@@ -1,0 +1,1 @@
+- Introduce ImagePlacer component
