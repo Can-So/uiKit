@@ -18,7 +18,7 @@ interface InnerWithObjectProps {
 interface InnerWithObjectState {
   prevClient?: Client;
   prevUrl?: string;
-  state: ObjectState;
+  cardState: ObjectState;
   uuid: string;
 }
 
@@ -28,7 +28,7 @@ class InnerWithObject extends React.Component<
 > {
   state: InnerWithObjectState = {
     uuid: v4(),
-    state: {
+    cardState: {
       status: 'resolving',
       services: [],
     },
@@ -36,10 +36,7 @@ class InnerWithObject extends React.Component<
 
   reload = () => {
     const { client, url } = this.props;
-    const {
-      state: { definitionId },
-    } = this.state;
-    client.reload(url, definitionId);
+    client.reload(url, this.state.cardState.definitionId);
   };
 
   static getDerivedStateFromProps(
@@ -53,7 +50,7 @@ class InnerWithObject extends React.Component<
       return {
         state: {
           status: 'resolving',
-          definitionId: prevState.state.definitionId,
+          definitionId: prevState.cardState.definitionId,
         },
         prevClient: nextProps.client,
         prevUrl: nextProps.url,
@@ -62,31 +59,51 @@ class InnerWithObject extends React.Component<
     return null;
   }
 
+  updateState(incomingState: ObjectState) {
+    const { url } = this.props;
+    const { cardState } = this.state;
+    console.log(`[CARD]: ${url} update state`);
+    console.log(`[CARD]: ---- old state`, cardState);
+    console.log(`[CARD]: ---- old state`, incomingState);
+    return this.setState({
+      cardState: incomingState,
+    });
+    // if (!cardState.definitionId) {
+    //   return this.setState({
+    //     cardState: incomingState
+    //   });
+    // }
+    // if (incomingState.definitionId && cardState.definitionId === incomingState.definitionId) {
+    //   return this.setState({
+    //     cardState: incomingState
+    //   });
+    // }
+    // if (cardState.definitionId === undefined && incomingState.definitionId) {
+    //   return this.setState({
+    //     cardState: incomingState
+    //   });
+    // }
+  }
+
   componentDidMount() {
     const { client, url } = this.props;
     const { uuid } = this.state;
-    const {
-      state: { definitionId },
-    } = this.state;
-    client.register(url, uuid, this.updateState).resolve(url, definitionId);
+    client.register(url).subscribe(uuid, this.updateState.bind(this));
+    client.resolve(url);
   }
-
-  updateState = (state: ObjectState) => {
-    this.setState({ state });
-  };
 
   componentDidUpdate(prevProps: InnerWithObjectProps) {
     const { client, url } = this.props;
     const { uuid } = this.state;
     if (this.props.client !== prevProps.client) {
       prevProps.client.deregister(prevProps.url, uuid);
-      client.register(url, uuid, this.updateState).resolve(url);
+      client.register(url).subscribe(uuid, this.updateState.bind(this));
+      client.resolve(url);
     }
     if (this.props.url !== prevProps.url) {
-      client
-        .deregister(prevProps.url, uuid)
-        .register(url, uuid, this.updateState)
-        .resolve(url);
+      client.deregister(prevProps.url, uuid);
+      client.register(url).subscribe(uuid, this.updateState.bind(this));
+      client.resolve(url);
     }
     return;
   }
@@ -100,8 +117,8 @@ class InnerWithObject extends React.Component<
 
   render() {
     const { children } = this.props;
-    const { state } = this.state;
-    return children({ state, reload: this.reload });
+    const { cardState } = this.state;
+    return children({ state: cardState, reload: this.reload });
   }
 }
 

@@ -75,7 +75,7 @@ export const mockMultipleCards = () => {
   fm.mock('*', async (_, opts: any) => {
     await delayP(1000);
 
-    const resourceUrl = JSON.parse(opts.body).resourceUrl;
+    const resourceUrl = JSON.parse(opts.body).resourceUrl as string;
 
     if (resourceUrl.startsWith('google')) {
       c1++;
@@ -83,15 +83,15 @@ export const mockMultipleCards = () => {
         console.log('MOCK:\tgoogle:\terror', c1);
         return;
       }
-      if (c1 >= 7 && c1 <= 11) {
+      if (c1 >= 7 && c1 <= 12) {
         console.log('MOCK:\tgoogle:\tunauthorisedBody', c1);
         return genUnauthorisedBody(googleDefinitionId);
       }
-      if (c1 >= 12 && c1 <= 16) {
+      if (c1 >= 13 && c1 <= 18) {
         console.log('MOCK:\tgoogle:\terror', c1);
         return;
       }
-      if (c1 >= 17 && c1 <= 21) {
+      if (c1 >= 19 && c1 <= 24) {
         console.log('MOCK:\tgoogle:\tforbiddenBody', c1);
         return gebForbiddenBody(googleDefinitionId);
       }

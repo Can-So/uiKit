@@ -41,29 +41,6 @@ function mockResolvedFetchCall() {
   });
 }
 
-function mockForbiddenFetchCall() {
-  fetchMock.mock({
-    name: 'forbidden',
-    matcher: `begin:${RESOLVE_URL}`,
-    response: {
-      status: 200,
-      body: JSON.stringify({
-        meta: {
-          visibility: 'restricted',
-          access: 'granted',
-          auth: remoteResourceMetaAuth,
-          definitionId,
-        },
-        data: {
-          '@context': {},
-          generator,
-          name: 'My Page',
-        },
-      }),
-    },
-  });
-}
-
 function mockUnauthorizedFetchCall() {
   fetchMock.mock({
     matcher: `begin:${RESOLVE_URL}`,
@@ -149,13 +126,20 @@ describe('Client', () => {
   afterEach(() => fetchMock.restore());
 
   it('should call update function two times', async () => {
-    mockForbiddenFetchCall();
+    mockResolvedFetchCall();
+
+    const client = new Client();
+    let stack: ObjectState[] = [];
 
     const result = await new Promise(resolve => {
-      const mockCardUpdateFunction = onNthState(resolve, 2);
-      new Client()
-        .register(OBJECT_URL, v4(), mockCardUpdateFunction)
-        .resolve(OBJECT_URL);
+      const mockCardUpdateFunction = (s: ObjectState) => {
+        stack.push(s);
+        if (stack.length === 2) {
+          resolve(stack);
+        }
+      };
+      client.register(OBJECT_URL).subscribe(v4(), mockCardUpdateFunction);
+      client.resolve(OBJECT_URL);
     });
 
     expect(result).toMatchObject([
@@ -165,25 +149,41 @@ describe('Client', () => {
   });
 
   it('should invoke different callbacks for the same URL', async () => {
-    mockForbiddenFetchCall();
+    mockResolvedFetchCall();
 
-    const result = await new Promise(resolve => {
+    const result = await new Promise<any[]>(resolve => {
+      const client = new Client();
+
       let stack: ObjectState[] = [];
-      const cardUpdateFn1 = (cardState: ObjectState) => {
-        stack.push(cardState);
+
+      const theUrl = 'TEST.COM/test-case-123';
+
+      const card1 = {
+        url: theUrl,
+        uuid: v4(),
+        update: (state: ObjectState) => {
+          stack.push({ ...state });
+        },
       };
-      const cardUpdateFn2 = (s: ObjectState) => {
-        stack.push(s);
-        if (stack.length === 4) {
-          return resolve(stack);
-        }
+      const card2 = {
+        url: theUrl,
+        uuid: v4(),
+        update: (state: ObjectState) => {
+          stack.push({ ...state });
+          if (stack.length === 4) {
+            return resolve(stack);
+          }
+        },
       };
 
-      new Client()
-        .register(OBJECT_URL, v4(), cardUpdateFn1)
-        .register(OBJECT_URL, v4(), cardUpdateFn2)
-        .resolve(OBJECT_URL);
+      client.register(card1.url).subscribe(card1.uuid, card1.update);
+      client.resolve(card1.url);
+
+      client.register(card2.url).subscribe(card2.uuid, card2.update);
+      client.resolve(card2.url);
     });
+
+    expect(result.length).toEqual(4);
 
     expect(result).toMatchObject([
       { status: 'resolving' },
@@ -198,9 +198,10 @@ describe('Client', () => {
 
     const result = await new Promise(resolve => {
       const mockCardUpdateFunction = onNthState(resolve, 2);
-      new Client()
-        .register(OBJECT_URL, v4(), mockCardUpdateFunction)
-        .resolve(OBJECT_URL);
+      const uuid = v4();
+      const client = new Client();
+      client.register(OBJECT_URL).subscribe(uuid, mockCardUpdateFunction);
+      client.resolve(OBJECT_URL);
     });
 
     expect(result).toMatchObject([
@@ -214,9 +215,10 @@ describe('Client', () => {
 
     const result = await new Promise<ObjectState[]>(resolve => {
       const mockCardUpdateFunction = onNthState(resolve, 2);
-      new Client()
-        .register(OBJECT_URL, v4(), mockCardUpdateFunction)
-        .resolve(OBJECT_URL);
+      const uuid = v4();
+      const client = new Client();
+      client.register(OBJECT_URL).subscribe(uuid, mockCardUpdateFunction);
+      client.resolve(OBJECT_URL);
     });
 
     expect(result[1].status).toEqual('unauthorized');
@@ -232,9 +234,10 @@ describe('Client', () => {
 
     const result = await new Promise<ObjectState[]>(resolve => {
       const mockCardUpdateFunction = onNthState(resolve, 2);
-      new Client()
-        .register(OBJECT_URL, v4(), mockCardUpdateFunction)
-        .resolve(OBJECT_URL);
+      const uuid = v4();
+      const client = new Client();
+      client.register(OBJECT_URL).subscribe(uuid, mockCardUpdateFunction);
+      client.resolve(OBJECT_URL);
     });
 
     expect(result[1].status).toEqual('forbidden');
@@ -250,9 +253,10 @@ describe('Client', () => {
 
     const result = await new Promise<ObjectState[]>(resolve => {
       const mockCardUpdateFunction = onNthState(resolve, 2);
-      new Client()
-        .register(OBJECT_URL, v4(), mockCardUpdateFunction)
-        .resolve(OBJECT_URL);
+      const uuid = v4();
+      const client = new Client();
+      client.register(OBJECT_URL).subscribe(uuid, mockCardUpdateFunction);
+      client.resolve(OBJECT_URL);
     });
 
     expect(result[1].status).toEqual('errored');
@@ -266,16 +270,18 @@ describe('Client', () => {
     const result = await new Promise<ObjectState[]>(resolve => {
       const client = new Client();
       const stack: ObjectState[] = [];
-      const cardUpdateFn = (s: ObjectState) => {
-        stack.push(s);
+      const uuid = v4();
+      const cardUpdateFn = (state: ObjectState) => {
+        stack.push(state);
         if (stack.length === 2) {
-          client.reload(OBJECT_URL, definitionId);
+          client.reload(OBJECT_URL);
         }
         if (stack.length === 4) {
           resolve(stack);
         }
       };
-      client.register(OBJECT_URL, v4(), cardUpdateFn).resolve(OBJECT_URL);
+      client.register(OBJECT_URL).subscribe(uuid, cardUpdateFn);
+      client.resolve(OBJECT_URL);
     });
 
     expect(result).toMatchObject([
@@ -315,10 +321,12 @@ describe('Client', () => {
       const customClient = new CustomClient();
       const stack: ObjectState[] = [];
 
+      const specialCardUUID = v4();
       const callbackForSpecialCase = (s: ObjectState) => {
         stack.push(s);
       };
 
+      const normalCardUUID = v4();
       const callbackForNormalCase = (s: ObjectState) => {
         stack.push(s);
         if (stack.length === 4) {
@@ -327,8 +335,11 @@ describe('Client', () => {
       };
 
       customClient
-        .register(specialCaseUrl, v4(), callbackForSpecialCase)
-        .register(OBJECT_URL, v4(), callbackForNormalCase);
+        .register(specialCaseUrl)
+        .subscribe(specialCardUUID, callbackForSpecialCase);
+      customClient
+        .register(OBJECT_URL)
+        .subscribe(normalCardUUID, callbackForNormalCase);
 
       customClient.resolve(OBJECT_URL);
       customClient.resolve(specialCaseUrl);
@@ -346,7 +357,7 @@ describe('Client', () => {
     ]);
   });
 
-  it('should not reload card that has already been resolved', async () => {
+  it('should not reload resolved card with the same definition id', async () => {
     mockResolvedFetchCall();
 
     const card1 = {
@@ -407,8 +418,8 @@ describe('Client', () => {
 
     const client = new CustomClient();
 
-    client.register(card1.url, card1.uuid, card1.updateFn);
-    client.register(card2.url, card2.uuid, card2.updateFn);
+    client.register(card1.url).subscribe(card1.uuid, card1.updateFn);
+    client.register(card2.url).subscribe(card2.uuid, card2.updateFn);
 
     client.resolve(card1.url);
     client.resolve(card2.url);
@@ -419,5 +430,79 @@ describe('Client', () => {
 
     expect(card1.updateFn).toHaveBeenCalledTimes(2);
     expect(card2.updateFn).toHaveBeenCalledTimes(2);
+  });
+
+  it('should not reload card that has already been resolved', async () => {
+    mockResolvedFetchCall();
+
+    const theUrl = 'http://drive.google.com/doc/1';
+
+    const card1 = {
+      url: theUrl,
+      uuid: v4(),
+      definitionId: undefined,
+      updateFn: jest.fn().mockImplementation((state: ObjectState) => {
+        if (state.definitionId) {
+          card1.definitionId = state.definitionId as any;
+        }
+      }),
+    };
+
+    const card2 = {
+      url: theUrl,
+      uuid: v4(),
+      definitionId: undefined,
+      updateFn: jest.fn().mockImplementation((state: ObjectState) => {
+        if (state.definitionId) {
+          card1.definitionId = state.definitionId as any;
+        }
+      }),
+    };
+
+    const customFetchMock = jest.fn().mockImplementation(() => {
+      return Promise.resolve(<ResolveResponse>{
+        meta: {
+          visibility: 'public',
+          access: 'granted',
+          auth: [],
+          definitionId: 'google',
+        },
+        data: {
+          name: 'Doc for Card 1',
+        },
+      });
+    });
+
+    class CustomClient extends Client {
+      fetchData(url: string): Promise<ResolveResponse> {
+        return customFetchMock(url);
+      }
+    }
+
+    const client = new CustomClient();
+
+    // First url has been pasted and a card has been added
+
+    client.register(card1.url).subscribe(card1.uuid, card1.updateFn);
+    client.resolve(card1.url);
+
+    await new Promise(res => setTimeout(res, 1));
+
+    expect(customFetchMock.mock.calls).toEqual([[theUrl]]);
+
+    expect(card1.updateFn).toHaveBeenCalledTimes(2);
+    expect(card2.updateFn).toHaveBeenCalledTimes(0);
+
+    // The same url has been pasted and another card has been added
+
+    client.register(card2.url).subscribe(card2.uuid, card2.updateFn);
+    client.resolve(card2.url);
+
+    await new Promise(res => setTimeout(res, 1));
+
+    expect(customFetchMock.mock.calls).toEqual([[theUrl]]);
+
+    expect(card1.updateFn).toHaveBeenCalledTimes(2);
+    expect(card2.updateFn).toHaveBeenCalledTimes(1);
   });
 });

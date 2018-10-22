@@ -20,3 +20,5 @@ export interface ObjectState {
   services: AuthService[];
   data?: { [name: string]: any };
 }
+
+export type CardUpdateCallback = (state: ObjectState) => void;
