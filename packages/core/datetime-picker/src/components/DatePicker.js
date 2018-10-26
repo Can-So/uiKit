@@ -300,7 +300,7 @@ class DatePicker extends Component<Props, State> {
 
   handleInputChange = (inputValue: string, actionMeta: {}) => {
     const { onInputChange } = this.props.selectProps;
-    onInputChange && onInputChange(inputValue, actionMeta);
+    if (onInputChange) onInputChange(inputValue, actionMeta);
     this.setState({ inputValue });
   };
 
