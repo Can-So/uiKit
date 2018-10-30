@@ -35,3 +35,5 @@ export default ({
     />
   </InputWrapper>
 );
+
+export default Input;
