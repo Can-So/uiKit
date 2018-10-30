@@ -154,7 +154,7 @@ export const InputWrapper = styled.div`
   vertical-align: top;
   ${p => p.isDisabled && `cursor: not-allowed;`}
   ${getPadding} ${getHoverState} ${getDisabledState};
-  
+
   & > input {
     background: transparent;
     border: 0;
