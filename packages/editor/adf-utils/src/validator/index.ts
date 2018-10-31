@@ -1,6 +1,6 @@
 import * as specs from './specs';
 
-export type Content = Array<string | [string, object]>;
+export type Content = Array<string | [string, object] | Array<string>>;
 
 export interface Entity {
   type: string;
@@ -53,6 +53,28 @@ const copy = (source: object, dest: object, key: string) => {
   dest[key] = source[key];
   return dest;
 };
+
+function mapMarksItems(spec, fn = x => x) {
+  const { items, ...rest } = spec.props.marks;
+  return {
+    ...spec,
+    props: {
+      ...spec.props,
+      marks: {
+        ...rest,
+        /**
+         * `Text & MarksObject<Mark-1>` produces `items: ['mark-1']`
+         * `Text & MarksObject<Mark-1 | Mark-2>` produces `items: [['mark-1', 'mark-2']]`
+         */
+        items: items.length
+          ? Array.isArray(items[0])
+            ? items.map(fn)
+            : [fn(items)]
+          : [[]],
+      },
+    },
+  };
+}
 
 function createSpec(nodes?: Array<string>, marks?: Array<string>) {
   return Object.keys(specs).reduce((newSpecs, k) => {
@@ -118,21 +140,7 @@ function createSpec(nodes?: Array<string>, marks?: Array<string>) {
                      * TODO: Probably try something like immer, but it's 3.3kb gzipped.
                      * Not worth it just for this.
                      */
-                    [
-                      subItem[0],
-                      {
-                        ...subItem[1],
-                        props: {
-                          ...subItem[1].props,
-                          marks: {
-                            ...subItem[1].props.marks,
-                            items: subItem[1].props.marks.items.map(_marks =>
-                              _marks.filter(mark => marks.indexOf(mark) > -1),
-                            ),
-                          },
-                        },
-                      },
-                    ]
+                    [subItem[0], mapMarksItems(subItem[1])]
                   : subItem,
               ),
           );

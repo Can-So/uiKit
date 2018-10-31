@@ -56,7 +56,6 @@ export type BlockContent =
   | Rule
   | Heading
   | CodeBlock
-  | CodeBlockWithBreakout
   | MediaGroup
   | MediaSingle
   | ApplicationCard
@@ -177,7 +176,7 @@ export interface DocNode {
   /**
    * @allowUnsupportedBlock true
    */
-  content: Array<BlockContent | LayoutSection>;
+  content: Array<BlockContent | LayoutSection | CodeBlockWithBreakout>;
 }
 
 export const doc: NodeSpec = {
