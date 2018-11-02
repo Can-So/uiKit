@@ -24,6 +24,9 @@ export type LayoutManagerWithViewControllerProps = {|
   customComponents?: { [string]: ComponentType<*> },
   getRefs?: GetRefs,
   globalNavigation: ComponentType<{}>,
+  containerSkeleton: ComponentType<{}>,
+  navigationUIController: UIController,
+  navigationViewController: ViewController,
   firstSkeletonToRender?: 'product' | 'container',
 |};
 
