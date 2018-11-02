@@ -1,13 +1,6 @@
 // @flow
 
-import React, {
-  Component,
-  Fragment,
-  PureComponent,
-  type ElementRef,
-  type Ref,
-  type Node,
-} from 'react';
+import React, { Component, Fragment, type ElementRef } from 'react';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 import { colors } from '@atlaskit/theme';
 
@@ -17,7 +10,8 @@ import {
 } from '../../../../package.json';
 import { Shadow } from '../../../common/primitives';
 import { light, ThemeProvider } from '../../../theme';
-import ContentNavigation from './ContentNavigation';
+import ContentNavigation from '../ContentNavigation';
+import PageContent from '../PageContent';
 import ResizeTransition, {
   isTransitioning,
   type TransitionState,
@@ -28,9 +22,8 @@ import {
   ContentNavigationWrapper,
   LayoutContainer,
   NavigationContainer,
-  PageWrapper,
 } from './primitives';
-import type { LayoutManagerProps, CollapseListeners } from './types';
+import type { LayoutManagerProps } from './types';
 
 import {
   CONTENT_NAV_WIDTH_COLLAPSED,
@@ -391,13 +384,14 @@ export default class LayoutManager extends Component<
     );
   };
 
-  render() {
+  renderPageContent = () => {
     const {
       navigationUIController,
       onExpandStart,
       onExpandEnd,
       onCollapseStart,
       onCollapseEnd,
+      children,
     } = this.props;
     const { flyoutIsOpen } = this.state;
     const {
@@ -407,21 +401,27 @@ export default class LayoutManager extends Component<
     } = navigationUIController.state;
 
     return (
+      <PageContent
+        flyoutIsOpen={flyoutIsOpen}
+        innerRef={this.getPageRef}
+        isResizing={isResizing}
+        isCollapsed={isCollapsed}
+        productNavWidth={productNavWidth}
+        onExpandStart={onExpandStart}
+        onExpandEnd={onExpandEnd}
+        onCollapseStart={onCollapseStart}
+        onCollapseEnd={onCollapseEnd}
+      >
+        {children}
+      </PageContent>
+    );
+  };
+
+  render() {
+    return (
       <LayoutContainer>
         {this.renderNavigation()}
-        <Page
-          flyoutIsOpen={flyoutIsOpen}
-          innerRef={this.getPageRef}
-          isResizing={isResizing}
-          isCollapsed={isCollapsed}
-          productNavWidth={productNavWidth}
-          onExpandStart={onExpandStart}
-          onExpandEnd={onExpandEnd}
-          onCollapseStart={onCollapseStart}
-          onCollapseEnd={onCollapseEnd}
-        >
-          {this.props.children}
-        </Page>
+        {this.renderPageContent()}
       </LayoutContainer>
     );
   }
