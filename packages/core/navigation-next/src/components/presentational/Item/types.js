@@ -9,7 +9,7 @@ import type { InteractionState } from '../InteractionStateManager/types';
 
 type Spacing = 'compact' | 'default';
 
-export type ItemPresentationProps = {
+export type ItemPresentationProps = {|
   /** Whether the Item is currently in the 'active' interaction state. */
   isActive: boolean,
   /** Whether the Item is inside a SortableContext, and is being dragged. */
@@ -22,9 +22,9 @@ export type ItemPresentationProps = {
   isFocused: boolean,
   /** How tight the spacing between the elements inside the Item should be. */
   spacing: Spacing,
-};
+|};
 
-export type ItemBaseProps = {
+export type ItemBaseProps = {|
   /** A component to render after the text. Typically used to render an icon or
    * a badge. This component will be passed the current UI state of the Item. */
   after?: ComponentType<ItemPresentationProps>,
@@ -64,22 +64,33 @@ export type ItemBaseProps = {
   target?: string,
   /** A string or Node to render as the main content of the Item. */
   text: Node,
-};
+|};
 
-export type ItemRenderComponentProps = ItemBaseProps & {
+export type ItemRenderComponentProps = {|
+  ...ItemBaseProps,
   children: Node,
   className: string,
-};
+|};
 
-export type ItemProps = ItemBaseProps & {
+/** Item props from an external consumer perspective */
+export type ExternalItemProps = {|
+  ...ItemBaseProps,
   /** A custom component to render instead of the default wrapper component.
    * Could used to render a router Link, for example. The component will be
    * provided with a className, children and onClick props, which should be passed on to the
    * element you render. If this is a SortableItem, you will also need to spread `draggableProps` and
    * set ref of `innerRef` to your outermost DOM element. */
   component?: ComponentType<ItemRenderComponentProps>,
-};
+|};
 
-export type ItemPrimitiveProps = ItemProps &
-  WithAnalyticsEventsProps &
-  InteractionState & { theme: ProductTheme };
+/** Item props from item's perspective */
+export type ItemProps = {|
+  ...ExternalItemProps,
+  ...$Exact<WithAnalyticsEventsProps>,
+|};
+
+export type ItemPrimitiveProps = {|
+  ...ExternalItemProps,
+  ...InteractionState,
+  theme: ProductTheme,
+|};

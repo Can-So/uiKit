@@ -17,16 +17,13 @@ class Item extends PureComponent<ItemProps> {
     text: '',
   };
 
-  renderItem = (state: InteractionState) => (
-    <ItemPrimitive {...state} {...this.props} />
-  );
+  renderItem = (state: InteractionState) => {
+    const { createAnalyticsEvent, ...props } = this.props;
+    return <ItemPrimitive {...state} {...props} />;
+  };
 
   render() {
-    return (
-      <InteractionStateManager {...this.props}>
-        {this.renderItem}
-      </InteractionStateManager>
-    );
+    return <InteractionStateManager>{this.renderItem}</InteractionStateManager>;
   }
 }
 
