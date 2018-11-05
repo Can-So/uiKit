@@ -56,6 +56,12 @@ type PageProps = {
   productNavWidth: number,
 };
 
+function defaultTooltipContent(isCollapsed: boolean) {
+  return isCollapsed
+    ? { text: 'Expand', char: '[' }
+    : { text: 'Collapse', char: '[' };
+}
+
 // FIXME: Move to separate file
 // eslint-disable-next-line react/no-multi-comp
 class PageInner extends PureComponent<{ children: Node }> {
@@ -110,7 +116,6 @@ export class Page extends PureComponent<PageProps> {
 }
 
 /* NOTE: experimental props use an underscore */
-/* eslint-disable camelcase */
 
 // eslint-disable-next-line react/no-multi-comp
 export default class LayoutManager extends Component<
@@ -126,6 +131,12 @@ export default class LayoutManager extends Component<
   pageRef: HTMLElement;
   containerRef: HTMLElement;
   flyoutMouseOverTimeout: TimeoutID;
+
+  static defaultProps = {
+    collapseToggleTooltipContent: defaultTooltipContent,
+    // eslint-disable-next-line camelcase
+    experimental_flyoutOnHover: false,
+  };
 
   static getDerivedStateFromProps(props: LayoutManagerProps, state: State) {
     // kill the flyout when the user commits to expanding navigation
@@ -223,7 +234,8 @@ export default class LayoutManager extends Component<
     const { transitionState, transitionStyle } = args;
     const {
       containerNavigation,
-      experimental_flyoutOnHover,
+      // eslint-disable-next-line camelcase
+      experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
       navigationUIController,
       productNavigation,
     } = this.props;
@@ -253,7 +265,7 @@ export default class LayoutManager extends Component<
           key="product-nav"
           product={productNavigation}
         />
-        {isCollapsed && !experimental_flyoutOnHover ? (
+        {isCollapsed && !EXPERIMENTAL_FLYOUT_ON_HOVER ? (
           <div
             aria-label="Click to expand the navigation"
             role="button"
@@ -285,7 +297,8 @@ export default class LayoutManager extends Component<
   renderNavigation = () => {
     const {
       navigationUIController,
-      experimental_flyoutOnHover,
+      // eslint-disable-next-line camelcase
+      experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
       collapseToggleTooltipContent,
     } = this.props;
     const { flyoutIsOpen, mouseIsOverNavigation, itemIsDragging } = this.state;
@@ -305,7 +318,7 @@ export default class LayoutManager extends Component<
           data={{
             attributes: {
               isExpanded: !isCollapsed,
-              flyoutOnHoverEnabled: experimental_flyoutOnHover,
+              flyoutOnHoverEnabled: EXPERIMENTAL_FLYOUT_ON_HOVER,
             },
             componentName: 'navigation',
             packageName,
@@ -323,7 +336,7 @@ export default class LayoutManager extends Component<
           >
             {({ transitionStyle, transitionState }) => {
               const onMouseOut =
-                isCollapsed && experimental_flyoutOnHover && flyoutIsOpen
+                isCollapsed && EXPERIMENTAL_FLYOUT_ON_HOVER && flyoutIsOpen
                   ? this.mouseOutFlyoutArea
                   : null;
               return (
@@ -340,7 +353,8 @@ export default class LayoutManager extends Component<
                     expandCollapseAffordanceRef={
                       this.nodeRefs.expandCollapseAffordance
                     }
-                    experimental_flyoutOnHover={experimental_flyoutOnHover}
+                    // eslint-disable-next-line camelcase
+                    experimental_flyoutOnHover={EXPERIMENTAL_FLYOUT_ON_HOVER}
                     isDisabled={isResizeDisabled}
                     flyoutIsOpen={flyoutIsOpen}
                     isGrabAreaDisabled={itemIsDragging}
@@ -354,7 +368,7 @@ export default class LayoutManager extends Component<
                     {({ isDragging, width }) => {
                       const onMouseOver =
                         isCollapsed &&
-                        experimental_flyoutOnHover &&
+                        EXPERIMENTAL_FLYOUT_ON_HOVER &&
                         !flyoutIsOpen
                           ? this.mouseOverFlyoutArea
                           : null;
