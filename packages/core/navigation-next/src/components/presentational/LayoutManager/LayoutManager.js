@@ -17,13 +17,12 @@ import ResizeTransition, {
   type TransitionState,
 } from '../ResizeTransition';
 import ResizeControl from './ResizeControl';
+import { LayoutContainer, NavigationContainer } from './primitives';
+import type { LayoutManagerProps } from './types';
 import {
   ContainerNavigationMask,
   ContentNavigationWrapper,
-  LayoutContainer,
-  NavigationContainer,
-} from './primitives';
-import type { LayoutManagerProps } from './types';
+} from '../ContentNavigation/primitives';
 
 import {
   CONTENT_NAV_WIDTH_COLLAPSED,

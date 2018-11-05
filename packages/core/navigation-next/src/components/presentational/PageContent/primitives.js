@@ -1,13 +1,8 @@
 // @flow
 
-import React, { type ElementRef } from 'react';
+import React from 'react';
 import { applyDisabledProperties } from '../../../common/helpers';
-
-// Resizable Elements can be disabled
-export type Resizable = {
-  innerRef?: ElementRef<*>,
-  disableInteraction: boolean,
-};
+import type { Resizable } from '../LayoutManager/primitives';
 
 type PageProps = Resizable & { offset: number };
 export const PageWrapper = ({
