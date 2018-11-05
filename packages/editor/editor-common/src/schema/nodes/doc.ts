@@ -183,5 +183,5 @@ export interface DocNode {
 
 export const doc: NodeSpec = {
   content: '(block|layoutSection)+',
-  marks: 'breakout',
+  marks: 'breakout alignment',
 };

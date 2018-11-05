@@ -551,9 +551,47 @@
               "enum": [
                 "\n"
               ]
+<<<<<<< HEAD
+=======
             }
           },
           "additionalProperties": false
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "heading_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "heading"
+          ]
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/inline_node"
+          }
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 6
+>>>>>>> Added new changeset with ID: 86ac606d
+            }
+          },
+          "required": [
+            "level"
+          ],
+          "additionalProperties": false
+<<<<<<< HEAD
         }
       },
       "required": [
@@ -588,6 +626,8 @@
             "level"
           ],
           "additionalProperties": false
+=======
+>>>>>>> Added new changeset with ID: 86ac606d
         }
       },
       "required": [
@@ -603,6 +643,7 @@
         "type": {
           "enum": [
             "rule"
+<<<<<<< HEAD
           ]
         }
       },
@@ -635,7 +676,76 @@
           "additionalProperties": false,
           "required": [
             "shortName"
+=======
+>>>>>>> Added new changeset with ID: 86ac606d
           ]
+        }
+      },
+      "required": [
+<<<<<<< HEAD
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "mention_node": {
+=======
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "emoji_node": {
+>>>>>>> Added new changeset with ID: 86ac606d
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+<<<<<<< HEAD
+            "mention"
+=======
+            "emoji"
+>>>>>>> Added new changeset with ID: 86ac606d
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+<<<<<<< HEAD
+            },
+            "text": {
+              "type": "string"
+            },
+            "userType": {
+              "enum": [
+                "DEFAULT",
+                "SPECIAL",
+                "APP"
+              ]
+            },
+            "accessLevel": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "additionalProperties": false
+=======
+            },
+            "shortName": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "shortName"
+          ]
+>>>>>>> Added new changeset with ID: 86ac606d
         }
       },
       "required": [
@@ -644,11 +754,20 @@
       ],
       "additionalProperties": false
     },
+<<<<<<< HEAD
+    "mediaGroup_node": {
+=======
     "mention_node": {
+>>>>>>> Added new changeset with ID: 86ac606d
       "type": "object",
       "properties": {
         "type": {
           "enum": [
+<<<<<<< HEAD
+            "mediaGroup"
+          ]
+        },
+=======
             "mention"
           ]
         },
@@ -692,6 +811,7 @@
             "mediaGroup"
           ]
         },
+>>>>>>> Added new changeset with ID: 86ac606d
         "content": {
           "type": "array",
           "items": {
@@ -1771,6 +1891,9 @@
       "additionalProperties": false
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added new changeset with ID: 86ac606d
     "breakout_mark": {
       "type": "object",
       "properties": {
