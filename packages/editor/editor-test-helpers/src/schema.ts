@@ -69,6 +69,7 @@ export default createSchema({
     'textColor',
     'confluenceInlineComment',
     'breakout',
+    'alignment',
   ],
   customNodeSpecs: {
     plain: { ...paragraph, content: 'text*', marks: '' },

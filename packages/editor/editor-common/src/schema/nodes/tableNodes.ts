@@ -263,6 +263,7 @@ export const tableCell = {
     '(paragraph | panel | blockquote | orderedList | bulletList | rule | heading | codeBlock |  mediaGroup | mediaSingle | applicationCard | decisionList | taskList | blockCard | extension | unsupportedBlock)+',
   attrs: cellAttrs,
   tableRole: 'cell',
+  marks: 'alignment',
   isolating: true,
   parseDOM: [
     {
@@ -291,6 +292,7 @@ export const tableHeader = {
   attrs: cellAttrs,
   tableRole: 'header_cell',
   isolating: true,
+  marks: 'alignment',
   parseDOM: [
     {
       tag: 'th',

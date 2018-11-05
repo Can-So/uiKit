@@ -32,3 +32,8 @@ export {
   BreakoutMarkAttrs,
   BreakoutMarkDefinition,
 } from './breakout';
+export {
+  alignment,
+  AlignmentAttributes,
+  AlignmentMarkDefinition,
+} from './alignment';

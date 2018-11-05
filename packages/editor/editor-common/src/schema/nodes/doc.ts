@@ -43,6 +43,7 @@ import { SubSupDefinition as SubSup } from '../marks/subsup';
 import { UnderlineDefinition as Underline } from '../marks/underline';
 import { TextColorDefinition as TextColor } from '../marks/text-color';
 import { ActionDefinition as Action } from '../marks/action';
+import { AlignmentMarkDefinition } from '../marks/alignment';
 
 /**
  * @name block_content
@@ -64,7 +65,8 @@ export type BlockContent =
   | Table
   | Extension
   | BodiedExtension
-  | BlockCard;
+  | BlockCard
+  | AlignmentMarkDefinition;
 
 /**
  * @name table_cell_content

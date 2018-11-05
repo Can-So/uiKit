@@ -105,6 +105,7 @@ class ToolbarBlockType extends React.PureComponent<
           disabled={disabled}
           onClick={this.handleTriggerClick}
           title={labelTextStyles}
+          ariaLabel="Font style"
           iconAfter={
             <Wrapper isSmall={isSmall}>
               {isSmall && <TextStyleIcon label={labelTextStyles} />}
