@@ -82,6 +82,15 @@ const responses = {
       genUnauthorisedBody(googleDefinitionId),
       undefined,
     ],
+    'google.com/doc/3': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      undefined,
+      gebForbiddenBody(googleDefinitionId),
+      gebForbiddenBody(googleDefinitionId),
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+      undefined,
+    ],
     'google.com/spreadshet/1': [
       (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
       gebForbiddenBody(googleDefinitionId),
@@ -133,13 +142,14 @@ export const mockMultipleCards = () => {
       throw new Error('Unknown domain name');
     }
 
+    //@ts-ignore
     let response = perDomain[resourceUrl].pop();
 
     if (typeof response === 'function') {
       response = response(resourceUrl);
     }
 
-    console.log(`[MOCK] ${domain} ${resourceUrl}`, response);
+    console.log(`[SERVER] ${domain} ${resourceUrl}`, response);
 
     return response;
   });

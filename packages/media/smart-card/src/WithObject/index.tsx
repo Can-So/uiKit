@@ -39,74 +39,35 @@ class InnerWithObject extends React.Component<
     client.reload(url, this.state.cardState.definitionId);
   };
 
-  // static getDerivedStateFromProps(
-  //   nextProps: InnerWithObjectProps,
-  //   prevState: InnerWithObjectState,
-  // ) {
-  //   console.log('[CARD] [getDerivedStateFromProps]', prevState, nextProps);
-  //   if (
-  //     nextProps.client !== prevState.prevClient ||
-  //     nextProps.url !== prevState.prevUrl
-  //   ) {
-  //     return {
-  //       state: {
-  //         status: 'resolving',
-  //         definitionId: prevState.cardState.definitionId,
-  //       },
-  //       prevClient: nextProps.client,
-  //       prevUrl: nextProps.url,
-  //     };
-  //   }
-  //   return null;
-  // }
-
-  updateState = (incomingState: ObjectState | null) => {
+  updateState = (incoming: [ObjectState | null, boolean]) => {
     const { url, client } = this.props;
-    console.log(`[CARD]: ${url} update state`, incomingState);
+    const [state, expired] = incoming;
 
-    if (incomingState === null) {
+    if (state === null || expired) {
       return client.resolve(url);
     }
 
     return this.setState({
-      cardState: incomingState,
+      cardState: state,
     });
-    // if (!cardState.definitionId) {
-    //   return this.setState({
-    //     cardState: incomingState
-    //   });
-    // }
-    // if (incomingState.definitionId && cardState.definitionId === incomingState.definitionId) {
-    //   return this.setState({
-    //     cardState: incomingState
-    //   });
-    // }
-    // if (cardState.definitionId === undefined && incomingState.definitionId) {
-    //   return this.setState({
-    //     cardState: incomingState
-    //   });
-    // }
   };
 
   componentDidMount() {
     const { client, url } = this.props;
     const { uuid } = this.state;
-    console.log('[CARD] [MOUNTED] ' + url);
     client.register(url).subscribe(uuid, this.updateState);
   }
 
   componentDidUpdate(prevProps: InnerWithObjectProps) {
     const { client, url } = this.props;
     const { uuid } = this.state;
-    if (this.props.client !== prevProps.client) {
+    if (client !== prevProps.client) {
       prevProps.client.deregister(prevProps.url, uuid);
       client.register(url).subscribe(uuid, this.updateState);
-      client.resolve(url);
     }
-    if (this.props.url !== prevProps.url) {
+    if (url !== prevProps.url) {
       client.deregister(prevProps.url, uuid);
       client.register(url).subscribe(uuid, this.updateState);
-      client.resolve(url);
     }
     return;
   }

@@ -11,6 +11,7 @@ import { StateWatch } from './stateWatcher';
 // TODO: add some form of caching so that urls not currently loaded will still be fast
 
 const SERVICE_URL = 'https://api-private.stg.atlassian.com/object-resolver';
+const DEFAULT_CACHE_LIFESPAN = 15 * 1000;
 
 export type CustomFetch = (url: string) => Promise<ResolveResponse> | null;
 
@@ -80,7 +81,7 @@ export type Options = {
 };
 
 const filterCardsByDefId = (
-  store: Store,
+  store: Store<ObjectState>,
   defId: string,
   urls: string[],
 ): string[] =>
@@ -90,21 +91,27 @@ const filterCardsByDefId = (
     return entryDefId === defId;
   });
 
-const unresolvedCards = (store: Store, urls: string[]): string[] =>
+const unresolvedCards = (store: Store<ObjectState>, urls: string[]): string[] =>
   urls.filter(url => {
     const entry = store.get(url);
     const entryStatus = entry && entry.getProp('status');
     return entryStatus !== 'resolved';
   });
 
-const cardsWithoutDefinitionId = (store: Store, urls: string[]): string[] =>
+const cardsWithoutDefinitionId = (
+  store: Store<ObjectState>,
+  urls: string[],
+): string[] =>
   urls.filter(url => {
     const entry = store.get(url);
     const defId = entry && entry.getProp('definitionId');
     return defId === undefined;
   });
 
-const getCardsToUpdate = (store: Store, definitionIdFromCard?: string) => {
+const getCardsToUpdate = (
+  store: Store<ObjectState>,
+  definitionIdFromCard?: string,
+) => {
   if (definitionIdFromCard) {
     return unresolvedCards(
       store,
@@ -120,10 +127,12 @@ export interface Client {
 }
 
 export class Client implements Client {
-  store: Store;
+  cacheLifespan: number;
+  store: Store<ObjectState>;
 
-  constructor() {
-    this.store = new Store();
+  constructor(cacheLifespan?: number) {
+    this.cacheLifespan = cacheLifespan || DEFAULT_CACHE_LIFESPAN;
+    this.store = new Store<ObjectState>();
   }
 
   fetchData(objectUrl: string): Promise<ResolveResponse> {
@@ -150,7 +159,7 @@ export class Client implements Client {
    * @param url the url that card holds
    * @param fn the callback that can be called after the data has been resolved for that card.
    */
-  register(url: string): StateWatch {
+  register(url: string): StateWatch<ObjectState> {
     if (!this.store.exists(url)) {
       return this.store.init(url);
     }
@@ -170,37 +179,39 @@ export class Client implements Client {
   }
 
   resolve(url: string, cb?: () => void) {
-    console.log(`[CLIENT] [resolve]`, url);
-
     if (!this.store.exists(url)) {
       throw new Error('Please, register a smart card before calling get()');
     }
 
     const entry = this.store.get(url);
 
-    if (entry && entry.hasExpired(5000)) {
-      console.log(`[CLIENT] [resolve] entry for ${url} has expired`);
-      this.store.set(url, { status: 'resolving', services: [] });
+    if (entry && entry.hasExpired()) {
+      this.store.set(
+        url,
+        { status: 'resolving', services: [] },
+        this.cacheLifespan,
+      );
 
       this.startStreaming(url).subscribe(orsResponse => {
-        this.store.set(url, orsResponse);
+        this.store.set(url, orsResponse, this.cacheLifespan);
 
         if (cb) {
           cb();
         }
       });
-    } else {
-      console.log(`[CLIENT] [resolve] entry for ${url} has NOT expired`);
     }
   }
 
-  reload(url: string, definitionIdFromCard?: string) {
-    this.store.get(url)!.invalidate();
+  reload(urlToReload: string, definitionIdFromCard?: string) {
+    this.store.get(urlToReload)!.invalidate();
 
-    this.resolve(url, () => {
-      getCardsToUpdate(this.store, definitionIdFromCard).forEach(url => {
-        this.resolve(url);
-      });
+    this.resolve(urlToReload, () => {
+      getCardsToUpdate(this.store, definitionIdFromCard)
+        .filter(otherUrl => otherUrl !== urlToReload)
+        .forEach(otherUrl => {
+          this.store.get(otherUrl)!.invalidate();
+          this.resolve(otherUrl);
+        });
     });
   }
 }

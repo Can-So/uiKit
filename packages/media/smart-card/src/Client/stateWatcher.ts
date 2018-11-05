@@ -1,78 +1,69 @@
-import { CardUpdateCallback, ObjectState } from './types';
+import { CardUpdateCallback } from './types';
 
-type StateWatchCallback = {
-  fn: CardUpdateCallback;
+type StateWatchCallback<T> = {
+  fn: CardUpdateCallback<T>;
   uuid: string;
 };
 
-type StateWatchEntry = {
-  state: ObjectState;
-  lastUpdate: number;
+type StateWatchEntry<T> = {
+  state: T;
+  goodTill: number;
 } | null;
 
-export class StateWatch {
-  public entry: StateWatchEntry = null;
-  private subscribers: StateWatchCallback[] = [];
+export type DateConstructor = {
+  getTime(): number;
+};
 
-  subscribe(uuid: string, fn: CardUpdateCallback) {
-    this.subscribers.push({ uuid, fn });
-    fn(this.entry ? this.entry.state : null);
+export class StateWatch<T> {
+  public entry: StateWatchEntry<T> = null;
+  private subscribers: StateWatchCallback<T>[] = [];
 
-    return () => {
-      console.log('unsubscribe!');
-    };
+  constructor(private dateConstructor: DateConstructor) {}
+
+  subscribe(uuid: string, fn: CardUpdateCallback<T>) {
+    if (!this.subscribers.find(sub => sub.uuid === uuid)) {
+      this.subscribers.push({ uuid, fn });
+    }
+    fn([this.entry ? this.entry.state : null, this.hasExpired()]);
+
+    return () => {};
   }
 
-  invalidate() {
-    this.entry = null;
+  invalidate(): StateWatch<T> {
+    if (this.entry) {
+      this.entry.goodTill = this.dateConstructor.getTime() - 1;
+    }
+    return this;
   }
 
-  getProp<T extends keyof ObjectState>(
-    propName: T,
-  ): ObjectState[T] | undefined {
+  getProp<K extends keyof T>(propName: K): T[K] | undefined {
     if (this.entry === null) {
       return;
     }
     return this.entry.state[propName];
   }
 
-  hasPropAndEq<T extends keyof ObjectState>(
-    propName: T,
-    checkValue?: ObjectState[T],
-  ): boolean {
-    if (this.entry === null) {
-      return false;
-    }
-    let hasProp = !!this.entry.state[propName];
-    if (checkValue) {
-      hasProp = this.entry.state[propName] === checkValue;
-    }
-    return hasProp;
-  }
-
   unsubscribe(uuid: string) {
     this.subscribers = this.subscribers.filter(rec => rec.uuid !== uuid);
   }
 
-  hasExpired(timeFrame: number): boolean {
+  hasExpired(): boolean {
     if (this.entry === null) {
       return true;
     }
-    const now = new Date().getTime();
-    const msElapsedSinceLastUpdate = now - this.entry.lastUpdate;
-    return msElapsedSinceLastUpdate > timeFrame;
+    return this.entry.goodTill < this.dateConstructor.getTime();
   }
 
-  update(newState: ObjectState) {
+  update(state: T, lifespan: number): void {
     if (
       this.entry === null ||
-      JSON.stringify(this.entry.state) !== JSON.stringify(newState)
+      JSON.stringify(this.entry.state) !== JSON.stringify(state)
     ) {
       this.entry = {
-        state: newState,
-        lastUpdate: new Date().getTime(),
+        state,
+        goodTill: this.dateConstructor.getTime() + lifespan,
       };
-      this.subscribers.forEach(rec => rec.fn(newState));
+      this.subscribers.forEach(rec => rec.fn([state, false]));
     }
   }
 }
