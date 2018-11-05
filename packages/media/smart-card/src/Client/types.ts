@@ -21,4 +21,4 @@ export interface ObjectState {
   data?: { [name: string]: any };
 }
 
-export type CardUpdateCallback = (state: ObjectState) => void;
+export type CardUpdateCallback = (state: ObjectState | null) => void;

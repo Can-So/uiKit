@@ -16,9 +16,7 @@ export class StateWatch {
 
   subscribe(uuid: string, fn: CardUpdateCallback) {
     this.subscribers.push({ uuid, fn });
-    if (this.entry !== null) {
-      fn(this.entry.state);
-    }
+    fn(this.entry ? this.entry.state : null);
 
     return () => {
       console.log('unsubscribe!');
@@ -53,7 +51,7 @@ export class StateWatch {
   }
 
   unsubscribe(uuid: string) {
-    this.subscribers.filter(rec => rec.uuid !== uuid);
+    this.subscribers = this.subscribers.filter(rec => rec.uuid !== uuid);
   }
 
   hasExpired(timeFrame: number): boolean {

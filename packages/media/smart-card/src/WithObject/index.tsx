@@ -39,32 +39,35 @@ class InnerWithObject extends React.Component<
     client.reload(url, this.state.cardState.definitionId);
   };
 
-  static getDerivedStateFromProps(
-    nextProps: InnerWithObjectProps,
-    prevState: InnerWithObjectState,
-  ) {
-    if (
-      nextProps.client !== prevState.prevClient ||
-      nextProps.url !== prevState.prevUrl
-    ) {
-      return {
-        state: {
-          status: 'resolving',
-          definitionId: prevState.cardState.definitionId,
-        },
-        prevClient: nextProps.client,
-        prevUrl: nextProps.url,
-      };
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(
+  //   nextProps: InnerWithObjectProps,
+  //   prevState: InnerWithObjectState,
+  // ) {
+  //   console.log('[CARD] [getDerivedStateFromProps]', prevState, nextProps);
+  //   if (
+  //     nextProps.client !== prevState.prevClient ||
+  //     nextProps.url !== prevState.prevUrl
+  //   ) {
+  //     return {
+  //       state: {
+  //         status: 'resolving',
+  //         definitionId: prevState.cardState.definitionId,
+  //       },
+  //       prevClient: nextProps.client,
+  //       prevUrl: nextProps.url,
+  //     };
+  //   }
+  //   return null;
+  // }
 
-  updateState(incomingState: ObjectState) {
-    const { url } = this.props;
-    const { cardState } = this.state;
-    console.log(`[CARD]: ${url} update state`);
-    console.log(`[CARD]: ---- old state`, cardState);
-    console.log(`[CARD]: ---- old state`, incomingState);
+  updateState = (incomingState: ObjectState | null) => {
+    const { url, client } = this.props;
+    console.log(`[CARD]: ${url} update state`, incomingState);
+
+    if (incomingState === null) {
+      return client.resolve(url);
+    }
+
     return this.setState({
       cardState: incomingState,
     });
@@ -83,13 +86,13 @@ class InnerWithObject extends React.Component<
     //     cardState: incomingState
     //   });
     // }
-  }
+  };
 
   componentDidMount() {
     const { client, url } = this.props;
     const { uuid } = this.state;
-    client.register(url).subscribe(uuid, this.updateState.bind(this));
-    client.resolve(url);
+    console.log('[CARD] [MOUNTED] ' + url);
+    client.register(url).subscribe(uuid, this.updateState);
   }
 
   componentDidUpdate(prevProps: InnerWithObjectProps) {
@@ -97,12 +100,12 @@ class InnerWithObject extends React.Component<
     const { uuid } = this.state;
     if (this.props.client !== prevProps.client) {
       prevProps.client.deregister(prevProps.url, uuid);
-      client.register(url).subscribe(uuid, this.updateState.bind(this));
+      client.register(url).subscribe(uuid, this.updateState);
       client.resolve(url);
     }
     if (this.props.url !== prevProps.url) {
       client.deregister(prevProps.url, uuid);
-      client.register(url).subscribe(uuid, this.updateState.bind(this));
+      client.register(url).subscribe(uuid, this.updateState);
       client.resolve(url);
     }
     return;
