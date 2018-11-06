@@ -65,7 +65,10 @@ function getOptionValue(option) {
 // Custom Components
 // ==============================
 
-const Control = ({ innerProps: { innerRef, ...innerProps }, ...props }: *) => (
+export const Control = ({
+  innerProps: { innerRef, ...innerProps },
+  ...props
+}: *) => (
   <div
     ref={innerRef}
     css={{
@@ -77,7 +80,7 @@ const Control = ({ innerProps: { innerRef, ...innerProps }, ...props }: *) => (
     <components.Control {...props} innerProps={innerProps} />
   </div>
 );
-const Footer = ({ text, onClick }: *) => (
+export const Footer = ({ text, onClick }: *) => (
   <button
     css={{
       background: 0,
