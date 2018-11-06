@@ -13,13 +13,15 @@ import type { GlobalTheme, ProductTheme, Theme } from './types';
 
 type State = { theme: Theme };
 
-function withTheme<
-  P: {},
-  C: ComponentType<P>,
-  ExternalProps: $Exact<$Diff<ElementConfig<C>, { theme: Theme | void }>>,
->(defaultTheme: Theme): C => ComponentType<ExternalProps> {
+type PropsWithoutTheme<C> = $Exact<
+  $Diff<ElementConfig<C>, { theme: Theme | void }>,
+>;
+
+const withTheme = <P: {}, C: ComponentType<P>, PWT: PropsWithoutTheme<C>>(
+  defaultTheme: Theme,
+): (C => ComponentType<PWT>) => {
   return WrappedComponent => {
-    return class WithTheme extends Component<ExternalProps, State> {
+    return class WithTheme extends Component<PWT, State> {
       static contextTypes = {
         [channel]: PropTypes.object,
       };
@@ -68,7 +70,7 @@ function withTheme<
       }
     };
   };
-}
+};
 
 const defaultContentTheme: ProductTheme = { mode: light, context: 'container' };
 const defaultGlobalTheme: GlobalTheme = { mode: light };
@@ -76,18 +78,17 @@ const defaultGlobalTheme: GlobalTheme = { mode: light };
 export const withContentTheme = <
   P: {},
   C: ComponentType<P>,
-  ExternalProps: $Exact<$Diff<ElementConfig<C>, { theme: Theme | void }>>,
+  PWT: PropsWithoutTheme<C>,
 >(
   WrappedComponent: C,
-): ComponentType<ExternalProps> =>
-  withTheme(defaultContentTheme)(WrappedComponent);
+): ComponentType<PWT> => withTheme(defaultContentTheme)(WrappedComponent);
 
 export const withGlobalTheme = <
   P: {},
   C: ComponentType<P>,
-  ExternalProps: $Exact<$Diff<ElementConfig<C>, { theme: Theme | void }>>,
+  PWT: PropsWithoutTheme<C>,
 >(
   WrappedComponent: C,
-): ComponentType<ExternalProps> =>
-  withTheme(defaultGlobalTheme)(WrappedComponent);
+): ComponentType<PWT> => withTheme(defaultGlobalTheme)(WrappedComponent);
+
 export default withTheme;
