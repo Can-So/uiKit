@@ -7,7 +7,7 @@ import { EditorPlugin } from '../../types';
 import createStatusPlugin, { StatusState, pluginKey } from './plugin';
 import WithPluginState from '../../ui/WithPluginState';
 import StatusPicker from './ui/statusPicker';
-import { commitStatusPicker, DEFAULT_STATUS, insertStatus } from './actions';
+import { commitStatusPicker, updateStatus, createStatus } from './actions';
 
 const baseStatusPlugin = (): EditorPlugin => ({
   nodes() {
@@ -44,10 +44,10 @@ const baseStatusPlugin = (): EditorPlugin => ({
               autoFocus={statusState.autoFocus}
               element={element}
               onSelect={status => {
-                insertStatus(status)(editorView);
+                updateStatus(status)(editorView);
               }}
               onTextChanged={status => {
-                insertStatus(status)(editorView);
+                updateStatus(status)(editorView);
               }}
               closeStatusPicker={() => {
                 commitStatusPicker()(editorView);
@@ -68,16 +68,7 @@ const createQuickInsertMenuItem = () => ({
   priority: 700,
   keywords: ['lozenge'],
   icon: () => <LabelIcon label="Status" />,
-  action(insert, state) {
-    const statusNode = state.schema.nodes.status.createChecked({
-      ...DEFAULT_STATUS,
-      localId: uuid.generate(),
-    });
-    const tr = insert(statusNode);
-    const showStatusPickerAt = tr.selection.from - 2;
-    tr.setSelection(NodeSelection.create(tr.doc, showStatusPickerAt));
-    return tr.setMeta(pluginKey, { showStatusPickerAt, autoFocus:true });
-  },
+  action: createStatus(-2),
 });
 
 export interface StatusOptions {
