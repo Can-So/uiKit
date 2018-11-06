@@ -196,6 +196,7 @@
     "prosemirror-dev-tools": "^2.1.0",
     "raw-loader": "^0.5.1",
     "react-addons-perf": "^15.3.2",
+    "react-async-component": "^2.0.0",
     "react-circle": "^1.0.1",
     "react-live-clock": "^2.0.2",
     "react-lorem-component": "^0.12.2",
