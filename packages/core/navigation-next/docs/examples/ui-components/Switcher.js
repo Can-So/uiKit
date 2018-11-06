@@ -111,7 +111,17 @@ export default class extends React.Component<*, State> {
       />
     );
 
-    return <ContainerHeader before={avatar} after={ChevD} {...selected} />;
+    const { id, text, subText } = selected;
+
+    return (
+      <ContainerHeader
+        before={avatar}
+        after={ChevD}
+        id={id}
+        text={text}
+        subText={subText}
+      />
+    );
   };
   onChange = (selected: *) => {
     this.setState({ selected });

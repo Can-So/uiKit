@@ -5,9 +5,16 @@ import { css } from 'emotion';
 import Tooltip from '@atlaskit/tooltip';
 
 import { styleReducerNoOp, withGlobalTheme } from '../../../theme';
-import type { GlobalItemPresentationProps, GlobalItemStyles } from './types';
+import type {
+  GlobalItemPresentationProps,
+  GlobalItemStyles,
+  GlobalItemPrimitiveProps,
+} from './types';
 
-class GlobalNavigationItemPrimitive extends Component<*> {
+// FIXME: Get GlobalItemPrimitiveProps type working
+class GlobalNavigationItemPrimitive extends Component<
+  * /* GlobalItemPrimitiveProps */,
+> {
   static defaultProps = {
     isActive: false,
     isHover: false,
