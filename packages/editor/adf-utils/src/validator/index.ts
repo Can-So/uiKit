@@ -592,7 +592,11 @@ export function validator(
           if (entity.marks) {
             if (validator.props.marks) {
               const { items } = validator.props!.marks!;
-              const marksSet = items.length ? items[0] : [];
+              const marksSet = items.length
+                ? Array.isArray(items[0])
+                  ? items[0]
+                  : items
+                : [];
               const newMarks = entity.marks
                 .filter(mark =>
                   mode === 'strict' && marks
