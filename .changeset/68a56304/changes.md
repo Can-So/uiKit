@@ -1,1 +1,0 @@
-- pass collectionName to MediaStore in order to use right auth token

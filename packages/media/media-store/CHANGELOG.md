@@ -1,5 +1,10 @@
 # @atlaskit/media-store
 
+## 8.3.1
+- [patch] [705dcf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/705dcf3):
+
+  - pass collectionName to MediaStore in order to use right auth token
+
 ## 8.3.0
 - [minor] [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
 
