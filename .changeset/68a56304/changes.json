@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/media-store", "type": "patch" },
+    { "name": "@atlaskit/media-core", "type": "patch" }
+  ],
+  "dependents": []
+}
