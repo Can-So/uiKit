@@ -47,22 +47,22 @@ const defaultStyles = {
 // ==============================
 // Custom Functions
 // ==============================
-const createStyles = (styles: SelectStyles = {}): Object =>
+
+export const createStyles = (styles: SelectStyles = {}): Object =>
   mergeStyles(defaultStyles, styles);
 
-export function filterOption({ data }: { data: OptionType }, input: string) {
-  return data.text.toLowerCase().includes(input.toLowerCase());
-}
-export function isOptionSelected(
+export const filterOption = ({ data }: { data: OptionType }, input: string) =>
+  data.text.toLowerCase().includes(input.toLowerCase());
+
+export const isOptionSelected = (
   option: OptionType,
   selected: Array<OptionType> | void,
-) {
+) => {
   if (!selected || !selected.length) return false;
   return option.id === selected[0].id;
-}
-export function getOptionValue(option: OptionType) {
-  return option.id;
-}
+};
+
+export const getOptionValue = (option: OptionType) => option.id;
 
 // ==============================
 // Custom Components
@@ -217,8 +217,6 @@ class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
     );
   }
 }
-
-export { createStyles };
 
 export { Switcher as BaseSwitcher };
 
