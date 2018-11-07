@@ -8,7 +8,7 @@ import {
 } from '../_helpers';
 
 import { messages as BlockMessages } from '../../../plugins/insert-block/ui/ToolbarInsertBlock';
-import { messages as ListMessages } from '../../../plugins/lists/ui/ToolbarLists';
+import { messages as ListMessages } from '../../../plugins/lists/messages';
 
 [
   ListMessages.unorderedList.defaultMessage,
