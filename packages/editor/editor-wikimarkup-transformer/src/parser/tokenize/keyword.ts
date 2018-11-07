@@ -1,30 +1,6 @@
 import { TokenType } from './';
 import { EMOJIS } from './emoji';
 
-/**
- * What's special about these keyword is that it follows following rules.
- *
- * "!file.jpg!" = should be converted to special formatting, there is no text before formatting char "!"
- * "Hello !file.jpg!" = should be converted to special formatting, there is no text before formatting char "!"
- * "?? hello?? = should not be converted to special formatting, there is a space after the "??" formatting characters
- * "text_foo_" = should not be converted to special formatting, there is text before formatting char "_"
- *
- */
-const formatterKeywordTokenMap = {
-  '!': TokenType.MEDIA,
-  '----': TokenType.QUADRUPLE_DASH_SYMBOL,
-  '---': TokenType.TRIPLE_DASH_SYMBOL,
-  '--': TokenType.DOUBLE_DASH_SYMBOL,
-  '-': TokenType.DELETED,
-  '+': TokenType.INSERTED,
-  '*': TokenType.STRONG,
-  '^': TokenType.SUPERSCRIPT,
-  '~': TokenType.SUBSCRIPT,
-  _: TokenType.EMPHASIS,
-  '{{': TokenType.MONOSPACE,
-  '??': TokenType.CITATION,
-};
-
 const macroKeywordTokenMap = {
   '{adf': TokenType.ADF_MACRO,
   '{anchor': TokenType.ANCHOR_MACRO,
@@ -50,22 +26,19 @@ const keywordTokenMap = {
   '\r': TokenType.HARD_BREAK,
   '\n': TokenType.HARD_BREAK,
   '\r\n': TokenType.HARD_BREAK,
+  '!': TokenType.MEDIA,
+  '----': TokenType.QUADRUPLE_DASH_SYMBOL,
+  '---': TokenType.TRIPLE_DASH_SYMBOL,
+  '--': TokenType.DOUBLE_DASH_SYMBOL,
+  '-': TokenType.DELETED,
+  '+': TokenType.INSERTED,
+  '*': TokenType.STRONG,
+  '^': TokenType.SUPERSCRIPT,
+  '~': TokenType.SUBSCRIPT,
+  _: TokenType.EMPHASIS,
+  '{{': TokenType.MONOSPACE,
+  '??': TokenType.CITATION,
 };
-
-export function parseFormatterKeyword(input: string) {
-  for (const name in formatterKeywordTokenMap) {
-    if (
-      formatterKeywordTokenMap.hasOwnProperty(name) &&
-      input.startsWith(name)
-    ) {
-      return {
-        type: formatterKeywordTokenMap[name],
-      };
-    }
-  }
-
-  return null;
-}
 
 export function parseMacroKeyword(input: string) {
   for (const name in macroKeywordTokenMap) {
