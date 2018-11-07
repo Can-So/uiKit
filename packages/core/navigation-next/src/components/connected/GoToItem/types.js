@@ -18,4 +18,7 @@ export type ExternalGoToItemProps = {
   spinnerDelay: number,
 };
 
-export type GoToItemProps = InjectedProps & ExternalGoToItemProps;
+export type GoToItemProps = {
+  ...InjectedProps,
+  ...ExternalGoToItemProps,
+};
