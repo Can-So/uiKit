@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 6.1.5
+- [patch] [fcf97d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fcf97d8):
+
+  - Fix countries and mismatched flags
+
 ## 6.1.4
 - [patch] [6ab8e95"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ab8e95"
