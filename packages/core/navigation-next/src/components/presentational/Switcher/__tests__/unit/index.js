@@ -167,59 +167,60 @@ describe('Switcher', () => {
 
 describe('createStyles()', () => {
   let defaultState;
+  let defaultStyles;
 
   beforeEach(() => {
     defaultState = {
       isFocused: false,
       isActive: false,
     };
+    defaultStyles = createStyles();
   });
 
-  it('should return an object with option property', () => {
-    const styles = createStyles();
-    expect(styles).toEqual({
+  it('should return an object with option field when using default styles', () => {
+    expect(defaultStyles).toEqual({
       option: expect.any(Function),
     });
   });
 
-  it('should return default option styles if no custom option styles is given', () => {
-    const styles = createStyles();
-    expect(styles.option({}, defaultState)).toEqual({
-      alignItems: 'center',
-      border: 'none',
-      backgroundColor: 'transparent',
-      boxSizing: 'border-box',
-      color: 'inherit',
-      cursor: 'default',
-      display: 'flex',
-      flexShrink: 0,
-      fontSize: 'inherit',
-      height: 8 * 6,
-      outline: 'none',
-      paddingRight: 8,
-      paddingLeft: 8,
-      textAlign: 'left',
-      textDecoration: 'none',
-      width: '100%',
-    });
+  it('should return custom styles merged with default styles when given custom styles', () => {
+    const customStyles = {
+      singleValue: provided => ({
+        ...provided,
+        color: 'red',
+      }),
+      noOptionsMessage: provided => ({
+        ...provided,
+        color: 'green',
+      }),
+      groupHeading: provided => ({
+        ...provided,
+        color: 'black',
+      }),
+    };
+    const styles = createStyles(customStyles);
+    expect(styles).toMatchObject(customStyles);
+    // default option field should be present
+    expect(styles.option).toEqual(expect.any(Function));
   });
 
-  it('should merge default option styles and custom option styles', () => {
-    const customStyles = {
-      option: base => ({
-        ...base,
+  it('should return merged default option styles when given custom option styles', () => {
+    const customOptionStyles = {
+      option: provided => ({
+        ...provided,
         color: 'red',
         backgroundColor: 'blue',
       }),
     };
-    const styles = createStyles(customStyles);
-    const option = styles.option({}, defaultState);
-    expect(option).toEqual({
+    const styles = createStyles(customOptionStyles);
+    const { option } = styles;
+
+    expect(option({}, defaultState)).toEqual({
+      backgroundColor: 'blue',
+      color: 'red',
       alignItems: 'center',
       border: 'none',
-      backgroundColor: 'blue',
       boxSizing: 'border-box',
-      color: 'red',
       cursor: 'default',
       display: 'flex',
       flexShrink: 0,
@@ -234,14 +235,35 @@ describe('createStyles()', () => {
     });
   });
 
-  it('should return focus option styles when isFocused is true', () => {
-    const styles = createStyles();
+  it('should return default option styles when isFocused and isActive are false', () => {
+    const { option } = defaultStyles;
+    expect(option({}, defaultState)).toEqual({
+      color: 'inherit',
+      backgroundColor: 'transparent',
+      alignItems: 'center',
+      border: 'none',
+      boxSizing: 'border-box',
+      cursor: 'default',
+      display: 'flex',
+      flexShrink: 0,
+      fontSize: 'inherit',
+      height: 8 * 6,
+      outline: 'none',
+      paddingRight: 8,
+      paddingLeft: 8,
+      textAlign: 'left',
+      textDecoration: 'none',
+      width: '100%',
+    });
+  });
+
+  it('should return focus option styles when state isFocused is true', () => {
+    const { option } = defaultStyles;
     const state = {
       isFocused: true,
       isActive: false,
     };
-
-    expect(styles.option({}, state)).toEqual({
+    expect(option({}, state)).toEqual({
       alignItems: 'center',
       border: 'none',
       backgroundColor: '#EBECF0',
@@ -261,14 +283,39 @@ describe('createStyles()', () => {
     });
   });
 
-  it('should return expected option styles when isFocused and isActive are true', () => {
-    const styles = createStyles();
+  it('should return active option styles when state isActive is true', () => {
+    const { option } = defaultStyles;
+    const state = {
+      isFocused: false,
+      isActive: true,
+    };
+    expect(option({}, state)).toEqual({
+      alignItems: 'center',
+      border: 'none',
+      backgroundColor: '#DEEBFF',
+      boxSizing: 'border-box',
+      color: 'inherit',
+      cursor: 'default',
+      display: 'flex',
+      flexShrink: 0,
+      fontSize: 'inherit',
+      height: 8 * 6,
+      outline: 'none',
+      paddingRight: 8,
+      paddingLeft: 8,
+      textAlign: 'left',
+      textDecoration: 'none',
+      width: '100%',
+    });
+  });
+
+  it('should return expected option styles when state isFocused and isActive are true', () => {
+    const { option } = defaultStyles;
     const state = {
       isFocused: true,
       isActive: true,
     };
-
-    expect(styles.option({}, state)).toEqual({
+    expect(option({}, state)).toEqual({
       alignItems: 'center',
       border: 'none',
       backgroundColor: '#DEEBFF',
@@ -324,7 +371,7 @@ describe('isOptionSelected()', () => {
 });
 
 describe('getOptionValue()', () => {
-  it('should return option id property', () => {
+  it('should return option id field', () => {
     const option = { id: 'an-id' };
     expect(getOptionValue(option)).toEqual('an-id');
   });
