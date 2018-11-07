@@ -44,6 +44,7 @@ export const buildByline = (json: any) => {
       ),
     };
   }
+
   return {};
 };
 

@@ -1,0 +1,1 @@
+- Improve rendering of Smart Cards.
