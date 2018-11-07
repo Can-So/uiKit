@@ -22,19 +22,19 @@ export default {
   'fabric.media.connect_to': '{name}에 연결',
   'fabric.media.connect_account_description':
     '{name} 계정을 연결할 수 있도록 새로운 페이지를 열겠습니다.',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': '아바타 업로드',
+  'fabric.media.save': '저장',
+  'fabric.media.or': '또는',
+  'fabric.media.upload_photo': '사진 업로드',
+  'fabric.media.default_avatars': '기본 아바타',
+  'fabric.media.drag_and_drop_images_here': '이미지를 여기에 끌어다 놓습니다.',
+  'fabric.media.upload_image': '이미지 업로드',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    '이미지를 로드할 수 없습니다. URL이 유효하지 않습니다.',
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    '이미지를 로드할 수 없습니다. 형식이 유효하지 않습니다.',
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
+    '이미지가 너무 큽니다. {MAX_SIZE_MB}MB 이하여야 합니다.',
   'fabric.media.something_went_wrong': '문제가 발생했습니다.',
   'fabric.media.might_be_a_hiccup': '일시적인 문제일 수 있습니다.',
   'fabric.media.couldnt_generate_preview':
@@ -45,4 +45,20 @@ export default {
   'fabric.media.no_pdf_artifacts': '이 파일에서 PDF 파일을 찾지 못했습니다.',
   'fabric.media.give_feedback': '피드백 전송',
   'fabric.media.try_downloading_file': '파일을 보려면 다운로드하십시오.',
+  'fabric.media.webgl_warning_description':
+    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+  'fabric.media.unable_to_annotate_image':
+    "You're unable to annotate this image",
+  'fabric.media.learn_more': 'Learn More',
+  'fabric.media.accounts': 'Accounts',
+  'fabric.media.actions': 'Actions',
+  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+  'fabric.media.error_hint_critical':
+    'If the problem keeps happening contact support.',
+  'fabric.media.close': 'Close',
+  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
+  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
+  'fabric.media.annotate': 'Annotate',
+  'fabric.media.drop_your_files_here': 'Drop your files here',
+  'fabric.media.share_files_instantly': "We'll share them instantly",
 };

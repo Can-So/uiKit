@@ -24,19 +24,19 @@ export default {
   'fabric.media.connect_to': 'Se connecter à {name}',
   'fabric.media.connect_account_description':
     'Nous ouvrirons une nouvelle page pour vous aider à vous connecter à votre compte {name}',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': 'Importer un avatar',
+  'fabric.media.save': 'Enregistrer',
+  'fabric.media.or': 'ou',
+  'fabric.media.upload_photo': 'Importer une photo',
+  'fabric.media.default_avatars': 'Avatars par défaut',
+  'fabric.media.drag_and_drop_images_here': ' Glisser-déplacer vos images ici',
+  'fabric.media.upload_image': 'Importer une image',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    "Impossible de charger l'image, l'URL n'est pas valide.",
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    "Impossible de charger l'image, le format n'est pas valide.",
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
+    "L'image est trop grande. Elle ne doit pas dépasser {MAX_SIZE_MB} Mo",
   'fabric.media.something_went_wrong': "Une erreur s'est produite.",
   'fabric.media.might_be_a_hiccup': "Ce n'est sûrement qu'un contretemps.",
   'fabric.media.couldnt_generate_preview':
@@ -49,4 +49,20 @@ export default {
   'fabric.media.give_feedback': 'Envoyer un commentaire',
   'fabric.media.try_downloading_file':
     'Essayez de télécharger le fichier pour le consulter.',
+  'fabric.media.webgl_warning_description':
+    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+  'fabric.media.unable_to_annotate_image':
+    "You're unable to annotate this image",
+  'fabric.media.learn_more': 'Learn More',
+  'fabric.media.accounts': 'Accounts',
+  'fabric.media.actions': 'Actions',
+  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+  'fabric.media.error_hint_critical':
+    'If the problem keeps happening contact support.',
+  'fabric.media.close': 'Close',
+  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
+  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
+  'fabric.media.annotate': 'Annotate',
+  'fabric.media.drop_your_files_here': 'Drop your files here',
+  'fabric.media.share_files_instantly': "We'll share them instantly",
 };

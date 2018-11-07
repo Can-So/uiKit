@@ -23,19 +23,20 @@ export default {
   'fabric.media.connect_to': 'Tengjast {name}',
   'fabric.media.connect_account_description':
     'Við munum opna nýja síðu til að hjálpa þér að tengja {name} reikninginn þinn',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': 'Hala upp avatar',
+  'fabric.media.save': 'Vista',
+  'fabric.media.or': 'eða',
+  'fabric.media.upload_photo': 'Hlaða inn mynd',
+  'fabric.media.default_avatars': 'Sálfgefnir genglar',
+  'fabric.media.drag_and_drop_images_here':
+    'Dragðu og slepptu myndunum þínum hér',
+  'fabric.media.upload_image': 'Hlaða upp mynd',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    'Ekki tókst að hlaða mynd því vefslóðin er ógild.',
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    'Ekki tókst að hlaða mynd því sniðið er ógilt.',
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
+    'Mynd er of stór, hún má ekki vera stærri en {MAX_SIZE_MB}Mb',
   'fabric.media.something_went_wrong': 'Eitthvað fór úrskeiðis.',
   'fabric.media.might_be_a_hiccup': 'Þetta gætu bara verið smá hnökrar.',
   'fabric.media.couldnt_generate_preview':
@@ -48,4 +49,20 @@ export default {
   'fabric.media.give_feedback': 'Gefa álit',
   'fabric.media.try_downloading_file':
     'Prófaðu að hlaða skránni niður til að skoða hana.',
+  'fabric.media.webgl_warning_description':
+    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+  'fabric.media.unable_to_annotate_image':
+    "You're unable to annotate this image",
+  'fabric.media.learn_more': 'Learn More',
+  'fabric.media.accounts': 'Accounts',
+  'fabric.media.actions': 'Actions',
+  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+  'fabric.media.error_hint_critical':
+    'If the problem keeps happening contact support.',
+  'fabric.media.close': 'Close',
+  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
+  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
+  'fabric.media.annotate': 'Annotate',
+  'fabric.media.drop_your_files_here': 'Drop your files here',
+  'fabric.media.share_files_instantly': "We'll share them instantly",
 };

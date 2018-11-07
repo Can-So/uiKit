@@ -23,27 +23,47 @@ export default {
   'fabric.media.connect_to': 'Conectare la {name}',
   'fabric.media.connect_account_description':
     'Vom deschide o pagină nouă pentru a vă ajuta să vă conectați contul {name}',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': 'Încărcați un avatar',
+  'fabric.media.save': 'Salvare',
+  'fabric.media.or': 'sau',
+  'fabric.media.upload_photo': 'Încărcați o fotografie',
+  'fabric.media.default_avatars': 'Avataruri implicite',
+  'fabric.media.drag_and_drop_images_here':
+    'Trageți și eliberați imaginile dvs. aici',
+  'fabric.media.upload_image': 'Încărcare imagine',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    'Nu s-a putut încărca imaginea, url-ul este nevalid.',
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    'Nu s-a putut încărca imaginea, formatul este nevalid.',
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
-  'fabric.media.something_went_wrong': 'Something went wrong.',
-  'fabric.media.might_be_a_hiccup': 'It might just be a hiccup.',
+    'Imaginea este prea mare, nu trebuie să fie mai mare de {MAX_SIZE_MB}Mb',
+  'fabric.media.something_went_wrong': 'Ceva nu a funcționat corect.',
+  'fabric.media.might_be_a_hiccup': 'Nu avem informații suplimentare.',
   'fabric.media.couldnt_generate_preview':
-    "We couldn't generate a preview for this file.",
-  'fabric.media.cant_preview_file_type': "We can't preview this file type.",
+    'Nu am putut genera o previzualizare pentru acest fișier.',
+  'fabric.media.cant_preview_file_type':
+    'Nu se poate previzualiza acest tip de fişier.',
   'fabric.media.item_not_found_in_list':
-    'The selected item was not found on the list.',
-  'fabric.media.no_pdf_artifacts': 'No PDF artifacts found for this file.',
-  'fabric.media.give_feedback': 'Give feedback',
-  'fabric.media.try_downloading_file': 'Try downloading the file to view it.',
+    'Elementul selectat nu a fost găsit pe listă.',
+  'fabric.media.no_pdf_artifacts':
+    'Nu s-au găsit artefacte PDF pentru acest fișier.',
+  'fabric.media.give_feedback': 'Oferiți feedback',
+  'fabric.media.try_downloading_file':
+    'Încercaţi să descărcaţi fişierul pentru a-l vizualiza.',
+  'fabric.media.webgl_warning_description':
+    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+  'fabric.media.unable_to_annotate_image':
+    "You're unable to annotate this image",
+  'fabric.media.learn_more': 'Learn More',
+  'fabric.media.accounts': 'Accounts',
+  'fabric.media.actions': 'Actions',
+  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+  'fabric.media.error_hint_critical':
+    'If the problem keeps happening contact support.',
+  'fabric.media.close': 'Close',
+  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
+  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
+  'fabric.media.annotate': 'Annotate',
+  'fabric.media.drop_your_files_here': 'Drop your files here',
+  'fabric.media.share_files_instantly': "We'll share them instantly",
 };

@@ -23,19 +23,19 @@ export default {
   'fabric.media.connect_to': 'Připojit k {name}',
   'fabric.media.connect_account_description':
     'Otevřeme novou stránku, abychom vám pomohli připojit váš {name} účet.',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': 'Nahrát avatar',
+  'fabric.media.save': 'Uložit',
+  'fabric.media.or': 'nebo',
+  'fabric.media.upload_photo': 'Nahrát fotku',
+  'fabric.media.default_avatars': 'Výchozí avatary',
+  'fabric.media.drag_and_drop_images_here': 'Přetáhněte své obrázky sem.',
+  'fabric.media.upload_image': 'Nahrát obrázek',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    'Nepodařilo se nahrát obrázek, adresa URL je neplatná.',
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    'Nepodařilo se nahrát obrázek, formát je neplatný.',
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
+    'Obrázek je příliš velký. Maximální velikost je {MAX_SIZE_MB} MB.',
   'fabric.media.something_went_wrong': 'Něco se pokazilo.',
   'fabric.media.might_be_a_hiccup': 'Chybička se vloudila, ale nevíme kam.',
   'fabric.media.couldnt_generate_preview':
@@ -49,4 +49,20 @@ export default {
   'fabric.media.give_feedback': 'Váš názor',
   'fabric.media.try_downloading_file':
     'Pokud chcete soubor zobrazit, zkuste ho stáhnout.',
+  'fabric.media.webgl_warning_description':
+    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+  'fabric.media.unable_to_annotate_image':
+    "You're unable to annotate this image",
+  'fabric.media.learn_more': 'Learn More',
+  'fabric.media.accounts': 'Accounts',
+  'fabric.media.actions': 'Actions',
+  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+  'fabric.media.error_hint_critical':
+    'If the problem keeps happening contact support.',
+  'fabric.media.close': 'Close',
+  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
+  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
+  'fabric.media.annotate': 'Annotate',
+  'fabric.media.drop_your_files_here': 'Drop your files here',
+  'fabric.media.share_files_instantly': "We'll share them instantly",
 };

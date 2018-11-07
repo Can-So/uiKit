@@ -22,27 +22,45 @@ export default {
   'fabric.media.connect_to': 'Collegati a {name}',
   'fabric.media.connect_account_description':
     'Apriremo una nuova pagina per aiutarti a collegare il tuo account {name}',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': 'Carica un avatar',
+  'fabric.media.save': 'Salva',
+  'fabric.media.or': 'o',
+  'fabric.media.upload_photo': 'Carica una foto',
+  'fabric.media.default_avatars': 'Avatar predefiniti',
+  'fabric.media.drag_and_drop_images_here': 'Trascina le tue immagini qui',
+  'fabric.media.upload_image': 'Carica immagine',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    "Non è stato possibile caricare l'immagine, l'url non è valido.",
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    "Non è stato possibile caricare l'immagine, il formato non è valido.",
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
-  'fabric.media.something_went_wrong': 'Something went wrong.',
-  'fabric.media.might_be_a_hiccup': 'It might just be a hiccup.',
+    "L'immagine è troppo grande, non può essere maggiore di {MAX_SIZE_MB} Mb",
+  'fabric.media.something_went_wrong': 'Si è verificato un errore.',
+  'fabric.media.might_be_a_hiccup': 'Potrebbe essere un semplice contrattempo.',
   'fabric.media.couldnt_generate_preview':
-    "We couldn't generate a preview for this file.",
-  'fabric.media.cant_preview_file_type': "We can't preview this file type.",
+    'Non siamo riusciti a generare un’anteprima per questo file.',
+  'fabric.media.cant_preview_file_type':
+    'Impossibile effettuare l’anteprima di questo tipo di file.',
   'fabric.media.item_not_found_in_list':
-    'The selected item was not found on the list.',
-  'fabric.media.no_pdf_artifacts': 'No PDF artifacts found for this file.',
-  'fabric.media.give_feedback': 'Give feedback',
-  'fabric.media.try_downloading_file': 'Try downloading the file to view it.',
+    'L’elemento selezionato non è stato trovato nell’elenco.',
+  'fabric.media.no_pdf_artifacts': 'Nessun PDF trovato per questo file.',
+  'fabric.media.give_feedback': 'Lascia un feedback',
+  'fabric.media.try_downloading_file':
+    'Prova a scaricare il file per visualizzarlo.',
+  'fabric.media.webgl_warning_description':
+    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+  'fabric.media.unable_to_annotate_image':
+    "You're unable to annotate this image",
+  'fabric.media.learn_more': 'Learn More',
+  'fabric.media.accounts': 'Accounts',
+  'fabric.media.actions': 'Actions',
+  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+  'fabric.media.error_hint_critical':
+    'If the problem keeps happening contact support.',
+  'fabric.media.close': 'Close',
+  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
+  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
+  'fabric.media.annotate': 'Annotate',
+  'fabric.media.drop_your_files_here': 'Drop your files here',
+  'fabric.media.share_files_instantly': "We'll share them instantly",
 };

@@ -23,27 +23,44 @@ export default {
   'fabric.media.connect_to': 'Forbind til {name}',
   'fabric.media.connect_account_description':
     'Vi åbner en ny side for at hjælpe dig til at forbinde din {name}-konto',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': 'Upload en avatar',
+  'fabric.media.save': 'Gem',
+  'fabric.media.or': 'eller',
+  'fabric.media.upload_photo': 'Upload et foto',
+  'fabric.media.default_avatars': 'Standard-avatarer',
+  'fabric.media.drag_and_drop_images_here':
+    'Træk dine billeder herover, og slip dem',
+  'fabric.media.upload_image': 'Upload billede',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    'Billedet kunne ikke indlæses; ugyldig URL.',
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    'Billedet kunne ikke indlæses; ugyldigt format.',
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
-  'fabric.media.something_went_wrong': 'Something went wrong.',
-  'fabric.media.might_be_a_hiccup': 'It might just be a hiccup.',
-  'fabric.media.couldnt_generate_preview':
-    "We couldn't generate a preview for this file.",
-  'fabric.media.cant_preview_file_type': "We can't preview this file type.",
+    'Billedet er for stort. Det må ikke være større end  {MAX_SIZE_MB}MB',
+  'fabric.media.something_went_wrong': 'Noget gik galt.',
+  'fabric.media.might_be_a_hiccup': 'Det må være et midlertidigt problem.',
+  'fabric.media.couldnt_generate_preview': 'Vi kunne ikke vise denne fil.',
+  'fabric.media.cant_preview_file_type': 'Vi kan ikke vise denne filtype.',
   'fabric.media.item_not_found_in_list':
-    'The selected item was not found on the list.',
-  'fabric.media.no_pdf_artifacts': 'No PDF artifacts found for this file.',
-  'fabric.media.give_feedback': 'Give feedback',
-  'fabric.media.try_downloading_file': 'Try downloading the file to view it.',
+    'Det valgte element blev ikke fundet på listen.',
+  'fabric.media.no_pdf_artifacts': 'Ingen PDF-artefakter for denne fil fundet.',
+  'fabric.media.give_feedback': 'Giv feedback',
+  'fabric.media.try_downloading_file':
+    'Prøv at downloade filen for at vise den.',
+  'fabric.media.webgl_warning_description':
+    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+  'fabric.media.unable_to_annotate_image':
+    "You're unable to annotate this image",
+  'fabric.media.learn_more': 'Learn More',
+  'fabric.media.accounts': 'Accounts',
+  'fabric.media.actions': 'Actions',
+  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+  'fabric.media.error_hint_critical':
+    'If the problem keeps happening contact support.',
+  'fabric.media.close': 'Close',
+  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
+  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
+  'fabric.media.annotate': 'Annotate',
+  'fabric.media.drop_your_files_here': 'Drop your files here',
+  'fabric.media.share_files_instantly': "We'll share them instantly",
 };

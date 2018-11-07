@@ -24,19 +24,20 @@ export default {
   'fabric.media.connect_to': 'Conectarse a {name}',
   'fabric.media.connect_account_description':
     'Abriremos otra página para ayudarte a conectar tu cuenta de {name}',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': 'Carga un avatar',
+  'fabric.media.save': 'Guardar',
+  'fabric.media.or': 'o',
+  'fabric.media.upload_photo': 'Carga una foto',
+  'fabric.media.default_avatars': 'Avatares predeterminados',
+  'fabric.media.drag_and_drop_images_here':
+    'Arrastra y suelta las imágenes aquí',
+  'fabric.media.upload_image': 'Carga una imagen',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    'No se pudo cargar la imagen porque la URL no es válida.',
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    'No se pudo cargar la imagen porque el formato no es válido.',
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
+    'La imagen es demasiado larga; no puede superar los {MAX_SIZE_MB} MB',
   'fabric.media.something_went_wrong': 'Algo ha ido mal.',
   'fabric.media.might_be_a_hiccup': 'Tal vez sea solo un tropiezo.',
   'fabric.media.couldnt_generate_preview':
@@ -50,4 +51,20 @@ export default {
   'fabric.media.give_feedback': 'Enviar comentarios',
   'fabric.media.try_downloading_file':
     'Prueba a descargar el archivo para verlo.',
+  'fabric.media.webgl_warning_description':
+    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+  'fabric.media.unable_to_annotate_image':
+    "You're unable to annotate this image",
+  'fabric.media.learn_more': 'Learn More',
+  'fabric.media.accounts': 'Accounts',
+  'fabric.media.actions': 'Actions',
+  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+  'fabric.media.error_hint_critical':
+    'If the problem keeps happening contact support.',
+  'fabric.media.close': 'Close',
+  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
+  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
+  'fabric.media.annotate': 'Annotate',
+  'fabric.media.drop_your_files_here': 'Drop your files here',
+  'fabric.media.share_files_instantly': "We'll share them instantly",
 };
