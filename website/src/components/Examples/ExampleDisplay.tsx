@@ -7,6 +7,7 @@ import Loading from '../Loading';
 import CodeBlock from '../Code';
 
 type Props = {
+  children?: (...param: any) => React.ReactNode;
   src: string | null;
   name: string;
   example: {
@@ -14,13 +15,15 @@ type Props = {
     exports: Function;
   };
   displayCode: boolean;
-  render: (P: ComponentType<any>, Q: ComponentType<any>, param: boolean) => any;
+  render?: (
+    P: ComponentType<any>,
+    Q: ComponentType<any>,
+    param: boolean,
+  ) => any;
 };
 
 export default class ExampleDisplay extends Component<Props> {
-  // TODO: find the correct type
-  // iframeRef: ElementRef(<iframe>);
-  iframeRef: HTMLElement<iframe>;
+  iframeRef: HTMLIFrameElement;
   ExampleCode:
     | (React.ComponentClass<{}, any> & Loadable.LoadableComponent)
     | (React.StatelessComponent<{}> & Loadable.LoadableComponent);
@@ -33,9 +36,10 @@ export default class ExampleDisplay extends Component<Props> {
     if (this.props.src !== nextProps.src) {
       if (
         this.iframeRef &&
-        typeof this.iframeRef.contentWindow.unmountApp === 'function'
+        typeof (this.iframeRef!.contentWindow! as Window).unmountApp ===
+          'function'
       ) {
-        this.iframeRef.contentWindow.unmountApp();
+        (this.iframeRef!.contentWindow! as Window).unmountApp!();
       }
       this.buildExampleComponents(nextProps);
     }
@@ -43,17 +47,17 @@ export default class ExampleDisplay extends Component<Props> {
   componentWillUnmount() {
     if (
       this.iframeRef &&
-      this.iframeRef.contentWindow &&
-      typeof this.iframeRef.contentWindow.unmountApp === 'function'
+      typeof (this.iframeRef!.contentWindow! as Window).unmountApp ===
+        'function'
     ) {
-      this.iframeRef.contentWindow.unmountApp();
+      (this.iframeRef!.contentWindow! as Window).unmountApp!();
     }
   }
   buildExampleComponents = props => {
     this.ExampleCode = Loadable({
       loader: () => props.example.contents(),
-      loading: Loading,
-      render(loaded) {
+      loading: () => <Loading />,
+      render(loaded: any) {
         return (
           <CodeBlock grammar="jsx" content={loaded.default} name={props.name} />
         );
@@ -82,7 +86,7 @@ export default class ExampleDisplay extends Component<Props> {
       return;
     }
 
-    const children = this.props.children(
+    const children = this.props.children!(
       this.ExampleCode,
       this.Example,
       this.props.displayCode,

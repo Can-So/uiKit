@@ -15,15 +15,16 @@ export type GroupsProps = {
   docs: Directory;
   patterns: Directory;
   packages: Directory;
+  onClick: (e: Event) => void;
 };
 
 export type GroupsState = {
-  parentRoute?: Object;
+  parentRoute?: Object | null;
   stack: Array<React.ReactNode>;
 };
 
 export type GroupsContext = {
-  router: Object;
+  router: { route: any };
 };
 
 export default class Groups extends React.Component<GroupsProps, GroupsState> {
@@ -31,7 +32,7 @@ export default class Groups extends React.Component<GroupsProps, GroupsState> {
     router: PropTypes.object,
   };
 
-  state = {
+  state: GroupsState = {
     parentRoute: null,
     stack: [[]],
   };
@@ -48,23 +49,35 @@ export default class Groups extends React.Component<GroupsProps, GroupsState> {
   }
 
   resolveRoutes(pathname: string) {
-    const { docs, packages, patterns } = this.props;
+    const { docs, onClick, packages, patterns } = this.props;
 
     const menus = [
       <Route path="/">
-        <DefaultNav pathname={pathname} />
+        <DefaultNav onClick={onClick} pathname={pathname} />
       </Route>,
       <Route path="/docs">
-        <DocsNav pathname={pathname} docs={docs} />
+        <DocsNav onClick={onClick} pathname={pathname} docs={docs} />
       </Route>,
       <Route path="/packages">
-        <PackagesNav pathname={pathname} packages={packages} />
+        <PackagesNav
+          onClick={onClick}
+          pathname={pathname}
+          packages={packages}
+        />
       </Route>,
       <Route path="/packages">
-        <PackagesNav pathname={pathname} packages={packages} />
+        <PackagesNav
+          onClick={onClick}
+          pathname={pathname}
+          packages={packages}
+        />
       </Route>,
       <Route path="/patterns">
-        <PatternsNav pathname={pathname} patterns={patterns} />
+        <PatternsNav
+          onClick={onClick}
+          pathname={pathname}
+          patterns={patterns}
+        />
       </Route>,
     ];
 

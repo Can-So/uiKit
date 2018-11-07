@@ -52,7 +52,7 @@ const Heading = ({
 const LogItem = styled.div`
   margin-bottom: 1em;
 
-  ${p =>
+  ${(p: { major: boolean }) =>
     p.major
       ? css`
           &:not(:first-child) {

@@ -8,8 +8,8 @@ const containerWidth = {
 };
 
 const PageContainer = styled.main`
-  max-width: ${p =>
-    containerWidth[p.width] ? containerWidth[p.width] : containerWidth.medium};
+  max-width: ${(p: { width?: keyof typeof containerWidth }) =>
+    p.width ? containerWidth[p.width] : containerWidth.medium};
   margin: 2rem auto;
   padding: 0 2rem;
 `;

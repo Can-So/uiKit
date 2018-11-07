@@ -57,6 +57,7 @@ export default class ChangelogExplorer extends Component<Props, State> {
     const { isInvalid, range } = this.state;
 
     const Content = Loadable({
+      // @ts-ignore TODO: Fix typings for Loadable component
       loading: Loading,
       loader: () => found && found.contents(),
       render: changelog =>

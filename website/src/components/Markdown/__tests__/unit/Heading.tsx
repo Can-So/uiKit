@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Heading from '../../Heading';
 import { mount } from 'enzyme';
-
+// TODO: Fix the console error thrown
 test('children', () => {
   const wrapper1 = mount(<Heading level={0} />);
   const wrapper2 = mount(<Heading level={0}>testing content</Heading>);
@@ -30,7 +30,7 @@ test('anchor - hidden', () => {
 
 test('anchor - show', () => {
   const wrapper = mount(<Heading level={0}>test content</Heading>);
-  const heading = wrapper.children(0);
+  const heading = wrapper.children();
 
   heading.simulate('mouseenter');
   wrapper.update();
@@ -42,7 +42,7 @@ test('anchor - show', () => {
 
 test('anchor - hide', () => {
   const wrapper = mount(<Heading level={0} />);
-  const heading = wrapper.children(0);
+  const heading = wrapper.children();
 
   heading.simulate('mouseenter');
   wrapper.update();

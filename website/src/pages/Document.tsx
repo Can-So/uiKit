@@ -28,7 +28,9 @@ export default function Document({
   const found = fs.findNormalized(docs, filePath);
 
   const Content = Loadable({
+    // @ts-ignore TODO: Typing Loadable
     loader: () => found && found.exports(),
+    // @ts-ignore TODO: Typing Loadable
     loading: Loading,
     render(md = {}) {
       const docDetails: { content?: string; data?: Object } = {};

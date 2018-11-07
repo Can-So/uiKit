@@ -41,12 +41,12 @@ module.exports = function createWebpackConfig(
       main: getEntries({
         isProduction,
         websiteDir,
-        entryPath: './src/index.js',
+        entryPath: './src/index.tsx',
       }),
       examples: getEntries({
         isProduction,
         websiteDir,
-        entryPath: './src/examples-entry.js',
+        entryPath: './src/examples-entry.tsx',
       }),
     },
     output: {

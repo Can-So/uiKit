@@ -1,5 +1,6 @@
 import { packages } from '../../../site';
 import * as fs from '../../../utils/fs';
+import { divvyChangelog } from '../../../utils/changelog';
 
 function getPkg(packages, groupId, pkgId) {
   const groups = fs.getDirectories(packages.children);
@@ -10,6 +11,7 @@ function getPkg(packages, groupId, pkgId) {
 }
 
 // TODO: find the exact types for the getJson and getDocs
+// @ts-ignore
 const getJSON: any = files => fs.getById(files, 'package.json').exports();
 const getDocs: any = dirs => {
   const docs: any = fs.maybeGetById(dirs, 'docs');
@@ -22,12 +24,14 @@ const getDocs: any = dirs => {
 };
 const getExamples = dirs => {
   const examples = fs.maybeGetById(dirs, 'examples');
+  // @ts-ignore
   return examples && examples.children;
 };
 const getChangelog = files => {
   const changelog = fs.maybeGetById(files, 'CHANGELOG.md');
   return (
     (changelog &&
+      // @ts-ignore
       changelog.contents().then(changelog => divvyChangelog(changelog))) ||
     []
   );

@@ -1,7 +1,7 @@
 export type NavGroupItem = {
   external?: any;
-  to: string;
-  title: string;
+  to?: string;
+  title?: string;
   isSelected?: (param1: string, param2: string) => boolean;
   isCompact?: boolean;
   iconSelected?: boolean;

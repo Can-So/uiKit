@@ -54,7 +54,16 @@ const cssLoaderExceptions = (pkgJSONName, groupId, packageId) => [
 
 const tsMatch = /.+(\.ts|\.tsx)/;
 
-export default class CodeSandbox extends Component<{}, {}> {
+type Props = {
+  deployButton: any;
+  example: any;
+  groupId: any;
+  loadingButton: any;
+  packageId: any;
+  pkgJSON: any;
+  afterDeployError?: any;
+};
+export default class CodeSandbox extends Component<Props, {}> {
   state = { parameters: '' };
 
   render() {

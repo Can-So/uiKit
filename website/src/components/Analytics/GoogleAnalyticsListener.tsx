@@ -108,8 +108,9 @@ export const observePerformanceMetrics = location => {
 };
 
 type Props = {
+  gaId: string | number;
   children: React.ReactNode;
-  location: Object;
+  location: { pathname: string };
 };
 
 class GoogleAnalyticsListener extends Component<Props> {

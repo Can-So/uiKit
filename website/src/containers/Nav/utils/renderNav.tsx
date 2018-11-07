@@ -18,7 +18,8 @@ export default function renderNav(
       key={pathname + index + (group.title || '')}
     >
       {group.items.map(item => {
-        const isAncestor = pathname.includes(item.to) && pathname !== item.to;
+        const isAncestor =
+          item.to && pathname.includes(item.to) && pathname !== item.to;
         const isSelected = pathname === item.to;
         const icon =
           isSelected || isAncestor ? item.iconSelected || item.icon : item.icon;

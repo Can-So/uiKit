@@ -26,20 +26,18 @@ export function buildSubNavGroup(
   Icon: ComponentType<any>,
 ): { title?: string; items: Array<NavGroupItem> } | null {
   if (!children || !children.length) return null;
-  return children
-    .filter(item => !item.id.startsWith('_'))
-    .reduce(
-      (acc, item) => {
-        acc.items.push({
-          to: url(fs.normalize(item.id)),
-          title: fs.titleize(item.id),
-          isCompact: true,
-          icon: <CenteredIcon>•</CenteredIcon>,
-        });
-        return acc;
-      },
-      { items: [] },
-    );
+  return children.filter(item => !item.id.startsWith('_')).reduce(
+    (acc, item) => {
+      acc.items.push({
+        to: url(fs.normalize(item.id)),
+        title: fs.titleize(item.id),
+        isCompact: true,
+        icon: <CenteredIcon>•</CenteredIcon>,
+      });
+      return acc;
+    },
+    { items: [] } as { items: Array<NavGroupItem> },
+  );
 }
 
 const getItemDetails = (pkg: Directory, group: Directory, pathname) => {
@@ -58,9 +56,9 @@ const getItemDetails = (pkg: Directory, group: Directory, pathname) => {
     )
     .slice(1);
 
-  const items = [];
+  const items: Array<NavGroupItem> = [];
 
-  const docsSubnav = buildSubNavGroup(
+  const docsSubnav: any = buildSubNavGroup(
     docItems,
     'Docs',
     packageDocUrl.bind(null, group.id, pkg.id),
@@ -97,6 +95,7 @@ const packagesList = {
 export type PackagesNavProps = {
   pathname: string;
   packages: Directory;
+  onClick: (e: Event) => void; // TODO: to confirm why do we need to do it
 };
 
 const standardGroups = (dirs: Array<Directory>, pathname) =>
@@ -104,18 +103,21 @@ const standardGroups = (dirs: Array<Directory>, pathname) =>
     const packages = fs.getDirectories(group.children);
     return {
       title: group.id,
-      items: packages.reduce((items, pkg) => {
-        const details = getItemDetails(pkg, group, pathname);
-        if (details) {
-          return items.concat(details);
-        }
-        return items;
-      }, []),
+      items: packages.reduce(
+        (items, pkg) => {
+          const details = getItemDetails(pkg, group, pathname);
+          if (details) {
+            return items.concat(details);
+          }
+          return items;
+        },
+        [] as Array<any>,
+      ),
     };
   });
 
 export default function PackagesNav(props: PackagesNavProps) {
-  const { packages, pathname } = props;
+  const { packages, pathname, onClick } = props;
   const dirs = fs.getDirectories(packages.children);
 
   return (
@@ -124,6 +126,7 @@ export default function PackagesNav(props: PackagesNavProps) {
         [{ items: [packagesList] }, ...standardGroups(dirs, pathname)],
         {
           pathname,
+          onClick,
         },
       )}
     </div>

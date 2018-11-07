@@ -109,9 +109,27 @@ function ExampleSelector(props) {
     </Control>
   );
 }
-
-class ExampleNavigation extends Component {
-  state = {};
+// TODO: need some help with the any and the optional props
+type ExampleNavigationProps = {
+  onExampleSelected?: (selected: { item: { value: string } }) => void;
+  examples?: any;
+  onPackageSelected?: (selected: { item: { value: string } }) => void;
+  groups?: any;
+  exampleId?: string;
+  groupId: string;
+  loaderUrl?: string | null;
+  packageId: string;
+  config?: any;
+  codeIsVisible: boolean;
+  onCodeToggle?: (event: React.SyntheticEvent<HTMLButtonElement>) => void;
+  deploySandbox?: any;
+  loadingSandbox?: any;
+};
+type Error = {
+  error: any;
+};
+class ExampleNavigation extends Component<ExampleNavigationProps> {
+  state: Error = { error: null };
   render() {
     const {
       onExampleSelected,
@@ -177,7 +195,6 @@ class ExampleNavigation extends Component {
                   <CodeSandboxLogo />
                 </NavButton>
               )}
-              useNavButton
             />
           </Tooltip>
           <Tooltip
@@ -383,8 +400,10 @@ export default class Examples extends React.Component<Props, State> {
         />
         <Helmet>
           <title>
-            Example - {fs.titleize(exampleId)} - {fs.titleize(packageId)} -{' '}
-            {process.env.BASE_TITLE}
+            {`Example - ${fs.titleize(exampleId)} - ${fs.titleize(
+              packageId,
+            )} -${' '}
+            ${process.env.BASE_TITLE}`}
           </title>
         </Helmet>
         {examples && exampleId ? (

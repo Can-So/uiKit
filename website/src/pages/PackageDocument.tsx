@@ -25,8 +25,11 @@ export default function PackageDocument({
   }
 
   const Content = Loadable({
+    // @ts-ignore //TODO: Need help to type Loadable
     loading: Loading,
+    // @ts-ignore //TODO: Need help to type Loadable
     loader: () => found && found.exports(),
+    // @ts-ignore //TODO: Need help to type Loadable
     render: doc => (doc ? doc.default : <FourOhFour />),
   });
 
@@ -34,7 +37,9 @@ export default function PackageDocument({
     <Page>
       <Helmet>
         <title>
-          {fs.titleize(pkgId)} - {fs.titleize(docId)} - {process.env.BASE_TITLE}
+          {`${fs.titleize(pkgId)} - ${fs.titleize(docId)} - ${
+            process.env.BASE_TITLE
+          }`}
         </title>
       </Helmet>
       <Title>

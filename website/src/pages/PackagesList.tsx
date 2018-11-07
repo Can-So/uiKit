@@ -8,15 +8,13 @@ import Page, { Title, Section } from '../components/Page';
 import { externalPackages as packages, getConfig } from '../site';
 
 type Head = {
-  cells: [
-    {
-      key: string;
-      content: string;
-      shouldTruncate?: boolean;
-      isSortable: boolean;
-      width: number;
-    }
-  ];
+  cells: Array<{
+    key: string;
+    content: string;
+    shouldTruncate?: boolean;
+    isSortable: boolean;
+    width: number;
+  }>;
 };
 
 const head: Head = {
@@ -116,12 +114,12 @@ const renderRow = (
 };
 
 const StatRows = () =>
-  fs.getDirectories(packages.children).reduce(
+  fs.getDirectories(packages.children).reduce<Array<React.ReactChild>>(
     (acc, team) =>
       acc.concat(
+        // @ts-ignore TODO: Fix concat type
         fs.getDirectories(team.children).map(pkg => {
           const pkgJSON = getConfig(team.id, pkg.id).config;
-
           return renderRow(pkgJSON, pkg, team.id);
         }),
       ),
@@ -130,9 +128,9 @@ const StatRows = () =>
 
 export default function PackagesList() {
   return (
-    <Page width="large">
+    <Page>
       <Helmet>
-        <title>Browse all packages - {process.env.BASE_TITLE}</title>
+        <title>{`Browse all packages - ${process.env.BASE_TITLE}`}</title>
       </Helmet>
       <Title>All Packages</Title>
       <Section>

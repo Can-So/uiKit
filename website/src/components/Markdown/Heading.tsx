@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Component } from 'react';
-import reactAddonsTextContent from 'react-addons-text-content';
+import * as reactAddonsTextContent from 'react-addons-text-content';
 import { Helmet } from 'react-helmet';
-import snackeCase from 'snake-case';
+// @ts-ignore TODO: How can I correctly import it, I have added the d.ts in the tsconfig.base
+import * as snackeCase from 'snake-case';
 
 type Props = {
   children?: React.ReactNode;
@@ -17,7 +18,7 @@ function dashcase(children) {
   return snackeCase(reactAddonsTextContent(children)).replace(/_/g, '-');
 }
 
-export default class extends Component<Props, State> {
+export default class Heading extends Component<Props, State> {
   state = {
     shouldShowAnchor: false,
   };
@@ -46,7 +47,9 @@ export default class extends Component<Props, State> {
         {level === 1 ? (
           <Helmet>
             <title>
-              {reactAddonsTextContent(children)} - {process.env.BASE_TITLE}
+              {`${reactAddonsTextContent(children)} - ${
+                process.env.BASE_TITLE
+              }`}
             </title>
           </Helmet>
         ) : (

@@ -101,8 +101,10 @@ export default function LoadData({ match }) {
       </Page>
     ),
     loader: () =>
+      // @ts-ignore Type Loadable
       fetchPackageData(groupId, pkgId).catch(error => console.log(error)),
     render: props =>
+      // @ts-ignore Type Loadable
       props.missing || props.error ? (
         <FourOhFour />
       ) : (
@@ -141,9 +143,7 @@ class Package extends Component<any, any> {
       <Page>
         {urlIsExactMatch && (
           <Helmet>
-            <title>
-              {title} package - {process.env.BASE_TITLE}
-            </title>
+            <title>{`${title} package - ${process.env.BASE_TITLE}`}</title>
           </Helmet>
         )}
         <Title>

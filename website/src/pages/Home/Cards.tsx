@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ComponentType } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { Link } from '../../components/WrappedLink';
 import { gridSize, colors, math } from '@atlaskit/theme';
@@ -98,7 +98,8 @@ const BaseCardStyles = css`
     color: ${colors.N900};
   }
 
-  animation-delay: ${({ index = 0 }) => 0.5 + 0.03 * index}s;
+  animation-delay: ${({ index }: { index?: number }) =>
+    0.5 + 0.03 * (index || 0)}s;
   background-size: contain;
   background-position: bottom;
 `;
@@ -130,11 +131,12 @@ const Img = ({ src, alt = '' }: { src: string; alt?: string }) => (
 );
 
 type CardProps = {
-  icon: Component;
+  icon: ComponentType;
+  index?: number;
   text: string;
   title: string;
-  image: string;
-  alt: string;
+  image?: string;
+  alt?: string;
   to?: string;
   href?: string;
 };
@@ -264,6 +266,7 @@ export default class Cards extends Component {
   state = {
     columnCount: 3,
   };
+  debouncedDetect: any;
 
   componentDidMount() {
     this.debouncedDetect = debounce(this.detectColumns, 500);

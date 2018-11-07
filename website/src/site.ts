@@ -3,9 +3,13 @@ import { Directory } from './types';
 // SITE_DATA is dynamically generated at runtime by bolt-fs-loader.
 // Configuration for bolt-fs-loader is in webpack.config.js since it needs to be dynamically created
 // depending on the subset of packages we want to represent on the website.
-import * as data from './SITE_DATA';
-import * as NAV_DATA from './NAV_DATA';
+// @ts-ignore
+import data from './SITE_DATA';
+// @ts-ignore
+import NAV_DATA from './NAV_DATA';
 import * as fs from './utils/fs';
+
+console.log(require('./SITE_DATA'));
 
 const productPackages = [
   'bitbucket',
@@ -46,8 +50,8 @@ for (const child of fs.getDirectories(packageDirs.children)) {
 }
 
 /* If a package is related to an Atlassian products, it will appear at the bottom of the navigation */
-let productsPkgs = [];
-let non_productsPkgs = [];
+let productsPkgs: Array<any> = [];
+let non_productsPkgs: Array<any> = [];
 for (let pkg of publicPackages.children) {
   if (productPackages.includes(pkg.id)) productsPkgs.push(pkg);
   else non_productsPkgs.push(pkg);

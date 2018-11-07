@@ -7,9 +7,14 @@ import buildNavGroups from '../utils/buildNavGroups';
 export type PatternsNavProps = {
   pathname: string;
   patterns: Directory;
+  onClick: (e: Event) => void;
 };
 
-export default function PatternsNav({ pathname, patterns }: PatternsNavProps) {
+export default function PatternsNav({
+  pathname,
+  patterns,
+  onClick,
+}: PatternsNavProps) {
   const groups = buildNavGroups('patterns', CodeIcon, pathname, patterns);
   groups.unshift({
     items: [
@@ -21,5 +26,5 @@ export default function PatternsNav({ pathname, patterns }: PatternsNavProps) {
     ],
   });
 
-  return <div>{renderNav(groups, { pathname })}</div>;
+  return <div>{renderNav(groups, { pathname, onClick })}</div>;
 }

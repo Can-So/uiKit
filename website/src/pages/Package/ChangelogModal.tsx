@@ -46,8 +46,8 @@ const LogWrapper = styled.div`
 
 type HeaderProps = {
   isInvalid: boolean;
-  onChange: (event: SyntheticEvent<HTMLInputElement>) => mixed;
-  onClose: () => mixed;
+  onChange: (event: React.SyntheticEvent<HTMLInputElement>) => void;
+  onClose: () => void;
   showKeyline: boolean;
   value: string;
 };
@@ -113,7 +113,7 @@ export default class ExamplesModal extends Component<Props, State> {
       });
   }
 
-  handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
+  handleChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
     const { groupId, pkgId } = this.props.match.params;
     const { target } = event;
 
@@ -159,7 +159,9 @@ export default class ExamplesModal extends Component<Props, State> {
     const { isInvalid, range } = this.state;
 
     const Content = Loadable({
+      // @ts-ignore TODO: Typing Loadable
       loading: Loading,
+      // @ts-ignore TODO: Typing Loadable
       loader: () => found && found.contents(),
       render: changelog =>
         changelog ? (
@@ -183,7 +185,7 @@ export default class ExamplesModal extends Component<Props, State> {
       >
         <Helmet>
           <title>
-            Changelog - {fs.titleize(pkgId)} - {process.env.BASE_TITLE}
+            {`Changelog - ${fs.titleize(pkgId)} - ${process.env.BASE_TITLE}`}
           </title>
         </Helmet>
         <ModalBody>

@@ -1,4 +1,6 @@
 class AtlassianAnalyticsClient {
+  payload: Array<{ name: string; properties: { [name: string]: any } }>;
+  version: string;
   constructor(options: any) {
     this.payload = [];
     this.version = options.version;
@@ -7,7 +9,7 @@ class AtlassianAnalyticsClient {
   addEvent(eventName, properties = {}) {
     if (
       // Make sure our JSON object is flat
-      Object.values(properties).some(key => typeof properties[key] === 'object')
+      Object.keys(properties).some(key => typeof properties[key] === 'object')
     ) {
       console.warn('Analytic properties are expected to be a flat JSON object');
     }

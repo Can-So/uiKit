@@ -27,11 +27,17 @@ export function getFiles(items: Array<Directory | File>): Array<File> {
   return files;
 }
 
-export function maybeGetById<T>(items: Array<T>, id: string): T | null {
+export function maybeGetById<T extends { id: string }>(
+  items: Array<T>,
+  id: string,
+): T | null {
   return items.find(item => item.id === id) || null;
 }
 
-export function getById<T>(items: Array<T>, id: string): T {
+export function getById<T extends { id: string }>(
+  items: Array<T>,
+  id: string,
+): T {
   const match = maybeGetById(items, id);
 
   if (!match) {

@@ -3,6 +3,14 @@ import * as React from 'react';
 import { Component } from 'react';
 import { sendApdex } from './Analytics/GoogleAnalyticsListener';
 
+interface LoadingComponentProps {
+  isLoading: boolean;
+  pastDelay: boolean;
+  timedOut: boolean;
+  error: any;
+  retry: () => void;
+}
+
 function checkMarkAndSendAnalytics() {
   if (!performance.mark) {
     return null;
@@ -41,7 +49,15 @@ class Wrapper extends Component {
     return this.props.children;
   }
 }
-const WrappedLoadable = ({ render, ...rest }) =>
+const WrappedLoadable = ({
+  render,
+  ...rest
+}: {
+  render: (args: {}) => React.ReactChild;
+  loader: () => Promise<string> | null;
+  loading: React.ComponentType<LoadingComponentProps> | (() => null);
+}) =>
+  // @ts-ignore //TODO: Need help to type Loadable
   Loadable({
     ...rest,
     render: args => <Wrapper>{render(args)}</Wrapper>,

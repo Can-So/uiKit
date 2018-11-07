@@ -21,7 +21,6 @@ import Groups from './Groups';
 import GroupDrawer from './GroupDrawer';
 import SearchDrawer from './SearchDrawer';
 import { externalPackages as packages, docs, patterns } from '../../site';
-// TODO: find how to import image in ts
 import atlaskitLogo from '../../assets/atlaskit-logo-inverted.png';
 import atlaskitLogoMonochrome from '../../assets/atlaskit-logo-monochrome.png';
 
@@ -90,7 +89,7 @@ export default class Nav extends Component<{}, State> {
       searchDrawerOpen: false,
       searchDrawerValue: '',
     });
-  updateSearchValue = (e: React.SyntheticEvent<any>) =>
+  updateSearchValue = (e: React.ChangeEvent<HTMLInputElement>) =>
     this.setState({
       searchDrawerValue: e.target.value,
     });
@@ -109,7 +108,12 @@ export default class Nav extends Component<{}, State> {
             const header = headers[headerKey];
 
             const groups = (
-              <Groups docs={docs} packages={packages} patterns={patterns} />
+              <Groups
+                onClick={() => {}}
+                docs={docs}
+                packages={packages}
+                patterns={patterns}
+              />
             );
 
             return (
@@ -169,11 +173,11 @@ export default class Nav extends Component<{}, State> {
                   <GroupDrawer
                     key="groupDrawer"
                     isOpen={groupDrawerOpen}
-                    closeDrawer={this.closeGroupDrawer}
-                    docs={docs}
+                    closeDrawer={this.closeGroupDrawer} // TODO: Confirm why do we have those props in Group Drawer?
+                    // docs={docs}
                     pathname={location.pathname}
-                    packages={packages}
-                    patterns={patterns}
+                    // packages={packages}
+                    // patterns={patterns}
                   >
                     {groups}
                   </GroupDrawer>,

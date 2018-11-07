@@ -54,50 +54,55 @@ const SearchDrawer = ({
       onInput={updateSearchValue}
       onKeyDown={() => {}}
     >
-      {fs.getDirectories(packages.children).reduce((acc, dir) => {
-        const initialItems = fs.getDirectories(dir.children);
-        const sanitizedValue = searchDrawerValue.toLowerCase();
-        if (
-          sanitizedValue.length > 0 &&
-          new RegExp(`^${sanitizedValue}`).test(dir.id)
-        ) {
-          return acc.concat(
-            <AkNavigationItemGroup title={dir.id} key={dir.id}>
-              {initialItems.map(({ id }) => (
-                <NavItem
-                  dirId={dir.id}
-                  id={id}
-                  key={id}
-                  closeDrawer={closeDrawer}
-                />
-              ))}
-            </AkNavigationItemGroup>,
-          );
-        }
-        const Items = initialItems.reduce((innerAccumulator, { id }) => {
-          // Remove the `-` from name because that is how they are displayed in search
-          const pageName = id.replace(/-/g, ' ');
-          if (pageName.includes(sanitizedValue)) {
-            return innerAccumulator.concat(
-              <NavItem
-                dirId={dir.id}
-                id={id}
-                closeDrawer={closeDrawer}
-                key={id}
-              />,
+      {fs
+        .getDirectories(packages.children)
+        .reduce<Array<React.ReactChild>>((acc, dir) => {
+          const initialItems = fs.getDirectories(dir.children);
+          const sanitizedValue = searchDrawerValue.toLowerCase();
+          if (
+            sanitizedValue.length > 0 &&
+            new RegExp(`^${sanitizedValue}`).test(dir.id)
+          ) {
+            return acc.concat(
+              <AkNavigationItemGroup title={dir.id} key={dir.id}>
+                {initialItems.map(({ id }) => (
+                  <NavItem
+                    dirId={dir.id}
+                    id={id}
+                    key={id}
+                    closeDrawer={closeDrawer}
+                  />
+                ))}
+              </AkNavigationItemGroup>,
             );
           }
-          return innerAccumulator;
-        }, []);
-        if (Items.length > 0) {
-          return acc.concat(
-            <AkNavigationItemGroup title={dir.id} key={dir.id}>
-              {Items}
-            </AkNavigationItemGroup>,
+          const Items = initialItems.reduce<Array<React.ReactChild>>(
+            (innerAccumulator, { id }) => {
+              // Remove the `-` from name because that is how they are displayed in search
+              const pageName = id.replace(/-/g, ' ');
+              if (pageName.includes(sanitizedValue)) {
+                return innerAccumulator.concat(
+                  <NavItem
+                    dirId={dir.id}
+                    id={id}
+                    closeDrawer={closeDrawer}
+                    key={id}
+                  />,
+                );
+              }
+              return innerAccumulator;
+            },
+            [],
           );
-        }
-        return acc;
-      }, [])}
+          if (Items.length > 0) {
+            return acc.concat(
+              <AkNavigationItemGroup title={dir.id} key={dir.id}>
+                {Items}
+              </AkNavigationItemGroup>,
+            );
+          }
+          return acc;
+        }, [])}
     </AkSearch>
   </AkSearchDrawer>
 );

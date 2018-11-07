@@ -37,7 +37,8 @@ const transitionDistance = {
 };
 
 export const ExampleComponentWrapper = styled.div`
-  padding-right: ${p => (p.codeIsVisible ? `${codePaneWidth}px` : 0)};
+  padding-right: ${(p: { codeIsVisible: boolean }) =>
+    p.codeIsVisible ? `${codePaneWidth}px` : 0};
   height: 100%;
   transition: padding ${transitionDuration}ms;
 `;
@@ -58,7 +59,11 @@ export const CodeBox = styled.div`
   position: fixed;
   right: 0;
   top: ${NAVBAR_HEIGHT};
-  transform: translate3d(${p => transitionDistance[p.status]}, 0, 0);
+  transform: translate3d(
+    ${(p: { status: number }) => transitionDistance[p.status]},
+    0,
+    0
+  );
   transition: opacity ${transitionDuration}ms, transform ${transitionDuration}ms;
   width: 640px;
   z-index: 3;
@@ -114,7 +119,8 @@ export const NavSection = styled.div`
 
 const navButtonStyles = css`
   align-items: center;
-  background-color: ${p => (p.isSelected ? colors.primary : 'transparent')};
+  background-color: ${(p: { isSelected?: boolean }) =>
+    p.isSelected ? colors.primary : 'transparent'};
   border-radius: 50%;
   border: 1px solid;
   border-color: ${p => (p.isSelected ? colors.primary : colors.N80)};
@@ -141,9 +147,9 @@ const navButtonStyles = css`
 export const NavButton = styled.button`
   ${navButtonStyles};
 `;
-export const NavLink = styled(Link)`
+export const NavLink = (styled(Link)`
   ${navButtonStyles};
-`;
+` as any) as typeof Link;
 
 // Misc.
 // ==============================

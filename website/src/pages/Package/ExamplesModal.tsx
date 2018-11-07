@@ -100,7 +100,16 @@ const NavInner = styled.div`
   }
 `;
 
-function ExampleNavigation({ examples, exampleId, onExampleSelected }) {
+function ExampleNavigation({
+  examples,
+  exampleId,
+  groupId,
+  packageId,
+  groups,
+  onPackageSelected,
+  loadingSandbox,
+  onExampleSelected,
+}) {
   const regex = /^[a-zA-Z0-9]/; // begins with letter or number, avoid "special" files
 
   return (
@@ -189,10 +198,11 @@ function toExampleUrl(
 }
 
 const ModalHeaderComp = ({
+  // afterDeployError,
   showKeyline,
   packageId,
   example,
-  examples,
+  // examples,
   groupId,
   pkgJSON,
   displayCode,
@@ -206,8 +216,9 @@ const ModalHeaderComp = ({
     <ModalActions>
       <ButtonGroup>
         <CodeSandbox
+          // afterDeployError={afterDeployError}
           example={example}
-          examples={examples}
+          // examples={examples} // TODO: Confirm with Ben
           groupId={groupId}
           packageId={packageId}
           pkgJSON={pkgJSON}
@@ -358,7 +369,7 @@ export default class ExamplesModal extends Component<Props, State> {
             showKeyline={showKeyline}
             packageId={packageId}
             example={example}
-            examples={examples}
+            // examples={examples}
             exampleId={exampleId}
             groupId={groupId}
             pkgJSON={pkgJSON}
@@ -374,8 +385,10 @@ export default class ExamplesModal extends Component<Props, State> {
       >
         <Helmet>
           <title>
-            Example - {fs.titleize(exampleId)} - {fs.titleize(packageId)} -{' '}
-            {process.env.BASE_TITLE}
+            {`Example - ${fs.titleize(exampleId)} - ${fs.titleize(
+              packageId,
+            )} -${' '}
+            ${process.env.BASE_TITLE}`}
           </title>
         </Helmet>
         <ContentBody>

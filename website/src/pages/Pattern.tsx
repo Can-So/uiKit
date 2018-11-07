@@ -24,9 +24,11 @@ export default function Pattern({
   }
 
   const Content = Loadable({
+    // @ts-ignore TODO: Typing Loadable
     loader: () => found && found.exports(),
+    // @ts-ignore TODO: Typing Loadable
     loading: Loading,
-    render(mod) {
+    render(mod: { default?: string } | null) {
       if (mod && mod.default) {
         return React.createElement(mod.default);
       }

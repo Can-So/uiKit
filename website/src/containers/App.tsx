@@ -43,7 +43,9 @@ const AppContent = styled.div`
   flex: 1 1 auto;
 `;
 
-class ScrollToTop extends Component {
+type Props = { location: { pathname: string } };
+
+class ScrollToTop extends Component<Props> {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       window.scrollTo(0, 0);
@@ -73,11 +75,10 @@ class Boundary extends Component {
   }
 }
 
-type Props = {};
 type State = { mode: 'dark' | 'light' };
 
-export default class App extends Component<Props, State> {
-  state = {
+export default class App extends Component<{}, State> {
+  state: State = {
     mode: 'light',
   };
   componentDidMount() {
