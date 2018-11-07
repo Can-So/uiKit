@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { IntlProvider } from 'react-intl';
+
 import Page, { Grid, GridColumn } from '@atlaskit/page';
 import { Field } from '@atlaskit/form';
 import { FieldTextStateless } from '@atlaskit/field-text';
@@ -68,75 +70,77 @@ class Example extends React.Component<{}, ExampleState> {
   render() {
     const { appearance, url, isSelected } = this.state;
     return (
-      <Provider>
-        <Page>
-          <Grid>
-            <GridColumn medium={8}>
-              <Field label="URL">
-                <FieldTextStateless
-                  autoFocus={true}
-                  shouldFitContainer={true}
-                  value={url}
-                  onChange={this.handleUrlChange}
-                />
-              </Field>
-            </GridColumn>
-            <GridColumn medium={2}>
-              <Field label="Appearance">
-                <RadioGroup
-                  options={[
-                    { label: 'Block', value: 'block' },
-                    { label: 'Inline', value: 'inline' },
-                  ]}
-                  checkedValue={appearance}
-                  label="Pick a "
-                  onChange={this.handleAppearanceChange}
-                />
-              </Field>
-            </GridColumn>
-            <GridColumn medium={2}>
-              <Field label="Selection">
-                <Checkbox
-                  isChecked={isSelected}
-                  onChange={this.handleIsSelected}
-                  label="is selected"
-                  value={true}
-                  name="isSelected"
-                />
-              </Field>
-            </GridColumn>
-          </Grid>
-          <Grid>
-            <GridColumn>
-              <br />
-              {this.renderCard(url, isSelected, appearance)}
-            </GridColumn>
-          </Grid>
-          <Grid>
-            <GridColumn>
-              <br />
-              <h3>Example urls:</h3>
-              {urlsJSON.map((example: any) => (
-                <p>
-                  <Button
-                    spacing="compact"
-                    onClick={() => this.changeUrl(example.url)}
-                  >
-                    Try it
-                  </Button>
-                  &nbsp;
-                  <a href={example.url}>
-                    {example.description ||
-                      `${example.provider} ${example.visibility} ${
-                        example.type
-                      }`}
-                  </a>
-                </p>
-              ))}
-            </GridColumn>
-          </Grid>
-        </Page>
-      </Provider>
+      <IntlProvider locale="en">
+        <Provider>
+          <Page>
+            <Grid>
+              <GridColumn medium={8}>
+                <Field label="URL">
+                  <FieldTextStateless
+                    autoFocus={true}
+                    shouldFitContainer={true}
+                    value={url}
+                    onChange={this.handleUrlChange}
+                  />
+                </Field>
+              </GridColumn>
+              <GridColumn medium={2}>
+                <Field label="Appearance">
+                  <RadioGroup
+                    options={[
+                      { label: 'Block', value: 'block' },
+                      { label: 'Inline', value: 'inline' },
+                    ]}
+                    checkedValue={appearance}
+                    label="Pick a "
+                    onChange={this.handleAppearanceChange}
+                  />
+                </Field>
+              </GridColumn>
+              <GridColumn medium={2}>
+                <Field label="Selection">
+                  <Checkbox
+                    isChecked={isSelected}
+                    onChange={this.handleIsSelected}
+                    label="is selected"
+                    value={true}
+                    name="isSelected"
+                  />
+                </Field>
+              </GridColumn>
+            </Grid>
+            <Grid>
+              <GridColumn>
+                <br />
+                {this.renderCard(url, isSelected, appearance)}
+              </GridColumn>
+            </Grid>
+            <Grid>
+              <GridColumn>
+                <br />
+                <h3>Example urls:</h3>
+                {urlsJSON.map((example: any) => (
+                  <p>
+                    <Button
+                      spacing="compact"
+                      onClick={() => this.changeUrl(example.url)}
+                    >
+                      Try it
+                    </Button>
+                    &nbsp;
+                    <a href={example.url}>
+                      {example.description ||
+                        `${example.provider} ${example.visibility} ${
+                          example.type
+                        }`}
+                    </a>
+                  </p>
+                ))}
+              </GridColumn>
+            </Grid>
+          </Page>
+        </Provider>
+      </IntlProvider>
     );
   }
 }

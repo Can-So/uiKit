@@ -6,6 +6,7 @@ import urlsJSON from './example-urls.json';
 import styled from 'styled-components';
 import * as lorem from 'lorem-ipsum';
 import { colors } from '@atlaskit/theme';
+import { IntlProvider } from 'react-intl';
 
 enum GroupingModes {
   none = 'none',
@@ -180,26 +181,28 @@ class Example extends React.Component<{}, ExampleState> {
     const { mode } = this.state;
 
     return (
-      <Provider>
-        <Page>
-          <Grid>
-            <GridColumn>
-              <Grid>
-                <GridColumn medium={8}>
-                  <ButtonGroup>
-                    <Button isDisabled appearance="link">
-                      Group by:
-                    </Button>
-                    {this.renderButtons(mode)}
-                  </ButtonGroup>
-                </GridColumn>
-              </Grid>
+      <IntlProvider locale="en">
+        <Provider>
+          <Page>
+            <Grid>
+              <GridColumn>
+                <Grid>
+                  <GridColumn medium={8}>
+                    <ButtonGroup>
+                      <Button isDisabled appearance="link">
+                        Group by:
+                      </Button>
+                      {this.renderButtons(mode)}
+                    </ButtonGroup>
+                  </GridColumn>
+                </Grid>
 
-              {this.renderByGroup(mode)}
-            </GridColumn>
-          </Grid>
-        </Page>
-      </Provider>
+                {this.renderByGroup(mode)}
+              </GridColumn>
+            </Grid>
+          </Page>
+        </Provider>
+      </IntlProvider>
     );
   }
 }

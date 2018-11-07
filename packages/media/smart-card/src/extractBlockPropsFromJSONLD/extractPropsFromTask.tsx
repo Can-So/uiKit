@@ -3,9 +3,9 @@ import {
   BlockCardResolvedViewProps,
   LozengeViewModel,
 } from '@atlaskit/media-ui';
-import { relativeTime } from '../utils';
 import ChatIcon from '@atlaskit/icon/glyph/comment';
 import { colors } from '@atlaskit/theme';
+import { FormattedRelative } from 'react-intl';
 
 export const buildTitle = (json: any) => {
   let name = json.name && json.name.trim();
@@ -25,13 +25,23 @@ export const buildLink = (json: any) => {
 export const buildByline = (json: any) => {
   const updatedBy =
     json.updatedBy && json.updatedBy.name ? ' by ' + json.updatedBy.name : '';
+
+  const attributedTo =
+    json.attributedTo && json.attributedTo.name
+      ? ' by ' + json.attributedTo.name
+      : '';
+
   if (json.dateCreated || json.updated) {
     return {
-      byline: {
-        text: json.updated
-          ? `Updated ${relativeTime(json.updated)}${updatedBy}`
-          : `Created ${relativeTime(json.dateCreated)}`,
-      },
+      byline: json.updated ? (
+        <span>
+          Updated {updatedBy} <FormattedRelative value={json.updated} />
+        </span>
+      ) : (
+        <span>
+          Created {attributedTo} <FormattedRelative value={json.dateCreated} />
+        </span>
+      ),
     };
   }
   return {};
