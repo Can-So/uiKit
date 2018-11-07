@@ -1,1 +1,0 @@
-- Fix multiple papercuts in quick insert
