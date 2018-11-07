@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.2.0
+- [minor] [fd35bec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fd35bec):
+
+  - Refactor tokenizer to accpt the whole input and its position
+
 ## 2.1.27
 - [patch] [fd0ed3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fd0ed3a):
 
