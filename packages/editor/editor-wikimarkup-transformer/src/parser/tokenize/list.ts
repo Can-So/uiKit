@@ -18,6 +18,7 @@ const processState = {
 
 export function list(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token {
@@ -33,7 +34,7 @@ export function list(
     TokenType.RULER,
   ];
 
-  let index = 0;
+  let index = position;
   let state = processState.NEW_LINE;
   let buffer = '';
   let lastListSymbols: string | null = null;
@@ -130,7 +131,7 @@ export function list(
           state = processState.BUFFER;
           break;
         }
-        const token = parseToken(input.substring(index), match.type, schema);
+        const token = parseToken(input, match.type, index, schema);
         if (token.type === 'text') {
           buffer += token.text;
         } else {
@@ -139,7 +140,7 @@ export function list(
            */
           if (!builder) {
             /** Something is really wrong here */
-            return fallback(input);
+            return fallback(input, position);
           }
           if (buffer.length > 0) {
             /**
@@ -167,7 +168,7 @@ export function list(
       case processState.END: {
         if (!builder) {
           /** Something is really wrong here */
-          return fallback(input);
+          return fallback(input, position);
         }
 
         if (buffer.length > 0) {
@@ -189,7 +190,7 @@ export function list(
         return {
           type: 'pmnode',
           nodes: output,
-          length: index,
+          length: index - position,
         };
       }
     }
@@ -218,7 +219,7 @@ export function list(
   return {
     type: 'pmnode',
     nodes: output,
-    length: index,
+    length: index - position,
   };
 }
 
@@ -265,10 +266,10 @@ function sanitize(nodes: PMNode[], schema: Schema) {
   }, []);
 }
 
-function fallback(input: string): Token {
+function fallback(input: string, position: number): Token {
   return {
     type: 'text',
-    text: input.substr(0, 1),
-    length: length,
+    text: input.substr(position, 1),
+    length: 1,
   };
 }
