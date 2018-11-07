@@ -151,7 +151,7 @@ if (TEST_ONLY_PATTERN) {
  */
 if (PARALLELIZE_TESTS) {
   const allTests = JSON.parse(PARALLELIZE_TESTS);
-  config.testMatch = allTests.filter((_, i) => i % STEPS - STEP_IDX === 0);
+  config.testMatch = allTests.filter((_, i) => (i % STEPS) - STEP_IDX === 0);
 
   console.log('Parallelising jest tests.');
   console.log(`Parallel step ${String(STEP_IDX)} of ${String(STEPS)}`);

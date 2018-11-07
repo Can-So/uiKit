@@ -13,9 +13,7 @@ export type SkeletonContainerHeaderProps = {
   isAvatarHidden?: boolean,
 };
 
-export default class SkeletonDefaultContainerHeader extends Component<
-  SkeletonContainerHeaderProps,
-> {
+export default class SkeletonDefaultContainerHeader extends Component<SkeletonContainerHeaderProps> {
   static defaultProps = {
     isCollapsed: false,
     isAvatarHidden: false,

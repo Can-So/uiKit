@@ -450,7 +450,7 @@ export class MediaPluginState {
     const oldLayout: MediaSingleLayout = mediaSingleNode.attrs.layout;
 
     if (width) {
-      const cols = Math.round(width / 100 * gridSize);
+      const cols = Math.round((width / 100) * gridSize);
       let targetCols = cols;
 
       const nonWrappedLayouts: MediaSingleLayout[] = [
@@ -480,7 +480,7 @@ export class MediaPluginState {
       }
 
       if (targetCols !== cols) {
-        width = targetCols / gridSize * 100;
+        width = (targetCols / gridSize) * 100;
       }
     }
 

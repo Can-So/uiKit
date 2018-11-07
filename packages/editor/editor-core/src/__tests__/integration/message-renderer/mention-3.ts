@@ -18,7 +18,7 @@ import { messages } from '../../../plugins/insert-block/ui/ToolbarInsertBlock';
  * number of tests have been skipped until move to snapshots.
  *
  * The remaining skipped tests for IE11/Edge are bugs that should be fixed for those browsers.
-*/
+ */
 
 BrowserTestCase(
   'mention-3.ts: user can click ToolbarMentionPicker and see mention',

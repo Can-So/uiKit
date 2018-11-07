@@ -160,9 +160,9 @@ const renderAsSprite = (props: Props) => {
   }
 
   const xPositionInPercent =
-    100 / (sprite.column - 1) * (representation.xIndex - 0);
+    (100 / (sprite.column - 1)) * (representation.xIndex - 0);
   const yPositionInPercent =
-    100 / (sprite.row - 1) * (representation.yIndex - 0);
+    (100 / (sprite.row - 1)) * (representation.yIndex - 0);
   const style = {
     backgroundImage: `url(${sprite.url})`,
     backgroundPosition: `${xPositionInPercent}% ${yPositionInPercent}%`,
@@ -257,7 +257,7 @@ const renderAsImage = (props: Props) => {
   if (fitToHeight && width && height) {
     // Presize image, to prevent reflow due to size changes after loading
     sizing = {
-      width: fitToHeight / height * width,
+      width: (fitToHeight / height) * width,
       height: fitToHeight,
     };
   }

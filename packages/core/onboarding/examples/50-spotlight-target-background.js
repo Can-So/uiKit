@@ -54,7 +54,7 @@ export default class SpotlightTargetBackgroundExample extends Component<
           { onClick: this.finish, text: 'Got it!' },
         ]}
         dialogPlacement="bottom right"
-        heading="Aah, that&apos;s better!"
+        heading="Aah, that's better!"
         key="with"
         target="with"
         targetBgColor="white"

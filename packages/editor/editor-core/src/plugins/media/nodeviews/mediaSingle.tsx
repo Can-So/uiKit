@@ -160,7 +160,7 @@ export default class MediaSingleNode extends Component<
     }
 
     const cardWidth = this.props.width;
-    const cardHeight = height / width * cardWidth;
+    const cardHeight = (height / width) * cardWidth;
     const cardDimensions = {
       width: `${cardWidth}px`,
       height: `${cardHeight}px`,

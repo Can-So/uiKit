@@ -81,8 +81,7 @@ describe('<MediaViewer />', () => {
     const { el, onClose } = createFixture([identifier], identifier);
 
     expect(el.find(CloseButtonWrapper)).toHaveLength(1);
-    el
-      .find(CloseButtonWrapper)
+    el.find(CloseButtonWrapper)
       .find('Button')
       .simulate('click');
     expect(onClose).toHaveBeenCalled();

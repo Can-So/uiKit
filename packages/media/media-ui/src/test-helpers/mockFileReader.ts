@@ -9,31 +9,37 @@ class MockFileReader {
     this.result = result;
   }
 
-  addEventListener = jest
-    .fn()
-    .mockImplementation((eventName: string, fn: () => void): void => {
+  addEventListener = jest.fn().mockImplementation(
+    (eventName: string, fn: () => void): void => {
       if (eventName === 'load') {
         this.loadEvent = fn;
       } else if (eventName === 'error') {
         this.errorEvent = fn;
       }
-    });
+    },
+  );
 
-  readAsDataURL = jest.fn().mockImplementation((): void => {
-    this.loadEvent();
-  });
+  readAsDataURL = jest.fn().mockImplementation(
+    (): void => {
+      this.loadEvent();
+    },
+  );
 
-  readAsArrayBuffer = jest.fn().mockImplementation((): void => {
-    this.loadEvent();
-  });
+  readAsArrayBuffer = jest.fn().mockImplementation(
+    (): void => {
+      this.loadEvent();
+    },
+  );
 }
 
 const mockFileReaderError = { message: 'error' };
 
 class MockFileReaderWithError extends MockFileReader {
-  readAsDataURL = jest.fn().mockImplementation((): void => {
-    this.errorEvent(mockFileReaderError);
-  });
+  readAsDataURL = jest.fn().mockImplementation(
+    (): void => {
+      this.errorEvent(mockFileReaderError);
+    },
+  );
 }
 
 const GlobalFileReader = global.FileReader;

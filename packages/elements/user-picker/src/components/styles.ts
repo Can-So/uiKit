@@ -9,8 +9,8 @@ export const getStyles = memoizeOne(width => ({
     borderColor: state.isFocused
       ? css.borderColor
       : state.selectProps.subtle
-        ? 'transparent'
-        : colors.N40,
+      ? 'transparent'
+      : colors.N40,
     backgroundColor: state.selectProps.subtle ? 'transparent' : colors.N10,
     '&:hover .fabric-user-picker__clear-indicator': {
       opacity: 1,
@@ -20,10 +20,10 @@ export const getStyles = memoizeOne(width => ({
       borderColor: state.isFocused
         ? css[':hover'].borderColor
         : state.selectProps.subtle
-          ? state.selectProps.hoveringClearIndicator
-            ? colors.R50
-            : colors.N30
-          : colors.N40,
+        ? state.selectProps.hoveringClearIndicator
+          ? colors.R50
+          : colors.N30
+        : colors.N40,
       backgroundColor:
         state.selectProps.subtle && state.selectProps.hoveringClearIndicator
           ? colors.R50

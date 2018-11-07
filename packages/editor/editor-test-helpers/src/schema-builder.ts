@@ -194,8 +194,8 @@ export function flatten<T>(deep: (T | T[])[]): T[] {
  * Coerce builder content into ref nodes.
  */
 export function coerce(content: BuilderContent[], schema: Schema) {
-  const refsContent = content.map(
-    item => (typeof item === 'string' ? text(item, schema) : item(schema)),
+  const refsContent = content.map(item =>
+    typeof item === 'string' ? text(item, schema) : item(schema),
   ) as (RefsContentItem | RefsContentItem[])[];
   return sequence(...flatten<RefsContentItem>(refsContent));
 }

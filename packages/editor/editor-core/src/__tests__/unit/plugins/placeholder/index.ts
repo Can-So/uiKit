@@ -172,9 +172,9 @@ describe('placeholder', () => {
     /*
      * ProseMirror currently doesn't keep track of the contents of the composition events,
      * and only looks at the state of the DOM after a compositionend to determine how to update the document state.
-     * 
+     *
      * As such, we manually update the DOM with typed text.
-     * 
+     *
      * However, ProseMirror's behaviour may (change in the future)[https://github.com/ProseMirror/prosemirror/issues/543].
      */
 

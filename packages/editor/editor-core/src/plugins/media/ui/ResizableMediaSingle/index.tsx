@@ -182,7 +182,7 @@ export default class ResizableMediaSingle extends React.Component<
     }
 
     // scale, keeping aspect ratio
-    const height = origHeight / origWidth * pxWidth;
+    const height = (origHeight / origWidth) * pxWidth;
     const width = pxWidth;
 
     const enable: EnabledHandles = {};
