@@ -149,6 +149,7 @@ describe('modal-dialog', () => {
       const CustomBody = ({ innerRef }: { innerRef: Function }) => {
         innerRef({
           addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
           clientHeight: 200,
           scrollHeight: 100,
           scrollTop: 10,
@@ -165,6 +166,7 @@ describe('modal-dialog', () => {
       const CustomBody = ({ innerRef }: { innerRef: Function }) => {
         innerRef({
           addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
           clientHeight: 100,
           scrollHeight: 200,
           scrollTop: 0,
