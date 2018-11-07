@@ -136,7 +136,7 @@ const leadingKeywordTokenMap = [
   },
   {
     type: TokenType.LIST,
-    regex: /^[*\-#]+ /,
+    regex: /^([*#]+|-) /,
   },
   {
     type: TokenType.TABLE,
