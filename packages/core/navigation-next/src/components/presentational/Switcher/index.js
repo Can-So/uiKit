@@ -50,17 +50,17 @@ const defaultStyles = {
 const createStyles = (styles: SelectStyles = {}): Object =>
   mergeStyles(defaultStyles, styles);
 
-export function filterOption({ data }: { data: OptionItem }, input: string) {
+export function filterOption({ data }: { data: OptionType }, input: string) {
   return data.text.toLowerCase().includes(input.toLowerCase());
 }
 export function isOptionSelected(
-  option: OptionItem,
-  selected: Array<OptionItem>,
+  option: OptionType,
+  selected: Array<OptionType> | void,
 ) {
   if (!selected || !selected.length) return false;
   return option.id === selected[0].id;
 }
-export function getOptionValue(option: OptionItem) {
+export function getOptionValue(option: OptionType) {
   return option.id;
 }
 
@@ -119,12 +119,8 @@ const isEmpty = obj => Object.keys(obj).length === 0;
 // ==============================
 // Class
 // ==============================
-type OptionItem = {
-  avatar?: string,
-  id?: string,
-  pathname?: string,
-  text: string,
-  subText?: string,
+type OptionType = {
+  [string]: any,
 };
 type ComponentsType = { [key: string]: ComponentType<any> };
 

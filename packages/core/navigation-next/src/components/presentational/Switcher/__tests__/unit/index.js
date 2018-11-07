@@ -303,9 +303,8 @@ describe('filterOption()', () => {
 describe('isOptionSelected()', () => {
   it('should return false when selected array is empty or undefined', () => {
     const selected = [];
-    expect(isOptionSelected(null, selected)).toBe(false);
-    expect(isOptionSelected(null, null)).toBe(false);
-    expect(isOptionSelected()).toBe(false);
+    expect(isOptionSelected({}, selected)).toBe(false);
+    expect(isOptionSelected({}, undefined)).toBe(false);
   });
   it('should returen false when option id is different than selected id', () => {
     const selected = [{ id: 'my-id' }];
