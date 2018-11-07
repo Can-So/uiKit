@@ -32,7 +32,6 @@ const extractAvatarData = (jiraResult: JiraResult) =>
       };
 
 const getI18nJiraContainerName = (projectType: JiraProjectType) => {
-  debugger;
   switch (projectType) {
     case JiraProjectType.Business: {
       return (
