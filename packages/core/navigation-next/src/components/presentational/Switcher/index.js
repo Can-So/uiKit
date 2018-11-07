@@ -50,7 +50,7 @@ const defaultStyles = {
 const createStyles = (styles: SelectStyles = {}): Object =>
   mergeStyles(defaultStyles, styles);
 
-function filterOption({ data }, input) {
+export function filterOption({ data }: { data: OptionItem }, input: string) {
   return data.text.toLowerCase().includes(input.toLowerCase());
 }
 function isOptionSelected(option, selected) {
@@ -116,7 +116,13 @@ const isEmpty = obj => Object.keys(obj).length === 0;
 // ==============================
 // Class
 // ==============================
-
+type OptionItem = {
+  avatar?: string,
+  id?: string,
+  pathname?: string,
+  text: string,
+  subText?: string,
+};
 type ComponentsType = { [key: string]: ComponentType<any> };
 
 type SelectStyles = {

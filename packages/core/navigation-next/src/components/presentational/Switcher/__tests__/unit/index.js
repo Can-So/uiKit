@@ -4,7 +4,13 @@ import React from 'react';
 import NodeResolver from 'react-node-resolver';
 import { shallow } from 'enzyme';
 import { PopupSelect } from '@atlaskit/select';
-import { BaseSwitcher, Footer, Control, createStyles } from '../../index';
+import {
+  BaseSwitcher,
+  Footer,
+  Control,
+  createStyles,
+  filterOption,
+} from '../../index';
 import Option from '../../Option';
 
 const Target = () => 'A target';
@@ -48,7 +54,7 @@ describe('Switcher', () => {
     const wrapper = shallow(<BaseSwitcher {...baseProps} />);
     expect(wrapper.find(PopupSelect).props()).toEqual(
       expect.objectContaining({
-        filterOption: expect.any(Function),
+        filterOption,
         isOptionSelected: expect.any(Function),
         getOptionValue: expect.any(Function),
         onOpen: wrapper.instance().handleOpen,
@@ -157,7 +163,7 @@ describe('Switcher', () => {
   });
 });
 
-describe('.createStyles()', () => {
+describe('createStyles()', () => {
   it('should return an object with option property', () => {
     const styles = createStyles();
     expect(styles).toEqual({
@@ -269,5 +275,20 @@ describe('.createStyles()', () => {
       textDecoration: 'none',
       width: '100%',
     });
+  });
+});
+
+describe('filterOption()', () => {
+  it('should return true when "data" text contains "input" text', () => {
+    const option = {
+      text: 'Design System Support',
+    };
+    expect(filterOption({ data: option }, 'blabla')).toEqual(false);
+    expect(filterOption({ data: option }, 'd')).toEqual(true);
+    expect(filterOption({ data: option }, 'D')).toEqual(true);
+    expect(filterOption({ data: option }, 'design ')).toEqual(true);
+    expect(filterOption({ data: option }, 'design s')).toEqual(true);
+    expect(filterOption({ data: option }, 'design S')).toEqual(true);
+    expect(filterOption({ data: option }, 'suppo')).toEqual(true);
   });
 });
