@@ -96,7 +96,7 @@ type PropsWithoutAnalytics<C> = $Diff<
 export default function withAnalyticsEvents<P: {}, C: ComponentType<P>>(
   createEventMap: EventMap<PropsWithoutAnalytics<C>> = {},
 ): C => ComponentType<PropsWithoutAnalytics<C>> {
-  return (WrappedComponent: C): ComponentType<PropsWithoutAnalytics<C>> => {
+  return WrappedComponent => {
     // $FlowFixMe - flow 0.67 doesn't know about forwardRef
     const WithAnalyticsEvents = React.forwardRef((props: PWA, ref) => {
       return (
