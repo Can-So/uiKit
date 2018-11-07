@@ -22,7 +22,7 @@ export default md`
 
 ### Migrating in JS files
 
-The only pre-requisite here is you must use styled-components so that the styles exported by the theme package are evaluated properly. 
+The only pre-requisite is that you must use styled-components so that the styles exported by the theme package are evaluated properly. 
 If you are not already using styled-components in your code but you are using Atlaksit components then you already have styled-components in your 
 application as it is peer-dependency in the components, therefore using it in your code should not have major impact on your bundle size.
 
@@ -43,7 +43,7 @@ We have a codemod that does this job for you please check out [codemod-util-shar
 ## Migrating in less files
 
 The @atlaskit/theme package does not export less files which makes it difficult to import the styles from
-the package in less files. To resolve this we suggest moving away from less to a css-in-js
+theme package in less files. To resolve this we suggest moving away from less to a css-in-js
 solution.
 
 We have released a new package [evaluate-inner-styles](https://www.npmjs.com/package/evaluate-inner-styles) which will help to generate static CSS from JS.
