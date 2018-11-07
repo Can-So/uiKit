@@ -151,6 +151,27 @@ export class MediaStore {
     }).then(mapResponseToJson);
   }
 
+  touchFiles(
+    body: MediaStoreTouchFileBody,
+    params: MediaStoreTouchFileParams = {},
+  ): Promise<MediaStoreResponse<TouchedFiles>> {
+    return this.request('/upload/touch', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+      authContext: { collectionName: params.collection },
+    }).then(mapResponseToJson, (response: Response) => {
+      if (response.status === 409) {
+        return response.json();
+      } else {
+        throw response;
+      }
+    });
+  }
+
   createFile(
     params: MediaStoreCreateFileParams = {},
   ): Promise<MediaStoreResponse<EmptyFile>> {
@@ -341,6 +362,19 @@ export type MediaStoreCreateFileParams = {
   readonly collection?: string;
 };
 
+export interface MediaStoreTouchFileParams {
+  readonly collection?: string;
+}
+
+export interface TouchFileDescriptor {
+  fileId: string;
+  occurrenceKey?: string;
+}
+
+export interface MediaStoreTouchFileBody {
+  descriptors: TouchFileDescriptor[];
+}
+
 export type MediaStoreCreateFileFromBinaryParams = {
   readonly replaceFileId?: string;
   readonly collection?: string;
@@ -409,6 +443,26 @@ export type AppendChunksToUploadRequestBody = {
   readonly hash?: string;
   readonly offset?: number;
 };
+
+export interface CreatedTouchedFile {
+  fileId: string;
+  uploadId: string;
+}
+
+export interface FailedTouchedFile {
+  fileId: string;
+}
+
+// This means that it can be one, or another, or both. But not none.
+export type TouchedFiles =
+  | {
+      created: CreatedTouchedFile[];
+      failed?: FailedTouchedFile[];
+    }
+  | {
+      created?: CreatedTouchedFile[];
+      failed: FailedTouchedFile[];
+    };
 
 export interface EmptyFile {
   readonly id: string;

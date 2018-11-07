@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock';
 import { stringify } from 'query-string';
 
-import { Auth, AuthProvider, MediaStore } from '../..';
+import { Auth, AuthProvider, CreatedTouchedFile, MediaStore } from '../..';
 import {
   MediaUpload,
   MediaChunksProbe,
@@ -14,6 +14,10 @@ import {
   MediaStoreGetFileParams,
   EmptyFile,
   ImageMetadata,
+  MediaStoreTouchFileBody,
+  TouchFileDescriptor,
+  TouchedFiles,
+  MediaStoreTouchFileParams,
 } from '../../media-store';
 import { MediaFileArtifacts } from '../../models/artifacts';
 
@@ -450,6 +454,108 @@ describe('MediaStore', () => {
             expect(response.data.contents).toHaveLength(1);
             expect(response.data.contents).toEqual([data.contents[0]]);
           });
+      });
+    });
+
+    describe('touchFiles', () => {
+      const createdTouchedFile1: CreatedTouchedFile = {
+        fileId: 'some-file-id',
+        uploadId: 'some-upload-id',
+      };
+      const createdTouchedFile2: CreatedTouchedFile = {
+        fileId: 'some-other-file-id',
+        uploadId: 'some-other-upload-id',
+      };
+      const params: MediaStoreTouchFileParams = {
+        collection: 'some-collection-name',
+      };
+
+      const descriptor1: TouchFileDescriptor = {
+        fileId: 'some-file-id',
+        occurrenceKey: 'some-occurrence-key',
+      };
+      const descriptor2: TouchFileDescriptor = {
+        fileId: 'some-other-file-id',
+      };
+
+      it('should POST to /upload/touch', () => {
+        const data: TouchedFiles = {
+          created: [createdTouchedFile1, createdTouchedFile2],
+        };
+        fetchMock.mock(`begin:${baseUrl}/upload/touch`, {
+          body: {
+            data,
+          },
+          status: 201,
+        });
+
+        const body: MediaStoreTouchFileBody = {
+          descriptors: [descriptor1, descriptor2],
+        };
+        return mediaStore.touchFiles(body, params).then(response => {
+          expect(response).toEqual({ data });
+          expect(fetchMock.lastUrl()).toEqual(`${baseUrl}/upload/touch`);
+          expect(fetchMock.lastOptions()).toEqual({
+            method: 'POST',
+            headers: {
+              'X-Client-Id': clientId,
+              Authorization: `Bearer ${token}`,
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          });
+          expect(authProvider).toHaveBeenCalledWith({
+            collectionName: params.collection,
+          });
+        });
+      });
+
+      it('should return partial result', () => {
+        const data: TouchedFiles = {
+          created: [createdTouchedFile1],
+          failed: [
+            {
+              fileId: 'some-other-file-id',
+            },
+          ],
+        };
+        fetchMock.mock(`begin:${baseUrl}/upload/touch`, {
+          body: {
+            data,
+          },
+          status: 409,
+        });
+
+        const body: MediaStoreTouchFileBody = {
+          descriptors: [descriptor1, descriptor2],
+        };
+        return mediaStore.touchFiles(body, params).then(response => {
+          expect(response).toEqual({ data });
+        });
+      });
+
+      it('should fail if non-409 status is thrown', () => {
+        const error = {
+          error: 'something wrong',
+        };
+        fetchMock.mock(`begin:${baseUrl}/upload/touch`, {
+          body: error,
+          status: 403,
+        });
+
+        const body: MediaStoreTouchFileBody = {
+          descriptors: [descriptor1],
+        };
+        return mediaStore.touchFiles(body, params).then(
+          result => {
+            expect(result).not.toBeDefined();
+          },
+          async (response: Response) => {
+            const reason = await response.json();
+            expect(reason).toEqual(error);
+          },
+        );
       });
     });
 
