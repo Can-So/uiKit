@@ -202,7 +202,7 @@ const typeToIcon: { [key: string]: iconDescriptor } = {
   ],
   'application/invision.prototype': ['Prototype', undefined],
 
-  //TODO: Figure a way to detect those
+  // TODO: Figure a way to detect those
   'application/sketch': [
     'Sketch',
     () => import('@atlaskit/icon-file-type/glyph/sketch/24'),

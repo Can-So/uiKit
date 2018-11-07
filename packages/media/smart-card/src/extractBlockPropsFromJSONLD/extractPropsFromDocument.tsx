@@ -24,10 +24,10 @@ export function extractPropsFromDocument(
 
   if (json.commentCount) {
     const { commentCount } = json;
-    const intCommentCount = parseInt(commentCount);
+    const intCommentCount = parseInt(commentCount, 10);
 
     // Only show the comment count if it's a string or an integer > 0
-    if (intCommentCount === NaN || intCommentCount) {
+    if (isNaN(intCommentCount) || intCommentCount) {
       props.details.push({
         icon: (
           <ChatIcon
