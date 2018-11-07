@@ -8,7 +8,7 @@ import { styleReducerNoOp, withGlobalTheme } from '../../../theme';
 import type {
   GlobalItemPresentationProps,
   GlobalItemStyles,
-  GlobalItemPrimitiveProps,
+  // GlobalItemPrimitiveProps,
 } from './types';
 
 // FIXME: Get GlobalItemPrimitiveProps type working

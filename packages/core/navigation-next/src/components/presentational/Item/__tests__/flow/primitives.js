@@ -33,7 +33,6 @@ const hocProvidedProps = {
 <ItemPrimitive />;
 <ItemPrimitive component={() => null} />;
 
-// Invalid usage
 // $ExpectError - id should be string
 <ItemPrimitive id={5} />;
 // $ExpectError - component should be component

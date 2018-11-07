@@ -4,6 +4,7 @@ import type { ComponentType } from 'react';
 import type { ExternalGlobalItemProps } from '../GlobalItem/types';
 import type { GlobalTheme } from '../../../theme/types';
 
+// FIXME: Use ElementConfig instead
 type ItemDataShape = ExternalGlobalItemProps & { key?: string };
 
 export type ConnectedGlobalNavigationProps = {

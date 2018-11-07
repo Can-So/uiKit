@@ -3,6 +3,6 @@
 import type { Node } from 'react';
 
 export type SectionHeadingProps = {
-  /** Text content of the GroupHeading. */
+  /** Text content of the SectionHeading. */
   children: Node,
 };
