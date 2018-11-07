@@ -173,7 +173,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
     quickInsert: ({ formatMessage }) => [
       {
         title: formatMessage(messages.filesAndImages),
-        priority: 200,
+        priority: 400,
         keywords: ['media'],
         icon: () => (
           <EditorImageIcon label={formatMessage(messages.filesAndImages)} />
