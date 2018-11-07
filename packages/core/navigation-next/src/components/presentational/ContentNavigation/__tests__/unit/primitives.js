@@ -1,11 +1,29 @@
 // @flow
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
-import { ContainerNavigation, ProductNavigation } from '../../primitives';
+import {
+  ContainerNavigation,
+  ProductNavigation,
+  ContainerNavigationMask,
+} from '../../primitives';
 import { light } from '../../../../../theme';
 
 describe('ContentNavigation primitives', () => {
+  describe('ContainerNavigationMask', () => {
+    it('should render correctly with default props', () => {
+      const wrapper = shallow(<ContainerNavigationMask />);
+
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should set pointerEvents to none when interaction is disabled', () => {
+      const wrapper = shallow(<ContainerNavigationMask disableInteraction />);
+
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
   describe('ContainerNavigation', () => {
     let defaultProps;
     beforeEach(() => {
