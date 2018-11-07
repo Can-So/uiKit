@@ -9,7 +9,7 @@ import WithPluginState from '../../ui/WithPluginState';
 import StatusPicker from './ui/statusPicker';
 import { commitStatusPicker, DEFAULT_STATUS, insertStatus } from './actions';
 
-const statusPlugin: EditorPlugin = {
+const baseStatusPlugin = (): EditorPlugin => ({
   nodes() {
     return [{ name: 'status', node: status }];
   },
@@ -60,28 +60,43 @@ const statusPlugin: EditorPlugin = {
       />
     );
   },
+});
 
-  pluginsOptions: {
-    quickInsert: [
-      {
-        title: 'Status',
-        priority: 700,
-        keywords: ['lozenge'],
-        icon: () => <LabelIcon label="Status" />,
-        action(insert, state) {
-          const statusNode = state.schema.nodes.status.createChecked({
-            ...DEFAULT_STATUS,
-            localId: uuid.generate(),
-          });
-
-          const tr = insert(statusNode);
-          const showStatusPickerAt = tr.selection.from - 2;
-          tr.setSelection(NodeSelection.create(tr.doc, showStatusPickerAt));
-          return tr.setMeta(pluginKey, { showStatusPickerAt });
-        },
-      },
-    ],
+const createQuickInsertMenuItem = () => ({
+  title: 'Status',
+  priority: 700,
+  keywords: ['lozenge'],
+  icon: () => <LabelIcon label="Status" />,
+  action(insert, state) {
+    const statusNode = state.schema.nodes.status.createChecked({
+      ...DEFAULT_STATUS,
+      localId: uuid.generate(),
+    });
+    const tr = insert(statusNode);
+    const showStatusPickerAt = tr.selection.from - 2;
+    tr.setSelection(NodeSelection.create(tr.doc, showStatusPickerAt));
+    return tr.setMeta(pluginKey, { showStatusPickerAt });
   },
+});
+
+export interface StatusOptions {
+  menuDisabled: boolean;
+}
+
+const decorateWithPluginOptions = (
+  plugin: EditorPlugin,
+  options: StatusOptions,
+): EditorPlugin => {
+  if (options.menuDisabled === true) {
+    return plugin;
+  }
+  plugin.pluginsOptions = {
+    quickInsert: [createQuickInsertMenuItem()],
+  };
+  return plugin;
 };
+
+const statusPlugin = (options: StatusOptions): EditorPlugin =>
+  decorateWithPluginOptions(baseStatusPlugin(), options);
 
 export default statusPlugin;

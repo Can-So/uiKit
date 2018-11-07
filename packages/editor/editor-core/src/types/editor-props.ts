@@ -142,8 +142,12 @@ export interface EditorProps {
   // Temporary flag to enable layouts while it's under development
   allowLayouts?: boolean;
 
-  // Enable status.
-  allowStatus?: boolean;
+  // Enable status, if menuDisabled is passed then plugin is enabled by default
+  allowStatus?:
+    | boolean
+    | {
+        menuDisabled: boolean;
+      };
 
   allowDynamicTextSizing?: boolean;
 
