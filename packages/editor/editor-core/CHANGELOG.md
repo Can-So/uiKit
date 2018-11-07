@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.0.6
+- [patch] [82ad72d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82ad72d):
+
+  - Timestamp on date node must always be a string
+
 ## 88.0.5
 - [patch] [beefae2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/beefae2):
 
