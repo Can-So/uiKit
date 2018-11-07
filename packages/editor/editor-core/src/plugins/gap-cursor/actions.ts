@@ -1,98 +1,122 @@
 import {
   EditorState,
-  Transaction,
   Selection,
   TextSelection,
+  Transaction,
 } from 'prosemirror-state';
 import { removeNodeBefore } from 'prosemirror-utils';
+import { Direction } from './direction';
 import { GapCursorSelection, Side } from './selection';
-import { isIgnored } from './utils';
+import { isTextBlockNearPos, isValidTargetNode } from './utils';
 import { Command } from '../../types';
+import { atTheBeginningOfDoc, atTheEndOfDoc } from '../../utils';
 import { pluginKey } from './pm-plugins/main';
 
-export enum Direction {
-  BACKWARD,
-  FORWARD,
-}
-
 export const arrow = (
-  direction: Direction,
+  dir: Direction,
   endOfTextblock: (dir: string, state?: EditorState) => boolean,
 ): Command => (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
-  const side = direction === Direction.BACKWARD ? Side.LEFT : Side.RIGHT;
+  const { doc, schema, selection, tr } = state;
 
-  const { selection, tr } = state;
-  let $pos = side === Side.RIGHT ? selection.$to : selection.$from;
+  let $pos = Direction.isBackward(dir) ? selection.$from : selection.$to;
   let mustMove = selection.empty;
 
   // start from text selection
   if (selection instanceof TextSelection) {
-    if (!endOfTextblock(side === Side.RIGHT ? 'right' : 'left')) {
+    // if cursor is in the middle of a text node, do nothing
+    if (!endOfTextblock(dir.toString())) {
       return false;
     }
-    mustMove = false;
-    $pos = state.doc.resolve(
-      side === Side.RIGHT ? $pos.after() : $pos.before(),
-    );
-  }
 
-  let nextSelection;
-  const { nodeAfter, nodeBefore } = $pos;
+    // UP/DOWN jumps to the nearest texblock skipping gapcursor whenever possible
+    if (
+      (dir === Direction.UP &&
+        !atTheBeginningOfDoc(state) &&
+        isTextBlockNearPos(doc, schema, $pos, -1)) ||
+      (dir === Direction.DOWN &&
+        (atTheEndOfDoc(state) || isTextBlockNearPos(doc, schema, $pos, 1)))
+    ) {
+      return false;
+    }
+
+    // otherwise resolve previous/next position
+    $pos = doc.resolve(
+      Direction.isBackward(dir) ? $pos.before() : $pos.after(),
+    );
+    mustMove = false;
+  }
 
   // when jumping between block nodes at the same depth, we need to reverse cursor without changing ProseMirror position
   if (
     selection instanceof GapCursorSelection &&
     // next node allow gap cursor position
-    (side === Side.RIGHT
-      ? nodeAfter && !isIgnored(nodeAfter)
-      : nodeBefore && !isIgnored(nodeBefore)) &&
+    isValidTargetNode(
+      Direction.isBackward(dir) ? $pos.nodeBefore : $pos.nodeAfter,
+    ) &&
     // gap cursor changes block node
-    ((side === Side.RIGHT && selection.side === Side.RIGHT) ||
-      (side === Side.LEFT && selection.side === Side.LEFT))
+    ((Direction.isBackward(dir) && selection.side === Side.LEFT) ||
+      (Direction.isForward(dir) && selection.side === Side.RIGHT))
   ) {
     // reverse cursor position
-    nextSelection = new GapCursorSelection(
-      $pos,
-      side === Side.RIGHT ? Side.LEFT : Side.RIGHT,
+    dispatch(
+      tr
+        .setSelection(
+          new GapCursorSelection(
+            $pos,
+            selection.side === Side.RIGHT ? Side.LEFT : Side.RIGHT,
+          ),
+        )
+        .scrollIntoView(),
     );
-  } else {
-    nextSelection = GapCursorSelection.findFrom(
-      $pos,
-      direction === Direction.BACKWARD ? -1 : 1,
-      mustMove,
+    return true;
+  }
+
+  const nextSelection = GapCursorSelection.findFrom(
+    $pos,
+    Direction.isBackward(dir) ? -1 : 1,
+    mustMove,
+  );
+
+  if (!nextSelection) {
+    return false;
+  }
+
+  if (
+    !isValidTargetNode(
+      Direction.isForward(dir)
+        ? nextSelection.$from.nodeBefore
+        : nextSelection.$from.nodeAfter,
+    )
+  ) {
+    // reverse cursor position
+    dispatch(
+      tr
+        .setSelection(
+          new GapCursorSelection(
+            nextSelection.$from,
+            Direction.isForward(dir) ? Side.LEFT : Side.RIGHT,
+          ),
+        )
+        .scrollIntoView(),
     );
-    if (!nextSelection) {
-      return false;
-    }
-    const { nodeBefore, nodeAfter } = nextSelection.$from;
-    if (
-      side === Side.RIGHT
-        ? !nodeBefore || isIgnored(nodeBefore)
-        : !nodeAfter || isIgnored(nodeAfter)
-    ) {
-      // reverse cursor position
-      nextSelection = new GapCursorSelection(
-        nextSelection.$from,
-        side === Side.RIGHT ? Side.LEFT : Side.RIGHT,
-      );
-    }
+    return true;
   }
 
   dispatch(tr.setSelection(nextSelection).scrollIntoView());
   return true;
 };
 
-export const deleteNode = (direction: Direction): Command => (
+export const deleteNode = (dir: Direction): Command => (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
   if (state.selection instanceof GapCursorSelection) {
     const { $from } = state.selection;
     let { tr } = state;
-    if (direction === Direction.BACKWARD) {
+    if (Direction.isBackward(dir)) {
       tr = removeNodeBefore(state.tr);
     } else if ($from.nodeAfter) {
       tr = tr.delete($from.pos, $from.pos + $from.nodeAfter.nodeSize);
@@ -200,8 +224,8 @@ export const setCursorForTopLevelBlocks = (
   const $pos = state.doc.resolve(cursorCoords.position);
   const isGapCursorAllowed =
     cursorCoords.side === Side.LEFT
-      ? $pos.nodeAfter && !isIgnored($pos.nodeAfter)
-      : $pos.nodeBefore && !isIgnored($pos.nodeBefore);
+      ? isValidTargetNode($pos.nodeAfter)
+      : isValidTargetNode($pos.nodeBefore);
 
   if (isGapCursorAllowed && GapCursorSelection.valid($pos)) {
     // this forces PM to re-render the decoration node if we change the side of the gap cursor, it doesn't do it by default
