@@ -6,6 +6,7 @@ import { parseString } from '../text';
 
 export function strong(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback: TokenErrCallback,
 ): Token {
@@ -47,7 +48,7 @@ export function strong(
     };
   };
 
-  return commonFormatter(input, schema, {
+  return commonFormatter(input, position, schema, {
     opening: '*',
     closing: '*',
     rawContentProcessor,

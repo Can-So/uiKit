@@ -132,3 +132,10 @@ export const ExternalIdentifierWrapper = styled.div`
     margin-bottom: 10px;
   }
 `;
+
+export const InlineCardVideoWrapper = styled.div``;
+export const InlineCardVideoWrapperItem = styled.div`
+  padding: 10px;
+  border: 1px solid;
+  margin: 10px;
+`;

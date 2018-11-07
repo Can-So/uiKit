@@ -1,5 +1,28 @@
 # @atlaskit/media-viewer
 
+## 26.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+  - @atlaskit/media-store@8.3.0
+
+## 25.0.3
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-test-helpers@18.2.11
+  - @atlaskit/media-card@42.0.0
+
+## 25.0.2
+- [patch] [714f6ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/714f6ba):
+
+  - Add analytics for navigation events in MediaViewer
+
+## 25.0.1
+- [patch] [74c9cd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/74c9cd1):
+
+  - Add analytics for zoom controls
+
 ## 25.0.0
 - [major] [023cb45"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/023cb45"

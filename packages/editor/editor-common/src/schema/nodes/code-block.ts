@@ -1,4 +1,4 @@
-import { NodeSpec, Node as PMNode } from 'prosemirror-model';
+import { NodeSpec, Node as PMNode, Schema, Fragment } from 'prosemirror-model';
 import { browser } from '../../utils';
 import { TextDefinition as Text } from './text';
 import { NoMark } from './doc';
@@ -155,6 +155,15 @@ export const codeBlock: NodeSpec = {
           return {};
         }
         return false;
+      },
+      // @see ED-5682
+      getContent: (dom: HTMLElement, schema: Schema) => {
+        const code = Array.from(dom.children)
+          .map(child => child.textContent)
+          // tslint:disable-next-line:triple-equals
+          .filter(x => x != undefined)
+          .join('\n');
+        return code ? Fragment.from(schema.text(code)) : Fragment.empty;
       },
     },
     // Handle GitHub/Gist paste

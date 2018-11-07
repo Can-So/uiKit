@@ -1,5 +1,158 @@
 # @atlaskit/editor-core
 
+## 88.0.6
+- [patch] [82ad72d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82ad72d):
+
+  - Timestamp on date node must always be a string
+
+## 88.0.5
+- [patch] [beefae2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/beefae2):
+
+  - Updated type definitions for prosemirror packages
+
+## 88.0.4
+- [patch] [2e1b194](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e1b194):
+
+  - Revert collab changes
+
+## 88.0.3
+- [patch] [222082a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/222082a):
+
+  - Fix incorrect import of PanelType
+
+## 88.0.2
+- [patch] [ffcaedd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ffcaedd):
+
+  - FS-2964 Implement status node placeholder support. Handle removing if no content in node
+
+## 88.0.1
+- [patch] [8059325](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8059325):
+
+  - Fix delete doing nothing
+
+## 88.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/renderer@30.0.0
+  - @atlaskit/emoji@46.0.0
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/media-filmstrip@18.0.0
+  - @atlaskit/media-picker@24.0.0
+  - @atlaskit/adf-utils@5.0.1
+  - @atlaskit/editor-bitbucket-transformer@4.0.18
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-markdown-transformer@2.0.19
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/task-decision@11.0.2
+  - @atlaskit/util-data-test@10.0.20
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+
+## 87.9.5
+- [patch] [e1db106](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e1db106):
+
+  * ED-5696 Allow private properties in adf-validator
+
+  `table` with `__autoSize`, `link` with `__confluenceMetadata` will render properly.
+
+## 87.9.4
+- [patch] [bce23bc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bce23bc):
+
+  - Change style of status selection
+
+## 87.9.3
+- [patch] [e6c4231](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6c4231):
+
+  - ED-5639: fix deleting columns in Safari
+
+## 87.9.2
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/editor-common@20.3.7
+  - @atlaskit/renderer@29.5.1
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-filmstrip@17.0.2
+  - @atlaskit/media-picker@23.2.2
+  - @atlaskit/media-test-helpers@18.2.11
+  - @atlaskit/media-card@42.0.0
+
+## 87.9.1
+- [patch] [676a586](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/676a586):
+
+  - ED-5024 Quick insert improvements
+
+## 87.9.0
+- [minor] [2cc9764](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2cc9764):
+
+  - Change the way we deal with transactions in collab edit
+
+## 87.8.2
+- [patch] [a9eb99f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a9eb99f):
+
+  - ED-5510: fix deleting last character in a cell in Safari
+
+## 87.8.1
+- [patch] [1764e1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1764e1c):
+
+  - ED-5215: don't insert paragraph when inserting rule if another follows
+
+## 87.8.0
+- [minor] [f17f0a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f17f0a6):
+
+  - ED-5448: support macro autoconversion in actions
+
+## 87.7.5
+- [patch] [fb6b89b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb6b89b):
+
+  - Revert "Add buffer to the bottom of fullpage editor"
+
+## 87.7.4
+- [patch] [8f1073c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8f1073c):
+
+  * ED-5572 Fixes copying 2+ lines from vs-code pastes as inline code
+
+## 87.7.3
+- [patch] [825d4e9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/825d4e9):
+
+  Fix copying codeblock from renderer
+- [patch] [9489ed2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9489ed2):
+
+  ED-4544 Added integration tests for panel
+
+## 87.7.2
+- [patch] [c032914](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c032914):
+
+  - ED-2043: Added table keyboard shortcut
+
+## 87.7.1
+- [patch] [e8afbf1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8afbf1):
+
+  - ED-5310: fix inline code background appearing when wrapping
+
+## 87.7.0
+- [minor] [abef80b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abef80b):
+
+  - ED-5527: apply max-width: 100% and pass container size to Card as dimension
+
+## 87.6.18
+- [patch] [9f26f82](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f26f82):
+
+  - Removing extra padding inside the comment editor
+
+## 87.6.17
+- [patch] [aef4235](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aef4235):
+
+  - Fix range selection
+
+## 87.6.16
+- [patch] [7bc4461](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7bc4461):
+
+  - ED-5565: support connecting external React.Context to nodeviews
+
+## 87.6.15
+- [patch] [e8052e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8052e1):
+
+  - Add main field to adf-utils package.json
+
 ## 87.6.14
 - [patch] [7787595](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7787595):
 

@@ -1,5 +1,15 @@
 # @atlaskit/status
 
+## 0.2.4
+- [patch] [36c362f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36c362f):
+
+  - FS-3174 - Fix usage of gridSize() and borderRadius()
+
+## 0.2.3
+- [patch] [527b954](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/527b954):
+
+  - FS-3174 - Remove usage of util-shared-styles from elements components
+
 ## 0.2.2
 - [patch] ED-5529 Fix JSON Schema [d286ab3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d286ab3)
 
