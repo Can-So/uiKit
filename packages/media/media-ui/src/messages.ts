@@ -212,66 +212,71 @@ export const messages = defineMessages({
     id: 'fabric.media.webgl_warning_description',
     defaultMessage:
       'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
-    description: 'TODO',
+    description:
+      'We show this error message when the browser doesnt support this feature',
   },
   unable_to_annotate_image: {
     id: 'fabric.media.unable_to_annotate_image',
     defaultMessage: "You're unable to annotate this image",
-    description: 'TODO',
+    description:
+      'If there is an error trying to annotate an image we show this',
   },
   learn_more: {
     id: 'fabric.media.learn_more',
     defaultMessage: 'Learn More',
-    description: 'TODO',
+    description: '',
   },
   accounts: {
     id: 'fabric.media.accounts',
     defaultMessage: 'Accounts',
-    description: 'TODO',
+    description: '',
   },
   actions: {
     id: 'fabric.media.actions',
     defaultMessage: 'Actions',
-    description: 'TODO',
+    description: '',
   },
   error_hint_retry: {
     id: 'fabric.media.error_hint_retry',
     defaultMessage: "Try again and we'll give it another shot.",
-    description: 'TODO',
+    description: 'Generic message that we show if an action failed',
   },
   error_hint_critical: {
     id: 'fabric.media.error_hint_critical',
     defaultMessage: 'If the problem keeps happening contact support.',
-    description: 'TODO',
+    description:
+      'We show this error message if we cant recover from the action',
   },
   close: {
     id: 'fabric.media.close',
     defaultMessage: 'Close',
-    description: 'TODO',
+    description: '',
   },
   could_not_load_editor: {
     id: 'fabric.media.could_not_load_editor',
     defaultMessage: 'Ouch! We could not load the editor',
-    description: 'TODO',
+    description: 'Error message to communicate that we cant load the editor',
   },
   could_not_save_image: {
     id: 'fabric.media.could_not_save_image',
     defaultMessage: 'Ouch! We could not save the image',
-    description: 'TODO',
+    description: 'Error message to communicate that we cant save an image',
   },
   annotate: {
     id: 'fabric.media.annotate',
     defaultMessage: 'Annotate',
-    description: 'TODO',
+    description: '',
   },
   drop_your_files_here: {
     id: 'fabric.media.drop_your_files_here',
     defaultMessage: 'Drop your files here',
-    description: 'TODO',
+    description:
+      'Info message that we show to indicate that the user can drag and drop files',
   },
   share_files_instantly: {
     id: 'fabric.media.share_files_instantly',
     defaultMessage: "We'll share them instantly",
-    description: 'TODO',
+    description:
+      'It means that we will upload the files you drag and drop automatically',
   },
 });
