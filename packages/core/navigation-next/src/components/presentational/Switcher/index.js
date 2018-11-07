@@ -53,11 +53,14 @@ const createStyles = (styles: SelectStyles = {}): Object =>
 export function filterOption({ data }: { data: OptionItem }, input: string) {
   return data.text.toLowerCase().includes(input.toLowerCase());
 }
-function isOptionSelected(option, selected) {
+export function isOptionSelected(
+  option: OptionItem,
+  selected: Array<OptionItem>,
+) {
   if (!selected || !selected.length) return false;
   return option.id === selected[0].id;
 }
-function getOptionValue(option) {
+export function getOptionValue(option: OptionItem) {
   return option.id;
 }
 

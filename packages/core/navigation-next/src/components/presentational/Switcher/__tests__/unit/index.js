@@ -10,6 +10,8 @@ import {
   Control,
   createStyles,
   filterOption,
+  isOptionSelected,
+  getOptionValue,
 } from '../../index';
 import Option from '../../Option';
 
@@ -55,8 +57,8 @@ describe('Switcher', () => {
     expect(wrapper.find(PopupSelect).props()).toEqual(
       expect.objectContaining({
         filterOption,
-        isOptionSelected: expect.any(Function),
-        getOptionValue: expect.any(Function),
+        isOptionSelected,
+        getOptionValue,
         onOpen: wrapper.instance().handleOpen,
         onClose: wrapper.instance().handleClose,
         options: wrapper.prop('options'),
@@ -279,16 +281,47 @@ describe('createStyles()', () => {
 });
 
 describe('filterOption()', () => {
-  it('should return true when "data" text contains "input" text', () => {
-    const option = {
-      text: 'Design System Support',
-    };
-    expect(filterOption({ data: option }, 'blabla')).toEqual(false);
-    expect(filterOption({ data: option }, 'd')).toEqual(true);
-    expect(filterOption({ data: option }, 'D')).toEqual(true);
-    expect(filterOption({ data: option }, 'design ')).toEqual(true);
-    expect(filterOption({ data: option }, 'design s')).toEqual(true);
-    expect(filterOption({ data: option }, 'design S')).toEqual(true);
-    expect(filterOption({ data: option }, 'suppo')).toEqual(true);
+  const option = {
+    text: 'Design System Support',
+  };
+  it('should return true when option text contains "input" text', () => {
+    expect(filterOption({ data: option }, 'd')).toBe(true);
+    expect(filterOption({ data: option }, 'D')).toBe(true);
+    expect(filterOption({ data: option }, 'design ')).toBe(true);
+    expect(filterOption({ data: option }, 'design s')).toBe(true);
+    expect(filterOption({ data: option }, 'design S')).toBe(true);
+    expect(filterOption({ data: option }, 'suppo')).toBe(true);
+  });
+
+  it('should return false when option text does not contain "input" text', () => {
+    expect(filterOption({ data: option }, 'blabla')).toBe(false);
+    expect(filterOption({ data: option }, 'x')).toBe(false);
+    expect(filterOption({ data: option }, 'dx')).toBe(false);
+  });
+});
+
+describe('isOptionSelected()', () => {
+  it('should return false when selected array is empty or undefined', () => {
+    const selected = [];
+    expect(isOptionSelected(null, selected)).toBe(false);
+    expect(isOptionSelected(null, null)).toBe(false);
+    expect(isOptionSelected()).toBe(false);
+  });
+  it('should returen false when option id is different than selected id', () => {
+    const selected = [{ id: 'my-id' }];
+    const option = { id: 'another-id' };
+    expect(isOptionSelected(option, selected)).toBe(false);
+  });
+  it('should return true when option id is equal to selected id', () => {
+    const selected = [{ id: 'my-id' }];
+    const option = { id: 'my-id' };
+    expect(isOptionSelected(option, selected)).toBe(true);
+  });
+});
+
+describe('getOptionValue()', () => {
+  it('should return option id property', () => {
+    const option = { id: 'an-id' };
+    expect(getOptionValue(option)).toEqual('an-id');
   });
 });
