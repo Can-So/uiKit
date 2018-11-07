@@ -9,6 +9,7 @@ import type {
   ExperimentalFeatureFlags,
   GetRefs,
 } from '../../presentational/LayoutManager/types';
+import type { ItemsRendererProps } from '../../../renderer/types';
 
 import type {
   ViewControllerState,
@@ -28,6 +29,7 @@ export type LayoutManagerWithViewControllerProps = {|
   navigationUIController: UIController,
   navigationViewController: ViewController,
   firstSkeletonToRender?: 'product' | 'container',
+  viewRenderer: ComponentType<ItemsRendererProps>,
 |};
 
 export type LayoutManagerWithViewControllerState = {

@@ -7,6 +7,7 @@ import {
   LayoutManagerWithViewController,
   NavigationProvider,
   SkeletonContainerView,
+  ViewRenderer,
 } from '../src';
 
 const MyGlobalNavigation = () => (
@@ -24,6 +25,7 @@ export default class App extends Component<{}> {
         <LayoutManagerWithViewController
           globalNavigation={MyGlobalNavigation}
           containerSkeleton={SkeletonContainerView}
+          viewRenderer={ViewRenderer}
         >
           <div css={{ padding: 30 }}>Page content goes here.</div>
         </LayoutManagerWithViewController>

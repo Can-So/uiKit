@@ -13,6 +13,7 @@ import {
   ViewController,
   withNavigationViewController,
   SkeletonContainerView,
+  ViewRenderer,
 } from '../src';
 
 const MyGlobalNavigation = () => (
@@ -134,6 +135,7 @@ class App extends Component<{
       <LayoutManagerWithViewController
         globalNavigation={MyGlobalNavigation}
         containerSkeleton={SkeletonContainerView}
+        viewRenderer={ViewRenderer}
       >
         <div css={{ padding: 30 }}>Page content goes here.</div>
       </LayoutManagerWithViewController>

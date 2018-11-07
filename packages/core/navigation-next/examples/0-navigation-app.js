@@ -10,6 +10,7 @@ import {
   LayoutManagerWithViewController,
   NavigationProvider,
   SkeletonContainerView,
+  ViewRenderer,
 } from '../src';
 
 import { DefaultGlobalNavigation, ProjectSwitcher } from './shared/components';
@@ -56,6 +57,7 @@ export default class App extends Component<
             experimental_flyoutOnHover={isFlyoutAvailable}
             globalNavigation={DefaultGlobalNavigation}
             containerSkeleton={SkeletonContainerView}
+            viewRenderer={ViewRenderer}
           >
             <div style={{ padding: 40 }}>
               <RootViews />
