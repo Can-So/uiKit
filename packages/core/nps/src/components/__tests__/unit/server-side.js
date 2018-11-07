@@ -10,7 +10,6 @@ test('Nps server side rendering', async () => {
   (await getExamplesFor('nps')).forEach(examples => {
     // $StringLitteral
     const Example = require(examples.filePath).default; // eslint-disable-line import/no-dynamic-require
-    console.log(examples.filePath);
     expect(() => ReactDOMServer.renderToString(<Example />)).not.toThrowError();
   });
 });
