@@ -33,11 +33,6 @@ export const gridStyles = css`
     border-left: 1px solid transparent;
   }
 
-  .gridContainer.wrapped .gridLine:nth-child(12),
-  .gridContainer.wrapped .gridLine:nth-child(2) {
-    visibility: hidden;
-  }
-
   .highlight {
     border-left: 1px solid ${colors.B200};
   }

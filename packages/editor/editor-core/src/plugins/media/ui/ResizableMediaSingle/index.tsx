@@ -66,15 +66,6 @@ export default class ResizableMediaSingle extends React.Component<
     return this.props.state.doc.resolve(pos);
   }
 
-  get gridMin() {
-    return !this.wrappedLayout ? 1 : 0;
-  }
-
-  get gridMax() {
-    const { gridSize } = this.props;
-    return this.wrappedLayout ? gridSize - 1 : gridSize;
-  }
-
   /**
    * The maxmimum number of grid columns this node can resize to.
    */
@@ -126,7 +117,7 @@ export default class ResizableMediaSingle extends React.Component<
 
     const { containerWidth, lineLength, appearance } = this.props;
     const snapTargets: number[] = [];
-    for (let i = this.gridMin; i < this.gridMax; i++) {
+    for (let i = 0; i < this.props.gridSize; i++) {
       snapTargets.push(
         calcPxFromColumns(i, lineLength, this.gridWidth) - offsetLeft,
       );
@@ -135,7 +126,11 @@ export default class ResizableMediaSingle extends React.Component<
     // full width
     snapTargets.push(lineLength - offsetLeft);
 
-    const minimumWidth = calcPxFromColumns(2, lineLength, this.props.gridSize);
+    const minimumWidth = calcPxFromColumns(
+      this.wrappedLayout ? 1 : 2,
+      lineLength,
+      this.props.gridSize,
+    );
     const snapPoints = snapTargets.filter(width => width >= minimumWidth);
 
     const $pos = this.$pos;
