@@ -30,7 +30,7 @@ import ToolbarButton from '../../../ui/ToolbarButton';
 import { messages as textFormattingMessages } from '../../text-formatting/ui/ToolbarTextFormatting';
 import { messages as advancedTextFormattingMessages } from '../../text-formatting/ui/ToolbarAdvancedTextFormatting';
 import { messages as blockTypeMessages } from '../../block-type/types';
-import { messages as listMessages } from '../../lists/ui/ToolbarLists';
+import { messages as listMessages } from '../../lists/messages';
 import { messages as insertBlockMessages } from '../../insert-block/ui/ToolbarInsertBlock';
 import { closeHelpCommand } from '../';
 

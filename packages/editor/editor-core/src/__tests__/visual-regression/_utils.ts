@@ -6,7 +6,7 @@ import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/T
 import { messages as blockTypeMessages } from '../../plugins/block-type/types';
 import { messages as textFormattingMessages } from '../../plugins/text-formatting/ui/ToolbarTextFormatting';
 import { messages as advancedTextFormattingMessages } from '../../plugins/text-formatting/ui/ToolbarAdvancedTextFormatting';
-import { messages as listsMessages } from '../../plugins/lists/ui/ToolbarLists';
+import { messages as listsMessages } from '../../plugins/lists/messages';
 import { messages as textColorMessages } from '../../plugins/text-color/ui/ToolbarTextColor';
 
 export {
