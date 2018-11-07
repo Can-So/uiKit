@@ -4,6 +4,8 @@ import {
   PersonResult as PersonResultComponent,
   ContainerResult as ContainerResultComponent,
 } from '@atlaskit/quick-search';
+import { FormattedMessage } from 'react-intl';
+import { messages } from '../messages';
 import {
   Result,
   ContainerResult,
@@ -11,6 +13,7 @@ import {
   PersonResult,
   ResultType,
   ConfluenceObjectResult,
+  JiraProjectType,
 } from '../model/Result';
 import { getAvatarForConfluenceObjectResult } from '../util/confluence-avatar-util';
 import { getDefaultAvatar } from '../util/jira-avatar-util';
@@ -27,6 +30,33 @@ const extractAvatarData = (jiraResult: JiraResult) =>
     : {
         avatar: getDefaultAvatar(jiraResult.contentType),
       };
+
+const getI18nJiraContainerName = (projectType: JiraProjectType) => {
+  debugger;
+  switch (projectType) {
+    case JiraProjectType.Business: {
+      return (
+        <FormattedMessage {...messages.jira_project_type_business_project} />
+      );
+    }
+    case JiraProjectType.Software: {
+      return (
+        <FormattedMessage {...messages.jira_project_type_software_project} />
+      );
+    }
+    case JiraProjectType.ServiceDesk: {
+      return (
+        <FormattedMessage
+          {...messages.jira_project_type_service_desk_project}
+        />
+      );
+    }
+    case JiraProjectType.Ops: {
+      return <FormattedMessage {...messages.jira_project_type_ops_project} />;
+    }
+  }
+  return null;
+};
 
 export default class ResultList extends React.Component<Props> {
   render() {
@@ -66,6 +96,11 @@ export default class ResultList extends React.Component<Props> {
         case ResultType.JiraObjectResult: {
           const jiraResult = result as JiraResult;
           const avatarData = extractAvatarData(jiraResult);
+
+          const containerName = jiraResult.projectType
+            ? getI18nJiraContainerName(jiraResult.projectType)
+            : jiraResult.containerName;
+
           return (
             <ObjectResultComponent
               key={uniqueResultId}
@@ -74,7 +109,7 @@ export default class ResultList extends React.Component<Props> {
               href={jiraResult.href}
               type={jiraResult.analyticsType}
               objectKey={jiraResult.objectKey}
-              containerName={jiraResult.containerName}
+              containerName={containerName}
               {...avatarData}
               analyticsData={analyticsData}
             />
@@ -82,7 +117,6 @@ export default class ResultList extends React.Component<Props> {
         }
         case ResultType.GenericContainerResult: {
           const containerResult = result as ContainerResult;
-
           return (
             <ContainerResultComponent
               key={uniqueResultId}

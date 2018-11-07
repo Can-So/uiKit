@@ -3,9 +3,17 @@ import { FormattedMessage } from 'react-intl';
 
 export enum ResultType {
   JiraObjectResult = 'jira-object-result',
+  JiraProjectResult = 'jira-project-result',
   GenericContainerResult = 'generic-container-result',
   PersonResult = 'person-result',
   ConfluenceObjectResult = 'confluence-object-result',
+}
+
+export enum JiraProjectType {
+  Software = 'software',
+  ServiceDesk = 'service_desk',
+  Business = 'business',
+  Ops = 'ops',
 }
 
 export interface Result {
@@ -71,6 +79,7 @@ export type ResultsGroup = {
 export interface JiraResult extends Result {
   objectKey?: string;
   containerName?: string;
+  projectType?: JiraProjectType;
   resultType: ResultType.JiraObjectResult;
   contentType: ContentType;
 }
