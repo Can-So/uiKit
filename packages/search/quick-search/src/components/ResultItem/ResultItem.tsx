@@ -32,7 +32,7 @@ type Props = {
   /** Standard onmouseleave event */
   onMouseLeave?: (e: MouseEvent) => void;
   /** Text to be shown alongside the main `text`. */
-  subText?: string;
+  subText?: React.ReactNode;
   /** Main text to be displayed as the item. Accepts a react component but in most cases this should just be a string. */
   text?: React.ReactNode;
   /** React component to be placed to the right of the main text. */

@@ -14,7 +14,7 @@ export type Props = CommonResultProps & {
   /** Main text to be displayed as the item. */
   text: React.ReactNode;
   /** Text to be shown alongside the main `text`. */
-  subText?: string;
+  subText?: React.ReactNode;
   /** Text to appear to the right of the text. It has a lower font-weight. */
   caption?: string;
   /** React element to appear to the left of the text. */

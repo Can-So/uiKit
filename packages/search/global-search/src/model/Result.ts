@@ -80,7 +80,7 @@ export interface JiraResult extends Result {
   objectKey?: string;
   containerName?: string;
   projectType?: JiraProjectType;
-  resultType: ResultType.JiraObjectResult;
+  resultType: ResultType.JiraObjectResult | ResultType.JiraProjectResult;
   contentType: ContentType;
 }
 

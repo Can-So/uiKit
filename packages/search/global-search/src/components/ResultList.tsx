@@ -31,7 +31,9 @@ const extractAvatarData = (jiraResult: JiraResult) =>
         avatar: getDefaultAvatar(jiraResult.contentType),
       };
 
-const getI18nJiraContainerName = (projectType: JiraProjectType) => {
+const getI18nJiraContainerName = (
+  projectType: JiraProjectType,
+): JSX.Element | undefined => {
   switch (projectType) {
     case JiraProjectType.Business: {
       return (
@@ -54,7 +56,6 @@ const getI18nJiraContainerName = (projectType: JiraProjectType) => {
       return <FormattedMessage {...messages.jira_project_type_ops_project} />;
     }
   }
-  return null;
 };
 
 export default class ResultList extends React.Component<Props> {
@@ -92,13 +93,30 @@ export default class ResultList extends React.Component<Props> {
             />
           );
         }
-        case ResultType.JiraObjectResult: {
+        case ResultType.JiraProjectResult: {
           const jiraResult = result as JiraResult;
           const avatarData = extractAvatarData(jiraResult);
 
-          const containerName = jiraResult.projectType
+          const containerNameElement = jiraResult.projectType
             ? getI18nJiraContainerName(jiraResult.projectType)
-            : jiraResult.containerName;
+            : null;
+
+          return (
+            <ContainerResultComponent
+              key={uniqueResultId}
+              resultId={uniqueResultId}
+              name={jiraResult.name}
+              href={jiraResult.href}
+              type={jiraResult.analyticsType}
+              subText={containerNameElement}
+              {...avatarData}
+              analyticsData={analyticsData}
+            />
+          );
+        }
+        case ResultType.JiraObjectResult: {
+          const jiraResult = result as JiraResult;
+          const avatarData = extractAvatarData(jiraResult);
 
           return (
             <ObjectResultComponent
@@ -108,7 +126,7 @@ export default class ResultList extends React.Component<Props> {
               href={jiraResult.href}
               type={jiraResult.analyticsType}
               objectKey={jiraResult.objectKey}
-              containerName={containerName}
+              containerName={jiraResult.containerName}
               {...avatarData}
               analyticsData={analyticsData}
             />

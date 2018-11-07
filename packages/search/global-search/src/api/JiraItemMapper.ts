@@ -105,11 +105,16 @@ const mapJiraItemToResultV2 = (
     ? addJiraResultQueryParams(url, queryParams)
     : url;
 
+  const resultType =
+    contentType === ContentType.JiraProject
+      ? ResultType.JiraProjectResult
+      : ResultType.JiraObjectResult;
+
   return {
     resultId: id,
     name: name,
     href,
-    resultType: ResultType.JiraObjectResult,
+    resultType: resultType,
     containerId: attributes.containerId,
     analyticsType: AnalyticsType.ResultJira,
     ...extractSpecificAttributes(attributes),
