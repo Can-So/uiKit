@@ -1,0 +1,1 @@
+- Upgrading react-beautiful-dnd-next to 10.0.0-beta.2
