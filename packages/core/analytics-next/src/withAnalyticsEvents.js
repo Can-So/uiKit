@@ -88,6 +88,10 @@ type Obj<T> = { [string]: T };
 const vmap = <A, B>(obj: Obj<A>, fn: (string, A) => B): Obj<B> =>
   Object.keys(obj).reduce((curr, k) => ({ ...curr, [k]: fn(k, obj[k]) }), {});
 
+/* This must use $Supertype to work with multiple HOCs - https://github.com/facebook/flow/issues/6057#issuecomment-414157781
+ * We also cannot alias this as a generic of withAnalyticsEvents itself as
+ * that causes issues with multiple HOCs - https://github.com/facebook/flow/issues/6587
+ */
 type PropsWithoutAnalytics<C> = $Diff<
   ElementConfig<$Supertype<C>>,
   AnalyticsEventsProps,
