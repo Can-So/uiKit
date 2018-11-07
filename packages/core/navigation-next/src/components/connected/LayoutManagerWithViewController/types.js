@@ -16,7 +16,7 @@ import type { ViewControllerState } from '../../../view-controller/types';
 export type LayoutManagerWithViewControllerProps = CollapseListeners &
   ExperimentalFeatureFlags & {
     children: Node,
-    customComponents: { [string]: ComponentType<*> },
+    customComponents?: { [string]: ComponentType<*> },
     getRefs?: GetRefs,
     globalNavigation: ComponentType<{}>,
     navigationUIController: UIController,
