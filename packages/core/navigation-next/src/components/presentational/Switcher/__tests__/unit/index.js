@@ -166,6 +166,15 @@ describe('Switcher', () => {
 });
 
 describe('createStyles()', () => {
+  let defaultState;
+
+  beforeEach(() => {
+    defaultState = {
+      isFocused: false,
+      isActive: false,
+    };
+  });
+
   it('should return an object with option property', () => {
     const styles = createStyles();
     expect(styles).toEqual({
@@ -175,7 +184,7 @@ describe('createStyles()', () => {
 
   it('should return default option styles if no custom option styles is given', () => {
     const styles = createStyles();
-    expect(styles.option({}, {})).toEqual({
+    expect(styles.option({}, defaultState)).toEqual({
       alignItems: 'center',
       border: 'none',
       backgroundColor: 'transparent',
@@ -204,7 +213,7 @@ describe('createStyles()', () => {
       }),
     };
     const styles = createStyles(customStyles);
-    const option = styles.option({}, {});
+    const option = styles.option({}, defaultState);
     expect(option).toEqual({
       alignItems: 'center',
       border: 'none',
@@ -225,7 +234,7 @@ describe('createStyles()', () => {
     });
   });
 
-  it('should return expected option styles when isFocused is true', () => {
+  it('should return focus option styles when isFocused is true', () => {
     const styles = createStyles();
     const state = {
       isFocused: true,
@@ -285,12 +294,8 @@ describe('filterOption()', () => {
     text: 'Design System Support',
   };
   it('should return true when option text contains "input" text', () => {
-    expect(filterOption({ data: option }, 'd')).toBe(true);
-    expect(filterOption({ data: option }, 'D')).toBe(true);
-    expect(filterOption({ data: option }, 'design ')).toBe(true);
-    expect(filterOption({ data: option }, 'design s')).toBe(true);
-    expect(filterOption({ data: option }, 'design S')).toBe(true);
-    expect(filterOption({ data: option }, 'suppo')).toBe(true);
+    expect(filterOption({ data: option }, 'DeSiGn s')).toBe(true);
+    expect(filterOption({ data: option }, 'SuPpo')).toBe(true);
   });
 
   it('should return false when option text does not contain "input" text', () => {
