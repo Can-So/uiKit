@@ -4,7 +4,6 @@ import { LocalUploadComponent, LocalUploadConfig } from '../localUpload';
 import { whenDomReady } from '../../util/documentReady';
 import dropzoneUI from './dropzoneUI';
 import { UploadEventPayloadMap } from '../..';
-import { messages } from '@atlaskit/media-ui';
 
 export interface DropzoneReactContext {
   intl?: IntlShape;

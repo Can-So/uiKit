@@ -34,9 +34,7 @@ export interface EditorViewOwnProps {
   readonly onError: (message: string) => void;
 }
 
-export type EditorViewProps = EditorViewStateProps &
-  EditorViewOwnProps &
-  InjectedIntlProps;
+export type EditorViewProps = EditorViewStateProps & EditorViewOwnProps;
 
 export interface EditorViewState {
   readonly dimensions: Dimensions;
@@ -45,7 +43,10 @@ export interface EditorViewState {
   readonly tool: Tool;
 }
 
-export class EditorView extends Component<EditorViewProps, EditorViewState> {
+export class EditorView extends Component<
+  EditorViewProps & InjectedIntlProps,
+  EditorViewState
+> {
   private loadParameters?: LoadParameters;
   private rootDiv?: HTMLDivElement;
   state: EditorViewState = {

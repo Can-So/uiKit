@@ -5,7 +5,11 @@ import Spinner from '@atlaskit/spinner';
 import { FlagGroup } from '@atlaskit/flag';
 import { Card } from '@atlaskit/media-card';
 import { MediaCollectionItem } from '@atlaskit/media-store';
-import { fakeContext } from '@atlaskit/media-test-helpers';
+import {
+  fakeContext,
+  fakeIntl,
+  mountWithIntlContext,
+} from '@atlaskit/media-test-helpers';
 import { Context } from '@atlaskit/media-core';
 import { State, SelectedItem, LocalUpload } from '../../../../../domain';
 import {
@@ -43,7 +47,7 @@ const createConnectedComponent = (
 ) => {
   const store = mockStore(state);
   const dispatch = store.dispatch;
-  const root = mount(
+  const root = mountWithIntlContext(
     <Provider store={store}>
       <ConnectedUploadViewWithStore
         mpBrowser={new Browser(context) as any}
@@ -51,12 +55,8 @@ const createConnectedComponent = (
         recentsCollection="some-collection-name"
       />
     </Provider>,
-    {
-      context: reactContext,
-      childContextTypes: {
-        getAtlaskitAnalyticsEventHandlers() {},
-      },
-    },
+    reactContext,
+    { getAtlaskitAnalyticsEventHandlers() {} },
   );
   const component = root.find(StatelessUploadView);
   return { component, dispatch, root, context };
@@ -96,6 +96,7 @@ describe('<StatelessUploadView />', () => {
           onEditorShowImage={() => {}}
           onEditRemoteImage={() => {}}
           setUpfrontIdDeferred={setUpfrontIdDeferred}
+          intl={fakeIntl}
         />
       </Provider>
     );
