@@ -24,7 +24,7 @@ export default md`
 
 The only pre-requisite is that you must use styled-components so that the styles exported by the theme package are evaluated properly. 
 If you are not already using styled-components in your code but you are using Atlaksit components then you already have styled-components in your 
-application as it is peer-dependency in the components, therefore using it in your code should not have major impact on your bundle size.
+application as it is peer-dependency in the components, therefore using it in your code should not have a major impact on your bundle size.
 
 To migrate to @atlaskit/theme package we can replace the imports from util-shared-styles package with theme package.
 
