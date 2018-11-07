@@ -1,0 +1,1 @@
+- Support advanced i18n mode in MediaPicker
