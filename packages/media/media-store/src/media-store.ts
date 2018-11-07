@@ -103,9 +103,11 @@ export class MediaStore {
 
   createUpload(
     createUpTo: number = 1,
+    collectionName?: string,
   ): Promise<MediaStoreResponse<MediaUpload[]>> {
     return this.request(`/upload`, {
       method: 'POST',
+      authContext: { collectionName },
       params: {
         createUpTo,
       },

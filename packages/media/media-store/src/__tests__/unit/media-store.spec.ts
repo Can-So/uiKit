@@ -76,6 +76,35 @@ describe('MediaStore', () => {
           });
         });
       });
+
+      it('should pass collection name to the authContext', async () => {
+        const data: MediaUpload[] = [
+          { id: 'some-upload-id', created: 123, expires: 456 },
+        ];
+
+        fetchMock.mock(`begin:${baseUrl}/upload`, {
+          body: {
+            data,
+          },
+          status: 201,
+        });
+
+        mediaStore.request = jest
+          .fn()
+          .mockReturnValue(Promise.resolve({ json() {} }));
+        await mediaStore.createUpload(undefined, 'my-collection');
+
+        expect(mediaStore.request).toBeCalledWith('/upload', {
+          authContext: {
+            collectionName: 'my-collection',
+          },
+          headers: {
+            Accept: 'application/json',
+          },
+          method: 'POST',
+          params: { createUpTo: 1 },
+        });
+      });
     });
 
     describe('uploadChunk', () => {

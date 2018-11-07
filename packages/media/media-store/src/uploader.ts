@@ -63,7 +63,7 @@ export const uploadFile = (
   const { content, collection, name, mimeType } = file;
   const occurrenceKey = uuid.v4();
   const deferredUploadId = store
-    .createUpload()
+    .createUpload(1, collection)
     .then(response => response.data[0].id);
   const deferredEmptyFile = store.createFile({ collection, occurrenceKey });
   const { response, cancel } = chunkinator(
