@@ -25,7 +25,7 @@ export type TypeAheadHandler = {
     item: TypeAheadItem,
     insert: (
       node: Node | Object | string,
-      opts?: { [key: string]: boolean },
+      opts?: { selectInlineNode?: boolean },
     ) => Transaction,
   ) => Transaction | false;
 };

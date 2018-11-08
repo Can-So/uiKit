@@ -67,7 +67,7 @@ export const selectItem = (
   return withTypeAheadQueryMarkPosition(state, (start, end) => {
     const insert = (
       maybeNode?: Node | Object | string,
-      opts: { [key: string]: boolean } = {},
+      opts: { selectInlineNode?: boolean } = {},
     ) => {
       let tr = state.tr;
 
@@ -110,10 +110,7 @@ export const selectItem = (
          *
          */
       } else if (node.isInline) {
-        const fragment = Fragment.fromArray([
-          node,
-          ...(opts.addTrailingSpace ? [state.schema.text(' ')] : []),
-        ]);
+        const fragment = Fragment.fromArray([node, state.schema.text(' ')]);
 
         tr = tr.replaceWith(start, start, fragment);
 

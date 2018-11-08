@@ -9,7 +9,7 @@ export type QuickInsertItem = TypeAheadItem & {
   action: (
     insert: (
       node?: Node | Object | string,
-      opts?: { [key: string]: boolean },
+      opts?: { selectInlineNode?: boolean },
     ) => Transaction,
     state: EditorState,
   ) => Transaction | false;
