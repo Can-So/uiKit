@@ -1,15 +1,9 @@
 // @flow
 
 import type { ElementConfig } from 'react';
-import { UIController, ViewController } from '../../../';
+import type { WithNavigationViewControllerProps } from '../../../view-controller/types';
+import type { WithNavigationUIControllerProps } from '../../../ui-controller/types';
 import ConnectedItem from '../ConnectedItem';
-
-type InjectedProps = {|
-  /** Internal prop injected by withNavigationUI HOC */
-  navigationUIController: UIController,
-  /** Internal prop injected by withNavigationViewController HOC */
-  navigationViewController: ViewController,
-|};
 
 export type ExternalGoToItemProps = {
   ...$Exact<ElementConfig<typeof ConnectedItem>>,
@@ -20,6 +14,7 @@ export type ExternalGoToItemProps = {
 };
 
 export type GoToItemProps = {
-  ...InjectedProps,
+  ...$Exact<WithNavigationViewControllerProps>,
+  ...$Exact<WithNavigationUIControllerProps>,
   ...$Exact<ExternalGoToItemProps>,
 };

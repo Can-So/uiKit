@@ -1,11 +1,8 @@
 // @flow
 
-import React, { type ComponentType, type ElementConfig } from 'react';
+import React, { type ComponentType } from 'react';
 import ViewControllerSubscriber from './ViewControllerSubscriber';
-
-export type ViewControllerWrappedComp<C> = ComponentType<
-  $Diff<ElementConfig<$Supertype<C>>, { navigationViewController: any }>,
->;
+import type { ViewControllerWrappedComp } from './types';
 
 export default <P: {}, C: ComponentType<P>>(
   WrappedComponent: C,

@@ -1,9 +1,11 @@
 // @flow
 
 import React, { Component } from 'react';
+import type { WithThemeProps } from '../../types';
 import withTheme, { withContentTheme, withGlobalTheme } from '../../withTheme';
 
 type FooProps = {
+  ...$Exact<WithThemeProps>,
   alwaysRequired: string,
   optional?: string,
   requiredButHasDefault: string,
@@ -17,13 +19,29 @@ class Foo extends Component<FooProps> {
   }
 }
 
+const mockTheme = {
+  mode: {
+    globalItem: () => ({ itemBase: {}, itemWrapper: {}, badgeWrapper: {} }),
+    globalNav: () => ({}),
+    heading: () => ({ product: {}, container: {} }),
+    item: () => ({ product: {}, container: {} }),
+    contentNav: () => ({ product: {}, container: {} }),
+    scrollHint: () => ({ product: {}, container: {} }),
+    section: () => ({ product: {}, container: {} }),
+    separator: () => ({ product: {}, container: {} }),
+    skeletonItem: () => ({ product: {}, container: {} }),
+  },
+};
+
 /**
  * Foo
  */
-<Foo alwaysRequired="always" />;
+<Foo alwaysRequired="always" theme={mockTheme} />;
 
 // $ExpectError - missing alwaysRequired
-<Foo />;
+<Foo theme={mockTheme} />;
+// $ExpectError - missing theme
+<Foo alwaysRequired="always" />;
 // $ExpectError - requiredButHasDefault wrong type
 <Foo alwaysRequired="always" requiredButHasDefault={5} />;
 // $ExpectError - optional wrong type
@@ -108,3 +126,27 @@ const FooWithDoubleGlobalTheme = withGlobalTheme(withGlobalTheme(Foo));
 <FooWithDoubleGlobalTheme alwaysRequired="always" requiredButHasDefault={5} />;
 // $ExpectError - optional wrong type
 <FooWithDoubleGlobalTheme alwaysRequired="always" optional={5} />;
+
+/**
+ * Bar
+ */
+
+type BarProps = {
+  theme: string,
+};
+class Bar extends Component<BarProps> {
+  render() {
+    return null;
+  }
+}
+
+<Bar theme="test" />;
+
+/**
+ * BarWithTheme
+ */
+
+// $ExpectError - Bar props are incompatible with HOC injected prop
+const BarWithTheme = withTheme()(Bar);
+
+<BarWithTheme />;

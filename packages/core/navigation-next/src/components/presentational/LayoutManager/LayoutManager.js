@@ -59,7 +59,8 @@ function defaultTooltipContent(isCollapsed: boolean) {
     : { text: 'Collapse', char: '[' };
 }
 
-type PageProps = CollapseListeners & {
+type PageProps = {
+  ...$Exact<CollapseListeners>,
   children: Node,
   flyoutIsOpen: boolean,
   innerRef: Ref<'div'>,

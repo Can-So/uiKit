@@ -1,9 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
+import UIController from '../../UIController';
 import withNavigationUIController from '../../withNavigationUIController';
+import type { WithNavigationUIControllerProps } from '../../types';
 
 type FooProps = {
+  ...$Exact<WithNavigationUIControllerProps>,
   alwaysRequired: string,
   optional?: string,
   requiredButHasDefault: string,
@@ -20,10 +23,15 @@ class Foo extends Component<FooProps> {
 /**
  * Foo
  */
-<Foo alwaysRequired="always" />;
+<Foo
+  alwaysRequired="always"
+  navigationUIController={new UIController({}, false)}
+/>;
 
 // $ExpectError - missing alwaysRequired
-<Foo />;
+<Foo navigationUIController={new UIController({}, false)} />;
+// $ExpectError - missing navigationUIController
+<Foo alwaysRequired="always" />;
 // $ExpectError - requiredButHasDefault wrong type
 <Foo alwaysRequired="always" requiredButHasDefault={5} />;
 // $ExpectError - optional wrong type
@@ -59,3 +67,27 @@ const FooDoubleTrouble = withNavigationUIController(
 <FooDoubleTrouble alwaysRequired="always" requiredButHasDefault={5} />;
 // $ExpectError - optional wrong type
 <FooDoubleTrouble alwaysRequired="always" optional={5} />;
+
+/**
+ * Bar
+ */
+
+type BarProps = {
+  navigationUIController: string,
+};
+class Bar extends Component<BarProps> {
+  render() {
+    return null;
+  }
+}
+
+<Bar navigationUIController="test" />;
+
+/**
+ * BarWithNavigationUIController
+ */
+
+// $ExpectError - Bar props are incompatible with HOC injected prop
+const BarWithNavigationUIController = withNavigationUIController(Bar);
+
+<BarWithNavigationUIController />;

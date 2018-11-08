@@ -2,7 +2,7 @@
 
 import type { ComponentType, ElementRef, Node } from 'react';
 
-import UIController from '../../../ui-controller/UIController';
+import type { WithNavigationUIControllerProps } from '../../../ui-controller/types';
 
 export type CollapseListener = (HTMLElement, boolean) => void;
 
@@ -10,7 +10,7 @@ export type CollapseToggleTooltipContent = (
   isCollapsed: boolean,
 ) => { text: string, char: string } | null;
 
-export type CollapseListeners = {
+export type CollapseListeners = {|
   /** Called when the navigation begins expanding. */
   onExpandStart?: CollapseListener,
   /** Called when the navigation completes expanding. */
@@ -19,13 +19,13 @@ export type CollapseListeners = {
   onCollapseStart?: CollapseListener,
   /** Called when the navigation completes collapsing. */
   onCollapseEnd?: CollapseListener,
-};
+|};
 
 type NonStringRef<T> = {
   current: ElementRef<T>,
 } | null;
 
-export type ExperimentalFeatureFlags = {
+export type ExperimentalFeatureFlags = {|
   /**
     NOTE: This property is experimental and may be removed in a minor release.
 
@@ -33,13 +33,14 @@ export type ExperimentalFeatureFlags = {
     mouse over the nav area whilst in a collapsed state.
   */
   experimental_flyoutOnHover: boolean,
-};
+|};
 
 export type GetRefs = ({
   expandCollapseAffordance: NonStringRef<'button'>,
 }) => void;
 
-export type ConnectedLayoutManagerProps = CollapseListeners & {
+export type ConnectedLayoutManagerProps = {
+  ...$Exact<CollapseListeners>,
   /** Your page content. */
   children: Node,
   /** A component which will render the container navigation layer. */
@@ -55,7 +56,8 @@ export type ConnectedLayoutManagerProps = CollapseListeners & {
   collapseToggleTooltipContent?: CollapseToggleTooltipContent,
 };
 
-export type LayoutManagerProps = ConnectedLayoutManagerProps &
-  ExperimentalFeatureFlags & {
-    navigationUIController: UIController,
-  };
+export type LayoutManagerProps = {
+  ...$Exact<ConnectedLayoutManagerProps>,
+  ...$Exact<ExperimentalFeatureFlags>,
+  ...$Exact<WithNavigationUIControllerProps>,
+};

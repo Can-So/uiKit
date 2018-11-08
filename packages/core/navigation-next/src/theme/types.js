@@ -1,5 +1,7 @@
 // @flow
 
+import type { ComponentType, ElementConfig } from 'react';
+import type { Diffable } from '../common/types';
 import type {
   GlobalItemPresentationProps,
   GlobalItemStyles,
@@ -102,6 +104,14 @@ export type ModeColors = {
   product: ContextColors,
 };
 
-export type ThemeProps = {
+/**
+ * withTheme
+ */
+
+export type WithThemeProps = {
   theme: Theme,
 };
+
+export type ThemeWrappedComp<C> = ComponentType<
+  $Diff<ElementConfig<$Supertype<C>>, Diffable<WithThemeProps>>,
+>;

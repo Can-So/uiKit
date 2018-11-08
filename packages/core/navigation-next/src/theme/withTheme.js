@@ -1,21 +1,18 @@
 // @flow
 
-import React, {
-  Component,
-  type ComponentType,
-  type ElementConfig,
-} from 'react';
+import React, { Component, type ComponentType } from 'react';
 import { channel } from 'emotion-theming';
 import PropTypes from 'prop-types';
 
 import { light } from './modes';
-import type { GlobalTheme, ProductTheme, Theme } from './types';
+import type {
+  GlobalTheme,
+  ProductTheme,
+  Theme,
+  ThemeWrappedComp,
+} from './types';
 
 type State = { theme: Theme };
-
-export type ThemeWrappedComp<C> = ComponentType<
-  $Diff<ElementConfig<$Supertype<C>>, { theme: any }>,
->;
 
 const withTheme = <P: {}, C: ComponentType<P>>(
   defaultTheme: Theme,
