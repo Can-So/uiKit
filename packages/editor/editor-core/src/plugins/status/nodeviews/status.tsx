@@ -5,7 +5,7 @@ import { Node as PMNode } from 'prosemirror-model';
 import { Selection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Status } from '@atlaskit/status';
-import { pluginKey, StatusState } from '../plugin';
+import { pluginKey } from '../plugin';
 import { setStatusPickerAt } from '../actions';
 import { colors } from '@atlaskit/theme';
 
@@ -64,14 +64,18 @@ class StatusNodeView extends React.Component<Props & InjectedIntlProps, State> {
 
   componentDidMount() {
     const { view } = this.props;
-    const pluginState: StatusState = pluginKey.getState(view.state);
-    pluginState.selectionChanges.subscribe(this.handleSelectionChange);
+    const { selectionChanges } = pluginKey.getState(view.state);
+    if (selectionChanges) {
+      selectionChanges.subscribe(this.handleSelectionChange);
+    }
   }
 
   componentWillUnmount() {
     const { view } = this.props;
-    const pluginState: StatusState = pluginKey.getState(view.state);
-    pluginState.selectionChanges.unsubscribe(this.handleSelectionChange);
+    const { selectionChanges } = pluginKey.getState(view.state);
+    if (selectionChanges) {
+      selectionChanges.unsubscribe(this.handleSelectionChange);
+    }
   }
 
   private handleSelectionChange = (
