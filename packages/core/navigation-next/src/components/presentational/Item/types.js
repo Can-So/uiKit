@@ -4,7 +4,7 @@ import type { ComponentType, Node, Ref } from 'react';
 import type { DraggableProps } from 'react-beautiful-dnd';
 import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
 
-import type { StyleReducer, ProductTheme } from '../../../theme/types';
+import type { StyleReducerWithState, ProductTheme } from '../../../theme/types';
 import type { InteractionState } from '../InteractionStateManager/types';
 
 type Spacing = 'compact' | 'default';
@@ -24,7 +24,7 @@ export type ItemPresentationProps = {
   spacing: Spacing,
 };
 
-export type ItemBaseProps = {
+export type ItemBaseProps = {|
   /** A component to render after the text. Typically used to render an icon or
    * a badge. This component will be passed the current UI state of the Item. */
   after?: ComponentType<ItemPresentationProps>,
@@ -56,7 +56,7 @@ export type ItemBaseProps = {
   /** A function which will be passed the default styles object for the Item as
    * well as its current state, and should return a new styles object. Allows
    * you to patch and customise the Item's appearance. */
-  styles: StyleReducer,
+  styles: StyleReducerWithState,
   /** The string to render as a 'description' under the main text content in the
    * Item. */
   subText?: string,
@@ -64,22 +64,27 @@ export type ItemBaseProps = {
   target?: string,
   /** A string or Node to render as the main content of the Item. */
   text: Node,
-};
+|};
 
-export type ItemRenderComponentProps = ItemBaseProps & {
+export type ItemRenderComponentProps = {
+  ...ItemBaseProps,
   children: Node,
   className: string,
 };
 
-export type ItemProps = ItemBaseProps & {
+export type ItemProps = {|
+  ...ItemBaseProps,
   /** A custom component to render instead of the default wrapper component.
    * Could used to render a router Link, for example. The component will be
    * provided with a className, children and onClick props, which should be passed on to the
    * element you render. If this is a SortableItem, you will also need to spread `draggableProps` and
    * set ref of `innerRef` to your outermost DOM element. */
   component?: ComponentType<ItemRenderComponentProps>,
-};
+|};
 
-export type ItemPrimitiveProps = ItemProps &
-  WithAnalyticsEventsProps &
-  InteractionState & { theme: ProductTheme };
+export type ItemPrimitiveProps = {|
+  ...ItemProps,
+  ...WithAnalyticsEventsProps,
+  ...InteractionState,
+  theme: ProductTheme,
+|};
