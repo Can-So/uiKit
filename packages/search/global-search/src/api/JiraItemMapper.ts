@@ -46,7 +46,7 @@ export const addJiraResultQueryParams = (
 
 const extractSpecificAttributes = (
   attributes: JiraItemAttributes,
-): Partial<JiraResult> => {
+): Partial<JiraResult> | null => {
   const type = attributes['@type'];
   switch (type) {
     case 'issue':
@@ -70,7 +70,7 @@ const extractSpecificAttributes = (
         projectType: attributes.projectType as JiraProjectType, // projectType maps directly to JiraProjectType enum at the moment for convenience
       };
   }
-  return {};
+  return null;
 };
 
 const extractAvatarUrl = ({ url = '', urls = {} } = {}) => {
