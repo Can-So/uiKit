@@ -1,6 +1,6 @@
 // Russian
 export default {
-  'fabric.elements.user-picker.placeholder': 'Find a person...',
-  'fabric.elements.user-picker.multi.remove-item': 'remove',
-  'fabric.elements.user-picker.single.clear': 'clear',
+  'fabric.elements.user-picker.placeholder': 'Найти пользователя…',
+  'fabric.elements.user-picker.multi.remove-item': 'Remove',
+  'fabric.elements.user-picker.single.clear': 'Clear',
 };
