@@ -2,8 +2,11 @@ const BASE_ZOOM_LEVELS = [0.06, 0.12, 0.24, 0.48, 1, 1.5, 2, 4, 6, 8];
 
 const sortNumbers = (nums: number[]) => nums.sort((a, b) => a - b); // default sorting is alphabetically
 
-const deduplicated = (nums: number[]): number[] =>
-  sortNumbers(nums).filter((num, pos) => pos === 0 || num !== nums[pos - 1]);
+const deduplicated = (nums: number[]): number[] => {
+  return sortNumbers(nums).filter(
+    (num, pos) => pos === 0 || num !== nums[pos - 1],
+  );
+};
 
 export class ZoomLevel {
   public readonly value: number;
@@ -24,7 +27,9 @@ export class ZoomLevel {
   get zoomLevels(): number[] {
     return deduplicated(
       sortNumbers(
-        BASE_ZOOM_LEVELS.map(i => i * this.initialValue).concat(1), // make sure 100% is selectable
+        BASE_ZOOM_LEVELS.map(zoomLevel => zoomLevel * this.initialValue).concat(
+          1,
+        ), // make sure 100% is selectable
       ),
     ); // and that all levels are ordered
   }
