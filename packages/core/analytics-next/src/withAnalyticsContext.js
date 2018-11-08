@@ -14,12 +14,14 @@ type WithAnalyticsContextProps = {|
  * Intersections cause issues so we must use exact objects in conjunction with
  * object spreading instead - https://github.com/flowtype/flow-bin/issues/93#issuecomment-340687896
  */
-export default function withAnalyticsContext<P: {}, C: ComponentType<P>>(
-  defaultData: {} = {},
-): C => ComponentType<{
+export type AnalyticsContextWrappedComp<C> = ComponentType<{
   ...$Exact<WithAnalyticsContextProps>,
   ...$Exact<ElementConfig<$Supertype<C>>>,
-}> {
+}>;
+
+export default function withAnalyticsContext<P: {}, C: ComponentType<P>>(
+  defaultData: {} = {},
+): C => AnalyticsContextWrappedComp<C> {
   return WrappedComponent => {
     // $FlowFixMe - flow 0.67 doesn't know about forwardRef
     const WithAnalyticsContext = React.forwardRef((props, ref) => {
