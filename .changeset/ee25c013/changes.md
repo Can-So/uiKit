@@ -1,1 +1,0 @@
-- Fixes potential infinite loop in parseChangesetCommit
