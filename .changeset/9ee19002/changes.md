@@ -1,1 +1,0 @@
-- Upgrade react syntax highlighter to version that ships its own async loaded languages and supports SSR
