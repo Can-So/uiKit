@@ -41,7 +41,10 @@
   },
   "peerDependencies": {
     "react": "^16.4.0",
-    "styled-components": "^3.2.6"
+    "react-dom": "^16.4.2",
+    "styled-components": "^3.2.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "@atlaskit/analytics-listeners": "^4.0.0",
@@ -61,15 +64,13 @@
     "@atlaskit/toggle": "^5.0.10",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
-    "react-async-component": "^2.0.0",
-    "react-dom": "^16.4.2",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-async-component": "^2.0.0"
   },
   "scripts": {
-    "prebuild": "mkdir -p dist/esm/entrypoints && touch dist/esm/entrypoints/a.js",
-    "build": "npm run replace-entrypoint-imports-to-dist && cp -r dist/esm/entrypoints/*.js ./",
+    "build": "echo 'building nav-next'",
+    "prebuild-entrypoints": "mkdir -p dist/esm/entrypoints && touch dist/esm/entrypoints/a.js",
+    "build-entrypoints": "npm run replace-entrypoint-imports-to-dist && cp -r dist/esm/entrypoints/*.js ./",
     "replace-entrypoint-imports-to-dist": "grep -rl \"'../\" ./dist/esm/entrypoints | xargs sed -i '' -e \"s@'../@'./dist/esm/@g\"",
-    "postbuild": "rm -rf dist/esm/entrypoints dist/cjs/entrypoints dist/a.js a.js"
+    "postbuild-entrypoints": "rm -rf dist/esm/entrypoints dist/cjs/entrypoints dist/a.js a.js"
   }
 }
