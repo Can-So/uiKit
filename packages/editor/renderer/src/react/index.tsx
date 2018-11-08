@@ -234,7 +234,7 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
   }
 
   private getHeadingId(node: Node) {
-    if (this.disableHeadingIDs || !node.content) {
+    if (this.disableHeadingIDs || !node.content.size) {
       return;
     }
 

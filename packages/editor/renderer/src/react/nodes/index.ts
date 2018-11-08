@@ -7,7 +7,6 @@ import BodiedExtension, {
 } from './bodiedExtension';
 import BulletList from './bulletList';
 import CodeBlock from './codeBlock';
-import { Props as DecisionItemProps } from './decisionItem';
 import DecisionList from './decisionList';
 import Doc from './doc';
 import Extension, { Props as ExtensionProps } from './extension';
@@ -290,7 +289,6 @@ export {
   CodeBlock,
   Date,
   DecisionItem,
-  DecisionItemProps,
   DecisionList,
   Doc,
   Emoji,

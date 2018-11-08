@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PureComponent, Children, ReactNode } from 'react';
+import { PureComponent, ReactNode } from 'react';
 import { ProviderFactory, WithProviders } from '@atlaskit/editor-common';
 import TaskItemWithProviders from './task-item-with-providers';
 import { RendererContext } from '../';
@@ -60,12 +60,6 @@ export default class TaskItem extends PureComponent<Props, {}> {
   };
 
   render() {
-    const { children } = this.props;
-
-    if (Children.count(children) === 0) {
-      return null;
-    }
-
     return (
       <WithProviders
         providers={['taskDecisionProvider', 'contextIdentifierProvider']}
