@@ -10,7 +10,7 @@
 .*/node_modules/babel-normalize-comments/.*
 .*/node_modules/extract-react-types/.*
 # Older versions of button which are transitive deps may contain flow errors/warnings
-.*/node_modules/@atlaskit/button/.*
+<PROJECT_ROOT>/node_modules/@atlaskit/button/.*
 .*/.git/.*
 [untyped]
 .*/node_modules/react-select
