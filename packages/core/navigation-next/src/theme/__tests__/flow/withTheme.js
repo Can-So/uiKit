@@ -69,3 +69,42 @@ const FooWithGlobalTheme = withGlobalTheme(Foo);
 <FooWithGlobalTheme alwaysRequired="always" requiredButHasDefault={5} />;
 // $ExpectError - optional wrong type
 <FooWithGlobalTheme alwaysRequired="always" optional={5} />;
+
+/**
+ * FooWithDoubleTheme - will it work with multiple HOCs
+ */
+const FooWithDoubleTheme = withTheme()(withTheme()(Foo));
+
+<FooWithDoubleTheme alwaysRequired="always" />;
+// $ExpectError - missing alwaysRequired
+<FooWithDoubleTheme />;
+// $ExpectError - requiredButHasDefault wrong type
+<FooWithDoubleTheme alwaysRequired="always" requiredButHasDefault={5} />;
+// $ExpectError - optional wrong type
+<FooWithDoubleTheme alwaysRequired="always" optional={5} />;
+
+/**
+ * FooWithDoubleContentTheme - will it work with multiple HOCs
+ */
+const FooWithDoubleContentTheme = withContentTheme(withContentTheme(Foo));
+
+<FooWithDoubleContentTheme alwaysRequired="always" />;
+// $ExpectError - missing alwaysRequired
+<FooWithDoubleContentTheme />;
+// $ExpectError - requiredButHasDefault wrong type
+<FooWithDoubleContentTheme alwaysRequired="always" requiredButHasDefault={5} />;
+// $ExpectError - optional wrong type
+<FooWithDoubleContentTheme alwaysRequired="always" optional={5} />;
+
+/**
+ * FooWithDoubleGlobalTheme - will it work with multiple HOCs
+ */
+const FooWithDoubleGlobalTheme = withGlobalTheme(withGlobalTheme(Foo));
+
+<FooWithDoubleGlobalTheme alwaysRequired="always" />;
+// $ExpectError - missing alwaysRequired
+<FooWithDoubleGlobalTheme />;
+// $ExpectError - requiredButHasDefault wrong type
+<FooWithDoubleGlobalTheme alwaysRequired="always" requiredButHasDefault={5} />;
+// $ExpectError - optional wrong type
+<FooWithDoubleGlobalTheme alwaysRequired="always" optional={5} />;
