@@ -147,8 +147,8 @@ export class CardViewBase extends React.Component<
     const wrapperDimensions = dimensions
       ? dimensions
       : isFileLikeIdentifier
-        ? getDefaultCardDimensions(appearance)
-        : undefined;
+      ? getDefaultCardDimensions(appearance)
+      : undefined;
     let card;
 
     if (mediaItemType === 'link') {

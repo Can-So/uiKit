@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { gridSize, fontSize, math } from '@atlaskit/theme';
 
-const height = gridSize() * 3 / parseInt(fontSize(), 10);
+const height = (gridSize() * 3) / parseInt(fontSize(), 10);
 
 const BreadcrumbsItemElement = styled.div`
   display: flex;

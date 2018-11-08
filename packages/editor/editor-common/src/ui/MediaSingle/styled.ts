@@ -108,7 +108,7 @@ const Wrapper: React.ComponentClass<
   &::after {
     content: '';
     display: block;
-    padding-bottom: ${p => p.height / p.width * 100}%;
+    padding-bottom: ${p => (p.height / p.width) * 100}%;
   }
 
   & > div {

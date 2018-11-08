@@ -14,7 +14,7 @@ import { messageEditor, lozenge } from './_message-renderer-helpers';
  * number of tests have been skipped until move to snapshots.
  *
  * The remaining skipped tests for IE11/Edge are bugs that should be fixed for those browsers.
-*/
+ */
 
 BrowserTestCase(
   'mention-1.ts: user can see mention inside blockquote',

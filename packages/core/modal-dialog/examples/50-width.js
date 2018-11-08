@@ -40,18 +40,20 @@ export default class ModalDemo extends Component<{}, { isOpen: any }> {
           <ButtonGroup>{units.map(btn)}</ButtonGroup>
 
           <ModalTransition>
-            {allWidths.filter(w => w === isOpen).map(name => (
-              <ModalDialog
-                actions={actions}
-                key={name}
-                onClose={this.close}
-                heading={`Modal: ${String(name)}`}
-                width={name}
-                {...this.props}
-              >
-                <Lorem count="1" />
-              </ModalDialog>
-            ))}
+            {allWidths
+              .filter(w => w === isOpen)
+              .map(name => (
+                <ModalDialog
+                  actions={actions}
+                  key={name}
+                  onClose={this.close}
+                  heading={`Modal: ${String(name)}`}
+                  width={name}
+                  {...this.props}
+                >
+                  <Lorem count="1" />
+                </ModalDialog>
+              ))}
           </ModalTransition>
         </div>
       </ThemeProvider>

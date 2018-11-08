@@ -88,7 +88,9 @@ export default class FlagGroupExample extends Component<void, State> {
     return (
       <div>
         <FlagGroup onDismissed={this.dismissFlag}>
-          {this.state.flags.map(flag => <Flag actions={actions} {...flag} />)}
+          {this.state.flags.map(flag => (
+            <Flag actions={actions} {...flag} />
+          ))}
         </FlagGroup>
         <Button onClick={this.addFlag}>Add Flag</Button>
       </div>

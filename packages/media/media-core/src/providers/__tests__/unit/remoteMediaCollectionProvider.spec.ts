@@ -66,7 +66,10 @@ describe('RemoteMediaCollectionProvider', () => {
     // Load next page when we have finished loading the first one.
     const subscription1: Subscription = collectionProvider
       .observable()
-      .pipe(take(1), tap(() => collectionProvider.loadNextPage()))
+      .pipe(
+        take(1),
+        tap(() => collectionProvider.loadNextPage()),
+      )
       .subscribe({
         next: () => subscription1.unsubscribe(),
       });

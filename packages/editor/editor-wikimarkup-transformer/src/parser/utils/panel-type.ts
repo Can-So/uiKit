@@ -92,9 +92,9 @@ function parsePrgb(prgb: string): RGB | null {
   const result = prgb.match(COLOR_TYPE_REGEX.prgb);
   return result
     ? {
-        r: Math.floor(255 * parseInt(result[1], 10) / 100),
-        g: Math.floor(255 * parseInt(result[2], 10) / 100),
-        b: Math.floor(255 * parseInt(result[4], 10) / 100),
+        r: Math.floor((255 * parseInt(result[1], 10)) / 100),
+        g: Math.floor((255 * parseInt(result[2], 10)) / 100),
+        b: Math.floor((255 * parseInt(result[4], 10)) / 100),
       }
     : null;
 }

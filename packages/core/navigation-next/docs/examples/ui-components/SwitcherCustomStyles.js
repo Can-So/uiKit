@@ -153,7 +153,9 @@ export default class SwitcherCustomStyles extends React.Component<*, State> {
             styles={customStyles}
           />
           <SectionHeading>Section heading</SectionHeading>
-          {items.map(p => <Item key={p.text} {...p} />)}
+          {items.map(p => (
+            <Item key={p.text} {...p} />
+          ))}
         </Wrapper>
       </NavigationProvider>
     );
