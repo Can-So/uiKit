@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { status, uuid } from '@atlaskit/editor-common';
+import { status } from '@atlaskit/editor-common';
 import LabelIcon from '@atlaskit/icon/glyph/label';
 import { findDomRefAtPos } from 'prosemirror-utils';
-import { NodeSelection } from 'prosemirror-state';
 import { EditorPlugin } from '../../types';
 import createStatusPlugin, { StatusState, pluginKey } from './plugin';
 import WithPluginState from '../../ui/WithPluginState';
