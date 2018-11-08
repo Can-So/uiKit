@@ -1,1 +1,0 @@
-- Export `AppearanceType` flow type

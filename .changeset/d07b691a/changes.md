@@ -1,1 +1,0 @@
-- Make `width` prop optional and default it to 'narrow'
