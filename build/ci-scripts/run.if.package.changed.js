@@ -22,6 +22,7 @@ async function getAllFSChangesets(cwd) {
     .filter(file => fse.lstatSync(path.join(changesetBase, file)).isDirectory())
     .map(changesetDir => {
       const jsonPath = path.join(changesetBase, changesetDir, 'changes.json');
+      // $ExpectError
       return require(jsonPath);
     });
 }
