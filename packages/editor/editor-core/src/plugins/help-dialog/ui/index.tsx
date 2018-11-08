@@ -108,7 +108,9 @@ export const formatting: ((intl: InjectedIntl) => Format[]) = ({
     autoFormatting: () => (
       <span>
         <CodeLg>
-          **<FormattedMessage {...textFormattingMessages.bold} />**
+          **
+          <FormattedMessage {...textFormattingMessages.bold} />
+          **
         </CodeLg>
       </span>
     ),
@@ -137,7 +139,9 @@ export const formatting: ((intl: InjectedIntl) => Format[]) = ({
     autoFormatting: () => (
       <span>
         <CodeLg>
-          ~~<FormattedMessage {...advancedTextFormattingMessages.strike} />~~
+          ~~
+          <FormattedMessage {...advancedTextFormattingMessages.strike} />
+          ~~
         </CodeLg>
       </span>
     ),
@@ -217,7 +221,8 @@ export const formatting: ((intl: InjectedIntl) => Format[]) = ({
     autoFormatting: () => (
       <span>
         <CodeLg>
-          [<FormattedMessage {...insertBlockMessages.link} />](http://a.com)
+          [<FormattedMessage {...insertBlockMessages.link} />
+          ](http://a.com)
         </CodeLg>
       </span>
     ),
@@ -309,7 +314,9 @@ const imageAutoFormat: Format = {
   autoFormatting: () => (
     <span>
       <CodeLg>
-        ![<FormattedMessage {...messages.altText} />](http://www.image.com)
+        ![
+        <FormattedMessage {...messages.altText} />
+        ](http://www.image.com)
       </CodeLg>
     </span>
   ),

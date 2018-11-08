@@ -238,12 +238,11 @@ class DynamicTable extends Component<Props, State> {
             />
           </PaginationWrapper>
         )}
-        {!rowsExist &&
-          emptyBody && (
-            <LoadingContainer isLoading={isLoading} spinnerSize={LARGE}>
-              {emptyBody}
-            </LoadingContainer>
-          )}
+        {!rowsExist && emptyBody && (
+          <LoadingContainer isLoading={isLoading} spinnerSize={LARGE}>
+            {emptyBody}
+          </LoadingContainer>
+        )}
       </div>
     );
   }

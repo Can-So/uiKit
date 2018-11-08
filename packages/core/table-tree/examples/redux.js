@@ -57,9 +57,10 @@ class ReduxTree extends Component<*> {
   }
 }
 
-const ConnectedReduxTree = connect(mapStateToProps, mapDispatchToProps)(
-  ReduxTree,
-);
+const ConnectedReduxTree = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ReduxTree);
 
 function mapStateToProps(state) {
   return {

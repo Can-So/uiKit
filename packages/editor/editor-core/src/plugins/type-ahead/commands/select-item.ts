@@ -82,8 +82,8 @@ export const selectItem = (
           maybeNode instanceof Node
             ? maybeNode
             : typeof maybeNode === 'string'
-              ? state.schema.text(maybeNode)
-              : Node.fromJSON(state.schema, maybeNode);
+            ? state.schema.text(maybeNode)
+            : Node.fromJSON(state.schema, maybeNode);
       } catch (e) {
         // tslint:disable-next-line:no-console
         console.error(e);

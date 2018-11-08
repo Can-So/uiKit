@@ -129,7 +129,9 @@ export default class extends React.Component<*, State> {
             value={selected}
           />
           <SectionHeading>Section heading</SectionHeading>
-          {items.map(p => <Item key={p.text} {...p} />)}
+          {items.map(p => (
+            <Item key={p.text} {...p} />
+          ))}
         </Wrapper>
       </NavigationProvider>
     );

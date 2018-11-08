@@ -5,7 +5,7 @@ import { fontSize, gridSize, colors } from '@atlaskit/theme';
 
 const gridSizeUnitless = gridSize();
 
-const lineHeightDefault = gridSizeUnitless * 2 / fontSize();
+const lineHeightDefault = (gridSizeUnitless * 2) / fontSize();
 
 const getPlaceholderStyle = style => css`
   &::-webkit-input-placeholder {

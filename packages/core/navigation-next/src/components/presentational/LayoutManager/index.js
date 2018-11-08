@@ -8,9 +8,7 @@ import type { ConnectedLayoutManagerProps } from './types';
 
 const LayoutManagerWithNavigationUI = withNavigationUI(LayoutManager);
 
-export default class ConnectedLayoutManager extends Component<
-  ConnectedLayoutManagerProps,
-> {
+export default class ConnectedLayoutManager extends Component<ConnectedLayoutManagerProps> {
   render() {
     return <LayoutManagerWithNavigationUI {...this.props} />;
   }
