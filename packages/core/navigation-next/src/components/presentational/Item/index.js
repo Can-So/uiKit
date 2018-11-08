@@ -6,7 +6,7 @@ import {
   withAnalyticsEvents,
 } from '@atlaskit/analytics-next';
 
-import { navigationItemClicked } from '../../../common/analytics';
+// import { navigationItemClicked } from '../../../common/analytics';
 import InteractionStateManager from '../InteractionStateManager';
 import type { InteractionState } from '../InteractionStateManager/types';
 import { styleReducerNoOp } from '../../../theme';
