@@ -10,6 +10,7 @@ import SignInIcon from '@atlaskit/icon/glyph/sign-in';
 import QuestionIcon from '@atlaskit/icon/glyph/question-circle';
 import GlobalNavigation from '../../index';
 import ScreenTracker from '../../../ScreenTracker';
+import ItemComponent from '../../../ItemComponent';
 
 const DrawerContents = () => <div>drawer</div>;
 const EmojiAtlassianIcon = () => <button>EmojiAtlassianIcon</button>;
@@ -486,8 +487,7 @@ describe('GlobalNavigation', () => {
         />,
       );
 
-      // ItemComponent
-      expect(wrapper.find('_default').props().badgeCount).toBe(15);
+      expect(wrapper.find(ItemComponent).props().badgeCount).toBe(15);
     });
   });
 
@@ -676,8 +676,7 @@ describe('GlobalNavigation', () => {
         notificationCount: 5,
       });
 
-      // ItemComponent
-      expect(wrapper.find('_default').props().badgeCount).toBe(5);
+      expect(wrapper.find(ItemComponent).props().badgeCount).toBe(5);
     });
   });
 

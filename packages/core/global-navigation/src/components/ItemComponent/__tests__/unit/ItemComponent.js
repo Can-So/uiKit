@@ -55,9 +55,7 @@ describe('ItemComponent', () => {
 
   it('should include "NavigationAnalyticsContext" with the correct parameters for notification', () => {
     const wrapper = mount(<ItemComponent badgeCount={10} icon={() => null} />);
-    expect(
-      wrapper.find('NavigationAnalyticsContext').props().data,
-    ).toMatchObject({
+    expect(wrapper.find('NavigationAnalyticsContext').props().data).toEqual({
       attributes: {
         badgeCount: 10,
       },
