@@ -22,7 +22,7 @@ function parseChangesetCommit(commitMsg) {
     curLine = lines.shift();
   }
 
-  // If curLine is undefined, we never didnt find the closing separator and this
+  // If curLine is undefined, we didn't find the closing separator and this
   // is not a changeset
   if (curLine === undefined) {
     return undefined;
