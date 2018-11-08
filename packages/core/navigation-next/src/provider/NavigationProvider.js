@@ -31,9 +31,7 @@ function defaultSetCache(state: UIControllerCacheShape) {
   }
 }
 
-export default class NavigationProvider extends Component<
-  NavigationProviderProps,
-> {
+export default class NavigationProvider extends Component<NavigationProviderProps> {
   static defaultProps = {
     cache: {
       get: defaultGetCache,

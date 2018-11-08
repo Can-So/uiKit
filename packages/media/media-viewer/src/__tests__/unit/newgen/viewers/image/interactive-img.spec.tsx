@@ -36,16 +36,14 @@ function createFixture() {
 }
 
 function clickZoomIn(el: ReactWrapper<any, any>) {
-  el
-    .find(ZoomControls)
+  el.find(ZoomControls)
     .find(Button)
     .last()
     .simulate('click');
 }
 
 function clickZoomOut(el: ReactWrapper<any, any>) {
-  el
-    .find(ZoomControls)
+  el.find(ZoomControls)
     .find(Button)
     .first()
     .simulate('click');

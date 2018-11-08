@@ -4,10 +4,11 @@ import { commonMacro } from './common-macro';
 
 export function adfMacro(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token {
-  return commonMacro(input, schema, {
+  return commonMacro(input.substring(position), schema, {
     opening: /^\{adf(?::([^\{\n\}]*))?\}/,
     closing: /\{adf\}/,
     rawContentProcessor,

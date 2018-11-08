@@ -1,5 +1,45 @@
 # @atlaskit/editor-mobile-bridge
 
+## 5.4.0
+- [minor] [611d8a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/611d8a5):
+
+  - ED-5707 Enable pinch to zoom in Renderer
+
+## 5.3.0
+- [minor] [13a108f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/13a108f):
+
+  - Updated package bundle
+
+## 5.2.4
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/renderer@30.0.0
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/task-decision@11.0.2
+  - @atlaskit/media-core@24.4.0
+
+## 5.2.3
+- [patch] [f6c3f01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6c3f01):
+
+  - ED-5586: Removes padding from editor and renderer for mobile.
+
+## 5.2.2
+- [patch] [3756327](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3756327):
+
+  - ED-5588: Fixes font size changing when rotating viewport on iOS.
+
+## 5.2.1
+- [patch] [a9eb99f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a9eb99f):
+
+  - ED-5510: fix deleting last character in a cell in Safari
+
+## 5.2.0
+- [minor] [f5696d5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5696d5):
+
+  - ED-5606: Added support for sending task update events to native for handling
+
 ## 5.1.0
 - [minor] [d793999](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d793999):
 

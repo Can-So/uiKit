@@ -1,5 +1,23 @@
 # @atlaskit/media-image
 
+## 43.0.0
+- [minor] [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+
+  - Allow to inline play video files in media-card
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+
+## 42.0.0
+- [major] [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+
+  - remove CardList component from media-card
+
+## 41.4.0
+- [minor] [abef80b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abef80b):
+
+  - ED-5527: apply max-width: 100% and pass container size to Card as dimension
+
 ## 41.3.0
 - [minor] [4718333](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4718333):
 

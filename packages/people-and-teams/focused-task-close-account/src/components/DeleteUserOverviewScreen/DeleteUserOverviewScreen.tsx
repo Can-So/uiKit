@@ -76,7 +76,9 @@ export class DeleteUserOverviewScreen extends React.Component<
                   values={{ fullName: user.fullName }}
                 />
                 <Styled.AccessibleSitesList>
-                  {accessibleSites.map((url, idx) => <li key={idx}>{url}</li>)}
+                  {accessibleSites.map((url, idx) => (
+                    <li key={idx}>{url}</li>
+                  ))}
                 </Styled.AccessibleSitesList>
                 <FormattedMessage
                   {...this.selectAdminOrSelfCopy(

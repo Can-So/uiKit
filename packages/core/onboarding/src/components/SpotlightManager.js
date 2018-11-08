@@ -95,11 +95,13 @@ export default class SpotlightManager extends PureComponent<
     this.setState(state => ({ spotlightCount: state.spotlightCount - 1 }));
   };
 
-  getStateProviderValue = memoizeOne((targets): SpotlightContext => ({
-    opened: this.spotlightOpen,
-    closed: this.spotlightClose,
-    targets,
-  }));
+  getStateProviderValue = memoizeOne(
+    (targets): SpotlightContext => ({
+      opened: this.spotlightOpen,
+      closed: this.spotlightClose,
+      targets,
+    }),
+  );
 
   render() {
     const { blanketIsTinted, children, component: Tag } = this.props;

@@ -12,9 +12,7 @@ import {
 } from './primitives';
 import type { ContentNavigationProps } from './types';
 
-export default class ContentNavigation extends Component<
-  ContentNavigationProps,
-> {
+export default class ContentNavigation extends Component<ContentNavigationProps> {
   isMounted = false;
 
   componentDidMount() {

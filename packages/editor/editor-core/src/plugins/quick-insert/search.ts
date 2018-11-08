@@ -140,9 +140,8 @@ export function find(
        * - potential match when query is one word
        * - exact match when query has more words
        */
-      .filter(
-        ({ distance }) =>
-          singleWord(query) ? distance !== Infinity : distance === 0,
+      .filter(({ distance }) =>
+        singleWord(query) ? distance !== Infinity : distance === 0,
       )
       // post-sort items by distance ascending, putting prioritary items last
       .sort(

@@ -83,7 +83,7 @@ export default new Plugin({
             if (indentText.endsWith(token.repeat(size))) {
               dispatch(
                 state.tr.delete(
-                  $cursor.pos - (size - indentText.length % size || size),
+                  $cursor.pos - (size - (indentText.length % size) || size),
                   $cursor.pos,
                 ),
               );

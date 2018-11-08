@@ -16,13 +16,15 @@ import { pluginKey as widthPluginKey } from '../../width';
 import { stateKey as reactNodeViewStateKey } from '../../../plugins/base/pm-plugins/react-nodeview';
 import { setNodeSelection } from '../../../utils';
 import ResizableMediaSingle from '../ui/ResizableMediaSingle';
-import { displayGrid } from '../../../plugins/grid';
+import { createDisplayGrid } from '../../../plugins/grid';
+import { EventDispatcher } from '../../../event-dispatcher';
 
 const DEFAULT_WIDTH = 250;
 const DEFAULT_HEIGHT = 200;
 
 export interface MediaSingleNodeProps {
   node: PMNode;
+  eventDispatcher: EventDispatcher;
   view: EditorView;
   width: number;
   selected: Function;
@@ -60,7 +62,9 @@ export default class MediaSingleNode extends Component<
       this.props.node.attrs.width !== nextProps.node.attrs.width ||
       this.props.selected() !== nextProps.selected() ||
       this.props.node.attrs.layout !== nextProps.node.attrs.layout ||
-      this.props.width !== nextProps.width
+      this.props.width !== nextProps.width ||
+      this.props.lineLength !== nextProps.lineLength ||
+      this.props.getPos !== nextProps.getPos
     ) {
       return true;
     }
@@ -106,13 +110,6 @@ export default class MediaSingleNode extends Component<
         layout,
         width,
       }),
-    );
-  };
-
-  boundDisplayGrid = (show, gridType) => {
-    displayGrid(show, gridType)(
-      this.props.view.state,
-      this.props.view.dispatch,
     );
   };
 
@@ -162,6 +159,13 @@ export default class MediaSingleNode extends Component<
       height = DEFAULT_HEIGHT;
     }
 
+    const cardWidth = this.props.width;
+    const cardHeight = (height / width) * cardWidth;
+    const cardDimensions = {
+      width: `${cardWidth}px`,
+      height: `${cardHeight}px`,
+    };
+
     const props = {
       layout,
       width,
@@ -183,10 +187,7 @@ export default class MediaSingleNode extends Component<
               node={this.child}
               view={this.props.view}
               getPos={this.props.getPos}
-              cardDimensions={{
-                width: '100%',
-                height: '100%',
-              }}
+              cardDimensions={cardDimensions}
               mediaProvider={mediaProvider}
               selected={selected()}
               onClick={this.selectMediaSingle}
@@ -202,7 +203,7 @@ export default class MediaSingleNode extends Component<
         {...props}
         getPos={getPos}
         updateSize={this.updateSize}
-        displayGrid={this.boundDisplayGrid}
+        displayGrid={createDisplayGrid(this.props.eventDispatcher)}
         gridSize={12}
         state={this.props.view.state}
         appearance={this.mediaPluginState.options.appearance}
@@ -217,6 +218,7 @@ export default class MediaSingleNode extends Component<
 
 class MediaSingleNodeView extends ReactNodeView {
   render(props, forwardRef) {
+    const { eventDispatcher } = this.reactComponentProps;
     return (
       <WithPluginState
         editorView={this.view}
@@ -233,6 +235,7 @@ class MediaSingleNodeView extends ReactNodeView {
               getPos={this.getPos}
               view={this.view}
               selected={() => this.getPos() + 1 === reactNodeViewState}
+              eventDispatcher={eventDispatcher}
             />
           );
         }}
@@ -241,10 +244,12 @@ class MediaSingleNodeView extends ReactNodeView {
   }
 }
 
-export const ReactMediaSingleNode = portalProviderAPI => (
+export const ReactMediaSingleNode = (portalProviderAPI, eventDispatcher) => (
   node: PMNode,
   view: EditorView,
   getPos: () => number,
 ): NodeView => {
-  return new MediaSingleNodeView(node, view, getPos, portalProviderAPI).init();
+  return new MediaSingleNodeView(node, view, getPos, portalProviderAPI, {
+    eventDispatcher,
+  }).init();
 };

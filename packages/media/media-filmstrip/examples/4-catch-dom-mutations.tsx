@@ -101,15 +101,19 @@ export class Example extends React.Component<ExampleProps, ExampleState> {
         <h1>Catch DOM Mutations</h1>
         <p>
           This story renders children which update the DOM outside of the
-          filmstrip React life-cycle.<br />
+          filmstrip React life-cycle.
+          <br />
           There once was a bug in filmstrip that resulted in the Filmstrip not
-          being navigable under certain edge cases<br />
+          being navigable under certain edge cases
+          <br />
           where children would update async outside of normal React life-cycle,
-          such as an image loading its src attribute.<br />
+          such as an image loading its src attribute.
+          <br />
           See{' '}
           <a href="https://product-fabric.atlassian.net/browse/MSW-425">
             MSW-425
-          </a>.
+          </a>
+          .
         </p>
         <h2>Profiling</h2>
         <p>

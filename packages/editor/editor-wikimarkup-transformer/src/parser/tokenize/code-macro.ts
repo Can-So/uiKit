@@ -77,10 +77,11 @@ const SUPPORTED_CODEBOCK_LANGUAGES = [
 
 export function codeMacro(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token {
-  return commonMacro(input, schema, {
+  return commonMacro(input.substring(position), schema, {
     opening: /^\{code(?::([^\{\n\}]*))?\}/,
     closing: /\{code\}/,
     rawContentProcessor,

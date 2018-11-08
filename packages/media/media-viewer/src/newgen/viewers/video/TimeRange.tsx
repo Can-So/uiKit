@@ -61,7 +61,7 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
     const { currentTime, onChange, duration } = this.props;
     const { movementX } = e;
     const movementPercentage =
-      Math.abs(movementX) * duration / this.wrapperElementWidth;
+      (Math.abs(movementX) * duration) / this.wrapperElementWidth;
     const newTime =
       currentTime + (movementX > 0 ? movementPercentage : -movementPercentage);
     const newTimeWithBoundaries = Math.min(Math.max(newTime, 0), duration);
@@ -93,7 +93,7 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
     const event = e.nativeEvent;
     const thumbCorrection = 8; // This is to actually center the thumb in the middle of the cursor
     const x = event.x - thumbCorrection;
-    const currentTime = x * duration / this.wrapperElementWidth;
+    const currentTime = (x * duration) / this.wrapperElementWidth;
 
     onChange(currentTime);
   };
@@ -114,8 +114,8 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
   render() {
     const { isDragging } = this.state;
     const { currentTime, duration, bufferedTime } = this.props;
-    const currentPosition = currentTime * 100 / duration;
-    const bufferedTimePercentage = bufferedTime * 100 / duration;
+    const currentPosition = (currentTime * 100) / duration;
+    const bufferedTimePercentage = (bufferedTime * 100) / duration;
 
     return (
       <TimeRangeWrapper onClick={this.onNavigate}>

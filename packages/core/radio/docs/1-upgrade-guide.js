@@ -4,24 +4,24 @@ import { md } from '@atlaskit/docs';
 export default md`
 The goal of **@atlaskit/radio** is to take **@atlaskit/field-radio-group** and refactor it to:
 
-* Normalise the API using conventions that have developed within ADG3 and the React ecosystem.
-* Refactor out the **Stateless/Stateful** paradigm in favor of a more maintainable conditionally controlled component.
-* Export more granular components to enable the consumption of atlaskit radio components for more use cases.
+- Normalise the API using conventions that have developed within ADG3 and the React ecosystem.
+- Refactor out the **Stateless/Stateful** paradigm in favor of a more maintainable conditionally controlled component.
+- Export more granular components to enable the consumption of atlaskit radio components for more use cases.
 
 ## Exports
 
 Previously in **@atlaskit/field-radio-group** the following components were exported:
 
-* AkRadioGroup (default)
-* AkRadioGroupStateless
-* AkRadio
+- AkRadioGroup (default)
+- AkRadioGroupStateless
+- AkRadio
 
 **@atlaskit/radio no longer has a default export**. Furthermore, the following components are exported instead:
 
-* RadioGroup
-* Radio
-* RadioInput
-* RadioIcon
+- RadioGroup
+- Radio
+- RadioInput
+- RadioIcon
 
 ## RadioGroup:
 
@@ -31,9 +31,9 @@ In @atlaskit/field-radio-group, users would pass in an \`items\` array to be ren
 
 Other core changes are the following prop additions:
 
-* \`checkedValue\`: This is an optional prop that is compared against the value of each passed in option. The matching option will be instantiated as a Radio component with isChecked set to true. If this prop is left undefined, the selection of any given radio is managed internally within the state of the RadioGroup component.
+- \`checkedValue\`: This is an optional prop that is compared against the value of each passed in option. The matching option will be instantiated as a Radio component with isChecked set to true. If this prop is left undefined, the selection of any given radio is managed internally within the state of the RadioGroup component.
 
-* \`defaultCheckedValue\`: This is an optional prop that is set as the checkedValue in state initially. Further interactions with radio options rendered by this RadioGroup will override this value with the internally managed checked state.
+- \`defaultCheckedValue\`: This is an optional prop that is set as the checkedValue in state initially. Further interactions with radio options rendered by this RadioGroup will override this value with the internally managed checked state.
 
 \*\`onRadioChange\` in field-radio-group is now \`onChange\` in @atlaskit/radio.
 

@@ -26,9 +26,7 @@ const GroupHeadingPrimitive = ({
 };
 const GroupHeadingPrimitiveWithTheme = withContentTheme(GroupHeadingPrimitive);
 
-export default class GroupHeading extends Component<
-  ConnectedGroupHeadingProps,
-> {
+export default class GroupHeading extends Component<ConnectedGroupHeadingProps> {
   render() {
     return <GroupHeadingPrimitiveWithTheme {...this.props} />;
   }
