@@ -81,4 +81,23 @@ export default class IosBridge implements NativeBridge {
       });
     }
   }
+
+  showStatus(text?: string, color?: string, uuid?: string) {
+    if (window.webkit && window.webkit.messageHandlers.statusBridge) {
+      window.webkit.messageHandlers.statusBridge.postMessage({
+        name: 'showStatus',
+        text,
+        color,
+        uuid,
+      });
+    }
+  }
+
+  dismissStatus() {
+    if (window.webkit && window.webkit.messageHandlers.statusBridge) {
+      window.webkit.messageHandlers.statusBridge.postMessage({
+        name: 'dismissStatus',
+      });
+    }
+  }
 }

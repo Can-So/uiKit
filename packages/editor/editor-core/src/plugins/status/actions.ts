@@ -4,6 +4,7 @@ import {
   Transaction,
   Selection,
 } from 'prosemirror-state';
+import { findDomRefAtPos } from 'prosemirror-utils';
 import { EditorView } from 'prosemirror-view';
 import { uuid } from '@atlaskit/editor-common';
 import { pluginKey } from './plugin';
@@ -18,6 +19,22 @@ export type StatusType = {
 export const DEFAULT_STATUS: StatusType = {
   text: '',
   color: 'neutral',
+};
+
+export const getStatusAtPosition = pos => editorView => {
+  const element = findDomRefAtPos(
+    pos,
+    editorView.domAtPos.bind(editorView),
+  ) as HTMLElement;
+
+  const state = { ...DEFAULT_STATUS };
+  if (element) {
+    state.color = (element.getAttribute('color') || state.color) as ColorType;
+    state.text = element.getAttribute('text') || state.text;
+    state.localId = element.getAttribute('text') || state.localId;
+  }
+
+  return state;
 };
 
 export const createStatus = (showStatusPickerAtOffset = -2) => (

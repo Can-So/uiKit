@@ -7,8 +7,21 @@ import {
   blockPluginStateKey,
   ListsState,
   listsStateKey,
+  statusPluginKey,
+  getStatusAtPosition,
 } from '@atlaskit/editor-core';
-
+import {
+  TaskDecisionProvider,
+  Query,
+  DecisionResponse,
+  TaskResponse,
+  ItemResponse,
+  RecentUpdatesId,
+  RecentUpdateContext,
+  ObjectKey,
+  TaskState,
+  Handler,
+} from '@atlaskit/task-decision';
 import { valueOf as valueOfMarkState } from './web-to-native/markState';
 import { valueOf as valueOfListState } from './web-to-native/listState';
 import { toNativeBridge } from './web-to-native';
@@ -19,6 +32,25 @@ import {
   MentionProvider,
   TaskDecisionProvider,
 } from '../providers';
+
+export class TaskDecisionProviderImpl implements TaskDecisionProvider {
+  getDecisions(query: Query): Promise<DecisionResponse> {
+    return Promise.resolve({ decisions: [] });
+  }
+  getTasks(query: Query): Promise<TaskResponse> {
+    return Promise.resolve({ tasks: [] });
+  }
+  getItems(query: Query): Promise<ItemResponse> {
+    return Promise.resolve({ items: [] });
+  }
+  unsubscribeRecentUpdates(id: RecentUpdatesId) {}
+  notifyRecentUpdates(updateContext?: RecentUpdateContext) {}
+  toggleTask(key: ObjectKey, state: TaskState): Promise<TaskState> {
+    return Promise.resolve('DONE' as TaskState);
+  }
+  subscribe(key: ObjectKey, handler: Handler) {}
+  unsubscribe(key: ObjectKey, handler: Handler) {}
+}
 
 const bridge: WebBridgeImpl = ((window as any).bridge = new WebBridgeImpl());
 
@@ -39,6 +71,7 @@ class EditorWithState extends Editor {
     subscribeForTextFormatChanges(view, eventDispatcher);
     subscribeForBlockStateChanges(view, eventDispatcher);
     subscribeForListStateChanges(view, eventDispatcher);
+    subscribeForStatusStateChange(view, eventDispatcher);
   }
 
   onEditorDestroyed(instance: {
@@ -51,6 +84,7 @@ class EditorWithState extends Editor {
     const { eventDispatcher, view } = instance;
     unsubscribeFromBlockStateChanges(view, eventDispatcher);
     unsubscribeFromListStateChanges(view, eventDispatcher);
+    unsubscribeFromStatusStateChanges(view, eventDispatcher);
 
     bridge.editorActions._privateUnregisterEditor();
     bridge.editorView = null;
@@ -69,6 +103,25 @@ function subscribeForMentionStateChanges(
     mentionsPluginState.subscribe(state => sendToNative(state));
   }
 }
+
+function subscribeForStatusStateChange(view: EditorView, eventDispatcher: any) {
+  let statusPluginState = statusPluginKey.getState(view.state);
+  bridge.statusPluginState = statusPluginState;
+  eventDispatcher.on((statusPluginKey as any).key, state => {
+    statusStateUpdated(view)(state);
+  });
+}
+
+const statusStateUpdated = view => state => {
+  if (state.showStatusPickerAt) {
+    const status = getStatusAtPosition(state.showStatusPickerAt)(view);
+    console.log(status);
+    toNativeBridge.showStatus(status.text, status.color, status.localId);
+  } else {
+    console.log('dismiss status');
+    toNativeBridge.dismissStatus();
+  }
+};
 
 function sendToNative(state) {
   if (state.queryActive) {
@@ -103,6 +156,14 @@ function unsubscribeFromBlockStateChanges(
   bridge.blockState = undefined;
 }
 
+function unsubscribeFromStatusStateChanges(
+  view: EditorView,
+  eventDispatcher: any,
+) {
+  eventDispatcher.off((statusPluginKey as any).key, statusStateUpdated);
+  bridge.statusPluginState = undefined;
+}
+
 const listStateUpdated = state => {
   toNativeBridge.updateListState(JSON.stringify(valueOfListState(state)));
 };
@@ -124,7 +185,7 @@ export default function mobileEditor(props) {
   return (
     <EditorWithState
       appearance="mobile"
-      mentionProvider={MentionProvider}
+      mentionProvider={Promise.resolve(new MentionProvider())}
       media={{
         customMediaPicker: new MobilePicker(),
         provider: props.mediaProvider || MediaProvider,
@@ -143,7 +204,8 @@ export default function mobileEditor(props) {
       allowTextColor={true}
       allowDate={true}
       allowRule={true}
-      taskDecisionProvider={Promise.resolve(TaskDecisionProvider())}
+      allowStatus={true}
+      taskDecisionProvider={Promise.resolve(new TaskDecisionProviderImpl())}
     />
   );
 }

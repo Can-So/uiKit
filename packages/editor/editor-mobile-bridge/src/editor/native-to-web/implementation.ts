@@ -20,6 +20,11 @@ import {
   toggleUnderline,
   toggleEm,
   toggleStrong,
+  StatusState,
+  insertStatus,
+  closeStatusPicker,
+  setStatusPickerAt,
+  StatusType,
 } from '@atlaskit/editor-core';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
 import { MentionDescription } from '@atlaskit/mention';
@@ -29,6 +34,7 @@ import { setBlockType } from '../../../../editor-core/src/plugins/block-type/com
 export default class WebBridgeImpl implements NativeToWebBridge {
   textFormattingPluginState: TextFormattingState | null = null;
   mentionsPluginState: MentionsState | null = null;
+  statusPluginState: StatusState | null = null;
   editorView: EditorView | null = null;
   transformer: JSONTransformer = new JSONTransformer();
   editorActions: EditorActions = new EditorActions();
@@ -77,6 +83,20 @@ export default class WebBridgeImpl implements NativeToWebBridge {
   onMentionSelect(mention: string) {
     if (this.mentionsPluginState) {
       this.mentionsPluginState.insertMention(JSON.parse(mention));
+    }
+  }
+
+  onStatusInsert(status: string) {
+    if (this.statusPluginState && this.editorView) {
+      let statusType = JSON.parse(status);
+      insertStatus(statusType)(this.editorView.state, this.editorView.dispatch);
+      // closeStatusPicker()(this.editorView);
+    }
+  }
+
+  onStatusPickerDismissed() {
+    if (this.statusPluginState) {
+      closeStatusPicker()(this.editorView);
     }
   }
 

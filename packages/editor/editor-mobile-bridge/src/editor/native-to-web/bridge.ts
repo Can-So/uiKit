@@ -18,4 +18,6 @@ export default interface NativeToWebBridge {
   onBulletListSelected();
   onIndentList();
   onOutdentList();
+  onStatusInsert(status: string);
+  onStatusPickerDismissed();
 }

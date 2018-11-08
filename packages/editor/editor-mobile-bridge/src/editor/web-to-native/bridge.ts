@@ -22,8 +22,14 @@ export interface ListBridge {
   updateListState(listState: string);
 }
 
+export interface StatusBridge {
+  showStatus(text?: string, color?: string, uuid?: string);
+  dismissStatus();
+}
+
 export default interface NativeBridge
   extends MentionBridge,
     TextFormattingBridge,
     PromiseBridge,
-    ListBridge {}
+    ListBridge,
+    StatusBridge {}

@@ -5,6 +5,7 @@ import {
   MediaBridge,
   PromiseBridge,
   ListBridge,
+  StatusBridge,
 } from './bridge';
 
 export default class AndroidBridge implements NativeBridge {
@@ -13,6 +14,7 @@ export default class AndroidBridge implements NativeBridge {
   mediaBridge: MediaBridge;
   promiseBridge: PromiseBridge;
   listBridge: ListBridge;
+  statusBridge: StatusBridge;
 
   constructor() {
     this.mentionBridge = window.mentionsBridge as MentionBridge;
@@ -20,6 +22,7 @@ export default class AndroidBridge implements NativeBridge {
     this.mediaBridge = window.mediaBridge as MediaBridge;
     this.promiseBridge = window.promiseBridge as PromiseBridge;
     this.listBridge = window.listBridge as ListBridge;
+    this.statusBridge = window.statusBridge as StatusBridge;
   }
 
   showMentions(query: String) {
@@ -55,4 +58,10 @@ export default class AndroidBridge implements NativeBridge {
   updateListState(listState: string) {
     this.listBridge.updateListState(listState);
   }
+
+  showStatus(text?: string, color?: string, uuid?: string) {
+    this.statusBridge.showStatus(text, color, uuid);
+  }
+
+  dismissStatus() {}
 }
