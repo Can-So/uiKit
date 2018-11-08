@@ -1,0 +1,1 @@
+- ED-5606 Adds union attrs support to validator

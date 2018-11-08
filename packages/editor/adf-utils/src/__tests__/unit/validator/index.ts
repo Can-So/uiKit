@@ -77,6 +77,42 @@ describe('validate', () => {
     expect(run).toThrowError('doc: invalid content.');
   });
 
+  it('should be able to validate attrs with union type - path-1', () => {
+    const run = () => {
+      validate({
+        type: 'doc',
+        version: 1,
+        content: [
+          {
+            type: 'blockCard',
+            attrs: {
+              url: 'https://docs.google.com/spreadsheets/d/xyz',
+            },
+          },
+        ],
+      });
+    };
+    expect(run).not.toThrowError();
+  });
+
+  it('should be able to validate attrs with union type - path-2', () => {
+    const run = () => {
+      validate({
+        type: 'doc',
+        version: 1,
+        content: [
+          {
+            type: 'blockCard',
+            attrs: {
+              data: { x: 10, y: 20 },
+            },
+          },
+        ],
+      });
+    };
+    expect(run).not.toThrowError();
+  });
+
   it('should throw when required attrs are missing inside children', () => {
     const run = () => {
       validate({
