@@ -1,10 +1,6 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import {
-  withAnalyticsContext,
-  withAnalyticsEvents,
-} from '@atlaskit/analytics-next';
 
 import { navigationItemClicked } from '../../../common/analytics';
 import InteractionStateManager from '../InteractionStateManager';
