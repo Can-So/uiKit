@@ -358,7 +358,7 @@ describe('isOptionSelected()', () => {
     expect(isOptionSelected({}, selected)).toBe(false);
     expect(isOptionSelected({}, undefined)).toBe(false);
   });
-  it('should returen false when option id is different than selected id', () => {
+  it('should return false when option id is different than selected id', () => {
     const selected = [{ id: 'my-id' }];
     const option = { id: 'another-id' };
     expect(isOptionSelected(option, selected)).toBe(false);
