@@ -25,7 +25,7 @@ function isAlphanumericalOrUnicodeOrParenthesis(
 ): boolean {
   // The unicode regex must ignore the space
   return [before, after].some(char =>
-    /[a-zA-Z0-9\(\)]|[^\u0000-\u007F]|\(|\)/.test(char),
+    /[a-zA-Z0-9\(\)]|[^\u0000-\u007F]/.test(char),
   );
 }
 
