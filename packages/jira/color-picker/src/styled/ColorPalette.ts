@@ -8,10 +8,12 @@ export const ColorCardWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
   margin: 2px;
 `;
 
+const palettePadding = `padding: ${gridSize() / 2}px ${gridSize()}px`;
+
 export const ColorPaletteContainer: ComponentClass<
   HTMLAttributes<{}>
 > = styled.div`
-  padding: 0 ${gridSize()}px;
   display: flex;
   flex-wrap: wrap;
+  ${palettePadding};
 `;

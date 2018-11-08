@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Select from '@atlaskit/select';
+import { PopupSelect } from '@atlaskit/select';
 import { ColorPalette } from './ColorPalette';
 import ColorCard from './ColorCard';
 import { Palette, Color } from '../types';
-import { styles } from '../styled/ColorPicker';
+import { ColorCardWrapper } from '../styled/ColorPicker';
 
 export type Option = Color;
 
@@ -49,12 +49,6 @@ const MenuList = (props: SelectComponentProps) => {
   );
 };
 
-const SingleValue = (props: SelectComponentProps) => {
-  const { data } = props;
-
-  return <ColorCard {...data} tabIndex={-1} />;
-};
-
 export class ColorPicker extends React.Component<Props, State> {
   onChange = (option: Option) => {
     this.props.onChange(option.value);
@@ -70,18 +64,37 @@ export class ColorPicker extends React.Component<Props, State> {
   }
 
   render() {
+    const { options, value } = this.getOptions();
+
     return (
-      <Select
-        {...this.getOptions()}
+      <PopupSelect
+        target={
+          <ColorCardWrapper>
+            <ColorCard {...value} />
+          </ColorCardWrapper>
+        }
+        popperProps={{
+          modifiers: {
+            offset: {
+              offset: '0, 8',
+            },
+            preventOverflow: {
+              padding: 0,
+            },
+          },
+        }}
+        maxMenuWidth="auto"
+        minMenuWidth="auto"
+        options={options}
+        value={value}
         components={{
           MenuList,
-          SingleValue,
           DropdownIndicator: EmptyComponent,
           Placeholder: EmptyComponent,
         }}
-        styles={styles}
-        isSearchable={false}
         onChange={this.onChange}
+        searchThreshold={Number.MAX_VALUE}
+        autoFocus
       />
     );
   }
