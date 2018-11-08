@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.0.8
+- [patch] [9390a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9390a7e):
+
+  - ED-5685: add grid ruler marks
+
 ## 88.0.7
 - [patch] [c64c174](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c64c174):
 
