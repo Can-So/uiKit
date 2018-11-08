@@ -1,45 +1,38 @@
 import { Token } from './';
 
-const TOKEN_LENGTH = 2;
-const TOKEN_TYPE = 'text';
+const TYPE = 'text';
+const SYMBOL = '–';
+const LENGTH = 2;
 
 export function doubleDashSymbol(input: string, position: number): Token {
-  const charAfterToken = input.charAt(position + TOKEN_LENGTH);
-  if (isAlphanumericalOrUnicode(charAfterToken)) {
-    return fallback();
-  }
+  const charAfterToken: string = input.charAt(position + LENGTH);
+  const charBeforeToken: string = input.charAt(position - 1);
+  const tuple: [string, string] = [charBeforeToken, charAfterToken];
 
-  const charBeforeToken = input.charAt(position - 1);
-  if (isAlphanumericalOrUnicode(charBeforeToken)) {
-    return fallback();
-  }
-
-  const isWrappedByParenthesis =
-    isParenthesis(charBeforeToken) || isParenthesis(charAfterToken);
-  if (isWrappedByParenthesis) {
+  if (isAlphanumericalOrUnicodeOrParenthesis(tuple)) {
     return fallback();
   }
 
   return {
-    type: TOKEN_TYPE,
-    text: '–',
-    length: TOKEN_LENGTH,
+    type: TYPE,
+    text: SYMBOL,
+    length: LENGTH,
   };
 }
 
-function isAlphanumericalOrUnicode(char: string): boolean {
-  // Check against alphanumerical or unicode without space
-  return /[a-zA-Z0-9\(\)]|[^\u0000-\u007F]/.test(char);
-}
-
-function isParenthesis(char: string): boolean {
-  return /\(|\)/.test(char);
+function isAlphanumericalOrUnicodeOrParenthesis(
+  tuple: [string, string],
+): boolean {
+  // The unicode regex must ignore the space
+  return tuple.some(char =>
+    /[a-zA-Z0-9\(\)]|[^\u0000-\u007F]|\(|\)/.test(char),
+  );
 }
 
 function fallback(): Token {
   return {
-    type: TOKEN_TYPE,
+    type: TYPE,
     text: '--',
-    length: TOKEN_LENGTH,
+    length: LENGTH,
   };
 }
