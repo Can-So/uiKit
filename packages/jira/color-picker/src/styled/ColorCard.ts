@@ -1,31 +1,12 @@
 import styled from 'styled-components';
-import { HTMLAttributes, ButtonHTMLAttributes, ComponentClass } from 'react';
-import { colors } from '@atlaskit/theme';
+import { HTMLAttributes, ComponentClass } from 'react';
+import { borderRadius } from '@atlaskit/theme';
 
-export const ColorCardContent: ComponentClass<
-  ButtonHTMLAttributes<{}>
-> = styled.button`
-  height: 26px;
-  width: 26px;
-  background: ${colors.N900};
-  padding: 0;
-  border-radius: 4px;
-  border: 1px solid ${colors.N0};
-  cursor: pointer;
+export const ColorCardContent: ComponentClass<HTMLAttributes<{}>> = styled.div`
   display: block;
-`;
-
-export const ColorCardContainer: ComponentClass<
-  HTMLAttributes<{}>
-> = styled.span`
-  border: 1px solid transparent;
-  margin: 1px;
-  font-size: 0;
-  display: flex;
-  align-items: center;
-  padding: 1px;
-  border-radius: 6px;
-  &:hover {
-    border: 1px solid ${colors.N50};
-  }
+  border-radius: ${borderRadius()}px;
+  height: 24px;
+  width: 24px;
+  padding: 0;
+  cursor: pointer;
 `;

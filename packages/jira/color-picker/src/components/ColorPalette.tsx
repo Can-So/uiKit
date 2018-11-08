@@ -2,19 +2,17 @@ import * as React from 'react';
 import { PureComponent } from 'react';
 import ColorCard from './ColorCard';
 
-import { ColorPaletteContainer } from '../styled/ColorPalette';
-
-export interface Color {
-  label: string;
-  value: string;
-  borderColor?: string;
-}
+import {
+  ColorPaletteContainer,
+  ColorCardWrapper,
+} from '../styled/ColorPalette';
+import { Palette } from '../types';
 
 export interface Props {
-  palette: Color[];
+  palette: Palette;
   selectedColor?: string;
   selectedLabel?: string;
-  onClick: (value: string) => void;
+  onClick?: (value: string) => void;
   cols?: number;
   className?: string;
   checkMarkColor?: string;
@@ -27,7 +25,7 @@ export class ColorPalette extends PureComponent<Props> {
       cols = 7,
       onClick,
       selectedColor,
-      selectedLabel = 'Selected',
+      selectedLabel,
       className,
       checkMarkColor,
     } = this.props;
@@ -38,16 +36,16 @@ export class ColorPalette extends PureComponent<Props> {
         style={{ maxWidth: cols * 32 }}
       >
         {palette.map(color => (
-          <ColorCard
-            key={color.value}
-            value={color.value}
-            borderColor={color.borderColor || 'trasparent'}
-            label={color.label}
-            selectedLabel={selectedLabel}
-            onClick={onClick}
-            isSelected={color.value === selectedColor}
-            checkMarkColor={checkMarkColor}
-          />
+          <ColorCardWrapper key={color.value}>
+            <ColorCard
+              value={color.value}
+              label={color.label}
+              selectedLabel={selectedLabel}
+              onClick={onClick}
+              isSelected={color.value === selectedColor}
+              checkMarkColor={checkMarkColor}
+            />
+          </ColorCardWrapper>
         ))}
       </ColorPaletteContainer>
     );
