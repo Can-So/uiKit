@@ -1,1 +1,0 @@
-- Fixes visual bug where header and footer keylines appeared below textboxes and other components
