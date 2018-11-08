@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import BacklogIcon from '@atlaskit/icon/glyph/backlog';
 
 import GoToItem from '../../../../connected/GoToItem';
 import Item from '../../../../presentational/Item';
