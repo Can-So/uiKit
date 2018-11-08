@@ -1,5 +1,10 @@
 # @atlaskit/quick-search
 
+## 5.1.0
+- [minor] [e93ffe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e93ffe0):
+
+  - Change container result item to accept a react node as the subtext
+
 ## 5.0.0
 - [major] [2da04ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2da04ed):
 

@@ -1,1 +1,0 @@
-- Change container result item to accept a react node as the subtext
