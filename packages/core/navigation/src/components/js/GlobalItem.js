@@ -21,7 +21,10 @@ type Props = {
    component is used if none is provided. */
   linkComponent?: ComponentType<any>,
   /** Standard onClick event */
-  onClick?: (event: Event, data?: {}) => void,
+  onClick?: (
+    event: SyntheticMouseEvent<*> | SyntheticKeyboardEvent<*>,
+    data?: {},
+  ) => void,
   onMouseDown: (event: MouseEvent) => void,
   /** ARIA role to apply to the global item. */
   role?: string,
@@ -38,7 +41,7 @@ class GlobalItem extends PureComponent<Props> {
     appearance: 'round',
   };
 
-  handleKeyDown = (event: KeyboardEvent) => {
+  handleKeyDown = (event: SyntheticKeyboardEvent<*>) => {
     if (event.key === 'Enter' && this.props.onClick) {
       this.props.onClick(event);
     }

@@ -1,18 +1,12 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, type Node, type ElementType } from 'react';
 import rafSchedule from 'raf-schd';
 import ScrollLock from 'react-scrolllock';
 
 import Footer from './Footer';
 import Header from './Header';
 
-import type {
-  AppearanceType,
-  ChildrenType,
-  ComponentType,
-  FunctionType,
-  KeyboardOrMouseEvent,
-} from '../types';
+import type { AppearanceType, KeyboardOrMouseEvent } from '../types';
 import { Body, keylineHeight, Wrapper } from '../styled/Content';
 
 function getInitialState() {
@@ -28,7 +22,7 @@ type Props = {
     Buttons to render in the footer
   */
   actions?: Array<{
-    onClick?: FunctionType,
+    onClick?: Function,
     text?: string,
   }>,
   /**
@@ -38,19 +32,19 @@ type Props = {
   /**
     Component to render the body of the modal.
   */
-  body: ComponentType,
+  body: ElementType,
   /**
     Content of the modal
   */
-  children?: ChildrenType,
+  children?: Node,
   /**
     Component to render the header of the modal.
   */
-  header?: ComponentType,
+  header?: ElementType,
   /**
     Component to render the footer of the moda.l
   */
-  footer?: ComponentType,
+  footer?: ElementType,
   /**
     Function that will be called to initiate the exit transition.
   */

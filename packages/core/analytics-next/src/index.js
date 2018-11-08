@@ -13,10 +13,14 @@ export { default as AnalyticsListener } from './AnalyticsListener';
 
 // AnalyticsContext component and HOC
 export { default as AnalyticsContext } from './AnalyticsContext';
+export type { AnalyticsContextWrappedComp } from './withAnalyticsContext';
 export { default as withAnalyticsContext } from './withAnalyticsContext';
 
 // createAnalyticsEvent HOC
-export type { WithAnalyticsEventsProps } from './withAnalyticsEvents';
+export type {
+  WithAnalyticsEventsProps,
+  AnalyticsEventsWrappedComp,
+} from './withAnalyticsEvents';
 export { default as withAnalyticsEvents } from './withAnalyticsEvents';
 // Helper functions
 export { default as createAndFireEvent } from './createAndFireEvent';
