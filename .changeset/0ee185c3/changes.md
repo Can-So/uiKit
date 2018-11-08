@@ -1,1 +1,0 @@
-- FS-3118 - Only focus status input field on initial insertion. FS-3158 - Fix focus flicker in status input field.
