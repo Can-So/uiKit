@@ -65,9 +65,7 @@ describe('ItemComponent', () => {
       badgeCount: 0,
     });
     wrapper.update();
-    expect(
-      wrapper.find('NavigationAnalyticsContext').props().data,
-    ).toMatchObject({
+    expect(wrapper.find('NavigationAnalyticsContext').props().data).toEqual({
       attributes: {
         badgeCount: 0,
       },
