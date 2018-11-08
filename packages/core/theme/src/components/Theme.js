@@ -37,6 +37,7 @@ export default class Theme extends Component<Props> {
           return typeof children === 'function' ? (
             children(merged)
           ) : (
+            // $FlowFixMe
             <Provider value={merged}>{children}</Provider>
           );
         }}
