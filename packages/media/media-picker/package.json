@@ -63,7 +63,6 @@
   "devDependencies": {
     "@atlaskit/analytics-listeners": "^4.0.5",
     "@atlaskit/docs": "^5.0.8",
-    "@atlaskit/layer-manager": "^5.0.13",
     "@atlaskit/media-core": "^24.4.0",
     "@atlaskit/media-test-helpers": "^18.2.12",
     "@atlaskit/toggle": "^5.0.9",

@@ -115,7 +115,6 @@
     "@atlaskit/editor-bitbucket-transformer": "^4.0.18",
     "@atlaskit/editor-test-helpers": "^6.2.16",
     "@atlaskit/i18n-tools": "^0.4.0",
-    "@atlaskit/layer-manager": "^5.0.13",
     "@atlaskit/lozenge": "^6.1.5",
     "@atlaskit/media-core": "^24.4.0",
     "@atlaskit/media-test-helpers": "^18.2.12",

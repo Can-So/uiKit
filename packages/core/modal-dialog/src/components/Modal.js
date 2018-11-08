@@ -6,7 +6,6 @@ import {
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
-import { FocusLock } from '@atlaskit/layer-manager';
 import Blanket from '@atlaskit/blanket';
 
 import {
@@ -24,6 +23,7 @@ import {
 } from '../styled/Modal';
 import { Animation } from './Animation';
 import Content from './Content';
+import FocusLock from './FocusLock';
 import { type Props as OuterProps } from './ModalWrapper';
 
 export const Positioner = ({
