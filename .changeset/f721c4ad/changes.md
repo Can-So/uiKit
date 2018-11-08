@@ -1,1 +1,0 @@
-- ED-5707 Enable pinch to zoom in Renderer
