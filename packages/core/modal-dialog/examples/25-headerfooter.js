@@ -118,8 +118,8 @@ export default class ModalDemo extends Component<{}, State> {
             <ModalDialog
               key={name}
               actions={['footer', 'both'].includes(name) ? actions : undefined}
-              footer={name === 'custom footer' ? Footer : null}
-              header={name === 'custom header' ? Header : null}
+              footer={name === 'custom footer' ? Footer : undefined}
+              header={name === 'custom header' ? Header : undefined}
               heading={
                 ['header', 'both'].includes(name) ? `Modal: ${name}` : undefined
               }
