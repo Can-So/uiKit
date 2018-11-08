@@ -58,7 +58,14 @@ function trimInlineNodes(nodes: PMNode[]) {
   return nodes;
 }
 
-export function isNextLineEmpty(input: string) {
+export function isNextLineNotTableCell(input: string, previousLine: string) {
   // Line with only spaces is considered an empty line
-  return input.trim().length === 0 ? true : false;
+  // return input.trim().length === 0 ? true : false;
+  if (
+    input.trim().length === 0 ||
+    (previousLine.endsWith('|') && !input.startsWith('|'))
+  ) {
+    return true;
+  }
+  return false;
 }

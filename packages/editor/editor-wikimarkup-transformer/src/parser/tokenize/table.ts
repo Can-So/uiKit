@@ -2,7 +2,7 @@ import { Node as PMNode, Schema } from 'prosemirror-model';
 import { AddCellArgs } from '../../interfaces';
 import { TableBuilder } from '../builder/table-builder';
 import { parseString } from '../text';
-import { isNextLineEmpty, normalizePMNodes } from '../utils/normalize';
+import { isNextLineNotTableCell, normalizePMNodes } from '../utils/normalize';
 import { Token, TokenType, TokenErrCallback } from './';
 import { parseNewlineOnly } from './whitespace';
 
@@ -21,10 +21,11 @@ export function table(
 
   let builder: TableBuilder | null = null;
   let lineBuffer: string[] = [];
+  let previousLine = '';
   for (const line of substring.split(NEWLINE)) {
     const match = line.match(TABLE_REGEXP);
 
-    if (!match && !isNextLineEmpty(line)) {
+    if (!match && !isNextLineNotTableCell(line, previousLine)) {
       lineBuffer.push(line);
       index += line.length;
       // Finding the length of the line break
@@ -32,6 +33,7 @@ export function table(
       if (length) {
         index += length;
       }
+      previousLine = line;
       continue;
     }
 
@@ -45,11 +47,10 @@ export function table(
       );
       lineBuffer = [];
     }
-
-    if (isNextLineEmpty(line)) {
+    if (isNextLineNotTableCell(line, previousLine)) {
       break;
     }
-
+    previousLine = line;
     lineBuffer.push(line);
     index += line.length;
     // Finding the length of the line break
