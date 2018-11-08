@@ -28,6 +28,7 @@ const HeaderOrFooter = styled.div`
   flex: 0 0 auto;
   justify-content: space-between;
   transition: box-shadow 200ms;
+  z-index: 1;
 `;
 
 export const Header = styled(HeaderOrFooter)`
