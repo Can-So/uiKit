@@ -95,6 +95,24 @@ sadfsadf
     ['should not create a list if started with multiple dashes', `----- a`],
     ['should create a list if started with multiple hash symbols', `## a`],
     ['should create a list if started with multiple star symbols', `** a`],
+    [
+      'should correctly insert a ruler if it occurs within a list',
+      `
+- a
+----
+- b
+-- c
+--- d
+----
+`,
+    ],
+    [
+      'should not insert a ruler if it is followed by any number of characters',
+      `
+- a
+---- b
+`,
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

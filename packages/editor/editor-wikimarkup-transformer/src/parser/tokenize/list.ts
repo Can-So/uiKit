@@ -8,6 +8,7 @@ import { parseNewlineOnly } from './whitespace';
 
 const LIST_ITEM_REGEXP = /^ *([*\-#]+) /;
 const EMPTY_LINE_REGEXP = /^[ \t]*\r?\n/;
+const RULER_LINE_REGEXP = /^----[ \t]*(\r?\n|$)/;
 
 const processState = {
   NEW_LINE: 0,
@@ -48,6 +49,15 @@ export function list(
     switch (state) {
       case processState.NEW_LINE: {
         const substring = input.substring(index);
+
+        const rulerLineMatch = substring.match(RULER_LINE_REGEXP);
+        if (rulerLineMatch) {
+          // Wind back current position as we want the parser to correctly parse a new line then ruler
+          index -= 1;
+          state = processState.END;
+          continue;
+        }
+
         const listMatch = substring.match(LIST_ITEM_REGEXP);
         if (listMatch) {
           const [, symbols] = listMatch;
