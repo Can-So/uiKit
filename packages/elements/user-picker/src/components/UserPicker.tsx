@@ -51,7 +51,11 @@ export type State = {
   count: number;
   hoveringClearIndicator: boolean;
   menuIsOpen: boolean;
+  hasValue: boolean;
 };
+
+const isRemoveAction = (action: string) =>
+  action === 'remove-value' || action === 'pop-value' || action === 'clear';
 
 export class UserPicker extends React.PureComponent<Props, State> {
   static defaultProps = {
@@ -85,6 +89,7 @@ export class UserPicker extends React.PureComponent<Props, State> {
       count: 0,
       hoveringClearIndicator: false,
       menuIsOpen: false,
+      hasValue: false,
     };
   }
 
@@ -110,11 +115,25 @@ export class UserPicker extends React.PureComponent<Props, State> {
       return;
     }
     const { onChange, onSelection } = this.props;
+    const { hasValue } = this.state;
+
     if (onChange) {
       onChange(extractUserValue(value), action);
     }
-    if (action === 'select-option' && onSelection) {
-      onSelection(value.user);
+
+    if (action === 'select-option') {
+      if (onSelection) {
+        onSelection(value.user);
+      }
+      if (!hasValue) {
+        this.setState({ hasValue: true });
+      }
+    }
+
+    if (isRemoveAction(action) && hasValue) {
+      if (action === 'clear' || value.length === 0) {
+        this.setState({ hasValue: false });
+      }
     }
     if (!this.props.value) {
       this.setState({ value });
@@ -228,6 +247,7 @@ export class UserPicker extends React.PureComponent<Props, State> {
       hoveringClearIndicator,
       menuIsOpen,
       value,
+      hasValue,
     } = this.state;
     return (
       <Select
@@ -236,7 +256,7 @@ export class UserPicker extends React.PureComponent<Props, State> {
         isMulti={isMulti}
         options={getOptions(usersFromState, users)}
         onChange={this.handleChange}
-        styles={getStyles(width)}
+        styles={getStyles(width, hasValue)}
         components={getComponents(isMulti, anchor)}
         inputValue={search}
         menuIsOpen={menuIsOpen}

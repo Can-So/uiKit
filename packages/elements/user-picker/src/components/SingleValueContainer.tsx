@@ -1,10 +1,11 @@
 import { components } from '@atlaskit/select';
 import * as React from 'react';
 import styled from 'styled-components';
-import Avatar from '@atlaskit/avatar';
+import { SizeableAvatar } from './SizeableAvatar';
+import { PLACEHOLDER_PADDING } from './styles';
 
 const PlaceholderIconContainer = styled.div`
-  padding-left: 12px;
+  padding-left: ${PLACEHOLDER_PADDING}px;
   line-height: 0;
 `;
 
@@ -22,10 +23,7 @@ export class SingleValueContainer extends React.PureComponent<any, {}> {
       <components.ValueContainer {...valueContainerProps}>
         <PlaceholderIconContainer>
           {!valueContainerProps.hasValue ? (
-            <Avatar
-              isHover={false}
-              size={appearance === 'normal' ? 'small' : 'xsmall'}
-            />
+            <SizeableAvatar appearance={appearance} />
           ) : null}
         </PlaceholderIconContainer>
         {children}
