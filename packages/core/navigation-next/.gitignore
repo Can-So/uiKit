@@ -1,2 +1,4 @@
-# ignore entrypoint files generated at build time and added at the root of the
-*.js
+# Ignoring entrypoint files that will be generated when we're running `yarn build`
+LayoutManagerWithViewController.js
+SkeletonContainer.js
+ViewRenderer.js

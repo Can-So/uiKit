@@ -64,13 +64,12 @@
     "@atlaskit/toggle": "^5.0.10",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "fs-extra": "^4.0.2",
+    "glob": "^7.1.2",
+    "mkdirp": "^0.5.1",
     "react-async-component": "^2.0.0"
   },
   "scripts": {
-    "build": "echo 'building nav-next'",
-    "prebuild-entrypoints": "mkdir -p dist/esm/entrypoints && touch dist/esm/entrypoints/a.js",
-    "build-entrypoints": "npm run replace-entrypoint-imports-to-dist && cp -r dist/esm/entrypoints/*.js ./",
-    "replace-entrypoint-imports-to-dist": "grep -rl \"'../\" ./dist/esm/entrypoints | xargs sed -i '' -e \"s@'../@'./dist/esm/@g\"",
-    "postbuild-entrypoints": "rm -rf dist/esm/entrypoints dist/cjs/entrypoints dist/a.js a.js"
+    "build": "node scripts/build-entrypoints.js"
   }
 }
