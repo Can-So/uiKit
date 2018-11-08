@@ -9,7 +9,7 @@ import type { InteractionState } from '../InteractionStateManager/types';
 
 type Spacing = 'compact' | 'default';
 
-export type ItemPresentationProps = {
+export type ItemPresentationProps = {|
   /** Whether the Item is currently in the 'active' interaction state. */
   isActive: boolean,
   /** Whether the Item is inside a SortableContext, and is being dragged. */
@@ -22,7 +22,7 @@ export type ItemPresentationProps = {
   isFocused: boolean,
   /** How tight the spacing between the elements inside the Item should be. */
   spacing: Spacing,
-};
+|};
 
 export type ItemBaseProps = {|
   /** A component to render after the text. Typically used to render an icon or
@@ -50,7 +50,7 @@ export type ItemBaseProps = {|
   /** Whether this Item should display as being selected. */
   isSelected: boolean,
   /** A handler which will be called when the Item is clicked. */
-  onClick?: (SyntheticEvent<MouseEvent>) => void,
+  onClick?: (SyntheticMouseEvent<*>) => void,
   /** How tight the spacing between the elements inside the Item should be. */
   spacing: Spacing,
   /** A function which will be passed the default styles object for the Item as
