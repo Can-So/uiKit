@@ -89,7 +89,7 @@ export default class MediaSingle extends Component<
       <WidthConsumer>
         {({ width: containerWidth, breakpoint }) => {
           const cardWidth = containerWidth;
-          const cardHeight = height / width * cardWidth;
+          const cardHeight = (height / width) * cardWidth;
           const cardDimensions = {
             width: `${cardWidth}px`,
             height: `${cardHeight}px`,

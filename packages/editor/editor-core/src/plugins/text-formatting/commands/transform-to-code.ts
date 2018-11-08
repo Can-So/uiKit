@@ -66,9 +66,11 @@ export function transformToCodeAction(
 
   if (schema.marks.code) {
     const codeMark = schema.marks.code.create();
-    tr
-      .addMark(tr.mapping.map(from), tr.mapping.map(to), codeMark)
-      .setStoredMarks([codeMark]);
+    tr.addMark(
+      tr.mapping.map(from),
+      tr.mapping.map(to),
+      codeMark,
+    ).setStoredMarks([codeMark]);
   }
   return tr;
 }

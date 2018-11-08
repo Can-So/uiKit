@@ -66,9 +66,8 @@ export default (
   const packages = getPackageInfo(event);
   const { packageName, packageVersion } =
     last(getPackageInfo(event)) || ({} as any);
-  const packageHierarchy = packages.map(
-    p =>
-      p.packageVersion ? `${p.packageName}@${p.packageVersion}` : p.packageName,
+  const packageHierarchy = packages.map(p =>
+    p.packageVersion ? `${p.packageName}@${p.packageVersion}` : p.packageName,
   );
 
   const {

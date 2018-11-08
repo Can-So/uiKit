@@ -85,59 +85,55 @@ function createSpec(nodes?: Array<string>, marks?: Array<string>) {
         spec.props.content.items = spec.props.content.items
           // ['inline'] => [['emoji', 'hr', ...]]
           // ['media'] => [['media']]
-          .map(
-            item =>
-              isString(item)
-                ? Array.isArray(specs[item])
-                  ? specs[item]
-                  : [item]
-                : item,
+          .map(item =>
+            isString(item)
+              ? Array.isArray(specs[item])
+                ? specs[item]
+                : [item]
+              : item,
           )
           // [['emoji', 'hr', 'inline_code']] => [['emoji', 'hr', ['text', { marks: {} }]]]
           .map(item =>
             item
-              .map(
-                subItem =>
-                  Array.isArray(specs[subItem])
-                    ? specs[subItem]
-                    : isString(subItem)
-                      ? subItem
-                      : // Now `NoMark` produces `items: []`, should be fixed in generator
-                        ['text', subItem],
+              .map(subItem =>
+                Array.isArray(specs[subItem])
+                  ? specs[subItem]
+                  : isString(subItem)
+                  ? subItem
+                  : // Now `NoMark` produces `items: []`, should be fixed in generator
+                    ['text', subItem],
               )
               // Remove unsupported nodes & marks
               // Filter nodes
-              .filter(
-                subItem =>
-                  // When Mark or `nodes` is undefined don't filter
-                  Array.isArray(subItem) || !nodes
-                    ? true
-                    : nodes.indexOf(subItem) > -1,
+              .filter(subItem =>
+                // When Mark or `nodes` is undefined don't filter
+                Array.isArray(subItem) || !nodes
+                  ? true
+                  : nodes.indexOf(subItem) > -1,
               )
               // Filter marks
-              .map(
-                subItem =>
-                  Array.isArray(subItem) && marks
-                    ? /**
-                       * TODO: Probably try something like immer, but it's 3.3kb gzipped.
-                       * Not worth it just for this.
-                       */
-                      [
-                        subItem[0],
-                        {
-                          ...subItem[1],
-                          props: {
-                            ...subItem[1].props,
-                            marks: {
-                              ...subItem[1].props.marks,
-                              items: subItem[1].props.marks.items.map(_marks =>
-                                _marks.filter(mark => marks.indexOf(mark) > -1),
-                              ),
-                            },
+              .map(subItem =>
+                Array.isArray(subItem) && marks
+                  ? /**
+                     * TODO: Probably try something like immer, but it's 3.3kb gzipped.
+                     * Not worth it just for this.
+                     */
+                    [
+                      subItem[0],
+                      {
+                        ...subItem[1],
+                        props: {
+                          ...subItem[1].props,
+                          marks: {
+                            ...subItem[1].props.marks,
+                            items: subItem[1].props.marks.items.map(_marks =>
+                              _marks.filter(mark => marks.indexOf(mark) > -1),
+                            ),
                           },
                         },
-                      ]
-                    : subItem,
+                      },
+                    ]
+                  : subItem,
               ),
           );
       }
@@ -590,11 +586,10 @@ export function validator(
               const { items } = validator.props!.marks!;
               const marksSet = items.length ? items[0] : [];
               const newMarks = entity.marks
-                .filter(
-                  mark =>
-                    mode === 'strict' && marks
-                      ? marks.indexOf(mark.type) > -1
-                      : true,
+                .filter(mark =>
+                  mode === 'strict' && marks
+                    ? marks.indexOf(mark.type) > -1
+                    : true,
                 )
                 .map(
                   mark =>

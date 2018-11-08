@@ -425,4 +425,7 @@ export default connect<
   UploadViewStateProps,
   UploadViewDispatchProps,
   UploadViewOwnProps
->(mapStateToProps, mapDispatchToProps)(injectIntl(StatelessUploadView));
+>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(injectIntl(StatelessUploadView));

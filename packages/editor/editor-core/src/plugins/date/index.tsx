@@ -93,7 +93,7 @@ const datePlugin: EditorPlugin = {
         icon: () => <EditorDateIcon label={formatMessage(messages.date)} />,
         action(insert, state) {
           const dateNode = state.schema.nodes.date.createChecked({
-            timestamp: Date.now(),
+            timestamp: Date.now().toString(),
           });
 
           const tr = insert(dateNode);

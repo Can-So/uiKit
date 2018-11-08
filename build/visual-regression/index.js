@@ -7,10 +7,10 @@ const fs = require('fs-extra');
 const glob = require('glob');
 
 /*
-* function main() to
-* start and stop webpack-dev-server,
-* and run and wait for visual-regression tests complete
-*/
+ * function main() to
+ * start and stop webpack-dev-server,
+ * and run and wait for visual-regression tests complete
+ */
 const JEST_WAIT_FOR_INPUT_TIMEOUT = 1000;
 const isLocalRun = process.env.RUN_LOCAL_ONLY === 'true';
 const watch = process.env.WATCH ? '--watch' : '';

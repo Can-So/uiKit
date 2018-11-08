@@ -93,7 +93,7 @@ export const mediaStyles = css`
  * that style applied inside a container that has a scroll, causes any svgs on
  * the page, without a border, that are inside a flexbox, to no longer align to
  * the center of their viewbox.
- * 
+ *
  * for us, this means that all the toolbar icons start jumping around if
  * you make the viewport small
  */

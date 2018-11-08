@@ -6,8 +6,8 @@ const uniqIdentifierStamp = process.env.LOCAL_IDENTIFIER || '';
 const commit = process.env.BITBUCKET_COMMIT
   ? process.env.BITBUCKET_COMMIT + uniqIdentifierStamp
   : process.env.USER
-    ? process.env.USER + uniqIdentifierStamp
-    : uniqIdentifierStamp;
+  ? process.env.USER + uniqIdentifierStamp
+  : uniqIdentifierStamp;
 
 if (!process.env.BITBUCKET_BRANCH && process.env.USER) {
   process.env.BITBUCKET_BRANCH = process.env.USER + '_local_run';

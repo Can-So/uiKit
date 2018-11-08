@@ -33,17 +33,19 @@ export default class ExampleAppearance extends PureComponent<
         </ButtonGroup>
 
         <ModalTransition>
-          {appearances.filter(a => a === isOpen).map(name => (
-            <Modal
-              key="active-modal"
-              actions={actions}
-              appearance={name}
-              onClose={this.close}
-              heading={`Modal: ${name}`}
-            >
-              <Lorem count={2} />
-            </Modal>
-          ))}
+          {appearances
+            .filter(a => a === isOpen)
+            .map(name => (
+              <Modal
+                key="active-modal"
+                actions={actions}
+                appearance={name}
+                onClose={this.close}
+                heading={`Modal: ${name}`}
+              >
+                <Lorem count={2} />
+              </Modal>
+            ))}
         </ModalTransition>
       </div>
     );

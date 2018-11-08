@@ -1,5 +1,50 @@
 # @atlaskit/editor-core
 
+## 88.0.9
+- [patch] [6efc73e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6efc73e):
+
+  - allow Fabric status plugin to be enabled but be hidden in the editor menu
+
+## 88.0.8
+- [patch] [9390a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9390a7e):
+
+  - ED-5685: add grid ruler marks
+
+## 88.0.7
+- [patch] [c64c174](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c64c174):
+
+  - Fix multiple papercuts in quick insert
+
+## 88.0.6
+- [patch] [82ad72d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82ad72d):
+
+  - Timestamp on date node must always be a string
+
+## 88.0.5
+- [patch] [beefae2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/beefae2):
+
+  - Updated type definitions for prosemirror packages
+
+## 88.0.4
+- [patch] [2e1b194](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e1b194):
+
+  - Revert collab changes
+
+## 88.0.3
+- [patch] [222082a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/222082a):
+
+  - Fix incorrect import of PanelType
+
+## 88.0.2
+- [patch] [ffcaedd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ffcaedd):
+
+  - FS-2964 Implement status node placeholder support. Handle removing if no content in node
+
+## 88.0.1
+- [patch] [8059325](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8059325):
+
+  - Fix delete doing nothing
+
 ## 88.0.0
 - Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
   - @atlaskit/editor-common@21.0.0

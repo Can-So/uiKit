@@ -36,7 +36,7 @@ const EmojiPlaceholder = (props: Props) => {
     const width = representation.width;
     const height = representation.height;
     if (width && height) {
-      scaledWidth = size / height * width;
+      scaledWidth = (size / height) * width;
       scaledHeight = size;
     }
   }

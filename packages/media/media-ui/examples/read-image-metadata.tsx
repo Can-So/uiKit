@@ -67,10 +67,10 @@ class Example extends React.Component<{}, ExampleState> {
               </Code>
             </p>
             <p>async Example:</p>
-            <Code
-            >{`const { type, width, height, tags: { Orientation, XResolution, PixelXDimension, PixelYDimension } } = await readImageMetaData(fileInfo);`}</Code>
+            <Code>{`const { type, width, height, tags: { Orientation, XResolution, PixelXDimension, PixelYDimension } } = await readImageMetaData(fileInfo);`}</Code>
             <p>
-              Select a local image to see it's metadata (if available).<br />
+              Select a local image to see it's metadata (if available).
+              <br />
               Currently only supports Exif / XMP tags in <b>JPEG</b> and{' '}
               <b>PNG</b> formats.
             </p>

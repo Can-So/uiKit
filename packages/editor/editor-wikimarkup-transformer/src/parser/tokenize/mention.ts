@@ -4,11 +4,15 @@ import { Token } from './';
 // [~username]
 const MENTION_REGEXP = /^\[[~@]([^\\\],]+?)\]/;
 
-export function mention(input: string, schema: Schema): Token {
-  const match = input.match(MENTION_REGEXP);
+export function mention(
+  input: string,
+  position: number,
+  schema: Schema,
+): Token {
+  const match = input.substring(position).match(MENTION_REGEXP);
 
   if (!match) {
-    return fallback();
+    return fallback(input, position);
   }
 
   const [, mentionText] = match;
@@ -24,10 +28,10 @@ export function mention(input: string, schema: Schema): Token {
   };
 }
 
-function fallback(): Token {
+function fallback(input: string, position: number): Token {
   return {
     type: 'text',
-    text: '[~',
+    text: input.substr(position, 2),
     length: 2,
   };
 }

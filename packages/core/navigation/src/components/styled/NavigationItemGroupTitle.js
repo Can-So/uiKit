@@ -8,7 +8,7 @@ const groupTitleFontSize = 11;
 
 const NavigationItemGroupTitle = styled.div`
   font-size: ${groupTitleFontSize}px;
-  line-height: ${gridSize * 2 / groupTitleFontSize};
+  line-height: ${(gridSize * 2) / groupTitleFontSize};
   font-weight: 600;
   ${truncate()} ${whenCollapsedAndNotInOverflowDropdown`
     display: none;

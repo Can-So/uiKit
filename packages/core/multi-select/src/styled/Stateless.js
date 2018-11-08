@@ -2,7 +2,7 @@
 import styled, { css } from 'styled-components';
 import { colors, gridSize, fontSize } from '@atlaskit/theme';
 
-const lineHeightDefault = gridSize() * 2 / fontSize();
+const lineHeightDefault = (gridSize() * 2) / fontSize();
 
 const getPlaceholderStyle = style => css`
   &::-webkit-input-placeholder {

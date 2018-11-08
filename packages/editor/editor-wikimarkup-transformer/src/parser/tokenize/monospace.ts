@@ -5,6 +5,7 @@ import { parseString } from '../text';
 
 export function monospace(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token {
@@ -43,7 +44,7 @@ export function monospace(
     };
   };
 
-  return commonFormatter(input, schema, {
+  return commonFormatter(input, position, schema, {
     opening: '{{',
     closing: '}}',
     rawContentProcessor,

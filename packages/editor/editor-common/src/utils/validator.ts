@@ -88,11 +88,8 @@ export const getValidDocument = (
 };
 
 const wrapInlineNodes = (nodes: ADNode[] = []): ADNode[] => {
-  return nodes.map(
-    node =>
-      inlineNodes.has(node.type)
-        ? { type: 'paragraph', content: [node] }
-        : node,
+  return nodes.map(node =>
+    inlineNodes.has(node.type) ? { type: 'paragraph', content: [node] } : node,
   );
 };
 

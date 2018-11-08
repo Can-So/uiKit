@@ -1,6 +1,6 @@
 /*
-* wrapper on top of webdriver-io apis to give a feel of puppeeteer api
-*/
+ * wrapper on top of webdriver-io apis to give a feel of puppeeteer api
+ */
 
 //TODO :move this to a new npm-pkg
 const webdriverio = require('webdriverio');

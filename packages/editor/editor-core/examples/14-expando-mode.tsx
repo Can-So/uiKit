@@ -8,11 +8,10 @@ export default class Example extends React.Component<{}, ExampleState> {
   state = { appearance: 'message' } as ExampleState;
 
   toggleAppearance = () => {
-    this.setState(
-      prevState =>
-        prevState.appearance === 'message'
-          ? { appearance: 'comment' }
-          : { appearance: 'message' },
+    this.setState(prevState =>
+      prevState.appearance === 'message'
+        ? { appearance: 'comment' }
+        : { appearance: 'message' },
     );
   };
 

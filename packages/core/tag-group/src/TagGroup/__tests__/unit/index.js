@@ -21,7 +21,9 @@ describe('TagGroup', () => {
 
     const wrapper = mount(
       <TagGroup>
-        {tags.map(tagName => <Tag key={tagName} text={tagName} />)}
+        {tags.map(tagName => (
+          <Tag key={tagName} text={tagName} />
+        ))}
       </TagGroup>,
     );
 
