@@ -10,10 +10,10 @@ import {
   ShapeParameters,
 } from '@atlaskit/media-editor';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
 import Toolbar, { tools } from './toolbar/toolbar';
 import { EditorContainer } from './styles';
 import { State } from '../../../../domain';
-import { messages } from '@atlaskit/media-ui';
 
 const DEFAULT_WIDTH = 845;
 const DEFAULT_HEIGHT = 530;
@@ -34,7 +34,9 @@ export interface EditorViewOwnProps {
   readonly onError: (message: string) => void;
 }
 
-export type EditorViewProps = EditorViewStateProps & EditorViewOwnProps;
+export type EditorViewProps = EditorViewStateProps &
+  EditorViewOwnProps &
+  InjectedIntlProps;
 
 export interface EditorViewState {
   readonly dimensions: Dimensions;
@@ -43,10 +45,7 @@ export interface EditorViewState {
   readonly tool: Tool;
 }
 
-export class EditorView extends Component<
-  EditorViewProps & InjectedIntlProps,
-  EditorViewState
-> {
+export class EditorView extends Component<EditorViewProps, EditorViewState> {
   private loadParameters?: LoadParameters;
   private rootDiv?: HTMLDivElement;
   state: EditorViewState = {

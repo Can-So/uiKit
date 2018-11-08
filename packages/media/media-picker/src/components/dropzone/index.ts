@@ -151,7 +151,6 @@ export class Dropzone extends LocalUploadComponent<
       return container;
     } else {
       if (this.proxyReactContext && this.proxyReactContext.intl) {
-        console.log('dropzone ui', this.proxyReactContext.intl);
         const { formatMessage } = this.proxyReactContext.intl;
 
         return dropzoneUI(formatMessage);

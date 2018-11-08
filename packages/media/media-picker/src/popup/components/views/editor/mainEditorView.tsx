@@ -11,14 +11,14 @@ import { MainContainer } from './styles';
 import { Selection, editorClose } from '../../../actions/editorClose';
 import { editorShowError } from '../../../actions/editorShowError';
 import { editorShowImage } from '../../../actions/editorShowImage';
-import { EditorViewProps } from './editorView/editorView';
+import { EditorViewOwnProps } from './editorView/editorView';
 import editorViewLoader from './editorViewLoader';
 export interface MainEditorViewStateProps {
   readonly editorData?: EditorData;
 }
 
 export interface MainEditorViewState {
-  EditorViewComponent?: ComponentClass<EditorViewProps>;
+  EditorViewComponent?: ComponentClass<EditorViewOwnProps>;
 }
 
 export interface MainEditorViewOwnProps {
@@ -43,7 +43,7 @@ export class MainEditorView extends Component<
   MainEditorViewProps,
   MainEditorViewState
 > {
-  static EditorViewComponent: ComponentClass<EditorViewProps>;
+  static EditorViewComponent: ComponentClass<EditorViewOwnProps>;
 
   state: MainEditorViewState = {
     EditorViewComponent: MainEditorView.EditorViewComponent,
@@ -89,7 +89,6 @@ export class MainEditorView extends Component<
     } else if (imageUrl && originalFile && EditorViewComponent) {
       return (
         <EditorViewComponent
-          imageUrl={imageUrl}
           onSave={this.onEditorSave(originalFile)}
           onCancel={this.onCancel}
           onError={this.onEditorError}
