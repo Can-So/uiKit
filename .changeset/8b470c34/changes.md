@@ -1,1 +1,0 @@
-- Check that content children of FormSection are valid elements before cloning
