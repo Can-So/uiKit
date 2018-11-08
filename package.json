@@ -9,7 +9,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "                               run-p build:pkg build:babel build:flowtypes && run-p build:typescript build:editor-common:json-schema --print-label --continue-on-error && yarn build:run-build-by-package",
-    "build:run-build-by-package": "          run-p build:media-editor:copy-binaries build:css-reset build:reduced-ui-pack build:icon build:layer build:navigation-next --print-label",
+    "build:run-build-by-package": "          yarn run build:media-editor:copy-binaries && run-p build:css-reset build:reduced-ui-pack build:icon build:layer build:navigation-next --print-label",
     "build:pkg": "                           bolt workspaces exec --only-fs 'packages/**' -- copy-pkg package.json dist/package.json --only name,version,sideEffects",
     "build:babel": "                         run-p build:babel:cjs build:babel:esm",
     "build:babel:cjs": "                     NODE_ENV=production BABEL_ENV=production:cjs bolt workspaces exec --parallel --only-fs \"$(node ./build/ci-scripts/get.glob.packages.for.tools.js babel)\" -- babel src -d dist/cjs --root-mode upward",

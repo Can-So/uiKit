@@ -346,9 +346,7 @@ export default class LayoutManager extends Component<
                   onMouseLeave={this.mouseLeave}
                 >
                   <ResizeControl
-                    collapseToggleTooltipContent={
-                      collapseToggleTooltipContent || null
-                    }
+                    collapseToggleTooltipContent={collapseToggleTooltipContent}
                     expandCollapseAffordanceRef={
                       this.nodeRefs.expandCollapseAffordance
                     }

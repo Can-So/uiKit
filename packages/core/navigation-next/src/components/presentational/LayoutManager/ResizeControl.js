@@ -487,4 +487,5 @@ class ResizeControl extends PureComponent<Props, State> {
 
 export { ResizeControl as ResizeControlBase };
 
+// $FlowFixMe
 export default withAnalyticsEvents()(ResizeControl);
