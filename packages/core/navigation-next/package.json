@@ -9,9 +9,7 @@
   "sideEffects": false,
   "files": [
     "dist",
-    "LayoutManagerWithViewController.js",
-    "SkeletonContainer.js",
-    "ViewRenderer.js"
+    "*.js"
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
@@ -71,7 +69,7 @@
   "scripts": {
     "prebuild": "mkdir -p dist/esm/entrypoints && touch dist/esm/entrypoints/a.js",
     "build": "npm run replace-entrypoint-imports-to-dist && cp -r dist/esm/entrypoints/*.js ./",
-    "replace-entrypoint-imports-to-dist": "grep -rl \"'../\" ./dist/esm/entrypoints | xargs sed -i '' -e \"s@'../@'./dist/esm@g\"",
-    "postbuild": "rm -rf dist/esm/entrypoints dist/cjs/entrypoints dist/a.js"
+    "replace-entrypoint-imports-to-dist": "grep -rl \"'../\" ./dist/esm/entrypoints | xargs sed -i '' -e \"s@'../@'./dist/esm/@g\"",
+    "postbuild": "rm -rf dist/esm/entrypoints dist/cjs/entrypoints dist/a.js a.js"
   }
 }
