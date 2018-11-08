@@ -102,7 +102,7 @@ export default function withAnalyticsEvents<P: {}, C: ComponentType<P>>(
 ): C => ComponentType<PropsWithoutAnalytics<C>> {
   return WrappedComponent => {
     // $FlowFixMe - flow 0.67 doesn't know about forwardRef
-    const WithAnalyticsEvents = React.forwardRef((props: PWA, ref) => {
+    const WithAnalyticsEvents = React.forwardRef((props, ref) => {
       return (
         <AnalyticsContextConsumer>
           {createAnalyticsEvent => {

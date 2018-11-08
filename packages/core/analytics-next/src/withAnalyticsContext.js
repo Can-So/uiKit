@@ -22,7 +22,7 @@ export default function withAnalyticsContext<P: {}, C: ComponentType<P>>(
 }> {
   return WrappedComponent => {
     // $FlowFixMe - flow 0.67 doesn't know about forwardRef
-    const WithAnalyticsContext = React.forwardRef((props: PWA, ref) => {
+    const WithAnalyticsContext = React.forwardRef((props, ref) => {
       const { analyticsContext = {}, ...others } = props;
       const data = { ...defaultData, ...analyticsContext };
       return (
