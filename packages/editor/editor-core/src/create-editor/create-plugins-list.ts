@@ -188,7 +188,11 @@ export default function createPluginsList(props: EditorProps): EditorPlugin[] {
   }
 
   if (props.allowStatus) {
-    plugins.push(statusPlugin);
+    const menuDisabled =
+      typeof props.allowStatus === 'object'
+        ? props.allowStatus.menuDisabled
+        : false;
+    plugins.push(statusPlugin({ menuDisabled }));
   }
 
   // UI only plugins

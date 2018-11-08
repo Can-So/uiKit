@@ -26,7 +26,7 @@ describe('Status - NodeView', () => {
   const editor = (doc: any) => {
     return createEditor({
       doc,
-      editorPlugins: [statusPlugin],
+      editorPlugins: [statusPlugin({ menuDisabled: false })],
     });
   };
 

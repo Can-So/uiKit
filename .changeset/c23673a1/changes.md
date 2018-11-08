@@ -1,0 +1,1 @@
+- allow Fabric status plugin to be enabled but be hidden in the editor menu
