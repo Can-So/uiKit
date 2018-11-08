@@ -310,7 +310,9 @@ export default class GlobalNavigation
     );
     const defaultConfig = generateDefaultConfig();
     const badge = this.renderNotificationBadge;
-    const { notificationCount: badgeCount } = this.state;
+    const { notificationCount: badgeCount } = this.isNotificationInbuilt
+      ? this.state
+      : this.props;
 
     const navItems: NavItem[] = Object.keys(productConfig).map(item => ({
       ...(productConfig[item]

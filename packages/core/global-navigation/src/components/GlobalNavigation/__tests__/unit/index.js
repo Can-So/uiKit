@@ -477,6 +477,18 @@ describe('GlobalNavigation', () => {
       );
       expect(wrapper.find('Badge').exists()).toBeFalsy();
     });
+
+    it('should pass the correct badgeCount to ItemComponent', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          onNotificationClick={() => {}}
+          notificationCount={15}
+        />,
+      );
+
+      // ItemComponent
+      expect(wrapper.find('_default').props().badgeCount).toBe(15);
+    });
   });
 
   describe('Inbuilt Notification', () => {
@@ -649,6 +661,23 @@ describe('GlobalNavigation', () => {
       expect(spyReturn).toMatchObject({
         skip: true,
       });
+    });
+
+    it('should pass the correct badgeCount to ItemComponent', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+      wrapper.setState({
+        notificationCount: 5,
+      });
+
+      // ItemComponent
+      expect(wrapper.find('_default').props().badgeCount).toBe(5);
     });
   });
 
