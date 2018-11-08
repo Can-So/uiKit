@@ -84,12 +84,12 @@ describe('validate', () => {
         version: 1,
         content: [
           {
-            type: 'paragraph',
+            type: 'heading',
           },
         ],
       });
     };
-    expect(run).toThrowError('paragraph: required prop missing.');
+    expect(run).toThrowError('heading: required prop missing.');
   });
 
   it('should not throw when required attrs are available', () => {

@@ -23,6 +23,7 @@ interface ValidatorSpec {
       type: 'array';
       items: Array<Array<string>>;
       minItems?: number;
+      optional?: boolean;
       allowUnsupportedBlock: boolean;
       allowUnsupportedInline: boolean;
     };
@@ -68,8 +69,7 @@ function createSpec(nodes?: Array<string>, marks?: Array<string>) {
            * Flatten
            *
            * Input:
-           * [ { type: 'array', items: [ 'tableHeader' ] },
-           * { type: 'array', items: [ 'tableCell' ] } ]
+           * [ { type: 'array', items: [ 'tableHeader' ] }, { type: 'array', items: [ 'tableCell' ] } ]
            *
            * Output:
            * { type: 'array', items: [ [ 'tableHeader' ], [ 'tableCell' ] ] }
@@ -572,7 +572,7 @@ export function validator(
                   }
                 })
                 .filter(Boolean);
-            } else {
+            } else if (!validator.props.content.optional) {
               return err(
                 VALIDATION_ERRORS.MISSING_PROPERTY,
                 'missing `content` prop',

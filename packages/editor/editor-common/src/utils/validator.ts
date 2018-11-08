@@ -567,7 +567,7 @@ export const getValidNode = (
         break;
       }
       case 'heading': {
-        if (attrs && content) {
+        if (attrs) {
           const { level } = attrs;
           const between = (x, a, b) => x >= a && x <= b;
           if (level && between(level, 1, 6)) {
