@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.0.9
+- [patch] [6efc73e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6efc73e):
+
+  - allow Fabric status plugin to be enabled but be hidden in the editor menu
+
 ## 88.0.8
 - [patch] [9390a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9390a7e):
 
