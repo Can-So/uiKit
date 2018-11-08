@@ -1,1 +1,0 @@
-- FS-3160 add defaultOptions prop
