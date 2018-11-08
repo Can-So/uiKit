@@ -119,8 +119,8 @@ class Example extends React.Component<{}, ExampleState> {
               <GridColumn>
                 <br />
                 <h3>Example urls:</h3>
-                {urlsJSON.map((example: any) => (
-                  <p>
+                {urlsJSON.map((example: any, i: number) => (
+                  <p key={i}>
                     <Button
                       spacing="compact"
                       onClick={() => this.changeUrl(example.url)}

@@ -134,13 +134,13 @@ class Example extends React.Component<{}, ExampleState> {
 
     for (let title in grouped) {
       if (title) {
-        result.push(<h3>{ucFirst(title)}</h3>);
+        result.push(<h3 key={title}>{ucFirst(title)}</h3>);
       }
 
       result.push.apply(
         result,
-        grouped[title].map(example => (
-          <DivWithMargin>
+        grouped[title].map((example, idx) => (
+          <DivWithMargin key={`${idx}-${title}`}>
             {this.renderTitle(mode, example)}
             <Grid>
               <GridColumn medium={6}>
@@ -166,6 +166,7 @@ class Example extends React.Component<{}, ExampleState> {
     for (let mode in GroupingModes) {
       result.push(
         <Button
+          key={mode}
           isSelected={mode === currentMode}
           onClick={() => this.handleGroupClick(mode as GroupingMode)}
         >
