@@ -7,9 +7,8 @@ const LENGTH = 2;
 export function doubleDashSymbol(input: string, position: number): Token {
   const charAfterToken: string = input.charAt(position + LENGTH);
   const charBeforeToken: string = input.charAt(position - 1);
-  const tuple: [string, string] = [charBeforeToken, charAfterToken];
 
-  if (isAlphanumericalOrUnicodeOrParenthesis(tuple)) {
+  if (isAlphanumericalOrUnicodeOrParenthesis(charBeforeToken, charAfterToken)) {
     return fallback();
   }
 
@@ -21,10 +20,11 @@ export function doubleDashSymbol(input: string, position: number): Token {
 }
 
 function isAlphanumericalOrUnicodeOrParenthesis(
-  tuple: [string, string],
+  before: string,
+  after: string,
 ): boolean {
   // The unicode regex must ignore the space
-  return tuple.some(char =>
+  return [before, after].some(char =>
     /[a-zA-Z0-9\(\)]|[^\u0000-\u007F]|\(|\)/.test(char),
   );
 }
