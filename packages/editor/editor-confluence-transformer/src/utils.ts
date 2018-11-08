@@ -290,7 +290,9 @@ export function calcPixelsFromCSSValue(
   if (value.substr(-2) === 'px') {
     return parseInt(value.slice(0, -2), 10);
   } else if (value.substr(-1) === '%') {
-    return Math.round(parseInt(value.slice(0, -1), 10) / 100.0 * parentPixels);
+    return Math.round(
+      (parseInt(value.slice(0, -1), 10) / 100.0) * parentPixels,
+    );
   }
   return 0;
 }

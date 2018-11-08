@@ -1,16 +1,20 @@
 // @flow
 
-import type { ElementConfig } from 'react';
-import type { ItemBaseProps as PresentationalItemProps } from '../../presentational/Item/types';
-
+import type { ComponentType, ElementConfig } from 'react';
+import type { ItemPresentationProps } from '../../presentational/Item/types';
 import Item from '../../presentational/Item';
 
-export type ConnectedItemProps = {|
-  ...$Exact<ElementConfig<typeof Item>>,
-  /** See 'after' prop of presentational Item. */
-  after?: $PropertyType<PresentationalItemProps, 'after'> | null,
+type ItemWithoutAfter = $Diff<
+  ElementConfig<$Supertype<typeof Item>>,
+  { after: any },
+>;
+
+export type ConnectedItemProps = {
+  ...$Exact<ItemWithoutAfter>,
+  /** See 'after' prop of presentational Item. Can be set to null to avoid goTo's default after icon. */
+  after?: ComponentType<ItemPresentationProps> | null,
   /** Deprecated: Do not use. */
   icon?: string,
   /** The view ID that should be transitioned to onClick. */
   goTo?: string,
-|};
+};

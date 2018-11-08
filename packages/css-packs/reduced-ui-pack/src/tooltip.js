@@ -4,7 +4,7 @@ import css from './utils/evaluate-inner';
 
 const grid = gridSize() / 2;
 const fontSize = 3 * grid;
-const lineHeight = 4 * grid / fontSize;
+const lineHeight = (4 * grid) / fontSize;
 const fontColor = 'white';
 const maxWidth = 105 * grid; // ~420px
 const borderRadius = '3px';

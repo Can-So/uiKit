@@ -12,16 +12,16 @@ export const insertDate = (date?: DateType) => (
   dispatch: (tr: Transaction) => void,
 ): boolean => {
   const { schema } = state;
-  let timestamp;
+  let timestamp: string;
   if (date) {
-    timestamp = Date.UTC(date.year, date.month - 1, date.day);
+    timestamp = Date.UTC(date.year, date.month - 1, date.day).toString();
   } else {
     const currentDate = new Date();
     timestamp = Date.UTC(
       currentDate.getFullYear(),
       currentDate.getMonth(),
       currentDate.getDate(),
-    );
+    ).toString();
   }
 
   const tr = state.tr;

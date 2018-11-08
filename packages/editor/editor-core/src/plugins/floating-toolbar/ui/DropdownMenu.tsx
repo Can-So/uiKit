@@ -55,20 +55,22 @@ export default class Dropdown extends Component<Props> {
     return (
       <ThemeProvider theme={{ [itemThemeNamespace]: editorItemTheme }}>
         <MenuContainer>
-          {items.filter(item => !item.hidden).map((item, idx) => (
-            <Item
-              key={idx}
-              isCompact={true}
-              elemBefore={this.renderSelected(item)}
-              onClick={() => {
-                hide();
-                dispatchCommand(item.onClick);
-              }}
-              isDisabled={item.disabled}
-            >
-              {item.title}
-            </Item>
-          ))}
+          {items
+            .filter(item => !item.hidden)
+            .map((item, idx) => (
+              <Item
+                key={idx}
+                isCompact={true}
+                elemBefore={this.renderSelected(item)}
+                onClick={() => {
+                  hide();
+                  dispatchCommand(item.onClick);
+                }}
+                isDisabled={item.disabled}
+              >
+                {item.title}
+              </Item>
+            ))}
         </MenuContainer>
       </ThemeProvider>
     );

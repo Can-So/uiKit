@@ -26,13 +26,6 @@ ${(
       />
     )}
 
-${(
-      <Props
-        heading="BackItem props"
-        props={require('!!extract-react-types-loader!../src/components/connected/BackItem')}
-      />
-    )}
-
 ${<Hr />}
 
 ${<H>ConnectedItem</H>}
@@ -115,13 +108,6 @@ ${(
         Component={require('./examples/ui-components/GoToItem').default}
         title="GoToItem"
         source={require('!!raw-loader!./examples/ui-components/GoToItem')}
-      />
-    )}
-
-${(
-      <Props
-        heading="GoToItem props"
-        props={require('!!extract-react-types-loader!../src/components/connected/GoToItem')}
       />
     )}
 
@@ -396,6 +382,24 @@ ${(
           // eslint-disable-next-line react/prop-types
           components: ({ defaultValue, ...props }) => <Prop {...props} />,
         }}
+      />
+    )}
+
+${<H>Changing Switcher styles</H>}
+
+The switcher component takes a styles prop which can be used to override the default styles.
+
+In case you want to override just a subset of the default styles, make sure to spread the **provided** argument on your styles Object.
+
+
+${(
+      <Example
+        packageName="@atlaskit/navigation-next"
+        Component={
+          require('./examples/ui-components/SwitcherCustomStyles').default
+        }
+        title="Switcher"
+        source={require('!!raw-loader!./examples/ui-components/SwitcherCustomStyles')}
       />
     )}
 

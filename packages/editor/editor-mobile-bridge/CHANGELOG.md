@@ -1,5 +1,25 @@
 # @atlaskit/editor-mobile-bridge
 
+## 5.4.0
+- [minor] [611d8a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/611d8a5):
+
+  - ED-5707 Enable pinch to zoom in Renderer
+
+## 5.3.0
+- [minor] [13a108f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/13a108f):
+
+  - Updated package bundle
+
+## 5.2.4
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/renderer@30.0.0
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/task-decision@11.0.2
+  - @atlaskit/media-core@24.4.0
+
 ## 5.2.3
 - [patch] [f6c3f01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6c3f01):
 

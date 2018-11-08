@@ -28,9 +28,7 @@ const GroupHeadingPrimitiveWithTheme = withContentTheme(GroupHeadingPrimitive);
 
 // TODO: This component is only defined to pass correct props to our prop docs
 // as we require classes for them. Remove once we fix this on the prop doc level.
-export default class GroupHeading extends Component<
-  ConnectedGroupHeadingProps,
-> {
+export default class GroupHeading extends Component<ConnectedGroupHeadingProps> {
   render() {
     return <GroupHeadingPrimitiveWithTheme {...this.props} />;
   }

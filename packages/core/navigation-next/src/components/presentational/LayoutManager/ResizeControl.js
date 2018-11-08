@@ -317,7 +317,7 @@ class ResizeControl extends PureComponent<Props, State> {
     }
 
     // allow the product nav to be 75% of the available page width
-    const maxWidth = Math.round(window.innerWidth / 4 * 3);
+    const maxWidth = Math.round((window.innerWidth / 4) * 3);
     const minWidth = CONTENT_NAV_WIDTH_COLLAPSED;
     const adjustedMax = maxWidth - initialWidth - GLOBAL_NAV_WIDTH;
     const adjustedMin = minWidth - initialWidth;
@@ -447,16 +447,15 @@ class ResizeControl extends PureComponent<Props, State> {
           <Shadow direction={shadowDirection} isBold={mouseIsDown} />
           {!isResizeDisabled && (
             <Fragment>
-              {!isGrabAreaDisabled &&
-                showGrabArea && (
-                  <GrabArea
-                    isBold={mouseIsDown}
-                    showHandle={mouseIsDown || mouseIsOverGrabArea}
-                    onMouseEnter={this.mouseEnterGrabArea}
-                    onMouseLeave={this.mouseLeaveGrabArea}
-                    onMouseDown={this.handleResizeStart}
-                  />
-                )}
+              {!isGrabAreaDisabled && showGrabArea && (
+                <GrabArea
+                  isBold={mouseIsDown}
+                  showHandle={mouseIsDown || mouseIsOverGrabArea}
+                  onMouseEnter={this.mouseEnterGrabArea}
+                  onMouseLeave={this.mouseLeaveGrabArea}
+                  onMouseDown={this.handleResizeStart}
+                />
+              )}
               {collapseToggleTooltipContent ? (
                 <Tooltip
                   content={makeTooltipNode(

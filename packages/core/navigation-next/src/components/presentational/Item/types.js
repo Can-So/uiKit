@@ -4,7 +4,7 @@ import type { ComponentType, Node, Ref } from 'react';
 import type { DraggableProps } from 'react-beautiful-dnd';
 import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
 
-import type { StyleReducer, ProductTheme } from '../../../theme/types';
+import type { StyleReducerWithState, ProductTheme } from '../../../theme/types';
 import type { InteractionState } from '../InteractionStateManager/types';
 
 type Spacing = 'compact' | 'default';
@@ -50,13 +50,13 @@ export type ItemBaseProps = {|
   /** Whether this Item should display as being selected. */
   isSelected: boolean,
   /** A handler which will be called when the Item is clicked. */
-  onClick?: (SyntheticEvent<MouseEvent>) => void,
+  onClick?: (SyntheticMouseEvent<*>) => void,
   /** How tight the spacing between the elements inside the Item should be. */
   spacing: Spacing,
   /** A function which will be passed the default styles object for the Item as
    * well as its current state, and should return a new styles object. Allows
    * you to patch and customise the Item's appearance. */
-  styles: StyleReducer,
+  styles: StyleReducerWithState,
   /** The string to render as a 'description' under the main text content in the
    * Item. */
   subText?: string,
@@ -66,11 +66,11 @@ export type ItemBaseProps = {|
   text: Node,
 |};
 
-export type ItemRenderComponentProps = {|
+export type ItemRenderComponentProps = {
   ...ItemBaseProps,
   children: Node,
   className: string,
-|};
+};
 
 /** Item props from an external consumer perspective */
 export type ExternalItemProps = {|

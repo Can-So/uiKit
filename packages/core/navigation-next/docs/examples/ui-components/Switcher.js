@@ -100,7 +100,7 @@ export default class extends React.Component<*, State> {
     },
     text: 'Create board',
   });
-  target = (selected: *) => {
+  target = ({ id, subText, text }: *) => {
     const avatar = s => (
       <ItemAvatar
         appearance="square"
@@ -111,15 +111,13 @@ export default class extends React.Component<*, State> {
       />
     );
 
-    const { id, text, subText } = selected;
-
     return (
       <ContainerHeader
         before={avatar}
         after={ChevD}
         id={id}
-        text={text}
         subText={subText}
+        text={text}
       />
     );
   };
@@ -139,7 +137,9 @@ export default class extends React.Component<*, State> {
             value={selected}
           />
           <SectionHeading>Section heading</SectionHeading>
-          {items.map(p => <Item key={p.text} {...p} />)}
+          {items.map(p => (
+            <Item key={p.text} {...p} />
+          ))}
         </Wrapper>
       </NavigationProvider>
     );

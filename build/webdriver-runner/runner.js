@@ -2,10 +2,10 @@
 // @flow
 
 /*
-* Setup webdriver clients depending on environment on which the test is run against.
-* BrowserTestCase is customized wrapper over jest-test-runner handling test setup, execution and 
-* teardown for webdriver tests .
-*/
+ * Setup webdriver clients depending on environment on which the test is run against.
+ * BrowserTestCase is customized wrapper over jest-test-runner handling test setup, execution and
+ * teardown for webdriver tests .
+ */
 
 // increase default jasmine timeout not to fail on webdriver tests as tests run can
 // take a while depending on the number of threads executing.
@@ -48,8 +48,8 @@ afterAll(async function() {
 function BrowserTestCase(...args /*:Array<any> */) {
   const testname = args.shift();
   /* Based on the recent changes of the runnner, test names are slightly wrong, they do not represent the test file. We now spinning one session to
-  * run all the tests contained in the test file then closing the session. Hence, we needed to update the test name to contain the filename.
-  * */
+   * run all the tests contained in the test file then closing the session. Hence, we needed to update the test name to contain the filename.
+   * */
   const testFileName = testname.split(':')[0] || testname;
   const testFn = args.pop();
   const skipForBrowser = args.length > 0 ? args.shift() : { skip: [] };

@@ -53,10 +53,9 @@ const RouterLink = ({
       >
         {children}
       </Link>
-      {subNav &&
-        isSubNavExpanded(href, pathname) && (
-          <SubNavWrapper>{renderNav(subNav, { pathname })}</SubNavWrapper>
-        )}
+      {subNav && isSubNavExpanded(href, pathname) && (
+        <SubNavWrapper>{renderNav(subNav, { pathname })}</SubNavWrapper>
+      )}
     </div>
   );
 };

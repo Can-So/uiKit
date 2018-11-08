@@ -11,22 +11,24 @@ const NEWLINE = /\r?\n/;
 
 export function table(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback: TokenErrCallback,
 ): Token {
+  const substring = input.substring(position);
   let index = 0;
   const output: PMNode[] = [];
 
   let builder: TableBuilder | null = null;
   let lineBuffer: string[] = [];
-  for (const line of input.split(NEWLINE)) {
+  for (const line of substring.split(NEWLINE)) {
     const match = line.match(TABLE_REGEXP);
 
     if (!match && !isNextLineEmpty(line)) {
       lineBuffer.push(line);
       index += line.length;
       // Finding the length of the line break
-      const length = parseNewlineOnly(input.substring(index));
+      const length = parseNewlineOnly(substring.substring(index));
       if (length) {
         index += length;
       }
@@ -51,7 +53,7 @@ export function table(
     lineBuffer.push(line);
     index += line.length;
     // Finding the length of the line break
-    const lengthOfLineBreak = parseNewlineOnly(input.substring(index));
+    const lengthOfLineBreak = parseNewlineOnly(substring.substring(index));
     if (lengthOfLineBreak) {
       index += lengthOfLineBreak;
     }

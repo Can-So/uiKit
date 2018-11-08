@@ -6,6 +6,8 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   type WithAnalyticsEventsProps,
+  type AnalyticsContextWrappedComp,
+  type AnalyticsEventsWrappedComp,
 } from '@atlaskit/analytics-next';
 import type { ViewLayer } from '../view-controller/types';
 
@@ -39,11 +41,11 @@ const getDisplayName = component =>
 const kebabToCamelCase = (str: string) =>
   `${str}`.replace(/-([a-z])/gi, g => g[1].toUpperCase());
 
-export const navigationItemClicked = <P: {}>(
-  Component: ComponentType<P>,
+export const navigationItemClicked = <P: {}, C: ComponentType<P>>(
+  Component: C,
   componentName: string,
   useActionSubjectId: boolean = false,
-) => {
+): AnalyticsContextWrappedComp<AnalyticsEventsWrappedComp<C>> => {
   return withAnalyticsContext({
     componentName,
   })(

@@ -13,10 +13,7 @@ export const ResultItemGroupTitle = styled.div`
   font-weight: 600;
 `;
 
-export const ResultItemAfter =
-  styled.div <
-  { shouldTakeSpace: boolean } >
-  `
+export const ResultItemAfter = styled.div<{ shouldTakeSpace: boolean }>`
   min-width: ${({ shouldTakeSpace }) => (shouldTakeSpace ? '24px' : 0)};
 `;
 

@@ -1,5 +1,10 @@
 # @atlaskit/tree
 
+## 4.1.5
+- [patch] [6c250fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c250fe):
+
+  - Upgrading react-beautiful-dnd-next to 10.0.0-beta.2
+
 ## 4.1.4
 - [patch] [7b08fd4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b08fd4):
 

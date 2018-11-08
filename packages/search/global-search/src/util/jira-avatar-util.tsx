@@ -7,8 +7,8 @@ import { gridSize } from '@atlaskit/theme';
 import { ContentType } from '../model/Result';
 
 const IconWrapper = styled.div`
-  width: ${7 * gridSize() / 2}px;
-  height: ${7 * gridSize() / 2}px;
+  width: ${(7 * gridSize()) / 2}px;
+  height: ${(7 * gridSize()) / 2}px;
   align-items: center;
   display: flex;
 `;

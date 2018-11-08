@@ -96,7 +96,7 @@ export default class Trigger extends PureComponent<Props, {}> {
                     handleItemRemove(item);
                   }}
                   removeButtonText={
-                    isDisabled ? null : `${item.content}, remove`
+                    isDisabled ? undefined : `${item.content}, remove`
                   }
                   text={item.content}
                 />

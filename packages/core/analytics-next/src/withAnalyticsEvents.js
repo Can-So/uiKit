@@ -88,17 +88,24 @@ type Obj<T> = { [string]: T };
 const vmap = <A, B>(obj: Obj<A>, fn: (string, A) => B): Obj<B> =>
   Object.keys(obj).reduce((curr, k) => ({ ...curr, [k]: fn(k, obj[k]) }), {});
 
-type PropsWithoutAnalytics<C> = $Diff<
+/* This must use $Supertype to work with multiple HOCs - https://github.com/facebook/flow/issues/6057#issuecomment-414157781
+ * We also cannot alias this as a generic of withAnalyticsEvents itself as
+ * that causes issues with multiple HOCs - https://github.com/facebook/flow/issues/6587
+ */
+type AnalyticsEventsWrappedProps<C> = $Diff<
   ElementConfig<$Supertype<C>>,
   AnalyticsEventsProps,
 >;
+export type AnalyticsEventsWrappedComp<C> = ComponentType<
+  AnalyticsEventsWrappedProps<C>,
+>;
 
 export default function withAnalyticsEvents<P: {}, C: ComponentType<P>>(
-  createEventMap: EventMap<PropsWithoutAnalytics<C>> = {},
-): C => ComponentType<PropsWithoutAnalytics<C>> {
+  createEventMap: EventMap<AnalyticsEventsWrappedProps<C>> = {},
+): C => AnalyticsEventsWrappedComp<C> {
   return WrappedComponent => {
     // $FlowFixMe - flow 0.67 doesn't know about forwardRef
-    const WithAnalyticsEvents = React.forwardRef((props: PWA, ref) => {
+    const WithAnalyticsEvents = React.forwardRef((props, ref) => {
       return (
         <AnalyticsContextConsumer>
           {createAnalyticsEvent => {

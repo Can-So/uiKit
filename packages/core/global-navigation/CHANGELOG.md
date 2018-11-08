@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.1.1
+- [patch] [d427e8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d427e8a):
+
+  - Adds tests to global-navigation. Removes a bit of dead code
+
 ## 5.1.0
 - [minor] [96a854f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/96a854f):
 

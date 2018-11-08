@@ -161,26 +161,24 @@ export default class MentionWithProfileCard extends PureComponent<
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         />
-        {target &&
-          portal &&
-          visible && (
-            <Popup
-              offset={[0, 8]}
-              target={target}
-              mountTo={portal}
-              alignX={popupAlignX}
-              alignY={popupAlignY}
-            >
-              <ProfilecardResourcedWithListeners
-                handleClickOutside={this.hideProfilecard}
-                handleEscapeKeydown={this.hideProfilecard}
-                cloudId={cloudId}
-                userId={id}
-                resourceClient={resourceClient}
-                actions={this.getActions(id, text, accessLevel)}
-              />
-            </Popup>
-          )}
+        {target && portal && visible && (
+          <Popup
+            offset={[0, 8]}
+            target={target}
+            mountTo={portal}
+            alignX={popupAlignX}
+            alignY={popupAlignY}
+          >
+            <ProfilecardResourcedWithListeners
+              handleClickOutside={this.hideProfilecard}
+              handleEscapeKeydown={this.hideProfilecard}
+              cloudId={cloudId}
+              userId={id}
+              resourceClient={resourceClient}
+              actions={this.getActions(id, text, accessLevel)}
+            />
+          </Popup>
+        )}
       </span>
     );
   }

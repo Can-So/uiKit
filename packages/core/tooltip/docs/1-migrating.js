@@ -47,7 +47,7 @@ export default md`
 
   #### Changes to Props
 
-  * \`description\` has been renamed to \`content\`
+  - \`description\` has been renamed to \`content\`
 
   In \`7.0.0\` the old props are still supported for backwards-compatibility,
   but will log a deprecation warning. Support will be removed from version
