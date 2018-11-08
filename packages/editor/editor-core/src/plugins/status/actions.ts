@@ -20,7 +20,7 @@ export const DEFAULT_STATUS: StatusType = {
   color: 'neutral',
 };
 
-export const createStatus = (showStatusPickerAtOffset: number) => (
+export const createStatus = (showStatusPickerAtOffset = -2) => (
   insert: (node?: Node | Object | string) => Transaction,
   state: EditorState,
 ): Transaction => {

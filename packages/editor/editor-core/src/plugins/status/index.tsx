@@ -68,7 +68,7 @@ const createQuickInsertMenuItem = () => ({
   priority: 700,
   keywords: ['lozenge'],
   icon: () => <LabelIcon label="Status" />,
-  action: createStatus(-2),
+  action: createStatus(),
 });
 
 export interface StatusOptions {
