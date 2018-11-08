@@ -72,11 +72,17 @@ export default class Reset extends Component<Props> {
   render() {
     return (
       <Consumer>
-        {theme => (
-          <Div {...defaultTheme} {...theme} {...this.props}>
-            {this.props.children}
-          </Div>
-        )}
+        {theme => {
+          return (
+            <Div
+              {...defaultTheme}
+              {...{ ...theme, mode: undefined }}
+              {...this.props}
+            >
+              {this.props.children}
+            </Div>
+          );
+        }}
       </Consumer>
     );
   }

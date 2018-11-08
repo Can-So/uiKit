@@ -8,7 +8,7 @@ test('no parent', done => {
   mount(
     <Theme>
       {t => {
-        expect(t).toEqual({});
+        expect(t).toEqual({ mode: 'light' });
         done();
       }}
     </Theme>,
@@ -22,7 +22,7 @@ test('has parent', done => {
     <Theme values={t => ({ backgroundColor, ...t })}>
       <Theme values={t => ({ ...t, textColor })}>
         {t => {
-          expect(t).toEqual({ backgroundColor, textColor });
+          expect(t).toEqual({ backgroundColor, mode: 'light', textColor });
           done();
         }}
       </Theme>
