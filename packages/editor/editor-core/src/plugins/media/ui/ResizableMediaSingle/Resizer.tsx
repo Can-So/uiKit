@@ -3,14 +3,8 @@ import * as classnames from 'classnames';
 import { MediaSingleLayout, calcColumnsFromPx } from '@atlaskit/editor-common';
 import { Props, EnabledHandles } from './types';
 
-// @ts-ignore
-// tslint:disable-next-line
-const Resizable = require('re-resizable');
-import {
-  default as ResizableType,
-  ResizableDirection,
-  NumberSize,
-} from 're-resizable';
+import Resizable from 're-resizable';
+import { ResizableDirection, NumberSize } from 're-resizable';
 
 import { gridTypeForLayout } from '../../../grid';
 
@@ -46,7 +40,7 @@ export default class Resizer extends React.Component<
     isResizing: boolean;
   }
 > {
-  resizable: ResizableType;
+  resizable: Resizable;
   state = {
     isResizing: false,
   };
@@ -175,7 +169,6 @@ export default class Resizer extends React.Component<
     // Ideally, Resizable would let you pass in the component rather than
     // the div. For now, we just apply the same styles using CSS
     return (
-      // @ts-ignore
       <Resizable
         ref={this.setResizableRef}
         onResize={this.handleResize}
