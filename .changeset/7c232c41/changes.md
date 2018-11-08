@@ -1,1 +1,0 @@
-- Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type
