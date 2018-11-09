@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.0.11
+- [patch] [6ef824b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ef824b):
+
+  - Fix import of re-resizable
+
 ## 88.0.10
 - [patch] [d518ce0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d518ce0):
 
