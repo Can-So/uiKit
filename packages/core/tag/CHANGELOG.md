@@ -1,5 +1,10 @@
 # @atlaskit/tag
 
+## 6.1.0
+- [minor] [925de1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/925de1a):
+
+  - Export `AppearanceType` flow type
+
 ## 6.0.9
 - [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
 

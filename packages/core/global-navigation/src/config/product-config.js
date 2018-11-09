@@ -123,34 +123,35 @@ function profileConfigFactory(
   };
 }
 
-function notificationBadge(notificationCount) {
+function notificationBadge(badgeCount) {
   return {
-    badge: notificationCount
+    badge: badgeCount
       ? () => (
           <Badge
             max={MAX_NOTIFICATIONS_COUNT}
             appearance="important"
-            value={notificationCount}
+            value={badgeCount}
           />
         )
       : null,
+    badgeCount,
   };
 }
 
 function notificationConfigFactory(
   notificationTooltip,
-  notificationCount,
+  badgeCount,
   notificationDrawerContents,
   onNotificationClick,
   isNotificationInbuilt,
   openDrawer,
 ) {
   return isNotificationInbuilt
-    ? configFactory(openDrawer, notificationTooltip)
+    ? configFactory(openDrawer, notificationTooltip, { badgeCount })
     : configFactory(
         onNotificationClick || (notificationDrawerContents && openDrawer),
         notificationTooltip,
-        notificationBadge(notificationCount),
+        notificationBadge(badgeCount),
       );
 }
 

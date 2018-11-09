@@ -1,18 +1,18 @@
 // @flow
-
-import React, {
-  cloneElement,
-  PureComponent,
-  type ComponentType,
-  type Element,
-  type ElementRef,
-} from 'react';
+import React, { PureComponent, cloneElement, type ElementRef } from 'react';
 import NodeResolver from 'react-node-resolver';
 import shallowEqualObjects from 'shallow-equal/objects';
 import { components, PopupSelect, mergeStyles } from '@atlaskit/select';
 import { colors, gridSize as gridSizeFn } from '@atlaskit/theme';
 import AddIcon from '@atlaskit/icon/glyph/add';
 
+import {
+  type SwitcherState,
+  type SwitcherProps,
+  type SwitcherBaseProps,
+  type SelectStyles,
+  type OptionType,
+} from './types';
 import Option from './Option';
 import { UIControllerSubscriber } from '../../../ui-controller';
 import { CONTENT_NAV_WIDTH } from '../../../common/constants';
@@ -47,25 +47,31 @@ const defaultStyles = {
 // ==============================
 // Custom Functions
 // ==============================
-const createStyles = (styles: SelectStyles = {}): Object =>
+
+export const createStyles = (styles: SelectStyles = {}): Object =>
   mergeStyles(defaultStyles, styles);
 
-function filterOption({ data }, input) {
-  return data.text.toLowerCase().includes(input.toLowerCase());
-}
-function isOptionSelected(option, selected) {
+export const filterOption = ({ data }: { data: OptionType }, input: string) =>
+  data.text.toLowerCase().includes(input.toLowerCase());
+
+export const isOptionSelected = (
+  option: OptionType,
+  selected: Array<OptionType> | void,
+) => {
   if (!selected || !selected.length) return false;
   return option.id === selected[0].id;
-}
-function getOptionValue(option) {
-  return option.id;
-}
+};
+
+export const getOptionValue = (option: OptionType) => option.id;
 
 // ==============================
 // Custom Components
 // ==============================
 
-const Control = ({ innerProps: { innerRef, ...innerProps }, ...props }: *) => (
+export const Control = ({
+  innerProps: { innerRef, ...innerProps },
+  ...props
+}: *) => (
   <div
     ref={innerRef}
     css={{
@@ -77,7 +83,7 @@ const Control = ({ innerProps: { innerRef, ...innerProps }, ...props }: *) => (
     <components.Control {...props} innerProps={innerProps} />
   </div>
 );
-const Footer = ({ text, onClick }: *) => (
+export const Footer = ({ text, onClick }: *) => (
   <button
     css={{
       background: 0,
@@ -113,47 +119,6 @@ const isEmpty = obj => Object.keys(obj).length === 0;
 // ==============================
 // Class
 // ==============================
-
-type ComponentsType = { [key: string]: ComponentType<any> };
-
-type SelectStyles = {
-  [component: string]: (
-    baseStyles: {},
-    {
-      isActive: boolean,
-      isHover: boolean,
-      isFocused: boolean,
-      isSelected: boolean,
-    },
-  ) => {},
-};
-
-type SwitcherBaseProps = {
-  /* Close the menu when the user clicks create */
-  closeMenuOnCreate?: boolean,
-  /* Replaceable components */
-  components?: ComponentsType,
-  /* The action and text representing a create button as the footer */
-  create?: { onClick: (*) => void, text: string },
-  /* The react element to display as the footer, beneath the list */
-  footer?: Element<*>,
-  /* The options presented in the select menu */
-  options: Array<Object>,
-  /* The target element, which invokes the select menu */
-  target: Element<*>,
-  /* A react-select Style object, which overrides the default components styles. */
-  styles?: SelectStyles,
-};
-
-type SwitcherProps = SwitcherBaseProps & {
-  // internal `navWidth` property isn't part of the public API
-  navWidth: number,
-};
-
-type SwitcherState = {
-  isOpen: boolean,
-  mergedComponents: ComponentsType,
-};
 
 class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
   state = {
@@ -252,8 +217,6 @@ class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
     );
   }
 }
-
-export { createStyles };
 
 export { Switcher as BaseSwitcher };
 

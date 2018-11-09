@@ -1,5 +1,15 @@
 # @atlaskit/modal-dialog
 
+## 7.0.7
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 7.0.6
+- [patch] [7cbd729](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7cbd729):
+
+  - Fixes visual bug where header and footer keylines appeared below textboxes and other components
+
 ## 7.0.5
 - [patch] [72bc8da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72bc8da):
 

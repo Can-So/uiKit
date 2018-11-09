@@ -1,5 +1,15 @@
 # @atlaskit/editor-core
 
+## 88.0.11
+- [patch] [6ef824b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ef824b):
+
+  - Fix import of re-resizable
+
+## 88.0.10
+- [patch] [d518ce0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d518ce0):
+
+  - FS-3118 - Only focus status input field on initial insertion. FS-3158 - Fix focus flicker in status input field.
+
 ## 88.0.9
 - [patch] [6efc73e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6efc73e):
 

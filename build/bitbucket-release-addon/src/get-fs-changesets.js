@@ -44,12 +44,11 @@ function getFullDiffStat(user, repo, hash, page, allValues = []) {
   });
 }
 
-function getSomething(user, repo, hashPromise, path) {
-  return hashPromise.then(hash =>
-    promisifyAPRequest(fetchFolderInfo(user, repo, hash, path)),
-  );
-}
-
+/**
+ * If we ever need to make this faster for large PRs, we could calculate the full
+ * number of requests after the first request and make serveral at a time in
+ * parallel.
+ */
 export default function getChangesetInfo(user, repo, pullrequestid) {
   let hashPromise = promisifyAPRequest(
     commitUrl(user, repo, pullrequestid),

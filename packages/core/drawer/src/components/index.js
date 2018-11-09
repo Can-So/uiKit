@@ -42,6 +42,10 @@ const createAndFireOnClick = (
   })(createAnalyticsEvent);
 
 export class DrawerBase extends Component<DrawerProps> {
+  static defaultProps = {
+    width: 'narrow',
+  };
+
   body = document.querySelector('body');
 
   componentDidMount() {

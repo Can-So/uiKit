@@ -19,7 +19,9 @@ exports[`Option should render correctly 1`] = `
     cx={[Function]}
     data={
       Object {
-        "text": "hello world",
+        "avatar": "/url-to-avatar",
+        "subText": "subText",
+        "text": "text",
       }
     }
     getStyles={[Function]}
@@ -46,10 +48,22 @@ exports[`Option should render correctly 1`] = `
     isSelected={false}
     theme={Object {}}
   >
+    <ElementWrapper
+      is="before"
+    >
+      <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar)))))
+        appearance="square"
+        borderColor="transparent"
+        src="/url-to-avatar"
+      />
+    </ElementWrapper>
     <ContentWrapper>
       <TextWrapper>
-        hello world
+        text
       </TextWrapper>
+      <SubTextWrapper>
+        subText
+      </SubTextWrapper>
     </ContentWrapper>
   </Option>
 </div>
