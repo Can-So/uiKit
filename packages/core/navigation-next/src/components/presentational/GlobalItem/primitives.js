@@ -8,17 +8,17 @@ import { styleReducerNoOp, withGlobalTheme } from '../../../theme';
 import type {
   GlobalItemPresentationProps,
   GlobalItemStyles,
-  // GlobalItemPrimitiveProps,
+  GlobalItemPrimitiveProps,
+  InjectedGlobalItemPrimitiveProps,
 } from './types';
 
 // FIXME: Get GlobalItemPrimitiveProps type working
-class GlobalNavigationItemPrimitive extends Component<
-  * /* GlobalItemPrimitiveProps */,
-> {
+class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> {
   static defaultProps = {
     isActive: false,
     isHover: false,
     isSelected: false,
+    isFocused: false,
     size: 'large',
     styles: styleReducerNoOp,
   };
@@ -27,11 +27,12 @@ class GlobalNavigationItemPrimitive extends Component<
     const { icon: Icon, badge: Badge, label, tooltip } = this.props;
     const presentationProps = this.getPresentationProps();
     if (!Icon && !Badge) return null;
+    const iconLabel = label || (typeof tooltip === 'string' ? tooltip : '');
     return (
       <Fragment>
         {!!Icon && (
           <div css={{ pointerEvents: 'none' }}>
-            <Icon label={label || tooltip} secondaryColor="inherit" />
+            <Icon label={iconLabel} secondaryColor="inherit" />
           </div>
         )}
         {!!Badge && (
@@ -43,12 +44,14 @@ class GlobalNavigationItemPrimitive extends Component<
     );
   };
 
-  getGlobalItemExternalProps = () => {
+  getGlobalItemExternalProps = (): $Diff<
+    GlobalItemPrimitiveProps,
+    InjectedGlobalItemPrimitiveProps,
+  > => {
     const {
-      createAnalyticsEvent,
       isActive,
+      isFocused,
       isHover,
-      isSelected,
       theme,
       ...externalProps
     } = this.props;
@@ -57,9 +60,9 @@ class GlobalNavigationItemPrimitive extends Component<
   };
 
   getPresentationProps = (): GlobalItemPresentationProps => {
-    const { isActive, isHover, isSelected, size } = this.props;
+    const { isActive, isFocused, isHover, isSelected, size } = this.props;
 
-    return { isActive, isHover, isSelected, size };
+    return { isActive, isFocused, isHover, isSelected, size };
   };
 
   generateStyles = (): GlobalItemStyles => {

@@ -1,11 +1,14 @@
 // @flow
 
-import type { ComponentType } from 'react';
-import type { ExternalGlobalItemProps } from '../GlobalItem/types';
+import type { ComponentType, ElementConfig } from 'react';
+import GlobalItem from '../GlobalItem';
 import type { GlobalTheme } from '../../../theme/types';
 
 // FIXME: Use ElementConfig instead
-type ItemDataShape = ExternalGlobalItemProps & { key?: string };
+type ItemDataShape = {
+  key?: string,
+  ...$Exact<ElementConfig<typeof GlobalItem>>,
+};
 
 export type ConnectedGlobalNavigationProps = {
   /** The component used to render the `primaryItems` and `secondaryItems`. By
