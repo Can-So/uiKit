@@ -1,0 +1,1 @@
+- ED-5196: For a block as first node in a document, up and left arrow should show a gap cursor
