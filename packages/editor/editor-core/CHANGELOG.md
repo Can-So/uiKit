@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.2
+- [patch] [93e576a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/93e576a):
+
+  - ED-5651: Typing // causes editor to disregard text
+
 ## 88.1.1
 - [patch] [9072682](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9072682):
 
