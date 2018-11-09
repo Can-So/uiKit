@@ -1,0 +1,1 @@
+- ED-5691 Allow unsupported block inside tableCell
