@@ -5,7 +5,7 @@ import {
   Transaction,
 } from 'prosemirror-state';
 import { removeNodeBefore } from 'prosemirror-utils';
-import { Direction } from './direction';
+import { Direction, isBackward, isForward } from './direction';
 import { GapCursorSelection, Side } from './selection';
 import { isTextBlockNearPos, isValidTargetNode } from './utils';
 import { Command } from '../../types';
@@ -21,7 +21,7 @@ export const arrow = (
 ): boolean => {
   const { doc, schema, selection, tr } = state;
 
-  let $pos = Direction.isBackward(dir) ? selection.$from : selection.$to;
+  let $pos = isBackward(dir) ? selection.$from : selection.$to;
   let mustMove = selection.empty;
 
   // start from text selection
@@ -43,9 +43,7 @@ export const arrow = (
     }
 
     // otherwise resolve previous/next position
-    $pos = doc.resolve(
-      Direction.isBackward(dir) ? $pos.before() : $pos.after(),
-    );
+    $pos = doc.resolve(isBackward(dir) ? $pos.before() : $pos.after());
     mustMove = false;
   }
 
@@ -53,12 +51,10 @@ export const arrow = (
   if (
     selection instanceof GapCursorSelection &&
     // next node allow gap cursor position
-    isValidTargetNode(
-      Direction.isBackward(dir) ? $pos.nodeBefore : $pos.nodeAfter,
-    ) &&
+    isValidTargetNode(isBackward(dir) ? $pos.nodeBefore : $pos.nodeAfter) &&
     // gap cursor changes block node
-    ((Direction.isBackward(dir) && selection.side === Side.LEFT) ||
-      (Direction.isForward(dir) && selection.side === Side.RIGHT))
+    ((isBackward(dir) && selection.side === Side.LEFT) ||
+      (isForward(dir) && selection.side === Side.RIGHT))
   ) {
     // reverse cursor position
     dispatch(
@@ -76,7 +72,7 @@ export const arrow = (
 
   const nextSelection = GapCursorSelection.findFrom(
     $pos,
-    Direction.isBackward(dir) ? -1 : 1,
+    isBackward(dir) ? -1 : 1,
     mustMove,
   );
 
@@ -86,7 +82,7 @@ export const arrow = (
 
   if (
     !isValidTargetNode(
-      Direction.isForward(dir)
+      isForward(dir)
         ? nextSelection.$from.nodeBefore
         : nextSelection.$from.nodeAfter,
     )
@@ -97,7 +93,7 @@ export const arrow = (
         .setSelection(
           new GapCursorSelection(
             nextSelection.$from,
-            Direction.isForward(dir) ? Side.LEFT : Side.RIGHT,
+            isForward(dir) ? Side.LEFT : Side.RIGHT,
           ),
         )
         .scrollIntoView(),
@@ -116,7 +112,7 @@ export const deleteNode = (dir: Direction): Command => (
   if (state.selection instanceof GapCursorSelection) {
     const { $from } = state.selection;
     let { tr } = state;
-    if (Direction.isBackward(dir)) {
+    if (isBackward(dir)) {
       tr = removeNodeBefore(state.tr);
     } else if ($from.nodeAfter) {
       tr = tr.delete($from.pos, $from.pos + $from.nodeAfter.nodeSize);
