@@ -40,6 +40,7 @@
     "@atlaskit/docs": "^5.0.2",
     "@atlaskit/field-range": "^5.0.2",
     "@atlaskit/field-text": "^7.0.3",
+    "@atlaskit/field-text-area": "^4.0.10",
     "@atlaskit/form": "^4.0.9",
     "@atlaskit/inline-message": "^7.0.0",
     "@atlaskit/page": "^8.0.2",
