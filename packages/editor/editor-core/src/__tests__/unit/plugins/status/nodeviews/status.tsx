@@ -42,10 +42,11 @@ describe('Status - NodeView', () => {
     const wrapper = mountWithIntl(
       <StatusNodeView
         view={view}
-        node={view.state.selection.$from.nodeBefore!}
+        node={view.state.selection.$from.nodeAfter!}
         getPos={jest.fn()}
       />,
     );
+
     expect(wrapper.find(Status).length).toBe(1);
     expect(wrapper.find(Status).prop('text')).toBe('In progress');
     expect(wrapper.find(Status).prop('color')).toBe('blue');
@@ -64,7 +65,7 @@ describe('Status - NodeView', () => {
     const wrapper = mountWithIntl(
       <StatusNodeView
         view={view}
-        node={view.state.selection.$from.nodeBefore!}
+        node={view.state.selection.$from.nodeAfter!}
         getPos={jest.fn()}
       />,
     );

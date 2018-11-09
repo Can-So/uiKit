@@ -69,6 +69,7 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
           const { pos, deleted } = tr.mapping.mapResult(
             state.showStatusPickerAt,
           );
+
           const newState = {
             showStatusPickerAt: deleted ? null : pos,
           };

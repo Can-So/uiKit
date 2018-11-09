@@ -31,10 +31,13 @@ export const getStatusAtPosition = pos => editorView => {
   if (element) {
     state.color = (element.getAttribute('color') || state.color) as ColorType;
     state.text = element.getAttribute('text') || state.text;
-    state.localId = element.getAttribute('text') || state.localId;
+    state.localId =
+      element.getAttribute('localId') || uuid.generate().toString();
+
+    return state;
   }
 
-  return state;
+  return undefined;
 };
 
 export const createStatus = (showStatusPickerAtOffset = -2) => (
@@ -66,18 +69,24 @@ export const updateStatus = (status?: StatusType) => (
 
   if (!showStatusPickerAt) {
     const statusNode = schema.nodes.status.createChecked(statusProps);
-    dispatch(tr.replaceSelectionWith(statusNode).scrollIntoView());
+    const newShowStatusPickerAt = tr.selection.from;
+    tr = tr.replaceSelectionWith(statusNode);
+    tr = tr.setSelection(NodeSelection.create(tr.doc, newShowStatusPickerAt));
+    tr = tr
+      .setMeta(pluginKey, { showStatusPickerAt: newShowStatusPickerAt })
+      .scrollIntoView();
+    dispatch(tr);
     return true;
   }
 
   if (state.doc.nodeAt(showStatusPickerAt)) {
-    dispatch(
-      tr
-        .setNodeMarkup(showStatusPickerAt, schema.nodes.status, statusProps)
-        .setSelection(Selection.near(tr.doc.resolve(showStatusPickerAt + 1)))
-        .setMeta(pluginKey, { showStatusPickerAt })
-        .scrollIntoView(),
-    );
+    tr = tr.setNodeMarkup(showStatusPickerAt, schema.nodes.status, statusProps);
+    tr = tr
+      // .setSelection(Selection.near(tr.doc.resolve(showStatusPickerAt - 1)))
+      .setSelection(NodeSelection.create(tr.doc, showStatusPickerAt));
+    tr = tr.setMeta(pluginKey, { showStatusPickerAt }).scrollIntoView();
+
+    dispatch(tr);
     return true;
   }
 
@@ -112,7 +121,7 @@ export const commitStatusPicker = () => (editorView: EditorView) => {
   tr = tr.setMeta(pluginKey, { showStatusPickerAt: null, autoFocus: false });
 
   if (statusNode.attrs.text) {
-    // still has content - keep content
+    // still has content - keep content, move selection after status
     tr = tr.setSelection(
       Selection.near(state.tr.doc.resolve(showStatusPickerAt + 2)),
     );

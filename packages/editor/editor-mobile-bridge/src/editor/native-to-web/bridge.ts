@@ -1,3 +1,5 @@
+import { Color as StatusColor } from '@atlaskit/status';
+
 export default interface NativeToWebBridge {
   onBoldClicked();
   onItalicClicked();
@@ -18,6 +20,6 @@ export default interface NativeToWebBridge {
   onBulletListSelected();
   onIndentList();
   onOutdentList();
-  onStatusInsert(status: string);
+  onStatusUpdate(text: string, color: StatusColor, uuid: string);
   onStatusPickerDismissed();
 }

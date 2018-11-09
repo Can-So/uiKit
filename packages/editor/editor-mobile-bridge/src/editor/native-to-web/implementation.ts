@@ -22,12 +22,12 @@ import {
   toggleStrong,
   StatusState,
   insertStatus,
-  closeStatusPicker,
-  setStatusPickerAt,
-  StatusType,
+  updateStatus,
+  commitStatusPicker,
 } from '@atlaskit/editor-core';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
 import { MentionDescription } from '@atlaskit/mention';
+import { Color as StatusColor } from '@atlaskit/status';
 import { rejectPromise, resolvePromise } from '../../cross-platform-promise';
 import { setBlockType } from '../../../../editor-core/src/plugins/block-type/commands';
 
@@ -86,17 +86,20 @@ export default class WebBridgeImpl implements NativeToWebBridge {
     }
   }
 
-  onStatusInsert(status: string) {
+  onStatusUpdate(text: string, color: StatusColor, uuid: string) {
+    // TODO create or insert....
     if (this.statusPluginState && this.editorView) {
-      let statusType = JSON.parse(status);
-      insertStatus(statusType)(this.editorView.state, this.editorView.dispatch);
-      // closeStatusPicker()(this.editorView);
+      updateStatus({
+        text,
+        color,
+        localId: uuid,
+      })(this.editorView);
     }
   }
 
   onStatusPickerDismissed() {
-    if (this.statusPluginState) {
-      closeStatusPicker()(this.editorView);
+    if (this.statusPluginState && this.editorView) {
+      commitStatusPicker()(this.editorView);
     }
   }
 

@@ -10,18 +10,6 @@ import {
   statusPluginKey,
   getStatusAtPosition,
 } from '@atlaskit/editor-core';
-import {
-  TaskDecisionProvider,
-  Query,
-  DecisionResponse,
-  TaskResponse,
-  ItemResponse,
-  RecentUpdatesId,
-  RecentUpdateContext,
-  ObjectKey,
-  TaskState,
-  Handler,
-} from '@atlaskit/task-decision';
 import { valueOf as valueOfMarkState } from './web-to-native/markState';
 import { valueOf as valueOfListState } from './web-to-native/listState';
 import { toNativeBridge } from './web-to-native';
@@ -33,26 +21,7 @@ import {
   TaskDecisionProvider,
 } from '../providers';
 
-export class TaskDecisionProviderImpl implements TaskDecisionProvider {
-  getDecisions(query: Query): Promise<DecisionResponse> {
-    return Promise.resolve({ decisions: [] });
-  }
-  getTasks(query: Query): Promise<TaskResponse> {
-    return Promise.resolve({ tasks: [] });
-  }
-  getItems(query: Query): Promise<ItemResponse> {
-    return Promise.resolve({ items: [] });
-  }
-  unsubscribeRecentUpdates(id: RecentUpdatesId) {}
-  notifyRecentUpdates(updateContext?: RecentUpdateContext) {}
-  toggleTask(key: ObjectKey, state: TaskState): Promise<TaskState> {
-    return Promise.resolve('DONE' as TaskState);
-  }
-  subscribe(key: ObjectKey, handler: Handler) {}
-  unsubscribe(key: ObjectKey, handler: Handler) {}
-}
-
-const bridge: WebBridgeImpl = ((window as any).bridge = new WebBridgeImpl());
+export const bridge: WebBridgeImpl = ((window as any).bridge = new WebBridgeImpl());
 
 class EditorWithState extends Editor {
   onEditorCreated(instance: {
@@ -115,12 +84,16 @@ function subscribeForStatusStateChange(view: EditorView, eventDispatcher: any) {
 const statusStateUpdated = view => state => {
   if (state.showStatusPickerAt) {
     const status = getStatusAtPosition(state.showStatusPickerAt)(view);
-    console.log(status);
-    toNativeBridge.showStatus(status.text, status.color, status.localId);
-  } else {
-    console.log('dismiss status');
-    toNativeBridge.dismissStatus();
+    if (status) {
+      toNativeBridge.showStatusPicker(
+        status.text,
+        status.color,
+        status.localId as string,
+      );
+      return;
+    }
   }
+  toNativeBridge.dismissStatusPicker();
 };
 
 function sendToNative(state) {
@@ -161,7 +134,7 @@ function unsubscribeFromStatusStateChanges(
   eventDispatcher: any,
 ) {
   eventDispatcher.off((statusPluginKey as any).key, statusStateUpdated);
-  bridge.statusPluginState = undefined;
+  bridge.statusPluginState = null;
 }
 
 const listStateUpdated = state => {
@@ -185,7 +158,7 @@ export default function mobileEditor(props) {
   return (
     <EditorWithState
       appearance="mobile"
-      mentionProvider={Promise.resolve(new MentionProvider())}
+      mentionProvider={Promise.resolve(MentionProvider)}
       media={{
         customMediaPicker: new MobilePicker(),
         provider: props.mediaProvider || MediaProvider,
@@ -205,7 +178,7 @@ export default function mobileEditor(props) {
       allowDate={true}
       allowRule={true}
       allowStatus={true}
-      taskDecisionProvider={Promise.resolve(new TaskDecisionProviderImpl())}
+      taskDecisionProvider={Promise.resolve(TaskDecisionProvider())}
     />
   );
 }

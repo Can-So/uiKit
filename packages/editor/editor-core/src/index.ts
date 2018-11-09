@@ -63,11 +63,11 @@ export {
   StatusState,
 } from './plugins/status/plugin';
 export {
-  insertStatus,
-  closeStatusPicker,
-  setStatusPickerAt,
+  commitStatusPicker,
   getStatusAtPosition,
+  setStatusPickerAt,
   StatusType,
+  updateStatus,
 } from './plugins/status/actions';
 
 // Used in editor-test-helpers

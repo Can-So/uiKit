@@ -7,6 +7,7 @@ import {
   ListBridge,
   StatusBridge,
 } from './bridge';
+import { Color as StatusColor } from '@atlaskit/status';
 
 export default class AndroidBridge implements NativeBridge {
   mentionBridge: MentionBridge;
@@ -59,9 +60,11 @@ export default class AndroidBridge implements NativeBridge {
     this.listBridge.updateListState(listState);
   }
 
-  showStatus(text?: string, color?: string, uuid?: string) {
-    this.statusBridge.showStatus(text, color, uuid);
+  showStatusPicker(text: string, color: StatusColor, uuid: string) {
+    this.statusBridge.showStatusPicker(text, color, uuid);
   }
 
-  dismissStatus() {}
+  dismissStatusPicker() {
+    this.statusBridge.dismissStatusPicker();
+  }
 }
