@@ -13,10 +13,6 @@ import { StateWatch } from './stateWatcher';
 const SERVICE_URL = 'https://api-private.stg.atlassian.com/object-resolver';
 const DEFAULT_CACHE_LIFESPAN = 15 * 1000;
 
-export type CustomFetch = (url: string) => Promise<ResolveResponse> | null;
-
-export type CardUpdateCallback = (state: ObjectState) => void;
-
 export type RemoteResourceAuthConfig = {
   key: string;
   displayName: string;
