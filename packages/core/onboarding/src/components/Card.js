@@ -7,14 +7,16 @@ import {
   gridSize,
   layers,
   math,
-  Theme,
   typography,
+  createTheme,
 } from '@atlaskit/theme';
 import { ActionItems, ActionItem } from '../styled/Dialog';
 import type { ActionsType } from '../types';
 
-export type CardTheme = {
-  container: () => Object,
+export type CardTokens = {
+  container: {
+    [string]: string | void,
+  },
 };
 
 type Props = {
@@ -36,7 +38,7 @@ type Props = {
   /** The image to render above the heading. Can be a url or a Node. */
   image?: string | Node,
   /** the theme of the card */
-  theme?: CardTheme => CardTheme,
+  theme?: CardTokens => CardTokens,
   innerRef?: Function,
 };
 
@@ -69,17 +71,16 @@ const DefaultFooter = styled.div`
   padding-top: ${gridSize}px;
 `;
 
-// IE11 and Edge: z-index needed because fixed position calculates z-index relative
-// to body insteadof nearest stacking context (Portal in our case).
-const defaultTheme = (theme: CardTheme): CardTheme => ({
-  container: () => ({
+const { Theme, ThemeContext } = createTheme<CardTokens, void>(() => ({
+  container: {
     overflow: 'auto',
     borderRadius: `${borderRadius()}px`,
     height: 'fit-content',
     zIndex: `${layers.spotlight() + 1}`,
-    ...(theme.container ? theme.container() : null),
-  }),
-});
+  },
+}));
+
+export { ThemeContext as CardThemeContext };
 
 const Card = ({
   actions = [],
@@ -94,48 +95,43 @@ const Card = ({
 }: Props) => {
   const { Header = DefaultHeader, Footer = DefaultFooter } = components;
   return (
-    // $FlowFixMe
-    <Theme theme={defaultTheme}>
-      {/* $FlowFixMe */}
-      <Theme theme={theme}>
-        {({ container }) => {
-          return (
-            <Container theme={container} innerRef={innerRef}>
-              {typeof image === 'string' ? <img src={image} alt="" /> : image}
-              <Body>
-                {heading || headingAfterElement ? (
-                  <Header>
-                    <Heading>{heading}</Heading>
-                    {/* Always need an element so space-between alignment works */}
-                    {headingAfterElement || <span />}
-                  </Header>
-                ) : null}
-                {children}
-                {actions.length > 0 || actionsBeforeElement ? (
-                  <Footer>
-                    {/* Always need an element so space-between alignment works */}
-                    {actionsBeforeElement || <span />}
-                    <ActionItems>
-                      {actions.map(({ text, key, ...rest }, idx) => {
-                        return (
-                          <ActionItem
-                            key={
-                              key ||
-                              (typeof text === 'string' ? text : `${idx}`)
-                            }
-                          >
-                            <Button {...rest}>{text}</Button>
-                          </ActionItem>
-                        );
-                      })}
-                    </ActionItems>
-                  </Footer>
-                ) : null}
-              </Body>
-            </Container>
-          );
-        }}
-      </Theme>
+    <Theme theme={theme} props={undefined}>
+      {({ container }) => {
+        return (
+          <Container theme={container} innerRef={innerRef}>
+            {typeof image === 'string' ? <img src={image} alt="" /> : image}
+            <Body>
+              {heading || headingAfterElement ? (
+                <Header>
+                  <Heading>{heading}</Heading>
+                  {/* Always need an element so space-between alignment works */}
+                  {headingAfterElement || <span />}
+                </Header>
+              ) : null}
+              {children}
+              {actions.length > 0 || actionsBeforeElement ? (
+                <Footer>
+                  {/* Always need an element so space-between alignment works */}
+                  {actionsBeforeElement || <span />}
+                  <ActionItems>
+                    {actions.map(({ text, key, ...rest }, idx) => {
+                      return (
+                        <ActionItem
+                          key={
+                            key || (typeof text === 'string' ? text : `${idx}`)
+                          }
+                        >
+                          <Button {...rest}>{text}</Button>
+                        </ActionItem>
+                      );
+                    })}
+                  </ActionItems>
+                </Footer>
+              ) : null}
+            </Body>
+          </Container>
+        );
+      }}
     </Theme>
   );
 };
