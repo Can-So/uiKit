@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ColorPalette } from '../src';
-import { simplePalette } from '../examples-helpers/constants';
+import { simplePalette } from '../mock-data';
 import { colors } from '@atlaskit/theme';
 
 export default () => (

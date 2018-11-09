@@ -5,6 +5,15 @@ import { ColorPalette } from './ColorPalette';
 import ColorCard from './ColorCard';
 import { Palette, Color } from '../types';
 import { ColorCardWrapper } from '../styled/ColorPicker';
+import {
+  name as packageName,
+  version as packageVersion,
+} from '../../package.json';
+import {
+  withAnalyticsEvents,
+  withAnalyticsContext,
+  createAndFireEvent,
+} from '@atlaskit/analytics-next';
 
 export type Option = Color;
 
@@ -18,7 +27,10 @@ export interface Props {
   /** color of checkmark on selected color */
   checkMarkColor?: string;
   /** onChange handler */
-  onChange: (value: string) => void;
+  onChange: (value: string, analyticsEvent?: object) => void;
+  /** You should not be accessing this prop under any circumstances. It is
+   provided by @atlaskit/analytics-next. */
+  createAnalyticsEvent?: any;
 }
 
 export interface State {
@@ -97,13 +109,33 @@ const adjustFocusIndex = (newIndex, itemsLength) => {
   return (itemsLength + newIndex) % itemsLength;
 };
 
-export class ColorPicker extends React.Component<Props, State> {
+export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
   state = {
     focusedItemIndex: getOptions(this.props).focusedItemIndex,
   };
 
+  createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
+
+  changeAnalyticsCaller = () => {
+    const { createAnalyticsEvent } = this.props;
+
+    if (createAnalyticsEvent) {
+      return this.createAndFireEventOnAtlaskit({
+        action: 'clicked',
+        actionSubject: 'avatar',
+
+        attributes: {
+          componentName: 'avatar',
+          packageName,
+          packageVersion,
+        },
+      })(createAnalyticsEvent);
+    }
+    return undefined;
+  };
+
   onChange = (option: Option) => {
-    this.props.onChange(option.value);
+    this.props.onChange(option.value, this.changeAnalyticsCaller());
   };
 
   onKeyDown = (event: React.KeyboardEvent) => {
@@ -229,3 +261,9 @@ export class ColorPicker extends React.Component<Props, State> {
     );
   }
 }
+
+export default withAnalyticsContext({
+  componentName: 'color-picker',
+  packageName,
+  packageVersion,
+})(withAnalyticsEvents()(ColorPickerWithoutAnalytics));

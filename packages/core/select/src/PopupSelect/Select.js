@@ -199,7 +199,6 @@ export default class PopupSelect extends PureComponent<Props, State> {
   // ==============================
 
   resolveTargetRef = (popperRef: ElementRef<*>) => (ref: HTMLElement) => {
-    console.log('>>> ref: ', ref);
     this.targetRef = ref;
     popperRef(ref);
   };

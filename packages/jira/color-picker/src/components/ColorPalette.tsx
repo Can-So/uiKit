@@ -27,7 +27,7 @@ export class ColorPalette extends PureComponent<Props> {
   render() {
     const {
       palette,
-      cols = 7,
+      cols,
       onClick,
       selectedColor,
       checkMarkColor,
@@ -35,8 +35,10 @@ export class ColorPalette extends PureComponent<Props> {
     } = this.props;
 
     return (
-      // HARDCODE: compensate container padding
-      <ColorPaletteContainer style={{ maxWidth: cols * 26 + 12 }}>
+      // HARDCODE: color card width and container padding
+      <ColorPaletteContainer
+        style={{ maxWidth: cols ? cols * 26 + 12 : undefined }}
+      >
         {palette.map((color, index) => (
           <ColorCardWrapper key={color.value}>
             <ColorCard
