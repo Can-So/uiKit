@@ -115,3 +115,27 @@ export type WithThemeProps = {
 export type ThemeWrappedComp<C> = ComponentType<
   $Diff<ElementConfig<$Supertype<C>>, Diffable<WithThemeProps>>,
 >;
+
+/**
+ * withContentTheme
+ */
+
+export type WithContentThemeProps = {
+  theme: ProductTheme,
+};
+
+export type ContentThemeWrappedComp<C> = ComponentType<
+  $Diff<ElementConfig<$Supertype<C>>, Diffable<WithContentThemeProps>>,
+>;
+
+/**
+ * withGlobalTheme
+ */
+
+export type WithGlobalThemeProps = {
+  theme: GlobalTheme,
+};
+
+export type GlobalThemeWrappedComp<C> = ComponentType<
+  $Diff<ElementConfig<$Supertype<C>>, Diffable<WithGlobalThemeProps>>,
+>;

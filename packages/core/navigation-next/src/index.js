@@ -97,4 +97,11 @@ export type {
   WithNavigationViewControllerProps,
   ViewControllerWrappedComp,
 } from './view-controller/types';
-export type { WithThemeProps, ThemeWrappedComp } from './theme/types';
+export type {
+  WithThemeProps,
+  ThemeWrappedComp,
+  WithContentThemeProps,
+  ContentThemeWrappedComp,
+  WithGlobalThemeProps,
+  GlobalThemeWrappedComp,
+} from './theme/types';
