@@ -4,7 +4,7 @@
   "config": {
     "access": "private"
   },
-  "description": "Jira Date Picker Component",
+  "description": "Jira Color Picker Component",
   "main": "dist/es5/index.js",
   "modules": "dist/es2015/index.js",
   "types": "dist/es5/types.d.ts",
@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@atlaskit/docs": "^5.2.0",
+    "@atlaskit/section-message": "^1.0.10",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "enzyme-adapter-react-16": "https://registry.npmjs.org/@pgleeson/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.1.7.tgz",
     "react": "^16.4.0"

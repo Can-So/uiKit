@@ -43,7 +43,6 @@ export default class ColorCard extends PureComponent<Props> {
       tabIndex,
       value,
       label,
-      selectedLabel = 'Selected',
       selected,
       checkMarkColor = colors.N0,
     } = this.props;
@@ -59,9 +58,7 @@ export default class ColorCard extends PureComponent<Props> {
         }}
         role="button"
       >
-        {selected && (
-          <EditorDoneIcon primaryColor={checkMarkColor} label={selectedLabel} />
-        )}
+        {selected && <EditorDoneIcon primaryColor={checkMarkColor} label="" />}
       </ColorCardContent>
     );
   }

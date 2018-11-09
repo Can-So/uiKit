@@ -9,11 +9,15 @@ import { ColorCardWrapper } from '../styled/ColorPicker';
 export type Option = Color;
 
 export interface Props {
+  /** list of available colors */
   palette: Palette;
+  /** selected color */
   selectedColor?: string;
-  selectedLabel?: string;
+  /** maximum column length */
   cols?: number;
+  /** color of checkmark on selected color */
   checkMarkColor?: string;
+  /** onChange handler */
   onChange: (value: string) => void;
 }
 
@@ -45,19 +49,13 @@ const arrowKeys = {
 };
 
 const MenuList = (props: SelectComponentProps) => {
-  const {
-    selectedLabel,
-    cols,
-    checkMarkColor,
-    focusedItemIndex,
-  } = props.selectProps;
+  const { cols, checkMarkColor, focusedItemIndex } = props.selectProps;
   const option = props.getValue()[0];
 
   return (
     <ColorPalette
       palette={props.options}
       selectedColor={option && option.value}
-      selectedLabel={selectedLabel}
       cols={cols}
       checkMarkColor={checkMarkColor}
       focusedItemIndex={focusedItemIndex}
@@ -188,7 +186,7 @@ export class ColorPicker extends React.Component<Props, State> {
   selectRef: React.RefObject<typeof PopupSelect> = React.createRef();
 
   render() {
-    const { selectedLabel, checkMarkColor, cols } = this.props;
+    const { checkMarkColor, cols } = this.props;
     const { focusedItemIndex } = this.state;
     const { options, value } = getOptions(this.props);
 
@@ -225,7 +223,6 @@ export class ColorPicker extends React.Component<Props, State> {
         searchThreshold={Number.MAX_VALUE}
         // palette props
         focusedItemIndex={focusedItemIndex}
-        selectedLabel={selectedLabel}
         cols={cols}
         checkMarkColor={checkMarkColor}
       />
