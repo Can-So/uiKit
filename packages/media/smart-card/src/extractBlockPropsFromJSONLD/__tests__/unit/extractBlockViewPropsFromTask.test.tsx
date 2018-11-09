@@ -1,5 +1,7 @@
+import * as React from 'react';
+import { mount } from 'enzyme';
+
 import { atlassianTask } from './_fixtures';
-import { relativeTime } from '../../../utils';
 import {
   buildTitle,
   buildDescription,
@@ -11,6 +13,7 @@ import {
   buildDetailsLozenge,
   buildContext,
 } from '../../extractPropsFromTask';
+import { FormattedRelative, IntlProvider } from 'react-intl';
 
 describe('extractPropsFromTask()', () => {
   describe('build a title', () => {
@@ -52,7 +55,7 @@ describe('extractPropsFromTask()', () => {
       expect(buildByline({})).toEqual({});
     });
 
-    it("should 'updated by user' at byline", () => {
+    it("should include 'updated by user' in byline", () => {
       const mock = {
         updated: '2018-07-27T11:14:57.392Z',
         updatedBy: {
@@ -60,36 +63,49 @@ describe('extractPropsFromTask()', () => {
         },
         dateCreated: '2018-06-27T11:14:57.392Z',
       };
-      expect(buildByline(mock)).toEqual({
-        byline: {
-          text: `Updated ${relativeTime(mock.updated)} by ${
-            mock.updatedBy.name
-          }`,
-        },
-      });
+      const props = buildByline(mock);
+      expect(props).toHaveProperty('byline');
+
+      const byline = props.byline as React.ReactElement<any>;
+      const wrapper = mount(<IntlProvider locale="en">{byline}</IntlProvider>);
+      expect(wrapper.find(FormattedRelative).prop('value')).toEqual(
+        '2018-07-27T11:14:57.392Z',
+      );
+      expect(wrapper.text()).toContain('Updated  by Test User');
     });
 
-    it("should 'updated' at byline", () => {
+    it("should include 'updated' in byline", () => {
       const mock = {
         updated: '2018-07-27T11:14:57.392Z',
         dateCreated: '2018-06-27T11:14:57.392Z',
       };
-      expect(buildByline(mock)).toEqual({
-        byline: {
-          text: `Updated ${relativeTime(mock.updated)}`,
-        },
-      });
+      const props = buildByline(mock);
+      expect(props).toHaveProperty('byline');
+
+      const byline = props.byline as React.ReactElement<any>;
+      const wrapper = mount(<IntlProvider locale="en">{byline}</IntlProvider>);
+      expect(wrapper.find(FormattedRelative).prop('value')).toEqual(
+        '2018-07-27T11:14:57.392Z',
+      );
+      expect(wrapper.text()).toContain('Updated');
     });
 
-    it("should 'updated by user' at byline", () => {
+    it("should include 'created by user' in byline", () => {
       const mock = {
         dateCreated: '2018-06-27T11:14:57.392Z',
-      };
-      expect(buildByline(mock)).toEqual({
-        byline: {
-          text: `Created ${relativeTime(mock.dateCreated)}`,
+        attributedTo: {
+          name: 'Test User',
         },
-      });
+      };
+      const props = buildByline(mock);
+      expect(props).toHaveProperty('byline');
+
+      const byline = props.byline as React.ReactElement<any>;
+      const wrapper = mount(<IntlProvider locale="en">{byline}</IntlProvider>);
+      expect(wrapper.find(FormattedRelative).prop('value')).toEqual(
+        '2018-06-27T11:14:57.392Z',
+      );
+      expect(wrapper.text()).toContain('Created  by Test User');
     });
   });
 
