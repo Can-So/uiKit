@@ -92,8 +92,7 @@ export class UserPicker extends React.PureComponent<Props, State> {
       count: 0,
       hoveringClearIndicator: false,
       menuIsOpen: false,
-      // TODO: Change to a check when we implement default values
-      hasValue: false,
+      hasValue: !!this.props.defaultValue || !!this.props.value,
     };
   }
 
