@@ -107,10 +107,26 @@ sadfsadf
 `,
     ],
     [
-      'should not insert a ruler if it is followed by any number of characters',
+      'should insert a if it is followed by an empty line',
+      `
+- a
+---- 
+`,
+    ],
+    [
+      'should continue list if rule is followed by text on next line',
+      `
+- a
+---- 
+abc
+`,
+    ],
+    [
+      'should handle lists with quad dash symbols',
       `
 - a
 ---- b
+-- c
 `,
     ],
   ];
