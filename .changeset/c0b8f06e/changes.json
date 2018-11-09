@@ -1,4 +1,0 @@
-{
-  "releases": [{ "name": "@atlaskit/smart-card", "type": "patch" }],
-  "dependents": []
-}

@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 8.6.3
+- [patch] [4b989c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b989c3):
+
+  - Fix inline cards crashing after change to the format.
+
 ## 8.6.2
 - [patch] [a567cc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a567cc9):
 
