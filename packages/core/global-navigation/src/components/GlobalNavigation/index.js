@@ -34,6 +34,7 @@ const mapToGlobalNavItem: NavItem => GlobalNavItemData = ({
   badge,
   href,
   size,
+  badgeCount,
 }) => ({
   dropdownItems,
   icon,
@@ -46,6 +47,7 @@ const mapToGlobalNavItem: NavItem => GlobalNavItemData = ({
   badge,
   href,
   size,
+  badgeCount,
 });
 
 const noop = () => {};
@@ -308,6 +310,9 @@ export default class GlobalNavigation
     );
     const defaultConfig = generateDefaultConfig();
     const badge = this.renderNotificationBadge;
+    const { notificationCount: badgeCount } = this.isNotificationInbuilt
+      ? this.state
+      : this.props;
 
     const navItems: NavItem[] = Object.keys(productConfig).map(item => ({
       ...(productConfig[item]
@@ -317,6 +322,7 @@ export default class GlobalNavigation
               : {}),
             ...defaultConfig[item],
             ...productConfig[item],
+            ...(item === 'notification' ? { badgeCount } : {}),
           }
         : null),
     }));

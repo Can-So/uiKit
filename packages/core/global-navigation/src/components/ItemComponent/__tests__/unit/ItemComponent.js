@@ -42,4 +42,33 @@ describe('ItemComponent', () => {
     expect(wrapper.find(CustomItem).exists()).toBe(true);
     expect(wrapper.find(GlobalItem).exists()).toBe(false);
   });
+
+  it('should not include "NavigationAnalyticsContext" for any component other than notification', () => {
+    const wrapper = mount(<ItemComponent icon={() => null} />);
+    expect(wrapper.find('NavigationAnalyticsContext').exists()).toBeFalsy();
+  });
+
+  it('should include "NavigationAnalyticsContext" for notification', () => {
+    const wrapper = mount(<ItemComponent badgeCount={10} icon={() => null} />);
+    expect(wrapper.find('NavigationAnalyticsContext').exists()).toBeTruthy();
+  });
+
+  it('should include "NavigationAnalyticsContext" with the correct parameters for notification', () => {
+    const wrapper = mount(<ItemComponent badgeCount={10} icon={() => null} />);
+    expect(wrapper.find('NavigationAnalyticsContext').props().data).toEqual({
+      attributes: {
+        badgeCount: 10,
+      },
+    });
+
+    wrapper.setProps({
+      badgeCount: 0,
+    });
+    wrapper.update();
+    expect(wrapper.find('NavigationAnalyticsContext').props().data).toEqual({
+      attributes: {
+        badgeCount: 0,
+      },
+    });
+  });
 });

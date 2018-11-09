@@ -1,0 +1,1 @@
+- Adds badgeCount to the analytics event that's fired when notification icon is clicked
