@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 21.1.1
+- [patch] [b19b7bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b19b7bb):
+
+  - ED-5721 Make content optional for all eligible nodes
+
 ## 21.1.0
 - [minor] [b440439](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b440439):
 
