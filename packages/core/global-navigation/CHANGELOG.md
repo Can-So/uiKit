@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.2.0
+- [minor] [0d4946e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0d4946e):
+
+  - Adds badgeCount to the analytics event that's fired when notification icon is clicked
+
 ## 5.1.2
 - [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
 
