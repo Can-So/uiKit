@@ -23,7 +23,7 @@ Object {
     Object {
       "content": Array [
         Object {
-          "text": "—— This is not a list",
+          "text": "— This is not a list",
           "type": "text",
         },
       ],
@@ -176,7 +176,7 @@ Object {
     Object {
       "content": Array [
         Object {
-          "text": "foo —— bar",
+          "text": "foo — bar",
           "type": "text",
         },
       ],
