@@ -130,9 +130,9 @@ export class Client implements Client {
   cacheLifespan: number;
   store: Store<ObjectState>;
 
-  constructor(cacheLifespan?: number) {
+  constructor(cacheLifespan?: number, private getNowTimeFn = Date.now) {
     this.cacheLifespan = cacheLifespan || DEFAULT_CACHE_LIFESPAN;
-    this.store = new Store<ObjectState>();
+    this.store = new Store<ObjectState>(this.getNowTimeFn);
   }
 
   fetchData(objectUrl: string): Promise<ResolveResponse> {

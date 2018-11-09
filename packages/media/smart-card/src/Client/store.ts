@@ -1,6 +1,9 @@
 import { StateWatch } from './stateWatcher';
+import { GetNowTimeFn } from './types';
 
 export class Store<T> {
+  constructor(private getNowTimeFn: GetNowTimeFn) {}
+
   store: { [K: string]: StateWatch<T> } = {};
 
   get(url: string): StateWatch<T> | undefined {
@@ -15,7 +18,7 @@ export class Store<T> {
     if (this.store[url]) {
       throw new Error(`Reinit the watcher for url: ${url}`);
     }
-    return (this.store[url] = new StateWatch(new Date()));
+    return (this.store[url] = new StateWatch(this.getNowTimeFn));
   }
 
   set(url: string, data: T, lifespan: number): void {

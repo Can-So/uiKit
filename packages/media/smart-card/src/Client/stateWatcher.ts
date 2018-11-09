@@ -1,4 +1,4 @@
-import { CardUpdateCallback } from './types';
+import { CardUpdateCallback, GetNowTimeFn } from './types';
 
 type StateWatchCallback<T> = {
   fn: CardUpdateCallback<T>;
@@ -10,15 +10,11 @@ type StateWatchEntry<T> = {
   goodTill: number;
 } | null;
 
-export type DateConstructor = {
-  getTime(): number;
-};
-
 export class StateWatch<T> {
   public entry: StateWatchEntry<T> = null;
   private subscribers: StateWatchCallback<T>[] = [];
 
-  constructor(private dateConstructor: DateConstructor) {}
+  constructor(private getNow: GetNowTimeFn) {}
 
   subscribe(uuid: string, fn: CardUpdateCallback<T>) {
     if (!this.subscribers.find(sub => sub.uuid === uuid)) {
@@ -31,7 +27,7 @@ export class StateWatch<T> {
 
   invalidate(): StateWatch<T> {
     if (this.entry) {
-      this.entry.goodTill = this.dateConstructor.getTime() - 1;
+      this.entry.goodTill = this.getNow() - 1;
     }
     return this;
   }
@@ -51,7 +47,7 @@ export class StateWatch<T> {
     if (this.entry === null) {
       return true;
     }
-    return this.entry.goodTill < this.dateConstructor.getTime();
+    return this.entry.goodTill < this.getNow();
   }
 
   update(state: T, lifespan: number): void {
@@ -61,7 +57,7 @@ export class StateWatch<T> {
     ) {
       this.entry = {
         state,
-        goodTill: this.dateConstructor.getTime() + lifespan,
+        goodTill: this.getNow() + lifespan,
       };
       this.subscribers.forEach(rec => rec.fn([state, false]));
     }

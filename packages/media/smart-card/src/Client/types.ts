@@ -1,4 +1,4 @@
-export type Command = { type: 'init' } | { type: 'reload'; provider: string };
+export type GetNowTimeFn = () => number;
 
 export type ObjectStatus =
   | 'resolving'

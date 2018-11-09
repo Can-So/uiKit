@@ -6,7 +6,7 @@ import FieldTextAreaStateless from '@atlaskit/field-text-area';
 
 mockMultipleCards();
 
-const theClient = new Client(15 * 1000);
+const theClient = new Client(10 * 1000);
 
 type State = {
   urls: string;
