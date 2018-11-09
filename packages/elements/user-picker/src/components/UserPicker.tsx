@@ -51,14 +51,7 @@ export type State = {
   count: number;
   hoveringClearIndicator: boolean;
   menuIsOpen: boolean;
-  hasValue: boolean;
 };
-
-// remove-value: cross on multi-select
-// pop-value: backspace
-// clear: cross on single-select
-const isRemoveAction = (action: string) =>
-  action === 'remove-value' || action === 'pop-value' || action === 'clear';
 
 export class UserPicker extends React.PureComponent<Props, State> {
   static defaultProps = {
@@ -92,7 +85,6 @@ export class UserPicker extends React.PureComponent<Props, State> {
       count: 0,
       hoveringClearIndicator: false,
       menuIsOpen: false,
-      hasValue: !!this.props.defaultValue || !!this.props.value,
     };
   }
 
@@ -118,7 +110,6 @@ export class UserPicker extends React.PureComponent<Props, State> {
       return;
     }
     const { onChange, onSelection } = this.props;
-    const { hasValue } = this.state;
 
     if (onChange) {
       onChange(extractUserValue(value), action);
@@ -128,16 +119,8 @@ export class UserPicker extends React.PureComponent<Props, State> {
       if (onSelection) {
         onSelection(value.user);
       }
-      if (!hasValue) {
-        this.setState({ hasValue: true });
-      }
     }
 
-    if (isRemoveAction(action) && hasValue) {
-      if (action === 'clear' || value.length === 0) {
-        this.setState({ hasValue: false });
-      }
-    }
     if (!this.props.value) {
       this.setState({ value });
     }
@@ -250,17 +233,23 @@ export class UserPicker extends React.PureComponent<Props, State> {
       hoveringClearIndicator,
       menuIsOpen,
       value,
-      hasValue,
     } = this.state;
+
+    const numValues: number = value ? value.length : 0;
+    const hasValue = numValues > 0;
+
+    const options = getOptions(usersFromState, users) || [];
+    const hasSelectedAll: boolean = numValues === options.length && !isLoading;
+
     return (
       <Select
         value={value}
         ref={this.handleSelectRef}
         isMulti={isMulti}
-        options={getOptions(usersFromState, users)}
+        options={options}
         onChange={this.handleChange}
         styles={getStyles(width, hasValue)}
-        components={getComponents(isMulti, anchor)}
+        components={getComponents(isMulti, hasValue && !hasSelectedAll, anchor)}
         inputValue={search}
         menuIsOpen={menuIsOpen}
         onFocus={this.handleFocus}

@@ -93,6 +93,6 @@ export const getStyles = memoizeOne((width, hasValue) => ({
   }),
   input: ({ margin, ...css }) => ({
     ...css,
-    paddingLeft: !hasValue ? PLACEHOLDER_PADDING : 0,
+    paddingLeft: !hasValue ? PLACEHOLDER_PADDING : 4,
   }),
 }));

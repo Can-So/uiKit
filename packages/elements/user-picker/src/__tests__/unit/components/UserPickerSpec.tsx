@@ -153,65 +153,6 @@ describe('UserPicker', () => {
       });
     });
 
-    describe('hasValue', () => {
-      it('should set to true if a selection is made', () => {
-        const component = shallowUserPicker({ users });
-        selectUser(component);
-
-        expect(component.state('hasValue')).toBeTruthy();
-      });
-
-      it('should set to false if the value is cleared', () => {
-        const component = shallowUserPicker({ users });
-        selectUser(component);
-        component.find(Select).simulate('change', null, { action: 'clear' });
-
-        expect(component.state('hasValue')).toBeFalsy();
-      });
-
-      it('should set to false if the value is an empty list after pop-value action', () => {
-        const component = shallowUserPicker({ users });
-        selectUser(component);
-        component.find(Select).simulate('change', [], { action: 'pop-value' });
-
-        expect(component.state('hasValue')).toBeFalsy();
-      });
-
-      it('should set to false if the value is an empty list after remove-value action', () => {
-        const component = shallowUserPicker({ users });
-        selectUser(component);
-        component
-          .find(Select)
-          .simulate('change', [], { action: 'remove-value' });
-
-        expect(component.state('hasValue')).toBeFalsy();
-      });
-
-      it('should not set to false if the value is non-empty list after remove-value', () => {
-        const component = shallowUserPicker({ users });
-        selectUser(component);
-        component
-          .find(Select)
-          .simulate('change', [{ value: 'abc-123', user: users[0] }], {
-            action: 'remove-value',
-          });
-
-        expect(component.state('hasValue')).toBeTruthy();
-      });
-
-      it('should not set to false if the value is non-empty list after remove-value', () => {
-        const component = shallowUserPicker({ users });
-        selectUser(component);
-        component
-          .find(Select)
-          .simulate('change', [{ value: 'abc-123', user: users[0] }], {
-            action: 'pop-value',
-          });
-
-        expect(component.state('hasValue')).toBeTruthy();
-      });
-    });
-
     describe('onInputChange', () => {
       it('should load users on input change', () => {
         const usersPromise = new Promise<User[]>(resolve =>
