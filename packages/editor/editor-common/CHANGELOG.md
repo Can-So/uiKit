@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 21.1.3
+- [patch] [fabc81f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fabc81f):
+
+  - ED-5197: bold toolbar button is inverted in table header cells
+
 ## 21.1.2
 - [patch] [68f3e01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68f3e01):
 
