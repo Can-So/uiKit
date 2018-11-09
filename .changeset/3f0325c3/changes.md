@@ -1,1 +1,0 @@
-- Improve handling of 'rules' in lists and at end of content
