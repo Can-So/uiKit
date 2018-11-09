@@ -177,9 +177,6 @@ export interface TableRow {
 export interface TableCell {
   type: 'tableCell';
   attrs?: CellAttributes;
-  /**
-   * @minItems 1
-   */
   content: TableCellContent;
 }
 
@@ -259,7 +256,7 @@ const cellAttrs = {
 
 export const tableCell = {
   content:
-    '(paragraph | panel | blockquote | orderedList | bulletList | rule | heading | codeBlock |  mediaGroup | mediaSingle | applicationCard | decisionList | taskList | blockCard | extension)+',
+    '(paragraph | panel | blockquote | orderedList | bulletList | rule | heading | codeBlock |  mediaGroup | mediaSingle | applicationCard | decisionList | taskList | blockCard | extension | unsupportedBlock)+',
   attrs: cellAttrs,
   tableRole: 'cell',
   isolating: true,
