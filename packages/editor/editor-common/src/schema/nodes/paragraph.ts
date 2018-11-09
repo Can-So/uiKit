@@ -9,7 +9,7 @@ export interface ParagraphDefinition {
   /**
    * @allowUnsupportedInline true
    */
-  content: Array<Inline>;
+  content?: Array<Inline>;
 }
 
 const pDOM: DOMOutputSpec = ['p', 0];
