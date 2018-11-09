@@ -179,4 +179,24 @@ export const messages = defineMessages({
     defaultMessage: 'Or refine your results with our advanced search.',
     description: '',
   },
+  jira_project_type_business_project: {
+    id: 'global_search.jira.project_type.business_project',
+    defaultMessage: 'Business project',
+    description: '',
+  },
+  jira_project_type_software_project: {
+    id: 'global_search.jira.project_type.software_project',
+    defaultMessage: 'Software project',
+    description: '',
+  },
+  jira_project_type_service_desk_project: {
+    id: 'global_search.jira.project_type.service_desk_project',
+    defaultMessage: 'Service desk project',
+    description: '',
+  },
+  jira_project_type_ops_project: {
+    id: 'global_search.jira.project_type.ops_project',
+    defaultMessage: 'Ops project',
+    description: '',
+  },
 });

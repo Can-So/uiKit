@@ -7,6 +7,7 @@ import { PMPluginFactory } from '../../types';
 export const pluginKey = new PluginKey('statusPlugin');
 
 export type StatusState = {
+  autoFocus: boolean;
   showStatusPickerAt: number | null;
   selectionChanges: SelectionChange;
 };
@@ -40,8 +41,9 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
   new Plugin({
     state: {
       init: () => ({
-        showStatusPickerAt: null,
+        autoFocus: false,
         selectionChanges: new SelectionChange(),
+        showStatusPickerAt: null,
       }),
       apply(tr, state: StatusState) {
         const meta = tr.getMeta(pluginKey);
@@ -85,7 +87,9 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
             // selection changed
             const pluginState: StatusState = pluginKey.getState(view.state);
             const { selectionChanges } = pluginState;
-            selectionChanges.notifyNewSelection(newSelection, prevSelection);
+            if (selectionChanges) {
+              selectionChanges.notifyNewSelection(newSelection, prevSelection);
+            }
           }
         },
       };

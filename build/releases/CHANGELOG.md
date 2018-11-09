@@ -1,5 +1,10 @@
 # @atlaskit/build-releases
 
+## 3.0.2
+- [patch] [f7b030a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f7b030a):
+
+  - Fixes potential infinite loop in parseChangesetCommit
+
 ## 3.0.1
 - [patch] [494c1fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/494c1fe):
 
