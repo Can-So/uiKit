@@ -1,0 +1,1 @@
+- Fix emoticons alignment
