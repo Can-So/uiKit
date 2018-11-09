@@ -92,7 +92,7 @@ class CellView extends ReactNodeView {
   setDomAttrs(node) {
     const { cell } = this;
     if (cell) {
-      const attrs = setCellAttrs(node);
+      const attrs = setCellAttrs(node, cell);
       Object.keys(attrs).forEach(attr => {
         cell.setAttribute(attr, attrs[attr]);
       });

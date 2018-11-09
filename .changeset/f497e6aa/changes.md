@@ -1,0 +1,1 @@
+- ED-5739: fix updating cells DOM attributes when deleting rows/columns
