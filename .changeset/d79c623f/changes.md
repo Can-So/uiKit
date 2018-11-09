@@ -1,0 +1,1 @@
+- Removes dependency on @atlaskit/layer-manager
