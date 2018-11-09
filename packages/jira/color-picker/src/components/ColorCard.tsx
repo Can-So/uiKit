@@ -9,12 +9,20 @@ export interface Props {
   label: string;
   selectedLabel?: string;
   tabIndex?: number;
-  isSelected?: boolean;
   onClick?: (value: string) => void;
   checkMarkColor?: string;
+  selected?: boolean;
+  focused?: boolean;
 }
 
 export default class ColorCard extends PureComponent<Props> {
+  componentDidUpdate(prevProps: Props) {
+    const { focused } = this.props;
+    if (!prevProps.focused && focused && this.ref.current) {
+      this.ref.current.focus();
+    }
+  }
+
   onMouseDown = event => {
     event.preventDefault();
   };
@@ -28,28 +36,30 @@ export default class ColorCard extends PureComponent<Props> {
     }
   };
 
+  ref: React.RefObject<HTMLButtonElement> = React.createRef();
+
   render() {
     const {
       tabIndex,
       value,
       label,
       selectedLabel = 'Selected',
-      isSelected,
+      selected,
       checkMarkColor = colors.N0,
     } = this.props;
     return (
       <ColorCardContent
+        innerRef={this.ref}
         onClick={this.onClick}
         onMouseDown={this.onMouseDown}
         tabIndex={tabIndex}
-        className={`${isSelected ? 'selected' : ''}`}
         title={label}
         style={{
           backgroundColor: value || 'transparent',
         }}
         role="button"
       >
-        {isSelected && (
+        {selected && (
           <EditorDoneIcon primaryColor={checkMarkColor} label={selectedLabel} />
         )}
       </ColorCardContent>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 import ColorCard from './ColorCard';
+import { gridSize } from '@atlaskit/theme';
 
 import {
   ColorPaletteContainer,
@@ -16,6 +17,7 @@ export interface Props {
   cols?: number;
   className?: string;
   checkMarkColor?: string;
+  focusedItemIndex?: number;
 }
 
 export class ColorPalette extends PureComponent<Props> {
@@ -28,22 +30,29 @@ export class ColorPalette extends PureComponent<Props> {
       selectedLabel,
       className,
       checkMarkColor,
+      focusedItemIndex,
     } = this.props;
 
     return (
       <ColorPaletteContainer
         className={className}
-        style={{ maxWidth: cols * 32 }}
+        style={{ maxWidth: cols * 30 + gridSize() * 2 }}
       >
-        {palette.map(color => (
+        {palette.map((color, index) => (
           <ColorCardWrapper key={color.value}>
             <ColorCard
               value={color.value}
               label={color.label}
               selectedLabel={selectedLabel}
               onClick={onClick}
-              isSelected={color.value === selectedColor}
+              selected={color.value === selectedColor}
               checkMarkColor={checkMarkColor}
+              tabIndex={focusedItemIndex !== undefined ? -1 : undefined}
+              focused={
+                focusedItemIndex !== undefined
+                  ? focusedItemIndex === index
+                  : undefined
+              }
             />
           </ColorCardWrapper>
         ))}
