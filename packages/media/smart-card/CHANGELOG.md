@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 8.6.2
+- [patch] [a567cc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a567cc9):
+
+  - Improve rendering of Smart Cards.
+
 ## 8.6.1
 - [patch] [7bc4461](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7bc4461):
 
