@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 21.1.5
+- [patch] [aadaeb9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aadaeb9):
+
+  - ED-5691 Allow unsupported block inside tableCell
+
 ## 21.1.4
 - [patch] [5c148c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c148c8):
 
