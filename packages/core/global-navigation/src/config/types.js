@@ -1,6 +1,6 @@
 // @flow
-import type { ComponentType } from 'react';
-import type { GlobalItemProps } from '@atlaskit/navigation-next';
+import type { ComponentType, ElementConfig } from 'react';
+import { GlobalItem } from '@atlaskit/navigation-next';
 
 type DefaultItemShape = {
   icon?: ComponentType<*>,
@@ -73,7 +73,8 @@ export type NavItem = {
 };
 
 // The shape of the item data required by GlobalNav
-export type GlobalNavItemData = GlobalItemProps & {
+export type GlobalNavItemData = {
+  ...$Exact<ElementConfig<typeof GlobalItem>>,
   dropdownItems?: ComponentType<{}>,
   itemComponent?: ComponentType<{}>,
   key?: string,
