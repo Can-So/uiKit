@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.4
+- [patch] [5c148c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c148c8):
+
+  - ED-5739: fix updating cells DOM attributes when deleting rows/columns
+
 ## 88.1.3
 - [patch] [68f3e01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68f3e01):
 
