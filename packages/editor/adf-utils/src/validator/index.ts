@@ -55,6 +55,10 @@ const copy = (source: object, dest: object, key: string) => {
   return dest;
 };
 
+// Helpers
+const makeArray = <T>(maybeArray: T | Array<T>) =>
+  Array.isArray(maybeArray) ? maybeArray : [maybeArray];
+
 function mapMarksItems(spec, fn = x => x) {
   const { items, ...rest } = spec.props.marks;
   return {
@@ -407,43 +411,34 @@ export function validator(
 
           // Attributes
           let validatorAttrs;
-          // media attrs is an array
-          if (Array.isArray(validator.props.attrs)) {
-            const { type } = entity.attrs;
-            if (!type) {
-              // If there's no type then there's no way to validate other attrs
-              return err(
-                VALIDATION_ERRORS.INVALID_ATTRIBUTES,
-                `'attrs' validation failed`,
-                { attrs: ['type'] },
-              );
-            }
-            const validatorPropsArr = validator.props.attrs.filter(
-              attr => attr.props.type.values.indexOf(entity.attrs.type) > -1,
-            );
-
-            if (validatorPropsArr.length === 0) {
-              return err(
-                VALIDATION_ERRORS.INVALID_ATTRIBUTES,
-                `'attrs' type '${type}' is invalid`,
-                { attrs: ['type'] },
-              );
-            }
-
-            validatorAttrs = validatorPropsArr[0];
-          } else {
-            validatorAttrs = validator.props.attrs;
-          }
 
           // Attributes Validation
-          if (validatorAttrs && validatorAttrs.props && entity.attrs) {
-            const invalidAttrs = Object.keys(validatorAttrs.props).reduce(
-              (attrs, k) =>
-                validateAttrs(validatorAttrs.props[k], entity.attrs[k])
-                  ? attrs
-                  : attrs.concat(k),
-              [] as Array<string>,
-            );
+          if (validator.props.attrs && entity.attrs) {
+            const attrOptions = makeArray(validator.props.attrs);
+            let invalidAttrs;
+
+            /**
+             * Attrs can be union type so try each path
+             * attrs: [{ props: { url: { type: 'string' } } }, { props: { data: {} } }],
+             * Gotcha: It will always report the last failure.
+             */
+            for (let i = 0, length = attrOptions.length; i < length; ++i) {
+              const attrOption = attrOptions[i];
+              invalidAttrs = Object.keys(attrOption.props).reduce<
+                Array<string>
+              >(
+                (attrs, k) =>
+                  validateAttrs(attrOption.props[k], entity.attrs[k])
+                    ? attrs
+                    : attrs.concat(k),
+                [],
+              );
+              if (!invalidAttrs.length) {
+                validatorAttrs = attrOption;
+                break;
+              }
+            }
+
             if (invalidAttrs.length) {
               return err(
                 VALIDATION_ERRORS.INVALID_ATTRIBUTES,
@@ -474,7 +469,7 @@ export function validator(
           }
 
           // Extra Attributes
-          if (entity.attrs && validator.props) {
+          if (entity.attrs) {
             const attrs = Object.keys(entity.attrs).filter(
               k => !(allowPrivateAttributes && k.startsWith('__')),
             );
