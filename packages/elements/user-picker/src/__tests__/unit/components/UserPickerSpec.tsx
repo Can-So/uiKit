@@ -28,6 +28,14 @@ describe('UserPicker', () => {
     },
   ];
 
+  const selectUser = component => {
+    component
+      .find(Select)
+      .simulate('change', [{ value: 'abc-123', user: users[0] }], {
+        action: 'select-option',
+      });
+  };
+
   it('should render Select', () => {
     const component = shallowUserPicker({ users });
     const select = component.find(Select);
@@ -35,14 +43,14 @@ describe('UserPicker', () => {
       { value: 'abc-123', user: users[0], label: 'Jace Beleren' },
       { value: '123-abc', user: users[1], label: 'Chandra Nalaar' },
     ]);
-    expect(getStyles).toHaveBeenCalledWith(350);
+    expect(getStyles).toHaveBeenCalledWith(350, expect.any(Boolean));
     expect(select.prop('menuPlacement')).toBeTruthy();
   });
 
   it('should set width', () => {
     shallowUserPicker({ width: 500 });
 
-    expect(getStyles).toHaveBeenCalledWith(500);
+    expect(getStyles).toHaveBeenCalledWith(500, expect.any(Boolean));
   });
 
   it('should trigger onChange with User', () => {
@@ -142,6 +150,65 @@ describe('UserPicker', () => {
         expect(component.state()).toMatchObject({
           users,
         });
+      });
+    });
+
+    describe('hasValue', () => {
+      it('should set to true if a selection is made', () => {
+        const component = shallowUserPicker({ users });
+        selectUser(component);
+
+        expect(component.state('hasValue')).toBeTruthy();
+      });
+
+      it('should set to false if the value is cleared', () => {
+        const component = shallowUserPicker({ users });
+        selectUser(component);
+        component.find(Select).simulate('change', null, { action: 'clear' });
+
+        expect(component.state('hasValue')).toBeFalsy();
+      });
+
+      it('should set to false if the value is an empty list after pop-value action', () => {
+        const component = shallowUserPicker({ users });
+        selectUser(component);
+        component.find(Select).simulate('change', [], { action: 'pop-value' });
+
+        expect(component.state('hasValue')).toBeFalsy();
+      });
+
+      it('should set to false if the value is an empty list after remove-value action', () => {
+        const component = shallowUserPicker({ users });
+        selectUser(component);
+        component
+          .find(Select)
+          .simulate('change', [], { action: 'remove-value' });
+
+        expect(component.state('hasValue')).toBeFalsy();
+      });
+
+      it('should not set to false if the value is non-empty list after remove-value', () => {
+        const component = shallowUserPicker({ users });
+        selectUser(component);
+        component
+          .find(Select)
+          .simulate('change', [{ value: 'abc-123', user: users[0] }], {
+            action: 'remove-value',
+          });
+
+        expect(component.state('hasValue')).toBeTruthy();
+      });
+
+      it('should not set to false if the value is non-empty list after remove-value', () => {
+        const component = shallowUserPicker({ users });
+        selectUser(component);
+        component
+          .find(Select)
+          .simulate('change', [{ value: 'abc-123', user: users[0] }], {
+            action: 'pop-value',
+          });
+
+        expect(component.state('hasValue')).toBeTruthy();
       });
     });
 

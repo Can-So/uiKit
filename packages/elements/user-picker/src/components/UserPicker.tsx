@@ -54,6 +54,9 @@ export type State = {
   hasValue: boolean;
 };
 
+// remove-value: cross on multi-select
+// pop-value: backspace
+// clear: cross on single-select
 const isRemoveAction = (action: string) =>
   action === 'remove-value' || action === 'pop-value' || action === 'clear';
 
@@ -89,6 +92,7 @@ export class UserPicker extends React.PureComponent<Props, State> {
       count: 0,
       hoveringClearIndicator: false,
       menuIsOpen: false,
+      // TODO: Change to a check when we implement default values
       hasValue: false,
     };
   }
