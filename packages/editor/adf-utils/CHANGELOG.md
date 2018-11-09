@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.1.2
+- [patch] [11d4b85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/11d4b85):
+
+  - ED-5606 Adds union attrs support to validator
+
 ## 5.1.1
 - [patch] [b19b7bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b19b7bb):
 

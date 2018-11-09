@@ -1,6 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/json-schema-generator", "type": "patch" }
-  ],
-  "dependents": []
-}

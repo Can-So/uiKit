@@ -1,1 +1,0 @@
-- ED-5606 Spec generator now produces object for empty type
