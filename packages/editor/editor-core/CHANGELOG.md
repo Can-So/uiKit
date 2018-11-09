@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.5
+- [patch] [60087ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60087ec):
+
+  - Remove decorators
+
 ## 88.1.4
 - [patch] [5c148c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c148c8):
 
