@@ -2,24 +2,6 @@ import { CardProvider } from '@atlaskit/editor-core';
 
 type CardAppearance = 'inline' | 'block';
 
-const mockCardData = (type: CardAppearance) => ({
-  type: type === 'inline' ? 'inlineCard' : 'blockCard',
-  attrs: {
-    data: {
-      '@context': 'https://www.w3.org/ns/activitystreams',
-      '@type': 'Document',
-      name: 'Welcome to Atlassian!',
-      url: 'http://www.atlassian.com',
-    },
-  },
-});
-
-export class CardMockProvider implements CardProvider {
-  resolve(url: string, appearance: CardAppearance): Promise<any> {
-    return new Promise(resolve => resolve(mockCardData(appearance)));
-  }
-}
-
 export type ORSCheckResponse = {
   isSupported: boolean;
 };
@@ -64,16 +46,19 @@ export class EditorCardProvider implements CardProvider {
 
 export class EditorExampleCardProvider implements CardProvider {
   cardProvider = new EditorCardProvider();
-  mockProvider = new CardMockProvider();
-
-  atlassianUrl = new RegExp('^https?://([a-z_-]*.)?atlassian.com');
+  jiraUrlMatch = /https?\:\/\/hello\.atlassian\.net\/browse\/|https?\:\/\/product\-fabric\.atlassian\.net\/browse\//i;
 
   async resolve(url: string, appearance: CardAppearance): Promise<any> {
-    if (url.match(this.atlassianUrl)) {
-      return await this.mockProvider.resolve(url, appearance);
-    } else {
-      return await this.cardProvider.resolve(url, appearance);
+    if (url.match(this.jiraUrlMatch)) {
+      return {
+        type: 'inlineCard',
+        attrs: {
+          url,
+        },
+      };
     }
+
+    return await this.cardProvider.resolve(url, appearance);
   }
 }
 
