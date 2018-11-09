@@ -1,0 +1,1 @@
+- Fix inline cards crashing after change to the format.
