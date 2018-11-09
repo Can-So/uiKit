@@ -122,10 +122,10 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
     if (createAnalyticsEvent) {
       return this.createAndFireEventOnAtlaskit({
         action: 'clicked',
-        actionSubject: 'avatar',
+        actionSubject: 'color-picker',
 
         attributes: {
-          componentName: 'avatar',
+          componentName: 'color-picker',
           packageName,
           packageVersion,
         },
