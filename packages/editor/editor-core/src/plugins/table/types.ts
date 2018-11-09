@@ -100,15 +100,12 @@ export const TableCssClassName = {
   HOVERED_TABLE: `${clPrefix}hovered-table`,
   RESIZING: `${clPrefix}resizing`,
   WITH_CONTROLS: `${clPrefix}with-controls`,
-  TABLE_LEFT_SHADOW: `${clPrefix}with-left-shadow`,
-  TABLE_RIGHT_SHADOW: `${clPrefix}with-right-shadow`,
 
   CONTEXTUAL_SUBMENU: `${clPrefix}contextual-submenu`,
   CONTEXTUAL_MENU_BUTTON: `${clPrefix}contextual-menu-button`,
   CONTEXTUAL_MENU_ICON: `${clPrefix}contextual-submenu-icon`,
 
   CELL_NODEVIEW_WRAPPER: `${clPrefix}cell-nodeview-wrapper`,
-  CELL_NODEVIEW_CONTENT_DOM: `${clPrefix}cell-nodeview-content-dom`,
 
   // come from prosemirror-table
   COLUMN_RESIZE_HANDLE: 'column-resize-handle',

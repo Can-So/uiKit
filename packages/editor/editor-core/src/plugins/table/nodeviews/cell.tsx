@@ -85,7 +85,7 @@ class CellView extends ReactNodeView {
 
   getContentDOM() {
     const dom = document.createElement('div');
-    dom.className = ClassName.CELL_NODEVIEW_CONTENT_DOM;
+    dom.className = ClassName.TABLE_CELL_NODEVIEW_CONTENT_DOM;
     return { dom };
   }
 
