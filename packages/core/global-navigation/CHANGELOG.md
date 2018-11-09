@@ -1,5 +1,20 @@
 # @atlaskit/global-navigation
 
+## 5.2.0
+- [minor] [0d4946e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0d4946e):
+
+  - Adds badgeCount to the analytics event that's fired when notification icon is clicked
+
+## 5.1.2
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 5.1.1
+- [patch] [d427e8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d427e8a):
+
+  - Adds tests to global-navigation. Removes a bit of dead code
+
 ## 5.1.0
 - [minor] [96a854f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/96a854f):
 

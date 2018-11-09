@@ -1,5 +1,15 @@
 # @atlaskit/global-search
 
+## 5.12.1
+- [patch] [e93ffe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e93ffe0):
+
+  - Change container result item to accept a react node as the subtext
+
+## 5.12.0
+- [minor] [6506916](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6506916):
+
+  - Refactor how i18n is handled internally
+
 ## 5.11.3
 - Updated dependencies [2da04ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2da04ed):
   - @atlaskit/navigation@33.3.1

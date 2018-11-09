@@ -66,9 +66,8 @@ export class ContentsProvider extends Component<
     items: [],
   };
   registerItem = (item: string) => {
-    this.setState(
-      state =>
-        !state.items.includes(item) ? { items: [...state.items, item] } : null,
+    this.setState(state =>
+      !state.items.includes(item) ? { items: [...state.items, item] } : null,
     );
   };
   unregisterItem = (item: string) => {

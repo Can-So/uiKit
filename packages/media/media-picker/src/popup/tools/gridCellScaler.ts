@@ -19,6 +19,6 @@ export default ({
 
   return {
     width: desiredWith,
-    height: Math.round(desiredWith / width * height),
+    height: Math.round((desiredWith / width) * height),
   };
 };

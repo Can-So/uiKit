@@ -92,6 +92,9 @@ sadfsadf
 {code}
 * list 2`,
     ],
+    ['should not create a list if started with multiple dashes', `----- a`],
+    ['should create a list if started with multiple hash symbols', `## a`],
+    ['should create a list if started with multiple star symbols', `** a`],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

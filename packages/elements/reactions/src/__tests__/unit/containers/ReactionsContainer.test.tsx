@@ -50,7 +50,8 @@ describe('ReactionsContainer', () => {
   });
 
   beforeEach(() =>
-    Object.keys(actions).forEach(key => actions[key].mockClear()));
+    Object.keys(actions).forEach(key => actions[key].mockClear()),
+  );
 
   describe('stateMapper', () => {
     it('should map empty state to notLoaded', () => {

@@ -35,6 +35,8 @@ const config = {
     '/__tests__\\/_.*?',
     // ignore files under __tests__ that start with an underscore
     '/__tests__\\/.*?\\/_.*?',
+    // ignore tests under __tests__/flow
+    '/__tests__\\/flow/',
     // ignore tests under __tests__/integration (we override this if the INTEGRATION_TESTS flag is set)
     '/__tests__\\/integration/',
     // ignore tests under __tests__/vr (we override this if the VISUAL_REGRESSION flag is set)
@@ -149,7 +151,7 @@ if (TEST_ONLY_PATTERN) {
  */
 if (PARALLELIZE_TESTS) {
   const allTests = JSON.parse(PARALLELIZE_TESTS);
-  config.testMatch = allTests.filter((_, i) => i % STEPS - STEP_IDX === 0);
+  config.testMatch = allTests.filter((_, i) => (i % STEPS) - STEP_IDX === 0);
 
   console.log('Parallelising jest tests.');
   console.log(`Parallel step ${String(STEP_IDX)} of ${String(STEPS)}`);

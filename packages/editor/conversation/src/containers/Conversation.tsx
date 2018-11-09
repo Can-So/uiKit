@@ -138,7 +138,10 @@ const mapDispatchToProps = (
 });
 
 const ResourcedConversation = withAnalyticsEvents()(
-  connect(mapStateToProps, mapDispatchToProps)(Conversation as any),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(Conversation as any),
 );
 
 export interface ContainerProps {

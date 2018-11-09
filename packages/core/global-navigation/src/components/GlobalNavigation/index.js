@@ -34,6 +34,7 @@ const mapToGlobalNavItem: NavItem => GlobalNavItemData = ({
   badge,
   href,
   size,
+  badgeCount,
 }) => ({
   dropdownItems,
   icon,
@@ -46,6 +47,7 @@ const mapToGlobalNavItem: NavItem => GlobalNavItemData = ({
   badge,
   href,
   size,
+  badgeCount,
 });
 
 const noop = () => {};
@@ -280,32 +282,24 @@ export default class GlobalNavigation
 
   renderNotificationBadge = () => {
     const { cloudId, fabricNotificationLogUrl } = this.props;
+    const refreshRate = this.state.notificationCount ? 180000 : 60000;
 
-    if (this.isNotificationInbuilt) {
-      const refreshRate = this.state.notificationCount ? 180000 : 60000;
-      return (
-        <NotificationIndicator
-          notificationLogProvider={
-            new NotificationLogClient(fabricNotificationLogUrl, cloudId)
-          }
-          refreshRate={refreshRate}
-          onCountUpdated={this.onCountUpdated}
-          onCountUpdating={this.onCountUpdating}
-        />
-      );
-    }
-
-    return null;
+    return (
+      <NotificationIndicator
+        notificationLogProvider={
+          new NotificationLogClient(fabricNotificationLogUrl, cloudId)
+        }
+        refreshRate={refreshRate}
+        onCountUpdated={this.onCountUpdated}
+        onCountUpdating={this.onCountUpdating}
+      />
+    );
   };
 
   renderNotificationDrawerContents = () => {
     const { locale, product } = this.props;
 
-    if (this.isNotificationInbuilt) {
-      return <NotificationDrawerContents product={product} locale={locale} />;
-    }
-
-    return null;
+    return <NotificationDrawerContents product={product} locale={locale} />;
   };
 
   constructNavItems = () => {
@@ -316,6 +310,9 @@ export default class GlobalNavigation
     );
     const defaultConfig = generateDefaultConfig();
     const badge = this.renderNotificationBadge;
+    const { notificationCount: badgeCount } = this.isNotificationInbuilt
+      ? this.state
+      : this.props;
 
     const navItems: NavItem[] = Object.keys(productConfig).map(item => ({
       ...(productConfig[item]
@@ -325,6 +322,7 @@ export default class GlobalNavigation
               : {}),
             ...defaultConfig[item],
             ...productConfig[item],
+            ...(item === 'notification' ? { badgeCount } : {}),
           }
         : null),
     }));

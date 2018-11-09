@@ -8,10 +8,11 @@ import { hasAnyOfMarks } from '../utils/text';
 
 export function colorMacro(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token {
-  return commonMacro(input, schema, {
+  return commonMacro(input.substring(position), schema, {
     opening: /^\{color(?::([^\{\n\}]*))?\}/,
     closing: /\{color\}/,
     rawContentProcessor,

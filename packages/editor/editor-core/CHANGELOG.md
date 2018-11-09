@@ -1,5 +1,105 @@
 # @atlaskit/editor-core
 
+## 88.0.11
+- [patch] [6ef824b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ef824b):
+
+  - Fix import of re-resizable
+
+## 88.0.10
+- [patch] [d518ce0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d518ce0):
+
+  - FS-3118 - Only focus status input field on initial insertion. FS-3158 - Fix focus flicker in status input field.
+
+## 88.0.9
+- [patch] [6efc73e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6efc73e):
+
+  - allow Fabric status plugin to be enabled but be hidden in the editor menu
+
+## 88.0.8
+- [patch] [9390a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9390a7e):
+
+  - ED-5685: add grid ruler marks
+
+## 88.0.7
+- [patch] [c64c174](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c64c174):
+
+  - Fix multiple papercuts in quick insert
+
+## 88.0.6
+- [patch] [82ad72d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82ad72d):
+
+  - Timestamp on date node must always be a string
+
+## 88.0.5
+- [patch] [beefae2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/beefae2):
+
+  - Updated type definitions for prosemirror packages
+
+## 88.0.4
+- [patch] [2e1b194](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e1b194):
+
+  - Revert collab changes
+
+## 88.0.3
+- [patch] [222082a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/222082a):
+
+  - Fix incorrect import of PanelType
+
+## 88.0.2
+- [patch] [ffcaedd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ffcaedd):
+
+  - FS-2964 Implement status node placeholder support. Handle removing if no content in node
+
+## 88.0.1
+- [patch] [8059325](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8059325):
+
+  - Fix delete doing nothing
+
+## 88.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/renderer@30.0.0
+  - @atlaskit/emoji@46.0.0
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/media-filmstrip@18.0.0
+  - @atlaskit/media-picker@24.0.0
+  - @atlaskit/adf-utils@5.0.1
+  - @atlaskit/editor-bitbucket-transformer@4.0.18
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-markdown-transformer@2.0.19
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/task-decision@11.0.2
+  - @atlaskit/util-data-test@10.0.20
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+
+## 87.9.5
+- [patch] [e1db106](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e1db106):
+
+  * ED-5696 Allow private properties in adf-validator
+
+  `table` with `__autoSize`, `link` with `__confluenceMetadata` will render properly.
+
+## 87.9.4
+- [patch] [bce23bc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bce23bc):
+
+  - Change style of status selection
+
+## 87.9.3
+- [patch] [e6c4231](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6c4231):
+
+  - ED-5639: fix deleting columns in Safari
+
+## 87.9.2
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/editor-common@20.3.7
+  - @atlaskit/renderer@29.5.1
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-filmstrip@17.0.2
+  - @atlaskit/media-picker@23.2.2
+  - @atlaskit/media-test-helpers@18.2.11
+  - @atlaskit/media-card@42.0.0
+
 ## 87.9.1
 - [patch] [676a586](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/676a586):
 

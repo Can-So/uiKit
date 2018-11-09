@@ -144,9 +144,9 @@ describe('editor/plugins/collab-edit', () => {
       const spy = sandbox.spy(provider, 'sendMessage');
 
       const { doc, tr } = editorView.state;
-      tr
-        .setMeta('sessionId', { sid: 'test' })
-        .setSelection(TextSelection.create(doc, 13));
+      tr.setMeta('sessionId', { sid: 'test' }).setSelection(
+        TextSelection.create(doc, 13),
+      );
       editorView.dispatch(tr);
       // Wait for next tick
       await new Promise(resolve => setTimeout(resolve, 0));

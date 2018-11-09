@@ -14,7 +14,7 @@ import { messageEditor, lozenge } from './_message-renderer-helpers';
  * number of tests have been skipped until move to snapshots.
  *
  * The remaining skipped tests for IE11/Edge are bugs that should be fixed for those browsers.
-*/
+ */
 
 // Follow up with browserstack as to why @ is keyed in as 2 on ie
 BrowserTestCase(

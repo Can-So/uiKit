@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/global-search",
-  "version": "5.11.3",
+  "version": "5.12.1",
   "description": "A cross-product search component (batteries included)",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -20,6 +20,10 @@
     "team": "fabric"
   },
   "repository": "bitbucket:atlaskit/atlaskit-mk-2",
+  "scripts": {
+    "i18n:push": "i18n-tools push --resource global-search --type ts .",
+    "i18n:pull": "rm -rf ./src/i18n && i18n-tools pull --resource global-search --type ts ."
+  },
   "dependencies": {
     "@atlaskit/analytics": "^4.0.6",
     "@atlaskit/analytics-gas-types": "^3.1.2",
@@ -34,7 +38,7 @@
     "@atlaskit/icon-object": "^1.0.4",
     "@atlaskit/logo": "^9.2.3",
     "@atlaskit/modal-dialog": "^7.0.3",
-    "@atlaskit/quick-search": "^5.0.0",
+    "@atlaskit/quick-search": "^5.1.0",
     "@atlaskit/theme": "^6.1.1",
     "@atlaskit/util-service-support": "^3.0.1",
     "@atlaskit/util-shared-styles": "^2.10.3",
@@ -51,13 +55,15 @@
   },
   "peerDependencies": {
     "react": "^16.4.0",
+    "react-intl": "^2.6.0",
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
     "@atlaskit/docs": "^5.0.8",
+    "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/navigation": "^33.3.1",
     "@atlaskit/page": "^8.0.8",
-    "@atlaskit/quick-search": "^5.0.0",
+    "@atlaskit/quick-search": "^5.1.0",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "fetch-mock": "^6.5.2",
     "react": "^16.4.0",

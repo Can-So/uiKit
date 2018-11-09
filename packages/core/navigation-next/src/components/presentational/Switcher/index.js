@@ -1,39 +1,77 @@
 // @flow
-
-import React, { cloneElement, PureComponent } from 'react';
+import React, { PureComponent, cloneElement, type ElementRef } from 'react';
 import NodeResolver from 'react-node-resolver';
 import shallowEqualObjects from 'shallow-equal/objects';
-import { components, PopupSelect } from '@atlaskit/select';
+import { components, PopupSelect, mergeStyles } from '@atlaskit/select';
 import { colors, gridSize as gridSizeFn } from '@atlaskit/theme';
 import AddIcon from '@atlaskit/icon/glyph/add';
 
+import {
+  type SwitcherState,
+  type SwitcherProps,
+  type SwitcherBaseProps,
+  type SelectStyles,
+  type OptionType,
+} from './types';
 import Option from './Option';
 import { UIControllerSubscriber } from '../../../ui-controller';
 import { CONTENT_NAV_WIDTH } from '../../../common/constants';
-import type { SwitcherProps, SwitcherState } from './types';
 
 const gridSize = gridSizeFn();
+
+const defaultStyles = {
+  option: (provided, { isActive, isFocused }) => {
+    return {
+      ...provided,
+      alignItems: 'center',
+      border: 'none',
+      backgroundColor: isFocused ? colors.N30 : 'transparent',
+      boxSizing: 'border-box',
+      color: 'inherit',
+      cursor: 'default',
+      display: 'flex',
+      flexShrink: 0,
+      fontSize: 'inherit',
+      height: gridSize * 6,
+      outline: 'none',
+      paddingRight: gridSize,
+      paddingLeft: gridSize,
+      textAlign: 'left',
+      textDecoration: 'none',
+      width: '100%',
+      ...(isActive && { backgroundColor: colors.B50 }),
+    };
+  },
+};
 
 // ==============================
 // Custom Functions
 // ==============================
 
-function filterOption({ data }, input) {
-  return data.text.toLowerCase().includes(input.toLowerCase());
-}
-function isOptionSelected(option, selected) {
+export const createStyles = (styles: SelectStyles = {}): Object =>
+  mergeStyles(defaultStyles, styles);
+
+export const filterOption = ({ data }: { data: OptionType }, input: string) =>
+  data.text.toLowerCase().includes(input.toLowerCase());
+
+export const isOptionSelected = (
+  option: OptionType,
+  selected: Array<OptionType> | void,
+) => {
   if (!selected || !selected.length) return false;
   return option.id === selected[0].id;
-}
-function getOptionValue(option) {
-  return option.id;
-}
+};
+
+export const getOptionValue = (option: OptionType) => option.id;
 
 // ==============================
 // Custom Components
 // ==============================
 
-const Control = ({ innerProps: { innerRef, ...innerProps }, ...props }: *) => (
+export const Control = ({
+  innerProps: { innerRef, ...innerProps },
+  ...props
+}: *) => (
   <div
     ref={innerRef}
     css={{
@@ -45,7 +83,7 @@ const Control = ({ innerProps: { innerRef, ...innerProps }, ...props }: *) => (
     <components.Control {...props} innerProps={innerProps} />
   </div>
 );
-const Footer = ({ text, onClick }: *) => (
+export const Footer = ({ text, onClick }: *) => (
   <button
     css={{
       background: 0,
@@ -76,32 +114,25 @@ const Footer = ({ text, onClick }: *) => (
 );
 
 const defaultComponents = { Control, Option };
-
 const isEmpty = obj => Object.keys(obj).length === 0;
 
 // ==============================
 // Class
 // ==============================
 
-// internal `navWidth` property isn't part of the public API
-type SwitcherPropsExtended = SwitcherProps & { navWidth: number };
-
-class Switcher extends PureComponent<SwitcherPropsExtended, SwitcherState> {
+class Switcher extends PureComponent<SwitcherProps, SwitcherState> {
   state = {
     isOpen: false,
     mergedComponents: defaultComponents,
   };
   selectRef = React.createRef();
-  targetRef: Element;
+  targetRef: ElementRef<*>;
   targetWidth = 0;
   static defaultProps = {
     closeMenuOnCreate: true,
     components: {},
   };
-  static getDerivedStateFromProps(
-    props: SwitcherPropsExtended,
-    state: SwitcherState,
-  ) {
+  static getDerivedStateFromProps(props: SwitcherProps, state: SwitcherState) {
     const newState = {};
 
     // Merge consumer and default components
@@ -117,13 +148,13 @@ class Switcher extends PureComponent<SwitcherPropsExtended, SwitcherState> {
   componentDidMount() {
     this.setTargetWidth();
   }
-  componentDidUpdate({ navWidth }: SwitcherPropsExtended) {
+  componentDidUpdate({ navWidth }: SwitcherProps) {
     // reset the target width if the user has resized the navigation pane
     if (navWidth !== this.props.navWidth) {
       this.setTargetWidth();
     }
   }
-  getTargetRef = ref => {
+  getTargetRef = (ref: ElementRef<*>) => {
     this.targetRef = ref;
   };
   setTargetWidth = () => {
@@ -180,13 +211,16 @@ class Switcher extends PureComponent<SwitcherPropsExtended, SwitcherState> {
           </NodeResolver>
         }
         {...props}
+        styles={createStyles(this.props.styles)}
         components={mergedComponents}
       />
     );
   }
 }
 
-export default (props: SwitcherProps) => (
+export { Switcher as BaseSwitcher };
+
+export default (props: SwitcherBaseProps) => (
   <UIControllerSubscriber>
     {({ state }) => <Switcher navWidth={state.productNavWidth} {...props} />}
   </UIControllerSubscriber>

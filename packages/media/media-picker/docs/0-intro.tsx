@@ -5,12 +5,12 @@ export default md`
 
   ## Table of contents
 
-  * [Working with the Library](#markdown-header-working-with-the-library)
-  * [Configuration](#markdown-header-configuration)
-  * [Component Creation](#markdown-header-component-creation)
-  * [Typescript](#typescript)
-  * [Events](#markdown-header-events)
-  * [Components](#markdown-header-components)
+  - [Working with the Library](#markdown-header-working-with-the-library)
+  - [Configuration](#markdown-header-configuration)
+  - [Component Creation](#markdown-header-component-creation)
+  - [Typescript](#typescript)
+  - [Events](#markdown-header-events)
+  - [Components](#markdown-header-components)
     _ [Dropzone](#markdown-header-dropzone)
     _ [Clipboard](#markdown-header-clipboard)
     _ [Browser](#markdown-header-browser)
@@ -112,8 +112,8 @@ export default md`
   MediaPicker is fully written in Typescript, and it exports all its public types and interfaces.
   We refer to some of those objects in the docs, if you want to know more about those please have a look into:
 
-  * media-picker/src/domain
-  * media-picker/popup/src/domain
+  - media-picker/src/domain
+  - media-picker/popup/src/domain
 
   ## Events
 
@@ -202,8 +202,8 @@ export default md`
 
   > Special cases
 
-  * This event doesn't support dragged directories, it will return 1 as length.
-  * IE11 and Safari don't return the number of dragged items. This will return 0 as length.
+  - This event doesn't support dragged directories, it will return 1 as length.
+  - IE11 and Safari don't return the number of dragged items. This will return 0 as length.
 
   **drag-leave** <_{ }_> — Emitted when user moved file away from the container
 
@@ -211,8 +211,8 @@ export default md`
 
   > Special cases
 
-  * IE11: doesn't upload files when a folder is dropped.
-  * Firefox: doesn't upload files recursively within a folder.
+  - IE11: doesn't upload files when a folder is dropped.
+  - Firefox: doesn't upload files recursively within a folder.
 
   ---
 

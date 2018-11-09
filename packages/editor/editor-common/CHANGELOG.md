@@ -1,5 +1,28 @@
 # @atlaskit/editor-common
 
+## 21.0.1
+- [patch] [9390a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9390a7e):
+
+  - ED-5685: add grid ruler marks
+
+## 21.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/emoji@46.0.0
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/media-core@24.4.0
+
+## 20.3.8
+- [patch] [1ec58fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ec58fb):
+
+  - Fix bodied extension node blows up with unsupportedBlock
+
+## 20.3.7
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-card@42.0.0
+
 ## 20.3.6
 - [patch] [a9eb99f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a9eb99f):
 

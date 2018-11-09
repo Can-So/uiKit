@@ -14,9 +14,9 @@ import {
   loadActionButton,
 } from './_task-decision-helpers';
 
-/* 
+/*
  * Safari adds special characters that end up in the snapshot
-*/
+ */
 
 // Cannot paste rich text in IE/Edge
 BrowserTestCase(

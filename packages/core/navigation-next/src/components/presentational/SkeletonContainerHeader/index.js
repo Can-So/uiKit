@@ -26,9 +26,7 @@ const modifyStyles = defaultStyles => ({
   },
 });
 
-export default class SkeletonContainerHeader extends PureComponent<
-  SkeletonContainerHeaderProps,
-> {
+export default class SkeletonContainerHeader extends PureComponent<SkeletonContainerHeaderProps> {
   static defaultProps = {
     hasBefore: false,
     styles: styleReducerNoOp,

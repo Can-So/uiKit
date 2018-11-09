@@ -1,8 +1,8 @@
 declare namespace MediaEditor {
   /*
-    * Types exposed by the native part.
-    * See src/bindings.cpp for details
-    */
+   * Types exposed by the native part.
+   * See src/bindings.cpp for details
+   */
 
   type VeColor = {
     red: number;
