@@ -9,8 +9,6 @@ import data from './SITE_DATA';
 import NAV_DATA from './NAV_DATA';
 import * as fs from './utils/fs';
 
-console.log(require('./SITE_DATA'));
-
 const productPackages = [
   'bitbucket',
   'confluence',
