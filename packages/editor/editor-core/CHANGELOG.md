@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.1
+- [patch] [9072682](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9072682):
+
+  - Fix emoticons alignment
+
 ## 88.1.0
 - [minor] [b440439](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b440439):
 
