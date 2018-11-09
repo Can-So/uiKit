@@ -4,7 +4,7 @@ import {
   ColorPickerWithoutAnalytics as ColorPicker,
   ColorPickerProps,
   ColorPickerState,
-} from '..';
+} from '../..';
 import { PopupSelect } from '@atlaskit/select';
 
 interface SelectProps {

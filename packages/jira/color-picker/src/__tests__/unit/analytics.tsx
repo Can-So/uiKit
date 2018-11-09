@@ -2,7 +2,7 @@ import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
 import * as React from 'react';
 import { mount } from 'enzyme';
 
-import ColorPicker from '..';
+import ColorPicker from '../..';
 
 describe('ColorPicker', () => {
   it('should call onChange analytics event when onChange is not provided', () => {

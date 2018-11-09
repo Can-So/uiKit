@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { ColorPalette, ColorPaletteProps } from '..';
-import ColorCard from '../components/ColorCard';
+import { ColorPalette, ColorPaletteProps } from '../..';
+import ColorCard from '../../components/ColorCard';
 
 describe('ColorPalette', () => {
   const palette = [
