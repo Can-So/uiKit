@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.3
+- [patch] [68f3e01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68f3e01):
+
+  - ED-5687: add full-width grid lines and other resizing fixes
+
 ## 88.1.2
 - [patch] [93e576a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/93e576a):
 
