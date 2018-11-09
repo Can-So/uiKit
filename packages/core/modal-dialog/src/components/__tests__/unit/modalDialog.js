@@ -280,6 +280,16 @@ test('no transform is applied to content', () => {
   expect(style.transform).toEqual(null);
 });
 
+test('should throw deprecation error when using a function for auto focus', () => {
+  const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  expect(() =>
+    mount(<ModalDialog autoFocus={() => document.createElement('div')} />),
+  ).toThrowError();
+  expect(spy).toHaveBeenCalled();
+  // needed otherwise global no console check will fail
+  jest.resetAllMocks();
+});
+
 describe('ModalDialog', () => {
   beforeEach(() => {
     jest.spyOn(global.console, 'warn');

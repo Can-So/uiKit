@@ -36,7 +36,7 @@ export default class FocusLock extends Component<Props> {
     const { enabled, autoFocus } = this.props;
 
     invariant(
-      process.env !== 'DEV' && typeof autoFocus === 'function',
+      process.env.NODE_ENV === 'production' || typeof autoFocus === 'boolean',
       '@atlaskit/modal-dialog: Passing a function as autoFocus is deprecated. Instead call focus on the element ref or use the autofocus property.',
     );
     if (typeof autoFocus === 'function' && enabled) {
