@@ -1,6 +1,5 @@
 import { Node as PMNode, Schema } from 'prosemirror-model';
 import { media } from './media';
-import { fileLink } from './file-link';
 import { blockquote } from './blockquote';
 import { citation } from './citation';
 import { deleted } from './deleted';
@@ -13,7 +12,6 @@ import { inserted } from './inserted';
 import { linkFormat } from './link-format';
 import { linkText } from './link-text';
 import { list } from './list';
-import { mention } from './mention';
 import { monospace } from './monospace';
 import { quadrupleDashSymbol } from './quadruple-dash-symbol';
 import { ruler } from './ruler';
@@ -44,7 +42,6 @@ export enum TokenType {
   LINK_FORMAT = 'LINK_FORMAT',
   LINK_TEXT = 'LINK_TEXT',
   MEDIA = 'MEDIA',
-  FLIE_LINK = 'FILE_LINK',
   HEADING = 'HEADING',
   LIST = 'LIST',
   TABLE = 'TABLE',
@@ -62,7 +59,6 @@ export enum TokenType {
   DELETED = 'DELETED', // -deleted-
   INSERTED = 'INSERTED', // +deleted+
   EMOJI = 'EMOJI', // :)
-  MENTION = 'MENTION', // [~username]
 }
 
 export interface TextToken {
@@ -106,12 +102,10 @@ const tokenToTokenParserMapping: {
   [TokenType.LINK_TEXT]: linkText,
   [TokenType.HEADING]: heading,
   [TokenType.MEDIA]: media,
-  [TokenType.FLIE_LINK]: fileLink,
   [TokenType.LIST]: list,
   [TokenType.QUOTE]: blockquote,
   [TokenType.TABLE]: table,
   [TokenType.EMOJI]: emoji,
-  [TokenType.MENTION]: mention,
   [TokenType.ADF_MACRO]: adfMacro,
   [TokenType.ANCHOR_MACRO]: anchorMacro,
   [TokenType.CODE_MACRO]: codeMacro,

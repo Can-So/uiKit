@@ -56,6 +56,14 @@ describe('JIRA wiki markup - Links', () => {
       '[CS-478] should resolve link with | in the url',
       `[page|https://hello.atlassian.net/wiki/spaces/Engage/pages/296780133/EP+Chrome+Extension#Set-test-metadata-without-having-to-create-a-message-in-targeting--|-title-=-3rd-Iteration-|-colour-=-Red-|-MAKEITSO-3652]`,
     ],
+    [
+      '[CS-542] should correctly style superscript links',
+      `[^link title^|http://example.com]`,
+    ],
+    [
+      '[CS-542] should correctly style superscript links',
+      `[~link title~|http://example.com]`,
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

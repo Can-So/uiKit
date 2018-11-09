@@ -3,6 +3,8 @@ import { Node as PMNode, Schema } from 'prosemirror-model';
 import { parseString } from '../text';
 import { Token, TokenType, TokenErrCallback } from './';
 import { hasAnyOfMarks } from '../utils/text';
+import { mention } from './mention';
+import { fileLink } from './file-link';
 
 // [http://www.example.com] and [Example|http://www.example.com]
 const LINK_FORMAT_REGEXP = /^\[(?:([^\]\n\|]*)\|)?([^\]\n]+)\]/;
@@ -33,6 +35,20 @@ export function linkFormat(
 
   const textRepresentation = match[1] || match[2];
   const url = match[2];
+
+  // If there is only one part and it starts with '^' / '~' instead parse
+  // as file file or mention.
+  if (textRepresentation.length > 0) {
+    if (textRepresentation[0] === '^') {
+      if (match[1] === undefined) {
+        return fileLink(input, position, schema);
+      }
+    } else if (textRepresentation[0] === '~') {
+      if (match[1] === undefined) {
+        return mention(input, position, schema);
+      }
+    }
+  }
 
   if (!isSafeUrl(url)) {
     return fallback();
