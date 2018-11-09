@@ -1,0 +1,1 @@
+- Ignore double dash symbol when sticked with alphanumerical, unicode without space, or parenthesis
