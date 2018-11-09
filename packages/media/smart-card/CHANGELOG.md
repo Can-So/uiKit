@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 8.7.0
+- [minor] [e89e244](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e89e244):
+
+  - Implemented time-based caching for the client.
+
 ## 8.6.3
 - [patch] [4b989c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b989c3):
 
