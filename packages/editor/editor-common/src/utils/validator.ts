@@ -367,11 +367,13 @@ export const getValidNode = (
             type,
             attrs,
             content,
+            marks,
           };
         }
         return {
           type,
           content,
+          marks,
         };
       }
       case 'date': {
