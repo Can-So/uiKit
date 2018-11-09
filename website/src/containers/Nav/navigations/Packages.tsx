@@ -26,18 +26,20 @@ export function buildSubNavGroup(
   Icon: ComponentType<any>,
 ): { title?: string; items: Array<NavGroupItem> } | null {
   if (!children || !children.length) return null;
-  return children.filter(item => !item.id.startsWith('_')).reduce(
-    (acc, item) => {
-      acc.items.push({
-        to: url(fs.normalize(item.id)),
-        title: fs.titleize(item.id),
-        isCompact: true,
-        icon: <CenteredIcon>•</CenteredIcon>,
-      });
-      return acc;
-    },
-    { items: [] } as { items: Array<NavGroupItem> },
-  );
+  return children
+    .filter(item => !item.id.startsWith('_'))
+    .reduce(
+      (acc, item) => {
+        acc.items.push({
+          to: url(fs.normalize(item.id)),
+          title: fs.titleize(item.id),
+          isCompact: true,
+          icon: <CenteredIcon>•</CenteredIcon>,
+        });
+        return acc;
+      },
+      { items: [] } as { items: Array<NavGroupItem> },
+    );
 }
 
 const getItemDetails = (pkg: Directory, group: Directory, pathname) => {
