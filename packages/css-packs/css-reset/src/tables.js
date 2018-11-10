@@ -38,8 +38,7 @@ export default evaluateInner`
   }
 
   caption {
-    ${typography.h600()};
-
+    ${typography.h600()}
     margin-bottom: ${gridSize()}px;
     text-align: left;
   }
