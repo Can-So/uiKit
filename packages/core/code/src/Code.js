@@ -13,7 +13,7 @@ type CodeProps = {
   /** The code to be formatted */
   text: string,
   /** The language in which the code is written */
-  language?: ADFSupportedLanguages | string,
+  language: ADFSupportedLanguages | string,
   /** A custom theme to be applied, implements the Theme interface */
   theme?: Theme | ThemeProps,
   codeStyle?: {},
@@ -24,10 +24,9 @@ type CodeProps = {
 
 export class Code extends PureComponent<CodeProps, {}> {
   static defaultProps = {
-    language: '',
     theme: {},
     showLineNumbers: false,
-    lineNumberContainerStyle: null,
+    lineNumberContainerStyle: {},
     codeTagProps: {},
   };
 
