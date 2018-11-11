@@ -101,9 +101,9 @@ export type InjectedGlobalItemPrimitiveProps = {|
   ...$Exact<WithGlobalThemeProps>,
 |};
 
-export type GlobalItemPrimitiveProps = {
+export type GlobalItemPrimitiveProps = {|
   ...$Exact<ExternalGlobalItemProps>,
   /** Whether this GlobalItem should display as being selected. */
   isSelected: boolean,
   ...$Exact<InjectedGlobalItemPrimitiveProps>,
-};
+|};

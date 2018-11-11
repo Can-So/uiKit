@@ -5,11 +5,6 @@ import React from 'react';
 import Tooltip from '@atlaskit/tooltip';
 import GlobalNavigationItemPrimitive from '../../primitives';
 
-const theme = {
-  mode: {
-    globalItem: Function.prototype,
-  },
-};
 const styles = () => ({
   itemBase: {},
 });
@@ -22,7 +17,6 @@ describe('GlobalNavigationItemPrimitive', () => {
   beforeEach(() => {
     jest.resetModules();
     defaultProps = {
-      theme,
       isFocused: false,
     };
   });
@@ -104,6 +98,7 @@ describe('GlobalNavigationItemPrimitive', () => {
       className: expect.any(String),
       component: MyComponent,
       id: 'my-id',
+      isSelected: false,
       label: 'my-label',
       onClick,
       size: 'large',

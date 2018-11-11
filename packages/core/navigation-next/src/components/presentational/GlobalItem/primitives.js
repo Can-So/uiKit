@@ -12,7 +12,6 @@ import type {
   InjectedGlobalItemPrimitiveProps,
 } from './types';
 
-// FIXME: Get GlobalItemPrimitiveProps type working
 class GlobalNavigationItemPrimitive extends Component<GlobalItemPrimitiveProps> {
   static defaultProps = {
     isActive: false,
