@@ -41,6 +41,7 @@ export default (
   * \`atlaskit/navigation-next/LayoutManagerWithViewController\`
   * \`atlaskit/navigation-next/ViewRenderer\`
   * \`atlaskit/navigation-next/SkeletonContainerView\`
+  * \`atlaskit/navigation-next/NavigationProvider\`
 
 `}</ContentsProvider>
 );
