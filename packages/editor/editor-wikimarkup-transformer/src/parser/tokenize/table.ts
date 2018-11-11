@@ -12,10 +12,8 @@ const TABLE_REGEXP = /^[ \t]*[|]+([^|{\n]*)/;
 
 const processState = {
   OPENING_CELL: 0,
-  BUFFER: 1,
-  END: 2,
-  MACRO: 3,
-  CLOSING_CELL: 4,
+  CLOSING_CELL: 1,
+  MACRO: 2,
 };
 
 export function table(
@@ -27,8 +25,7 @@ export function table(
   const output: PMNode[] = [];
   let index = position;
   let currentState = processState.OPENING_CELL;
-  let cellBuffer = '';
-  let buffer = '';
+  let tableBuffer = '';
   let builder: TableBuilder | null = null;
 
   while (index < input.length) {
@@ -43,28 +40,27 @@ export function table(
           if (!builder) {
             builder = new TableBuilder(schema);
           }
-          cellBuffer += input.substr(index, tableMatch[0].length);
+          tableBuffer += input.substr(index, tableMatch[0].length);
           index += tableMatch[0].length;
           currentState = processState.CLOSING_CELL;
           if (index < input.length) {
             continue;
           }
-          buffer += cellBuffer;
         }
         currentState = processState.CLOSING_CELL;
         continue;
       }
       case processState.CLOSING_CELL: {
-        // Looking for closing |
+        // Looking for | to close the table
         if (length) {
-          cellBuffer += '\n';
+          tableBuffer += '\n';
           index += length;
           if (index < input.length) {
             if (input.substring(index).match(TABLE_REGEXP) && builder) {
               builder.add(
-                parseToTableCell(cellBuffer, schema, tokenErrCallback),
+                parseToTableCell(tableBuffer, schema, tokenErrCallback),
               );
-              cellBuffer = '';
+              tableBuffer = '';
             }
             currentState = processState.OPENING_CELL;
             continue;
@@ -76,9 +72,11 @@ export function table(
             parseNewlineOnly(input.substring(index + 1))
           ) {
             index += parseNewlineOnly(input.substring(index + 1));
-            cellBuffer += char;
-            builder.add(parseToTableCell(cellBuffer, schema, tokenErrCallback));
-            cellBuffer = '';
+            tableBuffer += char;
+            builder.add(
+              parseToTableCell(tableBuffer, schema, tokenErrCallback),
+            );
+            tableBuffer = '';
             if (
               index < input.length &&
               !input.substring(index + 1).match(TABLE_REGEXP)
@@ -95,32 +93,17 @@ export function table(
           continue;
         } else {
           if (!length) {
-            cellBuffer += char;
+            tableBuffer += char;
           }
         }
         break;
       }
-      // case processState.END: {
-      //   if (!builder) {
-      //     /** Something is really wrong here */
-      //     return fallback(input, position);
-      //   }
-      //   cellBuffer = '';
-      //   builder.add(
-      //     parseToTableCell(buffer, schema, tokenErrCallback),
-      //   );
-      //   output.push(builder.buildPMNode());
-      //   return {
-      //     type: 'pmnode',
-      //     nodes: output,
-      //     length: index - position,
-      //   };
-      // }
     }
     index++;
   }
+
   if (builder) {
-    builder.add(parseToTableCell(cellBuffer, schema, tokenErrCallback));
+    builder.add(parseToTableCell(tableBuffer, schema, tokenErrCallback));
     output.push(builder.buildPMNode());
   }
 
