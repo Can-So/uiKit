@@ -108,9 +108,9 @@ export type ModeColors = {
  * withTheme
  */
 
-export type WithThemeProps = {
+export type WithThemeProps = {|
   theme: Theme,
-};
+|};
 
 export type ThemeWrappedComp<C> = ComponentType<
   $Diff<ElementConfig<$Supertype<C>>, Diffable<WithThemeProps>>,
@@ -120,9 +120,9 @@ export type ThemeWrappedComp<C> = ComponentType<
  * withContentTheme
  */
 
-export type WithContentThemeProps = {
+export type WithContentThemeProps = {|
   theme: ProductTheme,
-};
+|};
 
 export type ContentThemeWrappedComp<C> = ComponentType<
   $Diff<ElementConfig<$Supertype<C>>, Diffable<WithContentThemeProps>>,
@@ -132,9 +132,9 @@ export type ContentThemeWrappedComp<C> = ComponentType<
  * withGlobalTheme
  */
 
-export type WithGlobalThemeProps = {
+export type WithGlobalThemeProps = {|
   theme: GlobalTheme,
-};
+|};
 
 export type GlobalThemeWrappedComp<C> = ComponentType<
   $Diff<ElementConfig<$Supertype<C>>, Diffable<WithGlobalThemeProps>>,

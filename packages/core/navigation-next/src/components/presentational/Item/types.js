@@ -84,10 +84,10 @@ export type ExternalItemProps = {|
 |};
 
 /** Item props from item's perspective */
-export type ItemProps = {|
+export type ItemProps = {
   ...ExternalItemProps,
   ...$Exact<WithAnalyticsEventsProps>,
-|};
+};
 
 export type ItemPrimitiveProps = {|
   ...ExternalItemProps,
