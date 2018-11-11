@@ -10,16 +10,22 @@ import {
 import { type Theme, type ThemeProps, applyTheme } from './themes/themeBuilder';
 
 type CodeProps = {
-  /** The code to be formatted */
-  text: string,
+  /** The style object to apply to code */
+  codeStyle?: {},
+  /** The element or custom react component to use in place of the default code tag */
+  codeTagProps?: {},
   /** The language in which the code is written */
   language: ADFSupportedLanguages | string,
+  /** The style object to apply to the container that shows line number */
+  lineNumberContainerStyle?: {},
+  /** the element or custom react component to use in place of the default span tag */
+  preTag?: Node,
+  /** Indicates whether or not to show line numbers */
+  showLineNumbers?: boolean,
+  /** The code to be formatted */
+  text: string,
   /** A custom theme to be applied, implements the Theme interface */
   theme?: Theme | ThemeProps,
-  codeStyle?: {},
-  showLineNumbers?: boolean,
-  lineNumberContainerStyle?: {},
-  codeTagProps?: {},
 };
 
 export class Code extends PureComponent<CodeProps, {}> {
