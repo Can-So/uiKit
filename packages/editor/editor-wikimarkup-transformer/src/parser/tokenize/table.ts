@@ -8,7 +8,6 @@ import { parseNewlineOnly } from './whitespace';
 
 // Exclude { micros
 const TABLE_REGEXP = /^[ \t]*[|]+([^|{\n]*)/;
-// const NEWLINE = /\r?\n/;
 
 const processState = {
   OPENING_CELL: 0,
@@ -170,12 +169,4 @@ function parseToTableCell(
   }
 
   return cells;
-}
-
-function fallback(input: string, position: number): Token {
-  return {
-    type: 'text',
-    text: input.substr(position, 1),
-    length: 1,
-  };
 }

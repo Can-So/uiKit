@@ -22,6 +22,11 @@ yeah good luck closing this`,
       'should covet to same cell type for cells on the same row',
       '||Fixed? |No ||',
     ],
+    [
+      'should not include new line text in table',
+      `||foo | bar |
+      this is a new line text, not in the table`,
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {
