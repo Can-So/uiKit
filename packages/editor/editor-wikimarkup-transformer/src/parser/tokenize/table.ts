@@ -2,12 +2,21 @@ import { Node as PMNode, Schema } from 'prosemirror-model';
 import { AddCellArgs } from '../../interfaces';
 import { TableBuilder } from '../builder/table-builder';
 import { parseString } from '../text';
-import { isNextLineNotTableCell, normalizePMNodes } from '../utils/normalize';
+import { normalizePMNodes } from '../utils/normalize';
 import { Token, TokenType, TokenErrCallback } from './';
 import { parseNewlineOnly } from './whitespace';
 
-const TABLE_REGEXP = /^\s*[|]+([^|\n]*)/;
-const NEWLINE = /\r?\n/;
+// Exclude { micros
+const TABLE_REGEXP = /^[ \t]*[|]+([^|{\n]*)/;
+// const NEWLINE = /\r?\n/;
+
+const processState = {
+  OPENING_CELL: 0,
+  BUFFER: 1,
+  END: 2,
+  MACRO: 3,
+  CLOSING_CELL: 4,
+};
 
 export function table(
   input: string,
@@ -15,65 +24,110 @@ export function table(
   schema: Schema,
   tokenErrCallback: TokenErrCallback,
 ): Token {
-  const substring = input.substring(position);
-  let index = 0;
   const output: PMNode[] = [];
-
+  let index = position;
+  let currentState = processState.OPENING_CELL;
+  let cellBuffer = '';
+  let buffer = '';
   let builder: TableBuilder | null = null;
-  let lineBuffer: string[] = [];
-  let previousLine = '';
-  for (const line of substring.split(NEWLINE)) {
-    const match = line.match(TABLE_REGEXP);
 
-    if (!match && !isNextLineNotTableCell(line, previousLine)) {
-      lineBuffer.push(line);
-      index += line.length;
-      // Finding the length of the line break
-      const length = parseNewlineOnly(substring.substring(index));
-      if (length) {
-        index += length;
+  while (index < input.length) {
+    const char = input.charAt(index);
+    const substring = input.substring(index);
+    const length = parseNewlineOnly(input.substring(index));
+
+    switch (currentState) {
+      case processState.OPENING_CELL: {
+        const tableMatch = substring.match(TABLE_REGEXP);
+        if (tableMatch) {
+          if (!builder) {
+            builder = new TableBuilder(schema);
+          }
+          cellBuffer += input.substr(index, tableMatch[0].length);
+          index += tableMatch[0].length;
+          currentState = processState.CLOSING_CELL;
+          if (index < input.length) {
+            continue;
+          }
+          buffer += cellBuffer;
+        }
+        currentState = processState.CLOSING_CELL;
+        continue;
       }
-      previousLine = line;
-      continue;
+      case processState.CLOSING_CELL: {
+        // Looking for closing |
+        if (length) {
+          cellBuffer += '\n';
+          index += length;
+          if (index < input.length) {
+            if (input.substring(index).match(TABLE_REGEXP) && builder) {
+              builder.add(
+                parseToTableCell(cellBuffer, schema, tokenErrCallback),
+              );
+              cellBuffer = '';
+            }
+            currentState = processState.OPENING_CELL;
+            continue;
+          }
+        }
+        if (char === '|' && builder) {
+          if (
+            index < input.length &&
+            parseNewlineOnly(input.substring(index + 1))
+          ) {
+            index += parseNewlineOnly(input.substring(index + 1));
+            cellBuffer += char;
+            builder.add(parseToTableCell(cellBuffer, schema, tokenErrCallback));
+            cellBuffer = '';
+            if (
+              index < input.length &&
+              !input.substring(index + 1).match(TABLE_REGEXP)
+            ) {
+              output.push(builder.buildPMNode());
+              return {
+                type: 'pmnode',
+                nodes: output,
+                length: index - position,
+              };
+            }
+          }
+          currentState = processState.OPENING_CELL;
+          continue;
+        } else {
+          if (!length) {
+            cellBuffer += char;
+          }
+        }
+        break;
+      }
+      // case processState.END: {
+      //   if (!builder) {
+      //     /** Something is really wrong here */
+      //     return fallback(input, position);
+      //   }
+      //   cellBuffer = '';
+      //   builder.add(
+      //     parseToTableCell(buffer, schema, tokenErrCallback),
+      //   );
+      //   output.push(builder.buildPMNode());
+      //   return {
+      //     type: 'pmnode',
+      //     nodes: output,
+      //     length: index - position,
+      //   };
+      // }
     }
-
-    if (!builder) {
-      builder = new TableBuilder(schema);
-    }
-
-    if (lineBuffer.length > 0) {
-      builder.add(
-        parseToTableCell(lineBuffer.join('\n'), schema, tokenErrCallback),
-      );
-      lineBuffer = [];
-    }
-    if (isNextLineNotTableCell(line, previousLine)) {
-      break;
-    }
-    previousLine = line;
-    lineBuffer.push(line);
-    index += line.length;
-    // Finding the length of the line break
-    const lengthOfLineBreak = parseNewlineOnly(substring.substring(index));
-    if (lengthOfLineBreak) {
-      index += lengthOfLineBreak;
-    }
+    index++;
   }
-
-  if (lineBuffer.length > 0 && builder) {
-    builder.add(
-      parseToTableCell(lineBuffer.join('\n'), schema, tokenErrCallback),
-    );
-  }
-
   if (builder) {
+    builder.add(parseToTableCell(cellBuffer, schema, tokenErrCallback));
     output.push(builder.buildPMNode());
   }
 
   return {
     type: 'pmnode',
     nodes: output,
-    length: index,
+    length: index - position,
   };
 }
 
@@ -133,4 +187,12 @@ function parseToTableCell(
   }
 
   return cells;
+}
+
+function fallback(input: string, position: number): Token {
+  return {
+    type: 'text',
+    text: input.substr(position, 1),
+    length: 1,
+  };
 }
