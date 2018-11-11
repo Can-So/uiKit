@@ -1,5 +1,20 @@
 # @atlaskit/smart-card
 
+## 8.7.0
+- [minor] [e89e244](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e89e244):
+
+  - Implemented time-based caching for the client.
+
+## 8.6.3
+- [patch] [4b989c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b989c3):
+
+  - Fix inline cards crashing after change to the format.
+
+## 8.6.2
+- [patch] [a567cc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a567cc9):
+
+  - Improve rendering of Smart Cards.
+
 ## 8.6.1
 - [patch] [7bc4461](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7bc4461):
 

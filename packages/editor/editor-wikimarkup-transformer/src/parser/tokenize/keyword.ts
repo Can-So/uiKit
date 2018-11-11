@@ -97,7 +97,7 @@ const leadingKeywordTokenMap = [
   },
   {
     type: TokenType.RULER,
-    regex: /^-{4}\s/,
+    regex: /^-{4}(\s|$)/,
   },
   {
     type: TokenType.TRIPLE_DASH_SYMBOL,

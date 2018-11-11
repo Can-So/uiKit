@@ -85,14 +85,14 @@ class CellView extends ReactNodeView {
 
   getContentDOM() {
     const dom = document.createElement('div');
-    dom.className = ClassName.CELL_NODEVIEW_CONTENT_DOM;
+    dom.className = ClassName.TABLE_CELL_NODEVIEW_CONTENT_DOM;
     return { dom };
   }
 
   setDomAttrs(node) {
     const { cell } = this;
     if (cell) {
-      const attrs = setCellAttrs(node);
+      const attrs = setCellAttrs(node, cell);
       Object.keys(attrs).forEach(attr => {
         cell.setAttribute(attr, attrs[attr]);
       });
