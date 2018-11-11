@@ -64,22 +64,22 @@ export default evaluateInner`
 
   /* Headings */
   h1 {
-    ${typography.h800()};
+    ${typography.h800()}
   }
   h2 {
-    ${typography.h700()};
+    ${typography.h700()}
   }
   h3 {
-    ${typography.h600()};
+    ${typography.h600()}
   }
   h4 {
-    ${typography.h500()};
+    ${typography.h500()}
   }
   h5 {
-    ${typography.h400()};
+    ${typography.h400()}
   }
   h6 {
-    ${typography.h300()};
+    ${typography.h300()}
   }
 
   /* Lists */
@@ -168,7 +168,7 @@ export default evaluateInner`
 
   /* Other typographical elements */
   small {
-    ${typography.h100()};
+    ${typography.h100()}
   }
 
   code,
