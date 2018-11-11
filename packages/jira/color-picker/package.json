@@ -6,7 +6,9 @@
   "modules": "dist/es2015/index.js",
   "types": "dist/es5/types.d.ts",
   "atlaskit:src": "src/index.ts",
-  "atlaskit": { "internal": true },
+  "atlaskit": {
+    "internal": true
+  },
   "files": [
     "dist/es5/**/*.js",
     "dist/es5/**/*.d.ts",
@@ -29,8 +31,11 @@
     "palette"
   ],
   "dependencies": {
+    "@atlaskit/analytics-next": "^3.1.0",
+    "@atlaskit/icon": "^14.2.1",
     "@atlaskit/select": "^6.1.4",
     "@atlaskit/theme": "^6.0.0",
+    "memoize-one": "^3.0.1",
     "styled-components": "^3.2.6"
   },
   "peerDependencies": {

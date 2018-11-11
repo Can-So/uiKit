@@ -28,8 +28,7 @@ export interface Props {
   checkMarkColor?: string;
   /** onChange handler */
   onChange: (value: string, analyticsEvent?: object) => void;
-  /** You should not be accessing this prop under any circumstances. It is
-   provided by @atlaskit/analytics-next. */
+  /** You should not be accessing this prop under any circumstances. It is provided by @atlaskit/analytics-next. */
   createAnalyticsEvent?: any;
 }
 
