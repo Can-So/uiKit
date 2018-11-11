@@ -115,6 +115,14 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
 
   createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
 
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.selectedColor !== this.props.selectedColor) {
+      this.setState({
+        focusedItemIndex: getOptions(this.props).focusedItemIndex,
+      });
+    }
+  }
+
   changeAnalyticsCaller = () => {
     const { createAnalyticsEvent } = this.props;
 
