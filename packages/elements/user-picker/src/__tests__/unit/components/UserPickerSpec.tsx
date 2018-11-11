@@ -28,14 +28,6 @@ describe('UserPicker', () => {
     },
   ];
 
-  const selectUser = component => {
-    component
-      .find(Select)
-      .simulate('change', [{ value: 'abc-123', user: users[0] }], {
-        action: 'select-option',
-      });
-  };
-
   it('should render Select', () => {
     const component = shallowUserPicker({ users });
     const select = component.find(Select);
