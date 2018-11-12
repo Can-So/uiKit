@@ -1,1 +1,0 @@
-- FS-3190 disable hover state when focused
