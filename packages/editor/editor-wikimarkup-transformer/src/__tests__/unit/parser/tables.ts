@@ -27,6 +27,13 @@ yeah good luck closing this`,
       `||foo | bar |
       this is a new line text, not in the table`,
     ],
+    [
+      'should not create new cell if it is a escape char',
+      `||a\|\|b|\|c| d\\|e|
+
+      ||f\||g
+      h \||`,
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

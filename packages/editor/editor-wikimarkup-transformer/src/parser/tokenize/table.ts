@@ -8,6 +8,7 @@ import { parseNewlineOnly } from './whitespace';
 
 // Exclude { micros
 const TABLE_REGEXP = /^[ \t]*[|]+(\\\||\\\{|[^|{\n])*/;
+const BACK_SLASH_REGEXP = /(\\*$)/;
 
 const processState = {
   OPENING_CELL: 0,
@@ -41,10 +42,6 @@ export function table(
           }
           tableBuffer += input.substr(index, tableMatch[0].length);
           index += tableMatch[0].length;
-          currentState = processState.CLOSING_CELL;
-          if (index < input.length) {
-            continue;
-          }
         }
         currentState = processState.CLOSING_CELL;
         continue;
@@ -113,6 +110,57 @@ export function table(
   };
 }
 
+function containEscape(input: string): boolean {
+  const matches = input.match(BACK_SLASH_REGEXP);
+  return matches && matches[0].length === 1 ? true : false;
+}
+
+function escapeSlices(slices: string[]): string[] {
+  const slicesLength = slices.length;
+  let index = 0;
+  const escapedSlices: string[] = [];
+  while (index < slicesLength) {
+    if (index + 1 < slicesLength && containEscape(slices[index])) {
+      switch (slices[index + 1]) {
+        case '|': {
+          let sliceString = slices[index] + '|';
+          index++;
+          if (index + 1 < slicesLength) {
+            const subSlices = slices.slice(index + 1);
+            let previousElement = subSlices[0];
+            subSlices.find(el => {
+              if (
+                (el === '|' || el === '||') &&
+                !containEscape(previousElement)
+              ) {
+                return true;
+              }
+              sliceString += el;
+              index++;
+              previousElement = el;
+              return false;
+            });
+          }
+          escapedSlices.push(sliceString);
+          break;
+        }
+        case '||': {
+          escapedSlices.push(slices[index] + '|');
+          slices[index + 1] = '|';
+          break;
+        }
+        default: {
+          escapedSlices.push(slices[index]);
+        }
+      }
+    } else {
+      escapedSlices.push(slices[index]);
+    }
+    index++;
+  }
+  return escapedSlices;
+}
+
 function parseToTableCell(
   input: string,
   schema: Schema,
@@ -147,9 +195,12 @@ function parseToTableCell(
    */
   slices.shift();
 
-  for (let i = 0; i < slices.length; i += 2) {
-    const style = slices[i];
-    const rawContent = i + 1 < slices.length ? slices[i + 1] : null;
+  const escapedSlices = escapeSlices(slices);
+
+  for (let i = 0; i < escapedSlices.length; i += 2) {
+    const style = escapedSlices[i];
+    const rawContent =
+      i + 1 < escapedSlices.length ? escapedSlices[i + 1] : null;
     /**
      * We don't want to display the trailing space as a new cell
      * https://jdog.jira-dev.com/browse/BENTO-2319
