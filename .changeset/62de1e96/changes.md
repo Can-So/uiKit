@@ -1,0 +1,1 @@
+- FM-1358: Fixes scrolling lag when encountering a shadow
