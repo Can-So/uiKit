@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   The progress tracker is used to display the steps and progress through a journey.
@@ -8,6 +8,10 @@ export default md`
   The tracker is most commonly used for the focus task pattern.
 
   The default visited links support href and onClick passed through stage data.
+
+  ## Usage
+
+  ${code`import { ProgressTracker } from '@atlaskit/progress-tracker';`}
 
   ${(
     <Example

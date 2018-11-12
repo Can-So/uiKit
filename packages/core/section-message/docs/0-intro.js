@@ -15,8 +15,6 @@ export default md`
     </SectionMessage>
   )}
 
-  ${code`import SectionMessage from '@atlaskit/section-message';`}
-
   Section messages are part of the content of a user interface, and are used to
   alert users of a particular screen area that needs user action. These
   notifications can appear within a page or dialog. They are not dismissible,
@@ -26,6 +24,10 @@ export default md`
   different sections, a heading, a body, and actions.
 
   A section message will fill the width of its container.
+
+  ## Usage
+
+  ${code`import SectionMessage from '@atlaskit/section-message';`}
 
   ${(
     <Example

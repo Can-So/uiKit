@@ -1,12 +1,16 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   This package exports \`Drawer\` and \`DrawerBase\` components.
 
   You can wrap \`Drawer\` around any other React component to display the given
   \`children\` when the user hovers over the wrapped component.
+
+## Usage
+
+  ${code`import Drawer from '@atlaskit/drawer';`}
 
   ${(
     <Example

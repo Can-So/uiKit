@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default (
   <div>
@@ -13,6 +13,10 @@ export default (
       while the calendar or select is open will close it but not change or clear the value. When focussed 'Backspace' will clear the value.
       
       If needed you can modify or these default behaviours by passing props to the select component using the prop selectProps.
+
+      ## Usage
+
+      ${code`import { DatePicker, DateTimePicker, TimePicker } from '@atlaskit/datetime-picker';`}
 
       ## Examples
 

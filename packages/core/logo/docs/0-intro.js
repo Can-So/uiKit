@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   Use the logo component to output SVG versions of the company and product logos.
@@ -8,6 +8,10 @@ export default md`
   If you are not using tree-shaking, and are importing logos, you should likely use the
   direct path to the logos file. [this example](/example/getAbsolutePath) will give you
   the exact path you need.
+
+  ## Usage
+
+  ${code`AtlassianLogo, AtlassianIcon, AtlassianWordmark } from '@atlaskit/logo';`}
 
   ## Examples
 

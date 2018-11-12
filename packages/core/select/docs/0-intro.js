@@ -1,10 +1,25 @@
 // @flow
 import React from 'react';
-import { md, Example } from '@atlaskit/docs';
+import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
   React component which allows selection of an item or items from a dropdown list.
   Substitute for the native select element.
+
+  ## Usage
+
+  ${code`import Select, {
+  components,
+  createFilter,
+  mergeStyles,
+  AsyncSelect,
+  CheckboxSelect,
+  CountrySelect,
+  RadioSelect,
+  CreatableSelect,
+  AsyncCreatableSelect,
+  PopupSelect,
+} from '@atlaskit/select';`}
 
   ${(
     <Example

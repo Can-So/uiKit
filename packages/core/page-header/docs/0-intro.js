@@ -1,9 +1,11 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   The page header pattern is a template that helps combine other components (breadcrumbs, headings, actions, and selects) to create a consistent user experience.
+
+  ${code`import PageHeader from '@atlaskit/page-header';`}
 
   ${(
     <Example

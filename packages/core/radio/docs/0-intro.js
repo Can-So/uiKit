@@ -15,11 +15,12 @@ ${(
     </p>
   </SectionMessage>
 )}
-  ### Usage
 
   #### With Radio Group
 
   Provides a standard way to select a single option from a list.
+
+  ### Usage
 
   ${code`
   import { RadioGroup, Radio } from '@atlaskit/radio';

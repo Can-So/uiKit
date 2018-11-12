@@ -3,9 +3,9 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  ### Usage
-
   A checkbox element primarily for use in forms.
+
+  ### Usage
 
 ${code`
 import {

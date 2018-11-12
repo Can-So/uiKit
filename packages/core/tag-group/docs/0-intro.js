@@ -1,10 +1,14 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   A container around a [Tag](/components/tag) component that applies consistent
   styling to the collection of ties.
+
+  ## Usage
+
+  ${code`import TagGroup from '@atlaskit/tag-group';`}
 
   ## Examples
 

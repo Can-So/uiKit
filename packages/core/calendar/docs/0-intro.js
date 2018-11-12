@@ -1,13 +1,15 @@
 // @flow
 
 import * as React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   The calendar component displays a simple calendar that can be:
 
   - Used to display a calendar of dates.
   - Composed with other components to build a datepicker.
+
+${code`import Calendar from '@atlaskit/calendar';`}
 
   ## Examples
 

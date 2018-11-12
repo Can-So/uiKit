@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   This package exports \`Tooltip\` and \`TooltipPrimitive\` components.
@@ -12,6 +12,12 @@ export default md`
   a component with basic styles required by the tooltip. You can then pass this
   custom tooltip in \`component\` prop to display it when user hovers over wrapper
   content of \`Tooltip\`.
+
+  ## Usage
+
+  ${code`import Tooltip, { TooltipPrimitive } from '@atlaskit/tooltip';`}
+
+  ## Example
 
   ${(
     <Example

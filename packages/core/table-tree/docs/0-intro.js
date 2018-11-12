@@ -43,6 +43,17 @@ ${code`
 ]
 `}
 
+  ## Usage
+
+  ${code`import TableTree, {
+  Headers,
+  Header,
+  Cell,
+  Rows,
+  Row,
+  TableTreeDataHelper,
+} from '@atlaskit/table-tree';`}
+
 ${(
   <Props
     props={require('!!extract-react-types-loader!../src/components/TableTree')}

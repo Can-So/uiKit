@@ -1,11 +1,13 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
 This banner component is designed to display a prominent message at the
 top of the page. It animates its opening and closing, and is not dismissible.
+
+${code`import Banner from '@atlaskit/banner';`}
 
 ${(
   <Example

@@ -8,9 +8,9 @@ export default md`
   The <code>Flag</code> component applies styling, while <code>FlagGroup</code> animates
   the loading and unloading of flags.
 
-${code`
-import Flag, { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';
-`}
+  ## Usage
+
+  ${code`import Flag, { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';`}
 
   It is recommended to wrap your application with the
   [Layer Manager](https://atlaskit.atlassian.com/components/layer-manager) component to

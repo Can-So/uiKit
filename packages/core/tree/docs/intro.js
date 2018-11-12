@@ -28,6 +28,10 @@ export default md`
    - Reorganization of the tree by drag&drop
    - Mouse, touch and keyboard support
 
+  ## Usage
+
+  ${code`import Tree, { mutateTree, moveItemOnTree } from '@atlaskit/tree';`}
+
   ## Examples
 
   ${(

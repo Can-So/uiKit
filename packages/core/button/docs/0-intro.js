@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   Buttons are used as triggers for actions. They are used in forms, toolbars,
@@ -8,6 +8,8 @@ export default md`
 
   Button also exports a button-group component to make it easy to display
   multiple buttons together.
+
+  ${code`import Button, { ButtonGroup } from '@atlaskit/button';`}
 
   ${(
     <Example

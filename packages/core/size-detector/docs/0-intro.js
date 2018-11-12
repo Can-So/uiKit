@@ -1,9 +1,14 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   Size Detector is a utility component that informs the child function of the available width and height.
+
+  ## Usage
+
+  ${code`import SizeDetector from '@atlaskit/size-detector';`}
+
 
   ## Examples
 
