@@ -1,0 +1,1 @@
+- FS-3192 scroll to value when it is selected
