@@ -23,7 +23,6 @@ type Props = {
   match?: string | ((name: string) => boolean) | RegExp,
   /** Sets wether to call `onEvent` for private or public events. */
   matchPrivate?: boolean,
-  ...$Exact<{}>,
 };
 
 const ContextTypes = {
