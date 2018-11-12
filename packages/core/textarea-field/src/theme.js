@@ -8,14 +8,14 @@ const disabled = { light: colors.N20, dark: colors.DN20 };
 const red = { light: colors.R400, dark: colors.R400 };
 
 // The following do not yet have a darkmode 'map': N20A, N10
-const backgroundColor = {
+export const backgroundColor = {
   standard: { light: colors.N10, dark: colors.DN10 },
   disabled,
   invalid: { light: colors.N10, dark: colors.DN10 },
   subtle: { light: 'transparent', dark: 'transparent' },
   none: { light: 'transparent', dark: 'transparent' },
 };
-const backgroundColorFocus = {
+export const backgroundColorFocus = {
   standard: { light: colors.N0, dark: colors.DN10 },
   disabled,
   invalid: { light: colors.N0, dark: colors.DN10 },
@@ -23,7 +23,7 @@ const backgroundColorFocus = {
   none: { light: 'transparent', dark: 'transparent' },
 };
 
-const backgroundColorHover = {
+export const backgroundColorHover = {
   standard: { light: colors.N30, dark: colors.DN30 },
   disabled,
   invalid: { light: colors.N30, dark: colors.DN30 },
@@ -31,7 +31,7 @@ const backgroundColorHover = {
   none: { light: 'transparent', dark: 'transparent' },
 };
 
-const borderColor = {
+export const borderColor = {
   standard: { light: colors.N40, dark: colors.DN40 },
   disabled: { light: colors.N40, dark: colors.DN40 },
   invalid: red,
@@ -39,7 +39,7 @@ const borderColor = {
   none: { light: 'transparent', dark: 'transparent' },
 };
 
-const borderColorFocus = {
+export const borderColorFocus = {
   standard: { light: colors.B100, dark: colors.B75 },
   disabled: { light: colors.B100, dark: colors.B75 },
   invalid: { light: colors.B100, dark: colors.B75 },
@@ -47,10 +47,9 @@ const borderColorFocus = {
   none: { light: 'transparent', dark: 'transparent' },
 };
 
-const placeholderTextColor = { light: colors.N100, dark: colors.DN200 };
-
-const textColor = { light: colors.N900, dark: colors.DN600 };
-const disabledTextColor = { light: colors.N70, dark: colors.DN90 };
+export const placeholderTextColor = { light: colors.N100, dark: colors.DN200 };
+export const textColor = { light: colors.N900, dark: colors.DN600 };
+export const disabledTextColor = { light: colors.N70, dark: colors.DN90 };
 
 export type ThemeAppearance =
   | 'standard'
@@ -59,6 +58,10 @@ export type ThemeAppearance =
   | 'subtle'
   | 'none';
 
+export type TextAreaThemeProps = {
+  appearance: ThemeAppearance,
+  isCompact: boolean,
+};
 export type ThemeProps = {
   textArea?: ({ appearance: ThemeAppearance, isCompact: boolean }) => {
     borderColor?: string,
@@ -80,6 +83,9 @@ export type ThemeProps = {
   mode?: 'light' | 'dark',
 };
 
+/* BASE VARIABLES */
+// TODO: is this as generic as we can make these;
+// should information like px and s be specified in our styling instead?
 const grid = gridSize();
 const borderRadius = '3px';
 const borderWidth = 2;
@@ -95,32 +101,31 @@ const getLineHeight = isCompact =>
   (isCompact ? lineHeightCompact : lineHeightBase) / fontSize();
 const getHeight = isCompact => (isCompact ? heightCompact : heightBase);
 
+const getTextAreaTheme = mode => ({
+  appearance,
+  isCompact,
+}: TextAreaThemeProps) => ({
+  borderColor: borderColor[appearance][mode],
+  borderColorFocus: borderColorFocus[appearance][mode],
+  backgroundColorHover: backgroundColorHover[appearance][mode],
+  backgroundColorFocus: backgroundColorFocus[appearance][mode],
+  backgroundColor: backgroundColor[appearance][mode],
+  textColor: textColor[mode],
+  disabledTextColor: disabledTextColor[mode],
+  placeholderTextColor: placeholderTextColor[mode],
+  borderRadius,
+  borderWidth,
+  baseHeight: getHeight(isCompact),
+  lineHeight: getLineHeight(isCompact),
+  horizontalPadding,
+  innerHeight,
+  transitionDuration,
+});
+
 export default (props: ThemeProps): ThemeProps => {
   const mode = props.mode || 'light';
   return {
-    textArea: ({
-      appearance,
-      isCompact,
-    }: {
-      appearance: ThemeAppearance,
-      isCompact: boolean,
-    }) => ({
-      borderColor: borderColor[appearance][mode],
-      borderColorFocus: borderColorFocus[appearance][mode],
-      backgroundColorHover: backgroundColorHover[appearance][mode],
-      backgroundColorFocus: backgroundColorFocus[appearance][mode],
-      backgroundColor: backgroundColor[appearance][mode],
-      textColor: textColor[mode],
-      disabledTextColor: disabledTextColor[mode],
-      placeholderTextColor: placeholderTextColor[mode],
-      borderRadius,
-      borderWidth,
-      baseHeight: getHeight(isCompact),
-      lineHeight: getLineHeight(isCompact),
-      horizontalPadding,
-      innerHeight,
-      transitionDuration,
-    }),
+    textArea: getTextAreaTheme(mode),
     mode,
     ...props,
   };
