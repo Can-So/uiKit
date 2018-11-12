@@ -67,30 +67,30 @@ export type ItemBaseProps = {|
 |};
 
 export type ItemRenderComponentProps = {
-  ...ItemBaseProps,
+  ...$Exact<ItemBaseProps>,
   children: Node,
   className: string,
 };
 
 /** Item props from an external consumer perspective */
-export type ExternalItemProps = {|
-  ...ItemBaseProps,
+export type ExternalItemProps = {
+  ...$Exact<ItemBaseProps>,
   /** A custom component to render instead of the default wrapper component.
    * Could used to render a router Link, for example. The component will be
    * provided with a className, children and onClick props, which should be passed on to the
    * element you render. If this is a SortableItem, you will also need to spread `draggableProps` and
    * set ref of `innerRef` to your outermost DOM element. */
   component?: ComponentType<ItemRenderComponentProps>,
-|};
+};
 
 /** Item props from item's perspective */
 export type ItemProps = {
-  ...ExternalItemProps,
+  ...$Exact<ExternalItemProps>,
   ...$Exact<WithAnalyticsEventsProps>,
 };
 
-export type ItemPrimitiveProps = {|
-  ...ExternalItemProps,
-  ...InteractionState,
+export type ItemPrimitiveProps = {
+  ...$Exact<ExternalItemProps>,
+  ...$Exact<InteractionState>,
   theme: ProductTheme,
-|};
+};
