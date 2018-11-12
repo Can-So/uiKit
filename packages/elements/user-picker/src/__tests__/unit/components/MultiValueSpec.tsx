@@ -52,7 +52,7 @@ describe('MultiValue', () => {
     expect(tag.prop('color')).toBeUndefined();
   });
 
-  it('should use greyLight color when focused', () => {
+  it('should use blueLight color when focused', () => {
     const component = shallowMultiValue({ isFocused: true });
     expect(component.find(Container)).toHaveLength(1);
     const tag = component.find(Tag);
@@ -68,7 +68,7 @@ describe('MultiValue', () => {
         />
       ),
       removeButtonText: 'remove',
-      color: 'greyLight',
+      color: 'blueLight',
     });
   });
 
