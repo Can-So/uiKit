@@ -68,13 +68,13 @@ export const mediaStyles = css`
     border-radius: 6px;
   }
 
-  .mediaSingle-selected .mediaSingle-resize-handle-right::after,
-  .mediaSingle-selected .mediaSingle-resize-handle-left::after,
   .media-single:hover .mediaSingle-resize-handle-left::after,
   .media-single:hover .mediaSingle-resize-handle-right::after {
     background: ${colors.N60};
   }
 
+  .mediaSingle-selected .mediaSingle-resize-handle-right::after,
+  .mediaSingle-selected .mediaSingle-resize-handle-left::after,
   .media-single .mediaSingle-resize-handle-right:hover::after,
   .media-single .mediaSingle-resize-handle-left:hover::after,
   .media-single.is-resizing .mediaSingle-resize-handle-right::after,

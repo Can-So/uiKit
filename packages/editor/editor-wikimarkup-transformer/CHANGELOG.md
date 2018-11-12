@@ -1,5 +1,15 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.3.1
+- [patch] [5b4474f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b4474f):
+
+  - Improve handling of 'rules' in lists and at end of content
+
+## 2.3.0
+- [minor] [640e01f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/640e01f):
+
+  - Ignore double dash symbol when sticked with alphanumerical, unicode without space, or parenthesis
+
 ## 2.2.0
 - [minor] [fd35bec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fd35bec):
 
