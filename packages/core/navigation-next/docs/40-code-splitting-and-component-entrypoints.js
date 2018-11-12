@@ -3,7 +3,7 @@
 import React from 'react';
 import { code, md } from '@atlaskit/docs';
 
-import { Contents, ContentsProvider, H, IframeExample } from './shared';
+import { ContentsProvider, H } from './shared';
 
 export default (
   <ContentsProvider>{md`
