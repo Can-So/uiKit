@@ -5,14 +5,13 @@ import ReactDOMServer from 'react-dom/server';
 import Portal from '../..';
 
 jest.mock('exenv', () => ({
-  canUseDom: false,
+  canUseDOM: false,
 }));
 
 afterAll(() =>
   document
     .querySelectorAll('.atlaskit-portal')
-    .forEach(e => e.parentNode && e.parentNode.removeChild(e)),
-);
+    .forEach(e => e.parentNode && e.parentNode.removeChild(e)));
 
 const App = () => (
   <div>
