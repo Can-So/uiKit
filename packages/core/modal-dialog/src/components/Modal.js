@@ -156,7 +156,7 @@ class Modal extends Component<Props, State> {
             scrollDistance={scrollDistance}
           >
             <FocusLock
-              enabled={stackIndex === 0 && isOpen}
+              isEnabled={stackIndex === 0 && isOpen}
               autoFocus={autoFocus}
             >
               <Blanket isTinted onBlanketClicked={this.handleOverlayClick} />

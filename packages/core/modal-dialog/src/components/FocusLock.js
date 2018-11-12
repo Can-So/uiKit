@@ -16,11 +16,11 @@ type Props = {
   /**
     Whether the focus lock is active or not.
   */
-  enabled: boolean,
+  isEnabled: boolean,
   /**
     Whether to return the focus to the previous active element.
   */
-  returnFocus: boolean,
+  shouldReturnFocus: boolean,
 };
 
 // Thin wrapper over react-focus-lock. This wrapper only exists to ensure API compatibility.
@@ -28,18 +28,20 @@ type Props = {
 export default class FocusLock extends Component<Props> {
   static defaultProps = {
     autoFocus: true,
-    enabled: true,
-    returnFocus: true,
+    isEnabled: true,
+    shouldReturnFocus: true,
   };
 
   componentDidMount() {
-    const { enabled, autoFocus } = this.props;
+    const { isEnabled, autoFocus } = this.props;
 
-    invariant(
-      process.env.NODE_ENV === 'production' || typeof autoFocus === 'boolean',
-      '@atlaskit/modal-dialog: Passing a function as autoFocus is deprecated. Instead call focus on the element ref or use the autofocus property.',
-    );
-    if (typeof autoFocus === 'function' && enabled) {
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(
+        typeof autoFocus === 'boolean',
+        '@atlaskit/modal-dialog: Passing a function as autoFocus is deprecated. Instead call focus on the element ref or use the autofocus property.',
+      );
+    }
+    if (typeof autoFocus === 'function' && isEnabled) {
       const elem = autoFocus();
       if (elem && elem.focus) {
         elem.focus();
@@ -48,12 +50,12 @@ export default class FocusLock extends Component<Props> {
   }
 
   render() {
-    const { enabled, autoFocus, returnFocus } = this.props;
+    const { isEnabled, autoFocus, shouldReturnFocus } = this.props;
     return (
       <ReactFocusLock
-        disabled={!enabled}
+        disabled={!isEnabled}
         autoFocus={!!autoFocus}
-        returnFocus={returnFocus}
+        returnFocus={shouldReturnFocus}
       >
         {this.props.children}
       </ReactFocusLock>
