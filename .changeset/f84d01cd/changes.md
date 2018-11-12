@@ -1,0 +1,1 @@
+- Fix floating toolbars overlaping with main editor toolbar
