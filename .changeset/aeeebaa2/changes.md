@@ -1,1 +1,0 @@
-- FS-3194 change color for selected value
