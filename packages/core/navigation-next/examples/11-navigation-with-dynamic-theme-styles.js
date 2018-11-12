@@ -26,7 +26,6 @@ import {
   MenuSection,
   NavigationProvider,
   Separator,
-  UIControllerSubscriber,
   modeGenerator,
   ThemeProvider,
   Wordmark,
@@ -40,28 +39,6 @@ const gridSize = gridSizeFn();
 const globalNavPrimaryItems = [
   {
     key: 'jira',
-    component: ({ className, children }: *) => (
-      <UIControllerSubscriber>
-        {navigationUIController => {
-          function onClick() {
-            if (navigationUIController.state.isCollapsed) {
-              navigationUIController.expand();
-            }
-            navigationUIController.togglePeek();
-          }
-          return (
-            <button
-              className={className}
-              onClick={onClick}
-              onMouseEnter={navigationUIController.peekHint}
-              onMouseLeave={navigationUIController.unPeekHint}
-            >
-              {children}
-            </button>
-          );
-        }}
-      </UIControllerSubscriber>
-    ),
     icon: ({ label }: { label: string }) => (
       <JiraIcon size="medium" label={label} />
     ),

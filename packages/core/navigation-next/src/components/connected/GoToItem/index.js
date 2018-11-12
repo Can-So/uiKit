@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/arrow-right-circle';
 import Spinner from '@atlaskit/spinner';
 
-import { withNavigationUI } from '../../../ui-controller';
 import { withNavigationViewController } from '../../../view-controller';
 import ConnectedItem from '../ConnectedItem';
 
@@ -37,12 +36,7 @@ class GoToItem extends Component<GoToItemProps> {
   };
 
   handleClick = (e: SyntheticEvent<HTMLElement>) => {
-    const {
-      goTo,
-      navigationViewController,
-      navigationUIController,
-    } = this.props;
-    const { activeView } = navigationViewController.state;
+    const { goTo, navigationViewController } = this.props;
 
     e.preventDefault();
 
@@ -50,26 +44,13 @@ class GoToItem extends Component<GoToItemProps> {
       return;
     }
 
-    if (navigationUIController.state.isPeeking) {
-      if (activeView && goTo === activeView.id) {
-        // If we're peeking and goTo points to the active view, unpeek.
-        navigationUIController.unPeek();
-      } else {
-        // If we're peeking and goTo does not point to the active view, update
-        // the peek view.
-        navigationViewController.setPeekView(goTo);
-      }
-    } else {
-      // If we're not peeking, update the active view.
-      navigationViewController.setView(goTo);
-    }
+    navigationViewController.setView(goTo);
   };
 
   render() {
     const {
       after: afterProp,
       goTo,
-      navigationUIController,
       navigationViewController,
       spinnerDelay,
       ...rest
@@ -85,4 +66,4 @@ class GoToItem extends Component<GoToItemProps> {
 
 export { GoToItem as GoToItemBase };
 
-export default withNavigationUI(withNavigationViewController(GoToItem));
+export default withNavigationViewController(GoToItem);

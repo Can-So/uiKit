@@ -29,9 +29,6 @@ export {
   default as MenuSection,
 } from './components/presentational/MenuSection';
 export {
-  default as PeekToggleItem,
-} from './components/presentational/PeekToggleItem';
-export {
   default as ScrollableSectionInner,
 } from './components/presentational/ScrollableSectionInner';
 export { default as Section } from './components/presentational/Section';

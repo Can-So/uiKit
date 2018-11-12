@@ -42,28 +42,6 @@ const gridSize = gridSizeFn();
 const globalNavPrimaryItems = [
   {
     key: 'jira',
-    component: ({ className, children }: *) => (
-      <UIControllerSubscriber>
-        {navigationUIController => {
-          function onClick() {
-            if (navigationUIController.state.isCollapsed) {
-              navigationUIController.expand();
-            }
-            navigationUIController.togglePeek();
-          }
-          return (
-            <button
-              className={className}
-              onClick={onClick}
-              onMouseEnter={navigationUIController.peekHint}
-              onMouseLeave={navigationUIController.unPeekHint}
-            >
-              {children}
-            </button>
-          );
-        }}
-      </UIControllerSubscriber>
-    ),
     icon: ({ label }: { label: string }) => (
       <JiraIcon size="medium" label={label} />
     ),
@@ -195,15 +173,9 @@ function NOOP() {}
 type StatusEvents = {
   onResizeEnd: number => void,
   onResizeStart: number => void,
-  onPeekHint: () => void,
-  onUnpeekHint: () => void,
-  onPeek: () => void,
-  onUnpeek: () => void,
 };
 type NavState = {
   isCollapsed: boolean,
-  isPeekHinting: boolean,
-  isPeeking: boolean,
   isResizing: boolean,
   productNavWidth: number,
 };
@@ -223,20 +195,8 @@ class CollapseStatus extends React.Component<StatusProps> {
     onResizeStart: NOOP,
   };
   componentDidUpdate(prevProps: StatusProps) {
-    const {
-      onResizeStart,
-      onResizeEnd,
-      onPeekHint,
-      onUnpeekHint,
-      onPeek,
-      onUnpeek,
-    } = this.props;
-    const {
-      isPeekHinting,
-      isPeeking,
-      isResizing,
-      productNavWidth,
-    } = this.props.navState;
+    const { onResizeStart, onResizeEnd } = this.props;
+    const { isResizing, productNavWidth } = this.props.navState;
 
     // manual resize
     if (isResizing && !prevProps.navState.isResizing) {
@@ -244,22 +204,6 @@ class CollapseStatus extends React.Component<StatusProps> {
     }
     if (!isResizing && prevProps.navState.isResizing) {
       onResizeEnd(productNavWidth);
-    }
-
-    // hinting
-    if (isPeekHinting && !prevProps.navState.isPeekHinting) {
-      onPeekHint();
-    }
-    if (!isPeekHinting && prevProps.navState.isPeekHinting) {
-      onUnpeekHint();
-    }
-
-    // peeking
-    if (isPeeking && !prevProps.navState.isPeeking) {
-      onPeek();
-    }
-    if (!isPeeking && prevProps.navState.isPeeking) {
-      onUnpeek();
     }
   }
   render() {
@@ -408,10 +352,6 @@ class ExtendingNavSubscriber extends React.Component<*, State> {
         <CollapseStatusListener
           onResizeEnd={this.onResizeEnd}
           onResizeStart={this.onResizeStart}
-          onPeek={this.onEmit('onPeek')}
-          onUnpeek={this.onEmit('onUnpeek')}
-          onPeekHint={this.onEmit('onPeekHint')}
-          onUnpeekHint={this.onEmit('onUnpeekHint')}
         />
         <div>
           <ResizeBox width={boxWidth} pending={resizePending} />

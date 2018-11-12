@@ -45,7 +45,7 @@ export type View = {
    * Allowing extra attributes to be sent for analytics events. */
   getAnalyticsAttributes?: (items: ViewData) => {},
 };
-type ActiveView = {
+export type ActiveView = {
   analyticsAttributes?: {} | void,
   id: ViewID,
   type: ViewLayer,
@@ -59,7 +59,6 @@ type IncomingView = {
 export type Reducer = ViewData => ViewData;
 
 export type ViewControllerProps = {
-  initialPeekViewId?: ?ViewID,
   isDebugEnabled?: boolean,
 };
 
@@ -68,14 +67,6 @@ export type ViewControllerState = {
   activeView: ?ActiveView,
   /** The view which will become active once it has loaded. */
   incomingView: ?IncomingView,
-  /** The view which should be rendered on the product navigation layer when the
-   * active view is a 'container' view. @deprecated: The concept of peeking no
-   * longer exists in the UX spec, so this feature will be removed in a future
-   * release. */
-  activePeekView: ?ActiveView,
-  /** The view which will become the active peek view once it has loaded.
-   * @deprecated */
-  incomingPeekView: ?IncomingView,
 };
 
 export interface ViewControllerInterface {
@@ -87,9 +78,6 @@ export interface ViewControllerInterface {
   /** A map of reducer functions to be run over view items, keyed by the view's
    * ID. */
   reducers: { [ViewID]: Reducer[] };
-
-  /** The view which will be 'peeked' to. @deprecated */
-  initialPeekViewId: ?ViewID;
 
   /** In debug mode the view controller will log information about the usage of
    * reducers. */
@@ -112,9 +100,6 @@ export interface ViewControllerInterface {
 
   /** Remove a reducer from the view with the given ID. */
   removeReducer: (ViewID, Reducer) => void;
-
-  /** Specify which view should be treated as the initial peek view. */
-  setInitialPeekViewId: ViewID => void;
 
   /** Will re-resolve the active view and re-reduce its data. Accepts an
    * optional view ID to only re-resolve if the given ID matches the active

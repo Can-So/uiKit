@@ -243,12 +243,7 @@ export default class LayoutManager extends Component<
       navigationUIController,
       productNavigation,
     } = this.props;
-    const {
-      isCollapsed,
-      isPeekHinting,
-      isPeeking,
-      isResizing,
-    } = navigationUIController.state;
+    const { isCollapsed, isResizing } = navigationUIController.state;
 
     const isVisible = transitionState !== 'exited';
     const shouldDisableInteraction =
@@ -263,8 +258,6 @@ export default class LayoutManager extends Component<
       >
         <ContentNavigation
           container={containerNavigation}
-          isPeekHinting={isPeekHinting}
-          isPeeking={isPeeking}
           isVisible={isVisible}
           key="product-nav"
           product={productNavigation}

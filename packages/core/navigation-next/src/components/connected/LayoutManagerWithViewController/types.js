@@ -3,7 +3,6 @@
 import type { ComponentType, Node } from 'react';
 import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
 import UIController from '../../../ui-controller/UIController';
-import ViewController from '../../../view-controller/ViewController';
 
 import type {
   CollapseListeners,
@@ -11,7 +10,10 @@ import type {
   GetRefs,
 } from '../../presentational/LayoutManager/types';
 
-import type { ViewControllerState } from '../../../view-controller/types';
+import type {
+  ActiveView,
+  ViewControllerState,
+} from '../../../view-controller/types';
 
 export type LayoutManagerWithViewControllerProps = CollapseListeners &
   ExperimentalFeatureFlags & {
@@ -20,12 +22,13 @@ export type LayoutManagerWithViewControllerProps = CollapseListeners &
     getRefs?: GetRefs,
     globalNavigation: ComponentType<{}>,
     navigationUIController: UIController,
-    navigationViewController: ViewController,
     firstSkeletonToRender?: 'product' | 'container',
+    view: ?ActiveView,
   };
 
 export type LayoutManagerWithViewControllerState = {
   hasInitialised: boolean,
+  outgoingView: ?ActiveView,
 };
 
 export type LayerInitialisedProps = WithAnalyticsEventsProps & {

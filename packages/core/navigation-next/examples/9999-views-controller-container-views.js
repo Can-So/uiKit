@@ -316,7 +316,6 @@ class App extends Component<{
     navigationViewController.addView(productHomeView);
     navigationViewController.addView(productIssuesView);
     navigationViewController.addView(projectHomeView);
-    navigationViewController.setInitialPeekViewId(productHomeView.id);
   }
 
   render() {

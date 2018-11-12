@@ -27,11 +27,7 @@ describe('LayoutManagerWithViewController', () => {
 
     wrapper = mount(
       <HashRouter>
-        <NavigationProvider
-          cache={false}
-          initialPeekViewId="root/index"
-          isDebugEnabled={false}
-        >
+        <NavigationProvider cache={false} isDebugEnabled={false}>
           <LayoutManagerWithViewController
             globalNavigation={GlobalNavigationComponent}
             firstSkeletonToRender={'product'}
@@ -94,10 +90,7 @@ describe('LayoutManagerWithViewController', () => {
     it('should render skeleton using `container` context', () => {
       const containerWrapper = mount(
         <HashRouter>
-          <NavigationProvider
-            initialPeekViewId="root/index"
-            isDebugEnabled={false}
-          >
+          <NavigationProvider isDebugEnabled={false}>
             <LayoutManagerWithViewController
               globalNavigation={GlobalNavigationComponent}
               firstSkeletonToRender={'container'}

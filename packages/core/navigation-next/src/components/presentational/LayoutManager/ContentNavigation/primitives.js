@@ -2,15 +2,12 @@
 
 import React, { Fragment, type Node } from 'react';
 import { keyframes } from 'emotion';
-import Transition from 'react-transition-group/Transition';
 import { colors } from '@atlaskit/theme';
 
 import {
   transitionDuration,
-  transitionDurationMs,
   transitionTimingFunction,
 } from '../../../../common/constants';
-import { Shadow } from '../../../../common/primitives';
 import {
   light,
   withContentTheme,
@@ -18,26 +15,11 @@ import {
   type ProductTheme,
 } from '../../../../theme';
 
-const animationFade = state => {
-  const defaultStyle = {
-    opacity: 0,
-    transitionDuration,
-    transitionProperty: 'opacity',
-    transitionTimingFunction,
-  };
-  const transitionStyles = {
-    entering: { opacity: 0 },
-    entered: { opacity: 1 },
-  };
-  return { ...defaultStyle, ...transitionStyles[state] };
-};
-
 /**
  * Component tree structure
  *  - ProductNavigation
  *  - ContainerNavigation
  *    - ContainerOverlay
- *  - InnerShadow
  */
 
 const ScrollProvider = (props: any) => (
@@ -108,25 +90,18 @@ type ContainerNavigationPrimitiveBaseProps = {
   children: Node,
   isEntering: boolean,
   isExiting: boolean,
-  isPeekHinting: boolean,
-  isPeeking: boolean,
   theme: ProductTheme,
 };
 const ContainerNavigationPrimitiveBase = ({
   children,
   isEntering,
   isExiting,
-  isPeekHinting,
-  isPeeking,
   theme,
 }: ContainerNavigationPrimitiveBaseProps) => {
   let animationName;
   if (isEntering) animationName = slideIn;
 
-  let transform = null;
-  if (isPeekHinting) transform = 'translateX(16px)';
-  if (isPeeking) transform = 'translateX(calc(100% - 32px))';
-  if (isExiting) transform = 'translateX(100%)';
+  const transform = isExiting ? 'translateX(100%)' : null;
 
   return (
     <div
@@ -153,7 +128,6 @@ const ContainerNavigationPrimitive = withContentTheme(
 
 type ContainerNavigationProps = {
   children: Node,
-  isPeeking: boolean,
 };
 
 export const ContainerNavigationTheme = ({ children }: BaseNavigationTheme) => (
@@ -198,28 +172,4 @@ export const ContainerOverlay = ({
     role="presentation"
     {...props}
   />
-);
-
-/**
- * InnerShadow
- */
-type InnerShadowProps = { isVisible: boolean };
-
-export const InnerShadow = ({ isVisible }: InnerShadowProps) => (
-  <Transition
-    appear
-    in={isVisible}
-    mountOnEnter
-    timeout={transitionDurationMs}
-    unmountOnExit
-  >
-    {state => {
-      const styles = {
-        ...animationFade(state),
-        left: 'auto',
-        right: 0,
-      };
-      return <Shadow isBold style={styles} />;
-    }}
-  </Transition>
 );

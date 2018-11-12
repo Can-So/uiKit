@@ -9,7 +9,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
   describe('ContainerNavigation', () => {
     it('should ALWAYS use the `light` theme', () => {
       const wrapper = mount(
-        <ContainerNavigation isPeeking>
+        <ContainerNavigation>
           <p>This is a text</p>
         </ContainerNavigation>,
       );
@@ -21,7 +21,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
 
     it('should ALWAYS use the `container` context', () => {
       const wrapper = mount(
-        <ContainerNavigation isPeeking>
+        <ContainerNavigation>
           <p>This is a text</p>
         </ContainerNavigation>,
       );
@@ -33,7 +33,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
 
     it('should have scrollable effect', () => {
       const wrapper = mount(
-        <ContainerNavigation isPeeking>
+        <ContainerNavigation>
           <p>This is a text</p>
         </ContainerNavigation>,
       );
@@ -43,7 +43,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
 
     it('should render the received children', () => {
       const wrapper = mount(
-        <ContainerNavigation isPeeking>
+        <ContainerNavigation>
           <p>This is a text</p>
         </ContainerNavigation>,
       );
@@ -55,7 +55,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
   describe('ProductNavigation', () => {
     it('should use the `light` theme if another theme was not provided', () => {
       const wrapper = mount(
-        <ProductNavigation isPeeking>
+        <ProductNavigation>
           <p>This is a text</p>
         </ProductNavigation>,
       );
@@ -72,7 +72,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
 
     it('should ALWAYS use the `product` context', () => {
       const wrapper = mount(
-        <ProductNavigation isPeeking>
+        <ProductNavigation>
           <p>This is a text</p>
         </ProductNavigation>,
       );
@@ -87,7 +87,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
 
     it('should have scrollable effect', () => {
       const wrapper = mount(
-        <ProductNavigation isPeeking>
+        <ProductNavigation>
           <p>This is a text</p>
         </ProductNavigation>,
       );
@@ -97,7 +97,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
 
     it('should render the received children', () => {
       const wrapper = mount(
-        <ProductNavigation isPeeking>
+        <ProductNavigation>
           <p>This is a text</p>
         </ProductNavigation>,
       );

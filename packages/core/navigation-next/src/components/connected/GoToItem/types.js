@@ -1,11 +1,9 @@
 // @flow
 
-import { UIController, ViewController } from '../../../';
+import { ViewController } from '../../../';
 import type { ConnectedItemProps } from '../ConnectedItem/types';
 
 type InjectedProps = {
-  /** Internal prop injected by withNavigationUI HOC */
-  navigationUIController: UIController,
   /** Internal prop injected by withNavigationViewController HOC */
   navigationViewController: ViewController,
 };

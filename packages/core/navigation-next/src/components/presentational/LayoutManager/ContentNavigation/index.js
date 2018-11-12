@@ -5,11 +5,7 @@ import Transition from 'react-transition-group/Transition';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
 import { transitionDurationMs } from '../../../../common/constants';
-import {
-  ContainerNavigation,
-  InnerShadow,
-  ProductNavigation,
-} from './primitives';
+import { ContainerNavigation, ProductNavigation } from './primitives';
 import type { ContentNavigationProps } from './types';
 
 export default class ContentNavigation extends Component<ContentNavigationProps> {
@@ -20,13 +16,7 @@ export default class ContentNavigation extends Component<ContentNavigationProps>
   }
 
   render() {
-    const {
-      container: Container,
-      isPeekHinting,
-      isPeeking,
-      isVisible,
-      product: Product,
-    } = this.props;
+    const { container: Container, isVisible, product: Product } = this.props;
 
     return (
       <Fragment>
@@ -49,8 +39,6 @@ export default class ContentNavigation extends Component<ContentNavigationProps>
             <ContainerNavigation
               isEntering={state === 'entering'}
               isExiting={state === 'exiting'}
-              isPeekHinting={isPeekHinting}
-              isPeeking={isPeeking}
             >
               <NavigationAnalyticsContext
                 data={{ attributes: { navigationLayer: 'container' } }}
@@ -62,7 +50,6 @@ export default class ContentNavigation extends Component<ContentNavigationProps>
             </ContainerNavigation>
           )}
         </Transition>
-        <InnerShadow isVisible={isPeeking} />
       </Fragment>
     );
   }

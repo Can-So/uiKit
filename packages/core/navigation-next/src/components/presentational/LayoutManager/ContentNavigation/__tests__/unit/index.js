@@ -6,8 +6,6 @@ import ContentNavigation from '../../index';
 import { transitionDurationMs } from '../../../../../../common/constants';
 
 const defaultProps = {
-  isPeekHinting: false,
-  isPeeking: false,
   isVisible: false,
   product: () => null,
 };
@@ -22,7 +20,7 @@ describe('ContentNavigation', () => {
 
     expect(wrapper.find('Transition').props().timeout).toBe(0);
 
-    wrapper.setProps({ isPeeking: false });
+    wrapper.setProps({});
 
     expect(wrapper.find('Transition').props().timeout).toBe(
       transitionDurationMs,
