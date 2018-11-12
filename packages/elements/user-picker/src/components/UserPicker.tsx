@@ -115,10 +115,8 @@ export class UserPicker extends React.PureComponent<Props, State> {
       onChange(extractUserValue(value), action);
     }
 
-    if (action === 'select-option') {
-      if (onSelection) {
-        onSelection(value.user);
-      }
+    if (action === 'select-option' && onSelection) {
+      onSelection(value.user);
     }
 
     if (!this.props.value) {
