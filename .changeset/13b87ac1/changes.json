@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/code", "type": "patch" },
+    { "name": "@atlaskit/page", "type": "patch" }
+  ],
+  "dependents": []
+}
