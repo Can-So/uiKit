@@ -199,16 +199,9 @@ class LayoutManagerWithViewControllerBase extends Component<
 
 const LayoutManagerWithViews = props => (
   <ViewControllerSubscriber>
-    {navigationViewController => {
-      const {
-        state: { activeView },
-      } = navigationViewController;
+    {({ state: { activeView } }) => {
       return (
-        <LayoutManagerWithViewControllerBase
-          navigationViewController={navigationViewController}
-          view={activeView}
-          {...props}
-        />
+        <LayoutManagerWithViewControllerBase view={activeView} {...props} />
       );
     }}
   </ViewControllerSubscriber>
