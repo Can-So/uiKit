@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.3.3
+- [patch] [5f2efe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f2efe0):
+
+  - Change triple dash symbol and update parser rules
+
 ## 2.3.2
 - [patch] [904b74c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/904b74c):
 
