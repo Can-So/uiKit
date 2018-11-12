@@ -7,7 +7,7 @@ import { Token, TokenType, TokenErrCallback } from './';
 import { parseNewlineOnly } from './whitespace';
 
 // Exclude { micros
-const TABLE_REGEXP = /^[ \t]*[|]+([^|{\n]*)/;
+const TABLE_REGEXP = /^[ \t]*[|]+(\\\||\\\{|[^|{\n])*/;
 
 const processState = {
   OPENING_CELL: 0,
