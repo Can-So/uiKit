@@ -1475,10 +1475,7 @@
               "type": "string"
             },
             "style": {
-              "enum": [
-                "bold",
-                "subtle"
-              ]
+              "type": "string"
             }
           },
           "required": [
