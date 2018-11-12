@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 5.4.1
+- [patch] [05a4cf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05a4cf3):
+
+  - FM-1358: Fixes scrolling lag when encountering a shadow
+
 ## 5.4.0
 - [minor] [611d8a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/611d8a5):
 
