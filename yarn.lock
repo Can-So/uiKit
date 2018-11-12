@@ -7363,10 +7363,10 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-extract-react-types@^0.14.4:
-  version "0.14.4"
-  resolved "https://registry.yarnpkg.com/extract-react-types/-/extract-react-types-0.14.4.tgz#e61624759709cd80d01c35066fa4d34e0c0c4429"
-  integrity sha512-bLhCY+DiZcJIGkPl2XqaaYQH47g6IbqYQuMnoaoWXhy7UfMtysT/5/qGsdlkGL8P/KsemVpWblVoMLx07Q11YQ==
+extract-react-types@^0.14.5:
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/extract-react-types/-/extract-react-types-0.14.5.tgz#672684fa33beb9871f1a7bd990cfd44fa2b78097"
+  integrity sha512-GeKocuNScwAH7IeNPnjrD9uzhVjtT/S140TPgXkdG5RBeS7yQ/+K9zXW2jl4NkQ99hNmOdhlS2pMq211ThSVnQ==
   dependencies:
     "@babel/core" "7.0.0-beta.56"
     "@babel/types" "^7.0.0-beta.56"
