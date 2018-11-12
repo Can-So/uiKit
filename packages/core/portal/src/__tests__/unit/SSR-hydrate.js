@@ -11,7 +11,8 @@ jest.mock('exenv', () => ({
 afterAll(() =>
   document
     .querySelectorAll('.atlaskit-portal')
-    .forEach(e => e.parentNode && e.parentNode.removeChild(e)));
+    .forEach(e => e.parentNode && e.parentNode.removeChild(e)),
+);
 
 const App = () => (
   <div>
