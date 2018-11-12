@@ -110,12 +110,15 @@ export class UserPicker extends React.PureComponent<Props, State> {
       return;
     }
     const { onChange, onSelection } = this.props;
+
     if (onChange) {
       onChange(extractUserValue(value), action);
     }
+
     if (action === 'select-option' && onSelection) {
       onSelection(value.user);
     }
+
     if (!this.props.value) {
       this.setState({ value });
     }
@@ -229,15 +232,22 @@ export class UserPicker extends React.PureComponent<Props, State> {
       menuIsOpen,
       value,
     } = this.state;
+
+    const numValues: number = value ? value.length : 0;
+    const hasValue = numValues > 0;
+
+    const options = getOptions(usersFromState, users) || [];
+    const hasSelectedAll: boolean = numValues === options.length && !isLoading;
+
     return (
       <Select
         value={value}
         ref={this.handleSelectRef}
         isMulti={isMulti}
-        options={getOptions(usersFromState, users)}
+        options={options}
         onChange={this.handleChange}
-        styles={getStyles(width)}
-        components={getComponents(isMulti, anchor)}
+        styles={getStyles(width, hasValue)}
+        components={getComponents(isMulti, hasValue && !hasSelectedAll, anchor)}
         inputValue={search}
         menuIsOpen={menuIsOpen}
         onFocus={this.handleFocus}

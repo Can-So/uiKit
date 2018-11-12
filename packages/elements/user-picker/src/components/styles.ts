@@ -1,7 +1,11 @@
 import { colors } from '@atlaskit/theme';
 import memoizeOne from 'memoize-one';
+import { AVATAR_SIZES, BORDER_WIDTH } from '@atlaskit/avatar';
+import { getAvatarSize } from './utils';
 
-export const getStyles = memoizeOne(width => ({
+export const PLACEHOLDER_PADDING = 8;
+
+export const getStyles = memoizeOne((width, hasValue) => ({
   menu: css => ({ ...css, width }),
   control: (css, state) => ({
     ...css,
@@ -68,15 +72,27 @@ export const getStyles = memoizeOne(width => ({
     backgroundColor: 'transparent',
     '&:hover': { backgroundColor: 'transparent' },
   }),
-  placeholder: css => ({
-    ...css,
-    marginLeft: 4,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  }),
+  placeholder: (css, state) => {
+    const avatarSize = getAvatarSize(state.selectProps.appearance);
+    return {
+      ...css,
+      marginLeft: !state.selectProps.isMulti
+        ? 2 * PLACEHOLDER_PADDING +
+          2 * BORDER_WIDTH[avatarSize] +
+          AVATAR_SIZES[avatarSize]
+        : PLACEHOLDER_PADDING,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingTop: 2,
+    };
+  },
   option: css => ({
     ...css,
     overflow: 'hidden',
+  }),
+  input: ({ margin, ...css }) => ({
+    ...css,
+    paddingLeft: !hasValue ? PLACEHOLDER_PADDING : 4,
   }),
 }));

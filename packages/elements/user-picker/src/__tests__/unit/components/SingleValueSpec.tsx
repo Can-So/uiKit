@@ -1,7 +1,8 @@
-import Avatar, { AvatarItem } from '@atlaskit/avatar';
+import { AvatarItem } from '@atlaskit/avatar';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { SingleValue } from '../../../components/SingleValue';
+import { SizeableAvatar } from '../../../components/SizeableAvatar';
 
 describe('SingleValue', () => {
   const data = {
@@ -26,11 +27,10 @@ describe('SingleValue', () => {
       backgroundColor: 'transparent',
       primaryText: 'Jace Beleren',
       avatar: (
-        <Avatar
+        <SizeableAvatar
           src="http://avatars.atlassian.com/jace.png"
-          size="small"
+          appearance="normal"
           name="Jace Beleren"
-          isHover={false}
         />
       ),
     });
@@ -45,7 +45,7 @@ describe('SingleValue', () => {
     expect(component.find(AvatarItem).props()).toMatchObject({
       backgroundColor: 'transparent',
       primaryText: 'jbeleren',
-      avatar: <Avatar size="small" name="jbeleren" isHover={false} />,
+      avatar: <SizeableAvatar name="jbeleren" appearance="normal" />,
     });
   });
 
@@ -59,11 +59,10 @@ describe('SingleValue', () => {
       backgroundColor: 'transparent',
       primaryText: 'Jace Beleren',
       avatar: (
-        <Avatar
+        <SizeableAvatar
           src="http://avatars.atlassian.com/jace.png"
-          size="xsmall"
+          appearance="compact"
           name="Jace Beleren"
-          isHover={false}
         />
       ),
     });
