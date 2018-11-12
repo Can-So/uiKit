@@ -1,5 +1,10 @@
 # @atlaskit/onboarding
 
+## 6.1.8
+- Updated dependencies [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+  - @atlaskit/modal-dialog@7.0.9
+  - @atlaskit/portal@0.0.14
+
 ## 6.1.7
 - Updated dependencies [3f5a4dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5a4dd):
   - @atlaskit/modal-dialog@7.0.8

@@ -1,5 +1,10 @@
 # @atlaskit/dropdown-menu
 
+## 6.1.21
+- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+
+  - Fixed issue where tooltips and modals would initially render in the wrong location
+
 ## 6.1.20
 - [patch] [fe943bb"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe943bb"

@@ -1,5 +1,10 @@
 # @atlaskit/portal
 
+## 0.0.14
+- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+
+  - Fixed issue where tooltips and modals would initially render in the wrong location
+
 ## 0.0.13
 - [patch] [3f5a4dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5a4dd):
 

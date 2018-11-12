@@ -5,7 +5,7 @@ import ReactDOMServer from 'react-dom/server';
 import Portal from '../..';
 
 jest.mock('exenv', () => ({
-  canUseDom: false,
+  canUseDOM: false,
 }));
 
 afterAll(() =>
