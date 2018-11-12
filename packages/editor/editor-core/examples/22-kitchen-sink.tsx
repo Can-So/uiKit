@@ -150,7 +150,12 @@ export default class FullPageRendererExample extends React.Component<
   state: State = {
     locale: 'en',
     messages: enMessages,
-    adf: undefined,
+    adf:
+      (localStorage &&
+        JSON.parse(
+          localStorage.getItem('fabric.editor.example.full-page') || '',
+        )) ||
+      undefined,
     appearance: 'full-page',
     showADF: false,
     disabled: false,
