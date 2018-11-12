@@ -58,6 +58,15 @@ describe('UserPicker', () => {
     expect(select.prop('placeholder')).toEqual(custom);
   });
 
+  it('should pass custom no options message to picker', () => {
+    const customMessage = 'Custom';
+    const component = shallowUserPicker({ noOptionsMessage: customMessage });
+    const select = component.find(Select);
+    expect(select.prop('noOptionsMessage')).toBeInstanceOf(Function);
+    const result = (select.prop('noOptionsMessage') as Function)();
+    expect(result).toEqual(customMessage);
+  });
+
   it('should trigger onChange with User', () => {
     const onChange = jest.fn();
     const component = shallowUserPicker({ onChange });
