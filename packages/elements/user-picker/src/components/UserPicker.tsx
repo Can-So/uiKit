@@ -210,6 +210,13 @@ export class UserPicker extends React.PureComponent<Props, State> {
     }
   }
 
+  private handleKeyDown = (event: React.KeyboardEvent) => {
+    // Escape
+    if (event.keyCode === 27) {
+      this.selectRef.blur();
+    }
+  };
+
   handleClearIndicatorHover = (hoveringClearIndicator: boolean) => {
     this.setState({ hoveringClearIndicator });
   };
@@ -265,6 +272,7 @@ export class UserPicker extends React.PureComponent<Props, State> {
         blurInputOnSelect={!isMulti}
         closeMenuOnSelect={!isMulti}
         openMenuOnFocus
+        onKeyDown={this.handleKeyDown}
       />
     );
   }
