@@ -1,5 +1,10 @@
 # @atlaskit/modal-dialog
 
+## 7.0.9
+- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+
+  - Fixed issue where tooltips and modals would initially render in the wrong location
+
 ## 7.0.8
 - Updated dependencies [3f5a4dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5a4dd):
   - @atlaskit/portal@0.0.13
