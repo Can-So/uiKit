@@ -171,7 +171,7 @@ function makeTooltipNode({ text, char }: { text: string, char: string }) {
 type Props = {
   ...WithAnalyticsEventsProps,
   children: State => any,
-  collapseToggleTooltipContent: CollapseToggleTooltipContent,
+  collapseToggleTooltipContent?: CollapseToggleTooltipContent,
   expandCollapseAffordanceRef: Ref<'button'>,
   experimental_flyoutOnHover: boolean,
   flyoutIsOpen: boolean,
@@ -487,5 +487,4 @@ class ResizeControl extends PureComponent<Props, State> {
 
 export { ResizeControl as ResizeControlBase };
 
-// $FlowFixMe
 export default withAnalyticsEvents()(ResizeControl);

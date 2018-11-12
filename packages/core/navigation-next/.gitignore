@@ -1,4 +1,5 @@
 # Ignoring entrypoint files that will be generated when we're running `yarn build`
 LayoutManagerWithViewController.js
-SkeletonContainer.js
+SkeletonContainerView.js
+NavigationProvider.js
 ViewRenderer.js
