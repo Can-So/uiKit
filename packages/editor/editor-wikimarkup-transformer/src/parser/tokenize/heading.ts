@@ -3,7 +3,7 @@ import { parseString } from '../text';
 import { Token, TokenType, TokenErrCallback } from './';
 
 // h1. HEADING
-const HEADING_REGEXP = /^h([1|2|3|4|5|6])\.(.*)/;
+const HEADING_REGEXP = /^h([1-6])\.(.*)/;
 
 export function heading(
   input: string,

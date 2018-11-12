@@ -1,0 +1,1 @@
+- Heading doesn't need a following space
