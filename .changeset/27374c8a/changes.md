@@ -1,0 +1,1 @@
+- Fix build not exiting with non-zero exit code on failure
