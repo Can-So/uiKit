@@ -32,7 +32,9 @@ describe('@atlaskit/editor-core/editor/ui/HelpDialog', () => {
 
   it('should not be null if isVisible is true', () => {
     const helpDialog = mountWithIntl(
-      <HelpDialog editorView={editorView} isVisible={true} />,
+      <div>
+        <HelpDialog editorView={editorView} isVisible={true} />
+      </div>,
     );
 
     expect(helpDialog.find(HelpDialog).length).to.equal(1);
