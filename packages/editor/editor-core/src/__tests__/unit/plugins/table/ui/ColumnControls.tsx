@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { selectTable, getCellsInColumn } from 'prosemirror-utils';
+import {
+  selectTable,
+  getCellsInColumn,
+  getSelectionRect,
+} from 'prosemirror-utils';
 import { Node } from 'prosemirror-model';
 import { CellSelection } from 'prosemirror-tables';
 import {
@@ -23,7 +27,6 @@ import {
 import ColumnControls from '../../../../../plugins/table/ui/TableFloatingControls/ColumnControls';
 import { tablesPlugin } from '../../../../../plugins';
 import { setTextSelection } from '../../../../../index';
-import { getSelectionRect } from '../../../../../plugins/table/utils';
 
 const ColumnControlsButtonWrap = `.${ClassName.COLUMN_CONTROLS_BUTTON_WRAP}`;
 const DeleteColumnButton = `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP}`;
@@ -64,7 +67,6 @@ describe('ColumnControls', () => {
         const floatingControls = mountWithIntl(
           <ColumnControls
             tableRef={document.querySelector('table')!}
-            isTableHovered={false}
             editorView={editorView}
           />,
         );
@@ -94,7 +96,6 @@ describe('ColumnControls', () => {
         const floatingControls = mountWithIntl(
           <ColumnControls
             tableRef={document.querySelector('table')!}
-            isTableHovered={false}
             editorView={editorView}
           />,
         );
@@ -146,7 +147,6 @@ describe('ColumnControls', () => {
         const floatingControls = mountWithIntl(
           <ColumnControls
             tableRef={document.querySelector('table')!}
-            isTableHovered={false}
             editorView={editorView}
           />,
         );
@@ -184,7 +184,6 @@ describe('ColumnControls', () => {
       const floatingControls = mountWithIntl(
         <ColumnControls
           tableRef={document.querySelector('table')!}
-          isTableHovered={false}
           editorView={editorView}
         />,
       );
@@ -208,9 +207,9 @@ describe('ColumnControls', () => {
     const floatingControls = mountWithIntl(
       <ColumnControls
         tableRef={document.querySelector('table')!}
-        isTableHovered={false}
         editorView={editorView}
-        dangerColumns={[0, 1, 2]}
+        isInDanger={true}
+        hoveredColumns={[0, 1, 2]}
       />,
     );
 
@@ -238,7 +237,6 @@ describe('ColumnControls', () => {
     const floatingControls = mountWithIntl(
       <ColumnControls
         tableRef={document.querySelector('table')!}
-        isTableHovered={false}
         editorView={editorView}
       />,
     );
@@ -253,22 +251,17 @@ describe('ColumnControls', () => {
     floatingControls.unmount();
   });
 
-  describe('hides inner add buttons when selection spans multiple columns', () => {
+  describe('hides an add button when delete button overlaps it', () => {
     it('hides one when two columns are selected', () => {
       const { editorView } = editor(
         doc(
-          table()(
-            tr(thEmpty, td({})(p()), thEmpty),
-            tr(tdCursor, tdEmpty, tdEmpty),
-            tr(tdEmpty, tdEmpty, tdEmpty),
-          ),
+          table()(tr(thEmpty, thEmpty, thEmpty), tr(tdEmpty, tdEmpty, tdEmpty)),
         ),
       );
 
       const floatingControls = mountWithIntl(
         <ColumnControls
           tableRef={document.querySelector('table')!}
-          isTableHovered={false}
           editorView={editorView}
         />,
       );
@@ -281,37 +274,12 @@ describe('ColumnControls', () => {
       floatingControls.setProps({ numberOfColumns: 3 });
 
       expect(floatingControls.find(InsertColumnButton).length).toBe(2);
-
-      floatingControls.unmount();
-    });
-
-    it('hides two when three columns are selected', () => {
-      const { editorView } = editor(
-        doc(
-          table()(
-            tr(thEmpty, td({})(p()), thEmpty),
-            tr(tdCursor, tdEmpty, tdEmpty),
-            tr(tdEmpty, tdEmpty, tdEmpty),
-          ),
-        ),
-      );
-
-      const floatingControls = mountWithIntl(
-        <ColumnControls
-          tableRef={document.querySelector('table')!}
-          isTableHovered={false}
-          editorView={editorView}
-        />,
-      );
-
-      expect(floatingControls.find(InsertColumnButton).length).toBe(3);
-
-      editorView.dispatch(selectColumns([0, 1, 2])(editorView.state.tr));
-
-      // set numberOfColumns prop to trick shouldComponentUpdate and force re-render
-      floatingControls.setProps({ numberOfColumns: 3 });
-
-      expect(floatingControls.find(InsertColumnButton).length).toBe(1);
+      expect(
+        floatingControls
+          .find(ColumnControlsButtonWrap)
+          .first()
+          .find(InsertColumnButton).length,
+      ).toBe(0);
 
       floatingControls.unmount();
     });
@@ -330,7 +298,6 @@ describe('ColumnControls', () => {
       const floatingControls = mountWithIntl(
         <ColumnControls
           tableRef={document.querySelector('table')!}
-          isTableHovered={false}
           editorView={editorView}
         />,
       );

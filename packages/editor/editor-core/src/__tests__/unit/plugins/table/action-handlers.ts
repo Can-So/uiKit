@@ -113,10 +113,9 @@ describe('table action handlers', () => {
         decorationSet: DecorationSet.create(editorView.state.doc, [
           getHoverDecoration(),
         ]),
-        dangerColumns: [1, 2, 3],
-        dangerRows: [1, 2, 3],
-        isTableInDanger: true,
-        isTableHovered: true,
+        hoveredColumns: [1, 2, 3],
+        hoveredRows: [1, 2, 3],
+        isInDanger: true,
       };
       const newState = handleClearSelection(pluginState, dispatch);
       expect(newState).toEqual({
@@ -127,92 +126,52 @@ describe('table action handlers', () => {
     });
   });
   describe('#handleHoverColumns', () => {
-    it('should return a new state with updated dangerColumns and decorationSet props', () => {
+    it('should return a new state with updated hoveredColumns and decorationSet props', () => {
       const { editorView } = editor(doc(table()(tr(tdCursor, tdEmpty))));
       const pluginState = {
         ...defaultPluginState,
       };
-      const dangerColumns = [0];
+      const hoveredColumns = [0];
+      const isInDanger = true;
       const newState = handleHoverColumns(
         editorView.state,
         [getHoverDecoration()],
-        dangerColumns,
+        hoveredColumns,
+        isInDanger,
       )(pluginState, dispatch);
       expect(newState).toEqual({
         ...pluginState,
-        isTableInDanger: false,
         decorationSet: DecorationSet.create(editorView.state.doc, [
           getHoverDecoration(),
         ]),
-        dangerColumns,
-      });
-    });
-    describe('when dangerColumns === total number of columns', () => {
-      it('should return a new state with isTableInDanger = true', () => {
-        const { editorView } = editor(doc(table()(tr(tdCursor, tdEmpty))));
-        const pluginState = {
-          ...defaultPluginState,
-        };
-        const hoverDecoration: Decoration[] = [];
-        const dangerColumns = [0, 1];
-        const newState = handleHoverColumns(
-          editorView.state,
-          hoverDecoration,
-          dangerColumns,
-        )(pluginState, dispatch);
-        expect(newState).toEqual({
-          ...pluginState,
-          isTableInDanger: true,
-          decorationSet: DecorationSet.empty,
-          dangerColumns,
-        });
+        hoveredColumns,
+        isInDanger,
       });
     });
   });
   describe('#handleHoverRows', () => {
-    it('should return a new state with updated dangerRows and hoverDecoration props', () => {
+    it('should return a new state with updated hoveredRows and hoverDecoration props', () => {
       const { editorView } = editor(
         doc(table()(tr(tdCursor, tdEmpty), tr(tdEmpty, tdEmpty))),
       );
       const pluginState = {
         ...defaultPluginState,
       };
-      const dangerRows = [0];
+      const hoveredRows = [0];
+      const isInDanger = true;
       const newState = handleHoverRows(
         editorView.state,
         [getHoverDecoration()],
-        dangerRows,
+        hoveredRows,
+        isInDanger,
       )(pluginState, dispatch);
       expect(newState).toEqual({
         ...pluginState,
-        isTableInDanger: false,
         decorationSet: DecorationSet.create(editorView.state.doc, [
           getHoverDecoration(),
         ]),
-        dangerRows,
-      });
-    });
-    describe('when dangerRows === total number of columns', () => {
-      it('should return a new state with isTableInDanger = true', () => {
-        const { editorView } = editor(
-          doc(table()(tr(tdCursor, tdEmpty), tr(tdEmpty, tdEmpty))),
-        );
-        const pluginState = {
-          ...defaultPluginState,
-        };
-        const hoverDecoration: Decoration[] = [];
-        const dangerRows = [0, 1];
-        const newState = handleHoverRows(
-          editorView.state,
-          hoverDecoration,
-          dangerRows,
-        )(pluginState, dispatch);
-        expect(newState).toEqual({
-          ...pluginState,
-          isTableInDanger: true,
-          decorationSet: DecorationSet.empty,
-          dangerRows,
-        });
+        hoveredRows,
+        isInDanger,
       });
     });
   });
@@ -225,18 +184,24 @@ describe('table action handlers', () => {
         ...defaultPluginState,
       };
 
+      const isInDanger = true;
+      const hoveredColumns = [0];
+      const hoveredRows = [0];
       const newState = handleHoverTable(
         editorView.state,
         [getHoverDecoration()],
-        true,
+        hoveredColumns,
+        hoveredRows,
+        isInDanger,
       )(pluginState, dispatch);
       expect(newState).toEqual({
         ...pluginState,
         decorationSet: DecorationSet.create(editorView.state.doc, [
           getHoverDecoration(),
         ]),
-        isTableInDanger: true,
-        isTableHovered: true,
+        hoveredColumns,
+        hoveredRows,
+        isInDanger,
       });
     });
   });
@@ -272,10 +237,9 @@ describe('table action handlers', () => {
     it('should return a new state with updated tableNode prop and reset selection', () => {
       const pluginState = {
         ...defaultPluginState,
-        dangerColumns: [1, 2, 3],
-        dangerRows: [1, 2, 3],
-        isTableInDanger: true,
-        isTableHovered: true,
+        hoveredColumns: [1, 2, 3],
+        hoveredRows: [1, 2, 3],
+        isInDanger: true,
         tableNode: undefined,
         targetCellPosition: undefined,
       };
