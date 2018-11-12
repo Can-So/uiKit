@@ -20,8 +20,8 @@ import {
 } from './5-full-page';
 import LanguagePicker from '../example-helpers/LanguagePicker';
 import EditorContext from './../src/ui/EditorContext';
-import { EditorAppearance } from 'src/types';
-import { EditorActions } from 'src';
+import { EditorAppearance } from '../src/types';
+import { EditorActions } from '../src';
 
 export type Props = {};
 export type State = {
@@ -29,6 +29,8 @@ export type State = {
   messages: { [key: string]: string };
 
   adf: object | undefined;
+  adfInput: string;
+
   appearance: EditorAppearance;
   showADF: boolean;
   disabled: boolean;
@@ -147,15 +149,22 @@ export default class FullPageRendererExample extends React.Component<
   Props,
   State
 > {
+  private getDefaultADF = () => {
+    const localADF =
+      (localStorage &&
+        localStorage.getItem('fabric.editor.example.full-page')) ||
+      undefined;
+
+    if (localADF) {
+      return JSON.parse(localADF);
+    }
+  };
+
   state: State = {
     locale: 'en',
     messages: enMessages,
-    adf:
-      (localStorage &&
-        JSON.parse(
-          localStorage.getItem('fabric.editor.example.full-page') || '',
-        )) ||
-      undefined,
+    adf: this.getDefaultADF(),
+    adfInput: JSON.stringify(this.getDefaultADF(), null, 2),
     appearance: 'full-page',
     showADF: false,
     disabled: false,
@@ -256,7 +265,7 @@ export default class FullPageRendererExample extends React.Component<
                       }}
                       defaultValue={this.state.adf}
                       disabled={this.state.disabled}
-                      onChange={() => this.onChange(actions)}
+                      onChange={() => this.onEditorChange(actions)}
                       primaryToolbarComponents={
                         <>
                           <LanguagePicker
@@ -300,7 +309,8 @@ export default class FullPageRendererExample extends React.Component<
                     >
                       <Textarea
                         innerRef={ref => (this.inputRef = ref)}
-                        defaultValue={JSON.stringify(this.state.adf, null, 2)}
+                        value={this.state.adfInput}
+                        onChange={this.handleInputChange}
                       />
                       <Button onClick={() => this.importADF(actions)}>
                         Import ADF
@@ -321,7 +331,8 @@ export default class FullPageRendererExample extends React.Component<
       return;
     }
 
-    actions.replaceDocument(JSON.parse(this.inputRef.value));
+    actions.replaceDocument(this.state.adfInput);
+
     this.setState({
       showADF: false,
     });
@@ -339,9 +350,15 @@ export default class FullPageRendererExample extends React.Component<
     actions.replaceDocument(adf);
   };
 
-  private onChange = async editorActions => {
+  private onEditorChange = async editorActions => {
     const adf = await editorActions.getValue();
-    this.setState({ adf });
+    this.setState({ adf, adfInput: JSON.stringify(adf, null, 2) });
+  };
+
+  private handleInputChange = event => {
+    this.setState({ adfInput: event.target.value });
+    // the user loads the ADF via the load button; we just update the
+    // state of the textarea here
   };
 
   private loadLocale = async (locale: string) => {
