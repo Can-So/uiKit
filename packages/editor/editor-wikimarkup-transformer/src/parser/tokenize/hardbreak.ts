@@ -7,16 +7,6 @@ export function hardbreak(
   position: number,
   schema: Schema,
 ): Token {
-  // Look for special hardbreak \\
-  const firstTwoChar = input.substr(position, 2);
-  if (firstTwoChar === '\\\\') {
-    return {
-      type: 'pmnode',
-      nodes: [schema.nodes.hardBreak.createChecked()],
-      length: 2,
-    };
-  }
-
   // Look for normal hardbreak \r, \n, \r\n
   const length = parseNewlineOnly(input.substring(position));
 
