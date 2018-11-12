@@ -273,4 +273,14 @@ describe('UserPicker', () => {
       ]);
     });
   });
+
+  it('should blur on escape', () => {
+    const component = shallowUserPicker();
+    component.setState({ menuIsOpen: true });
+    const ref = { blur: jest.fn() };
+    (component.instance() as any).handleSelectRef(ref);
+
+    component.find(Select).simulate('keyDown', { keyCode: 27 });
+    expect(ref.blur).toHaveBeenCalled();
+  });
 });
