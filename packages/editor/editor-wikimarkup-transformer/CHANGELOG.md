@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.3.4
+- [patch] [7b8efea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b8efea):
+
+  - Heading doesn't need a following space
+
 ## 2.3.3
 - [patch] [5f2efe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f2efe0):
 
