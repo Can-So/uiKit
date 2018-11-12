@@ -1,10 +1,12 @@
 // @flow
 
-import type { ComponentType, Node } from 'react';
+import type { ComponentType, ElementConfig, Node } from 'react';
 import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
 
 import type { StyleReducer, WithGlobalThemeProps } from '../../../theme/types';
 import type { InteractionState } from '../InteractionStateManager/types';
+
+import GlobalItem from './index';
 
 type Size = 'large' | 'small';
 
@@ -78,10 +80,11 @@ export type InjectedGlobalItemProps = {|
 |};
 
 /**
- * This is used by @atlaskit/global-navigation.
- * TODO: Update that package to use ElementConfig instead
+ * This type is exported by the package.
  */
-export type ExternalGlobalItemProps = {
+export type ExternalGlobalItemProps = ElementConfig<typeof GlobalItem>;
+
+export type BaseGlobalItemProps = {
   ...$Exact<BaseItemProps>,
   /** A custom component to render instead of the default wrapper component.
    * Could be used to render a router Link, for example. The component will be
@@ -92,7 +95,7 @@ export type ExternalGlobalItemProps = {
 };
 
 export type GlobalItemProps = {
-  ...$Exact<ExternalGlobalItemProps>,
+  ...$Exact<BaseGlobalItemProps>,
   ...$Exact<InjectedGlobalItemProps>,
 };
 
@@ -102,7 +105,7 @@ export type InjectedGlobalItemPrimitiveProps = {|
 |};
 
 export type GlobalItemPrimitiveProps = {|
-  ...$Exact<ExternalGlobalItemProps>,
+  ...$Exact<BaseGlobalItemProps>,
   /** Whether this GlobalItem should display as being selected. */
   isSelected: boolean,
   ...$Exact<InjectedGlobalItemPrimitiveProps>,
