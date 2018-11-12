@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@atlaskit/docs';
 import SectionMessage from '@atlaskit/section-message';
 
 export default md`
@@ -20,17 +20,13 @@ ${(
 
 # Color picker
 
-@atlaskit/picker is the implementation of the color picker component in React. Check out [live examples](https://atlaskit.atlassian.com/packages/jira/color-picker/example/simple-color-picker).
+Allows to pick colors from color palette.
 
-## Installation
+## Usage
 
-~~~sh
-npm install @atlaskit/color-picker
-# or
-yarn add @atlaskit/color-picker
-~~~
-
-## Basic usage
+${code`
+  import ColorPicker, {ColorPalette} from '@atlaskit/color-picker';
+`}
 
 ${(
   <Example
@@ -42,8 +38,6 @@ ${(
   />
 )}
 
-## Multiple columns
-
 ${(
   <Example
     packageName="@atlaskit/color-picker"
@@ -53,8 +47,6 @@ ${(
     language="jsx"
   />
 )}
-
-## Standalone color palette component
 
 ${(
   <Example
