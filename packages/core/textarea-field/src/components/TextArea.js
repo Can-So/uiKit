@@ -1,8 +1,12 @@
 // @flow
-import React, { Component } from 'react';
-import { Wrapper, TextAreaWrapper } from '../styled';
+import React, { Component, type ElementRef } from 'react';
+import memoizeOne from 'memoize-one';
+import { Theme } from '@atlaskit/theme';
+import textAreaTheme, { type ThemeProps } from '../theme';
+import { TextAreaWrapper } from '../styled';
 
 type Props = {
+  resize: 'auto' | 'vertical' | 'horizontal' | 'smart',
   appearance: string,
   /** Set whether the fields should expand to fill available horizontal space. */
   isCompact?: boolean,
@@ -15,7 +19,7 @@ type Props = {
   /** Sets styling to indicate that the input is invalid. */
   isInvalid?: boolean,
   /** The minimum number of rows of text to display */
-  minimumRows?: number,
+  minimumRows: number,
   /** The value of the text-area. */
   value?: string | number,
   /** The default value of the text-area */
@@ -29,14 +33,21 @@ type Props = {
   /** Sets content text value to monospace */
   isMonospaced?: boolean,
   size?: string | number,
+  theme: ThemeProps => ThemeProps,
 };
 type State = {
   value: string | number,
   isFocused: boolean,
+  height?: number,
 };
+
+const hiddenTextArea = document.createElement('textarea');
+hiddenTextArea.disabled = true;
+let refCount = 0;
 
 export default class TextArea extends Component<Props, State> {
   static defaultProps = {
+    resize: 'smart',
     appearance: 'standard',
     isCompact: false,
     isRequired: false,
@@ -44,14 +55,64 @@ export default class TextArea extends Component<Props, State> {
     isDisabled: false,
     isMonospaced: false,
     minimumRows: 1,
+    theme: textAreaTheme,
   };
   state = {
+    height: undefined,
     isFocused: false,
     value: this.props.defaultValue || '',
   };
-  getValue = () => {
-    return this.props.value || this.state.value;
+  textArea: ElementRef<*>;
+  hiddenTextArea: ElementRef<*>;
+  elementRef: ElementRef<*> = {};
+
+  constructor(props: Props) {
+    super(props);
+    this.getNewHeight = memoizeOne(this.getNewHeight);
+  }
+
+  componentDidMount() {
+    if (refCount === 0 && document.body) {
+      document.body.appendChild(hiddenTextArea);
+    }
+    refCount++;
+  }
+
+  componentWillUnmount() {
+    refCount--;
+    if (refCount === 0 && document.body) {
+      document.body.removeChild(hiddenTextArea);
+    }
+  }
+
+  getHiddenTextArea = (ref: ElementRef<*>) => {
+    this.hiddenTextArea = ref;
   };
+
+  getNewHeight = (value: string) => {
+    let newHeight;
+
+    if (this.textArea) {
+      hiddenTextArea.style.cssText = window.getComputedStyle(
+        this.textArea,
+      ).cssText;
+      hiddenTextArea.style.visibility = 'hidden';
+      hiddenTextArea.value = value;
+      hiddenTextArea.style.height = '0';
+      newHeight = hiddenTextArea.scrollHeight;
+    }
+
+    return newHeight;
+  };
+
+  getTextAreaRef = (ref: ElementRef<*>) => {
+    this.textArea = ref;
+  };
+
+  getValue = () => {
+    return this.props.value !== undefined ? this.props.value : this.state.value;
+  };
+
   handleOnBlur = (event: SyntheticInputEvent<HTMLTextAreaElement>) => {
     const { onBlur } = this.props;
     this.setState({ isFocused: false });
@@ -68,16 +129,20 @@ export default class TextArea extends Component<Props, State> {
   };
   handleOnChange = (event: SyntheticInputEvent<HTMLTextAreaElement>) => {
     const { onChange } = this.props;
+
     this.setState({
       value: event.currentTarget.value,
     });
+
     if (onChange) {
       onChange(event);
     }
   };
+
   render() {
     const {
       appearance,
+      resize,
       size,
       isCompact,
       isDisabled,
@@ -85,33 +150,41 @@ export default class TextArea extends Component<Props, State> {
       isMonospaced,
       isRequired,
       minimumRows,
+      theme,
       ...props
     } = this.props;
 
     const { isFocused } = this.state;
+    const value = String(this.getValue());
 
     return (
-      <Wrapper isCompact={isCompact} size={size}>
-        <TextAreaWrapper
-          appearance={appearance}
-          isDisabled={isDisabled}
-          isReadOnly={isReadOnly}
-          isMonospaced={isMonospaced}
-          isFocused={isFocused}
-          minimumRows={minimumRows}
-        >
-          <textarea
-            {...props}
-            disabled={isDisabled}
-            readOnly={isReadOnly}
-            required={isRequired}
-            value={this.getValue()}
-            onFocus={this.handleOnFocus}
-            onBlur={this.handleOnBlur}
-            onChange={this.handleOnChange}
-          />
-        </TextAreaWrapper>
-      </Wrapper>
+      <Theme values={theme}>
+        {themeInContext => (
+          <TextAreaWrapper
+            {...themeInContext.textArea({ appearance, isCompact })}
+            resize={resize}
+            appearance={appearance}
+            isDisabled={isDisabled}
+            isReadOnly={isReadOnly}
+            isMonospaced={isMonospaced}
+            isFocused={isFocused}
+            minimumRows={minimumRows}
+            height={this.getNewHeight(value)}
+          >
+            <textarea
+              {...props}
+              ref={this.getTextAreaRef}
+              disabled={isDisabled}
+              readOnly={isReadOnly}
+              required={isRequired}
+              value={this.getValue()}
+              onFocus={this.handleOnFocus}
+              onBlur={this.handleOnBlur}
+              onChange={this.handleOnChange}
+            />
+          </TextAreaWrapper>
+        )}
+      </Theme>
     );
   }
 }

@@ -24,6 +24,7 @@
     "@atlaskit/theme": "^6.1.1",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
+    "memoize-one": "^3.0.1",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
