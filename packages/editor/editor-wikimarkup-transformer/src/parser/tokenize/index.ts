@@ -68,15 +68,15 @@ export enum TokenType {
 }
 
 export interface TextToken {
-  type: 'text';
-  text: string;
-  length: number;
+  readonly type: 'text';
+  readonly text: string;
+  readonly length: number;
 }
 
 export interface PMNodeToken {
-  type: 'pmnode';
-  nodes: PMNode[];
-  length: number;
+  readonly type: 'pmnode';
+  readonly nodes: PMNode[];
+  readonly length: number;
 }
 
 export type Token = TextToken | PMNodeToken;
