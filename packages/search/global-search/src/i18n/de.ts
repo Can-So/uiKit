@@ -14,10 +14,10 @@ export default {
   'global_search.no_recent_activity_title':
     'Suchen Sie danach, was Sie brauchen',
   'global_search.no_recent_activity_body':
-    'Oder verwenden Sie die <a href={url}>erweiterte Suche</a> (`shift + enter`), um Ihre Suchergebnisse zu präzisieren.',
-  'global_search.no_results_title': 'No results in titles and people',
+    'Oder verwenden Sie die <a href={url}>erweiterte Suche</a> (Shift + Enter), um Ihre Suchergebnisse zu präzisieren.',
+  'global_search.no_results_title': 'Keine Ergebnisse in Titeln und Personen',
   'global_search.no_results_body':
-    'Try searching with a different term. You can search page content as well with the advanced search, or search for people, below.',
+    'Versuchen Sie einen anderen Suchbegriff. Mit der erweiterten Suche können Sie auch die Seiteninhalte durchsuchen oder suchen Sie unten nach Personen.',
   'global_search.people.recent_people_heading': 'Hat kürzlich gearbeitet mit',
   'global_search.people.people_heading': 'Personen',
   'global_search.people.advanced_search': 'Personen suchen',
@@ -25,25 +25,26 @@ export default {
   'global_search.search_error_body':
     'Möglicherweise handelt es sich nur um ein vorübergehendes Problem. Am besten {link}.',
   'global_search.search_error_body.link': 'versuchen Sie es erneut.',
-  'global_search.jira.search_placeholder': 'Search Jira',
-  'global_search.jira.recent_issues_heading': 'Recent issues',
-  'global_search.jira.recent_people_heading': 'Recently worked with',
-  'global_search.jira.recent_containers': 'Recent boards, filters and projects',
-  'global_search.jira.search_result_issues_heading': 'Issues',
+  'global_search.jira.search_placeholder': 'Jira durchsuchen',
+  'global_search.jira.recent_issues_heading': 'Aktuelle Vorgänge',
+  'global_search.jira.recent_people_heading': 'Hat kürzlich gearbeitet mit',
+  'global_search.jira.recent_containers':
+    'Aktuelle Boards, Filter und Projekte',
+  'global_search.jira.search_result_issues_heading': 'Vorgänge',
   'global_search.jira.search_result_containers_heading':
-    'Boards, filters and projects',
-  'global_search.jira.search_result_people_heading': 'People',
-  'global_search.jira.advanced_search': 'Go to Advanced search for',
-  'global_search.jira.advanced_search_issues': 'issues',
-  'global_search.jira.advanced_search_projects': 'projects',
-  'global_search.jira.advanced_search_boards': 'boards',
-  'global_search.jira.advanced_search_filters': 'filters',
-  'global_search.jira.advanced_search_people': 'people',
-  'global_search.jira.advanced_issue_search': 'View all issues',
+    'Boards, Filter und Projekte',
+  'global_search.jira.search_result_people_heading': 'Personen',
+  'global_search.jira.advanced_search': 'Erweiterte Suche nach:',
+  'global_search.jira.advanced_search_issues': 'Vorgänge',
+  'global_search.jira.advanced_search_projects': 'Projekte',
+  'global_search.jira.advanced_search_boards': 'Boards',
+  'global_search.jira.advanced_search_filters': 'Filter',
+  'global_search.jira.advanced_search_people': 'Personen',
+  'global_search.jira.advanced_issue_search': 'Erweiterte Suche nach Vorgängen',
   'global_search.jira.no_results_title':
-    'No results in issue summaries, names and people',
+    'Keine Ergebnisse in Zusammenfassungen von Vorgängen, Namen und Personen',
   'global_search.jira.no_results_body':
-    'Try searching with a different term. You can search all text fields in issues as well with advanced search, or search for other items more specifically.',
+    'Versuchen Sie einen anderen Suchbegriff. Mit der erweiterten Suche können Sie auch alle Textfelder in Vorgängen durchsuchen oder suchen Sie spezifischer nach anderen Elementen.',
   'global_search.jira.no_recent_activity_body':
-    'Or refine your results with our advanced search.',
+    'Oder verfeinern Sie Ihre Ergebnisse mit unserer erweiterten Suche.',
 };
