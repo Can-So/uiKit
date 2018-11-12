@@ -1,1 +1,0 @@
-- Bump react-syntax-highlighter to 10.0.1

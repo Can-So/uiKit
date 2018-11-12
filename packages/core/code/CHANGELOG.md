@@ -1,5 +1,10 @@
 # @atlaskit/code
 
+## 8.1.1
+- [patch] [84e8015](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84e8015):
+
+  - Bump react-syntax-highlighter to 10.0.1
+
 ## 8.1.0
 - [minor] [26027dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/26027dd):
 
