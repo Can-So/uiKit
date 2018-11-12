@@ -8,7 +8,7 @@ import { parseNewlineOnly } from './whitespace';
 
 const LIST_ITEM_REGEXP = /^ *([*\-#]+) /;
 const EMPTY_LINE_REGEXP = /^[ \t]*\r?\n/;
-const RULER_SYMBOL = '----';
+const RULER_SYMBOL_REGEXP = /^-{4,5}/;
 
 const processState = {
   NEW_LINE: 0,
@@ -54,8 +54,11 @@ export function list(
           const [, symbols] = listMatch;
 
           // Handle ruler in list
-          if (symbols === RULER_SYMBOL) {
-            const remainingAfterSymbol = input.substring(index + 4);
+          const rulerMatch = symbols.match(RULER_SYMBOL_REGEXP);
+          if (rulerMatch) {
+            const remainingAfterSymbol = input.substring(
+              index + rulerMatch[0].length,
+            );
             const emptyLineMatch = remainingAfterSymbol.match(
               EMPTY_LINE_REGEXP,
             );

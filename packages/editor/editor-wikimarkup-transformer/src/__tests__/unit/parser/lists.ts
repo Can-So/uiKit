@@ -92,7 +92,7 @@ sadfsadf
 {code}
 * list 2`,
     ],
-    ['should not create a list if started with multiple dashes', `----- a`],
+    ['should not create a list if started with multiple dashes', `------ a`],
     ['should create a list if started with multiple hash symbols', `## a`],
     ['should create a list if started with multiple star symbols', `** a`],
     [
@@ -104,6 +104,17 @@ sadfsadf
 -- c
 --- d
 ----
+`,
+    ],
+    [
+      'should correctly insert a 5 dash ruler if it occurs within a list',
+      `
+- a
+-----
+- b
+-- c
+--- d
+-----
 `,
     ],
     [
