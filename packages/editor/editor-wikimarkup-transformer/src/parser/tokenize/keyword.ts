@@ -93,7 +93,7 @@ const leadingKeywordTokenMap = [
   },
   {
     type: TokenType.HEADING,
-    regex: /^h[1|2|3|4|5|6]\. /,
+    regex: /^h[1-6]\./,
   },
   {
     type: TokenType.RULER,
