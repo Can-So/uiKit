@@ -14,10 +14,10 @@ export default {
     'Laaja haku kyselylle "{query}"',
   'global_search.no_recent_activity_title': 'Hae tarvitsemiasi tietoja',
   'global_search.no_recent_activity_body':
-    'Tai käytä <a href={url}>Laajaa hakua</a> (`vaihtonäppäin + syöttönäppäin`) tarkentaaksesi tuloksesi.',
-  'global_search.no_results_title': 'No results in titles and people',
+    'Tai käytä <a href={url}>laajennettua hakua</a> (`vaihtonäppäin + syöttönäppäin`) tarkentaaksesi tuloksesi.',
+  'global_search.no_results_title': 'Ei tuloksia otsikoista eikä henkilöistä',
   'global_search.no_results_body':
-    'Try searching with a different term. You can search page content as well with the advanced search, or search for people, below.',
+    'Kokeile eri hakutermiä. Laajennetulla haulla voit hakea sivun sisältöä tai henkilöitä alla olevasta kohdasta.',
   'global_search.people.recent_people_heading':
     'Työskenteli äskettäin jonkun kanssa',
   'global_search.people.people_heading': 'Ihmiset',
@@ -26,25 +26,28 @@ export default {
   'global_search.search_error_body':
     'Se saattaa olla vain pieni ongelma. On parasta {link}.',
   'global_search.search_error_body.link': 'yritä uudestaan',
-  'global_search.jira.search_placeholder': 'Search Jira',
-  'global_search.jira.recent_issues_heading': 'Recent issues',
-  'global_search.jira.recent_people_heading': 'Recently worked with',
-  'global_search.jira.recent_containers': 'Recent boards, filters and projects',
-  'global_search.jira.search_result_issues_heading': 'Issues',
+  'global_search.jira.search_placeholder': 'Hae Jirasta',
+  'global_search.jira.recent_issues_heading': 'Viimeaikaiset asiat',
+  'global_search.jira.recent_people_heading':
+    'Työskenteli äskettäin tämän henkilön kanssa:',
+  'global_search.jira.recent_containers':
+    'Viimeaikaiset taulut, suodattimet ja projektit',
+  'global_search.jira.search_result_issues_heading': 'Asiat',
   'global_search.jira.search_result_containers_heading':
-    'Boards, filters and projects',
-  'global_search.jira.search_result_people_heading': 'People',
-  'global_search.jira.advanced_search': 'Go to Advanced search for',
-  'global_search.jira.advanced_search_issues': 'issues',
-  'global_search.jira.advanced_search_projects': 'projects',
-  'global_search.jira.advanced_search_boards': 'boards',
-  'global_search.jira.advanced_search_filters': 'filters',
-  'global_search.jira.advanced_search_people': 'people',
-  'global_search.jira.advanced_issue_search': 'View all issues',
+    'Taulut, suodattimet ja projektit',
+  'global_search.jira.search_result_people_heading': 'Henkilöt',
+  'global_search.jira.advanced_search':
+    'Siirry laajennettuun hakuun hakeaksesi',
+  'global_search.jira.advanced_search_issues': 'asiat',
+  'global_search.jira.advanced_search_projects': 'projektit',
+  'global_search.jira.advanced_search_boards': 'taulut',
+  'global_search.jira.advanced_search_filters': 'suodattimet',
+  'global_search.jira.advanced_search_people': 'henkilöt',
+  'global_search.jira.advanced_issue_search': 'Laajennettu haku asioille',
   'global_search.jira.no_results_title':
-    'No results in issue summaries, names and people',
+    'Ei tuloksia asiayhteenvedoista, nimistä eikä henkilöistä',
   'global_search.jira.no_results_body':
-    'Try searching with a different term. You can search all text fields in issues as well with advanced search, or search for other items more specifically.',
+    'Kokeile eri hakutermiä. Laajennetulla haulla voit hakea kaikista asioiden tekstikentistä tai hakea tarkemmin tiettyjä kohteita.',
   'global_search.jira.no_recent_activity_body':
-    'Or refine your results with our advanced search.',
+    'Tai tarkenna tuloksiasi laajennetun hakumme avulla.',
 };

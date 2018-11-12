@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { canUseDom } from 'exenv';
+import { canUseDOM } from 'exenv';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
@@ -74,7 +74,7 @@ class Modal extends Component<Props, State> {
 
   state = {
     dialogNode: null,
-    scrollDistance: canUseDom ? getScrollDistance() : 0,
+    scrollDistance: canUseDOM ? getScrollDistance() : 0,
     isExiting: false,
   };
 

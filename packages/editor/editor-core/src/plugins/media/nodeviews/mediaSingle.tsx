@@ -207,6 +207,7 @@ export default class MediaSingleNode extends Component<
         gridSize={12}
         state={this.props.view.state}
         appearance={this.mediaPluginState.options.appearance}
+        selected={this.props.selected()}
       >
         {MediaChild}
       </ResizableMediaSingle>

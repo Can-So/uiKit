@@ -24,6 +24,12 @@ describe('JIRA wiki markup - Misc', () => {
       `-
 this is not a list`,
     ],
+    [
+      'It should be possible to have a ruler as the final line of text',
+      `Hi
+----`,
+    ],
+    ['It should be possible to have a ruler as the only thing', '----'],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

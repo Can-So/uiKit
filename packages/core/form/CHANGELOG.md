@@ -1,5 +1,10 @@
 # @atlaskit/form
 
+## 4.0.15
+- [patch] [e6d3f57](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6d3f57):
+
+  - Check that content children of FormSection are valid elements before cloning
+
 ## 4.0.14
 - [patch] [c8d935f"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8d935f"

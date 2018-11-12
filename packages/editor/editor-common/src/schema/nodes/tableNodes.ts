@@ -41,18 +41,22 @@ const getCellAttrs = (dom: HTMLElement) => {
   };
 };
 
-export const setCellAttrs = (node: PmNode) => {
+export const setCellAttrs = (node: PmNode, cell?: HTMLElement) => {
   const attrs: {
     colspan?: number;
     rowspan?: number;
     style?: string;
   } = {};
-  if (node.attrs.colspan !== 1) {
+  const colspan = cell ? parseInt(cell.getAttribute('colspan') || '1', 10) : 1;
+  const rowspan = cell ? parseInt(cell.getAttribute('rowspan') || '1', 10) : 1;
+
+  if (node.attrs.colspan !== colspan) {
     attrs.colspan = node.attrs.colspan;
   }
-  if (node.attrs.rowspan !== 1) {
+  if (node.attrs.rowspan !== rowspan) {
     attrs.rowspan = node.attrs.rowspan;
   }
+
   if (node.attrs.colwidth) {
     attrs['data-colwidth'] = node.attrs.colwidth.join(',');
   }
@@ -177,9 +181,6 @@ export interface TableRow {
 export interface TableCell {
   type: 'tableCell';
   attrs?: CellAttributes;
-  /**
-   * @minItems 1
-   */
   content: TableCellContent;
 }
 
@@ -222,7 +223,7 @@ export const table: any = {
       }),
     },
   ],
-  toDOM(node) {
+  toDOM(node: PmNode) {
     const attrs = {
       'data-number-column': node.attrs.isNumberColumnEnabled,
       'data-layout': node.attrs.layout,
@@ -259,7 +260,7 @@ const cellAttrs = {
 
 export const tableCell = {
   content:
-    '(paragraph | panel | blockquote | orderedList | bulletList | rule | heading | codeBlock |  mediaGroup | mediaSingle | applicationCard | decisionList | taskList | blockCard | extension)+',
+    '(paragraph | panel | blockquote | orderedList | bulletList | rule | heading | codeBlock |  mediaGroup | mediaSingle | applicationCard | decisionList | taskList | blockCard | extension | unsupportedBlock)+',
   attrs: cellAttrs,
   tableRole: 'cell',
   isolating: true,
@@ -269,7 +270,7 @@ export const tableCell = {
       getAttrs: (dom: HTMLElement) => getCellAttrs(dom),
     },
   ],
-  toDOM(node) {
+  toDOM(node: PmNode) {
     return ['td', setCellAttrs(node), 0];
   },
 };
@@ -296,7 +297,7 @@ export const tableHeader = {
       getAttrs: (dom: HTMLElement) => getCellAttrs(dom),
     },
   ],
-  toDOM(node) {
+  toDOM(node: PmNode) {
     return ['th', setCellAttrs(node), 0];
   },
 };

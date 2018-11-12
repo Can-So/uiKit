@@ -14,9 +14,9 @@ export default {
   'global_search.no_recent_activity_title': 'Sök efter vad du behöver',
   'global_search.no_recent_activity_body':
     'Eller använd <a href={url}>Avancerad sökning</a> (skift + retur) för att söka mer fokuserat.',
-  'global_search.no_results_title': 'No results in titles and people',
+  'global_search.no_results_title': 'Inga resultat i titlar och personer',
   'global_search.no_results_body':
-    'Try searching with a different term. You can search page content as well with the advanced search, or search for people, below.',
+    'Prova med ett annat sökord. Du kan söka innehåll på sidor, använda Avancerad sökning eller söka efter personer nedan.',
   'global_search.people.recent_people_heading': 'Arbetade nyligen med',
   'global_search.people.people_heading': 'Personer',
   'global_search.people.advanced_search': 'Sök efter person',
@@ -24,25 +24,26 @@ export default {
   'global_search.search_error_body':
     'Det kan vara ett tillfälligt problem. Bäst är att {link}.',
   'global_search.search_error_body.link': 'försöka igen',
-  'global_search.jira.search_placeholder': 'Search Jira',
-  'global_search.jira.recent_issues_heading': 'Recent issues',
-  'global_search.jira.recent_people_heading': 'Recently worked with',
-  'global_search.jira.recent_containers': 'Recent boards, filters and projects',
-  'global_search.jira.search_result_issues_heading': 'Issues',
+  'global_search.jira.search_placeholder': 'Sök Jira',
+  'global_search.jira.recent_issues_heading': 'Senaste ärenden',
+  'global_search.jira.recent_people_heading': 'Arbetade nyligen med',
+  'global_search.jira.recent_containers':
+    'Senaste anslagstavlor, filter och projekt',
+  'global_search.jira.search_result_issues_heading': 'Ärenden',
   'global_search.jira.search_result_containers_heading':
-    'Boards, filters and projects',
-  'global_search.jira.search_result_people_heading': 'People',
-  'global_search.jira.advanced_search': 'Go to Advanced search for',
-  'global_search.jira.advanced_search_issues': 'issues',
-  'global_search.jira.advanced_search_projects': 'projects',
-  'global_search.jira.advanced_search_boards': 'boards',
-  'global_search.jira.advanced_search_filters': 'filters',
-  'global_search.jira.advanced_search_people': 'people',
-  'global_search.jira.advanced_issue_search': 'View all issues',
+    'Anslagstavlor, filter och projekt',
+  'global_search.jira.search_result_people_heading': 'Personer',
+  'global_search.jira.advanced_search': 'Gå till avancerad sökning efter',
+  'global_search.jira.advanced_search_issues': 'ärenden',
+  'global_search.jira.advanced_search_projects': 'projekt',
+  'global_search.jira.advanced_search_boards': 'anslagstavlor',
+  'global_search.jira.advanced_search_filters': 'filter',
+  'global_search.jira.advanced_search_people': 'personer',
+  'global_search.jira.advanced_issue_search': 'Avancerad sökning efter ärenden',
   'global_search.jira.no_results_title':
-    'No results in issue summaries, names and people',
+    'Inga resultat i ärendesammanfattningar, namn och personer',
   'global_search.jira.no_results_body':
-    'Try searching with a different term. You can search all text fields in issues as well with advanced search, or search for other items more specifically.',
+    'Prova med ett annat sökord. Du kan söka i alla textfält i ärenden, använda avancerad sökning eller söka efter andra ärenden mer specifikt.',
   'global_search.jira.no_recent_activity_body':
-    'Or refine your results with our advanced search.',
+    'Eller förfina ditt resultat med avancerad sökning.',
 };

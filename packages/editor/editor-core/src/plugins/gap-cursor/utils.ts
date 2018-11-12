@@ -66,6 +66,22 @@ const isNodeViewWrapper = (node?: HTMLElement | null): boolean => {
   );
 };
 
+function getBreakoutModeFromTargetNode(node: PMNode): string {
+  if (node.attrs.layout) {
+    return node.attrs.layout;
+  }
+
+  if (node.marks && node.marks.length) {
+    return (
+      node.marks.find(mark => mark.type.name === 'breakout') || {
+        attrs: { mode: '' },
+      }
+    ).attrs.mode;
+  }
+
+  return '';
+}
+
 // incapsulated this hack into a separate util function
 export const fixCursorAlignment = (view: EditorView) => {
   const {
@@ -162,8 +178,9 @@ export const fixCursorAlignment = (view: EditorView) => {
   }
 
   // breakout mode
-  if (/full-width|wide/i.test(targetNode.attrs.layout)) {
-    gapCursorRef.setAttribute('layout', targetNode.attrs.layout);
+  const breakoutMode = getBreakoutModeFromTargetNode(targetNode);
+  if (/full-width|wide/i.test(breakoutMode)) {
+    gapCursorRef.setAttribute('layout', breakoutMode);
   }
 
   // mediaSingle with layout="wrap-left" or "wrap-right"

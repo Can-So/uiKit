@@ -60,6 +60,7 @@ type resizeObj = {
 };
 
 type Props = {
+  ...WithAnalyticsEventsProps,
   /** Elements to be displayed in the ContainerNavigationComponent */
   children?: Node,
   /** Theme object to be used to color the navigation container. */
@@ -136,7 +137,7 @@ type Props = {
   /** todo */
   // isCreateDrawerOpen: boolean,
   // isSearchDrawerOpen: boolean,
-} & WithAnalyticsEventsProps;
+};
 
 type State = {
   containerTheme: Provided,

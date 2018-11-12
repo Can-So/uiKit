@@ -1,8 +1,8 @@
 // @flow
-import React, { createElement, Component } from 'react';
+import React, { createElement, Component, type ElementType } from 'react';
 import Button from '@atlaskit/button';
 
-import type { AppearanceType, ComponentType, FunctionType } from '../types';
+import type { AppearanceType } from '../types';
 import { Actions, ActionItem, Footer } from '../styled/Content';
 
 const JustifyShim = props => <span {...props} />;
@@ -10,15 +10,15 @@ const JustifyShim = props => <span {...props} />;
 type Props = {
   /** Buttons to render in the footer */
   actions?: Array<{
-    onClick?: FunctionType,
+    onClick?: Function,
     text?: string,
   }>,
   /** Appearance of the primary button. Also adds an icon to the heading, if provided. */
   appearance?: AppearanceType,
   /** Component to render the footer of the moda.l */
-  component?: ComponentType,
+  component?: ElementType,
   /** Function to close the dialog */
-  onClose: FunctionType,
+  onClose: Function,
   /** Whether or not to display a line above the footer */
   showKeyline?: boolean,
 };

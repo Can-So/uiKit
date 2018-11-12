@@ -9,7 +9,7 @@ export interface HeadingDefinition {
   /**
    * @allowUnsupportedInline true
    */
-  content: Array<Inline>;
+  content?: Array<Inline>;
   attrs: {
     /**
      * @minimum 1
