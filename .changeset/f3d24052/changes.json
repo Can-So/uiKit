@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/panel", "type": "patch" },
+    { "name": "@atlaskit/calendar", "type": "patch" }
+  ],
+  "dependents": []
+}

@@ -40,7 +40,6 @@
     "@atlaskit/docs": "^5.0.8",
     "date-fns": "^1.29.0",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
-    "enzyme-to-json": "^3.3.0",
     "jest-in-case": "^1.0.2",
     "react-dom": "^16.4.2",
     "react-test-renderer": "^16.3.0"
