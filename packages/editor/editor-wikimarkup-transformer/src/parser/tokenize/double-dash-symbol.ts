@@ -1,38 +1,14 @@
-import { Token } from './';
+import { TextToken } from './';
+import { createDashTokenParser } from './dash-token-creator';
 
-const TYPE = 'text';
-const SYMBOL = '–';
-const LENGTH = 2;
+const token: TextToken = {
+  type: 'text',
+  text: '–',
+  length: 2,
+};
+const fallback: TextToken = {
+  ...token,
+  text: '--',
+};
 
-export function doubleDashSymbol(input: string, position: number): Token {
-  const charAfterToken: string = input.charAt(position + LENGTH);
-  const charBeforeToken: string = input.charAt(position - 1);
-
-  if (isAlphanumericalOrUnicodeOrParenthesis(charBeforeToken, charAfterToken)) {
-    return fallback();
-  }
-
-  return {
-    type: TYPE,
-    text: SYMBOL,
-    length: LENGTH,
-  };
-}
-
-function isAlphanumericalOrUnicodeOrParenthesis(
-  before: string,
-  after: string,
-): boolean {
-  // The unicode regex must ignore the space
-  return [before, after].some(char =>
-    /[a-zA-Z0-9\(\)]|[^\u0000-\u007F]/.test(char),
-  );
-}
-
-function fallback(): Token {
-  return {
-    type: TYPE,
-    text: '--',
-    length: LENGTH,
-  };
-}
+export const doubleDashSymbol = createDashTokenParser(token, fallback);
