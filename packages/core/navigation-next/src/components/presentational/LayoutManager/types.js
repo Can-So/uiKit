@@ -8,7 +8,7 @@ export type CollapseListener = (HTMLElement, boolean) => void;
 
 export type CollapseToggleTooltipContent = (
   isCollapsed: boolean,
-) => { text: string, char: string } | null;
+) => { text: string, char: string };
 
 export type CollapseListeners = {|
   /** Called when the navigation begins expanding. */
@@ -22,8 +22,8 @@ export type CollapseListeners = {|
 |};
 
 type NonStringRef<T> = {
-  current: ElementRef<T>,
-} | null;
+  current: ElementRef<T> | null,
+};
 
 export type ExperimentalFeatureFlags = {|
   /**
@@ -40,7 +40,6 @@ export type GetRefs = ({
 }) => void;
 
 export type ConnectedLayoutManagerProps = {
-  ...$Exact<CollapseListeners>,
   /** Your page content. */
   children: Node,
   /** A component which will render the container navigation layer. */
@@ -53,11 +52,12 @@ export type ConnectedLayoutManagerProps = {
   /** A component which will render the product navigation layer. */
   productNavigation: ComponentType<{}>,
   /** Displayed when the user's mouse is over the collapse/expand toggle. */
-  collapseToggleTooltipContent?: CollapseToggleTooltipContent,
+  collapseToggleTooltipContent: CollapseToggleTooltipContent,
+  ...$Exact<CollapseListeners>,
+  ...$Exact<ExperimentalFeatureFlags>,
 };
 
 export type LayoutManagerProps = {
   ...$Exact<ConnectedLayoutManagerProps>,
-  ...$Exact<ExperimentalFeatureFlags>,
   ...$Exact<WithNavigationUIControllerProps>,
 };

@@ -4,7 +4,6 @@ import type { ComponentType, ElementConfig } from 'react';
 import GlobalItem from '../GlobalItem';
 import type { GlobalTheme } from '../../../theme/types';
 
-// FIXME: Use ElementConfig instead
 type ItemDataShape = {
   key?: string,
   ...$Exact<ElementConfig<typeof GlobalItem>>,

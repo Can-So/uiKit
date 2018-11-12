@@ -53,12 +53,6 @@ type State = {
   itemIsDragging: boolean,
 };
 
-function defaultTooltipContent(isCollapsed: boolean) {
-  return isCollapsed
-    ? { text: 'Expand', char: '[' }
-    : { text: 'Collapse', char: '[' };
-}
-
 type PageProps = {
   ...$Exact<CollapseListeners>,
   children: Node,
@@ -140,10 +134,6 @@ export default class LayoutManager extends Component<
   containerRef: HTMLElement;
   flyoutMouseOverTimeout: TimeoutID;
 
-  static defaultProps = {
-    collapseToggleTooltipContent: defaultTooltipContent,
-    experimental_flyoutOnHover: false,
-  };
   static getDerivedStateFromProps(props: LayoutManagerProps, state: State) {
     // kill the flyout when the user commits to expanding navigation
     if (!props.navigationUIController.state.isCollapsed && state.flyoutIsOpen) {
@@ -348,7 +338,6 @@ export default class LayoutManager extends Component<
                 >
                   <ResizeControl
                     collapseToggleTooltipContent={
-                      // $FlowFixMe
                       this.props.collapseToggleTooltipContent
                     }
                     expandCollapseAffordanceRef={
