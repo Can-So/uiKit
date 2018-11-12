@@ -1,1 +1,0 @@
-- FS-3516 have Avatar persist in single user-picker placeholder
