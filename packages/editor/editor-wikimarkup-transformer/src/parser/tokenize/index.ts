@@ -9,7 +9,7 @@ import { emphasis } from './emphasis';
 import { hardbreak } from './hardbreak';
 import { heading } from './heading';
 import { inserted } from './inserted';
-import { linkFormat } from './link-format';
+import { linkFormat } from './links/link-format';
 import { linkText } from './link-text';
 import { list } from './list';
 import { monospace } from './monospace';

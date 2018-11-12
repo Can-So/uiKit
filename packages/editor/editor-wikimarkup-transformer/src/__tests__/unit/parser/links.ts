@@ -49,6 +49,10 @@ describe('JIRA wiki markup - Links', () => {
       `[Link Title|http://www.google.com] boy I hope this doesn't go all the way to here] that would be bad.`,
     ],
     [
+      '[CS-240] should handle links with titles',
+      `[Link Description|http://www.google.com|title] boy I hope this doesn't go all the way to here] that would be bad.`,
+    ],
+    [
       '[CS-385] should link text in link format',
       `[https://splunk.paas-inf.net/en-GB/app/search/search?earliest=\-1d&latest=now|https://www.google.com]`,
     ],
