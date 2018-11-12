@@ -1,6 +1,3 @@
-/**
- * Minimal string buffer implementation to match Java implementation
- */
 import { isBlank, isDigit, isNotBlank, StringBuffer } from '../../utils/text';
 
 function trimIfPossible(s: string | null): string | null {
