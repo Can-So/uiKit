@@ -36,7 +36,7 @@ export function forceLineBreak(
 function fallback(input, position): Token {
   return {
     type: 'text',
-    text: input.substr(position, 1),
-    length: 1,
+    text: input.substr(position, 2),
+    length: 2,
   };
 }
