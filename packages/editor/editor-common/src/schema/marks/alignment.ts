@@ -1,16 +1,13 @@
-import { Mark, MarkSpec } from 'prosemirror-model';
+import { MarkSpec } from 'prosemirror-model';
 
 export interface AlignmentAttributes {
-  /**
-   * @pattern "^#[0-9a-f]{6}$"
-   */
   align: 'left' | 'center' | 'right';
 }
 
-export interface AlignmentMark extends Mark {
-  attrs: AlignmentAttributes;
-}
-
+/**
+ * @name alignment_mark
+ * @stage 0
+ */
 export interface AlignmentMarkDefinition {
   type: 'alignment';
   attrs: AlignmentAttributes;
@@ -26,12 +23,12 @@ export const alignment: MarkSpec = {
     {
       getAttrs: (dom: Element) => {
         return {
-          align: (dom as HTMLElement).getAttribute('align'),
+          align: dom.getAttribute('align'),
         };
       },
     },
   ],
-  toDOM(mark: AlignmentMark) {
+  toDOM(mark) {
     return [
       'div',
       { class: `align-${mark.attrs.align}`, 'data-align': mark.attrs.align },

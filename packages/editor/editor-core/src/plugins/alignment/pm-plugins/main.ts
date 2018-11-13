@@ -1,11 +1,12 @@
 import { Plugin, PluginKey, Transaction, EditorState } from 'prosemirror-state';
 import { Dispatch } from '../../../event-dispatcher';
-import { getActiveAlignment } from '../utils';
+import { getActiveAlignment, canApplyAlignment } from '../utils';
 
 export type AlignmentState = 'left' | 'right' | 'center';
 
 export type AlignmentPluginState = {
   align: AlignmentState;
+  isEnabled: boolean;
 };
 
 export type ActionHandlerParams = {
@@ -24,6 +25,7 @@ export function createInitialPluginState(
 ): AlignmentPluginState {
   return {
     align: getActiveAlignment(editorState) || pluginConfig.align,
+    isEnabled: true,
   };
 }
 
@@ -38,12 +40,16 @@ export function createPlugin(dispatch: Dispatch, pluginConfig): Plugin {
       },
       apply(tr, state: AlignmentPluginState, prevState, nextState) {
         const nextPluginState = getActiveAlignment(nextState);
+        const isEnabled = canApplyAlignment(nextState);
         const newState = {
           ...state,
           align: nextPluginState,
+          isEnabled,
         };
-        dispatch(pluginKey, newState);
-        return state;
+        if (nextPluginState !== state.align || isEnabled !== state.isEnabled) {
+          dispatch(pluginKey, newState);
+        }
+        return newState;
       },
     },
   });

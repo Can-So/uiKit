@@ -5,7 +5,6 @@ import WithPluginState from '../../ui/WithPluginState';
 import { pluginKey, createPlugin, AlignmentState } from './pm-plugins/main';
 import { changeAlignment } from './commands';
 import ToolbarAlignment from './ui/ToolbarAlignment';
-import { canApplyAlignment } from './utils';
 
 export const defaultConfig = {
   align: 'left',
@@ -48,7 +47,7 @@ const alignmentPlugin: EditorPlugin = {
               changeAlignment={(align: AlignmentState) =>
                 changeAlignment(align)(editorView.state, editorView.dispatch)
               }
-              disabled={!canApplyAlignment(editorView)}
+              disabled={!align.isEnabled}
               popupsMountPoint={popupsMountPoint}
               popupsBoundariesElement={popupsBoundariesElement}
               popupsScrollableElement={popupsScrollableElement}

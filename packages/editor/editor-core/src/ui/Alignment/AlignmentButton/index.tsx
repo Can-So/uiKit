@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 import ToolbarButton from '../../ToolbarButton';
 
@@ -12,7 +11,7 @@ export interface Props {
   content: React.ReactElement<any>;
 }
 
-class AlignmentButton extends PureComponent<Props & InjectedIntlProps> {
+class AlignmentButton extends PureComponent<Props> {
   render() {
     const { label, isSelected, content } = this.props;
     return (
@@ -33,4 +32,4 @@ class AlignmentButton extends PureComponent<Props & InjectedIntlProps> {
   };
 }
 
-export default injectIntl(AlignmentButton);
+export default AlignmentButton;

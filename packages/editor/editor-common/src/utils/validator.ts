@@ -538,11 +538,13 @@ export const getValidNode = (
         break;
       }
       case 'paragraph': {
-        return {
-          type,
-          content: content || [],
-          marks,
-        };
+        return marks
+          ? {
+              type,
+              content: content || [],
+              marks,
+            }
+          : { type, content: content || [] };
       }
       case 'rule': {
         return {
@@ -574,14 +576,22 @@ export const getValidNode = (
           const { level } = attrs;
           const between = (x, a, b) => x >= a && x <= b;
           if (level && between(level, 1, 6)) {
-            return {
-              type,
-              content,
-              marks,
-              attrs: {
-                level,
-              },
-            };
+            return marks
+              ? {
+                  type,
+                  content,
+                  marks,
+                  attrs: {
+                    level,
+                  },
+                }
+              : {
+                  type,
+                  content,
+                  attrs: {
+                    level,
+                  },
+                };
           }
         }
         break;
@@ -752,7 +762,6 @@ export const getValidNode = (
             type,
             content: wrapInlineNodes(content),
             attrs: attrs ? cellAttrs : undefined,
-            marks,
           };
         }
         break;

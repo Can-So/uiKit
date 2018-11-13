@@ -9,6 +9,8 @@ import {
   table,
   td,
   tr,
+  ul,
+  li,
 } from '@atlaskit/editor-test-helpers';
 import {
   AlignmentPluginState,
@@ -19,6 +21,9 @@ import alignment from '../../../../plugins/alignment';
 import panelPlugin from '../../../../plugins/panel';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import tablesPlugin from '../../../../plugins/table';
+import { insertBlockType } from '../../../../plugins/block-type/commands';
+import listPlugin from '../../../../plugins/lists';
+import { toggleBulletList } from '../../../../plugins/lists/commands';
 
 describe('alignment', () => {
   const editor = (doc: any) =>
@@ -26,6 +31,7 @@ describe('alignment', () => {
       doc,
       pluginKey: alignmentPluginKey,
       editorPlugins: [
+        listPlugin,
         tablesPlugin(),
         codeBlockPlugin(),
         panelPlugin,
@@ -36,6 +42,7 @@ describe('alignment', () => {
         allowPanel: true,
         allowCodeBlocks: true,
         allowTables: true,
+        allowLists: true,
       },
     });
 
@@ -106,6 +113,28 @@ describe('alignment', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(code_block()('hello{<>}')),
       );
+      editorView.destroy();
+    });
+
+    it('Removes alignment when panel is added to the selection', () => {
+      const { editorView } = editor(
+        doc(alignmentMark({ align: 'right' })(p('hello{<>}'))),
+      );
+      const { dispatch, state } = editorView;
+      insertBlockType('panel')(state, dispatch);
+      expect(editorView.state.doc).toEqualDocument(
+        doc(panel()(p('hello{<>}'))),
+      );
+      editorView.destroy();
+    });
+
+    it('Removes alignment when the text is toggled to a list', () => {
+      const { editorView } = editor(
+        doc(alignmentMark({ align: 'right' })(p('{<>}hello'))),
+      );
+      toggleBulletList(editorView);
+      expect(editorView.state.doc).toEqualDocument(doc(ul(li(p('hello')))));
+
       editorView.destroy();
     });
   });

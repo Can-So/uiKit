@@ -13,6 +13,17 @@ export interface ParagraphDefinition {
   content?: Array<Inline>;
 }
 
+export interface ParagraphMarks extends ParagraphDefinition {
+  marks?: Array<any>;
+}
+
+/**
+ * @name paragraph_with_alignment
+ * @stage 0
+ */
+export type ParagraphWithAlignment = ParagraphMarks &
+  MarksObject<AlignmentMarkDefinition>;
+
 const pDOM: DOMOutputSpec = ['p', 0];
 export const paragraph: NodeSpec = {
   content: 'inline*',
@@ -24,6 +35,3 @@ export const paragraph: NodeSpec = {
     return pDOM;
   },
 };
-
-export type ParagraphWithAlignment = ParagraphDefinition &
-  MarksObject<AlignmentMarkDefinition>;

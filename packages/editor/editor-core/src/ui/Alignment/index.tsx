@@ -11,7 +11,11 @@ export interface Props {
   className?: string;
 }
 
-const alignmentOptions: string[] = ['left', 'center', 'right'];
+const alignmentOptions = [
+  { title: 'Align left', value: 'left' },
+  { title: 'Align center', value: 'center' },
+  { title: 'Align right', value: 'right' },
+];
 
 export default class Alignment extends PureComponent<Props, any> {
   render() {
@@ -20,14 +24,15 @@ export default class Alignment extends PureComponent<Props, any> {
     return (
       <AlignmentWrapper className={className} style={{ maxWidth: 3 * 32 }}>
         {alignmentOptions.map(alignment => {
+          const { value, title } = alignment;
           return (
             <AlignmentButton
-              content={iconMap[alignment]}
-              key={alignment}
-              value={alignment}
-              label={alignment}
+              content={iconMap[value]}
+              key={value}
+              value={value}
+              label={title}
               onClick={onClick}
-              isSelected={alignment === selectedAlignment}
+              isSelected={value === selectedAlignment}
             />
           );
         })}

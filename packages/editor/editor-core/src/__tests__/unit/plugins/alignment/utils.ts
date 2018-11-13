@@ -53,13 +53,13 @@ describe('alignment utils', () => {
   describe('check disabled state', () => {
     it('should be able to add alignment to a top level paragraph', () => {
       const { editorView } = editor(doc(p('hello{<>}')));
-      expect(canApplyAlignment(editorView)).toBe(true);
+      expect(canApplyAlignment(editorView.state)).toBe(true);
       editorView.destroy();
     });
 
     it('should be able to add alignment to a top level heading', () => {
       const { editorView } = editor(doc(h1('hello{<>}')));
-      expect(canApplyAlignment(editorView)).toBe(true);
+      expect(canApplyAlignment(editorView.state)).toBe(true);
       editorView.destroy();
     });
 
@@ -70,19 +70,19 @@ describe('alignment utils', () => {
           table()(tr(td({})(p('hello')), td({})(p('world{<>}')))),
         ),
       );
-      expect(canApplyAlignment(editorView)).toBe(true);
+      expect(canApplyAlignment(editorView.state)).toBe(true);
       editorView.destroy();
     });
 
     it('should not be able to add alignment inside a panel', () => {
       const { editorView } = editor(doc(panel()(p('hello{<>}'))));
-      expect(canApplyAlignment(editorView)).toBe(false);
+      expect(canApplyAlignment(editorView.state)).toBe(false);
       editorView.destroy();
     });
 
     it('should not be able to add alignment inside a panel', () => {
       const { editorView } = editor(doc(code_block()('hello{<>}')));
-      expect(canApplyAlignment(editorView)).toBe(false);
+      expect(canApplyAlignment(editorView.state)).toBe(false);
       editorView.destroy();
     });
   });

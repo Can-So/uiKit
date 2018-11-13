@@ -22,8 +22,8 @@ export function changeAlignment(align: AlignmentState): Command {
       }
     });
 
-    const node = findParentNode(node =>
-      allowedBlocksForAlignment.includes(node.type.name),
+    const node = findParentNode(
+      node => allowedBlocksForAlignment.indexOf(node.type.name) > -1,
     )(state.selection);
 
     if (!node) {

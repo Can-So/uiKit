@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
+import { defineMessages } from 'react-intl';
 import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
-import { analyticsDecorator as analytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import Dropdown from '../../../../ui/Dropdown';
 import EditorAlignLeftIcon from '@atlaskit/icon/glyph/editor/align-left';
@@ -45,10 +44,7 @@ export interface Props {
   disabled?: boolean;
 }
 
-class AlignmentToolbar extends React.Component<
-  Props & InjectedIntlProps,
-  State
-> {
+class AlignmentToolbar extends React.Component<Props, State> {
   state: State = {
     isOpen: false,
   };
@@ -104,7 +100,6 @@ class AlignmentToolbar extends React.Component<
     );
   }
 
-  @analytics('atlassian.editor.format.alignment.button')
   private changeAlignment = align => {
     this.toggleOpen();
     return this.props.changeAlignment(align);
@@ -119,4 +114,4 @@ class AlignmentToolbar extends React.Component<
   };
 }
 
-export default injectIntl(AlignmentToolbar);
+export default AlignmentToolbar;

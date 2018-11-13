@@ -20,7 +20,8 @@
         }
       },
       "required": [
-        "type"
+        "type",
+        "content"
       ],
       "additionalProperties": false
     },
@@ -355,11 +356,7 @@
       },
       "required": [
         "type",
-<<<<<<< HEAD
-        "attrs"
-=======
         "content"
->>>>>>> Added new changeset with ID: 86ac606d
       ],
       "additionalProperties": false
     },
@@ -424,6 +421,36 @@
       ],
       "additionalProperties": false
     },
+    "breakout_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "breakout"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "enum": [
+                "wide",
+                "full-width"
+              ]
+            }
+          },
+          "required": [
+            "mode"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
     "codeBlock_node": {
       "type": "object",
       "properties": {
@@ -451,6 +478,9 @@
               }
             ]
           }
+        },
+        "marks": {
+          "type": "array"
         },
         "attrs": {
           "type": "object",
@@ -536,6 +566,42 @@
       ],
       "additionalProperties": false
     },
+    "codeBlock_no_marks_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/codeBlock_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "maxItems": 0
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "code_block_with_breakout_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/codeBlock_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/breakout_mark"
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
     "hardBreak_node": {
       "type": "object",
       "properties": {
@@ -551,47 +617,9 @@
               "enum": [
                 "\n"
               ]
-<<<<<<< HEAD
-=======
             }
           },
           "additionalProperties": false
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "heading_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "heading"
-          ]
-        },
-        "content": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/inline_node"
-          }
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "number",
-              "minimum": 1,
-              "maximum": 6
->>>>>>> Added new changeset with ID: 86ac606d
-            }
-          },
-          "required": [
-            "level"
-          ],
-          "additionalProperties": false
-<<<<<<< HEAD
         }
       },
       "required": [
@@ -626,16 +654,67 @@
             "level"
           ],
           "additionalProperties": false
-=======
->>>>>>> Added new changeset with ID: 86ac606d
         }
       },
       "required": [
         "type",
-        "content",
         "attrs"
       ],
       "additionalProperties": false
+    },
+    "heading_with_alignment": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "heading"
+              ]
+            },
+            "content": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/inline_node"
+              }
+            },
+            "attrs": {
+              "type": "object",
+              "properties": {
+                "level": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 6
+                }
+              },
+              "required": [
+                "level"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "attrs"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/alignment_mark"
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
     },
     "rule_node": {
       "type": "object",
@@ -643,7 +722,6 @@
         "type": {
           "enum": [
             "rule"
-<<<<<<< HEAD
           ]
         }
       },
@@ -676,76 +754,7 @@
           "additionalProperties": false,
           "required": [
             "shortName"
-=======
->>>>>>> Added new changeset with ID: 86ac606d
           ]
-        }
-      },
-      "required": [
-<<<<<<< HEAD
-        "type",
-        "attrs"
-      ],
-      "additionalProperties": false
-    },
-    "mention_node": {
-=======
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "emoji_node": {
->>>>>>> Added new changeset with ID: 86ac606d
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-<<<<<<< HEAD
-            "mention"
-=======
-            "emoji"
->>>>>>> Added new changeset with ID: 86ac606d
-          ]
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-<<<<<<< HEAD
-            },
-            "text": {
-              "type": "string"
-            },
-            "userType": {
-              "enum": [
-                "DEFAULT",
-                "SPECIAL",
-                "APP"
-              ]
-            },
-            "accessLevel": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "id"
-          ],
-          "additionalProperties": false
-=======
-            },
-            "shortName": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "shortName"
-          ]
->>>>>>> Added new changeset with ID: 86ac606d
         }
       },
       "required": [
@@ -754,20 +763,11 @@
       ],
       "additionalProperties": false
     },
-<<<<<<< HEAD
-    "mediaGroup_node": {
-=======
     "mention_node": {
->>>>>>> Added new changeset with ID: 86ac606d
       "type": "object",
       "properties": {
         "type": {
           "enum": [
-<<<<<<< HEAD
-            "mediaGroup"
-          ]
-        },
-=======
             "mention"
           ]
         },
@@ -811,7 +811,6 @@
             "mediaGroup"
           ]
         },
->>>>>>> Added new changeset with ID: 86ac606d
         "content": {
           "type": "array",
           "items": {
@@ -1869,6 +1868,37 @@
       ],
       "additionalProperties": false
     },
+    "alignment_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "alignment"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "align": {
+              "enum": [
+                "center",
+                "left",
+                "right"
+              ]
+            }
+          },
+          "required": [
+            "align"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
     "paragraph_node": {
       "type": "object",
       "properties": {
@@ -1885,49 +1915,50 @@
         }
       },
       "required": [
-        "type",
-        "content"
+        "type"
       ],
       "additionalProperties": false
     },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Added new changeset with ID: 86ac606d
-    "breakout_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "breakout"
-          ]
-        },
-        "attrs": {
+    "paragraph_with_alignment": {
+      "allOf": [
+        {
           "type": "object",
           "properties": {
-            "mode": {
+            "marks": {
+              "type": "array"
+            },
+            "type": {
               "enum": [
-                "wide",
-                "full-width"
+                "paragraph"
               ]
+            },
+            "content": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/inline_node"
+              }
             }
           },
+          "additionalProperties": false,
           "required": [
-            "mode"
-          ],
-          "additionalProperties": false
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/alignment_mark"
+              }
+            }
+          },
+          "additionalProperties": true
         }
-      },
-      "required": [
-        "type",
-        "attrs"
-      ],
-      "additionalProperties": false
+      ]
     },
-    "codeBlock_node": {
-=======
     "panel_node": {
->>>>>>> Added new changeset with ID: 86ac606d
       "type": "object",
       "properties": {
         "type": {
@@ -1971,89 +2002,6 @@
                 "$ref": "#/definitions/paragraph_node"
               }
             ]
-<<<<<<< HEAD
-          }
-        },
-        "marks": {
-          "type": "array"
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "language": {
-              "enum": [
-                "abap",
-                "actionscript",
-                "ada",
-                "arduino",
-                "autoit",
-                "c",
-                "c++",
-                "clojure",
-                "coffeescript",
-                "csharp",
-                "css",
-                "cuda",
-                "d",
-                "dart",
-                "delphi",
-                "elixir",
-                "erlang",
-                "fortran",
-                "foxpro",
-                "go",
-                "groovy",
-                "haskell",
-                "haxe",
-                "html",
-                "java",
-                "javascript",
-                "json",
-                "julia",
-                "kotlin",
-                "latex",
-                "livescript",
-                "lua",
-                "mathematica",
-                "matlab",
-                "objective-c",
-                "objective-j",
-                "objectpascal",
-                "ocaml",
-                "octave",
-                "perl",
-                "php",
-                "powershell",
-                "prolog",
-                "puppet",
-                "python",
-                "qml",
-                "r",
-                "racket",
-                "restructuredtext",
-                "ruby",
-                "rust",
-                "sass",
-                "scala",
-                "scheme",
-                "shell",
-                "smalltalk",
-                "sql",
-                "standardml",
-                "swift",
-                "tcl",
-                "tex",
-                "typescript",
-                "vala",
-                "vbnet",
-                "verilog",
-                "vhdl",
-                "xml",
-                "xquery"
-              ]
-            }
-=======
->>>>>>> Added new changeset with ID: 86ac606d
           },
           "minItems": 1
         }
@@ -2064,42 +2012,6 @@
         "content"
       ],
       "additionalProperties": false
-    },
-    "codeBlock_no_marks_node": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/codeBlock_node"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "marks": {
-              "type": "array",
-              "maxItems": 0
-            }
-          },
-          "additionalProperties": true
-        }
-      ]
-    },
-    "code_block_with_breakout_node": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/codeBlock_node"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "marks": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/breakout_mark"
-              }
-            }
-          },
-          "additionalProperties": true
-        }
-      ]
     },
     "block_content": {
       "anyOf": [
@@ -2119,7 +2031,7 @@
           "$ref": "#/definitions/table_node"
         },
         {
-          "$ref": "#/definitions/codeBlock_node"
+          "$ref": "#/definitions/codeBlock_no_marks_node"
         },
         {
           "$ref": "#/definitions/heading_node"
@@ -2149,45 +2061,10 @@
           "$ref": "#/definitions/blockCard_node"
         },
         {
-<<<<<<< HEAD
-          "$ref": "#/definitions/codeBlock_no_marks_node"
-=======
           "$ref": "#/definitions/paragraph_node"
         },
         {
           "$ref": "#/definitions/panel_node"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "enum": [
-                "alignment"
-              ]
-            },
-            "attrs": {
-              "type": "object",
-              "properties": {
-                "align": {
-                  "enum": [
-                    "center",
-                    "left",
-                    "right"
-                  ]
-                }
-              },
-              "required": [
-                "align"
-              ],
-              "additionalProperties": false
-            }
-          },
-          "required": [
-            "type",
-            "attrs"
-          ],
-          "additionalProperties": false
->>>>>>> Added new changeset with ID: 86ac606d
         }
       ]
     },
@@ -2208,7 +2085,7 @@
             "$ref": "#/definitions/bulletList_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_node"
+            "$ref": "#/definitions/codeBlock_no_marks_node"
           },
           {
             "$ref": "#/definitions/heading_node"
@@ -2235,14 +2112,10 @@
             "$ref": "#/definitions/blockCard_node"
           },
           {
-<<<<<<< HEAD
-            "$ref": "#/definitions/codeBlock_no_marks_node"
-=======
             "$ref": "#/definitions/paragraph_node"
           },
           {
             "$ref": "#/definitions/panel_node"
->>>>>>> Added new changeset with ID: 86ac606d
           }
         ]
       },
@@ -2268,7 +2141,7 @@
             "$ref": "#/definitions/table_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_node"
+            "$ref": "#/definitions/codeBlock_no_marks_node"
           },
           {
             "$ref": "#/definitions/heading_node"
@@ -2295,14 +2168,10 @@
             "$ref": "#/definitions/blockCard_node"
           },
           {
-<<<<<<< HEAD
-            "$ref": "#/definitions/codeBlock_no_marks_node"
-=======
             "$ref": "#/definitions/paragraph_node"
           },
           {
             "$ref": "#/definitions/panel_node"
->>>>>>> Added new changeset with ID: 86ac606d
           }
         ]
       },
@@ -2445,10 +2314,16 @@
                 "$ref": "#/definitions/table_node"
               },
               {
-                "$ref": "#/definitions/codeBlock_node"
+                "$ref": "#/definitions/codeBlock_no_marks_node"
+              },
+              {
+                "$ref": "#/definitions/code_block_with_breakout_node"
               },
               {
                 "$ref": "#/definitions/heading_node"
+              },
+              {
+                "$ref": "#/definitions/heading_with_alignment"
               },
               {
                 "$ref": "#/definitions/rule_node"
@@ -2478,63 +2353,22 @@
                 "$ref": "#/definitions/blockCard_node"
               },
               {
-<<<<<<< HEAD
-                "$ref": "#/definitions/codeBlock_no_marks_node"
-              },
-              {
-                "$ref": "#/definitions/code_block_with_breakout_node"
-=======
                 "$ref": "#/definitions/paragraph_node"
               },
               {
-                "$ref": "#/definitions/panel_node"
+                "$ref": "#/definitions/paragraph_with_alignment"
               },
               {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "enum": [
-                      "alignment"
-                    ]
-                  },
-                  "attrs": {
-                    "type": "object",
-                    "properties": {
-                      "align": {
-                        "enum": [
-                          "center",
-                          "left",
-                          "right"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "align"
-                    ],
-                    "additionalProperties": false
-                  }
-                },
-                "required": [
-                  "type",
-                  "attrs"
-                ],
-                "additionalProperties": false
->>>>>>> Added new changeset with ID: 86ac606d
+                "$ref": "#/definitions/panel_node"
               }
             ]
           }
-        },
-        "marks": {
-          "enum": [
-            "alignment"
-          ]
         }
       },
       "required": [
         "version",
         "type",
-        "content",
-        "marks"
+        "content"
       ],
       "additionalProperties": false
     }

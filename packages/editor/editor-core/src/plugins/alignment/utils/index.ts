@@ -1,22 +1,15 @@
-import { hasParentNodeOfType, findParentNodeOfType } from 'prosemirror-utils';
-import { EditorView } from 'prosemirror-view';
+import { findParentNodeOfType } from 'prosemirror-utils';
 import { EditorState, Transaction } from 'prosemirror-state';
 import { AlignmentState } from '../pm-plugins/main';
 
-export const canApplyAlignment = (view: EditorView): boolean => {
-  const { schema, selection } = view.state;
-
+export const canApplyAlignment = (state: EditorState): boolean => {
+  const { schema, selection } = state;
   const parent = selection.$from.node(selection.$from.depth - 1);
-  const isParentInTable =
-    parent &&
-    (parent.type === schema.nodes.tableCell ||
-      parent.type === schema.nodes.tableHeader);
 
+  /** Codeblocks are a special case where parent in text selection is the code block itself */
+  const isCodeblock = selection.$anchor.parent.type === schema.nodes.codeBlock;
   return (
-    !!hasParentNodeOfType([schema.nodes.heading, schema.nodes.paragraph])(
-      selection,
-    ) &&
-    (isParentInTable || view.state.selection.$from.depth === 1)
+    parent && parent.type.allowsMarkType(schema.marks.alignment) && !isCodeblock
   );
 };
 
@@ -55,34 +48,12 @@ export const removeAlignment = (
 };
 
 export const isAlignmentAllowed = (state, node, resolvedPos) => {
-  /**
-   * Alignment is allowed under the following conditions
-   */
-
   const { schema } = state;
-  const { depth, parent } = resolvedPos;
-
-  const isParagraphOrHeading =
-    node.type === schema.nodes.paragraph || node.type === schema.nodes.heading;
-
-  /** Case 1: Is top level paragraphs */
-  const isTopLevelParagraphInDoc = depth === 0 && isParagraphOrHeading;
-
-  /** Case 2: Inside table cells on para */
-  const isTopLevelParagraphInTable =
-    parent &&
-    isParagraphOrHeading &&
-    (parent.type === schema.nodes.tableCell ||
-      parent.type === schema.nodes.tableHeader);
-
-  /** Case 3: Inside layouts */
-  const isTopLevelParagraphInLayouts =
-    parent && isParagraphOrHeading && parent.type === schema.nodes.layoutColumn;
-
+  const { parent } = resolvedPos;
   return (
-    isTopLevelParagraphInDoc ||
-    isTopLevelParagraphInTable ||
-    isTopLevelParagraphInLayouts
+    (node.type === schema.nodes.paragraph ||
+      node.type === schema.nodes.heading) &&
+    parent.type.allowsMarkType(schema.marks.alignment)
   );
 };
 
