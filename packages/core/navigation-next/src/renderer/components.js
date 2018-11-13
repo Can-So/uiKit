@@ -41,7 +41,7 @@ import type {
   SectionProps,
   SortableContextProps,
   SortableGroupProps,
-  ItemType,
+  RendererItemType,
 } from './types';
 
 const gridSize = gridSizeFn();
@@ -218,10 +218,13 @@ const itemComponents = {
   Wordmark,
 };
 
-const renderItemComponent = (props: ItemType, key: string, index: number) => {
+const renderItemComponent = (
+  props: RendererItemType,
+  key: string,
+  index: number,
+) => {
   let element = null;
-  // We have to duplicate all code inside each if block for flow type refinement to work.
-  // At this stage it's worth asking if we should typecast to any instead and opt-out of typechecking
+  // We need an explicit conditional against each type for flow type refinement to work
   if (props.type === 'BackItem') {
     const { type, ...compProps } = props;
     element = <BackItem key={key} {...compProps} index={index} />;
@@ -232,7 +235,6 @@ const renderItemComponent = (props: ItemType, key: string, index: number) => {
     const { type, ...compProps } = props;
     element = <Debug key={key} {...compProps} />;
   } else if (props.type === 'GoToItem') {
-    // const goToItemProps: GoToItemType = ((props: any): GoToItemType);
     const { type, ...compProps } = props;
     element = <GoToItem key={key} {...compProps} index={index} />;
   } else if (props.type === 'Item') {
@@ -268,13 +270,12 @@ const groupComponents = {
 };
 
 const renderGroupComponent = (
-  props: ItemType,
+  props: RendererItemType,
   key: string,
   customComponents: CustomComponents,
 ) => {
   let element = null;
-  // We have to duplicate all code inside each if block for flow type refinement to work.
-  // At this stage it's worth asking if we should typecast to any instead and opt-out of typechecking
+  // We need an explicit conditional against each type for flow type refinement to work
   if (props.type === 'Group') {
     const { type, ...compProps } = props;
     element = (

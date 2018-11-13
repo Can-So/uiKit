@@ -108,3 +108,26 @@ export type {
   WithGlobalThemeProps,
   GlobalThemeWrappedComp,
 } from './theme/types';
+
+export type {
+  RendererItemType,
+  BackItemType,
+  ContainerHeaderType,
+  DebugType,
+  GoToItemType,
+  GroupHeadingType,
+  ItemType,
+  SortableItemType,
+  SectionHeadingType,
+  SeparatorType,
+  SwitcherType,
+  WordmarkType,
+  GroupType,
+  HeaderSectionType,
+  MenuSectionType,
+  SectionType,
+  SortableContextType,
+  SortableGroupType,
+  CustomComponentType,
+  InlineComponentType,
+} from './renderer/types';

@@ -23,111 +23,8 @@ import SortableItem from '../components/connected/SortableItem';
 type WithoutChildren<P: {}> = $Diff<P, { children: * }>;
 
 /**
- * Components
+ * Component Props
  */
-
-export type ItemType =
-  | {
-      +type: 'BackItem',
-      ...$Exact<ElementConfig<typeof BackItem>>,
-      ...$Exact<SharedItemTypeProps>,
-    }
-  | {
-      +type: 'ContainerHeader',
-      ...$Exact<ElementConfig<typeof ContainerHeader>>,
-      ...$Exact<SharedItemTypeProps>,
-    }
-  | {
-      +type: 'Debug',
-      [string]: any,
-      ...$Exact<SharedItemTypeProps>,
-    }
-  | {
-      +type: 'GoToItem',
-      ...$Exact<ElementConfig<typeof GoToItem>>,
-      ...$Exact<SharedItemTypeProps>,
-    }
-  | {|
-      +type: 'GroupHeading',
-      ...$Exact<GroupHeadingProps>,
-      ...$Exact<SharedItemTypeProps>,
-    |}
-  | {
-      +type: 'Item',
-      ...$Exact<ElementConfig<typeof ConnectedItem>>,
-      ...$Exact<SharedItemTypeProps>,
-    }
-  | {
-      +type: 'SortableItem',
-      ...$Exact<ElementConfig<typeof SortableItem>>,
-      ...$Exact<SharedItemTypeProps>,
-    }
-  | {|
-      +type: 'SectionHeading',
-      ...$Exact<SectionHeadingProps>,
-      ...$Exact<SharedItemTypeProps>,
-    |}
-  | {|
-      +type: 'Separator',
-      ...$Exact<ElementConfig<typeof Separator>>,
-      ...$Exact<SharedItemTypeProps>,
-    |}
-  | {
-      +type: 'Switcher',
-      ...$Exact<ElementConfig<typeof Switcher>>,
-      ...$Exact<SharedItemTypeProps>,
-    }
-  | {|
-      +type: 'Wordmark',
-      ...$Exact<ElementConfig<typeof Wordmark>>,
-      ...$Exact<SharedItemTypeProps>,
-    |}
-  | {|
-      +type: 'Group',
-      ...$Exact<GroupProps>,
-    |}
-  | {|
-      +type: 'HeaderSection',
-      ...$Exact<HeaderSectionProps>,
-    |}
-  | {|
-      +type: 'MenuSection',
-      ...$Exact<MenuSectionProps>,
-    |}
-  | {|
-      +type: 'Section',
-      ...$Exact<SectionProps>,
-    |}
-  | {|
-      +type: 'SortableContext',
-      ...$Exact<SortableContextProps>,
-    |}
-  | {|
-      +type: 'SortableGroup',
-      ...$Exact<SortableGroupProps>,
-    |}
-  | {
-      +type: 'CustomComponent',
-      name: string,
-      ...$Exact<SharedItemTypeProps>,
-    }
-  | {
-      +type: 'InlineComponent',
-      component: ComponentType<*>,
-      ...$Exact<SharedItemTypeProps>,
-    };
-
-export type GroupHeadingProps = {|
-  ...$Exact<WithoutChildren<ElementConfig<typeof GroupHeading>>>,
-  text: string,
-|};
-
-export type SectionHeadingProps = {|
-  ...$Exact<WithoutChildren<ElementConfig<typeof SectionHeading>>>,
-  text: string,
-|};
-
-export type CustomComponents = { [string]: ComponentType<any> };
 
 type SharedItemTypeProps = {|
   id: string,
@@ -136,7 +33,7 @@ type SharedItemTypeProps = {|
 type SharedGroupTypeProps = {|
   ...$Exact<SharedItemTypeProps>,
   customComponents?: CustomComponents,
-  items: Array<ItemType>,
+  items: Array<RendererItemType>,
 |};
 
 type SectionKey = {|
@@ -176,7 +73,152 @@ export type MenuSectionProps = {|
   ...$Exact<SectionKey>,
 |};
 
+export type GroupHeadingProps = {|
+  ...$Exact<WithoutChildren<ElementConfig<typeof GroupHeading>>>,
+  text: string,
+|};
+
+export type SectionHeadingProps = {|
+  ...$Exact<WithoutChildren<ElementConfig<typeof SectionHeading>>>,
+  text: string,
+|};
+
+export type CustomComponents = { [string]: ComponentType<*> };
+
 export type ItemsRendererProps = {
   customComponents?: CustomComponents,
-  items: ItemType[],
+  items: RendererItemType[],
 };
+
+/**
+ * Component Types
+ */
+
+export type BackItemType = {
+  +type: 'BackItem',
+  ...$Exact<ElementConfig<typeof BackItem>>,
+  ...$Exact<SharedItemTypeProps>,
+};
+
+export type ContainerHeaderType = {
+  +type: 'ContainerHeader',
+  ...$Exact<ElementConfig<typeof ContainerHeader>>,
+  ...$Exact<SharedItemTypeProps>,
+};
+
+export type DebugType = {
+  +type: 'Debug',
+  [string]: any,
+  ...$Exact<SharedItemTypeProps>,
+};
+
+export type GoToItemType = {
+  +type: 'GoToItem',
+  ...$Exact<ElementConfig<typeof GoToItem>>,
+  ...$Exact<SharedItemTypeProps>,
+};
+
+export type GroupHeadingType = {|
+  +type: 'GroupHeading',
+  ...$Exact<GroupHeadingProps>,
+  ...$Exact<SharedItemTypeProps>,
+|};
+
+export type ItemType = {
+  +type: 'Item',
+  ...$Exact<ElementConfig<typeof ConnectedItem>>,
+  ...$Exact<SharedItemTypeProps>,
+};
+
+export type SortableItemType = {
+  +type: 'SortableItem',
+  ...$Exact<ElementConfig<typeof SortableItem>>,
+  ...$Exact<SharedItemTypeProps>,
+};
+
+export type SectionHeadingType = {|
+  +type: 'SectionHeading',
+  ...$Exact<SectionHeadingProps>,
+  ...$Exact<SharedItemTypeProps>,
+|};
+
+export type SeparatorType = {|
+  +type: 'Separator',
+  ...$Exact<ElementConfig<typeof Separator>>,
+  ...$Exact<SharedItemTypeProps>,
+|};
+
+export type SwitcherType = {
+  +type: 'Switcher',
+  ...$Exact<ElementConfig<typeof Switcher>>,
+  ...$Exact<SharedItemTypeProps>,
+};
+
+export type WordmarkType = {|
+  +type: 'Wordmark',
+  ...$Exact<ElementConfig<typeof Wordmark>>,
+  ...$Exact<SharedItemTypeProps>,
+|};
+
+export type GroupType = {|
+  +type: 'Group',
+  ...$Exact<GroupProps>,
+|};
+
+export type HeaderSectionType = {|
+  +type: 'HeaderSection',
+  ...$Exact<HeaderSectionProps>,
+|};
+
+export type MenuSectionType = {|
+  +type: 'MenuSection',
+  ...$Exact<MenuSectionProps>,
+|};
+
+export type SectionType = {|
+  +type: 'Section',
+  ...$Exact<SectionProps>,
+|};
+
+export type SortableContextType = {|
+  +type: 'SortableContext',
+  ...$Exact<SortableContextProps>,
+|};
+
+export type SortableGroupType = {|
+  +type: 'SortableGroup',
+  ...$Exact<SortableGroupProps>,
+|};
+
+export type CustomComponentType = {
+  +type: 'CustomComponent',
+  name: string,
+  ...$Exact<SharedItemTypeProps>,
+};
+
+export type InlineComponentType = {
+  +type: 'InlineComponent',
+  component: ComponentType<*>,
+  ...$Exact<SharedItemTypeProps>,
+};
+
+export type RendererItemType =
+  | BackItemType
+  | ContainerHeaderType
+  | DebugType
+  | GoToItemType
+  | GroupHeadingType
+  | ItemType
+  | SortableItemType
+  | SectionHeadingType
+  | SeparatorType
+  | SwitcherType
+  | WordmarkType
+  | GroupType
+  | HeaderSectionType
+  | MenuSectionType
+  | SectionType
+  | SortableContextType
+  | SortableGroupType
+  | CustomComponentType
+  | InlineComponentType;
