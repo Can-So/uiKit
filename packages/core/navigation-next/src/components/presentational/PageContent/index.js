@@ -11,7 +11,8 @@ import {
   GLOBAL_NAV_WIDTH,
 } from '../../../common/constants';
 
-type PageProps = CollapseListeners & {
+type PageProps = {
+  ...$Exact<CollapseListeners>,
   children: Node,
   flyoutIsOpen: boolean,
   innerRef: Ref<'div'>,
