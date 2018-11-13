@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.10
+- [patch] [ac02f46](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ac02f46):
+
+  - ED-5499 ToolbarFeedback now accepts metadata that appears in feedback ticket
+
 ## 88.1.9
 - [patch] [6cb44c4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6cb44c4):
 
