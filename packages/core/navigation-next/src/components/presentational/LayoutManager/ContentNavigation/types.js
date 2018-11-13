@@ -7,3 +7,7 @@ export type ContentNavigationProps = {
   isVisible: boolean,
   product: ComponentType<{}>,
 };
+
+export type ContentNavigationState = {
+  cachedContainer: ?ComponentType<{||}>,
+};

@@ -13,15 +13,11 @@ describe('GoToItemBase', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.resetModules();
-    const mockNavigationUIController = {
-      state: {},
-    };
     const mockNavigationViewController = {
       state: {},
       setView: jest.fn(),
     };
     baseProps = {
-      navigationUIController: mockNavigationUIController,
       navigationViewController: mockNavigationViewController,
     };
   });

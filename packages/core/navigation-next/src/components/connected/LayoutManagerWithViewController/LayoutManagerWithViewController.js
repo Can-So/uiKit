@@ -44,9 +44,9 @@ class LayoutManagerWithViewControllerBase extends Component<
       return;
     }
 
-    // If we're moving from a product to a container view we cache the previous
-    // view so that we can still render it during the transition.
-    if (view.type === 'container' && prevView.type === 'product') {
+    // If we're moving from a product to a container view or vice versa we cache
+    // the previous view so that we can still render it during the transition.
+    if (view.type !== prevView.type) {
       // It's totally fine to setState in componentDidUpdate as long as it's
       // wrapped in a condition:
       // https://reactjs.org/docs/react-component.html#componentdidupdate
@@ -85,9 +85,14 @@ class LayoutManagerWithViewControllerBase extends Component<
 
   renderContainerNavigation = () => {
     const { firstSkeletonToRender, view } = this.props;
+    const { outgoingView } = this.state;
 
     if (view && view.type === 'container') {
       return this.renderView(view);
+    }
+
+    if (outgoingView && outgoingView.type === 'container') {
+      return this.renderView(outgoingView);
     }
 
     if (
@@ -162,6 +167,12 @@ class LayoutManagerWithViewControllerBase extends Component<
       view,
     } = this.props;
 
+    const shouldRenderContainerLayer =
+      (view && view.type === 'container') ||
+      (!view &&
+        firstSkeletonToRender === 'container' &&
+        !this.state.hasInitialised);
+
     return (
       <NavigationAnalyticsContext
         data={{
@@ -175,12 +186,7 @@ class LayoutManagerWithViewControllerBase extends Component<
         <LayoutManager
           globalNavigation={this.renderGlobalNavigation}
           containerNavigation={
-            (view && view.type === 'container') ||
-            (!view &&
-              firstSkeletonToRender === 'container' &&
-              !this.state.hasInitialised)
-              ? this.renderContainerNavigation
-              : null
+            shouldRenderContainerLayer ? this.renderContainerNavigation : null
           }
           experimental_flyoutOnHover={experimental_flyoutOnHover}
           productNavigation={this.renderProductNavigation}

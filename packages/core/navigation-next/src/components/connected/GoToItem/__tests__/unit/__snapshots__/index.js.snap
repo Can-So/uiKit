@@ -21,11 +21,6 @@ exports[`GoToItemBase should render a ConnectedItem 1`] = `
 <ConnectedItem
   after={[Function]}
   id="another-view-item"
-  navigationUIController={
-    Object {
-      "state": Object {},
-    }
-  }
   onClick={[Function]}
   text="Another View"
 />
