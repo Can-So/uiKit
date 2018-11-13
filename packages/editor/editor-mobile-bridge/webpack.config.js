@@ -7,7 +7,32 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const emptyExportPath = `${path.resolve(__dirname)}/empty.ts`;
 
+const mode = process.env.NODE_ENV || 'development';
+
+const envPlugins = [];
+
+if (mode === 'production') {
+  envPlugins.push(
+    new UglifyJsPlugin({
+      test: /\.js($|\?)/i,
+      sourceMap: true,
+      uglifyOptions: {
+        mangle: {
+          keep_fnames: true,
+        },
+        compress: {
+          warnings: false,
+        },
+        output: {
+          beautify: false,
+        },
+      },
+    }),
+  );
+}
+
 module.exports = {
+  mode,
   entry: {
     editor: './src/editor/index.tsx',
     renderer: './src/renderer/index.tsx',
@@ -63,10 +88,9 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV':
-        process.env.NODE_ENV === 'production'
-          ? '"production"'
-          : '"development"',
+      'process.env.NODE_ENV': JSON.stringify(
+        mode === 'production' ? 'production' : 'development',
+      ),
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public/editor.html.ejs'),
@@ -78,20 +102,8 @@ module.exports = {
       excludeChunks: ['editor'],
       filename: 'renderer.html',
     }),
-    new UglifyJsPlugin({
-      test: /\.js($|\?)/i,
-      sourceMap: true,
-      uglifyOptions: {
-        mangle: {
-          keep_fnames: true,
-        },
-        compress: {
-          warnings: false,
-        },
-        output: {
-          beautify: false,
-        },
-      },
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
     }),
-  ],
+  ].concat(envPlugins),
 };
