@@ -2,7 +2,7 @@
 
 import type { Node } from 'react';
 
-export type GroupProps = {
+export type GroupProps = {|
   /** Elements to render inside this group. */
   children: Node,
   /** Whether to render a Separator after the group. */
@@ -11,4 +11,4 @@ export type GroupProps = {
   heading?: Node,
   /** A unique identifier for the group. Used for analytics. */
   id?: string,
-};
+|};
