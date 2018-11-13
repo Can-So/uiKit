@@ -1,5 +1,13 @@
 import { isBlank, isDigit, isNotBlank, StringBuffer } from '../../utils/text';
 
+/*
+ * This implementation is ported from JIRA with minimal modifications
+ * It uses a mutable "StringBuffer" to parse links. It would be ideal to
+ *  move this to operating on immutable strings instead if possible
+ *
+ * TODO: CS-596 Replace string buffer usage with strings
+ */
+
 function trimIfPossible(s: string | null): string | null {
   if (s === null) {
     return null;
