@@ -4,14 +4,17 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from './i18n';
 
-export const scrollToValue = (current: HTMLElement, parent: HTMLElement) => {
-  const { top, height } = current.getBoundingClientRect();
-  const { height: parentHeight } = parent.getBoundingClientRect();
+export const scrollToValue = (
+  valueContainer: HTMLElement,
+  control: HTMLElement,
+) => {
+  const { top, height } = valueContainer.getBoundingClientRect();
+  const { height: controlHeight } = control.getBoundingClientRect();
   if (top - height < 0) {
-    current.scrollIntoView();
+    valueContainer.scrollIntoView();
   }
-  if (top + height > parentHeight) {
-    current.scrollIntoView(false);
+  if (top + height > controlHeight) {
+    valueContainer.scrollIntoView(false);
   }
 };
 
