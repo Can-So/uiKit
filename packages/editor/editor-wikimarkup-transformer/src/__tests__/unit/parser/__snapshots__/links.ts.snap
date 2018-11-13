@@ -176,7 +176,7 @@ Object {
 }
 `;
 
-exports[`JIRA wiki markup - Links [CS-542] should not parse nested lists 1`] = `
+exports[`JIRA wiki markup - Links [CS-542] should not parse nested links 1`] = `
 Object {
   "content": Array [
     Object {

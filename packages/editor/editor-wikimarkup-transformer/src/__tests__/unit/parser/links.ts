@@ -69,7 +69,7 @@ describe('JIRA wiki markup - Links', () => {
       `[~link title~|http://example.com]`,
     ],
     [
-      '[CS-542] should not parse nested lists',
+      '[CS-542] should not parse nested links',
       '[test[test|http://example.com]',
     ],
   ];
