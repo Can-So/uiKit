@@ -1,8 +1,7 @@
 // @flow
 /* eslint-disable no-mixed-operators */
 import styled, { css } from 'styled-components';
-import { colors, elevation } from '@atlaskit/theme';
-import { thumb, track } from './theme';
+import { elevation } from '@atlaskit/theme';
 
 const sliderThumbSize = 16;
 const sliderThumbBorderThickness = 2;
@@ -11,7 +10,7 @@ const transitionDuration = '0.2s';
 export const overallHeight = 40;
 
 const sliderThumbStyle = css`
-  background: ${thumb.default.background};
+  background: ${({ thumb }) => thumb.default.background};
   border: ${sliderThumbBorderThickness}px solid transparent;
   border-radius: 50%;
   height: ${sliderThumbSize}px;
@@ -21,23 +20,23 @@ const sliderThumbStyle = css`
 `;
 
 const sliderThumbFocusedStyle = css`
-  border-color: ${colors.B200};
+  border-color: ${({ thumb }) => thumb.focus.border};
 `;
 
 const sliderThumbDisabledStyle = css`
   cursor: not-allowed;
-  box-shadow: 0 0 1px ${colors.N60A};
+  box-shadow: 0 0 1px ${({ thumb }) => thumb.disabled.boxShadow};
 `;
 
 const sliderDefaultBackground = css`
   background: ${props =>
-    `linear-gradient(${track.default.lower}, ${track.default.lower}) 0/ ${
-      props.valuePercent
-    }% 100% no-repeat ${track.default.upper}`};
+    `linear-gradient(${props.track.default.lower}, ${
+      props.track.default.lower
+    }) 0/ ${props.valuePercent}% 100% no-repeat ${props.track.default.upper}`};
 `;
 
 const sliderTrackStyle = css`
-  background: ${colors.N30A};
+  background: ${({ track }) => track.background};
   border-radius: ${sliderLineThickness / 2}px;
   border: 0;
   cursor: pointer;
@@ -48,17 +47,17 @@ const sliderTrackStyle = css`
 
 const sliderTrackDisabledStyle = css`
   background: ${props =>
-    `linear-gradient(${track.disabled.lower}, ${track.disabled.lower}) 0/ ${
-      props.valuePercent
-    }% 100% no-repeat ${track.disabled.upper}`};
+    `linear-gradient(${props.track.disabled.lower}, ${
+      props.track.disabled.lower
+    }) 0/ ${props.valuePercent}% 100% no-repeat ${props.track.disabled.upper}`};
   cursor: not-allowed;
 `;
 
 const sliderTrackFocusedStyle = css`
   background: ${props =>
-    `linear-gradient(${track.hover.lower}, ${track.hover.lower}) 0/ ${
-      props.valuePercent
-    }% 100% no-repeat ${track.hover.upper}`};
+    `linear-gradient(${props.track.hover.lower}, ${
+      props.track.hover.lower
+    }) 0/ ${props.valuePercent}% 100% no-repeat ${props.track.hover.upper}`};
 `;
 
 const chromeRangeInputStyle = css`
@@ -159,33 +158,33 @@ const IERangeInputStyle = css`
   }
 
   &::-ms-fill-lower {
-    background: ${track.default.lower};
+    background: ${({ track }) => track.default.lower};
     border-radius: ${sliderLineThickness / 2}px;
     border: 0;
   }
 
   &::-ms-fill-upper {
-    background: ${track.default.upper};
+    background: ${({ track }) => track.default.upper};
     border-radius: ${sliderLineThickness / 2}px;
     border: 0;
   }
 
   &:active::-ms-fill-lower,
   &:hover::-ms-fill-lower {
-    background: ${track.hover.lower};
+    background: ${({ track }) => track.hover.lower};
   }
 
   &:active::-ms-fill-upper,
   &:hover::-ms-fill-upper {
-    background: ${track.hover.upper};
+    background: ${({ track }) => track.hover.upper};
   }
 
   &:disabled::-ms-fill-lower {
-    background: ${track.disabled.lower};
+    background: ${({ track }) => track.disabled.lower};
   }
 
   &:disabled::-ms-fill-upper {
-    background: ${track.disabled.upper};
+    background: ${({ track }) => track.disabled.upper};
   }
 `;
 

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Theme } from '@atlaskit/theme';
 import { Input } from './styled';
+import { theme as baseTheme } from './theme';
 
 type Props = {
   /** if the field range needs to be disabled */
@@ -16,10 +17,11 @@ type Props = {
   step?: number,
   /** Value of the range */
   value?: number,
-  /** The default value  */
+  /** The default value */
   defaultValue: number,
-  /** Callback to receive a reference.  */
+  /** Callback to receive a reference. */
   inputRef?: (input: ?HTMLInputElement) => mixed,
+  theme: Object,
 };
 
 type State = {
@@ -42,6 +44,7 @@ export default class Slider extends Component<Props, State> {
     max: 100,
     step: 0.1,
     onChange: () => {},
+    theme: baseTheme,
   };
 
   state: State = {
@@ -81,23 +84,26 @@ export default class Slider extends Component<Props, State> {
   };
 
   render() {
-    const { isDisabled, defaultValue, ...rest } = this.props;
+    const { isDisabled, defaultValue, theme, ...rest } = this.props;
     const { min, max } = this.props;
     const value = this.getValue();
 
     return (
-      <Theme>
-        <Input
-          {...rest}
-          type="range"
-          // why is this doing toString?
-          value={value.toString()}
-          onChange={this.handleChange}
-          disabled={isDisabled}
-          valuePercent={getPercentValue(value, min, max)}
-          innerRef={r => (this.range = r)} // eslint-disable-line
-          orient="vertical"
-        />
+      <Theme values={theme}>
+        {({ range }) => (
+          <Input
+            {...rest}
+            {...range()}
+            type="range"
+            // why is this doing toString?
+            value={value.toString()}
+            onChange={this.handleChange}
+            disabled={isDisabled}
+            valuePercent={getPercentValue(value, min, max)}
+            innerRef={r => (this.range = r)} // eslint-disable-line
+            orient="vertical"
+          />
+        )}
       </Theme>
     );
   }

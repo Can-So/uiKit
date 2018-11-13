@@ -9,7 +9,6 @@ const Container = styled.div`
 
 type State = {
   onChangeResult: string,
-  rangeValue: number,
 };
 
 export default class BasicExample extends PureComponent<void, State> {
