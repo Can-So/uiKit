@@ -22,6 +22,7 @@
     "@atlaskit/icon": "^14.2.0",
     "@atlaskit/media-core": "^24.4.0",
     "@atlaskit/media-test-helpers": "^18.2.12",
+    "@atlaskit/smart-card": "^8.6.1",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "prosemirror-commands": "^1.0.7",
     "prosemirror-keymap": "^1.0.1",

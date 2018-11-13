@@ -1,65 +1,27 @@
-import { CardProvider } from '@atlaskit/editor-core';
+import { EditorCardProvider } from '@atlaskit/smart-card';
 
 type CardAppearance = 'inline' | 'block';
 
-export type ORSCheckResponse = {
-  isSupported: boolean;
-};
-
-const ORS_CHECK_URL =
-  'https://api-private.stg.atlassian.com/object-resolver/check';
-
-export class EditorCardProvider implements CardProvider {
-  async resolve(url: string, appearance: CardAppearance): Promise<any> {
-    try {
-      const result: ORSCheckResponse = await (await fetch(ORS_CHECK_URL, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({ resourceUrl: url }),
-      })).json();
-
-      if (result && result.isSupported) {
-        return {
-          type: appearance === 'inline' ? 'inlineCard' : 'blockCard',
-          attrs: {
-            url,
-          },
-        };
-      }
-    } catch (e) {
-      // tslint:disable-next-line:no-console
-      console.warn(
-        `Error when trying to check Smart Card url "${url} - ${
-          e.prototype.name
-        } ${e.message}`,
-        e,
-      );
-    }
-
-    return Promise.reject(undefined);
-  }
-}
-
-export class EditorExampleCardProvider implements CardProvider {
-  cardProvider = new EditorCardProvider();
-  jiraUrlMatch = /https?\:\/\/hello\.atlassian\.net\/browse\/|https?\:\/\/product\-fabric\.atlassian\.net\/browse\//i;
+export class EditorTestCardProvider extends EditorCardProvider {
+  testUrlMatch = new RegExp('^https?://([a-z_-]*.)?atlassian.com');
 
   async resolve(url: string, appearance: CardAppearance): Promise<any> {
-    if (url.match(this.jiraUrlMatch)) {
+    if (url.match(this.testUrlMatch)) {
       return {
-        type: 'inlineCard',
+        type: appearance === 'inline' ? 'inlineCard' : 'blockCard',
         attrs: {
-          url,
+          data: {
+            '@context': 'https://www.w3.org/ns/activitystreams',
+            '@type': 'Document',
+            name: 'Welcome to Atlassian!',
+            url: 'http://www.atlassian.com',
+          },
         },
       };
+    } else {
+      return super.resolve(url, appearance);
     }
-
-    return await this.cardProvider.resolve(url, appearance);
   }
 }
 
-export const cardProvider = new EditorExampleCardProvider();
+export const cardProvider = new EditorTestCardProvider();

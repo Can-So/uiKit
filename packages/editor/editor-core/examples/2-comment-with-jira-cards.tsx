@@ -6,25 +6,61 @@ import {
   Provider as SmartCardProvider,
   Client,
   ResolveResponse,
+  CardAppearance,
+  EditorCardProvider,
 } from '@atlaskit/smart-card';
-import Editor, { EditorProps } from './../src/editor';
+
+import Editor from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
-import {
-  cardProvider,
-  customInsertMenuItems,
-} from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
 
-const jiraClient = new class extends Client {
-  jiraUrlMatch = /https?\:\/\/hello\.atlassian\.net\/browse\/(?:[A-Za-z\-0-9]+)|https?\:\/\/product\-fabric\.atlassian\.net\/browse\/(?:[A-Za-z\-0-9]+)/i;
+const jiraUrlMatch = /https?\:\/\/[a-zA-Z0-9]+\.atlassian\.net\/browse\//i;
 
+/**
+ * This class is responsible for telling the editor which URLs
+ * can be converted to a card.
+ */
+export class JiraCardProvider extends EditorCardProvider {
+  /**
+   * This method must resolve to a valid ADF that will be used to
+   * replace a blue link after user pastes URL.
+   *
+   * @param url The pasted URL
+   * @param appearance Appearance requested by the Editor
+   */
+  async resolve(url: string, appearance: CardAppearance): Promise<any> {
+    // This example uses a regex .match() but we could use a backend call here
+    if (url.match(jiraUrlMatch)) {
+      return {
+        type: 'inlineCard', // we always want inline cards for Jira issues
+        attrs: {
+          url,
+        },
+      };
+    }
+
+    // If the URL doesn't look like something we should handle, try native provider.
+    return super.resolve(url, appearance);
+  }
+}
+
+/**
+ * A Client is responsible for resolving URL to JSON-LD with metadata
+ */
+export class JiraCardClient extends Client {
   fetchData(url: string): Promise<ResolveResponse> {
-    const match = url.match(this.jiraUrlMatch);
-    if (!match) {
+    if (!url.match(jiraUrlMatch)) {
+      // This doesn't look like Jira URL, so let's use native resolver
       return super.fetchData(url);
     }
 
-    return new Promise((resolve, reject) => {
+    // In this example, we will use mock response, but in real implementation
+    // we would probably use window.fetch() to resolve the url and then map
+    // it to JSON-LD format. To read more about the format, please visit:
+    //   https://product-fabric.atlassian.net/wiki/spaces/CS/pages/615126630/Task
+    //
+    return new Promise(resolve => {
+      // We simulate a 2s load time
       setTimeout(() => {
         resolve({
           meta: {
@@ -50,52 +86,41 @@ const jiraClient = new class extends Client {
       }, 2000);
     });
   }
-}();
-
-export class CommentEditorWithJiraCards extends React.Component<
-  {
-    editorProps?: EditorProps;
-    replacementDoc?: any;
-  },
-  {}
-> {
-  state = {};
-
-  render() {
-    return (
-      <EditorContext>
-        <div>
-          <SmartCardProvider client={jiraClient}>
-            <Editor
-              appearance="comment"
-              placeholder="What do you want to say?"
-              shouldFocus={true}
-              quickInsert={true}
-              allowCodeBlocks={true}
-              allowTextColor={true}
-              allowLists={true}
-              allowRule={true}
-              allowTables={true}
-              allowHelpDialog={true}
-              allowGapCursor={true}
-              allowExtension={true}
-              insertMenuItems={customInsertMenuItems}
-              extensionHandlers={extensionHandlers}
-              UNSAFE_cards={{
-                provider: Promise.resolve(cardProvider),
-              }}
-              {...this.props.editorProps}
-              defaultValue={exampleDocument}
-            />
-          </SmartCardProvider>
-        </div>
-      </EditorContext>
-    );
-  }
 }
 
-export default function CommentExample(...props: any) {
-  return <CommentEditorWithJiraCards {...props} />;
+const jiraClient = new JiraCardClient();
+const cardProvider = new JiraCardProvider();
+
+export default function CommentWithJiraCardsExample() {
+  return (
+    <EditorContext>
+      <div>
+        {/* We must wrap the <Editor> with a provider, passing jiraClient via prop */}
+        <SmartCardProvider client={jiraClient}>
+          <Editor
+            appearance="comment"
+            placeholder="What do you want to say?"
+            shouldFocus={true}
+            quickInsert={true}
+            allowCodeBlocks={true}
+            allowTextColor={true}
+            allowLists={true}
+            allowRule={true}
+            allowTables={true}
+            allowHelpDialog={true}
+            allowGapCursor={true}
+            allowExtension={true}
+            extensionHandlers={extensionHandlers}
+            UNSAFE_cards={{
+              // This is how we pass in the provider for smart cards
+              provider: Promise.resolve(cardProvider),
+            }}
+            defaultValue={exampleDocument}
+          />
+        </SmartCardProvider>
+      </div>
+    </EditorContext>
+  );
 }
 
 const exampleDocument = {
@@ -104,21 +129,17 @@ const exampleDocument = {
   content: [
     {
       type: 'paragraph',
-      content: [{ type: 'text', text: 'Example URLs:' }],
-    },
-    {
-      type: 'paragraph',
       content: [
-        { type: 'text', text: 'https://hello.atlassian.net/browse/PC-4820' },
+        {
+          type: 'text',
+          text: 'Try copying and pasting back the following URL:',
+        },
       ],
     },
     {
       type: 'paragraph',
       content: [
-        {
-          type: 'text',
-          text: 'https://product-fabric.atlassian.net/browse/MS-1105',
-        },
+        { type: 'text', text: 'https://hello.atlassian.net/browse/PC-4820' },
       ],
     },
   ],
