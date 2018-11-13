@@ -39,6 +39,12 @@ describe('UserPicker', () => {
     expect(select.prop('menuPlacement')).toBeTruthy();
   });
 
+  it('should disable picker if isDisabled is true', () => {
+    const component = shallowUserPicker({ isDisabled: true });
+    const select = component.find(Select);
+    expect(select.prop('isDisabled')).toEqual(true);
+  });
+
   it('should set width', () => {
     shallowUserPicker({ width: 500 });
 
@@ -114,6 +120,12 @@ describe('UserPicker', () => {
     const select = component.find(Select);
     select.simulate('clearIndicatorHover', true);
     expect(component.state()).toHaveProperty('hoveringClearIndicator', true);
+  });
+
+  it('should set isClearable to false if shouldDisableClearable is passed in', () => {
+    const component = shallowUserPicker({ shouldDisableClearable: true });
+    const select = component.find(Select);
+    expect(select.prop('isClearable')).toEqual(false);
   });
 
   it('should open menu onFocus', () => {

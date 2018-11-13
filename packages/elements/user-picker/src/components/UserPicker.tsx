@@ -44,6 +44,8 @@ export type Props = {
   defaultValue?: UserValue;
   value?: UserValue;
   placeholder?: string;
+  isDisabled?: boolean;
+  shouldDisableClearable?: boolean;
 };
 
 export type State = {
@@ -235,6 +237,8 @@ export class UserPicker extends React.PureComponent<Props, State> {
       appearance,
       subtle,
       placeholder,
+      shouldDisableClearable,
+      isDisabled,
     } = this.props;
     const {
       users: usersFromState,
@@ -273,12 +277,13 @@ export class UserPicker extends React.PureComponent<Props, State> {
         onClearIndicatorHover={this.handleClearIndicatorHover}
         hoveringClearIndicator={hoveringClearIndicator}
         appearance={isMulti ? 'compact' : appearance}
-        isClearable
+        isClearable={!shouldDisableClearable}
         subtle={isMulti ? false : subtle}
         blurInputOnSelect={!isMulti}
         closeMenuOnSelect={!isMulti}
         openMenuOnFocus
         onKeyDown={this.handleKeyDown}
+        isDisabled={isDisabled}
       />
     );
   }
