@@ -5,6 +5,7 @@ import Button from '@atlaskit/button';
 import {
   borderRadius,
   gridSize,
+  layers,
   math,
   Theme,
   typography,
@@ -68,11 +69,14 @@ const DefaultFooter = styled.div`
   padding-top: ${gridSize}px;
 `;
 
+// IE11 and Edge: z-index needed because fixed position calculates z-index relative
+// to body insteadof nearest stacking context (Portal in our case).
 const defaultTheme = (theme: CardTheme): CardTheme => ({
   container: () => ({
     overflow: 'auto',
     borderRadius: `${borderRadius()}px`,
     height: 'fit-content',
+    zIndex: `${layers.spotlight() + 1}`,
     ...(theme.container ? theme.container() : null),
   }),
 });
@@ -112,11 +116,18 @@ const Card = ({
                     {/* Always need an element so space-between alignment works */}
                     {actionsBeforeElement || <span />}
                     <ActionItems>
-                      {actions.map(({ text, ...rest }, idx) => (
-                        <ActionItem key={text || idx}>
-                          <Button {...rest}>{text}</Button>
-                        </ActionItem>
-                      ))}
+                      {actions.map(({ text, key, ...rest }, idx) => {
+                        return (
+                          <ActionItem
+                            key={
+                              key ||
+                              (typeof text === 'string' ? text : `${idx}`)
+                            }
+                          >
+                            <Button {...rest}>{text}</Button>
+                          </ActionItem>
+                        );
+                      })}
                     </ActionItems>
                   </Footer>
                 ) : null}

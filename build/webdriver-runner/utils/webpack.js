@@ -1,10 +1,10 @@
 //@flow
 'use strict';
 /*
-* util module to build webpack-dev-server for running integration test.
-* const CHANGED_PACKAGES accepts environment variable which is used to
-* identify changed packages and return changed packages containing webdriverTests to be built.
-*/
+ * util module to build webpack-dev-server for running integration test.
+ * const CHANGED_PACKAGES accepts environment variable which is used to
+ * identify changed packages and return changed packages containing webdriverTests to be built.
+ */
 
 // Start of the hack for the issue with the webpack watcher that leads to it dying in attempt of watching files
 // in node_modules folder which contains circular symbolic links

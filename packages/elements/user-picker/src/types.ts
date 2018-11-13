@@ -14,7 +14,8 @@ export interface User {
   name?: string;
   nickname: string;
   highlight?: Highlight;
-  lozenge?: string;
+  badge?: string;
+  fixed?: boolean;
 }
 
 export type UserValue = User | Array<User> | null | undefined;
@@ -29,6 +30,12 @@ export type ActionTypes =
   | 'create-option';
 
 export type OnChange = (value: UserValue, action: ActionTypes) => void;
+
+export type OnInputChange = (query?: string) => void;
+
+export type OnPicker = () => void;
+
+export type OnUser = (value: UserValue) => void;
 
 export type UserOption = {
   label: string;

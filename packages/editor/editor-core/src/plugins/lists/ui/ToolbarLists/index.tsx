@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
-import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
 import BulletListIcon from '@atlaskit/icon/glyph/editor/bullet-list';
 import NumberListIcon from '@atlaskit/icon/glyph/editor/number-list';
 import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
-import { analyticsDecorator as analytics } from '../../../../analytics';
+import { withAnalytics } from '../../../../analytics';
 import {
   toggleBulletList as toggleBulletListKeymap,
   toggleOrderedList as toggleOrderedListKeymap,
@@ -21,24 +21,7 @@ import {
   Shortcut,
 } from '../../../../ui/styles';
 import { toggleBulletList, toggleOrderedList } from '../../commands';
-
-export const messages = defineMessages({
-  unorderedList: {
-    id: 'fabric.editor.unorderedList',
-    defaultMessage: 'Bullet list',
-    description: 'A list with bullets. Also known as an “unordered” list',
-  },
-  orderedList: {
-    id: 'fabric.editor.orderedList',
-    defaultMessage: 'Numbered list',
-    description: 'A list with ordered items 1… 2… 3…',
-  },
-  lists: {
-    id: 'fabric.editor.lists',
-    defaultMessage: 'Lists',
-    description: 'Menu shows ordered/bullet list and unordered/numbered lists',
-  },
-});
+import { messages } from '../../messages';
 
 export interface Props {
   editorView: EditorView;
@@ -185,21 +168,25 @@ class ToolbarLists extends PureComponent<Props & InjectedIntlProps, State> {
     }
   }
 
-  @analytics('atlassian.editor.format.list.bullet.button')
-  private handleBulletListClick = () => {
-    if (!this.props.bulletListDisabled) {
-      return toggleBulletList(this.props.editorView);
-    }
-    return false;
-  };
+  private handleBulletListClick = withAnalytics(
+    'atlassian.editor.format.list.bullet.button',
+    () => {
+      if (!this.props.bulletListDisabled) {
+        return toggleBulletList(this.props.editorView);
+      }
+      return false;
+    },
+  );
 
-  @analytics('atlassian.editor.format.list.numbered.button')
-  private handleOrderedListClick = () => {
-    if (!this.props.orderedListDisabled) {
-      return toggleOrderedList(this.props.editorView);
-    }
-    return false;
-  };
+  private handleOrderedListClick = withAnalytics(
+    'atlassian.editor.format.list.numbered.button',
+    () => {
+      if (!this.props.orderedListDisabled) {
+        return toggleOrderedList(this.props.editorView);
+      }
+      return false;
+    },
+  );
 
   private onItemActivated = ({ item }) => {
     this.setState({ isDropdownOpen: false });

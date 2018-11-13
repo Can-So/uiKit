@@ -1,5 +1,17 @@
 # @atlaskit/icon
 
+## 14.2.1
+- [patch] [d15caa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d15caa6):
+
+  - adding editor image alignment icons
+
+## 14.2.0
+- [minor] [fe3c283"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe3c283"
+d):
+
+  - ED-5600: add icons for new table ux
+
 ## 14.1.0
 - [minor] Add drag-handler [b0a64d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b0a64d6)
 

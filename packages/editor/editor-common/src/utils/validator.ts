@@ -88,11 +88,8 @@ export const getValidDocument = (
 };
 
 const wrapInlineNodes = (nodes: ADNode[] = []): ADNode[] => {
-  return nodes.map(
-    node =>
-      inlineNodes.has(node.type)
-        ? { type: 'paragraph', content: [node] }
-        : node,
+  return nodes.map(node =>
+    inlineNodes.has(node.type) ? { type: 'paragraph', content: [node] } : node,
   );
 };
 
@@ -370,11 +367,13 @@ export const getValidNode = (
             type,
             attrs,
             content,
+            marks,
           };
         }
         return {
           type,
           content,
+          marks,
         };
       }
       case 'date': {
@@ -570,7 +569,7 @@ export const getValidNode = (
         break;
       }
       case 'heading': {
-        if (attrs && content) {
+        if (attrs) {
           const { level } = attrs;
           const between = (x, a, b) => x >= a && x <= b;
           if (level && between(level, 1, 6)) {
@@ -639,22 +638,23 @@ export const getValidNode = (
         break;
       }
       case 'layoutSection': {
-        if (attrs && content) {
-          const { layoutType } = attrs;
+        if (content) {
           return {
             type,
-            attrs: { layoutType },
             content,
           };
         }
         break;
       }
       case 'layoutColumn': {
-        if (content) {
-          return {
-            type,
-            content,
-          };
+        if (attrs && content) {
+          if (attrs.width > 0 && attrs.width <= 100) {
+            return {
+              type,
+              content,
+              attrs,
+            };
+          }
         }
         break;
       }

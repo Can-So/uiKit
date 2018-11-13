@@ -37,10 +37,12 @@ export default () => (
       {`<sub>`} and {`<sup>`}
     </h2>
     <p>
-      These elements<a href=".">
+      These elements
+      <a href=".">
         <sup>1</sup>
       </a>{' '}
-      should still<a href=".">
+      should still
+      <a href=".">
         <sub>2</sub>
       </a>{' '}
       have default styling<sup>3</sup> as well<sub>4</sub>

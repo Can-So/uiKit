@@ -17,7 +17,10 @@ import { transformSliceToRemoveOpenBodiedExtension } from '../../extension/actio
 import { transformSliceToRemoveOpenLayoutNodes } from '../../layout/utils';
 import { linkifyContent } from '../../hyperlink/utils';
 import { pluginKey as tableStateKey } from '../../table/pm-plugins/main';
-import { transformSliceToRemoveOpenTable } from '../../table/utils';
+import {
+  transformSliceToRemoveOpenTable,
+  transformSliceToRemoveNumberColumn,
+} from '../../table/utils';
 import { transformSliceToAddTableHeaders } from '../../table/actions';
 import {
   handlePasteIntoTaskAndDecision,
@@ -81,20 +84,22 @@ export function createPlugin(
         const html = event.clipboardData.getData('text/html');
 
         const { state, dispatch } = view;
-        const { codeBlock, media } = state.schema.nodes;
-
-        if (handlePasteIntoTaskAndDecision(slice)(state, dispatch)) {
-          return true;
-        }
+        const { codeBlock, media, decisionItem, taskItem } = state.schema.nodes;
 
         if (handlePasteAsPlainText(slice, event)(state, dispatch, view)) {
           return true;
         }
 
-        analyticsService.trackEvent('atlassian.editor.paste', {
-          source: getPasteSource(event),
-        });
-
+        // send analytics
+        if (hasParentNodeOfType([decisionItem, taskItem])(state.selection)) {
+          analyticsService.trackEvent(
+            'atlassian.fabric.action-decision.editor.paste',
+          );
+        } else {
+          analyticsService.trackEvent('atlassian.editor.paste', {
+            source: getPasteSource(event),
+          });
+        }
         let markdownSlice: Slice | undefined;
         if (text && !html) {
           const doc = atlassianMarkDownParser.parse(escapeLinks(text));
@@ -113,6 +118,10 @@ export function createPlugin(
           ) {
             return true;
           }
+        }
+
+        if (handlePasteIntoTaskAndDecision(slice)(state, dispatch)) {
+          return true;
         }
 
         // If we're in a code block, append the text contents of clipboard inside it
@@ -207,6 +216,9 @@ export function createPlugin(
         return false;
       },
       transformPasted(slice) {
+        // remove table number column if its part of the node
+        slice = transformSliceToRemoveNumberColumn(slice, schema);
+
         /** If a partial paste of table, paste only table's content */
         slice = transformSliceToRemoveOpenTable(slice, schema);
 

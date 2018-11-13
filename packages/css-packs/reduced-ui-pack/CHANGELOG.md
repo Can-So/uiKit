@@ -1,5 +1,17 @@
 # @atlaskit/reduced-ui-pack
 
+## 10.2.1
+- [patch] [d15caa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d15caa6):
+
+  - adding editor image alignment icons
+
+## 10.2.0
+- [minor] [fe3c283"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe3c283"
+d):
+
+  - ED-5600: add icons for new table ux
+
 ## 10.1.1
 - [patch] Consume smallFontSize from @atlaskit/theme [a6f8a43](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6f8a43)
 

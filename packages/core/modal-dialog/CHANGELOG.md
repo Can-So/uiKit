@@ -1,5 +1,32 @@
 # @atlaskit/modal-dialog
 
+## 7.0.9
+- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+
+  - Fixed issue where tooltips and modals would initially render in the wrong location
+
+## 7.0.8
+- Updated dependencies [3f5a4dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5a4dd):
+  - @atlaskit/portal@0.0.13
+
+## 7.0.7
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 7.0.6
+- [patch] [7cbd729](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7cbd729):
+
+  - Fixes visual bug where header and footer keylines appeared below textboxes and other components
+
+## 7.0.5
+- [patch] [72bc8da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72bc8da):
+
+  - Removes reference to window in initial state to properly support ssr
+- [patch] [b332c91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b332c91):
+
+  - upgrades verison of react-scrolllock to SSR safe version
+
 ## 7.0.4
 - [patch] Updated dependencies [aaab348](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aaab348)
   - @atlaskit/portal@0.0.12

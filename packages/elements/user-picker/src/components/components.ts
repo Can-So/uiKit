@@ -1,21 +1,37 @@
 import memoizeOne from 'memoize-one';
-import { UserMultiValueLabel } from './UserMultiValueLabel';
-import { UserMultiValueRemove } from './UserMultiValueRemove';
+import { components } from '@atlaskit/select';
+import { ClearIndicator } from './ClearIndicator';
+import { MultiValue } from './MultiValue';
+import { Option } from './Option';
+import { SingleValue } from './SingleValue';
+import { MultiValueContainer } from './MultiValueContainer';
+import { SingleValueContainer } from './SingleValueContainer';
+import { Input } from './Input';
 
 /**
  * Memoize getComponents to avoid rerenders.
  */
-export const getComponents = memoizeOne((anchor?: React.ComponentType<any>) => {
-  if (anchor) {
-    return {
-      MultiValueLabel: UserMultiValueLabel,
-      MultiValueRemove: UserMultiValueRemove,
-      Control: anchor,
-    };
-  } else {
-    return {
-      MultiValueLabel: UserMultiValueLabel,
-      MultiValueRemove: UserMultiValueRemove,
-    };
-  }
-});
+export const getComponents = memoizeOne(
+  (
+    multi?: boolean,
+    showPrompt?: boolean,
+    anchor?: React.ComponentType<any>,
+  ) => {
+    if (anchor) {
+      return {
+        Control: anchor,
+        Option,
+      };
+    } else {
+      return {
+        MultiValue,
+        DropdownIndicator: null,
+        SingleValue,
+        ClearIndicator: multi ? null : ClearIndicator,
+        Option,
+        ValueContainer: multi ? MultiValueContainer : SingleValueContainer,
+        Input: multi && showPrompt ? Input : components.Input,
+      };
+    }
+  },
+);

@@ -19,8 +19,7 @@
         }
       },
       "required": [
-        "type",
-        "content"
+        "type"
       ],
       "additionalProperties": false
     },
@@ -263,8 +262,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/inline_node"
-          },
-          "minItems": 0
+          }
         },
         "attrs": {
           "type": "object",
@@ -283,7 +281,6 @@
       },
       "required": [
         "type",
-        "content",
         "attrs"
       ],
       "additionalProperties": false
@@ -1010,7 +1007,6 @@
       },
       "required": [
         "type",
-        "content",
         "attrs"
       ],
       "additionalProperties": false
@@ -1086,7 +1082,6 @@
       },
       "required": [
         "type",
-        "content",
         "attrs"
       ],
       "additionalProperties": false
@@ -1310,6 +1305,65 @@
       ],
       "additionalProperties": false
     },
+    "layoutColumn_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "layoutColumn"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "width"
+          ],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/block_content"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "attrs",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "layoutSection_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "layoutSection"
+          ]
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/layoutColumn_node"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
     "blockCard_node": {
       "type": "object",
       "properties": {
@@ -1419,12 +1473,17 @@
             },
             "localId": {
               "type": "string"
+            },
+            "style": {
+              "enum": [
+                "bold",
+                "subtle"
+              ]
             }
           },
           "required": [
             "text",
-            "color",
-            "localId"
+            "color"
           ],
           "additionalProperties": false
         }
@@ -1649,6 +1708,36 @@
       ],
       "additionalProperties": false
     },
+    "breakout_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "breakout"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "enum": [
+                "wide",
+                "full-width"
+              ]
+            }
+          },
+          "required": [
+            "mode"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
     "codeBlock_node": {
       "type": "object",
       "properties": {
@@ -1676,6 +1765,9 @@
               }
             ]
           }
+        },
+        "marks": {
+          "type": "array"
         },
         "attrs": {
           "type": "object",
@@ -1761,63 +1853,96 @@
       ],
       "additionalProperties": false
     },
-    "top_level_node": {
-      "type": "array",
-      "items": {
-        "anyOf": [
-          {
-            "$ref": "#/definitions/paragraph_node"
+    "codeBlock_no_marks_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/codeBlock_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "maxItems": 0
+            }
           },
-          {
-            "$ref": "#/definitions/bulletList_node"
+          "additionalProperties": true
+        }
+      ]
+    },
+    "code_block_with_breakout_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/codeBlock_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/breakout_mark"
+              }
+            }
           },
-          {
-            "$ref": "#/definitions/mediaSingle_node"
-          },
-          {
-            "$ref": "#/definitions/orderedList_node"
-          },
-          {
-            "$ref": "#/definitions/heading_node"
-          },
-          {
-            "$ref": "#/definitions/panel_node"
-          },
-          {
-            "$ref": "#/definitions/blockquote_node"
-          },
-          {
-            "$ref": "#/definitions/rule_node"
-          },
-          {
-            "$ref": "#/definitions/mediaGroup_node"
-          },
-          {
-            "$ref": "#/definitions/table_node"
-          },
-          {
-            "$ref": "#/definitions/applicationCard_node"
-          },
-          {
-            "$ref": "#/definitions/decisionList_node"
-          },
-          {
-            "$ref": "#/definitions/taskList_node"
-          },
-          {
-            "$ref": "#/definitions/extension_node"
-          },
-          {
-            "$ref": "#/definitions/bodiedExtension_node"
-          },
-          {
-            "$ref": "#/definitions/blockCard_node"
-          },
-          {
-            "$ref": "#/definitions/codeBlock_node"
-          }
-        ]
-      }
+          "additionalProperties": true
+        }
+      ]
+    },
+    "block_content": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/paragraph_node"
+        },
+        {
+          "$ref": "#/definitions/bulletList_node"
+        },
+        {
+          "$ref": "#/definitions/mediaSingle_node"
+        },
+        {
+          "$ref": "#/definitions/orderedList_node"
+        },
+        {
+          "$ref": "#/definitions/heading_node"
+        },
+        {
+          "$ref": "#/definitions/panel_node"
+        },
+        {
+          "$ref": "#/definitions/blockquote_node"
+        },
+        {
+          "$ref": "#/definitions/rule_node"
+        },
+        {
+          "$ref": "#/definitions/mediaGroup_node"
+        },
+        {
+          "$ref": "#/definitions/table_node"
+        },
+        {
+          "$ref": "#/definitions/applicationCard_node"
+        },
+        {
+          "$ref": "#/definitions/decisionList_node"
+        },
+        {
+          "$ref": "#/definitions/taskList_node"
+        },
+        {
+          "$ref": "#/definitions/extension_node"
+        },
+        {
+          "$ref": "#/definitions/bodiedExtension_node"
+        },
+        {
+          "$ref": "#/definitions/blockCard_node"
+        },
+        {
+          "$ref": "#/definitions/codeBlock_no_marks_node"
+        }
+      ]
     },
     "table_cell_content": {
       "type": "array",
@@ -1866,7 +1991,7 @@
             "$ref": "#/definitions/blockCard_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_node"
+            "$ref": "#/definitions/codeBlock_no_marks_node"
           }
         ]
       },
@@ -1922,7 +2047,7 @@
             "$ref": "#/definitions/blockCard_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_node"
+            "$ref": "#/definitions/codeBlock_no_marks_node"
           }
         ]
       },
@@ -2046,7 +2171,68 @@
           ]
         },
         "content": {
-          "$ref": "#/definitions/top_level_node"
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/paragraph_node"
+              },
+              {
+                "$ref": "#/definitions/bulletList_node"
+              },
+              {
+                "$ref": "#/definitions/mediaSingle_node"
+              },
+              {
+                "$ref": "#/definitions/orderedList_node"
+              },
+              {
+                "$ref": "#/definitions/heading_node"
+              },
+              {
+                "$ref": "#/definitions/panel_node"
+              },
+              {
+                "$ref": "#/definitions/blockquote_node"
+              },
+              {
+                "$ref": "#/definitions/rule_node"
+              },
+              {
+                "$ref": "#/definitions/mediaGroup_node"
+              },
+              {
+                "$ref": "#/definitions/table_node"
+              },
+              {
+                "$ref": "#/definitions/applicationCard_node"
+              },
+              {
+                "$ref": "#/definitions/decisionList_node"
+              },
+              {
+                "$ref": "#/definitions/taskList_node"
+              },
+              {
+                "$ref": "#/definitions/extension_node"
+              },
+              {
+                "$ref": "#/definitions/bodiedExtension_node"
+              },
+              {
+                "$ref": "#/definitions/layoutSection_node"
+              },
+              {
+                "$ref": "#/definitions/blockCard_node"
+              },
+              {
+                "$ref": "#/definitions/codeBlock_no_marks_node"
+              },
+              {
+                "$ref": "#/definitions/code_block_with_breakout_node"
+              }
+            ]
+          }
         }
       },
       "required": [

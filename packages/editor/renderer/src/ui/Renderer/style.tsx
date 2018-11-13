@@ -23,11 +23,19 @@ import {
   akEditorTableBorder,
   akEditorTableNumberColumnWidth,
   TableSharedCssClassName,
+  tableMarginTop,
+  akEditorSmallZIndex,
 } from '@atlaskit/editor-common';
 import { RendererAppearance } from './';
 import { RendererCssClassName } from '../../consts';
 
 export const FullPagePadding = 32;
+const shadowWidth = 8;
+
+export const shadowClassNames = {
+  RIGHT_SHADOW: 'right-shadow',
+  LEFT_SHADOW: 'left-shadow',
+};
 
 export interface Props {
   appearance?: RendererAppearance;
@@ -56,7 +64,7 @@ const fullPageStyles = ({ theme, appearance }) => {
       theme && theme.layoutMaxWidth ? `${theme.layoutMaxWidth}px` : 'none'
     };
     margin: 0 auto;
-    padding: 0 ${FullPagePadding}px;
+    padding: 0 ${appearance === 'full-page' ? FullPagePadding : 0}px;
   `;
 };
 
@@ -231,10 +239,21 @@ export const Wrapper = styled.div<Props & HTMLAttributes<{}>>`
     }
   }
 
+    .${TableSharedCssClassName.TABLE_NODE_WRAPPER} {
+      overflow-x: auto;
+    }
+
   ${tableSharedStyle}
+
   .${TableSharedCssClassName.TABLE_CONTAINER} {
     transition: all 0.1s linear;
-    overflow-x: auto;
+
+    /** Shadow overrides */
+    &.${shadowClassNames.RIGHT_SHADOW}::after, &.${shadowClassNames.LEFT_SHADOW}::before {
+      top: ${tableMarginTop - 1}px;
+      height: calc(100% - ${tableMarginTop}px);
+    }
+
     table {
       ${tableStyles};
       margin-left: 0;
@@ -242,47 +261,13 @@ export const Wrapper = styled.div<Props & HTMLAttributes<{}>>`
     }
 
     table[data-number-column='true'] {
-      counter-reset: row-number;
-
-      /**
-       * Don't show the row increment on header rows.
-       */
-      tr:first-child {
-        th:first-child::before {
-          content: '';
-        }
-
-        /*
-        * Only increment the row number if its a standard cell.
-        * When we have a header row that should count as the 0th row.
-        */  
-        th:first-child {
-          counter-reset: row-number;
-        }
-      }
-
-      tr td:first-child,
-      tr th:first-child {
-        counter-increment: row-number;
-        position: relative;
-        font-weight: normal;
-        padding-left: ${akEditorTableNumberColumnWidth + 10}px;
-      }
-
-      tr td:first-child::before,
-      tr th:first-child::before {
-        content: counter(row-number);
-        display: table-cell;
-        box-sizing: border-box;
-        text-align: center;
+      .${RendererCssClassName.NUMBER_COLUMN} {
         background-color: ${akEditorTableToolbar};
         border-right: 1px solid ${akEditorTableBorder};
         width: ${akEditorTableNumberColumnWidth}px;
-        height: 100%;
-        padding: 10px 2px;
-        position: absolute;
-        top: 0;
-        left: 0;
+        text-align: center;
+        color: ${colors.N200};
+        font-size: ${fontSize()}px;
       }
     }
   }
@@ -301,6 +286,7 @@ export const Wrapper = styled.div<Props & HTMLAttributes<{}>>`
     /* stylelint-enable */
 
     grid-template-columns: minmax(0, 1fr);
+    position: relative;
 
     /*
      * The overall renderer has word-wrap: break; which causes issues with
@@ -332,5 +318,39 @@ export const Wrapper = styled.div<Props & HTMLAttributes<{}>>`
     & > div + div {
       margin-left: ${gridSize() * 4}px;
     }
+  }
+
+  & .${shadowClassNames.RIGHT_SHADOW}::before, .${shadowClassNames.RIGHT_SHADOW}::after,
+    .${shadowClassNames.LEFT_SHADOW}::before, .${shadowClassNames.LEFT_SHADOW}::after {
+      display: none;
+      position: absolute;
+      pointer-events: none;
+      z-index: ${akEditorSmallZIndex};
+      width: ${shadowWidth}px;
+      content: '';
+      /* Scrollbar is outside the content in IE, inset in other browsers. */
+      height: calc(100%);
+  }
+
+  & .${shadowClassNames.LEFT_SHADOW}::before {
+    background: linear-gradient(
+      to left,
+      rgba(99, 114, 130, 0) 0,
+      ${colors.N40A} 100%
+    );
+    top: 0px;
+    left: 0;
+    display: block;
+  }
+
+  & .${shadowClassNames.RIGHT_SHADOW}::after {
+    background: linear-gradient(
+      to right,
+      rgba(99, 114, 130, 0) 0,
+      ${colors.N40A} 100%
+    );
+    left: calc(100% - ${shadowWidth}px);
+    top: 0px;
+    display: block;
   }
 `;

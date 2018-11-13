@@ -1,46 +1,34 @@
 import { NodeSpec } from 'prosemirror-model';
+import { LayoutColumnDefinition } from './layout-column';
 
-export type LayoutSectionLayoutType =
-  | 'two_equal'
-  | 'two_right_sidebar'
-  | 'two_left_sidebar'
-  | 'three_equal'
-  | 'three_with_sidebars';
+/**
+ * @name layoutSection_node
+ * @stage 0
+ */
+export interface LayoutSectionDefinition {
+  type: 'layoutSection';
 
-const LAYOUT_TYPES: LayoutSectionLayoutType[] = [
-  'two_equal',
-  'two_right_sidebar',
-  'two_left_sidebar',
-  'three_equal',
-  'three_with_sidebars',
-];
+  /**
+   * @minItems 1
+   */
+  content: Array<LayoutColumnDefinition>;
+}
 
 export const layoutSection: NodeSpec = {
   content: 'layoutColumn{2,3}',
   isolating: true,
-  attrs: {
-    layoutType: { default: 'two_equal' as LayoutSectionLayoutType },
-  },
   parseDOM: [
     {
       context: 'layoutSection//|layoutColumn//',
-      tag: 'div[data-layout-type]',
+      tag: 'div[data-layout-section]',
       skip: true,
     },
     {
-      tag: 'div[data-layout-type]',
-      getAttrs(dom: HTMLElement): { layoutType: LayoutSectionLayoutType } {
-        const domLayoutType = (
-          dom.getAttribute('data-layout-type') || ''
-        ).toLowerCase();
-        const layoutType =
-          LAYOUT_TYPES.find(type => domLayoutType === type) || 'two_equal';
-        return { layoutType };
-      },
+      tag: 'div[data-layout-section]',
     },
   ],
-  toDOM(node) {
-    const attrs = { 'data-layout-type': node.attrs.layoutType };
+  toDOM() {
+    const attrs = { 'data-layout-section': 'true' };
     return ['div', attrs, 0];
   },
 };

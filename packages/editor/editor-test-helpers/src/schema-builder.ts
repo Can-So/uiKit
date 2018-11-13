@@ -8,6 +8,7 @@ import {
   LinkAttributes,
   TableAttributes,
   CardAttributes,
+  BreakoutMarkAttrs,
 } from '@atlaskit/editor-common';
 import {
   Fragment,
@@ -194,8 +195,8 @@ export function flatten<T>(deep: (T | T[])[]): T[] {
  * Coerce builder content into ref nodes.
  */
 export function coerce(content: BuilderContent[], schema: Schema) {
-  const refsContent = content.map(
-    item => (typeof item === 'string' ? text(item, schema) : item(schema)),
+  const refsContent = content.map(item =>
+    typeof item === 'string' ? text(item, schema) : item(schema),
   ) as (RefsContentItem | RefsContentItem[])[];
   return sequence(...flatten<RefsContentItem>(refsContent));
 }
@@ -391,10 +392,9 @@ export const applicationCard = (attrs: ApplicationCardAttributes) =>
   nodeFactory(sampleSchema.nodes.applicationCard, attrs);
 export const placeholder = (attrs: { text: string }) =>
   nodeFactory(sampleSchema.nodes.placeholder, attrs)();
-export const layoutSection = (
-  attrs: { layoutType: string } = { layoutType: 'two-equal' },
-) => nodeFactory(sampleSchema.nodes.layoutSection, attrs);
-export const layoutColumn = nodeFactory(sampleSchema.nodes.layoutColumn);
+export const layoutSection = nodeFactory(sampleSchema.nodes.layoutSection);
+export const layoutColumn = (attrs: { width: number }) =>
+  nodeFactory(sampleSchema.nodes.layoutColumn, attrs);
 export const inlineCard = (attrs: CardAttributes) =>
   nodeFactory(sampleSchema.nodes.inlineCard, attrs);
 export const blockCard = (attrs: CardAttributes) =>
@@ -403,6 +403,9 @@ export const blockCard = (attrs: CardAttributes) =>
 //
 // Marks
 //
+
+export const breakout = (attrs: BreakoutMarkAttrs) =>
+  markFactory(sampleSchema.marks.breakout, attrs);
 export const em = markFactory(sampleSchema.marks.em, {});
 export const subsup = (attrs: { type: string }) =>
   markFactory(sampleSchema.marks.subsup, attrs);

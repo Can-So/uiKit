@@ -20,6 +20,6 @@ export const Wrapper: React.ComponentClass<
   & > div::after {
     content: '';
     display: block;
-    padding-bottom: ${p => p.height / p.width * 100}%;
+    padding-bottom: ${p => (p.height / p.width) * 100}%;
   }
 `;

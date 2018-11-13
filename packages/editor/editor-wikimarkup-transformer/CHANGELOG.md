@@ -1,5 +1,77 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.3.4
+- [patch] [7b8efea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b8efea):
+
+  - Heading doesn't need a following space
+
+## 2.3.3
+- [patch] [5f2efe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f2efe0):
+
+  - Change triple dash symbol and update parser rules
+
+## 2.3.2
+- [patch] [904b74c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/904b74c):
+
+  - Fix the behaivor of \\ for line break
+
+## 2.3.1
+- [patch] [5b4474f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b4474f):
+
+  - Improve handling of 'rules' in lists and at end of content
+
+## 2.3.0
+- [minor] [640e01f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/640e01f):
+
+  - Ignore double dash symbol when sticked with alphanumerical, unicode without space, or parenthesis
+
+## 2.2.0
+- [minor] [fd35bec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fd35bec):
+
+  - Refactor tokenizer to accpt the whole input and its position
+
+## 2.1.27
+- [patch] [fd0ed3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fd0ed3a):
+
+  - Changed parser to only start a list if it is led with a single dash
+
+## 2.1.26
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/renderer@30.0.0
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/util-data-test@10.0.20
+
+## 2.1.25
+- [patch] [b64fc55](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b64fc55):
+
+  - Adds roundtrip for external image
+
+## 2.1.24
+- Updated dependencies [a6dd6e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6dd6e3):
+  - @atlaskit/editor-common@20.3.1
+  - @atlaskit/renderer@29.3.1
+  - @atlaskit/profilecard@5.0.0
+
+## 2.1.23
+- [patch] [7ca5551](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ca5551):
+
+  - allow list to jump over empty lines in macro successfully
+
+## 2.1.22
+- [patch] [674b3d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/674b3d9):
+
+  - convert unknow macros to plain text
+
+## 2.1.21
+- [patch] [c6763e2"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c6763e2"
+d):
+
+  - new pattern for mention
+
 ## 2.1.20
 - [patch] Make common-formatter more generic for citation and monospace [c727890](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c727890)
 

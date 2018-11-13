@@ -116,9 +116,8 @@ export default class ResizeState {
           oldNextCol.minWidth,
         );
         state = new ResizeState(
-          state.cols.map(
-            (col, idx) =>
-              idx === colIdx ? newCol : idx === colIdx + 1 ? nextCol : col,
+          state.cols.map((col, idx) =>
+            idx === colIdx ? newCol : idx === colIdx + 1 ? nextCol : col,
           ),
           state.maxSize,
         );
@@ -161,8 +160,8 @@ export default class ResizeState {
           ? -amount
           : amount
         : amount > 0
-          ? amount
-          : -amount;
+        ? amount
+        : -amount;
     const widthFor = what =>
       (what === 'src' ? srcCol : destCol).width + amountFor(what);
 
@@ -197,9 +196,8 @@ export default class ResizeState {
     );
 
     const newCols = Array.from(state.cols)
-      .map(
-        (existingCol, idx) =>
-          idx === srcIdx ? newSrc : idx === destIdx ? newDest : existingCol,
+      .map((existingCol, idx) =>
+        idx === srcIdx ? newSrc : idx === destIdx ? newDest : existingCol,
       )
       .filter(Boolean) as Column[];
 
@@ -272,9 +270,8 @@ export default class ResizeState {
           candidate.col.wrapWidth,
           candidate.col.minWidth,
         );
-        const newCols = Array.from(state.cols).map(
-          (existingCol, idx) =>
-            idx === candidate.idx ? newCandidate : existingCol,
+        const newCols = Array.from(state.cols).map((existingCol, idx) =>
+          idx === candidate.idx ? newCandidate : existingCol,
         );
         state = new ResizeState(newCols, state.maxSize);
 

@@ -146,6 +146,21 @@ export class ListBuilder {
     let contentBuffer: PMNode[] = [];
     for (let i = 0; i < item.content.length; i++) {
       const pmNode = item.content[i];
+
+      /**
+       * Skip empty paragraph
+       */
+      if (pmNode.type.name === 'paragraph' && pmNode.childCount === 0) {
+        continue;
+      }
+
+      if (
+        pmNode.type.name === 'paragraph' &&
+        pmNode.textContent.trim() === ''
+      ) {
+        continue;
+      }
+
       if (supportedContentType.indexOf(pmNode.type.name) === -1) {
         const listItem = this.createListItem(contentBuffer, this.schema);
         output.push(listItem);

@@ -84,25 +84,43 @@
     "url": "https://docs.google.com/spreadsheets/d/1pHwRAZWA7_aGtlAwOjAOrHGoT5gT0oKS635HTI6gI8I/edit?usp=drive_web&ouid=110769160460483925018"
   },
   {
+    "provider": "Google Drive",
+    "visibility" : "protected",
+    "type": "Presentation Document",
+    "url": "https://docs.google.com/presentation/d/1KmsZMNg6cKLf_QdCT0Z-_k5wBF0nxvIm75HWd43_5XY/edit?usp=sharing"
+  },
+  {
+    "provider": "Google Drive",
+    "visibility" : "public",
+    "type": "Document (MP4)",
+    "url": "https://drive.google.com/file/d/1edI96v1yq7GSXsPavrXKNpzClh-3Tt7x/view"
+  },
+  {
+    "provider": "Google Drive",
+    "visibility" : "public",
+    "type": "Document (PDF)",
+    "url": "https://drive.google.com/open?id=1oPQqqMWo0iJK_SlYIk8MNfFeYqtXZOlh"
+  },
+  {
     "provider": "Invision",
     "visibility": "public",
     "type": "Presentation Document",
     "url": "https://atlassian.invisionapp.com/share/9YOKIUV2JCK",
-    "description": "Shared project from a Team account"
+    "description": "Shared Invision project from a Team account"
   },
   {
     "provider": "Invision",
     "visibility": "public",
     "type": "Presentation Document",
     "url": "https://invis.io/P8OKINLRQEH",
-    "description": "Shared project from a personal account"
+    "description": "Shared Invision project from a personal account"
   },
   {
     "provider": "Invision",
     "visibility": "public",
     "type": "Presentation Document",
     "url": "https://invis.io/P8OKINLRQEH#/325487955_Game",
-    "description": "Shared screen in a project from a personal account"
+    "description": "Shared Invision screen in a project from a personal account"
   },
   {
     "provider": "Trello (Public)",

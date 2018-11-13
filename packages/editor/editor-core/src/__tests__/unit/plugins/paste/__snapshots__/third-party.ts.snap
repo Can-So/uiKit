@@ -1,5 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`plugin: third-party should convert multiple lines to a code-block when pasting content from Visual Studio Code 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "attrs": Object {},
+      "content": Array [
+        Object {
+          "text": "import { EditorPlugin } from '../../types';
+import { createPlugin } from './pm-plugins/main';
+",
+          "type": "text",
+        },
+      ],
+      "type": "codeBlock",
+    },
+    Object {
+      "type": "paragraph",
+    },
+  ],
+  "type": "doc",
+  "version": 1,
+}
+`;
+
+exports[`plugin: third-party should convert single line to a code mark when pasting content from Visual Studio Code 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "marks": Array [
+            Object {
+              "type": "code",
+            },
+          ],
+          "text": "dispatchPasteEvent",
+          "type": "text",
+        },
+      ],
+      "type": "paragraph",
+    },
+  ],
+  "type": "doc",
+  "version": 1,
+}
+`;
+
 exports[`plugin: third-party should handle pasting content from Apple Pages 1`] = `
 Object {
   "content": Array [
@@ -2028,6 +2075,46 @@ Object {
       "type": "paragraph",
     },
     Object {
+      "type": "paragraph",
+    },
+  ],
+  "type": "doc",
+  "version": 1,
+}
+`;
+
+exports[`plugin: third-party should handle pasting content using react-syntax-highlighter 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "text": "Intro to JavaScript:",
+          "type": "text",
+        },
+      ],
+      "type": "paragraph",
+    },
+    Object {
+      "attrs": Object {},
+      "content": Array [
+        Object {
+          "text": "const x = 10;
+const add = x => y => x + y;
+const addTwo = add(2);
+console.log(addTow(x));",
+          "type": "text",
+        },
+      ],
+      "type": "codeBlock",
+    },
+    Object {
+      "content": Array [
+        Object {
+          "text": "🤷🏽‍♂️",
+          "type": "text",
+        },
+      ],
       "type": "paragraph",
     },
   ],

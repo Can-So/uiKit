@@ -1,4 +1,4 @@
-export type Command = { type: 'init' } | { type: 'reload'; provider: string };
+export type GetNowTimeFn = () => number;
 
 export type ObjectStatus =
   | 'resolving'
@@ -20,3 +20,5 @@ export interface ObjectState {
   services: AuthService[];
   data?: { [name: string]: any };
 }
+
+export type CardUpdateCallback<T> = (state: [T | null, boolean]) => void;

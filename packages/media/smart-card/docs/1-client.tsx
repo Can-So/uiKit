@@ -41,6 +41,17 @@ export default md`
   ...
   ~~~
 
+  ## Customizing Client
+
+  1. You can set the timeout for cache. Meaning that when resolving happens, the resolved data will be good for ~date.now + lifespan~ time.
+
+  2. Also, you can pass a custom function that will return "current time".
+
+  ~~~
+  // 60 seconds for data and mocked time
+  new Client(60*1000, () => mockedDate.now());
+  ~~~
+
   ## ResolveResponse type
 
   ~~~

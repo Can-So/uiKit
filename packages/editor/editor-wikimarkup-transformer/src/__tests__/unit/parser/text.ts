@@ -14,9 +14,8 @@ describe('JIRA wiki markup - Text', () => {
       "should treat \\ as a charater if it's not applied with any keyword",
       '\\foobar',
     ],
+    ['should respect \\\\ as a line break', 'foo \\\\ bar'],
     ['should respect \\ as a line break', 'foo \\\\ bar'],
-    ['should replace double dash with a special unicode symbol', 'foo -- bar'],
-    ['should replace triple dash with a special unicode symbol', 'foo --- bar'],
     [
       'should replace four dashes with a ruler + ignore four dashes in a line of text',
       `This is a text with ---- in it

@@ -256,6 +256,62 @@ Object {
 }
 `;
 
+exports[`JIRA wiki markup - Lists should continue list if rule is followed by text on next line 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "content": Array [
+                Object {
+                  "text": "a",
+                  "type": "text",
+                },
+              ],
+              "type": "paragraph",
+            },
+          ],
+          "type": "listItem",
+        },
+      ],
+      "type": "bulletList",
+    },
+    Object {
+      "type": "rule",
+    },
+    Object {
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "content": Array [
+                Object {
+                  "text": " ",
+                  "type": "text",
+                },
+                Object {
+                  "type": "hardBreak",
+                },
+                Object {
+                  "text": "abc",
+                  "type": "text",
+                },
+              ],
+              "type": "paragraph",
+            },
+          ],
+          "type": "listItem",
+        },
+      ],
+      "type": "bulletList",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
 exports[`JIRA wiki markup - Lists should convert blockquotes into paragraphs 1`] = `
 Object {
   "content": Array [
@@ -323,13 +379,180 @@ Object {
         Object {
           "content": Array [
             Object {
+              "type": "paragraph",
+            },
+          ],
+          "type": "listItem",
+        },
+      ],
+      "type": "bulletList",
+    },
+    Object {
+      "type": "rule",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`JIRA wiki markup - Lists should correctly insert a ruler if it occurs within a list 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
               "content": Array [
                 Object {
-                  "text": "----",
+                  "text": "a",
                   "type": "text",
                 },
               ],
               "type": "paragraph",
+            },
+          ],
+          "type": "listItem",
+        },
+      ],
+      "type": "bulletList",
+    },
+    Object {
+      "type": "rule",
+    },
+    Object {
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "content": Array [
+                Object {
+                  "text": "b",
+                  "type": "text",
+                },
+              ],
+              "type": "paragraph",
+            },
+            Object {
+              "content": Array [
+                Object {
+                  "content": Array [
+                    Object {
+                      "content": Array [
+                        Object {
+                          "text": "c",
+                          "type": "text",
+                        },
+                      ],
+                      "type": "paragraph",
+                    },
+                    Object {
+                      "content": Array [
+                        Object {
+                          "content": Array [
+                            Object {
+                              "content": Array [
+                                Object {
+                                  "text": "d",
+                                  "type": "text",
+                                },
+                              ],
+                              "type": "paragraph",
+                            },
+                          ],
+                          "type": "listItem",
+                        },
+                      ],
+                      "type": "bulletList",
+                    },
+                  ],
+                  "type": "listItem",
+                },
+              ],
+              "type": "bulletList",
+            },
+          ],
+          "type": "listItem",
+        },
+      ],
+      "type": "bulletList",
+    },
+    Object {
+      "type": "rule",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`JIRA wiki markup - Lists should create a list if started with multiple hash symbols 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "type": "paragraph",
+            },
+            Object {
+              "content": Array [
+                Object {
+                  "content": Array [
+                    Object {
+                      "content": Array [
+                        Object {
+                          "text": "a",
+                          "type": "text",
+                        },
+                      ],
+                      "type": "paragraph",
+                    },
+                  ],
+                  "type": "listItem",
+                },
+              ],
+              "type": "orderedList",
+            },
+          ],
+          "type": "listItem",
+        },
+      ],
+      "type": "orderedList",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`JIRA wiki markup - Lists should create a list if started with multiple star symbols 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "type": "paragraph",
+            },
+            Object {
+              "content": Array [
+                Object {
+                  "content": Array [
+                    Object {
+                      "content": Array [
+                        Object {
+                          "text": "a",
+                          "type": "text",
+                        },
+                      ],
+                      "type": "paragraph",
+                    },
+                  ],
+                  "type": "listItem",
+                },
+              ],
+              "type": "bulletList",
             },
           ],
           "type": "listItem",
@@ -838,6 +1061,181 @@ Object {
 }
 `;
 
+exports[`JIRA wiki markup - Lists should handle lists with quad dash symbols 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "content": Array [
+                Object {
+                  "text": "a",
+                  "type": "text",
+                },
+              ],
+              "type": "paragraph",
+            },
+            Object {
+              "content": Array [
+                Object {
+                  "content": Array [
+                    Object {
+                      "type": "paragraph",
+                    },
+                    Object {
+                      "content": Array [
+                        Object {
+                          "content": Array [
+                            Object {
+                              "type": "paragraph",
+                            },
+                            Object {
+                              "content": Array [
+                                Object {
+                                  "content": Array [
+                                    Object {
+                                      "content": Array [
+                                        Object {
+                                          "text": "b",
+                                          "type": "text",
+                                        },
+                                      ],
+                                      "type": "paragraph",
+                                    },
+                                  ],
+                                  "type": "listItem",
+                                },
+                              ],
+                              "type": "bulletList",
+                            },
+                          ],
+                          "type": "listItem",
+                        },
+                      ],
+                      "type": "bulletList",
+                    },
+                  ],
+                  "type": "listItem",
+                },
+                Object {
+                  "content": Array [
+                    Object {
+                      "content": Array [
+                        Object {
+                          "text": "c",
+                          "type": "text",
+                        },
+                      ],
+                      "type": "paragraph",
+                    },
+                  ],
+                  "type": "listItem",
+                },
+              ],
+              "type": "bulletList",
+            },
+          ],
+          "type": "listItem",
+        },
+      ],
+      "type": "bulletList",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`JIRA wiki markup - Lists should insert a if it is followed by an empty line 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "content": Array [
+                Object {
+                  "text": "a",
+                  "type": "text",
+                },
+              ],
+              "type": "paragraph",
+            },
+          ],
+          "type": "listItem",
+        },
+      ],
+      "type": "bulletList",
+    },
+    Object {
+      "type": "rule",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`JIRA wiki markup - Lists should jump over empty lines in macro successfully 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "content": Array [
+                Object {
+                  "text": "list with macro",
+                  "type": "text",
+                },
+              ],
+              "type": "paragraph",
+            },
+          ],
+          "type": "listItem",
+        },
+      ],
+      "type": "bulletList",
+    },
+    Object {
+      "attrs": Object {
+        "language": "java",
+        "uniqueId": null,
+      },
+      "content": Array [
+        Object {
+          "text": "sadfsadf",
+          "type": "text",
+        },
+      ],
+      "type": "codeBlock",
+    },
+    Object {
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "content": Array [
+                Object {
+                  "text": "list 2",
+                  "type": "text",
+                },
+              ],
+              "type": "paragraph",
+            },
+          ],
+          "type": "listItem",
+        },
+      ],
+      "type": "bulletList",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
 exports[`JIRA wiki markup - Lists should not be a list item if it follows by a line break 1`] = `
 Object {
   "content": Array [
@@ -873,6 +1271,23 @@ Object {
         },
       ],
       "type": "bulletList",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`JIRA wiki markup - Lists should not create a list if started with multiple dashes 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "text": "----- a",
+          "type": "text",
+        },
+      ],
+      "type": "paragraph",
     },
   ],
   "type": "doc",

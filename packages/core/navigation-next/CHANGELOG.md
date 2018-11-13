@@ -1,5 +1,37 @@
 # @atlaskit/navigation-next
 
+## 3.22.1
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 3.22.0
+- [minor] [b8bda3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8bda3a):
+
+  - Make Switcher option components styles customizable
+
+## 3.21.0
+- [minor] [9d98f92](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d98f92):
+
+  - Add SortableContext, SortableGroup and SortableItem components to enable drag and drop of items within a view.
+
+## 3.20.1
+- [patch] [c2a6561](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2a6561):
+
+  - Fixing section animation on first-page load
+
+## 3.20.0
+- [minor] [3f17176](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f17176):
+
+  - Make GoToItem display arrow icon on focus event
+
+## 3.19.1
+- [patch] [f3d0351"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f3d0351"
+d):
+
+  - Removing animations on first page load
+
 ## 3.19.0
 - [minor] Export the following view renderer components as standalone UI components: BackItem, ConnectedItem, GoToItem, HeaderSection, MenuSection, Wordmark [459c2dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/459c2dd)
 

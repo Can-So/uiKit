@@ -4,11 +4,11 @@ const Selenium = require('selenium-standalone');
 const util = require('util');
 
 /*
-* util module to support 
-*   a. install chrome-driver / gecko-driver on local selenium-standlone setup
-*   b. start and stop selenium server
-* more about selenium : https://www.seleniumhq.org/docs/
-*/
+ * util module to support
+ *   a. install chrome-driver / gecko-driver on local selenium-standlone setup
+ *   b. start and stop selenium server
+ * more about selenium : https://www.seleniumhq.org/docs/
+ */
 
 const install = util.promisify(Selenium.install);
 const start = util.promisify(Selenium.start);

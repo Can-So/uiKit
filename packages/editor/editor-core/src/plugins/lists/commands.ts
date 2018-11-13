@@ -255,31 +255,31 @@ export function outdentList(): Command {
         baseListCommand.liftListItem(listItem)(state, liftTr => (tr = liftTr))
       ) {
         /* we now need to handle the case that we lifted a sublist out,
-          * and any listItems at the current level get shifted out to
-          * their own new list; e.g.:
-          *
-          * unorderedList
-          *  listItem(A)
-          *  listItem
-          *    unorderedList
-          *      listItem(B)
-          *  listItem(C)
-          *
-          * becomes, after unindenting the first, top level listItem, A:
-          *
-          * content of A
-          * unorderedList
-          *  listItem(B)
-          * unorderedList
-          *  listItem(C)
-          *
-          * so, we try to merge these two lists if they're of the same type, to give:
-          *
-          * content of A
-          * unorderedList
-          *  listItem(B)
-          *  listItem(C)
-          */
+         * and any listItems at the current level get shifted out to
+         * their own new list; e.g.:
+         *
+         * unorderedList
+         *  listItem(A)
+         *  listItem
+         *    unorderedList
+         *      listItem(B)
+         *  listItem(C)
+         *
+         * becomes, after unindenting the first, top level listItem, A:
+         *
+         * content of A
+         * unorderedList
+         *  listItem(B)
+         * unorderedList
+         *  listItem(C)
+         *
+         * so, we try to merge these two lists if they're of the same type, to give:
+         *
+         * content of A
+         * unorderedList
+         *  listItem(B)
+         *  listItem(C)
+         */
 
         const $start: ResolvedPos = state.doc.resolve(range.start);
         const $end: ResolvedPos = state.doc.resolve(range.end);
@@ -312,7 +312,8 @@ export function indentList(): Command {
     const { listItem } = state.schema.nodes;
     const { $from } = state.selection;
     if ($from.node(-1).type === listItem) {
-      return baseListCommand.sinkListItem(listItem)(state, dispatch);
+      baseListCommand.sinkListItem(listItem)(state, dispatch);
+      return true;
     }
     return false;
   };

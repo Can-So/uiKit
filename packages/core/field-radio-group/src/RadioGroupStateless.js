@@ -12,19 +12,13 @@ import {
   version as packageVersion,
 } from '../package.json';
 import Radio from './Radio';
-import type { RadioGroupStatelessPropTypes, ItemsPropType } from './types';
-
-type DefaultPropsTypes = {
-  isRequired: boolean,
-  items: ItemsPropType,
-  label: string,
-};
+import type { RadioGroupStatelessPropTypes } from './types';
 
 class FieldRadioGroupStateless extends Component<
   RadioGroupStatelessPropTypes,
   void,
 > {
-  static defaultProps: DefaultPropsTypes = {
+  static defaultProps = {
     isRequired: false,
     items: [],
     label: '',
@@ -53,13 +47,12 @@ class FieldRadioGroupStateless extends Component<
   render() {
     return (
       <div>
-        {/* $FlowFixMe TEMPORARY */}
-        <Label label={this.props.label} isRequired={this.props.isRequired} />
-        <Base
-          appearance="none"
+        <Label
+          // FIXME: Once label is properly typed as required we can remove this
+          label={this.props.label || ''}
           isRequired={this.props.isRequired}
-          label={this.props.label}
-        >
+        />
+        <Base appearance="none" isRequired={this.props.isRequired}>
           <div aria-label={this.props.label} role="group">
             {this.renderItems()}
           </div>

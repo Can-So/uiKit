@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
-import { Transition } from 'react-transition-group';
+import Transition from 'react-transition-group/Transition';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
 import { transitionDurationMs } from '../../../../common/constants';
@@ -12,9 +12,13 @@ import {
 } from './primitives';
 import type { ContentNavigationProps } from './types';
 
-export default class ContentNavigation extends Component<
-  ContentNavigationProps,
-> {
+export default class ContentNavigation extends Component<ContentNavigationProps> {
+  isMounted = false;
+
+  componentDidMount() {
+    this.isMounted = true;
+  }
+
   render() {
     const {
       container: Container,
@@ -37,7 +41,7 @@ export default class ContentNavigation extends Component<
         </ProductNavigation>
         <Transition
           in={!!Container}
-          timeout={transitionDurationMs}
+          timeout={this.isMounted ? transitionDurationMs : 0}
           mountOnEnter
           unmountOnExit
         >

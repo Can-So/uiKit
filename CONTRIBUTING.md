@@ -37,8 +37,8 @@ Include details about your configuration and environment:
 4. At Atlassian, "Play, As A Team" is one of our values. We encourage cross team contributions and collaborations.
 
 Please raise a new issue:
-- For Atlassians staff, please use this [internal link][atlassianbug].
-- For External contributors, please use this [link][issuetracker].
+* For Atlassians staff, please use this [internal link][atlassianbug].
+* For External contributors, please use this [link][issuetracker].
 
 # Contributing
 
@@ -50,8 +50,7 @@ little while. So bear with us for a little while as we work out all the
 problems.
 
 Don't worry though, we're making it easier than ever to work on Atlaskit from
-end to end. If you have any questions/problems, feel free to contact James Kyle
-or Luke Batchelor.
+end to end. If you have any questions/problems, feel free to contact Luke Batchelor.
 
 A more in-depth view of how we want to work with other teams and open source
 contributions can be found on the
@@ -122,7 +121,7 @@ After running `bolt install` you will most likely experiencing issues with IDE i
     {find . -type d -name 'node_modules' | grep 'node_modules$' | grep -v 'node_modules/' | while read line ; do echo "<excludeFolder url=\"file://\$MODULE_DIR$/$line\" />"; done;} | pbcopy
     ``` 
     This will find paths to each node_modules/ folder in the project, create <excludeFolder> tags for each of them and copy resulting text to clipboard 
-1. Open `.idea/atlaskit.iml` in your favorite text editor. 
+1. Open `.idea/atlaskit-mk-2.iml` in your favorite text editor. 
 1. Pres Ctrl + V to paste text from clipboard after existing `<excludeFolder>` tags. Or paste inside `<content>` if you do not have `<excludeFolder>` tags. Save the file.
 1. Open IntelliJ. You should be fine
 

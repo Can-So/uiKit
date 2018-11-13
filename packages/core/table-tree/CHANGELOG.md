@@ -1,5 +1,18 @@
 # @atlaskit/table-tree
 
+## 5.0.1
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 5.0.0
+- [major] [90109e9"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90109e9"
+d):
+
+  * added isDefaultExpanded flag to control default expansion state
+  * Row component now takes in isExpanded prop to control the expansion state
+
 ## 4.1.11
 - [patch] Fixing blank state for datetime-picker in Firefox.  [0e6d838](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e6d838)
 

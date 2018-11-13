@@ -1,8 +1,13 @@
 import * as React from 'react';
 import rafSchedule from 'raf-schd';
 import { updateColumnsOnResize } from 'prosemirror-tables';
-import { browser } from '@atlaskit/editor-common';
-import { calcTableWidth } from '@atlaskit/editor-common';
+import { Node as PmNode } from 'prosemirror-model';
+import { EditorView } from 'prosemirror-view';
+import {
+  browser,
+  calcTableWidth,
+  akEditorMobileBreakoutPoint,
+} from '@atlaskit/editor-common';
 
 import TableFloatingControls from '../ui/TableFloatingControls';
 import ColumnControls from '../ui/TableFloatingControls/ColumnControls';
@@ -12,7 +17,7 @@ import { scaleTable, setColumnWidths } from '../pm-plugins/table-resizing';
 
 import { TablePluginState, TableCssClassName as ClassName } from '../types';
 import { getCellMinWidth } from '../';
-
+import * as classnames from 'classnames';
 const isIE11 = browser.ie_version === 11;
 
 import { Props } from './table';
@@ -24,11 +29,16 @@ import {
 import { WidthPluginState } from '../../width';
 
 export interface ComponentProps extends Props {
+  view: EditorView;
+  node: PmNode;
+  UNSAFE_allowFlexiColumnResizing: boolean;
+  allowColumnResizing: boolean;
   onComponentMount: () => void;
   contentDOM: (element: HTMLElement | undefined) => void;
 
   containerWidth: WidthPluginState;
   pluginState: TablePluginState;
+  width: number;
 }
 
 class TableComponent extends React.Component<ComponentProps> {
@@ -117,7 +127,7 @@ class TableComponent extends React.Component<ComponentProps> {
   }
 
   render() {
-    const { view, node, pluginState, containerWidth } = this.props;
+    const { view, node, pluginState, containerWidth, width } = this.props;
     const {
       pluginConfig: { allowControls = true },
     } = pluginState;
@@ -185,15 +195,16 @@ class TableComponent extends React.Component<ComponentProps> {
         style={{
           width: this.getTableContainerWidth(node.attrs.layout, containerWidth),
         }}
-        className={`${ClassName.TABLE_CONTAINER} ${
-          tableActive ? ClassName.WITH_CONTROLS : ''
-        }`}
+        className={classnames(ClassName.TABLE_CONTAINER, {
+          [ClassName.WITH_CONTROLS]: tableActive,
+          'less-padding': width < akEditorMobileBreakoutPoint,
+        })}
         data-number-column={node.attrs.isNumberColumnEnabled}
         data-layout={node.attrs.layout}
       >
         {allowControls && rowControls}
         <div
-          className={ClassName.TABLE_NODE_WRAPPER}
+          className={classnames(ClassName.TABLE_NODE_WRAPPER)}
           ref={elem => {
             this.wrapper = elem;
             this.props.contentDOM(elem ? elem : undefined);

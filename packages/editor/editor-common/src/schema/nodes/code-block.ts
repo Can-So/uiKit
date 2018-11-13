@@ -1,14 +1,16 @@
-import { NodeSpec, Node as PMNode } from 'prosemirror-model';
+import { NodeSpec, Node as PMNode, Schema, Fragment } from 'prosemirror-model';
 import { browser } from '../../utils';
 import { TextDefinition as Text } from './text';
-import { NoMark } from './doc';
+import { NoMark, MarksObject } from './doc';
+import { BreakoutMarkDefinition } from '../marks/breakout';
 
 /**
  * @name codeBlock_node
  */
-export interface CodeBlockDefinition {
+export type CodeBlockBaseDefinition = {
   type: 'codeBlock';
   content?: Array<Text & NoMark>;
+  marks?: Array<any>;
   attrs?: {
     language?:
       | 'abap'
@@ -80,7 +82,19 @@ export interface CodeBlockDefinition {
       | 'xml'
       | 'xquery';
   };
-}
+};
+
+/**
+ * @name codeBlock_no_marks_node
+ */
+export type CodeBlockDefinition = CodeBlockBaseDefinition & NoMark;
+
+/**
+ * @name code_block_with_breakout_node
+ * @stage 0
+ */
+export type CodeBlockWithBreakoutDefinition = CodeBlockBaseDefinition &
+  MarksObject<BreakoutMarkDefinition>;
 
 const getLanguageFromEditorStyle = (dom: HTMLElement): string | undefined => {
   return dom.getAttribute('data-language') || undefined;
@@ -156,6 +170,15 @@ export const codeBlock: NodeSpec = {
         }
         return false;
       },
+      // @see ED-5682
+      getContent: (dom: HTMLElement, schema: Schema) => {
+        const code = Array.from(dom.children)
+          .map(child => child.textContent)
+          // tslint:disable-next-line:triple-equals
+          .filter(x => x != undefined)
+          .join('\n');
+        return code ? Fragment.from(schema.text(code)) : Fragment.empty;
+      },
     },
     // Handle GitHub/Gist paste
     {
@@ -166,6 +189,24 @@ export const codeBlock: NodeSpec = {
           return {};
         }
         return false;
+      },
+    },
+    {
+      tag: 'div.CodeBlock',
+      preserveWhitespace: 'full',
+      getAttrs: (dom: HTMLElement) => {
+        // TODO: ED-5604 Fix it inside `react-syntax-highlighter`
+        // Remove line numbers
+        const linesCode = dom.querySelector('code');
+        if (
+          linesCode &&
+          linesCode.querySelector('.react-syntax-highlighter-line-number')
+        ) {
+          // It's possible to copy without the line numbers too hence this
+          // `react-syntax-highlighter-line-number` check, so that we don't remove real code
+          linesCode.remove();
+        }
+        return {};
       },
     },
   ],

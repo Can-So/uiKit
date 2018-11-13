@@ -66,20 +66,22 @@ export default class ModalDemo extends Component<{}, State> {
         <ButtonGroup>{variants.map(btn)}</ButtonGroup>
 
         <ModalTransition>
-          {variants.filter(w => w === isOpen).map(name => (
-            <ModalDialog
-              key={name}
-              appearance="warning"
-              actions={actions}
-              heading={variantToHeading(name)}
-              onClose={() => this.close(name)}
-              isHeadingMultiline={variantToMultiline(name)}
-              width="medium"
-              {...this.props}
-            >
-              <Lorem count="5" />
-            </ModalDialog>
-          ))}
+          {variants
+            .filter(w => w === isOpen)
+            .map(name => (
+              <ModalDialog
+                key={name}
+                appearance="warning"
+                actions={actions}
+                heading={variantToHeading(name)}
+                onClose={() => this.close(name)}
+                isHeadingMultiline={variantToMultiline(name)}
+                width="medium"
+                {...this.props}
+              >
+                <Lorem count="5" />
+              </ModalDialog>
+            ))}
         </ModalTransition>
       </div>
     );

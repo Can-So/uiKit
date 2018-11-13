@@ -1,5 +1,87 @@
 # @atlaskit/adf-utils
 
+## 5.1.2
+- [patch] [11d4b85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/11d4b85):
+
+  - ED-5606 Adds union attrs support to validator
+
+## 5.1.1
+- [patch] [b19b7bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b19b7bb):
+
+  - ED-5721 Validator now supports optional content
+
+## 5.1.0
+- [minor] [b440439](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b440439):
+
+  - Add breakout mark to editor, renderer and adf-utils
+
+## 5.0.1
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+
+## 5.0.0
+- [major] [e1db106](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e1db106):
+
+  * New validator API
+
+  ### Breaking Change
+
+  **Old API**
+
+  ```
+  export type ValidationMode = 'strict' | 'loose';
+
+  validator(
+    nodes?: Array<string>,
+    marks?: Array<string>,
+    validationMode?: ValidationMode,
+  )
+  ```
+
+  **New API**
+
+  We introduced a new `allowPrivateAttributes` option. It allows attributes starting with `__` without validation.
+
+  ```
+  export type ValidationMode = 'strict' | 'loose';
+
+  export interface ValidationOptions {
+    mode?: ValidationMode;
+    allowPrivateAttributes?: boolean;
+  }
+
+  validator(
+    nodes?: Array<string>,
+    marks?: Array<string>,
+    options?: ValidationOptions,
+  )
+  ```
+
+## 4.1.0
+- [minor] [4f5830f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4f5830f):
+
+  - ED-4200: add page layout support to generator and ADF schema
+
+## 4.0.4
+- [patch] [e8052e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8052e1):
+
+  - Add main field to adf-utils package.json
+
+## 4.0.3
+- [patch] [653b6a9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/653b6a9):
+
+  - removed optional attributes from adf-builder module for status node
+- [patch] [cd5471b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cd5471b):
+
+  - added style attribute for Status node in ADF schema
+
+## 4.0.2
+- [patch] [6201223"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6201223"
+d):
+
+  - Add examples.
+
 ## 4.0.1
 - [patch] Fix floating number validation [ea027b8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ea027b8)
 

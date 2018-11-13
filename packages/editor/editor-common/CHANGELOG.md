@@ -1,5 +1,164 @@
 # @atlaskit/editor-common
 
+## 21.1.5
+- [patch] [aadaeb9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aadaeb9):
+
+  - ED-5691 Allow unsupported block inside tableCell
+
+## 21.1.4
+- [patch] [5c148c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c148c8):
+
+  - ED-5739: fix updating cells DOM attributes when deleting rows/columns
+
+## 21.1.3
+- [patch] [fabc81f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fabc81f):
+
+  - ED-5197: bold toolbar button is inverted in table header cells
+
+## 21.1.2
+- [patch] [68f3e01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68f3e01):
+
+  - ED-5687: add full-width grid lines and other resizing fixes
+
+## 21.1.1
+- [patch] [b19b7bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b19b7bb):
+
+  - ED-5721 Make content optional for all eligible nodes
+
+## 21.1.0
+- [minor] [b440439](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b440439):
+
+  - Add breakout mark to editor, renderer and adf-utils
+
+## 21.0.1
+- [patch] [9390a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9390a7e):
+
+  - ED-5685: add grid ruler marks
+
+## 21.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/emoji@46.0.0
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/media-core@24.4.0
+
+## 20.3.8
+- [patch] [1ec58fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ec58fb):
+
+  - Fix bodied extension node blows up with unsupportedBlock
+
+## 20.3.7
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-card@42.0.0
+
+## 20.3.6
+- [patch] [a9eb99f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a9eb99f):
+
+  - ED-5510: fix deleting last character in a cell in Safari
+
+## 20.3.5
+- [patch] [ed15858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ed15858):
+
+  - ED-5552: Adds shadow to overflow elements in the renderer.
+
+## 20.3.4
+- [patch] [8f1073c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8f1073c):
+
+  * ED-5572 Fixes copying 2+ lines from vs-code pastes as inline code
+
+## 20.3.3
+- [patch] [825d4e9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/825d4e9):
+
+  Fix copying codeblock from renderer
+
+## 20.3.2
+- [patch] [9f26f82](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f26f82):
+
+  - Removing extra padding inside the comment editor
+
+## 20.3.1
+- Updated dependencies [a6dd6e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6dd6e3):
+  - @atlaskit/profilecard@5.0.0
+
+## 20.3.0
+- [minor] [4f5830f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4f5830f):
+
+  - ED-4200: add page layout support to generator and ADF schema
+
+## 20.2.5
+- [patch] [653b6a9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/653b6a9):
+
+  - removed optional attributes from adf-builder module for status node
+- [patch] [cd5471b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cd5471b):
+
+  - added style attribute for Status node in ADF schema
+
+## 20.2.4
+- [patch] [6a0a6f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6a0a6f8):
+
+  - ED-5448, ED-5613, ED-5582: smart card UX improvements; allow blockCard in tableCell
+
+## 20.2.3
+- [patch] [8fb4b1e"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8fb4b1e"
+d):
+
+  * ED-5274 Fixes tables have excessive margin above
+
+## 20.2.2
+- [patch] [67325ee"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/67325ee"
+d):
+
+  - fixing image size inside tables
+
+## 20.2.1
+- [patch] [534f6ab"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/534f6ab"
+d):
+
+  - ED-5615: Fix block element padding inside table cells.
+
+## 20.2.0
+- [minor] [03947b2"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/03947b2"
+d):
+
+  - Change selected state for horizontal rule
+
+## 20.1.9
+- [patch] [ef26075"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef26075"
+d):
+
+  - ED-5622: fix table selection when adding columns/rows very fast
+
+## 20.1.8
+- [patch] [08e6a0c"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/08e6a0c"
+d):
+
+  - Fix panel icon shrinking when a lot of text in a panel
+
+## 20.1.7
+- [patch] [25cdb93](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/25cdb93):
+
+  Fix copying codeblock from renderer
+
+## 20.1.6
+- [patch] [1662ae0"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1662ae0"
+d):
+
+  - ED-5440 convert sections to use percentages
+
+## 20.1.5
+- [patch] [f271431](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f271431):
+
+  ED-5179: fix context menu when table has scroll
+
 ## 20.1.4
 - [patch] Wrap invalid node with unsupported node [fb60e39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb60e39)
 

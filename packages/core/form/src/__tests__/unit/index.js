@@ -11,6 +11,8 @@ import Form, {
   Validator,
 } from '../..';
 
+import { FormSectionContent } from '../../styled/FormSection';
+
 // TODO: Add tests to cover all components
 
 // Form
@@ -18,6 +20,25 @@ import Form, {
 // FormHeader
 
 // FormSection
+describe('FormSection', () => {
+  describe('Form section content', () => {
+    const defaultProps = {
+      children: [<div />, null, undefined, <div />],
+    };
+
+    it('should instantiate', () => {
+      const wrapper = shallow(<FormSection {...defaultProps} />);
+      expect(wrapper.exists()).toBe(true);
+    });
+
+    it('should render only valid child elements', () => {
+      const wrapper = shallow(<FormSection {...defaultProps} />);
+      const formSectionContent = wrapper.find(FormSectionContent);
+      expect(formSectionContent.exists()).toBe(true);
+      expect(formSectionContent.children().length).toBe(2);
+    });
+  });
+});
 
 // Field
 describe('Field', () => {

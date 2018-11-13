@@ -1,6 +1,7 @@
 //@flow
 /* eslint-disable no-console */
 const CHANGED_PACKAGES = process.env.CHANGED_PACKAGES;
+const COVERAGE_PACKAGES = process.env.COVERAGE_PACKAGES;
 const INTEGRATION_TESTS = process.env.INTEGRATION_TESTS;
 const VISUAL_REGRESSION = process.env.VISUAL_REGRESSION;
 const PARALLELIZE_TESTS = process.env.PARALLELIZE_TESTS;
@@ -34,6 +35,8 @@ const config = {
     '/__tests__\\/_.*?',
     // ignore files under __tests__ that start with an underscore
     '/__tests__\\/.*?\\/_.*?',
+    // ignore tests under __tests__/flow
+    '/__tests__\\/flow/',
     // ignore tests under __tests__/integration (we override this if the INTEGRATION_TESTS flag is set)
     '/__tests__\\/integration/',
     // ignore tests under __tests__/vr (we override this if the VISUAL_REGRESSION flag is set)
@@ -69,6 +72,10 @@ const config = {
     // Need this to have jsdom loading images.
     resources: 'usable',
   },
+  coverageReporters: ['lcov', 'html', 'text-summary'],
+  collectCoverage: false,
+  collectCoverageFrom: [],
+  coverageThreshold: {},
 };
 
 // If the CHANGED_PACKAGES variable is set, we parse it to get an array of changed packages and only
@@ -79,6 +86,19 @@ if (CHANGED_PACKAGES) {
     pkgPath => `${__dirname}/${pkgPath}/**/__tests__/**/*.(js|tsx|ts)`,
   );
   config.testMatch = changedPackagesTestGlobs;
+}
+
+// Adding code coverage thresold configuration for unit test only
+// This should add only the packages with code coverage threshold available
+// If not it will keep the same flow without code coverage check
+if (COVERAGE_PACKAGES) {
+  const coveragePackages = JSON.parse(COVERAGE_PACKAGES);
+
+  if (coveragePackages.collectCoverageFrom.length > 0) {
+    config.collectCoverage = true;
+    config.collectCoverageFrom = coveragePackages.collectCoverageFrom;
+    config.coverageThreshold = coveragePackages.coverageThreshold;
+  }
 }
 
 // If the INTEGRATION_TESTS / VISUAL_REGRESSION flag is set we need to
@@ -119,6 +139,7 @@ if (TEST_ONLY_PATTERN) {
   if (TEST_ONLY_PATTERN.startsWith('!')) {
     newIgnore = TEST_ONLY_PATTERN.substr(1);
   }
+
   config.testPathIgnorePatterns.push(newIgnore);
 }
 
@@ -130,7 +151,7 @@ if (TEST_ONLY_PATTERN) {
  */
 if (PARALLELIZE_TESTS) {
   const allTests = JSON.parse(PARALLELIZE_TESTS);
-  config.testMatch = allTests.filter((_, i) => i % STEPS - STEP_IDX === 0);
+  config.testMatch = allTests.filter((_, i) => (i % STEPS) - STEP_IDX === 0);
 
   console.log('Parallelising jest tests.');
   console.log(`Parallel step ${String(STEP_IDX)} of ${String(STEPS)}`);
@@ -141,6 +162,7 @@ if (PARALLELIZE_TESTS) {
 // Annoyingly, if the array is empty, jest will fallback to its defaults and run everything
 if (config.testMatch.length === 0) {
   config.testMatch = ['DONT-RUN-ANYTHING'];
+  config.collectCoverage = false;
   // only log this message if we are running in an actual terminal (output not being piped to a file
   // or a subshell)
   if (process.stdout.isTTY) {

@@ -41,7 +41,7 @@ const shouldResetGrabArea = (width: number) => {
 const Outer = (props: *) => (
   <div css={{ position: 'relative', width: OUTER_WIDTH }} {...props} />
 );
-const GrabArea = ({ showHandle, isBold, ...props }: *) => (
+export const GrabArea = ({ showHandle, isBold, ...props }: *) => (
   <div
     css={{
       cursor: 'ew-resize',
@@ -168,13 +168,15 @@ function makeTooltipNode({ text, char }: { text: string, char: string }) {
   );
 }
 
-type Props = WithAnalyticsEventsProps & {
+type Props = {
+  ...WithAnalyticsEventsProps,
   children: State => any,
   collapseToggleTooltipContent: CollapseToggleTooltipContent,
   expandCollapseAffordanceRef: Ref<'button'>,
   experimental_flyoutOnHover: boolean,
   flyoutIsOpen: boolean,
   isDisabled: boolean,
+  isGrabAreaDisabled: boolean,
   mouseIsOverNavigation: boolean,
   mutationRefs: Array<{
     ref: ElementRef<*>,
@@ -212,6 +214,11 @@ class ResizeControl extends PureComponent<Props, State> {
     showGrabArea: true,
     width: this.props.navigation.state.productNavWidth,
   };
+
+  static defaultProps = {
+    isGrabAreaDisabled: false,
+  };
+
   static getDerivedStateFromProps(props: Props, state: State) {
     const { experimental_flyoutOnHover, flyoutIsOpen, navigation } = props;
     const { isCollapsed } = navigation.state;
@@ -310,7 +317,7 @@ class ResizeControl extends PureComponent<Props, State> {
     }
 
     // allow the product nav to be 75% of the available page width
-    const maxWidth = Math.round(window.innerWidth / 4 * 3);
+    const maxWidth = Math.round((window.innerWidth / 4) * 3);
     const minWidth = CONTENT_NAV_WIDTH_COLLAPSED;
     const adjustedMax = maxWidth - initialWidth - GLOBAL_NAV_WIDTH;
     const adjustedMin = minWidth - initialWidth;
@@ -407,6 +414,7 @@ class ResizeControl extends PureComponent<Props, State> {
       expandCollapseAffordanceRef,
       flyoutIsOpen,
       isDisabled,
+      isGrabAreaDisabled,
       mouseIsOverNavigation,
       navigation,
     } = this.props;
@@ -439,7 +447,7 @@ class ResizeControl extends PureComponent<Props, State> {
           <Shadow direction={shadowDirection} isBold={mouseIsDown} />
           {!isResizeDisabled && (
             <Fragment>
-              {showGrabArea && (
+              {!isGrabAreaDisabled && showGrabArea && (
                 <GrabArea
                   isBold={mouseIsDown}
                   showHandle={mouseIsDown || mouseIsOverGrabArea}
