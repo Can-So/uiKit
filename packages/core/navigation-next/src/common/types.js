@@ -17,3 +17,9 @@ export type Pick<
   $Call<typeof toObject, Keys>,
   <Key>(k: Key) => $ElementType<Origin, Key>,
 >;
+
+export type TypeOrVoid = <T>(T) => T | void;
+
+// Make an object safely diffable so it does not error if origin object does not contain a prop
+// being diffed.
+export type Diffable<O: {}> = $ObjMap<O, TypeOrVoid>;

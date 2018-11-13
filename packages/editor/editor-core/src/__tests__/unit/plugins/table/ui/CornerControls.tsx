@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { isTableSelected } from 'prosemirror-utils';
 import {
   doc,
   createEditor,
@@ -9,11 +10,20 @@ import {
   mountWithIntl,
 } from '@atlaskit/editor-test-helpers';
 
-import { pluginKey } from '../../../../../plugins/table/pm-plugins/main';
-import { TablePluginState } from '../../../../../plugins/table/types';
+import {
+  pluginKey,
+  getPluginState,
+} from '../../../../../plugins/table/pm-plugins/main';
+import {
+  TablePluginState,
+  TableCssClassName as ClassName,
+} from '../../../../../plugins/table/types';
 import CornerControls from '../../../../../plugins/table/ui/TableFloatingControls/CornerControls';
 import { tablesPlugin } from '../../../../../plugins';
-import InsertButton from '../../../../../plugins/table/ui/TableFloatingControls/InsertButton';
+
+const InsertColumnButton = `.${ClassName.CONTROLS_INSERT_COLUMN}`;
+const InsertRowButton = `.${ClassName.CONTROLS_INSERT_ROW}`;
+const CornerButton = `.${ClassName.CONTROLS_CORNER_BUTTON}`;
 
 describe('CornerControls', () => {
   const editor = (doc: any) =>
@@ -27,21 +37,20 @@ describe('CornerControls', () => {
     it('should render insert column and insert row buttons', () => {
       const { editorView } = editor(
         doc(
-          table({ isNumberColumnEnabled: true })(
-            tr(tdEmpty, tdEmpty, tdEmpty),
-            tr(tdEmpty, tdEmpty, tdEmpty),
-          ),
+          table()(tr(tdEmpty, tdEmpty, tdEmpty), tr(tdEmpty, tdEmpty, tdEmpty)),
         ),
       );
 
       const controls = mountWithIntl(
         <CornerControls
+          tableRef={document.querySelector('table')!}
           editorView={editorView}
-          clearHoverSelection={() => {}}
+          isNumberColumnEnabled={true}
         />,
       );
 
-      expect(controls.find(InsertButton)).toHaveLength(2);
+      expect(controls.find(InsertColumnButton)).toHaveLength(1);
+      expect(controls.find(InsertRowButton)).toHaveLength(1);
       controls.unmount();
       editorView.destroy();
     });
@@ -57,14 +66,14 @@ describe('CornerControls', () => {
 
       const controls = mountWithIntl(
         <CornerControls
+          tableRef={document.querySelector('table')!}
           editorView={editorView}
-          clearHoverSelection={() => {}}
           isHeaderColumnEnabled={true}
         />,
       );
 
-      expect(controls.find(InsertButton)).toHaveLength(1);
-      expect(controls.find(InsertButton).prop('type')).toEqual('row');
+      expect(controls.find(InsertColumnButton)).toHaveLength(0);
+      expect(controls.find(InsertRowButton)).toHaveLength(1);
       controls.unmount();
       editorView.destroy();
     });
@@ -80,14 +89,60 @@ describe('CornerControls', () => {
 
       const controls = mountWithIntl(
         <CornerControls
+          tableRef={document.querySelector('table')!}
           editorView={editorView}
-          clearHoverSelection={() => {}}
           isHeaderRowEnabled={true}
         />,
       );
 
-      expect(controls.find(InsertButton)).toHaveLength(1);
-      expect(controls.find(InsertButton).prop('type')).toEqual('column');
+      expect(controls.find(InsertColumnButton)).toHaveLength(1);
+      expect(controls.find(InsertRowButton)).toHaveLength(0);
+      controls.unmount();
+      editorView.destroy();
+    });
+  });
+
+  describe('when button is clicked', () => {
+    it('should select the table', () => {
+      const { editorView } = editor(
+        doc(table()(tr(thEmpty, thEmpty, thEmpty))),
+      );
+
+      const controls = mountWithIntl(
+        <CornerControls
+          tableRef={document.querySelector('table')!}
+          editorView={editorView}
+        />,
+      );
+
+      controls.find(CornerButton).simulate('click');
+
+      expect(isTableSelected(editorView.state.selection)).toBe(true);
+      controls.unmount();
+      editorView.destroy();
+    });
+  });
+
+  describe('when button is hovered', () => {
+    it('should highlight the table with hover decoration', () => {
+      const { editorView } = editor(
+        doc(
+          table()(tr(thEmpty, thEmpty, thEmpty), tr(thEmpty, thEmpty, thEmpty)),
+        ),
+      );
+
+      const controls = mountWithIntl(
+        <CornerControls
+          tableRef={document.querySelector('table')!}
+          editorView={editorView}
+        />,
+      );
+
+      controls.find(CornerButton).simulate('mouseover');
+
+      const { hoveredColumns, hoveredRows } = getPluginState(editorView.state);
+      expect(hoveredColumns).toEqual([0, 1, 2]);
+      expect(hoveredRows).toEqual([0, 1]);
       controls.unmount();
       editorView.destroy();
     });

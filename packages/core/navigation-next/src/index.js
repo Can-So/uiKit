@@ -85,7 +85,23 @@ export { default as ViewRenderer } from './renderer';
 export { dark, light, settings, modeGenerator, ThemeProvider } from './theme';
 
 /** Types */
-export {
+export type {
   ExternalGlobalItemProps as GlobalItemProps,
 } from './components/presentational/GlobalItem/types';
-export { GlobalTheme } from './theme';
+export type { GlobalTheme } from './theme';
+export type {
+  WithNavigationUIControllerProps,
+  UIControllerWrappedComp,
+} from './ui-controller/types';
+export type {
+  WithNavigationViewControllerProps,
+  ViewControllerWrappedComp,
+} from './view-controller/types';
+export type {
+  WithThemeProps,
+  ThemeWrappedComp,
+  WithContentThemeProps,
+  ContentThemeWrappedComp,
+  WithGlobalThemeProps,
+  GlobalThemeWrappedComp,
+} from './theme/types';

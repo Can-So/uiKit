@@ -459,7 +459,6 @@ class ResizeControl extends PureComponent<Props, State> {
               {collapseToggleTooltipContent ? (
                 <Tooltip
                   content={makeTooltipNode(
-                    // $FlowFixMe
                     collapseToggleTooltipContent(isCollapsed),
                   )}
                   delay={600}

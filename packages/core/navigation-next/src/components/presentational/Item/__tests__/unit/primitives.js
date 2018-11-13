@@ -25,7 +25,6 @@ describe('ItemPrimitiveBase', () => {
       isFocused: false,
       spacing: 'default',
       text: 'item content',
-      createAnalyticsEvent: (): any => ({}),
       theme: {
         context: 'default',
         mode: ({

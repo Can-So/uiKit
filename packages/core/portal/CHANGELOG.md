@@ -1,5 +1,15 @@
 # @atlaskit/portal
 
+## 0.0.14
+- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+
+  - Fixed issue where tooltips and modals would initially render in the wrong location
+
+## 0.0.13
+- [patch] [3f5a4dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5a4dd):
+
+  - Replaces our own check for dom in ssr with exenv package
+
 ## 0.0.12
 - [patch] fixes problem with the DOM container for portal not creating a new stacking context [aaab348](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aaab348)
 

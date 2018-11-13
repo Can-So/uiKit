@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/global-navigation",
-  "version": "5.1.2",
+  "version": "5.2.1",
   "description": "Global navigation component for Atlassian",
   "main": "dist/cjs/index.js",
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
@@ -21,7 +21,7 @@
     "@atlaskit/drawer": "^2.3.0",
     "@atlaskit/dropdown-menu": "^6.1.19",
     "@atlaskit/icon": "^14.0.2",
-    "@atlaskit/navigation-next": "^3.22.1",
+    "@atlaskit/navigation-next": "^3.23.0",
     "@atlaskit/notification-indicator": "^4.0.3",
     "@atlaskit/notification-log-client": "^3.1.0",
     "@atlaskit/spinner": "^9.0.9",

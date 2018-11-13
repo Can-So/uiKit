@@ -26,7 +26,7 @@ export const MultiValue = props => {
         elemBefore={<Avatar size="xsmall" src={avatarUrl} label={label} />}
         removeButtonText={fixed ? undefined : 'remove'}
         onAfterRemoveAction={onRemove}
-        color={isFocused ? 'greyLight' : undefined}
+        color={isFocused ? 'blueLight' : undefined}
       />
     </Container>
   );

@@ -2,6 +2,6 @@
 
 import type { ComponentType } from 'react';
 
-export type WordmarkProps = {
+export type WordmarkProps = {|
   wordmark: ComponentType<{ [key: string]: any }>,
-};
+|};

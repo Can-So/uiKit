@@ -48,3 +48,6 @@ export const usersToOptions = memoizeOne((defaultValue: UserValue) => {
   }
   return userToOption(defaultValue);
 });
+
+export const getAvatarSize = (appearance: string): 'small' | 'xsmall' =>
+  appearance === 'normal' ? 'small' : 'xsmall';
