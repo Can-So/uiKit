@@ -68,6 +68,10 @@ describe('JIRA wiki markup - Links', () => {
       '[CS-542] should correctly style superscript links',
       `[~link title~|http://example.com]`,
     ],
+    [
+      '[CS-542] should not parse nested lists',
+      '[test[test|http://example.com]',
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

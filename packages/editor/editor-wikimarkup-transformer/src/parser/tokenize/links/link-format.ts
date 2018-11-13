@@ -4,7 +4,7 @@ import { resolveLink } from './link-resolver';
 import { parseContentLink } from './link-parser';
 
 // [http://www.example.com] and [Example|http://www.example.com]
-const LINK_FORMAT_REGEXP = /^\[([^\]\n]+)]/;
+const LINK_FORMAT_REGEXP = /^\[([^\[\]\n]+)]/;
 
 export function linkFormat(
   input: string,
