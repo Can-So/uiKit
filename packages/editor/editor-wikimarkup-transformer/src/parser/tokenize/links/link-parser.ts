@@ -9,30 +9,34 @@ function trimIfPossible(s: string | null): string | null {
 }
 
 function extractLinkBody(buffer: StringBuffer): string | null {
-  if (
-    buffer.indexOf('!') == -1 ||
-    buffer.indexOf('!') > buffer.indexOf('|') ||
-    buffer.indexOf('!') == buffer.lastIndexOf('!')
-  ) {
+  const indexOfBang = buffer.indexOf('!');
+  const indexOfPipe = buffer.indexOf('|');
+  const lastIndexOfBang = buffer.lastIndexOf('!');
+  const notEscaped =
+    indexOfBang == -1 ||
+    indexOfBang > indexOfPipe ||
+    indexOfBang == lastIndexOfBang;
+
+  if (notEscaped) {
     return divideOn(buffer, '|');
-  } else {
-    const body = new StringBuffer();
-    let inEscape = false;
-
-    for (let i = 0; i < buffer.length(); i++) {
-      const c = buffer.charAt(i);
-      if (c == '!') {
-        inEscape = !inEscape;
-      }
-      if (c == '|' && !inEscape) {
-        buffer.delete(0, i + 1);
-        return body.toString();
-      }
-      body.append(c);
-    }
-
-    return null;
   }
+
+  const body = new StringBuffer();
+  let inEscape = false;
+
+  for (let i = 0; i < buffer.length(); i++) {
+    const c = buffer.charAt(i);
+    if (c == '!') {
+      inEscape = !inEscape;
+    }
+    if (c == '|' && !inEscape) {
+      buffer.delete(0, i + 1);
+      return body.toString();
+    }
+    body.append(c);
+  }
+
+  return null;
 }
 
 function divideAfterLast(buffer: StringBuffer, divider: string): string | null {
