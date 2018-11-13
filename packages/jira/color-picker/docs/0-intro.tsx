@@ -32,7 +32,7 @@ ${(
   <Example
     packageName="@atlaskit/color-picker"
     Component={require('../examples/00-color-picker').default}
-    source={require('!!raw-loader!../examples/03-color-picker')}
+    source={require('!!raw-loader!../examples/00-color-picker')}
     title="Basic Usage"
     language="jsx"
   />
@@ -42,7 +42,7 @@ ${(
   <Example
     packageName="@atlaskit/color-picker"
     Component={require('../examples/01-multi-columns-color-picker').default}
-    source={require('!!raw-loader!../examples/04-multi-columns-color-picker')}
+    source={require('!!raw-loader!../examples/01-multi-columns-color-picker')}
     title="Color picker with multiple columns palette"
     language="jsx"
   />

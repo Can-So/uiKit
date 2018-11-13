@@ -96,8 +96,6 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props> {
   };
 
   onKeyDown = (event: React.KeyboardEvent) => {
-    console.log(this.selectRef);
-
     switch (event.key) {
       case 'ArrowLeft':
       case 'ArrowRight':
