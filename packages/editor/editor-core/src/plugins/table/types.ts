@@ -19,8 +19,6 @@ export interface PluginConfig {
   stickToolbarToBottom?: boolean;
   permittedLayouts?: PermittedLayoutsDescriptor;
   allowControls?: boolean;
-  // This flag can specifiy re-size mode.
-  UNSAFE_allowFlexiColumnResizing?: boolean;
 }
 
 export interface TablePluginState {

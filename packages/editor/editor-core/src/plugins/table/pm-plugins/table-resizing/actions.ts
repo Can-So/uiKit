@@ -226,7 +226,7 @@ export function resizeColumnTo(
     elem = elem.parentNode as HTMLElement;
   }
 
-  const resizer = new Resizer(elem as HTMLTableElement, {
+  const resizer = Resizer.fromDOM(elem as HTMLTableElement, {
     minWidth: getCellMinWidth(true),
     maxSize: elem.offsetWidth,
     node: node,
@@ -250,7 +250,7 @@ function scale(dom: HTMLTableElement, node: PMNode, maxSize: number) {
     maxSize -= akEditorTableNumberColumnWidth;
   }
 
-  const resizer = new Resizer(dom, {
+  const resizer = Resizer.fromDOM(dom, {
     minWidth: getCellMinWidth(true),
     maxSize: dom.offsetWidth,
     node: node,

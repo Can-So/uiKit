@@ -2,6 +2,7 @@ import { Plugin, PluginKey } from 'prosemirror-state';
 import { Decoration, DecorationSet } from 'prosemirror-view';
 import { TableMap } from 'prosemirror-tables';
 import { findParentNodeOfType, hasParentNodeOfType } from 'prosemirror-utils';
+
 import {
   getLayoutSize,
   pointsAtCell,
@@ -9,6 +10,7 @@ import {
   currentColWidth,
   domCellAround,
 } from './utils';
+
 import {
   updateControls,
   handleBreakoutContent,
@@ -209,7 +211,6 @@ function handleMouseDown(view, event, cellMinWidth) {
   }
 
   let cell = view.state.doc.nodeAt(pluginState.activeHandle);
-
   let $cell = view.state.doc.resolve(pluginState.activeHandle);
   let dom = view.domAtPos($cell.start(-1)).node;
   while (dom.nodeName !== 'TABLE') {
@@ -217,13 +218,13 @@ function handleMouseDown(view, event, cellMinWidth) {
   }
 
   const containerWidth = widthPluginKey.getState(view.state).width;
-  const resizer = new Resizer(dom, {
+  const resizer = Resizer.fromDOM(dom, {
     minWidth: cellMinWidth,
     maxSize: getLayoutSize(dom.getAttribute('data-layout'), containerWidth),
     node: $cell.node(-1),
   });
 
-  resizer.apply(resizer.currentState!);
+  resizer.apply(resizer.currentState);
 
   let width = currentColWidth(view, pluginState.activeHandle, cell.attrs);
   view.dispatch(
@@ -233,32 +234,33 @@ function handleMouseDown(view, event, cellMinWidth) {
   );
 
   function finish(event) {
+    const { clientX } = event;
+
     window.removeEventListener('mouseup', finish);
     window.removeEventListener('mousemove', move);
-    let pluginState = key.getState(view.state);
-    if (pluginState.dragging) {
-      updateColumnWidth(
-        view,
-        pluginState.activeHandle,
-        event.clientX - pluginState.dragging.startX,
-        resizer,
-      );
+
+    const { activeHandle, dragging } = key.getState(view.state);
+
+    if (dragging) {
+      const { startX } = dragging;
+      updateColumnWidth(view, activeHandle, clientX - startX, resizer);
       view.dispatch(view.state.tr.setMeta(key, { setDragging: null }));
     }
   }
 
   function move(event) {
-    if (!event.which) {
+    const { clientX, which } = event;
+
+    if (!which) {
       return finish(event);
     }
 
-    let pluginState = key.getState(view.state);
-    resizeColumn(
-      view,
-      pluginState.activeHandle,
-      event.clientX - pluginState.dragging.startX,
-      resizer,
-    );
+    const {
+      activeHandle,
+      dragging: { startX },
+    } = key.getState(view.state);
+
+    resizeColumn(view, activeHandle, clientX - startX, resizer);
   }
 
   window.addEventListener('mouseup', finish);

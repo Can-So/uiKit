@@ -22,7 +22,6 @@ export interface Props {
   allowColumnResizing?: boolean;
   cellMinWidth?: number;
   portalProviderAPI: PortalProviderAPI;
-  UNSAFE_allowFlexiColumnResizing?: boolean;
   getPos: () => number;
 }
 
@@ -168,16 +167,12 @@ export const createTableView = (portalProviderAPI: PortalProviderAPI) => (
   getPos,
 ): NodeView => {
   const { pluginConfig } = getPluginState(view.state);
-  const {
-    allowColumnResizing,
-    UNSAFE_allowFlexiColumnResizing,
-  } = getPluginConfig(pluginConfig);
+  const { allowColumnResizing } = getPluginConfig(pluginConfig);
 
   return new TableView({
     node,
     view,
     allowColumnResizing,
-    UNSAFE_allowFlexiColumnResizing,
     portalProviderAPI,
     getPos,
   }).init();
