@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.3.5
+- [patch] [d76aa5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d76aa5a):
+
+  - Adds in support for multiple -
+
 ## 2.3.4
 - [patch] [7b8efea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b8efea):
 
