@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.3.6
+- [patch] [56007b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56007b3):
+
+  - Allow {color} in formatter
+
 ## 2.3.5
 - [patch] [d76aa5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d76aa5a):
 
