@@ -1,40 +1,24 @@
 // @flow
 'use strict';
-const ChromeDriverLauncher = require('wdio-chromedriver-service/launcher');
-const util = require('util');
+const chromedriver = require('chromedriver');
 
 /*
-* Next steps: 
-* - Create our own chromedriver launcher
-* - Pass it the config.
-* - Remove selenium and clean the package.json
+ * util module to support
+ *   a. install chrome-driver
+ *   b. start and stop chrome driver server
+ */
 
-/*
-* util module to support 
-*   a. install chrome-driver
-*   b. start and stop chrome driver server
-* more about: XXXXX
-*/
-let child;
-
-const chromeConfig = {
-  port: '9000',
-  path: '/',
-  services: ['chromedriver'],
-  chromeDriverArgs: ['--port=9000'],
-  chromeDriverLogs: './',
-};
+const port = 9515;
+const args = ['--url-base=wd/hub', `--port=${port}`];
 
 async function startChromeServer() {
-  child = new ChromeDriverLauncher(chromeConfig);
+  chromedriver.start(args);
   console.log('Started chrome server');
 }
 
 function stopChromeServer() {
-  if (child) {
-    console.log('Stopping chrome server');
-    child.kill();
-  }
+  chromedriver.stop();
+  console.log('Stopping chrome server');
 }
 
-module.exports = { startChromeServer, stopChromeServer };
+module.exports = { startChromeServer, stopChromeServer, port };
