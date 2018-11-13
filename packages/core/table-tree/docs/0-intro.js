@@ -6,7 +6,9 @@ export default md`
 The component displays a table of expandable, nested rows that form a tree-like hierarchy.
 Child rows can be loaded asynchronously, on expansion.
 
-## Basic Usage
+## Usage
+
+${code`import TableTree from '@atlaskit/table-tree';`}
 
 Import the default exported Component and provide the data in \`items\` prop.
 

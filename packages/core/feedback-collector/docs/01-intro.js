@@ -20,8 +20,6 @@ ${(
   </SectionMessage>
 )}
 
-## Feedback collector
-
 Feedback collector is a wrapper around feedback form component that collects customer feedback across Atlassian products.
 
 ## Usage

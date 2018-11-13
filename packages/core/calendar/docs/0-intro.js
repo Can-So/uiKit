@@ -9,6 +9,8 @@ export default md`
   - Used to display a calendar of dates.
   - Composed with other components to build a datepicker.
 
+## Usage
+
 ${code`import Calendar from '@atlaskit/calendar';`}
 
   ## Examples

@@ -5,6 +5,8 @@ import { md, Example, Props, code } from '@atlaskit/docs';
 export default md`
   The page header pattern is a template that helps combine other components (breadcrumbs, headings, actions, and selects) to create a consistent user experience.
 
+  ## Usage
+
   ${code`import PageHeader from '@atlaskit/page-header';`}
 
   ${(

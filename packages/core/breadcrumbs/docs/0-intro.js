@@ -12,6 +12,8 @@ export default md`
   BreadcrumbsItem is the rendering componet for each individual item in the
   list.
 
+  ## Usage
+
   ${code`import Breadcrumbs, { BreadcrumbsItem } from '@atlaskit/breadcrumbs';`}
 
   or
