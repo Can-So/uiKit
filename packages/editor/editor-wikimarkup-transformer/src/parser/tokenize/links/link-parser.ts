@@ -1,7 +1,7 @@
 import { isBlank, isDigit, isNotBlank, StringBuffer } from '../../utils/text';
 
 function trimIfPossible(s: string | null): string | null {
-  if (s == null) {
+  if (s === null) {
     return null;
   }
 
@@ -13,9 +13,9 @@ function extractLinkBody(buffer: StringBuffer): string | null {
   const indexOfPipe = buffer.indexOf('|');
   const lastIndexOfBang = buffer.lastIndexOf('!');
   const notEscaped =
-    indexOfBang == -1 ||
+    indexOfBang === -1 ||
     indexOfBang > indexOfPipe ||
-    indexOfBang == lastIndexOfBang;
+    indexOfBang === lastIndexOfBang;
 
   if (notEscaped) {
     return divideOn(buffer, '|');
@@ -26,10 +26,10 @@ function extractLinkBody(buffer: StringBuffer): string | null {
 
   for (let i = 0; i < buffer.length(); i++) {
     const c = buffer.charAt(i);
-    if (c == '!') {
+    if (c === '!') {
       inEscape = !inEscape;
     }
-    if (c == '|' && !inEscape) {
+    if (c === '|' && !inEscape) {
       buffer.delete(0, i + 1);
       return body.toString();
     }
@@ -40,7 +40,7 @@ function extractLinkBody(buffer: StringBuffer): string | null {
 }
 
 function divideAfterLast(buffer: StringBuffer, divider: string): string | null {
-  if (buffer.length() == 0) {
+  if (buffer.length() === 0) {
     return null;
   }
 
@@ -57,7 +57,7 @@ function divideAfter(
 
   if (index < 0) {
     return null;
-  } else if (index == buffer.length() - 1) {
+  } else if (index === buffer.length() - 1) {
     buffer.deleteCharAt(buffer.length() - 1);
     return null;
   } else {
@@ -81,7 +81,7 @@ function divideAfter(
  * @return the characters before the divider, or the default if there are none
  */
 function divideOn(buffer: StringBuffer, divider: string): string | null {
-  if (buffer.length() == 0) {
+  if (buffer.length() === 0) {
     return null;
   }
 
@@ -89,7 +89,7 @@ function divideOn(buffer: StringBuffer, divider: string): string | null {
 
   if (i < 0) {
     return null;
-  } else if (i == 0) {
+  } else if (i === 0) {
     buffer.deleteCharAt(0);
     return null;
   } else {
@@ -112,7 +112,7 @@ function extractNumber(buf: StringBuffer): number {
   }
 
   try {
-    return parseInt(digits.toString());
+    return parseInt(digits.toString(), 10);
   } catch (e) {
     return 0;
   }
@@ -129,7 +129,7 @@ export function parseLink(linkText: string): Link {
   const originalLinkText = linkText;
 
   // we want to decode single quotes (represented by &#039;) back before parsing the link test
-  if (linkText.indexOf('&#039;') != -1) {
+  if (linkText.indexOf('&#039;') !== -1) {
     linkText = linkText.replace('&#039;', "'");
   }
 
@@ -187,10 +187,10 @@ export function parseContentLink(link: Link | string): ContentLink {
   if (isBlank(shortcutName)) {
     spaceKey = trimIfPossible(divideOn(buf, ':'));
 
-    if (buf.indexOf('$') == 0) {
+    if (buf.indexOf('$') === 0) {
       buf.deleteCharAt(0);
       contentId = extractNumber(buf);
-      if (contentId == 0) {
+      if (contentId === 0) {
         return {
           ...link,
           shortcutName,
@@ -208,7 +208,7 @@ export function parseContentLink(link: Link | string): ContentLink {
     anchor = trimIfPossible(divideAfter(buf, '#'));
   }
 
-  if (contentId == 0) {
+  if (contentId === 0) {
     destinationTitle = buf.toString().trim();
   }
 
