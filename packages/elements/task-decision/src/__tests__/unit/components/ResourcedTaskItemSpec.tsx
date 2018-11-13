@@ -281,7 +281,7 @@ describe('<ResourcedTaskItem/>', () => {
     const participants = getParticipants(2);
 
     it('participants not used for inline style item', () => {
-      const component = mount(
+      component = mount(
         <ResourcedTaskItem
           taskId="task-1"
           objectAri="objectAri"
@@ -295,7 +295,7 @@ describe('<ResourcedTaskItem/>', () => {
     });
 
     it('participants used for card style item', () => {
-      const component = mount(
+      component = mount(
         <ResourcedTaskItem
           taskId="task-1"
           objectAri="objectAri"
@@ -315,7 +315,7 @@ describe('<ResourcedTaskItem/>', () => {
 
   describe('showPlaceholder', () => {
     it('should render placeholder if task is empty', () => {
-      const component = mount(
+      component = mount(
         <ResourcedTaskItem
           taskId="task-1"
           objectAri="objectAri"
@@ -329,7 +329,7 @@ describe('<ResourcedTaskItem/>', () => {
     });
 
     it('should not render placeholder task if not empty', () => {
-      const component = mount(
+      component = mount(
         <ResourcedTaskItem
           taskId="task-1"
           objectAri="objectAri"
@@ -347,7 +347,7 @@ describe('<ResourcedTaskItem/>', () => {
 
   describe('analytics', () => {
     it('check action fires an event', () => {
-      const component = mount(
+      component = mount(
         <FabricAnalyticsListener client={analyticsWebClientMock}>
           <ResourcedTaskItem
             taskId="task-1"
@@ -374,7 +374,7 @@ describe('<ResourcedTaskItem/>', () => {
     });
 
     it('uncheck action fires an event', () => {
-      const component = mount(
+      component = mount(
         <FabricAnalyticsListener client={analyticsWebClientMock}>
           <ResourcedTaskItem
             taskId="task-1"

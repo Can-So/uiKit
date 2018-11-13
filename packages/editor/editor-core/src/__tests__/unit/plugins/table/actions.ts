@@ -39,12 +39,27 @@ import {
 } from '../../../../plugins/table/pm-plugins/main';
 
 describe('table plugin: actions', () => {
-  const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+  let unmountEditor: () => void | undefined = undefined;
+
+  beforeEach(() => {
+    unmountEditor = undefined;
+  });
+
+  afterEach(() => {
+    if (unmountEditor) {
+      unmountEditor();
+    }
+  });
+
+  const editor = (doc: any) => {
+    const { unmount, ...rest } = createEditor<TablePluginState>({
       doc,
       editorPlugins: [tablesPlugin(), panelPlugin],
       pluginKey,
     });
+    unmountEditor = unmount;
+    return rest;
+  };
 
   describe('transformSliceToAddTableHeaders', () => {
     const textNode = defaultSchema.text('hello', undefined);
@@ -230,7 +245,6 @@ describe('table plugin: actions', () => {
           const cell = cells[i] as HTMLElement;
           expect(cell.getAttribute('colspan')).not.toEqual('2');
         }
-        editorView.destroy();
       });
     });
   });
@@ -268,7 +282,6 @@ describe('table plugin: actions', () => {
           const cell = cells[i] as HTMLElement;
           expect(cell.getAttribute('rowspan')).not.toEqual('2');
         }
-        editorView.destroy();
       });
     });
   });
@@ -419,8 +432,13 @@ describe('table plugin: actions', () => {
       setEditorFocus(true)(state, dispatch);
       setTableRef(tableRef)(editorView.state, dispatch);
       const pluginState = getPluginState(editorView.state);
-      expect(pluginState.tableRef).toEqual(tableRef);
-      expect(pluginState.tableNode).toEqual(editorView.state.doc.firstChild!);
+      expect({
+        tableRef: pluginState.tableRef,
+        tableNode: pluginState.tableNode,
+      }).toEqual({
+        tableRef,
+        tableNode: editorView.state.doc.firstChild!,
+      });
     });
   });
 
@@ -491,7 +509,6 @@ describe('table plugin: actions', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -531,7 +548,6 @@ describe('table plugin: actions', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
   });

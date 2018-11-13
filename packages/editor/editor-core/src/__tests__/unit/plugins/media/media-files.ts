@@ -22,9 +22,21 @@ import { panelPlugin } from '../../../../plugins';
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 describe('media-files', () => {
+  let unmountEditor: () => void | undefined = undefined;
+
+  beforeEach(() => {
+    unmountEditor = undefined;
+  });
+
+  afterEach(() => {
+    if (unmountEditor) {
+      unmountEditor();
+    }
+  });
+
   const temporaryFileId = `temporary:${randomId()}`;
-  const editor = (doc: any, uploadErrorHandler?: () => void) =>
-    createEditor({
+  const editor = (doc: any, uploadErrorHandler?: () => void) => {
+    const { unmount, ...rest } = createEditor({
       doc,
       editorPlugins: [
         mediaPlugin(),
@@ -34,6 +46,9 @@ describe('media-files', () => {
         panelPlugin,
       ],
     });
+    unmountEditor = unmount;
+    return rest;
+  };
 
   describe('when cursor is at the end of a text block', () => {
     it('inserts media node into the document after current paragraph node', () => {
@@ -59,7 +74,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('puts cursor to the next paragraph after inserting media node', () => {
@@ -83,7 +97,6 @@ describe('media-files', () => {
       expect(editorView.state.selection.from).toEqual(
         paragraphNodeSize + mediaGroupNodeSize + 1,
       );
-      editorView.destroy();
     });
 
     it('should prepend media node to existing media group after it', () => {
@@ -126,7 +139,6 @@ describe('media-files', () => {
           ),
         ),
       );
-      editorView.destroy();
     });
   });
 
@@ -171,7 +183,6 @@ describe('media-files', () => {
           p('text'),
         ),
       );
-      editorView.destroy();
     });
   });
 
@@ -200,7 +211,6 @@ describe('media-files', () => {
             p('xt'),
           ),
         );
-        editorView.destroy();
       });
 
       it('moves cursor to the front of later part of the text', () => {
@@ -225,7 +235,6 @@ describe('media-files', () => {
         expect(editorView.state.selection.from).toEqual(
           paragraphNodeSize + mediaGroupNodeSize + 1,
         );
-        editorView.destroy();
       });
     });
 
@@ -253,7 +262,6 @@ describe('media-files', () => {
             h1('xt'),
           ),
         );
-        editorView.destroy();
       });
     });
   });
@@ -283,7 +291,6 @@ describe('media-files', () => {
               p('t'),
             ),
           );
-          editorView.destroy();
         });
       });
 
@@ -312,7 +319,6 @@ describe('media-files', () => {
                   p(),
                 ),
               );
-              editorView.destroy();
             });
           });
 
@@ -340,7 +346,6 @@ describe('media-files', () => {
                   p(),
                 ),
               );
-              editorView.destroy();
             });
           });
         });
@@ -402,7 +407,6 @@ describe('media-files', () => {
                 ),
               ),
             );
-            editorView.destroy();
           });
         });
       });
@@ -431,7 +435,6 @@ describe('media-files', () => {
               p(),
             ),
           );
-          editorView.destroy();
         });
 
         it('prepends to existing media group after parent', () => {
@@ -474,7 +477,6 @@ describe('media-files', () => {
               ),
             ),
           );
-          editorView.destroy();
         });
       });
     });
@@ -507,7 +509,6 @@ describe('media-files', () => {
               p(),
             ),
           );
-          editorView.destroy();
         });
       });
 
@@ -553,7 +554,6 @@ describe('media-files', () => {
               p('text'),
             ),
           );
-          editorView.destroy();
         });
 
         it('prepends to the existing media group - w/o any following paragraph', () => {
@@ -595,7 +595,6 @@ describe('media-files', () => {
               ),
             ),
           );
-          editorView.destroy();
         });
 
         it('sets cursor to the paragraph after', () => {
@@ -637,7 +636,6 @@ describe('media-files', () => {
           expect(editorView.state.selection.from).toEqual(
             mediaGroupNodeSize + 1,
           );
-          editorView.destroy();
         });
       });
 
@@ -667,7 +665,6 @@ describe('media-files', () => {
                 p(),
               ),
             );
-            editorView.destroy();
           });
         });
 
@@ -725,7 +722,6 @@ describe('media-files', () => {
                   p(),
                 ),
               );
-              editorView.destroy();
             });
           });
 
@@ -771,7 +767,6 @@ describe('media-files', () => {
                   ),
                 ),
               );
-              editorView.destroy();
             });
           });
 
@@ -841,7 +836,6 @@ describe('media-files', () => {
                   ),
                 ),
               );
-              editorView.destroy();
             });
           });
         });
@@ -871,7 +865,6 @@ describe('media-files', () => {
             p('xt'),
           ),
         );
-        editorView.destroy();
       });
 
       it('prepends to exisiting media group before parent', () => {
@@ -914,7 +907,6 @@ describe('media-files', () => {
             p('xt'),
           ),
         );
-        editorView.destroy();
       });
     });
   });
@@ -942,7 +934,6 @@ describe('media-files', () => {
         p(),
       ),
     );
-    editorView.destroy();
   });
 
   it(`should insert media node into the document after current codeblock node`, () => {
@@ -968,7 +959,6 @@ describe('media-files', () => {
         p(),
       ),
     );
-    editorView.destroy();
   });
 
   describe('inside empty block', () => {
@@ -994,7 +984,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('apends media group to empty paragraph in an empty code block', () => {
@@ -1020,7 +1009,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('apends media group to empty paragraph in an empty heading', () => {
@@ -1046,7 +1034,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('prepends media to existing media group before the empty paragraph', () => {
@@ -1089,7 +1076,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('should replace empty paragraph with mediaGroup and preserve next empty paragraph', () => {
@@ -1114,7 +1100,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('should replace empty paragraph with mediaGroup and preserve previous empty paragraph', () => {
@@ -1140,7 +1125,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('should insert all media nodes on the same line', async () => {
@@ -1174,7 +1158,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
   });
 

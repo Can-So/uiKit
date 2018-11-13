@@ -3,13 +3,28 @@ import { mount } from 'enzyme';
 import { createEditor, doc, p } from '@atlaskit/editor-test-helpers';
 import Comment from '../../../ui/Appearance/Comment';
 
-const editor = (doc: any) =>
-  createEditor({
-    doc,
-    editorProps: { allowExtension: true },
+describe('comment editor', () => {
+  let unmountEditor: () => void | undefined = undefined;
+
+  beforeEach(() => {
+    unmountEditor = undefined;
   });
 
-describe('comment editor', () => {
+  afterEach(() => {
+    if (unmountEditor) {
+      unmountEditor();
+    }
+  });
+
+  const editor = (doc: any) => {
+    const { unmount, ...rest } = createEditor({
+      doc,
+      editorProps: { allowExtension: true },
+    });
+    unmountEditor = unmount;
+    return rest;
+  };
+
   it('should create empty terminal empty paragraph when clicked outside editor', () => {
     const { editorView } = editor(doc(p('Hello world'), p('Hello world')));
     const fullPage = mount(
