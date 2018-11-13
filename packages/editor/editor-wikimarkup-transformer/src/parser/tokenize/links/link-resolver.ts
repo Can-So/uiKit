@@ -1,6 +1,6 @@
 import { ContentLink } from './link-parser';
 import { Token, TokenErrCallback } from '../index';
-import { Schema } from 'prosemirror-model';
+import { Node as PMNode, Schema } from 'prosemirror-model';
 import { mentionLinkResolver } from './mention-link';
 import { attachmentLinkResolver } from './attachment-link';
 import { urlLinkResolver } from './url-link';
@@ -18,7 +18,7 @@ type ContentLinkResolver = (
   parsedLink: ContentLink,
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
-) => Token | null;
+) => PMNode[] | undefined;
 
 // jira-components/jira-core/src/main/resources/system-contentlinkresolvers-plugin.xml
 // attachment resolver: 10
@@ -38,16 +38,23 @@ export function resolveLink(
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token {
+  const length = link.originalLinkText.length + 2;
+
   for (const resolver of linkResolverStrategies) {
-    let resolvedLink = resolver(link, schema, tokenErrCallback);
+    const resolvedLink = resolver(link, schema, tokenErrCallback);
+
     if (resolvedLink) {
-      return resolvedLink;
+      return {
+        length,
+        nodes: resolvedLink,
+        type: 'pmnode',
+      };
     }
   }
 
   return {
+    length,
     type: 'text',
     text: `[${link.originalLinkText}]`,
-    length: link.originalLinkText.length + 2,
   };
 }

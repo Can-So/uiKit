@@ -1,5 +1,5 @@
 import { ContentLink } from './link-parser';
-import { Token, TokenErrCallback, TokenType } from '../index';
+import { TokenErrCallback, TokenType } from '../index';
 import { isSafeUrl } from '@atlaskit/editor-common/src/utils/url';
 import { parseString } from '../../text';
 import { hasAnyOfMarks } from '../../utils/text';
@@ -9,14 +9,14 @@ export function urlLinkResolver(
   link: ContentLink,
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
-): Token | null {
+): PMNode[] | undefined {
   const output: PMNode[] = [];
 
   const url = link.notLinkBody;
   const textRepresentation = link.linkBody || link.notLinkBody;
 
   if (!isSafeUrl(url)) {
-    return null;
+    return;
   }
 
   const ignoreTokenTypes = [
@@ -55,11 +55,7 @@ export function urlLinkResolver(
     output.push(linkTextNode);
   }
 
-  return {
-    type: 'pmnode',
-    nodes: output,
-    length: link.originalLinkText.length + 2,
-  };
+  return output;
 }
 
 function hasTextNode(nodes: PMNode[]) {
