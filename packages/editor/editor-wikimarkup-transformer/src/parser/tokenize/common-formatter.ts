@@ -1,5 +1,5 @@
 import { Schema } from 'prosemirror-model';
-import { Token } from './';
+import { Token, TokenType } from './';
 import { linkFormat } from './link-format';
 import { parseNewlineOnly } from './whitespace';
 import { parseMacroKeyword } from './keyword';
@@ -131,6 +131,14 @@ export function commonFormatter(
         const token = parseToken(input, match.type, index, schema);
         if (token.type === 'text') {
           buffer += token.text;
+          index += token.length;
+          state = processState.BUFFER;
+          continue;
+        } else if (match.type === TokenType.COLOR_MACRO) {
+          /**
+           * {color} is valid in formatter, we simply jump over the length
+           */
+          buffer += input.substr(index, token.length);
           index += token.length;
           state = processState.BUFFER;
           continue;
