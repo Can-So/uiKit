@@ -13,7 +13,10 @@ export interface StatusDefinition {
     text: string;
     color: 'neutral' | 'purple' | 'blue' | 'red' | 'yellow' | 'green';
     localId?: string;
-    style?: 'bold' | 'subtle';
+    /**
+     * Supported values are bold and subtle
+     */
+    style?: string;
   };
 }
 
@@ -25,7 +28,7 @@ export const status: NodeSpec = {
     text: { default: '' },
     color: { default: '' },
     localId: { default: '' },
-    style: { default: '' },
+    style: { default: null },
   },
   parseDOM: [
     {

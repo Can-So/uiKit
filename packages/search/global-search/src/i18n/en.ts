@@ -13,7 +13,7 @@ export default {
     'Advanced search for "{query}"',
   'global_search.no_recent_activity_title': 'Search for what you need',
   'global_search.no_recent_activity_body':
-    'Or use <a href={url}>Advanced Search</a> (`shift + enter`) to focus your results.',
+    'Or use <a href={url}>advanced search</a> (`shift + enter`) to focus your results.',
   'global_search.no_results_title': 'No results in titles and people',
   'global_search.no_results_body':
     'Try searching with a different term. You can search page content as well with the advanced search, or search for people, below.',
@@ -32,13 +32,13 @@ export default {
   'global_search.jira.search_result_containers_heading':
     'Boards, filters and projects',
   'global_search.jira.search_result_people_heading': 'People',
-  'global_search.jira.advanced_search': 'Go to Advanced search for',
+  'global_search.jira.advanced_search': 'Go to advanced search for',
   'global_search.jira.advanced_search_issues': 'issues',
   'global_search.jira.advanced_search_projects': 'projects',
   'global_search.jira.advanced_search_boards': 'boards',
   'global_search.jira.advanced_search_filters': 'filters',
   'global_search.jira.advanced_search_people': 'people',
-  'global_search.jira.advanced_issue_search': 'View all issues',
+  'global_search.jira.advanced_issue_search': 'Advanced search for issues',
   'global_search.jira.no_results_title':
     'No results in issue summaries, names and people',
   'global_search.jira.no_results_body':

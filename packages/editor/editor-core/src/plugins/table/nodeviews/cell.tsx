@@ -12,6 +12,7 @@ import messages from '../ui/messages';
 import { pluginKey } from '../pm-plugins/main';
 import { toggleContextualMenu } from '../actions';
 import { TableCssClassName as ClassName } from '../types';
+import { closestElement } from '../../../utils';
 
 export interface CellViewProps {
   node: PmNode;
@@ -123,7 +124,7 @@ class CellView extends ReactNodeView {
     const target = record.target as HTMLElement;
     if (
       record.attributeName === 'class' ||
-      (target && target.classList.contains(ClassName.CELL_NODEVIEW_WRAPPER))
+      (target && closestElement(target, `.${ClassName.CELL_NODEVIEW_WRAPPER}`))
     ) {
       return true;
     }

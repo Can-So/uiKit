@@ -9,7 +9,7 @@ import SkeletonItem from '../SkeletonItem';
 
 const gridSize = gridSizeFn();
 
-export default class SkeletonContainerView extends Component<{}> {
+export default class SkeletonContainerView extends Component<{||}> {
   render() {
     return (
       <Fragment>

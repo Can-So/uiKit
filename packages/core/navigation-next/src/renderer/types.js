@@ -8,7 +8,7 @@ import {
   SortableContext,
   SortableGroup,
 } from '../';
-import type { ViewData } from '../../src/view-controller/types';
+import type { ViewData } from '../view-controller/types';
 
 /**
  * Components

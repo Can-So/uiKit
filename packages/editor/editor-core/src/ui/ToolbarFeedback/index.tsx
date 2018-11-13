@@ -42,6 +42,7 @@ export interface Props {
   popupsMountPoint?: HTMLElement;
   popupsBoundariesElement?: HTMLElement;
   popupsScrollableElement?: HTMLElement;
+  labels?: string[];
 }
 
 export interface State {
@@ -318,17 +319,15 @@ export default class ToolbarFeedback extends PureComponent<Props, State> {
           }
         },
         fieldValues: {
-          description: `Please describe the problem you're having or feature you'd like to see:\n\n\n---~---~---~---~---~---~---~---~---~---~---~---~---~---~---\n version: ${
-            this.props.packageName
-          }@${
+          description: `Please describe the problem you're having or feature you'd like to see:\n\n\n`,
+          // 11711 is the field ID for the Feedback Labels field on Product Fabric.
+          // this is found by clicking "configure" on the field and inspecting the URL
+          customfield_11711: [product, ...(this.props.labels || [])],
+          customfield_11712: `version: ${this.props.packageName}@${
             this.props.packageVersion
-          } (${coreVersion})\n product: ${product}\n---~---~---~---~---~---~---~---~---~---~---~---~---~---~---\nBrowser: ${getBrowserInfo(
-            navigator.userAgent,
-          )}\nOS: ${getDeviceInfo(
-            navigator.userAgent,
-            navigator.appVersion,
-          )}\n---~---~---~---~---~---~---~---~---~---~---~---~---~---~---\n\n
-        `,
+          } (${coreVersion})
+          Browser: ${getBrowserInfo(navigator.userAgent)}
+          OS: ${getDeviceInfo(navigator.userAgent, navigator.appVersion)}`,
         },
         environment: {
           'Editor Package': this.props.packageName,

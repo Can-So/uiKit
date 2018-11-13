@@ -1,5 +1,10 @@
 # @atlaskit/calendar
 
+## 7.0.12
+- [patch] [21f5216](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/21f5216):
+
+  - Remove enzyme-to-json as it is used in our jestFrameworkSetup.js
+
 ## 7.0.11
 - [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
 

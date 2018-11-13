@@ -6444,9 +6444,9 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-extract-react-types@^0.14.4:
-  version "0.14.4"
-  resolved "https://registry.yarnpkg.com/extract-react-types/-/extract-react-types-0.14.4.tgz#e61624759709cd80d01c35066fa4d34e0c0c4429"
+extract-react-types@^0.14.5:
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/extract-react-types/-/extract-react-types-0.14.5.tgz#672684fa33beb9871f1a7bd990cfd44fa2b78097"
   dependencies:
     "@babel/core" "7.0.0-beta.56"
     "@babel/types" "^7.0.0-beta.56"
@@ -9722,9 +9722,9 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
-kind2string@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/kind2string/-/kind2string-0.5.0.tgz#663a72ee0a12592916adecd27ceb43b85bc5465a"
+kind2string@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/kind2string/-/kind2string-0.5.1.tgz#d4e7ec66316d1ecd5350cb86c70324b1c2e270e3"
 
 klaw@^1.0.0:
   version "1.3.1"
@@ -12829,12 +12829,12 @@ pretty-format@^23.0.1, pretty-format@^23.6.0:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
 
-pretty-proptypes@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/pretty-proptypes/-/pretty-proptypes-0.4.0.tgz#f628879ddeee73d7829f8776d74935187766c5e2"
+pretty-proptypes@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/pretty-proptypes/-/pretty-proptypes-0.4.1.tgz#fa38191e9119a45a284d868fc5490a16e40467ad"
   dependencies:
     emotion "^9.1.1"
-    kind2string "^0.5.0"
+    kind2string "^0.5.1"
     react-markings "^1.2.0"
 
 prettyjson@^1.1.2, prettyjson@^1.2.1:
@@ -13084,9 +13084,10 @@ prosemirror-transform@^1.0.0, prosemirror-transform@^1.1.0, prosemirror-transfor
   dependencies:
     prosemirror-model "^1.0.0"
 
-prosemirror-utils@^0.6.7:
-  version "0.6.7"
-  resolved "https://registry.yarnpkg.com/prosemirror-utils/-/prosemirror-utils-0.6.7.tgz#2a54de0883a609442b83fe5c076073b828c58f19"
+prosemirror-utils@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/prosemirror-utils/-/prosemirror-utils-0.7.2.tgz#dbdd42c902892777f7fc04dbcb23dbfd9332a771"
+  integrity sha512-y4o/d+Zx2naAe9qLXGCQugPX677FoXZequKx5sVjd40uBE9g3aREI23JGLLoVIgefytmssBfRN2T0/7UGpGvag==
 
 prosemirror-view@^1.0.0:
   version "1.6.0"
@@ -13734,9 +13735,9 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-syntax-highlighter@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-10.0.0.tgz#0908ae3d8436ff54a1322073105141d79f37edb4"
+react-syntax-highlighter@^10.0.1:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-10.0.1.tgz#307d74740a9f95506a2f0d9bd7e62b21a0723cd4"
   dependencies:
     babel-runtime "^6.18.0"
     highlight.js "~9.12.0"

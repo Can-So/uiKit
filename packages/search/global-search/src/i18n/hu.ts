@@ -14,10 +14,11 @@ export default {
     'Speciális keresés erre: „{query}”',
   'global_search.no_recent_activity_title': 'Keresd meg, amire szükséged van',
   'global_search.no_recent_activity_body':
-    'Vagy használd a <a href={url}>Speciális keresés</a> („shift + enter”) funkciót a találatok körének szűkítéséhez.',
-  'global_search.no_results_title': 'No results in titles and people',
+    'Vagy használja a <a href={url}>Speciális keresés</a> („Shift + Enter”) funkciót a találatok körének szűkítéséhez.',
+  'global_search.no_results_title':
+    'Nincs találat a címek és a személyek között.',
   'global_search.no_results_body':
-    'Try searching with a different term. You can search page content as well with the advanced search, or search for people, below.',
+    'Próbáljon meg másik kifejezés alapján keresni. Az alábbiakban keresést végezhet az oldalak tartalmában, használhatja a speciális keresést, vagy személyekre is kereshet.',
   'global_search.people.recent_people_heading': 'Legutóbbi munkák',
   'global_search.people.people_heading': 'Személyek',
   'global_search.people.advanced_search': 'Személyek keresése',
@@ -25,25 +26,27 @@ export default {
   'global_search.search_error_body':
     'Lehet, hogy csak átmeneti hibáról van szó. A legjobb, ha {link}.',
   'global_search.search_error_body.link': 'próbáld újra',
-  'global_search.jira.search_placeholder': 'Search Jira',
-  'global_search.jira.recent_issues_heading': 'Recent issues',
-  'global_search.jira.recent_people_heading': 'Recently worked with',
-  'global_search.jira.recent_containers': 'Recent boards, filters and projects',
-  'global_search.jira.search_result_issues_heading': 'Issues',
+  'global_search.jira.search_placeholder': 'Keresés a Jirában',
+  'global_search.jira.recent_issues_heading': 'Legutóbbi ügyek',
+  'global_search.jira.recent_people_heading':
+    'Legutóbbi közös munka résztvevői',
+  'global_search.jira.recent_containers':
+    'Legutóbbi táblák, szűrők és projektek',
+  'global_search.jira.search_result_issues_heading': 'Ügyek',
   'global_search.jira.search_result_containers_heading':
-    'Boards, filters and projects',
-  'global_search.jira.search_result_people_heading': 'People',
-  'global_search.jira.advanced_search': 'Go to Advanced search for',
-  'global_search.jira.advanced_search_issues': 'issues',
-  'global_search.jira.advanced_search_projects': 'projects',
-  'global_search.jira.advanced_search_boards': 'boards',
-  'global_search.jira.advanced_search_filters': 'filters',
-  'global_search.jira.advanced_search_people': 'people',
-  'global_search.jira.advanced_issue_search': 'View all issues',
+    'Táblák, szűrők és projektek',
+  'global_search.jira.search_result_people_heading': 'Személyek',
+  'global_search.jira.advanced_search': 'Speciális keresés erre:',
+  'global_search.jira.advanced_search_issues': 'ügyek',
+  'global_search.jira.advanced_search_projects': 'projektek',
+  'global_search.jira.advanced_search_boards': 'táblák',
+  'global_search.jira.advanced_search_filters': 'szűrők',
+  'global_search.jira.advanced_search_people': 'személyek',
+  'global_search.jira.advanced_issue_search': 'Speciális keresés ügyekre',
   'global_search.jira.no_results_title':
-    'No results in issue summaries, names and people',
+    'Nincs találat az ügyösszefoglalók, a nevek és a személyek között.',
   'global_search.jira.no_results_body':
-    'Try searching with a different term. You can search all text fields in issues as well with advanced search, or search for other items more specifically.',
+    'Próbáljon meg másik kifejezés alapján keresni. Keresést végezhet az ügyek összes szövegmezőjében, használhatja a speciális keresést, vagy egyéb konkrét elemekre is rákereshet.',
   'global_search.jira.no_recent_activity_body':
-    'Or refine your results with our advanced search.',
+    'Vagy pontosítsa a találatokat a speciális keresési funkciónkkal.',
 };

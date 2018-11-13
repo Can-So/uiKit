@@ -1,5 +1,30 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.3.6
+- [patch] [56007b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56007b3):
+
+  - Allow {color} in formatter
+
+## 2.3.5
+- [patch] [d76aa5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d76aa5a):
+
+  - Adds in support for multiple -
+
+## 2.3.4
+- [patch] [7b8efea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b8efea):
+
+  - Heading doesn't need a following space
+
+## 2.3.3
+- [patch] [5f2efe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f2efe0):
+
+  - Change triple dash symbol and update parser rules
+
+## 2.3.2
+- [patch] [904b74c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/904b74c):
+
+  - Fix the behaivor of \\ for line break
+
 ## 2.3.1
 - [patch] [5b4474f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b4474f):
 
