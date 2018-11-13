@@ -7,9 +7,19 @@ import { light } from '../../../../../../theme';
 
 describe('NavigationNext components: ContentNavigation primitives', () => {
   describe('ContainerNavigation', () => {
+    let defaultProps;
+    beforeEach(() => {
+      defaultProps = {
+        isPeeking: false,
+        isPeekHinting: false,
+        isEntering: false,
+        isExiting: false,
+      };
+    });
+
     it('should ALWAYS use the `light` theme', () => {
       const wrapper = mount(
-        <ContainerNavigation isPeeking>
+        <ContainerNavigation {...defaultProps}>
           <p>This is a text</p>
         </ContainerNavigation>,
       );
@@ -21,7 +31,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
 
     it('should ALWAYS use the `container` context', () => {
       const wrapper = mount(
-        <ContainerNavigation isPeeking>
+        <ContainerNavigation {...defaultProps}>
           <p>This is a text</p>
         </ContainerNavigation>,
       );
@@ -33,7 +43,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
 
     it('should have scrollable effect', () => {
       const wrapper = mount(
-        <ContainerNavigation isPeeking>
+        <ContainerNavigation {...defaultProps}>
           <p>This is a text</p>
         </ContainerNavigation>,
       );
@@ -43,7 +53,7 @@ describe('NavigationNext components: ContentNavigation primitives', () => {
 
     it('should render the received children', () => {
       const wrapper = mount(
-        <ContainerNavigation isPeeking>
+        <ContainerNavigation {...defaultProps}>
           <p>This is a text</p>
         </ContainerNavigation>,
       );

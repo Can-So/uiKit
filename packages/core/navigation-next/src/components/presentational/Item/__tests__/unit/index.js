@@ -32,8 +32,15 @@ describe('Item', () => {
   });
 
   describe('ItemBase', () => {
+    let defaultProps;
+    beforeEach(() => {
+      defaultProps = {
+        createAnalyticsEvent: (() => null: any),
+        text: 'My item',
+      };
+    });
     it('should render an InteractionStateManager', () => {
-      const wrapper = shallow(<ItemBase text="My item" />);
+      const wrapper = shallow(<ItemBase {...defaultProps} />);
 
       expect(wrapper.find(InteractionStateManager)).toHaveLength(1);
 
@@ -41,7 +48,7 @@ describe('Item', () => {
     });
 
     it('should render the Item primitive', () => {
-      const wrapper = shallow(<ItemBase text="My item" />);
+      const wrapper = shallow(<ItemBase {...defaultProps} />);
 
       const renderChildren = wrapper.find(InteractionStateManager).dive();
 

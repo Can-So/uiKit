@@ -1,0 +1,1 @@
+- Update flow types to use object spread instead of intersection and reference GlobalItem via ElementConfig rather than its props directly

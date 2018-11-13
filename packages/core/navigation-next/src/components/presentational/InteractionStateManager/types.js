@@ -8,6 +8,6 @@ export type InteractionState = {|
   isFocused: boolean,
 |};
 
-export type InteractionStateProps = {
+export type InteractionStateProps = {|
   children: InteractionState => Node,
-};
+|};
