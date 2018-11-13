@@ -32,6 +32,8 @@ describe('LayoutManager', () => {
       productNavigation: ProductNavigation,
       containerNavigation: null,
       children: <div>Page content</div>,
+      experimental_flyoutOnHover: false,
+      collapseToggleTooltipContent: () => ({ text: 'Expand', char: '[' }),
     };
   });
   // TODO: Please update this test, it should be deterministic,

@@ -261,4 +261,49 @@ describe('selectItem', () => {
       doc(p('some text '), blockquote(p('quote'))),
     );
   });
+
+  it('should select inserted inline node when selectInlineNode is specified', () => {
+    const plugin = createTypeAheadPlugin();
+    const { editorView } = createEditor({
+      doc: doc(p(typeAheadQuery({ trigger: '/' })('/query{<>}'))),
+      editorPlugins: [plugin, datePlugin],
+    });
+    selectItem(
+      {
+        trigger: '/',
+        selectItem: (state, item, insert) =>
+          insert(
+            state.schema.nodes.date.createChecked({ timestamp: item.title }),
+            { selectInlineNode: true },
+          ),
+        getItems: () => [],
+      },
+      { title: '1' },
+    )(editorView.state, editorView.dispatch);
+
+    expect(editorView.state.selection.from).toEqual(1);
+    expect(editorView.state.selection.to).toEqual(2);
+  });
+
+  it("should move cursor after inline node+space when selectInlineNode isn't specified", () => {
+    const plugin = createTypeAheadPlugin();
+    const { editorView } = createEditor({
+      doc: doc(p(typeAheadQuery({ trigger: '/' })('/query{<>}'))),
+      editorPlugins: [plugin, datePlugin],
+    });
+    selectItem(
+      {
+        trigger: '/',
+        selectItem: (state, item, insert) =>
+          insert(
+            state.schema.nodes.date.createChecked({ timestamp: item.title }),
+          ),
+        getItems: () => [],
+      },
+      { title: '1' },
+    )(editorView.state, editorView.dispatch);
+
+    expect(editorView.state.selection.from).toEqual(3);
+    expect(editorView.state.selection.to).toEqual(3);
+  });
 });

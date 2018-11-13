@@ -1,5 +1,40 @@
 # @atlaskit/editor-common
 
+## 21.1.6
+- [patch] [a1fb551](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1fb551):
+
+  - Fixed style attribute ADF error for Fabric Status
+
+## 21.1.5
+- [patch] [aadaeb9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aadaeb9):
+
+  - ED-5691 Allow unsupported block inside tableCell
+
+## 21.1.4
+- [patch] [5c148c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c148c8):
+
+  - ED-5739: fix updating cells DOM attributes when deleting rows/columns
+
+## 21.1.3
+- [patch] [fabc81f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fabc81f):
+
+  - ED-5197: bold toolbar button is inverted in table header cells
+
+## 21.1.2
+- [patch] [68f3e01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68f3e01):
+
+  - ED-5687: add full-width grid lines and other resizing fixes
+
+## 21.1.1
+- [patch] [b19b7bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b19b7bb):
+
+  - ED-5721 Make content optional for all eligible nodes
+
+## 21.1.0
+- [minor] [b440439](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b440439):
+
+  - Add breakout mark to editor, renderer and adf-utils
+
 ## 21.0.1
 - [patch] [9390a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9390a7e):
 

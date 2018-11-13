@@ -8,7 +8,7 @@ export type GroupProps = {
   /** Whether to render a Separator after the group. */
   hasSeparator: boolean,
   /** A heading to render before the group. */
-  heading: Node,
+  heading?: Node,
   /** A unique identifier for the group. Used for analytics. */
   id?: string,
 };

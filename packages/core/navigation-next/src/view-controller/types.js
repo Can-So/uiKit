@@ -1,6 +1,8 @@
 // @flow
 
-import type { ComponentType } from 'react';
+import type { ComponentType, ElementConfig } from 'react';
+import type { Diffable } from '../common/types';
+import ViewController from './ViewController';
 
 type ViewItemArgs = {
   actionAfter?: string,
@@ -124,3 +126,18 @@ export interface ViewControllerInterface {
   /** Set whether the view controller is in debug mode. */
   setIsDebugEnabled: boolean => void;
 }
+
+/**
+ * withNavigationUIController
+ */
+
+export type WithNavigationViewControllerProps = {
+  navigationViewController: ViewController,
+};
+
+export type ViewControllerWrappedComp<C> = ComponentType<
+  $Diff<
+    ElementConfig<$Supertype<C>>,
+    Diffable<WithNavigationViewControllerProps>,
+  >,
+>;

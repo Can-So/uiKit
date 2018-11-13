@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 7.4.1
+- [patch] [a567cc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a567cc9):
+
+  - Improve rendering of Smart Cards.
+
 ## 7.4.0
 - [minor] [b758737](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b758737):
 

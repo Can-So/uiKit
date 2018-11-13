@@ -29,6 +29,7 @@ import { codeMacro } from './code-macro';
 import { quoteMacro } from './quote-macro';
 import { colorMacro } from './color-macro';
 import { noformatMacro } from './noformat-macro';
+import { forceLineBreak } from './force-line-break';
 
 export enum TokenType {
   ADF_MACRO = 'ADF_MACRO', // {adf}
@@ -63,18 +64,19 @@ export enum TokenType {
   INSERTED = 'INSERTED', // +deleted+
   EMOJI = 'EMOJI', // :)
   MENTION = 'MENTION', // [~username]
+  FORCE_LINE_BREAK = 'FORCE_LINE_BREAK', // \\
 }
 
 export interface TextToken {
-  type: 'text';
-  text: string;
-  length: number;
+  readonly type: 'text';
+  readonly text: string;
+  readonly length: number;
 }
 
 export interface PMNodeToken {
-  type: 'pmnode';
-  nodes: PMNode[];
-  length: number;
+  readonly type: 'pmnode';
+  readonly nodes: PMNode[];
+  readonly length: number;
 }
 
 export type Token = TextToken | PMNodeToken;
@@ -119,6 +121,7 @@ const tokenToTokenParserMapping: {
   [TokenType.NOFORMAT_MACRO]: noformatMacro,
   [TokenType.PANEL_MACRO]: panelMacro,
   [TokenType.COLOR_MACRO]: colorMacro,
+  [TokenType.FORCE_LINE_BREAK]: forceLineBreak,
 };
 
 export function parseToken(

@@ -143,6 +143,11 @@ const InsertButton = () => `
 `;
 
 const DeleteButton = (css?: string) => `
+  .${ClassName.CONTROLS_DELETE_BUTTON_WRAP},
+  .${ClassName.CONTROLS_DELETE_BUTTON} {
+    height: ${tableDeleteButtonSize}px;
+    width: ${tableDeleteButtonSize}px;
+  }
   .${ClassName.CONTROLS_DELETE_BUTTON_WRAP} {
     position: absolute;
     cursor: pointer;
@@ -156,8 +161,6 @@ const DeleteButton = (css?: string) => `
           background: ${R300};
           color: white;
         }
-        height: ${tableDeleteButtonSize}px;
-        width: ${tableDeleteButtonSize}px;
       `)}
     }
   }
@@ -218,26 +221,26 @@ export const tableStyles = css`
 
       .${ClassName.COLUMN_CONTROLS_INNER} {
         display: flex;
-        & > div.last > button {
-          border-top-right-radius: ${tableBorderRadiusSize}px;
-        }
       }
       .${ClassName.COLUMN_CONTROLS_BUTTON_WRAP} {
         position: relative;
         margin-right: -1px;
-        &.active {
-          z-index: ${akEditorUnitZIndex};
-        }
+      }
+      .${ClassName.COLUMN_CONTROLS_BUTTON_WRAP}:last-child > button {
+        border-top-right-radius: ${tableBorderRadiusSize}px;
+      }
+      .${ClassName.COLUMN_CONTROLS_BUTTON_WRAP}.active .${
+  ClassName.CONTROLS_BUTTON
+},
+      .${ClassName.CONTROLS_BUTTON}:hover {
+        z-index: ${akEditorUnitZIndex};
+        position: relative;
       }
       ${HeaderButton(`
         border-right: 1px solid ${tableBorderColor};
         border-bottom: none;
         height: ${tableToolbarSize}px;
         width: 100%;
-        &:hover {
-          z-index: ${akEditorUnitZIndex};
-          position: relative;
-        }
 
         .${ClassName.CONTROLS_BUTTON_OVERLAY} {
           position: absolute;
@@ -349,20 +352,25 @@ export const tableStyles = css`
       width: ${tableToolbarSize}px;
       box-sizing: border-box;
       display: none;
+      position: relative;
 
       .${ClassName.ROW_CONTROLS_INNER} {
         display: flex;
         flex-direction: column;
-        & > div.${ClassName.ROW_CONTROLS_BUTTON_WRAP}.last > button {
-          border-bottom-left-radius: ${tableBorderRadiusSize}px;
-        }
+      }
+      .${ClassName.ROW_CONTROLS_BUTTON_WRAP}:last-child > button {
+        border-bottom-left-radius: ${tableBorderRadiusSize}px;
       }
       .${ClassName.ROW_CONTROLS_BUTTON_WRAP} {
         position: relative;
         margin-top: -1px;
-        &.active {
-          z-index: ${akEditorUnitZIndex};
-        }
+      }
+      .${ClassName.ROW_CONTROLS_BUTTON_WRAP}.active .${
+  ClassName.CONTROLS_BUTTON
+},
+      .${ClassName.CONTROLS_BUTTON}:hover {
+        z-index: ${akEditorUnitZIndex};
+        position: relative;
       }
       .${ClassName.CONTROLS_INSERT_BUTTON_WRAP} {
         position: absolute;
@@ -486,9 +494,9 @@ export const tableStyles = css`
           rgba(99, 114, 130, 0) 0,
           ${N40A} 100%
         );
-        height: calc(100% - ${tableMarginTop - 1}px);
+        height: calc(100% - ${tableMarginTop + 8}px);
         left: calc(100% + 2px);
-        top: ${tableMarginTop - tableToolbarSize + 1}px;
+        top: ${tableMarginTop - 1}px;
       }
     }
 

@@ -1,5 +1,10 @@
 # @atlaskit/panel
 
+## 0.0.7
+- [patch] [21f5216](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/21f5216):
+
+  - Remove enzyme-to-json as it is used in our jestFrameworkSetup.js
+
 ## 0.0.6
 - [patch] Fix button-toggle vertical positioning in IE 11 [92932e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/92932e6)
 

@@ -1,5 +1,76 @@
 # @atlaskit/editor-core
 
+## 88.1.10
+- [patch] [ac02f46](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ac02f46):
+
+  - ED-5499 ToolbarFeedback now accepts metadata that appears in feedback ticket
+
+## 88.1.9
+- [patch] [6cb44c4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6cb44c4):
+
+  - ED-5162: fix table selection for merged cells
+
+## 88.1.8
+- [patch] [e151c1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e151c1a):
+
+  - Removes dependency on @atlaskit/layer-manager
+
+  As of component versions:
+
+  - \`@atlaskit/modal-dialog@7.0.0\`
+  - \`@atlaskit/tooltip@12.0.2\`
+  - \`@atlaskit/flag@9.0.6\`
+  - \`@atlaskit/onboarding@6.0.0\`
+
+  No component requires \`LayerManager\` to layer correctly.
+
+  You can safely remove this dependency and stop rendering \`LayerManager\` in your apps.
+
+## 88.1.7
+- [patch] [8262781](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8262781):
+
+  - Fix floating toolbars overlaping with main editor toolbar
+
+## 88.1.6
+- [patch] [50aa9d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/50aa9d2):
+
+  - Refactor transform-to-code command
+
+## 88.1.5
+- [patch] [60087ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60087ec):
+
+  - Remove decorators
+
+## 88.1.4
+- [patch] [5c148c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c148c8):
+
+  - ED-5739: fix updating cells DOM attributes when deleting rows/columns
+
+## 88.1.3
+- [patch] [68f3e01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68f3e01):
+
+  - ED-5687: add full-width grid lines and other resizing fixes
+
+## 88.1.2
+- [patch] [93e576a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/93e576a):
+
+  - ED-5651: Typing // causes editor to disregard text
+
+## 88.1.1
+- [patch] [9072682](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9072682):
+
+  - Fix emoticons alignment
+
+## 88.1.0
+- [minor] [b440439](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b440439):
+
+  - Add breakout mark to editor, renderer and adf-utils
+
+## 88.0.11
+- [patch] [6ef824b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ef824b):
+
+  - Fix import of re-resizable
+
 ## 88.0.10
 - [patch] [d518ce0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d518ce0):
 

@@ -22,7 +22,7 @@ const keywordTokenMap = {
   '[': TokenType.LINK_FORMAT,
   http: TokenType.LINK_TEXT,
   irc: TokenType.LINK_TEXT,
-  '\\\\': TokenType.HARD_BREAK,
+  '\\\\': TokenType.FORCE_LINE_BREAK,
   '\r': TokenType.HARD_BREAK,
   '\n': TokenType.HARD_BREAK,
   '\r\n': TokenType.HARD_BREAK,
@@ -93,11 +93,11 @@ const leadingKeywordTokenMap = [
   },
   {
     type: TokenType.HEADING,
-    regex: /^h[1|2|3|4|5|6]\. /,
+    regex: /^h[1-6]\./,
   },
   {
     type: TokenType.RULER,
-    regex: /^-{4}\s/,
+    regex: /^-{4,5}(\s|$)/,
   },
   {
     type: TokenType.TRIPLE_DASH_SYMBOL,
