@@ -1,1 +1,0 @@
-- Fixed style attribute ADF error for Fabric Status

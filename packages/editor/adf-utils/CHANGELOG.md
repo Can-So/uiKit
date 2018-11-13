@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.1.3
+- [patch] [a1fb551](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1fb551):
+
+  - Fixed style attribute ADF error for Fabric Status
+
 ## 5.1.2
 - [patch] [11d4b85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/11d4b85):
 
