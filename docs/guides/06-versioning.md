@@ -42,7 +42,6 @@ Some examples of what would fall under the abstract semver umbrella:
   - Change named exports exposed via the main entry point.
   - Changing and renaming public props.
   - Making a public prop more restrictive in what it accepts.
-  - Change named exports exposed via the main entry point.
   - Icon sizes changing.
   - Changes in CSS that can affect layout outside of a component. For example, changing display property from flex to block and vice-versa.
   - Upgrade peer dependencies.
@@ -71,7 +70,7 @@ For this reason:
 * Updating `flow-bin` should not trigger a release unless you have to update types for certain components.
 * Updating Flow types within a component should trigger a release of the appropriate type and be called out in the changelogs.
 
-If you were to change the return type of a function in your public API, this alone should does not mean you are releasing a major version. The fact that you are expecting a different type of value does, even if no code change is required. Most times, an update to your types will correspond to an update in your code, or your expected public API.
+If you were to change the return type of a function in your public API, this alone does not mean you are releasing a major version. The fact that you are expecting a different type of value does, even if no code change is required. Most times, an update to your types will correspond to an update in your code, or your expected public API.
 
 If you're fixing a bug, you might change a type that ends up getting exported, but it may not affect your public API. In this scenario, you'd release a patch, even though the type might cause errors once consumed during development.
 
