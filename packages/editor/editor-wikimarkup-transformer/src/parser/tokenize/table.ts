@@ -7,13 +7,14 @@ import { Token, TokenType, TokenErrCallback } from './';
 import { parseNewlineOnly } from './whitespace';
 
 // Exclude { micros
-const TABLE_REGEXP = /^[ \t]*[|]+(\\\||\\\{|[^|{\n])*/;
+const TABLE_REGEXP = /^[ \t]*[|]+(\\\||[^|\n])*/;
 const BACK_SLASH_REGEXP = /(\\*$)/;
 
 const processState = {
   OPENING_CELL: 0,
   CLOSING_CELL: 1,
   MACRO: 2,
+  BUFFER: 3,
 };
 
 export function table(
@@ -43,10 +44,35 @@ export function table(
           tableBuffer += input.substr(index, tableMatch[0].length);
           index += tableMatch[0].length;
         }
-        currentState = processState.CLOSING_CELL;
+        currentState = processState.BUFFER;
         continue;
       }
       case processState.CLOSING_CELL: {
+        if (
+          builder &&
+          index < input.length &&
+          parseNewlineOnly(input.substring(index + 1))
+        ) {
+          index += parseNewlineOnly(input.substring(index + 1));
+          tableBuffer += char;
+          builder.add(parseToTableCell(tableBuffer, schema, tokenErrCallback));
+          tableBuffer = '';
+          if (
+            index < input.length &&
+            !input.substring(index + 1).match(TABLE_REGEXP)
+          ) {
+            output.push(builder.buildPMNode());
+            return {
+              type: 'pmnode',
+              nodes: output,
+              length: index - position,
+            };
+          }
+        }
+        currentState = processState.OPENING_CELL;
+        continue;
+      }
+      case processState.BUFFER: {
         // Looking for | to close the table
         if (length) {
           tableBuffer += '\n';
@@ -63,29 +89,7 @@ export function table(
           }
         }
         if (char === '|' && builder) {
-          if (
-            index < input.length &&
-            parseNewlineOnly(input.substring(index + 1))
-          ) {
-            index += parseNewlineOnly(input.substring(index + 1));
-            tableBuffer += char;
-            builder.add(
-              parseToTableCell(tableBuffer, schema, tokenErrCallback),
-            );
-            tableBuffer = '';
-            if (
-              index < input.length &&
-              !input.substring(index + 1).match(TABLE_REGEXP)
-            ) {
-              output.push(builder.buildPMNode());
-              return {
-                type: 'pmnode',
-                nodes: output,
-                length: index - position,
-              };
-            }
-          }
-          currentState = processState.OPENING_CELL;
+          currentState = processState.CLOSING_CELL;
           continue;
         } else {
           if (!length) {
