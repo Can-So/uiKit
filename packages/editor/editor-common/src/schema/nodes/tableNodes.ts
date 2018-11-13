@@ -242,8 +242,10 @@ export const tableToJSON = (node: PmNode) => ({
     }, {}),
 });
 
+// We allow empty rows here to prevent ProseMirror from trying to "fix" the table by injecting cells in random places
+// Instead, we remove empty rows on our side in table plugin -> appendTransaction
 export const tableRow = {
-  content: '(tableCell | tableHeader)+',
+  content: '(tableCell | tableHeader)*',
   tableRole: 'row',
   parseDOM: [{ tag: 'tr' }],
   toDOM() {
