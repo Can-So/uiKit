@@ -90,4 +90,76 @@ describe('link-parser', () => {
     expect(link.shortcutValue).toBeNull();
     expect('TEST').toEqual(link.spaceKey);
   });
+
+  it('should handle escapes in links', () => {
+    const wikiMarkup = 'Test!| blah!|http://example.com';
+
+    const link = parseContentLink(wikiMarkup);
+
+    expect(link.anchor).toBeNull();
+    expect(link.attachmentName).toBeNull();
+    expect(link.contentId).toEqual(0);
+    expect(link.destinationTitle).toEqual('//example.com');
+    expect(link.linkBody).toEqual('Test!| blah!');
+    expect(link.linkTitle).toBeNull();
+    expect(link.notLinkBody).toEqual('http://example.com');
+    expect(link.originalLinkText).toEqual(wikiMarkup);
+    expect(link.shortcutName).toBeNull();
+    expect(link.shortcutValue).toBeNull();
+    expect(link.spaceKey).toEqual('http');
+  });
+
+  it('should handle url links', () => {
+    const wikiMarkup = 'http://example.com';
+
+    const link = parseContentLink(wikiMarkup);
+
+    expect(link.anchor).toBeNull();
+    expect(link.attachmentName).toBeNull();
+    expect(link.contentId).toEqual(0);
+    expect(link.destinationTitle).toEqual('//example.com');
+    expect(link.linkBody).toBeNull();
+    expect(link.linkTitle).toBeNull();
+    expect(link.notLinkBody).toEqual('http://example.com');
+    expect(link.originalLinkText).toEqual(wikiMarkup);
+    expect(link.shortcutName).toBeNull();
+    expect(link.shortcutValue).toBeNull();
+    expect(link.spaceKey).toEqual('http');
+  });
+
+  it('should handle attachments', () => {
+    const wikiMarkup = '^file';
+
+    const link = parseContentLink(wikiMarkup);
+
+    expect(link.anchor).toBeNull();
+    expect(link.attachmentName).toEqual('file');
+    expect(link.contentId).toEqual(0);
+    expect(link.destinationTitle).toEqual('');
+    expect(link.linkBody).toBeNull();
+    expect(link.linkTitle).toBeNull();
+    expect(link.notLinkBody).toEqual('^file');
+    expect(link.originalLinkText).toEqual(wikiMarkup);
+    expect(link.shortcutName).toBeNull();
+    expect(link.shortcutValue).toBeNull();
+    expect(link.spaceKey).toBeNull();
+  });
+
+  it('should handle mention', () => {
+    const wikiMarkup = '~test';
+
+    const link = parseContentLink(wikiMarkup);
+
+    expect(link.anchor).toBeNull();
+    expect(link.attachmentName).toBeNull();
+    expect(link.contentId).toEqual(0);
+    expect(link.destinationTitle).toEqual('~test');
+    expect(link.linkBody).toBeNull();
+    expect(link.linkTitle).toBeNull();
+    expect(link.notLinkBody).toEqual('~test');
+    expect(link.originalLinkText).toEqual(wikiMarkup);
+    expect(link.shortcutName).toBeNull();
+    expect(link.shortcutValue).toBeNull();
+    expect(link.spaceKey).toBeNull();
+  });
 });
