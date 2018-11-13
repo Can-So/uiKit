@@ -65,12 +65,14 @@ const Foo = () => null;
       items: [{ type: 'Item', id: 'item', text: 'Item' }],
     },
     {
-      type: 'Foo',
-      id: 'foo',
+      type: 'CustomComponent',
+      id: 'custom-component',
+      name: 'Foo',
     },
     {
-      type: () => <Foo />,
-      id: 'foo',
+      type: 'InlineComponent',
+      id: 'inline-component',
+      component: () => <Foo />,
     },
   ]}
 />;
@@ -139,6 +141,28 @@ const Foo = () => null;
     {
       type: 'Group',
       id: 'group',
+    },
+  ]}
+/>;
+
+// $ExpectError - CustomComponent must have name prop
+<ItemsRenderer
+  customComponents={{ Foo }}
+  items={[
+    {
+      type: 'CustomComponent',
+      id: 'custom-component',
+    },
+  ]}
+/>;
+
+// $ExpectError - InlineComponent must have component prop
+<ItemsRenderer
+  customComponents={{ Foo }}
+  items={[
+    {
+      type: 'InlineComponent',
+      id: 'inline-component',
     },
   ]}
 />;

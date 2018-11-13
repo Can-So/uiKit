@@ -334,8 +334,12 @@ describe('navigation-next view renderer', () => {
         { type: 'Item', id: 'item' },
         { type: 'BackItem', id: 'back-item' },
         { type: 'GoToItem', id: 'goto-item', goTo: 'view' },
-        { type: InlineCustom, id: 'inlineCustom' },
-        { type: 'Corgie', id: 'corgie' },
+        {
+          type: 'InlineComponent',
+          component: InlineCustom,
+          id: 'inlineCustom',
+        },
+        { type: 'CustomComponent', name: 'Corgie', id: 'corgie' },
       ];
       const wrapper = shallow(
         <ItemsRenderer items={items} customComponents={{ Corgie }} />,
@@ -344,7 +348,7 @@ describe('navigation-next view renderer', () => {
     });
 
     it('should cache custom components with analytics', () => {
-      const items = [{ type: 'Corgie', id: 'corgie' }];
+      const items = [{ type: 'CustomComponent', name: 'Corgie', id: 'corgie' }];
       const wrapper = mount(
         <ItemsRenderer items={items} customComponents={{ Corgie }} />,
       );
@@ -354,7 +358,9 @@ describe('navigation-next view renderer', () => {
     });
 
     it('should cache inline custom components with analytics', () => {
-      const items = [{ type: Corgie, id: 'corgieSpy' }];
+      const items = [
+        { type: 'InlineComponent', component: Corgie, id: 'corgieSpy' },
+      ];
       const wrapper = mount(<ItemsRenderer items={items} />);
       expect(didMountSpy).toHaveBeenCalledTimes(1);
       wrapper.setProps({ foo: 1 });

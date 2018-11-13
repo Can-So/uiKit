@@ -218,7 +218,7 @@ const itemComponents = {
   Wordmark,
 };
 
-const renderItemComponents = (props: ItemType, key: string, index: number) => {
+const renderItemComponent = (props: ItemType, key: string, index: number) => {
   let element = null;
   // We have to duplicate all code inside each if block for flow type refinement to work.
   // At this stage it's worth asking if we should typecast to any instead and opt-out of typechecking
@@ -267,7 +267,7 @@ const groupComponents = {
   SortableGroup,
 };
 
-const renderGroupComponents = (
+const renderGroupComponent = (
   props: ItemType,
   key: string,
   customComponents: CustomComponents,
@@ -338,22 +338,22 @@ class ItemsRenderer extends PureComponent<ItemsRendererProps> {
     ComponentType<*>,
   > = new Map();
 
-  getCustomComponent = (type: string | ComponentType<*>) => {
+  getCustomComponent = (component: string | ComponentType<*>) => {
     // cache custom components wrapped with analytics
     // to prevent re-mounting of component on re-render
     const { customComponents = {} } = this.props;
-    let component = this.customComponentsWithAnalytics.get(type);
-    if (!component) {
-      component =
-        typeof type === 'string'
-          ? navigationItemClicked(customComponents[type], type)
+    let cachedComponent = this.customComponentsWithAnalytics.get(component);
+    if (!cachedComponent) {
+      cachedComponent =
+        typeof component === 'string'
+          ? navigationItemClicked(customComponents[component], component)
           : navigationItemClicked(
-              type,
-              type.displayName || 'inlineCustomComponent',
+              component,
+              component.displayName || 'inlineCustomComponent',
             );
-      this.customComponentsWithAnalytics.set(type, component);
+      this.customComponentsWithAnalytics.set(component, cachedComponent);
     }
-    return component;
+    return cachedComponent;
   };
 
   render() {
@@ -367,13 +367,14 @@ class ItemsRenderer extends PureComponent<ItemsRendererProps> {
           ? props.nestedGroupKey
           : props.id;
 
-      // If they've provided a component as the type
-      if (typeof props.type === 'function') {
-        const CustomComponent = this.getCustomComponent(props.type);
+      if (props.type === 'InlineComponent') {
+        const { type, component, ...componentProps } = props;
+        // If they've provided a component as the type
+        const CustomComponent = this.getCustomComponent(props.component);
         return (
           <CustomComponent
             key={key}
-            {...props}
+            {...componentProps}
             index={index}
             // We pass our in-built components through to custom components so
             // they can wrap/render them if they want to.
@@ -381,41 +382,30 @@ class ItemsRenderer extends PureComponent<ItemsRendererProps> {
             customComponents={customComponents}
           />
         );
-      }
-
-      if (typeof props.type === 'string') {
+      } else if (Object.keys(groupComponents).includes(props.type)) {
         // If they've provided a type which matches one of our in-built group
         // components
-        if (Object.keys(groupComponents).includes(props.type)) {
-          renderGroupComponents(props, key, customComponents);
-        }
-
+        return renderGroupComponent(props, key, customComponents);
         // If they've provided a type which matches one of our in-built item
         // components.
-        if (Object.keys(itemComponents).includes(props.type)) {
-          return renderItemComponents(props, key, index);
-        }
-        // if (itemComponents[props.type]) {
-        //   const I = itemComponents[props.type];
-        //   return <I key={key} {...props} index={index} />;
-        // }
-
+      } else if (Object.keys(itemComponents).includes(props.type)) {
+        return renderItemComponent(props, key, index);
+      } else if (props.type === 'CustomComponent') {
+        const { type, name, ...componentProps } = props;
         // If they've provided a type which matches one of their defined custom
         // components.
-        if (customComponents[props.type]) {
-          const CustomComponent = this.getCustomComponent(props.type);
-          return (
-            <CustomComponent
-              key={key}
-              {...props}
-              index={index}
-              // We pass our in-built components through to custom components so
-              // they can wrap/render them if they want to.
-              components={components}
-              customComponents={customComponents}
-            />
-          );
-        }
+        const CustomComponent = this.getCustomComponent(name);
+        return (
+          <CustomComponent
+            key={key}
+            {...componentProps}
+            index={index}
+            // We pass our in-built components through to custom components so
+            // they can wrap/render them if they want to.
+            components={components}
+            customComponents={customComponents}
+          />
+        );
       }
 
       return <Debug key={key} type={props.type} {...props} />;

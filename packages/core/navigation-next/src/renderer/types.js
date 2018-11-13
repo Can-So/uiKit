@@ -105,9 +105,17 @@ export type ItemType =
   | {|
       +type: 'SortableGroup',
       ...$Exact<SortableGroupProps>,
-    |};
-
-// export type RendererItem = ItemType;
+    |}
+  | {
+      +type: 'CustomComponent',
+      name: string,
+      ...$Exact<SharedItemTypeProps>,
+    }
+  | {
+      +type: 'InlineComponent',
+      component: ComponentType<*>,
+      ...$Exact<SharedItemTypeProps>,
+    };
 
 export type GroupHeadingProps = {|
   ...$Exact<WithoutChildren<ElementConfig<typeof GroupHeading>>>,
