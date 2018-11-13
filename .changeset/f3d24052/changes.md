@@ -1,1 +1,0 @@
-- Remove enzyme-to-json as it is used in our jestFrameworkSetup.js
