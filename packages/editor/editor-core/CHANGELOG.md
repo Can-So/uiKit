@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.13
+- [patch] [f9d1245](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f9d1245):
+
+  - Fixes pasting from Microsoft & Apple office products (ED-5694, ED-5575)
+
 ## 88.1.12
 - [patch] [cc78d09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc78d09):
 
