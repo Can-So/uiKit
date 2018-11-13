@@ -3,7 +3,6 @@ import memoizeOne from 'memoize-one';
 import { PopupSelect } from '@atlaskit/select';
 import ColorCard from './ColorCard';
 import { Palette, Color } from '../types';
-import { ColorCardWrapper } from '../styled/ColorPalette';
 import * as components from './components';
 import {
   name as packageName,
@@ -14,8 +13,11 @@ import {
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
+import { ColorCardWrapper } from '../styled/ColorPicker';
 
 export interface Props {
+  /** color picker button label */
+  label?: string;
   /** list of available colors */
   palette: Palette;
   /** selected color */
@@ -30,12 +32,9 @@ export interface Props {
   createAnalyticsEvent?: any;
 }
 
-const arrowKeys = {
-  ArrowDown: 'down',
-  ArrowLeft: 'left',
-  ArrowRight: 'right',
-  ArrowUp: 'up',
-};
+export interface State {
+  isOpen: boolean;
+}
 
 const getOptions = memoizeOne((props: Props) => {
   const { palette, selectedColor } = props;
@@ -58,20 +57,12 @@ const getOptions = memoizeOne((props: Props) => {
   };
 });
 
-// const adjustFocusIndex = (newIndex, itemsLength) => {
-//   return (itemsLength + newIndex) % itemsLength;
-// };
+export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
+  state = {
+    isOpen: false,
+  };
 
-export class ColorPickerWithoutAnalytics extends React.Component<Props> {
   createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
-
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.selectedColor !== this.props.selectedColor) {
-      this.setState({
-        focusedItemIndex: getOptions(this.props).focusedItemIndex,
-      });
-    }
-  }
 
   changeAnalyticsCaller = () => {
     const { createAnalyticsEvent } = this.props;
@@ -95,87 +86,46 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props> {
     this.props.onChange(option.value, this.changeAnalyticsCaller());
   };
 
-  onKeyDown = (event: React.KeyboardEvent) => {
-    switch (event.key) {
-      case 'ArrowLeft':
-      case 'ArrowRight':
-      case 'ArrowUp':
-      case 'ArrowDown':
-        this.focusOption(arrowKeys[event.key]);
-        break;
-      default:
-        return;
-    }
-
-    event.preventDefault();
+  onOpen = () => {
+    this.setState({ isOpen: true });
   };
 
-  focusOption(dir) {
-    // const { cols, palette } = this.props;
-    // switch (dir) {
-    //   case 'up': {
-    //     if (cols !== undefined) {
-    //       this.setState({
-    //         focusedItemIndex: adjustFocusIndex(
-    //           focusedItemIndex - cols,
-    //           palette.length,
-    //         ),
-    //       });
-    //     }
-    //     break;
-    //   }
-    //   case 'left':
-    //     this.setState({
-    //       focusedItemIndex: adjustFocusIndex(
-    //         focusedItemIndex - 1,
-    //         palette.length,
-    //       ),
-    //     });
-    //     break;
-    //   case 'down':
-    //     if (cols !== undefined) {
-    //       this.setState({
-    //         focusedItemIndex: adjustFocusIndex(
-    //           focusedItemIndex + cols,
-    //           palette.length,
-    //         ),
-    //       });
-    //     }
-    //     break;
-    //   case 'right':
-    //     this.setState({
-    //       focusedItemIndex: adjustFocusIndex(
-    //         focusedItemIndex + 1,
-    //         palette.length,
-    //       ),
-    //     });
-    //     break;
-    //   default:
-    //     return;
-    // }
-  }
-
-  selectRef: React.RefObject<typeof PopupSelect> = React.createRef();
+  onClose = () => {
+    this.setState({ isOpen: false });
+  };
 
   render() {
-    const { checkMarkColor, cols } = this.props;
+    const { checkMarkColor, cols, label } = this.props;
     const { options, value } = getOptions(this.props);
+    const { isOpen } = this.state;
 
     return (
       <PopupSelect
-        ref={this.selectRef}
         target={
           <ColorCardWrapper>
-            <ColorCard {...value} />
+            <ColorCard
+              {...value}
+              label={label || value.label}
+              focused={isOpen}
+            />
           </ColorCardWrapper>
         }
+        popperProps={{
+          modifiers: {
+            offset: { offset: '0, 5' },
+            preventOverflow: {
+              padding: 0,
+            },
+          },
+        }}
         maxMenuWidth="auto"
         minMenuWidth="auto"
         options={options}
         value={value}
         components={components}
         onChange={this.onChange}
-        onKeyDown={this.onKeyDown}
+        onOpen={this.onOpen}
+        onClose={this.onClose}
         // never show search input
         searchThreshold={Number.MAX_VALUE}
         // palette props

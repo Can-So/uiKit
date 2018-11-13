@@ -7,7 +7,6 @@ import { ColorCardOption, ColorCardButton } from '../styled/ColorCard';
 export interface Props {
   value: string;
   label?: string;
-  tabIndex?: number;
   onClick?: (value: string) => void;
   checkMarkColor?: string;
   selected?: boolean;
@@ -40,7 +39,6 @@ export default class ColorCard extends PureComponent<Props> {
 
   render() {
     const {
-      tabIndex,
       value,
       label,
       selected,
@@ -56,9 +54,7 @@ export default class ColorCard extends PureComponent<Props> {
         innerRef={this.ref}
         onClick={this.onClick}
         onMouseDown={this.onMouseDown}
-        tabIndex={tabIndex}
         title={label}
-        type="button"
         color={value || 'transparent'}
         focused={focused}
       >
