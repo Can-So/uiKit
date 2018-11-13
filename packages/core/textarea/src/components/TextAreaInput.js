@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, type ElementRef } from 'react';
+import React, { Component } from 'react';
 import AutoResize from './AutoResize';
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   /** The value of the text-area. */
   value?: string | number,
   /** The default value of the text-area */
-  defaultValue?: string | number,
+  defaultValue: string | number,
   /** Handler to be called when the input changes. */
   onChange?: (event: SyntheticInputEvent<HTMLTextAreaElement>) => void,
 };
@@ -15,26 +15,20 @@ type Props = {
 type State = {
   value: string | number,
   isFocused: boolean,
-  height?: number,
 };
 
 export default class FTextArea extends Component<Props, State> {
   static defaultProps = {
-    appearance: 'standard',
-    isCompact: false,
-    isRequired: false,
-    isReadOnly: false,
-    isDisabled: false,
-    isMonospaced: false,
+    defaultValue: '',
   };
+
   state = {
-    height: undefined,
     isFocused: false,
-    value: this.props.defaultValue || '',
+    value:
+      this.props.value !== undefined
+        ? this.props.value
+        : this.props.defaultValue,
   };
-  textArea: ElementRef<*>;
-  hiddenTextArea: ElementRef<*>;
-  elementRef: ElementRef<*> = {};
 
   getValue = () => {
     return this.props.value !== undefined ? this.props.value : this.state.value;
@@ -53,7 +47,7 @@ export default class FTextArea extends Component<Props, State> {
   };
 
   render() {
-    const { resize, ...props } = this.props;
+    const { resize, defaultValue, ...props } = this.props;
     const value = this.getValue();
     if (resize === 'smart')
       return (
@@ -61,7 +55,7 @@ export default class FTextArea extends Component<Props, State> {
           {(height, ref) => (
             <textarea
               {...props}
-              innerRef={ref}
+              ref={ref}
               style={{ height }}
               value={value}
               onChange={this.handleOnChange}

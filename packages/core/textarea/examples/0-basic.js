@@ -22,7 +22,7 @@ export default class extends Component<*, *> {
   render() {
     return (
       <Div>
-        <TextArea minimumRows={4} resize="smart" />
+        <TextArea resize="smart" />
         <TextArea resize="auto" />
         <TextArea resize="horizontal" />
         <TextArea resize="vertical" />

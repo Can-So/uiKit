@@ -3,7 +3,7 @@ import React, { Component, type ElementRef } from 'react';
 import { Theme } from '@atlaskit/theme';
 import textAreaTheme, { type ThemeProps } from '../theme';
 import { TextAreaWrapper } from '../styled';
-import Textarea from './TextArea';
+import TextareaInput from './TextAreaInput';
 
 type Props = {
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart',
@@ -50,7 +50,7 @@ export default class ThemedTextArea extends Component<Props, State> {
     isReadOnly: false,
     isDisabled: false,
     isMonospaced: false,
-    minimumRows: 4,
+    minimumRows: 1,
     theme: textAreaTheme,
   };
   state = {
@@ -108,7 +108,7 @@ export default class ThemedTextArea extends Component<Props, State> {
             isFocused={isFocused}
             minimumRows={minimumRows}
           >
-            <Textarea
+            <TextareaInput
               {...props}
               resize={resize}
               disabled={isDisabled}
