@@ -34,7 +34,171 @@ export class DeleteUserOverviewScreen extends React.Component<
         <Styled.Title>
           <FormattedMessage {...overviewMessages.heading} />
         </Styled.Title>
+        <Styled.FirstLine>
+          <FormattedMessage
+            {...this.selectAdminOrSelfCopy(
+              overviewMessages.firstLineAdmin,
+              overviewMessages.firstLineSelf,
+            )}
+          />
+        </Styled.FirstLine>
         <UserInfo user={user} />
+        <FormattedMessage
+          {...this.selectAdminOrSelfCopy(
+            overviewMessages.paragraphAboutToDeleteAdmin,
+            overviewMessages.paragraphAboutToDeleteSelf,
+          )}
+        />
+        <Styled.MainInformationList>
+          <li>
+            <Styled.ListItems>
+              {!accessibleSites || accessibleSites.length === 0 ? (
+                <FormattedMessage
+                  {...this.selectAdminOrSelfCopy(
+                    overviewMessages.paragraphLoseAccessAdminNoSites,
+                    overviewMessages.paragraphLoseAccessSelfNoSites,
+                  )}
+                />
+              ) : (
+                <>
+                  <FormattedMessage
+                    {...this.selectAdminOrSelfCopy(
+                      overviewMessages.paragraphLoseAccessAdmin,
+                      overviewMessages.paragraphLoseAccessSelf,
+                    )}
+                    values={{ fullName: user.fullName }}
+                  />
+                  <Styled.AccessibleSitesList>
+                    {accessibleSites.map((url, idx) => (
+                      <li key={idx}>{url}</li>
+                    ))}
+                  </Styled.AccessibleSitesList>
+                  <Styled.AccessibleSitesListFootnote>
+                    <FormattedMessage
+                      {...overviewMessages.paragraphLoseAccessFootnote}
+                    />
+                  </Styled.AccessibleSitesListFootnote>
+                </>
+              )}
+            </Styled.ListItems>
+          </li>
+          <li>
+            <Styled.ListItems>
+              <FormattedMessage
+                {...this.selectAdminOrSelfCopy(
+                  overviewMessages.paragraphPersonalDataWillBeDeletedAdmin,
+                  overviewMessages.paragraphPersonalDataWillBeDeletedSelf,
+                )}
+              />
+              <Styled.InfoIconWrapper>
+                <StatefulInlineDialog
+                  placement="auto-start"
+                  content={
+                    <div>
+                      <FormattedMessage
+                        {...this.selectAdminOrSelfCopy(
+                          overviewMessages.inlineDialogDataWillBeDeletedP1Admin,
+                          overviewMessages.inlineDialogDataWillBeDeletedP1Self,
+                        )}
+                        tagName="p"
+                      />
+                      <Styled.ListItems>
+                        <FormattedMessage
+                          {...this.selectAdminOrSelfCopy(
+                            overviewMessages.inlineDialogDataWillBeDeletedLi1Admin,
+                            overviewMessages.inlineDialogDataWillBeDeletedLi1Self,
+                          )}
+                          tagName="li"
+                        />
+                        <FormattedMessage
+                          {...this.selectAdminOrSelfCopy(
+                            overviewMessages.inlineDialogDataWillBeDeletedLi2Admin,
+                            overviewMessages.inlineDialogDataWillBeDeletedLi2Self,
+                          )}
+                          tagName="li"
+                        />
+                        <FormattedMessage
+                          {...this.selectAdminOrSelfCopy(
+                            overviewMessages.inlineDialogDataWillBeDeletedLi3Admin,
+                            overviewMessages.inlineDialogDataWillBeDeletedLi3Self,
+                          )}
+                          tagName="li"
+                        />
+                      </Styled.ListItems>
+                      <FormattedMessage
+                        {...this.selectAdminOrSelfCopy(
+                          overviewMessages.inlineDialogDataWillBeDeletedP2Admin,
+                          overviewMessages.inlineDialogDataWillBeDeletedP2Self,
+                        )}
+                        tagName="p"
+                      />
+                      <FormattedMessage
+                        {...this.selectAdminOrSelfCopy(
+                          overviewMessages.inlineDialogDataWillBeDeletedP3Admin,
+                          overviewMessages.inlineDialogDataWillBeDeletedP3Self,
+                        )}
+                        tagName="p"
+                      />
+                    </div>
+                  }
+                >
+                  <InfoIcon label="" size="small" />
+                </StatefulInlineDialog>
+              </Styled.InfoIconWrapper>
+            </Styled.ListItems>
+            <Styled.ListItems>
+              <FormattedMessage
+                {...this.selectAdminOrSelfCopy(
+                  overviewMessages.paragraphPersonalDataWillBeDeletedFootnoteAdmin,
+                  overviewMessages.paragraphPersonalDataWillBeDeletedFootnoteSelf,
+                )}
+              />{' '}
+              <Styled.InfoIconWrapper>
+                <StatefulInlineDialog
+                  placement="auto-start"
+                  content={
+                    <div>
+                      <FormattedMessage
+                        {...this.selectAdminOrSelfCopy(
+                          overviewMessages.inlineDialogDataAppsAdmin,
+                          overviewMessages.inlineDialogDataAppsSelf,
+                        )}
+                        tagName="p"
+                      />
+                    </div>
+                  }
+                >
+                  <InfoIcon label="" size="small" />
+                </StatefulInlineDialog>
+              </Styled.InfoIconWrapper>
+            </Styled.ListItems>
+          </li>
+          <li>
+            <Styled.ListItems>
+              <FormattedMessage
+                {...this.selectAdminOrSelfCopy(
+                  overviewMessages.paragraphContentCreatedAdmin,
+                  overviewMessages.paragraphContentCreatedSelf,
+                )}
+              />{' '}
+              <Styled.InfoIconWrapper>
+                <StatefulInlineDialog
+                  placement="auto-start"
+                  content={
+                    <FormattedMessage
+                      {...this.selectAdminOrSelfCopy(
+                        overviewMessages.inlineDialogContentCreatedAdmin,
+                        overviewMessages.inlineDialogContentCreatedSelf,
+                      )}
+                    />
+                  }
+                >
+                  <InfoIcon label="" size="small" />
+                </StatefulInlineDialog>
+              </Styled.InfoIconWrapper>
+            </Styled.ListItems>
+          </li>
+        </Styled.MainInformationList>
         {deactivateUserHandler && (
           <Styled.SectionMessageOuter>
             <SectionMessage appearance="warning">
@@ -51,106 +215,6 @@ export class DeleteUserOverviewScreen extends React.Component<
             </SectionMessage>
           </Styled.SectionMessageOuter>
         )}
-        <FormattedMessage
-          {...this.selectAdminOrSelfCopy(
-            overviewMessages.paragraphAboutToDeleteAdmin,
-            overviewMessages.paragraphAboutToDeleteSelf,
-          )}
-        />
-        <Styled.MainInformationList>
-          <li>
-            {!accessibleSites || accessibleSites.length === 0 ? (
-              <FormattedMessage
-                {...this.selectAdminOrSelfCopy(
-                  overviewMessages.paragraphLoseAccessAdminNoSites,
-                  overviewMessages.paragraphLoseAccessSelfNoSites,
-                )}
-              />
-            ) : (
-              <>
-                <FormattedMessage
-                  {...this.selectAdminOrSelfCopy(
-                    overviewMessages.paragraphLoseAccessAdmin,
-                    overviewMessages.paragraphLoseAccessSelf,
-                  )}
-                  values={{ fullName: user.fullName }}
-                />
-                <Styled.AccessibleSitesList>
-                  {accessibleSites.map((url, idx) => (
-                    <li key={idx}>{url}</li>
-                  ))}
-                </Styled.AccessibleSitesList>
-                <FormattedMessage
-                  {...this.selectAdminOrSelfCopy(
-                    overviewMessages.paragraphLoseAccessFootnoteAdmin,
-                    overviewMessages.paragraphLoseAccessFootnoteSelf,
-                  )}
-                  tagName="small"
-                />
-              </>
-            )}
-          </li>
-          <li>
-            <FormattedMessage
-              {...this.selectAdminOrSelfCopy(
-                overviewMessages.paragraphContentCreatedAdmin,
-                overviewMessages.paragraphContentCreatedSelf,
-              )}
-            />{' '}
-            <Styled.InfoIconWrapper>
-              <StatefulInlineDialog
-                placement="auto-start"
-                content={
-                  <FormattedMessage
-                    {...this.selectAdminOrSelfCopy(
-                      overviewMessages.inlineDialogContentCreatedAdmin,
-                      overviewMessages.inlineDialogContentCreatedSelf,
-                    )}
-                  />
-                }
-              >
-                <InfoIcon label="" size="small" />
-              </StatefulInlineDialog>
-            </Styled.InfoIconWrapper>
-          </li>
-          <li>
-            <FormattedMessage
-              {...this.selectAdminOrSelfCopy(
-                overviewMessages.paragraphPersonalDataWillBeDeletedAdmin,
-                overviewMessages.paragraphPersonalDataWillBeDeletedSelf,
-              )}
-            />
-            <FormattedMessage
-              {...overviewMessages.paragraphPersonalDataWillBeDeletedFootnote}
-              tagName="small"
-            />{' '}
-            <Styled.InfoIconWrapper>
-              <StatefulInlineDialog
-                placement="auto-start"
-                content={
-                  <div>
-                    <FormattedMessage
-                      {...this.selectAdminOrSelfCopy(
-                        overviewMessages.inlineDialogDataWillBeDeletedP1Admin,
-                        overviewMessages.inlineDialogDataWillBeDeletedP1Self,
-                      )}
-                      tagName="p"
-                    />
-                    <FormattedMessage
-                      {...this.selectAdminOrSelfCopy(
-                        overviewMessages.inlineDialogDataWillBeDeletedP2Admin,
-                        overviewMessages.inlineDialogDataWillBeDeletedP2Self,
-                      )}
-                      tagName="p"
-                    />
-                  </div>
-                }
-              >
-                <InfoIcon label="" size="small" />
-              </StatefulInlineDialog>
-            </Styled.InfoIconWrapper>
-          </li>
-        </Styled.MainInformationList>
       </Styled.Screen>
     );
   }

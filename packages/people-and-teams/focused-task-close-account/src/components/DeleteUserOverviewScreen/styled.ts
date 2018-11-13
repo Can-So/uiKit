@@ -4,7 +4,7 @@ import gridSizeTimes from '../../util/gridSizeTimes';
 
 export const Screen = styled.div`
   width: 640px;
-  margin-bottom: ${gridSizeTimes(4)}px;
+  margin-bottom: ${gridSizeTimes(2)}px;
 `;
 
 export const LoadingWrapper = styled.div`
@@ -20,6 +20,11 @@ export const Title = styled.div`
   margin-top: 0;
 `;
 
+export const FirstLine = styled.div`
+  margin-top: ${gridSizeTimes(3)}px;
+  margin-bottom: ${gridSizeTimes(2)}px;
+`;
+
 export const SectionMessageOuter = styled.div`
   margin: ${gridSizeTimes(3)}px 0;
 `;
@@ -27,6 +32,7 @@ export const SectionMessageOuter = styled.div`
 export const MainInformationList = styled.ul`
   > li {
     margin-top: 16px;
+    margin-left: 10px;
   }
 `;
 
@@ -34,6 +40,17 @@ export const AccessibleSitesList = styled.ul`
   list-style: none;
   padding-left: 0;
   font-weight: 600;
+  margin-left: 8px;
+`;
+
+export const AccessibleSitesListFootnote = styled.div`
+  padding-left: 0;
+  margin-left: 8px;
+`;
+
+export const ListItems = styled.div`
+  margin-left: 24px;
+  margin-top: 8px;
 `;
 
 export const InfoIconWrapper = styled.span`
