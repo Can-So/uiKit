@@ -1,5 +1,5 @@
 // @flow
-import { colors, gridSize, fontSize } from '@atlaskit/theme';
+import { colors } from '@atlaskit/theme';
 
 // The following are the name for color mappings in @atlaskit/themes
 // The exports are the functions, not the objects, so could not be used here
@@ -83,28 +83,7 @@ export type ThemeProps = {
   mode?: 'light' | 'dark',
 };
 
-/* BASE VARIABLES */
-// TODO: is this as generic as we can make these;
-// should information like px and s be specified in our styling instead?
-const grid = gridSize();
-const borderRadius = '3px';
-const borderWidth = 2;
-const lineHeightBase = grid * 2.5;
-const lineHeightCompact = grid * 2;
-const heightBase = grid * 5;
-const heightCompact = grid * 4;
-const horizontalPadding = grid;
-const innerHeight = grid * 3;
-const transitionDuration = '0.2s';
-
-const getLineHeight = isCompact =>
-  (isCompact ? lineHeightCompact : lineHeightBase) / fontSize();
-const getHeight = isCompact => (isCompact ? heightCompact : heightBase);
-
-const getTextAreaTheme = mode => ({
-  appearance,
-  isCompact,
-}: TextAreaThemeProps) => ({
+const getTextAreaTheme = mode => ({ appearance }: TextAreaThemeProps) => ({
   borderColor: borderColor[appearance][mode],
   borderColorFocus: borderColorFocus[appearance][mode],
   backgroundColorHover: backgroundColorHover[appearance][mode],
@@ -113,13 +92,6 @@ const getTextAreaTheme = mode => ({
   textColor: textColor[mode],
   disabledTextColor: disabledTextColor[mode],
   placeholderTextColor: placeholderTextColor[mode],
-  borderRadius,
-  borderWidth,
-  baseHeight: getHeight(isCompact),
-  lineHeight: getLineHeight(isCompact),
-  horizontalPadding,
-  innerHeight,
-  transitionDuration,
 });
 
 export default (props: ThemeProps): ThemeProps => {

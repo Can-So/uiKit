@@ -1,2 +1,2 @@
 // @flow
-export { default } from './components/TextArea';
+export { default } from './components/ThemedTextArea';

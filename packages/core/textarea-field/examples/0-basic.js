@@ -23,12 +23,6 @@ export default class extends Component<*, *> {
     return (
       <Div>
         <TextArea minimumRows={4} resize="smart" />
-        <TextArea
-          minimumRows={4}
-          onChange={this.controlValue}
-          value={this.state.value}
-          resize="smart"
-        />
         <TextArea resize="auto" />
         <TextArea resize="horizontal" />
         <TextArea resize="vertical" />
