@@ -15,7 +15,7 @@ const horizontalPadding = grid;
 const transitionDuration = '0.2s';
 
 const getBorderStyle = props =>
-  props.appearance === 'none' ? 'none' : 'solid';
+  props.appearance === 'none' ? 'none;' : 'solid;';
 
 const getPlaceholderStyle = style => css`
   &::-webkit-input-placeholder {
@@ -90,19 +90,19 @@ const getResizeStyles = ({ resize }) => {
   if (resize === 'vertical') {
     return `resize: vertical;`;
   }
-  return `resize: none`;
+  return `resize: none;`;
 };
 
 export const TextAreaWrapper = styled.div`
   flex: 1 1 100%;
   position: relative;
   background-color: ${props =>
-    props.isFocused ? props.backgroundColorFocus : props.backgroundColor}
+    props.isFocused ? props.backgroundColorFocus : props.backgroundColor};
   border-color: ${props =>
     props.isFocused ? props.borderColorFocus : props.borderColor};
   border-radius: ${borderRadius};
   border-style: ${getBorderStyle};
-  box-sizing: border-box;;
+  box-sizing: border-box;
   line-height: ${getLineHeight};
   overflow: hidden;
   transition: background-color ${transitionDuration} ease-in-out,
@@ -110,8 +110,8 @@ export const TextAreaWrapper = styled.div`
   word-wrap: break-word;
   ${getBorderAndPadding}
   ${getHoverState}
-  ${getDisabledState};
-  ${props => props.isDisabled && `cursor:not-allowed;`}
+  ${getDisabledState}
+  ${props => props.isDisabled && `cursor: not-allowed;`}
   padding-right: 0;
   font-size: ${fontSize}px;
   max-width: 100%;
@@ -120,7 +120,7 @@ export const TextAreaWrapper = styled.div`
     display:block;
     padding-right: 6px;
     resize: none;
-    background: transparent
+    background: transparent;
     padding: 0;
     margin: 0;
     border: 0;
