@@ -1,1 +1,0 @@
-- ED-5162: fix table selection for merged cells

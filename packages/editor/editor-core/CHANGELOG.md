@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.9
+- [patch] [6cb44c4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6cb44c4):
+
+  - ED-5162: fix table selection for merged cells
+
 ## 88.1.8
 - [patch] [e151c1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e151c1a):
 
