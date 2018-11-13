@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.12
+- [patch] [cc78d09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc78d09):
+
+  - ED-5196: For a block as first node in a document, up and left arrow should show a gap cursor
+
 ## 88.1.11
 - [patch] [4897ebf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4897ebf):
 
