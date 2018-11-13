@@ -1,6 +1,15 @@
 // @flow
 import React, { Component, type ElementRef } from 'react';
 import { Theme } from '@atlaskit/theme';
+import {
+  withAnalyticsEvents,
+  withAnalyticsContext,
+  createAndFireEvent,
+} from '@atlaskit/analytics-next';
+import {
+  name as packageName,
+  version as packageVersion,
+} from '../../package.json';
 import textAreaTheme, { type ThemeProps } from '../theme';
 import { TextAreaWrapper } from '../styled';
 import TextareaInput from './TextAreaInput';
@@ -41,7 +50,7 @@ type State = {
   height?: number,
 };
 
-export default class ThemedTextArea extends Component<Props, State> {
+class TextArea extends Component<Props, State> {
   static defaultProps = {
     resize: 'smart',
     appearance: 'standard',
@@ -123,3 +132,36 @@ export default class ThemedTextArea extends Component<Props, State> {
     );
   }
 }
+
+export { TextArea as TextAreaWithoutAnalytics };
+const createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
+
+export default withAnalyticsContext({
+  componentName: 'textArea',
+  packageName,
+  packageVersion,
+})(
+  withAnalyticsEvents({
+    onBlur: createAndFireEventOnAtlaskit({
+      action: 'blurred',
+      actionSubject: 'textArea',
+
+      attributes: {
+        componentName: 'textArea',
+        packageName,
+        packageVersion,
+      },
+    }),
+
+    onFocus: createAndFireEventOnAtlaskit({
+      action: 'focused',
+      actionSubject: 'textArea',
+
+      attributes: {
+        componentName: 'textArea',
+        packageName,
+        packageVersion,
+      },
+    }),
+  })(TextArea),
+);
