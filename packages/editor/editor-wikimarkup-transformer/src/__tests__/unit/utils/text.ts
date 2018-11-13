@@ -62,9 +62,11 @@ describe('StringBuffer', () => {
 
 describe('isDigit', () => {
   it('should return true if character is a digit', () => {
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(v => String(v)).forEach(value => {
-      expect(isDigit(value)).toEqual(true);
-    });
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      .map(v => String(v))
+      .forEach(value => {
+        expect(isDigit(value)).toEqual(true);
+      });
   });
 
   it('should return false if character is not digit', () => {
