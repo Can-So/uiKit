@@ -1,5 +1,9 @@
 export function isPastedFromWord(html?: string): boolean {
-  return !!html && html.indexOf('urn:schemas-microsoft-com:office:office') >= 0;
+  return !!html && html.indexOf('urn:schemas-microsoft-com:office:word') >= 0;
+}
+
+export function isPastedFromExcel(html?: string): boolean {
+  return !!html && html.indexOf('urn:schemas-microsoft-com:office:excel') >= 0;
 }
 
 export function isPastedFromDropboxPaper(html?: string): boolean {
@@ -33,6 +37,8 @@ export function getPasteSource(event: ClipboardEvent): string {
     return 'dropbox-paper';
   } else if (isPastedFromWord(html)) {
     return 'microsoft-word';
+  } else if (isPastedFromExcel(html)) {
+    return 'microsoft-excel';
   } else if (isPastedFromGoogleDocs(html)) {
     return 'google-docs';
   } else if (isPastedFromGoogleSpreadSheets(html)) {

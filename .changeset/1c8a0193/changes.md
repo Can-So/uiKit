@@ -1,0 +1,1 @@
+- Fixes pasting from Microsoft & Apple office products (ED-5694, ED-5575)
