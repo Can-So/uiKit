@@ -25,13 +25,13 @@ Allows to pick colors from color palette.
 ## Usage
 
 ${code`
-  import ColorPicker, {ColorPalette} from '@atlaskit/color-picker';
+  import ColorPicker from '@atlaskit/color-picker';
 `}
 
 ${(
   <Example
     packageName="@atlaskit/color-picker"
-    Component={require('../examples/03-color-picker').default}
+    Component={require('../examples/00-color-picker').default}
     source={require('!!raw-loader!../examples/03-color-picker')}
     title="Basic Usage"
     language="jsx"
@@ -41,19 +41,9 @@ ${(
 ${(
   <Example
     packageName="@atlaskit/color-picker"
-    Component={require('../examples/04-multi-columns-color-picker').default}
+    Component={require('../examples/01-multi-columns-color-picker').default}
     source={require('!!raw-loader!../examples/04-multi-columns-color-picker')}
     title="Color picker with multiple columns palette"
-    language="jsx"
-  />
-)}
-
-${(
-  <Example
-    packageName="@atlaskit/color-picker"
-    Component={require('../examples/02-multi-columns-color-palette').default}
-    source={require('!!raw-loader!../examples/02-multi-columns-color-palette')}
-    title="Standalone color palette component"
     language="jsx"
   />
 )}
@@ -62,13 +52,6 @@ ${(
   <Props
     heading="Color picker props"
     props={require('!!extract-react-types-loader!../src/components/ColorPicker')}
-  />
-)}
-
-${(
-  <Props
-    heading="Color palette props"
-    props={require('!!extract-react-types-loader!../src/components/ColorPalette')}
   />
 )}
 `;

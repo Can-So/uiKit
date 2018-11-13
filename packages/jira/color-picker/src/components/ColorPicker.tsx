@@ -1,10 +1,10 @@
 import * as React from 'react';
 import memoizeOne from 'memoize-one';
 import { PopupSelect } from '@atlaskit/select';
-import { ColorPalette } from './ColorPalette';
 import ColorCard from './ColorCard';
 import { Palette, Color } from '../types';
-import { ColorCardWrapper } from '../styled/ColorPicker';
+import { ColorCardWrapper } from '../styled/ColorPalette';
+import * as components from './components';
 import {
   name as packageName,
   version as packageVersion,
@@ -14,8 +14,6 @@ import {
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
-
-export type Option = Color;
 
 export interface Props {
   /** list of available colors */
@@ -32,55 +30,11 @@ export interface Props {
   createAnalyticsEvent?: any;
 }
 
-export interface State {
-  focusedItemIndex: number;
-}
-
-export interface SelectComponentProps {
-  // select props
-  data: Option;
-  options: Option[];
-  setValue: (option: Option) => void;
-  getValue: () => Option[];
-  selectProps: {
-    selectedLabel?: string;
-    cols?: number;
-    checkMarkColor?: string;
-    focusedItemIndex: number;
-  };
-}
-
-const EmptyComponent = () => null;
-
 const arrowKeys = {
   ArrowDown: 'down',
   ArrowLeft: 'left',
   ArrowRight: 'right',
   ArrowUp: 'up',
-};
-
-const MenuList = (props: SelectComponentProps) => {
-  const { cols, checkMarkColor, focusedItemIndex } = props.selectProps;
-  const option = props.getValue()[0];
-
-  return (
-    <ColorPalette
-      palette={props.options}
-      selectedColor={option && option.value}
-      cols={cols}
-      checkMarkColor={checkMarkColor}
-      focusedItemIndex={focusedItemIndex}
-      onClick={newColor => {
-        const newOption = props.options.find(
-          option => option.value === newColor,
-        );
-
-        if (newOption) {
-          props.setValue(newOption);
-        }
-      }}
-    />
-  );
 };
 
 const getOptions = memoizeOne((props: Props) => {
@@ -104,15 +58,11 @@ const getOptions = memoizeOne((props: Props) => {
   };
 });
 
-const adjustFocusIndex = (newIndex, itemsLength) => {
-  return (itemsLength + newIndex) % itemsLength;
-};
+// const adjustFocusIndex = (newIndex, itemsLength) => {
+//   return (itemsLength + newIndex) % itemsLength;
+// };
 
-export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
-  state = {
-    focusedItemIndex: getOptions(this.props).focusedItemIndex,
-  };
-
+export class ColorPickerWithoutAnalytics extends React.Component<Props> {
   createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
 
   componentDidUpdate(prevProps: Props) {
@@ -141,21 +91,19 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
     return undefined;
   };
 
-  onChange = (option: Option) => {
+  onChange = (option: Color) => {
     this.props.onChange(option.value, this.changeAnalyticsCaller());
   };
 
   onKeyDown = (event: React.KeyboardEvent) => {
+    console.log(this.selectRef);
+
     switch (event.key) {
       case 'ArrowLeft':
       case 'ArrowRight':
       case 'ArrowUp':
       case 'ArrowDown':
         this.focusOption(arrowKeys[event.key]);
-        break;
-      case 'Tab':
-      case 'Enter':
-        this.selectOption();
         break;
       default:
         return;
@@ -165,68 +113,54 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
   };
 
   focusOption(dir) {
-    const { cols, palette } = this.props;
-    const { focusedItemIndex } = this.state;
-
-    switch (dir) {
-      case 'up': {
-        if (cols !== undefined) {
-          this.setState({
-            focusedItemIndex: adjustFocusIndex(
-              focusedItemIndex - cols,
-              palette.length,
-            ),
-          });
-        }
-        break;
-      }
-      case 'left':
-        this.setState({
-          focusedItemIndex: adjustFocusIndex(
-            focusedItemIndex - 1,
-            palette.length,
-          ),
-        });
-        break;
-      case 'down':
-        if (cols !== undefined) {
-          this.setState({
-            focusedItemIndex: adjustFocusIndex(
-              focusedItemIndex + cols,
-              palette.length,
-            ),
-          });
-        }
-        break;
-      case 'right':
-        this.setState({
-          focusedItemIndex: adjustFocusIndex(
-            focusedItemIndex + 1,
-            palette.length,
-          ),
-        });
-        break;
-      default:
-        return;
-    }
-  }
-
-  selectOption() {
-    const { focusedItemIndex } = this.state;
-    const { palette, onChange } = this.props;
-
-    onChange(palette[focusedItemIndex].value);
-
-    if (this.selectRef.current) {
-      this.selectRef.current.close();
-    }
+    // const { cols, palette } = this.props;
+    // switch (dir) {
+    //   case 'up': {
+    //     if (cols !== undefined) {
+    //       this.setState({
+    //         focusedItemIndex: adjustFocusIndex(
+    //           focusedItemIndex - cols,
+    //           palette.length,
+    //         ),
+    //       });
+    //     }
+    //     break;
+    //   }
+    //   case 'left':
+    //     this.setState({
+    //       focusedItemIndex: adjustFocusIndex(
+    //         focusedItemIndex - 1,
+    //         palette.length,
+    //       ),
+    //     });
+    //     break;
+    //   case 'down':
+    //     if (cols !== undefined) {
+    //       this.setState({
+    //         focusedItemIndex: adjustFocusIndex(
+    //           focusedItemIndex + cols,
+    //           palette.length,
+    //         ),
+    //       });
+    //     }
+    //     break;
+    //   case 'right':
+    //     this.setState({
+    //       focusedItemIndex: adjustFocusIndex(
+    //         focusedItemIndex + 1,
+    //         palette.length,
+    //       ),
+    //     });
+    //     break;
+    //   default:
+    //     return;
+    // }
   }
 
   selectRef: React.RefObject<typeof PopupSelect> = React.createRef();
 
   render() {
     const { checkMarkColor, cols } = this.props;
-    const { focusedItemIndex } = this.state;
     const { options, value } = getOptions(this.props);
 
     return (
@@ -237,31 +171,16 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
             <ColorCard {...value} />
           </ColorCardWrapper>
         }
-        popperProps={{
-          modifiers: {
-            offset: {
-              offset: '0, 8',
-            },
-            preventOverflow: {
-              padding: 0,
-            },
-          },
-        }}
         maxMenuWidth="auto"
         minMenuWidth="auto"
         options={options}
         value={value}
-        components={{
-          MenuList,
-          DropdownIndicator: EmptyComponent,
-          Placeholder: EmptyComponent,
-        }}
+        components={components}
         onChange={this.onChange}
         onKeyDown={this.onKeyDown}
         // never show search input
         searchThreshold={Number.MAX_VALUE}
         // palette props
-        focusedItemIndex={focusedItemIndex}
         cols={cols}
         checkMarkColor={checkMarkColor}
       />

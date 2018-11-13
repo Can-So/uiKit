@@ -1,24 +1,38 @@
-import styled from 'styled-components';
-import { ButtonHTMLAttributes, ComponentClass, RefObject } from 'react';
-import { borderRadius } from '@atlaskit/theme';
+import styled, { css } from 'styled-components';
+import { RefObject } from 'react';
+import { borderRadius, colors } from '@atlaskit/theme';
 
-export const ColorCardContent: ComponentClass<
-  ButtonHTMLAttributes<{}> & {
-    innerRef: RefObject<HTMLButtonElement>;
-    focused?: boolean;
-  }
-> = styled.button`
-  display: block;
+interface Props {
+  innerRef: RefObject<HTMLButtonElement>;
+  color: string;
+  type?: string;
+  focused?: boolean;
+}
+
+const colorCardCss = css`
+  display: inline-block;
+  box-sizing: border-box;
   border-radius: ${borderRadius()}px;
-  height: 24px;
-  width: 24px;
+  height: 26px;
+  width: 26px;
   padding: 0;
+  border: 2px solid transparent;
   cursor: pointer;
-  border-width: 0;
   outline: none;
-  transition: box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38);
+  background: ${(props: Props) => props.color};
+  transition: border-color 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38);
 
   &:focus {
-    box-shadow: 0 0 0 2px rgba(38, 132, 255, 0.6);
+    border-color: ${colors.B100};
   }
+
+  ${(props: Props) => props.focused && `border-color: ${colors.B100};`};
+`;
+
+export const ColorCardOption = styled.option`
+  ${colorCardCss};
+`;
+
+export const ColorCardButton = styled.button`
+  ${colorCardCss};
 `;
