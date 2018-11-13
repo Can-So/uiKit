@@ -22,7 +22,7 @@ jest.mock('@atlaskit/analytics-next', () => ({
 describe('FieldTextAreaStateless', () => {
   it('should be wrapped with analytics context', () => {
     expect(withAnalyticsContext).toHaveBeenCalledWith({
-      componentName: 'fieldTextArea',
+      componentName: 'textArea',
       packageName,
       packageVersion,
     });
@@ -35,7 +35,7 @@ describe('FieldTextAreaStateless', () => {
         action: 'blurred',
         actionSubject: 'textArea',
         attributes: {
-          componentName: 'fieldTextArea',
+          componentName: 'textArea',
           packageName,
           packageVersion,
         },
@@ -44,7 +44,7 @@ describe('FieldTextAreaStateless', () => {
         action: 'focused',
         actionSubject: 'textArea',
         attributes: {
-          componentName: 'fieldTextArea',
+          componentName: 'textArea',
           packageName,
           packageVersion,
         },
