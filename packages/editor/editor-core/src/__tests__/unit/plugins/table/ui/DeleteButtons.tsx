@@ -8,28 +8,28 @@ describe('Table controls - DeleteButton', () => {
   describe('callbacks', () => {
     it('fires the onMouseEnter callback', () => {
       const onMouseEnter = jest.fn();
-      const r = mountWithIntl(
+      const button = mountWithIntl(
         <DeleteButton
           removeLabel={tableMessages.removeColumns}
           onMouseEnter={onMouseEnter}
         />,
       );
-      r.simulate('mouseenter');
-
+      button.simulate('mouseenter');
       expect(onMouseEnter).toBeCalled();
+      button.unmount();
     });
 
     it('fires the onMouseLeave callback', () => {
       const onMouseLeave = jest.fn();
-      const r = mountWithIntl(
+      const button = mountWithIntl(
         <DeleteButton
           removeLabel={tableMessages.removeRows}
           onMouseLeave={onMouseLeave}
         />,
       );
-      r.simulate('mouseleave');
-
+      button.simulate('mouseleave');
       expect(onMouseLeave).toBeCalled();
+      button.unmount();
     });
   });
 });
