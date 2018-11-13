@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.7
+- [patch] [8262781](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8262781):
+
+  - Fix floating toolbars overlaping with main editor toolbar
+
 ## 88.1.6
 - [patch] [50aa9d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/50aa9d2):
 
