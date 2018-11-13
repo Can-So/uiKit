@@ -1,1 +1,0 @@
-- ED-4777 Toggling list no longer selects previous text

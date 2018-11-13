@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.1.11
+- [patch] [4897ebf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4897ebf):
+
+  - ED-4777 Toggling list no longer selects previous text
+
 ## 88.1.10
 - [patch] [ac02f46](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ac02f46):
 
