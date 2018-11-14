@@ -55,7 +55,6 @@ export const ColorCardButton: ComponentClass<
 export const ColorCardContent: ComponentClass<
   HTMLAttributes<{}> & { color: string }
 > = styled.div`
-  display: block;
   position: absolute;
   top: 1px;
   left: 1px;
