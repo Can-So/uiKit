@@ -17,7 +17,7 @@ export interface SelectComponentProps {
   setValue: (option: Color) => void;
   getValue: () => Color[];
   selectProps: {
-    selectedLabel?: string;
+    label?: string;
     cols?: number;
     checkMarkColor?: string;
     focusedItemIndex: number;
@@ -42,7 +42,7 @@ export const MenuList = (props: SelectComponentProps) => {
 
 export const Option = (props: SelectComponentProps) => {
   const {
-    data: { value },
+    data: { value, label },
     selectProps: { checkMarkColor },
     isFocused,
     isSelected,
@@ -51,6 +51,7 @@ export const Option = (props: SelectComponentProps) => {
   return (
     <ColorCardWrapper {...props.innerProps}>
       <ColorCard
+        label={label}
         value={value}
         checkMarkColor={checkMarkColor}
         isOption

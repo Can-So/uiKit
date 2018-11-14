@@ -1,19 +1,15 @@
-import styled from 'styled-components';
-import { RefObject, ComponentClass, HTMLAttributes } from 'react';
+import styled, { css } from 'styled-components';
+import { ComponentClass, HTMLAttributes } from 'react';
 import { borderRadius, colors } from '@atlaskit/theme';
 import { COLOR_CARD_SIZE } from '../constants';
 
 interface Props {
-  innerRef: RefObject<HTMLButtonElement>;
-  type?: string;
   focused?: boolean;
 }
 
-const focusedBorder = `border-color: ${colors.B100};`;
+const buttonFocusedBorder = `border-color: ${colors.B100};`;
 
-export const ColorCardContainer: ComponentClass<HTMLAttributes<{}> & Props> & {
-  withComponent: (tag: string) => typeof ColorCardContainer;
-} = styled.div`
+const sharedColorContainerStyles = css`
   display: inline-block;
   position: relative;
   width: ${COLOR_CARD_SIZE}px;
@@ -26,14 +22,32 @@ export const ColorCardContainer: ComponentClass<HTMLAttributes<{}> & Props> & {
   padding: 0;
   cursor: pointer;
   outline: none;
+`;
+
+export const ColorCardOption: ComponentClass<
+  HTMLAttributes<{}> & Props
+> = styled.div`
+  ${sharedColorContainerStyles};
+
+  ${props => {
+    if (props.focused) {
+      return `border-color: ${colors.B75}`;
+    }
+  }};
+`;
+
+export const ColorCardButton: ComponentClass<
+  HTMLAttributes<{}> & Props
+> = styled.button`
+  ${sharedColorContainerStyles};
 
   &:focus {
-    ${focusedBorder};
+    ${buttonFocusedBorder};
   }
 
   ${props => {
     if (props.focused) {
-      return focusedBorder;
+      return buttonFocusedBorder;
     }
   }};
 `;
@@ -50,7 +64,3 @@ export const ColorCardContent: ComponentClass<
   border-radius: ${borderRadius()}px;
   background: ${props => props.color};
 `;
-
-export const ColorCardOption = ColorCardContainer;
-
-export const ColorCardButton = ColorCardContainer.withComponent('button');

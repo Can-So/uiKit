@@ -1,7 +1,7 @@
 import * as React from 'react';
 import memoizeOne from 'memoize-one';
 import { PopupSelect } from '@atlaskit/select';
-import ColorCard from './ColorCard';
+import Trigger from './Trigger';
 import { Palette, Color } from '../types';
 import * as components from './components';
 import {
@@ -95,19 +95,16 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
   };
 
   render() {
-    const { checkMarkColor, cols, label } = this.props;
+    const { checkMarkColor, cols, label = 'Color picker' } = this.props;
     const { options, value } = getOptions(this.props);
     const { isOpen } = this.state;
+    const fullLabel = `${label}, ${value.label} selected`;
 
     return (
       <PopupSelect
         target={
           <ColorCardWrapper>
-            <ColorCard
-              {...value}
-              label={label || value.label}
-              focused={isOpen}
-            />
+            <Trigger {...value} label={fullLabel} expanded={isOpen} />
           </ColorCardWrapper>
         }
         popperProps={{
@@ -121,6 +118,7 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
         maxMenuWidth="auto"
         minMenuWidth="auto"
         options={options}
+        label={fullLabel}
         value={value}
         components={components}
         onChange={this.onChange}
