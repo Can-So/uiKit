@@ -1,1 +1,0 @@
-- Adding text alignment to editor and renderer

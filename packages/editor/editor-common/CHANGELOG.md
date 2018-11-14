@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 21.2.0
+- [minor] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
 ## 21.1.7
 - [patch] [380928b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/380928b):
 
