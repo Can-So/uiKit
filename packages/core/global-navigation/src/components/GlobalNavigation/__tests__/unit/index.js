@@ -10,6 +10,7 @@ import SignInIcon from '@atlaskit/icon/glyph/sign-in';
 import QuestionIcon from '@atlaskit/icon/glyph/question-circle';
 import GlobalNavigation from '../../index';
 import ScreenTracker from '../../../ScreenTracker';
+import ItemComponent from '../../../ItemComponent';
 
 const DrawerContents = () => <div>drawer</div>;
 const EmojiAtlassianIcon = () => <button>EmojiAtlassianIcon</button>;
@@ -477,6 +478,17 @@ describe('GlobalNavigation', () => {
       );
       expect(wrapper.find('Badge').exists()).toBeFalsy();
     });
+
+    it('should pass the correct badgeCount to ItemComponent', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          onNotificationClick={() => {}}
+          notificationCount={15}
+        />,
+      );
+
+      expect(wrapper.find(ItemComponent).props().badgeCount).toBe(15);
+    });
   });
 
   describe('Inbuilt Notification', () => {
@@ -649,6 +661,22 @@ describe('GlobalNavigation', () => {
       expect(spyReturn).toMatchObject({
         skip: true,
       });
+    });
+
+    it('should pass the correct badgeCount to ItemComponent', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+      wrapper.setState({
+        notificationCount: 5,
+      });
+
+      expect(wrapper.find(ItemComponent).props().badgeCount).toBe(5);
     });
   });
 

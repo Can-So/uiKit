@@ -10,7 +10,7 @@ export interface TaskItemDefinition {
   /**
    * @allowUnsupportedInline true
    */
-  content: Array<Inline>;
+  content?: Array<Inline>;
   attrs: {
     localId: string;
     state: 'TODO' | 'DONE';

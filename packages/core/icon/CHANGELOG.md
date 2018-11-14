@@ -1,5 +1,10 @@
 # @atlaskit/icon
 
+## 14.3.0
+- [minor] [dced9bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dced9bf):
+
+  - Remove StarOutlineIcon as it is not used
+
 ## 14.2.1
 - [patch] [d15caa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d15caa6):
 

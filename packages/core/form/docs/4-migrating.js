@@ -19,7 +19,7 @@ ${(
 
   ### Migrating existing forms
 
-  If you have forms already using Atlaskit form components then you can migrate them relelatively easily to
+  If you have forms already using Atlaskit form components then you can migrate them relatively easily to
   use the Form package.
 
   ${(

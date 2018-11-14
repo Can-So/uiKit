@@ -168,7 +168,8 @@ function makeTooltipNode({ text, char }: { text: string, char: string }) {
   );
 }
 
-type Props = WithAnalyticsEventsProps & {
+type Props = {
+  ...WithAnalyticsEventsProps,
   children: State => any,
   collapseToggleTooltipContent: CollapseToggleTooltipContent,
   expandCollapseAffordanceRef: Ref<'button'>,
@@ -456,7 +457,6 @@ class ResizeControl extends PureComponent<Props, State> {
               {collapseToggleTooltipContent ? (
                 <Tooltip
                   content={makeTooltipNode(
-                    // $FlowFixMe
                     collapseToggleTooltipContent(isCollapsed),
                   )}
                   delay={600}

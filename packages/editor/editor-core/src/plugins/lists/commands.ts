@@ -369,11 +369,6 @@ export function adjustSelectionInList(
 
   const isSameLine = $from.pos === $to.pos;
 
-  if (isSameLine) {
-    $from = doc.resolve($from.start($from.depth));
-    $to = doc.resolve($from.end($from.depth));
-  }
-
   let startPos = $from.pos;
   let endPos = $to.pos;
 

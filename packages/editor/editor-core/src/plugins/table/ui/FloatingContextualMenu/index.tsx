@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { EditorView } from 'prosemirror-view';
 import { findCellRectClosestToPos, isCellSelection } from 'prosemirror-utils';
-import { findDomRefAtPos } from 'prosemirror-utils';
+import { findDomRefAtPos, getSelectionRect } from 'prosemirror-utils';
 import {
   Popup,
   akEditorFloatingOverlapPanelZIndex,
@@ -10,7 +10,6 @@ import ContextualMenu from './ContextualMenu';
 import { contextualMenuTriggerSize } from '../styles';
 import { pluginKey } from '../../pm-plugins/main';
 import { PluginConfig } from '../../types';
-import { getSelectionRect } from '../../utils';
 
 // offset of the contextual menu dropdown
 const calculateOffset = (targetCellRef, state) => {

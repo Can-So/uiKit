@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, type ElementConfig } from 'react';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
 import ViewRenderer from '../../../renderer';
@@ -25,6 +25,10 @@ class LayoutManagerWithViewControllerBase extends Component<
   LayoutManagerWithViewControllerProps,
   LayoutManagerWithViewControllerState,
 > {
+  static defaultProps = {
+    experimental_flyoutOnHover: false,
+  };
+
   state = {
     hasInitialised: false,
     outgoingView: null,
@@ -204,7 +208,12 @@ class LayoutManagerWithViewControllerBase extends Component<
   }
 }
 
-const LayoutManagerWithViews = props => (
+const LayoutManagerWithView = (
+  props: $Diff<
+    ElementConfig<typeof LayoutManagerWithViewControllerBase>,
+    { view: * },
+  >,
+) => (
   <ViewControllerSubscriber>
     {({ state: { activeView } }) => {
       return (
@@ -214,4 +223,4 @@ const LayoutManagerWithViews = props => (
   </ViewControllerSubscriber>
 );
 
-export default withNavigationUI(LayoutManagerWithViews);
+export default withNavigationUI(LayoutManagerWithView);

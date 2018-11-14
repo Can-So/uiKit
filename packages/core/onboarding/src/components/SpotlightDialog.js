@@ -1,17 +1,12 @@
 // @flow
-import React, {
-  Component,
-  type ElementType,
-  type Element,
-  type Node,
-} from 'react';
+import React, { Component, type ElementType, type Node } from 'react';
+import FocusLock from 'react-focus-lock';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
 import { Popper, type Placement } from '@atlaskit/popper';
-import { FocusLock } from '@atlaskit/layer-manager';
 
 import {
   name as packageName,
@@ -27,7 +22,7 @@ type Props = {
   /** Buttons to render in the footer */
   actions?: ActionsType,
   /** An optional element rendered beside the footer actions */
-  actionsBeforeElement?: Element<*>,
+  actionsBeforeElement?: Node,
   /** The elements rendered in the modal */
   children?: Node,
   /** Where the dialog should appear, relative to the contents of the children. */
@@ -61,19 +56,19 @@ type Props = {
 };
 
 type State = {
-  hasFocusLock: boolean,
+  focusLockDisabled: boolean,
 };
 
 class SpotlightDialog extends Component<Props, State> {
   state = {
-    hasFocusLock: false,
+    focusLockDisabled: true,
   };
 
   componentDidMount() {
     setTimeout(() => {
       // we delay the enabling of the focus lock to avoid the scroll position
       // jumping around in some situations
-      this.setState({ hasFocusLock: true });
+      this.setState({ focusLockDisabled: false });
     }, 200);
   }
 
@@ -91,7 +86,7 @@ class SpotlightDialog extends Component<Props, State> {
       image,
       targetNode,
     } = this.props;
-    const { hasFocusLock } = this.state;
+    const { focusLockDisabled } = this.state;
 
     const translatedPlacement: Placement | void = dialogPlacement
       ? {
@@ -114,7 +109,11 @@ class SpotlightDialog extends Component<Props, State> {
       <Popper referenceElement={targetNode} placement={translatedPlacement}>
         {({ ref, style, scheduleUpdate }) => (
           <ValueChanged value={dialogWidth} onChange={scheduleUpdate}>
-            <FocusLock enabled={hasFocusLock} returnFocus={false}>
+            <FocusLock
+              disabled={focusLockDisabled}
+              returnFocus={false}
+              autoFocus
+            >
               <SpotlightCard
                 ref={ref}
                 theme={({ container }) => ({

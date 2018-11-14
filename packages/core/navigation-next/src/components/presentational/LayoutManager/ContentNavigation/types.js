@@ -1,6 +1,8 @@
 // @flow
 
-import type { ComponentType } from 'react';
+import type { ComponentType, Node } from 'react';
+
+import type { ProductTheme } from '../../../../theme';
 
 export type ContentNavigationProps = {
   container?: ?ComponentType<{}>,
@@ -8,6 +10,17 @@ export type ContentNavigationProps = {
   product: ComponentType<{}>,
 };
 
-export type ContentNavigationState = {
+export type ContentNavigationState = {|
   cachedContainer: ?ComponentType<{||}>,
-};
+|};
+
+export type ContainerNavigationPrimitiveProps = {|
+  children: Node,
+  isEntering: boolean,
+  isExiting: boolean,
+|};
+
+export type ContainerNavigationPrimitiveBaseProps = {|
+  ...ContainerNavigationPrimitiveProps,
+  theme: ProductTheme,
+|};

@@ -35,14 +35,14 @@ describe('UserPicker', () => {
       { value: 'abc-123', user: users[0], label: 'Jace Beleren' },
       { value: '123-abc', user: users[1], label: 'Chandra Nalaar' },
     ]);
-    expect(getStyles).toHaveBeenCalledWith(350);
+    expect(getStyles).toHaveBeenCalledWith(350, expect.any(Boolean));
     expect(select.prop('menuPlacement')).toBeTruthy();
   });
 
   it('should set width', () => {
     shallowUserPicker({ width: 500 });
 
-    expect(getStyles).toHaveBeenCalledWith(500);
+    expect(getStyles).toHaveBeenCalledWith(500, expect.any(Boolean));
   });
 
   it('should trigger onChange with User', () => {
@@ -272,5 +272,15 @@ describe('UserPicker', () => {
         removableOption,
       ]);
     });
+  });
+
+  it('should blur on escape', () => {
+    const component = shallowUserPicker();
+    component.setState({ menuIsOpen: true });
+    const ref = { blur: jest.fn() };
+    (component.instance() as any).handleSelectRef(ref);
+
+    component.find(Select).simulate('keyDown', { keyCode: 27 });
+    expect(ref.blur).toHaveBeenCalled();
   });
 });

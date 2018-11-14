@@ -16,7 +16,8 @@ describe('Drawer Transitions', () => {
       const { defaultStyles } = wrapper.find('TransitionHandler').props();
 
       expect(defaultStyles).toMatchObject({
-        transition: 'transform 220ms cubic-bezier(0.2, 0, 0, 1)',
+        transition:
+          'transform 220ms cubic-bezier(0.2, 0, 0, 1), width 220ms cubic-bezier(0.2, 0, 0, 1)',
         transform: 'translate3d(-100%,0,0)',
       });
     });

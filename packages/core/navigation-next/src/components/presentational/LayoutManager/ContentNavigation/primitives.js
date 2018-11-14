@@ -15,6 +15,11 @@ import {
   type ProductTheme,
 } from '../../../../theme';
 
+import type {
+  ContainerNavigationPrimitiveBaseProps,
+  ContainerNavigationPrimitiveProps,
+} from './types';
+
 /**
  * Component tree structure
  *  - ProductNavigation
@@ -86,12 +91,6 @@ const slideIn = keyframes`
 /**
  * ContainerNavigation
  */
-type ContainerNavigationPrimitiveBaseProps = {
-  children: Node,
-  isEntering: boolean,
-  isExiting: boolean,
-  theme: ProductTheme,
-};
 const ContainerNavigationPrimitiveBase = ({
   children,
   isEntering,
@@ -126,17 +125,15 @@ const ContainerNavigationPrimitive = withContentTheme(
   ContainerNavigationPrimitiveBase,
 );
 
-type ContainerNavigationProps = {
-  children: Node,
-};
-
 export const ContainerNavigationTheme = ({ children }: BaseNavigationTheme) => (
   <ThemeProvider theme={{ mode: light, context: 'container' }}>
     <Fragment>{children}</Fragment>
   </ThemeProvider>
 );
 
-export const ContainerNavigation = (props: ContainerNavigationProps) => (
+export const ContainerNavigation = (
+  props: ContainerNavigationPrimitiveProps,
+) => (
   <ContainerNavigationTheme>
     <ContainerNavigationPrimitive {...props} />
   </ContainerNavigationTheme>
