@@ -10,355 +10,6 @@
  * Add synonyms in icon/icons/synonyms.js.
  */
 
-import ActivityIcon from '../glyph/activity';
-import AddCircleIcon from '../glyph/add-circle';
-import AddItemIcon from '../glyph/add-item';
-import AddIcon from '../glyph/add';
-import AddonIcon from '../glyph/addon';
-import AppAccessIcon from '../glyph/app-access';
-import AppSwitcherIcon from '../glyph/app-switcher';
-import ArrowDownCircleIcon from '../glyph/arrow-down-circle';
-import ArrowDownIcon from '../glyph/arrow-down';
-import ArrowLeftCircleIcon from '../glyph/arrow-left-circle';
-import ArrowLeftIcon from '../glyph/arrow-left';
-import ArrowRightCircleIcon from '../glyph/arrow-right-circle';
-import ArrowRightIcon from '../glyph/arrow-right';
-import ArrowUpCircleIcon from '../glyph/arrow-up-circle';
-import ArrowUpIcon from '../glyph/arrow-up';
-import AttachmentIcon from '../glyph/attachment';
-import AudioCircleIcon from '../glyph/audio-circle';
-import AudioIcon from '../glyph/audio';
-import BacklogIcon from '../glyph/backlog';
-import BillingFilledIcon from '../glyph/billing-filled';
-import BillingIcon from '../glyph/billing';
-import BitbucketBranchesIcon from '../glyph/bitbucket/branches';
-import BitbucketBuildsIcon from '../glyph/bitbucket/builds';
-import BitbucketCloneIcon from '../glyph/bitbucket/clone';
-import BitbucketCommitsIcon from '../glyph/bitbucket/commits';
-import BitbucketCompareIcon from '../glyph/bitbucket/compare';
-import BitbucketForksIcon from '../glyph/bitbucket/forks';
-import BitbucketOutputIcon from '../glyph/bitbucket/output';
-import BitbucketPipelinesIcon from '../glyph/bitbucket/pipelines';
-import BitbucketPullrequestsIcon from '../glyph/bitbucket/pullrequests';
-import BitbucketReposIcon from '../glyph/bitbucket/repos';
-import BitbucketSnippetsIcon from '../glyph/bitbucket/snippets';
-import BitbucketSourceIcon from '../glyph/bitbucket/source';
-import BoardIcon from '../glyph/board';
-import BookIcon from '../glyph/book';
-import BulletListIcon from '../glyph/bullet-list';
-import CalendarFilledIcon from '../glyph/calendar-filled';
-import CalendarIcon from '../glyph/calendar';
-import CameraFilledIcon from '../glyph/camera-filled';
-import CameraRotateIcon from '../glyph/camera-rotate';
-import CameraTakePictureIcon from '../glyph/camera-take-picture';
-import CameraIcon from '../glyph/camera';
-import CanvasIcon from '../glyph/canvas';
-import CheckCircleOutlineIcon from '../glyph/check-circle-outline';
-import CheckCircleIcon from '../glyph/check-circle';
-import CheckIcon from '../glyph/check';
-import CheckboxIndeterminateIcon from '../glyph/checkbox-indeterminate';
-import CheckboxIcon from '../glyph/checkbox';
-import ChevronDownCircleIcon from '../glyph/chevron-down-circle';
-import ChevronDownIcon from '../glyph/chevron-down';
-import ChevronLeftCircleIcon from '../glyph/chevron-left-circle';
-import ChevronLeftLargeIcon from '../glyph/chevron-left-large';
-import ChevronLeftIcon from '../glyph/chevron-left';
-import ChevronRightCircleIcon from '../glyph/chevron-right-circle';
-import ChevronRightLargeIcon from '../glyph/chevron-right-large';
-import ChevronRightIcon from '../glyph/chevron-right';
-import ChevronUpCircleIcon from '../glyph/chevron-up-circle';
-import ChevronUpIcon from '../glyph/chevron-up';
-import ChildIssuesIcon from '../glyph/child-issues';
-import CodeIcon from '../glyph/code';
-import CommentIcon from '../glyph/comment';
-import ComponentIcon from '../glyph/component';
-import CopyIcon from '../glyph/copy';
-import CreditcardFilledIcon from '../glyph/creditcard-filled';
-import CreditcardIcon from '../glyph/creditcard';
-import CrossCircleIcon from '../glyph/cross-circle';
-import CrossIcon from '../glyph/cross';
-import DashboardIcon from '../glyph/dashboard';
-import DecisionIcon from '../glyph/decision';
-import DepartmentIcon from '../glyph/department';
-import DetailViewIcon from '../glyph/detail-view';
-import DiscoverFilledIcon from '../glyph/discover-filled';
-import DiscoverIcon from '../glyph/discover';
-import DocumentFilledIcon from '../glyph/document-filled';
-import DocumentIcon from '../glyph/document';
-import DocumentsIcon from '../glyph/documents';
-import DownloadIcon from '../glyph/download';
-import DragHandlerIcon from '../glyph/drag-handler';
-import DropboxIcon from '../glyph/dropbox';
-import EditFilledIcon from '../glyph/edit-filled';
-import EditIcon from '../glyph/edit';
-import EditorAddIcon from '../glyph/editor/add';
-import EditorAddonIcon from '../glyph/editor/addon';
-import EditorAdvancedIcon from '../glyph/editor/advanced';
-import EditorAlignCenterIcon from '../glyph/editor/align-center';
-import EditorAlignImageCenterIcon from '../glyph/editor/align-image-center';
-import EditorAlignImageLeftIcon from '../glyph/editor/align-image-left';
-import EditorAlignImageRightIcon from '../glyph/editor/align-image-right';
-import EditorAlignLeftIcon from '../glyph/editor/align-left';
-import EditorAlignRightIcon from '../glyph/editor/align-right';
-import EditorAttachmentIcon from '../glyph/editor/attachment';
-import EditorBackgroundColorIcon from '../glyph/editor/background-color';
-import EditorBoldIcon from '../glyph/editor/bold';
-import EditorBulletListIcon from '../glyph/editor/bullet-list';
-import EditorCloseIcon from '../glyph/editor/close';
-import EditorCodeIcon from '../glyph/editor/code';
-import EditorCollapseIcon from '../glyph/editor/collapse';
-import EditorDateIcon from '../glyph/editor/date';
-import EditorDecisionIcon from '../glyph/editor/decision';
-import EditorDividerIcon from '../glyph/editor/divider';
-import EditorDoneIcon from '../glyph/editor/done';
-import EditorEditIcon from '../glyph/editor/edit';
-import EditorEmojiIcon from '../glyph/editor/emoji';
-import EditorErrorIcon from '../glyph/editor/error';
-import EditorExpandIcon from '../glyph/editor/expand';
-import EditorFeedbackIcon from '../glyph/editor/feedback';
-import EditorFileIcon from '../glyph/editor/file';
-import EditorHelpIcon from '../glyph/editor/help';
-import EditorHintIcon from '../glyph/editor/hint';
-import EditorHorizontalRuleIcon from '../glyph/editor/horizontal-rule';
-import EditorImageBorderIcon from '../glyph/editor/image-border';
-import EditorImageResizeIcon from '../glyph/editor/image-resize';
-import EditorImageIcon from '../glyph/editor/image';
-import EditorIndentIcon from '../glyph/editor/indent';
-import EditorInfoIcon from '../glyph/editor/info';
-import EditorItalicIcon from '../glyph/editor/italic';
-import EditorLayoutThreeEqualIcon from '../glyph/editor/layout-three-equal';
-import EditorLayoutThreeWithSidebarsIcon from '../glyph/editor/layout-three-with-sidebars';
-import EditorLayoutTwoEqualIcon from '../glyph/editor/layout-two-equal';
-import EditorLayoutTwoLeftSidebarIcon from '../glyph/editor/layout-two-left-sidebar';
-import EditorLayoutTwoRightSidebarIcon from '../glyph/editor/layout-two-right-sidebar';
-import EditorLinkIcon from '../glyph/editor/link';
-import EditorMediaCenterIcon from '../glyph/editor/media-center';
-import EditorMediaFullWidthIcon from '../glyph/editor/media-full-width';
-import EditorMediaWideIcon from '../glyph/editor/media-wide';
-import EditorMediaWrapLeftIcon from '../glyph/editor/media-wrap-left';
-import EditorMediaWrapRightIcon from '../glyph/editor/media-wrap-right';
-import EditorMentionIcon from '../glyph/editor/mention';
-import EditorMoreIcon from '../glyph/editor/more';
-import EditorNoteIcon from '../glyph/editor/note';
-import EditorNumberListIcon from '../glyph/editor/number-list';
-import EditorOpenIcon from '../glyph/editor/open';
-import EditorOutdentIcon from '../glyph/editor/outdent';
-import EditorPanelIcon from '../glyph/editor/panel';
-import EditorPhotoIcon from '../glyph/editor/photo';
-import EditorQuoteIcon from '../glyph/editor/quote';
-import EditorRecentIcon from '../glyph/editor/recent';
-import EditorRedoIcon from '../glyph/editor/redo';
-import EditorRemoveIcon from '../glyph/editor/remove';
-import EditorSearchIcon from '../glyph/editor/search';
-import EditorSettingsIcon from '../glyph/editor/settings';
-import EditorStrikethroughIcon from '../glyph/editor/strikethrough';
-import EditorSuccessIcon from '../glyph/editor/success';
-import EditorTableDisplayOptionsIcon from '../glyph/editor/table-display-options';
-import EditorTableIcon from '../glyph/editor/table';
-import EditorTaskIcon from '../glyph/editor/task';
-import EditorTextColorIcon from '../glyph/editor/text-color';
-import EditorTextStyleIcon from '../glyph/editor/text-style';
-import EditorUnderlineIcon from '../glyph/editor/underline';
-import EditorUndoIcon from '../glyph/editor/undo';
-import EditorUnlinkIcon from '../glyph/editor/unlink';
-import EditorWarningIcon from '../glyph/editor/warning';
-import EmailIcon from '../glyph/email';
-import EmojiAddIcon from '../glyph/emoji-add';
-import EmojiIcon from '../glyph/emoji';
-import EmojiActivityIcon from '../glyph/emoji/activity';
-import EmojiAtlassianIcon from '../glyph/emoji/atlassian';
-import EmojiCustomIcon from '../glyph/emoji/custom';
-import EmojiEmojiIcon from '../glyph/emoji/emoji';
-import EmojiFlagsIcon from '../glyph/emoji/flags';
-import EmojiFoodIcon from '../glyph/emoji/food';
-import EmojiFrequentIcon from '../glyph/emoji/frequent';
-import EmojiKeyboardIcon from '../glyph/emoji/keyboard';
-import EmojiNatureIcon from '../glyph/emoji/nature';
-import EmojiObjectsIcon from '../glyph/emoji/objects';
-import EmojiPeopleIcon from '../glyph/emoji/people';
-import EmojiProductivityIcon from '../glyph/emoji/productivity';
-import EmojiSymbolsIcon from '../glyph/emoji/symbols';
-import EmojiTravelIcon from '../glyph/emoji/travel';
-import ErrorIcon from '../glyph/error';
-import ExportIcon from '../glyph/export';
-import FeedbackIcon from '../glyph/feedback';
-import FileIcon from '../glyph/file';
-import FilterIcon from '../glyph/filter';
-import FlagFilledIcon from '../glyph/flag-filled';
-import FolderFilledIcon from '../glyph/folder-filled';
-import FolderIcon from '../glyph/folder';
-import FollowersIcon from '../glyph/followers';
-import FollowingIcon from '../glyph/following';
-import GoogledriveIcon from '../glyph/googledrive';
-import GraphBarIcon from '../glyph/graph-bar';
-import GraphLineIcon from '../glyph/graph-line';
-import GsuiteIcon from '../glyph/gsuite';
-import HighlightsIcon from '../glyph/highlights';
-import HipchatAudioOnlyIcon from '../glyph/hipchat/audio-only';
-import HipchatChevronDoubleDownIcon from '../glyph/hipchat/chevron-double-down';
-import HipchatChevronDoubleUpIcon from '../glyph/hipchat/chevron-double-up';
-import HipchatChevronDownIcon from '../glyph/hipchat/chevron-down';
-import HipchatChevronUpIcon from '../glyph/hipchat/chevron-up';
-import HipchatDialOutIcon from '../glyph/hipchat/dial-out';
-import HipchatLobbyIcon from '../glyph/hipchat/lobby';
-import HipchatMediaAttachmentCountIcon from '../glyph/hipchat/media-attachment-count';
-import HipchatOutgoingSoundIcon from '../glyph/hipchat/outgoing-sound';
-import HipchatSdVideoIcon from '../glyph/hipchat/sd-video';
-import HomeCircleIcon from '../glyph/home-circle';
-import HomeFilledIcon from '../glyph/home-filled';
-import ImageBorderIcon from '../glyph/image-border';
-import ImageResizeIcon from '../glyph/image-resize';
-import ImageIcon from '../glyph/image';
-import InfoIcon from '../glyph/info';
-import InviteTeamIcon from '../glyph/invite-team';
-import IssueRaiseIcon from '../glyph/issue-raise';
-import IssueIcon from '../glyph/issue';
-import IssuesIcon from '../glyph/issues';
-import JiraBlockerIcon from '../glyph/jira/blocker';
-import JiraCaptureIcon from '../glyph/jira/capture';
-import JiraCriticalIcon from '../glyph/jira/critical';
-import JiraFailedBuildStatusIcon from '../glyph/jira/failed-build-status';
-import JiraLabsIcon from '../glyph/jira/labs';
-import JiraMajorIcon from '../glyph/jira/major';
-import JiraMediumIcon from '../glyph/jira/medium';
-import JiraMinorIcon from '../glyph/jira/minor';
-import JiraTestSessionIcon from '../glyph/jira/test-session';
-import JiraTrivialIcon from '../glyph/jira/trivial';
-import LabelIcon from '../glyph/label';
-import LightbulbFilledIcon from '../glyph/lightbulb-filled';
-import LightbulbIcon from '../glyph/lightbulb';
-import LikeIcon from '../glyph/like';
-import LinkFilledIcon from '../glyph/link-filled';
-import LinkIcon from '../glyph/link';
-import ListIcon from '../glyph/list';
-import LocationIcon from '../glyph/location';
-import LockCircleIcon from '../glyph/lock-circle';
-import LockFilledIcon from '../glyph/lock-filled';
-import LockIcon from '../glyph/lock';
-import MarketplaceIcon from '../glyph/marketplace';
-import MediaServicesActualSizeIcon from '../glyph/media-services/actual-size';
-import MediaServicesAddCommentIcon from '../glyph/media-services/add-comment';
-import MediaServicesAnnotateIcon from '../glyph/media-services/annotate';
-import MediaServicesArrowIcon from '../glyph/media-services/arrow';
-import MediaServicesAudioIcon from '../glyph/media-services/audio';
-import MediaServicesBlurIcon from '../glyph/media-services/blur';
-import MediaServicesBrushIcon from '../glyph/media-services/brush';
-import MediaServicesButtonOptionIcon from '../glyph/media-services/button-option';
-import MediaServicesCodeIcon from '../glyph/media-services/code';
-import MediaServicesDocumentIcon from '../glyph/media-services/document';
-import MediaServicesFilterIcon from '../glyph/media-services/filter';
-import MediaServicesFitToPageIcon from '../glyph/media-services/fit-to-page';
-import MediaServicesFullScreenIcon from '../glyph/media-services/full-screen';
-import MediaServicesGridIcon from '../glyph/media-services/grid';
-import MediaServicesImageIcon from '../glyph/media-services/image';
-import MediaServicesLineThicknessIcon from '../glyph/media-services/line-thickness';
-import MediaServicesLineIcon from '../glyph/media-services/line';
-import MediaServicesNoImageIcon from '../glyph/media-services/no-image';
-import MediaServicesOpenMediaviewerIcon from '../glyph/media-services/open-mediaviewer';
-import MediaServicesOvalIcon from '../glyph/media-services/oval';
-import MediaServicesPdfIcon from '../glyph/media-services/pdf';
-import MediaServicesPreselectedIcon from '../glyph/media-services/preselected';
-import MediaServicesPresentationIcon from '../glyph/media-services/presentation';
-import MediaServicesRectangleIcon from '../glyph/media-services/rectangle';
-import MediaServicesScaleLargeIcon from '../glyph/media-services/scale-large';
-import MediaServicesScaleSmallIcon from '../glyph/media-services/scale-small';
-import MediaServicesSpreadsheetIcon from '../glyph/media-services/spreadsheet';
-import MediaServicesTextIcon from '../glyph/media-services/text';
-import MediaServicesUnknownIcon from '../glyph/media-services/unknown';
-import MediaServicesVideoIcon from '../glyph/media-services/video';
-import MediaServicesZipIcon from '../glyph/media-services/zip';
-import MediaServicesZoomInIcon from '../glyph/media-services/zoom-in';
-import MediaServicesZoomOutIcon from '../glyph/media-services/zoom-out';
-import MentionIcon from '../glyph/mention';
-import MenuIcon from '../glyph/menu';
-import MoreVerticalIcon from '../glyph/more-vertical';
-import MoreIcon from '../glyph/more';
-import NotificationAllIcon from '../glyph/notification-all';
-import NotificationDirectIcon from '../glyph/notification-direct';
-import NotificationIcon from '../glyph/notification';
-import OfficeBuildingFilledIcon from '../glyph/office-building-filled';
-import OfficeBuildingIcon from '../glyph/office-building';
-import OpenIcon from '../glyph/open';
-import OverviewIcon from '../glyph/overview';
-import PageFilledIcon from '../glyph/page-filled';
-import PageIcon from '../glyph/page';
-import PdfIcon from '../glyph/pdf';
-import PeopleGroupIcon from '../glyph/people-group';
-import PeopleIcon from '../glyph/people';
-import PersonCircleIcon from '../glyph/person-circle';
-import PersonIcon from '../glyph/person';
-import PortfolioIcon from '../glyph/portfolio';
-import PreferencesIcon from '../glyph/preferences';
-import PresenceActiveIcon from '../glyph/presence-active';
-import PresenceBusyIcon from '../glyph/presence-busy';
-import PresenceUnavailableIcon from '../glyph/presence-unavailable';
-import QuestionCircleIcon from '../glyph/question-circle';
-import QuestionIcon from '../glyph/question';
-import QuestionsIcon from '../glyph/questions';
-import QueuesIcon from '../glyph/queues';
-import QuoteIcon from '../glyph/quote';
-import RadioIcon from '../glyph/radio';
-import RecentIcon from '../glyph/recent';
-import RedoIcon from '../glyph/redo';
-import RefreshIcon from '../glyph/refresh';
-import RoadmapIcon from '../glyph/roadmap';
-import RoomMenuIcon from '../glyph/room-menu';
-import ScheduleFilledIcon from '../glyph/schedule-filled';
-import ScheduleIcon from '../glyph/schedule';
-import ScreenIcon from '../glyph/screen';
-import SearchIcon from '../glyph/search';
-import SelectClearIcon from '../glyph/select-clear';
-import SendIcon from '../glyph/send';
-import SettingsIcon from '../glyph/settings';
-import ShareIcon from '../glyph/share';
-import ShipIcon from '../glyph/ship';
-import ShortcutIcon from '../glyph/shortcut';
-import SignInIcon from '../glyph/sign-in';
-import SignOutIcon from '../glyph/sign-out';
-import StarFilledIcon from '../glyph/star-filled';
-import StarLargeIcon from '../glyph/star-large';
-import StarIcon from '../glyph/star';
-import SubtaskIcon from '../glyph/subtask';
-import SuitcaseIcon from '../glyph/suitcase';
-import SwitcherIcon from '../glyph/switcher';
-import TableIcon from '../glyph/table';
-import TaskIcon from '../glyph/task';
-import TrashIcon from '../glyph/trash';
-import TrayIcon from '../glyph/tray';
-import UndoIcon from '../glyph/undo';
-import UnlinkIcon from '../glyph/unlink';
-import UnlockCircleIcon from '../glyph/unlock-circle';
-import UnlockFilledIcon from '../glyph/unlock-filled';
-import UnlockIcon from '../glyph/unlock';
-import UploadIcon from '../glyph/upload';
-import UserAvatarCircleIcon from '../glyph/user-avatar-circle';
-import VidAudioMutedIcon from '../glyph/vid-audio-muted';
-import VidAudioOnIcon from '../glyph/vid-audio-on';
-import VidBackwardIcon from '../glyph/vid-backward';
-import VidCameraOffIcon from '../glyph/vid-camera-off';
-import VidCameraOnIcon from '../glyph/vid-camera-on';
-import VidConnectionCircleIcon from '../glyph/vid-connection-circle';
-import VidForwardIcon from '../glyph/vid-forward';
-import VidFullScreenOffIcon from '../glyph/vid-full-screen-off';
-import VidFullScreenOnIcon from '../glyph/vid-full-screen-on';
-import VidHangUpIcon from '../glyph/vid-hang-up';
-import VidHdCircleIcon from '../glyph/vid-hd-circle';
-import VidPauseIcon from '../glyph/vid-pause';
-import VidPlayIcon from '../glyph/vid-play';
-import VidRaisedHandIcon from '../glyph/vid-raised-hand';
-import VidShareScreenIcon from '../glyph/vid-share-screen';
-import VidSpeakingCircleIcon from '../glyph/vid-speaking-circle';
-import VidVolumeFullIcon from '../glyph/vid-volume-full';
-import VidVolumeHalfIcon from '../glyph/vid-volume-half';
-import VidVolumeMutedIcon from '../glyph/vid-volume-muted';
-import VideoCircleIcon from '../glyph/video-circle';
-import VideoFilledIcon from '../glyph/video-filled';
-import WarningIcon from '../glyph/warning';
-import WatchFilledIcon from '../glyph/watch-filled';
-import WatchIcon from '../glyph/watch';
-import WorldSmallIcon from '../glyph/world-small';
-import WorldIcon from '../glyph/world';
-
 export default {
   activity: {
     keywords: ['activity', 'window', 'icon', 'core'],
@@ -366,15 +17,7 @@ export default {
     package: '@atlaskit/icon/glyph/activity',
   },
   'add-circle': {
-    keywords: [
-      'add-circle',
-      'addcircle',
-      'plus',
-      'create',
-      'new',
-      'icon',
-      'core',
-    ],
+    keywords: ['add-circle', 'addcircle', 'plus', 'create', 'new', 'icon', 'core'],
     componentName: 'AddCircleIcon',
     package: '@atlaskit/icon/glyph/add-circle',
   },
@@ -414,14 +57,7 @@ export default {
     package: '@atlaskit/icon/glyph/arrow-down',
   },
   'arrow-left-circle': {
-    keywords: [
-      'arrow-left-circle',
-      'arrowleftcircle',
-      'back',
-      'previous',
-      'icon',
-      'core',
-    ],
+    keywords: ['arrow-left-circle', 'arrowleftcircle', 'back', 'previous', 'icon', 'core'],
     componentName: 'ArrowLeftCircleIcon',
     package: '@atlaskit/icon/glyph/arrow-left-circle',
   },
@@ -431,14 +67,7 @@ export default {
     package: '@atlaskit/icon/glyph/arrow-left',
   },
   'arrow-right-circle': {
-    keywords: [
-      'arrow-right-circle',
-      'arrowrightcircle',
-      'forward',
-      'next',
-      'icon',
-      'core',
-    ],
+    keywords: ['arrow-right-circle', 'arrowrightcircle', 'forward', 'next', 'icon', 'core'],
     componentName: 'ArrowRightCircleIcon',
     package: '@atlaskit/icon/glyph/arrow-right-circle',
   },
@@ -463,15 +92,7 @@ export default {
     package: '@atlaskit/icon/glyph/attachment',
   },
   'audio-circle': {
-    keywords: [
-      'audio-circle',
-      'audiocircle',
-      'music',
-      'note',
-      'sound',
-      'icon',
-      'core',
-    ],
+    keywords: ['audio-circle', 'audiocircle', 'music', 'note', 'sound', 'icon', 'core'],
     componentName: 'AudioCircleIcon',
     package: '@atlaskit/icon/glyph/audio-circle',
   },
@@ -536,12 +157,7 @@ export default {
     package: '@atlaskit/icon/glyph/bitbucket/pipelines',
   },
   'bitbucket/pullrequests': {
-    keywords: [
-      'bitbucket/pullrequests',
-      'bitbucketpullrequests',
-      'icon',
-      'core',
-    ],
+    keywords: ['bitbucket/pullrequests', 'bitbucketpullrequests', 'icon', 'core'],
     componentName: 'BitbucketPullrequestsIcon',
     package: '@atlaskit/icon/glyph/bitbucket/pullrequests',
   },
@@ -551,13 +167,7 @@ export default {
     package: '@atlaskit/icon/glyph/bitbucket/repos',
   },
   'bitbucket/snippets': {
-    keywords: [
-      'bitbucket/snippets',
-      'bitbucketsnippets',
-      'scissors',
-      'icon',
-      'core',
-    ],
+    keywords: ['bitbucket/snippets', 'bitbucketsnippets', 'scissors', 'icon', 'core'],
     componentName: 'BitbucketSnippetsIcon',
     package: '@atlaskit/icon/glyph/bitbucket/snippets',
   },
@@ -602,13 +212,7 @@ export default {
     package: '@atlaskit/icon/glyph/camera-rotate',
   },
   'camera-take-picture': {
-    keywords: [
-      'camera-take-picture',
-      'cameratakepicture',
-      'photo',
-      'icon',
-      'core',
-    ],
+    keywords: ['camera-take-picture', 'cameratakepicture', 'photo', 'icon', 'core'],
     componentName: 'CameraTakePictureIcon',
     package: '@atlaskit/icon/glyph/camera-take-picture',
   },
@@ -638,12 +242,7 @@ export default {
     package: '@atlaskit/icon/glyph/check',
   },
   'checkbox-indeterminate': {
-    keywords: [
-      'checkbox-indeterminate',
-      'checkboxindeterminate',
-      'icon',
-      'core',
-    ],
+    keywords: ['checkbox-indeterminate', 'checkboxindeterminate', 'icon', 'core'],
     componentName: 'CheckboxIndeterminateIcon',
     package: '@atlaskit/icon/glyph/checkbox-indeterminate',
   },
@@ -653,38 +252,17 @@ export default {
     package: '@atlaskit/icon/glyph/checkbox',
   },
   'chevron-down-circle': {
-    keywords: [
-      'chevron-down-circle',
-      'chevrondowncircle',
-      'expand',
-      'collapse',
-      'icon',
-      'core',
-    ],
+    keywords: ['chevron-down-circle', 'chevrondowncircle', 'expand', 'collapse', 'icon', 'core'],
     componentName: 'ChevronDownCircleIcon',
     package: '@atlaskit/icon/glyph/chevron-down-circle',
   },
   'chevron-down': {
-    keywords: [
-      'chevron-down',
-      'chevrondown',
-      'expand',
-      'collapse',
-      'icon',
-      'core',
-    ],
+    keywords: ['chevron-down', 'chevrondown', 'expand', 'collapse', 'icon', 'core'],
     componentName: 'ChevronDownIcon',
     package: '@atlaskit/icon/glyph/chevron-down',
   },
   'chevron-left-circle': {
-    keywords: [
-      'chevron-left-circle',
-      'chevronleftcircle',
-      'back',
-      'previous',
-      'icon',
-      'core',
-    ],
+    keywords: ['chevron-left-circle', 'chevronleftcircle', 'back', 'previous', 'icon', 'core'],
     componentName: 'ChevronLeftCircleIcon',
     package: '@atlaskit/icon/glyph/chevron-left-circle',
   },
@@ -694,26 +272,12 @@ export default {
     package: '@atlaskit/icon/glyph/chevron-left-large',
   },
   'chevron-left': {
-    keywords: [
-      'chevron-left',
-      'chevronleft',
-      'back',
-      'previous',
-      'icon',
-      'core',
-    ],
+    keywords: ['chevron-left', 'chevronleft', 'back', 'previous', 'icon', 'core'],
     componentName: 'ChevronLeftIcon',
     package: '@atlaskit/icon/glyph/chevron-left',
   },
   'chevron-right-circle': {
-    keywords: [
-      'chevron-right-circle',
-      'chevronrightcircle',
-      'forward',
-      'next',
-      'icon',
-      'core',
-    ],
+    keywords: ['chevron-right-circle', 'chevronrightcircle', 'forward', 'next', 'icon', 'core'],
     componentName: 'ChevronRightCircleIcon',
     package: '@atlaskit/icon/glyph/chevron-right-circle',
   },
@@ -723,26 +287,12 @@ export default {
     package: '@atlaskit/icon/glyph/chevron-right-large',
   },
   'chevron-right': {
-    keywords: [
-      'chevron-right',
-      'chevronright',
-      'forward',
-      'next',
-      'icon',
-      'core',
-    ],
+    keywords: ['chevron-right', 'chevronright', 'forward', 'next', 'icon', 'core'],
     componentName: 'ChevronRightIcon',
     package: '@atlaskit/icon/glyph/chevron-right',
   },
   'chevron-up-circle': {
-    keywords: [
-      'chevron-up-circle',
-      'chevronupcircle',
-      'expand',
-      'collapse',
-      'icon',
-      'core',
-    ],
+    keywords: ['chevron-up-circle', 'chevronupcircle', 'expand', 'collapse', 'icon', 'core'],
     componentName: 'ChevronUpCircleIcon',
     package: '@atlaskit/icon/glyph/chevron-up-circle',
   },
@@ -777,15 +327,7 @@ export default {
     package: '@atlaskit/icon/glyph/copy',
   },
   'creditcard-filled': {
-    keywords: [
-      'creditcard-filled',
-      'creditcardfilled',
-      'buy',
-      'pay',
-      'purchase',
-      'icon',
-      'core',
-    ],
+    keywords: ['creditcard-filled', 'creditcardfilled', 'buy', 'pay', 'purchase', 'icon', 'core'],
     componentName: 'CreditcardFilledIcon',
     package: '@atlaskit/icon/glyph/creditcard-filled',
   },
@@ -795,15 +337,7 @@ export default {
     package: '@atlaskit/icon/glyph/creditcard',
   },
   'cross-circle': {
-    keywords: [
-      'cross-circle',
-      'crosscircle',
-      'close',
-      'x',
-      'cancel',
-      'icon',
-      'core',
-    ],
+    keywords: ['cross-circle', 'crosscircle', 'close', 'x', 'cancel', 'icon', 'core'],
     componentName: 'CrossCircleIcon',
     package: '@atlaskit/icon/glyph/cross-circle',
   },
@@ -833,14 +367,7 @@ export default {
     package: '@atlaskit/icon/glyph/detail-view',
   },
   'discover-filled': {
-    keywords: [
-      'discover-filled',
-      'discoverfilled',
-      'compass',
-      'navigate',
-      'icon',
-      'core',
-    ],
+    keywords: ['discover-filled', 'discoverfilled', 'compass', 'navigate', 'icon', 'core'],
     componentName: 'DiscoverFilledIcon',
     package: '@atlaskit/icon/glyph/discover-filled',
   },
@@ -850,16 +377,7 @@ export default {
     package: '@atlaskit/icon/glyph/discover',
   },
   'document-filled': {
-    keywords: [
-      'document-filled',
-      'documentfilled',
-      'page',
-      'paper',
-      'sheet',
-      'file',
-      'icon',
-      'core',
-    ],
+    keywords: ['document-filled', 'documentfilled', 'page', 'paper', 'sheet', 'file', 'icon', 'core'],
     componentName: 'DocumentFilledIcon',
     package: '@atlaskit/icon/glyph/document-filled',
   },
@@ -899,15 +417,7 @@ export default {
     package: '@atlaskit/icon/glyph/edit',
   },
   'editor/add': {
-    keywords: [
-      'editor/add',
-      'editoradd',
-      'plus',
-      'create',
-      'new',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/add', 'editoradd', 'plus', 'create', 'new', 'icon', 'core'],
     componentName: 'EditorAddIcon',
     package: '@atlaskit/icon/glyph/editor/add',
   },
@@ -917,16 +427,7 @@ export default {
     package: '@atlaskit/icon/glyph/editor/addon',
   },
   'editor/advanced': {
-    keywords: [
-      'editor/advanced',
-      'editoradvanced',
-      'strikethrough',
-      'type',
-      'font',
-      'typography',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/advanced', 'editoradvanced', 'strikethrough', 'type', 'font', 'typography', 'icon', 'core'],
     componentName: 'EditorAdvancedIcon',
     package: '@atlaskit/icon/glyph/editor/advanced',
   },
@@ -936,32 +437,17 @@ export default {
     package: '@atlaskit/icon/glyph/editor/align-center',
   },
   'editor/align-image-center': {
-    keywords: [
-      'editor/align-image-center',
-      'editoralignimagecenter',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/align-image-center', 'editoralignimagecenter', 'icon', 'core'],
     componentName: 'EditorAlignImageCenterIcon',
     package: '@atlaskit/icon/glyph/editor/align-image-center',
   },
   'editor/align-image-left': {
-    keywords: [
-      'editor/align-image-left',
-      'editoralignimageleft',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/align-image-left', 'editoralignimageleft', 'icon', 'core'],
     componentName: 'EditorAlignImageLeftIcon',
     package: '@atlaskit/icon/glyph/editor/align-image-left',
   },
   'editor/align-image-right': {
-    keywords: [
-      'editor/align-image-right',
-      'editoralignimageright',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/align-image-right', 'editoralignimageright', 'icon', 'core'],
     componentName: 'EditorAlignImageRightIcon',
     package: '@atlaskit/icon/glyph/editor/align-image-right',
   },
@@ -976,24 +462,12 @@ export default {
     package: '@atlaskit/icon/glyph/editor/align-right',
   },
   'editor/attachment': {
-    keywords: [
-      'editor/attachment',
-      'editorattachment',
-      'paperclip',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/attachment', 'editorattachment', 'paperclip', 'icon', 'core'],
     componentName: 'EditorAttachmentIcon',
     package: '@atlaskit/icon/glyph/editor/attachment',
   },
   'editor/background-color': {
-    keywords: [
-      'editor/background-color',
-      'editorbackgroundcolor',
-      'fill',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/background-color', 'editorbackgroundcolor', 'fill', 'icon', 'core'],
     componentName: 'EditorBackgroundColorIcon',
     package: '@atlaskit/icon/glyph/editor/background-color',
   },
@@ -1008,15 +482,7 @@ export default {
     package: '@atlaskit/icon/glyph/editor/bullet-list',
   },
   'editor/close': {
-    keywords: [
-      'editor/close',
-      'editorclose',
-      'x',
-      'cancel',
-      'cross',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/close', 'editorclose', 'x', 'cancel', 'cross', 'icon', 'core'],
     componentName: 'EditorCloseIcon',
     package: '@atlaskit/icon/glyph/editor/close',
   },
@@ -1056,26 +522,12 @@ export default {
     package: '@atlaskit/icon/glyph/editor/edit',
   },
   'editor/emoji': {
-    keywords: [
-      'editor/emoji',
-      'editoremoji',
-      'emoticon',
-      'smiley',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/emoji', 'editoremoji', 'emoticon', 'smiley', 'icon', 'core'],
     componentName: 'EditorEmojiIcon',
     package: '@atlaskit/icon/glyph/editor/emoji',
   },
   'editor/error': {
-    keywords: [
-      'editor/error',
-      'editorerror',
-      'warning',
-      'alert',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/error', 'editorerror', 'warning', 'alert', 'icon', 'core'],
     componentName: 'EditorErrorIcon',
     package: '@atlaskit/icon/glyph/editor/error',
   },
@@ -1085,29 +537,12 @@ export default {
     package: '@atlaskit/icon/glyph/editor/expand',
   },
   'editor/feedback': {
-    keywords: [
-      'editor/feedback',
-      'editorfeedback',
-      'announce',
-      'speaker',
-      'megaphone',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/feedback', 'editorfeedback', 'announce', 'speaker', 'megaphone', 'icon', 'core'],
     componentName: 'EditorFeedbackIcon',
     package: '@atlaskit/icon/glyph/editor/feedback',
   },
   'editor/file': {
-    keywords: [
-      'editor/file',
-      'editorfile',
-      'page',
-      'document',
-      'paper',
-      'sheet',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/file', 'editorfile', 'page', 'document', 'paper', 'sheet', 'icon', 'core'],
     componentName: 'EditorFileIcon',
     package: '@atlaskit/icon/glyph/editor/file',
   },
@@ -1122,62 +557,27 @@ export default {
     package: '@atlaskit/icon/glyph/editor/hint',
   },
   'editor/horizontal-rule': {
-    keywords: [
-      'editor/horizontal-rule',
-      'editorhorizontalrule',
-      'rule',
-      'divider',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/horizontal-rule', 'editorhorizontalrule', 'rule', 'divider', 'icon', 'core'],
     componentName: 'EditorHorizontalRuleIcon',
     package: '@atlaskit/icon/glyph/editor/horizontal-rule',
   },
   'editor/image-border': {
-    keywords: [
-      'editor/image-border',
-      'editorimageborder',
-      'marquee',
-      'box',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/image-border', 'editorimageborder', 'marquee', 'box', 'icon', 'core'],
     componentName: 'EditorImageBorderIcon',
     package: '@atlaskit/icon/glyph/editor/image-border',
   },
   'editor/image-resize': {
-    keywords: [
-      'editor/image-resize',
-      'editorimageresize',
-      'expand',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/image-resize', 'editorimageresize', 'expand', 'icon', 'core'],
     componentName: 'EditorImageResizeIcon',
     package: '@atlaskit/icon/glyph/editor/image-resize',
   },
   'editor/image': {
-    keywords: [
-      'editor/image',
-      'editorimage',
-      'photo',
-      'picture',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/image', 'editorimage', 'photo', 'picture', 'icon', 'core'],
     componentName: 'EditorImageIcon',
     package: '@atlaskit/icon/glyph/editor/image',
   },
   'editor/indent': {
-    keywords: [
-      'editor/indent',
-      'editorindent',
-      'tab',
-      'spacing',
-      'padding',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/indent', 'editorindent', 'tab', 'spacing', 'padding', 'icon', 'core'],
     componentName: 'EditorIndentIcon',
     package: '@atlaskit/icon/glyph/editor/indent',
   },
@@ -1192,52 +592,27 @@ export default {
     package: '@atlaskit/icon/glyph/editor/italic',
   },
   'editor/layout-three-equal': {
-    keywords: [
-      'editor/layout-three-equal',
-      'editorlayoutthreeequal',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/layout-three-equal', 'editorlayoutthreeequal', 'icon', 'core'],
     componentName: 'EditorLayoutThreeEqualIcon',
     package: '@atlaskit/icon/glyph/editor/layout-three-equal',
   },
   'editor/layout-three-with-sidebars': {
-    keywords: [
-      'editor/layout-three-with-sidebars',
-      'editorlayoutthreewithsidebars',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/layout-three-with-sidebars', 'editorlayoutthreewithsidebars', 'icon', 'core'],
     componentName: 'EditorLayoutThreeWithSidebarsIcon',
     package: '@atlaskit/icon/glyph/editor/layout-three-with-sidebars',
   },
   'editor/layout-two-equal': {
-    keywords: [
-      'editor/layout-two-equal',
-      'editorlayouttwoequal',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/layout-two-equal', 'editorlayouttwoequal', 'icon', 'core'],
     componentName: 'EditorLayoutTwoEqualIcon',
     package: '@atlaskit/icon/glyph/editor/layout-two-equal',
   },
   'editor/layout-two-left-sidebar': {
-    keywords: [
-      'editor/layout-two-left-sidebar',
-      'editorlayouttwoleftsidebar',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/layout-two-left-sidebar', 'editorlayouttwoleftsidebar', 'icon', 'core'],
     componentName: 'EditorLayoutTwoLeftSidebarIcon',
     package: '@atlaskit/icon/glyph/editor/layout-two-left-sidebar',
   },
   'editor/layout-two-right-sidebar': {
-    keywords: [
-      'editor/layout-two-right-sidebar',
-      'editorlayouttworightsidebar',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/layout-two-right-sidebar', 'editorlayouttworightsidebar', 'icon', 'core'],
     componentName: 'EditorLayoutTwoRightSidebarIcon',
     package: '@atlaskit/icon/glyph/editor/layout-two-right-sidebar',
   },
@@ -1247,80 +622,32 @@ export default {
     package: '@atlaskit/icon/glyph/editor/link',
   },
   'editor/media-center': {
-    keywords: [
-      'editor/media-center',
-      'editormediacenter',
-      'layout',
-      'align',
-      'position',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/media-center', 'editormediacenter', 'layout', 'align', 'position', 'icon', 'core'],
     componentName: 'EditorMediaCenterIcon',
     package: '@atlaskit/icon/glyph/editor/media-center',
   },
   'editor/media-full-width': {
-    keywords: [
-      'editor/media-full-width',
-      'editormediafullwidth',
-      'layout',
-      'align',
-      'position',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/media-full-width', 'editormediafullwidth', 'layout', 'align', 'position', 'icon', 'core'],
     componentName: 'EditorMediaFullWidthIcon',
     package: '@atlaskit/icon/glyph/editor/media-full-width',
   },
   'editor/media-wide': {
-    keywords: [
-      'editor/media-wide',
-      'editormediawide',
-      'layout',
-      'align',
-      'position',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/media-wide', 'editormediawide', 'layout', 'align', 'position', 'icon', 'core'],
     componentName: 'EditorMediaWideIcon',
     package: '@atlaskit/icon/glyph/editor/media-wide',
   },
   'editor/media-wrap-left': {
-    keywords: [
-      'editor/media-wrap-left',
-      'editormediawrapleft',
-      'layout',
-      'align',
-      'position',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/media-wrap-left', 'editormediawrapleft', 'layout', 'align', 'position', 'icon', 'core'],
     componentName: 'EditorMediaWrapLeftIcon',
     package: '@atlaskit/icon/glyph/editor/media-wrap-left',
   },
   'editor/media-wrap-right': {
-    keywords: [
-      'editor/media-wrap-right',
-      'editormediawrapright',
-      'layout',
-      'align',
-      'position',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/media-wrap-right', 'editormediawrapright', 'layout', 'align', 'position', 'icon', 'core'],
     componentName: 'EditorMediaWrapRightIcon',
     package: '@atlaskit/icon/glyph/editor/media-wrap-right',
   },
   'editor/mention': {
-    keywords: [
-      'editor/mention',
-      'editormention',
-      '@',
-      'person',
-      'user',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/mention', 'editormention', '@', 'person', 'user', 'icon', 'core'],
     componentName: 'EditorMentionIcon',
     package: '@atlaskit/icon/glyph/editor/mention',
   },
@@ -1345,16 +672,7 @@ export default {
     package: '@atlaskit/icon/glyph/editor/open',
   },
   'editor/outdent': {
-    keywords: [
-      'editor/outdent',
-      'editoroutdent',
-      'indent',
-      'tab',
-      'spacing',
-      'padding',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/outdent', 'editoroutdent', 'indent', 'tab', 'spacing', 'padding', 'icon', 'core'],
     componentName: 'EditorOutdentIcon',
     package: '@atlaskit/icon/glyph/editor/outdent',
   },
@@ -1374,14 +692,7 @@ export default {
     package: '@atlaskit/icon/glyph/editor/quote',
   },
   'editor/recent': {
-    keywords: [
-      'editor/recent',
-      'editorrecent',
-      'clock',
-      'time',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/recent', 'editorrecent', 'clock', 'time', 'icon', 'core'],
     componentName: 'EditorRecentIcon',
     package: '@atlaskit/icon/glyph/editor/recent',
   },
@@ -1391,79 +702,32 @@ export default {
     package: '@atlaskit/icon/glyph/editor/redo',
   },
   'editor/remove': {
-    keywords: [
-      'editor/remove',
-      'editorremove',
-      'bin',
-      'trash',
-      'recycle',
-      'delete',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/remove', 'editorremove', 'bin', 'trash', 'recycle', 'delete', 'icon', 'core'],
     componentName: 'EditorRemoveIcon',
     package: '@atlaskit/icon/glyph/editor/remove',
   },
   'editor/search': {
-    keywords: [
-      'editor/search',
-      'editorsearch',
-      'magnifying',
-      'glass',
-      'find',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/search', 'editorsearch', 'magnifying', 'glass', 'find', 'icon', 'core'],
     componentName: 'EditorSearchIcon',
     package: '@atlaskit/icon/glyph/editor/search',
   },
   'editor/settings': {
-    keywords: [
-      'editor/settings',
-      'editorsettings',
-      'options',
-      'configuration',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/settings', 'editorsettings', 'options', 'configuration', 'icon', 'core'],
     componentName: 'EditorSettingsIcon',
     package: '@atlaskit/icon/glyph/editor/settings',
   },
   'editor/strikethrough': {
-    keywords: [
-      'editor/strikethrough',
-      'editorstrikethrough',
-      'strikethrough',
-      'type',
-      'font',
-      'typography',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/strikethrough', 'editorstrikethrough', 'strikethrough', 'type', 'font', 'typography', 'icon', 'core'],
     componentName: 'EditorStrikethroughIcon',
     package: '@atlaskit/icon/glyph/editor/strikethrough',
   },
   'editor/success': {
-    keywords: [
-      'editor/success',
-      'editorsuccess',
-      'luck',
-      'achievement',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/success', 'editorsuccess', 'luck', 'achievement', 'icon', 'core'],
     componentName: 'EditorSuccessIcon',
     package: '@atlaskit/icon/glyph/editor/success',
   },
   'editor/table-display-options': {
-    keywords: [
-      'editor/table-display-options',
-      'editortabledisplayoptions',
-      'display-options',
-      'display',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/table-display-options', 'editortabledisplayoptions', 'display-options', 'display', 'icon', 'core'],
     componentName: 'EditorTableDisplayOptionsIcon',
     package: '@atlaskit/icon/glyph/editor/table-display-options',
   },
@@ -1483,27 +747,12 @@ export default {
     package: '@atlaskit/icon/glyph/editor/text-color',
   },
   'editor/text-style': {
-    keywords: [
-      'editor/text-style',
-      'editortextstyle',
-      'type',
-      'font',
-      'typography',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/text-style', 'editortextstyle', 'type', 'font', 'typography', 'icon', 'core'],
     componentName: 'EditorTextStyleIcon',
     package: '@atlaskit/icon/glyph/editor/text-style',
   },
   'editor/underline': {
-    keywords: [
-      'editor/underline',
-      'editorunderline',
-      'font',
-      'text',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/underline', 'editorunderline', 'font', 'text', 'icon', 'core'],
     componentName: 'EditorUnderlineIcon',
     package: '@atlaskit/icon/glyph/editor/underline',
   },
@@ -1518,14 +767,7 @@ export default {
     package: '@atlaskit/icon/glyph/editor/unlink',
   },
   'editor/warning': {
-    keywords: [
-      'editor/warning',
-      'editorwarning',
-      'alert',
-      'error',
-      'icon',
-      'core',
-    ],
+    keywords: ['editor/warning', 'editorwarning', 'alert', 'error', 'icon', 'core'],
     componentName: 'EditorWarningIcon',
     package: '@atlaskit/icon/glyph/editor/warning',
   },
@@ -1545,14 +787,7 @@ export default {
     package: '@atlaskit/icon/glyph/emoji',
   },
   'emoji/activity': {
-    keywords: [
-      'emoji/activity',
-      'emojiactivity',
-      'tennis',
-      'ball',
-      'icon',
-      'core',
-    ],
+    keywords: ['emoji/activity', 'emojiactivity', 'tennis', 'ball', 'icon', 'core'],
     componentName: 'EmojiActivityIcon',
     package: '@atlaskit/icon/glyph/emoji/activity',
   },
@@ -1562,28 +797,12 @@ export default {
     package: '@atlaskit/icon/glyph/emoji/atlassian',
   },
   'emoji/custom': {
-    keywords: [
-      'emoji/custom',
-      'emojicustom',
-      'plus',
-      'add',
-      'create',
-      'new',
-      'icon',
-      'core',
-    ],
+    keywords: ['emoji/custom', 'emojicustom', 'plus', 'add', 'create', 'new', 'icon', 'core'],
     componentName: 'EmojiCustomIcon',
     package: '@atlaskit/icon/glyph/emoji/custom',
   },
   'emoji/emoji': {
-    keywords: [
-      'emoji/emoji',
-      'emojiemoji',
-      'emoticon',
-      'smiley',
-      'icon',
-      'core',
-    ],
+    keywords: ['emoji/emoji', 'emojiemoji', 'emoticon', 'smiley', 'icon', 'core'],
     componentName: 'EmojiEmojiIcon',
     package: '@atlaskit/icon/glyph/emoji/emoji',
   },
@@ -1598,14 +817,7 @@ export default {
     package: '@atlaskit/icon/glyph/emoji/food',
   },
   'emoji/frequent': {
-    keywords: [
-      'emoji/frequent',
-      'emojifrequent',
-      'time',
-      'clock',
-      'icon',
-      'core',
-    ],
+    keywords: ['emoji/frequent', 'emojifrequent', 'time', 'clock', 'icon', 'core'],
     componentName: 'EmojiFrequentIcon',
     package: '@atlaskit/icon/glyph/emoji/frequent',
   },
@@ -1635,26 +847,12 @@ export default {
     package: '@atlaskit/icon/glyph/emoji/productivity',
   },
   'emoji/symbols': {
-    keywords: [
-      'emoji/symbols',
-      'emojisymbols',
-      'heart',
-      'love',
-      'icon',
-      'core',
-    ],
+    keywords: ['emoji/symbols', 'emojisymbols', 'heart', 'love', 'icon', 'core'],
     componentName: 'EmojiSymbolsIcon',
     package: '@atlaskit/icon/glyph/emoji/symbols',
   },
   'emoji/travel': {
-    keywords: [
-      'emoji/travel',
-      'emojitravel',
-      'train',
-      'transport',
-      'icon',
-      'core',
-    ],
+    keywords: ['emoji/travel', 'emojitravel', 'train', 'transport', 'icon', 'core'],
     componentName: 'EmojiTravelIcon',
     package: '@atlaskit/icon/glyph/emoji/travel',
   },
@@ -1714,32 +912,12 @@ export default {
     package: '@atlaskit/icon/glyph/googledrive',
   },
   'graph-bar': {
-    keywords: [
-      'graph-bar',
-      'graphbar',
-      'chart',
-      'growth',
-      'data',
-      'statistics',
-      'analytics',
-      'icon',
-      'core',
-    ],
+    keywords: ['graph-bar', 'graphbar', 'chart', 'growth', 'data', 'statistics', 'analytics', 'icon', 'core'],
     componentName: 'GraphBarIcon',
     package: '@atlaskit/icon/glyph/graph-bar',
   },
   'graph-line': {
-    keywords: [
-      'graph-line',
-      'graphline',
-      'chart',
-      'growth',
-      'data',
-      'statistics',
-      'analytics',
-      'icon',
-      'core',
-    ],
+    keywords: ['graph-line', 'graphline', 'chart', 'growth', 'data', 'statistics', 'analytics', 'icon', 'core'],
     componentName: 'GraphLineIcon',
     package: '@atlaskit/icon/glyph/graph-line',
   },
@@ -1754,33 +932,17 @@ export default {
     package: '@atlaskit/icon/glyph/highlights',
   },
   'hipchat/audio-only': {
-    keywords: [
-      'hipchat/audio-only',
-      'hipchataudioonly',
-      'audio',
-      'icon',
-      'core',
-    ],
+    keywords: ['hipchat/audio-only', 'hipchataudioonly', 'audio', 'icon', 'core'],
     componentName: 'HipchatAudioOnlyIcon',
     package: '@atlaskit/icon/glyph/hipchat/audio-only',
   },
   'hipchat/chevron-double-down': {
-    keywords: [
-      'hipchat/chevron-double-down',
-      'hipchatchevrondoubledown',
-      'icon',
-      'core',
-    ],
+    keywords: ['hipchat/chevron-double-down', 'hipchatchevrondoubledown', 'icon', 'core'],
     componentName: 'HipchatChevronDoubleDownIcon',
     package: '@atlaskit/icon/glyph/hipchat/chevron-double-down',
   },
   'hipchat/chevron-double-up': {
-    keywords: [
-      'hipchat/chevron-double-up',
-      'hipchatchevrondoubleup',
-      'icon',
-      'core',
-    ],
+    keywords: ['hipchat/chevron-double-up', 'hipchatchevrondoubleup', 'icon', 'core'],
     componentName: 'HipchatChevronDoubleUpIcon',
     package: '@atlaskit/icon/glyph/hipchat/chevron-double-up',
   },
@@ -1795,14 +957,7 @@ export default {
     package: '@atlaskit/icon/glyph/hipchat/chevron-up',
   },
   'hipchat/dial-out': {
-    keywords: [
-      'hipchat/dial-out',
-      'hipchatdialout',
-      'dial',
-      'call',
-      'icon',
-      'core',
-    ],
+    keywords: ['hipchat/dial-out', 'hipchatdialout', 'dial', 'call', 'icon', 'core'],
     componentName: 'HipchatDialOutIcon',
     package: '@atlaskit/icon/glyph/hipchat/dial-out',
   },
@@ -1812,36 +967,17 @@ export default {
     package: '@atlaskit/icon/glyph/hipchat/lobby',
   },
   'hipchat/media-attachment-count': {
-    keywords: [
-      'hipchat/media-attachment-count',
-      'hipchatmediaattachmentcount',
-      'dot',
-      'icon',
-      'core',
-    ],
+    keywords: ['hipchat/media-attachment-count', 'hipchatmediaattachmentcount', 'dot', 'icon', 'core'],
     componentName: 'HipchatMediaAttachmentCountIcon',
     package: '@atlaskit/icon/glyph/hipchat/media-attachment-count',
   },
   'hipchat/outgoing-sound': {
-    keywords: [
-      'hipchat/outgoing-sound',
-      'hipchatoutgoingsound',
-      'sound',
-      'icon',
-      'core',
-    ],
+    keywords: ['hipchat/outgoing-sound', 'hipchatoutgoingsound', 'sound', 'icon', 'core'],
     componentName: 'HipchatOutgoingSoundIcon',
     package: '@atlaskit/icon/glyph/hipchat/outgoing-sound',
   },
   'hipchat/sd-video': {
-    keywords: [
-      'hipchat/sd-video',
-      'hipchatsdvideo',
-      'video',
-      'definition',
-      'icon',
-      'core',
-    ],
+    keywords: ['hipchat/sd-video', 'hipchatsdvideo', 'video', 'definition', 'icon', 'core'],
     componentName: 'HipchatSdVideoIcon',
     package: '@atlaskit/icon/glyph/hipchat/sd-video',
   },
@@ -1876,29 +1012,12 @@ export default {
     package: '@atlaskit/icon/glyph/info',
   },
   'invite-team': {
-    keywords: [
-      'invite-team',
-      'inviteteam',
-      'add',
-      'person',
-      'user',
-      'icon',
-      'core',
-    ],
+    keywords: ['invite-team', 'inviteteam', 'add', 'person', 'user', 'icon', 'core'],
     componentName: 'InviteTeamIcon',
     package: '@atlaskit/icon/glyph/invite-team',
   },
   'issue-raise': {
-    keywords: [
-      'issue-raise',
-      'issueraise',
-      'add',
-      'create',
-      'plus',
-      'new',
-      'icon',
-      'core',
-    ],
+    keywords: ['issue-raise', 'issueraise', 'add', 'create', 'plus', 'new', 'icon', 'core'],
     componentName: 'IssueRaiseIcon',
     package: '@atlaskit/icon/glyph/issue-raise',
   },
@@ -1913,14 +1032,7 @@ export default {
     package: '@atlaskit/icon/glyph/issues',
   },
   'jira/blocker': {
-    keywords: [
-      'jira/blocker',
-      'jirablocker',
-      'priority',
-      'issue',
-      'icon',
-      'core',
-    ],
+    keywords: ['jira/blocker', 'jirablocker', 'priority', 'issue', 'icon', 'core'],
     componentName: 'JiraBlockerIcon',
     package: '@atlaskit/icon/glyph/jira/blocker',
   },
@@ -1930,24 +1042,12 @@ export default {
     package: '@atlaskit/icon/glyph/jira/capture',
   },
   'jira/critical': {
-    keywords: [
-      'jira/critical',
-      'jiracritical',
-      'priority',
-      'issue',
-      'icon',
-      'core',
-    ],
+    keywords: ['jira/critical', 'jiracritical', 'priority', 'issue', 'icon', 'core'],
     componentName: 'JiraCriticalIcon',
     package: '@atlaskit/icon/glyph/jira/critical',
   },
   'jira/failed-build-status': {
-    keywords: [
-      'jira/failed-build-status',
-      'jirafailedbuildstatus',
-      'icon',
-      'core',
-    ],
+    keywords: ['jira/failed-build-status', 'jirafailedbuildstatus', 'icon', 'core'],
     componentName: 'JiraFailedBuildStatusIcon',
     package: '@atlaskit/icon/glyph/jira/failed-build-status',
   },
@@ -1962,14 +1062,7 @@ export default {
     package: '@atlaskit/icon/glyph/jira/major',
   },
   'jira/medium': {
-    keywords: [
-      'jira/medium',
-      'jiramedium',
-      'priority',
-      'issue',
-      'icon',
-      'core',
-    ],
+    keywords: ['jira/medium', 'jiramedium', 'priority', 'issue', 'icon', 'core'],
     componentName: 'JiraMediumIcon',
     package: '@atlaskit/icon/glyph/jira/medium',
   },
@@ -1984,14 +1077,7 @@ export default {
     package: '@atlaskit/icon/glyph/jira/test-session',
   },
   'jira/trivial': {
-    keywords: [
-      'jira/trivial',
-      'jiratrivial',
-      'priority',
-      'issue',
-      'icon',
-      'core',
-    ],
+    keywords: ['jira/trivial', 'jiratrivial', 'priority', 'issue', 'icon', 'core'],
     componentName: 'JiraTrivialIcon',
     package: '@atlaskit/icon/glyph/jira/trivial',
   },
@@ -2001,14 +1087,7 @@ export default {
     package: '@atlaskit/icon/glyph/label',
   },
   'lightbulb-filled': {
-    keywords: [
-      'lightbulb-filled',
-      'lightbulbfilled',
-      'idea',
-      'hint',
-      'icon',
-      'core',
-    ],
+    keywords: ['lightbulb-filled', 'lightbulbfilled', 'idea', 'hint', 'icon', 'core'],
     componentName: 'LightbulbFilledIcon',
     package: '@atlaskit/icon/glyph/lightbulb-filled',
   },
@@ -2043,46 +1122,17 @@ export default {
     package: '@atlaskit/icon/glyph/location',
   },
   'lock-circle': {
-    keywords: [
-      'lock-circle',
-      'lockcircle',
-      'closed',
-      'permissions',
-      'privacy',
-      'restrict',
-      'secure',
-      'icon',
-      'core',
-    ],
+    keywords: ['lock-circle', 'lockcircle', 'closed', 'permissions', 'privacy', 'restrict', 'secure', 'icon', 'core'],
     componentName: 'LockCircleIcon',
     package: '@atlaskit/icon/glyph/lock-circle',
   },
   'lock-filled': {
-    keywords: [
-      'lock-filled',
-      'lockfilled',
-      'closed',
-      'permissions',
-      'privacy',
-      'restrict',
-      'secure',
-      'icon',
-      'core',
-    ],
+    keywords: ['lock-filled', 'lockfilled', 'closed', 'permissions', 'privacy', 'restrict', 'secure', 'icon', 'core'],
     componentName: 'LockFilledIcon',
     package: '@atlaskit/icon/glyph/lock-filled',
   },
   lock: {
-    keywords: [
-      'lock',
-      'closed',
-      'permissions',
-      'privacy',
-      'restrict',
-      'secure',
-      'icon',
-      'core',
-    ],
+    keywords: ['lock', 'closed', 'permissions', 'privacy', 'restrict', 'secure', 'icon', 'core'],
     componentName: 'LockIcon',
     package: '@atlaskit/icon/glyph/lock',
   },
@@ -2092,35 +1142,17 @@ export default {
     package: '@atlaskit/icon/glyph/marketplace',
   },
   'media-services/actual-size': {
-    keywords: [
-      'media-services/actual-size',
-      'mediaservicesactualsize',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/actual-size', 'mediaservicesactualsize', 'icon', 'core'],
     componentName: 'MediaServicesActualSizeIcon',
     package: '@atlaskit/icon/glyph/media-services/actual-size',
   },
   'media-services/add-comment': {
-    keywords: [
-      'media-services/add-comment',
-      'mediaservicesaddcomment',
-      'chat',
-      'new',
-      'create',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/add-comment', 'mediaservicesaddcomment', 'chat', 'new', 'create', 'icon', 'core'],
     componentName: 'MediaServicesAddCommentIcon',
     package: '@atlaskit/icon/glyph/media-services/add-comment',
   },
   'media-services/annotate': {
-    keywords: [
-      'media-services/annotate',
-      'mediaservicesannotate',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/annotate', 'mediaservicesannotate', 'icon', 'core'],
     componentName: 'MediaServicesAnnotateIcon',
     package: '@atlaskit/icon/glyph/media-services/annotate',
   },
@@ -2130,69 +1162,32 @@ export default {
     package: '@atlaskit/icon/glyph/media-services/arrow',
   },
   'media-services/audio': {
-    keywords: [
-      'media-services/audio',
-      'mediaservicesaudio',
-      'music',
-      'note',
-      'sound',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/audio', 'mediaservicesaudio', 'music', 'note', 'sound', 'icon', 'core'],
     componentName: 'MediaServicesAudioIcon',
     package: '@atlaskit/icon/glyph/media-services/audio',
   },
   'media-services/blur': {
-    keywords: [
-      'media-services/blur',
-      'mediaservicesblur',
-      'pixelate',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/blur', 'mediaservicesblur', 'pixelate', 'icon', 'core'],
     componentName: 'MediaServicesBlurIcon',
     package: '@atlaskit/icon/glyph/media-services/blur',
   },
   'media-services/brush': {
-    keywords: [
-      'media-services/brush',
-      'mediaservicesbrush',
-      'paint',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/brush', 'mediaservicesbrush', 'paint', 'icon', 'core'],
     componentName: 'MediaServicesBrushIcon',
     package: '@atlaskit/icon/glyph/media-services/brush',
   },
   'media-services/button-option': {
-    keywords: [
-      'media-services/button-option',
-      'mediaservicesbuttonoption',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/button-option', 'mediaservicesbuttonoption', 'icon', 'core'],
     componentName: 'MediaServicesButtonOptionIcon',
     package: '@atlaskit/icon/glyph/media-services/button-option',
   },
   'media-services/code': {
-    keywords: [
-      'media-services/code',
-      'mediaservicescode',
-      'source',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/code', 'mediaservicescode', 'source', 'icon', 'core'],
     componentName: 'MediaServicesCodeIcon',
     package: '@atlaskit/icon/glyph/media-services/code',
   },
   'media-services/document': {
-    keywords: [
-      'media-services/document',
-      'mediaservicesdocument',
-      'text',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/document', 'mediaservicesdocument', 'text', 'icon', 'core'],
     componentName: 'MediaServicesDocumentIcon',
     package: '@atlaskit/icon/glyph/media-services/document',
   },
@@ -2202,55 +1197,27 @@ export default {
     package: '@atlaskit/icon/glyph/media-services/filter',
   },
   'media-services/fit-to-page': {
-    keywords: [
-      'media-services/fit-to-page',
-      'mediaservicesfittopage',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/fit-to-page', 'mediaservicesfittopage', 'icon', 'core'],
     componentName: 'MediaServicesFitToPageIcon',
     package: '@atlaskit/icon/glyph/media-services/fit-to-page',
   },
   'media-services/full-screen': {
-    keywords: [
-      'media-services/full-screen',
-      'mediaservicesfullscreen',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/full-screen', 'mediaservicesfullscreen', 'icon', 'core'],
     componentName: 'MediaServicesFullScreenIcon',
     package: '@atlaskit/icon/glyph/media-services/full-screen',
   },
   'media-services/grid': {
-    keywords: [
-      'media-services/grid',
-      'mediaservicesgrid',
-      'table',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/grid', 'mediaservicesgrid', 'table', 'icon', 'core'],
     componentName: 'MediaServicesGridIcon',
     package: '@atlaskit/icon/glyph/media-services/grid',
   },
   'media-services/image': {
-    keywords: [
-      'media-services/image',
-      'mediaservicesimage',
-      'photo',
-      'picture',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/image', 'mediaservicesimage', 'photo', 'picture', 'icon', 'core'],
     componentName: 'MediaServicesImageIcon',
     package: '@atlaskit/icon/glyph/media-services/image',
   },
   'media-services/line-thickness': {
-    keywords: [
-      'media-services/line-thickness',
-      'mediaserviceslinethickness',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/line-thickness', 'mediaserviceslinethickness', 'icon', 'core'],
     componentName: 'MediaServicesLineThicknessIcon',
     package: '@atlaskit/icon/glyph/media-services/line-thickness',
   },
@@ -2260,188 +1227,82 @@ export default {
     package: '@atlaskit/icon/glyph/media-services/line',
   },
   'media-services/no-image': {
-    keywords: [
-      'media-services/no-image',
-      'mediaservicesnoimage',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/no-image', 'mediaservicesnoimage', 'icon', 'core'],
     componentName: 'MediaServicesNoImageIcon',
     package: '@atlaskit/icon/glyph/media-services/no-image',
   },
   'media-services/open-mediaviewer': {
-    keywords: [
-      'media-services/open-mediaviewer',
-      'mediaservicesopenmediaviewer',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/open-mediaviewer', 'mediaservicesopenmediaviewer', 'icon', 'core'],
     componentName: 'MediaServicesOpenMediaviewerIcon',
     package: '@atlaskit/icon/glyph/media-services/open-mediaviewer',
   },
   'media-services/oval': {
-    keywords: [
-      'media-services/oval',
-      'mediaservicesoval',
-      'ellipse',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/oval', 'mediaservicesoval', 'ellipse', 'icon', 'core'],
     componentName: 'MediaServicesOvalIcon',
     package: '@atlaskit/icon/glyph/media-services/oval',
   },
   'media-services/pdf': {
-    keywords: [
-      'media-services/pdf',
-      'mediaservicespdf',
-      'document',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/pdf', 'mediaservicespdf', 'document', 'icon', 'core'],
     componentName: 'MediaServicesPdfIcon',
     package: '@atlaskit/icon/glyph/media-services/pdf',
   },
   'media-services/preselected': {
-    keywords: [
-      'media-services/preselected',
-      'mediaservicespreselected',
-      'circle',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/preselected', 'mediaservicespreselected', 'circle', 'icon', 'core'],
     componentName: 'MediaServicesPreselectedIcon',
     package: '@atlaskit/icon/glyph/media-services/preselected',
   },
   'media-services/presentation': {
-    keywords: [
-      'media-services/presentation',
-      'mediaservicespresentation',
-      'chart',
-      'graph',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/presentation', 'mediaservicespresentation', 'chart', 'graph', 'icon', 'core'],
     componentName: 'MediaServicesPresentationIcon',
     package: '@atlaskit/icon/glyph/media-services/presentation',
   },
   'media-services/rectangle': {
-    keywords: [
-      'media-services/rectangle',
-      'mediaservicesrectangle',
-      'box',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/rectangle', 'mediaservicesrectangle', 'box', 'icon', 'core'],
     componentName: 'MediaServicesRectangleIcon',
     package: '@atlaskit/icon/glyph/media-services/rectangle',
   },
   'media-services/scale-large': {
-    keywords: [
-      'media-services/scale-large',
-      'mediaservicesscalelarge',
-      'photo',
-      'picture',
-      'image',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/scale-large', 'mediaservicesscalelarge', 'photo', 'picture', 'image', 'icon', 'core'],
     componentName: 'MediaServicesScaleLargeIcon',
     package: '@atlaskit/icon/glyph/media-services/scale-large',
   },
   'media-services/scale-small': {
-    keywords: [
-      'media-services/scale-small',
-      'mediaservicesscalesmall',
-      'photo',
-      'picture',
-      'image',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/scale-small', 'mediaservicesscalesmall', 'photo', 'picture', 'image', 'icon', 'core'],
     componentName: 'MediaServicesScaleSmallIcon',
     package: '@atlaskit/icon/glyph/media-services/scale-small',
   },
   'media-services/spreadsheet': {
-    keywords: [
-      'media-services/spreadsheet',
-      'mediaservicesspreadsheet',
-      'document',
-      'excel',
-      'sheets',
-      'table',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/spreadsheet', 'mediaservicesspreadsheet', 'document', 'excel', 'sheets', 'table', 'icon', 'core'],
     componentName: 'MediaServicesSpreadsheetIcon',
     package: '@atlaskit/icon/glyph/media-services/spreadsheet',
   },
   'media-services/text': {
-    keywords: [
-      'media-services/text',
-      'mediaservicestext',
-      'type',
-      'typography',
-      'font',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/text', 'mediaservicestext', 'type', 'typography', 'font', 'icon', 'core'],
     componentName: 'MediaServicesTextIcon',
     package: '@atlaskit/icon/glyph/media-services/text',
   },
   'media-services/unknown': {
-    keywords: [
-      'media-services/unknown',
-      'mediaservicesunknown',
-      'document',
-      'file',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/unknown', 'mediaservicesunknown', 'document', 'file', 'icon', 'core'],
     componentName: 'MediaServicesUnknownIcon',
     package: '@atlaskit/icon/glyph/media-services/unknown',
   },
   'media-services/video': {
-    keywords: [
-      'media-services/video',
-      'mediaservicesvideo',
-      'film',
-      'camera',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/video', 'mediaservicesvideo', 'film', 'camera', 'icon', 'core'],
     componentName: 'MediaServicesVideoIcon',
     package: '@atlaskit/icon/glyph/media-services/video',
   },
   'media-services/zip': {
-    keywords: [
-      'media-services/zip',
-      'mediaserviceszip',
-      'compress',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/zip', 'mediaserviceszip', 'compress', 'icon', 'core'],
     componentName: 'MediaServicesZipIcon',
     package: '@atlaskit/icon/glyph/media-services/zip',
   },
   'media-services/zoom-in': {
-    keywords: [
-      'media-services/zoom-in',
-      'mediaserviceszoomin',
-      'magnify',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/zoom-in', 'mediaserviceszoomin', 'magnify', 'icon', 'core'],
     componentName: 'MediaServicesZoomInIcon',
     package: '@atlaskit/icon/glyph/media-services/zoom-in',
   },
   'media-services/zoom-out': {
-    keywords: [
-      'media-services/zoom-out',
-      'mediaserviceszoomout',
-      'magnify',
-      'icon',
-      'core',
-    ],
+    keywords: ['media-services/zoom-out', 'mediaserviceszoomout', 'magnify', 'icon', 'core'],
     componentName: 'MediaServicesZoomOutIcon',
     package: '@atlaskit/icon/glyph/media-services/zoom-out',
   },
@@ -2451,15 +1312,7 @@ export default {
     package: '@atlaskit/icon/glyph/mention',
   },
   menu: {
-    keywords: [
-      'menu',
-      'hamburger',
-      'navigation',
-      'switcher',
-      'app switcher',
-      'icon',
-      'core',
-    ],
+    keywords: ['menu', 'hamburger', 'navigation', 'switcher', 'app switcher', 'icon', 'core'],
     componentName: 'MenuIcon',
     package: '@atlaskit/icon/glyph/menu',
   },
@@ -2474,26 +1327,12 @@ export default {
     package: '@atlaskit/icon/glyph/more',
   },
   'notification-all': {
-    keywords: [
-      'notification-all',
-      'notificationall',
-      'bell',
-      'alarm',
-      'icon',
-      'core',
-    ],
+    keywords: ['notification-all', 'notificationall', 'bell', 'alarm', 'icon', 'core'],
     componentName: 'NotificationAllIcon',
     package: '@atlaskit/icon/glyph/notification-all',
   },
   'notification-direct': {
-    keywords: [
-      'notification-direct',
-      'notificationdirect',
-      'bell',
-      'alarm',
-      'icon',
-      'core',
-    ],
+    keywords: ['notification-direct', 'notificationdirect', 'bell', 'alarm', 'icon', 'core'],
     componentName: 'NotificationDirectIcon',
     package: '@atlaskit/icon/glyph/notification-direct',
   },
@@ -2503,12 +1342,7 @@ export default {
     package: '@atlaskit/icon/glyph/notification',
   },
   'office-building-filled': {
-    keywords: [
-      'office-building-filled',
-      'officebuildingfilled',
-      'icon',
-      'core',
-    ],
+    keywords: ['office-building-filled', 'officebuildingfilled', 'icon', 'core'],
     componentName: 'OfficeBuildingFilledIcon',
     package: '@atlaskit/icon/glyph/office-building-filled',
   },
@@ -2543,15 +1377,7 @@ export default {
     package: '@atlaskit/icon/glyph/pdf',
   },
   'people-group': {
-    keywords: [
-      'people-group',
-      'peoplegroup',
-      'person',
-      'user',
-      'group',
-      'icon',
-      'core',
-    ],
+    keywords: ['people-group', 'peoplegroup', 'person', 'user', 'group', 'icon', 'core'],
     componentName: 'PeopleGroupIcon',
     package: '@atlaskit/icon/glyph/people-group',
   },
@@ -2576,14 +1402,7 @@ export default {
     package: '@atlaskit/icon/glyph/portfolio',
   },
   preferences: {
-    keywords: [
-      'preferences',
-      'settings',
-      'configuration',
-      'options',
-      'icon',
-      'core',
-    ],
+    keywords: ['preferences', 'settings', 'configuration', 'options', 'icon', 'core'],
     componentName: 'PreferencesIcon',
     package: '@atlaskit/icon/glyph/preferences',
   },
@@ -2593,14 +1412,7 @@ export default {
     package: '@atlaskit/icon/glyph/presence-active',
   },
   'presence-busy': {
-    keywords: [
-      'presence-busy',
-      'presencebusy',
-      'block',
-      'do not disturb',
-      'icon',
-      'core',
-    ],
+    keywords: ['presence-busy', 'presencebusy', 'block', 'do not disturb', 'icon', 'core'],
     componentName: 'PresenceBusyIcon',
     package: '@atlaskit/icon/glyph/presence-busy',
   },
@@ -2785,46 +1597,17 @@ export default {
     package: '@atlaskit/icon/glyph/unlink',
   },
   'unlock-circle': {
-    keywords: [
-      'unlock-circle',
-      'unlockcircle',
-      'open',
-      'permissions',
-      'privacy',
-      'restrict',
-      'insecure',
-      'icon',
-      'core',
-    ],
+    keywords: ['unlock-circle', 'unlockcircle', 'open', 'permissions', 'privacy', 'restrict', 'insecure', 'icon', 'core'],
     componentName: 'UnlockCircleIcon',
     package: '@atlaskit/icon/glyph/unlock-circle',
   },
   'unlock-filled': {
-    keywords: [
-      'unlock-filled',
-      'unlockfilled',
-      'open',
-      'permissions',
-      'privacy',
-      'restrict',
-      'insecure',
-      'icon',
-      'core',
-    ],
+    keywords: ['unlock-filled', 'unlockfilled', 'open', 'permissions', 'privacy', 'restrict', 'insecure', 'icon', 'core'],
     componentName: 'UnlockFilledIcon',
     package: '@atlaskit/icon/glyph/unlock-filled',
   },
   unlock: {
-    keywords: [
-      'unlock',
-      'open',
-      'permissions',
-      'privacy',
-      'restrict',
-      'insecure',
-      'icon',
-      'core',
-    ],
+    keywords: ['unlock', 'open', 'permissions', 'privacy', 'restrict', 'insecure', 'icon', 'core'],
     componentName: 'UnlockIcon',
     package: '@atlaskit/icon/glyph/unlock',
   },
@@ -2834,37 +1617,17 @@ export default {
     package: '@atlaskit/icon/glyph/upload',
   },
   'user-avatar-circle': {
-    keywords: [
-      'user-avatar-circle',
-      'useravatarcircle',
-      'person',
-      'icon',
-      'core',
-    ],
+    keywords: ['user-avatar-circle', 'useravatarcircle', 'person', 'icon', 'core'],
     componentName: 'UserAvatarCircleIcon',
     package: '@atlaskit/icon/glyph/user-avatar-circle',
   },
   'vid-audio-muted': {
-    keywords: [
-      'vid-audio-muted',
-      'vidaudiomuted',
-      'microphone',
-      'sound',
-      'icon',
-      'core',
-    ],
+    keywords: ['vid-audio-muted', 'vidaudiomuted', 'microphone', 'sound', 'icon', 'core'],
     componentName: 'VidAudioMutedIcon',
     package: '@atlaskit/icon/glyph/vid-audio-muted',
   },
   'vid-audio-on': {
-    keywords: [
-      'vid-audio-on',
-      'vidaudioon',
-      'microphone',
-      'sound',
-      'icon',
-      'core',
-    ],
+    keywords: ['vid-audio-on', 'vidaudioon', 'microphone', 'sound', 'icon', 'core'],
     componentName: 'VidAudioOnIcon',
     package: '@atlaskit/icon/glyph/vid-audio-on',
   },
@@ -2884,14 +1647,7 @@ export default {
     package: '@atlaskit/icon/glyph/vid-camera-on',
   },
   'vid-connection-circle': {
-    keywords: [
-      'vid-connection-circle',
-      'vidconnectioncircle',
-      'signal',
-      'bar',
-      'icon',
-      'core',
-    ],
+    keywords: ['vid-connection-circle', 'vidconnectioncircle', 'signal', 'bar', 'icon', 'core'],
     componentName: 'VidConnectionCircleIcon',
     package: '@atlaskit/icon/glyph/vid-connection-circle',
   },
@@ -2901,25 +1657,12 @@ export default {
     package: '@atlaskit/icon/glyph/vid-forward',
   },
   'vid-full-screen-off': {
-    keywords: [
-      'vid-full-screen-off',
-      'vidfullscreenoff',
-      'collapse',
-      'close',
-      'icon',
-      'core',
-    ],
+    keywords: ['vid-full-screen-off', 'vidfullscreenoff', 'collapse', 'close', 'icon', 'core'],
     componentName: 'VidFullScreenOffIcon',
     package: '@atlaskit/icon/glyph/vid-full-screen-off',
   },
   'vid-full-screen-on': {
-    keywords: [
-      'vid-full-screen-on',
-      'vidfullscreenon',
-      'expand',
-      'icon',
-      'core',
-    ],
+    keywords: ['vid-full-screen-on', 'vidfullscreenon', 'expand', 'icon', 'core'],
     componentName: 'VidFullScreenOnIcon',
     package: '@atlaskit/icon/glyph/vid-full-screen-on',
   },
@@ -2929,14 +1672,7 @@ export default {
     package: '@atlaskit/icon/glyph/vid-hang-up',
   },
   'vid-hd-circle': {
-    keywords: [
-      'vid-hd-circle',
-      'vidhdcircle',
-      'high',
-      'definition',
-      'icon',
-      'core',
-    ],
+    keywords: ['vid-hd-circle', 'vidhdcircle', 'high', 'definition', 'icon', 'core'],
     componentName: 'VidHdCircleIcon',
     package: '@atlaskit/icon/glyph/vid-hd-circle',
   },
@@ -2951,16 +1687,7 @@ export default {
     package: '@atlaskit/icon/glyph/vid-play',
   },
   'vid-raised-hand': {
-    keywords: [
-      'vid-raised-hand',
-      'vidraisedhand',
-      'person',
-      'question',
-      'user',
-      'arm',
-      'icon',
-      'core',
-    ],
+    keywords: ['vid-raised-hand', 'vidraisedhand', 'person', 'question', 'user', 'arm', 'icon', 'core'],
     componentName: 'VidRaisedHandIcon',
     package: '@atlaskit/icon/glyph/vid-raised-hand',
   },
@@ -2970,15 +1697,7 @@ export default {
     package: '@atlaskit/icon/glyph/vid-share-screen',
   },
   'vid-speaking-circle': {
-    keywords: [
-      'vid-speaking-circle',
-      'vidspeakingcircle',
-      'sound',
-      'talk',
-      'audio',
-      'icon',
-      'core',
-    ],
+    keywords: ['vid-speaking-circle', 'vidspeakingcircle', 'sound', 'talk', 'audio', 'icon', 'core'],
     componentName: 'VidSpeakingCircleIcon',
     package: '@atlaskit/icon/glyph/vid-speaking-circle',
   },
@@ -2998,26 +1717,12 @@ export default {
     package: '@atlaskit/icon/glyph/vid-volume-muted',
   },
   'video-circle': {
-    keywords: [
-      'video-circle',
-      'videocircle',
-      'video',
-      'camera',
-      'icon',
-      'core',
-    ],
+    keywords: ['video-circle', 'videocircle', 'video', 'camera', 'icon', 'core'],
     componentName: 'VideoCircleIcon',
     package: '@atlaskit/icon/glyph/video-circle',
   },
   'video-filled': {
-    keywords: [
-      'video-filled',
-      'videofilled',
-      'video',
-      'camera',
-      'icon',
-      'core',
-    ],
+    keywords: ['video-filled', 'videofilled', 'video', 'camera', 'icon', 'core'],
     componentName: 'VideoFilledIcon',
     package: '@atlaskit/icon/glyph/video-filled',
   },
@@ -3027,15 +1732,7 @@ export default {
     package: '@atlaskit/icon/glyph/warning',
   },
   'watch-filled': {
-    keywords: [
-      'watch-filled',
-      'watchfilled',
-      'visible',
-      'visibility',
-      'eye',
-      'icon',
-      'core',
-    ],
+    keywords: ['watch-filled', 'watchfilled', 'visible', 'visibility', 'eye', 'icon', 'core'],
     componentName: 'WatchFilledIcon',
     package: '@atlaskit/icon/glyph/watch-filled',
   },

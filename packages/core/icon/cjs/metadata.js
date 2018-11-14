@@ -1552,11 +1552,6 @@ var _default = {
     componentName: 'StarLargeIcon',
     package: '@atlaskit/icon/glyph/star-large'
   },
-  'star-outline': {
-    keywords: ['star-outline', 'staroutline', 'icon', 'core'],
-    componentName: 'StarOutlineIcon',
-    package: '@atlaskit/icon/glyph/star-outline'
-  },
   star: {
     keywords: ['star', 'icon', 'core'],
     componentName: 'StarIcon',
