@@ -1,15 +1,11 @@
-// @flow
-/* eslint-disable react/no-unused-prop-types */
-
-import React, { type Node } from 'react';
+import * as React from 'react';
 import { gridSize, math } from '@atlaskit/theme';
 import { getLoadingStyle } from './utils';
 
 type Props = {
-  spacing: string,
-  isOnlyChild: boolean,
-  children: Node,
-  isLoading?: boolean,
+  spacing: string;
+  isOnlyChild: boolean;
+  isLoading?: boolean;
 };
 
 const getMargin = (props: Props) => {
@@ -18,8 +14,8 @@ const getMargin = (props: Props) => {
   return `0 ${math.divide(gridSize, 2)(props)}px`;
 };
 
-const IconWrapper = (props: Props) => {
-  const style = {
+const IconWrapper: React.StatelessComponent<Props> = props => {
+  const style: React.CSSProperties = {
     alignSelf: 'center',
     display: 'flex',
     flexShrink: 0,

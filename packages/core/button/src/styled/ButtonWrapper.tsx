@@ -1,24 +1,12 @@
-// @flow
+import * as React from 'react';
 
-import React, { type Node } from 'react';
-
-type Props = {
-  onClick: (e: Event) => mixed,
-  fit: boolean,
-  children: Node,
+export type Props = {
+  onClick?: React.MouseEventHandler;
+  fit: boolean;
 };
 
-type styleObj = {
-  alignSelf: string,
-  display: string,
-  flexWrap: string,
-  maxWidth: string,
-  width?: string,
-  justifyContent?: string,
-};
-
-const ButtonWrapper = (props: Props) => {
-  const style: styleObj = {
+const ButtonWrapper: React.StatelessComponent<Props> = props => {
+  const style: React.CSSProperties = {
     alignSelf: 'center',
     display: 'inline-flex',
     flexWrap: 'nowrap',
@@ -30,7 +18,7 @@ const ButtonWrapper = (props: Props) => {
     style.justifyContent = 'center';
   }
 
-  const optionalProps = {};
+  const optionalProps: Pick<Props, 'onClick'> = {};
   if (props.onClick) {
     optionalProps.onClick = props.onClick;
   }

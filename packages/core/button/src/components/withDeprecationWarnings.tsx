@@ -1,13 +1,7 @@
-// @flow
+import * as React from 'react';
+import { ButtonAppearances } from '../types';
 
-import React, {
-  Component,
-  type ComponentType,
-  type ElementConfig,
-} from 'react';
-import type { ButtonAppearances } from '../types';
-
-const getComponentName = (target: any): string => {
+const getComponentName = (target: React.ComponentType): string => {
   if (target.displayName && typeof target.displayName === 'string') {
     return target.displayName;
   }
@@ -15,9 +9,9 @@ const getComponentName = (target: any): string => {
   return target.name || 'Component';
 };
 
-const warnIfDeprecatedAppearance = appearance => {
+const warnIfDeprecatedAppearance = (appearance?: ButtonAppearances) => {
   const deprecatedAppearances = ['help'];
-  if (appearance && deprecatedAppearances.includes(appearance)) {
+  if (appearance && deprecatedAppearances.indexOf(appearance) !== -1) {
     // eslint-disable-next-line no-console
     console.warn(
       `Atlaskit: The Button appearance "${appearance}" is deprecated. Please use styled-components' ThemeProvider to provide a custom theme for Button instead.`,
@@ -26,12 +20,11 @@ const warnIfDeprecatedAppearance = appearance => {
 };
 
 export default function withDeprecationWarnings<
-  Props: { appearance?: ButtonAppearances },
-  InnerComponent: ComponentType<Props>,
->(
-  WrappedComponent: InnerComponent,
-): ComponentType<ElementConfig<$Supertype<InnerComponent>>> {
-  return class WithDeprecationWarnings extends Component<$ReadOnly<Props>> {
+  Props extends { appearance?: ButtonAppearances }
+>(WrappedComponent: React.ComponentClass<Props>): React.ComponentClass<Props> {
+  return class WithDeprecationWarnings extends React.Component<
+    Readonly<Props>
+  > {
     static displayName = `WithDeprecationWarnings(${getComponentName(
       WrappedComponent,
     )})`;
@@ -40,7 +33,7 @@ export default function withDeprecationWarnings<
       warnIfDeprecatedAppearance(this.props.appearance);
     }
 
-    componentWillReceiveProps(newProps: *) {
+    componentWillReceiveProps(newProps: Props) {
       if (newProps.appearance !== this.props.appearance) {
         warnIfDeprecatedAppearance(newProps.appearance);
       }

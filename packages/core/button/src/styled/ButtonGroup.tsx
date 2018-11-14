@@ -1,4 +1,3 @@
-// @flow
 import styled from 'styled-components';
 
 const gutter = 4;

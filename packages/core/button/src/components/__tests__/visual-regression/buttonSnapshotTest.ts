@@ -1,4 +1,3 @@
-// @flow
 import {
   getExampleUrl,
   takeScreenShot,
@@ -10,10 +9,11 @@ describe('Snapshot Test', () => {
       'core',
       'button',
       'ButtonAppearances',
+      // @ts-ignore
       global.__BASEURL__,
     );
+    // @ts-ignore
     const image = await takeScreenShot(global.page, url);
-    //$FlowFixMe
     expect(image).toMatchProdImageSnapshot();
   });
 });

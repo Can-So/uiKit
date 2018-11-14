@@ -1,35 +1,28 @@
-// @flow
-import React, {
-  Children,
-  cloneElement,
-  Component,
-  type ChildrenArray,
-  type Element,
-} from 'react';
+import * as React from 'react';
 import withDeprecationWarnings from './withDeprecationWarnings';
 import Group, { GroupItem } from '../styled/ButtonGroup';
-import type { ButtonAppearances } from '../types';
+import { ButtonAppearances } from '../types';
 
 export type ButtonGroupProps = {
   /** The appearance to apply to all buttons. */
-  appearance?: ButtonAppearances,
-  /** The buttons to render. */
-  children: ChildrenArray<Element<any> | null | void>,
+  appearance?: ButtonAppearances;
 };
 
-class ButtonGroup extends Component<ButtonGroupProps> {
+class ButtonGroup extends React.Component<ButtonGroupProps> {
   render() {
     const { appearance, children } = this.props;
 
     return (
       <Group>
-        {Children.map(children, (child, idx) => {
+        {React.Children.map(children, (child, idx) => {
           if (!child) {
             return null;
           }
           return (
             <GroupItem key={idx}>
-              {appearance ? cloneElement(child, { appearance }) : child}
+              {appearance
+                ? React.cloneElement(child as JSX.Element, { appearance })
+                : child}
             </GroupItem>
           );
         })}

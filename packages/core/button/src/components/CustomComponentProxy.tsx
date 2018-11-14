@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { cleanProps } from '@atlaskit/analytics-next';
 
 /**
@@ -9,9 +9,9 @@ import { cleanProps } from '@atlaskit/analytics-next';
  * acts as a layer which catches the appearance-related properties so that they can be used by
  * styled-components, then passes the rest of the props on to the custom component.
  */
-import type { DerivedButtonProps } from '../types';
+import { DerivedButtonProps } from '../types';
 
-class CustomComponentProxy extends Component<DerivedButtonProps> {
+class CustomComponentProxy extends React.Component<DerivedButtonProps> {
   render() {
     const {
       appearance,

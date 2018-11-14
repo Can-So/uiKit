@@ -1,4 +1,3 @@
-// @flow
 import { getPropertyAppearance } from '../../../styled/getButtonStyles';
 
 const themeDefinitions = {
@@ -42,6 +41,7 @@ describe('getPropertyAppearance', () => {
     expect(
       getPropertyAppearance(
         'propertyA',
+        // @ts-ignore
         { theme: 'themeB', appearance: 'not-an-appearance' },
         themeDefinitions,
       ),
@@ -83,6 +83,7 @@ describe('getPropertyAppearance', () => {
     expect(
       getPropertyAppearance(
         'propertyA',
+        // @ts-ignore
         { appearance: 'appearanceB', isSelected: true },
         themeDefinitions,
       ),

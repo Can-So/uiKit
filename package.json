@@ -103,6 +103,7 @@
     "@types/lorem-ipsum": "^1.0.2",
     "@types/mocha": "^2.2.39",
     "@types/prop-types": "^15.5.1",
+    "@types/react-dom": "^16.0.9",
     "@types/react-intl": "^2.3.8",
     "@types/react-syntax-highlighter": "^0.0.3",
     "babel-eslint": "^10.0.1",

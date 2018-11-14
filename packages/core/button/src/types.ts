@@ -1,5 +1,5 @@
 // @flow
-import type { Node, Element, ElementType } from 'react';
+import React from 'react';
 import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
 
 export type ButtonAppearances =
@@ -14,67 +14,64 @@ export type ButtonAppearances =
 
 export type ButtonProps = {
   /** The base styling to apply to the button. */
-  appearance?: ButtonAppearances,
+  appearance?: ButtonAppearances;
   /** Pass aria-controls to underlying html button. */
-  ariaControls?: string,
+  ariaControls?: string;
   /** Pass aria-expanded to underlying html button. */
-  ariaExpanded?: boolean,
+  ariaExpanded?: boolean;
   /** Pass aria-label to underlying html button. */
-  ariaLabel?: string,
+  ariaLabel?: string;
   /** Pass aria-haspopup to underlying html button. */
-  ariaHaspopup?: boolean,
-  /** This button's child nodes. */
-  children?: Node,
+  ariaHaspopup?: boolean;
   /** Add a classname to the button. */
-  className?: string,
+  className?: string;
   /** A custom component to use instead of the default button. */
-  component?: ElementType,
+  component?: React.ComponentType<Partial<DerivedButtonProps>>;
   /** Name property of a linked form that the button submits when clicked. */
-  form?: string,
+  form?: string;
   /** Provides a url for buttons being used as a link. */
-  href?: string,
+  href?: string;
   /** Places an icon within the button, after the button's text. */
-  iconAfter?: Element<*>,
+  iconAfter?: React.ReactChild;
   /** Places an icon within the button, before the button's text. */
-  iconBefore?: Element<*>,
+  iconBefore?: React.ReactChild;
   /** Pass a reference on to the styled component */
-  innerRef?: HTMLElement => mixed,
+  innerRef?: (element: HTMLElement) => void;
   /** Provide a unique id to the button. */
-  id?: string,
+  id?: string;
   /** Set if the button is disabled. */
-  isDisabled: boolean,
+  isDisabled: boolean;
   /**
     Set if the button is loading. When isLoading is true, text is hidden, and
     a spinner is shown in its place. The button maintains the width that it would
     have if the text were visible.
   */
-  isLoading: boolean,
+  isLoading: boolean;
   /** Change the style to indicate the button is selected. */
-  isSelected: boolean,
+  isSelected: boolean;
   /** Handler to be called on blur */
-  onBlur?: (e: SyntheticEvent<>) => void,
+  onBlur?: React.FocusEventHandler;
   /** Handler to be called on click. The second argument can be used to track analytics data. See the tutorial in the analytics-next package for details. */
-  onClick?: (e: SyntheticEvent<>, analyticsEvent: UIAnalyticsEvent) => void,
+  onClick?: (e: React.MouseEvent, analyticsEvent: UIAnalyticsEvent) => void;
   /** Handler to be called on focus */
-  onFocus?: (e: SyntheticEvent<>) => void,
+  onFocus?: React.FocusEventHandler;
   /** Set the amount of padding in the button. */
-  spacing: 'compact' | 'default' | 'none',
+  spacing: 'compact' | 'default' | 'none';
   /** Assign specific tabIndex order to the underlying html button. */
-  tabIndex?: number,
+  tabIndex?: number;
   /** Pass target down to a link within the button component, if a href is provided. */
-  target?: string,
+  target?: string;
   /** Set whether it is a button or a form submission. */
-  type: 'button' | 'submit',
+  type: 'button' | 'submit';
   /** Option to fit button width to its parent width */
-  shouldFitContainer: boolean,
+  shouldFitContainer: boolean;
   /** Set the button to autofocus on mount. */
-  autoFocus: boolean,
+  autoFocus: boolean;
 };
 
 export type DerivedButtonProps = {
-  ...ButtonProps,
-  isActive: boolean,
-  isFocus: boolean,
-  isHover: boolean,
-  fit: boolean,
-};
+  isActive: boolean;
+  isFocus: boolean;
+  isHover: boolean;
+  fit: boolean;
+} & ButtonProps;

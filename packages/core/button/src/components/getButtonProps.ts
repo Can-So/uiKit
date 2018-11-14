@@ -1,7 +1,7 @@
-// @flow
-import { type ButtonType } from './Button';
+import { ButtonType, ButtonState } from './Button';
+import { ButtonProps } from 'src/types';
 
-const getAppearanceProps = (props, state) => {
+const getAppearanceProps = (props: ButtonProps, state: ButtonState) => {
   const {
     appearance,
     className,
@@ -28,7 +28,7 @@ const getAppearanceProps = (props, state) => {
   };
 };
 
-const getInteractionProps = component => {
+const getInteractionProps = (component: ButtonType) => {
   const {
     onBlur,
     onFocus,
@@ -41,10 +41,8 @@ const getInteractionProps = component => {
   const { tabIndex } = component.props;
 
   // Block onClick/Keyboard submit while isLoading
-  const onClick = component.props.isLoading
-    ? (e: SyntheticEvent<>) => {
-        e.preventDefault();
-      }
+  const onClick: ButtonProps['onClick'] = component.props.isLoading
+    ? e => e.preventDefault()
     : component.props.onClick;
 
   return {
@@ -65,7 +63,7 @@ const getLinkElementProps = props => {
   return { href, target };
 };
 
-const getButtonElementProps = props => {
+const getButtonElementProps = (props: ButtonType['props']) => {
   const { ariaHaspopup, ariaExpanded, ariaControls, form, type } = props;
 
   return {

@@ -1,10 +1,10 @@
-// @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
+  WithAnalyticsEventProps,
 } from '@atlaskit/analytics-next';
 import withDeprecationWarnings from './withDeprecationWarnings';
 import getButtonProps from './getButtonProps';
@@ -15,7 +15,7 @@ import ButtonWrapper from '../styled/ButtonWrapper';
 import IconWrapper from '../styled/IconWrapper';
 import LoadingSpinner from '../styled/LoadingSpinner';
 
-import type { ButtonProps } from '../types';
+import { ButtonProps } from '../types';
 
 const {
   name: packageName,
@@ -56,25 +56,41 @@ const createStyledComponent = () => {
   return component;
 };
 
-type State = {
-  isActive: boolean,
-  isFocus: boolean,
-  isHover: boolean,
+export type ButtonState = {
+  isActive: boolean;
+  isFocus: boolean;
+  isHover: boolean;
 };
 
 export const defaultProps = {
-  appearance: 'default',
+  appearance: 'default' as 'default',
   isDisabled: false,
   isSelected: false,
   isLoading: false,
-  spacing: 'default',
-  type: 'button',
+  spacing: 'default' as 'default',
+  type: 'button' as 'button',
   shouldFitContainer: false,
   autoFocus: false,
 };
 
-class Button extends Component<ButtonProps, State> {
+// TODO: Extract to generic types package
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+type WithDefaults<P extends { [K in keyof D]?: any }, D> = Partial<
+  Pick<P, keyof D>
+> &
+  Omit<P, keyof D>;
+type ComponentProps<P> = Readonly<{ children?: React.ReactNode }> & Readonly<P>;
+// We pass all spare props through to child component, allow them on top level props
+type PassThroughProps = Record<string, any>;
+
+type DefaultedButtonProps = WithDefaults<ButtonProps, typeof defaultProps>;
+
+export class Button extends React.Component<
+  DefaultedButtonProps & WithAnalyticsEventProps & PassThroughProps,
+  ButtonState
+> {
   button: HTMLElement;
+  props: ComponentProps<ButtonProps & WithAnalyticsEventProps>;
 
   static defaultProps = defaultProps;
 
@@ -84,7 +100,7 @@ class Button extends Component<ButtonProps, State> {
     isHover: false,
   };
 
-  componentWillReceiveProps(nextProps: ButtonProps) {
+  componentWillReceiveProps(nextProps: DefaultedButtonProps) {
     if (this.props.component !== nextProps.component) {
       delete this.customComponent;
     }
@@ -96,7 +112,7 @@ class Button extends Component<ButtonProps, State> {
     }
   }
 
-  customComponent = null;
+  private customComponent: React.ComponentType<any> | null = null;
 
   isInteractive = () => !this.props.isDisabled && !this.props.isLoading;
 
@@ -113,14 +129,14 @@ class Button extends Component<ButtonProps, State> {
 
   onMouseUp = () => this.setState({ isActive: false });
 
-  onFocus = (event: SyntheticEvent<>) => {
+  onFocus: React.FocusEventHandler = event => {
     this.setState({ isFocus: true });
     if (this.props.onFocus) {
       this.props.onFocus(event);
     }
   };
 
-  onBlur = (event: SyntheticEvent<>) => {
+  onBlur: React.FocusEventHandler = event => {
     this.setState({ isFocus: false });
     if (this.props.onBlur) {
       this.props.onBlur(event);
@@ -128,7 +144,7 @@ class Button extends Component<ButtonProps, State> {
   };
 
   /* Swallow click events when the button is disabled to prevent inner child clicks bubbling up */
-  onInnerClick = (e: Event) => {
+  onInnerClick: React.MouseEventHandler = e => {
     if (!this.isInteractive()) {
       e.stopPropagation();
     }

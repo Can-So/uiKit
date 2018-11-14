@@ -1,4 +1,3 @@
-// @flow
 import { colors, themed } from '@atlaskit/theme';
 
 /**
@@ -7,25 +6,27 @@ import { colors, themed } from '@atlaskit/theme';
  * @param {Number} alpha Optional alpha value (defaults to 1).
  *
  */
-/* eslint-disable no-bitwise */
-const hex2rgba = (hex, alpha = 1) => {
-  let color;
-
+const hex2rgba = (hex: string, alpha = 1) => {
   if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-    color = hex.substring(1).split('');
+    let colorArr = hex.substring(1).split('');
 
-    if (color.length === 3) {
-      color = [color[0], color[0], color[1], color[1], color[2], color[2]];
+    if (colorArr.length === 3) {
+      colorArr = [
+        colorArr[0],
+        colorArr[0],
+        colorArr[1],
+        colorArr[1],
+        colorArr[2],
+        colorArr[2],
+      ];
     }
 
-    color = `0x${color.join('')}`;
+    const color = `0x${colorArr.join('')}`;
 
-    // $FlowFixMe - `>>` oxperand can validly take a string value
-    const r = (color >> 16) & 255;
-    // $FlowFixMe - `>>` operand can validly take a string value
-    const g = (color >> 8) & 255;
-    // $FlowFixMe - `>>` operand can validly take a string value
-    const b = color & 255;
+    // FIXME: `>>` operand can validly take a string value
+    const r = ((color as any) >> 16) & 255;
+    const g = ((color as any) >> 8) & 255;
+    const b = (color as any) & 255;
 
     return `rgba(${[r, g, b].join(',')}, ${alpha})`;
   }

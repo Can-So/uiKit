@@ -1,13 +1,20 @@
-// @flow
 import { css } from 'styled-components';
 import { borderRadius, fontSize, gridSize, math } from '@atlaskit/theme';
 import themeDefinitions from './themeDefinitions';
 import { themeNamespace } from '../theme';
+import getButtonProps from '../components/getButtonProps';
 
-const getProvidedTheme = ({ theme }) => (theme && theme[themeNamespace]) || {};
+// TODO: Type correctly when @atlaskit/theme is typescript
+
+const getProvidedTheme = ({ theme }: StyleProps) =>
+  (theme && theme[themeNamespace]) || {};
+
+type StyleProps = Partial<ReturnType<typeof getButtonProps>> & {
+  theme?: string;
+};
 
 const getAppearanceProperty = (
-  property,
+  property: string,
   appearance,
   providedTheme,
   inBuiltTheme,
@@ -23,7 +30,13 @@ const getAppearanceProperty = (
   );
 };
 
-const getState = ({ disabled, isActive, isFocus, isHover, isSelected }) => {
+const getState = ({
+  disabled,
+  isActive,
+  isFocus,
+  isHover,
+  isSelected,
+}: StyleProps) => {
   if (disabled) return 'disabled';
   if (isSelected && isFocus) return 'focusSelected';
   if (isSelected) return 'selected';
@@ -35,8 +48,8 @@ const getState = ({ disabled, isActive, isFocus, isHover, isSelected }) => {
 
 export const getPropertyAppearance = (
   property: string,
-  props: Object = {},
-  definitions: Object = themeDefinitions,
+  props: StyleProps = {},
+  definitions: any = themeDefinitions,
 ) => {
   const { appearance } = props;
   const { fallbacks, theme: inBuiltTheme } = definitions;
@@ -58,7 +71,7 @@ export const getPropertyAppearance = (
   return propertyStyles[state] || propertyStyles.default || fallbacks[property];
 };
 
-export default function getButtonStyles(props: Object) {
+export default function getButtonStyles(props: StyleProps) {
   // $FlowFixMe - should be fixed when theme work is done
   const baseSize = fontSize(props);
   const buttonHeight = `${math.divide(math.multiply(gridSize, 4), baseSize)(

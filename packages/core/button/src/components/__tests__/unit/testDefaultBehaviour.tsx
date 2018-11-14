@@ -1,6 +1,5 @@
-// @flow
 import { mount } from 'enzyme';
-import React from 'react';
+import * as React from 'react';
 import Spinner from '@atlaskit/spinner';
 import { AtlassianIcon } from '@atlaskit/logo';
 
@@ -182,7 +181,7 @@ describe('ak-button/default-behaviour', () => {
       </Button>,
     );
     const button = wrapper.find('StyledButton');
-    button.prop('onFocus')();
+    button.prop('onFocus')!({} as any);
     expect(spy).toHaveBeenCalled();
   });
 
@@ -259,7 +258,7 @@ describe('ak-button/default-behaviour', () => {
       </Button>,
     );
     const button = wrapper.find('StyledButton');
-    button.prop('onBlur')();
+    button.prop('onBlur')!({} as any);
     expect(spy).toHaveBeenCalled();
   });
 });
