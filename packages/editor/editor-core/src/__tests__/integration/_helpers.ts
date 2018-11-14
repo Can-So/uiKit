@@ -5,6 +5,7 @@
  */
 import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
 import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
+import { ToolbarFeatures } from '../../../example-helpers/ToolsDrawer';
 
 export const getDocFromElement = el => el.pmViewDesc.node.toJSON();
 export const editable = '.ProseMirror';
@@ -76,7 +77,44 @@ export const setupMediaMocksProviders = async browser => {
   await browser.click('.mediaProvider-resolved-no-auth-provider');
 
   // reload the editor so that media provider changes take effect
+  await rerenderEditor(browser);
+};
+
+/**
+ * Toggles a given feature on a page with a toolbar.
+ */
+export const toggleFeature = async (browser, name: keyof ToolbarFeatures) => {
+  const selector = `.toggleFeature-${name}`;
+  await browser.waitForSelector(selector);
+  await browser.click(selector);
+};
+
+/**
+ * Enables or disables a given feature on a page with a toolbar.
+ */
+export const setFeature = async (
+  browser,
+  name: keyof ToolbarFeatures,
+  enable: boolean,
+) => {
+  const enableSelector = `.disableFeature-${name}`;
+  const isEnabled = get$$Length(await browser.$$(enableSelector));
+
+  // toggle it if it requires enabling
+  if ((enable && !isEnabled) || (!enable && isEnabled)) {
+    await toggleFeature(browser, name);
+  }
+};
+
+/**
+ * Re-renders the current editor on a page with a toolbar.
+ */
+export const rerenderEditor = async browser => {
   await browser.click('.reloadEditorButton');
+};
+
+export const loadExampleDocument = async browser => {
+  await browser.click('.loadExampleDocument');
 };
 
 export const insertMedia = async (

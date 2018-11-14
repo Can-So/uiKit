@@ -395,3 +395,11 @@ export const evaluateClick = (page, selector) => {
     document.querySelector(selector).click();
   }, selector);
 };
+
+export const getBoundingRect = async (page, selector) => {
+  return await page.evaluate(selector => {
+    const element = document.querySelector(selector);
+    const { x, y, width, height } = element.getBoundingClientRect();
+    return { left: x, top: y, width, height, id: element.id };
+  }, selector);
+};

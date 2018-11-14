@@ -107,6 +107,7 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
               contextIdentifierProvider,
               onChange,
               disabled,
+              enabledFeatures,
             }) => (
               <div style={{ padding: '20px' }}>
                 <CollapsedEditor
@@ -133,7 +134,10 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
                     emojiProvider={emojiProvider}
                     media={{
                       provider: mediaProvider,
+                      allowMediaSingle: enabledFeatures.imageResizing,
+                      allowResizing: enabledFeatures.imageResizing,
                     }}
+                    allowDynamicTextSizing={enabledFeatures.dynamicTextSizing}
                     taskDecisionProvider={taskDecisionProvider}
                     contextIdentifierProvider={contextIdentifierProvider}
                     onChange={onChange}
