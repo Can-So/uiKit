@@ -6,7 +6,7 @@ export default md`
   The analytics package exports several components and functions that work together
   to enable other components to fire analytics, extend event data, and process events.
 
-## Usage:
+## Usage
 
 ${code`
 import {
