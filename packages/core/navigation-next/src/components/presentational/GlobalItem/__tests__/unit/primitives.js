@@ -5,11 +5,6 @@ import React from 'react';
 import Tooltip from '@atlaskit/tooltip';
 import GlobalNavigationItemPrimitive from '../../primitives';
 
-const theme = {
-  mode: {
-    globalItem: Function.prototype,
-  },
-};
 const styles = () => ({
   itemBase: {},
 });
@@ -18,8 +13,12 @@ const styles = () => ({
 const shallowDive = node => shallow(node).dive();
 
 describe('GlobalNavigationItemPrimitive', () => {
+  let defaultProps;
   beforeEach(() => {
     jest.resetModules();
+    defaultProps = {
+      isFocused: false,
+    };
   });
 
   it('should be wrapped using withGlobalTheme HOC', () => {
@@ -39,8 +38,8 @@ describe('GlobalNavigationItemPrimitive', () => {
   it('should render an anchor when an href prop is passed', () => {
     const wrapper = shallowDive(
       <GlobalNavigationItemPrimitive
+        {...defaultProps}
         styles={styles}
-        theme={theme}
         href="www.example.com"
       />,
     );
@@ -58,9 +57,9 @@ describe('GlobalNavigationItemPrimitive', () => {
   it('should render a button when an onClick prop is passed', () => {
     const wrapper = shallowDive(
       <GlobalNavigationItemPrimitive
+        {...defaultProps}
         styles={styles}
-        theme={theme}
-        onClick={Function.prototype}
+        onClick={() => {}}
       />,
     );
     const button = wrapper.find('button');
@@ -83,12 +82,12 @@ describe('GlobalNavigationItemPrimitive', () => {
     const onClick = () => {};
     const wrapper = shallowDive(
       <GlobalNavigationItemPrimitive
+        {...defaultProps}
         component={MyComponent}
         label="my-label"
         id="my-id"
         onClick={onClick}
         styles={styles}
-        theme={theme}
       />,
     );
 
@@ -99,6 +98,7 @@ describe('GlobalNavigationItemPrimitive', () => {
       className: expect.any(String),
       component: MyComponent,
       id: 'my-id',
+      isSelected: false,
       label: 'my-label',
       onClick,
       size: 'large',
@@ -110,7 +110,7 @@ describe('GlobalNavigationItemPrimitive', () => {
 
   it('should render a span if neither an href, onClick or component prop is passed', () => {
     const wrapper = shallowDive(
-      <GlobalNavigationItemPrimitive styles={styles} theme={theme} />,
+      <GlobalNavigationItemPrimitive {...defaultProps} styles={styles} />,
     );
     const span = wrapper.find('span');
     expect(span).toHaveLength(1);
@@ -125,11 +125,11 @@ describe('GlobalNavigationItemPrimitive', () => {
     const MyIcon = () => <div id="icon" />;
     const wrapper = shallowDive(
       <GlobalNavigationItemPrimitive
+        {...defaultProps}
         styles={styles}
-        theme={theme}
         badge={MyBadge}
         icon={MyIcon}
-        onClick={Function.prototype}
+        onClick={() => {}}
       />,
     );
 
@@ -140,13 +140,13 @@ describe('GlobalNavigationItemPrimitive', () => {
   it('should render a tooltip when a tooltip prop is passed', () => {
     const wrapper = shallowDive(
       <GlobalNavigationItemPrimitive
+        {...defaultProps}
         component={({ className, children, onClick }) => (
           <button className={className} onClick={onClick} id="customComponent">
             {children}
           </button>
         )}
         styles={styles}
-        theme={theme}
         tooltip="Test tooltip"
       />,
     );
@@ -156,9 +156,9 @@ describe('GlobalNavigationItemPrimitive', () => {
   it('should render a tooltip without text if element is selected', () => {
     const wrapper = shallowDive(
       <GlobalNavigationItemPrimitive
+        {...defaultProps}
         component={() => <button id="customComponent" />}
         styles={styles}
-        theme={theme}
         tooltip="Test tooltip"
         isSelected
       />,

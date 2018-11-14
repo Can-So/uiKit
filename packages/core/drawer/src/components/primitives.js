@@ -5,13 +5,14 @@ import { colors, layers, gridSize } from '@atlaskit/theme';
 import ArrowLeft from '@atlaskit/icon/glyph/arrow-left';
 
 import { Slide } from './transitions';
-import type { DrawerPrimitiveProps } from './types';
+import type { DrawerPrimitiveProps, DrawerWidth } from './types';
 
 // Misc.
 // ------------------------------
 
-const widths = {
+const widths: { [DrawerWidth]: string | number } = {
   full: '100vw',
+  extended: '95vw',
   narrow: 45 * gridSize(),
   medium: 60 * gridSize(),
   wide: 75 * gridSize(),

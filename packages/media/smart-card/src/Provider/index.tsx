@@ -7,13 +7,13 @@ export interface ProviderProps {
   children: React.ReactElement<any>;
 }
 
-export class Provider extends React.Component<ProviderProps> {
-  static defaultClient: Client = new Client();
+const defaultClient: Client = new Client();
 
+export class Provider extends React.Component<ProviderProps> {
   render() {
     const { client, children } = this.props;
     return (
-      <Context.Provider value={client || Provider.defaultClient}>
+      <Context.Provider value={client || defaultClient}>
         {children}
       </Context.Provider>
     );

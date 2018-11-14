@@ -11,9 +11,9 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "Atlassian Home",
-    "Jimmy Kurniawan",
-    "Ryan Braganza"
+    "Notifications Platform",
+    "Leonard Osang",
+    "Kim Damevin"
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {

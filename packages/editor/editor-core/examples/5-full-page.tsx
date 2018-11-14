@@ -100,7 +100,7 @@ export const SaveAndCancelButtons = props => (
 
 export type State = { disabled: boolean };
 
-const providers = {
+export const providers = {
   emojiProvider: emoji.storyData.getEmojiResource({
     uploadSupported: true,
     currentUser: {
@@ -116,7 +116,7 @@ const providers = {
   macroProvider: Promise.resolve(macroProvider),
 };
 
-const mediaProvider = storyMediaProviderFactory({
+export const mediaProvider = storyMediaProviderFactory({
   includeUserAuthProvider: true,
 });
 
@@ -149,6 +149,7 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               allowTables={{
                 advanced: true,
               }}
+              allowBreakout={true}
               allowJiraIssue={true}
               allowUnsupportedContent={true}
               allowPanel={true}
