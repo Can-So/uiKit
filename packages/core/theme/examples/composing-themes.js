@@ -2,7 +2,7 @@
 
 import React from 'react';
 import color from 'color';
-import { Theme } from '../src';
+import { createTheme, Theme } from '../src';
 
 const DisplayThemeColors = () => (
   <Theme>
@@ -26,11 +26,23 @@ const DisplayThemeColors = () => (
   </Theme>
 );
 
+const Theme1 = createTheme<
+  {
+    backgroundColor?: string,
+    textColor?: string,
+  },
+  *,
+>(() => ({
+  backgroundColor: '#333',
+  textColor: '#eee',
+}));
+// const Theme2 = createTheme(t => ({ ...t, backgroundColor: 'palevioletred' }));
+
 export default () => (
-  <Theme values={() => ({ backgroundColor: '#333', textColor: '#eee' })}>
+  <Theme1>
     <DisplayThemeColors />
     <Theme values={t => ({ ...t, backgroundColor: 'palevioletred' })}>
       <DisplayThemeColors />
     </Theme>
-  </Theme>
+  </Theme1>
 );

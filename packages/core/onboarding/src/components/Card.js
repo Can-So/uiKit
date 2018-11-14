@@ -71,7 +71,7 @@ const DefaultFooter = styled.div`
   padding-top: ${gridSize}px;
 `;
 
-const { Theme, ThemeContext } = createTheme<CardTokens, void>(() => ({
+const Theme = createTheme<CardTokens, void>(() => ({
   container: {
     overflow: 'auto',
     borderRadius: `${borderRadius()}px`,
@@ -79,8 +79,6 @@ const { Theme, ThemeContext } = createTheme<CardTokens, void>(() => ({
     zIndex: `${layers.spotlight() + 1}`,
   },
 }));
-
-export { ThemeContext as CardThemeContext };
 
 const Card = ({
   actions = [],

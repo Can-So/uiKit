@@ -44,7 +44,7 @@ export const textColors = {
   removed: { light: colors.R500, dark: colors.R500 },
 };
 
-export const { Theme, ThemeContext } = createTheme<ThemeTokens, ThemeProps>(
+export const Theme = createTheme<ThemeTokens, ThemeProps>(
   ({ appearance, mode }) => {
     if (typeof appearance === 'object') {
       return {
