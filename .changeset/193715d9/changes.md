@@ -1,1 +1,1 @@
-- Update TypeScript TD (Add isSpellCheckEnabled field)
+- Update TypeScript TD (Add isValidationHidden field)
