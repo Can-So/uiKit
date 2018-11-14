@@ -17,11 +17,11 @@ type CodeProps = {
   /** The language in which the code is written */
   language: ADFSupportedLanguages | string,
   /** The style object to apply to the container that shows line number */
-  lineNumberContainerStyle?: {},
-  /** the element or custom react component to use in place of the default span tag */
-  preTag?: Node,
+  lineNumberContainerStyle: {},
+  /** The element or custom react component to use in place of the default span tag */
+  preTag: Node | string,
   /** Indicates whether or not to show line numbers */
-  showLineNumbers?: boolean,
+  showLineNumbers: boolean,
   /** The code to be formatted */
   text: string,
   /** A custom theme to be applied, implements the Theme interface */
@@ -34,6 +34,7 @@ export class Code extends PureComponent<CodeProps, {}> {
     showLineNumbers: false,
     lineNumberContainerStyle: {},
     codeTagProps: {},
+    preTag: 'span',
   };
 
   render() {
@@ -42,7 +43,7 @@ export class Code extends PureComponent<CodeProps, {}> {
 
     const props = {
       language,
-      PreTag: 'span',
+      PreTag: this.props.preTag,
       style: this.props.codeStyle || inlineCodeStyle,
       showLineNumbers: this.props.showLineNumbers,
       lineNumberContainerStyle: this.props.lineNumberContainerStyle,
