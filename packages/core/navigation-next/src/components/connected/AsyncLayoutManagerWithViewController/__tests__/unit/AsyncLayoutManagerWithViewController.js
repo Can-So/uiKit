@@ -4,12 +4,14 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { HashRouter } from 'react-router-dom';
 
-import LayoutManagerWithViewController from '../../LayoutManagerWithViewController';
+import AsyncLayoutManagerWithViewController from '../../AsyncLayoutManagerWithViewController';
 import { NavigationProvider } from '../../../../../index';
 
 const GlobalNavigationComponent = () => null;
+const SkeletonContainerView = () => null;
+const ViewRenderer = () => null;
 
-describe('LayoutManagerWithViewController', () => {
+describe('AsyncLayoutManagerWithViewController', () => {
   let wrapper;
 
   let onCollapseStart;
@@ -32,20 +34,22 @@ describe('LayoutManagerWithViewController', () => {
           initialPeekViewId="root/index"
           isDebugEnabled={false}
         >
-          <LayoutManagerWithViewController
+          <AsyncLayoutManagerWithViewController
             globalNavigation={GlobalNavigationComponent}
             firstSkeletonToRender={'product'}
             onCollapseStart={onCollapseStart}
             onCollapseEnd={onCollapseEnd}
             onExpandStart={onExpandStart}
             onExpandEnd={onExpandEnd}
+            containerSkeleton={SkeletonContainerView}
+            viewRenderer={ViewRenderer}
             getRefs={getRefs}
           >
             <p>
               Children requires to have `NavigationProvider` as a parent Because
               of `unstated`. This is an issue
             </p>
-          </LayoutManagerWithViewController>
+          </AsyncLayoutManagerWithViewController>
         </NavigationProvider>
       </HashRouter>,
     );
@@ -79,7 +83,7 @@ describe('LayoutManagerWithViewController', () => {
   describe('Skeleton management', () => {
     it('should render skeleton using `product` context', () => {
       expect(
-        wrapper.find(LayoutManagerWithViewController).props()
+        wrapper.find(AsyncLayoutManagerWithViewController).props()
           .firstSkeletonToRender,
       ).toBe('product');
 
@@ -96,26 +100,28 @@ describe('LayoutManagerWithViewController', () => {
             initialPeekViewId="root/index"
             isDebugEnabled={false}
           >
-            <LayoutManagerWithViewController
+            <AsyncLayoutManagerWithViewController
               globalNavigation={GlobalNavigationComponent}
               firstSkeletonToRender={'container'}
               onCollapseStart={onCollapseStart}
               onCollapseEnd={onCollapseEnd}
               onExpandStart={onExpandStart}
               onExpandEnd={onExpandEnd}
+              containerSkeleton={SkeletonContainerView}
+              viewRenderer={ViewRenderer}
               getRefs={getRefs}
             >
               <p>
                 Children requires to have `NavigationProvider` as a parent
                 Because of `unstated`. This is an issue
               </p>
-            </LayoutManagerWithViewController>
+            </AsyncLayoutManagerWithViewController>
           </NavigationProvider>
         </HashRouter>,
       );
 
       expect(
-        containerWrapper.find(LayoutManagerWithViewController).props()
+        containerWrapper.find(AsyncLayoutManagerWithViewController).props()
           .firstSkeletonToRender,
       ).toBe('container');
 

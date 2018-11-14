@@ -7,19 +7,17 @@ import { withNavigationUI } from '../../../ui-controller';
 import { withNavigationViewController } from '../../../view-controller';
 import LayoutManager from '../../presentational/LayoutManager';
 import type {
-  LayoutManagerWithViewControllerProps,
-  LayoutManagerWithViewControllerState,
+  AsyncLayoutManagerWithViewControllerProps,
+  AsyncLayoutManagerWithViewControllerState,
 } from './types';
-import ViewRenderer from '../../../renderer';
-import SkeletonContainerView from '../../presentational/SkeletonContainerView';
 import type { ActiveView } from '../../../view-controller/types';
 import LayerInitialised from '../../presentational/LayerInitialised';
 /* NOTE: experimental props use an underscore */
 /* eslint-disable camelcase */
 
 class LayoutManagerWithViewControllerBase extends Component<
-  LayoutManagerWithViewControllerProps,
-  LayoutManagerWithViewControllerState,
+  AsyncLayoutManagerWithViewControllerProps,
+  AsyncLayoutManagerWithViewControllerState,
 > {
   static defaultProps = {
     experimental_flyoutOnHover: false,
@@ -29,7 +27,7 @@ class LayoutManagerWithViewControllerBase extends Component<
     hasInitialised: false,
   };
 
-  constructor(props: LayoutManagerWithViewControllerProps) {
+  constructor(props: AsyncLayoutManagerWithViewControllerProps) {
     super(props);
     this.renderContainerNavigation.displayName = 'ContainerNavigationRenderer';
     this.renderProductNavigation.displayName = 'ProductNavigationRenderer';
@@ -42,7 +40,8 @@ class LayoutManagerWithViewControllerBase extends Component<
   };
 
   renderSkeleton = () => {
-    return <SkeletonContainerView type={this.props.firstSkeletonToRender} />;
+    const { containerSkeleton: ContainerSkeleton } = this.props;
+    return <ContainerSkeleton type={this.props.firstSkeletonToRender} />;
   };
 
   renderContainerNavigation = () => {
@@ -117,7 +116,7 @@ class LayoutManagerWithViewControllerBase extends Component<
   };
 
   renderView(view: ActiveView): Node {
-    const { customComponents } = this.props;
+    const { customComponents, viewRenderer: ViewRenderer } = this.props;
     return (
       <ViewRenderer customComponents={customComponents} items={view.data} />
     );

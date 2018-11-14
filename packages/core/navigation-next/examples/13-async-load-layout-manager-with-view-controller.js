@@ -8,7 +8,7 @@ import { Label } from '@atlaskit/field-base';
 import { ToggleStateless } from '@atlaskit/toggle';
 
 import {
-  LayoutManagerWithViewController,
+  AsyncLayoutManagerWithViewController,
   NavigationProvider,
   SkeletonContainerView,
   ViewRenderer,
@@ -117,11 +117,11 @@ export default class App extends Component<
           initialPeekViewId="root/index"
           isDebugEnabled={isDebugEnabled}
         >
-          <LayoutManagerWithViewController
+          <AsyncLayoutManagerWithViewController
             customComponents={{ ProjectSwitcher: AsyncProjectSwitch }}
             experimental_flyoutOnHover={isFlyoutAvailable}
             globalNavigation={AsyncDefaultGlobalNavigation}
-            containerSkeleton={SkeletonContainerView}
+            containerSkeleton={() => <SkeletonContainerView type={'product'} />}
             viewRenderer={ViewRenderer}
             firstSkeletonToRender={'product'}
           >
@@ -144,7 +144,7 @@ export default class App extends Component<
                 onChange={this.onDebugToggle}
               />
             </div>
-          </LayoutManagerWithViewController>
+          </AsyncLayoutManagerWithViewController>
         </NavigationProvider>
       </HashRouter>
     );

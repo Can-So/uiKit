@@ -2,16 +2,18 @@
 
 import type { ComponentType, Node } from 'react';
 import type { WithNavigationUIControllerProps } from '../../../ui-controller/types';
-
+import { UIController } from '../../../ui-controller';
+import { ViewController } from '../../../view-controller';
 import type {
   CollapseListeners,
   ExperimentalFeatureFlags,
   GetRefs,
 } from '../../presentational/LayoutManager/types';
+import type { ItemsRendererProps } from '../../../renderer/types';
 
 import type { WithNavigationViewControllerProps } from '../../../view-controller/types';
 
-export type LayoutManagerWithViewControllerProps = {|
+export type AsyncLayoutManagerWithViewControllerProps = {|
   ...$Exact<CollapseListeners>,
   ...$Exact<ExperimentalFeatureFlags>,
   ...$Exact<WithNavigationViewControllerProps>,
@@ -20,9 +22,13 @@ export type LayoutManagerWithViewControllerProps = {|
   customComponents?: { [string]: ComponentType<*> },
   getRefs?: GetRefs,
   globalNavigation: ComponentType<{}>,
+  containerSkeleton: ComponentType<{}>,
+  navigationUIController: UIController,
+  navigationViewController: ViewController,
   firstSkeletonToRender?: 'product' | 'container',
+  viewRenderer: ComponentType<ItemsRendererProps>,
 |};
 
-export type LayoutManagerWithViewControllerState = {
+export type AsyncLayoutManagerWithViewControllerState = {
   hasInitialised: boolean,
 };

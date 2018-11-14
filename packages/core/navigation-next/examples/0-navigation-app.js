@@ -6,12 +6,7 @@ import { HashRouter } from 'react-router-dom';
 import { Label } from '@atlaskit/field-base';
 import { ToggleStateless } from '@atlaskit/toggle';
 
-import {
-  LayoutManagerWithViewController,
-  NavigationProvider,
-  SkeletonContainerView,
-  ViewRenderer,
-} from '../src';
+import { LayoutManagerWithViewController, NavigationProvider } from '../src';
 
 import { DefaultGlobalNavigation, ProjectSwitcher } from './shared/components';
 import RootViews from './shared/views/root';
@@ -56,8 +51,6 @@ export default class App extends Component<
             customComponents={{ ProjectSwitcher }}
             experimental_flyoutOnHover={isFlyoutAvailable}
             globalNavigation={DefaultGlobalNavigation}
-            containerSkeleton={SkeletonContainerView}
-            viewRenderer={ViewRenderer}
           >
             <div style={{ padding: 40 }}>
               <RootViews />

@@ -23,8 +23,6 @@ import {
   ViewController,
   viewReducerUtils,
   withNavigationViewController,
-  SkeletonContainerView,
-  ViewRenderer,
 } from '../src';
 
 const MyGlobalNavigation = () => (
@@ -356,11 +354,7 @@ class App extends Component<{
 
   render() {
     return (
-      <LayoutManagerWithViewController
-        globalNavigation={MyGlobalNavigation}
-        containerSkeleton={SkeletonContainerView}
-        viewRenderer={ViewRenderer}
-      >
+      <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
         <Switch>
           <Route path="/projects/my-project" component={ProjectBacklogRoute} />
           <Route path="/issues" component={IssuesAndFiltersRoute} />

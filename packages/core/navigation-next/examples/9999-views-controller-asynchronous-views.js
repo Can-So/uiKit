@@ -14,8 +14,6 @@ import {
   NavigationProvider,
   ViewController,
   withNavigationViewController,
-  SkeletonContainerView,
-  ViewRenderer,
 } from '../src';
 
 const MyGlobalNavigation = () => (
@@ -222,11 +220,7 @@ class App extends Component<{
 
   render() {
     return (
-      <LayoutManagerWithViewController
-        globalNavigation={MyGlobalNavigation}
-        containerSkeleton={SkeletonContainerView}
-        viewRenderer={ViewRenderer}
-      >
+      <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
         <Switch>
           <Route path="/issues" component={IssuesAndFiltersRoute} />
           <Route path="/" component={DashboardsRoute} />

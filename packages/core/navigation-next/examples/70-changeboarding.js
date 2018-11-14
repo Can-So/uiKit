@@ -13,8 +13,6 @@ import {
   UIControllerSubscriber,
   UIController,
   withNavigationUI,
-  SkeletonContainerView,
-  ViewRenderer,
 } from '../src';
 
 const GlobalNavigation = () => (
@@ -77,8 +75,6 @@ class Example extends Component<ExampleProps, ExampleState> {
           globalNavigation={GlobalNavigation}
           onCollapseEnd={this.openChangeboarding}
           getRefs={this.getCollapseAffordanceRef}
-          containerSkeleton={SkeletonContainerView}
-          viewRenderer={ViewRenderer}
         >
           <div css={{ padding: '32px 40px' }}>
             <ExpandToggleButton />
