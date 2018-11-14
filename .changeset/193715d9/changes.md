@@ -1,1 +1,0 @@
-- Update TypeScript TD (Add isValidationHidden field)
