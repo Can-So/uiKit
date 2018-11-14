@@ -1,6 +1,6 @@
 import { ContentLink } from './link-parser';
 import { TokenErrCallback, TokenType } from '../index';
-import { isSafeUrl } from '@atlaskit/editor-common/src/utils/url';
+import { isSafeUrl } from '@atlaskit/editor-common';
 import { parseString } from '../../text';
 import { hasAnyOfMarks } from '../../utils/text';
 import { Node as PMNode, Schema } from 'prosemirror-model';
