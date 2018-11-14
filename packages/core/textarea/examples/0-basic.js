@@ -12,8 +12,8 @@ export default class extends Component<*, *> {
     return (
       <Div>
         <p>Disabled:</p>
-        <TextArea isDisabled />
-        <p>isInvalid:</p>
+        <TextArea value="hello" isDisabled />
+        <p>Invalid:</p>
         <TextArea isInvalid />
         <p>Smart:</p>
         <TextArea />

@@ -41,13 +41,6 @@ const getBorderAndPadding = () => {
   `;
 };
 
-const getDisabledState = props =>
-  props.isDisabled &&
-  css`
-    color: ${props.disabledTextColor};
-    pointer-events: none;
-  `;
-
 const getHoverState = props => {
   if (props.readOnly || props.isFocused || props.none) return null;
   let backgroundColorHover = props.backgroundColorHover;
@@ -129,7 +122,6 @@ export const TextAreaWrapper = styled.div`
   word-wrap: break-word;
   ${getBorderAndPadding}
   ${getHoverState}
-  ${getDisabledState}
   ${props => props.isDisabled && `cursor: not-allowed;`}
   padding-right: 0;
   font-size: ${fontSize}px;
@@ -144,7 +136,9 @@ export const TextAreaWrapper = styled.div`
     margin: 0;
     border: 0;
     box-sizing: border-box;
-    color: ${props => props.textColor};
+    color: ${({ isDisabled, textColor, disabledRules }) =>
+      isDisabled ? disabledRules.textColor : textColor};
+    ${({ isDisabled }) => (isDisabled ? 'pointer-events: none;' : null)}
     cursor: inherit;
     font-family: ${props =>
       props.isMonospaced ? codeFontFamily() : 'inherit'};
