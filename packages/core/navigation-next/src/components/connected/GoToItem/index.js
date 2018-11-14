@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/arrow-right-circle';
 import Spinner from '@atlaskit/spinner';
 
-import { withNavigationUI } from '../../../ui-controller';
+import { withNavigationUIController } from '../../../ui-controller';
 import { withNavigationViewController } from '../../../view-controller';
 import ConnectedItem from '../ConnectedItem';
 
@@ -85,4 +85,6 @@ class GoToItem extends Component<GoToItemProps> {
 
 export { GoToItem as GoToItemBase };
 
-export default withNavigationUI(withNavigationViewController(GoToItem));
+export default withNavigationUIController(
+  withNavigationViewController(GoToItem),
+);

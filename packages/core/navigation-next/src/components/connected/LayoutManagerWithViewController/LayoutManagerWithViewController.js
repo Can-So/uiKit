@@ -4,7 +4,7 @@ import React, { Component, Fragment } from 'react';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
 import ViewRenderer from '../../../renderer';
-import { withNavigationUI } from '../../../ui-controller';
+import { withNavigationUIController } from '../../../ui-controller';
 import { withNavigationViewController } from '../../../view-controller';
 import LayoutManager from '../../presentational/LayoutManager';
 import SkeletonContainerView from '../../presentational/SkeletonContainerView';
@@ -195,6 +195,6 @@ class LayoutManagerWithViewControllerBase extends Component<
   }
 }
 
-export default withNavigationUI(
+export default withNavigationUIController(
   withNavigationViewController(LayoutManagerWithViewControllerBase),
 );

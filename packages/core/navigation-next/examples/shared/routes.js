@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import {
   UIControllerSubscriber,
   withNavigationViewController,
-  withNavigationUI,
+  withNavigationUIController,
 } from '../../src';
 
 import ShortcutsPlugin from './shortcuts-plugin';
@@ -29,7 +29,7 @@ class SetActiveViewBase extends Component<{
     return null;
   }
 }
-const SetActiveView = withNavigationUI(
+const SetActiveView = withNavigationUIController(
   withNavigationViewController(SetActiveViewBase),
 );
 
