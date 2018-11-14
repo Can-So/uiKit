@@ -1,1 +1,0 @@
-- Add jira card editor example.

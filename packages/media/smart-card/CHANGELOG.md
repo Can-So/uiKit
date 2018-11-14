@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 8.7.1
+- [patch] [00cd9a8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00cd9a8):
+
+  - Add tag support for inline task card.
+
 ## 8.7.0
 - [minor] [e89e244](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e89e244):
 

@@ -1,1 +1,0 @@
-- Add tag support for inline task card.
