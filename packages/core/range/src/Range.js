@@ -45,7 +45,7 @@ export default class Slider extends Component<Props, State> {
     defaultValue: 50,
     min: 0,
     max: 100,
-    step: 0.1,
+    step: 1,
     onChange: () => {},
     theme: baseTheme,
   };
@@ -67,7 +67,8 @@ export default class Slider extends Component<Props, State> {
     }
   }
 
-  getValue = () => (this.props.value ? this.props.value : this.state.value);
+  getValue = () =>
+    this.props.value !== undefined ? this.props.value : this.state.value;
 
   handleChange = (e: Event) => {
     // Event.target is typed as an EventTarget but we need to access properties on it which are

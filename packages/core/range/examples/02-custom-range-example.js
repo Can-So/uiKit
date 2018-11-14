@@ -1,55 +1,22 @@
 // @flow
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
+import React, { Fragment } from 'react';
 import Range from '../src';
 
-const Container = styled.div`
-  width: 500px;
-`;
+const CustomValues = () => (
+  <Fragment>
+    <Range
+      defaultValue={480}
+      min={40}
+      max={500}
+      step={20}
+      onChange={value => console.log('new value', value)}
+    />
+    <p>
+      This range has a minimum of 40, a maximum of 500, a default value of 480 ,
+      and a step of 20. If you want to experiment with custom values, check out
+      the playground.
+    </p>
+  </Fragment>
+);
 
-type State = {
-  onChangeResult: string,
-  rangeValue: number,
-};
-
-export default class BasicExample extends PureComponent<void, State> {
-  state = {
-    onChangeResult: 'Check & Uncheck to trigger onChange',
-    rangeValue: 50,
-  };
-
-  onChange = (value: any) => {
-    this.setState({
-      onChangeResult: `onChange called with value: ${value}`,
-      rangeValue: value,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <Container>
-          <Range
-            value={this.state.rangeValue}
-            min={0}
-            max={50}
-            step={1}
-            onChange={this.onChange}
-          />
-        </Container>
-        <div
-          style={{
-            borderStyle: 'dashed',
-            borderWidth: '1px',
-            borderColor: '#ccc',
-            padding: '0.5em',
-            color: '#ccc',
-            margin: '0.5em',
-          }}
-        >
-          Range: 0-50. Step: 1. {this.state.onChangeResult}
-        </div>
-      </div>
-    );
-  }
-}
+export default CustomValues;
