@@ -1,6 +1,8 @@
 import EditorCloseIcon from '@atlaskit/icon/glyph/editor/close';
 import { components } from '@atlaskit/select';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { messages } from './i18n';
 
 export class ClearIndicator extends React.PureComponent<any> {
   private handleMouseEnter = () => {
@@ -38,7 +40,9 @@ export class ClearIndicator extends React.PureComponent<any> {
             onMouseDown: this.handleMouseDown,
           }}
         >
-          <EditorCloseIcon label="clear" /> {/* TODO i18n */}
+          <FormattedMessage {...messages.clear}>
+            {(message: string) => <EditorCloseIcon label={message} />}
+          </FormattedMessage>
         </components.ClearIndicator>
       </div>
     );
