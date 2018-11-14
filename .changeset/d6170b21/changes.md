@@ -1,1 +1,0 @@
-- Remove StarOutlineIcon as it is not used
