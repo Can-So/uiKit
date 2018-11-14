@@ -88,7 +88,3 @@ describe('Code', () => {
     expect(wrapperLineNumbers).toMatchSnapshot();
   });
 });
-
-// TODO:
-// 3. Add more examples for code
-// 4. Add more examples for code block
