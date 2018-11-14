@@ -1,0 +1,1 @@
+- Remove ScrollableSectionInner component. Remove scrollHint styles from theme.
