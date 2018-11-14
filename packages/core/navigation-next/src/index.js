@@ -66,7 +66,7 @@ export { NavigationProvider } from './provider';
 export {
   UIController,
   UIControllerSubscriber,
-  withNavigationUI,
+  withNavigationUIController,
 } from './ui-controller';
 export {
   ViewController,

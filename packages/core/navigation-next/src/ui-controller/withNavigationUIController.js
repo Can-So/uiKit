@@ -7,7 +7,7 @@ import type { UIControllerWrappedComp } from './types';
 export default <P: {}, C: ComponentType<P>>(
   WrappedComponent: C,
 ): UIControllerWrappedComp<C> => {
-  const WithNavigationUI = (props: *) => (
+  const withNavigationUIController = (props: *) => (
     <UIControllerSubscriber>
       {navigationUIController => (
         <WrappedComponent
@@ -18,8 +18,8 @@ export default <P: {}, C: ComponentType<P>>(
     </UIControllerSubscriber>
   );
 
-  WithNavigationUI.displayName = `WithNavigationUI(${WrappedComponent.displayName ||
+  withNavigationUIController.displayName = `WithNavigationUIController(${WrappedComponent.displayName ||
     WrappedComponent.name})`;
 
-  return WithNavigationUI;
+  return withNavigationUIController;
 };

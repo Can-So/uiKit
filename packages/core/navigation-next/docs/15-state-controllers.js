@@ -63,11 +63,11 @@ const MyComponent = () => (
   </UIControllerSubscriber>
 );`}
 
-### withNavigationUI
+### withNavigationUIController
 
 A higher-order component which provides the UI controller instance through the \`navigationUIController\` prop to the component it wraps.
 
-${code`import { withNavigationUI } from '@atlaskit/navigation-next';
+${code`import { withNavigationUIController } from '@atlaskit/navigation-next';
 
 class MyComponentBase extends Component {
   render() {
@@ -75,7 +75,7 @@ class MyComponentBase extends Component {
     return navigationUIController.state.isCollapsed ? 'Foo' : 'Bar';
   }
 }
-const MyComponent = withNavigationUI(MyComponentBase);`}
+const MyComponent = withNavigationUIController(MyComponentBase);`}
 
 ${<Hr />}
 

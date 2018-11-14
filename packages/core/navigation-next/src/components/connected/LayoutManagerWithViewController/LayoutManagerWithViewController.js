@@ -4,8 +4,8 @@ import React, { Component, Fragment, type ElementConfig } from 'react';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
 import ViewRenderer from '../../../renderer';
-import { withNavigationUI } from '../../../ui-controller';
 import { ViewControllerSubscriber } from '../../../view-controller';
+import { withNavigationUIController } from '../../../ui-controller';
 import LayoutManager from '../../presentational/LayoutManager';
 import SkeletonContainerView from '../../presentational/SkeletonContainerView';
 import type {
@@ -223,4 +223,4 @@ const LayoutManagerWithView = (
   </ViewControllerSubscriber>
 );
 
-export default withNavigationUI(LayoutManagerWithView);
+export default withNavigationUIController(LayoutManagerWithView);

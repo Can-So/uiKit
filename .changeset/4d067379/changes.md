@@ -1,0 +1,1 @@
+- Remove icon prop from ConnectedItem
