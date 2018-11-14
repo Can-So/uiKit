@@ -59,7 +59,7 @@ const getBorderAndPadding = () => {
 };
 
 const getDisabledState = props =>
-  props.disabled &&
+  props.isDisabled &&
   css`
     color: ${props.disabledTextColor};
     pointer-events: none;
@@ -67,10 +67,14 @@ const getDisabledState = props =>
 
 const getHoverState = props => {
   if (props.readOnly || props.isFocused || props.none) return null;
-
+  let backgroundColorHover = props.backgroundColorHover;
+  if (props.isDisabled)
+    backgroundColorHover = props.disabledRules.backgroundColorHover;
+  if (props.isInvalid)
+    backgroundColorHover = props.invalidRules.backgroundColorHover;
   return css`
     &:hover {
-      background-color: ${props.backgroundColorHover};
+      background-color: ${backgroundColorHover};
     }
   `;
 };
@@ -93,13 +97,45 @@ const getResizeStyles = ({ resize }) => {
   return `resize: none;`;
 };
 
+const getBorderColor = props => {
+  let borderColor = props.isFocused
+    ? props.borderColorFocus
+    : props.borderColor;
+  if (props.isDisabled) {
+    borderColor = props.isFocused
+      ? props.disabledRules.borderColorFocus
+      : props.disabledRules.borderColor;
+  }
+  if (props.isInvalid) {
+    borderColor = props.isFocused
+      ? props.invalidRules.borderColorFocus
+      : props.invalidRules.borderColor;
+  }
+  return borderColor;
+};
+
+const getBackgroundColor = props => {
+  let backgroundColor = props.isFocused
+    ? props.backgroundColorFocus
+    : props.backgroundColor;
+  if (props.isDisabled) {
+    backgroundColor = props.isFocused
+      ? props.disabledRules.backgroundColorFocus
+      : props.disabledRules.backgroundColor;
+  }
+  if (props.isInvalid) {
+    backgroundColor = props.isFocused
+      ? props.invalidRules.backgroundColorFocus
+      : props.invalidRules.backgroundColor;
+  }
+  return backgroundColor;
+};
+
 export const TextAreaWrapper = styled.div`
   flex: 1 1 100%;
   position: relative;
-  background-color: ${props =>
-    props.isFocused ? props.backgroundColorFocus : props.backgroundColor};
-  border-color: ${props =>
-    props.isFocused ? props.borderColorFocus : props.borderColor};
+  background-color: ${getBackgroundColor};
+  border-color: ${getBorderColor};
   border-radius: ${borderRadius};
   border-style: ${getBorderStyle};
   box-sizing: border-box;

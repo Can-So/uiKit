@@ -10,13 +10,13 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../package.json';
-import textAreaTheme, { type ThemeProps } from '../theme';
+import { theme as defaultTheme, type ThemeProps } from '../theme';
 import { TextAreaWrapper } from '../styled';
 import TextareaInput from './TextAreaInput';
 
 type Props = {
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart',
-  appearance: 'standard' | 'subtle',
+  appearance: 'standard' | 'subtle' | 'none',
   /** Set whether the fields should expand to fill available horizontal space. */
   isCompact?: boolean,
   /** Sets the field as uneditable, with a changed hover state. */
@@ -58,9 +58,10 @@ class TextArea extends Component<Props, State> {
     isRequired: false,
     isReadOnly: false,
     isDisabled: false,
+    isInvalid: false,
     isMonospaced: false,
     minimumRows: 1,
-    theme: textAreaTheme,
+    theme: defaultTheme,
   };
   state = {
     height: undefined,

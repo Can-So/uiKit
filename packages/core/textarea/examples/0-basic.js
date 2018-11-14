@@ -19,14 +19,13 @@ export default class extends Component<*, *> {
       } falsdgalskgjasldfjas;ldghkajsldfkja;g`,
     });
   };
-  onFocus = () => console.log('IVE BEEN FOCUSED');
   render() {
     return (
       <Div>
-        <TextArea resize="smart" onFocus={this.onFocus} />
-        <TextArea resize="auto" onFocus={this.onFocus} />
-        <TextArea resize="horizontal" onFocus={this.onFocus} />
-        <TextArea resize="vertical" onFocus={this.onFocus} />
+        <TextArea resize="smart" />
+        <TextArea resize="auto" isDisabled />
+        <TextArea resize="horizontal" isInvalid />
+        <TextArea resize="vertical" />
         <TextArea />
       </Div>
     );
