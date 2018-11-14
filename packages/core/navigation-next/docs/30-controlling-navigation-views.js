@@ -295,8 +295,6 @@ ${code`class App extends Component {
     return (
       <LayoutManagerWithViewController
         globalNavigation={MyGlobalNavigation}
-        containerSkeleton={SkeletonContainerView}
-        viewRenderer={ViewRenderer}
       >
 -       <div>Page content goes here.</div>
 +       <Switch>
@@ -417,8 +415,6 @@ ${code`render() {
   return (
     <LayoutManagerWithViewController
       globalNavigation={MyGlobalNavigation}
-      containerSkeleton={SkeletonContainerView}
-      viewRenderer={ViewRenderer}
     >
       <Switch>
         <Route path="/projects/my-project" component={ProjectBacklogRoute} />
