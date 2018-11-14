@@ -5,9 +5,9 @@ Component which renders a Slider and is a substitute of the native input["range"
 ## Installation
 
 ```sh
-yarn add @atlaskit/field-range
+yarn add @atlaskit/range
 ```
 
 ## Usage
 
-Detailed docs and example usage can be found [here](https://atlaskit.atlassian.com/packages/core/field-range).
+Detailed docs and example usage can be found [here](https://atlaskit.atlassian.com/packages/core/range).

@@ -21,6 +21,9 @@ type Props = {
   defaultValue: number,
   /** Callback to receive a reference. */
   inputRef?: (input: ?HTMLInputElement) => mixed,
+  /** The theme object to be passed down. See
+  [@atlaskit/theme](https://atlaskit.atlassian.com/packages/core/theme) for more details on themeing.
+  */
   theme: Object,
 };
 
@@ -90,18 +93,18 @@ export default class Slider extends Component<Props, State> {
 
     return (
       <Theme values={theme}>
-        {({ range }) => (
+        {computedTheme => (
           <Input
             {...rest}
-            {...range()}
+            {...computedTheme.range()}
             type="range"
-            // why is this doing toString?
-            value={value.toString()}
+            value={value}
             onChange={this.handleChange}
             disabled={isDisabled}
             valuePercent={getPercentValue(value, min, max)}
-            innerRef={r => (this.range = r)} // eslint-disable-line
-            orient="vertical"
+            innerRef={r => {
+              this.range = r;
+            }}
           />
         )}
       </Theme>
