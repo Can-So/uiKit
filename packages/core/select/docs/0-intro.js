@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, code, Props } from '@atlaskit/docs';
+import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
   React component which allows selection of an item or items from a dropdown list.
