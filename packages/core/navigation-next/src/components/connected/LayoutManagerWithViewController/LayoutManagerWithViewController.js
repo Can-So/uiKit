@@ -128,6 +128,7 @@ class LayoutManagerWithViewControllerBase extends Component<
 
   renderProductNavigation = () => {
     const { view } = this.props;
+    const { outgoingView } = this.state;
 
     if (view && view.type === 'product') {
       return this.renderView(view);
@@ -138,10 +139,10 @@ class LayoutManagerWithViewControllerBase extends Component<
     if (
       view &&
       view.type === 'container' &&
-      this.state.outgoingView &&
-      this.state.outgoingView.type === 'product'
+      outgoingView &&
+      outgoingView.type === 'product'
     ) {
-      return this.renderView(this.state.outgoingView);
+      return this.renderView(outgoingView);
     }
 
     return this.renderSkeleton();
