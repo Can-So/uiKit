@@ -82,7 +82,10 @@ export {
 } from './view-controller';
 
 /** Renderer */
-export { default as ViewRenderer } from './renderer';
+export {
+  default as ViewRenderer,
+  TypedItemsRenderer as TypedViewRenderer,
+} from './renderer';
 
 /** Theme */
 export { dark, light, settings, modeGenerator, ThemeProvider } from './theme';
