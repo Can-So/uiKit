@@ -20,6 +20,7 @@
     "@babel/runtime": "^7.0.0",
     "emotion": "^9.1.1",
     "emotion-theming": "^9.0.0",
+    "exenv": "^1.2.2",
     "prop-types": "^15.5.10",
     "raf-schd": "^2.1.0",
     "react-dom": "^16.4.2",

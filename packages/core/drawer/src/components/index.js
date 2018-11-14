@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Children, Component, Fragment } from 'react';
+import { canUseDOM } from 'exenv';
 import { createPortal } from 'react-dom';
 import { TransitionGroup } from 'react-transition-group';
 import {
@@ -46,7 +47,7 @@ export class DrawerBase extends Component<DrawerProps> {
     width: 'narrow',
   };
 
-  body = document.querySelector('body');
+  body = canUseDOM ? document.querySelector('body') : undefined;
 
   componentDidMount() {
     const { isOpen } = this.props;
