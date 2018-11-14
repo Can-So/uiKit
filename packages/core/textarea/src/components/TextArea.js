@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, type ElementRef } from 'react';
 import { Theme } from '@atlaskit/theme';
 import {
   withAnalyticsEvents,
@@ -56,6 +56,7 @@ type Props = {
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
   /** The theme function TextArea consumes to derive theming constants for use in styling its components */
   theme: ThemeProps => ThemeProps,
+  textAreaRef: (ref?: ElementRef<*>) => void,
 };
 type State = {
   isFocused: boolean,
@@ -73,6 +74,7 @@ class TextArea extends Component<Props, State> {
     isMonospaced: false,
     minimumRows: 1,
     theme: defaultTheme,
+    textAreaRef: () => {},
   };
 
   state = {
@@ -107,6 +109,7 @@ class TextArea extends Component<Props, State> {
       isRequired,
       minimumRows,
       theme,
+      textAreaRef,
       ...props
     } = this.props;
 
@@ -128,6 +131,7 @@ class TextArea extends Component<Props, State> {
           >
             <TextareaElement
               {...props}
+              innerRef={textAreaRef}
               resize={resize}
               disabled={isDisabled}
               readOnly={isReadOnly}

@@ -1,8 +1,9 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, type ElementRef } from 'react';
 import AutoResize from './AutoResize';
 
 type Props = {
+  innerRef?: (ElementRef<*>) => void,
   resize?: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
   /** The value of the text-area. */
   value?: string | number,
@@ -46,6 +47,16 @@ export default class FTextArea extends Component<Props, State> {
     }
   };
 
+  handleTextAreaRef = (
+    textAreaRef: ElementRef<*>,
+    refFn: (ElementRef<*>) => void = () => {},
+  ) => {
+    refFn(textAreaRef);
+    if (typeof this.props.innerRef === 'function') {
+      this.props.innerRef(textAreaRef);
+    }
+  };
+
   render() {
     const { resize, defaultValue, ...props } = this.props;
     const value = this.getValue();
@@ -55,7 +66,7 @@ export default class FTextArea extends Component<Props, State> {
           {(height, ref) => (
             <textarea
               {...props}
-              ref={ref}
+              ref={textAreaRef => this.handleTextAreaRef(textAreaRef, ref)}
               style={{ height }}
               value={value}
               onChange={this.handleOnChange}
@@ -63,6 +74,13 @@ export default class FTextArea extends Component<Props, State> {
           )}
         </AutoResize>
       );
-    return <textarea {...props} value={value} onChange={this.handleOnChange} />;
+    return (
+      <textarea
+        ref={this.handleTextAreaRef}
+        {...props}
+        value={value}
+        onChange={this.handleOnChange}
+      />
+    );
   }
 }
