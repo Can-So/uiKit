@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.4.0
+- [minor] [8681fc0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8681fc0):
+
+  - Improve wikimarkup link handling with formatting and titles
+
 ## 2.3.6
 - [patch] [56007b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56007b3):
 
