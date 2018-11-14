@@ -31,15 +31,14 @@ import {
   handleClick,
   handleTripleClick,
 } from '../event-handlers';
-import { findControlsHoverDecoration } from '../utils';
+import { findControlsHoverDecoration, fixTables } from '../utils';
 
 export const pluginKey = new PluginKey('tablePlugin');
 
 export const defaultTableSelection = {
-  dangerColumns: [],
-  dangerRows: [],
-  isTableInDanger: false,
-  isTableHovered: false,
+  hoveredColumns: [],
+  hoveredRows: [],
+  isInDanger: false,
 };
 
 export enum ACTIONS {
@@ -86,9 +85,9 @@ export const createPlugin = (
           tableRef,
           targetCellPosition,
           hoverDecoration,
-          dangerColumns,
-          dangerRows,
-          isTableInDanger,
+          hoveredColumns,
+          hoveredRows,
+          isInDanger,
           insertColumnButtonIndex,
           insertRowButtonIndex,
         } = data;
@@ -122,22 +121,29 @@ export const createPlugin = (
             return handleClearSelection(pluginState, dispatch);
 
           case ACTIONS.HOVER_COLUMNS:
-            return handleHoverColumns(state, hoverDecoration, dangerColumns)(
-              pluginState,
-              dispatch,
-            );
+            return handleHoverColumns(
+              state,
+              hoverDecoration,
+              hoveredColumns,
+              isInDanger,
+            )(pluginState, dispatch);
 
           case ACTIONS.HOVER_ROWS:
-            return handleHoverRows(state, hoverDecoration, dangerRows)(
-              pluginState,
-              dispatch,
-            );
+            return handleHoverRows(
+              state,
+              hoverDecoration,
+              hoveredRows,
+              isInDanger,
+            )(pluginState, dispatch);
 
           case ACTIONS.HOVER_TABLE:
-            return handleHoverTable(state, hoverDecoration, isTableInDanger)(
-              pluginState,
-              dispatch,
-            );
+            return handleHoverTable(
+              state,
+              hoverDecoration,
+              hoveredColumns,
+              hoveredRows,
+              isInDanger,
+            )(pluginState, dispatch);
 
           case ACTIONS.TOGGLE_CONTEXTUAL_MENU:
             return handleToggleContextualMenu(pluginState, dispatch);
@@ -176,7 +182,11 @@ export const createPlugin = (
     ) => {
       const tr = transactions.find(tr => tr.getMeta('uiEvent') === 'cut');
       if (tr) {
-        return handleCut(tr, oldState, newState);
+        // "fixTables" removes empty rows as we don't allow that in schema
+        return fixTables(handleCut(tr, oldState, newState));
+      }
+      if (transactions.find(tr => tr.docChanged)) {
+        return fixTables(newState.tr);
       }
     },
     view: (editorView: EditorView) => {

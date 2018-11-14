@@ -19,8 +19,7 @@
         }
       },
       "required": [
-        "type",
-        "content"
+        "type"
       ],
       "additionalProperties": false
     },
@@ -277,7 +276,6 @@
       },
       "required": [
         "type",
-        "content",
         "attrs"
       ],
       "additionalProperties": false
@@ -1004,7 +1002,6 @@
       },
       "required": [
         "type",
-        "content",
         "attrs"
       ],
       "additionalProperties": false
@@ -1080,7 +1077,6 @@
       },
       "required": [
         "type",
-        "content",
         "attrs"
       ],
       "additionalProperties": false
@@ -1546,6 +1542,9 @@
             ]
           }
         },
+        "marks": {
+          "type": "array"
+        },
         "attrs": {
           "type": "object",
           "properties": {
@@ -1630,6 +1629,23 @@
       ],
       "additionalProperties": false
     },
+    "codeBlock_no_marks_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/codeBlock_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "maxItems": 0
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
     "table_cell_content": {
       "type": "array",
       "items": {
@@ -1674,7 +1690,7 @@
             "$ref": "#/definitions/extension_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_node"
+            "$ref": "#/definitions/codeBlock_no_marks_node"
           }
         ]
       },
@@ -1727,7 +1743,7 @@
             "$ref": "#/definitions/extension_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_node"
+            "$ref": "#/definitions/codeBlock_no_marks_node"
           }
         ]
       },
@@ -1894,7 +1910,7 @@
                 "$ref": "#/definitions/bodiedExtension_node"
               },
               {
-                "$ref": "#/definitions/codeBlock_node"
+                "$ref": "#/definitions/codeBlock_no_marks_node"
               }
             ]
           }

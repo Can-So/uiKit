@@ -1,18 +1,11 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, type ElementType, type Node } from 'react';
 import { layers } from '@atlaskit/theme';
 import Portal from '@atlaskit/portal';
 import { ModalTransitionConsumer } from './ModalTransition';
 import StackConsumer from './StackConsumer';
 
-import type {
-  AppearanceType,
-  ChildrenType,
-  ComponentType,
-  ElementType,
-  FunctionType,
-  KeyboardOrMouseEvent,
-} from '../types';
+import type { AppearanceType, KeyboardOrMouseEvent } from '../types';
 
 import Modal from './Modal';
 
@@ -21,7 +14,7 @@ export type Props = {
     Buttons to render in the footer
   */
   actions?: Array<{
-    onClick?: FunctionType,
+    onClick?: Function,
     text?: string,
   }>,
   /**
@@ -32,23 +25,23 @@ export type Props = {
     Boolean indicating whether to focus on the first tabbable element inside the focus lock.
   */
   autoFocus: boolean | (() => HTMLElement | null),
-  components?: { Body: ComponentType },
+  components?: { Body: ElementType },
   /**
     Content of the modal
   */
-  children?: ChildrenType,
+  children?: Node,
   /**
     Component to render the body of the modal, replaces the internal implementation.
   */
-  body?: ComponentType,
+  body?: ElementType,
   /**
     Component to render the footer of the modal, replaces internal implementation.
   */
-  footer?: ComponentType,
+  footer?: ElementType,
   /**
     Component to render the header of the modal, replaces internal implementation.
   */
-  header?: ComponentType,
+  header?: ElementType,
   /**
     The modal title; rendered in the header.
   */
@@ -73,11 +66,11 @@ export type Props = {
   /**
     Function that will be called when the exit transition is complete.
   */
-  onCloseComplete?: ElementType => void,
+  onCloseComplete?: HTMLElement => void,
   /**
     Function that will be called when the enter transition is complete.
   */
-  onOpenComplete?: (node: ElementType, isAppearing: boolean) => void,
+  onOpenComplete?: (node: HTMLElement, isAppearing: boolean) => void,
   /**
     Function that will be called when the modal changes position in the stack.
   */

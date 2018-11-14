@@ -40,6 +40,6 @@ export default class SkeletonContainerHeader extends PureComponent<SkeletonConta
     const patchedStyles = defaultStyles =>
       styleReducer(modifyStyles(defaultStyles));
 
-    return <SkeletonItem {...props} styles={patchedStyles} spacing="default" />;
+    return <SkeletonItem {...props} styles={patchedStyles} />;
   }
 }

@@ -12,7 +12,8 @@ export type InitialNavigationStateShape = {
   productNavWidth?: number,
 };
 
-export type NavigationStateShape = InitialNavigationStateShape & {
+export type NavigationStateShape = {
+  ...$Exact<InitialNavigationStateShape>,
   isResizing?: boolean,
 };
 
@@ -146,6 +147,7 @@ export type GlobalNavigationProps = {
   notificationCount?: number,
   /** The text to display in the tooltip for the notifications item. */
   notificationTooltip?: string,
-} & GlobalNavDrawerProps;
+  ...$Exact<GlobalNavDrawerProps>,
+};
 
 export type DrawerName = 'search' | 'notification' | 'starred' | 'create';

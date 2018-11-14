@@ -1,7 +1,6 @@
 // @flow
 
 import { mount, shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import React from 'react';
 import AnimateHeight from 'react-animate-height';
 
@@ -56,6 +55,6 @@ describe('Panel component', () => {
     );
     const panelHeader = wrapper.dive().find(styles.PanelHeader);
 
-    expect(toJson(panelHeader)).toMatchSnapshot();
+    expect(panelHeader).toMatchSnapshot();
   });
 });

@@ -2,8 +2,11 @@
 
 import React, { type ComponentType } from 'react';
 import UIControllerSubscriber from './UIControllerSubscriber';
+import type { UIControllerWrappedComp } from './types';
 
-export default (WrappedComponent: ComponentType<*>) => {
+export default <P: {}, C: ComponentType<P>>(
+  WrappedComponent: C,
+): UIControllerWrappedComp<C> => {
   const WithNavigationUI = (props: *) => (
     <UIControllerSubscriber>
       {navigationUIController => (

@@ -25,7 +25,7 @@ type Props = {
   /** Whether this row has any child rows. */
   hasChildren: boolean,
   /** One or more Cell elements that will form this row of data. */
-  children: Node | ChildrenArray<Element<*>>,
+  children: ?ChildrenArray<Element<*>>,
 
   /** Unique, stable ID for the row. Can be used for accessibility, caching etc. */
   itemId: string,
@@ -152,6 +152,7 @@ class Row extends Component<Props, State> {
     return (
       <Fragment>
         <TreeRowContainer role={'row'} {...ariaAttrs}>
+          {/* $FlowFixMe - React.Children.map is typed incorrectly, it should handle null/undefined */}
           {React.Children.map(this.props.children, (cell, index) =>
             this.renderCell(cell, index),
           )}

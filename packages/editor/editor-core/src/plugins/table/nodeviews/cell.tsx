@@ -12,6 +12,7 @@ import messages from '../ui/messages';
 import { pluginKey } from '../pm-plugins/main';
 import { toggleContextualMenu } from '../actions';
 import { TableCssClassName as ClassName } from '../types';
+import { closestElement } from '../../../utils';
 
 export interface CellViewProps {
   node: PmNode;
@@ -85,14 +86,14 @@ class CellView extends ReactNodeView {
 
   getContentDOM() {
     const dom = document.createElement('div');
-    dom.className = ClassName.CELL_NODEVIEW_CONTENT_DOM;
+    dom.className = ClassName.TABLE_CELL_NODEVIEW_CONTENT_DOM;
     return { dom };
   }
 
   setDomAttrs(node) {
     const { cell } = this;
     if (cell) {
-      const attrs = setCellAttrs(node);
+      const attrs = setCellAttrs(node, cell);
       Object.keys(attrs).forEach(attr => {
         cell.setAttribute(attr, attrs[attr]);
       });
@@ -123,7 +124,7 @@ class CellView extends ReactNodeView {
     const target = record.target as HTMLElement;
     if (
       record.attributeName === 'class' ||
-      (target && target.classList.contains(ClassName.CELL_NODEVIEW_WRAPPER))
+      (target && closestElement(target, `.${ClassName.CELL_NODEVIEW_WRAPPER}`))
     ) {
       return true;
     }

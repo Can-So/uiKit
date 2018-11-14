@@ -37,7 +37,7 @@ class RouterLink extends React.PureComponent<Props, {}> {
 const ButtonWithRouter = () => (
   <div>
     <MemoryRouter>
-      <BreadcrumbsStateless>
+      <BreadcrumbsStateless onExpand={(...args) => console.log(args)}>
         <BreadcrumbsItem href="/pages" text="Pages" component={RouterLink} />
         <BreadcrumbsItem
           href="/pages/home"

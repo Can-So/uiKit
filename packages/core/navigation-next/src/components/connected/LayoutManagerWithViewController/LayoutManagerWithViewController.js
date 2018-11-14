@@ -25,6 +25,10 @@ class LayoutManagerWithViewControllerBase extends Component<
   LayoutManagerWithViewControllerProps,
   LayoutManagerWithViewControllerState,
 > {
+  static defaultProps = {
+    experimental_flyoutOnHover: false,
+  };
+
   state = {
     hasInitialised: false,
   };

@@ -1,6 +1,6 @@
 // @flow
 
-const canUseDom = () =>
+const canUseDOM = () =>
   Boolean(
     typeof window !== 'undefined' &&
       window.document &&
@@ -8,6 +8,6 @@ const canUseDom = () =>
   );
 
 const supportsVoiceOver = () =>
-  /Mac OS X/.test(canUseDom() ? navigator.userAgent : '');
+  /Mac OS X/.test(canUseDOM() ? navigator.userAgent : '');
 
 export default supportsVoiceOver;

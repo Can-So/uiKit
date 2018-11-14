@@ -12,7 +12,7 @@ import * as clipboard from '../../../utils/clipboard';
 import { EditorAppearance } from '../../../types';
 import { insertMediaAsMediaSingle } from '../../media/utils/media-single';
 import linkify from '../linkify-md-plugin';
-import { escapeLinks, isPastedFromWord, getPasteSource } from '../util';
+import { escapeLinks, getPasteSource } from '../util';
 import { transformSliceToRemoveOpenBodiedExtension } from '../../extension/actions';
 import { transformSliceToRemoveOpenLayoutNodes } from '../../layout/utils';
 import { linkifyContent } from '../../hyperlink/utils';
@@ -59,22 +59,6 @@ export function createPlugin(
   return new Plugin({
     key: stateKey,
     props: {
-      handleDOMEvents: {
-        paste(view: EditorView, event: ClipboardEvent) {
-          // @see https://product-fabric.atlassian.net/browse/ED-5366
-          if (clipboard.isPastedFile(event)) {
-            const html = event.clipboardData.getData('text/html');
-            event.preventDefault();
-
-            // Microsoft Office always copies an image to clipboard so we don't let the event reach media
-            if (isPastedFromWord(html)) {
-              event.stopPropagation();
-            }
-            return true;
-          }
-          return false;
-        },
-      },
       handlePaste(view: EditorView, event: ClipboardEvent, slice: Slice) {
         if (!event.clipboardData) {
           return false;
@@ -82,6 +66,18 @@ export function createPlugin(
 
         const text = event.clipboardData.getData('text/plain');
         const html = event.clipboardData.getData('text/html');
+
+        // Bail if copied content has files
+        if (clipboard.isPastedFile(event)) {
+          if (!html) {
+            return true;
+          }
+          /**
+           * Microsoft Office, Number, Pages, etc. adds an image to clipboard
+           * with other mime-types so we don't let the event reach media
+           */
+          event.stopPropagation();
+        }
 
         const { state, dispatch } = view;
         const { codeBlock, media, decisionItem, taskItem } = state.schema.nodes;

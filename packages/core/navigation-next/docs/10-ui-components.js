@@ -26,13 +26,6 @@ ${(
       />
     )}
 
-${(
-      <Props
-        heading="BackItem props"
-        props={require('!!extract-react-types-loader!../src/components/connected/BackItem')}
-      />
-    )}
-
 ${<Hr />}
 
 ${<H>ConnectedItem</H>}
@@ -115,13 +108,6 @@ ${(
         Component={require('./examples/ui-components/GoToItem').default}
         title="GoToItem"
         source={require('!!raw-loader!./examples/ui-components/GoToItem')}
-      />
-    )}
-
-${(
-      <Props
-        heading="GoToItem props"
-        props={require('!!extract-react-types-loader!../src/components/connected/GoToItem')}
       />
     )}
 

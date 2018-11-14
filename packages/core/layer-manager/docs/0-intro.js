@@ -4,6 +4,39 @@ import { code, md, Example, Props } from '@atlaskit/docs';
 import SectionMessage from '@atlaskit/section-message';
 
 export default md`
+
+  ${(
+    <SectionMessage appearance="warning">
+      <p>
+        <strong>
+          @atlaskit/layer-manager is not needed anymore and has been deprecated.
+        </strong>
+      </p>
+      {md`
+        As of component versions:
+
+        - \`@atlaskit/modal-dialog@7.0.0\`
+        - \`@atlaskit/tooltip@12.0.2\`
+        - \`@atlaskit/flag@9.0.6\`
+        - \`@atlaskit/onboarding@6.0.0\`
+
+        No component requires global coordination to layer correctly.
+        All of these components are built using \`@atlaskit/portal\` which has full support for React Context.
+      `}
+      <p>
+        If you are after a scroll lock component we recommend{' '}
+        <a href="https://github.com/jossmac/react-scrolllock">
+          react-scrolllock
+        </a>
+        , if you need a focus lock component check out{' '}
+        <a href="https://github.com/theKashey/react-focus-lock">
+          react-focus-lock
+        </a>
+        .
+      </p>
+    </SectionMessage>
+  )}
+
   ## Why?
   The layer manager is used to render React DOM into a new context (aka "Portal").
   This can be used to implement various UI components such as modals.

@@ -8,10 +8,15 @@ import type { ConnectedItemProps } from './types';
 
 export default class ConnectedItem extends Component<ConnectedItemProps> {
   render() {
+    const { after, ...props } = this.props;
+
     return this.props.goTo ? (
-      <GoToItem {...this.props} />
+      <GoToItem {...props} after={after} />
     ) : (
-      <PresentationalItem {...this.props} />
+      <PresentationalItem
+        {...props}
+        after={after === null ? undefined : after}
+      />
     );
   }
 }

@@ -8,6 +8,7 @@ import { parseNewlineOnly } from './whitespace';
 
 const LIST_ITEM_REGEXP = /^ *([*\-#]+) /;
 const EMPTY_LINE_REGEXP = /^[ \t]*\r?\n/;
+const RULER_SYMBOL_REGEXP = /^-{4,5}/;
 
 const processState = {
   NEW_LINE: 0,
@@ -31,7 +32,6 @@ export function list(
     TokenType.TRIPLE_DASH_SYMBOL,
     TokenType.QUADRUPLE_DASH_SYMBOL,
     TokenType.LIST,
-    TokenType.RULER,
   ];
 
   let index = position;
@@ -48,9 +48,28 @@ export function list(
     switch (state) {
       case processState.NEW_LINE: {
         const substring = input.substring(index);
+
         const listMatch = substring.match(LIST_ITEM_REGEXP);
         if (listMatch) {
           const [, symbols] = listMatch;
+
+          // Handle ruler in list
+          const rulerMatch = symbols.match(RULER_SYMBOL_REGEXP);
+          if (rulerMatch) {
+            const remainingAfterSymbol = input.substring(
+              index + rulerMatch[0].length,
+            );
+            const emptyLineMatch = remainingAfterSymbol.match(
+              EMPTY_LINE_REGEXP,
+            );
+
+            // If this is an empty line skip to the buffering step rather than match as a list element
+            if (emptyLineMatch) {
+              state = processState.BUFFER;
+              continue;
+            }
+          }
+
           if (!builder) {
             /**
              * It happens because this is the first item of the list
