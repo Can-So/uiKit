@@ -126,7 +126,7 @@ exports[`navigation-next view renderer SortableContext should render the Sortabl
   id="sortable"
   onDragEnd={[Function]}
 >
-  <ItemsRenderer
+  <TypedItemsRenderer
     items={
       Array [
         Object {
@@ -189,7 +189,7 @@ exports[`navigation-next view renderer SortableGroup should render the SortableG
       ]
     }
   >
-    <ItemsRenderer
+    <TypedItemsRenderer
       items={
         Array [
           Object {

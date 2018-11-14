@@ -1,3 +1,5 @@
 // @flow
 
-export { default } from './components';
+import TypedItemsRenderer from './components';
+
+export default class ItemsRenderer extends TypedItemsRenderer<> {}

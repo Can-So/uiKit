@@ -339,7 +339,7 @@ describe('navigation-next view renderer', () => {
           component: InlineCustom,
           id: 'inlineCustom',
         },
-        { type: 'CustomComponent', name: 'Corgie', id: 'corgie' },
+        { type: 'Corgie', id: 'corgie' },
       ];
       const wrapper = shallow(
         <ItemsRenderer items={items} customComponents={{ Corgie }} />,
@@ -348,7 +348,7 @@ describe('navigation-next view renderer', () => {
     });
 
     it('should cache custom components with analytics', () => {
-      const items = [{ type: 'CustomComponent', name: 'Corgie', id: 'corgie' }];
+      const items = [{ type: 'Corgie', id: 'corgie' }];
       const wrapper = mount(
         <ItemsRenderer items={items} customComponents={{ Corgie }} />,
       );

@@ -18,14 +18,17 @@ const getItems = () => [
     id: 'root/index:menu',
     items: [
       {
-        type: LinkItem,
+        // Inline component
+        type: 'InlineComponent',
+        component: LinkItem,
         id: 'dashboards',
         text: 'Dashboards',
         icon: 'DashboardIcon',
         to: '/',
       },
       {
-        type: LinkItem,
+        // Custom component
+        type: 'LinkItem',
         id: 'projects',
         text: 'Projects',
         icon: 'FolderIcon',

@@ -1,24 +1,14 @@
 // @flow
 
 import React from 'react';
-import TypedItemsRenderer from '../../components';
+import ItemsRenderer from '../../index';
 
-type CustomComponents =
-  | { type: 'Funky', id: string, funky: boolean, optionalString?: string }
-  | { type: 'Groovy', id: string, groovy: boolean, optionalNumber?: number };
+const Foo = () => null;
 
-class ItemsRendererWithCustomComponents extends TypedItemsRenderer<CustomComponents> {}
-
-const Funky = (props: { funky: boolean, optionalString?: number }) => null;
-const Groovy = (props: { groovy: boolean, optionalNumber?: number }) => null;
-
-<ItemsRendererWithCustomComponents items={[]} />;
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
-  items={[]}
-/>;
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
+<ItemsRenderer items={[]} />;
+<ItemsRenderer customComponents={{ Foo }} items={[]} />;
+<ItemsRenderer
+  customComponents={{ Foo }}
   items={[
     { type: 'BackItem', id: 'back' },
     { type: 'ContainerHeader', id: 'header' },
@@ -38,81 +28,57 @@ const Groovy = (props: { groovy: boolean, optionalNumber?: number }) => null;
     {
       type: 'Group',
       id: 'group',
-      customComponents: { Funky, Groovy },
+      customComponents: { Foo },
       items: [{ type: 'Item', id: 'item', text: 'Item' }],
     },
     {
       type: 'HeaderSection',
       id: 'headerSection',
-      customComponents: { Funky, Groovy },
+      customComponents: { Foo },
       items: [{ type: 'Item', id: 'item', text: 'Item' }],
     },
     {
       type: 'MenuSection',
       id: 'menuSection',
-      customComponents: { Funky, Groovy },
+      customComponents: { Foo },
       nestedGroupKey: 'menu',
       items: [{ type: 'Item', id: 'item', text: 'Item' }],
     },
     {
       type: 'Section',
       id: 'section',
-      customComponents: { Funky, Groovy },
+      customComponents: { Foo },
       nestedGroupKey: 'section',
       items: [{ type: 'Item', id: 'item', text: 'Item' }],
     },
     {
       type: 'SortableContext',
       id: 'sortable-context',
-      customComponents: { Funky, Groovy },
+      customComponents: { Foo },
       onDragEnd: () => {},
       items: [{ type: 'Item', id: 'item', text: 'Item' }],
     },
     {
       type: 'SortableGroup',
       id: 'sortable-group',
-      customComponents: { Funky, Groovy },
+      customComponents: { Foo },
       items: [{ type: 'Item', id: 'item', text: 'Item' }],
     },
     {
       type: 'InlineComponent',
       id: 'inline-component',
-      component: () => <Funky funky />,
-    },
-    {
-      type: 'Funky',
-      id: 'funky-component',
-      funky: true,
-    },
-    {
-      type: 'Groovy',
-      id: 'groovy-component',
-      groovy: true,
-    },
-  ]}
-/>;
-
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
-  items={[
-    {
-      type: 'InlineComponent',
-      id: 'inline-component',
-      component: () => <Funky funky />,
+      component: () => <Foo />,
     },
   ]}
 />;
 
 // $ExpectError - missing items
-<ItemsRendererWithCustomComponents customComponents={{ Funky, Groovy }} />;
+<ItemsRenderer customComponents={{ Foo }} />;
 // $ExpectError - customComponents must be object with ComponentTypes
-<ItemsRendererWithCustomComponents
-  customComponents={{ Foo: null }}
-  items={[]}
-/>;
+<ItemsRenderer customComponents={{ Foo: null }} items={[]} />;
 // $ExpectError - items must only have valid item types
 <CustomItemsRenderer
-  customComponents={{ Funky, Groovy }}
+  customComponents={{ Foo }}
   items={[
     {
       type: 'abc',
@@ -121,8 +87,8 @@ const Groovy = (props: { groovy: boolean, optionalNumber?: number }) => null;
   ]}
 />;
 // $ExpectError - each item in items must have an id
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
+<ItemsRenderer
+  customComponents={{ Foo }}
   items={[
     {
       type: 'Item',
@@ -130,8 +96,8 @@ const Groovy = (props: { groovy: boolean, optionalNumber?: number }) => null;
   ]}
 />;
 // $ExpectError - GoToItem must have goTo
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
+<ItemsRenderer
+  customComponents={{ Foo }}
   items={[
     {
       type: 'GoToItem',
@@ -141,8 +107,8 @@ const Groovy = (props: { groovy: boolean, optionalNumber?: number }) => null;
 />;
 
 // $ExpectError - GroupHeading must have text
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
+<ItemsRenderer
+  customComponents={{ Foo }}
   items={[
     {
       type: 'GroupHeading',
@@ -152,8 +118,8 @@ const Groovy = (props: { groovy: boolean, optionalNumber?: number }) => null;
 />;
 
 // $ExpectError - SortableItem must have index
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
+<ItemsRenderer
+  customComponents={{ Foo }}
   items={[
     {
       type: 'SortableItem',
@@ -164,8 +130,8 @@ const Groovy = (props: { groovy: boolean, optionalNumber?: number }) => null;
 />;
 
 // $ExpectError - Group must have items
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
+<ItemsRenderer
+  customComponents={{ Foo }}
   items={[
     {
       type: 'Group',
@@ -174,31 +140,20 @@ const Groovy = (props: { groovy: boolean, optionalNumber?: number }) => null;
   ]}
 />;
 
-// $ExpectError - Funky custom component must have funky prop
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
+// $ExpectError - CustomComponent must have name prop
+<ItemsRenderer
+  customComponents={{ Foo }}
   items={[
     {
-      type: 'Funky',
-      id: 'funky-component',
-    },
-  ]}
-/>;
-
-// $ExpectError - Groovy custom component must have groovy prop
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
-  items={[
-    {
-      type: 'Groovy',
-      id: 'groovy-component',
+      type: 'CustomComponent',
+      id: 'custom-component',
     },
   ]}
 />;
 
 // $ExpectError - InlineComponent must have component prop
-<ItemsRendererWithCustomComponents
-  customComponents={{ Funky, Groovy }}
+<ItemsRenderer
+  customComponents={{ Foo }}
   items={[
     {
       type: 'InlineComponent',

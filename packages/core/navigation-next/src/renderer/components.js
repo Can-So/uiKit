@@ -98,7 +98,7 @@ const Group = ({
 }: GroupProps) =>
   items.length ? (
     <GroupComponent heading={heading} hasSeparator={hasSeparator} id={id}>
-      <ItemsRenderer items={items} customComponents={customComponents} />
+      <TypedItemsRenderer items={items} customComponents={customComponents} />
     </GroupComponent>
   ) : null;
 
@@ -116,7 +116,7 @@ const SortableGroup = ({
       id={id}
     >
       <RenderBlocker items={items} customComponents={customComponents}>
-        <ItemsRenderer items={items} customComponents={customComponents} />
+        <TypedItemsRenderer items={items} customComponents={customComponents} />
       </RenderBlocker>
     </SortableGroupComponent>
   ) : null;
@@ -141,7 +141,10 @@ const Section = ({
     >
       {({ className }) => (
         <div className={className}>
-          <ItemsRenderer items={items} customComponents={customComponents} />
+          <TypedItemsRenderer
+            items={items}
+            customComponents={customComponents}
+          />
         </div>
       )}
     </SectionComponent>
@@ -157,7 +160,10 @@ const HeaderSection = ({
     <HeaderSectionComponent id={id} key={nestedGroupKey}>
       {({ className }) => (
         <div className={className}>
-          <ItemsRenderer items={items} customComponents={customComponents} />
+          <TypedItemsRenderer
+            items={items}
+            customComponents={customComponents}
+          />
         </div>
       )}
     </HeaderSectionComponent>
@@ -179,7 +185,7 @@ const MenuSection = ({
   >
     {({ className }) => (
       <div className={className}>
-        <ItemsRenderer items={items} customComponents={customComponents} />
+        <TypedItemsRenderer items={items} customComponents={customComponents} />
       </div>
     )}
   </MenuSectionComponent>
@@ -200,7 +206,7 @@ const SortableContext = ({
       onDragUpdate={onDragUpdate}
       onDragEnd={onDragEnd}
     >
-      <ItemsRenderer items={items} customComponents={customComponents} />
+      <TypedItemsRenderer items={items} customComponents={customComponents} />
     </SortableContextComponent>
   ) : null;
 
@@ -218,8 +224,8 @@ const itemComponents = {
   Wordmark,
 };
 
-const renderItemComponent = (
-  props: RendererItemType,
+const renderItemComponent = <T: empty>(
+  props: RendererItemType<T>,
   key: string,
   index: number,
 ) => {
@@ -269,8 +275,8 @@ const groupComponents = {
   SortableGroup,
 };
 
-const renderGroupComponent = (
-  props: RendererItemType,
+const renderGroupComponent = <T: empty>(
+  props: RendererItemType<T>,
   key: string,
   customComponents: CustomComponents,
 ) => {
@@ -333,7 +339,9 @@ export const components = { ...itemComponents, ...groupComponents };
 /**
  * RENDERER
  */
-class ItemsRenderer extends PureComponent<ItemsRendererProps> {
+class TypedItemsRenderer<
+  T: { type: *, id: string } = empty,
+> extends PureComponent<ItemsRendererProps<T>> {
   customComponentsWithAnalytics: Map<
     string | ComponentType<*>,
     ComponentType<*>,
@@ -391,11 +399,11 @@ class ItemsRenderer extends PureComponent<ItemsRendererProps> {
         // components.
       } else if (Object.keys(itemComponents).includes(props.type)) {
         return renderItemComponent(props, key, index);
-      } else if (props.type === 'CustomComponent') {
-        const { type, name, ...componentProps } = props;
+      } else if (Object.keys(customComponents).includes(props.type)) {
+        const { type, ...componentProps } = props;
         // If they've provided a type which matches one of their defined custom
         // components.
-        const CustomComponent = this.getCustomComponent(name);
+        const CustomComponent = this.getCustomComponent(type);
         return (
           <CustomComponent
             key={key}
@@ -414,4 +422,4 @@ class ItemsRenderer extends PureComponent<ItemsRendererProps> {
   }
 }
 
-export default ItemsRenderer;
+export default TypedItemsRenderer;

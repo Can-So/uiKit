@@ -111,6 +111,8 @@ export type {
 
 export type {
   RendererItemType,
+  LeafItemType,
+  BranchItemType,
   BackItemType,
   ContainerHeaderType,
   DebugType,
@@ -128,6 +130,5 @@ export type {
   SectionType,
   SortableContextType,
   SortableGroupType,
-  CustomComponentType,
   InlineComponentType,
 } from './renderer/types';

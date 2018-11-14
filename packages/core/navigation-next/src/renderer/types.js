@@ -33,7 +33,7 @@ type SharedItemTypeProps = {|
 type SharedGroupTypeProps = {|
   ...$Exact<SharedItemTypeProps>,
   customComponents?: CustomComponents,
-  items: Array<RendererItemType>,
+  items: Array<RendererItemType<>>,
 |};
 
 type SectionKey = {|
@@ -85,9 +85,9 @@ export type SectionHeadingProps = {|
 
 export type CustomComponents = { [string]: ComponentType<*> };
 
-export type ItemsRendererProps = {
+export type ItemsRendererProps<T = empty> = {
   customComponents?: CustomComponents,
-  items: RendererItemType[],
+  items: RendererItemType<T>[],
 };
 
 /**
@@ -190,19 +190,13 @@ export type SortableGroupType = {|
   ...$Exact<SortableGroupProps>,
 |};
 
-export type CustomComponentType = {
-  +type: 'CustomComponent',
-  name: string,
-  ...$Exact<SharedItemTypeProps>,
-};
-
 export type InlineComponentType = {
   +type: 'InlineComponent',
   component: ComponentType<*>,
   ...$Exact<SharedItemTypeProps>,
 };
 
-export type RendererItemType =
+export type LeafItemType =
   | BackItemType
   | ContainerHeaderType
   | DebugType
@@ -213,12 +207,18 @@ export type RendererItemType =
   | SectionHeadingType
   | SeparatorType
   | SwitcherType
-  | WordmarkType
+  | WordmarkType;
+
+export type BranchItemType =
   | GroupType
   | HeaderSectionType
   | MenuSectionType
   | SectionType
   | SortableContextType
-  | SortableGroupType
-  | CustomComponentType
-  | InlineComponentType;
+  | SortableGroupType;
+
+export type RendererItemType<T = empty> =
+  | LeafItemType
+  | BranchItemType
+  | InlineComponentType
+  | T;

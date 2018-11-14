@@ -31,7 +31,8 @@ const getItems = () => [
         text: 'Issues and filters',
       },
       {
-        type: LinkItem,
+        type: 'InlineComponent',
+        component: LinkItem,
         id: 'search-issues',
         text: 'Search issues',
         to: '/issues/search',
