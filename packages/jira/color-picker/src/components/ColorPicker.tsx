@@ -118,7 +118,7 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
         maxMenuWidth="auto"
         minMenuWidth="auto"
         options={options}
-        label={fullLabel}
+        aria-label={fullLabel}
         value={value}
         components={components}
         onChange={this.onChange}
