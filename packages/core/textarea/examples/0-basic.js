@@ -11,9 +11,11 @@ export default class extends Component<*, *> {
   render() {
     return (
       <Div>
-        <TextArea resize="auto" isDisabled />
-        <TextArea resize="horizontal" isInvalid />
-        <TextArea resize="vertical" />
+        <p>Disabled:</p>
+        <TextArea isDisabled />
+        <p>isInvalid:</p>
+        <TextArea isInvalid />
+        <p>Smart:</p>
         <TextArea />
       </Div>
     );
