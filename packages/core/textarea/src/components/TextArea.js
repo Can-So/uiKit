@@ -12,10 +12,14 @@ import {
 } from '../../package.json';
 import { theme as defaultTheme, type ThemeProps } from '../theme';
 import { TextAreaWrapper } from '../styled';
-import TextareaInput from './TextAreaInput';
+import TextareaElement from './TextAreaElement';
 
 type Props = {
-  resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
+  /**
+   * controls the appearance of the field.
+   * subtle shows styling on hover.
+   * none hides all field styling.
+   */
   appearance: 'standard' | 'subtle' | 'none',
   /** Set whether the fields should expand to fill available horizontal space. */
   isCompact?: boolean,
@@ -41,6 +45,15 @@ type Props = {
   onFocus?: (event: SyntheticInputEvent<HTMLTextAreaElement>) => void,
   /** Sets content text value to monospace */
   isMonospaced?: boolean,
+  /**
+   * Enables the resizing of the textarea:
+   * auto: both directions.
+   * horizontal: only along the x axis.
+   * vertical: only along the y axis.
+   * smart (default): vertically grows and shrinks the textarea automatically to wrap your input text.
+   * none: explicitly disallow resizing on the textarea.
+   */
+  resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
   theme: ThemeProps => ThemeProps,
 };
 type State = {
@@ -112,7 +125,7 @@ class TextArea extends Component<Props, State> {
             isInvalid={isInvalid}
             minimumRows={minimumRows}
           >
-            <TextareaInput
+            <TextareaElement
               {...props}
               resize={resize}
               disabled={isDisabled}
