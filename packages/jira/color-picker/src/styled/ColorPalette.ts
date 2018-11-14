@@ -4,7 +4,6 @@ import { gridSize } from '@atlaskit/theme';
 
 export const ColorCardWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
   display: flex;
-  padding: 1px;
   margin: 2px;
 `;
 

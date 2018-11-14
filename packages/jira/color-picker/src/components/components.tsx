@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { gridSize } from '@atlaskit/theme';
 import { Color } from '../types';
 import ColorCard from './ColorCard';
+import { COLOR_CARD_SIZE } from '../constants';
 import {
   ColorPaletteContainer,
   ColorCardWrapper,
@@ -30,7 +32,9 @@ export const MenuList = (props: SelectComponentProps) => {
 
   return (
     <ColorPaletteContainer
-      style={{ maxWidth: cols ? cols * 28 + 12 : undefined }}
+      style={{
+        maxWidth: cols ? cols * (COLOR_CARD_SIZE + 2) + gridSize() : undefined,
+      }}
       {...props}
     />
   );

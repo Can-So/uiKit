@@ -2,7 +2,11 @@ import * as React from 'react';
 import { PureComponent } from 'react';
 import EditorDoneIcon from '@atlaskit/icon/glyph/editor/done';
 import { colors } from '@atlaskit/theme';
-import { ColorCardOption, ColorCardButton } from '../styled/ColorCard';
+import {
+  ColorCardOption,
+  ColorCardButton,
+  ColorCardContent,
+} from '../styled/ColorCard';
 
 export interface Props {
   value: string;
@@ -15,13 +19,6 @@ export interface Props {
 }
 
 export default class ColorCard extends PureComponent<Props> {
-  componentDidUpdate(prevProps: Props) {
-    const { focused } = this.props;
-    if (!prevProps.focused && focused && this.ref.current) {
-      this.ref.current.focus();
-    }
-  }
-
   onMouseDown = event => {
     event.preventDefault();
   };
@@ -52,13 +49,16 @@ export default class ColorCard extends PureComponent<Props> {
     return (
       <Component
         innerRef={this.ref}
+        title={label}
         onClick={this.onClick}
         onMouseDown={this.onMouseDown}
-        title={label}
-        color={value || 'transparent'}
         focused={focused}
       >
-        {selected && <EditorDoneIcon primaryColor={checkMarkColor} label="" />}
+        <ColorCardContent color={value || 'transparent'}>
+          {selected && (
+            <EditorDoneIcon primaryColor={checkMarkColor} label="" />
+          )}
+        </ColorCardContent>
       </Component>
     );
   }
