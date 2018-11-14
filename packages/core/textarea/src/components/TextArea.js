@@ -16,7 +16,7 @@ import TextareaInput from './TextAreaInput';
 
 type Props = {
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart',
-  appearance: string,
+  appearance: 'standard' | 'subtle',
   /** Set whether the fields should expand to fill available horizontal space. */
   isCompact?: boolean,
   /** Sets the field as uneditable, with a changed hover state. */
@@ -81,7 +81,6 @@ class TextArea extends Component<Props, State> {
 
   handleOnFocus = (event: SyntheticInputEvent<HTMLTextAreaElement>) => {
     const { onFocus } = this.props;
-    console.error('HELLO?');
     this.setState({ isFocused: true });
     if (onFocus) {
       onFocus(event);
@@ -95,6 +94,7 @@ class TextArea extends Component<Props, State> {
       size,
       isCompact,
       isDisabled,
+      isInvalid,
       isReadOnly,
       isMonospaced,
       isRequired,
@@ -116,6 +116,7 @@ class TextArea extends Component<Props, State> {
             isReadOnly={isReadOnly}
             isMonospaced={isMonospaced}
             isFocused={isFocused}
+            isInvalid={isInvalid}
             minimumRows={minimumRows}
           >
             <TextareaInput

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 import FieldTextArea from '../..';
 import TextAreaWithAnalytics, {
@@ -69,9 +69,9 @@ describe('FieldTextAreaStateless', () => {
   });
 
   describe('isInvalid prop', () => {
-    it.skip('should reflect its value to the FieldBase', () => {
+    it('should reflect its value to the FieldBase', () => {
       expect(
-        shallow(<TextArea onChange={() => {}} isInvalid />)
+        mount(<TextArea onChange={() => {}} isInvalid />)
           .find(TextAreaWrapper)
           .props().isInvalid,
       ).toBe(true);
