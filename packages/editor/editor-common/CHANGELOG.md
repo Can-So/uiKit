@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 21.1.7
+- [patch] [380928b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/380928b):
+
+  - ED-5293: fix merging cells
+
 ## 21.1.6
 - [patch] [a1fb551](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1fb551):
 
