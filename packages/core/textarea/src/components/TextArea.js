@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, type ElementRef } from 'react';
+import React, { Component } from 'react';
 import { Theme } from '@atlaskit/theme';
 import {
   withAnalyticsEvents,
@@ -15,7 +15,7 @@ import { TextAreaWrapper } from '../styled';
 import TextareaInput from './TextAreaInput';
 
 type Props = {
-  resize: 'auto' | 'vertical' | 'horizontal' | 'smart',
+  resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
   appearance: 'standard' | 'subtle' | 'none',
   /** Set whether the fields should expand to fill available horizontal space. */
   isCompact?: boolean,
@@ -41,13 +41,10 @@ type Props = {
   onFocus?: (event: SyntheticInputEvent<HTMLTextAreaElement>) => void,
   /** Sets content text value to monospace */
   isMonospaced?: boolean,
-  size?: string | number,
   theme: ThemeProps => ThemeProps,
 };
 type State = {
-  value: string | number,
   isFocused: boolean,
-  height?: number,
 };
 
 class TextArea extends Component<Props, State> {
@@ -63,14 +60,10 @@ class TextArea extends Component<Props, State> {
     minimumRows: 1,
     theme: defaultTheme,
   };
+
   state = {
-    height: undefined,
     isFocused: false,
-    value: this.props.defaultValue || '',
   };
-  textArea: ElementRef<*>;
-  hiddenTextArea: ElementRef<*>;
-  elementRef: ElementRef<*> = {};
 
   handleOnBlur = (event: SyntheticInputEvent<HTMLTextAreaElement>) => {
     const { onBlur } = this.props;
@@ -92,7 +85,6 @@ class TextArea extends Component<Props, State> {
     const {
       appearance,
       resize,
-      size,
       isCompact,
       isDisabled,
       isInvalid,

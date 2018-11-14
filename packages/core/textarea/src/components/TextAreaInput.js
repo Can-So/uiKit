@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import AutoResize from './AutoResize';
 
 type Props = {
-  resize?: 'auto' | 'vertical' | 'horizontal' | 'smart',
+  resize?: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
   /** The value of the text-area. */
   value?: string | number,
   /** The default value of the text-area */
