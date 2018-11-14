@@ -15,7 +15,7 @@ ${(
   <Example
     packageName="@atlaskit/banner"
     Component={require('../examples/AnimationExample').default}
-    title="Simple Example"
+    title="Animation"
     source={require('!!raw-loader!../examples/AnimationExample')}
   />
 )}

@@ -32,7 +32,7 @@ export default md`
   ${(
     <Example
       packageName="@atlaskit/section-message"
-      title="Basic Example"
+      title="Basic"
       Component={require('../examples/0-basic-example').default}
       source={require('!!raw-loader!../examples/0-basic-example')}
     />

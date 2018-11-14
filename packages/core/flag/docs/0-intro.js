@@ -23,7 +23,7 @@ export default md`
     <Example
       packageName="@atlaskit/flag"
       Component={require('../examples/01-flag-without-flagGroup').default}
-      title="Flag Component"
+      title="Flag without group"
       source={require('!!raw-loader!../examples/01-flag-without-flagGroup')}
     />
   )}
@@ -32,7 +32,7 @@ export default md`
     <Example
       packageName="@atlaskit/flag"
       Component={require('../examples/11-bold-flag-component').default}
-      title="Flag Component"
+      title="Flag using bold"
       source={require('!!raw-loader!../examples/11-bold-flag-component')}
     />
   )}
@@ -41,7 +41,7 @@ export default md`
     <Example
       packageName="@atlaskit/flag"
       Component={require('../examples/12-flag-group').default}
-      title="Flag Component"
+      title="Flag group"
       source={require('!!raw-loader!../examples/12-flag-group')}
     />
   )}

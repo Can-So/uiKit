@@ -19,7 +19,7 @@ export default md`
   ${(
     <Example
       packageName="@atlaskit/inline-dialog"
-      title="Basic Inline Dialog"
+      title="Basic"
       Component={require('../examples/01-basic').default}
       source={require('!!raw-loader!../examples/01-basic')}
     />

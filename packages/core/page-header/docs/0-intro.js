@@ -14,7 +14,7 @@ export default md`
       packageName="@atlaskit/page-header"
       Component={require('../examples/BasicExample').default}
       source={require('!!raw-loader!../examples/BasicExample')}
-      title="Basic example"
+      title="Basic"
     />
   )}
 
@@ -23,7 +23,7 @@ export default md`
       packageName="@atlaskit/page-header"
       Component={require('../examples/ComplexExample').default}
       source={require('!!raw-loader!../examples/ComplexExample')}
-      title="Complex example"
+      title="Complex"
     />
   )}
 
@@ -32,7 +32,7 @@ export default md`
       packageName="@atlaskit/page-header"
       Component={require('../examples/CustomTitleComponentExample').default}
       source={require('!!raw-loader!../examples/CustomTitleComponentExample')}
-      title="Custom title component example"
+      title="Custom title component"
     />
   )}
 

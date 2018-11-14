@@ -17,11 +17,11 @@ export default md`
       packageName="@atlaskit/drawer"
       Component={require('../examples/00-basic-drawer').default}
       source={require('!!raw-loader!../examples/00-basic-drawer')}
-      title="Basic Usage"
+      title="Basic"
     />
   )}
 
-  Above is a basic example of how to define width.
+  Below is a basic example of how to define width.
 
   ${(
     <Example

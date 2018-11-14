@@ -17,7 +17,7 @@ ${(
     packageName="@atlaskit/table-tree"
     Component={require('../examples/single-component').default}
     source={require('!!raw-loader!../examples/single-component')}
-    title="Basic Usage: With Static Data"
+    title="With Static Data"
     language="jsx"
   />
 )}

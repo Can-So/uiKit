@@ -18,7 +18,7 @@ export default md`
     <Example
       packageName="@atlaskit/pagination"
       Component={require('../examples/01-uncontrolled').default}
-      title="Basic example"
+      title="Basic"
       source={require('!!raw-loader!../examples/01-uncontrolled')}
     />
   )}

@@ -6,7 +6,7 @@ export default md`
 
 Blanket provides the overlay layer for components such as a modal dialog or a tooltip.
 
-### Usage
+## Usage
 
 ${code`import Blanket from '@atlaskit/blanket';`}
 

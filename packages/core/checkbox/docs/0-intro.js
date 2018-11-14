@@ -5,7 +5,7 @@ import { md, Example, Props, code } from '@atlaskit/docs';
 export default md`
   A checkbox element primarily for use in forms.
 
-  ### Usage
+  ## Usage
 
 ${code`
 import {

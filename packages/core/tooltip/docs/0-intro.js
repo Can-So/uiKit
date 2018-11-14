@@ -22,7 +22,7 @@ export default md`
       packageName="@atlaskit/tooltip"
       Component={require('../examples/basic').default}
       source={require('!!raw-loader!../examples/basic')}
-      title="Basic Usage"
+      title="Basic"
     />
   )}
 

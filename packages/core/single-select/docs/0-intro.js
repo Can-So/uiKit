@@ -23,7 +23,7 @@ export default md`
       packageName="@atlaskit/single-select"
       Component={require('../examples/00-basic').default}
       source={require('!!raw-loader!../examples/00-basic')}
-      title="Basic Usage"
+      title="Basic"
     />
   )}
 
@@ -32,7 +32,7 @@ export default md`
       packageName="@atlaskit/single-select"
       Component={require('../examples/01-stateless').default}
       source={require('!!raw-loader!../examples/01-stateless')}
-      title="Custom Usage with Stateless Select"
+      title="With Stateless Select"
     />
   )}
 
