@@ -39,7 +39,7 @@ const gridSize = gridSizeFn();
  */
 const globalNavPrimaryItems = [
   {
-    key: 'jira',
+    id: 'jira',
     component: ({ className, children }: *) => (
       <UIControllerSubscriber>
         {navigationUIController => {
@@ -67,8 +67,8 @@ const globalNavPrimaryItems = [
     ),
     label: 'Jira',
   },
-  { key: 'search', icon: SearchIcon, label: 'Search' },
-  { key: 'create', icon: AddIcon, label: 'Add' },
+  { id: 'search', icon: SearchIcon, label: 'Search' },
+  { id: 'create', icon: AddIcon, label: 'Add' },
 ];
 
 const globalNavSecondaryItems = [

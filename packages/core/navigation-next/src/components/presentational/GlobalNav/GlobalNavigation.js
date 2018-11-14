@@ -43,9 +43,7 @@ export default class GlobalNavigation extends Component<GlobalNavigationProps> {
                   if (!index) {
                     const { icon: Icon, ...rest } = props;
                     return (
-                      <FirstPrimaryItemWrapper
-                        key={props.id || props.key || props.label}
-                      >
+                      <FirstPrimaryItemWrapper key={props.id || props.label}>
                         <ItemComponent
                           {...rest}
                           icon={provided => <Icon {...provided} size="large" />}
@@ -58,7 +56,7 @@ export default class GlobalNavigation extends Component<GlobalNavigationProps> {
                   return (
                     <ItemComponent
                       {...props}
-                      key={props.id || props.key || props.label}
+                      key={props.id || props.label}
                       size="large"
                       index={index}
                     />

@@ -79,5 +79,4 @@ export type GlobalNavItemData = {
   dropdownItems?: ComponentType<{}>,
   itemComponent?: ComponentType<{}>,
   badgeCount?: number,
-  key?: string,
 };

@@ -51,12 +51,12 @@ const Item = ({ testKey, ...props }: { testKey?: string }) => {
  */
 const globalNavPrimaryItems = [
   {
-    key: 'jira',
+    id: 'jira',
     icon: () => <JiraIcon size="medium" label="Jira" />,
     label: 'Jira',
   },
-  { key: 'search', icon: SearchIcon, label: 'Search' },
-  { key: 'create', icon: AddIcon, label: 'Add' },
+  { id: 'search', icon: SearchIcon, label: 'Search' },
+  { id: 'create', icon: AddIcon, label: 'Add' },
 ];
 
 const globalNavSecondaryItems = [
