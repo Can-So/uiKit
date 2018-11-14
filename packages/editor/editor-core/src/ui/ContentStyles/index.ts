@@ -97,11 +97,16 @@ const ContentStyles: ComponentClass<HTMLAttributes<{}>> = styled.div`
     padding: 0;
   }
 
-  .align-right {
+  /** Needed to override any cleared floats, e.g. image wrapping */
+  div[class^='align'] {
+    clear: none !important;
+  }
+
+  .align-end {
     text-align: right;
   }
 
-  .align-left {
+  .align-start {
     text-align: left;
   }
 

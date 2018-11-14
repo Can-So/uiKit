@@ -2,8 +2,15 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 
 export type Props = {
-  align: 'left' | 'right' | 'center';
+  align: 'start' | 'end' | 'center';
   children: React.Props<any>;
+};
+
+/** TODO: Flip these positions for RTL */
+const positionMap = {
+  start: 'left',
+  end: 'right',
+  center: 'center',
 };
 
 const MarkWrapper: React.ComponentClass<
@@ -12,7 +19,7 @@ const MarkWrapper: React.ComponentClass<
   ${({ align }) =>
     align &&
     css`
-      text-align: ${align};
+      text-align: ${positionMap[align]};
     `};
 `;
 

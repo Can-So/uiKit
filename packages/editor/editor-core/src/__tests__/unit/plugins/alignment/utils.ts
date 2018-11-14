@@ -42,7 +42,7 @@ describe('alignment utils', () => {
 
   it('removes alignment', () => {
     const { editorView } = editor(
-      doc(alignmentMark({ align: 'right' })(p('{<}hello{>}'))),
+      doc(alignmentMark({ align: 'end' })(p('{<}hello{>}'))),
     );
     const tr = removeAlignment(editorView.state) as Transaction;
     editorView.dispatch(tr);

@@ -1,7 +1,7 @@
 import { MarkSpec } from 'prosemirror-model';
 
 export interface AlignmentAttributes {
-  align: 'left' | 'center' | 'right';
+  align: 'start' | 'center' | 'end';
 }
 
 /**
@@ -16,7 +16,7 @@ export interface AlignmentMarkDefinition {
 export const alignment: MarkSpec = {
   attrs: {
     align: {
-      default: 'left',
+      default: 'start',
     },
   },
   parseDOM: [

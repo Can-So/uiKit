@@ -300,7 +300,7 @@ Object {
       "marks": Array [
         Object {
           "attrs": Object {
-            "align": "right",
+            "align": "end",
           },
           "type": "alignment",
         },

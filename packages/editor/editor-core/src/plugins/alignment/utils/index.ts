@@ -68,5 +68,5 @@ export const getActiveAlignment = (state): AlignmentState | undefined => {
       mark => mark.type === state.schema.marks.alignment,
     )[0];
 
-  return (getMark && getMark.attrs.align) || 'left';
+  return (getMark && getMark.attrs.align) || 'start';
 };

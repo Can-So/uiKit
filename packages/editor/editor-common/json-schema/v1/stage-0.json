@@ -1882,8 +1882,8 @@
             "align": {
               "enum": [
                 "center",
-                "left",
-                "right"
+                "start",
+                "end"
               ]
             }
           },

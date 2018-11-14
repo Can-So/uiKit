@@ -8,8 +8,8 @@ import EditorAlignCenterIcon from '@atlaskit/icon/glyph/editor/align-center';
 import EditorAlignRightIcon from '@atlaskit/icon/glyph/editor/align-right';
 
 export const iconMap = {
-  left: <EditorAlignLeftIcon label="Align left" />,
-  right: <EditorAlignRightIcon label="Align right" />,
+  start: <EditorAlignLeftIcon label="Align left" />,
+  end: <EditorAlignRightIcon label="Align right" />,
   center: <EditorAlignCenterIcon label="Align center" />,
 };
 

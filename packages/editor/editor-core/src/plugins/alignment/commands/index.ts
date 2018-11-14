@@ -31,7 +31,7 @@ export function changeAlignment(align: AlignmentState): Command {
     }
 
     nodesToAlign.forEach(node => {
-      tr.setNodeMarkup(node.pos, undefined, node.attrs, [
+      tr.setNodeMarkup(node.pos, undefined, node.node.attrs, [
         state.schema.marks.alignment.create({ align }),
       ]);
     });

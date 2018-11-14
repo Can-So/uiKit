@@ -12,9 +12,9 @@ export interface Props {
 }
 
 const alignmentOptions = [
-  { title: 'Align left', value: 'left' },
+  { title: 'Align left', value: 'start' },
   { title: 'Align center', value: 'center' },
-  { title: 'Align right', value: 'right' },
+  { title: 'Align right', value: 'end' },
 ];
 
 export default class Alignment extends PureComponent<Props, any> {

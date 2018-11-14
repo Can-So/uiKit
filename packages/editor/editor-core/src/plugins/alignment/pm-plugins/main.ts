@@ -2,7 +2,7 @@ import { Plugin, PluginKey, Transaction, EditorState } from 'prosemirror-state';
 import { Dispatch } from '../../../event-dispatcher';
 import { getActiveAlignment, canApplyAlignment } from '../utils';
 
-export type AlignmentState = 'left' | 'right' | 'center';
+export type AlignmentState = 'start' | 'end' | 'center';
 
 export type AlignmentPluginState = {
   align: AlignmentState;

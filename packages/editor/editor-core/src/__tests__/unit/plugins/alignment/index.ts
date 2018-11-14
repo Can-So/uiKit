@@ -50,9 +50,9 @@ describe('alignment', () => {
     it('should be able to add alignment to a top level paragraph', () => {
       const { editorView } = editor(doc(p('hello{<>}')));
       const { dispatch, state } = editorView;
-      changeAlignment('right')(state, dispatch);
+      changeAlignment('end')(state, dispatch);
       expect(editorView.state.doc).toEqualDocument(
-        doc(alignmentMark({ align: 'right' })(p('hello{<>}'))),
+        doc(alignmentMark({ align: 'end' })(p('hello{<>}'))),
       );
       editorView.destroy();
     });
@@ -60,9 +60,9 @@ describe('alignment', () => {
     it('applies alignment only to the current paragraph', () => {
       const { editorView } = editor(doc(p('hello{<>}'), p('world')));
       const { dispatch, state } = editorView;
-      changeAlignment('right')(state, dispatch);
+      changeAlignment('end')(state, dispatch);
       expect(editorView.state.doc).toEqualDocument(
-        doc(alignmentMark({ align: 'right' })(p('hello{<>}')), p('world')),
+        doc(alignmentMark({ align: 'end' })(p('hello{<>}')), p('world')),
       );
 
       editorView.destroy();
@@ -71,9 +71,9 @@ describe('alignment', () => {
     it('should be able to add alignment to a top level heading', () => {
       const { editorView } = editor(doc(h1('hello{<>}')));
       const { dispatch, state } = editorView;
-      changeAlignment('right')(state, dispatch);
+      changeAlignment('end')(state, dispatch);
       expect(editorView.state.doc).toEqualDocument(
-        doc(alignmentMark({ align: 'right' })(h1('hello{<>}'))),
+        doc(alignmentMark({ align: 'end' })(h1('hello{<>}'))),
       );
       editorView.destroy();
     });
@@ -83,12 +83,12 @@ describe('alignment', () => {
         doc(p('{<}hello'), panel()(p('hello')), p('world{>}')),
       );
       const { dispatch, state } = editorView;
-      changeAlignment('right')(state, dispatch);
+      changeAlignment('end')(state, dispatch);
       expect(editorView.state.doc).toEqualDocument(
         doc(
-          alignmentMark({ align: 'right' })(p('{<}hello')),
+          alignmentMark({ align: 'end' })(p('{<}hello')),
           panel()(p('hello')),
-          alignmentMark({ align: 'right' })(p('world{>}')),
+          alignmentMark({ align: 'end' })(p('world{>}')),
         ),
       );
       editorView.destroy();
@@ -99,7 +99,7 @@ describe('alignment', () => {
     it('Does not apply to paragraph inside a panel', () => {
       const { editorView } = editor(doc(panel()(p('hello{<>}'))));
       const { dispatch, state } = editorView;
-      changeAlignment('right')(state, dispatch);
+      changeAlignment('end')(state, dispatch);
       expect(editorView.state.doc).toEqualDocument(
         doc(panel()(p('hello{<>}'))),
       );
@@ -109,7 +109,7 @@ describe('alignment', () => {
     it('Does not apply to paragraph inside a codeblock', () => {
       const { editorView } = editor(doc(code_block()('hello{<>}')));
       const { dispatch, state } = editorView;
-      changeAlignment('right')(state, dispatch);
+      changeAlignment('end')(state, dispatch);
       expect(editorView.state.doc).toEqualDocument(
         doc(code_block()('hello{<>}')),
       );
@@ -118,7 +118,7 @@ describe('alignment', () => {
 
     it('Removes alignment when panel is added to the selection', () => {
       const { editorView } = editor(
-        doc(alignmentMark({ align: 'right' })(p('hello{<>}'))),
+        doc(alignmentMark({ align: 'end' })(p('hello{<>}'))),
       );
       const { dispatch, state } = editorView;
       insertBlockType('panel')(state, dispatch);
@@ -130,7 +130,7 @@ describe('alignment', () => {
 
     it('Removes alignment when the text is toggled to a list', () => {
       const { editorView } = editor(
-        doc(alignmentMark({ align: 'right' })(p('{<>}hello'))),
+        doc(alignmentMark({ align: 'end' })(p('{<>}hello'))),
       );
       toggleBulletList(editorView);
       expect(editorView.state.doc).toEqualDocument(doc(ul(li(p('hello')))));
@@ -145,14 +145,14 @@ describe('alignment', () => {
         doc(p('text'), table()(tr(td({})(p('hello')), td({})(p('world{<>}'))))),
       );
       const { dispatch, state } = editorView;
-      changeAlignment('right')(state, dispatch);
+      changeAlignment('end')(state, dispatch);
       expect(editorView.state.doc).toEqualDocument(
         doc(
           p('text'),
           table()(
             tr(
               td({})(p('hello')),
-              td({})(alignmentMark({ align: 'right' })(p('world{<>}'))),
+              td({})(alignmentMark({ align: 'end' })(p('world{<>}'))),
             ),
           ),
         ),

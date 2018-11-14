@@ -17,7 +17,7 @@
         {
           "type": "alignment",
           "attrs": {
-            "align": "center"
+            "align": "end"
           }
         }
       ]
