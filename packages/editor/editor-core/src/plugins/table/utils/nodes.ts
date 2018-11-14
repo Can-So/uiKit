@@ -15,7 +15,7 @@ export const containsHeaderColumn = (
   const { tableHeader } = state.schema.nodes;
   let contains = true;
   table.content.forEach(row => {
-    if (row.firstChild!.type !== tableHeader) {
+    if (row.firstChild && row.firstChild.type !== tableHeader) {
       contains = false;
     }
   });

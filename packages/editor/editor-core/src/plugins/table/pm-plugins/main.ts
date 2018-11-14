@@ -31,7 +31,7 @@ import {
   handleClick,
   handleTripleClick,
 } from '../event-handlers';
-import { findControlsHoverDecoration } from '../utils';
+import { findControlsHoverDecoration, fixTables } from '../utils';
 
 export const pluginKey = new PluginKey('tablePlugin');
 
@@ -182,7 +182,11 @@ export const createPlugin = (
     ) => {
       const tr = transactions.find(tr => tr.getMeta('uiEvent') === 'cut');
       if (tr) {
-        return handleCut(tr, oldState, newState);
+        // "fixTables" removes empty rows as we don't allow that in schema
+        return fixTables(handleCut(tr, oldState, newState));
+      }
+      if (transactions.find(tr => tr.docChanged)) {
+        return fixTables(newState.tr);
       }
     },
     view: (editorView: EditorView) => {
