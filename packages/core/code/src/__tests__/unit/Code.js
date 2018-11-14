@@ -3,17 +3,24 @@ import { mount, shallow } from 'enzyme';
 import React from 'react';
 import ThemedCode, { Code } from '../../Code';
 
-const code = `
-  const a = 'foo';
-  const b = 'bar';
-  const c = [a, b].map(item => item + item);
-`;
+const jsCode = `const map = new Map({ key: 'value' })`;
+
+const javaCode = `public class HelloWorld
+{
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+}`;
+
+const pyCode = `def transform_data(data_frame, rolling_value):
+rolling_df = pd.DataFrame(data_frame)
+return rolling_df.rolling(rolling_value, min_periods=1, center=True).mean()`;
 
 const theme = { mode: 'dark' };
 
 describe('Code', () => {
-  const codeJavascript = <Code text={code} language="javascript" />;
-  const codeLanguageNotSupported = <Code text={code} language="dde" />;
+  const codeJavascript = <Code text={jsCode} language="javascript" />;
+  const codeLanguageNotSupported = <Code text={jsCode} language="dde" />;
   test('should render with language javascript', () => {
     expect(mount(codeJavascript)).toBeDefined();
     expect(
@@ -27,21 +34,21 @@ describe('Code', () => {
   });
   test('should apply theme', () => {
     expect(
-      mount(<ThemedCode text={code} language="java" theme={theme} />)
+      mount(<ThemedCode text={javaCode} language="java" theme={theme} />)
         .find(Code)
         .prop('theme'),
     ).toBe(theme);
   });
   test('should not show the line numbers', () => {
     expect(
-      mount(<ThemedCode text={code} language="java" />)
+      mount(<ThemedCode text={javaCode} language="java" />)
         .find(Code)
         .prop('showLineNumbers'),
     ).toBe(false);
   });
   test('should render a div instead of a span', () => {
     expect(
-      mount(<ThemedCode PreTag="div" text={code} language="python" />)
+      mount(<ThemedCode PreTag="div" text={pyCode} language="python" />)
         .find(Code)
         .prop('PreTag'),
     ).not.toBe('span');
@@ -51,7 +58,7 @@ describe('Code', () => {
       <ThemedCode
         PreTag="div"
         codeTagProps={{ style: { color: 'red' } }}
-        text={code}
+        text={pyCode}
         language="python"
       />,
     );
@@ -62,7 +69,7 @@ describe('Code', () => {
       <ThemedCode
         PreTag="div"
         lineNumberContainerStyle={{ style: { color: 'blue' } }}
-        text={code}
+        text={pyCode}
         showLineNumbers
         language="python"
       />,
@@ -72,7 +79,7 @@ describe('Code', () => {
   test('should passe along code style to LineNumbers', () => {
     const wrapperLineNumbers = shallow(
       <ThemedCode
-        text={code}
+        text={pyCode}
         language="python"
         codeStyle={{ style: { color: 'blue' } }}
         showLineNumbers
