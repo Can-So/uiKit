@@ -27,6 +27,8 @@ export default md`
   property. Generally, you won't need this unless you're using your own custom
   icon.
 
+  ## Usage
+  
 ${code`
 import Icon from '@atlaskit/icon';
 `}

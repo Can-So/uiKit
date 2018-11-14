@@ -17,7 +17,7 @@ ${(
   </SectionMessage>
 )}
 
-The Form package provides form & field state, layout and validation
+The Form package provides form & field state, layout and validation.
 
   ## Usage
 

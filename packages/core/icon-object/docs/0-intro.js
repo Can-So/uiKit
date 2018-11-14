@@ -16,9 +16,9 @@ This package includes the field-type icons. These are a subset of icons with the
 - They are represented at only 2 sizes, each size being a unique svg
     - a 16*16px icon
     - a 24*24px icon
-- They do not have the sizing prop
-- They have specific colours by default
-- they have a different API to icons in the \`@atlaskit/icons\` package
+- They do not have the sizing prop.
+- They have specific colours by default.
+- they have a different API to icons in the \`@atlaskit/icons\` package.
 
 ## Usage
 

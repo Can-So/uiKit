@@ -9,7 +9,7 @@ export default md`
 
   ${code`import Toggle from '@atlaskit/toggle';`}
 
-  The default export is a component that you can control and listen to events on
+  The default export is a component that you can control and listen to events.
 
   ${(
     <Example

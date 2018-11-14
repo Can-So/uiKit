@@ -17,11 +17,11 @@ This package includes the field-type icons. These are a subset of icons with the
     - a 16*16px icon
     - a 24*24px icon
     - a 48*64px icon
-- They do not have the sizing prop
-- They have specific colours by default
-- they have a different API to icons in the \`@atlaskit/icons\` package
+- They do not have the sizing prop.
+- They have specific colours by default.
+- they have a different API to icons in the \`@atlaskit/icons\` package.
 
-## Usage:
+## Usage
 
 ${code`
 import AudioIcon from '@atlaskit/icon-file-type/glyph/audio/16';

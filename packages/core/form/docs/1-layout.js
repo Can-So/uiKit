@@ -24,7 +24,7 @@ ${code`import Form {
     FormFooter
   } from '@atlaskit/form';`}
 
-  FormHeader & FormFooter provide optional layout containers. If you are using Form then FormSection is required as a container
+  FormHeader & FormFooter provide optional layout containers. If you are using Form then FormSection is required as a container.
   for your Fields.
   
   ${(

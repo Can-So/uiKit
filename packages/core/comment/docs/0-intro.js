@@ -5,9 +5,11 @@ import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
 
-The comment component exports both the wrapper component for comments, as well as several smaller components designed to be passed in to the comment component to display a richer comment. The complete export is:
+The comment component exports both the wrapper component for comments, as well as several smaller components designed to be passed in to the comment component to display a richer comment.
 
 ## Usage
+
+The complete export is:
 
 ${code`
 import Comment, {
