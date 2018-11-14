@@ -1,0 +1,1 @@
+- Improve wikimarkup link handling with formatting and titles
