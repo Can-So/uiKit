@@ -12,8 +12,6 @@ ${code`import DropdownMenu, { DropdownItemGroup, DropdownItem, DropdownMenuState
 
 The stateful component handles selection for you, while still providing several functions that allow you to retrieve information from a form, most notably onItemActivated, which returns an item when it is clicked on.
 
-## Examples
-
 ${(
   <Example
     packageName="@atlaskit/dropdown-menu"

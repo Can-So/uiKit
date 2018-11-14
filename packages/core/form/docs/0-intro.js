@@ -17,8 +17,12 @@ ${(
   </SectionMessage>
 )}
 
-  ### Usage
-  The Form package provides form & field state, layout and validation and can be imported using:
+The Form package provides form & field state, layout and validation
+
+  ## Usage
+
+  It can imported using:
+
   ${code`
   import Form {
     FormHeader,
@@ -34,7 +38,7 @@ ${(
   If you have existing form wrappers then **Field**, **FieldGroup** & **Validator** can still be used to provide validation via
   validator libs, custom validator functions or Regular expressions.
 
-   ### Getting Started
+  ## Getting Started
 ${(
   <ul>
     <li>
@@ -55,7 +59,7 @@ ${(
     </li>
   </ul>
 )}
-   ### More Examples & Reference
+   ## More Examples & Reference
 ${(
   <ul>
     <li>

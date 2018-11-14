@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { code, md, Example, Props } from '@atlaskit/docs';
 import SectionMessage from '@atlaskit/section-message';
 
 export default md`
@@ -15,17 +15,14 @@ ${(
     </p>
   </SectionMessage>
 )}
+ 
+## Usage
 
-  ### Form Layout Examples
-
-  Usage:
-  ~~~js
-  import Form {
+${code`import Form {
     FormHeader,
     FormSection,
     FormFooter
-  } from '@atlaskit/form';
-  ~~~
+  } from '@atlaskit/form';`}
 
   FormHeader & FormFooter provide optional layout containers. If you are using Form then FormSection is required as a container
   for your Fields.

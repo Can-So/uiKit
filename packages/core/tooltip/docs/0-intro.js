@@ -17,8 +17,6 @@ export default md`
 
   ${code`import Tooltip, { TooltipPrimitive } from '@atlaskit/tooltip';`}
 
-  ## Example
-
   ${(
     <Example
       packageName="@atlaskit/tooltip"

@@ -62,12 +62,16 @@ import {
     />
   )}
 
-  ## Checkbox Props
-  ${<Props props={require('!!extract-react-types-loader!../src/Checkbox')} />}
-
-  ## CheckboxIcon Props
   ${(
     <Props
+      heading="Checkbox Props"
+      props={require('!!extract-react-types-loader!../src/Checkbox')}
+    />
+  )}
+
+  ${(
+    <Props
+      heading="CheckboxIcon Props"
       props={require('!!extract-react-types-loader!../src/CheckboxIcon')}
     />
   )}

@@ -19,8 +19,6 @@ export default md`
 
   ${code`import Tag from '@atlaskit/tag';`}
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/tag"
@@ -39,5 +37,10 @@ export default md`
     />
   )}
 
-  ${<Props props={require('!!extract-react-types-loader!../src/Tag')} />}
+  ${(
+    <Props
+      heading="Tag Props"
+      props={require('!!extract-react-types-loader!../src/Tag')}
+    />
+  )}
 `;

@@ -13,8 +13,6 @@ export default md`
 
   ${code`AtlassianLogo, AtlassianIcon, AtlassianWordmark } from '@atlaskit/logo';`}
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/logo"
@@ -26,6 +24,7 @@ export default md`
 
   ${(
     <Props
+      heading="Logo Props"
       props={require('!!extract-react-types-loader!../src/AtlassianLogo/Logo')}
     />
   )}

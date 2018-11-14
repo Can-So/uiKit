@@ -4,6 +4,7 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
+
   Breadcrumbs are used for nested navigation, with each item acting as a link.
   There is a stateful default export that handles expansion of the collapse
   view, and passes other props on to the stateless export.
@@ -21,8 +22,6 @@ export default md`
   ${code`import { BreadcrumbsStateless, BreadcrumbsItem } from '@atlaskit/breadcrumbs';`}
 
   A BreadcrumbsStateless component with no items will not be rendered.
-
-  ## Examples
 
   ${(
     <Example

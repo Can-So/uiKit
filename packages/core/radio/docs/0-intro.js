@@ -16,11 +16,11 @@ ${(
   </SectionMessage>
 )}
 
-  #### With Radio Group
+  ## With Radio Group
 
   Provides a standard way to select a single option from a list.
 
-  ### Usage
+  ## Usage
 
   ${code`
   import { RadioGroup, Radio } from '@atlaskit/radio';
@@ -41,7 +41,7 @@ ${(
     />
   )}
 
-  #### defaultCheckedValue
+  ### defaultCheckedValue
   RadioGroup component also exposes a defaultCheckedValue prop that allows you to specify the initially checked Radio instantiated within your RadioGroup instance.
 
   ${(

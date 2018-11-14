@@ -19,8 +19,6 @@ export default md`
 
   Flags will fallback to being appended to the \`<body>\` if an ancestor Layer Manager does not exist.
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/flag"

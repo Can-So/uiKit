@@ -11,8 +11,6 @@ export default md`
 
   ${code`import Lozenge from '@atlaskit/lozenge';`}
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/lozenge"

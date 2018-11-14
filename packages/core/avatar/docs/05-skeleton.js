@@ -3,6 +3,11 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
+
+The \`Skeleton\`component is used for loading states. 
+
+## Usage
+
 ${code`import { Skeleton } from '@atlaskit/avatar';`}
 
 ${(

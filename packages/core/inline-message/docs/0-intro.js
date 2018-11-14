@@ -11,8 +11,6 @@ export default md`
 
   ${code`import InlineMessage from '@atlaskit/inline-message';`}
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/inline-message"
@@ -33,7 +31,7 @@ export default md`
 
   ${(
     <Props
-      heading="Props"
+      heading="InlineMessage Props"
       props={require('!!extract-react-types-loader!../src/components/InlineMessage')}
     />
   )}

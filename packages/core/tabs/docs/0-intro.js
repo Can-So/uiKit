@@ -31,7 +31,7 @@ export default md`
 
   ${(
     <Props
-      heading=" "
+      heading="TabContent Props"
       props={require('!!extract-react-types-loader!../src/components/TabContent')}
     />
   )}
@@ -51,7 +51,7 @@ export default md`
 
   ${(
     <Props
-      heading=" "
+      heading="TabItem Props"
       props={require('!!extract-react-types-loader!../src/components/TabItem')}
     />
   )}

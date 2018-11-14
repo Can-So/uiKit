@@ -9,8 +9,6 @@ export default md`
 
   ${code`import Toggle from '@atlaskit/toggle';`}
 
-  ## Examples
-
   The default export is a component that you can control and listen to events on
 
   ${(
@@ -34,14 +32,16 @@ export default md`
     />
   )}
 
-  ## Default Export Props
-
-  ${<Props props={require('!!extract-react-types-loader!../src/Toggle')} />}
-
-  ## Stateless Props
+  ${(
+    <Props
+      heading="Toggle Default Props"
+      props={require('!!extract-react-types-loader!../src/Toggle')}
+    />
+  )}
 
   ${(
     <Props
+      heading="Toggle Stateless Props"
       props={require('!!extract-react-types-loader!../src/ToggleStateless')}
     />
   )}

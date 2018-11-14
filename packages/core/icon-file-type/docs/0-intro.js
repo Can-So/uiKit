@@ -21,7 +21,7 @@ This package includes the field-type icons. These are a subset of icons with the
 - They have specific colours by default
 - they have a different API to icons in the \`@atlaskit/icons\` package
 
-### Using icons from \`@atlaskit/icon-file-type\`
+## Usage:
 
 ${code`
 import AudioIcon from '@atlaskit/icon-file-type/glyph/audio/16';

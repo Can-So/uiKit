@@ -10,8 +10,6 @@ export default md`
 
   ${code`import TagGroup from '@atlaskit/tag-group';`}
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/tag-group"
@@ -21,5 +19,10 @@ export default md`
     />
   )}
 
-  ${<Props props={require('!!extract-react-types-loader!../src/TagGroup')} />}
+  ${(
+    <Props
+      heading="TagGroup Props"
+      props={require('!!extract-react-types-loader!../src/TagGroup')}
+    />
+  )}
 `;

@@ -9,9 +9,6 @@ export default md`
 
   ${code`import SizeDetector from '@atlaskit/size-detector';`}
 
-
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/size-detector"
@@ -23,6 +20,7 @@ export default md`
 
   ${(
     <Props
+      heading="SizeDetector Props"
       props={require('!!extract-react-types-loader!../src/SizeDetector')}
     />
   )}

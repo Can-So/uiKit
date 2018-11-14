@@ -25,6 +25,7 @@ export default md`
 
   ${(
     <Props
+      heading="Pagination Props"
       props={require('!!extract-react-types-loader!../src/components/Pagination')}
     />
   )}

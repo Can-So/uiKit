@@ -3,10 +3,12 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-${code`import { AvatarItem } from '@atlaskit/avatar';`}
+\`AvatarItem\` is a wrapper designed to go around \`Avatar\`, when th avatar
+will be displayed alongside text, such as a name and status.
 
-  \`AvatarItem\` is a wrapper designed to go around \`Avatar\`, when th avatar
-  will be displayed alongside text, such as a name and status.
+## Usage
+
+${code`import { AvatarItem } from '@atlaskit/avatar';`}
 
 ${(
   <Example

@@ -35,6 +35,7 @@ export default md`
 
   ${(
     <Props
+      heading="ProgressTracker Props"
       props={require('!!extract-react-types-loader!../src/ProgressTracker')}
     />
   )}

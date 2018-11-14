@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, code } from '@atlaskit/docs';
+import { md, Example, code, Props } from '@atlaskit/docs';
 
 export default md`
   React component which allows selection of an item or items from a dropdown list.
@@ -107,18 +107,14 @@ export default md`
     />
   )}
 
-  ### Props
+For further documentation regarding props, please refer to the react-select [documentation](https://react-select.com).
 
-  Please refer to the react-select documentation for [prop documentation](https://react-select.com).
 `;
 
-/*
-re-introduce props when there's a resolution for missing types in extract-react-types
-
+/* TODO: Add the proper props on the documentation - AK-4705 
 ${(
-  <Props
-    heading="Select Props"
-    props={require('!!extract-react-types-loader!../src/Select')}
-  />
-)}
-*/
+  //   <Props
+  //     heading="Select Props"
+  //     props={require('!!extract-react-types-loader!../src/createSelect')}
+  //   />
+ )}*/

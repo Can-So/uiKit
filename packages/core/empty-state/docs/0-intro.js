@@ -12,8 +12,6 @@ export default md`
 
   ${code`import EmptyState from '@atlaskit/empty-state';`}
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/empty-state"
@@ -23,5 +21,10 @@ export default md`
     />
   )}
 
-  ${<Props props={require('!!extract-react-types-loader!../src/EmptyState')} />}
+  ${(
+    <Props
+      heading="EmptyState Props"
+      props={require('!!extract-react-types-loader!../src/EmptyState')}
+    />
+  )}
 `;

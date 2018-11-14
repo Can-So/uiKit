@@ -13,8 +13,6 @@ export default md`
 
   ${code`import { ProgressDots } from '@atlaskit/progress-indicator';`}
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/progress-indicator"
@@ -26,6 +24,7 @@ export default md`
 
   ${(
     <Props
+      heading="ProgressDots Props"
       props={require('!!extract-react-types-loader!../src/components/Dots')}
     />
   )}

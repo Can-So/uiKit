@@ -15,8 +15,6 @@ export default md`
 
   ${code`import Spinner from '@atlaskit/spinner';`}
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/spinner"
@@ -35,5 +33,10 @@ export default md`
     />
   )}
  
-  ${<Props props={require('!!extract-react-types-loader!../src/Spinner')} />}
+  ${(
+    <Props
+      heading="Spinner Props"
+      props={require('!!extract-react-types-loader!../src/Spinner')}
+    />
+  )}
 `;

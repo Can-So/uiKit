@@ -36,5 +36,10 @@ export default md`
     />
   )}
 
-  ${<Props props={require('!!extract-react-types-loader!../src/PageHeader')} />}
+  ${(
+    <Props
+      heading="PageHeader Props"
+      props={require('!!extract-react-types-loader!../src/PageHeader')}
+    />
+  )}
 `;

@@ -10,13 +10,11 @@ export default md`
     - The children, which are the elements the modal will be positioned relative to, using the position prop.
     - The content, which is the content to display inside the modal.
 
-  ### Usage
+  ## Usage
 
   ${code`
   import InlineDialog from '@atlaskit/inline-dialog';
   `}
-
-  ### Example
 
   ${(
     <Example
@@ -29,7 +27,7 @@ export default md`
 
   ${(
     <Props
-      heading="Props"
+      heading="InlineDialog Props"
       props={require('!!extract-react-types-loader!../src/InlineDialog')}
     />
   )}

@@ -6,7 +6,7 @@ export default md`
 
   NPS provides a component to render an NPS survey.
 
-  ### Usage
+  ## Usage
 
 ${code`
 import NPSCollector, { NPS } from '@atlaskit/nps';
@@ -48,14 +48,14 @@ import NPSCollector, { NPS } from '@atlaskit/nps';
   ${(
     <Props
       props={require('!!extract-react-types-loader!../src/components/DefaultNPS')}
-      heading="Default Props"
+      heading="NPS Default Props"
     />
   )}
 
   ${(
     <Props
       props={require('!!extract-react-types-loader!../src/components/NPS')}
-      heading="Named Props"
+      heading="NPS Named Props"
     />
   )}
 `;

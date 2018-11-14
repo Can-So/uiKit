@@ -27,16 +27,16 @@ export default md`
   - [Status](/packages/core/avatar/docs/status)
   - [Skeleton](/packages/core/avatar/docs/skeleton)
 
-  ## Avatar - Default Export
-
-  ${code`import Avatar from '@atlaskit/avatar';`}
-
+  
   Use the \`Avatar\` component to represent users with their profile picture.
   Optionally, a presence to indicate online status can also be displayed.
 
   You can use the \`Presence\` component independently for contexts where the
   profile picture is not required (e.g. next to a username)
+  
+  ## Usage
 
+  ${code`import Avatar from '@atlaskit/avatar';`}
 
   ${(
     <Example

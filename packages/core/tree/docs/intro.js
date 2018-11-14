@@ -32,8 +32,6 @@ export default md`
 
   ${code`import Tree, { mutateTree, moveItemOnTree } from '@atlaskit/tree';`}
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/tree"
@@ -183,6 +181,7 @@ onDragEnd = (source: TreePosition, destination: ?TreePosition) => {
   ${(
     <Props
       title="API Reference"
+      heading="Tree Props"
       props={require('!!extract-react-types-loader!../src/components/Tree/Tree')}
     />
   )}

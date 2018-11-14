@@ -20,7 +20,7 @@ This package includes the field-type icons. These are a subset of icons with the
 - They have specific colours by default
 - they have a different API to icons in the \`@atlaskit/icons\` package
 
-### Using icons from \`@atlaskit/icon-object\`
+## Usage
 
 ${code`
 import CodeIcon from '@atlaskit/icon-object/glyph/code/16';

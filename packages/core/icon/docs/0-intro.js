@@ -50,6 +50,7 @@ import BookIcon from '@atlaskit/icon/glyph/book';
 
   ${(
     <Props
+      heading="Icon Props"
       props={require('!!extract-react-types-loader!../src/components/Icon')}
     />
   )}
