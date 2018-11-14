@@ -39,40 +39,88 @@ const Groovy = (props: { groovy: boolean, optionalNumber?: number }) => null;
       type: 'Group',
       id: 'group',
       customComponents: { Funky, Groovy },
-      items: [{ type: 'Item', id: 'item', text: 'Item' }],
+      items: [
+        { type: 'Item', id: 'item', text: 'Item' },
+        // Custom components should work within other items
+        {
+          type: 'Funky',
+          id: 'funky-component',
+          funky: true,
+        },
+      ],
     },
     {
       type: 'HeaderSection',
       id: 'headerSection',
       customComponents: { Funky, Groovy },
-      items: [{ type: 'Item', id: 'item', text: 'Item' }],
+      items: [
+        { type: 'Item', id: 'item', text: 'Item' },
+        // Custom components should work within other items
+        {
+          type: 'Funky',
+          id: 'funky-component',
+          funky: true,
+        },
+      ],
     },
     {
       type: 'MenuSection',
       id: 'menuSection',
       customComponents: { Funky, Groovy },
       nestedGroupKey: 'menu',
-      items: [{ type: 'Item', id: 'item', text: 'Item' }],
+      items: [
+        { type: 'Item', id: 'item', text: 'Item' },
+        // Custom components should work within other items
+        {
+          type: 'Funky',
+          id: 'funky-component',
+          funky: true,
+        },
+      ],
     },
     {
       type: 'Section',
       id: 'section',
       customComponents: { Funky, Groovy },
       nestedGroupKey: 'section',
-      items: [{ type: 'Item', id: 'item', text: 'Item' }],
+      items: [
+        { type: 'Item', id: 'item', text: 'Item' },
+        // Custom components should work within other items
+        {
+          type: 'Funky',
+          id: 'funky-component',
+          funky: true,
+        },
+      ],
     },
     {
       type: 'SortableContext',
       id: 'sortable-context',
       customComponents: { Funky, Groovy },
       onDragEnd: () => {},
-      items: [{ type: 'Item', id: 'item', text: 'Item' }],
+      items: [
+        { type: 'Item', id: 'item', text: 'Item' },
+        // Custom components should work within other items
+        {
+          type: 'Funky',
+          id: 'funky-component',
+          funky: true,
+        },
+      ],
     },
     {
       type: 'SortableGroup',
       id: 'sortable-group',
       customComponents: { Funky, Groovy },
-      items: [{ type: 'Item', id: 'item', text: 'Item' }],
+      items: [
+        { type: 'Item', id: 'item', text: 'Item' },
+        // Custom components should work within other items
+        {
+          type: 'Funky',
+          id: 'funky-component',
+          funky: true,
+        },
+      ],
     },
     {
       type: 'InlineComponent',
@@ -192,6 +240,23 @@ const Groovy = (props: { groovy: boolean, optionalNumber?: number }) => null;
     {
       type: 'Groovy',
       id: 'groovy-component',
+    },
+  ]}
+/>;
+
+// $ExpectError - Groovy custom component must have groovy prop when embedded within another item
+<ItemsRendererWithCustomComponents
+  customComponents={{ Funky, Groovy }}
+  items={[
+    {
+      type: 'Group',
+      id: 'group',
+      items: [
+        {
+          type: 'Groovy',
+          id: 'groovy-component',
+        },
+      ],
     },
   ]}
 />;

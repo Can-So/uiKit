@@ -22,6 +22,9 @@ import SortableItem from '../components/connected/SortableItem';
 
 type WithoutChildren<P: {}> = $Diff<P, { children: * }>;
 
+// Used as upper bound for generic custom component types
+export type TypeShape = { type: *, id: string };
+
 /**
  * Component Props
  */
@@ -30,46 +33,46 @@ type SharedItemTypeProps = {|
   id: string,
 |};
 
-type SharedGroupTypeProps = {|
+type SharedGroupTypeProps<T> = {|
   ...$Exact<SharedItemTypeProps>,
   customComponents?: CustomComponents,
-  items: Array<RendererItemType<>>,
+  items: Array<NavigationRendererItemType<T>>,
 |};
 
 type SectionKey = {|
   nestedGroupKey?: string,
 |};
 
-export type GroupProps = {|
+export type GroupProps<T> = {|
   ...$Exact<WithoutChildren<ElementConfig<typeof Group>>>,
-  ...$Exact<SharedGroupTypeProps>,
+  ...$Exact<SharedGroupTypeProps<T>>,
 |};
 
-export type SectionProps = {|
+export type SectionProps<T> = {|
   ...$Exact<WithoutChildren<ElementConfig<typeof Section>>>,
-  ...$Exact<SharedGroupTypeProps>,
+  ...$Exact<SharedGroupTypeProps<T>>,
   ...$Exact<SectionKey>,
 |};
 
-export type SortableContextProps = {|
-  ...$Exact<SharedGroupTypeProps>,
+export type SortableContextProps<T> = {|
+  ...$Exact<SharedGroupTypeProps<T>>,
   ...$Exact<WithoutChildren<ElementConfig<typeof SortableContext>>>,
 |};
 
-export type SortableGroupProps = {|
-  ...$Exact<SharedGroupTypeProps>,
+export type SortableGroupProps<T> = {|
+  ...$Exact<SharedGroupTypeProps<T>>,
   ...$Exact<WithoutChildren<ElementConfig<typeof SortableGroup>>>,
 |};
 
-export type HeaderSectionProps = {|
+export type HeaderSectionProps<T> = {|
   ...$Exact<WithoutChildren<ElementConfig<typeof HeaderSection>>>,
-  ...$Exact<SharedGroupTypeProps>,
+  ...$Exact<SharedGroupTypeProps<T>>,
   ...$Exact<SectionKey>,
 |};
 
-export type MenuSectionProps = {|
+export type MenuSectionProps<T> = {|
   ...$Exact<WithoutChildren<ElementConfig<typeof MenuSection>>>,
-  ...$Exact<SharedGroupTypeProps>,
+  ...$Exact<SharedGroupTypeProps<T>>,
   ...$Exact<SectionKey>,
 |};
 
@@ -85,9 +88,9 @@ export type SectionHeadingProps = {|
 
 export type CustomComponents = { [string]: ComponentType<*> };
 
-export type ItemsRendererProps<T = empty> = {
+export type ItemsRendererProps<T: TypeShape = empty> = {
   customComponents?: CustomComponents,
-  items: RendererItemType<T>[],
+  items: NavigationRendererItemType<T>[],
 };
 
 /**
@@ -160,34 +163,34 @@ export type WordmarkType = {|
   ...$Exact<SharedItemTypeProps>,
 |};
 
-export type GroupType = {|
+export type GroupType<T> = {|
   +type: 'Group',
-  ...$Exact<GroupProps>,
+  ...$Exact<GroupProps<T>>,
 |};
 
-export type HeaderSectionType = {|
+export type HeaderSectionType<T> = {|
   +type: 'HeaderSection',
-  ...$Exact<HeaderSectionProps>,
+  ...$Exact<HeaderSectionProps<T>>,
 |};
 
-export type MenuSectionType = {|
+export type MenuSectionType<T> = {|
   +type: 'MenuSection',
-  ...$Exact<MenuSectionProps>,
+  ...$Exact<MenuSectionProps<T>>,
 |};
 
-export type SectionType = {|
+export type SectionType<T> = {|
   +type: 'Section',
-  ...$Exact<SectionProps>,
+  ...$Exact<SectionProps<T>>,
 |};
 
-export type SortableContextType = {|
+export type SortableContextType<T> = {|
   +type: 'SortableContext',
-  ...$Exact<SortableContextProps>,
+  ...$Exact<SortableContextProps<T>>,
 |};
 
-export type SortableGroupType = {|
+export type SortableGroupType<T> = {|
   +type: 'SortableGroup',
-  ...$Exact<SortableGroupProps>,
+  ...$Exact<SortableGroupProps<T>>,
 |};
 
 export type InlineComponentType = {
@@ -209,16 +212,18 @@ export type LeafItemType =
   | SwitcherType
   | WordmarkType;
 
-export type BranchItemType =
-  | GroupType
-  | HeaderSectionType
-  | MenuSectionType
-  | SectionType
-  | SortableContextType
-  | SortableGroupType;
+export type BranchItemType<T> =
+  | GroupType<T>
+  | HeaderSectionType<T>
+  | MenuSectionType<T>
+  | SectionType<T>
+  | SortableContextType<T>
+  | SortableGroupType<T>;
 
-export type RendererItemType<T = empty> =
+// The 'empty' type should be used when no custom components exist
+// We provide a default of empty so that the type can be used as NavigationRendererItemType<>
+export type NavigationRendererItemType<T: TypeShape = empty> =
   | LeafItemType
-  | BranchItemType
+  | BranchItemType<T>
   | InlineComponentType
   | T;

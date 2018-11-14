@@ -41,7 +41,8 @@ import type {
   SectionProps,
   SortableContextProps,
   SortableGroupProps,
-  RendererItemType,
+  NavigationRendererItemType,
+  TypeShape,
 } from './types';
 
 const gridSize = gridSizeFn();
@@ -89,26 +90,26 @@ const Debug = (props: any) => (
  */
 
 // Group
-const Group = ({
+const Group = <T: TypeShape>({
   customComponents,
   hasSeparator,
   heading,
   items,
   id,
-}: GroupProps) =>
+}: GroupProps<T>) =>
   items.length ? (
     <GroupComponent heading={heading} hasSeparator={hasSeparator} id={id}>
       <TypedItemsRenderer items={items} customComponents={customComponents} />
     </GroupComponent>
   ) : null;
 
-const SortableGroup = ({
+const SortableGroup = <T: TypeShape>({
   customComponents,
   hasSeparator,
   heading,
   items,
   id,
-}: SortableGroupProps) =>
+}: SortableGroupProps<T>) =>
   items && items.length ? (
     <SortableGroupComponent
       heading={heading}
@@ -122,7 +123,7 @@ const SortableGroup = ({
   ) : null;
 
 // Section
-const Section = ({
+const Section = <T: TypeShape>({
   alwaysShowScrollHint = false,
   customComponents,
   id,
@@ -130,7 +131,7 @@ const Section = ({
   nestedGroupKey,
   parentId,
   shouldGrow,
-}: SectionProps) =>
+}: SectionProps<T>) =>
   items.length ? (
     <SectionComponent
       alwaysShowScrollHint={alwaysShowScrollHint}
@@ -150,12 +151,12 @@ const Section = ({
     </SectionComponent>
   ) : null;
 
-const HeaderSection = ({
+const HeaderSection = <T: TypeShape>({
   customComponents,
   id,
   items,
   nestedGroupKey,
-}: HeaderSectionProps) =>
+}: HeaderSectionProps<T>) =>
   items.length ? (
     <HeaderSectionComponent id={id} key={nestedGroupKey}>
       {({ className }) => (
@@ -169,14 +170,14 @@ const HeaderSection = ({
     </HeaderSectionComponent>
   ) : null;
 
-const MenuSection = ({
+const MenuSection = <T: TypeShape>({
   alwaysShowScrollHint,
   customComponents,
   id,
   items,
   nestedGroupKey,
   parentId,
-}: MenuSectionProps) => (
+}: MenuSectionProps<T>) => (
   <MenuSectionComponent
     alwaysShowScrollHint={alwaysShowScrollHint}
     id={id}
@@ -191,14 +192,14 @@ const MenuSection = ({
   </MenuSectionComponent>
 );
 
-const SortableContext = ({
+const SortableContext = <T: TypeShape>({
   customComponents,
   id,
   items,
   onDragStart,
   onDragUpdate,
   onDragEnd,
-}: SortableContextProps) =>
+}: SortableContextProps<T>) =>
   items && items.length ? (
     <SortableContextComponent
       id={id}
@@ -225,7 +226,7 @@ const itemComponents = {
 };
 
 const renderItemComponent = <T: empty>(
-  props: RendererItemType<T>,
+  props: NavigationRendererItemType<T>,
   key: string,
   index: number,
 ) => {
@@ -276,7 +277,7 @@ const groupComponents = {
 };
 
 const renderGroupComponent = <T: empty>(
-  props: RendererItemType<T>,
+  props: NavigationRendererItemType<T>,
   key: string,
   customComponents: CustomComponents,
 ) => {
@@ -339,9 +340,9 @@ export const components = { ...itemComponents, ...groupComponents };
 /**
  * RENDERER
  */
-class TypedItemsRenderer<
-  T: { type: *, id: string } = empty,
-> extends PureComponent<ItemsRendererProps<T>> {
+class TypedItemsRenderer<T: TypeShape = empty> extends PureComponent<
+  ItemsRendererProps<T>,
+> {
   customComponentsWithAnalytics: Map<
     string | ComponentType<*>,
     ComponentType<*>,

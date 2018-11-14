@@ -3,10 +3,14 @@
 import React from 'react';
 import { JiraWordmark as JiraWordmarkLogo } from '@atlaskit/logo';
 import { LinkItem } from '../../components';
+import type { NavigationRendererItemType } from '../../../../src/';
 
 import ViewRegistrar from '../common/view-registrar';
 
-const getItems = () => [
+const getItems = (): NavigationRendererItemType<{
+  type: 'LinkItem',
+  id: string,
+}>[] => [
   {
     id: 'root/index:header',
     items: [

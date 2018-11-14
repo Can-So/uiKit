@@ -110,7 +110,7 @@ export type {
 } from './theme/types';
 
 export type {
-  RendererItemType,
+  NavigationRendererItemType,
   LeafItemType,
   BranchItemType,
   BackItemType,
@@ -131,4 +131,5 @@ export type {
   SortableContextType,
   SortableGroupType,
   InlineComponentType,
+  TypeShape as NavigationItemTypeShape,
 } from './renderer/types';
