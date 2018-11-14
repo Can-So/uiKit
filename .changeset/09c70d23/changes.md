@@ -1,1 +1,0 @@
-- FS-3096 add i18n to user-picker
