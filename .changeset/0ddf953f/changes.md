@@ -1,1 +1,0 @@
-- Add extended width option and width transitions
