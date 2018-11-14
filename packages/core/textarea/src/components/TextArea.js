@@ -81,6 +81,7 @@ class TextArea extends Component<Props, State> {
 
   handleOnFocus = (event: SyntheticInputEvent<HTMLTextAreaElement>) => {
     const { onFocus } = this.props;
+    console.error('HELLO?');
     this.setState({ isFocused: true });
     if (onFocus) {
       onFocus(event);

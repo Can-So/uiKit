@@ -141,18 +141,19 @@ describe('TextArea', () => {
   });
 });
 
-describe.skip('TextArea input focus', () => {
+describe('TextArea input focus', () => {
   it('should get focus when focus() is called', () => {
     let hasFocus = 0;
     const wrapper = mount(<TextArea onChange={() => {}} label="" />);
-    wrapper.getDOMNode().addEventListener(
+    const textInput = wrapper.find('textarea').instance();
+    textInput.addEventListener(
       'focus',
       () => {
         hasFocus = 1;
       },
       true,
     );
-    wrapper.instance().focus();
+    textInput.focus();
 
     expect(hasFocus).toBe(1);
   });
