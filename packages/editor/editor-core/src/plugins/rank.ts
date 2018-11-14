@@ -24,6 +24,7 @@ export default {
     'typeAheadInputRule',
     'lists',
     'textColor',
+    'alignmentPlugin',
     'listsInputRule',
     'listsKeymap',
     'codeBlock',
@@ -137,6 +138,7 @@ export default {
     'textColor',
 
     // Block marks
+    'alignment',
     'breakout',
   ],
 };
