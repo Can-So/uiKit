@@ -54,6 +54,7 @@ type Props = {
    * none: explicitly disallow resizing on the textarea.
    */
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
+  /** The theme function TextArea consumes to derive theming constants for use in styling its components */
   theme: ThemeProps => ThemeProps,
 };
 type State = {
