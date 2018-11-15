@@ -110,6 +110,7 @@ export default class FieldsExample extends PureComponent<void, State> {
 
   // Footer Button Handlers
   submitClickHandler = () => {
+    console.log('fields', this.formRef);
     return this.formRef.validate();
   };
 
@@ -251,7 +252,7 @@ export default class FieldsExample extends PureComponent<void, State> {
                 />,
               ]}
             >
-              <DatePicker defaultValue="2018-01-02" />
+              <DatePicker defaultValue="2019-01-02" />
             </Field>
 
             <Field
@@ -275,7 +276,11 @@ export default class FieldsExample extends PureComponent<void, State> {
               {...fieldProps}
               validators={[<Validator {...validatorProps} />]}
             >
-              <FieldText name="" placeholder="placeholder text..." />
+              <FieldText
+                name=""
+                value="hello"
+                placeholder="placeholder text..."
+              />
             </Field>
 
             <Field

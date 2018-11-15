@@ -1,6 +1,6 @@
 // @flow
 import styled from 'styled-components';
-import { typography } from '@atlaskit/theme';
+import { typography, colors } from '@atlaskit/theme';
 
 /**
  * Provide a styled container for field components
@@ -24,6 +24,11 @@ export const Label = styled.label`
 export const HelperText = styled.span`
   ${typography.h200()} font-weight: normal;
   margin-top: 8px;
+`;
+
+export const RequiredIndicator = styled.span`
+  color: ${colors.red};
+  padding-left: 2px;
 `;
 
 export default FieldWrapper;
