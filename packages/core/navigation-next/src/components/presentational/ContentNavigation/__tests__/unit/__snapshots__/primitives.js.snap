@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LayoutManager primitives ContainerNavigationMask should render correctly with default props 1`] = `
+exports[`ContentNavigation primitives ContainerNavigationMask should render correctly with default props 1`] = `
 .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -18,7 +18,7 @@ exports[`LayoutManager primitives ContainerNavigationMask should render correctl
 />
 `;
 
-exports[`LayoutManager primitives ContainerNavigationMask should set pointerEvents to none when interaction is disabled 1`] = `
+exports[`ContentNavigation primitives ContainerNavigationMask should set pointerEvents to none when interaction is disabled 1`] = `
 .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;

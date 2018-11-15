@@ -47,7 +47,8 @@ export type View = {
    * Allowing extra attributes to be sent for analytics events. */
   getAnalyticsAttributes?: (items: ViewData) => {},
 };
-type ActiveView = {
+
+export type ActiveView = {
   analyticsAttributes?: {} | void,
   id: ViewID,
   type: ViewLayer,

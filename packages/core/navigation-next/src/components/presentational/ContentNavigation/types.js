@@ -2,7 +2,7 @@
 
 import type { ComponentType, Node } from 'react';
 
-import type { ProductTheme } from '../../../../theme';
+import type { ProductTheme } from '../../../theme';
 
 export type ContentNavigationProps = {
   container?: ?ComponentType<{}>,

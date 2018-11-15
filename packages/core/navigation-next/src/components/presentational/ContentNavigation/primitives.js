@@ -9,14 +9,16 @@ import {
   transitionDuration,
   transitionDurationMs,
   transitionTimingFunction,
-} from '../../../../common/constants';
-import { Shadow } from '../../../../common/primitives';
+} from '../../../common/constants';
+import { Shadow } from '../../../common/primitives';
 import {
   light,
   withContentTheme,
   ThemeProvider,
   type ProductTheme,
-} from '../../../../theme';
+} from '../../../theme';
+import type { Resizable } from '../LayoutManager/primitives';
+import { applyDisabledProperties } from '../../../common/helpers';
 
 import type {
   ContainerNavigationPrimitiveBaseProps,
@@ -216,4 +218,39 @@ export const InnerShadow = ({ isVisible }: InnerShadowProps) => (
       return <Shadow isBold style={styles} />;
     }}
   </Transition>
+);
+
+export const ContentNavigationWrapper = ({
+  innerRef,
+  disableInteraction,
+  ...props
+}: Resizable) => (
+  <div
+    ref={innerRef}
+    css={{
+      height: '100%',
+      position: 'relative',
+      ...applyDisabledProperties(!!disableInteraction),
+    }}
+    {...props}
+  />
+);
+
+export const ContainerNavigationMask = ({
+  disableInteraction,
+  ...props
+}: {
+  disableInteraction?: boolean,
+  [string]: any,
+}) => (
+  <div
+    css={{
+      display: 'flex',
+      flexDirection: 'row',
+      overflow: 'hidden',
+      height: '100%',
+      ...applyDisabledProperties(!!disableInteraction),
+    }}
+    {...props}
+  />
 );
