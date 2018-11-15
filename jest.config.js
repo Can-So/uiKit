@@ -26,6 +26,11 @@ const STEPS = Number(process.env.STEPS);
  *
  * Run only tests for changed packages (in parallel)
  * PARALLELIZE_TESTS="$(CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js) yarn --silent jest --listTests)" yarn jest --listTests
+ *
+ * If the number of tests to run is too long for bash, you can pass a file containing the tests instead
+ * TMPFILE="$(mktemp /tmp/jest.XXXXX)"
+ * yarn --silent jest --listTests > $TMPFILE
+ * PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --listTests
  */
 
 const config = {
