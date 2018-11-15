@@ -48,7 +48,7 @@ ${(
       (WIP)
     </li>
     <li>
-      <Link to="form/docs/migrating">
+      <Link to="form/docs/migration-guide">
         Migrate an existing form that uses Atlaskit components
       </Link>
     </li>
