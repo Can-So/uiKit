@@ -1,10 +1,13 @@
 //@flow
 /* eslint-disable no-console */
+const fs = require('fs');
+
 const CHANGED_PACKAGES = process.env.CHANGED_PACKAGES;
 const COVERAGE_PACKAGES = process.env.COVERAGE_PACKAGES;
 const INTEGRATION_TESTS = process.env.INTEGRATION_TESTS;
 const VISUAL_REGRESSION = process.env.VISUAL_REGRESSION;
 const PARALLELIZE_TESTS = process.env.PARALLELIZE_TESTS;
+const PARALLELIZE_TESTS_FILE = process.env.PARALLELIZE_TESTS_FILE;
 const TEST_ONLY_PATTERN = process.env.TEST_ONLY_PATTERN;
 const PROD = process.env.PROD;
 // These are set by Pipelines if you are running in a parallel steps
@@ -23,6 +26,11 @@ const STEPS = Number(process.env.STEPS);
  *
  * Run only tests for changed packages (in parallel)
  * PARALLELIZE_TESTS="$(CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js) yarn --silent jest --listTests)" yarn jest --listTests
+ *
+ * If the number of tests to run is too long for bash, you can pass a file containing the tests instead
+ * TMPFILE="$(mktemp /tmp/jest.XXXXX)"
+ * yarn --silent jest --listTests > $TMPFILE
+ * PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --listTests
  */
 
 const config = {
@@ -149,8 +157,14 @@ if (TEST_ONLY_PATTERN) {
  * We do this by passing in a list of test files (PARALLELIZE_TESTS), the number of a parallel steps (STEPS)
  * and the (0 indexed) index of the current step (STEP_IDX). Using these we can split the test up evenly
  */
-if (PARALLELIZE_TESTS) {
-  const allTests = JSON.parse(PARALLELIZE_TESTS);
+if (PARALLELIZE_TESTS || PARALLELIZE_TESTS_FILE) {
+  const testStr = PARALLELIZE_TESTS_FILE
+    ? fs.readFileSync(PARALLELIZE_TESTS_FILE, 'utf8')
+    : PARALLELIZE_TESTS;
+  if (!testStr) {
+    throw new Error('Cannot read parallelized tests');
+  }
+  const allTests = JSON.parse(testStr);
   config.testMatch = allTests.filter((_, i) => (i % STEPS) - STEP_IDX === 0);
 
   console.log('Parallelising jest tests.');
