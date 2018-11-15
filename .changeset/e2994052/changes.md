@@ -1,1 +1,0 @@
-- Adding new component AsyncLayoutManagerWithViewController to be used with code splitting
