@@ -9,7 +9,7 @@ import {
   doc,
   createEditor,
   p,
-  CardMockProvider,
+  EditorTestCardProvider,
 } from '@atlaskit/editor-test-helpers';
 
 describe('card', () => {
@@ -27,7 +27,7 @@ describe('card', () => {
         const { editorView } = editor(doc(p()));
         const { state, dispatch } = editorView;
 
-        const provider = new CardMockProvider();
+        const provider = new EditorTestCardProvider();
         dispatch(setProvider(provider)(state.tr));
 
         expect(pluginKey.getState(editorView.state)).toEqual({

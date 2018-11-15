@@ -253,28 +253,32 @@ pipelines:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
-                - STEPS="4" STEP_IDX="0" PARALLELIZE_TESTS="$(yarn --silent jest --listTests --json)" yarn jest --runInBand
+                - export TMPFILE=$(mktemp /tmp/jest.XXXXXX) && yarn --silent jest --listTests --json > $TMPFILE
+                - STEPS="4" STEP_IDX="0" PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --runInBand
           - step:
               name: Running Jest 2 of 4 chunks
               script:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
-                - STEPS="4" STEP_IDX="1" PARALLELIZE_TESTS="$(yarn --silent jest --listTests --json)" yarn jest --runInBand
+                - export TMPFILE=$(mktemp /tmp/jest.XXXXXX) && yarn --silent jest --listTests --json > $TMPFILE
+                - STEPS="4" STEP_IDX="1" PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --runInBand
           - step:
               name: Running Jest 3 of 4 chunks
               script:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
-                - STEPS="4" STEP_IDX="2" PARALLELIZE_TESTS="$(yarn --silent jest --listTests --json)" yarn jest --runInBand
+                - export TMPFILE=$(mktemp /tmp/jest.XXXXXX) && yarn --silent jest --listTests --json > $TMPFILE
+                - STEPS="4" STEP_IDX="2" PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --runInBand
           - step:
               name: Running Jest 4 of 4 chunks
               script:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
-                - STEPS="4" STEP_IDX="3" PARALLELIZE_TESTS="$(yarn --silent jest --listTests --json)" yarn jest --runInBand
+                - export TMPFILE=$(mktemp /tmp/jest.XXXXXX) && yarn --silent jest --listTests --json > $TMPFILE
+                - STEPS="4" STEP_IDX="3" PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --runInBand
       - step:
           name: Wait until no master is running
           script:

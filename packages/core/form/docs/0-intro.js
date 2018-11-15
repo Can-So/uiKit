@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Props } from '@atlaskit/docs';
+import { md, Props, code } from '@atlaskit/docs';
 import SectionMessage from '@atlaskit/section-message';
 import { Link } from 'react-router-dom';
 
@@ -17,9 +17,13 @@ ${(
   </SectionMessage>
 )}
 
-  ### Usage
-  The Form package provides form & field state, layout and validation and can be imported using:
-  ~~~js
+The Form package provides form & field state, layout and validation.
+
+  ## Usage
+
+  It can imported using:
+
+  ${code`
   import Form {
     FormHeader,
     FormSection,
@@ -28,13 +32,13 @@ ${(
     FieldGroup,
     Validator
   } from '@atlaskit/form';
-  ~~~
+  `}
 
   Layout & state management can be implemented using **Form**, **FormHeader**, **FormSection** & **FormFooter** components.
   If you have existing form wrappers then **Field**, **FieldGroup** & **Validator** can still be used to provide validation via
   validator libs, custom validator functions or Regular expressions.
 
-   ### Getting Started
+  ## Getting Started
 ${(
   <ul>
     <li>
@@ -55,7 +59,7 @@ ${(
     </li>
   </ul>
 )}
-   ### More Examples & Reference
+   ## More Examples & Reference
 ${(
   <ul>
     <li>

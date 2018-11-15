@@ -18,7 +18,6 @@ function getType(style: string): CellType {
 export class TableBuilder implements Builder {
   private schema: Schema;
   private root: Table;
-  private lastCell: TableCell;
   private lastRow: TableRow;
 
   constructor(schema: Schema) {
@@ -49,22 +48,14 @@ export class TableBuilder implements Builder {
     const cellType = getType(cells[0].style);
 
     for (const cell of cells) {
-      const { style, content } = cell;
+      const { content } = cell;
 
       // For the first item, determine if it's a new row or not
       if (index === 0) {
-        if (style === null) {
-          // If there's no style (cell delimeter), it's part of the previous row
-          this.lastCell.content.push(...content);
-          continue;
-        } else {
-          // Otherwise, create a new row
-          this.addRow();
-        }
+        this.addRow();
       }
 
       const newCell = { type: cellType, content };
-      this.lastCell = newCell;
       this.lastRow.cells.push(newCell);
 
       index += 1;

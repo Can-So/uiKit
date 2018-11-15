@@ -1,5 +1,6 @@
 // DO NOT MODIFY THIS FILE, USE `yarn generate:spec`
 export { default as paragraph } from './paragraph';
+export { default as alignment } from './alignment';
 export { default as bulletList } from './bulletList';
 export { default as media } from './media';
 export { default as mediaSingle } from './mediaSingle';
