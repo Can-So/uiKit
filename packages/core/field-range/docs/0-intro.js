@@ -3,9 +3,10 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  ### Usage
 
-  Component which renders a slider and is a substitute of the native input[range] element
+  Component which renders a slider and is a substitute of the native input[range] element.
+
+    ## Usage
 
   ${code`import FieldRange from '@atlaskit/field-range';`}
 
