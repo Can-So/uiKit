@@ -1,0 +1,1 @@
+- ED-5584: Added Emoji support to the renderer.

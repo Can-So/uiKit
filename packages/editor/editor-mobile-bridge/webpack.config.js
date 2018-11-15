@@ -49,7 +49,6 @@ module.exports = {
     extensions: ['.js', '.ts', '.tsx'],
     alias: {
       '@atlaskit/media-picker': emptyExportPath,
-      '@atlaskit/tooltip': emptyExportPath,
       '@atlaskit/modal-dialog': emptyExportPath,
       '@atlaskit/logo': emptyExportPath,
       '@atlaskit/avatar': emptyExportPath,
@@ -60,7 +59,6 @@ module.exports = {
       'components/picker/EmojiPicker': emptyExportPath,
       'react-virtualized/dist/commonjs/List': emptyExportPath,
       'react-virtualized': emptyExportPath,
-      '@atlaskit/emoji': emptyExportPath,
     },
   },
   module: {
