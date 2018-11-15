@@ -6,8 +6,13 @@ import { normalizePMNodes } from '../utils/normalize';
 import { Token, TokenType, TokenErrCallback } from './';
 import { parseNewlineOnly } from './whitespace';
 
-// Exclude { micros
-const CELL_REGEXP = /^[ \t]*([|]+)/;
+/* 
+  The following are currently NOT supported
+  1. Macros
+  2. Escape |
+  3. Table of table
+*/
+const CELL_REGEXP = /^([ \t]*)([|]+)([ \t]*)/;
 const EMPTY_LINE_REGEXP = /^[ \t]*\r?\n/;
 const EMPTY_CELL_REGEXP = /^([ \t]+)/;
 
@@ -57,15 +62,10 @@ export function table(
           if (!builder) {
             builder = new TableBuilder(schema);
           }
-          const emptyCellMatch = input
-            .substring(index)
-            .match(EMPTY_CELL_REGEXP);
-          if (emptyCellMatch) {
-            index += emptyCellMatch[1].length;
-            continue;
-          }
-          cellStyle = tableMatch[1];
+          /* Capture empty spaces */
           index += tableMatch[1].length;
+          cellStyle = tableMatch[2];
+          index += tableMatch[2].length;
           currentState = processState.BUFFER;
           continue;
         }
@@ -74,9 +74,8 @@ export function table(
         continue;
       }
       case processState.LINE_BREAK: {
-        const substring = input.substring(index);
         /**
-         * If we encounter an empty line, we should end the list
+         * If we encounter an empty line, we should end the table
          */
         const emptyLineMatch = substring.match(EMPTY_LINE_REGEXP);
         if (emptyLineMatch) {
@@ -103,7 +102,7 @@ export function table(
         continue;
       }
       case processState.BUFFER: {
-        const length = parseNewlineOnly(input.substring(index));
+        const length = parseNewlineOnly(substring);
         if (length) {
           const charBefore = input.charAt(index - 1);
           if (charBefore === '|' || charBefore.match(EMPTY_CELL_REGEXP)) {
@@ -135,18 +134,13 @@ export function table(
              * Update cells tyle
              */
             const cellMatch = substring.match(CELL_REGEXP);
+            /* The below if statement should aways be true, we leave it here to prevent any future code changes fall into infinite loop */
             if (cellMatch) {
-              cellStyle = cellMatch[1];
-              index += cellMatch[1].length;
+              cellStyle = cellMatch[2];
+              /* Move into the cell content */
+              index += cellMatch[2].length;
               /* Remove empty spaces after new cell */
-              if (index < input.length) {
-                const emptyCellMatch = input
-                  .substring(index)
-                  .match(EMPTY_CELL_REGEXP);
-                if (emptyCellMatch) {
-                  index += emptyCellMatch[1].length;
-                }
-              }
+              index += cellMatch[3].length;
               continue;
             }
             break;
