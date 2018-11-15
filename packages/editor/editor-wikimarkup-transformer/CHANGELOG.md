@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.4.2
+- [patch] [171443f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/171443f):
+
+  - Re-wrtie table parser
+
 ## 2.4.1
 - [patch] [930ca26](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/930ca26):
 
