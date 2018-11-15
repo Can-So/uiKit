@@ -21,7 +21,7 @@ export function parseWhitespaceOnly(input: string) {
   return index;
 }
 
-export function parseNewlineOnly(input: string) {
+export function parseNewlineOnly(input: string): number {
   let index = 0;
   const char = input.charAt(index);
 

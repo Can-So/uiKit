@@ -7,14 +7,16 @@ import { Token, TokenType, TokenErrCallback } from './';
 import { parseNewlineOnly } from './whitespace';
 
 // Exclude { micros
-const TABLE_REGEXP = /^[ \t]*[|]+(\\\||[^|\n])*/;
-const BACK_SLASH_REGEXP = /(\\*$)/;
+const CELL_REGEXP = /^[ \t]*([|]+)/;
+const EMPTY_LINE_REGEXP = /^[ \t]*\r?\n/;
+const EMPTY_CELL_REGEXP = /^([ \t]+)/;
 
 const processState = {
-  OPENING_CELL: 0,
-  CLOSING_CELL: 1,
-  MACRO: 2,
-  BUFFER: 3,
+  END_TABLE: 2,
+  BUFFER: 4,
+  CLOSE_ROW: 5,
+  NEW_ROW: 6,
+  LINE_BREAK: 7,
 };
 
 export function table(
@@ -23,153 +25,6 @@ export function table(
   schema: Schema,
   tokenErrCallback: TokenErrCallback,
 ): Token {
-  const output: PMNode[] = [];
-  let index = position;
-  let currentState = processState.OPENING_CELL;
-  let tableBuffer = '';
-  let builder: TableBuilder | null = null;
-
-  while (index < input.length) {
-    const char = input.charAt(index);
-    const substring = input.substring(index);
-    const length = parseNewlineOnly(input.substring(index));
-
-    switch (currentState) {
-      case processState.OPENING_CELL: {
-        const tableMatch = substring.match(TABLE_REGEXP);
-        if (tableMatch) {
-          if (!builder) {
-            builder = new TableBuilder(schema);
-          }
-          tableBuffer += input.substr(index, tableMatch[0].length);
-          index += tableMatch[0].length;
-        }
-        currentState = processState.BUFFER;
-        continue;
-      }
-      case processState.CLOSING_CELL: {
-        if (
-          builder &&
-          index < input.length &&
-          parseNewlineOnly(input.substring(index + 1))
-        ) {
-          index += parseNewlineOnly(input.substring(index + 1));
-          tableBuffer += char;
-          builder.add(parseToTableCell(tableBuffer, schema, tokenErrCallback));
-          tableBuffer = '';
-          if (
-            index < input.length &&
-            !input.substring(index + 1).match(TABLE_REGEXP)
-          ) {
-            output.push(builder.buildPMNode());
-            return {
-              type: 'pmnode',
-              nodes: output,
-              length: index - position,
-            };
-          }
-        }
-        currentState = processState.OPENING_CELL;
-        continue;
-      }
-      case processState.BUFFER: {
-        // Looking for | to close the table
-        if (length) {
-          tableBuffer += '\n';
-          index += length;
-          if (index < input.length) {
-            if (input.substring(index).match(TABLE_REGEXP) && builder) {
-              builder.add(
-                parseToTableCell(tableBuffer, schema, tokenErrCallback),
-              );
-              tableBuffer = '';
-            }
-            currentState = processState.OPENING_CELL;
-            continue;
-          }
-        }
-        if (char === '|' && builder) {
-          currentState = processState.CLOSING_CELL;
-          continue;
-        } else {
-          if (!length) {
-            tableBuffer += char;
-          }
-        }
-        break;
-      }
-    }
-    index++;
-  }
-
-  if (builder) {
-    builder.add(parseToTableCell(tableBuffer, schema, tokenErrCallback));
-    output.push(builder.buildPMNode());
-  }
-
-  return {
-    type: 'pmnode',
-    nodes: output,
-    length: index - position,
-  };
-}
-
-function containEscape(input: string): boolean {
-  const matches = input.match(BACK_SLASH_REGEXP);
-  return matches && matches[0].length === 1 ? true : false;
-}
-
-function escapeSlices(slices: string[]): string[] {
-  const slicesLength = slices.length;
-  let index = 0;
-  const escapedSlices: string[] = [];
-  while (index < slicesLength) {
-    if (index + 1 < slicesLength && containEscape(slices[index])) {
-      switch (slices[index + 1]) {
-        case '|': {
-          let sliceString = slices[index] + '|';
-          index++;
-          if (index + 1 < slicesLength) {
-            const subSlices = slices.slice(index + 1);
-            let previousElement = subSlices[0];
-            subSlices.find(el => {
-              if (
-                (el === '|' || el === '||') &&
-                !containEscape(previousElement)
-              ) {
-                return true;
-              }
-              sliceString += el;
-              index++;
-              previousElement = el;
-              return false;
-            });
-          }
-          escapedSlices.push(sliceString);
-          break;
-        }
-        case '||': {
-          escapedSlices.push(slices[index] + '|');
-          slices[index + 1] = '|';
-          break;
-        }
-        default: {
-          escapedSlices.push(slices[index]);
-        }
-      }
-    } else {
-      escapedSlices.push(slices[index]);
-    }
-    index++;
-  }
-  return escapedSlices;
-}
-
-function parseToTableCell(
-  input: string,
-  schema: Schema,
-  tokenErrCallback?: TokenErrCallback,
-): AddCellArgs[] {
   /**
    * The following token types will be ignored in parsing
    * the content of a table cell
@@ -182,46 +37,204 @@ function parseToTableCell(
     TokenType.RULER,
   ];
 
-  const cells: AddCellArgs[] = [];
+  const output: PMNode[] = [];
+  let index = position;
+  let currentState = processState.NEW_ROW;
+  let buffer = '';
+  let cellsBuffer: AddCellArgs[] = [];
+  let cellStyle = '';
 
-  /**
-   * If separator is a regular expression that contains capturing parentheses,
-   * then each time separator is matched, the results (including any undefined results)
-   * of the capturing parentheses are spliced into the output array.
-   */
-  const slices = input.split(/([|]+)/);
-  /**
-   * After the split, the first item would always be a "" which we don't need
-   * For example,
-   * ||header||header||header
-   * returns:
-   * ["", "||", "header", "||", "header", "||", "header"]
-   */
-  slices.shift();
+  let builder: TableBuilder | null = null;
 
-  const escapedSlices = escapeSlices(slices);
+  while (index < input.length) {
+    const char = input.charAt(index);
+    const substring = input.substring(index);
 
-  for (let i = 0; i < escapedSlices.length; i += 2) {
-    const style = escapedSlices[i];
-    const rawContent =
-      i + 1 < escapedSlices.length ? escapedSlices[i + 1] : null;
-    /**
-     * We don't want to display the trailing space as a new cell
-     * https://jdog.jira-dev.com/browse/BENTO-2319
-     */
-    if (rawContent === null || /^\s*$/.test(rawContent)) {
-      continue;
+    switch (currentState) {
+      case processState.NEW_ROW: {
+        const tableMatch = substring.match(CELL_REGEXP);
+        if (tableMatch) {
+          if (!builder) {
+            builder = new TableBuilder(schema);
+          }
+          const emptyCellMatch = input
+            .substring(index)
+            .match(EMPTY_CELL_REGEXP);
+          if (emptyCellMatch) {
+            index += emptyCellMatch[1].length;
+            continue;
+          }
+          cellStyle = tableMatch[1];
+          index += tableMatch[1].length;
+          currentState = processState.BUFFER;
+          continue;
+        }
+
+        currentState = processState.END_TABLE;
+        continue;
+      }
+      case processState.LINE_BREAK: {
+        const substring = input.substring(index);
+        /**
+         * If we encounter an empty line, we should end the list
+         */
+        const emptyLineMatch = substring.match(EMPTY_LINE_REGEXP);
+        if (emptyLineMatch) {
+          bufferToCells(
+            cellStyle,
+            buffer,
+            cellsBuffer,
+            schema,
+            ignoreTokenTypes,
+            tokenErrCallback,
+          );
+          currentState = processState.END_TABLE;
+          continue;
+        }
+        /**
+         * If we enconter a new row
+         */
+        const cellMatch = substring.match(CELL_REGEXP);
+        if (cellMatch) {
+          currentState = processState.CLOSE_ROW;
+        } else {
+          currentState = processState.BUFFER;
+        }
+        continue;
+      }
+      case processState.BUFFER: {
+        const length = parseNewlineOnly(input.substring(index));
+        if (length) {
+          const charBefore = input.charAt(index - 1);
+          if (charBefore === '|' || charBefore.match(EMPTY_CELL_REGEXP)) {
+            currentState = processState.CLOSE_ROW;
+          } else {
+            currentState = processState.LINE_BREAK;
+            buffer += input.substr(index, length);
+          }
+          index += length;
+          continue;
+        }
+
+        switch (char) {
+          case '|': {
+            /**
+             * This is now end of a cell, we should wrap the buffer into a cell
+             */
+            bufferToCells(
+              cellStyle,
+              buffer,
+              cellsBuffer,
+              schema,
+              ignoreTokenTypes,
+              tokenErrCallback,
+            );
+            buffer = '';
+
+            /**
+             * Update cells tyle
+             */
+            const cellMatch = substring.match(CELL_REGEXP);
+            if (cellMatch) {
+              cellStyle = cellMatch[1];
+              index += cellMatch[1].length;
+              /* Remove empty spaces after new cell */
+              if (index < input.length) {
+                const emptyCellMatch = input
+                  .substring(index)
+                  .match(EMPTY_CELL_REGEXP);
+                if (emptyCellMatch) {
+                  index += emptyCellMatch[1].length;
+                }
+              }
+              continue;
+            }
+            break;
+          }
+          default: {
+            buffer += char;
+            index++;
+            continue;
+          }
+        }
+        break;
+      }
+      case processState.CLOSE_ROW: {
+        bufferToCells(
+          cellStyle,
+          buffer,
+          cellsBuffer,
+          schema,
+          ignoreTokenTypes,
+          tokenErrCallback,
+        );
+        buffer = '';
+        if (builder) {
+          builder.add(cellsBuffer);
+          cellsBuffer = [];
+        }
+
+        currentState = processState.NEW_ROW;
+        continue;
+      }
+      case processState.END_TABLE: {
+        if (builder) {
+          if (cellsBuffer.length) {
+            builder.add(cellsBuffer);
+          }
+          output.push(builder.buildPMNode());
+        }
+        return {
+          type: 'pmnode',
+          nodes: output,
+          length: index - position,
+        };
+      }
     }
+    index++;
+  }
 
+  bufferToCells(
+    cellStyle,
+    buffer,
+    cellsBuffer,
+    schema,
+    ignoreTokenTypes,
+    tokenErrCallback,
+  );
+
+  if (builder) {
+    if (cellsBuffer.length) {
+      builder.add(cellsBuffer);
+    }
+    output.push(builder.buildPMNode());
+  }
+
+  return {
+    type: 'pmnode',
+    nodes: output,
+    length: index - position,
+  };
+}
+
+function bufferToCells(
+  style: string,
+  buffer: string,
+  cellsBuffer: AddCellArgs[],
+  schema: Schema,
+  ignoreTokenTypes: TokenType[],
+  tokenErrCallback: TokenErrCallback,
+) {
+  if (buffer.length) {
     const contentNode = parseString(
-      rawContent,
+      buffer,
       schema,
       ignoreTokenTypes,
       tokenErrCallback,
     );
-
-    cells.push({ style, content: normalizePMNodes(contentNode, schema) });
+    cellsBuffer.push({
+      style,
+      content: normalizePMNodes(contentNode, schema),
+    });
   }
-
-  return cells;
 }
