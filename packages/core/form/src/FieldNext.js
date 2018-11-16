@@ -54,7 +54,7 @@ class Field extends React.Component<
         value: true,
       },
       {
-        getValidator: () => () => console.log('validated'),
+        getValidator: () => () => {},
       },
     );
   }

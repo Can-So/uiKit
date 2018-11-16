@@ -9,8 +9,9 @@ const translate = fn => e => {
     } else {
       fn(e.target.value);
     }
+  } else {
+    fn(e);
   }
-  fn(e);
 };
 
 export default translate;

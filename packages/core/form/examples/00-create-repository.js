@@ -110,11 +110,7 @@ export default class LayoutExample extends PureComponent<void, State> {
                   )}
                 </Field>
 
-                <Field
-                  name="repo_name"
-                  label="Repository name"
-                  defaultValue="Yahh"
-                >
+                <Field name="repo_name" label="Repository name" defaultValue="">
                   {({ fieldProps }) => (
                     <FieldText
                       shouldFitContainer
@@ -124,12 +120,11 @@ export default class LayoutExample extends PureComponent<void, State> {
                   )}
                 </Field>
 
-                <Field name="access-level" label="Access level" defaultValue>
+                <Field name="access-level" label="Access level">
                   {({ fieldProps: { value, ...others } }) => (
                     <Checkbox
                       label="This is a private repository"
-                      value="private"
-                      isChecked={value}
+                      isChecked={!!value}
                       {...others}
                     />
                   )}
