@@ -1,0 +1,1 @@
+- Fix conversion of pasted urls via macroPlugin with html in clipboard (ED-5786)
