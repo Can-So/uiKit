@@ -778,6 +778,41 @@ Object {
 }
 `;
 
+exports[`JIRA wiki markup - Macros should title of noformat 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "marks": Array [
+            Object {
+              "type": "strong",
+            },
+          ],
+          "text": "title",
+          "type": "text",
+        },
+      ],
+      "type": "paragraph",
+    },
+    Object {
+      "attrs": Object {
+        "language": "java",
+        "uniqueId": null,
+      },
+      "content": Array [
+        Object {
+          "text": "code inside noformat",
+          "type": "text",
+        },
+      ],
+      "type": "codeBlock",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
 exports[`JIRA wiki markup - Macros should transform h1 to Bold and Uppercase under blockquote 1`] = `
 Object {
   "content": Array [
