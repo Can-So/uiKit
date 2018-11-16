@@ -31,9 +31,30 @@ export default class FielsExample extends Component<{}> {
             <form {...props}>
               <FormHeader title="Different fields" />
 
-              <Field name="name" label="Full name" defaultValue="foobar">
-                {({ fieldProps }) => (
-                  <FieldText shouldFitContainer isLabelHidden {...fieldProps} />
+              <Field
+                name="name"
+                label="Full name"
+                defaultValue=""
+                validate={val => (val.length < 3 ? 'TOO_SHORT' : undefined)}
+              >
+                {({ fieldProps, error }) => (
+                  <>
+                    <FieldText
+                      shouldFitContainer
+                      isLabelHidden
+                      {...fieldProps}
+                    />
+                    {!error && (
+                      <HelperMessage>
+                        Must be longer than three characters
+                      </HelperMessage>
+                    )}
+                    {error === 'TOO_SHORT' && (
+                      <ErrorMessage>
+                        Must be longer than three characters
+                      </ErrorMessage>
+                    )}
+                  </>
                 )}
               </Field>
 

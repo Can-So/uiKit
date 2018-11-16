@@ -18,6 +18,8 @@ type Props = {
   name: string,
   /* the type of the field */
   type?: 'checkbox',
+  /* validates the current value of field */
+  validate: any => string | Promise<string> | void,
 };
 
 type State = Object;
@@ -37,12 +39,14 @@ class Field extends React.Component<
     form.change(name, defaultValue);
     form.registerField(
       name,
-      ({ change, blur, focus, value }) => {
+      ({ change, blur, focus, value, error, touched }) => {
         this.setState({
           onChange: translateEvent(change),
           onBlur: blur,
           onFocus: focus,
+          error,
           value,
+          touched,
           registered: true,
         });
       },
@@ -52,21 +56,31 @@ class Field extends React.Component<
         touched: true,
         valid: true,
         value: true,
+        error: true,
       },
       {
-        getValidator: () => () => {},
+        getValidator: () => this.props.validate,
       },
     );
   }
   render() {
     const { children, isRequired, label, name, type } = this.props;
-    const { registered, onChange, onBlur, onFocus, value } = this.state;
+    const {
+      registered,
+      onChange,
+      onBlur,
+      onFocus,
+      value,
+      error,
+      touched,
+    } = this.state;
     const fieldProps = {
       onChange,
       onBlur,
       onFocus,
       value,
       name,
+      isInvalid: touched && error,
     };
     return (
       <FieldWrapper>
@@ -76,7 +90,8 @@ class Field extends React.Component<
             <RequiredIndicator role="presentation">*</RequiredIndicator>
           )}
         </Label>
-        {registered && children({ fieldProps, status: 'default' })}
+        {registered &&
+          children({ fieldProps, status: 'default', error: touched && error })}
       </FieldWrapper>
     );
   }

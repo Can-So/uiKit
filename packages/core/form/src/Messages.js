@@ -13,9 +13,15 @@ const Message = styled.div`
     } else if (props.valid) {
       return colors.G400;
     }
-    return 'inherit';
+    return colors.N90;
   }};
   margin-top: ${math.multiply(gridSize, 0.5)}px;
+  display: flex;
+  justify-content: baseline;
+`;
+
+const IconWrapper = styled.span`
+  display: flex;
 `;
 
 type Props = {
@@ -28,14 +34,18 @@ export const HelperMessage = ({ children }: Props) => (
 
 export const ErrorMessage = ({ children }: Props) => (
   <Message error>
-    <ErrorIcon size="small" role="presentation" />
+    <IconWrapper>
+      <ErrorIcon size="small" role="presentation" />
+    </IconWrapper>
     {children}
   </Message>
 );
 
 export const ValidMessage = ({ children }: Props) => (
   <Message valid>
-    <SuccessIcon size="small" role="presentation" />
+    <IconWrapper>
+      <SuccessIcon size="small" role="presentation" />
+    </IconWrapper>
     {children}
   </Message>
 );
