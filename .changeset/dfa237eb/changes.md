@@ -1,0 +1,1 @@
+- FS-3207 disable clearable button if consumer passes isClearable as false

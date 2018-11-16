@@ -7,9 +7,9 @@ import { shallow } from 'enzyme';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { getStyles } from '../../../components/styles';
-import { Props, UserPicker } from '../../../components/UserPicker';
+import { UserPicker } from '../../../components/UserPicker';
 import { userToOption } from '../../../components/utils';
-import { User } from '../../../types';
+import { User, UserPickerProps as Props } from '../../../types';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<Props> = {}) =>
@@ -122,8 +122,8 @@ describe('UserPicker', () => {
     expect(component.state()).toHaveProperty('hoveringClearIndicator', true);
   });
 
-  it('should set isClearable to false if shouldDisableClearable is passed in', () => {
-    const component = shallowUserPicker({ shouldDisableClearable: true });
+  it('should set isClearable to false', () => {
+    const component = shallowUserPicker({ isClearable: false });
     const select = component.find(Select);
     expect(select.prop('isClearable')).toEqual(false);
   });

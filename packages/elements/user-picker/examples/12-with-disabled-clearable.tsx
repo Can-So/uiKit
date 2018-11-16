@@ -4,6 +4,6 @@ import { UserPicker } from '../src/components/UserPicker';
 
 export default class Example extends React.Component<{}> {
   render() {
-    return <UserPicker users={exampleUsers} shouldDisableClearable={true} />;
+    return <UserPicker users={exampleUsers} isClearable={true} />;
   }
 }
