@@ -1,0 +1,1 @@
+- ED-5770: fix resizer for media @ 0 and non-dynamic text sizes
