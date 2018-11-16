@@ -1,103 +1,70 @@
 // @flow
 import { colors } from '@atlaskit/theme';
-
-// The following are the name for color mappings in @atlaskit/themes
-// The exports are the functions, not the objects, so could not be used here
-const disabled = { light: colors.N20, dark: colors.DN20 };
-// For validation red is the new 'yellow' which was { light: colors.Y300, dark: colors.Y300 }
-const invalidBorderColor = { light: colors.R400, dark: colors.R400 };
-
-const defaultBorderColorFocus = { light: colors.B100, dark: colors.B75 };
-const defaultBorderColor = { light: colors.N40, dark: colors.DN40 };
-const defaultBackgroundColor = { light: colors.N10, dark: colors.DN10 };
-const defaultBackgroundColorHover = { light: colors.N30, dark: colors.DN30 };
-const defaultBackgroundColorFocus = { light: colors.N0, dark: colors.DN10 };
-
-const placeholderTextColor = { light: colors.N100, dark: colors.DN200 };
-const textColor = { light: colors.N900, dark: colors.DN600 };
-const disabledTextColor = { light: colors.N70, dark: colors.DN90 };
-const transparent = { light: 'transparent', dark: 'transparent' };
+import * as componentTokens from './component-tokens';
 
 export const invalidRules = {
   light: {
-    borderColor: invalidBorderColor.light,
-    borderColorFocus: defaultBorderColorFocus.light,
-    backgroundColor: defaultBackgroundColor.light,
-    backgroundColorFocus: defaultBackgroundColorFocus.light,
-    backgroundColorHover: defaultBackgroundColorHover.light,
+    borderColor: componentTokens.invalidBorderColor.light,
+    borderColorFocus: componentTokens.defaultBorderColorFocus.light,
+    backgroundColor: componentTokens.defaultBackgroundColor.light,
+    backgroundColorFocus: componentTokens.defaultBackgroundColorFocus.light,
+    backgroundColorHover: componentTokens.defaultBackgroundColorHover.light,
   },
   dark: {
-    borderColor: invalidBorderColor.dark,
-    borderColorFocus: defaultBorderColorFocus.dark,
-    backgroundColor: defaultBackgroundColor.dark,
-    backgroundColorFocus: defaultBackgroundColorFocus.dark,
-    backgroundColorHover: defaultBackgroundColorHover.dark,
+    borderColor: componentTokens.invalidBorderColor.dark,
+    borderColorFocus: componentTokens.defaultBorderColorFocus.dark,
+    backgroundColor: componentTokens.defaultBackgroundColor.dark,
+    backgroundColorFocus: componentTokens.defaultBackgroundColorFocus.dark,
+    backgroundColorHover: componentTokens.defaultBackgroundColorHover.dark,
   },
 };
-
 export const disabledRules = {
   light: {
-    backgroundColor: disabled.light,
-    backgroundColorFocus: disabled.light,
-    backgroundColorHover: disabled.light,
-    borderColor: defaultBorderColor.light,
-    borderColorFocus: defaultBorderColorFocus.light,
-    textColor: disabledTextColor.light,
+    backgroundColor: componentTokens.disabled.light,
+    backgroundColorFocus: componentTokens.disabled.light,
+    backgroundColorHover: componentTokens.disabled.light,
+    borderColor: componentTokens.defaultBorderColor.light,
+    borderColorFocus: componentTokens.defaultBorderColorFocus.light,
+    textColor: componentTokens.disabledTextColor.light,
   },
   dark: {
-    backgroundColor: disabled.dark,
-    backgroundColorFocus: disabled.dark,
-    backgroundColorHover: disabled.dark,
-    borderColor: defaultBorderColor.dark,
-    borderColorFocus: defaultBorderColorFocus.dark,
-    textColor: disabledTextColor.dark,
+    backgroundColor: componentTokens.disabled.dark,
+    backgroundColorFocus: componentTokens.disabled.dark,
+    backgroundColorHover: componentTokens.disabled.dark,
+    borderColor: componentTokens.defaultBorderColor.dark,
+    borderColorFocus: componentTokens.defaultBorderColorFocus.dark,
+    textColor: componentTokens.disabledTextColor.dark,
   },
 };
 
 // The following do not yet have a darkmode 'map': N20A, N10
 const backgroundColor = {
-  standard: defaultBackgroundColor,
-  subtle: transparent,
-  none: transparent,
+  standard: componentTokens.defaultBackgroundColor,
+  subtle: componentTokens.transparent,
+  none: componentTokens.transparent,
 };
 const backgroundColorFocus = {
-  standard: defaultBackgroundColorFocus,
-  subtle: defaultBackgroundColorFocus,
-  none: transparent,
+  standard: componentTokens.defaultBackgroundColorFocus,
+  subtle: componentTokens.defaultBackgroundColorFocus,
+  none: componentTokens.transparent,
 };
-
 const backgroundColorHover = {
-  standard: defaultBackgroundColorHover,
-  subtle: defaultBackgroundColorHover,
-  none: transparent,
+  standard: componentTokens.defaultBackgroundColorHover,
+  subtle: componentTokens.defaultBackgroundColorHover,
+  none: componentTokens.transparent,
 };
-
 const borderColor = {
-  standard: defaultBorderColor,
-  subtle: transparent,
-  none: transparent,
+  standard: componentTokens.defaultBorderColor,
+  subtle: componentTokens.transparent,
+  none: componentTokens.transparent,
 };
-
 const borderColorFocus = {
-  standard: defaultBorderColorFocus,
-  subtle: defaultBorderColorFocus,
-  none: transparent,
-};
-
-export const themeTokens = {
-  borderColor,
-  borderColorFocus,
-  backgroundColor,
-  backgroundColorFocus,
-  backgroundColorHover,
-  disabledRules,
-  invalidRules,
-  textColor,
-  placeholderTextColor,
+  standard: componentTokens.defaultBorderColorFocus,
+  subtle: componentTokens.defaultBorderColorFocus,
+  none: componentTokens.transparent,
 };
 
 export type ThemeAppearance = 'standard' | 'subtle' | 'none';
-
 export type TextAreaThemeProps = {
   appearance: ThemeAppearance,
   isCompact: boolean,
@@ -123,6 +90,17 @@ export type ThemeProps = {
   mode?: 'light' | 'dark',
 };
 
+export const themeTokens = {
+  borderColor,
+  borderColorFocus,
+  backgroundColor,
+  backgroundColorFocus,
+  backgroundColorHover,
+  disabledRules,
+  invalidRules,
+  textColor: componentTokens.textColor,
+  placeholderTextColor: componentTokens.placeholderTextColor,
+};
 const getTextAreaTheme = mode => ({ appearance }: TextAreaThemeProps) => ({
   borderColor: borderColor[appearance][mode],
   borderColorFocus: borderColorFocus[appearance][mode],
@@ -131,8 +109,8 @@ const getTextAreaTheme = mode => ({ appearance }: TextAreaThemeProps) => ({
   backgroundColor: backgroundColor[appearance][mode],
   disabledRules: disabledRules[mode],
   invalidRules: invalidRules[mode],
-  textColor: textColor[mode],
-  placeholderTextColor: placeholderTextColor[mode],
+  textColor: componentTokens.textColor[mode],
+  placeholderTextColor: componentTokens.placeholderTextColor[mode],
 });
 
 export const theme = (props: ThemeProps): ThemeProps => {
