@@ -11,6 +11,7 @@ import {
   createEditor,
   dispatchPasteEvent,
   bodiedExtension,
+  inlineExtension,
   a as link,
   taskList,
   taskItem,
@@ -23,11 +24,13 @@ import {
   tdCursor,
   hardBreak,
   a,
+  MockMacroProvider,
 } from '@atlaskit/editor-test-helpers';
 import mediaPlugin from '../../../../plugins/media';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import extensionPlugin from '../../../../plugins/extension';
 import tablesPlugin from '../../../../plugins/table';
+import macroPlugin, { setMacroProvider } from '../../../../plugins/macro';
 import { uuid } from '@atlaskit/editor-common';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 
@@ -37,6 +40,7 @@ describe('paste plugins', () => {
       doc,
       editorPlugins: [
         mediaPlugin({ allowMediaSingle: true }),
+        macroPlugin,
         codeBlockPlugin(),
         extensionPlugin,
         tasksAndDecisionsPlugin,
@@ -398,6 +402,70 @@ describe('paste plugins', () => {
               ),
             ),
           ),
+        );
+      });
+    });
+  });
+
+  describe('macroPlugin', () => {
+    const attrs = {
+      extensionType: 'com.atlassian.confluence.macro.core',
+      extensionKey: 'dumbMacro',
+      parameters: {
+        macroParams: { paramA: { value: 'CFE' } },
+        macroMetadata: {
+          macroId: { value: 12345 },
+          placeholder: [
+            {
+              data: { url: '' },
+              type: 'icon',
+            },
+          ],
+        },
+      },
+    };
+
+    it('should convert pasted content to inlineExtension (confluence macro)', () => {
+      it('from plain text url', async () => {
+        const macroProvider = Promise.resolve(new MockMacroProvider({}));
+        const { editorView } = editor(doc(p('{<>}')));
+        await setMacroProvider(macroProvider)(editorView);
+
+        dispatchPasteEvent(editorView, {
+          plain: 'http://www.dumbmacro.com?paramA=CFE',
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p(inlineExtension(attrs)())),
+        );
+      });
+
+      it('from url in pasted html', async () => {
+        const macroProvider = Promise.resolve(new MockMacroProvider({}));
+        const { editorView } = editor(doc(p('{<>}')));
+        await setMacroProvider(macroProvider)(editorView);
+
+        dispatchPasteEvent(editorView, {
+          plain: 'http://www.dumbmacro.com?paramA=CFE',
+          html: `<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+          <html>
+          <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+          <meta http-equiv="Content-Style-Type" content="text/css">
+          <title></title>
+          <meta name="Generator" content="Cocoa HTML Writer">
+          <meta name="CocoaVersion" content="1561.6">
+          <style type="text/css">
+          p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 26.0px 'Helvetica Neue'; color: #000000}
+          </style>
+          </head>
+          <body>
+          <p class="p1">http://www.dumbmacro.com?paramA=CFE</p>
+          </body>
+          </html>
+          `,
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p(inlineExtension(attrs)())),
         );
       });
     });
