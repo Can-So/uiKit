@@ -15,13 +15,15 @@ import PageIcon from '@atlaskit/icon/glyph/page';
 import PortfolioIcon from '@atlaskit/icon/glyph/portfolio';
 import ShipIcon from '@atlaskit/icon/glyph/ship';
 import { JiraIcon, JiraWordmark } from '@atlaskit/logo';
+import Lozenge from '@atlaskit/lozenge';
 import {
   ItemAvatar,
   LayoutManagerWithViewController,
   NavigationProvider,
   ViewController,
+  viewReducerUtils,
   withNavigationViewController,
-} from '../src';
+} from '../../../src';
 
 const MyGlobalNavigation = () => (
   <GlobalNavigation
@@ -308,6 +310,37 @@ const ProjectBacklogRoute = withNavigationViewController(
   ProjectBacklogRouteBase,
 );
 
+class GrowthExperimentBase extends Component<{
+  navigationViewController: ViewController,
+}> {
+  componentDidMount() {
+    const { navigationViewController } = this.props;
+    navigationViewController.addReducer(productHomeView.id, this.reducer);
+  }
+
+  componentWillUnmount() {
+    const { navigationViewController } = this.props;
+    navigationViewController.removeReducer(productHomeView.id, this.reducer);
+  }
+
+  reducer = (viewItems: any): any => {
+    const addBadge = item => ({
+      ...item,
+      after: () => (
+        <Lozenge appearance="success" isBold>
+          New
+        </Lozenge>
+      ),
+    });
+    return viewReducerUtils.findId('portfolio')(addBadge)(viewItems);
+  };
+
+  render() {
+    return null;
+  }
+}
+const GrowthExperiment = withNavigationViewController(GrowthExperimentBase);
+
 class App extends Component<{
   navigationViewController: ViewController,
 }> {
@@ -327,6 +360,7 @@ class App extends Component<{
           <Route path="/issues" component={IssuesAndFiltersRoute} />
           <Route path="/" component={DashboardsRoute} />
         </Switch>
+        <GrowthExperiment />
       </LayoutManagerWithViewController>
     );
   }

@@ -1,8 +1,6 @@
 // @flow
-/* eslint-disable react/no-multi-comp */
 
 import React, { Component } from 'react';
-import { HashRouter, Link, Route, Switch } from 'react-router-dom';
 import GlobalNavigation from '@atlaskit/global-navigation';
 import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
 import FolderIcon from '@atlaskit/icon/glyph/folder';
@@ -14,7 +12,7 @@ import {
   NavigationProvider,
   ViewController,
   withNavigationViewController,
-} from '../src';
+} from '../../../src';
 
 const MyGlobalNavigation = () => (
   <GlobalNavigation
@@ -22,24 +20,6 @@ const MyGlobalNavigation = () => (
     onProductClick={() => {}}
   />
 );
-
-const LinkItem = ({ components: { Item }, to, ...props }: *) => {
-  return (
-    <Route
-      render={({ location: { pathname } }) => (
-        <Item
-          component={({ children, className }) => (
-            <Link className={className} to={to}>
-              {children}
-            </Link>
-          )}
-          isSelected={pathname === to}
-          {...props}
-        />
-      )}
-    />
-  );
-};
 
 const productHomeView = {
   id: 'product/home',
@@ -63,11 +43,10 @@ const productHomeView = {
       parentId: null,
       items: [
         {
-          type: LinkItem,
+          type: 'Item',
           id: 'dashboards',
           before: DashboardIcon,
           text: 'Dashboards',
-          to: '/',
         },
         { type: 'Item', id: 'projects', before: FolderIcon, text: 'Projects' },
         {
@@ -121,12 +100,7 @@ const productIssuesView = {
           text: 'Issues and filters',
           id: 'issues-and-filters-heading',
         },
-        {
-          type: LinkItem,
-          id: 'search-issues',
-          text: 'Search issues',
-          to: '/issues',
-        },
+        { type: 'Item', text: 'Search issues', id: 'search-issues' },
         { type: 'GroupHeading', id: 'other-heading', text: 'Other' },
         { type: 'Item', text: 'My open issues', id: 'my-open-issues' },
         { type: 'Item', text: 'Reported by me', id: 'reported-by-me' },
@@ -144,44 +118,6 @@ const productIssuesView = {
   ],
 };
 
-class DashboardsRouteBase extends Component<{
-  navigationViewController: ViewController,
-}> {
-  componentDidMount() {
-    const { navigationViewController } = this.props;
-    navigationViewController.setView(productHomeView.id);
-  }
-
-  render() {
-    return (
-      <div css={{ padding: 30 }}>
-        <h1>Dashboards</h1>
-      </div>
-    );
-  }
-}
-const DashboardsRoute = withNavigationViewController(DashboardsRouteBase);
-
-class IssuesAndFiltersRouteBase extends Component<{
-  navigationViewController: ViewController,
-}> {
-  componentDidMount() {
-    const { navigationViewController } = this.props;
-    navigationViewController.setView(productIssuesView.id);
-  }
-
-  render() {
-    return (
-      <div css={{ padding: 30 }}>
-        <h1>Issues and filters</h1>
-      </div>
-    );
-  }
-}
-const IssuesAndFiltersRoute = withNavigationViewController(
-  IssuesAndFiltersRouteBase,
-);
-
 class App extends Component<{
   navigationViewController: ViewController,
 }> {
@@ -189,15 +125,13 @@ class App extends Component<{
     const { navigationViewController } = this.props;
     navigationViewController.addView(productHomeView);
     navigationViewController.addView(productIssuesView);
+    navigationViewController.setView(productHomeView.id);
   }
 
   render() {
     return (
       <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
-        <Switch>
-          <Route path="/issues" component={IssuesAndFiltersRoute} />
-          <Route path="/" component={DashboardsRoute} />
-        </Switch>
+        <div css={{ padding: 30 }}>Page content goes here.</div>
       </LayoutManagerWithViewController>
     );
   }
@@ -205,9 +139,7 @@ class App extends Component<{
 const AppWithNavigationViewController = withNavigationViewController(App);
 
 export default () => (
-  <HashRouter>
-    <NavigationProvider>
-      <AppWithNavigationViewController />
-    </NavigationProvider>
-  </HashRouter>
+  <NavigationProvider>
+    <AppWithNavigationViewController />
+  </NavigationProvider>
 );

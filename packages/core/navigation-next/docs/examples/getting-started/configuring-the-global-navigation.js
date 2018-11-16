@@ -3,7 +3,7 @@
 import React from 'react';
 import GlobalNavigation from '@atlaskit/global-navigation';
 import { AtlassianIcon } from '@atlaskit/logo';
-import { LayoutManager, NavigationProvider } from '../src';
+import { LayoutManager, NavigationProvider } from '../../../src';
 
 const MyGlobalNavigation = () => (
   <GlobalNavigation
