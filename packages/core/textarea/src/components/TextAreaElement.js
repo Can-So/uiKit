@@ -1,86 +1,73 @@
 // @flow
 import React, { Component, type ElementRef } from 'react';
-import AutoResize from './AutoResize';
 
 type Props = {
   innerRef?: (ElementRef<*>) => void,
   resize?: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
-  /** The value of the text-area. */
-  value?: string | number,
-  /** The default value of the text-area */
-  defaultValue: string | number,
+  // /** The value of the text-area. */
+  // value?: string | number,
+  // /** The default value of the text-area */
+  // defaultValue?: string | number,
   /** Handler to be called when the input changes. */
   onChange?: (event: SyntheticInputEvent<HTMLTextAreaElement>) => void,
 };
 
 type State = {
-  value: string | number,
-  isFocused: boolean,
+  height: string,
 };
 
 export default class FTextArea extends Component<Props, State> {
-  static defaultProps = {
-    defaultValue: '',
-  };
+  textareaRef = React.createRef();
 
   state = {
-    isFocused: false,
-    value:
-      this.props.value !== undefined
-        ? this.props.value
-        : this.props.defaultValue,
+    height: '100%',
   };
 
-  getValue = () => {
-    return this.props.value !== undefined ? this.props.value : this.state.value;
-  };
+  componentDidMount() {
+    if (this.props.resize === 'smart' && this.textareaRef.current) {
+      this.setState({
+        // eslint-disable-line
+        height: `${this.textareaRef.current.scrollHeight}px`,
+      });
+    }
+  }
 
   handleOnChange = (event: SyntheticInputEvent<HTMLTextAreaElement>) => {
     const { onChange } = this.props;
-
-    this.setState({
-      value: event.currentTarget.value,
-    });
+    if (this.props.resize === 'smart') {
+      this.setState(
+        {
+          height: 'auto',
+        },
+        () => {
+          if (this.props.resize === 'smart' && this.textareaRef.current) {
+            this.setState({
+              height: `${this.textareaRef.current.scrollHeight}px`,
+            });
+          }
+        },
+      );
+    }
 
     if (onChange) {
       onChange(event);
     }
   };
 
-  handleTextAreaRef = (
-    textAreaRef: ElementRef<*>,
-    refFn: (ElementRef<*>) => void = () => {},
-  ) => {
-    refFn(textAreaRef);
-    if (typeof this.props.innerRef === 'function') {
-      this.props.innerRef(textAreaRef);
-    }
-  };
-
   render() {
-    const { resize, defaultValue, ...props } = this.props;
-    const value = this.getValue();
-    if (resize === 'smart')
+    const { resize, innerRef, ...props } = this.props;
+
+    const { height } = this.state;
+    if (resize === 'smart') {
       return (
-        <AutoResize value={value}>
-          {(height, ref) => (
-            <textarea
-              {...props}
-              ref={textAreaRef => this.handleTextAreaRef(textAreaRef, ref)}
-              style={{ height }}
-              value={value}
-              onChange={this.handleOnChange}
-            />
-          )}
-        </AutoResize>
+        <textarea
+          {...props}
+          onChange={this.handleOnChange}
+          ref={this.textareaRef}
+          style={{ height }}
+        />
       );
-    return (
-      <textarea
-        ref={this.handleTextAreaRef}
-        {...props}
-        value={value}
-        onChange={this.handleOnChange}
-      />
-    );
+    }
+    return <textarea style={{ height: '100%' }} {...props} />;
   }
 }
