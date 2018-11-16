@@ -1,0 +1,1 @@
+- Add Confluence cards in Editor example.
