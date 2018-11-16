@@ -3,9 +3,12 @@
 // gets called with a sythetic event and pulls the relevent value of of it
 const translate = fn => e => {
   if (e.target) {
-    const { target } = e;
-    if (target.checked !== undefined) {
-      fn(target.checked ? target.value : undefined);
+    if (e.target.type === 'checkbox') {
+      if (e.target.checked) {
+        fn(e.target.value || true);
+      } else {
+        fn(e.target.value ? undefined : false);
+      }
     } else {
       fn(e.target.value);
     }

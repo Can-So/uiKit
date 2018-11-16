@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import Select from '@atlaskit/select';
 import FieldText from '@atlaskit/field-text';
 import Button from '@atlaskit/button';
+import { RadioGroup } from '@atlaskit/radio';
 import { Checkbox } from '@atlaskit/checkbox';
 
 import { FormHeader, FormSection, FormFooter } from '../src';
@@ -125,6 +126,24 @@ export default class LayoutExample extends PureComponent<void, State> {
                     <Checkbox
                       label="This is a private repository"
                       isChecked={!!value}
+                      {...others}
+                    />
+                  )}
+                </Field>
+                <Field name="color" label="Pick a color">
+                  {({ fieldProps: { value, ...others } }) => (
+                    <RadioGroup
+                      options={[
+                        { name: 'color', value: 'red', label: 'Red' },
+                        {
+                          name: 'color',
+                          value: 'blue',
+                          label: 'Blue',
+                        },
+                        { name: 'color', value: 'yellow', label: 'Yellow' },
+                        { name: 'color', value: 'green', label: 'Green' },
+                      ]}
+                      checkedValue={value}
                       {...others}
                     />
                   )}

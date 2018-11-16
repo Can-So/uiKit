@@ -66,6 +66,7 @@ class Field extends React.Component<
       onBlur,
       onFocus,
       value,
+      name,
     };
     return (
       <FieldWrapper>
