@@ -17,8 +17,6 @@ const macroKeywordTokenMap = {
  * will be checked first, so it matters.
  */
 const keywordTokenMap = {
-  '[~': TokenType.MENTION,
-  '[^': TokenType.FLIE_LINK,
   '[': TokenType.LINK_FORMAT,
   http: TokenType.LINK_TEXT,
   irc: TokenType.LINK_TEXT,

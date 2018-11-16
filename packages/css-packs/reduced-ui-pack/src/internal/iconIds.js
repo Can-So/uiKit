@@ -307,7 +307,6 @@ const iconIds: Array<string> = [
   'sign-out',
   'star-filled',
   'star-large',
-  'star-outline',
   'star',
   'subtask',
   'suitcase',

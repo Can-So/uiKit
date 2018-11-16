@@ -3,7 +3,7 @@ import { createDashTokenParser } from './dash-token-creator';
 
 const token: TextToken = {
   type: 'text',
-  text: '—',
+  text: '\u2014', // EM DASH
   length: 3,
 };
 const fallback: TextToken = {

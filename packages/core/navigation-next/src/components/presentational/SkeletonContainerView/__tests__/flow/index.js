@@ -6,4 +6,4 @@ import SkeletonContainerView from '../../index';
 <SkeletonContainerView />;
 
 // $ExpectError - invalid prop
-<SkeletonContainerView foo />;
+<SkeletonContainerView type={'foo'} />;
