@@ -1,0 +1,1 @@
+- FS-3186 disable tooltip when hovering over avatar in picker

@@ -266,7 +266,9 @@ export class UserPicker extends React.PureComponent<Props, State> {
         isLoading={count > 0 || isLoading}
         onInputChange={this.handleInputChange}
         menuPlacement="auto"
-        placeholder={placeholder || <FormattedMessage {...messages.placeholder} />}
+        placeholder={
+          placeholder || <FormattedMessage {...messages.placeholder} />
+        }
         classNamePrefix="fabric-user-picker"
         onClearIndicatorHover={this.handleClearIndicatorHover}
         hoveringClearIndicator={hoveringClearIndicator}
