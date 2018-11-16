@@ -12,4 +12,9 @@ export const messages = defineMessages({
     description:
       'Tooltip for the single item remove button in a multi user select field.',
   },
+  clear: {
+    id: 'fabric.elements.user-picker.single.clear',
+    defaultMessage: 'Clear',
+    description: 'Tooltip for clear button in the single user select field.',
+  },
 });
