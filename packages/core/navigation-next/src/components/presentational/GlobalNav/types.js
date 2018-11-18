@@ -5,6 +5,7 @@ import GlobalItem from '../GlobalItem';
 import type { GlobalTheme } from '../../../theme/types';
 
 type ItemDataShape = {
+  id: string,
   ...$Exact<ElementConfig<typeof GlobalItem>>,
 };
 
