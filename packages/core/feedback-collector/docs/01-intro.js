@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 import SectionMessage from '@atlaskit/section-message';
 
 export default md`
@@ -20,9 +20,11 @@ ${(
   </SectionMessage>
 )}
 
-## Feedback collector
-
 Feedback collector is a wrapper around feedback form component that collects customer feedback across Atlassian products.
+
+## Usage
+
+${code`import FeedbackCollector, { FeedbackFlag, FeedbackForm } from '@atlaskit/feedback-collector';`}
 
 ${(
   <Example
@@ -35,7 +37,7 @@ ${(
 
 ${(
   <Props
-    heading="Props"
+    heading="Feedback Collector Props"
     props={require('!!extract-react-types-loader!../src/components/FeedbackCollector')}
   />
 )}
@@ -56,7 +58,7 @@ ${(
 
 ${(
   <Props
-    heading="Props"
+    heading="Feedback Form Props"
     props={require('!!extract-react-types-loader!../src/components/FeedbackForm')}
   />
 )}

@@ -157,6 +157,7 @@ const App = () => (
 
   ${(
     <Props
+      heading="LayerManager Props"
       props={require('!!extract-react-types-loader!../src/components/LayerManager')}
     />
   )}

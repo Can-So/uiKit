@@ -8,6 +8,7 @@ import {
   MediaProvider,
   MentionProvider,
   TaskDecisionProvider,
+  EmojiProvider,
 } from '../providers';
 
 import { eventDispatcher } from './dispatcher';
@@ -42,6 +43,7 @@ export default class MobileRenderer extends React.Component<
       mediaProvider: MediaProvider,
       mentionProvider: MentionProvider,
       taskDecisionProvider: Promise.resolve(taskDecisionProvider),
+      emojiProvider: Promise.resolve(EmojiProvider),
     });
 
     this.containerAri = 'MOCK-containerAri';

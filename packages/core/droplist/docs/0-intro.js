@@ -3,9 +3,10 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  ### Usage
 
-  An internal base component for implementing dropdown and select components.
+An internal base component for implementing dropdown and select components.
+
+ ## Usage
 
 ${code`
 import DropList, {
@@ -18,7 +19,6 @@ import DropList, {
   @atlaskit/single-select, @atlaskit/multi-select are built. It contains only styles and
   very basic logic. It does not have any keyboard interactions, selectable logic or
   open/close functionality
-
 
   ${(
     <Example
