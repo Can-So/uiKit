@@ -2,7 +2,7 @@ import { Schema } from 'prosemirror-model';
 import { Token, TokenType } from './';
 import { linkFormat } from './links/link-format';
 import { parseNewlineOnly } from './whitespace';
-import { parseMacroKeyword } from './keyword';
+import { parseMacroKeyword, Keyword } from './keyword';
 import { parseToken } from '.';
 
 export interface FormatterOption {
@@ -94,7 +94,6 @@ export function commonFormatter(
         if (buffer.length === 0) {
           return fallback(input, position, openingSymbolLength);
         }
-
         /**
          * If the closing symbol is followed by a alphanumeric, it's
          * not a valid formatter, and we keep looking for
@@ -102,6 +101,18 @@ export function commonFormatter(
          */
         if (index < input.length) {
           const charAfterEnd = input.charAt(index);
+
+          if (opt.closing === Keyword.STRONG) {
+            if (
+              Keyword.STRONG === twoChar.charAt(0) &&
+              Keyword.STRONG === twoChar.charAt(1)
+            ) {
+              index += 2;
+              buffer += charsMatchClosingSymbol;
+              continue;
+            }
+          }
+
           if (/[a-zA-Z0-9]|[^\u0000-\u007F]/.test(charAfterEnd)) {
             buffer += charsMatchClosingSymbol;
             state = processState.BUFFER;
