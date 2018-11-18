@@ -37,14 +37,12 @@ const rawContentProcessor = (
     panelType: getPanelType(parsedAttrs),
   };
 
-  if (parsedAttrs.title) {
-    output.push(title(parsedAttrs.title, schema));
-  }
-
   const parsedContent = parseString(rawContent, schema, [], tokenErrCallback);
 
   const normalizedContent = normalizePMNodes(parsedContent, schema);
-  let contentBuffer: PMNode[] = [];
+  let contentBuffer: PMNode[] = parsedAttrs.title
+    ? [title(parsedAttrs.title, schema)]
+    : [];
 
   for (const n of normalizedContent) {
     if (allowedNodeType.indexOf(n.type.name) !== -1) {

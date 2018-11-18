@@ -44,6 +44,7 @@ import {
   floatingToolbarPlugin,
   statusPlugin,
   gridPlugin,
+  alignment,
 } from '../plugins';
 
 /**
@@ -72,6 +73,10 @@ export default function createPluginsList(props: EditorProps): EditorPlugin[] {
 
   if (props.allowBreakout) {
     plugins.push(breakoutPlugin);
+  }
+
+  if (props.allowTextAlignment) {
+    plugins.push(alignment);
   }
 
   if (props.quickInsert) {

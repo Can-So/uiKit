@@ -1,5 +1,25 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.4.4
+- [patch] [01a92e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01a92e1):
+
+  - Title for panel and noformat changes
+
+## 2.4.3
+- [patch] [131e012](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/131e012):
+
+  - Port from Jira regex for dashes
+
+## 2.4.2
+- [patch] [171443f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/171443f):
+
+  - Re-wrtie table parser
+
+## 2.4.1
+- [patch] [930ca26](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/930ca26):
+
+  - Fixed issue with library importing from a path within the editor common package
+
 ## 2.4.0
 - [minor] [8681fc0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8681fc0):
 

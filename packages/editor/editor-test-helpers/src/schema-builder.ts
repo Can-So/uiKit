@@ -9,6 +9,7 @@ import {
   TableAttributes,
   CardAttributes,
   BreakoutMarkAttrs,
+  AlignmentAttributes,
 } from '@atlaskit/editor-common';
 import {
   Fragment,
@@ -17,6 +18,7 @@ import {
   NodeType,
   Schema,
   Slice,
+  Mark,
 } from 'prosemirror-model';
 import matches from './matches';
 import sampleSchema from './schema';
@@ -204,7 +206,7 @@ export function coerce(content: BuilderContent[], schema: Schema) {
 /**
  * Create a factory for nodes.
  */
-export function nodeFactory(type: NodeType, attrs = {}) {
+export function nodeFactory(type: NodeType, attrs = {}, marks?: Mark[]) {
   return function(...content: BuilderContent[]): (schema: Schema) => RefsNode {
     return schema => {
       const { nodes, refs } = coerce(content, schema);
@@ -218,7 +220,7 @@ export function nodeFactory(type: NodeType, attrs = {}) {
           ).join(', ')}`,
         );
       }
-      const node = nodeBuilder.createChecked(attrs, nodes) as RefsNode;
+      const node = nodeBuilder.createChecked(attrs, nodes, marks) as RefsNode;
       node.refs = refs;
       return node;
     };
@@ -428,3 +430,7 @@ export const confluenceInlineComment = (attrs: { reference: string }) =>
     attrs ? attrs : {},
     true,
   );
+
+/** Block marks */
+export const alignment = (attrs: AlignmentAttributes) =>
+  markFactory(sampleSchema.marks.alignment, attrs);

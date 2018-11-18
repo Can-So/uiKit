@@ -96,6 +96,24 @@ const ContentStyles: ComponentClass<HTMLAttributes<{}>> = styled.div`
   .mediaGroupView-content-wrap ul {
     padding: 0;
   }
+
+  /** Needed to override any cleared floats, e.g. image wrapping */
+  div[class^='align'] {
+    clear: none !important;
+  }
+
+  .align-end {
+    text-align: right;
+  }
+
+  .align-start {
+    text-align: left;
+  }
+
+  .align-center {
+    text-align: center;
+  }
+
 `;
 
 export default ContentStyles;
