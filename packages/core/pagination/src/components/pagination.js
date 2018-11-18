@@ -7,7 +7,7 @@ import {
 } from '@atlaskit/analytics-next';
 import PageComponent from './page';
 import { LeftNavigator, RightNavigator } from './navigators';
-import Ellipsis from './ellipses';
+import Ellipsis from './ellipsis';
 import collapseRangeHelper from '../util/collapse-range';
 import {
   name as packageName,
