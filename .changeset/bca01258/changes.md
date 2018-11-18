@@ -1,0 +1,1 @@
+- Update flowtypes of UIController to allow consumer supplied cache getters to return null/undefined
