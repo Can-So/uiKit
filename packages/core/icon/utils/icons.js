@@ -300,6 +300,7 @@ import RadioIcon from '../glyph/radio';
 import RecentIcon from '../glyph/recent';
 import RedoIcon from '../glyph/redo';
 import RefreshIcon from '../glyph/refresh';
+import RetryIcon from '../glyph/retry';
 import RoadmapIcon from '../glyph/roadmap';
 import RoomMenuIcon from '../glyph/room-menu';
 import ScheduleFilledIcon from '../glyph/schedule-filled';
@@ -2104,6 +2105,12 @@ export default {
     component: RefreshIcon,
     componentName: 'RefreshIcon',
     package: '@atlaskit/icon/glyph/refresh',
+  },
+  retry: {
+    keywords: ['retry', 'icon', 'core'],
+    component: RetryIcon,
+    componentName: 'RetryIcon',
+    package: '@atlaskit/icon/glyph/retry',
   },
   roadmap: {
     keywords: ['roadmap', 'icon', 'core'],

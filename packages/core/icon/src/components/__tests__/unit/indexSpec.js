@@ -298,6 +298,7 @@ describe(name, () => {
         'recent',
         'redo',
         'refresh',
+        'retry',
         'room-menu',
         'schedule-filled',
         'schedule',
