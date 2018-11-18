@@ -1,8 +1,8 @@
-import Avatar from '@atlaskit/avatar';
 import Tag from '@atlaskit/tag';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from './i18n';
+import { SizeableAvatar } from './SizeableAvatar';
 
 export const scrollToValue = (
   valueContainer: HTMLElement,
@@ -54,7 +54,13 @@ export class MultiValue extends React.PureComponent<any> {
               {...innerProps}
               appearance="rounded"
               text={label}
-              elemBefore={<Avatar size="xsmall" src={avatarUrl} />}
+              elemBefore={
+                <SizeableAvatar
+                  appearance="compact"
+                  src={avatarUrl}
+                  name={label}
+                />
+              }
               removeButtonText={fixed ? undefined : remove}
               onAfterRemoveAction={onRemove}
               color={isFocused ? 'blueLight' : undefined}
