@@ -425,7 +425,7 @@ describe('paste plugins', () => {
       },
     };
 
-    it('should convert pasted content to inlineExtension (confluence macro)', () => {
+    describe('should convert pasted content to inlineExtension (confluence macro)', () => {
       it('from plain text url', async () => {
         const macroProvider = Promise.resolve(new MockMacroProvider({}));
         const { editorView } = editor(doc(p('{<>}')));
