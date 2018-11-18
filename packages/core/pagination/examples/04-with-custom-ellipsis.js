@@ -5,7 +5,6 @@ import Pagination from '../src';
 
 export default () => (
   <div style={{ margin: '20px' }}>
-    <h2>Basic Pagination:</h2>
     <Pagination
       ellipsisComponent={({ key }) => (
         <Button appearance="subtle" key={key} isDisabled>
