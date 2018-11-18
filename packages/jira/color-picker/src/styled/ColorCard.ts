@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components';
-import { ComponentClass, HTMLAttributes } from 'react';
 import { borderRadius, colors } from '@atlaskit/theme';
 import { COLOR_CARD_SIZE } from '../constants';
 
-interface Props {
+interface ColorCardProps {
   focused?: boolean;
 }
 
@@ -24,9 +23,7 @@ const sharedColorContainerStyles = css`
   outline: none;
 `;
 
-export const ColorCardOption: ComponentClass<
-  HTMLAttributes<{}> & Props
-> = styled.div`
+export const ColorCardOption = styled.div<ColorCardProps>`
   ${sharedColorContainerStyles};
 
   ${props => {
@@ -36,9 +33,7 @@ export const ColorCardOption: ComponentClass<
   }};
 `;
 
-export const ColorCardButton: ComponentClass<
-  HTMLAttributes<{}> & Props
-> = styled.button`
+export const ColorCardButton = styled.button<ColorCardProps>`
   ${sharedColorContainerStyles};
 
   &:focus {
@@ -52,9 +47,11 @@ export const ColorCardButton: ComponentClass<
   }};
 `;
 
-export const ColorCardContent: ComponentClass<
-  HTMLAttributes<{}> & { color: string }
-> = styled.div`
+interface ColorCardContentProps {
+  color: string;
+}
+
+export const ColorCardContent = styled.div<ColorCardContentProps>`
   position: absolute;
   top: 1px;
   left: 1px;
