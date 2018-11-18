@@ -9,7 +9,6 @@ import type {
   ExperimentalFeatureFlags,
   GetRefs,
 } from '../../presentational/LayoutManager/types';
-import type { ItemsRendererProps } from '../../../renderer/types';
 
 import type { WithNavigationViewControllerProps } from '../../../view-controller/types';
 
@@ -26,7 +25,7 @@ export type AsyncLayoutManagerWithViewControllerProps = {|
   navigationUIController: UIController,
   navigationViewController: ViewController,
   firstSkeletonToRender?: 'product' | 'container',
-  viewRenderer: ComponentType<ItemsRendererProps>,
+  viewRenderer: ComponentType<*>,
 |};
 
 export type AsyncLayoutManagerWithViewControllerState = {
