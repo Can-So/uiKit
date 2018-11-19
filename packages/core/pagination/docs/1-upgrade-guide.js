@@ -55,34 +55,6 @@ ${code`
 
 - **onChange**: The function signature has been updated to \`( event: SyntheticEvent, newSelectedPageIndex: number, analyticsEvent: UIAnalyticsEvent ) => void\`
 
-### 𝌙 Advance Usage
-
-#### Passing in the <Link> component from react-router
-
-You can replace parts of the pagination UI by passing in previousPageComponent, nextPageComponent, pageComponent and ellipsisComponent.
-
-The following will render the pagination component by replacing the @atlaskit/button component with the <Link> component from react-router.
-
-${code`
-import Pagination from '@atlaskit/pagination';
-import { Link } from 'react-router-dom';
-
-// Wrapper component for page link
-function RouterLink (props) {
-  const { page } = props;
-  return <Link
-      to={page.to}
-    >
-      {page.label}
-    </Link>
-}
-
-<Pagination 
-  pages={[{ label: '1', to: '/home' }, { label: '2', to: '/about' }, { label: '3', to: '/contact' } ]}
-  pageComponent={RouterLink}
-/>
-`}
-
 ## v7 to v8
 
 ### 🎉 ADG styling
