@@ -36,7 +36,7 @@ async function getPackagesInfo(cwd /*: string */) {
 
       let hasKarmaDep = !!allDependencies.karma;
 
-      let isTypeScript = tsConfigExists;
+      let isTypeScript = tsConfigExists && !isWebsitePackage;
       let isTSLint = isTypeScript || tslintConfigExists;
 
       let isBabel = srcExists && !isTypeScript && !isWebsitePackage;
@@ -46,7 +46,7 @@ async function getPackagesInfo(cwd /*: string */) {
       let isKarma = testBrowserExists || hasKarmaDep;
       let isBrowserStack = isKarma;
       let isStylelint = srcExists && isBrowserPackage;
-      let isWebdriver = testWebdriverExists && !isWebsitePackage; // The website has an integration tests that will only run on a schedule build
+      let isWebdriver = testWebdriverExists;
       let isVisualRegression = testVisualRegressionExists;
 
       return {

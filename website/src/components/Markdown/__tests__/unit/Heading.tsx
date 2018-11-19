@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Heading from '../../Heading';
 import { mount } from 'enzyme';
-// TODO: Fix the console error thrown
+// A console error is thrown because 'h' + level is not recognized as a React component
 test('children', () => {
   const wrapper1 = mount(<Heading level={0} />);
   const wrapper2 = mount(<Heading level={0}>testing content</Heading>);
