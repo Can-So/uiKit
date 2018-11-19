@@ -57,7 +57,7 @@ type Props = {
   /** The theme function TextArea consumes to derive theming constants for use in styling its components */
   theme: ThemeProps => ThemeProps,
   /** Ref used to access the textarea dom element. NOTE we expose this via forwardRef,
-  so you can also use the ref prop of this component to the same effect. */
+   so you can also use the ref prop of this component to the same effect. */
   textareaRef: (HTMLTextAreaElement | null) => void,
 };
 type State = {
@@ -101,8 +101,8 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
 
   render() {
     const {
-      // eslint-disable-next-line react/prop-types
-      createAnalyticsEvent,
+      //$FlowFixMe
+      createAnalyticsEvent, //eslint-disable-line react/prop-types
       appearance,
       resize,
       isCompact,
