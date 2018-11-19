@@ -69,7 +69,9 @@ export class Dropzone extends LocalUploadComponent<
   }
 
   private readonly onFileDropped = (dragEvent: DragEvent) => {
-    if (!dragEvent.dataTransfer) return;
+    if (!dragEvent.dataTransfer) {
+      return;
+    }
 
     dragEvent.preventDefault();
     dragEvent.stopPropagation();
@@ -200,7 +202,9 @@ export class Dropzone extends LocalUploadComponent<
   }
 
   private static dragContainsFiles(event: DragEvent): boolean {
-    if (!event.dataTransfer) return false;
+    if (!event.dataTransfer) {
+      return false;
+    }
 
     const { types } = event.dataTransfer;
 
