@@ -29,6 +29,7 @@ export default class ViewController extends Container<ViewControllerState>
 
   constructor({ isDebugEnabled }: ViewControllerProps = defaultProps) {
     super();
+
     if (typeof isDebugEnabled !== 'undefined') {
       this.isDebugEnabled = isDebugEnabled;
     }

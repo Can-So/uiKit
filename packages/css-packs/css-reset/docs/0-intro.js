@@ -3,17 +3,10 @@ import React from 'react';
 import { md, code, Example } from '@atlaskit/docs';
 
 export default md`
-# CSS Reset
 
 This package exports a CSS file which provides a minimal reset along with base styles for many HTML elements. It is meant to be used as a basis for all styling to be built upon.
 
-## Installation
-
-${code`
-npm install @atlaskit/css-reset
-`}
-
-## Including css-reset in your application
+## Usage
 
 Please include the stylesheet bundle available in css-reset package.
 

@@ -15,6 +15,10 @@ describe('JIRA wiki markup - Macros', () => {
       '{noformat}{code}code inside noformat{code}{noformat}',
     ],
     [
+      'should title of noformat',
+      '{noformat:title=title}code inside noformat{noformat}',
+    ],
+    [
       'should not process code contents',
       '{code:xml}this is a {color:red}colored text{color}{noformat}{code}',
     ],

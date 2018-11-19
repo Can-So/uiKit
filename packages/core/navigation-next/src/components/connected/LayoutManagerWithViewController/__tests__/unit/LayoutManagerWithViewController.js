@@ -73,12 +73,9 @@ describe('LayoutManagerWithViewController', () => {
           .firstSkeletonToRender,
       ).toBe('product');
 
-      expect(
-        wrapper
-          .find('SkeletonItem')
-          .first()
-          .props().theme.context,
-      ).toBe('product');
+      expect(wrapper.find('SkeletonContainerView').props().type).toEqual(
+        'product',
+      );
     });
 
     it('should render skeleton using `container` context', () => {
@@ -100,10 +97,10 @@ describe('LayoutManagerWithViewController', () => {
 
       expect(
         containerWrapper
-          .find('SkeletonItem')
+          .find('SkeletonContainerView')
           .first()
-          .props().theme.context,
-      ).toBe('container');
+          .props().type,
+      ).toEqual('container');
     });
   });
 
@@ -130,12 +127,20 @@ describe('LayoutManagerWithViewController', () => {
     const productView = {
       type: 'product',
       id: 'product-view',
-      getItems: () => [{ type: ProductItem, id: 'product-item' }],
+      getItems: () => [
+        { type: 'InlineComponent', component: ProductItem, id: 'product-item' },
+      ],
     };
     const containerView = {
       type: 'container',
       id: 'container-view',
-      getItems: () => [{ type: ContainerItem, id: 'container-item' }],
+      getItems: () => [
+        {
+          type: 'InlineComponent',
+          component: ContainerItem,
+          id: 'container-item',
+        },
+      ],
     };
 
     it('should continue rendering the last product view when transitioning from product -> container', () => {

@@ -12,7 +12,7 @@ import type { SectionPresentationProps } from '../components/presentational/Sect
 /**
  * Types
  */
-type ObjectType = { [string]: * };
+type ObjectType = { [string]: any };
 
 type ContentNavigationComponentThemeObject = {
   container: ObjectType,
@@ -42,7 +42,6 @@ export type Mode = {
   heading: ContentNavigationComponentTheme<void>,
   item: ContentNavigationComponentTheme<ItemPresentationProps>,
   contentNav: ContentNavigationComponentTheme<void>,
-  scrollHint: ContentNavigationComponentTheme<void>,
   section: ContentNavigationComponentTheme<SectionPresentationProps>,
   separator: ContentNavigationComponentTheme<void>,
   skeletonItem: ContentNavigationComponentTheme<void>,

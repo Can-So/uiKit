@@ -12,6 +12,7 @@ import TextColor from './textColor';
 import Underline from './underline';
 import Action from './action';
 import Breakout from './breakout';
+import Alignment from './alignment';
 
 // Stage0
 import ConfluenceInlineComment from './confluence-inline-comment';
@@ -30,6 +31,7 @@ export const markToReact = {
   // Stage0
   confluenceInlineComment: ConfluenceInlineComment,
   breakout: Breakout,
+  alignment: Alignment,
 };
 
 export const toReact = (mark: Mark): ComponentClass<any> => {

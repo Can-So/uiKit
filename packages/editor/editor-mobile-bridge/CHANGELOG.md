@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 5.5.0
+- [minor] [586100b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/586100b):
+
+  - ED-5584: Added Emoji support to the renderer.
+
 ## 5.4.1
 - [patch] [05a4cf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05a4cf3):
 

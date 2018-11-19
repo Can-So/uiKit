@@ -61,5 +61,6 @@ export const defaultSchema: Schema = createSchema({
     'textColor',
     'confluenceInlineComment',
     'breakout',
+    'alignment',
   ],
 });

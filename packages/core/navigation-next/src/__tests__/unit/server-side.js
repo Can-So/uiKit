@@ -9,6 +9,8 @@ import ReactDOMServer from 'react-dom/server';
 
 const examplesWithDomOrBrowser = [
   '0-navigation-app',
+  '12-async-load-layout-manager',
+  '13-async-load-layout-manager-with-view-controller',
   '9999-views-controller-adding-routes',
   '9999-views-controller-asynchronous-views',
   '9999-views-controller-container-views',
