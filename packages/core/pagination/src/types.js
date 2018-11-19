@@ -52,7 +52,7 @@ export type PaginationPropTypes = {
   max: number,
   /** The component to be displayed in place of the next page button */
   nextPageComponent?: ComponentType<*>,
-  /** onChange handler for when page is chagned */
+  /** onChange handler for when page is changed */
   onChange?: (
     event: SyntheticEvent<>,
     pageIndex: number,

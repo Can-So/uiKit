@@ -8,36 +8,14 @@ export default md`
 
 ### ⚡️ Highlights
 
-- Ability to pass in custom components
-- Control the number of pages to be displayed
-- Ability to provide custom logic to collapse the pages
-- Pass in innerStyles to Pagination component
-
-### 🆕 Props added:
-
-- **pages**: ( ***Required*** ) Pages to displayed in the pagination
-- **defaultSelectedIndex**: The index of the defualt selected page
-- **selectedIndex**: The index of currently selected page. Incase you want to control the selected page
-- **collapseRange**: Function used to create a collapsed range of the pages to display
-- **pageComponent**: A react component to be rendered instead of the defualt subtle atlaskit button.
-- **previousPageComponent**: A react component to be rendered instead of the defualt subtle atlaskit button.
-- **nextPageComponent**: A react component to be rendered instead of the defualt subtle atlaskit button.
-- **ellipsisComponent**: A react component to be rendered instead of default ellipsis component.
-- **innerStyles**: A styles object that is spread on the styles on the div wrapping pagination. Ideal for adding margins as required as per guideline.
-
-### 🚨 Depcrecated Props:
-
-- **defaultValue**: Please use ***defaultSelectedIndex*** instead
-- **total**: Please use ***pages*** instead and pass in array of pages instead of just a number
-- **value**: Please use ***selectedIndex*** instead
-
-### ⏫ Props updated:
-
-- **onChange**: The function signature has been updated to \`( event: SyntheticEvent, newSelectedPageIndex: number, analyticsEvent: UIAnalyticsEvent ) => void\`
+- Ability to extend the pagination UI with custom components
+- Control the maximum number of pages to be displayed
+- Ability to customise the logic to collapse the pagination affordance
+- Pass in extra styling to the pagination container component so you can omit the use of style wrappers
 
 ### 💻 Upgrading:
 
-In v8 we used to create pagination like following:
+In v8 we used to create pagination components like the following:
 
 ${code`
 <Pagination
@@ -46,49 +24,51 @@ ${code`
 />
 `}
 
-In v9 instead of total we should pass in the array of pages. So, the above code needs to be re-written in v9 as:
+The above code could be written in v9 as:
 
 ${code`
 <Pagination
-  pages={[ ...Array(10).map((_, i) => i + 1) ]} // or [ 1, 2, 3, 4, 5,... , 10 ]
+  pages={[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]} // or [ ...Array(10) ].map((_, i) => i + 1)
   onChange={(e, newSelectedPage) => console.log('page changed', newSelectedPage)}
 />
 `}
 
+### 🆕 Props added:
+
+- **pages**: ( ***Required*** ) Array of pages to the rendered by the Pagination component
+- **defaultSelectedIndex**: The index of the page to be selected by default
+- **selectedIndex**: The index of the page to be selected.
+- **collapseRange**: A function which should return an Array of pages to be rendered by Pagination component
+- **pageComponent**: A react component to be rendered instead of the default subtle atlaskit button.
+- **previousPageComponent**: A react component to be rendered instead of the default subtle atlaskit button.
+- **nextPageComponent**: A react component to be rendered instead of the default subtle atlaskit button.
+- **ellipsisComponent**: A react component to be rendered instead of default ellipsis component.
+- **innerStyles**: A styles object that is spread on the styles on the div wrapping pagination. Ideal for adding margins as required by the ADG guideline.
+
+### 🚨 Depcrecated Props:
+
+- **defaultValue**: Please use ***defaultSelectedIndex*** prop instead
+- **total**: Please use ***pages*** prop and pass in array of pages instead
+- **value**: Please use ***selectedIndex*** prop instead
+
+### ⏫ Props updated:
+
+- **onChange**: The function signature has been updated to \`( event: SyntheticEvent, newSelectedPageIndex: number, analyticsEvent: UIAnalyticsEvent ) => void\`
+
 ### 𝌙 Advance Usage
 
-#### Passing in custom component for pages:
+#### Passing in the <Link> component from react-router
 
-We can you use the **previousPageComponent**, **nextPageComponent**, **pageComponent** and **ellipsisComponent** to replace the default components respectively.
+You can replace parts of the pagination UI by passing in previousPageComponent, nextPageComponent, pageComponent and ellipsisComponent.
 
-Following usage will render the custom component passed in instead of the subtle @atlaskit/button for pages.
+The following will render the pagination component by replacing the @atlaskit/button component with the <Link> component from react-router.
 
 ${code`
 import Pagination from '@atlaskit/pagination';
 import { Link } from 'react-router-dom';
 
-// Wrapper component for right navigator
-function RouterLinkNavigationRight (props) {
-  const { pages, selectedIndex } = props;
-  return <Link
-      to={pages[selectedIndex + 1].to}
-    >
-      Next
-    </Link>
-}
-
-// Wrapper component for left navigator
-function RouterLinkNavigationLeft (props) {
-  const { pages, selectedIndex } = props;
-  return <Link
-      to={pages[selectedIndex - 1].to}
-    >
-      Previous
-    </Link>
-}
-
 // Wrapper component for page link
-function RouterLinkPage (props) {
+function RouterLink (props) {
   const { page } = props;
   return <Link
       to={page.to}
@@ -100,8 +80,6 @@ function RouterLinkPage (props) {
 <Pagination 
   pages={[{ label: '1', to: '/home' }, { label: '2', to: '/about' }, { label: '3', to: '/contact' } ]}
   pageComponent={RouterLink}
-  previousPageComponent={RouterLinkNavigationLeft}
-  previousPageComponent={RouterLinkNavigationRight}
 />
 `}
 
