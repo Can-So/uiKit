@@ -77,7 +77,7 @@ export class GlobalQuickSearch extends React.Component<Props, State> {
 
   debouncedSearch = debounce(this.doSearch, 350);
 
-  async doSearch(query: string) {
+  doSearch(query: string) {
     const {
       onSearch,
       searchSessionId,
