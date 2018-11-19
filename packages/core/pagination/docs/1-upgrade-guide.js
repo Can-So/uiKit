@@ -59,7 +59,7 @@ ${code`
 
 #### Passing in the <Link> component from react-router
 
-You can replace parts of the pagination UI by passing in previousPageComponent, nextPageComponent, pageComponent and ellipsisComponent.
+You can replace parts of the pagination UI by passing in previousPageComponent, nextPageComponent, pageComponent and ellipsisComponent.
 
 The following will render the pagination component by replacing the @atlaskit/button component with the <Link> component from react-router.
 
