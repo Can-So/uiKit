@@ -15,8 +15,6 @@ type Props = {
   label?: Node,
   /* The name of the field */
   name: string,
-  /* the type of the field */
-  type?: 'checkbox',
   /* validates the current value of field */
   validate: any => string | Promise<string> | void,
 };
@@ -60,6 +58,7 @@ class Field extends React.Component<
             valid: true,
             value: true,
             error: true,
+            submitError: true,
           },
           {
             getValidator: () => this.props.validate,
@@ -84,7 +83,7 @@ class Field extends React.Component<
       onFocus,
       value,
       name,
-      isInvalid: !!rest.error,
+      isInvalid: !!rest.error || !!rest.submitError,
     };
     return (
       <FieldWrapper>
