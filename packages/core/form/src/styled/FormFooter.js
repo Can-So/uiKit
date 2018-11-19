@@ -7,5 +7,6 @@ import styled from 'styled-components';
  */
 export const FormFooterWrapper = styled.footer`
   margin-top: 24px;
-  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 `;

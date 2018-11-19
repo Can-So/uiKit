@@ -77,13 +77,14 @@ class Field extends React.Component<
       value,
       ...rest
     } = this.state;
+    const error = rest.submitError || (rest.touched && rest.error);
     const fieldProps = {
       onChange,
       onBlur,
       onFocus,
       value,
       name,
-      isInvalid: !!rest.error || !!rest.submitError,
+      isInvalid: error,
     };
     return (
       <FieldWrapper>
@@ -93,7 +94,7 @@ class Field extends React.Component<
             <RequiredIndicator role="presentation">*</RequiredIndicator>
           )}
         </Label>
-        {registered && children({ fieldProps, ...rest })}
+        {registered && children({ fieldProps, error, meta: rest })}
       </FieldWrapper>
     );
   }
