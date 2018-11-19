@@ -284,7 +284,7 @@ pipelines:
           script:
             - source ./build-setup.sh
             - cd build/ci-scripts
-            - yarn
+            - yarn --ignore-engines
             - node ./wait.until.no.master.build.running.js
     # This build should only be run on the master branch, once per day.
     # It manually clears the cache and runs a very quick install node_modules
