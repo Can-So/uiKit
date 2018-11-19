@@ -103,7 +103,7 @@ export default class RadioInputExample extends Component<*, State> {
     });
     this.setState({
       items: newItems,
-      value: value,
+      value,
     });
   };
 
