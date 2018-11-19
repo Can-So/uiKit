@@ -1,2 +1,1 @@
-- Upgraded the pagination API to render props
-- Better control on the composition of the pagination component
+- Upgraded the pagination API to give more control over the component
