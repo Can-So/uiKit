@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize } from '@atlaskit/theme';
 import styled from 'styled-components';
 import SearchIcon from '@atlaskit/icon/glyph/search';
-import Button from '@atlaskit/button';
 import DropdownMenu, {
   DropdownItemGroup,
   DropdownItem,
