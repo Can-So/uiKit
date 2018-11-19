@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 8.8.0
+- [minor] [93b31fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/93b31fa):
+
+  - Add support for nested <SmartCardProvider />
+
 ## 8.7.1
 - [patch] [00cd9a8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00cd9a8):
 

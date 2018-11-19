@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.2
+- [patch] [9a66a9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a66a9b):
+
+  - Add Confluence cards in Editor example.
+
 ## 88.2.1
 - [patch] [16ff8d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/16ff8d2):
 
