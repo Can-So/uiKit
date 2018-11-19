@@ -1,94 +1,109 @@
 //@flow
 import React from 'react';
 import { code, md } from '@atlaskit/docs';
+import DynamicTable from '@atlaskit/dynamic-table';
 
 export default md`
 ## v8 to v9
 
-### 🎉 New better API for composition
+### ⚡️ Highlights
 
-The pagination can we composed using four components exported from pagination component:
+- Ability to pass in custom components
+- Control the number of pages to be displayed
+- Ability to provide custom logic to collapse the pages
+- Pass in innerStyles to Pagination component
 
-1. **LeftNavigator**: A react component that displays the left navigation button
+### 🆕 Props added:
 
-2. **Page**: This is the actual component that you will use to display you page
+- **pages**: ( ***Required*** ) Pages to displayed in the pagination
+- **defaultSelectedIndex**: The index of the defualt selected page
+- **selectedIndex**: The index of currently selected page. Incase you want to control the selected page
+- **collapseRange**: Function used to create a collapsed range of the pages to display
+- **pageComponent**:
+- **previousPageComponent**:
+- **nextPageComponent**:
+- **ellipsisComponent**:
+- **innerStyles**: 
 
-3. **RightNavigator**: A react component that displays the right navigation button
+### 🚨 Depcrecated Props:
 
-4. **Ellipses**: This will print '...'  in the page, this is used to skip the pages
+- **defaultValue**: Please use ***defaultSelectedIndex*** instead
+- **total**: Please use ***pages*** instead and pass in array of pages instead of just a number
+- **value**: Please use ***selectedIndex*** instead
 
-and there is a new export from the package:
+### ⏫ Props updated:
 
-5. **collapseRange**: This is a util function which takes in pages, current page value, optiional maximum visible pages and ellipsis component as arguments
-and returns an array of items to show.
+- **onChange**: The function signature has been updated to \`( event: SyntheticEvent, newSelectedPageIndex: number, analyticsEvent: UIAnalyticsEvent ) => void\`
 
-### 🚗 Upgrade from v8
+### 💻 Upgrading:
 
-To see an example of a pagination in v8 to show 10 pages:
+In v8 we used to create pagination like following:
 
 ${code`
 <Pagination
-    value={5}    // selected value
-    total={10}  // Total number of pages
-    onChange={e => console.log('page changed', e)} // onChange hook with page selected
+  total={10}
+  onChange={e => console.log('page changed', e)}
 />
 `}
 
-**Drawbacks with the above approach:**
-
-- You cannot control the total number of pagesNumber's displayed, as it is constant 7 defined in component.
-- You have no control over what you display on page number, by that I mean it always displays 1,2,3... there is no
-support for localisation.
-- We cannot render Link component for routing with react-router, etc.
-
-In v9 we can re-write the above component as:
+In v9 instead of total we should pass in the array of pages. So, the above code needs to be re-written in v9 as:
 
 ${code`
-import Pagination, {
-    collapseRange
-    LeftNavigator,
-    RightNavigator,
-} from '@atlaskit/pagination';
-
-
-<Pagination>
-    {/** The previous page navigator */}
-    <LeftNavigator
-        isDisabled={currentPageIndex === 1}
-        onClick={() => this.updateSelectedPageTo(currentPageIndex - 1)}
-    />
-    {/** All the pages */}
-    {collapseRange(PAGES, currentPageIndex)}
-    {/** The Next page navigator */}
-    <RightNavigator
-        isDisabled={currentPageIndex === PAGES.length}
-        onClick={() => this.updateSelectedPageTo(currentPageIndex + 1)}
-    />
-</Pagination>
+<Pagination
+  total={[ ...Array(10).map((_, i) => i + 1) ]} // or [ 1, 2, 3, 4, 5,... , 10 ]
+  onChange={(e, newSelectedPage) => console.log('page changed', newSelectedPage)}
+/>
 `}
 
-Where pages is the list of all the pages rendered. To see an example if you want render a pagination component of total 10 pages:
+### 𝌙 Advance Usage
+
+#### Passing in custom component for pages:
+
+We can you use the **previousPageComponent**, **nextPageComponent**, **pageComponent** and **ellipsisComponent** to replace the default components respectively.
+
+Following usage will render the custom component passed in instead of the subtle @atlaskit/button for pages.
 
 ${code`
-import { Page } from '@atlaskit/pagination';
+import Pagination from '@atlaskit/pagination';
+import { Link } from 'react-router-dom';
 
-const PAGES = [...Array(10)].map((_, i) => (
-    <Page
-        isSelected={currentPageIndex === i + 1}
-        key={i + 1}
-        onClick={() => this.updateSelectedPageTo(i + 1)}
+// Wrapper component for right navigator
+function RouterLinkNavigationRight (props) {
+  const { pages, selectedIndex } = props;
+  return <Link
+      to={pages[selectedIndex + 1].to}
     >
-        {i + 1}
-    </Page>
-));
+      Next
+    </Link>
+}
+
+// Wrapper component for left navigator
+function RouterLinkNavigationLeft (props) {
+  const { pages, selectedIndex } = props;
+  return <Link
+      to={pages[selectedIndex - 1].to}
+    >
+      Previous
+    </Link>
+}
+
+// Wrapper component for page link
+function RouterLinkPage (props) {
+  const { page } = props;
+  return <Link
+      to={page.to}
+    >
+      {page.label}
+    </Link>
+}
+
+<Pagination 
+  pages={[{ label: '1', to: '/home' }, { label: '2', to: '/about' }, { label: '3', to: '/contact' } ]}
+  pageComponent={RouterLink}
+  previousPageComponent={RouterLinkNavigationLeft}
+  previousPageComponent={RouterLinkNavigationRight}
+/>
 `}
-
-**Advantages over old API:**
-
-- You have full control over the total number of pages's displayed, it is the an optional argument in the \`collapseRange\` function with default value as 7.
-- You have full control over what text to display in Page component, by that I mean you can render roman number I, II, III...
-localisation can be achieved easily.
-- We can render Link component for routing with react-router, etc.
 
 ## v7 to v8
 
@@ -176,39 +191,60 @@ export default () => (
   #### Prop name changes
 
   ${(
-    <table>
-      <thead>
-        <tr>
-          <th>Before</th>
-          <th>In version 4</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{md`
-\`current\`
-          `}</td>
-          <td>{md`
-\`value\`
-          `}</td>
-        </tr>
-        <tr>
-          <td>{md`
-\`defaultCurrent\`
-          `}</td>
-          <td>{md`
-\`defaultValue\`
-          `}</td>
-        </tr>
-        <tr>
-          <td>{md`
-\`onSetPage\`
-          `}</td>
-          <td>{md`
-\`onChange\`
-          `}</td>
-        </tr>
-      </tbody>
-    </table>
+    <DynamicTable
+      head={{
+        cells: [
+          {
+            key: 'before',
+            content: 'Before',
+          },
+          {
+            key: 'v4',
+            content: 'In version 4',
+          },
+        ],
+      }}
+      rows={[
+        {
+          cells: [
+            {
+              key: 'current',
+              content: 'current',
+            },
+            {
+              key: 'value',
+              content: 'value',
+            },
+          ],
+          key: 'value',
+        },
+        {
+          cells: [
+            {
+              key: 'defaultCurrent',
+              content: 'defaultCurrent',
+            },
+            {
+              key: 'defaultValue',
+              content: 'defaultValue',
+            },
+          ],
+          key: 'defaultValue',
+        },
+        {
+          cells: [
+            {
+              key: 'onSetPage',
+              content: 'onSetPage',
+            },
+            {
+              key: 'onChange',
+              content: 'onChange',
+            },
+          ],
+          key: 'onChange',
+        },
+      ]}
+    />
   )}
 `;
