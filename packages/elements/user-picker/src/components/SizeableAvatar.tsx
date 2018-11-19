@@ -18,6 +18,7 @@ export class SizeableAvatar extends React.PureComponent<any, {}> {
         size={getAvatarSize(appearance)}
         src={src}
         name={name}
+        enableTooltip={false}
       />
     );
   }

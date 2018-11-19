@@ -126,7 +126,7 @@ exports[`navigation-next view renderer SortableContext should render the Sortabl
   id="sortable"
   onDragEnd={[Function]}
 >
-  <ItemsRenderer
+  <TypedItemsRenderer
     items={
       Array [
         Object {
@@ -134,16 +134,19 @@ exports[`navigation-next view renderer SortableContext should render the Sortabl
           "items": Array [
             Object {
               "id": "backlog",
+              "index": 3,
               "text": "Backlog",
               "type": "SortableItem",
             },
             Object {
               "id": "active-sprints",
+              "index": 1,
               "text": "Active sprints",
               "type": "SortableItem",
             },
             Object {
               "id": "issues",
+              "index": 2,
               "text": "Issues",
               "type": "SortableItem",
             },
@@ -167,37 +170,43 @@ exports[`navigation-next view renderer SortableGroup should render the SortableG
       Array [
         Object {
           "id": "backlog",
+          "index": 0,
           "text": "Backlog",
           "type": "SortableItem",
         },
         Object {
           "id": "active-sprints",
+          "index": 1,
           "text": "Active sprints",
           "type": "SortableItem",
         },
         Object {
           "id": "issues",
+          "index": 2,
           "text": "Issues",
           "type": "SortableItem",
         },
       ]
     }
   >
-    <ItemsRenderer
+    <TypedItemsRenderer
       items={
         Array [
           Object {
             "id": "backlog",
+            "index": 0,
             "text": "Backlog",
             "type": "SortableItem",
           },
           Object {
             "id": "active-sprints",
+            "index": 1,
             "text": "Active sprints",
             "type": "SortableItem",
           },
           Object {
             "id": "issues",
+            "index": 2,
             "text": "Issues",
             "type": "SortableItem",
           },

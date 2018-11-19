@@ -45,6 +45,13 @@ describe('UserPicker', () => {
     expect(getStyles).toHaveBeenCalledWith(500, expect.any(Boolean));
   });
 
+  it('should set custom placeholder', () => {
+    const custom = 'Custom';
+    const component = shallowUserPicker({ placeholder: custom });
+    const select = component.find(Select);
+    expect(select.prop('placeholder')).toEqual(custom);
+  });
+
   it('should trigger onChange with User', () => {
     const onChange = jest.fn();
     const component = shallowUserPicker({ onChange });

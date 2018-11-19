@@ -10,6 +10,11 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 const { createDefaultGlob } = require('./utils');
 const statsOptions = require('./statsOptions');
 
+const baseCacheDir = path.resolve(
+  __dirname,
+  '../../../node_modules/.cache-loader',
+);
+
 module.exports = function createWebpackConfig(
   {
     globs = createDefaultGlob(),
@@ -105,20 +110,41 @@ module.exports = function createWebpackConfig(
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          loader: 'babel-loader',
-          options: {
-            babelrc: true,
-            rootMode: 'upward',
-            envName: 'production:cjs',
-          },
+          use: [
+            {
+              loader: 'thread-loader',
+              options: {
+                name: 'babel-pool',
+              },
+            },
+            {
+              loader: 'babel-loader',
+              options: {
+                babelrc: true,
+                rootMode: 'upward',
+                envName: 'production:cjs',
+                cacheDirectory: path.resolve(baseCacheDir, 'babel'),
+              },
+            },
+          ],
         },
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
-          loader: require.resolve('ts-loader'),
-          options: {
-            transpileOnly: true,
-          },
+          use: [
+            {
+              loader: 'cache-loader',
+              options: {
+                cacheDirectory: path.resolve(baseCacheDir, 'ts'),
+              },
+            },
+            {
+              loader: require.resolve('ts-loader'),
+              options: {
+                transpileOnly: true,
+              },
+            },
+          ],
         },
 
         {
