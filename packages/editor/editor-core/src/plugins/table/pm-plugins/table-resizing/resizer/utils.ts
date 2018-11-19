@@ -1,11 +1,11 @@
-import Column from './column';
+import ColumnState from './columnState';
 
 export interface ColIdxPair {
-  col: Column[];
+  col: ColumnState[];
   idx: number;
 }
 
-export const makeColIdxPair = (cols: Column[]) => {
+export const makeColIdxPair = (cols: ColumnState[]) => {
   return cols.map((col, idx) => {
     return { col, idx };
   });
@@ -31,9 +31,9 @@ export const findFreeCol = (colIdxObj, direction) => {
   return freeIdx;
 };
 
-export const findNextFreeCol = (colIdxObj, direction: number) => {
+export const findNextFreeCol = (colIdxObj, direction: number): number => {
   if (colIdxObj.length === 0) {
-    return null;
+    return -1;
   }
 
   if (direction < 0) {
@@ -70,13 +70,18 @@ export const getRowChildren = (row: HTMLElement) => {
   return children;
 };
 
-export const forEachCellInColumn = (
+const defaultCalculateColWidthCb = (
+  col: HTMLElement,
+  colComputedStyle: CSSStyleDeclaration,
+): number => unitToNumber(colComputedStyle.width);
+
+export const calculateColWidth = (
   table: HTMLElement,
   colIdx: number,
   calculateColWidthCb: (
     col: HTMLElement,
     colComputedStyle: CSSStyleDeclaration,
-  ) => number,
+  ) => number = defaultCalculateColWidthCb,
 ) => {
   const tbody = table.querySelector('tbody') as HTMLElement;
   if (tbody) {

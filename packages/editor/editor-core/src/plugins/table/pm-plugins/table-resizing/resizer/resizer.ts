@@ -1,6 +1,6 @@
 import { Node as PMNode } from 'prosemirror-model';
 import ResizeState from './resizeState';
-import Column from './column';
+import ColumnState from './columnState';
 
 import { renderColgroupFromNode } from '../../../utils';
 
@@ -19,31 +19,6 @@ function recreateResizeColsByNode(
   return colgroup.children;
 }
 
-function recreateResizeColsFromState(
-  tableElem: HTMLTableElement,
-  state: ResizeState,
-): HTMLCollection {
-  const prevColgroup = tableElem.querySelector(
-    'colgroup',
-  ) as HTMLTableColElement;
-  const nextColgroup = prevColgroup.cloneNode(false) as HTMLTableColElement;
-
-  state.cols.forEach(
-    col =>
-      (nextColgroup.appendChild(document.createElement('col')).style.width = `${
-        col.width
-      }px`),
-  );
-
-  if (prevColgroup) {
-    tableElem.removeChild(prevColgroup);
-  }
-
-  tableElem.insertBefore(nextColgroup, tableElem.firstChild);
-
-  return nextColgroup.children;
-}
-
 export interface ResizerConfig {
   minWidth: number;
   maxSize: number;
@@ -51,20 +26,17 @@ export interface ResizerConfig {
 }
 
 export default class Resizer {
-  tableElem: HTMLTableElement;
   minWidth: number;
-  maxSize: number;
   node: PMNode;
   currentState: ResizeState;
 
   private constructor(
-    tableElem: HTMLTableElement,
+    public tableElem: HTMLTableElement,
+    public colgroupChildren: HTMLCollection,
     config: ResizerConfig,
     initialState: ResizeState,
   ) {
-    this.tableElem = tableElem;
     this.minWidth = config.minWidth;
-    this.maxSize = config.maxSize;
     this.node = config.node;
     this.currentState = initialState;
   }
@@ -78,11 +50,12 @@ export default class Resizer {
 
     return new Resizer(
       tableElem,
+      colgroupChildren,
       config,
       // update state from DOM
       new ResizeState(
         Array.from(colgroupChildren).map((col, i) => {
-          return Column.fromDOM(tableElem, i, minWidth);
+          return ColumnState.fromDOM(tableElem, i, minWidth);
         }),
         maxSize,
       ),
@@ -93,7 +66,13 @@ export default class Resizer {
    * Applies a resize state to the DOM. Does NOT update state.
    */
   apply(state: ResizeState) {
-    recreateResizeColsFromState(this.tableElem, state);
+    state.cols
+      .filter(col => !!col.width) // if width is 0, we dont want to apply that.
+      .forEach((col, i) => {
+        (this.colgroupChildren[i] as HTMLElement).style.width = `${
+          col.width
+        }px`;
+      });
   }
 
   /**
@@ -105,7 +84,7 @@ export default class Resizer {
   }
 
   /**
-   * Resize a given column by an amount from the current state, and return the new state.
+   * Resize a given column by an amount from the current state and return the new state.
    *
    * You can then either:
    * - #apply() this new state to the DOM while dragging resize handles,
@@ -118,14 +97,13 @@ export default class Resizer {
   }
 
   /**
-   * Scale the table to a given size, update state and DOM, and return the new state.
+   * Scale the table to a given size, update state and DOM and return the new state.
+   * @param {number} newSize the table new size
    */
   scale(newSize: number): ResizeState {
-    recreateResizeColsByNode(this.tableElem, this.node);
-    this.currentState = this.currentState.scale(newSize);
-    this.maxSize = newSize;
-    this.apply(this.currentState);
-    return this.currentState;
+    const newState = this.currentState.scale(newSize);
+    this.update(newState);
+    return newState;
   }
 
   getCol(colIdx: number) {

@@ -22,9 +22,7 @@ import FloatingContextualMenu from './ui/FloatingContextualMenu';
 import { isLayoutSupported } from './utils';
 
 export const HANDLE_WIDTH = 6;
-export const CELL_MIN_WIDTH = 128;
-export const getCellMinWidth = newResizing =>
-  newResizing ? 48 : CELL_MIN_WIDTH;
+export const CELL_MIN_WIDTH = 48;
 
 export const pluginConfig = (tablesConfig?: PluginConfig | boolean) => {
   const config =
@@ -81,7 +79,7 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
           return allowColumnResizing
             ? flexiResizing({
                 handleWidth: HANDLE_WIDTH,
-                cellMinWidth: getCellMinWidth(true),
+                cellMinWidth: CELL_MIN_WIDTH,
               })
             : undefined;
         },

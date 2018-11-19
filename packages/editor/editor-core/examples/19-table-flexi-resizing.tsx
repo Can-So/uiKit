@@ -1,10 +1,9 @@
 import { default as FullPageExample } from './5-full-page';
-import { exampleDocument } from '../example-helpers/example-document';
+import { exampleDocument } from '../example-helpers/example-doc-with-table';
 
 export default function Example() {
   return FullPageExample({
     defaultValue: exampleDocument,
-    disabled: true,
     allowTables: {
       allowColumnResizing: true,
       allowMergeCells: true,
