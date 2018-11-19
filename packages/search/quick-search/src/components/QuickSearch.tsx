@@ -101,6 +101,7 @@ export type Props = {
   value?: string;
   /** Corresponds to the `resultId` of the selected result */
   selectedResultId?: SelectedResultId;
+  /** Optional way of being notified when the selected result changes due to keyboard nav */
   onSelectedResultIdChanged?: (id: SelectedResultId) => void;
   // Internal: injected by withAnalytics(). Fire a private analytics event
   firePrivateAnalyticsEvent?: FireAnalyticsEvent;
@@ -167,7 +168,6 @@ export class QuickSearch extends React.Component<Props, State> {
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.children !== this.props.children) {
-      // is this when we re-render?
       this.setState({
         selectedResultId: nextProps.selectedResultId || null,
       });
