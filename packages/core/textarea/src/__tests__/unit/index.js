@@ -99,7 +99,7 @@ describe('TextArea', () => {
   [
     { name: 'test' },
     { placeholder: 'test placeholder' },
-    { maxlength: 5 },
+    { maxLength: 5 },
   ].forEach(prop =>
     describe(JSON.stringify(prop), () =>
       it('TextArea should have attribute defined', () => {

@@ -99,6 +99,7 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
 
   render() {
     const {
+      createAnalyticsEvent,
       appearance,
       resize,
       isCompact,

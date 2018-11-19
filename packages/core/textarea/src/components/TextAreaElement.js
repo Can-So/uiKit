@@ -20,7 +20,7 @@ type State = {
   height: string,
 };
 
-export default class FTextArea extends Component<Props, State> {
+export default class TextAreaElement extends Component<Props, State> {
   textareaRef: HTMLTextAreaElement | null;
 
   state = {
