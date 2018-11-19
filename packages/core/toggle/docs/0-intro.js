@@ -1,13 +1,15 @@
 // @flow
 import React from 'react';
-import { md, Props, Example } from '@atlaskit/docs';
+import { md, Props, Example, code } from '@atlaskit/docs';
 
 export default md`
   A Toggle component. It is a checkbox displayed in an alternative way.
 
-  ## Examples
+  ## Usage
 
-  The default export is a component that you can control and listen to events on
+  ${code`import Toggle from '@atlaskit/toggle';`}
+
+  The default export is a component that you can control and listen to events.
 
   ${(
     <Example
@@ -30,14 +32,16 @@ export default md`
     />
   )}
 
-  ## Default Export Props
-
-  ${<Props props={require('!!extract-react-types-loader!../src/Toggle')} />}
-
-  ## Stateless Props
+  ${(
+    <Props
+      heading="Toggle Default Props"
+      props={require('!!extract-react-types-loader!../src/Toggle')}
+    />
+  )}
 
   ${(
     <Props
+      heading="Toggle Stateless Props"
       props={require('!!extract-react-types-loader!../src/ToggleStateless')}
     />
   )}

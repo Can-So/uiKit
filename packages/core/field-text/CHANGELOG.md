@@ -1,5 +1,10 @@
 # @atlaskit/field-text
 
+## 7.0.14
+- [patch] [17dde74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/17dde74):
+
+  - Update TypeScript TD (Add isValidationHidden field)
+
 ## 7.0.13
 - [patch] [4035588"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4035588"

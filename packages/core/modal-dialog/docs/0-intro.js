@@ -28,8 +28,6 @@ ${code`
   statement that controls the rendering of a \`ModalDialog\`. Take a look our other
   \`ModalDialog\` examples for more usages of this pattern.
 
-  ## Examples
-
   This example controls the rendering of a \`ModalDialog\` based on component state.
 
   ${(
@@ -65,17 +63,16 @@ ${code`
     />
   )}
 
-
   ${(
     <Props
-      heading={'ModalDialog Props'}
+      heading="ModalDialog Props"
       props={require('!!extract-react-types-loader!../src/components/ModalWrapper')}
     />
   )}
 
   ${(
     <Props
-      heading={'ModalTransition Props'}
+      heading="ModalTransition Props"
       props={require('!!extract-react-types-loader!../src/components/ModalTransition')}
     />
   )}

@@ -21,7 +21,7 @@ const readFilesSync = (path: string) =>
   );
 
 describe('validate', () => {
-  ['full', 'stage-0'].forEach(schemaType => {
+  ['stage-0'].forEach(schemaType => {
     const valid = readFilesSync(`${BASE_DIR}/${schemaType}/valid`);
     valid.forEach(file => {
       // Don't test Application Card

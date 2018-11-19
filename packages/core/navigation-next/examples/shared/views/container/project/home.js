@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import { LinkItem } from '../../../components';
 
 import ViewRegistrar from '../../common/view-registrar';
 
@@ -22,7 +21,7 @@ const getItems = () => [
         id: 'backlog',
         text: 'Backlog',
         to: '/projects/endeavour',
-        type: LinkItem,
+        type: 'LinkItem',
       },
       {
         icon: 'BoardIcon',

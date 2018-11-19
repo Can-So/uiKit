@@ -256,7 +256,8 @@ ${code`const LinkItem = ({ components: { Item }, to, ...props }) => {
 ${code`// Project home view Dashboards item
 {
 - type: 'Item',
-+ type: LinkItem,
++ type: 'InlineComponent',
++ component: LinkItem,
   id: 'dashboards',
   before: DashboardIcon,
   text: 'Dashboards',
@@ -264,6 +265,8 @@ ${code`// Project home view Dashboards item
 }`}
 
 This component renders a \`react-router\` \`Link\`. It also connects to the router and will appear selected when the current route matches its \`to\` property.
+
+An alternative way to specify a custom component is using the \`customComponents\` prop of \`LayoutManagerWithViewcontroller\` component and then referencing the custom component type directly as a string, similar to a built-in type.
 
 #### 2. Add routes to our app which set their view on mount
 
@@ -293,7 +296,9 @@ ${code`class App extends Component {
 
   render() {
     return (
-      <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
+      <LayoutManagerWithViewController
+        globalNavigation={MyGlobalNavigation}
+      >
 -       <div>Page content goes here.</div>
 +       <Switch>
 +         <Route path="/issues" component={IssuesAndFiltersRoute} />
@@ -411,7 +416,9 @@ It's then as simple as rendering the \`GrowthExperiment\` component as long as w
 
 ${code`render() {
   return (
-    <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
+    <LayoutManagerWithViewController
+      globalNavigation={MyGlobalNavigation}
+    >
       <Switch>
         <Route path="/projects/my-project" component={ProjectBacklogRoute} />
         <Route path="/issues" component={IssuesAndFiltersRoute} />

@@ -70,7 +70,8 @@ const initialSortableIssueItems: ItemsByGroup = {
       href: '#',
     },
     {
-      type: LinkItem,
+      type: 'InlineComponent',
+      component: LinkItem,
       id: 'go-to-projects',
       to: '/projects/endeavour',
       text: 'Go to endeavour project',
@@ -106,7 +107,8 @@ const getRootSortableIssues = ({ sortableItems, onDragEnd }: *) => () => [
         text: 'Sortable Issues and filters',
       },
       {
-        type: LinkItem,
+        type: 'InlineComponent',
+        component: LinkItem,
         id: 'search-issues',
         text: 'Search issues',
         to: '/issues/search',

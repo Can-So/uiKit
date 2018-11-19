@@ -2,7 +2,7 @@
 
 import type { ComponentType, Node } from 'react';
 
-import type { ProductTheme } from '../../../theme/types';
+import type { WithContentThemeProps } from '../../../theme/types';
 
 export type ConnectedGroupHeadingProps = {
   /** A component to render after the main content of the title. */
@@ -11,6 +11,7 @@ export type ConnectedGroupHeadingProps = {
   children: Node,
 };
 
-export type GroupHeadingProps = ConnectedGroupHeadingProps & {
-  theme: ProductTheme,
-};
+export type GroupHeadingProps = {|
+  ...$Exact<ConnectedGroupHeadingProps>,
+  ...$Exact<WithContentThemeProps>,
+|};
