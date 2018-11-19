@@ -18,7 +18,7 @@ type Props = {
   /**
    * controls the appearance of the field.
    * subtle shows styling on hover.
-   * none hides all field styling.
+   * none prevents all field styling.
    */
   appearance: 'standard' | 'subtle' | 'none',
   /** Set whether the fields should expand to fill available horizontal space. */
@@ -27,7 +27,7 @@ type Props = {
   isDisabled?: boolean,
   /** If true, prevents the value of the input from being edited. */
   isReadOnly?: boolean,
-  /** Add asterisk to label. Set required for form that the field is part of. */
+  /** Set required for form that the field is part of. */
   isRequired?: boolean,
   /** Sets styling to indicate that the input is invalid. */
   isInvalid?: boolean,
@@ -56,13 +56,13 @@ type Props = {
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
   /** The theme function TextArea consumes to derive theming constants for use in styling its components */
   theme: ThemeProps => ThemeProps,
-  textAreaRef: (ref?: ElementRef<*>) => void,
+  textareaRef: (HTMLTextAreaElement | null) => void,
 };
 type State = {
   isFocused: boolean,
 };
 
-class TextArea extends Component<Props, State> {
+class TextAreaWithoutForwardRef extends Component<Props, State> {
   static defaultProps = {
     resize: 'smart',
     appearance: 'standard',
@@ -74,7 +74,7 @@ class TextArea extends Component<Props, State> {
     isMonospaced: false,
     minimumRows: 1,
     theme: defaultTheme,
-    textAreaRef: () => {},
+    textareaRef: () => {},
   };
 
   state = {
@@ -109,7 +109,7 @@ class TextArea extends Component<Props, State> {
       isRequired,
       minimumRows,
       theme,
-      textAreaRef,
+      textareaRef,
       ...props
     } = this.props;
 
@@ -131,7 +131,7 @@ class TextArea extends Component<Props, State> {
           >
             <TextareaElement
               {...props}
-              innerRef={textAreaRef}
+              innerRef={textareaRef}
               resize={resize}
               disabled={isDisabled}
               readOnly={isReadOnly}
@@ -145,6 +145,11 @@ class TextArea extends Component<Props, State> {
     );
   }
 }
+
+// $FlowFixMe flow-bin v0.74.0 doesn't know about forwardRef.
+const TextArea = React.forwardRef((props, ref) => (
+  <TextAreaWithoutForwardRef {...props} textareaRef={ref} />
+));
 
 export { TextArea as TextAreaWithoutAnalytics };
 const createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');

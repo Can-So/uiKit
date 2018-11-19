@@ -19,7 +19,7 @@ jest.mock('@atlaskit/analytics-next', () => ({
   createAndFireEvent: jest.fn(() => jest.fn(args => args)),
 }));
 
-describe('FieldTextAreaStateless', () => {
+describe('TextArea', () => {
   it('should be wrapped with analytics context', () => {
     expect(withAnalyticsContext).toHaveBeenCalledWith({
       componentName: 'textArea',

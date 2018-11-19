@@ -1,15 +1,13 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-
-import FieldTextArea from '../..';
 import TextAreaWithAnalytics, {
   TextAreaWithoutAnalytics as TextArea,
 } from '../../components/TextArea';
 
 import { TextAreaWrapper } from '../../styled';
 
-describe('FieldTextAreaStateless', () => {
+describe('TextArea', () => {
   // Stub window.cancelAnimationFrame, so Popper (used in Layer) doesn't error when accessing it.
   const animStub = window.cancelAnimationFrame;
   beforeEach(() => {
@@ -32,7 +30,7 @@ describe('FieldTextAreaStateless', () => {
 
       it('should reflect its value to the TextAreaWrapper', () => {
         expect(
-          mount(<FieldTextArea onChange={() => {}} isReadOnly label="" />)
+          mount(<TextArea onChange={() => {}} isReadOnly label="" />)
             .find(TextAreaWrapper)
             .props().isReadOnly,
         ).toBe(true);
@@ -48,7 +46,7 @@ describe('FieldTextAreaStateless', () => {
         ).toBe(false);
       });
 
-      it('should reflect its value to the FieldBase', () => {
+      it('should reflect its value to the TextAreaWrapper', () => {
         expect(
           mount(<TextArea onChange={() => {}} label="" />)
             .find(TextAreaWrapper)
@@ -69,7 +67,7 @@ describe('FieldTextAreaStateless', () => {
   });
 
   describe('isInvalid prop', () => {
-    it('should reflect its value to the FieldBase', () => {
+    it('should reflect its value to the TextAreaWrapper', () => {
       expect(
         mount(<TextArea onChange={() => {}} isInvalid />)
           .find(TextAreaWrapper)

@@ -15,7 +15,7 @@ import TextArea rom '@atlaskit/textarea';
 
   ${(
     <Example
-      packageName="@atlaskit/textarea-field"
+      packageName="@atlaskit/textarea"
       Component={require('../examples/0-basic').default}
       title="Basic"
       source={require('!!raw-loader!../examples/0-basic')}

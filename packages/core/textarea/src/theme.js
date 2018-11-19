@@ -2,7 +2,7 @@
 import { colors } from '@atlaskit/theme';
 import * as componentTokens from './component-tokens';
 
-export const invalidRules = {
+const invalidRules = {
   light: {
     borderColor: componentTokens.invalidBorderColor.light,
     borderColorFocus: componentTokens.defaultBorderColorFocus.light,
@@ -18,7 +18,8 @@ export const invalidRules = {
     backgroundColorHover: componentTokens.defaultBackgroundColorHover.dark,
   },
 };
-export const disabledRules = {
+
+const disabledRules = {
   light: {
     backgroundColor: componentTokens.disabled.light,
     backgroundColorFocus: componentTokens.disabled.light,
@@ -79,13 +80,6 @@ export type ThemeProps = {
     textColor?: string,
     disabledTextColor?: string,
     placeholderTextColor?: string,
-    borderRadius?: string,
-    borderWidth?: number,
-    height?: number,
-    lineHeight?: number,
-    horizontalPadding?: number,
-    innerHeight?: number,
-    transitionDuration?: string,
   },
   mode?: 'light' | 'dark',
 };
@@ -101,6 +95,7 @@ export const themeTokens = {
   textColor: componentTokens.textColor,
   placeholderTextColor: componentTokens.placeholderTextColor,
 };
+
 const getTextAreaTheme = mode => ({ appearance }: TextAreaThemeProps) => ({
   borderColor: borderColor[appearance][mode],
   borderColorFocus: borderColorFocus[appearance][mode],

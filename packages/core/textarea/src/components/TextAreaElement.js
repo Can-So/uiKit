@@ -2,12 +2,16 @@
 import React, { Component, type ElementRef } from 'react';
 
 type Props = {
-  innerRef?: (ElementRef<*>) => void,
+  innerRef?: (HTMLTextAreaElement | null) => void,
+  /**
+   * Enables the resizing of the textarea:
+   * auto: both directions.
+   * horizontal: only along the x axis.
+   * vertical: only along the y axis.
+   * smart (default): vertically grows and shrinks the textarea automatically to wrap your input text.
+   * none: explicitly disallow resizing on the textarea.
+   */
   resize?: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
-  // /** The value of the text-area. */
-  // value?: string | number,
-  // /** The default value of the text-area */
-  // defaultValue?: string | number,
   /** Handler to be called when the input changes. */
   onChange?: (event: SyntheticInputEvent<HTMLTextAreaElement>) => void,
 };
@@ -17,20 +21,27 @@ type State = {
 };
 
 export default class FTextArea extends Component<Props, State> {
-  textareaRef = React.createRef();
+  textareaRef: HTMLTextAreaElement | null;
 
   state = {
     height: '100%',
   };
 
   componentDidMount() {
-    if (this.props.resize === 'smart' && this.textareaRef.current) {
+    if (this.props.resize === 'smart' && this.textareaRef) {
       this.setState({
         // eslint-disable-line
-        height: `${this.textareaRef.current.scrollHeight}px`,
+        height: `${this.textareaRef.scrollHeight}px`,
       });
     }
   }
+
+  getTextAreaRef = (ref: HTMLTextAreaElement | null) => {
+    this.textareaRef = ref;
+    if (this.props.innerRef) {
+      this.props.innerRef(ref);
+    }
+  };
 
   handleOnChange = (event: SyntheticInputEvent<HTMLTextAreaElement>) => {
     const { onChange } = this.props;
@@ -40,9 +51,9 @@ export default class FTextArea extends Component<Props, State> {
           height: 'auto',
         },
         () => {
-          if (this.props.resize === 'smart' && this.textareaRef.current) {
+          if (this.props.resize === 'smart' && this.textareaRef) {
             this.setState({
-              height: `${this.textareaRef.current.scrollHeight}px`,
+              height: `${this.textareaRef.scrollHeight}px`,
             });
           }
         },
@@ -56,14 +67,14 @@ export default class FTextArea extends Component<Props, State> {
 
   render() {
     const { resize, innerRef, ...props } = this.props;
-
     const { height } = this.state;
+
     if (resize === 'smart') {
       return (
         <textarea
           {...props}
           onChange={this.handleOnChange}
-          ref={this.textareaRef}
+          ref={this.getTextAreaRef}
           style={{ height }}
         />
       );

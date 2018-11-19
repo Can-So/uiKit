@@ -127,7 +127,7 @@ export const TextAreaWrapper = styled.div`
   font-size: ${fontSize}px;
   max-width: 100%;
   ${getResizeStyles}
-  & textarea {
+  & > textarea {
     display:block;
     padding-right: 6px;
     resize: none;
@@ -152,7 +152,7 @@ export const TextAreaWrapper = styled.div`
     ${getPlaceholderStyle(getPlaceholderColor)};
     ${getMinimumRowsHeight}
 
-    [disabled] {
+    &[disabled] {
       ${overrideSafariDisabledStyles};
     }
     &::-ms-clear {
