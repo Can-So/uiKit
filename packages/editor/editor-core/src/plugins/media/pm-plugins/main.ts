@@ -76,8 +76,10 @@ export class MediaPluginState {
   public pickers: PickerFacade[] = [];
   public binaryPicker?: PickerFacade;
   private popupPicker?: PickerFacade;
+  // @ts-ignore
   private clipboardPicker?: PickerFacade;
   private dropzonePicker?: PickerFacade;
+  // @ts-ignore
   private customPicker?: PickerFacade;
   public editorAppearance: EditorAppearance;
   private removeOnCloseListener: () => void = () => {};
@@ -365,7 +367,7 @@ export class MediaPluginState {
    * NOTE: The promise will resolve even if some of the media have failed to process.
    */
   waitForPendingTasks = (
-    timeout?: Number,
+    timeout?: number,
     lastTask?: Promise<MediaState | null>,
   ) => {
     if (lastTask && this.pendingTask === lastTask) {

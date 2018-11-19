@@ -74,122 +74,125 @@ export interface State {
   emojiName?: string;
 }
 
-export const Reaction = withAnalyticsEvents()(
-  class extends PureComponent<Props & WithAnalyticsEventProps, State> {
-    static defaultProps = {
-      flash: false,
-      className: undefined,
-      onMouseOver: undefined,
-      flashOnMount: false,
-    };
+class ReactionWithoutAnalytics extends PureComponent<
+  Props & WithAnalyticsEventProps,
+  State
+> {
+  static defaultProps = {
+    flash: false,
+    className: undefined,
+    onMouseOver: undefined,
+    flashOnMount: false,
+  };
 
-    static displayName = 'Reaction';
+  static displayName = 'Reaction';
 
-    private mounted: boolean;
-    private hoverStart: number | undefined;
+  private mounted: boolean;
+  private hoverStart: number | undefined;
 
-    constructor(props) {
-      super(props);
+  constructor(props) {
+    super(props);
 
-      this.state = {};
-    }
+    this.state = {};
+  }
 
-    componentDidUpdate({ reaction: prevReaction }) {
-      if (!prevReaction.users && this.props.reaction.users) {
-        createAndFireSafe(
-          this.props.createAnalyticsEvent,
-          createReactionHoveredEvent,
-          this.hoverStart,
-        );
-      }
-    }
-
-    componentDidMount() {
-      this.mounted = true;
-      this.props.emojiProvider
-        .then(emojiResource =>
-          emojiResource.findByEmojiId({
-            shortName: '',
-            id: this.props.reaction.emojiId,
-          }),
-        )
-        .then(foundEmoji => {
-          if (foundEmoji && this.mounted) {
-            this.setState({
-              emojiName: foundEmoji.name,
-            });
-          }
-        });
-    }
-
-    componentWillUnmount() {
-      this.mounted = false;
-    }
-
-    private handleMouseDown = event => {
-      event.preventDefault();
-      if (this.props.onClick && isLeftClick(event)) {
-        const { reaction, createAnalyticsEvent } = this.props;
-        const { reacted, emojiId } = reaction;
-        createAndFireSafe(
-          createAnalyticsEvent,
-          createReactionClickedEvent,
-          !reacted,
-          emojiId,
-        );
-
-        this.props.onClick(this.props.reaction.emojiId, event);
-      }
-    };
-
-    private handleMouseOver = event => {
-      event.preventDefault();
-      const { onMouseOver, reaction } = this.props;
-      if (!reaction.users || !reaction.users.length) {
-        this.hoverStart = Date.now();
-      }
-      if (onMouseOver) {
-        onMouseOver(this.props.reaction, event);
-      }
-    };
-
-    render() {
-      const {
-        emojiProvider,
-        reaction,
-        className: classNameProp,
-        flash,
-      } = this.props;
-      const { emojiName } = this.state;
-
-      const classNames = cx(reactionStyle, classNameProp);
-
-      const emojiId = { id: reaction.emojiId, shortName: '' };
-
-      return (
-        <ReactionTooltip emojiName={emojiName} reaction={reaction}>
-          <button
-            className={classNames}
-            onMouseUp={this.handleMouseDown}
-            onMouseOver={this.handleMouseOver}
-          >
-            <FlashAnimation flash={flash} className={flashStyle}>
-              <div className={emojiStyle}>
-                <ResourcedEmoji
-                  emojiProvider={emojiProvider}
-                  emojiId={emojiId}
-                  fitToHeight={16}
-                />
-              </div>
-              <Counter
-                className={counterStyle}
-                value={reaction.count}
-                highlight={reaction.reacted}
-              />
-            </FlashAnimation>
-          </button>
-        </ReactionTooltip>
+  componentDidUpdate({ reaction: prevReaction }) {
+    if (!prevReaction.users && this.props.reaction.users) {
+      createAndFireSafe(
+        this.props.createAnalyticsEvent,
+        createReactionHoveredEvent,
+        this.hoverStart,
       );
     }
-  },
-);
+  }
+
+  componentDidMount() {
+    this.mounted = true;
+    this.props.emojiProvider
+      .then(emojiResource =>
+        emojiResource.findByEmojiId({
+          shortName: '',
+          id: this.props.reaction.emojiId,
+        }),
+      )
+      .then(foundEmoji => {
+        if (foundEmoji && this.mounted) {
+          this.setState({
+            emojiName: foundEmoji.name,
+          });
+        }
+      });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  private handleMouseDown = event => {
+    event.preventDefault();
+    if (this.props.onClick && isLeftClick(event)) {
+      const { reaction, createAnalyticsEvent } = this.props;
+      const { reacted, emojiId } = reaction;
+      createAndFireSafe(
+        createAnalyticsEvent,
+        createReactionClickedEvent,
+        !reacted,
+        emojiId,
+      );
+
+      this.props.onClick(this.props.reaction.emojiId, event);
+    }
+  };
+
+  private handleMouseOver = event => {
+    event.preventDefault();
+    const { onMouseOver, reaction } = this.props;
+    if (!reaction.users || !reaction.users.length) {
+      this.hoverStart = Date.now();
+    }
+    if (onMouseOver) {
+      onMouseOver(this.props.reaction, event);
+    }
+  };
+
+  render() {
+    const {
+      emojiProvider,
+      reaction,
+      className: classNameProp,
+      flash,
+    } = this.props;
+    const { emojiName } = this.state;
+
+    const classNames = cx(reactionStyle, classNameProp);
+
+    const emojiId = { id: reaction.emojiId, shortName: '' };
+
+    return (
+      <ReactionTooltip emojiName={emojiName} reaction={reaction}>
+        <button
+          className={classNames}
+          onMouseUp={this.handleMouseDown}
+          onMouseOver={this.handleMouseOver}
+        >
+          <FlashAnimation flash={flash} className={flashStyle}>
+            <div className={emojiStyle}>
+              <ResourcedEmoji
+                emojiProvider={emojiProvider}
+                emojiId={emojiId}
+                fitToHeight={16}
+              />
+            </div>
+            <Counter
+              className={counterStyle}
+              value={reaction.count}
+              highlight={reaction.reacted}
+            />
+          </FlashAnimation>
+        </button>
+      </ReactionTooltip>
+    );
+  }
+}
+
+export const Reaction = withAnalyticsEvents()(ReactionWithoutAnalytics);

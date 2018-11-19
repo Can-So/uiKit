@@ -297,7 +297,7 @@ describe('UploadService', () => {
       uploadService.on('file-converting', fileConvertingCallback);
       jest.spyOn(context.file, 'upload').mockReturnValue(
         new Observable(observer => {
-          setImmediate(() => {
+          setTimeout(() => {
             observer.next({
               status: 'processing',
               id: 'public-file-id',
@@ -306,7 +306,7 @@ describe('UploadService', () => {
         }),
       );
       uploadService.addFiles([file]);
-      setImmediate(() => {
+      setTimeout(() => {
         expect(fileConvertingCallback).toHaveBeenCalledTimes(1);
         expect(fileConvertingCallback).toHaveBeenCalledWith({
           file: {
@@ -388,7 +388,7 @@ describe('UploadService', () => {
       uploadService.on('file-converted', fileConvertedCallback);
       jest.spyOn(context.file, 'upload').mockReturnValue(
         new Observable(observer => {
-          setImmediate(() => {
+          setTimeout(() => {
             observer.next({
               status: 'processing',
               id: 'public-file-id',
@@ -554,7 +554,7 @@ describe('UploadService', () => {
 
       jest.spyOn(context.file, 'upload').mockReturnValue(
         new Observable(observer => {
-          setImmediate(() => {
+          setTimeout(() => {
             observer.next({
               status: 'processing',
               id: 'some-id',
@@ -566,7 +566,7 @@ describe('UploadService', () => {
         observable: () =>
           Observable.create((observer: Subscriber<MediaItem>) => {
             // We have to wait 1 cycle otherwise :next callback called synchronously
-            setImmediate(() => {
+            setTimeout(() => {
               // It's not required, but I like "natural" feel of this call
               observer.next(pendingFileItem);
 
@@ -620,7 +620,7 @@ describe('UploadService', () => {
 
       jest.spyOn(context.file, 'upload').mockReturnValue(
         new Observable(observer => {
-          setImmediate(() => {
+          setTimeout(() => {
             observer.next({
               status: 'processing',
             });
@@ -631,7 +631,7 @@ describe('UploadService', () => {
       const mediaItemProvider: MediaItemProvider = {
         observable: () =>
           Observable.create((observer: Subscriber<MediaItem>) => {
-            setImmediate(() => {
+            setTimeout(() => {
               observer.next(succeededFileItem);
               expect(
                 Object.keys((uploadService as any).cancellableFilesUploads),

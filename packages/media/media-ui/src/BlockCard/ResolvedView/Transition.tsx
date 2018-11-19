@@ -114,7 +114,7 @@ export default class Transition extends React.Component<
           visible: false,
           children,
         }),
-      timeout,
+      timeout as number,
     ); // FIXME: hmm not sure why we have to wait - it should have already finished
   };
 

@@ -15,9 +15,7 @@ export default class WidthEmitter extends Component<Props> {
 
   render() {
     return (
-      <WidthConsumer>
-        {({ width }) => this.broadcastWidth(width) || null}
-      </WidthConsumer>
+      <WidthConsumer>{({ width }) => this.broadcastWidth(width)}</WidthConsumer>
     );
   }
 
@@ -44,5 +42,6 @@ export default class WidthEmitter extends Component<Props> {
         this.debounce = null;
       }, 10);
     }
+    return null;
   };
 }

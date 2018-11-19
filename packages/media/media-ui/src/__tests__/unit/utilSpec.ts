@@ -149,7 +149,7 @@ describe('Image Meta Data Util', () => {
       class MockImage extends global.Image {
         constructor() {
           super();
-          setImmediate(() => this.onload());
+          setTimeout(() => this.onload());
         }
       }
       global.Image = MockImage;

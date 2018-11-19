@@ -69,6 +69,8 @@ export class Dropzone extends LocalUploadComponent<
   }
 
   private readonly onFileDropped = (dragEvent: DragEvent) => {
+    if (!dragEvent.dataTransfer) return;
+
     dragEvent.preventDefault();
     dragEvent.stopPropagation();
     this.onDrop(dragEvent);
@@ -94,7 +96,7 @@ export class Dropzone extends LocalUploadComponent<
   private onDragOver = (e: DragEvent): void => {
     e.preventDefault();
 
-    if (this.instance && Dropzone.dragContainsFiles(e)) {
+    if (this.instance && e.dataTransfer && Dropzone.dragContainsFiles(e)) {
       const dataTransfer = e.dataTransfer;
       let allowed;
 
@@ -127,7 +129,7 @@ export class Dropzone extends LocalUploadComponent<
   }
 
   private onDragLeave = (e: DragEvent): void => {
-    if (this.instance) {
+    if (this.instance && e.dataTransfer) {
       e.preventDefault();
       this.instance.classList.remove('active');
       let length = 0;
@@ -166,7 +168,7 @@ export class Dropzone extends LocalUploadComponent<
   private onDrop = (e: DragEvent): void => {
     const { instance } = this;
 
-    if (instance && Dropzone.dragContainsFiles(e)) {
+    if (instance && e.dataTransfer && Dropzone.dragContainsFiles(e)) {
       instance.classList.remove('active');
       const dataTransfer = e.dataTransfer;
       const length = this.getDraggedItemsLength(dataTransfer);
@@ -198,6 +200,8 @@ export class Dropzone extends LocalUploadComponent<
   }
 
   private static dragContainsFiles(event: DragEvent): boolean {
+    if (!event.dataTransfer) return false;
+
     const { types } = event.dataTransfer;
 
     return toArray(types).indexOf('Files') > -1;
