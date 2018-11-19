@@ -57,6 +57,7 @@ const tsMatch = /.+(\.ts|\.tsx)/;
 type Props = {
   deployButton: any;
   example: any;
+  examples: any;
   groupId: any;
   loadingButton: any;
   packageId: any;

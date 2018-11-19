@@ -101,11 +101,12 @@ export default function LoadData({ match }) {
       </Page>
     ),
     loader: () =>
-      // @ts-ignore Type Loadable
-      fetchPackageData(groupId, pkgId).catch(error => console.log(error)),
+      fetchPackageData(groupId, pkgId).catch((error: Error) => {
+        console.error(error);
+        return { error };
+      }),
     render: props =>
-      // @ts-ignore Type Loadable
-      props.missing || props.error ? (
+      props.error ? (
         <FourOhFour />
       ) : (
         <Package

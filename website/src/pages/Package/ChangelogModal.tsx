@@ -92,6 +92,10 @@ function getQualifiedRange(str: string) {
   return '';
 }
 
+type ResolvedChangelog = {
+  changelog?: string;
+};
+
 type Props = {
   match: RouterMatch;
   history: any;
@@ -158,15 +162,13 @@ export default class ExamplesModal extends Component<Props, State> {
     const found = fs.find(packages, (file, currPath) => currPath === filePath);
     const { isInvalid, range } = this.state;
 
-    const Content = Loadable({
-      // @ts-ignore TODO: Typing Loadable
+    const Content = Loadable<{}, ResolvedChangelog>({
       loading: Loading,
-      // @ts-ignore TODO: Typing Loadable
-      loader: () => found && found.contents(),
+      loader: async () => (found ? { changelog: await found.contents() } : {}),
       render: changelog =>
         changelog ? (
           <Changelog
-            changelog={divvyChangelog(changelog)}
+            changelog={divvyChangelog({ default: changelog.changelog || '' })}
             range={getQualifiedRange(range)}
             packageName={pkgId}
           />

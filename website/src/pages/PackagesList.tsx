@@ -114,16 +114,18 @@ const renderRow = (
 };
 
 const StatRows = () =>
-  fs.getDirectories(packages.children).reduce<Array<React.ReactChild>>(
-    (acc, team) =>
-      acc.concat(
-        fs.getDirectories(team.children).map(pkg => {
-          const pkgJSON = getConfig(team.id, pkg.id).config;
-          return renderRow(pkgJSON, pkg, team.id);
-        }),
-      ),
-    [],
-  );
+  fs
+    .getDirectories(packages.children)
+    .reduce<Array<ReturnType<typeof renderRow>>>(
+      (acc, team) =>
+        acc.concat(
+          fs.getDirectories(team.children).map(pkg => {
+            const pkgJSON = getConfig(team.id, pkg.id).config;
+            return renderRow(pkgJSON, pkg, team.id);
+          }),
+        ),
+      [],
+    );
 
 export default function PackagesList() {
   return (

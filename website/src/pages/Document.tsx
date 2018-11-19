@@ -13,6 +13,13 @@ type DocProps = {
   match: RouterMatch;
 };
 
+type ResolvedMD = {
+  default?: {
+    content?: string;
+    data?: object;
+  };
+};
+
 export default function Document({
   match: {
     params: { docId },
@@ -27,13 +34,11 @@ export default function Document({
   const filePath = `docs/${docId}`;
   const found = fs.findNormalized(docs, filePath);
 
-  const Content = Loadable({
-    // @ts-ignore TODO: Typing Loadable
-    loader: () => found && found.exports(),
-    // @ts-ignore TODO: Typing Loadable
+  const Content = Loadable<{}, ResolvedMD>({
+    loader: async () => (found ? await found.exports() : {}),
     loading: Loading,
-    render(md: { default: Object }) {
-      const docDetails: { content?: string; data?: Object } = md.default || {};
+    render(md) {
+      const docDetails = md.default || {};
       const { content, data = {} } = docDetails;
       if (content) {
         return <Markdown {...data}>{content}</Markdown>;

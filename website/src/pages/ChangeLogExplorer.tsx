@@ -25,6 +25,9 @@ type Props = {
 
 type State = { isInvalid: boolean; range: string };
 
+type ResolvedLog = {
+  log: string;
+};
 export default class ChangelogExplorer extends Component<Props, State> {
   props: Props;
   state: State = { isInvalid: false, range: '' };
@@ -56,14 +59,14 @@ export default class ChangelogExplorer extends Component<Props, State> {
     });
     const { isInvalid, range } = this.state;
 
-    const Content = Loadable({
-      // @ts-ignore TODO: Fix typings for Loadable component
+    const Content = Loadable<{}, ResolvedLog>({
       loading: Loading,
-      loader: () => found && found.contents(),
-      render: log =>
-        log ? (
+      loader: async () =>
+        found ? { log: await found.contents() } : { log: '' },
+      render: changelog =>
+        changelog ? (
           <Changelog
-            changelog={divvyChangelog(log)}
+            changelog={divvyChangelog({ default: changelog.log })}
             range={range}
             packageName={pkgId}
           />

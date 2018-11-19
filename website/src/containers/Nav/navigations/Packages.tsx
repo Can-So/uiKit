@@ -5,7 +5,7 @@ import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
 import styled from 'styled-components';
 import { isSubNavExpanded } from '../utils/linkComponents';
 import renderNav from '../utils/renderNav';
-import { Directory, File, NavGroupItem } from '../../../types';
+import { Directory, File, NavGroup, NavGroupItem } from '../../../types';
 import * as fs from '../../../utils/fs';
 import { packageUrl, packageDocUrl } from '../../../utils/url';
 
@@ -23,8 +23,8 @@ export function buildSubNavGroup(
   children: Array<File>,
   groupTitle: string,
   url: (id: string) => string,
-  Icon: ComponentType<any>,
-): { title?: string; items: Array<NavGroupItem> } | null {
+  Icon: ComponentType,
+): NavGroup | null {
   if (!children || !children.length) return null;
   return children
     .filter(item => !item.id.startsWith('_'))
@@ -38,7 +38,7 @@ export function buildSubNavGroup(
         });
         return acc;
       },
-      { items: [] } as { items: Array<NavGroupItem> },
+      { items: [] as Array<NavGroupItem> },
     );
 }
 
@@ -58,7 +58,7 @@ const getItemDetails = (pkg: Directory, group: Directory, pathname) => {
     )
     .slice(1);
 
-  const items: Array<NavGroupItem> = [];
+  const items: Array<NavGroup> = [];
 
   const docsSubnav = buildSubNavGroup(
     docItems,
@@ -100,7 +100,7 @@ export type PackagesNavProps = {
   onClick?: (e: Event) => void;
 };
 
-const standardGroups = (dirs: Array<Directory>, pathname) =>
+const standardGroups = (dirs: Array<Directory>, pathname): NavGroup[] =>
   dirs.map(group => {
     const packages = fs.getDirectories(group.children);
     return {
@@ -113,7 +113,7 @@ const standardGroups = (dirs: Array<Directory>, pathname) =>
           }
           return items;
         },
-        [] as any,
+        [] as NavGroupItem[],
       ),
     };
   });

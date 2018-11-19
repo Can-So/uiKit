@@ -81,9 +81,7 @@ export interface Log {
   version: string;
   repository: string;
 }
-export interface Logs {
-  logs: Array<Log>;
-}
+export type Logs = Array<Log>;
 
 type Props = {
   changelog: Array<Log>;

@@ -12,7 +12,9 @@ const getPageLoadNumber = () => {
     return null;
   }
 
-  let navigationEntries = window.performance.getEntriesByType('navigation');
+  let navigationEntries = window.performance.getEntriesByType(
+    'navigation',
+  ) as PerformanceNavigationTiming[];
   if (navigationEntries.length !== 1) return null;
 
   return Math.round(navigationEntries[0].domComplete);

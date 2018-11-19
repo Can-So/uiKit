@@ -23,12 +23,10 @@ export default function Pattern({
     return <FourOhFour />;
   }
 
-  const Content = Loadable({
-    // @ts-ignore TODO: Typing Loadable
+  const Content = Loadable<{}, { default?: string }>({
     loader: () => found && found.exports(),
-    // @ts-ignore TODO: Typing Loadable
     loading: Loading,
-    render(mod: { default?: string } | null) {
+    render(mod) {
       if (mod && mod.default) {
         return React.createElement(mod.default);
       }

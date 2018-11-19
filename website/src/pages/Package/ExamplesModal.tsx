@@ -366,7 +366,7 @@ export default class ExamplesModal extends Component<Props, State> {
         body={ModalBody}
         header={({ showKeyline }) => (
           <ModalHeaderComp
-            afterDeployError={this.afterDeployError}
+            afterDeployError={null}
             showKeyline={showKeyline}
             packageId={packageId}
             example={example}

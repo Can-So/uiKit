@@ -111,9 +111,7 @@ type Example = {
 
 function ExampleLoader(props: ExampleLoaderProps) {
   const ExampleComponent = Loadable({
-    // @ts-ignore TODO: Typing Loadable
     loader: () => props.example.exports(),
-    // @ts-ignore TODO: Typing Loadable
     loading: Loading,
     render(loaded: Example) {
       const ExampleComp = loaded.default;

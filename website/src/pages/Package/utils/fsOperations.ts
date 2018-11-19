@@ -10,11 +10,10 @@ function getPkg(packages, groupId, pkgId) {
   return pkg;
 }
 
-// TODO: find the exact types for the getJson and getDocs
-// @ts-ignore
-const getJSON: any = files => fs.getById(files, 'package.json').exports();
-const getDocs: any = dirs => {
-  const docs: any = fs.maybeGetById(dirs, 'docs');
+const getJSON = (files: fs.File[]) =>
+  fs.getById(files, 'package.json').exports();
+const getDocs = (dirs: fs.Directory[]) => {
+  const docs = fs.maybeGetById(dirs, 'docs');
   let doc;
   if (docs) {
     doc = fs.find(docs, () => true);
@@ -22,16 +21,14 @@ const getDocs: any = dirs => {
 
   return doc && doc.exports().then(mod => mod.default);
 };
-const getExamples = dirs => {
+const getExamples = (dirs: fs.Directory[]) => {
   const examples = fs.maybeGetById(dirs, 'examples');
-  // @ts-ignore
   return examples && examples.children;
 };
-const getChangelog = files => {
+const getChangelog = (files: fs.File[]) => {
   const changelog = fs.maybeGetById(files, 'CHANGELOG.md');
   return (
     (changelog &&
-      // @ts-ignore
       changelog.contents().then(changelog => divvyChangelog(changelog))) ||
     []
   );
@@ -52,5 +49,6 @@ export default function fetchPackageData(groupId, pkgId) {
     doc,
     examples,
     changelog,
+    error: false,
   }));
 }

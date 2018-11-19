@@ -1,6 +1,8 @@
 import sentenceCase from 'sentence-case';
 import { Directory, File } from '../types';
 
+export { Directory, File };
+
 export function getDirectories(
   items: Array<Directory | File>,
 ): Array<Directory> {

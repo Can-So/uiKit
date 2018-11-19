@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import * as reactAddonsTextContent from 'react-addons-text-content';
 import { Helmet } from 'react-helmet';
+// @ts-ignore: snakeCase has broken typings
 import * as snackeCase from 'snake-case';
 
 type Props = {

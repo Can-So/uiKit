@@ -12,6 +12,10 @@ type PackageDocumentProps = {
   match: RouterMatch;
 };
 
+type ResolvedJSXElement = {
+  default?: JSX.Element;
+};
+
 export default function PackageDocument({
   match: {
     params: { groupId, pkgId, docId },
@@ -24,12 +28,9 @@ export default function PackageDocument({
     return <FourOhFour />;
   }
 
-  const Content = Loadable({
-    // @ts-ignore //TODO: Need help to type Loadable
+  const Content = Loadable<{}, ResolvedJSXElement>({
     loading: Loading,
-    // @ts-ignore //TODO: Need help to type Loadable
-    loader: () => found && found.exports(),
-    // @ts-ignore //TODO: Need help to type Loadable
+    loader: async () => (found ? await found.exports() : {}),
     render: doc => (doc ? doc.default : <FourOhFour />),
   });
 
