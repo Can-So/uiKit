@@ -8,7 +8,6 @@ Those tests should be added before the release candidate*/
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
 import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import * as assert from 'assert';
 
 /* Url to test the example */
 const urlFormCreateRepo = getExampleUrl('core', 'form', 'create-repository');
