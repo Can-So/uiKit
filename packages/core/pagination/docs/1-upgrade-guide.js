@@ -19,11 +19,11 @@ export default md`
 - **defaultSelectedIndex**: The index of the defualt selected page
 - **selectedIndex**: The index of currently selected page. Incase you want to control the selected page
 - **collapseRange**: Function used to create a collapsed range of the pages to display
-- **pageComponent**:
-- **previousPageComponent**:
-- **nextPageComponent**:
-- **ellipsisComponent**:
-- **innerStyles**: 
+- **pageComponent**: A react component to be rendered instead of the defualt subtle atlaskit button.
+- **previousPageComponent**: A react component to be rendered instead of the defualt subtle atlaskit button.
+- **nextPageComponent**: A react component to be rendered instead of the defualt subtle atlaskit button.
+- **ellipsisComponent**: A react component to be rendered instead of default ellipsis component.
+- **innerStyles**: A styles object that is spread on the styles on the div wrapping pagination. Ideal for adding margins as required as per guideline.
 
 ### 🚨 Depcrecated Props:
 
@@ -50,7 +50,7 @@ In v9 instead of total we should pass in the array of pages. So, the above code 
 
 ${code`
 <Pagination
-  total={[ ...Array(10).map((_, i) => i + 1) ]} // or [ 1, 2, 3, 4, 5,... , 10 ]
+  pages={[ ...Array(10).map((_, i) => i + 1) ]} // or [ 1, 2, 3, 4, 5,... , 10 ]
   onChange={(e, newSelectedPage) => console.log('page changed', newSelectedPage)}
 />
 `}
