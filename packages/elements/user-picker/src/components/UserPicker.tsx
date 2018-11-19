@@ -225,7 +225,6 @@ export class UserPicker extends React.Component<
     const hasValue = numValues > 0;
 
     const options = getOptions(usersFromState, users) || [];
-    const hasSelectedAll: boolean = numValues === options.length && !isLoading;
 
     return (
       <Select
@@ -235,7 +234,7 @@ export class UserPicker extends React.Component<
         options={options}
         onChange={this.handleChange}
         styles={getStyles(width, hasValue)}
-        components={getComponents(isMulti, hasValue && !hasSelectedAll, anchor)}
+        components={getComponents(isMulti, anchor)}
         inputValue={search}
         menuIsOpen={menuIsOpen}
         onFocus={this.handleFocus}

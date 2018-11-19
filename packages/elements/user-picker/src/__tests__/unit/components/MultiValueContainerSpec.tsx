@@ -1,9 +1,11 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import {
-  ScrollAnchor,
   MultiValueContainer,
+  ScrollAnchor,
 } from '../../../components/MultiValueContainer';
+import { renderProp } from '../_testUtils';
 
 describe('ValueContainer', () => {
   beforeEach(() => {
@@ -13,18 +15,39 @@ describe('ValueContainer', () => {
     jest.useRealTimers();
   });
 
-  const shallowValueContainer = props =>
-    shallow(<MultiValueContainer {...props} />);
+  const selectProps = {
+    value: [1],
+    options: [1, 2, 3],
+    isLoading: false,
+  };
 
-  it('should render ValueContainer with children', () => {
-    const component = shallowValueContainer({ children: 'some text' });
-    expect(
-      component
-        .children()
-        .at(0)
-        .text(),
-    ).toEqual('some text');
-  });
+  const shallowValueContainer = props =>
+    shallow(<MultiValueContainer selectProps={selectProps} {...props} />);
+
+  const DummyComponent = ({ placeholder }) => placeholder;
+
+  test.each([
+    ['add more people...', selectProps.value, false],
+    [undefined, selectProps.options, false],
+    [undefined, [], false],
+    [undefined, [], true],
+  ])(
+    'should set placeholder to "%s" when (value: %p, loading: %s)',
+    (placeholder, value, isLoading) => {
+      const component = shallowValueContainer({
+        children: <DummyComponent />,
+        selectProps: { ...selectProps, value, isLoading },
+      });
+      const children = renderProp(
+        component.find(FormattedMessage),
+        'children',
+        'add more people...',
+      );
+      expect(children.find(DummyComponent).prop('placeholder')).toEqual(
+        placeholder,
+      );
+    },
+  );
 
   it('should scroll to bottom when adding new items', () => {
     const component = shallowValueContainer({
