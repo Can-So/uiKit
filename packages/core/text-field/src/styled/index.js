@@ -8,13 +8,6 @@ import {
   colors,
   themed,
 } from '@atlaskit/theme';
-import {
-  getBackgroundColor,
-  getBackgroundColorFocus,
-  getBackgroundColorHover,
-  getBorderColor,
-  getBorderColorFocus,
-} from '../theme';
 
 const borderRadius = '3px';
 const borderWidth = 2;
@@ -43,12 +36,10 @@ const getLineHeight = ({ isCompact }) => {
   return currentLineHeight / fontSize();
 };
 
-const getDisabledColor = themed({ light: colors.N70, dark: colors.DN90 });
-
 const getDisabledState = props =>
   props.isDisabled &&
   css`
-    color: ${getDisabledColor(props)};
+    color: ${props.disabledTextColor};
     pointer-events: none;
   `;
 
@@ -57,7 +48,7 @@ const getHoverState = props => {
 
   return css`
     &:hover {
-      background-color: ${getBackgroundColorHover(props)};
+      background-color: ${props.backgroundColorHover};
     }
   `;
 };
@@ -65,9 +56,13 @@ const getHoverState = props => {
 const getBorderStyle = ({ appearance }) =>
   appearance === 'none' ? 'none' : 'solid';
 
-const getPlaceholderColor = ({ isDisabled }) => {
-  if (isDisabled) return themed({ light: colors.N70, dark: colors.DN90 });
-  return themed({ light: colors.N100, dark: colors.DN90 });
+const getPlaceholderColor = ({
+  isDisabled,
+  placeholderTextColor,
+  disabledTextColor,
+}) => {
+  if (isDisabled) return disabledTextColor;
+  return placeholderTextColor;
 };
 
 // can't group these placeholder styles into one block because browsers drop
@@ -125,9 +120,8 @@ export const Wrapper = styled.div`
 export const InputWrapper = styled.div`
   align-items: center;
   background-color: ${p =>
-    p.isFocused ? getBackgroundColorFocus(p) : getBackgroundColor(p)};
-  border-color: ${p =>
-    p.isFocused ? getBorderColorFocus(p) : getBorderColor(p)};
+    p.isFocused ? p.backgroundColorFocus : p.backgroundColor};
+  border-color: ${p => (p.isFocused ? p.borderColorFocus : p.borderColor)};
   border-radius: ${borderRadius};
   border-width: ${borderWidth}px;
   border-style: ${getBorderStyle};
@@ -160,7 +154,7 @@ export const InputWrapper = styled.div`
     outline: none;
     width: 100%;
 
-    [disabled] {
+    &[disabled] {
       ${overrideSafariDisabledStyles};
     }
 

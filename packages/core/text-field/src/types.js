@@ -1,6 +1,7 @@
 // @flow
 import type { ElementRef } from 'react';
 import DefaultInput from './components/Input';
+import type { ThemeProps } from './theme';
 
 export type InputProps = {
   /** Controls the appearance of the field.
@@ -22,6 +23,7 @@ export type InputProps = {
   isRequired?: boolean,
   /** Forwarded ref */
   forwardedRef: ElementRef<*>,
+  theme: ThemeProps => ThemeProps,
 };
 
 export type TextFieldProps = {
@@ -41,14 +43,9 @@ export type TextFieldProps = {
   value?: string | number,
   /** Forwarded ref */
   forwardedRef: ElementRef<*>,
+  theme: ThemeProps => ThemeProps,
 
   /** Redundant types */
   isInvalid?: boolean,
-  invalidMessage?: string,
-  isLabelHidden?: boolean,
-  isValidationHidden?: boolean,
-  validationMessage?: string,
-  validationState?: {},
-  onUpdate?: (e: SyntheticEvent<>) => mixed,
   createAnalyticsEvent?: (e: SyntheticEvent<>) => mixed,
 };

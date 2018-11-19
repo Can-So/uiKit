@@ -22,9 +22,11 @@ export default ({
   isMonospaced,
   isReadOnly,
   isRequired,
+  theme,
   ...props
 }: InputProps) => (
   <InputWrapper
+    {...theme.textField({ appearance })}
     appearance={appearance}
     isCompact={isCompact}
     isDisabled={isDisabled}

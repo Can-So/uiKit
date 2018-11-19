@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import { Theme } from '@atlaskit/theme';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
@@ -12,6 +13,7 @@ import {
 } from '../../package.json';
 
 import DefaultInput from './Input';
+import defaultTheme from '../theme';
 import { Wrapper } from '../styled';
 import type { TextFieldProps } from '../types';
 
@@ -25,6 +27,7 @@ class TextField extends Component<TextFieldProps, State> {
     appearance: 'standard',
     input: DefaultInput,
     onChange: () => {},
+    theme: defaultTheme,
   };
 
   state = {
@@ -38,21 +41,21 @@ class TextField extends Component<TextFieldProps, State> {
     return this.props.value || this.state.value;
   };
 
-  handleOnFocus = (e: SyntheticEvent<*>) => {
+  handleOnFocus = (e: SyntheticEvent<HTMLInputElement>) => {
     this.setState({ isFocused: true });
     if (this.props.onFocus) {
       this.props.onFocus(e);
     }
   };
 
-  handleOnBlur = (e: SyntheticEvent<*>) => {
+  handleOnBlur = (e: SyntheticEvent<HTMLInputElement>) => {
     this.setState({ isFocused: false });
     if (this.props.onBlur) {
       this.props.onBlur(e);
     }
   };
 
-  handleOnChange = (e: SyntheticInputEvent<*>) => {
+  handleOnChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({ value: e.currentTarget.value });
     if (this.props.onChange) {
       this.props.onChange(e);
@@ -80,28 +83,28 @@ class TextField extends Component<TextFieldProps, State> {
       // These props come from 'form field' bc backwards compat.
       //  We don't need them tho.
       isInvalid,
-      invalidMessage,
-      isLabelHidden,
-      isValidationHidden,
-      validationMessage,
-      validationState,
-      onUpdate,
       createAnalyticsEvent,
+      theme,
       ...rest
     } = this.props;
 
     return (
-      <Wrapper size={size}>
-        <Input
-          {...rest}
-          isFocused={isFocused}
-          forwardedRef={forwardedRef}
-          onFocus={this.handleOnFocus}
-          onBlur={this.handleOnBlur}
-          onChange={this.handleOnChange}
-          value={this.getValue()}
-        />
-      </Wrapper>
+      <Theme theme={theme}>
+        {t => (
+          <Wrapper size={size}>
+            <Input
+              {...rest}
+              theme={t}
+              isFocused={isFocused}
+              forwardedRef={forwardedRef}
+              onFocus={this.handleOnFocus}
+              onBlur={this.handleOnBlur}
+              onChange={this.handleOnChange}
+              value={this.getValue()}
+            />
+          </Wrapper>
+        )}
+      </Theme>
     );
   }
 }
