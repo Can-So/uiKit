@@ -33,10 +33,6 @@ export const StatusContainer = styled.span`
   * ::selection {
     background-color: transparent;
   }
-
-  * {
-    -webkit-touch-callout: none;
-  }
 `;
 
 export const messages = defineMessages({
