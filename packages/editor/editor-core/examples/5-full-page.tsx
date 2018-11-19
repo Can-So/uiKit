@@ -100,7 +100,7 @@ export const SaveAndCancelButtons = props => (
 
 export type State = { disabled: boolean };
 
-const providers = {
+export const providers = {
   emojiProvider: emoji.storyData.getEmojiResource({
     uploadSupported: true,
     currentUser: {
@@ -116,7 +116,7 @@ const providers = {
   macroProvider: Promise.resolve(macroProvider),
 };
 
-const mediaProvider = storyMediaProviderFactory({
+export const mediaProvider = storyMediaProviderFactory({
   includeUserAuthProvider: true,
 });
 
@@ -160,6 +160,7 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               allowDate={true}
               allowLayouts={true}
               allowGapCursor={true}
+              allowTextAlignment={true}
               allowTemplatePlaceholders={{ allowInserting: true }}
               UNSAFE_cards={{
                 provider: Promise.resolve(cardProvider),

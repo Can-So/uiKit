@@ -1,5 +1,71 @@
 # @atlaskit/editor-core
 
+## 88.2.2
+- [patch] [9a66a9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a66a9b):
+
+  - Add Confluence cards in Editor example.
+
+## 88.2.1
+- [patch] [16ff8d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/16ff8d2):
+
+  - Add jira card editor example.
+
+## 88.2.0
+- [minor] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
+## 88.1.14
+- [patch] [380928b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/380928b):
+
+  - ED-5293: fix merging cells
+
+## 88.1.13
+- [patch] [f9d1245](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f9d1245):
+
+  - Fixes pasting from Microsoft & Apple office products (ED-5694, ED-5575)
+
+## 88.1.12
+- [patch] [cc78d09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc78d09):
+
+  - ED-5196: For a block as first node in a document, up and left arrow should show a gap cursor
+
+## 88.1.11
+- [patch] [4897ebf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4897ebf):
+
+  - ED-4777 Toggling list no longer selects previous text
+
+## 88.1.10
+- [patch] [ac02f46](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ac02f46):
+
+  - ED-5499 ToolbarFeedback now accepts metadata that appears in feedback ticket
+
+## 88.1.9
+- [patch] [6cb44c4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6cb44c4):
+
+  - ED-5162: fix table selection for merged cells
+
+## 88.1.8
+- [patch] [e151c1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e151c1a):
+
+  - Removes dependency on @atlaskit/layer-manager
+
+  As of component versions:
+
+  - \`@atlaskit/modal-dialog@7.0.0\`
+  - \`@atlaskit/tooltip@12.0.2\`
+  - \`@atlaskit/flag@9.0.6\`
+  - \`@atlaskit/onboarding@6.0.0\`
+
+  No component requires \`LayerManager\` to layer correctly.
+
+  You can safely remove this dependency and stop rendering \`LayerManager\` in your apps.
+
+## 88.1.7
+- [patch] [8262781](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8262781):
+
+  - Fix floating toolbars overlaping with main editor toolbar
+
 ## 88.1.6
 - [patch] [50aa9d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/50aa9d2):
 

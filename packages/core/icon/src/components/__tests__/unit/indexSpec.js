@@ -351,7 +351,6 @@ describe(name, () => {
         'watch',
         'world-small',
         'star-large',
-        'star-outline',
         'world',
         'suitcase',
         'select-clear',

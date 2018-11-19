@@ -24,6 +24,10 @@ This is a text`,
     ],
     ['leading triple dashes is not list', `--- This is not a list`],
     ['leading double dashes is not list', `-- This is not a list`],
+    [
+      'multiple - should be rendered as plain text',
+      '------------- ---------------- ------------------',
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

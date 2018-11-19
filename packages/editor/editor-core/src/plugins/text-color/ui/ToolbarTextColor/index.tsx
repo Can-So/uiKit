@@ -2,6 +2,7 @@ import * as React from 'react';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
 import TextColorIcon from '@atlaskit/icon/glyph/editor/text-color';
+import { akEditorMenuZIndex } from '@atlaskit/editor-common';
 import { withAnalytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import ColorPalette from '../../../../ui/ColorPalette';
@@ -65,6 +66,7 @@ class ToolbarTextColor extends React.Component<
           onOpenChange={this.handleOpenChange}
           fitWidth={242}
           fitHeight={80}
+          zIndex={akEditorMenuZIndex}
           trigger={
             <ToolbarButton
               spacing={isReducedSpacing ? 'none' : 'default'}

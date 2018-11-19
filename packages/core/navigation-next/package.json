@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/navigation-next",
-  "version": "3.22.1",
+  "version": "3.25.1",
   "description": "The Atlassian navigation component.",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -8,7 +8,8 @@
   "atlaskit:src": "src/index.js",
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "*.js"
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
@@ -51,7 +52,7 @@
     "@atlaskit/drawer": "^2.3.0",
     "@atlaskit/dropdown-menu": "^6.1.19",
     "@atlaskit/field-base": "^11.0.10",
-    "@atlaskit/global-navigation": "^5.1.2",
+    "@atlaskit/global-navigation": "^5.2.1",
     "@atlaskit/logo": "^9.2.3",
     "@atlaskit/lozenge": "^6.2.2",
     "@atlaskit/modal-dialog": "^7.0.7",
@@ -60,8 +61,15 @@
     "@atlaskit/toggle": "^5.0.10",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "fs-extra": "^4.0.2",
+    "glob": "^7.1.2",
+    "mkdirp": "^0.5.1",
     "react-dom": "^16.4.2",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "react-async-component": "^2.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/build-entrypoints.js"
   }
 }

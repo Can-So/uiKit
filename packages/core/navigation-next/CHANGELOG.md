@@ -1,5 +1,31 @@
 # @atlaskit/navigation-next
 
+## 3.25.1
+- [patch] [a22db3c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a22db3c):
+
+  - Update flowtypes of UIController to allow consumer supplied cache getters to return null/undefined
+
+## 3.25.0
+- [minor] [d96b032](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d96b032):
+
+  - Export flow types for each built-in item renderer type
+  - Export a generic flow typed version of the renderer, `TypedViewRenderer`, that is designed to be extended to pass custom component flow types
+    so the renderer typechecks custom components. See the [View Renderer documentation](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/state-controllers#view-renderer) for more information.
+
+## 3.24.0
+- [minor] [c2c0b0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2c0b0c):
+
+  - Adding new component AsyncLayoutManagerWithViewController to be used with code splitting
+
+## 3.23.0
+- [minor] [b40e33e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b40e33e):
+
+  - Update flow types of navigation components and higher-order components (HOCs) to allow types to flow through to consumers.
+
+    Previously this was broken because our navigation HOCs (withTheme, withNavigationUIController, withNavigationViewController)
+    weren't explicitly typed and swallowed types of a component. Types were also lost when components were wrapped with multiple HOCs (including withAnalyticsEvents, withAnalyticsContext HOCs). This is now fixed by default and a number of types related to our navigation HOCs have been exported so that you can explicitly type any subsequent components
+    wrapped with our HOCs.
+
 ## 3.22.1
 - [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
 

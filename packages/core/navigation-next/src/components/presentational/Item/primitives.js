@@ -31,7 +31,6 @@ const ComponentSwitch = ({
 
 const getItemComponentProps = (props: ItemPrimitiveProps) => {
   const {
-    createAnalyticsEvent,
     isActive,
     isHover,
     isSelected,

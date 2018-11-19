@@ -1397,7 +1397,6 @@ describe('Renderer - Validator', () => {
             },
           ],
         });
-
         expect(content).to.deep.equal(itemContent);
       });
     });

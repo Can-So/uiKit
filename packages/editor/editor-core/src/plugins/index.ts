@@ -47,3 +47,4 @@ export { default as floatingToolbarPlugin } from './floating-toolbar';
 export { default as statusPlugin } from './status';
 export { default as gridPlugin } from './grid';
 export { default as breakoutPlugin } from './breakout';
+export { default as alignment } from './alignment';

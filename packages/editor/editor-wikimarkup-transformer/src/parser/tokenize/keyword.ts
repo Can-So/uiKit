@@ -17,8 +17,6 @@ const macroKeywordTokenMap = {
  * will be checked first, so it matters.
  */
 const keywordTokenMap = {
-  '[~': TokenType.MENTION,
-  '[^': TokenType.FLIE_LINK,
   '[': TokenType.LINK_FORMAT,
   http: TokenType.LINK_TEXT,
   irc: TokenType.LINK_TEXT,
@@ -97,7 +95,7 @@ const leadingKeywordTokenMap = [
   },
   {
     type: TokenType.RULER,
-    regex: /^-{4}(\s|$)/,
+    regex: /^-{4,5}(\s|$)/,
   },
   {
     type: TokenType.TRIPLE_DASH_SYMBOL,

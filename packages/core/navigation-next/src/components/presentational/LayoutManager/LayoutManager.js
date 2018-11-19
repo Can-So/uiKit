@@ -1,13 +1,6 @@
 // @flow
 
-import React, {
-  Component,
-  Fragment,
-  PureComponent,
-  type ElementRef,
-  type Ref,
-  type Node,
-} from 'react';
+import React, { Component, Fragment, type ElementRef } from 'react';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 import { colors } from '@atlaskit/theme';
 
@@ -17,20 +10,19 @@ import {
 } from '../../../../package.json';
 import { Shadow } from '../../../common/primitives';
 import { light, ThemeProvider } from '../../../theme';
-import ContentNavigation from './ContentNavigation';
+import ContentNavigation from '../ContentNavigation';
+import PageContent from '../PageContent';
 import ResizeTransition, {
   isTransitioning,
   type TransitionState,
-} from './ResizeTransition';
+} from '../ResizeTransition';
 import ResizeControl from './ResizeControl';
+import { LayoutContainer, NavigationContainer } from './primitives';
+import type { LayoutManagerProps } from './types';
 import {
   ContainerNavigationMask,
   ContentNavigationWrapper,
-  LayoutContainer,
-  NavigationContainer,
-  PageWrapper,
-} from './primitives';
-import type { LayoutManagerProps, CollapseListeners } from './types';
+} from '../ContentNavigation/primitives';
 
 import {
   CONTENT_NAV_WIDTH_COLLAPSED,
@@ -59,72 +51,8 @@ function defaultTooltipContent(isCollapsed: boolean) {
     : { text: 'Collapse', char: '[' };
 }
 
-type PageProps = CollapseListeners & {
-  children: Node,
-  flyoutIsOpen: boolean,
-  innerRef: Ref<'div'>,
-  isResizing: boolean,
-  isCollapsed: boolean,
-  productNavWidth: number,
-};
-
-// FIXME: Move to separate file
-// eslint-disable-next-line react/no-multi-comp
-class PageInner extends PureComponent<{ children: Node }> {
-  render() {
-    return this.props.children;
-  }
-}
-
-// FIXME: Move to separate file
-// eslint-disable-next-line react/no-multi-comp
-export class Page extends PureComponent<PageProps> {
-  render() {
-    const {
-      flyoutIsOpen,
-      innerRef,
-      isResizing,
-      isCollapsed,
-      productNavWidth,
-      onExpandStart,
-      onExpandEnd,
-      onCollapseStart,
-      onCollapseEnd,
-    } = this.props;
-    return (
-      <ResizeTransition
-        from={[CONTENT_NAV_WIDTH_COLLAPSED]}
-        in={!isCollapsed}
-        productNavWidth={productNavWidth}
-        properties={['paddingLeft']}
-        to={[flyoutIsOpen ? CONTENT_NAV_WIDTH_FLYOUT : productNavWidth]}
-        userIsDragging={isResizing}
-        /* Attach expand/collapse callbacks to the page resize transition to ensure they are only
-         * called when the nav is permanently expanded/collapsed, i.e. when page content position changes. */
-        onExpandStart={onExpandStart}
-        onExpandEnd={onExpandEnd}
-        onCollapseStart={onCollapseStart}
-        onCollapseEnd={onCollapseEnd}
-      >
-        {({ transitionStyle, transitionState }) => (
-          <PageWrapper
-            disableInteraction={isResizing || isTransitioning(transitionState)}
-            innerRef={innerRef}
-            offset={GLOBAL_NAV_WIDTH}
-            style={transitionStyle}
-          >
-            <PageInner>{this.props.children}</PageInner>
-          </PageWrapper>
-        )}
-      </ResizeTransition>
-    );
-  }
-}
-
 /* NOTE: experimental props use an underscore */
-/* eslint-disable camelcase */
 
-// eslint-disable-next-line react/no-multi-comp
 export default class LayoutManager extends Component<
   LayoutManagerProps,
   State,
@@ -141,8 +69,10 @@ export default class LayoutManager extends Component<
 
   static defaultProps = {
     collapseToggleTooltipContent: defaultTooltipContent,
+    // eslint-disable-next-line camelcase
     experimental_flyoutOnHover: false,
   };
+
   static getDerivedStateFromProps(props: LayoutManagerProps, state: State) {
     // kill the flyout when the user commits to expanding navigation
     if (!props.navigationUIController.state.isCollapsed && state.flyoutIsOpen) {
@@ -239,7 +169,8 @@ export default class LayoutManager extends Component<
     const { transitionState, transitionStyle } = args;
     const {
       containerNavigation,
-      experimental_flyoutOnHover,
+      // eslint-disable-next-line camelcase
+      experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
       navigationUIController,
       productNavigation,
     } = this.props;
@@ -269,7 +200,7 @@ export default class LayoutManager extends Component<
           key="product-nav"
           product={productNavigation}
         />
-        {isCollapsed && !experimental_flyoutOnHover ? (
+        {isCollapsed && !EXPERIMENTAL_FLYOUT_ON_HOVER ? (
           <div
             aria-label="Click to expand the navigation"
             role="button"
@@ -299,7 +230,12 @@ export default class LayoutManager extends Component<
   };
 
   renderNavigation = () => {
-    const { navigationUIController, experimental_flyoutOnHover } = this.props;
+    const {
+      navigationUIController,
+      // eslint-disable-next-line camelcase
+      experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
+      collapseToggleTooltipContent,
+    } = this.props;
     const { flyoutIsOpen, mouseIsOverNavigation, itemIsDragging } = this.state;
     const {
       isCollapsed,
@@ -317,7 +253,7 @@ export default class LayoutManager extends Component<
           data={{
             attributes: {
               isExpanded: !isCollapsed,
-              flyoutOnHoverEnabled: experimental_flyoutOnHover,
+              flyoutOnHoverEnabled: EXPERIMENTAL_FLYOUT_ON_HOVER,
             },
             componentName: 'navigation',
             packageName,
@@ -335,7 +271,7 @@ export default class LayoutManager extends Component<
           >
             {({ transitionStyle, transitionState }) => {
               const onMouseOut =
-                isCollapsed && experimental_flyoutOnHover && flyoutIsOpen
+                isCollapsed && EXPERIMENTAL_FLYOUT_ON_HOVER && flyoutIsOpen
                   ? this.mouseOutFlyoutArea
                   : null;
               return (
@@ -346,14 +282,12 @@ export default class LayoutManager extends Component<
                   onMouseLeave={this.mouseLeave}
                 >
                   <ResizeControl
-                    collapseToggleTooltipContent={
-                      // $FlowFixMe
-                      this.props.collapseToggleTooltipContent
-                    }
+                    collapseToggleTooltipContent={collapseToggleTooltipContent}
                     expandCollapseAffordanceRef={
                       this.nodeRefs.expandCollapseAffordance
                     }
-                    experimental_flyoutOnHover={experimental_flyoutOnHover}
+                    // eslint-disable-next-line camelcase
+                    experimental_flyoutOnHover={EXPERIMENTAL_FLYOUT_ON_HOVER}
                     isDisabled={isResizeDisabled}
                     flyoutIsOpen={flyoutIsOpen}
                     isGrabAreaDisabled={itemIsDragging}
@@ -367,7 +301,7 @@ export default class LayoutManager extends Component<
                     {({ isDragging, width }) => {
                       const onMouseOver =
                         isCollapsed &&
-                        experimental_flyoutOnHover &&
+                        EXPERIMENTAL_FLYOUT_ON_HOVER &&
                         !flyoutIsOpen
                           ? this.mouseOverFlyoutArea
                           : null;
@@ -401,13 +335,14 @@ export default class LayoutManager extends Component<
     );
   };
 
-  render() {
+  renderPageContent = () => {
     const {
       navigationUIController,
       onExpandStart,
       onExpandEnd,
       onCollapseStart,
       onCollapseEnd,
+      children,
     } = this.props;
     const { flyoutIsOpen } = this.state;
     const {
@@ -417,21 +352,27 @@ export default class LayoutManager extends Component<
     } = navigationUIController.state;
 
     return (
+      <PageContent
+        flyoutIsOpen={flyoutIsOpen}
+        innerRef={this.getPageRef}
+        isResizing={isResizing}
+        isCollapsed={isCollapsed}
+        productNavWidth={productNavWidth}
+        onExpandStart={onExpandStart}
+        onExpandEnd={onExpandEnd}
+        onCollapseStart={onCollapseStart}
+        onCollapseEnd={onCollapseEnd}
+      >
+        {children}
+      </PageContent>
+    );
+  };
+
+  render() {
+    return (
       <LayoutContainer>
         {this.renderNavigation()}
-        <Page
-          flyoutIsOpen={flyoutIsOpen}
-          innerRef={this.getPageRef}
-          isResizing={isResizing}
-          isCollapsed={isCollapsed}
-          productNavWidth={productNavWidth}
-          onExpandStart={onExpandStart}
-          onExpandEnd={onExpandEnd}
-          onCollapseStart={onCollapseStart}
-          onCollapseEnd={onCollapseEnd}
-        >
-          {this.props.children}
-        </Page>
+        {this.renderPageContent()}
       </LayoutContainer>
     );
   }

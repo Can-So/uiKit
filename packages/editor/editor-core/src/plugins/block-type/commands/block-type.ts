@@ -9,6 +9,7 @@ import {
   HEADINGS_BY_NAME,
   NORMAL_TEXT,
 } from '../types';
+import { removeAlignment } from '../../alignment/utils';
 
 export function setBlockType(name: string): Command {
   return (state, dispatch) => {
@@ -85,9 +86,14 @@ export function insertBlockType(name: string): Command {
  */
 function wrapSelectionIn(type): Command {
   return function(state: EditorState, dispatch) {
-    const { tr } = state;
+    let { tr } = state;
     const { $from, $to } = state.selection;
     const { paragraph } = state.schema.nodes;
+
+    /** Alignment is not valid inside block types */
+    const removeAlignTr = removeAlignment(state);
+    tr = removeAlignTr || tr;
+
     const range = $from.blockRange($to) as any;
     const wrapping = range && (findWrapping(range, type) as any);
     if (range && wrapping) {

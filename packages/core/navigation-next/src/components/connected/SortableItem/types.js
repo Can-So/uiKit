@@ -3,7 +3,7 @@
 import type { ElementConfig } from 'react';
 import Item from '../../presentational/Item';
 
-export type SortableItemProps = {
+export type SortableItemProps = {|
   ...$Exact<ElementConfig<typeof Item>>,
   /** The index of the sortable item within it's group, used for sorting. */
   index: number,
@@ -11,4 +11,4 @@ export type SortableItemProps = {
    *  for drag and drop. Also used for analytics.
    */
   id: string,
-};
+|};

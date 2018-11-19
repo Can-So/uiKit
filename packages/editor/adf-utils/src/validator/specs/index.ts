@@ -1,5 +1,6 @@
 // DO NOT MODIFY THIS FILE, USE `yarn generate:spec`
 export { default as paragraph } from './paragraph';
+export { default as alignment } from './alignment';
 export { default as bulletList } from './bulletList';
 export { default as media } from './media';
 export { default as mediaSingle } from './mediaSingle';
@@ -9,10 +10,6 @@ export { default as heading } from './heading';
 export { default as panel } from './panel';
 export { default as blockquote } from './blockquote';
 export { default as rule } from './rule';
-export { default as table } from './table';
-export { default as tableRow } from './tableRow';
-export { default as tableCell } from './tableCell';
-export { default as tableHeader } from './tableHeader';
 export { default as text } from './text';
 export { default as breakout } from './breakout';
 export { default as codeBlock } from './codeBlock';
@@ -26,6 +23,10 @@ export { default as decisionItem } from './decisionItem';
 export { default as decisionList } from './decisionList';
 export { default as taskItem } from './taskItem';
 export { default as taskList } from './taskList';
+export { default as table } from './table';
+export { default as tableRow } from './tableRow';
+export { default as tableCell } from './tableCell';
+export { default as tableHeader } from './tableHeader';
 export { default as extension } from './extension';
 export { default as inlineExtension } from './inlineExtension';
 export { default as bodiedExtension } from './bodiedExtension';

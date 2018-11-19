@@ -10,25 +10,31 @@ import {
 import { type Theme, type ThemeProps, applyTheme } from './themes/themeBuilder';
 
 type CodeProps = {
+  /** The style object to apply to code */
+  codeStyle?: {},
+  /** The element or custom react component to use in place of the default code tag */
+  codeTagProps?: {},
+  /** The language in which the code is written */
+  language: ADFSupportedLanguages | string,
+  /** The style object to apply to the container that shows line number */
+  lineNumberContainerStyle: {},
+  /** The element or custom react component to use in place of the default span tag */
+  preTag: Node | string,
+  /** Indicates whether or not to show line numbers */
+  showLineNumbers: boolean,
   /** The code to be formatted */
   text: string,
-  /** The language in which the code is written */
-  language?: ADFSupportedLanguages | string,
   /** A custom theme to be applied, implements the Theme interface */
   theme?: Theme | ThemeProps,
-  codeStyle?: {},
-  showLineNumbers?: boolean,
-  lineNumberContainerStyle?: {},
-  codeTagProps?: {},
 };
 
 export class Code extends PureComponent<CodeProps, {}> {
   static defaultProps = {
-    language: '',
     theme: {},
     showLineNumbers: false,
-    lineNumberContainerStyle: null,
+    lineNumberContainerStyle: {},
     codeTagProps: {},
+    preTag: 'span',
   };
 
   render() {
@@ -37,7 +43,7 @@ export class Code extends PureComponent<CodeProps, {}> {
 
     const props = {
       language,
-      PreTag: 'span',
+      PreTag: this.props.preTag,
       style: this.props.codeStyle || inlineCodeStyle,
       showLineNumbers: this.props.showLineNumbers,
       lineNumberContainerStyle: this.props.lineNumberContainerStyle,

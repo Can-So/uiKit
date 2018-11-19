@@ -70,7 +70,8 @@ const productHomeView = {
       parentId: null,
       items: [
         {
-          type: LinkItem,
+          type: 'InlineComponent',
+          component: LinkItem,
           id: 'dashboards',
           before: DashboardIcon,
           text: 'Dashboards',
@@ -133,7 +134,8 @@ const productIssuesView = {
                   id: 'issues-and-filters-heading',
                 },
                 {
-                  type: LinkItem,
+                  type: 'InlineComponent',
+                  component: LinkItem,
                   id: 'search-issues',
                   text: 'Search issues',
                   to: '/issues',
@@ -208,7 +210,8 @@ const projectHomeView = {
       parentId: null,
       items: [
         {
-          type: LinkItem,
+          type: 'InlineComponent',
+          component: LinkItem,
           before: BacklogIcon,
           text: 'Backlog',
           to: '/projects/my-project',

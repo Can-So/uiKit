@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.2.1
+- [patch] [ad45749](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad45749):
+
+  - Update flow types to use object spread instead of intersection and reference GlobalItem via ElementConfig rather than its props directly
+
 ## 5.2.0
 - [minor] [0d4946e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0d4946e):
 

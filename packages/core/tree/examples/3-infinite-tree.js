@@ -13,7 +13,7 @@ import Tree, {
   type TreeData,
   type ItemId,
   type Path,
-} from '../src/';
+} from '../src';
 import { range } from '../src/utils/handy';
 
 const Container = styled.div`

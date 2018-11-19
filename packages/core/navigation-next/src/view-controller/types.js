@@ -1,38 +1,10 @@
 // @flow
 
-import type { ComponentType } from 'react';
+import type { ComponentType, ElementConfig } from 'react';
+import type { Diffable } from '../common/types';
+import ViewController from './ViewController';
 
-type ViewItemArgs = {
-  actionAfter?: string,
-  goTo?: string,
-  icon?: ComponentType<{
-    isActive: boolean,
-    isHover: boolean,
-    isSelected: boolean,
-    spacing: 'compact' | 'default',
-  }>,
-  iconName?: string,
-  id: string,
-  isLoading?: boolean,
-  isSelected?: boolean,
-  lozenge?: string,
-  onClick?: (SyntheticEvent<any>) => void,
-  route?: string,
-  target?: string,
-  text?: string,
-  type: ComponentType<*> | string,
-  url?: string,
-};
-
-type ViewGroupArgs = {
-  id: string,
-  items: ViewData,
-  nestedGroupKey?: string,
-  parentId?: string,
-  type: ComponentType<*> | string,
-};
-
-export type ViewData = Array<ViewItemArgs | ViewGroupArgs>;
+export type ViewData = Array<{ [string]: any }>;
 export type ViewID = string;
 export type ViewLayer = 'product' | 'container';
 type GetItemsSignature = () => Promise<ViewData> | ViewData;
@@ -45,7 +17,8 @@ export type View = {
    * Allowing extra attributes to be sent for analytics events. */
   getAnalyticsAttributes?: (items: ViewData) => {},
 };
-type ActiveView = {
+
+export type ActiveView = {
   analyticsAttributes?: {} | void,
   id: ViewID,
   type: ViewLayer,
@@ -124,3 +97,18 @@ export interface ViewControllerInterface {
   /** Set whether the view controller is in debug mode. */
   setIsDebugEnabled: boolean => void;
 }
+
+/**
+ * withNavigationUIController
+ */
+
+export type WithNavigationViewControllerProps = {
+  navigationViewController: ViewController,
+};
+
+export type ViewControllerWrappedComp<C> = ComponentType<
+  $Diff<
+    ElementConfig<$Supertype<C>>,
+    Diffable<WithNavigationViewControllerProps>,
+  >,
+>;

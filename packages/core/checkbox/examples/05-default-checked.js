@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Checkbox from '../src/Checkbox';
+import { Checkbox } from '../src';
 
 export default class ControlledExample extends Component<void> {
   render() {
