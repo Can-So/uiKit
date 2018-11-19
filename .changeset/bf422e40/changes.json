@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "@atlaskit/color-picker", "type": "minor" }],
+  "dependents": []
+}
