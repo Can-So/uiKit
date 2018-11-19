@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Children, Component, Fragment } from 'react';
 import { canUseDOM } from 'exenv';
 import { createPortal } from 'react-dom';
@@ -12,7 +13,6 @@ import {
   type WithAnalyticsEventsProps,
 } from '@atlaskit/analytics-next';
 import Blanket from '@atlaskit/blanket';
-import chromatism from 'chromatism';
 import {
   name as packageName,
   version as packageVersion,

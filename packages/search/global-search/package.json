@@ -30,7 +30,6 @@
     "@atlaskit/analytics-next": "^3.0.10",
     "@atlaskit/avatar": "^14.1.2",
     "@atlaskit/button": "^9.0.15",
-    "@atlaskit/drawer": "^2.4.0",
     "@atlaskit/dropdown-menu": "^6.1.19",
     "@atlaskit/field-text-area": "^4.0.10",
     "@atlaskit/flag": "^9.1.1",
@@ -61,6 +60,7 @@
   },
   "devDependencies": {
     "@atlaskit/docs": "^5.0.8",
+    "@atlaskit/drawer": "^2.4.0",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/navigation": "^33.3.1",
     "@atlaskit/page": "^8.0.8",
