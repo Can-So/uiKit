@@ -109,7 +109,7 @@ function ExampleSelector(props) {
     </Control>
   );
 }
-// TODO: need some help with the any and the optional props
+
 type ExampleNavigationProps = {
   onExampleSelected?: (selected: { item: { value: string } }) => void;
   examples?: any;
@@ -173,6 +173,7 @@ class ExampleNavigation extends Component<ExampleNavigationProps> {
             position="left"
           >
             <CodeSandbox
+              examples={examples}
               example={example}
               groupId={groupId}
               packageId={packageId}
@@ -400,7 +401,7 @@ export default class Examples extends React.Component<Props, State> {
             {`Example - ${fs.titleize(exampleId)} - ${fs.titleize(
               packageId,
             )} -${' '}
-            ${process.env.BASE_TITLE}`}
+            ${BASE_TITLE}`}
           </title>
         </Helmet>
         {examples && exampleId ? (

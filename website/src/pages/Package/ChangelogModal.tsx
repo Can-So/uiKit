@@ -163,7 +163,7 @@ export default class ExamplesModal extends Component<Props, State> {
     const { isInvalid, range } = this.state;
 
     const Content = Loadable<{}, ResolvedChangelog>({
-      loading: Loading,
+      loading: () => <Loading />,
       loader: async () => (found ? { changelog: await found.contents() } : {}),
       render: changelog =>
         changelog ? (
@@ -186,9 +186,7 @@ export default class ExamplesModal extends Component<Props, State> {
         width={640}
       >
         <Helmet>
-          <title>
-            {`Changelog - ${fs.titleize(pkgId)} - ${process.env.BASE_TITLE}`}
-          </title>
+          <title>{`Changelog - ${fs.titleize(pkgId)} - ${BASE_TITLE}`}</title>
         </Helmet>
         <ModalBody>
           {isInvalid ? (

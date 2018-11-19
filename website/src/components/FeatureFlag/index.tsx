@@ -41,13 +41,9 @@ const createClient = () => {
   let client;
   return () => {
     if (!client) {
-      client = LDClient.initialize(
-        clientKey(process.env.WEBSITE_ENV),
-        anonymousUser(),
-        {
-          bootstrap: 'localStorage',
-        },
-      );
+      client = LDClient.initialize(clientKey(WEBSITE_ENV), anonymousUser(), {
+        bootstrap: 'localStorage',
+      });
     }
     return client;
   };

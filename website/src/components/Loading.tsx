@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Spinner, { SpinnerProps } from '@atlaskit/spinner';
+import Spinner from '@atlaskit/spinner';
+import { SpinnerProps } from '../types';
 
 const Container = styled.div`
   align-items: center;
@@ -10,11 +11,10 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const Loading = { props: SpinnerProps }(
+const Loading: React.StatelessComponent<SpinnerProps> = ({ size, ...rest }) => (
   <Container>
-    <Spinner {...props} />
-  </Container>,
+    <Spinner size={size || 'large'} {...rest} />
+  </Container>
 );
-Loading.defaultProps = { size: 'large' };
 
 export default Loading;

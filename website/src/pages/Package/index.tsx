@@ -144,7 +144,7 @@ class Package extends Component<any, any> {
       <Page>
         {urlIsExactMatch && (
           <Helmet>
-            <title>{`${title} package - ${process.env.BASE_TITLE}`}</title>
+            <title>{`${title} package - ${BASE_TITLE}`}</title>
           </Helmet>
         )}
         <Title>

@@ -4,7 +4,7 @@ export interface LinkProps {
   onClick?: (e: Event) => void;
   to: string | Record<string, string | Location>;
   theme?: any;
-  className?: ClassNames;
+  className?: any;
   replace?: boolean;
   style?: {};
   isSelected?: boolean;

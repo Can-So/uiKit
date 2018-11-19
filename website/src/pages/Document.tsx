@@ -36,7 +36,7 @@ export default function Document({
 
   const Content = Loadable<{}, ResolvedMD>({
     loader: async () => (found ? await found.exports() : {}),
-    loading: Loading,
+    loading: () => <Loading />,
     render(md) {
       const docDetails = md.default || {};
       const { content, data = {} } = docDetails;

@@ -11,7 +11,7 @@ declare interface Window {
 }
 
 type Props = {
-  children?: (...param: any) => React.ReactChild;
+  children?: (...param: Array<any>) => React.ReactChild;
   src: string | null;
   name: string;
   example: {
@@ -60,7 +60,7 @@ export default class ExampleDisplay extends Component<Props> {
   buildExampleComponents = props => {
     this.ExampleCode = Loadable({
       loader: () => props.example.contents(),
-      loading: () => <Loading />,
+      loading: () => <Loading {...props} />,
       render(loaded: any) {
         return (
           <CodeBlock grammar="jsx" content={loaded.default} name={props.name} />

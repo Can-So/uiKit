@@ -131,7 +131,7 @@ export default function PackagesList() {
   return (
     <Page>
       <Helmet>
-        <title>{`Browse all packages - ${process.env.BASE_TITLE}`}</title>
+        <title>{`Browse all packages - ${BASE_TITLE}`}</title>
       </Helmet>
       <Title>All Packages</Title>
       <Section>

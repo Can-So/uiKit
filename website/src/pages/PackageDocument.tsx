@@ -29,7 +29,7 @@ export default function PackageDocument({
   }
 
   const Content = Loadable<{}, ResolvedJSXElement>({
-    loading: Loading,
+    loading: () => <Loading />,
     loader: async () => (found ? await found.exports() : {}),
     render: doc => (doc ? doc.default : <FourOhFour />),
   });
@@ -38,9 +38,7 @@ export default function PackageDocument({
     <Page>
       <Helmet>
         <title>
-          {`${fs.titleize(pkgId)} - ${fs.titleize(docId)} - ${
-            process.env.BASE_TITLE
-          }`}
+          {`${fs.titleize(pkgId)} - ${fs.titleize(docId)} - ${BASE_TITLE}`}
         </title>
       </Helmet>
       <Title>

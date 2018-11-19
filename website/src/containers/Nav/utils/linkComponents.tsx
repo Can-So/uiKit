@@ -37,7 +37,6 @@ const RouterLink = ({
   className,
   subNav,
   onClick,
-  isSelected,
   pathname,
 }: RouterLinkProps) => {
   return (
@@ -48,7 +47,6 @@ const RouterLink = ({
         replace={replace}
         style={{ color: 'inherit' }}
         to={href}
-        isSelected={isSelected}
       >
         {children}
       </Link>

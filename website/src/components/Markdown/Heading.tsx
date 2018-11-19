@@ -47,9 +47,7 @@ export default class Heading extends Component<Props, State> {
         {level === 1 ? (
           <Helmet>
             <title>
-              {`${reactAddonsTextContent(children)} - ${
-                process.env.BASE_TITLE
-              }`}
+              {`${reactAddonsTextContent(children)} - ${BASE_TITLE}`}
             </title>
           </Helmet>
         ) : (

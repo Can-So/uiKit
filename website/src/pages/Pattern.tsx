@@ -25,7 +25,7 @@ export default function Pattern({
 
   const Content = Loadable<{}, { default?: string }>({
     loader: () => found && found.exports(),
-    loading: Loading,
+    loading: () => <Loading />,
     render(mod) {
       if (mod && mod.default) {
         return React.createElement(mod.default);

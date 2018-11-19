@@ -28,6 +28,12 @@ export const sendPerformanceMetrics = ({
   timing,
   value,
   isInitial,
+}: {
+  location: string;
+  metricName: string;
+  timing: number;
+  value: number;
+  isInitial: boolean;
 }) => {
   ReactGA.event({
     category: 'Performance',
@@ -50,7 +56,11 @@ export const sendPerformanceMetrics = ({
   request.send();
 };
 
-export const sendApdex = (location, timing, isInitial = false) => {
+export const sendApdex = (
+  location: string,
+  timing: number,
+  isInitial = false,
+) => {
   let apdex = 0;
   if (timing < 1000) apdex = 100;
   else if (timing < 4000) apdex = 50;
@@ -63,13 +73,13 @@ export const sendApdex = (location, timing, isInitial = false) => {
   });
 };
 
-export const sendInitialApdex = location => {
+export const sendInitialApdex = (location: string) => {
   const timing = getPageLoadNumber();
   if (!timing) return null;
   sendApdex(location, timing, true);
 };
 
-export const observePerformanceMetrics = location => {
+export const observePerformanceMetrics = (location: string) => {
   if (typeof PerformanceObserver === 'undefined') {
     return;
   }

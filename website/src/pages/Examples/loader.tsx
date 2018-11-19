@@ -112,7 +112,7 @@ type Example = {
 function ExampleLoader(props: ExampleLoaderProps) {
   const ExampleComponent = Loadable({
     loader: () => props.example.exports(),
-    loading: Loading,
+    loading: () => <Loading />,
     render(loaded: Example) {
       const ExampleComp = loaded.default;
       if (!ExampleComp) {

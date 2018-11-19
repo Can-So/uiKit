@@ -37,7 +37,7 @@ export default function Markdown({
       <Helmet>
         <meta
           name="description"
-          content={description || process.env.DEFAULT_META_DESCRIPTION}
+          content={description || DEFAULT_META_DESCRIPTION}
         />
       </Helmet>
       {renderer.render(parser.parse(children))}

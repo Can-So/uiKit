@@ -389,7 +389,7 @@ export default class ExamplesModal extends Component<Props, State> {
             {`Example - ${fs.titleize(exampleId)} - ${fs.titleize(
               packageId,
             )} -${' '}
-            ${process.env.BASE_TITLE}`}
+            ${BASE_TITLE}`}
           </title>
         </Helmet>
         <ContentBody>

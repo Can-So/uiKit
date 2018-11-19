@@ -60,7 +60,7 @@ export default class ChangelogExplorer extends Component<Props, State> {
     const { isInvalid, range } = this.state;
 
     const Content = Loadable<{}, ResolvedLog>({
-      loading: Loading,
+      loading: () => <Loading />,
       loader: async () =>
         found ? { log: await found.contents() } : { log: '' },
       render: changelog =>
