@@ -2,11 +2,8 @@
 import { md, code } from '@atlaskit/docs';
 
 export default md`
-## Installation
 
-${code`
-npm i @atlaskit/reduced-ui-pack;
-`}
+CSS classes which provide styling for a reduced number of Atlaskit components.
 
 ## Usage
 

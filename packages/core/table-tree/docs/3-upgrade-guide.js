@@ -53,7 +53,7 @@ ${(
       require('../examples/upgrade-guide-examples/static-data').default
     }
     source={require('!!raw-loader!../examples/upgrade-guide-examples/static-data')}
-    title="Basic Usage: With Static Data"
+    title="With Static Data"
     language="jsx"
   />
 )}

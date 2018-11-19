@@ -24,11 +24,11 @@ export interface PluginConfig {
 }
 
 export interface TablePluginState {
-  dangerColumns: number[];
-  dangerRows: number[];
   decorationSet: DecorationSet;
-  pluginConfig: PluginConfig;
   editorHasFocus?: boolean;
+  hoveredColumns: number[];
+  hoveredRows: number[];
+  pluginConfig: PluginConfig;
   // position of a cell PM node that has cursor
   targetCellPosition?: number;
   // controls need to be re-rendered when table content changes
@@ -37,8 +37,7 @@ export interface TablePluginState {
   tableRef?: HTMLElement;
   tableFloatingToolbarTarget?: HTMLElement;
   isContextualMenuOpen?: boolean;
-  isTableHovered?: boolean;
-  isTableInDanger?: boolean;
+  isInDanger?: boolean;
   insertColumnButtonIndex?: number;
   insertRowButtonIndex?: number;
 }

@@ -9,7 +9,7 @@ export default {
           values: ['neutral', 'purple', 'blue', 'red', 'yellow', 'green'],
         },
         localId: { type: 'string', optional: true },
-        style: { type: 'enum', values: ['bold', 'subtle'], optional: true },
+        style: { type: 'string', optional: true },
       },
     },
   },

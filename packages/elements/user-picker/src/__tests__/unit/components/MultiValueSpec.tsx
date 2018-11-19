@@ -1,8 +1,17 @@
 import Avatar from '@atlaskit/avatar';
-import Tag from '@atlaskit/tag';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { MultiValue } from '../../../components/MultiValue';
+
+const renderProp = (wrapper: ShallowWrapper, renderProp: string, ...args) => {
+  const prop = wrapper.prop(renderProp);
+  if (prop && typeof prop === 'function') {
+    const Wrapper = () => prop(...args);
+    return shallow(<Wrapper />);
+  }
+  throw new Error('renderProp is not a function');
+};
 
 describe('MultiValue', () => {
   const Container = props => <div {...props} />;
@@ -35,37 +44,34 @@ describe('MultiValue', () => {
   it('should render the Container with a Tag', () => {
     const component = shallowMultiValue();
     expect(component.find(Container)).toHaveLength(1);
-    const tag = component.find(Tag);
-    expect(tag).toHaveLength(1);
+    const tag = renderProp(
+      component.find(FormattedMessage),
+      'children',
+      'remove',
+    );
     expect(tag.props()).toMatchObject({
       appearance: 'rounded',
       text: 'Jace Beleren',
       elemBefore: (
-        <Avatar
-          size="xsmall"
-          src="http://avatars.atlassian.com/jace.png"
-          label="Jace Beleren"
-        />
+        <Avatar size="xsmall" src="http://avatars.atlassian.com/jace.png" />
       ),
       removeButtonText: 'remove',
     });
-    expect(tag.prop('color')).toBeUndefined();
   });
 
   it('should use blueLight color when focused', () => {
     const component = shallowMultiValue({ isFocused: true });
     expect(component.find(Container)).toHaveLength(1);
-    const tag = component.find(Tag);
-    expect(tag).toHaveLength(1);
+    const tag = renderProp(
+      component.find(FormattedMessage),
+      'children',
+      'remove',
+    );
     expect(tag.props()).toMatchObject({
       appearance: 'rounded',
       text: 'Jace Beleren',
       elemBefore: (
-        <Avatar
-          size="xsmall"
-          src="http://avatars.atlassian.com/jace.png"
-          label="Jace Beleren"
-        />
+        <Avatar size="xsmall" src="http://avatars.atlassian.com/jace.png" />
       ),
       removeButtonText: 'remove',
       color: 'blueLight',
@@ -74,7 +80,12 @@ describe('MultiValue', () => {
 
   it('should call onClick onAfterRemoveAction', () => {
     const component = shallowMultiValue();
-    component.find(Tag).simulate('afterRemoveAction');
+    const tag = renderProp(
+      component.find(FormattedMessage),
+      'children',
+      'remove',
+    );
+    tag.simulate('afterRemoveAction');
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
@@ -82,6 +93,11 @@ describe('MultiValue', () => {
     const component = shallowMultiValue({
       data: { ...data, user: { ...data.user, fixed: true } },
     });
-    expect(component.find(Tag).prop('removeButtonText')).toBeUndefined();
+    const tag = renderProp(
+      component.find(FormattedMessage),
+      'children',
+      'remove',
+    );
+    expect(tag.prop('removeButtonText')).toBeUndefined();
   });
 });

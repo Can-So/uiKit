@@ -23,7 +23,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkCreateDrawer"
+      heading="AkCreateDrawer Props"
       props={require('!!extract-react-types-loader!../src/components/js/drawers/CreateDrawer.js')}
     />
   )}
@@ -31,7 +31,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkSearchDrawer"
+      heading="AkSearchDrawer Props"
       props={require('!!extract-react-types-loader!../src/components/js/drawers/SearchDrawer.js')}
     />
   )}
@@ -39,12 +39,8 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkCustomDrawer"
+      heading="AkCustomDrawer Props"
       props={require('!!extract-react-types-loader!../src/components/js/drawers/CustomDrawer.js')}
     />
   )}
 `;
-
-// AkCreateDrawer
-// AkCustomDrawer
-// AkSearchDrawer

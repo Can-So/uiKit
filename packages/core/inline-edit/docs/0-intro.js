@@ -3,11 +3,11 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  ### Usage
-
   The inline editor is designed to not stand out as an input when it is not
   focused or being interacted with. It is designed to be used as a wrapper
-  to control an input component
+  to control an input component.
+
+## Usage
 
 ${code`
 import InlineEdit, { InlineEditStateless } from '@atlaskit/inline-edit';

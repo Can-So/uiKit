@@ -63,7 +63,9 @@ const productHomeView = {
       parentId: null,
       items: [
         {
-          type: LinkItem,
+          // Example: using LinkItem as an inline component
+          type: 'InlineComponent',
+          component: LinkItem,
           id: 'dashboards',
           before: DashboardIcon,
           text: 'Dashboards',
@@ -122,7 +124,8 @@ const productIssuesView = {
           id: 'issues-and-filters-heading',
         },
         {
-          type: LinkItem,
+          // Example: using LinkItem as a custom component type
+          type: 'LinkItem',
           id: 'search-issues',
           text: 'Search issues',
           to: '/issues',
@@ -193,7 +196,10 @@ class App extends Component<{
 
   render() {
     return (
-      <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
+      <LayoutManagerWithViewController
+        customComponents={{ LinkItem }}
+        globalNavigation={MyGlobalNavigation}
+      >
         <Switch>
           <Route path="/issues" component={IssuesAndFiltersRoute} />
           <Route path="/" component={DashboardsRoute} />

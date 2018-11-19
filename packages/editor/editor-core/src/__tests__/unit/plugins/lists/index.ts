@@ -450,6 +450,22 @@ describe('lists', () => {
       expect(pluginState).toHaveProperty('bulletListDisabled', true);
     });
 
+    describe('toggling a list', () => {
+      it("shouldn't affect text selection", () => {
+        const { editorView } = editor(doc(p('hello{<>}')));
+
+        toggleBulletList(editorView);
+        // If the text is not selected, pressing enter will
+        // create a new paragraph. If it is selected the
+        // 'hello' text will be removed
+        sendKeyToPm(editorView, 'Enter');
+
+        expect(editorView.state.doc).toEqualDocument(
+          doc(ul(li(p('hello')), li(p('')))),
+        );
+      });
+    });
+
     describe('untoggling a list', () => {
       const expectedOutput = doc(
         ol(li(p('One'))),
