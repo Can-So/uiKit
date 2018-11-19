@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, type ElementRef } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { TextAreaWithoutAnalytics as TextArea } from '../src/components/TextArea';
 
@@ -10,7 +10,7 @@ const Div = styled.div`
 export default class extends Component<*, *> {
   textareaRef: HTMLTextAreaElement | null;
 
-  focus = (event: SyntheticInputEvent<HTMLTextAreaElement>) => {
+  focus = () => {
     if (this.textareaRef) {
       this.textareaRef.focus();
     }
@@ -23,7 +23,11 @@ export default class extends Component<*, *> {
         <p>Invalid:</p>
         <TextArea isInvalid resize="auto" />
         <p>Smart:</p>
-        <TextArea ref={ref => (this.textareaRef = ref)} />
+        <TextArea
+          ref={ref => {
+            this.textareaRef = ref;
+          }}
+        />
         <button onClick={this.focus}>focus</button>
       </Div>
     );

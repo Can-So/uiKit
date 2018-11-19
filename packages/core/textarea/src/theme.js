@@ -1,5 +1,4 @@
 // @flow
-import { colors } from '@atlaskit/theme';
 import * as componentTokens from './component-tokens';
 
 const invalidRules = {

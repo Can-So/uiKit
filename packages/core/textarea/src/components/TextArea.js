@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, type ElementRef } from 'react';
+import React, { Component } from 'react';
 import { Theme } from '@atlaskit/theme';
 import {
   withAnalyticsEvents,
@@ -101,6 +101,7 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
 
   render() {
     const {
+      // eslint-disable-next-line react/prop-types
       createAnalyticsEvent,
       appearance,
       resize,

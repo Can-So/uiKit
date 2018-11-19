@@ -130,15 +130,6 @@ describe('TextArea', () => {
   });
 });
 
-describe('TextArea', () => {
-  it('should call onChange when input value changes', () => {
-    const spy = jest.fn();
-    const wrapper = mount(<TextArea onChange={spy} label="" />);
-    wrapper.find('textarea').simulate('change');
-    expect(spy).toHaveBeenCalledTimes(1);
-  });
-});
-
 describe('TextArea input focus', () => {
   it('should get focus when focus() is called', () => {
     let hasFocus = 0;

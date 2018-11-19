@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, type ElementRef } from 'react';
+import React, { Component } from 'react';
 
 type Props = {
   innerRef?: (HTMLTextAreaElement | null) => void,
@@ -29,8 +29,8 @@ export default class TextAreaElement extends Component<Props, State> {
 
   componentDidMount() {
     if (this.props.resize === 'smart' && this.textareaRef) {
+      // eslint-disable-next-line
       this.setState({
-        // eslint-disable-line
         height: `${this.textareaRef.scrollHeight}px`,
       });
     }
