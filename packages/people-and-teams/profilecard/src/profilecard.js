@@ -1,14 +1,18 @@
 // @flow
 import React, { PureComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { colors } from '@atlaskit/theme';
 import AkSpinner from '@atlaskit/spinner';
 import AkAvatar from '@atlaskit/avatar';
 import AkButton from '@atlaskit/button';
+import AkLozenge from '@atlaskit/lozenge';
 
 import ErrorMessage from './components/ErrorMessage';
 import HeightTransitionWrapper from './components/HeightTransitionWrapper';
 import IconLabel from './components/IconLabel';
+import RelativeDate from './components/RelativeDate';
 import presences from './internal/presences';
+import messages from './messages';
 
 import type { ProfilecardProps } from './types';
 
@@ -18,17 +22,18 @@ import {
   AppTitleLabel,
   CardContainer,
   CardContent,
-  DeactivatedInfo,
+  DisabledInfo,
   DetailsGroup,
   FullNameLabel,
   JobTitleLabel,
   ProfileImage,
   SpinnerContainer,
+  LozengeWrapper,
 } from './styled/Card';
 
 export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   static defaultProps = {
-    isActive: true,
+    status: 'active',
     isBot: false,
     isNotMentionable: false,
     presence: 'none',
@@ -116,34 +121,109 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   }
 
   renderCardDetailsDefault() {
-    const validPresence = presences[this.props.presence || 'none'];
+    const {
+      meta,
+      presence,
+      presenceMessage,
+      nickname,
+      fullName,
+      location,
+      email,
+      timestring,
+      orgName,
+    } = this.props;
+
+    const validPresence = presences[presence || 'none'];
 
     return (
       <DetailsGroup>
-        <FullNameLabel noMeta={!this.props.meta}>
-          {this.props.fullName}
-        </FullNameLabel>
-        {this.props.meta && <JobTitleLabel>{this.props.meta}</JobTitleLabel>}
-        <IconLabel icon={this.props.presence}>
-          {(!!validPresence && this.props.presenceMessage) || validPresence}
+        <FullNameLabel noMeta={!meta}>{fullName}</FullNameLabel>
+        {meta && <JobTitleLabel>{meta}</JobTitleLabel>}
+        <IconLabel icon={presence}>
+          {(!!validPresence && presenceMessage) || validPresence}
         </IconLabel>
-        <IconLabel icon="email">{this.props.email}</IconLabel>
-        <IconLabel icon="mention">
-          {this.props.nickname && `@${this.props.nickname}`}
-        </IconLabel>
-        <IconLabel icon="time">{this.props.timestring}</IconLabel>
-        <IconLabel icon="location">{this.props.location}</IconLabel>
+        <IconLabel icon="email">{email}</IconLabel>
+        <IconLabel icon="mention">{nickname && `@${nickname}`}</IconLabel>
+        <IconLabel icon="time">{timestring}</IconLabel>
+        <IconLabel icon="org">{orgName}</IconLabel>
+        <IconLabel icon="location">{location}</IconLabel>
       </DetailsGroup>
     );
   }
 
-  renderCardDetailsDeactivated() {
+  renderCardDetailsForDisabledAccount() {
+    const { nickname, status, orgName } = this.props;
+
     return (
       <DetailsGroup>
-        <FullNameLabel noMeta>{this.props.fullName}</FullNameLabel>
-        <DeactivatedInfo>This user is no longer available</DeactivatedInfo>
+        <FullNameLabel noMeta isDisabledAccount>
+          {this.getDisabledAccountName()}
+        </FullNameLabel>
+
+        <LozengeWrapper>
+          <AkLozenge appearance="default" isBold>
+            {status === 'inactive' && (
+              <FormattedMessage {...messages.inactiveAccountMsg} />
+            )}
+            {status === 'closed' && (
+              <FormattedMessage {...messages.closedAccountMsg} />
+            )}
+          </AkLozenge>
+        </LozengeWrapper>
+
+        <DisabledInfo>{this.getDisabledAccountDesc()}</DisabledInfo>
+
+        {status === 'inactive' && (
+          <>
+            <IconLabel icon="mention">{nickname && `@${nickname}`}</IconLabel>
+            <IconLabel icon="org">{orgName}</IconLabel>
+          </>
+        )}
       </DetailsGroup>
     );
+  }
+
+  getDisabledAccountName() {
+    const { nickname, fullName, status } = this.props;
+    if (status === 'inactive') {
+      return fullName || nickname;
+    } else if (status === 'closed') {
+      return (
+        nickname || (
+          <FormattedMessage {...messages.disabledAccountDefaultName} />
+        )
+      );
+    }
+
+    return null;
+  }
+
+  getDisabledAccountDesc() {
+    const { status, statusModifiedDate } = this.props;
+    const date = statusModifiedDate ? new Date(statusModifiedDate) : null;
+    const relativeDate = date ? <RelativeDate date={date} /> : null;
+
+    if (status === 'inactive') {
+      return date ? (
+        <FormattedMessage
+          {...messages.inactiveAccountDescHasDateMsg}
+          values={{ date: relativeDate }}
+        />
+      ) : (
+        <FormattedMessage {...messages.inactiveAccountDescNoDateMsg} />
+      );
+    } else if (status === 'closed') {
+      return date ? (
+        <FormattedMessage
+          {...messages.closedAccountDescHasDateMsg}
+          values={{ date: relativeDate }}
+        />
+      ) : (
+        <FormattedMessage {...messages.closedAccountDescNoDateMsg} />
+      );
+    }
+
+    return null;
   }
 
   renderCardDetailsApp() {
@@ -159,26 +239,33 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   }
 
   renderCardDetails() {
-    if (this.props.isBot) {
+    const { isBot, status } = this.props;
+
+    if (isBot) {
       return this.renderCardDetailsApp();
-    } else if (!this.props.isActive) {
-      return this.renderCardDetailsDeactivated();
+    }
+
+    if (status === 'inactive' || status === 'closed') {
+      return this.renderCardDetailsForDisabledAccount();
     }
 
     return this.renderCardDetailsDefault();
   }
 
   renderProfilecard() {
+    const { status } = this.props;
+
     this.callAnalytics('profile-card.loaded', {
       duration: this._durationSince(this._timeOpen),
     });
+    const isDisabledUser = status === 'inactive' || status === 'closed';
 
     return (
-      <CardContainer>
+      <CardContainer isDisabledUser={isDisabledUser}>
         <ProfileImage>
           <AkAvatar
             size="xlarge"
-            src={this.props.isActive ? this.props.avatarUrl : null}
+            src={this.props.status !== 'closed' ? this.props.avatarUrl : null}
             borderColor={colors.N0}
           />
         </ProfileImage>
@@ -192,6 +279,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   }
 
   render() {
+    const { isInAdmin } = this.props;
     let cardContent = null;
 
     if (this.props.hasError) {
@@ -208,6 +296,10 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
       cardContent = this.renderProfilecard();
     }
 
-    return <HeightTransitionWrapper>{cardContent}</HeightTransitionWrapper>;
+    return (
+      <HeightTransitionWrapper isInAdmin={isInAdmin}>
+        {cardContent}
+      </HeightTransitionWrapper>
+    );
   }
 }

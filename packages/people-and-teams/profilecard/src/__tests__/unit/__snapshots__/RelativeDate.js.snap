@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RelativeDate should match snapshot when date prop is a few months ago 1`] = `
+<FormattedMessage
+  defaultMessage="a few months"
+  description="a relative date is showed when a user is closed/deactivated"
+  id="pt.profile.card.a.few.months"
+  values={Object {}}
+/>
+`;
+
+exports[`RelativeDate should match snapshot when date prop is in last month 1`] = `
+<FormattedMessage
+  defaultMessage="last month"
+  description="a relative date is showed when a user is closed/deactivated"
+  id="pt.profile.card.last.month"
+  values={Object {}}
+/>
+`;
+
+exports[`RelativeDate should match snapshot when date prop is in this month 1`] = `
+<FormattedMessage
+  defaultMessage="this month"
+  description="a relative date is showed when a user is closed/deactivated"
+  id="pt.profile.card.this.month"
+  values={Object {}}
+/>
+`;
+
+exports[`RelativeDate should match snapshot when date prop is in this week 1`] = `
+<FormattedMessage
+  defaultMessage="this week"
+  description="a relative date is showed when a user is closed/deactivated"
+  id="pt.profile.card.this.week"
+  values={Object {}}
+/>
+`;
+
+exports[`RelativeDate should match snapshot when date prop is more than a year ago 1`] = `
+<FormattedMessage
+  defaultMessage="more than a year"
+  description="a relative date is showed when a user is closed/deactivated"
+  id="pt.profile.card.more.than.a.year"
+  values={Object {}}
+/>
+`;
+
+exports[`RelativeDate should match snapshot when date prop is several months ago 1`] = `
+<FormattedMessage
+  defaultMessage="several months"
+  description="a relative date is showed when a user is closed/deactivated"
+  id="pt.profile.several.months"
+  values={Object {}}
+/>
+`;
+
+exports[`RelativeDate should match snapshot when date prop is today 1`] = `
+<FormattedMessage
+  defaultMessage="this week"
+  description="a relative date is showed when a user is closed/deactivated"
+  id="pt.profile.card.this.week"
+  values={Object {}}
+/>
+`;
+
+exports[`RelativeDate should match snapshot when date prop is yesterday 1`] = `
+<FormattedMessage
+  defaultMessage="this week"
+  description="a relative date is showed when a user is closed/deactivated"
+  id="pt.profile.card.this.week"
+  values={Object {}}
+/>
+`;

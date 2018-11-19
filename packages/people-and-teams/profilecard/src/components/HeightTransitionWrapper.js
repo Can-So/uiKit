@@ -7,14 +7,15 @@ import {
   borderRadius,
   gridSize,
   math,
+  elevation,
 } from '@atlaskit/theme';
 
-import { bgColor, bgShadowColor, bgBorderColor } from '../styled/constants';
+import { bgColor } from '../styled/constants';
 
 const CardAnimationWrapper = styled.div`
   background-color: ${bgColor};
   border-radius: ${borderRadius}px;
-  box-shadow: 0 4px 8px -2px ${bgShadowColor}, 0 0 1px ${bgBorderColor};
+  ${props => (props.isInAdmin ? elevation.e100 : elevation.e200)};
   cursor: default;
   font-family: ${fontFamily};
   font-size: ${fontSize}px;
@@ -26,6 +27,7 @@ const CardAnimationWrapper = styled.div`
 
 type Props = {
   children: ReactNode,
+  isInAdmin?: boolean,
 };
 
 type State = {
@@ -66,12 +68,15 @@ export default class HeightTransitionWrapper extends PureComponent<
   }
 
   render() {
+    const { isInAdmin } = this.props;
+
     const inlineHeight = {
       height: this.state.height,
     };
 
     return (
       <CardAnimationWrapper
+        isInAdmin={isInAdmin}
         style={inlineHeight}
         innerRef={ref => {
           this.ref = ref;

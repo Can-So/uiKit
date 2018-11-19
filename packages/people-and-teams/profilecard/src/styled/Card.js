@@ -5,6 +5,8 @@ import { gridSize, math } from '@atlaskit/theme';
 
 import {
   headerBgColor,
+  headerBgColorDisabledUser,
+  headerTextColorInactive,
   headerTextColor,
   appLabelBgColor,
   appLabelTextColor,
@@ -54,7 +56,7 @@ export const DetailsGroup = styled.div`
   width: ${math.multiply(gridSize, 24.5)}px;
 `;
 
-export const DeactivatedInfo = styled.div`
+export const DisabledInfo = styled.div`
   font-size: ${math.multiply(gridSize, 1.5)}px;
   color: ${labelTextColor};
   margin: ${math.multiply(gridSize, 1.5)}px 0 0 0;
@@ -67,9 +69,16 @@ export const FullNameLabel = styled.span`
   white-space: nowrap;
 
   font-size: 18px;
-  color: ${headerTextColor};
+  color: ${props =>
+    props.isDisabledAccount ? headerTextColorInactive : headerTextColor};
   margin: ${props => getFullNameMargin(props)};
   line-height: ${math.divide(() => 24, 18)}em;
+`;
+
+export const LozengeWrapper = styled.div`
+  margin-top: ${math.multiply(gridSize, 2)}px;
+  text-transform: uppercase;
+  display: block;
 `;
 
 export const JobTitleLabel = styled.span`
@@ -110,8 +119,12 @@ export const CardContainer = styled.div`
   -moz-osx-font-smoothing: grayscale;
   background-image: linear-gradient(
     to bottom,
-    ${headerBgColor} 0%,
-    ${headerBgColor} 100%
+    ${props =>
+        props.isDisabledUser ? headerBgColorDisabledUser : headerBgColor}
+      0%,
+    ${props =>
+        props.isDisabledUser ? headerBgColorDisabledUser : headerBgColor}
+      100%
   );
   background-repeat: no-repeat;
   background-size: 100% ${math.multiply(gridSize, 12)}px;

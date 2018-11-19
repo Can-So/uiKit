@@ -4,12 +4,33 @@ import { shallow, mount } from 'enzyme';
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
 import AkButton from '@atlaskit/button';
 import { Presence } from '@atlaskit/avatar';
+import mockdate from 'mockdate';
 import AkProfilecardResourced, { AkProfilecard, AkProfileClient } from '../..';
 import ErrorMessage from '../../components/ErrorMessage';
 import presences from '../../internal/presences';
 import { FullNameLabel, ActionButtonGroup } from '../../styled/Card';
 
 describe('Profilecard', () => {
+  const defaultProps = {
+    fullName: 'full name test',
+    status: 'active',
+    nickname: 'jscrazy',
+    orgName: 'Atlassian',
+  };
+
+  const TODAY = new Date(2018, 10, 19, 17, 30, 0, 0);
+
+  beforeEach(() => {
+    mockdate.set(TODAY);
+  });
+
+  afterEach(() => {
+    mockdate.reset();
+  });
+
+  const renderShawllow = (props = {}) =>
+    shallow(<AkProfilecard {...defaultProps} {...props} />);
+
   it('should export default AkProfilecardResourced', () => {
     expect(AkProfilecardResourced).toBeInstanceOf(Object);
   });
@@ -174,6 +195,44 @@ describe('Profilecard', () => {
         card.setProps({ actions: undefined });
         const actionsWrapper = card.find(ActionButtonGroup);
         expect(actionsWrapper.children().length).toBe(0);
+      });
+    });
+
+    describe('status property', () => {
+      it('should match snapshot when status=inactive and status modified date is unknown', () => {
+        const card = renderShawllow({
+          status: 'inactive',
+          statusModifiedDate: undefined,
+        });
+
+        expect(card).toMatchSnapshot();
+      });
+
+      it('should match snapshot when status=inactive and status modified date is defined', () => {
+        const card = renderShawllow({
+          status: 'inactive',
+          statusModifiedDate: 1542608651819,
+        });
+
+        expect(card).toMatchSnapshot();
+      });
+
+      it('should match snapshot when status=closed and status modified date is unknown', () => {
+        const card = renderShawllow({
+          status: 'closed',
+          statusModifiedDate: undefined,
+        });
+
+        expect(card).toMatchSnapshot();
+      });
+
+      it('should match snapshot when status=closed and status modified date is defined', () => {
+        const card = renderShawllow({
+          status: 'closed',
+          statusModifiedDate: 1542608651819,
+        });
+
+        expect(card).toMatchSnapshot();
       });
     });
   });

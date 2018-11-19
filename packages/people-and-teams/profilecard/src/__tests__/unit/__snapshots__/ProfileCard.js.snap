@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profilecard AkProfilecard status property should match snapshot when status=closed and status modified date is defined 1`] = `
+<HeightTransitionWrapper>
+  <styled.div
+    isDisabledUser={true}
+  >
+    <styled.div>
+      <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar)))))
+        borderColor="#FFFFFF"
+        size="xlarge"
+        src={null}
+      />
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        <styled.span
+          isDisabledAccount={true}
+          noMeta={true}
+        >
+          jscrazy
+        </styled.span>
+        <styled.div>
+          <Lozenge
+            appearance="default"
+            isBold={true}
+            maxWidth={200}
+            theme={[Function]}
+          >
+            <FormattedMessage
+              defaultMessage="Account deleted"
+              description="A text in a grey lozenge shows that this user is closed/deleted"
+              id="pt.profile.card.closed.account"
+              values={Object {}}
+            />
+          </Lozenge>
+        </styled.div>
+        <styled.div>
+          <FormattedMessage
+            defaultMessage="You can no longer collaborate with this person. Their account has been deleted {date}."
+            description="A long text explains this user is closed when we know the date of starting to close"
+            id="pt.profile.card.inactive.account.has.date"
+            values={
+              Object {
+                "date": <RelativeDate
+                  date={2018-11-19T06:24:11.819Z}
+                />,
+              }
+            }
+          />
+        </styled.div>
+      </styled.div>
+      <styled.div />
+    </styled.div>
+  </styled.div>
+</HeightTransitionWrapper>
+`;
+
+exports[`Profilecard AkProfilecard status property should match snapshot when status=closed and status modified date is unknown 1`] = `
+<HeightTransitionWrapper>
+  <styled.div
+    isDisabledUser={true}
+  >
+    <styled.div>
+      <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar)))))
+        borderColor="#FFFFFF"
+        size="xlarge"
+        src={null}
+      />
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        <styled.span
+          isDisabledAccount={true}
+          noMeta={true}
+        >
+          jscrazy
+        </styled.span>
+        <styled.div>
+          <Lozenge
+            appearance="default"
+            isBold={true}
+            maxWidth={200}
+            theme={[Function]}
+          >
+            <FormattedMessage
+              defaultMessage="Account deleted"
+              description="A text in a grey lozenge shows that this user is closed/deleted"
+              id="pt.profile.card.closed.account"
+              values={Object {}}
+            />
+          </Lozenge>
+        </styled.div>
+        <styled.div>
+          <FormattedMessage
+            defaultMessage="You can no longer collaborate with this person. Their account has been deleted."
+            description="A long text explains this user is closed when we do not know the date of starting to close"
+            id="pt.profile.card.closed.account.no.date"
+            values={Object {}}
+          />
+        </styled.div>
+      </styled.div>
+      <styled.div />
+    </styled.div>
+  </styled.div>
+</HeightTransitionWrapper>
+`;
+
+exports[`Profilecard AkProfilecard status property should match snapshot when status=inactive and status modified date is defined 1`] = `
+<HeightTransitionWrapper>
+  <styled.div
+    isDisabledUser={true}
+  >
+    <styled.div>
+      <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar)))))
+        borderColor="#FFFFFF"
+        size="xlarge"
+      />
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        <styled.span
+          isDisabledAccount={true}
+          noMeta={true}
+        >
+          full name test
+        </styled.span>
+        <styled.div>
+          <Lozenge
+            appearance="default"
+            isBold={true}
+            maxWidth={200}
+            theme={[Function]}
+          >
+            <FormattedMessage
+              defaultMessage="Account deactivated"
+              description="A text in a grey lozenge shows that this user is inactive"
+              id="pt.profile.card.inactive.account"
+              values={Object {}}
+            />
+          </Lozenge>
+        </styled.div>
+        <styled.div>
+          <FormattedMessage
+            defaultMessage="You can no longer collaborate with this person. Their account was deactivated {date}."
+            description="A long text explains this user is inactive when we know the date of starting to deactivate"
+            id="pt.profile.card.inactive.account.has.date"
+            values={
+              Object {
+                "date": <RelativeDate
+                  date={2018-11-19T06:24:11.819Z}
+                />,
+              }
+            }
+          />
+        </styled.div>
+        <Fragment>
+          <IconLabel
+            icon="mention"
+          >
+            @jscrazy
+          </IconLabel>
+          <IconLabel
+            icon="org"
+          >
+            Atlassian
+          </IconLabel>
+        </Fragment>
+      </styled.div>
+      <styled.div />
+    </styled.div>
+  </styled.div>
+</HeightTransitionWrapper>
+`;
+
+exports[`Profilecard AkProfilecard status property should match snapshot when status=inactive and status modified date is unknown 1`] = `
+<HeightTransitionWrapper>
+  <styled.div
+    isDisabledUser={true}
+  >
+    <styled.div>
+      <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar)))))
+        borderColor="#FFFFFF"
+        size="xlarge"
+      />
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        <styled.span
+          isDisabledAccount={true}
+          noMeta={true}
+        >
+          full name test
+        </styled.span>
+        <styled.div>
+          <Lozenge
+            appearance="default"
+            isBold={true}
+            maxWidth={200}
+            theme={[Function]}
+          >
+            <FormattedMessage
+              defaultMessage="Account deactivated"
+              description="A text in a grey lozenge shows that this user is inactive"
+              id="pt.profile.card.inactive.account"
+              values={Object {}}
+            />
+          </Lozenge>
+        </styled.div>
+        <styled.div>
+          <FormattedMessage
+            defaultMessage="You can no longer collaborate with this person. Their account has been deactivated."
+            description="A long text explains this user is inactive when we do not know the date of starting to deactivate"
+            id="pt.profile.card.inactive.account.no.date"
+            values={Object {}}
+          />
+        </styled.div>
+        <Fragment>
+          <IconLabel
+            icon="mention"
+          >
+            @jscrazy
+          </IconLabel>
+          <IconLabel
+            icon="org"
+          >
+            Atlassian
+          </IconLabel>
+        </Fragment>
+      </styled.div>
+      <styled.div />
+    </styled.div>
+  </styled.div>
+</HeightTransitionWrapper>
+`;

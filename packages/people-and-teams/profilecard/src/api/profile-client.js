@@ -80,6 +80,8 @@ const buildUserQuery = (cloudId: string, userId: string) => ({
     User: CloudUser(userId: $userId, cloudId: $cloudId) {
       id,
       isCurrentUser,
+      status,
+      statusModifiedDate,
       isActive: active,
       isBot,
       isNotMentionable,

@@ -6,6 +6,17 @@ export type PresenceTypes =
   | 'unavailable'
   | 'focus';
 
+export type StatusTypes = 'active' | 'inactive' | 'closed';
+
+export type StatusModifiedDateType =
+  | 'noDate'
+  | 'thisWeek'
+  | 'thisMonth'
+  | 'lastMonth'
+  | 'aFewMonths'
+  | 'severalMonths'
+  | 'moreThanAYear';
+
 export type ProfileCardAction = {
   callback?: Function,
   shouldRender?: Function,
@@ -14,7 +25,7 @@ export type ProfileCardAction = {
 };
 
 export type ProfilecardProps = {
-  isActive?: boolean,
+  status?: StatusTypes,
   isBot?: boolean,
   avatarUrl?: string,
   fullName?: string,
@@ -22,6 +33,7 @@ export type ProfilecardProps = {
   nickname?: string,
   email?: string,
   location?: string,
+  orgName?: string,
   timestring?: string,
   presence?: PresenceTypes,
   actions?: ProfileCardAction[],
@@ -31,6 +43,12 @@ export type ProfilecardProps = {
   clientFetchProfile?: Function,
   analytics?: Function,
   presenceMessage?: string,
+  statusModifiedDate?: number,
+  isInAdmin?: boolean,
+};
+
+export type RelativeDateProps = {
+  date: Date,
 };
 
 export type ProfileClient = {
