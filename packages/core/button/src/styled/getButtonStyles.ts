@@ -37,12 +37,24 @@ const getState = ({
   isHover,
   isSelected,
 }: StyleProps) => {
-  if (disabled) return 'disabled';
-  if (isSelected && isFocus) return 'focusSelected';
-  if (isSelected) return 'selected';
-  if (isActive) return 'active';
-  if (isHover) return 'hover';
-  if (isFocus) return 'focus';
+  if (disabled) {
+    return 'disabled';
+  }
+  if (isSelected && isFocus) {
+    return 'focusSelected';
+  }
+  if (isSelected) {
+    return 'selected';
+  }
+  if (isActive) {
+    return 'active';
+  }
+  if (isHover) {
+    return 'hover';
+  }
+  if (isFocus) {
+    return 'focus';
+  }
   return 'default';
 };
 

@@ -1,5 +1,5 @@
 import { ButtonType, ButtonState } from './Button';
-import { ButtonProps } from 'src/types';
+import { ButtonProps } from '../types';
 
 const getAppearanceProps = (props: ButtonProps, state: ButtonState) => {
   const {

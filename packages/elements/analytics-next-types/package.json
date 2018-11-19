@@ -32,5 +32,8 @@
   },
   "peerDependencies": {
     "react": "^16.4.0"
+  },
+  "dependencies": {
+    "@atlaskit/type-helpers": "^1.0.0"
   }
 }

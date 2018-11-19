@@ -9,8 +9,12 @@ type Props = {
 };
 
 const getMargin = (props: Props) => {
-  if (props.spacing === 'none') return 0;
-  if (props.isOnlyChild) return `0 -${math.divide(gridSize, 4)(props)}px`;
+  if (props.spacing === 'none') {
+    return 0;
+  }
+  if (props.isOnlyChild) {
+    return `0 -${math.divide(gridSize, 4)(props)}px`;
+  }
   return `0 ${math.divide(gridSize, 2)(props)}px`;
 };
 

@@ -20,14 +20,19 @@ const LoadingDiv = styled.div`
 export default class LoadingSpinner extends React.Component<Props> {
   invertSpinner = () => {
     const { appearance, isSelected, isDisabled } = this.props;
-    if (isSelected) return true;
-    else if (isDisabled) return false;
-    else if (
+    if (isSelected) {
+      return true;
+    }
+    if (isDisabled) {
+      return false;
+    }
+    if (
       appearance === 'primary' ||
       appearance === 'danger' ||
       appearance === 'help'
-    )
+    ) {
       return true;
+    }
     return false;
   };
 

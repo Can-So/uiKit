@@ -17,10 +17,10 @@ import LoadingSpinner from '../styled/LoadingSpinner';
 
 import { ButtonProps } from '../types';
 
-const {
-  name: packageName,
-  version: packageVersion,
-} = require('../../package.json');
+import {
+  name as packageName,
+  version as packageVersion,
+} from '../../package.json';
 
 const StyledButton = styled.button`
   ${getButtonStyles};
@@ -62,35 +62,32 @@ export type ButtonState = {
   isHover: boolean;
 };
 
-export const defaultProps = {
-  appearance: 'default' as 'default',
+export const defaultProps: Pick<
+  ButtonProps,
+  | 'appearance'
+  | 'isDisabled'
+  | 'isSelected'
+  | 'isLoading'
+  | 'spacing'
+  | 'type'
+  | 'shouldFitContainer'
+  | 'autoFocus'
+> = {
+  appearance: 'default',
   isDisabled: false,
   isSelected: false,
   isLoading: false,
-  spacing: 'default' as 'default',
-  type: 'button' as 'button',
+  spacing: 'default',
+  type: 'button',
   shouldFitContainer: false,
   autoFocus: false,
 };
 
-// TODO: Extract to generic types package
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-type WithDefaults<P extends { [K in keyof D]?: any }, D> = Partial<
-  Pick<P, keyof D>
-> &
-  Omit<P, keyof D>;
-type ComponentProps<P> = Readonly<{ children?: React.ReactNode }> & Readonly<P>;
-// We pass all spare props through to child component, allow them on top level props
-type PassThroughProps = Record<string, any>;
-
-type DefaultedButtonProps = WithDefaults<ButtonProps, typeof defaultProps>;
-
 export class Button extends React.Component<
-  DefaultedButtonProps & WithAnalyticsEventProps & PassThroughProps,
+  ButtonProps & WithAnalyticsEventProps,
   ButtonState
 > {
   button: HTMLElement;
-  props: ComponentProps<ButtonProps & WithAnalyticsEventProps>;
 
   static defaultProps = defaultProps;
 
@@ -100,7 +97,7 @@ export class Button extends React.Component<
     isHover: false,
   };
 
-  componentWillReceiveProps(nextProps: DefaultedButtonProps) {
+  componentWillReceiveProps(nextProps) {
     if (this.props.component !== nextProps.component) {
       delete this.customComponent;
     }
@@ -169,7 +166,9 @@ export class Button extends React.Component<
   getInnerRef = (ref: HTMLElement) => {
     this.button = ref;
 
-    if (this.props.innerRef) this.props.innerRef(ref);
+    if (this.props.innerRef) {
+      this.props.innerRef(ref);
+    }
   };
 
   render() {

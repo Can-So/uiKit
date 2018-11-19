@@ -29,10 +29,11 @@ class CustomComponentProxy extends React.Component<DerivedButtonProps> {
       isLoading,
       ...proxiedProps
     } = cleanProps(this.props);
-    if (!component)
+    if (!component) {
       throw new Error(
         'No custom component provided while trying to use custom button component',
       );
+    }
     const ProxiedComponent = component;
     return <ProxiedComponent {...proxiedProps}>{children}</ProxiedComponent>;
   }
