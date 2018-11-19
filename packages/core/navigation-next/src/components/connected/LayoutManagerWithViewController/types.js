@@ -1,7 +1,6 @@
 // @flow
 
 import type { ComponentType, Node } from 'react';
-import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
 import type { WithNavigationUIControllerProps } from '../../../ui-controller/types';
 
 import type {
@@ -10,10 +9,7 @@ import type {
   GetRefs,
 } from '../../presentational/LayoutManager/types';
 
-import type {
-  ViewControllerState,
-  WithNavigationViewControllerProps,
-} from '../../../view-controller/types';
+import type { WithNavigationViewControllerProps } from '../../../view-controller/types';
 
 export type LayoutManagerWithViewControllerProps = {|
   ...$Exact<CollapseListeners>,
@@ -29,11 +25,4 @@ export type LayoutManagerWithViewControllerProps = {|
 
 export type LayoutManagerWithViewControllerState = {
   hasInitialised: boolean,
-};
-
-export type LayerInitialisedProps = {
-  ...$Exact<WithAnalyticsEventsProps>,
-  activeView: $PropertyType<ViewControllerState, 'activeView'>,
-  initialised: boolean,
-  onInitialised?: () => void,
 };

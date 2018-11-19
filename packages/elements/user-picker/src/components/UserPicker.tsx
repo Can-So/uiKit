@@ -1,6 +1,7 @@
 import Select from '@atlaskit/select';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import {
   InputActionTypes,
   LoadOptions,
@@ -14,6 +15,7 @@ import {
 } from '../types';
 import { batchByKey } from './batch';
 import { getComponents } from './components';
+import { messages } from './i18n';
 import { getStyles } from './styles';
 import {
   extractUserValue,
@@ -262,7 +264,7 @@ export class UserPicker extends React.PureComponent<Props, State> {
         isLoading={count > 0 || isLoading}
         onInputChange={this.handleInputChange}
         menuPlacement="auto"
-        placeholder="Find a person..." // TODO i18n
+        placeholder={<FormattedMessage {...messages.placeholder} />}
         classNamePrefix="fabric-user-picker"
         onClearIndicatorHover={this.handleClearIndicatorHover}
         hoveringClearIndicator={hoveringClearIndicator}

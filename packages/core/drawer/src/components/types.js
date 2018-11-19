@@ -3,13 +3,15 @@
 import type { ComponentType, Node } from 'react';
 import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
 
+export type DrawerWidth = 'narrow' | 'medium' | 'wide' | 'extended' | 'full';
+
 export type BaseProps = {
   /** The content of the drawer */
   children: Node,
   /** Icon to be rendered in your drawer as a component, if available */
   icon?: ComponentType<*>,
   /** Available drawer sizes */
-  width: 'full' | 'medium' | 'narrow' | 'wide',
+  width: DrawerWidth,
 };
 export type DrawerPrimitiveProps = BaseProps & {
   onClose?: (SyntheticMouseEvent<*>) => void,

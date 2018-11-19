@@ -8,10 +8,14 @@ export default function Example() {
     <div>
       <SectionMessage title="Smart Cards in the Editor">
         <p>
-          Try pasting URLs to Google Drive, Asana, Dropbox, Trello etc. Links
+          Make sure you're logged into{' '}
+          <a href="https://api-private.stg.atlassian.com/me" target="_blank">
+            Atlassian Cloud on Staging
+          </a>
+          . Try pasting URLs to Google Drive, Asana, Dropbox, Trello etc. Links
           pasted in empty paragraphs will create a bigger, block card. Links
           pasted inside other elements (like lists, tables, panels) will be
-          converted to a smaller, inline version of card. A gallery of different
+          converted to a smaller, inline version of card. A gallery of available
           types of cards{' '}
           <a href="/packages/media/smart-card/example/gallery">
             can be found here

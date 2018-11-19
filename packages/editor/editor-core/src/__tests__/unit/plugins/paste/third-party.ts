@@ -69,13 +69,31 @@ describe('paste plugin: third-party', () => {
     expect(toJSON(editorView.state.doc)).toMatchDocSnapshot();
   });
 
-  it('should handle pasting content from Microsoft Word', () => {
-    const { editorView } = editor(doc(p('')));
-    dispatchPasteEvent(editorView, {
+  describe('`Microsoft Word`: ', () => {
+    const blob = dataURItoBlob(smallImage);
+    const image = new File([blob], 'image.png', { type: 'image/png' });
+    const eventPayload = {
       html: msWordTextHTML,
       plain: msWordTextPlain,
+      files: [image],
+      types: ['Files', 'text/plain', 'text/html'],
+    };
+
+    it('should handle pasting content', () => {
+      const { editorView } = editor(doc(p('')));
+
+      dispatchPasteEvent(editorView, eventPayload);
+
+      expect(toJSON(editorView.state.doc)).toMatchDocSnapshot();
     });
-    expect(toJSON(editorView.state.doc)).toMatchDocSnapshot();
+
+    it('should ignore image on clipboard', () => {
+      const { editorView } = editor(doc(p('')));
+
+      const event = dispatchPasteEvent(editorView, eventPayload) as CustomEvent;
+
+      expect(event.cancelBubble).toBe(true);
+    });
   });
 
   it('should handle pasting content using react-syntax-highlighter', () => {
@@ -84,21 +102,6 @@ describe('paste plugin: third-party', () => {
       html: reactSyntaxHighlighterHTML,
     });
     expect(toJSON(editorView.state.doc)).toMatchDocSnapshot();
-  });
-
-  it('should ignore image on clipboard when pasting content from Microsoft Word', () => {
-    const { editorView } = editor(doc(p('')));
-    const blob = dataURItoBlob(smallImage);
-    const image = new File([blob], 'image.png', { type: 'image/png' });
-
-    const event = dispatchPasteEvent(editorView, {
-      html: msWordTextHTML,
-      plain: msWordTextPlain,
-      files: [image],
-      types: ['Files', 'text/plain', 'text/html'],
-    }) as CustomEvent;
-
-    expect(event.cancelBubble).toBe(true);
   });
 
   it('should convert multiple lines to a code-block when pasting content from Visual Studio Code', () => {

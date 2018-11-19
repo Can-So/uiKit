@@ -1,9 +1,13 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   Use tabs to display multiple panels within a single window.
+
+  ## Usage
+
+  ${code`import Tabs,  { TabContent, TabItem } from '@atlaskit/tabs';`}
 
   ${(
     <Example
@@ -27,7 +31,7 @@ export default md`
 
   ${(
     <Props
-      heading=" "
+      heading="TabContent Props"
       props={require('!!extract-react-types-loader!../src/components/TabContent')}
     />
   )}
@@ -47,7 +51,7 @@ export default md`
 
   ${(
     <Props
-      heading=" "
+      heading="TabItem Props"
       props={require('!!extract-react-types-loader!../src/components/TabItem')}
     />
   )}

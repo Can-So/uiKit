@@ -293,7 +293,9 @@ ${code`class App extends Component {
 
   render() {
     return (
-      <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
+      <LayoutManagerWithViewController
+        globalNavigation={MyGlobalNavigation}
+      >
 -       <div>Page content goes here.</div>
 +       <Switch>
 +         <Route path="/issues" component={IssuesAndFiltersRoute} />
@@ -411,7 +413,9 @@ It's then as simple as rendering the \`GrowthExperiment\` component as long as w
 
 ${code`render() {
   return (
-    <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
+    <LayoutManagerWithViewController
+      globalNavigation={MyGlobalNavigation}
+    >
       <Switch>
         <Route path="/projects/my-project" component={ProjectBacklogRoute} />
         <Route path="/issues" component={IssuesAndFiltersRoute} />
