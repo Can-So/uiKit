@@ -2,18 +2,18 @@
 
 import React from 'react';
 import AsyncLayoutManagerWithViewController from '../../index';
-import ViewRenderer, { TypedItemsRenderer } from '../../../../../renderer';
+import ItemsRenderer, { TypedItemsRenderer } from '../../../../../renderer';
 
 const noop = () => null;
 
-class CustomViewRenderer extends TypedItemsRenderer<
+class CustomItemsRenderer extends TypedItemsRenderer<
   { type: 'Foo', id: string } | { type: 'Bar', id: string },
 > {}
 
 <AsyncLayoutManagerWithViewController
   globalNavigation={noop}
   containerSkeleton={noop}
-  viewRenderer={noop}
+  itemsRenderer={noop}
 >
   Page
 </AsyncLayoutManagerWithViewController>;
@@ -21,7 +21,7 @@ class CustomViewRenderer extends TypedItemsRenderer<
 <AsyncLayoutManagerWithViewController
   globalNavigation={noop}
   containerSkeleton={noop}
-  viewRenderer={ViewRenderer}
+  itemsRenderer={ItemsRenderer}
 >
   Page
 </AsyncLayoutManagerWithViewController>;
@@ -29,7 +29,7 @@ class CustomViewRenderer extends TypedItemsRenderer<
 <AsyncLayoutManagerWithViewController
   globalNavigation={noop}
   containerSkeleton={noop}
-  viewRenderer={CustomViewRenderer}
+  itemsRenderer={CustomItemsRenderer}
 >
   Page
 </AsyncLayoutManagerWithViewController>;
@@ -38,7 +38,7 @@ class CustomViewRenderer extends TypedItemsRenderer<
 <AsyncLayoutManagerWithViewController
   globalNavigation={noop}
   containerSkeleton={noop}
-  viewRenderer={noop}
+  itemsRenderer={noop}
 />;
 
 // $ExpectError - missing globalNavigation prop

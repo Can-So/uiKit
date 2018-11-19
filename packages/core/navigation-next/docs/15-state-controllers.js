@@ -240,9 +240,9 @@ const MyComponent = withNavigationViewController(MyComponentBase);`}
 
 ${<Hr />}
 
-${<H>View Renderer</H>}
+${<H>Items Renderer</H>}
 
-The view renderer is used to render the data representation of your view items for you. If using the \`LayoutManagerWithViewController\` component, you do not need to use the renderer as it is taken care of for you. However, if using directly you can use two different variants, depending on whether you wish to enable flow checking for it or not.
+The items renderer is used to render the data representation of your view items for you. If using the \`LayoutManagerWithViewController\` component, you do not need to use the renderer as it is taken care of for you. However, if using directly you can use two different variants, depending on whether you wish to enable flow checking for it or not.
 
 
 ### Composing directly
@@ -250,21 +250,21 @@ The view renderer is used to render the data representation of your view items f
 The default version can be used as follows:
 
 ${code`
-  import { ViewRenderer } from '@atlaskit/navigation-next';
+  import { ItemsRenderer } from '@atlaskit/navigation-next';
 
-  <ViewRenderer customComponents={...} items={...} />;
+  <ItemsRenderer customComponents={...} items={...} />;
 `}
 
 To use the typed version, which allows you to type any custom components passed in:
 
 ${code`
-  import { TypedViewRenderer } from '@atlaskit/navigation-next';
+  import { TypedItemsRenderer } from '@atlaskit/navigation-next';
 
   type CustomComponentType = { type: 'Foo', id: string, foo: boolean } | { type: 'Bar', id: string, bar: boolean };
 
-  class ViewRenderer extends TypedViewRenderer<CustomComponentType> {};
+  class ItemsRenderer extends TypedItemsRenderer<CustomComponentType> {};
 
-  <ViewRenderer customComponents={...} items={...} />;
+  <ItemsRenderer customComponents={...} items={...} />;
 `}
 
 This version will properly type check the items passed to the renderer, including any custom component types.
@@ -308,7 +308,7 @@ a nested transition to occur.
 
 We export a corresponding flow type for each built-in view item type as well as a combined type, \`NavigationRendererItemType\` that can be used to explicitly type the view items array in your code, e.g. the return type of your \`getItems\` functions.
 
-The \`NavigationRendererItemType\` is a parameterised type that takes an optional type argument that specified any custom component types, i.e. types passed into the \`customComponents\` prop of \`ViewRenderer\` or \`LayoutManagerWithViewController\`.
+The \`NavigationRendererItemType\` is a parameterised type that takes an optional type argument that specified any custom component types, i.e. types passed into the \`customComponents\` prop of \`ItemsRenderer\` or \`LayoutManagerWithViewController\`.
 
 For example,
 
