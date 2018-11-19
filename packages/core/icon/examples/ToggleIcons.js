@@ -1,6 +1,7 @@
 // @flow
-import React, { Component, type ComponentType } from 'react';
+import React, { Fragment, Component, type ComponentType } from 'react';
 import { colors } from '@atlaskit/theme';
+import Button from '@atlaskit/button';
 import components from '../utils/icons';
 
 const twoColorIcons = ['checkbox', 'radio'];
@@ -55,14 +56,18 @@ export default class ToggleIcons extends Component<{}, State> {
 
         <div style={colorStyle}>
           {this.state.icons.map(([id, Icon]) => (
-            <Icon
-              key={id}
-              label="Icon which checks and unchecks itself"
-              secondaryColor="inherit"
-              onClick={() =>
-                this.setState({ toggleColor: !this.state.toggleColor })
-              }
-            />
+            <Fragment>
+              <Button
+                onClick={() =>
+                  this.setState({ toggleColor: !this.state.toggleColor })
+                }
+              />
+              <Icon
+                key={id}
+                label="Icon which checks and unchecks itself"
+                secondaryColor="inherit"
+              />
+            </Fragment>
           ))}
         </div>
         <h6 style={{ padding: 0, margin: '10px 5px' }}>
@@ -71,14 +76,18 @@ export default class ToggleIcons extends Component<{}, State> {
         </h6>
         <div style={colorStyleReverse}>
           {this.state.icons.map(([id, Icon]) => (
-            <Icon
-              key={id}
-              secondaryColor="inherit"
-              label="Icon which reverses itself while staying checked"
-              onClick={() =>
-                this.setState({ toggleFill: !this.state.toggleFill })
-              }
-            />
+            <Fragment>
+              <Button
+                onClick={() =>
+                  this.setState({ toggleColor: !this.state.toggleFill })
+                }
+              />
+              <Icon
+                key={id}
+                secondaryColor="inherit"
+                label="Icon which reverses itself while staying checked"
+              />
+            </Fragment>
           ))}
         </div>
       </div>
