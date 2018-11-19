@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Component } from 'react';
 import * as reactAddonsTextContent from 'react-addons-text-content';
 import { Helmet } from 'react-helmet';
-// @ts-ignore TODO: How can I correctly import it, I have added the d.ts in the tsconfig.base
 import * as snackeCase from 'snake-case';
 
 type Props = {

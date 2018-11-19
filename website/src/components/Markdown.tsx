@@ -29,7 +29,7 @@ export default function Markdown({
   children,
   description,
 }: {
-  children: React.ReactNode;
+  children: React.ReactChild;
   description?: string;
 }) {
   return (

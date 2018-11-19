@@ -32,8 +32,8 @@ export default function Document({
     loader: () => found && found.exports(),
     // @ts-ignore TODO: Typing Loadable
     loading: Loading,
-    render(md = {}) {
-      const docDetails: { content?: string; data?: Object } = {};
+    render(md: { default: Object }) {
+      const docDetails: { content?: string; data?: Object } = md.default || {};
       const { content, data = {} } = docDetails;
       if (content) {
         return <Markdown {...data}>{content}</Markdown>;

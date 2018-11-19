@@ -20,8 +20,7 @@ const clientKey = websiteEnv => {
 
 const id = () => {
   try {
-    let id = localStorage.getItem('atlaskit-website-ld-user-key') || '';
-    id = uuid();
+    const id = localStorage.getItem('atlaskit-website-ld-user-key') || uuid();
     localStorage.setItem('atlaskit-website-ld-user-key', id);
     return id;
   } catch (e) {

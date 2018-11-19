@@ -7,7 +7,7 @@ import renderNav from './renderNav';
 import { Link } from '../../../components/WrappedLink';
 
 type RouterLinkProps = {
-  children: React.ReactNode;
+  children: React.ReactChild;
   className?: string;
   href: string;
   isSelected?: boolean;
@@ -37,7 +37,7 @@ const RouterLink = ({
   className,
   subNav,
   onClick,
-  // isSelected,
+  isSelected,
   pathname,
 }: RouterLinkProps) => {
   return (
@@ -48,7 +48,7 @@ const RouterLink = ({
         replace={replace}
         style={{ color: 'inherit' }}
         to={href}
-        // isSelected={isSelected}
+        isSelected={isSelected}
       >
         {children}
       </Link>

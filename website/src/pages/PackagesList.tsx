@@ -117,7 +117,6 @@ const StatRows = () =>
   fs.getDirectories(packages.children).reduce<Array<React.ReactChild>>(
     (acc, team) =>
       acc.concat(
-        // @ts-ignore TODO: Fix concat type
         fs.getDirectories(team.children).map(pkg => {
           const pkgJSON = getConfig(team.id, pkg.id).config;
           return renderRow(pkgJSON, pkg, team.id);

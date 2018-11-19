@@ -67,7 +67,7 @@ const Latest = ({
   children,
   ...rest
 }: {
-  children?: React.ReactNode | string;
+  children?: React.ReactChild | string;
 }) => (
   <span style={{ position: 'relative', top: -3 }}>
     <Lozenge appearance="new" {...rest}>

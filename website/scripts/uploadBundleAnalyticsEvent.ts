@@ -1,4 +1,4 @@
-import { stats } from '../dist/stats.json';
+import * as stats from '../dist/stats.json';
 
 // These are the known splits in the repo that we can look for.
 // Once the chunk splitting in the website is more sane, we can definitely look at adding more

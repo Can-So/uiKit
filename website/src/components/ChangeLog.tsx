@@ -19,7 +19,7 @@ const Heading = ({
   packageName,
   href,
 }: {
-  children: React.ReactNode;
+  children: React.ReactChild;
   level: number;
   packageName: string;
   href: string;
@@ -76,11 +76,17 @@ export const NoMatch = styled.div`
   min-height: 120px;
 `;
 
-export type Log = { md: string; version: string; repository: string };
-export type Logs = Array<Log>;
+export interface Log {
+  md: string;
+  version: string;
+  repository: string;
+}
+export interface Logs {
+  logs: Array<Log>;
+}
 
 type Props = {
-  changelog: Logs;
+  changelog: Array<Log>;
   range?: string;
   packageName: string;
 };
@@ -93,7 +99,7 @@ export default class ChangeLog extends Component<Props> {
       ? changelog.filter(e => semver.satisfies(e.version, range))
       : changelog;
 
-    let currentMajor = 0 || '';
+    let currentMajor: number | string = 0;
 
     return (
       <div>
@@ -102,7 +108,7 @@ export default class ChangeLog extends Component<Props> {
         ) : (
           logs.map((v, i) => {
             const major = v.version.substr(0, 1);
-            const majorHasChanged = currentMajor !== major;
+            const majorHasChanged = `${currentMajor}` !== major;
             currentMajor = major;
             // In case of blank / empty changelogs, the default commit points to mk-2
             const href = `https://bitbucket.org/atlassian/${

@@ -125,11 +125,8 @@ type ExampleNavigationProps = {
   deploySandbox?: any;
   loadingSandbox?: any;
 };
-type Error = {
-  error: any;
-};
 class ExampleNavigation extends Component<ExampleNavigationProps> {
-  state: Error = { error: null };
+  state: Error = { name: '', message: '' };
   render() {
     const {
       onExampleSelected,
@@ -144,7 +141,7 @@ class ExampleNavigation extends Component<ExampleNavigationProps> {
       codeIsVisible,
       onCodeToggle,
     } = this.props;
-    const { error } = this.state;
+    const error: Error = this.state;
     const example = examples && examples.children.find(e => e.id === exampleId);
 
     return (

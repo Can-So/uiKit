@@ -6,8 +6,12 @@ import Loadable from 'react-loadable';
 import Loading from '../Loading';
 import CodeBlock from '../Code';
 
+declare interface Window {
+  unmountApp?: () => void;
+}
+
 type Props = {
-  children?: (...param: any) => React.ReactNode;
+  children?: (...param: any) => React.ReactChild;
   src: string | null;
   name: string;
   example: {
@@ -16,8 +20,8 @@ type Props = {
   };
   displayCode: boolean;
   render?: (
-    P: ComponentType<any>,
-    Q: ComponentType<any>,
+    component1: ComponentType<any>,
+    component2: ComponentType<any>,
     param: boolean,
   ) => any;
 };
@@ -85,12 +89,10 @@ export default class ExampleDisplay extends Component<Props> {
       );
       return;
     }
-
-    const children = this.props.children!(
+    return this.props.children!(
       this.ExampleCode,
       this.Example,
       this.props.displayCode,
     );
-    return children;
   }
 }

@@ -173,11 +173,8 @@ export default class Nav extends Component<{}, State> {
                   <GroupDrawer
                     key="groupDrawer"
                     isOpen={groupDrawerOpen}
-                    closeDrawer={this.closeGroupDrawer} // TODO: Confirm why do we have those props in Group Drawer?
-                    // docs={docs}
+                    closeDrawer={this.closeGroupDrawer}
                     pathname={location.pathname}
-                    // packages={packages}
-                    // patterns={patterns}
                   >
                     {groups}
                   </GroupDrawer>,

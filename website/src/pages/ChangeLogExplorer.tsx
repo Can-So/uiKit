@@ -60,10 +60,10 @@ export default class ChangelogExplorer extends Component<Props, State> {
       // @ts-ignore TODO: Fix typings for Loadable component
       loading: Loading,
       loader: () => found && found.contents(),
-      render: changelog =>
-        changelog ? (
+      render: log =>
+        log ? (
           <Changelog
-            changelog={divvyChangelog(changelog)}
+            changelog={divvyChangelog(log)}
             range={range}
             packageName={pkgId}
           />
@@ -101,7 +101,7 @@ const Back = ({
   children,
   to,
 }: {
-  children?: React.ReactNode | string;
+  children?: React.ReactChild;
   to: string;
 }) => (
   <Button

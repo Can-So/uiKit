@@ -79,7 +79,7 @@ export const CodeContainer = ({
   children,
   show,
 }: {
-  children: React.ReactNode;
+  children: React.ReactChild;
   show: boolean;
 }) => (
   <Transition

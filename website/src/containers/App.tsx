@@ -42,7 +42,7 @@ const AppContent = styled.div`
   flex: 1 1 auto;
 `;
 
-type Props = { location: { pathname: string } };
+type Props = { location: Window['location'] };
 
 class ScrollToTop extends Component<Props> {
   componentDidUpdate(prevProps) {

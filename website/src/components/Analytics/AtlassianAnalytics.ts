@@ -1,7 +1,7 @@
 class AtlassianAnalyticsClient {
-  payload: Array<{ name: string; properties: { [name: string]: any } }>;
+  payload: Array<{ name: string; properties: Record<string, any> }>;
   version: string;
-  constructor(options: any) {
+  constructor(options: { version: string }) {
     this.payload = [];
     this.version = options.version;
   }

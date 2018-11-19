@@ -5,7 +5,7 @@ import renderNav from '../utils/renderNav';
 import buildNavGroups from '../utils/buildNavGroups';
 
 export type DocsNavProps = {
-  onClick: (e: Event) => void; // TODO: Ask why the onClick is required to be passed through renderNav
+  onClick?: (e: Event) => void;
   pathname: string;
   docs: Directory;
 };

@@ -4,7 +4,7 @@ import Button from '@atlaskit/button';
 
 export type LinkButtonProps = {
   to: string;
-  children: React.ReactNode;
+  children: React.ReactChild;
 };
 
 export default function LinkButton({ to, children }: LinkButtonProps) {

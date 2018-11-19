@@ -266,7 +266,7 @@ export default class Cards extends Component {
   state = {
     columnCount: 3,
   };
-  debouncedDetect: any;
+  debouncedDetect: () => void;
 
   componentDidMount() {
     this.debouncedDetect = debounce(this.detectColumns, 500);

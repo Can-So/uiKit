@@ -60,7 +60,7 @@ const getItemDetails = (pkg: Directory, group: Directory, pathname) => {
 
   const items: Array<NavGroupItem> = [];
 
-  const docsSubnav: any = buildSubNavGroup(
+  const docsSubnav = buildSubNavGroup(
     docItems,
     'Docs',
     packageDocUrl.bind(null, group.id, pkg.id),
@@ -97,7 +97,7 @@ const packagesList = {
 export type PackagesNavProps = {
   pathname: string;
   packages: Directory;
-  onClick: (e: Event) => void; // TODO: to confirm why do we need to do it
+  onClick?: (e: Event) => void;
 };
 
 const standardGroups = (dirs: Array<Directory>, pathname) =>
@@ -113,13 +113,13 @@ const standardGroups = (dirs: Array<Directory>, pathname) =>
           }
           return items;
         },
-        [] as Array<any>,
+        [] as any,
       ),
     };
   });
 
 export default function PackagesNav(props: PackagesNavProps) {
-  const { packages, pathname, onClick } = props;
+  const { packages, pathname } = props;
   const dirs = fs.getDirectories(packages.children);
 
   return (
@@ -128,7 +128,6 @@ export default function PackagesNav(props: PackagesNavProps) {
         [{ items: [packagesList] }, ...standardGroups(dirs, pathname)],
         {
           pathname,
-          onClick,
         },
       )}
     </div>

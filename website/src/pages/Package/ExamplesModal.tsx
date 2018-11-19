@@ -198,11 +198,11 @@ function toExampleUrl(
 }
 
 const ModalHeaderComp = ({
-  // afterDeployError,
+  afterDeployError,
   showKeyline,
   packageId,
   example,
-  // examples,
+  examples,
   groupId,
   pkgJSON,
   displayCode,
@@ -216,9 +216,9 @@ const ModalHeaderComp = ({
     <ModalActions>
       <ButtonGroup>
         <CodeSandbox
-          // afterDeployError={afterDeployError}
+          afterDeployError={afterDeployError}
           example={example}
-          // examples={examples} // TODO: Confirm with Ben
+          examples={examples}
           groupId={groupId}
           packageId={packageId}
           pkgJSON={pkgJSON}
@@ -366,10 +366,11 @@ export default class ExamplesModal extends Component<Props, State> {
         body={ModalBody}
         header={({ showKeyline }) => (
           <ModalHeaderComp
+            afterDeployError={this.afterDeployError}
             showKeyline={showKeyline}
             packageId={packageId}
             example={example}
-            // examples={examples}
+            examples={examples}
             exampleId={exampleId}
             groupId={groupId}
             pkgJSON={pkgJSON}
