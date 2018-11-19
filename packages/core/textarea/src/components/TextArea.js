@@ -56,6 +56,8 @@ type Props = {
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
   /** The theme function TextArea consumes to derive theming constants for use in styling its components */
   theme: ThemeProps => ThemeProps,
+  /** Ref used to access the textarea dom element. NOTE we expose this via forwardRef,
+  so you can also use the ref prop of this component to the same effect. */
   textareaRef: (HTMLTextAreaElement | null) => void,
 };
 type State = {
@@ -149,7 +151,11 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
 
 // $FlowFixMe flow-bin v0.74.0 doesn't know about forwardRef.
 const TextArea = React.forwardRef((props, ref) => (
-  <TextAreaWithoutForwardRef {...props} textareaRef={ref} />
+  // Once Extract React Types is fixed to read from default exports we can
+  // move textareaRef instantiation to after the spread.
+  // as of now we do this to reduce the chance of users being misled into a breaking configuration
+  // by our documentat.
+  <TextAreaWithoutForwardRef textareaRef={ref} {...props} />
 ));
 
 export { TextArea as TextAreaWithoutAnalytics };

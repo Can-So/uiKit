@@ -21,13 +21,9 @@ export default class extends Component<*, *> {
         <p>Disabled:</p>
         <TextArea value="hello" isDisabled />
         <p>Invalid:</p>
-        <TextArea isInvalid />
+        <TextArea isInvalid resize="auto" />
         <p>Smart:</p>
-        <TextArea
-          ref={ref => {
-            this.textareaRef = ref;
-          }}
-        />
+        <TextArea ref={ref => (this.textareaRef = ref)} />
         <button onClick={this.focus}>focus</button>
       </Div>
     );
