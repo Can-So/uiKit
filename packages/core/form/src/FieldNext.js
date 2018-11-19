@@ -1,7 +1,6 @@
 // @flow
 import React, { type Node } from 'react';
-import { type FormApi } from 'final-form';
-import { FormContext } from './FormNext';
+import { FormContext, type FieldInfo } from './FormNext';
 import FieldWrapper, { Label, RequiredIndicator } from './styled/Field';
 import translateEvent from './utils/translateEvent';
 
@@ -27,7 +26,7 @@ type State = Object;
 class Field extends React.Component<
   {
     ...$Exact<Props>,
-    form: FormApi,
+    register: FieldInfo => any,
   },
   State,
 > {
@@ -35,44 +34,49 @@ class Field extends React.Component<
     registered: false,
   };
   componentDidMount() {
-    const { name, form, defaultValue } = this.props;
-    form.change(name, defaultValue);
-    form.registerField(
+    const { name, register, defaultValue } = this.props;
+    register({
       name,
-      ({ change, blur, focus, value, error, touched }) => {
-        this.setState({
-          onChange: translateEvent(change),
-          onBlur: blur,
-          onFocus: focus,
-          error,
-          value,
-          touched,
-          registered: true,
-        });
+      initialValue: defaultValue,
+      register: form => {
+        form.registerField(
+          name,
+          ({ change, blur, focus, value, error, touched, ...rest }) => {
+            this.setState({
+              onChange: translateEvent(change),
+              onBlur: blur,
+              onFocus: focus,
+              error,
+              value,
+              touched,
+              registered: true,
+              ...rest,
+            });
+          },
+          {
+            active: true,
+            dirty: true,
+            touched: true,
+            valid: true,
+            value: true,
+            error: true,
+          },
+          {
+            getValidator: () => this.props.validate,
+          },
+        );
       },
-      {
-        active: true,
-        dirty: true,
-        touched: true,
-        valid: true,
-        value: true,
-        error: true,
-      },
-      {
-        getValidator: () => this.props.validate,
-      },
-    );
+    });
   }
   render() {
-    const { children, isRequired, label, name, type } = this.props;
+    const { children, isRequired, label, name } = this.props;
     const {
       registered,
       onChange,
       onBlur,
       onFocus,
       value,
-      error,
-      touched,
+      ...rest
     } = this.state;
     const fieldProps = {
       onChange,
@@ -80,7 +84,7 @@ class Field extends React.Component<
       onFocus,
       value,
       name,
-      isInvalid: touched && error,
+      isInvalid: !!rest.error,
     };
     return (
       <FieldWrapper>
@@ -90,8 +94,7 @@ class Field extends React.Component<
             <RequiredIndicator role="presentation">*</RequiredIndicator>
           )}
         </Label>
-        {registered &&
-          children({ fieldProps, status: 'default', error: touched && error })}
+        {registered && children({ fieldProps, ...rest })}
       </FieldWrapper>
     );
   }
@@ -99,6 +102,6 @@ class Field extends React.Component<
 
 export default React.forwardRef((props: Props, ref) => (
   <FormContext.Consumer>
-    {form => <Field {...props} form={form} ref={ref} />}
+    {registerField => <Field {...props} register={registerField} ref={ref} />}
   </FormContext.Consumer>
 ));

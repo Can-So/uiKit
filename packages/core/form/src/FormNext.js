@@ -1,6 +1,6 @@
 // @flow
 import React, { createContext, type Node } from 'react';
-import { createForm } from 'final-form';
+import { createForm, type FormApi } from 'final-form';
 
 export const FormContext = createContext();
 
@@ -11,15 +11,46 @@ type Props = {
   onSubmit: Object => any,
 };
 
+export type FieldInfo = {
+  name: string,
+  initialValue: any,
+  register: FormApi => any,
+};
+
 class Form extends React.Component<Props> {
-  form = createForm({ onSubmit: this.props.onSubmit });
+  fields = [];
+  form = undefined;
+
+  componentDidMount() {
+    const initialValues = this.fields.reduce(
+      (initials, field) => ({
+        ...initials,
+        [field.name]: field.initialValue,
+      }),
+      {},
+    );
+    this.form = createForm({
+      initialValues,
+      onSubmit: this.props.onSubmit,
+    });
+    this.fields.forEach(field => {
+      field.register(this.form);
+    });
+    this.fields = [];
+  }
+
+  registerField = (field: FieldInfo) => {
+    this.fields = [...this.fields, field];
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     this.form.submit();
   };
+
   render() {
     return (
-      <FormContext.Provider value={this.form}>
+      <FormContext.Provider value={this.registerField}>
         {this.props.children({ onSubmit: this.handleSubmit })}
       </FormContext.Provider>
     );
