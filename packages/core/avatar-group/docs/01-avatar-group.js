@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props, Prop } from '@atlaskit/docs';
+import { md, Example, Props, Prop, code } from '@atlaskit/docs';
 
 export default md`
   \`AvatarGroup\` is a wrapper around avatars designed to render a collection
@@ -21,6 +21,10 @@ export default md`
   - \`borderColor\` will get the \`AvatarGroup\`'s \`borderColor\`
   - \`size\` will get the \`AvatarGroup\`'s \`size\`
   - \`groupAppearance\` will get the \`AvatarGroup\`'s \`appearance\`
+
+  ## Usage
+
+  ${code`import AvatarGroup from '@atlaskit/avatar-group';`}
 
 ${(
   <Example

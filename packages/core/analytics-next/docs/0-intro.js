@@ -57,15 +57,14 @@ const InstrumentedTable = ({ packages }: { packages: InstrumentedItem[] }) => (
 );
 
 export default md`
+Many of our components support analytics out of the box. These components create
+analytics events and hand them to you. This puts you in control of firing, listening
+and recording these events in which ever way you like.
   ## Usage
-
-  Many of our components support analytics out of the box. These components create
-  analytics events and hand them to you. This puts you in control of firing, listening
-  and recording these events in which ever way you like.
 
   Let's look at a simple component to understand how to use Button's click analytics.
 
-  ##### SaveButton.js
+  ### SaveButton.js
 ${code`
 import Button from '@atlaskit/button';
 
@@ -80,7 +79,7 @@ const SaveButton = ({ onClick }) => (
 
   Now you have the event, it is up to you to fire it.
 
-  ##### SaveButton.js
+  ### SaveButton.js
 ${code`
 import Button from '@atlaskit/button';
 
@@ -102,7 +101,7 @@ const SaveButton = ({ onClick }) => (
 
   The next step is to set up a listener which receives the events.
 
-  #### App.js
+  ### App.js
 ${code`
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import SaveButton from './SaveButton';

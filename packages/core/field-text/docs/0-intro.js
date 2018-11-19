@@ -3,9 +3,10 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  ### Usage
 
   Text Field provides a form input.
+
+  ## Usage
 
 ${code`
 import FieldText, { FieldTextStateless } from '@atlaskit/field-text';

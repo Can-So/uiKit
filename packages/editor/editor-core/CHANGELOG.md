@@ -1,5 +1,20 @@
 # @atlaskit/editor-core
 
+## 88.2.2
+- [patch] [9a66a9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a66a9b):
+
+  - Add Confluence cards in Editor example.
+
+## 88.2.1
+- [patch] [16ff8d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/16ff8d2):
+
+  - Add jira card editor example.
+
+## 88.2.0
+- [minor] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
 ## 88.1.14
 - [patch] [380928b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/380928b):
 

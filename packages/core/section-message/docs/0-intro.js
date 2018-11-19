@@ -15,8 +15,6 @@ export default md`
     </SectionMessage>
   )}
 
-  ${code`import SectionMessage from '@atlaskit/section-message';`}
-
   Section messages are part of the content of a user interface, and are used to
   alert users of a particular screen area that needs user action. These
   notifications can appear within a page or dialog. They are not dismissible,
@@ -27,10 +25,14 @@ export default md`
 
   A section message will fill the width of its container.
 
+  ## Usage
+
+  ${code`import SectionMessage from '@atlaskit/section-message';`}
+
   ${(
     <Example
       packageName="@atlaskit/section-message"
-      title="Basic Example"
+      title="Basic"
       Component={require('../examples/0-basic-example').default}
       source={require('!!raw-loader!../examples/0-basic-example')}
     />
@@ -49,6 +51,7 @@ export default md`
 
   ${(
     <Props
+      heading="SectionMessage Props"
       props={require('!!extract-react-types-loader!../src/components/SectionMessage')}
     />
   )}

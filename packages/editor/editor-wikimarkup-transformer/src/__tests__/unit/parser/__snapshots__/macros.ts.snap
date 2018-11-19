@@ -4,24 +4,24 @@ exports[`JIRA wiki markup - Macros should collapse and join outer macros 1`] = `
 Object {
   "content": Array [
     Object {
-      "content": Array [
-        Object {
-          "marks": Array [
-            Object {
-              "type": "strong",
-            },
-          ],
-          "text": "My Title",
-          "type": "text",
-        },
-      ],
-      "type": "paragraph",
-    },
-    Object {
       "attrs": Object {
         "panelType": "info",
       },
       "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "marks": Array [
+                Object {
+                  "type": "strong",
+                },
+              ],
+              "text": "My Title",
+              "type": "text",
+            },
+          ],
+          "type": "paragraph",
+        },
         Object {
           "content": Array [
             Object {
@@ -85,25 +85,22 @@ exports[`JIRA wiki markup - Macros should collapse outer macros 1`] = `
 Object {
   "content": Array [
     Object {
-      "content": Array [
-        Object {
-          "marks": Array [
-            Object {
-              "type": "strong",
-            },
-          ],
-          "text": "My Title",
-          "type": "text",
-        },
-      ],
-      "type": "paragraph",
-    },
-    Object {
       "attrs": Object {
         "panelType": "info",
       },
       "content": Array [
         Object {
+          "content": Array [
+            Object {
+              "marks": Array [
+                Object {
+                  "type": "strong",
+                },
+              ],
+              "text": "My Title",
+              "type": "text",
+            },
+          ],
           "type": "paragraph",
         },
       ],
@@ -186,24 +183,24 @@ exports[`JIRA wiki markup - Macros should convert panels 1`] = `
 Object {
   "content": Array [
     Object {
-      "content": Array [
-        Object {
-          "marks": Array [
-            Object {
-              "type": "strong",
-            },
-          ],
-          "text": "My Title",
-          "type": "text",
-        },
-      ],
-      "type": "paragraph",
-    },
-    Object {
       "attrs": Object {
         "panelType": "info",
       },
       "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "marks": Array [
+                Object {
+                  "type": "strong",
+                },
+              ],
+              "text": "My Title",
+              "type": "text",
+            },
+          ],
+          "type": "paragraph",
+        },
         Object {
           "content": Array [
             Object {
@@ -364,24 +361,24 @@ exports[`JIRA wiki markup - Macros should map panel bgColor in colorName to pane
 Object {
   "content": Array [
     Object {
-      "content": Array [
-        Object {
-          "marks": Array [
-            Object {
-              "type": "strong",
-            },
-          ],
-          "text": "My Title",
-          "type": "text",
-        },
-      ],
-      "type": "paragraph",
-    },
-    Object {
       "attrs": Object {
         "panelType": "warning",
       },
       "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "marks": Array [
+                Object {
+                  "type": "strong",
+                },
+              ],
+              "text": "My Title",
+              "type": "text",
+            },
+          ],
+          "type": "paragraph",
+        },
         Object {
           "content": Array [
             Object {
@@ -403,24 +400,24 @@ exports[`JIRA wiki markup - Macros should map panel bgColor in hex value to pane
 Object {
   "content": Array [
     Object {
-      "content": Array [
-        Object {
-          "marks": Array [
-            Object {
-              "type": "strong",
-            },
-          ],
-          "text": "My Title",
-          "type": "text",
-        },
-      ],
-      "type": "paragraph",
-    },
-    Object {
       "attrs": Object {
         "panelType": "tip",
       },
       "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "marks": Array [
+                Object {
+                  "type": "strong",
+                },
+              ],
+              "text": "My Title",
+              "type": "text",
+            },
+          ],
+          "type": "paragraph",
+        },
         Object {
           "content": Array [
             Object {
@@ -442,24 +439,24 @@ exports[`JIRA wiki markup - Macros should map panel bgColor in hex value to pane
 Object {
   "content": Array [
     Object {
-      "content": Array [
-        Object {
-          "marks": Array [
-            Object {
-              "type": "strong",
-            },
-          ],
-          "text": "My Title",
-          "type": "text",
-        },
-      ],
-      "type": "paragraph",
-    },
-    Object {
       "attrs": Object {
         "panelType": "info",
       },
       "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "marks": Array [
+                Object {
+                  "type": "strong",
+                },
+              ],
+              "text": "My Title",
+              "type": "text",
+            },
+          ],
+          "type": "paragraph",
+        },
         Object {
           "content": Array [
             Object {
@@ -775,6 +772,41 @@ Object {
         },
       ],
       "type": "blockquote",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`JIRA wiki markup - Macros should title of noformat 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "marks": Array [
+            Object {
+              "type": "strong",
+            },
+          ],
+          "text": "title",
+          "type": "text",
+        },
+      ],
+      "type": "paragraph",
+    },
+    Object {
+      "attrs": Object {
+        "language": "java",
+        "uniqueId": null,
+      },
+      "content": Array [
+        Object {
+          "text": "code inside noformat",
+          "type": "text",
+        },
+      ],
+      "type": "codeBlock",
     },
   ],
   "type": "doc",

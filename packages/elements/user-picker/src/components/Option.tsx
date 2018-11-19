@@ -45,6 +45,7 @@ export class Option extends React.PureComponent<any> {
         presence={status}
         name={name}
         isHover={false}
+        enableTooltip={false}
       />
     );
   };

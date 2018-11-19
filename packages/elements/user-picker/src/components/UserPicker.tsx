@@ -43,6 +43,7 @@ export type Props = {
   subtle?: boolean;
   defaultValue?: UserValue;
   value?: UserValue;
+  placeholder?: string;
 };
 
 export type State = {
@@ -233,6 +234,7 @@ export class UserPicker extends React.PureComponent<Props, State> {
       isLoading,
       appearance,
       subtle,
+      placeholder,
     } = this.props;
     const {
       users: usersFromState,
@@ -264,7 +266,9 @@ export class UserPicker extends React.PureComponent<Props, State> {
         isLoading={count > 0 || isLoading}
         onInputChange={this.handleInputChange}
         menuPlacement="auto"
-        placeholder={<FormattedMessage {...messages.placeholder} />}
+        placeholder={
+          placeholder || <FormattedMessage {...messages.placeholder} />
+        }
         classNamePrefix="fabric-user-picker"
         onClearIndicatorHover={this.handleClearIndicatorHover}
         hoveringClearIndicator={hoveringClearIndicator}

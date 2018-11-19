@@ -1,5 +1,10 @@
 # @atlaskit/code
 
+## 8.2.0
+- [minor] [10fe416](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/10fe416):
+
+  - Props Language should be required and surfacing more props for code
+
 ## 8.1.1
 - [patch] [84e8015](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84e8015):
 
