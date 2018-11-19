@@ -1,6 +1,7 @@
 // @flow
-import React, { createContext, type Node } from 'react';
+import React, { createContext, type Node, createRef } from 'react';
 import { createForm, type FormApi } from 'final-form';
+import createDecorator from 'final-form-focus';
 
 export const FormContext = createContext();
 
@@ -20,6 +21,7 @@ export type FieldInfo = {
 class Form extends React.Component<Props> {
   fields = [];
   form = undefined;
+  formRef = React.createRef();
 
   componentDidMount() {
     const initialValues = this.fields.reduce(
@@ -33,6 +35,14 @@ class Form extends React.Component<Props> {
       initialValues,
       onSubmit: this.props.onSubmit,
     });
+
+    const withFocusDecorator = createDecorator(() =>
+      this.formRef.current
+        ? Array.from(this.formRef.current.querySelectorAll('input'))
+        : [],
+    );
+    withFocusDecorator(this.form);
+
     this.fields.forEach(field => {
       field.register(this.form);
     });
@@ -51,7 +61,10 @@ class Form extends React.Component<Props> {
   render() {
     return (
       <FormContext.Provider value={this.registerField}>
-        {this.props.children({ onSubmit: this.handleSubmit })}
+        {this.props.children({
+          onSubmit: this.handleSubmit,
+          ref: this.formRef,
+        })}
       </FormContext.Provider>
     );
   }

@@ -26,7 +26,7 @@ export default class FielsExample extends Component<{}> {
           flexDirection: 'column',
         }}
       >
-        <Form onSubmit={data => console.log(data)}>
+        <Form onSubmit={() => Promise.resolve({ owner: 'bad name' })}>
           {props => (
             <form {...props}>
               <FormHeader title="Different fields" />
@@ -37,19 +37,19 @@ export default class FielsExample extends Component<{}> {
                 defaultValue=""
                 validate={val => (val.length < 3 ? 'TOO_SHORT' : undefined)}
               >
-                {({ fieldProps, error }) => (
+                {({ fieldProps, submitError }) => (
                   <>
                     <FieldText
                       shouldFitContainer
                       isLabelHidden
                       {...fieldProps}
                     />
-                    {!error && (
+                    {!submitError && (
                       <HelperMessage>
                         Must be longer than three characters
                       </HelperMessage>
                     )}
-                    {error === 'TOO_SHORT' && (
+                    {submitError && (
                       <ErrorMessage>
                         Must be longer than three characters
                       </ErrorMessage>
