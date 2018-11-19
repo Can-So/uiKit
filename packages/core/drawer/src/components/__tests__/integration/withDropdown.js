@@ -23,5 +23,8 @@ BrowserTestCase(
 
     expect(dropdownMenuLocation.x).toBeGreaterThanOrEqual(100);
     expect(dropdownMenuLocation.y).toBeGreaterThanOrEqual(200);
+    // Console errors can only be checked in Chrome
+    if (drawerTest.browser.desiredCapabilities.browserName === 'chrome')
+      await drawerTest.checkConsoleErrors();
   },
 );

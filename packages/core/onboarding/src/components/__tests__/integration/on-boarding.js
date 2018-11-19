@@ -27,7 +27,8 @@ BrowserTestCase(
     await onBoardingTest.click(OnBoardingDefault);
     const menuIsVisible = await onBoardingTest.isVisible(OnBoardingMenuTitle);
     expect(menuIsVisible).toBe(true);
-    await onBoardingTest.checkConsoleErrors();
+    if (onBoardingTest.browser.desiredCapabilities.browserName === 'chrome')
+      await onBoardingTest.checkConsoleErrors();
   },
 );
 
@@ -45,5 +46,7 @@ BrowserTestCase(
     await onBoardingTest.waitFor(OnBoardingMenuTitle, 5000);
     const text = await onBoardingTest.getText(OnBoardingMenuTitle);
     expect(text).toBe('Yellow');
+    if (onBoardingTest.browser.desiredCapabilities.browserName === 'chrome')
+      await onBoardingTest.checkConsoleErrors();
   },
 );

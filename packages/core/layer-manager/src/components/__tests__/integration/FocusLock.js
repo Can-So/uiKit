@@ -22,5 +22,7 @@ BrowserTestCase(
     const firstButtonFocused = await LayerManagerTest.hasFocus(FirstButton);
     expect(firstButtonFocused).toBe(true);
     await LayerManagerTest.checkConsoleErrors();
+    if (LayerManagerTest.browser.desiredCapabilities.browserName === 'chrome')
+      await LayerManagerTest.checkConsoleErrors();
   },
 );
