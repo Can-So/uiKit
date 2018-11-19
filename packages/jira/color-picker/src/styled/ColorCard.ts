@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { borderRadius, colors } from '@atlaskit/theme';
 import { COLOR_CARD_SIZE } from '../constants';
 
-interface ColorCardProps {
+type ColorCardProps = {
   focused?: boolean;
-}
+};
 
 const buttonFocusedBorder = `border-color: ${colors.B100};`;
 
@@ -47,9 +47,9 @@ export const ColorCardButton = styled.button<ColorCardProps>`
   }};
 `;
 
-interface ColorCardContentProps {
+type ColorCardContentProps = {
   color: string;
-}
+};
 
 export const ColorCardContent = styled.div<ColorCardContentProps>`
   position: absolute;
