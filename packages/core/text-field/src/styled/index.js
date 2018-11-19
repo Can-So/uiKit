@@ -20,9 +20,6 @@ const horizontalPadding = grid;
 const innerHeight = grid * 3;
 const transitionDuration = '0.2s';
 
-// TODO Think about how to `theming` newer/better.
-const getColor = themed({ light: colors.N900, dark: colors.DN600 });
-
 const getPadding = ({ isCompact }) => {
   const height = isCompact ? heightCompact : heightBase;
   return css`
@@ -127,7 +124,7 @@ export const InputWrapper = styled.div`
   border-style: ${getBorderStyle};
   display: inline-block;
   box-sizing: border-box;
-  color: ${getColor};
+  color: ${p => p.textColor};
   display: flex;
   flex: 1 0 auto;
   font-size: ${fontSize}px;

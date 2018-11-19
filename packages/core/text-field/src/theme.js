@@ -8,6 +8,7 @@ const disabled = { light: colors.N20, dark: colors.DN20 };
 // For validation red is the new 'yellow' which was { light: colors.Y300, dark: colors.Y300 }
 const red = { light: colors.R400, dark: colors.R400 };
 
+// TODO Think about how to `theming` newer/better.
 // The following do not yet have a darkmode 'map': N20A, N10
 
 const backgroundColor = {
@@ -49,6 +50,8 @@ const borderColorFocus = {
   none: { light: 'transparent', dark: 'transparent' },
 };
 
+const textColor = { light: colors.N900, dark: colors.DN600 };
+
 const disabledTextColor = { light: colors.N70, dark: colors.DN90 };
 
 const placeholderTextColor = { light: colors.N100, dark: colors.DN90 };
@@ -60,6 +63,7 @@ export type ThemeProps = {
     backgroundColorHover?: string,
     borderColor?: string,
     borderColorFocus?: string,
+    textColor?: string,
     disabledTextColor?: string,
     placeholderTextColor?: string,
   },
@@ -77,6 +81,7 @@ export default (props: ThemeProps): ThemeProps => {
       borderColorFocus: borderColorFocus[appearance][mode],
       disabledTextColor: disabledTextColor[mode],
       placeholderTextColor: placeholderTextColor[mode],
+      textColor: textColor[mode],
     }),
     mode,
     ...props,

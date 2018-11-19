@@ -29,8 +29,6 @@ export type InputProps = {
 export type TextFieldProps = {
   /** Sets a default value as input value */
   defaultValue?: string,
-  /** Optional input Element from consumer */
-  input: typeof DefaultInput,
   /** Handler to be called when the input loses focus. */
   onBlur?: (e: SyntheticEvent<>) => mixed,
   /** Handler to be called when the input changes. */
