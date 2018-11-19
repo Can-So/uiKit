@@ -1,0 +1,1 @@
+- Fix strong bug when ending line finishes with two strong symbols
