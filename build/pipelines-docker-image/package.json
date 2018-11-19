@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/pipelines-docker-image",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "description": "Docker image used to set up the Atlaskit repo in pipelines",
   "scripts": {
