@@ -74,8 +74,9 @@ const globalNavPrimaryItems = [
 ];
 
 const globalNavSecondaryItems = [
-  { icon: QuestionCircleIcon, label: 'Help', size: 'small' },
+  { id: 'icon-123', icon: QuestionCircleIcon, label: 'Help', size: 'small' },
   {
+    id: 'icon-321',
     icon: () => (
       <Avatar
         borderColor="transparent"
