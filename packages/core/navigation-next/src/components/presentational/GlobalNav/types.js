@@ -5,8 +5,8 @@ import GlobalItem from '../GlobalItem';
 import type { GlobalTheme } from '../../../theme/types';
 
 type ItemDataShape = {
-  id: string,
   ...$Exact<ElementConfig<typeof GlobalItem>>,
+  id: string,
 };
 
 export type ConnectedGlobalNavigationProps = {
@@ -24,6 +24,7 @@ export type ConnectedGlobalNavigationProps = {
   secondaryItems: ItemDataShape[],
 };
 
-export type GlobalNavigationProps = GlobalNavigationProps & {
+export type GlobalNavigationProps = {
+  ...$Exact<GlobalNavigationProps>,
   theme: GlobalTheme,
 };
