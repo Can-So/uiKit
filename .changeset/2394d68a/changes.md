@@ -1,0 +1,1 @@
+- Adds resize property to fix media without dimensions
