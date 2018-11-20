@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.8
+- [patch] [04abea3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04abea3):
+
+  - ED-5186: Always show scroll bar, to avoid page shift.
+
 ## 88.2.7
 - [patch] [4e2a3b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e2a3b1):
 
