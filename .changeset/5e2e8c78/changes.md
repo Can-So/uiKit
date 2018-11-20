@@ -1,0 +1,1 @@
+- ED-5774: add breakout for Columns

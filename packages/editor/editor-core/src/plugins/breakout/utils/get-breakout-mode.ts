@@ -1,11 +1,10 @@
 import { EditorState } from 'prosemirror-state';
 import { findParentNode } from 'prosemirror-utils';
 import { BreakoutMode } from '../commands/set-breakout-mode';
+import { isSupportedNodeForBreakout } from './is-supported-node';
 
 export function getBreakoutMode(state: EditorState): BreakoutMode | undefined {
-  const node = findParentNode(node => node.type.name === 'codeBlock')(
-    state.selection,
-  );
+  const node = findParentNode(isSupportedNodeForBreakout)(state.selection);
 
   if (!node) {
     return;

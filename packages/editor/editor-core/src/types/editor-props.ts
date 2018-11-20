@@ -144,7 +144,11 @@ export interface EditorProps {
   allowInlineAction?: boolean;
 
   // Temporary flag to enable layouts while it's under development
-  allowLayouts?: boolean;
+  allowLayouts?:
+    | boolean
+    | {
+        allowBreakout: boolean;
+      };
 
   // Enable status, if menuDisabled is passed then plugin is enabled by default
   allowStatus?:
