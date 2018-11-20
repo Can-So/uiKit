@@ -196,6 +196,9 @@ export class UserPicker extends React.Component<
     this.setState({ hoveringClearIndicator });
   };
 
+  private configureNoOptionsMessage = (): string | undefined =>
+    this.props.noOptionsMessage;
+
   render() {
     const {
       width,
@@ -251,6 +254,7 @@ export class UserPicker extends React.Component<
         subtle={isMulti ? false : subtle}
         blurInputOnSelect={!isMulti}
         closeMenuOnSelect={!isMulti}
+        noOptionsMessage={this.configureNoOptionsMessage}
         openMenuOnFocus
         onKeyDown={this.handleKeyDown}
         isDisabled={isDisabled}
