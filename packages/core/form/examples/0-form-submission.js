@@ -12,6 +12,10 @@ import Form, {
   ErrorMessage,
 } from '../src';
 
+const PasswordError = () => (
+  <ErrorMessage>Password needs to be more than 8 characters.</ErrorMessage>
+);
+
 export default () => (
   <div
     style={{
@@ -24,9 +28,9 @@ export default () => (
     <Form
       onSubmit={data => {
         console.log('form data', data);
-        return data.username === 'error'
-          ? Promise.resolve({ username: 'IN_USE' })
-          : undefined;
+        return Promise.resolve(
+          data.username === 'error' ? { username: 'IN_USE' } : undefined,
+        );
       }}
     >
       {props => (
@@ -41,7 +45,7 @@ export default () => (
                     You can use letters, numbers & periods.
                   </HelperMessage>
                 )}
-                {error === 'IN_USE' && (
+                {error && (
                   <ErrorMessage>
                     This user name is already in use, try another one.
                   </ErrorMessage>
@@ -70,7 +74,7 @@ export default () => (
                     symbols.
                   </HelperMessage>
                 )}
-                {error === 'TOO_SHORT' && (
+                {error && (
                   <ErrorMessage>
                     Password needs to be more than 8 characters.
                   </ErrorMessage>

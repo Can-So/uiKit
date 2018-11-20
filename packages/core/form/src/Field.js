@@ -5,6 +5,8 @@ import FieldWrapper, { Label, RequiredIndicator } from './styled/Field';
 import translateEvent from './utils/translateEvent';
 
 type FieldProps = {
+  isRequired: boolean,
+  isInvalid: boolean,
   onChange: any => any,
   onBlur: () => any,
   onFocus: () => any,
@@ -140,6 +142,7 @@ class FieldInner extends React.Component<Props, State> {
       value,
       name,
       isInvalid: Boolean(error),
+      isRequired: Boolean(isRequired),
     };
     return (
       <FieldWrapper>

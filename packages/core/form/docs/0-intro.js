@@ -17,22 +17,32 @@ ${(
   </SectionMessage>
 )}
 
-The Form package provides form & field state, layout and validation.
-
-  ## Usage
-
-  It can imported using:
+  ### Usage
+  The Form package contains a number of components to help manage form state, validation and layout.
+  It has been designed for use with other Atlaskit components.
 
   ${code`
-  import Form {
-    FormHeader,
-    FormSection,
-    FormFooter
-    Field,
-    FieldGroup,
-    Validator
-  } from '@atlaskit/form';
-  `}
+import Form, { Field } from '@atlaskit/form';
+import Button from '@atlaskit/button';
+import FieldText from '@atlaskit/field-text';
+
+const MyForm = () => (
+  <Form onSubmit={data => console.log('form data', data)}>
+    {props => (
+      <form {...props}>
+        <Field name="username" defaultValue="" label="User name" isRequired>
+          {({ fieldProps }) => (
+            <FieldText shouldFitContainer isLabelHidden {...fieldProps} />
+          )}
+        </Field>
+        <Button type="submit" appearance="primary">
+          Submit
+        </Button>
+      </form>
+    )}
+  </Form>
+);
+`}
 
   Layout & state management can be implemented using **Form**, **FormHeader**, **FormSection** & **FormFooter** components.
   If you have existing form wrappers then **Field**, **FieldGroup** & **Validator** can still be used to provide validation via
@@ -42,19 +52,16 @@ The Form package provides form & field state, layout and validation.
 ${(
   <ul>
     <li>
-      <Link to="form/docs/form-builder">
-        Use Form Builder to generate a new form
-      </Link>{' '}
-      (WIP)
-    </li>
-    <li>
-      <Link to="form/docs/migration-guide">
-        Migrate an existing form that uses Atlaskit components
-      </Link>
+      <Link to="form/docs/fields">See examples of different fields.</Link>
     </li>
     <li>
       <Link to="form/docs/validation">
-        Using Field Validators within your own &lt;form&gt; wrapper
+        Learn about how Field validation works.
+      </Link>
+    </li>
+    <li>
+      <Link to="form/docs/migrating">
+        Migrate an existing form that uses Atlaskit components
       </Link>
     </li>
   </ul>
@@ -105,22 +112,8 @@ ${(
 
   ${(
     <Props
-      props={require('!!extract-react-types-loader!../src/FieldGroup')}
-      heading="FieldGroup Props"
-    />
-  )}
-
-  ${(
-    <Props
       props={require('!!extract-react-types-loader!../src/Field')}
       heading="Field Props"
-    />
-  )}
-
-  ${(
-    <Props
-      props={require('!!extract-react-types-loader!../src/Validator')}
-      heading="Validator Props"
     />
   )}
 

@@ -7,13 +7,7 @@ import { Checkbox } from '@atlaskit/checkbox';
 import { RadioGroup } from '@atlaskit/radio';
 import FieldTextArea from '@atlaskit/field-text-area';
 
-import Form, {
-  Field,
-  FieldGroup,
-  FormHeader,
-  FormSection,
-  FormFooter,
-} from '../src';
+import Form, { Field, FormHeader, FormSection, FormFooter } from '../src';
 
 const resultBoxStyle = {
   width: '95%',
@@ -132,24 +126,22 @@ export default class LayoutExample extends PureComponent<void, State> {
               <Select />
             </Field>
 
-            <FieldGroup label="Checkboxes">
-              <Field>
-                <Checkbox
-                  label="Checkbox- Valid"
-                  value="Valid"
-                  onChange={this.onChangeHandler}
-                  name="checkbox-valid"
-                />
-              </Field>
-              <Field isInvalid invalidMessage="Invalid Message">
-                <Checkbox
-                  label="Checkbox - Invalid"
-                  value="Invalid"
-                  onChange={this.onChangeHandler}
-                  name="checkbox-valid"
-                />
-              </Field>
-            </FieldGroup>
+            <Field>
+              <Checkbox
+                label="Checkbox- Valid"
+                value="Valid"
+                onChange={this.onChangeHandler}
+                name="checkbox-valid"
+              />
+            </Field>
+            <Field isInvalid invalidMessage="Invalid Message">
+              <Checkbox
+                label="Checkbox - Invalid"
+                value="Invalid"
+                onChange={this.onChangeHandler}
+                name="checkbox-valid"
+              />
+            </Field>
 
             <Field isRequired label="Radio Group">
               <RadioGroup options={options} onChange={this.onChangeHandler} />

@@ -66,22 +66,8 @@ ${code`import Form {
 
   ${(
     <Props
-      props={require('!!extract-react-types-loader!../src/FieldGroup')}
-      heading="FieldGroup Props"
-    />
-  )}
-
-  ${(
-    <Props
       props={require('!!extract-react-types-loader!../src/Field')}
       heading="Field Props"
-    />
-  )}
-
-  ${(
-    <Props
-      props={require('!!extract-react-types-loader!../src/Validator')}
-      heading="Validator Props"
     />
   )}
 

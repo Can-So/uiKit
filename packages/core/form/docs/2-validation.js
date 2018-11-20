@@ -38,11 +38,4 @@ ${code`import Form { Field, Validator } from '@atlaskit/form';`}
     />
   )}
 
-  ${(
-    <Props
-      props={require('!!extract-react-types-loader!../src/Validator')}
-      heading="Validator Props"
-    />
-  )}
-
 `;
