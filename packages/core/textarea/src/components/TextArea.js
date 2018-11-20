@@ -58,7 +58,7 @@ type Props = {
   theme: ThemeProps => ThemeProps,
   /** Ref used to access the textarea dom element. NOTE we expose this via forwardRef,
    so you can also use the ref prop of this component to the same effect. */
-  textareaRef: (HTMLTextAreaElement | null) => void,
+  forwardedRef: (HTMLTextAreaElement | null) => void,
 };
 type State = {
   isFocused: boolean,
@@ -135,7 +135,7 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
           >
             <TextareaElement
               {...props}
-              innerRef={textareaRef}
+              innerRef={forwardedRef}
               resize={resize}
               disabled={isDisabled}
               readOnly={isReadOnly}
@@ -156,7 +156,7 @@ const TextArea = React.forwardRef((props, ref) => (
   // move textareaRef instantiation to after the spread.
   // as of now we do this to reduce the chance of users being misled into a breaking configuration
   // by our documentat.
-  <TextAreaWithoutForwardRef textareaRef={ref} {...props} />
+  <TextAreaWithoutForwardRef forwardedRef={ref} {...props} />
 ));
 
 export { TextArea as TextAreaWithoutAnalytics };
