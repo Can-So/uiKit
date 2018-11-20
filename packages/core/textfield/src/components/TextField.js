@@ -68,7 +68,6 @@ class TextField extends Component<TextFieldProps, State> {
       theme,
       // createAnalytics passed through from analytics-next
       // we don't want to spread this onto our input
-      // $ExpectError
       createAnalyticsEvent, // eslint-disable-line react/prop-types
       ...rest
     } = this.props;
@@ -92,7 +91,7 @@ class TextField extends Component<TextFieldProps, State> {
   }
 }
 
-// $FlowFixMe - flow 0.67 doesn't know about forwardRef
+// $ExpectError - flow 0.67 doesn't know about forwardRef
 const ForwardRefTextField = React.forwardRef((props, ref) => (
   <TextField {...props} forwardedRef={ref} />
 ));
