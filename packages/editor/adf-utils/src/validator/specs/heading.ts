@@ -8,6 +8,5 @@ export default {
       optional: true,
     },
     attrs: { props: { level: { type: 'number', minimum: 1, maximum: 6 } } },
-    marks: { type: 'array', items: ['alignment'], optional: true },
   },
 };
