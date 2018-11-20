@@ -362,7 +362,7 @@ Object {
   "content": Array [
     Object {
       "attrs": Object {
-        "panelType": "warning",
+        "panelType": "error",
       },
       "content": Array [
         Object {
@@ -401,7 +401,7 @@ Object {
   "content": Array [
     Object {
       "attrs": Object {
-        "panelType": "tip",
+        "panelType": "success",
       },
       "content": Array [
         Object {
@@ -585,6 +585,31 @@ Object {
 }
 `;
 
+exports[`JIRA wiki markup - Macros should render green success panel 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "attrs": Object {
+        "panelType": "success",
+      },
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "text": "green",
+              "type": "text",
+            },
+          ],
+          "type": "paragraph",
+        },
+      ],
+      "type": "panel",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
 exports[`JIRA wiki markup - Macros should render macro likes {macrolike} as plain text 1`] = `
 Object {
   "content": Array [
@@ -596,6 +621,31 @@ Object {
         },
       ],
       "type": "paragraph",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`JIRA wiki markup - Macros should render red error panel 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "attrs": Object {
+        "panelType": "error",
+      },
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "text": "red",
+              "type": "text",
+            },
+          ],
+          "type": "paragraph",
+        },
+      ],
+      "type": "panel",
     },
   ],
   "type": "doc",
