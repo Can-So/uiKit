@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.7
+- [patch] [4e2a3b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e2a3b1):
+
+  - ED-5809 Fixes code mark getting removed from document
+
 ## 88.2.6
 - [patch] [899b377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/899b377):
 
