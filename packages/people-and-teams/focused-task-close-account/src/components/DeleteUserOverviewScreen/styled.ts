@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, typography } from '@atlaskit/theme';
+import { typography } from '@atlaskit/theme';
 import gridSizeTimes from '../../util/gridSizeTimes';
 
 export const Screen = styled.div`
@@ -32,30 +32,14 @@ export const SectionMessageOuter = styled.div`
 export const MainInformationList = styled.ul`
   > li {
     margin-top: 16px;
-    margin-left: 10px;
+    margin-left: 12px;
   }
-`;
-
-export const AccessibleSitesList = styled.ul`
-  list-style: none;
-  padding-left: 0;
-  font-weight: 600;
-  margin-left: 8px;
-`;
-
-export const AccessibleSitesListFootnote = styled.div`
-  padding-left: 0;
-  margin-left: 8px;
 `;
 
 export const ListItems = styled.div`
   margin-left: 24px;
   margin-top: 8px;
-`;
-
-export const InfoIconWrapper = styled.span`
-  color: ${colors.B300};
-  div {
-    display: inline-block;
+  > * b {
+    font-weight: 600;
   }
 `;
