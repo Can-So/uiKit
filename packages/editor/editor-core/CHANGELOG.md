@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.4
+- [patch] [a458d03](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a458d03):
+
+  - ED-5713: Quick insert aliases
+
 ## 88.2.3
 - [patch] [8d30d62](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d30d62):
 
