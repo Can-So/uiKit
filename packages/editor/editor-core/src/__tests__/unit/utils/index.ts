@@ -335,9 +335,9 @@ describe('@atlaskit/editore-core/utils', () => {
 
   describe('#dedupe', () => {
     it('should always return a new list', () => {
-      const l1 = [],
-        l2 = ['a'],
-        l3 = ['a', 'a'];
+      const l1 = [];
+      const l2 = ['a'];
+      const l3 = ['a', 'a'];
       expect(dedupe(l1) !== l1).toBeTruthy();
       expect(dedupe(l2) !== l2).toBeTruthy();
       expect(dedupe(l3) !== l3).toBeTruthy();
@@ -355,8 +355,8 @@ describe('@atlaskit/editore-core/utils', () => {
     });
 
     it('should dedupe objects', () => {
-      const o1 = {},
-        o2 = {};
+      const o1 = {};
+      const o2 = {};
       const l = [o1, o1, o2, o2];
       expect(dedupe(l)).toEqual([o1, o2]);
     });
