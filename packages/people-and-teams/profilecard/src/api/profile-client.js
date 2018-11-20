@@ -82,7 +82,6 @@ const buildUserQuery = (cloudId: string, userId: string) => ({
       isCurrentUser,
       status,
       statusModifiedDate,
-      isActive: active,
       isBot,
       isNotMentionable,
       fullName,
