@@ -6,13 +6,16 @@ export default md`
 
 ### Reasons to migrate
 
-1. @atlaskit/util-shared-styles will be deprecated soon
-2. New feature requests are not accepted in @atlaskit/util-shared-styles
-3. @atlaskit/theme is the source of truth for ADG styling
+1. The @atlaskit/util-shared-styles package will be deprecated soon
+2. Feature requests are not accepted for @atlaskit/util-shared-styles anymore
+3. The @atlaskit/theme package is the source of truth for ADG styling
+
+
+### Following the guide
 
 Keeping up with value *Be the change you seek* we migrated all the core packages and css-packs. While migrating these
 package we came up with two migration paths. One is for the usage of util-shared-styles as css-in-js solution
-and other for usage in less files.
+and other is for usage in less files.
 
 ### Migrating the CSS-IN-JS styles
 
