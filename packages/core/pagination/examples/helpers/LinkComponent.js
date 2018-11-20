@@ -27,7 +27,6 @@ export function renderRouterLink({
   disabled,
   page,
 }: PageProps) {
-  console.log(onMouseEnter);
   const href = page && page.href;
   return disabled ? (
     <div className={className}>{children}</div>
