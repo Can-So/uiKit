@@ -1,5 +1,6 @@
 import { Client } from '../Client';
-import { CardAppearance } from './CardContent';
+
+export type CardAppearance = 'inline' | 'block';
 
 type BaseCardProps = {
   appearance: CardAppearance;
@@ -8,12 +9,14 @@ type BaseCardProps = {
 };
 
 export type CardWithData = BaseCardProps & {
-  data?: any;
+  data: any;
+  importer?: (target: any) => void;
 };
 
 export type CardWithUrl = BaseCardProps & {
-  url?: string;
+  url: string;
   client?: Client;
+  importer?: (target: any) => void;
 };
 
 export type CardProps = CardWithData | CardWithUrl;

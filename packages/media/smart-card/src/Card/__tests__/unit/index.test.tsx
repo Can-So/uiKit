@@ -33,24 +33,57 @@ function createClient(consequesntStates?: ObjectState[]): Client {
   return client;
 }
 
+const getNow = (nows: number[]) => () => nows.shift() || new Date().getTime();
+const waitFor = (time = 1) => new Promise(res => setTimeout(res, time));
+
 describe('Card', () => {
   // tslint:disable-next-line:no-console
   console.error = jest.fn();
 
-  it('should render the resolving view when resolving', () => {
+  it('should render the link as the first representation', () => {
     const client = createClient();
+    const url = 'https://www.atlassian.com/';
     const wrapper = mount(
-      <Card
-        appearance="block"
-        client={client}
-        url="https://www.atlassian.com/"
-      />,
+      <Card appearance="block" client={client} url={url} />,
     );
-    expect(wrapper.find(BlockCardResolvingView).exists()).toBeTruthy();
+    expect(wrapper.find('a').exists()).toBeTruthy();
+  });
+
+  it('should render the link and then resolved state as came in sooner than loading state', async () => {
+    class CustomClient extends Client {
+      fetchData() {
+        return Promise.resolve({
+          meta: {
+            visibility: 'public',
+            access: 'granted',
+            auth: [],
+            definitionId: 'd1',
+          },
+          data: {
+            name: 'foobar',
+          },
+        } as ResolveResponse);
+      }
+    }
+    const client = new CustomClient({
+      cacheLifespan: 1,
+      getNowTimeFn: getNow([1, 2]),
+      loadingStateDelay: 10,
+    });
+    const url = 'https://www.atlassian.com/';
+    const wrapper = mount(
+      <Card appearance="block" client={client} url={url} />,
+    );
+    expect(wrapper.find('a').exists()).toBeTruthy();
+    await waitFor(1);
+    wrapper.update();
+    expect(wrapper.find(BlockCardResolvedView).exists()).toBeTruthy();
   });
 
   it('should render the errored view when errored', async () => {
-    const client = createClient([{ status: 'errored', services: [] }]);
+    const client = createClient([
+      { status: 'errored', definitionId: undefined },
+    ]);
 
     const wrapper = mount(
       <Card
@@ -194,6 +227,7 @@ describe('Card', () => {
     const client = createClient([
       {
         status: 'resolved',
+        definitionId: '1',
         services: [],
         data: {
           name: 'The best of EAC',
@@ -228,7 +262,10 @@ describe('Card', () => {
     const wrapper = mount(
       <Card appearance="block" data={{ name: 'foobar' }} />,
     );
+
+    await waitFor();
     wrapper.update();
+
     expect(wrapper.find(BlockCardResolvedView)).toHaveLength(1);
     expect(wrapper.find(BlockCardResolvedView).props()).toEqual(
       expect.objectContaining({
@@ -247,6 +284,7 @@ describe('Card', () => {
       />,
     );
     wrapper.update();
+    await waitFor();
     expect(wrapper.find(InlineCardResolvingView)).toHaveLength(1);
   });
 
@@ -260,6 +298,7 @@ describe('Card', () => {
       />,
     );
     wrapper.update();
+    await waitFor();
     expect(wrapper.find(BlockCardResolvingView)).toHaveLength(1);
   });
 
@@ -268,6 +307,7 @@ describe('Card', () => {
       <Card appearance="inline" data={{ name: 'foobar' }} />,
     );
     wrapper.update();
+    await waitFor();
     expect(wrapper.find(InlineCardResolvedView)).toHaveLength(1);
     expect(wrapper.find(InlineCardResolvedView).props()).toEqual(
       expect.objectContaining({
@@ -281,6 +321,7 @@ describe('Card', () => {
       <Card appearance="block" data={{ name: 'foobar' }} />,
     );
     wrapper.update();
+    await waitFor();
     expect(wrapper.find(BlockCardResolvedView)).toHaveLength(1);
     expect(wrapper.find(BlockCardResolvedView).props()).toEqual(
       expect.objectContaining({

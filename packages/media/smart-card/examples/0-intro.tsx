@@ -6,7 +6,7 @@ import { Field } from '@atlaskit/form';
 import { FieldTextStateless } from '@atlaskit/field-text';
 import Button from '@atlaskit/button';
 import { Provider, Card } from '../src';
-import { CardAppearance } from '../src/Card/CardContent';
+import { CardAppearance } from '../src/Card/types';
 import { Checkbox } from '@atlaskit/checkbox';
 import { RadioGroup } from '@atlaskit/radio';
 import urlsJSON from './example-urls.json';

@@ -11,7 +11,7 @@ export interface WithObjectRenderProps {
 interface InnerWithObjectProps {
   client: Client;
   url: string;
-  children: (props: WithObjectRenderProps) => React.ReactNode;
+  children: (renderProps: WithObjectRenderProps) => React.ReactNode;
 }
 
 interface InnerWithObjectState {
@@ -27,15 +27,19 @@ class InnerWithObject extends React.Component<
 > {
   state: InnerWithObjectState = {
     uuid: v4(),
-    cardState: {
-      status: 'resolving',
-      services: [],
-    },
+    cardState: { status: 'pending' },
   };
 
   reload = () => {
-    const { client, url } = this.props;
-    client.reload(url, this.state.cardState.definitionId);
+    const { cardState } = this.state;
+    if (
+      cardState.status === 'errored' ||
+      cardState.status === 'unauthorized' ||
+      cardState.status === 'forbidden'
+    ) {
+      const { client, url } = this.props;
+      client.reload(url, cardState.definitionId);
+    }
   };
 
   updateState = (incoming: [ObjectState | null, boolean]) => {
@@ -74,7 +78,6 @@ class InnerWithObject extends React.Component<
   componentWillUnmount() {
     const { client, url } = this.props;
     const { uuid } = this.state;
-
     client.deregister(url, uuid);
   }
 
@@ -96,8 +99,6 @@ export function WithObject(props: WithObjectProps) {
   return (
     <Context.Consumer>
       {clientFromContext => {
-        // TODO: Remove the last fallback - this is a temporary workaround for React context not penetrating the <Editor />
-        //       https://product-fabric.atlassian.net/browse/ED-5565
         const client = clientFromProps || clientFromContext;
         if (!client) {
           throw new Error(

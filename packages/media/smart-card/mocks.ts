@@ -126,11 +126,13 @@ const responses = {
   },
 };
 
+const random = (max: number) => Math.floor(Math.random() * max);
 const delayP = (n: number) => new Promise(res => setTimeout(res, n));
 
 export const mockMultipleCards = () => {
   fm.mock('*', async (_, opts: any) => {
-    await delayP(1000);
+    const delay = random(2000);
+    await delayP(delay);
 
     const resourceUrl = JSON.parse(opts.body).resourceUrl as string;
 
@@ -149,7 +151,7 @@ export const mockMultipleCards = () => {
       response = response(resourceUrl);
     }
 
-    console.log(`[SERVER] ${domain} ${resourceUrl}`, response);
+    console.log(`[SERVER] <${delay}> ${domain} ${resourceUrl}`, response);
 
     return response;
   });

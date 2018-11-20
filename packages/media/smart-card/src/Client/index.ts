@@ -1,10 +1,22 @@
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { merge } from 'rxjs/observable/merge';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import fetch$ from './fetch';
 import { map } from 'rxjs/operators/map';
+import { delay } from 'rxjs/operators/delay';
+import { takeUntil } from 'rxjs/operators/takeUntil';
 import { catchError } from 'rxjs/operators/catchError';
-import { ObjectState, ObjectStatus, AuthService } from './types';
+import {
+  ObjectState,
+  DefinedState,
+  DefinedStatus,
+  ErroredState,
+  ObjectStatus,
+  AuthService,
+  NotFoundState,
+  ResolvingState,
+} from './types';
 import { Store } from './store';
 import { StateWatch } from './stateWatcher';
 
@@ -43,22 +55,20 @@ const convertAuthToService = (auth: {
 });
 
 const statusByAccess = (
-  status: ObjectStatus,
+  status: DefinedStatus,
   json: ResolveResponse,
-): ObjectState => ({
+): DefinedState => ({
   status: status,
   definitionId: json.meta.definitionId,
   services: json.meta.auth.map(convertAuthToService),
   data: json.data,
 });
 
-const responseToStateMapper = (json: ResolveResponse): ObjectState => {
+const responseToStateMapper = (
+  json: ResolveResponse,
+): NotFoundState | DefinedState => {
   if (json.meta.visibility === 'not_found') {
-    return {
-      status: 'not-found',
-      definitionId: undefined,
-      services: [],
-    };
+    return { status: 'not-found' };
   }
   switch (json.meta.access) {
     case 'forbidden':
@@ -70,52 +80,52 @@ const responseToStateMapper = (json: ResolveResponse): ObjectState => {
   }
 };
 
-export type Options = {
-  serviceUrl: string;
-  objectUrl: string;
-  definitionId?: string;
-};
-
-const filterCardsByDefId = (
+const filterUrlsByDefId = (
   store: Store<ObjectState>,
   defId: string,
   urls: string[],
 ): string[] =>
   urls.filter(url => {
     const entry = store.get(url);
-    const entryDefId = entry && entry.getProp('definitionId');
+    const entryDefId = entry && entry.getProp<DefinedState>('definitionId');
     return entryDefId === defId;
   });
 
-const unresolvedCards = (store: Store<ObjectState>, urls: string[]): string[] =>
+const unresolvedUrls = (store: Store<ObjectState>, urls: string[]): string[] =>
   urls.filter(url => {
     const entry = store.get(url);
     const entryStatus = entry && entry.getProp('status');
     return entryStatus !== 'resolved';
   });
 
-const cardsWithoutDefinitionId = (
+const urlsWithoutDefinitionId = (
   store: Store<ObjectState>,
   urls: string[],
 ): string[] =>
   urls.filter(url => {
     const entry = store.get(url);
-    const defId = entry && entry.getProp('definitionId');
+    const defId = entry && entry.getProp<DefinedState>('definitionId');
     return defId === undefined;
   });
 
-const getCardsToUpdate = (
+const getUrlsToReload = (
   store: Store<ObjectState>,
   definitionIdFromCard?: string,
 ) => {
   if (definitionIdFromCard) {
-    return unresolvedCards(
+    return unresolvedUrls(
       store,
-      filterCardsByDefId(store, definitionIdFromCard, store.getAllUrls()),
+      filterUrlsByDefId(store, definitionIdFromCard, store.getAllUrls()),
     );
   } else {
-    return cardsWithoutDefinitionId(store, store.getAllUrls());
+    return urlsWithoutDefinitionId(store, store.getAllUrls());
   }
+};
+
+export type ClientConfig = {
+  cacheLifespan?: number;
+  getNowTimeFn?: () => number;
+  loadingStateDelay?: number;
 };
 
 export interface Client {
@@ -125,10 +135,15 @@ export interface Client {
 export class Client implements Client {
   cacheLifespan: number;
   store: Store<ObjectState>;
+  loadingStateDelay: number;
 
-  constructor(cacheLifespan?: number, private getNowTimeFn = Date.now) {
-    this.cacheLifespan = cacheLifespan || DEFAULT_CACHE_LIFESPAN;
-    this.store = new Store<ObjectState>(this.getNowTimeFn);
+  constructor(config?: ClientConfig) {
+    this.cacheLifespan =
+      (config && config.cacheLifespan) || DEFAULT_CACHE_LIFESPAN;
+    this.store = new Store<ObjectState>(
+      (config && config.getNowTimeFn) || Date.now,
+    );
+    this.loadingStateDelay = (config && config.loadingStateDelay) || 800;
   }
 
   fetchData(objectUrl: string): Promise<ResolveResponse> {
@@ -137,10 +152,12 @@ export class Client implements Client {
     }).toPromise();
   }
 
-  startStreaming(objectUrl: string): Observable<ObjectState> {
+  startStreaming(
+    objectUrl: string,
+  ): Observable<ErroredState | NotFoundState | DefinedState> {
     return fromPromise(this.fetchData(objectUrl)).pipe(
       map(responseToStateMapper),
-      catchError(() => of({ status: 'errored', services: [] } as ObjectState)),
+      catchError(() => of({ status: 'errored' } as ErroredState)),
     );
   }
 
@@ -182,14 +199,14 @@ export class Client implements Client {
     const entry = this.store.get(url);
 
     if (entry && entry.hasExpired()) {
-      this.store.set(
-        url,
-        { status: 'resolving', services: [] },
-        this.cacheLifespan,
+      const data$ = this.startStreaming(url);
+      const resolving$ = of(<ResolvingState>{ status: 'resolving' }).pipe(
+        delay(this.loadingStateDelay),
+        takeUntil(data$),
       );
 
-      this.startStreaming(url).subscribe(orsResponse => {
-        this.store.set(url, orsResponse, this.cacheLifespan);
+      merge(resolving$, data$).subscribe(state => {
+        this.store.set(url, state, this.cacheLifespan);
 
         if (cb) {
           cb();
@@ -202,7 +219,7 @@ export class Client implements Client {
     this.store.get(urlToReload)!.invalidate();
 
     this.resolve(urlToReload, () => {
-      getCardsToUpdate(this.store, definitionIdFromCard)
+      getUrlsToReload(this.store, definitionIdFromCard)
         .filter(otherUrl => otherUrl !== urlToReload)
         .forEach(otherUrl => {
           this.store.get(otherUrl)!.invalidate();
