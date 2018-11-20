@@ -2,6 +2,7 @@
 
 import React, { Component, Fragment } from 'react';
 import { Checkbox } from '@atlaskit/checkbox';
+import { colors } from '@atlaskit/theme';
 import Range from '../src';
 
 const initialState = {
@@ -32,7 +33,7 @@ export default class Playground extends Component<*, *> {
           />
         </div>
         <div
-          style={{ width: '100%', height: '1px', backgroundColor: 'orange' }}
+          style={{ width: '100%', height: '1px', backgroundColor: colors.P400 }}
         />
         <Checkbox
           value="Toggle Disabled"
