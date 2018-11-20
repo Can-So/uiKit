@@ -41,10 +41,11 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
+    "@atlaskit/button": "^9.0.16",
     "@atlaskit/editor-test-helpers": "^6.2.16",
     "@atlaskit/field-text": "^7.0.13",
+    "@atlaskit/form": "^4.0.15",
     "@atlaskit/select": "^6.1.6",
-    "@atlaskit/button": "^9.0.16",
     "ajv": "^4.11.3",
     "babel-loader": "^8.0.2",
     "html-webpack-plugin": "^3.2.0",

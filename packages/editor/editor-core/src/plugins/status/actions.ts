@@ -81,9 +81,7 @@ export const updateStatus = (status?: StatusType) => (
 
   if (state.doc.nodeAt(showStatusPickerAt)) {
     tr = tr.setNodeMarkup(showStatusPickerAt, schema.nodes.status, statusProps);
-    tr = tr
-      // .setSelection(Selection.near(tr.doc.resolve(showStatusPickerAt - 1)))
-      .setSelection(NodeSelection.create(tr.doc, showStatusPickerAt));
+    tr = tr.setSelection(NodeSelection.create(tr.doc, showStatusPickerAt));
     tr = tr.setMeta(pluginKey, { showStatusPickerAt }).scrollIntoView();
 
     dispatch(tr);
