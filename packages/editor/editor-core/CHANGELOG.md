@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.5
+- [patch] [4ad840a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4ad840a):
+
+  - Adds resize property to fix media without dimensions
+
 ## 88.2.4
 - [patch] [a458d03](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a458d03):
 
