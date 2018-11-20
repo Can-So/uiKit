@@ -119,16 +119,14 @@ test('should communicate error when isRequired is set on field', () => {
     <Form onSubmit={jest.fn()}>
       {() => (
         <Field name="username" defaultValue="" isRequired>
-          {({ fieldProps, error }) =>
-            console.log('error', error) || (
-              <>
-                <FieldText {...fieldProps} />
-                {error === 'REQUIRED' && (
-                  <ErrorMessage>This field is required</ErrorMessage>
-                )}
-              </>
-            )
-          }
+          {({ fieldProps, error }) => (
+            <>
+              <FieldText {...fieldProps} />
+              {error === 'REQUIRED' && (
+                <ErrorMessage>This field is required</ErrorMessage>
+              )}
+            </>
+          )}
         </Field>
       )}
     </Form>,

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Select from '@atlaskit/select';
 import FieldText from '@atlaskit/field-text';
-import FieldTextArea from '@atlaskit/field-text-area';
+import { FieldTextAreaStateless } from '@atlaskit/field-text-area';
 import Button from '@atlaskit/button';
 import { RadioGroup } from '@atlaskit/radio';
 import { Checkbox } from '@atlaskit/checkbox';
@@ -12,7 +12,7 @@ import { FormHeader, FormFooter } from '../src';
 import Field from '../src/FieldNext';
 import CheckboxField from '../src/CheckboxField';
 import Form from '../src/FormNext';
-import { HelperMessage, ErrorMessage, ValidMessage } from '../src/Messages';
+import { HelperMessage, ErrorMessage } from '../src/Messages';
 
 export default class FielsExample extends Component<{}> {
   render() {
@@ -37,19 +37,19 @@ export default class FielsExample extends Component<{}> {
                 defaultValue=""
                 validate={val => (val.length < 3 ? 'TOO_SHORT' : undefined)}
               >
-                {({ fieldProps, submitError }) => (
+                {({ fieldProps, error }) => (
                   <>
                     <FieldText
                       shouldFitContainer
                       isLabelHidden
                       {...fieldProps}
                     />
-                    {!submitError && (
+                    {!error && (
                       <HelperMessage>
                         Must be longer than three characters
                       </HelperMessage>
                     )}
-                    {submitError && (
+                    {error && (
                       <ErrorMessage>
                         Must be longer than three characters
                       </ErrorMessage>
@@ -119,7 +119,7 @@ export default class FielsExample extends Component<{}> {
 
               <Field name="information" label="Add additional information">
                 {({ fieldProps }) => (
-                  <FieldTextArea
+                  <FieldTextAreaStateless
                     shouldFitContainer
                     isLabelHidden
                     {...fieldProps}

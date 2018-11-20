@@ -2,9 +2,25 @@
 import React, { type Node } from 'react';
 import Field from './FieldNext';
 
+type FieldProps = {
+  isChecked: boolean,
+  onChange: any => any,
+  onBlur: () => any,
+  onFocus: () => any,
+  value: any,
+};
+
+type Meta = {
+  dirty: boolean,
+  touched: boolean,
+  valid: boolean,
+  error: any,
+  submitError: any,
+};
+
 type Props = {
   /* Children to render in the field. Called with form information. */
-  children: ({ fieldProps: { isChecked: boolean, value?: string } }) => Node,
+  children: ({ fieldProps: FieldProps, error: any, meta: Meta }) => Node,
   /* The default checked state of the checkbox */
   defaultIsChecked: boolean,
   /* Whether the field is required for submission */
