@@ -164,7 +164,6 @@ export const InputWrapper = styled.div`
   border-radius: ${borderRadius};
   border-width: ${borderWidth}px;
   border-style: ${getBorderStyle};
-  display: inline-block;
   box-sizing: border-box;
   color: ${p => p.textColor};
   display: flex;

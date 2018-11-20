@@ -40,7 +40,7 @@ export default class TextFieldExample extends Component<Props, State> {
 
     return (
       <div>
-        <label for="event-handlers">Event Handlers</label>
+        <label htmlFor="event-handlers">Event Handlers</label>
         <TextField
           name="event-handlers"
           onChange={this.handleOnChange}
@@ -49,29 +49,29 @@ export default class TextFieldExample extends Component<Props, State> {
         />
         <div style={eventResultStyle}>{eventResult}</div>
 
-        <label for="default-value">Default Value</label>
+        <label htmlFor="default-value">Default Value</label>
         <TextField name="default-value" defaultValue="candy" />
 
-        <label for="disabled">Disabled</label>
+        <label htmlFor="disabled">Disabled</label>
         <TextField
           name="disabled"
           isDisabled
           defaultValue="can't touch this..."
         />
 
-        <label for="required">Required</label>
+        <label htmlFor="required">Required</label>
         <TextField name="required" isRequired />
 
-        <label for="invalid">Invalid</label>
+        <label htmlFor="invalid">Invalid</label>
         <TextField name="invalid" isInvalid />
 
-        <label for="placeholder">Placeholder</label>
+        <label htmlFor="placeholder">Placeholder</label>
         <TextField name="placeholder" placeholder="Click here to input..." />
 
-        <label for="auto-focus">Auto Focus</label>
+        <label htmlFor="auto-focus">Auto Focus</label>
         <TextField name="auto-focus" autoFocus />
 
-        <label for="spell-check">Spell Check</label>
+        <label htmlFor="spell-check">Spell Check</label>
         <TextField name="spell-check" spellCheck />
       </div>
     );
