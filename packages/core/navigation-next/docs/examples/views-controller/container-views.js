@@ -21,7 +21,7 @@ import {
   NavigationProvider,
   ViewController,
   withNavigationViewController,
-} from '../src';
+} from '../../../src';
 
 const MyGlobalNavigation = () => (
   <GlobalNavigation

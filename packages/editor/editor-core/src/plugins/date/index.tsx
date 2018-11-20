@@ -89,7 +89,7 @@ const datePlugin: EditorPlugin = {
       {
         title: formatMessage(messages.date),
         priority: 800,
-        keywords: ['time', '/'],
+        keywords: ['time', 'today', '/'],
         icon: () => <EditorDateIcon label={formatMessage(messages.date)} />,
         action(insert, state) {
           const dateNode = state.schema.nodes.date.createChecked({

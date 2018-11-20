@@ -1,11 +1,10 @@
 import { findParentNode } from 'prosemirror-utils';
 import { Command } from '../../../types';
+import { isSupportedNodeForBreakout } from '../utils/is-supported-node';
 
 export function removeBreakout(): Command {
   return (state, dispatch) => {
-    const node = findParentNode(node => node.type.name === 'codeBlock')(
-      state.selection,
-    );
+    const node = findParentNode(isSupportedNodeForBreakout)(state.selection);
 
     if (!node) {
       return false;

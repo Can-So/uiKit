@@ -6,7 +6,7 @@ import { FloatingToolbarConfig } from '../floating-toolbar/types';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';
 
 import {
-  default as layoutPlugin,
+  default as createLayoutPlugin,
   pluginKey,
   LayoutState,
 } from './pm-plugins/main';
@@ -27,15 +27,15 @@ export default {
     return [
       {
         name: 'layout',
-        plugin: () => layoutPlugin,
+        plugin: ({ props }) => createLayoutPlugin(props.allowLayouts),
       },
     ];
   },
   pluginsOptions: {
     floatingToolbar(state, intl): FloatingToolbarConfig | undefined {
-      const { pos } = pluginKey.getState(state) as LayoutState;
+      const { pos, allowBreakout } = pluginKey.getState(state) as LayoutState;
       if (pos !== null) {
-        return buildToolbar(state, intl, pos);
+        return buildToolbar(state, intl, pos, allowBreakout);
       }
       return undefined;
     },

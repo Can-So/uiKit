@@ -9,12 +9,12 @@ import { colors } from '@atlaskit/theme';
 /**
  * Load an example in an iframe
  */
-export const IframeExample = ({ source, title, url }: *) => (
+export const IframeExample = ({ source, title, id, path = '' }: *) => (
   <Example
     packageName="@atlaskit/navigation-next"
     Component={() => (
       <iframe
-        src={url}
+        src={`/examples.html?groupId=core&packageId=navigation-next&exampleId=${id}&examplesPath=docs/examples${path}`}
         style={{
           border: 0,
           height: '500px',

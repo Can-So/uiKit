@@ -31,7 +31,11 @@ import {
   handleClick,
   handleTripleClick,
 } from '../event-handlers';
-import { findControlsHoverDecoration, fixTables } from '../utils';
+import {
+  findControlsHoverDecoration,
+  fixTables,
+  normalizeSelection,
+} from '../utils';
 
 export const pluginKey = new PluginKey('tablePlugin');
 
@@ -187,6 +191,9 @@ export const createPlugin = (
       }
       if (transactions.find(tr => tr.docChanged)) {
         return fixTables(newState.tr);
+      }
+      if (transactions.find(tr => tr.selectionSet)) {
+        return normalizeSelection(newState.tr);
       }
     },
     view: (editorView: EditorView) => {

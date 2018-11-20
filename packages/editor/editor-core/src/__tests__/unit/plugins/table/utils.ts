@@ -1,4 +1,5 @@
 import { CellSelection } from 'prosemirror-tables';
+import { isTableSelected } from 'prosemirror-utils';
 import {
   doc,
   p,
@@ -1117,6 +1118,96 @@ describe('table plugin: utils', () => {
               expect(classNames.indexOf('danger') > -1).toBe(true);
             });
           });
+        });
+      });
+    });
+  });
+
+  describe('#normalizeSelection', () => {
+    describe('when table has non-rectangular column CellSelection', () => {
+      describe('when first column is selected', () => {
+        it('should create a rectangular CellSelection', () => {
+          const {
+            editorView,
+            refs: { anchor, head },
+          } = editor(
+            doc(
+              p('text'),
+              table()(
+                tr(td({})(p('{anchor}a1')), tdEmpty),
+                tr(td({ colspan: 2 })(p('b1'))),
+                tr(td({})(p('{head}c1')), tdEmpty),
+              ),
+            ),
+          );
+          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
+          expect(isTableSelected(editorView.state.selection)).toBe(true);
+        });
+      });
+      describe('when second column is selected', () => {
+        it('should create a rectangular CellSelection', () => {
+          const {
+            editorView,
+            refs: { anchor, head },
+          } = editor(
+            doc(
+              p('text'),
+              table()(
+                tr(tdEmpty, td({})(p('{anchor}a1'))),
+                tr(td({ colspan: 2 })(p('b1'))),
+                tr(tdEmpty, td({})(p('{head}c1'))),
+              ),
+            ),
+          );
+          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
+          expect(isTableSelected(editorView.state.selection)).toBe(true);
+        });
+      });
+    });
+
+    describe('when table has non-rectangular rpw CellSelection', () => {
+      describe('when first row is selected', () => {
+        it('should create a rectangular CellSelection', () => {
+          const {
+            editorView,
+            refs: { anchor, head },
+          } = editor(
+            doc(
+              p('text'),
+              table()(
+                tr(
+                  td({})(p('{anchor}a1')),
+                  td({ rowspan: 2 })(p('a2')),
+                  td({})(p('{head}a3')),
+                ),
+                tr(tdEmpty, tdEmpty),
+              ),
+            ),
+          );
+          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
+          expect(isTableSelected(editorView.state.selection)).toBe(true);
+        });
+      });
+      describe('when second row is selected', () => {
+        it('should create a rectangular CellSelection', () => {
+          const {
+            editorView,
+            refs: { anchor, head },
+          } = editor(
+            doc(
+              p('text'),
+              table()(
+                tr(tdEmpty, td({ rowspan: 2 })(p('a2')), tdEmpty),
+                tr(td({})(p('{anchor}b1')), td({})(p('{head}b3'))),
+              ),
+            ),
+          );
+          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+
+          expect(isTableSelected(editorView.state.selection)).toBe(true);
         });
       });
     });

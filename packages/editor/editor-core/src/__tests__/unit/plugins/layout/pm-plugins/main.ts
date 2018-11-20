@@ -11,7 +11,7 @@ import {
   sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
 import {
-  default as layoutPlugin,
+  default as createLayoutPlugin,
   pluginKey,
 } from '../../../../../plugins/layout/pm-plugins/main';
 import {
@@ -31,6 +31,8 @@ const toState = (node: RefsNode) =>
   });
 
 describe('layout', () => {
+  const layoutPlugin = createLayoutPlugin({ allowBreakout: true });
+
   describe('plugin', () => {
     describe('#init', () => {
       it('should set pos when selection in layout', () => {
@@ -45,7 +47,7 @@ describe('layout', () => {
           {},
           state,
         );
-        expect(pluginState).toEqual({ pos: 0 });
+        expect(pluginState).toEqual({ pos: 0, allowBreakout: true });
       });
       it('should set pos to null when selection is not in layout', () => {
         const document = doc(p('{<>}'))(defaultSchema);
@@ -54,7 +56,7 @@ describe('layout', () => {
           {},
           state,
         );
-        expect(pluginState).toEqual({ pos: null });
+        expect(pluginState.pos).toEqual(null);
       });
     });
 
@@ -77,9 +79,7 @@ describe('layout', () => {
             TextSelection.create(editorView.state.doc, layoutPos),
           ),
         );
-        expect(pluginKey.getState(editorView.state)).toEqual({
-          pos: 2,
-        });
+        expect(pluginKey.getState(editorView.state).pos).toEqual(2);
       });
       it('should set pos to null when selection is not in layout', () => {
         const {
@@ -99,9 +99,7 @@ describe('layout', () => {
             TextSelection.create(editorView.state.doc, pPos),
           ),
         );
-        expect(pluginKey.getState(editorView.state)).toEqual({
-          pos: null,
-        });
+        expect(pluginKey.getState(editorView.state).pos).toEqual(null);
       });
     });
 
