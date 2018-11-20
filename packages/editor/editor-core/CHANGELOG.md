@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.3
+- [patch] [8d30d62](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d30d62):
+
+  - ED-5774: add breakout for Columns
+
 ## 88.2.2
 - [patch] [9a66a9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a66a9b):
 
