@@ -1,6 +1,11 @@
 import { Node, Schema } from 'prosemirror-model';
 import { Transaction } from 'prosemirror-state';
-import { Entity, VALIDATION_ERRORS } from '@atlaskit/adf-utils';
+import {
+  validator,
+  Entity,
+  VALIDATION_ERRORS,
+  ValidationError,
+} from '@atlaskit/adf-utils';
 import { analyticsService } from '../analytics';
 
 /**
