@@ -86,11 +86,14 @@ export type ThemeProps = {
   },
   mode?: 'light' | 'dark',
 };
+export type ThemeAppearance = {
+  appearance: 'subtle' | 'standard' | 'none',
+};
 
 export default (props: ThemeProps): ThemeProps => {
   const mode = props.mode || 'light';
   return {
-    textField: ({ appearance }) => ({
+    textField: ({ appearance }: ThemeAppearance) => ({
       backgroundColor: backgroundColor[appearance][mode],
       backgroundColorFocus: backgroundColorFocus[appearance][mode],
       backgroundColorHover: backgroundColorHover[appearance][mode],
