@@ -21,7 +21,6 @@ BrowserTestCase(
     // get focus status of first button
     const firstButtonFocused = await LayerManagerTest.hasFocus(FirstButton);
     expect(firstButtonFocused).toBe(true);
-    if (LayerManagerTest.browser.desiredCapabilities.browserName === 'chrome')
-      await LayerManagerTest.checkConsoleErrors();
+    await LayerManagerTest.checkConsoleErrors();
   },
 );

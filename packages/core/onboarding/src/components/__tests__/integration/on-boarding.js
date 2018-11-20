@@ -30,8 +30,7 @@ BrowserTestCase(
     await onBoardingTest.waitFor(onBoardingMenuTitle, 5000);
     const menuIsVisible = await onBoardingTest.isVisible(onBoardingCard);
     expect(menuIsVisible).toBe(true);
-    if (onBoardingTest.browser.desiredCapabilities.browserName === 'chrome')
-      await onBoardingTest.checkConsoleErrors();
+    await onBoardingTest.checkConsoleErrors();
   },
 );
 
@@ -49,7 +48,6 @@ BrowserTestCase(
     await onBoardingTest.waitFor(onBoardingMenuTitle, 5000);
     const text = await onBoardingTest.getText(onBoardingMenuTitle);
     expect(text).toBe('Yellow');
-    if (onBoardingTest.browser.desiredCapabilities.browserName === 'chrome')
-      await onBoardingTest.checkConsoleErrors();
+    await onBoardingTest.checkConsoleErrors();
   },
 );

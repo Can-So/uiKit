@@ -25,8 +25,7 @@ urlArray.forEach(url => {
       await selectTest.click(selectDefault);
       const menuIsVisible = await selectTest.isVisible(selectMenu);
       expect(menuIsVisible).toBe(true);
-      if (selectTest.browser.desiredCapabilities.browserName === 'chrome')
-        await selectTest.checkConsoleErrors();
+      await selectTest.checkConsoleErrors();
     },
   );
 });

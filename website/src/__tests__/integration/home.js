@@ -22,7 +22,6 @@ BrowserTestCase(
     expect(logo).toBe(true);
     expect(subHeaderTitle).toBe('Atlaskit');
     expect(pageIsVisible).toBe(true);
-    if (homeTest.browser.desiredCapabilities.browserName === 'chrome')
-      await homeTest.checkConsoleErrors();
+    await homeTest.checkConsoleErrors();
   },
 );

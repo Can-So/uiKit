@@ -43,7 +43,6 @@ BrowserTestCase(
     expect(includeReadmeIsVisible).toBe(true);
     expect(createRepoBtnIsVisible).toBe(true);
     expect(cancelBtnIsVisible).toBe(true);
-    if (formTest.browser.desiredCapabilities.browserName === 'chrome')
-      await formTest.checkConsoleErrors();
+    await formTest.checkConsoleErrors();
   },
 );
