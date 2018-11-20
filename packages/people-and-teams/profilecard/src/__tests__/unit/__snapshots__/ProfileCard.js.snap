@@ -36,18 +36,21 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
           </Lozenge>
         </styled.div>
         <styled.div>
-          <FormattedMessage
-            defaultMessage="You can no longer collaborate with this person. Their account has been deleted {date}."
-            description="A long text explains this user is closed when we know the date of starting to close"
-            id="pt.profile.card.inactive.account.has.date"
-            values={
-              Object {
-                "date": <RelativeDate
-                  date={2018-11-19T06:24:11.819Z}
-                />,
-              }
-            }
-          />
+          <p>
+            <FormattedMessage
+              defaultMessage="You can no longer collaborate with this person. "
+              description="A first sentence of a long text explains this user is inactive/closed"
+              id="pt.profile.card.general.msg.disabled.user"
+              values={Object {}}
+            />
+             
+            <FormattedMessage
+              defaultMessage="Their account has been deleted."
+              description="A long text explains this user is closed when we do not know the date of starting to close"
+              id="pt.profile.card.closed.account.no.date"
+              values={Object {}}
+            />
+          </p>
         </styled.div>
       </styled.div>
       <styled.div />
@@ -92,12 +95,21 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
           </Lozenge>
         </styled.div>
         <styled.div>
-          <FormattedMessage
-            defaultMessage="You can no longer collaborate with this person. Their account has been deleted."
-            description="A long text explains this user is closed when we do not know the date of starting to close"
-            id="pt.profile.card.closed.account.no.date"
-            values={Object {}}
-          />
+          <p>
+            <FormattedMessage
+              defaultMessage="You can no longer collaborate with this person. "
+              description="A first sentence of a long text explains this user is inactive/closed"
+              id="pt.profile.card.general.msg.disabled.user"
+              values={Object {}}
+            />
+             
+            <FormattedMessage
+              defaultMessage="Their account has been deleted."
+              description="A long text explains this user is closed when we do not know the date of starting to close"
+              id="pt.profile.card.closed.account.no.date"
+              values={Object {}}
+            />
+          </p>
         </styled.div>
       </styled.div>
       <styled.div />
@@ -141,18 +153,21 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
           </Lozenge>
         </styled.div>
         <styled.div>
-          <FormattedMessage
-            defaultMessage="You can no longer collaborate with this person. Their account was deactivated {date}."
-            description="A long text explains this user is inactive when we know the date of starting to deactivate"
-            id="pt.profile.card.inactive.account.has.date"
-            values={
-              Object {
-                "date": <RelativeDate
-                  date={2018-11-19T06:24:11.819Z}
-                />,
-              }
-            }
-          />
+          <p>
+            <FormattedMessage
+              defaultMessage="You can no longer collaborate with this person. "
+              description="A first sentence of a long text explains this user is inactive/closed"
+              id="pt.profile.card.general.msg.disabled.user"
+              values={Object {}}
+            />
+             
+            <FormattedMessage
+              defaultMessage="Their account has been deactivated."
+              description="A long text explains this user is inactive when we do not know the date of starting to deactivate"
+              id="pt.profile.card.inactive.account.no.date"
+              values={Object {}}
+            />
+          </p>
         </styled.div>
         <Fragment>
           <IconLabel
@@ -208,12 +223,21 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
           </Lozenge>
         </styled.div>
         <styled.div>
-          <FormattedMessage
-            defaultMessage="You can no longer collaborate with this person. Their account has been deactivated."
-            description="A long text explains this user is inactive when we do not know the date of starting to deactivate"
-            id="pt.profile.card.inactive.account.no.date"
-            values={Object {}}
-          />
+          <p>
+            <FormattedMessage
+              defaultMessage="You can no longer collaborate with this person. "
+              description="A first sentence of a long text explains this user is inactive/closed"
+              id="pt.profile.card.general.msg.disabled.user"
+              values={Object {}}
+            />
+             
+            <FormattedMessage
+              defaultMessage="Their account has been deactivated."
+              description="A long text explains this user is inactive when we do not know the date of starting to deactivate"
+              id="pt.profile.card.inactive.account.no.date"
+              values={Object {}}
+            />
+          </p>
         </styled.div>
         <Fragment>
           <IconLabel

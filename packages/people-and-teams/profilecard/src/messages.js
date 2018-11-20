@@ -8,18 +8,58 @@ const messages = defineMessages({
     description: 'A text in a grey lozenge shows that this user is inactive',
   },
 
-  inactiveAccountDescNoDateMsg: {
+  generalDescMsgForDisabledUser: {
+    id: 'pt.profile.card.general.msg.disabled.user',
+    defaultMessage: 'You can no longer collaborate with this person. ',
+    description:
+      'A first sentence of a long text explains this user is inactive/closed',
+  },
+
+  inactiveAccountDescMsgNoDate: {
     id: 'pt.profile.card.inactive.account.no.date',
-    defaultMessage:
-      'You can no longer collaborate with this person. Their account has been deactivated.',
+    defaultMessage: 'Their account has been deactivated.',
     description:
       'A long text explains this user is inactive when we do not know the date of starting to deactivate',
   },
 
-  inactiveAccountDescHasDateMsg: {
-    id: 'pt.profile.card.inactive.account.has.date',
-    defaultMessage:
-      'You can no longer collaborate with this person. Their account was deactivated {date}.',
+  inactiveAccountDescMsgHasDateThisWeek: {
+    id: 'pt.profile.card.inactive.account.has.date.this.week',
+    defaultMessage: 'Their account was deactivated this week.',
+    description:
+      'A long text explains this user is inactive when we know the date of starting to deactivate',
+  },
+
+  inactiveAccountDescMsgHasDateThisMonth: {
+    id: 'pt.profile.card.inactive.account.has.date.this.month',
+    defaultMessage: 'Their account was deactivated this month.',
+    description:
+      'A long text explains this user is inactive when we know the date of starting to deactivate',
+  },
+
+  inactiveAccountDescMsgHasDateLastMonth: {
+    id: 'pt.profile.card.inactive.account.has.date.last.month',
+    defaultMessage: 'Their account was deactivated last month.',
+    description:
+      'A long text explains this user is inactive when we know the date of starting to deactivate',
+  },
+
+  inactiveAccountDescMsgHasDateAFewMonths: {
+    id: 'pt.profile.card.inactive.account.has.date.a.few.months',
+    defaultMessage: 'Their account has been deactivated for a few months.',
+    description:
+      'A long text explains this user is inactive when we know the date of starting to deactivate',
+  },
+
+  inactiveAccountDescMsgHasDateSeveralMonths: {
+    id: 'pt.profile.card.inactive.account.has.date.several.months',
+    defaultMessage: 'Their account has been deactivated for several months.',
+    description:
+      'A long text explains this user is inactive when we know the date of starting to deactivate',
+  },
+
+  inactiveAccountDescMsgHasDateMoreThanAYear: {
+    id: 'pt.profile.card.inactive.account.has.date.more.than.a.year',
+    defaultMessage: 'Their account has been deactivated for more than a year.',
     description:
       'A long text explains this user is inactive when we know the date of starting to deactivate',
   },
@@ -31,18 +71,51 @@ const messages = defineMessages({
       'A text in a grey lozenge shows that this user is closed/deleted',
   },
 
-  closedAccountDescNoDateMsg: {
+  closedAccountDescMsgNoDate: {
     id: 'pt.profile.card.closed.account.no.date',
-    defaultMessage:
-      'You can no longer collaborate with this person. Their account has been deleted.',
+    defaultMessage: 'Their account has been deleted.',
     description:
       'A long text explains this user is closed when we do not know the date of starting to close',
   },
 
-  closedAccountDescHasDateMsg: {
-    id: 'pt.profile.card.inactive.account.has.date',
-    defaultMessage:
-      'You can no longer collaborate with this person. Their account has been deleted {date}.',
+  closedAccountDescMsgHasDateThisWeek: {
+    id: 'pt.profile.card.inactive.account.has.date.this.week',
+    defaultMessage: 'Their account was deleted this week.',
+    description:
+      'A long text explains this user is closed when we know the date of starting to close',
+  },
+
+  closedAccountDescMsgHasDateThisMonth: {
+    id: 'pt.profile.card.inactive.account.has.date.this.month',
+    defaultMessage: 'Their account was deleted this month.',
+    description:
+      'A long text explains this user is closed when we know the date of starting to close',
+  },
+
+  closedAccountDescMsgHasDateLastMonth: {
+    id: 'pt.profile.card.inactive.account.has.date.last.month',
+    defaultMessage: 'Their account was deleted last month.',
+    description:
+      'A long text explains this user is closed when we know the date of starting to close',
+  },
+
+  closedAccountDescMsgHasDateAFewMonths: {
+    id: 'pt.profile.card.inactive.account.has.date.a.few.months',
+    defaultMessage: 'Their account has been deleted for a few months.',
+    description:
+      'A long text explains this user is closed when we know the date of starting to close',
+  },
+
+  closedAccountDescMsgHasDateSeveralMonths: {
+    id: 'pt.profile.card.inactive.account.has.date.several.months',
+    defaultMessage: 'Their account has been deleted for several months.',
+    description:
+      'A long text explains this user is closed when we know the date of starting to close',
+  },
+
+  closedAccountDescMsgHasDateMoreThanAYear: {
+    id: 'pt.profile.card.inactive.account.has.date.more.than.a.year',
+    defaultMessage: 'Their account has been deleted for more than a year.',
     description:
       'A long text explains this user is closed when we know the date of starting to close',
   },

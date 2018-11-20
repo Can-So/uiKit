@@ -1,8 +1,6 @@
 // @flow
-import React from 'react';
-import { shallow } from 'enzyme';
 import mockdate from 'mockdate';
-import RelativeDate from '../../components/RelativeDate';
+import relativeDate from '../../relative-date';
 
 describe('RelativeDate', () => {
   const TODAY = new Date(2018, 10, 20, 17, 30, 0, 0);
@@ -17,9 +15,6 @@ describe('RelativeDate', () => {
   const INVALID_DATE = new Date('');
   const FUTURE_DATE = new Date(new Date(TODAY).setMonth(11));
 
-  const renderShallow = (props = {}) =>
-    shallow(<RelativeDate date={TODAY} {...props} />);
-
   beforeEach(() => {
     mockdate.set(TODAY);
   });
@@ -29,82 +24,52 @@ describe('RelativeDate', () => {
   });
 
   it('should match snapshot when date prop is today', () => {
-    const wrapper = renderShallow({
-      date: TODAY_2,
-    });
-
-    expect(wrapper).toMatchSnapshot();
+    const relativeDateKey = relativeDate(TODAY_2, TODAY);
+    expect(relativeDateKey).toEqual('ThisWeek');
   });
 
   it('should match snapshot when date prop is yesterday', () => {
-    const wrapper = renderShallow({
-      date: YESTERDAY,
-    });
-
-    expect(wrapper).toMatchSnapshot();
+    const relativeDateKey = relativeDate(YESTERDAY, TODAY);
+    expect(relativeDateKey).toEqual('ThisWeek');
   });
 
   it('should match snapshot when date prop is in this week', () => {
-    const wrapper = renderShallow({
-      date: THIS_WEEK,
-    });
-
-    expect(wrapper).toMatchSnapshot();
+    const relativeDateKey = relativeDate(THIS_WEEK, TODAY);
+    expect(relativeDateKey).toEqual('ThisWeek');
   });
 
   it('should match snapshot when date prop is in this month', () => {
-    const wrapper = renderShallow({
-      date: THIS_MONTH,
-    });
-
-    expect(wrapper).toMatchSnapshot();
+    const relativeDateKey = relativeDate(THIS_MONTH, TODAY);
+    expect(relativeDateKey).toEqual('ThisMonth');
   });
 
   it('should match snapshot when date prop is in last month', () => {
-    const wrapper = renderShallow({
-      date: LAST_MONTH,
-    });
-
-    expect(wrapper).toMatchSnapshot();
+    const relativeDateKey = relativeDate(LAST_MONTH, TODAY);
+    expect(relativeDateKey).toEqual('LastMonth');
   });
 
   it('should match snapshot when date prop is a few months ago', () => {
-    const wrapper = renderShallow({
-      date: A_FEW_MONTHS,
-    });
-
-    expect(wrapper).toMatchSnapshot();
+    const relativeDateKey = relativeDate(A_FEW_MONTHS, TODAY);
+    expect(relativeDateKey).toEqual('AFewMonths');
   });
 
   it('should match snapshot when date prop is several months ago', () => {
-    const wrapper = renderShallow({
-      date: SEVERAL_MONTHS,
-    });
-
-    expect(wrapper).toMatchSnapshot();
+    const relativeDateKey = relativeDate(SEVERAL_MONTHS, TODAY);
+    expect(relativeDateKey).toEqual('SeveralMonths');
   });
 
   it('should match snapshot when date prop is more than a year ago', () => {
-    const wrapper = renderShallow({
-      date: MORE_THAN_A_YEAR,
-    });
-
-    expect(wrapper).toMatchSnapshot();
+    const relativeDateKey = relativeDate(MORE_THAN_A_YEAR, TODAY);
+    expect(relativeDateKey).toEqual('MoreThanAYear');
   });
 
   it('should match snapshot when date prop is invalid date', () => {
-    const wrapper = renderShallow({
-      date: INVALID_DATE,
-    });
-
-    expect(wrapper).toMatchSnapshot();
+    const relativeDateKey = relativeDate(INVALID_DATE, TODAY);
+    expect(relativeDateKey).toEqual(null);
   });
 
   it('should match snapshot when date prop is a future date', () => {
-    const wrapper = renderShallow({
-      date: FUTURE_DATE,
-    });
-
-    expect(wrapper).toMatchSnapshot();
+    const relativeDateKey = relativeDate(FUTURE_DATE, TODAY);
+    expect(relativeDateKey).toEqual(null);
   });
 });

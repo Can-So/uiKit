@@ -49,9 +49,14 @@ export type ProfilecardProps = {
   customElevation?: string,
 };
 
-export type RelativeDateProps = {
-  date: Date,
-};
+export type RelativeDateKeyType =
+  | 'ThisWeek'
+  | 'ThisMonth'
+  | 'LastMonth'
+  | 'AFewMonths'
+  | 'SeveralMonths'
+  | 'MoreThanAYear'
+  | null;
 
 export type ProfileClient = {
   makeRequest: (cloudId: string, userId: string) => Promise<any>,

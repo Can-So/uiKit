@@ -10,7 +10,7 @@ import AkLozenge from '@atlaskit/lozenge';
 import ErrorMessage from './components/ErrorMessage';
 import HeightTransitionWrapper from './components/HeightTransitionWrapper';
 import IconLabel from './components/IconLabel';
-import RelativeDate from './components/RelativeDate';
+import relativeDate from './relative-date';
 import presences from './internal/presences';
 import messages from './messages';
 
@@ -199,31 +199,31 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   }
 
   getDisabledAccountDesc() {
-    const { status, statusModifiedDate } = this.props;
-    const date = statusModifiedDate ? new Date(statusModifiedDate) : null;
-    const relativeDate = date ? <RelativeDate date={date} /> : null;
+    const { status = 'closed', statusModifiedDate } = this.props;
+    const date = statusModifiedDate
+      ? new Date(statusModifiedDate * 1000)
+      : null;
+    const relativeDateKey = relativeDate(date);
 
-    if (status === 'inactive') {
-      return RelativeDate.isValidDate(date) ? (
+    let secondSentence = null;
+    if (relativeDateKey) {
+      secondSentence = (
         <FormattedMessage
-          {...messages.inactiveAccountDescHasDateMsg}
-          values={{ date: relativeDate }}
+          {...messages[`${status}AccountDescMsgHasDate${relativeDateKey}`]}
         />
-      ) : (
-        <FormattedMessage {...messages.inactiveAccountDescNoDateMsg} />
       );
-    } else if (status === 'closed') {
-      return RelativeDate.isValidDate(date) ? (
-        <FormattedMessage
-          {...messages.closedAccountDescHasDateMsg}
-          values={{ date: relativeDate }}
-        />
-      ) : (
-        <FormattedMessage {...messages.closedAccountDescNoDateMsg} />
+    } else {
+      secondSentence = (
+        <FormattedMessage {...messages[`${status}AccountDescMsgNoDate`]} />
       );
     }
 
-    return null;
+    return (
+      <p>
+        <FormattedMessage {...messages.generalDescMsgForDisabledUser} />{' '}
+        {secondSentence}
+      </p>
+    );
   }
 
   renderCardDetailsApp() {

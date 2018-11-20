@@ -174,44 +174,58 @@ export default class ProfilecardInteractive extends Component<Props, State> {
           checked={this.state.statusModifiedDateFieldName === attribute}
           id={id}
           onChange={() => {
-            let dateTime;
+            let dateTimeInMilliSeconds;
             const today = new Date();
 
             switch (attribute) {
               case 'thisWeek':
                 // if `today.getDate() - 1` === 0, the last date of previous month is returned
-                dateTime = new Date(today).setDate(today.getDate() - 1);
+                dateTimeInMilliSeconds = new Date(today).setDate(
+                  today.getDate() - 1,
+                );
                 break;
 
               case 'thisMonth':
                 // in case, today is 1st or 2st, so we can not render "this month" period
                 // above periods can be displayed instead.
-                dateTime = new Date(today).setDate(1);
+                dateTimeInMilliSeconds = new Date(today).setDate(1);
                 break;
 
               case 'lastMonth':
                 // if `today.getMonth() - 1` === -1, the last date of Dec of previous year is returned.
-                dateTime = new Date(today).setMonth(today.getMonth() - 1);
+                dateTimeInMilliSeconds = new Date(today).setMonth(
+                  today.getMonth() - 1,
+                );
                 break;
 
               case 'aFewMonths':
-                dateTime = new Date(today).setMonth(today.getMonth() - 3);
+                dateTimeInMilliSeconds = new Date(today).setMonth(
+                  today.getMonth() - 3,
+                );
                 break;
 
               case 'severalMonths':
-                dateTime = new Date(today).setMonth(today.getMonth() - 7);
+                dateTimeInMilliSeconds = new Date(today).setMonth(
+                  today.getMonth() - 7,
+                );
                 break;
 
               case 'moreThanAYear':
-                dateTime = new Date(today).setMonth(today.getMonth() - 13);
+                dateTimeInMilliSeconds = new Date(today).setMonth(
+                  today.getMonth() - 13,
+                );
                 break;
 
               default:
-                dateTime = undefined;
+                dateTimeInMilliSeconds = undefined;
             }
 
+            const dateTimeInSeconds = dateTimeInMilliSeconds
+              ? dateTimeInMilliSeconds / 1000
+              : undefined;
+
             return this.setState({
-              statusModifiedDate: dateTime,
+              statusModifiedDate: dateTimeInSeconds,
               statusModifiedDateFieldName: attribute,
             });
           }}
