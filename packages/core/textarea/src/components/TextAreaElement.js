@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 type Props = {
-  innerRef?: (HTMLTextAreaElement | null) => void,
+  forwardedRef?: (HTMLTextAreaElement | null) => void,
   /**
    * Enables the resizing of the textarea:
    * auto: both directions.
@@ -21,25 +21,25 @@ type State = {
 };
 
 export default class TextAreaElement extends Component<Props, State> {
-  textareaRef: HTMLTextAreaElement | null;
+  textareaElement: HTMLTextAreaElement | null;
 
   state = {
     height: '100%',
   };
 
   componentDidMount() {
-    if (this.props.resize === 'smart' && this.textareaRef) {
+    if (this.props.resize === 'smart' && this.textareaElement) {
       // eslint-disable-next-line
       this.setState({
-        height: `${this.textareaRef.scrollHeight}px`,
+        height: `${this.textareaElement.scrollHeight}px`,
       });
     }
   }
 
   getTextAreaRef = (ref: HTMLTextAreaElement | null) => {
-    this.textareaRef = ref;
-    if (this.props.innerRef) {
-      this.props.innerRef(ref);
+    this.textareaElement = ref;
+    if (this.props.forwardedRef) {
+      this.props.forwardedRef(ref);
     }
   };
 
@@ -51,9 +51,9 @@ export default class TextAreaElement extends Component<Props, State> {
           height: 'auto',
         },
         () => {
-          if (this.props.resize === 'smart' && this.textareaRef) {
+          if (this.props.resize === 'smart' && this.textareaElement) {
             this.setState({
-              height: `${this.textareaRef.scrollHeight}px`,
+              height: `${this.textareaElement.scrollHeight}px`,
             });
           }
         },
@@ -66,7 +66,7 @@ export default class TextAreaElement extends Component<Props, State> {
   };
 
   render() {
-    const { resize, innerRef, ...props } = this.props;
+    const { resize, forwardedRef, ...props } = this.props;
     const { height } = this.state;
 
     if (resize === 'smart') {

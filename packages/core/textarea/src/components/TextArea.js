@@ -76,7 +76,7 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
     isMonospaced: false,
     minimumRows: 1,
     theme: defaultTheme,
-    textareaRef: () => {},
+    forwardedRef: () => {},
   };
 
   state = {
@@ -113,7 +113,7 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
       isRequired,
       minimumRows,
       theme,
-      textareaRef,
+      forwardedRef,
       ...props
     } = this.props;
 
@@ -135,7 +135,7 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
           >
             <TextareaElement
               {...props}
-              innerRef={forwardedRef}
+              forwardedRef={forwardedRef}
               resize={resize}
               disabled={isDisabled}
               readOnly={isReadOnly}
