@@ -33,7 +33,10 @@ describe('ValueContainer', () => {
     'should set placeholder to "%s" when (value: %p, loading: %s)',
     (placeholder, value, isLoading) => {
       const component = shallowValueContainer({
-        children: [<div>Placeholder</div>, <input type="text" />],
+        children: [
+          <div key="placeholder">Placeholder</div>,
+          <input key="input" type="text" />,
+        ],
         selectProps: { ...selectProps, value, isLoading },
       });
       const children = renderProp(
