@@ -51,8 +51,6 @@ export type TextFieldProps = {
   isRequired?: boolean,
   /** Handler to be called when the input loses focus. */
   onBlur?: (e: SyntheticEvent<>) => mixed,
-  /** Handler to be called when the input changes. */
-  onChange?: (e: SyntheticInputEvent<HTMLInputElement>) => mixed,
   /** Handler to be called when the input receives focus. */
   onFocus?: (e: SyntheticEvent<>) => mixed,
   /** Sets maximum width of input */

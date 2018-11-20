@@ -24,7 +24,6 @@ type State = {
 class TextField extends Component<TextFieldProps, State> {
   static defaultProps = {
     appearance: 'standard',
-    onChange: () => {},
     theme: defaultTheme,
   };
 
@@ -45,12 +44,6 @@ class TextField extends Component<TextFieldProps, State> {
     this.setState({ isFocused: false });
     if (this.props.onBlur) {
       this.props.onBlur(e);
-    }
-  };
-
-  handleOnChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    if (this.props.onChange) {
-      this.props.onChange(e);
     }
   };
 
@@ -91,7 +84,6 @@ class TextField extends Component<TextFieldProps, State> {
               forwardedRef={forwardedRef}
               onFocus={this.handleOnFocus}
               onBlur={this.handleOnBlur}
-              onChange={this.handleOnChange}
             />
           </Wrapper>
         )}
