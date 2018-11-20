@@ -4,3 +4,4 @@
 /NavigationProvider.js
 /ViewRenderer.js
 /AsyncLayoutManagerWithViewController.js
+/ViewControllerSubscriber.js
