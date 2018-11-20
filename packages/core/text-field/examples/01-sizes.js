@@ -1,32 +1,31 @@
 // @flow
 
 import React from 'react';
-import { Field } from '@atlaskit/form';
 import TextField from '../src';
 
 export default function() {
   return (
     <div>
-      <label>xsmall</label>
-      <TextField size="xsmall" />
+      <label for="xsmall">xsmall</label>
+      <TextField name="xsmall" size="xsmall" />
 
-      <label>small</label>
-      <TextField size="small" />
+      <label for="small">small</label>
+      <TextField name="small" size="small" />
 
-      <label>medium</label>
-      <TextField size="medium" />
+      <label for="medium">medium</label>
+      <TextField name="medium" size="medium" />
 
-      <label>large</label>
-      <TextField size="large" />
+      <label for="large">large</label>
+      <TextField name="large" size="large" />
 
-      <label>xlarge</label>
-      <TextField size="xlarge" />
+      <label for="xlarge">xlarge</label>
+      <TextField name="xlarge" size="xlarge" />
 
-      <label>custom width (eg, 546)</label>
-      <TextField size="546" />
+      <label for="custom-width">custom width (eg, 546)</label>
+      <TextField name="custom-width" size="546" />
 
-      <label>default (100%)</label>
-      <TextField />
+      <label for="default">default (100%)</label>
+      <TextField name="default" />
     </div>
   );
 }

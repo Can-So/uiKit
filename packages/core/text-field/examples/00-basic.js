@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Field } from '@atlaskit/form';
 import TextField from '../src';
 
 const eventResultStyle = {
@@ -41,34 +40,39 @@ export default class TextFieldExample extends Component<Props, State> {
 
     return (
       <div>
-        <label>Event Handlers</label>
+        <label for="event-handlers">Event Handlers</label>
         <TextField
+          name="event-handlers"
           onChange={this.handleOnChange}
           onBlur={this.handleOnBlur}
           onFocus={this.handleOnFocus}
         />
         <div style={eventResultStyle}>{eventResult}</div>
 
-        <label>Default Value</label>
-        <TextField defaultValue="candy" />
+        <label for="default-value">Default Value</label>
+        <TextField name="default-value" defaultValue="candy" />
 
-        <label>Disabled</label>
-        <TextField isDisabled defaultValue="can't touch this..." />
+        <label for="disabled">Disabled</label>
+        <TextField
+          name="disabled"
+          isDisabled
+          defaultValue="can't touch this..."
+        />
 
-        <label>Required</label>
-        <TextField isRequired />
+        <label for="required">Required</label>
+        <TextField name="required" isRequired />
 
-        <label>Invalid</label>
-        <TextField isInvalid />
+        <label for="invalid">Invalid</label>
+        <TextField name="invalid" isInvalid />
 
-        <label>Placeholder</label>
-        <TextField placeholder="Click here to input..." />
+        <label for="placeholder">Placeholder</label>
+        <TextField name="placeholder" placeholder="Click here to input..." />
 
-        <label>Auto Focus</label>
-        <TextField autoFocus />
+        <label for="auto-focus">Auto Focus</label>
+        <TextField name="auto-focus" autoFocus />
 
-        <label>Spell Check</label>
-        <TextField spellCheck />
+        <label for="spell-check">Spell Check</label>
+        <TextField name="spell-check" spellCheck />
       </div>
     );
   }

@@ -1,13 +1,7 @@
 // @flow
 
 import styled, { css } from 'styled-components';
-import {
-  codeFontFamily,
-  gridSize,
-  fontSize,
-  colors,
-  themed,
-} from '@atlaskit/theme';
+import { codeFontFamily, gridSize, fontSize } from '@atlaskit/theme';
 
 const borderRadius = '3px';
 const borderWidth = 2;

@@ -1,6 +1,4 @@
 // @flow
-
-import { themed } from '@atlaskit/theme';
 import * as componentTokens from './component-tokens';
 
 const disabledRules = {
