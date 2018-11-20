@@ -13,8 +13,10 @@ const urlSpotlightBasic = getExampleUrl(
   'onboarding',
   'spotlight-basic',
 );
-const OnBoardingDefault = '#examples p:nth-child(3) > button';
-const OnBoardingMenuTitle = 'div h4';
+const onBoardingDefault = '#examples > div > p:nth-child(3) > button';
+const onBoardingMenuTitle = 'div h4';
+const onBoardingCard =
+  '.atlaskit-portal-container > div:nth-child(1) > div:nth-child(4) > div > div';
 const startBtn = '#examples > button';
 const tellMeMoreBtn = '[type="button"]';
 
@@ -24,8 +26,9 @@ BrowserTestCase(
   async client => {
     const onBoardingTest = new Page(client);
     await onBoardingTest.goto(urlSpotlightScroll);
-    await onBoardingTest.click(OnBoardingDefault);
-    const menuIsVisible = await onBoardingTest.isVisible(OnBoardingMenuTitle);
+    await onBoardingTest.click(onBoardingDefault);
+    await onBoardingTest.waitFor(onBoardingMenuTitle, 5000);
+    const menuIsVisible = await onBoardingTest.isVisible(onBoardingCard);
     expect(menuIsVisible).toBe(true);
     if (onBoardingTest.browser.desiredCapabilities.browserName === 'chrome')
       await onBoardingTest.checkConsoleErrors();
@@ -39,12 +42,12 @@ BrowserTestCase(
     const onBoardingTest = new Page(client);
     await onBoardingTest.goto(urlSpotlightBasic);
     await onBoardingTest.click(startBtn);
-    await onBoardingTest.waitFor(OnBoardingMenuTitle, 5000);
-    const menuIsVisible = await onBoardingTest.isVisible(OnBoardingMenuTitle);
+    await onBoardingTest.waitFor(onBoardingMenuTitle, 5000);
+    const menuIsVisible = await onBoardingTest.isVisible(onBoardingMenuTitle);
     expect(menuIsVisible).toBe(true);
     await onBoardingTest.click(tellMeMoreBtn);
-    await onBoardingTest.waitFor(OnBoardingMenuTitle, 5000);
-    const text = await onBoardingTest.getText(OnBoardingMenuTitle);
+    await onBoardingTest.waitFor(onBoardingMenuTitle, 5000);
+    const text = await onBoardingTest.getText(onBoardingMenuTitle);
     expect(text).toBe('Yellow');
     if (onBoardingTest.browser.desiredCapabilities.browserName === 'chrome')
       await onBoardingTest.checkConsoleErrors();
