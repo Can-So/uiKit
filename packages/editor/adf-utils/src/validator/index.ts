@@ -607,6 +607,7 @@ export function validator(
                 newEntity.marks = newMarks;
               } else {
                 delete newEntity.marks;
+                return { valid: false, entity: newEntity };
               }
             } else {
               return err(VALIDATION_ERRORS.REDUNDANT_MARKS, 'redundant marks');

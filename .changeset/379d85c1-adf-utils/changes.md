@@ -1,0 +1,1 @@
+- Fixes validating marks with multiple possible branch

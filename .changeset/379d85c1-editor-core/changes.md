@@ -1,0 +1,1 @@
+- ED-5809 Fixes code mark getting removed from document
