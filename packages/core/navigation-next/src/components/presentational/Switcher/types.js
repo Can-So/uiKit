@@ -36,7 +36,8 @@ export type SwitcherBaseProps = {
   styles?: SelectStyles,
 };
 
-export type SwitcherProps = SwitcherBaseProps & {
+export type SwitcherProps = {
+  ...$Exact<SwitcherBaseProps>,
   // internal `navWidth` property isn't part of the public API
   navWidth: number,
 };

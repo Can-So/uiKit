@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.4.4
+- [patch] [01a92e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01a92e1):
+
+  - Title for panel and noformat changes
+
 ## 2.4.3
 - [patch] [131e012](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/131e012):
 
