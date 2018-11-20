@@ -1,13 +1,18 @@
 // @flow
-import React, { createContext, type Node } from 'react';
+import React, { createContext, type Node, type Ref } from 'react';
 import { createForm, type FormApi } from 'final-form';
 import createDecorator from 'final-form-focus';
 
 export const FormContext = createContext();
 
+type FormProps = {
+  ref: Ref<'form'>,
+  onSubmit: (SyntheticEvent<HTMLFormElement> | any) => any,
+};
+
 type Props = {
-  /* Children rendered inside the Form component */
-  children: Object => Node,
+  /* Children rendered inside the Form component. Function will be passed props from the form. */
+  children: ({ formProps: FormProps }) => Node,
   /* Called when the form is submitted without errors */
   onSubmit: Object => any,
 };
@@ -55,8 +60,10 @@ class Form extends React.Component<Props> {
     this.fields = [...this.fields, field];
   };
 
-  handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  handleSubmit = (e: SyntheticEvent<HTMLFormElement> | any) => {
+    if (typeof e.preventDefault === 'function') {
+      e.preventDefault();
+    }
     if (this.form) {
       this.form.submit();
     }
@@ -66,8 +73,10 @@ class Form extends React.Component<Props> {
     return (
       <FormContext.Provider value={this.registerField}>
         {this.props.children({
-          onSubmit: this.handleSubmit,
-          ref: this.formRef,
+          formProps: {
+            onSubmit: this.handleSubmit,
+            ref: this.formRef,
+          },
         })}
       </FormContext.Provider>
     );

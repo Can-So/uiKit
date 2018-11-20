@@ -30,8 +30,8 @@ export default class FieldsExample extends Component<{}> {
         }}
       >
         <Form onSubmit={() => Promise.resolve({ owner: 'bad name' })}>
-          {props => (
-            <form {...props}>
+          {({ formProps }) => (
+            <form {...formProps}>
               <FormHeader title="Different fields" />
 
               <Field

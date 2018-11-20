@@ -12,10 +12,6 @@ import Form, {
   ErrorMessage,
 } from '../src';
 
-const PasswordError = () => (
-  <ErrorMessage>Password needs to be more than 8 characters.</ErrorMessage>
-);
-
 export default () => (
   <div
     style={{
@@ -33,8 +29,8 @@ export default () => (
         );
       }}
     >
-      {props => (
-        <form {...props}>
+      {({ formProps }) => (
+        <form {...formProps}>
           <FormHeader title="Sign up" />
           <Field name="username" defaultValue="" label="User name" isRequired>
             {({ fieldProps, error }) => (

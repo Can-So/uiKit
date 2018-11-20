@@ -85,7 +85,7 @@ test('touched field should show validation error', () => {
 test('should show errors after submission', () => {
   const wrapper = mount(
     <Form onSubmit={() => Promise.resolve({ username: 'TAKEN_USERNAME' })}>
-      {({ onSubmit }) => (
+      {({ formProps: { onSubmit } }) => (
         <>
           <Field name="username" defaultValue="Joe Bloggs">
             {({ fieldProps, error }) => (

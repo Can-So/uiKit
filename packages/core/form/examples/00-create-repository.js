@@ -60,9 +60,9 @@ export default class LayoutExample extends PureComponent<void, State> {
         }}
       >
         <Form onSubmit={console.log}>
-          {props => (
+          {({ formProps }) => (
             <form
-              {...props}
+              {...formProps}
               action="//httpbin.org/get"
               method="GET"
               target="submitFrame"
