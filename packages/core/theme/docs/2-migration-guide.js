@@ -1,153 +1,96 @@
 // @flow
-
-import React from 'react';
 import { code, md } from '@atlaskit/docs';
-import migrateInJsImage from './assets/migrate-in-js.jpg';
-import lessToCssCompileImage from './assets/less-to-css-compile.jpg';
-import nestedStylesThemePackage from './assets/nested-styles-theme-package.jpg';
-
-type ImageProps = {
-  src: string,
-  alt: string,
-};
-
-function Image({ src, alt }: ImageProps) {
-  return (
-    <img src={src} alt={alt} style={{ width: '100%', marginTop: '8px' }} />
-  );
-}
 
 export default md`
-## Migrate from @atlaksit/util-shared-styles
+## Migrate from @atlaskit/util-shared-styles
 
-### Migrating in JS files
+### Reasons to migrate
 
-The only pre-requisite is that you must use styled-components so that the styles exported by the theme package are evaluated properly. 
-If you are not already using styled-components in your code but you are using Atlaksit components then you already have styled-components in your 
-application as it is peer-dependency in the components, therefore using it in your code should not have a major impact on your bundle size.
+1. @atlaskit/util-shared-styles will be deprecated soon
+2. New feature requests are not accepted in @atlaskit/util-shared-styles
+3. @atlaskit/theme is the source of truth for ADG styling
 
-To migrate to @atlaskit/theme package we can replace the imports from util-shared-styles package with theme package.
+Keeping up with value *Be the change you seek* we migrated all the core packages and css-packs. While migrating these
+package we came up with two migration paths. One is for the usage of util-shared-styles as css-in-js solution
+and other for usage in less files.
 
-Here is an example of how we replaced the typography and grid size styles in a package:
+### Migrating the CSS-IN-JS styles
 
-${(
-  <Image
-    src={migrateInJsImage}
-    alt="code before and after of importing gridsize and typography from theme package"
-  />
-)}
-
-We have a codemod that does this job for you please check out [codemod-util-shared-styles-to-theme](https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/packages/bitbucket/codemod-util-shared-styles-to-theme/)
-, the readme has all the instructions on how to run this codemod in your repository.
-
-## Migrating in less files
-
-The @atlaskit/theme package does not export less files which makes it difficult to import the styles from
-theme package in less files. To resolve this we suggest moving away from less to a css-in-js
-solution.
-
-We have released a new package [evaluate-inner-styles](https://www.npmjs.com/package/evaluate-inner-styles) which will help to generate static CSS from JS.
-
-Steps to migrate:
-
-1. Compile the less to CSS-in-JS:
-
-    a. Please use [http://lesscss.org/less-preview/](http://lesscss.org/less-preview/) to compile the Less styles to CSS.
-
-    You will get compilation errors as style values being imported from util-shared-styles are not found. To resolve this
-    please declare them with string on top so that we remember to replace them. To see an example,
-    
-    ***if you are using color \`@ak-color-B400\` in your less styles then add a new variable on top of the file \`@ak-color-B400: \${colors.B400}\`***
-
-    ${<Image src={lessToCssCompileImage} alt="less compiled to css" />}
-
-2. Create a corresponding JS file for the above less file and use the default export function from [evaluate-inner-styles](https://www.npmjs.com/package/evaluate-inner-styles)
-    to evaluate and export your styles. The syntax of this function is same as offered by other css-in-js libraries like emotion and styled-components. 
-
-    Below is example of how to use evaluate-inner-styles library with theme package:
-
-    ${code`
-    import { colors } from '@atlaskit/theme';
-    import evaluateInerStyles from 'evaluate-inner-styles';
-    export default evaluateInerStyles()\`
-      div {
-        color: \${colors.B400};
-      }
-    \`
-    `}
-
-3. Now instead of using the less compiler to generate CSS, you can use this small script to create styles from the above JS file
-
-    ${code`
-    import * as fs from 'fs';
-    import * as path from 'path';
-    import { promisify } from 'util';
-    import makeDir from 'mkdirp';
-    const writeFile = promisify(fs.writeFile);
-
-    // Include your js stylesheet here
-    import styleSheet from '../src/styles';
-
-    // path the destination for the build css
-    const DIST = path.join(__dirname, 'dist');
-
-    async function buildCSSReset() {
-      try {
-        // Create the dist folder if it does not exist
-        makeDir.sync(DIST);
-        // Write the file
-        await writeFile(path.join(DIST, 'bundle.css'), styleSheet);
-      } catch (err) {
-        console.error(\`Failed to build css-reset due to \${err}\`);
-      }
-    }
-
-    // Execute the function
-    buildCSSReset().then(() => {
-      console.log('Successfully build css-reset');
-    });
-    `}
-
-It is common use-case where we will have multiple less files so for that we can create an index file which imports the styles from all the other files and
-exports them in logical order,
-
-Example:
+In util-shared-styles we used to style the component like the following:
 
 ${code`
-import baseStyles from './base';
-import browserFixesStyles from './browser-fixes';
-import resetStyles from './reset';
-import tableStyles from './tables';
-import utilStyles from './utils';
+import styled from 'styled-components';
+import { akGridSizeUnitless } from '@atlaskit/util-shared-styles';
 
-export default \`
-\${resetStyles}
-\${baseStyles}
-\${tableStyles}
-\${browserFixesStyles}
-\${utilStyles}
+const Header = styled.h1\`
+  margin-right: \${akGridSizeUnitless * 4} px;
 \`;
 `}
 
-### Other solutions that we thought of but disregarded:
+The above style can be written with the theme package as:
 
-**import atlaskit/theme in less files and use variables from there ( not doing it )**
+${code`
+import styled from 'styled-components';
+import { gridSize } from '@atlaskit/theme';
 
-We looked for existing solutions and there was only one → [https://github.com/tompascall/js-to-styles-var-loader](https://github.com/tompascall/js-to-styles-var-loader) ,
-this does not work for our use-case because we have deeply nested styles in @atlaskit/theme package and sometimes they are a function that we need
-to call.
+const Header = styled.h1\`
+  margin-right: \${gridSize() * 4}px;
+\`;
+`}
 
-Let's take an example of typography styles:
+We have a code mod that will replace all the usage of util-shared-styles with theme in the javascript files.
+Please see [codemod-util-shared-styles-to-theme](https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/packages/bitbucket/codemod-util-shared-styles-to-theme/)
+and go through readme for details.
 
-${(
-  <Image
-    src={nestedStylesThemePackage}
-    alt="nested styles in the theme package"
-  />
-)}
+### Migrating the less styles
 
-***(Not digging into details but we can see that heading is a function, look at the return in themed function.)***
+With the existing tooling we cannot consume the @atlaskit/theme package in less files. Therefore, building
+our own tools was the only option.
 
-Creating our own tooling to consume JS in less was an option but we have already seen the power of css-in-js thus we did not
-go ahead with this solution.
+We have build tooling to generating static styles from js at the build time. Since we are headed in css-in-js
+direction this is the best bet. Please see [GitHub - ajaymathur/evaluate-inner-styles](https://github.com/ajaymathur/evaluate-inner-styles)
+and go through readme for details.
+
+In util-shared-styles we used to create styles in less files like following:
+
+${code`
+// styles.less
+@import '../node_modules/@atlaskit/util-shared-styles/src/grid.less';
+
+.header{
+  margin-right: (@ak-grid-size * 1.5)
+}
+`}
+
+The above styles can we written in js files using theme package as:
+
+${code`
+// styles.js
+import evaluateInner from 'evaluate-inner-styles';
+import { gridSize } from '@atlaskit/theme';
+
+export default evaluateInnerStyles()\`
+  .header: {
+    margin-right: \${gridSize()}px;
+  }
+\`
+`}
+
+Additionally, in less we use less compiler to compile the less styles like following:
+
+${code`
+lessc styles.less styles.css
+`}
+
+The above functionality can we achieved using the following script:
+
+${code`
+// Get the default exported styles from styles.js
+import styleSheet from '../styles';
+
+// Write the styles to styles.css on disk
+await writeFile(path.join(DIST, 'styles.css'), styleSheet);
+`}
+
+***( This is just a gist of script, please see [css-reset/js-to-css.js](https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/packages/css-packs/css-reset/build/js-to-css.js))***
 `;
