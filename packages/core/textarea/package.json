@@ -21,8 +21,7 @@
   "dependencies": {
     "@atlaskit/analytics-next": "^3.0.10",
     "@atlaskit/theme": "^6.1.1",
-    "@babel/runtime": "^7.0.0",
-    "memoize-one": "^3.0.1"
+    "@babel/runtime": "^7.0.0"
   },
   "peerDependencies": {
     "react": "^16.4.0",

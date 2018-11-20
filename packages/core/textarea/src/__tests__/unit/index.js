@@ -30,7 +30,7 @@ describe('TextArea', () => {
 
       it('should reflect its value to the TextAreaWrapper', () => {
         expect(
-          mount(<TextArea onChange={() => {}} isReadOnly label="" />)
+          mount(<TextArea onChange={() => {}} isReadOnly />)
             .find(TextAreaWrapper)
             .props().isReadOnly,
         ).toBe(true);
@@ -40,7 +40,7 @@ describe('TextArea', () => {
     describe('set to false', () => {
       it('should sets its value on the input', () => {
         expect(
-          mount(<TextArea onChange={() => {}} label="" />)
+          mount(<TextArea onChange={() => {}} />)
             .find('textarea')
             .props().readOnly,
         ).toBe(false);
@@ -48,7 +48,7 @@ describe('TextArea', () => {
 
       it('should reflect its value to the TextAreaWrapper', () => {
         expect(
-          mount(<TextArea onChange={() => {}} label="" />)
+          mount(<TextArea onChange={() => {}} />)
             .find(TextAreaWrapper)
             .props().isReadOnly,
         ).toBe(false);
@@ -79,7 +79,7 @@ describe('TextArea', () => {
   describe('spellCheck prop', () => {
     it('should render an input with a spellCheck prop', () => {
       expect(
-        mount(<TextArea onChange={() => {}} spellCheck label="" />)
+        mount(<TextArea onChange={() => {}} spellCheck />)
           .find('textarea')
           .props().spellCheck,
       ).toBe(true);
@@ -89,7 +89,7 @@ describe('TextArea', () => {
   describe('isMonospaced prop', () => {
     it('should render an input with an isMonospaced prop', () => {
       expect(
-        mount(<TextArea onChange={() => {}} isMonospaced label="" />)
+        mount(<TextArea onChange={() => {}} isMonospaced />)
           .find(TextAreaWrapper)
           .props().isMonospaced,
       ).toBe(true);
@@ -124,7 +124,7 @@ describe('TextArea', () => {
 
   it('onChange should be called when input value changes', () => {
     const spy = jest.fn();
-    const wrapper = mount(<TextArea onChange={spy} label="" />);
+    const wrapper = mount(<TextArea onChange={spy} />);
     wrapper.find('textarea').simulate('change');
     expect(spy).toHaveBeenCalledTimes(1);
   });
@@ -133,7 +133,7 @@ describe('TextArea', () => {
 describe('TextArea input focus', () => {
   it('should get focus when focus() is called', () => {
     let hasFocus = 0;
-    const wrapper = mount(<TextArea onChange={() => {}} label="" />);
+    const wrapper = mount(<TextArea onChange={() => {}} />);
     const textInput = wrapper.find('textarea').instance();
     textInput.addEventListener(
       'focus',
@@ -159,7 +159,7 @@ describe('TextAreaWithAnalytics', () => {
   });
 
   it('should mount without errors', () => {
-    mount(<TextAreaWithAnalytics onChange={() => {}} label="" />);
+    mount(<TextAreaWithAnalytics onChange={() => {}} />);
     /* eslint-disable no-console */
     expect(console.warn).not.toHaveBeenCalled();
     expect(console.error).not.toHaveBeenCalled();

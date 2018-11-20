@@ -5,13 +5,13 @@ import { md, Example, Props, code } from '@atlaskit/docs';
 export default md`
   ### Usage
 
-  Provides a standard way to create a text-based form input with an associated label.
+  Provides a standard way to create a text-based form input.
 
-${code`
-import TextArea rom '@atlaskit/textarea';
-`}
-
-  @atlaskit/textarea exports a default component, this component manages the value of the input if this.props.value is not specified.
+  ${code`
+import TextArea from '@atlaskit/textarea';
+  `}
+  
+  @atlaskit/textarea exports a default component, that is optionally controllable. To control the component, specify a value prop; to specify the defaultValue but leave the component uncontrolled specify a defaultValue prop.
 
   ${(
     <Example
