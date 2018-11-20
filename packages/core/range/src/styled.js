@@ -9,6 +9,15 @@ const sliderLineThickness = 4;
 const transitionDuration = '0.2s';
 export const overallHeight = 40;
 
+const getBackgroundGradient = ({ lower, upper }, percent) =>
+  css`
+    background: linear-gradient(${lower}, ${lower}) 0 / ${percent}% 100%
+      no-repeat ${upper};
+    [dir='rtl'] & {
+      background-position: right;
+    }
+  `;
+
 const sliderThumbStyle = css`
   background: ${({ thumb }) => thumb.default.background};
   border: ${sliderThumbBorderThickness}px solid transparent;
@@ -28,12 +37,8 @@ const sliderThumbDisabledStyle = css`
   box-shadow: 0 0 1px ${({ thumb }) => thumb.disabled.boxShadow};
 `;
 
-const sliderDefaultBackground = css`
-  background: ${props =>
-    `linear-gradient(${props.track.default.lower}, ${
-      props.track.default.lower
-    }) 0/ ${props.valuePercent}% 100% no-repeat ${props.track.default.upper}`};
-`;
+const sliderDefaultBackground = props =>
+  getBackgroundGradient(props.track.default, props.valuePercent);
 
 const sliderTrackStyle = css`
   background: ${({ track }) => track.background};
@@ -46,19 +51,16 @@ const sliderTrackStyle = css`
 `;
 
 const sliderTrackDisabledStyle = css`
-  background: ${props =>
-    `linear-gradient(${props.track.disabled.lower}, ${
-      props.track.disabled.lower
-    }) 0/ ${props.valuePercent}% 100% no-repeat ${props.track.disabled.upper}`};
+  ${props =>
+    getBackgroundGradient(
+      props.track.disabled,
+      props.valuePercent,
+    )}
   cursor: not-allowed;
 `;
 
-const sliderTrackFocusedStyle = css`
-  background: ${props =>
-    `linear-gradient(${props.track.hover.lower}, ${
-      props.track.hover.lower
-    }) 0/ ${props.valuePercent}% 100% no-repeat ${props.track.hover.upper}`};
-`;
+const sliderTrackFocusedStyle = props =>
+  getBackgroundGradient(props.track.hover, props.valuePercent);
 
 const chromeRangeInputStyle = css`
   &::-webkit-slider-thumb {
@@ -203,6 +205,7 @@ export const rangeInputStyle = css`
   }
 
   ${chromeRangeInputStyle} ${firefoxRangeInputStyle} ${IERangeInputStyle};
+  background-position: right;
 `;
 
 export const Input = styled.input`

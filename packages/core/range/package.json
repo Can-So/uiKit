@@ -28,6 +28,7 @@
     "@atlaskit/build-utils": "^2.0.0",
     "@atlaskit/docs": "^5.0.6",
     "@atlaskit/checkbox": "^5.0.5",
+    "@atlaskit/tooltip": "^12.1.9",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-dom": "^16.4.2"
   },
