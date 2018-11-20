@@ -162,17 +162,20 @@ describe(name, () => {
         expect(val).to.deep.equal(toJSON(result));
       });
 
-      it('should filter out task and decision items', async () => {
+      it('should not filter out task and decision items', async () => {
         const decisionsAndTasks = doc(
           decisionList({})(decisionItem({})()),
           taskList({})(taskItem({})()),
           p('text'),
         )(defaultSchema);
-        const expected = doc(p('text'))(defaultSchema);
+
         editorActions.replaceDocument(decisionsAndTasks.toJSON());
 
         const actual = await editorActions.getValue();
-        expect(actual).to.deep.equal({ ...expected.toJSON(), version: 1 });
+        expect(actual).to.deep.equal({
+          ...decisionsAndTasks.toJSON(),
+          version: 1,
+        });
       });
 
       describe('with waitForMediaUpload === true', () => {
