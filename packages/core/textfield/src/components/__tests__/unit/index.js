@@ -87,7 +87,8 @@ describe('TextField', () => {
     describe('native input events', () => {
       // TODO - fix events
       const nativeEvents = [
-        /*'onBlur', 'onChange', 'onFocus',*/
+        'onChange',
+        /*'onBlur', 'onFocus',*/
         'onKeyDown',
         'onKeyPress',
         'onKeyUp',
