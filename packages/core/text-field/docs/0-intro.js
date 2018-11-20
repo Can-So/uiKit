@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, code } from '@atlaskit/docs';
+import { md, Example, code, Props } from '@atlaskit/docs';
 
 export default md`
 Text Field provides a form input.
@@ -29,6 +29,12 @@ To control the component, specify a value prop; to specify the defaultValue but 
       Component={require('../examples/01-sizes').default}
       title="Sizes"
       source={require('!!raw-loader!../examples/01-sizes')}
+    />
+  )}
+
+  ${(
+    <Props
+      props={require('!!extract-react-types-loader!../src/components/TextField')}
     />
   )}
 `;

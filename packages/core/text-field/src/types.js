@@ -26,6 +26,11 @@ export type InputProps = {
 };
 
 export type TextFieldProps = {
+  /** Controls the appearance of the field.
+   * `subtle` shows styling on hover.
+   * `none` hides all field styling.
+   */
+  appearance?: 'standard' | 'none' | 'subtle',
   /** Sets a default value as input value */
   defaultValue?: string,
   /** Handler to be called when the input loses focus. */
