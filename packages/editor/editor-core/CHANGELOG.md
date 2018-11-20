@@ -1,5 +1,35 @@
 # @atlaskit/editor-core
 
+## 88.2.8
+- [patch] [04abea3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04abea3):
+
+  - ED-5186: Always show scroll bar, to avoid page shift.
+
+## 88.2.7
+- [patch] [4e2a3b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e2a3b1):
+
+  - ED-5809 Fixes code mark getting removed from document
+
+## 88.2.6
+- [patch] [899b377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/899b377):
+
+  - ED-5750: fix selection for merged cells when its created by dragging mouse across table cells
+
+## 88.2.5
+- [patch] [4ad840a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4ad840a):
+
+  - Adds resize property to fix media without dimensions
+
+## 88.2.4
+- [patch] [a458d03](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a458d03):
+
+  - ED-5713: Quick insert aliases
+
+## 88.2.3
+- [patch] [8d30d62](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d30d62):
+
+  - ED-5774: add breakout for Columns
+
 ## 88.2.2
 - [patch] [9a66a9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a66a9b):
 

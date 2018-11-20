@@ -1,17 +1,9 @@
 import Avatar from '@atlaskit/avatar';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { MultiValue } from '../../../components/MultiValue';
-
-const renderProp = (wrapper: ShallowWrapper, renderProp: string, ...args) => {
-  const prop = wrapper.prop(renderProp);
-  if (prop && typeof prop === 'function') {
-    const Wrapper = () => prop(...args);
-    return shallow(<Wrapper />);
-  }
-  throw new Error('renderProp is not a function');
-};
+import { renderProp } from '../_testUtils';
 
 describe('MultiValue', () => {
   const Container = props => <div {...props} />;

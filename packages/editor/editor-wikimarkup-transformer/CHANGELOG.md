@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.4.5
+- [patch] [3148c95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3148c95):
+
+  - add error and success color
+
 ## 2.4.4
 - [patch] [01a92e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01a92e1):
 

@@ -27,8 +27,8 @@ import {
   Separator,
   ThemeProvider,
   Wordmark,
-} from '../src';
-import { CONTENT_NAV_WIDTH } from '../src/common/constants';
+} from '../../../src';
+import { CONTENT_NAV_WIDTH } from '../../../src/common/constants';
 
 const FakeContentNav = ({ isContainer = false, ...props }: any) => (
   <ThemeProvider
