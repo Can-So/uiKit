@@ -21,7 +21,6 @@ import {
   toggleEm,
   toggleStrong,
   StatusState,
-  insertStatus,
   updateStatus,
   commitStatusPicker,
 } from '@atlaskit/editor-core';
