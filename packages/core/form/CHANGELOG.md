@@ -1,5 +1,9 @@
 # @atlaskit/form
 
+## 4.0.16
+- Updated dependencies [8199088](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8199088):
+  - @atlaskit/radio@0.3.0
+
 ## 4.0.15
 - [patch] [e6d3f57](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6d3f57):
 

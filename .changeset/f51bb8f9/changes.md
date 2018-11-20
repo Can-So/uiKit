@@ -1,1 +1,0 @@
-- BREAKING: defaultCheckedValue and checkedValue props in the RadioGroup component now changed to defaultValue and value respectively
