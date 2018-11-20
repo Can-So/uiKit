@@ -4,8 +4,6 @@ import React, { Children, Component, Fragment } from 'react';
 import { canUseDOM } from 'exenv';
 import { createPortal } from 'react-dom';
 import { TransitionGroup } from 'react-transition-group';
-import { ThemeProvider } from 'styled-components';
-import defaultDrawerTheme from '../theme/default-drawer-theme';
 import {
   createAndFireEvent,
   withAnalyticsEvents,
@@ -112,25 +110,23 @@ export class DrawerBase extends Component<DrawerProps> {
     }
     const { isOpen, children, icon, width, shouldUnmountOnExit } = this.props;
     return createPortal(
-      <ThemeProvider theme={defaultDrawerTheme}>
-        <TransitionGroup component={OnlyChild}>
-          <Fragment>
-            {/* $FlowFixMe the `in` prop is internal */}
-            <Fade in={isOpen}>
-              <Blanket isTinted onBlanketClicked={this.handleBlanketClick} />
-            </Fade>
-            <DrawerPrimitive
-              icon={icon}
-              in={isOpen}
-              onClose={this.handleBackButtonClick}
-              width={width}
-              shouldUnmountOnExit={shouldUnmountOnExit}
-            >
-              {children}
-            </DrawerPrimitive>
-          </Fragment>
-        </TransitionGroup>
-      </ThemeProvider>,
+      <TransitionGroup component={OnlyChild}>
+        <Fragment>
+          {/* $FlowFixMe the `in` prop is internal */}
+          <Fade in={isOpen}>
+            <Blanket isTinted onBlanketClicked={this.handleBlanketClick} />
+          </Fade>
+          <DrawerPrimitive
+            icon={icon}
+            in={isOpen}
+            onClose={this.handleBackButtonClick}
+            width={width}
+            shouldUnmountOnExit={shouldUnmountOnExit}
+          >
+            {children}
+          </DrawerPrimitive>
+        </Fragment>
+      </TransitionGroup>,
       this.body,
     );
   }

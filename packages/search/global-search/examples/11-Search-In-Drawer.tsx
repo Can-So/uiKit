@@ -1,13 +1,11 @@
 import * as React from 'react';
 import Button from '@atlaskit/button';
 import { setupMocks, teardownMocks } from '../example-helpers/mockApis';
-import Drawer from '@atlaskit/drawer';
+import Drawer, { withDrawerTheme } from '@atlaskit/drawer';
 import { GlobalQuickSearch } from '../src';
 import LocaleIntlProvider from '../example-helpers/LocaleIntlProvider';
 
-type State = {
-  isDrawerOpen: boolean;
-};
+const ThemedDrawer = withDrawerTheme(Drawer);
 
 export default class extends React.Component {
   state = {
@@ -35,7 +33,7 @@ export default class extends React.Component {
   render() {
     return (
       <div css={{ padding: '2rem' }}>
-        <Drawer
+        <ThemedDrawer
           onClose={this.closeDrawer}
           isOpen={this.state.isDrawerOpen}
           width="wide"
@@ -51,7 +49,7 @@ export default class extends React.Component {
               }}
             />
           </LocaleIntlProvider>
-        </Drawer>
+        </ThemedDrawer>
         <Button type="button" onClick={this.openDrawer}>
           Open drawer
         </Button>

@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import { DrawerTheme, Background, ItemTheme, ScrollBarTheme } from './types';
 import {
   gridSize,
