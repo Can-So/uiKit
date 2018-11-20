@@ -1,28 +1,15 @@
 // @flow
 
-import type { ComponentType, Node } from 'react';
-import type { WithNavigationUIControllerProps } from '../../../ui-controller/types';
+import type { ElementConfig } from 'react';
 
-import type {
-  CollapseListeners,
-  ExperimentalFeatureFlags,
-  GetRefs,
-} from '../../presentational/LayoutManager/types';
-
-import type { WithNavigationViewControllerProps } from '../../../view-controller/types';
+import AsyncLayoutManagerWithViewController from '../AsyncLayoutManagerWithViewController';
 
 export type LayoutManagerWithViewControllerProps = {|
-  ...$Exact<CollapseListeners>,
-  ...$Exact<ExperimentalFeatureFlags>,
-  ...$Exact<WithNavigationViewControllerProps>,
-  ...$Exact<WithNavigationUIControllerProps>,
-  children: Node,
-  customComponents?: { [string]: ComponentType<*> },
-  getRefs?: GetRefs,
-  globalNavigation: ComponentType<{}>,
-  firstSkeletonToRender?: 'product' | 'container',
+  ...$Diff<
+    ElementConfig<typeof AsyncLayoutManagerWithViewController>,
+    {
+      viewRenderer: *,
+      containerSkeleton: *,
+    },
+  >,
 |};
-
-export type LayoutManagerWithViewControllerState = {
-  hasInitialised: boolean,
-};
