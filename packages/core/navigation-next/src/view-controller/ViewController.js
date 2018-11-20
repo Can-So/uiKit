@@ -13,86 +13,32 @@ import type {
 } from './types';
 
 const defaultProps: ViewControllerProps = {
-  initialPeekViewId: null,
   isDebugEnabled: false,
 };
-
-type StateKeys =
-  | { active: 'activeView', incoming: 'incomingView' }
-  | { active: 'activePeekView', incoming: 'incomingPeekView' };
 
 export default class ViewController extends Container<ViewControllerState>
   implements ViewControllerInterface {
   state = {
     activeView: null,
     incomingView: null,
-    activePeekView: null,
-    incomingPeekView: null,
   };
 
   reducers: { [ViewID]: Reducer[] } = {};
   views: { [ViewID]: View } = {};
   isDebugEnabled: boolean = false;
-  initialPeekViewId: ?ViewID = null;
 
-  constructor({
-    initialPeekViewId,
-    isDebugEnabled,
-  }: ViewControllerProps = defaultProps) {
+  constructor({ isDebugEnabled }: ViewControllerProps = defaultProps) {
     super();
 
     if (typeof isDebugEnabled !== 'undefined') {
       this.isDebugEnabled = isDebugEnabled;
     }
-    if (initialPeekViewId) {
-      this.setInitialPeekViewId(initialPeekViewId);
-    }
   }
-
-  /**
-   * DRY function for setting a view. Can be configured to set either the active
-   * view, or the active peek view.
-   */
-  _setViewInternals = (stateKeys: StateKeys) => (viewId: ViewID) => {
-    const updateViewController = this._updateViewController(stateKeys);
-    const { incoming } = stateKeys;
-    const view = this.views[viewId];
-
-    // The view has been added
-    if (view) {
-      const { id, type, getItems } = view;
-      const returnedItems = getItems();
-
-      // This view returned a Promise
-      if (returnedItems instanceof Promise) {
-        // Enter a temporary loading state
-        this.setState({ [incoming]: { id, type } });
-
-        // Wait for the Promise to resolve
-        returnedItems.then(data => {
-          updateViewController(view, data);
-        });
-        return;
-      }
-
-      // The view returned data
-      updateViewController(view, returnedItems);
-      return;
-    }
-
-    // The view has not been added yet. We enter an indefinite loading state
-    // until the view is added or another view is set.
-    this.setState({ [incoming]: { id: viewId, type: null } });
-  };
 
   /**
    * Helper function for reducing a view's data and updating the state.
    */
-  _updateViewController = (stateKeys: StateKeys) => (
-    view: View,
-    initialData: ViewData,
-  ) => {
-    const { active, incoming } = stateKeys;
+  _updateViewController = (view: View, initialData: ViewData) => {
     const { id, type, getAnalyticsAttributes } = view;
     const reducers = this.reducers[id] || [];
     const data = reducers.reduce((d, reducer) => reducer(d), initialData);
@@ -101,8 +47,8 @@ export default class ViewController extends Container<ViewControllerState>
       : undefined;
 
     this.setState({
-      [active]: { id, type, data, analyticsAttributes },
-      [incoming]: null,
+      activeView: { id, type, data, analyticsAttributes },
+      incomingView: null,
     });
   };
 
@@ -144,28 +90,17 @@ export default class ViewController extends Container<ViewControllerState>
     const { id } = view;
     this.views = { ...this.views, [id]: view };
 
-    // We need to call setView or setPeekView again for the following cases:
+    // We need to call setView again for the following cases:
     // 1. The added view matches the active view (if it returns a Promise we
     //    want to temporarily enter a loading state while it resolves).
     // 2. The added view matches the expected incoming view and we want to
     //    resolve it.
-    const {
-      activeView,
-      incomingView,
-      activePeekView,
-      incomingPeekView,
-    } = this.state;
+    const { activeView, incomingView } = this.state;
     if (
       (activeView && id === activeView.id) ||
       (incomingView && id === incomingView.id)
     ) {
       this.setView(id);
-    }
-    if (
-      (activePeekView && id === activePeekView.id) ||
-      (incomingPeekView && id === incomingPeekView.id)
-    ) {
-      this.setPeekView(id);
     }
   };
 
@@ -180,25 +115,34 @@ export default class ViewController extends Container<ViewControllerState>
   /**
    * Set the registered view with the given ID as the active view.
    */
-  setView = this._setViewInternals({
-    active: 'activeView',
-    incoming: 'incomingView',
-  });
+  setView = (viewId: ViewID) => {
+    const view = this.views[viewId];
 
-  /**
-   * Set the registered view with the given ID as the active peek view.
-   */
-  setPeekView = this._setViewInternals({
-    active: 'activePeekView',
-    incoming: 'incomingPeekView',
-  });
+    // The view has been added
+    if (view) {
+      const { id, type, getItems } = view;
+      const returnedItems = getItems();
 
-  /**
-   * Specify which view should be treated as the initial peek view.
-   */
-  setInitialPeekViewId = (viewId: ViewID) => {
-    this.initialPeekViewId = viewId;
-    this.setPeekView(viewId);
+      // This view returned a Promise
+      if (returnedItems instanceof Promise) {
+        // Enter a temporary loading state
+        this.setState({ incomingView: { id, type } });
+
+        // Wait for the Promise to resolve
+        returnedItems.then(data => {
+          this._updateViewController(view, data);
+        });
+        return;
+      }
+
+      // The view returned data
+      this._updateViewController(view, returnedItems);
+      return;
+    }
+
+    // The view has not been added yet. We enter an indefinite loading state
+    // until the view is added or another view is set.
+    this.setState({ incomingView: { id: viewId, type: null } });
   };
 
   /**

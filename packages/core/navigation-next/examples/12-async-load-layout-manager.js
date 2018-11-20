@@ -13,7 +13,6 @@ import {
   GlobalNav,
   LayoutManager,
   NavigationProvider,
-  UIControllerSubscriber,
   modeGenerator,
   ThemeProvider,
   SkeletonContainerView,
@@ -25,28 +24,6 @@ import {
 const globalNavPrimaryItems = [
   {
     id: 'jira',
-    component: ({ className, children }: *) => (
-      <UIControllerSubscriber>
-        {navigationUIController => {
-          function onClick() {
-            if (navigationUIController.state.isCollapsed) {
-              navigationUIController.expand();
-            }
-            navigationUIController.togglePeek();
-          }
-          return (
-            <button
-              className={className}
-              onClick={onClick}
-              onMouseEnter={navigationUIController.peekHint}
-              onMouseLeave={navigationUIController.unPeekHint}
-            >
-              {children}
-            </button>
-          );
-        }}
-      </UIControllerSubscriber>
-    ),
     icon: ({ label }: { label: string }) => (
       <JiraIcon size="medium" label={label} />
     ),

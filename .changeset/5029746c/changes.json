@@ -1,0 +1,18 @@
+{
+  "releases": [{ "name": "@atlaskit/navigation-next", "type": "major" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/feedback-collector",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/global-navigation",
+        "@atlaskit/navigation-next"
+      ]
+    },
+    {
+      "name": "@atlaskit/global-navigation",
+      "type": "patch",
+      "dependencies": ["@atlaskit/navigation-next"]
+    }
+  ]
+}

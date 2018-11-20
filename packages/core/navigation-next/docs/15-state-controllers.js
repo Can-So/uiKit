@@ -35,14 +35,6 @@ ${code`interface UIControllerInterface {
   state: {
     /** Whether the navigation is currently collapsed. */
     isCollapsed: boolean,
-    /** Whether the navigation is currently performing a 'peek hint'.
-     * @deprecated: The concept of peeking has been removed from the UX spec so
-     * this property will be removed in a future release. */
-    isPeekHinting: boolean,
-    /** Whether the navigation is currently performing a 'peek'. @deprecated:
-     * The concept of peeking has been removed from the UX spec so this property
-     * will be removed in a future release. */
-    isPeeking: boolean,
     /** Whether the navigation is currently being resized. */
     isResizing: boolean,
     /** The width of the content navigation area. */
@@ -55,24 +47,6 @@ ${code`interface UIControllerInterface {
   expand: () => void;
   /** Toggle the collapse/expand state of the content navigation. */
   toggleCollapse: () => void;
-
-  /** Shift the container navigation layer to suggest that a 'peek' can be
-   * performed. @deprecated */
-  peekHint: () => void;
-  /** Reset the position of the container navigation layer. @deprecated */
-  unPeekHint: () => void;
-  /** Toggle the hinting state of the container navigation layer. @deprecated */
-  togglePeekHint: () => void;
-
-  /** Slide the container navigation layer out of the way, or transition a
-   * nested product navigation view, to reveal the 'root product home view'.
-   * @deprecated */
-  peek: () => void;
-  /** Reset the navigation to its state before a peek was performed. @deprecated
-   * */
-  unPeek: () => void;
-  /** Toggle the peeking state of the navigation. @deprecated */
-  togglePeek: () => void;
 }`}
 
 ### UIControllerSubscriber
@@ -136,28 +110,6 @@ ${code`interface ViewControllerInterface {
       /** The layer of navigation this view should be rendered on. */
       type: 'container' | 'product',
     } | null,
-
-    /** The view which should be rendered on the product navigation layer when
-     * the active view is a 'container' view. @deprecated: The concept of
-     * peeking no longer exists in the UX spec, so this feature will be removed
-     * in a future release. */
-    activePeekView: {
-      /** The unique ID for this view. */
-      id: string,
-      /** The layer of navigation this view should be rendered on. */
-      type: 'container' | 'product',
-      /** An array of items. */
-      data: [],
-    } | null,
-
-    /** The view which will become the active peek view once it has loaded.
-     * @deprecated */
-    incomingPeekView: {
-      /** The unique ID for this view. */
-      id: string,
-      /** The layer of navigation this view should be rendered on. */
-      type: 'container' | 'product',
-    } | null,
   };
 
   /** Register a view. You must provide an \`id\`, the \`type\` of view
@@ -191,9 +143,6 @@ ${code`interface ViewControllerInterface {
 
   /** Remove a reducer from the view with the given ID. */
   removeReducer: (string, ([]) => []) => void;
-
-  /** Specify which view should be treated as the initial peek view. */
-  setInitialPeekViewId: string => void;
 
   /** Will re-resolve the active view and re-reduce its data. Accepts an
    * optional view ID to only re-resolve if the given ID matches the active

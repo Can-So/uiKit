@@ -1,10 +1,15 @@
 // @flow
 
-import React, { Component, Fragment, type Node } from 'react';
+import React, {
+  Component,
+  Fragment,
+  type ElementConfig,
+  type Node,
+} from 'react';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
 import { withNavigationUIController } from '../../../ui-controller';
-import { withNavigationViewController } from '../../../view-controller';
+import { ViewControllerSubscriber } from '../../../view-controller';
 import LayoutManager from '../../presentational/LayoutManager';
 import type {
   AsyncLayoutManagerWithViewControllerProps,
@@ -25,12 +30,32 @@ class LayoutManagerWithViewControllerBase extends Component<
 
   state = {
     hasInitialised: false,
+    outgoingView: null,
   };
 
   constructor(props: AsyncLayoutManagerWithViewControllerProps) {
     super(props);
     this.renderContainerNavigation.displayName = 'ContainerNavigationRenderer';
     this.renderProductNavigation.displayName = 'ProductNavigationRenderer';
+  }
+
+  componentDidUpdate(prevProps: AsyncLayoutManagerWithViewControllerProps) {
+    const { view } = this.props;
+    const { view: prevView } = prevProps;
+
+    if (!view || !prevView) {
+      return;
+    }
+
+    // If we're moving from a product to a container view or vice versa we cache
+    // the previous view so that we can still render it during the transition.
+    if (view.type !== prevView.type) {
+      // It's totally fine to setState in componentDidUpdate as long as it's
+      // wrapped in a condition:
+      // https://reactjs.org/docs/react-component.html#componentdidupdate
+      // eslint-disable-next-line
+      this.setState({ outgoingView: prevView });
+    }
   }
 
   onInitialised = () => {
@@ -45,19 +70,19 @@ class LayoutManagerWithViewControllerBase extends Component<
   };
 
   renderContainerNavigation = () => {
-    const {
-      navigationViewController: {
-        state: { activeView },
-      },
-      firstSkeletonToRender,
-    } = this.props;
+    const { firstSkeletonToRender, view } = this.props;
+    const { outgoingView } = this.state;
 
-    if (activeView && activeView.type === 'container') {
-      return this.renderView(activeView);
+    if (view && view.type === 'container') {
+      return this.renderView(view);
+    }
+
+    if (outgoingView && outgoingView.type === 'container') {
+      return this.renderView(outgoingView);
     }
 
     if (
-      !activeView &&
+      !view &&
       firstSkeletonToRender === 'container' &&
       !this.state.hasInitialised
     ) {
@@ -68,12 +93,7 @@ class LayoutManagerWithViewControllerBase extends Component<
   };
 
   renderGlobalNavigation = () => {
-    const {
-      globalNavigation: GlobalNavigation,
-      navigationViewController: {
-        state: { activeView },
-      },
-    } = this.props;
+    const { globalNavigation: GlobalNavigation, view } = this.props;
     const { hasInitialised } = this.state;
 
     /* We are embedding the LayerInitialised analytics component within global navigation so that
@@ -84,7 +104,7 @@ class LayoutManagerWithViewControllerBase extends Component<
       <Fragment>
         <GlobalNavigation />
         <LayerInitialised
-          activeView={activeView}
+          activeView={view}
           initialised={hasInitialised}
           onInitialised={this.onInitialised}
         />
@@ -93,23 +113,22 @@ class LayoutManagerWithViewControllerBase extends Component<
   };
 
   renderProductNavigation = () => {
-    const {
-      navigationUIController: {
-        state: { isPeeking },
-      },
-      navigationViewController: {
-        state: { activeView, activePeekView },
-      },
-    } = this.props;
+    const { view } = this.props;
+    const { outgoingView } = this.state;
 
-    if (
-      activePeekView &&
-      (isPeeking || (activeView && activeView.type === 'container'))
-    ) {
-      return this.renderView(activePeekView);
+    if (view && view.type === 'product') {
+      return this.renderView(view);
     }
-    if (activeView && activeView.type === 'product') {
-      return this.renderView(activeView);
+
+    // If we're transitioning from a product view to a container view still
+    // render the outgoing product view.
+    if (
+      view &&
+      view.type === 'container' &&
+      outgoingView &&
+      outgoingView.type === 'product'
+    ) {
+      return this.renderView(outgoingView);
     }
 
     return this.renderSkeleton();
@@ -126,32 +145,30 @@ class LayoutManagerWithViewControllerBase extends Component<
     const {
       children,
       experimental_flyoutOnHover,
-      navigationViewController: {
-        state: { activeView },
-      },
       firstSkeletonToRender,
       onExpandStart,
       onExpandEnd,
       onCollapseStart,
       onCollapseEnd,
       getRefs,
+      view,
     } = this.props;
 
     return (
       <NavigationAnalyticsContext
         data={{
           attributes: {
-            navigationLayer: activeView && activeView.type,
-            view: activeView && activeView.id,
-            ...(activeView && activeView.analyticsAttributes),
+            navigationLayer: view && view.type,
+            view: view && view.id,
+            ...(view && view.analyticsAttributes),
           },
         }}
       >
         <LayoutManager
           globalNavigation={this.renderGlobalNavigation}
           containerNavigation={
-            (activeView && activeView.type === 'container') ||
-            (!activeView &&
+            (view && view.type === 'container') ||
+            (!view &&
               firstSkeletonToRender === 'container' &&
               !this.state.hasInitialised)
               ? this.renderContainerNavigation
@@ -172,6 +189,19 @@ class LayoutManagerWithViewControllerBase extends Component<
   }
 }
 
-export default withNavigationUIController(
-  withNavigationViewController(LayoutManagerWithViewControllerBase),
+const AsyncLayoutManagerWithView = (
+  props: $Diff<
+    ElementConfig<typeof LayoutManagerWithViewControllerBase>,
+    { view: * },
+  >,
+) => (
+  <ViewControllerSubscriber>
+    {({ state: { activeView } }) => {
+      return (
+        <LayoutManagerWithViewControllerBase view={activeView} {...props} />
+      );
+    }}
+  </ViewControllerSubscriber>
 );
+
+export default withNavigationUIController(AsyncLayoutManagerWithView);

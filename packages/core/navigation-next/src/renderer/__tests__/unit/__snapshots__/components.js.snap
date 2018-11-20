@@ -41,7 +41,7 @@ Array [
     key="back-item"
     text="Back"
   />,
-  <WithNavigationUIController(WithNavigationViewController(GoToItem))
+  <WithNavigationViewController(GoToItem)
     goTo="view"
     id="goto-item"
     index={4}

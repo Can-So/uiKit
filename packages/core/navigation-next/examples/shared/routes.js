@@ -4,34 +4,26 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-import {
-  UIControllerSubscriber,
-  withNavigationViewController,
-  withNavigationUIController,
-} from '../../src';
+import { withNavigationViewController } from '../../src';
 
 import ShortcutsPlugin from './shortcuts-plugin';
 
 class SetActiveViewBase extends Component<{
   id: string,
-  navigationUIController: *,
   navigationViewController: *,
 }> {
   componentDidMount() {
-    const { id, navigationUIController, navigationViewController } = this.props;
+    const { id, navigationViewController } = this.props;
     const { containerViewId, productViewId } = navigationViewController.state;
     if (id !== containerViewId && id !== productViewId) {
       navigationViewController.setView(id);
     }
-    navigationUIController.unPeek();
   }
   render() {
     return null;
   }
 }
-const SetActiveView = withNavigationUIController(
-  withNavigationViewController(SetActiveViewBase),
-);
+const SetActiveView = withNavigationViewController(SetActiveViewBase);
 
 /**
  * Root-level routes
@@ -66,11 +58,7 @@ export const SearchIssuesView = () => (
 /**
  * Container-level routes
  */
-class BacklogViewBase extends Component<*> {
-  componentDidMount() {
-    this.props.navigationUIController.unPeek();
-  }
-
+export class BacklogView extends Component<*> {
   render() {
     return (
       <Fragment>
@@ -85,10 +73,3 @@ class BacklogViewBase extends Component<*> {
     );
   }
 }
-export const BacklogView = () => (
-  <UIControllerSubscriber>
-    {navigationUIController => (
-      <BacklogViewBase navigationUIController={navigationUIController} />
-    )}
-  </UIControllerSubscriber>
-);

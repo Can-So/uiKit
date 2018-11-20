@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { HashRouter } from 'react-router-dom';
 
 import LayoutManagerWithViewController from '../../LayoutManagerWithViewController';
 import { NavigationProvider } from '../../../../../index';
@@ -26,28 +25,19 @@ describe('LayoutManagerWithViewController', () => {
     getRefs = jest.fn();
 
     wrapper = mount(
-      <HashRouter>
-        <NavigationProvider
-          cache={false}
-          initialPeekViewId="root/index"
-          isDebugEnabled={false}
+      <NavigationProvider cache={false} isDebugEnabled={false}>
+        <LayoutManagerWithViewController
+          globalNavigation={GlobalNavigationComponent}
+          firstSkeletonToRender={'product'}
+          onCollapseStart={onCollapseStart}
+          onCollapseEnd={onCollapseEnd}
+          onExpandStart={onExpandStart}
+          onExpandEnd={onExpandEnd}
+          getRefs={getRefs}
         >
-          <LayoutManagerWithViewController
-            globalNavigation={GlobalNavigationComponent}
-            firstSkeletonToRender={'product'}
-            onCollapseStart={onCollapseStart}
-            onCollapseEnd={onCollapseEnd}
-            onExpandStart={onExpandStart}
-            onExpandEnd={onExpandEnd}
-            getRefs={getRefs}
-          >
-            <p>
-              Children requires to have `NavigationProvider` as a parent Because
-              of `unstated`. This is an issue
-            </p>
-          </LayoutManagerWithViewController>
-        </NavigationProvider>
-      </HashRouter>,
+          <div />
+        </LayoutManagerWithViewController>
+      </NavigationProvider>,
     );
   });
 
@@ -90,28 +80,14 @@ describe('LayoutManagerWithViewController', () => {
 
     it('should render skeleton using `container` context', () => {
       const containerWrapper = mount(
-        <HashRouter>
-          <NavigationProvider
-            cache={false}
-            initialPeekViewId="root/index"
-            isDebugEnabled={false}
+        <NavigationProvider isDebugEnabled={false}>
+          <LayoutManagerWithViewController
+            globalNavigation={GlobalNavigationComponent}
+            firstSkeletonToRender={'container'}
           >
-            <LayoutManagerWithViewController
-              globalNavigation={GlobalNavigationComponent}
-              firstSkeletonToRender={'container'}
-              onCollapseStart={onCollapseStart}
-              onCollapseEnd={onCollapseEnd}
-              onExpandStart={onExpandStart}
-              onExpandEnd={onExpandEnd}
-              getRefs={getRefs}
-            >
-              <p>
-                Children requires to have `NavigationProvider` as a parent
-                Because of `unstated`. This is an issue
-              </p>
-            </LayoutManagerWithViewController>
-          </NavigationProvider>
-        </HashRouter>,
+            <div />
+          </LayoutManagerWithViewController>
+        </NavigationProvider>,
       );
 
       expect(
@@ -142,6 +118,63 @@ describe('LayoutManagerWithViewController', () => {
       expect(layoutManager.props().onExpandStart).toBeCalledWith(0);
       expect(layoutManager.props().onExpandEnd).toBeCalledWith(200);
       expect(layoutManager.props().getRefs).toHaveBeenCalled();
+    });
+  });
+
+  describe('Rendering the outgoing view when transitioning between layers', () => {
+    const ProductItem = () => <div />;
+    const ContainerItem = () => <div />;
+    const productView = {
+      type: 'product',
+      id: 'product-view',
+      getItems: () => [
+        { type: 'InlineComponent', component: ProductItem, id: 'product-item' },
+      ],
+    };
+    const containerView = {
+      type: 'container',
+      id: 'container-view',
+      getItems: () => [
+        {
+          type: 'InlineComponent',
+          component: ContainerItem,
+          id: 'container-item',
+        },
+      ],
+    };
+
+    it('should continue rendering the last product view when transitioning from product -> container', () => {
+      const { viewController } = wrapper.instance();
+      viewController.addView(productView);
+      viewController.addView(containerView);
+      viewController.setView(productView.id);
+      wrapper.update();
+
+      expect(wrapper.find(ProductItem)).toHaveLength(1);
+      expect(wrapper.find(ContainerItem)).toHaveLength(0);
+
+      viewController.setView(containerView.id);
+      wrapper.update();
+
+      expect(wrapper.find(ProductItem)).toHaveLength(1);
+      expect(wrapper.find(ContainerItem)).toHaveLength(1);
+    });
+
+    it('should continue rendering the last container view when transitioning from container -> product', () => {
+      const { viewController } = wrapper.instance();
+      viewController.addView(productView);
+      viewController.addView(containerView);
+      viewController.setView(containerView.id);
+      wrapper.update();
+
+      expect(wrapper.find(ProductItem)).toHaveLength(0);
+      expect(wrapper.find(ContainerItem)).toHaveLength(1);
+
+      viewController.setView(productView.id);
+      wrapper.update();
+
+      expect(wrapper.find(ProductItem)).toHaveLength(1);
+      expect(wrapper.find(ContainerItem)).toHaveLength(1);
     });
   });
 });
