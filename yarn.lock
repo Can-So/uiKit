@@ -13062,9 +13062,9 @@ prosemirror-state@>=1.0.0, prosemirror-state@^1.0.0, prosemirror-state@^1.2.2:
     prosemirror-model "^1.0.0"
     prosemirror-transform "^1.0.0"
 
-prosemirror-tables@^0.7.9:
-  version "0.7.9"
-  resolved "https://registry.yarnpkg.com/prosemirror-tables/-/prosemirror-tables-0.7.9.tgz#fb82d1e5d8cc4661820fdb956b76f2192bcd2127"
+prosemirror-tables@^0.7.10:
+  version "0.7.10"
+  resolved "https://registry.yarnpkg.com/prosemirror-tables/-/prosemirror-tables-0.7.10.tgz#4b0f623422b4b8f84cdc9c559f8a87579846b3ba"
   dependencies:
     prosemirror-keymap "^1.0.0"
     prosemirror-model "^1.0.0"
