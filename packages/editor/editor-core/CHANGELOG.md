@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.9
+- [patch] [70a104dc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/70a104dc):
+
+  - ED-5802: fix merging rows when rowspan > 1 in neighbour columns
+
 ## 88.2.8
 - [patch] [04abea3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04abea3):
 

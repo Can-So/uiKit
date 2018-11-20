@@ -1,1 +1,0 @@
-- ED-5802: fix merging rows when rowspan > 1 in neighbour columns
