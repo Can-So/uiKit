@@ -1,5 +1,10 @@
 # @atlaskit/profilecard
 
+## 6.0.0
+- [major] [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+
+  - Replace "isActive" prop with new "status" prop and adding react-intl messages
+
 ## 5.0.0
 - [major] [a6dd6e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6dd6e3):
 

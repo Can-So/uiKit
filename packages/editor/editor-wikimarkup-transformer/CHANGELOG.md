@@ -1,5 +1,11 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.4.6
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/editor-common@21.2.2
+  - @atlaskit/renderer@30.2.1
+  - @atlaskit/profilecard@6.0.0
+
 ## 2.4.5
 - [patch] [3148c95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3148c95):
 
