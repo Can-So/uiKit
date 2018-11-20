@@ -7,7 +7,7 @@ import {
 } from '@atlaskit/analytics-next';
 import PageComponent from './page';
 import { LeftNavigator, RightNavigator } from './navigators';
-import Ellipsis from './ellipsis';
+import renderEllipsis from './ellipsis';
 import collapseRangeHelper from '../util/collapse-range';
 import {
   name as packageName,
@@ -21,7 +21,7 @@ type StateType = {
 
 class Pagination extends Component<PaginationPropTypes, StateType> {
   static defaultProps = {
-    ellipsisComponent: Ellipsis,
+    ellipsisComponent: renderEllipsis,
     i18n: {
       prev: 'previous',
       next: 'next',
@@ -82,17 +82,21 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
   pagesToComponents = (pages: Array<any>) => {
     const { selectedIndex } = this.state;
     const { pageComponent, getPageLabel } = this.props;
-    return pages.map((page, index) => (
-      <PageComponent
-        key={`page-${getPageLabel ? getPageLabel(page, index + 1) : index}`}
-        component={pageComponent}
-        onClick={event => this.onChange(event, index + 1)}
-        isSelected={selectedIndex === index + 1}
-        page={page}
-      >
-        {getPageLabel ? getPageLabel(page, index + 1) : page}
-      </PageComponent>
-    ));
+    return pages.map((page, index) => {
+      // array is 0 indexed but our pages start with 1
+      const pageIndex = index + 1;
+      return (
+        <PageComponent
+          key={`page-${getPageLabel ? getPageLabel(page, pageIndex) : index}`}
+          component={pageComponent}
+          onClick={event => this.onChange(event, pageIndex)}
+          isSelected={selectedIndex === pageIndex}
+          page={page}
+        >
+          {getPageLabel ? getPageLabel(page, pageIndex) : page}
+        </PageComponent>
+      );
+    });
   };
 
   renderPages = () => {

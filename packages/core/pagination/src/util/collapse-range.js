@@ -1,16 +1,18 @@
 // @flow
+import type { Node } from 'react';
+
 export default function collapseRange(
-  pageLinks: Array<any>,
+  pages: Array<Node>,
   current: number,
   {
     max,
     ellipsisComponent,
   }: {
     max: number,
-    ellipsisComponent: Function,
+    ellipsisComponent: ({ key: string }) => Node,
   },
-) {
-  const total = pageLinks.length;
+): Array<Node> {
+  const total = pages.length;
   // only need ellipsis if we have more pages than we can display
   const needEllipsis = total > max;
   // show start ellipsis if the current page is further away than max - 3 from the first page
@@ -19,32 +21,32 @@ export default function collapseRange(
   const hasEndEllipsis = needEllipsis && current < total - max + 4;
 
   if (!needEllipsis) {
-    return pageLinks;
+    return pages;
   } else if (hasStartEllipsis && !hasEndEllipsis) {
     const pageCount = max - 2;
     return [
-      pageLinks[0],
+      pages[0],
       ellipsisComponent({ key: 'elipses-1' }),
-      ...pageLinks.slice(total - pageCount),
+      ...pages.slice(total - pageCount),
     ];
   } else if (!hasStartEllipsis && hasEndEllipsis) {
     const pageCount = max - 2;
     return [
-      ...pageLinks.slice(0, pageCount),
+      ...pages.slice(0, pageCount),
       ellipsisComponent({ key: 'elipses-1' }),
-      ...pageLinks.slice(-1),
+      ...pages.slice(-1),
     ];
   }
   // we have both start and end ellipsis
   const pageCount = max - 4;
   return [
-    pageLinks[0],
+    pages[0],
     ellipsisComponent({ key: 'elipses-1' }),
-    ...pageLinks.slice(
+    ...pages.slice(
       current - Math.floor(pageCount / 2),
       current + pageCount - 1,
     ),
     ellipsisComponent({ key: 'elipses-2' }),
-    ...pageLinks.slice(-1),
+    ...pages.slice(-1),
   ];
 }

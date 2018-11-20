@@ -20,7 +20,7 @@ In v8 we used to create pagination components like the following:
 ${code`
 <Pagination
   total={10}
-  onChange={e => console.log('page changed', e)}
+  onChange={newSelectedPage => console.log('page changed', newSelectedPage)}
 />
 `}
 
@@ -38,7 +38,7 @@ ${code`
 - **pages**: ( ***Required*** ) Array of pages to the rendered by the Pagination component
 - **defaultSelectedIndex**: The index of the page to be selected by default
 - **selectedIndex**: The index of the page to be selected.
-- **collapseRange**: A function which should return an Array of pages to be rendered by Pagination component
+- **collapseRange**: A function which should return an Array of react Nodes to be rendered by Pagination component
 - **pageComponent**: A react component to be rendered instead of the default subtle atlaskit button.
 - **previousPageComponent**: A react component to be rendered instead of the default subtle atlaskit button.
 - **nextPageComponent**: A react component to be rendered instead of the default subtle atlaskit button.
@@ -53,7 +53,7 @@ ${code`
 
 ### ⏫ Props updated:
 
-- **onChange**: The function signature has been updated to \`( event: SyntheticEvent, newSelectedPageIndex: number, analyticsEvent: UIAnalyticsEvent ) => void\`
+- **onChange**: The function signature has been updated to \`( event: SyntheticEvent<>, newSelectedPageIndex: number, analyticsEvent: UIAnalyticsEvent ) => void\`
 
 ## v7 to v8
 

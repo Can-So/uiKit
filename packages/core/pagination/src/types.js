@@ -1,10 +1,10 @@
 //@flow
-import type { Node, ComponentType } from 'react';
+import type { Node } from 'react';
 import type { ButtonProps, ButtonAppearances } from '@atlaskit/button';
 import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
 
 export type EliipsisPropType = {
-  key: number,
+  key: string,
 };
 
 export type NavigatorPropsType = {
@@ -25,23 +25,23 @@ export type NavigatorPropsType = {
 export type PaginationPropTypes = {
   /** Custom collapse range function */
   collapseRange: (
-    items: Array<any>,
+    pages: Array<Node>,
     selectedIndex: number,
-    { max: number, ellipsisComponent: Function => Node },
-  ) => Array<number | string | ComponentType<*>>,
-  /** You should not be accessing this prop under any circumstances. It is
+    { max: number, ellipsisComponent: ({ key: string }) => Node },
+  ) => Array<Node>,
+  /** This prop should not be accessed under any circumstances. It is
    provided by @atlaskit/analytics-next. */
   createAnalyticsEvent?: any,
-  /** Index of the default selected page */
+  /** Index of the page to be selected by default */
   defaultSelectedIndex: number,
-  /** The component to be displayed in place of the ellipsis in the pagination button */
-  ellipsisComponent: Function => Node,
-  /** in case the pages in a object then this function will help us get the label of the page */
+  /** The react Node returned from the function is rendered instead of the default ellipsis node */
+  ellipsisComponent: ({ key: string }) => Node,
+  /** Helper function to get text displayed on the page button. It is helpful in scenarios when page is passed in Object  */
   getPageLabel?: (
     pageObj: string | number | Object,
     pageIndex: number,
   ) => number | string,
-  /** aria label for pagination next and previous buttons */
+  /** The aria label for pagination next and previous buttons */
   i18n: {
     prev: string,
     next: string,
@@ -50,21 +50,44 @@ export type PaginationPropTypes = {
   innerStyles?: Object,
   /** Maximum number of pages to be displayed in the pagination */
   max: number,
-  /** The component to be displayed in place of the next page button */
-  nextPageComponent?: ComponentType<*>,
-  /** onChange handler for when page is changed */
+  /** The react Node returned from nextPageComponent function is rendered instead of default next page component */
+  nextPageComponent?: ({
+    children?: Node,
+    className?: string,
+    onMouseEnter?: Function,
+    onMouseLeave?: Function,
+    disabled?: boolean,
+    pages?: Array<any>,
+    selectedIndex?: number,
+  }) => Node,
+  /** onChange handler which is called when the page is changed */
   onChange?: (
     event: SyntheticEvent<>,
     pageIndex: number,
     analyticsEvent: ?UIAnalyticsEvent,
   ) => void,
-  /** The component to be displayed in place of the page button */
-  pageComponent?: ComponentType<*>,
+  /** The react Node returned from pageComponent function is rendered instead of default page button component */
+  pageComponent?: ({
+    children?: Node,
+    className?: string,
+    onMouseEnter?: Function,
+    onMouseLeave?: Function,
+    disabled?: boolean,
+    page?: any,
+  }) => Node,
   /** Array of the pages to display */
   pages: Array<any>,
-  /** The component to be displayed in place of the previous page button */
-  previousPageComponent?: ComponentType<*>,
-  /** index of the selected page - to make this value controlled */
+  /** The react Node returned from previousPageComponent function is rendered instead of default previous page component */
+  previousPageComponent?: ({
+    children?: Node,
+    className?: string,
+    onMouseEnter?: Function,
+    onMouseLeave?: Function,
+    disabled?: boolean,
+    pages?: Array<any>,
+    selectedIndex?: number,
+  }) => Node,
+  /** index of the selected page. This will make this pagination controlled */
   selectedIndex?: number,
 };
 

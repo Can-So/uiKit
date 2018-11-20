@@ -1,5 +1,5 @@
 //@flow
-import React from 'react';
+import React, { type Node } from 'react';
 import styled from 'styled-components';
 import type { EliipsisPropType } from '../../types';
 
@@ -10,6 +10,6 @@ const StyledEllipsis = styled.span`
   padding: 0 8px;
 `;
 
-export default function Ellipsis({ key }: EliipsisPropType) {
+export default function renderEllipsis({ key }: EliipsisPropType): Node {
   return <StyledEllipsis key={key}>...</StyledEllipsis>;
 }

@@ -3,23 +3,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  children: any,
-  className: string,
-  onMouseEnter: Event,
-  onMouseLeave: Event,
-  disabled: boolean,
+  children?: any,
+  className?: string,
+  onMouseEnter?: Function,
+  onMouseLeave?: Function,
+  disabled?: boolean,
 };
 
 type PageProps = Props & {
-  page: any,
+  page?: any,
 };
 
 type NavigatorProps = Props & {
-  pages: any,
-  selectedIndex: number,
+  pages?: any,
+  selectedIndex?: number,
 };
 
-export function RouterLink({
+export function renderRouterLink({
   children,
   className,
   onMouseEnter,
@@ -27,24 +27,25 @@ export function RouterLink({
   disabled,
   page,
 }: PageProps) {
-  const href = page.href;
+  console.log(onMouseEnter);
+  const href = page && page.href;
   return disabled ? (
     <div className={className}>{children}</div>
   ) : (
     <Link
-      key={page.label}
+      key={page && page.label}
       className={className}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       disabled
       to={disabled ? '#' : href}
     >
-      {page.label}
+      {page && page.label}
     </Link>
   );
 }
 
-export function RouterLinkLeft({
+export function renderRouterLinkLeft({
   children,
   className,
   onMouseEnter,
@@ -54,7 +55,7 @@ export function RouterLinkLeft({
   selectedIndex,
 }: NavigatorProps) {
   let href;
-  if (pages && selectedIndex > 1) {
+  if (pages && selectedIndex && selectedIndex > 1) {
     href = pages[selectedIndex - 2].href;
   }
   return disabled ? (
@@ -72,7 +73,7 @@ export function RouterLinkLeft({
   );
 }
 
-export function RouterLinkRight({
+export function renderRouterLinkRight({
   children,
   className,
   onMouseEnter,

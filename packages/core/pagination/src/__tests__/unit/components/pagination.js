@@ -100,7 +100,7 @@ describe(`${name} - Pagination component`, () => {
   });
   describe('previousPageComponent prop', () => {
     it('should display this new component instead of the default page component', () => {
-      const customComponent = ({ page }: { page: any }) => <div>{page}</div>;
+      const customComponent = () => <div>Previous</div>;
       const wrapper = mount(
         <Pagination
           pages={[1, 2, 3]}
@@ -115,7 +115,7 @@ describe(`${name} - Pagination component`, () => {
 
   describe('nextPageComponent prop', () => {
     it('should display this new component instead of the default page component', () => {
-      const customComponent = ({ page }: { page: any }) => <div>{page}</div>;
+      const customComponent = () => <div>Next</div>;
       const wrapper = mount(
         <Pagination
           pages={[1, 2, 3]}
