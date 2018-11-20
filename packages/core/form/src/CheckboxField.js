@@ -41,4 +41,8 @@ const CheckboxField = ({
   );
 };
 
+CheckboxField.defaultProps = {
+  defaultIsChecked: false,
+};
+
 export default CheckboxField;

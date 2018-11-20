@@ -22,8 +22,8 @@ export default () => (
   >
     <Form
       onSubmit={data => {
-        console.log('data', data);
-        return Math.random() > 0.5
+        console.log('form data', data);
+        return data.username === 'error'
           ? Promise.resolve({ username: 'IN_USE' })
           : undefined;
       }}

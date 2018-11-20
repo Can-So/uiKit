@@ -7,16 +7,21 @@ import Form from '../../FormNext';
 import Field from '../../FieldNext';
 import { HelperMessage, ErrorMessage } from '../../Messages';
 
+const touch = wrapper => {
+  wrapper.simulate('focus');
+  wrapper.simulate('blur');
+};
+
 test('should not be dirty after mount', () => {
   const wrapper = mount(
     <Form onSubmit={jest.fn()}>
       {() => (
         <Field name="username" defaultValue="Joe Bloggs">
-          {({ fieldProps, dirty }) => (
+          {({ fieldProps, meta: { dirty } }) => (
             <>
               <FieldText {...fieldProps} />
               <HelperMessage>
-                Field is {dirty ? 'dirty' : 'pristine'}
+                Field is {dirty === true ? 'dirty' : 'pristine'}
               </HelperMessage>
             </>
           )}
@@ -27,7 +32,7 @@ test('should not be dirty after mount', () => {
   expect(wrapper.find(HelperMessage).text()).toBe('Field is pristine');
 });
 
-test('should validate field on mount', () => {
+test('untouched field should not show validation error', () => {
   const wrapper = mount(
     <Form onSubmit={jest.fn()}>
       {() => (
@@ -48,20 +53,46 @@ test('should validate field on mount', () => {
       )}
     </Form>,
   );
+  expect(wrapper.find(ErrorMessage)).toHaveLength(0);
+  expect(wrapper.find(FieldText).props()).toMatchObject({ isInvalid: false });
+});
+
+test('touched field should show validation error', () => {
+  const wrapper = mount(
+    <Form onSubmit={jest.fn()}>
+      {() => (
+        <Field
+          name="username"
+          defaultValue="Joe Bloggs"
+          validate={() => 'ERROR'}
+        >
+          {({ fieldProps, error }) => (
+            <>
+              <FieldText {...fieldProps} />
+              {error && (
+                <ErrorMessage>There is a problem with this field</ErrorMessage>
+              )}
+            </>
+          )}
+        </Field>
+      )}
+    </Form>,
+  );
+  touch(wrapper.find('input'));
   expect(wrapper.find(ErrorMessage)).toHaveLength(1);
   expect(wrapper.find(FieldText).props()).toMatchObject({ isInvalid: true });
 });
 
-test('should show errors on submission', () => {
+test('should show errors after submission', () => {
   const wrapper = mount(
     <Form onSubmit={() => Promise.resolve({ username: 'TAKEN_USERNAME' })}>
       {({ onSubmit }) => (
         <>
           <Field name="username" defaultValue="Joe Bloggs">
-            {({ fieldProps, submitError }) => (
+            {({ fieldProps, error }) => (
               <>
                 <FieldText {...fieldProps} />
-                {submitError && (
+                {error === 'TAKEN_USERNAME' && (
                   <ErrorMessage>
                     There is a problem with this field
                   </ErrorMessage>
@@ -81,4 +112,28 @@ test('should show errors on submission', () => {
     expect(wrapper.find(ErrorMessage)).toHaveLength(1);
     expect(wrapper.find(FieldText).props()).toMatchObject({ isInvalid: true });
   });
+});
+
+test('should communicate error when isRequired is set on field', () => {
+  const wrapper = mount(
+    <Form onSubmit={jest.fn()}>
+      {() => (
+        <Field name="username" defaultValue="" isRequired>
+          {({ fieldProps, error }) =>
+            console.log('error', error) || (
+              <>
+                <FieldText {...fieldProps} />
+                {error === 'REQUIRED' && (
+                  <ErrorMessage>This field is required</ErrorMessage>
+                )}
+              </>
+            )
+          }
+        </Field>
+      )}
+    </Form>,
+  );
+  touch(wrapper.find('input'));
+  expect(wrapper.find(ErrorMessage)).toHaveLength(1);
+  expect(wrapper.find(FieldText).props()).toMatchObject({ isInvalid: true });
 });

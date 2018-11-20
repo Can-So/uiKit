@@ -1,7 +1,7 @@
 // @flow
 
 // gets called with a sythetic event and pulls the relevent value of of it
-const translate = fn => e => {
+const translate = (fn: any => any) => (e: SyntheticEvent<> | any) => {
   if (e.target) {
     if (e.target.type === 'checkbox') {
       if (e.target.checked) {

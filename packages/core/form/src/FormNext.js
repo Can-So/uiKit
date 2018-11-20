@@ -1,5 +1,5 @@
 // @flow
-import React, { createContext, type Node, createRef } from 'react';
+import React, { createContext, type Node } from 'react';
 import { createForm, type FormApi } from 'final-form';
 import createDecorator from 'final-form-focus';
 
@@ -44,7 +44,9 @@ class Form extends React.Component<Props> {
     withFocusDecorator(this.form);
 
     this.fields.forEach(field => {
-      field.register(this.form);
+      if (this.form) {
+        field.register(this.form);
+      }
     });
     this.fields = [];
   }
@@ -53,9 +55,11 @@ class Form extends React.Component<Props> {
     this.fields = [...this.fields, field];
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    this.form.submit();
+    if (this.form) {
+      this.form.submit();
+    }
   };
 
   render() {
