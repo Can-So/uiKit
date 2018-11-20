@@ -1,0 +1,1 @@
+- Fix a bug which closed user does not full name returned from API and it caused card is not rendered
