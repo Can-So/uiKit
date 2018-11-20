@@ -1,1 +1,0 @@
-- Rename `withNavigationUI` HOC to `withNavigationUIController`
