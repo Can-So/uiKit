@@ -32,7 +32,7 @@ const getItems = (): NavigationRendererItemType<{
       },
       {
         // Custom component
-        type: 'LinkItem',
+        type: 'Item',
         id: 'projects',
         text: 'Projects',
         icon: 'FolderIcon',
