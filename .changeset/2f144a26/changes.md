@@ -1,1 +1,0 @@
-- FS-3206 add ability for consumer to disable picker and clearable
