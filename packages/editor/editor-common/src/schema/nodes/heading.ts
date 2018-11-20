@@ -1,5 +1,6 @@
 import { NodeSpec } from 'prosemirror-model';
-import { Inline } from './doc';
+import { Inline, MarksObject } from './doc';
+import { AlignmentMarkDefinition } from '..';
 
 /**
  * @name heading_node
@@ -18,6 +19,17 @@ export interface HeadingDefinition {
     level: number;
   };
 }
+
+export interface HeadingMarks extends HeadingDefinition {
+  marks?: Array<any>;
+}
+
+/**
+ * @name heading_with_alignment
+ * @stage 0
+ */
+export type HeadingWithAlignment = HeadingMarks &
+  MarksObject<AlignmentMarkDefinition>;
 
 export const heading: NodeSpec = {
   attrs: { level: { default: 1 } },

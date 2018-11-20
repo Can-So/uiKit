@@ -1,12 +1,24 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   This package contains a number of components to help highlight product changes to users.
   These components can be used together to implement various
   [First Impressions](https://atlassian.design/guidelines/product/first-impressions/first-impressions-overview)
   patterns.
+
+  ## Usage
+
+  ${code`import {
+  Modal,
+  Spotlight,
+  SpotlightCard,
+  SpotlightManager,
+  SpotlightTarget,
+  SpotlightTransition,
+  SpotlightPulse
+} from '@atlaskit/onboarding';`}
 
   ## Spotlight
 
@@ -23,6 +35,7 @@ export default md`
 
   ${(
     <Props
+      heading="Spotlight Props"
       props={require('!!extract-react-types-loader!../src/components/Spotlight')}
     />
   )}
@@ -42,6 +55,7 @@ export default md`
 
   ${(
     <Props
+      heading="SpotlightCard Props"
       props={require('!!extract-react-types-loader!../src/components/SpotlightCard')}
     />
   )}
@@ -62,6 +76,7 @@ export default md`
 
   ${(
     <Props
+      heading="Benefits Modal Props"
       props={require('!!extract-react-types-loader!../src/components/Modal')}
     />
   )}

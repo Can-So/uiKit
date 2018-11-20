@@ -1,5 +1,46 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.5.0
+- [minor] [6fb9918](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6fb9918):
+
+  - Fix strong bug when ending line finishes with two strong symbols
+
+## 2.4.6
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/editor-common@21.2.2
+  - @atlaskit/renderer@30.2.1
+  - @atlaskit/profilecard@6.0.0
+
+## 2.4.5
+- [patch] [3148c95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3148c95):
+
+  - add error and success color
+
+## 2.4.4
+- [patch] [01a92e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01a92e1):
+
+  - Title for panel and noformat changes
+
+## 2.4.3
+- [patch] [131e012](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/131e012):
+
+  - Port from Jira regex for dashes
+
+## 2.4.2
+- [patch] [171443f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/171443f):
+
+  - Re-wrtie table parser
+
+## 2.4.1
+- [patch] [930ca26](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/930ca26):
+
+  - Fixed issue with library importing from a path within the editor common package
+
+## 2.4.0
+- [minor] [8681fc0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8681fc0):
+
+  - Improve wikimarkup link handling with formatting and titles
+
 ## 2.3.6
 - [patch] [56007b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56007b3):
 

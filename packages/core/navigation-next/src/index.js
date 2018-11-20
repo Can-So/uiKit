@@ -58,6 +58,9 @@ export { default as GoToItem } from './components/connected/GoToItem';
 export {
   default as LayoutManagerWithViewController,
 } from './components/connected/LayoutManagerWithViewController';
+export {
+  default as AsyncLayoutManagerWithViewController,
+} from './components/connected/AsyncLayoutManagerWithViewController';
 export { default as SortableGroup } from './components/connected/SortableGroup';
 export { default as SortableItem } from './components/connected/SortableItem';
 export {
@@ -79,7 +82,10 @@ export {
 } from './view-controller';
 
 /** Renderer */
-export { default as ViewRenderer } from './renderer';
+export {
+  default as ViewRenderer,
+  TypedItemsRenderer as TypedViewRenderer,
+} from './renderer';
 
 /** Theme */
 export { dark, light, settings, modeGenerator, ThemeProvider } from './theme';
@@ -105,3 +111,28 @@ export type {
   WithGlobalThemeProps,
   GlobalThemeWrappedComp,
 } from './theme/types';
+
+export type {
+  NavigationRendererItemType,
+  LeafItemType,
+  BranchItemType,
+  BackItemType,
+  ContainerHeaderType,
+  DebugType,
+  GoToItemType,
+  GroupHeadingType,
+  ItemType,
+  SortableItemType,
+  SectionHeadingType,
+  SeparatorType,
+  SwitcherType,
+  WordmarkType,
+  GroupType,
+  HeaderSectionType,
+  MenuSectionType,
+  SectionType,
+  SortableContextType,
+  SortableGroupType,
+  InlineComponentType,
+  TypeShape as NavigationItemTypeShape,
+} from './renderer/types';

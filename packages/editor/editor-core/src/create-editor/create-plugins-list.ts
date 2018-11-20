@@ -44,6 +44,8 @@ import {
   floatingToolbarPlugin,
   statusPlugin,
   gridPlugin,
+  alignment,
+  editorDisabledPlugin,
 } from '../plugins';
 
 /**
@@ -61,6 +63,7 @@ export function getDefaultPluginsList(props: EditorProps = {}): EditorPlugin[] {
     widthPlugin,
     typeAheadPlugin,
     unsupportedContentPlugin,
+    editorDisabledPlugin,
   ];
 }
 
@@ -72,6 +75,10 @@ export default function createPluginsList(props: EditorProps): EditorPlugin[] {
 
   if (props.allowBreakout) {
     plugins.push(breakoutPlugin);
+  }
+
+  if (props.allowTextAlignment) {
+    plugins.push(alignment);
   }
 
   if (props.quickInsert) {

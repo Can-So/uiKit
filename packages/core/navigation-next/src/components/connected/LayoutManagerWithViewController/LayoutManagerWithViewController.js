@@ -1,23 +1,19 @@
 // @flow
 
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, type Node } from 'react';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
-import ViewRenderer from '../../../renderer';
 import { withNavigationUI } from '../../../ui-controller';
 import { withNavigationViewController } from '../../../view-controller';
 import LayoutManager from '../../presentational/LayoutManager';
-import SkeletonContainerView from '../../presentational/SkeletonContainerView';
 import type {
   LayoutManagerWithViewControllerProps,
   LayoutManagerWithViewControllerState,
 } from './types';
-import LayerInitialised from './LayerInitialised';
-import {
-  ProductNavigationTheme,
-  ContainerNavigationTheme,
-} from '../../presentational/LayoutManager/ContentNavigation/primitives';
-
+import ViewRenderer from '../../../renderer';
+import SkeletonContainerView from '../../presentational/SkeletonContainerView';
+import type { ActiveView } from '../../../view-controller/types';
+import LayerInitialised from '../../presentational/LayerInitialised';
 /* NOTE: experimental props use an underscore */
 /* eslint-disable camelcase */
 
@@ -46,25 +42,7 @@ class LayoutManagerWithViewControllerBase extends Component<
   };
 
   renderSkeleton = () => {
-    const { firstSkeletonToRender } = this.props;
-    let Wrapper;
-
-    if (firstSkeletonToRender === 'product' && !this.state.hasInitialised) {
-      Wrapper = ProductNavigationTheme;
-    } else if (
-      firstSkeletonToRender === 'container' &&
-      !this.state.hasInitialised
-    ) {
-      Wrapper = ContainerNavigationTheme;
-    } else {
-      Wrapper = Fragment;
-    }
-
-    return (
-      <Wrapper>
-        <SkeletonContainerView />
-      </Wrapper>
-    );
+    return <SkeletonContainerView type={this.props.firstSkeletonToRender} />;
   };
 
   renderContainerNavigation = () => {
@@ -138,7 +116,7 @@ class LayoutManagerWithViewControllerBase extends Component<
     return this.renderSkeleton();
   };
 
-  renderView(view) {
+  renderView(view: ActiveView): Node {
     const { customComponents } = this.props;
     return (
       <ViewRenderer customComponents={customComponents} items={view.data} />

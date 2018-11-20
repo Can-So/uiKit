@@ -12,7 +12,6 @@ import {
   p,
   a,
   insertText,
-  CardMockProvider,
 } from '@atlaskit/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
 
@@ -256,7 +255,7 @@ describe('card', () => {
 
     describe('changed document', () => {
       let promises: Promise<any>[] = [];
-      let provider: CardMockProvider;
+      let provider: CardProvider;
 
       beforeEach(() => {
         provider = new class implements CardProvider {

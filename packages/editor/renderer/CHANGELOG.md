@@ -1,5 +1,15 @@
 # @atlaskit/renderer
 
+## 30.2.1
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/editor-common@21.2.2
+  - @atlaskit/profilecard@6.0.0
+
+## 30.2.0
+- [minor] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
 ## 30.1.1
 - [patch] [b19b7bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b19b7bb):
 

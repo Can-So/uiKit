@@ -10,6 +10,7 @@ import {
   breakout,
   codeBlock,
   text,
+  alignment,
 } from '../../../builders';
 
 describe('Builders', () => {
@@ -61,6 +62,7 @@ describe('Builders', () => {
         p(emoji({ shortName: ':wtf:', text: ':wtf:' }), ' '),
       ),
     () => doc(breakout({ mode: 'wide' })(codeBlock({})(text('some code')))),
+    () => doc(alignment({ align: 'end' })(p('hello'))),
   ];
 
   nodes.forEach((node, idx) => {

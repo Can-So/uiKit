@@ -3,8 +3,7 @@
 import type { ComponentType, ElementRef, Node } from 'react';
 
 import type { WithNavigationUIControllerProps } from '../../../ui-controller/types';
-
-export type CollapseListener = (HTMLElement, boolean) => void;
+import type { CollapseListener } from '../ResizeTransition/types';
 
 export type CollapseToggleTooltipContent = (
   isCollapsed: boolean,

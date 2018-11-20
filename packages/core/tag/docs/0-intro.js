@@ -1,15 +1,23 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
+import SectionMessage from '@atlaskit/section-message';
 
 export default md`
   Tags are designed to be displayed within a [Tag Group](/components/tag-group).
   They can be rendered flat, as links, or with a close button.
 
-  > **Note:** Once a tag has been removed, there is nothing that you can pass
-  > to it to make it re-render the tag.
+  ${(
+    <SectionMessage>{md`
+      **Note:** Once a tag has been removed, there is nothing that you can pass
+      to it to make it re-render the tag.
+    `}</SectionMessage>
+  )}
+  
 
-  ## Examples
+  ## Usage
+
+  ${code`import Tag from '@atlaskit/tag';`}
 
   ${(
     <Example
@@ -29,5 +37,10 @@ export default md`
     />
   )}
 
-  ${<Props props={require('!!extract-react-types-loader!../src/Tag')} />}
+  ${(
+    <Props
+      heading="Tag Props"
+      props={require('!!extract-react-types-loader!../src/Tag')}
+    />
+  )}
 `;

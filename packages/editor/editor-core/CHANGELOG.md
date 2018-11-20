@@ -1,5 +1,80 @@
 # @atlaskit/editor-core
 
+## 88.2.11
+- [patch] [a706ffd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a706ffd):
+
+  ED-4427 Editor disabled state applies to floating toolbars and task decision checkboxes
+
+## 88.2.10
+- [patch] [368e858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/368e858):
+
+  - ED-5570 Fixed long URLs wrapping in editor panel
+
+## 88.2.9
+- [patch] [70a104dc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/70a104dc):
+
+  - ED-5802: fix merging rows when rowspan > 1 in neighbour columns
+
+## 88.2.8
+- [patch] [04abea3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04abea3):
+
+  - ED-5186: Always show scroll bar, to avoid page shift.
+
+## 88.2.7
+- [patch] [4e2a3b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e2a3b1):
+
+  - ED-5809 Fixes code mark getting removed from document
+
+## 88.2.6
+- [patch] [899b377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/899b377):
+
+  - ED-5750: fix selection for merged cells when its created by dragging mouse across table cells
+
+## 88.2.5
+- [patch] [4ad840a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4ad840a):
+
+  - Adds resize property to fix media without dimensions
+
+## 88.2.4
+- [patch] [a458d03](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a458d03):
+
+  - ED-5713: Quick insert aliases
+
+## 88.2.3
+- [patch] [8d30d62](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d30d62):
+
+  - ED-5774: add breakout for Columns
+
+## 88.2.2
+- [patch] [9a66a9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a66a9b):
+
+  - Add Confluence cards in Editor example.
+
+## 88.2.1
+- [patch] [16ff8d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/16ff8d2):
+
+  - Add jira card editor example.
+
+## 88.2.0
+- [minor] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
+## 88.1.14
+- [patch] [380928b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/380928b):
+
+  - ED-5293: fix merging cells
+
+## 88.1.13
+- [patch] [f9d1245](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f9d1245):
+
+  - Fixes pasting from Microsoft & Apple office products (ED-5694, ED-5575)
+
+## 88.1.12
+- [patch] [cc78d09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc78d09):
+
+  - ED-5196: For a block as first node in a document, up and left arrow should show a gap cursor
+
 ## 88.1.11
 - [patch] [4897ebf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4897ebf):
 

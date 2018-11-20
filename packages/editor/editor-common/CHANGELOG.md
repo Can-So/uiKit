@@ -1,5 +1,29 @@
 # @atlaskit/editor-common
 
+## 21.2.3
+- [patch] [d3bb11f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3bb11f):
+
+  - Fixing validator for alignment marks
+
+## 21.2.2
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/profilecard@6.0.0
+
+## 21.2.1
+- [patch] [c31aaf0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c31aaf0):
+
+  - Fixing the first paragraph for alignment
+
+## 21.2.0
+- [minor] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
+## 21.1.7
+- [patch] [380928b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/380928b):
+
+  - ED-5293: fix merging cells
+
 ## 21.1.6
 - [patch] [a1fb551](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1fb551):
 

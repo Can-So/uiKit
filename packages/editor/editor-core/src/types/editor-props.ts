@@ -144,7 +144,11 @@ export interface EditorProps {
   allowInlineAction?: boolean;
 
   // Temporary flag to enable layouts while it's under development
-  allowLayouts?: boolean;
+  allowLayouts?:
+    | boolean
+    | {
+        allowBreakout: boolean;
+      };
 
   // Enable status, if menuDisabled is passed then plugin is enabled by default
   allowStatus?:
@@ -154,6 +158,8 @@ export interface EditorProps {
       };
 
   allowDynamicTextSizing?: boolean;
+
+  allowTextAlignment?: boolean;
 
   // Set to enable the quick insert menu i.e. '/' key trigger.
   // You can also provide your own insert menu options that will be shown in addition to the enabled

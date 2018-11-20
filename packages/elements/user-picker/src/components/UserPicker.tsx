@@ -1,19 +1,16 @@
 import Select from '@atlaskit/select';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import {
   InputActionTypes,
-  LoadOptions,
-  OnChange,
-  OnInputChange,
-  OnPicker,
-  OnUser,
   User,
-  UserOption,
-  UserValue,
+  UserPickerProps,
+  UserPickerState,
 } from '../types';
 import { batchByKey } from './batch';
 import { getComponents } from './components';
+import { messages } from './i18n';
 import { getStyles } from './styles';
 import {
   extractUserValue,
@@ -22,47 +19,23 @@ import {
   usersToOptions,
 } from './utils';
 
-export type Props = {
-  users?: User[];
-  width?: number;
-  loadUsers?: LoadOptions;
-  onChange?: OnChange;
-  isMulti?: boolean;
-  search?: string;
-  anchor?: React.ComponentType<any>;
-  open?: boolean;
-  isLoading?: boolean;
-  onInputChange?: OnInputChange;
-  onSelection?: OnUser;
-  onFocus?: OnPicker;
-  onBlur?: OnPicker;
-  blurInputOnSelect?: boolean;
-  appearance?: 'normal' | 'compact';
-  subtle?: boolean;
-  defaultValue?: UserValue;
-  value?: UserValue;
-};
-
-export type State = {
-  users: User[];
-  value?: UserOption[];
-  resultVersion: number;
-  inflightRequest: number;
-  count: number;
-  hoveringClearIndicator: boolean;
-  menuIsOpen: boolean;
-};
-
-export class UserPicker extends React.PureComponent<Props, State> {
+export class UserPicker extends React.Component<
+  UserPickerProps,
+  UserPickerState
+> {
   static defaultProps = {
     width: 350,
     isMulti: false,
     appearance: 'normal',
     subtle: false,
+    isClearable: true,
   };
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    const derivedState: Partial<State> = {};
+  static getDerivedStateFromProps(
+    nextProps: UserPickerProps,
+    prevState: UserPickerState,
+  ) {
+    const derivedState: Partial<UserPickerState> = {};
     if (nextProps.open !== undefined) {
       derivedState.menuIsOpen = nextProps.open;
     }
@@ -186,6 +159,8 @@ export class UserPicker extends React.PureComponent<Props, State> {
     { action }: { action: InputActionTypes },
   ) => {
     const { onInputChange } = this.props;
+    // TODO FS-3184: If isClearable = false, have value persist unless
+    // another option is explicitly selected
     if (action === 'input-change') {
       if (onInputChange) {
         onInputChange(search);
@@ -198,7 +173,7 @@ export class UserPicker extends React.PureComponent<Props, State> {
     select.onInputChange(this.props.search, { action: 'input-change' });
   });
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
     // trigger onInputChange
     if (this.props.search !== prevProps.search) {
       this.triggerInputChange();
@@ -221,6 +196,9 @@ export class UserPicker extends React.PureComponent<Props, State> {
     this.setState({ hoveringClearIndicator });
   };
 
+  private configureNoOptionsMessage = (): string | undefined =>
+    this.props.noOptionsMessage;
+
   render() {
     const {
       width,
@@ -231,6 +209,9 @@ export class UserPicker extends React.PureComponent<Props, State> {
       isLoading,
       appearance,
       subtle,
+      placeholder,
+      isClearable,
+      isDisabled,
     } = this.props;
     const {
       users: usersFromState,
@@ -243,18 +224,15 @@ export class UserPicker extends React.PureComponent<Props, State> {
     const numValues: number = value ? value.length : 0;
     const hasValue = numValues > 0;
 
-    const options = getOptions(usersFromState, users) || [];
-    const hasSelectedAll: boolean = numValues === options.length && !isLoading;
-
     return (
       <Select
         value={value}
         ref={this.handleSelectRef}
         isMulti={isMulti}
-        options={options}
+        options={getOptions(usersFromState, users) || []}
         onChange={this.handleChange}
         styles={getStyles(width, hasValue)}
-        components={getComponents(isMulti, hasValue && !hasSelectedAll, anchor)}
+        components={getComponents(isMulti, anchor)}
         inputValue={search}
         menuIsOpen={menuIsOpen}
         onFocus={this.handleFocus}
@@ -262,17 +240,21 @@ export class UserPicker extends React.PureComponent<Props, State> {
         isLoading={count > 0 || isLoading}
         onInputChange={this.handleInputChange}
         menuPlacement="auto"
-        placeholder="Find a person..." // TODO i18n
+        placeholder={
+          placeholder || <FormattedMessage {...messages.placeholder} />
+        }
         classNamePrefix="fabric-user-picker"
         onClearIndicatorHover={this.handleClearIndicatorHover}
         hoveringClearIndicator={hoveringClearIndicator}
         appearance={isMulti ? 'compact' : appearance}
-        isClearable
+        isClearable={isClearable}
         subtle={isMulti ? false : subtle}
         blurInputOnSelect={!isMulti}
         closeMenuOnSelect={!isMulti}
+        noOptionsMessage={this.configureNoOptionsMessage}
         openMenuOnFocus
         onKeyDown={this.handleKeyDown}
+        isDisabled={isDisabled}
       />
     );
   }

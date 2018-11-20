@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
   Spinners are used for showing a system process of unknown length going on
@@ -11,7 +11,9 @@ export default md`
   The inverted spinner matches the dark spinner for display in non-dark
   contexts. In a dark context, the inverted spinner remains the same color.
 
-  ## Examples
+  ## Usage
+
+  ${code`import Spinner from '@atlaskit/spinner';`}
 
   ${(
     <Example
@@ -31,5 +33,10 @@ export default md`
     />
   )}
  
-  ${<Props props={require('!!extract-react-types-loader!../src/Spinner')} />}
+  ${(
+    <Props
+      heading="Spinner Props"
+      props={require('!!extract-react-types-loader!../src/Spinner')}
+    />
+  )}
 `;

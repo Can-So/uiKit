@@ -11,5 +11,12 @@ export function extractInlineViewPropsFromTask(
 
   props.icon = <Task16Icon label={json.provider ? json.provider.name : ''} />;
 
+  if (json.tag && json.tag.name) {
+    props.lozenge = {
+      appearance: 'success',
+      text: json.tag.name,
+    };
+  }
+
   return props;
 }

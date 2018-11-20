@@ -143,6 +143,7 @@ class MediaNode extends Component<
     return (
       <Card
         context={this.state.viewContext!}
+        resizeMode="full-fit"
         dimensions={cardDimensions}
         identifier={identifier}
         selectable={true}
