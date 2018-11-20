@@ -3,13 +3,14 @@ import React from 'react';
 import { md, Example } from '@atlaskit/docs';
 
 export default md`
-  Spinners are used for showing a system process of unknown length going on
-  that ends with the system displaying results to the user. The spinner
-  animates in, as well as animating out when \`isCompleting\` is
-  passed to it.
+Text Field provides a form input.
 
-  The inverted spinner matches the dark spinner for display in non-dark
-  contexts. In a dark context, the inverted spinner remains the same color.
+${code`
+import TextField from '@atlaskit/field-text';
+`}
+
+@atlaskit/textfield exports a default component, that is optionally controllable.
+To control the component, specify a value prop; to specify the defaultValue but leave the component uncontrolled specify a defaultValue prop.
 
   ## Examples
 

@@ -30,6 +30,7 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
+    "@atlaskit/build-utils": "^2.0.0",
     "@atlaskit/button": "^9.0.16",
     "@atlaskit/docs": "^5.0.6",
     "@atlaskit/form": "^4.0.14",

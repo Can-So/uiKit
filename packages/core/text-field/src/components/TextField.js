@@ -73,9 +73,10 @@ class TextField extends Component<TextFieldProps, State> {
       size,
       forwardedRef,
       theme,
-      // These props come from 'form field' bc backwards compat.
-      //  We don't need them tho.
-      createAnalyticsEvent,
+      // createAnalytics passed through from analytics-next
+      // we don't want to spread this onto our input
+      // $FlowFixMe
+      createAnalyticsEvent, // eslint-disable-line react/prop-types
       ...rest
     } = this.props;
 
