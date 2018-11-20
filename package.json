@@ -183,6 +183,7 @@
     "lodash.isequal": "^4.5.0",
     "mkdirp": "^0.5.1",
     "mocha": "^3.5.0",
+    "mockdate": "^2.0.2",
     "moment": "^2.22.2",
     "netlify-cli": "^2.1.1",
     "ngrok": "^2.2.24",
