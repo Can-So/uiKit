@@ -1,0 +1,1 @@
+- Replace "isActive" prop with new "status" prop and adding react-intl messages 
