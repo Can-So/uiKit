@@ -39,13 +39,9 @@ export default function getRelativeDateKey(
     return 'AFewMonths';
   }
 
-  if (diffInMonths >= 6 && diffInMonths <= 12) {
+  if (diffInMonths <= 12) {
     return 'SeveralMonths';
   }
 
-  if (diffInMonths > 12) {
-    return 'MoreThanAYear';
-  }
-
-  return null;
+  return 'MoreThanAYear';
 }
