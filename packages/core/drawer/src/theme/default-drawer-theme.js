@@ -1,14 +1,13 @@
 // @flow
-import React from 'react';
+import { itemThemeNamespace } from '@atlaskit/item';
+import { colors, themed } from '@atlaskit/theme';
+import chromatism from 'chromatism';
 import { DrawerTheme, Background, ItemTheme, ScrollBarTheme } from './types';
 import {
   gridSize,
   darkDrawerItemHoverBackground,
   darkDrawerItemActiveBackground,
 } from '../constants';
-import { itemThemeNamespace } from '@atlaskit/item';
-import { colors, themed } from '@atlaskit/theme';
-import chromatism from 'chromatism';
 
 // These themes are copied over from @atlaskit/global-navigation to preserve the theming
 // of search and starred drawers.
