@@ -21,9 +21,10 @@ const getSize = props => {
 export const IconWrapper = styled.span`
   ${getSize} color: ${p => p.primaryColor || 'currentColor'};
   display: inline-block;
-  fill: ${p => p.secondaryColor || colors.background}
+  fill: ${p => p.secondaryColor || colors.background};
   flex-shrink: 0;
   line-height: 1;
+
   > svg {
     ${getSize} max-height: 100%;
     max-width: 100%;
@@ -36,7 +37,9 @@ export const IconWrapper = styled.span`
    * rule) and then override it with currentColor for the color changes to be picked up.
    */
   stop {
-    stop-color: currentColor;};`;
+    stop-color: currentColor;
+  }
+`;
 
 type Props = {
   /** More performant than the glyph prop, but potentially dangerous if the SVG string hasn't
