@@ -1,0 +1,1 @@
+- FS-3179 expose noOptionsMessage for integrators

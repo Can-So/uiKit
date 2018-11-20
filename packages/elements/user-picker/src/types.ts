@@ -17,6 +17,7 @@ export type UserPickerProps = {
   subtle?: boolean;
   defaultValue?: UserValue;
   placeholder?: string;
+  noOptionsMessage?: string;
   value?: UserValue;
   /** Disable all interactions with the picker, putting it in a read-only state. */
   isDisabled?: boolean;
