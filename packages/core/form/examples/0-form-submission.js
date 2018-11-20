@@ -3,13 +3,14 @@ import React from 'react';
 import FieldText from '@atlaskit/field-text';
 import Button, { ButtonGroup } from '@atlaskit/button';
 import { Checkbox } from '@atlaskit/checkbox';
-
-import { FormHeader, FormFooter } from '../src';
-// TODO: import from src
-import { HelperMessage, ErrorMessage } from '../src/Messages';
-import Field from '../src/FieldNext';
-import CheckboxField from '../src/CheckboxField';
-import Form from '../src/FormNext';
+import Form, {
+  CheckboxField,
+  Field,
+  FormHeader,
+  FormFooter,
+  HelperMessage,
+  ErrorMessage,
+} from '../src';
 
 export default () => (
   <div

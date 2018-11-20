@@ -18,14 +18,6 @@ export const Label = styled.label`
   margin-top: 0;
 `;
 
-/**
- * The content that sits below the field
- */
-export const HelperText = styled.span`
-  ${typography.h200()} font-weight: normal;
-  margin-top: 8px;
-`;
-
 export const RequiredIndicator = styled.span`
   color: ${colors.red};
   padding-left: 2px;

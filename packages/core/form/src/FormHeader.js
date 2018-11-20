@@ -8,32 +8,24 @@ import FormHeaderWrapper, {
 
 type Props = {
   /** Header Title */
-  title?: string,
+  title?: Node,
   /** Header sub title or description */
-  description?: string,
+  description?: Node,
   /** Child contents will be rendered below the description */
   children?: Node,
-  /** Enables the Header to be sticky */
-  fixed?: boolean,
 };
 
 export default class FormHeader extends Component<Props, void> {
-  static defaultProps = {
-    title: '',
-    description: '',
-    fixed: false,
-  };
-
   render() {
-    const { title, description } = this.props;
+    const { title, description, children } = this.props;
 
     return (
-      <FormHeaderWrapper fixed={this.props.fixed}>
+      <FormHeaderWrapper>
         {title && <FormHeaderTitle>{title}</FormHeaderTitle>}
         {description && (
           <FormHeaderDescription>{description}</FormHeaderDescription>
         )}
-        <FormHeaderContent>{this.props.children}</FormHeaderContent>
+        <FormHeaderContent>{children}</FormHeaderContent>
       </FormHeaderWrapper>
     );
   }

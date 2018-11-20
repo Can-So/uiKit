@@ -8,13 +8,16 @@ import { RadioGroup } from '@atlaskit/radio';
 import { Checkbox } from '@atlaskit/checkbox';
 import Toggle from '@atlaskit/toggle';
 
-import { FormHeader, FormFooter } from '../src';
-import Field from '../src/FieldNext';
-import CheckboxField from '../src/CheckboxField';
-import Form from '../src/FormNext';
-import { HelperMessage, ErrorMessage } from '../src/Messages';
+import Form, {
+  CheckboxField,
+  Field,
+  FormHeader,
+  FormFooter,
+  HelperMessage,
+  ErrorMessage,
+} from '../src';
 
-export default class FielsExample extends Component<{}> {
+export default class FieldsExample extends Component<{}> {
   render() {
     return (
       <div

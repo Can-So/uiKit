@@ -3,8 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
 import FieldText from '@atlaskit/field-text';
-import Form from '../../FormNext';
-import Field from '../../FieldNext';
+import Form, { Field } from '../../../src';
 import { HelperMessage, ErrorMessage } from '../../Messages';
 
 const touch = wrapper => {

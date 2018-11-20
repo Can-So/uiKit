@@ -1,6 +1,6 @@
 // @flow
 import React, { type Node } from 'react';
-import Field from './FieldNext';
+import Field from './Field';
 
 type FieldProps = {
   isChecked: boolean,

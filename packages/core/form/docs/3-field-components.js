@@ -2,8 +2,8 @@
 import React from 'react';
 import { md, Example } from '@atlaskit/docs';
 import SectionMessage from '@atlaskit/section-message';
-import { fieldComponents } from '../src/data/fieldComponents';
-import ComponentsTable from '../src/utils/ComponentsTable';
+import { fieldComponents } from './data/fieldComponents';
+import ComponentsTable from './data/ComponentsTable';
 
 export default md`
 ${(

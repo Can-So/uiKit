@@ -6,7 +6,7 @@ import EditorWarningIcon from '@atlaskit/icon/glyph/editor/warning';
 import { colors } from '@atlaskit/theme';
 /* eslint-disable import/no-extraneous-dependencies */
 import Tooltip from '@atlaskit/tooltip';
-import { type FieldComponentsType } from '../data/fieldComponents';
+import { type FieldComponentsType } from './fieldComponents';
 
 type Props = {
   components: FieldComponentsType,
