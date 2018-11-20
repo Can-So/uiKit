@@ -2,7 +2,12 @@
 import { itemThemeNamespace } from '@atlaskit/item';
 import { colors, themed } from '@atlaskit/theme';
 import chromatism from 'chromatism';
-import { DrawerTheme, Background, ItemTheme, ScrollBarTheme } from './types';
+import {
+  type DrawerTheme,
+  type Background,
+  type ItemTheme,
+  type ScrollBarTheme,
+} from './types';
 import {
   gridSize,
   darkDrawerItemHoverBackground,

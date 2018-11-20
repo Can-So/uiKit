@@ -32,7 +32,7 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div css={{ padding: '2rem' }}>
+      <div style={{ padding: '2rem' }}>
         <ThemedDrawer
           onClose={this.closeDrawer}
           isOpen={this.state.isDrawerOpen}
