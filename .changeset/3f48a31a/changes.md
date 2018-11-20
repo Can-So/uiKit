@@ -1,1 +1,1 @@
-- Fix a bug which closed user does not full name returned from API and it caused card is not rendered
+- Fixed a bug where content is not rendered for cards of users whose accounts are closed

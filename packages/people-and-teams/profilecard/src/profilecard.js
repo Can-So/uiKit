@@ -284,7 +284,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
     const { customElevation } = this.props;
     let cardContent = null;
 
-    // closed user does not full name
+    // closed users have empty fullName field
     const isFetched = fullName || status === 'closed';
 
     if (this.props.hasError) {
