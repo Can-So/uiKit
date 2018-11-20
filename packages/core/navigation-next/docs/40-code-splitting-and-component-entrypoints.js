@@ -39,7 +39,7 @@ export default (
   ## Exposed entrypoints
 
   * \`atlaskit/navigation-next/LayoutManagerWithViewController\`
-  * \`atlaskit/navigation-next/ViewRenderer\`
+  * \`atlaskit/navigation-next/ItemsRenderer\`
   * \`atlaskit/navigation-next/SkeletonContainerView\`
   * \`atlaskit/navigation-next/NavigationProvider\`
   * \`atlaskit/navigation-next/AsyncLayoutManagerWithViewController\`

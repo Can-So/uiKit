@@ -9,7 +9,7 @@ import { NavigationProvider } from '../../../../../index';
 
 const GlobalNavigationComponent = () => null;
 const SkeletonContainerView = () => null;
-const ViewRenderer = () => null;
+const ItemsRenderer = () => null;
 
 describe('AsyncLayoutManagerWithViewController', () => {
   let wrapper;
@@ -42,7 +42,7 @@ describe('AsyncLayoutManagerWithViewController', () => {
             onExpandStart={onExpandStart}
             onExpandEnd={onExpandEnd}
             containerSkeleton={SkeletonContainerView}
-            viewRenderer={ViewRenderer}
+            itemsRenderer={ItemsRenderer}
             getRefs={getRefs}
           >
             <p>
@@ -108,7 +108,7 @@ describe('AsyncLayoutManagerWithViewController', () => {
               onExpandStart={onExpandStart}
               onExpandEnd={onExpandEnd}
               containerSkeleton={SkeletonContainerView}
-              viewRenderer={ViewRenderer}
+              itemsRenderer={ItemsRenderer}
               getRefs={getRefs}
             >
               <p>
