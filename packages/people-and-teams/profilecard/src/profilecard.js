@@ -279,13 +279,13 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   }
 
   render() {
-    const { fullName, status, nickname } = this.props;
+    const { fullName, status } = this.props;
 
     const { customElevation } = this.props;
     let cardContent = null;
 
     // closed user does not full name
-    const isFetched = fullName || status === 'closed' || nickname;
+    const isFetched = fullName || status === 'closed';
 
     if (this.props.hasError) {
       this.callAnalytics('profile-card.error', {});
