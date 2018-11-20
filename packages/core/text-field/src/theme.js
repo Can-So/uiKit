@@ -8,11 +8,51 @@ const disabled = { light: colors.N20, dark: colors.DN20 };
 // For validation red is the new 'yellow' which was { light: colors.Y300, dark: colors.Y300 }
 const red = { light: colors.R400, dark: colors.R400 };
 
-// TODO Think about how to `theming` newer/better.
 // The following do not yet have a darkmode 'map': N20A, N10
+const defaultBackgroundColor = { light: colors.N10, dark: colors.DN10 };
+const defaultBackgroundColorFocus = { light: colors.N0, dark: colors.DN10 };
+const defaultBackgroundColorHover = { light: colors.N30, dark: colors.DN30 };
+const defaultBorderColor = { light: colors.N40, dark: colors.DN40 };
+const defaultBorderColorFocus = { light: colors.B100, dark: colors.B75 };
+const transparent = { light: 'transparent', dark: 'transparent' };
+
+const disabledRules = {
+  light: {
+    backgroundColor: defaultBackgroundColor.light,
+    backgroundColorFocus: disabled.Light,
+    backgroundColorHover: disabled.light,
+    borderColor: colors.N40,
+    borderColorFocus: colors.B100,
+    textColor: colors.N70,
+  },
+  dark: {
+    backgroundColor: defaultBackgroundColor,
+    backgroundColorFocus: disabled,
+    backgroundColorHover: disabled,
+    borderColor: colors.DN40,
+    borderColorFocus: colors.B75,
+    textColor: colors.DN90,
+  },
+};
+const invalidRules = {
+  light: {
+    backgroundColor: defaultBackgroundColor,
+    backgroundColorFocus: colors.N0,
+    backgroundColorHover: colors.N30,
+    borderColor: red.light,
+    borderColorFocus: colors.B100,
+  },
+  dark: {
+    backgroundColor: defaultBackgroundColor,
+    backgroundColorFocus: colors.DN10,
+    backgroundColorHover: colors.DN30,
+    borderColor: red.dark,
+    borderColorFocus: colors.B75,
+  },
+};
 
 const backgroundColor = {
-  standard: { light: colors.N10, dark: colors.DN10 },
+  standard: defaultBackgroundColor,
   disabled: { light: colors.N10, dark: colors.DN10 },
   invalid: { light: colors.N10, dark: colors.DN10 },
   subtle: { light: 'transparent', dark: 'transparent' },
@@ -20,34 +60,34 @@ const backgroundColor = {
 };
 
 const backgroundColorFocus = {
-  standard: { light: colors.N0, dark: colors.DN10 },
+  standard: defaultBackgroundColorFocus,
   disabled,
-  invalid: { light: colors.N0, dark: colors.DN10 },
-  subtle: { light: colors.N0, dark: colors.DN10 },
-  none: { light: 'transparent', dark: 'transparent' },
+  invalid: defaultBackgroundColorFocus,
+  subtle: defaultBackgroundColorFocus,
+  none: transparent,
 };
 
 const backgroundColorHover = {
-  standard: { light: colors.N30, dark: colors.DN30 },
+  standard: defaultBackgroundColorHover,
   disabled,
-  invalid: { light: colors.N30, dark: colors.DN30 },
-  subtle: { light: colors.N30, dark: colors.DN30 },
-  none: { light: 'transparent', dark: 'transparent' },
+  invalid: defaultBackgroundColorHover,
+  subtle: defaultBackgroundColorHover,
+  none: transparent,
 };
 
 const borderColor = {
-  standard: { light: colors.N40, dark: colors.DN40 },
-  disabled: { light: colors.N40, dark: colors.DN40 },
+  standard: defaultBorderColor,
+  disabled: defaultBorderColor,
   invalid: red,
-  subtle: { light: 'transparent', dark: 'transparent' },
-  none: { light: 'transparent', dark: 'transparent' },
+  subtle: transparent,
+  none: transparent,
 };
 const borderColorFocus = {
-  standard: { light: colors.B100, dark: colors.B75 },
-  disabled: { light: colors.B100, dark: colors.B75 },
-  invalid: { light: colors.B100, dark: colors.B75 },
-  subtle: { light: colors.B100, dark: colors.B75 },
-  none: { light: 'transparent', dark: 'transparent' },
+  standard: defaultBorderColorFocus,
+  disabled: defaultBorderColorFocus,
+  invalid: defaultBorderColorFocus,
+  subtle: defaultBorderColorFocus,
+  none: transparent,
 };
 
 const textColor = { light: colors.N900, dark: colors.DN600 };
@@ -82,6 +122,8 @@ export default (props: ThemeProps): ThemeProps => {
       disabledTextColor: disabledTextColor[mode],
       placeholderTextColor: placeholderTextColor[mode],
       textColor: textColor[mode],
+      invalidRules: invalidRules[mode],
+      disabledRules: disabledRules[mode],
     }),
     mode,
     ...props,

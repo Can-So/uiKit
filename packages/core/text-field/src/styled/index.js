@@ -36,16 +36,23 @@ const getLineHeight = ({ isCompact }) => {
 const getDisabledState = props =>
   props.isDisabled &&
   css`
-    color: ${props.disabledTextColor};
+    color: ${props.disabledRules.textColor};
     pointer-events: none;
   `;
 
 const getHoverState = props => {
   if (props.isReadOnly || props.isFocused || props.none) return null;
+  let backgroundColorHover = props.backgroundColorHover;
+  if (props.isDisabled) {
+    backgroundColorHover = props.disabledRules.backgroundColorHover;
+  }
+  if (props.isInvalid) {
+    backgroundColorHover = props.invalidRules.backgroundColorHover;
+  }
 
   return css`
     &:hover {
-      background-color: ${props.backgroundColorHover};
+      background-color: ${backgroundColorHover};
     }
   `;
 };
@@ -56,9 +63,9 @@ const getBorderStyle = ({ appearance }) =>
 const getPlaceholderColor = ({
   isDisabled,
   placeholderTextColor,
-  disabledTextColor,
+  disabledRules,
 }) => {
-  if (isDisabled) return disabledTextColor;
+  if (isDisabled) return disabledRules.textColor;
   return placeholderTextColor;
 };
 
@@ -114,11 +121,52 @@ export const Wrapper = styled.div`
   max-width: ${getMaxWidth};
 `;
 
+const getBackgroundColor = ({
+  isFocused,
+  isDisabled,
+  isInvalid,
+  disabledRules,
+  invalidRules,
+  ...p
+}) => {
+  let backgroundColor = isFocused ? p.backgroundColorFocus : p.backgroundColor;
+  if (isDisabled) {
+    backgroundColor = isFocused
+      ? disabledRules.backgroundColorFocus
+      : disabledRules.backgroundColor;
+  } else if (isInvalid) {
+    backgroundColor = isFocused
+      ? invalidRules.backgroundColorFocus
+      : invalidRules.backgroundColor;
+  }
+  return backgroundColor;
+};
+
+const getBorderColor = ({
+  isFocused,
+  isDisabled,
+  isInvalid,
+  disabledRules,
+  invalidRules,
+  ...p
+}) => {
+  let borderColor = isFocused ? p.borderColorFocus : p.borderColor;
+  if (isDisabled) {
+    borderColor = isFocused
+      ? disabledRules.borderColorFocus
+      : disabledRules.borderColor;
+  } else if (isInvalid) {
+    borderColor = isFocused
+      ? invalidRules.borderColorFocus
+      : invalidRules.borderColor;
+  }
+  return borderColor;
+};
+
 export const InputWrapper = styled.div`
   align-items: center;
-  background-color: ${p =>
-    p.isFocused ? p.backgroundColorFocus : p.backgroundColor};
-  border-color: ${p => (p.isFocused ? p.borderColorFocus : p.borderColor)};
+  background-color: ${getBackgroundColor};
+  border-color: ${getBorderColor};
   border-radius: ${borderRadius};
   border-width: ${borderWidth}px;
   border-style: ${getBorderStyle};

@@ -1,6 +1,5 @@
 // @flow
 import type { ElementRef } from 'react';
-import DefaultInput from './components/Input';
 import type { ThemeProps } from './theme';
 
 export type InputProps = {

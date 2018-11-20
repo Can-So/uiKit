@@ -19,6 +19,7 @@ export default ({
   isCompact,
   isDisabled,
   isFocused,
+  isInvalid,
   isMonospaced,
   isReadOnly,
   isRequired,
@@ -34,6 +35,7 @@ export default ({
     isMonospaced={isMonospaced}
     isReadOnly={isReadOnly}
     isRequired={isRequired}
+    isInvalid={isInvalid}
   >
     <input
       ref={forwardedRef}

@@ -41,42 +41,34 @@ export default class TextFieldExample extends Component<Props, State> {
 
     return (
       <div>
-        <Field label="Event handlers">
-          <TextField
-            onChange={this.handleOnChange}
-            onBlur={this.handleOnBlur}
-            onFocus={this.handleOnFocus}
-          />
-        </Field>
+        <label>Event Handlers</label>
+        <TextField
+          onChange={this.handleOnChange}
+          onBlur={this.handleOnBlur}
+          onFocus={this.handleOnFocus}
+        />
         <div style={eventResultStyle}>{eventResult}</div>
 
-        <Field label="Default value">
-          <TextField defaultValue="candy" />
-        </Field>
+        <label>Default Value</label>
+        <TextField defaultValue="candy" />
 
-        <Field label="Disabled">
-          <TextField isDisabled defaultValue="can't touch this..." />
-        </Field>
+        <label>Disabled</label>
+        <TextField isDisabled defaultValue="can't touch this..." />
 
-        <Field label="Required" isRequired>
-          <TextField isRequired />
-        </Field>
+        <label>Required</label>
+        <TextField isRequired />
 
-        <Field label="Invalid">
-          <TextField isInvalid />
-        </Field>
+        <label>Invalid</label>
+        <TextField isInvalid />
 
-        <Field label="Placeholder">
-          <TextField placeholder="Click here to input..." />
-        </Field>
+        <label>Placeholder</label>
+        <TextField placeholder="Click here to input..." />
 
-        <Field label="Autofocus">
-          <TextField autoFocus />
-        </Field>
+        <label>Auto Focus</label>
+        <TextField autoFocus />
 
-        <Field label="Spell check">
-          <TextField spellCheck />
-        </Field>
+        <label>Spell Check</label>
+        <TextField spellCheck />
       </div>
     );
   }

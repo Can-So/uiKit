@@ -62,9 +62,8 @@ class TextField extends Component<TextFieldProps, State> {
 
   setInputRef = (input: ?HTMLInputElement) => {
     this.input = input;
-    // $FlowFixMe - Cannot call `this.props.innerRef` because undefined [1] is not a function
-    if (this.props.innerRef) {
-      this.props.innerRef(input);
+    if (this.props.forwardedRef) {
+      this.props.forwardedRef(input);
     }
   };
 
@@ -73,11 +72,10 @@ class TextField extends Component<TextFieldProps, State> {
     const {
       size,
       forwardedRef,
+      theme,
       // These props come from 'form field' bc backwards compat.
       //  We don't need them tho.
-      isInvalid,
       createAnalyticsEvent,
-      theme,
       ...rest
     } = this.props;
 

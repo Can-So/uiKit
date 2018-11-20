@@ -7,33 +7,26 @@ import TextField from '../src';
 export default function() {
   return (
     <div>
-      <Field label="xsmall">
-        <TextField size="xsmall" />
-      </Field>
+      <label>xsmall</label>
+      <TextField size="xsmall" />
 
-      <Field label="small">
-        <TextField size="small" />
-      </Field>
+      <label>small</label>
+      <TextField size="small" />
 
-      <Field label="medium">
-        <TextField size="medium" />
-      </Field>
+      <label>medium</label>
+      <TextField size="medium" />
 
-      <Field label="large">
-        <TextField size="large" />
-      </Field>
+      <label>large</label>
+      <TextField size="large" />
 
-      <Field label="xlarge">
-        <TextField size="xlarge" />
-      </Field>
+      <label>xlarge</label>
+      <TextField size="xlarge" />
 
-      <Field label="custom width (eg, 546)">
-        <TextField size="546" />
-      </Field>
+      <label>custom width (eg, 546)</label>
+      <TextField size="546" />
 
-      <Field label="default (100%)">
-        <TextField />
-      </Field>
+      <label>default (100%)</label>
+      <TextField />
     </div>
   );
 }
