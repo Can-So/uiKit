@@ -1,1 +1,0 @@
-- Fixing validator for alignment marks

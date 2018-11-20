@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.1.5
+- [patch] [d3bb11f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3bb11f):
+
+  - Fixing validator for alignment marks
+
 ## 5.1.4
 - [patch] [4e2a3b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e2a3b1):
 
