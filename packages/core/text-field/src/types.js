@@ -14,6 +14,8 @@ export type InputProps = {
   isDisabled?: boolean,
   /** Sets styling to indicate that the input is focused. */
   isFocused?: boolean,
+  /** Sets styling to indicate that the input is invalid */
+  isInvalid?: boolean,
   /** Sets content text value to monospace */
   isMonospaced?: boolean,
   /** If true, prevents the value of the input from being edited. */
@@ -33,6 +35,20 @@ export type TextFieldProps = {
   appearance?: 'standard' | 'none' | 'subtle',
   /** Sets a default value as input value */
   defaultValue?: string,
+  /** Set whether the fields should expand to fill available horizontal space. */
+  isCompact?: boolean,
+  /** Sets the field as uneditable, with a changed hover state. */
+  isDisabled?: boolean,
+  /** Sets styling to indicate that the input is focused. */
+  isFocused?: boolean,
+  /** Sets styling to indicate that the input is invalid */
+  isInvalid?: boolean,
+  /** Sets content text value to monospace */
+  isMonospaced?: boolean,
+  /** If true, prevents the value of the input from being edited. */
+  isReadOnly?: boolean,
+  /** Set required for form that the field is part of. */
+  isRequired?: boolean,
   /** Handler to be called when the input loses focus. */
   onBlur?: (e: SyntheticEvent<>) => mixed,
   /** Handler to be called when the input changes. */
@@ -46,8 +62,4 @@ export type TextFieldProps = {
   /** Forwarded ref */
   forwardedRef: ElementRef<*>,
   theme: ThemeProps => ThemeProps,
-
-  /** Redundant types */
-  isInvalid?: boolean,
-  createAnalyticsEvent?: (e: SyntheticEvent<>) => mixed,
 };
