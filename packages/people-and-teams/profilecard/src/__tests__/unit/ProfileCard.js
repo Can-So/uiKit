@@ -15,7 +15,7 @@ describe('Profilecard', () => {
     fullName: 'full name test',
     status: 'active',
     nickname: 'jscrazy',
-    orgName: 'Atlassian',
+    companyName: 'Atlassian',
   };
 
   const TODAY = new Date(2018, 10, 19, 17, 30, 0, 0);

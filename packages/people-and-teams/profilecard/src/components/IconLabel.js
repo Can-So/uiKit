@@ -18,7 +18,7 @@ const icons = {
   time: IconRecent,
   mention: IconMention,
   email: IconEmail,
-  org: OfficeBuildingIcon,
+  companyName: OfficeBuildingIcon,
   available: () => <Presence presence="online" borderColor="transparent" />,
   unavailable: () => <Presence presence="offline" borderColor="transparent" />,
   busy: () => <Presence presence="busy" borderColor="transparent" />,

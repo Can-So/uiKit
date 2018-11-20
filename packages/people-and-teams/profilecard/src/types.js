@@ -33,7 +33,7 @@ export type ProfilecardProps = {
   nickname?: string,
   email?: string,
   location?: string,
-  orgName?: string,
+  companyName?: string,
   timestring?: string,
   presence?: PresenceTypes,
   actions?: ProfileCardAction[],

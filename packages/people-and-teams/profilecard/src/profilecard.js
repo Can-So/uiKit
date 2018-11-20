@@ -130,7 +130,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
       location,
       email,
       timestring,
-      orgName,
+      companyName,
     } = this.props;
 
     const validPresence = presences[presence || 'none'];
@@ -145,14 +145,14 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
         <IconLabel icon="email">{email}</IconLabel>
         <IconLabel icon="mention">{nickname && `@${nickname}`}</IconLabel>
         <IconLabel icon="time">{timestring}</IconLabel>
-        <IconLabel icon="org">{orgName}</IconLabel>
+        <IconLabel icon="companyName">{companyName}</IconLabel>
         <IconLabel icon="location">{location}</IconLabel>
       </DetailsGroup>
     );
   }
 
   renderCardDetailsForDisabledAccount() {
-    const { nickname, status, orgName } = this.props;
+    const { nickname, status, companyName } = this.props;
 
     return (
       <DetailsGroup>
@@ -176,7 +176,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
         {status === 'inactive' && (
           <>
             <IconLabel icon="mention">{nickname && `@${nickname}`}</IconLabel>
-            <IconLabel icon="org">{orgName}</IconLabel>
+            <IconLabel icon="companyName">{companyName}</IconLabel>
           </>
         )}
       </DetailsGroup>

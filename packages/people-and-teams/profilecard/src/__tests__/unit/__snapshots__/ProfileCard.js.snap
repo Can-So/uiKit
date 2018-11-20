@@ -38,7 +38,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
         <styled.div>
           <p>
             <FormattedMessage
-              defaultMessage="You can no longer collaborate with this person. "
+              defaultMessage="You can no longer collaborate with this person."
               description="A first sentence of a long text explains this user is inactive/closed"
               id="pt.profile-card.general.msg.disabled.user"
               values={Object {}}
@@ -97,7 +97,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
         <styled.div>
           <p>
             <FormattedMessage
-              defaultMessage="You can no longer collaborate with this person. "
+              defaultMessage="You can no longer collaborate with this person."
               description="A first sentence of a long text explains this user is inactive/closed"
               id="pt.profile-card.general.msg.disabled.user"
               values={Object {}}
@@ -155,7 +155,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
         <styled.div>
           <p>
             <FormattedMessage
-              defaultMessage="You can no longer collaborate with this person. "
+              defaultMessage="You can no longer collaborate with this person."
               description="A first sentence of a long text explains this user is inactive/closed"
               id="pt.profile-card.general.msg.disabled.user"
               values={Object {}}
@@ -176,7 +176,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             @jscrazy
           </IconLabel>
           <IconLabel
-            icon="org"
+            icon="companyName"
           >
             Atlassian
           </IconLabel>
@@ -225,7 +225,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
         <styled.div>
           <p>
             <FormattedMessage
-              defaultMessage="You can no longer collaborate with this person. "
+              defaultMessage="You can no longer collaborate with this person."
               description="A first sentence of a long text explains this user is inactive/closed"
               id="pt.profile-card.general.msg.disabled.user"
               values={Object {}}
@@ -246,7 +246,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             @jscrazy
           </IconLabel>
           <IconLabel
-            icon="org"
+            icon="companyName"
           >
             Atlassian
           </IconLabel>

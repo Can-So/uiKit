@@ -10,7 +10,7 @@ const messages = defineMessages({
 
   generalDescMsgForDisabledUser: {
     id: 'pt.profile-card.general.msg.disabled.user',
-    defaultMessage: 'You can no longer collaborate with this person. ',
+    defaultMessage: 'You can no longer collaborate with this person.',
     description:
       'A first sentence of a long text explains this user is inactive/closed',
   },

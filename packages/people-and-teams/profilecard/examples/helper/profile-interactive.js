@@ -47,7 +47,7 @@ type State = {
   presence: PresenceTypes,
   fullName: string,
   nickname: string,
-  orgName: string,
+  companyName: string,
   meta: string,
   location: string,
   timeString: string,
@@ -83,7 +83,7 @@ export default class ProfilecardInteractive extends Component<Props, State> {
     nickname: 'natalie',
     meta: 'Senior Developer',
     location: 'Sydney, Australia',
-    orgName: 'Atlassian',
+    companyName: 'Atlassian',
     timeString: getTimeString(),
     statusModifiedDate: undefined,
     statusModifiedDateFieldName: 'noDate',
@@ -98,7 +98,7 @@ export default class ProfilecardInteractive extends Component<Props, State> {
     hasAvatar: true,
     hasMeta: true,
     hasLocation: true,
-    hasOrgName: true,
+    hasCompanyName: true,
     hasTime: true,
     hasLongName: false,
     hasLongRole: false,
@@ -273,7 +273,9 @@ export default class ProfilecardInteractive extends Component<Props, State> {
                   : this.state.fullName
               }
               location={this.state.hasLocation ? this.state.location : ''}
-              orgName={this.state.hasOrgName ? this.state.orgName : ''}
+              companyName={
+                this.state.hasCompanyName ? this.state.companyName : ''
+              }
               meta={this.state.hasMeta ? meta : ''}
               nickname={this.state.nickname}
               presence={this.state.presence}
@@ -296,7 +298,7 @@ export default class ProfilecardInteractive extends Component<Props, State> {
               <li>{this.createCheckboxBooleanAttribute('hasNoActions')}</li>
               <li>{this.createCheckboxBooleanAttribute('hasMeta')}</li>
               <li>{this.createCheckboxBooleanAttribute('hasLocation')}</li>
-              <li>{this.createCheckboxBooleanAttribute('hasOrgName')}</li>
+              <li>{this.createCheckboxBooleanAttribute('hasCompanyName')}</li>
               <li>{this.createCheckboxBooleanAttribute('hasTime')}</li>
             </ul>
 
