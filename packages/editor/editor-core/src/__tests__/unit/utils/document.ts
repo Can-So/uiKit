@@ -1,5 +1,4 @@
 import { name } from '../../../../package.json';
-import { Node } from 'prosemirror-model';
 import {
   doc,
   p,
