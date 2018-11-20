@@ -9,6 +9,8 @@ export default class Example extends React.Component<{}> {
         users={exampleUsers.slice(0, 2)}
         isMulti
         onChange={console.log}
+        noOptionsMessage="Custom no options"
+        placeholder="Custom placeholder"
       />
     );
   }

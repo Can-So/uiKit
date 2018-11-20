@@ -1,0 +1,1 @@
+- Remove deprecated `key` prop usage for GlobalNav primary and secondary items

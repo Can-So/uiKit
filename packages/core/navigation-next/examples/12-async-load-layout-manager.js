@@ -23,19 +23,20 @@ import {
  */
 const globalNavPrimaryItems = [
   {
-    key: 'jira',
+    id: 'jira',
     icon: ({ label }: { label: string }) => (
       <JiraIcon size="medium" label={label} />
     ),
     label: 'Jira',
   },
-  { key: 'search', icon: SearchIcon, label: 'Search' },
-  { key: 'create', icon: AddIcon, label: 'Add' },
+  { id: 'search', icon: SearchIcon, label: 'Search' },
+  { id: 'create', icon: AddIcon, label: 'Add' },
 ];
 
 const globalNavSecondaryItems = [
-  { icon: QuestionCircleIcon, label: 'Help', size: 'small' },
+  { id: 'icon', icon: QuestionCircleIcon, label: 'Help', size: 'small' },
   {
+    id: 'avatar',
     icon: () => (
       <Avatar
         borderColor="transparent"

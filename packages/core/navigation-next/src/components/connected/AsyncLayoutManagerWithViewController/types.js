@@ -19,8 +19,8 @@ export type AsyncLayoutManagerWithViewControllerProps = {|
   firstSkeletonToRender?: 'product' | 'container',
   getRefs?: GetRefs,
   globalNavigation: ComponentType<{}>,
+  itemsRenderer: ComponentType<*>,
   view: ?ActiveView,
-  viewRenderer: ComponentType<*>,
 |};
 
 export type AsyncLayoutManagerWithViewControllerState = {

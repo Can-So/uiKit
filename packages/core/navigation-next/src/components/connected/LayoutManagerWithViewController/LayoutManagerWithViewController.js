@@ -9,13 +9,13 @@ import React, {
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
 import { ViewControllerSubscriber } from '../../../view-controller';
+import ItemsRenderer from '../../../renderer';
 import { withNavigationUIController } from '../../../ui-controller';
 import LayoutManager from '../../presentational/LayoutManager';
 import type {
   LayoutManagerWithViewControllerProps,
   LayoutManagerWithViewControllerState,
 } from './types';
-import ViewRenderer from '../../../renderer';
 import SkeletonContainerView from '../../presentational/SkeletonContainerView';
 import type { ActiveView } from '../../../view-controller/types';
 import LayerInitialised from '../../presentational/LayerInitialised';
@@ -138,7 +138,7 @@ class LayoutManagerWithViewControllerBase extends Component<
   renderView(view: ActiveView): Node {
     const { customComponents } = this.props;
     return (
-      <ViewRenderer customComponents={customComponents} items={view.data} />
+      <ItemsRenderer customComponents={customComponents} items={view.data} />
     );
   }
 

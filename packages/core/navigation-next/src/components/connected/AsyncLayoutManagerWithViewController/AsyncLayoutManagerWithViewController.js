@@ -135,9 +135,9 @@ class LayoutManagerWithViewControllerBase extends Component<
   };
 
   renderView(view: ActiveView): Node {
-    const { customComponents, viewRenderer: ViewRenderer } = this.props;
+    const { customComponents, itemsRenderer: ItemsRenderer } = this.props;
     return (
-      <ViewRenderer customComponents={customComponents} items={view.data} />
+      <ItemsRenderer customComponents={customComponents} items={view.data} />
     );
   }
 
