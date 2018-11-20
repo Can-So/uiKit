@@ -26,12 +26,12 @@ describe('Range', () => {
       const input = range.find('input');
       expect(input.props().min).toBe(0);
       expect(input.props().max).toBe(100);
-      expect(input.props().step).toBe(0.1);
+      expect(input.props().step).toBe(1);
     });
 
     it('should input with defined value', () => {
       const input = range.find('input');
-      expect(input.props().value).toBe('20.12');
+      expect(input.props().value).toBe(20.12);
     });
 
     it('should not be disabled by default', () => {
@@ -66,7 +66,7 @@ describe('Range', () => {
     it('should change input value when prop is changed', () => {
       range.setProps({ value: 15 });
       const input = range.find('input');
-      expect(input.props().value).toBe('15');
+      expect(input.props().value).toBe(15);
     });
 
     it('should be disabled if isDisabled prop is truthy', () => {
