@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.10
+- [patch] [368e858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/368e858):
+
+  - ED-5570 Fixed long URLs wrapping in editor panel
+
 ## 88.2.9
 - [patch] [70a104dc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/70a104dc):
 
