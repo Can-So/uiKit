@@ -6,11 +6,9 @@ export default class Example extends React.Component<{}> {
   render() {
     return (
       <UserPicker
-        users={exampleUsers.slice(0, 2)}
-        isMulti
-        onChange={console.log}
-        noOptionsMessage="Custom no options"
-        placeholder="Custom placeholder"
+        users={exampleUsers}
+        isDisabled={true}
+        value={exampleUsers[0]}
       />
     );
   }

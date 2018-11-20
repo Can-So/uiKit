@@ -29,6 +29,7 @@ type State = {
   packageId: string,
   groupId: string,
   exampleId: string,
+  examplesPath: ?string,
 };
 
 type ExampleLoaderProps = {
@@ -40,16 +41,18 @@ export default class ExamplesIFrame extends Component<{}, State> {
     packageId: '',
     groupId: '',
     exampleId: '',
+    examplesPath: undefined,
   };
   componentWillMount() {
     if (window) {
-      const { packageId, groupId, exampleId } = qs.parse(
+      const { packageId, groupId, exampleId, examplesPath } = qs.parse(
         window.location.search,
       );
       this.setState({
         packageId,
         groupId,
         exampleId,
+        examplesPath,
       });
     }
   }
@@ -70,17 +73,14 @@ export default class ExamplesIFrame extends Component<{}, State> {
   }
 
   render() {
-    const { examples, packageId, exampleId } = packageResolver(
+    const { example, packageId, exampleId } = packageResolver(
       this.state.groupId,
       this.state.packageId,
       this.state.exampleId,
+      this.state.examplesPath,
     );
-    if (examples && exampleId) {
-      return (
-        <ExampleLoader
-          example={fs.getById(fs.getFiles(examples.children), exampleId)}
-        />
-      );
+    if (example && exampleId) {
+      return <ExampleLoader example={example} />;
     }
 
     return (

@@ -158,7 +158,9 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               }}
               allowRule={true}
               allowDate={true}
-              allowLayouts={true}
+              allowLayouts={{
+                allowBreakout: true,
+              }}
               allowGapCursor={true}
               allowTextAlignment={true}
               allowTemplatePlaceholders={{ allowInserting: true }}

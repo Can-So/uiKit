@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { LayoutManager, NavigationProvider } from '../src';
+import { LayoutManager, NavigationProvider } from '../../../src';
 
 export default () => (
   <NavigationProvider>
