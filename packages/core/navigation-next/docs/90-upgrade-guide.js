@@ -1,6 +1,5 @@
 // @flow
 
-import React from 'react';
 import { code, md } from '@atlaskit/docs';
 
 export default md`
