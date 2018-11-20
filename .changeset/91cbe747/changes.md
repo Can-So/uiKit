@@ -1,1 +1,0 @@
-- FS-3180 use default remove icon for ClearIndicator
