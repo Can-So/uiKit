@@ -12,10 +12,6 @@ const macroKeywordTokenMap = {
   '{loremipsum': TokenType.LOREM_MACRO,
 };
 
-export enum Keyword {
-  STRONG = '*',
-}
-
 /**
  * The order of this mapping determind which keyword
  * will be checked first, so it matters.
@@ -34,7 +30,7 @@ const keywordTokenMap = {
   '--': TokenType.DOUBLE_DASH_SYMBOL,
   '-': TokenType.DELETED,
   '+': TokenType.INSERTED,
-  [Keyword.STRONG]: TokenType.STRONG,
+  '*': TokenType.STRONG,
   '^': TokenType.SUPERSCRIPT,
   '~': TokenType.SUBSCRIPT,
   _: TokenType.EMPHASIS,

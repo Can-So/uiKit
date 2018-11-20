@@ -2,7 +2,7 @@ import { Schema } from 'prosemirror-model';
 import { Token, TokenType } from './';
 import { linkFormat } from './links/link-format';
 import { parseNewlineOnly } from './whitespace';
-import { parseMacroKeyword, Keyword } from './keyword';
+import { parseMacroKeyword } from './keyword';
 import { parseToken } from '.';
 
 export interface FormatterOption {
@@ -90,10 +90,12 @@ export function commonFormatter(
       }
       case processState.END: {
         index += closingSymbolLength;
+
         // empty formatter mark is treated as normal text
         if (buffer.length === 0) {
           return fallback(input, position, openingSymbolLength);
         }
+
         /**
          * If the closing symbol is followed by a alphanumeric, it's
          * not a valid formatter, and we keep looking for
@@ -102,32 +104,19 @@ export function commonFormatter(
         if (index < input.length) {
           const charAfterEnd = input.charAt(index);
 
-          if (opt.closing === Keyword.STRONG) {
-            if (
-              Keyword.STRONG === twoChar.charAt(0) &&
-              Keyword.STRONG === twoChar.charAt(1)
-            ) {
-              index += 2;
-              buffer += charsMatchClosingSymbol;
-              continue;
-            }
-          }
-
           if (/[a-zA-Z0-9]|[^\u0000-\u007F]/.test(charAfterEnd)) {
             buffer += charsMatchClosingSymbol;
             state = processState.BUFFER;
             continue;
           }
         }
+
         /**
          * If the closing symbol has an empty space before it,
-         * it's not a valid formatter, and we keep looking for
-         * next valid closing formatter
+         * it's not a valid formatter
          */
         if (buffer.endsWith(' ')) {
-          buffer += charsMatchClosingSymbol;
-          state = processState.BUFFER;
-          continue;
+          return fallback(input, position, openingSymbolLength);
         }
 
         return opt.rawContentProcessor(buffer, index - position);
