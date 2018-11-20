@@ -1,0 +1,1 @@
+- Remove onClick props as icon is only a presentational placeholder. Please wrap icon into a Button or a Link component.
