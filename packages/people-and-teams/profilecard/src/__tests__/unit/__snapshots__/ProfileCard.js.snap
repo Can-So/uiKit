@@ -30,7 +30,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             <FormattedMessage
               defaultMessage="Account deleted"
               description="A text in a grey lozenge shows that this user is closed/deleted"
-              id="pt.profile.card.closed.account"
+              id="pt.profile-card.closed.account"
               values={Object {}}
             />
           </Lozenge>
@@ -40,14 +40,14 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             <FormattedMessage
               defaultMessage="You can no longer collaborate with this person. "
               description="A first sentence of a long text explains this user is inactive/closed"
-              id="pt.profile.card.general.msg.disabled.user"
+              id="pt.profile-card.general.msg.disabled.user"
               values={Object {}}
             />
              
             <FormattedMessage
               defaultMessage="Their account has been deleted."
               description="A long text explains this user is closed when we do not know the date of starting to close"
-              id="pt.profile.card.closed.account.no.date"
+              id="pt.profile-card.closed.account.no.date"
               values={Object {}}
             />
           </p>
@@ -89,7 +89,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             <FormattedMessage
               defaultMessage="Account deleted"
               description="A text in a grey lozenge shows that this user is closed/deleted"
-              id="pt.profile.card.closed.account"
+              id="pt.profile-card.closed.account"
               values={Object {}}
             />
           </Lozenge>
@@ -99,14 +99,14 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             <FormattedMessage
               defaultMessage="You can no longer collaborate with this person. "
               description="A first sentence of a long text explains this user is inactive/closed"
-              id="pt.profile.card.general.msg.disabled.user"
+              id="pt.profile-card.general.msg.disabled.user"
               values={Object {}}
             />
              
             <FormattedMessage
               defaultMessage="Their account has been deleted."
               description="A long text explains this user is closed when we do not know the date of starting to close"
-              id="pt.profile.card.closed.account.no.date"
+              id="pt.profile-card.closed.account.no.date"
               values={Object {}}
             />
           </p>
@@ -147,7 +147,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             <FormattedMessage
               defaultMessage="Account deactivated"
               description="A text in a grey lozenge shows that this user is inactive"
-              id="pt.profile.card.inactive.account"
+              id="pt.profile-card.inactive.account"
               values={Object {}}
             />
           </Lozenge>
@@ -157,14 +157,14 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             <FormattedMessage
               defaultMessage="You can no longer collaborate with this person. "
               description="A first sentence of a long text explains this user is inactive/closed"
-              id="pt.profile.card.general.msg.disabled.user"
+              id="pt.profile-card.general.msg.disabled.user"
               values={Object {}}
             />
              
             <FormattedMessage
               defaultMessage="Their account has been deactivated."
               description="A long text explains this user is inactive when we do not know the date of starting to deactivate"
-              id="pt.profile.card.inactive.account.no.date"
+              id="pt.profile-card.inactive.account.no.date"
               values={Object {}}
             />
           </p>
@@ -217,7 +217,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             <FormattedMessage
               defaultMessage="Account deactivated"
               description="A text in a grey lozenge shows that this user is inactive"
-              id="pt.profile.card.inactive.account"
+              id="pt.profile-card.inactive.account"
               values={Object {}}
             />
           </Lozenge>
@@ -227,14 +227,14 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             <FormattedMessage
               defaultMessage="You can no longer collaborate with this person. "
               description="A first sentence of a long text explains this user is inactive/closed"
-              id="pt.profile.card.general.msg.disabled.user"
+              id="pt.profile-card.general.msg.disabled.user"
               values={Object {}}
             />
              
             <FormattedMessage
               defaultMessage="Their account has been deactivated."
               description="A long text explains this user is inactive when we do not know the date of starting to deactivate"
-              id="pt.profile.card.inactive.account.no.date"
+              id="pt.profile-card.inactive.account.no.date"
               values={Object {}}
             />
           </p>

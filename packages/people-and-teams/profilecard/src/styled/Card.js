@@ -1,7 +1,7 @@
 // @flow
 import styled from 'styled-components';
 import { akBorderRadius } from '@atlaskit/util-shared-styles';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize, math, fontSizeSmall } from '@atlaskit/theme';
 
 import {
   headerBgColor,
@@ -57,10 +57,10 @@ export const DetailsGroup = styled.div`
 `;
 
 export const DisabledInfo = styled.div`
-  font-size: ${math.multiply(gridSize, 1.5)}px;
+  font-size: ${fontSizeSmall}px;
   color: ${labelTextColor};
   margin: ${math.multiply(gridSize, 1.5)}px 0 0 0;
-  line-height: ${math.divide(() => 24, 12)}em;
+  line-height: ${math.multiply(gridSize, 2)}px;
 `;
 
 export const FullNameLabel = styled.span`
