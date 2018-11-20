@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.6
+- [patch] [899b377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/899b377):
+
+  - ED-5750: fix selection for merged cells when its created by dragging mouse across table cells
+
 ## 88.2.5
 - [patch] [4ad840a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4ad840a):
 
