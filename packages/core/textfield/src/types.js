@@ -33,6 +33,8 @@ export type TextFieldProps = {
    * `none` hides all field styling.
    */
   appearance?: 'standard' | 'none' | 'subtle',
+  /** This prop is injected by analytics-next and has no use within textfield */
+  createAnalyticsEvent: (SyntheticEvent<>) => void,
   /** Sets a default value as input value */
   defaultValue?: string,
   /** Set whether the fields should expand to fill available horizontal space. */
@@ -59,5 +61,6 @@ export type TextFieldProps = {
   value?: string | number,
   /** Forwarded ref */
   forwardedRef: ElementRef<*>,
+  /** The theme the component should use. */
   theme: ThemeProps => ThemeProps,
 };

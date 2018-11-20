@@ -68,7 +68,7 @@ class TextField extends Component<TextFieldProps, State> {
       theme,
       // createAnalytics passed through from analytics-next
       // we don't want to spread this onto our input
-      // $FlowFixMe
+      // $ExpectError
       createAnalyticsEvent, // eslint-disable-line react/prop-types
       ...rest
     } = this.props;
