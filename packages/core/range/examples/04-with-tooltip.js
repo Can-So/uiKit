@@ -10,13 +10,15 @@ export default class SimpleRange extends Component<*, *> {
 
   render() {
     return (
-      <Tooltip position="top" content={this.state.value}>
-        <Range
-          step={1}
-          value={this.state.value}
-          onChange={value => this.setState({ value })}
-        />
-      </Tooltip>
+      <div style={{ paddingTop: '40px' }}>
+        <Tooltip position="top" content={this.state.value}>
+          <Range
+            step={1}
+            value={this.state.value}
+            onChange={value => this.setState({ value })}
+          />
+        </Tooltip>
+      </div>
     );
   }
 }
