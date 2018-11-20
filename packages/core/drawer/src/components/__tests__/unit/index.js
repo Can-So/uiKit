@@ -30,7 +30,7 @@ describe('Drawer Transitions', () => {
 
   it('should add a keydown listener only when drawer is opened', () => {
     const wrapper = mount(
-      <Drawer width="wide">
+      <Drawer isOpen={false} width="wide">
         <code>Drawer contents</code>
       </Drawer>,
     );
@@ -108,7 +108,7 @@ describe('Drawer Transitions', () => {
     const onClose = jest.fn();
 
     const wrapper = mount(
-      <Drawer onClose={onClose} width="wide">
+      <Drawer isOpen={false} onClose={onClose} width="wide">
         <code>Drawer contents</code>
       </Drawer>,
     );

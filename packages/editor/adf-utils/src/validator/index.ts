@@ -1,6 +1,6 @@
 import * as specs from './specs';
 
-export type Content = Array<string | [string, object]>;
+export type Content = Array<string | [string, object] | Array<string>>;
 
 export interface Entity {
   type: string;
@@ -23,6 +23,7 @@ interface ValidatorSpec {
       type: 'array';
       items: Array<Array<string>>;
       minItems?: number;
+      optional?: boolean;
       allowUnsupportedBlock: boolean;
       allowUnsupportedInline: boolean;
     };
@@ -37,7 +38,7 @@ interface ValidatorSpec {
 const isDefined = x => x != null;
 
 const isNumber = (x): x is number =>
-  typeof x === 'number' && isFinite(x) && Math.floor(x) === x;
+  typeof x === 'number' && !isNaN(x) && isFinite(x);
 
 const isBoolean = (x): x is boolean =>
   x === true || x === false || toString.call(x) === '[object Boolean]';
@@ -54,6 +55,32 @@ const copy = (source: object, dest: object, key: string) => {
   return dest;
 };
 
+// Helpers
+const makeArray = <T>(maybeArray: T | Array<T>) =>
+  Array.isArray(maybeArray) ? maybeArray : [maybeArray];
+
+function mapMarksItems(spec, fn = x => x) {
+  const { items, ...rest } = spec.props.marks;
+  return {
+    ...spec,
+    props: {
+      ...spec.props,
+      marks: {
+        ...rest,
+        /**
+         * `Text & MarksObject<Mark-1>` produces `items: ['mark-1']`
+         * `Text & MarksObject<Mark-1 | Mark-2>` produces `items: [['mark-1', 'mark-2']]`
+         */
+        items: items.length
+          ? Array.isArray(items[0])
+            ? items.map(fn)
+            : [fn(items)]
+          : [[]],
+      },
+    },
+  };
+}
+
 function createSpec(nodes?: Array<string>, marks?: Array<string>) {
   return Object.keys(specs).reduce((newSpecs, k) => {
     const spec = { ...specs[k] };
@@ -68,8 +95,7 @@ function createSpec(nodes?: Array<string>, marks?: Array<string>) {
            * Flatten
            *
            * Input:
-           * [ { type: 'array', items: [ 'tableHeader' ] },
-           * { type: 'array', items: [ 'tableCell' ] } ]
+           * [ { type: 'array', items: [ 'tableHeader' ] }, { type: 'array', items: [ 'tableCell' ] } ]
            *
            * Output:
            * { type: 'array', items: [ [ 'tableHeader' ], [ 'tableCell' ] ] }
@@ -85,59 +111,41 @@ function createSpec(nodes?: Array<string>, marks?: Array<string>) {
         spec.props.content.items = spec.props.content.items
           // ['inline'] => [['emoji', 'hr', ...]]
           // ['media'] => [['media']]
-          .map(
-            item =>
-              isString(item)
-                ? Array.isArray(specs[item])
-                  ? specs[item]
-                  : [item]
-                : item,
+          .map(item =>
+            isString(item)
+              ? Array.isArray(specs[item])
+                ? specs[item]
+                : [item]
+              : item,
           )
           // [['emoji', 'hr', 'inline_code']] => [['emoji', 'hr', ['text', { marks: {} }]]]
           .map(item =>
             item
-              .map(
-                subItem =>
-                  Array.isArray(specs[subItem])
-                    ? specs[subItem]
-                    : isString(subItem)
-                      ? subItem
-                      : // Now `NoMark` produces `items: []`, should be fixed in generator
-                        ['text', subItem],
+              .map(subItem =>
+                Array.isArray(specs[subItem])
+                  ? specs[subItem]
+                  : isString(subItem)
+                  ? subItem
+                  : // Now `NoMark` produces `items: []`, should be fixed in generator
+                    ['text', subItem],
               )
               // Remove unsupported nodes & marks
               // Filter nodes
-              .filter(
-                subItem =>
-                  // When Mark or `nodes` is undefined don't filter
-                  Array.isArray(subItem) || !nodes
-                    ? true
-                    : nodes.indexOf(subItem) > -1,
+              .filter(subItem =>
+                // When Mark or `nodes` is undefined don't filter
+                Array.isArray(subItem) || !nodes
+                  ? true
+                  : nodes.indexOf(subItem) > -1,
               )
               // Filter marks
-              .map(
-                subItem =>
-                  Array.isArray(subItem) && marks
-                    ? /**
-                       * TODO: Probably try something like immer, but it's 3.3kb gzipped.
-                       * Not worth it just for this.
-                       */
-                      [
-                        subItem[0],
-                        {
-                          ...subItem[1],
-                          props: {
-                            ...subItem[1].props,
-                            marks: {
-                              ...subItem[1].props.marks,
-                              items: subItem[1].props.marks.items.map(_marks =>
-                                _marks.filter(mark => marks.indexOf(mark) > -1),
-                              ),
-                            },
-                          },
-                        },
-                      ]
-                    : subItem,
+              .map(subItem =>
+                Array.isArray(subItem) && marks
+                  ? /**
+                     * TODO: Probably try something like immer, but it's 3.3kb gzipped.
+                     * Not worth it just for this.
+                     */
+                    [subItem[0], mapMarksItems(subItem[1])]
+                  : subItem,
               ),
           );
       }
@@ -263,8 +271,14 @@ export type ErrorCallback = (
   },
 ) => Entity | undefined;
 
-// Ignore and filter extra props or attributes
+// `loose` - ignore and filter extra props or attributes
 export type ValidationMode = 'strict' | 'loose';
+
+export interface ValidationOptions {
+  mode?: ValidationMode;
+  // Allow attributes starting with `__` without validation
+  allowPrivateAttributes?: boolean;
+}
 
 export interface Output {
   valid: boolean;
@@ -274,9 +288,10 @@ export interface Output {
 export function validator(
   nodes?: Array<string>,
   marks?: Array<string>,
-  validationMode: ValidationMode = 'strict',
+  options?: ValidationOptions,
 ) {
   const validatorSpecs = createSpec(nodes, marks);
+  const { mode = 'strict', allowPrivateAttributes = false } = options || {};
 
   const validate = (
     entity: Entity,
@@ -316,8 +331,8 @@ export function validator(
     }
 
     if (type) {
-      const options = getOptionsForType(type, allowed);
-      if (options === false) {
+      const typeOptions = getOptionsForType(type, allowed);
+      if (typeOptions === false) {
         return err(VALIDATION_ERRORS.INVALID_TYPE, 'type not allowed here');
       }
 
@@ -331,10 +346,10 @@ export function validator(
 
       const validator: ValidatorSpec = {
         ...spec,
-        ...options,
+        ...typeOptions,
         // options with props can override props of spec
         ...(spec.props
-          ? { props: { ...spec.props, ...(options['props'] || {}) } }
+          ? { props: { ...spec.props, ...(typeOptions['props'] || {}) } }
           : {}),
       };
 
@@ -396,43 +411,34 @@ export function validator(
 
           // Attributes
           let validatorAttrs;
-          // media attrs is an array
-          if (Array.isArray(validator.props.attrs)) {
-            const { type } = entity.attrs;
-            if (!type) {
-              // If there's no type then there's no way to validate other attrs
-              return err(
-                VALIDATION_ERRORS.INVALID_ATTRIBUTES,
-                `'attrs' validation failed`,
-                { attrs: ['type'] },
-              );
-            }
-            const validatorPropsArr = validator.props.attrs.filter(
-              attr => attr.props.type.values.indexOf(entity.attrs.type) > -1,
-            );
-
-            if (validatorPropsArr.length === 0) {
-              return err(
-                VALIDATION_ERRORS.INVALID_ATTRIBUTES,
-                `'attrs' type '${type}' is invalid`,
-                { attrs: ['type'] },
-              );
-            }
-
-            validatorAttrs = validatorPropsArr[0];
-          } else {
-            validatorAttrs = validator.props.attrs;
-          }
 
           // Attributes Validation
-          if (validatorAttrs && validatorAttrs.props && entity.attrs) {
-            const invalidAttrs = Object.keys(validatorAttrs.props).reduce(
-              (attrs, k) =>
-                validateAttrs(validatorAttrs.props[k], entity.attrs[k])
-                  ? attrs
-                  : attrs.concat(k),
-              [] as Array<string>,
-            );
+          if (validator.props.attrs && entity.attrs) {
+            const attrOptions = makeArray(validator.props.attrs);
+            let invalidAttrs;
+
+            /**
+             * Attrs can be union type so try each path
+             * attrs: [{ props: { url: { type: 'string' } } }, { props: { data: {} } }],
+             * Gotcha: It will always report the last failure.
+             */
+            for (let i = 0, length = attrOptions.length; i < length; ++i) {
+              const attrOption = attrOptions[i];
+              invalidAttrs = Object.keys(attrOption.props).reduce<
+                Array<string>
+              >(
+                (attrs, k) =>
+                  validateAttrs(attrOption.props[k], entity.attrs[k])
+                    ? attrs
+                    : attrs.concat(k),
+                [],
+              );
+              if (!invalidAttrs.length) {
+                validatorAttrs = attrOption;
+                break;
+              }
+            }
+
             if (invalidAttrs.length) {
               return err(
                 VALIDATION_ERRORS.INVALID_ATTRIBUTES,
@@ -443,9 +449,13 @@ export function validator(
           }
 
           // Extra Props
-          const props = Object.keys(entity);
+          // Filter out private and required properties
+          const props = Object.keys(entity).filter(
+            k => !(validator.props![k] && !validator.props![k].optional),
+          );
+
           if (!props.every(p => !!validator.props![p])) {
-            if (validationMode === 'loose') {
+            if (mode === 'loose') {
               newEntity = { type };
               props
                 .filter(p => !!validator.props![p])
@@ -453,19 +463,21 @@ export function validator(
             } else {
               return err(
                 VALIDATION_ERRORS.REDUNDANT_PROPERTIES,
-                `redundant props found: ${Object.keys(entity).join(', ')}`,
+                `redundant props found: ${props.join(', ')}`,
               );
             }
           }
 
           // Extra Attributes
-          if (entity.attrs && validator.props) {
-            const attrs = Object.keys(entity.attrs);
+          if (entity.attrs) {
+            const attrs = Object.keys(entity.attrs).filter(
+              k => !(allowPrivateAttributes && k.startsWith('__')),
+            );
             if (
               !validatorAttrs ||
               !attrs.every(a => !!validatorAttrs.props[a])
             ) {
-              if (validationMode === 'loose') {
+              if (mode === 'loose') {
                 newEntity.attrs = {};
                 attrs
                   .filter(a => !!validatorAttrs.props![a])
@@ -476,9 +488,9 @@ export function validator(
               } else {
                 return err(
                   VALIDATION_ERRORS.REDUNDANT_ATTRIBUTES,
-                  `redundant attributes found: ${Object.keys(entity.attrs).join(
-                    ', ',
-                  )}`,
+                  `redundant attributes found: ${attrs
+                    .filter(a => !validatorAttrs.props![a])
+                    .join(', ')}`,
                 );
               }
             }
@@ -563,7 +575,7 @@ export function validator(
                   }
                 })
                 .filter(Boolean);
-            } else {
+            } else if (!validator.props.content.optional) {
               return err(
                 VALIDATION_ERRORS.MISSING_PROPERTY,
                 'missing `content` prop',
@@ -575,13 +587,16 @@ export function validator(
           if (entity.marks) {
             if (validator.props.marks) {
               const { items } = validator.props!.marks!;
-              const marksSet = items.length ? items[0] : [];
+              const marksSet = items.length
+                ? Array.isArray(items[0])
+                  ? items[0]
+                  : items
+                : [];
               const newMarks = entity.marks
-                .filter(
-                  mark =>
-                    validationMode === 'strict' && marks
-                      ? marks.indexOf(mark.type) > -1
-                      : true,
+                .filter(mark =>
+                  mode === 'strict' && marks
+                    ? marks.indexOf(mark.type) > -1
+                    : true,
                 )
                 .map(
                   mark =>
@@ -592,6 +607,7 @@ export function validator(
                 newEntity.marks = newMarks;
               } else {
                 delete newEntity.marks;
+                return { valid: false, entity: newEntity };
               }
             } else {
               return err(VALIDATION_ERRORS.REDUNDANT_MARKS, 'redundant marks');

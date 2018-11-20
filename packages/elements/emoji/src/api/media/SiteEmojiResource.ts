@@ -230,32 +230,34 @@ export default class SiteEmojiResource {
       .requestService<EmojiUploadResponse>(this.siteServiceConfig, {
         requestInit,
       })
-      .then((response): EmojiDescription => {
-        const { emojis } = response;
-        if (emojis.length) {
-          const { altRepresentations, ...emoji } = emojis[0];
+      .then(
+        (response): EmojiDescription => {
+          const { emojis } = response;
+          if (emojis.length) {
+            const { altRepresentations, ...emoji } = emojis[0];
 
-          const response = {
-            ...emoji,
-            representation: convertImageToMediaRepresentation(
-              emoji.representation as ImageRepresentation,
-            ),
-          };
-          const altRepresentation = getAltRepresentation(
-            altRepresentations || {},
-          );
-          const imgAltRepresentation = altRepresentation
-            ? convertImageToMediaRepresentation(
-                altRepresentation as ImageRepresentation,
-              )
-            : undefined;
+            const response = {
+              ...emoji,
+              representation: convertImageToMediaRepresentation(
+                emoji.representation as ImageRepresentation,
+              ),
+            };
+            const altRepresentation = getAltRepresentation(
+              altRepresentations || {},
+            );
+            const imgAltRepresentation = altRepresentation
+              ? convertImageToMediaRepresentation(
+                  altRepresentation as ImageRepresentation,
+                )
+              : undefined;
 
-          return buildEmojiDescriptionWithAltRepresentation(
-            response,
-            imgAltRepresentation,
-          );
-        }
-        throw new Error('No emoji returns from upload. Upload failed.');
-      });
+            return buildEmojiDescriptionWithAltRepresentation(
+              response,
+              imgAltRepresentation,
+            );
+          }
+          throw new Error('No emoji returns from upload. Upload failed.');
+        },
+      );
   };
 }

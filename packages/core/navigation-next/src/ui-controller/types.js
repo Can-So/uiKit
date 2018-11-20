@@ -1,6 +1,8 @@
 // @flow
 
-import type { Node } from 'react';
+import type { ComponentType, ElementConfig, Node } from 'react';
+
+import type { Diffable } from '../common/types';
 
 import UIController from './UIController';
 
@@ -39,7 +41,7 @@ export type UIControllerShape = {
   productNavWidth: number,
 };
 
-export type UIControllerCacheGetter = () => UIControllerCacheShape;
+export type UIControllerCacheGetter = () => ?UIControllerCacheShape;
 
 export type UIControllerCacheSetter = UIControllerCacheShape => void;
 
@@ -82,3 +84,18 @@ export interface UIControllerInterface {
 export type UIControllerSubscriberProps = {
   children: UIController => Node,
 };
+
+/**
+ * withNavigationUIController
+ */
+
+export type WithNavigationUIControllerProps = {
+  navigationUIController: UIController,
+};
+
+export type UIControllerWrappedComp<C> = ComponentType<
+  $Diff<
+    ElementConfig<$Supertype<C>>,
+    Diffable<WithNavigationUIControllerProps>,
+  >,
+>;

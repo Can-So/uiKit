@@ -9,7 +9,6 @@ import { Actions, ActionItem, Body, Heading, Image } from '../styled/Modal';
 import { getModalTheme } from './theme';
 import type { ActionsType } from '../types';
 
-/* eslint-disable react/no-unused-prop-types */
 type Props = {|
   /** Buttons to render in the footer */
   actions?: ActionsType,
@@ -24,49 +23,43 @@ type Props = {|
   /** Heading text rendered above the body */
   heading?: string,
 |};
-/* eslint-enable react/no-unused-prop-types */
 
-// NOTE: @atlaskit/modal-dialog expects a component for header/footer. This is
-// inconsistent with Spotlight so we take the element and create a
-// stateless-functional component.
-function makeFnComp(element) {
-  return element ? () => element : null;
-}
 function noop() {}
 
 export default class OnboardingModal extends Component<Props> {
   headerComponent = (props: Props) => {
-    const { header: headerElement, heading, image: src } = props;
+    const { header: HeaderElement, image: src } = props;
 
-    const imageElement = <Image alt={heading} src={src} />;
-    const header = makeFnComp(headerElement);
-    const image = makeFnComp(imageElement);
+    const ImageElement = () => <Image alt="" src={src} />;
 
-    return header || image;
+    return HeaderElement || ImageElement;
   };
   footerComponent = (props: Props) => {
-    const { footer: footerElement, actions: actionList } = props;
+    const { footer: FooterElement, actions: actionList } = props;
 
-    const actionsElement = actionList ? (
-      <ThemeProvider theme={getModalTheme}>
-        <Actions>
-          {actionList.map(({ text, ...rest }, idx) => {
-            const variant = idx ? 'subtle-link' : 'primary';
-            return (
-              <ActionItem key={text || idx}>
-                <Button appearance={variant} autoFocus={!idx} {...rest}>
-                  {text}
-                </Button>
-              </ActionItem>
-            );
-          })}
-        </Actions>
-      </ThemeProvider>
-    ) : null;
-    const footer = makeFnComp(footerElement);
-    const actions = makeFnComp(actionsElement);
+    const ActionsElement = () =>
+      actionList ? (
+        <ThemeProvider theme={getModalTheme}>
+          <Actions>
+            {actionList.map(({ text, key, ...rest }, idx) => {
+              const variant = idx ? 'subtle-link' : 'primary';
+              return (
+                <ActionItem
+                  key={key || (typeof text === 'string' ? text : `${idx}`)}
+                >
+                  <Button appearance={variant} autoFocus={!idx} {...rest}>
+                    {text}
+                  </Button>
+                </ActionItem>
+              );
+            })}
+          </Actions>
+        </ThemeProvider>
+      ) : (
+        undefined
+      );
 
-    return footer || actions;
+    return FooterElement || ActionsElement;
   };
 
   render() {

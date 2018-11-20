@@ -1,3 +1,40 @@
+export type UserPickerProps = {
+  users?: User[];
+  width?: number;
+  loadUsers?: LoadOptions;
+  onChange?: OnChange;
+  isMulti?: boolean;
+  search?: string;
+  anchor?: React.ComponentType<any>;
+  open?: boolean;
+  isLoading?: boolean;
+  onInputChange?: OnInputChange;
+  onSelection?: OnUser;
+  onFocus?: OnPicker;
+  onBlur?: OnPicker;
+  blurInputOnSelect?: boolean;
+  appearance?: 'normal' | 'compact';
+  subtle?: boolean;
+  defaultValue?: UserValue;
+  placeholder?: string;
+  noOptionsMessage?: string;
+  value?: UserValue;
+  /** Disable all interactions with the picker, putting it in a read-only state. */
+  isDisabled?: boolean;
+  /** Display a remove button on the single picker. True by default. */
+  isClearable?: boolean;
+};
+
+export type UserPickerState = {
+  users: User[];
+  value?: UserOption[];
+  resultVersion: number;
+  inflightRequest: number;
+  count: number;
+  hoveringClearIndicator: boolean;
+  menuIsOpen: boolean;
+};
+
 export interface HighlightRange {
   start: number;
   end: number;
@@ -14,7 +51,8 @@ export interface User {
   name?: string;
   nickname: string;
   highlight?: Highlight;
-  lozenge?: string;
+  badge?: string;
+  fixed?: boolean;
 }
 
 export type UserValue = User | Array<User> | null | undefined;
@@ -29,6 +67,12 @@ export type ActionTypes =
   | 'create-option';
 
 export type OnChange = (value: UserValue, action: ActionTypes) => void;
+
+export type OnInputChange = (query?: string) => void;
+
+export type OnPicker = () => void;
+
+export type OnUser = (value: UserValue) => void;
 
 export type UserOption = {
   label: string;

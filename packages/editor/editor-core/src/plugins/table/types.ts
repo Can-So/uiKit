@@ -24,13 +24,12 @@ export interface PluginConfig {
 }
 
 export interface TablePluginState {
-  dangerColumns: number[];
-  dangerRows: number[];
   decorationSet: DecorationSet;
-  pluginConfig: PluginConfig;
   editorHasFocus?: boolean;
-  // context menu button is positioned relatively to this DOM node.
-  targetCellRef?: HTMLElement;
+  hoveredColumns: number[];
+  hoveredRows: number[];
+  pluginConfig: PluginConfig;
+  // position of a cell PM node that has cursor
   targetCellPosition?: number;
   // controls need to be re-rendered when table content changes
   // e.g. when pressing enter inside of a cell, it creates a new p and we need to update row controls
@@ -38,8 +37,7 @@ export interface TablePluginState {
   tableRef?: HTMLElement;
   tableFloatingToolbarTarget?: HTMLElement;
   isContextualMenuOpen?: boolean;
-  isTableHovered?: boolean;
-  isTableInDanger?: boolean;
+  isInDanger?: boolean;
   insertColumnButtonIndex?: number;
   insertRowButtonIndex?: number;
 }
@@ -82,6 +80,8 @@ export const TableCssClassName = {
   CONTROLS_INSERT_BUTTON_INNER: `${clPrefix}controls__insert-button-inner`,
   CONTROLS_INSERT_BUTTON_WRAP: `${clPrefix}controls__insert-button-wrap`,
   CONTROLS_INSERT_LINE: `${clPrefix}controls__insert-line`,
+  CONTROLS_BUTTON_OVERLAY: `${clPrefix}controls__button-overlay`,
+  LAYOUT_BUTTON: `${clPrefix}layout-button`,
 
   CONTROLS_INSERT_MARKER: `${clPrefix}controls__insert-marker`,
   CONTROLS_INSERT_COLUMN: `${clPrefix}controls__insert-column`,
@@ -99,12 +99,12 @@ export const TableCssClassName = {
   HOVERED_TABLE: `${clPrefix}hovered-table`,
   RESIZING: `${clPrefix}resizing`,
   WITH_CONTROLS: `${clPrefix}with-controls`,
-  TABLE_LEFT_SHADOW: `${clPrefix}with-left-shadow`,
-  TABLE_RIGHT_SHADOW: `${clPrefix}with-right-shadow`,
 
   CONTEXTUAL_SUBMENU: `${clPrefix}contextual-submenu`,
-  CONTEXTUAL_MENU_TRIGGER: `${clPrefix}contextual-menu-trigger`,
+  CONTEXTUAL_MENU_BUTTON: `${clPrefix}contextual-menu-button`,
   CONTEXTUAL_MENU_ICON: `${clPrefix}contextual-submenu-icon`,
+
+  CELL_NODEVIEW_WRAPPER: `${clPrefix}cell-nodeview-wrapper`,
 
   // come from prosemirror-table
   COLUMN_RESIZE_HANDLE: 'column-resize-handle',

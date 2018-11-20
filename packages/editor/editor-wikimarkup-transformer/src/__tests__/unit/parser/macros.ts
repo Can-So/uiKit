@@ -15,6 +15,10 @@ describe('JIRA wiki markup - Macros', () => {
       '{noformat}{code}code inside noformat{code}{noformat}',
     ],
     [
+      'should title of noformat',
+      '{noformat:title=title}code inside noformat{noformat}',
+    ],
+    [
       'should not process code contents',
       '{code:xml}this is a {color:red}colored text{color}{noformat}{code}',
     ],
@@ -68,10 +72,6 @@ this is a text as well{panel}`,
 this is a text as well`,
     ],
     [
-      'should render unsupported macro as bodiedExtension',
-      'this is {unknown}no macro{unknown}',
-    ],
-    [
       'should transform h1 to Bold and Uppercase under blockquote',
       '{quote}h1. header one{quote}',
     ],
@@ -100,6 +100,30 @@ this is a text as well`,
       `{quote}something
 * list item
 {quote}`,
+    ],
+    [
+      'should render {anchor} as empty string',
+      `You cannot see this {anchor:here}`,
+    ],
+    [
+      'should render {loremipsum} as plain text',
+      `This is plain text {loremipsum}`,
+    ],
+    [
+      'should render macro likes {macrolike} as plain text',
+      `This is plain text {macrolike}`,
+    ],
+    [
+      'should render green success panel',
+      `{panel:bgColor=green}
+green
+{panel}`,
+    ],
+    [
+      'should render red error panel',
+      `{panel:bgColor=red}
+red
+{panel}`,
     ],
   ];
 

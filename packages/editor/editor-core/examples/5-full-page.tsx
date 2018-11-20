@@ -8,14 +8,15 @@ import Editor, { EditorProps } from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
 import WithEditorActions from './../src/ui/WithEditorActions';
 import {
+  cardProvider,
   storyMediaProviderFactory,
   storyContextIdentifierProviderFactory,
   macroProvider,
-  cardProvider,
 } from '@atlaskit/editor-test-helpers';
 import { mention, emoji, taskDecision } from '@atlaskit/util-data-test';
 import { MockActivityResource } from '@atlaskit/activity/dist/es5/support';
 import { EmojiProvider } from '@atlaskit/emoji';
+import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
 
 import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
@@ -47,6 +48,8 @@ TitleInput.displayName = 'TitleInput';
  *                                    80px - 48px (Outside of iframe)
  */
 export const Wrapper: any = styled.div`
+  box-sizing: border-box;
+  padding: 2px;
   height: calc(100vh - 32px);
 `;
 Wrapper.displayName = 'Wrapper';
@@ -70,10 +73,14 @@ export const SaveAndCancelButtons = props => (
       tabIndex="-1"
       appearance="primary"
       onClick={() =>
-        props.editorActions
-          .getValue()
+        props.editorActions.getValue().then(value => {
           // tslint:disable-next-line:no-console
-          .then(value => console.log(value))
+          console.log(value);
+          localStorage.setItem(
+            'fabric.editor.example.full-page',
+            JSON.stringify(value),
+          );
+        })
       }
     >
       Publish
@@ -81,8 +88,10 @@ export const SaveAndCancelButtons = props => (
     <Button
       tabIndex="-1"
       appearance="subtle"
-      // tslint:disable-next-line:jsx-no-lambda
-      onClick={() => props.editorActions.clear()}
+      onClick={() => {
+        props.editorActions.clear();
+        localStorage.removeItem('fabric.editor.example.full-page');
+      }}
     >
       Close
     </Button>
@@ -91,7 +100,7 @@ export const SaveAndCancelButtons = props => (
 
 export type State = { disabled: boolean };
 
-const providers = {
+export const providers = {
   emojiProvider: emoji.storyData.getEmojiResource({
     uploadSupported: true,
     currentUser: {
@@ -107,7 +116,7 @@ const providers = {
   macroProvider: Promise.resolve(macroProvider),
 };
 
-const mediaProvider = storyMediaProviderFactory({
+export const mediaProvider = storyMediaProviderFactory({
   includeUserAuthProvider: true,
 });
 
@@ -129,66 +138,77 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
     return (
       <Wrapper>
         <Content>
-          <Editor
-            appearance="full-page"
-            analyticsHandler={analyticsHandler}
-            quickInsert={{ provider: Promise.resolve(quickInsertProvider) }}
-            allowCodeBlocks={{ enableKeybindingsForIDE: true }}
-            allowLists={true}
-            allowTextColor={true}
-            allowTables={{
-              advanced: true,
-            }}
-            allowJiraIssue={true}
-            allowUnsupportedContent={true}
-            allowPanel={true}
-            allowExtension={{
-              allowBreakout: true,
-            }}
-            allowRule={true}
-            allowDate={true}
-            allowLayouts={true}
-            allowGapCursor={true}
-            allowTemplatePlaceholders={{ allowInserting: true }}
-            UNSAFE_cards={{
-              provider: Promise.resolve(cardProvider),
-            }}
-            allowStatus={true}
-            {...providers}
-            media={{ provider: mediaProvider, allowMediaSingle: true }}
-            placeholder="Write something..."
-            shouldFocus={false}
-            disabled={this.state.disabled}
-            contentComponents={
-              <WithEditorActions
-                // tslint:disable-next-line:jsx-no-lambda
-                render={actions => (
-                  <TitleInput
-                    placeholder="Give this page a title..."
-                    // tslint:disable-next-line:jsx-no-lambda
-                    innerRef={this.handleTitleRef}
-                    onFocus={this.handleTitleOnFocus}
-                    onBlur={this.handleTitleOnBlur}
-                    onKeyDown={(e: KeyboardEvent) =>
-                      this.onKeyPressed(e, actions)
-                    }
-                  />
-                )}
-              />
-            }
-            primaryToolbarComponents={
-              <WithEditorActions
-                // tslint:disable-next-line:jsx-no-lambda
-                render={actions => (
-                  <SaveAndCancelButtons editorActions={actions} />
-                )}
-              />
-            }
-            onSave={SAVE_ACTION}
-            insertMenuItems={customInsertMenuItems}
-            extensionHandlers={extensionHandlers}
-            {...this.props}
-          />
+          <SmartCardProvider>
+            <Editor
+              appearance="full-page"
+              analyticsHandler={analyticsHandler}
+              quickInsert={{ provider: Promise.resolve(quickInsertProvider) }}
+              allowCodeBlocks={{ enableKeybindingsForIDE: true }}
+              allowLists={true}
+              allowTextColor={true}
+              allowTables={{
+                advanced: true,
+              }}
+              allowBreakout={true}
+              allowJiraIssue={true}
+              allowUnsupportedContent={true}
+              allowPanel={true}
+              allowExtension={{
+                allowBreakout: true,
+              }}
+              allowRule={true}
+              allowDate={true}
+              allowLayouts={{
+                allowBreakout: true,
+              }}
+              allowGapCursor={true}
+              allowTextAlignment={true}
+              allowTemplatePlaceholders={{ allowInserting: true }}
+              UNSAFE_cards={{
+                provider: Promise.resolve(cardProvider),
+              }}
+              allowStatus={true}
+              {...providers}
+              media={{ provider: mediaProvider, allowMediaSingle: true }}
+              placeholder="Write something..."
+              shouldFocus={false}
+              disabled={this.state.disabled}
+              defaultValue={
+                (localStorage &&
+                  localStorage.getItem('fabric.editor.example.full-page')) ||
+                undefined
+              }
+              contentComponents={
+                <WithEditorActions
+                  // tslint:disable-next-line:jsx-no-lambda
+                  render={actions => (
+                    <TitleInput
+                      placeholder="Give this page a title..."
+                      // tslint:disable-next-line:jsx-no-lambda
+                      innerRef={this.handleTitleRef}
+                      onFocus={this.handleTitleOnFocus}
+                      onBlur={this.handleTitleOnBlur}
+                      onKeyDown={(e: KeyboardEvent) =>
+                        this.onKeyPressed(e, actions)
+                      }
+                    />
+                  )}
+                />
+              }
+              primaryToolbarComponents={
+                <WithEditorActions
+                  // tslint:disable-next-line:jsx-no-lambda
+                  render={actions => (
+                    <SaveAndCancelButtons editorActions={actions} />
+                  )}
+                />
+              }
+              onSave={SAVE_ACTION}
+              insertMenuItems={customInsertMenuItems}
+              extensionHandlers={extensionHandlers}
+              {...this.props}
+            />
+          </SmartCardProvider>
         </Content>
       </Wrapper>
     );

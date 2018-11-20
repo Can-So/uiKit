@@ -27,6 +27,7 @@ import { Card } from '../../../src/root/card';
 import { LazyContent } from '../../../src/utils/lazyContent';
 import { getDataURIFromFileState } from '../../../src/utils/getDataURIFromFileState';
 import { ExternalImageIdentifier } from '../../root';
+import { InlinePlayer } from '../../../src/root/inlinePlayer';
 
 describe('Card', () => {
   const urlIdentifier: UrlPreviewIdentifier = {
@@ -53,7 +54,10 @@ describe('Card', () => {
     props?: Partial<CardProps>,
   ) => {
     (getDataURIFromFileState as any).mockReset();
-    (getDataURIFromFileState as any).mockReturnValue('some-data-uri');
+    (getDataURIFromFileState as any).mockReturnValue({
+      src: 'some-data-uri',
+      orientation: 6,
+    });
     const component = shallow(
       <Card
         context={context}
@@ -493,6 +497,15 @@ describe('Card', () => {
     expect(component.state('dataURI')).toEqual('some-data-uri');
   });
 
+  it('should set preview orientation and pass it down do view', async () => {
+    const { component } = setup();
+    await nextTick();
+
+    expect(component.state('previewOrientation')).toEqual(6);
+    component.update();
+    expect(component.find(CardView).prop('previewOrientation')).toEqual(6);
+  });
+
   it('should set right state when file is uploading', async () => {
     const context = createContextWithGetFile({
       status: 'uploading',
@@ -506,6 +519,8 @@ describe('Card', () => {
       dataURI: 'some-data-uri',
       isCardVisible: true,
       progress: 0.2,
+      previewOrientation: 6,
+      isPlayingFile: false,
       metadata: {
         id: '123',
         mediaType: 'image',
@@ -528,6 +543,8 @@ describe('Card', () => {
       dataURI: 'some-data-uri',
       progress: undefined,
       isCardVisible: true,
+      isPlayingFile: false,
+      previewOrientation: 6,
       metadata: {
         id: '123',
         mediaType: 'image',
@@ -552,6 +569,8 @@ describe('Card', () => {
       dataURI: 'mock result of URL.createObjectURL()',
       progress: undefined,
       isCardVisible: true,
+      isPlayingFile: false,
+      previewOrientation: 6,
       metadata: {
         id: '123',
         mediaType: 'image',
@@ -796,5 +815,30 @@ describe('Card', () => {
       'some-file-name',
       fileIdentifier.collectionName,
     );
+  });
+
+  describe('Inline player', () => {
+    it('should render InlinePlayer when isPlayingFile=true', () => {
+      const { component } = setup();
+
+      component.setState({
+        isPlayingFile: true,
+      });
+      component.update();
+      expect(component.find(InlinePlayer)).toHaveLength(1);
+    });
+
+    it('should set isPlayingFile=true when clicking on a video file', () => {
+      const { component } = setup(undefined, { useInlinePlayer: true });
+      const instance = component.instance() as Card;
+
+      instance.onClick({
+        mediaItemDetails: {
+          mediaType: 'video',
+        },
+      } as any);
+
+      expect(component.state('isPlayingFile')).toBeTruthy();
+    });
   });
 });

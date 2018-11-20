@@ -2,12 +2,12 @@
 
 import type { Node } from 'react';
 
-export type InteractionState = {
+export type InteractionState = {|
   isActive: boolean,
   isHover: boolean,
-};
+  isFocused: boolean,
+|};
 
-export type InteractionStateProps = {
+export type InteractionStateProps = {|
   children: InteractionState => Node,
-  styles?: {},
-};
+|};

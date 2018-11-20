@@ -1,6 +1,6 @@
 import { Schema } from 'prosemirror-model';
 import { inputRules } from 'prosemirror-inputrules';
-import { Transaction, Plugin } from 'prosemirror-state';
+import { Plugin } from 'prosemirror-state';
 import {
   createInputRule,
   leafNodeReplacementCharacter,
@@ -22,17 +22,19 @@ export function inputRulePlugin(
     `(^|[.!?\\s${leafNodeReplacementCharacter}])(${triggers})$`,
   );
 
-  const typeAheadInputRule = createInputRule(regex, (state, match, start, end):
-    | Transaction
-    | undefined => {
+  const typeAheadInputRule = createInputRule(regex, (state, match) => {
     const mark = schema.mark('typeAheadQuery', { trigger: match[2] });
-    const { tr } = state;
+    const { tr, selection } = state;
+    const marks = selection.$from.marks();
 
     analyticsService.trackEvent('atlassian.editor.typeahead.trigger', {
       trigger: match[2],
     });
 
-    return tr.replaceSelectionWith(schema.text(match[2], [mark]), false);
+    return tr.replaceSelectionWith(
+      schema.text(match[2], [mark, ...marks]),
+      false,
+    );
   });
 
   return inputRules({ rules: [typeAheadInputRule] });

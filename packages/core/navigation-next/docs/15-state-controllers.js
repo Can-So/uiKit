@@ -240,7 +240,36 @@ const MyComponent = withNavigationViewController(MyComponentBase);`}
 
 ${<Hr />}
 
-${<H>Built-in view item types</H>}
+${<H>View Renderer</H>}
+
+The view renderer is used to render the data representation of your view items for you. If using the \`LayoutManagerWithViewController\` component, you do not need to use the renderer as it is taken care of for you. However, if using directly you can use two different variants, depending on whether you wish to enable flow checking for it or not.
+
+
+### Composing directly
+
+The default version can be used as follows:
+
+${code`
+  import { ViewRenderer } from '@atlaskit/navigation-next';
+
+  <ViewRenderer customComponents={...} items={...} />;
+`}
+
+To use the typed version, which allows you to type any custom components passed in:
+
+${code`
+  import { TypedViewRenderer } from '@atlaskit/navigation-next';
+
+  type CustomComponentType = { type: 'Foo', id: string, foo: boolean } | { type: 'Bar', id: string, bar: boolean };
+
+  class ViewRenderer extends TypedViewRenderer<CustomComponentType> {};
+
+  <ViewRenderer customComponents={...} items={...} />;
+`}
+
+This version will properly type check the items passed to the renderer, including any custom component types.
+
+### Built-in view item types
 
 Every item in a view must have a \`type\` property. This can be a component, but the primitive UI component types are built into the renderer and can be identified using a string:
 
@@ -249,11 +278,15 @@ Every item in a view must have a \`type\` property. This can be a component, but
 * \`'Group'\`
 * \`'GroupHeading'\`
 * \`'HeaderSection'\`
+* \`'InlineComponent'\`
 * \`'Item'\`
 * \`'MenuSection'\`
 * \`'Section'\`
 * \`'SectionHeading'\`
 * \`'Separator'\`
+* \`'SortableContext'\`
+* \`'SortableGroup'\`
+* \`'SortableItem'\`
 * \`'Switcher'\`
 * \`'Wordmark'\`
 
@@ -262,13 +295,38 @@ Every item in a view must have a \`type\` property. This can be a component, but
 For the most part these built-in types take exactly the same props as their component counterparts, however there are a few differences:
 
 * All items must have an \`id\` property. This ID is used as the React \`key\`, and should be unique within the view so that reducers can accurately select individual items by ID. It is also used to uniquely identify the item for analytics click events.
-* Rather than passing a \`children\` prop to container types, namely \`'Group'\`, \`'HeaderSection'\`, \`'MenuSection'\` and \`'Section'\`, you should specify their descendants as an array with the \`items\` property. Any item with an \`items\` property will be walked by reducers.
+* Rather than passing a \`children\` prop to container types, namely \`'Group'\`, \`'HeaderSection'\`, \`'MenuSection'\`, \`'Section'\`, \`'SortableGroup'\` and \`'SortableContext'\`, you should specify their descendants as an array with the \`items\` property. Any item with an \`items\` property will be walked by reducers.
 * The Section components take an optional \`nestedGroupKey\` prop to be used as the key of the
 element to allow sections across multiple views to share the same key for nested
 transitions. If not supplied, the id of the sections must match between views where you want
 a nested transition to occur.
 * The \`'Item'\` type is actually the \`'ConnectedItem'\` UI component instead of the basic \`'Item'\` component. It therefore accepts a special \`goTo\` property, which should be a view ID. When an \`'Item'\` with a \`goTo\` is clicked, that view will be activated. It will also render a right-arrow icon when hovered, or a loading spinner when its \`goTo\` property matches the incoming view ID.
 * The \`'GroupHeading'\` and \`'SectionHeading'\` types accept a \`text\` property instead of \`children\`.
+* The \`'InlineComponent'\` type does not have a corresponding UI component. It takes a \`component\` prop that will render the component passed to it, with all remaining props in the type passed to it. The \`'id'\` prop is still mandatory.
+
+### Exported flow types
+
+We export a corresponding flow type for each built-in view item type as well as a combined type, \`NavigationRendererItemType\` that can be used to explicitly type the view items array in your code, e.g. the return type of your \`getItems\` functions.
+
+The \`NavigationRendererItemType\` is a parameterised type that takes an optional type argument that specified any custom component types, i.e. types passed into the \`customComponents\` prop of \`ViewRenderer\` or \`LayoutManagerWithViewController\`.
+
+For example,
+
+${code`
+  // @flow
+  import type { NavigationRendererItemType } from '@atlaskit/navigation-next';
+
+  // Note that you still need to use the <> prefix even when not using any custom components
+  const itemsWithoutCustomComponents: NavigationRendererItemType<> = [...];
+
+  type CustomComponentType = { type: 'Foo', id: string, foo: boolean } | { type: 'Bar', id: string, bar: boolean };
+
+  const itemsWithCustomComponents: NavigationRendererItemType<CustomComponentType> = [...];
+`}
+
+When typing custom components, you must adhere to the same rules as built-in view item types and specify \`type\` and \`id\` props.
+
+Unfortunately, inline component types cannot be typechecked individually like custom component types since they share the same \`type\` property of \`'InlineComponent'\`.
 
 ${<Hr />}
 

@@ -25,10 +25,12 @@ const SelectWithTooltips = () => (
     <Select
       items={[
         {
-          items: selectItems.map((i): Object => ({
-            ...i,
-            tooltipPosition: 'right',
-          })),
+          items: selectItems.map(
+            (i): Object => ({
+              ...i,
+              tooltipPosition: 'right',
+            }),
+          ),
         },
       ]}
       placeholder="Aligned to right"
@@ -36,10 +38,12 @@ const SelectWithTooltips = () => (
     <Select
       items={[
         {
-          items: selectItems.map((i): Object => ({
-            ...i,
-            tooltipPosition: 'top',
-          })),
+          items: selectItems.map(
+            (i): Object => ({
+              ...i,
+              tooltipPosition: 'top',
+            }),
+          ),
         },
       ]}
       placeholder="Aligned to top"
@@ -47,10 +51,12 @@ const SelectWithTooltips = () => (
     <Select
       items={[
         {
-          items: selectItems.map((i): Object => ({
-            ...i,
-            tooltipPosition: 'bottom',
-          })),
+          items: selectItems.map(
+            (i): Object => ({
+              ...i,
+              tooltipPosition: 'bottom',
+            }),
+          ),
         },
       ]}
       placeholder="Aligned to bottom"
@@ -58,10 +64,12 @@ const SelectWithTooltips = () => (
     <Select
       items={[
         {
-          items: selectItems.map((i): Object => ({
-            ...i,
-            tooltipPosition: 'left',
-          })),
+          items: selectItems.map(
+            (i): Object => ({
+              ...i,
+              tooltipPosition: 'left',
+            }),
+          ),
         },
       ]}
       placeholder="Aligned to left"

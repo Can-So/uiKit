@@ -24,6 +24,7 @@ export default {
     'typeAheadInputRule',
     'lists',
     'textColor',
+    'alignmentPlugin',
     'listsInputRule',
     'listsKeymap',
     'codeBlock',
@@ -121,6 +122,7 @@ export default {
     'blockCard',
   ],
   marks: [
+    // Inline marks
     'link',
     'confluenceInlineComment',
     'em',
@@ -134,5 +136,9 @@ export default {
     'typeAheadQuery',
     'emojiQuery',
     'textColor',
+
+    // Block marks
+    'alignment',
+    'breakout',
   ],
 };

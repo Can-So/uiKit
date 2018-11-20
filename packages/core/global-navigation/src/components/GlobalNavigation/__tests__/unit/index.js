@@ -10,9 +10,11 @@ import SignInIcon from '@atlaskit/icon/glyph/sign-in';
 import QuestionIcon from '@atlaskit/icon/glyph/question-circle';
 import GlobalNavigation from '../../index';
 import ScreenTracker from '../../../ScreenTracker';
+import ItemComponent from '../../../ItemComponent';
 
 const DrawerContents = () => <div>drawer</div>;
 const EmojiAtlassianIcon = () => <button>EmojiAtlassianIcon</button>;
+const noop = () => {};
 
 const escKeyDown = () => {
   const event = document.createEvent('Events');
@@ -64,8 +66,10 @@ describe('GlobalNavigation', () => {
       );
 
       const productIcon = wrapper.find(EmojiAtlassianIcon);
+
       expect(productIcon.exists()).toBeTruthy();
       expect(wrapper.find('a').props().href).toEqual('/testtest');
+
       productIcon.simulate('click');
       expect(mockProductClick).toHaveBeenCalled();
     });
@@ -147,7 +151,7 @@ describe('GlobalNavigation', () => {
           ).toBeTruthy();
         });
 
-        describe('uncontrolled', () => {
+        describe('Uncontrolled', () => {
           it(`should open "${name}" drawer when "${name}" icon is clicked`, () => {
             // Testing XDrawerContents positive
             const props = {
@@ -247,7 +251,7 @@ describe('GlobalNavigation', () => {
             const wrapper = mount(<GlobalNavigation {...props} />);
 
             wrapper.setProps({
-              isSearchDrawerOpen: false,
+              [`is${capitalisedName}DrawerOpen`]: false,
             });
             wrapper.update();
             escKeyDown();
@@ -264,15 +268,15 @@ describe('GlobalNavigation', () => {
         productIcon={EmojiAtlassianIcon}
         productHref="#"
         productTooltip="product tooltip"
-        onProductClick={() => console.log('product clicked')}
+        onProductClick={noop}
         createTooltip="create tooltip"
-        onCreateClick={() => console.log('create clicked')}
+        onCreateClick={noop}
         searchTooltip="search tooltip"
-        onSearchClick={() => console.log('search clicked')}
+        onSearchClick={noop}
         starredTooltip="starred tooltip"
-        onStarredClick={() => console.log('your work clicked')}
+        onStarredClick={noop}
         notificationTooltip="notification tooltip"
-        onNotificationClick={() => console.log('notification clicked')}
+        onNotificationClick={noop}
         profileTooltip="profile tooltip"
         loginHref="#login"
         helpItems={() => <div>items</div>}
@@ -283,11 +287,11 @@ describe('GlobalNavigation', () => {
       <GlobalNavigation
         productIcon={EmojiAtlassianIcon}
         productHref="#"
-        onProductClick={() => console.log('product clicked')}
-        onCreateClick={() => console.log('create clicked')}
-        onSearchClick={() => console.log('search clicked')}
-        onStarredClick={() => console.log('your work clicked')}
-        onNotificationClick={() => console.log('notification clicked')}
+        onProductClick={noop}
+        onCreateClick={noop}
+        onSearchClick={noop}
+        onStarredClick={noop}
+        onNotificationClick={noop}
         loginHref="#login"
         helpItems={() => <div>items</div>}
       />,
@@ -363,11 +367,11 @@ describe('GlobalNavigation', () => {
       <GlobalNavigation
         productIcon={EmojiAtlassianIcon}
         productHref="#"
-        onProductClick={() => console.log('product clicked')}
-        onCreateClick={() => console.log('create clicked')}
-        onSearchClick={() => console.log('search clicked')}
-        onStarredClick={() => console.log('your work clicked')}
-        onNotificationClick={() => console.log('notification clicked')}
+        onProductClick={noop}
+        onCreateClick={noop}
+        onSearchClick={noop}
+        onStarredClick={noop}
+        onNotificationClick={noop}
         loginHref="#login"
         helpItems={() => <div>items</div>}
       />,
@@ -474,6 +478,206 @@ describe('GlobalNavigation', () => {
       );
       expect(wrapper.find('Badge').exists()).toBeFalsy();
     });
+
+    it('should pass the correct badgeCount to ItemComponent', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          onNotificationClick={() => {}}
+          notificationCount={15}
+        />,
+      );
+
+      expect(wrapper.find(ItemComponent).props().badgeCount).toBe(15);
+    });
+  });
+
+  describe('Inbuilt Notification', () => {
+    const fabricNotificationLogUrl = '/gateway/api/notification-log/';
+    const cloudId = 'DUMMY-158c8204-ff3b-47c2-adbb-a0906ccc722b';
+    it('should not render when either fabricID or fabricNotificationLogUrl are missing', () => {
+      const wrapper = mount(<GlobalNavigation product="jira" locale="en" />);
+
+      const icon = wrapper.find('NotificationIcon');
+      expect(icon.exists()).toBeFalsy();
+    });
+
+    it('should render the notification icon when both fabricID and fabricNotificationLogUrl are present', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+      const icon = wrapper.find('NotificationIcon');
+      expect(icon.exists()).toBeTruthy();
+    });
+
+    it('should render tooltip passed from the product', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+          notificationTooltip="Notification tooltip from product"
+        />,
+      );
+
+      expect(
+        wrapper
+          .find('NotificationIcon')
+          .parents('Tooltip')
+          .props().content,
+      ).toBe('Notification tooltip from product');
+      expect(wrapper.find('NotificationIcon').props().label).toBe(
+        'Notification tooltip from product',
+      );
+    });
+
+    it('should open notification drawer when clicked', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+      const icon = wrapper.find('NotificationIcon');
+      icon.simulate('click');
+
+      expect(wrapper.find('NotificationDrawer').exists()).toBeTruthy();
+    });
+
+    it('should not render iframe in drawer when notificationDrawerContents is passed', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+          notificationDrawerContents={DrawerContents}
+        />,
+      );
+      const icon = wrapper.find('NotificationIcon');
+      icon.simulate('click');
+
+      expect(wrapper.find(DrawerContents).exists()).toBeTruthy();
+      expect(
+        wrapper
+          .find(DrawerContents)
+          .children('iframe')
+          .exists(),
+      ).toBeFalsy();
+    });
+
+    it('should poll for notification every 1 minute when there is no badge', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      wrapper.setState({
+        notificationCount: 5,
+      });
+      wrapper.update();
+
+      wrapper.setState({
+        notificationCount: 0,
+      });
+      wrapper.update();
+      expect(wrapper.find('NotificationIndicator').props().refreshRate).toEqual(
+        60000,
+      );
+    });
+
+    it('should poll for notification every 3 minutes when there is a badge', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      wrapper.setState({
+        notificationCount: 5,
+      });
+      wrapper.update();
+
+      expect(wrapper.find('NotificationIndicator').props().refreshRate).toEqual(
+        180000,
+      );
+    });
+
+    it('should pass "countOverride" to NotificationIndicator when local notificationCount is the NOT same as cachedCount', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      localStorage.setItem('notificationBadgeCountCache', '2');
+      wrapper.setState({
+        notificationCount: 5,
+      });
+
+      const spy = jest.spyOn(wrapper.instance(), 'onCountUpdating');
+      const spyReturn = spy(1); // 1 is the visibilityChangesSinceTimer, passed by NotificationIndicator
+
+      expect(spyReturn).toMatchObject({
+        countOverride: 2,
+      });
+    });
+
+    it('should pass "skip" to NotificationIndicator when local notificationCount is the same as cachedCount', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      localStorage.setItem('notificationBadgeCountCache', '5');
+      wrapper.setState({
+        notificationCount: 5,
+      });
+
+      const spy = jest.spyOn(wrapper.instance(), 'onCountUpdating');
+      const spyReturn = spy(1);
+
+      expect(spyReturn).toMatchObject({
+        skip: true,
+      });
+    });
+
+    it('should pass the correct badgeCount to ItemComponent', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+      wrapper.setState({
+        notificationCount: 5,
+      });
+
+      expect(wrapper.find(ItemComponent).props().badgeCount).toBe(5);
+    });
   });
 
   describe('AppSwitcher', () => {
@@ -490,11 +694,11 @@ describe('GlobalNavigation', () => {
       <GlobalNavigation
         productIcon={EmojiAtlassianIcon}
         productHref="#"
-        onProductClick={() => console.log('product clicked')}
-        onCreateClick={() => console.log('create clicked')}
-        onSearchClick={() => console.log('search clicked')}
-        onStarredClick={() => console.log('your work clicked')}
-        onNotificationClick={() => console.log('notification clicked')}
+        onProductClick={noop}
+        onCreateClick={noop}
+        onSearchClick={noop}
+        onStarredClick={noop}
+        onNotificationClick={noop}
         appSwitcherComponent={AppSwitcher}
         appSwitcherTooltip="appSwitcher tooltip"
         loginHref="#login"

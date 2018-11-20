@@ -1,7 +1,7 @@
 // @ts-ignore: unused variable
 // prettier-ignore
 import { css, Styles, StyledComponentClass } from 'styled-components';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors, fontSize } from '@atlaskit/theme';
 import {
   browser,
   tableMarginTop,
@@ -19,7 +19,6 @@ const {
   N40A,
   B100,
   B300,
-  B400,
   N300,
   B75,
   N20,
@@ -52,16 +51,15 @@ export const tableInsertColumnButtonSize = 20;
 export const tableDeleteButtonSize = 16;
 export const contextualMenuTriggerSize = 16;
 export const contextualMenuDropdownWidth = 180;
+export const layoutButtonSize = 32;
 
 const isIE11 = browser.ie_version === 11;
 
 const Button = (css?: string) => `
-  background: ${B400};
   border-radius: ${borderRadius()}px;
   border-width: 0px;
   display: inline-flex;
   max-width: 100%;
-  height: auto;
   text-align: center;
   margin: 0px;
   padding: 0px;
@@ -69,10 +67,7 @@ const Button = (css?: string) => `
   transition: background 0.1s ease-out 0s, box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
   outline: none !important;
   cursor: pointer;
-  color: white;
-  :hover {
-    background: ${B300};
-  }
+
   > .${ClassName.CONTROLS_BUTTON_ICON} {
     display: inline-flex;
     max-height: 100%;
@@ -109,6 +104,7 @@ const HeaderButton = (css?: string) => `
   .active .${ClassName.CONTROLS_BUTTON},
   .${ClassName.HOVERED_TABLE} .${ClassName.CONTROLS_BUTTON},
   .${ClassName.CONTROLS_BUTTON}:hover {
+    color: ${N0};
     background-color: ${tableToolbarSelectedColor};
     border-color: ${tableBorderSelectedColor};
   }
@@ -120,32 +116,40 @@ const HeaderButton = (css?: string) => `
   }
 `;
 
-const InsertButton = (css?: string) => `
+const InsertButton = () => `
   .${ClassName.CONTROLS_INSERT_BUTTON_INNER} {
     position: absolute;
     z-index: ${akEditorUnitZIndex};
+  }
+  .${ClassName.CONTROLS_INSERT_BUTTON_INNER},
+  .${ClassName.CONTROLS_INSERT_BUTTON} {
+    height: ${tableInsertColumnButtonSize}px;
+    width: ${tableInsertColumnButtonSize}px;
+  }
+  .${ClassName.CONTROLS_INSERT_BUTTON} {
+    ${Button(`
+      background: white;
+      box-shadow: 0 4px 8px -2px ${N60A}, 0 0 1px ${N60A};
+      color: ${N300};
+      :hover {
+        background: ${B300};
+        color: white;
+      }
+    `)}
+  }
+  .${ClassName.CONTROLS_INSERT_LINE} {
     display: none;
-    width: 100%;
-    ${css}
-
-    button {
-      width: 100%;
-    }
-    button * {
-      width: 100%;
-      height: 100%;
-    }
-    .${ClassName.CONTROLS_INSERT_BUTTON} {
-      ${Button()}
-    }
   }
 `;
 
 const DeleteButton = (css?: string) => `
-  .${ClassName.CONTROLS_DELETE_BUTTON_WRAP} {
-    position: absolute;
+  .${ClassName.CONTROLS_DELETE_BUTTON_WRAP},
+  .${ClassName.CONTROLS_DELETE_BUTTON} {
     height: ${tableDeleteButtonSize}px;
     width: ${tableDeleteButtonSize}px;
+  }
+  .${ClassName.CONTROLS_DELETE_BUTTON_WRAP} {
+    position: absolute;
     cursor: pointer;
     ${css}
 
@@ -158,11 +162,6 @@ const DeleteButton = (css?: string) => `
           color: white;
         }
       `)}
-      .${ClassName.CONTROLS_BUTTON_ICON},
-      .${ClassName.CONTROLS_BUTTON_ICON} svg {
-        width: 16px;
-        height: 16px;
-      }
     }
   }
 `;
@@ -180,8 +179,25 @@ const InsertMarker = (css?: string) => `
 `;
 
 export const tableStyles = css`
+  .${ClassName.LAYOUT_BUTTON} button {
+    background: ${N20A};
+    color: ${N300};
+    :hover {
+      background: ${B300};
+      color: white !important;
+    }
+  }
+
   .ProseMirror {
     ${tableSharedStyle}
+
+    .less-padding {
+      padding: 0 8px;
+
+      .${ClassName.ROW_CONTROLS_WRAPPER} {
+         padding: 0 8px;
+      }
+    }
 
     /* Breakout only works on top level */
     > .${ClassName.NODEVIEW_WRAPPER} .${
@@ -205,25 +221,36 @@ export const tableStyles = css`
 
       .${ClassName.COLUMN_CONTROLS_INNER} {
         display: flex;
-        & > div.last > button {
-          border-top-right-radius: ${tableBorderRadiusSize}px;
-        }
       }
       .${ClassName.COLUMN_CONTROLS_BUTTON_WRAP} {
         position: relative;
         margin-right: -1px;
-        &.active {
-          z-index: ${akEditorUnitZIndex};
-        }
+      }
+      .${ClassName.COLUMN_CONTROLS_BUTTON_WRAP}:last-child > button {
+        border-top-right-radius: ${tableBorderRadiusSize}px;
+      }
+      .${ClassName.COLUMN_CONTROLS_BUTTON_WRAP}.active .${
+  ClassName.CONTROLS_BUTTON
+},
+      .${ClassName.CONTROLS_BUTTON}:hover {
+        z-index: ${akEditorUnitZIndex};
+        position: relative;
       }
       ${HeaderButton(`
         border-right: 1px solid ${tableBorderColor};
         border-bottom: none;
         height: ${tableToolbarSize}px;
         width: 100%;
-        &:hover {
-          z-index: ${akEditorUnitZIndex};
-          position: relative;
+
+        .${ClassName.CONTROLS_BUTTON_OVERLAY} {
+          position: absolute;
+          width: 50%;
+          height: 30px;
+          bottom: 0;
+          right: 0;
+        }
+        .${ClassName.CONTROLS_BUTTON_OVERLAY}:first-child {
+          left: 0;
         }
       `)}
     }
@@ -238,26 +265,26 @@ export const tableStyles = css`
         width: ${tableInsertColumnButtonSize}px;
         z-index: ${akEditorSmallZIndex};
         cursor: pointer;
-        &:hover > div {
+        &:hover .${ClassName.CONTROLS_INSERT_LINE} {
           display: flex;
         }
       }
       .${ClassName.CONTROLS_INSERT_COLUMN} {
-        top: -${tableInsertColumnButtonSize}px;
+        top: -${tableInsertColumnButtonSize - 2}px;
         right: -${tableInsertColumnButtonSize / 2}px;
       }
       .${ClassName.CONTROLS_INSERT_ROW} {
         top: 2px;
-        left: -${tableDeleteButtonSize + 4}px;
+        left: -${tableDeleteButtonSize + 2}px;
       }
     }
     .${ClassName.COLUMN_CONTROLS},
     .${ClassName.CONTROLS_INSERT_COLUMN} {
-      ${InsertButton('top: 2px;')}
+      ${InsertButton()}
       ${InsertLine(`
         width: 2px;
         left: 8px;
-        top: ${tableInsertColumnButtonSize}px;
+        top: ${tableInsertColumnButtonSize - 2}px;
       `)}
       ${InsertMarker(`
         bottom: 5px;
@@ -266,11 +293,11 @@ export const tableStyles = css`
     }
     .${ClassName.ROW_CONTROLS},
     .${ClassName.CONTROLS_INSERT_ROW} {
-      ${InsertButton('left: 2px;')}
+      ${InsertButton()}
       ${InsertLine(`
         height: 2px;
         top: 8px;
-        left: ${tableInsertColumnButtonSize}px;
+        left: ${tableInsertColumnButtonSize - 2}px;
       `)}
       ${InsertMarker(`
         top: 7px;
@@ -325,30 +352,35 @@ export const tableStyles = css`
       width: ${tableToolbarSize}px;
       box-sizing: border-box;
       display: none;
+      position: relative;
 
       .${ClassName.ROW_CONTROLS_INNER} {
         display: flex;
         flex-direction: column;
-        & > div.${ClassName.ROW_CONTROLS_BUTTON_WRAP}.last > button {
-          border-bottom-left-radius: ${tableBorderRadiusSize}px;
-        }
+      }
+      .${ClassName.ROW_CONTROLS_BUTTON_WRAP}:last-child > button {
+        border-bottom-left-radius: ${tableBorderRadiusSize}px;
       }
       .${ClassName.ROW_CONTROLS_BUTTON_WRAP} {
         position: relative;
         margin-top: -1px;
-        &.active {
-          z-index: ${akEditorUnitZIndex};
-        }
+      }
+      .${ClassName.ROW_CONTROLS_BUTTON_WRAP}.active .${
+  ClassName.CONTROLS_BUTTON
+},
+      .${ClassName.CONTROLS_BUTTON}:hover {
+        z-index: ${akEditorUnitZIndex};
+        position: relative;
       }
       .${ClassName.CONTROLS_INSERT_BUTTON_WRAP} {
         position: absolute;
         bottom: -${tableInsertColumnButtonSize / 2}px;
-        left: -${tableInsertColumnButtonSize}px;
+        left: -${tableInsertColumnButtonSize - 2}px;
         height: ${tableInsertColumnButtonSize}px;
         width: ${tableInsertColumnButtonSize}px;
         z-index: ${akEditorSmallZIndex};
         cursor: pointer;
-        &:hover > div {
+        &:hover .${ClassName.CONTROLS_INSERT_LINE} {
           display: flex;
         }
       }
@@ -362,6 +394,17 @@ export const tableStyles = css`
         border-radius: 0;
         height: 100%;
         width: ${tableToolbarSize + 1}px;
+
+        .${ClassName.CONTROLS_BUTTON_OVERLAY} {
+          position: absolute;
+          width: 30px;
+          height: 50%;
+          right: 0;
+          bottom: 0;
+        }
+        .${ClassName.CONTROLS_BUTTON_OVERLAY}:first-child {
+          top: 0;
+        }
       `)}
     }
 
@@ -382,6 +425,7 @@ export const tableStyles = css`
       margin-top: -1px;
       padding: 10px 2px;
       text-align: center;
+      font-size: ${fontSize()}px;
       background-color: ${tableToolbarColor};
       color: ${N200};
       border-color: ${akEditorTableBorder};
@@ -450,9 +494,9 @@ export const tableStyles = css`
           rgba(99, 114, 130, 0) 0,
           ${N40A} 100%
         );
-        height: calc(100% - ${tableMarginTop - 1}px);
+        height: calc(100% - ${tableMarginTop + 8}px);
         left: calc(100% + 2px);
-        top: ${tableMarginTop - tableToolbarSize + 1}px;
+        top: ${tableMarginTop - 1}px;
       }
     }
 
@@ -494,7 +538,7 @@ export const tableStyles = css`
     .${ClassName.COLUMN_CONTROLS_WRAPPER},
     .${ClassName.ROW_CONTROLS_WRAPPER} {
       position: absolute;
-      top: ${(isIE11 ? 0 : tableMarginTop) - tableToolbarSize}px;
+      top: ${tableMarginTop - 1}px;
     }
     .${ClassName.ROW_CONTROLS_WRAPPER}.${ClassName.TABLE_LEFT_SHADOW} {
       z-index: ${akEditorUnitZIndex};
@@ -508,6 +552,8 @@ export const tableStyles = css`
     .${ClassName.TABLE_NODE_WRAPPER} {
       padding-right: ${tableInsertColumnButtonSize / 2}px;
       margin-right: -${tableInsertColumnButtonSize / 2}px;
+      padding-top: ${tableInsertColumnButtonSize / 2}px;
+      margin-top: -${tableInsertColumnButtonSize / 2}px;
       z-index: ${akEditorUnitZIndex - 1};
       /* fixes gap cursor height */
       overflow: ${isIE11 ? 'none' : 'auto'};
@@ -550,12 +596,17 @@ export const tableStyles = css`
   }
 
   /* =============== TABLE CONTEXTUAL MENU ================== */
-  .${ClassName.CONTEXTUAL_MENU_TRIGGER} {
+  .${ClassName.CONTEXTUAL_MENU_BUTTON} {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+
     > div {
-      background: ${N20A};
+      background: ${N20};
       border-radius: ${borderRadius()}px;
+      border: 2px solid ${N0};
       display: flex;
-      height: ${contextualMenuTriggerSize}px;
+      height: ${contextualMenuTriggerSize + 2}px;
       flex-direction: column;
     }
     button {
@@ -594,7 +645,7 @@ export const tableStyles = css`
       width: 1px;
       position: relative;
       left: 25px;
-      top: -3px;
+      top: 9px;
       color: ${N90};
     }
   }

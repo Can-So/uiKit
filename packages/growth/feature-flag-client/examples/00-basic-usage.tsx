@@ -46,20 +46,21 @@ export default () => (
 
     <h4>getVariantValue</h4>
     <p>
-      Value for flag "my.experiment" is "{client.getVariantValue(
-        'my.experiment',
-        {
-          default: 'control',
-          oneOf: ['control', 'experiment'],
-        },
-      )}"
+      Value for flag "my.experiment" is "
+      {client.getVariantValue('my.experiment', {
+        default: 'control',
+        oneOf: ['control', 'experiment'],
+      })}
+      "
     </p>
 
     <h4>getBooleanValue</h4>
     <p>
-      Value for flag "my.boolean.flag" is "{JSON.stringify(
+      Value for flag "my.boolean.flag" is "
+      {JSON.stringify(
         client.getBooleanValue('my.boolean.flag', { default: true }),
-      )}"
+      )}
+      "
     </p>
 
     <h4>getJSONFlag</h4>

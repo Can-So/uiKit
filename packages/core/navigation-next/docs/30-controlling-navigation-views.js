@@ -20,9 +20,10 @@ We refer to each state the navigation can be in as a 'view'. As an example, here
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-views-example')}
+      source={require('!!raw-loader!./examples/views-controller/views-example')}
       title="Navigation views"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-views-example"
+      id="views-example"
+      path="/views-controller"
     />
   )}
 
@@ -116,9 +117,10 @@ We provide a state manager to help you handle this, and a wrapped version of the
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-layoutmanagerwithviewcontroller')}
+      source={require('!!raw-loader!./examples/views-controller/layoutmanagerwithviewcontroller')}
       title="LayoutManagerWithViewController"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-layoutmanagerwithviewcontroller"
+      id="layoutmanagerwithviewcontroller"
+      path="/views-controller"
     />
   )}
 
@@ -159,9 +161,10 @@ We call \`navigationViewController.addView(myView)\` to register that view. We t
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-add-and-set-view')}
+      source={require('!!raw-loader!./examples/views-controller/add-and-set-view')}
       title="Adding and setting a view"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-add-and-set-view"
+      id="add-and-set-view"
+      path="/views-controller"
     />
   )}
 
@@ -171,9 +174,10 @@ Let's add a Project issues view to our navigation. Now when we click on the 'Iss
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-update-view')}
+      source={require('!!raw-loader!./examples/views-controller/update-view')}
       title="Transitioning between views"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-update-view"
+      id="update-view"
+      path="/views-controller"
     />
   )}
 
@@ -223,9 +227,10 @@ Let's add some routing to our app. In this example we'll use \`react-router\`.
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-adding-routes')}
+      source={require('!!raw-loader!./examples/views-controller/adding-routes')}
       title="Adding routing to our app"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-adding-routes"
+      id="adding-routes"
+      path="/views-controller"
     />
   )}
 
@@ -256,7 +261,8 @@ ${code`const LinkItem = ({ components: { Item }, to, ...props }) => {
 ${code`// Project home view Dashboards item
 {
 - type: 'Item',
-+ type: LinkItem,
++ type: 'InlineComponent',
++ component: LinkItem,
   id: 'dashboards',
   before: DashboardIcon,
   text: 'Dashboards',
@@ -264,6 +270,8 @@ ${code`// Project home view Dashboards item
 }`}
 
 This component renders a \`react-router\` \`Link\`. It also connects to the router and will appear selected when the current route matches its \`to\` property.
+
+An alternative way to specify a custom component is using the \`customComponents\` prop of \`LayoutManagerWithViewcontroller\` component and then referencing the custom component type directly as a string, similar to a built-in type.
 
 #### 2. Add routes to our app which set their view on mount
 
@@ -293,7 +301,9 @@ ${code`class App extends Component {
 
   render() {
     return (
-      <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
+      <LayoutManagerWithViewController
+        globalNavigation={MyGlobalNavigation}
+      >
 -       <div>Page content goes here.</div>
 +       <Switch>
 +         <Route path="/issues" component={IssuesAndFiltersRoute} />
@@ -323,9 +333,10 @@ What if your view needs some data to render, but you don't want to fetch that da
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-asynchronous-views')}
+      source={require('!!raw-loader!./examples/views-controller/asynchronous-views')}
       title="Asynchronous views"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-asynchronous-views"
+      id="asynchronous-views"
+      path="/views-controller"
     />
   )}
 
@@ -337,9 +348,10 @@ So far we've only been dealing with 'product' navigation. When we enter a 'conta
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-container-views')}
+      source={require('!!raw-loader!./examples/views-controller/container-views')}
       title="Container views"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-container-views"
+      id="container-views"
+      path="/views-controller"
     />
   )}
 
@@ -355,9 +367,10 @@ You may run into situations in your application where one part of the app wants 
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-reducing-views')}
+      source={require('!!raw-loader!./examples/views-controller/reducing-views')}
       title="Container views"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-reducing-views"
+      id="reducing-views"
+      path="/views-controller"
     />
   )}
 
@@ -411,7 +424,9 @@ It's then as simple as rendering the \`GrowthExperiment\` component as long as w
 
 ${code`render() {
   return (
-    <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
+    <LayoutManagerWithViewController
+      globalNavigation={MyGlobalNavigation}
+    >
       <Switch>
         <Route path="/projects/my-project" component={ProjectBacklogRoute} />
         <Route path="/issues" component={IssuesAndFiltersRoute} />

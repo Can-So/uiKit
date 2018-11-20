@@ -1,5 +1,10 @@
 # @atlaskit/page
 
+## 8.0.10
+- [patch] [84e8015](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84e8015):
+
+  - Bump react-syntax-highlighter to 10.0.1
+
 ## 8.0.9
 - [patch] Fix webpack 3 support for page & code [03af95e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/03af95e)
 

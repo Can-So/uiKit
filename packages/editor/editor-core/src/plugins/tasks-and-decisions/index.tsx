@@ -73,7 +73,7 @@ const tasksAndDecisionsPlugin: EditorPlugin = {
       {
         title: formatMessage(insertBlockMessages.action),
         priority: 100,
-        keywords: ['task'],
+        keywords: ['checkbox', 'task', 'todo'],
         icon: () => (
           <EditorTaskIcon label={formatMessage(insertBlockMessages.action)} />
         ),

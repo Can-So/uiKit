@@ -40,6 +40,7 @@ export const akEditorCodeBlockPadding = '12px';
 export const akEditorCodeInlinePadding = '2px 4px';
 export const akEditorUnitZIndex = 1;
 export const akEditorSmallZIndex = 2;
+export const akEditorGridLineZIndex = 9999;
 // z-index for main menu bar -
 // this is highest as it should be above anything else in editor below.
 export const akEditorMenuZIndex = layers.blanket();
@@ -69,6 +70,7 @@ export const akEditorWideLayoutWidth = 960;
 export const akEditorTableNumberColumnWidth = 42;
 export const akEditorBreakoutPadding = 96;
 export const akEditorElementMinWidth = 150;
+export const akEditorMobileBreakoutPoint = 720;
 
 export const editorFontSize = ({ theme }) =>
   theme && theme.baseFontSize ? theme.baseFontSize : defaultFontSize();

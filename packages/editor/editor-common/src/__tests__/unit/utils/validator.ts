@@ -628,6 +628,7 @@ describe('Renderer - Validator', () => {
           text: 'Done',
           color: 'green',
           localId: '666',
+          style: 'bold',
         };
         const { type, attrs } = getValidNode({
           type: 'status',
@@ -1396,7 +1397,6 @@ describe('Renderer - Validator', () => {
             },
           ],
         });
-
         expect(content).to.deep.equal(itemContent);
       });
     });

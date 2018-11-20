@@ -1,5 +1,63 @@
 # @atlaskit/navigation-next
 
+## 3.25.1
+- [patch] [a22db3c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a22db3c):
+
+  - Update flowtypes of UIController to allow consumer supplied cache getters to return null/undefined
+
+## 3.25.0
+- [minor] [d96b032](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d96b032):
+
+  - Export flow types for each built-in item renderer type
+  - Export a generic flow typed version of the renderer, `TypedViewRenderer`, that is designed to be extended to pass custom component flow types
+    so the renderer typechecks custom components. See the [View Renderer documentation](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/state-controllers#view-renderer) for more information.
+
+## 3.24.0
+- [minor] [c2c0b0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2c0b0c):
+
+  - Adding new component AsyncLayoutManagerWithViewController to be used with code splitting
+
+## 3.23.0
+- [minor] [b40e33e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b40e33e):
+
+  - Update flow types of navigation components and higher-order components (HOCs) to allow types to flow through to consumers.
+
+    Previously this was broken because our navigation HOCs (withTheme, withNavigationUIController, withNavigationViewController)
+    weren't explicitly typed and swallowed types of a component. Types were also lost when components were wrapped with multiple HOCs (including withAnalyticsEvents, withAnalyticsContext HOCs). This is now fixed by default and a number of types related to our navigation HOCs have been exported so that you can explicitly type any subsequent components
+    wrapped with our HOCs.
+
+## 3.22.1
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 3.22.0
+- [minor] [b8bda3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8bda3a):
+
+  - Make Switcher option components styles customizable
+
+## 3.21.0
+- [minor] [9d98f92](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d98f92):
+
+  - Add SortableContext, SortableGroup and SortableItem components to enable drag and drop of items within a view.
+
+## 3.20.1
+- [patch] [c2a6561](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2a6561):
+
+  - Fixing section animation on first-page load
+
+## 3.20.0
+- [minor] [3f17176](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f17176):
+
+  - Make GoToItem display arrow icon on focus event
+
+## 3.19.1
+- [patch] [f3d0351"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f3d0351"
+d):
+
+  - Removing animations on first page load
+
 ## 3.19.0
 - [minor] Export the following view renderer components as standalone UI components: BackItem, ConnectedItem, GoToItem, HeaderSection, MenuSection, Wordmark [459c2dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/459c2dd)
 

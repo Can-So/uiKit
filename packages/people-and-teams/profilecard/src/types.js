@@ -6,6 +6,17 @@ export type PresenceTypes =
   | 'unavailable'
   | 'focus';
 
+export type StatusTypes = 'active' | 'inactive' | 'closed';
+
+export type StatusModifiedDateType =
+  | 'noDate'
+  | 'thisWeek'
+  | 'thisMonth'
+  | 'lastMonth'
+  | 'aFewMonths'
+  | 'severalMonths'
+  | 'moreThanAYear';
+
 export type ProfileCardAction = {
   callback?: Function,
   shouldRender?: Function,
@@ -14,8 +25,7 @@ export type ProfileCardAction = {
 };
 
 export type ProfilecardProps = {
-  isCensored?: boolean,
-  isActive?: boolean,
+  status?: StatusTypes,
   isBot?: boolean,
   avatarUrl?: string,
   fullName?: string,
@@ -23,6 +33,7 @@ export type ProfilecardProps = {
   nickname?: string,
   email?: string,
   location?: string,
+  companyName?: string,
   timestring?: string,
   presence?: PresenceTypes,
   actions?: ProfileCardAction[],
@@ -32,7 +43,20 @@ export type ProfilecardProps = {
   clientFetchProfile?: Function,
   analytics?: Function,
   presenceMessage?: string,
+  statusModifiedDate?: number,
+  // allow to pass custom elevation, example value of this prop is: `e100`, `e200`, `e300`, `e400` and `e500`
+  // Reference from `packages/core/theme/src/elevation.js` to see all valid values.
+  customElevation?: string,
 };
+
+export type RelativeDateKeyType =
+  | 'ThisWeek'
+  | 'ThisMonth'
+  | 'LastMonth'
+  | 'AFewMonths'
+  | 'SeveralMonths'
+  | 'MoreThanAYear'
+  | null;
 
 export type ProfileClient = {
   makeRequest: (cloudId: string, userId: string) => Promise<any>,

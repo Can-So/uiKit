@@ -1,5 +1,15 @@
 # @atlaskit/mention
 
+## 15.1.2
+- [patch] [36c362f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36c362f):
+
+  - FS-3174 - Fix usage of gridSize() and borderRadius()
+
+## 15.1.1
+- [patch] [527b954](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/527b954):
+
+  - FS-3174 - Remove usage of util-shared-styles from elements components
+
 ## 15.1.0
 - [minor] Use relative units for font size and paddings in Mention component [b711063](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b711063)
 

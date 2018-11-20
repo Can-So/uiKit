@@ -2,7 +2,6 @@ import * as React from 'react';
 import EditorDateIcon from '@atlaskit/icon/glyph/editor/date';
 import { date } from '@atlaskit/editor-common';
 import { findDomRefAtPos } from 'prosemirror-utils';
-import { NodeSelection } from 'prosemirror-state';
 
 import { EditorPlugin } from '../../types';
 import WithPluginState from '../../ui/WithPluginState';
@@ -52,23 +51,27 @@ const datePlugin: EditorPlugin = {
 
   contentComponent({ editorView }) {
     const { dispatch } = editorView;
+    const domAtPos = editorView.domAtPos.bind(editorView);
     return (
       <WithPluginState
         plugins={{
           dateState: pluginKey,
         }}
         render={({ dateState = {} as DateState }) => {
-          if (dateState.showDatePickerAt === null) {
+          const { showDatePickerAt } = dateState;
+
+          if (!showDatePickerAt) {
             return null;
           }
 
           const element = findDomRefAtPos(
-            dateState.showDatePickerAt,
-            editorView.domAtPos.bind(editorView),
+            showDatePickerAt,
+            domAtPos,
           ) as HTMLElement;
 
           return (
             <DatePicker
+              key={showDatePickerAt}
               element={element}
               onSelect={date => insertDate(date)(editorView.state, dispatch)}
               closeDatePicker={() =>
@@ -86,17 +89,17 @@ const datePlugin: EditorPlugin = {
       {
         title: formatMessage(messages.date),
         priority: 800,
-        keywords: ['time', '/'],
+        keywords: ['time', 'today', '/'],
         icon: () => <EditorDateIcon label={formatMessage(messages.date)} />,
         action(insert, state) {
           const dateNode = state.schema.nodes.date.createChecked({
-            timestamp: Date.now(),
+            timestamp: Date.now().toString(),
           });
 
-          const tr = insert(dateNode);
-          const showDatePickerAt = tr.selection.from - 2;
-          tr.setSelection(NodeSelection.create(tr.doc, showDatePickerAt));
-          return tr.setMeta(pluginKey, { showDatePickerAt });
+          const tr = insert(dateNode, { selectInlineNode: true });
+          return tr.setMeta(pluginKey, {
+            showDatePickerAt: tr.selection.from,
+          });
         },
       },
     ],

@@ -83,6 +83,63 @@ describe('JIRA wiki markup - Lists', () => {
       `* nested
        spaces in front of me`,
     ],
+    [
+      'should jump over empty lines in macro successfully',
+      `* list with macro
+{code}
+sadfsadf
+
+{code}
+* list 2`,
+    ],
+    ['should not create a list if started with multiple dashes', `------ a`],
+    ['should create a list if started with multiple hash symbols', `## a`],
+    ['should create a list if started with multiple star symbols', `** a`],
+    [
+      'should correctly insert a ruler if it occurs within a list',
+      `
+- a
+----
+- b
+-- c
+--- d
+----
+`,
+    ],
+    [
+      'should correctly insert a 5 dash ruler if it occurs within a list',
+      `
+- a
+-----
+- b
+-- c
+--- d
+-----
+`,
+    ],
+    [
+      'should insert a if it is followed by an empty line',
+      `
+- a
+---- 
+`,
+    ],
+    [
+      'should continue list if rule is followed by text on next line',
+      `
+- a
+---- 
+abc
+`,
+    ],
+    [
+      'should handle lists with quad dash symbols',
+      `
+- a
+---- b
+-- c
+`,
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

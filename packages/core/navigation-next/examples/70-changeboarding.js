@@ -80,18 +80,17 @@ class Example extends Component<ExampleProps, ExampleState> {
             <ExpandToggleButton />
           </div>
         </LayoutManagerWithViewController>
-        {isChangeboardingOpen &&
-          spotlightTargetNode && (
-            <Spotlight
-              actions={[{ onClick: this.closeChangeboarding, text: 'Close' }]}
-              dialogPlacement="right bottom"
-              heading="We've got a new collapse state"
-              targetNode={spotlightTargetNode}
-              targetRadius={16}
-            >
-              <div>Awww yeah.</div>
-            </Spotlight>
-          )}
+        {isChangeboardingOpen && spotlightTargetNode && (
+          <Spotlight
+            actions={[{ onClick: this.closeChangeboarding, text: 'Close' }]}
+            dialogPlacement="right bottom"
+            heading="We've got a new collapse state"
+            targetNode={spotlightTargetNode}
+            targetRadius={16}
+          >
+            <div>Awww yeah.</div>
+          </Spotlight>
+        )}
       </Fragment>
     );
   }

@@ -1,5 +1,6 @@
 // @flow
 import type { Node } from 'react';
+import type { AppearanceType } from '@atlaskit/tag';
 
 export type GroupType = {
   heading?: string,
@@ -34,6 +35,6 @@ export type ItemType = {
 };
 
 export type TagType = {
-  appearance?: string,
+  appearance?: AppearanceType,
   elemBefore?: Node,
 };

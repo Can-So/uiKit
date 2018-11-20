@@ -12,7 +12,8 @@ export type InitialNavigationStateShape = {
   productNavWidth?: number,
 };
 
-export type NavigationStateShape = InitialNavigationStateShape & {
+export type NavigationStateShape = {
+  ...$Exact<InitialNavigationStateShape>,
   isResizing?: boolean,
 };
 
@@ -60,6 +61,16 @@ export type GlobalNavDrawerProps = {
   /** A callback function which will be called when the notifications drawer is
    * closed. */
   onNotificationDrawerClose?: () => void,
+
+  /** Locale to be passed to the notification iFrame */
+  locale?: string,
+  /** Prop to let notification iframe know which product it's being rendered in*/
+  product?: 'jira' | 'confluence',
+  /** fabricNotificationLogUrl of the user */
+  fabricNotificationLogUrl?: string,
+  /** cloudId of the user */
+  cloudId?: string,
+
   /** A prop to decide if the contents of the drawer should unmount on drawer
    * close. It is true by default. */
   shouldNotificationDrawerUnmountOnExit?: boolean,
@@ -136,6 +147,7 @@ export type GlobalNavigationProps = {
   notificationCount?: number,
   /** The text to display in the tooltip for the notifications item. */
   notificationTooltip?: string,
-} & GlobalNavDrawerProps;
+  ...$Exact<GlobalNavDrawerProps>,
+};
 
 export type DrawerName = 'search' | 'notification' | 'starred' | 'create';

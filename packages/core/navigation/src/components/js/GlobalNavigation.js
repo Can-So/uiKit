@@ -32,9 +32,13 @@ type Props = {
   /** The icon to use in the global navigation for the global search button */
   searchIcon?: Element<any>,
   /** A handler that is called when the search drawer is requesting to be opened */
-  onSearchActivate?: () => void,
+  onSearchActivate?: (
+    e: SyntheticMouseEvent<*> | SyntheticKeyboardEvent<*>,
+  ) => void,
   /** A handler that is called when the createIcon is clicked */
-  onCreateActivate?: (e: Event) => void,
+  onCreateActivate?: (
+    e: SyntheticMouseEvent<*> | SyntheticKeyboardEvent<*>,
+  ) => void,
   /** The theme of the global navigation. Presets are available via the
   presetThemes named export, or you can generate your own using the the
   createGlobalTheme named export function. */

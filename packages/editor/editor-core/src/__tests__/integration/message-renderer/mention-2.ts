@@ -1,20 +1,20 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import { getDocFromElement } from '../_helpers';
 import {
-  messageEditor,
+  getDocFromElement,
   editable,
-  picker,
   insertMention,
-  lozenge,
-} from './_mention-helpers';
+  mentionPicker,
+} from '../_helpers';
+
+import { messageEditor, lozenge } from './_message-renderer-helpers';
 
 /*
  * Safari does not understand webdriver keyboard actions so a
  * number of tests have been skipped until move to snapshots.
  *
  * The remaining skipped tests for IE11/Edge are bugs that should be fixed for those browsers.
-*/
+ */
 
 // Follow up with browserstack as to why @ is keyed in as 2 on ie
 BrowserTestCase(
@@ -25,9 +25,9 @@ BrowserTestCase(
     await browser.goto(messageEditor);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@');
-    await browser.waitForSelector(picker);
+    await browser.waitForSelector(mentionPicker);
     expect(await browser.isExisting('[data-mention-query="true"]')).toBe(true);
-    expect(await browser.isExisting(picker)).toBe(true);
+    expect(await browser.isExisting(mentionPicker)).toBe(true);
   },
 );
 
@@ -39,7 +39,7 @@ BrowserTestCase(
     await browser.goto(messageEditor);
     await browser.waitForSelector(editable);
     await browser.type(editable, 'test@');
-    expect(await browser.isExisting(picker)).toBe(false);
+    expect(await browser.isExisting(mentionPicker)).toBe(false);
   },
 );
 
@@ -68,7 +68,7 @@ BrowserTestCase(
     await browser.goto(messageEditor);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@ Carolyn');
-    expect(await browser.isExisting(picker)).toBe(false);
+    expect(await browser.isExisting(mentionPicker)).toBe(false);
   },
 );
 
@@ -80,7 +80,7 @@ BrowserTestCase(
     await browser.goto(messageEditor);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@');
-    await browser.waitForSelector(picker);
+    await browser.waitForSelector(mentionPicker);
     await browser.type(editable, 'penelope');
     await browser.isVisible('[data-mention-name=pgill]');
     await browser.isVisible('[data-mention-name=plim]');
@@ -112,8 +112,8 @@ BrowserTestCase(
     await browser.goto(messageEditor);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@');
-    await browser.waitForSelector(picker);
+    await browser.waitForSelector(mentionPicker);
     await browser.type(editable, 'Escape');
-    expect(await browser.isExisting(picker)).toBe(false);
+    expect(await browser.isExisting(mentionPicker)).toBe(false);
   },
 );

@@ -3,10 +3,11 @@ import { parseString } from '../text';
 import { Token, TokenType, TokenErrCallback } from './';
 
 // h1. HEADING
-const HEADING_REGEXP = /^h([1|2|3|4|5|6])\.\s(.*)/;
+const HEADING_REGEXP = /^h([1-6])\.(.*)/;
 
 export function heading(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token {
@@ -20,10 +21,10 @@ export function heading(
     TokenType.QUADRUPLE_DASH_SYMBOL,
   ];
 
-  const match = input.match(HEADING_REGEXP);
+  const match = input.substring(position).match(HEADING_REGEXP);
 
   if (!match) {
-    return fallback(input);
+    return fallback(input, position);
   }
 
   const level = parseInt(match[1], 10);
@@ -60,10 +61,10 @@ export function heading(
   }
 }
 
-function fallback(input: string): Token {
+function fallback(input: string, position: number): Token {
   return {
     type: 'text',
-    text: input.substr(0, 1),
+    text: input.substr(position, 1),
     length: 1,
   };
 }

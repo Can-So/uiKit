@@ -1,4 +1,5 @@
 import { Node, Fragment, Schema } from 'prosemirror-model';
+import { Transaction } from 'prosemirror-state';
 import {
   validator,
   Entity,
@@ -146,7 +147,7 @@ function fireAnalyticsEvent(
   type: 'block' | 'inline' | 'mark' = 'block',
 ) {
   const { code } = error;
-  analyticsService.trackEvent('fabric.editor.unsupported.node', {
+  analyticsService.trackEvent('atlassian.editor.unsupported', {
     name: entity.type || 'unknown',
     type,
     errorCode: code,
@@ -188,7 +189,7 @@ export function processRawValue(
   try {
     const nodes = Object.keys(schema.nodes);
     const marks = Object.keys(schema.marks);
-    const validate = validator(nodes, marks);
+    const validate = validator(nodes, marks, { allowPrivateAttributes: true });
     const emptyDoc: Entity = { type: 'doc', content: [] };
 
     // ProseMirror always require a child under doc
@@ -257,3 +258,23 @@ export function processRawValue(
     return;
   }
 }
+
+export const getStepRange = (
+  transaction: Transaction,
+): { from: number; to: number } | null => {
+  let from = -1;
+  let to = -1;
+
+  transaction.steps.forEach(step => {
+    step.getMap().forEach((_oldStart, _oldEnd, newStart, newEnd) => {
+      from = newStart < from || from === -1 ? newStart : from;
+      to = newEnd < to || to === -1 ? newEnd : to;
+    });
+  });
+
+  if (from !== -1) {
+    return { from, to };
+  }
+
+  return null;
+};

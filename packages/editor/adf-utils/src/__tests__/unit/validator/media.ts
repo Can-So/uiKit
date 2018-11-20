@@ -110,7 +110,7 @@ describe('media', () => {
         },
       });
     };
-    expect(run).toThrowError(`media: 'attrs' type 'zz' is invalid`);
+    expect(run).toThrowError(`media: 'attrs' validation failed.`);
   });
 
   it('should not throw when collection is empty', () => {

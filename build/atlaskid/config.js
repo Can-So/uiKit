@@ -43,6 +43,9 @@ const editorTeam = [
   'ahixon_atlassian',
   'wangjerome',
   'nathanflew',
+  'fghilini',
+  'MichaelOates',
+  'wcalderipe',
 ];
 const elementsTeam = [
   'sguillope',
@@ -100,6 +103,7 @@ const navigationTeam = [
   'mblaszczyk-atlassian',
   'wmendesneto',
   'isriharsha',
+  'lucaslago_atlassian',
 ];
 const homeTeam = [
   'losang', // maintainer
@@ -108,6 +112,19 @@ const homeTeam = [
   'erwinbolwidt',
   'zeev_gilovitz',
   'hmaher',
+];
+const bitbucketTeam = [
+  'bgummer',
+  'stacylondoner',
+  'ttadej-atlassian',
+  'mafrauen',
+  'IvonneTerrero',
+  'seanaty',
+  'sogrady',
+  'ebutleratlassian',
+  'jpoh',
+  'cdoan-atlassian',
+  'peterwilliams-atl',
 ];
 const usersAllowedToApprove = [].concat(
   atlaskitTeam,
@@ -120,6 +137,7 @@ const usersAllowedToApprove = [].concat(
   growthTeam,
   navigationTeam,
   homeTeam,
+  bitbucketTeam,
 );
 
 module.exports = {

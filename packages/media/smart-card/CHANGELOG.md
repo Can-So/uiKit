@@ -1,5 +1,43 @@
 # @atlaskit/smart-card
 
+## 8.8.0
+- [minor] [93b31fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/93b31fa):
+
+  - Add support for nested <SmartCardProvider />
+
+## 8.7.1
+- [patch] [00cd9a8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00cd9a8):
+
+  - Add tag support for inline task card.
+
+## 8.7.0
+- [minor] [e89e244](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e89e244):
+
+  - Implemented time-based caching for the client.
+
+## 8.6.3
+- [patch] [4b989c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b989c3):
+
+  - Fix inline cards crashing after change to the format.
+
+## 8.6.2
+- [patch] [a567cc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a567cc9):
+
+  - Improve rendering of Smart Cards.
+
+## 8.6.1
+- [patch] [7bc4461](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7bc4461):
+
+  - ED-5565: support connecting external React.Context to nodeviews
+
+## 8.6.0
+- [minor] [1aa57ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1aa57ab):
+
+  Clean up for media up and new task converter for smart cards
+- [minor] [d310628](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d310628):
+
+  Added a converter for atlassian:task type
+
 ## 8.5.2
 - [patch] ED-5439: add block smart cards, toolbar switcher [5f8bdfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f8bdfe)
 

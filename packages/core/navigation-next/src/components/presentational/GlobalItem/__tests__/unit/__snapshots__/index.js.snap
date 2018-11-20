@@ -46,37 +46,11 @@ exports[`GlobalItem GlobalItemBase should render the GlobalItem primitive 1`] = 
 <WithTheme(GlobalNavigationItemPrimitive)
   icon={[Function]}
   isActive={false}
+  isFocused={false}
   isHover={false}
   label=""
   size="large"
   styles={[Function]}
-  theme={
-    Object {
-      "mode": Object {
-        "globalItem": [MockFunction] {
-          "calls": Array [
-            Array [
-              Object {
-                "size": "large",
-              },
-            ],
-          ],
-          "results": Array [
-            Object {
-              "isThrow": false,
-              "value": Object {
-                "badgeWrapper": Object {},
-                "itemBase": Object {},
-                "itemWrapper": Object {
-                  "marginTop": 10,
-                },
-              },
-            },
-          ],
-        },
-      },
-    }
-  }
 />
 `;
 

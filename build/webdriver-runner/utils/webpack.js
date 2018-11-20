@@ -1,10 +1,10 @@
 //@flow
 'use strict';
 /*
-* util module to build webpack-dev-server for running integration test.
-* const CHANGED_PACKAGES accepts environment variable which is used to
-* identify changed packages and return changed packages containing webdriverTests to be built.
-*/
+ * util module to build webpack-dev-server for running integration test.
+ * const CHANGED_PACKAGES accepts environment variable which is used to
+ * identify changed packages and return changed packages containing webdriverTests to be built.
+ */
 
 // Start of the hack for the issue with the webpack watcher that leads to it dying in attempt of watching files
 // in node_modules folder which contains circular symbolic links
@@ -38,7 +38,6 @@ const utils = require('@atlaskit/webpack-config/config/utils');
 const HOST = 'localhost';
 const PORT = 9000;
 const WEBPACK_BUILD_TIMEOUT = 10000;
-const WEBPACK_MAX_SAFE_INTEGER = 4294967295;
 const CHANGED_PACKAGES = process.env.CHANGED_PACKAGES;
 
 let server;
@@ -128,13 +127,12 @@ async function startDevServer() {
   });
 
   let extraOpts = {};
+  let ignored;
   if (!isWatchEnabled) {
     extraOpts = {
       watch: false,
-      watchOptions: {
-        poll: WEBPACK_MAX_SAFE_INTEGER,
-      },
     };
+    ignored = ['**/*'];
   }
 
   const compiler = webpack({ ...config, ...extraOpts });
@@ -158,7 +156,7 @@ async function startDevServer() {
     hot: false,
     inline: false,
     watchOptions: {
-      poll: WEBPACK_MAX_SAFE_INTEGER,
+      ignored,
     },
   });
 

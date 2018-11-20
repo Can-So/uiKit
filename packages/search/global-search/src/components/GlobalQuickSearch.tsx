@@ -14,7 +14,6 @@ import {
   SelectedSearchResultEvent,
   AdvancedSearchSelectedEvent,
   KeyboardControlEvent,
-  SearchResultEvent,
   fireSelectedAdvancedSearch,
   fireTextEnteredEvent,
   fireDismissedEvent,
@@ -33,7 +32,7 @@ const QS_ANALYTICS_EV_SUBMIT = `${ATLASKIT_QUICKSEARCH_NS}.submit`;
 export interface Props {
   onMount();
   onSearch(query: string);
-  onSearchSubmit?();
+  onSearchSubmit?(event: React.KeyboardEvent<HTMLInputElement>);
 
   isLoading: boolean;
   placeholder?: string;
@@ -42,6 +41,8 @@ export interface Props {
   linkComponent?: LinkComponent;
   createAnalyticsEvent?: CreateAnalyticsEventFn;
   isSendSearchTermsEnabled?: boolean;
+  selectedResultId?: string;
+  onSelectedResultIdChanged?: (id: string) => void;
 }
 
 export interface State {
@@ -126,10 +127,7 @@ export class GlobalQuickSearch extends React.Component<Props, State> {
     }
   };
 
-  fireSearchResultEvents = (
-    eventName: string,
-    eventData: SearchResultEvent,
-  ) => {
+  fireSearchResultEvents = (eventName: string, eventData: Object) => {
     const { createAnalyticsEvent, searchSessionId } = this.props;
     if (eventName === QS_ANALYTICS_EV_SUBMIT) {
       this.fireSearchResultSelectedEvent(
@@ -162,6 +160,8 @@ export class GlobalQuickSearch extends React.Component<Props, State> {
       linkComponent,
       children,
       onSearchSubmit,
+      selectedResultId,
+      onSelectedResultIdChanged,
     } = this.props;
 
     return (
@@ -174,6 +174,8 @@ export class GlobalQuickSearch extends React.Component<Props, State> {
           value={this.state.query}
           linkComponent={linkComponent}
           onSearchSubmit={onSearchSubmit}
+          selectedResultId={selectedResultId}
+          onSelectedResultIdChanged={onSelectedResultIdChanged}
         >
           {children}
         </QuickSearch>
