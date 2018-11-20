@@ -24,8 +24,6 @@ describe('ValueContainer', () => {
   const shallowValueContainer = props =>
     shallow(<MultiValueContainer selectProps={selectProps} {...props} />);
 
-  const DummyComponent = ({ placeholder }) => placeholder;
-
   test.each([
     ['add more people...', selectProps.value, false],
     [undefined, selectProps.options, false],
@@ -35,7 +33,7 @@ describe('ValueContainer', () => {
     'should set placeholder to "%s" when (value: %p, loading: %s)',
     (placeholder, value, isLoading) => {
       const component = shallowValueContainer({
-        children: <DummyComponent />,
+        children: [<div>Placeholder</div>, <input type="text" />],
         selectProps: { ...selectProps, value, isLoading },
       });
       const children = renderProp(
@@ -43,9 +41,7 @@ describe('ValueContainer', () => {
         'children',
         'add more people...',
       );
-      expect(children.find(DummyComponent).prop('placeholder')).toEqual(
-        placeholder,
-      );
+      expect(children.find('input').prop('placeholder')).toEqual(placeholder);
     },
   );
 

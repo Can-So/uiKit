@@ -60,8 +60,9 @@ export class MultiValueContainer extends React.PureComponent<any, State> {
         <FormattedMessage {...messages.addMore}>
           {addMore =>
             React.Children.map(children, child =>
-              typeof child !== 'string' &&
-              typeof child !== 'number' &&
+              typeof child === 'object' &&
+              child.props &&
+              child.props.type === 'text' &&
               this.showPlaceholder()
                 ? React.cloneElement(child, { placeholder: addMore })
                 : child,
