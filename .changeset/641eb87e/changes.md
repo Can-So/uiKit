@@ -1,0 +1,1 @@
+- ED-5750: fix selection for merged cells when its created by dragging mouse across table cells
