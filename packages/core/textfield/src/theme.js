@@ -74,7 +74,7 @@ export const themeTokens = {
 };
 
 export type ThemeProps = {
-  textField?: ({ appearance: string }) => {
+  textField?: ThemeAppearance => {
     backgroundColor?: string,
     backgroundColorFocus?: string,
     backgroundColorHover?: string,
