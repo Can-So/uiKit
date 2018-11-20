@@ -25,9 +25,9 @@ ${code`import Form { Field, Validator } from '@atlaskit/form';`}
   ${(
     <Example
       packageName="@atlaskit/form"
-      Component={require('../examples/03-validators-example').default}
+      Component={require('../examples/03-validation-example').default}
       title="Form & Field Validation"
-      source={require('!!raw-loader!../examples/03-validators-example')}
+      source={require('!!raw-loader!../examples/03-validation-example')}
     />
   )}
 

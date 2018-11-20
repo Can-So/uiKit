@@ -35,7 +35,7 @@ type Props = {
   /* Ignore this prop. It gets set internally from context. */
   register: FieldInfo => any,
   /* validates the current value of field */
-  validate?: any => string | Promise<string> | void,
+  validate?: any => string | void | Promise<string | void>,
 };
 
 type State = {
@@ -50,11 +50,6 @@ type State = {
   submitError: any,
   registered: boolean,
 };
-
-const required = value => (String(value).length === 0 ? 'REQUIRED' : undefined);
-
-const withRequired = validator => value =>
-  required(value) || (validator ? validator(value) : undefined);
 
 class FieldInner extends React.Component<Props, State> {
   unregisterField = () => {};
@@ -112,8 +107,7 @@ class FieldInner extends React.Component<Props, State> {
             submitError: true,
           },
           {
-            getValidator: () =>
-              isRequired ? withRequired(validate) : validate,
+            getValidator: () => validate,
           },
         );
       },
@@ -134,7 +128,8 @@ class FieldInner extends React.Component<Props, State> {
       value,
       ...rest
     } = this.state;
-    const error = rest.submitError || (rest.touched && rest.error);
+    const error =
+      rest.submitError || ((rest.touched || rest.dirty) && rest.error);
     const fieldProps = {
       onChange,
       onBlur,
