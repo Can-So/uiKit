@@ -127,6 +127,7 @@ describe('status plugin: actions', () => {
               color: 'blue',
               localId: '666',
             }),
+            ' ',
           ),
         ),
       );

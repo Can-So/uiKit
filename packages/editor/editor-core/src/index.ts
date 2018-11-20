@@ -61,12 +61,11 @@ export { EventDispatcher } from './event-dispatcher';
 export {
   pluginKey as statusPluginKey,
   StatusState,
+  StatusType,
 } from './plugins/status/plugin';
 export {
   commitStatusPicker,
-  getStatusAtPosition,
   setStatusPickerAt,
-  StatusType,
   updateStatus,
 } from './plugins/status/actions';
 

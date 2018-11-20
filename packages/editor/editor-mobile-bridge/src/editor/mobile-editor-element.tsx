@@ -8,7 +8,6 @@ import {
   ListsState,
   listsStateKey,
   statusPluginKey,
-  getStatusAtPosition,
 } from '@atlaskit/editor-core';
 import { valueOf as valueOfMarkState } from './web-to-native/markState';
 import { valueOf as valueOfListState } from './web-to-native/listState';
@@ -82,18 +81,18 @@ function subscribeForStatusStateChange(view: EditorView, eventDispatcher: any) {
 }
 
 const statusStateUpdated = view => state => {
-  if (state.showStatusPickerAt) {
-    const status = getStatusAtPosition(state.showStatusPickerAt)(view);
-    if (status) {
-      toNativeBridge.showStatusPicker(
-        status.text,
-        status.color,
-        status.localId as string,
-      );
-      return;
-    }
+  const { selectedStatus: status, showStatusPickerAt } = state;
+  if (status) {
+    toNativeBridge.showStatusPicker(
+      status.text,
+      status.color,
+      status.localId as string,
+    );
+    return;
   }
-  toNativeBridge.dismissStatusPicker();
+  if (!showStatusPickerAt) {
+    toNativeBridge.dismissStatusPicker();
+  }
 };
 
 function sendToNative(state) {
