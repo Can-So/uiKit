@@ -5,8 +5,8 @@ import type { OptionsPropType, OptionPropType } from './types';
 /* eslint-disable react/no-array-index-key */
 
 export type RadioGroupProps = {
-  checkedValue?: string | number | null,
-  defaultCheckedValue?: string | number | null,
+  value?: string | number | null,
+  defaultValue?: string | number | null,
   isRequired?: boolean,
   options: OptionsPropType,
   onInvalid?: (event: SyntheticEvent<*>) => void,
@@ -15,7 +15,7 @@ export type RadioGroupProps = {
 
 type RadioElementArray = Array<Element<typeof Radio>>;
 
-type State = { checkedValue?: string | number | null };
+type State = { value?: string | number | null };
 
 export default class RadioGroup extends Component<RadioGroupProps, State> {
   static defaultProps = {
@@ -26,10 +26,10 @@ export default class RadioGroup extends Component<RadioGroupProps, State> {
   constructor(props: RadioGroupProps) {
     super(props);
     this.state = {
-      checkedValue:
-        this.props.checkedValue !== undefined
-          ? this.props.checkedValue
-          : this.props.defaultCheckedValue,
+      value:
+        this.props.value !== undefined
+          ? this.props.value
+          : this.props.defaultValue,
     };
   }
 
@@ -39,7 +39,7 @@ export default class RadioGroup extends Component<RadioGroupProps, State> {
 
   onChange = (event: SyntheticEvent<*>) => {
     this.setState({
-      checkedValue: event.currentTarget.value,
+      value: event.currentTarget.value,
     });
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(event);
@@ -48,12 +48,12 @@ export default class RadioGroup extends Component<RadioGroupProps, State> {
 
   buildOptions = () => {
     const { options, isRequired, onInvalid } = this.props;
-    const checkedValue = this.getProp('checkedValue');
+    const value = this.getProp('value');
     if (!options.length) return null;
 
     return (options.map((option: OptionPropType, index: number) => {
       let optionProps = { ...option };
-      if (checkedValue !== null && option.value === checkedValue) {
+      if (value !== null && option.value === value) {
         optionProps = { ...option, isChecked: true };
       }
       return (

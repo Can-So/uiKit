@@ -1,0 +1,15 @@
+{
+  "releases": [{ "name": "@atlaskit/radio", "type": "minor" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/form",
+      "type": "patch",
+      "dependencies": ["@atlaskit/radio"]
+    },
+    {
+      "name": "@atlaskit/smart-card",
+      "type": "patch",
+      "dependencies": ["@atlaskit/form", "@atlaskit/radio"]
+    }
+  ]
+}

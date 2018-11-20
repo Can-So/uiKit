@@ -15,7 +15,7 @@ type State = {
   isChecked: boolean,
   isFocused: boolean,
   isMouseDown: boolean,
-  checkedValue: string,
+  value: string,
 };
 
 const items: Array<{
@@ -65,7 +65,7 @@ const items: Array<{
 export default class RadioInputExample extends Component<*, State> {
   state = {
     items: (items.slice(): Array<*>),
-    checkedValue: '1',
+    value: '1',
     isActive: false,
     isChecked: false,
     isMouseDown: false,
@@ -103,7 +103,7 @@ export default class RadioInputExample extends Component<*, State> {
     });
     this.setState({
       items: newItems,
-      checkedValue: value,
+      value,
     });
   };
 
@@ -153,7 +153,7 @@ export default class RadioInputExample extends Component<*, State> {
             margin: '1em 0',
           }}
         >
-          currently selected value: {this.state.checkedValue}
+          currently selected value: {this.state.value}
         </div>
       </div>
     );

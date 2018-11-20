@@ -31,13 +31,13 @@ In @atlaskit/field-radio-group, users would pass in an \`items\` array to be ren
 
 Other core changes are the following prop additions:
 
-- \`checkedValue\`: This is an optional prop that is compared against the value of each passed in option. The matching option will be instantiated as a Radio component with isChecked set to true. If this prop is left undefined, the selection of any given radio is managed internally within the state of the RadioGroup component.
+- \`value\`: This is an optional prop that is compared against the value of each passed in option. The matching option will be instantiated as a Radio component with isChecked set to true. If this prop is left undefined, the selection of any given radio is managed internally within the state of the RadioGroup component.
 
-- \`defaultCheckedValue\`: This is an optional prop that is set as the checkedValue in state initially. Further interactions with radio options rendered by this RadioGroup will override this value with the internally managed checked state.
+- \`defaultValue\`: This is an optional prop that is set as the value in state initially. Further interactions with radio options rendered by this RadioGroup will override this value with the internally managed checked state.
 
 \*\`onRadioChange\` in field-radio-group is now \`onChange\` in @atlaskit/radio.
 
-Additionally, while \`defaultChecked\` use to be a valid property within the passed in items array in \`field-radio-group\`; this is no longer the case in \`@atlaskit/radio\`, as the responsibility of this property is now passed up to the defaultCheckedValue prop on the RadioGroup component.
+Additionally, while \`defaultChecked\` use to be a valid property within the passed in items array in \`field-radio-group\`; this is no longer the case in \`@atlaskit/radio\`, as the responsibility of this property is now passed up to the defaultValue prop on the RadioGroup component.
 
 ## Radio
 
