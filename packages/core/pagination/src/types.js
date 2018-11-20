@@ -1,5 +1,5 @@
 //@flow
-import type { Node } from 'react';
+import type { Node, ElementType } from 'react';
 import type { ButtonProps, ButtonAppearances } from '@atlaskit/button';
 import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
 
@@ -51,15 +51,7 @@ export type PaginationPropTypes = {
   /** Maximum number of pages to be displayed in the pagination */
   max: number,
   /** The react Node returned from nextPageComponent function is rendered instead of default next page component */
-  nextPageComponent?: ({
-    children?: Node,
-    className?: string,
-    onMouseEnter?: Function,
-    onMouseLeave?: Function,
-    disabled?: boolean,
-    pages?: Array<any>,
-    selectedIndex?: number,
-  }) => Node,
+  nextPageComponent?: ElementType,
   /** onChange handler which is called when the page is changed */
   onChange?: (
     event: SyntheticEvent<>,
@@ -67,26 +59,11 @@ export type PaginationPropTypes = {
     analyticsEvent: ?UIAnalyticsEvent,
   ) => void,
   /** The react Node returned from pageComponent function is rendered instead of default page button component */
-  pageComponent?: ({
-    children?: Node,
-    className?: string,
-    onMouseEnter?: Function,
-    onMouseLeave?: Function,
-    disabled?: boolean,
-    page?: any,
-  }) => Node,
+  pageComponent?: ElementType,
   /** Array of the pages to display */
   pages: Array<any>,
   /** The react Node returned from previousPageComponent function is rendered instead of default previous page component */
-  previousPageComponent?: ({
-    children?: Node,
-    className?: string,
-    onMouseEnter?: Function,
-    onMouseLeave?: Function,
-    disabled?: boolean,
-    pages?: Array<any>,
-    selectedIndex?: number,
-  }) => Node,
+  previousPageComponent?: ElementType,
   /** index of the selected page. This will make this pagination controlled */
   selectedIndex?: number,
 };
