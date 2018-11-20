@@ -14,6 +14,8 @@ describe('RelativeDate', () => {
   const A_FEW_MONTHS = new Date(new Date(TODAY).setMonth(8));
   const SEVERAL_MONTHS = new Date(new Date(TODAY).setMonth(2));
   const MORE_THAN_A_YEAR = new Date(new Date(TODAY).setMonth(-3));
+  const INVALID_DATE = new Date('');
+  const FUTURE_DATE = new Date(new Date(TODAY).setMonth(11));
 
   const renderShallow = (props = {}) =>
     shallow(<RelativeDate date={TODAY} {...props} />);
@@ -85,6 +87,22 @@ describe('RelativeDate', () => {
   it('should match snapshot when date prop is more than a year ago', () => {
     const wrapper = renderShallow({
       date: MORE_THAN_A_YEAR,
+    });
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should match snapshot when date prop is invalid date', () => {
+    const wrapper = renderShallow({
+      date: INVALID_DATE,
+    });
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should match snapshot when date prop is a future date', () => {
+    const wrapper = renderShallow({
+      date: FUTURE_DATE,
     });
 
     expect(wrapper).toMatchSnapshot();

@@ -9,6 +9,8 @@ exports[`RelativeDate should match snapshot when date prop is a few months ago 1
 />
 `;
 
+exports[`RelativeDate should match snapshot when date prop is a future date 1`] = `""`;
+
 exports[`RelativeDate should match snapshot when date prop is in last month 1`] = `
 <FormattedMessage
   defaultMessage="last month"
@@ -35,6 +37,8 @@ exports[`RelativeDate should match snapshot when date prop is in this week 1`] =
   values={Object {}}
 />
 `;
+
+exports[`RelativeDate should match snapshot when date prop is invalid date 1`] = `""`;
 
 exports[`RelativeDate should match snapshot when date prop is more than a year ago 1`] = `
 <FormattedMessage

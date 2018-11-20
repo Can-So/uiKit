@@ -15,7 +15,10 @@ import { bgColor } from '../styled/constants';
 const CardAnimationWrapper = styled.div`
   background-color: ${bgColor};
   border-radius: ${borderRadius}px;
-  ${props => (props.isInAdmin ? elevation.e100 : elevation.e200)};
+  ${props =>
+    props.customElevation && elevation[props.customElevation]
+      ? elevation[props.customElevation]
+      : elevation.e200};
   cursor: default;
   font-family: ${fontFamily};
   font-size: ${fontSize}px;
@@ -27,7 +30,7 @@ const CardAnimationWrapper = styled.div`
 
 type Props = {
   children: ReactNode,
-  isInAdmin?: boolean,
+  customElevation?: string,
 };
 
 type State = {
@@ -68,7 +71,7 @@ export default class HeightTransitionWrapper extends PureComponent<
   }
 
   render() {
-    const { isInAdmin } = this.props;
+    const { customElevation } = this.props;
 
     const inlineHeight = {
       height: this.state.height,
@@ -76,7 +79,7 @@ export default class HeightTransitionWrapper extends PureComponent<
 
     return (
       <CardAnimationWrapper
-        isInAdmin={isInAdmin}
+        customElevation={customElevation}
         style={inlineHeight}
         innerRef={ref => {
           this.ref = ref;

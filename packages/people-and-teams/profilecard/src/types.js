@@ -44,7 +44,9 @@ export type ProfilecardProps = {
   analytics?: Function,
   presenceMessage?: string,
   statusModifiedDate?: number,
-  isInAdmin?: boolean,
+  // allow to pass custom elevation, example value of this prop is: `e100`, `e200`, `e300`, `e400` and `e500`
+  // Reference from `packages/core/theme/src/elevation.js` to see all valid values.
+  customElevation?: string,
 };
 
 export type RelativeDateProps = {

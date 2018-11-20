@@ -204,7 +204,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
     const relativeDate = date ? <RelativeDate date={date} /> : null;
 
     if (status === 'inactive') {
-      return date ? (
+      return RelativeDate.isValidDate(date) ? (
         <FormattedMessage
           {...messages.inactiveAccountDescHasDateMsg}
           values={{ date: relativeDate }}
@@ -213,7 +213,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
         <FormattedMessage {...messages.inactiveAccountDescNoDateMsg} />
       );
     } else if (status === 'closed') {
-      return date ? (
+      return RelativeDate.isValidDate(date) ? (
         <FormattedMessage
           {...messages.closedAccountDescHasDateMsg}
           values={{ date: relativeDate }}
@@ -279,7 +279,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   }
 
   render() {
-    const { isInAdmin } = this.props;
+    const { customElevation } = this.props;
     let cardContent = null;
 
     if (this.props.hasError) {
@@ -297,7 +297,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
     }
 
     return (
-      <HeightTransitionWrapper isInAdmin={isInAdmin}>
+      <HeightTransitionWrapper customElevation={customElevation}>
         {cardContent}
       </HeightTransitionWrapper>
     );

@@ -28,7 +28,7 @@ describe('Profilecard', () => {
     mockdate.reset();
   });
 
-  const renderShawllow = (props = {}) =>
+  const renderShallow = (props = {}) =>
     shallow(<AkProfilecard {...defaultProps} {...props} />);
 
   it('should export default AkProfilecardResourced', () => {
@@ -200,7 +200,7 @@ describe('Profilecard', () => {
 
     describe('status property', () => {
       it('should match snapshot when status=inactive and status modified date is unknown', () => {
-        const card = renderShawllow({
+        const card = renderShallow({
           status: 'inactive',
           statusModifiedDate: undefined,
         });
@@ -209,7 +209,7 @@ describe('Profilecard', () => {
       });
 
       it('should match snapshot when status=inactive and status modified date is defined', () => {
-        const card = renderShawllow({
+        const card = renderShallow({
           status: 'inactive',
           statusModifiedDate: 1542608651819,
         });
@@ -218,7 +218,7 @@ describe('Profilecard', () => {
       });
 
       it('should match snapshot when status=closed and status modified date is unknown', () => {
-        const card = renderShawllow({
+        const card = renderShallow({
           status: 'closed',
           statusModifiedDate: undefined,
         });
@@ -227,12 +227,21 @@ describe('Profilecard', () => {
       });
 
       it('should match snapshot when status=closed and status modified date is defined', () => {
-        const card = renderShawllow({
+        const card = renderShallow({
           status: 'closed',
           statusModifiedDate: 1542608651819,
         });
 
         expect(card).toMatchSnapshot();
+      });
+    });
+
+    describe('customElevation', () => {
+      it('should have correct customElevation', () => {
+        const wrapper = mount(<AkProfilecard customElevation="e400" />);
+        expect(
+          wrapper.find('HeightTransitionWrapper').props().customElevation,
+        ).toEqual('e400');
       });
     });
   });
