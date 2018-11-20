@@ -87,7 +87,6 @@ export default class WebBridgeImpl implements NativeToWebBridge {
   }
 
   onStatusUpdate(text: string, color: StatusColor, uuid: string) {
-    // TODO create or insert....
     if (this.statusPluginState && this.editorView) {
       updateStatus({
         text,
