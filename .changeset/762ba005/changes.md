@@ -1,1 +1,0 @@
-- Rename `ViewsRenderer` to `ItemsRenderer` in order to better represent the component's purpose
