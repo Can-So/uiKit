@@ -4,8 +4,6 @@ import {
   Vector2,
   Bounds,
   dataURItoFile,
-  loadImage,
-  getOrientation,
   FileInfo,
   getFileInfo,
   getFileInfoFromSrc,
@@ -14,6 +12,10 @@ import { Container } from './container';
 import { Image } from './image';
 import { Margin } from './margin';
 import { ImagePlacerWrapper, ImagePlacerErrorWrapper } from './styled';
+import {
+  initialiseImagePreview,
+  renderImageAtCurrentView,
+} from './imageProcessor';
 
 /*
 "container(Width|Height)" is the outputed size of the final image plus "margin"s.
@@ -40,14 +42,6 @@ export interface ImagePlacerAPI {
   toFile: () => File;
 }
 
-/* returned when pre-processing loaded images */
-export interface ImageInfo {
-  fileInfo: FileInfo;
-  width: number;
-  height: number;
-}
-
-/* props for main component */
 export interface ImagePlacerProps {
   containerWidth: number;
   containerHeight: number;
@@ -60,15 +54,14 @@ export interface ImagePlacerProps {
   originY: number;
   useConstraints: boolean;
   circular: boolean;
-  useCircularMask: boolean;
+  renderCircularMask: boolean;
   backgroundColor: string;
   onImageChange?: (imageElement: HTMLImageElement) => void;
   onZoomChange?: (zoom: number) => void;
   onSaveImage?: (api: ImagePlacerAPI) => void;
-  errorRenderer?: (errorMessage: string) => JSX.Element;
+  onRenderError?: (errorMessage: string) => JSX.Element;
 }
 
-/* state for main component */
 export interface ImagePlacerState {
   imageWidth: number;
   imageHeight: number;
@@ -89,11 +82,10 @@ export const DEFAULT_ORIGIN_X = 0;
 export const DEFAULT_ORIGIN_Y = 0;
 export const DEFAULT_USE_CONSTRAINTS = true;
 export const DEFAULT_CIRCULAR = false;
-export const DEFAULT_USE_CIRCULAR_MASK = false;
+export const DEFAULT_RENDER_CIRCULAR_MASK = false;
 export const DEFAULT_BACKGROUND_COLOR = 'transparent';
 
-/* prop defaults */
-export const DefaultProps = {
+export const defaultProps = {
   containerWidth: DEFAULT_CONTAINER_SIZE,
   containerHeight: DEFAULT_CONTAINER_SIZE,
   margin: DEFAULT_MARGIN,
@@ -103,7 +95,7 @@ export const DefaultProps = {
   originY: DEFAULT_ORIGIN_Y,
   useConstraints: DEFAULT_USE_CONSTRAINTS,
   circular: DEFAULT_CIRCULAR,
-  useCircularMask: DEFAULT_USE_CIRCULAR_MASK,
+  renderCircularMask: DEFAULT_RENDER_CIRCULAR_MASK,
   backgroundColor: DEFAULT_BACKGROUND_COLOR,
 };
 
@@ -111,7 +103,6 @@ export function radians(deg: number) {
   return deg * (Math.PI / 180);
 }
 
-/* main component */
 export class ImagePlacer extends React.Component<
   ImagePlacerProps,
   ImagePlacerState
@@ -123,7 +114,7 @@ export class ImagePlacer extends React.Component<
   imageElement?: HTMLImageElement; /* image element used to load */
   currentFile?: File; /* used to detect file change, but not necessary for state */
 
-  static defaultProps = DefaultProps;
+  static defaultProps = defaultProps;
 
   state: ImagePlacerState = {
     imageWidth: 0,
@@ -134,8 +125,8 @@ export class ImagePlacer extends React.Component<
     src: this.props.src,
   };
 
-  /* the local rect of the container size plus margins */
-  get containerRect(): Rectangle {
+  /* the local rect of the container with margins */
+  get containerRectWithMargins(): Rectangle {
     const { containerWidth, containerHeight, margin } = this.props;
     return new Rectangle(
       containerWidth + margin * 2,
@@ -143,10 +134,21 @@ export class ImagePlacer extends React.Component<
     );
   }
 
+  /* the local rect of the container without margins */
+  get containerRect(): Rectangle {
+    const { containerWidth, containerHeight } = this.props;
+    return new Rectangle(containerWidth, containerHeight);
+  }
+
   /* the bounds of the scaled/panned image, relative to container */
   get imageBounds(): Bounds {
+    const { zoom } = this.state;
+    return this.calcImageBounds(zoom);
+  }
+
+  private calcImageBounds(zoom: number): Bounds {
     const { margin, maxZoom } = this.props;
-    const { originX, originY, imageWidth, imageHeight, zoom } = this.state;
+    const { originX, originY, imageWidth, imageHeight } = this.state;
     const x = margin + originX;
     const y = margin + originY;
     const maxWidthDiff = imageWidth * maxZoom - imageWidth;
@@ -165,8 +167,8 @@ export class ImagePlacer extends React.Component<
   /* a coordinate mapping from visibleBounds to local rect of image */
   get sourceRect(): Bounds {
     const { containerWidth, containerHeight } = this.props;
-    const { x: originX, y: originY } = this.mapCoords(0, 0);
-    const { x: cornerX, y: cornerY } = this.mapCoords(
+    const { x: originX, y: originY } = this.transformVisibleToImageCoords(0, 0);
+    const { x: cornerX, y: cornerY } = this.transformVisibleToImageCoords(
       containerWidth,
       containerHeight,
     );
@@ -175,12 +177,12 @@ export class ImagePlacer extends React.Component<
 
   componentWillMount() {
     const { onSaveImage } = this.props;
-    /* update consumer with export methods */
     if (onSaveImage) {
+      /* update consumer with export methods */
       onSaveImage({
-        toCanvas: () => this.toCanvas(),
-        toDataURL: () => this.toDataURL(),
-        toFile: () => this.toFile(),
+        toCanvas: this.toCanvas,
+        toDataURL: this.toDataURL,
+        toFile: this.toFile,
       });
     }
   }
@@ -218,6 +220,7 @@ export class ImagePlacer extends React.Component<
       nextContainerHeight !== currentContainerHeight;
     const isMarginChange =
       nextMargin !== undefined && nextMargin !== currentMargin;
+    const isFileChanged = nextFile !== undefined && nextFile !== currentFile;
 
     const zoomReset = { zoom: 0 };
 
@@ -243,9 +246,9 @@ export class ImagePlacer extends React.Component<
 
     let fileInfo;
 
-    if (nextFile !== undefined && nextFile !== currentFile) {
+    if (isFileChanged) {
       /* if passed file and src, take file only */
-      fileInfo = await getFileInfo(nextFile);
+      fileInfo = await getFileInfo(nextFile as File);
     } else if (
       nextSrc !== undefined &&
       nextSrc.length &&
@@ -260,9 +263,16 @@ export class ImagePlacer extends React.Component<
   }
 
   async preprocessFile(fileInfo: FileInfo) {
-    const filePreview = await this.initialiseImagePreview(fileInfo);
-    if (filePreview) {
-      this.setFile(filePreview.fileInfo);
+    const { maxZoom } = this.props;
+    const previewInfo = await initialiseImagePreview(
+      fileInfo,
+      this.containerRect,
+      maxZoom,
+    );
+    if (previewInfo) {
+      const { width, height } = previewInfo;
+      this.imageSourceRect = new Rectangle(width, height);
+      this.setFile(previewInfo.fileInfo);
     } else {
       this.setState({ errorMessage: 'Cannot load image' });
     }
@@ -278,103 +288,6 @@ export class ImagePlacer extends React.Component<
       originY: 0,
     });
     this.updateZoomProp();
-  }
-
-  /* pre-process the incoming image for optimisations
-     - resample image to min size required to fit zoomed view
-     - apply exif orientation (rotate image if needed) so that coords don't need transforming when zooming, panning, or getting image
-     - return size info about image (in case of rotation)
- */
-  async initialiseImagePreview(fileInfo: FileInfo): Promise<ImageInfo | null> {
-    try {
-      const orientation = await getOrientation(fileInfo.file);
-      const img = await loadImage(fileInfo.src);
-
-      if (img) {
-        const { containerWidth, containerHeight, maxZoom } = this.props;
-        const { naturalWidth, naturalHeight } = img;
-        const srcRect = new Rectangle(naturalWidth, naturalHeight);
-        const maxRect = new Rectangle(
-          containerWidth * maxZoom,
-          containerHeight * maxZoom,
-        );
-        const scaleFactor = srcRect.scaleToFitLargestSide(maxRect);
-        const scaledRect =
-          scaleFactor < 1 ? srcRect.scaled(scaleFactor) : srcRect;
-        const { width: imageWidth, height: imageHeight } = scaledRect;
-
-        let canvasRect = scaledRect.clone();
-
-        if (orientation >= 5) {
-          canvasRect = canvasRect.flipped();
-        }
-
-        const { width: canvasWidth, height: canvasHeight } = canvasRect;
-
-        this.getCanvas(
-          canvasWidth,
-          canvasHeight,
-          (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
-            switch (orientation) {
-              case 2:
-                context.translate(imageWidth, 0);
-                context.scale(-1, 1);
-                break;
-              case 3:
-                context.translate(imageWidth, imageHeight);
-                context.scale(-1, -1);
-                break;
-              case 4:
-                context.translate(0, imageHeight);
-                context.scale(1, -1);
-                break;
-              case 5:
-                context.translate(imageHeight, 0);
-                context.rotate(radians(90));
-                context.translate(0, imageHeight);
-                context.scale(1, -1);
-                break;
-              case 6:
-                context.translate(imageHeight, 0);
-                context.rotate(radians(90));
-                break;
-              case 7:
-                context.translate(imageHeight, 0);
-                context.rotate(radians(90));
-                context.translate(imageWidth, 0);
-                context.scale(-1, 1);
-                break;
-              case 8:
-                context.translate(imageHeight, 0);
-                context.rotate(radians(90));
-                context.translate(imageWidth, imageHeight);
-                context.scale(-1, -1);
-                break;
-            }
-
-            context.drawImage(
-              img,
-              0,
-              0,
-              naturalWidth,
-              naturalHeight,
-              0,
-              0,
-              imageWidth,
-              imageHeight,
-            );
-
-            fileInfo.src = canvas.toDataURL();
-          },
-        );
-
-        this.imageSourceRect = new Rectangle(canvasWidth, canvasHeight);
-        return { fileInfo, width: canvasWidth, height: canvasHeight };
-      }
-    } catch (e) {
-      //
-    }
-    return null;
   }
 
   /* tell consumer that zoom has changed */
@@ -399,6 +312,7 @@ export class ImagePlacer extends React.Component<
     });
   }
 
+  /* apply zoom if required */
   update() {
     const { useConstraints } = this.props;
     const { imageWidth, imageHeight } = this.state;
@@ -427,7 +341,7 @@ export class ImagePlacer extends React.Component<
         originY: 0,
         zoom: 0,
       },
-      () => this.applyConstraints(),
+      this.applyConstraints,
     );
     this.updateZoomProp();
   }
@@ -436,94 +350,113 @@ export class ImagePlacer extends React.Component<
   applyConstraints() {
     const { useConstraints } = this.props;
     const { originX: currentOriginX, originY: currentOriginY } = this.state;
-    const { visibleBounds, imageBounds } = this;
 
     let originX = currentOriginX;
     let originY = currentOriginY;
+    let delta = new Vector2(0, 0);
 
     if (useConstraints) {
-      /* stop imageBounds edges from going inside visibleBounds */
-      const deltaLeft = visibleBounds.left - imageBounds.left;
-      const deltaTop = visibleBounds.top - imageBounds.top;
-      const deltaBottom = visibleBounds.bottom - imageBounds.bottom;
-      const deltaRight = visibleBounds.right - imageBounds.right;
-
-      if (
-        imageBounds.right > visibleBounds.right &&
-        imageBounds.left > visibleBounds.left
-      ) {
-        originX += deltaLeft;
-      }
-      if (
-        imageBounds.bottom > visibleBounds.bottom &&
-        imageBounds.top > visibleBounds.top
-      ) {
-        originY += deltaTop;
-      }
-      if (
-        imageBounds.top < visibleBounds.top &&
-        imageBounds.bottom < visibleBounds.bottom
-      ) {
-        originY += deltaBottom;
-      }
-      if (
-        imageBounds.left < visibleBounds.left &&
-        imageBounds.right < visibleBounds.right
-      ) {
-        originX += deltaRight;
-      }
+      delta = this.applyFullConstraints();
     } else {
-      /* stop imageBounds edges from going outside visibleBounds */
-      const deltaTop = visibleBounds.top - imageBounds.bottom;
-      const deltaBottom = visibleBounds.bottom - imageBounds.top;
-      const deltaLeft = visibleBounds.left - imageBounds.right;
-      const deltaRight = visibleBounds.right - imageBounds.left;
-
-      if (imageBounds.right < visibleBounds.left) {
-        originX += deltaLeft;
-      }
-      if (imageBounds.bottom < visibleBounds.top) {
-        originY += deltaTop;
-      }
-      if (imageBounds.top > visibleBounds.bottom) {
-        originY += deltaBottom;
-      }
-      if (imageBounds.left > visibleBounds.right) {
-        originX += deltaRight;
-      }
+      delta = this.applyPartialConstraints();
     }
 
     this.setState({
-      originX,
-      originY,
+      originX: originX + delta.x,
+      originY: originY + delta.y,
     });
+  }
+
+  /* stop imageBounds edges from going inside visibleBounds - this is when useConstraints is true */
+  private applyFullConstraints(): Vector2 {
+    const { visibleBounds, imageBounds } = this;
+    const deltaLeft = visibleBounds.left - imageBounds.left;
+    const deltaTop = visibleBounds.top - imageBounds.top;
+    const deltaBottom = visibleBounds.bottom - imageBounds.bottom;
+    const deltaRight = visibleBounds.right - imageBounds.right;
+
+    let deltaX = 0;
+    let deltaY = 0;
+
+    if (
+      imageBounds.right > visibleBounds.right &&
+      imageBounds.left > visibleBounds.left
+    ) {
+      deltaX += deltaLeft;
+    }
+    if (
+      imageBounds.bottom > visibleBounds.bottom &&
+      imageBounds.top > visibleBounds.top
+    ) {
+      deltaY += deltaTop;
+    }
+    if (
+      imageBounds.top < visibleBounds.top &&
+      imageBounds.bottom < visibleBounds.bottom
+    ) {
+      deltaY += deltaBottom;
+    }
+    if (
+      imageBounds.left < visibleBounds.left &&
+      imageBounds.right < visibleBounds.right
+    ) {
+      deltaX += deltaRight;
+    }
+
+    return new Vector2(deltaX, deltaY);
+  }
+
+  /* stop imageBounds edges from going outside visibleBounds - this is when useConstraints is false */
+  private applyPartialConstraints(): Vector2 {
+    const { visibleBounds, imageBounds } = this;
+    const deltaTop = visibleBounds.top - imageBounds.bottom;
+    const deltaBottom = visibleBounds.bottom - imageBounds.top;
+    const deltaLeft = visibleBounds.left - imageBounds.right;
+    const deltaRight = visibleBounds.right - imageBounds.left;
+
+    let deltaX = 0;
+    let deltaY = 0;
+
+    if (imageBounds.right < visibleBounds.left) {
+      deltaX += deltaLeft;
+    }
+    if (imageBounds.bottom < visibleBounds.top) {
+      deltaY += deltaTop;
+    }
+    if (imageBounds.top > visibleBounds.bottom) {
+      deltaY += deltaBottom;
+    }
+    if (imageBounds.left > visibleBounds.right) {
+      deltaX += deltaRight;
+    }
+
+    return new Vector2(deltaX, deltaY);
   }
 
   /* set zoom but apply constraints */
   setZoom(newZoom: number) {
-    const { originX, originY } = this.state;
-    /* itemBounds is a getter, so get it before and after changing zoom */
-    const lastItemBounds = this.imageBounds;
-    /* temporarily change zoom, which next call to imageBounds will read */
-    this.state.zoom = newZoom;
-    const imageBounds = this.imageBounds;
+    const { originX, originY, zoom } = this.state;
+    const lastItemBounds = this.calcImageBounds(zoom);
+    const imageBounds = this.calcImageBounds(newZoom);
     const { x: deltaX, y: deltaY } = lastItemBounds.center.sub(
       imageBounds.center,
     );
     const origin = new Vector2(originX + deltaX, originY + deltaY);
-    /* adjust zoom and origin to apply constraints */
     this.setState(
       {
         zoom: newZoom,
         originX: origin.x,
         originY: origin.y,
       },
-      () => this.applyConstraints(),
+      this.applyConstraints,
     );
   }
 
   /* transformation between visibleBounds local coords to image source rect (factoring in zoom and pan) */
-  mapCoords(visibleBoundsX: number, visibleBoundsY: number): Vector2 {
+  transformVisibleToImageCoords(
+    visibleBoundsX: number,
+    visibleBoundsY: number,
+  ): Vector2 {
     const { imageSourceRect, visibleBounds, imageBounds } = this;
     const offset = visibleBounds.origin.sub(imageBounds.origin);
     const rect = imageBounds.rect;
@@ -535,106 +468,44 @@ export class ImagePlacer extends React.Component<
     ).rounded();
   }
 
-  /* helper method to return new sized canvas for drawing */
-  getCanvas(
-    width: number,
-    height: number,
-    fn: (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => void,
-  ) {
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const context = canvas.getContext('2d');
-
-    if (context) {
-      fn(context, canvas);
-    }
-
-    return canvas;
-  }
-
   /* convert the current visible region (zoomed / panned) to a correctly sized canvas with that view drawn */
-  toCanvas(): HTMLCanvasElement {
+  toCanvas = (): HTMLCanvasElement => {
     const {
-      containerWidth,
-      containerHeight,
-      backgroundColor,
+      imageElement,
+      sourceRect,
+      visibleBounds,
+      imageBounds,
+      containerRect,
+      props,
+    } = this;
+    const {
       useConstraints,
       circular,
-      useCircularMask,
-    } = this.props;
-
-    return this.getCanvas(containerWidth, containerHeight, context => {
-      const { imageElement } = this;
-
-      context.fillStyle = backgroundColor;
-      context.fillRect(0, 0, containerWidth, containerHeight);
-
-      if (imageElement) {
-        if (circular && useCircularMask) {
-          const cx = containerWidth * 0.5;
-          const cy = containerHeight * 0.5;
-          const rx = cx;
-          const ry = cy;
-
-          context.save();
-          context.beginPath();
-          context.translate(cx - rx, cy - ry);
-          context.scale(rx, ry);
-          context.arc(1, 1, 1, 0, 2 * Math.PI, false);
-          context.restore();
-          context.fill();
-          context.clip();
-        }
-
-        if (useConstraints) {
-          /* draw sourceRect mapped to container size */
-          const { sourceRect } = this;
-
-          context.drawImage(
-            imageElement,
-            sourceRect.left,
-            sourceRect.top,
-            sourceRect.width,
-            sourceRect.height,
-            0,
-            0,
-            containerWidth,
-            containerHeight,
-          );
-        } else {
-          /* draw imageBounds as is inside container size */
-          const { visibleBounds, imageBounds } = this;
-          const { naturalWidth, naturalHeight } = imageElement;
-          const { left, top, width, height } = imageBounds.relativeTo(
-            visibleBounds,
-          );
-
-          context.drawImage(
-            imageElement,
-            0,
-            0,
-            naturalWidth,
-            naturalHeight,
-            left,
-            top,
-            width,
-            height,
-          );
-        }
-      }
-    });
-  }
+      renderCircularMask,
+      backgroundColor,
+    } = props;
+    return renderImageAtCurrentView(
+      imageElement,
+      sourceRect,
+      visibleBounds,
+      imageBounds,
+      containerRect,
+      useConstraints,
+      circular,
+      renderCircularMask,
+      backgroundColor,
+    );
+  };
 
   /* convert current visible view to dataURL for image */
-  toDataURL(): string {
+  toDataURL = (): string => {
     return this.toCanvas().toDataURL();
-  }
+  };
 
   /* convert current visible view to File */
-  toFile(): File {
+  toFile = (): File => {
     return dataURItoFile(this.toDataURL());
-  }
+  };
 
   /* image has loaded */
   onImageLoad = (
@@ -675,7 +546,7 @@ export class ImagePlacer extends React.Component<
           originX: newOriginX,
           originY: newOriginY,
         },
-        () => this.applyConstraints(),
+        this.applyConstraints,
       );
     }
   };
@@ -696,7 +567,7 @@ export class ImagePlacer extends React.Component<
       containerHeight,
       margin,
       circular,
-      errorRenderer,
+      onRenderError,
     } = this.props;
     const { errorMessage, src } = this.state;
     const { imageBounds } = this;
@@ -713,7 +584,7 @@ export class ImagePlacer extends React.Component<
         >
           {errorMessage ? (
             <ImagePlacerErrorWrapper>
-              {errorRenderer ? errorRenderer(errorMessage) : errorMessage}
+              {onRenderError ? onRenderError(errorMessage) : errorMessage}
             </ImagePlacerErrorWrapper>
           ) : (
             <div>

@@ -4,7 +4,7 @@
   import * as originalModule from 'module-to-mock';
   const mockedModule = mockModule('module-to-mock', originalModule);
 
-  // now anything that imports from there is mocked, but is immutable
+  // now anything that imports from there is mocked, but is mutable
 
   import { Symbol1, Symbol2 } from 'module-to-mock';
   mockedModule.Symbol1 = jest.fn();

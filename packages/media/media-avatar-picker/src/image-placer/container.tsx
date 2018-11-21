@@ -12,7 +12,7 @@ export interface ContainerProps {
 }
 
 export class Container extends React.Component<ContainerProps, {}> {
-  dragClientStart?: Vector2;
+  private dragClientStart?: Vector2;
 
   componentWillMount() {
     if (this.isTouch) {
@@ -25,34 +25,42 @@ export class Container extends React.Component<ContainerProps, {}> {
     }
   }
 
-  get isTouch() {
-    return typeof window.ontouchstart !== 'undefined';
-  }
-
-  private getFirstTouchEvent(e: any): Touch | null {
-    if (e.touches && e.touches.length >= 1) {
-      return e.touches[0];
+  componentWillUnmount() {
+    if (this.isTouch) {
+      document.removeEventListener('touchmove', this.onTouchMove);
+      document.removeEventListener('touchend', this.onMouseUp);
+      document.removeEventListener('touchcancel', this.onMouseUp);
+    } else {
+      document.removeEventListener('mousemove', this.onMouseMove);
+      document.removeEventListener('mouseup', this.onMouseUp);
     }
-    return null;
   }
 
-  onMouseDown = (e: any) => {
-    if (e.which === 3) {
+  get isDragging() {
+    return this.dragClientStart !== undefined;
+  }
+
+  get isTouch() {
+    return window.hasOwnProperty('ontouchstart');
+  }
+
+  onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button === 2) {
       return;
     }
     this.dragClientStart = new Vector2(e.clientX, e.clientY);
     this.props.onDragStart();
   };
 
-  onTouchStart = (e: any) => {
-    const touch = this.getFirstTouchEvent(e);
-    if (touch) {
+  onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches && e.touches.length >= 1) {
+      const touch = e.touches[0];
       this.dragClientStart = new Vector2(touch.clientX, touch.clientY);
       this.props.onDragStart();
     }
   };
 
-  onMouseMove = (e: any) => {
+  onMouseMove = (e: MouseEvent) => {
     const { dragClientStart } = this;
     if (dragClientStart) {
       const delta = new Vector2(
@@ -63,15 +71,17 @@ export class Container extends React.Component<ContainerProps, {}> {
     }
   };
 
-  onTouchMove = (e: any) => {
+  onTouchMove = (e: TouchEvent) => {
     const { dragClientStart } = this;
-    const touch = this.getFirstTouchEvent(e);
-    if (touch && dragClientStart) {
-      const delta = new Vector2(
-        touch.clientX - dragClientStart.x,
-        touch.clientY - dragClientStart.y,
-      );
-      this.props.onDragMove(delta);
+    if (e.touches && e.touches.length >= 1) {
+      const touch = e.touches[0];
+      if (touch && dragClientStart) {
+        const delta = new Vector2(
+          touch.clientX - dragClientStart.x,
+          touch.clientY - dragClientStart.y,
+        );
+        this.props.onDragMove(delta);
+      }
     }
   };
 
@@ -79,7 +89,7 @@ export class Container extends React.Component<ContainerProps, {}> {
     delete this.dragClientStart;
   };
 
-  onWheel = (e: any) => {
+  onWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     this.props.onWheel(e.deltaY);
   };
 

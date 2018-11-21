@@ -16,48 +16,55 @@ export interface ImageProps {
   onError: (errorMessage: string) => void;
 }
 
+export const IMAGE_ERRORS = {
+  BAD_URL: 'Invalid image url',
+  LOAD_FAIL: 'Image failed to load',
+};
+
 export class Image extends React.Component<ImageProps, {}> {
-  constructor(props: ImageProps) {
-    super(props);
-    if (props.src !== undefined) {
+  componentWillMount() {
+    const { src, onError } = this.props;
+    if (src !== undefined) {
       try {
-        isImageRemote(props.src);
+        isImageRemote(src);
       } catch (e) {
-        if (props.onError) {
-          props.onError('Bad Url');
-        }
+        onError(IMAGE_ERRORS.BAD_URL);
       }
     }
   }
 
-  onLoad = (e: any) => {
-    const image = e.target as HTMLImageElement;
+  onLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const image = e.currentTarget;
     const { naturalWidth: width, naturalHeight: height } = image;
     this.props.onLoad(image, width, height);
   };
 
   onError = () => {
-    this.props.onError('Image load error');
+    this.props.onError(IMAGE_ERRORS.LOAD_FAIL);
   };
 
   render() {
     const { src, x, y, width, height } = this.props;
 
     if (src) {
-      const crossOrigin = isImageRemote(src) ? 'anonymous' : undefined;
-      return (
-        <ImageWrapper
-          src={src}
-          x={x}
-          y={y}
-          crossOrigin={crossOrigin}
-          width={width}
-          height={height}
-          onLoad={this.onLoad}
-          onError={this.onError}
-          draggable={false}
-        />
-      );
+      try {
+        const crossOrigin = isImageRemote(src) ? 'anonymous' : undefined;
+        return (
+          <ImageWrapper
+            src={src}
+            x={x}
+            y={y}
+            crossOrigin={crossOrigin}
+            width={width}
+            height={height}
+            onLoad={this.onLoad}
+            onError={this.onError}
+            draggable={false}
+          />
+        );
+      } catch (e) {
+        return null;
+      }
     }
 
     return null;

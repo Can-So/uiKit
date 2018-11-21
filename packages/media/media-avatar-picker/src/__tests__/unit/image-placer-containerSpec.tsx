@@ -21,37 +21,45 @@ const setup = (props: Partial<ContainerProps> = {}): SetupInfo => {
   const onDragMove = jest.fn();
   const onWheel = jest.fn();
 
-  let wrapper = shallow(<div />);
-  try {
-    wrapper = shallow(
-      <Container
-        width={1}
-        height={2}
-        margin={3}
-        onDragStart={onDragStart}
-        onDragMove={onDragMove}
-        onWheel={onWheel}
-        {...props}
-      />,
-    );
-  } catch (e) {}
+  let wrapper = shallow(
+    <Container
+      width={1}
+      height={2}
+      margin={3}
+      onDragStart={onDragStart}
+      onDragMove={onDragMove}
+      onWheel={onWheel}
+      {...props}
+    />,
+  );
 
   const instance = wrapper.instance() as Container;
   return { wrapper, instance, onDragStart, onDragMove, onWheel };
 };
 
-const setIsTouch = (isTouch: boolean) =>
-  ((window as any).ontouchstart = isTouch ? null : undefined);
+/* simulate whether touch is available in environment, container.tsx isTouch accessor checks window property */
+const setIsTouch = (isTouch: boolean) => {
+  const win = window as any;
+  if (isTouch) {
+    win.ontouchstart = true;
+  } else {
+    delete win.ontouchstart;
+  }
+};
 
-const mouseLeftEvent = { which: 1, clientX: 1, clientY: 2 };
-const mouseRightEvent = { which: 3 };
+const mouseLeftEvent: Partial<MouseEvent> = {
+  button: 1,
+  clientX: 1,
+  clientY: 2,
+};
+const mouseRightEvent: Partial<MouseEvent> = { button: 2 };
 const touchStartEvent = { touches: [{ clientX: 1, clientY: 2 }] };
 const touchMoveEvent = { touches: [{ clientX: 2, clientY: 3 } as Touch] };
 
 describe('Image Placer Container', () => {
   describe('Events', () => {
     describe('Touch vs Mouse', () => {
-      let addEventListener: any;
+      let addEventListener: jest.SpyInstance;
       beforeEach(() => {
         addEventListener = jest.spyOn(document, 'addEventListener');
       });
@@ -146,7 +154,7 @@ describe('Image Placer Container', () => {
       wrapper.simulate('touchstart', touchStartEvent);
       document.dispatchEvent(createTouchEvent('touchmove', touchMoveEvent));
       document.dispatchEvent(createTouchEvent('touchend'));
-      expect(instance.dragClientStart).toBeUndefined();
+      expect(instance.isDragging).toBeFalsy();
     });
 
     it('should clear dragClientStart when mouseup event', () => {
@@ -156,13 +164,13 @@ describe('Image Placer Container', () => {
       wrapper.simulate('mousedown', mouseLeftEvent);
       document.dispatchEvent(createTouchEvent('touchmove'));
       document.dispatchEvent(createTouchEvent('mouseup'));
-      expect(instance.dragClientStart).toBeUndefined();
+      expect(instance.isDragging).toBeFalsy();
     });
 
     it('should call onWheel prop when wheel event', () => {
       setIsTouch(false);
       const { onWheel, instance } = setup();
-      instance.onWheel({ deltaY: 1 });
+      instance.onWheel({ deltaY: 1 } as React.WheelEvent<HTMLDivElement>);
       expect(onWheel).toHaveBeenCalledWith(1);
     });
   });

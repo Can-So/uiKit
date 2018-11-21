@@ -9,7 +9,7 @@ jest.mock('@atlaskit/media-ui', () => ({
 }));
 
 // ...before importing Image
-import { Image, ImageProps } from '../../image-placer/image';
+import { Image, ImageProps, IMAGE_ERRORS } from '../../image-placer/image';
 
 interface SetupInfo {
   wrapper: ShallowWrapper;
@@ -22,20 +22,17 @@ const setup = (props: Partial<ImageProps> = {}): SetupInfo => {
   const onLoad = jest.fn();
   const onError = jest.fn();
 
-  let wrapper = shallow(<div />);
-  try {
-    wrapper = shallow(
-      <Image
-        x={1}
-        y={2}
-        width={3}
-        height={4}
-        onLoad={onLoad}
-        onError={onError}
-        {...props}
-      />,
-    );
-  } catch (e) {}
+  let wrapper = shallow(
+    <Image
+      x={1}
+      y={2}
+      width={3}
+      height={4}
+      onLoad={onLoad}
+      onError={onError}
+      {...props}
+    />,
+  );
 
   const instance = wrapper.instance() as Image;
   return { wrapper, instance, onLoad, onError };
@@ -47,28 +44,28 @@ describe('Image Placer Image', () => {
       isImageRemote.mockImplementation(() => {
         throw new Error();
       });
-      const { onError } = setup({ src: 'some-very-bad-src' });
+      const { onError } = setup({ src: 'some-very-bad-url' });
 
-      expect(onError).toBeCalledWith('Bad Url');
+      expect(onError).toHaveBeenCalledWith(IMAGE_ERRORS.BAD_URL);
     });
 
     describe('Image Events', () => {
-      const target = {
+      const currentTarget = {
         naturalWidth: 1,
         naturalHeight: 2,
       };
 
       beforeAll(() => {
-        isImageRemote.mockImplementation(() => true);
+        isImageRemote.mockReturnValue(true);
       });
 
       it('should pass image load event to props', () => {
         const { wrapper, onLoad } = setup({ src: 'some-src' });
 
         wrapper.find(ImageWrapper).simulate('load', {
-          target,
+          currentTarget,
         });
-        expect(onLoad).toHaveBeenCalledWith(target, 1, 2);
+        expect(onLoad).toHaveBeenCalledWith(currentTarget, 1, 2);
       });
 
       it('should pass image error event to props', () => {
@@ -88,13 +85,15 @@ describe('Image Placer Image', () => {
 
     it('should render image with given coordinates', () => {
       const { wrapper } = setup({ src: 'some-src' });
-      const img = wrapper.find(ImageWrapper).get(0);
-      const { x, y, width, height } = img.props;
 
-      expect(x).toEqual(1);
-      expect(y).toEqual(2);
-      expect(width).toEqual(3);
-      expect(height).toEqual(4);
+      expect(wrapper.find(ImageWrapper).props()).toEqual(
+        expect.objectContaining({
+          x: 1,
+          y: 2,
+          width: 3,
+          height: 4,
+        }),
+      );
     });
   });
 });

@@ -1,22 +1,29 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { mockModule, nextTick } from '@atlaskit/media-test-helpers';
+import { Vector2, Rectangle, FileInfo } from '@atlaskit/media-ui';
+import {
+  nextTick,
+  mockCanvas,
+  mockLoadImage,
+  mockLoadImageError,
+  unMockLoadImage,
+} from '@atlaskit/media-test-helpers';
 
-/* mock media-ui::loadImage */
-import * as mediaUI from '@atlaskit/media-ui';
-const mockedMediaUI = mockModule('@atlaskit/media-ui', mediaUI);
-import { Vector2, FileInfo } from '@atlaskit/media-ui';
+jest.mock('../../image-placer/util', () => ({
+  getCanvas: mockCanvas,
+}));
 
 import {
   ImagePlacer,
   ImagePlacerProps,
-  DefaultProps,
+  defaultProps as defaultComponentProps,
   ImagePlacerAPI,
   DEFAULT_MAX_ZOOM,
 } from '../../image-placer';
 import { Container } from '../../image-placer/container';
 import { Image } from '../../image-placer/image';
 import { ImagePlacerErrorWrapper } from '../../image-placer/styled';
+import { initialiseImagePreview } from '../../image-placer/imageProcessor';
 
 interface SetupInfo {
   wrapper: ShallowWrapper;
@@ -64,20 +71,17 @@ const setup = (
   const onZoomChange = jest.fn();
   const onSaveImage = jest.fn();
 
-  let wrapper = shallow(<div />);
-  try {
-    wrapper = shallow(
-      <ImagePlacer
-        {...DefaultProps}
-        onZoomChange={onZoomChange}
-        onSaveImage={onSaveImage}
-        {...props}
-      />,
-    );
-  } catch (e) {}
+  let wrapper = shallow(
+    <ImagePlacer
+      {...defaultComponentProps}
+      onZoomChange={onZoomChange}
+      onSaveImage={onSaveImage}
+      {...props}
+    />,
+  );
 
   const instance = wrapper.instance() as ImagePlacer;
-  mockCanvas(instance);
+
   if (imageSourceWidth && imageSourceHeight) {
     /* force image load */
     instance.onImageLoad({} as any, imageSourceWidth, imageSourceHeight);
@@ -91,62 +95,6 @@ const setup = (
     onZoomChange,
     onSaveImage,
   };
-};
-
-const mockCanvas = (instance: ImagePlacer) => {
-  instance.getCanvas = (width: any, height: any, fn: any) => {
-    const context = {
-      translate: jest.fn(),
-      rotate: jest.fn(),
-      scale: jest.fn(),
-      drawImage: jest.fn(),
-      arc: jest.fn(),
-      save: jest.fn(),
-      beginPath: jest.fn(),
-      restore: jest.fn(),
-      fill: jest.fn(),
-      stroke: jest.fn(),
-      clip: jest.fn(),
-      fillRect: jest.fn(),
-      closePath: jest.fn(),
-      moveTo: jest.fn(),
-      lineTo: jest.fn(),
-      fillStyle: '',
-      strokeStyle: '',
-    };
-    const canvas: {} = {
-      width,
-      height,
-      toDataURL: jest.fn(),
-    };
-    fn(context, canvas);
-    return canvas as HTMLCanvasElement;
-  };
-};
-
-const mockLoadImage = (
-  naturalWidth: number = mediumSize,
-  naturalHeight: number = mediumSize,
-  orientation: number = 1,
-) => {
-  jest.spyOn(mockedMediaUI, 'getOrientation').mockResolvedValue(orientation);
-  jest
-    .spyOn(mockedMediaUI, 'loadImage')
-    .mockResolvedValue({ naturalWidth, naturalHeight });
-};
-
-const mockLoadImageError = (
-  errorMessage: string = 'some-image-failed-to-load-reason',
-) => {
-  jest.spyOn(mockedMediaUI, 'getOrientation').mockResolvedValue(1);
-  jest.spyOn(mockedMediaUI, 'loadImage').mockImplementation(() => {
-    throw new Error(errorMessage);
-  });
-};
-
-const unMockLoadImage = () => {
-  mockedMediaUI.getOrientation.mockClear();
-  mockedMediaUI.loadImage.mockClear();
 };
 
 describe('Image Placer', () => {
@@ -212,12 +160,16 @@ describe('Image Placer', () => {
       it('should be equal to container size plus margins', () => {
         const { instance } = setup();
         const {
-          containerRect,
+          containerRectWithMargins,
           props: { margin, containerWidth, containerHeight },
         } = instance;
         const doubleMargin = margin * 2;
-        expect(containerRect.width).toEqual(containerWidth + doubleMargin);
-        expect(containerRect.height).toEqual(containerHeight + doubleMargin);
+        expect(containerRectWithMargins.width).toEqual(
+          containerWidth + doubleMargin,
+        );
+        expect(containerRectWithMargins.height).toEqual(
+          containerHeight + doubleMargin,
+        );
       });
     });
 
@@ -444,21 +396,30 @@ describe('Image Placer', () => {
     describe('Mapping Coordinates', () => {
       it('should map equally when imageBounds and visibleBounds equal', () => {
         const { instance } = setup(defaultProps, ...imageSizeMedium);
-        const corner = instance.mapCoords(containerSize, containerSize);
+        const corner = instance.transformVisibleToImageCoords(
+          containerSize,
+          containerSize,
+        );
         expect(corner.x).toEqual(mediumSize);
         expect(corner.y).toEqual(mediumSize);
       });
 
       it('should map reduced coords when imageBounds smaller than visibleBounds', () => {
         const { instance } = setup(defaultProps, ...imageSizeSmall);
-        const corner = instance.mapCoords(containerSize, containerSize);
+        const corner = instance.transformVisibleToImageCoords(
+          containerSize,
+          containerSize,
+        );
         expect(corner.x).toEqual(smallSize);
         expect(corner.y).toEqual(smallSize);
       });
 
       it('should map enlarged coords when imageBounds larger than visibleBounds', () => {
         const { instance } = setup(defaultProps, ...imageSizeLarge);
-        const corner = instance.mapCoords(containerSize, containerSize);
+        const corner = instance.transformVisibleToImageCoords(
+          containerSize,
+          containerSize,
+        );
         expect(corner.x).toEqual(largeSize);
         expect(corner.y).toEqual(largeSize);
       });
@@ -591,6 +552,10 @@ describe('Image Placer', () => {
 
   describe('PreProcessing Image', () => {
     const mockFileInfo = { file: {}, src: '' } as FileInfo;
+    const containerRect = new Rectangle(
+      defaultProps.containerWidth,
+      defaultProps.containerHeight,
+    );
 
     afterEach(() => {
       unMockLoadImage();
@@ -599,20 +564,23 @@ describe('Image Placer', () => {
     it('should return null if error occurs when loading image during image initialisation', async () => {
       mockLoadImageError();
 
-      const { instance } = setup();
-      const imageInfo = await instance.initialiseImagePreview(mockFileInfo);
+      const imageInfo = await initialiseImagePreview(
+        mockFileInfo,
+        containerRect,
+        defaultProps.maxZoom,
+      );
       expect(imageInfo).toBeNull();
     });
 
     it('should scale down image to fit largest zoom size required', async done => {
       mockLoadImage(extraLargeSize, extraLargeSize);
 
-      const { instance } = setup();
-      const imageInfo = await instance.initialiseImagePreview(mockFileInfo);
+      const imageInfo = await initialiseImagePreview(
+        mockFileInfo,
+        containerRect,
+        defaultProps.maxZoom,
+      );
       if (imageInfo !== null) {
-        const imageSourceRect = instance.imageSourceRect;
-        expect(imageInfo.width).toEqual(imageSourceRect.width);
-        expect(imageInfo.height).toEqual(imageSourceRect.height);
         expect(imageInfo.width).toEqual(
           defaultProps.containerWidth * defaultProps.maxZoom,
         );
@@ -633,8 +601,11 @@ describe('Image Placer', () => {
 
       const tearUp = async (orientation: number) => {
         mockLoadImage(shortSide, longSide, orientation);
-        const { instance } = setup();
-        const imageInfo = await instance.initialiseImagePreview(mockFileInfo);
+        const imageInfo = await initialiseImagePreview(
+          mockFileInfo,
+          containerRect,
+          defaultProps.maxZoom,
+        );
         if (imageInfo !== null) {
           const { width: imageWidth, height: imageHeight } = imageInfo;
           return { imageWidth, imageHeight };
@@ -725,10 +696,10 @@ describe('Image Placer', () => {
       expect(errorWrapper.dive().text()).toEqual('some-error');
     });
 
-    it('should render errorRenderer if error and passed', () => {
+    it('should render onRenderError if error and passed', () => {
       const { wrapper, instance } = setup({
         ...defaultProps,
-        errorRenderer: (errorMessage: string) => <h1>{errorMessage}</h1>,
+        onRenderError: (errorMessage: string) => <h1>{errorMessage}</h1>,
       });
       instance.onImageError('some-error');
       wrapper.update();
@@ -769,9 +740,5 @@ describe('Image Placer', () => {
       expect(instance.onDragStart).toHaveBeenCalled();
       expect(instance.onDragMove).toHaveBeenCalled();
     });
-  });
-
-  describe.skip('Get Image (Exporting)', () => {
-    // ...
   });
 });

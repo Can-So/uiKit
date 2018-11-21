@@ -17,7 +17,7 @@ export interface ExampleState {
   maxZoom: number;
   useConstraints: boolean;
   circular: boolean;
-  useCircularMask: boolean;
+  renderCircularMask: boolean;
   src?: string;
   file?: File;
   exportedDataURI?: string;
@@ -41,7 +41,7 @@ class Example extends React.Component<{}, ExampleState> {
     maxZoom: 2,
     useConstraints: true,
     circular: false,
-    useCircularMask: false,
+    renderCircularMask: false,
   };
 
   private setZoomSliderValue(value: number) {
@@ -50,26 +50,26 @@ class Example extends React.Component<{}, ExampleState> {
     }
   }
 
-  onZoomSliderChange = (e: any) => {
-    const value = e.target.valueAsNumber;
+  onZoomSliderChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.valueAsNumber;
     const zoom = value / 100;
     this.setState({ zoom });
   };
 
-  onUseConstraintsChanged = (e: any) => {
-    const useConstraints = e.target.checked;
+  onUseConstraintsChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const useConstraints = e.currentTarget.checked;
     this.setZoomSliderValue(0);
     this.setState({ zoom: 0, useConstraints });
   };
 
-  onCircularChanged = (e: any) => {
-    const circular = e.target.checked;
+  onCircularChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const circular = e.currentTarget.checked;
     this.setState({ circular });
   };
 
-  onUseCircularMaskChanged = (e: any) => {
-    const useCircularMask = e.target.checked;
-    this.setState({ useCircularMask });
+  onRenderCircularMaskChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const renderCircularMask = e.currentTarget.checked;
+    this.setState({ renderCircularMask });
   };
 
   onZoomSliderRef = (el: any) => {
@@ -84,10 +84,11 @@ class Example extends React.Component<{}, ExampleState> {
     this.setZoomSliderValue(zoom);
   };
 
-  onFileInputChange = async (e: any) => {
-    const files = [...e.target.files];
-    const file = files[0];
-    this.setState({ src: undefined, file });
+  onFileInputChange = async (e: React.SyntheticEvent<HTMLInputElement>) => {
+    if (e.currentTarget.files) {
+      const file = e.currentTarget.files[0];
+      this.setState({ src: undefined, file });
+    }
   };
 
   onSaveImage = (api: ImagePlacerAPI) => {
@@ -112,7 +113,7 @@ class Example extends React.Component<{}, ExampleState> {
       maxZoom,
       useConstraints,
       circular,
-      useCircularMask,
+      renderCircularMask,
       file,
       src,
       exportedDataURI,
@@ -154,15 +155,15 @@ class Example extends React.Component<{}, ExampleState> {
             </Label>
             <Label>
               {circular ? (
-                <span>Use Circular Mask:</span>
+                <span>Render Circular Mask:</span>
               ) : (
-                <DisabledText>Use Circular Mask:</DisabledText>
+                <DisabledText>Render Circular Mask:</DisabledText>
               )}
               <input
                 type="checkbox"
                 disabled={!circular}
-                defaultChecked={useCircularMask}
-                onChange={this.onUseCircularMaskChanged}
+                defaultChecked={renderCircularMask}
+                onChange={this.onRenderCircularMaskChanged}
               />
             </Label>
             <Label>
@@ -187,7 +188,7 @@ class Example extends React.Component<{}, ExampleState> {
               maxZoom={maxZoom}
               useConstraints={useConstraints}
               circular={circular}
-              useCircularMask={useCircularMask}
+              renderCircularMask={renderCircularMask}
               onImageChange={this.onImageChange}
               onZoomChange={this.onZoomChange}
               onSaveImage={this.onSaveImage}
@@ -211,7 +212,7 @@ class Example extends React.Component<{}, ExampleState> {
         <Grid>
           <GridColumn>
             <input type="file" onChange={this.onFileInputChange} />
-            {typeof src === 'string' || typeof file !== 'undefined' ? (
+            {typeof src === 'string' || file !== undefined ? (
               <p>
                 <button onClick={this.onGetImageClick}>Export DataURI</button>
               </p>
@@ -254,7 +255,7 @@ class Example extends React.Component<{}, ExampleState> {
           defaultValue={`${defaultValue}`}
           step={step}
           list={stepListId}
-          onChange={(e: any) => this.onFormSliderChange(e, title)}
+          onChange={this.onSliderChange(title)}
         />
         {defaultValue}
         <datalist id={stepListId}>{dataListOptions}</datalist>
@@ -262,21 +263,23 @@ class Example extends React.Component<{}, ExampleState> {
     );
   }
 
-  onFormSliderChange = (e: any, id: string) => {
-    const value = e.target.valueAsNumber;
-    switch (id) {
-      case CONTAINER_WIDTH_LABEL:
-        this.setState({ containerWidth: value });
-        break;
-      case CONTAINER_HEIGHT_LABEL:
-        this.setState({ containerHeight: value });
-        break;
-      case MARGIN_LABEL:
-        this.setState({ zoom: 0, margin: value });
-        this.setZoomSliderValue(0);
-        break;
-    }
-  };
+  private onSliderChange(id: string) {
+    return (e: React.SyntheticEvent<HTMLInputElement>) => {
+      const value = e.currentTarget.valueAsNumber;
+      switch (id) {
+        case CONTAINER_WIDTH_LABEL:
+          this.setState({ containerWidth: value });
+          break;
+        case CONTAINER_HEIGHT_LABEL:
+          this.setState({ containerHeight: value });
+          break;
+        case MARGIN_LABEL:
+          this.setState({ zoom: 0, margin: value });
+          this.setZoomSliderValue(0);
+          break;
+      }
+    };
+  }
 }
 
 export default () => <Example />;
