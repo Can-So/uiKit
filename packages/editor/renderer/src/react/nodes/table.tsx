@@ -41,6 +41,7 @@ const addNumberColumnIndexes = rows => {
 const Table = (props: TableProps & OverflowShadowProps) => {
   const colgroup = props.columnWidths ? (
     <colgroup>
+      {props.isNumberColumnEnabled && <col />}
       {props.columnWidths.map((colWidth, idx) => {
         const style = colWidth ? { width: `${colWidth}px` } : {};
         return <col key={idx} style={style} />;
