@@ -219,6 +219,7 @@ describe('Profilecard', () => {
 
       it('should match snapshot when status=closed and status modified date is unknown', () => {
         const card = renderShallow({
+          fullName: undefined,
           status: 'closed',
           statusModifiedDate: undefined,
         });
@@ -228,6 +229,7 @@ describe('Profilecard', () => {
 
       it('should match snapshot when status=closed and status modified date is defined', () => {
         const card = renderShallow({
+          fullName: undefined,
           status: 'closed',
           statusModifiedDate: 1542608651819,
         });

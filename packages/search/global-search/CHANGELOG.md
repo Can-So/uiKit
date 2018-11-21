@@ -1,5 +1,11 @@
 # @atlaskit/global-search
 
+## 5.12.2
+- Updated dependencies [80304f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80304f0):
+  - @atlaskit/icon@14.4.0
+  - @atlaskit/icon-file-type@2.0.0
+  - @atlaskit/icon-object@2.0.0
+
 ## 5.12.1
 - [patch] [e93ffe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e93ffe0):
 

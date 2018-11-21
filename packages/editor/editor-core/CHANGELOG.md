@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.13
+- [patch] [37313f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37313f8):
+
+  - Remove preprocessDoc because it was removing empty tasks & decisionItems
+
 ## 88.2.12
 - [patch] [1358f62](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1358f62):
 

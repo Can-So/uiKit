@@ -279,8 +279,13 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   }
 
   render() {
+    const { fullName, status } = this.props;
+
     const { customElevation } = this.props;
     let cardContent = null;
+
+    // closed users have empty fullName field
+    const isFetched = fullName || status === 'closed';
 
     if (this.props.hasError) {
       this.callAnalytics('profile-card.error', {});
@@ -292,7 +297,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
           <AkSpinner />
         </SpinnerContainer>
       );
-    } else if (this.props.fullName) {
+    } else if (isFetched) {
       cardContent = this.renderProfilecard();
     }
 
