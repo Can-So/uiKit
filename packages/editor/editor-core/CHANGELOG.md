@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.14
+- [patch] [1ac6286](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ac6286):
+
+  - Fixes width plugin continuing without valid transaction state
+
 ## 88.2.13
 - [patch] [37313f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37313f8):
 
