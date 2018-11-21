@@ -131,7 +131,7 @@ exports[`DeleteUserOverviewScreen 1`] = `
       <styled.div>
         <FormattedMessage
           defaultMessage="We’ll email you a list of apps that may have stored their personal data."
-          description="A note explaining that some personal data is required to be saved from deletion for legal purposes."
+          description="A note explaining that about apps storing personal data"
           id="focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin"
           values={Object {}}
         />
@@ -141,7 +141,7 @@ exports[`DeleteUserOverviewScreen 1`] = `
             <div>
               <FormattedMessage
                 defaultMessage="You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information."
-                description="Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes."
+                description="Text elaborating on the note about apps storing personal data"
                 id="focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin"
                 tagName="p"
                 values={Object {}}
@@ -342,7 +342,7 @@ exports[`accessibleSites display text displayed is different when no accessibleS
       <styled.div>
         <FormattedMessage
           defaultMessage="We’ll email you a list of apps that may have stored their personal data."
-          description="A note explaining that some personal data is required to be saved from deletion for legal purposes."
+          description="A note explaining that about apps storing personal data"
           id="focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin"
           values={Object {}}
         />
@@ -352,7 +352,7 @@ exports[`accessibleSites display text displayed is different when no accessibleS
             <div>
               <FormattedMessage
                 defaultMessage="You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information."
-                description="Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes."
+                description="Text elaborating on the note about apps storing personal data"
                 id="focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin"
                 tagName="p"
                 values={Object {}}
@@ -566,7 +566,7 @@ exports[`deactivateUserHandler display warning section is not displayed if the d
       <styled.div>
         <FormattedMessage
           defaultMessage="We’ll email you a list of apps that may have stored their personal data."
-          description="A note explaining that some personal data is required to be saved from deletion for legal purposes."
+          description="A note explaining that about apps storing personal data"
           id="focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin"
           values={Object {}}
         />
@@ -576,7 +576,7 @@ exports[`deactivateUserHandler display warning section is not displayed if the d
             <div>
               <FormattedMessage
                 defaultMessage="You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information."
-                description="Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes."
+                description="Text elaborating on the note about apps storing personal data"
                 id="focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin"
                 tagName="p"
                 values={Object {}}
