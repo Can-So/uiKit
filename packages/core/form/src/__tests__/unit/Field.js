@@ -3,6 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
 import FieldText from '@atlaskit/field-text';
+import { WithState } from './helpers';
 import Form, { Field } from '../../../src';
 import { HelperMessage, ErrorMessage } from '../../Messages';
 
@@ -133,4 +134,25 @@ test('should communicate error when isRequired is set on field', () => {
   touch(wrapper.find('input'));
   expect(wrapper.find(ErrorMessage)).toHaveLength(1);
   expect(wrapper.find(FieldText).props()).toMatchObject({ isInvalid: true });
+});
+
+test('change in defaultValue should reset form field', () => {
+  const wrapper = mount(
+    <WithState defaultState={''}>
+      {(defaultValue, setDefaultValue) => (
+        <>
+          <Form onSubmit={jest.fn()}>
+            {() => (
+              <Field name="username" defaultValue={defaultValue} isRequired>
+                {({ fieldProps }) => <FieldText {...fieldProps} />}
+              </Field>
+            )}
+          </Form>
+          <Button onClick={() => setDefaultValue('jill')}>Submit</Button>
+        </>
+      )}
+    </WithState>,
+  );
+  wrapper.find(Button).simulate('click');
+  expect(wrapper.find(FieldText).props()).toMatchObject({ value: 'jill' });
 });
