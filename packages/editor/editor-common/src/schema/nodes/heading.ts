@@ -22,12 +22,12 @@ export interface HeadingBaseDefinition {
 }
 
 /**
- * @name heading_with_no_marks
+ * @name heading_with_no_marks_node
  */
 export type HeadingDefinition = HeadingBaseDefinition & NoMark;
 
 /**
- * @name heading_with_marks
+ * @name heading_with_marks_node
  * @stage 0
  */
 export type HeadingWithMarksDefinition = HeadingBaseDefinition &
