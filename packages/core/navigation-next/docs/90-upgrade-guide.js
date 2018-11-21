@@ -18,6 +18,16 @@ export default md`
     }
     `}
 
+  #### Rename AsyncLayoutManagerWithViewController's \`viewRenderer\` prop to \`itemsRenderer\`
+
+  This prop has been renamed to align wtih the renamed \`ItemsRenderer\` component.
+
+  ${code`
+  <AsyncLayoutManagerWithViewController
+  - viewRenderer={ViewRenderer}
+  + itemsRenderer={ItemsRenderer}
+  `}
+
   ### Export renames
 
   #### Rename \`withNavigationUI\` HOC to \`withNavigationUIController\`

@@ -1,180 +1,128 @@
 // @flow
 
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
-import LayoutManagerWithViewController from '../../LayoutManagerWithViewController';
 import { NavigationProvider } from '../../../../../index';
+import ItemsRenderer from '../../../../../renderer';
+import SkeletonContainerView from '../../../../presentational/SkeletonContainerView';
+import AsyncLayoutManagerWithViewController from '../../../AsyncLayoutManagerWithViewController';
+import LayoutManagerWithViewController from '../../LayoutManagerWithViewController';
 
 const GlobalNavigationComponent = () => null;
 
 describe('LayoutManagerWithViewController', () => {
-  let wrapper;
-
-  let onCollapseStart;
-  let onCollapseEnd;
-  let onExpandStart;
-  let onExpandEnd;
-  let getRefs;
+  let defaultProps;
 
   beforeEach(() => {
-    onCollapseStart = jest.fn();
-    onCollapseEnd = jest.fn();
-    onExpandStart = jest.fn();
-    onExpandEnd = jest.fn();
-    getRefs = jest.fn();
+    jest.clearAllMocks();
+    defaultProps = {
+      customComponents: { Foo: () => null },
+      globalNavigation: GlobalNavigationComponent,
+      experimental_flyoutOnHover: false,
+      firstSkeletonToRender: 'product',
+      onCollapseStart: jest.fn(),
+      onCollapseEnd: jest.fn(),
+      onExpandStart: jest.fn(),
+      onExpandEnd: jest.fn(),
+      getRefs: jest.fn(),
+    };
+  });
 
-    wrapper = mount(
+  it('should render AsyncLayoutManagerWithViewController', () => {
+    const wrapper = mount(
       <NavigationProvider cache={false} isDebugEnabled={false}>
         <LayoutManagerWithViewController
           globalNavigation={GlobalNavigationComponent}
           firstSkeletonToRender={'product'}
-          onCollapseStart={onCollapseStart}
-          onCollapseEnd={onCollapseEnd}
-          onExpandStart={onExpandStart}
-          onExpandEnd={onExpandEnd}
-          getRefs={getRefs}
+          {...defaultProps}
         >
           <div />
         </LayoutManagerWithViewController>
       </NavigationProvider>,
     );
+    const asyncLayoutManager = wrapper.find(
+      AsyncLayoutManagerWithViewController,
+    );
+    expect(asyncLayoutManager).toHaveLength(1);
   });
 
-  afterEach(() => {
-    onCollapseStart.mockReset();
-    onCollapseEnd.mockReset();
-    onExpandStart.mockReset();
-    onExpandEnd.mockReset();
-    getRefs.mockReset();
-  });
-
-  it('should render global navigation based on using `globalNavigation` as a reference', () => {
-    expect(wrapper.find(GlobalNavigationComponent).length).toBe(1);
-  });
-
-  describe('LayerInitialised', () => {
-    it('should be initialised when `onInitialised` method is called', () => {
-      const layerInitialised = wrapper.find('LayerInitialised');
-
-      expect(layerInitialised.props().initialised).toBe(false);
-
-      layerInitialised.props().onInitialised();
-      wrapper.update();
-
-      expect(wrapper.find('LayerInitialised').props().initialised).toBe(true);
+  it('should pass down props to AsyncLayoutManagerWithViewController', () => {
+    const child = <div />;
+    const wrapper = mount(
+      <NavigationProvider cache={false} isDebugEnabled={false}>
+        <LayoutManagerWithViewController {...defaultProps}>
+          {child}
+        </LayoutManagerWithViewController>
+      </NavigationProvider>,
+    );
+    const asyncLayoutManager = wrapper.find(
+      AsyncLayoutManagerWithViewController,
+    );
+    expect(asyncLayoutManager.props()).toMatchObject({
+      children: child,
+      ...defaultProps,
     });
   });
 
-  describe('Skeleton management', () => {
-    it('should render skeleton using `product` context', () => {
-      expect(
-        wrapper.find(LayoutManagerWithViewController).props()
-          .firstSkeletonToRender,
-      ).toBe('product');
-
-      expect(wrapper.find('SkeletonContainerView').props().type).toEqual(
-        'product',
-      );
-    });
-
-    it('should render skeleton using `container` context', () => {
-      const containerWrapper = mount(
-        <NavigationProvider isDebugEnabled={false}>
-          <LayoutManagerWithViewController
-            globalNavigation={GlobalNavigationComponent}
-            firstSkeletonToRender={'container'}
-          >
-            <div />
-          </LayoutManagerWithViewController>
-        </NavigationProvider>,
-      );
-
-      expect(
-        containerWrapper.find(LayoutManagerWithViewController).props()
-          .firstSkeletonToRender,
-      ).toBe('container');
-
-      expect(
-        containerWrapper
-          .find('SkeletonContainerView')
-          .first()
-          .props().type,
-      ).toEqual('container');
+  it('should inject `itemsRenderer` and `containerSkeleton` props into AsyncLayoutManagerWithViewController', () => {
+    const wrapper = mount(
+      <NavigationProvider cache={false} isDebugEnabled={false}>
+        <LayoutManagerWithViewController {...defaultProps}>
+          <div />
+        </LayoutManagerWithViewController>
+      </NavigationProvider>,
+    );
+    const asyncLayoutManager = wrapper.find(
+      AsyncLayoutManagerWithViewController,
+    );
+    expect(asyncLayoutManager.props()).toMatchObject({
+      containerSkeleton: expect.any(Function),
+      itemsRenderer: ItemsRenderer,
     });
   });
 
-  describe('Passing props to LayoutManager', () => {
-    it('should pass expand/collapse listeners and getRefs', () => {
-      const layoutManager = wrapper.find('LayoutManager');
+  it('`containerSkeleton` prop passed down to Async should render a skeleton container view if `firstSkeletonToRender` prop is set', () => {
+    const wrapper = mount(
+      <NavigationProvider cache={false} isDebugEnabled={false}>
+        <LayoutManagerWithViewController
+          {...defaultProps}
+          firstSkeletonToRender="product"
+        >
+          <div />
+        </LayoutManagerWithViewController>
+      </NavigationProvider>,
+    );
+    const asyncLayoutManager = wrapper.find(
+      AsyncLayoutManagerWithViewController,
+    );
+    const ContainerSkeleton = asyncLayoutManager.prop('containerSkeleton');
 
-      onCollapseStart(200);
-      onCollapseEnd(0);
-      onExpandStart(0);
-      onExpandEnd(200);
+    const containerSkeletonEl = shallow(<ContainerSkeleton />);
 
-      expect(layoutManager.props().onCollapseStart).toBeCalledWith(200);
-      expect(layoutManager.props().onCollapseEnd).toBeCalledWith(0);
-      expect(layoutManager.props().onExpandStart).toBeCalledWith(0);
-      expect(layoutManager.props().onExpandEnd).toBeCalledWith(200);
-      expect(layoutManager.props().getRefs).toHaveBeenCalled();
-    });
-  });
-
-  describe('Rendering the outgoing view when transitioning between layers', () => {
-    const ProductItem = () => <div />;
-    const ContainerItem = () => <div />;
-    const productView = {
+    expect(containerSkeletonEl.find(SkeletonContainerView)).toHaveLength(1);
+    expect(containerSkeletonEl.find(SkeletonContainerView).props()).toEqual({
       type: 'product',
-      id: 'product-view',
-      getItems: () => [
-        { type: 'InlineComponent', component: ProductItem, id: 'product-item' },
-      ],
-    };
-    const containerView = {
-      type: 'container',
-      id: 'container-view',
-      getItems: () => [
-        {
-          type: 'InlineComponent',
-          component: ContainerItem,
-          id: 'container-item',
-        },
-      ],
-    };
-
-    it('should continue rendering the last product view when transitioning from product -> container', () => {
-      const { viewController } = wrapper.instance();
-      viewController.addView(productView);
-      viewController.addView(containerView);
-      viewController.setView(productView.id);
-      wrapper.update();
-
-      expect(wrapper.find(ProductItem)).toHaveLength(1);
-      expect(wrapper.find(ContainerItem)).toHaveLength(0);
-
-      viewController.setView(containerView.id);
-      wrapper.update();
-
-      expect(wrapper.find(ProductItem)).toHaveLength(1);
-      expect(wrapper.find(ContainerItem)).toHaveLength(1);
     });
+  });
 
-    it('should continue rendering the last container view when transitioning from container -> product', () => {
-      const { viewController } = wrapper.instance();
-      viewController.addView(productView);
-      viewController.addView(containerView);
-      viewController.setView(containerView.id);
-      wrapper.update();
+  it('`containerSkeleton` prop passed down to Async should not render anything if `firstSkeletonToRender` prop is not set', () => {
+    const wrapper = mount(
+      <NavigationProvider cache={false} isDebugEnabled={false}>
+        <LayoutManagerWithViewController
+          {...defaultProps}
+          firstSkeletonToRender={undefined}
+        >
+          <div />
+        </LayoutManagerWithViewController>
+      </NavigationProvider>,
+    );
+    const asyncLayoutManager = wrapper.find(
+      AsyncLayoutManagerWithViewController,
+    );
+    const ContainerSkeleton = asyncLayoutManager.prop('containerSkeleton');
 
-      expect(wrapper.find(ProductItem)).toHaveLength(0);
-      expect(wrapper.find(ContainerItem)).toHaveLength(1);
-
-      viewController.setView(productView.id);
-      wrapper.update();
-
-      expect(wrapper.find(ProductItem)).toHaveLength(1);
-      expect(wrapper.find(ContainerItem)).toHaveLength(1);
-    });
+    const containerSkeletonEl = shallow(<ContainerSkeleton />);
+    expect(containerSkeletonEl.children()).toHaveLength(0);
   });
 });

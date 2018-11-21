@@ -3,7 +3,7 @@
 import React from 'react';
 
 import type { LayoutManagerWithViewControllerProps } from './types';
-import ViewRenderer from '../../../renderer';
+import ItemsRenderer from '../../../renderer';
 import SkeletonContainerView from '../../presentational/SkeletonContainerView';
 import AsyncLayoutManagerWithViewController from '../AsyncLayoutManagerWithViewController';
 /* NOTE: experimental props use an underscore */
@@ -36,7 +36,7 @@ const LayoutManagerWithViewController = ({
           <SkeletonContainerView type={firstSkeletonToRender} />
         ) : null
       }
-      viewRenderer={ViewRenderer}
+      itemsRenderer={ItemsRenderer}
       firstSkeletonToRender={firstSkeletonToRender}
     >
       {children}
