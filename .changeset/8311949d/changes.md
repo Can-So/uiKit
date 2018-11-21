@@ -1,1 +1,0 @@
-- Use fontSizeSmall from theme

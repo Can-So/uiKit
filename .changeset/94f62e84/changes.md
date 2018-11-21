@@ -1,1 +1,0 @@
-- Change the format for the docs file to be focused on metadata only

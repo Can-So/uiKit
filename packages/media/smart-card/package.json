@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/smart-card",
-  "version": "8.8.1",
+  "version": "8.8.2",
   "description": "Smart card component",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -17,9 +17,9 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/icon": "^14.0.0",
-    "@atlaskit/icon-file-type": "^1.0.4",
-    "@atlaskit/icon-object": "^1.0.4",
+    "@atlaskit/icon": "^14.4.0",
+    "@atlaskit/icon-file-type": "^2.0.0",
+    "@atlaskit/icon-object": "^2.0.0",
     "@atlaskit/media-ui": "^7.4.1",
     "@atlaskit/outbound-auth-flow-client": "^1.0.1",
     "@atlaskit/theme": "^6.0.0",

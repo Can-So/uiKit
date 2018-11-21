@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 8.8.2
+- [patch] [b859e08](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b859e08):
+
+  - Update dependent versions
+
 ## 8.8.1
 - Updated dependencies [8199088](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8199088):
   - @atlaskit/form@4.0.16
