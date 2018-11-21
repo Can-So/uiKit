@@ -43,8 +43,8 @@ export default (
   * \`atlaskit/navigation-next/SkeletonContainerView\`
   * \`atlaskit/navigation-next/NavigationProvider\`
   * \`atlaskit/navigation-next/AsyncLayoutManagerWithViewController\`
-  * \`atlaskit/navigation-next/ViewControllerSubscriber\`
-
+  * \`atlaskit/navigation-next/ViewController\`
+  * \`atlaskit/navigation-next/UIController\`
 
 `}</ContentsProvider>
 );
