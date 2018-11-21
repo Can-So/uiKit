@@ -4,15 +4,6 @@ import React from 'react';
 import { InputWrapper } from '../styled';
 import type { InputProps } from '../types';
 
-type InputProps = {
-  appearance: boolean,
-  isDisabled: boolean,
-  isFocused: boolean,
-  isInvalid: boolean,
-  isReadOnly: boolean,
-  isRequired: boolean,
-};
-
 export default ({
   appearance,
   forwardedRef,
