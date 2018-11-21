@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 21.3.2
+- [patch] [409e610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/409e610):
+
+  - Fix schema block marks name inconsistency
+
 ## 21.3.1
 - [patch] [37d6258](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37d6258):
 

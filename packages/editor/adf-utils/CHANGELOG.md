@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.1.7
+- [patch] [409e610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/409e610):
+
+  - Fix schema block marks name inconsistency
+
 ## 5.1.6
 - [patch] [df33a8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df33a8b):
 
