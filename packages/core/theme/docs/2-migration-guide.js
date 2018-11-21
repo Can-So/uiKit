@@ -50,7 +50,7 @@ and go through readme for details.
 With the existing tooling we cannot consume the @atlaskit/theme package in less files. Therefore, building
 our own tools was the only option.
 
-We have build tooling to generating static styles from js at the build time. Since we are headed in css-in-js
+We have build tools that can generate static styles from JS at build time. Since we are headed in css-in-js
 direction this is the best bet. Please see [evaluate-inner-styles](https://github.com/ajaymathur/evaluate-inner-styles)
 and go through readme for details.
 
