@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.1.6
+- [patch] [df33a8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df33a8b):
+
+  - Fix block marks validation
+
 ## 5.1.5
 - [patch] [d3bb11f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3bb11f):
 
