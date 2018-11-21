@@ -41,7 +41,7 @@ export type UIControllerShape = {
   productNavWidth: number,
 };
 
-export type UIControllerCacheGetter = () => UIControllerCacheShape;
+export type UIControllerCacheGetter = () => ?UIControllerCacheShape;
 
 export type UIControllerCacheSetter = UIControllerCacheShape => void;
 

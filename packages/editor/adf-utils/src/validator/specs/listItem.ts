@@ -4,8 +4,8 @@ export default {
     content: {
       type: 'array',
       items: [
-        ['paragraph', 'mediaSingle'],
-        ['paragraph', 'bulletList', 'mediaSingle', 'orderedList'],
+        ['paragraph_with_no_marks', 'mediaSingle'],
+        ['paragraph_with_no_marks', 'bulletList', 'mediaSingle', 'orderedList'],
       ],
       minItems: 1,
     },

@@ -1,5 +1,10 @@
 # @atlaskit/reduced-ui-pack
 
+## 10.3.1
+- [patch] [f2f231c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f2f231c):
+
+  - Use fontSizeSmall from theme
+
 ## 10.3.0
 - [minor] [dced9bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dced9bf):
 

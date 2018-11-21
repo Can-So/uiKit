@@ -20,8 +20,15 @@ describe('ADF => WikiMarkup - Panel', () => {
     expect(transformer.encode(node)).toMatchSnapshot();
   });
 
-  test('should convert tip panel node', () => {
-    const node = doc(panel({ panelType: 'tip' })(p('This is a tip panel')))(
+  test('should convert success panel node', () => {
+    const node = doc(
+      panel({ panelType: 'success' })(p('This is a success panel')),
+    )(defaultSchema);
+    expect(transformer.encode(node)).toMatchSnapshot();
+  });
+
+  test('should convert error panel node', () => {
+    const node = doc(panel({ panelType: 'error' })(p('This is a error panel')))(
       defaultSchema,
     );
     expect(transformer.encode(node)).toMatchSnapshot();
