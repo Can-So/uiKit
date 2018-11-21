@@ -1,0 +1,1 @@
+- ED-5785: fix number column when header row is enabled
