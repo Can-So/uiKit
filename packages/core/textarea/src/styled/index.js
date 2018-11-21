@@ -123,16 +123,13 @@ export const TextAreaWrapper = styled.div`
   ${getBorderAndPadding}
   ${getHoverState}
   ${props => props.isDisabled && `cursor: not-allowed;`}
-  padding-right: 0;
   font-size: ${fontSize}px;
   max-width: 100%;
   ${getResizeStyles}
   & > textarea {
     display:block;
-    padding-right: 6px;
     resize: none;
     background: transparent;
-    padding: 0;
     margin: 0;
     border: 0;
     box-sizing: border-box;
@@ -147,6 +144,7 @@ export const TextAreaWrapper = styled.div`
       getLineHeight({ isCompact }) / fontSize()};
     min-width: 0;
     outline: none;
+    overflow: auto;
     max-width: 100%;
     width: 100%;
     ${getPlaceholderStyle(getPlaceholderColor)};
