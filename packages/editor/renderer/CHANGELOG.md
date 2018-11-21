@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 30.3.1
+- [patch] [f2cb9d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f2cb9d9):
+
+  - ED-5785: fix number column when header row is enabled
+
 ## 30.3.0
 - [minor] [1e5cd32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e5cd32):
 
