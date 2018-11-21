@@ -30,7 +30,7 @@ export default function PackageDocument({
 
   const Content = Loadable<{}, ResolvedJSXElement>({
     loading: () => <Loading />,
-    loader: async () => (found ? await found.exports() : {}),
+    loader: async () => (fs.isFile(found) ? await found.exports() : {}),
     render: doc => (doc ? doc.default : <FourOhFour />),
   });
 

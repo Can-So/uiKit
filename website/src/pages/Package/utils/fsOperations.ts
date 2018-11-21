@@ -1,6 +1,7 @@
 import { packages } from '../../../site';
 import * as fs from '../../../utils/fs';
 import { divvyChangelog } from '../../../utils/changelog';
+import { Directory, File } from '../../../types';
 
 function getPkg(packages, groupId, pkgId) {
   const groups = fs.getDirectories(packages.children);
@@ -10,9 +11,8 @@ function getPkg(packages, groupId, pkgId) {
   return pkg;
 }
 
-const getJSON = (files: fs.File[]) =>
-  fs.getById(files, 'package.json').exports();
-const getDocs = (dirs: fs.Directory[]) => {
+const getJSON = (files: File[]) => fs.getById(files, 'package.json').exports();
+const getDocs = (dirs: Directory[]) => {
   const docs = fs.maybeGetById(dirs, 'docs');
   let doc;
   if (docs) {
@@ -21,11 +21,11 @@ const getDocs = (dirs: fs.Directory[]) => {
 
   return doc && doc.exports().then(mod => mod.default);
 };
-const getExamples = (dirs: fs.Directory[]) => {
+const getExamples = (dirs: Directory[]) => {
   const examples = fs.maybeGetById(dirs, 'examples');
   return examples && examples.children;
 };
-const getChangelog = (files: fs.File[]) => {
+const getChangelog = (files: File[]) => {
   const changelog = fs.maybeGetById(files, 'CHANGELOG.md');
   return (
     (changelog &&

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import Loadable from 'react-loadable';
 import { Helmet } from 'react-helmet';
@@ -105,7 +105,7 @@ type State = {
   range: string;
 };
 
-export default class ExamplesModal extends Component<Props, State> {
+export default class ExamplesModal extends React.Component<Props, State> {
   state: State = { isInvalid: false, range: '' };
 
   componentDidMount() {
@@ -164,7 +164,8 @@ export default class ExamplesModal extends Component<Props, State> {
 
     const Content = Loadable<{}, ResolvedChangelog>({
       loading: () => <Loading />,
-      loader: async () => (found ? { changelog: await found.contents() } : {}),
+      loader: async () =>
+        fs.isFile(found) ? { changelog: await found.contents() } : {},
       render: changelog =>
         changelog ? (
           <Changelog

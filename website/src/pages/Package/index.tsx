@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from '../../components/WrappedLink';
 import Loadable from '../../components/WrappedLoader';
@@ -121,7 +120,7 @@ export default function LoadData({ match }) {
   return <Content />;
 }
 
-class Package extends Component<any, any> {
+class Package extends React.Component<any, any> {
   render() {
     const {
       urlIsExactMatch,

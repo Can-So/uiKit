@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Component } from 'react';
 import styled from 'styled-components';
 import { colors, gridSize, math } from '@atlaskit/theme';
 
@@ -29,7 +28,7 @@ export type MetaDataProps = {
   packageName: string;
 };
 
-export default class MetaData extends Component<MetaDataProps> {
+export default class MetaData extends React.Component<MetaDataProps> {
   render() {
     const { packageSrc, packageName } = this.props;
 

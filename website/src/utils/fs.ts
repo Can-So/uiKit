@@ -1,8 +1,6 @@
 import sentenceCase from 'sentence-case';
 import { Directory, File } from '../types';
 
-export { Directory, File };
-
 export function getDirectories(
   items: Array<Directory | File>,
 ): Array<Directory> {
@@ -90,7 +88,10 @@ export function find(
   return visit(dir, dir.id) || null;
 }
 
-export function findNormalized(dir: Directory, filePath: string) {
+export function findNormalized(
+  dir: Directory,
+  filePath: string,
+): Directory | File | null {
   return find(dir, (file, currPath) => {
     return normalize(currPath) === filePath;
   });
@@ -108,4 +109,12 @@ export function normalize(filePath: string): string {
 
 export function titleize(filePath: string): string {
   return sentenceCase(normalize(filePath));
+}
+
+export function isFile(file): file is File {
+  return file && file.contents;
+}
+
+export function isChildren(file): file is File {
+  return file && file.children;
 }

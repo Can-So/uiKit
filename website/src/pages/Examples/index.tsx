@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -125,7 +125,7 @@ type ExampleNavigationProps = {
   deploySandbox?: any;
   loadingSandbox?: any;
 };
-class ExampleNavigation extends Component<ExampleNavigationProps> {
+class ExampleNavigation extends React.Component<ExampleNavigationProps> {
   state: Error = { name: '', message: '' };
   render() {
     const {
@@ -407,6 +407,7 @@ export default class Examples extends React.Component<Props, State> {
         {examples && exampleId ? (
           <ExampleDisplay
             displayCode={this.state.displayCode}
+            // @ts-ignore - to discuss with Ben
             example={fs.getById(fs.getFiles(examples.children), exampleId)}
             name={config.name}
             src={loaderUrl}

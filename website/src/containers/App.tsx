@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import styled, { injectGlobal } from 'styled-components';
@@ -44,7 +44,7 @@ const AppContent = styled.div`
 
 type Props = { location: Window['location'] };
 
-class ScrollToTop extends Component<Props> {
+class ScrollToTop extends React.Component<Props> {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       window.scrollTo(0, 0);
@@ -58,7 +58,7 @@ class ScrollToTop extends Component<Props> {
 
 const ScrollHandler = withRouter(ScrollToTop);
 
-class Boundary extends Component {
+class Boundary extends React.Component {
   state = { hasError: false };
 
   componentDidCatch(error, info) {
@@ -76,7 +76,7 @@ class Boundary extends Component {
 
 type State = { mode: 'dark' | 'light' };
 
-export default class App extends Component<{}, State> {
+export default class App extends React.Component<{}, State> {
   state: State = {
     mode: 'light',
   };

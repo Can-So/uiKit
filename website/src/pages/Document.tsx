@@ -35,7 +35,7 @@ export default function Document({
   const found = fs.findNormalized(docs, filePath);
 
   const Content = Loadable<{}, ResolvedMD>({
-    loader: async () => (found ? await found.exports() : {}),
+    loader: async () => (fs.isFile(found) ? await found.exports() : {}),
     loading: () => <Loading />,
     render(md) {
       const docDetails = md.default || {};

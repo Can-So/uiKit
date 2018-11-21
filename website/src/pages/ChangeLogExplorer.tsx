@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from '../components/WrappedLink';
 
@@ -14,7 +13,6 @@ import { packages } from '../site';
 import * as fs from '../utils/fs';
 import Loading from '../components/Loading';
 import { divvyChangelog } from '../utils/changelog';
-
 import { RouterMatch } from '../types';
 
 /* eslint-disable react/no-unused-prop-types */
@@ -28,7 +26,7 @@ type State = { isInvalid: boolean; range: string };
 type ResolvedLog = {
   log: string;
 };
-export default class ChangelogExplorer extends Component<Props, State> {
+export default class ChangelogExplorer extends React.Component<Props, State> {
   props: Props;
   state: State = { isInvalid: false, range: '' };
 
@@ -62,7 +60,7 @@ export default class ChangelogExplorer extends Component<Props, State> {
     const Content = Loadable<{}, ResolvedLog>({
       loading: () => <Loading />,
       loader: async () =>
-        found ? { log: await found.contents() } : { log: '' },
+        fs.isFile(found) ? { log: await found.contents() } : { log: '' },
       render: changelog =>
         changelog ? (
           <Changelog

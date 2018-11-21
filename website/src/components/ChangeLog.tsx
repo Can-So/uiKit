@@ -97,7 +97,7 @@ export default class ChangeLog extends Component<Props> {
       ? changelog.filter(e => semver.satisfies(e.version, range))
       : changelog;
 
-    let currentMajor: number | string = 0;
+    let currentMajor: string = '0';
 
     return (
       <div>
@@ -106,7 +106,7 @@ export default class ChangeLog extends Component<Props> {
         ) : (
           logs.map((v, i) => {
             const major = v.version.substr(0, 1);
-            const majorHasChanged = `${currentMajor}` !== major;
+            const majorHasChanged = currentMajor !== major;
             currentMajor = major;
             // In case of blank / empty changelogs, the default commit points to mk-2
             const href = `https://bitbucket.org/atlassian/${

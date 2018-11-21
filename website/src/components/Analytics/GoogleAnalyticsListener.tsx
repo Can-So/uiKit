@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import * as React from 'react';
 import ReactGA from 'react-ga';
 import { withRouter } from 'react-router-dom';
 import ttiPolyfill from 'tti-polyfill';
@@ -125,7 +125,7 @@ type Props = {
   location: Window['location'];
 };
 
-class GoogleAnalyticsListener extends Component<Props> {
+class GoogleAnalyticsListener extends React.Component<Props> {
   constructor(props) {
     super(props);
     ReactGA.initialize(GOOGLE_ANALYTICS_ID);

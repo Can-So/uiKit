@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import CodeSandboxer from 'react-codesandboxer';
 import { replaceSrc } from '@atlaskit/docs';
 
@@ -64,7 +64,7 @@ type Props = {
   pkgJSON: any;
   afterDeployError?: any;
 };
-export default class CodeSandbox extends Component<Props, {}> {
+export default class CodeSandbox extends React.Component<Props, {}> {
   state = { parameters: '' };
 
   render() {

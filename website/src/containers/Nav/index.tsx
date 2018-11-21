@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Component } from 'react';
 import { toClass } from 'recompose';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
@@ -73,7 +72,7 @@ export const AtlaskitIcon = ({ monochrome }: { monochrome?: boolean }) => (
   />
 );
 
-export default class Nav extends Component<{}, State> {
+export default class Nav extends React.Component<{}, State> {
   state = {
     groupDrawerOpen: false,
     searchDrawerOpen: false,

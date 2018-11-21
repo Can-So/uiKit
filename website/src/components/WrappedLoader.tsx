@@ -1,6 +1,5 @@
-import Loadable from 'react-loadable';
 import * as React from 'react';
-import { Component } from 'react';
+import Loadable from 'react-loadable';
 import { sendApdex } from './Analytics/GoogleAnalyticsListener';
 
 function checkMarkAndSendAnalytics() {
@@ -33,7 +32,7 @@ function checkMarkAndSendAnalytics() {
   return null;
 }
 
-class Wrapper extends Component {
+class Wrapper extends React.Component {
   componentDidMount() {
     checkMarkAndSendAnalytics();
   }
@@ -41,12 +40,6 @@ class Wrapper extends Component {
     return this.props.children;
   }
 }
-
-// {
-//   render: (args: {}) => React.ReactChild;
-//   loader: Loadable.;
-//   loading: React.ComponentType<LoadingComponentProps> | (() => null);
-// }
 
 const WrappedLoadable = <Props2, Exports extends object>({
   render,

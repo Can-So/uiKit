@@ -1,5 +1,4 @@
-//
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { gridSize, math, colors } from '@atlaskit/theme';
@@ -60,7 +59,7 @@ const Style = () => (
 `}</style>
 );
 
-export default class HomePage extends Component {
+export default class HomePage extends React.Component {
   render() {
     return (
       <HomePageWrapper>

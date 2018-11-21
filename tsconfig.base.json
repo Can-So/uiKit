@@ -52,6 +52,7 @@
     "./typings/react-dom.d.ts",
     "./typings/rusha.d.ts",
     "./typings/scrollparent.d.ts",
+    "./typings/snake-case.d.ts",
     "./typings/static-assets.d.ts",
     "./typings/url.d.ts",
     "./typings/uuid.d.ts",

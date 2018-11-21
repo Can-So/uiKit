@@ -22,6 +22,7 @@ export default (
   let example;
 
   if (examples) {
+    // @ts-ignore - to discuss with Ben
     example = fs.find(examples, file => {
       if (exampleId) {
         return fs.normalize(file.id) === exampleId;

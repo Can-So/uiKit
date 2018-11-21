@@ -24,7 +24,8 @@ export default function Pattern({
   }
 
   const Content = Loadable<{}, { default?: string }>({
-    loader: () => found && found.exports(),
+    loader: async () =>
+      found && fs.isFile(found) ? await found.exports() : {},
     loading: () => <Loading />,
     render(mod) {
       if (mod && mod.default) {

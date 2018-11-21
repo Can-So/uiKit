@@ -26,6 +26,10 @@ type Props = {
   ) => any;
 };
 
+type Example = {
+  default: string;
+};
+
 export default class ExampleDisplay extends Component<Props> {
   iframeRef: HTMLIFrameElement;
   ExampleCode:
@@ -38,30 +42,34 @@ export default class ExampleDisplay extends Component<Props> {
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.src !== nextProps.src) {
-      if (
+      const contentWindow =
         this.iframeRef &&
-        typeof (this.iframeRef!.contentWindow! as Window).unmountApp ===
-          'function'
-      ) {
-        (this.iframeRef!.contentWindow! as Window).unmountApp!();
+        (this.iframeRef.contentWindow as
+          | null
+          | Window & { unmountApp?: Function });
+
+      if (contentWindow && contentWindow.unmountApp) {
+        contentWindow.unmountApp();
       }
       this.buildExampleComponents(nextProps);
     }
   }
   componentWillUnmount() {
-    if (
+    const contentWindow =
       this.iframeRef &&
-      typeof (this.iframeRef!.contentWindow! as Window).unmountApp ===
-        'function'
-    ) {
-      (this.iframeRef!.contentWindow! as Window).unmountApp!();
+      (this.iframeRef.contentWindow as
+        | null
+        | Window & { unmountApp?: Function });
+
+    if (contentWindow && contentWindow.unmountApp) {
+      contentWindow.unmountApp();
     }
   }
   buildExampleComponents = props => {
     this.ExampleCode = Loadable({
       loader: () => props.example.contents(),
       loading: () => <Loading {...props} />,
-      render(loaded: any) {
+      render(loaded: Example) {
         return (
           <CodeBlock grammar="jsx" content={loaded.default} name={props.name} />
         );
@@ -89,10 +97,11 @@ export default class ExampleDisplay extends Component<Props> {
       );
       return;
     }
-    return this.props.children!(
-      this.ExampleCode,
-      this.Example,
-      this.props.displayCode,
-    );
+    if (this.props.children)
+      return this.props.children(
+        this.ExampleCode,
+        this.Example,
+        this.props.displayCode,
+      );
   }
 }

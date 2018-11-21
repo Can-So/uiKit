@@ -55,6 +55,8 @@ for (let pkg of publicPackages.children) {
   else non_productsPkgs.push(pkg);
 }
 
+publicPackages.children = non_productsPkgs.concat(productsPkgs);
+
 export const getConfig = (groupId: string, pkgId: string) => {
   return NAV_DATA[groupId] && NAV_DATA[groupId].find(pkg => pkg.name === pkgId);
 };
