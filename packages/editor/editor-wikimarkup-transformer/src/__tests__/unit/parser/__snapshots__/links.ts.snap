@@ -212,7 +212,21 @@ Object {
     Object {
       "content": Array [
         Object {
-          "text": "This [waves hands around\\\\]. Be",
+          "text": "This ",
+          "type": "text",
+        },
+        Object {
+          "type": "hardBreak",
+        },
+        Object {
+          "text": "[waves hands around",
+          "type": "text",
+        },
+        Object {
+          "type": "hardBreak",
+        },
+        Object {
+          "text": "]. Be",
           "type": "text",
         },
       ],

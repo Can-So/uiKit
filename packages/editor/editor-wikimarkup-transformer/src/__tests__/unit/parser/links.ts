@@ -74,7 +74,7 @@ describe('JIRA wiki markup - Links', () => {
     ],
     [
       '[EX-500] should jump over the link if it is invalid',
-      'This \\[waves hands around\\]. Be',
+      'This \\\\[waves hands around\\\\]. Be',
     ],
   ];
 
