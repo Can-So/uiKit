@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ComponentType, Component } from 'react';
 // we explicitly do not want to use our wrapped loadable here, as the modal being loaded should
 // be handled by the iframe sendApdex
 import Loadable from 'react-loadable';
@@ -20,8 +19,8 @@ type Props = {
   };
   displayCode: boolean;
   render?: (
-    component1: ComponentType<any>,
-    component2: ComponentType<any>,
+    component1: React.ComponentType<any>,
+    component2: React.ComponentType<any>,
     param: boolean,
   ) => any;
 };
@@ -30,7 +29,7 @@ type Example = {
   default: string;
 };
 
-export default class ExampleDisplay extends Component<Props> {
+export default class ExampleDisplay extends React.Component<Props> {
   iframeRef: HTMLIFrameElement;
   ExampleCode:
     | (React.ComponentClass<{}, any> & Loadable.LoadableComponent)

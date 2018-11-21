@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ComponentType } from 'react';
 import PackageIcon from '@atlaskit/icon/glyph/chevron-right';
 import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
 import styled from 'styled-components';
@@ -23,7 +22,7 @@ export function buildSubNavGroup(
   children: Array<File>,
   groupTitle: string,
   url: (id: string) => string,
-  Icon: ComponentType,
+  Icon: React.ComponentType,
 ): NavGroup | null {
   if (!children || !children.length) return null;
   return children

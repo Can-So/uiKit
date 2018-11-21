@@ -1,4 +1,4 @@
-import { ComponentType } from 'react';
+import * as React from 'react';
 import { Directory, NavGroupItem, File } from '../../../types';
 import * as fs from '../../../utils/fs';
 
@@ -8,7 +8,7 @@ type groupType = {
 };
 export default function buildNavGroups(
   prefix: string,
-  Icon: ComponentType<any>,
+  Icon: React.ComponentType<any>,
   pathname: string,
   dir: Directory,
 ) {

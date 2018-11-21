@@ -1,4 +1,4 @@
-import React, { Component, ComponentType } from 'react';
+import * as React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { Link } from '../../components/WrappedLink';
 import { gridSize, colors, math } from '@atlaskit/theme';
@@ -131,7 +131,7 @@ const Img = ({ src, alt = '' }: { src: string; alt?: string }) => (
 );
 
 type CardProps = {
-  icon: ComponentType;
+  icon: React.ComponentType;
   index?: number;
   text: string;
   title: string;
@@ -141,7 +141,7 @@ type CardProps = {
   href?: string;
 };
 
-class Card extends Component<CardProps, any> {
+class Card extends React.Component<CardProps, any> {
   render() {
     const { icon: Icon, text, title, image, alt, ...props } = this.props;
 
@@ -262,7 +262,7 @@ const cards = [
 ];
 
 /* eslint-disable react/no-multi-comp */
-export default class Cards extends Component {
+export default class Cards extends React.Component {
   state = {
     columnCount: 3,
   };

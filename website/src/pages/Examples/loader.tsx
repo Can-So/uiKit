@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Component, ComponentType } from 'react';
 import styled from 'styled-components';
 import FabricAnalyticsListeners from '@atlaskit/analytics-listeners';
 import { colors } from '@atlaskit/theme';
@@ -34,7 +33,7 @@ type ExampleLoaderProps = {
   example: File;
 };
 
-export default class ExamplesIFrame extends Component<{}, State> {
+export default class ExamplesIFrame extends React.Component<{}, State> {
   state = {
     packageId: '',
     groupId: '',
@@ -106,7 +105,7 @@ type Metadata = {
 };
 
 type Example = {
-  default: ComponentType<any> & Metadata;
+  default: React.ComponentType<any> & Metadata;
 };
 
 function ExampleLoader(props: ExampleLoaderProps) {
