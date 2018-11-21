@@ -36,15 +36,6 @@ export default md`
       )}
 
       ${(
-        <Example
-          packageName="@atlaskit/dynamic-table"
-          Component={require('../examples/13-colspan').default}
-          title="With column spanning"
-          source={require('!!raw-loader!../examples/13-colspan')}
-        />
-      )}
-
-      ${(
         <Props
           heading="Stateful DynamicTable Props"
           props={require('!!extract-react-types-loader!../src/components/Stateful')}
