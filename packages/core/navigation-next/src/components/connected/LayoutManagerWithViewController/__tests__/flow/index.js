@@ -21,7 +21,7 @@ import LayoutManagerWithViewController from '../../index';
   Page
 </LayoutManagerWithViewController>;
 
-// $ExpectError - viewRenderer should not being passed
+// $ExpectError - containerSkeleton should not being passed
 <LayoutManagerWithViewController
   globalNavigation={() => null}
   containerSkeleton={() => null}
