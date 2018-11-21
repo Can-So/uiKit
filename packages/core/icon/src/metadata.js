@@ -1468,7 +1468,6 @@ export default {
   },
   retry: {
     keywords: ['retry', 'icon', 'core'],
-    component: RetryIcon,
     componentName: 'RetryIcon',
     package: '@atlaskit/icon/glyph/retry',
   },
