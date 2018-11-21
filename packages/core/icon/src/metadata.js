@@ -1311,6 +1311,11 @@ export default {
     componentName: 'MentionIcon',
     package: '@atlaskit/icon/glyph/mention',
   },
+  'menu-expand': {
+    keywords: ['menu-expand', 'menuexpand', 'icon', 'core'],
+    componentName: 'MenuExpandIcon',
+    package: '@atlaskit/icon/glyph/menu-expand',
+  },
   menu: {
     keywords: ['menu', 'hamburger', 'navigation', 'switcher', 'app switcher', 'icon', 'core'],
     componentName: 'MenuIcon',

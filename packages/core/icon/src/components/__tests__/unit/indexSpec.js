@@ -268,6 +268,7 @@ describe(name, () => {
         'media-services/zoom-out',
         'mention',
         'menu',
+        'menu-expand',
         'more-vertical',
         'more',
         'notification-all',
