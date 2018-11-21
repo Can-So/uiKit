@@ -18,27 +18,27 @@ export function createPlugin(
       init: () => ({
         width: document.body.offsetWidth,
       }),
-      apply(tr, oldPluginState) {
-        const receivedPluginState = tr.getMeta(pluginKey);
+      apply(tr, pluginState: WidthPluginState) {
+        const meta: WidthPluginState | undefined = tr.getMeta(pluginKey);
 
-        if (!receivedPluginState) {
-          return oldPluginState;
+        if (!meta) {
+          return pluginState;
         }
 
         const newPluginState = {
-          ...oldPluginState,
-          ...receivedPluginState,
+          ...pluginState,
+          ...meta,
         };
 
         if (
           newPluginState &&
-          (oldPluginState.width !== newPluginState.width ||
-            oldPluginState.lineLength !== newPluginState.lineLength)
+          (pluginState.width !== newPluginState.width ||
+            pluginState.lineLength !== newPluginState.lineLength)
         ) {
           dispatch(pluginKey, newPluginState);
           return newPluginState;
         }
-        return oldPluginState;
+        return pluginState;
       },
     },
   });

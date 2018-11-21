@@ -1,0 +1,1 @@
+- ED-5813: Added type safety to width plugin.
