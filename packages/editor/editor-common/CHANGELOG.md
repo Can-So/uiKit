@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 21.3.1
+- [patch] [37d6258](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37d6258):
+
+  - ED-5796: fix setting background color to white
+
 ## 21.3.0
 - [minor] [1e5cd32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e5cd32):
 
