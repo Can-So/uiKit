@@ -1,0 +1,1 @@
+- ED-5796: fix setting background color to white
