@@ -7,11 +7,9 @@
   "module": "dist/esm/index.js",
   "atlaskit:src": "src/index.js",
   "atlaskit:designLink": "https://atlassian.design/guidelines/product/components/textfield",
-  "types": "src/index.d.ts",
   "sideEffects": false,
   "files": [
-    "dist",
-    "src/index.d.ts"
+    "dist"
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [

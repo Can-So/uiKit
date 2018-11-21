@@ -6,7 +6,7 @@ export default md`
 Text Field provides a form input.
 
 ${code`
-import TextField from '@atlaskit/field-text';
+import TextField from '@atlaskit/textfield';
 `}
 
 @atlaskit/textfield exports a default component, that is optionally controllable.
