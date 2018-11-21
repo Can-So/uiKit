@@ -1,15 +1,15 @@
 // DO NOT MODIFY THIS FILE, USE `yarn generate:spec`
 export { default as paragraph } from './paragraph';
-export {
-  default as paragraph_with_alignment,
-} from './paragraph_with_alignment';
+export { default as paragraph_with_no_marks } from './paragraph_with_no_marks';
+export { default as paragraph_with_marks } from './paragraph_with_marks';
 export { default as bulletList } from './bulletList';
 export { default as media } from './media';
 export { default as mediaSingle } from './mediaSingle';
 export { default as listItem } from './listItem';
 export { default as orderedList } from './orderedList';
 export { default as heading } from './heading';
-export { default as heading_with_alignment } from './heading_with_alignment';
+export { default as heading_with_no_marks } from './heading_with_no_marks';
+export { default as heading_with_marks } from './heading_with_marks';
 export { default as panel } from './panel';
 export { default as blockquote } from './blockquote';
 export { default as rule } from './rule';

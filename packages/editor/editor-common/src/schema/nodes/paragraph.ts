@@ -1,27 +1,29 @@
 import { NodeSpec, DOMOutputSpec } from 'prosemirror-model';
-import { Inline, MarksObject } from './doc';
+import { Inline, MarksObject, NoMark } from './doc';
 import { AlignmentMarkDefinition } from '..';
 
 /**
  * @name paragraph_node
  */
-export interface ParagraphDefinition {
+export interface ParagraphBaseDefinition {
   type: 'paragraph';
   /**
    * @allowUnsupportedInline true
    */
   content?: Array<Inline>;
-}
-
-export interface ParagraphMarks extends ParagraphDefinition {
   marks?: Array<any>;
 }
 
 /**
- * @name paragraph_with_alignment
+ * @name paragraph_with_no_marks
+ */
+export type ParagraphDefinition = ParagraphBaseDefinition & NoMark;
+
+/**
+ * @name paragraph_with_marks
  * @stage 0
  */
-export type ParagraphWithAlignment = ParagraphMarks &
+export type ParagraphWithMarksDefinition = ParagraphBaseDefinition &
   MarksObject<AlignmentMarkDefinition>;
 
 const pDOM: DOMOutputSpec = ['p', 0];
