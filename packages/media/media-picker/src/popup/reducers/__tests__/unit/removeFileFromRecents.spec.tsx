@@ -19,14 +19,16 @@ describe('removeFileFromRecents reducer', () => {
     state = {
       ...mockState,
       uploads: {
-        'local-upload-id': {
+        'some-id': {
           file: {
             metadata: {
-              id: 'some-local-file-id',
+              id: 'some-id',
               mimeType: 'some-type',
-              upfrontId: Promise.resolve('some-local-upfront-file-id'),
               name: 'some-name',
               size: 42,
+              upfrontId: Promise.resolve('some-local-upfront-file-id'),
+              userUpfrontId: Promise.resolve(''),
+              userOccurrenceKey: Promise.resolve(''),
             },
           },
           events: [],
@@ -40,9 +42,11 @@ describe('removeFileFromRecents reducer', () => {
             metadata: {
               id: 'some-other-local-file-id',
               mimeType: 'some-type',
-              upfrontId: Promise.resolve('some-other-local-upfront-file-id'),
               name: 'some-name',
               size: 42,
+              upfrontId: Promise.resolve('some-other-local-upfront-file-id'),
+              userUpfrontId: Promise.resolve(''),
+              userOccurrenceKey: Promise.resolve(''),
             },
           },
           events: [],

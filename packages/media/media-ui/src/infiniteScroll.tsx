@@ -76,8 +76,8 @@ export class InfiniteScroll extends Component<
     );
 
     const thresholdReached =
-      position >= this.scrollHeight &&
-      position >= div.scrollHeight - adjustedThreshold;
+      position > this.scrollHeight &&
+      position > div.scrollHeight - adjustedThreshold;
 
     if (thresholdReached) {
       this.scrollHeight = div.scrollHeight;

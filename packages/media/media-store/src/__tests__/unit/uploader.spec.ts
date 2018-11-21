@@ -237,6 +237,6 @@ describe('Uploader', () => {
     await createFileFromUpload();
 
     expect(onId).toHaveBeenCalledTimes(1);
-    expect(onId).toBeCalledWith('id-upfront-123');
+    expect(onId).toBeCalledWith('id-upfront-123', expect.any(String));
   });
 });

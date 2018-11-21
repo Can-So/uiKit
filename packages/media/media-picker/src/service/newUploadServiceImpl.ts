@@ -43,7 +43,7 @@ export interface CancellableFileUpload {
   cancel?: () => void;
 }
 
-interface UpfrontIds {
+export interface UpfrontIds {
   upfrontId: Promise<string>;
   userUpfrontId?: Promise<string>;
   userOccurrenceKey?: Promise<string>;
@@ -103,7 +103,7 @@ export class NewUploadServiceImpl implements UploadService {
       new Promise<string>((resolve, reject) => {
         const subscription = observable.subscribe({
           next: state => {
-            resolve(state.id); // Don't care about userUpfrontId
+            resolve(state.id);
             subscription.unsubscribe();
           },
           error: error => reject(error),
@@ -116,7 +116,7 @@ export class NewUploadServiceImpl implements UploadService {
       new Promise<string>((resolve, reject) => {
         const subscription = observable.subscribe({
           next: state => {
-            resolve(state.occurrenceKey); // Don't care about userUpfrontId
+            resolve(state.occurrenceKey);
             subscription.unsubscribe();
           },
           error: error => reject(error),
@@ -213,17 +213,17 @@ export class NewUploadServiceImpl implements UploadService {
           userOccurrenceKey,
         } = this.getUpfrontIds(observable, occurrenceKey);
 
-        userUpfrontId!.then(userUpfrontId => {
-          console.log({ userUpfrontId });
-        });
-        userOccurrenceKey!.then(userOccurrenceKey => {
-          console.log({ userOccurrenceKey });
-        });
+        // userUpfrontId!.then(userUpfrontId => {
+        //   console.log({ userUpfrontId });
+        // });
+        // userOccurrenceKey!.then(userOccurrenceKey => {
+        //   console.log({ userOccurrenceKey });
+        // });
 
         const mediaFile: MediaFile = {
           id,
           upfrontId,
-          userUpfrontId: userUpfrontId || Promise.resolve(''), // TODO Bad!
+          userUpfrontId,
           userOccurrenceKey,
           name: file.name,
           size: file.size,

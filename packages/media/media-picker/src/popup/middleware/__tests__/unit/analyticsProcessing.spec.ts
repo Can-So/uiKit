@@ -535,6 +535,8 @@ describe('analyticsProcessing middleware', () => {
                 size: 1,
                 mimeType: 'type1',
                 upfrontId: Promise.resolve(''),
+                userUpfrontId: Promise.resolve(''),
+                userOccurrenceKey: Promise.resolve(''),
               },
             },
             events: [
@@ -605,6 +607,8 @@ describe('analyticsProcessing middleware', () => {
                 size: 1,
                 mimeType: 'type1',
                 upfrontId: Promise.resolve(''),
+                userUpfrontId: Promise.resolve(''),
+                userOccurrenceKey: Promise.resolve(''),
               },
             },
             events: [

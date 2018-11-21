@@ -1,14 +1,19 @@
-jest.mock('lodash.debounce');
 import { mount, ReactWrapper } from 'enzyme';
+import { IntlProvider } from 'react-intl';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import Spinner from '@atlaskit/spinner';
 import { FlagGroup } from '@atlaskit/flag';
 import { Card } from '@atlaskit/media-card';
 import { MediaCollectionItem } from '@atlaskit/media-store';
-import { fakeContext } from '@atlaskit/media-test-helpers';
+import { asMock, fakeContext } from '@atlaskit/media-test-helpers';
 import { Context } from '@atlaskit/media-core';
-import { State, SelectedItem, LocalUpload } from '../../../../../domain';
+import {
+  State,
+  SelectedItem,
+  LocalUpload,
+  ServiceFile,
+} from '../../../../../domain';
 import {
   mockStore,
   mockState,
@@ -48,13 +53,15 @@ const createConnectedComponent = (
   const store = mockStore(state);
   const dispatch = store.dispatch;
   const root = mount(
-    <Provider store={store}>
-      <ConnectedUploadViewWithStore
-        mpBrowser={new Browser(context) as any}
-        context={context}
-        recentsCollection="some-collection-name"
-      />
-    </Provider>,
+    <IntlProvider locale="en">
+      <Provider store={store}>
+        <ConnectedUploadViewWithStore
+          mpBrowser={new Browser(context) as any}
+          context={context}
+          recentsCollection="some-collection-name"
+        />
+      </Provider>
+    </IntlProvider>,
     {
       context: reactContext,
       childContextTypes: {
@@ -87,22 +94,24 @@ describe('<StatelessUploadView />', () => {
     const setUpfrontIdDeferred = jest.fn();
 
     return (
-      <Provider store={store}>
-        <StatelessUploadView
-          mpBrowser={{} as any}
-          context={context}
-          recentsCollection="some-collection-name"
-          isLoading={isLoading}
-          recents={recents}
-          uploads={uploads}
-          selectedItems={selectedItems}
-          onFileClick={() => {}}
-          onEditorShowImage={() => {}}
-          onEditRemoteImage={() => {}}
-          removeFileFromRecents={() => {}}
-          setUpfrontIdDeferred={setUpfrontIdDeferred}
-        />
-      </Provider>
+      <IntlProvider locale="en">
+        <Provider store={store}>
+          <StatelessUploadView
+            mpBrowser={{} as any}
+            context={context}
+            recentsCollection="some-collection-name"
+            isLoading={isLoading}
+            recents={recents}
+            uploads={uploads}
+            selectedItems={selectedItems}
+            onFileClick={() => {}}
+            onEditorShowImage={() => {}}
+            onEditRemoteImage={() => {}}
+            removeFileFromRecents={() => {}}
+            setUpfrontIdDeferred={setUpfrontIdDeferred}
+          />
+        </Provider>
+      </IntlProvider>
     );
   };
 
@@ -185,6 +194,7 @@ describe('<StatelessUploadView />', () => {
 describe('<UploadView />', () => {
   let state: State;
   const upfrontId = Promise.resolve('');
+  const userUpfrontId = Promise.resolve('');
   beforeEach(() => {
     state = {
       ...mockState,
@@ -215,6 +225,8 @@ describe('<UploadView />', () => {
               size: 1000,
               mimeType: 'image/png',
               upfrontId,
+              userUpfrontId,
+              userOccurrenceKey: Promise.resolve('some-user-occurrence-key'),
             },
           },
           index: 0,
@@ -245,12 +257,13 @@ describe('<UploadView />', () => {
   it('should dispatch fileClick action when onFileClick called', () => {
     const { component, dispatch } = createConnectedComponent(state);
     const props = component.props();
-    const metadata = {
+    const metadata: ServiceFile = {
       id: 'some-id',
       mimeType: 'some-mime-type',
       name: 'some-name',
       size: 42,
       upfrontId,
+      date: Date.now(),
     };
     props.onFileClick(metadata, 'google');
     expect(dispatch).toBeCalledWith(
@@ -260,7 +273,7 @@ describe('<UploadView />', () => {
           mimeType: 'some-mime-type',
           name: 'some-name',
           size: 42,
-          date: 0,
+          date: expect.any(Number),
           upfrontId,
         },
         'google',
@@ -355,20 +368,9 @@ describe('<UploadView />', () => {
     });
 
     it('should render loading next page state if next page is being loaded', async () => {
+      const { component, root, context } = createConnectedComponent(state);
       const nextItems = new Promise(resolve => setImmediate(resolve));
-      const loadNextPage = jest.fn().mockReturnValue(nextItems);
-      const context = fakeContext({
-        collection: { loadNextPage },
-      });
-      const { component, root } = createConnectedComponent(
-        state,
-        undefined,
-        context,
-      );
-      // We fire threshold reached on mount
-      expect(root.find(LoadingNextPageWrapper).find(Spinner)).toHaveLength(1);
-      await nextItems;
-      root.update();
+      asMock(context.collection.loadNextPage).mockReturnValue(nextItems);
 
       expect(root.find(LoadingNextPageWrapper).find(Spinner)).toHaveLength(0);
       simulateThresholdReached(component);

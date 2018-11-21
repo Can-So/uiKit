@@ -275,14 +275,14 @@ export class StatelessUploadView extends Component<
       const onClick = () => onFileClick(serviceFile, 'upload');
       const actions: CardAction[] = [
         createDeleteCardAction(async () => {
-          console.log('removing!');
+          // console.log('removing!');
           const userFileId = await userUpfrontId;
           const occurrenceKey = await userOccurrenceKey;
-          console.log(
-            'user file id and occurrence Key are',
-            userFileId,
-            occurrenceKey,
-          );
+          // console.log(
+          //   'user file id and occurrence Key are',
+          //   userFileId,
+          //   occurrenceKey,
+          // );
           removeFileFromRecents(id, occurrenceKey, userFileId);
         }),
       ]; // TODO [MS-1017]: allow file annotation for uploading files
