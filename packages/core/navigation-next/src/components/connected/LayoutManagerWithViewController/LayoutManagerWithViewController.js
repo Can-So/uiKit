@@ -15,11 +15,19 @@ const LayoutManagerWithViewController = ({
   customComponents,
   experimental_flyoutOnHover,
   globalNavigation,
-  ...otherProps
+  onExpandStart,
+  onExpandEnd,
+  onCollapseStart,
+  onCollapseEnd,
+  getRefs,
 }: LayoutManagerWithViewControllerProps) => {
   return (
     <AsyncLayoutManagerWithViewController
-      {...otherProps}
+      onExpandStart={onExpandStart}
+      onExpandEnd={onExpandEnd}
+      onCollapseStart={onCollapseStart}
+      onCollapseEnd={onCollapseEnd}
+      getRefs={getRefs}
       customComponents={customComponents}
       experimental_flyoutOnHover={!!experimental_flyoutOnHover}
       globalNavigation={globalNavigation}
