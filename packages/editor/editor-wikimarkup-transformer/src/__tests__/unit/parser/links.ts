@@ -72,6 +72,10 @@ describe('JIRA wiki markup - Links', () => {
       '[CS-542] should not parse nested links',
       '[test[test|http://example.com]',
     ],
+    [
+      '[EX-500] should jump over the link if it is invalid',
+      'This \\[waves hands around\\]. Be',
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {
