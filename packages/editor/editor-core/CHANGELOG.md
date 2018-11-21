@@ -1,5 +1,20 @@
 # @atlaskit/editor-core
 
+## 88.2.12
+- [patch] [1358f62](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1358f62):
+
+  - ED-5717: deduped quick insert provided items
+
+## 88.2.11
+- [patch] [a706ffd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a706ffd):
+
+  ED-4427 Editor disabled state applies to floating toolbars and task decision checkboxes
+
+## 88.2.10
+- [patch] [368e858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/368e858):
+
+  - ED-5570 Fixed long URLs wrapping in editor panel
+
 ## 88.2.9
 - [patch] [70a104dc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/70a104dc):
 

@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.5.0
+- [minor] [6fb9918](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6fb9918):
+
+  - Fix strong bug when ending line finishes with two strong symbols
+
 ## 2.4.6
 - Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
   - @atlaskit/editor-common@21.2.2

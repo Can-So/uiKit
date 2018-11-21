@@ -316,11 +316,11 @@ How you do this will completely depend on what *exactly* you are trying to achie
 >
 > If your package is a flow package run:
 >
-> NODE_ENV=production BABEL_ENV=production:cjs bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/cjs
+> NODE_ENV=production BABEL_ENV=production:cjs bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/cjs --root-mode upward
 >
 > **or** if you know that you are consuming the package as a module:
 >
-> NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/esm
+> NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/esm --root-mode upward
 >
 > If your package is written in TS:
 > NODE_ENV=production bolt workspaces exec --only "@atlaskit/pkgName" -- tsc --project ./build/es5

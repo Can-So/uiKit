@@ -1,5 +1,15 @@
 # @atlaskit/editor-common
 
+## 21.2.4
+- [patch] [df33a8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df33a8b):
+
+  - Fix block marks validation
+
+## 21.2.3
+- [patch] [d3bb11f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3bb11f):
+
+  - Fixing validator for alignment marks
+
 ## 21.2.2
 - Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
   - @atlaskit/profilecard@6.0.0

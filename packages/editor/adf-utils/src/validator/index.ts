@@ -133,9 +133,11 @@ function createSpec(nodes?: Array<string>, marks?: Array<string>) {
               // Filter nodes
               .filter(subItem =>
                 // When Mark or `nodes` is undefined don't filter
-                Array.isArray(subItem) || !nodes
+                !nodes
                   ? true
-                  : nodes.indexOf(subItem) > -1,
+                  : nodes.indexOf(
+                      Array.isArray(subItem) ? subItem[0] : subItem,
+                    ) > -1,
               )
               // Filter marks
               .map(subItem =>

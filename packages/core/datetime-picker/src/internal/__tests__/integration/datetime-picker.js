@@ -42,9 +42,7 @@ BrowserTestCase(
       await dateTimePickerTest.keys(['Backspace']);
     }
     expect(await dateTimePickerTest.getText(dateValue)).not.toBe(previousDate);
-    // Console errors can only be checked in Chrome
-    if (dateTimePickerTest.browser.desiredCapabilities.browserName === 'chrome')
-      await dateTimePickerTest.checkConsoleErrors();
+    await dateTimePickerTest.checkConsoleErrors();
   },
 );
 
@@ -74,9 +72,7 @@ BrowserTestCase(
       await dateTimePickerTest.keys(['Enter']);
     }
     expect(await dateTimePickerTest.getText(dateValue)).not.toBe(previousDate);
-    // Console errors can only be checked in Chrome
-    if (dateTimePickerTest.browser.desiredCapabilities.browserName === 'chrome')
-      await dateTimePickerTest.checkConsoleErrors();
+    await dateTimePickerTest.checkConsoleErrors();
   },
 );
 
@@ -105,9 +101,7 @@ BrowserTestCase(
     expect((await timePicker.getText(timeValue))[0].trim()).toContain(
       '12:45pm',
     );
-    // Console errors can only be checked in Chrome
-    if (timePicker.browser.desiredCapabilities.browserName === 'chrome')
-      await timePicker.checkConsoleErrors();
+    await timePicker.checkConsoleErrors();
   },
 );
 
@@ -127,8 +121,6 @@ BrowserTestCase(
     const AfterTime = (await dateTimePickerTest.getText(dateTimeValues))[1];
     expect(AfterDate).not.toBe(previousDate);
     expect(previousTime).toBe(AfterTime);
-    // Console errors can only be checked in Chrome
-    if (dateTimePickerTest.browser.desiredCapabilities.browserName === 'chrome')
-      await dateTimePickerTest.checkConsoleErrors();
+    await dateTimePickerTest.checkConsoleErrors();
   },
 );
