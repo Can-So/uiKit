@@ -9,6 +9,7 @@ import {
   akEditorBreakoutPadding,
 } from '../consts';
 import { PanelSharedCssClassName } from './panel';
+import { calcWideWidth } from '../../utils';
 
 export const tableMarginTop = 24;
 export const tableMarginBottom = 16;
@@ -115,9 +116,7 @@ export const calcTableWidth = (
       if (containerWidth) {
         const targetWidth =
           containerWidth - (addControllerPadding ? akEditorBreakoutPadding : 0);
-        return targetWidth < akEditorWideLayoutWidth
-          ? `${targetWidth}px`
-          : `${akEditorWideLayoutWidth}px`;
+        return calcWideWidth(containerWidth, targetWidth, `${targetWidth}px`);
       } else {
         return `${akEditorWideLayoutWidth}px`;
       }
