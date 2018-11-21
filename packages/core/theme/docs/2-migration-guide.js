@@ -6,7 +6,7 @@ export default md`
 
 ### Reasons to migrate
 
-1. The @atlaskit/util-shared-styles package will be deprecated soon
+1. The @atlaskit/util-shared-styles package is now unmaintained and will not represent the ADG styles.
 2. Feature requests are not accepted for @atlaskit/util-shared-styles anymore
 3. The @atlaskit/theme package is the source of truth for ADG styling
 
@@ -51,7 +51,7 @@ With the existing tooling we cannot consume the @atlaskit/theme package in less 
 our own tools was the only option.
 
 We have build tooling to generating static styles from js at the build time. Since we are headed in css-in-js
-direction this is the best bet. Please see [GitHub - ajaymathur/evaluate-inner-styles](https://github.com/ajaymathur/evaluate-inner-styles)
+direction this is the best bet. Please see [evaluate-inner-styles](https://github.com/ajaymathur/evaluate-inner-styles)
 and go through readme for details.
 
 In util-shared-styles we used to create styles in less files like following:
@@ -79,13 +79,13 @@ export default evaluateInnerStyles()\`
 \`
 `}
 
-Additionally, in less we use less compiler to compile the less styles like following:
+Additionally, in less we use the less compiler to compile the less styles like following:
 
 ${code`
 lessc styles.less styles.css
 `}
 
-The above functionality can we achieved using the following script:
+The above functionality can be achieved using the following script:
 
 ${code`
 // Get the default exported styles from styles.js
@@ -95,5 +95,6 @@ import styleSheet from '../styles';
 await writeFile(path.join(DIST, 'styles.css'), styleSheet);
 `}
 
-***( This is just a gist of script, please see [css-reset/js-to-css.js](https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/packages/css-packs/css-reset/build/js-to-css.js))***
+***( This is just the structure, please see [css-reset/js-to-css.js](https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/packages/css-packs/css-reset/build/js-to-css.js)
+for a working implementation )***
 `;
