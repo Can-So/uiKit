@@ -5,3 +5,4 @@
 - Remove icon prop from ConnectedItem and built-in renderer 'Item' type
 - Remove deprecated `key` prop from GlobalNav's `primaryItems` and `secondaryItems` props
 - Remove ScrollableSectionInner component. Remove scrollHint styles from theme.
+- Remove peeking behaviour

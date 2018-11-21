@@ -45,9 +45,33 @@ export default md`
 
   #### Remove deprecated \`key\` prop from GlobalNav primary and secondary items
 
-  The \`key\` prop of \`primaryItems\` and \`secondaryItems\` in GlobalNav has been removed in favour of the \`id\` prop.
+  The \`key\` prop of \`primaryItems\` and \`secondaryItems\` in GlobalNav has been removed in favour of the \`id\` prop, which is now required.
+
+  ${code`
+    <GlobalNav
+      primaryItems={[
+        {
+          icon: SearchIcon,
+      -   key: 'search',
+      +   id: 'search'
+        }
+      ]}
+    />
+  `}
 
   #### Remove ScrollableSectionInner component
 
   Remove ScrollableSectionInner component and scrollHint styles from theme. Scrolling behaviour is already a part of \`MenuSection\` and can be achieved in \`Section\` by setting its \`shouldGrow\` prop.
+
+  #### Remove peeking behaviour
+
+  Peeking behaviour is no longer supported.
+
+  - \`peek\`, \`unpeek\`, \`togglePeek\`, \`peekHint\`, \`unPeekHint\`, and \`togglePeekHint\` methods removed from \`UIController\`
+  - \`isPeeking\` and \`isPeekHinting\` properties removed from \`UIController.state\`
+  - \`initialPeekViewId\` removed as constructor parameter to \`ViewController\` and as prop to \`NavigationProvider\`
+  - \`setInitialPeekViewId\` method removed from \`ViewController\`
+  - \`activePeekView\` and \`incomingPeekView\` properties removed from \`ViewController.state\`
+  - \`PeekToggleItem\` removed as an exported component
+
 `;
