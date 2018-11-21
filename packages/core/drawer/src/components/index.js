@@ -3,6 +3,7 @@
 import React, { Children, Component, Fragment } from 'react';
 import { canUseDOM } from 'exenv';
 import { createPortal } from 'react-dom';
+import { ThemeProvider } from 'styled-components';
 import { TransitionGroup } from 'react-transition-group';
 import {
   createAndFireEvent,
@@ -15,7 +16,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../package.json';
-
+import defaultDrawerTheme from '../theme/default-drawer-theme';
 import DrawerPrimitive from './primitives';
 import { Fade } from './transitions';
 import type { CloseTrigger, DrawerProps } from './types';
@@ -131,6 +132,10 @@ export class DrawerBase extends Component<DrawerProps> {
     );
   }
 }
+
+export const DrawerItemTheme = (props: {}) => (
+  <ThemeProvider theme={defaultDrawerTheme}>{props.children}</ThemeProvider>
+);
 
 export default withAnalyticsContext({
   componentName: 'drawer',

@@ -1,11 +1,9 @@
 import * as React from 'react';
 import Button from '@atlaskit/button';
 import { setupMocks, teardownMocks } from '../example-helpers/mockApis';
-import Drawer, { withDrawerTheme } from '@atlaskit/drawer';
+import Drawer, { DrawerItemTheme } from '@atlaskit/drawer';
 import { GlobalQuickSearch } from '../src';
 import LocaleIntlProvider from '../example-helpers/LocaleIntlProvider';
-
-const ThemedDrawer = withDrawerTheme(Drawer);
 
 export default class extends React.Component {
   state = {
@@ -33,23 +31,25 @@ export default class extends React.Component {
   render() {
     return (
       <div style={{ padding: '2rem' }}>
-        <ThemedDrawer
+        <Drawer
           onClose={this.closeDrawer}
           isOpen={this.state.isDrawerOpen}
           width="wide"
         >
-          <LocaleIntlProvider locale={'en'}>
-            <GlobalQuickSearch
-              addSessionIdToJiraResult={true}
-              cloudId="cloudId"
-              context={'jira'}
-              referralContextIdentifiers={{
-                currentContentId: '123',
-                searchReferrerId: '123',
-              }}
-            />
-          </LocaleIntlProvider>
-        </ThemedDrawer>
+          <DrawerItemTheme>
+            <LocaleIntlProvider locale={'en'}>
+              <GlobalQuickSearch
+                addSessionIdToJiraResult={true}
+                cloudId="cloudId"
+                context={'jira'}
+                referralContextIdentifiers={{
+                  currentContentId: '123',
+                  searchReferrerId: '123',
+                }}
+              />
+            </LocaleIntlProvider>
+          </DrawerItemTheme>
+        </Drawer>
         <Button type="button" onClick={this.openDrawer}>
           Open drawer
         </Button>
