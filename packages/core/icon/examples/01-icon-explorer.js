@@ -5,12 +5,98 @@ import styled from 'styled-components';
 import Button from '@atlaskit/button';
 import { FieldTextStateless } from '@atlaskit/field-text';
 
-import { iconInfo as objectIconInfo } from '@atlaskit/icon-object';
-import { iconInfo as fileTypeIconInfo } from '@atlaskit/icon-file-type';
+import { metadata as objectIconMetadata } from '@atlaskit/icon-object';
+import { metadata as fileTypeIconMetadata } from '@atlaskit/icon-file-type';
 
-import iconIcons from '../utils/icons';
+import { metadata } from '../src';
 import IconExplorerCell from './utils/IconExplorerCell';
 import logoIcons from '../utils/logoIcons';
+
+// WARNING
+// It is going to be very tempting to move these into some higher level abstraction
+// They need to live at the root because of the dynamic imports so webpack resolves
+// them correctly
+
+const iconIconInfo = Promise.all(
+  Object.keys(metadata).map(async (name: $Keys<typeof metadata>) => {
+    // $ExpectError - we are fine with this being dynamic
+    const icon = await import(`../glyph/${name}.js`);
+    return { name, icon: icon.default };
+  }),
+).then(newData =>
+  newData
+    .map(icon => ({
+      [icon.name]: { ...metadata[icon.name], component: icon.icon },
+    }))
+    .reduce((acc, b) => ({ ...acc, ...b })),
+);
+const objectIconInfo = Promise.all(
+  Object.keys(objectIconMetadata).map(
+    async (name: $Keys<typeof objectIconMetadata>) => {
+      // $ExpectError - we are fine with this being dynamic
+      const icon = await import(`@atlaskit/icon-object/glyph/${name}.js`);
+      return { name, icon: icon.default };
+    },
+  ),
+).then(newData =>
+  newData
+    .map(icon => ({
+      [icon.name]: { ...objectIconMetadata[icon.name], component: icon.icon },
+    }))
+    .reduce((acc, b) => ({ ...acc, ...b })),
+);
+const fileTypeIconInfo = Promise.all(
+  Object.keys(fileTypeIconMetadata).map(
+    async (name: $Keys<typeof fileTypeIconMetadata>) => {
+      // $ExpectError - we are fine with this being dynamic
+      const icon = await import(`@atlaskit/icon-file-type/glyph/${name}.js`);
+      return { name, icon: icon.default };
+    },
+  ),
+).then(newData =>
+  newData
+    .map(icon => ({
+      [icon.name]: { ...fileTypeIconMetadata[icon.name], component: icon.icon },
+    }))
+    .reduce((acc, b) => ({ ...acc, ...b })),
+);
+
+const getAllIcons = async () => {
+  const iconData = await iconIconInfo;
+  const objectData = await objectIconInfo;
+  const filetypeData = await fileTypeIconInfo;
+  return {
+    first: {
+      componentName: 'divider-icons',
+      component: () => 'exported from @atlaskit/icon',
+      keywords: getKeywords(metadata),
+      divider: true,
+    },
+    ...iconData,
+    firstTwo: {
+      componentName: 'divider-product',
+      component: () => 'exported from @atlaskit/logo',
+      keywords: getKeywords(logoIcons),
+      divider: true,
+    },
+    ...logoIcons,
+    second: {
+      componentName: 'divider-object-icons',
+      component: () => 'exported from @atlaskit/icon-object',
+      keywords: getKeywords(objectIconMetadata),
+      divider: true,
+    },
+    ...objectData,
+    third: {
+      componentName: 'divider-file-type-icons',
+      component: () => 'exported from @atlaskit/icon-file-type',
+      keywords: getKeywords(fileTypeIconMetadata),
+      divider: true,
+    },
+    ...filetypeData,
+  };
+};
+const allIconsPromise = getAllIcons();
 
 const getKeywords = logoMap =>
   Object.values(logoMap).reduce(
@@ -20,37 +106,6 @@ const getKeywords = logoMap =>
     ],
     [],
   );
-
-const allIcons = {
-  first: {
-    componentName: 'divider-icons',
-    component: () => 'exported from @atlaskit/icon',
-    keywords: getKeywords(iconIcons),
-    divider: true,
-  },
-  ...iconIcons,
-  firstTwo: {
-    componentName: 'divider-product',
-    component: () => 'exported from @atlaskit/logo',
-    keywords: getKeywords(logoIcons),
-    divider: true,
-  },
-  ...logoIcons,
-  second: {
-    componentName: 'divider-object-icons',
-    component: () => 'exported from @atlaskit/icon-object',
-    keywords: getKeywords(objectIconInfo),
-    divider: true,
-  },
-  ...objectIconInfo,
-  third: {
-    componentName: 'divider-file-type-icons',
-    component: () => 'exported from @atlaskit/icon-file-type',
-    keywords: getKeywords(fileTypeIconInfo),
-    divider: true,
-  },
-  ...fileTypeIconInfo,
-};
 
 const IconGridWrapper = styled.div`
   padding: 10px 5px 0;
@@ -91,6 +146,7 @@ const filterIcons = (icons, query) => {
 type State = {
   query: string,
   showIcons: boolean,
+  allIcons?: { [string]: iconType },
 };
 
 class IconAllExample extends Component<{}, State> {
@@ -99,12 +155,22 @@ class IconAllExample extends Component<{}, State> {
     showIcons: false,
   };
 
+  componentDidMount() {
+    allIconsPromise.then(allIcons => this.setState({ allIcons }));
+  }
+
   updateQuery = (query: string) => this.setState({ query, showIcons: true });
 
   toggleShowIcons = () => this.setState({ showIcons: !this.state.showIcons });
 
   renderIcons = () => {
-    const icons: iconType[] = filterIcons(allIcons, this.state.query);
+    if (!this.state.allIcons) {
+      return <div>Loading Icons...</div>;
+    }
+    const icons: iconType[] = filterIcons(
+      this.state.allIcons,
+      this.state.query,
+    );
     return icons.length ? (
       <IconExplorerGrid>
         {icons.map(icon => (

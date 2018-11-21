@@ -3,6 +3,7 @@ import { Plugin, PluginKey } from 'prosemirror-state';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { analyticsService } from '../../analytics';
 import { EditorPlugin, Command } from '../../types';
+import { dedupe } from '../../utils';
 import {
   QuickInsertItem,
   QuickInsertProvider,
@@ -35,7 +36,12 @@ const quickInsertPlugin: EditorPlugin = {
 
         if (quickInsertState.provider) {
           return quickInsertState.provider
-            .then(items => find(query, [...defaultItems, ...items]))
+            .then(items =>
+              find(
+                query,
+                dedupe([...defaultItems, ...items], item => item.title),
+              ),
+            )
             .catch(err => {
               // tslint:disable-next-line:no-console
               console.error(err);

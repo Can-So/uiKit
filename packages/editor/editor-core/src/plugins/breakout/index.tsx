@@ -1,19 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Plugin } from 'prosemirror-state';
-import {
-  breakout,
-  calcBreakoutWidth,
-  blockNodesVerticalMargin,
-} from '@atlaskit/editor-common';
+import { breakout, calcBreakoutWidth } from '@atlaskit/editor-common';
 import { EditorPlugin } from '../../types';
 import { ReactNodeView } from '../../nodeviews';
 import WithPluginState from '../../ui/WithPluginState';
 import { pluginKey as widthPluginKey, WidthPluginState } from '../width';
 
 export const Wrapper = styled.div`
-  margin: ${blockNodesVerticalMargin} 0;
-
   .ProseMirror > .breakoutView-content-wrap &[data-layout='full-width'],
   .ProseMirror > .breakoutView-content-wrap &[data-layout='wide'] {
     margin-left: 50%;

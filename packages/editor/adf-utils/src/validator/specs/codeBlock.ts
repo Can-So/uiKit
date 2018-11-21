@@ -15,7 +15,6 @@ export default {
       ],
       optional: true,
     },
-    marks: { type: 'array', items: [], optional: true },
     attrs: {
       props: {
         language: {

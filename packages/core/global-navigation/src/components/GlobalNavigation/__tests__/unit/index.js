@@ -151,6 +151,30 @@ describe('GlobalNavigation', () => {
           ).toBeTruthy();
         });
 
+        it(`should default the width of the "${name}" drawer to "wide" when the drawer width is not passed in`, () => {
+          const props = {
+            [`${name}DrawerContents`]: DrawerContents,
+          };
+          // TODO: Convert to shallow once enzyme has been upgraded
+          const wrapper = mount(<GlobalNavigation {...props} />);
+          expect(wrapper.find('DrawerBase').props()).toMatchObject({
+            width: 'wide',
+          });
+        });
+
+        it(`should set the width of the "${name}" drawer when the drawer width is passed in`, () => {
+          const props = {
+            [`${name}DrawerWidth`]: 'full',
+            [`${name}DrawerContents`]: DrawerContents,
+          };
+
+          // TODO: Convert to shallow once enzyme has been upgraded
+          const wrapper = mount(<GlobalNavigation {...props} />);
+          expect(wrapper.find('DrawerBase').props()).toMatchObject({
+            width: 'full',
+          });
+        });
+
         describe('Uncontrolled', () => {
           it(`should open "${name}" drawer when "${name}" icon is clicked`, () => {
             // Testing XDrawerContents positive

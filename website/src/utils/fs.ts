@@ -73,15 +73,17 @@ export function flatMap<T>(
 
 export function find(
   dir: Directory,
-  iteratee: (file: File, filePath: string) => boolean,
-): File | null {
+  iteratee: (file: File | Directory, filePath: string) => boolean,
+): File | Directory | null {
   function visit(dir, filePath) {
     for (const item of dir.children) {
       const currPath = `${filePath}/${item.id}`;
-      if (item.type === 'dir') {
+      if (iteratee(item, currPath)) {
+        return item;
+      } else if (item.type === 'dir') {
         const result = visit(item, currPath);
         if (result) return result;
-      } else if (iteratee(item, currPath)) return item;
+      }
     }
   }
 

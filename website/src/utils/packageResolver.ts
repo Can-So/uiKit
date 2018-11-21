@@ -1,7 +1,13 @@
 import * as fs from './fs';
 import { packages as packagesData } from '../site';
 
-export default (groupId?: string, packageId?: string, exampleId?: string) => {
+export default (
+  groupId?: string,
+  packageId?: string,
+  exampleId?: string,
+  // Path relative to the package dir to load examples from
+  examplesPath: string = 'examples',
+) => {
   const groups = fs.getDirectories(packagesData.children);
   const resolvedGroupId = groupId || groups[0].id;
   const group = fs.getById(groups, resolvedGroupId);
@@ -9,7 +15,10 @@ export default (groupId?: string, packageId?: string, exampleId?: string) => {
   const resolvedPackageId = packageId || packages[0].id;
   const pkg = fs.getById(packages, resolvedPackageId);
 
-  const examples = fs.maybeGetById(fs.getDirectories(pkg.children), 'examples');
+  const examples = fs.findNormalized(
+    pkg,
+    `${resolvedPackageId}/${examplesPath}`,
+  );
   let example;
 
   if (examples) {

@@ -15,7 +15,7 @@ import LayerInitialised from '../../presentational/LayerInitialised';
 /* NOTE: experimental props use an underscore */
 /* eslint-disable camelcase */
 
-class LayoutManagerWithViewControllerBase extends Component<
+class AsyncLayoutManagerWithViewControllerBase extends Component<
   AsyncLayoutManagerWithViewControllerProps,
   AsyncLayoutManagerWithViewControllerState,
 > {
@@ -173,5 +173,5 @@ class LayoutManagerWithViewControllerBase extends Component<
 }
 
 export default withNavigationUI(
-  withNavigationViewController(LayoutManagerWithViewControllerBase),
+  withNavigationViewController(AsyncLayoutManagerWithViewControllerBase),
 );

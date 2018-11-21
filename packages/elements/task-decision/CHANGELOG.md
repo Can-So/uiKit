@@ -1,5 +1,10 @@
 # @atlaskit/task-decision
 
+## 11.0.3
+- [patch] [a706ffd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a706ffd):
+
+  ED-4427 Editor disabled state applies to floating toolbars and task decision checkboxes
+
 ## 11.0.2
 - Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
   - @atlaskit/editor-common@21.0.0

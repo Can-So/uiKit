@@ -59,7 +59,7 @@ const panelPlugin: EditorPlugin = {
       },
       {
         title: formatMessage(messages.successPanel),
-        keywords: ['success'],
+        keywords: ['success', 'tip'],
         priority: 1000,
         icon: () => (
           <EditorSuccessIcon label={formatMessage(messages.successPanel)} />

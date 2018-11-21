@@ -93,7 +93,7 @@ export type CodeBlockDefinition = CodeBlockBaseDefinition & NoMark;
  * @name code_block_with_breakout_node
  * @stage 0
  */
-export type CodeBlockWithBreakoutDefinition = CodeBlockBaseDefinition &
+export type CodeBlockWithMarksDefinition = CodeBlockBaseDefinition &
   MarksObject<BreakoutMarkDefinition>;
 
 const getLanguageFromEditorStyle = (dom: HTMLElement): string | undefined => {

@@ -24,8 +24,17 @@ describe('ADF => WikiMarkup - Panel', () => {
     expect(adf).toEqual(node.toJSON());
   });
 
-  test('should convert tip panel node', () => {
-    const node = doc(panel({ panelType: 'tip' })(p('This is a tip panel')))(
+  test('should convert success panel node', () => {
+    const node = doc(
+      panel({ panelType: 'success' })(p('This is a success panel')),
+    )(defaultSchema);
+    const wiki = transformer.encode(node);
+    const adf = transformer.parse(wiki).toJSON();
+    expect(adf).toEqual(node.toJSON());
+  });
+
+  test('should convert error panel node', () => {
+    const node = doc(panel({ panelType: 'error' })(p('This is a error panel')))(
       defaultSchema,
     );
     const wiki = transformer.encode(node);
