@@ -2,7 +2,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
-import Page from '../../../components/page';
+import Page from '../../../components/Page';
 import { name } from '../../../../package.json';
 
 describe(`${name} - Page component`, () => {

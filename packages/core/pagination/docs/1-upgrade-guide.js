@@ -33,6 +33,12 @@ ${code`
 />
 `}
 
+We have created a codemod which aims to reduce the amount of busy work to upgrade to this new API. Here is how to get up and running:
+
+1. Clone the [Atlaskit Codemod repository](https://bitbucket.org/atlassian/atlaskit-codemods/src/master/).
+2. Follow the setup instructions on the [README](https://bitbucket.org/atlassian/atlaskit-codemods/src/master/README.md).
+3. The codemod created for this upgrade is the [pagination-8-to-9](https://bitbucket.org/atlassian/atlaskit-codemods/src/master/src/pagination-8-to-9/README.md) codemod. The README in that directory contains all the information about setting up and running the codemod.
+
 ### 🆕 Props added:
 
 - **pages**: ( ***Required*** ) Array of pages to the rendered by the Pagination component
