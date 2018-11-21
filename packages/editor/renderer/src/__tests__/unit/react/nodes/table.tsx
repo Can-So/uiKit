@@ -21,8 +21,14 @@ describe('Renderer - React/Nodes/Table', () => {
   });
 
   it('should render table props', () => {
+    const columnWidths = [100, 110, 120];
+
     const table = mount(
-      <Table layout="default" isNumberColumnEnabled={true}>
+      <Table
+        layout="default"
+        isNumberColumnEnabled={true}
+        columnWidths={columnWidths}
+      >
         <TableRow>
           <TableCell />
         </TableRow>
@@ -31,6 +37,7 @@ describe('Renderer - React/Nodes/Table', () => {
 
     expect(table.prop('layout')).to.equal('default');
     expect(table.prop('isNumberColumnEnabled')).to.equal(true);
+    expect(table.prop('columnWidths')).to.equal(columnWidths);
     expect(table.find(TableRow).prop('isNumberColumnEnabled')).to.equal(true);
   });
 
@@ -107,6 +114,63 @@ describe('Renderer - React/Nodes/Table', () => {
               .text(),
           ).to.equal(`${index + 1}`);
         });
+      });
+    });
+    it('should add an extra <col> node for number column', () => {
+      const columnWidths = [111, 222];
+      const table = mount(
+        <Table
+          layout="default"
+          isNumberColumnEnabled={true}
+          columnWidths={columnWidths}
+        >
+          <TableRow>
+            <TableCell />
+            <TableCell />
+          </TableRow>
+          <TableRow>
+            <TableCell />
+            <TableCell />
+          </TableRow>
+        </Table>,
+      );
+      expect(table.find('col')).to.have.lengthOf(3);
+
+      table.find('col').forEach((col, index) => {
+        if (index === 0) {
+          expect(col.prop('style')).to.equal(undefined);
+        } else {
+          expect(col.prop('style')!.width).to.equal(
+            `${columnWidths[index - 1]}px`,
+          );
+        }
+      });
+    });
+  });
+
+  describe('When number column is disabled', () => {
+    it('should not add an extra <col> node for number column', () => {
+      const columnWidths = [111, 222];
+      const table = mount(
+        <Table
+          layout="default"
+          isNumberColumnEnabled={false}
+          columnWidths={columnWidths}
+        >
+          <TableRow>
+            <TableCell />
+            <TableCell />
+          </TableRow>
+          <TableRow>
+            <TableCell />
+            <TableCell />
+          </TableRow>
+        </Table>,
+      );
+      expect(table.find('col')).to.have.lengthOf(2);
+
+      table.find('col').forEach((col, index) => {
+        expect(col.prop('style')!.width).to.equal(`${columnWidths[index]}px`);
       });
     });
   });
