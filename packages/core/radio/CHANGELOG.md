@@ -1,5 +1,10 @@
 # @atlaskit/radio
 
+## 0.3.0
+- [minor] [8199088](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8199088):
+
+  - BREAKING: defaultCheckedValue and checkedValue props in the RadioGroup component now changed to defaultValue and value respectively
+
 ## 0.2.4
 - [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
 

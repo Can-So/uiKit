@@ -53,6 +53,8 @@ export interface Props {
   handleSearchSubmit?(event: React.KeyboardEvent<HTMLInputElement>): void;
   isSendSearchTermsEnabled?: boolean;
   placeholder?: string;
+  selectedResultId?: string;
+  onSelectedResultIdChanged?: (id: string) => void;
 }
 
 export interface State {
@@ -312,6 +314,8 @@ export class QuickSearchContainer extends React.Component<Props, State> {
       isSendSearchTermsEnabled,
       getSearchResultsComponent,
       placeholder,
+      selectedResultId,
+      onSelectedResultIdChanged,
     } = this.props;
     const {
       isLoading,
@@ -333,6 +337,8 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         linkComponent={linkComponent}
         searchSessionId={searchSessionId}
         isSendSearchTermsEnabled={isSendSearchTermsEnabled}
+        selectedResultId={selectedResultId}
+        onSelectedResultIdChanged={onSelectedResultIdChanged}
       >
         {getSearchResultsComponent({
           retrySearch: this.retrySearch,

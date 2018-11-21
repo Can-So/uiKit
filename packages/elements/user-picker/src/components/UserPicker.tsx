@@ -224,18 +224,15 @@ export class UserPicker extends React.Component<
     const numValues: number = value ? value.length : 0;
     const hasValue = numValues > 0;
 
-    const options = getOptions(usersFromState, users) || [];
-    const hasSelectedAll: boolean = numValues === options.length && !isLoading;
-
     return (
       <Select
         value={value}
         ref={this.handleSelectRef}
         isMulti={isMulti}
-        options={options}
+        options={getOptions(usersFromState, users) || []}
         onChange={this.handleChange}
         styles={getStyles(width, hasValue)}
-        components={getComponents(isMulti, hasValue && !hasSelectedAll, anchor)}
+        components={getComponents(isMulti, anchor)}
         inputValue={search}
         menuIsOpen={menuIsOpen}
         onFocus={this.handleFocus}

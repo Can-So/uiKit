@@ -20,7 +20,7 @@ import LayerInitialised from '../../presentational/LayerInitialised';
 /* NOTE: experimental props use an underscore */
 /* eslint-disable camelcase */
 
-class LayoutManagerWithViewControllerBase extends Component<
+class AsyncLayoutManagerWithViewControllerBase extends Component<
   AsyncLayoutManagerWithViewControllerProps,
   AsyncLayoutManagerWithViewControllerState,
 > {
@@ -191,14 +191,17 @@ class LayoutManagerWithViewControllerBase extends Component<
 
 const AsyncLayoutManagerWithView = (
   props: $Diff<
-    ElementConfig<typeof LayoutManagerWithViewControllerBase>,
+    ElementConfig<typeof AsyncLayoutManagerWithViewControllerBase>,
     { view: * },
   >,
 ) => (
   <ViewControllerSubscriber>
     {({ state: { activeView } }) => {
       return (
-        <LayoutManagerWithViewControllerBase view={activeView} {...props} />
+        <AsyncLayoutManagerWithViewControllerBase
+          view={activeView}
+          {...props}
+        />
       );
     }}
   </ViewControllerSubscriber>

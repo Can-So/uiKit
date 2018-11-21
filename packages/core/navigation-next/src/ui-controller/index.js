@@ -5,4 +5,3 @@ export { default as UIControllerSubscriber } from './UIControllerSubscriber';
 export {
   default as withNavigationUIController,
 } from './withNavigationUIController';
-export type { UIControllerInterface } from './types';

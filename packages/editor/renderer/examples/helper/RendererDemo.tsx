@@ -230,6 +230,7 @@ export default class RendererDemo extends PureComponent<
         <fieldset style={{ marginBottom: 20 }}>
           <legend>Input</legend>
           <textarea
+            id="renderer-value-input"
             style={{
               boxSizing: 'border-box',
               border: '1px solid lightgray',

@@ -73,7 +73,9 @@ export const setCellAttrs = (node: PmNode, cell?: HTMLElement) => {
       (nodeType === 'tableCell' &&
         background === tableBackgroundColorNames.get('white'));
 
-    if (!ignored) {
+    if (ignored) {
+      attrs.style = '';
+    } else {
       const color =
         nodeType === 'tableCell' && isHex(background)
           ? hexToRgba(background, akEditorTableCellBackgroundOpacity)

@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.3.0
+- [minor] [ffb0d5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ffb0d5a):
+
+  - Support global navigation drawer widths
+
 ## 5.2.1
 - [patch] [ad45749](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad45749):
 

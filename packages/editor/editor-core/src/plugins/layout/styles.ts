@@ -2,7 +2,10 @@
 // prettier-ignore
 import { css, Styles, StyledComponentClass } from 'styled-components';
 import { colors, gridSize } from '@atlaskit/theme';
-import { columnLayoutSharedStyle } from '@atlaskit/editor-common';
+import {
+  columnLayoutSharedStyle,
+  gridMediumMaxWidth,
+} from '@atlaskit/editor-common';
 
 export const layoutStyles = css`
   .ProseMirror {
@@ -21,8 +24,15 @@ export const layoutStyles = css`
         border: 1px solid transparent;
         border-radius: 5px;
       }
+
       & > * + * {
         margin-left: ${gridSize() - 2}px;
+      }
+
+      @media screen and (max-width: ${gridMediumMaxWidth}px) {
+        & > * + * {
+          margin-left: 0;
+        }
       }
 
       /**

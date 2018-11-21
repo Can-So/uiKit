@@ -4,12 +4,12 @@ import { RadioGroup } from '../src';
 import type { OptionsPropType } from '../src/types';
 
 type State = {
-  checkedValue: string | number | null,
+  value: string | number | null,
   options: OptionsPropType,
 };
 export default class StatelessExample extends Component<void, State> {
   state = {
-    checkedValue: null,
+    value: null,
     options: [
       { name: 'color2', value: 'red', label: 'Red' },
       { name: 'color2', value: 'blue', label: 'Blue' },
@@ -21,7 +21,7 @@ export default class StatelessExample extends Component<void, State> {
   setValue = (e: any) => {
     console.log(e.target.value);
     this.setState({
-      checkedValue: e.target.value,
+      value: e.target.value,
     });
   };
 
@@ -30,7 +30,7 @@ export default class StatelessExample extends Component<void, State> {
       <div>
         <RadioGroup
           options={this.state.options}
-          checkedValue={this.state.checkedValue}
+          value={this.state.value}
           label="Pick a color (Checked state isn't managed by the component):"
           onChange={this.setValue}
         />
@@ -44,7 +44,7 @@ export default class StatelessExample extends Component<void, State> {
             margin: '0.5em',
           }}
         >
-          onChange called with value: {this.state.checkedValue}
+          onChange called with value: {this.state.value}
         </div>
       </div>
     );
