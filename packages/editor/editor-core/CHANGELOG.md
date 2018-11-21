@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.2.12
+- [patch] [1358f62](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1358f62):
+
+  - ED-5717: deduped quick insert provided items
+
 ## 88.2.11
 - [patch] [a706ffd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a706ffd):
 

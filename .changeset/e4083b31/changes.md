@@ -1,1 +1,0 @@
-- ED-5717: deduped quick insert provided items
