@@ -1,0 +1,1 @@
+- Fixes width plugin continuing without valid transaction state

@@ -20,6 +20,11 @@ export function createPlugin(
       }),
       apply(tr, oldPluginState) {
         const receivedPluginState = tr.getMeta(pluginKey);
+
+        if (!receivedPluginState) {
+          return oldPluginState;
+        }
+
         const newPluginState = {
           ...oldPluginState,
           ...receivedPluginState,
@@ -27,7 +32,7 @@ export function createPlugin(
 
         if (
           newPluginState &&
-          (oldPluginState.width !== newPluginState.newWidth ||
+          (oldPluginState.width !== newPluginState.width ||
             oldPluginState.lineLength !== newPluginState.lineLength)
         ) {
           dispatch(pluginKey, newPluginState);
