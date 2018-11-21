@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 30.3.0
+- [minor] [1e5cd32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e5cd32):
+
+  - Make layouts stack on small screens
+
 ## 30.2.1
 - Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
   - @atlaskit/editor-common@21.2.2

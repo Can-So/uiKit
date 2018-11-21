@@ -1,5 +1,13 @@
 # @atlaskit/editor-core
 
+## 88.3.0
+- [patch] [43f178a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/43f178a):
+
+  - ED-5813: Added type safety to width plugin.
+- [minor] [1e5cd32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e5cd32):
+
+  - Make layouts stack on small screens
+
 ## 88.2.14
 - [patch] [1ac6286](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ac6286):
 

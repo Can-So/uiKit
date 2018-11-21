@@ -1,1 +1,0 @@
-- Make layouts stack on small screens
