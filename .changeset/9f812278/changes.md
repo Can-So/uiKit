@@ -1,1 +1,0 @@
-- FS-3185 remove border from avatar
