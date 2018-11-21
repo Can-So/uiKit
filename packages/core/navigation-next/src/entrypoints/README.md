@@ -39,4 +39,25 @@ import LayoutManagerWithViewController from '@atlaskit/navigation-next/LayoutMan
 - `atlaskit/navigation-next/SkeletonContainerView`
 - `atlaskit/navigation-next/NavigationProvider`
 - `atlaskit/navigation-next/AsyncLayoutManagerWithViewController`
-- `atlaskit/navigation-next/ViewControllerSubscriber`
+- `atlaskit/navigation-next/ViewController`
+
+  ```js
+  // Using ViewController
+  import {
+    ViewController,
+    ViewControllerSubscriber,
+    withNavigationViewController,
+    viewReducerUtils,
+  } from '@atlaskit/navigation-next/ViewController';
+  ```
+
+- `atlaskit/navigation-next/UIController`
+  ```js
+  // Using UIController
+  import {
+    UIController,
+    UIControllerSubscriber,
+    withNavigationUI,
+    type UIControllerInterface,
+  } from '@atlaskit/navigation-next/UIController';
+  ```
