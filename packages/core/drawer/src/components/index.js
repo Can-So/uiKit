@@ -133,7 +133,7 @@ export class DrawerBase extends Component<DrawerProps> {
   }
 }
 
-export const DrawerItemTheme = (props: {}) => (
+export const DrawerItemTheme = (props: { children?: any }) => (
   <ThemeProvider theme={drawerItemTheme}>{props.children}</ThemeProvider>
 );
 
