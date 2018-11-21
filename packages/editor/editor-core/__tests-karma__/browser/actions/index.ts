@@ -8,8 +8,6 @@ import {
   blockquote,
   decisionList,
   decisionItem,
-  taskList,
-  taskItem,
   randomId,
   storyMediaProviderFactory,
   bodiedExtension,
@@ -162,19 +160,6 @@ describe(name, () => {
         expect(val).to.deep.equal(toJSON(result));
       });
 
-      it('should filter out task and decision items', async () => {
-        const decisionsAndTasks = doc(
-          decisionList({})(decisionItem({})()),
-          taskList({})(taskItem({})()),
-          p('text'),
-        )(defaultSchema);
-        const expected = doc(p('text'))(defaultSchema);
-        editorActions.replaceDocument(decisionsAndTasks.toJSON());
-
-        const actual = await editorActions.getValue();
-        expect(actual).to.deep.equal({ ...expected.toJSON(), version: 1 });
-      });
-
       describe('with waitForMediaUpload === true', () => {
         it('should not resolve when all media operations are pending', async () => {
           stateManager.updateState(testTempFileId, {
@@ -296,7 +281,7 @@ describe(name, () => {
           const value = (await editorActions.getValue()) as any;
 
           expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(1);
+          expect(value.content).to.be.of.length(2);
           expect(value.content[0].type).to.be.eq('mediaGroup');
           expect(value.content[0].content[0].type).to.be.eq('media');
           expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
@@ -329,7 +314,7 @@ describe(name, () => {
           const value = (await editorActions.getValue()) as any;
 
           expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(1);
+          expect(value.content).to.be.of.length(2);
           expect(value.content[0].type).to.be.eq('mediaGroup');
           expect(value.content[0].content[0].type).to.be.eq('media');
           expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
@@ -377,7 +362,7 @@ describe(name, () => {
           const value = (await editorActions.getValue()) as any;
 
           expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(1);
+          expect(value.content).to.be.of.length(2);
           expect(value.content[0].type).to.be.eq('mediaGroup');
           expect(value.content[0].content[0].type).to.be.eq('media');
           expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);

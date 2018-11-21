@@ -23,5 +23,6 @@ BrowserTestCase(
 
     expect(dropdownMenuLocation.x).toBeGreaterThanOrEqual(100);
     expect(dropdownMenuLocation.y).toBeGreaterThanOrEqual(200);
+    await drawerTest.checkConsoleErrors();
   },
 );

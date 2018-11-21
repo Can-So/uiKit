@@ -1,5 +1,6 @@
 import { Transaction } from 'prosemirror-state';
 import { Node as PMNode } from 'prosemirror-model';
+import { getCellsInRow } from 'prosemirror-utils';
 
 const fixTable = (
   table: PMNode,
@@ -12,6 +13,22 @@ const fixTable = (
     if (!row.childCount) {
       rowPos = tr.mapping.map(rowPos);
       tr.delete(rowPos, rowPos + row.nodeSize);
+
+      // decrement rowspans @see ED-5802
+      for (let j = i - 1; j >= 0; j--) {
+        const cells = getCellsInRow(j)(tr.selection);
+        if (cells) {
+          cells.forEach(cell => {
+            const { rowspan } = cell.node.attrs;
+            if (rowspan + j - 1 >= i) {
+              tr.setNodeMarkup(cell.pos, cell.node.type, {
+                ...cell.node.attrs,
+                rowspan: rowspan - 1,
+              });
+            }
+          });
+        }
+      }
     }
     rowPos += row.nodeSize;
   }

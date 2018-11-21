@@ -1,5 +1,40 @@
 # @atlaskit/editor-core
 
+## 88.2.13
+- [patch] [37313f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37313f8):
+
+  - Remove preprocessDoc because it was removing empty tasks & decisionItems
+
+## 88.2.12
+- [patch] [1358f62](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1358f62):
+
+  - ED-5717: deduped quick insert provided items
+
+## 88.2.11
+- [patch] [a706ffd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a706ffd):
+
+  ED-4427 Editor disabled state applies to floating toolbars and task decision checkboxes
+
+## 88.2.10
+- [patch] [368e858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/368e858):
+
+  - ED-5570 Fixed long URLs wrapping in editor panel
+
+## 88.2.9
+- [patch] [70a104dc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/70a104dc):
+
+  - ED-5802: fix merging rows when rowspan > 1 in neighbour columns
+
+## 88.2.8
+- [patch] [04abea3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04abea3):
+
+  - ED-5186: Always show scroll bar, to avoid page shift.
+
+## 88.2.7
+- [patch] [4e2a3b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e2a3b1):
+
+  - ED-5809 Fixes code mark getting removed from document
+
 ## 88.2.6
 - [patch] [899b377](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/899b377):
 

@@ -9,9 +9,10 @@ const COLOR_TYPE_REGEX = {
 
 const PANEL_TYPE_TO_RGB = {
   info: { r: 222, g: 235, b: 255 },
-  tip: { r: 227, g: 252, b: 239 },
   note: { r: 234, g: 230, b: 255 },
+  success: { r: 227, g: 252, b: 239 },
   warning: { r: 255, g: 250, b: 230 },
+  error: { r: 255, g: 235, b: 230 },
 };
 
 interface RGB {
