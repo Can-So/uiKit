@@ -1,8 +1,8 @@
-import Avatar from '@atlaskit/avatar';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { MultiValue, scrollToValue } from '../../../components/MultiValue';
+import { SizeableAvatar } from '../../../components/SizeableAvatar';
 import { renderProp } from '../_testUtils';
 
 const mockHtmlElement = (rect: Partial<DOMRect>): HTMLElement =>
@@ -41,7 +41,11 @@ describe('MultiValue', () => {
       appearance: 'rounded',
       text: 'Jace Beleren',
       elemBefore: (
-        <Avatar size="xsmall" src="http://avatars.atlassian.com/jace.png" />
+        <SizeableAvatar
+          appearance="compact"
+          src="http://avatars.atlassian.com/jace.png"
+          name="Jace Beleren"
+        />
       ),
       removeButtonText: 'remove',
     });
@@ -58,7 +62,11 @@ describe('MultiValue', () => {
       appearance: 'rounded',
       text: 'Jace Beleren',
       elemBefore: (
-        <Avatar size="xsmall" src="http://avatars.atlassian.com/jace.png" />
+        <SizeableAvatar
+          appearance="compact"
+          src="http://avatars.atlassian.com/jace.png"
+          name="Jace Beleren"
+        />
       ),
       removeButtonText: 'remove',
       color: 'blueLight',
