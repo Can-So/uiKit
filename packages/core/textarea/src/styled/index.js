@@ -116,7 +116,7 @@ export const TextAreaWrapper = styled.div`
   border-style: ${getBorderStyle};
   box-sizing: border-box;
   line-height: ${getLineHeight};
-  overflow: hidden;
+  overflow: auto;
   transition: background-color ${transitionDuration} ease-in-out,
     border-color ${transitionDuration} ease-in-out;
   word-wrap: break-word;
@@ -124,6 +124,7 @@ export const TextAreaWrapper = styled.div`
   ${getHoverState}
   ${props => props.isDisabled && `cursor: not-allowed;`}
   font-size: ${fontSize}px;
+  max-height: ${props => props.maxHeight};
   max-width: 100%;
   ${getResizeStyles}
   & > textarea {

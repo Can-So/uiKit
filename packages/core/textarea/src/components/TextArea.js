@@ -33,6 +33,8 @@ type Props = {
   isInvalid?: boolean,
   /** The minimum number of rows of text to display */
   minimumRows: number,
+  /** The maxheight of the textarea */
+  maxHeight: string,
   /** The value of the text-area. */
   value?: string | number,
   /** The default value of the text-area */
@@ -75,6 +77,7 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
     isInvalid: false,
     isMonospaced: false,
     minimumRows: 1,
+    maxHeight: '50vh',
     theme: defaultTheme,
     forwardedRef: () => {},
   };
@@ -112,6 +115,7 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
       isMonospaced,
       isRequired,
       minimumRows,
+      maxHeight,
       theme,
       forwardedRef,
       ...props
@@ -125,6 +129,7 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
           <TextAreaWrapper
             {...themeInContext.textArea({ appearance, isCompact })}
             resize={resize}
+            maxHeight={maxHeight}
             appearance={appearance}
             isDisabled={isDisabled}
             isReadOnly={isReadOnly}

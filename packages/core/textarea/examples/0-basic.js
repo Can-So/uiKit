@@ -8,7 +8,7 @@ const Div = styled.div`
 `;
 
 export default class extends Component<*, *> {
-  textareaElement: HTMLTextAreaElement | null;
+  textareaElement: any;
   focus = () => {
     if (this.textareaElement) {
       this.textareaElement.focus();
@@ -23,7 +23,7 @@ export default class extends Component<*, *> {
         <TextArea resize="auto" isInvalid />
         <p>Smart:</p>
         <TextArea
-          ref={ref => {
+          ref={(ref?: any) => {
             this.textareaElement = ref;
           }}
         />
