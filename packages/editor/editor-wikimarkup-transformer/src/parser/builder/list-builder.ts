@@ -182,13 +182,14 @@ export class ListBuilder {
   private isParagraphEmptyTextNode(node: PMNode): boolean {
     let flag = false;
     if (node.type.name === 'paragraph' && node.childCount) {
-      node.content.forEach(n => {
+      for (let i = 0; i < node.childCount; i++) {
+        const n = node.content.child(i);
         if (n.type.name === 'text' && n.textContent.trim() === '') {
           flag = true;
         } else {
           return false;
         }
-      });
+      }
     }
     return flag;
   }
