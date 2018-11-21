@@ -4,16 +4,19 @@ import { NodeSpec } from 'prosemirror-model';
 import { PanelDefinition as Panel } from './panel';
 import {
   ParagraphDefinition as Paragraph,
-  ParagraphWithAlignment,
+  ParagraphWithMarksDefinition as ParagraphWithMarks,
 } from './paragraph';
 import { BlockQuoteDefinition as Blockquote } from './blockquote';
 import { OrderedListDefinition as OrderedList } from './ordered-list';
 import { BulletListDefinition as BulletList } from './bullet-list';
 import { RuleDefinition as Rule } from './rule';
-import { HeadingDefinition as Heading, HeadingWithAlignment } from './heading';
+import {
+  HeadingDefinition as Heading,
+  HeadingWithMarksDefinition as HeadingWithMarks,
+} from './heading';
 import {
   CodeBlockDefinition as CodeBlock,
-  CodeBlockWithBreakoutDefinition as CodeBlockWithBreakout,
+  CodeBlockWithMarksDefinition as CodeBlockWithMarks,
 } from './code-block';
 import { MediaGroupDefinition as MediaGroup } from './media-group';
 import { MediaSingleDefinition as MediaSingle } from './media-single';
@@ -182,9 +185,9 @@ export interface DocNode {
   content: Array<
     | BlockContent
     | LayoutSection
-    | CodeBlockWithBreakout
-    | ParagraphWithAlignment
-    | HeadingWithAlignment
+    | CodeBlockWithMarks
+    | ParagraphWithMarks
+    | HeadingWithMarks
   >;
 }
 

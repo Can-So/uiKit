@@ -7,6 +7,6 @@ export default {
       allowUnsupportedInline: true,
       optional: true,
     },
-    marks: { type: 'array', items: ['alignment'], optional: true },
+    marks: { type: 'array', items: [], optional: true },
   },
 };

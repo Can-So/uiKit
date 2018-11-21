@@ -1,5 +1,27 @@
 # @atlaskit/navigation-next
 
+## 3.26.0
+- [minor] [5c6c893](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c6c893):
+
+  - Create an entrypoint for ViewController and UIController
+
+## 3.25.2
+- [patch] [5e99cb1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e99cb1):
+
+  - Replacing LayoutManagerWithViewController impl by composing AsyncLMWVC
+
+## 3.25.1
+- [patch] [a22db3c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a22db3c):
+
+  - Update flowtypes of UIController to allow consumer supplied cache getters to return null/undefined
+
+## 3.25.0
+- [minor] [d96b032](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d96b032):
+
+  - Export flow types for each built-in item renderer type
+  - Export a generic flow typed version of the renderer, `TypedViewRenderer`, that is designed to be extended to pass custom component flow types
+    so the renderer typechecks custom components. See the [View Renderer documentation](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/state-controllers#view-renderer) for more information.
+
 ## 3.24.0
 - [minor] [c2c0b0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2c0b0c):
 

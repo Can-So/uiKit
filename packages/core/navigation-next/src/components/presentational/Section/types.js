@@ -2,7 +2,7 @@
 
 import type { Node } from 'react';
 
-import type { StyleReducer, ProductTheme } from '../../../theme/types';
+import type { StyleReducer, WithContentThemeProps } from '../../../theme/types';
 
 export type RenderProvided = {
   className: string,
@@ -18,7 +18,8 @@ export type SectionPresentationProps = {
   alwaysShowScrollHint: boolean,
 };
 
-export type ConnectedSectionProps = SectionPresentationProps & {
+export type ConnectedSectionProps = {|
+  ...$Exact<SectionPresentationProps>,
   /** A unique ID for this section. */
   id?: string,
   /** The unique ID of the section which is this section's 'parent' in the
@@ -34,9 +35,12 @@ export type ConnectedSectionProps = SectionPresentationProps & {
   /** A function which will be passed the default styles object for the Section
    * and should return a new styles object. */
   styles: StyleReducer,
-};
+|};
 
-export type SectionProps = ConnectedSectionProps & { theme: ProductTheme };
+export type SectionProps = {|
+  ...$Exact<ConnectedSectionProps>,
+  ...$Exact<WithContentThemeProps>,
+|};
 
 export type SectionState = {
   traversalDirection: 'down' | 'up' | null,

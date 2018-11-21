@@ -91,7 +91,7 @@ class Example extends React.Component<{}, ExampleState> {
                       { label: 'Block', value: 'block' },
                       { label: 'Inline', value: 'inline' },
                     ]}
-                    checkedValue={appearance}
+                    value={appearance}
                     label="Pick a "
                     onChange={this.handleAppearanceChange}
                   />

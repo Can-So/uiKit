@@ -1,6 +1,6 @@
+import { AVATAR_SIZES, BORDER_WIDTH } from '@atlaskit/avatar';
 import { colors } from '@atlaskit/theme';
 import memoizeOne from 'memoize-one';
-import { AVATAR_SIZES, BORDER_WIDTH } from '@atlaskit/avatar';
 import { getAvatarSize } from './utils';
 
 export const PLACEHOLDER_PADDING = 8;
@@ -100,5 +100,14 @@ export const getStyles = memoizeOne((width, hasValue) => ({
   input: ({ margin, ...css }) => ({
     ...css,
     paddingLeft: !hasValue ? PLACEHOLDER_PADDING : 4,
+    '& input::placeholder': {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: colors.N100,
+      opacity: 1 /* Firefox */,
+    },
+    '& input:-ms-input-placeholder': {
+      /* Internet Explorer 10-11 */
+      color: colors.N100,
+    },
   }),
 }));

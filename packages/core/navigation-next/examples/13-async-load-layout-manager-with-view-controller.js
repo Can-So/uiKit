@@ -12,6 +12,7 @@ import {
   NavigationProvider,
   SkeletonContainerView,
   ViewRenderer,
+  SkeletonItem,
 } from '../src';
 
 import ContainerViews from './shared/views/container';
@@ -38,10 +39,22 @@ const AsyncProjectSwitch = asyncComponent({
       return new Promise(resolve => {
         setTimeout(() => {
           return resolve(ProjectSwitcher);
-        }, 10000);
+        }, 2000);
       });
     }),
   LoadingComponent: () => <ProjectSwitchSkeleton />,
+});
+
+const AsyncLinkItem = asyncComponent({
+  resolve: () =>
+    import('./shared/components').then(({ LinkItem }) => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          return resolve(LinkItem);
+        }, 2000);
+      });
+    }),
+  LoadingComponent: () => <SkeletonItem hasBefore />,
 });
 
 const AsyncDefaultGlobalNavigation = asyncComponent({
@@ -118,7 +131,10 @@ export default class App extends Component<
           isDebugEnabled={isDebugEnabled}
         >
           <AsyncLayoutManagerWithViewController
-            customComponents={{ ProjectSwitcher: AsyncProjectSwitch }}
+            customComponents={{
+              ProjectSwitcher: AsyncProjectSwitch,
+              LinkItem: AsyncLinkItem,
+            }}
             experimental_flyoutOnHover={isFlyoutAvailable}
             globalNavigation={AsyncDefaultGlobalNavigation}
             containerSkeleton={() => <SkeletonContainerView type={'product'} />}

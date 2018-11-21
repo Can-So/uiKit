@@ -14,7 +14,7 @@
         "content": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/paragraph_node"
+            "$ref": "#/definitions/paragraph_with_no_marks_node"
           },
           "minItems": 1
         }
@@ -195,7 +195,7 @@
                   "$ref": "#/definitions/mediaSingle_node"
                 },
                 {
-                  "$ref": "#/definitions/paragraph_node"
+                  "$ref": "#/definitions/paragraph_with_no_marks_node"
                 }
               ]
             },
@@ -211,7 +211,7 @@
                   "$ref": "#/definitions/bulletList_node"
                 },
                 {
-                  "$ref": "#/definitions/paragraph_node"
+                  "$ref": "#/definitions/paragraph_with_no_marks_node"
                 }
               ]
             }
@@ -531,7 +531,7 @@
       ],
       "additionalProperties": false
     },
-    "codeBlock_no_marks_node": {
+    "codeBlock_with_no_marks_node": {
       "allOf": [
         {
           "$ref": "#/definitions/codeBlock_node"
@@ -587,6 +587,9 @@
             "$ref": "#/definitions/inline_node"
           }
         },
+        "marks": {
+          "type": "array"
+        },
         "attrs": {
           "type": "object",
           "properties": {
@@ -607,6 +610,23 @@
         "attrs"
       ],
       "additionalProperties": false
+    },
+    "heading_with_no_marks_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/heading_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "maxItems": 0
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
     },
     "rule_node": {
       "type": "object",
@@ -1584,12 +1604,32 @@
           "items": {
             "$ref": "#/definitions/inline_node"
           }
+        },
+        "marks": {
+          "type": "array"
         }
       },
       "required": [
         "type"
       ],
       "additionalProperties": false
+    },
+    "paragraph_with_no_marks_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/paragraph_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "maxItems": 0
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
     },
     "panel_node": {
       "type": "object",
@@ -1629,10 +1669,10 @@
                 "$ref": "#/definitions/bulletList_node"
               },
               {
-                "$ref": "#/definitions/heading_node"
+                "$ref": "#/definitions/heading_with_no_marks_node"
               },
               {
-                "$ref": "#/definitions/paragraph_node"
+                "$ref": "#/definitions/paragraph_with_no_marks_node"
               }
             ]
           },
@@ -1663,10 +1703,10 @@
             "$ref": "#/definitions/bulletList_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_no_marks_node"
+            "$ref": "#/definitions/codeBlock_with_no_marks_node"
           },
           {
-            "$ref": "#/definitions/heading_node"
+            "$ref": "#/definitions/heading_with_no_marks_node"
           },
           {
             "$ref": "#/definitions/rule_node"
@@ -1687,7 +1727,7 @@
             "$ref": "#/definitions/extension_node"
           },
           {
-            "$ref": "#/definitions/paragraph_node"
+            "$ref": "#/definitions/paragraph_with_no_marks_node"
           },
           {
             "$ref": "#/definitions/panel_node"
@@ -1716,10 +1756,10 @@
             "$ref": "#/definitions/table_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_no_marks_node"
+            "$ref": "#/definitions/codeBlock_with_no_marks_node"
           },
           {
-            "$ref": "#/definitions/heading_node"
+            "$ref": "#/definitions/heading_with_no_marks_node"
           },
           {
             "$ref": "#/definitions/rule_node"
@@ -1740,7 +1780,7 @@
             "$ref": "#/definitions/extension_node"
           },
           {
-            "$ref": "#/definitions/paragraph_node"
+            "$ref": "#/definitions/paragraph_with_no_marks_node"
           },
           {
             "$ref": "#/definitions/panel_node"
@@ -1880,10 +1920,10 @@
                 "$ref": "#/definitions/table_node"
               },
               {
-                "$ref": "#/definitions/codeBlock_no_marks_node"
+                "$ref": "#/definitions/codeBlock_with_no_marks_node"
               },
               {
-                "$ref": "#/definitions/heading_node"
+                "$ref": "#/definitions/heading_with_no_marks_node"
               },
               {
                 "$ref": "#/definitions/rule_node"
@@ -1907,7 +1947,7 @@
                 "$ref": "#/definitions/bodiedExtension_node"
               },
               {
-                "$ref": "#/definitions/paragraph_node"
+                "$ref": "#/definitions/paragraph_with_no_marks_node"
               },
               {
                 "$ref": "#/definitions/panel_node"
