@@ -34,8 +34,6 @@ export default function fileUploadsAdd(state: State, action: Action): State {
         }),
     );
 
-    console.log({ fileUploadAddFileId: files[0].id });
-
     const newSelectedItems: SelectedItem[] = files.map(file => ({
       date: 0,
       id: file.id,

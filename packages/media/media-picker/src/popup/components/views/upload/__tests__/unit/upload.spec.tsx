@@ -7,6 +7,7 @@ import { FlagGroup } from '@atlaskit/flag';
 import { Card } from '@atlaskit/media-card';
 import { MediaCollectionItem } from '@atlaskit/media-store';
 import { asMock, fakeContext } from '@atlaskit/media-test-helpers';
+import { InfiniteScroll } from '@atlaskit/media-ui';
 import { Context } from '@atlaskit/media-core';
 import {
   State,
@@ -39,7 +40,6 @@ import { Dropzone } from '../../dropzone';
 import { SpinnerWrapper, Wrapper } from '../../styled';
 import { LocalBrowserButton } from '../../../../views/upload/uploadButton';
 import { Browser } from '../../../../../../components/browser';
-import { InfiniteScroll } from '../../../../../../../../media-ui/src';
 
 const ConnectedUploadViewWithStore = getComponentClassWithStore(
   ConnectedUploadView,

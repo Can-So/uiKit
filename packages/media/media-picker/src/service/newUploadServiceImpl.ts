@@ -106,7 +106,7 @@ export class NewUploadServiceImpl implements UploadService {
             resolve(state.id);
             subscription.unsubscribe();
           },
-          error: error => reject(error),
+          error: reject,
         });
       });
 
@@ -119,14 +119,15 @@ export class NewUploadServiceImpl implements UploadService {
             resolve(state.occurrenceKey);
             subscription.unsubscribe();
           },
-          error: error => reject(error),
+          error: reject,
         });
       });
 
     const { shouldCopyFileToRecents } = this;
     if (shouldCopyFileToRecents && observable) {
       return {
-        // Don't care about userUpfrontId
+        // We don't specify userUpfrontId since this is the case
+        // when we use upload directly to tenant first
         upfrontId: getIdFromObservable(observable),
       };
     } else if (this.userMediaStore && observable) {
@@ -212,13 +213,6 @@ export class NewUploadServiceImpl implements UploadService {
           userUpfrontId,
           userOccurrenceKey,
         } = this.getUpfrontIds(observable, occurrenceKey);
-
-        // userUpfrontId!.then(userUpfrontId => {
-        //   console.log({ userUpfrontId });
-        // });
-        // userOccurrenceKey!.then(userOccurrenceKey => {
-        //   console.log({ userOccurrenceKey });
-        // });
 
         const mediaFile: MediaFile = {
           id,

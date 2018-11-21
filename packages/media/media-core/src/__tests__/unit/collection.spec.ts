@@ -1,4 +1,7 @@
-import { MediaCollectionItem } from '@atlaskit/media-store';
+import {
+  MediaCollectionItem,
+  MediaCollectionItemDetails,
+} from '@atlaskit/media-store';
 import { nextTick } from '@atlaskit/media-test-helpers';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import {
@@ -7,7 +10,6 @@ import {
   mergeItems,
 } from '../../collection';
 import { fileStreamsCache } from '../../context/fileStreamCache';
-import { MediaCollectionItemDetails } from '../../../../media-store/src/models/media';
 
 const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
   const firstItem: MediaCollectionItem = {
@@ -53,15 +55,13 @@ const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
     type: 'file',
   };
   const contents: MediaCollectionItem[] = [firstItem, secondItem];
-  const getCollectionItems = jest.fn().mockReturnValue(
-    Promise.resolve({
-      data: {
-        contents,
-        nextInclusiveStartKey,
-      },
-    }),
-  );
-  const removeCollectionFile = jest.fn().mockReturnValue(Promise.resolve());
+  const getCollectionItems = jest.fn().mockResolvedValue({
+    data: {
+      contents,
+      nextInclusiveStartKey,
+    },
+  });
+  const removeCollectionFile = jest.fn().mockResolvedValue({});
   const mediaStore: any = {
     getCollectionItems,
     removeCollectionFile,

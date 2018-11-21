@@ -97,7 +97,7 @@ export interface UploadViewDispatchProps {
   readonly removeFileFromRecents: (
     id: string,
     occurrenceKey?: string,
-    idForApiCall?: string,
+    userFileId?: string,
   ) => void;
 }
 
@@ -275,14 +275,8 @@ export class StatelessUploadView extends Component<
       const onClick = () => onFileClick(serviceFile, 'upload');
       const actions: CardAction[] = [
         createDeleteCardAction(async () => {
-          // console.log('removing!');
           const userFileId = await userUpfrontId;
           const occurrenceKey = await userOccurrenceKey;
-          // console.log(
-          //   'user file id and occurrence Key are',
-          //   userFileId,
-          //   occurrenceKey,
-          // );
           removeFileFromRecents(id, occurrenceKey, userFileId);
         }),
       ]; // TODO [MS-1017]: allow file annotation for uploading files
@@ -431,8 +425,8 @@ const mapDispatchToProps = (
     dispatch(editRemoteImage(file, collectionName)),
   setUpfrontIdDeferred: (id, resolver, rejecter) =>
     dispatch(setUpfrontIdDeferred(id, resolver, rejecter)),
-  removeFileFromRecents: (id, occurrenceKey, idForApiCall) =>
-    dispatch(removeFileFromRecents(id, occurrenceKey, idForApiCall)),
+  removeFileFromRecents: (id, occurrenceKey, userFileId) =>
+    dispatch(removeFileFromRecents(id, occurrenceKey, userFileId)),
 });
 
 export default connect<
