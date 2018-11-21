@@ -1,6 +1,6 @@
 //@flow
-import renderEllipsis from '../../../components/ellipsis';
-import collapseRange from '../../../util/collapse-range';
+import renderEllipsis from '../../../components/renderEllipsis';
+import collapseRange from '../../../util/collapseRange';
 import { name } from '../../../../package.json';
 
 describe(`${name} - collapse range`, () => {

@@ -2,8 +2,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Pagination from '../../..';
-import Page from '../../../components/page';
-import { LeftNavigator } from '../../../components/navigators';
+import Page from '../../../components/Page';
+import { LeftNavigator } from '../../../components/Navigators';
 import { name } from '../../../../package.json';
 
 describe(`${name} - Pagination component`, () => {

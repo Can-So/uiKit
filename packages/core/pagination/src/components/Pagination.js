@@ -5,10 +5,10 @@ import {
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
-import PageComponent from './page';
-import { LeftNavigator, RightNavigator } from './navigators';
-import renderEllipsis from './ellipsis';
-import collapseRangeHelper from '../util/collapse-range';
+import PageComponent from './Page';
+import { LeftNavigator, RightNavigator } from './Navigators';
+import renderEllipsis from './renderEllipsis';
+import collapseRangeHelper from '../util/collapseRange';
 import {
   name as packageName,
   version as packageVersion,

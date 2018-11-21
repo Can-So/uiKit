@@ -5,7 +5,7 @@ import Button from '@atlaskit/button';
 import ChevronRightLargeIcon from '@atlaskit/icon/glyph/chevron-right-large';
 
 import { name } from '../../../../../package.json';
-import RightNavigator from '../../../../components/navigators/right-navigator';
+import RightNavigator from '../../../../components/Navigators/RightNavigator';
 
 describe(`${name} - RightNavigator`, () => {
   it('default props', () => {
