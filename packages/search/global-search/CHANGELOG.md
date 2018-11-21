@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.12.3
+- [patch] [6c50eb1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c50eb1):
+
+  - Pre-highlight exact matches of Jira issues and remove the split button
+
 ## 5.12.2
 - Updated dependencies [80304f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80304f0):
   - @atlaskit/icon@14.4.0

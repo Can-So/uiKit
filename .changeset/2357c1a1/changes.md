@@ -1,1 +1,0 @@
-- Pre-highlight exact matches of Jira issues and remove the split button
