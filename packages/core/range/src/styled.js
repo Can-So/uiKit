@@ -194,6 +194,7 @@ export const rangeInputStyle = css`
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   background: transparent; /* Otherwise white in Chrome */
   height: ${overallHeight}px; /* Otherwise thumb will collide with previous box element */
+  padding: 0; /* IE11 includes padding, this normalises it */
   width: 100%; /* Specific width is required for Firefox. */
 
   &:focus {
