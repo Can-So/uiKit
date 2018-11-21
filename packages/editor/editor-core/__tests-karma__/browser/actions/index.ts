@@ -162,22 +162,6 @@ describe(name, () => {
         expect(val).to.deep.equal(toJSON(result));
       });
 
-      it('should not filter out task and decision items', async () => {
-        const decisionsAndTasks = doc(
-          decisionList({})(decisionItem({})()),
-          taskList({})(taskItem({})()),
-          p('text'),
-        )(defaultSchema);
-
-        editorActions.replaceDocument(decisionsAndTasks.toJSON());
-
-        const actual = await editorActions.getValue();
-        expect(actual).to.deep.equal({
-          ...decisionsAndTasks.toJSON(),
-          version: 1,
-        });
-      });
-
       describe('with waitForMediaUpload === true', () => {
         it('should not resolve when all media operations are pending', async () => {
           stateManager.updateState(testTempFileId, {
