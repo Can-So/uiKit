@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 3.26.0
+- [minor] [5c6c893](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c6c893):
+
+  - Create an entrypoint for ViewController and UIController
+
 ## 3.25.2
 - [patch] [5e99cb1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e99cb1):
 
