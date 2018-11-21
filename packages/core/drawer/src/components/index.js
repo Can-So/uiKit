@@ -16,7 +16,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../package.json';
-import defaultDrawerTheme from '../theme/default-drawer-theme';
+import drawerItemTheme from '../theme/drawer-item-theme';
 import DrawerPrimitive from './primitives';
 import { Fade } from './transitions';
 import type { CloseTrigger, DrawerProps } from './types';
@@ -134,7 +134,7 @@ export class DrawerBase extends Component<DrawerProps> {
 }
 
 export const DrawerItemTheme = (props: {}) => (
-  <ThemeProvider theme={defaultDrawerTheme}>{props.children}</ThemeProvider>
+  <ThemeProvider theme={drawerItemTheme}>{props.children}</ThemeProvider>
 );
 
 export default withAnalyticsContext({
