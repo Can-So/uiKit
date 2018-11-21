@@ -22,7 +22,7 @@ describe(`${name} json-schema v1`, () => {
         `${__dirname}/v1-reference/${schemaName}/valid`,
       );
       valid.forEach(file => {
-        it(`validates '${file.name}`, () => {
+        it(`validates '${file.name}'`, () => {
           validate(file.data);
           expect(validate.errors).toEqual(null);
         });
@@ -32,7 +32,7 @@ describe(`${name} json-schema v1`, () => {
         `${__dirname}/v1-reference/${schemaName}/invalid`,
       );
       invalid.forEach(file => {
-        it(`does not validate '${file.name}`, () => {
+        it(`does not validate '${file.name}'`, () => {
           expect(validate(file.data)).toEqual(false);
         });
       });

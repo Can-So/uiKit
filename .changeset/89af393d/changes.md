@@ -1,0 +1,1 @@
+- Fix block marks validation

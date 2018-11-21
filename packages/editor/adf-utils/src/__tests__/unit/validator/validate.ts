@@ -28,7 +28,7 @@ describe('validate', () => {
       if (file.name.indexOf('applicationCard') === 0) {
         return;
       }
-      it(`validates '${file.name}`, () => {
+      it(`validates '${file.name}'`, () => {
         const run = () => {
           validate(file.data);
         };

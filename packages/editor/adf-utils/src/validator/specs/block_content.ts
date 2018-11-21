@@ -1,9 +1,9 @@
 export default [
-  'paragraph',
+  'paragraph_with_no_marks',
   'bulletList',
   'mediaSingle',
   'orderedList',
-  'heading',
+  'heading_with_no_marks',
   'panel',
   'blockquote',
   'rule',

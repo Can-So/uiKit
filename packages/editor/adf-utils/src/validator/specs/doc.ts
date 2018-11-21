@@ -6,13 +6,13 @@ export default {
       type: 'array',
       items: [
         [
-          'paragraph',
-          'paragraph_with_alignment',
+          'paragraph_with_no_marks',
+          'paragraph_with_marks',
           'bulletList',
           'mediaSingle',
           'orderedList',
-          'heading',
-          'heading_with_alignment',
+          'heading_with_no_marks',
+          'heading_with_marks',
           'panel',
           'blockquote',
           'rule',
