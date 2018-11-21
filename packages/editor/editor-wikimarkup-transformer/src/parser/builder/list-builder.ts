@@ -154,10 +154,8 @@ export class ListBuilder {
         continue;
       }
 
-      if (
-        pmNode.type.name === 'paragraph' &&
-        pmNode.textContent.trim() === ''
-      ) {
+      /* Skip Empty spaces after rule */
+      if (this.isParagraphEmptyTextNode(pmNode)) {
         continue;
       }
 
@@ -179,6 +177,21 @@ export class ListBuilder {
 
     return output;
   };
+
+  /* Check if all paragraph's children nodes are empty spaces */
+  private isParagraphEmptyTextNode(node: PMNode): boolean {
+    let flag = false;
+    if (node.type.name === 'paragraph' && node.childCount) {
+      node.content.forEach(n => {
+        if (n.type.name === 'text' && n.textContent.trim() === '') {
+          flag = true;
+        } else {
+          return false;
+        }
+      });
+    }
+    return flag;
+  }
 
   private createListItem(content: PMNode[], schema: Schema): PMNode {
     if (
