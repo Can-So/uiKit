@@ -1,1 +1,1 @@
-- Create an entrypoint for ViewControllerSubscriber component
+- Create an entrypoint for ViewController and UIController
