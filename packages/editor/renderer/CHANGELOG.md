@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 30.3.2
+- [patch] [030007e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/030007e):
+
+  - ED-5776: fix number column when first column is resized
+
 ## 30.3.1
 - [patch] [f2cb9d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f2cb9d9):
 

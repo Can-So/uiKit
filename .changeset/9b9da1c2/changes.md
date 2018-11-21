@@ -1,1 +1,0 @@
-- ED-5776: fix number column when first column is resized
