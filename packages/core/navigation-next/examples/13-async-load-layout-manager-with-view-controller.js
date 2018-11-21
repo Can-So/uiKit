@@ -35,7 +35,7 @@ const GlobalNavSkeleton = () => (
 // ==============================
 const AsyncProjectSwitch = asyncComponent({
   resolve: () =>
-    import('./shared/components').then(({ ProjectSwitcher, LinkItem }) => {
+    import('./shared/components').then(({ ProjectSwitcher }) => {
       return new Promise(resolve => {
         setTimeout(() => {
           return resolve(ProjectSwitcher);
