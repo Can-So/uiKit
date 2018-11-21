@@ -49,5 +49,5 @@ export default md`
 
   #### Remove ScrollableSectionInner component
 
-  Remove ScrollableSectionInner component and scrollHint styles from theme. This component is not required as it has been replaced inline within Section directly.
+  Remove ScrollableSectionInner component and scrollHint styles from theme. Scrolling behaviour is already a part of \`MenuSection\` and can be achieved in \`Section\` by setting its \`shouldGrow\` prop.
 `;
