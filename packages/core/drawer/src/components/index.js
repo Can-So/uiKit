@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Children, Component, Fragment } from 'react';
+import React, { Children, Component, Fragment, type Node } from 'react';
 import { canUseDOM } from 'exenv';
 import { createPortal } from 'react-dom';
 import { ThemeProvider } from 'styled-components';
@@ -133,7 +133,7 @@ export class DrawerBase extends Component<DrawerProps> {
   }
 }
 
-export const DrawerItemTheme = (props: { children?: any }) => (
+export const DrawerItemTheme = (props: { children: Node }) => (
   <ThemeProvider theme={drawerItemTheme}>{props.children}</ThemeProvider>
 );
 
