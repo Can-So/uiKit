@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { TextAreaWithoutAnalytics as TextArea } from '../src/components/TextArea';
+import TextArea from '../src';
 
 const Div = styled.div`
   max-width: 500px;
