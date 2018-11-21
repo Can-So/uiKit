@@ -8,8 +8,6 @@ import {
   blockquote,
   decisionList,
   decisionItem,
-  taskList,
-  taskItem,
   randomId,
   storyMediaProviderFactory,
   bodiedExtension,
@@ -283,7 +281,7 @@ describe(name, () => {
           const value = (await editorActions.getValue()) as any;
 
           expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(1);
+          expect(value.content).to.be.of.length(2);
           expect(value.content[0].type).to.be.eq('mediaGroup');
           expect(value.content[0].content[0].type).to.be.eq('media');
           expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
@@ -316,7 +314,7 @@ describe(name, () => {
           const value = (await editorActions.getValue()) as any;
 
           expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(1);
+          expect(value.content).to.be.of.length(2);
           expect(value.content[0].type).to.be.eq('mediaGroup');
           expect(value.content[0].content[0].type).to.be.eq('media');
           expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
@@ -364,7 +362,7 @@ describe(name, () => {
           const value = (await editorActions.getValue()) as any;
 
           expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(1);
+          expect(value.content).to.be.of.length(2);
           expect(value.content[0].type).to.be.eq('mediaGroup');
           expect(value.content[0].content[0].type).to.be.eq('media');
           expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
