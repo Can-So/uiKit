@@ -93,19 +93,19 @@ import { gridSize } from '@atlaskit/theme';
 </div>
 `}
 
-## Migrating to version 4
+## v3 to v4
 
-  In version 4 we have simplified the package to export a single component.
-  This section describes the changes and how to migrate to version 4.
+In version 4 we have simplified the package to export a single component.
+This section describes the changes and how to migrate to version 4.
 
-  ### Removal of Stateless component
+### Removal of Stateless component
 
-  This export has been removed from the package. The value of the current page
-  value can be controlled by using the \`value\` prop from the default import.
+This export has been removed from the package. The value of the current page
+value can be controlled by using the \`value\` prop from the default import.
 
-  Before version 4:
+Before version 4:
 
-  ${code`
+${code`
 import React from 'react';
 import { PaginationStateless } from '@atlaskit/pagination';
 
@@ -116,11 +116,11 @@ export default () => (
     onSetPage={page => console.log(page)}
   />
 );
-  `}
+`}
 
-  In version 4:
+In version 4:
 
-  ${code`
+${code`
 import React from 'react';
 import Pagination from '@atlaskit/pagination';
 
@@ -131,70 +131,70 @@ export default () => (
     onChange={page => console.log(page)}
   />
 );
-  `}
+`}
 
-  ### Naming changes
+### Naming changes
 
-  Version 4 renames props to follow more standard React naming conventions.
-  Below is a table of the changes.
+Version 4 renames props to follow more standard React naming conventions.
+Below is a table of the changes.
 
-  #### Prop name changes
+#### Prop name changes
 
-  ${(
-    <DynamicTable
-      head={{
+${(
+  <DynamicTable
+    head={{
+      cells: [
+        {
+          key: 'before',
+          content: 'Before',
+        },
+        {
+          key: 'v4',
+          content: 'In version 4',
+        },
+      ],
+    }}
+    rows={[
+      {
         cells: [
           {
-            key: 'before',
-            content: 'Before',
+            key: 'current',
+            content: 'current',
           },
           {
-            key: 'v4',
-            content: 'In version 4',
+            key: 'value',
+            content: 'value',
           },
         ],
-      }}
-      rows={[
-        {
-          cells: [
-            {
-              key: 'current',
-              content: 'current',
-            },
-            {
-              key: 'value',
-              content: 'value',
-            },
-          ],
-          key: 'value',
-        },
-        {
-          cells: [
-            {
-              key: 'defaultCurrent',
-              content: 'defaultCurrent',
-            },
-            {
-              key: 'defaultValue',
-              content: 'defaultValue',
-            },
-          ],
-          key: 'defaultValue',
-        },
-        {
-          cells: [
-            {
-              key: 'onSetPage',
-              content: 'onSetPage',
-            },
-            {
-              key: 'onChange',
-              content: 'onChange',
-            },
-          ],
-          key: 'onChange',
-        },
-      ]}
-    />
-  )}
+        key: 'value',
+      },
+      {
+        cells: [
+          {
+            key: 'defaultCurrent',
+            content: 'defaultCurrent',
+          },
+          {
+            key: 'defaultValue',
+            content: 'defaultValue',
+          },
+        ],
+        key: 'defaultValue',
+      },
+      {
+        cells: [
+          {
+            key: 'onSetPage',
+            content: 'onSetPage',
+          },
+          {
+            key: 'onChange',
+            content: 'onChange',
+          },
+        ],
+        key: 'onChange',
+      },
+    ]}
+  />
+)}
 `;

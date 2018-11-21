@@ -34,7 +34,7 @@ export default function collapseRange(
     return [
       ...pages.slice(0, pageCount),
       ellipsisComponent({ key: 'elipses-1' }),
-      ...pages.slice(-1),
+      pages[total - 1],
     ];
   }
   // we have both start and end ellipsis
@@ -47,6 +47,6 @@ export default function collapseRange(
       current + pageCount - 1,
     ),
     ellipsisComponent({ key: 'elipses-2' }),
-    ...pages.slice(-1),
+    pages[total - 1],
   ];
 }
