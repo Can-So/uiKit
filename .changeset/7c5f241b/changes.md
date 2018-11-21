@@ -1,0 +1,1 @@
+- fix issue with mentions in list
