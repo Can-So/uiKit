@@ -5,7 +5,7 @@ import React from 'react';
 import type { LayoutManagerWithViewControllerProps } from './types';
 import ViewRenderer from '../../../renderer';
 import SkeletonContainerView from '../../presentational/SkeletonContainerView';
-import AsyncLayoutManagerWithViewController from '../AsyncLayoutManagerWithViewController/AsyncLayoutManagerWithViewController';
+import AsyncLayoutManagerWithViewController from '../AsyncLayoutManagerWithViewController';
 /* NOTE: experimental props use an underscore */
 /* eslint-disable camelcase */
 
