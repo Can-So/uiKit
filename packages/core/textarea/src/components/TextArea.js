@@ -155,7 +155,7 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
   }
 }
 
-// $FlowFixMe flow-bin v0.74.0 doesn't know about forwardRef.
+// $ExpectError flow-bin v0.74.0 doesn't know about forwardRef.
 const TextArea = React.forwardRef((props, ref) => (
   // Once Extract React Types is fixed to read from default exports we can
   // move textareaRef instantiation to after the spread.
