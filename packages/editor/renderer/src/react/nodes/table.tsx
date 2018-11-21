@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ReactNode } from 'react';
 import {
   calcTableWidth,
   WidthConsumer,
@@ -11,7 +12,7 @@ export interface TableProps {
   columnWidths?: Array<number>;
   layout: TableLayout;
   isNumberColumnEnabled: boolean;
-  children: React.ReactChildren;
+  children: ReactNode;
 }
 
 const isHeaderRowEnabled = rows => {
@@ -24,6 +25,7 @@ const isHeaderRowEnabled = rows => {
       return false;
     }
   }
+  return true;
 };
 
 const addNumberColumnIndexes = rows => {
