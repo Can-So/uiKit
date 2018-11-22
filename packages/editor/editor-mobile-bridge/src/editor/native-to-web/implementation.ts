@@ -1,5 +1,5 @@
 import {
-  MentionsState,
+  MentionPluginState,
   TextFormattingState,
   EditorActions,
   CustomMediaPicker,
@@ -19,7 +19,6 @@ import {
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-import { MentionDescription } from '@atlaskit/mention';
 
 import NativeToWebBridge from './bridge';
 import WebBridge from '../../web-bridge';
@@ -29,7 +28,7 @@ import { setBlockType } from '../../../../editor-core/src/plugins/block-type/com
 export default class WebBridgeImpl extends WebBridge
   implements NativeToWebBridge {
   textFormattingPluginState: TextFormattingState | null = null;
-  mentionsPluginState: MentionsState | null = null;
+  mentionsPluginState: MentionPluginState | null = null;
   editorView: EditorView | null = null;
   transformer: JSONTransformer = new JSONTransformer();
   editorActions: EditorActions = new EditorActions();
@@ -75,27 +74,12 @@ export default class WebBridgeImpl extends WebBridge
       toggleSubscript()(this.editorView.state, this.editorView.dispatch);
     }
   }
-  onMentionSelect(mention: string) {
-    if (this.mentionsPluginState) {
-      this.mentionsPluginState.insertMention(JSON.parse(mention));
-    }
-  }
 
-  onMentionPickerResult(result: string) {
-    if (this.mentionsPluginState) {
-      let all: MentionDescription[] = JSON.parse(result);
-      this.mentionsPluginState.onMentionResult(
-        all,
-        this.mentionsPluginState.query ? this.mentionsPluginState.query : '',
-      );
-    }
-  }
+  onMentionSelect(mention: string) {}
 
-  onMentionPickerDismissed() {
-    if (this.mentionsPluginState) {
-      this.mentionsPluginState.dismiss();
-    }
-  }
+  onMentionPickerResult(result: string) {}
+
+  onMentionPickerDismissed() {}
 
   setContent(content: string) {
     if (this.editorActions) {

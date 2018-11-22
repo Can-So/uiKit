@@ -415,13 +415,12 @@ export const underline = markFactory(sampleSchema.marks.underline, {});
 export const strong = markFactory(sampleSchema.marks.strong, {});
 export const code = markFactory(sampleSchema.marks.code, {});
 export const strike = markFactory(sampleSchema.marks.strike, {});
-export const mentionQuery = (attrs = { active: true }) =>
-  markFactory(sampleSchema.marks.mentionQuery, attrs ? attrs : {});
 export const a = (attrs: LinkAttributes) =>
   markFactory(sampleSchema.marks.link, attrs);
 export const emojiQuery = markFactory(sampleSchema.marks.emojiQuery, {});
-export const typeAheadQuery = (attrs = { trigger: '' }) =>
-  markFactory(sampleSchema.marks.typeAheadQuery, attrs);
+export const typeAheadQuery = (
+  attrs: { trigger: string; query?: string } = { trigger: '', query: '' },
+) => markFactory(sampleSchema.marks.typeAheadQuery, attrs);
 export const textColor = (attrs: { color: string }) =>
   markFactory(sampleSchema.marks.textColor, attrs);
 export const confluenceInlineComment = (attrs: { reference: string }) =>

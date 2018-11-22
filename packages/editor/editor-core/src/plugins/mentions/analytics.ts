@@ -3,8 +3,10 @@ import { isSpecialMention, MentionDescription } from '@atlaskit/mention';
 import {
   name as packageName,
   version as packageVersion,
-} from '../../../../package.json';
-import { InsertType } from '../../../analytics/fabric-analytics-helper';
+} from '../../../package.json';
+import { SelectItemMode } from '../type-ahead/commands/select-item.js';
+
+const componentName = 'mention';
 
 export const buildAnalyticsPayload = (
   actionSubject: string,
@@ -19,7 +21,7 @@ export const buildAnalyticsPayload = (
   attributes: {
     packageName,
     packageVersion,
-    componentName: 'mention',
+    componentName,
     sessionId,
     ...otherAttributes,
   },
@@ -82,15 +84,14 @@ const getPosition = (
   return;
 };
 
-const isClicked = (insertType: InsertType) =>
-  insertType === InsertType.SELECTED;
+const isClicked = (insertType: SelectItemMode) => insertType === 'selected';
 
 export const buildTypeAheadInsertedPayload = (
   duration: number,
   upKeyCount: number,
   downKeyCount: number,
   sessionId: string,
-  insertType: InsertType,
+  insertType: SelectItemMode,
   mention: MentionDescription,
   mentionList?: MentionDescription[],
   query?: string,
@@ -115,4 +116,24 @@ export const buildTypeAheadInsertedPayload = (
       downKeyCount,
     },
   );
+};
+
+export const buildTypeAheadRenderedPayload = (
+  duration: number,
+  userIds: Array<string>,
+  query: string,
+): GasPayload => {
+  return {
+    action: 'rendered',
+    actionSubject: 'mentionTypeAhead',
+    eventType: 'ui',
+    attributes: {
+      packageName,
+      packageVersion,
+      componentName,
+      duration,
+      userIds,
+      query,
+    },
+  };
 };
