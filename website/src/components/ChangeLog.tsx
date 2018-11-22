@@ -1,4 +1,4 @@
-import React, { Children, Component } from 'react';
+import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
 import semver from 'semver';
 import styled, { css } from 'styled-components';
@@ -24,7 +24,7 @@ const Heading = ({
   packageName: string;
   href: string;
 }) => {
-  const childrenArray = Children.toArray(children);
+  const childrenArray = React.Children.toArray(children);
   const title = childrenArray[0];
   const version = getVersion(title.toString());
 
@@ -89,7 +89,7 @@ type Props = {
   packageName: string;
 };
 
-export default class ChangeLog extends Component<Props> {
+export default class ChangeLog extends React.Component<Props> {
   props: Props; // eslint-disable-line react/sort-comp
   render() {
     const { changelog, packageName, range } = this.props;
