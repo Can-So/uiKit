@@ -20,7 +20,7 @@ export default md`
 
   #### Rename AsyncLayoutManagerWithViewController's \`viewRenderer\` prop to \`itemsRenderer\`
 
-  This prop has been renamed to align wtih the renamed \`ItemsRenderer\` component.
+  This prop has been renamed to align with the renamed \`ItemsRenderer\` component.
 
   ${code`
   <AsyncLayoutManagerWithViewController
