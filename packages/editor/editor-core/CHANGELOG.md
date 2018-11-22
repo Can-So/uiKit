@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.4.1
+- [patch] [8974838](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8974838):
+
+  - Do not wrap in breakout a paragraph inserted after code block
+
 ## 88.4.0
 - [minor] [6d6522b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d6522b):
 
