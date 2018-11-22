@@ -1,0 +1,1 @@
+- Add a menu expand icon
