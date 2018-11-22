@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.6.0
+- [minor] [8451c11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8451c11):
+
+  - Fly over links inside table cells
+
 ## 2.5.2
 - [patch] [c93eb36](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c93eb36):
 
