@@ -8,6 +8,7 @@ import StarLargeIcon from '@atlaskit/icon/glyph/star-large';
 import NotificationIcon from '@atlaskit/icon/glyph/notification';
 import SignInIcon from '@atlaskit/icon/glyph/sign-in';
 import QuestionIcon from '@atlaskit/icon/glyph/question-circle';
+import { NotificationIndicator } from '@atlaskit/notification-indicator';
 import GlobalNavigation from '../../index';
 import ScreenTracker from '../../../ScreenTracker';
 import ItemComponent from '../../../ItemComponent';
@@ -616,7 +617,7 @@ describe('GlobalNavigation', () => {
         notificationCount: 0,
       });
       wrapper.update();
-      expect(wrapper.find('NotificationIndicator').props().refreshRate).toEqual(
+      expect(wrapper.find(NotificationIndicator).props().refreshRate).toEqual(
         60000,
       );
     });
@@ -636,7 +637,7 @@ describe('GlobalNavigation', () => {
       });
       wrapper.update();
 
-      expect(wrapper.find('NotificationIndicator').props().refreshRate).toEqual(
+      expect(wrapper.find(NotificationIndicator).props().refreshRate).toEqual(
         180000,
       );
     });
@@ -701,6 +702,31 @@ describe('GlobalNavigation', () => {
       });
 
       expect(wrapper.find(ItemComponent).props().badgeCount).toBe(5);
+    });
+
+    it('should unmount NotificationIndicator when notification drawer is open', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      const icon = wrapper.find('NotificationIcon');
+      icon.simulate('click');
+
+      expect(wrapper.find(NotificationIndicator).exists()).toBeFalsy();
+    });
+
+    it('should mount NotificationIndicator when notification drawer is closed', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      expect(wrapper.find(NotificationIndicator).exists()).toBeTruthy();
     });
   });
 
