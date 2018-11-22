@@ -657,27 +657,16 @@ Object {
                 Object {
                   "content": Array [
                     Object {
-                      "text": "cfoo",
-                      "type": "text",
-                    },
-                  ],
-                  "type": "paragraph",
-                },
-              ],
-              "type": "tableHeader",
-            },
-            Object {
-              "attrs": Object {
-                "background": null,
-                "colspan": 1,
-                "colwidth": null,
-                "rowspan": 1,
-              },
-              "content": Array [
-                Object {
-                  "content": Array [
-                    Object {
-                      "text": "cbar",
+                      "marks": Array [
+                        Object {
+                          "attrs": Object {
+                            "__confluenceMetadata": null,
+                            "href": "http://atlassian.com",
+                          },
+                          "type": "link",
+                        },
+                      ],
+                      "text": "http://atlassian.com",
                       "type": "text",
                     },
                   ],

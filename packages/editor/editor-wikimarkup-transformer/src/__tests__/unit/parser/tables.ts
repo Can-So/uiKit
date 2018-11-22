@@ -34,7 +34,7 @@ this is a new line text, not in the table`,
     ],
     [
       'should parse properly links inside a cell',
-      '||hfoo||hbar|||cfoo|cbar|[link 1|https://atlassian.com], [link 2|https://atlassian.com]|',
+      '||hfoo||hbar|||[http://atlassian.com]|[link 1|https://atlassian.com], [link 2|https://atlassian.com]|',
     ],
   ];
 
