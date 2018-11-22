@@ -1,0 +1,1 @@
+- Add height check when rendering images
