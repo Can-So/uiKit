@@ -5,6 +5,8 @@ import { MultiValueContainer } from './MultiValueContainer';
 import { Option } from './Option';
 import { SingleValue } from './SingleValue';
 import { SingleValueContainer } from './SingleValueContainer';
+import { SingleInput } from './SingleInput';
+import { components } from '@atlaskit/select';
 
 /**
  * Memoize getComponents to avoid rerenders.
@@ -24,6 +26,7 @@ export const getComponents = memoizeOne(
         ClearIndicator: multi ? null : ClearIndicator,
         Option,
         ValueContainer: multi ? MultiValueContainer : SingleValueContainer,
+        Input: multi ? components.Input : SingleInput,
       };
     }
   },

@@ -17,6 +17,7 @@ import {
   getOptions,
   isIterable,
   usersToOptions,
+  hasSingleValue,
 } from './utils';
 
 export class UserPicker extends React.Component<
@@ -158,19 +159,27 @@ export class UserPicker extends React.Component<
     search: string,
     { action }: { action: InputActionTypes },
   ) => {
-    const { onInputChange } = this.props;
-    // TODO FS-3184: If isClearable = false, have value persist unless
-    // another option is explicitly selected
+    const { onInputChange, isMulti } = this.props;
     if (action === 'input-change') {
+      if (!isMulti && !search) {
+        this.triggerClearValue();
+        return;
+      }
+
       if (onInputChange) {
         onInputChange(search);
       }
+
       this.executeLoadOptions(search);
     }
   };
 
   private triggerInputChange = this.withSelectRef(select => {
     select.onInputChange(this.props.search, { action: 'input-change' });
+  });
+
+  private triggerClearValue = this.withSelectRef(select => {
+    select.clearValue();
   });
 
   componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
@@ -221,7 +230,11 @@ export class UserPicker extends React.Component<
       value,
     } = this.state;
 
-    const numValues: number = value ? value.length : 0;
+    const numValues: number = hasSingleValue(value)
+      ? 1
+      : value
+      ? value.length
+      : 0;
     const hasValue = numValues > 0;
 
     return (
@@ -255,6 +268,8 @@ export class UserPicker extends React.Component<
         openMenuOnFocus
         onKeyDown={this.handleKeyDown}
         isDisabled={isDisabled}
+        isFocused={menuIsOpen}
+        backspaceRemovesValue={isMulti}
       />
     );
   }
