@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as reactAddonsTextContent from 'react-addons-text-content';
 import { Helmet } from 'react-helmet';
-import * as snackeCase from 'snake-case';
+import * as snakeCase from 'snake-case';
 
 type Props = {
-  children?: React.ReactNode;
+  children?: React.ReactChild;
   level: number;
 };
 
@@ -13,7 +13,7 @@ type State = {
 };
 
 function dashcase(children) {
-  return snackeCase(reactAddonsTextContent(children)).replace(/_/g, '-');
+  return snakeCase(reactAddonsTextContent(children)).replace(/_/g, '-');
 }
 
 export default class Heading extends React.Component<Props, State> {

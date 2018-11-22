@@ -63,12 +63,7 @@ const Button = styled(Btn)`
   right: 0;
   top: ${math.multiply(gridSize, 3)}px;
 `;
-const Latest = ({
-  children,
-  ...rest
-}: {
-  children?: React.ReactChild | string;
-}) => (
+const Latest = ({ children, ...rest }: { children?: React.ReactChild }) => (
   <span style={{ position: 'relative', top: -3 }}>
     <Lozenge appearance="new" {...rest}>
       {children || 'Latest'}
