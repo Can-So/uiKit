@@ -1,5 +1,20 @@
 # @atlaskit/editor-core
 
+## 88.4.2
+- [patch] [6e4570d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e4570d):
+
+  - Add height check when rendering images
+
+## 88.4.1
+- [patch] [8974838](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8974838):
+
+  - Do not wrap in breakout a paragraph inserted after code block
+
+## 88.4.0
+- [minor] [6d6522b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d6522b):
+
+  - Refactor mentions to use TypeAhead plugin
+
 ## 88.3.0
 - [patch] [43f178a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/43f178a):
 

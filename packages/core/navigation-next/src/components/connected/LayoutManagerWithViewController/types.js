@@ -8,7 +8,7 @@ export type LayoutManagerWithViewControllerProps = $Exact<
   $Diff<
     ElementConfig<typeof AsyncLayoutManagerWithViewController>,
     {
-      viewRenderer: *,
+      itemsRenderer: *,
       containerSkeleton: *,
     },
   >,

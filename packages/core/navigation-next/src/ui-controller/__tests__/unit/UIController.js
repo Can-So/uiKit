@@ -3,8 +3,6 @@ import UIController from '../../UIController';
 
 const initialState = {
   isCollapsed: true,
-  isPeekHinting: true,
-  isPeeking: true,
   isResizeDisabled: false,
   productNavWidth: 100,
 };
@@ -25,8 +23,6 @@ describe('NavigationNext UI Controller: UIController', () => {
       const uiController = new UIController(initialState, false);
       expect(uiController.state).toEqual({
         isCollapsed: true,
-        isPeekHinting: true,
-        isPeeking: true,
         isResizeDisabled: false,
         isResizing: false,
         productNavWidth: 100,
@@ -82,32 +78,6 @@ describe('NavigationNext UI Controller: UIController', () => {
     uiController.toggleCollapse();
 
     expect(uiController.state.isCollapsed).toEqual(true);
-    expect(cacheController.set).toHaveBeenCalled();
-  });
-
-  it('should toggle peek hint state if `togglePeekHint` is called', () => {
-    const uiController = new UIController(initialState, cacheController);
-
-    uiController.togglePeekHint();
-
-    expect(uiController.state.isPeekHinting).toEqual(false);
-
-    uiController.togglePeekHint();
-
-    expect(uiController.state.isPeekHinting).toEqual(true);
-    expect(cacheController.set).toHaveBeenCalled();
-  });
-
-  it('should toggle peek state if `togglePeek` is called', () => {
-    const uiController = new UIController(initialState, cacheController);
-
-    uiController.togglePeek();
-
-    expect(uiController.state.isPeeking).toEqual(false);
-
-    uiController.togglePeek();
-
-    expect(uiController.state.isPeeking).toEqual(true);
     expect(cacheController.set).toHaveBeenCalled();
   });
 
@@ -209,8 +179,6 @@ describe('NavigationNext UI Controller: UIController', () => {
           {
             get: () => ({
               isCollapsed: true,
-              isPeekHinting: false,
-              isPeeking: false,
               isResizing: false,
               productNavWidth: 240,
             }),

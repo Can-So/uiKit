@@ -416,14 +416,12 @@ class ResizeControl extends PureComponent<Props, State> {
       collapseToggleTooltipContent,
       expandCollapseAffordanceRef,
       flyoutIsOpen,
-      isDisabled,
+      isDisabled: isResizeDisabled,
       isGrabAreaDisabled,
       mouseIsOverNavigation,
       navigation,
     } = this.props;
-    const { isCollapsed, isPeeking } = navigation.state;
-
-    const isResizeDisabled = isDisabled || isPeeking;
+    const { isCollapsed } = navigation.state;
 
     // the button shouldn't "flip" until the drag is complete
     let ButtonIcon = ChevronLeft;
