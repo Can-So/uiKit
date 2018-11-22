@@ -2,8 +2,8 @@
 
 import React, { type Node } from 'react';
 import styled from 'styled-components';
-import { colors, Theme, themed, withTheme } from '@atlaskit/theme';
-import { theme } from '../theme';
+import { colors, themed, withTheme } from '@atlaskit/theme';
+import { Theme } from '../theme';
 import type { AppearanceType, SizeType } from '../types';
 
 export const ShapeGroup = withTheme(styled.g`
@@ -33,13 +33,14 @@ export const Slot = ({
   label,
   role,
 }: SlotProps) => (
-  <Theme theme={theme}>
-    {({ avatar }) => {
-      const { backgroundColor, borderRadius } = avatar({
-        appearance,
-        isLoading,
-        size,
-      });
+  <Theme
+    props={{
+      appearance,
+      isLoading,
+      size,
+    }}
+  >
+    {({ backgroundColor, borderRadius }) => {
       return (
         <span
           style={{
@@ -76,13 +77,14 @@ export const Svg = ({
   isLoading,
   ...otherProps
 }: SvgProps) => (
-  <Theme theme={theme}>
-    {({ avatar }) => {
-      const { backgroundColor, borderRadius } = avatar({
-        appearance,
-        isLoading,
-        size,
-      });
+  <Theme
+    props={{
+      appearance,
+      isLoading,
+      size,
+    }}
+  >
+    {({ backgroundColor, borderRadius }) => {
       return (
         <svg
           style={{

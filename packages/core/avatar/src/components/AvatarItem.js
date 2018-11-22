@@ -1,13 +1,12 @@
 // @flow
 
-import { Theme } from '@atlaskit/theme';
+import { Consumer as ThemeGlobal } from '@atlaskit/theme';
 import React, {
   cloneElement,
   Component,
   type Element,
   type ComponentType,
 } from 'react';
-
 import { propsOmittedFromClickData } from './constants';
 import { omit } from '../utils';
 import {
@@ -18,7 +17,7 @@ import {
 } from '../styled/AvatarItem';
 import { getProps, getStyledAvatarItem } from '../helpers';
 import { withPseudoState } from '../hoc';
-import { themeItem, type ThemeItemType } from '../theme/item';
+import { ThemeItem, type ThemeItemTokens } from '../theme/item';
 import type { AvatarClickType } from '../types';
 
 /* eslint-disable react/no-unused-prop-types */
@@ -49,7 +48,7 @@ type Props = {
   /** Pass target down to the anchor, if href is provided. */
   target?: '_blank' | '_self' | '_top' | '_parent',
   /** The item's theme. */
-  theme?: ThemeItemType => ThemeItemType,
+  theme?: ThemeItemTokens => ThemeItemTokens,
   /** Whether or not overflowing primary and secondary text is truncated */
   enableTextTruncate?: boolean,
 };
@@ -59,7 +58,6 @@ class AvatarItem extends Component<Props> {
 
   static defaultProps = {
     enableTextTruncate: true,
-    theme: themeItem,
   };
 
   // expose blur/focus to consumers via ref
@@ -100,36 +98,38 @@ class AvatarItem extends Component<Props> {
     const StyledComponent: any = getStyledAvatarItem(this.props);
 
     return (
-      <Theme theme={this.props.theme}>
-        {({ avatarItem, mode }) => {
-          const { backgroundColor } = avatarItem();
+      <ThemeGlobal>
+        {({ mode }) => (
+          <ThemeItem theme={this.props.theme}>
+            {theme => {
+              // maintain the illusion of a mask around presence/status
+              const borderColor = getBackgroundColor({
+                ...this.props,
+                ...theme,
+                mode,
+              });
 
-          // maintain the illusion of a mask around presence/status
-          const borderColor = getBackgroundColor({
-            ...this.props,
-            backgroundColor,
-            mode,
-          });
-
-          return (
-            <StyledComponent
-              innerRef={this.setNode}
-              {...enhancedProps}
-              onClick={this.guardedClick}
-            >
-              {cloneElement(avatar, { borderColor })}
-              <Content truncate={enableTextTruncate}>
-                <PrimaryText truncate={enableTextTruncate}>
-                  {primaryText}
-                </PrimaryText>
-                <SecondaryText truncate={enableTextTruncate}>
-                  {secondaryText}
-                </SecondaryText>
-              </Content>
-            </StyledComponent>
-          );
-        }}
-      </Theme>
+              return (
+                <StyledComponent
+                  innerRef={this.setNode}
+                  {...enhancedProps}
+                  onClick={this.guardedClick}
+                >
+                  {cloneElement(avatar, { borderColor })}
+                  <Content truncate={enableTextTruncate}>
+                    <PrimaryText truncate={enableTextTruncate}>
+                      {primaryText}
+                    </PrimaryText>
+                    <SecondaryText truncate={enableTextTruncate}>
+                      {secondaryText}
+                    </SecondaryText>
+                  </Content>
+                </StyledComponent>
+              );
+            }}
+          </ThemeItem>
+        )}
+      </ThemeGlobal>
     );
   }
 }

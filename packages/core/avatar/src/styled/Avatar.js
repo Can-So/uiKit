@@ -3,14 +3,13 @@
 import React from 'react';
 import type { Node } from 'react';
 import styled from 'styled-components';
-import { Theme, withTheme } from '@atlaskit/theme';
-import { theme } from '../theme';
+import { withTheme } from '@atlaskit/theme';
+import { Theme } from '../theme';
 import { getInnerStyles } from './utils';
 
 export default (props: { children: Node, stackIndex: ?number }) => (
-  <Theme theme={theme}>
-    {({ avatar }) => {
-      const { dimensions } = avatar({ ...props, includeBorderWidth: true });
+  <Theme props={{ ...props, includeBorderWidth: true }}>
+    {({ dimensions }) => {
       return (
         <div
           style={{
@@ -34,9 +33,8 @@ export const Inner = withTheme(styled.div`
 `);
 
 export const PresenceWrapper = (props: { children: Node }) => (
-  <Theme theme={theme}>
-    {({ avatar }) => {
-      const { presence } = avatar(props);
+  <Theme props={{ ...props, includeBorderWidth: true }}>
+    {({ presence }) => {
       return (
         <span
           style={{
@@ -53,9 +51,8 @@ export const PresenceWrapper = (props: { children: Node }) => (
 );
 
 export const StatusWrapper = (props: { children: Node }) => (
-  <Theme theme={theme}>
-    {({ avatar }) => {
-      const { status } = avatar(props);
+  <Theme props={{ ...props, includeBorderWidth: true }}>
+    {({ status }) => {
       return (
         <span
           style={{

@@ -1,6 +1,5 @@
 // @flow
 
-import { Theme } from '@atlaskit/theme';
 import React, { Component } from 'react';
 import type { Node } from 'react';
 import {
@@ -21,7 +20,7 @@ import Outer, { PresenceWrapper, StatusWrapper } from '../styled/Avatar';
 import { omit } from '../utils';
 import { getProps, getStyledAvatar } from '../helpers';
 import { mapProps, withPseudoState } from '../hoc';
-import { theme } from '../theme';
+import { Theme } from '../theme';
 import type { AvatarPropTypes, SupportedSizeWithAnIcon } from '../types';
 
 const warn = (message: string) => {
@@ -37,7 +36,6 @@ class Avatar extends Component<AvatarPropTypes> {
     appearance: 'circle',
     enableTooltip: true,
     size: 'medium',
-    theme,
   };
 
   createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
