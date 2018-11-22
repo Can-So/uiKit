@@ -1,11 +1,11 @@
 import Avatar from '@atlaskit/avatar';
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import { SizeableAvatar, Props } from '../../../components/SizeableAvatar';
+import { Props, SizeableAvatar } from '../../../components/SizeableAvatar';
 
 describe('SizeableAvatar', () => {
   const shallowSizeableAvatar = (props: Partial<Props> = {}) =>
-    shallow(<SizeableAvatar {...props} />);
+    shallow(<SizeableAvatar appearance="normal" {...props} />);
 
   it('should render Avatar', () => {
     const component = shallowSizeableAvatar({ appearance: 'normal' });
@@ -23,5 +23,17 @@ describe('SizeableAvatar', () => {
     const component = shallowSizeableAvatar({ appearance: 'compact' });
     const avatar = component.find(Avatar);
     expect(avatar.prop('size')).toEqual('xsmall');
+  });
+
+  it('should render medium Avatar with big appearance', () => {
+    const component = shallowSizeableAvatar({ appearance: 'big' });
+    const avatar = component.find(Avatar);
+    expect(avatar.prop('size')).toEqual('medium');
+  });
+
+  it('should set presence in Avatar component', () => {
+    const component = shallowSizeableAvatar({ presence: 'online' });
+    const avatar = component.find(Avatar);
+    expect(avatar.prop('presence')).toEqual('online');
   });
 });
