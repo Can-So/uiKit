@@ -1,4 +1,0 @@
-{
-  "releases": [{ "name": "@atlaskit/textarea", "type": "minor" }],
-  "dependents": []
-}
