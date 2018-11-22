@@ -15,7 +15,7 @@ export type GroupsProps = {
   docs: Directory;
   patterns: Directory;
   packages: Directory;
-  onClick: (e: Event) => void;
+  onClick?: (e: Event) => void | undefined;
 };
 
 export type GroupsState = {

@@ -107,12 +107,7 @@ export default class Nav extends React.Component<{}, State> {
             const header = headers[headerKey];
 
             const groups = (
-              <Groups
-                onClick={() => {}}
-                docs={docs}
-                packages={packages}
-                patterns={patterns}
-              />
+              <Groups docs={docs} packages={packages} patterns={patterns} />
             );
 
             return (

@@ -7,7 +7,7 @@ import buildNavGroups from '../utils/buildNavGroups';
 export type PatternsNavProps = {
   pathname: string;
   patterns: Directory;
-  onClick: (e: Event) => void;
+  onClick?: (e: Event) => void | undefined;
 };
 
 export default function PatternsNav({

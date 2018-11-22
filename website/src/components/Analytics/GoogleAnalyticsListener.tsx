@@ -7,6 +7,14 @@ import { GOOGLE_ANALYTICS_ID } from '../../constants';
 
 let mounted = 0;
 
+type PerformanceMetrictsOpts = {
+  location: string;
+  metricName: string;
+  timing: number;
+  value: number;
+  isInitial: boolean;
+};
+
 export const getPageLoadNumber = () => {
   if (!window || !window.performance || !window.performance.getEntriesByType) {
     return null;
@@ -22,35 +30,23 @@ export const getPageLoadNumber = () => {
 
 export const initializeGA = () => ReactGA.initialize(GOOGLE_ANALYTICS_ID);
 
-export const sendPerformanceMetrics = ({
-  location,
-  metricName,
-  timing,
-  value,
-  isInitial,
-}: {
-  location: string;
-  metricName: string;
-  timing: number;
-  value: number;
-  isInitial: boolean;
-}) => {
+export const sendPerformanceMetrics = (opts: PerformanceMetrictsOpts) => {
   ReactGA.event({
     category: 'Performance',
-    action: metricName,
-    value,
+    action: opts.metricName,
+    value: opts.value,
     nonInteraction: true,
-    label: `seconds:${(timing / 1000).toFixed(1)}`,
+    label: `seconds:${(opts.timing / 1000).toFixed(1)}`,
   });
 
   const request = getAtlassianAnalyticsClient({
     version: '-',
   });
   const attributes = {
-    [metricName]: value,
-    loadTimeInMs: timing,
-    path: location,
-    isInitial: isInitial || false,
+    metricName: opts.value,
+    loadTimeInMs: opts.timing,
+    path: opts.location,
+    isInitial: opts.isInitial || false,
   };
   request.addEvent(`atlaskit.website.performance`, attributes);
   request.send();
@@ -120,7 +116,7 @@ export const observePerformanceMetrics = (location: string) => {
 };
 
 type Props = {
-  gaId: string | number;
+  gaId: string;
   children: React.ReactChild;
   location: Window['location'];
 };
