@@ -3,8 +3,6 @@ import * as React from 'react';
 import { expect } from 'chai';
 import Tooltip from '@atlaskit/tooltip';
 import Button from '@atlaskit/button';
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
-
 import * as styles from '../../../../components/common/styles';
 import Emoji from '../../../../components/common/Emoji';
 import { spriteEmoji, imageEmoji } from '../../_test-data';
