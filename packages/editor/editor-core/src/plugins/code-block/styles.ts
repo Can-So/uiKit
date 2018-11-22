@@ -75,4 +75,7 @@ export const codeBlockStyles = css`
       }
     }
   }
+  .ProseMirror li > .code-block {
+    margin: 0;
+  }
 `;
