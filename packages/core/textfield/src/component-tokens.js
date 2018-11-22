@@ -3,7 +3,7 @@ import { colors } from '@atlaskit/theme';
 
 // The following are the name for color mappings in @atlaskit/themes
 // The exports are the functions, not the objects, so could not be used here
-export const disabled = { light: colors.N20, dark: colors.DN20 };
+export const disabledBackgroundColor = { light: colors.N20, dark: colors.DN20 };
 // For validation red is the new 'yellow' which was { light: colors.Y300, dark: colors.Y300 }
 export const invalidBorderColor = { light: colors.R400, dark: colors.R400 };
 

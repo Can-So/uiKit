@@ -4,16 +4,16 @@ import * as componentTokens from './component-tokens';
 const disabledRules = {
   light: {
     backgroundColor: componentTokens.defaultBackgroundColor.light,
-    backgroundColorFocus: componentTokens.disabled.light,
-    backgroundColorHover: componentTokens.disabled.light,
+    backgroundColorFocus: componentTokens.disabledBackgroundColor.light,
+    backgroundColorHover: componentTokens.disabledBackgroundColor.light,
     borderColor: componentTokens.defaultBorderColor.light,
     borderColorFocus: componentTokens.defaultBorderColorFocus.light,
     textColor: componentTokens.disabledTextColor.light,
   },
   dark: {
     backgroundColor: componentTokens.defaultBackgroundColor.dark,
-    backgroundColorFocus: componentTokens.disabled.dark,
-    backgroundColorHover: componentTokens.disabled.dark,
+    backgroundColorFocus: componentTokens.disabledBackgroundColor.dark,
+    backgroundColorHover: componentTokens.disabledBackgroundColor.dark,
     borderColor: componentTokens.defaultBorderColor.dark,
     borderColorFocus: componentTokens.defaultBorderColorFocus.dark,
     textColor: componentTokens.disabledTextColor.dark,
