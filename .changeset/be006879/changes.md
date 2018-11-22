@@ -1,0 +1,1 @@
+- ED-5667 Added hyperlink to quick insert
