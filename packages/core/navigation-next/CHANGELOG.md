@@ -1,5 +1,18 @@
 # @atlaskit/navigation-next
 
+## 4.0.0
+- [major] [8e753fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e753fc):
+
+  - View the [upgrade guide](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/upgrade-guide) to help you upgrade to v4
+  - The API for renderer items that use components as their `type` property have now changed to use a type value of `'InlineComponent'` and specify the component via a `component` prop instead. This allows the renderer item types to be typed correctly as disjoint unions on the type property.
+  - Rename `withNavigationUI` HOC to `withNavigationUIController`
+  - Rename `ViewRenderer` component to `ItemsRenderer`
+  - Rename AsyncLayoutManagerWithViewController's `viewRenderer` prop to `itemsRenderer`
+  - Remove icon prop from ConnectedItem and built-in renderer 'Item' type
+  - Remove deprecated `key` prop from GlobalNav's `primaryItems` and `secondaryItems` props
+  - Remove ScrollableSectionInner component. Remove scrollHint styles from theme.
+  - Remove peeking behaviour
+
 ## 3.26.0
 - [minor] [5c6c893](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c6c893):
 
