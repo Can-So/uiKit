@@ -15,26 +15,6 @@ export default function createTheme<ThemeTokens, ThemeProps>(
   const emptyThemeFn: (ThemeTokens, ThemeProps) => ThemeTokens = tokens =>
     tokens;
   const ThemeContext = createContext(emptyThemeFn);
-  function cascade(
-    children: ThemeTokens => Node,
-    themeFn?: (ThemeTokens, ThemeProps) => ThemeTokens = emptyThemeFn,
-    themeProps?: ThemeProps = emptyPropsObj,
-  ) {
-    return (
-      <ThemeContext.Consumer>
-        {themeContext => {
-          const themeContextFn = themeContext || emptyThemeFn;
-          const themeDefaultFn = themeDefault || emptyThemeDefaultFn;
-          return children(
-            themeFn(
-              themeContextFn(themeDefaultFn(themeProps), themeProps),
-              themeProps,
-            ),
-          );
-        }}
-      </ThemeContext.Consumer>
-    );
-  }
   return ({
     children,
     props,
@@ -45,7 +25,20 @@ export default function createTheme<ThemeTokens, ThemeProps>(
     theme?: (ThemeTokens, ThemeProps) => ThemeTokens,
   }) => {
     return typeof children === 'function' ? (
-      cascade(children, theme, props)
+      <ThemeContext.Consumer>
+        {themeContext => {
+          const themeFn = theme || emptyThemeFn;
+          const themeProps = props || emptyPropsObj;
+          const themeContextFn = themeContext || emptyThemeFn;
+          const themeDefaultFn = themeDefault || emptyThemeDefaultFn;
+          return children(
+            themeFn(
+              themeContextFn(themeDefaultFn(themeProps), themeProps),
+              themeProps,
+            ),
+          );
+        }}
+      </ThemeContext.Consumer>
     ) : (
       <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
     );
