@@ -8,17 +8,15 @@ const borderWidth = 2;
 const grid = gridSize();
 const lineHeightBase = grid * 2.5;
 const lineHeightCompact = grid * 2;
-const heightBase = grid * 5;
-const heightCompact = grid * 4;
 const horizontalPadding = grid;
-const innerHeight = grid * 3;
 const transitionDuration = '0.2s';
+const paddingCompact = grid / 2;
+const paddingBase = grid;
 
 const getPadding = ({ isCompact }) => {
-  const height = isCompact ? heightCompact : heightBase;
+  const height = isCompact ? paddingCompact : paddingBase;
   return css`
-    padding: ${(height - 2 * borderWidth - innerHeight) / 2}px
-      ${horizontalPadding - borderWidth}px;
+    padding: ${height}px ${horizontalPadding - borderWidth}px;
   `;
 };
 
@@ -170,7 +168,6 @@ export const InputWrapper = styled.div`
   flex: 1 0 auto;
   font-size: ${fontSize}px;
   justify-content: space-between;
-  line-height: ${getLineHeight};
   max-width: 100%;
   overflow: hidden;
   transition: background-color ${transitionDuration} ease-in-out,
@@ -183,6 +180,7 @@ export const InputWrapper = styled.div`
   & > input {
     background: transparent;
     border: 0;
+    padding: 0;
     box-sizing: border-box;
     color: inherit;
     cursor: inherit;
@@ -191,6 +189,7 @@ export const InputWrapper = styled.div`
     min-width: 0;
     outline: none;
     width: 100%;
+    line-height: ${getLineHeight};
 
     &[disabled] {
       ${overrideSafariDisabledStyles};
