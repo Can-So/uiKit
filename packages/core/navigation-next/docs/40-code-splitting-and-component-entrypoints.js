@@ -34,7 +34,7 @@ export default (
 
   ${code`
   import LayoutManagerWithViewController from '@atlaskit/navigation-next/LayoutManagerWithViewController';
-  import ViewRenderer from '@atlaskit/navigation-next/ViewRenderer';
+  import ItemsRenderer from '@atlaskit/navigation-next/ItemsRenderer';
   import SkeletonContainerView from '@atlaskit/navigation-next/SkeletonContainerView';
   import NavigationProvider from '@atlaskit/navigation-next/NavigationProvider';
   import AsyncLayoutManagerWithViewController from '@atlaskit/navigation-next/AsyncLayoutManagerWithViewController';
@@ -47,7 +47,7 @@ export default (
   import {
     UIController,
     UIControllerSubscriber,
-    withNavigationUI,
+    withNavigationUIController,
   } from '@atlaskit/navigation-next/ui-controller';
   `}
 

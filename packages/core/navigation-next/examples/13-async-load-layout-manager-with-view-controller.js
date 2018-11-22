@@ -126,10 +126,7 @@ export default class App extends Component<
 
     return (
       <HashRouter>
-        <NavigationProvider
-          initialPeekViewId="root/index"
-          isDebugEnabled={isDebugEnabled}
-        >
+        <NavigationProvider isDebugEnabled={isDebugEnabled}>
           <AsyncLayoutManagerWithViewController
             customComponents={{
               ProjectSwitcher: AsyncProjectSwitch,

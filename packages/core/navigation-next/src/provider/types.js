@@ -10,7 +10,7 @@ import type {
 /**
  * NavigationProvider
  */
-export type NavigationProviderProps = {
+export type NavigationProviderProps = {|
   /** Your application. */
   children: Element<*>,
   /** A mechanism for persisting the UI state between page loads. This should be
@@ -22,4 +22,4 @@ export type NavigationProviderProps = {
   /** In debug mode the view controller will log information about the usage of
    * reducers. */
   isDebugEnabled: boolean,
-};
+|};

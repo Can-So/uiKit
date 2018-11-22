@@ -27,11 +27,7 @@ describe('AsyncLayoutManagerWithViewController', () => {
     getRefs = jest.fn();
 
     wrapper = mount(
-      <NavigationProvider
-        cache={false}
-        initialPeekViewId="root/index"
-        isDebugEnabled={false}
-      >
+      <NavigationProvider cache={false} isDebugEnabled={false}>
         <AsyncLayoutManagerWithViewController
           globalNavigation={GlobalNavigationComponent}
           firstSkeletonToRender={'product'}
@@ -91,11 +87,7 @@ describe('AsyncLayoutManagerWithViewController', () => {
 
     it('should render skeleton using `container` context', () => {
       const containerWrapper = mount(
-        <NavigationProvider
-          cache={false}
-          initialPeekViewId="root/index"
-          isDebugEnabled={false}
-        >
+        <NavigationProvider cache={false} isDebugEnabled={false}>
           <AsyncLayoutManagerWithViewController
             globalNavigation={GlobalNavigationComponent}
             firstSkeletonToRender={'container'}
