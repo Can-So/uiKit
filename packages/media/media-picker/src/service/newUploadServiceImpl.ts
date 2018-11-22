@@ -72,7 +72,6 @@ export class NewUploadServiceImpl implements UploadService {
       authProvider: tenantAuthProvider,
     });
 
-    // TODO Would be nice to have two contexts: tenant and user ones
     if (userAuthProvider) {
       this.userMediaStore = new MediaStore({
         authProvider: userAuthProvider,
@@ -131,7 +130,6 @@ export class NewUploadServiceImpl implements UploadService {
         upfrontId: getIdFromObservable(observable),
       };
     } else if (this.userMediaStore && observable) {
-      // TODO observable requirement wasn't here before. Why?
       const userUpfrontId = getIdFromObservable(observable);
       const userOccurrenceKey = getOccurrenceKeyFromObservable(observable);
       const { collection } = this.tenantUploadParams;

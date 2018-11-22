@@ -11,7 +11,7 @@ export default function removeFileFromRecents(
     const recentItems = state.recents.items.filter(
       item => item.id !== action.id,
     );
-    // TODO this action.id is recents one, but item.id is tenant one.
+
     const selectedItems = state.selectedItems.filter(
       item => item.id !== action.id,
     );
