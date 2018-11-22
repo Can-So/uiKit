@@ -14,7 +14,7 @@
         "content": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/paragraph_with_no_marks"
+            "$ref": "#/definitions/paragraph_with_no_marks_node"
           },
           "minItems": 1
         }
@@ -200,7 +200,7 @@
                   "$ref": "#/definitions/mediaSingle_node"
                 },
                 {
-                  "$ref": "#/definitions/paragraph_with_no_marks"
+                  "$ref": "#/definitions/paragraph_with_no_marks_node"
                 }
               ]
             },
@@ -216,7 +216,7 @@
                   "$ref": "#/definitions/bulletList_node"
                 },
                 {
-                  "$ref": "#/definitions/paragraph_with_no_marks"
+                  "$ref": "#/definitions/paragraph_with_no_marks_node"
                 }
               ]
             }
@@ -566,7 +566,7 @@
       ],
       "additionalProperties": false
     },
-    "codeBlock_no_marks_node": {
+    "codeBlock_with_no_marks_node": {
       "allOf": [
         {
           "$ref": "#/definitions/codeBlock_node"
@@ -583,7 +583,7 @@
         }
       ]
     },
-    "code_block_with_breakout_node": {
+    "codeBlock_with_marks_node": {
       "allOf": [
         {
           "$ref": "#/definitions/codeBlock_node"
@@ -665,7 +665,7 @@
       ],
       "additionalProperties": false
     },
-    "heading_with_no_marks": {
+    "heading_with_no_marks_node": {
       "allOf": [
         {
           "$ref": "#/definitions/heading_node"
@@ -682,7 +682,7 @@
         }
       ]
     },
-    "heading_with_marks": {
+    "heading_with_marks_node": {
       "allOf": [
         {
           "$ref": "#/definitions/heading_node"
@@ -1904,7 +1904,7 @@
       ],
       "additionalProperties": false
     },
-    "paragraph_with_no_marks": {
+    "paragraph_with_no_marks_node": {
       "allOf": [
         {
           "$ref": "#/definitions/paragraph_node"
@@ -1921,7 +1921,7 @@
         }
       ]
     },
-    "paragraph_with_marks": {
+    "paragraph_with_marks_node": {
       "allOf": [
         {
           "$ref": "#/definitions/paragraph_node"
@@ -1978,10 +1978,10 @@
                 "$ref": "#/definitions/bulletList_node"
               },
               {
-                "$ref": "#/definitions/heading_with_no_marks"
+                "$ref": "#/definitions/heading_with_no_marks_node"
               },
               {
-                "$ref": "#/definitions/paragraph_with_no_marks"
+                "$ref": "#/definitions/paragraph_with_no_marks_node"
               }
             ]
           },
@@ -2013,10 +2013,10 @@
           "$ref": "#/definitions/table_node"
         },
         {
-          "$ref": "#/definitions/codeBlock_no_marks_node"
+          "$ref": "#/definitions/codeBlock_with_no_marks_node"
         },
         {
-          "$ref": "#/definitions/heading_with_no_marks"
+          "$ref": "#/definitions/heading_with_no_marks_node"
         },
         {
           "$ref": "#/definitions/rule_node"
@@ -2043,7 +2043,7 @@
           "$ref": "#/definitions/blockCard_node"
         },
         {
-          "$ref": "#/definitions/paragraph_with_no_marks"
+          "$ref": "#/definitions/paragraph_with_no_marks_node"
         },
         {
           "$ref": "#/definitions/panel_node"
@@ -2067,10 +2067,10 @@
             "$ref": "#/definitions/bulletList_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_no_marks_node"
+            "$ref": "#/definitions/codeBlock_with_no_marks_node"
           },
           {
-            "$ref": "#/definitions/heading_with_no_marks"
+            "$ref": "#/definitions/heading_with_no_marks_node"
           },
           {
             "$ref": "#/definitions/rule_node"
@@ -2094,7 +2094,7 @@
             "$ref": "#/definitions/blockCard_node"
           },
           {
-            "$ref": "#/definitions/paragraph_with_no_marks"
+            "$ref": "#/definitions/paragraph_with_no_marks_node"
           },
           {
             "$ref": "#/definitions/panel_node"
@@ -2123,10 +2123,10 @@
             "$ref": "#/definitions/table_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_no_marks_node"
+            "$ref": "#/definitions/codeBlock_with_no_marks_node"
           },
           {
-            "$ref": "#/definitions/heading_with_no_marks"
+            "$ref": "#/definitions/heading_with_no_marks_node"
           },
           {
             "$ref": "#/definitions/rule_node"
@@ -2150,7 +2150,7 @@
             "$ref": "#/definitions/blockCard_node"
           },
           {
-            "$ref": "#/definitions/paragraph_with_no_marks"
+            "$ref": "#/definitions/paragraph_with_no_marks_node"
           },
           {
             "$ref": "#/definitions/panel_node"
@@ -2296,16 +2296,16 @@
                 "$ref": "#/definitions/table_node"
               },
               {
-                "$ref": "#/definitions/codeBlock_no_marks_node"
+                "$ref": "#/definitions/codeBlock_with_no_marks_node"
               },
               {
-                "$ref": "#/definitions/code_block_with_breakout_node"
+                "$ref": "#/definitions/codeBlock_with_marks_node"
               },
               {
-                "$ref": "#/definitions/heading_with_no_marks"
+                "$ref": "#/definitions/heading_with_no_marks_node"
               },
               {
-                "$ref": "#/definitions/heading_with_marks"
+                "$ref": "#/definitions/heading_with_marks_node"
               },
               {
                 "$ref": "#/definitions/rule_node"
@@ -2335,10 +2335,10 @@
                 "$ref": "#/definitions/blockCard_node"
               },
               {
-                "$ref": "#/definitions/paragraph_with_no_marks"
+                "$ref": "#/definitions/paragraph_with_no_marks_node"
               },
               {
-                "$ref": "#/definitions/paragraph_with_marks"
+                "$ref": "#/definitions/paragraph_with_marks_node"
               },
               {
                 "$ref": "#/definitions/panel_node"

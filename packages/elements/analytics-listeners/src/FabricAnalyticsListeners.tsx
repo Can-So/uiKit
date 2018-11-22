@@ -32,10 +32,6 @@ class FabricAnalyticsListeners extends React.Component<Props> {
     super(props);
 
     this.logger = new Logger({ logLevel: props.logLevel });
-
-    if (!props.client) {
-      throw new Error('Analytics client not provided');
-    }
   }
 
   render() {

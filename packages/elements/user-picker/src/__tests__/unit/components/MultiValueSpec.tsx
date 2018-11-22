@@ -1,12 +1,17 @@
-import Avatar from '@atlaskit/avatar';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { MultiValue } from '../../../components/MultiValue';
+import { MultiValue, scrollToValue } from '../../../components/MultiValue';
+import { SizeableAvatar } from '../../../components/SizeableAvatar';
 import { renderProp } from '../_testUtils';
 
+const mockHtmlElement = (rect: Partial<DOMRect>): HTMLElement =>
+  ({
+    getBoundingClientRect: jest.fn(() => rect),
+    scrollIntoView: jest.fn(),
+  } as any);
+
 describe('MultiValue', () => {
-  const Container = props => <div {...props} />;
   const data = {
     label: 'Jace Beleren',
     user: {
@@ -19,23 +24,14 @@ describe('MultiValue', () => {
   const onClick = jest.fn();
   const shallowMultiValue = (
     { components, ...props }: any = { components: {} },
-  ) =>
-    shallow(
-      <MultiValue
-        data={data}
-        components={{ Container, ...components }}
-        removeProps={{ onClick }}
-        {...props}
-      />,
-    );
+  ) => shallow(<MultiValue data={data} removeProps={{ onClick }} {...props} />);
 
   afterEach(() => {
     onClick.mockClear();
   });
 
-  it('should render the Container with a Tag', () => {
+  it('should render Tag', () => {
     const component = shallowMultiValue();
-    expect(component.find(Container)).toHaveLength(1);
     const tag = renderProp(
       component.find(FormattedMessage),
       'children',
@@ -45,7 +41,11 @@ describe('MultiValue', () => {
       appearance: 'rounded',
       text: 'Jace Beleren',
       elemBefore: (
-        <Avatar size="xsmall" src="http://avatars.atlassian.com/jace.png" />
+        <SizeableAvatar
+          appearance="compact"
+          src="http://avatars.atlassian.com/jace.png"
+          name="Jace Beleren"
+        />
       ),
       removeButtonText: 'remove',
     });
@@ -53,7 +53,6 @@ describe('MultiValue', () => {
 
   it('should use blueLight color when focused', () => {
     const component = shallowMultiValue({ isFocused: true });
-    expect(component.find(Container)).toHaveLength(1);
     const tag = renderProp(
       component.find(FormattedMessage),
       'children',
@@ -63,7 +62,11 @@ describe('MultiValue', () => {
       appearance: 'rounded',
       text: 'Jace Beleren',
       elemBefore: (
-        <Avatar size="xsmall" src="http://avatars.atlassian.com/jace.png" />
+        <SizeableAvatar
+          appearance="compact"
+          src="http://avatars.atlassian.com/jace.png"
+          name="Jace Beleren"
+        />
       ),
       removeButtonText: 'remove',
       color: 'blueLight',
@@ -91,5 +94,21 @@ describe('MultiValue', () => {
       'remove',
     );
     expect(tag.prop('removeButtonText')).toBeUndefined();
+  });
+
+  it('should scroll to open from bottom', () => {
+    const current: HTMLElement = mockHtmlElement({ top: 10, height: 20 });
+    const parent: HTMLElement = mockHtmlElement({ height: 100 });
+    scrollToValue(current, parent);
+    expect(current.scrollIntoView).toHaveBeenCalled();
+    expect(current.scrollIntoView).toHaveBeenCalledWith();
+  });
+
+  it('should scroll to open from top', () => {
+    const current: HTMLElement = mockHtmlElement({ top: 90, height: 20 });
+    const parent: HTMLElement = mockHtmlElement({ height: 100 });
+    scrollToValue(current, parent);
+    expect(current.scrollIntoView).toHaveBeenCalled();
+    expect(current.scrollIntoView).toHaveBeenCalledWith(false);
   });
 });

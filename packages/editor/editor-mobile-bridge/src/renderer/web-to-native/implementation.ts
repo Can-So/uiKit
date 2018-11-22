@@ -1,4 +1,4 @@
-import { sendToBridge } from '../utils';
+import { sendToBridge } from '../../utils';
 
 class WebRendererBridge {
   call(...args) {

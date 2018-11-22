@@ -1,9 +1,10 @@
 import * as sinon from 'sinon';
-import { toNativeBridge } from '../../../src/editor/web-to-native';
-import mobileEditor from '../../../src/editor/mobile-editor-element';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
+
 import { mountEditor } from './utils';
+import { toNativeBridge } from '../../../src/editor/web-to-native';
+import mobileEditor from '../../../src/editor/mobile-editor-element';
 
 declare var bridge;
 
@@ -116,3 +117,26 @@ function sendSampleMediaEvents() {
     '{"file":{"id":"116ba70f-9e28-41a1-ac81-6cdaef0665a0","name":"IMG_20180406_001117.jpg","type":"file","publicId":"e94c3f67-5ac3-42b2-bf6a-ce35bb787894"},"public":{}}',
   );
 }
+
+describe('set padding', () => {
+  let editor;
+  beforeEach(async () => {
+    editor = await mountEditor();
+  });
+
+  afterEach(() => {
+    editor.unmount();
+  });
+
+  it('sets padding on the editor', () => {
+    bridge.setPadding(
+      20 /* Top */,
+      10 /* Right */,
+      20 /* Bottom */,
+      10 /* Left */,
+    );
+
+    const root = bridge.getRootElement();
+    expect(root.style.padding).to.equal('20px 10px');
+  });
+});

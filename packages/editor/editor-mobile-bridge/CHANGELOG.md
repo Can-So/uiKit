@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 5.6.0
+- [minor] [d901563](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d901563):
+
+  - FM-1388: Add bridge API to both editor and renderer to set padding
+
 ## 5.5.0
 - [minor] [586100b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/586100b):
 

@@ -1,5 +1,20 @@
 # @atlaskit/editor-common
 
+## 21.3.2
+- [patch] [409e610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/409e610):
+
+  - Fix schema block marks name inconsistency
+
+## 21.3.1
+- [patch] [37d6258](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37d6258):
+
+  - ED-5796: fix setting background color to white
+
+## 21.3.0
+- [minor] [1e5cd32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e5cd32):
+
+  - Make layouts stack on small screens
+
 ## 21.2.4
 - [patch] [df33a8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df33a8b):
 

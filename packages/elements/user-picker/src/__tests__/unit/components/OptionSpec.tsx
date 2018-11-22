@@ -1,10 +1,11 @@
-import Avatar, { AvatarItem } from '@atlaskit/avatar';
+import { AvatarItem } from '@atlaskit/avatar';
 import { components } from '@atlaskit/select';
 import { colors } from '@atlaskit/theme';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { HighlightText } from '../../../components/HighlightText';
 import { Option, TextWrapper } from '../../../components/Option';
+import { SizeableAvatar } from '../../../components/SizeableAvatar';
 
 describe('Option', () => {
   const data = {
@@ -26,12 +27,11 @@ describe('Option', () => {
     expect(avatarItem.props()).toMatchObject({
       backgroundColor: 'transparent',
       avatar: (
-        <Avatar
+        <SizeableAvatar
           src="http://avatars.atlassian.com/jace.png"
-          size="medium"
+          appearance="big"
           presence="approved"
           name="Jace Beleren"
-          isHover={false}
         />
       ),
       primaryText: <TextWrapper color={colors.N800}>Jace Beleren</TextWrapper>,
@@ -47,12 +47,11 @@ describe('Option', () => {
     expect(avatarItem.props()).toMatchObject({
       backgroundColor: 'transparent',
       avatar: (
-        <Avatar
+        <SizeableAvatar
           src="http://avatars.atlassian.com/jace.png"
-          size="medium"
+          appearance="big"
           presence="approved"
           name="Jace Beleren"
-          isHover={false}
         />
       ),
       primaryText: <TextWrapper color={colors.N0}>Jace Beleren</TextWrapper>,

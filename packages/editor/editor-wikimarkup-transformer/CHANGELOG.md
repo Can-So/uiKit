@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.5.1
+- [patch] [fce377d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fce377d):
+
+  - fix issue with mentions in list
+
 ## 2.5.0
 - [minor] [6fb9918](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6fb9918):
 

@@ -85,12 +85,12 @@ export type CodeBlockBaseDefinition = {
 };
 
 /**
- * @name codeBlock_no_marks_node
+ * @name codeBlock_with_no_marks_node
  */
 export type CodeBlockDefinition = CodeBlockBaseDefinition & NoMark;
 
 /**
- * @name code_block_with_breakout_node
+ * @name codeBlock_with_marks_node
  * @stage 0
  */
 export type CodeBlockWithMarksDefinition = CodeBlockBaseDefinition &
