@@ -1,10 +1,13 @@
+import { TaskState, ObjectKey } from '@atlaskit/task-decision';
+
 import RendererBridge from './bridge';
+import WebBridge from '../../web-bridge';
 import { eventDispatcher } from '../dispatcher';
 import { resolvePromise, rejectPromise } from '../../cross-platform-promise';
-import { TaskState, ObjectKey } from '@atlaskit/task-decision';
 import { TaskDecisionProviderImpl } from '../../providers/taskDecisionProvider';
 
-export default class RendererBridgeImpl implements RendererBridge {
+export default class RendererBridgeImpl extends WebBridge
+  implements RendererBridge {
   taskDecisionProvider: TaskDecisionProviderImpl;
   containerAri: string;
   objectAri: string;
@@ -39,5 +42,9 @@ export default class RendererBridgeImpl implements RendererBridge {
 
       this.taskDecisionProvider.notifyUpdated(key, state);
     }
+  }
+
+  getRootElement(): HTMLElement | null {
+    return document.querySelector('#renderer');
   }
 }

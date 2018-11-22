@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ReactNode } from 'react';
 import {
   calcTableWidth,
   WidthConsumer,
@@ -11,7 +12,7 @@ export interface TableProps {
   columnWidths?: Array<number>;
   layout: TableLayout;
   isNumberColumnEnabled: boolean;
-  children: React.ReactChildren;
+  children: ReactNode;
 }
 
 const isHeaderRowEnabled = rows => {
@@ -24,6 +25,7 @@ const isHeaderRowEnabled = rows => {
       return false;
     }
   }
+  return true;
 };
 
 const addNumberColumnIndexes = rows => {
@@ -39,6 +41,7 @@ const addNumberColumnIndexes = rows => {
 const Table = (props: TableProps & OverflowShadowProps) => {
   const colgroup = props.columnWidths ? (
     <colgroup>
+      {props.isNumberColumnEnabled && <col />}
       {props.columnWidths.map((colWidth, idx) => {
         const style = colWidth ? { width: `${colWidth}px` } : {};
         return <col key={idx} style={style} />;

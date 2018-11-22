@@ -1,9 +1,5 @@
-import NativeToWebBridge from './bridge';
-
-import { EditorView } from 'prosemirror-view';
-
 import {
-  MentionsState,
+  MentionPluginState,
   TextFormattingState,
   EditorActions,
   CustomMediaPicker,
@@ -24,15 +20,19 @@ import {
   updateStatus,
   commitStatusPicker,
 } from '@atlaskit/editor-core';
+import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-import { MentionDescription } from '@atlaskit/mention';
 import { Color as StatusColor } from '@atlaskit/status';
+
+import NativeToWebBridge from './bridge';
+import WebBridge from '../../web-bridge';
 import { rejectPromise, resolvePromise } from '../../cross-platform-promise';
 import { setBlockType } from '../../../../editor-core/src/plugins/block-type/commands';
 
-export default class WebBridgeImpl implements NativeToWebBridge {
+export default class WebBridgeImpl extends WebBridge
+  implements NativeToWebBridge {
   textFormattingPluginState: TextFormattingState | null = null;
-  mentionsPluginState: MentionsState | null = null;
+  mentionsPluginState: MentionPluginState | null = null;
   statusPluginState: StatusState | null = null;
   editorView: EditorView | null = null;
   transformer: JSONTransformer = new JSONTransformer();
@@ -79,11 +79,6 @@ export default class WebBridgeImpl implements NativeToWebBridge {
       toggleSubscript()(this.editorView.state, this.editorView.dispatch);
     }
   }
-  onMentionSelect(mention: string) {
-    if (this.mentionsPluginState) {
-      this.mentionsPluginState.insertMention(JSON.parse(mention));
-    }
-  }
 
   onStatusUpdate(text: string, color: StatusColor, uuid: string) {
     if (this.statusPluginState && this.editorView) {
@@ -101,21 +96,11 @@ export default class WebBridgeImpl implements NativeToWebBridge {
     }
   }
 
-  onMentionPickerResult(result: string) {
-    if (this.mentionsPluginState) {
-      let all: MentionDescription[] = JSON.parse(result);
-      this.mentionsPluginState.onMentionResult(
-        all,
-        this.mentionsPluginState.query ? this.mentionsPluginState.query : '',
-      );
-    }
-  }
+  onMentionSelect(mention: string) {}
 
-  onMentionPickerDismissed() {
-    if (this.mentionsPluginState) {
-      this.mentionsPluginState.dismiss();
-    }
-  }
+  onMentionPickerResult(result: string) {}
+
+  onMentionPickerDismissed() {}
 
   setContent(content: string) {
     if (this.editorActions) {
@@ -195,5 +180,9 @@ export default class WebBridgeImpl implements NativeToWebBridge {
     if (this.listState && this.editorView) {
       outdentList()(this.editorView.state, this.editorView.dispatch);
     }
+  }
+
+  getRootElement(): HTMLElement | null {
+    return document.querySelector('#editor');
   }
 }

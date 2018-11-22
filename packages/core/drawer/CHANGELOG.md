@@ -1,5 +1,10 @@
 # @atlaskit/drawer
 
+## 2.5.0
+- [minor] [aacb208](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aacb208):
+
+  - Export a new component, DrawerItemTheme, for theming the Drawer with the navigation item theme.
+
 ## 2.4.0
 - [minor] [6746a42](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6746a42):
 

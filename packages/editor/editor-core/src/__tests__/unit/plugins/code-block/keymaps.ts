@@ -4,14 +4,16 @@ import {
   doc,
   p,
   code_block,
+  breakout,
 } from '@atlaskit/editor-test-helpers';
 import codeBlockPlugin from '../../../../plugins/code-block';
+import breakoutPlugin from '../../../../plugins/breakout';
 
 describe('codeBlock - keymaps', () => {
   const editor = (doc: any) =>
     createEditor({
       doc,
-      editorPlugins: [codeBlockPlugin()],
+      editorPlugins: [codeBlockPlugin(), breakoutPlugin],
     });
 
   describe('Enter keypress', () => {
@@ -28,13 +30,15 @@ describe('codeBlock - keymaps', () => {
     });
 
     describe('when enter key is pressed 2 times', () => {
-      it('it should exit code block', () => {
-        const { editorView } = editor(doc(code_block()('codeBlock{<>}')));
+      it('should exit code block', () => {
+        const { editorView } = editor(
+          doc(breakout({ mode: 'wide' })(code_block()('codeBlock{<>}'))),
+        );
 
         sendKeyToPm(editorView, 'Enter');
         sendKeyToPm(editorView, 'Enter');
         expect(editorView.state.doc).toEqualDocument(
-          doc(code_block()('codeBlock'), p('{<>}')),
+          doc(breakout({ mode: 'wide' })(code_block()('codeBlock')), p('{<>}')),
         );
         editorView.destroy();
       });
@@ -65,7 +69,9 @@ describe('codeBlock - keymaps', () => {
 
   describe('Backspace', () => {
     it('should remove the code block if the cursor is at the beginning of the code block - 1', () => {
-      const { editorView } = editor(doc(code_block()('{<>}')));
+      const { editorView } = editor(
+        doc(breakout({ mode: 'wide' })(code_block()('{<>}'))),
+      );
 
       sendKeyToPm(editorView, 'Backspace');
       expect(editorView.state.doc).toEqualDocument(doc(p()));

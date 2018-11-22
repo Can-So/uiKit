@@ -102,5 +102,67 @@ describe('table merging logic', () => {
         });
       });
     });
+
+    describe('when rows from the first columns get merged', () => {
+      describe('and table has merged rows in the next column', () => {
+        it('should delete an empty row and decrement rowspan of the next column', () => {
+          const {
+            editorView,
+            refs: { anchor, head },
+          } = editor(
+            doc(
+              p('text'),
+              table()(
+                tr(td({})(p('{anchor}a1')), td({ rowspan: 3 })(p('a2'))),
+                tr(td({})(p('{head}'))),
+                tr(tdEmpty),
+              ),
+            ),
+          );
+          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+          mergeCells(editorView.state, editorView.dispatch);
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              p('text'),
+              table()(
+                tr(td({})(p('a1')), td({ rowspan: 2 })(p('a2'))),
+                tr(tdEmpty),
+              ),
+            ),
+          );
+        });
+      });
+    });
+
+    describe('when rows from the last columns get merged', () => {
+      describe('and table has merged rows in the previous column', () => {
+        it('should delete an empty row and decrement rowspan of the previous column', () => {
+          const {
+            editorView,
+            refs: { anchor, head },
+          } = editor(
+            doc(
+              p('text'),
+              table()(
+                tr(td({ rowspan: 3 })(p('a1')), td({})(p('{anchor}a2'))),
+                tr(td({})(p('{head}'))),
+                tr(tdEmpty),
+              ),
+            ),
+          );
+          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+          mergeCells(editorView.state, editorView.dispatch);
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              p('text'),
+              table()(
+                tr(td({ rowspan: 2 })(p('a1')), td({})(p('a2'))),
+                tr(tdEmpty),
+              ),
+            ),
+          );
+        });
+      });
+    });
   });
 });

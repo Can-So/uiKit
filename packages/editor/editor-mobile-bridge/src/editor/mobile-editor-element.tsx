@@ -2,7 +2,6 @@ import * as React from 'react';
 import { EditorView } from 'prosemirror-view';
 import {
   Editor,
-  mentionPluginKey,
   textFormattingStateKey,
   blockPluginStateKey,
   ListsState,
@@ -35,7 +34,6 @@ class EditorWithState extends Editor {
     if (this.props.media && this.props.media.customMediaPicker) {
       bridge.mediaPicker = this.props.media.customMediaPicker;
     }
-    subscribeForMentionStateChanges(view, eventDispatcher);
     subscribeForTextFormatChanges(view, eventDispatcher);
     subscribeForBlockStateChanges(view, eventDispatcher);
     subscribeForListStateChanges(view, eventDispatcher);
@@ -61,17 +59,6 @@ class EditorWithState extends Editor {
   }
 }
 
-function subscribeForMentionStateChanges(
-  view: EditorView,
-  eventDispatcher: any,
-) {
-  let mentionsPluginState = mentionPluginKey.getState(view.state);
-  bridge.mentionsPluginState = mentionsPluginState;
-  if (mentionsPluginState) {
-    mentionsPluginState.subscribe(state => sendToNative(state));
-  }
-}
-
 function subscribeForStatusStateChange(view: EditorView, eventDispatcher: any) {
   let statusPluginState = statusPluginKey.getState(view.state);
   bridge.statusPluginState = statusPluginState;
@@ -94,14 +81,6 @@ const statusStateUpdated = view => state => {
     toNativeBridge.dismissStatusPicker();
   }
 };
-
-function sendToNative(state) {
-  if (state.queryActive) {
-    toNativeBridge.showMentions(state.query || '');
-  } else {
-    toNativeBridge.dismissMentions();
-  }
-}
 
 function subscribeForTextFormatChanges(view: EditorView, eventDispatcher: any) {
   let textFormattingPluginState = textFormattingStateKey.getState(view.state);
@@ -157,7 +136,7 @@ export default function mobileEditor(props) {
   return (
     <EditorWithState
       appearance="mobile"
-      mentionProvider={Promise.resolve(MentionProvider)}
+      mentionProvider={MentionProvider}
       media={{
         customMediaPicker: new MobilePicker(),
         provider: props.mediaProvider || MediaProvider,

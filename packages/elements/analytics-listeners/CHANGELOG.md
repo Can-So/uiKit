@@ -1,5 +1,10 @@
 # @atlaskit/analytics-listeners
 
+## 4.0.7
+- [patch] [1d30f7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d30f7e):
+
+  - Make analytics-web-client non-mandatory
+
 ## 4.0.6
 - [patch] [c525423"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c525423"

@@ -1,10 +1,11 @@
-import Avatar, { AvatarItem } from '@atlaskit/avatar';
+import { AvatarItem } from '@atlaskit/avatar';
 import { components } from '@atlaskit/select';
 import { colors } from '@atlaskit/theme';
 import * as React from 'react';
 import styled from 'styled-components';
 import { HighlightRange } from '../types';
 import { HighlightText } from './HighlightText';
+import { SizeableAvatar } from './SizeableAvatar';
 
 type AvatarTextData = [string, HighlightRange[] | undefined];
 
@@ -14,10 +15,10 @@ interface AvatarText {
 }
 
 const AvatarComponent = styled.div`
-  padding: 0;
-  margin: 0;
-  border: none;
-  &:hover {
+  &,
+  &:hover,
+  &:active,
+  &:focus {
     padding: 0;
     margin: 0;
     border: none;
@@ -39,13 +40,11 @@ export class Option extends React.PureComponent<any> {
       status,
     } = this.props;
     return (
-      <Avatar
+      <SizeableAvatar
+        appearance="big"
         src={avatarUrl}
-        size="medium"
         presence={status}
         name={name}
-        isHover={false}
-        enableTooltip={false}
       />
     );
   };

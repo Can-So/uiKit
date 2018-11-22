@@ -1,5 +1,26 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.5.2
+- [patch] [c93eb36](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c93eb36):
+
+  - Do not jump over the link if invalid
+
+## 2.5.1
+- [patch] [fce377d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fce377d):
+
+  - fix issue with mentions in list
+
+## 2.5.0
+- [minor] [6fb9918](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6fb9918):
+
+  - Fix strong bug when ending line finishes with two strong symbols
+
+## 2.4.6
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/editor-common@21.2.2
+  - @atlaskit/renderer@30.2.1
+  - @atlaskit/profilecard@6.0.0
+
 ## 2.4.5
 - [patch] [3148c95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3148c95):
 

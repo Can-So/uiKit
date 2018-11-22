@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/user-picker",
-  "version": "0.0.17",
+  "version": "0.0.20",
   "config": {
     "access": "public"
   },

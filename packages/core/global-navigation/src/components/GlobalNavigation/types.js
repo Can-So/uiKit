@@ -1,6 +1,7 @@
 // @flow
 
 import type { ComponentType } from 'react';
+import type { DrawerWidth } from '@atlaskit/drawer';
 
 export type DrawerContentProps = { closeDrawer: () => void };
 
@@ -24,6 +25,8 @@ export type GlobalNavDrawerProps = {
   /** The contents of the create drawer. This is ignored if onCreateClick is
    * passed. */
   createDrawerContents?: ComponentType<*>,
+  /** The width of the create drawer. This is "wide" by default. */
+  createDrawerWidth?: DrawerWidth,
   /** A callback function which will be fired when the create drawer is opened.
    * */
   onCreateDrawerOpen?: () => void,
@@ -40,6 +43,8 @@ export type GlobalNavDrawerProps = {
   /** The contents of the search drawer. This is ignored if onSearchClick is
    * passed. */
   searchDrawerContents?: ComponentType<*>,
+  /** The width of the search drawer. This is "wide" by default. */
+  searchDrawerWidth?: DrawerWidth,
   /** A callback function which will be called when the search drawer is opened.
    * */
   onSearchDrawerOpen?: () => void,
@@ -55,6 +60,8 @@ export type GlobalNavDrawerProps = {
   isNotificationDrawerOpen?: boolean,
   /** The contents of the notifications drawer. */
   notificationDrawerContents?: ComponentType<*>,
+  /** The width of the notification drawer. This is "wide" by default. */
+  notificationDrawerWidth?: DrawerWidth,
   /** A callback function which will be called when the notifications drawer is
    * opened. */
   onNotificationDrawerOpen?: () => void,
@@ -80,6 +87,8 @@ export type GlobalNavDrawerProps = {
   isStarredDrawerOpen?: boolean,
   /** The contents of the starred drawer. */
   starredDrawerContents?: ComponentType<*>,
+  /** The width of the starred drawer. This is "wide" by default. */
+  starredDrawerWidth?: DrawerWidth,
   /** A callback function which will be called when the starred drawer is
    * opened. */
   onStarredDrawerOpen?: () => void,
@@ -151,3 +160,5 @@ export type GlobalNavigationProps = {
 };
 
 export type DrawerName = 'search' | 'notification' | 'starred' | 'create';
+
+export type { DrawerWidth };

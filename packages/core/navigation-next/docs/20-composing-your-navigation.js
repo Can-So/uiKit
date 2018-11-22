@@ -30,7 +30,7 @@ ${code`
 }
 `}
 
-The \`LayoutManager\` will position these layers and handle UI state concerns such as resizing, collapsing, peeking, etc. out of the box. This state container can be accessed via context and we will explore how this works later on. For now, it means we'll need one more component before we can render anything - the \`NavigationProvider\`. With this, we can render the bare bones of an Atlassian application:
+The \`LayoutManager\` will position these layers and handle UI state concerns such as resizing, expanding, and collapsing out of the box. This state container can be accessed via context and we will explore how this works later on. For now, it means we'll need one more component before we can render anything - the \`NavigationProvider\`. With this, we can render the bare bones of an Atlassian application:
 
 ${(
     <IframeExample
