@@ -13,13 +13,13 @@ export const deleteButton = style({
   visibility: 'hidden',
   display: 'flex',
   height: '0px',
-  // 40px emoji width
-  width: '40px',
+  // 40px emoji width with 2px left offset
+  width: '38px',
   alignItems: 'flex-end',
   justifyContent: 'flex-end',
   // vertically align button and prevent emoji offset
-  paddingTop: '2px',
-  marginBottom: '-2px',
+  paddingTop: '4px',
+  marginBottom: '-4px',
 });
 
 export const emoji = style({
