@@ -50,7 +50,7 @@ export default class TextfieldExample extends Component<Props, State> {
         <div style={eventResultStyle}>{eventResult}</div>
 
         <label htmlFor="default-value">Default Value</label>
-        <Textfield name="default-value" defaultValue="candy" />
+        <Textfield isCompact name="default-value" defaultValue="candy" />
 
         <label htmlFor="disabled">Disabled</label>
         <Textfield

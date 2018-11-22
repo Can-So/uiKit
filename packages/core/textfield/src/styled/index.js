@@ -6,23 +6,23 @@ import { codeFontFamily, gridSize, fontSize } from '@atlaskit/theme';
 const borderRadius = '3px';
 const borderWidth = 2;
 const grid = gridSize();
-const lineHeightBase = grid * 2.5;
-const lineHeightCompact = grid * 2;
+const lineHeight = grid * 2.5;
 const horizontalPadding = grid;
 const transitionDuration = '0.2s';
-const paddingCompact = grid / 2;
-const paddingBase = grid;
+const verticalPaddingCompact = grid / 4;
+const verticalPaddingBase = grid;
 
 const getPadding = ({ isCompact }) => {
-  const height = isCompact ? paddingCompact : paddingBase;
+  const verticalPadding = isCompact
+    ? verticalPaddingCompact
+    : verticalPaddingBase;
   return css`
-    padding: ${height}px ${horizontalPadding - borderWidth}px;
+    padding: ${verticalPadding}px ${horizontalPadding - borderWidth}px;
   `;
 };
 
 const getLineHeight = ({ isCompact }) => {
-  const currentLineHeight = isCompact ? lineHeightCompact : lineHeightBase;
-  return currentLineHeight / fontSize();
+  return lineHeight / fontSize();
 };
 
 const getDisabledState = props =>
