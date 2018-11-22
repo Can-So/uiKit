@@ -1,1 +1,0 @@
-- Fixes a bug that prevented the notification badge from clearing when the notification drawer is opened.
