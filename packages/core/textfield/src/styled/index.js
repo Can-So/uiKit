@@ -21,7 +21,7 @@ const getPadding = ({ isCompact }) => {
   `;
 };
 
-const getLineHeight = ({ isCompact }) => {
+const getLineHeight = () => {
   return lineHeight / fontSize();
 };
 
