@@ -31,11 +31,10 @@ class ColumnWidths {
   width(colIdx: number, span: number = 1, autosizeEnd = false): number[] {
     return this.columns
       .slice(colIdx, colIdx + span)
-      .map(
-        (colInfo, idx) =>
-          autosizeEnd && idx + colIdx === this.columns.length - 1
-            ? 0
-            : colInfo.width,
+      .map((colInfo, idx) =>
+        autosizeEnd && idx + colIdx === this.columns.length - 1
+          ? 0
+          : colInfo.width,
       );
   }
 

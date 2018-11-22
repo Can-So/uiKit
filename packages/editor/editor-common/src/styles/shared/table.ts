@@ -14,9 +14,14 @@ export const tableMarginTop = 24;
 export const tableMarginBottom = 16;
 export const tableMarginSides = 8;
 
+const clPrefix = 'pm-table-';
+
 export const TableSharedCssClassName = {
-  TABLE_CONTAINER: 'pm-table-container',
-  TABLE_NODE_WRAPPER: 'pm-table-wrapper',
+  TABLE_CONTAINER: `${clPrefix}container`,
+  TABLE_NODE_WRAPPER: `${clPrefix}wrapper`,
+  TABLE_LEFT_SHADOW: `${clPrefix}with-left-shadow`,
+  TABLE_RIGHT_SHADOW: `${clPrefix}with-right-shadow`,
+  TABLE_CELL_NODEVIEW_CONTENT_DOM: `${clPrefix}cell-nodeview-content-dom`,
 };
 
 const tableSharedStyle = css`
@@ -84,10 +89,10 @@ const tableSharedStyle = css`
       th {
         background-color: ${akEditorTableToolbar};
         text-align: left;
-        & * {
+        & *:not(strong) {
           font-weight: normal;
         }
-        & > p {
+        & .${TableSharedCssClassName.TABLE_CELL_NODEVIEW_CONTENT_DOM} > p {
           font-weight: bold;
         }
       }

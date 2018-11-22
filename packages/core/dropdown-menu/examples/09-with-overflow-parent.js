@@ -71,7 +71,8 @@ export default class OverflowParentExample extends Component<{}, State> {
       <div style={{ height: 2000, paddingTop: windowScroll }}>
         <Description>
           The grey box below is the containing block of the dropdown with an
-          overflow.<br />
+          overflow.
+          <br />
           {`The list ${
             isMenuFixed ? 'will' : 'will not'
           } be visible outside of it when open.`}

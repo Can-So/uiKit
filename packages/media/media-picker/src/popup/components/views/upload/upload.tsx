@@ -408,4 +408,7 @@ export default connect<
   UploadViewStateProps,
   UploadViewDispatchProps,
   UploadViewOwnProps
->(mapStateToProps, mapDispatchToProps)(StatelessUploadView);
+>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(StatelessUploadView);

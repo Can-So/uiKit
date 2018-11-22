@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { selectTable, getCellsInRow, selectRow } from 'prosemirror-utils';
+import {
+  selectTable,
+  getCellsInRow,
+  selectRow,
+  getSelectionRect,
+} from 'prosemirror-utils';
 import { Node } from 'prosemirror-model';
 import { CellSelection } from 'prosemirror-tables';
 import {
@@ -21,15 +26,9 @@ import {
 } from '../../../../../plugins/table/types';
 import RowControls from '../../../../../plugins/table/ui/TableFloatingControls/RowControls';
 import TableFloatingControls from '../../../../../plugins/table/ui/TableFloatingControls';
-import {
-  hoverRows,
-  insertRow,
-  clearHoverSelection,
-  deleteSelectedRows,
-} from '../../../../../plugins/table/actions';
+import { hoverRows } from '../../../../../plugins/table/actions';
 import { tablesPlugin } from '../../../../../plugins';
 import { setTextSelection } from '../../../../../index';
-import { getSelectionRect } from '../../../../../plugins/table/utils';
 
 const RowControlsButtonWrap = `.${ClassName.ROW_CONTROLS_BUTTON_WRAP}`;
 const DeleteRowButton = `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP}`;
@@ -151,18 +150,8 @@ describe('RowControls', () => {
             hoverRows={(rows, danger) => {
               hoverRows(rows, danger)(editorView.state, editorView.dispatch);
             }}
-            clearHoverSelection={() => {
-              clearHoverSelection(editorView.state, editorView.dispatch);
-            }}
-            isTableHovered={false}
-            insertRow={row => {
-              insertRow(row)(editorView.state, editorView.dispatch);
-            }}
             selectRow={row => {
               editorView.dispatch(selectRow(row)(editorView.state.tr));
-            }}
-            deleteSelectedRows={() => {
-              deleteSelectedRows(editorView.state, editorView.dispatch);
             }}
           />,
         );
@@ -228,17 +217,8 @@ describe('RowControls', () => {
         hoverRows={(rows, danger) => {
           hoverRows(rows, danger)(editorView.state, editorView.dispatch);
         }}
-        clearHoverSelection={() => {
-          clearHoverSelection(editorView.state, editorView.dispatch);
-        }}
-        isTableHovered={false}
-        insertRow={row => {
-          insertRow(row)(editorView.state, editorView.dispatch);
-        }}
-        deleteSelectedRows={() => {
-          deleteSelectedRows(editorView.state, editorView.dispatch);
-        }}
-        dangerRows={[0, 1]}
+        hoveredRows={[0, 1]}
+        isInDanger={true}
         selectRow={row => {
           editorView.dispatch(selectRow(row)(editorView.state.tr));
         }}
@@ -251,59 +231,6 @@ describe('RowControls', () => {
       .forEach(buttonWrap => {
         expect(buttonWrap.hasClass('danger')).toBe(true);
       });
-
-    floatingControls.unmount();
-  });
-
-  it('calls remove on clicking the remove button', () => {
-    const { editorView } = editor(
-      doc(
-        table()(
-          tr(thEmpty, td({})(p()), thEmpty),
-          tr(tdCursor, tdEmpty, tdEmpty),
-          tr(tdEmpty, tdEmpty, tdEmpty),
-        ),
-      ),
-    );
-
-    const deleteSelectedRowsMock = jest.fn();
-
-    const floatingControls = mountWithIntl(
-      <RowControls
-        tableRef={document.querySelector('table')!}
-        editorView={editorView}
-        hoverRows={(rows, danger) => {
-          hoverRows(rows, danger)(editorView.state, editorView.dispatch);
-        }}
-        clearHoverSelection={() => {
-          clearHoverSelection(editorView.state, editorView.dispatch);
-        }}
-        isTableHovered={false}
-        insertRow={row => {
-          insertRow(row)(editorView.state, editorView.dispatch);
-        }}
-        deleteSelectedRows={deleteSelectedRowsMock}
-        selectRow={row => {
-          editorView.dispatch(selectRow(row)(editorView.state.tr));
-        }}
-      />,
-    );
-
-    editorView.dispatch(selectRows([0, 1])(editorView.state.tr));
-
-    // selecting the row mutates the editor state (which is inside editorView)
-    // we set tableHeight prop to trick shouldComponentUpdate and force re-render
-    floatingControls.setProps({ tableHeight: 100 });
-
-    expect(floatingControls.find(DeleteRowButton).length).toBe(1);
-
-    floatingControls
-      .find(DeleteRowButton)
-      .find('button')
-      .simulate('click');
-
-    // ensure we called remove
-    expect(deleteSelectedRowsMock).toBeCalled();
 
     floatingControls.unmount();
   });
@@ -326,16 +253,6 @@ describe('RowControls', () => {
         hoverRows={(rows, danger) => {
           hoverRows(rows, danger)(editorView.state, editorView.dispatch);
         }}
-        clearHoverSelection={() => {
-          clearHoverSelection(editorView.state, editorView.dispatch);
-        }}
-        isTableHovered={false}
-        insertRow={row => {
-          insertRow(row)(editorView.state, editorView.dispatch);
-        }}
-        deleteSelectedRows={() => {
-          deleteSelectedRows(editorView.state, editorView.dispatch);
-        }}
         selectRow={row => {
           editorView.dispatch(selectRow(row)(editorView.state.tr));
         }}
@@ -353,12 +270,12 @@ describe('RowControls', () => {
     floatingControls.unmount();
   });
 
-  describe('hides inner add buttons when selection spans multiple rows', () => {
+  describe('hides an add button when delete button overlaps it', () => {
     it('hides one when two rows are selected', () => {
       const { editorView } = editor(
         doc(
           table()(
-            tr(thEmpty, td({})(p()), thEmpty),
+            tr(thEmpty, thEmpty, thEmpty),
             tr(tdCursor, tdEmpty, tdEmpty),
             tr(tdEmpty, tdEmpty, tdEmpty),
           ),
@@ -371,16 +288,6 @@ describe('RowControls', () => {
           editorView={editorView}
           hoverRows={(rows, danger) => {
             hoverRows(rows, danger)(editorView.state, editorView.dispatch);
-          }}
-          clearHoverSelection={() => {
-            clearHoverSelection(editorView.state, editorView.dispatch);
-          }}
-          isTableHovered={false}
-          insertRow={row => {
-            insertRow(row)(editorView.state, editorView.dispatch);
-          }}
-          deleteSelectedRows={() => {
-            deleteSelectedRows(editorView.state, editorView.dispatch);
           }}
           selectRow={row => {
             editorView.dispatch(selectRow(row)(editorView.state.tr));
@@ -397,53 +304,12 @@ describe('RowControls', () => {
       floatingControls.setProps({ tableHeight: 100 });
 
       expect(floatingControls.find(InsertRowButton).length).toBe(2);
-
-      floatingControls.unmount();
-    });
-
-    it('hides two when three rows are selected', () => {
-      const { editorView } = editor(
-        doc(
-          table()(
-            tr(thEmpty, td({})(p()), thEmpty),
-            tr(tdCursor, tdEmpty, tdEmpty),
-            tr(tdEmpty, tdEmpty, tdEmpty),
-          ),
-        ),
-      );
-
-      const floatingControls = mountWithIntl(
-        <RowControls
-          tableRef={document.querySelector('table')!}
-          editorView={editorView}
-          hoverRows={(rows, danger) => {
-            hoverRows(rows, danger)(editorView.state, editorView.dispatch);
-          }}
-          clearHoverSelection={() => {
-            clearHoverSelection(editorView.state, editorView.dispatch);
-          }}
-          isTableHovered={false}
-          insertRow={row => {
-            insertRow(row)(editorView.state, editorView.dispatch);
-          }}
-          deleteSelectedRows={() => {
-            deleteSelectedRows(editorView.state, editorView.dispatch);
-          }}
-          selectRow={row => {
-            editorView.dispatch(selectRow(row)(editorView.state.tr));
-          }}
-        />,
-      );
-
-      expect(floatingControls.find(InsertRowButton).length).toBe(3);
-
-      editorView.dispatch(selectRows([0, 1, 2])(editorView.state.tr));
-
-      // selecting the row mutates the editor state (which is inside editorView)
-      // we set tableHeight prop to trick shouldComponentUpdate and force re-render
-      floatingControls.setProps({ tableHeight: 100 });
-
-      expect(floatingControls.find(InsertRowButton).length).toBe(1);
+      expect(
+        floatingControls
+          .find(RowControlsButtonWrap)
+          .first()
+          .find(InsertRowButton).length,
+      ).toBe(0);
 
       floatingControls.unmount();
     });
@@ -465,16 +331,6 @@ describe('RowControls', () => {
           editorView={editorView}
           hoverRows={(rows, danger) => {
             hoverRows(rows, danger)(editorView.state, editorView.dispatch);
-          }}
-          clearHoverSelection={() => {
-            clearHoverSelection(editorView.state, editorView.dispatch);
-          }}
-          isTableHovered={false}
-          insertRow={row => {
-            insertRow(row)(editorView.state, editorView.dispatch);
-          }}
-          deleteSelectedRows={() => {
-            deleteSelectedRows(editorView.state, editorView.dispatch);
           }}
           selectRow={row => {
             editorView.dispatch(selectRow(row)(editorView.state.tr));

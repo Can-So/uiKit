@@ -73,10 +73,14 @@ export const SaveAndCancelButtons = props => (
       tabIndex="-1"
       appearance="primary"
       onClick={() =>
-        props.editorActions
-          .getValue()
+        props.editorActions.getValue().then(value => {
           // tslint:disable-next-line:no-console
-          .then(value => console.log(value))
+          console.log(value);
+          localStorage.setItem(
+            'fabric.editor.example.full-page',
+            JSON.stringify(value),
+          );
+        })
       }
     >
       Publish
@@ -84,8 +88,10 @@ export const SaveAndCancelButtons = props => (
     <Button
       tabIndex="-1"
       appearance="subtle"
-      // tslint:disable-next-line:jsx-no-lambda
-      onClick={() => props.editorActions.clear()}
+      onClick={() => {
+        props.editorActions.clear();
+        localStorage.removeItem('fabric.editor.example.full-page');
+      }}
     >
       Close
     </Button>
@@ -94,7 +100,7 @@ export const SaveAndCancelButtons = props => (
 
 export type State = { disabled: boolean };
 
-const providers = {
+export const providers = {
   emojiProvider: emoji.storyData.getEmojiResource({
     uploadSupported: true,
     currentUser: {
@@ -110,7 +116,7 @@ const providers = {
   macroProvider: Promise.resolve(macroProvider),
 };
 
-const mediaProvider = storyMediaProviderFactory({
+export const mediaProvider = storyMediaProviderFactory({
   includeUserAuthProvider: true,
 });
 
@@ -143,6 +149,7 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               allowTables={{
                 advanced: true,
               }}
+              allowBreakout={true}
               allowJiraIssue={true}
               allowUnsupportedContent={true}
               allowPanel={true}
@@ -151,8 +158,11 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               }}
               allowRule={true}
               allowDate={true}
-              allowLayouts={true}
+              allowLayouts={{
+                allowBreakout: true,
+              }}
               allowGapCursor={true}
+              allowTextAlignment={true}
               allowTemplatePlaceholders={{ allowInserting: true }}
               UNSAFE_cards={{
                 provider: Promise.resolve(cardProvider),
@@ -163,6 +173,11 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               placeholder="Write something..."
               shouldFocus={false}
               disabled={this.state.disabled}
+              defaultValue={
+                (localStorage &&
+                  localStorage.getItem('fabric.editor.example.full-page')) ||
+                undefined
+              }
               contentComponents={
                 <WithEditorActions
                   // tslint:disable-next-line:jsx-no-lambda

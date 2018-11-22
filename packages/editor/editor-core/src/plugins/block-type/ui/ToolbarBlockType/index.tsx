@@ -8,6 +8,7 @@ import {
 } from 'react-intl';
 import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
 import TextStyleIcon from '@atlaskit/icon/glyph/editor/text-style';
+import { akEditorMenuZIndex } from '@atlaskit/editor-common';
 
 import { analyticsService as analytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
@@ -105,6 +106,7 @@ class ToolbarBlockType extends React.PureComponent<
           disabled={disabled}
           onClick={this.handleTriggerClick}
           title={labelTextStyles}
+          ariaLabel="Font style"
           iconAfter={
             <Wrapper isSmall={isSmall}>
               {isSmall && <TextStyleIcon label={labelTextStyles} />}
@@ -138,6 +140,7 @@ class ToolbarBlockType extends React.PureComponent<
             mountTo={popupsMountPoint}
             boundariesElement={popupsBoundariesElement}
             scrollableElement={popupsScrollableElement}
+            zIndex={akEditorMenuZIndex}
             fitHeight={360}
             fitWidth={106}
           >

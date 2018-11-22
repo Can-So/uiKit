@@ -37,8 +37,8 @@ Include details about your configuration and environment:
 4. At Atlassian, "Play, As A Team" is one of our values. We encourage cross team contributions and collaborations.
 
 Please raise a new issue:
-- For Atlassians staff, please use this [internal link][atlassianbug].
-- For External contributors, please use this [link][issuetracker].
+* For Atlassians staff, please use this [internal link][atlassianbug].
+* For External contributors, please use this [link][issuetracker].
 
 # Contributing
 
@@ -121,7 +121,7 @@ After running `bolt install` you will most likely experiencing issues with IDE i
     {find . -type d -name 'node_modules' | grep 'node_modules$' | grep -v 'node_modules/' | while read line ; do echo "<excludeFolder url=\"file://\$MODULE_DIR$/$line\" />"; done;} | pbcopy
     ``` 
     This will find paths to each node_modules/ folder in the project, create <excludeFolder> tags for each of them and copy resulting text to clipboard 
-1. Open `.idea/atlaskit.iml` in your favorite text editor. 
+1. Open `.idea/atlaskit-mk-2.iml` in your favorite text editor. 
 1. Pres Ctrl + V to paste text from clipboard after existing `<excludeFolder>` tags. Or paste inside `<content>` if you do not have `<excludeFolder>` tags. Save the file.
 1. Open IntelliJ. You should be fine
 
@@ -316,11 +316,11 @@ How you do this will completely depend on what *exactly* you are trying to achie
 >
 > If your package is a flow package run:
 >
-> NODE_ENV=production BABEL_ENV=production:cjs bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/cjs
+> NODE_ENV=production BABEL_ENV=production:cjs bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/cjs --root-mode upward
 >
 > **or** if you know that you are consuming the package as a module:
 >
-> NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/esm
+> NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/esm --root-mode upward
 >
 > If your package is written in TS:
 > NODE_ENV=production bolt workspaces exec --only "@atlaskit/pkgName" -- tsc --project ./build/es5

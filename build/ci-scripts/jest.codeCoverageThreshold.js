@@ -2,15 +2,15 @@
 
 module.exports = {
   'packages/core/navigation-next/src': {
-    statements: 68,
-    branches: 60,
-    functions: 68,
-    lines: 68,
+    statements: 78,
+    branches: 69,
+    functions: 78,
+    lines: 79,
   },
   'packages/core/global-navigation/src': {
-    statements: 85,
-    branches: 85,
-    functions: 85,
-    lines: 85,
+    statements: 90,
+    branches: 90,
+    functions: 90,
+    lines: 90,
   },
 };

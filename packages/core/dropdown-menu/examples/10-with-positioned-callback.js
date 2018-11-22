@@ -47,9 +47,11 @@ export default class PositionCallbackExample extends Component<{}, State> {
       <Fragment>
         <Description>
           The values below are the co-ordinates of the dropdown content before
-          and after it is positioned by layer.<br />
+          and after it is positioned by layer.
+          <br />
           There may be some rare use cases where the content would need to defer
-          some handling until after this occurs.<br />
+          some handling until after this occurs.
+          <br />
         </Description>
         <CoordWrapper>
           <p>{`Before onPositioned called - x: ${beforePosition.x}, y: ${

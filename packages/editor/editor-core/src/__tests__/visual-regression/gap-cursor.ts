@@ -4,6 +4,7 @@ import {
   snapshot,
   changeSelectedNodeLayout,
 } from './_utils';
+import { setTableLayout } from './table/_table-utils';
 import commonMessages from '../../messages';
 
 const nodeLabel = node => {
@@ -32,10 +33,14 @@ describe('Snapshot Test: Gap cursor', () => {
 
   ['table', 'code', 'panel', 'action', 'decision', 'bodied', 'columns'].forEach(
     node => {
-      ['Left', 'Right'].forEach(side => {
+      [
+        { key: 'ArrowLeft', side: 'Left' },
+        { key: 'ArrowUp', side: 'Left' },
+        { key: 'ArrowRight', side: 'Right' },
+      ].forEach(({ key, side }) => {
         it(`should render gap cursor for node ${nodeLabel(
           node,
-        )} on the ${side} side`, async () => {
+        )} on ${side} side when hitting ${key}`, async () => {
           await page.type('.ProseMirror p', `/${node}`);
           await page.waitFor('div[aria-label="Popup"] span[role="button"]');
           await page.click('div[aria-label="Popup"] span[role="button"]');
@@ -47,7 +52,7 @@ describe('Snapshot Test: Gap cursor', () => {
           if (node === 'columns' && side === 'Right') {
             await page.keyboard.down(`ArrowRight`);
           }
-          await page.keyboard.down(`Arrow${side}`);
+          await page.keyboard.down(key);
           await page.waitForSelector('.ProseMirror-gapcursor');
           await snapshot(page);
         });
@@ -56,25 +61,34 @@ describe('Snapshot Test: Gap cursor', () => {
   );
 
   ['table', 'bodied'].forEach(node => {
-    [
-      commonMessages.layoutWide.defaultMessage,
-      commonMessages.layoutFullWidth.defaultMessage,
-    ].forEach(layout => {
-      ['Left', 'Right'].forEach(side => {
+    ['wide', 'full-width'].forEach(layout => {
+      [
+        { key: 'ArrowLeft', side: 'Left' },
+        { key: 'ArrowUp', side: 'Left' },
+        { key: 'ArrowRight', side: 'Right' },
+      ].forEach(({ key, side }) => {
         it(`should render gap cursor in ${layout} layout for node ${nodeLabel(
           node,
-        )} on the ${side} side`, async () => {
+        )} on ${side} side when hitting ${key}`, async () => {
           await page.setViewport({ width: 1920, height: 1080 });
           await page.type('.ProseMirror p', `/${node}`);
           await page.waitFor('div[aria-label="Popup"] span[role="button"]');
           await page.click('div[aria-label="Popup"] span[role="button"]');
-          await changeSelectedNodeLayout(page, layout);
-          if (node === 'table' && side === 'Right') {
-            await page.keyboard.down(`ArrowDown`);
-            await page.keyboard.down(`ArrowDown`);
-            await page.keyboard.down(`ArrowDown`);
+          if (node === 'table') {
+            await setTableLayout(page, layout);
+            if (side === 'Right') {
+              await page.keyboard.down(`ArrowDown`);
+              await page.keyboard.down(`ArrowDown`);
+              await page.keyboard.down(`ArrowDown`);
+            }
+          } else {
+            const layoutSelector = {
+              wide: commonMessages.layoutWide.defaultMessage,
+              'full-width': commonMessages.layoutFullWidth.defaultMessage,
+            };
+            await changeSelectedNodeLayout(page, layoutSelector[layout]);
           }
-          await page.keyboard.down(`Arrow${side}`);
+          await page.keyboard.down(key);
           await page.waitForSelector('.ProseMirror-gapcursor');
           await snapshot(page);
         });

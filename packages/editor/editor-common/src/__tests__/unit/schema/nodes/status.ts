@@ -85,5 +85,20 @@ describe(`${name}/schema status node`, () => {
         .firstChild!;
       expect(parsedNode).toEqual(node);
     });
+
+    it('converts html status attributes to node attributes without style', () => {
+      const attrs = {
+        text: 'In progress',
+        color: 'blue',
+        localId: '3fba07fc-0458-449c-bba9-04d5555164ea',
+      };
+      const node = schema.nodes.status.create(attrs);
+      const dom = toDOM(node, schema).firstChild! as HTMLElement;
+      expect(dom.getAttribute('data-node-type')).toEqual('status');
+      expect(dom.textContent).toEqual(attrs.text);
+      expect(dom.getAttribute('data-color')).toEqual(attrs.color);
+      expect(dom.getAttribute('data-local-id')).toEqual(attrs.localId);
+      expect(dom.getAttribute('data-style')).toEqual(null);
+    });
   });
 });

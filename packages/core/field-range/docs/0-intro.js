@@ -1,11 +1,21 @@
 // @flow
 import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
+import SectionMessage from '@atlaskit/section-message';
 
 export default md`
-  ### Usage
+  ${(
+    <SectionMessage
+      appearance="warning"
+      title="Note: @atlaskit/field-range is being deprecated in favor of @atlaskit/range."
+    >
+      This is part of our forms update which will modernize all our form fields.
+    </SectionMessage>
+  )}
 
-  Component which renders a slider and is a substitute of the native input[range] element
+  Component which renders a slider and is a substitute of the native input[range] element.
+
+    ## Usage
 
   ${code`import FieldRange from '@atlaskit/field-range';`}
 

@@ -1,5 +1,29 @@
 # @atlaskit/drawer
 
+## 2.5.0
+- [minor] [aacb208](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aacb208):
+
+  - Export a new component, DrawerItemTheme, for theming the Drawer with the navigation item theme.
+
+## 2.4.0
+- [minor] [6746a42](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6746a42):
+
+  - Add extended width option and width transitions
+
+## 2.3.1
+- [patch] [a6e5197](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6e5197):
+
+  - 1) Add canUseDOM to fix SSR issue in Drawer. 2) Update SSR tests in navigation-next to exclude the examples with Hash, Router or Dom
+
+## 2.3.0
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+- [minor] [670597d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/670597d):
+
+  - Make `width` prop optional and default it to 'narrow'
+
 ## 2.2.0
 - [minor] [90f4995](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90f4995):
 

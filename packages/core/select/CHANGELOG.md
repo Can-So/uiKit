@@ -1,5 +1,20 @@
 # @atlaskit/select
 
+## 6.1.7
+- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+
+  - Fixed issue where tooltips and modals would initially render in the wrong location
+
+## 6.1.6
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 6.1.5
+- [patch] [fcf97d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fcf97d8):
+
+  - Fix countries and mismatched flags
+
 ## 6.1.4
 - [patch] [6ab8e95"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ab8e95"

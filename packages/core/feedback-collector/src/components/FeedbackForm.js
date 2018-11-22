@@ -114,7 +114,6 @@ export default class FeedbackForm extends Component<Props, FormFields> {
 
               <Field>
                 <Checkbox
-                  value={this.state.canBeContacted}
                   name="can-be-contacted"
                   label="Atlassian can contact me about this feedback"
                   onChange={event =>
@@ -125,7 +124,6 @@ export default class FeedbackForm extends Component<Props, FormFields> {
 
               <Field>
                 <Checkbox
-                  value={this.state.enrollInResearchGroup}
                   name="enroll-in-research-group"
                   label="I'd like to participate in product research"
                   onChange={event =>

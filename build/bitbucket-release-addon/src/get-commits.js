@@ -8,7 +8,7 @@ function commitUrl(user, repo, pullrequestid, page) {
   return `/2.0/repositories/${user}/${repo}/pullrequests/${pullrequestid}/commits?page=${page}`;
 }
 
-function getCommits(user, repo, pullrequestid, page = 0) {
+function getCommits(user, repo, pullrequestid, page = 1) {
   return new Promise((resolve, reject) => {
     window.AP.require('request', request => {
       request({
@@ -30,16 +30,13 @@ function getCommits(user, repo, pullrequestid, page = 0) {
   });
 }
 
-export default function getCommitsThenParse(
-  user,
-  repo,
-  pullrequestid,
-  page = 0,
-) {
-  return getCommits(user, repo, pullrequestid, page).then(commits =>
+export default function getCommitsThenParse(user, repo, pullrequestid) {
+  return getCommits(user, repo, pullrequestid).then(commits =>
     commits
       .map(commit => commit.message)
       .filter(commit => !!commit.match(/^CHANGESET: .+?\n/))
-      .map(parseChangesetCommit),
+      .map(parseChangesetCommit)
+      // remove any changesets that couldn't be parsed
+      .filter(changsetOrUndefined => !!changsetOrUndefined),
   );
 }

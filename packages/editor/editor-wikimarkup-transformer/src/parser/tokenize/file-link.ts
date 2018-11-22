@@ -5,11 +5,15 @@ import { Token } from './';
 // [^attachment.pdf]
 const FILE_LINK_REGEXP = /^\[\^([\(\)\w. -]+)\]/;
 
-export function fileLink(input: string, schema: Schema): Token {
-  const match = input.match(FILE_LINK_REGEXP);
+export function fileLink(
+  input: string,
+  position: number,
+  schema: Schema,
+): Token {
+  const match = input.substring(position).match(FILE_LINK_REGEXP);
 
   if (!match) {
-    return fallback(input);
+    return fallback(input, position);
   }
 
   const node = getMediaGroupNodeView(schema, match[1]);
@@ -21,10 +25,10 @@ export function fileLink(input: string, schema: Schema): Token {
   };
 }
 
-function fallback(input: string): Token {
+function fallback(input: string, position: number): Token {
   return {
     type: 'text',
-    text: input.substr(0, 1),
+    text: input.substr(position, 1),
     length: 1,
   };
 }

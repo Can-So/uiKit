@@ -69,12 +69,12 @@ export default md`
 
   **Arguments:**
 
-  * \`event\`
-    * \`width\` - A \`number\`. The visible width of the filmstrip;
-    * \`offset\` - A \`number\`.
-    * \`offsets\`: ChildOffset[];
-    * \`minOffset\` - A \`number\`.
-    * \`maxOffset\` - A \`number\`.
+  - \`event\`
+    - \`width\` - A \`number\`. The visible width of the filmstrip;
+    - \`offset\` - A \`number\`.
+    - \`offsets\`: ChildOffset[];
+    - \`minOffset\` - A \`number\`.
+    - \`maxOffset\` - A \`number\`.
 
   #### onScroll
 
@@ -84,11 +84,11 @@ export default md`
 
   **Arguments:**
 
-  * \`event\`
-    * \`direction\` - Either \`"left"\` or \`"right"\`. The direction the user
+  - \`event\`
+    - \`direction\` - Either \`"left"\` or \`"right"\`. The direction the user
       wants to move the filmstrip.
-    * \`offset\` - A \`number\`. The desired offset.
-    * \`animate\` - A \`boolean\`. Whether the change should be animated (this
+    - \`offset\` - A \`number\`. The desired offset.
+    - \`animate\` - A \`boolean\`. Whether the change should be animated (this
       arg could probably do with a better name!)
 
   #### children

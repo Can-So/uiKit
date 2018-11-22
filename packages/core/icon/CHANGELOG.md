@@ -1,5 +1,36 @@
 # @atlaskit/icon
 
+## 14.5.0
+- [minor] [f5e26e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e26e1):
+
+  - Add a retry icon
+
+## 14.4.0
+- [patch] [29b160f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29b160f):
+
+  - Simplify the icons build process
+
+  Icons no longer need a custom `build` step to be accurate on npm. This
+  has come about by renaming the `es5` folder to `cjs`. If you weren't reaching
+  into our package's internals, you shouldn't notice.
+
+- [minor] [62a7c37](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/62a7c37):
+
+  - Add metadata export
+
+  In trying to align the icons packages, the core `@atlaskit/icon` package now exports
+  `metadata`, which includes information about every icon in this package.
+- Updated dependencies [b29bec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b29bec1):
+- Updated dependencies [80304f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80304f0):
+  - @atlaskit/icon-file-type@2.0.0
+  - @atlaskit/icon-object@2.0.0
+  - @atlaskit/icon-build-process@0.1.0
+
+## 14.3.0
+- [minor] [dced9bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dced9bf):
+
+  - Remove StarOutlineIcon as it is not used
+
 ## 14.2.1
 - [patch] [d15caa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d15caa6):
 

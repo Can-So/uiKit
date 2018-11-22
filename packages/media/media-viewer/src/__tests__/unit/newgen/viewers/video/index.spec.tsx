@@ -153,8 +153,7 @@ describe('Video viewer', () => {
     await (el as any).instance()['init']();
     el.update();
     expect(el.state('isHDActive')).toBeFalsy();
-    el
-      .find(Button)
+    el.find(Button)
       .at(2)
       .simulate('click');
     expect(el.state('isHDActive')).toBeTruthy();

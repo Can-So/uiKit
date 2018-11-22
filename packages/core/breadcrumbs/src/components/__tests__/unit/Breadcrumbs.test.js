@@ -145,7 +145,9 @@ cases(
         itemsBeforeCollapse={itemsBefore}
         itemsAfterCollapse={itemsAfter}
       >
-        {itemTexts.map(t => <Item text={t} key={t} />)}
+        {itemTexts.map(t => (
+          <Item text={t} key={t} />
+        ))}
       </BreadcrumbsStateless>,
     );
 

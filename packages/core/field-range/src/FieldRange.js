@@ -61,7 +61,7 @@ export default class Slider extends Component<Props, State> {
   getPercentValue = (value: number, min: number, max: number): string => {
     let percent = '0';
     if (min < max && value > min) {
-      percent = ((value - min) / (max - min) * 100).toFixed(2);
+      percent = (((value - min) / (max - min)) * 100).toFixed(2);
     }
     return percent;
   };

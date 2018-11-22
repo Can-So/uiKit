@@ -15,6 +15,7 @@ h1. Boom! this is a heading with *bold* text in it
       '[CS-310] should ignore heading text when fails to create a heading',
       'h1. {panel}nothing{panel}',
     ],
+    ['[CS-572] should not need a whitespace', 'h1.this is a heading node'],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

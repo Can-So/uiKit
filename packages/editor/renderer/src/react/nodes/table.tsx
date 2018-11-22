@@ -1,9 +1,19 @@
 import * as React from 'react';
+import { ReactNode } from 'react';
 import {
   calcTableWidth,
   WidthConsumer,
   TableSharedCssClassName,
+  TableLayout,
 } from '@atlaskit/editor-common';
+import overflowShadow, { OverflowShadowProps } from '../../ui/overflow-shadow';
+
+export interface TableProps {
+  columnWidths?: Array<number>;
+  layout: TableLayout;
+  isNumberColumnEnabled: boolean;
+  children: ReactNode;
+}
 
 const isHeaderRowEnabled = rows => {
   if (!rows.length) {
@@ -28,9 +38,10 @@ const addNumberColumnIndexes = rows => {
   });
 };
 
-const Table = props => {
+const Table = (props: TableProps & OverflowShadowProps) => {
   const colgroup = props.columnWidths ? (
     <colgroup>
+      {props.isNumberColumnEnabled && <col />}
       {props.columnWidths.map((colWidth, idx) => {
         const style = colWidth ? { width: `${colWidth}px` } : {};
         return <col key={idx} style={style} />;
@@ -42,22 +53,30 @@ const Table = props => {
     <WidthConsumer>
       {({ width }) => (
         <div
-          className={TableSharedCssClassName.TABLE_CONTAINER}
+          className={`${TableSharedCssClassName.TABLE_CONTAINER} ${
+            props.shadowClassNames
+          }`}
           data-layout={props.layout}
+          ref={props.handleRef}
           style={{ width: calcTableWidth(props.layout, width, false) }}
         >
-          <table data-number-column={props.isNumberColumnEnabled}>
-            {colgroup}
-            <tbody>
-              {props.isNumberColumnEnabled
-                ? addNumberColumnIndexes(props.children)
-                : props.children}
-            </tbody>
-          </table>
+          <div className={TableSharedCssClassName.TABLE_NODE_WRAPPER}>
+            <table data-number-column={props.isNumberColumnEnabled}>
+              {colgroup}
+              <tbody>
+                {props.isNumberColumnEnabled
+                  ? addNumberColumnIndexes(props.children)
+                  : props.children}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </WidthConsumer>
   );
 };
 
-export default Table;
+export default overflowShadow(Table, {
+  overflowSelector: `.${TableSharedCssClassName.TABLE_NODE_WRAPPER}`,
+  scrollableSelector: 'table',
+});

@@ -1,7 +1,11 @@
 // @flow
 
 import React from 'react';
-import { LinkItem } from '../../../components';
+import BacklogIcon from '@atlaskit/icon/glyph/backlog';
+import BoardIcon from '@atlaskit/icon/glyph/board';
+import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
+import ShipIcon from '@atlaskit/icon/glyph/ship';
+import IssuesIcon from '@atlaskit/icon/glyph/issues';
 
 import ViewRegistrar from '../../common/view-registrar';
 
@@ -18,39 +22,39 @@ const getItems = () => [
     nestedGroupKey: 'menu',
     items: [
       {
-        icon: 'BacklogIcon',
+        before: BacklogIcon,
         id: 'backlog',
         text: 'Backlog',
         to: '/projects/endeavour',
-        type: LinkItem,
+        type: 'LinkItem',
       },
       {
-        icon: 'BoardIcon',
+        before: BoardIcon,
         id: 'active-sprints',
         text: 'Active sprints',
         type: 'Item',
       },
       {
-        icon: 'GraphLineIcon',
+        before: GraphLineIcon,
         id: 'reports',
         text: 'Reports',
         type: 'Item',
       },
       {
-        icon: 'ShipIcon',
+        before: ShipIcon,
         id: 'releases',
         text: 'Releases',
         type: 'Item',
       },
       {
-        icon: 'IssuesIcon',
+        before: IssuesIcon,
         goTo: 'container/project/issues',
         id: 'issues',
         text: 'Issues',
         type: 'GoToItem',
       },
       {
-        icon: 'IssuesIcon',
+        before: IssuesIcon,
         goTo: 'container/project/sortable-issues',
         id: 'sortable-issues',
         text: 'Sortable Issues',

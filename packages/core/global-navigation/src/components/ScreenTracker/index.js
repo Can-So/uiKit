@@ -9,11 +9,12 @@ import {
 import { NAVIGATION_CHANNEL } from '../../constants';
 
 type Props = {
+  ...WithAnalyticsEventsProps,
   /** The name of the screen that is being displayed, sent in analytics. */
   name: string,
   /** Whether the screen is visible or not */
   isVisible: boolean,
-} & WithAnalyticsEventsProps;
+};
 
 /** Fires a screen event when the screen becomes visible */
 export class ScreenTrackerBase extends Component<Props> {

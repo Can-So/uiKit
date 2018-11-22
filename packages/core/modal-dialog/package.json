@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/modal-dialog",
-  "version": "7.0.5",
+  "version": "7.0.10",
   "description": "A React component that displays content in a layer blocking the interaction with the page.",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -19,12 +19,11 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/analytics-next": "^3.0.10",
-    "@atlaskit/blanket": "^7.0.8",
+    "@atlaskit/analytics-next": "^3.1.0",
+    "@atlaskit/blanket": "^7.0.9",
     "@atlaskit/button": "^9.0.15",
     "@atlaskit/icon": "^14.0.2",
-    "@atlaskit/layer-manager": "^5.0.15",
-    "@atlaskit/portal": "^0.0.12",
+    "@atlaskit/portal": "^0.0.14",
     "@atlaskit/theme": "^6.1.1",
     "@babel/runtime": "^7.0.0",
     "exenv": "^1.2.2",
@@ -32,7 +31,8 @@
     "raf-schd": "^2.1.0",
     "react-focus-lock": "^1.11.3",
     "react-scrolllock": "^3.0.2",
-    "react-transition-group": "^2.2.1"
+    "react-transition-group": "^2.2.1",
+    "tiny-invariant": "^0.0.3"
   },
   "peerDependencies": {
     "react": "^16.4.0",
@@ -43,7 +43,7 @@
     "@atlaskit/build-utils": "^2.0.0",
     "@atlaskit/checkbox": "^5.0.4",
     "@atlaskit/docs": "^5.0.8",
-    "@atlaskit/field-radio-group": "^4.0.9",
+    "@atlaskit/field-radio-group": "^4.0.10",
     "@atlaskit/field-text": "^7.0.12",
     "@atlaskit/inline-dialog": "^9.0.7",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
