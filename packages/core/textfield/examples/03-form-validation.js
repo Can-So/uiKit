@@ -2,7 +2,7 @@
 
 import React, { Component, type ElementRef } from 'react';
 import Form, { Field, FormHeader, Validator } from '@atlaskit/form';
-import TextField from '../src';
+import Textfield from '../src';
 
 const iframeStyles = {
   width: '95%',
@@ -72,7 +72,7 @@ export default class extends Component<Props> {
               />,
             ]}
           >
-            <TextField name="command" />
+            <Textfield name="command" />
           </Field>
         </Form>
         <p>The data submitted by the form will appear below:</p>

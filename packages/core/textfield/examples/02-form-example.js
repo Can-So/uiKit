@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Button from '@atlaskit/button';
-import TextField from '../src';
+import Textfield from '../src';
 
 const formTestUrl = '//httpbin.org/get';
 
@@ -26,7 +26,7 @@ export default function() {
         style={{ backgroundColor: 'white' }}
         target="submitFrame"
       >
-        <TextField name="example-text" defaultValue="A default value" />
+        <Textfield name="example-text" defaultValue="A default value" />
         <p>
           <Button type="submit" appearance="primary">
             Submit

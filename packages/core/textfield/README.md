@@ -1,4 +1,4 @@
-# Text-field
+# Textfield
 
 Provides a standard way to create a text-based form input.
 
@@ -10,4 +10,4 @@ yarn add @atlaskit/textfield
 
 ## Usage
 
-Detailed docs and example usage can be found [here](https://atlaskit.atlassian.com/packages/core/text-field).
+Detailed docs and example usage can be found [here](https://atlaskit.atlassian.com/packages/core/textfield).

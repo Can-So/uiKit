@@ -21,7 +21,7 @@ type State = {
   isFocused: boolean,
 };
 
-class TextField extends Component<TextFieldProps, State> {
+class Textfield extends Component<TextFieldProps, State> {
   static defaultProps = {
     appearance: 'standard',
     theme: defaultTheme,
@@ -92,11 +92,11 @@ class TextField extends Component<TextFieldProps, State> {
 }
 
 // $ExpectError - flow 0.67 doesn't know about forwardRef
-const ForwardRefTextField = React.forwardRef((props, ref) => (
-  <TextField {...props} forwardedRef={ref} />
+const ForwardRefTextfield = React.forwardRef((props, ref) => (
+  <Textfield {...props} forwardedRef={ref} />
 ));
 
-export { ForwardRefTextField as TextFieldWithoutAnalytics };
+export { ForwardRefTextfield as TextFieldWithoutAnalytics };
 const createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
 
 export default withAnalyticsContext({
@@ -126,5 +126,5 @@ export default withAnalyticsContext({
         packageVersion,
       },
     }),
-  })(ForwardRefTextField),
+  })(ForwardRefTextfield),
 );

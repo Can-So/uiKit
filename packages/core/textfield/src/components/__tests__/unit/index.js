@@ -3,60 +3,60 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import TextField from '../../TextField';
+import Textfield from '../../Textfield';
 
-describe('TextField', () => {
+describe('Textfield', () => {
   test('should show defaults', () => {
-    const wrapper = mount(<TextField />);
+    const wrapper = mount(<Textfield />);
     expect(wrapper).toHaveLength(1);
   });
 
   describe('- Properties', () => {
     describe('isCompact', () => {
       test("should set it's value to true on the input", () => {
-        const wrapper = mount(<TextField isCompact />).props().isCompact;
+        const wrapper = mount(<Textfield isCompact />).props().isCompact;
         expect(wrapper).toBe(true);
       });
     });
 
     describe('isDisabled', () => {
       test("should set it's value to true on the input", () => {
-        const wrapper = mount(<TextField isDisabled />).props().isDisabled;
+        const wrapper = mount(<Textfield isDisabled />).props().isDisabled;
         expect(wrapper).toBe(true);
       });
     });
 
     describe('isFocused', () => {
       test("should set it's value to true on the input", () => {
-        const wrapper = mount(<TextField isFocused />).props().isFocused;
+        const wrapper = mount(<Textfield isFocused />).props().isFocused;
         expect(wrapper).toBe(true);
       });
     });
 
     describe('isReadOnly', () => {
       test("should set it's value to true on the input", () => {
-        const wrapper = mount(<TextField isReadOnly />).props().isReadOnly;
+        const wrapper = mount(<Textfield isReadOnly />).props().isReadOnly;
         expect(wrapper).toBe(true);
       });
     });
 
     describe('isRequired', () => {
       test("should set it's value to true on the input", () => {
-        const wrapper = mount(<TextField isRequired />).props().isRequired;
+        const wrapper = mount(<Textfield isRequired />).props().isRequired;
         expect(wrapper).toBe(true);
       });
     });
 
     describe('isMonospaced', () => {
       test("should set it's value to true on the input", () => {
-        const wrapper = mount(<TextField isMonospaced />).props().isMonospaced;
+        const wrapper = mount(<Textfield isMonospaced />).props().isMonospaced;
         expect(wrapper).toBe(true);
       });
     });
 
     describe('size', () => {
       test("should set it's value to `small` on the input", () => {
-        const wrapper = mount(<TextField size="small" />).props().size;
+        const wrapper = mount(<Textfield size="small" />).props().size;
         expect(wrapper).toBe('small');
       });
     });
@@ -77,7 +77,7 @@ describe('TextField', () => {
           pattern: '/.+/',
         };
 
-        const wrapper = mount(<TextField {...nativeProps} />)
+        const wrapper = mount(<Textfield {...nativeProps} />)
           .find('input')
           .props();
         expect(wrapper).toEqual(expect.objectContaining(nativeProps));
@@ -96,7 +96,7 @@ describe('TextField', () => {
       nativeEvents.forEach(event => {
         test(event, () => {
           const eventSpy = jest.fn();
-          const wrapper = mount(<TextField {...{ [event]: eventSpy }} />);
+          const wrapper = mount(<Textfield {...{ [event]: eventSpy }} />);
           const input = wrapper.find('input');
           expect(input.prop(event)).toBe(eventSpy);
 
@@ -111,7 +111,7 @@ describe('TextField', () => {
     describe('onFocus', () => {
       test('should get focus when onFocus() is called', () => {
         const focusSpy = jest.fn();
-        const wrapper = mount(<TextField onFocus={focusSpy} />);
+        const wrapper = mount(<Textfield onFocus={focusSpy} />);
         expect(focusSpy).toHaveBeenCalledTimes(0);
         wrapper.find('input').prop('onFocus')();
         expect(focusSpy).toHaveBeenCalledTimes(1);
@@ -121,7 +121,7 @@ describe('TextField', () => {
     describe('defaultValue', () => {
       test('should have defaultValue="test default value"', () => {
         const wrapper = mount(
-          <TextField defaultValue="test default value" />,
+          <Textfield defaultValue="test default value" />,
         ).prop('defaultValue');
         expect(wrapper).toBe('test default value');
       });
@@ -129,7 +129,7 @@ describe('TextField', () => {
 
     describe('value', () => {
       test('should have value="test value"', () => {
-        const wrapper = mount(<TextField value="test value" />).prop('value');
+        const wrapper = mount(<Textfield value="test value" />).prop('value');
         expect(wrapper).toBe('test value');
       });
     });
@@ -137,7 +137,7 @@ describe('TextField', () => {
     describe('onChange', () => {
       test('should update input value when called', () => {
         const spy = jest.fn();
-        const wrapper = mount(<TextField value="" onChange={spy} />);
+        const wrapper = mount(<Textfield value="" onChange={spy} />);
         wrapper.find('input').simulate('change');
         expect(spy).toHaveBeenCalledTimes(1);
       });

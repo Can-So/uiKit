@@ -8,7 +8,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../../../package.json';
-import '../../TextField';
+import '../../Textfield';
 
 // This is a global mock for this file that will mock all components wrapped with analytics
 // and replace them with an empty SFC that returns null. This includes components imported
@@ -19,7 +19,7 @@ jest.mock('@atlaskit/analytics-next', () => ({
   createAndFireEvent: jest.fn(() => jest.fn(args => args)),
 }));
 
-describe('TextField', () => {
+describe('Textfield', () => {
   it('should be wrapped with analytics context', () => {
     expect(withAnalyticsContext).toHaveBeenCalledWith({
       componentName: 'textField',

@@ -6,7 +6,7 @@ export default md`
 Text Field provides a form input.
 
 ${code`
-import TextField from '@atlaskit/textfield';
+import Textfield from '@atlaskit/textfield';
 `}
 
 @atlaskit/textfield exports a default component, that is optionally controllable.
@@ -34,7 +34,7 @@ To control the component, specify a value prop; to specify the defaultValue but 
 
   ${(
     <Props
-      props={require('!!extract-react-types-loader!../src/components/TextField')}
+      props={require('!!extract-react-types-loader!../src/components/Textfield')}
     />
   )}
 `;

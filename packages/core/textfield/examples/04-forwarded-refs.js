@@ -2,7 +2,7 @@
 
 import React, { Component, type ElementRef } from 'react';
 import Button from '@atlaskit/button';
-import TextField from '../src';
+import Textfield from '../src';
 
 type Props = {};
 type FormRef = {
@@ -23,10 +23,10 @@ class TextFieldExample extends Component<Props> {
   render() {
     return (
       <div>
-        <TextField ref={this.handleRef} />
+        <Textfield ref={this.handleRef} />
         <p>
           <Button appearance="primary" onClick={this.handleFocus}>
-            Focus TextField
+            Focus Textfield
           </Button>
         </p>
       </div>
