@@ -7,7 +7,7 @@ import { GOOGLE_ANALYTICS_ID } from '../../constants';
 
 let mounted = 0;
 
-const getPageLoadNumber = () => {
+export const getPageLoadNumber = () => {
   if (!window || !window.performance || !window.performance.getEntriesByType) {
     return null;
   }

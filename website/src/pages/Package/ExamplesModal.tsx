@@ -346,7 +346,6 @@ export default class ExamplesModal extends React.Component<Props, State> {
 
     let example;
     if (exampleId && examples) {
-      // @ts-ignore - to discuss with Ben
       example = fs.getById(fs.getFiles(examples.children), exampleId);
     }
 
@@ -408,7 +407,6 @@ export default class ExamplesModal extends React.Component<Props, State> {
             {examples && exampleId && loaderUrl ? (
               <ExampleDisplay
                 displayCode={displayCode}
-                // @ts-ignore - to discuss with Ben
                 example={fs.getById(fs.getFiles(examples.children), exampleId)}
                 name={pkgJSON.name}
                 src={loaderUrl}

@@ -97,6 +97,17 @@ export function findNormalized(
   });
 }
 
+export function findNormalizedDir(
+  dir: Directory,
+  filePath: string,
+): Directory | null {
+  let dir2 = find(dir, (file, currPath) => {
+    return normalize(currPath) === filePath;
+  });
+  if (dir2 && dir2.type !== 'dir') return null;
+  else return dir2 as Directory;
+}
+
 export function normalize(filePath: string): string {
   return filePath
     .split('/')

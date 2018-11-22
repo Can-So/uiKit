@@ -10,7 +10,7 @@ const atlaskitTitle = 'h1';
 
 BrowserTestCase(
   'home.js: The website home page should be displayed without errors',
-  { skip: [''] },
+  { skip: [] },
   async client => {
     const homeTest = new Page(client);
     await homeTest.goto(urlHome);

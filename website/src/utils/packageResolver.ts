@@ -1,5 +1,6 @@
 import * as fs from './fs';
 import { packages as packagesData } from '../site';
+import { Directory } from '../types';
 
 export default (
   groupId?: string,
@@ -15,14 +16,14 @@ export default (
   const resolvedPackageId = packageId || packages[0].id;
   const pkg = fs.getById(packages, resolvedPackageId);
 
-  const examples = fs.findNormalized(
-    pkg,
-    `${resolvedPackageId}/${examplesPath}`,
-  );
+  let examples = fs.findNormalized(pkg, `${resolvedPackageId}/${examplesPath}`);
+
+  examples =
+    examples && examples.type === 'dir' ? (examples as Directory) : null;
+
   let example;
 
   if (examples) {
-    // @ts-ignore - to discuss with Ben
     example = fs.find(examples, file => {
       if (exampleId) {
         return fs.normalize(file.id) === exampleId;

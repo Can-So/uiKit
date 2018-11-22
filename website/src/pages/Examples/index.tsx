@@ -407,7 +407,6 @@ export default class Examples extends React.Component<Props, State> {
         {examples && exampleId ? (
           <ExampleDisplay
             displayCode={this.state.displayCode}
-            // @ts-ignore - to discuss with Ben
             example={fs.getById(fs.getFiles(examples.children), exampleId)}
             name={config.name}
             src={loaderUrl}
