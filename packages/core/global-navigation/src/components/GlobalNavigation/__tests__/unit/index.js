@@ -53,7 +53,7 @@ describe('GlobalNavigation', () => {
 
       const productIcon = wrapper.find(EmojiAtlassianIcon);
       expect(productIcon.exists()).toBeTruthy();
-      expect(wrapper.find('a').props().href).toEqual('/testtest');
+      expect(wrapper.find('a').prop('href')).toEqual('/testtest');
     });
 
     it('should pass both href and onClick for product logo', () => {
@@ -69,7 +69,7 @@ describe('GlobalNavigation', () => {
       const productIcon = wrapper.find(EmojiAtlassianIcon);
 
       expect(productIcon.exists()).toBeTruthy();
-      expect(wrapper.find('a').props().href).toEqual('/testtest');
+      expect(wrapper.find('a').prop('href')).toEqual('/testtest');
 
       productIcon.simulate('click');
       expect(mockProductClick).toHaveBeenCalled();
@@ -140,7 +140,7 @@ describe('GlobalNavigation', () => {
           const icon = wrapper.find(akIcon);
           icon.simulate('click');
           expect(
-            wrapper.find('DrawerBase').props().shouldUnmountOnExit,
+            wrapper.find('DrawerBase').prop('shouldUnmountOnExit'),
           ).toBeFalsy();
 
           wrapper.setProps({
@@ -148,7 +148,7 @@ describe('GlobalNavigation', () => {
           });
           wrapper.update();
           expect(
-            wrapper.find('DrawerBase').props().shouldUnmountOnExit,
+            wrapper.find('DrawerBase').prop('shouldUnmountOnExit'),
           ).toBeTruthy();
         });
 
@@ -260,7 +260,7 @@ describe('GlobalNavigation', () => {
             // Cannot assert for the drawer to be absent because it is
             // dismounted by ReactTransitionGroup on animationEnd, which is not
             // being captured by enzyme.
-            expect(wrapper.find('DrawerPrimitive').props().in).toBeFalsy();
+            expect(wrapper.find('DrawerPrimitive').prop('in')).toBeFalsy();
           });
 
           //  There is no onXOpen callback for controlled drawers. A consumer can
@@ -366,9 +366,9 @@ describe('GlobalNavigation', () => {
           defaultWrapper
             .find(icon)
             .parents('Tooltip')
-            .props().content,
+            .prop('content'),
         ).toBe(defaultTooltip);
-        expect(defaultWrapper.find(icon).props().label).toBe(defaultTooltip);
+        expect(defaultWrapper.find(icon).prop('label')).toBe(defaultTooltip);
       });
     });
 
@@ -378,9 +378,9 @@ describe('GlobalNavigation', () => {
           customTooltipWrapper
             .find(icon)
             .parents('Tooltip')
-            .props().content,
+            .prop('content'),
         ).toBe(`${name} tooltip`);
-        expect(customTooltipWrapper.find(icon).props().label).toBe(
+        expect(customTooltipWrapper.find(icon).prop('label')).toBe(
           `${name} tooltip`,
         );
       });
@@ -512,7 +512,7 @@ describe('GlobalNavigation', () => {
         />,
       );
 
-      expect(wrapper.find(ItemComponent).props().badgeCount).toBe(15);
+      expect(wrapper.find(ItemComponent).prop('badgeCount')).toBe(15);
     });
   });
 
@@ -554,9 +554,9 @@ describe('GlobalNavigation', () => {
         wrapper
           .find(NotificationIcon)
           .parents('Tooltip')
-          .props().content,
+          .prop('content'),
       ).toBe('Notification tooltip from product');
-      expect(wrapper.find(NotificationIcon).props().label).toBe(
+      expect(wrapper.find(NotificationIcon).prop('label')).toBe(
         'Notification tooltip from product',
       );
     });
@@ -617,7 +617,7 @@ describe('GlobalNavigation', () => {
         notificationCount: 0,
       });
       wrapper.update();
-      expect(wrapper.find(NotificationIndicator).props().refreshRate).toEqual(
+      expect(wrapper.find(NotificationIndicator).prop('refreshRate')).toEqual(
         60000,
       );
     });
@@ -637,7 +637,7 @@ describe('GlobalNavigation', () => {
       });
       wrapper.update();
 
-      expect(wrapper.find(NotificationIndicator).props().refreshRate).toEqual(
+      expect(wrapper.find(NotificationIndicator).prop('refreshRate')).toEqual(
         180000,
       );
     });
@@ -701,7 +701,7 @@ describe('GlobalNavigation', () => {
         notificationCount: 5,
       });
 
-      expect(wrapper.find(ItemComponent).props().badgeCount).toBe(5);
+      expect(wrapper.find(ItemComponent).prop('badgeCount')).toBe(5);
     });
 
     it('should unmount NotificationIndicator when notification drawer is open', () => {
@@ -761,10 +761,10 @@ describe('GlobalNavigation', () => {
 
     it('should render the correct tooltip', () => {
       // AppSwitcher doesn't have a default tooltip in global navigation as it's handled by the base app switcher component
-      expect(defaultWrapper.find(AppSwitcher).props().label).toBe(
+      expect(defaultWrapper.find(AppSwitcher).prop('label')).toBe(
         'appSwitcher tooltip',
       );
-      expect(defaultWrapper.find(AppSwitcher).props().tooltip).toBe(
+      expect(defaultWrapper.find(AppSwitcher).prop('tooltip')).toBe(
         'appSwitcher tooltip',
       );
     });
@@ -856,7 +856,7 @@ describe('GlobalNavigation', () => {
       );
 
       expect(wrapper.find('DefaultImage').exists()).toBeFalsy();
-      expect(wrapper.find('Avatar').props().src).toEqual(
+      expect(wrapper.find('Avatar').prop('src')).toEqual(
         '//url.to.image/fancy',
       );
     });
