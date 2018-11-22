@@ -15,7 +15,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 var MenuExpandIcon = function MenuExpandIcon(props) {
   return _react.default.createElement(_index.default, _extends({
-    dangerouslySetGlyph: "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" focusable=\"false\" role=\"presentation\"><g fill-rule=\"evenodd\"><mask id=\"a\" fill=\"inherit\"><use/></mask><use fill=\"currentColor\" fill-rule=\"nonzero\"/><g mask=\"url(#a)\" fill=\"currentColor\"><path d=\"M0 24h24V0H0z\"/></g></g></svg>"
+    dangerouslySetGlyph: "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" focusable=\"false\" role=\"presentation\"><path d=\"M6 12c0-.552.456-1 1.002-1h9.996a.999.999 0 1 1 0 2H7.002A.999.999 0 0 1 6 12zm0 4c0-.552.456-1 1.002-1h9.996a.999.999 0 1 1 0 2H7.002A.999.999 0 0 1 6 16zm0-8c0-.552.456-1 1.002-1h9.996a.999.999 0 1 1 0 2H7.002A.999.999 0 0 1 6 8z\" fill=\"currentColor\"/></svg>"
   }, props));
 };
 
