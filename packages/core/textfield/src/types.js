@@ -37,7 +37,7 @@ export type TextFieldProps = {
   createAnalyticsEvent: (SyntheticEvent<>) => void,
   /** Sets a default value as input value */
   defaultValue?: string,
-  /** Set whether the fields should expand to fill available horizontal space. */
+  /** Applies compact styling, making the field smaller */
   isCompact?: boolean,
   /** Sets the field as uneditable, with a changed hover state. */
   isDisabled?: boolean,
