@@ -173,7 +173,7 @@ class Avatar extends Component<AvatarPropTypes> {
     Inner.displayName = 'Inner';
 
     const AvatarNode = (
-      <Theme theme={this.props.theme}>
+      <Theme.Provider theme={this.props.theme}>
         <Outer size={size} stackIndex={stackIndex}>
           <Inner
             innerRef={this.setRef}
@@ -189,7 +189,7 @@ class Avatar extends Component<AvatarPropTypes> {
           </Inner>
           {this.renderIcon()}
         </Outer>
-      </Theme>
+      </Theme.Provider>
     );
 
     return enableTooltip && name ? (

@@ -15,27 +15,27 @@ test('returns component', () => {
 test('component as a consumer', done => {
   const Theme = createTheme(() => ({ test: true }));
   mount(
-    <Theme>
+    <Theme.Consumer>
       {theme => {
         expect(theme.test).toBe(true);
         done();
       }}
-    </Theme>,
+    </Theme.Consumer>,
   );
 });
 
 test('component as a provider (uses composition)', done => {
   const Theme = createTheme(() => ({ test1: true, test2: false }));
   mount(
-    <Theme theme={parent => ({ ...parent, test2: true })}>
-      <Theme>
+    <Theme.Provider theme={parent => ({ ...parent, test2: true })}>
+      <Theme.Consumer>
         {theme => {
           expect(theme.test1).toBe(true);
           expect(theme.test2).toBe(true);
           done();
         }}
-      </Theme>
-    </Theme>,
+      </Theme.Consumer>
+    </Theme.Provider>,
   );
 });
 
@@ -68,8 +68,8 @@ test('cascade order', done => {
     return { supplied: true };
   };
   mount(
-    <Theme theme={context}>
-      <Theme props={{ test: true }} theme={supplied}>
+    <Theme.Provider theme={context}>
+      <Theme.Consumer props={{ test: true }} theme={supplied}>
         {theme => {
           expect(theme).toEqual({
             default: undefined,
@@ -78,7 +78,7 @@ test('cascade order', done => {
           });
           done();
         }}
-      </Theme>
-    </Theme>,
+      </Theme.Consumer>
+    </Theme.Provider>,
   );
 });

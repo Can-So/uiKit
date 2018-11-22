@@ -2,10 +2,10 @@
 
 import React from 'react';
 import color from 'color';
-import { createTheme, Theme } from '../src';
+import { createTheme } from '../src';
 
 const DisplayThemeColors = () => (
-  <Theme>
+  <Theme.Consumer>
     {theme =>
       Object.keys(theme).map(k => (
         <div
@@ -23,10 +23,10 @@ const DisplayThemeColors = () => (
         </div>
       ))
     }
-  </Theme>
+  </Theme.Consumer>
 );
 
-const Theme1 = createTheme<
+const Theme = createTheme<
   {
     backgroundColor?: string,
     textColor?: string,
@@ -36,13 +36,12 @@ const Theme1 = createTheme<
   backgroundColor: '#333',
   textColor: '#eee',
 }));
-// const Theme2 = createTheme(t => ({ ...t, backgroundColor: 'palevioletred' }));
 
 export default () => (
-  <Theme1>
+  <Theme.Provider>
     <DisplayThemeColors />
-    <Theme values={t => ({ ...t, backgroundColor: 'palevioletred' })}>
+    <Theme.Provider theme={t => ({ ...t, backgroundColor: 'palevioletred' })}>
       <DisplayThemeColors />
-    </Theme>
-  </Theme1>
+    </Theme.Provider>
+  </Theme.Provider>
 );

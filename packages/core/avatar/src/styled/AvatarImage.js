@@ -33,7 +33,7 @@ export const Slot = ({
   label,
   role,
 }: SlotProps) => (
-  <Theme
+  <Theme.Consumer
     props={{
       appearance,
       isLoading,
@@ -60,7 +60,7 @@ export const Slot = ({
         />
       );
     }}
-  </Theme>
+  </Theme.Consumer>
 );
 
 type SvgProps = {
@@ -77,7 +77,7 @@ export const Svg = ({
   isLoading,
   ...otherProps
 }: SvgProps) => (
-  <Theme
+  <Theme.Consumer
     props={{
       appearance,
       isLoading,
@@ -99,5 +99,5 @@ export const Svg = ({
         </svg>
       );
     }}
-  </Theme>
+  </Theme.Consumer>
 );

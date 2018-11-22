@@ -37,7 +37,7 @@ export default class Lozenge extends PureComponent<Props> {
   render() {
     const { props } = this;
     return (
-      <Theme props={props} theme={props.theme}>
+      <Theme.Consumer props={props} theme={props.theme}>
         {theme => {
           return (
             <Container {...theme}>
@@ -45,7 +45,7 @@ export default class Lozenge extends PureComponent<Props> {
             </Container>
           );
         }}
-      </Theme>
+      </Theme.Consumer>
     );
   }
 }

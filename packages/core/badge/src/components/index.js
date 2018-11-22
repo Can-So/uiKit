@@ -73,7 +73,7 @@ export default class Badge extends Component<Props> {
     return (
       <ThemeGlobal>
         {({ mode }) => (
-          <Theme
+          <Theme.Consumer
             props={{ appearance: props.appearance, mode }}
             theme={props.theme}
           >
@@ -88,7 +88,7 @@ export default class Badge extends Component<Props> {
                 )}
               </Container>
             )}
-          </Theme>
+          </Theme.Consumer>
         )}
       </ThemeGlobal>
     );

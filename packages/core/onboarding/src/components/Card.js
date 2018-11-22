@@ -93,7 +93,7 @@ const Card = ({
 }: Props) => {
   const { Header = DefaultHeader, Footer = DefaultFooter } = components;
   return (
-    <Theme theme={theme} props={undefined}>
+    <Theme.Consumer theme={theme} props={undefined}>
       {({ container }) => {
         return (
           <Container theme={container} innerRef={innerRef}>
@@ -130,7 +130,7 @@ const Card = ({
           </Container>
         );
       }}
-    </Theme>
+    </Theme.Consumer>
   );
 };
 

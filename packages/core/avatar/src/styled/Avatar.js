@@ -8,7 +8,7 @@ import { Theme } from '../theme';
 import { getInnerStyles } from './utils';
 
 export default (props: { children: Node, stackIndex: ?number }) => (
-  <Theme props={{ ...props, includeBorderWidth: true }}>
+  <Theme.Consumer props={{ ...props, includeBorderWidth: true }}>
     {({ dimensions }) => {
       return (
         <div
@@ -24,7 +24,7 @@ export default (props: { children: Node, stackIndex: ?number }) => (
         </div>
       );
     }}
-  </Theme>
+  </Theme.Consumer>
 );
 
 // TODO this doesn't appear to be used anywhere so we should look at removing.
@@ -33,7 +33,7 @@ export const Inner = withTheme(styled.div`
 `);
 
 export const PresenceWrapper = (props: { children: Node }) => (
-  <Theme props={{ ...props, includeBorderWidth: true }}>
+  <Theme.Consumer props={{ ...props, includeBorderWidth: true }}>
     {({ presence }) => {
       return (
         <span
@@ -47,11 +47,11 @@ export const PresenceWrapper = (props: { children: Node }) => (
         </span>
       );
     }}
-  </Theme>
+  </Theme.Consumer>
 );
 
 export const StatusWrapper = (props: { children: Node }) => (
-  <Theme props={{ ...props, includeBorderWidth: true }}>
+  <Theme.Consumer props={{ ...props, includeBorderWidth: true }}>
     {({ status }) => {
       return (
         <span
@@ -64,5 +64,5 @@ export const StatusWrapper = (props: { children: Node }) => (
         </span>
       );
     }}
-  </Theme>
+  </Theme.Consumer>
 );

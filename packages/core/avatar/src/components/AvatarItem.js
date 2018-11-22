@@ -100,7 +100,7 @@ class AvatarItem extends Component<Props> {
     return (
       <ThemeGlobal>
         {({ mode }) => (
-          <ThemeItem theme={this.props.theme}>
+          <ThemeItem.Consumer theme={this.props.theme}>
             {theme => {
               // maintain the illusion of a mask around presence/status
               const borderColor = getBackgroundColor({
@@ -127,7 +127,7 @@ class AvatarItem extends Component<Props> {
                 </StyledComponent>
               );
             }}
-          </ThemeItem>
+          </ThemeItem.Consumer>
         )}
       </ThemeGlobal>
     );
