@@ -320,6 +320,25 @@ describe('CollectionFetcher', () => {
       expect(collectionCache['some-collection-name'].items).toHaveLength(0);
       expect(removeSpy).toHaveBeenCalledWith('some-id-some-collection-name');
     });
+
+    it('should propagate the change in cached observable', async () => {
+      const { collectionFetcher } = setup();
+
+      const updatedItems = await new Promise(async resolve => {
+        collectionCache['some-collection-name'].subject.subscribe({
+          next: items => {
+            resolve(items);
+          },
+        });
+
+        await collectionFetcher.removeFile(
+          'some-id',
+          'some-collection-name',
+          'some-occurrence-key',
+        );
+      });
+      expect(updatedItems).toEqual([]);
+    });
   });
 });
 

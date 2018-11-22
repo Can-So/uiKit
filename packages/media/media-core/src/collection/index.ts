@@ -151,6 +151,8 @@ export class CollectionFetcher {
       occurrenceKey,
     );
     this.removeFromCache(id, collectionName);
+    const collection = collectionCache[collectionName];
+    collection.subject.next(collection.items);
   }
 
   async loadNextPage(
