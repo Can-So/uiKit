@@ -115,6 +115,7 @@ export class JiraQuickSearchContainer extends React.Component<
     searchSessionId,
   }) => {
     const query = latestSearchQuery;
+    const isPreQuery = !query; // it's true if the query is empty
     return (
       <SearchResultsComponent
         query={query}
@@ -141,7 +142,7 @@ export class JiraQuickSearchContainer extends React.Component<
             <JiraAdvancedSearch
               analyticsData={analyticsData}
               query={query}
-              showKeyboardLozenge
+              showKeyboardLozenge={!isPreQuery && !keepPreQueryState}
               showSearchIcon
               onAdvancedSearchChange={this.onAdvancedSearchChange}
             />
