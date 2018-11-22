@@ -522,7 +522,7 @@ describe('GlobalNavigation', () => {
     it('should not render when either fabricID or fabricNotificationLogUrl are missing', () => {
       const wrapper = mount(<GlobalNavigation product="jira" locale="en" />);
 
-      const icon = wrapper.find('NotificationIcon');
+      const icon = wrapper.find(NotificationIcon);
       expect(icon.exists()).toBeFalsy();
     });
 
@@ -535,7 +535,7 @@ describe('GlobalNavigation', () => {
           cloudId={cloudId}
         />,
       );
-      const icon = wrapper.find('NotificationIcon');
+      const icon = wrapper.find(NotificationIcon);
       expect(icon.exists()).toBeTruthy();
     });
 
@@ -552,11 +552,11 @@ describe('GlobalNavigation', () => {
 
       expect(
         wrapper
-          .find('NotificationIcon')
+          .find(NotificationIcon)
           .parents('Tooltip')
           .props().content,
       ).toBe('Notification tooltip from product');
-      expect(wrapper.find('NotificationIcon').props().label).toBe(
+      expect(wrapper.find(NotificationIcon).props().label).toBe(
         'Notification tooltip from product',
       );
     });
@@ -570,7 +570,7 @@ describe('GlobalNavigation', () => {
           cloudId={cloudId}
         />,
       );
-      const icon = wrapper.find('NotificationIcon');
+      const icon = wrapper.find(NotificationIcon);
       icon.simulate('click');
 
       expect(wrapper.find('NotificationDrawer').exists()).toBeTruthy();
@@ -586,7 +586,7 @@ describe('GlobalNavigation', () => {
           notificationDrawerContents={DrawerContents}
         />,
       );
-      const icon = wrapper.find('NotificationIcon');
+      const icon = wrapper.find(NotificationIcon);
       icon.simulate('click');
 
       expect(wrapper.find(DrawerContents).exists()).toBeTruthy();
@@ -712,7 +712,7 @@ describe('GlobalNavigation', () => {
         />,
       );
 
-      const icon = wrapper.find('NotificationIcon');
+      const icon = wrapper.find(NotificationIcon);
       icon.simulate('click');
 
       expect(wrapper.find(NotificationIndicator).exists()).toBeFalsy();
