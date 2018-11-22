@@ -1,0 +1,1 @@
+- Do not jump over the link if invalid

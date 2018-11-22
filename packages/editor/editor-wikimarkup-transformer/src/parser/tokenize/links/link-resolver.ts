@@ -53,8 +53,8 @@ export function resolveLink(
   }
 
   return {
-    length,
+    length: 1,
     type: 'text',
-    text: `[${link.originalLinkText}]`,
+    text: `[`,
   };
 }
