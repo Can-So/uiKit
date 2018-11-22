@@ -18,6 +18,9 @@
 ## 3.25.0
 - [minor] [d96b032](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d96b032):
 
+  - BREAKING: A breaking change was accidentally released in this version.
+
+    The API for renderer items that use components as their \`type\` property have now changed to use a type value of \`'InlineComponent'\` and specify the component via a \`component\` prop instead. See the View the [v3 - v4 upgrade guide](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/upgrade-guide) for more information.
   - Export flow types for each built-in item renderer type
   - Export a generic flow typed version of the renderer, `TypedViewRenderer`, that is designed to be extended to pass custom component flow types
     so the renderer typechecks custom components. See the [View Renderer documentation](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/state-controllers#view-renderer) for more information.

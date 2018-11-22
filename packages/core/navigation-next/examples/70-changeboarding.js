@@ -12,7 +12,7 @@ import {
   NavigationProvider,
   UIControllerSubscriber,
   UIController,
-  withNavigationUI,
+  withNavigationUIController,
 } from '../src';
 
 const GlobalNavigation = () => (
@@ -95,7 +95,7 @@ class Example extends Component<ExampleProps, ExampleState> {
     );
   }
 }
-const ExampleWithNavigationUI = withNavigationUI(Example);
+const ExampleWithNavigationUI = withNavigationUIController(Example);
 
 export default () => (
   <NavigationProvider>

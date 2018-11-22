@@ -359,7 +359,6 @@ Here's what changed:
 
 1. We added a view called \`'project/home'\` with the \`'container'\` type. We register this view along with the rest of the views in our App's \`componentDidMount\` method.
 2. We created a new component for the projects route, which sets the \`project/home\` view when it mounts. We added a \`Link\` to this route in the Dashboards component.
-3. We set the \`product/home\` view as the initial peek view in our App's \`componentDidMount\` method. The 'peek view' is the product navigation view which should be active when a container view is being rendered over the top of the product navigation layer. **Note:** The concept of peeking has been removed from the UX spec so this feature will soon be deprecated and removed, but please continue to do this for now.
 
 ${<H>Using reducers</H>}
 

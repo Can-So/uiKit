@@ -2,6 +2,10 @@
 
 import React from 'react';
 import { JiraWordmark as JiraWordmarkLogo } from '@atlaskit/logo';
+import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
+import FolderIcon from '@atlaskit/icon/glyph/folder';
+import IssuesIcon from '@atlaskit/icon/glyph/issues';
+
 import { LinkItem } from '../../components';
 import type { NavigationRendererItemType } from '../../../../src/';
 
@@ -27,7 +31,7 @@ const getItems = (): NavigationRendererItemType<{
         component: LinkItem,
         id: 'dashboards',
         text: 'Dashboards',
-        icon: 'DashboardIcon',
+        before: DashboardIcon,
         to: '/',
       },
       {
@@ -35,18 +39,18 @@ const getItems = (): NavigationRendererItemType<{
         type: 'LinkItem',
         id: 'projects',
         text: 'Projects',
-        icon: 'FolderIcon',
+        before: FolderIcon,
         to: '/projects',
       },
       {
-        icon: 'IssuesIcon',
+        before: IssuesIcon,
         goTo: 'root/issues',
         id: 'issues',
         text: 'Issues',
         type: 'GoToItem',
       },
       {
-        icon: 'IssuesIcon',
+        before: IssuesIcon,
         goTo: 'root/sortable-issues',
         id: 'sortable-issues',
         text: 'Sortable Issues',

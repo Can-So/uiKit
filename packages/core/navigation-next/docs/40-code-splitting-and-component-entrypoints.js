@@ -34,7 +34,7 @@ export default (
 
   ${code`
   import LayoutManagerWithViewController from '@atlaskit/navigation-next/LayoutManagerWithViewController';
-  import ViewRenderer from '@atlaskit/navigation-next/ViewRenderer';
+  import ItemsRenderer from '@atlaskit/navigation-next/ItemsRenderer';
   import SkeletonContainerView from '@atlaskit/navigation-next/SkeletonContainerView';
   import NavigationProvider from '@atlaskit/navigation-next/NavigationProvider';
   import AsyncLayoutManagerWithViewController from '@atlaskit/navigation-next/AsyncLayoutManagerWithViewController';
@@ -47,14 +47,14 @@ export default (
   import {
     UIController,
     UIControllerSubscriber,
-    withNavigationUI,
+    withNavigationUIController,
   } from '@atlaskit/navigation-next/ui-controller';
   `}
 
   ## Exposed entrypoints
 
   * \`atlaskit/navigation-next/LayoutManagerWithViewController\`
-  * \`atlaskit/navigation-next/ViewRenderer\`
+  * \`atlaskit/navigation-next/ItemsRenderer\`
   * \`atlaskit/navigation-next/SkeletonContainerView\`
   * \`atlaskit/navigation-next/NavigationProvider\`
   * \`atlaskit/navigation-next/AsyncLayoutManagerWithViewController\`

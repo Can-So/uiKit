@@ -13,10 +13,10 @@ import LayoutManagerWithViewController from '../../index';
 // $ExpectError - missing globalNavigation prop
 <LayoutManagerWithViewController>Page</LayoutManagerWithViewController>;
 
-// $ExpectError - viewRenderer should not being passed
+// $ExpectError - itemsRenderer should not being passed
 <LayoutManagerWithViewController
   globalNavigation={() => null}
-  viewRenderer={() => null}
+  itemsRenderer={() => null}
 >
   Page
 </LayoutManagerWithViewController>;

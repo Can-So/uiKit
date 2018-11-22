@@ -2,14 +2,13 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { HashRouter } from 'react-router-dom';
 
 import AsyncLayoutManagerWithViewController from '../../AsyncLayoutManagerWithViewController';
 import { NavigationProvider } from '../../../../../index';
 
 const GlobalNavigationComponent = () => null;
 const SkeletonContainerView = () => null;
-const ViewRenderer = () => null;
+const ItemsRenderer = () => null;
 
 describe('AsyncLayoutManagerWithViewController', () => {
   let wrapper;
@@ -28,30 +27,24 @@ describe('AsyncLayoutManagerWithViewController', () => {
     getRefs = jest.fn();
 
     wrapper = mount(
-      <HashRouter>
-        <NavigationProvider
-          cache={false}
-          initialPeekViewId="root/index"
-          isDebugEnabled={false}
+      <NavigationProvider cache={false} isDebugEnabled={false}>
+        <AsyncLayoutManagerWithViewController
+          globalNavigation={GlobalNavigationComponent}
+          firstSkeletonToRender={'product'}
+          onCollapseStart={onCollapseStart}
+          onCollapseEnd={onCollapseEnd}
+          onExpandStart={onExpandStart}
+          onExpandEnd={onExpandEnd}
+          containerSkeleton={SkeletonContainerView}
+          itemsRenderer={ItemsRenderer}
+          getRefs={getRefs}
         >
-          <AsyncLayoutManagerWithViewController
-            globalNavigation={GlobalNavigationComponent}
-            firstSkeletonToRender={'product'}
-            onCollapseStart={onCollapseStart}
-            onCollapseEnd={onCollapseEnd}
-            onExpandStart={onExpandStart}
-            onExpandEnd={onExpandEnd}
-            containerSkeleton={SkeletonContainerView}
-            viewRenderer={ViewRenderer}
-            getRefs={getRefs}
-          >
-            <p>
-              Children requires to have `NavigationProvider` as a parent Because
-              of `unstated`. This is an issue
-            </p>
-          </AsyncLayoutManagerWithViewController>
-        </NavigationProvider>
-      </HashRouter>,
+          <p>
+            Children requires to have `NavigationProvider` as a parent Because
+            of `unstated`. This is an issue
+          </p>
+        </AsyncLayoutManagerWithViewController>
+      </NavigationProvider>,
     );
   });
 
@@ -94,30 +87,24 @@ describe('AsyncLayoutManagerWithViewController', () => {
 
     it('should render skeleton using `container` context', () => {
       const containerWrapper = mount(
-        <HashRouter>
-          <NavigationProvider
-            cache={false}
-            initialPeekViewId="root/index"
-            isDebugEnabled={false}
+        <NavigationProvider cache={false} isDebugEnabled={false}>
+          <AsyncLayoutManagerWithViewController
+            globalNavigation={GlobalNavigationComponent}
+            firstSkeletonToRender={'container'}
+            onCollapseStart={onCollapseStart}
+            onCollapseEnd={onCollapseEnd}
+            onExpandStart={onExpandStart}
+            onExpandEnd={onExpandEnd}
+            containerSkeleton={SkeletonContainerView}
+            itemsRenderer={ItemsRenderer}
+            getRefs={getRefs}
           >
-            <AsyncLayoutManagerWithViewController
-              globalNavigation={GlobalNavigationComponent}
-              firstSkeletonToRender={'container'}
-              onCollapseStart={onCollapseStart}
-              onCollapseEnd={onCollapseEnd}
-              onExpandStart={onExpandStart}
-              onExpandEnd={onExpandEnd}
-              containerSkeleton={SkeletonContainerView}
-              viewRenderer={ViewRenderer}
-              getRefs={getRefs}
-            >
-              <p>
-                Children requires to have `NavigationProvider` as a parent
-                Because of `unstated`. This is an issue
-              </p>
-            </AsyncLayoutManagerWithViewController>
-          </NavigationProvider>
-        </HashRouter>,
+            <p>
+              Children requires to have `NavigationProvider` as a parent Because
+              of `unstated`. This is an issue
+            </p>
+          </AsyncLayoutManagerWithViewController>
+        </NavigationProvider>,
       );
 
       expect(
