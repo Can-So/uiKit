@@ -294,6 +294,12 @@ export default class GlobalNavigation extends Component<
   };
 
   renderNotificationBadge = () => {
+    if (this.state.isNotificationDrawerOpen) {
+      // Unmount the badge when the drawer is open
+      // So that it can remount with the latest badgeCount when the drawer closes.
+      return null;
+    }
+
     const { cloudId, fabricNotificationLogUrl } = this.props;
     const refreshRate = this.state.notificationCount ? 180000 : 60000;
 
