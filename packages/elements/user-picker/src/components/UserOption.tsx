@@ -30,11 +30,6 @@ export const TextWrapper = styled.div`
   text-overflow: ellipsis;
 `;
 
-export const OptionWrapper = styled.div`
-  & ${TextWrapper} {
-  }
-`;
-
 export type UserOptionProps = {
   user: User;
   status: string;
