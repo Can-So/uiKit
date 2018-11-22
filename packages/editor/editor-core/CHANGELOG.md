@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.4.2
+- [patch] [6e4570d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e4570d):
+
+  - Add height check when rendering images
+
 ## 88.4.1
 - [patch] [8974838](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8974838):
 
