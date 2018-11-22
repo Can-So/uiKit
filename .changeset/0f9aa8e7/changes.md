@@ -1,1 +1,0 @@
-- Refactor mentions to use TypeAhead plugin

@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.4.0
+- [minor] [6d6522b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d6522b):
+
+  - Refactor mentions to use TypeAhead plugin
+
 ## 88.3.0
 - [patch] [43f178a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/43f178a):
 
