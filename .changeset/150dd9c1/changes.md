@@ -1,0 +1,1 @@
+- ED-5771: fix wide and full-width images in renderer
