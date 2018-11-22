@@ -47,10 +47,7 @@ export default class App extends Component<
 
     return (
       <HashRouter>
-        <NavigationProvider
-          initialPeekViewId="root/index"
-          isDebugEnabled={isDebugEnabled}
-        >
+        <NavigationProvider isDebugEnabled={isDebugEnabled}>
           <LayoutManagerWithViewController
             customComponents={{ LinkItem, ProjectSwitcher }}
             experimental_flyoutOnHover={isFlyoutAvailable}

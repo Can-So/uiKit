@@ -1477,6 +1477,11 @@ var _default = {
     componentName: 'RefreshIcon',
     package: '@atlaskit/icon/glyph/refresh'
   },
+  retry: {
+    keywords: ['retry', 'icon', 'core'],
+    componentName: 'RetryIcon',
+    package: '@atlaskit/icon/glyph/retry'
+  },
   roadmap: {
     keywords: ['roadmap', 'icon', 'core'],
     componentName: 'RoadmapIcon',

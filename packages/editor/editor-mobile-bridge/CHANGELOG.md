@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.0.0
+- [major] [6d6522b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d6522b):
+
+  - Refactor mentions to use TypeAhead plugin
+
 ## 5.6.0
 - [minor] [d901563](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d901563):
 

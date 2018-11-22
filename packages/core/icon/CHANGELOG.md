@@ -1,5 +1,10 @@
 # @atlaskit/icon
 
+## 14.5.0
+- [minor] [f5e26e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e26e1):
+
+  - Add a retry icon
+
 ## 14.4.0
 - [patch] [29b160f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29b160f):
 

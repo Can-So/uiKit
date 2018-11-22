@@ -1,5 +1,14 @@
 # @atlaskit/global-navigation
 
+## 5.3.2
+- Updated dependencies [8e753fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e753fc):
+  - @atlaskit/navigation-next@4.0.0
+
+## 5.3.1
+- [patch] [3e7125a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3e7125a):
+
+  - Fixes a bug that prevented the notification badge from clearing when the notification drawer is opened.
+
 ## 5.3.0
 - [minor] [ffb0d5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ffb0d5a):
 

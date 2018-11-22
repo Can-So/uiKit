@@ -15,10 +15,10 @@ interface AvatarText {
 }
 
 const AvatarComponent = styled.div`
-  padding: 0;
-  margin: 0;
-  border: none;
-  &:hover {
+  &,
+  &:hover,
+  &:active,
+  &:focus {
     padding: 0;
     margin: 0;
     border: none;
