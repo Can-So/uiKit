@@ -1,0 +1,1 @@
+- FM-1388: Add bridge API to both editor and renderer to set padding
