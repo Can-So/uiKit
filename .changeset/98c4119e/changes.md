@@ -1,1 +1,0 @@
-- FS-3188 fix dragging option issue
