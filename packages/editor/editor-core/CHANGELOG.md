@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 88.4.3
+- [patch] [96c125b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/96c125b):
+
+  - Fixes an issue where using arrow keys to navigate between mention nodes would put the cursor in unexpected locations.
+
 ## 88.4.2
 - [patch] [6e4570d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e4570d):
 
