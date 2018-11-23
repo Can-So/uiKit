@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.1.8
+- [patch] [416fbb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/416fbb3):
+
+  - ED-3298: codeBlocks inside lists
+
 ## 5.1.7
 - [patch] [409e610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/409e610):
 

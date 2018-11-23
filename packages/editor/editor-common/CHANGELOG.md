@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 21.4.1
+- [patch] [416fbb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/416fbb3):
+
+  - ED-3298: codeBlocks inside lists
+
 ## 21.4.0
 - [minor] [6d6522b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d6522b):
 
