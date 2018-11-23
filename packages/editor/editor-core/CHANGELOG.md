@@ -1,5 +1,14 @@
 # @atlaskit/editor-core
 
+## 88.5.2
+- [patch] [b73607f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b73607f):
+
+  - ED-5770: fix resizer for media @ 0 and non-dynamic text sizes
+
+- [patch] [7a9f647](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a9f647):
+
+  - ensure toolbar always appears even if media re-renders (e.g. resizer)
+
 ## 88.5.1
 - [patch] [ab6d96b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6d96b):
 
