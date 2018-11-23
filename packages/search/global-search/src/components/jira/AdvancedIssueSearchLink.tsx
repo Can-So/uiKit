@@ -23,7 +23,7 @@ export default class AdvancedIssueSearchLink extends React.Component {
           icon={<SearchIcon size="medium" label="Advanced search" />}
           type={AnalyticsType.TopLinkPreQueryAdvancedSearchJira}
           elemAfter={<Return />}
-          key={`advanced-search-link-${Date.now()}`}
+          key="advanced-search-link"
         />
       </Wrapper>
     );
