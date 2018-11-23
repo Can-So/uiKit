@@ -4,6 +4,7 @@ import { TableBuilder } from '../builder/table-builder';
 import { parseString } from '../text';
 import { normalizePMNodes } from '../utils/normalize';
 import { linkFormat } from './links/link-format';
+import { media } from './media';
 import { Token, TokenType, TokenErrCallback } from './';
 import { parseNewlineOnly } from './whitespace';
 
@@ -24,6 +25,7 @@ const processState = {
   NEW_ROW: 6,
   LINE_BREAK: 7,
   LINK: 8,
+  MEDIA: 9,
 };
 
 export function table(
@@ -153,6 +155,11 @@ export function table(
             continue;
           }
 
+          case '!': {
+            currentState = processState.MEDIA;
+            continue;
+          }
+
           default: {
             buffer += char;
             index++;
@@ -210,6 +217,13 @@ export function table(
           currentState = processState.BUFFER;
           continue;
         }
+      }
+      case processState.MEDIA: {
+        const token = media(input, index, schema);
+        buffer += input.substr(index, token.length);
+        index += token.length;
+        currentState = processState.BUFFER;
+        continue;
       }
     }
     index++;
