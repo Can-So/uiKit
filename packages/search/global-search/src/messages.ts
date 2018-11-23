@@ -110,7 +110,7 @@ export const messages = defineMessages({
   },
   jira_recent_containers: {
     id: 'global_search.jira.recent_containers',
-    defaultMessage: 'Recent boards, filters and projects',
+    defaultMessage: 'Recent boards, projects and filters',
     description: '',
   },
   jira_search_result_issues_heading: {
@@ -120,7 +120,7 @@ export const messages = defineMessages({
   },
   jira_search_result_containers_heading: {
     id: 'global_search.jira.search_result_containers_heading',
-    defaultMessage: 'Boards, filters and projects',
+    defaultMessage: 'Boards, projects and filters',
     description: '',
   },
   jira_search_result_people_heading: {
