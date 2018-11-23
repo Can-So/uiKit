@@ -199,6 +199,13 @@ export function table(
           length: index - position,
         };
       }
+      case processState.MEDIA: {
+        const token = media(input, index, schema);
+        buffer += input.substr(index, token.length);
+        index += token.length;
+        currentState = processState.BUFFER;
+        continue;
+      }
       case processState.LINK: {
         /**
          * We should "fly over" the link format and we dont want
@@ -217,13 +224,6 @@ export function table(
           currentState = processState.BUFFER;
           continue;
         }
-      }
-      case processState.MEDIA: {
-        const token = media(input, index, schema);
-        buffer += input.substr(index, token.length);
-        index += token.length;
-        currentState = processState.BUFFER;
-        continue;
       }
     }
     index++;
