@@ -16,6 +16,9 @@ import {
   toggleUnderline,
   toggleEm,
   toggleStrong,
+  insertBlockType,
+  createTable,
+  insertTaskDecision,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
@@ -159,6 +162,48 @@ export default class WebBridgeImpl extends WebBridge
   onOutdentList() {
     if (this.listState && this.editorView) {
       outdentList()(this.editorView.state, this.editorView.dispatch);
+    }
+  }
+
+  onBlockQuoteInsert() {
+    if (this.editorView) {
+      insertBlockType('blockquote')(
+        this.editorView.state,
+        this.editorView.dispatch,
+      );
+    }
+  }
+
+  onCodeBlockInsert() {
+    if (this.editorView) {
+      insertBlockType('codeblock')(
+        this.editorView.state,
+        this.editorView.dispatch,
+      );
+    }
+  }
+
+  onPanelInsert() {
+    if (this.editorView) {
+      insertBlockType('panel')(this.editorView.state, this.editorView.dispatch);
+    }
+  }
+
+  onActionInsert() {
+    if (this.editorView) {
+      insertTaskDecision(this.editorView, 'taskList');
+    }
+  }
+
+  onDecisionInsert() {
+    if (this.editorView) {
+      insertTaskDecision(this.editorView, 'decisionList');
+    }
+  }
+
+  onTableInsert() {
+    if (this.editorView) {
+      createTable(this.editorView.state, this.editorView.dispatch);
     }
   }
 
