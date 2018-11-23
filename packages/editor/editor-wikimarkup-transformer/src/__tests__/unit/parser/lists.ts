@@ -151,6 +151,13 @@ abc
 -- [~name4]
 `,
     ],
+    [
+      '[CS-617] should not ignore double and triple dash in list item',
+      `
+* list item -- 1
+* list item --- 2
+`,
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {
