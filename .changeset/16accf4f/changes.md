@@ -1,0 +1,1 @@
+- Hide the 'shift+enter' on jira quick search pre-query screen
