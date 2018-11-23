@@ -23,6 +23,7 @@ export function copyMediaFileForUpload(
     upfrontId,
     userUpfrontId,
     occurrenceKey,
+    userOccurrenceKey,
   }: MediaFile,
   uploadId: string,
 ): MediaFile {
@@ -36,6 +37,7 @@ export function copyMediaFileForUpload(
     upfrontId,
     userUpfrontId,
     occurrenceKey,
+    userOccurrenceKey,
   };
 }
 

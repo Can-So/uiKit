@@ -12,39 +12,53 @@ export default function fileUploadsAdd(state: State, action: Action): State {
 
     let newLastUploadIndex = lastUploadIndex;
     files.forEach(
-      file =>
-        (newUploads[file.id] = {
-          file: {
-            metadata: {
-              id: file.id,
-              name: file.name,
-              mimeType: file.type,
-              size: file.size,
-              upfrontId: file.upfrontId,
-              userUpfrontId: file.userUpfrontId!,
-              userOccurrenceKey: file.userOccurrenceKey!,
-              occurrenceKey: file.occurrenceKey,
+      ({
+        id,
+        name,
+        type,
+        size,
+        upfrontId,
+        userUpfrontId,
+        userOccurrenceKey,
+        occurrenceKey,
+      }) => {
+        if (userUpfrontId && userOccurrenceKey) {
+          newUploads[id] = {
+            file: {
+              metadata: {
+                id,
+                name,
+                mimeType: type,
+                size,
+                upfrontId,
+                userUpfrontId,
+                userOccurrenceKey,
+                occurrenceKey,
+              },
             },
-          },
-          timeStarted: Date.now(),
-          progress: 0,
-          events: [], // uploads-start is not part of events. It will be emitted manually in importFiles.tsx
-          index: newLastUploadIndex++, // this index helps to sort upload items, so that latest come first
-          tenant,
-        }),
+            timeStarted: Date.now(),
+            progress: 0,
+            events: [], // uploads-start is not part of events. It will be emitted manually in importFiles.tsx
+            index: newLastUploadIndex++, // this index helps to sort upload items, so that latest come first
+            tenant,
+          };
+        }
+      },
     );
 
-    const newSelectedItems: SelectedItem[] = files.map(file => ({
-      date: 0,
-      id: file.id,
-      upfrontId: file.upfrontId,
-      occurrenceKey: file.occurrenceKey,
-      mimeType: file.type,
-      name: file.name,
-      parentId: '',
-      size: file.size,
-      serviceName: 'upload',
-    }));
+    const newSelectedItems: SelectedItem[] = files.map(
+      ({ id, name, type, size, upfrontId, occurrenceKey }) => ({
+        date: 0,
+        id,
+        upfrontId,
+        occurrenceKey,
+        mimeType: type,
+        name,
+        parentId: '',
+        size,
+        serviceName: 'upload',
+      }),
+    );
 
     return {
       ...state,
