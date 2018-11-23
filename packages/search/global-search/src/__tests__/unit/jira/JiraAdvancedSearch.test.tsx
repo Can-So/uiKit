@@ -76,10 +76,10 @@ describe('JiraAdvancedSearch', () => {
     expect(items.length).toBe(5);
     expect(items.map(item => item.key())).toMatchObject([
       'issues',
-      'people',
+      'boards',
       'projects',
       'filters',
-      'boards',
+      'people',
     ]);
   });
 });
