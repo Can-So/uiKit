@@ -1,5 +1,18 @@
 # @atlaskit/editor-core
 
+## 88.5.3
+- [patch] [dfcb816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfcb816):
+
+  - ED-5818: Add support for inserting block nodes
+
+  Bridge API now supports inserting:
+  * Tables
+  * Panels
+  * Codeblocks
+  * Block Quotes
+  * Actions
+  * Decisions
+
 ## 88.5.2
 - [patch] [b73607f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b73607f):
 
