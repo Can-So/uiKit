@@ -4,14 +4,6 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { createTheme } from '../createTheme';
 
-test('is a function', () => {
-  expect(typeof createTheme).toBe('function');
-});
-
-test('returns component', () => {
-  expect(typeof createTheme(() => ({}))).toBe('function');
-});
-
 test('component as a consumer', done => {
   const Theme = createTheme(() => ({ test: true }));
   mount(
@@ -25,9 +17,12 @@ test('component as a consumer', done => {
 });
 
 test('component as a provider (uses composition)', done => {
-  const Theme = createTheme(() => ({ test1: true, test2: false }));
+  const Theme = createTheme(() => ({
+    test1: true,
+    test2: false,
+  }));
   mount(
-    <Theme.Provider theme={parent => ({ ...parent, test2: true })}>
+    <Theme.Provider value={theme => ({ ...theme(), test2: true })}>
       <Theme.Consumer>
         {theme => {
           expect(theme.test1).toBe(true);
@@ -40,45 +35,35 @@ test('component as a provider (uses composition)', done => {
 });
 
 test('cascade order', done => {
-  let calledDefault = false;
-  let calledContext = false;
-  let calledSupplied = false;
   const expectedProps = { test: true };
   const Theme = createTheme(props => {
-    expect(calledDefault).toBe(false);
     expect(props).toEqual(expectedProps);
-    calledDefault = true;
     return { default: true };
   });
   const context = (themeDefault, props) => {
-    expect(calledDefault).toBe(true);
-    expect(calledContext).toBe(false);
     expect(props).toEqual(expectedProps);
-    expect(themeDefault).toEqual({ default: true });
-    calledContext = true;
+    expect(themeDefault(props)).toEqual({ default: true });
     return { context: true };
   };
   const supplied = (themeContext, props) => {
-    expect(calledDefault).toBe(true);
-    expect(calledContext).toBe(true);
-    expect(calledSupplied).toBe(false);
     expect(props).toEqual(expectedProps);
-    expect(themeContext).toEqual({ default: undefined, context: true });
-    calledSupplied = true;
+    expect(themeContext(props)).toEqual({ default: undefined, context: true });
     return { supplied: true };
   };
   mount(
-    <Theme.Provider theme={context}>
-      <Theme.Consumer props={{ test: true }} theme={supplied}>
-        {theme => {
-          expect(theme).toEqual({
-            default: undefined,
-            context: undefined,
-            supplied: true,
-          });
-          done();
-        }}
-      </Theme.Consumer>
+    <Theme.Provider value={context}>
+      <Theme.Provider value={supplied}>
+        <Theme.Consumer test>
+          {theme => {
+            expect(theme).toEqual({
+              default: undefined,
+              context: undefined,
+              supplied: true,
+            });
+            done();
+          }}
+        </Theme.Consumer>
+      </Theme.Provider>
     </Theme.Provider>,
   );
 });

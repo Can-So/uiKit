@@ -2,7 +2,7 @@
 
 import React, { createContext, type ComponentType, type Node } from 'react';
 
-export type ThemeProp<ThemeTokens, ThemeProps = *> = (
+export type ThemeProp<ThemeTokens = {}, ThemeProps = *> = (
   (ThemeProps) => ThemeTokens,
   ThemeProps,
 ) => ThemeTokens;

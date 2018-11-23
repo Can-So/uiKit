@@ -19,8 +19,8 @@ test('has parent', done => {
   const backgroundColor = '#fff';
   const textColor = '#000';
   mount(
-    <Theme.Provider theme={t => ({ backgroundColor, ...t })}>
-      <Theme.Provider theme={t => ({ ...t, textColor })}>
+    <Theme.Provider value={t => ({ backgroundColor, ...t() })}>
+      <Theme.Provider value={t => ({ ...t(), textColor })}>
         <Theme.Consumer>
           {t => {
             expect(t).toEqual({ backgroundColor, mode: 'light', textColor });
