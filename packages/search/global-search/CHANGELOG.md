@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.12.6
+- [patch] [9c3e374](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c3e374):
+
+  - Update the order of advanced search links and container headings
+
 ## 5.12.5
 - [patch] [82842ad](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82842ad):
 
