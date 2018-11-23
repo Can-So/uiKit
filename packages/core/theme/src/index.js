@@ -61,6 +61,6 @@ export const assistive = () => css`
 
 // New API
 export * from './components/Reset';
-export * from './components/Theme';
+export { default } from './components/Theme';
 export * from './hoc';
 export * from './utils/createTheme';
