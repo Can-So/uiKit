@@ -37,10 +37,10 @@ const Container = styled.div`
 
 const itemI18nKeySuffix = [
   JiraEntityTypes.Issues,
-  JiraEntityTypes.People,
+  JiraEntityTypes.Boards,
   JiraEntityTypes.Projects,
   JiraEntityTypes.Filters,
-  JiraEntityTypes.Boards,
+  JiraEntityTypes.People,
 ];
 
 const getI18nItemName = (i18nKeySuffix: string) => {

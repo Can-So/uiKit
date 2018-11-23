@@ -1484,9 +1484,6 @@ map.put(3, 10);`,
     },
     {
       type: 'mediaSingle',
-      attrs: {
-        layout: 'full-width',
-      },
       content: [
         {
           type: 'media',

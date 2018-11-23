@@ -115,6 +115,14 @@ export default class WebBridgeImpl extends WebBridge
           return;
         }
         case 'upload-end': {
+          if (payload.file.collectionName) {
+            /**
+             * We call this custom event instead of `upload-end` to set the collection
+             * As when emitting `upload-end`, the `ready` handler will usually fire before
+             * the `publicId` is resolved which causes a noop, resulting in bad ADF.
+             */
+            this.mediaPicker.emit('collection', payload);
+          }
           const getUploadPromise = this.mediaMap.get(payload.file.id);
           if (getUploadPromise) {
             getUploadPromise!(payload.file.publicId);

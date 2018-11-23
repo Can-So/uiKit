@@ -1,4 +1,5 @@
 import { NodeType, Node as PMNode } from 'prosemirror-model';
+import { hasParentNodeOfType } from 'prosemirror-utils';
 import {
   TextSelection,
   NodeSelection,
@@ -16,13 +17,17 @@ export const insertBlock = (
   attrs?: { [key: string]: any },
 ): Transaction | null => {
   // To ensure that match is done after HardBreak.
-  const { hardBreak } = state.schema.nodes;
-  if (state.doc.resolve(start).nodeAfter!.type !== hardBreak) {
+  const { hardBreak, codeBlock, listItem } = state.schema.nodes;
+  const $pos = state.doc.resolve(start);
+  if ($pos.nodeAfter!.type !== hardBreak) {
     return null;
   }
 
-  // To ensure no nesting is done.
-  if (state.doc.resolve(start).depth > 1) {
+  // To ensure no nesting is done. (unless we're inserting a codeBlock inside lists)
+  if (
+    $pos.depth > 1 &&
+    !(nodeType === codeBlock && hasParentNodeOfType(listItem)(state.selection))
+  ) {
     return null;
   }
 

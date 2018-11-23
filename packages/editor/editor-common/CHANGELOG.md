@@ -1,5 +1,15 @@
 # @atlaskit/editor-common
 
+## 21.5.0
+- [minor] [cfba914](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cfba914):
+
+  - ED-5771: fix wide and full-width images in renderer
+
+## 21.4.1
+- [patch] [416fbb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/416fbb3):
+
+  - ED-3298: codeBlocks inside lists
+
 ## 21.4.0
 - [minor] [6d6522b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d6522b):
 

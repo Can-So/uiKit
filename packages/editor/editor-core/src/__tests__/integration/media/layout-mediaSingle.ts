@@ -29,7 +29,7 @@ BrowserTestCase(
     await insertMedia(browser);
 
     // click it so the toolbar appears
-    await browser.click('.media-single div div div');
+    await browser.click('.media-single');
 
     // change layouts
     const layoutButton = `[aria-label="${

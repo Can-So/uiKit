@@ -1,5 +1,15 @@
 # @atlaskit/navigation-next
 
+## 4.0.2
+- [patch] [01d913d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01d913d):
+
+  - fixing exports integration on JFE
+
+## 4.0.1
+- [patch] [f66f71f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f66f71f):
+
+  - Makes all entrypoints have a corresponding .flow file containing the //@flow comment
+
 ## 4.0.0
 - [major] [8e753fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e753fc):
 

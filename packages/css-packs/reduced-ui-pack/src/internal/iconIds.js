@@ -261,6 +261,7 @@ const iconIds: Array<string> = [
   'media-services/zoom-out',
   'mention',
   'menu',
+  'menu-expand',
   'more-vertical',
   'more',
   'notification-all',

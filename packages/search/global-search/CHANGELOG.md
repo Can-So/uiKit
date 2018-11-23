@@ -1,5 +1,20 @@
 # @atlaskit/global-search
 
+## 5.12.6
+- [patch] [9c3e374](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c3e374):
+
+  - Update the order of advanced search links and container headings
+
+## 5.12.5
+- [patch] [82842ad](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82842ad):
+
+  - Hide the 'shift+enter' on jira quick search pre-query screen
+
+## 5.12.4
+- [patch] [a1e1821](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1e1821):
+
+  - Title case for "Software project", "Service Desk project", "Ops project"
+
 ## 5.12.3
 - [patch] [6c50eb1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c50eb1):
 

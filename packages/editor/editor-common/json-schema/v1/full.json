@@ -178,75 +178,6 @@
       ],
       "additionalProperties": false
     },
-    "listItem_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "listItem"
-          ]
-        },
-        "content": {
-          "type": "array",
-          "items": [
-            {
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/mediaSingle_node"
-                },
-                {
-                  "$ref": "#/definitions/paragraph_with_no_marks_node"
-                }
-              ]
-            },
-            {
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/orderedList_node"
-                },
-                {
-                  "$ref": "#/definitions/mediaSingle_node"
-                },
-                {
-                  "$ref": "#/definitions/bulletList_node"
-                },
-                {
-                  "$ref": "#/definitions/paragraph_with_no_marks_node"
-                }
-              ]
-            }
-          ],
-          "minItems": 1
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "bulletList_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "bulletList"
-          ]
-        },
-        "content": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/listItem_node"
-          },
-          "minItems": 1
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
     "table_node": {
       "type": "object",
       "properties": {
@@ -547,6 +478,81 @@
           "additionalProperties": true
         }
       ]
+    },
+    "listItem_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "listItem"
+          ]
+        },
+        "content": {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/mediaSingle_node"
+                },
+                {
+                  "$ref": "#/definitions/codeBlock_with_no_marks_node"
+                },
+                {
+                  "$ref": "#/definitions/paragraph_with_no_marks_node"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/orderedList_node"
+                },
+                {
+                  "$ref": "#/definitions/mediaSingle_node"
+                },
+                {
+                  "$ref": "#/definitions/codeBlock_with_no_marks_node"
+                },
+                {
+                  "$ref": "#/definitions/bulletList_node"
+                },
+                {
+                  "$ref": "#/definitions/paragraph_with_no_marks_node"
+                }
+              ]
+            }
+          ],
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "bulletList_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "bulletList"
+          ]
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/listItem_node"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
     },
     "hardBreak_node": {
       "type": "object",
@@ -1700,10 +1706,10 @@
             "$ref": "#/definitions/mediaSingle_node"
           },
           {
-            "$ref": "#/definitions/bulletList_node"
+            "$ref": "#/definitions/codeBlock_with_no_marks_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_with_no_marks_node"
+            "$ref": "#/definitions/bulletList_node"
           },
           {
             "$ref": "#/definitions/heading_with_no_marks_node"
@@ -1750,13 +1756,13 @@
             "$ref": "#/definitions/mediaSingle_node"
           },
           {
-            "$ref": "#/definitions/bulletList_node"
-          },
-          {
             "$ref": "#/definitions/table_node"
           },
           {
             "$ref": "#/definitions/codeBlock_with_no_marks_node"
+          },
+          {
+            "$ref": "#/definitions/bulletList_node"
           },
           {
             "$ref": "#/definitions/heading_with_no_marks_node"
@@ -1914,13 +1920,13 @@
                 "$ref": "#/definitions/mediaSingle_node"
               },
               {
-                "$ref": "#/definitions/bulletList_node"
-              },
-              {
                 "$ref": "#/definitions/table_node"
               },
               {
                 "$ref": "#/definitions/codeBlock_with_no_marks_node"
+              },
+              {
+                "$ref": "#/definitions/bulletList_node"
               },
               {
                 "$ref": "#/definitions/heading_with_no_marks_node"

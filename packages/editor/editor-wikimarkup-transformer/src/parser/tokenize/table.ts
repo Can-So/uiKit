@@ -3,10 +3,11 @@ import { AddCellArgs } from '../../interfaces';
 import { TableBuilder } from '../builder/table-builder';
 import { parseString } from '../text';
 import { normalizePMNodes } from '../utils/normalize';
+import { linkFormat } from './links/link-format';
 import { Token, TokenType, TokenErrCallback } from './';
 import { parseNewlineOnly } from './whitespace';
 
-/* 
+/*
   The following are currently NOT supported
   1. Macros
   2. Escape |
@@ -22,6 +23,7 @@ const processState = {
   CLOSE_ROW: 5,
   NEW_ROW: 6,
   LINE_BREAK: 7,
+  LINK: 8,
 };
 
 export function table(
@@ -145,6 +147,12 @@ export function table(
             }
             break;
           }
+
+          case '[': {
+            currentState = processState.LINK;
+            continue;
+          }
+
           default: {
             buffer += char;
             index++;
@@ -183,6 +191,25 @@ export function table(
           nodes: output,
           length: index - position,
         };
+      }
+      case processState.LINK: {
+        /**
+         * We should "fly over" the link format and we dont want
+         * -awesome [link|https://www.atlass-ian.com] nice
+         * to be a strike through because of the '-' in link
+         */
+        const token = linkFormat(input, index, schema);
+        if (token.type === 'text') {
+          buffer += token.text;
+          index += token.length;
+          currentState = processState.BUFFER;
+          continue;
+        } else if (token.type === 'pmnode') {
+          buffer += input.substr(index, token.length);
+          index += token.length;
+          currentState = processState.BUFFER;
+          continue;
+        }
       }
     }
     index++;
