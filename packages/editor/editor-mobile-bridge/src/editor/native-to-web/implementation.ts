@@ -165,45 +165,44 @@ export default class WebBridgeImpl extends WebBridge
     }
   }
 
-  onBlockQuoteInsert() {
-    if (this.editorView) {
-      insertBlockType('blockquote')(
-        this.editorView.state,
-        this.editorView.dispatch,
-      );
+  insertBlockType(type) {
+    if (!this.editorView) {
+      return;
     }
-  }
 
-  onCodeBlockInsert() {
-    if (this.editorView) {
-      insertBlockType('codeblock')(
-        this.editorView.state,
-        this.editorView.dispatch,
-      );
-    }
-  }
+    switch (type) {
+      case 'blockquote':
+        insertBlockType('blockquote')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'codeblock':
+        insertBlockType('codeblock')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'panel':
+        insertBlockType('panel')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'action':
+        insertTaskDecision(this.editorView, 'taskList');
+        return;
+      case 'decision':
+        insertTaskDecision(this.editorView, 'decisionList');
+        return;
+      case 'table':
+        createTable(this.editorView.state, this.editorView.dispatch);
+        return;
 
-  onPanelInsert() {
-    if (this.editorView) {
-      insertBlockType('panel')(this.editorView.state, this.editorView.dispatch);
-    }
-  }
-
-  onActionInsert() {
-    if (this.editorView) {
-      insertTaskDecision(this.editorView, 'taskList');
-    }
-  }
-
-  onDecisionInsert() {
-    if (this.editorView) {
-      insertTaskDecision(this.editorView, 'decisionList');
-    }
-  }
-
-  onTableInsert() {
-    if (this.editorView) {
-      createTable(this.editorView.state, this.editorView.dispatch);
+      default:
+        // tslint:disable-next-line:no-console
+        console.error(`${type} cannot be inserted as it's not supported`);
+        return;
     }
   }
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`block-nodes.ts: Calls onActionInsert and results in valid ADF 1`] = `
+exports[`block-nodes.ts: Inserts action and results in valid ADF 1`] = `
 Object {
   "content": Array [
     Object {
@@ -23,7 +23,7 @@ Object {
 }
 `;
 
-exports[`block-nodes.ts: Calls onBlockQuoteInsert and results in valid ADF 1`] = `
+exports[`block-nodes.ts: Inserts blockquote and results in valid ADF 1`] = `
 Object {
   "content": Array [
     Object {
@@ -39,7 +39,7 @@ Object {
 }
 `;
 
-exports[`block-nodes.ts: Calls onCodeBlockInsert and results in valid ADF 1`] = `
+exports[`block-nodes.ts: Inserts codeblock and results in valid ADF 1`] = `
 Object {
   "content": Array [
     Object {
@@ -57,7 +57,7 @@ Object {
 }
 `;
 
-exports[`block-nodes.ts: Calls onDecisionInsert and results in valid ADF 1`] = `
+exports[`block-nodes.ts: Inserts decision and results in valid ADF 1`] = `
 Object {
   "content": Array [
     Object {
@@ -80,7 +80,7 @@ Object {
 }
 `;
 
-exports[`block-nodes.ts: Calls onPanelInsert and results in valid ADF 1`] = `
+exports[`block-nodes.ts: Inserts panel and results in valid ADF 1`] = `
 Object {
   "content": Array [
     Object {
@@ -99,7 +99,7 @@ Object {
 }
 `;
 
-exports[`block-nodes.ts: Calls onTableInsert and results in valid ADF 1`] = `
+exports[`block-nodes.ts: Inserts table and results in valid ADF 1`] = `
 Object {
   "content": Array [
     Object {
