@@ -6,6 +6,12 @@ export const messages = defineMessages({
     defaultMessage: 'Find a person...',
     description: 'Placeholder description for empty user select field.',
   },
+  addMore: {
+    id: 'fabric.elements.user-picker.placeholder.add-more',
+    defaultMessage: 'add more people...',
+    description:
+      'Placeholder for multi user picker when the field is not empty.',
+  },
   remove: {
     id: 'fabric.elements.user-picker.multi.remove-item',
     defaultMessage: 'Remove',

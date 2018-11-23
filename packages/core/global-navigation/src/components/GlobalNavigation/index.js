@@ -18,37 +18,8 @@ import ScreenTracker from '../ScreenTracker';
 import { analyticsIdMap, fireDrawerDismissedEvents } from './analytics';
 import NotificationDrawerContents from '../../platform-integration';
 
-import type { GlobalNavItemData, NavItem } from '../../config/types';
+import type { NavItem } from '../../config/types';
 import type { GlobalNavigationProps, DrawerName } from './types';
-
-// TODO: Figure out a way to appease flow without this function.
-const mapToGlobalNavItem: NavItem => GlobalNavItemData = ({
-  dropdownItems,
-  icon,
-  id,
-  itemComponent,
-  label,
-  onClick,
-  tooltip,
-  component,
-  badge,
-  href,
-  size,
-  badgeCount,
-}) => ({
-  dropdownItems,
-  icon,
-  id,
-  itemComponent,
-  label,
-  onClick,
-  tooltip,
-  component,
-  badge,
-  href,
-  size,
-  badgeCount,
-});
 
 const noop = () => {};
 
@@ -294,6 +265,12 @@ export default class GlobalNavigation extends Component<
   };
 
   renderNotificationBadge = () => {
+    if (this.state.isNotificationDrawerOpen) {
+      // Unmount the badge when the drawer is open
+      // So that it can remount with the latest badgeCount when the drawer closes.
+      return null;
+    }
+
     const { cloudId, fabricNotificationLogUrl } = this.props;
     const refreshRate = this.state.notificationCount ? 180000 : 60000;
 
@@ -331,11 +308,13 @@ export default class GlobalNavigation extends Component<
       ...(productConfig[item]
         ? {
             ...(item === 'notification' && this.isNotificationInbuilt
-              ? { badge }
+              ? { id: 'notifications', badge }
               : {}),
             ...defaultConfig[item],
             ...productConfig[item],
-            ...(item === 'notification' ? { badgeCount } : {}),
+            ...(item === 'notification'
+              ? { id: 'notifications', badgeCount }
+              : {}),
           }
         : null),
     }));
@@ -344,11 +323,17 @@ export default class GlobalNavigation extends Component<
       primaryItems: navItems
         .filter(({ section }) => section === 'primary')
         .sort(({ rank: rank1 }, { rank: rank2 }) => rank1 - rank2)
-        .map(mapToGlobalNavItem),
+        .map(navItem => {
+          const { section, rank, ...props } = navItem;
+          return props;
+        }),
       secondaryItems: navItems
         .filter(({ section }) => section === 'secondary')
         .sort(({ rank: rank1 }, { rank: rank2 }) => rank1 - rank2)
-        .map(mapToGlobalNavItem),
+        .map(navItem => {
+          const { section, rank, ...props } = navItem;
+          return props;
+        }),
     };
   };
 
@@ -387,13 +372,15 @@ export default class GlobalNavigation extends Component<
               return null;
             }
 
+            const width = this.props[`${drawerName}DrawerWidth`] || 'wide';
+
             return (
               <Drawer
                 key={drawerName}
                 isOpen={this.state[`is${capitalisedDrawerName}Open`]}
                 onClose={this.closeDrawer(drawerName)}
                 shouldUnmountOnExit={shouldUnmountOnExit}
-                width="wide"
+                width={width}
               >
                 <ScreenTracker
                   name={analyticsIdMap[drawerName]}

@@ -130,7 +130,7 @@ export const messages = defineMessages({
   },
   jira_advanced_search: {
     id: 'global_search.jira.advanced_search',
-    defaultMessage: 'Go to advanced search for',
+    defaultMessage: 'Advanced search for',
     description: '',
   },
   jira_advanced_search_issues: {

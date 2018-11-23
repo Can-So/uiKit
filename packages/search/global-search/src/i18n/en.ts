@@ -32,7 +32,7 @@ export default {
   'global_search.jira.search_result_containers_heading':
     'Boards, filters and projects',
   'global_search.jira.search_result_people_heading': 'People',
-  'global_search.jira.advanced_search': 'Go to advanced search for',
+  'global_search.jira.advanced_search': 'Advanced search for',
   'global_search.jira.advanced_search_issues': 'issues',
   'global_search.jira.advanced_search_projects': 'projects',
   'global_search.jira.advanced_search_boards': 'boards',

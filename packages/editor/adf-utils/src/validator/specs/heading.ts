@@ -7,7 +7,7 @@ export default {
       allowUnsupportedInline: true,
       optional: true,
     },
+    marks: { type: 'array', items: [], optional: true },
     attrs: { props: { level: { type: 'number', minimum: 1, maximum: 6 } } },
-    marks: { type: 'array', items: ['alignment'], optional: true },
   },
 };

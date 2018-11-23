@@ -154,7 +154,7 @@ export default class MediaSingleNode extends Component<
       canResize = canResize && !disabledNode;
     }
 
-    if (width === null) {
+    if (width === null || height === null) {
       width = DEFAULT_WIDTH;
       height = DEFAULT_HEIGHT;
     }
