@@ -1,5 +1,44 @@
 # @atlaskit/global-navigation
 
+## 5.3.3
+- [patch] [4d9040d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d9040d):
+
+  - Uses the latest version of @atlaskit/drawer
+
+## 5.3.2
+- Updated dependencies [8e753fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e753fc):
+  - @atlaskit/navigation-next@4.0.0
+
+## 5.3.1
+- [patch] [3e7125a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3e7125a):
+
+  - Fixes a bug that prevented the notification badge from clearing when the notification drawer is opened.
+
+## 5.3.0
+- [minor] [ffb0d5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ffb0d5a):
+
+  - Support global navigation drawer widths
+
+## 5.2.1
+- [patch] [ad45749](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad45749):
+
+  - Update flow types to use object spread instead of intersection and reference GlobalItem via ElementConfig rather than its props directly
+
+## 5.2.0
+- [minor] [0d4946e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0d4946e):
+
+  - Adds badgeCount to the analytics event that's fired when notification icon is clicked
+
+## 5.1.2
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 5.1.1
+- [patch] [d427e8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d427e8a):
+
+  - Adds tests to global-navigation. Removes a bit of dead code
+
 ## 5.1.0
 - [minor] [96a854f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/96a854f):
 

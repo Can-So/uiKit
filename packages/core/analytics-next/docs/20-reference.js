@@ -109,6 +109,7 @@ ${code`
 
   ${(
     <Props
+      heading="AnalyticsListener Props"
       props={require('!!extract-react-types-loader!../src/AnalyticsListener')}
     />
   )}
@@ -124,6 +125,7 @@ ${code`
 
   ${(
     <Props
+      heading="AnalyticsContext Props"
       props={require('!!extract-react-types-loader!../src/AnalyticsContext')}
     />
   )}

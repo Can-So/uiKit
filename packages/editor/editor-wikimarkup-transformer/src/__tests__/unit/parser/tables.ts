@@ -19,8 +19,22 @@ yeah good luck closing this`,
     ['should be able to parse macros in table', `|{panel}123{panel}|`],
     ['should not render trailing space into a new cell', '|cell 1|cell 2|   '],
     [
+      'should remove trailing space before and after cell open and close',
+      `|cell 1|cell 2|
+              |cell 3|             cell 4 |`,
+    ],
+    [
       'should covet to same cell type for cells on the same row',
       '||Fixed? |No ||',
+    ],
+    [
+      'should not include new line text in table',
+      `||foo | bar |
+this is a new line text, not in the table`,
+    ],
+    [
+      'should parse properly links inside a cell',
+      '||hfoo||hbar|||[http://atlassian.com]|[link 1|https://atlassian.com], [link 2|https://atlassian.com]|',
     ],
   ];
 

@@ -154,6 +154,11 @@ export class ListBuilder {
         continue;
       }
 
+      /* Skip Empty spaces after rule */
+      if (this.isParagraphEmptyTextNode(pmNode)) {
+        continue;
+      }
+
       if (supportedContentType.indexOf(pmNode.type.name) === -1) {
         const listItem = this.createListItem(contentBuffer, this.schema);
         output.push(listItem);
@@ -172,6 +177,23 @@ export class ListBuilder {
 
     return output;
   };
+
+  /* Check if all paragraph's children nodes are text and empty */
+  private isParagraphEmptyTextNode(node: PMNode): boolean {
+    if (node.type.name !== 'paragraph' || !node.childCount) {
+      return false;
+    }
+    for (let i = 0; i < node.childCount; i++) {
+      const n = node.content.child(i);
+      if (n.type.name !== 'text') {
+        // Paragraph contains non-text node, so not empty
+        return false;
+      } else if (n.textContent.trim() !== '') {
+        return false;
+      }
+    }
+    return true;
+  }
 
   private createListItem(content: PMNode[], schema: Schema): PMNode {
     if (

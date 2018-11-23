@@ -39,34 +39,33 @@ export class Popper extends Component<Props, State> {
     placement: 'bottom-start',
   };
 
-  getModifiers = memoizeOne((placement: Placement): $ElementType<
-    PopperProps,
-    'modifiers',
-  > => {
-    const flipBehavior = getFlipBehavior(placement.split('-')[0]);
-    const modifiers: $ElementType<PopperProps, 'modifiers'> = {
-      flip: {
-        enabled: true,
-        behavior: flipBehavior,
-        boundariesElement: 'viewport',
-      },
-      hide: {
-        enabled: true,
-        boundariesElement: 'scrollParent',
-      },
-      offset: {
-        enabled: true,
-        offset: this.props.offset,
-      },
-      preventOverflow: {
-        enabled: true,
-        escapeWithReference: false,
-        boundariesElement: 'window',
-      },
-    };
+  getModifiers = memoizeOne(
+    (placement: Placement): $ElementType<PopperProps, 'modifiers'> => {
+      const flipBehavior = getFlipBehavior(placement.split('-')[0]);
+      const modifiers: $ElementType<PopperProps, 'modifiers'> = {
+        flip: {
+          enabled: true,
+          behavior: flipBehavior,
+          boundariesElement: 'viewport',
+        },
+        hide: {
+          enabled: true,
+          boundariesElement: 'scrollParent',
+        },
+        offset: {
+          enabled: true,
+          offset: this.props.offset,
+        },
+        preventOverflow: {
+          enabled: true,
+          escapeWithReference: false,
+          boundariesElement: 'window',
+        },
+      };
 
-    return modifiers;
-  });
+      return modifiers;
+    },
+  );
 
   render() {
     const { placement, children, referenceElement } = this.props;

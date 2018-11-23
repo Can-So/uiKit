@@ -51,17 +51,23 @@ const Item = ({ testKey, ...props }: { testKey?: string }) => {
  */
 const globalNavPrimaryItems = [
   {
-    key: 'jira',
+    id: 'jira',
     icon: () => <JiraIcon size="medium" label="Jira" />,
     label: 'Jira',
   },
-  { key: 'search', icon: SearchIcon, label: 'Search' },
-  { key: 'create', icon: AddIcon, label: 'Add' },
+  { id: 'search', icon: SearchIcon, label: 'Search' },
+  { id: 'create', icon: AddIcon, label: 'Add' },
 ];
 
 const globalNavSecondaryItems = [
-  { icon: QuestionCircleIcon, label: 'Help', size: 'small' },
   {
+    id: '10-composed-navigation',
+    icon: QuestionCircleIcon,
+    label: 'Help',
+    size: 'small',
+  },
+  {
+    id: '10-composed-navigation-2',
     icon: () => (
       <Avatar
         borderColor="transparent"

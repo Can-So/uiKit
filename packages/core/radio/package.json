@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/radio",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "A radio group React component used for selecting discrete values in a form",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -34,7 +34,7 @@
     "@atlaskit/build-utils": "^2.0.0",
     "@atlaskit/button": "^9.0.15",
     "@atlaskit/docs": "^5.0.8",
-    "@atlaskit/form": "^4.0.12",
+    "@atlaskit/form": "^4.0.16",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-dom": "^16.4.2"
   },

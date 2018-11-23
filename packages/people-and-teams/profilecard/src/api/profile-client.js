@@ -80,7 +80,8 @@ const buildUserQuery = (cloudId: string, userId: string) => ({
     User: CloudUser(userId: $userId, cloudId: $cloudId) {
       id,
       isCurrentUser,
-      isActive: active,
+      status,
+      statusModifiedDate,
       isBot,
       isNotMentionable,
       fullName,
@@ -88,6 +89,7 @@ const buildUserQuery = (cloudId: string, userId: string) => ({
       email,
       meta: title,
       location,
+      companyName,
       avatarUrl(size: 192),
       remoteWeekdayIndex: localTime(format: "d"),
       remoteWeekdayString: localTime(format: "ddd"),

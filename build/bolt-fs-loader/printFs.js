@@ -36,11 +36,10 @@ function printDir(dir /*: Directory */, depth /*: number */ = 0) {
   return [
     pad(`dir('${dir.id}', [`, depth),
     dir.children
-      .map(
-        child =>
-          child.type === 'dir'
-            ? printDir(child, depth + 1)
-            : printFile(child, depth + 1),
+      .map(child =>
+        child.type === 'dir'
+          ? printDir(child, depth + 1)
+          : printFile(child, depth + 1),
       )
       .join(',\n'),
     pad(`])`, depth),

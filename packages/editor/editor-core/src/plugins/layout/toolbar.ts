@@ -11,6 +11,8 @@ import { Command } from '../../../src/types';
 import {
   FloatingToolbarConfig,
   FloatingToolbarItem,
+  FloatingToolbarSeparator,
+  FloatingToolbarButton,
   Icon,
 } from '../../../src/plugins/floating-toolbar/types';
 import {
@@ -19,6 +21,7 @@ import {
   getPresetLayout,
   PresetLayout,
 } from './actions';
+import { createBreakoutToolbarItems } from '../breakout/utils/create-breakout-toolbar-items';
 
 export const messages = defineMessages({
   twoColumns: {
@@ -46,9 +49,6 @@ const LAYOUT_TYPES: PresetLayoutButtonItem[] = [
     title: messages.threeColumns,
     icon: LayoutThreeEqualIcon,
   },
-  // { type: two_left_sidebar, text: 'Two columns with left sidebar' }
-  // { type: two_right_sidebar, text: 'Two columns with right sidebar' }
-  // { type: three_with_siderbars, text: 'Three columns with sidebars' }
 ];
 
 const buildLayoutButton = (
@@ -67,10 +67,30 @@ export const buildToolbar = (
   state: EditorState,
   intl: InjectedIntl,
   pos: number,
+  allowBreakout: boolean,
 ): FloatingToolbarConfig | undefined => {
   const node = state.doc.nodeAt(pos);
   if (node) {
     const currentLayout = getPresetLayout(node);
+
+    const breakoutToolbar = allowBreakout
+      ? createBreakoutToolbarItems(state, {
+          formatMessage: intl.formatMessage,
+        })
+      : null;
+
+    const separator: FloatingToolbarSeparator = {
+      type: 'separator',
+    };
+
+    const deleteButton: FloatingToolbarButton<Command> = {
+      type: 'button',
+      appearance: 'danger',
+      icon: RemoveIcon,
+      title: intl.formatMessage(commonMessages.remove),
+      onClick: deleteActiveLayoutNode,
+    };
+
     return {
       title: 'Columns floating controls',
       getDomRef: view =>
@@ -78,14 +98,9 @@ export const buildToolbar = (
       nodeType: state.schema.nodes.layoutSection,
       items: [
         ...LAYOUT_TYPES.map(i => buildLayoutButton(intl, i, currentLayout)),
-        { type: 'separator' },
-        {
-          type: 'button',
-          appearance: 'danger',
-          icon: RemoveIcon,
-          title: intl.formatMessage(commonMessages.remove),
-          onClick: deleteActiveLayoutNode,
-        },
+        ...(breakoutToolbar ? [separator, ...breakoutToolbar] : []),
+        separator,
+        deleteButton,
       ],
     };
   }

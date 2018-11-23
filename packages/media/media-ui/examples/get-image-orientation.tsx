@@ -84,7 +84,8 @@ class Example extends React.Component<{}, ExampleState> {
               </Code>
             </p>
             <p>
-              Select a local image to see it's Exif orientation (if available).<br />
+              Select a local image to see it's Exif orientation (if available).
+              <br />
               Currently only supports Exif / XMP tags in <b>JPEG</b> and{' '}
               <b>PNG</b> formats.
             </p>

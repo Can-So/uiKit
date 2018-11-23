@@ -49,12 +49,32 @@ describe('JIRA wiki markup - Links', () => {
       `[Link Title|http://www.google.com] boy I hope this doesn't go all the way to here] that would be bad.`,
     ],
     [
+      '[CS-240] should handle links with titles',
+      `[Link Description|http://www.google.com|title] boy I hope this doesn't go all the way to here] that would be bad.`,
+    ],
+    [
       '[CS-385] should link text in link format',
       `[https://splunk.paas-inf.net/en-GB/app/search/search?earliest=\-1d&latest=now|https://www.google.com]`,
     ],
     [
       '[CS-478] should resolve link with | in the url',
       `[page|https://hello.atlassian.net/wiki/spaces/Engage/pages/296780133/EP+Chrome+Extension#Set-test-metadata-without-having-to-create-a-message-in-targeting--|-title-=-3rd-Iteration-|-colour-=-Red-|-MAKEITSO-3652]`,
+    ],
+    [
+      '[CS-542] should correctly style superscript links',
+      `[^link title^|http://example.com]`,
+    ],
+    [
+      '[CS-542] should correctly style superscript links',
+      `[~link title~|http://example.com]`,
+    ],
+    [
+      '[CS-542] should not parse nested links',
+      '[test[test|http://example.com]',
+    ],
+    [
+      '[EX-500] should jump over the link if it is invalid',
+      'This \\\\[waves hands around\\\\]. Be',
     ],
   ];
 

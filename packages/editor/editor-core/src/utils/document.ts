@@ -1,4 +1,4 @@
-import { Node, Fragment, Schema } from 'prosemirror-model';
+import { Node, Schema } from 'prosemirror-model';
 import { Transaction } from 'prosemirror-state';
 import {
   validator,
@@ -99,38 +99,6 @@ export function isEmptyDocument(node: Node): boolean {
   );
 }
 
-export const preprocessDoc = (
-  schema: Schema,
-  origDoc: Node | undefined,
-): Node | undefined => {
-  if (!origDoc) {
-    return;
-  }
-
-  const content: Node[] = [];
-  // A flag to indicate if the element in the array is the last paragraph
-  let isLastParagraph = true;
-
-  for (let i = origDoc.content.childCount - 1; i >= 0; i--) {
-    const node = origDoc.content.child(i);
-    const { taskList, decisionList } = schema.nodes;
-    if (
-      !(
-        node.type.name === 'paragraph' &&
-        node.content.size === 0 &&
-        isLastParagraph
-      ) &&
-      ((node.type !== taskList && node.type !== decisionList) ||
-        node.textContent)
-    ) {
-      content.push(node);
-      isLastParagraph = false;
-    }
-  }
-
-  return schema.nodes.doc.create({}, Fragment.fromArray(content.reverse()));
-};
-
 function wrapWithUnsupported(
   originalValue: Entity,
   type: 'block' | 'inline' = 'block',
@@ -189,7 +157,7 @@ export function processRawValue(
   try {
     const nodes = Object.keys(schema.nodes);
     const marks = Object.keys(schema.marks);
-    const validate = validator(nodes, marks);
+    const validate = validator(nodes, marks, { allowPrivateAttributes: true });
     const emptyDoc: Entity = { type: 'doc', content: [] };
 
     // ProseMirror always require a child under doc

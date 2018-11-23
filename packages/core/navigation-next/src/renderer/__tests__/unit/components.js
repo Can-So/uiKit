@@ -56,9 +56,7 @@ describe('navigation-next view renderer', () => {
         <HeaderSection
           id="header"
           items={[{ type: 'Wordmark', wordmark: JiraWordmark, id: 'wordmark' }]}
-        >
-          {({ className }) => <div className={className} />}
-        </HeaderSection>,
+        />,
       );
 
       expect(wrapper.find(HeaderSectionComponent)).toHaveLength(1);
@@ -75,9 +73,7 @@ describe('navigation-next view renderer', () => {
           customComponents={customComponents}
           id="header"
           items={items}
-        >
-          {({ className }) => <div className={className} />}
-        </HeaderSection>,
+        />,
       );
 
       expect(wrapper.find(ItemsRenderer)).toHaveLength(1);
@@ -98,9 +94,7 @@ describe('navigation-next view renderer', () => {
             { type: 'Item', text: 'Active sprints', id: 'active-sprints' },
             { type: 'Item', text: 'Issues', id: 'issues' },
           ]}
-        >
-          {({ className }) => <div className={className} />}
-        </MenuSection>,
+        />,
       );
 
       expect(wrapper.find(MenuSectionComponent)).toHaveLength(1);
@@ -120,9 +114,7 @@ describe('navigation-next view renderer', () => {
           parentId="foo"
           nestedGroupKey="menu"
           alwaysShowScrollHint
-        >
-          {({ className }) => <div className={className} />}
-        </MenuSection>,
+        />,
       );
 
       expect(wrapper.find(MenuSectionComponent).props()).toEqual({
@@ -145,9 +137,7 @@ describe('navigation-next view renderer', () => {
           customComponents={customComponents}
           id="menu"
           items={items}
-        >
-          {({ className }) => <div className={className} />}
-        </MenuSection>,
+        />,
       );
 
       expect(wrapper.find(ItemsRenderer)).toHaveLength(1);
@@ -166,13 +156,14 @@ describe('navigation-next view renderer', () => {
           type: 'SortableGroup',
           id: 'sortable-group',
           items: [
-            { type: 'SortableItem', id: 'backlog', text: 'Backlog' },
+            { type: 'SortableItem', id: 'backlog', text: 'Backlog', index: 3 },
             {
               type: 'SortableItem',
               id: 'active-sprints',
               text: 'Active sprints',
+              index: 1,
             },
-            { type: 'SortableItem', id: 'issues', text: 'Issues' },
+            { type: 'SortableItem', id: 'issues', text: 'Issues', index: 2 },
           ],
         },
       ];
@@ -240,9 +231,14 @@ describe('navigation-next view renderer', () => {
     let items;
     beforeEach(() => {
       items = [
-        { type: 'SortableItem', text: 'Backlog', id: 'backlog' },
-        { type: 'SortableItem', text: 'Active sprints', id: 'active-sprints' },
-        { type: 'SortableItem', text: 'Issues', id: 'issues' },
+        { type: 'SortableItem', text: 'Backlog', id: 'backlog', index: 0 },
+        {
+          type: 'SortableItem',
+          text: 'Active sprints',
+          id: 'active-sprints',
+          index: 1,
+        },
+        { type: 'SortableItem', text: 'Issues', id: 'issues', index: 2 },
       ];
     });
     it('should render the SortableGroup UI Component', () => {
@@ -290,7 +286,8 @@ describe('navigation-next view renderer', () => {
                 id="sortable-group"
                 heading="Sortable Group"
                 items={rootItems}
-              />,
+              />
+              ,
             </SortableContextComponent>
           )}
         </Harness>,
@@ -337,7 +334,11 @@ describe('navigation-next view renderer', () => {
         { type: 'Item', id: 'item' },
         { type: 'BackItem', id: 'back-item' },
         { type: 'GoToItem', id: 'goto-item', goTo: 'view' },
-        { type: InlineCustom, id: 'inlineCustom' },
+        {
+          type: 'InlineComponent',
+          component: InlineCustom,
+          id: 'inlineCustom',
+        },
         { type: 'Corgie', id: 'corgie' },
       ];
       const wrapper = shallow(
@@ -357,7 +358,9 @@ describe('navigation-next view renderer', () => {
     });
 
     it('should cache inline custom components with analytics', () => {
-      const items = [{ type: Corgie, id: 'corgieSpy' }];
+      const items = [
+        { type: 'InlineComponent', component: Corgie, id: 'corgieSpy' },
+      ];
       const wrapper = mount(<ItemsRenderer items={items} />);
       expect(didMountSpy).toHaveBeenCalledTimes(1);
       wrapper.setProps({ foo: 1 });

@@ -52,6 +52,14 @@ another one is here and it should* not be applied`,
 
 https://app.datadoghq.com/screen/282018/product-fabric-adf-service?tv_mode=true#close`,
     ],
+    [
+      '[CS-576] should allow {color} macro in formatters',
+      'This is _{color:red}*Strong Red and Italic*{color}_',
+    ],
+    [
+      'should not apply strong when ending line is two strong symbols',
+      '*not valid strong **',
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

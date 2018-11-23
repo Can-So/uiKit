@@ -1,5 +1,7 @@
 // @flow
 
+import type { ComponentType, ElementConfig } from 'react';
+import type { Diffable } from '../common/types';
 import type {
   GlobalItemPresentationProps,
   GlobalItemStyles,
@@ -10,7 +12,7 @@ import type { SectionPresentationProps } from '../components/presentational/Sect
 /**
  * Types
  */
-type ObjectType = { [string]: * };
+type ObjectType = { [string]: any };
 
 type ContentNavigationComponentThemeObject = {
   container: ObjectType,
@@ -40,7 +42,6 @@ export type Mode = {
   heading: ContentNavigationComponentTheme<void>,
   item: ContentNavigationComponentTheme<ItemPresentationProps>,
   contentNav: ContentNavigationComponentTheme<void>,
-  scrollHint: ContentNavigationComponentTheme<void>,
   section: ContentNavigationComponentTheme<SectionPresentationProps>,
   separator: ContentNavigationComponentTheme<void>,
   skeletonItem: ContentNavigationComponentTheme<void>,
@@ -60,6 +61,12 @@ export type Theme = GlobalTheme | ProductTheme | void;
 export type StyleReducer = (
   Styles: ObjectType,
   State?: ObjectType,
+  Theme?: ProductTheme,
+) => ObjectType;
+
+export type StyleReducerWithState = (
+  Styles: ObjectType,
+  State: ObjectType,
   Theme?: ProductTheme,
 ) => ObjectType;
 
@@ -96,6 +103,38 @@ export type ModeColors = {
   product: ContextColors,
 };
 
-export type ThemeProps = {
+/**
+ * withTheme
+ */
+
+export type WithThemeProps = {|
   theme: Theme,
-};
+|};
+
+export type ThemeWrappedComp<C> = ComponentType<
+  $Diff<ElementConfig<$Supertype<C>>, Diffable<WithThemeProps>>,
+>;
+
+/**
+ * withContentTheme
+ */
+
+export type WithContentThemeProps = {|
+  theme: ProductTheme,
+|};
+
+export type ContentThemeWrappedComp<C> = ComponentType<
+  $Diff<ElementConfig<$Supertype<C>>, Diffable<WithContentThemeProps>>,
+>;
+
+/**
+ * withGlobalTheme
+ */
+
+export type WithGlobalThemeProps = {|
+  theme: GlobalTheme,
+|};
+
+export type GlobalThemeWrappedComp<C> = ComponentType<
+  $Diff<ElementConfig<$Supertype<C>>, Diffable<WithGlobalThemeProps>>,
+>;

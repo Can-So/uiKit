@@ -1,5 +1,115 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.6.0
+- [minor] [8451c11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8451c11):
+
+  - Fly over links inside table cells
+
+## 2.5.2
+- [patch] [c93eb36](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c93eb36):
+
+  - Do not jump over the link if invalid
+
+## 2.5.1
+- [patch] [fce377d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fce377d):
+
+  - fix issue with mentions in list
+
+## 2.5.0
+- [minor] [6fb9918](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6fb9918):
+
+  - Fix strong bug when ending line finishes with two strong symbols
+
+## 2.4.6
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/editor-common@21.2.2
+  - @atlaskit/renderer@30.2.1
+  - @atlaskit/profilecard@6.0.0
+
+## 2.4.5
+- [patch] [3148c95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3148c95):
+
+  - add error and success color
+
+## 2.4.4
+- [patch] [01a92e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01a92e1):
+
+  - Title for panel and noformat changes
+
+## 2.4.3
+- [patch] [131e012](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/131e012):
+
+  - Port from Jira regex for dashes
+
+## 2.4.2
+- [patch] [171443f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/171443f):
+
+  - Re-wrtie table parser
+
+## 2.4.1
+- [patch] [930ca26](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/930ca26):
+
+  - Fixed issue with library importing from a path within the editor common package
+
+## 2.4.0
+- [minor] [8681fc0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8681fc0):
+
+  - Improve wikimarkup link handling with formatting and titles
+
+## 2.3.6
+- [patch] [56007b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56007b3):
+
+  - Allow {color} in formatter
+
+## 2.3.5
+- [patch] [d76aa5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d76aa5a):
+
+  - Adds in support for multiple -
+
+## 2.3.4
+- [patch] [7b8efea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b8efea):
+
+  - Heading doesn't need a following space
+
+## 2.3.3
+- [patch] [5f2efe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f2efe0):
+
+  - Change triple dash symbol and update parser rules
+
+## 2.3.2
+- [patch] [904b74c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/904b74c):
+
+  - Fix the behaivor of \\ for line break
+
+## 2.3.1
+- [patch] [5b4474f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b4474f):
+
+  - Improve handling of 'rules' in lists and at end of content
+
+## 2.3.0
+- [minor] [640e01f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/640e01f):
+
+  - Ignore double dash symbol when sticked with alphanumerical, unicode without space, or parenthesis
+
+## 2.2.0
+- [minor] [fd35bec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fd35bec):
+
+  - Refactor tokenizer to accpt the whole input and its position
+
+## 2.1.27
+- [patch] [fd0ed3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fd0ed3a):
+
+  - Changed parser to only start a list if it is led with a single dash
+
+## 2.1.26
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/renderer@30.0.0
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/util-data-test@10.0.20
+
 ## 2.1.25
 - [patch] [b64fc55](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b64fc55):
 

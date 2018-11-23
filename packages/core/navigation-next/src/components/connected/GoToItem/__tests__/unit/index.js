@@ -13,16 +13,11 @@ describe('GoToItemBase', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.resetModules();
-    const mockNavigationUIController = {
-      state: {},
-      unPeek: Function.prototype,
-    };
     const mockNavigationViewController = {
       state: {},
       setView: jest.fn(),
     };
     baseProps = {
-      navigationUIController: mockNavigationUIController,
       navigationViewController: mockNavigationViewController,
     };
   });
@@ -161,26 +156,5 @@ describe('GoToItem', () => {
     expect(mockWithNavigationViewController).toHaveBeenLastCalledWith(
       RequiredGoToItemBase,
     );
-  });
-
-  it('should be wrapped with withNavigationUI HOC', () => {
-    const uiWrappedGoToItemBase = () => null;
-    const mockWithNavigationUI = jest.fn(() => uiWrappedGoToItemBase);
-    const viewWrappedGoToItemBase = () => null;
-    const mockWithNavigationViewController = jest.fn(
-      () => viewWrappedGoToItemBase,
-    );
-    jest.doMock('../../../../../view-controller', () => ({
-      withNavigationViewController: mockWithNavigationViewController,
-    }));
-    jest.doMock('../../../../../ui-controller', () => ({
-      withNavigationUI: mockWithNavigationUI,
-    }));
-    const { default: GoToItem } = require('../../index');
-
-    expect(mockWithNavigationUI).toHaveBeenLastCalledWith(
-      viewWrappedGoToItemBase,
-    );
-    expect(uiWrappedGoToItemBase).toEqual(GoToItem);
   });
 });

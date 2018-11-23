@@ -1,16 +1,21 @@
 // @flow
 
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
-export default (
-  <div>
-    {md`
+export default md`
+
       The Dynamic Table component is a table component with pagination and sorting functionality.
       
       Dynamic table also allows you to reorder rows (available only with react@^16.0.0) thanks to [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd) library.
 
-      ## Examples
+      ## Usage
+
+      ${code`import DynamicTable from '@atlaskit/dynamic-table';`}
+
+      or 
+
+      ${code`import { DynamicTableStateless } from '@atlaskit/dynamic-table';`}
 
       ${(
         <Example
@@ -32,17 +37,15 @@ export default (
 
       ${(
         <Props
-          heading={'Stateful Dynamic Table Component Props'}
+          heading="Stateful DynamicTable Props"
           props={require('!!extract-react-types-loader!../src/components/Stateful')}
         />
       )}
 
       ${(
         <Props
-          heading={'Stateless Dynamic Table Component Props'}
+          heading="Stateless DynamicTable Props"
           props={require('!!extract-react-types-loader!../src/components/Stateless')}
         />
       )}
-    `}
-  </div>
-);
+`;

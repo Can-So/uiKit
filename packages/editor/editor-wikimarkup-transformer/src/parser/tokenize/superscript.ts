@@ -6,6 +6,7 @@ import { parseString } from '../text';
 
 export function superscript(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback: TokenErrCallback,
 ): Token {
@@ -44,7 +45,7 @@ export function superscript(
     };
   };
 
-  return commonFormatter(input, schema, {
+  return commonFormatter(input, position, schema, {
     opening: '^',
     closing: '^',
     rawContentProcessor,

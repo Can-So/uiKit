@@ -1,10 +1,15 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
+
   Renders inline code snippets and code blocks.
   
+  ## Usage
+
+  ${code`import { AkCode, AkCodeBlock } from '@atlaskit/code`}
+
   ${(
     <Example
       packageName="@atlaskit/code"
@@ -16,14 +21,14 @@ export default md`
 
   ${(
     <Props
-      heading={'Code Props'}
+      heading="Code Props"
       props={require('!!extract-react-types-loader!../src/Code')}
     />
   )}
 
   ${(
     <Props
-      heading={'CodeBlock Props'}
+      heading="CodeBlock Props"
       props={require('!!extract-react-types-loader!../src/CodeBlock')}
     />
   )}

@@ -1,5 +1,25 @@
 # @atlaskit/reduced-ui-pack
 
+## 10.5.0
+- [minor] [29968f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29968f4):
+
+  - Add a menu expand icon
+
+## 10.4.0
+- [minor] [f5e26e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e26e1):
+
+  - Add a retry icon
+
+## 10.3.1
+- [patch] [f2f231c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f2f231c):
+
+  - Use fontSizeSmall from theme
+
+## 10.3.0
+- [minor] [dced9bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dced9bf):
+
+  - Remove StarOutlineIcon as it is not used
+
 ## 10.2.1
 - [patch] [d15caa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d15caa6):
 

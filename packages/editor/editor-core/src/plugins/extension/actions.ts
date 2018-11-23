@@ -40,12 +40,10 @@ export const updateExtensionLayout = (layout): Command => (state, dispatch) => {
 
   const pluginState = pluginKey.getState(state);
 
-  tr
-    .setNodeMarkup(extPosition, undefined, {
-      ...extNode!.attrs,
-      layout,
-    })
-    .setMeta(pluginKey, { ...pluginState, layout });
+  tr.setNodeMarkup(extPosition, undefined, {
+    ...extNode!.attrs,
+    layout,
+  }).setMeta(pluginKey, { ...pluginState, layout });
 
   dispatch(tr);
 

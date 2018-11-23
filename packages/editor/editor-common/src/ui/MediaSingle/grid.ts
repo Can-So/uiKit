@@ -18,7 +18,7 @@ export function calcPxFromColumns(
   gridSize: number,
 ): number {
   const maxWidth = lineLength + gutterSize;
-  return maxWidth / gridSize * columns - gutterSize;
+  return (maxWidth / gridSize) * columns - gutterSize;
 }
 
 export function calcColumnsFromPx(
@@ -27,7 +27,7 @@ export function calcColumnsFromPx(
   gridSize: number,
 ): number {
   const maxWidth = lineLength + gutterSize;
-  return (width + gutterSize) * gridSize / maxWidth;
+  return ((width + gutterSize) * gridSize) / maxWidth;
 }
 
 export function calcPxFromPct(pct: number, lineLength: number): number {
@@ -50,7 +50,7 @@ export const snapToGrid = (gridWidth, width, height, lineLength, gridSize) => {
   const alignedWidth = calcPxFromColumns(columnSpan, lineLength, gridSize);
 
   return {
-    height: height / width * alignedWidth,
+    height: (height / width) * alignedWidth,
     width: alignedWidth,
   };
 };

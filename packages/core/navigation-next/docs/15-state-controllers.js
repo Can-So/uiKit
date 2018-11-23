@@ -35,14 +35,6 @@ ${code`interface UIControllerInterface {
   state: {
     /** Whether the navigation is currently collapsed. */
     isCollapsed: boolean,
-    /** Whether the navigation is currently performing a 'peek hint'.
-     * @deprecated: The concept of peeking has been removed from the UX spec so
-     * this property will be removed in a future release. */
-    isPeekHinting: boolean,
-    /** Whether the navigation is currently performing a 'peek'. @deprecated:
-     * The concept of peeking has been removed from the UX spec so this property
-     * will be removed in a future release. */
-    isPeeking: boolean,
     /** Whether the navigation is currently being resized. */
     isResizing: boolean,
     /** The width of the content navigation area. */
@@ -55,24 +47,6 @@ ${code`interface UIControllerInterface {
   expand: () => void;
   /** Toggle the collapse/expand state of the content navigation. */
   toggleCollapse: () => void;
-
-  /** Shift the container navigation layer to suggest that a 'peek' can be
-   * performed. @deprecated */
-  peekHint: () => void;
-  /** Reset the position of the container navigation layer. @deprecated */
-  unPeekHint: () => void;
-  /** Toggle the hinting state of the container navigation layer. @deprecated */
-  togglePeekHint: () => void;
-
-  /** Slide the container navigation layer out of the way, or transition a
-   * nested product navigation view, to reveal the 'root product home view'.
-   * @deprecated */
-  peek: () => void;
-  /** Reset the navigation to its state before a peek was performed. @deprecated
-   * */
-  unPeek: () => void;
-  /** Toggle the peeking state of the navigation. @deprecated */
-  togglePeek: () => void;
 }`}
 
 ### UIControllerSubscriber
@@ -89,11 +63,11 @@ const MyComponent = () => (
   </UIControllerSubscriber>
 );`}
 
-### withNavigationUI
+### withNavigationUIController
 
 A higher-order component which provides the UI controller instance through the \`navigationUIController\` prop to the component it wraps.
 
-${code`import { withNavigationUI } from '@atlaskit/navigation-next';
+${code`import { withNavigationUIController } from '@atlaskit/navigation-next';
 
 class MyComponentBase extends Component {
   render() {
@@ -101,7 +75,7 @@ class MyComponentBase extends Component {
     return navigationUIController.state.isCollapsed ? 'Foo' : 'Bar';
   }
 }
-const MyComponent = withNavigationUI(MyComponentBase);`}
+const MyComponent = withNavigationUIController(MyComponentBase);`}
 
 ${<Hr />}
 
@@ -131,28 +105,6 @@ ${code`interface ViewControllerInterface {
 
     /** The view which will become active once it has loaded. */
     incomingView: {
-      /** The unique ID for this view. */
-      id: string,
-      /** The layer of navigation this view should be rendered on. */
-      type: 'container' | 'product',
-    } | null,
-
-    /** The view which should be rendered on the product navigation layer when
-     * the active view is a 'container' view. @deprecated: The concept of
-     * peeking no longer exists in the UX spec, so this feature will be removed
-     * in a future release. */
-    activePeekView: {
-      /** The unique ID for this view. */
-      id: string,
-      /** The layer of navigation this view should be rendered on. */
-      type: 'container' | 'product',
-      /** An array of items. */
-      data: [],
-    } | null,
-
-    /** The view which will become the active peek view once it has loaded.
-     * @deprecated */
-    incomingPeekView: {
       /** The unique ID for this view. */
       id: string,
       /** The layer of navigation this view should be rendered on. */
@@ -191,9 +143,6 @@ ${code`interface ViewControllerInterface {
 
   /** Remove a reducer from the view with the given ID. */
   removeReducer: (string, ([]) => []) => void;
-
-  /** Specify which view should be treated as the initial peek view. */
-  setInitialPeekViewId: string => void;
 
   /** Will re-resolve the active view and re-reduce its data. Accepts an
    * optional view ID to only re-resolve if the given ID matches the active
@@ -240,7 +189,36 @@ const MyComponent = withNavigationViewController(MyComponentBase);`}
 
 ${<Hr />}
 
-${<H>Built-in view item types</H>}
+${<H>Items Renderer</H>}
+
+The items renderer is used to render the data representation of your view items for you. If using the \`LayoutManagerWithViewController\` component, you do not need to use the renderer as it is taken care of for you. However, if using directly you can use two different variants, depending on whether you wish to enable flow checking for it or not.
+
+
+### Composing directly
+
+The default version can be used as follows:
+
+${code`
+  import { ItemsRenderer } from '@atlaskit/navigation-next';
+
+  <ItemsRenderer customComponents={...} items={...} />;
+`}
+
+To use the typed version, which allows you to type any custom components passed in:
+
+${code`
+  import { TypedItemsRenderer } from '@atlaskit/navigation-next';
+
+  type CustomComponentType = { type: 'Foo', id: string, foo: boolean } | { type: 'Bar', id: string, bar: boolean };
+
+  class ItemsRenderer extends TypedItemsRenderer<CustomComponentType> {};
+
+  <ItemsRenderer customComponents={...} items={...} />;
+`}
+
+This version will properly type check the items passed to the renderer, including any custom component types.
+
+### Built-in view item types
 
 Every item in a view must have a \`type\` property. This can be a component, but the primitive UI component types are built into the renderer and can be identified using a string:
 
@@ -249,6 +227,7 @@ Every item in a view must have a \`type\` property. This can be a component, but
 * \`'Group'\`
 * \`'GroupHeading'\`
 * \`'HeaderSection'\`
+* \`'InlineComponent'\`
 * \`'Item'\`
 * \`'MenuSection'\`
 * \`'Section'\`
@@ -272,6 +251,31 @@ transitions. If not supplied, the id of the sections must match between views wh
 a nested transition to occur.
 * The \`'Item'\` type is actually the \`'ConnectedItem'\` UI component instead of the basic \`'Item'\` component. It therefore accepts a special \`goTo\` property, which should be a view ID. When an \`'Item'\` with a \`goTo\` is clicked, that view will be activated. It will also render a right-arrow icon when hovered, or a loading spinner when its \`goTo\` property matches the incoming view ID.
 * The \`'GroupHeading'\` and \`'SectionHeading'\` types accept a \`text\` property instead of \`children\`.
+* The \`'InlineComponent'\` type does not have a corresponding UI component. It takes a \`component\` prop that will render the component passed to it, with all remaining props in the type passed to it. The \`'id'\` prop is still mandatory.
+
+### Exported flow types
+
+We export a corresponding flow type for each built-in view item type as well as a combined type, \`NavigationRendererItemType\` that can be used to explicitly type the view items array in your code, e.g. the return type of your \`getItems\` functions.
+
+The \`NavigationRendererItemType\` is a parameterised type that takes an optional type argument that specified any custom component types, i.e. types passed into the \`customComponents\` prop of \`ItemsRenderer\` or \`LayoutManagerWithViewController\`.
+
+For example,
+
+${code`
+  // @flow
+  import type { NavigationRendererItemType } from '@atlaskit/navigation-next';
+
+  // Note that you still need to use the <> prefix even when not using any custom components
+  const itemsWithoutCustomComponents: NavigationRendererItemType<> = [...];
+
+  type CustomComponentType = { type: 'Foo', id: string, foo: boolean } | { type: 'Bar', id: string, bar: boolean };
+
+  const itemsWithCustomComponents: NavigationRendererItemType<CustomComponentType> = [...];
+`}
+
+When typing custom components, you must adhere to the same rules as built-in view item types and specify \`type\` and \`id\` props.
+
+Unfortunately, inline component types cannot be typechecked individually like custom component types since they share the same \`type\` property of \`'InlineComponent'\`.
 
 ${<Hr />}
 

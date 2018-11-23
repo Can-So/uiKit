@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import Checkbox from '../src/Checkbox';
+import { Checkbox } from '../src';
 
 type State = {
   onChangeResult: string,
@@ -12,7 +12,9 @@ export default class UncontrolledExample extends PureComponent<void, State> {
   };
   onChange = (event: SyntheticEvent<*>) => {
     this.setState({
-      onChangeResult: `this.state.isChecked: ${event.currentTarget.checked}`,
+      onChangeResult: `this.state.isChecked: ${String(
+        event.currentTarget.checked,
+      )}`,
     });
   };
 

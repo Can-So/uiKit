@@ -35,7 +35,7 @@ export const Wrapper: ComponentClass<
           - padding-bottom % is calculated on the width of the parent container
          */
         height: 0;
-        padding-bottom: ${1 / aspectRatio * 100}%;
+        padding-bottom: ${(1 / aspectRatio) * 100}%;
       `;
     } else {
       return `

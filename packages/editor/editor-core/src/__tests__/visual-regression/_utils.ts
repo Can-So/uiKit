@@ -6,7 +6,7 @@ import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/T
 import { messages as blockTypeMessages } from '../../plugins/block-type/types';
 import { messages as textFormattingMessages } from '../../plugins/text-formatting/ui/ToolbarTextFormatting';
 import { messages as advancedTextFormattingMessages } from '../../plugins/text-formatting/ui/ToolbarAdvancedTextFormatting';
-import { messages as listsMessages } from '../../plugins/lists/ui/ToolbarLists';
+import { messages as listsMessages } from '../../plugins/lists/messages';
 import { messages as textColorMessages } from '../../plugins/text-color/ui/ToolbarTextColor';
 
 export {
@@ -356,7 +356,7 @@ export const setTests = forInput => {
   });
 };
 
-export const snapshot = async page => {
+export const snapshot = async (page, tolerance?: number) => {
   const editor = await page.$('.akEditor');
 
   // Try to take a screenshot of only the editor.
@@ -368,12 +368,30 @@ export const snapshot = async page => {
     image = await page.screenshot();
   }
 
-  // @ts-ignore
-  expect(image).toMatchProdImageSnapshot();
+  if (tolerance !== undefined) {
+    // @ts-ignore
+    expect(image).toMatchProdImageSnapshot({
+      failureThreshold: `${tolerance}`,
+      failureThresholdType: 'percent',
+    });
+  } else {
+    // @ts-ignore
+    expect(image).toMatchProdImageSnapshot();
+  }
 };
 
 export const insertMedia = async (page, filenames = ['one.svg']) => {
   // We need to wrap this as the xpath selector used in integration tests
   // isnt valid in puppeteer
   await integrationInsertMedia(page, filenames, 'div[aria-label="%s"]');
+};
+
+// Execute the click using page.evaluate
+// There appears to be a bug in Puppeteer which causes the
+// "Node is either not visible or not an HTMLElement" error.
+// https://product-fabric.atlassian.net/browse/ED-5688
+export const evaluateClick = (page, selector) => {
+  return page.evaluate(selector => {
+    document.querySelector(selector).click();
+  }, selector);
 };
