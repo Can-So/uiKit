@@ -197,7 +197,6 @@ export default class ResizableMediaSingle extends React.Component<Props> {
         height={height}
         layout={layout}
         containerWidth={containerWidth || origWidth}
-        pctWidth={pctWidth}
         innerRef={elem => (this.wrapper = elem)}
       >
         <Resizer
