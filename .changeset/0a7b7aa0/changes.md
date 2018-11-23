@@ -1,1 +1,0 @@
-- Should not ignore double and triple dashes in list item
