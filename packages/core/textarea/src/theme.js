@@ -1,4 +1,6 @@
 // @flow
+
+import { createTheme } from '@atlaskit/theme';
 import * as componentTokens from './component-tokens';
 
 const invalidRules = {
@@ -65,22 +67,19 @@ const borderColorFocus = {
 };
 
 export type ThemeAppearance = 'standard' | 'subtle' | 'none';
-export type TextAreaThemeProps = {
-  appearance: ThemeAppearance,
-  isCompact: boolean,
-};
 export type ThemeProps = {
-  textArea?: ({ appearance: ThemeAppearance, isCompact: boolean }) => {
-    borderColor?: string,
-    borderColorFocus?: string,
-    backgroundColorHover?: string,
-    backgroundColorFocus?: string,
-    backgroundColor?: string,
-    textColor?: string,
-    disabledTextColor?: string,
-    placeholderTextColor?: string,
-  },
-  mode?: 'light' | 'dark',
+  appearance: ThemeAppearance,
+  mode: 'dark' | 'light',
+};
+export type ThemeTokens = {
+  borderColor?: string,
+  borderColorFocus?: string,
+  backgroundColorHover?: string,
+  backgroundColorFocus?: string,
+  backgroundColor?: string,
+  textColor?: string,
+  disabledTextColor?: string,
+  placeholderTextColor?: string,
 };
 
 export const themeTokens = {
@@ -95,23 +94,16 @@ export const themeTokens = {
   placeholderTextColor: componentTokens.placeholderTextColor,
 };
 
-const getTextAreaTheme = mode => ({ appearance }: TextAreaThemeProps) => ({
-  borderColor: borderColor[appearance][mode],
-  borderColorFocus: borderColorFocus[appearance][mode],
-  backgroundColorHover: backgroundColorHover[appearance][mode],
-  backgroundColorFocus: backgroundColorFocus[appearance][mode],
-  backgroundColor: backgroundColor[appearance][mode],
-  disabledRules: disabledRules[mode],
-  invalidRules: invalidRules[mode],
-  textColor: componentTokens.textColor[mode],
-  placeholderTextColor: componentTokens.placeholderTextColor[mode],
-});
-
-export const theme = (props: ThemeProps): ThemeProps => {
-  const mode = props.mode || 'light';
-  return {
-    textArea: getTextAreaTheme(mode),
-    mode,
-    ...props,
-  };
-};
+export const Theme = createTheme<ThemeTokens, ThemeProps>(
+  ({ appearance, mode }) => ({
+    borderColor: borderColor[appearance][mode],
+    borderColorFocus: borderColorFocus[appearance][mode],
+    backgroundColorHover: backgroundColorHover[appearance][mode],
+    backgroundColorFocus: backgroundColorFocus[appearance][mode],
+    backgroundColor: backgroundColor[appearance][mode],
+    disabledRules: disabledRules[mode],
+    invalidRules: invalidRules[mode],
+    textColor: componentTokens.textColor[mode],
+    placeholderTextColor: componentTokens.placeholderTextColor[mode],
+  }),
+);

@@ -1,16 +1,17 @@
 // @flow
-import React, { Component } from 'react';
-import { Theme } from '@atlaskit/theme';
+
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
+import GlobalTheme, { type ThemeProp } from '@atlaskit/theme';
+import React, { Component } from 'react';
 import {
   name as packageName,
   version as packageVersion,
 } from '../../package.json';
-import { theme as defaultTheme, type ThemeProps } from '../theme';
+import { Theme, type ThemeTokens } from '../theme';
 import { TextAreaWrapper } from '../styled';
 import TextareaElement from './TextAreaElement';
 
@@ -57,7 +58,7 @@ type Props = {
    */
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
   /** The theme function TextArea consumes to derive theming constants for use in styling its components */
-  theme: ThemeProps => ThemeProps,
+  theme: ThemeProp<ThemeTokens>,
   /** Ref used to access the textarea dom element. NOTE we expose this via forwardRef,
    so you can also use the ref prop of this component to the same effect. */
   forwardedRef: (HTMLTextAreaElement | null) => void,
@@ -78,7 +79,6 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
     isMonospaced: false,
     minimumRows: 1,
     maxHeight: '50vh',
-    theme: defaultTheme,
     forwardedRef: () => {},
   };
 
@@ -124,33 +124,39 @@ class TextAreaWithoutForwardRef extends Component<Props, State> {
     const { isFocused } = this.state;
 
     return (
-      <Theme values={theme}>
-        {themeInContext => (
-          <TextAreaWrapper
-            {...themeInContext.textArea({ appearance, isCompact })}
-            resize={resize}
-            maxHeight={maxHeight}
-            appearance={appearance}
-            isDisabled={isDisabled}
-            isReadOnly={isReadOnly}
-            isMonospaced={isMonospaced}
-            isFocused={isFocused}
-            isInvalid={isInvalid}
-            minimumRows={minimumRows}
-          >
-            <TextareaElement
-              {...props}
-              forwardedRef={forwardedRef}
-              resize={resize}
-              disabled={isDisabled}
-              readOnly={isReadOnly}
-              required={isRequired}
-              onFocus={this.handleOnFocus}
-              onBlur={this.handleOnBlur}
-            />
-          </TextAreaWrapper>
+      <GlobalTheme.Consumer>
+        {({ mode }) => (
+          <Theme.Provider value={theme}>
+            <Theme.Consumer appearance={appearance} mode={mode}>
+              {themeInContext => (
+                <TextAreaWrapper
+                  {...themeInContext}
+                  resize={resize}
+                  maxHeight={maxHeight}
+                  appearance={appearance}
+                  isDisabled={isDisabled}
+                  isReadOnly={isReadOnly}
+                  isMonospaced={isMonospaced}
+                  isFocused={isFocused}
+                  isInvalid={isInvalid}
+                  minimumRows={minimumRows}
+                >
+                  <TextareaElement
+                    {...props}
+                    forwardedRef={forwardedRef}
+                    resize={resize}
+                    disabled={isDisabled}
+                    readOnly={isReadOnly}
+                    required={isRequired}
+                    onFocus={this.handleOnFocus}
+                    onBlur={this.handleOnBlur}
+                  />
+                </TextAreaWrapper>
+              )}
+            </Theme.Consumer>
+          </Theme.Provider>
         )}
-      </Theme>
+      </GlobalTheme.Consumer>
     );
   }
 }
