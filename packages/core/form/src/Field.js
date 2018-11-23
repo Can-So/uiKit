@@ -141,12 +141,14 @@ class FieldInner extends React.Component<Props, State> {
     };
     return (
       <FieldWrapper>
-        <Label htmlFor={name}>
-          {label}
-          {isRequired && (
-            <RequiredIndicator role="presentation">*</RequiredIndicator>
-          )}
-        </Label>
+        {label && (
+          <Label htmlFor={name}>
+            {label}
+            {isRequired && (
+              <RequiredIndicator role="presentation">*</RequiredIndicator>
+            )}
+          </Label>
+        )}
         {registered && children({ fieldProps, error, meta: rest })}
       </FieldWrapper>
     );

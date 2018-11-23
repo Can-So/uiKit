@@ -24,15 +24,15 @@ export default () => (
     <Form
       onSubmit={data => {
         console.log('form data', data);
-        return Promise.resolve(
+        return new Promise(resolve => setTimeout(resolve, 2000)).then(() =>
           data.username === 'error' ? { username: 'IN_USE' } : undefined,
         );
       }}
     >
-      {({ formProps }) => (
+      {({ formProps, dirty, submitting }) => (
         <form {...formProps}>
           <FormHeader title="Sign up" />
-          <Field name="username" defaultValue="" label="User name" isRequired>
+          <Field name="username" label="User name" isRequired defaultValue="">
             {({ fieldProps, error }) => (
               <>
                 <FieldText shouldFitContainer isLabelHidden {...fieldProps} />
@@ -51,8 +51,8 @@ export default () => (
           </Field>
           <Field
             name="password"
-            defaultValue=""
             label="Password"
+            defaultValue=""
             isRequired
             validate={value => (value.length < 8 ? 'TOO_SHORT' : undefined)}
           >
@@ -78,7 +78,7 @@ export default () => (
               </>
             )}
           </Field>
-          <CheckboxField name="remember" defaultIsChecked label="Remember me">
+          <CheckboxField name="remember" label="Remember me" defaultIsChecked>
             {({ fieldProps }) => (
               <Checkbox {...fieldProps} label="Always sign in on this device" />
             )}
@@ -86,7 +86,11 @@ export default () => (
           <FormFooter>
             <ButtonGroup>
               <Button appearance="subtle">Cancel</Button>
-              <Button type="submit" appearance="primary">
+              <Button
+                type="submit"
+                appearance="primary"
+                isDisabled={!dirty || submitting}
+              >
                 Sign up
               </Button>
             </ButtonGroup>

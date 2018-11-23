@@ -23,10 +23,19 @@ export type FieldInfo = {
   register: FormApi => any,
 };
 
-class Form extends React.Component<Props> {
+type State = {
+  dirty: boolean,
+  submitting: boolean,
+};
+
+class Form extends React.Component<Props, State> {
   fields = [];
   form = undefined;
   formRef = React.createRef();
+  state = {
+    dirty: false,
+    submitting: false,
+  };
 
   componentDidMount() {
     const initialValues = this.fields.reduce(
@@ -70,6 +79,7 @@ class Form extends React.Component<Props> {
   };
 
   render() {
+    const { dirty, submitting } = this.state;
     return (
       <FormContext.Provider value={this.registerField}>
         {this.props.children({
@@ -77,6 +87,8 @@ class Form extends React.Component<Props> {
             onSubmit: this.handleSubmit,
             ref: this.formRef,
           },
+          dirty,
+          submitting,
         })}
       </FormContext.Provider>
     );
