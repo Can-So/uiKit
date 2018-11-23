@@ -181,22 +181,22 @@ export const messages = defineMessages({
   },
   jira_project_type_business_project: {
     id: 'global_search.jira.project_type.business_project',
-    defaultMessage: 'Business project',
+    defaultMessage: 'Business Project',
     description: '',
   },
   jira_project_type_software_project: {
     id: 'global_search.jira.project_type.software_project',
-    defaultMessage: 'Software project',
+    defaultMessage: 'Software Project',
     description: '',
   },
   jira_project_type_service_desk_project: {
     id: 'global_search.jira.project_type.service_desk_project',
-    defaultMessage: 'Service desk project',
+    defaultMessage: 'Service Desk Project',
     description: '',
   },
   jira_project_type_ops_project: {
     id: 'global_search.jira.project_type.ops_project',
-    defaultMessage: 'Ops project',
+    defaultMessage: 'Ops Project',
     description: '',
   },
 });
