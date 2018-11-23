@@ -1,0 +1,1 @@
+- Update the order of advanced search links and container headings
