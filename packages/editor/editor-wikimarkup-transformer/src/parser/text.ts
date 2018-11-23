@@ -150,7 +150,7 @@ export function parseString(
          * Ported from Jira:
          * If previous char is also a backslash, then this is not a valid escape
          */
-        if (!escapedChar.includes(nextChar) || prevChar === '\\') {
+        if (escapedChar.indexOf(nextChar) === -1 || prevChar === '\\') {
           // Insert \ in buffer mode
           buffer += char;
         }
