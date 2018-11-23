@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.12.4
+- [patch] [a1e1821](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1e1821):
+
+  - Title case for "Software project", "Service Desk project", "Ops project"
+
 ## 5.12.3
 - [patch] [6c50eb1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c50eb1):
 

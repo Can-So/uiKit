@@ -1,1 +1,0 @@
-- Title case for "Software project", "Service Desk project", "Ops project"
