@@ -311,7 +311,8 @@ export class JiraQuickSearchContainer extends React.Component<
     if (
       issueResults &&
       issueResults.length > 0 &&
-      issueResults[0].objectKey === query
+      typeof issueResults[0].objectKey === 'string' &&
+      issueResults[0].objectKey!.toLowerCase() === query.toLowerCase()
     ) {
       this.setState({
         selectedResultId: getUniqueResultId(issueResults[0]),
