@@ -1,1 +1,0 @@
-- Makes all entrypoints have a corresponding .flow file containing the //@flow comment
