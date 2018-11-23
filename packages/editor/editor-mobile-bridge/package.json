@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-mobile-bridge",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "Mobile destribution of the Editor",
   "main": "dist/es5/index.js",
   "module": "dist/es2015/index.js",
@@ -24,7 +24,7 @@
   "homepage": "https://bitbucket.org/atlaskit/atlaskit-mk-2#readme",
   "dependencies": {
     "@atlaskit/editor-common": "^21.4.0",
-    "@atlaskit/editor-core": "^88.4.0",
+    "@atlaskit/editor-core": "^88.5.1",
     "@atlaskit/editor-json-transformer": "^4.0.21",
     "@atlaskit/emoji": "^46.0.0",
     "@atlaskit/media-core": "^24.4.0",

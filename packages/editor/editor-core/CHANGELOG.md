@@ -1,5 +1,12 @@
 # @atlaskit/editor-core
 
+## 88.5.1
+- [patch] [ab6d96b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6d96b):
+
+  - ED-5710: Fixes calling media upfront.
+
+  We now only call for the media auth, when rendering / loading a media item.
+
 ## 88.5.0
 - [minor] [cfba914](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cfba914):
 

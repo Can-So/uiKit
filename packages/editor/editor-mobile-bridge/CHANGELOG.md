@@ -1,5 +1,12 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.1.0
+- [minor] [ab6d96b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6d96b):
+
+  - ED-5710: Fixes calling media upfront.
+
+  We now only call for the media auth, when rendering / loading a media item.
+
 ## 6.0.0
 - [major] [6d6522b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d6522b):
 
