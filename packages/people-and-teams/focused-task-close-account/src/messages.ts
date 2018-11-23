@@ -73,7 +73,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.warning-section.body',
     defaultMessage:
-      "You can't undo deleting the account after 14 days. If you think you’ll need the account later, deactivate it instead.",
+      'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
     description:
       'A warning message shown to users when they try to delete their account.',
   },
@@ -97,7 +97,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin',
     defaultMessage:
-      '{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. They currently have access to these services:',
+      '{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. They currently have access to: ',
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app.',
   },
@@ -176,7 +176,7 @@ export const overviewMessages = {
       'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin',
     defaultMessage:
       "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian services within 30 days, " +
-      'except in a few cases where required for legitimate business or legal purposes.',
+      'except in a few cases where required for legitimate business or legal purposes. ',
     description:
       "A paragraph explaining what parts of the user's personal data will be deleted",
   },
@@ -185,7 +185,7 @@ export const overviewMessages = {
       'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self',
     defaultMessage:
       "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian services within 30 days, " +
-      'except in a few cases where required for legitimate business or legal purposes.',
+      'except in a few cases where required for legitimate business or legal purposes. ',
     description:
       "A paragraph explaining what parts of the user's personal data will be deleted",
   },
@@ -316,7 +316,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self',
     defaultMessage:
-      'Users have the right to submit complaints to the supervisory authority in their country.',
+      'You have the right to submit complaints to the supervisory authority in your country.',
     description:
       'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
   },

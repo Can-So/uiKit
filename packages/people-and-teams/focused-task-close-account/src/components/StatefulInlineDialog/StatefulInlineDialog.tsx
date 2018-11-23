@@ -1,6 +1,5 @@
 import * as React from 'react';
 import InlineDialog from '@atlaskit/inline-dialog';
-import * as Styled from './styled';
 
 interface Props {
   children: React.ReactNode;
@@ -10,13 +9,11 @@ interface Props {
 
 interface State {
   isOpen: boolean;
-  isHovered: boolean;
 }
 
 export class StatefulInlineDialog extends React.Component<Props, State> {
   state = {
     isOpen: false,
-    isHovered: false,
   };
 
   openDialog = () => {
@@ -28,32 +25,28 @@ export class StatefulInlineDialog extends React.Component<Props, State> {
   };
 
   handleMouseOver = () => {
-    this.setState({ isHovered: true });
     this.openDialog();
   };
 
   handleMouseOut = () => {
-    this.setState({ isHovered: false });
     this.closeDialog();
   };
 
   render() {
     const { children, content, placement } = this.props;
     return (
-      <Styled.InfoIconWrapper isHovered={this.state.isHovered}>
-        <InlineDialog
-          content={content}
-          placement={placement}
-          isOpen={this.state.isOpen}
+      <InlineDialog
+        content={content}
+        placement={placement}
+        isOpen={this.state.isOpen}
+      >
+        <span
+          onMouseOver={this.handleMouseOver}
+          onMouseOut={this.handleMouseOut}
         >
-          <span
-            onMouseOver={this.handleMouseOver}
-            onMouseOut={this.handleMouseOut}
-          >
-            {children}
-          </span>
-        </InlineDialog>
-      </Styled.InfoIconWrapper>
+          {children}
+        </span>
+      </InlineDialog>
     );
   }
 }

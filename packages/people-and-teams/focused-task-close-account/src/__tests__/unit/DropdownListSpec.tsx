@@ -17,13 +17,12 @@ const render = (props = {}) =>
   shallow(<DropdownList {...defaultProps} {...props} />);
 
 describe('Dropdown list button', () => {
-  test('not display if accessibleSites < 3', () => {
+  test('renders sites list', () => {
     const wrapper = render();
     expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find(Button).exists()).toBeFalsy();
   });
 
-  test('display if accessibleSites > 3', () => {
+  test('renders sites list with expand button for more than 3 sites', () => {
     const sites = [
       'hello.atlassian.net',
       'acme.atlassian.net',
@@ -34,11 +33,10 @@ describe('Dropdown list button', () => {
       render({
         accessibleSites: sites,
       }),
-    ).toMatchDocSnapshot();
+    ).toMatchSnapshot();
   });
-});
-describe('Dropdown list', () => {
-  test('displayed if accessibleSites > 3', () => {
+
+  test('renders sites list with collapse button for more than 3 sites after been expanded', () => {
     const sites = [
       'hello.atlassian.net',
       'acme.atlassian.net',
@@ -54,9 +52,8 @@ describe('Dropdown list', () => {
 
     expect(wrapper).toMatchSnapshot();
   });
-});
-describe('Dropdown collapse button', () => {
-  test('displayed if accessibleSites > 3', () => {
+
+  test('renders sites list with expand button for more than 3 sites after been collapsed', () => {
     const sites = [
       'hello.atlassian.net',
       'acme.atlassian.net',
@@ -69,20 +66,6 @@ describe('Dropdown collapse button', () => {
     const expandButton = wrapper.find(Button);
     expandButton.simulate('click');
     wrapper.update();
-
-    expect(wrapper.find(Button).exists()).toBeTruthy();
-  });
-  test('onClick renders expand button', () => {
-    const sites = [
-      'hello.atlassian.net',
-      'acme.atlassian.net',
-      'test.atlassian.net',
-      'bitflix.atlassian.net',
-    ];
-    const wrapper = render({
-      accessibleSites: sites,
-    });
-    wrapper.setState({ isExpanded: true });
 
     const collapseButton = wrapper.find(Button);
     collapseButton.simulate('click');

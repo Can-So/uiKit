@@ -1,8 +1,8 @@
-import Button from '@atlaskit/button';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Button from '@atlaskit/button';
 import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
 import ChevronUpIcon from '@atlaskit/icon/glyph/chevron-up';
-import * as React from 'react';
 
 import * as Styled from './styled';
 import { DropDownListProps } from './types';
@@ -11,6 +11,8 @@ import { overviewMessages, dropDownListMessages } from '../../messages';
 type State = {
   isExpanded: boolean;
 };
+
+const COLLAPSED_LIST_SITE_COUNT = 3;
 
 export class DropdownList extends React.Component<DropDownListProps, State> {
   state = {
@@ -25,71 +27,61 @@ export class DropdownList extends React.Component<DropDownListProps, State> {
     this.setState({ isExpanded: false });
   };
 
+  getVisibleSites = () => {
+    return this.state.isExpanded
+      ? this.props.accessibleSites
+      : this.props.accessibleSites.slice(0, COLLAPSED_LIST_SITE_COUNT);
+  };
+
   render() {
     const { accessibleSites } = this.props;
     const { isExpanded } = this.state;
+    const visibleSites = this.getVisibleSites();
 
-    return accessibleSites.length < 4 ? (
+    const footNote = visibleSites.length === accessibleSites.length && (
+      <Styled.AccessibleSitesListFootnote>
+        <FormattedMessage {...overviewMessages.paragraphLoseAccessFootnote} />
+      </Styled.AccessibleSitesListFootnote>
+    );
+
+    const toggleExpand = accessibleSites.length > COLLAPSED_LIST_SITE_COUNT && (
+      <Styled.ButtonWrapper>
+        <Button
+          onClick={isExpanded ? this.hideDropdownList : this.showDropdownList}
+          appearance="link"
+          spacing="none"
+          iconBefore={
+            isExpanded ? (
+              <ChevronUpIcon label="collapse" />
+            ) : (
+              <ChevronDownIcon label="expand" />
+            )
+          }
+        >
+          {isExpanded ? (
+            <FormattedMessage {...dropDownListMessages.collapseButton} />
+          ) : (
+            <FormattedMessage
+              {...dropDownListMessages.expandButton}
+              values={{ num: accessibleSites.length - 3 }}
+            />
+          )}
+        </Button>
+      </Styled.ButtonWrapper>
+    );
+
+    return (
       <>
         <Styled.AccessibleSitesList>
-          {accessibleSites.map((url, idx) => (
+          {visibleSites.map((url, idx) => (
             <li key={idx}>{url}</li>
           ))}
         </Styled.AccessibleSitesList>
-        <Styled.AccessibleSitesListFootnote>
-          <FormattedMessage {...overviewMessages.paragraphLoseAccessFootnote} />
-        </Styled.AccessibleSitesListFootnote>
-      </>
-    ) : (
-      <>
-        <Styled.AccessibleSitesList>
-          {accessibleSites.slice(0, 3).map((url, idx) => (
-            <li key={idx}>{url}</li>
-          ))}
-        </Styled.AccessibleSitesList>
-        {isExpanded && (
-          <>
-            <Styled.AccessibleSitesList>
-              {accessibleSites
-                .slice(3, accessibleSites.length)
-                .map((url, idx) => (
-                  <li key={idx}>{url}</li>
-                ))}
-            </Styled.AccessibleSitesList>
-            <Styled.AccessibleSitesListFootnote>
-              <FormattedMessage
-                {...overviewMessages.paragraphLoseAccessFootnote}
-              />
-            </Styled.AccessibleSitesListFootnote>
-          </>
-        )}
-        {!isExpanded ? (
-          <Styled.ButtonWrapper>
-            <Button
-              onClick={this.showDropdownList}
-              appearance="link"
-              spacing="none"
-              iconBefore={<ChevronDownIcon label="expand" />}
-            >
-              <FormattedMessage
-                {...dropDownListMessages.expandButton}
-                values={{ num: accessibleSites.length - 3 }}
-              />
-            </Button>
-          </Styled.ButtonWrapper>
-        ) : (
-          <Styled.ButtonWrapper>
-            <Button
-              onClick={this.hideDropdownList}
-              appearance="link"
-              spacing="none"
-              iconBefore={<ChevronUpIcon label="collapse" />}
-            >
-              <FormattedMessage {...dropDownListMessages.collapseButton} />
-            </Button>
-          </Styled.ButtonWrapper>
-        )}
+        {footNote}
+        {toggleExpand}
       </>
     );
   }
 }
+
+export default DropdownList;

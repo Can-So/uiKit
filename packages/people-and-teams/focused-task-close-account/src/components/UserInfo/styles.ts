@@ -19,8 +19,8 @@ export const UserInfoOuter = styled.div`
 export const Avatar = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
-  margin-right: 8px;
+  margin-left: ${gridSizeTimes(2.5)}px;
+  margin-right: ${gridSizeTimes(1)}px;
   margin-bottom: ;
 `;
 

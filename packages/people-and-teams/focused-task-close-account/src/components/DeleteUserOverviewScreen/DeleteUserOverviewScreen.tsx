@@ -26,22 +26,170 @@ export class DeleteUserOverviewScreen extends React.Component<
     return this.props.isCurrentUser ? selfCopy : adminCopy;
   };
 
+  displayFirstListElement = () => {
+    const { accessibleSites, user } = this.props;
+    return (
+      <li>
+        {!accessibleSites || accessibleSites.length === 0 ? (
+          <FormattedHTMLMessage
+            {...this.selectAdminOrSelfCopy(
+              overviewMessages.paragraphLoseAccessAdminNoSites,
+              overviewMessages.paragraphLoseAccessSelfNoSites,
+            )}
+            values={{ fullName: user.fullName }}
+          />
+        ) : (
+          <>
+            <FormattedHTMLMessage
+              {...this.selectAdminOrSelfCopy(
+                overviewMessages.paragraphLoseAccessAdmin,
+                overviewMessages.paragraphLoseAccessSelf,
+              )}
+              values={{ fullName: user.fullName }}
+            />
+            <DropdownList accessibleSites={accessibleSites} />
+          </>
+        )}
+      </li>
+    );
+  };
+
+  displaySecondListElement = () => {
+    return (
+      <li>
+        <FormattedHTMLMessage
+          {...this.selectAdminOrSelfCopy(
+            overviewMessages.paragraphPersonalDataWillBeDeletedAdmin,
+            overviewMessages.paragraphPersonalDataWillBeDeletedSelf,
+          )}
+        />
+        <Styled.IconHoverWrapper>
+          <StatefulInlineDialog
+            placement="auto-start"
+            content={
+              <Styled.InlineDialogContent>
+                <FormattedMessage
+                  {...this.selectAdminOrSelfCopy(
+                    overviewMessages.inlineDialogDataWillBeDeletedP1Admin,
+                    overviewMessages.inlineDialogDataWillBeDeletedP1Self,
+                  )}
+                  tagName="p"
+                />
+                <FormattedMessage
+                  {...this.selectAdminOrSelfCopy(
+                    overviewMessages.inlineDialogDataWillBeDeletedLi1Admin,
+                    overviewMessages.inlineDialogDataWillBeDeletedLi1Self,
+                  )}
+                  tagName="li"
+                />
+                <FormattedMessage
+                  {...this.selectAdminOrSelfCopy(
+                    overviewMessages.inlineDialogDataWillBeDeletedLi2Admin,
+                    overviewMessages.inlineDialogDataWillBeDeletedLi2Self,
+                  )}
+                  tagName="li"
+                />
+                <FormattedMessage
+                  {...this.selectAdminOrSelfCopy(
+                    overviewMessages.inlineDialogDataWillBeDeletedLi3Admin,
+                    overviewMessages.inlineDialogDataWillBeDeletedLi3Self,
+                  )}
+                  tagName="li"
+                />
+                <FormattedMessage
+                  {...this.selectAdminOrSelfCopy(
+                    overviewMessages.inlineDialogDataWillBeDeletedP2Admin,
+                    overviewMessages.inlineDialogDataWillBeDeletedP2Self,
+                  )}
+                  tagName="p"
+                />
+                <FormattedMessage
+                  {...this.selectAdminOrSelfCopy(
+                    overviewMessages.inlineDialogDataWillBeDeletedP3Admin,
+                    overviewMessages.inlineDialogDataWillBeDeletedP3Self,
+                  )}
+                  tagName="p"
+                />
+              </Styled.InlineDialogContent>
+            }
+          >
+            <InfoIcon label="" size="small" />
+          </StatefulInlineDialog>
+        </Styled.IconHoverWrapper>
+      </li>
+    );
+  };
+
+  displayThirdListElement = () => {
+    return (
+      <li>
+        <FormattedMessage
+          {...this.selectAdminOrSelfCopy(
+            overviewMessages.paragraphListOfAppsWithPersonalDataAdmin,
+            overviewMessages.paragraphListOfAppsWithPersonalDataSelf,
+          )}
+        />{' '}
+        <Styled.IconHoverWrapper>
+          <StatefulInlineDialog
+            placement="auto-start"
+            content={
+              <FormattedMessage
+                {...this.selectAdminOrSelfCopy(
+                  overviewMessages.inlineDialogDataAppsAdmin,
+                  overviewMessages.inlineDialogDataAppsSelf,
+                )}
+              />
+            }
+          >
+            <InfoIcon label="" size="small" />
+          </StatefulInlineDialog>
+        </Styled.IconHoverWrapper>
+      </li>
+    );
+  };
+  displayFourthListElement = () => {
+    return (
+      <li>
+        <FormattedMessage
+          {...this.selectAdminOrSelfCopy(
+            overviewMessages.paragraphContentCreatedAdmin,
+            overviewMessages.paragraphContentCreatedSelf,
+          )}
+        />{' '}
+        <Styled.IconHoverWrapper>
+          <StatefulInlineDialog
+            placement="auto-start"
+            content={
+              <FormattedMessage
+                {...this.selectAdminOrSelfCopy(
+                  overviewMessages.inlineDialogContentCreatedAdmin,
+                  overviewMessages.inlineDialogContentCreatedSelf,
+                )}
+              />
+            }
+          >
+            <InfoIcon label="" size="small" />
+          </StatefulInlineDialog>
+        </Styled.IconHoverWrapper>
+      </li>
+    );
+  };
+
   render() {
-    const { accessibleSites, user, deactivateUserHandler } = this.props;
+    const { user, deactivateUserHandler } = this.props;
 
     return (
       <Styled.Screen>
         <Styled.Title>
           <FormattedMessage {...overviewMessages.heading} />
         </Styled.Title>
-        <Styled.FirstLine>
-          <FormattedMessage
-            {...this.selectAdminOrSelfCopy(
-              overviewMessages.firstLineAdmin,
-              overviewMessages.firstLineSelf,
-            )}
-          />
-        </Styled.FirstLine>
+        <FormattedMessage
+          {...this.selectAdminOrSelfCopy(
+            overviewMessages.firstLineAdmin,
+            overviewMessages.firstLineSelf,
+          )}
+          tagName="p"
+        />
         <UserInfo user={user} />
         <FormattedMessage
           {...this.selectAdminOrSelfCopy(
@@ -50,151 +198,10 @@ export class DeleteUserOverviewScreen extends React.Component<
           )}
         />
         <Styled.MainInformationList>
-          <li>
-            <Styled.ListItems>
-              {!accessibleSites || accessibleSites.length === 0 ? (
-                <FormattedHTMLMessage
-                  {...this.selectAdminOrSelfCopy(
-                    overviewMessages.paragraphLoseAccessAdminNoSites,
-                    overviewMessages.paragraphLoseAccessSelfNoSites,
-                  )}
-                  values={{ fullName: user.fullName }}
-                />
-              ) : (
-                <>
-                  <FormattedHTMLMessage
-                    {...this.selectAdminOrSelfCopy(
-                      overviewMessages.paragraphLoseAccessAdmin,
-                      overviewMessages.paragraphLoseAccessSelf,
-                    )}
-                    values={{ fullName: user.fullName }}
-                  />
-                  <DropdownList accessibleSites={accessibleSites} />
-                </>
-              )}
-            </Styled.ListItems>
-          </li>
-          <li>
-            <Styled.ListItems>
-              <FormattedHTMLMessage
-                {...this.selectAdminOrSelfCopy(
-                  overviewMessages.paragraphPersonalDataWillBeDeletedAdmin,
-                  overviewMessages.paragraphPersonalDataWillBeDeletedSelf,
-                )}
-              />
-              <StatefulInlineDialog
-                placement="auto-start"
-                content={
-                  <div>
-                    <FormattedMessage
-                      {...this.selectAdminOrSelfCopy(
-                        overviewMessages.inlineDialogDataWillBeDeletedP1Admin,
-                        overviewMessages.inlineDialogDataWillBeDeletedP1Self,
-                      )}
-                      tagName="p"
-                    />
-                    <Styled.ListItems>
-                      <FormattedMessage
-                        {...this.selectAdminOrSelfCopy(
-                          overviewMessages.inlineDialogDataWillBeDeletedLi1Admin,
-                          overviewMessages.inlineDialogDataWillBeDeletedLi1Self,
-                        )}
-                        tagName="li"
-                      />
-                      <FormattedMessage
-                        {...this.selectAdminOrSelfCopy(
-                          overviewMessages.inlineDialogDataWillBeDeletedLi2Admin,
-                          overviewMessages.inlineDialogDataWillBeDeletedLi2Self,
-                        )}
-                        tagName="li"
-                      />
-                      <FormattedMessage
-                        {...this.selectAdminOrSelfCopy(
-                          overviewMessages.inlineDialogDataWillBeDeletedLi3Admin,
-                          overviewMessages.inlineDialogDataWillBeDeletedLi3Self,
-                        )}
-                        tagName="li"
-                      />
-                    </Styled.ListItems>
-                    <FormattedMessage
-                      {...this.selectAdminOrSelfCopy(
-                        overviewMessages.inlineDialogDataWillBeDeletedP2Admin,
-                        overviewMessages.inlineDialogDataWillBeDeletedP2Self,
-                      )}
-                      tagName="p"
-                    />
-                    <FormattedMessage
-                      {...this.selectAdminOrSelfCopy(
-                        overviewMessages.inlineDialogDataWillBeDeletedP3Admin,
-                        overviewMessages.inlineDialogDataWillBeDeletedP3Self,
-                      )}
-                      tagName="p"
-                    />
-                  </div>
-                }
-              >
-                <InfoIcon label="" size="small" />
-              </StatefulInlineDialog>
-            </Styled.ListItems>
-          </li>
-          <li>
-            <Styled.ListItems>
-              <FormattedMessage
-                {...this.selectAdminOrSelfCopy(
-                  overviewMessages.paragraphListOfAppsWithPersonalDataAdmin,
-                  overviewMessages.paragraphListOfAppsWithPersonalDataSelf,
-                )}
-              />{' '}
-              <StatefulInlineDialog
-                placement="auto-start"
-                content={
-                  <div>
-                    <FormattedMessage
-                      {...this.selectAdminOrSelfCopy(
-                        overviewMessages.inlineDialogDataAppsAdmin,
-                        overviewMessages.inlineDialogDataAppsSelf,
-                      )}
-                      tagName="p"
-                    />
-                  </div>
-                }
-              >
-                <InfoIcon label="" size="small" />
-              </StatefulInlineDialog>
-            </Styled.ListItems>
-          </li>
-          <li>
-            <Styled.ListItems>
-              <FormattedMessage
-                {...this.selectAdminOrSelfCopy(
-                  overviewMessages.paragraphContentCreatedAdmin,
-                  overviewMessages.paragraphContentCreatedSelf,
-                )}
-              />{' '}
-              <StatefulInlineDialog
-                placement="auto-start"
-                content={
-                  <FormattedMessage
-                    {...this.selectAdminOrSelfCopy(
-                      overviewMessages.inlineDialogContentCreatedAdmin,
-                      overviewMessages.inlineDialogContentCreatedSelf,
-                    )}
-                  />
-                }
-              >
-                <InfoIcon label="" size="small" />
-              </StatefulInlineDialog>
-            </Styled.ListItems>
-          </li>
-          {!this.props.isCurrentUser && (
-            <li>
-              <Styled.ListItems>
-                <FormattedMessage
-                  {...overviewMessages.paragraphGracePeriodAdmin}
-                />
-              </Styled.ListItems>
-            </li>
-          )}
+          {this.displayFirstListElement()}
+          {this.displaySecondListElement()}
+          {this.displayThirdListElement()}
+          {this.displayFourthListElement()}
         </Styled.MainInformationList>
         {deactivateUserHandler && (
           <Styled.SectionMessageOuter>

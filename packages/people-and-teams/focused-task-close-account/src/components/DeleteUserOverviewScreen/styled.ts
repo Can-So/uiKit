@@ -1,10 +1,14 @@
 import styled from 'styled-components';
-import { typography } from '@atlaskit/theme';
+import { colors, typography } from '@atlaskit/theme';
 import gridSizeTimes from '../../util/gridSizeTimes';
 
 export const Screen = styled.div`
   width: 640px;
   margin-bottom: ${gridSizeTimes(2)}px;
+  > p {
+    margin-top: ${gridSizeTimes(3)}px;
+    margin-bottom: ${gridSizeTimes(2)}px;
+  }
 `;
 
 export const LoadingWrapper = styled.div`
@@ -20,26 +24,32 @@ export const Title = styled.div`
   margin-top: 0;
 `;
 
-export const FirstLine = styled.div`
-  margin-top: ${gridSizeTimes(3)}px;
-  margin-bottom: ${gridSizeTimes(2)}px;
-`;
-
 export const SectionMessageOuter = styled.div`
   margin: ${gridSizeTimes(3)}px 0;
 `;
 
 export const MainInformationList = styled.ul`
   > li {
-    margin-top: 16px;
-    margin-left: 12px;
+    margin-top: ${gridSizeTimes(2)}px;
+    margin-left: ${gridSizeTimes(1.5)}px;
+    padding-left: ${gridSizeTimes(3)}px;
+    b {
+      font-weight: 600;
+    }
   }
 `;
 
-export const ListItems = styled.div`
-  margin-left: 24px;
-  margin-top: 8px;
-  > * b {
-    font-weight: 600;
+export const IconHoverWrapper = styled.span`
+  color: ${colors.B500};
+  &:hover {
+    color: ${colors.B200};
+  }
+`;
+
+export const InlineDialogContent = styled.div`
+  li {
+    margin-left: ${gridSizeTimes(3)}px;
+    margin-top: ${gridSizeTimes(1)}px;
+    padding-left: ${gridSizeTimes(1)}px;
   }
 `;
