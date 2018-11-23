@@ -122,6 +122,7 @@ export default function mobileEditor(props) {
       allowTextColor={true}
       allowDate={true}
       allowRule={true}
+      allowGapCursor={true}
       taskDecisionProvider={Promise.resolve(TaskDecisionProvider())}
     />
   );

@@ -16,6 +16,9 @@ import {
   toggleUnderline,
   toggleEm,
   toggleStrong,
+  insertBlockType,
+  createTable,
+  insertTaskDecision,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
@@ -167,6 +170,47 @@ export default class WebBridgeImpl extends WebBridge
   onOutdentList() {
     if (this.listState && this.editorView) {
       outdentList()(this.editorView.state, this.editorView.dispatch);
+    }
+  }
+
+  insertBlockType(type) {
+    if (!this.editorView) {
+      return;
+    }
+
+    switch (type) {
+      case 'blockquote':
+        insertBlockType('blockquote')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'codeblock':
+        insertBlockType('codeblock')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'panel':
+        insertBlockType('panel')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'action':
+        insertTaskDecision(this.editorView, 'taskList');
+        return;
+      case 'decision':
+        insertTaskDecision(this.editorView, 'decisionList');
+        return;
+      case 'table':
+        createTable(this.editorView.state, this.editorView.dispatch);
+        return;
+
+      default:
+        // tslint:disable-next-line:no-console
+        console.error(`${type} cannot be inserted as it's not supported`);
+        return;
     }
   }
 
