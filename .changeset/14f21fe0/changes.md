@@ -1,1 +1,0 @@
-- Fix zoom not sorting numerical values correctly
