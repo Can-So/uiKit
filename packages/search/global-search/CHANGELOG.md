@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.12.5
+- [patch] [82842ad](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82842ad):
+
+  - Hide the 'shift+enter' on jira quick search pre-query screen
+
 ## 5.12.4
 - [patch] [a1e1821](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1e1821):
 
