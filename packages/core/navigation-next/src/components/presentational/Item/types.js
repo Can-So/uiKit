@@ -1,7 +1,7 @@
 // @flow
 
 import type { ComponentType, Node, Ref } from 'react';
-import type { DraggableProps } from 'react-beautiful-dnd';
+import type { DraggableProps, DragHandleProps } from 'react-beautiful-dnd';
 import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
 
 import type { StyleReducerWithState, ProductTheme } from '../../../theme/types';
@@ -33,7 +33,7 @@ export type ItemBaseProps = {|
    * */
   before?: ComponentType<ItemPresentationProps>,
   /** Properties exclusive to Items within a SortableContext. */
-  draggableProps?: DraggableProps,
+  draggableProps?: {| ...$Exact<DraggableProps>, ...$Exact<DragHandleProps> |},
   /** An href which this Item links to. If this prop is provided the Item will
    * render as an <a>. */
   href?: string,

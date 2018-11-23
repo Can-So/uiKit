@@ -37,7 +37,7 @@ export class RankableTableRow extends Component<Props, {}> {
     const { cells, key, ...restRowProps } = row;
     const inlineStyles = inlineStylesIfRanking(isRanking, refWidth);
 
-    if (!row.key) {
+    if (typeof key !== 'string' && !isRankingDisabled) {
       throw new Error(
         'dynamic-table: ranking is not possible because table row does not have a key. Add the key to the row or disable ranking.',
       );
@@ -45,7 +45,7 @@ export class RankableTableRow extends Component<Props, {}> {
 
     return (
       <Draggable
-        draggableId={key}
+        draggableId={key || ''}
         index={rowIndex}
         isDragDisabled={isRankingDisabled}
       >
