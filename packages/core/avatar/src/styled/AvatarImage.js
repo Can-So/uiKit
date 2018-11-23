@@ -33,13 +33,7 @@ export const Slot = ({
   label,
   role,
 }: SlotProps) => (
-  <Theme.Consumer
-    props={{
-      appearance,
-      isLoading,
-      size,
-    }}
-  >
+  <Theme.Consumer appearance={appearance} isLoading={isLoading} size={size}>
     {({ backgroundColor, borderRadius }) => {
       return (
         <span
@@ -77,13 +71,7 @@ export const Svg = ({
   isLoading,
   ...otherProps
 }: SvgProps) => (
-  <Theme.Consumer
-    props={{
-      appearance,
-      isLoading,
-      size,
-    }}
-  >
+  <Theme.Consumer appearance={appearance} isLoading={isLoading} size={size}>
     {({ backgroundColor, borderRadius }) => {
       return (
         <svg

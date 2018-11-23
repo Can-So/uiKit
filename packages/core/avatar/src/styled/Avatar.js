@@ -8,7 +8,7 @@ import { Theme } from '../theme';
 import { getInnerStyles } from './utils';
 
 export default (props: { children: Node, stackIndex: ?number }) => (
-  <Theme.Consumer props={{ ...props, includeBorderWidth: true }}>
+  <Theme.Consumer {...props} includeBorderWidth>
     {({ dimensions }) => {
       return (
         <div
@@ -33,7 +33,7 @@ export const Inner = withTheme(styled.div`
 `);
 
 export const PresenceWrapper = (props: { children: Node }) => (
-  <Theme.Consumer props={{ ...props, includeBorderWidth: true }}>
+  <Theme.Consumer {...props} includeBorderWidth>
     {({ presence }) => {
       return (
         <span
@@ -51,7 +51,7 @@ export const PresenceWrapper = (props: { children: Node }) => (
 );
 
 export const StatusWrapper = (props: { children: Node }) => (
-  <Theme.Consumer props={{ ...props, includeBorderWidth: true }}>
+  <Theme.Consumer {...props} includeBorderWidth>
     {({ status }) => {
       return (
         <span

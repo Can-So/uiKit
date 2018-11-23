@@ -1,6 +1,6 @@
 // @flow
 
-import GlobalTheme from '@atlaskit/theme';
+import GlobalTheme, { type ThemeProp } from '@atlaskit/theme';
 import React, {
   cloneElement,
   Component,
@@ -48,7 +48,7 @@ type Props = {
   /** Pass target down to the anchor, if href is provided. */
   target?: '_blank' | '_self' | '_top' | '_parent',
   /** The item's theme. */
-  theme?: ThemeItemTokens => ThemeItemTokens,
+  theme?: ThemeProp<ThemeItemTokens>,
   /** Whether or not overflowing primary and secondary text is truncated */
   enableTextTruncate?: boolean,
 };
@@ -100,34 +100,36 @@ class AvatarItem extends Component<Props> {
     return (
       <GlobalTheme.Consumer>
         {({ mode }) => (
-          <ThemeItem.Consumer theme={this.props.theme}>
-            {theme => {
-              // maintain the illusion of a mask around presence/status
-              const borderColor = getBackgroundColor({
-                ...this.props,
-                ...theme,
-                mode,
-              });
+          <ThemeItem.Provider value={this.props.theme}>
+            <ThemeItem.Consumer>
+              {theme => {
+                // maintain the illusion of a mask around presence/status
+                const borderColor = getBackgroundColor({
+                  ...this.props,
+                  ...theme,
+                  mode,
+                });
 
-              return (
-                <StyledComponent
-                  innerRef={this.setNode}
-                  {...enhancedProps}
-                  onClick={this.guardedClick}
-                >
-                  {cloneElement(avatar, { borderColor })}
-                  <Content truncate={enableTextTruncate}>
-                    <PrimaryText truncate={enableTextTruncate}>
-                      {primaryText}
-                    </PrimaryText>
-                    <SecondaryText truncate={enableTextTruncate}>
-                      {secondaryText}
-                    </SecondaryText>
-                  </Content>
-                </StyledComponent>
-              );
-            }}
-          </ThemeItem.Consumer>
+                return (
+                  <StyledComponent
+                    innerRef={this.setNode}
+                    {...enhancedProps}
+                    onClick={this.guardedClick}
+                  >
+                    {cloneElement(avatar, { borderColor })}
+                    <Content truncate={enableTextTruncate}>
+                      <PrimaryText truncate={enableTextTruncate}>
+                        {primaryText}
+                      </PrimaryText>
+                      <SecondaryText truncate={enableTextTruncate}>
+                        {secondaryText}
+                      </SecondaryText>
+                    </Content>
+                  </StyledComponent>
+                );
+              }}
+            </ThemeItem.Consumer>
+          </ThemeItem.Provider>
         )}
       </GlobalTheme.Consumer>
     );
