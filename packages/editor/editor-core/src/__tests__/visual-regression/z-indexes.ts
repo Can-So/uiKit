@@ -23,7 +23,7 @@ const emojiPicker = 'div[data-emoji-picker-container="true"]';
 const mentionButton = `span[aria-label="${
   insertBlockMessages.mention.defaultMessage
 }"]`;
-const mentionPicker = 'span[data-mention-query="true"]';
+const mentionQuery = 'span[data-type-ahead-query]';
 
 describe('Snapshot Test: z-indexes', () => {
   ['full-page', 'comment'].forEach(appearance => {
@@ -57,7 +57,7 @@ describe('Snapshot Test: z-indexes', () => {
         await page.click(emojiButton);
         await page.waitForSelector(emojiPicker);
         await page.click(mentionButton);
-        await page.waitForSelector(mentionPicker);
+        await page.waitForSelector(mentionQuery);
         await snapshot(page);
       });
 
