@@ -31,18 +31,9 @@ const config: Partial<Config> = {
   directoryServiceUrl: 'https://api-private.stg.atlassian.com/directory',
 };
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const cloudId = '497ea592-beb4-43c3-9137-a6e5fa301088'; // JDOG
 export default class extends React.Component<{}, { cloudId: string }> {
   render() {
-    return (
-      <Container>
-        <GlobalQuickSearchInNavigation cloudId={cloudId} {...config} />
-      </Container>
-    );
+    return <GlobalQuickSearchInNavigation cloudId={cloudId} {...config} />;
   }
 }
