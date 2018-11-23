@@ -2,57 +2,56 @@
 
 import React, { createContext, type ComponentType, type Node } from 'react';
 
-export default function createTheme<ThemeTokens, ThemeProps>(
-  themeDefault: ThemeProps => ThemeTokens,
+export type ThemeProp<ThemeTokens, ThemeProps = *> = (
+  (ThemeProps) => ThemeTokens,
+  ThemeProps,
+) => ThemeTokens;
+
+export function createTheme<ThemeTokens, ThemeProps>(
+  defaultThemeFn: ThemeProps => ThemeTokens,
 ): {
-  Consumer: ComponentType<{
-    children: ThemeTokens => Node,
-    props?: ThemeProps,
-    theme?: (ThemeTokens, ThemeProps) => ThemeTokens,
-  }>,
+  Consumer: ComponentType<
+    ThemeProps & {
+      children: ThemeTokens => Node,
+    },
+  >,
   Provider: ComponentType<{
-    children: *,
-    theme?: (ThemeTokens, ThemeProps) => ThemeTokens,
+    children?: Node,
+    value?: ThemeProp<ThemeTokens, ThemeProps>,
   }>,
 } {
-  const emptyPropsObj: $Shape<ThemeProps> = {};
-  const emptyTokenObj: $Shape<ThemeTokens> = {};
-  const emptyThemeDefaultFn: ThemeProps => ThemeTokens = () => emptyTokenObj;
-  const emptyThemeFn: (ThemeTokens, ThemeProps) => ThemeTokens = tokens =>
-    tokens;
-  const ThemeContext = createContext(emptyThemeFn);
+  const emptyThemeFn = (tokens, props) => tokens(props);
+  const ThemeContext = createContext(defaultThemeFn);
 
-  function Consumer(props: {
-    children: ThemeTokens => Node,
-    props?: ThemeProps,
-    theme?: (ThemeTokens, ThemeProps) => ThemeTokens,
-  }) {
+  function Consumer(props: ThemeProps & { children: ThemeTokens => Node }) {
+    const { children, ...themeProps } = props;
     return (
       <ThemeContext.Consumer>
-        {themeContext => {
-          const themeFn = props.theme || emptyThemeFn;
-          const themeProps = props.props || emptyPropsObj;
-          const themeContextFn = themeContext || emptyThemeFn;
-          const themeDefaultFn = themeDefault || emptyThemeDefaultFn;
-          return props.children(
-            themeFn(
-              themeContextFn(themeDefaultFn(themeProps), themeProps),
-              themeProps,
-            ),
-          );
+        {theme => {
+          const themeFn = theme || emptyThemeFn;
+          return props.children(themeFn(themeProps));
         }}
       </ThemeContext.Consumer>
     );
   }
 
   function Provider(props: {
-    children: Node,
-    theme?: (ThemeTokens, ThemeProps) => ThemeTokens,
+    children?: Node,
+    value?: ThemeProp<ThemeTokens, ThemeProps>,
   }) {
     return (
-      <ThemeContext.Provider value={props.theme}>
-        {props.children}
-      </ThemeContext.Provider>
+      <ThemeContext.Consumer>
+        {themeFn => {
+          const valueFn = props.value || emptyThemeFn;
+          const mixedFn = (themeProps: ThemeProps) =>
+            valueFn(themeFn, themeProps);
+          return (
+            <ThemeContext.Provider value={mixedFn}>
+              {props.children}
+            </ThemeContext.Provider>
+          );
+        }}
+      </ThemeContext.Consumer>
     );
   }
 

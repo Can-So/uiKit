@@ -1,6 +1,6 @@
 // @flow
 
-import { Consumer as ThemeGlobal } from '@atlaskit/theme';
+import GlobalTheme from '@atlaskit/theme';
 import React, { PureComponent } from 'react';
 import { Slot, ShapeGroup, Svg } from '../styled/AvatarImage';
 import type { AppearanceType, SizeType } from '../types';
@@ -19,7 +19,7 @@ export function DefaultImage({
   const rectBounds = 128;
 
   return (
-    <ThemeGlobal>
+    <GlobalTheme.Consumer>
       {({ mode }) => {
         return (
           <Svg
@@ -53,7 +53,7 @@ export function DefaultImage({
           </Svg>
         );
       }}
-    </ThemeGlobal>
+    </GlobalTheme.Consumer>
   );
 }
 

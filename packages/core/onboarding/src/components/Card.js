@@ -1,4 +1,5 @@
 // @flow
+
 import React, { type Node, type ElementType } from 'react';
 import styled from 'styled-components';
 import Button from '@atlaskit/button';
@@ -9,6 +10,7 @@ import {
   math,
   typography,
   createTheme,
+  type ThemeProp,
 } from '@atlaskit/theme';
 import { ActionItems, ActionItem } from '../styled/Dialog';
 import type { ActionsType } from '../types';
@@ -38,7 +40,7 @@ type Props = {
   /** The image to render above the heading. Can be a url or a Node. */
   image?: string | Node,
   /** the theme of the card */
-  theme?: CardTokens => CardTokens,
+  theme?: ThemeProp<CardTokens>,
   innerRef?: Function,
 };
 
@@ -71,7 +73,7 @@ const DefaultFooter = styled.div`
   padding-top: ${gridSize}px;
 `;
 
-const Theme = createTheme<CardTokens, void>(() => ({
+const Theme = createTheme<CardTokens, *>(() => ({
   container: {
     overflow: 'auto',
     borderRadius: `${borderRadius()}px`,
@@ -93,44 +95,47 @@ const Card = ({
 }: Props) => {
   const { Header = DefaultHeader, Footer = DefaultFooter } = components;
   return (
-    <Theme.Consumer theme={theme} props={undefined}>
-      {({ container }) => {
-        return (
-          <Container theme={container} innerRef={innerRef}>
-            {typeof image === 'string' ? <img src={image} alt="" /> : image}
-            <Body>
-              {heading || headingAfterElement ? (
-                <Header>
-                  <Heading>{heading}</Heading>
-                  {/* Always need an element so space-between alignment works */}
-                  {headingAfterElement || <span />}
-                </Header>
-              ) : null}
-              {children}
-              {actions.length > 0 || actionsBeforeElement ? (
-                <Footer>
-                  {/* Always need an element so space-between alignment works */}
-                  {actionsBeforeElement || <span />}
-                  <ActionItems>
-                    {actions.map(({ text, key, ...rest }, idx) => {
-                      return (
-                        <ActionItem
-                          key={
-                            key || (typeof text === 'string' ? text : `${idx}`)
-                          }
-                        >
-                          <Button {...rest}>{text}</Button>
-                        </ActionItem>
-                      );
-                    })}
-                  </ActionItems>
-                </Footer>
-              ) : null}
-            </Body>
-          </Container>
-        );
-      }}
-    </Theme.Consumer>
+    <Theme.Provider value={theme}>
+      <Theme.Consumer>
+        {({ container }) => {
+          return (
+            <Container theme={container} innerRef={innerRef}>
+              {typeof image === 'string' ? <img src={image} alt="" /> : image}
+              <Body>
+                {heading || headingAfterElement ? (
+                  <Header>
+                    <Heading>{heading}</Heading>
+                    {/* Always need an element so space-between alignment works */}
+                    {headingAfterElement || <span />}
+                  </Header>
+                ) : null}
+                {children}
+                {actions.length > 0 || actionsBeforeElement ? (
+                  <Footer>
+                    {/* Always need an element so space-between alignment works */}
+                    {actionsBeforeElement || <span />}
+                    <ActionItems>
+                      {actions.map(({ text, key, ...rest }, idx) => {
+                        return (
+                          <ActionItem
+                            key={
+                              key ||
+                              (typeof text === 'string' ? text : `${idx}`)
+                            }
+                          >
+                            <Button {...rest}>{text}</Button>
+                          </ActionItem>
+                        );
+                      })}
+                    </ActionItems>
+                  </Footer>
+                ) : null}
+              </Body>
+            </Container>
+          );
+        }}
+      </Theme.Consumer>
+    </Theme.Provider>
   );
 };
 

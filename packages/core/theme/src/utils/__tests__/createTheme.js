@@ -2,7 +2,7 @@
 
 import { mount } from 'enzyme';
 import React from 'react';
-import createTheme from '../createTheme';
+import { createTheme } from '../createTheme';
 
 test('is a function', () => {
   expect(typeof createTheme).toBe('function');

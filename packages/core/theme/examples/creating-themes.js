@@ -4,6 +4,12 @@ import React from 'react';
 import color from 'color';
 import { createTheme } from '../src';
 
+type ThemeProps = *;
+type ThemeTokens = {
+  backgroundColor?: string,
+  textColor?: string,
+};
+
 const DisplayThemeColors = () => (
   <Theme.Consumer>
     {theme =>
@@ -26,22 +32,16 @@ const DisplayThemeColors = () => (
   </Theme.Consumer>
 );
 
-const Theme = createTheme<
-  {
-    backgroundColor?: string,
-    textColor?: string,
-  },
-  *,
->(() => ({
+const Theme = createTheme<ThemeTokens, ThemeProps>(() => ({
   backgroundColor: '#333',
   textColor: '#eee',
 }));
 
 export default () => (
-  <Theme.Provider>
+  <React.Fragment>
     <DisplayThemeColors />
-    <Theme.Provider theme={t => ({ ...t, backgroundColor: 'palevioletred' })}>
+    <Theme.Provider value={t => ({ ...t(), backgroundColor: 'palevioletred' })}>
       <DisplayThemeColors />
     </Theme.Provider>
-  </Theme.Provider>
+  </React.Fragment>
 );

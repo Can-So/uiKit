@@ -1,5 +1,6 @@
 // @flow
 
+import { type ThemeProp } from '@atlaskit/theme';
 import React, { PureComponent, type Node } from 'react';
 import Container from './styledContainer';
 import Content from './styledContent';
@@ -24,7 +25,7 @@ type Props = {
   maxWidth: number | string,
 
   /** The theme the component should use. */
-  theme?: (ThemeTokens, ThemeProps) => ThemeTokens,
+  theme?: ThemeProp<ThemeTokens, ThemeProps>,
 };
 
 export default class Lozenge extends PureComponent<Props> {
@@ -33,19 +34,20 @@ export default class Lozenge extends PureComponent<Props> {
     appearance: 'default',
     maxWidth: 200,
   };
-
   render() {
     const { props } = this;
     return (
-      <Theme.Consumer props={props} theme={props.theme}>
-        {theme => {
-          return (
-            <Container {...theme}>
-              <Content {...theme}>{props.children}</Content>
-            </Container>
-          );
-        }}
-      </Theme.Consumer>
+      <Theme.Provider value={props.theme}>
+        <Theme.Consumer {...props}>
+          {theme => {
+            return (
+              <Container {...theme}>
+                <Content {...theme}>{props.children}</Content>
+              </Container>
+            );
+          }}
+        </Theme.Consumer>
+      </Theme.Provider>
     );
   }
 }

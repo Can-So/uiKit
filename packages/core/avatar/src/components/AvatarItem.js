@@ -1,6 +1,6 @@
 // @flow
 
-import { Consumer as ThemeGlobal } from '@atlaskit/theme';
+import GlobalTheme from '@atlaskit/theme';
 import React, {
   cloneElement,
   Component,
@@ -98,7 +98,7 @@ class AvatarItem extends Component<Props> {
     const StyledComponent: any = getStyledAvatarItem(this.props);
 
     return (
-      <ThemeGlobal>
+      <GlobalTheme.Consumer>
         {({ mode }) => (
           <ThemeItem.Consumer theme={this.props.theme}>
             {theme => {
@@ -129,7 +129,7 @@ class AvatarItem extends Component<Props> {
             }}
           </ThemeItem.Consumer>
         )}
-      </ThemeGlobal>
+      </GlobalTheme.Consumer>
     );
   }
 }

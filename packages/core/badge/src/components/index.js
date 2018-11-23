@@ -1,6 +1,6 @@
 // @flow
 
-import { Consumer as ThemeGlobal } from '@atlaskit/theme';
+import GlobalTheme, { type ThemeProp } from '@atlaskit/theme';
 import React, { Component } from 'react';
 import { Container } from './Container';
 import { Format } from './Format';
@@ -31,7 +31,7 @@ type Props = {
   }) => any,
 
   /** The theme the component should use. */
-  theme?: (ThemeTokens, ThemeProps) => ThemeTokens,
+  theme?: ThemeProp<ThemeTokens, ThemeProps>,
 
   /** DEPRECATED - use `Max` from `@atlaskit/format`. The value displayed within the badge. */
   /** DEPRECATED - use children instead. The value displayed within the badge. */
@@ -71,26 +71,25 @@ export default class Badge extends Component<Props> {
   render() {
     const { props } = this;
     return (
-      <ThemeGlobal>
-        {({ mode }) => (
-          <Theme.Consumer
-            props={{ appearance: props.appearance, mode }}
-            theme={props.theme}
-          >
-            {theme => (
-              <Container {...theme}>
-                {typeof props.children === 'string' ? (
-                  props.children
-                ) : (
-                  <Format max={props.max}>
-                    {props.value || props.children}
-                  </Format>
-                )}
-              </Container>
-            )}
-          </Theme.Consumer>
-        )}
-      </ThemeGlobal>
+      <Theme.Provider value={this.props.theme}>
+        <GlobalTheme.Consumer>
+          {({ mode }) => (
+            <Theme.Consumer appearance={props.appearance} mode={mode}>
+              {theme => (
+                <Container {...theme}>
+                  {typeof props.children === 'string' ? (
+                    props.children
+                  ) : (
+                    <Format max={props.max}>
+                      {props.value || props.children}
+                    </Format>
+                  )}
+                </Container>
+              )}
+            </Theme.Consumer>
+          )}
+        </GlobalTheme.Consumer>
+      </Theme.Provider>
     );
   }
 }
