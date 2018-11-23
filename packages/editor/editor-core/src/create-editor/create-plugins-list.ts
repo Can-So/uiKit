@@ -195,10 +195,6 @@ export default function createPluginsList(
     plugins.push(layoutPlugin);
   }
 
-  if (props.allowGapCursor) {
-    plugins.push(gapCursorPlugin);
-  }
-
   if (props.UNSAFE_cards) {
     plugins.push(cardPlugin);
   }
@@ -219,6 +215,7 @@ export default function createPluginsList(
     }),
   );
 
+  plugins.push(gapCursorPlugin);
   plugins.push(gridPlugin);
   plugins.push(submitEditorPlugin);
   plugins.push(fakeTextCursorPlugin);

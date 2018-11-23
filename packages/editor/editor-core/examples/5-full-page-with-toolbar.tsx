@@ -108,7 +108,6 @@ export class ExampleEditor extends React.Component<Props> {
                 allowRule={true}
                 allowDate={true}
                 allowLayouts={true}
-                allowGapCursor={true}
                 allowTemplatePlaceholders={{ allowInserting: true }}
                 UNSAFE_cards={{
                   provider: Promise.resolve(cardProvider),
