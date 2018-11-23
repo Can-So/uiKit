@@ -20,6 +20,7 @@ import Flag, { FlagGroup } from '@atlaskit/flag';
 import AnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
 import EditorInfoIcon from '@atlaskit/icon/glyph/error';
+import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
 import { FormattedMessage } from 'react-intl';
 import { messages, InfiniteScroll } from '@atlaskit/media-ui';
 import { Browser } from '../../../../components/browser';
@@ -110,6 +111,11 @@ export interface UploadViewState {
   readonly isWebGLWarningFlagVisible: boolean;
   readonly shouldDismissWebGLWarningFlag: boolean;
   readonly isLoadingNextPage: boolean;
+  readonly deletionCandidate?: {
+    id: string;
+    occurrenceKey: string;
+    userFileId?: string;
+  };
 }
 
 export class StatelessUploadView extends Component<
@@ -134,6 +140,7 @@ export class StatelessUploadView extends Component<
     } else if (!isEmpty) {
       contentPart = this.renderRecentsView(cards);
     }
+    const confirmationDialog = this.renderDeleteConfirmation();
 
     return (
       <InfiniteScroll
@@ -143,10 +150,51 @@ export class StatelessUploadView extends Component<
         <Wrapper>
           <Dropzone isEmpty={isEmpty} mpBrowser={mpBrowser} />
           {contentPart}
+          {confirmationDialog}
         </Wrapper>
       </InfiniteScroll>
     );
   }
+
+  private renderDeleteConfirmation = () => {
+    const { deletionCandidate } = this.state;
+    const { removeFileFromRecents } = this.props;
+    const closeDialog = () => {
+      this.setState({ deletionCandidate: undefined });
+    };
+    if (deletionCandidate) {
+      const { id, occurrenceKey, userFileId } = deletionCandidate;
+      const actions = [
+        {
+          text: 'Delete permanently',
+          onClick: () => {
+            removeFileFromRecents(id, occurrenceKey, userFileId);
+            closeDialog();
+          },
+        },
+        {
+          text: 'Cancel',
+          onClick: () => {
+            closeDialog();
+          },
+        },
+      ];
+      return (
+        <ModalTransition>
+          <ModalDialog
+            appearance="danger"
+            heading="Delete forever?"
+            actions={actions}
+            onClose={closeDialog}
+          >
+            This file is about to be permanently deleted. Once you delete, it's
+            gone for good.
+          </ModalDialog>
+        </ModalTransition>
+      );
+    }
+    return null;
+  };
 
   private onThresholdReachedListener = () => {
     const { isLoadingNextPage } = this.state;
@@ -209,6 +257,7 @@ export class StatelessUploadView extends Component<
       }
     };
   }
+
   // TODO [i18n]
   private renderWebGLWarningFlag = (): JSX.Element => (
     <FlagGroup onDismissed={this.onFlagDismissed}>
@@ -236,7 +285,7 @@ export class StatelessUploadView extends Component<
   }
 
   private uploadingFilesCards(): { key: string; el: JSX.Element }[] {
-    const { uploads, onFileClick, removeFileFromRecents, context } = this.props;
+    const { uploads, onFileClick, context } = this.props;
     const itemsKeys = Object.keys(uploads);
     itemsKeys.sort((a, b) => {
       return uploads[b].index - uploads[a].index;
@@ -277,7 +326,9 @@ export class StatelessUploadView extends Component<
         createDeleteCardAction(async () => {
           const userFileId = await userUpfrontId;
           const occurrenceKey = await userOccurrenceKey;
-          removeFileFromRecents(id, occurrenceKey, userFileId);
+          this.setState({
+            deletionCandidate: { id, occurrenceKey, userFileId },
+          });
         }),
       ]; // TODO [MS-1017]: allow file annotation for uploading files
 
@@ -312,7 +363,6 @@ export class StatelessUploadView extends Component<
       onFileClick,
       onEditRemoteImage,
       setUpfrontIdDeferred,
-      removeFileFromRecents,
     } = this.props;
     const { items } = recents;
     const selectedRecentFiles = selectedItems
@@ -364,7 +414,9 @@ export class StatelessUploadView extends Component<
       const { id, occurrenceKey, details } = item;
       const selected = selectedRecentFiles.indexOf(id) > -1;
       const actions: CardAction[] = [
-        createDeleteCardAction(() => removeFileFromRecents(id, occurrenceKey)),
+        createDeleteCardAction(() => {
+          this.setState({ deletionCandidate: { id, occurrenceKey } });
+        }),
       ];
 
       if ((details as FileDetails).mediaType === 'image') {

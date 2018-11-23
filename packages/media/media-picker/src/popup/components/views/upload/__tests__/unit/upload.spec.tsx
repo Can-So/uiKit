@@ -4,9 +4,11 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import Spinner from '@atlaskit/spinner';
 import { FlagGroup } from '@atlaskit/flag';
-import { Card } from '@atlaskit/media-card';
+import { Card, CardAction } from '@atlaskit/media-card';
 import { MediaCollectionItem } from '@atlaskit/media-store';
-import { asMock, fakeContext } from '@atlaskit/media-test-helpers';
+import ModalDialog from '@atlaskit/modal-dialog';
+import Button from '@atlaskit/button';
+import { asMock, fakeContext, nextTick } from '@atlaskit/media-test-helpers';
 import { InfiniteScroll } from '@atlaskit/media-ui';
 import { Context } from '@atlaskit/media-core';
 import {
@@ -40,6 +42,8 @@ import { Dropzone } from '../../dropzone';
 import { SpinnerWrapper, Wrapper } from '../../styled';
 import { LocalBrowserButton } from '../../../../views/upload/uploadButton';
 import { Browser } from '../../../../../../components/browser';
+import { menuDelete } from '../../../editor/phrases';
+import { LocalUploadFileMetadata } from '../../../../../domain/local-upload';
 
 const ConnectedUploadViewWithStore = getComponentClassWithStore(
   ConnectedUploadView,
@@ -78,6 +82,7 @@ describe('<StatelessUploadView />', () => {
     isLoading: boolean,
     recentItems: MediaCollectionItem[] = [],
     mockStateOverride: Partial<State> = {},
+    removeFileFromRecents: jest.Mock<any> = jest.fn(),
   ) => {
     const state: State = {
       ...mockState,
@@ -107,7 +112,7 @@ describe('<StatelessUploadView />', () => {
             onFileClick={() => {}}
             onEditorShowImage={() => {}}
             onEditRemoteImage={() => {}}
-            removeFileFromRecents={() => {}}
+            removeFileFromRecents={removeFileFromRecents}
             setUpfrontIdDeferred={setUpfrontIdDeferred}
           />
         </Provider>
@@ -187,6 +192,190 @@ describe('<StatelessUploadView />', () => {
     expect(component.find(Card).prop('identifier')).toEqual({
       id: upfrontId,
       mediaItemType: 'file',
+    });
+  });
+
+  const assertDeleteConfirmationDialog = (component: ReactWrapper<any>) => {
+    const modalDialog = component.find(ModalDialog);
+    expect(modalDialog).toHaveLength(1);
+    expect(modalDialog.props()).toEqual(
+      expect.objectContaining({
+        heading: 'Delete forever?',
+        actions: expect.any(Array),
+      }),
+    );
+  };
+
+  describe('when deleting uploaded item', () => {
+    let removeFileFromRecents: jest.Mock<any>;
+    beforeEach(() => {
+      removeFileFromRecents = jest.fn();
+    });
+
+    const setup = () => {
+      const upfrontId = Promise.resolve('id1');
+      const userUpfrontId = Promise.resolve('id2');
+      const userOccurrenceKey = Promise.resolve('userOccurrenceKey1');
+      const metadata: LocalUploadFileMetadata = {
+        id: 'id1',
+        mimeType: 'image/jpeg',
+        name: 'some-file-name',
+        size: 42,
+        upfrontId,
+        userUpfrontId,
+        userOccurrenceKey,
+      };
+
+      const mockStateOverride: Partial<State> = {
+        uploads: {
+          uploadId1: {
+            file: {
+              metadata,
+            },
+          } as LocalUpload,
+        },
+        selectedItems: [
+          {
+            id: 'id1',
+            serviceName: 'upload',
+          },
+        ] as SelectedItem[],
+      };
+      const component = mount(
+        getUploadViewElement(
+          false,
+          [],
+          mockStateOverride,
+          removeFileFromRecents,
+        ),
+      );
+      const deleteAction = component
+        .find(Card)
+        .props()
+        .actions.find((action: CardAction) => action.label === menuDelete);
+      const readyIds = Promise.all([
+        upfrontId,
+        userUpfrontId,
+        userOccurrenceKey,
+      ]);
+      return { component, deleteAction, readyIds };
+    };
+
+    const setupAndClickDelete = async () => {
+      const { component, deleteAction, readyIds } = setup();
+
+      deleteAction.handler();
+      component.update();
+
+      await readyIds;
+      await nextTick();
+
+      component.update();
+      return component;
+    };
+
+    it('should open confirmation dialog', async () => {
+      const component = await setupAndClickDelete();
+      assertDeleteConfirmationDialog(component);
+    });
+
+    it('should delete requested item when confirmation clicked', async () => {
+      const component = await setupAndClickDelete();
+      const confirmButton = component
+        .find(ModalDialog)
+        .find(Button)
+        .at(0);
+      confirmButton.simulate('click');
+      component.update();
+      const modalDialog = component.find(ModalDialog);
+      expect(modalDialog).toHaveLength(0);
+      expect(removeFileFromRecents).toHaveBeenCalledWith(
+        'id1',
+        'userOccurrenceKey1',
+        'id2',
+      );
+    });
+
+    it('should close dialog without deleting file when cancel clicked', async () => {
+      const component = await setupAndClickDelete();
+      const confirmButton = component
+        .find(ModalDialog)
+        .find(Button)
+        .at(1);
+      confirmButton.simulate('click');
+      component.update();
+      const modalDialog = component.find(ModalDialog);
+      expect(modalDialog).toHaveLength(0);
+      expect(removeFileFromRecents).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('when deleting recent item', () => {
+    let removeFileFromRecents: jest.Mock<any>;
+    beforeEach(() => {
+      removeFileFromRecents = jest.fn();
+    });
+
+    const setup = () => {
+      const component = mount(
+        getUploadViewElement(
+          false,
+          [
+            {
+              type: 'file',
+              id: 'some-id',
+              insertedAt: 0,
+              occurrenceKey: 'some-occurrence-key',
+              details: {
+                name: 'some-name',
+                size: 100,
+              },
+            },
+          ],
+          {},
+          removeFileFromRecents,
+        ),
+      );
+      const deleteAction = component
+        .find(Card)
+        .props()
+        .actions.find((action: CardAction) => action.label === menuDelete);
+
+      return { component, deleteAction };
+    };
+
+    const setupAndClickDelete = async () => {
+      const { component, deleteAction } = setup();
+
+      deleteAction.handler();
+      component.update();
+
+      await nextTick();
+
+      component.update();
+      return component;
+    };
+
+    it('should open confirmation dialog', async () => {
+      const component = await setupAndClickDelete();
+      assertDeleteConfirmationDialog(component);
+    });
+
+    it('should delete requested item when confirmation clicked', async () => {
+      const component = await setupAndClickDelete();
+      const confirmButton = component
+        .find(ModalDialog)
+        .find(Button)
+        .at(0);
+      confirmButton.simulate('click');
+      component.update();
+      const modalDialog = component.find(ModalDialog);
+      expect(modalDialog).toHaveLength(0);
+      expect(removeFileFromRecents).toHaveBeenCalledWith(
+        'some-id',
+        'some-occurrence-key',
+        undefined,
+      );
     });
   });
 });
