@@ -106,6 +106,10 @@ class MediaNode extends Component<
     this.pluginState.handleMediaNodeUnmount(node);
   }
 
+  componentDidUpdate() {
+    this.pluginState.updateElement();
+  }
+
   private updateMediaContext = async () => {
     const mediaProvider = await this.mediaProvider;
     if (mediaProvider) {

@@ -1,0 +1,1 @@
+- ensure toolbar always appears even if media re-renders (e.g. resizer)
