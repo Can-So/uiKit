@@ -50,16 +50,30 @@ export const commonMessages = {
 export const overviewMessages = {
   heading: {
     id: 'focused-task-close-account.delete-account.overview.heading',
-    defaultMessage: 'What deleting an account means',
+    defaultMessage: 'Delete account',
     description:
       "Heading for the screen that explains what happens when a user's account is deleted",
+  },
+
+  firstLineSelf: {
+    id: 'focused-task-close-account.delete-account.overview.first.line.self',
+    defaultMessage: "You're about to delete your account:",
+    description:
+      'First line for the screen when the admin is about to delete another user',
+  },
+
+  firstLineAdmin: {
+    id: 'focused-task-close-account.delete-account.overview.first.line.admin',
+    defaultMessage: "You're about to delete the account of:",
+    description:
+      'First line for the screen when the user is about to delete their own account',
   },
 
   warningSectionBody: {
     id:
       'focused-task-close-account.delete-account.overview.warning-section.body',
     defaultMessage:
-      "You can't undo deleting an account. If you think you'll need the account later, deactivate it instead.",
+      'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
     description:
       'A warning message shown to users when they try to delete their account.',
   },
@@ -67,14 +81,14 @@ export const overviewMessages = {
   paragraphAboutToDeleteAdmin: {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin',
-    defaultMessage: "You're about to delete a user's account, which means:",
+    defaultMessage: 'When you delete the account:',
     description:
       'A paragraph explaining that the admin is about to delete another user',
   },
   paragraphAboutToDeleteSelf: {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self',
-    defaultMessage: "You're about to delete your account, which means:",
+    defaultMessage: 'When you delete your account:',
     description:
       'A paragraph explaining that user is about to delete their own account',
   },
@@ -83,7 +97,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin',
     defaultMessage:
-      'They will immediately lose access to all Atlassian services. {fullName} currently has access to:',
+      '{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. They currently have access to: ',
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app.',
   },
@@ -91,7 +105,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self',
     defaultMessage:
-      'You will immediately lose access to all Atlassian services. You currently have access to:',
+      "You'll <b>immediately lose access</b> to all Atlassian services, including sites and products. You currently have access to:",
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access.',
   },
@@ -100,7 +114,8 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites',
     defaultMessage:
-      'They will immediately lose access to all Atlassian services.',
+      '{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. Currently, they don’t have access to any, except <a href="https://confluence.atlassian.com/display/Cloud/Organization+administration">services</a> ' +
+      'like Community and Marketplace. ',
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app.',
   },
@@ -108,39 +123,25 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites',
     defaultMessage:
-      'You will immediately lose access to all Atlassian services.',
+      "You'll <b>immediately lose access</b> to all Atlassian services, including sites and products.",
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access.',
   },
 
-  paragraphLoseAccessFootnoteAdmin: {
+  paragraphLoseAccessFootnote: {
     id:
-      'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote.admin',
+      'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote',
     defaultMessage:
-      'They might also have access to other services, such as {atlassianCommunity}',
+      'Other Atlassian services, such as Atlassian Community and Marketplace. ',
     description:
       "A paragraph explaining that upon deletion the user may also lose access to services that weren't listed prior.",
-    values: {
-      atlassianCommunity: 'Atlassian Commnuity',
-    },
-  },
-  paragraphLoseAccessFootnoteSelf: {
-    id:
-      'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote.self',
-    defaultMessage:
-      'You might also have access to other services, such as {atlassianCommunity}',
-    description:
-      "A paragraph explaining that upon deletion the user may also lose access to services that weren't listed prior.",
-    values: {
-      atlassianCommunity: 'Atlassian Commnuity',
-    },
   },
 
   paragraphContentCreatedAdmin: {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.content-created.admin',
     defaultMessage:
-      "The content they've created will remain in Atlassian services",
+      "The content they've created will remain in Atlassian services.",
     description:
       "A paragraph explaining that although the user's details will be deleted, content they have created will remain.",
   },
@@ -148,7 +149,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.content-created.self',
     defaultMessage:
-      "The content you've created will remain in Atlassian services",
+      "The content you've created will remain in Atlassian services.",
     description:
       "A paragraph explaining that although the user's details will be deleted, content they have created will remain.",
   },
@@ -174,7 +175,8 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin',
     defaultMessage:
-      'Their personal data (their full name, email address, etc) will be deleted from Atlassian sites and products.',
+      "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian services within 30 days, " +
+      'except in a few cases where required for legitimate business or legal purposes. ',
     description:
       "A paragraph explaining what parts of the user's personal data will be deleted",
   },
@@ -182,24 +184,41 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self',
     defaultMessage:
-      'Your personal data (full name, email address, etc) will be deleted from Atlassian sites and products.',
+      "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian services within 30 days, " +
+      'except in a few cases where required for legitimate business or legal purposes. ',
     description:
       "A paragraph explaining what parts of the user's personal data will be deleted",
   },
 
-  paragraphPersonalDataWillBeDeletedFootnote: {
+  paragraphListOfAppsWithPersonalDataAdmin: {
     id:
-      'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.footnote',
-    defaultMessage: 'We keep some personal data for legal purposes.',
-    description:
-      'A note explaining that some personal data is required to be saved from deletion for legal purposes.',
+      'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin',
+    defaultMessage:
+      'We’ll email you a list of apps that may have stored their personal data.',
+    description: 'A note explaining that about apps storing personal data',
+  },
+
+  paragraphListOfAppsWithPersonalDataSelf: {
+    id:
+      'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self',
+    defaultMessage:
+      'We’ll email you a list of apps that may have stored your personal data.',
+    description: 'A note explaining that about apps storing personal data',
+  },
+
+  paragraphGracePeriodAdmin: {
+    id:
+      'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin',
+    defaultMessage:
+      'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    description: 'A note explaining about the grace period',
   },
 
   inlineDialogDataWillBeDeletedP1Admin: {
     id:
       'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin',
     defaultMessage:
-      "We keep some personal data for the purposes of legal claims or for other legitimate interests. We might need this data if the user requests a service or we need to comply with a legal obligation. For example, if the user is a billing administrator, we're required to retain their name and purchase history for financial reporting and auditing.",
+      'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
     description:
       'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
   },
@@ -207,7 +226,61 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self',
     defaultMessage:
-      "We keep some personal data for the purposes of legal claims or for other legitimate interests. We might need this data you request a service or we need to comply with a legal obligation. For example, if you are a billing administrator, we're required to retain your name and purchase history for financial reporting and auditing.",
+      'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    description:
+      'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
+  },
+
+  inlineDialogDataWillBeDeletedLi1Admin: {
+    id:
+      'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin',
+    defaultMessage:
+      "Information related to purchases, which we're required to keep for financial reporting.",
+    description:
+      'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
+  },
+
+  inlineDialogDataWillBeDeletedLi1Self: {
+    id:
+      'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self',
+    defaultMessage:
+      "Information related to purchases, which we're required to keep for financial reporting.",
+    description:
+      'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
+  },
+
+  inlineDialogDataWillBeDeletedLi2Admin: {
+    id:
+      'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin',
+    defaultMessage:
+      "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    description:
+      'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
+  },
+
+  inlineDialogDataWillBeDeletedLi2Self: {
+    id:
+      'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self',
+    defaultMessage:
+      "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    description:
+      'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
+  },
+
+  inlineDialogDataWillBeDeletedLi3Admin: {
+    id:
+      'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin',
+    defaultMessage:
+      "Data that's part of an active lawsuit, which we're required to keep by law.",
+    description:
+      'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
+  },
+
+  inlineDialogDataWillBeDeletedLi3Self: {
+    id:
+      'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self',
+    defaultMessage:
+      "Data that's part of an active lawsuit, which we're required to keep by law.",
     description:
       'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
   },
@@ -216,17 +289,53 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.admin',
     defaultMessage:
-      'Users have the right to submit complaints to a supervisory authority.',
+      'We don’t delete any personal data from content created by users, such as names or email addresses they typed in a page or issue. The product admins need to delete that data manually.',
     description:
       'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
   },
+
   inlineDialogDataWillBeDeletedP2Self: {
     id:
       'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.self',
     defaultMessage:
-      'You have the right to submit complaints to a supervisory authority.',
+      "We don't delete any personal data from content created by you or other people, such as names or email addresses typed into a page or issue. Your product admins need to delete that data manually.",
     description:
       'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
+  },
+
+  inlineDialogDataWillBeDeletedP3Admin: {
+    id:
+      'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.admin',
+    defaultMessage:
+      'Users have the right to submit complaints to the supervisory authority in their country.',
+    description:
+      'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
+  },
+
+  inlineDialogDataWillBeDeletedP3Self: {
+    id:
+      'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self',
+    defaultMessage:
+      'You have the right to submit complaints to the supervisory authority in your country.',
+    description:
+      'Text elaborating on the note that some personal data is required to be saved from deletion for legal purposes.',
+  },
+
+  inlineDialogDataAppsAdmin: {
+    id:
+      'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin',
+    defaultMessage:
+      'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    description:
+      'Text elaborating on the note about apps storing personal data',
+  },
+  inlineDialogDataAppsSelf: {
+    id:
+      'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self',
+    defaultMessage:
+      'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    description:
+      'Text elaborating on the note about apps storing personal data',
   },
 };
 
@@ -236,5 +345,20 @@ export const contentPreviewMessages = {
     defaultMessage: 'How users will see this account',
     description:
       'Heading for the screen that explains what other users will see when viewing the deleted/deactivated user',
+  },
+};
+
+export const dropDownListMessages = {
+  expandButton: {
+    id: 'focused-task-close-account.delete-account.drop-down-expand-button',
+    defaultMessage: '{num} more',
+    description:
+      'Button text displaying number of available sites greater than 3 on expand',
+  },
+
+  collapseButton: {
+    id: 'focused-task-close-account.delete-account.drop-down-collapse-button',
+    defaultMessage: 'Show less',
+    description: 'Button text displaying text on collapse',
   },
 };
