@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { GlobalQuickSearch } from '../src/index';
 import { Config } from '../src/api/configureSearchClients';
 import withNavigation from '../example-helpers/withNavigation';
