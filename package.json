@@ -403,7 +403,7 @@
     "prosemirror-utils": "^0.7.2",
     "prosemirror-view": "^1.6.5",
     "pubnub": "^4.20.3",
-    "puppeteer": "^1.4.0",
+    "puppeteer": "^1.10.0",
     "query-string": "^4.3.2",
     "raf-schd": "^2.1.0",
     "raf-stub": "^2.0.1",
