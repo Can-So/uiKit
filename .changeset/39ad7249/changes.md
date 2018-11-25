@@ -1,1 +1,0 @@
-- Fix media items inside table cells

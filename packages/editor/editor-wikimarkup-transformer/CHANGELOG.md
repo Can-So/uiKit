@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.7.0
+- [minor] [37eaced](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37eaced):
+
+  - Fix media items inside table cells
+
 ## 2.6.2
 - [patch] [352fbc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/352fbc9):
 
