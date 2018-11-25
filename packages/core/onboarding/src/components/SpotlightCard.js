@@ -1,7 +1,8 @@
 // @flow
+
+import { colors, type ThemeProp } from '@atlaskit/theme';
 import React, { type Node, type ElementType } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { colors } from '@atlaskit/theme';
 import Card, { type CardTokens } from './Card';
 import { getSpotlightTheme } from './theme';
 import type { ActionsType } from '../types';
@@ -27,7 +28,7 @@ type Props = {
   /** Removes elevation styles if set */
   isFlat: boolean,
   /** the theme of the card */
-  theme: CardTokens => CardTokens,
+  theme: ThemeProp<CardTokens>,
   /** width of the card in pixels */
   width: number,
   innerRef?: Function,
@@ -64,8 +65,9 @@ class SpotlightCard extends React.Component<Props> {
           actionsBeforeElement={actionsBeforeElement}
           components={components}
           image={image}
-          theme={({ container, ...others }) =>
-            theme({
+          theme={parent => {
+            const { container, ...others } = parent();
+            return theme({
               ...others,
               container: {
                 background: colors.P300,
@@ -76,8 +78,8 @@ class SpotlightCard extends React.Component<Props> {
                   : `0 4px 8px -2px ${colors.N50A}, 0 0 1px ${colors.N60A}`, // AK-5598
                 ...container,
               },
-            })
-          }
+            });
+          }}
         >
           {children}
         </Card>
