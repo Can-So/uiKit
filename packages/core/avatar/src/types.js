@@ -1,8 +1,9 @@
 // @flow
 
-import type { Node, ComponentType } from 'react';
 import type { AnalyticsEventInterface } from '@atlaskit/analytics-next';
-import type { ThemeProp, ThemeProps, ThemeTokens } from './theme';
+import type { ThemeProp } from '@atlaskit/theme';
+import type { Node, ComponentType } from 'react';
+import type { ThemeProps, ThemeTokens } from './theme';
 
 export type AppearanceType = 'circle' | 'square';
 export type PresenceType = ('online' | 'busy' | 'focus' | 'offline') | Node;
