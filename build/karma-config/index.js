@@ -163,7 +163,7 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
         startTunnel: true,
         tunnelIdentifier: process.env.BITBUCKET_COMMIT || 'ak_tunnel',
         localIdentifier: `${process.env.BITBUCKET_COMMIT}_unit_tests`,
-        project: 'Atlaskit',
+        project: 'Atlaskit Karma Tests',
         build: `${process.env.BITBUCKET_BRANCH} ${time} ${
           process.env.BITBUCKET_COMMIT
         }`,
