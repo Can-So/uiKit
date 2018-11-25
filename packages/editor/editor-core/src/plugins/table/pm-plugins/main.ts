@@ -2,6 +2,7 @@ import { EditorState, Plugin, PluginKey, Transaction } from 'prosemirror-state';
 import { findParentDomRefOfType } from 'prosemirror-utils';
 import { EditorView, DecorationSet } from 'prosemirror-view';
 import { PluginConfig, TablePluginState } from '../types';
+import { EditorAppearance } from '../../../types';
 import { Dispatch } from '../../../event-dispatcher';
 import { createTableView } from '../nodeviews/table';
 import { createCellView } from '../nodeviews/cell';
@@ -64,6 +65,7 @@ export const createPlugin = (
   portalProviderAPI: PortalProviderAPI,
   eventDispatcher: EventDispatcher,
   pluginConfig: PluginConfig,
+  appearance?: EditorAppearance,
 ) =>
   new Plugin({
     state: {
@@ -233,8 +235,8 @@ export const createPlugin = (
 
       nodeViews: {
         table: createTableView(portalProviderAPI),
-        tableCell: createCellView(portalProviderAPI),
-        tableHeader: createCellView(portalProviderAPI),
+        tableCell: createCellView(portalProviderAPI, appearance),
+        tableHeader: createCellView(portalProviderAPI, appearance),
       },
 
       handleDOMEvents: {

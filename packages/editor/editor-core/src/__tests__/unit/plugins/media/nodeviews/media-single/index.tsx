@@ -62,6 +62,7 @@ describe('nodeviews/mediaSingle', () => {
         providerFactory: providerFactory,
       },
       handleMediaNodeMount: () => {},
+      updateElement: jest.fn(),
     };
 
     pluginState.stateManager = stateManager;

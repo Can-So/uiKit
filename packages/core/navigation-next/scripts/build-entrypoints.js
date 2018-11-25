@@ -7,7 +7,7 @@ const mkdirp = require('mkdirp');
 const PACKAGE_ROOT = path.resolve(__dirname, '../');
 const ENTRYPOINTS_FOLDER = `${PACKAGE_ROOT}/dist/esm/entrypoints`;
 
-const files = glob.sync(`${ENTRYPOINTS_FOLDER}/*.js`, {
+const files = glob.sync(`${ENTRYPOINTS_FOLDER}/*.{js,flow}`, {
   cwd: __dirname,
 });
 

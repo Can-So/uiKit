@@ -14,12 +14,7 @@ import { gridTypeForLayout } from '../../../grid';
 
 export const handleSides = ['left', 'right'];
 
-const snapTo = (
-  target: number,
-  points: number[],
-  scaleFactor: number = 1,
-  direction,
-): number =>
+const snapTo = (target: number, points: number[]): number =>
   points.reduce((point, closest) => {
     return Math.abs(closest - target) < Math.abs(point - target)
       ? closest
@@ -48,12 +43,12 @@ export default class Resizer extends React.Component<
     isResizing: false,
   };
 
-  handleResizeStart = () => {
+  handleResizeStart = (e, dir) => {
     this.setState({ isResizing: true }, () => {
       this.props.displayGrid(
         true,
         gridTypeForLayout(this.props.layout),
-        this.highlights(this.props.width, 1),
+        this.highlights(this.props.width),
       );
     });
   };
@@ -82,18 +77,13 @@ export default class Resizer extends React.Component<
     this.props.displayGrid(
       true,
       gridTypeForLayout(newSize.layout),
-      this.highlights(newWidth, delta.width),
+      this.highlights(newWidth),
     );
     this.resizable.updateSize({ width: newWidth, height: 'auto' });
   };
 
-  highlights = (newWidth, direction) => {
-    const snapWidth = snapTo(
-      newWidth,
-      this.props.snapPoints,
-      this.props.scaleFactor,
-      direction,
-    );
+  highlights = newWidth => {
+    const snapWidth = snapTo(newWidth, this.props.snapPoints);
 
     if (snapWidth > akEditorWideLayoutWidth) {
       return ['full-width'];
@@ -142,19 +132,14 @@ export default class Resizer extends React.Component<
       this.props.snapPoints[0],
     );
 
-    const snapWidth = snapTo(
-      newWidth,
-      this.props.snapPoints,
-      this.props.scaleFactor,
-      delta.width,
-    );
+    const snapWidth = snapTo(newWidth, this.props.snapPoints);
     const newSize = this.props.calcNewSize(snapWidth, true);
 
     // show committed grid size
     this.props.displayGrid(
       true,
       gridTypeForLayout(newSize.layout),
-      this.highlights(newWidth, delta.width),
+      this.highlights(newWidth),
     );
 
     this.setState({ isResizing: false }, () => {

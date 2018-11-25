@@ -1,5 +1,34 @@
 # @atlaskit/editor-core
 
+## 88.5.3
+- [patch] [dfcb816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfcb816):
+
+  - ED-5818: Add support for inserting block nodes
+
+  Bridge API now supports inserting:
+  * Tables
+  * Panels
+  * Codeblocks
+  * Block Quotes
+  * Actions
+  * Decisions
+
+## 88.5.2
+- [patch] [b73607f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b73607f):
+
+  - ED-5770: fix resizer for media @ 0 and non-dynamic text sizes
+
+- [patch] [7a9f647](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a9f647):
+
+  - ensure toolbar always appears even if media re-renders (e.g. resizer)
+
+## 88.5.1
+- [patch] [ab6d96b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6d96b):
+
+  - ED-5710: Fixes calling media upfront.
+
+  We now only call for the media auth, when rendering / loading a media item.
+
 ## 88.5.0
 - [minor] [cfba914](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cfba914):
 

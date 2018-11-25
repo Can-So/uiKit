@@ -12,6 +12,14 @@ type ResizeColumnOpts = {
   row?: number;
 };
 
+// This fixes an issue when tests will fail with
+// "Node is either not visible or not an HTMLElement" due to the table
+// header not being visible
+const clickFirstCell = async page => {
+  await page.waitForSelector(ClassName.TOP_LEFT_CELL);
+  await page.click(ClassName.TOP_LEFT_CELL);
+};
+
 export const getSelectorForTableControl = (type, atIndex?: number) => {
   let selector = `.pm-table-${type}-controls__button-wrap`;
   if (atIndex) {
@@ -79,6 +87,7 @@ export const insertRowOrColumn = async (page, type, atIndex: number) => {
     buttonWrapSelector = ClassName.COLUMN_CONTROLS_BUTTON_WRAP;
     insertSelector = ClassName.CONTROLS_INSERT_COLUMN;
   }
+  await clickFirstCell(page);
 
   const buttonSelector = `.${buttonWrapSelector}:nth-child(${atIndex}) .${insertSelector}`;
   await page.hover(buttonSelector);
@@ -106,6 +115,7 @@ export const deleteRowOrColumn = async (page, type, atIndex) => {
   const deleteButtonSelector = `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP} .${
     ClassName.CONTROLS_DELETE_BUTTON
   }`;
+  await clickFirstCell(page);
   await page.click(controlSelector);
   await page.hover(deleteButtonSelector);
   await page.waitForSelector(deleteButtonSelector);

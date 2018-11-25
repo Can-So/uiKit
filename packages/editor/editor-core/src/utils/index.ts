@@ -31,6 +31,7 @@ import { GapCursorSelection, Side } from '../plugins/gap-cursor/selection';
 
 export * from './document';
 export * from './action';
+export * from './step';
 
 export { JSONDocNode, JSONNode };
 

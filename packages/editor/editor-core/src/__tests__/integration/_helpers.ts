@@ -118,7 +118,14 @@ export const insertMedia = async (
   if (browser.browser.desiredCapabilities) {
     await browser.browser.waitUntil(async () => {
       const mediaCards = await browser.$$(mediaCardSelector);
-      return get$$Length(mediaCards) === mediaCardCount;
+
+      // media picker can still be displayed after inserting an image after some small time
+      // wait until it's completely disappeared before continuing
+      const insertButtons = await browser.$$(insertMediaButton);
+      return (
+        get$$Length(mediaCards) === mediaCardCount &&
+        get$$Length(insertButtons) === 0
+      );
     });
   } else {
     await browser.evaluate(() => {

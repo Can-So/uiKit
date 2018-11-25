@@ -1,5 +1,15 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.6.2
+- [patch] [352fbc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/352fbc9):
+
+  - Should not ignore double and triple dashes in list item
+
+## 2.6.1
+- [patch] [f11c6e2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f11c6e2):
+
+  - Escape properly
+
 ## 2.6.0
 - [minor] [8451c11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8451c11):
 
