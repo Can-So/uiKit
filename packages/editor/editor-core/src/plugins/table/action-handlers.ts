@@ -1,7 +1,6 @@
 import { EditorState, Transaction } from 'prosemirror-state';
 import { findTable, findParentNodeOfType } from 'prosemirror-utils';
 import { DecorationSet, Decoration } from 'prosemirror-view';
-import { TableMap } from 'prosemirror-tables';
 import { Dispatch } from '../../event-dispatcher';
 import { pluginKey, defaultTableSelection } from './pm-plugins/main';
 import { TablePluginState, TableCssClassName as ClassName } from './types';
@@ -80,11 +79,9 @@ export const handleClearSelection = (
 export const handleHoverColumns = (
   state: EditorState,
   hoverDecoration: Decoration[],
-  dangerColumns: number[],
+  hoveredColumns: number[],
+  isInDanger: boolean,
 ) => (pluginState: TablePluginState, dispatch: Dispatch): TablePluginState => {
-  const table = findTable(state.selection)!;
-  const map = TableMap.get(table.node);
-
   const nextPluginState = {
     ...pluginState,
     decorationSet: processDecorations(
@@ -93,8 +90,8 @@ export const handleHoverColumns = (
       hoverDecoration,
       findControlsHoverDecoration,
     ),
-    dangerColumns,
-    isTableInDanger: map.width === dangerColumns.length ? true : false,
+    hoveredColumns,
+    isInDanger,
   };
   dispatch(pluginKey, nextPluginState);
   return nextPluginState;
@@ -103,11 +100,9 @@ export const handleHoverColumns = (
 export const handleHoverRows = (
   state: EditorState,
   hoverDecoration: Decoration[],
-  dangerRows: number[],
+  hoveredRows: number[],
+  isInDanger: boolean,
 ) => (pluginState: TablePluginState, dispatch: Dispatch): TablePluginState => {
-  const table = findTable(state.selection)!;
-  const map = TableMap.get(table.node);
-
   const nextPluginState = {
     ...pluginState,
     decorationSet: processDecorations(
@@ -116,8 +111,8 @@ export const handleHoverRows = (
       hoverDecoration,
       findControlsHoverDecoration,
     ),
-    dangerRows,
-    isTableInDanger: map.height === dangerRows.length ? true : false,
+    hoveredRows,
+    isInDanger,
   };
   dispatch(pluginKey, nextPluginState);
   return nextPluginState;
@@ -126,7 +121,9 @@ export const handleHoverRows = (
 export const handleHoverTable = (
   state: EditorState,
   hoverDecoration: Decoration[],
-  isTableInDanger: boolean,
+  hoveredColumns: number[],
+  hoveredRows: number[],
+  isInDanger: boolean,
 ) => (pluginState: TablePluginState, dispatch: Dispatch): TablePluginState => {
   const nextPluginState = {
     ...pluginState,
@@ -136,8 +133,9 @@ export const handleHoverTable = (
       hoverDecoration,
       findControlsHoverDecoration,
     ),
-    isTableInDanger,
-    isTableHovered: true,
+    hoveredColumns,
+    hoveredRows,
+    isInDanger,
   };
   dispatch(pluginKey, nextPluginState);
   return nextPluginState;

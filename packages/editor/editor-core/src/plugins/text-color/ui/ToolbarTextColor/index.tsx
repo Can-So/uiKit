@@ -2,7 +2,8 @@ import * as React from 'react';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
 import TextColorIcon from '@atlaskit/icon/glyph/editor/text-color';
-import { analyticsDecorator as analytics } from '../../../../analytics';
+import { akEditorMenuZIndex } from '@atlaskit/editor-common';
+import { withAnalytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import ColorPalette from '../../../../ui/ColorPalette';
 import Dropdown from '../../../../ui/Dropdown';
@@ -65,6 +66,7 @@ class ToolbarTextColor extends React.Component<
           onOpenChange={this.handleOpenChange}
           fitWidth={242}
           fitHeight={80}
+          zIndex={akEditorMenuZIndex}
           trigger={
             <ToolbarButton
               spacing={isReducedSpacing ? 'none' : 'default'}
@@ -101,15 +103,17 @@ class ToolbarTextColor extends React.Component<
     );
   }
 
-  @analytics('atlassian.editor.format.textcolor.button')
-  private changeTextColor = (color, disabled) => {
-    if (!disabled) {
-      this.toggleOpen();
-      return this.props.changeColor(color);
-    }
+  private changeTextColor = withAnalytics(
+    'atlassian.editor.format.textcolor.button',
+    (color, disabled) => {
+      if (!disabled) {
+        this.toggleOpen();
+        return this.props.changeColor(color);
+      }
 
-    return false;
-  };
+      return false;
+    },
+  );
 
   private toggleOpen = () => {
     this.handleOpenChange({ isOpen: !this.state.isOpen });

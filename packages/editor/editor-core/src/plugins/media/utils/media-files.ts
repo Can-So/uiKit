@@ -115,7 +115,12 @@ const createMediaFileNodes = (
 ): PMNode[] => {
   const nodes = mediaStates.map(mediaState => {
     const { id } = mediaState;
-    const node = media.create({ id, type: 'file', collection, __key: id });
+    const node = media.create({
+      id,
+      type: 'file',
+      collection,
+      __key: id,
+    });
     copyOptionalAttrsFromMediaState(mediaState, node);
     return node;
   });

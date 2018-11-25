@@ -47,7 +47,7 @@ describe('<FabricAnalyticsListeners />', () => {
   });
 
   describe('FabricAnalyticsListener', () => {
-    it('should throw an error when no client is provided', () => {
+    it('should not throw an error when no client is provided', () => {
       const compOnClick = jest.fn();
       expect(() =>
         mount(
@@ -56,7 +56,7 @@ describe('<FabricAnalyticsListeners />', () => {
             <DummyElementsCompWithAnalytics onClick={compOnClick} />
           </FabricAnalyticsListeners>,
         ),
-      ).toThrow();
+      ).not.toThrow();
     });
 
     it('should log an error when an invalid event type is captured and error logging is enabled', () => {

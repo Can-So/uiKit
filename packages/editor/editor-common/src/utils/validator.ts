@@ -367,11 +367,13 @@ export const getValidNode = (
             type,
             attrs,
             content,
+            marks,
           };
         }
         return {
           type,
           content,
+          marks,
         };
       }
       case 'date': {
@@ -536,10 +538,13 @@ export const getValidNode = (
         break;
       }
       case 'paragraph': {
-        return {
-          type,
-          content: content || [],
-        };
+        return marks
+          ? {
+              type,
+              content: content || [],
+              marks,
+            }
+          : { type, content: content || [] };
       }
       case 'rule': {
         return {
@@ -567,17 +572,26 @@ export const getValidNode = (
         break;
       }
       case 'heading': {
-        if (attrs && content) {
+        if (attrs) {
           const { level } = attrs;
           const between = (x, a, b) => x >= a && x <= b;
           if (level && between(level, 1, 6)) {
-            return {
-              type,
-              content,
-              attrs: {
-                level,
-              },
-            };
+            return marks
+              ? {
+                  type,
+                  content,
+                  marks,
+                  attrs: {
+                    level,
+                  },
+                }
+              : {
+                  type,
+                  content,
+                  attrs: {
+                    level,
+                  },
+                };
           }
         }
         break;

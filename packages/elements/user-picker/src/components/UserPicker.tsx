@@ -1,63 +1,50 @@
 import Select from '@atlaskit/select';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import {
   InputActionTypes,
-  LoadOptions,
-  OnChange,
-  OnInputChange,
-  OnPicker,
-  OnUser,
   User,
+  UserPickerProps,
+  UserPickerState,
 } from '../types';
 import { batchByKey } from './batch';
 import { getComponents } from './components';
+import { messages } from './i18n';
 import { getStyles } from './styles';
-import { extractUserValue, getOptions, isIterable } from './utils';
+import {
+  extractUserValue,
+  getOptions,
+  isIterable,
+  usersToOptions,
+} from './utils';
 
-export type Props = {
-  users?: User[];
-  width?: number;
-  loadUsers?: LoadOptions;
-  onChange?: OnChange;
-  isMulti?: boolean;
-  search?: string;
-  anchor?: React.ComponentType<any>;
-  open?: boolean;
-  isLoading?: boolean;
-  onInputChange?: OnInputChange;
-  onSelection?: OnUser;
-  onFocus?: OnPicker;
-  onBlur?: OnPicker;
-  blurInputOnSelect?: boolean;
-  appearance?: 'normal' | 'compact';
-  subtle?: boolean;
-};
-
-export type State = {
-  users: User[];
-  resultVersion: number;
-  inflightRequest: number;
-  count: number;
-  hoveringClearIndicator: boolean;
-  menuIsOpen: boolean;
-};
-
-export class UserPicker extends React.PureComponent<Props, State> {
+export class UserPicker extends React.Component<
+  UserPickerProps,
+  UserPickerState
+> {
   static defaultProps = {
     width: 350,
     isMulti: false,
     appearance: 'normal',
     subtle: false,
+    isClearable: true,
   };
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+  static getDerivedStateFromProps(
+    nextProps: UserPickerProps,
+    prevState: UserPickerState,
+  ) {
+    const derivedState: Partial<UserPickerState> = {};
     if (nextProps.open !== undefined) {
-      return {
-        menuIsOpen: nextProps.open,
-      };
+      derivedState.menuIsOpen = nextProps.open;
     }
-    return null;
+    if (nextProps.value) {
+      derivedState.value = usersToOptions(nextProps.value);
+    } else if (nextProps.defaultValue && !prevState.value) {
+      derivedState.value = usersToOptions(nextProps.defaultValue);
+    }
+    return derivedState;
   }
 
   private selectRef;
@@ -91,13 +78,22 @@ export class UserPicker extends React.PureComponent<Props, State> {
     select.selectOption(focusedOption);
   });
 
-  private handleChange = (value, { action }) => {
+  private handleChange = (value, { action, removedValue }) => {
+    if (removedValue && removedValue.user.fixed) {
+      return;
+    }
     const { onChange, onSelection } = this.props;
+
     if (onChange) {
       onChange(extractUserValue(value), action);
     }
+
     if (action === 'select-option' && onSelection) {
       onSelection(value.user);
+    }
+
+    if (!this.props.value) {
+      this.setState({ value });
     }
   };
 
@@ -163,6 +159,8 @@ export class UserPicker extends React.PureComponent<Props, State> {
     { action }: { action: InputActionTypes },
   ) => {
     const { onInputChange } = this.props;
+    // TODO FS-3184: If isClearable = false, have value persist unless
+    // another option is explicitly selected
     if (action === 'input-change') {
       if (onInputChange) {
         onInputChange(search);
@@ -175,7 +173,7 @@ export class UserPicker extends React.PureComponent<Props, State> {
     select.onInputChange(this.props.search, { action: 'input-change' });
   });
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
     // trigger onInputChange
     if (this.props.search !== prevProps.search) {
       this.triggerInputChange();
@@ -187,9 +185,19 @@ export class UserPicker extends React.PureComponent<Props, State> {
     }
   }
 
+  private handleKeyDown = (event: React.KeyboardEvent) => {
+    // Escape
+    if (event.keyCode === 27) {
+      this.selectRef.blur();
+    }
+  };
+
   handleClearIndicatorHover = (hoveringClearIndicator: boolean) => {
     this.setState({ hoveringClearIndicator });
   };
+
+  private configureNoOptionsMessage = (): string | undefined =>
+    this.props.noOptionsMessage;
 
   render() {
     const {
@@ -201,20 +209,29 @@ export class UserPicker extends React.PureComponent<Props, State> {
       isLoading,
       appearance,
       subtle,
+      placeholder,
+      isClearable,
+      isDisabled,
     } = this.props;
     const {
       users: usersFromState,
       count,
       hoveringClearIndicator,
       menuIsOpen,
+      value,
     } = this.state;
+
+    const numValues: number = value ? value.length : 0;
+    const hasValue = numValues > 0;
+
     return (
       <Select
+        value={value}
         ref={this.handleSelectRef}
         isMulti={isMulti}
-        options={getOptions(usersFromState, users)}
+        options={getOptions(usersFromState, users) || []}
         onChange={this.handleChange}
-        styles={getStyles(width)}
+        styles={getStyles(width, hasValue)}
         components={getComponents(isMulti, anchor)}
         inputValue={search}
         menuIsOpen={menuIsOpen}
@@ -223,16 +240,21 @@ export class UserPicker extends React.PureComponent<Props, State> {
         isLoading={count > 0 || isLoading}
         onInputChange={this.handleInputChange}
         menuPlacement="auto"
-        placeholder="Find a person..." // TODO i18n
+        placeholder={
+          placeholder || <FormattedMessage {...messages.placeholder} />
+        }
         classNamePrefix="fabric-user-picker"
         onClearIndicatorHover={this.handleClearIndicatorHover}
         hoveringClearIndicator={hoveringClearIndicator}
         appearance={isMulti ? 'compact' : appearance}
-        isClearable
+        isClearable={isClearable}
         subtle={isMulti ? false : subtle}
         blurInputOnSelect={!isMulti}
         closeMenuOnSelect={!isMulti}
+        noOptionsMessage={this.configureNoOptionsMessage}
         openMenuOnFocus
+        onKeyDown={this.handleKeyDown}
+        isDisabled={isDisabled}
       />
     );
   }

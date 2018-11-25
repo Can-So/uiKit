@@ -168,9 +168,10 @@ function makeTooltipNode({ text, char }: { text: string, char: string }) {
   );
 }
 
-type Props = WithAnalyticsEventsProps & {
+type Props = {
+  ...WithAnalyticsEventsProps,
   children: State => any,
-  collapseToggleTooltipContent: CollapseToggleTooltipContent,
+  collapseToggleTooltipContent?: CollapseToggleTooltipContent,
   expandCollapseAffordanceRef: Ref<'button'>,
   experimental_flyoutOnHover: boolean,
   flyoutIsOpen: boolean,
@@ -196,8 +197,6 @@ type State = {
 };
 
 /* NOTE: experimental props use an underscore */
-/* eslint-disable camelcase */
-
 class ResizeControl extends PureComponent<Props, State> {
   invalidDragAttempted = false;
   lastWidth: number;
@@ -219,11 +218,16 @@ class ResizeControl extends PureComponent<Props, State> {
   };
 
   static getDerivedStateFromProps(props: Props, state: State) {
-    const { experimental_flyoutOnHover, flyoutIsOpen, navigation } = props;
+    const {
+      // eslint-disable-next-line camelcase
+      experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
+      flyoutIsOpen,
+      navigation,
+    } = props;
     const { isCollapsed } = navigation.state;
 
     // resolve "hover locking" issue with resize grab area
-    if (experimental_flyoutOnHover) {
+    if (EXPERIMENTAL_FLYOUT_ON_HOVER) {
       const showGrabArea = !isCollapsed && !flyoutIsOpen;
       const mouseIsOverGrabArea = showGrabArea
         ? state.mouseIsOverGrabArea
@@ -412,14 +416,12 @@ class ResizeControl extends PureComponent<Props, State> {
       collapseToggleTooltipContent,
       expandCollapseAffordanceRef,
       flyoutIsOpen,
-      isDisabled,
+      isDisabled: isResizeDisabled,
       isGrabAreaDisabled,
       mouseIsOverNavigation,
       navigation,
     } = this.props;
-    const { isCollapsed, isPeeking } = navigation.state;
-
-    const isResizeDisabled = isDisabled || isPeeking;
+    const { isCollapsed } = navigation.state;
 
     // the button shouldn't "flip" until the drag is complete
     let ButtonIcon = ChevronLeft;
@@ -458,7 +460,6 @@ class ResizeControl extends PureComponent<Props, State> {
               {collapseToggleTooltipContent ? (
                 <Tooltip
                   content={makeTooltipNode(
-                    // $FlowFixMe
                     collapseToggleTooltipContent(isCollapsed),
                   )}
                   delay={600}

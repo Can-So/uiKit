@@ -41,7 +41,6 @@ export default class MediaSingleNode extends Component<
   MediaSingleNodeProps,
   MediaSingleNodeState
 > {
-  private child: PMNode;
   private mediaPluginState: MediaPluginState;
 
   state = {
@@ -51,7 +50,6 @@ export default class MediaSingleNode extends Component<
 
   constructor(props) {
     super(props);
-    this.child = props.node.firstChild;
     this.mediaPluginState = stateKey.getState(
       this.props.view.state,
     ) as MediaPluginState;
@@ -64,7 +62,8 @@ export default class MediaSingleNode extends Component<
       this.props.node.attrs.layout !== nextProps.node.attrs.layout ||
       this.props.width !== nextProps.width ||
       this.props.lineLength !== nextProps.lineLength ||
-      this.props.getPos !== nextProps.getPos
+      this.props.getPos !== nextProps.getPos ||
+      this.mediaChildHasUpdated(nextProps)
     ) {
       return true;
     }
@@ -87,6 +86,18 @@ export default class MediaSingleNode extends Component<
       () => {
         this.forceUpdate();
       },
+    );
+  };
+
+  private mediaChildHasUpdated = nextProps => {
+    if (!this.props.node.firstChild || !nextProps.node.firstChild) {
+      return false;
+    }
+
+    return (
+      this.props.node.firstChild.attrs.collection !==
+        nextProps.node.firstChild.attrs.collection ||
+      this.props.node.firstChild.attrs.id !== nextProps.node.firstChild.attrs.id
     );
   };
 
@@ -114,15 +125,17 @@ export default class MediaSingleNode extends Component<
   };
 
   render() {
-    const { layout, width: mediaSingleWidth } = this.props.node.attrs;
-
     const {
       selected,
       getPos,
+      node,
       view: { state },
     } = this.props;
 
-    let { width, height, type } = this.child.attrs;
+    const { layout, width: mediaSingleWidth } = node.attrs;
+    const childNode = node.firstChild!;
+
+    let { width, height, type } = childNode.attrs;
 
     if (type === 'external') {
       const { width: stateWidth, height: stateHeight } = this.state;
@@ -137,7 +150,7 @@ export default class MediaSingleNode extends Component<
     }
 
     const mediaState = this.mediaPluginState.getMediaNodeState(
-      this.child.attrs.__key,
+      childNode.attrs.__key,
     );
 
     const isLoading = mediaState ? !this.mediaReady(mediaState) : false;
@@ -154,7 +167,7 @@ export default class MediaSingleNode extends Component<
       canResize = canResize && !disabledNode;
     }
 
-    if (width === null) {
+    if (width === null || height === null) {
       width = DEFAULT_WIDTH;
       height = DEFAULT_HEIGHT;
     }
@@ -184,7 +197,7 @@ export default class MediaSingleNode extends Component<
         renderNode={({ mediaProvider }) => {
           return (
             <MediaItem
-              node={this.child}
+              node={childNode}
               view={this.props.view}
               getPos={this.props.getPos}
               cardDimensions={cardDimensions}
@@ -207,6 +220,7 @@ export default class MediaSingleNode extends Component<
         gridSize={12}
         state={this.props.view.state}
         appearance={this.mediaPluginState.options.appearance}
+        selected={this.props.selected()}
       >
         {MediaChild}
       </ResizableMediaSingle>

@@ -1,5 +1,45 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.2.0
+- [minor] [dfcb816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfcb816):
+
+  - ED-5818: Add support for inserting block nodes
+
+  Bridge API now supports inserting:
+  * Tables
+  * Panels
+  * Codeblocks
+  * Block Quotes
+  * Actions
+  * Decisions
+
+## 6.1.0
+- [minor] [ab6d96b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6d96b):
+
+  - ED-5710: Fixes calling media upfront.
+
+  We now only call for the media auth, when rendering / loading a media item.
+
+## 6.0.0
+- [major] [6d6522b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d6522b):
+
+  - Refactor mentions to use TypeAhead plugin
+
+## 5.6.0
+- [minor] [d901563](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d901563):
+
+  - FM-1388: Add bridge API to both editor and renderer to set padding
+
+## 5.5.0
+- [minor] [586100b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/586100b):
+
+  - ED-5584: Added Emoji support to the renderer.
+
+## 5.4.1
+- [patch] [05a4cf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05a4cf3):
+
+  - FM-1358: Fixes scrolling lag when encountering a shadow
+
 ## 5.4.0
 - [minor] [611d8a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/611d8a5):
 

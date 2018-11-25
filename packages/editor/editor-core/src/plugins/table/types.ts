@@ -24,11 +24,11 @@ export interface PluginConfig {
 }
 
 export interface TablePluginState {
-  dangerColumns: number[];
-  dangerRows: number[];
   decorationSet: DecorationSet;
-  pluginConfig: PluginConfig;
   editorHasFocus?: boolean;
+  hoveredColumns: number[];
+  hoveredRows: number[];
+  pluginConfig: PluginConfig;
   // position of a cell PM node that has cursor
   targetCellPosition?: number;
   // controls need to be re-rendered when table content changes
@@ -37,8 +37,7 @@ export interface TablePluginState {
   tableRef?: HTMLElement;
   tableFloatingToolbarTarget?: HTMLElement;
   isContextualMenuOpen?: boolean;
-  isTableHovered?: boolean;
-  isTableInDanger?: boolean;
+  isInDanger?: boolean;
   insertColumnButtonIndex?: number;
   insertRowButtonIndex?: number;
 }
@@ -100,15 +99,12 @@ export const TableCssClassName = {
   HOVERED_TABLE: `${clPrefix}hovered-table`,
   RESIZING: `${clPrefix}resizing`,
   WITH_CONTROLS: `${clPrefix}with-controls`,
-  TABLE_LEFT_SHADOW: `${clPrefix}with-left-shadow`,
-  TABLE_RIGHT_SHADOW: `${clPrefix}with-right-shadow`,
 
   CONTEXTUAL_SUBMENU: `${clPrefix}contextual-submenu`,
   CONTEXTUAL_MENU_BUTTON: `${clPrefix}contextual-menu-button`,
   CONTEXTUAL_MENU_ICON: `${clPrefix}contextual-submenu-icon`,
 
   CELL_NODEVIEW_WRAPPER: `${clPrefix}cell-nodeview-wrapper`,
-  CELL_NODEVIEW_CONTENT_DOM: `${clPrefix}cell-nodeview-content-dom`,
 
   // come from prosemirror-table
   COLUMN_RESIZE_HANDLE: 'column-resize-handle',
@@ -116,4 +112,6 @@ export const TableCssClassName = {
 
   // defined in ReactNodeView based on PM node name
   NODEVIEW_WRAPPER: 'tableView-content-wrap',
+
+  TOP_LEFT_CELL: 'table > tbody > tr:nth-child(2) > td:nth-child(1)',
 };

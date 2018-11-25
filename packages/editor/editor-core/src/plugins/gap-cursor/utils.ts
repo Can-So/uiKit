@@ -1,4 +1,4 @@
-import { Node as PMNode } from 'prosemirror-model';
+import { Node as PMNode, ResolvedPos, Schema } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
 import { findPositionOfNodeBefore, findDomRefAtPos } from 'prosemirror-utils';
 import { tableMarginTop } from '@atlaskit/editor-common';
@@ -8,7 +8,7 @@ import { TableCssClassName } from '../table/types';
 import { tableInsertColumnButtonSize } from '../table/ui/styles';
 
 // we don't show gap cursor for those nodes
-const INGORED_NODES = [
+const IGNORED_NODES = [
   'paragraph',
   'bulletList',
   'orderedList',
@@ -37,10 +37,54 @@ const getDomNodeVerticalMargin = (
 };
 
 export const isIgnored = (node?: PMNode | null): boolean => {
-  if (!node) {
-    return false;
+  return !!node && IGNORED_NODES.indexOf(node.type.name) !== -1;
+};
+
+export const isValidTargetNode = (node?: PMNode | null): boolean => {
+  return !!node && !isIgnored(node);
+};
+
+export const isTextBlockNearPos = (
+  doc: PMNode,
+  schema: Schema,
+  $pos: ResolvedPos,
+  dir: number,
+) => {
+  let $currentPos = $pos;
+  let currentNode: PMNode | null = null;
+
+  while ($currentPos.depth > 0) {
+    $currentPos = doc.resolve(
+      dir === -1 ? $currentPos.before() : $currentPos.after(),
+    );
+
+    if (!$currentPos) {
+      return false;
+    }
+
+    currentNode =
+      (dir === -1 ? $currentPos.nodeBefore : $currentPos.nodeAfter) ||
+      $currentPos.parent;
+
+    if (!currentNode || currentNode.type === schema.nodes.doc) {
+      return false;
+    }
+
+    if (currentNode.isTextblock) {
+      return true;
+    }
   }
-  return INGORED_NODES.indexOf(node.type.name) > -1;
+
+  let childNode: PMNode | null = currentNode;
+
+  while (childNode && childNode.firstChild) {
+    childNode = childNode.firstChild;
+    if (childNode && childNode.isTextblock) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 const isMediaSingle = (node?: HTMLElement | null): boolean => {
@@ -65,6 +109,22 @@ const isNodeViewWrapper = (node?: HTMLElement | null): boolean => {
     node.className.indexOf('-content-wrap') !== -1
   );
 };
+
+function getBreakoutModeFromTargetNode(node: PMNode): string {
+  if (node.attrs.layout) {
+    return node.attrs.layout;
+  }
+
+  if (node.marks && node.marks.length) {
+    return (
+      node.marks.find(mark => mark.type.name === 'breakout') || {
+        attrs: { mode: '' },
+      }
+    ).attrs.mode;
+  }
+
+  return '';
+}
 
 // incapsulated this hack into a separate util function
 export const fixCursorAlignment = (view: EditorView) => {
@@ -162,8 +222,9 @@ export const fixCursorAlignment = (view: EditorView) => {
   }
 
   // breakout mode
-  if (/full-width|wide/i.test(targetNode.attrs.layout)) {
-    gapCursorRef.setAttribute('layout', targetNode.attrs.layout);
+  const breakoutMode = getBreakoutModeFromTargetNode(targetNode);
+  if (/full-width|wide/i.test(breakoutMode)) {
+    gapCursorRef.setAttribute('layout', breakoutMode);
   }
 
   // mediaSingle with layout="wrap-left" or "wrap-right"

@@ -4,5 +4,5 @@ export interface DeleteUserOverviewScreenProps {
   accessibleSites: string[];
   isCurrentUser: boolean;
   user: User;
-  deactivateUserHandler: () => void;
+  deactivateUserHandler?: () => void;
 }

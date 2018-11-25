@@ -1,12 +1,11 @@
 // @flow
 import React, { Component } from 'react';
-import { canUseDom } from 'exenv';
+import { canUseDOM } from 'exenv';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
-import { FocusLock } from '@atlaskit/layer-manager';
 import Blanket from '@atlaskit/blanket';
 
 import {
@@ -24,6 +23,7 @@ import {
 } from '../styled/Modal';
 import { Animation } from './Animation';
 import Content from './Content';
+import FocusLock from './FocusLock';
 import { type Props as OuterProps } from './ModalWrapper';
 
 export const Positioner = ({
@@ -74,7 +74,7 @@ class Modal extends Component<Props, State> {
 
   state = {
     dialogNode: null,
-    scrollDistance: canUseDom ? getScrollDistance() : 0,
+    scrollDistance: canUseDOM ? getScrollDistance() : 0,
     isExiting: false,
   };
 
@@ -156,7 +156,7 @@ class Modal extends Component<Props, State> {
             scrollDistance={scrollDistance}
           >
             <FocusLock
-              enabled={stackIndex === 0 && isOpen}
+              isEnabled={stackIndex === 0 && isOpen}
               autoFocus={autoFocus}
             >
               <Blanket isTinted onBlanketClicked={this.handleOverlayClick} />

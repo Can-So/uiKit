@@ -1,5 +1,72 @@
 # @atlaskit/navigation-next
 
+## 4.0.2
+- [patch] [01d913d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01d913d):
+
+  - fixing exports integration on JFE
+
+## 4.0.1
+- [patch] [f66f71f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f66f71f):
+
+  - Makes all entrypoints have a corresponding .flow file containing the //@flow comment
+
+## 4.0.0
+- [major] [8e753fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e753fc):
+
+  - View the [upgrade guide](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/upgrade-guide) to help you upgrade to v4
+  - The API for renderer items that use components as their `type` property have now changed to use a type value of `'InlineComponent'` and specify the component via a `component` prop instead. This allows the renderer item types to be typed correctly as disjoint unions on the type property.
+  - Rename `withNavigationUI` HOC to `withNavigationUIController`
+  - Rename `ViewRenderer` component to `ItemsRenderer`
+  - Rename AsyncLayoutManagerWithViewController's `viewRenderer` prop to `itemsRenderer`
+  - Remove icon prop from ConnectedItem and built-in renderer 'Item' type
+  - Remove deprecated `key` prop from GlobalNav's `primaryItems` and `secondaryItems` props
+  - Remove ScrollableSectionInner component. Remove scrollHint styles from theme.
+  - Remove peeking behaviour
+
+## 3.26.0
+- [minor] [5c6c893](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c6c893):
+
+  - Create an entrypoint for ViewController and UIController
+
+## 3.25.2
+- [patch] [5e99cb1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e99cb1):
+
+  - Replacing LayoutManagerWithViewController impl by composing AsyncLMWVC
+
+## 3.25.1
+- [patch] [a22db3c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a22db3c):
+
+  - Update flowtypes of UIController to allow consumer supplied cache getters to return null/undefined
+
+## 3.25.0
+- [minor] [d96b032](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d96b032):
+
+  - BREAKING: A breaking change was accidentally released in this version.
+
+    The API for renderer items that use components as their \`type\` property have now changed to use a type value of \`'InlineComponent'\` and specify the component via a \`component\` prop instead. See the View the [v3 - v4 upgrade guide](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/upgrade-guide) for more information.
+  - Export flow types for each built-in item renderer type
+  - Export a generic flow typed version of the renderer, `TypedViewRenderer`, that is designed to be extended to pass custom component flow types
+    so the renderer typechecks custom components. See the [View Renderer documentation](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/state-controllers#view-renderer) for more information.
+
+## 3.24.0
+- [minor] [c2c0b0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2c0b0c):
+
+  - Adding new component AsyncLayoutManagerWithViewController to be used with code splitting
+
+## 3.23.0
+- [minor] [b40e33e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b40e33e):
+
+  - Update flow types of navigation components and higher-order components (HOCs) to allow types to flow through to consumers.
+
+    Previously this was broken because our navigation HOCs (withTheme, withNavigationUIController, withNavigationViewController)
+    weren't explicitly typed and swallowed types of a component. Types were also lost when components were wrapped with multiple HOCs (including withAnalyticsEvents, withAnalyticsContext HOCs). This is now fixed by default and a number of types related to our navigation HOCs have been exported so that you can explicitly type any subsequent components
+    wrapped with our HOCs.
+
+## 3.22.1
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
 ## 3.22.0
 - [minor] [b8bda3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8bda3a):
 

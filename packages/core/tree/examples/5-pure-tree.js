@@ -11,7 +11,7 @@ import Tree, {
   type ItemId,
   type TreeSourcePosition,
   type TreeDestinationPosition,
-} from '../src/';
+} from '../src';
 import { treeWithTwoBranches } from '../mockdata/treeWithTwoBranches';
 
 const PADDING_PER_LEVEL = 16;

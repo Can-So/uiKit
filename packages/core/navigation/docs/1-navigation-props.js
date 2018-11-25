@@ -21,7 +21,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="Navigation Component Props"
+      heading="Navigation Props"
       props={require('!!extract-react-types-loader!../src/components/js/Navigation.js')}
     />
   )}

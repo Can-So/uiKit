@@ -1,6 +1,7 @@
 // @ts-ignore: unused variable
 import { css, Styles, StyledComponentClass } from 'styled-components';
 import { colors } from '@atlaskit/theme';
+import { akEditorGridLineZIndex } from '@atlaskit/editor-common';
 
 export const GRID_GUTTER = 12;
 
@@ -10,6 +11,7 @@ export const gridStyles = css`
     margin-left: -${GRID_GUTTER}px;
     margin-right: -${GRID_GUTTER}px;
     transform: scale(1);
+    z-index: ${akEditorGridLineZIndex};
   }
 
   .gridContainer {
@@ -20,13 +22,14 @@ export const gridStyles = css`
   }
 
   .gridLine {
-    border-left: 1px solid ${colors.N30};
+    border-left: 1px solid ${colors.N30A};
     display: inline-block;
     box-sizing: border-box;
     height: 100%;
     margin-left: -1px;
 
     transition: border-color 0.15s linear;
+    z-index: 0;
   }
 
   .gridContainer.hidden .gridLine {

@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ADF => WikiMarkup - Panel should convert error panel node 1`] = `
+"{panel:bgColor=#ffebe6}
+This is a error panel
+{panel}"
+`;
+
 exports[`ADF => WikiMarkup - Panel should convert heading inside panel node 1`] = `
 "{panel:bgColor=#fffae6}
 h1. This is a warning panel
@@ -36,9 +42,9 @@ This is a note panel
 {panel}"
 `;
 
-exports[`ADF => WikiMarkup - Panel should convert tip panel node 1`] = `
+exports[`ADF => WikiMarkup - Panel should convert success panel node 1`] = `
 "{panel:bgColor=#e3fcef}
-This is a tip panel
+This is a success panel
 {panel}"
 `;
 

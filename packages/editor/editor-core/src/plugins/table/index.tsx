@@ -68,7 +68,7 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
       {
         name: 'table',
         plugin: ({
-          props: { allowTables },
+          props: { allowTables, appearance },
           eventDispatcher,
           dispatch,
           portalProviderAPI,
@@ -78,6 +78,7 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
             portalProviderAPI,
             eventDispatcher,
             pluginConfig(allowTables),
+            appearance,
           );
         },
       },

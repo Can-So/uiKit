@@ -9,17 +9,21 @@ import { liftTarget, ReplaceAroundStep } from 'prosemirror-transform';
 import { EditorView } from 'prosemirror-view';
 import * as baseCommand from 'prosemirror-commands';
 import * as baseListCommand from 'prosemirror-schema-list';
+import {
+  hasParentNodeOfType,
+  findPositionOfNodeBefore,
+} from 'prosemirror-utils';
 import { isEmptyNode, hasVisibleContent } from '../../utils/document';
 import {
   filter,
   isEmptySelectionAtStart,
   isFirstChildOfParent,
-  isNthParentOfType,
   findCutBefore,
 } from '../../utils/commands';
 import { isRangeOfType } from '../../utils';
 import { liftFollowingList, liftSelectionList } from './transforms';
 import { Command } from '../../types';
+import { GapCursorSelection } from '../gap-cursor';
 
 const deletePreviousEmptyListItem = (
   state: EditorState,
@@ -50,24 +54,35 @@ const deletePreviousEmptyListItem = (
   return false;
 };
 
-const joinPToPreviousListItem = (
+const joinToPreviousListItem = (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
   const { $from } = state.selection;
-  const { paragraph, bulletList, orderedList } = state.schema.nodes;
-
-  const $cut = findCutBefore($from);
+  const {
+    paragraph,
+    listItem,
+    codeBlock,
+    bulletList,
+    orderedList,
+  } = state.schema.nodes;
+  const isGapCursorShown = state.selection instanceof GapCursorSelection;
+  const $cutPos = isGapCursorShown ? state.doc.resolve($from.pos + 1) : $from;
+  let $cut = findCutBefore($cutPos);
   if (!$cut) {
     return false;
   }
+
   // see if the containing node is a list
   if (
     $cut.nodeBefore &&
     [bulletList, orderedList].indexOf($cut.nodeBefore.type) > -1
   ) {
-    // and the node after this is a paragraph
-    if ($cut.nodeAfter && $cut.nodeAfter.type === paragraph) {
+    // and the node after this is a paragraph or a codeBlock
+    if (
+      $cut.nodeAfter &&
+      ($cut.nodeAfter.type === paragraph || $cut.nodeAfter.type === codeBlock)
+    ) {
       // find the nearest paragraph that precedes this node
       let $lastNode = $cut.doc.resolve($cut.pos - 1);
 
@@ -75,23 +90,42 @@ const joinPToPreviousListItem = (
         $lastNode = state.doc.resolve($lastNode.pos - 1);
       }
 
-      // take the text content of the paragraph and insert after the paragraph up until before the the cut
-      let tr = state.tr.step(
-        new ReplaceAroundStep(
-          $lastNode.pos,
-          $cut.pos + $cut.nodeAfter!.nodeSize,
-          $cut.pos + 1,
-          $cut.pos + $cut.nodeAfter!.nodeSize - 1,
-          state.tr.doc.slice($lastNode.pos, $cut.pos),
-          0,
-          true,
-        ),
-      );
+      let { tr } = state;
+      if (isGapCursorShown) {
+        const nodeBeforePos = findPositionOfNodeBefore(tr.selection);
+        if (typeof nodeBeforePos !== 'number') {
+          return false;
+        }
+        // append the codeblock to the list node
+        const list = $cut.nodeBefore.copy(
+          $cut.nodeBefore.content.append(
+            Fragment.from(listItem.createChecked({}, $cut.nodeAfter)),
+          ),
+        );
+        tr.replaceWith(
+          nodeBeforePos,
+          $from.pos + $cut.nodeAfter.nodeSize,
+          list,
+        );
+      } else {
+        // take the text content of the paragraph and insert after the paragraph up until before the the cut
+        tr = state.tr.step(
+          new ReplaceAroundStep(
+            $lastNode.pos,
+            $cut.pos + $cut.nodeAfter.nodeSize,
+            $cut.pos + 1,
+            $cut.pos + $cut.nodeAfter.nodeSize - 1,
+            state.tr.doc.slice($lastNode.pos, $cut.pos),
+            0,
+            true,
+          ),
+        );
+      }
 
       // find out if there's now another list following and join them
       // as in, [list, p, list] => [list with p, list], and we want [joined list]
       let $postCut = tr.doc.resolve(
-        tr.mapping.map($cut.pos + $cut.nodeAfter!.nodeSize),
+        tr.mapping.map($cut.pos + $cut.nodeAfter.nodeSize),
       );
       if (
         $postCut.nodeBefore &&
@@ -108,6 +142,49 @@ const joinPToPreviousListItem = (
   }
 
   return false;
+};
+
+const isInsideListItem = (state: EditorState): boolean => {
+  const { $from } = state.selection;
+  const { listItem, paragraph } = state.schema.nodes;
+
+  if (state.selection instanceof GapCursorSelection) {
+    return $from.parent.type === listItem;
+  }
+
+  return (
+    hasParentNodeOfType(listItem)(state.selection) &&
+    $from.parent.type === paragraph
+  );
+};
+
+const canToJoinToPreviousListItem = (state: EditorState): boolean => {
+  const { $from } = state.selection;
+  const { bulletList, orderedList } = state.schema.nodes;
+
+  const $before = state.doc.resolve($from.pos - 1);
+  let nodeBefore = $before ? $before.nodeBefore : null;
+
+  if (state.selection instanceof GapCursorSelection) {
+    nodeBefore = $from.nodeBefore;
+  }
+
+  return (
+    !!nodeBefore && [bulletList, orderedList].indexOf(nodeBefore.type) > -1
+  );
+};
+
+const canOutdent = (state: EditorState): boolean => {
+  const { parent } = state.selection.$from;
+  const { listItem, paragraph } = state.schema.nodes;
+
+  if (state.selection instanceof GapCursorSelection) {
+    return parent.type === listItem;
+  }
+
+  return (
+    parent.type === paragraph && hasParentNodeOfType(listItem)(state.selection)
+  );
 };
 
 export const enterKeyCommand = (
@@ -143,16 +220,16 @@ export const backspaceKeyCommand = baseCommand.chainCommands(
 
       // list items might have multiple paragraphs; only do this at the first one
       isFirstChildOfParent,
-      isNthParentOfType('listItem', 1),
+      canOutdent,
     ],
     baseCommand.chainCommands(deletePreviousEmptyListItem, outdentList()),
   ),
 
-  // if we're just inside a paragraph node and backspace, then try to join
+  // if we're just inside a paragraph node (or gapcursor is shown) and backspace, then try to join
   // the text to the previous list item, if one exists
   filter(
-    [isEmptySelectionAtStart, isNthParentOfType('paragraph', 0)],
-    joinPToPreviousListItem,
+    [isEmptySelectionAtStart, canToJoinToPreviousListItem],
+    joinToPreviousListItem,
   ),
 );
 
@@ -234,7 +311,7 @@ export function outdentList(): Command {
   return function(state, dispatch) {
     const { listItem } = state.schema.nodes;
     const { $from, $to } = state.selection;
-    if ($from.node(-1).type === listItem) {
+    if (isInsideListItem(state)) {
       // if we're backspacing at the start of a list item, unindent it
       // take the the range of nodes we might be lifting
 
@@ -310,8 +387,7 @@ export function outdentList(): Command {
 export function indentList(): Command {
   return function(state, dispatch) {
     const { listItem } = state.schema.nodes;
-    const { $from } = state.selection;
-    if ($from.node(-1).type === listItem) {
+    if (isInsideListItem(state)) {
       baseListCommand.sinkListItem(listItem)(state, dispatch);
       return true;
     }
@@ -368,11 +444,6 @@ export function adjustSelectionInList(
   let { $from, $to } = selection;
 
   const isSameLine = $from.pos === $to.pos;
-
-  if (isSameLine) {
-    $from = doc.resolve($from.start($from.depth));
-    $to = doc.resolve($from.end($from.depth));
-  }
 
   let startPos = $from.pos;
   let endPos = $to.pos;

@@ -41,6 +41,8 @@ export interface Props {
   linkComponent?: LinkComponent;
   createAnalyticsEvent?: CreateAnalyticsEventFn;
   isSendSearchTermsEnabled?: boolean;
+  selectedResultId?: string;
+  onSelectedResultIdChanged?: (id: string) => void;
 }
 
 export interface State {
@@ -158,6 +160,8 @@ export class GlobalQuickSearch extends React.Component<Props, State> {
       linkComponent,
       children,
       onSearchSubmit,
+      selectedResultId,
+      onSelectedResultIdChanged,
     } = this.props;
 
     return (
@@ -170,6 +174,8 @@ export class GlobalQuickSearch extends React.Component<Props, State> {
           value={this.state.query}
           linkComponent={linkComponent}
           onSearchSubmit={onSearchSubmit}
+          selectedResultId={selectedResultId}
+          onSelectedResultIdChanged={onSelectedResultIdChanged}
         >
           {children}
         </QuickSearch>

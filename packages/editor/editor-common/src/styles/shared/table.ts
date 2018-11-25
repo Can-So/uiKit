@@ -21,6 +21,7 @@ export const TableSharedCssClassName = {
   TABLE_NODE_WRAPPER: `${clPrefix}wrapper`,
   TABLE_LEFT_SHADOW: `${clPrefix}with-left-shadow`,
   TABLE_RIGHT_SHADOW: `${clPrefix}with-right-shadow`,
+  TABLE_CELL_NODEVIEW_CONTENT_DOM: `${clPrefix}cell-nodeview-content-dom`,
 };
 
 const tableSharedStyle = css`
@@ -88,10 +89,10 @@ const tableSharedStyle = css`
       th {
         background-color: ${akEditorTableToolbar};
         text-align: left;
-        & * {
+        & *:not(strong) {
           font-weight: normal;
         }
-        & > p {
+        & .${TableSharedCssClassName.TABLE_CELL_NODEVIEW_CONTENT_DOM} > p {
           font-weight: bold;
         }
       }

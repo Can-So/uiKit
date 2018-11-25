@@ -18,35 +18,8 @@ import ScreenTracker from '../ScreenTracker';
 import { analyticsIdMap, fireDrawerDismissedEvents } from './analytics';
 import NotificationDrawerContents from '../../platform-integration';
 
-import type { GlobalNavItemData, NavItem } from '../../config/types';
+import type { NavItem } from '../../config/types';
 import type { GlobalNavigationProps, DrawerName } from './types';
-
-// TODO: Figure out a way to appease flow without this function.
-const mapToGlobalNavItem: NavItem => GlobalNavItemData = ({
-  dropdownItems,
-  icon,
-  id,
-  itemComponent,
-  label,
-  onClick,
-  tooltip,
-  component,
-  badge,
-  href,
-  size,
-}) => ({
-  dropdownItems,
-  icon,
-  id,
-  itemComponent,
-  label,
-  onClick,
-  tooltip,
-  component,
-  badge,
-  href,
-  size,
-});
 
 const noop = () => {};
 
@@ -64,19 +37,30 @@ type GlobalNavigationState = {
   isStarredDrawerOpen: boolean,
 };
 
-interface Global {
-  [key: string]: boolean; // Need an indexer property to appease flow for is${capitalisedDrawerName}Controlled
-  isSearchDrawerControlled?: boolean;
-  isNotificationDrawerControlled?: boolean;
-  isStarredDrawerControlled?: boolean;
-  isNotificationInbuilt: boolean;
-}
+type DrawerInstanceState = {
+  isControlled: boolean,
+};
 
-// $FlowFixMe Flow has a bug with indexer properties in interfaces. https://github.com/facebook/flow/issues/6321
-export default class GlobalNavigation
-  extends Component<GlobalNavigationProps, GlobalNavigationState>
-  implements Global {
-  drawers: DrawerName[] = ['search', 'notification', 'starred', 'create'];
+export default class GlobalNavigation extends Component<
+  GlobalNavigationProps,
+  GlobalNavigationState,
+> {
+  drawers: {
+    [DrawerName]: DrawerInstanceState,
+  } = {
+    search: {
+      isControlled: false,
+    },
+    notification: {
+      isControlled: false,
+    },
+    starred: {
+      isControlled: false,
+    },
+    create: {
+      isControlled: false,
+    },
+  };
   isNotificationInbuilt = false;
 
   constructor(props: GlobalNavigationProps) {
@@ -90,7 +74,7 @@ export default class GlobalNavigation
       notificationCount: 0,
     };
 
-    this.drawers.forEach((drawer: DrawerName) => {
+    Object.keys(this.drawers).forEach((drawer: DrawerName) => {
       this.updateDrawerControlledStatus(drawer, props);
 
       const capitalisedDrawerName = this.getCapitalisedDrawerName(drawer);
@@ -123,12 +107,12 @@ export default class GlobalNavigation
   }
 
   componentDidUpdate(prevProps: GlobalNavigationProps) {
-    this.drawers.forEach(drawer => {
-      this.updateDrawerControlledStatus(drawer, this.props);
+    Object.keys(this.drawers).forEach(drawerName => {
+      this.updateDrawerControlledStatus(drawerName, this.props);
 
-      const capitalisedDrawerName = this.getCapitalisedDrawerName(drawer);
+      const capitalisedDrawerName = this.getCapitalisedDrawerName(drawerName);
       // Do nothing if it's a controlled drawer
-      if (this[`is${capitalisedDrawerName}Controlled`]) {
+      if (this.drawers[drawerName].isControlled) {
         return;
       }
 
@@ -192,6 +176,7 @@ export default class GlobalNavigation
     try {
       return localStorage.getItem('notificationBadgeCountCache');
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
     }
     return null;
@@ -201,21 +186,22 @@ export default class GlobalNavigation
     try {
       localStorage.setItem('notificationBadgeCountCache', newCount);
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
     }
   };
 
   updateDrawerControlledStatus = (
-    drawer: DrawerName,
+    drawerName: DrawerName,
     props: GlobalNavigationProps,
   ) => {
-    const capitalisedDrawerName = this.getCapitalisedDrawerName(drawer);
+    const capitalisedDrawerName = this.getCapitalisedDrawerName(drawerName);
 
     if (props[`on${capitalisedDrawerName.replace('Drawer', '')}Click`]) {
-      this[`is${capitalisedDrawerName}Controlled`] = false;
+      this.drawers[drawerName].isControlled = false;
     } else {
       // If a drawer doesn't have an onClick handler, mark it as a controlled drawer.
-      this[`is${capitalisedDrawerName}Controlled`] = true;
+      this.drawers[drawerName].isControlled = true;
     }
   };
 
@@ -237,7 +223,7 @@ export default class GlobalNavigation
 
     // Update the state only if it's a controlled drawer.
     // componentDidMount takes care of the uncontrolled drawers
-    if (this[`is${capitalisedDrawerName}Controlled`]) {
+    if (this.drawers[drawerName].isControlled) {
       this.setState(
         {
           [`is${capitalisedDrawerName}Open`]: true,
@@ -265,7 +251,7 @@ export default class GlobalNavigation
 
     // Update the state only if it's a controlled drawer.
     // componentDidMount takes care of the uncontrolled drawers
-    if (this[`is${capitalisedDrawerName}Controlled`]) {
+    if (this.drawers[drawerName].isControlled) {
       this.setState(
         {
           [`is${capitalisedDrawerName}Open`]: false,
@@ -279,6 +265,12 @@ export default class GlobalNavigation
   };
 
   renderNotificationBadge = () => {
+    if (this.state.isNotificationDrawerOpen) {
+      // Unmount the badge when the drawer is open
+      // So that it can remount with the latest badgeCount when the drawer closes.
+      return null;
+    }
+
     const { cloudId, fabricNotificationLogUrl } = this.props;
     const refreshRate = this.state.notificationCount ? 180000 : 60000;
 
@@ -308,15 +300,21 @@ export default class GlobalNavigation
     );
     const defaultConfig = generateDefaultConfig();
     const badge = this.renderNotificationBadge;
+    const { notificationCount: badgeCount } = this.isNotificationInbuilt
+      ? this.state
+      : this.props;
 
     const navItems: NavItem[] = Object.keys(productConfig).map(item => ({
       ...(productConfig[item]
         ? {
             ...(item === 'notification' && this.isNotificationInbuilt
-              ? { badge }
+              ? { id: 'notifications', badge }
               : {}),
             ...defaultConfig[item],
             ...productConfig[item],
+            ...(item === 'notification'
+              ? { id: 'notifications', badgeCount }
+              : {}),
           }
         : null),
     }));
@@ -325,11 +323,17 @@ export default class GlobalNavigation
       primaryItems: navItems
         .filter(({ section }) => section === 'primary')
         .sort(({ rank: rank1 }, { rank: rank2 }) => rank1 - rank2)
-        .map(mapToGlobalNavItem),
+        .map(navItem => {
+          const { section, rank, ...props } = navItem;
+          return props;
+        }),
       secondaryItems: navItems
         .filter(({ section }) => section === 'secondary')
         .sort(({ rank: rank1 }, { rank: rank2 }) => rank1 - rank2)
-        .map(mapToGlobalNavItem),
+        .map(navItem => {
+          const { section, rank, ...props } = navItem;
+          return props;
+        }),
     };
   };
 
@@ -351,31 +355,35 @@ export default class GlobalNavigation
             primaryItems={primaryItems}
             secondaryItems={secondaryItems}
           />
-          {this.drawers.map(drawer => {
-            const capitalisedDrawerName = this.getCapitalisedDrawerName(drawer);
+          {Object.keys(this.drawers).map(drawerName => {
+            const capitalisedDrawerName = this.getCapitalisedDrawerName(
+              drawerName,
+            );
             const shouldUnmountOnExit = this.props[
               `should${capitalisedDrawerName}UnmountOnExit`
             ];
 
             const DrawerContents =
-              drawer === 'notification' && this.isNotificationInbuilt
+              drawerName === 'notification' && this.isNotificationInbuilt
                 ? this.renderNotificationDrawerContents
-                : this.props[`${drawer}DrawerContents`];
+                : this.props[`${drawerName}DrawerContents`];
 
             if (!DrawerContents) {
               return null;
             }
 
+            const width = this.props[`${drawerName}DrawerWidth`] || 'wide';
+
             return (
               <Drawer
-                key={drawer}
+                key={drawerName}
                 isOpen={this.state[`is${capitalisedDrawerName}Open`]}
-                onClose={this.closeDrawer(drawer)}
+                onClose={this.closeDrawer(drawerName)}
                 shouldUnmountOnExit={shouldUnmountOnExit}
-                width="wide"
+                width={width}
               >
                 <ScreenTracker
-                  name={analyticsIdMap[drawer]}
+                  name={analyticsIdMap[drawerName]}
                   isVisible={this.state[`is${capitalisedDrawerName}Open`]}
                 />
                 <DrawerContents />

@@ -164,6 +164,7 @@ const assertAdvancedSearchGroup = (product: Product, element: JSX.Element) => {
 const getSearchAndRecentItems = (
   product: Product,
   sessionId,
+  extraProps = {},
 ): SearchResultProps => {
   const commonProps = {
     retrySearch: jest.fn(),
@@ -176,6 +177,7 @@ const getSearchAndRecentItems = (
   if (product === 'jira') {
     return {
       ...commonProps,
+      ...extraProps,
       searchResults: {
         objects: issues,
         containers: boards,
@@ -189,6 +191,7 @@ const getSearchAndRecentItems = (
   }
   return {
     ...commonProps,
+    ...extraProps,
     searchResults: {
       objects: [],
       spaces: spaceResults,
@@ -364,6 +367,31 @@ const getPreqQueryResults = (product: Product) =>
       const { getPostQueryGroups } = getProps();
       const postQueryGroups = getPostQueryGroups();
       expect(postQueryGroups).toMatchObject(getPostQueryResults(product));
+    });
+  });
+});
+
+describe('jira', () => {
+  it('should not render lozenge for pre-query screen', () => {
+    const wrapper = renderComponent('jira');
+    const quickSearchContainer = wrapper.find(QuickSearchContainer);
+    const searchResultsComponent = (quickSearchContainer.props() as QuickSearchContainerProps).getSearchResultsComponent(
+      getSearchAndRecentItems('jira', 'abc', { latestSearchQuery: '' }),
+    );
+    const { props } = searchResultsComponent! as React.ReactElement<
+      SearchResultsComponentProps
+    >;
+    const { renderAdvancedSearchGroup } = props;
+    const advancedSearchGroup = renderAdvancedSearchGroup({ resultsCount: 10 });
+    expect(advancedSearchGroup.props.children).toMatchObject({
+      type: JiraAdvancedSearchGroup,
+      props: {
+        analyticsData: { resultsCount: 10 },
+        query: '',
+        showKeyboardLozenge: false,
+        showSearchIcon: true,
+        onAdvancedSearchChange: expect.any(Function),
+      },
     });
   });
 });

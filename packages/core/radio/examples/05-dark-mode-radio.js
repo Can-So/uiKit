@@ -26,7 +26,7 @@ export default class ThemedRadio extends Component<
     return (
       <AtlaskitThemeProvider mode={themeMode}>
         <RadioGroup
-          defaultCheckedValue={this.state.themeMode}
+          defaultValue={this.state.themeMode}
           options={options}
           onChange={this.switchTheme}
         />

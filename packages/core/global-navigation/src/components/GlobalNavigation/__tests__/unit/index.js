@@ -8,8 +8,10 @@ import StarLargeIcon from '@atlaskit/icon/glyph/star-large';
 import NotificationIcon from '@atlaskit/icon/glyph/notification';
 import SignInIcon from '@atlaskit/icon/glyph/sign-in';
 import QuestionIcon from '@atlaskit/icon/glyph/question-circle';
+import { NotificationIndicator } from '@atlaskit/notification-indicator';
 import GlobalNavigation from '../../index';
 import ScreenTracker from '../../../ScreenTracker';
+import ItemComponent from '../../../ItemComponent';
 
 const DrawerContents = () => <div>drawer</div>;
 const EmojiAtlassianIcon = () => <button>EmojiAtlassianIcon</button>;
@@ -51,7 +53,7 @@ describe('GlobalNavigation', () => {
 
       const productIcon = wrapper.find(EmojiAtlassianIcon);
       expect(productIcon.exists()).toBeTruthy();
-      expect(wrapper.find('a').props().href).toEqual('/testtest');
+      expect(wrapper.find('a').prop('href')).toEqual('/testtest');
     });
 
     it('should pass both href and onClick for product logo', () => {
@@ -67,7 +69,7 @@ describe('GlobalNavigation', () => {
       const productIcon = wrapper.find(EmojiAtlassianIcon);
 
       expect(productIcon.exists()).toBeTruthy();
-      expect(wrapper.find('a').props().href).toEqual('/testtest');
+      expect(wrapper.find('a').prop('href')).toEqual('/testtest');
 
       productIcon.simulate('click');
       expect(mockProductClick).toHaveBeenCalled();
@@ -138,7 +140,7 @@ describe('GlobalNavigation', () => {
           const icon = wrapper.find(akIcon);
           icon.simulate('click');
           expect(
-            wrapper.find('DrawerBase').props().shouldUnmountOnExit,
+            wrapper.find('DrawerBase').prop('shouldUnmountOnExit'),
           ).toBeFalsy();
 
           wrapper.setProps({
@@ -146,8 +148,32 @@ describe('GlobalNavigation', () => {
           });
           wrapper.update();
           expect(
-            wrapper.find('DrawerBase').props().shouldUnmountOnExit,
+            wrapper.find('DrawerBase').prop('shouldUnmountOnExit'),
           ).toBeTruthy();
+        });
+
+        it(`should default the width of the "${name}" drawer to "wide" when the drawer width is not passed in`, () => {
+          const props = {
+            [`${name}DrawerContents`]: DrawerContents,
+          };
+          // TODO: Convert to shallow once enzyme has been upgraded
+          const wrapper = mount(<GlobalNavigation {...props} />);
+          expect(wrapper.find('DrawerBase').props()).toMatchObject({
+            width: 'wide',
+          });
+        });
+
+        it(`should set the width of the "${name}" drawer when the drawer width is passed in`, () => {
+          const props = {
+            [`${name}DrawerWidth`]: 'full',
+            [`${name}DrawerContents`]: DrawerContents,
+          };
+
+          // TODO: Convert to shallow once enzyme has been upgraded
+          const wrapper = mount(<GlobalNavigation {...props} />);
+          expect(wrapper.find('DrawerBase').props()).toMatchObject({
+            width: 'full',
+          });
         });
 
         describe('Uncontrolled', () => {
@@ -234,7 +260,7 @@ describe('GlobalNavigation', () => {
             // Cannot assert for the drawer to be absent because it is
             // dismounted by ReactTransitionGroup on animationEnd, which is not
             // being captured by enzyme.
-            expect(wrapper.find('DrawerPrimitive').props().in).toBeFalsy();
+            expect(wrapper.find('DrawerPrimitive').prop('in')).toBeFalsy();
           });
 
           //  There is no onXOpen callback for controlled drawers. A consumer can
@@ -340,9 +366,9 @@ describe('GlobalNavigation', () => {
           defaultWrapper
             .find(icon)
             .parents('Tooltip')
-            .props().content,
+            .prop('content'),
         ).toBe(defaultTooltip);
-        expect(defaultWrapper.find(icon).props().label).toBe(defaultTooltip);
+        expect(defaultWrapper.find(icon).prop('label')).toBe(defaultTooltip);
       });
     });
 
@@ -352,9 +378,9 @@ describe('GlobalNavigation', () => {
           customTooltipWrapper
             .find(icon)
             .parents('Tooltip')
-            .props().content,
+            .prop('content'),
         ).toBe(`${name} tooltip`);
-        expect(customTooltipWrapper.find(icon).props().label).toBe(
+        expect(customTooltipWrapper.find(icon).prop('label')).toBe(
           `${name} tooltip`,
         );
       });
@@ -477,6 +503,17 @@ describe('GlobalNavigation', () => {
       );
       expect(wrapper.find('Badge').exists()).toBeFalsy();
     });
+
+    it('should pass the correct badgeCount to ItemComponent', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          onNotificationClick={() => {}}
+          notificationCount={15}
+        />,
+      );
+
+      expect(wrapper.find(ItemComponent).prop('badgeCount')).toBe(15);
+    });
   });
 
   describe('Inbuilt Notification', () => {
@@ -485,7 +522,7 @@ describe('GlobalNavigation', () => {
     it('should not render when either fabricID or fabricNotificationLogUrl are missing', () => {
       const wrapper = mount(<GlobalNavigation product="jira" locale="en" />);
 
-      const icon = wrapper.find('NotificationIcon');
+      const icon = wrapper.find(NotificationIcon);
       expect(icon.exists()).toBeFalsy();
     });
 
@@ -498,7 +535,7 @@ describe('GlobalNavigation', () => {
           cloudId={cloudId}
         />,
       );
-      const icon = wrapper.find('NotificationIcon');
+      const icon = wrapper.find(NotificationIcon);
       expect(icon.exists()).toBeTruthy();
     });
 
@@ -515,11 +552,11 @@ describe('GlobalNavigation', () => {
 
       expect(
         wrapper
-          .find('NotificationIcon')
+          .find(NotificationIcon)
           .parents('Tooltip')
-          .props().content,
+          .prop('content'),
       ).toBe('Notification tooltip from product');
-      expect(wrapper.find('NotificationIcon').props().label).toBe(
+      expect(wrapper.find(NotificationIcon).prop('label')).toBe(
         'Notification tooltip from product',
       );
     });
@@ -533,7 +570,7 @@ describe('GlobalNavigation', () => {
           cloudId={cloudId}
         />,
       );
-      const icon = wrapper.find('NotificationIcon');
+      const icon = wrapper.find(NotificationIcon);
       icon.simulate('click');
 
       expect(wrapper.find('NotificationDrawer').exists()).toBeTruthy();
@@ -549,7 +586,7 @@ describe('GlobalNavigation', () => {
           notificationDrawerContents={DrawerContents}
         />,
       );
-      const icon = wrapper.find('NotificationIcon');
+      const icon = wrapper.find(NotificationIcon);
       icon.simulate('click');
 
       expect(wrapper.find(DrawerContents).exists()).toBeTruthy();
@@ -580,7 +617,7 @@ describe('GlobalNavigation', () => {
         notificationCount: 0,
       });
       wrapper.update();
-      expect(wrapper.find('NotificationIndicator').props().refreshRate).toEqual(
+      expect(wrapper.find(NotificationIndicator).prop('refreshRate')).toEqual(
         60000,
       );
     });
@@ -600,7 +637,7 @@ describe('GlobalNavigation', () => {
       });
       wrapper.update();
 
-      expect(wrapper.find('NotificationIndicator').props().refreshRate).toEqual(
+      expect(wrapper.find(NotificationIndicator).prop('refreshRate')).toEqual(
         180000,
       );
     });
@@ -650,6 +687,47 @@ describe('GlobalNavigation', () => {
         skip: true,
       });
     });
+
+    it('should pass the correct badgeCount to ItemComponent', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+      wrapper.setState({
+        notificationCount: 5,
+      });
+
+      expect(wrapper.find(ItemComponent).prop('badgeCount')).toBe(5);
+    });
+
+    it('should unmount NotificationIndicator when notification drawer is open', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      const icon = wrapper.find(NotificationIcon);
+      icon.simulate('click');
+
+      expect(wrapper.find(NotificationIndicator).exists()).toBeFalsy();
+    });
+
+    it('should mount NotificationIndicator when notification drawer is closed', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      expect(wrapper.find(NotificationIndicator).exists()).toBeTruthy();
+    });
   });
 
   describe('AppSwitcher', () => {
@@ -683,10 +761,10 @@ describe('GlobalNavigation', () => {
 
     it('should render the correct tooltip', () => {
       // AppSwitcher doesn't have a default tooltip in global navigation as it's handled by the base app switcher component
-      expect(defaultWrapper.find(AppSwitcher).props().label).toBe(
+      expect(defaultWrapper.find(AppSwitcher).prop('label')).toBe(
         'appSwitcher tooltip',
       );
-      expect(defaultWrapper.find(AppSwitcher).props().tooltip).toBe(
+      expect(defaultWrapper.find(AppSwitcher).prop('tooltip')).toBe(
         'appSwitcher tooltip',
       );
     });
@@ -778,7 +856,7 @@ describe('GlobalNavigation', () => {
       );
 
       expect(wrapper.find('DefaultImage').exists()).toBeFalsy();
-      expect(wrapper.find('Avatar').props().src).toEqual(
+      expect(wrapper.find('Avatar').prop('src')).toEqual(
         '//url.to.image/fancy',
       );
     });

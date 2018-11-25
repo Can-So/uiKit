@@ -815,6 +815,23 @@ System.out.println("There are " + count + " values >= 5");`,
       ],
     },
     {
+      type: 'codeBlock',
+      marks: [{ type: 'breakout', attrs: { mode: 'wide' } }],
+      content: [
+        {
+          type: 'text',
+          text: `// Create a map.
+final IntIntOpenHashMap map = new IntIntOpenHashMap();
+map.put(1, 2);
+map.put(2, 5);
+map.put(3, 10);`,
+        },
+      ],
+      attrs: {
+        language: 'javascript',
+      },
+    },
+    {
       type: 'orderedList',
       content: [
         {
@@ -1467,9 +1484,6 @@ System.out.println("There are " + count + " values >= 5");`,
     },
     {
       type: 'mediaSingle',
-      attrs: {
-        layout: 'full-width',
-      },
       content: [
         {
           type: 'media',

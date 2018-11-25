@@ -12,7 +12,7 @@ type CodeBlockProps = {
   /** The code to be formatted */
   text: string,
   /** The language in which the code is written */
-  language?: ADFSupportedLanguages | string,
+  language: ADFSupportedLanguages | string,
   /** Indicates whether or not to show line numbers */
   showLineNumbers?: boolean,
   /** A custom theme to be applied, implements the Theme interface */

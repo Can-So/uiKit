@@ -15,10 +15,14 @@ module.exports = () => {
       {
         params: Object.assign({}, callbackOnDefinedFill.params, {
           callback: fill => {
-            // file-types and objects are colored icons
+            // file-types and objects are colored icons (16/24/48)
             if (
               fill.toString().startsWith('#') &&
-              !(filename.includes('file-types') || filename.includes('objects'))
+              !(
+                filename.includes('16') ||
+                filename.includes('24') ||
+                filename.includes('48')
+              )
             )
               console.warn(`"${filename}": has a fill of "${fill}"`);
           },

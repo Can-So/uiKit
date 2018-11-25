@@ -1,9 +1,12 @@
 // @flow
 
-import type { ComponentType, Node } from 'react';
+import type { ComponentType, ElementConfig, Node } from 'react';
+import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
 
-import type { StyleReducer, GlobalTheme } from '../../../theme/types';
+import type { StyleReducer, WithGlobalThemeProps } from '../../../theme/types';
 import type { InteractionState } from '../InteractionStateManager/types';
+
+import GlobalItem from './index';
 
 type Size = 'large' | 'small';
 
@@ -14,6 +17,8 @@ export type GlobalItemPresentationProps = {
   isSelected: boolean,
   /** Whether the Item is currently in the 'hover' interaction state. */
   isHover: boolean,
+  /** Whether the Item is currently in the 'focused' interaction state. */
+  isFocused: boolean,
   /** The size of the GlobalItem. */
   size: Size,
 };
@@ -27,15 +32,9 @@ export type GlobalItemStyles = {
 type GlobalItemIconProps = {
   label: string,
   secondaryColor: 'inherit',
-  size: 'large' | null,
 };
 
-export type HOCProvidedProps = {
-  /** An internal prop provided by our theme HOC. Should not be provided externally */
-  theme: GlobalTheme,
-};
-
-type BaseItemProps = HOCProvidedProps & {
+type BaseItemProps = {
   /** A component to render over the GlobalItem in the the badge position. */
   badge?: ComponentType<GlobalItemPresentationProps>,
   /** An href which this Item links to. If this prop is provided the Item will
@@ -44,7 +43,7 @@ type BaseItemProps = HOCProvidedProps & {
   /** A component which should render the main content of this GlobalItem. There
    * is an assumption that this will typically be an Atlaskit Icon component, so
    * it will be passed `label`, `secondaryColor`, and `size` props. */
-  icon: ?ComponentType<GlobalItemIconProps>,
+  icon?: ?ComponentType<GlobalItemIconProps>,
   /* The id of the item to be used in analytics and react keying */
   id?: string,
   /** The zero-based index for the position of the item within the global
@@ -57,11 +56,11 @@ type BaseItemProps = HOCProvidedProps & {
   /** A handler which will be called when the GlobalItem is clicked. */
   onClick?: (SyntheticEvent<HTMLElement>) => void,
   /** The size of the GlobalItem. */
-  size?: Size,
+  size: Size,
   /** A function which will be passed the default styles object for the Item,
    * and should return a new styles object. Allows you to patch and customise
    * the GlobalItem's appearance. */
-  styles?: StyleReducer,
+  styles: StyleReducer,
   /** The HTML target attribute. Will only be used if href is also set. */
   target?: string,
   /** A string/Node to render in a tooltip which will appear when the GlobalItem
@@ -69,12 +68,24 @@ type BaseItemProps = HOCProvidedProps & {
   tooltip?: Node,
 };
 
-export type GlobalItemRenderComponentProps = BaseItemProps & {
+export type GlobalItemRenderComponentProps = {
+  ...$Exact<BaseItemProps>,
   children: Node,
   className: string,
 };
 
-export type GlobalItemProps = BaseItemProps & {
+export type InjectedGlobalItemProps = {|
+  ...$Exact<WithGlobalThemeProps>,
+  ...$Exact<WithAnalyticsEventsProps>,
+|};
+
+/**
+ * This type is exported by the package.
+ */
+export type ExternalGlobalItemProps = ElementConfig<typeof GlobalItem>;
+
+export type BaseGlobalItemProps = {
+  ...$Exact<BaseItemProps>,
   /** A custom component to render instead of the default wrapper component.
    * Could be used to render a router Link, for example. The component will be
    * provided with the standard globalItem props. It will also be provided
@@ -83,8 +94,19 @@ export type GlobalItemProps = BaseItemProps & {
   component?: ComponentType<GlobalItemRenderComponentProps>,
 };
 
-// TODO: Type withTheme HOC instead and have consumers of GlobalItemProps reference
-// the type of the GlobalItem component instead
-export type ExternalGlobalItemProps = $Diff<GlobalItemProps, HOCProvidedProps>;
+export type GlobalItemProps = {
+  ...$Exact<BaseGlobalItemProps>,
+  ...$Exact<InjectedGlobalItemProps>,
+};
 
-export type GlobalItemPrimitiveProps = GlobalItemProps & InteractionState;
+export type InjectedGlobalItemPrimitiveProps = {|
+  ...$Exact<InteractionState>,
+  ...$Exact<WithGlobalThemeProps>,
+|};
+
+export type GlobalItemPrimitiveProps = {
+  ...$Exact<BaseGlobalItemProps>,
+  /** Whether this GlobalItem should display as being selected. */
+  isSelected: boolean,
+  ...$Exact<InjectedGlobalItemPrimitiveProps>,
+};

@@ -15,14 +15,7 @@ import { Wrapper } from './styled';
 import { Props, EnabledHandles } from './types';
 import Resizer, { handleSides } from './Resizer';
 
-export default class ResizableMediaSingle extends React.Component<
-  Props,
-  { selected: boolean }
-> {
-  state = {
-    selected: false,
-  };
-
+export default class ResizableMediaSingle extends React.Component<Props> {
   get wrappedLayout() {
     const { layout } = this.props;
     return layout === 'wrap-left' || layout === 'wrap-right';
@@ -59,7 +52,7 @@ export default class ResizableMediaSingle extends React.Component<
 
   get $pos() {
     const pos = this.props.getPos();
-    if (!pos) {
+    if (typeof pos !== 'number') {
       return null;
     }
 
@@ -117,7 +110,7 @@ export default class ResizableMediaSingle extends React.Component<
 
     const { containerWidth, lineLength, appearance } = this.props;
     const snapTargets: number[] = [];
-    for (let i = 0; i < this.props.gridSize; i++) {
+    for (let i = 0; i < this.gridWidth; i++) {
       snapTargets.push(
         calcPxFromColumns(i, lineLength, this.gridWidth) - offsetLeft,
       );
@@ -127,7 +120,7 @@ export default class ResizableMediaSingle extends React.Component<
     snapTargets.push(lineLength - offsetLeft);
 
     const minimumWidth = calcPxFromColumns(
-      this.wrappedLayout ? 1 : 2,
+      this.wrappedLayout || this.insideInlineLike ? 1 : 2,
       lineLength,
       this.props.gridSize,
     );
@@ -141,7 +134,7 @@ export default class ResizableMediaSingle extends React.Component<
     const isTopLevel = $pos.parent.type.name === 'doc';
     if (isTopLevel && appearance === 'full-page') {
       snapPoints.push(akEditorWideLayoutWidth);
-      const fullWidthPoint = containerWidth - 128;
+      const fullWidthPoint = containerWidth - akEditorBreakoutPadding;
       if (fullWidthPoint > akEditorWideLayoutWidth) {
         snapPoints.push(fullWidthPoint);
       }
@@ -204,14 +197,13 @@ export default class ResizableMediaSingle extends React.Component<
         height={height}
         layout={layout}
         containerWidth={containerWidth || origWidth}
-        pctWidth={pctWidth}
         innerRef={elem => (this.wrapper = elem)}
       >
         <Resizer
           {...this.props}
           width={width}
           height={height}
-          selected={this.state.selected}
+          selected={this.props.selected}
           enable={enable}
           calcNewSize={this.calcNewSize}
           snapPoints={this.snapPoints}
@@ -219,11 +211,7 @@ export default class ResizableMediaSingle extends React.Component<
           isInlineLike={this.insideInlineLike}
           getColumnLeft={this.calcColumnLeft}
         >
-          {React.cloneElement(React.Children.only(this.props.children), {
-            onSelection: selected => {
-              this.setState({ selected });
-            },
-          })}
+          {this.props.children}
         </Resizer>
       </Wrapper>
     );
