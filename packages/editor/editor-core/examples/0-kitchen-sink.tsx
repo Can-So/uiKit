@@ -12,14 +12,14 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import enMessages from '../src/i18n/en';
 import languages from '../src/i18n/languages';
 import WithEditorActions from './../src/ui/WithEditorActions';
-import Editor, { EditorProps } from './../src/editor';
+import Editor from './../src/editor';
 import {
   SaveAndCancelButtons,
-  ExampleEditor,
   providers,
   mediaProvider,
   analyticsHandler,
   quickInsertProvider,
+  LOCALSTORAGE_defaultDocKey,
 } from './5-full-page';
 import LanguagePicker from '../example-helpers/LanguagePicker';
 import EditorContext from './../src/ui/EditorContext';
@@ -50,11 +50,14 @@ const Container = styled.div`
   margin-top: 0.5em;
 `;
 
-const Column: React.ComponentClass<
-  React.HTMLAttributes<{}> & { vertical?: boolean }
+const Column: React.ComponentClass<React.HTMLAttributes<{}> & {}> = styled.div`
+  flex: 1;
+`;
+
+const EditorColumn: React.ComponentClass<
+  React.HTMLAttributes<{}> & { vertical: boolean }
 > = styled.div`
   flex: 1;
-
   ${p =>
     typeof p.vertical === 'boolean'
       ? p.vertical
@@ -163,22 +166,28 @@ export const Textarea: any = styled.textarea`
   width: 100%;
   height: 80%;
 `;
+
+const LOCALSTORAGE_orientationKey =
+  'fabric.editor.example.kitchen-sink.orientation';
 export default class FullPageRendererExample extends React.Component<
   Props,
   State
 > {
-  private getDefaultADF = () => {
-    const localADF =
-      (localStorage &&
-        localStorage.getItem('fabric.editor.example.full-page')) ||
-      undefined;
+  private getJSONFromStorage = (key: string, fallback: any = undefined) => {
+    const localADF = (localStorage && localStorage.getItem(key)) || undefined;
 
-    if (localADF) {
-      return JSON.parse(localADF);
-    } else {
-      return { version: 1, type: 'doc', content: [] };
-    }
+    return localADF ? JSON.parse(localADF) : fallback;
   };
+
+  private getDefaultADF = () =>
+    this.getJSONFromStorage(LOCALSTORAGE_defaultDocKey, {
+      version: 1,
+      type: 'doc',
+      content: [],
+    });
+
+  private getDefaultOrientation = () =>
+    this.getJSONFromStorage(LOCALSTORAGE_orientationKey, { vertical: true });
 
   state: State = {
     locale: 'en',
@@ -188,11 +197,31 @@ export default class FullPageRendererExample extends React.Component<
     appearance: 'full-page',
     showADF: false,
     disabled: false,
-    vertical: false,
+    vertical: this.getDefaultOrientation().vertical,
   };
 
   private inputRef: HTMLTextAreaElement | null;
   private popupMountPoint: HTMLElement | null;
+
+  showHideADF = () =>
+    this.setState(state => ({
+      showADF: !state.showADF,
+    }));
+
+  enableDisableEditor = () =>
+    this.setState(state => ({
+      disabled: !state.disabled,
+    }));
+
+  switchEditorOrientation = () => {
+    const vertical = !this.state.vertical;
+    this.setState({ vertical });
+
+    localStorage.setItem(
+      LOCALSTORAGE_orientationKey,
+      JSON.stringify({ vertical: vertical }),
+    );
+  };
 
   render() {
     const { locale, messages } = this.state;
@@ -239,35 +268,18 @@ export default class FullPageRendererExample extends React.Component<
                       display: 'flex',
                     }}
                   >
-                    <Button
-                      onClick={() => {
-                        this.setState(state => ({
-                          vertical: !state.vertical,
-                        }));
-                      }}
-                    >
+                    <Button onClick={this.switchEditorOrientation}>
                       Display {!this.state.vertical ? 'Vertical' : 'Horizontal'}
                     </Button>
 
                     <Button
                       appearance={this.state.disabled ? 'primary' : 'default'}
-                      onClick={() => {
-                        this.setState(state => ({
-                          disabled: !state.disabled,
-                        }));
-                      }}
+                      onClick={this.enableDisableEditor}
                     >
                       {!this.state.disabled ? 'Disable' : 'Enable'} editor
                     </Button>
 
-                    <Button
-                      appearance="primary"
-                      onClick={() => {
-                        this.setState(state => ({
-                          showADF: !state.showADF,
-                        }));
-                      }}
-                    >
+                    <Button appearance="primary" onClick={this.showHideADF}>
                       {!this.state.showADF ? 'Show' : 'Hide'} current ADF
                     </Button>
                   </Column>
@@ -275,10 +287,10 @@ export default class FullPageRendererExample extends React.Component<
               </Controls>
               <Container
                 style={{
-                  flexDirection: this.state.vertical ? 'column' : 'row',
+                  flexDirection: !this.state.vertical ? 'column' : 'row',
                 }}
               >
-                <Column vertical={!this.state.vertical}>
+                <EditorColumn vertical={this.state.vertical}>
                   <IntlProvider
                     locale={this.getLocalTag(locale)}
                     messages={messages}
@@ -340,7 +352,7 @@ export default class FullPageRendererExample extends React.Component<
                       }
                     />
                   </IntlProvider>
-                </Column>
+                </EditorColumn>
                 <Column>
                   {!this.state.showADF ? (
                     <div
