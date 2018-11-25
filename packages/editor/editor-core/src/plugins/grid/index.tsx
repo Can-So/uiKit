@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
+import { withTheme } from 'styled-components';
+
 import { PluginKey } from 'prosemirror-state';
-import { EditorPlugin } from '../../types';
+import { EditorPlugin, EditorAppearance } from '../../types';
 import {
   akEditorFullPageMaxWidth,
   akEditorWideLayoutWidth,
   MediaSingleLayout,
-  mapBreakpointToLayoutMaxWidth,
-  getBreakpoint,
   akEditorBreakoutPadding,
 } from '@atlaskit/editor-common';
 
@@ -134,6 +134,58 @@ const lineLengthGridLines = highlights => {
   return gridLines;
 };
 
+type Props = {
+  theme: any;
+  appearance: EditorAppearance;
+  containerElement?: HTMLElement;
+  editorWidth: number;
+
+  visible: boolean;
+  gridType: GridType;
+  highlight: number[];
+};
+
+class Grid extends React.Component<Props> {
+  render() {
+    const {
+      highlight,
+      appearance,
+      theme,
+      containerElement,
+      editorWidth,
+      gridType,
+      visible,
+    } = this.props;
+    const editorMaxWidth = theme.layoutMaxWidth;
+
+    let gridLines = [
+      ...lineLengthGridLines(highlight),
+      ...gutterGridLines(appearance, editorMaxWidth, editorWidth, highlight),
+    ];
+
+    return (
+      <div className="gridParent">
+        <div
+          className={classnames(
+            'gridContainer',
+            gridType,
+            !visible ? 'hidden' : '',
+          )}
+          style={{
+            height: containerElement
+              ? `${containerElement.scrollHeight}px`
+              : undefined,
+          }}
+        >
+          {gridLines}
+        </div>
+      </div>
+    );
+  }
+}
+
+const ThemedGrid = withTheme(Grid);
+
 const gridPlugin: EditorPlugin = {
   contentComponent: ({ editorView, appearance, containerElement }) => {
     return (
@@ -153,37 +205,13 @@ const gridPlugin: EditorPlugin = {
             return null;
           }
 
-          const editorMaxWidth = mapBreakpointToLayoutMaxWidth(
-            getBreakpoint(widthState.width),
-          );
-
-          let gridLines = [
-            ...lineLengthGridLines(grid.highlight),
-            ...gutterGridLines(
-              appearance,
-              editorMaxWidth,
-              widthState.width,
-              grid.highlight,
-            ),
-          ];
-
           return (
-            <div className="gridParent">
-              <div
-                className={classnames(
-                  'gridContainer',
-                  grid.gridType,
-                  !grid.visible ? 'hidden' : '',
-                )}
-                style={{
-                  height: containerElement
-                    ? `${containerElement.scrollHeight}px`
-                    : undefined,
-                }}
-              >
-                {gridLines}
-              </div>
-            </div>
+            <ThemedGrid
+              appearance={appearance}
+              editorWidth={widthState.width}
+              containerElement={containerElement}
+              {...grid}
+            />
           );
         }}
       />

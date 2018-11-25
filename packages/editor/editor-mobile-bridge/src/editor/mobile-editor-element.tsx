@@ -156,6 +156,7 @@ export default function mobileEditor(props) {
       allowDate={true}
       allowRule={true}
       allowStatus={true}
+      allowGapCursor={true}
       taskDecisionProvider={Promise.resolve(TaskDecisionProvider())}
     />
   );

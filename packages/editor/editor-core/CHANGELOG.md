@@ -1,5 +1,54 @@
 # @atlaskit/editor-core
 
+## 88.5.3
+- [patch] [dfcb816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfcb816):
+
+  - ED-5818: Add support for inserting block nodes
+
+  Bridge API now supports inserting:
+  * Tables
+  * Panels
+  * Codeblocks
+  * Block Quotes
+  * Actions
+  * Decisions
+
+## 88.5.2
+- [patch] [b73607f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b73607f):
+
+  - ED-5770: fix resizer for media @ 0 and non-dynamic text sizes
+
+- [patch] [7a9f647](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a9f647):
+
+  - ensure toolbar always appears even if media re-renders (e.g. resizer)
+
+## 88.5.1
+- [patch] [ab6d96b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6d96b):
+
+  - ED-5710: Fixes calling media upfront.
+
+  We now only call for the media auth, when rendering / loading a media item.
+
+## 88.5.0
+- [minor] [cfba914](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cfba914):
+
+  - ED-5771: fix wide and full-width images in renderer
+
+## 88.4.4
+- [patch] [416fbb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/416fbb3):
+
+  - ED-3298: codeBlocks inside lists
+
+## 88.4.3
+- [patch] [96c125b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/96c125b):
+
+  - Fixes an issue where using arrow keys to navigate between mention nodes would put the cursor in unexpected locations.
+
+## 88.4.2
+- [patch] [6e4570d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e4570d):
+
+  - Add height check when rendering images
+
 ## 88.4.1
 - [patch] [8974838](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8974838):
 

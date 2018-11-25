@@ -18,7 +18,7 @@ export const scrollToValue = (
   }
 };
 
-export class MultiValue extends React.PureComponent<any> {
+export class MultiValue extends React.Component<any> {
   private containerRef;
   constructor(props) {
     super(props);
@@ -33,6 +33,29 @@ export class MultiValue extends React.PureComponent<any> {
         this.containerRef.current.parentElement.parentElement,
       );
     }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const {
+      data: { label, user },
+      innerProps,
+      isFocused,
+    } = this.props;
+
+    const {
+      data: { label: nextLabel, user: nextUser },
+      innerProps: nextInnerProps,
+      isFocused: nextIsFocused,
+    } = nextProps;
+
+    // We can ignore onRemove here because it is a anonymous function
+    // that will recreated every time but with the same implementation.
+    return (
+      user !== nextUser ||
+      label !== nextLabel ||
+      innerProps !== nextInnerProps ||
+      isFocused !== nextIsFocused
+    );
   }
 
   render() {

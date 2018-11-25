@@ -88,6 +88,7 @@ class MediaNode extends Component<
       this.props.selected !== nextProps.selected ||
       this.state.viewContext !== nextState.viewContext ||
       this.props.node.attrs.id !== nextProps.node.attrs.id ||
+      this.props.node.attrs.collection !== nextProps.node.attrs.collection ||
       this.props.cardDimensions !== nextProps.cardDimensions
     ) {
       return true;
@@ -103,6 +104,10 @@ class MediaNode extends Component<
   componentWillUnmount() {
     const { node } = this.props;
     this.pluginState.handleMediaNodeUnmount(node);
+  }
+
+  componentDidUpdate() {
+    this.pluginState.updateElement();
   }
 
   private updateMediaContext = async () => {

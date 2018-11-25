@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-wikimarkup-transformer",
-  "version": "2.5.2",
+  "version": "2.7.0",
   "description": "Wiki markup transformer for JIRA and Confluence",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -38,7 +38,7 @@
     "cookie": "^0.3.1",
     "debug": "^2.2.0",
     "got": "^8.3.1",
-    "puppeteer": "^1.4.0",
+    "puppeteer": "^1.10.0",
     "rxjs": "^5.5.0"
   }
 }

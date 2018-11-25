@@ -11,6 +11,7 @@ export const SearchBox = styled.div`
   height: 36px;
   padding-bottom: 2px;
   border-bottom: 2px solid ${colors.B200};
+  z-index: 10;
 `;
 
 export const SearchFieldBaseInner = styled.div`

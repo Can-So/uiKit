@@ -4,6 +4,7 @@ import { Plugin, EditorState } from 'prosemirror-state';
 import {
   setTextSelection,
   findParentNodeOfTypeClosestToPos,
+  hasParentNodeOfType,
 } from 'prosemirror-utils';
 import { getCursor } from '../../../utils';
 
@@ -44,15 +45,17 @@ export function keymapPlugin(schema: Schema): Plugin | undefined {
     },
     Backspace: (state: EditorState, dispatch) => {
       const $cursor = getCursor(state.selection);
+      const { paragraph, codeBlock, listItem } = state.schema.nodes;
+      if (!$cursor || $cursor.parent.type !== codeBlock) {
+        return false;
+      }
+
       if (
-        $cursor &&
-        $cursor.pos === 1 &&
-        $cursor.parent.type === state.schema.nodes.codeBlock
+        $cursor.pos === 1 ||
+        (hasParentNodeOfType(listItem)(state.selection) &&
+          $cursor.parentOffset === 0)
       ) {
-        const node = findParentNodeOfTypeClosestToPos(
-          $cursor,
-          state.schema.nodes.codeBlock,
-        );
+        const node = findParentNodeOfTypeClosestToPos($cursor, codeBlock);
 
         if (!node) {
           return false;
@@ -61,14 +64,11 @@ export function keymapPlugin(schema: Schema): Plugin | undefined {
         dispatch(
           state.tr
             .setNodeMarkup(node.pos, node.node.type, node.node.attrs, [])
-            .setBlockType(
-              $cursor.pos,
-              $cursor.pos,
-              state.schema.nodes.paragraph,
-            ),
+            .setBlockType($cursor.pos, $cursor.pos, paragraph),
         );
         return true;
       }
+
       return false;
     },
   });
