@@ -51,8 +51,8 @@ const Column: React.ComponentClass<
   ${p =>
     typeof p.vertical === 'boolean'
       ? p.vertical
-        ? `border-right: 1px dotted ${colors.N50}; min-height: 85vh`
-        : `border-bottom: 1px dotted ${colors.N50};`
+        ? `border-right: 1px solid ${colors.N30}; min-height: 85vh`
+        : `border-bottom: 1px solid ${colors.N30}`
       : ''}
 `;
 
@@ -185,6 +185,7 @@ export default class FullPageRendererExample extends React.Component<
   };
 
   private inputRef: HTMLTextAreaElement | null;
+  private popupMountPoint: HTMLElement | null;
 
   render() {
     const { locale, messages } = this.state;
@@ -193,6 +194,12 @@ export default class FullPageRendererExample extends React.Component<
         <WithEditorActions
           render={actions => (
             <div>
+              <div
+                ref={ref => (this.popupMountPoint = ref)}
+                style={{
+                  zIndex: 9999,
+                }}
+              />
               <Controls>
                 <Select
                   formatOptionLabel={formatAppearanceOption}
@@ -295,6 +302,7 @@ export default class FullPageRendererExample extends React.Component<
                       defaultValue={this.state.adf}
                       disabled={this.state.disabled}
                       onChange={() => this.onEditorChange(actions)}
+                      popupsMountPoint={this.popupMountPoint || undefined}
                       primaryToolbarComponents={
                         <>
                           <LanguagePicker
