@@ -27,9 +27,10 @@ ${(
 
 ### Passing in the <Link> component from react-router
 
-You can replace parts of the pagination UI by passing in previousPageComponent, nextPageComponent, pageComponent and ellipsisComponent.
+You can replace parts of the pagination UI by passing in custom components.
 
-The following will render the pagination component by replacing the @atlaskit/button component with the <Link> component from react-router.
+The following will render the pagination component by replacing the @atlaskit/button
+component with the <Link> component from react-router.
 
 ${code`
 import Pagination from '@atlaskit/pagination';
@@ -47,7 +48,9 @@ function RouterLink (props) {
 
 <Pagination 
   pages={[{ label: '1', to: '/home' }, { label: '2', to: '/about' }, { label: '3', to: '/contact' } ]}
-  pageComponent={RouterLink}
+  components={{
+    Page: RouterLink
+  }}
 />
 `}
 

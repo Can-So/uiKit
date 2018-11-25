@@ -7,7 +7,7 @@ import {
 } from '@atlaskit/analytics-next';
 import PageComponent from './Page';
 import { LeftNavigator, RightNavigator } from './Navigators';
-import renderEllipsis from './renderEllipsis';
+import renderDefaultEllipsis from './renderEllipsis';
 import collapseRangeHelper from '../util/collapseRange';
 import {
   name as packageName,
@@ -21,7 +21,8 @@ type StateType = {
 
 class Pagination extends Component<PaginationPropTypes, StateType> {
   static defaultProps = {
-    ellipsisComponent: renderEllipsis,
+    components: {},
+    renderEllipsis: renderDefaultEllipsis,
     i18n: {
       prev: 'previous',
       next: 'next',
@@ -81,14 +82,14 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
 
   pagesToComponents = (pages: Array<any>) => {
     const { selectedIndex } = this.state;
-    const { pageComponent, getPageLabel } = this.props;
+    const { components, getPageLabel } = this.props;
     return pages.map((page, index) => {
       // array is 0 indexed but our pages start with 1
       const pageIndex = index + 1;
       return (
         <PageComponent
           key={`page-${getPageLabel ? getPageLabel(page, pageIndex) : index}`}
-          component={pageComponent}
+          component={components.Page}
           onClick={event => this.onChange(event, pageIndex)}
           isSelected={selectedIndex === pageIndex}
           page={page}
@@ -101,17 +102,17 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
 
   renderPages = () => {
     const { selectedIndex } = this.state;
-    const { pages, max, ellipsisComponent, collapseRange } = this.props;
+    const { pages, max, collapseRange, renderEllipsis } = this.props;
     const pagesComponents = this.pagesToComponents(pages);
 
     return collapseRange(pagesComponents, selectedIndex, {
       max,
-      ellipsisComponent,
+      ellipsis: renderEllipsis,
     });
   };
 
   renderLeftNavigator = () => {
-    const { previousPageComponent, pages, i18n } = this.props;
+    const { components, pages, i18n } = this.props;
     const { selectedIndex } = this.state;
     const props = {
       ariaLabel: i18n.prev,
@@ -122,7 +123,7 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
     return (
       <LeftNavigator
         key="left-navigator"
-        component={previousPageComponent}
+        component={components.Previous}
         onClick={event => this.onChange(event, selectedIndex - 1)}
         isDisabled={selectedIndex === 1}
         {...props}
@@ -131,7 +132,7 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
   };
 
   renderRightNavigator = () => {
-    const { nextPageComponent, pages, i18n } = this.props;
+    const { components, pages, i18n } = this.props;
     const { selectedIndex } = this.state;
     const props = {
       ariaLabel: i18n.next,
@@ -141,7 +142,7 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
     return (
       <RightNavigator
         key="right-navigator"
-        component={nextPageComponent}
+        component={components.Next}
         onClick={event => this.onChange(event, selectedIndex + 1)}
         isDisabled={selectedIndex === pages.length}
         {...props}

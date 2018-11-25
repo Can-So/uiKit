@@ -90,7 +90,9 @@ describe(`${name} - Pagination component`, () => {
       const wrapper = mount(
         <Pagination
           pages={[1, 2, 3]}
-          pageComponent={customComponent}
+          components={{
+            Page: customComponent,
+          }}
           defaultSelectedIndex={2}
         />,
       );
@@ -104,7 +106,9 @@ describe(`${name} - Pagination component`, () => {
       const wrapper = mount(
         <Pagination
           pages={[1, 2, 3]}
-          previousPageComponent={customComponent}
+          components={{
+            Previous: customComponent,
+          }}
           defaultSelectedIndex={2}
         />,
       );
@@ -119,7 +123,9 @@ describe(`${name} - Pagination component`, () => {
       const wrapper = mount(
         <Pagination
           pages={[1, 2, 3]}
-          nextPageComponent={customComponent}
+          components={{
+            Next: customComponent,
+          }}
           defaultSelectedIndex={2}
         />,
       );

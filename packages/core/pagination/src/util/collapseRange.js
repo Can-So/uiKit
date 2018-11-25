@@ -6,10 +6,10 @@ export default function collapseRange(
   current: number,
   {
     max,
-    ellipsisComponent,
+    ellipsis,
   }: {
     max: number,
-    ellipsisComponent: ({ key: string }) => Node,
+    ellipsis: ({ key: string }) => Node,
   },
 ): Array<Node> {
   const total = pages.length;
@@ -26,14 +26,14 @@ export default function collapseRange(
     const pageCount = max - 2;
     return [
       pages[0],
-      ellipsisComponent({ key: 'elipses-1' }),
+      ellipsis({ key: 'elipses-1' }),
       ...pages.slice(total - pageCount),
     ];
   } else if (!hasStartEllipsis && hasEndEllipsis) {
     const pageCount = max - 2;
     return [
       ...pages.slice(0, pageCount),
-      ellipsisComponent({ key: 'elipses-1' }),
+      ellipsis({ key: 'elipses-1' }),
       pages[total - 1],
     ];
   }
@@ -41,12 +41,12 @@ export default function collapseRange(
   const pageCount = max - 4;
   return [
     pages[0],
-    ellipsisComponent({ key: 'elipses-1' }),
+    ellipsis({ key: 'elipses-1' }),
     ...pages.slice(
       current - Math.floor(pageCount / 2),
       current + pageCount - 1,
     ),
-    ellipsisComponent({ key: 'elipses-2' }),
+    ellipsis({ key: 'elipses-2' }),
     pages[total - 1],
   ];
 }

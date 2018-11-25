@@ -19,23 +19,14 @@ type NavigatorProps = Props & {
   selectedIndex?: number,
 };
 
-export function renderRouterLink({
-  children,
-  className,
-  onMouseEnter,
-  onMouseLeave,
-  disabled,
-  page,
-}: PageProps) {
+export function RouterLink({ children, disabled, page, ...rest }: PageProps) {
   const href = page && page.href;
   return disabled ? (
-    <div className={className}>{children}</div>
+    <div {...rest}>{children}</div>
   ) : (
     <Link
+      {...rest}
       key={page && page.label}
-      className={className}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
       disabled
       to={disabled ? '#' : href}
     >
@@ -44,57 +35,41 @@ export function renderRouterLink({
   );
 }
 
-export function renderRouterLinkLeft({
+export function RouterLinkLeft({
   children,
-  className,
-  onMouseEnter,
-  onMouseLeave,
   disabled,
   pages,
   selectedIndex,
+  ...rest
 }: NavigatorProps) {
   let href;
   if (pages && selectedIndex && selectedIndex > 1) {
     href = pages[selectedIndex - 2].href;
   }
   return disabled ? (
-    <div className={className}>{children}</div>
+    <div {...rest}>{children}</div>
   ) : (
-    <Link
-      className={className}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      disabled
-      to={disabled ? '#' : href}
-    >
+    <Link {...rest} disabled to={disabled ? '#' : href}>
       {children}
     </Link>
   );
 }
 
-export function renderRouterLinkRight({
+export function RouterLinkRight({
   children,
-  className,
-  onMouseEnter,
-  onMouseLeave,
   disabled,
   pages,
   selectedIndex,
+  ...rest
 }: NavigatorProps) {
   let href;
   if (pages && selectedIndex < pages.length) {
     href = pages[selectedIndex].href;
   }
   return disabled ? (
-    <div className={className}>{children}</div>
+    <div {...rest}>{children}</div>
   ) : (
-    <Link
-      className={className}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      disabled
-      to={disabled ? '#' : href}
-    >
+    <Link {...rest} disabled to={disabled ? '#' : href}>
       {children}
     </Link>
   );

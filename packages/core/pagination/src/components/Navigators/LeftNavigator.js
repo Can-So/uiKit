@@ -1,8 +1,7 @@
 //@flow
 import React, { Component } from 'react';
 import ChevronLeftLargeIcon from '@atlaskit/icon/glyph/chevron-left-large';
-import Navigator from './Navigator';
-import type { NavigatorPropsType } from '../../types';
+import Navigator, { type NavigatorPropsType } from './Navigator';
 
 export default class LeftNavigator extends Component<NavigatorPropsType> {
   static defaultProps = {

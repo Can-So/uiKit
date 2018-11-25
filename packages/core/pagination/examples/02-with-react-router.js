@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { gridSize } from '@atlaskit/theme';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import {
-  renderRouterLink,
-  renderRouterLinkLeft,
-  renderRouterLinkRight,
+  RouterLink,
+  RouterLinkLeft,
+  RouterLinkRight,
 } from './helpers/LinkComponent';
 import Pagination from '../src';
 
@@ -53,9 +53,11 @@ const PaginationWithSelectPage = ({
       getPageLabel={page => (typeof page === 'object' ? page.label : page)}
       selectedIndex={pageSelected}
       pages={pages}
-      pageComponent={renderRouterLink}
-      previousPageComponent={renderRouterLinkLeft}
-      nextPageComponent={renderRouterLinkRight}
+      components={{
+        Page: RouterLink,
+        Previous: RouterLinkLeft,
+        Next: RouterLinkRight,
+      }}
     />
   </div>
 );

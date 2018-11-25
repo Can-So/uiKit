@@ -15,7 +15,7 @@ export default md`
 
 ### 💻 Upgrading:
 
-In v8 we used to create pagination components like the following:
+In v8 we used to create pagination components as follows:
 
 ${code`
 <Pagination
@@ -29,7 +29,7 @@ The above code could be written in v9 as:
 ${code`
 <Pagination
   pages={[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]} // or [ ...Array(10) ].map((_, i) => i + 1)
-  onChange={(e, newSelectedPage) => console.log('page changed', newSelectedPage)}
+  onChange={(event, newSelectedPage) => console.log('page changed', newSelectedPage)}
 />
 `}
 
@@ -45,10 +45,8 @@ We have created a codemod which aims to reduce the amount of busy work to upgrad
 - **defaultSelectedIndex**: The index of the page to be selected by default
 - **selectedIndex**: The index of the page to be selected.
 - **collapseRange**: A function which should return an Array of react Nodes to be rendered by Pagination component
-- **pageComponent**: A react component to be rendered instead of the default subtle atlaskit button.
-- **previousPageComponent**: A react component to be rendered instead of the default subtle atlaskit button.
-- **nextPageComponent**: A react component to be rendered instead of the default subtle atlaskit button.
-- **ellipsisComponent**: A react component to be rendered instead of default ellipsis component.
+- **components**: You can replace the default page, previous and next component by passing in your custom components here.
+- **renderEllipsis**: A function that returns a react node to be rendered instead of default ellipsis.
 - **innerStyles**: A styles object that is spread on the styles on the div wrapping pagination. Ideal for adding margins as required by the ADG guideline.
 
 ### 🚨 Depcrecated Props:
