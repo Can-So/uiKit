@@ -45,11 +45,11 @@ export class RankableTableRow extends Component<Props, {}> {
 
     return (
       <Draggable
-        draggableId={key || ''}
+        draggableId={key || `${rowIndex}`}
         index={rowIndex}
         isDragDisabled={isRankingDisabled}
       >
-        {(provided, snapshot) => [
+        {(provided, snapshot) => (
           <RankableTableBodyRow
             {...restRowProps}
             {...provided.dragHandleProps}
@@ -58,13 +58,9 @@ export class RankableTableRow extends Component<Props, {}> {
             style={{ ...provided.draggableProps.style, ...inlineStyles }}
             isRanking={isRanking}
             isRankingItem={snapshot.isDragging}
-            // we have to pass key here, because array of two elements (RankableTableRow and placeholder) is returned
-            // without key we will get react-warning-keys exception
-            key={0}
           >
             {cells.map((cell, cellIndex) => {
               const headCell = (head || { cells: [] }).cells[cellIndex];
-
               return (
                 <TableCell
                   head={headCell}
@@ -75,8 +71,8 @@ export class RankableTableRow extends Component<Props, {}> {
                 />
               );
             })}
-          </RankableTableBodyRow>,
-        ]}
+          </RankableTableBodyRow>
+        )}
       </Draggable>
     );
   }
