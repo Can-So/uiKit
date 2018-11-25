@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.12.8
+- [patch] [124cdc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/124cdc1):
+
+  - fix keyboard navigation
+
 ## 5.12.7
 - [patch] [225c0aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/225c0aa):
 
