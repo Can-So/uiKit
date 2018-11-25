@@ -12,6 +12,7 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import enMessages from '../src/i18n/en';
 import languages from '../src/i18n/languages';
 import WithEditorActions from './../src/ui/WithEditorActions';
+import Editor, { EditorProps } from './../src/editor';
 import {
   SaveAndCancelButtons,
   ExampleEditor,
@@ -34,6 +35,7 @@ export type State = {
   appearance: EditorAppearance;
   showADF: boolean;
   disabled: boolean;
+  vertical: boolean;
 };
 
 const Container = styled.div`
@@ -41,8 +43,17 @@ const Container = styled.div`
   margin-top: 0.5em;
 `;
 
-const Column = styled.div`
+const Column: React.ComponentClass<
+  React.HTMLAttributes<{}> & { vertical?: boolean }
+> = styled.div`
   flex: 1;
+
+  ${p =>
+    typeof p.vertical === 'boolean'
+      ? p.vertical
+        ? `border-right: 1px dotted ${colors.N50}; min-height: 85vh`
+        : `border-bottom: 1px dotted ${colors.N50};`
+      : ''}
 `;
 
 const Controls = styled.div`
@@ -157,6 +168,8 @@ export default class FullPageRendererExample extends React.Component<
 
     if (localADF) {
       return JSON.parse(localADF);
+    } else {
+      return { version: 1, type: 'doc', content: [] };
     }
   };
 
@@ -168,6 +181,7 @@ export default class FullPageRendererExample extends React.Component<
     appearance: 'full-page',
     showADF: false,
     disabled: false,
+    vertical: false,
   };
 
   private inputRef: HTMLTextAreaElement | null;
@@ -212,6 +226,16 @@ export default class FullPageRendererExample extends React.Component<
                     }}
                   >
                     <Button
+                      onClick={() => {
+                        this.setState(state => ({
+                          vertical: !state.vertical,
+                        }));
+                      }}
+                    >
+                      Display {!this.state.vertical ? 'Vertical' : 'Horizontal'}
+                    </Button>
+
+                    <Button
                       appearance={this.state.disabled ? 'primary' : 'default'}
                       onClick={() => {
                         this.setState(state => ({
@@ -235,18 +259,23 @@ export default class FullPageRendererExample extends React.Component<
                   </Column>
                 </Container>
               </Controls>
-              <Container>
-                <Column>
+              <Container
+                style={{
+                  flexDirection: this.state.vertical ? 'column' : 'row',
+                }}
+              >
+                <Column vertical={!this.state.vertical}>
                   <IntlProvider
                     locale={this.getLocalTag(locale)}
                     messages={messages}
                   >
-                    <ExampleEditor
+                    <Editor
                       contentComponents={undefined}
                       allowHelpDialog={true}
                       quickInsert={true}
                       allowLayouts={true}
                       appearance={this.state.appearance}
+                      {...providers}
                       media={{
                         provider: mediaProvider,
                         allowMediaSingle: true,
@@ -261,7 +290,7 @@ export default class FullPageRendererExample extends React.Component<
                         allowHeaderColumn: true,
                         permittedLayouts: 'all',
                         stickToolbarToBottom: true,
-                        UNSAFE_allowFlexiColumnResizing: true,
+                        UNSAFE_allowFlexiColumnResizing: false,
                       }}
                       defaultValue={this.state.adf}
                       disabled={this.state.disabled}
