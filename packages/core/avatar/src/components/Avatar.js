@@ -161,6 +161,7 @@ class Avatar extends Component<AvatarPropTypes> {
       src,
       stackIndex,
       onClick,
+      theme,
     } = this.props;
 
     // distill props from context, props, and state
@@ -173,7 +174,7 @@ class Avatar extends Component<AvatarPropTypes> {
     Inner.displayName = 'Inner';
 
     const AvatarNode = (
-      <Theme.Provider theme={this.props.theme}>
+      <Theme.Provider value={theme}>
         <Outer size={size} stackIndex={stackIndex}>
           <Inner
             innerRef={this.setRef}
