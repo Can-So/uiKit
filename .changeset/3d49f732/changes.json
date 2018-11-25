@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/drawer", "type": "patch" },
+    { "name": "@atlaskit/quick-search", "type": "patch" }
+  ],
+  "dependents": []
+}
