@@ -1,1 +1,0 @@
-- Convert padding to margin to fix a scrolling issue in global-search
