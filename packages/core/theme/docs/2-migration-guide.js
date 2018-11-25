@@ -7,8 +7,8 @@ export default md`
 ### Reasons to migrate
 
 1. The @atlaskit/util-shared-styles package is now unmaintained and will not represent the ADG styles.
-2. Feature requests are not accepted for @atlaskit/util-shared-styles anymore
-3. The @atlaskit/theme package is the source of truth for ADG styling
+2. Feature requests are not accepted for @atlaskit/util-shared-styles anymore.
+3. The @atlaskit/theme package is the source of truth for ADG styling.
 
 
 ### Following the guide
@@ -19,7 +19,7 @@ and other is for usage in less files.
 
 ### Migrating the CSS-IN-JS styles
 
-In util-shared-styles we used to style the component like the following:
+In util-shared-styles we used to style the component as follows:
 
 ${code`
 import styled from 'styled-components';
@@ -54,7 +54,7 @@ We have build tools that can generate static styles from JS at build time. Since
 direction this is the best bet. Please see [evaluate-inner-styles](https://github.com/ajaymathur/evaluate-inner-styles)
 and go through readme for details.
 
-In util-shared-styles we used to create styles in less files like following:
+In util-shared-styles we used to create styles in less files as follows:
 
 ${code`
 // styles.less
@@ -65,7 +65,7 @@ ${code`
 }
 `}
 
-The above styles can we written in js files using theme package as:
+The above styles can be written in js files using theme package as:
 
 ${code`
 // styles.js
@@ -79,7 +79,7 @@ export default evaluateInnerStyles()\`
 \`
 `}
 
-Additionally, in less we use the less compiler to compile the less styles like following:
+Additionally, in less we use the less compiler to compile the less styles as follows:
 
 ${code`
 lessc styles.less styles.css
