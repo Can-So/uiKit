@@ -1,0 +1,1 @@
+- ED-5819: Fixes emitting text color plugin state on every key stroke, without the state changing.

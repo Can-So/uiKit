@@ -6,7 +6,7 @@ import { ColorPaletteWrapper } from './styles';
 
 export interface Props {
   palette: Map<string, string>;
-  selectedColor?: string;
+  selectedColor: string | null;
   borderColors: object;
   onClick: (value: string) => void;
   cols?: number;

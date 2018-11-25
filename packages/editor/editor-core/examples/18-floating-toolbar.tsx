@@ -115,6 +115,7 @@ const DROPDOWNS: Array<FloatingToolbarItem<Function>> = [
         <ColorPalette
           palette={tableBackgroundColorPalette}
           borderColors={tableBackgroundBorderColors}
+          selectedColor={null}
           onClick={() => {
             SAVE_ACTION();
             hide();
