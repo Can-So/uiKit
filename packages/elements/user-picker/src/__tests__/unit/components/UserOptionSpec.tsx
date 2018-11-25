@@ -14,8 +14,9 @@ describe('Option', () => {
   const user = {
     id: 'abc-123',
     name: 'Jace Beleren',
-    nickname: 'jbeleren',
+    publicName: 'jbeleren',
     avatarUrl: 'http://avatars.atlassian.com/jace.png',
+    byline: 'Teammate',
   };
   const shallowOption = (props: Partial<UserOptionProps> = {}) =>
     shallow(
@@ -40,8 +41,16 @@ describe('Option', () => {
           name="Jace Beleren"
         />
       ),
-      primaryText: <TextWrapper color={colors.N800}>Jace Beleren</TextWrapper>,
-      secondaryText: <TextWrapper color={colors.N800}>jbeleren</TextWrapper>,
+      primaryText: [
+        <TextWrapper color={colors.N800}>
+          <HighlightText>Jace Beleren</HighlightText>
+        </TextWrapper>,
+        <> </>,
+        <TextWrapper color={colors.N200}>
+          (<HighlightText>jbeleren</HighlightText>)
+        </TextWrapper>,
+      ],
+      secondaryText: <TextWrapper color={colors.N200}>Teammate</TextWrapper>,
     });
   });
 
@@ -58,8 +67,15 @@ describe('Option', () => {
           name="Jace Beleren"
         />
       ),
-      primaryText: <TextWrapper color={colors.N0}>Jace Beleren</TextWrapper>,
-      secondaryText: <TextWrapper color={colors.N0}>jbeleren</TextWrapper>,
+      primaryText: [
+        <TextWrapper color={colors.N0}>
+          <HighlightText>Jace Beleren</HighlightText>
+        </TextWrapper>,
+        <> </>,
+        <TextWrapper color={colors.N50}>
+          (<HighlightText>jbeleren</HighlightText>)
+        </TextWrapper>,
+      ],
     });
   });
 
@@ -68,47 +84,48 @@ describe('Option', () => {
       ...user,
       highlight: {
         name: [{ start: 0, end: 2 }],
-        nickname: [{ start: 2, end: 4 }],
+        publicName: [{ start: 2, end: 4 }],
       },
     };
     const component = shallowOption({ user: userWithHighlight });
     const avatarItem = component.find(AvatarItem);
     expect(avatarItem.props()).toMatchObject({
-      primaryText: (
+      primaryText: [
         <TextWrapper color={colors.N800}>
           <HighlightText highlights={[{ start: 0, end: 2 }]}>
             Jace Beleren
           </HighlightText>
-        </TextWrapper>
-      ),
-      secondaryText: (
-        <TextWrapper color={colors.N800}>
+        </TextWrapper>,
+        <> </>,
+        <TextWrapper color={colors.N200}>
+          (
           <HighlightText highlights={[{ start: 2, end: 4 }]}>
             jbeleren
           </HighlightText>
-        </TextWrapper>
-      ),
+          )
+        </TextWrapper>,
+      ],
     });
   });
 
-  it('should use nickname if name is not provided', () => {
+  it('should show only the name when no publicName is provided', () => {
     const userWithoutName = {
       id: 'abc-123',
-      nickname: 'jbeleren',
+      name: 'jbeleren',
       highlight: {
-        nickname: [{ start: 2, end: 4 }],
-        name: [],
+        name: [{ start: 2, end: 4 }],
+        publicName: [],
       },
     };
     const component = shallowOption({ user: userWithoutName });
     const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.prop('primaryText')).toEqual(
+    expect(avatarItem.prop('primaryText')).toEqual([
       <TextWrapper color={colors.N800}>
         <HighlightText highlights={[{ start: 2, end: 4 }]}>
           jbeleren
         </HighlightText>
       </TextWrapper>,
-    );
+    ]);
     expect(avatarItem.prop('secondaryText')).toBeUndefined();
   });
 });

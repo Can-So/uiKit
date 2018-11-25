@@ -2,16 +2,9 @@ import { AvatarItem } from '@atlaskit/avatar';
 import { colors } from '@atlaskit/theme';
 import * as React from 'react';
 import styled from 'styled-components';
-import { HighlightRange, User } from '../types';
+import { User } from '../types';
 import { HighlightText } from './HighlightText';
 import { SizeableAvatar } from './SizeableAvatar';
-
-type AvatarTextData = [string, HighlightRange[] | undefined];
-
-interface AvatarText {
-  primaryText: AvatarTextData;
-  secondaryText?: AvatarTextData;
-}
 
 const AvatarComponent = styled.div`
   &,
@@ -24,10 +17,11 @@ const AvatarComponent = styled.div`
   }
 `;
 
-export const TextWrapper = styled.div`
+export const TextWrapper = styled.span`
   color: ${({ color }) => color};
   overflow: hidden;
   text-overflow: ellipsis;
+  display: inline-block;
 `;
 
 export type UserOptionProps = {
@@ -52,54 +46,50 @@ export class UserOption extends React.PureComponent<UserOptionProps> {
     );
   };
 
-  private generateAvatarText = (): AvatarText => {
+  private getPrimaryText = () => {
     const {
-      user: { name, nickname, highlight },
+      user: { name, publicName, highlight },
     } = this.props;
 
-    const nicknameData: [string, HighlightRange[] | undefined] = [
-      nickname,
-      highlight && highlight.nickname,
-    ];
-
-    if (name) {
-      const nameData: [string, HighlightRange[] | undefined] = [
-        name,
-        highlight && highlight.name,
-      ];
-      return {
-        primaryText: nameData,
-        secondaryText: nicknameData,
-      };
-    }
-    return { primaryText: nicknameData };
-  };
-
-  private highlightText = (textData?: AvatarTextData) => {
-    if (!textData) {
-      return undefined;
-    }
-    const [text, highlights] = textData;
-    return (
+    const result = [
       <TextWrapper color={this.props.isSelected ? colors.N0 : colors.N800}>
-        {highlights ? (
-          <HighlightText highlights={highlights}>{text}</HighlightText>
-        ) : (
-          text
-        )}
-      </TextWrapper>
-    );
+        <HighlightText highlights={highlight && highlight.name}>
+          {name}
+        </HighlightText>
+      </TextWrapper>,
+    ];
+    if (publicName && name !== publicName) {
+      result.push(<> </>);
+      result.push(
+        <TextWrapper color={this.props.isSelected ? colors.N50 : colors.N200}>
+          (
+          <HighlightText highlights={highlight && highlight.publicName}>
+            {publicName}
+          </HighlightText>
+          )
+        </TextWrapper>,
+      );
+    }
+    return result;
   };
+
+  private renderByline = () =>
+    this.props.user.byline ? (
+      <TextWrapper color={this.props.isSelected ? colors.N50 : colors.N200}>
+        {this.props.user.byline}
+      </TextWrapper>
+    ) : (
+      undefined
+    );
 
   render() {
-    const { primaryText, secondaryText } = this.generateAvatarText();
     return (
       <AvatarItem
         backgroundColor="transparent"
         avatar={this.renderAvatar()}
         component={AvatarComponent}
-        primaryText={this.highlightText(primaryText)}
-        secondaryText={this.highlightText(secondaryText)}
+        primaryText={this.getPrimaryText()}
+        secondaryText={this.renderByline()}
       />
     );
   }

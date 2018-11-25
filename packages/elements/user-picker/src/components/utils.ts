@@ -3,7 +3,7 @@ import { Promisable, User, UserOption, UserValue } from '../types';
 import { ReactElement, ReactChild } from 'react';
 
 export const userToOption = (user: User) => ({
-  label: user.name || user.nickname || '',
+  label: user.name,
   value: user.id,
   user,
 });

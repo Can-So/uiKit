@@ -23,23 +23,19 @@ const AvatarItemComponent = styled.div`
 export const SingleValue = props => {
   const {
     data: {
-      user: { avatarUrl, name, nickname },
+      label,
+      user: { avatarUrl },
     },
     selectProps: { appearance, isFocused },
   } = props;
-  const displayName = name || nickname;
 
   return !isFocused ? (
     <AvatarItem
       backgroundColor="transparent"
       avatar={
-        <SizeableAvatar
-          src={avatarUrl}
-          appearance={appearance}
-          name={displayName}
-        />
+        <SizeableAvatar src={avatarUrl} appearance={appearance} name={label} />
       }
-      primaryText={displayName}
+      primaryText={label}
       component={AvatarItemComponent}
     />
   ) : null;
