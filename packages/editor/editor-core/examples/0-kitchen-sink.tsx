@@ -18,11 +18,18 @@ import {
   ExampleEditor,
   providers,
   mediaProvider,
+  analyticsHandler,
+  quickInsertProvider,
 } from './5-full-page';
 import LanguagePicker from '../example-helpers/LanguagePicker';
 import EditorContext from './../src/ui/EditorContext';
 import { EditorAppearance } from '../src/types';
 import { EditorActions } from '../src';
+import {
+  cardProvider,
+  customInsertMenuItems,
+} from '@atlaskit/editor-test-helpers';
+import { extensionHandlers } from '../example-helpers/extension-handlers';
 
 export type Props = {};
 export type State = {
@@ -277,28 +284,46 @@ export default class FullPageRendererExample extends React.Component<
                     messages={messages}
                   >
                     <Editor
-                      contentComponents={undefined}
-                      allowHelpDialog={true}
-                      quickInsert={true}
-                      allowLayouts={true}
                       appearance={this.state.appearance}
+                      analyticsHandler={analyticsHandler}
+                      quickInsert={{
+                        provider: Promise.resolve(quickInsertProvider),
+                      }}
+                      allowCodeBlocks={{ enableKeybindingsForIDE: true }}
+                      allowLists={true}
+                      allowTextColor={true}
+                      allowTables={{
+                        advanced: true,
+                      }}
+                      allowBreakout={true}
+                      allowJiraIssue={true}
+                      allowUnsupportedContent={true}
+                      allowPanel={true}
+                      allowExtension={{
+                        allowBreakout: true,
+                      }}
+                      allowRule={true}
+                      allowDate={true}
+                      allowLayouts={{
+                        allowBreakout: true,
+                      }}
+                      allowGapCursor={true}
+                      allowTextAlignment={true}
+                      allowTemplatePlaceholders={{ allowInserting: true }}
+                      UNSAFE_cards={{
+                        provider: Promise.resolve(cardProvider),
+                      }}
+                      allowStatus={true}
                       {...providers}
                       media={{
                         provider: mediaProvider,
                         allowMediaSingle: true,
                         allowResizing: true,
                       }}
-                      allowTables={{
-                        allowColumnResizing: true,
-                        allowMergeCells: true,
-                        allowNumberColumn: true,
-                        allowBackgroundColor: true,
-                        allowHeaderRow: true,
-                        allowHeaderColumn: true,
-                        permittedLayouts: 'all',
-                        stickToolbarToBottom: true,
-                        UNSAFE_allowFlexiColumnResizing: false,
-                      }}
+                      insertMenuItems={customInsertMenuItems}
+                      extensionHandlers={extensionHandlers}
+                      placeholder="Type something here, and watch it render to the side!"
+                      shouldFocus={true}
                       defaultValue={this.state.adf}
                       disabled={this.state.disabled}
                       onChange={() => this.onEditorChange(actions)}
