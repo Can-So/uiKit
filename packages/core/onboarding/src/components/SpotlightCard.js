@@ -38,8 +38,8 @@ class SpotlightCard extends React.Component<Props> {
   static defaultProps = {
     width: 400,
     isFlat: false,
-    theme: x => x,
     components: {},
+    theme: x => x,
   };
   render() {
     const {
@@ -67,7 +67,7 @@ class SpotlightCard extends React.Component<Props> {
           image={image}
           theme={parent => {
             const { container, ...others } = parent();
-            return theme({
+            return theme(() => ({
               ...others,
               container: {
                 background: colors.P300,
@@ -78,7 +78,7 @@ class SpotlightCard extends React.Component<Props> {
                   : `0 4px 8px -2px ${colors.N50A}, 0 0 1px ${colors.N60A}`, // AK-5598
                 ...container,
               },
-            });
+            }));
           }}
         >
           {children}
