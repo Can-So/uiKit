@@ -36,6 +36,10 @@ this is a new line text, not in the table`,
       'should parse properly links inside a cell',
       '||hfoo||hbar|||[http://atlassian.com]|[link 1|https://atlassian.com], [link 2|https://atlassian.com]|',
     ],
+    [
+      'should parse properly medias inside a cell',
+      '|!quicktime.mov|width=300,height=400!|',
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {
