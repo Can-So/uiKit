@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.12.7
+- [patch] [225c0aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/225c0aa):
+
+  - Auto-highlight of exact issue matches is case-sensitive
+
 ## 5.12.6
 - [patch] [9c3e374](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c3e374):
 
