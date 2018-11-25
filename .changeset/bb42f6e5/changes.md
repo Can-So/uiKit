@@ -1,0 +1,1 @@
+- Auto-highlight of exact issue matches is case-sensitive
