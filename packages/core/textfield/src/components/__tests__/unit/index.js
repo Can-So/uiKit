@@ -54,9 +54,9 @@ describe('Textfield', () => {
       });
     });
 
-    describe('size', () => {
+    describe('width', () => {
       test("should set it's value to `small` on the input", () => {
-        const wrapper = mount(<Textfield size="small" />).props().size;
+        const wrapper = mount(<Textfield width="small" />).props().width;
         expect(wrapper).toBe('small');
       });
     });

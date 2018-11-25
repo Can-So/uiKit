@@ -26,9 +26,9 @@ To control the component, specify a value prop; to specify the defaultValue but 
   ${(
     <Example
       packageName="@atlaskit/textfield"
-      Component={require('../examples/01-sizes').default}
-      title="Sizes"
-      source={require('!!raw-loader!../examples/01-sizes')}
+      Component={require('../examples/01-widths').default}
+      title="Widths"
+      source={require('!!raw-loader!../examples/01-widths')}
     />
   )}
 

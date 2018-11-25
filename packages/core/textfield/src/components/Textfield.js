@@ -63,7 +63,7 @@ class Textfield extends Component<TextFieldProps, State> {
   render() {
     const { isFocused } = this.state;
     const {
-      size,
+      width,
       forwardedRef,
       theme,
       // createAnalytics passed through from analytics-next
@@ -75,7 +75,7 @@ class Textfield extends Component<TextFieldProps, State> {
     return (
       <Theme theme={theme}>
         {t => (
-          <Wrapper size={size}>
+          <Wrapper width={width}>
             <Input
               {...rest}
               theme={t}

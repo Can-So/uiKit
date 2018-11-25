@@ -90,9 +90,9 @@ const overrideSafariDisabledStyles = `
   -webkit-opacity: 1;
 `;
 
-const getMaxWidth = ({ size }) => {
-  if (!size) return `100%`;
-  switch (size) {
+const getMaxWidth = ({ width }) => {
+  if (!width) return `100%`;
+  switch (width) {
     case 'xsmall':
       return '80px';
     case 'small':
@@ -104,7 +104,7 @@ const getMaxWidth = ({ size }) => {
     case 'xlarge':
       return '480px';
     default:
-      return `${size}px`;
+      return `${width}px`;
   }
 };
 

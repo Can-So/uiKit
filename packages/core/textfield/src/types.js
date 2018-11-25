@@ -56,7 +56,7 @@ export type TextFieldProps = {
   /** Handler to be called when the input receives focus. */
   onFocus?: (e: SyntheticEvent<>) => mixed,
   /** Sets maximum width of input */
-  size?: string | number,
+  width?: string | number,
   /** The value of the input. */
   value?: string | number,
   /** Forwarded ref */
