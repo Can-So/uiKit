@@ -1,1 +1,0 @@
-- Allow consumers to pass promise of analytics web client as well as the client itself
