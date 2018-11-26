@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import Button from '@atlaskit/button';
+// $FlowFixMe: cannot resolve TS module
 import { ResultItemGroup, ObjectResult } from '@atlaskit/quick-search';
 import Drawer, { DrawerItemTheme } from '../src';
 

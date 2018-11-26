@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-export type Shared<A, B extends Shared<A, B>> = {
+export type Shared<A, B> = {
   [P in Extract<keyof A, keyof B>]?: A[P] extends B[P] ? B[P] : never
-};
+} &
+  { [P in Extract<keyof B, keyof A>]?: B[P] extends A[P] ? A[P] : never };
 /**
  * Extract the type of "P" for a given React component
  */
