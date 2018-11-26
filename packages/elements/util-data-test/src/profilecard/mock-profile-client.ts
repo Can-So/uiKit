@@ -14,7 +14,7 @@ export default function getMockProfileClient(
       const error = matchError && matchError[1];
 
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
+        window.setTimeout(() => {
           if (error) {
             return reject({ reason: error });
           }

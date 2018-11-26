@@ -191,7 +191,7 @@ export class Client implements ActionablePubSubClient {
     }
 
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
+      window.setTimeout(() => {
         this.subscribeToCurrentChannels()
           .then(() => resolve(this))
           .catch(reject);

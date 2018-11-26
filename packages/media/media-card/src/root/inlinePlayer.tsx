@@ -45,7 +45,7 @@ export class InlinePlayer extends Component<
             if (blob.type.indexOf('video/') === 0) {
               const fileSrc = URL.createObjectURL(state.preview.blob);
               this.setState({ fileSrc });
-              setTimeout(this.unsubscribe, 0);
+              window.setTimeout(this.unsubscribe, 0);
               return;
             }
           }
@@ -61,7 +61,7 @@ export class InlinePlayer extends Component<
               );
 
               this.setState({ fileSrc });
-              setTimeout(this.unsubscribe, 0);
+              window.setTimeout(this.unsubscribe, 0);
             } catch (error) {
               const { onError } = this.props;
 

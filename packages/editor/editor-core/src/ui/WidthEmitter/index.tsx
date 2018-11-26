@@ -27,7 +27,7 @@ export default class WidthEmitter extends Component<Props> {
       }
 
       // NodeViews will trigger multiple state change error without this debounce
-      this.debounce = setTimeout(() => {
+      this.debounce = window.setTimeout(() => {
         const pmDom = this.props.contentArea
           ? this.props.contentArea.querySelector('.ProseMirror')
           : undefined;

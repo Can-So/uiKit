@@ -86,7 +86,7 @@ describe('SiteEmojiResource', () => {
     const setup = () => {
       const uploadFile = jest.fn().mockReturnValue(
         new Observable(observer => {
-          setTimeout(() => {
+          window.setTimeout(() => {
             // We need it due rxjs sync unsubscription
             observer.next({
               id: '123',

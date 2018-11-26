@@ -376,7 +376,7 @@ describe('importFiles middleware', () => {
           nextDispatch,
         )(action);
 
-        setTimeout(() => {
+        window.setTimeout(() => {
           const sendUploadEventsCalls = getSendUploadEventPayloads(
             store,
             'upload-preview-update',
@@ -399,7 +399,7 @@ describe('importFiles middleware', () => {
           nextDispatch,
         )(action);
 
-        setTimeout(() => {
+        window.setTimeout(() => {
           expect(eventEmitter.emitUploadsStart).toHaveBeenCalledTimes(1);
           expect(
             getSendUploadEventPayloads(store, 'uploads-start'),
@@ -417,7 +417,7 @@ describe('importFiles middleware', () => {
           nextDispatch,
         )(action);
 
-        setTimeout(() => {
+        window.setTimeout(() => {
           const setEventProxyCalls = getDispatchArgs(
             store,
             'SET_EVENT_PROXY',
@@ -448,7 +448,7 @@ describe('importFiles middleware', () => {
           nextDispatch,
         )(action);
 
-        setTimeout(() => {
+        window.setTimeout(() => {
           expect(wsConnectionHolder.openConnection).toHaveBeenCalledTimes(1);
           expect(wsConnectionHolder.send).toHaveBeenCalledTimes(1);
           expect(wsConnectionHolder.send).toHaveBeenCalledWith({

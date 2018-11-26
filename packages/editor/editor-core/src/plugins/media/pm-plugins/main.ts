@@ -233,7 +233,7 @@ export class MediaPluginState {
       clearTimeout(this.updateUploadStateDebounce);
     }
 
-    this.updateUploadStateDebounce = setTimeout(() => {
+    this.updateUploadStateDebounce = window.setTimeout(() => {
       this.updateUploadStateDebounce = null;
       this.allUploadsFinished = false;
       this.notifyPluginStateSubscribers();
@@ -386,7 +386,7 @@ export class MediaPluginState {
 
     let rejectTimeout: number;
     const timeoutPromise = new Promise((resolve, reject) => {
-      rejectTimeout = setTimeout(
+      rejectTimeout = window.setTimeout(
         () =>
           reject(new Error(`Media operations did not finish in ${timeout} ms`)),
         timeout,

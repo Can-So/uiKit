@@ -108,7 +108,7 @@ export default class BasicQuickSearch extends React.Component<Props, State> {
     });
     this.setQuery(query);
     const results = searchData(query);
-    this.searchTimeoutId = setTimeout(() => {
+    this.searchTimeoutId = window.setTimeout(() => {
       this.setState({
         results,
         isLoading: false,

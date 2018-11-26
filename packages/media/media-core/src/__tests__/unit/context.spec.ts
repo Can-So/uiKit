@@ -292,7 +292,7 @@ describe('Context', () => {
         },
       });
 
-      setTimeout(jest.runAllTimers);
+      window.setTimeout(jest.runAllTimers);
     });
 
     it('should pass options down', () => {

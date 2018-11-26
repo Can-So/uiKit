@@ -34,7 +34,7 @@ describe.skip('Clipboard', () => {
       .uploadService as UploadService).addFilesWithSource = addFilesWithSource;
 
     // necessary for dom ready listener
-    setTimeout(done, 0);
+    window.setTimeout(done, 0);
   });
 
   afterEach(() => {

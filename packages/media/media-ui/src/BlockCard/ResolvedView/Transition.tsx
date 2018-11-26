@@ -108,7 +108,7 @@ export default class Transition extends React.Component<
 
   handleExited = () => {
     const { timeout, children } = this.props;
-    setTimeout(
+    window.setTimeout(
       () =>
         this.setState({
           visible: false,

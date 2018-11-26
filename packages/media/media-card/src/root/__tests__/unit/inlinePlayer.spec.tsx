@@ -36,7 +36,7 @@ describe('<InlinePlayer />', () => {
     };
   };
   const update = async (component: ShallowWrapper) => {
-    await new Promise(resolve => setTimeout(resolve));
+    await new Promise(resolve => window.setTimeout(resolve));
     component.update();
   };
 

@@ -140,7 +140,7 @@ export abstract class UsageShowAndClearComponent extends PureComponent<
 
   onSelection = (emojiId: EmojiId, emoji: OptionalEmojiDescription): void => {
     // give the tracker a chance to write to the queue and local storage before updating state
-    setTimeout(() => {
+    window.setTimeout(() => {
       this.refreshFrequentlyUsedList();
     });
   };
