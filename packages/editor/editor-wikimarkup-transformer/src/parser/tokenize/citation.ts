@@ -25,7 +25,7 @@ export function citation(
     // We don't want to mix `code` mark with others
     if (n.type.name === 'text' && !hasAnyOfMarks(n, ['em', 'code'])) {
       if (index === 0) {
-        n.text = `-- ${n.text}`;
+        n.text = `— ${n.text}`;
       }
       return n.mark([...n.marks, mark]);
     }

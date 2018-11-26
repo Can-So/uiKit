@@ -38,7 +38,7 @@ describe('ADF => WikiMarkup - Paragraph', () => {
   });
 
   test('should convert em to -- citation', () => {
-    const node = doc(p('This is a ', em('-- citation')))(defaultSchema);
+    const node = doc(p('This is a ', em('— citation')))(defaultSchema);
     expect(transformer.encode(node)).toMatchSnapshot();
   });
 
@@ -103,7 +103,7 @@ describe('ADF => WikiMarkup - Paragraph', () => {
 
   test('should convert citation with strong mark', () => {
     const node = doc(
-      p('This is an ', em(strong('-- strong citation')), ' text'),
+      p('This is an ', em(strong('— strong citation')), ' text'),
     )(defaultSchema);
     expect(transformer.encode(node)).toMatchSnapshot();
   });
