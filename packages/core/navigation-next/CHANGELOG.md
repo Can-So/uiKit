@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 4.0.3
+- [patch] [d22baae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d22baae):
+
+  - Fixing entrypoint replacement script
+
 ## 4.0.2
 - [patch] [01d913d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01d913d):
 
