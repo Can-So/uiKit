@@ -1,12 +1,12 @@
 import { Context } from '@atlaskit/media-core';
-import { IntlShape, IntlProvider } from 'react-intl';
+import { IntlProvider, InjectedIntl } from 'react-intl';
 import { LocalUploadComponent, LocalUploadConfig } from '../localUpload';
 import { whenDomReady } from '../../util/documentReady';
 import dropzoneUI from './dropzoneUI';
 import { UploadEventPayloadMap } from '../..';
 
 export interface DropzoneReactContext {
-  intl?: IntlShape;
+  intl?: InjectedIntl;
 }
 export interface DropzoneConfig extends LocalUploadConfig {
   container?: HTMLElement;
