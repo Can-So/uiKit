@@ -1,0 +1,1 @@
+- Fixing flowtype exports on @atlaskit/navigation-next entry points
