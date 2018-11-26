@@ -1,9 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/dynamic-table", "type": "patch" },
-    { "name": "@atlaskit/modal-dialog", "type": "patch" },
-    { "name": "@atlaskit/navigation-next", "type": "patch" },
-    { "name": "@atlaskit/navigation", "type": "patch" }
-  ],
-  "dependents": []
-}

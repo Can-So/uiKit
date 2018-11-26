@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 4.0.4
+- [patch] [abd3a39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abd3a39):
+
+  - Bump react-beautiful-dnd dependency to v10.0.2
+
 ## 4.0.3
 - [patch] [d22baae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d22baae):
 

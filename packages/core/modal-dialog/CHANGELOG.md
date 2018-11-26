@@ -1,5 +1,10 @@
 # @atlaskit/modal-dialog
 
+## 7.0.11
+- [patch] [abd3a39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abd3a39):
+
+  - Bump react-beautiful-dnd dependency to v10.0.2
+
 ## 7.0.10
 - [patch] [e151c1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e151c1a):
 
