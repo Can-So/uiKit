@@ -9,7 +9,7 @@
   "sideEffects": false,
   "files": [
     "dist",
-    "*.js"
+    "*.js*"
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
