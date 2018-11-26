@@ -20,10 +20,7 @@ files.forEach(file => {
     `${PACKAGE_ROOT}/${fileName}`,
     fileContent.replace(replaceFrom, "'./dist/esm/"),
   );
-  // Avoid infinite loop in test running with watch mode
-  if (process.env.NODE_ENV !== 'test') {
-    fs.unlinkSync(file);
-  }
+  fs.unlinkSync(file);
 });
 
 fs.removeSync(`${ENTRYPOINTS_FOLDER}`);
