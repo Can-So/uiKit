@@ -18,11 +18,12 @@ files.forEach(file => {
   const fileContent = fs.readFileSync(file, 'utf-8');
   fs.writeFileSync(
     `${PACKAGE_ROOT}/${fileName}`,
-    `// @flow
-
-${fileContent.replace(replaceFrom, "'./dist/esm/")}`,
+    fileContent.replace(replaceFrom, "'./dist/esm/"),
   );
-  fs.unlinkSync(file);
+  // Avoid infinite loop in test running with watch mode
+  if (process.env.NODE_ENV !== 'test') {
+    fs.unlinkSync(file);
+  }
 });
 
 fs.removeSync(`${ENTRYPOINTS_FOLDER}`);
