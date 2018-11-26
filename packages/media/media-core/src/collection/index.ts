@@ -38,25 +38,9 @@ export interface CollectionCacheEntry {
   isLoadingNextPage: boolean;
   nextInclusiveStartKey?: string;
 }
+
 export type CollectionCache = {
   [collectionName: string]: CollectionCacheEntry;
-};
-
-export const mergeItems = (
-  firstPageItems: MediaCollectionItem[],
-  currentItems: MediaCollectionItem[],
-): MediaCollectionItem[] => {
-  let reachedFirst = false;
-  const firstId = currentItems[0] ? currentItems[0].id : '';
-  const newItems = firstPageItems.filter(item => {
-    if (reachedFirst) {
-      return false;
-    }
-    reachedFirst = firstId === item.id;
-    return !reachedFirst;
-  });
-
-  return [...newItems, ...currentItems];
 };
 
 export const collectionCache: CollectionCache = {};
@@ -100,6 +84,17 @@ export class CollectionFetcher {
     });
   }
 
+  private removeFromCache(id: string, collectionName: string) {
+    const keyOptions = { collectionName };
+
+    const key = FileStreamCache.createKey(id, keyOptions);
+    fileStreamsCache.remove(key);
+    const collectionCacheIndex = collectionCache[
+      collectionName
+    ].items.findIndex(item => item.id === id);
+    collectionCache[collectionName].items.splice(collectionCacheIndex, 1);
+  }
+
   getItems(
     collectionName: string,
     params?: MediaStoreGetCollectionItemsParams,
@@ -119,7 +114,9 @@ export class CollectionFetcher {
         const { contents, nextInclusiveStartKey } = items.data;
 
         this.populateCache(contents, collectionName);
-        collection.items = mergeItems(items.data.contents, collection.items);
+        // It's hard to merge two together, so we just take what's came from the server.
+        // Since we load only one page > 2 pages will be ditched from the cache.
+        collection.items = items.data.contents;
 
         // We only want to asign nextInclusiveStartKey the first time
         if (!collection.nextInclusiveStartKey) {
@@ -130,6 +127,17 @@ export class CollectionFetcher {
       });
 
     return subject;
+  }
+
+  async removeFile(id: string, collectionName: string, occurrenceKey?: string) {
+    await this.mediaStore.removeCollectionFile(
+      id,
+      collectionName,
+      occurrenceKey,
+    );
+    this.removeFromCache(id, collectionName);
+    const collection = collectionCache[collectionName];
+    collection.subject.next(collection.items);
   }
 
   async loadNextPage(

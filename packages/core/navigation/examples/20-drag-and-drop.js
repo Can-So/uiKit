@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component, type Element } from 'react';
 import styled, { injectGlobal } from 'styled-components';
 import { Draggable, Droppable, DragDropContext } from 'react-beautiful-dnd';
 
@@ -88,7 +88,7 @@ export default class NavigationWithDragAndDrop extends Component<void, State> {
     });
   };
 
-  renderContainerItems = (): Array<Draggable> => {
+  renderContainerItems = (): Array<Element<typeof Draggable>> => {
     return this.state.items.map((item: Item, index) => (
       <Draggable draggableId={item.id} index={index} key={item.id}>
         {(provided, snapshot) => (

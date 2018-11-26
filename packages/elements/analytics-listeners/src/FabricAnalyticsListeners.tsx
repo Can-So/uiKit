@@ -11,7 +11,7 @@ import MediaAnalyticsListener from './media/MediaAnalyticsListener';
 export type Props = {
   /** Children! */
   children?: React.ReactNode;
-  client?: AnalyticsWebClient;
+  client?: AnalyticsWebClient | Promise<AnalyticsWebClient>;
   logLevel?: number;
   /** A list of individual listeners to exclude, identified by channel */
   excludedChannels?: FabricChannel[];
