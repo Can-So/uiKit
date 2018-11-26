@@ -140,25 +140,6 @@ describe('<StatelessUploadView />', () => {
           intl={fakeIntl}
         />
       </Provider>
-
-      // <IntlProvider locale="en">
-      //   <Provider store={store}>
-      //     <StatelessUploadView
-      //       mpBrowser={{} as any}
-      //       context={context}
-      //       recentsCollection="some-collection-name"
-      //       isLoading={isLoading}
-      //       recents={recents}
-      //       uploads={uploads}
-      //       selectedItems={selectedItems}
-      //       onFileClick={() => {}}
-      //       onEditorShowImage={() => {}}
-      //       onEditRemoteImage={() => {}}
-      //       removeFileFromRecents={removeFileFromRecents}
-      //       setUpfrontIdDeferred={setUpfrontIdDeferred}
-      //     />
-      //   </Provider>
-      // </IntlProvider>
     );
   };
 

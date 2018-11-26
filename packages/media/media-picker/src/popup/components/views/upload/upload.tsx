@@ -287,19 +287,6 @@ export class StatelessUploadView extends Component<
     );
   };
 
-  // private renderWebGLWarningFlag = (): JSX.Element => (
-  //   <FlagGroup onDismissed={this.onFlagDismissed}>
-  //     <Flag
-  //       shouldDismiss={this.state.shouldDismissWebGLWarningFlag}
-  //       description="Your browser does not support WebGL. Use a WebGL enabled browser to annotate images."
-  //       icon={<EditorInfoIcon label="info" />}
-  //       id="webgl-warning-flag"
-  //       title="You're unable to annotate this image"
-  //       actions={[{ content: 'Learn More', onClick: this.onLearnMoreClicked }]}
-  //     />
-  //   </FlagGroup>
-  // );
-
   private renderCards() {
     const recentFilesCards = this.recentFilesCards();
     const uploadingFilesCards = this.uploadingFilesCards();
