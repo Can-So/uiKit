@@ -30,6 +30,7 @@
     "@atlaskit/media-core": "^24.5.0",
     "@atlaskit/mention": "^15.0.6",
     "@atlaskit/renderer": "^31.0.0",
+    "@atlaskit/status": "^0.2.5",
     "@atlaskit/task-decision": "^11.0.4",
     "@babel/polyfill": "^7.0.0",
     "@types/prosemirror-view": "^1.3.0",
@@ -40,7 +41,11 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
+    "@atlaskit/button": "^9.0.16",
     "@atlaskit/editor-test-helpers": "^6.2.19",
+    "@atlaskit/field-text": "^7.0.13",
+    "@atlaskit/form": "^4.0.15",
+    "@atlaskit/select": "^6.1.6",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "ajv": "^4.11.3",
     "babel-loader": "^8.0.2",

@@ -4,6 +4,7 @@ import {
   MentionBridge,
   PromiseBridge,
   TextFormattingBridge,
+  StatusBridge,
 } from './bridge';
 import AndroidBridge from './android-impl';
 import IosBridge from './ios-impl';
@@ -17,6 +18,7 @@ declare global {
     mediaBridge?: MediaBridge;
     promiseBridge?: PromiseBridge;
     listBridge?: ListBridge;
+    statusBridge?: StatusBridge;
     webkit?: any;
   }
 }

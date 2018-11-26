@@ -1,15 +1,23 @@
 import { EditorState, Plugin, PluginKey, Selection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
+import { Color as ColorType } from '@atlaskit/status';
 import StatusNodeView from './nodeviews/status';
 import { ReactNodeView } from '../../nodeviews';
 import { PMPluginFactory } from '../../types';
 
 export const pluginKey = new PluginKey('statusPlugin');
 
+export type StatusType = {
+  color: ColorType;
+  text: string;
+  localId?: string;
+};
+
 export type StatusState = {
   autoFocus: boolean;
   showStatusPickerAt: number | null;
   selectionChanges: SelectionChange;
+  selectedStatus: StatusType | null;
 };
 
 export type SelectionChangeHandler = (
@@ -44,12 +52,38 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
         autoFocus: false,
         selectionChanges: new SelectionChange(),
         showStatusPickerAt: null,
+        selectedStatus: null,
       }),
-      apply(tr, state: StatusState) {
+      apply(tr, state: StatusState, editorState) {
         const meta = tr.getMeta(pluginKey);
 
+        const nodeAtSelection = tr.doc.nodeAt(tr.selection.from);
+        if (
+          state.showStatusPickerAt &&
+          (!nodeAtSelection ||
+            nodeAtSelection.type !== editorState.schema.nodes.status)
+        ) {
+          let newState = {
+            ...state,
+            showStatusPickerAt: null,
+            selectedStatus: null,
+          };
+          dispatch(pluginKey, newState);
+          return newState;
+        }
+
         if (meta) {
-          let newState = { ...state, ...meta };
+          let selectedStatus: StatusType | null = null;
+          if (
+            meta.showStatusPickerAt &&
+            meta.showStatusPickerAt !== state.showStatusPickerAt
+          ) {
+            const statusNode = tr.doc.nodeAt(meta.showStatusPickerAt);
+            if (statusNode) {
+              selectedStatus = statusNode.attrs as StatusType;
+            }
+          }
+          let newState = { ...state, ...meta, selectedStatus };
           dispatch(pluginKey, newState);
           return newState;
         }
@@ -58,8 +92,10 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
           const { pos, deleted } = tr.mapping.mapResult(
             state.showStatusPickerAt,
           );
+
           const newState = {
             showStatusPickerAt: deleted ? null : pos,
+            selectedStatus: null,
           };
 
           if (newState.showStatusPickerAt !== state.showStatusPickerAt) {

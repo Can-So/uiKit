@@ -1,3 +1,5 @@
+import { Color as StatusColor } from '@atlaskit/status';
+
 export interface MentionBridge {
   showMentions(query: String);
   dismissMentions();
@@ -22,8 +24,14 @@ export interface ListBridge {
   updateListState(listState: string);
 }
 
+export interface StatusBridge {
+  showStatusPicker(text: string, color: StatusColor, uuid: string);
+  dismissStatusPicker();
+}
+
 export default interface NativeBridge
   extends MentionBridge,
     TextFormattingBridge,
     PromiseBridge,
-    ListBridge {}
+    ListBridge,
+    StatusBridge {}
