@@ -1,0 +1,1 @@
+- Context.collection.removeFile has been added; occurrenceKey was added to all FileState flavours and filled as part of observable during upload;

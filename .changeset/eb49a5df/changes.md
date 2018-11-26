@@ -1,0 +1,1 @@
+- InfiniteScroll component now triggers on load and on change (where is previously only onScroll event)

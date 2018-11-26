@@ -1,0 +1,1 @@
+- Media store object now has removeCollectionFile method; uploadFile third argument (UploadFileCallbacks) onId now will be supplied with occurrenceKey as second argument;
