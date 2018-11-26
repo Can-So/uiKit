@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ButtonAppearances } from '../types';
-import { PropsInjector } from '@atlaskit/type-helpers';
+import { PropsPasser, PropsOf } from '@atlaskit/type-helpers';
 
 const getComponentName = (target: React.ComponentType): string => {
   if (target.displayName && typeof target.displayName === 'string') {
@@ -20,13 +20,11 @@ const warnIfDeprecatedAppearance = (appearance?: ButtonAppearances) => {
   }
 };
 
-type AppearanceProps = { appearance: ButtonAppearances };
+type AppearanceProps = { appearance?: ButtonAppearances };
 
-const withDeprecationWarnings: PropsInjector<{}> = (
-  Component: React.ComponentType,
-) => {
+const withDeprecationWarnings: PropsPasser<AppearanceProps> = Component => {
   return class WithDeprecationWarnings extends React.Component<
-    AppearanceProps
+    PropsOf<typeof Component> & AppearanceProps
   > {
     static displayName = `WithDeprecationWarnings(${getComponentName(
       Component,
@@ -43,11 +41,9 @@ const withDeprecationWarnings: PropsInjector<{}> = (
     }
 
     render() {
-      return <Component {...this.props} />;
+      return React.createElement(Component, this.props as any);
     }
-  } as any;
-  // The any is here as JSX.LibraryManagedAttributes is not happy even though
-  // props match exactly.
+  };
 };
 
 export default withDeprecationWarnings;

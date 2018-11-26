@@ -1,14 +1,13 @@
-// @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import Button from '../src';
 
 type State = {
-  count: number,
-  disabled: boolean,
-  childrenEls: boolean,
+  count: number;
+  disabled: boolean;
+  childrenEls: boolean;
 };
 
-export default class extends Component<{}, State> {
+export default class extends React.Component<{}, State> {
   state = {
     count: 0,
     disabled: true,

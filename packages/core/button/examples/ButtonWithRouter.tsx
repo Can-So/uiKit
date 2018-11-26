@@ -1,15 +1,15 @@
-// @flow
-import React from 'react';
+import * as React from 'react';
 import { Link, MemoryRouter } from 'react-router-dom';
 import Button from '../src';
 
 type Props = {
-  children: Node,
-  className: string,
-  href: Link,
-  onMouseEnter: Event,
-  onMouseLeave: Event,
+  children: React.ReactChild;
+  className: string;
+  href: Link;
+  onMouseEnter: React.MouseEventHandler;
+  onMouseLeave: React.MouseEventHandler;
 };
+
 class RouterLink extends React.PureComponent<Props, {}> {
   render() {
     const {

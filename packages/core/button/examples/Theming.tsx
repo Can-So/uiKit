@@ -1,10 +1,9 @@
-// @flow
-import React from 'react';
+import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { themed, colors } from '@atlaskit/theme';
-import Button, { ButtonGroup, themeNamespace } from '../src';
+import Button, { ButtonGroup, themeNamespace, ButtonAppearances } from '../src';
 
-const appearances = ['primary'];
+const appearances: ButtonAppearances[] = ['primary'];
 
 const theme = {
   primary: {

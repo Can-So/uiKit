@@ -1,5 +1,4 @@
-// @flow
-import React from 'react';
+import * as React from 'react';
 import Button, { ButtonGroup } from '../src';
 
 const Row = props => <div style={{ padding: 8 }} {...props} />;

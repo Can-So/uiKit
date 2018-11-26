@@ -1,5 +1,4 @@
-// @flow
-import React from 'react';
+import * as React from 'react';
 import Btn from '../src';
 
 const Table = props => <div style={{ display: 'table' }} {...props} />;

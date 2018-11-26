@@ -72,10 +72,7 @@ export class CardViewBase extends React.Component<
   CardViewBaseProps,
   CardViewState
 > {
-  constructor(props: CardViewBaseProps) {
-    super(props);
-    this.state = {};
-  }
+  state: CardViewState = {};
 
   componentDidMount() {
     this.saveElementWidth();

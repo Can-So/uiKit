@@ -1,5 +1,4 @@
-// @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import Calendar from '@atlaskit/icon/glyph/calendar';
 import Page from '@atlaskit/icon/glyph/page';
 import Question from '@atlaskit/icon/glyph/question';
@@ -7,7 +6,7 @@ import Expand from '@atlaskit/icon/glyph/arrow-down';
 import Unlink from '@atlaskit/icon/glyph/editor/unlink';
 import Open from '@atlaskit/icon/glyph/editor/open';
 
-import Button from '../src';
+import Button, { ButtonAppearances } from '../src';
 
 const css = `
   .container {
@@ -34,7 +33,7 @@ const css = `
   }
 `;
 
-class CustomComponent extends Component<any, {}> {
+class CustomComponent extends React.Component<any, {}> {
   render() {
     const { children, innerRef, ...props } = this.props; // eslint-disable-line no-unused-vars
     return <div {...props}>{children}</div>;
@@ -293,7 +292,7 @@ const BuildStory = (props: any) => (
   </div>
 );
 
-const appearances = [
+const appearances: ButtonAppearances[] = [
   'default',
   'danger',
   'link',
@@ -303,14 +302,18 @@ const appearances = [
   'warning',
 ];
 
+type State = {
+  appearance: ButtonAppearances;
+};
+
 /* eslint-disable react/no-multi-comp */
-export default class extends Component<*, *> {
-  state = {
+export default class extends React.Component<{}, State> {
+  state: State = {
     appearance: 'default',
   };
 
   setAppearance = (e: { target: { value: string } }) => {
-    this.setState({ appearance: e.target.value });
+    this.setState({ appearance: e.target.value as ButtonAppearances });
   };
 
   render() {

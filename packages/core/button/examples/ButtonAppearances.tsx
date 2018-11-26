@@ -1,5 +1,4 @@
-// @flow
-import React, { Component, Fragment } from 'react';
+import * as React from 'react';
 import { Checkbox } from '@atlaskit/checkbox';
 import Button from '../src';
 
@@ -29,14 +28,18 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export default class ButtonAppearance extends Component<*, *> {
+export type State = {
+  showLoadingState: boolean;
+};
+
+export default class ButtonAppearance extends React.Component<{}, State> {
   state = { showLoadingState: false };
 
   render() {
     const { showLoadingState } = this.state;
 
     return (
-      <Fragment>
+      <React.Fragment>
         <Checkbox
           value="showLoading"
           label="Show Loading State"
@@ -60,7 +63,7 @@ export default class ButtonAppearance extends Component<*, *> {
             </Row>
           ))}
         </Table>
-      </Fragment>
+      </React.Fragment>
     );
   }
 }

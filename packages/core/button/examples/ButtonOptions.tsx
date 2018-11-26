@@ -1,5 +1,4 @@
-// @flow
-import React, { type Node } from 'react';
+import * as React from 'react';
 import { AtlassianIcon } from '@atlaskit/logo';
 import Button from '../src';
 
@@ -9,8 +8,8 @@ const ButtonWrapper = ({
   inline = true,
   children,
 }: {
-  inline?: boolean,
-  children: Node,
+  inline?: boolean;
+  children: React.ReactChild;
 }) => (
   <div style={{ display: inline ? 'inline-block' : 'block', padding: 4 }}>
     {children}

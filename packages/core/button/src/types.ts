@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 
 export type ButtonAppearances =
   | 'default'
@@ -67,6 +67,7 @@ export type ButtonProps = {
   shouldFitContainer: boolean;
   /** Set the button to autofocus on mount. */
   autoFocus: boolean;
+  theme?: string;
 };
 
 export type DerivedButtonProps = {

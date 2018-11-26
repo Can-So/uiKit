@@ -1,17 +1,14 @@
-// @flow
-/* eslint-disable react/prop-types, react/no-multi-comp  */
-
-import React, { Component, type Node } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 import Button from '../src';
 
 type Props = {
-  children: Node,
-  innerRef: () => any,
+  children: React.ReactChild;
+  innerRef: () => any;
 };
 
-class CustomComponent extends Component<Props, *> {
+class CustomComponent extends React.Component<Props> {
   render() {
     const { children, innerRef, ...props } = this.props;
     return <div {...props}>{children}</div>;
@@ -27,10 +24,10 @@ const TEST_RUNS = 5; // how many render passes to run during the test
 const BUTTON_COUNT = 5; // the number of buttons per group
 
 type State = {
-  count: number,
+  count: number;
 };
 
-class PerfTest extends Component<{}, State> {
+class PerfTest extends React.Component<{}, State> {
   state = {
     count: 0,
   };
@@ -61,7 +58,7 @@ class PerfTest extends Component<{}, State> {
   };
   renderButtons() {
     const { count } = this.state;
-    const buttons = [];
+    const buttons: JSX.Element[] = [];
     for (let i = 1; i <= count; i++) {
       const buttonNumber = (i - 1) * BUTTON_COUNT;
       buttons.push(

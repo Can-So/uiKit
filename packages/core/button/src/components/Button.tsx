@@ -4,8 +4,8 @@ import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
-  WithAnalyticsEventProps,
 } from '@atlaskit/analytics-next';
+import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import withDeprecationWarnings from './withDeprecationWarnings';
 import getButtonProps from './getButtonProps';
 import CustomComponentProxy from './CustomComponentProxy';
@@ -21,6 +21,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../package.json';
+import { withDefaultProps } from '@atlaskit/type-helpers';
 
 const StyledButton = styled.button`
   ${getButtonStyles};
@@ -83,13 +84,11 @@ export const defaultProps: Pick<
   autoFocus: false,
 };
 
-export class Button extends React.Component<
+export class NonDefaultedButton extends React.Component<
   ButtonProps & WithAnalyticsEventProps,
   ButtonState
 > {
   button: HTMLElement;
-
-  static defaultProps = defaultProps;
 
   state = {
     isActive: false,
@@ -234,7 +233,9 @@ export class Button extends React.Component<
   }
 }
 
-export type ButtonType = Button;
+export const Button = withDefaultProps(defaultProps, NonDefaultedButton);
+
+export type ButtonType = NonDefaultedButton;
 export const ButtonBase = Button;
 
 export const ButtonWithoutAnalytics = withDeprecationWarnings(Button);
@@ -256,5 +257,5 @@ export default withAnalyticsContext({
         packageVersion,
       },
     }),
-  })(ButtonWithoutAnalytics),
+  })(Button),
 );
