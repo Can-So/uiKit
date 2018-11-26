@@ -1,1 +1,0 @@
-- FS-3150 - Support status in the editor-mobile-bridge
