@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-test-helpers",
-  "version": "6.2.19",
+  "version": "6.2.20",
   "description": "Test Helpers for Atlassian Editor components",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -19,7 +19,7 @@
   "dependencies": {
     "@atlaskit/analytics-next-types": "^3.1.0",
     "@atlaskit/editor-common": "^22.0.0",
-    "@atlaskit/editor-core": "^89.0.0",
+    "@atlaskit/editor-core": "^89.0.2",
     "@atlaskit/icon": "^14.2.0",
     "@atlaskit/media-core": "^24.5.0",
     "@atlaskit/media-test-helpers": "^18.3.0",

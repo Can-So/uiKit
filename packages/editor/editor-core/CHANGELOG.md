@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 89.0.2
+- [patch] [a2cae0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2cae0c):
+
+  - Fix conversion of pasted urls via macroPlugin with html in clipboard (ED-5786)
+
 ## 89.0.1
 - [patch] [086f816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/086f816):
 
