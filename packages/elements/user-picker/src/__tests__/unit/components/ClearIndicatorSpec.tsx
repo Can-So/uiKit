@@ -33,7 +33,7 @@ describe('ClearIndicator', () => {
     expect(stopPropagation).toHaveBeenCalledTimes(1);
   });
 
-  it('should call not stopPropagation if focused', () => {
+  it('should not call stopPropagation if focused', () => {
     const component = shallowClearIndicator({
       clearValue: jest.fn(),
       selectProps: { isFocused: true },

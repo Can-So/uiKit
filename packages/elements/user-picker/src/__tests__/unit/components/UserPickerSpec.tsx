@@ -288,43 +288,53 @@ describe('UserPicker', () => {
 
   describe('inputValue', () => {
     it('should set inputValue to empty string by default', () => {
-      const component = shallowUserPicker();
+      const component = shallowUserPicker({ value: users[0] });
       expect(component.find(Select).prop('inputValue')).toEqual('');
     });
 
-    it('should set inputValue to query onInputChange', () => {
+    it('onInputChange: should set inputValue to query', () => {
       const component = shallowUserPicker();
       const select = component.find(Select);
       select.simulate('inputChange', 'some text', { action: 'input-change' });
       expect(component.find(Select).prop('inputValue')).toEqual('some text');
     });
 
-    it('should clear inputValue onBlur', () => {
+    it('onBlur: should clear inputValue', () => {
       const component = shallowUserPicker();
       const select = component.find(Select);
       select.simulate('blur');
       expect(component.find(Select).prop('inputValue')).toEqual('');
     });
 
-    it('should clear inputValue onChange', () => {
+    it('onChange: should clear inputValue', () => {
       const component = shallowUserPicker();
       const select = component.find(Select);
       select.simulate('change', userOptions[0], { action: 'select-option' });
       expect(component.find(Select).prop('inputValue')).toEqual('');
     });
 
-    it('should set inputValue to value if exists on focus', () => {
+    it('onFocus with value: should set inputValue to value', () => {
       const component = shallowUserPicker({ value: users[0] });
       const select = component.find(Select);
       select.simulate('focus', { target: {} });
       expect(component.find(Select).prop('inputValue')).toEqual(users[0].name);
     });
 
-    it('should have empty inputValue if focus with no value', () => {
+    it('onFocus no value: should have set empty inputValue', () => {
       const component = shallowUserPicker();
       const select = component.find(Select);
       select.simulate('focus', { target: {} });
       expect(component.find(Select).prop('inputValue')).toEqual('');
+    });
+
+    it('should highlight input value on focus', () => {
+      const component = shallowUserPicker({ value: users[0] });
+      const select = component.find(Select);
+      const highlightInput = jest.fn();
+      const input = document.createElement('input') as HTMLInputElement;
+      input.select = highlightInput;
+      select.simulate('focus', { target: input });
+      expect(highlightInput).toBeCalledTimes(1);
     });
   });
 
