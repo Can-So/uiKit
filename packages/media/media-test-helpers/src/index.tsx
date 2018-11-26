@@ -13,6 +13,7 @@ export * from './mediaPickerAuthProvider';
 export * from './mocks';
 export * from './await-error';
 export * from './nextTick';
+export * from './asMock';
 export * from './I18nWrapper';
 export * from './mountWithIntlContext';
 export * from './fakeI18n';

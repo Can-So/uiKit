@@ -291,7 +291,7 @@ export class QuickSearch extends React.Component<Props, State> {
       this.flatResults,
       result.props.resultId,
     );
-    if (resultIndex) {
+    if (resultIndex !== null && +resultIndex >= 0) {
       this.flatResults.splice(resultIndex, 1);
     }
   };

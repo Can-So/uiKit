@@ -36,7 +36,7 @@ describe('SortableItem', () => {
         isDragging: false,
       },
     ];
-    Draggable.mockImplementation(({ children }) =>
+    (Draggable: any).mockImplementation(({ children }) =>
       children(...draggableRenderArgs),
     );
     baseProps = {
@@ -85,7 +85,7 @@ describe('SortableItem', () => {
 
   it('should not trigger onClick if the item is dragged', () => {
     draggableRenderArgs[1].isDragging = true;
-    Draggable.mockImplementation(({ children }) =>
+    (Draggable: any).mockImplementation(({ children }) =>
       children(...draggableRenderArgs),
     );
     const wrapper = shallow(<SortableItem {...baseProps} />).dive();

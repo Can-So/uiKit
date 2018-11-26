@@ -1,17 +1,27 @@
 import { mount, ReactWrapper } from 'enzyme';
+import { IntlProvider } from 'react-intl';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import Spinner from '@atlaskit/spinner';
 import { FlagGroup } from '@atlaskit/flag';
-import { Card } from '@atlaskit/media-card';
+import { Card, CardAction } from '@atlaskit/media-card';
 import { MediaCollectionItem } from '@atlaskit/media-store';
 import {
+  asMock,
   fakeContext,
   fakeIntl,
-  mountWithIntlContext,
+  nextTick,
 } from '@atlaskit/media-test-helpers';
+import ModalDialog from '@atlaskit/modal-dialog';
+import Button from '@atlaskit/button';
+import { InfiniteScroll } from '@atlaskit/media-ui';
 import { Context } from '@atlaskit/media-core';
-import { State, SelectedItem, LocalUpload } from '../../../../../domain';
+import {
+  State,
+  SelectedItem,
+  LocalUpload,
+  ServiceFile,
+} from '../../../../../domain';
 import {
   mockStore,
   mockState,
@@ -24,6 +34,8 @@ import { isWebGLAvailable } from '../../../../../tools/webgl';
 import {
   StatelessUploadView,
   default as ConnectedUploadView,
+  UploadViewProps,
+  UploadViewState,
 } from '../../upload';
 import { LoadingNextPageWrapper } from '../../styled';
 import { fileClick } from '../../../../../actions/fileClick';
@@ -35,6 +47,8 @@ import { Dropzone } from '../../dropzone';
 import { SpinnerWrapper, Wrapper } from '../../styled';
 import { LocalBrowserButton } from '../../../../views/upload/uploadButton';
 import { Browser } from '../../../../../../components/browser';
+import { menuDelete } from '../../../editor/phrases';
+import { LocalUploadFileMetadata } from '../../../../../domain/local-upload';
 
 const ConnectedUploadViewWithStore = getComponentClassWithStore(
   ConnectedUploadView,
@@ -47,19 +61,44 @@ const createConnectedComponent = (
 ) => {
   const store = mockStore(state);
   const dispatch = store.dispatch;
-  const root = mountWithIntlContext(
-    <Provider store={store}>
-      <ConnectedUploadViewWithStore
-        mpBrowser={new Browser(context) as any}
-        context={context}
-        recentsCollection="some-collection-name"
-      />
-    </Provider>,
-    reactContext,
-    { getAtlaskitAnalyticsEventHandlers() {} },
+  const root = mount(
+    <IntlProvider locale="en">
+      <Provider store={store}>
+        <ConnectedUploadViewWithStore
+          mpBrowser={new Browser(context) as any}
+          context={context}
+          recentsCollection="some-collection-name"
+        />
+      </Provider>
+    </IntlProvider>,
+    {
+      context: reactContext,
+      childContextTypes: {
+        getAtlaskitAnalyticsEventHandlers() {},
+      },
+    },
   );
   const component = root.find(StatelessUploadView);
   return { component, dispatch, root, context };
+};
+
+const getDeleteActionHandler = (
+  component: ReactWrapper<UploadViewProps, UploadViewState>,
+) => {
+  const actions = component.find(Card).props().actions;
+
+  if (!actions) {
+    throw new Error('actions expected');
+  }
+
+  const action = actions.find(
+    (action: CardAction) => action.label === menuDelete,
+  );
+  if (!action) {
+    throw new Error('delete action expected');
+  }
+
+  return action.handler;
 };
 
 describe('<StatelessUploadView />', () => {
@@ -67,6 +106,7 @@ describe('<StatelessUploadView />', () => {
     isLoading: boolean,
     recentItems: MediaCollectionItem[] = [],
     mockStateOverride: Partial<State> = {},
+    removeFileFromRecents: jest.Mock<any> = jest.fn(),
   ) => {
     const state: State = {
       ...mockState,
@@ -96,9 +136,29 @@ describe('<StatelessUploadView />', () => {
           onEditorShowImage={() => {}}
           onEditRemoteImage={() => {}}
           setUpfrontIdDeferred={setUpfrontIdDeferred}
+          removeFileFromRecents={removeFileFromRecents}
           intl={fakeIntl}
         />
       </Provider>
+
+      // <IntlProvider locale="en">
+      //   <Provider store={store}>
+      //     <StatelessUploadView
+      //       mpBrowser={{} as any}
+      //       context={context}
+      //       recentsCollection="some-collection-name"
+      //       isLoading={isLoading}
+      //       recents={recents}
+      //       uploads={uploads}
+      //       selectedItems={selectedItems}
+      //       onFileClick={() => {}}
+      //       onEditorShowImage={() => {}}
+      //       onEditRemoteImage={() => {}}
+      //       removeFileFromRecents={removeFileFromRecents}
+      //       setUpfrontIdDeferred={setUpfrontIdDeferred}
+      //     />
+      //   </Provider>
+      // </IntlProvider>
     );
   };
 
@@ -176,11 +236,190 @@ describe('<StatelessUploadView />', () => {
       mediaItemType: 'file',
     });
   });
+
+  const assertDeleteConfirmationDialog = (component: ReactWrapper<any>) => {
+    const modalDialog = component.find(ModalDialog);
+    expect(modalDialog).toHaveLength(1);
+    expect(modalDialog.props()).toEqual(
+      expect.objectContaining({
+        heading: 'Delete forever?',
+        actions: expect.any(Array),
+      }),
+    );
+  };
+
+  describe('when deleting uploaded item', () => {
+    let removeFileFromRecents: jest.Mock<any>;
+    beforeEach(() => {
+      removeFileFromRecents = jest.fn();
+    });
+
+    const setup = () => {
+      const upfrontId = Promise.resolve('id1');
+      const userUpfrontId = Promise.resolve('id2');
+      const userOccurrenceKey = Promise.resolve('userOccurrenceKey1');
+      const metadata: LocalUploadFileMetadata = {
+        id: 'id1',
+        mimeType: 'image/jpeg',
+        name: 'some-file-name',
+        size: 42,
+        upfrontId,
+        userUpfrontId,
+        userOccurrenceKey,
+      };
+
+      const mockStateOverride: Partial<State> = {
+        uploads: {
+          uploadId1: {
+            file: {
+              metadata,
+            },
+          } as LocalUpload,
+        },
+        selectedItems: [
+          {
+            id: 'id1',
+            serviceName: 'upload',
+          },
+        ] as SelectedItem[],
+      };
+      const component = mount(
+        getUploadViewElement(
+          false,
+          [],
+          mockStateOverride,
+          removeFileFromRecents,
+        ),
+      );
+      const deleteActionHandler = getDeleteActionHandler(component);
+      const readyIds = Promise.all([
+        upfrontId,
+        userUpfrontId,
+        userOccurrenceKey,
+      ]);
+      return { component, deleteActionHandler, readyIds };
+    };
+
+    const setupAndClickDelete = async () => {
+      const { component, deleteActionHandler, readyIds } = setup();
+
+      deleteActionHandler();
+      component.update();
+
+      await readyIds;
+      await nextTick();
+
+      component.update();
+      return component;
+    };
+
+    it('should open confirmation dialog', async () => {
+      const component = await setupAndClickDelete();
+      assertDeleteConfirmationDialog(component);
+    });
+
+    it('should delete requested item when confirmation clicked', async () => {
+      const component = await setupAndClickDelete();
+      const confirmButton = component
+        .find(ModalDialog)
+        .find(Button)
+        .at(0);
+      confirmButton.simulate('click');
+      component.update();
+      const modalDialog = component.find(ModalDialog);
+      expect(modalDialog).toHaveLength(0);
+      expect(removeFileFromRecents).toHaveBeenCalledWith(
+        'id1',
+        'userOccurrenceKey1',
+        'id2',
+      );
+    });
+
+    it('should close dialog without deleting file when cancel clicked', async () => {
+      const component = await setupAndClickDelete();
+      const confirmButton = component
+        .find(ModalDialog)
+        .find(Button)
+        .at(1);
+      confirmButton.simulate('click');
+      component.update();
+      const modalDialog = component.find(ModalDialog);
+      expect(modalDialog).toHaveLength(0);
+      expect(removeFileFromRecents).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('when deleting recent item', () => {
+    let removeFileFromRecents: jest.Mock<any>;
+    beforeEach(() => {
+      removeFileFromRecents = jest.fn();
+    });
+
+    const setup = () => {
+      const component = mount(
+        getUploadViewElement(
+          false,
+          [
+            {
+              type: 'file',
+              id: 'some-id',
+              insertedAt: 0,
+              occurrenceKey: 'some-occurrence-key',
+              details: {
+                name: 'some-name',
+                size: 100,
+              },
+            },
+          ],
+          {},
+          removeFileFromRecents,
+        ),
+      );
+      const deleteActionHandler = getDeleteActionHandler(component);
+
+      return { component, deleteActionHandler };
+    };
+
+    const setupAndClickDelete = async () => {
+      const { component, deleteActionHandler } = setup();
+
+      deleteActionHandler();
+      component.update();
+
+      await nextTick();
+
+      component.update();
+      return component;
+    };
+
+    it('should open confirmation dialog', async () => {
+      const component = await setupAndClickDelete();
+      assertDeleteConfirmationDialog(component);
+    });
+
+    it('should delete requested item when confirmation clicked', async () => {
+      const component = await setupAndClickDelete();
+      const confirmButton = component
+        .find(ModalDialog)
+        .find(Button)
+        .at(0);
+      confirmButton.simulate('click');
+      component.update();
+      const modalDialog = component.find(ModalDialog);
+      expect(modalDialog).toHaveLength(0);
+      expect(removeFileFromRecents).toHaveBeenCalledWith(
+        'some-id',
+        'some-occurrence-key',
+        undefined,
+      );
+    });
+  });
 });
 
 describe('<UploadView />', () => {
   let state: State;
   const upfrontId = Promise.resolve('');
+  const userUpfrontId = Promise.resolve('');
   beforeEach(() => {
     state = {
       ...mockState,
@@ -211,6 +450,8 @@ describe('<UploadView />', () => {
               size: 1000,
               mimeType: 'image/png',
               upfrontId,
+              userUpfrontId,
+              userOccurrenceKey: Promise.resolve('some-user-occurrence-key'),
             },
           },
           index: 0,
@@ -241,12 +482,13 @@ describe('<UploadView />', () => {
   it('should dispatch fileClick action when onFileClick called', () => {
     const { component, dispatch } = createConnectedComponent(state);
     const props = component.props();
-    const metadata = {
+    const metadata: ServiceFile = {
       id: 'some-id',
       mimeType: 'some-mime-type',
       name: 'some-name',
       size: 42,
       upfrontId,
+      date: Date.now(),
     };
     props.onFileClick(metadata, 'google');
     expect(dispatch).toBeCalledWith(
@@ -256,7 +498,7 @@ describe('<UploadView />', () => {
           mimeType: 'some-mime-type',
           name: 'some-name',
           size: 42,
-          date: 0,
+          date: expect.any(Number),
           upfrontId,
         },
         'google',
@@ -337,33 +579,28 @@ describe('<UploadView />', () => {
   });
 
   describe('pagination', () => {
-    const simulateScrollEndReached = (component: ReactWrapper<any, any>) =>
-      (component.instance() as any)['onThresholdReachedListener']();
+    const simulateThresholdReached = (
+      component: ReactWrapper<UploadViewProps, UploadViewState>,
+    ) => component.find(InfiniteScroll).props().onThresholdReached!();
 
     it('should load next collection page when threshold is reached', () => {
       const { component, context } = createConnectedComponent(state);
 
-      simulateScrollEndReached(component);
+      simulateThresholdReached(component);
 
       expect(context.collection.loadNextPage).toHaveBeenCalledTimes(1);
       expect(context.collection.loadNextPage).toBeCalledWith('recents');
     });
 
     it('should render loading next page state if next page is being loaded', async () => {
+      const { component, root, context } = createConnectedComponent(state);
       const nextItems = new Promise(resolve => setImmediate(resolve));
-      const loadNextPage = jest.fn().mockReturnValue(nextItems);
-      const context = fakeContext({
-        collection: { loadNextPage },
-      });
-      const { component, root } = createConnectedComponent(
-        state,
-        undefined,
-        context,
-      );
+      asMock(context.collection.loadNextPage).mockReturnValue(nextItems);
 
       expect(root.find(LoadingNextPageWrapper).find(Spinner)).toHaveLength(0);
-      simulateScrollEndReached(component);
+      simulateThresholdReached(component);
       root.update();
+
       expect(root.find(LoadingNextPageWrapper).find(Spinner)).toHaveLength(1);
       await nextItems;
       root.update();
@@ -373,8 +610,8 @@ describe('<UploadView />', () => {
     it('should not load next collection page if its already being loaded', () => {
       const { component, context } = createConnectedComponent(state);
 
-      simulateScrollEndReached(component);
-      simulateScrollEndReached(component);
+      simulateThresholdReached(component);
+      simulateThresholdReached(component);
 
       expect(context.collection.loadNextPage).toHaveBeenCalledTimes(1);
     });

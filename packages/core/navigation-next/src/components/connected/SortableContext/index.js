@@ -5,7 +5,7 @@ import {
   DragDropContext,
   type DropResult,
   type DragStart,
-  type HookProvided,
+  type ResponderProvided,
 } from 'react-beautiful-dnd';
 import { LayoutEventEmitter } from '../../presentational/LayoutManager/LayoutEvent';
 
@@ -13,7 +13,7 @@ import type { SortableContextProps } from './types';
 
 export default class SortableContext extends Component<SortableContextProps> {
   onDragStart = (
-    [start, provided]: [DragStart, HookProvided],
+    [start, provided]: [DragStart, ResponderProvided],
     emit: () => void,
   ) => {
     emit();
@@ -23,7 +23,7 @@ export default class SortableContext extends Component<SortableContextProps> {
   };
 
   onDragEnd = (
-    [result, provided]: [DropResult, HookProvided],
+    [result, provided]: [DropResult, ResponderProvided],
     emit: () => void,
   ) => {
     emit();
