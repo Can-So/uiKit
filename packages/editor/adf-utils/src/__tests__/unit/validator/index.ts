@@ -228,6 +228,37 @@ describe('validate', () => {
     expect(invalidDoc).toMatchSnapshot();
   });
 
+  it('should not remove valid marks', () => {
+    const doc = {
+      version: 1,
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'Hello',
+              marks: [
+                {
+                  type: 'code',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    const run = () => {
+      const result = validate(doc, x => undefined);
+      expect(result.entity).toMatchSnapshot();
+    };
+
+    expect(run).not.toThrowError();
+    expect(doc).toMatchSnapshot();
+  });
+
   it('should be able to wrap invalid nodes - 2', () => {
     const invalidDoc = {
       version: 1,

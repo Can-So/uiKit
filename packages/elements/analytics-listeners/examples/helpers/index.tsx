@@ -16,7 +16,7 @@ export type Props = WithAnalyticsEventProps & OwnProps;
 
 const CustomButton = ({ onClick, text }) => (
   <div id="dummy" onClick={onClick} style={{ paddingBottom: 12 }}>
-    <Button appearance="help">{text || 'Test'}</Button>
+    <Button>{text || 'Test'}</Button>
   </div>
 );
 
@@ -66,6 +66,15 @@ export class DummyEditorComponent extends React.Component<Props> {
   }
 }
 
+export class DummyMediaComponent extends React.Component<Props> {
+  static displayName = 'DummyEditorComponent';
+  render() {
+    return (
+      <CustomButton text={FabricChannel.media} onClick={this.props.onClick} />
+    );
+  }
+}
+
 class MyButton extends React.Component<Props> {
   static displayName = 'MyButton';
   render() {
@@ -82,6 +91,7 @@ const componentChannels = {
   [FabricChannel.elements]: DummyElementsComponent,
   [FabricChannel.navigation]: DummyNavigationComponent,
   [FabricChannel.editor]: DummyEditorComponent,
+  [FabricChannel.media]: DummyMediaComponent,
 };
 
 export const createComponentWithAnalytics = (

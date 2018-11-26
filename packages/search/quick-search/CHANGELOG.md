@@ -1,5 +1,10 @@
 # @atlaskit/quick-search
 
+## 5.1.1
+- [patch] [f480bab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f480bab):
+
+  - Convert padding to margin to fix a scrolling issue in global-search
+
 ## 5.1.0
 - [minor] [e93ffe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e93ffe0):
 

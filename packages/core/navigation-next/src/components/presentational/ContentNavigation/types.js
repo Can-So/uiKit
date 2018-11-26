@@ -6,18 +6,18 @@ import type { ProductTheme } from '../../../theme';
 
 export type ContentNavigationProps = {
   container?: ?ComponentType<{}>,
-  isPeekHinting: boolean,
-  isPeeking: boolean,
   isVisible: boolean,
   product: ComponentType<{}>,
 };
+
+export type ContentNavigationState = {|
+  cachedContainer: ?ComponentType<{||}>,
+|};
 
 export type ContainerNavigationPrimitiveProps = {|
   children: Node,
   isEntering: boolean,
   isExiting: boolean,
-  isPeekHinting: boolean,
-  isPeeking: boolean,
 |};
 
 export type ContainerNavigationPrimitiveBaseProps = {|

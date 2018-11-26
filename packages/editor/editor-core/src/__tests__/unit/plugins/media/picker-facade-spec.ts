@@ -156,7 +156,7 @@ describe('Media PickerFacade', () => {
       it(`listens to picker events`, () => {
         const fn = jasmine.any(Function);
         expect(spies.on).toHaveBeenCalledTimes(
-          pickerType === 'dropzone' ? 5 : 3,
+          pickerType === 'dropzone' ? 6 : 4,
         );
         expect(spies.on).toHaveBeenCalledWith('upload-preview-update', fn);
         expect(spies.on).toHaveBeenCalledWith('upload-end', fn);

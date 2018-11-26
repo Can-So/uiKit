@@ -27,12 +27,7 @@ export function list(
    * The following token types will be ignored in parsing
    * the content of a listItem
    */
-  const ignoreTokenTypes = [
-    TokenType.DOUBLE_DASH_SYMBOL,
-    TokenType.TRIPLE_DASH_SYMBOL,
-    TokenType.QUADRUPLE_DASH_SYMBOL,
-    TokenType.LIST,
-  ];
+  const ignoreTokenTypes = [TokenType.QUADRUPLE_DASH_SYMBOL, TokenType.LIST];
 
   let index = position;
   let state = processState.NEW_LINE;

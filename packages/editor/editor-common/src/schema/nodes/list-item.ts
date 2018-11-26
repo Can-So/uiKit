@@ -3,10 +3,13 @@ import { ParagraphDefinition as Paragraph } from './paragraph';
 import { OrderedListDefinition as OrderedList } from './ordered-list';
 import { BulletListDefinition as BulletList } from './bullet-list';
 import { MediaSingleDefinition as MediaSingle } from './media-single';
+import { CodeBlockDefinition as CodeBlock } from './code-block';
 
 export interface ListItemArray
-  extends Array<Paragraph | OrderedList | BulletList | MediaSingle> {
-  0: Paragraph | MediaSingle;
+  extends Array<
+      Paragraph | OrderedList | BulletList | MediaSingle | CodeBlock
+    > {
+  0: Paragraph | MediaSingle | CodeBlock;
 }
 
 /**
@@ -22,7 +25,7 @@ export interface ListItemDefinition {
 
 export const listItem: NodeSpec = {
   content:
-    '(paragraph | mediaSingle) (paragraph | bulletList | orderedList | mediaSingle)*',
+    '(paragraph | mediaSingle | codeBlock) (paragraph | bulletList | orderedList | mediaSingle | codeBlock)*',
   defining: true,
   parseDOM: [{ tag: 'li' }],
   toDOM() {

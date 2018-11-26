@@ -28,12 +28,6 @@ export {
 export {
   default as MenuSection,
 } from './components/presentational/MenuSection';
-export {
-  default as PeekToggleItem,
-} from './components/presentational/PeekToggleItem';
-export {
-  default as ScrollableSectionInner,
-} from './components/presentational/ScrollableSectionInner';
 export { default as Section } from './components/presentational/Section';
 export {
   default as SectionHeading,
@@ -72,7 +66,7 @@ export { NavigationProvider } from './provider';
 export {
   UIController,
   UIControllerSubscriber,
-  withNavigationUI,
+  withNavigationUIController,
 } from './ui-controller';
 export {
   ViewController,
@@ -82,7 +76,7 @@ export {
 } from './view-controller';
 
 /** Renderer */
-export { default as ViewRenderer } from './renderer';
+export { default as ItemsRenderer, TypedItemsRenderer } from './renderer';
 
 /** Theme */
 export { dark, light, settings, modeGenerator, ThemeProvider } from './theme';
@@ -108,3 +102,28 @@ export type {
   WithGlobalThemeProps,
   GlobalThemeWrappedComp,
 } from './theme/types';
+
+export type {
+  NavigationRendererItemType,
+  LeafItemType,
+  BranchItemType,
+  BackItemType,
+  ContainerHeaderType,
+  DebugType,
+  GoToItemType,
+  GroupHeadingType,
+  ItemType,
+  SortableItemType,
+  SectionHeadingType,
+  SeparatorType,
+  SwitcherType,
+  WordmarkType,
+  GroupType,
+  HeaderSectionType,
+  MenuSectionType,
+  SectionType,
+  SortableContextType,
+  SortableGroupType,
+  InlineComponentType,
+  TypeShape as NavigationItemTypeShape,
+} from './renderer/types';

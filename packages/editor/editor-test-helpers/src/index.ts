@@ -44,7 +44,6 @@ export {
   offsetRefs,
   panel,
   panelNote,
-  mentionQuery,
   hardBreak,
   emojiQuery,
   typeAheadQuery,

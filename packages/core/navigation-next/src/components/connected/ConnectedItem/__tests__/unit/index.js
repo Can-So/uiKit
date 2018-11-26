@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import BacklogIcon from '@atlaskit/icon/glyph/backlog';
 
 import GoToItem from '../../../../connected/GoToItem';
 import Item from '../../../../presentational/Item';
@@ -28,13 +27,5 @@ describe('ConnectedItem', () => {
 
     expect(wrapper.find(GoToItem)).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should map a provided icon string prop to a before icon prop', () => {
-    const wrapper = shallow(
-      <ConnectedItem id="my-item" text="My item" icon="BacklogIcon" />,
-    );
-
-    expect(wrapper.find(Item).prop('before')).toEqual(BacklogIcon);
   });
 });

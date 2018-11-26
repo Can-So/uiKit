@@ -10,7 +10,6 @@ import contentNavStyles from '../components/presentational/ContentNavigation/sty
 import itemStyles from '../components/presentational/Item/styles';
 import headingStyles from '../components/presentational/GroupHeading/styles';
 import separatorStyles from '../components/presentational/Separator/styles';
-import scrollHintStyles from '../components/presentational/ScrollableSectionInner/styles';
 import sectionStyles from '../components/presentational/Section/styles';
 import skeletonItemStyles from '../components/presentational/SkeletonItem/styles';
 
@@ -104,7 +103,6 @@ export default ({ product }: Args): Mode => {
     contentNav: contentNavStyles(modeColors),
     heading: headingStyles(modeColors),
     item: itemStyles(modeColors),
-    scrollHint: scrollHintStyles(modeColors),
     section: sectionStyles(modeColors),
     separator: separatorStyles(modeColors),
     skeletonItem: skeletonItemStyles(modeColors),

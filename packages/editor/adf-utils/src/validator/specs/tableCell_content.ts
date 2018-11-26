@@ -2,15 +2,15 @@ export default {
   type: 'array',
   items: [
     [
-      'paragraph',
+      'paragraph_with_no_marks',
       'bulletList',
       'mediaSingle',
+      'codeBlock_with_no_marks',
       'orderedList',
-      'heading',
+      'heading_with_no_marks',
       'panel',
       'blockquote',
       'rule',
-      'codeBlock_no_marks',
       'mediaGroup',
       'applicationCard',
       'decisionList',

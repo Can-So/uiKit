@@ -2,7 +2,6 @@
 
 import type { ElementConfig } from 'react';
 import type { WithNavigationViewControllerProps } from '../../../view-controller/types';
-import type { WithNavigationUIControllerProps } from '../../../ui-controller/types';
 import ConnectedItem from '../ConnectedItem';
 
 export type ExternalGoToItemProps = {
@@ -15,6 +14,5 @@ export type ExternalGoToItemProps = {
 
 export type GoToItemProps = {
   ...$Exact<WithNavigationViewControllerProps>,
-  ...$Exact<WithNavigationUIControllerProps>,
   ...$Exact<ExternalGoToItemProps>,
 };

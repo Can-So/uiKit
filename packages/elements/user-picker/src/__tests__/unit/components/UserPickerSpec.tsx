@@ -7,9 +7,9 @@ import { shallow } from 'enzyme';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { getStyles } from '../../../components/styles';
-import { Props, UserPicker } from '../../../components/UserPicker';
+import { UserPicker } from '../../../components/UserPicker';
 import { userToOption } from '../../../components/utils';
-import { User } from '../../../types';
+import { User, UserPickerProps as Props } from '../../../types';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<Props> = {}) =>
@@ -39,10 +39,32 @@ describe('UserPicker', () => {
     expect(select.prop('menuPlacement')).toBeTruthy();
   });
 
+  it('should disable picker if isDisabled is true', () => {
+    const component = shallowUserPicker({ isDisabled: true });
+    const select = component.find(Select);
+    expect(select.prop('isDisabled')).toEqual(true);
+  });
+
   it('should set width', () => {
     shallowUserPicker({ width: 500 });
 
     expect(getStyles).toHaveBeenCalledWith(500, expect.any(Boolean));
+  });
+
+  it('should set custom placeholder', () => {
+    const custom = 'Custom';
+    const component = shallowUserPicker({ placeholder: custom });
+    const select = component.find(Select);
+    expect(select.prop('placeholder')).toEqual(custom);
+  });
+
+  it('should pass custom no options message to picker', () => {
+    const customMessage = 'Custom';
+    const component = shallowUserPicker({ noOptionsMessage: customMessage });
+    const select = component.find(Select);
+    expect(select.prop('noOptionsMessage')).toBeInstanceOf(Function);
+    const result = (select.prop('noOptionsMessage') as Function)();
+    expect(result).toEqual(customMessage);
   });
 
   it('should trigger onChange with User', () => {
@@ -107,6 +129,12 @@ describe('UserPicker', () => {
     const select = component.find(Select);
     select.simulate('clearIndicatorHover', true);
     expect(component.state()).toHaveProperty('hoveringClearIndicator', true);
+  });
+
+  it('should set isClearable to false', () => {
+    const component = shallowUserPicker({ isClearable: false });
+    const select = component.find(Select);
+    expect(select.prop('isClearable')).toEqual(false);
   });
 
   it('should open menu onFocus', () => {

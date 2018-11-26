@@ -58,6 +58,9 @@ const getI18nJiraContainerName = (
   }
 };
 
+export const getUniqueResultId = (result: Result): string =>
+  result.key ? result.key : `${result.contentType}-${result.resultId}`;
+
 export default class ResultList extends React.Component<Props> {
   render() {
     const { results, sectionIndex } = this.props;
@@ -75,7 +78,7 @@ export default class ResultList extends React.Component<Props> {
       };
 
       // Make sure that key and resultId are unique across all search results
-      const uniqueResultId = `${result.contentType}-${result.resultId}`;
+      const uniqueResultId = getUniqueResultId(result);
 
       switch (resultType) {
         case ResultType.ConfluenceObjectResult: {

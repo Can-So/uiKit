@@ -101,6 +101,8 @@ export type Props = {
   value?: string;
   /** Corresponds to the `resultId` of the selected result */
   selectedResultId?: SelectedResultId;
+  /** Optional way of being notified when the selected result changes due to keyboard nav */
+  onSelectedResultIdChanged?: (id: SelectedResultId) => void;
   // Internal: injected by withAnalytics(). Fire a private analytics event
   firePrivateAnalyticsEvent?: FireAnalyticsEvent;
   /** React component to be used for rendering links */
@@ -252,6 +254,9 @@ export class QuickSearch extends React.Component<Props, State> {
     if (selectedResultId) {
       this.fireKeyboardControlEvent(selectedResultId);
     }
+    if (this.props.onSelectedResultIdChanged) {
+      this.props.onSelectedResultIdChanged(selectedResultId);
+    }
   };
 
   /** Select next result */
@@ -286,7 +291,7 @@ export class QuickSearch extends React.Component<Props, State> {
       this.flatResults,
       result.props.resultId,
     );
-    if (resultIndex) {
+    if (resultIndex !== null && +resultIndex >= 0) {
       this.flatResults.splice(resultIndex, 1);
     }
   };

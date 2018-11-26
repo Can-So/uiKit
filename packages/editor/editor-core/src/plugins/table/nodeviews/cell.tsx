@@ -11,14 +11,20 @@ import WithPluginState from '../../../ui/WithPluginState';
 import messages from '../ui/messages';
 import { pluginKey } from '../pm-plugins/main';
 import { toggleContextualMenu } from '../actions';
-import { TableCssClassName as ClassName } from '../types';
+import { TableCssClassName as ClassName, TablePluginState } from '../types';
+import { EditorAppearance } from '../../../types';
 import { closestElement } from '../../../utils';
+import {
+  EditorDisabledPluginState,
+  pluginKey as editorDisabledPluginKey,
+} from '../../editor-disabled';
 
 export interface CellViewProps {
   node: PmNode;
   view: EditorView;
   portalProviderAPI: PortalProviderAPI;
   getPos: () => number;
+  appearance?: EditorAppearance;
 }
 
 export type CellProps = {
@@ -26,6 +32,8 @@ export type CellProps = {
   forwardRef: (ref: HTMLElement | null) => void;
   withCursor: boolean;
   isContextualMenuOpen: boolean;
+  disabled: boolean;
+  appearance?: EditorAppearance;
 };
 
 class Cell extends React.Component<CellProps & InjectedIntlProps> {
@@ -42,12 +50,14 @@ class Cell extends React.Component<CellProps & InjectedIntlProps> {
       isContextualMenuOpen,
       forwardRef,
       intl: { formatMessage },
+      disabled,
+      appearance,
     } = this.props;
     const labelCellOptions = formatMessage(messages.cellOptions);
 
     return (
       <div className={ClassName.CELL_NODEVIEW_WRAPPER} ref={forwardRef}>
-        {withCursor && (
+        {withCursor && !disabled && appearance !== 'mobile' && (
           <div className={ClassName.CONTEXTUAL_MENU_BUTTON}>
             <ToolbarButton
               selected={isContextualMenuOpen}
@@ -105,14 +115,25 @@ class CellView extends ReactNodeView {
     // so we trigger render manually to hide/show contextual menu button when `targetCellPosition` is updated
     return (
       <WithPluginState
-        plugins={{ pluginState: pluginKey }}
+        plugins={{
+          pluginState: pluginKey,
+          editorDisabledPlugin: editorDisabledPluginKey,
+        }}
         editorView={props.view}
-        render={({ pluginState }) => (
+        render={({
+          pluginState,
+          editorDisabledPlugin,
+        }: {
+          pluginState: TablePluginState;
+          editorDisabledPlugin: EditorDisabledPluginState;
+        }) => (
           <CellComponent
             forwardRef={forwardRef}
             withCursor={this.getPos() === pluginState.targetCellPosition}
-            isContextualMenuOpen={pluginState.isContextualMenuOpen}
+            isContextualMenuOpen={!!pluginState.isContextualMenuOpen}
             view={props.view}
+            appearance={props.appearance}
+            disabled={(editorDisabledPlugin || {}).editorDisabled}
           />
         )}
       />
@@ -132,10 +153,15 @@ class CellView extends ReactNodeView {
   }
 }
 
-export const createCellView = (portalProviderAPI: PortalProviderAPI) => (
-  node,
-  view,
-  getPos,
-): NodeView => {
-  return new CellView({ node, view, getPos, portalProviderAPI }).init();
+export const createCellView = (
+  portalProviderAPI: PortalProviderAPI,
+  appearance?: EditorAppearance,
+) => (node, view, getPos): NodeView => {
+  return new CellView({
+    node,
+    view,
+    getPos,
+    portalProviderAPI,
+    appearance,
+  }).init();
 };

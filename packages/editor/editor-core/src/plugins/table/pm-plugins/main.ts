@@ -2,6 +2,7 @@ import { EditorState, Plugin, PluginKey, Transaction } from 'prosemirror-state';
 import { findParentDomRefOfType } from 'prosemirror-utils';
 import { EditorView, DecorationSet } from 'prosemirror-view';
 import { PluginConfig, TablePluginState } from '../types';
+import { EditorAppearance } from '../../../types';
 import { Dispatch } from '../../../event-dispatcher';
 import { createTableView } from '../nodeviews/table';
 import { createCellView } from '../nodeviews/cell';
@@ -31,7 +32,11 @@ import {
   handleClick,
   handleTripleClick,
 } from '../event-handlers';
-import { findControlsHoverDecoration, fixTables } from '../utils';
+import {
+  findControlsHoverDecoration,
+  fixTables,
+  normalizeSelection,
+} from '../utils';
 
 export const pluginKey = new PluginKey('tablePlugin');
 
@@ -60,6 +65,7 @@ export const createPlugin = (
   portalProviderAPI: PortalProviderAPI,
   eventDispatcher: EventDispatcher,
   pluginConfig: PluginConfig,
+  appearance?: EditorAppearance,
 ) =>
   new Plugin({
     state: {
@@ -188,6 +194,9 @@ export const createPlugin = (
       if (transactions.find(tr => tr.docChanged)) {
         return fixTables(newState.tr);
       }
+      if (transactions.find(tr => tr.selectionSet)) {
+        return normalizeSelection(newState.tr);
+      }
     },
     view: (editorView: EditorView) => {
       const domAtPos = editorView.domAtPos.bind(editorView);
@@ -226,8 +235,8 @@ export const createPlugin = (
 
       nodeViews: {
         table: createTableView(portalProviderAPI),
-        tableCell: createCellView(portalProviderAPI),
-        tableHeader: createCellView(portalProviderAPI),
+        tableCell: createCellView(portalProviderAPI, appearance),
+        tableHeader: createCellView(portalProviderAPI, appearance),
       },
 
       handleDOMEvents: {

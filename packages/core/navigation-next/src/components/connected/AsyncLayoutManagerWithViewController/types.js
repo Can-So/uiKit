@@ -2,33 +2,28 @@
 
 import type { ComponentType, Node } from 'react';
 import type { WithNavigationUIControllerProps } from '../../../ui-controller/types';
-import { UIController } from '../../../ui-controller';
-import { ViewController } from '../../../view-controller';
 import type {
   CollapseListeners,
   ExperimentalFeatureFlags,
   GetRefs,
 } from '../../presentational/LayoutManager/types';
-import type { ItemsRendererProps } from '../../../renderer/types';
-
-import type { WithNavigationViewControllerProps } from '../../../view-controller/types';
+import type { ActiveView } from '../../../view-controller/types';
 
 export type AsyncLayoutManagerWithViewControllerProps = {|
   ...$Exact<CollapseListeners>,
   ...$Exact<ExperimentalFeatureFlags>,
-  ...$Exact<WithNavigationViewControllerProps>,
   ...$Exact<WithNavigationUIControllerProps>,
   children: Node,
+  containerSkeleton: ComponentType<{}>,
   customComponents?: { [string]: ComponentType<*> },
+  firstSkeletonToRender?: 'product' | 'container',
   getRefs?: GetRefs,
   globalNavigation: ComponentType<{}>,
-  containerSkeleton: ComponentType<{}>,
-  navigationUIController: UIController,
-  navigationViewController: ViewController,
-  firstSkeletonToRender?: 'product' | 'container',
-  viewRenderer: ComponentType<ItemsRendererProps>,
+  itemsRenderer: ComponentType<*>,
+  view: ?ActiveView,
 |};
 
 export type AsyncLayoutManagerWithViewControllerState = {
   hasInitialised: boolean,
+  outgoingView: ?ActiveView,
 };

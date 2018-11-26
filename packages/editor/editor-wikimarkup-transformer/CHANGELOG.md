@@ -1,5 +1,65 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.7.1
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/editor-core@89.0.0
+  - @atlaskit/renderer@31.0.0
+  - @atlaskit/editor-json-transformer@4.0.22
+  - @atlaskit/editor-test-helpers@6.2.19
+  - @atlaskit/util-data-test@10.0.21
+
+## 2.7.0
+- [minor] [37eaced](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37eaced):
+
+  - Fix media items inside table cells
+
+## 2.6.2
+- [patch] [352fbc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/352fbc9):
+
+  - Should not ignore double and triple dashes in list item
+
+## 2.6.1
+- [patch] [f11c6e2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f11c6e2):
+
+  - Escape properly
+
+## 2.6.0
+- [minor] [8451c11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8451c11):
+
+  - Fly over links inside table cells
+
+## 2.5.2
+- [patch] [c93eb36](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c93eb36):
+
+  - Do not jump over the link if invalid
+
+## 2.5.1
+- [patch] [fce377d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fce377d):
+
+  - fix issue with mentions in list
+
+## 2.5.0
+- [minor] [6fb9918](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6fb9918):
+
+  - Fix strong bug when ending line finishes with two strong symbols
+
+## 2.4.6
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/editor-common@21.2.2
+  - @atlaskit/renderer@30.2.1
+  - @atlaskit/profilecard@6.0.0
+
+## 2.4.5
+- [patch] [3148c95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3148c95):
+
+  - add error and success color
+
+## 2.4.4
+- [patch] [01a92e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01a92e1):
+
+  - Title for panel and noformat changes
+
 ## 2.4.3
 - [patch] [131e012](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/131e012):
 

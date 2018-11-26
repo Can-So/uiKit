@@ -594,6 +594,204 @@ Object {
 }
 `;
 
+exports[`JIRA wiki markup - Tables should parse properly links inside a cell 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "attrs": Object {
+        "__autoSize": false,
+        "isNumberColumnEnabled": false,
+        "layout": "default",
+      },
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "attrs": Object {
+                "background": null,
+                "colspan": 1,
+                "colwidth": null,
+                "rowspan": 1,
+              },
+              "content": Array [
+                Object {
+                  "content": Array [
+                    Object {
+                      "text": "hfoo",
+                      "type": "text",
+                    },
+                  ],
+                  "type": "paragraph",
+                },
+              ],
+              "type": "tableHeader",
+            },
+            Object {
+              "attrs": Object {
+                "background": null,
+                "colspan": 1,
+                "colwidth": null,
+                "rowspan": 1,
+              },
+              "content": Array [
+                Object {
+                  "content": Array [
+                    Object {
+                      "text": "hbar",
+                      "type": "text",
+                    },
+                  ],
+                  "type": "paragraph",
+                },
+              ],
+              "type": "tableHeader",
+            },
+            Object {
+              "attrs": Object {
+                "background": null,
+                "colspan": 1,
+                "colwidth": null,
+                "rowspan": 1,
+              },
+              "content": Array [
+                Object {
+                  "content": Array [
+                    Object {
+                      "marks": Array [
+                        Object {
+                          "attrs": Object {
+                            "__confluenceMetadata": null,
+                            "href": "http://atlassian.com",
+                          },
+                          "type": "link",
+                        },
+                      ],
+                      "text": "http://atlassian.com",
+                      "type": "text",
+                    },
+                  ],
+                  "type": "paragraph",
+                },
+              ],
+              "type": "tableHeader",
+            },
+            Object {
+              "attrs": Object {
+                "background": null,
+                "colspan": 1,
+                "colwidth": null,
+                "rowspan": 1,
+              },
+              "content": Array [
+                Object {
+                  "content": Array [
+                    Object {
+                      "marks": Array [
+                        Object {
+                          "attrs": Object {
+                            "__confluenceMetadata": null,
+                            "href": "https://atlassian.com",
+                          },
+                          "type": "link",
+                        },
+                      ],
+                      "text": "link 1",
+                      "type": "text",
+                    },
+                    Object {
+                      "text": ", ",
+                      "type": "text",
+                    },
+                    Object {
+                      "marks": Array [
+                        Object {
+                          "attrs": Object {
+                            "__confluenceMetadata": null,
+                            "href": "https://atlassian.com",
+                          },
+                          "type": "link",
+                        },
+                      ],
+                      "text": "link 2",
+                      "type": "text",
+                    },
+                  ],
+                  "type": "paragraph",
+                },
+              ],
+              "type": "tableHeader",
+            },
+          ],
+          "type": "tableRow",
+        },
+      ],
+      "type": "table",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`JIRA wiki markup - Tables should parse properly medias inside a cell 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "attrs": Object {
+        "__autoSize": false,
+        "isNumberColumnEnabled": false,
+        "layout": "default",
+      },
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "attrs": Object {
+                "background": null,
+                "colspan": 1,
+                "colwidth": null,
+                "rowspan": 1,
+              },
+              "content": Array [
+                Object {
+                  "attrs": Object {
+                    "layout": "center",
+                    "width": null,
+                  },
+                  "content": Array [
+                    Object {
+                      "attrs": Object {
+                        "__displayType": null,
+                        "__fileMimeType": null,
+                        "__fileName": null,
+                        "__fileSize": null,
+                        "__key": null,
+                        "collection": "",
+                        "height": 400,
+                        "id": "quicktime.mov",
+                        "occurrenceKey": null,
+                        "type": "file",
+                        "url": null,
+                        "width": 300,
+                      },
+                      "type": "media",
+                    },
+                  ],
+                  "type": "mediaSingle",
+                },
+              ],
+              "type": "tableCell",
+            },
+          ],
+          "type": "tableRow",
+        },
+      ],
+      "type": "table",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
 exports[`JIRA wiki markup - Tables should remove trailing space before and after cell open and close 1`] = `
 Object {
   "content": Array [

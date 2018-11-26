@@ -1,5 +1,10 @@
 # @atlaskit/feedback-collector
 
+## 0.2.5
+- Updated dependencies [8e753fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e753fc):
+  - @atlaskit/global-navigation@5.3.2
+  - @atlaskit/navigation-next@4.0.0
+
 ## 0.2.4
 - [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
 

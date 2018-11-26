@@ -1,5 +1,6 @@
 export default {
   plugins: [
+    'inlineCursorTargetPlugin',
     'focusHandlerPlugin',
     'submitEditor',
     'imageUpload',
@@ -132,7 +133,6 @@ export default {
     'subsup',
     'underline',
     'code',
-    'mentionQuery',
     'typeAheadQuery',
     'emojiQuery',
     'textColor',

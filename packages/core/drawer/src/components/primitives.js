@@ -53,7 +53,7 @@ const Wrapper = ({
 
 const Content = props => (
   <div
-    css={{ flex: 1, paddingTop: 3 * gridSize(), overflow: 'auto' }}
+    css={{ flex: 1, marginTop: 3 * gridSize(), overflow: 'auto' }}
     {...props}
   />
 );
