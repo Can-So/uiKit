@@ -10,7 +10,7 @@ const PlaceholderIconContainer = styled.div`
 `;
 
 const showUserAvatar = (inputValue, value) =>
-  value && inputValue === value.label;
+  value && value.user && inputValue === value.label;
 
 export class SingleValueContainer extends React.Component<any> {
   private renderAvatar = () => {

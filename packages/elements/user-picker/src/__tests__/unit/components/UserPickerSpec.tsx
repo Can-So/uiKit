@@ -8,8 +8,8 @@ import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { getStyles } from '../../../components/styles';
 import { UserPicker } from '../../../components/UserPicker';
-import { userToOption } from '../../../components/utils';
-import { User, UserPickerProps as Props } from '../../../types';
+import { User, UserPickerProps as Props, UserOption } from '../../../types';
+import { usersToOptions, userToOption } from '../../../components/utils';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<Props> = {}) =>
@@ -28,13 +28,12 @@ describe('UserPicker', () => {
     },
   ];
 
+  const userOptions: UserOption[] = usersToOptions(users);
+
   it('should render Select', () => {
     const component = shallowUserPicker({ users });
     const select = component.find(Select);
-    expect(select.prop('options')).toEqual([
-      { value: 'abc-123', user: users[0], label: 'Jace Beleren' },
-      { value: '123-abc', user: users[1], label: 'Chandra Nalaar' },
-    ]);
+    expect(select.prop('options')).toEqual(userOptions);
     expect(getStyles).toHaveBeenCalledWith(350);
     expect(select.prop('menuPlacement')).toBeTruthy();
   });
@@ -72,11 +71,7 @@ describe('UserPicker', () => {
     const component = shallowUserPicker({ onChange });
 
     const select = component.find(Select);
-    select.simulate(
-      'change',
-      { value: 'abc-123', user: users[0] },
-      { action: 'select-option' },
-    );
+    select.simulate('change', userOptions[0], { action: 'select-option' });
 
     expect(onChange).toHaveBeenCalledWith(users[0], 'select-option');
   });
@@ -86,11 +81,7 @@ describe('UserPicker', () => {
     const component = shallowUserPicker({ onSelection });
 
     const select = component.find(Select);
-    select.simulate(
-      'change',
-      { value: 'abc-123', user: users[0] },
-      { action: 'select-option' },
-    );
+    select.simulate('change', userOptions[0], { action: 'select-option' });
 
     expect(onSelection).toHaveBeenCalledWith(users[0]);
   });
@@ -108,14 +99,7 @@ describe('UserPicker', () => {
 
       component
         .find(Select)
-        .simulate(
-          'change',
-          [
-            { value: 'abc-123', user: users[0] },
-            { value: '123-abc', user: users[1] },
-          ],
-          { action: 'select-option' },
-        );
+        .simulate('change', userOptions, { action: 'select-option' });
 
       expect(onChange).toHaveBeenCalledWith(
         [users[0], users[1]],
@@ -140,7 +124,7 @@ describe('UserPicker', () => {
   it('should open menu onFocus', () => {
     const component = shallowUserPicker();
     const select = component.find(Select);
-    select.simulate('focus');
+    select.simulate('focus', { target: {} });
     expect(component.state()).toHaveProperty('menuIsOpen', true);
   });
 
@@ -299,6 +283,48 @@ describe('UserPicker', () => {
         fixedOption,
         removableOption,
       ]);
+    });
+  });
+
+  describe('inputValue', () => {
+    it('should set inputValue to empty string by default', () => {
+      const component = shallowUserPicker();
+      expect(component.find(Select).prop('inputValue')).toEqual('');
+    });
+
+    it('should set inputValue to query onInputChange', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('inputChange', 'some text', { action: 'input-change' });
+      expect(component.find(Select).prop('inputValue')).toEqual('some text');
+    });
+
+    it('should clear inputValue onBlur', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('blur');
+      expect(component.find(Select).prop('inputValue')).toEqual('');
+    });
+
+    it('should clear inputValue onChange', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('change', userOptions[0], { action: 'select-option' });
+      expect(component.find(Select).prop('inputValue')).toEqual('');
+    });
+
+    it('should set inputValue to value if exists on focus', () => {
+      const component = shallowUserPicker({ value: users[0] });
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.find(Select).prop('inputValue')).toEqual(users[0].name);
+    });
+
+    it('should have empty inputValue if focus with no value', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.find(Select).prop('inputValue')).toEqual('');
     });
   });
 

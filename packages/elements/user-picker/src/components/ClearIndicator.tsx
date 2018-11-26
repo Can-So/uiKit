@@ -7,7 +7,7 @@ export class ClearIndicator extends React.PureComponent<any> {
       return;
     }
     this.props.clearValue();
-    if (!this.props.selectProps.isFocused) {
+    if (this.props.selectProps && !this.props.selectProps.isFocused) {
       event.stopPropagation();
     }
   };

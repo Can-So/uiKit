@@ -14,10 +14,36 @@ describe('ClearIndicator', () => {
       .find(components.ClearIndicator)
       .prop('innerProps');
 
-    const stopPropagation = jest.fn();
-    onMouseDown({ stopPropagation });
+    onMouseDown();
 
     expect(clearValue).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call stopPropagation if not focused', () => {
+    const component = shallowClearIndicator({
+      clearValue: jest.fn(),
+      selectProps: { isFocused: false },
+    });
+
+    const { onMouseDown } = component
+      .find(components.ClearIndicator)
+      .prop('innerProps');
+    const stopPropagation = jest.fn();
+    onMouseDown({ stopPropagation });
     expect(stopPropagation).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call not stopPropagation if focused', () => {
+    const component = shallowClearIndicator({
+      clearValue: jest.fn(),
+      selectProps: { isFocused: true },
+    });
+
+    const { onMouseDown } = component
+      .find(components.ClearIndicator)
+      .prop('innerProps');
+    const stopPropagation = jest.fn();
+    onMouseDown({ stopPropagation });
+    expect(stopPropagation).toHaveBeenCalledTimes(0);
   });
 });

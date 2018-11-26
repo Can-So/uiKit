@@ -151,7 +151,7 @@ export class UserPicker extends React.Component<
     }
   }, 200);
 
-  private handleFocus = event => {
+  private handleFocus = (event: React.FocusEvent) => {
     const { value } = this.state;
     this.setState({ menuIsOpen: true });
     const input = event.target;
