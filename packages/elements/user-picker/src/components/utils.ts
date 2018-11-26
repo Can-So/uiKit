@@ -1,11 +1,5 @@
 import memoizeOne from 'memoize-one';
-import {
-  Promisable,
-  User,
-  UserOption,
-  UserValue,
-  InputActionTypes,
-} from '../types';
+import { Promisable, User, UserOption, UserValue } from '../types';
 import { ReactElement, ReactChild } from 'react';
 
 export const userToOption = (user: User) => ({
@@ -28,10 +22,6 @@ export const isIterable = (
   a: Promisable<User | User[]> | Iterable<Promisable<User | User[]>>,
 ): a is Iterable<Promisable<User | User[]>> =>
   typeof a[Symbol.iterator] === 'function';
-
-export const hasSingleValue = (
-  u: UserOption | UserOption[] | undefined,
-): u is UserOption => !!u && !Array.isArray(u);
 
 export const getUsers = (usersFromState: User[], usersFromProps?: User[]) => {
   if (usersFromState.length > 0) {
@@ -74,3 +64,7 @@ export const isChildInput = (child: ReactChild): child is ReactElement<any> =>
   typeof child === 'object' &&
   child.props &&
   child.props.type === 'text';
+
+export const isSingleValue = (
+  value?: UserOption | UserOption[],
+): value is UserOption => !!value && !Array.isArray(value);

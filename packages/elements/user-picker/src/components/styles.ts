@@ -5,7 +5,7 @@ import { getAvatarSize } from './utils';
 
 export const PLACEHOLDER_PADDING = 8;
 
-export const getStyles = memoizeOne((width, hasValue) => ({
+export const getStyles = memoizeOne(width => ({
   menu: css => ({ ...css, width }),
   control: (css, state) => ({
     ...css,
@@ -99,7 +99,10 @@ export const getStyles = memoizeOne((width, hasValue) => ({
   }),
   input: ({ margin, ...css }) => ({
     ...css,
-    paddingLeft: !hasValue ? PLACEHOLDER_PADDING : 4,
+    display: 'flex',
+    alignSelf: 'center',
+    paddingBottom: 1,
+    paddingLeft: PLACEHOLDER_PADDING,
     '& input::placeholder': {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
       color: colors.N100,

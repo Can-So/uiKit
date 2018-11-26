@@ -17,7 +17,7 @@ import {
   getOptions,
   isIterable,
   usersToOptions,
-  hasSingleValue,
+  isSingleValue,
 } from './utils';
 
 export class UserPicker extends React.Component<
@@ -30,6 +30,7 @@ export class UserPicker extends React.Component<
     appearance: 'normal',
     subtle: false,
     isClearable: true,
+    search: '',
   };
 
   static getDerivedStateFromProps(
@@ -59,6 +60,7 @@ export class UserPicker extends React.Component<
       count: 0,
       hoveringClearIndicator: false,
       menuIsOpen: false,
+      inputValue: props.search,
     };
   }
 
@@ -84,6 +86,8 @@ export class UserPicker extends React.Component<
       return;
     }
     const { onChange, onSelection } = this.props;
+
+    this.setState({ inputValue: '' });
 
     if (onChange) {
       onChange(extractUserValue(value), action);
@@ -147,28 +151,33 @@ export class UserPicker extends React.Component<
     }
   }, 200);
 
-  private handleFocus = () => {
+  private handleFocus = event => {
+    const { value } = this.state;
     this.setState({ menuIsOpen: true });
+    const input = event.target;
+    if (!this.props.isMulti && isSingleValue(value)) {
+      this.setState({ inputValue: value.label }, () => {
+        if (input instanceof HTMLInputElement) {
+          input.select();
+        }
+      });
+    }
   };
 
   private handleBlur = () => {
-    this.setState({ menuIsOpen: false });
+    this.setState({ menuIsOpen: false, inputValue: '' });
   };
 
   private handleInputChange = (
     search: string,
     { action }: { action: InputActionTypes },
   ) => {
-    const { onInputChange, isMulti } = this.props;
+    const { onInputChange } = this.props;
     if (action === 'input-change') {
-      if (!isMulti && !search) {
-        this.triggerClearValue();
-        return;
-      }
-
       if (onInputChange) {
         onInputChange(search);
       }
+      this.setState({ inputValue: search });
 
       this.executeLoadOptions(search);
     }
@@ -176,10 +185,6 @@ export class UserPicker extends React.Component<
 
   private triggerInputChange = this.withSelectRef(select => {
     select.onInputChange(this.props.search, { action: 'input-change' });
-  });
-
-  private triggerClearValue = this.withSelectRef(select => {
-    select.clearValue();
   });
 
   componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
@@ -212,7 +217,6 @@ export class UserPicker extends React.Component<
     const {
       width,
       isMulti,
-      search,
       anchor,
       users,
       isLoading,
@@ -228,14 +232,8 @@ export class UserPicker extends React.Component<
       hoveringClearIndicator,
       menuIsOpen,
       value,
+      inputValue,
     } = this.state;
-
-    const numValues: number = hasSingleValue(value)
-      ? 1
-      : value
-      ? value.length
-      : 0;
-    const hasValue = numValues > 0;
 
     return (
       <Select
@@ -244,9 +242,9 @@ export class UserPicker extends React.Component<
         isMulti={isMulti}
         options={getOptions(usersFromState, users) || []}
         onChange={this.handleChange}
-        styles={getStyles(width, hasValue)}
+        styles={getStyles(width)}
         components={getComponents(isMulti, anchor)}
-        inputValue={search}
+        inputValue={inputValue}
         menuIsOpen={menuIsOpen}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}

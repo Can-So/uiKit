@@ -29,11 +29,7 @@ export const SingleValue = props => {
   } = props;
   const displayName = name || nickname;
 
-  if (isFocused) {
-    return <SizeableAvatar src={avatarUrl} appearance={appearance} />;
-  }
-
-  return (
+  return !isFocused ? (
     <AvatarItem
       backgroundColor="transparent"
       avatar={
@@ -46,5 +42,5 @@ export const SingleValue = props => {
       primaryText={displayName}
       component={AvatarItemComponent}
     />
-  );
+  ) : null;
 };
