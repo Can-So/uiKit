@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ProfilecardInteractive from './helper/profile-interactive';
+import LocaleIntlProvider from './helper/local-intl-provider';
 
 export const MainStage = styled.div`
   margin: 16px;
@@ -18,11 +19,13 @@ export const Section = styled.div`
 
 export default function Example() {
   return (
-    <MainStage>
-      <Section>
-        <h4>Interactive Profilecard</h4>
-        <ProfilecardInteractive />
-      </Section>
-    </MainStage>
+    <LocaleIntlProvider>
+      <MainStage>
+        <Section>
+          <h4>Interactive Profilecard</h4>
+          <ProfilecardInteractive />
+        </Section>
+      </MainStage>
+    </LocaleIntlProvider>
   );
 }

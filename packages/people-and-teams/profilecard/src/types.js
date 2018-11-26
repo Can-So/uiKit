@@ -49,6 +49,10 @@ export type ProfilecardProps = {
   customElevation?: string,
 };
 
+export type MessageIntlProviderProps = {
+  children: JSX.Element,
+};
+
 export type RelativeDateKeyType =
   | 'ThisWeek'
   | 'ThisMonth'

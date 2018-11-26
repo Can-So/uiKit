@@ -2,6 +2,7 @@
 import React from 'react';
 import AkProfilecardResourced from '../src';
 import { getMockProfileClient } from './helper/util';
+import LocaleIntlProvider from './helper/local-intl-provider';
 
 const mockClient = getMockProfileClient(10, 0);
 // With a real client this would look like:
@@ -9,17 +10,19 @@ const mockClient = getMockProfileClient(10, 0);
 
 export default function Example() {
   return (
-    <AkProfilecardResourced
-      userId="1"
-      cloudId="dummy-cloud"
-      resourceClient={mockClient}
-      actions={[
-        {
-          label: 'View profile',
-          id: 'view-profile',
-          callback: () => {},
-        },
-      ]}
-    />
+    <LocaleIntlProvider>
+      <AkProfilecardResourced
+        userId="1"
+        cloudId="dummy-cloud"
+        resourceClient={mockClient}
+        actions={[
+          {
+            label: 'View profile',
+            id: 'view-profile',
+            callback: () => {},
+          },
+        ]}
+      />
+    </LocaleIntlProvider>
   );
 }

@@ -5,6 +5,7 @@ import { profiles } from '../mock-helpers/index';
 
 import { AkProfilecard } from '../src';
 import type { ProfilecardProps } from '../src/types';
+import LocaleIntlProvider from './helper/local-intl-provider';
 
 export const MainStage = styled.div`
   margin: 16px;
@@ -91,40 +92,42 @@ const actions = [
 
 export default function Example() {
   return (
-    <MainStage>
-      <Section>
-        <h4>Loading State</h4>
-        <AkProfilecard isLoading />
-      </Section>
-      <Section>
-        <h4>Error State</h4>
-        <AkProfilecard hasError />
-      </Section>
-      <Section>
-        <h4>Error State (Not Found Error)</h4>
-        <AkProfilecard
-          hasError
-          errorType={{
-            reason: 'NotFound',
-          }}
-        />
-      </Section>
-      <Section>
-        <h4>Worst case</h4>
-        <AkProfilecard {...worstCaseProfile} />
-      </Section>
-      <Section>
-        <h4>Best case</h4>
-        <AkProfilecard {...bestCaseProfile} />
-      </Section>
-      <Section>
-        <h4>Bot case</h4>
-        <AkProfilecard {...botCaseProfile} />
-      </Section>
-      <Section>
-        <h4>Alternate actions</h4>
-        <AkProfilecard {...fakeData({ actions })} />
-      </Section>
-    </MainStage>
+    <LocaleIntlProvider>
+      <MainStage>
+        <Section>
+          <h4>Loading State</h4>
+          <AkProfilecard isLoading />
+        </Section>
+        <Section>
+          <h4>Error State</h4>
+          <AkProfilecard hasError />
+        </Section>
+        <Section>
+          <h4>Error State (Not Found Error)</h4>
+          <AkProfilecard
+            hasError
+            errorType={{
+              reason: 'NotFound',
+            }}
+          />
+        </Section>
+        <Section>
+          <h4>Worst case</h4>
+          <AkProfilecard {...worstCaseProfile} />
+        </Section>
+        <Section>
+          <h4>Best case</h4>
+          <AkProfilecard {...bestCaseProfile} />
+        </Section>
+        <Section>
+          <h4>Bot case</h4>
+          <AkProfilecard {...botCaseProfile} />
+        </Section>
+        <Section>
+          <h4>Alternate actions</h4>
+          <AkProfilecard {...fakeData({ actions })} />
+        </Section>
+      </MainStage>
+    </LocaleIntlProvider>
   );
 }
