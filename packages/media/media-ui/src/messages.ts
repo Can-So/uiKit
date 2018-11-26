@@ -279,4 +279,9 @@ export const messages = defineMessages({
     description:
       'It means that we will upload the files you drag and drop automatically',
   },
+  insert_files: {
+    id: 'fabric.media.insert_files',
+    defaultMessage: 'Insert {0, plural, one {a file} other {{0} files}}',
+    description: 'Showed when the user selects 1 or more files to insert',
+  },
 });

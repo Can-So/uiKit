@@ -5,8 +5,6 @@ import { wrapperStyles } from './styled';
 import { getAssetUrl } from '../../util/getAssetUrl';
 
 // TODO [MSW-385]: Remove template string and use React
-// TODO [i18n][MS-1030]: Translate non React MediaPicker locales
-
 export default (
   formatMessage: (
     messageDescriptor: FormattedMessage.MessageDescriptor,
