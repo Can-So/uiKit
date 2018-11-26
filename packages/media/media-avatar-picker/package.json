@@ -38,6 +38,7 @@
   "devDependencies": {
     "@atlaskit/docs": "^5.2.2",
     "@atlaskit/media-test-helpers": "^18.3.2",
+	"@atlaskit/page": "^8.0.9",
     "@types/enzyme": "^3.1.6",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react": "^16.4.0",

@@ -1,7 +1,4 @@
-export function mockCanvas(
-  width: number = 0,
-  height: number = 0,
-): Partial<HTMLCanvasElement> {
+export function mockCanvas(width: number = 0, height: number = 0) {
   const context: Partial<CanvasRenderingContext2D> = {
     translate: jest.fn(),
     rotate: jest.fn(),
@@ -23,9 +20,12 @@ export function mockCanvas(
   };
 
   return {
-    width,
-    height,
-    toDataURL: jest.fn(),
-    getContext: jest.fn().mockReturnValue(context),
+    canvas: {
+      width,
+      height,
+      toDataURL: jest.fn(),
+      getContext: jest.fn().mockReturnValue(context),
+    },
+    context,
   };
 }

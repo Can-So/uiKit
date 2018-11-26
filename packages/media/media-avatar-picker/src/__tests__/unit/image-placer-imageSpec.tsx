@@ -9,21 +9,25 @@ jest.mock('@atlaskit/media-ui', () => ({
 }));
 
 // ...before importing Image
-import { Image, ImageProps, IMAGE_ERRORS } from '../../image-placer/image';
+import {
+  ImagePlacerImage,
+  ImagePlacerImageProps,
+  IMAGE_ERRORS,
+} from '../../image-placer/image';
 
 interface SetupInfo {
   wrapper: ShallowWrapper;
-  instance: Image;
+  instance: ImagePlacerImage;
   onLoad: () => void;
   onError: () => void;
 }
 
-const setup = (props: Partial<ImageProps> = {}): SetupInfo => {
+const setup = (props: Partial<ImagePlacerImageProps> = {}): SetupInfo => {
   const onLoad = jest.fn();
   const onError = jest.fn();
 
   let wrapper = shallow(
-    <Image
+    <ImagePlacerImage
       x={1}
       y={2}
       width={3}
@@ -34,7 +38,7 @@ const setup = (props: Partial<ImageProps> = {}): SetupInfo => {
     />,
   );
 
-  const instance = wrapper.instance() as Image;
+  const instance = wrapper.instance() as ImagePlacerImage;
   return { wrapper, instance, onLoad, onError };
 };
 

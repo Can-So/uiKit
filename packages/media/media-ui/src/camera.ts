@@ -61,7 +61,7 @@ export class Rectangle {
   // - is fully visible inside of the containing Rectangle
   // - is the LARGEST possible size
   // - maintains the original aspect ratio (no distortion)
-  scaleToFitLargestSide(containing: Rectangle): number {
+  scaleToFit(containing: Rectangle): number {
     const widthRatio = containing.width / this.width;
     const heightRatio = containing.height / this.height;
     if (widthRatio <= heightRatio) {
@@ -69,6 +69,10 @@ export class Rectangle {
     } else {
       return heightRatio;
     }
+  }
+
+  scaleToFitLargestSide(containing: Rectangle): number {
+    return this.scaleToFit(containing);
   }
 
   // Computes the scaling factor that needs to be applied to this

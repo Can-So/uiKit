@@ -1,8 +1,7 @@
 /* mock media-ui::loadImage */
 import * as mediaUI from '@atlaskit/media-ui';
-import { mockModule } from './mockModule';
+import { mockModule } from '@atlaskit/media-test-helpers';
 const mockedMediaUI = mockModule('@atlaskit/media-ui', mediaUI);
-// import { Vector2, FileInfo } from '@atlaskit/media-ui';
 
 export const mockLoadImage = (
   naturalWidth: number,

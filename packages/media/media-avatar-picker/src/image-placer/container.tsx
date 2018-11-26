@@ -1,8 +1,12 @@
+/**
+ * The Container is responsible for implementing the mouse/touch events.
+ * This way, you can still move the image without clicking directly on it.
+ */
 import * as React from 'react';
 import { ContainerWrapper } from './styled';
 import { Vector2 } from '@atlaskit/media-ui';
 
-export interface ContainerProps {
+export interface ImagePlacerContainerProps {
   width: number;
   height: number;
   margin: number;
@@ -11,7 +15,10 @@ export interface ContainerProps {
   onWheel: (delta: number) => void;
 }
 
-export class Container extends React.Component<ContainerProps, {}> {
+export class ImagePlacerContainer extends React.Component<
+  ImagePlacerContainerProps,
+  {}
+> {
   private dragClientStart?: Vector2;
 
   componentWillMount() {

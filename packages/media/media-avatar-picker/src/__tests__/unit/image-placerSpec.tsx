@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Vector2, Rectangle, FileInfo } from '@atlaskit/media-ui';
+import { nextTick, mockCanvas } from '@atlaskit/media-test-helpers';
 import {
-  nextTick,
-  mockCanvas,
   mockLoadImage,
   mockLoadImageError,
   unMockLoadImage,
-} from '@atlaskit/media-test-helpers';
+} from '../../image-placer/test-helpers';
 
 jest.mock('../../image-placer/util', () => ({
   getCanvas: mockCanvas,
@@ -17,11 +16,11 @@ import {
   ImagePlacer,
   ImagePlacerProps,
   defaultProps as defaultComponentProps,
-  ImagePlacerAPI,
+  ImageActions,
   DEFAULT_MAX_ZOOM,
 } from '../../image-placer';
-import { Container } from '../../image-placer/container';
-import { Image } from '../../image-placer/image';
+import { ImagePlacerContainer } from '../../image-placer/container';
+import { ImagePlacerImage } from '../../image-placer/image';
 import { ImagePlacerErrorWrapper } from '../../image-placer/styled';
 import { initialiseImagePreview } from '../../image-placer/imageProcessor';
 
@@ -75,7 +74,7 @@ const setup = (
     <ImagePlacer
       {...defaultComponentProps}
       onZoomChange={onZoomChange}
-      onSaveImage={onSaveImage}
+      onImageActions={onSaveImage}
       {...props}
     />,
   );
@@ -101,14 +100,14 @@ describe('Image Placer', () => {
   describe('Image', () => {
     it('should show image if loads successfully', () => {
       const { wrapper } = setup();
-      const img = wrapper.find(Image);
+      const img = wrapper.find(ImagePlacerImage);
       expect(img).toHaveLength(1);
       expect(img.props().src).toEqual('some-src');
     });
 
     it('should set error state if image load fails', () => {
       const { wrapper } = setup();
-      const img = wrapper.find(Image);
+      const img = wrapper.find(ImagePlacerImage);
       img.props().onError('some-error');
       expect(wrapper.state('errorMessage')).toEqual('some-error');
     });
@@ -123,7 +122,7 @@ describe('Image Placer', () => {
     it('should provide ImagePlacerAPI when image loads successfully', done => {
       setup({
         ...defaultProps,
-        onSaveImage: (api: ImagePlacerAPI) => {
+        onImageActions: (api: ImageActions) => {
           expect(api).toHaveProperty('toCanvas');
           expect(api).toHaveProperty('toDataURL');
           expect(api).toHaveProperty('toFile');
@@ -396,7 +395,7 @@ describe('Image Placer', () => {
     describe('Mapping Coordinates', () => {
       it('should map equally when imageBounds and visibleBounds equal', () => {
         const { instance } = setup(defaultProps, ...imageSizeMedium);
-        const corner = instance.transformVisibleToImageCoords(
+        const corner = instance.transformVisibleBoundsToImageCoords(
           containerSize,
           containerSize,
         );
@@ -406,7 +405,7 @@ describe('Image Placer', () => {
 
       it('should map reduced coords when imageBounds smaller than visibleBounds', () => {
         const { instance } = setup(defaultProps, ...imageSizeSmall);
-        const corner = instance.transformVisibleToImageCoords(
+        const corner = instance.transformVisibleBoundsToImageCoords(
           containerSize,
           containerSize,
         );
@@ -416,7 +415,7 @@ describe('Image Placer', () => {
 
       it('should map enlarged coords when imageBounds larger than visibleBounds', () => {
         const { instance } = setup(defaultProps, ...imageSizeLarge);
-        const corner = instance.transformVisibleToImageCoords(
+        const corner = instance.transformVisibleBoundsToImageCoords(
           containerSize,
           containerSize,
         );
@@ -428,23 +427,23 @@ describe('Image Placer', () => {
     describe('Source Rect', () => {
       it('should map coords correctly when zoomed out', () => {
         const { instance } = setup(defaultProps, ...imageSizeMedium);
-        const sourceRect = instance.sourceRect;
-        expect(sourceRect.left).toEqual(0);
-        expect(sourceRect.top).toEqual(0);
-        expect(sourceRect.width).toEqual(mediumSize);
-        expect(sourceRect.height).toEqual(mediumSize);
+        const sourceBounds = instance.sourceBounds;
+        expect(sourceBounds.left).toEqual(0);
+        expect(sourceBounds.top).toEqual(0);
+        expect(sourceBounds.width).toEqual(mediumSize);
+        expect(sourceBounds.height).toEqual(mediumSize);
       });
 
       it('should map coords correctly when zoomed in', async done => {
         const { instance } = setup(defaultProps, ...imageSizeMedium);
         instance.setZoom(1);
         await nextTick();
-        const sourceRect = instance.sourceRect;
+        const sourceBounds = instance.sourceBounds;
         expect(instance.state.zoom).toEqual(1);
-        expect(sourceRect.left).toEqual(Math.round(mediumSize / 4));
-        expect(sourceRect.top).toEqual(Math.round(mediumSize / 4));
-        expect(sourceRect.width).toEqual(mediumSize / DEFAULT_MAX_ZOOM);
-        expect(sourceRect.height).toEqual(mediumSize / DEFAULT_MAX_ZOOM);
+        expect(sourceBounds.left).toEqual(Math.round(mediumSize / 4));
+        expect(sourceBounds.top).toEqual(Math.round(mediumSize / 4));
+        expect(sourceBounds.width).toEqual(mediumSize / DEFAULT_MAX_ZOOM);
+        expect(sourceBounds.height).toEqual(mediumSize / DEFAULT_MAX_ZOOM);
         done();
       });
     });
@@ -683,7 +682,7 @@ describe('Image Placer', () => {
       const { wrapper, instance } = setup();
       instance.onImageError('some-error');
       wrapper.update();
-      const image = wrapper.find(Image);
+      const image = wrapper.find(ImagePlacerImage);
       expect(image).toHaveLength(0);
     });
 
@@ -718,7 +717,7 @@ describe('Image Placer', () => {
       wrapper.setState({ errorMessage: undefined });
       wrapper.update();
       /* now we can simluate load event and hand correct functions referenced by children */
-      const image = wrapper.find(Image);
+      const image = wrapper.find(ImagePlacerImage);
       image.simulate('load');
       image.simulate('error');
       expect(instance.onImageLoad).toHaveBeenCalled();
@@ -734,7 +733,7 @@ describe('Image Placer', () => {
       jest.spyOn(instance, 'onDragMove');
       wrapper.setState({ errorMessage: undefined });
       wrapper.update();
-      const container = wrapper.find(Container).get(0);
+      const container = wrapper.find(ImagePlacerContainer).get(0);
       container.props.onDragStart({});
       container.props.onDragMove({});
       expect(instance.onDragStart).toHaveBeenCalled();

@@ -20,4 +20,3 @@ export * from './mountWithIntlContext';
 export * from './fakeI18n';
 export * from './mockModule';
 export * from './mockCanvas';
-export * from './mockLoadImage';

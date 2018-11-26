@@ -5,24 +5,27 @@ import {
   createTouchEvent,
 } from '@atlaskit/media-test-helpers';
 
-import { Container, ContainerProps } from '../../image-placer/container';
+import {
+  ImagePlacerContainer,
+  ImagePlacerContainerProps,
+} from '../../image-placer/container';
 import { ContainerWrapper } from '../../image-placer/styled';
 
 interface SetupInfo {
   wrapper: ShallowWrapper;
-  instance: Container;
+  instance: ImagePlacerContainer;
   onDragStart: () => void;
   onDragMove: () => void;
   onWheel: () => void;
 }
 
-const setup = (props: Partial<ContainerProps> = {}): SetupInfo => {
+const setup = (props: Partial<ImagePlacerContainerProps> = {}): SetupInfo => {
   const onDragStart = jest.fn();
   const onDragMove = jest.fn();
   const onWheel = jest.fn();
 
   let wrapper = shallow(
-    <Container
+    <ImagePlacerContainer
       width={1}
       height={2}
       margin={3}
@@ -33,7 +36,7 @@ const setup = (props: Partial<ContainerProps> = {}): SetupInfo => {
     />,
   );
 
-  const instance = wrapper.instance() as Container;
+  const instance = wrapper.instance() as ImagePlacerContainer;
   return { wrapper, instance, onDragStart, onDragMove, onWheel };
 };
 

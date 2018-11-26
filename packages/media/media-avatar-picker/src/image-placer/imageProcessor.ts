@@ -11,63 +11,77 @@ export function radians(deg: number) {
   return deg * (Math.PI / 180);
 }
 
+export interface ViewInfo {
+  containerRect: Rectangle;
+  imageBounds: Bounds;
+  sourceBounds: Bounds;
+  visibleBounds: Bounds;
+}
+
 export function applyOrientation(
   img: HTMLImageElement,
-  context: CanvasRenderingContext2D,
+  canvasWidth: number,
+  canvasHeight: number,
   orientation: number,
   sourceWidth: number,
   sourceHeight: number,
   destWidth: number,
   destHeight: number,
-) {
-  switch (orientation) {
-    case 2:
-      context.translate(destWidth, 0);
-      context.scale(-1, 1);
-      break;
-    case 3:
-      context.translate(destWidth, destHeight);
-      context.scale(-1, -1);
-      break;
-    case 4:
-      context.translate(0, destHeight);
-      context.scale(1, -1);
-      break;
-    case 5:
-      context.translate(destHeight, 0);
-      context.rotate(radians(90));
-      context.translate(0, destHeight);
-      context.scale(1, -1);
-      break;
-    case 6:
-      context.translate(destHeight, 0);
-      context.rotate(radians(90));
-      break;
-    case 7:
-      context.translate(destHeight, 0);
-      context.rotate(radians(90));
-      context.translate(destWidth, 0);
-      context.scale(-1, 1);
-      break;
-    case 8:
-      context.translate(destHeight, 0);
-      context.rotate(radians(90));
-      context.translate(destWidth, destHeight);
-      context.scale(-1, -1);
-      break;
+): string {
+  const { canvas, context } = getCanvas(canvasWidth, canvasHeight);
+
+  if (context) {
+    switch (orientation) {
+      case 2:
+        context.translate(destWidth, 0);
+        context.scale(-1, 1);
+        break;
+      case 3:
+        context.translate(destWidth, destHeight);
+        context.scale(-1, -1);
+        break;
+      case 4:
+        context.translate(0, destHeight);
+        context.scale(1, -1);
+        break;
+      case 5:
+        context.translate(destHeight, 0);
+        context.rotate(radians(90));
+        context.translate(0, destHeight);
+        context.scale(1, -1);
+        break;
+      case 6:
+        context.translate(destHeight, 0);
+        context.rotate(radians(90));
+        break;
+      case 7:
+        context.translate(destHeight, 0);
+        context.rotate(radians(90));
+        context.translate(destWidth, 0);
+        context.scale(-1, 1);
+        break;
+      case 8:
+        context.translate(destHeight, 0);
+        context.rotate(radians(90));
+        context.translate(destWidth, destHeight);
+        context.scale(-1, -1);
+        break;
+    }
+
+    context.drawImage(
+      img,
+      0,
+      0,
+      sourceWidth,
+      sourceHeight,
+      0,
+      0,
+      destWidth,
+      destHeight,
+    );
   }
 
-  context.drawImage(
-    img,
-    0,
-    0,
-    sourceWidth,
-    sourceHeight,
-    0,
-    0,
-    destWidth,
-    destHeight,
-  );
+  return canvas.toDataURL();
 }
 
 export interface PreviewInfo {
@@ -90,8 +104,12 @@ export async function initialiseImagePreview(
   let img: HTMLImageElement;
 
   try {
-    orientation = await getOrientation(fileInfo.file);
-    img = await loadImage(fileInfo.src);
+    const [_orientation, _img] = await Promise.all([
+      getOrientation(fileInfo.file),
+      loadImage(fileInfo.src),
+    ]);
+    orientation = _orientation;
+    img = _img;
   } catch (e) {
     return null;
   }
@@ -117,20 +135,16 @@ export async function initialiseImagePreview(
 
     const { width: canvasWidth, height: canvasHeight } = canvasRect;
 
-    const { canvas, context } = getCanvas(canvasWidth, canvasHeight);
-
-    if (context) {
-      applyOrientation(
-        img,
-        context,
-        orientation,
-        naturalWidth,
-        naturalHeight,
-        imageWidth,
-        imageHeight,
-      );
-      fileInfo.src = canvas.toDataURL();
-    }
+    fileInfo.src = applyOrientation(
+      img,
+      canvasWidth,
+      canvasHeight,
+      orientation,
+      naturalWidth,
+      naturalHeight,
+      imageWidth,
+      imageHeight,
+    );
 
     return { fileInfo, width: canvasWidth, height: canvasHeight };
   }
@@ -140,15 +154,12 @@ export async function initialiseImagePreview(
 
 export function renderImageAtCurrentView(
   imageElement: HTMLImageElement | undefined,
-  sourceRect: Bounds,
-  visibleBounds: Bounds,
-  imageBounds: Bounds,
-  containerRect: Rectangle,
+  viewInfo: ViewInfo,
   useConstraints: boolean,
-  circular: boolean,
-  renderCircularMask: boolean,
+  useCircularClipWithActions: boolean,
   backgroundColor: string,
 ): HTMLCanvasElement {
+  const { containerRect, imageBounds, sourceBounds, visibleBounds } = viewInfo;
   const { width: containerWidth, height: containerHeight } = containerRect;
   const { canvas, context } = getCanvas(containerWidth, containerHeight);
 
@@ -157,7 +168,7 @@ export function renderImageAtCurrentView(
     context.fillRect(0, 0, containerWidth, containerHeight);
 
     if (imageElement) {
-      if (circular && renderCircularMask) {
+      if (useCircularClipWithActions) {
         const cx = containerWidth * 0.5;
         const cy = containerHeight * 0.5;
         const rx = cx;
@@ -177,10 +188,10 @@ export function renderImageAtCurrentView(
         /* draw sourceRect mapped to container size */
         context.drawImage(
           imageElement,
-          sourceRect.left,
-          sourceRect.top,
-          sourceRect.width,
-          sourceRect.height,
+          sourceBounds.left,
+          sourceBounds.top,
+          sourceBounds.width,
+          sourceBounds.height,
           0,
           0,
           containerWidth,

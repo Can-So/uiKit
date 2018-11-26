@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
-import { ImagePlacer, ImagePlacerAPI } from '../src/image-placer';
+import { ImagePlacer, ImageActions } from '../src/image-placer';
 import {
   Slider,
   Label,
@@ -16,8 +16,8 @@ export interface ExampleState {
   zoom: number;
   maxZoom: number;
   useConstraints: boolean;
-  circular: boolean;
-  renderCircularMask: boolean;
+  isCircular: boolean;
+  useCircularClipWithActions: boolean;
   src?: string;
   file?: File;
   exportedDataURI?: string;
@@ -28,9 +28,9 @@ const CONTAINER_HEIGHT_LABEL = 'Container_Height';
 const MARGIN_LABEL = 'Margin';
 
 class Example extends React.Component<{}, ExampleState> {
-  zoomSliderRef?: HTMLInputElement;
+  zoomSliderElement?: HTMLInputElement;
 
-  // part of ImagePlacerAPI exported with onSaveImage prop of ImagePlacer
+  // part of ImageActions exported with onImageActions prop of ImagePlacer
   toDataURL?: () => string;
 
   state: ExampleState = {
@@ -40,15 +40,9 @@ class Example extends React.Component<{}, ExampleState> {
     zoom: 0,
     maxZoom: 2,
     useConstraints: true,
-    circular: false,
-    renderCircularMask: false,
+    isCircular: false,
+    useCircularClipWithActions: false,
   };
-
-  private setZoomSliderValue(value: number) {
-    if (this.zoomSliderRef) {
-      this.zoomSliderRef.value = `${value * 100}`;
-    }
-  }
 
   onZoomSliderChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const value = e.currentTarget.valueAsNumber;
@@ -58,22 +52,21 @@ class Example extends React.Component<{}, ExampleState> {
 
   onUseConstraintsChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const useConstraints = e.currentTarget.checked;
-    this.setZoomSliderValue(0);
     this.setState({ zoom: 0, useConstraints });
   };
 
   onCircularChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    const circular = e.currentTarget.checked;
-    this.setState({ circular });
+    const isCircular = e.currentTarget.checked;
+    this.setState({ isCircular });
   };
 
   onRenderCircularMaskChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    const renderCircularMask = e.currentTarget.checked;
-    this.setState({ renderCircularMask });
+    const useCircularClipWithActions = e.currentTarget.checked;
+    this.setState({ useCircularClipWithActions });
   };
 
-  onZoomSliderRef = (el: any) => {
-    this.zoomSliderRef = el;
+  onZoomSliderElement = (el: HTMLInputElement) => {
+    this.zoomSliderElement = el;
   };
 
   onImageChange = () => {
@@ -81,7 +74,7 @@ class Example extends React.Component<{}, ExampleState> {
   };
 
   onZoomChange = (zoom: number) => {
-    this.setZoomSliderValue(zoom);
+    this.setState({ zoom });
   };
 
   onFileInputChange = async (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -91,8 +84,8 @@ class Example extends React.Component<{}, ExampleState> {
     }
   };
 
-  onSaveImage = (api: ImagePlacerAPI) => {
-    this.toDataURL = api.toDataURL;
+  onImageActions = (actions: ImageActions) => {
+    this.toDataURL = actions.toDataURL;
   };
 
   onGetImageClick = () => {
@@ -112,8 +105,8 @@ class Example extends React.Component<{}, ExampleState> {
       zoom,
       maxZoom,
       useConstraints,
-      circular,
-      renderCircularMask,
+      isCircular,
+      useCircularClipWithActions,
       file,
       src,
       exportedDataURI,
@@ -139,8 +132,8 @@ class Example extends React.Component<{}, ExampleState> {
               useConstraints prop.
             </p>
             <p>
-              To receive an object with api to provide current view in different
-              formats, provide a callback to the onSaveImage prop.
+              To access the image at current view, provide a callback to
+              onImageActions to receive an object with actions.
             </p>
             {this.createSlider(CONTAINER_WIDTH_LABEL, containerWidth)}
             {this.createSlider(CONTAINER_HEIGHT_LABEL, containerHeight)}
@@ -149,20 +142,20 @@ class Example extends React.Component<{}, ExampleState> {
               <span>Circular:</span>
               <input
                 type="checkbox"
-                defaultChecked={circular}
+                defaultChecked={isCircular}
                 onChange={this.onCircularChanged}
               />
             </Label>
             <Label>
-              {circular ? (
+              {isCircular ? (
                 <span>Render Circular Mask:</span>
               ) : (
                 <DisabledText>Render Circular Mask:</DisabledText>
               )}
               <input
                 type="checkbox"
-                disabled={!circular}
-                defaultChecked={renderCircularMask}
+                disabled={!isCircular}
+                defaultChecked={useCircularClipWithActions}
                 onChange={this.onRenderCircularMaskChanged}
               />
             </Label>
@@ -187,11 +180,11 @@ class Example extends React.Component<{}, ExampleState> {
               zoom={zoom}
               maxZoom={maxZoom}
               useConstraints={useConstraints}
-              circular={circular}
-              renderCircularMask={renderCircularMask}
+              isCircular={isCircular}
+              useCircularClipWithActions={useCircularClipWithActions}
               onImageChange={this.onImageChange}
               onZoomChange={this.onZoomChange}
-              onSaveImage={this.onSaveImage}
+              onImageActions={this.onImageActions}
             />
           </GridColumn>
         </Grid>
@@ -201,10 +194,10 @@ class Example extends React.Component<{}, ExampleState> {
               type="range"
               min="0"
               max="100"
-              defaultValue={`${zoom * 100}`}
+              value={`${zoom * 100}`}
               step="1"
               onChange={this.onZoomSliderChange}
-              innerRef={this.onZoomSliderRef}
+              innerRef={this.onZoomSliderElement}
               style={{ width: containerWidth + margin * 2 }}
             />
           </GridColumn>
@@ -275,7 +268,6 @@ class Example extends React.Component<{}, ExampleState> {
           break;
         case MARGIN_LABEL:
           this.setState({ zoom: 0, margin: value });
-          this.setZoomSliderValue(0);
           break;
       }
     };

@@ -8,8 +8,8 @@ import {
   getFileInfo,
   getFileInfoFromSrc,
 } from '@atlaskit/media-ui';
-import { Container } from './container';
-import { Image } from './image';
+import { ImagePlacerContainer } from './container';
+import { ImagePlacerImage } from './image';
 import { Margin } from './margin';
 import { ImagePlacerWrapper, ImagePlacerErrorWrapper } from './styled';
 import {
@@ -28,7 +28,7 @@ import {
 |  | visibleBounds <----------------- this is the visible inner area, also the exported size (container minus margin)
 |  |  +------------+  |  |
 |  |  | \        / |  |  |
-|  |  | imageBounds| <--------------- this is the current scaled size of the image (this.imageSourceRect for original size)
+|  |  | imageBounds| <--------------- this is the current scaled size of the image (this.imagesourceBounds for original size)
 |  |  | /        \ |  |  |
 |  |  +------------+  |  |
 |  +------------------+  |
@@ -36,7 +36,7 @@ import {
 */
 
 /* pass onSaveImage prop function to receive an object with this API to render/return image */
-export interface ImagePlacerAPI {
+export interface ImageActions {
   toCanvas: () => HTMLCanvasElement;
   toDataURL: () => string;
   toFile: () => File;
@@ -53,12 +53,12 @@ export interface ImagePlacerProps {
   originX: number;
   originY: number;
   useConstraints: boolean;
-  circular: boolean;
-  renderCircularMask: boolean;
+  isCircular: boolean;
+  useCircularClipWithActions: boolean;
   backgroundColor: string;
   onImageChange?: (imageElement: HTMLImageElement) => void;
   onZoomChange?: (zoom: number) => void;
-  onSaveImage?: (api: ImagePlacerAPI) => void;
+  onImageActions?: (actions: ImageActions) => void;
   onRenderError?: (errorMessage: string) => JSX.Element;
 }
 
@@ -81,8 +81,8 @@ export const DEFAULT_ZOOM = 0;
 export const DEFAULT_ORIGIN_X = 0;
 export const DEFAULT_ORIGIN_Y = 0;
 export const DEFAULT_USE_CONSTRAINTS = true;
-export const DEFAULT_CIRCULAR = false;
-export const DEFAULT_RENDER_CIRCULAR_MASK = false;
+export const DEFAULT_USE_CIRCULAR = false; /* whether or not to apply a circular margin to image while positioning */
+export const DEFAULT_USE_CIRCULAR_CLIP_WITH_ACTIONS = false; /* whether or not to apply a circular clip when rendering via actions */
 export const DEFAULT_BACKGROUND_COLOR = 'transparent';
 
 export const defaultProps = {
@@ -94,20 +94,16 @@ export const defaultProps = {
   originX: DEFAULT_ORIGIN_X,
   originY: DEFAULT_ORIGIN_Y,
   useConstraints: DEFAULT_USE_CONSTRAINTS,
-  circular: DEFAULT_CIRCULAR,
-  renderCircularMask: DEFAULT_RENDER_CIRCULAR_MASK,
+  isCircular: DEFAULT_USE_CIRCULAR,
+  useCircularClipWithActions: DEFAULT_USE_CIRCULAR_CLIP_WITH_ACTIONS,
   backgroundColor: DEFAULT_BACKGROUND_COLOR,
 };
-
-export function radians(deg: number) {
-  return deg * (Math.PI / 180);
-}
 
 export class ImagePlacer extends React.Component<
   ImagePlacerProps,
   ImagePlacerState
 > {
-  imageSourceRect = new Rectangle(
+  imagesourceBounds = new Rectangle(
     0,
     0,
   ); /* original size of image (un-scaled) */
@@ -165,10 +161,13 @@ export class ImagePlacer extends React.Component<
   }
 
   /* a coordinate mapping from visibleBounds to local rect of image */
-  get sourceRect(): Bounds {
+  get sourceBounds(): Bounds {
     const { containerWidth, containerHeight } = this.props;
-    const { x: originX, y: originY } = this.transformVisibleToImageCoords(0, 0);
-    const { x: cornerX, y: cornerY } = this.transformVisibleToImageCoords(
+    const { x: originX, y: originY } = this.transformVisibleBoundsToImageCoords(
+      0,
+      0,
+    );
+    const { x: cornerX, y: cornerY } = this.transformVisibleBoundsToImageCoords(
       containerWidth,
       containerHeight,
     );
@@ -176,10 +175,10 @@ export class ImagePlacer extends React.Component<
   }
 
   componentWillMount() {
-    const { onSaveImage } = this.props;
-    if (onSaveImage) {
-      /* update consumer with export methods */
-      onSaveImage({
+    const { onImageActions } = this.props;
+    if (onImageActions) {
+      /* provide actions which will return current image at current view */
+      onImageActions({
         toCanvas: this.toCanvas,
         toDataURL: this.toDataURL,
         toFile: this.toFile,
@@ -189,7 +188,7 @@ export class ImagePlacer extends React.Component<
 
   /* respond to prop changes */
   async UNSAFE_componentWillReceiveProps(nextProps: ImagePlacerProps) {
-    const { imageSourceRect, state, props, currentFile } = this;
+    const { imagesourceBounds, state, props, currentFile } = this;
     const { zoom } = state;
     const {
       useConstraints: currentUseConstraints,
@@ -232,8 +231,8 @@ export class ImagePlacer extends React.Component<
       this.setState(
         {
           zoom: 0,
-          imageWidth: imageSourceRect.width,
-          imageHeight: imageSourceRect.height,
+          imageWidth: imagesourceBounds.width,
+          imageHeight: imagesourceBounds.height,
         },
         this.update,
       );
@@ -271,7 +270,7 @@ export class ImagePlacer extends React.Component<
     );
     if (previewInfo) {
       const { width, height } = previewInfo;
-      this.imageSourceRect = new Rectangle(width, height);
+      this.imagesourceBounds = new Rectangle(width, height);
       this.setFile(previewInfo.fileInfo);
     } else {
       this.setState({ errorMessage: 'Cannot load image' });
@@ -301,7 +300,7 @@ export class ImagePlacer extends React.Component<
   /* reset view  */
   reset() {
     const {
-      imageSourceRect: { width: imageWidth, height: imageHeight },
+      imagesourceBounds: { width: imageWidth, height: imageHeight },
     } = this;
     this.setState({
       imageWidth,
@@ -453,18 +452,18 @@ export class ImagePlacer extends React.Component<
   }
 
   /* transformation between visibleBounds local coords to image source rect (factoring in zoom and pan) */
-  transformVisibleToImageCoords(
+  transformVisibleBoundsToImageCoords(
     visibleBoundsX: number,
     visibleBoundsY: number,
   ): Vector2 {
-    const { imageSourceRect, visibleBounds, imageBounds } = this;
+    const { imagesourceBounds, visibleBounds, imageBounds } = this;
     const offset = visibleBounds.origin.sub(imageBounds.origin);
     const rect = imageBounds.rect;
     const x = (offset.x + visibleBoundsX) / rect.width;
     const y = (offset.y + visibleBoundsY) / rect.height;
     return new Vector2(
-      imageSourceRect.width * x,
-      imageSourceRect.height * y,
+      imagesourceBounds.width * x,
+      imagesourceBounds.height * y,
     ).rounded();
   }
 
@@ -472,7 +471,7 @@ export class ImagePlacer extends React.Component<
   toCanvas = (): HTMLCanvasElement => {
     const {
       imageElement,
-      sourceRect,
+      sourceBounds,
       visibleBounds,
       imageBounds,
       containerRect,
@@ -480,19 +479,20 @@ export class ImagePlacer extends React.Component<
     } = this;
     const {
       useConstraints,
-      circular,
-      renderCircularMask,
+      useCircularClipWithActions,
       backgroundColor,
     } = props;
+    const viewInfo = {
+      containerRect,
+      imageBounds,
+      sourceBounds,
+      visibleBounds,
+    };
     return renderImageAtCurrentView(
       imageElement,
-      sourceRect,
-      visibleBounds,
-      imageBounds,
-      containerRect,
+      viewInfo,
       useConstraints,
-      circular,
-      renderCircularMask,
+      useCircularClipWithActions,
       backgroundColor,
     );
   };
@@ -514,7 +514,7 @@ export class ImagePlacer extends React.Component<
     height: number,
   ) => {
     const { onImageChange } = this.props;
-    this.imageSourceRect = new Rectangle(width, height);
+    this.imagesourceBounds = new Rectangle(width, height);
     this.imageElement = imageElement;
     this.setState({ imageWidth: width, imageHeight: height }, this.update);
     if (onImageChange) {
@@ -539,8 +539,8 @@ export class ImagePlacer extends React.Component<
   onDragMove = (delta: Vector2) => {
     const { dragOrigin } = this.state;
     if (dragOrigin) {
-      let newOriginX = dragOrigin.x + delta.x;
-      let newOriginY = dragOrigin.y + delta.y;
+      const newOriginX = dragOrigin.x + delta.x;
+      const newOriginY = dragOrigin.y + delta.y;
       this.setState(
         {
           originX: newOriginX,
@@ -566,7 +566,7 @@ export class ImagePlacer extends React.Component<
       containerWidth,
       containerHeight,
       margin,
-      circular,
+      isCircular,
       onRenderError,
     } = this.props;
     const { errorMessage, src } = this.state;
@@ -574,7 +574,7 @@ export class ImagePlacer extends React.Component<
 
     return (
       <ImagePlacerWrapper backgroundColor={backgroundColor}>
-        <Container
+        <ImagePlacerContainer
           width={containerWidth}
           height={containerHeight}
           margin={margin}
@@ -588,7 +588,7 @@ export class ImagePlacer extends React.Component<
             </ImagePlacerErrorWrapper>
           ) : (
             <div>
-              <Image
+              <ImagePlacerImage
                 src={src}
                 x={imageBounds.x}
                 y={imageBounds.y}
@@ -600,12 +600,12 @@ export class ImagePlacer extends React.Component<
               <Margin
                 width={containerWidth}
                 height={containerHeight}
-                circular={circular}
+                circular={isCircular}
                 size={margin}
               />
             </div>
           )}
-        </Container>
+        </ImagePlacerContainer>
       </ImagePlacerWrapper>
     );
   }

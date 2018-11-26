@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ImageWrapper } from './styled';
 import { isImageRemote } from '@atlaskit/media-ui';
 
-export interface ImageProps {
+export interface ImagePlacerImageProps {
   src?: string;
   x: number;
   y: number;
@@ -21,7 +21,10 @@ export const IMAGE_ERRORS = {
   LOAD_FAIL: 'Image failed to load',
 };
 
-export class Image extends React.Component<ImageProps, {}> {
+export class ImagePlacerImage extends React.Component<
+  ImagePlacerImageProps,
+  {}
+> {
   componentWillMount() {
     const { src, onError } = this.props;
     if (src !== undefined) {
