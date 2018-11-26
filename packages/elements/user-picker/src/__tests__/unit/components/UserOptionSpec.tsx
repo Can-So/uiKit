@@ -42,13 +42,15 @@ describe('Option', () => {
         />
       ),
       primaryText: [
-        <TextWrapper color={colors.N800}>
+        <TextWrapper key="name" color={colors.N800}>
           <HighlightText>Jace Beleren</HighlightText>
         </TextWrapper>,
-        <> </>,
-        <TextWrapper color={colors.N200}>
-          (<HighlightText>jbeleren</HighlightText>)
-        </TextWrapper>,
+        <React.Fragment key="publicName">
+          {' '}
+          <TextWrapper color={colors.N200}>
+            (<HighlightText>jbeleren</HighlightText>)
+          </TextWrapper>
+        </React.Fragment>,
       ],
       secondaryText: <TextWrapper color={colors.N200}>Teammate</TextWrapper>,
     });
@@ -68,13 +70,15 @@ describe('Option', () => {
         />
       ),
       primaryText: [
-        <TextWrapper color={colors.N0}>
+        <TextWrapper key="name" color={colors.N0}>
           <HighlightText>Jace Beleren</HighlightText>
         </TextWrapper>,
-        <> </>,
-        <TextWrapper color={colors.N50}>
-          (<HighlightText>jbeleren</HighlightText>)
-        </TextWrapper>,
+        <React.Fragment key="publicName">
+          {' '}
+          <TextWrapper color={colors.N50}>
+            (<HighlightText>jbeleren</HighlightText>)
+          </TextWrapper>
+        </React.Fragment>,
       ],
     });
   });
@@ -91,19 +95,21 @@ describe('Option', () => {
     const avatarItem = component.find(AvatarItem);
     expect(avatarItem.props()).toMatchObject({
       primaryText: [
-        <TextWrapper color={colors.N800}>
+        <TextWrapper key="name" color={colors.N800}>
           <HighlightText highlights={[{ start: 0, end: 2 }]}>
             Jace Beleren
           </HighlightText>
         </TextWrapper>,
-        <> </>,
-        <TextWrapper color={colors.N200}>
-          (
-          <HighlightText highlights={[{ start: 2, end: 4 }]}>
-            jbeleren
-          </HighlightText>
-          )
-        </TextWrapper>,
+        <React.Fragment key="publicName">
+          {' '}
+          <TextWrapper color={colors.N200}>
+            (
+            <HighlightText highlights={[{ start: 2, end: 4 }]}>
+              jbeleren
+            </HighlightText>
+            )
+          </TextWrapper>
+        </React.Fragment>,
       ],
     });
   });
@@ -120,12 +126,39 @@ describe('Option', () => {
     const component = shallowOption({ user: userWithoutName });
     const avatarItem = component.find(AvatarItem);
     expect(avatarItem.prop('primaryText')).toEqual([
-      <TextWrapper color={colors.N800}>
+      <TextWrapper key="name" color={colors.N800}>
         <HighlightText highlights={[{ start: 2, end: 4 }]}>
           jbeleren
         </HighlightText>
       </TextWrapper>,
     ]);
-    expect(avatarItem.prop('secondaryText')).toBeUndefined();
+  });
+
+  it('should show only name', () => {
+    const userWithSamePublicName = {
+      ...user,
+      publicName: user.name,
+    };
+    const component = shallowOption({ user: userWithSamePublicName });
+    const avatarItem = component.find(AvatarItem);
+    expect(avatarItem.prop('primaryText')).toEqual([
+      <TextWrapper key="name" color={colors.N800}>
+        <HighlightText>Jace Beleren</HighlightText>
+      </TextWrapper>,
+    ]);
+  });
+
+  it('should ignore blank spaces while comparing', () => {
+    const userWithSamePublicName = {
+      ...user,
+      publicName: `  ${user.name}  `,
+    };
+    const component = shallowOption({ user: userWithSamePublicName });
+    const avatarItem = component.find(AvatarItem);
+    expect(avatarItem.prop('primaryText')).toEqual([
+      <TextWrapper key="name" color={colors.N800}>
+        <HighlightText>Jace Beleren</HighlightText>
+      </TextWrapper>,
+    ]);
   });
 });

@@ -1,6 +1,6 @@
 import memoizeOne from 'memoize-one';
+import { ReactChild, ReactElement } from 'react';
 import { Promisable, User, UserOption, UserValue } from '../types';
-import { ReactElement, ReactChild } from 'react';
 
 export const userToOption = (user: User) => ({
   label: user.name,
@@ -68,3 +68,6 @@ export const isChildInput = (child: ReactChild): child is ReactElement<any> =>
 export const isSingleValue = (
   value?: UserOption | UserOption[],
 ): value is UserOption => !!value && !Array.isArray(value);
+
+export const hasValue = (value?: string): value is string =>
+  !!value && value.trim().length > 0;

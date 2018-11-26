@@ -10,7 +10,7 @@ describe('SingleValue', () => {
     user: {
       id: 'abc-123',
       name: 'Jace Beleren',
-      displayName: 'jbeleren',
+      publicName: 'jbeleren',
       avatarUrl: 'http://avatars.atlassian.com/jace.png',
       byline: 'teammate',
     },

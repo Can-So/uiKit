@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { User } from '../types';
 import { HighlightText } from './HighlightText';
 import { SizeableAvatar } from './SizeableAvatar';
+import { hasValue } from './utils';
 
 const AvatarComponent = styled.div`
   &,
@@ -52,22 +53,27 @@ export class UserOption extends React.PureComponent<UserOptionProps> {
     } = this.props;
 
     const result = [
-      <TextWrapper color={this.props.isSelected ? colors.N0 : colors.N800}>
+      <TextWrapper
+        key="name"
+        color={this.props.isSelected ? colors.N0 : colors.N800}
+      >
         <HighlightText highlights={highlight && highlight.name}>
           {name}
         </HighlightText>
       </TextWrapper>,
     ];
-    if (publicName && name !== publicName) {
-      result.push(<> </>);
+    if (hasValue(publicName) && name.trim() !== publicName.trim()) {
       result.push(
-        <TextWrapper color={this.props.isSelected ? colors.N50 : colors.N200}>
-          (
-          <HighlightText highlights={highlight && highlight.publicName}>
-            {publicName}
-          </HighlightText>
-          )
-        </TextWrapper>,
+        <React.Fragment key="publicName">
+          {' '}
+          <TextWrapper color={this.props.isSelected ? colors.N50 : colors.N200}>
+            (
+            <HighlightText highlights={highlight && highlight.publicName}>
+              {publicName}
+            </HighlightText>
+            )
+          </TextWrapper>
+        </React.Fragment>,
       );
     }
     return result;
