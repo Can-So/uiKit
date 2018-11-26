@@ -51,19 +51,20 @@ export default {
   'fabric.media.try_downloading_file':
     'Încercaţi să descărcaţi fişierul pentru a-l vizualiza.',
   'fabric.media.webgl_warning_description':
-    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
-  'fabric.media.unable_to_annotate_image':
-    "You're unable to annotate this image",
-  'fabric.media.learn_more': 'Learn More',
-  'fabric.media.accounts': 'Accounts',
-  'fabric.media.actions': 'Actions',
-  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+    'Browserul nu acceptă WebGL. Utilizați un browser care acceptă WebGL pentru adnotarea imaginilor.',
+  'fabric.media.unable_to_annotate_image': 'Nu s-a putut adnota imaginea',
+  'fabric.media.learn_more': 'Aflați mai multe',
+  'fabric.media.accounts': 'Conturi',
+  'fabric.media.actions': 'Acțiuni',
+  'fabric.media.error_hint_retry': 'Încercați din nou.',
   'fabric.media.error_hint_critical':
-    'If the problem keeps happening contact support.',
-  'fabric.media.close': 'Close',
-  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
-  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
-  'fabric.media.annotate': 'Annotate',
-  'fabric.media.drop_your_files_here': 'Drop your files here',
-  'fabric.media.share_files_instantly': "We'll share them instantly",
+    'Dacă problema continuă să apară, contactați suportul tehnic.',
+  'fabric.media.close': 'Închidere',
+  'fabric.media.could_not_load_editor': 'Ups! Nu am putut încărca editorul',
+  'fabric.media.could_not_save_image': 'Ups! Nu am putut salva imaginea',
+  'fabric.media.annotate': 'Adnotare',
+  'fabric.media.drop_your_files_here': 'Eliberați fișierele aici',
+  'fabric.media.share_files_instantly': 'Le vom distribui instant',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} few{Insert {0} files} other{Insert {0} files}}',
 };

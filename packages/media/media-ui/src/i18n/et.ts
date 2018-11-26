@@ -47,19 +47,21 @@ export default {
   'fabric.media.try_downloading_file':
     'Faili vaatamiseks proovi see alla laadida.',
   'fabric.media.webgl_warning_description':
-    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+    'Veebilehitseja ei toeta WebGLi. Piltidele märke lisamiseks kasuta WebGL toetavat veebilehitsejat.',
   'fabric.media.unable_to_annotate_image':
-    "You're unable to annotate this image",
-  'fabric.media.learn_more': 'Learn More',
-  'fabric.media.accounts': 'Accounts',
-  'fabric.media.actions': 'Actions',
-  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+    'Sa ei saa sellele pildile lisada märke',
+  'fabric.media.learn_more': 'Lisateave',
+  'fabric.media.accounts': 'Kontod',
+  'fabric.media.actions': 'Toimingud',
+  'fabric.media.error_hint_retry': 'Proovi uuesti ja anname uue võimaluse.',
   'fabric.media.error_hint_critical':
-    'If the problem keeps happening contact support.',
-  'fabric.media.close': 'Close',
-  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
-  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
-  'fabric.media.annotate': 'Annotate',
-  'fabric.media.drop_your_files_here': 'Drop your files here',
-  'fabric.media.share_files_instantly': "We'll share them instantly",
+    'Probleemi kordumisel võta ühendust klienditoega.',
+  'fabric.media.close': 'Sulge',
+  'fabric.media.could_not_load_editor': 'Ups! Muutja laadimine nurjus',
+  'fabric.media.could_not_save_image': 'Ups! Pildi salvestamine nurjus',
+  'fabric.media.annotate': 'Lisa märge',
+  'fabric.media.drop_your_files_here': 'Aseta failid siia',
+  'fabric.media.share_files_instantly': 'Jagame seda kohe',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} other{Insert {0} files}}',
 };

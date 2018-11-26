@@ -62,4 +62,6 @@ export default {
   'fabric.media.annotate': 'Annotate',
   'fabric.media.drop_your_files_here': 'Drop your files here',
   'fabric.media.share_files_instantly': "We'll share them instantly",
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} other{Insert {0} files}}',
 };

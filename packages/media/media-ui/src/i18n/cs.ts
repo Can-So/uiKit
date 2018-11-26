@@ -50,19 +50,22 @@ export default {
   'fabric.media.try_downloading_file':
     'Pokud chcete soubor zobrazit, zkuste ho stáhnout.',
   'fabric.media.webgl_warning_description':
-    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+    'Váš prohlížeč nepodporuje knihovnu WebGL. Chcete-li přidávat k obrázkům poznámky, použijte prohlížeč, který ji podporuje.',
   'fabric.media.unable_to_annotate_image':
-    "You're unable to annotate this image",
-  'fabric.media.learn_more': 'Learn More',
-  'fabric.media.accounts': 'Accounts',
-  'fabric.media.actions': 'Actions',
-  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+    'K tomuto obrázku nemůžete přidávat poznámky.',
+  'fabric.media.learn_more': 'Další informace',
+  'fabric.media.accounts': 'Účty',
+  'fabric.media.actions': 'Akce',
+  'fabric.media.error_hint_retry':
+    'Zkuste to znovu a my se o to také pokusíme.',
   'fabric.media.error_hint_critical':
-    'If the problem keeps happening contact support.',
-  'fabric.media.close': 'Close',
-  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
-  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
-  'fabric.media.annotate': 'Annotate',
-  'fabric.media.drop_your_files_here': 'Drop your files here',
-  'fabric.media.share_files_instantly': "We'll share them instantly",
+    'Pokud problém přetrvává, kontaktujte podporu.',
+  'fabric.media.close': 'Zavřít',
+  'fabric.media.could_not_load_editor': 'Editor se nepodařilo načíst.',
+  'fabric.media.could_not_save_image': 'Obrázek se nepodařilo uložit.',
+  'fabric.media.annotate': 'Přidat poznámku',
+  'fabric.media.drop_your_files_here': 'Přetáhněte své soubory sem.',
+  'fabric.media.share_files_instantly': 'Okamžitě je nasdílíme.',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} few{Insert {0} files} many{Insert {0} files} other{Insert {0} files}}',
 };

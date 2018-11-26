@@ -50,19 +50,22 @@ export default {
   'fabric.media.try_downloading_file':
     'Kokeile ladata tiedosto, jotta voit tarkastella sitä.',
   'fabric.media.webgl_warning_description':
-    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+    'Selaimesi ei tue WebGL:ää. Käytä WebGL:ää tukevaa selainta, jos haluat tehdä merkintöjä kuviin.',
   'fabric.media.unable_to_annotate_image':
-    "You're unable to annotate this image",
-  'fabric.media.learn_more': 'Learn More',
-  'fabric.media.accounts': 'Accounts',
-  'fabric.media.actions': 'Actions',
-  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+    'Et voi tehdä merkintöjä tähän kuvaan',
+  'fabric.media.learn_more': 'Lue lisää   ',
+  'fabric.media.accounts': 'Tilit',
+  'fabric.media.actions': 'Toiminnot',
+  'fabric.media.error_hint_retry':
+    'Yritä uudelleen, ja mekin kokeilemme vielä kerran.',
   'fabric.media.error_hint_critical':
-    'If the problem keeps happening contact support.',
-  'fabric.media.close': 'Close',
-  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
-  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
-  'fabric.media.annotate': 'Annotate',
-  'fabric.media.drop_your_files_here': 'Drop your files here',
-  'fabric.media.share_files_instantly': "We'll share them instantly",
+    'Jos ongelma toistuu jatkuvasti, ota yhteyttä tukeen.',
+  'fabric.media.close': 'Sulje',
+  'fabric.media.could_not_load_editor': 'Voi ei! Muokkainta ei voitu ladata',
+  'fabric.media.could_not_save_image': 'Voi ei! Kuvaa ei voitu tallentaa',
+  'fabric.media.annotate': 'Tee merkintöjä',
+  'fabric.media.drop_your_files_here': 'Pudota tiedostosi tänne',
+  'fabric.media.share_files_instantly': 'Jaamme ne heti',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} other{Insert {0} files}}',
 };

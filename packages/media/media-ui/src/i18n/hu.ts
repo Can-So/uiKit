@@ -52,19 +52,22 @@ export default {
   'fabric.media.try_downloading_file':
     'A megtekintéshez próbálja meg letölteni a fájlt.',
   'fabric.media.webgl_warning_description':
-    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+    'A böngészője nem támogatja a WebGL funkciót. A képek jegyzetekkel való ellátásához használjon a WebGL funkcióval kompatibilis böngészőt.',
   'fabric.media.unable_to_annotate_image':
-    "You're unable to annotate this image",
-  'fabric.media.learn_more': 'Learn More',
-  'fabric.media.accounts': 'Accounts',
-  'fabric.media.actions': 'Actions',
-  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+    'Nem sikerült jegyzetet fűznie a képhez.',
+  'fabric.media.learn_more': 'További információ',
+  'fabric.media.accounts': 'Fiókok',
+  'fabric.media.actions': 'Műveletek',
+  'fabric.media.error_hint_retry':
+    'Próbálja meg újból, és teszünk még egy kísérletet.',
   'fabric.media.error_hint_critical':
-    'If the problem keeps happening contact support.',
-  'fabric.media.close': 'Close',
-  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
-  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
-  'fabric.media.annotate': 'Annotate',
-  'fabric.media.drop_your_files_here': 'Drop your files here',
-  'fabric.media.share_files_instantly': "We'll share them instantly",
+    'Ha a probléma nem szűnik meg, lépjen kapcsolatba az ügyfélszolgálattal.',
+  'fabric.media.close': 'Bezárás',
+  'fabric.media.could_not_load_editor': 'Nem sikerült betölteni a szerkesztőt.',
+  'fabric.media.could_not_save_image': 'Nem sikerült betölteni a képet.',
+  'fabric.media.annotate': 'Jegyzet készítése',
+  'fabric.media.drop_your_files_here': 'Húzza ide a fájlokat.',
+  'fabric.media.share_files_instantly': 'Azonnal megosztjuk őket.',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} other{Insert {0} files}}',
 };

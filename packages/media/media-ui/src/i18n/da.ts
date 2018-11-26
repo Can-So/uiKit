@@ -48,19 +48,21 @@ export default {
   'fabric.media.try_downloading_file':
     'Prøv at downloade filen for at vise den.',
   'fabric.media.webgl_warning_description':
-    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
-  'fabric.media.unable_to_annotate_image':
-    "You're unable to annotate this image",
-  'fabric.media.learn_more': 'Learn More',
-  'fabric.media.accounts': 'Accounts',
-  'fabric.media.actions': 'Actions',
-  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+    'Din browser understøtter ikke WebGL. Brug en WebGL-kompatibel browser for at annotere billeder.',
+  'fabric.media.unable_to_annotate_image': 'Du kan ikke annotere dette billede',
+  'fabric.media.learn_more': 'Få mere at vide',
+  'fabric.media.accounts': 'Konti',
+  'fabric.media.actions': 'Handlinger',
+  'fabric.media.error_hint_retry':
+    'Prøv igen, så giver vi det endnu et forsøg.',
   'fabric.media.error_hint_critical':
-    'If the problem keeps happening contact support.',
-  'fabric.media.close': 'Close',
-  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
-  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
-  'fabric.media.annotate': 'Annotate',
-  'fabric.media.drop_your_files_here': 'Drop your files here',
-  'fabric.media.share_files_instantly': "We'll share them instantly",
+    'Hvis problemet fortsat opstår, skal du kontakte support.',
+  'fabric.media.close': 'Luk',
+  'fabric.media.could_not_load_editor': 'Ups! Vi kunne ikke indlæse editoren',
+  'fabric.media.could_not_save_image': 'Ups! Vi kunne ikke gemme billedet',
+  'fabric.media.annotate': 'Annotér',
+  'fabric.media.drop_your_files_here': 'Træk dine filer hertil',
+  'fabric.media.share_files_instantly': 'Vi deler dem med det samme',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} other{Insert {0} files}}',
 };

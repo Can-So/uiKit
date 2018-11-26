@@ -50,19 +50,22 @@ export default {
   'fabric.media.give_feedback': 'Gi en tilbakemelding',
   'fabric.media.try_downloading_file': 'Prøv å laste ned filen for å vise den.',
   'fabric.media.webgl_warning_description':
-    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+    'Nettleserdin støtter ikke WebGL. Bruk en WebGL-aktivert nettleser til å kommentere bilder.',
   'fabric.media.unable_to_annotate_image':
-    "You're unable to annotate this image",
-  'fabric.media.learn_more': 'Learn More',
-  'fabric.media.accounts': 'Accounts',
-  'fabric.media.actions': 'Actions',
-  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+    'Du kan ikke kommentere dette bildet',
+  'fabric.media.learn_more': 'Les mer',
+  'fabric.media.accounts': 'Kontoer',
+  'fabric.media.actions': 'Tiltak',
+  'fabric.media.error_hint_retry': 'Vent litt, så prøver vi igjen.',
   'fabric.media.error_hint_critical':
-    'If the problem keeps happening contact support.',
-  'fabric.media.close': 'Close',
-  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
-  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
-  'fabric.media.annotate': 'Annotate',
-  'fabric.media.drop_your_files_here': 'Drop your files here',
-  'fabric.media.share_files_instantly': "We'll share them instantly",
+    'Kontakt brukerstøtte hvis problemet ikke forsvinner.',
+  'fabric.media.close': 'Lukk',
+  'fabric.media.could_not_load_editor':
+    'Beklager. Vi kunne ikke laste opp redigeringsprogrammet',
+  'fabric.media.could_not_save_image': 'Beklager. Vi kunne ikke lagre bildet',
+  'fabric.media.annotate': 'Kommenter',
+  'fabric.media.drop_your_files_here': 'Slipp bildene her',
+  'fabric.media.share_files_instantly': 'Vi deler dem med det samme',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} other{Insert {0} files}}',
 };

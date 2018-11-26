@@ -53,19 +53,23 @@ export default {
   'fabric.media.try_downloading_file':
     'Laden Sie die Datei herunter, um sie anzusehen.',
   'fabric.media.webgl_warning_description':
-    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+    'Ihr Browser unterstützt WebGL nicht. Verwenden Sie zum Kommentieren von Bildern einen WebGL-fähigen Browser.',
   'fabric.media.unable_to_annotate_image':
-    "You're unable to annotate this image",
-  'fabric.media.learn_more': 'Learn More',
+    'Sie können dieses Bild nicht kommentieren.',
+  'fabric.media.learn_more': 'Mehr erfahren',
   'fabric.media.accounts': 'Accounts',
-  'fabric.media.actions': 'Actions',
-  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+  'fabric.media.actions': 'Aktionen',
+  'fabric.media.error_hint_retry': 'Versuchen Sie es erneut.',
   'fabric.media.error_hint_critical':
-    'If the problem keeps happening contact support.',
-  'fabric.media.close': 'Close',
-  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
-  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
-  'fabric.media.annotate': 'Annotate',
-  'fabric.media.drop_your_files_here': 'Drop your files here',
-  'fabric.media.share_files_instantly': "We'll share them instantly",
+    'Sollte das Problem bestehen bleiben, wenden Sie sich an den Support.',
+  'fabric.media.close': 'Schließen',
+  'fabric.media.could_not_load_editor':
+    'Hoppla, der Editor konnte nicht abgerufen werden.',
+  'fabric.media.could_not_save_image':
+    'Hoppla, das Bild konnte nicht gespeichert werden.',
+  'fabric.media.annotate': 'Kommentieren',
+  'fabric.media.drop_your_files_here': 'Dateien hier ablegen',
+  'fabric.media.share_files_instantly': 'Wir teilen sie sofort.',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} other{Insert {0} files}}',
 };

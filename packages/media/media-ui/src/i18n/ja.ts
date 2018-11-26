@@ -51,19 +51,20 @@ export default {
   'fabric.media.try_downloading_file':
     'ファイルを表示するにはダウンロードしてください。',
   'fabric.media.webgl_warning_description':
-    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+    'お使いのブラウザはWebGLに対応していません。画像にコメントをつけるにはWebGL対応ブラウザをご利用ください。',
   'fabric.media.unable_to_annotate_image':
-    "You're unable to annotate this image",
-  'fabric.media.learn_more': 'Learn More',
-  'fabric.media.accounts': 'Accounts',
-  'fabric.media.actions': 'Actions',
-  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+    'この画像にコメントをつけられませんでした',
+  'fabric.media.learn_more': 'さらに詳しく',
+  'fabric.media.accounts': 'アカウント',
+  'fabric.media.actions': 'アクション',
+  'fabric.media.error_hint_retry': '改めてお試しください。',
   'fabric.media.error_hint_critical':
-    'If the problem keeps happening contact support.',
-  'fabric.media.close': 'Close',
-  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
-  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
-  'fabric.media.annotate': 'Annotate',
-  'fabric.media.drop_your_files_here': 'Drop your files here',
-  'fabric.media.share_files_instantly': "We'll share them instantly",
+    '問題が継続して起きる場合はサポートにご連絡ください。',
+  'fabric.media.close': '閉じる',
+  'fabric.media.could_not_load_editor': 'エディターを読み込めませんでした',
+  'fabric.media.could_not_save_image': '画像を保存できませんでした',
+  'fabric.media.annotate': 'コメント',
+  'fabric.media.drop_your_files_here': 'ファイルをここにドロップ',
+  'fabric.media.share_files_instantly': 'すぐに公開されます',
+  'fabric.media.insert_files': '{0, plural, other{Insert a file}}',
 };

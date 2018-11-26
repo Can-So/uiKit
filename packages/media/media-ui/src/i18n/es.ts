@@ -52,19 +52,23 @@ export default {
   'fabric.media.try_downloading_file':
     'Prueba a descargar el archivo para verlo.',
   'fabric.media.webgl_warning_description':
-    'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
-  'fabric.media.unable_to_annotate_image':
-    "You're unable to annotate this image",
-  'fabric.media.learn_more': 'Learn More',
-  'fabric.media.accounts': 'Accounts',
-  'fabric.media.actions': 'Actions',
-  'fabric.media.error_hint_retry': "Try again and we'll give it another shot.",
+    'Tu navegador no admite WebGL. Usa un navegador compatible con WebGL para anotar imágenes.',
+  'fabric.media.unable_to_annotate_image': 'No puedes anotar esta imagen',
+  'fabric.media.learn_more': 'Más información',
+  'fabric.media.accounts': 'Cuentas',
+  'fabric.media.actions': 'Acciones',
+  'fabric.media.error_hint_retry':
+    'Vuelve a probar y lo intentaremos otra vez.',
   'fabric.media.error_hint_critical':
-    'If the problem keeps happening contact support.',
-  'fabric.media.close': 'Close',
-  'fabric.media.could_not_load_editor': 'Ouch! We could not load the editor',
-  'fabric.media.could_not_save_image': 'Ouch! We could not save the image',
-  'fabric.media.annotate': 'Annotate',
-  'fabric.media.drop_your_files_here': 'Drop your files here',
-  'fabric.media.share_files_instantly': "We'll share them instantly",
+    'Si el problema continúa, ponte en contacto con la asistencia.',
+  'fabric.media.close': 'Cerrar',
+  'fabric.media.could_not_load_editor':
+    '¡Qué pena! No hemos podido cargar el editor',
+  'fabric.media.could_not_save_image':
+    '¡Qué pena! No hemos podido guardar la imagen',
+  'fabric.media.annotate': 'Anotar',
+  'fabric.media.drop_your_files_here': 'Arrastra tus archivos hasta aquí',
+  'fabric.media.share_files_instantly': 'Los compartiremos al instante',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} other{Insert {0} files}}',
 };
