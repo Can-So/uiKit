@@ -18,7 +18,9 @@ files.forEach(file => {
   const fileContent = fs.readFileSync(file, 'utf-8');
   fs.writeFileSync(
     `${PACKAGE_ROOT}/${fileName}`,
-    fileContent.replace(replaceFrom, "'./dist/esm/"),
+    `// @flow
+
+${fileContent.replace(replaceFrom, "'./dist/esm/")}`,
   );
   fs.unlinkSync(file);
 });
