@@ -1,6 +1,6 @@
 /* tslint:disable:no-console */
 import * as React from 'react';
-import { Component } from 'react';
+import { Component, RefObject } from 'react';
 import {
   createUploadContext,
   defaultMediaPickerCollectionName,
@@ -19,7 +19,7 @@ export interface DropzoneWrapperState {
 }
 
 class DropzoneWrapper extends Component<{}, DropzoneWrapperState> {
-  dropzoneContainer?: HTMLDivElement;
+  dropzoneRef: RefObject<HTMLDivElement>;
 
   static contextTypes = {
     intl: intlShape,
@@ -29,16 +29,26 @@ class DropzoneWrapper extends Component<{}, DropzoneWrapperState> {
     isActive: true,
   };
 
-  componentWillReceiveProps(_: any, nextContext: any) {
+  constructor(props: {}) {
+    super(props);
+
+    this.dropzoneRef = React.createRef();
+  }
+
+  UNSAFE_componentWillReceiveProps(_: any, nextContext: any) {
     if (this.context.intl !== nextContext.intl) {
       this.createMediaPicker(nextContext);
     }
   }
 
   createMediaPicker(reactContext: any) {
+    if (!this.dropzoneRef.current) {
+      return;
+    }
+
     const context = createUploadContext();
     const dropzone = MediaPicker('dropzone', context, {
-      container: this.dropzoneContainer,
+      container: this.dropzoneRef.current,
       uploadParams: {
         collection: defaultMediaPickerCollectionName,
       },
@@ -48,9 +58,7 @@ class DropzoneWrapper extends Component<{}, DropzoneWrapperState> {
     dropzone.activate();
   }
 
-  saveDropzoneContainer = (element: HTMLDivElement) => {
-    this.dropzoneContainer = element;
-
+  componentDidMount = () => {
     this.createMediaPicker(this.context);
   };
 
@@ -60,10 +68,7 @@ class DropzoneWrapper extends Component<{}, DropzoneWrapperState> {
     return (
       <PopupContainer>
         <DropzoneContentWrapper>
-          <DropzoneContainer
-            isActive={isActive}
-            innerRef={this.saveDropzoneContainer}
-          />
+          <DropzoneContainer isActive={isActive} innerRef={this.dropzoneRef} />
         </DropzoneContentWrapper>
       </PopupContainer>
     );
