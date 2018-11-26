@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 4.0.5
+- [patch] [21bc705](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/21bc705):
+
+  - Fixing flowtype exports on @atlaskit/navigation-next entry points
+
 ## 4.0.4
 - [patch] [abd3a39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abd3a39):
 
