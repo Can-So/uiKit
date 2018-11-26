@@ -1,0 +1,1 @@
+- Replace react-beautiful-dnd-next dependency with react-beautiful-dnd@10.0.2

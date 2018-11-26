@@ -1,0 +1,1 @@
+- Bump react-beautiful-dnd dependency to v10.0.2
