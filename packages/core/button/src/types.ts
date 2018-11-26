@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 
@@ -26,7 +25,7 @@ export type ButtonProps = {
   /** Add a classname to the button. */
   className?: string;
   /** A custom component to use instead of the default button. */
-  component?: React.ComponentType<Partial<DerivedButtonProps>>;
+  component?: React.ComponentType;
   /** Name property of a linked form that the button submits when clicked. */
   form?: string;
   /** Provides a url for buttons being used as a link. */

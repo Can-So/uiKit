@@ -85,7 +85,7 @@ export const defaultProps: Pick<
 };
 
 export class NonDefaultedButton extends React.Component<
-  ButtonProps & WithAnalyticsEventProps,
+  ButtonProps,
   ButtonState
 > {
   button: HTMLElement;
