@@ -208,4 +208,80 @@ export const messages = defineMessages({
     defaultMessage: 'Try downloading the file to view it.',
     description: 'We show this message to allow users to download a file',
   },
+  webgl_warning_description: {
+    id: 'fabric.media.webgl_warning_description',
+    defaultMessage:
+      'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+    description:
+      'We show this error message when the browser doesnt support this feature',
+  },
+  unable_to_annotate_image: {
+    id: 'fabric.media.unable_to_annotate_image',
+    defaultMessage: "You're unable to annotate this image",
+    description:
+      'If there is an error trying to annotate an image we show this',
+  },
+  learn_more: {
+    id: 'fabric.media.learn_more',
+    defaultMessage: 'Learn More',
+    description: '',
+  },
+  accounts: {
+    id: 'fabric.media.accounts',
+    defaultMessage: 'Accounts',
+    description: '',
+  },
+  actions: {
+    id: 'fabric.media.actions',
+    defaultMessage: 'Actions',
+    description: '',
+  },
+  error_hint_retry: {
+    id: 'fabric.media.error_hint_retry',
+    defaultMessage: "Try again and we'll give it another shot.",
+    description: 'Generic message that we show if an action failed',
+  },
+  error_hint_critical: {
+    id: 'fabric.media.error_hint_critical',
+    defaultMessage: 'If the problem keeps happening contact support.',
+    description:
+      'We show this error message if we cant recover from the action',
+  },
+  close: {
+    id: 'fabric.media.close',
+    defaultMessage: 'Close',
+    description: '',
+  },
+  could_not_load_editor: {
+    id: 'fabric.media.could_not_load_editor',
+    defaultMessage: 'Ouch! We could not load the editor',
+    description: 'Error message to communicate that we cant load the editor',
+  },
+  could_not_save_image: {
+    id: 'fabric.media.could_not_save_image',
+    defaultMessage: 'Ouch! We could not save the image',
+    description: 'Error message to communicate that we cant save an image',
+  },
+  annotate: {
+    id: 'fabric.media.annotate',
+    defaultMessage: 'Annotate',
+    description: '',
+  },
+  drop_your_files_here: {
+    id: 'fabric.media.drop_your_files_here',
+    defaultMessage: 'Drop your files here',
+    description:
+      'Info message that we show to indicate that the user can drag and drop files',
+  },
+  share_files_instantly: {
+    id: 'fabric.media.share_files_instantly',
+    defaultMessage: "We'll share them instantly",
+    description:
+      'It means that we will upload the files you drag and drop automatically',
+  },
+  insert_files: {
+    id: 'fabric.media.insert_files',
+    defaultMessage: 'Insert {0, plural, one {a file} other {{0} files}}',
+    description: 'Showed when the user selects 1 or more files to insert',
+  },
 });

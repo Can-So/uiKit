@@ -1,13 +1,17 @@
 import { Context } from '@atlaskit/media-core';
-
+import { IntlProvider, InjectedIntl } from 'react-intl';
 import { LocalUploadComponent, LocalUploadConfig } from '../localUpload';
 import { whenDomReady } from '../../util/documentReady';
 import dropzoneUI from './dropzoneUI';
 import { UploadEventPayloadMap } from '../..';
 
+export interface DropzoneReactContext {
+  intl?: InjectedIntl;
+}
 export interface DropzoneConfig extends LocalUploadConfig {
   container?: HTMLElement;
   headless?: boolean;
+  proxyReactContext?: DropzoneReactContext;
 }
 
 export interface DropzoneConstructor {
@@ -37,13 +41,15 @@ export class Dropzone extends LocalUploadComponent<
   private instance?: HTMLElement;
   private headless: boolean;
   private uiActive: boolean;
+  private proxyReactContext?: DropzoneReactContext;
 
   constructor(context: Context, config: DropzoneConfig = { uploadParams: {} }) {
     super(context, config);
-    const { container, headless } = config;
+    const { container, headless, proxyReactContext } = config;
     this.container = container || document.body;
     this.headless = headless || false;
     this.uiActive = false;
+    this.proxyReactContext = proxyReactContext;
   }
 
   public activate(): Promise<void> {
@@ -144,7 +150,16 @@ export class Dropzone extends LocalUploadComponent<
       container.classList.add('headless-dropzone');
       return container;
     } else {
-      return dropzoneUI;
+      if (this.proxyReactContext && this.proxyReactContext.intl) {
+        const { formatMessage } = this.proxyReactContext.intl;
+
+        return dropzoneUI(formatMessage);
+      }
+      const defaultFormatMessage = new IntlProvider({
+        locale: 'en',
+      }).getChildContext().intl.formatMessage;
+
+      return dropzoneUI(defaultFormatMessage);
     }
   }
 

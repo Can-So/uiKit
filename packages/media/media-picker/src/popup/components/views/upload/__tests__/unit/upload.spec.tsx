@@ -6,9 +6,14 @@ import Spinner from '@atlaskit/spinner';
 import { FlagGroup } from '@atlaskit/flag';
 import { Card, CardAction } from '@atlaskit/media-card';
 import { MediaCollectionItem } from '@atlaskit/media-store';
+import {
+  asMock,
+  fakeContext,
+  fakeIntl,
+  nextTick,
+} from '@atlaskit/media-test-helpers';
 import ModalDialog from '@atlaskit/modal-dialog';
 import Button from '@atlaskit/button';
-import { asMock, fakeContext, nextTick } from '@atlaskit/media-test-helpers';
 import { InfiniteScroll } from '@atlaskit/media-ui';
 import { Context } from '@atlaskit/media-core';
 import {
@@ -118,24 +123,23 @@ describe('<StatelessUploadView />', () => {
     const setUpfrontIdDeferred = jest.fn();
 
     return (
-      <IntlProvider locale="en">
-        <Provider store={store}>
-          <StatelessUploadView
-            mpBrowser={{} as any}
-            context={context}
-            recentsCollection="some-collection-name"
-            isLoading={isLoading}
-            recents={recents}
-            uploads={uploads}
-            selectedItems={selectedItems}
-            onFileClick={() => {}}
-            onEditorShowImage={() => {}}
-            onEditRemoteImage={() => {}}
-            removeFileFromRecents={removeFileFromRecents}
-            setUpfrontIdDeferred={setUpfrontIdDeferred}
-          />
-        </Provider>
-      </IntlProvider>
+      <Provider store={store}>
+        <StatelessUploadView
+          mpBrowser={{} as any}
+          context={context}
+          recentsCollection="some-collection-name"
+          isLoading={isLoading}
+          recents={recents}
+          uploads={uploads}
+          selectedItems={selectedItems}
+          onFileClick={() => {}}
+          onEditorShowImage={() => {}}
+          onEditRemoteImage={() => {}}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
+          removeFileFromRecents={removeFileFromRecents}
+          intl={fakeIntl}
+        />
+      </Provider>
     );
   };
 
