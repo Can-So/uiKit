@@ -110,7 +110,7 @@ class Example extends React.Component<{}, ExampleState> {
               </GridColumn>
             </Grid>
             <Grid>
-              <GridColumn>
+              <GridColumn key={url}>
                 <br />
                 {this.renderCard(url, isSelected, appearance)}
               </GridColumn>

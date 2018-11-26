@@ -24,6 +24,7 @@ import { StateWatch } from './stateWatcher';
 
 const SERVICE_URL = 'https://api-private.stg.atlassian.com/object-resolver';
 const DEFAULT_CACHE_LIFESPAN = 15 * 1000;
+const DEFAULT_LOADING_STATE_DELAY = 1200;
 
 export type RemoteResourceAuthConfig = {
   key: string;
@@ -143,7 +144,8 @@ export class Client implements Client {
     this.store = new Store<ObjectState>(
       (config && config.getNowTimeFn) || Date.now,
     );
-    this.loadingStateDelay = (config && config.loadingStateDelay) || 800;
+    this.loadingStateDelay =
+      (config && config.loadingStateDelay) || DEFAULT_LOADING_STATE_DELAY;
   }
 
   fetchData(objectUrl: string): Promise<ResolveResponse> {
