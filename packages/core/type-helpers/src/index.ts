@@ -35,9 +35,9 @@ export type ResultantProps<InjectedProps, P extends InjectedProps> = Omit<
  * This type is used for HOC's that do not inject any props rather just render
  * the component in a special way.  The resultant component can take in additional
  * props.
- * 
+ *
  * Example usage:
- * 
+ *
  * const withDeprecationWarnings: PropsPasser<AppearanceProps> = (
  *  Component,
  * ) => {
@@ -45,17 +45,17 @@ export type ResultantProps<InjectedProps, P extends InjectedProps> = Omit<
  *     static displayName = `WithDeprecationWarnings(${getComponentName(
  *       Component,
  *     )})`;
-
+ *
  *     componentWillMount() {
  *       warnIfDeprecatedAppearance(this.props.appearance);
  *     }
-
+ *
  *     componentWillReceiveProps(newProps: AppearanceProps) {
  *       if (newProps.appearance !== this.props.appearance) {
  *         warnIfDeprecatedAppearance(newProps.appearance);
  *       }
  *     }
-
+ *
  *     render() {
  *       return React.createElement(Component, this.props as any);
  *     }
