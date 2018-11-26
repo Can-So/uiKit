@@ -1,1 +1,0 @@
-- Ability to delete file from recents has been added; MediaFile now has optional fields userUpfrontId and userOccurrenceKey;

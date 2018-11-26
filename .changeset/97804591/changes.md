@@ -1,1 +1,0 @@
-- asMock method was added; It can be used to convert any function into jest.Mock;
