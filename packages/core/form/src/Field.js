@@ -33,7 +33,7 @@ type Props = {
   /* The name of the field */
   name: string,
   /* Ignore this prop. It gets set internally from context. */
-  register: FieldInfo => any,
+  registerField: FieldInfo => any,
   /* validates the current value of field */
   validate?: any => string | void | Promise<string | void>,
 };
@@ -66,52 +66,60 @@ class FieldInner extends React.Component<Props, State> {
     registered: false,
   };
 
+  register = () => {
+    const { defaultValue, name, registerField, validate } = this.props;
+    return registerField(
+      name,
+      defaultValue,
+      ({
+        change,
+        blur,
+        focus,
+        dirty,
+        touched,
+        valid,
+        value,
+        error,
+        submitError,
+      }) => {
+        this.setState({
+          registered: true,
+          onChange: translateEvent(change),
+          onBlur: blur,
+          onFocus: focus,
+          dirty,
+          touched,
+          valid,
+          value,
+          error,
+          submitError,
+        });
+      },
+      {
+        dirty: true,
+        touched: true,
+        valid: true,
+        value: true,
+        error: true,
+        submitError: true,
+      },
+      {
+        getValidator: () => validate,
+      },
+    );
+  };
+
+  componentDidUpdate(prevProps: Props) {
+    const { defaultValue, name, registerField, validate } = this.props;
+    if (prevProps.defaultValue !== defaultValue || prevProps.name !== name) {
+      this.unregisterField();
+      this.unregisterField = this.register();
+    }
+  }
+
   componentDidMount() {
     const { name, register, defaultValue, isRequired, validate } = this.props;
-    register({
-      name,
-      initialValue: defaultValue,
-      register: form => {
-        this.unregisterField = form.registerField(
-          name,
-          ({
-            change,
-            blur,
-            focus,
-            dirty,
-            touched,
-            valid,
-            value,
-            error,
-            submitError,
-          }) => {
-            this.setState({
-              registered: true,
-              onChange: translateEvent(change),
-              onBlur: blur,
-              onFocus: focus,
-              dirty,
-              touched,
-              valid,
-              value,
-              error,
-              submitError,
-            });
-          },
-          {
-            dirty: true,
-            touched: true,
-            valid: true,
-            value: true,
-            error: true,
-            submitError: true,
-          },
-          {
-            getValidator: () => validate,
-          },
-        );
-      },
-    });
+    this.unregisterField = this.register();
   }
 
   componentWillUnmount() {
@@ -158,13 +166,13 @@ class FieldInner extends React.Component<Props, State> {
 // Make it easier to reference context value in lifecycle methods
 const Field = (props: Props) => (
   <FormContext.Consumer>
-    {registerField => <FieldInner {...props} register={registerField} />}
+    {registerField => <FieldInner {...props} registerField={registerField} />}
   </FormContext.Consumer>
 );
 
 Field.defaultProps = {
   defaultValue: undefined,
-  register: () => {},
+  registerField: () => {},
 };
 
 export default Field;

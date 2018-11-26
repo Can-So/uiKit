@@ -114,28 +114,6 @@ test('should show errors after submission', () => {
   });
 });
 
-test('should communicate error when isRequired is set on field', () => {
-  const wrapper = mount(
-    <Form onSubmit={jest.fn()}>
-      {() => (
-        <Field name="username" defaultValue="" isRequired>
-          {({ fieldProps, error }) => (
-            <>
-              <FieldText {...fieldProps} />
-              {error === 'REQUIRED' && (
-                <ErrorMessage>This field is required</ErrorMessage>
-              )}
-            </>
-          )}
-        </Field>
-      )}
-    </Form>,
-  );
-  touch(wrapper.find('input'));
-  expect(wrapper.find(ErrorMessage)).toHaveLength(1);
-  expect(wrapper.find(FieldText).props()).toMatchObject({ isInvalid: true });
-});
-
 test('change in defaultValue should reset form field', () => {
   const wrapper = mount(
     <WithState defaultState={''}>
@@ -143,8 +121,21 @@ test('change in defaultValue should reset form field', () => {
         <>
           <Form onSubmit={jest.fn()}>
             {() => (
-              <Field name="username" defaultValue={defaultValue} isRequired>
-                {({ fieldProps }) => <FieldText {...fieldProps} />}
+              <Field
+                name="username"
+                defaultValue={defaultValue}
+                validate={value => (value.length < 1 ? 'too short' : undefined)}
+              >
+                {({ fieldProps, error }) => (
+                  <>
+                    <FieldText {...fieldProps} />
+                    {error && (
+                      <ErrorMessage>
+                        There is a problem with this field
+                      </ErrorMessage>
+                    )}
+                  </>
+                )}
               </Field>
             )}
           </Form>
@@ -154,5 +145,39 @@ test('change in defaultValue should reset form field', () => {
     </WithState>,
   );
   wrapper.find(Button).simulate('click');
-  expect(wrapper.find(FieldText).props()).toMatchObject({ value: 'jill' });
+  return Promise.resolve().then(() => {
+    wrapper.update();
+    expect(wrapper.find(ErrorMessage)).toHaveLength(0);
+    expect(wrapper.find(FieldText).props()).toMatchObject({ value: 'jill' });
+  });
+});
+
+const wait = ms => new Promise(res => setTimeout(res, ms));
+
+test('should indicate whether form is submitting', () => {
+  let complete = () => {};
+  const promise = new Promise(res => {
+    complete = res;
+  });
+  const wrapper = mount(
+    <Form onSubmit={() => promise}>
+      {({ formProps, submitting }) => (
+        <Button type="submit" onClick={formProps.onSubmit}>
+          {submitting ? 'submitting' : 'submit'}
+        </Button>
+      )}
+    </Form>,
+  );
+  expect(wrapper.find(Button).text()).toBe('submit');
+  wrapper.find(Button).simulate('click');
+  return Promise.resolve()
+    .then(() => {
+      wrapper.update();
+      expect(wrapper.find(Button).text()).toBe('submitting');
+      complete();
+    })
+    .then(() => {
+      wrapper.update();
+      expect(wrapper.find(Button).text()).toBe('submit');
+    });
 });

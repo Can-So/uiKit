@@ -28,45 +28,75 @@ type State = {
   submitting: boolean,
 };
 
+const createFinalForm = (onSubmit, formRef) => {
+  const form = createForm({
+    onSubmit: onSubmit,
+    mutators: {
+      setDefaultValue: ([name, defaultValue], state) => {
+        state.formState.initialValues = {
+          ...state.formState.initialValues,
+          [name]: defaultValue,
+        };
+        state.formState.values = {
+          ...state.formState.values,
+          [name]: defaultValue,
+        };
+      },
+      printState: (_, state) => console.log(state),
+    },
+  });
+  const withFocusDecorator = createDecorator(() =>
+    formRef.current
+      ? Array.from(formRef.current.querySelectorAll('input'))
+      : [],
+  );
+  withFocusDecorator(form);
+  return form;
+};
+
 class Form extends React.Component<Props, State> {
-  fields = [];
-  form = undefined;
+  unsubscribe = () => {};
   formRef = React.createRef();
+  form = createFinalForm(this.props.onSubmit, this.formRef);
+
   state = {
     dirty: false,
     submitting: false,
   };
 
   componentDidMount() {
-    const initialValues = this.fields.reduce(
-      (initials, field) => ({
-        ...initials,
-        [field.name]: field.initialValue,
-      }),
-      {},
+    this.unsubscribe = this.form.subscribe(
+      ({ submitting, dirty }) => {
+        this.setState({ submitting, dirty });
+      },
+      {
+        dirty: true,
+        submitting: true,
+      },
     );
-    this.form = createForm({
-      initialValues,
-      onSubmit: this.props.onSubmit,
-    });
-
-    const withFocusDecorator = createDecorator(() =>
-      this.formRef.current
-        ? Array.from(this.formRef.current.querySelectorAll('input'))
-        : [],
-    );
-    withFocusDecorator(this.form);
-
-    this.fields.forEach(field => {
-      if (this.form) {
-        field.register(this.form);
-      }
-    });
-    this.fields = [];
   }
 
-  registerField = (field: FieldInfo) => {
-    this.fields = [...this.fields, field];
+  componenWillUnmount() {
+    this.unsubscribe();
+  }
+
+  registerField = (
+    name: string,
+    defaultValue: any,
+    subscriber: Subscriber,
+    subscription: FieldSubscription,
+    config: FieldConfig,
+  ) => {
+    this.form.pauseValidation();
+    const unsubscribe = this.form.registerField(
+      name,
+      subscriber,
+      subscription,
+      config,
+    );
+    this.form.mutators.setDefaultValue(name, defaultValue);
+    this.form.resumeValidation();
+    return unsubscribe;
   };
 
   handleSubmit = (e: SyntheticEvent<HTMLFormElement> | any) => {
