@@ -182,6 +182,7 @@ export class StatelessUploadView extends Component<
       return (
         <ModalTransition>
           <ModalDialog
+            width="small"
             appearance="danger"
             heading="Delete forever?"
             actions={actions}
