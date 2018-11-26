@@ -1,6 +1,6 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
-import { User, UserOption } from '../../types';
+import { User } from '../../types';
 
 export const renderProp = (
   wrapper: ShallowWrapper,
