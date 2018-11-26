@@ -77,6 +77,25 @@ const createConnectedComponent = (
   return { component, dispatch, root, context };
 };
 
+const getDeleteActionHandler = (
+  component: ReactWrapper<UploadViewProps, UploadViewState>,
+) => {
+  const actions = component.find(Card).props().actions;
+
+  if (!actions) {
+    throw new Error('actions expected');
+  }
+
+  const action = actions.find(
+    (action: CardAction) => action.label === menuDelete,
+  );
+  if (!action) {
+    throw new Error('delete action expected');
+  }
+
+  return action.handler;
+};
+
 describe('<StatelessUploadView />', () => {
   const getUploadViewElement = (
     isLoading: boolean,
@@ -249,22 +268,19 @@ describe('<StatelessUploadView />', () => {
           removeFileFromRecents,
         ),
       );
-      const deleteAction = component
-        .find(Card)
-        .props()
-        .actions.find((action: CardAction) => action.label === menuDelete);
+      const deleteActionHandler = getDeleteActionHandler(component);
       const readyIds = Promise.all([
         upfrontId,
         userUpfrontId,
         userOccurrenceKey,
       ]);
-      return { component, deleteAction, readyIds };
+      return { component, deleteActionHandler, readyIds };
     };
 
     const setupAndClickDelete = async () => {
-      const { component, deleteAction, readyIds } = setup();
+      const { component, deleteActionHandler, readyIds } = setup();
 
-      deleteAction.handler();
+      deleteActionHandler();
       component.update();
 
       await readyIds;
@@ -336,18 +352,15 @@ describe('<StatelessUploadView />', () => {
           removeFileFromRecents,
         ),
       );
-      const deleteAction = component
-        .find(Card)
-        .props()
-        .actions.find((action: CardAction) => action.label === menuDelete);
+      const deleteActionHandler = getDeleteActionHandler(component);
 
-      return { component, deleteAction };
+      return { component, deleteActionHandler };
     };
 
     const setupAndClickDelete = async () => {
-      const { component, deleteAction } = setup();
+      const { component, deleteActionHandler } = setup();
 
-      deleteAction.handler();
+      deleteActionHandler();
       component.update();
 
       await nextTick();
