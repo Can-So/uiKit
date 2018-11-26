@@ -1,6 +1,5 @@
 //@flow
 import type { Node, ElementType } from 'react';
-import type { ButtonProps, ButtonAppearances } from '@atlaskit/button';
 import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
 
 export type PaginationPropTypes = {
