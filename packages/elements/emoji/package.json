@@ -63,6 +63,7 @@
     "@atlaskit/media-core": "^24.4.0",
     "@atlaskit/util-common-test": "^2.4.2",
     "@atlaskit/util-data-test": "^10.0.20",
+    "@atlaskit/visual-regression": "^0.0.1",
     "@types/chai": "^4.0.4",
     "canvas-prebuilt": "^2.0.0-alpha.14",
     "chai": "^4.1.2",

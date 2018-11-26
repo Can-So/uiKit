@@ -1,0 +1,1 @@
+- Use onClick from button in emoji
