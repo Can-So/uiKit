@@ -3,17 +3,20 @@ import {
   sendKeyToPm,
   doc,
   p,
+  ul,
+  li,
   code_block,
   breakout,
 } from '@atlaskit/editor-test-helpers';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import breakoutPlugin from '../../../../plugins/breakout';
+import listPlugin from '../../../../plugins/lists';
 
 describe('codeBlock - keymaps', () => {
   const editor = (doc: any) =>
     createEditor({
       doc,
-      editorPlugins: [codeBlockPlugin(), breakoutPlugin],
+      editorPlugins: [codeBlockPlugin(), breakoutPlugin, listPlugin],
     });
 
   describe('Enter keypress', () => {
@@ -84,6 +87,16 @@ describe('codeBlock - keymaps', () => {
       sendKeyToPm(editorView, 'Backspace');
       expect(editorView.state.doc).toEqualDocument(doc(p('Hello')));
       editorView.destroy();
+    });
+
+    describe('when codeblock is nested inside list item', () => {
+      it('should remove the code block if the cursor is at the beginning of the code block - 2', () => {
+        const { editorView } = editor(doc(ul(li(code_block()('{<>}Hello')))));
+
+        sendKeyToPm(editorView, 'Backspace');
+        expect(editorView.state.doc).toEqualDocument(doc(ul(li(p('Hello')))));
+        editorView.destroy();
+      });
     });
 
     it('should remove the code block if the cursor is at the beginning of the code block - 2', () => {

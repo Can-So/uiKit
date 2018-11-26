@@ -1,5 +1,10 @@
 # @atlaskit/drawer
 
+## 2.5.1
+- [patch] [f480bab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f480bab):
+
+  - Convert padding to margin to fix a scrolling issue in global-search
+
 ## 2.5.0
 - [minor] [aacb208](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aacb208):
 

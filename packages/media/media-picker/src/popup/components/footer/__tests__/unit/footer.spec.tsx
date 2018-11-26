@@ -165,7 +165,7 @@ describe('<Footer />', () => {
       expect(element.find(InsertButton).prop('isDisabled')).toBeFalsy();
     });
 
-    it('should not have a number of files selected when itemCount=1', () => {
+    it('should pass the number of selected items to the formatted message', () => {
       const element = shallow(
         <Footer
           selectedItems={[SELECTED_ITEM]}
@@ -175,22 +175,9 @@ describe('<Footer />', () => {
           onCancel={jest.fn()}
         />,
       );
-      expect(element.find(InsertButton).prop('children')).toEqual(
-        'Insert a file',
-      );
-    });
-
-    it('should pluralize the insert button text when itemCount>1', () => {
-      const element = shallow(
-        <Footer
-          selectedItems={[SELECTED_ITEM, SELECTED_ITEM]}
-          canInsert={true}
-          canCancel={true}
-          onInsert={jest.fn()}
-          onCancel={jest.fn()}
-        />,
-      );
-      expect(element.find(InsertButton).prop('children')).toMatch('files');
+      expect(element.find(InsertButton).prop('children').props.values).toEqual({
+        0: 1,
+      });
     });
   });
 });

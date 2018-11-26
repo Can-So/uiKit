@@ -17,10 +17,15 @@ import {
 import { fakeContext, nextTick } from '@atlaskit/media-test-helpers';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs';
-import { NewUploadServiceImpl } from '../../newUploadServiceImpl';
+import { NewUploadServiceImpl, UpfrontIds } from '../../newUploadServiceImpl';
 import { MediaFile, UploadParams } from '../../..';
 import * as getPreviewModule from '../../../util/getPreviewFromBlob';
 import * as getPreviewFromImage from '../../../util/getPreviewFromImage';
+import { Preview } from '../../../domain/preview';
+import {
+  UploadPreviewUpdateEventPayload,
+  UploadsStartEventPayload,
+} from '../../../domain/uploadEvent';
 
 const fileStreamCacheSpy = jest.spyOn(fileStreamsCache, 'set');
 
@@ -60,14 +65,33 @@ describe('UploadService', () => {
       tenantUploadParams,
       shouldCopyFileToRecents,
     );
+
+    jest
+      .spyOn((uploadService as any).tenantMediaStore, 'createFile')
+      .mockResolvedValue({ data: { id: 'some-new-tenant-file-id' } });
+
     const filesAddedPromise = new Promise(resolve =>
       uploadService.on('files-added', () => resolve()),
     );
 
-    return { uploadService, filesAddedPromise, context };
+    if (context.config.userAuthProvider) {
+      jest
+        .spyOn((uploadService as any).userMediaStore, 'createFile')
+        .mockResolvedValue({ data: { id: 'some-new-user-file-id' } });
+      const userContext: Context = (uploadService as any)['userContext'];
+      const userContextUpload = jest.spyOn(userContext.file, 'upload');
+      userContextUpload.mockReturnValue({
+        subscribe() {},
+      });
+
+      return { uploadService, filesAddedPromise, context, userContext };
+    } else {
+      return { uploadService, filesAddedPromise, context };
+    }
   };
 
   beforeEach(() => {
+    fileStreamCacheSpy.mockReset();
     (getPreviewModule.getPreviewFromBlob as any).mockReset();
     (getPreviewModule.getPreviewFromBlob as any).mockReturnValue(
       Promise.resolve(),
@@ -99,10 +123,14 @@ describe('UploadService', () => {
       const callback = jest.fn();
       uploadService.on('file-preview-update', callback);
 
+      const previewObject: Preview = { someImagePreview: true } as any;
+      (getPreviewModule.getPreviewFromBlob as any).mockReturnValue(
+        Promise.resolve(previewObject),
+      );
+
       uploadService.addFiles([file]);
       await filesAddedPromise;
-
-      expect(callback).toHaveBeenCalledWith({
+      const expectedPayload: UploadPreviewUpdateEventPayload = {
         file: {
           creationDate: expect.any(Number),
           id: expect.any(String),
@@ -111,8 +139,12 @@ describe('UploadService', () => {
           type: 'video/mp4',
           upfrontId,
           occurrenceKey: expect.any(String),
+          userUpfrontId: undefined,
+          userOccurrenceKey: undefined,
         },
-      });
+        preview: previewObject,
+      };
+      expect(callback).toHaveBeenCalledWith(expectedPayload);
     });
 
     it('should emit file-preview-update for image files', async () => {
@@ -121,15 +153,14 @@ describe('UploadService', () => {
 
       const callback = jest.fn();
       uploadService.on('file-preview-update', callback);
-
+      const previewObject: Preview = { someImagePreview: true } as any;
       (getPreviewFromImage.getPreviewFromImage as any).mockReturnValue(
-        Promise.resolve({ someImagePreview: true }),
+        Promise.resolve(previewObject),
       );
 
       uploadService.addFiles([file as File]);
       await filesAddedPromise;
-
-      expect(callback).toHaveBeenCalledWith({
+      const expectedPayload: UploadPreviewUpdateEventPayload = {
         file: {
           creationDate: expect.any(Number),
           id: expect.any(String),
@@ -138,9 +169,12 @@ describe('UploadService', () => {
           type: 'image/png',
           upfrontId,
           occurrenceKey: expect.any(String),
+          userUpfrontId: undefined,
+          userOccurrenceKey: undefined,
         },
-        preview: { someImagePreview: true },
-      });
+        preview: previewObject,
+      };
+      expect(callback).toHaveBeenCalledWith(expectedPayload);
     });
 
     it('should use getPreviewFromBlob for non-image files when emitting preview', async () => {
@@ -184,7 +218,7 @@ describe('UploadService', () => {
       uploadService.on('files-added', filesAddedCallback);
 
       uploadService.addFiles([file, file2]);
-      expect(filesAddedCallback).toHaveBeenCalledWith({
+      const expectedPayload: UploadsStartEventPayload = {
         files: [
           {
             id: expect.any(String),
@@ -194,6 +228,8 @@ describe('UploadService', () => {
             type: 'video/mp4',
             upfrontId,
             occurrenceKey: expect.any(String),
+            userUpfrontId: undefined,
+            userOccurrenceKey: undefined,
           },
           {
             id: expect.any(String),
@@ -203,9 +239,12 @@ describe('UploadService', () => {
             type: 'image/png',
             upfrontId,
             occurrenceKey: expect.any(String),
+            userUpfrontId: undefined,
+            userOccurrenceKey: undefined,
           },
         ],
-      });
+      };
+      expect(filesAddedCallback).toHaveBeenCalledWith(expectedPayload);
       expect(filesAddedCallback.mock.calls[0][0].files[0].id).not.toEqual(
         filesAddedCallback.mock.calls[0][0].files[1].id,
       );
@@ -742,13 +781,15 @@ describe('UploadService', () => {
         .mockReturnValue(Promise.reject(copyFileToCollectionRejection));
 
       const { uploadService, sourceFileId } = setup({
+        userAuthProvider,
         copyFileWithTokenSpy,
       });
 
       const fileUploadErrorCallback = jest.fn();
       uploadService.on('file-upload-error', fileUploadErrorCallback);
 
-      return uploadService['copyFileToUsersCollection'](sourceFileId).catch(
+      return uploadService['copyFileToUsersCollection'](sourceFileId).then(
+        () => expect(true).toBe(false),
         (error: Error) => {
           expect(error).toEqual(copyFileToCollectionRejection);
           expect(fileUploadErrorCallback).not.toHaveBeenCalled();
@@ -803,22 +844,23 @@ describe('UploadService', () => {
 
     it('should use userContext context to upload file when shouldCopyFileToRecents=false', () => {
       const context = getContext({ userAuthProvider });
-      const { uploadService } = setup(context, {}, false);
-      const userContextUpload = jest.spyOn(
-        (uploadService as any)['userContext'].file,
-        'upload',
-      );
+      const { uploadService, userContext } = setup(context, {}, false);
+
       uploadService.addFiles([file]);
-      expect(userContextUpload).toHaveBeenCalledTimes(1);
+      expect(userContext!.file.upload).toHaveBeenCalledTimes(1);
     });
 
     it('should populate fileStreamsCache once we have the upfront id', async () => {
       const { uploadService } = setup(undefined, {
         collection: 'some-collection',
       });
-      const getUpfrontId = jest.fn().mockReturnValue(Promise.resolve('1234'));
+      const upfrontIds: UpfrontIds = {
+        upfrontId: Promise.resolve('1234'),
+      };
 
-      (uploadService as any).getUpfrontId = getUpfrontId;
+      (uploadService as any).getUpfrontIds = jest
+        .fn()
+        .mockReturnValue(upfrontIds);
       uploadService.addFiles([file]);
 
       await nextTick();
@@ -829,28 +871,65 @@ describe('UploadService', () => {
     });
   });
 
-  describe('getUpfrontId()', () => {
-    it('should create an empty file on the tenant when shouldCopyFileToRecents=false', async () => {
-      const context = getContext({ userAuthProvider });
-      const { uploadService } = setup(context, {}, false);
-      const createFileSpy = jest
-        .spyOn((uploadService as any).tenantMediaStore, 'createFile')
-        .mockReturnValue({
-          data: {
-            id: '12',
-          },
-        });
-      const id = await (uploadService as any).getUpfrontId(
-        undefined,
-        'occurrenceKey-1',
-      );
+  describe('getUpfrontIds()', () => {
+    let upfrontIds: UpfrontIds;
+    let createFileSpy: jest.SpyInstance<any>;
 
-      expect(createFileSpy).toHaveBeenCalledTimes(1);
-      expect(createFileSpy).lastCalledWith({
-        collection: undefined,
-        occurrenceKey: 'occurrenceKey-1',
+    describe('when should copy file to recents', () => {
+      beforeEach(async () => {
+        const context = getContext({ userAuthProvider });
+        const { uploadService } = setup(
+          context,
+          { collection: 'tenant-collection-name' },
+          false,
+        );
+        const fileState: FileState = {
+          status: 'processing',
+          id: 'some-user-id',
+          name: 'some-name',
+          occurrenceKey: 'some-user-occurrence-key',
+          size: 42,
+          mediaType: 'image',
+          mimeType: 'some-mime-type',
+        };
+        const observable = new Observable<FileState>(observer => {
+          setImmediate(() => {
+            observer.next(fileState);
+          });
+        });
+
+        createFileSpy = jest
+          .spyOn((uploadService as any).tenantMediaStore, 'createFile')
+          .mockResolvedValue({
+            data: {
+              id: '12',
+            },
+          });
+
+        upfrontIds = await (uploadService as any).getUpfrontIds(
+          observable,
+          'tenant-occurrence-key',
+        );
       });
-      expect(id).toEqual('12');
+
+      it('should return upfrontId created with createFile API', async () => {
+        expect(createFileSpy).toHaveBeenCalledTimes(1);
+        expect(createFileSpy).lastCalledWith({
+          collection: 'tenant-collection-name',
+          occurrenceKey: 'tenant-occurrence-key',
+        });
+        expect(await upfrontIds.upfrontId).toEqual('12');
+      });
+
+      it('should return userUpfrontId taken from observable', async () => {
+        expect(await upfrontIds.userUpfrontId).toEqual('some-user-id');
+      });
+
+      it('should return userOccurrenceKey taken from observable', async () => {
+        expect(await upfrontIds.userOccurrenceKey).toEqual(
+          'some-user-occurrence-key',
+        );
+      });
     });
   });
 });

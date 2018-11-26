@@ -5,19 +5,32 @@ import {
 } from '@atlaskit/analytics-gas-types';
 import Logger from './helpers/logger';
 
-export const sendEvent = (logger: Logger, client?: AnalyticsWebClient) => (
-  event: GasPayload | GasScreenEventPayload,
-): void => {
+export const sendEvent = (
+  logger: Logger,
+  client?: AnalyticsWebClient | Promise<AnalyticsWebClient>,
+) => (event: GasPayload | GasScreenEventPayload): void => {
   if (client) {
     const gasEvent = {
       ...event,
     };
     delete gasEvent.eventType;
 
+    const withClient = (cb: (analyticsClient: AnalyticsWebClient) => void) => {
+      if (client instanceof Promise) {
+        client
+          .then(cb)
+          .catch(() =>
+            logger.warn('AnalyticsWebClient instance could not be resolved'),
+          );
+      } else {
+        cb(client);
+      }
+    };
+
     switch (event.eventType) {
       case 'ui':
         logger.debug('Sending UI Event via analytics client', gasEvent);
-        client.sendUIEvent(gasEvent);
+        withClient(client => client.sendUIEvent(gasEvent));
         break;
 
       case 'operational':
@@ -25,17 +38,17 @@ export const sendEvent = (logger: Logger, client?: AnalyticsWebClient) => (
           'Sending Operational Event via analytics client',
           gasEvent,
         );
-        client.sendOperationalEvent(gasEvent);
+        withClient(client => client.sendOperationalEvent(gasEvent));
         break;
 
       case 'track':
         logger.debug('Sending Track Event via analytics client', gasEvent);
-        client.sendTrackEvent(gasEvent);
+        withClient(client => client.sendTrackEvent(gasEvent));
         break;
 
       case 'screen':
         logger.debug('Sending Screen Event via analytics client', gasEvent);
-        client.sendScreenEvent(gasEvent);
+        withClient(client => client.sendScreenEvent(gasEvent));
         break;
 
       default:

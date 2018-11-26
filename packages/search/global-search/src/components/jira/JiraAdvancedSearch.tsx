@@ -37,10 +37,10 @@ const Container = styled.div`
 
 const itemI18nKeySuffix = [
   JiraEntityTypes.Issues,
-  JiraEntityTypes.People,
+  JiraEntityTypes.Boards,
   JiraEntityTypes.Projects,
   JiraEntityTypes.Filters,
-  JiraEntityTypes.Boards,
+  JiraEntityTypes.People,
 ];
 
 const getI18nItemName = (i18nKeySuffix: string) => {
@@ -76,7 +76,7 @@ export default class JiraAdvancedSearch extends React.Component<Props> {
     return (
       <AdvancedSearchResult
         href={getJiraAdvancedSearchUrl(JiraEntityTypes.Issues, query)}
-        key="search_jira"
+        key={`search-jira-${Date.now()}`}
         resultId={ADVANCED_JIRA_SEARCH_RESULT_ID}
         text={
           <Container>

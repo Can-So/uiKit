@@ -1,6 +1,7 @@
 import { EditorState, Transaction } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { ResolvedPos } from 'prosemirror-model';
+import { GapCursorSelection } from '../plugins/gap-cursor';
 
 type Command = (
   state: EditorState,
@@ -32,7 +33,10 @@ const isEmptySelectionAtStart = (
   view?: EditorView,
 ): boolean => {
   const { empty, $from } = state.selection;
-  return empty && $from.parentOffset === 0;
+  return (
+    empty &&
+    ($from.parentOffset === 0 || state.selection instanceof GapCursorSelection)
+  );
 };
 
 const isFirstChildOfParent = (
@@ -40,7 +44,11 @@ const isFirstChildOfParent = (
   view?: EditorView,
 ): boolean => {
   const { $from } = state.selection;
-  return $from.depth > 1 ? $from.index($from.depth - 1) === 0 : true;
+  return $from.depth > 1
+    ? (state.selection instanceof GapCursorSelection &&
+        $from.parentOffset === 0) ||
+        $from.index($from.depth - 1) === 0
+    : true;
 };
 
 /**

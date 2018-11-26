@@ -5,7 +5,8 @@ import { colors, borderRadius, gridSize } from '@atlaskit/theme';
 import { StatusPicker as AkStatusPicker, Color } from '@atlaskit/status';
 import { dropShadow } from '../../../ui/styles';
 import withOuterListeners from '../../../ui/with-outer-listeners';
-import { StatusType, DEFAULT_STATUS } from '../actions';
+import { DEFAULT_STATUS } from '../actions';
+import { StatusType } from '../plugin';
 
 const PopupWithListeners = withOuterListeners(Popup);
 

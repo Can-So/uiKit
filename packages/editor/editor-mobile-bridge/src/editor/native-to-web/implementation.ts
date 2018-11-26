@@ -16,9 +16,16 @@ import {
   toggleUnderline,
   toggleEm,
   toggleStrong,
+  StatusState,
+  updateStatus,
+  commitStatusPicker,
+  insertBlockType,
+  createTable,
+  insertTaskDecision,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+import { Color as StatusColor } from '@atlaskit/status';
 
 import NativeToWebBridge from './bridge';
 import WebBridge from '../../web-bridge';
@@ -29,6 +36,7 @@ export default class WebBridgeImpl extends WebBridge
   implements NativeToWebBridge {
   textFormattingPluginState: TextFormattingState | null = null;
   mentionsPluginState: MentionPluginState | null = null;
+  statusPluginState: StatusState | null = null;
   editorView: EditorView | null = null;
   transformer: JSONTransformer = new JSONTransformer();
   editorActions: EditorActions = new EditorActions();
@@ -75,6 +83,22 @@ export default class WebBridgeImpl extends WebBridge
     }
   }
 
+  onStatusUpdate(text: string, color: StatusColor, uuid: string) {
+    if (this.statusPluginState && this.editorView) {
+      updateStatus({
+        text,
+        color,
+        localId: uuid,
+      })(this.editorView);
+    }
+  }
+
+  onStatusPickerDismissed() {
+    if (this.statusPluginState && this.editorView) {
+      commitStatusPicker()(this.editorView);
+    }
+  }
+
   onMentionSelect(mention: string) {}
 
   onMentionPickerResult(result: string) {}
@@ -96,7 +120,6 @@ export default class WebBridgeImpl extends WebBridge
   setTextFormattingStateAndSubscribe(state: TextFormattingState) {
     this.textFormattingPluginState = state;
   }
-
   onMediaPicked(eventName: string, mediaPayload: string) {
     if (this.mediaPicker) {
       const payload = JSON.parse(mediaPayload);
@@ -115,6 +138,14 @@ export default class WebBridgeImpl extends WebBridge
           return;
         }
         case 'upload-end': {
+          if (payload.file.collectionName) {
+            /**
+             * We call this custom event instead of `upload-end` to set the collection
+             * As when emitting `upload-end`, the `ready` handler will usually fire before
+             * the `publicId` is resolved which causes a noop, resulting in bad ADF.
+             */
+            this.mediaPicker.emit('collection', payload);
+          }
           const getUploadPromise = this.mediaMap.get(payload.file.id);
           if (getUploadPromise) {
             getUploadPromise!(payload.file.publicId);
@@ -159,6 +190,47 @@ export default class WebBridgeImpl extends WebBridge
   onOutdentList() {
     if (this.listState && this.editorView) {
       outdentList()(this.editorView.state, this.editorView.dispatch);
+    }
+  }
+
+  insertBlockType(type) {
+    if (!this.editorView) {
+      return;
+    }
+
+    switch (type) {
+      case 'blockquote':
+        insertBlockType('blockquote')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'codeblock':
+        insertBlockType('codeblock')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'panel':
+        insertBlockType('panel')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'action':
+        insertTaskDecision(this.editorView, 'taskList');
+        return;
+      case 'decision':
+        insertTaskDecision(this.editorView, 'decisionList');
+        return;
+      case 'table':
+        createTable(this.editorView.state, this.editorView.dispatch);
+        return;
+
+      default:
+        // tslint:disable-next-line:no-console
+        console.error(`${type} cannot be inserted as it's not supported`);
+        return;
     }
   }
 

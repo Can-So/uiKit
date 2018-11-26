@@ -3,6 +3,7 @@ import * as React from 'react';
 import { MouseEvent, SyntheticEvent } from 'react';
 import Tooltip from '@atlaskit/tooltip';
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
+import Button from '@atlaskit/button';
 import { colors } from '@atlaskit/theme';
 
 import * as styles from './styles';
@@ -243,11 +244,17 @@ const renderAsImage = (props: Props) => {
   if (showDelete) {
     deleteButton = (
       <span className={styles.deleteButton}>
-        <CrossCircleIcon
-          label={deleteEmojiLabel}
-          primaryColor={colors.N500}
-          size="small"
+        <Button
+          iconBefore={
+            <CrossCircleIcon
+              label={deleteEmojiLabel}
+              primaryColor={colors.N500}
+              size="small"
+            />
+          }
           onClick={event => handleDelete(props, event)}
+          appearance="subtle-link"
+          spacing="none"
         />
       </span>
     );

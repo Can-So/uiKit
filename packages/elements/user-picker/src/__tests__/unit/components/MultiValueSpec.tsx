@@ -111,4 +111,60 @@ describe('MultiValue', () => {
     expect(current.scrollIntoView).toHaveBeenCalled();
     expect(current.scrollIntoView).toHaveBeenCalledWith(false);
   });
+
+  describe('shouldComponentUpdate', () => {
+    const defaultProps = {
+      data: data,
+      isFocused: false,
+      innerProps: {},
+    };
+    test.each([
+      [false, defaultProps],
+      [
+        true,
+        {
+          ...defaultProps,
+          isFocused: true,
+        },
+      ],
+      [
+        true,
+        {
+          ...defaultProps,
+          data: {
+            ...data,
+            user: {
+              ...data.user,
+              nickname: 'crazy_jace',
+            },
+          },
+        },
+      ],
+      [
+        true,
+        {
+          ...defaultProps,
+          data: {
+            ...data,
+            label: 'crazy_jace',
+          },
+        },
+      ],
+      [
+        true,
+        {
+          ...defaultProps,
+          innerProps: {},
+        },
+      ],
+    ])('should return %s for nextProps %p', (shouldUpdate, nextProps) => {
+      const component = shallowMultiValue(defaultProps);
+      const instance = component.instance();
+      expect(
+        instance &&
+          instance.shouldComponentUpdate &&
+          instance.shouldComponentUpdate(nextProps, {}, {}),
+      ).toEqual(shouldUpdate);
+    });
+  });
 });
