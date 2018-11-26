@@ -1,5 +1,6 @@
 import { defaultSchema } from '@atlaskit/editor-common';
 import WikiMarkupTransformer from '../../../index';
+import { EM_DASH } from '../../../char';
 
 import {
   a,
@@ -38,7 +39,7 @@ describe('ADF => WikiMarkup - Paragraph', () => {
   });
 
   test('should convert em to -- citation', () => {
-    const node = doc(p('This is a ', em('— citation')))(defaultSchema);
+    const node = doc(p('This is a ', em(`${EM_DASH} citation`)))(defaultSchema);
     expect(transformer.encode(node)).toMatchSnapshot();
   });
 
@@ -103,7 +104,7 @@ describe('ADF => WikiMarkup - Paragraph', () => {
 
   test('should convert citation with strong mark', () => {
     const node = doc(
-      p('This is an ', em(strong('— strong citation')), ' text'),
+      p('This is an ', em(strong(`${EM_DASH} strong citation`)), ' text'),
     )(defaultSchema);
     expect(transformer.encode(node)).toMatchSnapshot();
   });

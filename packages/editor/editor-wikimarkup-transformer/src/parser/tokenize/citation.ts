@@ -3,6 +3,7 @@ import { Token, TokenType, TokenErrCallback } from './';
 import { hasAnyOfMarks } from '../utils/text';
 import { commonFormatter } from './common-formatter';
 import { parseString } from '../text';
+import { EM_DASH } from '../../char';
 
 export function citation(
   input: string,
@@ -25,7 +26,7 @@ export function citation(
     // We don't want to mix `code` mark with others
     if (n.type.name === 'text' && !hasAnyOfMarks(n, ['em', 'code'])) {
       if (index === 0) {
-        n.text = `— ${n.text}`;
+        n.text = `${EM_DASH} ${n.text}`;
       }
       return n.mark([...n.marks, mark]);
     }
