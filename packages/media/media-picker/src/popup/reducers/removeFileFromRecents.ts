@@ -8,6 +8,10 @@ export default function removeFileFromRecents(
   action: Action,
 ): State {
   if (isRemoveFileFromRecentsAction(action)) {
+    const recentItems = state.recents.items.filter(
+      item => item.id !== action.id,
+    );
+
     const selectedItems = state.selectedItems.filter(
       item => item.id !== action.id,
     );
@@ -22,6 +26,7 @@ export default function removeFileFromRecents(
 
     return {
       ...state,
+      recents: { items: recentItems },
       selectedItems,
       uploads,
     };

@@ -4,11 +4,7 @@ import {
 } from '@atlaskit/media-store';
 import { nextTick } from '@atlaskit/media-test-helpers';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import {
-  CollectionFetcher,
-  collectionCache,
-  mergeItems,
-} from '../../collection';
+import { CollectionFetcher, collectionCache } from '../../collection';
 import { fileStreamsCache } from '../../context/fileStreamCache';
 
 const setup = (nextInclusiveStartKey: string | null = 'first-key') => {
@@ -96,13 +92,8 @@ describe('CollectionFetcher', () => {
       });
     });
 
-    it('should prepend new items to the local ones', async done => {
-      const {
-        collectionFetcher,
-        contents,
-        getCollectionItems,
-        newItem,
-      } = setup();
+    it('should replace items with the local ones', async done => {
+      const { collectionFetcher, getCollectionItems, newItem } = setup();
 
       collectionFetcher.getItems('recents').subscribe({
         next() {
@@ -119,9 +110,8 @@ describe('CollectionFetcher', () => {
       await nextTick();
       collectionFetcher.getItems('recents').subscribe({
         next(items) {
-          // we are only interested on the last event
-          if (items.length === 3) {
-            expect(items).toEqual([newItem, ...contents]);
+          if (items.length === 1) {
+            expect(items).toEqual([newItem]);
             expect(getCollectionItems).toHaveBeenCalledTimes(2);
             done();
           }
@@ -339,29 +329,5 @@ describe('CollectionFetcher', () => {
       });
       expect(updatedItems).toEqual([]);
     });
-  });
-});
-
-describe('mergeItems()', () => {
-  it('should prepend new items to existing ones', () => {
-    const { contents, newItem } = setup();
-
-    expect(mergeItems([newItem, ...contents], contents)).toEqual([
-      newItem,
-      ...contents,
-    ]);
-    expect(mergeItems([newItem], contents)).toEqual([newItem, ...contents]);
-  });
-
-  it('should add all new items when existing ones are empty', () => {
-    const { contents } = setup();
-
-    expect(mergeItems(contents, [])).toEqual(contents);
-  });
-
-  it('should keep existing items', () => {
-    const { contents } = setup();
-
-    expect(mergeItems(contents, contents)).toEqual(contents);
   });
 });

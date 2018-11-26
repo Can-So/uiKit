@@ -105,6 +105,10 @@ describe('removeFileFromRecents reducer', () => {
     resultState = removeFileFromRecents(state, removeFromLocalUploads);
   });
 
+  it('should remove file from recents list', () => {
+    expect(resultState.recents.items).toHaveLength(1);
+    expect(resultState.recents.items[0].id).toEqual('other-id');
+  });
   it('should remove item from selected list', () => {
     expect(resultState.selectedItems).toHaveLength(1);
     expect(resultState.selectedItems[0].id).toEqual('other-id');

@@ -43,23 +43,6 @@ export type CollectionCache = {
   [collectionName: string]: CollectionCacheEntry;
 };
 
-export const mergeItems = (
-  firstPageItems: MediaCollectionItem[],
-  currentItems: MediaCollectionItem[],
-): MediaCollectionItem[] => {
-  let reachedFirst = false;
-  const firstId = currentItems[0] ? currentItems[0].id : '';
-  const newItems = firstPageItems.filter(item => {
-    if (reachedFirst) {
-      return false;
-    }
-    reachedFirst = firstId === item.id;
-    return !reachedFirst;
-  });
-
-  return [...newItems, ...currentItems];
-};
-
 export const collectionCache: CollectionCache = {};
 
 const createCacheEntry = (): CollectionCacheEntry => ({
@@ -131,7 +114,9 @@ export class CollectionFetcher {
         const { contents, nextInclusiveStartKey } = items.data;
 
         this.populateCache(contents, collectionName);
-        collection.items = mergeItems(items.data.contents, collection.items);
+        // It's hard to merge two together, so we just take what's came from the server.
+        // Since we load only one page > 2 pages will be ditched from the cache.
+        collection.items = items.data.contents;
 
         // We only want to asign nextInclusiveStartKey the first time
         if (!collection.nextInclusiveStartKey) {
