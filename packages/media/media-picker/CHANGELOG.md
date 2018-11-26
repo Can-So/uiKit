@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 25.0.1
+- [patch] [b9d9e9a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9d9e9a):
+
+  - Support advanced i18n mode in MediaPicker
+
 ## 25.0.0
 - [minor] [801fd18](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/801fd18):
 
