@@ -46,7 +46,6 @@
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "fetch-mock": "^6.5.2",
     "loader-utils": "^1.1.0",
-    "mockdate": "^2.0.2",
     "sinon": "^2.2.0",
     "uid": "^0.0.2"
   },
