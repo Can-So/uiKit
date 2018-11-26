@@ -1,1 +1,0 @@
-- The version command now removes empty folders before it starts. This should prevent a race condition in CI
