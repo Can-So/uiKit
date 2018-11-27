@@ -1,35 +1,35 @@
 // Swedish
 export default {
-  'pt.profile-card.inactive.account': 'Account deactivated',
+  'pt.profile-card.inactive.account': 'Kontot är inaktiverat',
   'pt.profile-card.general.msg.disabled.user':
-    'You can no longer collaborate with this person.',
+    'Du kan inte längre samarbeta med den här personen.',
   'pt.profile-card.inactive.account.no.date':
-    'Their account has been deactivated.',
+    'Personens konto har inaktiverats.',
   'pt.profile-card.inactive.account.has.date.this.week':
-    'Their account was deactivated this week.',
+    'Personens konto inaktiverades den här veckan.',
   'pt.profile-card.inactive.account.has.date.this.month':
-    'Their account was deactivated this month.',
+    'Personens konto inaktiverades den här månaden.',
   'pt.profile-card.inactive.account.has.date.last.month':
-    'Their account was deactivated last month.',
+    'Personens konto inaktiverades förra månaden.',
   'pt.profile-card.inactive.account.has.date.a.few.months':
-    'Their account has been deactivated for a few months.',
+    'Personens konto har varit inaktiverat i några få månader.',
   'pt.profile-card.inactive.account.has.date.several.months':
-    'Their account has been deactivated for several months.',
+    'Personens konto har varit inaktiverat i flera månader.',
   'pt.profile-card.inactive.account.has.date.more.than.a.year':
-    'Their account has been deactivated for more than a year.',
-  'pt.profile-card.closed.account': 'Account deleted',
-  'pt.profile-card.closed.account.no.date': 'Their account has been deleted.',
+    'Personens konto har varit inaktiverat i mer än ett år.',
+  'pt.profile-card.closed.account': 'Kontot är borttaget',
+  'pt.profile-card.closed.account.no.date': 'Personens konto har tagits bort.',
   'pt.profile-card.closed.account.has.date.this.week':
-    'Their account was deleted this week.',
+    'Personens konto togs bort den här veckan.',
   'pt.profile-card.closed.account.has.date.this.month':
-    'Their account was deleted this month.',
+    'Personens konto togs bort den här månaden.',
   'pt.profile-card.closed.account.has.date.last.month':
-    'Their account was deleted last month.',
+    'Personens konto togs bort förra månaden.',
   'pt.profile-card.closed.account.has.date.a.few.months':
-    'Their account has been deleted for a few months.',
+    'Personens konto har varit borttaget i några få månader.',
   'pt.profile-card.closed.account.has.date.several.months':
-    'Their account has been deleted for several months.',
+    'Personens konto har varit borttaget i flera månader.',
   'pt.profile-card.closed.account.has.date.more.than.a.year':
-    'Their account has been deleted for more than a year.',
-  'pt.profile-card.disabled.account.default.name': 'Former user',
+    'Personens konto har varit borttaget i mer än ett år.',
+  'pt.profile-card.disabled.account.default.name': 'Före detta användare',
 };

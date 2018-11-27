@@ -1,35 +1,35 @@
 // Italian
 export default {
-  'pt.profile-card.inactive.account': 'Account deactivated',
+  'pt.profile-card.inactive.account': 'Account disattivato',
   'pt.profile-card.general.msg.disabled.user':
-    'You can no longer collaborate with this person.',
+    'Non puoi più collaborare con questa persona.',
   'pt.profile-card.inactive.account.no.date':
-    'Their account has been deactivated.',
+    'Il suo account è stato disattivato.',
   'pt.profile-card.inactive.account.has.date.this.week':
-    'Their account was deactivated this week.',
+    'Il suo account è stato disattivato questa settimana.',
   'pt.profile-card.inactive.account.has.date.this.month':
-    'Their account was deactivated this month.',
+    'Il suo account è stato disattivato questo mese.',
   'pt.profile-card.inactive.account.has.date.last.month':
-    'Their account was deactivated last month.',
+    'Il suo account è stato disattivato il mese scorso.',
   'pt.profile-card.inactive.account.has.date.a.few.months':
-    'Their account has been deactivated for a few months.',
+    'Il suo account è disattivato da qualche mese.',
   'pt.profile-card.inactive.account.has.date.several.months':
-    'Their account has been deactivated for several months.',
+    'Il suo account è disattivato da diversi mesi.',
   'pt.profile-card.inactive.account.has.date.more.than.a.year':
-    'Their account has been deactivated for more than a year.',
-  'pt.profile-card.closed.account': 'Account deleted',
-  'pt.profile-card.closed.account.no.date': 'Their account has been deleted.',
+    'Il suo account è disattivato da più di un anno.',
+  'pt.profile-card.closed.account': 'Account eliminato',
+  'pt.profile-card.closed.account.no.date': 'Il suo account è stato eliminato.',
   'pt.profile-card.closed.account.has.date.this.week':
-    'Their account was deleted this week.',
+    'Il suo account è stato eliminato questa settimana.',
   'pt.profile-card.closed.account.has.date.this.month':
-    'Their account was deleted this month.',
+    'Il suo account è stato eliminato questo mese.',
   'pt.profile-card.closed.account.has.date.last.month':
-    'Their account was deleted last month.',
+    'Il suo account è stato eliminato lo scorso mese.',
   'pt.profile-card.closed.account.has.date.a.few.months':
-    'Their account has been deleted for a few months.',
+    'Il suo account è stato eliminato da qualche mese.',
   'pt.profile-card.closed.account.has.date.several.months':
-    'Their account has been deleted for several months.',
+    'Il suo account è stato eliminato da diversi mesi.',
   'pt.profile-card.closed.account.has.date.more.than.a.year':
-    'Their account has been deleted for more than a year.',
-  'pt.profile-card.disabled.account.default.name': 'Former user',
+    'Il suo account è stato eliminato da più di un anno.',
+  'pt.profile-card.disabled.account.default.name': 'Ex utente',
 };

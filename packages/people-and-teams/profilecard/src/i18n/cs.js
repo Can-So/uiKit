@@ -1,35 +1,34 @@
 // Czech
 export default {
-  'pt.profile-card.inactive.account': 'Account deactivated',
+  'pt.profile-card.inactive.account': 'Deaktivovaný účet',
   'pt.profile-card.general.msg.disabled.user':
-    'You can no longer collaborate with this person.',
-  'pt.profile-card.inactive.account.no.date':
-    'Their account has been deactivated.',
+    'S touto osobou již nemůžete spolupracovat.',
+  'pt.profile-card.inactive.account.no.date': 'Účet uživatele byl deaktivován.',
   'pt.profile-card.inactive.account.has.date.this.week':
-    'Their account was deactivated this week.',
+    'Účet uživatele byl deaktivován tento týden.',
   'pt.profile-card.inactive.account.has.date.this.month':
-    'Their account was deactivated this month.',
+    'Účet uživatele byl tento měsíc deaktivován.',
   'pt.profile-card.inactive.account.has.date.last.month':
-    'Their account was deactivated last month.',
+    'Účet uživatele byl deaktivován minulý měsíc.',
   'pt.profile-card.inactive.account.has.date.a.few.months':
-    'Their account has been deactivated for a few months.',
+    'Účet uživatele je deaktivovaný již několik měsíců.',
   'pt.profile-card.inactive.account.has.date.several.months':
-    'Their account has been deactivated for several months.',
+    'Účet uživatele je deaktivovaný již několik měsíců.',
   'pt.profile-card.inactive.account.has.date.more.than.a.year':
-    'Their account has been deactivated for more than a year.',
-  'pt.profile-card.closed.account': 'Account deleted',
-  'pt.profile-card.closed.account.no.date': 'Their account has been deleted.',
+    'Účet uživatele je deaktivovaný více než rok.',
+  'pt.profile-card.closed.account': 'Smazaný účet',
+  'pt.profile-card.closed.account.no.date': 'Účet uživatele byl smazán.',
   'pt.profile-card.closed.account.has.date.this.week':
-    'Their account was deleted this week.',
+    'Účet uživatele byl smazán tento týden.',
   'pt.profile-card.closed.account.has.date.this.month':
-    'Their account was deleted this month.',
+    'Účet uživatele byl tento měsíc smazán.',
   'pt.profile-card.closed.account.has.date.last.month':
-    'Their account was deleted last month.',
+    'Účet uživatele byl minulý měsíc smazán.',
   'pt.profile-card.closed.account.has.date.a.few.months':
-    'Their account has been deleted for a few months.',
+    'Účet uživatele je smazaný již několik měsíců.',
   'pt.profile-card.closed.account.has.date.several.months':
-    'Their account has been deleted for several months.',
+    'Účet uživatele je smazaný již několik měsíců.',
   'pt.profile-card.closed.account.has.date.more.than.a.year':
-    'Their account has been deleted for more than a year.',
-  'pt.profile-card.disabled.account.default.name': 'Former user',
+    'Účet uživatele je smazaný více než rok.',
+  'pt.profile-card.disabled.account.default.name': 'Bývalý uživatel',
 };

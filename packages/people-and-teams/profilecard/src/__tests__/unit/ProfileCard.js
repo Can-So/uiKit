@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { shallow, mount } from 'enzyme';
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
 import AkButton from '@atlaskit/button';
 import { Presence } from '@atlaskit/avatar';
@@ -7,11 +8,16 @@ import AkProfilecardResourced, { AkProfilecard, AkProfileClient } from '../..';
 import ErrorMessage from '../../components/ErrorMessage';
 import presences from '../../internal/presences';
 import { FullNameLabel, ActionButtonGroup } from '../../styled/Card';
-import {
-  mountWithIntl,
-  shallowWithIntl,
-} from './helper/_intl-enzyme-test-helper';
 import mockGlobalDate from './helper/_mock-global-date';
+
+function MockMessagesIntlProvider(props: any) {
+  return props.children;
+}
+
+jest.mock(
+  '../../components/MessagesIntlProvider',
+  () => MockMessagesIntlProvider,
+);
 
 describe('Profilecard', () => {
   const defaultProps = {
@@ -32,10 +38,7 @@ describe('Profilecard', () => {
   });
 
   const renderShallow = (props = {}) =>
-    shallowWithIntl(<AkProfilecard {...defaultProps} {...props} />);
-
-  const renderMount = (props = {}) =>
-    mountWithIntl(<AkProfilecard {...defaultProps} {...props} />);
+    shallow(<AkProfilecard {...defaultProps} {...props} />);
 
   it('should export default AkProfilecardResourced', () => {
     expect(AkProfilecardResourced).toBeInstanceOf(Object);
@@ -48,16 +51,13 @@ describe('Profilecard', () => {
 
   describe('AkProfilecard', () => {
     it('should be possible to create a component', () => {
-      const card = renderShallow();
+      const card = shallow(<AkProfilecard />);
       expect(card.length).toBeGreaterThan(0);
     });
 
     describe('fullName property', () => {
       const fullName = 'This is an avatar!';
-      const card = renderShallow({
-        fullName,
-      });
-
+      const card = shallow(<AkProfilecard fullName={fullName} />);
       it('should show the full name on the card if property is set', () => {
         const el = card.find(FullNameLabel).dive();
         expect(el.text()).toBe(fullName);
@@ -77,10 +77,9 @@ describe('Profilecard', () => {
 
         presenceWithoutNone.forEach(presence => {
           it(`should render label with content ${presence}`, () => {
-            const card = renderMount({
-              fullName: 'name',
-              presence,
-            });
+            const card = mount(
+              <AkProfilecard fullName="name" presence={presence} />,
+            );
             const el = card.find('IconLabel').first();
             expect(el.length).toBeGreaterThan(0);
             expect(el.text()).toBe(presences[presence]);
@@ -89,9 +88,7 @@ describe('Profilecard', () => {
       });
 
       it('should not render a presence label if property is not set', () => {
-        const card = renderMount({
-          fullName: 'name',
-        });
+        const card = mount(<AkProfilecard fullName="name" />);
         const el = card.find(Presence);
         expect(el.exists()).toBe(false);
       });
@@ -105,11 +102,13 @@ describe('Profilecard', () => {
 
         presenceWithoutNone.forEach(presence => {
           it(`should render label with content ${presence}`, () => {
-            const card = renderMount({
-              fullName: 'name',
-              presence,
-              presenceMessage: 'Test message',
-            });
+            const card = mount(
+              <AkProfilecard
+                fullName="name"
+                presence={presence}
+                presenceMessage="Test message"
+              />,
+            );
             const el = card.find('IconLabel').first();
             expect(el.length).toBeGreaterThan(0);
             expect(el.text()).toBe('Test message');
@@ -118,11 +117,9 @@ describe('Profilecard', () => {
       });
 
       it('should not render a presence label if presenceMessage is set but presence is not', () => {
-        const card = renderMount({
-          fullName: 'name',
-          presenceMessage: 'Test message',
-        });
-
+        const card = mount(
+          <AkProfilecard fullName="name" presenceMessage="Test message" />,
+        );
         const el = card.find(Presence);
         expect(el.exists()).toBe(false);
       });
@@ -130,27 +127,21 @@ describe('Profilecard', () => {
 
     describe('isLoading property', () => {
       it('should render the LoadingMessage component', () => {
-        const card = renderMount({
-          isLoading: true,
-        });
+        const card = mount(<AkProfilecard isLoading />);
         expect(card.find('SpinnerContainer').length).toBe(1);
       });
     });
 
     describe('hasError property', () => {
       it('should render the ErrorMessage component', () => {
-        const card = renderMount({
-          hasError: true,
-        });
+        const card = mount(<AkProfilecard hasError />);
         expect(card.find(ErrorMessage).length).toBe(1);
       });
 
       it('should render the ErrorMessage component with retry button if clientFetchProfile is provided', () => {
-        const card = renderMount({
-          hasError: true,
-          clientFetchProfile: () => {},
-        });
-
+        const card = mount(
+          <AkProfilecard hasError clientFetchProfile={() => {}} />,
+        );
         const errorComponent = card.find(ErrorMessage);
         expect(errorComponent.length).toBe(1);
         expect(errorComponent.find(CrossCircleIcon).length).toBe(1);
@@ -173,10 +164,7 @@ describe('Profilecard', () => {
           label: 'three',
         },
       ];
-      const card = renderMount({
-        fullName: 'name',
-        actions,
-      });
+      const card = mount(<AkProfilecard fullName="name" actions={actions} />);
 
       it('should render an action button for every item in actions property', () => {
         const actionsWrapper = card.find(ActionButtonGroup);
@@ -261,9 +249,7 @@ describe('Profilecard', () => {
 
     describe('customElevation', () => {
       it('should have correct customElevation', () => {
-        const wrapper = renderMount({
-          customElevation: 'e400',
-        });
+        const wrapper = mount(<AkProfilecard customElevation="e400" />);
         expect(
           wrapper.find('HeightTransitionWrapper').props().customElevation,
         ).toEqual('e400');

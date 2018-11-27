@@ -1,35 +1,34 @@
 // Russian
 export default {
-  'pt.profile-card.inactive.account': 'Account deactivated',
+  'pt.profile-card.inactive.account': 'Аккаунт отключен',
   'pt.profile-card.general.msg.disabled.user':
-    'You can no longer collaborate with this person.',
-  'pt.profile-card.inactive.account.no.date':
-    'Their account has been deactivated.',
+    'Вы больше не можете работать с этим пользователем.',
+  'pt.profile-card.inactive.account.no.date': 'Его аккаунт был отключен.',
   'pt.profile-card.inactive.account.has.date.this.week':
-    'Their account was deactivated this week.',
+    'Его аккаунт был отключен на этой неделе.',
   'pt.profile-card.inactive.account.has.date.this.month':
-    'Their account was deactivated this month.',
+    'Его аккаунт был отключен в этом месяце.',
   'pt.profile-card.inactive.account.has.date.last.month':
-    'Their account was deactivated last month.',
+    'Его аккаунт был отключен в прошлом месяце.',
   'pt.profile-card.inactive.account.has.date.a.few.months':
-    'Their account has been deactivated for a few months.',
+    'Его аккаунт был отключен несколько месяцев назад.',
   'pt.profile-card.inactive.account.has.date.several.months':
-    'Their account has been deactivated for several months.',
+    'Его аккаунт уже несколько месяцев отключен.',
   'pt.profile-card.inactive.account.has.date.more.than.a.year':
-    'Their account has been deactivated for more than a year.',
-  'pt.profile-card.closed.account': 'Account deleted',
-  'pt.profile-card.closed.account.no.date': 'Their account has been deleted.',
+    'Его аккаунт был отключен более года назад.',
+  'pt.profile-card.closed.account': 'Аккаунт удален',
+  'pt.profile-card.closed.account.no.date': 'Его аккаунт был удален.',
   'pt.profile-card.closed.account.has.date.this.week':
-    'Their account was deleted this week.',
+    'Его аккаунт был удален на этой неделе.',
   'pt.profile-card.closed.account.has.date.this.month':
-    'Their account was deleted this month.',
+    'Его аккаунт был удален в этом месяце.',
   'pt.profile-card.closed.account.has.date.last.month':
-    'Their account was deleted last month.',
+    'Его аккаунт был удален в прошлом месяце.',
   'pt.profile-card.closed.account.has.date.a.few.months':
-    'Their account has been deleted for a few months.',
+    'Его аккаунт был удален несколько месяцев назад.',
   'pt.profile-card.closed.account.has.date.several.months':
-    'Their account has been deleted for several months.',
+    'Его аккаунт удален уже несколько месяцев назад.',
   'pt.profile-card.closed.account.has.date.more.than.a.year':
-    'Their account has been deleted for more than a year.',
-  'pt.profile-card.disabled.account.default.name': 'Former user',
+    'Его аккаунт был удален более года назад.',
+  'pt.profile-card.disabled.account.default.name': 'Бывший пользователь',
 };

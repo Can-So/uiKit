@@ -1,35 +1,34 @@
 // Estonian
 export default {
-  'pt.profile-card.inactive.account': 'Account deactivated',
+  'pt.profile-card.inactive.account': 'Konto on deaktiveeritud',
   'pt.profile-card.general.msg.disabled.user':
-    'You can no longer collaborate with this person.',
-  'pt.profile-card.inactive.account.no.date':
-    'Their account has been deactivated.',
+    'Te ei saa enam selle inimesega koostööd teha.',
+  'pt.profile-card.inactive.account.no.date': 'Nende konto on deaktiveeritud.',
   'pt.profile-card.inactive.account.has.date.this.week':
-    'Their account was deactivated this week.',
+    'Nende konto deaktiveeriti sel nädalal.',
   'pt.profile-card.inactive.account.has.date.this.month':
-    'Their account was deactivated this month.',
+    'Nende konto deaktiveeriti sel kuul.',
   'pt.profile-card.inactive.account.has.date.last.month':
-    'Their account was deactivated last month.',
+    'Nende konto deaktiveeriti eelmisel kuul.',
   'pt.profile-card.inactive.account.has.date.a.few.months':
-    'Their account has been deactivated for a few months.',
+    'Nende konto on olnud juba paar kuud deaktiveeritud.',
   'pt.profile-card.inactive.account.has.date.several.months':
-    'Their account has been deactivated for several months.',
+    'Nende konto on olnud juba mitu kuud deaktiveeritud.',
   'pt.profile-card.inactive.account.has.date.more.than.a.year':
-    'Their account has been deactivated for more than a year.',
-  'pt.profile-card.closed.account': 'Account deleted',
-  'pt.profile-card.closed.account.no.date': 'Their account has been deleted.',
+    'Nende konto on olnud juba üle aasta deaktiveeritud.',
+  'pt.profile-card.closed.account': 'Konto on kustutatud',
+  'pt.profile-card.closed.account.no.date': 'Nende konto on kustutatud.',
   'pt.profile-card.closed.account.has.date.this.week':
-    'Their account was deleted this week.',
+    'Nende konto kustutati sel nädalal.',
   'pt.profile-card.closed.account.has.date.this.month':
-    'Their account was deleted this month.',
+    'Nende konto kustutati sel kuul.',
   'pt.profile-card.closed.account.has.date.last.month':
-    'Their account was deleted last month.',
+    'Nende konto kustutati eelmisel kuul.',
   'pt.profile-card.closed.account.has.date.a.few.months':
-    'Their account has been deleted for a few months.',
+    'Nende konto on olnud juba paar kuud kustutatud.',
   'pt.profile-card.closed.account.has.date.several.months':
-    'Their account has been deleted for several months.',
+    'Nende konto on olnud juba mitu kuud kustutatud.',
   'pt.profile-card.closed.account.has.date.more.than.a.year':
-    'Their account has been deleted for more than a year.',
-  'pt.profile-card.disabled.account.default.name': 'Former user',
+    'Nende konto on olnud juba üle aasta kustutatud.',
+  'pt.profile-card.disabled.account.default.name': 'Endine kasutaja',
 };

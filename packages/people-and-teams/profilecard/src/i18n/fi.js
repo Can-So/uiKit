@@ -1,35 +1,35 @@
 // Finnish
 export default {
-  'pt.profile-card.inactive.account': 'Account deactivated',
+  'pt.profile-card.inactive.account': 'Tili poistettu käytöstä',
   'pt.profile-card.general.msg.disabled.user':
-    'You can no longer collaborate with this person.',
+    'Et voi enää tehdä yhteistyötä tämän henkilön kanssa.',
   'pt.profile-card.inactive.account.no.date':
-    'Their account has been deactivated.',
+    'Hänen tilinsä on poistettu käytöstä.',
   'pt.profile-card.inactive.account.has.date.this.week':
-    'Their account was deactivated this week.',
+    'Hänen tilinsä poistettiin käytöstä tällä viikolla.',
   'pt.profile-card.inactive.account.has.date.this.month':
-    'Their account was deactivated this month.',
+    'Hänen tilinsä poistettiin käytöstä tässä kuussa.',
   'pt.profile-card.inactive.account.has.date.last.month':
-    'Their account was deactivated last month.',
+    'Hänen tilinsä poistettiin käytöstä viime kuussa.',
   'pt.profile-card.inactive.account.has.date.a.few.months':
-    'Their account has been deactivated for a few months.',
+    'Hänen tilinsä on ollut poissa käytöstä muutaman kuukauden ajan.',
   'pt.profile-card.inactive.account.has.date.several.months':
-    'Their account has been deactivated for several months.',
+    'Hänen tilinsä on ollut poissa käytöstä usean kuukauden ajan.',
   'pt.profile-card.inactive.account.has.date.more.than.a.year':
-    'Their account has been deactivated for more than a year.',
-  'pt.profile-card.closed.account': 'Account deleted',
-  'pt.profile-card.closed.account.no.date': 'Their account has been deleted.',
+    'Hänen tilinsä on ollut poissa käytöstä yli vuoden.',
+  'pt.profile-card.closed.account': 'Tili poistettu',
+  'pt.profile-card.closed.account.no.date': 'Hänen tilinsä on poistettu.',
   'pt.profile-card.closed.account.has.date.this.week':
-    'Their account was deleted this week.',
+    'Hänen tilinsä poistettiin tällä viikolla.',
   'pt.profile-card.closed.account.has.date.this.month':
-    'Their account was deleted this month.',
+    'Hänen tilinsä poistettiin tässä kuussa.',
   'pt.profile-card.closed.account.has.date.last.month':
-    'Their account was deleted last month.',
+    'Hänen tilinsä poistettiin viime kuussa.',
   'pt.profile-card.closed.account.has.date.a.few.months':
-    'Their account has been deleted for a few months.',
+    'Hänen tilinsä on ollut poistettuna muutaman kuukauden ajan.',
   'pt.profile-card.closed.account.has.date.several.months':
-    'Their account has been deleted for several months.',
+    'Hänen tilinsä on ollut poistettuna usean kuukauden ajan.',
   'pt.profile-card.closed.account.has.date.more.than.a.year':
-    'Their account has been deleted for more than a year.',
-  'pt.profile-card.disabled.account.default.name': 'Former user',
+    'Hänen tilinsä on ollut poistettuna yli vuoden.',
+  'pt.profile-card.disabled.account.default.name': 'Entinen käyttäjä',
 };

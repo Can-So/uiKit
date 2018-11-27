@@ -39,7 +39,7 @@ export default {
       return new MockDate().valueOf();
     };
 
-    MockDate.parse = function(dateString) {
+    MockDate.parse = function parse(dateString) {
       return _Date.parse(dateString);
     };
 

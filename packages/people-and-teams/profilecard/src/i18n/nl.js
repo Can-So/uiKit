@@ -1,35 +1,35 @@
 // Dutch
 export default {
-  'pt.profile-card.inactive.account': 'Account deactivated',
+  'pt.profile-card.inactive.account': 'Account gedeactiveerd',
   'pt.profile-card.general.msg.disabled.user':
-    'You can no longer collaborate with this person.',
+    'Je kunt niet meer samenwerken met deze persoon.',
   'pt.profile-card.inactive.account.no.date':
-    'Their account has been deactivated.',
+    'Zijn/haar account is gedeactiveerd.',
   'pt.profile-card.inactive.account.has.date.this.week':
-    'Their account was deactivated this week.',
+    'Zijn/haar account is deze week gedeactiveerd.',
   'pt.profile-card.inactive.account.has.date.this.month':
-    'Their account was deactivated this month.',
+    'Zijn/haar account is deze maand gedeactiveerd.',
   'pt.profile-card.inactive.account.has.date.last.month':
-    'Their account was deactivated last month.',
+    'Zijn/haar account is vorige maand gedeactiveerd.',
   'pt.profile-card.inactive.account.has.date.a.few.months':
-    'Their account has been deactivated for a few months.',
+    'Zijn/haar account is een paar maanden geleden gedeactiveerd.',
   'pt.profile-card.inactive.account.has.date.several.months':
-    'Their account has been deactivated for several months.',
+    'Zijn/haar account is een paar maanden geleden gedeactiveerd.',
   'pt.profile-card.inactive.account.has.date.more.than.a.year':
-    'Their account has been deactivated for more than a year.',
-  'pt.profile-card.closed.account': 'Account deleted',
-  'pt.profile-card.closed.account.no.date': 'Their account has been deleted.',
+    'Zijn/haar account is ruim een jaar geleden gedeactiveerd.',
+  'pt.profile-card.closed.account': 'Account verwijderd',
+  'pt.profile-card.closed.account.no.date': 'Zijn/haar account is verwijderd.',
   'pt.profile-card.closed.account.has.date.this.week':
-    'Their account was deleted this week.',
+    'Zijn/haar account is deze week verwijderd.',
   'pt.profile-card.closed.account.has.date.this.month':
-    'Their account was deleted this month.',
+    'Zijn/haar account is deze maand verwijderd.',
   'pt.profile-card.closed.account.has.date.last.month':
-    'Their account was deleted last month.',
+    'Zijn/haar account is vorige maand verwijderd.',
   'pt.profile-card.closed.account.has.date.a.few.months':
-    'Their account has been deleted for a few months.',
+    'Zijn/haar account is een paar maanden geleden verwijderd.',
   'pt.profile-card.closed.account.has.date.several.months':
-    'Their account has been deleted for several months.',
+    'Zijn/haar account is een paar maanden geleden verwijderd.',
   'pt.profile-card.closed.account.has.date.more.than.a.year':
-    'Their account has been deleted for more than a year.',
-  'pt.profile-card.disabled.account.default.name': 'Former user',
+    'Zijn/haar account is ruim een jaar geleden verwijderd.',
+  'pt.profile-card.disabled.account.default.name': 'Voormalige gebruiker',
 };

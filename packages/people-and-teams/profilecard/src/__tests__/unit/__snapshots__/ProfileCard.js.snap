@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Profilecard AkProfilecard status property should match snapshot when status=closed and status modified date is defined 1`] = `
-<InjectIntl(MessagesIntlProvider)>
+<MockMessagesIntlProvider>
   <HeightTransitionWrapper>
     <styled.div
       isDisabledUser={true}
@@ -58,11 +58,11 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
       </styled.div>
     </styled.div>
   </HeightTransitionWrapper>
-</InjectIntl(MessagesIntlProvider)>
+</MockMessagesIntlProvider>
 `;
 
 exports[`Profilecard AkProfilecard status property should match snapshot when status=closed and status modified date is unknown 1`] = `
-<InjectIntl(MessagesIntlProvider)>
+<MockMessagesIntlProvider>
   <HeightTransitionWrapper>
     <styled.div
       isDisabledUser={true}
@@ -119,11 +119,11 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
       </styled.div>
     </styled.div>
   </HeightTransitionWrapper>
-</InjectIntl(MessagesIntlProvider)>
+</MockMessagesIntlProvider>
 `;
 
 exports[`Profilecard AkProfilecard status property should match snapshot when status=inactive and status modified date is defined 1`] = `
-<InjectIntl(MessagesIntlProvider)>
+<MockMessagesIntlProvider>
   <HeightTransitionWrapper>
     <styled.div
       isDisabledUser={true}
@@ -191,11 +191,11 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
       </styled.div>
     </styled.div>
   </HeightTransitionWrapper>
-</InjectIntl(MessagesIntlProvider)>
+</MockMessagesIntlProvider>
 `;
 
 exports[`Profilecard AkProfilecard status property should match snapshot when status=inactive and status modified date is unknown 1`] = `
-<InjectIntl(MessagesIntlProvider)>
+<MockMessagesIntlProvider>
   <HeightTransitionWrapper>
     <styled.div
       isDisabledUser={true}
@@ -263,5 +263,5 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
       </styled.div>
     </styled.div>
   </HeightTransitionWrapper>
-</InjectIntl(MessagesIntlProvider)>
+</MockMessagesIntlProvider>
 `;
