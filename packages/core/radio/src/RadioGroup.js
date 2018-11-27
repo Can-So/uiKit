@@ -60,12 +60,12 @@ export default class RadioGroup extends Component<RadioGroupProps, State> {
     if (!options.length) return null;
 
     return (options.map((option: OptionPropType, index: number) => {
-      let optionProps = { ...option };
+      const optionProps = { ...option };
       if (typeof isDisabled !== 'undefined') {
-        optionProps = { ...optionProps, isDisabled };
+        optionProps.isDisabled = isDisabled;
       }
       if (value !== null && option.value === value) {
-        optionProps = { ...optionProps, isChecked: true };
+        optionProps.isChecked = true;
       }
       return (
         <Radio
