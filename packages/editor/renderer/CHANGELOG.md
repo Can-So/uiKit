@@ -1,5 +1,41 @@
 # @atlaskit/renderer
 
+## 31.0.3
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/smart-card@8.8.5
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/editor-common@22.0.2
+  - @atlaskit/editor-test-helpers@6.2.21
+  - @atlaskit/mention@15.1.3
+  - @atlaskit/status@0.2.6
+  - @atlaskit/task-decision@11.0.6
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-filmstrip@19.0.2
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/profilecard@6.0.3
+  - @atlaskit/icon@15.0.0
+
+## 31.0.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/analytics-listeners@4.1.1
+  - @atlaskit/task-decision@11.0.5
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/media-filmstrip@19.0.1
+  - @atlaskit/smart-card@8.8.4
+  - @atlaskit/profilecard@6.0.2
+  - @atlaskit/field-range@5.0.9
+  - @atlaskit/button@10.0.0
+
+## 31.0.1
+- [patch] [1c42021](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c42021):
+
+  - ED-5775: fix columns collapsing in renderer
+
 ## 31.0.0
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/editor-common@22.0.0

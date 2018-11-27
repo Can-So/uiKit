@@ -479,7 +479,7 @@ describe('Client', () => {
 
     client.register(card1.url).subscribe(card1.uuid, card1.updateFn);
 
-    await new Promise(res => setTimeout(res, 1));
+    await new Promise(res => window.setTimeout(res, 1));
 
     expect(customFetchMock.mock.calls).toEqual([[theUrl]]);
 
@@ -490,7 +490,7 @@ describe('Client', () => {
 
     client.register(card2.url).subscribe(card2.uuid, card2.updateFn);
 
-    await new Promise(res => setTimeout(res, 1));
+    await new Promise(res => window.setTimeout(res, 1));
 
     expect(customFetchMock.mock.calls).toEqual([[theUrl]]);
 

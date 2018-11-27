@@ -1,5 +1,19 @@
 # @atlaskit/editor-common
 
+## 22.0.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/editor-test-helpers@6.2.21
+  - @atlaskit/emoji@47.0.2
+  - @atlaskit/mention@15.1.3
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/profilecard@6.0.3
+  - @atlaskit/icon@15.0.0
+
+## 22.0.1
+- [patch] [2db96d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db96d3):
+
+  - Adjust min-width nodes to support table resizing
+
 ## 22.0.0
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/emoji@47.0.0

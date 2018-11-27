@@ -44,7 +44,7 @@ export default class PlaceholderTextNode {
       nodeBefore.type === this.view.state.schema.nodes.placeholder &&
       this.view.domAtPos(pos).node === event.target
     ) {
-      document.getSelection().removeAllRanges();
+      document.getSelection()!.removeAllRanges();
       // Find the nearest selection to the left to move the cursor to
       // TODO: [ts30] handle void and null properly
       const selectionToLeftOfClick = TextSelection.findFrom(
@@ -54,7 +54,7 @@ export default class PlaceholderTextNode {
       ) as TextSelection;
       this.view.dispatch(state.tr.setSelection(selectionToLeftOfClick));
     } else {
-      document.getSelection().removeAllRanges();
+      document.getSelection()!.removeAllRanges();
       this.view.dispatch(state.tr.setSelection(selectionAtClick));
     }
     return true;

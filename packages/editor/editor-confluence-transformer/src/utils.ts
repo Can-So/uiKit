@@ -317,7 +317,7 @@ export function getContent(
 
 export function parseMacro(node: Element): Macro {
   const macroName = getAcName(node) || 'Unnamed Macro';
-  const macroId = node.getAttributeNS(AC_XMLNS, 'macro-id');
+  const macroId = node.getAttributeNS(AC_XMLNS, 'macro-id')!;
   const properties = {};
   const params = {};
 

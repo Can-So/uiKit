@@ -1,5 +1,12 @@
 # @atlaskit/analytics-listeners
 
+## 4.1.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/button@10.0.0
+  - @atlaskit/analytics-next-types@3.1.2
+
 ## 4.1.0
 - [minor] [dd0a73c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dd0a73c):
 

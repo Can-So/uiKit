@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 import { borderRadius, colors } from '@atlaskit/theme';
 import {
   blockNodesVerticalMargin,
-  akEditorElementMinWidth,
+  akEditorTableCellMinWidth,
 } from '@atlaskit/editor-common';
 import { akEditorCodeFontFamily, akEditorCodeBlockPadding } from '../../styles';
 
@@ -16,7 +16,7 @@ export const codeBlockStyles = css`
     margin: ${blockNodesVerticalMargin} 0 0 0;
     counter-reset: line;
     display: flex;
-    min-width: ${akEditorElementMinWidth}px;
+    min-width: ${akEditorTableCellMinWidth}px;
 
     .line-number-gutter {
       color: ${colors.N300};

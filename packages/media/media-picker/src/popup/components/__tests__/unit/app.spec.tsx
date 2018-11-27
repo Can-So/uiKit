@@ -64,7 +64,7 @@ const makeFile = (id: string): MediaFile => ({
 });
 
 const mockSetTimeout = () => {
-  const origSetTimeout = setTimeout;
+  const origSetTimeout = window.setTimeout;
   window.setTimeout = jest.fn().mockImplementation((cb, ms, ...args) => {
     cb(...args);
   });

@@ -315,7 +315,7 @@ export default class ToolbarFeedback extends PureComponent<Props, State> {
 
             // and run it now
             // next tick is essential due to JIRA issue collector behaviour
-            setTimeout(showCollectorDialog, 0);
+            window.setTimeout(showCollectorDialog, 0);
           }
         },
         fieldValues: {

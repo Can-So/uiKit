@@ -1,5 +1,5 @@
 export function checkClipboardTypes(
-  type: DOMStringList | Array<string>,
+  type: DOMStringList | ReadonlyArray<string>,
   item: string,
 ) {
   const isDOMStringList = (t): t is DOMStringList => !t.indexOf && !!t.contains;

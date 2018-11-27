@@ -463,7 +463,7 @@ describe('Card', () => {
     );
 
     // need this delay because of the promise within customFetch
-    await new Promise(resolve => setTimeout(resolve, 1));
+    await new Promise(resolve => window.setTimeout(resolve, 1));
     wrapper.update();
 
     expect(wrapper.find(BlockCardResolvedView).exists()).toBeTruthy();

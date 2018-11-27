@@ -193,7 +193,7 @@ export const customInsertMenuItems = [
       );
 
       const openMacroBrowser = new Promise(resolve => {
-        setTimeout(() => {
+        window.setTimeout(() => {
           resolve(bodiedExtensionData[0]);
         }, 1000);
       });

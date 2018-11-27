@@ -19,7 +19,7 @@ class CacheTimer extends React.Component<{ client: Client; url: string }, any> {
   };
   timer: number | undefined = undefined;
   componentDidMount() {
-    this.timer = setInterval(this.tick, 1000);
+    this.timer = window.setInterval(this.tick, 1000);
   }
   componentWillUnmount() {
     clearInterval(this.timer);

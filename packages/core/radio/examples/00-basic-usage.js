@@ -1,5 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
+import { Checkbox } from '@atlaskit/checkbox';
 import { RadioGroup } from '../src';
 import type { OptionsPropType } from '../src/types';
 
@@ -8,30 +9,45 @@ const options: OptionsPropType = [
   { name: 'color', value: 'blue', label: 'Blue' },
   { name: 'color', value: 'yellow', label: 'Yellow' },
   { name: 'color', value: 'green', label: 'Green' },
+  { name: 'color', value: 'black', label: 'Black' },
 ];
 
 type State = {
   currentValue: string | null,
+  isDisabled?: boolean,
   onChangeResult: string,
 };
 
 export default class BasicExample extends PureComponent<void, State> {
   state = {
     currentValue: null,
+    isDisabled: undefined,
     onChangeResult: 'Click on a radio field to trigger onChange',
   };
 
-  onChange = (event: any) => {
-    const newValue = event.target.value;
+  onChange = (event: SyntheticEvent<HTMLInputElement>) => {
     this.setState({
-      onChangeResult: `onChange called with value: ${newValue}`,
+      onChangeResult: `onChange called with value: ${
+        event.currentTarget.value
+      }`,
+    });
+  };
+
+  toggleCheckbox = (event: SyntheticEvent<HTMLInputElement>) => {
+    this.setState({
+      [event.currentTarget.value]: event.currentTarget.checked,
     });
   };
 
   render() {
     return (
       <div>
-        <RadioGroup options={options} onChange={this.onChange} />
+        <h4>Choose a color:</h4>
+        <RadioGroup
+          isDisabled={this.state.isDisabled}
+          options={options}
+          onChange={this.onChange}
+        />
         <div
           style={{
             borderStyle: 'dashed',
@@ -42,8 +58,13 @@ export default class BasicExample extends PureComponent<void, State> {
             margin: '0.5em',
           }}
         >
-          onChange called with value: {this.state.currentValue}
+          {this.state.onChangeResult}
         </div>
+        <Checkbox
+          value="isDisabled"
+          label="is disabled"
+          onChange={this.toggleCheckbox}
+        />
       </div>
     );
   }
