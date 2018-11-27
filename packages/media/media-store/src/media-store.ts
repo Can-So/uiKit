@@ -405,7 +405,10 @@ export interface MediaStoreTouchFileParams {
 
 export interface TouchFileDescriptor {
   fileId: string;
+  collection?: string;
   occurrenceKey?: string;
+  expireAfter?: number;
+  deletable?: boolean;
 }
 
 export interface MediaStoreTouchFileBody {

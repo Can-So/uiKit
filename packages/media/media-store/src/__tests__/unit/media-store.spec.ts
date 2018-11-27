@@ -490,10 +490,13 @@ describe('MediaStore', () => {
 
       const descriptor1: TouchFileDescriptor = {
         fileId: 'some-file-id',
-        occurrenceKey: 'some-occurrence-key',
       };
       const descriptor2: TouchFileDescriptor = {
         fileId: 'some-other-file-id',
+        occurrenceKey: 'some-occurrence-key',
+        collection: 'some-collection',
+        deletable: false,
+        expireAfter: 42,
       };
 
       it('should POST to /upload/createWithFiles', () => {
