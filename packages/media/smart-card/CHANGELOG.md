@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 8.8.3
+- Updated dependencies [b42680b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b42680b):
+  - @atlaskit/form@4.0.17
+  - @atlaskit/radio@0.4.0
+
 ## 8.8.2
 - [patch] [b859e08](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b859e08):
 
