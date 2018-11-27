@@ -69,5 +69,14 @@ export default {
   'fabric.media.share_files_instantly':
     'Compartilharemos os arquivos instantaneamente',
   'fabric.media.insert_files':
-    '{0, plural, one{Insert a file} other{Insert {0} files}}',
+    '{0, plural, one{Inserir um arquivo} other{Inserir {0} arquivos}}',
+  'fabric.media.zoom_out': 'zoom out',
+  'fabric.media.zoom_in': 'zoom in',
+  'fabric.media.remove_image': 'Remove image',
+  'fabric.media.play': 'play',
+  'fabric.media.pause': 'pause',
+  'fabric.media.disable_fullscreen': 'disable fullscreen',
+  'fabric.media.enable_fullscreen': 'enable fullscreen',
+  'fabric.media.error_loading_file': 'Error loading file',
+  'fabric.media.error_generating_preview': 'Error generating preview',
 };

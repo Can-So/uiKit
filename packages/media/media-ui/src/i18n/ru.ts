@@ -62,5 +62,14 @@ export default {
   'fabric.media.drop_your_files_here': 'Перетащите файлы сюда',
   'fabric.media.share_files_instantly': 'Мы загрузим их автоматически',
   'fabric.media.insert_files':
-    '{0, plural, one{Insert a file} few{Insert {0} files} many{Insert {0} files} other{Insert {0} files}}',
+    '{0, plural, one{Вставить файл} few{Вставить {0} файла} many{Вставить {0} файлов} other{Вставить {0} файла}}',
+  'fabric.media.zoom_out': 'zoom out',
+  'fabric.media.zoom_in': 'zoom in',
+  'fabric.media.remove_image': 'Remove image',
+  'fabric.media.play': 'play',
+  'fabric.media.pause': 'pause',
+  'fabric.media.disable_fullscreen': 'disable fullscreen',
+  'fabric.media.enable_fullscreen': 'enable fullscreen',
+  'fabric.media.error_loading_file': 'Error loading file',
+  'fabric.media.error_generating_preview': 'Error generating preview',
 };

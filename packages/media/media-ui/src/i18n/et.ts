@@ -63,5 +63,14 @@ export default {
   'fabric.media.drop_your_files_here': 'Aseta failid siia',
   'fabric.media.share_files_instantly': 'Jagame seda kohe',
   'fabric.media.insert_files':
-    '{0, plural, one{Insert a file} other{Insert {0} files}}',
+    '{0, plural, one{Sisesta fail} other{Sisesta {0} faili}}',
+  'fabric.media.zoom_out': 'zoom out',
+  'fabric.media.zoom_in': 'zoom in',
+  'fabric.media.remove_image': 'Remove image',
+  'fabric.media.play': 'play',
+  'fabric.media.pause': 'pause',
+  'fabric.media.disable_fullscreen': 'disable fullscreen',
+  'fabric.media.enable_fullscreen': 'enable fullscreen',
+  'fabric.media.error_loading_file': 'Error loading file',
+  'fabric.media.error_generating_preview': 'Error generating preview',
 };
