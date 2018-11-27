@@ -158,7 +158,7 @@ describe('UserPicker', () => {
 
     it('should load users when picker open', () => {
       const usersPromise = new Promise<User[]>(resolve =>
-        setTimeout(() => resolve(users), 500),
+        window.setTimeout(() => resolve(users), 500),
       );
       const loadUsers = jest.fn(() => usersPromise);
       const component = shallowUserPicker({ loadUsers });
@@ -176,7 +176,7 @@ describe('UserPicker', () => {
     describe('onInputChange', () => {
       it('should load users on input change', () => {
         const usersPromise = new Promise<User[]>(resolve =>
-          setTimeout(() => resolve(users), 500),
+          window.setTimeout(() => resolve(users), 500),
         );
         const loadUsers = jest.fn(() => usersPromise);
         const component = shallowUserPicker({ loadUsers });
@@ -203,7 +203,7 @@ describe('UserPicker', () => {
 
       it('should debounce input change events', () => {
         const usersPromise = new Promise<User[]>(resolve =>
-          setTimeout(() => resolve(users), 500),
+          window.setTimeout(() => resolve(users), 500),
         );
         const loadUsers = jest.fn(() => usersPromise);
         shallowUserPicker({ loadUsers });

@@ -61,7 +61,7 @@ export class JiraCardClient extends Client {
     //
     return new Promise(resolve => {
       // We simulate a 2s load time
-      setTimeout(() => {
+      window.setTimeout(() => {
         resolve({
           meta: {
             visibility: 'restricted',

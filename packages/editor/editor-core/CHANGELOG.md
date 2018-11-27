@@ -1,5 +1,44 @@
 # @atlaskit/editor-core
 
+## 89.0.4
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/avatar-group@2.1.6
+  - @atlaskit/calendar@7.0.13
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/droplist@7.0.13
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/select@6.1.8
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/renderer@31.0.2
+  - @atlaskit/emoji@47.0.1
+  - @atlaskit/pubsub@3.0.5
+  - @atlaskit/task-decision@11.0.5
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/media-filmstrip@19.0.1
+  - @atlaskit/media-picker@25.0.2
+  - @atlaskit/smart-card@8.8.4
+  - @atlaskit/button@10.0.0
+  - @atlaskit/analytics-next-types@3.1.2
+
+## 89.0.3
+- [patch] [1e8d316](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e8d316):
+
+  - ED-5819: Fixes emitting text color plugin state on every key stroke, without the state changing.
+
+## 89.0.2
+- [patch] [a2cae0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2cae0c):
+
+  - Fix conversion of pasted urls via macroPlugin with html in clipboard (ED-5786)
+
 ## 89.0.1
 - [patch] [086f816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/086f816):
 

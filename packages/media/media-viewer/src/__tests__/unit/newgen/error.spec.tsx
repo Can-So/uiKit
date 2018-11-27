@@ -48,7 +48,7 @@ describe('Error Message', () => {
   it('should render a child component', () => {
     const el = mount(
       <ErrorMessage intl={fakeIntl} error={createError('unsupported')}>
-        <Button label="Download" />
+        <Button />
       </ErrorMessage>,
     );
     expect(el.find(Button)).toHaveLength(1);

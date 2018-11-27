@@ -119,7 +119,7 @@ export class CustomVideo extends Component<
     const secondaryColor = isHDActive ? colors.white : colors.DN60;
     return (
       <Button
-        appearance="toolbar"
+        appearance={'toolbar' as any}
         isSelected={isHDActive}
         onClick={onHDToggleClick}
         iconBefore={
@@ -139,7 +139,7 @@ export class CustomVideo extends Component<
         <VolumeToggleWrapper isMuted={isMuted}>
           <MutedIndicator isMuted={isMuted} />
           <Button
-            appearance="toolbar"
+            appearance={'toolbar' as any}
             onClick={actions.toggleMute}
             iconBefore={<SoundIcon label="volume" />}
           />
@@ -170,7 +170,7 @@ export class CustomVideo extends Component<
 
     return (
       <Button
-        appearance="toolbar"
+        appearance={'toolbar' as any}
         onClick={this.onFullScreenClick}
         iconBefore={icon}
       />
@@ -209,7 +209,7 @@ export class CustomVideo extends Component<
             const toggleButtonAction = isPlaying ? actions.pause : actions.play;
             const button = (
               <Button
-                appearance="toolbar"
+                appearance={'toolbar' as any}
                 iconBefore={toggleButtonIcon}
                 onClick={toggleButtonAction}
               />

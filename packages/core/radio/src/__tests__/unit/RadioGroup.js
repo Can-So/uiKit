@@ -64,18 +64,57 @@ describe(name, () => {
           }
         });
       });
-
-      describe('isRequired prop', () => {
+      describe('isDisabled prop', () => {
         it('is reflected to each Radio option', () => {
-          const isRequired = true;
+          const isDisabled = true;
           const wrapper = shallow(
-            <RadioGroup onChange={() => {}} isRequired={isRequired} />,
+            <RadioGroup
+              onChange={() => {}}
+              isDisabled={isDisabled}
+              options={sampleOptions}
+            />,
           );
           wrapper
             .find(Radio)
             .forEach(radio =>
-              expect(radio.prop('isRequired', isRequired)).not.toBe(undefined),
+              expect(radio.prop('isDisabled', isDisabled)).toBe(true),
             );
+        });
+        it('if set, overrides isDisabled values set on each option', () => {
+          const isDisabled = true;
+          const wrapper = mount(
+            <RadioGroup
+              onChange={() => {}}
+              isDisabled={isDisabled}
+              options={[
+                ...sampleOptions,
+                {
+                  name: 'color',
+                  value: 'red',
+                  label: 'Red',
+                  isDisabled: false,
+                },
+              ]}
+            />,
+          );
+          wrapper.find(Radio).forEach(radio => {
+            expect(radio.prop('isDisabled')).toBe(true);
+          });
+        });
+      });
+      describe('isRequired prop', () => {
+        it('is reflected to each Radio option', () => {
+          const isRequired = true;
+          const wrapper = mount(
+            <RadioGroup
+              onChange={() => {}}
+              isRequired={isRequired}
+              options={sampleOptions}
+            />,
+          );
+          wrapper.find(Radio).forEach(radio => {
+            expect(radio.prop('isRequired')).not.toBe(undefined);
+          });
         });
       });
 

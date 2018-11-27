@@ -33,7 +33,11 @@ export class PortalProviderAPI extends EventDispatcher {
     hasReactContext: boolean = false,
   ) {
     this.portals.set(container, { children, hasReactContext });
-    unstable_renderSubtreeIntoContainer(this.context, children(), container);
+    unstable_renderSubtreeIntoContainer(
+      this.context,
+      children() as React.ReactElement<any>,
+      container,
+    );
   }
 
   // TODO: until https://product-fabric.atlassian.net/browse/ED-5013
@@ -47,7 +51,7 @@ export class PortalProviderAPI extends EventDispatcher {
 
       unstable_renderSubtreeIntoContainer(
         this.context,
-        portal.children(),
+        portal.children() as React.ReactElement<any>,
         container,
       );
     });

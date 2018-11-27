@@ -43,7 +43,7 @@ describe('MediaFileService', () => {
   };
 
   const respondFakeXhr = (fileDetails?: FileDetails) => {
-    setTimeout(() => {
+    window.setTimeout(() => {
       const mockedResponse = {
         data: fileDetails || defaultFileDetails,
       };
@@ -133,7 +133,7 @@ describe('MediaFileService', () => {
         error => expect(error).toBeDefined(),
       );
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       requests[0].respond(500, {}, '');
     });
     return response;

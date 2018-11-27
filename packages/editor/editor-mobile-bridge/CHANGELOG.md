@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.3.1
+- [patch] [345b45c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/345b45c):
+
+  - Update @atlaskit/button inside @atlaskit/editor-mobile-bridge
+
 ## 6.3.0
 - [minor] [086f816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/086f816):
 

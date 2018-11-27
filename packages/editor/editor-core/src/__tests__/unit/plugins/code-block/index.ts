@@ -107,7 +107,7 @@ describe('code-block', () => {
           );
           const language = 'someLanguage';
           changeLanguage(language)(editorView.state, editorView.dispatch);
-          setTimeout(() => {
+          window.setTimeout(() => {
             expect(pluginState.language).toEqual(language);
           }, 0);
         });

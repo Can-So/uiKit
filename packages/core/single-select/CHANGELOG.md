@@ -1,5 +1,16 @@
 # @atlaskit/single-select
 
+## 6.0.8
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/droplist@7.0.13
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
 ## 6.0.7
 - [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
 

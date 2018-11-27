@@ -12,16 +12,24 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import enMessages from '../src/i18n/en';
 import languages from '../src/i18n/languages';
 import WithEditorActions from './../src/ui/WithEditorActions';
+import Editor from './../src/editor';
 import {
   SaveAndCancelButtons,
-  ExampleEditor,
   providers,
   mediaProvider,
+  analyticsHandler,
+  quickInsertProvider,
+  LOCALSTORAGE_defaultDocKey,
 } from './5-full-page';
 import LanguagePicker from '../example-helpers/LanguagePicker';
 import EditorContext from './../src/ui/EditorContext';
 import { EditorAppearance } from '../src/types';
 import { EditorActions } from '../src';
+import {
+  cardProvider,
+  customInsertMenuItems,
+} from '@atlaskit/editor-test-helpers';
+import { extensionHandlers } from '../example-helpers/extension-handlers';
 
 export type Props = {};
 export type State = {
@@ -34,6 +42,7 @@ export type State = {
   appearance: EditorAppearance;
   showADF: boolean;
   disabled: boolean;
+  vertical: boolean;
 };
 
 const Container = styled.div`
@@ -41,8 +50,20 @@ const Container = styled.div`
   margin-top: 0.5em;
 `;
 
-const Column = styled.div`
+const Column: React.ComponentClass<React.HTMLAttributes<{}> & {}> = styled.div`
   flex: 1;
+`;
+
+const EditorColumn: React.ComponentClass<
+  React.HTMLAttributes<{}> & { vertical: boolean }
+> = styled.div`
+  flex: 1;
+  ${p =>
+    typeof p.vertical === 'boolean'
+      ? p.vertical
+        ? `border-right: 1px solid ${colors.N30}; min-height: 85vh`
+        : `border-bottom: 1px solid ${colors.N30}`
+      : ''}
 `;
 
 const Controls = styled.div`
@@ -145,20 +166,28 @@ export const Textarea: any = styled.textarea`
   width: 100%;
   height: 80%;
 `;
+
+const LOCALSTORAGE_orientationKey =
+  'fabric.editor.example.kitchen-sink.orientation';
 export default class FullPageRendererExample extends React.Component<
   Props,
   State
 > {
-  private getDefaultADF = () => {
-    const localADF =
-      (localStorage &&
-        localStorage.getItem('fabric.editor.example.full-page')) ||
-      undefined;
+  private getJSONFromStorage = (key: string, fallback: any = undefined) => {
+    const localADF = (localStorage && localStorage.getItem(key)) || undefined;
 
-    if (localADF) {
-      return JSON.parse(localADF);
-    }
+    return localADF ? JSON.parse(localADF) : fallback;
   };
+
+  private getDefaultADF = () =>
+    this.getJSONFromStorage(LOCALSTORAGE_defaultDocKey, {
+      version: 1,
+      type: 'doc',
+      content: [],
+    });
+
+  private getDefaultOrientation = () =>
+    this.getJSONFromStorage(LOCALSTORAGE_orientationKey, { vertical: true });
 
   state: State = {
     locale: 'en',
@@ -168,9 +197,31 @@ export default class FullPageRendererExample extends React.Component<
     appearance: 'full-page',
     showADF: false,
     disabled: false,
+    vertical: this.getDefaultOrientation().vertical,
   };
 
   private inputRef: HTMLTextAreaElement | null;
+  private popupMountPoint: HTMLElement | null;
+
+  showHideADF = () =>
+    this.setState(state => ({
+      showADF: !state.showADF,
+    }));
+
+  enableDisableEditor = () =>
+    this.setState(state => ({
+      disabled: !state.disabled,
+    }));
+
+  switchEditorOrientation = () => {
+    const vertical = !this.state.vertical;
+    this.setState({ vertical });
+
+    localStorage.setItem(
+      LOCALSTORAGE_orientationKey,
+      JSON.stringify({ vertical: vertical }),
+    );
+  };
 
   render() {
     const { locale, messages } = this.state;
@@ -179,6 +230,12 @@ export default class FullPageRendererExample extends React.Component<
         <WithEditorActions
           render={actions => (
             <div>
+              <div
+                ref={ref => (this.popupMountPoint = ref)}
+                style={{
+                  zIndex: 9999,
+                }}
+              />
               <Controls>
                 <Select
                   formatOptionLabel={formatAppearanceOption}
@@ -211,61 +268,78 @@ export default class FullPageRendererExample extends React.Component<
                       display: 'flex',
                     }}
                   >
+                    <Button onClick={this.switchEditorOrientation}>
+                      Display {!this.state.vertical ? 'Vertical' : 'Horizontal'}
+                    </Button>
+
                     <Button
                       appearance={this.state.disabled ? 'primary' : 'default'}
-                      onClick={() => {
-                        this.setState(state => ({
-                          disabled: !state.disabled,
-                        }));
-                      }}
+                      onClick={this.enableDisableEditor}
                     >
                       {!this.state.disabled ? 'Disable' : 'Enable'} editor
                     </Button>
 
-                    <Button
-                      appearance="primary"
-                      onClick={() => {
-                        this.setState(state => ({
-                          showADF: !state.showADF,
-                        }));
-                      }}
-                    >
+                    <Button appearance="primary" onClick={this.showHideADF}>
                       {!this.state.showADF ? 'Show' : 'Hide'} current ADF
                     </Button>
                   </Column>
                 </Container>
               </Controls>
-              <Container>
-                <Column>
+              <Container
+                style={{
+                  flexDirection: !this.state.vertical ? 'column' : 'row',
+                }}
+              >
+                <EditorColumn vertical={this.state.vertical}>
                   <IntlProvider
                     locale={this.getLocalTag(locale)}
                     messages={messages}
                   >
-                    <ExampleEditor
-                      contentComponents={undefined}
-                      allowHelpDialog={true}
-                      quickInsert={true}
-                      allowLayouts={true}
+                    <Editor
                       appearance={this.state.appearance}
+                      analyticsHandler={analyticsHandler}
+                      quickInsert={{
+                        provider: Promise.resolve(quickInsertProvider),
+                      }}
+                      allowCodeBlocks={{ enableKeybindingsForIDE: true }}
+                      allowLists={true}
+                      allowTextColor={true}
+                      allowTables={{
+                        advanced: true,
+                      }}
+                      allowBreakout={true}
+                      allowJiraIssue={true}
+                      allowUnsupportedContent={true}
+                      allowPanel={true}
+                      allowExtension={{
+                        allowBreakout: true,
+                      }}
+                      allowRule={true}
+                      allowDate={true}
+                      allowLayouts={{
+                        allowBreakout: true,
+                      }}
+                      allowGapCursor={true}
+                      allowTextAlignment={true}
+                      allowTemplatePlaceholders={{ allowInserting: true }}
+                      UNSAFE_cards={{
+                        provider: Promise.resolve(cardProvider),
+                      }}
+                      allowStatus={true}
+                      {...providers}
                       media={{
                         provider: mediaProvider,
                         allowMediaSingle: true,
                         allowResizing: true,
                       }}
-                      allowTables={{
-                        allowColumnResizing: true,
-                        allowMergeCells: true,
-                        allowNumberColumn: true,
-                        allowBackgroundColor: true,
-                        allowHeaderRow: true,
-                        allowHeaderColumn: true,
-                        permittedLayouts: 'all',
-                        stickToolbarToBottom: true,
-                        UNSAFE_allowFlexiColumnResizing: true,
-                      }}
+                      insertMenuItems={customInsertMenuItems}
+                      extensionHandlers={extensionHandlers}
+                      placeholder="Type something here, and watch it render to the side!"
+                      shouldFocus={true}
                       defaultValue={this.state.adf}
                       disabled={this.state.disabled}
                       onChange={() => this.onEditorChange(actions)}
+                      popupsMountPoint={this.popupMountPoint || undefined}
                       primaryToolbarComponents={
                         <>
                           <LanguagePicker
@@ -278,7 +352,7 @@ export default class FullPageRendererExample extends React.Component<
                       }
                     />
                   </IntlProvider>
-                </Column>
+                </EditorColumn>
                 <Column>
                   {!this.state.showADF ? (
                     <div

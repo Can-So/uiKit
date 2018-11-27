@@ -61,7 +61,7 @@ describe('TableView', () => {
       // @ts-ignore
       .stub(TableView.prototype, '_handleRef')
       .callsFake(ref => {
-        setTimeout(ref => handleRefInnerMock.call(this, ref), 0);
+        window.setTimeout(ref => handleRefInnerMock.call(this, ref), 0);
       });
 
     // create the NodeView
@@ -79,7 +79,7 @@ describe('TableView', () => {
     // ProseMirror will render the node's children into the element
     expect(tableView.contentDOM).toBeDefined();
 
-    // we shouldn't have called the mock yet, since it's behind the setTimeout
+    // we shouldn't have called the mock yet, since it's behind the window.setTimeout
     expect(handleRefInnerMock).not.toBeCalled();
 
     // run the timers through

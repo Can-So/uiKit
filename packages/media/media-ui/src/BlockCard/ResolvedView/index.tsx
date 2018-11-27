@@ -201,7 +201,7 @@ export class BlockCardResolvedView extends React.Component<
       success: (message?: string) => {
         this.setState(getActionSuccessState(action, message), () => {
           // hide the alert after 2s
-          this.alertTimeout = setTimeout(
+          this.alertTimeout = window.setTimeout(
             () => this.setState(clearActionSuccessState()),
             2000,
           );

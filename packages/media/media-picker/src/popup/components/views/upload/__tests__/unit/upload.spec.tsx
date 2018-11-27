@@ -575,7 +575,7 @@ describe('<UploadView />', () => {
 
     it('should render loading next page state if next page is being loaded', async () => {
       const { component, root, context } = createConnectedComponent(state);
-      const nextItems = new Promise(resolve => setImmediate(resolve));
+      const nextItems = new Promise(resolve => window.setTimeout(resolve));
       asMock(context.collection.loadNextPage).mockReturnValue(nextItems);
 
       expect(root.find(LoadingNextPageWrapper).find(Spinner)).toHaveLength(0);

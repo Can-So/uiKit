@@ -1,5 +1,15 @@
 # @atlaskit/tooltip
 
+## 12.1.10
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/popper@0.3.2
+  - @atlaskit/portal@0.0.15
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
 ## 12.1.9
 - Updated dependencies [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
   - @atlaskit/portal@0.0.14

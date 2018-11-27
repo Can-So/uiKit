@@ -90,7 +90,7 @@ describe('UsageFrequencyTracker', () => {
 
       // now delay, and periodically check if the queued work has had a chance to complete before asserting
       // that more can be queued.
-      const intervalId = setInterval(() => {
+      const intervalId = window.setInterval(() => {
         if (completedCounter > 0) {
           clearInterval(intervalId);
           expect(
@@ -115,7 +115,7 @@ describe('UsageFrequencyTracker', () => {
       assertions?: () => void,
     ) => {
       // now delay, and periodically check if the work has completed.
-      const intervalId = setInterval(() => {
+      const intervalId = window.setInterval(() => {
         if (mockEnqueue.called) {
           clearInterval(intervalId);
           if (assertions) {

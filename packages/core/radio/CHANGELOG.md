@@ -1,5 +1,20 @@
 # @atlaskit/radio
 
+## 0.4.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/form@4.0.18
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 0.4.0
+- [minor] [b42680b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b42680b):
+
+  - Add isDisabled prop to RadioGroup, once set will set the isDisabled value for all Radio elements within the group
+
 ## 0.3.0
 - [minor] [8199088](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8199088):
 

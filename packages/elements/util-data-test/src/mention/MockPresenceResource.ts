@@ -51,7 +51,7 @@ export class MockPresenceResource extends AbstractPresenceResource {
         };
       }
     }
-    setTimeout(() => {
+    window.setTimeout(() => {
       this.notifyListeners(presences);
     }, this.getTimeout());
   }

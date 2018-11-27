@@ -126,7 +126,7 @@ const responses = {
   },
 };
 
-const delayP = (n: number) => new Promise(res => setTimeout(res, n));
+const delayP = (n: number) => new Promise(res => window.setTimeout(res, n));
 
 export const mockMultipleCards = () => {
   fm.mock('*', async (_, opts: any) => {
