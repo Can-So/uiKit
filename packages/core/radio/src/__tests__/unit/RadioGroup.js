@@ -64,7 +64,46 @@ describe(name, () => {
           }
         });
       });
-
+      describe('isDisabled prop', () => {
+        it('is reflected to each Radio option', () => {
+          const isDisabled = true;
+          const wrapper = shallow(
+            <RadioGroup
+              onChange={() => {}}
+              isDisabled={isDisabled}
+              options={sampleOptions}
+            />,
+          );
+          wrapper
+            .find(Radio)
+            .forEach(radio =>
+              expect(radio.prop('isDisabled', isDisabled)).toBe(true),
+            );
+        });
+        it('if set, overrides isDisabled values set on each option', () => {
+          const isDisabled = true;
+          const wrapper = shallow(
+            <RadioGroup
+              onChange={() => {}}
+              isDisabled={isDisabled}
+              options={[
+                ...sampleOptions,
+                {
+                  name: 'color',
+                  value: 'red',
+                  label: 'Red',
+                  isDisabled: false,
+                },
+              ]}
+            />,
+          );
+          wrapper
+            .find(Radio)
+            .forEach(radio =>
+              expect(radio.prop('isDisabled', isDisabled).toBe(false)),
+            );
+        });
+      });
       describe('isRequired prop', () => {
         it('is reflected to each Radio option', () => {
           const isRequired = true;
