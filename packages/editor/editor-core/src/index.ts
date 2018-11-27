@@ -56,7 +56,20 @@ export {
   toggleEm,
   toggleStrong,
 } from './plugins/text-formatting/commands/text-formatting';
+export { insertBlockType } from './plugins/block-type/commands';
+export { createTable } from './plugins/table/actions';
+export { insertTaskDecision } from './plugins/tasks-and-decisions/commands';
 export { EventDispatcher } from './event-dispatcher';
+export {
+  pluginKey as statusPluginKey,
+  StatusState,
+  StatusType,
+} from './plugins/status/plugin';
+export {
+  commitStatusPicker,
+  setStatusPickerAt,
+  updateStatus,
+} from './plugins/status/actions';
 
 // Used in editor-test-helpers
 export { setTextSelection } from './utils';

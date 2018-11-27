@@ -23,19 +23,19 @@ export default {
   'fabric.media.connect_to': 'Anslut till {name}',
   'fabric.media.connect_account_description':
     'Vi kommer att öppna en ny sida som hjälper dig att ansluta till ditt {name}-konto',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': 'Ladda upp en avatar',
+  'fabric.media.save': 'Spara',
+  'fabric.media.or': 'eller',
+  'fabric.media.upload_photo': 'Ladda upp en bild',
+  'fabric.media.default_avatars': 'Standardavatarer',
+  'fabric.media.drag_and_drop_images_here': 'Dra och släpp dina bilder här',
+  'fabric.media.upload_image': 'Ladda upp bild',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    'Kunde inte läsa in bild på grund av felaktig URL.',
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    'Kunde inte läsa in bild på grund av ogiltigt format.',
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
+    'Bilden är för stor. Storleken får inte överstiga {MAX_SIZE_MB} MB.',
   'fabric.media.something_went_wrong': 'Något gick fel.',
   'fabric.media.might_be_a_hiccup': 'Det är nog bara lite krångel.',
   'fabric.media.couldnt_generate_preview':
@@ -49,4 +49,23 @@ export default {
   'fabric.media.give_feedback': 'Ge feedback',
   'fabric.media.try_downloading_file':
     'Försök ladda ner filen för att visa den.',
+  'fabric.media.webgl_warning_description':
+    'Din webbläsare stöder inte WebGL. Använd en webbläsare som har stöd för WebGL för att kommentera bilder.',
+  'fabric.media.unable_to_annotate_image':
+    'Du kan inte kommentera den här bilden.',
+  'fabric.media.learn_more': 'Mer information',
+  'fabric.media.accounts': 'Konton',
+  'fabric.media.actions': 'Åtgärder',
+  'fabric.media.error_hint_retry': 'Försök igen.',
+  'fabric.media.error_hint_critical':
+    'Kontakta kundsupport om problemet kvarstår.',
+  'fabric.media.close': 'Stäng',
+  'fabric.media.could_not_load_editor':
+    'Oj då! Vi kunde inte läsa in redigeringsprogrammet.',
+  'fabric.media.could_not_save_image': 'Oj då! Vi kunde inte spara bilden',
+  'fabric.media.annotate': 'Kommentera',
+  'fabric.media.drop_your_files_here': 'Släpp dina filer här',
+  'fabric.media.share_files_instantly': 'Vi delar dem direkt',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} other{Insert {0} files}}',
 };

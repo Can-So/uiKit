@@ -9,9 +9,9 @@ import {
   LoadParameters,
   ShapeParameters,
 } from '@atlaskit/media-editor';
-
-import { Toolbar, tools } from './toolbar/toolbar';
-import { couldNotLoadEditor, couldNotSaveImage } from '../phrases';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
+import Toolbar, { tools } from './toolbar/toolbar';
 import { EditorContainer } from './styles';
 import { State } from '../../../../domain';
 
@@ -34,7 +34,9 @@ export interface EditorViewOwnProps {
   readonly onError: (message: string) => void;
 }
 
-export type EditorViewProps = EditorViewStateProps & EditorViewOwnProps;
+export type EditorViewProps = EditorViewStateProps &
+  EditorViewOwnProps &
+  InjectedIntlProps;
 
 export interface EditorViewState {
   readonly dimensions: Dimensions;
@@ -46,17 +48,12 @@ export interface EditorViewState {
 export class EditorView extends Component<EditorViewProps, EditorViewState> {
   private loadParameters?: LoadParameters;
   private rootDiv?: HTMLDivElement;
-
-  constructor(props: EditorViewProps) {
-    super(props);
-
-    this.state = {
-      dimensions: { width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT },
-      color: { red: 0xbf, green: 0x26, blue: 0x00 },
-      lineWidth: 10,
-      tool: 'arrow',
-    };
-  }
+  state: EditorViewState = {
+    dimensions: { width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT },
+    color: { red: 0xbf, green: 0x26, blue: 0x00 },
+    lineWidth: 10,
+    tool: 'arrow',
+  };
 
   componentDidMount() {
     if (!this.rootDiv) {
@@ -142,7 +139,11 @@ export class EditorView extends Component<EditorViewProps, EditorViewState> {
   };
 
   private onError = (): void => {
-    this.props.onError(couldNotLoadEditor);
+    const {
+      onError,
+      intl: { formatMessage },
+    } = this.props;
+    onError(formatMessage(messages.could_not_load_editor));
   };
 
   private onSave = (): void => {
@@ -151,11 +152,15 @@ export class EditorView extends Component<EditorViewProps, EditorViewState> {
     }
     const { imageGetter } = this.loadParameters;
     const image = imageGetter();
-
+    const {
+      onSave,
+      onError,
+      intl: { formatMessage },
+    } = this.props;
     if (image.isExported && image.content) {
-      this.props.onSave(image.content);
+      onSave(image.content);
     } else {
-      this.props.onError(couldNotSaveImage);
+      onError(formatMessage(messages.could_not_save_image));
     }
   };
 
@@ -215,4 +220,4 @@ export default connect<EditorViewStateProps, {}, EditorViewOwnProps>(
   ({ editorData }: State) => ({
     imageUrl: editorData ? editorData.imageUrl || '' : '',
   }),
-)(EditorView);
+)(injectIntl(EditorView));

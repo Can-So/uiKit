@@ -10,7 +10,7 @@ import {
   type DraggableProvided,
   type DraggableStateSnapshot,
   type DroppableProvided,
-} from 'react-beautiful-dnd-next';
+} from 'react-beautiful-dnd';
 import { getBox } from 'css-box-model';
 import { calculateFinalDropPositions } from './Tree-utils';
 import type { Props, State, DragState } from './Tree-types';

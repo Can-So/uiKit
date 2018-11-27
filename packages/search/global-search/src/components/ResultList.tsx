@@ -59,7 +59,7 @@ const getI18nJiraContainerName = (
 };
 
 export const getUniqueResultId = (result: Result): string =>
-  `${result.contentType}-${result.resultId}`;
+  result.key ? result.key : `${result.contentType}-${result.resultId}`;
 
 export default class ResultList extends React.Component<Props> {
   render() {

@@ -4,7 +4,11 @@ import gridSizeTimes from '../../util/gridSizeTimes';
 
 export const Screen = styled.div`
   width: 640px;
-  margin-bottom: ${gridSizeTimes(4)}px;
+  margin-bottom: ${gridSizeTimes(2)}px;
+  > p {
+    margin-top: ${gridSizeTimes(3)}px;
+    margin-bottom: ${gridSizeTimes(2)}px;
+  }
 `;
 
 export const LoadingWrapper = styled.div`
@@ -26,19 +30,26 @@ export const SectionMessageOuter = styled.div`
 
 export const MainInformationList = styled.ul`
   > li {
-    margin-top: 16px;
+    margin-top: ${gridSizeTimes(2)}px;
+    margin-left: ${gridSizeTimes(1.5)}px;
+    padding-left: ${gridSizeTimes(3)}px;
+    b {
+      font-weight: 600;
+    }
   }
 `;
 
-export const AccessibleSitesList = styled.ul`
-  list-style: none;
-  padding-left: 0;
-  font-weight: 600;
+export const IconHoverWrapper = styled.span`
+  color: ${colors.B500};
+  &:hover {
+    color: ${colors.B200};
+  }
 `;
 
-export const InfoIconWrapper = styled.span`
-  color: ${colors.B300};
-  div {
-    display: inline-block;
+export const InlineDialogContent = styled.div`
+  li {
+    margin-left: ${gridSizeTimes(3)}px;
+    margin-top: ${gridSizeTimes(1)}px;
+    padding-left: ${gridSizeTimes(1)}px;
   }
 `;

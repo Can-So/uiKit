@@ -41,7 +41,7 @@ export const insertMediaSingleNode = (
   mediaState: MediaState,
   collection?: string,
 ): boolean => {
-  if (!collection) {
+  if (typeof collection !== 'string') {
     return false;
   }
 

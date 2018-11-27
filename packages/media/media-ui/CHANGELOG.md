@@ -1,5 +1,15 @@
 # @atlaskit/media-ui
 
+## 7.6.0
+- [minor] [b9d9e9a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9d9e9a):
+
+  - Support advanced i18n mode in MediaPicker
+
+## 7.5.0
+- [minor] [2cac27f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2cac27f):
+
+  - InfiniteScroll component now triggers on load and on change (where is previously only onScroll event)
+
 ## 7.4.1
 - [patch] [a567cc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a567cc9):
 

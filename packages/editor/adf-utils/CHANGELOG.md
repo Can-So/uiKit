@@ -1,5 +1,14 @@
 # @atlaskit/adf-utils
 
+## 5.1.9
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+
+## 5.1.8
+- [patch] [416fbb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/416fbb3):
+
+  - ED-3298: codeBlocks inside lists
+
 ## 5.1.7
 - [patch] [409e610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/409e610):
 

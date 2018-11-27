@@ -1,4 +1,6 @@
 import * as URI from 'urijs';
+import * as uuid from 'uuid';
+
 import {
   ResultType,
   AnalyticsType,
@@ -112,6 +114,7 @@ const mapJiraItemToResultV2 = (
 
   return {
     resultId: id,
+    key: uuid(),
     name: name,
     href,
     resultType: resultType,

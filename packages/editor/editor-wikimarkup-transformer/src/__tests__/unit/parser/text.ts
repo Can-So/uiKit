@@ -28,6 +28,7 @@ This is a text`,
       'multiple - should be rendered as plain text',
       '------------- ---------------- ------------------',
     ],
+    ['[EX-500] should handle escape correctly', '\\* \\m'],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

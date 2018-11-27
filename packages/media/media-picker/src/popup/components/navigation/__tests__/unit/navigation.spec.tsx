@@ -4,6 +4,7 @@ import Dropdown from '@atlaskit/dropdown-menu';
 import RefreshIcon from '@atlaskit/icon/glyph/refresh';
 import DropdownMenu, { DropdownItem } from '@atlaskit/dropdown-menu';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
+import { mountWithIntlContext, fakeIntl } from '@atlaskit/media-test-helpers';
 import {
   getComponentClassWithStore,
   mockStore,
@@ -42,9 +43,10 @@ const ConnectedNavigationWithStore = getComponentClassWithStore(
 const createConnectedComponent = () => {
   const store = mockStore();
   const dispatch = store.dispatch;
-  const component = shallow(
+  const component = mountWithIntlContext(
     <ConnectedNavigationWithStore store={store} />,
   ).find(Navigation);
+
   return { component, dispatch };
 };
 
@@ -156,6 +158,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 
@@ -190,6 +193,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 
@@ -207,6 +211,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 
@@ -232,6 +237,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 
@@ -262,6 +268,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 
@@ -292,6 +299,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 

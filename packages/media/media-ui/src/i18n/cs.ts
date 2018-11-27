@@ -23,19 +23,19 @@ export default {
   'fabric.media.connect_to': 'Připojit k {name}',
   'fabric.media.connect_account_description':
     'Otevřeme novou stránku, abychom vám pomohli připojit váš {name} účet.',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': 'Nahrát avatar',
+  'fabric.media.save': 'Uložit',
+  'fabric.media.or': 'nebo',
+  'fabric.media.upload_photo': 'Nahrát fotku',
+  'fabric.media.default_avatars': 'Výchozí avatary',
+  'fabric.media.drag_and_drop_images_here': 'Přetáhněte své obrázky sem.',
+  'fabric.media.upload_image': 'Nahrát obrázek',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    'Nepodařilo se nahrát obrázek, adresa URL je neplatná.',
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    'Nepodařilo se nahrát obrázek, formát je neplatný.',
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
+    'Obrázek je příliš velký. Maximální velikost je {MAX_SIZE_MB} MB.',
   'fabric.media.something_went_wrong': 'Něco se pokazilo.',
   'fabric.media.might_be_a_hiccup': 'Chybička se vloudila, ale nevíme kam.',
   'fabric.media.couldnt_generate_preview':
@@ -49,4 +49,23 @@ export default {
   'fabric.media.give_feedback': 'Váš názor',
   'fabric.media.try_downloading_file':
     'Pokud chcete soubor zobrazit, zkuste ho stáhnout.',
+  'fabric.media.webgl_warning_description':
+    'Váš prohlížeč nepodporuje knihovnu WebGL. Chcete-li přidávat k obrázkům poznámky, použijte prohlížeč, který ji podporuje.',
+  'fabric.media.unable_to_annotate_image':
+    'K tomuto obrázku nemůžete přidávat poznámky.',
+  'fabric.media.learn_more': 'Další informace',
+  'fabric.media.accounts': 'Účty',
+  'fabric.media.actions': 'Akce',
+  'fabric.media.error_hint_retry':
+    'Zkuste to znovu a my se o to také pokusíme.',
+  'fabric.media.error_hint_critical':
+    'Pokud problém přetrvává, kontaktujte podporu.',
+  'fabric.media.close': 'Zavřít',
+  'fabric.media.could_not_load_editor': 'Editor se nepodařilo načíst.',
+  'fabric.media.could_not_save_image': 'Obrázek se nepodařilo uložit.',
+  'fabric.media.annotate': 'Přidat poznámku',
+  'fabric.media.drop_your_files_here': 'Přetáhněte své soubory sem.',
+  'fabric.media.share_files_instantly': 'Okamžitě je nasdílíme.',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} few{Insert {0} files} many{Insert {0} files} other{Insert {0} files}}',
 };

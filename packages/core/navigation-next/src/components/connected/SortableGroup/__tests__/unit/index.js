@@ -31,7 +31,7 @@ describe('SortableGroup', () => {
       },
       { isDraggingOver: false },
     ];
-    Droppable.mockImplementation(({ children }) =>
+    (Droppable: any).mockImplementation(({ children }) =>
       children(...droppableRenderArgs),
     );
     baseProps = {
@@ -97,7 +97,7 @@ describe('SortableGroup', () => {
   it('should disable pointerEvents on the group while it is being dragged over', () => {
     droppableRenderArgs[1].isDraggingOver = true;
 
-    Droppable.mockImplementation(({ children }) =>
+    (Droppable: any).mockImplementation(({ children }) =>
       children(...droppableRenderArgs),
     );
     const wrapper = shallow(

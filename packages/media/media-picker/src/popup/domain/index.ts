@@ -139,6 +139,7 @@ export interface ServiceFolder {
   readonly cursor?: string;
 }
 
+// TODO [MS-1255] this interface is almost identical to LocalUploadFileMetadata (and possibly to tens others)
 export interface ServiceFile {
   readonly mimeType: string;
   readonly id: string;

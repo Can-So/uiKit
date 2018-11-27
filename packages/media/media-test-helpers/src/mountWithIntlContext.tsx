@@ -4,6 +4,8 @@ import { ReactElement } from 'react';
 
 export const mountWithIntlContext = (
   component: ReactElement<any>,
+  reactContext?: Object,
+  childContextTypes?: Object,
 ): ReactWrapper => {
   const intlProvider = new IntlProvider({
     locale: 'en',
@@ -12,7 +14,7 @@ export const mountWithIntlContext = (
   const intl = intlProvider.getChildContext().intl;
 
   return mount(component, {
-    context: { intl },
-    childContextTypes: { intl: intlShape },
+    context: { intl, ...reactContext },
+    childContextTypes: { intl: intlShape, ...childContextTypes },
   });
 };

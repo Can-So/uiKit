@@ -1,5 +1,10 @@
 # @atlaskit/focused-task-close-account
 
+## 0.3.0
+- [minor] [75772f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/75772f8):
+
+  - Content updated and added drop down list support as per the latest design.
+
 ## 0.2.0
 - [minor] [c8ea304](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8ea304):
 

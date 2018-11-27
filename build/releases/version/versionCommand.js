@@ -9,6 +9,7 @@ const updateChangelog = require('../changelog');
 const fs = require('@atlaskit/build-utils/fs');
 const fse = require('fs-extra');
 const resolveConfig = require('../utils/resolveConfig');
+const { removeEmptyFolders } = require('../utils/removeFolders');
 const getChangesetBase = require('../utils/getChangesetBase');
 const { versionOptions } = require('../initialize/initial/config');
 
@@ -41,6 +42,7 @@ async function getOldCommitChangesets() {
 }
 
 async function getNewFSChangesets(changesetBase) {
+  removeEmptyFolders(changesetBase);
   if (!fse.existsSync(changesetBase)) {
     throw new Error('There is no .changeset directory in this project');
   }
