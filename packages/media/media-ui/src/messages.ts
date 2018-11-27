@@ -284,4 +284,49 @@ export const messages = defineMessages({
     defaultMessage: 'Insert {0, plural, one {a file} other {{0} files}}',
     description: 'Showed when the user selects 1 or more files to insert',
   },
+  zoom_out: {
+    id: 'fabric.media.zoom_out',
+    defaultMessage: 'zoom out',
+    description: 'TODO',
+  },
+  zoom_in: {
+    id: 'fabric.media.zoom_in',
+    defaultMessage: 'zoom in',
+    description: 'TODO',
+  },
+  remove_image: {
+    id: 'fabric.media.remove_image',
+    defaultMessage: 'Remove image',
+    description: 'TODO',
+  },
+  play: {
+    id: 'fabric.media.play',
+    defaultMessage: 'play',
+    description: 'TODO',
+  },
+  pause: {
+    id: 'fabric.media.pause',
+    defaultMessage: 'pause',
+    description: 'TODO',
+  },
+  disable_fullscreen: {
+    id: 'fabric.media.disable_fullscreen',
+    defaultMessage: 'disable fullscreen',
+    description: 'TODO',
+  },
+  enable_fullscreen: {
+    id: 'fabric.media.enable_fullscreen',
+    defaultMessage: 'enable fullscreen',
+    description: 'TODO',
+  },
+  error_loading_file: {
+    id: 'fabric.media.error_loading_file',
+    defaultMessage: 'Error loading file',
+    description: 'TODO',
+  },
+  error_generating_preview: {
+    id: 'fabric.media.error_generating_preview',
+    defaultMessage: 'Error generating preview',
+    description: 'TODO',
+  },
 });
