@@ -2,40 +2,52 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { ErrorMessage, createError } from '../../../newgen/error';
 import Button from '@atlaskit/button';
+import { fakeIntl } from '@atlaskit/media-test-helpers';
 
 describe('Error Message', () => {
   it('should render the right error for retrieving metadata', () => {
-    const el = mount(<ErrorMessage error={createError('metadataFailed')} />);
+    const el = mount(
+      <ErrorMessage intl={fakeIntl} error={createError('metadataFailed')} />,
+    );
     expect(el.text()).toContain(
       'Something went wrong.It might just be a hiccup.',
     );
   });
 
   it('should render the right error for generating a preview', () => {
-    const el = mount(<ErrorMessage error={createError('previewFailed')} />);
+    const el = mount(
+      <ErrorMessage intl={fakeIntl} error={createError('previewFailed')} />,
+    );
     expect(el.text()).toContain("We couldn't generate a preview for this file");
   });
 
   it('should render the right error when the id is not found', () => {
-    const el = mount(<ErrorMessage error={createError('idNotFound')} />);
+    const el = mount(
+      <ErrorMessage intl={fakeIntl} error={createError('idNotFound')} />,
+    );
     expect(el.text()).toContain('The selected item was not found on the list');
   });
 
   it('should render the right error when the PDF artifact does not exist', () => {
     const el = mount(
-      <ErrorMessage error={createError('noPDFArtifactsFound')} />,
+      <ErrorMessage
+        intl={fakeIntl}
+        error={createError('noPDFArtifactsFound')}
+      />,
     );
     expect(el.text()).toContain('No PDF artifacts found for this file');
   });
 
   it('should render the right error when the file type is unsupported', () => {
-    const el = mount(<ErrorMessage error={createError('unsupported')} />);
+    const el = mount(
+      <ErrorMessage intl={fakeIntl} error={createError('unsupported')} />,
+    );
     expect(el.text()).toContain("We can't preview this file type.");
   });
 
   it('should render a child component', () => {
     const el = mount(
-      <ErrorMessage error={createError('unsupported')}>
+      <ErrorMessage intl={fakeIntl} error={createError('unsupported')}>
         <Button label="Download" />
       </ErrorMessage>,
     );
