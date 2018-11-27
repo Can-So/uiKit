@@ -330,4 +330,9 @@ export const messages = defineMessages({
     description:
       'Message showed when we had an error trying generate a preview for a file',
   },
+  download: {
+    id: 'fabric.media.download',
+    defaultMessage: 'Download',
+    description: '',
+  },
 });
