@@ -1,29 +1,27 @@
 import * as React from 'react';
+import * as H from 'history';
+import { match } from 'react-router';
 import styled from 'styled-components';
 import { Link } from '../components/WrappedLink';
-
 import BackIcon from '@atlaskit/icon/glyph/arrow-left';
 import TextField from '@atlaskit/field-text';
 import Button from '@atlaskit/button';
 import Loadable from '../components/WrappedLoader';
-
 import Changelog, { NoMatch } from '../components/ChangeLog';
 import Page from '../components/Page';
 import { packages } from '../site';
 import * as fs from '../utils/fs';
 import Loading from '../components/Loading';
 import { divvyChangelog } from '../utils/changelog';
-import { RouterMatch } from '../types';
 
-/* eslint-disable react/no-unused-prop-types */
-type Props = {
-  match: RouterMatch;
-  history: any;
+export type Props = {
+  match: match<Record<string, string>>;
+  history: H.History;
 };
 
-type State = { isInvalid: boolean; range: string };
+export type State = { isInvalid: boolean; range: string };
 
-type ResolvedLog = {
+export type ResolvedLog = {
   log: string;
 };
 export default class ChangelogExplorer extends React.Component<Props, State> {
@@ -38,7 +36,7 @@ export default class ChangelogExplorer extends React.Component<Props, State> {
       });
   }
 
-  handleChange = (e: any) => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { groupId, pkgId } = this.props.match.params;
     const range = e.target.value;
     this.props.history.replace(

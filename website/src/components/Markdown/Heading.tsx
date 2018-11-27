@@ -3,12 +3,12 @@ import * as reactAddonsTextContent from 'react-addons-text-content';
 import { Helmet } from 'react-helmet';
 import * as snakeCase from 'snake-case';
 
-type Props = {
+export type Props = {
   children?: React.ReactChild;
   level: number;
 };
 
-type State = {
+export type State = {
   shouldShowAnchor: boolean;
 };
 

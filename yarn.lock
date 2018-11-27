@@ -1192,7 +1192,6 @@
 "@types/classnames@^2.2.6":
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.6.tgz#dbe8a666156d556ed018e15a4c65f08937c3f628"
-  integrity sha512-XHcYvVdbtAxVstjKxuULYqYaWIzHR15yr1pZj4fnGChuBVJlIAp9StJna0ZJNSgxPh4Nac2FL4JM3M11Tm6fqQ==
 
 "@types/codemirror@^0.0.40":
   version "0.0.40"
@@ -1228,6 +1227,11 @@
 "@types/filesize@^3.2.15":
   version "3.2.15"
   resolved "https://registry.yarnpkg.com/@types/filesize/-/filesize-3.2.15.tgz#a97325f27a5ff7974c7cbd7afa244b8a7affe668"
+
+"@types/history@*":
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
+  integrity sha512-ui3WwXmjTaY73fOQ3/m3nnajU/Orhi6cEu5rzX+BrAAJxa3eITXZ5ch9suPqtM03OWhAHhPSyBGCN4UKoxO20Q==
 
 "@types/jest@^23.0.2":
   version "23.3.2"
@@ -1375,6 +1379,14 @@
   dependencies:
     "@types/react" "*"
     redux "^3.6.0"
+
+"@types/react-router@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-4.4.1.tgz#c875dfd0b6fe00efa463eb8e5de8b5f74644b3f5"
+  integrity sha512-CtQfdcXyMye3vflnQQ2sHU832iDJRoAr4P+7f964KlLYupXU1I5crP1+d/WnCMo6mmtjBjqQvxrtbAbodqerMA==
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
 
 "@types/react-syntax-highlighter@^0.0.3":
   version "0.0.3"
@@ -13161,7 +13173,6 @@ react-base16-styling@^0.5.1:
 react-beautiful-dnd@^10.0.2:
   version "10.0.2"
   resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-10.0.2.tgz#618fe3dcd841c65235fca89bdde99a172fe77e50"
-  integrity sha512-hLdSdUh7UHHCpFx/dMqtLmxVry8npxjdSpwmLG5dM6D578qv9LMF3uuAn37X6Wgyc2Hj5TYFoFL2iQWMnoR/Bg==
   dependencies:
     "@babel/runtime-corejs2" "^7.1.5"
     css-box-model "^1.1.1"

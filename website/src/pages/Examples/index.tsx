@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { match } from 'react-router';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -15,7 +16,6 @@ import { colors } from '@atlaskit/theme';
 
 import ExampleDisplay from '../../components/Examples/ExampleDisplay';
 import * as fs from '../../utils/fs';
-import { RouterMatch } from '../../types';
 import { getConfig } from '../../site';
 import packageResolver, { getLoaderUrl } from '../../utils/packageResolver';
 import { packageUrl } from '../../utils/url';
@@ -110,7 +110,8 @@ function ExampleSelector(props) {
   );
 }
 
-type ExampleNavigationProps = {
+// TODO: Type correct once codesandbox is typed
+export type ExampleNavigationProps = {
   onExampleSelected?: (selected: { item: { value: string } }) => void;
   examples?: any;
   onPackageSelected?: (selected: { item: { value: string } }) => void;
@@ -217,14 +218,14 @@ class ExampleNavigation extends React.Component<ExampleNavigationProps> {
   }
 }
 
-type State = {
+export type State = {
   displayCode: boolean;
   flags: Object;
   loadingSandbox: boolean;
 };
 
-type Props = {
-  match: RouterMatch;
+export type Props = {
+  match: match<Record<string, string>>;
 };
 
 export default class Examples extends React.Component<Props, State> {

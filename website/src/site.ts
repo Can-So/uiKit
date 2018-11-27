@@ -1,4 +1,4 @@
-import { Directory } from './types';
+import { Directory, File } from './types';
 
 // SITE_DATA is dynamically generated at runtime by bolt-fs-loader.
 // Configuration for bolt-fs-loader is in webpack.config.js since it needs to be dynamically created
@@ -48,8 +48,8 @@ for (const child of fs.getDirectories(packageDirs.children)) {
 }
 
 /* If a package is related to an Atlassian products, it will appear at the bottom of the navigation */
-let productsPkgs: Array<any> = [];
-let non_productsPkgs: Array<any> = [];
+let productsPkgs: Array<Directory | File> = [];
+let non_productsPkgs: Array<Directory | File> = [];
 for (let pkg of publicPackages.children) {
   if (productPackages.includes(pkg.id)) productsPkgs.push(pkg);
   else non_productsPkgs.push(pkg);

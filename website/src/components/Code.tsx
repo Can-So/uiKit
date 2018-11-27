@@ -23,7 +23,7 @@ const Code = styled.pre`
   }
 `;
 
-type Props = {
+export type Props = {
   content: string;
   grammar: 'jsx';
   name: string;

@@ -29,7 +29,7 @@
       "es2015.promise",
       "es2016.array.include"
     ],
-    "types": ["jest", "react", "enzyme", "css-color-names", "jest-styled-components", "styled-components"],
+    "types": ["jest", "react","react-router","history", "enzyme", "css-color-names", "jest-styled-components", "styled-components"],
     "typeRoots": ["./typings", "./node_modules/@types"]
   },
   "files": [
@@ -56,7 +56,6 @@
     "./typings/static-assets.d.ts",
     "./typings/url.d.ts",
     "./typings/uuid.d.ts",
-    "./typings/webpack.d.ts",
-    "./typings/window.d.ts"
+    "./typings/webpack.d.ts"
   ]
 }

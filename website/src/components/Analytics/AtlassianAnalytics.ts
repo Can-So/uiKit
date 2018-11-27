@@ -1,12 +1,15 @@
 class AtlassianAnalyticsClient {
-  payload: Array<{ name: string; properties: Record<string, any> }>;
+  payload: Array<{
+    name: string;
+    properties: Record<string, string | number | boolean>;
+  }>;
   version: string;
   constructor(options: { version: string }) {
     this.payload = [];
     this.version = options.version;
   }
 
-  addEvent(eventName, properties = {}) {
+  addEvent(eventName, properties: Record<string, string | number | boolean>) {
     if (
       // Make sure our JSON object is flat
       Object.keys(properties).some(key => typeof properties[key] === 'object')

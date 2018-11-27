@@ -2,9 +2,9 @@ import { Link as BaseLink } from 'react-router-dom';
 import * as React from 'react';
 export interface LinkProps {
   onClick?: (e: Event) => void;
-  to: string | Record<string, string | Location>;
-  theme?: any;
-  className?: any;
+  to: string | Record<string, string | Location> | undefined;
+  theme?: any; // TODO: Type correct once theme is typed
+  className?: string;
   replace?: boolean;
   style?: {};
   isSelected?: boolean;

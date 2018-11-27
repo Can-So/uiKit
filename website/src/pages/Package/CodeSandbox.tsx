@@ -54,7 +54,8 @@ const cssLoaderExceptions = (pkgJSONName, groupId, packageId) => [
 
 const tsMatch = /.+(\.ts|\.tsx)/;
 
-type Props = {
+// TODO: Type correct once codesandbox is typed
+export type Props = {
   deployButton: any;
   example: any;
   examples: any;

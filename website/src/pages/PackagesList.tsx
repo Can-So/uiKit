@@ -7,7 +7,7 @@ import * as fs from '../utils/fs';
 import Page, { Title, Section } from '../components/Page';
 import { externalPackages as packages, getConfig } from '../site';
 
-type Head = {
+export type Head = {
   cells: Array<{
     key: string;
     content: string;

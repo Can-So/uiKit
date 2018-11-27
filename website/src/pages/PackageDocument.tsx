@@ -1,18 +1,18 @@
 import * as React from 'react';
+import { match } from 'react-router';
 import Loadable from '../components/WrappedLoader';
 import { Helmet } from 'react-helmet';
-import { RouterMatch } from '../types';
 import { packages } from '../site';
 import * as fs from '../utils/fs';
 import Page, { Title } from '../components/Page';
 import FourOhFour from './FourOhFour';
 import Loading from '../components/Loading';
 
-type PackageDocumentProps = {
-  match: RouterMatch;
+export type PackageDocumentProps = {
+  match: match<Record<string, string>>;
 };
 
-type ResolvedJSXElement = {
+export type ResolvedJSXElement = {
   default?: JSX.Element;
 };
 

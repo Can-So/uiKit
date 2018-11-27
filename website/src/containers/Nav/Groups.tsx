@@ -24,7 +24,7 @@ export type GroupsState = {
 };
 
 export type GroupsContext = {
-  router: { route: any };
+  router: { route: Route };
 };
 
 export default class Groups extends React.Component<GroupsProps, GroupsState> {

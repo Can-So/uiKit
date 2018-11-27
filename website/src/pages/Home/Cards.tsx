@@ -130,7 +130,7 @@ const Img = ({ src, alt = '' }: { src: string; alt?: string }) => (
   />
 );
 
-type CardProps = {
+export type CardProps = {
   icon: React.ComponentType;
   index?: number;
   text: string;
@@ -141,7 +141,7 @@ type CardProps = {
   href?: string;
 };
 
-class Card extends React.Component<CardProps, any> {
+class Card extends React.Component<CardProps> {
   render() {
     const { icon: Icon, text, title, image, alt, ...props } = this.props;
 

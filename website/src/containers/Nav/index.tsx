@@ -23,7 +23,7 @@ import { externalPackages as packages, docs, patterns } from '../../site';
 import atlaskitLogo from '../../assets/atlaskit-logo-inverted.png';
 import atlaskitLogoMonochrome from '../../assets/atlaskit-logo-monochrome.png';
 
-type State = {
+export type State = {
   groupDrawerOpen: boolean;
   searchDrawerOpen: boolean;
   searchDrawerValue: string;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Page from '../components/Page';
 
-type FourOhFourProps = {};
+export type FourOhFourProps = {};
 
 export default class FourOhFour extends React.PureComponent<FourOhFourProps> {
   props: FourOhFourProps;

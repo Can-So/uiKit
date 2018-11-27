@@ -2,6 +2,7 @@ import { packages } from '../../../site';
 import * as fs from '../../../utils/fs';
 import { divvyChangelog } from '../../../utils/changelog';
 import { Directory, File } from '../../../types';
+import { Log } from '../../../components/ChangeLog';
 
 function getPkg(packages, groupId, pkgId) {
   const groups = fs.getDirectories(packages.children);
@@ -11,7 +12,15 @@ function getPkg(packages, groupId, pkgId) {
   return pkg;
 }
 
-const getJSON = (files: File[]) => fs.getById(files, 'package.json').exports();
+// No need to export as it is exported through PackageJson
+type Primitive = string | number | boolean | PackageJson;
+
+export type PackageJson = {
+  [key: string]: Primitive | Primitive[];
+};
+
+const getJSON = (files: File[]) =>
+  (fs.getById(files, 'package.json').exports() as any) as PackageJson;
 const getDocs = (dirs: Directory[]) => {
   const docs = fs.maybeGetById(dirs, 'docs');
   let doc;
@@ -34,7 +43,15 @@ const getChangelog = (files: File[]) => {
   );
 };
 
-export default function fetchPackageData(groupId, pkgId) {
+export type PackageData = {
+  pkg: PackageJson;
+  doc: any;
+  examples: Array<Directory | File> | null;
+  changelog: Array<Log>;
+  error: undefined;
+};
+
+export default function fetchPackageData(groupId, pkgId): Promise<PackageData> {
   const pkgInfo = getPkg(packages, groupId, pkgId);
   const dirs = fs.getDirectories(pkgInfo.children);
   const files = fs.getFiles(pkgInfo.children);
@@ -49,6 +66,6 @@ export default function fetchPackageData(groupId, pkgId) {
     doc,
     examples,
     changelog,
-    error: false,
+    error: undefined,
   }));
 }

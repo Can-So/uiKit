@@ -5,7 +5,7 @@ import ReactRenderer from 'commonmark-react-renderer';
 import { AkCodeBlock, AkCode } from '@atlaskit/code';
 import Heading from './Markdown/Heading';
 
-type Props = {
+export type Props = {
   literal: string;
   language: string;
 };

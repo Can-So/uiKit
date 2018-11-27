@@ -83,7 +83,7 @@ export interface Log {
 }
 export type Logs = Array<Log>;
 
-type Props = {
+export type Props = {
   changelog: Array<Log>;
   range?: string;
   packageName: string;

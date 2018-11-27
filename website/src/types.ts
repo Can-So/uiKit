@@ -1,6 +1,6 @@
 export type NavGroupItem = {
-  external?: any;
-  to?: string;
+  external?: boolean;
+  to?: string | Record<string, string | Location>;
   title?: string;
   isSelected?: (param1: string, param2: string) => boolean;
   isCompact?: boolean;
@@ -25,12 +25,6 @@ export type Directory = {
   type: 'dir';
   id: string;
   children: Array<File | Directory>;
-};
-
-export type RouterMatch = {
-  params: {
-    [key: string]: string;
-  };
 };
 
 export type Func = () => void;
@@ -60,4 +54,9 @@ export type SpinnerPhases = 'DELAY' | 'ENTER' | 'IDLE' | 'LEAVE' | '';
 
 export type SpinnerState = {
   phase: SpinnerPhases;
+};
+
+export type Window = {
+  unmountApp?: () => void;
+  location: { pathname: string; search?: string };
 };

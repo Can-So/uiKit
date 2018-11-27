@@ -112,7 +112,7 @@ const standardGroups = (dirs: Array<Directory>, pathname): NavGroup[] =>
           }
           return items;
         },
-        [] as NavGroupItem[],
+        [] as Array<NavGroupItem>,
       ),
     };
   });

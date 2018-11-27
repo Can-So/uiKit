@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { colors, gridSize, math } from '@atlaskit/theme';
 
-type MetaItemProps = {
+export type MetaItemProps = {
   href?: string;
   label: React.ReactNode;
   summary: React.ReactNode;

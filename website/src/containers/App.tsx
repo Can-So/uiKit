@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { withRouter } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router';
 import styled, { injectGlobal } from 'styled-components';
 import { ModalTransition } from '@atlaskit/modal-dialog';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
@@ -42,9 +42,7 @@ const AppContent = styled.div`
   flex: 1 1 auto;
 `;
 
-type Props = { location: Window['location'] };
-
-class ScrollToTop extends React.Component<Props> {
+class ScrollToTop extends React.Component<RouteComponentProps<any>> {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       window.scrollTo(0, 0);
@@ -74,7 +72,7 @@ class Boundary extends React.Component {
   }
 }
 
-type State = { mode: 'dark' | 'light' };
+export type State = { mode: 'dark' | 'light' };
 
 export default class App extends React.Component<{}, State> {
   state: State = {

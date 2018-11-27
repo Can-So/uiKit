@@ -4,10 +4,11 @@ import { withRouter } from 'react-router-dom';
 import ttiPolyfill from 'tti-polyfill';
 import { getAtlassianAnalyticsClient } from './AtlassianAnalytics';
 import { GOOGLE_ANALYTICS_ID } from '../../constants';
+import { Window } from '../../types';
 
 let mounted = 0;
 
-type PerformanceMetrictsOpts = {
+export type PerformanceMetrictsOpts = {
   location: string;
   metricName: string;
   timing: number;
@@ -22,7 +23,7 @@ export const getPageLoadNumber = () => {
 
   let navigationEntries = window.performance.getEntriesByType(
     'navigation',
-  ) as PerformanceNavigationTiming[];
+  ) as Array<PerformanceNavigationTiming>;
   if (navigationEntries.length !== 1) return null;
 
   return Math.round(navigationEntries[0].domComplete);
@@ -115,7 +116,7 @@ export const observePerformanceMetrics = (location: string) => {
     });
 };
 
-type Props = {
+export type Props = {
   gaId: string;
   children: React.ReactChild;
   location: Window['location'];

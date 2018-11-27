@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { match } from 'react-router';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { Redirect } from 'react-router-dom';
@@ -22,7 +23,6 @@ import { colors, elevation, gridSize } from '@atlaskit/theme';
 
 import * as fs from '../../utils/fs';
 import packageResolver, { getLoaderUrl } from '../../utils/packageResolver';
-import { RouterMatch } from '../../types';
 import ExampleDisplay from '../../components/Examples/ExampleDisplay';
 import { getConfig } from '../../site';
 import CodeSandbox from './CodeSandbox';
@@ -145,14 +145,14 @@ function ExampleNavigation({
   );
 }
 
-type State = {
+export type State = {
   displayCode: boolean;
   flags: Object;
   loadingSandbox: boolean;
 };
 
-type Props = {
-  match: RouterMatch;
+export type Props = {
+  match: match<Record<string, string>>;
 };
 
 function toUrl(

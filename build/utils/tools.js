@@ -36,7 +36,7 @@ async function getPackagesInfo(cwd /*: string */) {
 
       let hasKarmaDep = !!allDependencies.karma;
 
-      let isTypeScript = tsConfigExists && !isWebsitePackage;
+      let isTypeScript = tsConfigExists && !isWebsitePackage; // The website does not need to be built
       let isTSLint = isTypeScript || tslintConfigExists;
 
       let isBabel = srcExists && !isTypeScript && !isWebsitePackage;

@@ -4,12 +4,13 @@ import cssResetStyles from '@atlaskit/css-reset';
 import 'regenerator-runtime/runtime';
 import insertStyleSheetInHead from './utils/insertStyleSheetInHead';
 import ExamplesLoader from './pages/Examples/loader';
+import { Window } from './types';
 
 insertStyleSheetInHead(cssResetStyles);
 
 const componentNode = document.getElementById('examples');
 if (typeof window !== 'undefined') {
-  window.unmountApp = function unmountApp() {
+  (window as Window).unmountApp = function unmountApp() {
     return unmountComponentAtNode(componentNode);
   };
 }

@@ -4,13 +4,14 @@ import * as React from 'react';
 import Loadable from 'react-loadable';
 import Loading from '../Loading';
 import CodeBlock from '../Code';
+import { Window } from '../../types';
 
-declare interface Window {
-  unmountApp?: () => void;
-}
-
-type Props = {
-  children?: (...param: Array<any>) => React.ReactChild;
+export type Props = {
+  children?: (
+    a: React.ComponentType,
+    b: React.ComponentType,
+    c: boolean,
+  ) => React.ReactChild;
   src: string | null;
   name: string;
   example: {
@@ -19,21 +20,21 @@ type Props = {
   };
   displayCode: boolean;
   render?: (
-    component1: React.ComponentType<any>,
-    component2: React.ComponentType<any>,
+    component1: React.ComponentType,
+    component2: React.ComponentType,
     param: boolean,
-  ) => any;
+  ) => JSX.Element;
 };
 
-type Example = {
+export type Example = {
   default: string;
 };
 
 export default class ExampleDisplay extends React.Component<Props> {
   iframeRef: HTMLIFrameElement;
   ExampleCode:
-    | (React.ComponentClass<{}, any> & Loadable.LoadableComponent)
-    | (React.StatelessComponent<{}> & Loadable.LoadableComponent);
+    | (React.ComponentClass & Loadable.LoadableComponent)
+    | (React.StatelessComponent & Loadable.LoadableComponent);
   Example: () => JSX.Element;
   constructor(props) {
     super(props);

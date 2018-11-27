@@ -2,13 +2,13 @@ import * as React from 'react';
 import { Directory, NavGroupItem, File } from '../../../types';
 import * as fs from '../../../utils/fs';
 
-type groupType = {
+export type groupType = {
   title?: string;
   items: Array<NavGroupItem>;
 };
 export default function buildNavGroups(
   prefix: string,
-  Icon: React.ComponentType<any>,
+  Icon: React.ComponentType,
   pathname: string,
   dir: Directory,
 ) {

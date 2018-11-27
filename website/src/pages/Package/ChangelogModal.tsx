@@ -1,4 +1,6 @@
 import * as React from 'react';
+import * as H from 'history';
+import { match } from 'react-router';
 import styled from 'styled-components';
 import Loadable from 'react-loadable';
 import { Helmet } from 'react-helmet';
@@ -11,7 +13,6 @@ import { FieldTextStateless as Input } from '@atlaskit/field-text';
 import Modal, { ModalHeader as OgModalHeader } from '@atlaskit/modal-dialog';
 
 import * as fs from '../../utils/fs';
-import { RouterMatch } from '../../types';
 import Loading from '../../components/Loading';
 import Changelog, { NoMatch } from '../../components/ChangeLog';
 import { packages } from '../../site';
@@ -44,7 +45,7 @@ const LogWrapper = styled.div`
 // END STYLES
 // ==============================
 
-type HeaderProps = {
+export type HeaderProps = {
   isInvalid: boolean;
   onChange: (event: React.SyntheticEvent<HTMLInputElement>) => void;
   onClose: () => void;
@@ -92,15 +93,15 @@ function getQualifiedRange(str: string) {
   return '';
 }
 
-type ResolvedChangelog = {
+export type ResolvedChangelog = {
   changelog?: string;
 };
 
-type Props = {
-  match: RouterMatch;
-  history: any;
+export type Props = {
+  match: match<Record<string, string>>;
+  history: H.History;
 };
-type State = {
+export type State = {
   isInvalid: boolean;
   range: string;
 };

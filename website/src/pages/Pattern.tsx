@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Loadable from '../components/WrappedLoader';
 import * as fs from '../utils/fs';
-import { RouterMatch } from '../types';
+import { match } from 'react-router';
 import Page from '../components/Page';
 import FourOhFour from './FourOhFour';
 import Loading from '../components/Loading';
 import { patterns } from '../site';
 
-type Props = {
-  match: RouterMatch;
+export type Props = {
+  match: match<Record<string, string>>;
 };
 
 export default function Pattern({

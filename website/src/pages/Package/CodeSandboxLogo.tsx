@@ -7,7 +7,7 @@ function toPxStr(num) {
   return `${num}px`;
 }
 
-type Props = {
+export type Props = {
   fill?: string;
   size?: number;
 };

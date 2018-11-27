@@ -3,7 +3,7 @@ import { AkNavigationItemGroup } from '@atlaskit/navigation';
 import { RouterNavigationItem, ExternalNavigationItem } from './linkComponents';
 import { NavGroup } from '../../../types';
 
-type Props = {
+export type Props = {
   onClick?: (e: Event) => void;
   pathname: string;
 };
@@ -19,7 +19,10 @@ export default function renderNav(
     >
       {group.items.map(item => {
         const isAncestor =
-          item.to && pathname.includes(item.to) && pathname !== item.to;
+          item.to &&
+          typeof item.to === 'string' &&
+          pathname.includes(item.to) &&
+          pathname !== item.to;
         const isSelected = pathname === item.to;
         const icon =
           isSelected || isAncestor ? item.iconSelected || item.icon : item.icon;
@@ -38,7 +41,7 @@ export default function renderNav(
             href={item.to}
             icon={icon}
             onClick={onClick}
-            text={item.title}
+            title={item.title}
             isSelected={isSelected}
             pathname={pathname}
             subNav={item.items}

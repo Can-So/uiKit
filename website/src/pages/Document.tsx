@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { match } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import Loadable from '../components/WrappedLoader';
-import { RouterMatch } from '../types';
 import * as fs from '../utils/fs';
 import Page from '../components/Page';
 import Markdown from '../components/Markdown';
@@ -9,14 +9,14 @@ import FourOhFour from './FourOhFour';
 import Loading from '../components/Loading';
 import { docs } from '../site';
 
-type DocProps = {
-  match: RouterMatch;
+export type DocProps = {
+  match: match<Record<string, string>>; // TODO: replace with react router
 };
 
-type ResolvedMD = {
+export type ResolvedMD = {
   default?: {
     content?: string;
-    data?: object;
+    data?: Object;
   };
 };
 

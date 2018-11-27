@@ -22,14 +22,14 @@ const ErrorMessage = styled.div`
   padding: 1em;
 `;
 
-type State = {
+export type State = {
   packageId: string;
   groupId: string;
   exampleId: string;
   examplesPath: string | undefined;
 };
 
-type ExampleLoaderProps = {
+export type ExampleLoaderProps = {
   example: File;
 };
 
@@ -98,14 +98,14 @@ const mockClient = {
   sendScreenEvent: (...args) => console.debug('Screen event', ...args),
 };
 
-type Metadata = {
+export type Metadata = {
   meta?: {
     noListener?: boolean;
   };
 };
 
-type Example = {
-  default: React.ComponentType<any> & Metadata;
+export type Example = {
+  default: React.ComponentType & Metadata;
 };
 
 function ExampleLoader(props: ExampleLoaderProps) {

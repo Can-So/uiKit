@@ -5,26 +5,36 @@ import { gridSize } from '@atlaskit/theme';
 import { AkNavigationItem } from '@atlaskit/navigation';
 import renderNav from './renderNav';
 import { Link } from '../../../components/WrappedLink';
+import { NavGroup } from '../../../types';
 
-type RouterLinkProps = {
-  children: React.ReactChild;
+export type RouterLinkProps = {
+  children?: React.ReactChild;
   className?: string;
-  href: string;
-  isSelected?: boolean;
-  onClick: (e: Event) => void;
+  href?: string | Record<string, string | Location>;
+  onClick?: (e: Event) => void;
   pathname: string;
   replace?: boolean;
-  subNav?: any;
+  subNav?: Array<NavGroup>;
+  to?: string | Record<string, string | Location>;
+  title?: string;
+  isSelected?: ((param1: string, param2: string) => boolean) | boolean;
+  isCompact?: boolean;
+  iconSelected?: boolean;
+  icon?: React.ReactNode;
+  items?: Array<NavGroup>;
 };
 
 const SubNavWrapper = styled.div`
   padding: 0 0 0 ${() => gridSize() * 4}px;
 `;
 
-export function isSubNavExpanded(to: string, pathname: string): boolean {
-  const lastSeg = to.split('/').pop();
+export function isSubNavExpanded(
+  to: string | Record<string, string | Location>,
+  pathname: string,
+): boolean {
+  const lastSeg = (to as string).split('/').pop();
   return (
-    pathname.startsWith(to) &&
+    pathname.startsWith(to as string) &&
     (!!pathname.match(new RegExp(`\/${lastSeg}\/`)) ||
       !!pathname.match(new RegExp(`\/${lastSeg}$`)))
   );
@@ -50,7 +60,7 @@ const RouterLink = ({
       >
         {children}
       </Link>
-      {subNav && isSubNavExpanded(href, pathname) && (
+      {subNav && href && isSubNavExpanded(href, pathname) && (
         <SubNavWrapper>
           {renderNav(subNav, { pathname, onClick })}
         </SubNavWrapper>
@@ -59,7 +69,7 @@ const RouterLink = ({
   );
 };
 
-export const RouterNavigationItem = (props: any) => {
+export const RouterNavigationItem = (props: RouterLinkProps) => {
   return (
     <AkNavigationItem
       linkComponent={toClass(linkProps => (
@@ -75,6 +85,7 @@ export const RouterNavigationItem = (props: any) => {
   );
 };
 
+// TODO: Type correct once navigation is typed
 export const ExternalNavigationItem = (props: any) => (
   <AkNavigationItem {...props} />
 );

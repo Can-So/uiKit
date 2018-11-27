@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { match } from 'react-router';
 import styled from 'styled-components';
 import { Link } from '../../components/WrappedLink';
 import Loadable from '../../components/WrappedLoader';
@@ -16,10 +17,12 @@ import MetaData from './MetaData';
 import LatestChangelog from './LatestChangelog';
 
 import * as fs from '../../utils/fs';
-import { RouterMatch } from '../../types';
 
-import { Logs } from '../../components/ChangeLog';
-import fetchPackageData from './utils/fsOperations';
+import { Log } from '../../components/ChangeLog';
+import fetchPackageData, {
+  PackageData,
+  PackageJson,
+} from './utils/fsOperations';
 
 export const Title = styled.div`
   display: flex;
@@ -62,15 +65,18 @@ export const NoDocs = props => {
 };
 
 export type PackageProps = {
-  match: RouterMatch;
+  match: match<Record<string, string>>;
 };
 
-export type PackageState = {
-  changelog: Logs;
-  doc: React.ReactNode | null;
-  examples: Array<any> | null;
-  missing: boolean | null;
-  pkg: Object | null;
+export type Props = {
+  description?: string;
+  urlIsExactMatch: boolean;
+  groupId: string;
+  pkgId: string;
+  pkg: PackageJson;
+  doc?: string;
+  changelog: Array<Log>;
+  examples?: any;
 };
 
 function getExamplesPaths(groupId, pkgId, examples) {
@@ -109,7 +115,7 @@ export default function LoadData({ match }) {
         <FourOhFour />
       ) : (
         <Package
-          {...props}
+          {...props as PackageData}
           pkgId={pkgId}
           groupId={groupId}
           urlIsExactMatch={match.isExact}
@@ -120,7 +126,7 @@ export default function LoadData({ match }) {
   return <Content />;
 }
 
-class Package extends React.Component<any, any> {
+class Package extends React.Component<Props> {
   render() {
     const {
       urlIsExactMatch,
@@ -158,7 +164,7 @@ class Package extends React.Component<any, any> {
               <Button component={Link} to={exampleModalPath}>
                 Examples
               </Button>
-              {pkg['atlaskit:designLink'] && (
+              {pkg && pkg['atlaskit:designLink'] && (
                 <Button
                   iconBefore={<AtlassianIcon size="small" />}
                   href={pkg['atlaskit:designLink']}
@@ -171,7 +177,7 @@ class Package extends React.Component<any, any> {
         </Title>
         <Intro>{pkg.description}</Intro>
         <MetaData
-          packageName={pkg.name}
+          packageName={pkg.name as string}
           packageSrc={`https://bitbucket.org/atlassian/atlaskit-mk-2/src/master/packages/${groupId}/${pkgId}`}
         />
         <LatestChangelog
