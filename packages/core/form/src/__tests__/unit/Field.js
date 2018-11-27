@@ -3,6 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
 import FieldText from '@atlaskit/field-text';
+import TextField from '@atlaskit/textfield';
 import { WithState } from './helpers';
 import Form, { Field } from '../../../src';
 import { HelperMessage, ErrorMessage } from '../../Messages';
@@ -152,8 +153,6 @@ test('change in defaultValue should reset form field', () => {
   });
 });
 
-const wait = ms => new Promise(res => setTimeout(res, ms));
-
 test('should indicate whether form is submitting', () => {
   let complete = () => {};
   const promise = new Promise(res => {
@@ -180,4 +179,31 @@ test('should indicate whether form is submitting', () => {
       wrapper.update();
       expect(wrapper.find(Button).text()).toBe('submit');
     });
+});
+
+test('isDisabled should disable all fields in form', () => {
+  const spy = jest.fn();
+  const wrapper = mount(
+    <Form onSubmit={spy} isDisabled>
+      {({ formProps, disabled }) => (
+        <form {...formProps}>
+          <Field name="name" defaultValue="">
+            {({ fieldProps }) => <TextField {...fieldProps} />}
+          </Field>
+          <Button
+            type="submit"
+            onClick={formProps.onSubmit}
+            isDisabled={disabled}
+          >
+            Submit
+          </Button>
+        </form>
+      )}
+    </Form>,
+  );
+  expect(wrapper.find(TextField).props()).toMatchObject({ isDisabled: true });
+  wrapper.find(Button).simulate('click');
+  return Promise.resolve().then(() => {
+    expect(spy).not.toHaveBeenCalled();
+  });
 });

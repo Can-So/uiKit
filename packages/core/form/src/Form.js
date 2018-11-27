@@ -4,6 +4,7 @@ import { createForm, type FormApi } from 'final-form';
 import createDecorator from 'final-form-focus';
 
 export const FormContext = createContext();
+export const IsDisabledContext = createContext(false);
 
 type FormProps = {
   ref: Ref<'form'>,
@@ -12,15 +13,16 @@ type FormProps = {
 
 type Props = {
   /* Children rendered inside the Form component. Function will be passed props from the form. */
-  children: ({ formProps: FormProps }) => Node,
+  children: ({
+    formProps: FormProps,
+    disabled: boolean,
+    dirty: boolean,
+    submitting: boolean,
+  }) => Node,
   /* Called when the form is submitted without errors */
   onSubmit: Object => any,
-};
-
-export type FieldInfo = {
-  name: string,
-  initialValue: any,
-  register: FormApi => any,
+  /* When set the form and all fields will be disabled */
+  isDisabled: boolean,
 };
 
 type State = {
@@ -30,7 +32,7 @@ type State = {
 
 const createFinalForm = (onSubmit, formRef) => {
   const form = createForm({
-    onSubmit: onSubmit,
+    onSubmit,
     mutators: {
       setDefaultValue: ([name, defaultValue], state) => {
         state.formState.initialValues = {
@@ -55,6 +57,10 @@ const createFinalForm = (onSubmit, formRef) => {
 };
 
 class Form extends React.Component<Props, State> {
+  static defaultProps = {
+    isDisabled: false,
+  };
+
   unsubscribe = () => {};
   formRef = React.createRef();
   form = createFinalForm(this.props.onSubmit, this.formRef);
@@ -109,17 +115,21 @@ class Form extends React.Component<Props, State> {
   };
 
   render() {
+    const { isDisabled, children } = this.props;
     const { dirty, submitting } = this.state;
     return (
       <FormContext.Provider value={this.registerField}>
-        {this.props.children({
-          formProps: {
-            onSubmit: this.handleSubmit,
-            ref: this.formRef,
-          },
-          dirty,
-          submitting,
-        })}
+        <IsDisabledContext.Provider value={isDisabled}>
+          {children({
+            formProps: {
+              onSubmit: this.handleSubmit,
+              ref: this.formRef,
+            },
+            dirty,
+            submitting,
+            disabled: isDisabled,
+          })}
+        </IsDisabledContext.Provider>
       </FormContext.Provider>
     );
   }

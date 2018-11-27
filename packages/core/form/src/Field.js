@@ -1,6 +1,6 @@
 // @flow
 import React, { type Node } from 'react';
-import { FormContext, type FieldInfo } from './Form';
+import { FormContext, IsDisabledContext, type FieldInfo } from './Form';
 import FieldWrapper, { Label, RequiredIndicator } from './styled/Field';
 import translateEvent from './utils/translateEvent';
 
@@ -28,11 +28,13 @@ type Props = {
   defaultValue: any,
   /* Whether the field is required for submission */
   isRequired?: boolean,
+  /* Whether the field is disabled. Gets set through context. */
+  isDisabled: boolean,
   /* Label displayed above the field */
   label?: Node,
   /* The name of the field */
   name: string,
-  /* Ignore this prop. It gets set internally from context. */
+  /* Register the Field with the Form. Gets set through context. */
   registerField: FieldInfo => any,
   /* validates the current value of field */
   validate?: any => string | void | Promise<string | void>,
@@ -127,7 +129,7 @@ class FieldInner extends React.Component<Props, State> {
   }
 
   render() {
-    const { children, isRequired, label, name } = this.props;
+    const { children, isRequired, isDisabled, label, name } = this.props;
     const {
       registered,
       onChange,
@@ -144,6 +146,7 @@ class FieldInner extends React.Component<Props, State> {
       onFocus,
       value,
       name,
+      isDisabled,
       isInvalid: Boolean(error),
       isRequired: Boolean(isRequired),
     };
@@ -166,12 +169,23 @@ class FieldInner extends React.Component<Props, State> {
 // Make it easier to reference context value in lifecycle methods
 const Field = (props: Props) => (
   <FormContext.Consumer>
-    {registerField => <FieldInner {...props} registerField={registerField} />}
+    {registerField => (
+      <IsDisabledContext.Consumer>
+        {isDisabled => (
+          <FieldInner
+            {...props}
+            registerField={registerField}
+            isDisabled={isDisabled}
+          />
+        )}
+      </IsDisabledContext.Consumer>
+    )}
   </FormContext.Consumer>
 );
 
 Field.defaultProps = {
   defaultValue: undefined,
+  isDisabled: false,
   registerField: () => {},
 };
 
