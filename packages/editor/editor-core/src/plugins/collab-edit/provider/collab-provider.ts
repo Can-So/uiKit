@@ -82,8 +82,8 @@ export class CollabProvider implements CollabEditProvider {
 
   private queueData(data: StepResponse) {
     logger(`Queuing data for version ${data.version}`);
-    const orderedQueue = [...this.queue, data].sort(
-      (a, b) => (a.version > b.version ? 1 : -1),
+    const orderedQueue = [...this.queue, data].sort((a, b) =>
+      a.version > b.version ? 1 : -1,
     );
 
     this.queue = orderedQueue;

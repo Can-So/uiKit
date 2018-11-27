@@ -1,5 +1,54 @@
 # @atlaskit/adf-utils
 
+## 5.1.9
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+
+## 5.1.8
+- [patch] [416fbb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/416fbb3):
+
+  - ED-3298: codeBlocks inside lists
+
+## 5.1.7
+- [patch] [409e610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/409e610):
+
+  - Fix schema block marks name inconsistency
+
+## 5.1.6
+- [patch] [df33a8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df33a8b):
+
+  - Fix block marks validation
+
+## 5.1.5
+- [patch] [d3bb11f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3bb11f):
+
+  - Fixing validator for alignment marks
+
+## 5.1.4
+- [patch] [4e2a3b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e2a3b1):
+
+  - Fixes validating marks with multiple possible branch
+
+## 5.1.3
+- [patch] [a1fb551](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1fb551):
+
+  - Fixed style attribute ADF error for Fabric Status
+
+## 5.1.2
+- [patch] [11d4b85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/11d4b85):
+
+  - ED-5606 Adds union attrs support to validator
+
+## 5.1.1
+- [patch] [b19b7bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b19b7bb):
+
+  - ED-5721 Validator now supports optional content
+
+## 5.1.0
+- [minor] [b440439](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b440439):
+
+  - Add breakout mark to editor, renderer and adf-utils
+
 ## 5.0.1
 - Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
   - @atlaskit/editor-common@21.0.0

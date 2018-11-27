@@ -80,13 +80,15 @@ export const insertMediaGroupNode = (
     if (!deleteRange) {
       tr.insert(mediaInsertPos, content);
     } else if (mediaInsertPos <= deleteRange.start) {
-      tr
-        .deleteRange(deleteRange.start, deleteRange.end)
-        .insert(mediaInsertPos, content);
+      tr.deleteRange(deleteRange.start, deleteRange.end).insert(
+        mediaInsertPos,
+        content,
+      );
     } else {
-      tr
-        .insert(mediaInsertPos, content)
-        .deleteRange(deleteRange.start, deleteRange.end);
+      tr.insert(mediaInsertPos, content).deleteRange(
+        deleteRange.start,
+        deleteRange.end,
+      );
     }
     dispatch(tr);
     setSelectionAfterMediaInsertion(view, mediaInsertPos);
@@ -113,7 +115,12 @@ const createMediaFileNodes = (
 ): PMNode[] => {
   const nodes = mediaStates.map(mediaState => {
     const { id } = mediaState;
-    const node = media.create({ id, type: 'file', collection, __key: id });
+    const node = media.create({
+      id,
+      type: 'file',
+      collection,
+      __key: id,
+    });
     copyOptionalAttrsFromMediaState(mediaState, node);
     return node;
   });

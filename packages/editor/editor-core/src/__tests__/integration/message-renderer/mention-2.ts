@@ -1,20 +1,20 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 import Page from '@atlaskit/webdriver-runner/wd-wrapper';
+import { getDocFromElement } from '../_helpers';
 import {
-  getDocFromElement,
+  message,
   editable,
+  typeAheadPicker,
   insertMention,
-  mentionPicker,
+  lozenge,
 } from '../_helpers';
-
-import { messageEditor, lozenge } from './_message-renderer-helpers';
 
 /*
  * Safari does not understand webdriver keyboard actions so a
  * number of tests have been skipped until move to snapshots.
  *
  * The remaining skipped tests for IE11/Edge are bugs that should be fixed for those browsers.
-*/
+ */
 
 // Follow up with browserstack as to why @ is keyed in as 2 on ie
 BrowserTestCase(
@@ -22,12 +22,11 @@ BrowserTestCase(
   { skip: ['ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await browser.goto(message.path);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@');
-    await browser.waitForSelector(mentionPicker);
-    expect(await browser.isExisting('[data-mention-query="true"]')).toBe(true);
-    expect(await browser.isExisting(mentionPicker)).toBe(true);
+    await browser.waitForSelector(typeAheadPicker);
+    expect(await browser.isExisting(typeAheadPicker)).toBe(true);
   },
 );
 
@@ -36,10 +35,10 @@ BrowserTestCase(
   { skip: ['ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await browser.goto(message.path);
     await browser.waitForSelector(editable);
     await browser.type(editable, 'test@');
-    expect(await browser.isExisting(mentionPicker)).toBe(false);
+    expect(await browser.isExisting(typeAheadPicker)).toBe(false);
   },
 );
 
@@ -48,7 +47,7 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await browser.goto(message.path);
     await browser.waitForSelector(editable);
     await insertMention(browser, 'Carolyn');
     await insertMention(browser, 'Summer');
@@ -65,28 +64,10 @@ BrowserTestCase(
   { skip: ['ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await browser.goto(message.path);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@ Carolyn');
-    expect(await browser.isExisting(mentionPicker)).toBe(false);
-  },
-);
-
-BrowserTestCase(
-  'mention-2.ts: insert on space if unique exact nickname match, with multiple results',
-  { skip: ['ie', 'edge'] },
-  async client => {
-    const browser = new Page(client);
-    await browser.goto(messageEditor);
-    await browser.waitForSelector(editable);
-    await browser.type(editable, '@');
-    await browser.waitForSelector(mentionPicker);
-    await browser.type(editable, 'penelope');
-    await browser.isVisible('[data-mention-name=pgill]');
-    await browser.isVisible('[data-mention-name=plim]');
-    await browser.type(editable, ' some');
-    await browser.type(editable, ' text');
-    expect(await browser.isExisting('span=@penelope')).toBe(true);
+    expect(await browser.isExisting(typeAheadPicker)).toBe(false);
   },
 );
 
@@ -96,7 +77,7 @@ BrowserTestCase(
   async client => {
     const browser = new Page(client);
     await browser.waitForSelector(editable);
-    await browser.goto(messageEditor);
+    await browser.goto(message.path);
     await insertMention(browser, 'Summer');
     await browser.waitForSelector('span=@Summer');
     const doc = await browser.$eval(editable, getDocFromElement);
@@ -109,11 +90,11 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await browser.goto(message.path);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@');
-    await browser.waitForSelector(mentionPicker);
+    await browser.waitForSelector(typeAheadPicker);
     await browser.type(editable, 'Escape');
-    expect(await browser.isExisting(mentionPicker)).toBe(false);
+    expect(await browser.isExisting(typeAheadPicker)).toBe(false);
   },
 );

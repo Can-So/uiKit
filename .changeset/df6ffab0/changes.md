@@ -1,1 +1,0 @@
-- Changed parser to only start a list if it is led with a single dash

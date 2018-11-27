@@ -14,9 +14,7 @@ import type { ConnectedGlobalNavigationProps } from './types';
 
 const GlobalNavigationWithTheme = withGlobalTheme(GlobalNavigation);
 
-export default class ConnectedGlobalNavigation extends Component<
-  ConnectedGlobalNavigationProps,
-> {
+export default class ConnectedGlobalNavigation extends Component<ConnectedGlobalNavigationProps> {
   static defaultProps = {
     itemComponent: GlobalItem,
   };

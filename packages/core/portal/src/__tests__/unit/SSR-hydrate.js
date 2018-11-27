@@ -3,14 +3,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import Portal from '../..';
-import canUseDom from '../../utils/canUseDom';
 
-jest.mock('../../utils/canUseDom');
+jest.mock('exenv', () => ({
+  canUseDOM: false,
+}));
 
 afterAll(() =>
   document
     .querySelectorAll('.atlaskit-portal')
-    .forEach(e => e.parentNode && e.parentNode.removeChild(e)));
+    .forEach(e => e.parentNode && e.parentNode.removeChild(e)),
+);
 
 const App = () => (
   <div>
@@ -22,8 +24,6 @@ const App = () => (
 );
 
 test('should ssr then hydrate portal correctly', () => {
-  // $FlowFixMe - flow can't tell canUseDOM is a jest mock function
-  canUseDom.mockReturnValueOnce(false).mockReturnValueOnce(true);
   // server-side
   const serverHTML = ReactDOMServer.renderToString(<App />);
   // client-side

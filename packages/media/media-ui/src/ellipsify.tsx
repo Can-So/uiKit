@@ -59,7 +59,7 @@ const setEllipsis = (props: EllipsifyProps) => (element: HTMLElement) => {
       : 8;
   const beginningText = text.substr(
     0,
-    text.length * maximumLines / lineCount - endLength,
+    (text.length * maximumLines) / lineCount - endLength,
   );
   const endText = text.substr(text.length - endLength, endLength);
   element.textContent = textContent = `${beginningText}...${endText}`;
@@ -68,7 +68,7 @@ const setEllipsis = (props: EllipsifyProps) => (element: HTMLElement) => {
   if (finalHeight > maximumHeight) {
     const adjustedBeginningText = beginningText.substr(
       0,
-      beginningText.length - beginningText.length / maximumLines * 0.25,
+      beginningText.length - (beginningText.length / maximumLines) * 0.25,
     );
     textContent = `${adjustedBeginningText}...${endText}`;
   }

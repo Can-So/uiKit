@@ -3,9 +3,10 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  ### Usage
 
   Provides a standard way to select a single option from a list.
+
+  ## Usage
 
 ${code`
 import RadioGroup, { AkFieldRadioGroup, AkRadio } from '@atlaskit/field-radio-group';

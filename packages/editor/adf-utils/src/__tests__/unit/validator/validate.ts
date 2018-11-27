@@ -21,14 +21,14 @@ const readFilesSync = (path: string) =>
   );
 
 describe('validate', () => {
-  ['full', 'stage-0'].forEach(schemaType => {
+  ['stage-0'].forEach(schemaType => {
     const valid = readFilesSync(`${BASE_DIR}/${schemaType}/valid`);
     valid.forEach(file => {
       // Don't test Application Card
       if (file.name.indexOf('applicationCard') === 0) {
         return;
       }
-      it(`validates '${file.name}`, () => {
+      it(`validates '${file.name}'`, () => {
         const run = () => {
           validate(file.data);
         };

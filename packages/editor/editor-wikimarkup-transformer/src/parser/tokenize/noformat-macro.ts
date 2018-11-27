@@ -1,13 +1,16 @@
-import { Schema } from 'prosemirror-model';
+import { Schema, Node as PMNode } from 'prosemirror-model';
 import { Token, TokenErrCallback } from '.';
 import { commonMacro } from './common-macro';
+import { parseAttrs } from '../utils/attrs';
+import { title } from '../utils/title';
 
 export function noformatMacro(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token {
-  return commonMacro(input, schema, {
+  return commonMacro(input.substring(position), schema, {
     opening: /^\{noformat(?::([^\{\n\}]*))?\}/,
     closing: /\{noformat\}/,
     rawContentProcessor,
@@ -22,12 +25,24 @@ const rawContentProcessor = (
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token => {
+  const output: PMNode[] = [];
   const { codeBlock } = schema.nodes;
-  const textNode = schema.text(rawContent);
+
+  const parsedAttrs = parseAttrs(rawAttrs);
+  const trimedContent = rawContent.replace(/^\s+|\s+$/g, '');
+  const textNode = trimedContent.length
+    ? schema.text(trimedContent)
+    : undefined;
+
+  if (parsedAttrs.title) {
+    output.push(title(parsedAttrs.title, schema));
+  }
+
+  output.push(codeBlock.createChecked({ language: 'java' }, textNode));
 
   return {
     type: 'pmnode',
-    nodes: [codeBlock.createChecked({ language: 'java' }, textNode)],
+    nodes: output,
     length,
   };
 };

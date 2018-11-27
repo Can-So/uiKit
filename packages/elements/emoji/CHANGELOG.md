@@ -1,5 +1,15 @@
 # @atlaskit/emoji
 
+## 47.0.0
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/util-data-test@10.0.21
+  - @atlaskit/media-core@24.5.0
+
+## 46.0.1
+- [patch] [49a2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49a2a58):
+
+  - Use onClick from button in emoji
+
 ## 46.0.0
 - Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
   - @atlaskit/util-data-test@10.0.20

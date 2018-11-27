@@ -4,23 +4,31 @@ import { extractPropsFromObject } from './extractPropsFromObject';
 import { extractPropsFromDocument } from './extractPropsFromDocument';
 import { extractPropsFromSpreadsheet } from './extractPropsFromSpreadsheet';
 import { extractBlockViewPropsFromTask } from './extractPropsFromTask';
+import { extractPropsFromPresentation } from './extractPropsFromPresentation';
+import { extractPropsFromTextDocument } from './extractPropsFromTextDocument';
+import { extractBlockViewPropsFromProject } from './extractPropsFromProject';
 
 const extractorPrioritiesByType = {
   Object: 0,
   Document: 5,
   'schema:TextDigitalDocument': 10,
   'schema:SpreadsheetDigitalDocument': 10,
+  'schema:PresentationDigitalDocument': 10,
   Spreadsheet: 10,
   'atlassian:Task': 10,
+  'atlassian:Project': 10,
 };
 
 const extractorFunctionsByType = {
   Object: extractPropsFromObject,
-  'schema:TextDigitalDocument': extractPropsFromDocument,
+  'schema:TextDigitalDocument': extractPropsFromTextDocument,
   'schema:SpreadsheetDigitalDocument': extractPropsFromSpreadsheet,
+  'schema:PresentationDigitalDocument': extractPropsFromPresentation,
   Document: extractPropsFromDocument,
   Spreadsheet: extractPropsFromSpreadsheet,
+  Presentation: extractPropsFromPresentation,
   'atlassian:Task': extractBlockViewPropsFromTask,
+  'atlassian:Project': extractBlockViewPropsFromProject,
 };
 
 export function extractBlockPropsFromJSONLD(

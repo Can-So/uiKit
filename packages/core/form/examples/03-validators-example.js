@@ -82,9 +82,11 @@ const isMojitoRecipe = (
 ): boolean => {
   // Check every selected option value exists in our valid ingredients
   if (items.length === mojitoIngredients.length) {
-    return items.map(item => item.value).every(value => {
-      return mojitoIngredients.map(item => item.value).indexOf(value) >= 0;
-    });
+    return items
+      .map(item => item.value)
+      .every(value => {
+        return mojitoIngredients.map(item => item.value).indexOf(value) >= 0;
+      });
   }
   return false;
 };

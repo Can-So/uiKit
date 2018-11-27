@@ -1,13 +1,13 @@
 'use strict';
 // @flow
-
 const webdriverio = require('webdriverio');
+const port = require('./chromeDriver').port;
 const uniqIdentifierStamp = process.env.LOCAL_IDENTIFIER || '';
 const commit = process.env.BITBUCKET_COMMIT
   ? process.env.BITBUCKET_COMMIT + uniqIdentifierStamp
   : process.env.USER
-    ? process.env.USER + uniqIdentifierStamp
-    : uniqIdentifierStamp;
+  ? process.env.USER + uniqIdentifierStamp
+  : uniqIdentifierStamp;
 
 if (!process.env.BITBUCKET_BRANCH && process.env.USER) {
   process.env.BITBUCKET_BRANCH = process.env.USER + '_local_run';
@@ -59,7 +59,7 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
         os_version: launchers[launchKey].os_version,
         browserName: launchers[launchKey].browserName,
         browser_version: launchers[launchKey].browser_version,
-        project: 'Atlaskit MK-2 Webdriver Tests',
+        project: 'Atlaskit Webdriver Tests',
         build: process.env.BITBUCKET_BRANCH,
         'browserstack.local': true,
         'browserstack.debug': true,
@@ -79,29 +79,18 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
 }
 
 function setLocalClients() /*: Array<?Object>*/ {
-  const isHeadless = process.env.HEADLESS !== 'false';
-  const launchers = {
-    chrome: {
+  let isHeadless = process.env.HEADLESS !== 'false';
+  // Keep only chrome for watch mode
+  if (process.env.WATCH === 'true') isHeadless === 'false';
+  const options = {
+    port,
+    desiredCapabilities: {
       browserName: 'chrome',
       chromeOptions: isHeadless ? { args: ['--headless'] } : { args: [] },
     },
-    firefox: {
-      browserName: 'firefox',
-      'moz:firefoxOptions': isHeadless ? { args: ['-headless'] } : { args: [] },
-    },
   };
-
-  // Keep only chrome for watch mode
-  if (process.env.WATCH === 'true') {
-    delete launchers.firefox;
-  }
-
-  const launchKeys = Object.keys(launchers);
-  const options = launchKeys.map(key => {
-    const driver = webdriverio.remote({ desiredCapabilities: launchers[key] });
-    return { driver: driver, isReady: false };
-  });
-  return options;
+  const driver = webdriverio.remote(options);
+  return [{ driver: driver, isReady: false }];
 }
 
 module.exports = { setLocalClients, setBrowserStackClients };

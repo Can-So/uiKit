@@ -1,5 +1,22 @@
 # @atlaskit/editor-test-helpers
 
+## 6.2.19
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/editor-core@89.0.0
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 6.2.18
+- [patch] [16ff8d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/16ff8d2):
+
+  - Add jira card editor example.
+
+## 6.2.17
+- [patch] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
 ## 6.2.16
 - Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
   - @atlaskit/editor-common@21.0.0

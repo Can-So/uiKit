@@ -1,7 +1,9 @@
 // @flow
 
-import React, { Children, Component, Fragment } from 'react';
+import React, { Children, Component, Fragment, type Node } from 'react';
+import { canUseDOM } from 'exenv';
 import { createPortal } from 'react-dom';
+import { ThemeProvider } from 'styled-components';
 import { TransitionGroup } from 'react-transition-group';
 import {
   createAndFireEvent,
@@ -14,7 +16,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../package.json';
-
+import drawerItemTheme from '../theme/drawer-item-theme';
 import DrawerPrimitive from './primitives';
 import { Fade } from './transitions';
 import type { CloseTrigger, DrawerProps } from './types';
@@ -42,7 +44,11 @@ const createAndFireOnClick = (
   })(createAnalyticsEvent);
 
 export class DrawerBase extends Component<DrawerProps> {
-  body = document.querySelector('body');
+  static defaultProps = {
+    width: 'narrow',
+  };
+
+  body = canUseDOM ? document.querySelector('body') : undefined;
 
   componentDidMount() {
     const { isOpen } = this.props;
@@ -126,6 +132,10 @@ export class DrawerBase extends Component<DrawerProps> {
     );
   }
 }
+
+export const DrawerItemTheme = (props: { children: Node }) => (
+  <ThemeProvider theme={drawerItemTheme}>{props.children}</ThemeProvider>
+);
 
 export default withAnalyticsContext({
   componentName: 'drawer',

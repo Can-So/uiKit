@@ -1,5 +1,10 @@
 # @atlaskit/json-schema-generator
 
+## 1.2.1
+- [patch] [11d4b85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/11d4b85):
+
+  - ED-5606 Spec generator now produces object for empty type
+
 ## 1.2.0
 - [minor] Wrap invalid node with unsupported node [fb60e39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb60e39)
 

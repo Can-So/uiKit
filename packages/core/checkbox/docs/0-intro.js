@@ -3,9 +3,9 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  ### Usage
-
   A checkbox element primarily for use in forms.
+
+  ## Usage
 
 ${code`
 import {
@@ -62,12 +62,16 @@ import {
     />
   )}
 
-  ## Checkbox Props
-  ${<Props props={require('!!extract-react-types-loader!../src/Checkbox')} />}
-
-  ## CheckboxIcon Props
   ${(
     <Props
+      heading="Checkbox Props"
+      props={require('!!extract-react-types-loader!../src/Checkbox')}
+    />
+  )}
+
+  ${(
+    <Props
+      heading="CheckboxIcon Props"
       props={require('!!extract-react-types-loader!../src/CheckboxIcon')}
     />
   )}

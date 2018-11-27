@@ -13,7 +13,6 @@ import { ClickAreaBlock } from '../Addon';
 import { tableCommentEditorStyles } from '../../plugins/table/ui/styles';
 import WithFlash from '../WithFlash';
 import {
-  akEditorMenuZIndex,
   WidthConsumer,
   akEditorMobileBreakoutPoint,
 } from '@atlaskit/editor-common';
@@ -63,7 +62,6 @@ const MainToolbar = styled.div`
   padding: ${gridSize()}px ${gridSize()}px 0;
   display: flex;
   height: auto;
-  z-index: ${akEditorMenuZIndex};
 
   padding-left: ${TableControlsPadding}px;
 

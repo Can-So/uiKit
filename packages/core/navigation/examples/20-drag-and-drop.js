@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component, type Element } from 'react';
 import styled, { injectGlobal } from 'styled-components';
 import { Draggable, Droppable, DragDropContext } from 'react-beautiful-dnd';
 
@@ -28,10 +28,12 @@ type Item = {|
 |};
 
 const getItems = (count: number): Item[] =>
-  Array.from({ length: count }, (v, k) => k).map((val: number): Item => ({
-    id: `${val}`,
-    content: `item ${val}`,
-  }));
+  Array.from({ length: count }, (v, k) => k).map(
+    (val: number): Item => ({
+      id: `${val}`,
+      content: `item ${val}`,
+    }),
+  );
 
 type State = {
   items: Item[],
@@ -86,7 +88,7 @@ export default class NavigationWithDragAndDrop extends Component<void, State> {
     });
   };
 
-  renderContainerItems = (): Array<Draggable> => {
+  renderContainerItems = (): Array<Element<typeof Draggable>> => {
     return this.state.items.map((item: Item, index) => (
       <Draggable draggableId={item.id} index={index} key={item.id}>
         {(provided, snapshot) => (

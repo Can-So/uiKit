@@ -2,7 +2,6 @@ import * as React from 'react';
 import { EditorView } from 'prosemirror-view';
 import {
   Editor,
-  mentionPluginKey,
   textFormattingStateKey,
   blockPluginStateKey,
   ListsState,
@@ -35,7 +34,6 @@ class EditorWithState extends Editor {
     if (this.props.media && this.props.media.customMediaPicker) {
       bridge.mediaPicker = this.props.media.customMediaPicker;
     }
-    subscribeForMentionStateChanges(view, eventDispatcher);
     subscribeForTextFormatChanges(view, eventDispatcher);
     subscribeForBlockStateChanges(view, eventDispatcher);
     subscribeForListStateChanges(view, eventDispatcher);
@@ -56,25 +54,6 @@ class EditorWithState extends Editor {
     bridge.editorView = null;
     bridge.mentionsPluginState = null;
     bridge.textFormattingPluginState = null;
-  }
-}
-
-function subscribeForMentionStateChanges(
-  view: EditorView,
-  eventDispatcher: any,
-) {
-  let mentionsPluginState = mentionPluginKey.getState(view.state);
-  bridge.mentionsPluginState = mentionsPluginState;
-  if (mentionsPluginState) {
-    mentionsPluginState.subscribe(state => sendToNative(state));
-  }
-}
-
-function sendToNative(state) {
-  if (state.queryActive) {
-    toNativeBridge.showMentions(state.query || '');
-  } else {
-    toNativeBridge.dismissMentions();
   }
 }
 
@@ -143,6 +122,7 @@ export default function mobileEditor(props) {
       allowTextColor={true}
       allowDate={true}
       allowRule={true}
+      allowGapCursor={true}
       taskDecisionProvider={Promise.resolve(TaskDecisionProvider())}
     />
   );

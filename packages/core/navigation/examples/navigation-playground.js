@@ -221,7 +221,9 @@ class SearchDrawer extends Component<*, *> {
         >
           {items
             .filter(item => item.includes(this.state.value))
-            .map(item => <AkNavigationItem key={item} text={item} />)}
+            .map(item => (
+              <AkNavigationItem key={item} text={item} />
+            ))}
         </AkSearch>
       </AkSearchDrawer>
     );

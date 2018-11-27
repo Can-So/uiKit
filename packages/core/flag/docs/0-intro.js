@@ -8,9 +8,9 @@ export default md`
   The <code>Flag</code> component applies styling, while <code>FlagGroup</code> animates
   the loading and unloading of flags.
 
-${code`
-import Flag, { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';
-`}
+  ## Usage
+
+  ${code`import Flag, { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';`}
 
   It is recommended to wrap your application with the
   [Layer Manager](https://atlaskit.atlassian.com/components/layer-manager) component to
@@ -19,13 +19,11 @@ import Flag, { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';
 
   Flags will fallback to being appended to the \`<body>\` if an ancestor Layer Manager does not exist.
 
-  ## Examples
-
   ${(
     <Example
       packageName="@atlaskit/flag"
       Component={require('../examples/01-flag-without-flagGroup').default}
-      title="Flag Component"
+      title="Flag without group"
       source={require('!!raw-loader!../examples/01-flag-without-flagGroup')}
     />
   )}
@@ -34,7 +32,7 @@ import Flag, { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';
     <Example
       packageName="@atlaskit/flag"
       Component={require('../examples/11-bold-flag-component').default}
-      title="Flag Component"
+      title="Flag using bold"
       source={require('!!raw-loader!../examples/11-bold-flag-component')}
     />
   )}
@@ -43,7 +41,7 @@ import Flag, { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';
     <Example
       packageName="@atlaskit/flag"
       Component={require('../examples/12-flag-group').default}
-      title="Flag Component"
+      title="Flag group"
       source={require('!!raw-loader!../examples/12-flag-group')}
     />
   )}

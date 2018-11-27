@@ -42,6 +42,7 @@ const testFile1: MediaFile = {
   size: 1,
   creationDate: 1,
   type: 'type1',
+  userUpfrontId: Promise.resolve('id1'),
   upfrontId: Promise.resolve('id1'),
 };
 
@@ -534,6 +535,8 @@ describe('analyticsProcessing middleware', () => {
                 size: 1,
                 mimeType: 'type1',
                 upfrontId: Promise.resolve(''),
+                userUpfrontId: Promise.resolve(''),
+                userOccurrenceKey: Promise.resolve(''),
               },
             },
             events: [
@@ -604,6 +607,8 @@ describe('analyticsProcessing middleware', () => {
                 size: 1,
                 mimeType: 'type1',
                 upfrontId: Promise.resolve(''),
+                userUpfrontId: Promise.resolve(''),
+                userOccurrenceKey: Promise.resolve(''),
               },
             },
             events: [

@@ -13,10 +13,11 @@ export default {
     'Geavanceerd zoeken naar "{query}"',
   'global_search.no_recent_activity_title': 'Zoek naar wat je nodig hebt',
   'global_search.no_recent_activity_body':
-    'Of gebruik <a href={url}>Geavanceerd zoeken</a>(`shift + enter`) om gerichter te zoeken. ',
-  'global_search.no_results_title': 'No results in titles and people',
+    'Of gebruik <a href={url}>geavanceerd zoeken</a> (shift + enter) om gerichter te zoeken.',
+  'global_search.no_results_title':
+    'Geen resultaten gevonden in titels en gebruikers',
   'global_search.no_results_body':
-    'Try searching with a different term. You can search page content as well with the advanced search, or search for people, below.',
+    "Probeer het opnieuw met een andere zoekterm. Je kunt met geavanceerd zoeken ook de content van pagina's doorzoeken, of hieronder naar gebruikers zoeken.",
   'global_search.people.recent_people_heading': 'Recent gewerkt met',
   'global_search.people.people_heading': 'Gebruikers',
   'global_search.people.advanced_search': 'Zoek naar gebruikers',
@@ -24,25 +25,26 @@ export default {
   'global_search.search_error_body':
     'Het kan even een tijdelijke kink in de kabel zijn. Het beste is om {link}.',
   'global_search.search_error_body.link': 'het opnieuw te proberen',
-  'global_search.jira.search_placeholder': 'Search Jira',
-  'global_search.jira.recent_issues_heading': 'Recent issues',
-  'global_search.jira.recent_people_heading': 'Recently worked with',
-  'global_search.jira.recent_containers': 'Recent boards, filters and projects',
+  'global_search.jira.search_placeholder': 'Jira doorzoeken',
+  'global_search.jira.recent_issues_heading': 'Recente issues',
+  'global_search.jira.recent_people_heading': 'Recent gewerkt met',
+  'global_search.jira.recent_containers':
+    'Recente borden, filters en projecten',
   'global_search.jira.search_result_issues_heading': 'Issues',
   'global_search.jira.search_result_containers_heading':
-    'Boards, filters and projects',
-  'global_search.jira.search_result_people_heading': 'People',
-  'global_search.jira.advanced_search': 'Go to Advanced search for',
+    'Borden, filters en projecten',
+  'global_search.jira.search_result_people_heading': 'Gebruikers',
+  'global_search.jira.advanced_search': 'Ga naar geavanceerd zoeken voor',
   'global_search.jira.advanced_search_issues': 'issues',
-  'global_search.jira.advanced_search_projects': 'projects',
-  'global_search.jira.advanced_search_boards': 'boards',
+  'global_search.jira.advanced_search_projects': 'projecten',
+  'global_search.jira.advanced_search_boards': 'borden',
   'global_search.jira.advanced_search_filters': 'filters',
-  'global_search.jira.advanced_search_people': 'people',
-  'global_search.jira.advanced_issue_search': 'View all issues',
+  'global_search.jira.advanced_search_people': 'gebruikers',
+  'global_search.jira.advanced_issue_search': 'Geavanceerd zoeken naar issues',
   'global_search.jira.no_results_title':
-    'No results in issue summaries, names and people',
+    'Geen resultaten in issue-omschrijvingen, namen en gebruikers',
   'global_search.jira.no_results_body':
-    'Try searching with a different term. You can search all text fields in issues as well with advanced search, or search for other items more specifically.',
+    'Probeer het opnieuw met een andere zoekterm. Je kunt met geavanceerd zoeken ook alle tekstvelden van issues doorzoeken of specifieker naar andere items zoeken.',
   'global_search.jira.no_recent_activity_body':
-    'Or refine your results with our advanced search.',
+    'Of verfijn je resultaten met geavanceerd zoeken.',
 };

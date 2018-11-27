@@ -10,11 +10,12 @@ export interface EmojiMapItem {
   };
 }
 
-export function emoji(input: string, schema: Schema): Token {
+export function emoji(input: string, position: number, schema: Schema): Token {
+  const substring = input.substring(position);
   // Look for a emoji
   for (const emo of EMOJIS) {
     for (const text of emo.markup) {
-      if (input.startsWith(text)) {
+      if (substring.startsWith(text)) {
         return {
           type: 'pmnode',
           nodes: [schema.nodes.emoji.createChecked(emo.adf)],
@@ -25,7 +26,7 @@ export function emoji(input: string, schema: Schema): Token {
   }
   return {
     type: 'text',
-    text: input.substr(0, 1),
+    text: substring.substr(0, 1),
     length: 1,
   };
 }

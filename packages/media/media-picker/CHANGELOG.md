@@ -1,5 +1,31 @@
 # @atlaskit/media-picker
 
+## 25.0.0
+- [minor] [801fd18](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/801fd18):
+
+  - Ability to delete file from recents has been added; MediaFile now has optional fields userUpfrontId and userOccurrenceKey;
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/media-editor@19.0.0
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 24.0.1
+- [patch] [e151c1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e151c1a):
+
+  - Removes dependency on @atlaskit/layer-manager
+
+  As of component versions:
+
+  - \`@atlaskit/modal-dialog@7.0.0\`
+  - \`@atlaskit/tooltip@12.0.2\`
+  - \`@atlaskit/flag@9.0.6\`
+  - \`@atlaskit/onboarding@6.0.0\`
+
+  No component requires \`LayerManager\` to layer correctly.
+
+  You can safely remove this dependency and stop rendering \`LayerManager\` in your apps.
+
 ## 24.0.0
 - Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
   - @atlaskit/media-card@43.0.0

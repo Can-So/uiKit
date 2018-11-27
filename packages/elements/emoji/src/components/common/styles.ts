@@ -10,11 +10,16 @@ export const emojiNode = 'emoji-common-node';
 
 export const deleteButton = style({
   // hide by default
-  display: 'none',
-  float: 'right',
+  visibility: 'hidden',
+  display: 'flex',
   height: '0px',
-  marginRight: '-14px',
-  marginTop: '-14px',
+  // 40px emoji width with 2px left offset
+  width: '38px',
+  alignItems: 'flex-end',
+  justifyContent: 'flex-end',
+  // vertically align button and prevent emoji offset
+  paddingTop: '4px',
+  marginBottom: '-4px',
 });
 
 export const emoji = style({
@@ -33,7 +38,7 @@ export const emoji = style({
     },
     [`&.${selected},&.${selectOnHover}:hover .${deleteButton}`]: {
       // show delete button on hover
-      display: 'inline-block',
+      visibility: 'visible',
     },
     img: {
       display: 'block',

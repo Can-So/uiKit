@@ -256,8 +256,8 @@ export class Card extends Component<CardProps, CardState> {
     const id = isUrlPreviewIdentifier(identifier)
       ? identifier.url
       : isExternalImageIdentifier(identifier)
-        ? 'external-image'
-        : identifier.id;
+      ? 'external-image'
+      : identifier.id;
 
     return getBaseAnalyticsContext('Card', id);
   }

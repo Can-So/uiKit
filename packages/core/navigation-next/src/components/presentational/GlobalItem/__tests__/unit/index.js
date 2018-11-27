@@ -21,9 +21,15 @@ const theme: any = {
 };
 
 describe('GlobalItem', () => {
+  let defaultProps;
   beforeEach(() => {
     jest.clearAllMocks();
     jest.resetModules();
+
+    defaultProps = {
+      createAnalyticsEvent: (() => ({}): any),
+      theme,
+    };
   });
 
   it('should render correctly', () => {
@@ -73,7 +79,7 @@ describe('GlobalItem', () => {
   describe('GlobalItemBase', () => {
     it('should render an InteractionStateManager', () => {
       const wrapper = shallow(
-        <GlobalItemBase theme={theme} icon={() => <AtlassianIcon />} />,
+        <GlobalItemBase {...defaultProps} icon={() => <AtlassianIcon />} />,
       );
 
       expect(wrapper.find(InteractionStateManager)).toHaveLength(1);
@@ -83,7 +89,7 @@ describe('GlobalItem', () => {
 
     it('should render the GlobalItem primitive', () => {
       const wrapper = shallow(
-        <GlobalItemBase theme={theme} icon={() => <AtlassianIcon />} />,
+        <GlobalItemBase {...defaultProps} icon={() => <AtlassianIcon />} />,
       );
 
       const renderChildren = wrapper.find(InteractionStateManager).dive();
@@ -97,7 +103,7 @@ describe('GlobalItem', () => {
     it('should render an item wrapper with the globalItem.itemWrapper theme styles when size is large', () => {
       const largeItem = shallow(
         <GlobalItemBase
-          theme={theme}
+          {...defaultProps}
           icon={() => <AtlassianIcon />}
           size="large"
         />,
@@ -110,7 +116,7 @@ describe('GlobalItem', () => {
     it('should render an item wrapper with the globalItem.itemWrapper theme styles when size is small', () => {
       const smallItem = shallow(
         <GlobalItemBase
-          theme={theme}
+          {...defaultProps}
           icon={() => <AtlassianIcon />}
           size="small"
         />,

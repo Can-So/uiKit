@@ -43,4 +43,7 @@ export default connect<
   undefined,
   SidebarItemDispatchProps,
   SidebarItemOwnProps
->(null, mapDispatchToProps)(StatelessSidebarItem);
+>(
+  null,
+  mapDispatchToProps,
+)(StatelessSidebarItem);

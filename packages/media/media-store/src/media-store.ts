@@ -101,11 +101,42 @@ export class MediaStore {
     };
   }
 
+  async removeCollectionFile(
+    id: string,
+    collectionName: string,
+    occurrenceKey?: string,
+  ): Promise<void> {
+    const body = {
+      actions: [
+        {
+          action: 'remove',
+          item: {
+            type: 'file',
+            id,
+            occurrenceKey,
+          },
+        },
+      ],
+    };
+
+    await this.request(`/collection/${collectionName}`, {
+      method: 'PUT',
+      authContext: { collectionName },
+      body: JSON.stringify(body),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+
   createUpload(
     createUpTo: number = 1,
+    collectionName?: string,
   ): Promise<MediaStoreResponse<MediaUpload[]>> {
     return this.request(`/upload`, {
       method: 'POST',
+      authContext: { collectionName },
       params: {
         createUpTo,
       },
@@ -115,16 +146,25 @@ export class MediaStore {
     }).then(mapResponseToJson);
   }
 
-  uploadChunk(etag: string, blob: Blob): Promise<void> {
+  uploadChunk(
+    etag: string,
+    blob: Blob,
+    collectionName?: string,
+  ): Promise<void> {
     return this.request(`/chunk/${etag}`, {
       method: 'PUT',
+      authContext: { collectionName },
       body: blob,
     }).then(mapResponseToVoid);
   }
 
-  probeChunks(chunks: string[]): Promise<MediaStoreResponse<MediaChunksProbe>> {
+  probeChunks(
+    chunks: string[],
+    collectionName?: string,
+  ): Promise<MediaStoreResponse<MediaChunksProbe>> {
     return this.request(`/chunk/probe`, {
       method: 'POST',
+      authContext: { collectionName },
       body: JSON.stringify({
         chunks,
       }),
@@ -276,9 +316,11 @@ export class MediaStore {
   appendChunksToUpload(
     uploadId: string,
     body: AppendChunksToUploadRequestBody,
+    collectionName?: string,
   ): Promise<void> {
     return this.request(`/upload/${uploadId}/chunks`, {
       method: 'PUT',
+      authContext: { collectionName },
       body: JSON.stringify(body),
       headers: {
         Accept: 'application/json',
@@ -307,6 +349,7 @@ export class MediaStore {
     path: string,
     options: MediaStoreRequestOptions = {
       method: 'GET',
+      authContext: {},
     },
   ): Promise<Response> {
     const { authProvider } = this.config;
@@ -343,7 +386,7 @@ export interface MediaStoreResponse<Data> {
 
 export type MediaStoreRequestOptions = {
   readonly method?: RequestMethod;
-  readonly authContext?: AuthContext;
+  readonly authContext: AuthContext;
   readonly params?: RequestParams;
   readonly headers?: RequestHeaders;
   readonly body?: any;

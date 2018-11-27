@@ -13,6 +13,7 @@ export type ConnectedItemAvatarProps = {
   styles: StyleReducer,
 };
 
-export type ItemAvatarProps = ConnectedItemAvatarProps & {
+export type ItemAvatarProps = {
+  ...$Exact<ConnectedItemAvatarProps>,
   theme: ProductTheme,
 };

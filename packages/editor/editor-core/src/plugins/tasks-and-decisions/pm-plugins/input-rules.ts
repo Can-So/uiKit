@@ -64,8 +64,7 @@ const createListRule = (
       );
 
       if (!shouldBreakNode) {
-        tr
-          .delete(where, $from.end($from.depth))
+        tr.delete(where, $from.end($from.depth))
           .replaceSelectionWith(
             list.create({ localId: uuid.generate() }, [
               item.create({ localId: uuid.generate() }, content),
@@ -75,8 +74,7 @@ const createListRule = (
           .setSelection(new TextSelection(tr.doc.resolve(start + 1)));
       } else {
         const depthAdjustment = changeInDepth($from, tr.selection.$from);
-        tr
-          .split($from.pos)
+        tr.split($from.pos)
           .setSelection(new NodeSelection(tr.doc.resolve($from.pos + 1)))
           .replaceSelectionWith(
             list.create({ localId: uuid.generate() }, [

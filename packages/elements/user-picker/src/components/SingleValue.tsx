@@ -1,11 +1,11 @@
-import Avatar, { AvatarItem } from '@atlaskit/avatar';
+import { AvatarItem } from '@atlaskit/avatar';
 import * as React from 'react';
 import styled from 'styled-components';
+import { SizeableAvatar } from './SizeableAvatar';
 
 const AvatarItemComponent = styled.div`
   border: none;
   padding: 0;
-  margin-left: 4px;
   width: auto;
   overflow: hidden;
 
@@ -15,7 +15,6 @@ const AvatarItemComponent = styled.div`
 
   &:hover {
     width: auto;
-    margin-left: 4px;
     padding: 0;
     border: none;
   }
@@ -33,11 +32,10 @@ export const SingleValue = props => {
     <AvatarItem
       backgroundColor="transparent"
       avatar={
-        <Avatar
+        <SizeableAvatar
           src={avatarUrl}
-          size={appearance === 'normal' ? 'small' : 'xsmall'}
+          appearance={appearance}
           name={displayName}
-          isHover={false}
         />
       }
       primaryText={displayName}
