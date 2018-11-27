@@ -4,7 +4,7 @@ export function batchByKey<T>(
   const calls = {};
   return (key: string, ...args: T[]) => {
     if (!calls[key]) {
-      setTimeout(() => {
+      window.setTimeout(() => {
         callback(key, calls[key]);
         delete calls[key];
       });

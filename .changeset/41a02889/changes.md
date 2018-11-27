@@ -1,0 +1,4 @@
+- Converted @atlaskit/button to Typescript
+  - Dist paths have changed, if you are importing by exact file path you will need to update your imports
+    - E.g. `import '@atlaskit/button/dist/cjs/components/ButtonGroup';` would need to be updated to `import '@atlaskit/button/dist/es5/components/ButtonGroup'`
+  - Flow types are not present any more, Typescript definitions are shipped instead

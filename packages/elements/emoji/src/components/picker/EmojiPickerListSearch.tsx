@@ -93,7 +93,7 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
       // setting the focus to search input.
       // see FS-2056
       this.inputRef = input;
-      setTimeout(this.focusInput);
+      window.setTimeout(this.focusInput);
     }
   };
 

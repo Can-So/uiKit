@@ -102,7 +102,7 @@ describe('MentionResource', () => {
         .mock(
           /\/mentions\/search\?.*query=cr(&|$)/,
           new Promise(resolve => {
-            setTimeout(() => {
+            window.setTimeout(() => {
               resolve({
                 // delayed results
                 body: {
@@ -204,7 +204,7 @@ describe('MentionResource', () => {
       resource.unsubscribe('test1');
       resource.filter('craig');
       // Not desirable...
-      setTimeout(() => {
+      window.setTimeout(() => {
         expect(listener).toHaveBeenCalledTimes(0);
         done();
       }, 50);
@@ -288,7 +288,7 @@ describe('MentionResource', () => {
     //     },
     //   );
     //   resource.filter('c');
-    //   setTimeout(() => {
+    //   window.setTimeout(() => {
     //     resource.filter('craig');
     //   }, 10);
     // });
@@ -338,7 +338,7 @@ describe('MentionResource', () => {
         }
       });
       resource.filter('delay');
-      setTimeout(() => {
+      window.setTimeout(() => {
         resource.filter('craig');
       }, 5);
     });
@@ -525,7 +525,7 @@ describe('MentionResource', () => {
       );
 
       resource.filter('c'); // this call should succeed and return mentions which get indexed locally
-      setTimeout(() => {
+      window.setTimeout(() => {
         resource.filter('cz'); // this is the call that will result in a 401
       }, 10);
     });

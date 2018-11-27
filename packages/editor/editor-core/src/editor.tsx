@@ -81,7 +81,7 @@ export default class Editor extends React.Component<EditorProps, {}> {
     );
     if (this.props.shouldFocus) {
       if (!instance.view.hasFocus()) {
-        setTimeout(() => {
+        window.setTimeout(() => {
           instance.view.focus();
         }, 0);
       }

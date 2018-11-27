@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ReactElement } from 'react';
+import { ReactInstance } from 'react';
 import * as ReactDOM from 'react-dom';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
@@ -207,7 +207,7 @@ class ToolbarInsertBlock extends React.PureComponent<
   Props & InjectedIntlProps,
   State
 > {
-  private pickerRef: ReactElement<any>;
+  private pickerRef: ReactInstance;
   private button?;
 
   state: State = {

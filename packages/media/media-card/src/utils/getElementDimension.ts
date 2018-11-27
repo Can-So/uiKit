@@ -6,8 +6,8 @@ export const getElementDimension = (
   component: React.Component,
   dimension: ElementDimension,
 ): number => {
-  const element = ReactDOM.findDOMNode(component);
-  const { [dimension]: dimensionValue } = element.getBoundingClientRect();
+  const element = ReactDOM.findDOMNode(component) as Element;
+  const dimensionValue = element.getBoundingClientRect()[dimension];
 
   return Math.round(dimensionValue);
 };

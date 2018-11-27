@@ -1,0 +1,18 @@
+{
+  "releases": [{ "name": "@atlaskit/type-helpers", "type": "major" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/button",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/analytics-next-types",
+        "@atlaskit/type-helpers"
+      ]
+    },
+    {
+      "name": "@atlaskit/analytics-next-types",
+      "type": "patch",
+      "dependencies": ["@atlaskit/type-helpers"]
+    }
+  ]
+}

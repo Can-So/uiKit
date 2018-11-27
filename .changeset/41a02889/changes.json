@@ -1,0 +1,1101 @@
+{
+  "releases": [
+    { "name": "@atlaskit/button", "type": "major" },
+    { "name": "@atlaskit/analytics-next-types", "type": "patch" }
+  ],
+  "dependents": [
+    {
+      "name": "@atlaskit/docs",
+      "type": "patch",
+      "dependencies": ["@atlaskit/icon", "@atlaskit/theme", "@atlaskit/button"]
+    },
+    {
+      "name": "@atlaskit/mobile-header",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/icon",
+        "@atlaskit/navigation",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/panel",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/icon",
+        "@atlaskit/page",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/analytics-next",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/field-text",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/avatar",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/section-message",
+        "@atlaskit/theme",
+        "@atlaskit/toggle",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/avatar-group",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/avatar",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/toggle",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/banner",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/blanket",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/breadcrumbs",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/logo",
+        "@atlaskit/select",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/calendar",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/checkbox",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/section-message",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/comment",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/avatar",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/editor-core",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/datetime-picker",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/calendar",
+        "@atlaskit/field-text",
+        "@atlaskit/icon",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/popper",
+        "@atlaskit/select",
+        "@atlaskit/theme",
+        "@atlaskit/field-range",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/drawer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/blanket",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/icon",
+        "@atlaskit/section-message",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/dropdown-menu",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/avatar",
+        "@atlaskit/droplist",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/droplist",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/dynamic-table",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/avatar",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/pagination",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/toggle",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/empty-state",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/feedback-collector",
+      "type": "major",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/checkbox",
+        "@atlaskit/field-text-area",
+        "@atlaskit/flag",
+        "@atlaskit/form",
+        "@atlaskit/global-navigation",
+        "@atlaskit/icon",
+        "@atlaskit/logo",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/navigation-next",
+        "@atlaskit/section-message",
+        "@atlaskit/select",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/field-radio-group",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/field-text",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/field-text-area",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/flag",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/field-radio-group",
+        "@atlaskit/icon",
+        "@atlaskit/portal",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/form",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/calendar",
+        "@atlaskit/checkbox",
+        "@atlaskit/datetime-picker",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/droplist",
+        "@atlaskit/field-radio-group",
+        "@atlaskit/field-text",
+        "@atlaskit/field-text-area",
+        "@atlaskit/icon",
+        "@atlaskit/inline-edit",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/multi-select",
+        "@atlaskit/radio",
+        "@atlaskit/section-message",
+        "@atlaskit/select",
+        "@atlaskit/single-select",
+        "@atlaskit/theme",
+        "@atlaskit/toggle",
+        "@atlaskit/tooltip",
+        "@atlaskit/field-range",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/global-navigation",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/avatar",
+        "@atlaskit/blanket",
+        "@atlaskit/drawer",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/field-radio-group",
+        "@atlaskit/icon",
+        "@atlaskit/logo",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/navigation-next",
+        "@atlaskit/section-message",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/toggle",
+        "@atlaskit/analytics-listeners",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/icon",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/dynamic-table",
+        "@atlaskit/field-text",
+        "@atlaskit/icon-file-type",
+        "@atlaskit/icon-object",
+        "@atlaskit/logo",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/section-message",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/icon-file-type",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/field-text",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/icon-object",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/field-text",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/inline-dialog",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/datetime-picker",
+        "@atlaskit/icon",
+        "@atlaskit/popper",
+        "@atlaskit/select",
+        "@atlaskit/single-select",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/inline-edit",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/field-radio-group",
+        "@atlaskit/field-text",
+        "@atlaskit/icon",
+        "@atlaskit/multi-select",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/inline-message",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/icon",
+        "@atlaskit/inline-dialog",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/layer-manager",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/onboarding",
+        "@atlaskit/section-message",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/logo",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/field-radio-group",
+        "@atlaskit/select",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/modal-dialog",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/avatar",
+        "@atlaskit/blanket",
+        "@atlaskit/checkbox",
+        "@atlaskit/field-radio-group",
+        "@atlaskit/field-text",
+        "@atlaskit/icon",
+        "@atlaskit/inline-dialog",
+        "@atlaskit/portal",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/multi-select",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/avatar",
+        "@atlaskit/droplist",
+        "@atlaskit/icon",
+        "@atlaskit/section-message",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/navigation",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/avatar",
+        "@atlaskit/blanket",
+        "@atlaskit/checkbox",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/field-text",
+        "@atlaskit/icon",
+        "@atlaskit/logo",
+        "@atlaskit/page",
+        "@atlaskit/section-message",
+        "@atlaskit/single-select",
+        "@atlaskit/theme",
+        "@atlaskit/toggle",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/navigation-next",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/avatar",
+        "@atlaskit/drawer",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/global-navigation",
+        "@atlaskit/icon",
+        "@atlaskit/logo",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/onboarding",
+        "@atlaskit/section-message",
+        "@atlaskit/select",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/toggle",
+        "@atlaskit/tooltip",
+        "@atlaskit/analytics-listeners",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/nps",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/checkbox",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/field-text-area",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/onboarding",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/popper",
+        "@atlaskit/portal",
+        "@atlaskit/progress-indicator",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/page",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/banner",
+        "@atlaskit/logo",
+        "@atlaskit/navigation",
+        "@atlaskit/toggle",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/page-header",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/breadcrumbs",
+        "@atlaskit/field-text",
+        "@atlaskit/inline-edit",
+        "@atlaskit/page",
+        "@atlaskit/single-select",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/pagination",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/popper",
+      "type": "patch",
+      "dependencies": ["@atlaskit/docs", "@atlaskit/theme", "@atlaskit/button"]
+    },
+    {
+      "name": "@atlaskit/portal",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/flag",
+        "@atlaskit/icon",
+        "@atlaskit/inline-dialog",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/onboarding",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/progress-indicator",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/radio",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/form",
+        "@atlaskit/icon",
+        "@atlaskit/section-message",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/section-message",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/field-range",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/select",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/checkbox",
+        "@atlaskit/form",
+        "@atlaskit/icon",
+        "@atlaskit/logo",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/single-select",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/avatar",
+        "@atlaskit/droplist",
+        "@atlaskit/icon",
+        "@atlaskit/section-message",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/spinner",
+      "type": "patch",
+      "dependencies": ["@atlaskit/docs", "@atlaskit/theme", "@atlaskit/button"]
+    },
+    {
+      "name": "@atlaskit/table-tree",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/empty-state",
+        "@atlaskit/icon",
+        "@atlaskit/section-message",
+        "@atlaskit/select",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/textarea",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/textfield",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/form",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/theme",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/section-message",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/toggle",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/tooltip",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/popper",
+        "@atlaskit/portal",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-confluence-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/editor-core",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-core",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/avatar",
+        "@atlaskit/avatar-group",
+        "@atlaskit/calendar",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/droplist",
+        "@atlaskit/icon",
+        "@atlaskit/logo",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/section-message",
+        "@atlaskit/select",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/renderer",
+        "@atlaskit/emoji",
+        "@atlaskit/pubsub",
+        "@atlaskit/task-decision",
+        "@atlaskit/media-card",
+        "@atlaskit/media-core",
+        "@atlaskit/media-filmstrip",
+        "@atlaskit/media-picker",
+        "@atlaskit/smart-card",
+        "@atlaskit/button",
+        "@atlaskit/analytics-next-types"
+      ]
+    },
+    {
+      "name": "@atlaskit/embedded-document",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/theme",
+        "@atlaskit/editor-core",
+        "@atlaskit/renderer",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/renderer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/analytics-listeners",
+        "@atlaskit/task-decision",
+        "@atlaskit/media-card",
+        "@atlaskit/media-core",
+        "@atlaskit/media-filmstrip",
+        "@atlaskit/smart-card",
+        "@atlaskit/profilecard",
+        "@atlaskit/field-range",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/analytics-listeners",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/button",
+        "@atlaskit/analytics-next-types"
+      ]
+    },
+    {
+      "name": "@atlaskit/emoji",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/icon",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/media-core",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/pubsub",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/field-text",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/reactions",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/emoji",
+        "@atlaskit/button",
+        "@atlaskit/analytics-next-types"
+      ]
+    },
+    {
+      "name": "@atlaskit/task-decision",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/avatar",
+        "@atlaskit/avatar-group",
+        "@atlaskit/icon",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/renderer",
+        "@atlaskit/analytics-listeners",
+        "@atlaskit/button",
+        "@atlaskit/analytics-next-types"
+      ]
+    },
+    {
+      "name": "@atlaskit/media-avatar-picker",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/icon",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/spinner",
+        "@atlaskit/media-ui",
+        "@atlaskit/field-range",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/media-card",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/field-radio-group",
+        "@atlaskit/field-text",
+        "@atlaskit/icon",
+        "@atlaskit/spinner",
+        "@atlaskit/toggle",
+        "@atlaskit/media-core",
+        "@atlaskit/media-ui",
+        "@atlaskit/field-range",
+        "@atlaskit/button",
+        "@atlaskit/analytics-next-types"
+      ]
+    },
+    {
+      "name": "@atlaskit/media-core",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/media-card",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/media-filmstrip",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/checkbox",
+        "@atlaskit/field-radio-group",
+        "@atlaskit/icon",
+        "@atlaskit/media-card",
+        "@atlaskit/media-core",
+        "@atlaskit/field-range",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/media-picker",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/field-text",
+        "@atlaskit/flag",
+        "@atlaskit/icon",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/spinner",
+        "@atlaskit/toggle",
+        "@atlaskit/analytics-listeners",
+        "@atlaskit/media-card",
+        "@atlaskit/media-core",
+        "@atlaskit/media-ui",
+        "@atlaskit/button",
+        "@atlaskit/analytics-next-types"
+      ]
+    },
+    {
+      "name": "@atlaskit/media-ui",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/avatar",
+        "@atlaskit/avatar-group",
+        "@atlaskit/checkbox",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/field-text",
+        "@atlaskit/icon",
+        "@atlaskit/page",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/media-viewer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/icon",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/media-card",
+        "@atlaskit/media-core",
+        "@atlaskit/media-ui",
+        "@atlaskit/field-range",
+        "@atlaskit/button",
+        "@atlaskit/analytics-next-types"
+      ]
+    },
+    {
+      "name": "@atlaskit/smart-card",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/checkbox",
+        "@atlaskit/field-text",
+        "@atlaskit/field-text-area",
+        "@atlaskit/form",
+        "@atlaskit/icon",
+        "@atlaskit/icon-file-type",
+        "@atlaskit/icon-object",
+        "@atlaskit/inline-message",
+        "@atlaskit/page",
+        "@atlaskit/radio",
+        "@atlaskit/theme",
+        "@atlaskit/media-ui",
+        "@atlaskit/field-range",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/focused-task-close-account",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/avatar",
+        "@atlaskit/checkbox",
+        "@atlaskit/drawer",
+        "@atlaskit/icon",
+        "@atlaskit/inline-dialog",
+        "@atlaskit/section-message",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/profilecard",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/avatar",
+        "@atlaskit/dynamic-table",
+        "@atlaskit/icon",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/global-search",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/analytics-next",
+        "@atlaskit/avatar",
+        "@atlaskit/drawer",
+        "@atlaskit/dropdown-menu",
+        "@atlaskit/field-text-area",
+        "@atlaskit/flag",
+        "@atlaskit/icon",
+        "@atlaskit/icon-file-type",
+        "@atlaskit/icon-object",
+        "@atlaskit/logo",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/navigation",
+        "@atlaskit/page",
+        "@atlaskit/theme",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/website",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/dynamic-table",
+        "@atlaskit/field-text",
+        "@atlaskit/flag",
+        "@atlaskit/icon",
+        "@atlaskit/icon-object",
+        "@atlaskit/inline-dialog",
+        "@atlaskit/logo",
+        "@atlaskit/modal-dialog",
+        "@atlaskit/navigation",
+        "@atlaskit/page",
+        "@atlaskit/single-select",
+        "@atlaskit/spinner",
+        "@atlaskit/theme",
+        "@atlaskit/tooltip",
+        "@atlaskit/analytics-listeners",
+        "@atlaskit/media-card",
+        "@atlaskit/media-core",
+        "@atlaskit/media-filmstrip",
+        "@atlaskit/button"
+      ]
+    },
+    {
+      "name": "@atlaskit/field-range",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/docs",
+        "@atlaskit/section-message",
+        "@atlaskit/theme"
+      ]
+    }
+  ]
+}

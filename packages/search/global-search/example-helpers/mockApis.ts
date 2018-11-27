@@ -47,7 +47,9 @@ export const DEFAULT_MOCKS_CONFIG: MocksConfig = {
 };
 
 function delay<T>(millis: number, value?: T): Promise<T> {
-  return new Promise(resolve => setTimeout(() => resolve(value), millis));
+  return new Promise(resolve =>
+    window.setTimeout(() => resolve(value), millis),
+  );
 }
 
 function mockRecentApi(recentResponse) {
