@@ -60,7 +60,7 @@ export const messages = defineMessages({
   no_results_body: {
     id: 'global_search.no_results_body',
     defaultMessage:
-      'Try searching with a different term. You can search page content as well with the advanced search, or search for people, below.',
+      'Try again with a different term, or refine your results with our advanced search.',
     description: '',
   },
   people_recent_people_heading: {
@@ -165,13 +165,13 @@ export const messages = defineMessages({
   },
   jira_no_results_title: {
     id: 'global_search.jira.no_results_title',
-    defaultMessage: 'No results in issue summaries, names and people',
+    defaultMessage: "We couldn't find anything matching your search",
     description: '',
   },
   jira_no_results_body: {
     id: 'global_search.jira.no_results_body',
     defaultMessage:
-      'Try searching with a different term. You can search all text fields in issues as well with advanced search, or search for other items more specifically.',
+      'Try again with a different term, or refine your results with our advanced search.',
     description: '',
   },
   jira_no_recent_activity_body: {
