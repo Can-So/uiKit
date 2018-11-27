@@ -83,10 +83,7 @@ export const defaultProps: Pick<
   autoFocus: false,
 };
 
-export class NonDefaultedButton extends React.Component<
-  ButtonProps,
-  ButtonState
-> {
+export class Button extends React.Component<ButtonProps, ButtonState> {
   button: HTMLElement;
 
   state = {
@@ -232,9 +229,9 @@ export class NonDefaultedButton extends React.Component<
   }
 }
 
-export const Button = withDefaultProps(defaultProps, NonDefaultedButton);
+export const DefaultedButton = withDefaultProps(defaultProps, Button);
 
-export type ButtonType = NonDefaultedButton;
+export type ButtonType = Button;
 export const ButtonBase = Button;
 
 export const ButtonWithoutAnalytics = withDeprecationWarnings(Button);
@@ -256,5 +253,5 @@ export default withAnalyticsContext({
         packageVersion,
       },
     }),
-  })(Button),
+  })(ButtonWithoutAnalytics),
 );
