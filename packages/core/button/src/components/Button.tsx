@@ -234,7 +234,7 @@ export const DefaultedButton = withDefaultProps(defaultProps, Button);
 export type ButtonType = Button;
 export const ButtonBase = Button;
 
-export const ButtonWithoutAnalytics = withDeprecationWarnings(Button);
+export const ButtonWithoutAnalytics = withDeprecationWarnings(DefaultedButton);
 const createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
 
 export default withAnalyticsContext({
