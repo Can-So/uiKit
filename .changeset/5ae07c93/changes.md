@@ -1,0 +1,1 @@
+- Add media tag to analytics tags sent by media listener
