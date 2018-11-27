@@ -1,8 +1,8 @@
 const media_ui = require.requireActual('@atlaskit/media-ui');
 
 export const mockLoadImage = (
-  naturalWidth: number,
-  naturalHeight: number,
+  naturalWidth: number = 1,
+  naturalHeight: number = 1,
   orientation: number = 1,
 ) => {
   jest.spyOn(media_ui, 'getOrientation').mockResolvedValue(orientation);

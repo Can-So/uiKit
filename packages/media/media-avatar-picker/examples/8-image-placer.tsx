@@ -6,7 +6,6 @@ import {
   Label,
   ExportedImage,
   ExportedImageWrapper,
-  DisabledText,
 } from '../example-helpers/styled';
 
 export interface ExampleState {
@@ -145,14 +144,9 @@ class Example extends React.Component<{}, ExampleState> {
               />
             </Label>
             <Label>
-              {isCircular ? (
-                <span>Render Circular Mask:</span>
-              ) : (
-                <DisabledText>Render Circular Mask:</DisabledText>
-              )}
+              <span>Render Circular Mask:</span>
               <input
                 type="checkbox"
-                disabled={!isCircular}
                 defaultChecked={useCircularClipWithActions}
                 onChange={this.onRenderCircularMaskChanged}
               />

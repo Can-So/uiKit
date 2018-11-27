@@ -39,7 +39,3 @@ export const ExportedImageWrapper = styled.div`
     color: blue;
   }
 `;
-
-export const DisabledText = styled.span`
-  color: #ccc;
-`;
