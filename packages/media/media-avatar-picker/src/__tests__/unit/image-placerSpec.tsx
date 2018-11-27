@@ -542,7 +542,7 @@ describe('Image Placer', () => {
       const { wrapper, instance } = setup();
       instance.onImageError('some-error');
       expect(wrapper.state('errorMessage')).not.toBeUndefined();
-      instance.setFile({ file: {} as File, src: 'some-src' });
+      instance.setSrc({ file: {} as File, src: 'some-src' });
       expect(wrapper.state('errorMessage')).toBeUndefined();
 
       done();

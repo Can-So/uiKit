@@ -45,8 +45,7 @@ export interface ImageActions {
 export interface ImagePlacerProps {
   containerWidth: number;
   containerHeight: number;
-  src?: string;
-  file?: File;
+  src?: string | File;
   margin: number;
   zoom: number;
   maxZoom: number;
@@ -70,7 +69,7 @@ export interface ImagePlacerState {
   zoom: number;
   errorMessage?: string;
   dragOrigin?: Vector2;
-  src?: string;
+  src?: string | File;
 }
 
 /* immutable prop defaults */
@@ -108,7 +107,6 @@ export class ImagePlacer extends React.Component<
     0,
   ); /* original size of image (un-scaled) */
   imageElement?: HTMLImageElement; /* image element used to load */
-  currentFile?: File; /* used to detect file change, but not necessary for state */
 
   static defaultProps = defaultProps;
 
@@ -188,7 +186,7 @@ export class ImagePlacer extends React.Component<
 
   /* respond to prop changes */
   async UNSAFE_componentWillReceiveProps(nextProps: ImagePlacerProps) {
-    const { imagesourceBounds, state, props, currentFile } = this;
+    const { imagesourceBounds, state, props } = this;
     const { zoom } = state;
     const {
       useConstraints: currentUseConstraints,
@@ -204,7 +202,6 @@ export class ImagePlacer extends React.Component<
       containerHeight: nextContainerHeight,
       margin: nextMargin,
       src: nextSrc,
-      file: nextFile,
     } = nextProps;
 
     const isZoomChange = nextZoom !== undefined && nextZoom !== zoom;
@@ -219,7 +216,8 @@ export class ImagePlacer extends React.Component<
       nextContainerHeight !== currentContainerHeight;
     const isMarginChange =
       nextMargin !== undefined && nextMargin !== currentMargin;
-    const isFileChanged = nextFile !== undefined && nextFile !== currentFile;
+    const isSrcChanged = typeof nextSrc === 'string' && nextSrc !== currentSrc;
+    const isFileChanged = nextSrc instanceof File && nextSrc !== currentSrc;
 
     const zoomReset = { zoom: 0 };
 
@@ -246,14 +244,11 @@ export class ImagePlacer extends React.Component<
     let fileInfo;
 
     if (isFileChanged) {
-      /* if passed file and src, take file only */
-      fileInfo = await getFileInfo(nextFile as File);
-    } else if (
-      nextSrc !== undefined &&
-      nextSrc.length &&
-      nextSrc !== currentSrc
-    ) {
-      fileInfo = await getFileInfoFromSrc(nextSrc);
+      fileInfo = await getFileInfo(nextSrc as File);
+    }
+
+    if (isSrcChanged) {
+      fileInfo = await getFileInfoFromSrc(nextSrc as string);
     }
 
     if (fileInfo) {
@@ -271,14 +266,13 @@ export class ImagePlacer extends React.Component<
     if (previewInfo) {
       const { width, height } = previewInfo;
       this.imagesourceBounds = new Rectangle(width, height);
-      this.setFile(previewInfo.fileInfo);
+      this.setSrc(previewInfo.fileInfo);
     } else {
       this.setState({ errorMessage: 'Cannot load image' });
     }
   }
 
-  setFile(fileInfo: FileInfo) {
-    this.currentFile = fileInfo.file;
+  setSrc(fileInfo: FileInfo) {
     this.setState({
       errorMessage: undefined,
       src: fileInfo.src,
@@ -571,6 +565,7 @@ export class ImagePlacer extends React.Component<
     } = this.props;
     const { errorMessage, src } = this.state;
     const { imageBounds } = this;
+    const imgSrc = typeof src === 'string' ? src : undefined;
 
     return (
       <ImagePlacerWrapper backgroundColor={backgroundColor}>
@@ -589,7 +584,7 @@ export class ImagePlacer extends React.Component<
           ) : (
             <div>
               <ImagePlacerImage
-                src={src}
+                src={imgSrc}
                 x={imageBounds.x}
                 y={imageBounds.y}
                 width={imageBounds.width}

@@ -18,8 +18,7 @@ export interface ExampleState {
   useConstraints: boolean;
   isCircular: boolean;
   useCircularClipWithActions: boolean;
-  src?: string;
-  file?: File;
+  src?: string | File;
   exportedDataURI?: string;
 }
 
@@ -80,7 +79,7 @@ class Example extends React.Component<{}, ExampleState> {
   onFileInputChange = async (e: React.SyntheticEvent<HTMLInputElement>) => {
     if (e.currentTarget.files) {
       const file = e.currentTarget.files[0];
-      this.setState({ src: undefined, file });
+      this.setState({ src: file });
     }
   };
 
@@ -107,7 +106,6 @@ class Example extends React.Component<{}, ExampleState> {
       useConstraints,
       isCircular,
       useCircularClipWithActions,
-      file,
       src,
       exportedDataURI,
     } = this.state;
@@ -175,7 +173,6 @@ class Example extends React.Component<{}, ExampleState> {
               containerWidth={containerWidth}
               containerHeight={containerHeight}
               src={src}
-              file={file}
               margin={margin}
               zoom={zoom}
               maxZoom={maxZoom}
@@ -205,7 +202,7 @@ class Example extends React.Component<{}, ExampleState> {
         <Grid>
           <GridColumn>
             <input type="file" onChange={this.onFileInputChange} />
-            {typeof src === 'string' || file !== undefined ? (
+            {src !== undefined ? (
               <p>
                 <button onClick={this.onGetImageClick}>Export DataURI</button>
               </p>
