@@ -1,6 +1,10 @@
 // @flow
 import React, { createContext, type Node, type Ref } from 'react';
-import { createForm, type FormApi } from 'final-form';
+import {
+  createForm,
+  type FieldState,
+  type FieldSubscription,
+} from 'final-form';
 import createDecorator from 'final-form-focus';
 
 export const FormContext = createContext();
@@ -34,17 +38,19 @@ const createFinalForm = (onSubmit, formRef) => {
   const form = createForm({
     onSubmit,
     mutators: {
+      // https://medium.com/@erikras/final-form-arrays-and-mutators-13159cb7d285
       setDefaultValue: ([name, defaultValue], state) => {
+        // eslint-disable-next-line no-param-reassign
         state.formState.initialValues = {
           ...state.formState.initialValues,
           [name]: defaultValue,
         };
+        // eslint-disable-next-line no-param-reassign
         state.formState.values = {
           ...state.formState.values,
           [name]: defaultValue,
         };
       },
-      printState: (_, state) => console.log(state),
     },
   });
   const withFocusDecorator = createDecorator(() =>
@@ -89,9 +95,9 @@ class Form extends React.Component<Props, State> {
   registerField = (
     name: string,
     defaultValue: any,
-    subscriber: Subscriber,
+    subscriber: FieldState => any,
     subscription: FieldSubscription,
-    config: FieldConfig,
+    config: Object,
   ) => {
     this.form.pauseValidation();
     const unsubscribe = this.form.registerField(

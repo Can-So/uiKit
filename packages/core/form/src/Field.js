@@ -1,6 +1,7 @@
 // @flow
 import React, { type Node } from 'react';
-import { FormContext, IsDisabledContext, type FieldInfo } from './Form';
+import { type FieldState, type FieldSubscription } from 'final-form';
+import { FormContext, IsDisabledContext } from './Form';
 import FieldWrapper, { Label, RequiredIndicator } from './styled/Field';
 import translateEvent from './utils/translateEvent';
 
@@ -28,14 +29,20 @@ type Props = {
   defaultValue: any,
   /* Whether the field is required for submission */
   isRequired?: boolean,
-  /* Whether the field is disabled. Gets set through context. */
+  /* Whether the field is disabled. Internal prop - gets set through context. */
   isDisabled: boolean,
   /* Label displayed above the field */
   label?: Node,
   /* The name of the field */
   name: string,
-  /* Register the Field with the Form. Gets set through context. */
-  registerField: FieldInfo => any,
+  /* Register the Field with the Form. Internal prop - gets set through context. */
+  registerField: (
+    string,
+    any,
+    (FieldState) => any,
+    FieldSubscription,
+    Object,
+  ) => any,
   /* validates the current value of field */
   validate?: any => string | void | Promise<string | void>,
 };
@@ -112,7 +119,7 @@ class FieldInner extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    const { defaultValue, name, registerField, validate } = this.props;
+    const { defaultValue, name } = this.props;
     if (prevProps.defaultValue !== defaultValue || prevProps.name !== name) {
       this.unregisterField();
       this.unregisterField = this.register();
@@ -120,7 +127,6 @@ class FieldInner extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    const { name, register, defaultValue, isRequired, validate } = this.props;
     this.unregisterField = this.register();
   }
 
