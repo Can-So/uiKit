@@ -1,8 +1,10 @@
+// @flow
+
 // backup real global Date object
 const _Date = global.Date;
 
 export default {
-  setToday: (today = new Date()) => {
+  setToday: function setToday(today: Date = new Date()) {
     function MockDate(y, m, d, h, M, s, ms) {
       let returnDate;
 
@@ -16,12 +18,15 @@ export default {
           break;
 
         default:
-          const d = typeof d === 'undefined' ? 1 : d;
-          const h = h || 0;
-          const M = M || 0;
-          const s = s || 0;
-          const ms = ms || 0;
-          returnDate = new _Date(y, m, d, h, M, s, ms);
+          returnDate = new _Date(
+            y,
+            m,
+            typeof d === 'undefined' ? 1 : d,
+            h || 0,
+            M || 0,
+            s || 0,
+            ms || 0,
+          );
           break;
       }
 
@@ -42,7 +47,8 @@ export default {
 
     global.Date = MockDate;
   },
-  reset: () => {
+
+  reset: function reset() {
     global.Date = _Date;
   },
 };

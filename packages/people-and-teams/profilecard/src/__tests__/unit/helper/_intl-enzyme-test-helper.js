@@ -1,3 +1,5 @@
+// @flow
+
 /**
  * Components using the react-intl module require access to the intl context.
  * This is not available when mounting single components in Enzyme.
@@ -6,11 +8,16 @@
  *
  * Copied from https://github.com/yahoo/react-intl/wiki/Testing-with-React-Intl
  */
-
-import * as React from 'react';
+import React, { type Element as ReactElement } from 'react';
 import { IntlProvider, intlShape } from 'react-intl';
 import { mount, shallow } from 'enzyme';
 import { getMessagesForLocale } from '../../../internal/i18n-util';
+
+type RenderingOptions = {
+  context?: any,
+  childContextTypes?: any,
+  additionalOptions?: any,
+};
 
 // Create the IntlProvider to retrieve context for wrapping around.
 const intlProvider = new IntlProvider(
@@ -22,14 +29,16 @@ export const { intl } = intlProvider.getChildContext();
 /**
  * When using React-Intl `injectIntl` on components, props.intl is required.
  */
-function nodeWithIntlProp(node) {
+function nodeWithIntlProp(node: any) {
   return React.cloneElement(node, { intl });
 }
 
 export function shallowWithIntl(
-  node,
-  { context = null, ...additionalOptions } = {},
+  node: ReactElement<*>,
+  options: RenderingOptions = {},
 ) {
+  const { context = null, ...additionalOptions } = options;
+
   return shallow(nodeWithIntlProp(node), {
     context: Object.assign({}, context, { intl }),
     ...additionalOptions,
@@ -37,9 +46,15 @@ export function shallowWithIntl(
 }
 
 export function mountWithIntl(
-  node,
-  { context = null, childContextTypes = null, ...additionalOptions } = {},
+  node: ReactElement<*>,
+  options: RenderingOptions = {},
 ) {
+  const {
+    context = null,
+    childContextTypes = null,
+    ...additionalOptions
+  } = options;
+
   return mount(nodeWithIntlProp(node), {
     context: Object.assign({}, context, { intl }),
     childContextTypes: Object.assign(

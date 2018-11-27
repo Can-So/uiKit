@@ -1,3 +1,5 @@
+// @flow
+
 import React, { PureComponent } from 'react';
 import { IntlProvider, injectIntl, InjectedIntlProps } from 'react-intl';
 import { getMessagesForLocale } from '../internal/i18n-util';

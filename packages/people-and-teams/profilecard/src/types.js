@@ -1,4 +1,6 @@
 // @flow
+import { type Element as ReactElement } from 'react';
+
 export type PresenceTypes =
   | 'none'
   | 'available'
@@ -50,7 +52,7 @@ export type ProfilecardProps = {
 };
 
 export type MessageIntlProviderProps = {
-  children: JSX.Element,
+  children: ReactElement<*>,
 };
 
 export type RelativeDateKeyType =
