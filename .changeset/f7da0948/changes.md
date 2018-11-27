@@ -1,0 +1,1 @@
+- Added `colspan` to cell type. Added example using `colspan`.
