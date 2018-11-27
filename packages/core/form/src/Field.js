@@ -1,5 +1,7 @@
 // @flow
 import React, { type Node } from 'react';
+import arrayShallowEqual from 'shallow-equal/arrays';
+import objectShallowEqual from 'shallow-equal/objects';
 import { type FieldState, type FieldSubscription } from 'final-form';
 import { FormContext, IsDisabledContext } from './Form';
 import FieldWrapper, { Label, RequiredIndicator } from './styled/Field';
@@ -25,7 +27,7 @@ type Meta = {
 type Props = {
   /* Children to render in the field. Called with form information. */
   children: ({ fieldProps: FieldProps, error: any, meta: Meta }) => Node,
-  /* The default value of the field */
+  /* The default value of the field. If a function is provided it is called with the current default value of the field. */
   defaultValue: any,
   /* Whether the field is required for submission */
   isRequired?: boolean,
@@ -35,6 +37,8 @@ type Props = {
   label?: Node,
   /* The name of the field */
   name: string,
+  /* Given what onChange was called with and the current field value return the next field value */
+  transform: <E, T>(event: E, current: T) => T,
   /* Register the Field with the Form. Internal prop - gets set through context. */
   registerField: (
     string,
@@ -61,6 +65,9 @@ type State = {
 };
 
 class FieldInner extends React.Component<Props, State> {
+  static defaultProps = {
+    transform: translateEvent,
+  };
   unregisterField = () => {};
   state = {
     onChange: () => {},
@@ -93,7 +100,7 @@ class FieldInner extends React.Component<Props, State> {
       }) => {
         this.setState({
           registered: true,
-          onChange: translateEvent(change),
+          onChange: change,
           onBlur: blur,
           onFocus: focus,
           dirty,
@@ -120,7 +127,14 @@ class FieldInner extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps: Props) {
     const { defaultValue, name } = this.props;
-    if (prevProps.defaultValue !== defaultValue || prevProps.name !== name) {
+    const defaultValueSame = ((a, b) => {
+      return (
+        a === b ||
+        (Array.isArray(b) && arrayShallowEqual(a, b)) ||
+        (typeof b === 'object' && objectShallowEqual(a, b))
+      );
+    })(prevProps.defaultValue, defaultValue);
+    if (!defaultValueSame || prevProps.name !== name) {
       this.unregisterField();
       this.unregisterField = this.register();
     }
@@ -135,7 +149,14 @@ class FieldInner extends React.Component<Props, State> {
   }
 
   render() {
-    const { children, isRequired, isDisabled, label, name } = this.props;
+    const {
+      children,
+      isRequired,
+      isDisabled,
+      label,
+      name,
+      transform,
+    } = this.props;
     const {
       registered,
       onChange,
@@ -147,7 +168,9 @@ class FieldInner extends React.Component<Props, State> {
     const error =
       rest.submitError || ((rest.touched || rest.dirty) && rest.error);
     const fieldProps = {
-      onChange,
+      onChange: e => {
+        onChange(transform(e, value));
+      },
       onBlur,
       onFocus,
       value,

@@ -33,23 +33,46 @@ type Props = {
   value?: string,
 };
 
+const getIsChecked = (value, current) => {
+  if (value !== undefined) {
+    return !!current.find(v => v === value);
+  }
+  return current;
+};
+
+const getDefaultValue = (value, defaultIsChecked) => {
+  if (value !== undefined) {
+    return defaultIsChecked ? [value] : [];
+  }
+  return defaultIsChecked;
+};
+
 const CheckboxField = ({
   children,
   defaultIsChecked = false,
   value,
   ...rest
 }: Props) => {
-  const defaultValue = (() => {
-    if (value) {
-      return defaultIsChecked ? value : undefined;
-    }
-    return defaultIsChecked;
-  })();
   return (
-    <Field defaultValue={defaultValue} {...rest}>
+    <Field
+      defaultValue={getDefaultValue(value, defaultIsChecked)}
+      {...rest}
+      transform={(event: SyntheticInputEvent<>, current) => {
+        if (value !== undefined) {
+          return event.target.checked
+            ? [...current, value]
+            : current.filter(v => v !== value);
+        }
+        return event.target.checked;
+      }}
+    >
       {({ fieldProps: { value: fieldValue, ...otherFieldProps }, ...others }) =>
         children({
-          fieldProps: { ...otherFieldProps, isChecked: !!fieldValue, value },
+          fieldProps: {
+            ...otherFieldProps,
+            isChecked: getIsChecked(value, fieldValue),
+            value,
+          },
           ...others,
         })
       }
