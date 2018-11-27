@@ -1,0 +1,1 @@
+- ED-5775: fix columns collapsing in renderer
