@@ -1,0 +1,1 @@
+- Add touchEndpoint() method that calls /upload/createWithFiles and creates uploads & files with given ids 
