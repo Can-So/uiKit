@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 31.0.1
+- [patch] [1c42021](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c42021):
+
+  - ED-5775: fix columns collapsing in renderer
+
 ## 31.0.0
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/editor-common@22.0.0
