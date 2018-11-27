@@ -74,7 +74,7 @@ const logoLocation = {
 };
 
 export default md`
-## v14 to v15
+## v14.x to v15.x
 In Version 15, we removed the onClick props. Icons are not focusable elements, they are only presentational.
 We recommend to wrap them into a link or a button if you need to click on them.
 
@@ -105,7 +105,7 @@ import EmojiIcon from '@atlaskit/icon/glyph/emoji';
 
 
 
-## v13 to v14
+## v13.x to v14.x
 Version 14 of icons resorts our icons into better locations.
 There is a full explanation below, but to start, here are the icons
 that are affected.
