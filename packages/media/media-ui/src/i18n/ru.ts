@@ -73,4 +73,9 @@ export default {
   'fabric.media.error_loading_file': 'Error loading file',
   'fabric.media.error_generating_preview': 'Error generating preview',
   'fabric.media.download': 'Download',
+  'fabric.media.unknown': 'unknown',
+  'fabric.media.document': 'document',
+  'fabric.media.audio': 'audio',
+  'fabric.media.video': 'video',
+  'fabric.media.image': 'image',
 };
