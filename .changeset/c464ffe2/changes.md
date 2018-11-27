@@ -1,1 +1,1 @@
-- Add isDisabled prop to RadioGruop, once set will set the isDisabled value for all Radio elements within the group
+- Add isDisabled prop to RadioGroup, once set will set the isDisabled value for all Radio elements within the group
