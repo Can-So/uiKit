@@ -287,46 +287,47 @@ export const messages = defineMessages({
   zoom_out: {
     id: 'fabric.media.zoom_out',
     defaultMessage: 'zoom out',
-    description: 'TODO',
+    description: 'Indicates the user can zoom out a file',
   },
   zoom_in: {
     id: 'fabric.media.zoom_in',
     defaultMessage: 'zoom in',
-    description: 'TODO',
+    description: 'Indicates the user can zoom out a file',
   },
   remove_image: {
     id: 'fabric.media.remove_image',
     defaultMessage: 'Remove image',
-    description: 'TODO',
+    description: 'Allows the user to remove a file',
   },
   play: {
     id: 'fabric.media.play',
     defaultMessage: 'play',
-    description: 'TODO',
+    description: '',
   },
   pause: {
     id: 'fabric.media.pause',
     defaultMessage: 'pause',
-    description: 'TODO',
+    description: '',
   },
   disable_fullscreen: {
     id: 'fabric.media.disable_fullscreen',
     defaultMessage: 'disable fullscreen',
-    description: 'TODO',
+    description: 'Hint to let the user know he can disable the fullscreen mode',
   },
   enable_fullscreen: {
     id: 'fabric.media.enable_fullscreen',
     defaultMessage: 'enable fullscreen',
-    description: 'TODO',
+    description: 'Hint to let the user know he can enable the fullscreen mode',
   },
   error_loading_file: {
     id: 'fabric.media.error_loading_file',
     defaultMessage: 'Error loading file',
-    description: 'TODO',
+    description: 'Message showed when we had an error trying to load the file',
   },
   error_generating_preview: {
     id: 'fabric.media.error_generating_preview',
     defaultMessage: 'Error generating preview',
-    description: 'TODO',
+    description:
+      'Message showed when we had an error trying generate a preview for a file',
   },
 });
