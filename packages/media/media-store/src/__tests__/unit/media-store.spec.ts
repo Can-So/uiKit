@@ -496,11 +496,11 @@ describe('MediaStore', () => {
         fileId: 'some-other-file-id',
       };
 
-      it('should POST to /upload/touch', () => {
+      it('should POST to /upload/createWithFiles', () => {
         const data: TouchedFiles = {
           created: [createdTouchedFile1, createdTouchedFile2],
         };
-        fetchMock.mock(`begin:${baseUrl}/upload/touch`, {
+        fetchMock.mock(`begin:${baseUrl}/upload/createWithFiles`, {
           body: {
             data,
           },
@@ -512,7 +512,9 @@ describe('MediaStore', () => {
         };
         return mediaStore.touchFiles(body, params).then(response => {
           expect(response).toEqual({ data });
-          expect(fetchMock.lastUrl()).toEqual(`${baseUrl}/upload/touch`);
+          expect(fetchMock.lastUrl()).toEqual(
+            `${baseUrl}/upload/createWithFiles`,
+          );
           expect(fetchMock.lastOptions()).toEqual({
             method: 'POST',
             headers: {
@@ -529,35 +531,11 @@ describe('MediaStore', () => {
         });
       });
 
-      it('should return partial result', () => {
-        const data: TouchedFiles = {
-          created: [createdTouchedFile1],
-          failed: [
-            {
-              fileId: 'some-other-file-id',
-            },
-          ],
-        };
-        fetchMock.mock(`begin:${baseUrl}/upload/touch`, {
-          body: {
-            data,
-          },
-          status: 409,
-        });
-
-        const body: MediaStoreTouchFileBody = {
-          descriptors: [descriptor1, descriptor2],
-        };
-        return mediaStore.touchFiles(body, params).then(response => {
-          expect(response).toEqual({ data });
-        });
-      });
-
-      it('should fail if non-409 status is thrown', () => {
+      it('should fail if error status is returned', () => {
         const error = {
           error: 'something wrong',
         };
-        fetchMock.mock(`begin:${baseUrl}/upload/touch`, {
+        fetchMock.mock(`begin:${baseUrl}/upload/createWithFiles`, {
           body: error,
           status: 403,
         });

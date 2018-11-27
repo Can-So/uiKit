@@ -195,7 +195,7 @@ export class MediaStore {
     body: MediaStoreTouchFileBody,
     params: MediaStoreTouchFileParams = {},
   ): Promise<MediaStoreResponse<TouchedFiles>> {
-    return this.request('/upload/touch', {
+    return this.request('/upload/createWithFiles', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -203,13 +203,7 @@ export class MediaStore {
       },
       body: JSON.stringify(body),
       authContext: { collectionName: params.collection },
-    }).then(mapResponseToJson, (response: Response) => {
-      if (response.status === 409) {
-        return response.json();
-      } else {
-        throw response;
-      }
-    });
+    }).then(mapResponseToJson);
   }
 
   createFile(
@@ -492,20 +486,9 @@ export interface CreatedTouchedFile {
   uploadId: string;
 }
 
-export interface FailedTouchedFile {
-  fileId: string;
-}
-
-// This means that it can be one, or another, or both. But not none.
-export type TouchedFiles =
-  | {
-      created: CreatedTouchedFile[];
-      failed?: FailedTouchedFile[];
-    }
-  | {
-      created?: CreatedTouchedFile[];
-      failed: FailedTouchedFile[];
-    };
+export type TouchedFiles = {
+  created: CreatedTouchedFile[];
+};
 
 export interface EmptyFile {
   readonly id: string;

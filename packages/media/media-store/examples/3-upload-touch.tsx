@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@atlaskit/button';
 import styled from 'styled-components';
 import { MediaStore } from '../src';
-import { createStorybookContext } from '../../media-test-helpers';
+import { createUploadContext } from '../../media-test-helpers';
 import * as uuid from 'uuid';
 
 const Wrapper = styled.div`
@@ -29,7 +29,7 @@ const Response = styled.div`
   white-space: pre;
 `;
 
-const context = createStorybookContext();
+const context = createUploadContext();
 
 export interface State {
   result: any;
@@ -75,17 +75,25 @@ class Example extends React.Component<{}, State> {
   };
 
   createSameFile = async () => {
-    const result = await this.store.touchFiles({
-      descriptors: [
-        {
-          fileId: this.lastFileId,
-        },
-        {
-          fileId: uuid.v4(),
-        },
-      ],
-    });
-    this.setState({ result: result.data });
+    try {
+      await this.store.touchFiles({
+        descriptors: [
+          {
+            fileId: this.lastFileId,
+          },
+          {
+            fileId: uuid.v4(),
+          },
+        ],
+      });
+    } catch (e) {
+      const response = e as Response;
+      const result = {
+        status: response.status,
+        body: await response.text(),
+      };
+      this.setState({ result });
+    }
   };
 
   render() {
