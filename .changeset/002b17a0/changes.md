@@ -1,0 +1,1 @@
+- Update @atlaskit/button inside @atlaskit/editor-mobile-bridge
