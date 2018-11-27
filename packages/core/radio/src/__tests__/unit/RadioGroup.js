@@ -82,7 +82,7 @@ describe(name, () => {
         });
         it('if set, overrides isDisabled values set on each option', () => {
           const isDisabled = true;
-          const wrapper = shallow(
+          const wrapper = mount(
             <RadioGroup
               onChange={() => {}}
               isDisabled={isDisabled}
@@ -97,24 +97,24 @@ describe(name, () => {
               ]}
             />,
           );
-          wrapper
-            .find(Radio)
-            .forEach(radio =>
-              expect(radio.prop('isDisabled', isDisabled).toBe(false)),
-            );
+          wrapper.find(Radio).forEach(radio => {
+            expect(radio.prop('isDisabled')).toBe(true);
+          });
         });
       });
       describe('isRequired prop', () => {
         it('is reflected to each Radio option', () => {
           const isRequired = true;
-          const wrapper = shallow(
-            <RadioGroup onChange={() => {}} isRequired={isRequired} />,
+          const wrapper = mount(
+            <RadioGroup
+              onChange={() => {}}
+              isRequired={isRequired}
+              options={sampleOptions}
+            />,
           );
-          wrapper
-            .find(Radio)
-            .forEach(radio =>
-              expect(radio.prop('isRequired', isRequired)).not.toBe(undefined),
-            );
+          wrapper.find(Radio).forEach(radio => {
+            expect(radio.prop('isRequired')).not.toBe(undefined);
+          });
         });
       });
 
