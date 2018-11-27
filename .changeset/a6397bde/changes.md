@@ -1,1 +1,0 @@
-- FS-3184 move onFocus handling to user picker
