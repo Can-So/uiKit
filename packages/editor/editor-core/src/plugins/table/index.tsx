@@ -16,8 +16,9 @@ import { messages } from '../insert-block/ui/ToolbarInsertBlock';
 import { PluginConfig, PermittedLayoutsDescriptor } from './types';
 import { createPlugin, pluginKey } from './pm-plugins/main';
 import { keymapPlugin } from './pm-plugins/keymap';
-import { columnResizing as flexiResizing } from './pm-plugins/table-resizing';
+import { createPlugin as createFlexiResizingPlugin } from './pm-plugins/table-resizing';
 import { getToolbarConfig } from './toolbar';
+import { ColumnResizingPlugin } from './types';
 import FloatingContextualMenu from './ui/FloatingContextualMenu';
 import { isLayoutSupported } from './utils';
 
@@ -74,13 +75,13 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
       },
       {
         name: 'tablePMColResizing',
-        plugin: ({ props: { allowTables } }) => {
+        plugin: ({ dispatch, props: { allowTables } }) => {
           const { allowColumnResizing } = pluginConfig(allowTables);
           return allowColumnResizing
-            ? flexiResizing({
+            ? createFlexiResizingPlugin(dispatch, {
                 handleWidth: HANDLE_WIDTH,
                 cellMinWidth: CELL_MIN_WIDTH,
-              })
+              } as ColumnResizingPlugin)
             : undefined;
         },
       },

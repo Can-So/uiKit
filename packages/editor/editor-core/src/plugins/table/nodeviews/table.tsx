@@ -14,6 +14,7 @@ import TableComponent from './TableComponent';
 import WithPluginState from '../../../ui/WithPluginState';
 import { pluginKey as widthPluginKey } from '../../width';
 import { pluginKey, getPluginState } from '../pm-plugins/main';
+import { pluginKey as tableResizingPluginKey } from '../pm-plugins/table-resizing/index';
 import { pluginConfig as getPluginConfig } from '../index';
 
 export interface Props {
@@ -86,6 +87,7 @@ export default class TableView extends ReactNodeView {
         plugins={{
           containerWidth: widthPluginKey,
           pluginState: pluginKey,
+          tableResizingPluginState: tableResizingPluginKey,
         }}
         editorView={props.view}
         render={pluginStates => (

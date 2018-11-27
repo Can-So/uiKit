@@ -12,7 +12,11 @@ import TableFloatingControls from '../ui/TableFloatingControls';
 import ColumnControls from '../ui/TableFloatingControls/ColumnControls';
 
 import { getPluginState } from '../pm-plugins/main';
-import { scaleTable, setColumnWidths } from '../pm-plugins/table-resizing';
+import {
+  ResizeState,
+  scaleTable,
+  setColumnWidths,
+} from '../pm-plugins/table-resizing';
 
 import { TablePluginState, TableCssClassName as ClassName } from '../types';
 import * as classnames from 'classnames';
@@ -35,6 +39,7 @@ export interface ComponentProps extends Props {
 
   containerWidth: WidthPluginState;
   pluginState: TablePluginState;
+  tableResizingPluginState?: ResizeState;
   width: number;
 }
 
@@ -111,7 +116,14 @@ class TableComponent extends React.Component<ComponentProps> {
   }
 
   render() {
-    const { view, node, pluginState, width } = this.props;
+    const {
+      view,
+      node,
+      pluginState,
+      tableResizingPluginState,
+      width,
+    } = this.props;
+
     const {
       pluginConfig: { allowControls = true },
     } = pluginState;
@@ -126,7 +138,9 @@ class TableComponent extends React.Component<ComponentProps> {
     } = getPluginState(view.state);
 
     const tableRef = this.table || undefined;
-    const tableActive = this.table === pluginState.tableRef;
+    const tableActive =
+      this.table === pluginState.tableRef &&
+      (!tableResizingPluginState || !tableResizingPluginState.dragging);
     const { scroll } = this.state;
 
     const rowControls = [
