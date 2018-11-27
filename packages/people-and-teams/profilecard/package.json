@@ -14,8 +14,8 @@
   "scripts": {
     "build:flow": "bolt workspaces exec --only \"@atlaskit/profilecard\" -- flow-copy-source -v -i '**/__tests__/**' src dist/esm/src",
     "build:babel": "NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --parallel  --only \"@atlaskit/profilecard\" -- babel src -d dist/esm/src --root-mode upward",
-    "build:for:i18n:push": "yarn build:flow && yarn build:babel",
-    "i18n:push": "i18n-tools push --resource profilecard ./dist/esm",
+    "build:for:i18n:push": "rm -rf ./dist && yarn build:flow && yarn build:babel",
+    "i18n:push": "yarn build:for:i18n:push && i18n-tools push --resource profilecard ./dist/esm",
     "i18n:pull": "rm -rf ./src/i18n && i18n-tools pull --resource profilecard ."
   },
   "dependencies": {

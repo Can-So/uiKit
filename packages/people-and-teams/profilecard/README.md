@@ -8,8 +8,7 @@ Contact Atlaskit team to get `TRANSIFEX_API_TOKEN` as a global variable
 
 In `atlaskit-mk-2/packages/people-and-teams/profilecard` folder: 
 
-- Run `yarn build:for:i18n:push` to build `dis/esm/src` 
-- Run `yarn i18n:push` to find messages in `dis/esm/src` and push them to Transifex
+- Run `yarn i18n:push` to build and then find messages in `dis/esm/src` and push them to Transifex
 
 ### Pulling translation
 
