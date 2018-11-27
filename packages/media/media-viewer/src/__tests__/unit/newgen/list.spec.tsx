@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
 import { MediaItemType } from '@atlaskit/media-core';
 import { Observable } from 'rxjs';
 import { List, Props } from '../../../newgen/list';
@@ -8,6 +7,7 @@ import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import { ItemViewer } from '../../../newgen/item-viewer';
 import { Identifier } from '../../../newgen/domain';
 import Button from '@atlaskit/button';
+import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 
 function createFixture(props: Partial<Props>) {
   const items: Identifier[] = [];
@@ -26,7 +26,7 @@ function createFixture(props: Partial<Props>) {
         }),
     },
   } as any;
-  const el = mount(
+  const el = mountWithIntlContext(
     <List
       items={items}
       defaultSelectedItem={selectedItem}
