@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 22.0.3
+- [patch] [52606a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52606a5):
+
+  - ED-5560 Code block language in schema is now a string (ADF Change 33)
+
 ## 22.0.2
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/editor-test-helpers@6.2.21
