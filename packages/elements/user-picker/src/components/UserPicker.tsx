@@ -1,4 +1,4 @@
-import Select from '@atlaskit/select';
+import Select, { createFilter } from '@atlaskit/select';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -33,6 +33,23 @@ export class UserPicker extends React.Component<
     search: '',
   };
 
+  private selectRef;
+  private static defaultFilter = createFilter();
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      resultVersion: 0,
+      inflightRequest: 0,
+      count: 0,
+      hoveringClearIndicator: false,
+      menuIsOpen: false,
+      inputValue: props.search,
+      preventFilter: false,
+    };
+  }
+
   static getDerivedStateFromProps(
     nextProps: UserPickerProps,
     prevState: UserPickerState,
@@ -47,21 +64,6 @@ export class UserPicker extends React.Component<
       derivedState.value = usersToOptions(nextProps.defaultValue);
     }
     return derivedState;
-  }
-
-  private selectRef;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: [],
-      resultVersion: 0,
-      inflightRequest: 0,
-      count: 0,
-      hoveringClearIndicator: false,
-      menuIsOpen: false,
-      inputValue: props.search,
-    };
   }
 
   private withSelectRef = (callback: (selectRef: any) => void) => () => {
@@ -156,7 +158,7 @@ export class UserPicker extends React.Component<
     this.setState({ menuIsOpen: true });
     const input = event.target;
     if (!this.props.isMulti && isSingleValue(value)) {
-      this.setState({ inputValue: value.label }, () => {
+      this.setState({ inputValue: value.label, preventFilter: true }, () => {
         if (input instanceof HTMLInputElement) {
           input.select();
         }
@@ -165,7 +167,7 @@ export class UserPicker extends React.Component<
   };
 
   private handleBlur = () => {
-    this.setState({ menuIsOpen: false, inputValue: '' });
+    this.setState({ menuIsOpen: false, inputValue: '', preventFilter: false });
   };
 
   private handleInputChange = (
@@ -177,7 +179,7 @@ export class UserPicker extends React.Component<
       if (onInputChange) {
         onInputChange(search);
       }
-      this.setState({ inputValue: search });
+      this.setState({ inputValue: search, preventFilter: false });
 
       this.executeLoadOptions(search);
     }
@@ -212,6 +214,9 @@ export class UserPicker extends React.Component<
 
   private configureNoOptionsMessage = (): string | undefined =>
     this.props.noOptionsMessage;
+
+  private filterOption = (option, search: string) =>
+    this.state.preventFilter || UserPicker.defaultFilter(option, search);
 
   render() {
     const {
@@ -268,6 +273,7 @@ export class UserPicker extends React.Component<
         isDisabled={isDisabled}
         isFocused={menuIsOpen}
         backspaceRemovesValue={isMulti}
+        filterOption={this.filterOption}
       />
     );
   }

@@ -313,7 +313,7 @@ describe('UserPicker', () => {
       expect(component.find(Select).prop('inputValue')).toEqual('');
     });
 
-    it('onFocus with value: should set inputValue to value', () => {
+    it('single onFocus with value: should set inputValue to value', () => {
       const component = shallowUserPicker({ value: users[0] });
       const select = component.find(Select);
       select.simulate('focus', { target: {} });
@@ -327,6 +327,13 @@ describe('UserPicker', () => {
       expect(component.find(Select).prop('inputValue')).toEqual('');
     });
 
+    it('multi onFocus with value: should have empty inputValue', () => {
+      const component = shallowUserPicker({ value: users[0], isMulti: true });
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.find(Select).prop('inputValue')).toEqual('');
+    });
+
     it('should highlight input value on focus', () => {
       const component = shallowUserPicker({ value: users[0] });
       const select = component.find(Select);
@@ -335,6 +342,48 @@ describe('UserPicker', () => {
       input.select = highlightInput;
       select.simulate('focus', { target: input });
       expect(highlightInput).toBeCalledTimes(1);
+    });
+  });
+
+  describe('preventFilter', () => {
+    it('default: should set preventFilter to false', () => {
+      const component = shallowUserPicker();
+      expect(component.state('preventFilter')).toBeFalsy();
+    });
+
+    it('onInputChange: should set preventFilter to false', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('inputChange', 'some text', { action: 'input-change' });
+      expect(component.state('preventFilter')).toBeFalsy();
+    });
+
+    it('onBlur: should set preventFilter to false', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('blur');
+      expect(component.state('preventFilter')).toBeFalsy();
+    });
+
+    it('onFocus with no value: should not set preventFilter to true', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.state('preventFilter')).toBeFalsy();
+    });
+
+    it('multi onFocus with value: should not set preventFilter to true', () => {
+      const component = shallowUserPicker({ isMulti: true, value: users[0] });
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.state('preventFilter')).toBeFalsy();
+    });
+
+    it('single onFocus with value: should set preventFilter to true', () => {
+      const component = shallowUserPicker({ value: users[0] });
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.state('preventFilter')).toBeTruthy();
     });
   });
 

@@ -34,6 +34,7 @@ export type UserPickerState = {
   hoveringClearIndicator: boolean;
   menuIsOpen: boolean;
   inputValue: string;
+  preventFilter: boolean;
 };
 
 export interface HighlightRange {
