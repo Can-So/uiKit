@@ -1,6 +1,7 @@
 //@flow
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Button from '@atlaskit/button';
+import SectionMessage from '@atlaskit/section-message';
 import Pagination from '../src';
 
 export default class extends Component<{}, { max: number }> {
@@ -16,7 +17,12 @@ export default class extends Component<{}, { max: number }> {
 
   render() {
     return (
-      <div style={{ margin: '20px' }}>
+      <Fragment>
+        <div style={{ marginBottom: '10px' }}>
+          <SectionMessage title="Using the example">
+            <p>Please click on the ellipsis to expand the Pagination</p>
+          </SectionMessage>
+        </div>
         <Pagination
           renderEllipsis={({ key }) => (
             <Button
@@ -31,7 +37,7 @@ export default class extends Component<{}, { max: number }> {
           max={this.state.max}
           pages={[...Array(10)].map((_, i) => i + 1)}
         />
-      </div>
+      </Fragment>
     );
   }
 }
