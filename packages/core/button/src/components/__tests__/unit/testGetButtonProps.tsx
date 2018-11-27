@@ -5,14 +5,16 @@ import Button, { ButtonGroup } from '../../..';
 
 const Component = () => null;
 
+const customProps: any = { customProp: 1 };
+
 describe('getButtonProps', () => {
   it('should pass through all props to a custom component', () => {
-    const cmp = mount(<Button customProp={1} component={Component} />);
+    const cmp = mount(<Button component={Component} />);
     expect(cmp.find('StyledComponent').prop('customProp')).toBe(1);
   });
 
   it('should not pass through all props to an inbuilt component', () => {
-    const cmp = mount(<Button customProp={1} />);
+    const cmp = mount(<Button {...customProps} />);
 
     expect(cmp.find('StyledComponent').prop('customProp')).toBeUndefined();
   });

@@ -52,6 +52,10 @@ export type ButtonProps = {
   onBlur?: React.FocusEventHandler;
   /** Handler to be called on click. The second argument can be used to track analytics data. See the tutorial in the analytics-next package for details. */
   onClick?: (e: React.MouseEvent, analyticsEvent: UIAnalyticsEvent) => void;
+  onMouseDown?: React.MouseEventHandler;
+  onMouseEnter?: React.MouseEventHandler;
+  onMouseLeave?: React.MouseEventHandler;
+  onMouseUp?: React.MouseEventHandler;
   /** Handler to be called on focus */
   onFocus?: React.FocusEventHandler;
   /** Set the amount of padding in the button. */
