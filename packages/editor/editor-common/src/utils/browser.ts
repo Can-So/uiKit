@@ -30,7 +30,10 @@ if (typeof navigator !== 'undefined') {
     !ie &&
     /AppleWebKit/.test(navigator.userAgent) &&
     /Mobile\/\w+/.test(navigator.userAgent);
-  result.webkit = !ie && 'WebkitAppearance' in document.documentElement.style;
+  result.webkit =
+    !ie &&
+    !!document.documentElement &&
+    'WebkitAppearance' in document.documentElement.style;
 }
 
 export default result;

@@ -154,7 +154,7 @@ export class MockTaskDecisionResource implements TaskDecisionProvider {
 
     if (lag) {
       return new Promise(resolve => {
-        setTimeout(() => {
+        window.setTimeout(() => {
           resolve(newResult);
         }, lag);
       });
@@ -200,7 +200,7 @@ export class MockTaskDecisionResource implements TaskDecisionProvider {
       resolve(state);
 
       const lag = (this.config && this.config.lag) || 0;
-      setTimeout(() => {
+      window.setTimeout(() => {
         if (this.config && this.config.error) {
           // Undo optimistic change
           this.notifyUpdated(objectKey, toggleTaskState(state));
@@ -229,7 +229,7 @@ export class MockTaskDecisionResource implements TaskDecisionProvider {
 
     this.queueItem(objectKey);
 
-    debouncedTaskStateQuery = setTimeout(() => {
+    debouncedTaskStateQuery = window.setTimeout(() => {
       this.getTaskState(Array.from(this.batchedKeys.values())).then(tasks => {
         tasks.forEach(task => {
           const { containerAri, objectAri, localId } = task;

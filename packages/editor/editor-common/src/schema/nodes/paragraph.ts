@@ -15,12 +15,12 @@ export interface ParagraphBaseDefinition {
 }
 
 /**
- * @name paragraph_with_no_marks
+ * @name paragraph_with_no_marks_node
  */
 export type ParagraphDefinition = ParagraphBaseDefinition & NoMark;
 
 /**
- * @name paragraph_with_marks
+ * @name paragraph_with_marks_node
  * @stage 0
  */
 export type ParagraphWithMarksDefinition = ParagraphBaseDefinition &

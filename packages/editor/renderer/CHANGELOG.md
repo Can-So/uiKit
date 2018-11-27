@@ -1,5 +1,52 @@
 # @atlaskit/renderer
 
+## 31.0.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/analytics-listeners@4.1.1
+  - @atlaskit/task-decision@11.0.5
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/media-filmstrip@19.0.1
+  - @atlaskit/smart-card@8.8.4
+  - @atlaskit/profilecard@6.0.2
+  - @atlaskit/field-range@5.0.9
+  - @atlaskit/button@10.0.0
+
+## 31.0.1
+- [patch] [1c42021](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c42021):
+
+  - ED-5775: fix columns collapsing in renderer
+
+## 31.0.0
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/media-filmstrip@19.0.0
+  - @atlaskit/editor-json-transformer@4.0.22
+  - @atlaskit/editor-test-helpers@6.2.19
+  - @atlaskit/task-decision@11.0.4
+  - @atlaskit/util-data-test@10.0.21
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 30.3.2
+- [patch] [030007e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/030007e):
+
+  - ED-5776: fix number column when first column is resized
+
+## 30.3.1
+- [patch] [f2cb9d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f2cb9d9):
+
+  - ED-5785: fix number column when header row is enabled
+
+## 30.3.0
+- [minor] [1e5cd32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e5cd32):
+
+  - Make layouts stack on small screens
+
 ## 30.2.1
 - Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
   - @atlaskit/editor-common@21.2.2

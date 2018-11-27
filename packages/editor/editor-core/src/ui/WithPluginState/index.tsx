@@ -18,7 +18,7 @@ export interface Props {
   eventDispatcher?: EventDispatcher;
   editorView?: EditorView;
   plugins: PluginsConfig;
-  render: (pluginsState: State) => React.ReactElement<any> | null;
+  render: (pluginsState: any) => React.ReactElement<any> | null;
 }
 
 /**
@@ -102,7 +102,7 @@ export default class WithPluginState extends React.Component<Props, State> {
       clearTimeout(this.debounce);
     }
 
-    this.debounce = setTimeout(() => {
+    this.debounce = window.setTimeout(() => {
       this.setState(this.notAppliedState);
       this.debounce = null;
       this.notAppliedState = {};

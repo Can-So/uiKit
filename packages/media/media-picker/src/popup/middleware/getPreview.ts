@@ -42,8 +42,8 @@ export async function getPreview(
 ) {
   const { file, collection } = action;
   const { userContext } = store.getState();
-  const subscription = userContext
-    .getFile(file.id, { collectionName: collection })
+  const subscription = userContext.file
+    .getFileState(file.id, { collectionName: collection })
     .subscribe({
       async next(state) {
         if (state.status === 'error') {
@@ -52,7 +52,7 @@ export async function getPreview(
 
         const { mediaType } = state;
         // We need to wait for the next tick since rxjs might call "next" before returning from "subscribe"
-        setImmediate(() => subscription.unsubscribe());
+        window.setTimeout(() => subscription.unsubscribe());
 
         if (mediaType === 'image') {
           const metadata = await userContext.getImageMetadata(file.id, {

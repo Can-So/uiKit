@@ -157,7 +157,7 @@ describe('JiraClient', () => {
       expect(requestOptions).toHaveProperty('path', RECENT_PATH);
       expect(requestOptions.queryParams).toMatchObject({
         search_id: sessionId,
-        ...counts,
+        counts: 'issues=7,projects=5,boards=3,filters=1',
       });
     });
 

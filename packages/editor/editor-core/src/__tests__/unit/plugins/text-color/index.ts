@@ -98,7 +98,7 @@ describe('text-color', () => {
       ),
     );
 
-    expect(pluginState.color).toBe(undefined);
+    expect(pluginState.color).toBe(null);
   });
 
   it('should expose no color when selection has mixed content', () => {
@@ -106,7 +106,7 @@ describe('text-color', () => {
       doc(p('{<}', createTextColor(testColor1)('te'), 'xt', '{>}')),
     );
 
-    expect(pluginState.color).toBe(undefined);
+    expect(pluginState.color).toBe(null);
   });
 
   it('should expose default color when selection has no color marks', () => {

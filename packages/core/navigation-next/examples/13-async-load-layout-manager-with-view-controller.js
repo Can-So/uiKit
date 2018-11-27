@@ -11,7 +11,7 @@ import {
   AsyncLayoutManagerWithViewController,
   NavigationProvider,
   SkeletonContainerView,
-  ViewRenderer,
+  ItemsRenderer,
   SkeletonItem,
 } from '../src';
 
@@ -126,10 +126,7 @@ export default class App extends Component<
 
     return (
       <HashRouter>
-        <NavigationProvider
-          initialPeekViewId="root/index"
-          isDebugEnabled={isDebugEnabled}
-        >
+        <NavigationProvider isDebugEnabled={isDebugEnabled}>
           <AsyncLayoutManagerWithViewController
             customComponents={{
               ProjectSwitcher: AsyncProjectSwitch,
@@ -138,7 +135,7 @@ export default class App extends Component<
             experimental_flyoutOnHover={isFlyoutAvailable}
             globalNavigation={AsyncDefaultGlobalNavigation}
             containerSkeleton={() => <SkeletonContainerView type={'product'} />}
-            viewRenderer={ViewRenderer}
+            itemsRenderer={ItemsRenderer}
             firstSkeletonToRender={'product'}
           >
             <div style={{ padding: 40 }}>

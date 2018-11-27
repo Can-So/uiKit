@@ -1,13 +1,27 @@
 import styled from 'styled-components';
-import { typography } from '@atlaskit/theme';
+import { typography, fontSize, colors } from '@atlaskit/theme';
 
 import gridSizeTimes from '../../util/gridSizeTimes';
+
+const baseHeading = (size, lineHeight) => `
+  font-size: ${size / fontSize()}em;
+  font-style: inherit;
+  line-height: ${lineHeight / size};
+`;
 
 export const UserInfoOuter = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   margin-bottom: ${gridSizeTimes(2)}px;
+`;
+
+export const Avatar = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: ${gridSizeTimes(2.5)}px;
+  margin-right: ${gridSizeTimes(1)}px;
+  margin-bottom: ;
 `;
 
 export const UserDetails = styled.div`
@@ -22,6 +36,7 @@ export const UserName = styled.span`
 `;
 
 export const UserEmail = styled.span`
-  ${typography.h100};
+  ${baseHeading(11, 16)} color: ${colors.subtleHeading};
+  font-weight: 300;
   margin-top: ${gridSizeTimes(0.5)}px;
 `;

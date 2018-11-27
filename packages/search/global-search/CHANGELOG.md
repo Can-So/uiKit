@@ -1,5 +1,54 @@
 # @atlaskit/global-search
 
+## 5.12.9
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/drawer@2.5.2
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/field-text-area@4.0.12
+  - @atlaskit/flag@9.1.5
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/icon-file-type@2.0.1
+  - @atlaskit/icon-object@2.0.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/navigation@33.3.5
+  - @atlaskit/page@8.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 5.12.8
+- [patch] [124cdc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/124cdc1):
+
+  - fix keyboard navigation
+
+## 5.12.7
+- [patch] [225c0aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/225c0aa):
+
+  - Auto-highlight of exact issue matches is case-sensitive
+
+## 5.12.6
+- [patch] [9c3e374](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c3e374):
+
+  - Update the order of advanced search links and container headings
+
+## 5.12.5
+- [patch] [82842ad](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82842ad):
+
+  - Hide the 'shift+enter' on jira quick search pre-query screen
+
+## 5.12.4
+- [patch] [a1e1821](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1e1821):
+
+  - Title case for "Software project", "Service Desk project", "Ops project"
+
+## 5.12.3
+- [patch] [6c50eb1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c50eb1):
+
+  - Pre-highlight exact matches of Jira issues and remove the split button
+
 ## 5.12.2
 - Updated dependencies [80304f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80304f0):
   - @atlaskit/icon@14.4.0

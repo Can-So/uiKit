@@ -51,7 +51,7 @@ export class FeedbackButton extends React.Component<{}, {}> {
     return (
       <FeedbackWrapper>
         <Button
-          appearance="toolbar"
+          appearance={'toolbar' as any}
           onClick={this.showFeedbackDialog}
           iconBefore={<FeedbackIcon label="feedback" />}
         >

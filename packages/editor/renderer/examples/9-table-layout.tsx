@@ -5,15 +5,21 @@ import { storyMediaProviderFactory } from '@atlaskit/editor-test-helpers';
 import { default as Renderer } from '../src/ui/Renderer';
 import document from './helper/table-layout.adf.json';
 
+import Sidebar from './helper/NavigationNext';
+
 const mediaProvider = storyMediaProviderFactory();
 const providerFactory = ProviderFactory.create({ mediaProvider });
 
 export default function Example() {
   return (
-    <Renderer
-      dataProviders={providerFactory}
-      document={document}
-      appearance="full-page"
-    />
+    <Sidebar showSidebar={true}>
+      {additionalProps => (
+        <Renderer
+          dataProviders={providerFactory}
+          document={document}
+          {...additionalProps}
+        />
+      )}
+    </Sidebar>
   );
 }

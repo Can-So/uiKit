@@ -8,6 +8,32 @@ import {
 import { parseToken, TokenType, TokenErrCallback } from './tokenize';
 import { parseWhitespaceOnly } from './tokenize/whitespace';
 
+/**
+ * In Jira, following characters are escaped
+ * private static final Pattern ESCAPING_PATTERN = Pattern.compile("(^|(?<!\\\\))\\\\([\\-\\#\\*\\_\\+\\?\\^\\~\\|\\%\\{\\}\\[\\]\\(\\)\\!\\@])");
+ * https://stash.atlassian.com/projects/JIRACLOUD/repos/jira/browse/jira-components/jira-renderer/src/main/java/com/atlassian/renderer/v2/components/BackslashEscapeRendererComponent.java
+ */
+const escapedChar = [
+  '-',
+  '#',
+  '*',
+  '_',
+  '+',
+  '?',
+  '^',
+  '~',
+  '|',
+  '%',
+  '{',
+  '}',
+  '[',
+  ']',
+  '(',
+  ')',
+  '!',
+  '@',
+];
+
 const processState = {
   NEWLINE: 0,
   BUFFER: 1,
@@ -86,7 +112,7 @@ export function parseString(
 
         if (char === '\\') {
           state = processState.ESCAPE;
-          break;
+          continue;
         }
 
         buffer += char;
@@ -118,30 +144,20 @@ export function parseString(
       }
 
       case processState.ESCAPE: {
+        const prevChar = input.charAt(index - 1);
+        const nextChar = input.charAt(index + 1);
         /**
-         * During this state, the parser will see if the escaped
-         * char is a keyword. If it's not a valid keyword, the '\'
-         * will be included in the buffer as well
+         * Ported from Jira:
+         * If previous char is also a backslash, then this is not a valid escape
          */
-        if (char === '\\') {
-          // '\\' is a linebreak
-          buffer += '\n';
-          state = processState.BUFFER;
-          break;
+        if (escapedChar.indexOf(nextChar) === -1 || prevChar === '\\') {
+          // Insert \ in buffer mode
+          buffer += char;
         }
-
-        const substring = input.substring(index);
-        const match =
-          parseLeadingKeyword(substring) ||
-          parseMacroKeyword(substring) ||
-          parseOtherKeyword(substring);
-
-        if (!match) {
-          buffer += '\\';
-        }
-        buffer += char;
+        buffer += nextChar;
         state = processState.BUFFER;
-        break;
+        index += 2;
+        continue;
       }
       default:
     }

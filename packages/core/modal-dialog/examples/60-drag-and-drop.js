@@ -114,12 +114,10 @@ class ItemLineCard extends Component<ItemLineCardProps, ItemLineCardState> {
         dragHandleProps.onMouseDown(event);
       }
     })();
-    const onMouseUp = (() => dragHandleProps.onMouseUp || noop)();
     return {
       ...dragHandleProps,
       ...this.eventHandlers,
       onMouseDown,
-      onMouseUp,
     };
   };
 
@@ -145,7 +143,6 @@ class ItemLineCard extends Component<ItemLineCardProps, ItemLineCardState> {
               ...provided.draggableProps,
               ...this.patchedHandlers(provided.dragHandleProps),
             })}
-            {provided.placeholder}
           </div>
         )}
       </Draggable>

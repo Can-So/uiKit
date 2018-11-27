@@ -28,8 +28,6 @@ describe('ContentNavigation primitives', () => {
     let defaultProps;
     beforeEach(() => {
       defaultProps = {
-        isPeeking: false,
-        isPeekHinting: false,
         isEntering: false,
         isExiting: false,
       };
@@ -83,7 +81,7 @@ describe('ContentNavigation primitives', () => {
   describe('ProductNavigation', () => {
     it('should use the `light` theme if another theme was not provided', () => {
       const wrapper = mount(
-        <ProductNavigation isPeeking>
+        <ProductNavigation>
           <p>This is a text</p>
         </ProductNavigation>,
       );
@@ -100,7 +98,7 @@ describe('ContentNavigation primitives', () => {
 
     it('should ALWAYS use the `product` context', () => {
       const wrapper = mount(
-        <ProductNavigation isPeeking>
+        <ProductNavigation>
           <p>This is a text</p>
         </ProductNavigation>,
       );
@@ -115,7 +113,7 @@ describe('ContentNavigation primitives', () => {
 
     it('should have scrollable effect', () => {
       const wrapper = mount(
-        <ProductNavigation isPeeking>
+        <ProductNavigation>
           <p>This is a text</p>
         </ProductNavigation>,
       );
@@ -125,7 +123,7 @@ describe('ContentNavigation primitives', () => {
 
     it('should render the received children', () => {
       const wrapper = mount(
-        <ProductNavigation isPeeking>
+        <ProductNavigation>
           <p>This is a text</p>
         </ProductNavigation>,
       );

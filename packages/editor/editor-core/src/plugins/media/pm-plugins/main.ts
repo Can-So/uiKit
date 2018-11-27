@@ -19,7 +19,7 @@ import {
 } from '@atlaskit/editor-common';
 
 import analyticsService from '../../../analytics/service';
-import { isImage } from '../../../utils';
+import { isImage, SetAttrsStep } from '../../../utils';
 import { Dispatch } from '../../../event-dispatcher';
 import { ProsemirrorGetPosHandler } from '../../../nodeviews';
 import { EditorAppearance } from '../../../types/editor-props';
@@ -76,8 +76,10 @@ export class MediaPluginState {
   public pickers: PickerFacade[] = [];
   public binaryPicker?: PickerFacade;
   private popupPicker?: PickerFacade;
+  // @ts-ignore
   private clipboardPicker?: PickerFacade;
   private dropzonePicker?: PickerFacade;
+  // @ts-ignore
   private customPicker?: PickerFacade;
   public editorAppearance: EditorAppearance;
   private removeOnCloseListener: () => void = () => {};
@@ -231,7 +233,7 @@ export class MediaPluginState {
       clearTimeout(this.updateUploadStateDebounce);
     }
 
-    this.updateUploadStateDebounce = setTimeout(() => {
+    this.updateUploadStateDebounce = window.setTimeout(() => {
       this.updateUploadStateDebounce = null;
       this.allUploadsFinished = false;
       this.notifyPluginStateSubscribers();
@@ -267,7 +269,7 @@ export class MediaPluginState {
     const { stateManager } = this;
     const { mediaSingle } = this.view.state.schema.nodes;
     const collection = this.collectionFromProvider();
-    if (!collection) {
+    if (typeof collection !== 'string') {
       return;
     }
 
@@ -365,7 +367,7 @@ export class MediaPluginState {
    * NOTE: The promise will resolve even if some of the media have failed to process.
    */
   waitForPendingTasks = (
-    timeout?: Number,
+    timeout?: number,
     lastTask?: Promise<MediaState | null>,
   ) => {
     if (lastTask && this.pendingTask === lastTask) {
@@ -384,7 +386,7 @@ export class MediaPluginState {
 
     let rejectTimeout: number;
     const timeoutPromise = new Promise((resolve, reject) => {
-      rejectTimeout = setTimeout(
+      rejectTimeout = window.setTimeout(
         () =>
           reject(new Error(`Media operations did not finish in ${timeout} ms`)),
         timeout,
@@ -642,28 +644,29 @@ export class MediaPluginState {
     };
   }
 
-  private replaceTemporaryNode = (
-    state: MediaState,
+  private updateMediaNodeAttrs = (
+    id: string,
+    attrs: object,
     isMediaSingle: boolean,
   ) => {
     const { view } = this;
     if (!view) {
       return;
     }
-    const { id, publicId } = state;
+
     const mediaNodeWithPos = isMediaSingle
       ? this.findMediaNode(id)
       : this.mediaGroupNodes[id];
+
     if (!mediaNodeWithPos) {
       return;
     }
-    const { tr } = view.state;
-    tr.setNodeMarkup(mediaNodeWithPos.getPos(), undefined, {
-      ...mediaNodeWithPos.node.attrs,
-      id: publicId,
-    });
-    delete this.mediaGroupNodes[id];
-    view.dispatch(tr);
+
+    view.dispatch(
+      view.state.tr
+        .step(new SetAttrsStep(mediaNodeWithPos.getPos(), attrs))
+        .setMeta('addToHistory', false),
+    );
   };
 
   private collectionFromProvider(): string | undefined {
@@ -675,6 +678,9 @@ export class MediaPluginState {
   }
 
   private handleMediaState = async (state: MediaState) => {
+    const isMediaSingle =
+      isImage(state.fileMimeType) && !!this.view.state.schema.nodes.mediaSingle;
+
     switch (state.status) {
       case 'error':
         this.removeNodeById(state);
@@ -686,11 +692,16 @@ export class MediaPluginState {
         break;
 
       case 'preview':
-        this.replaceTemporaryNode(
-          state,
-          isImage(state.fileMimeType) &&
-            !!this.view.state.schema.nodes.mediaSingle,
-        );
+        let attrs: { id?: string; collection?: string } = {
+          id: state.publicId || state.id,
+        };
+
+        if (state.collection) {
+          attrs.collection = state.collection;
+        }
+
+        this.updateMediaNodeAttrs(state.id, attrs, isMediaSingle);
+        delete this.mediaGroupNodes[state.id];
         break;
 
       case 'ready':

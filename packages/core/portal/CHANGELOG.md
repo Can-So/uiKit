@@ -1,5 +1,16 @@
 # @atlaskit/portal
 
+## 0.0.15
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/flag@9.1.5
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/inline-dialog@9.0.10
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/onboarding@6.1.10
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/button@10.0.0
+
 ## 0.0.14
 - [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
 

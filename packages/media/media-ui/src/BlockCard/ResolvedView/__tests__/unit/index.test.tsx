@@ -304,7 +304,7 @@ describe('ResolvedView', () => {
     );
     const buttons = getActionButtons(element);
     buttons.first().simulate('click');
-    setTimeout(() => {
+    window.setTimeout(() => {
       element.update();
       try {
         expect(element.find(AlertView).exists()).toBeFalsy();

@@ -1,6 +1,5 @@
 // tslint:disable:no-console
 import * as React from 'react';
-import { PureComponent } from 'react';
 import {
   profilecard as profilecardUtils,
   emoji,
@@ -30,6 +29,8 @@ import {
 import { AkProfileClient, modifyResponse } from '@atlaskit/profilecard';
 
 import { EmailSerializer, renderDocument, TextSerializer } from '../../src';
+
+import Sidebar, { getDefaultShowSidebarState } from './NavigationNext';
 
 const { getMockProfileClient: getMockProfileClientUtil } = profilecardUtils;
 const MockProfileClient = getMockProfileClientUtil(
@@ -169,15 +170,17 @@ export interface DemoRendererProps {
   appearance?: RendererAppearance;
   maxHeight?: number;
   truncationEnabled?: boolean;
+  allowDynamicTextSizing?: boolean;
 }
 
 export interface DemoRendererState {
   input: string;
   portal?: HTMLElement;
   truncated: boolean;
+  showSidebar: boolean;
 }
 
-export default class RendererDemo extends PureComponent<
+export default class RendererDemo extends React.Component<
   DemoRendererProps,
   DemoRendererState
 > {
@@ -197,6 +200,7 @@ export default class RendererDemo extends PureComponent<
     this.state = {
       input: JSON.stringify(doc, null, 2),
       truncated: true,
+      showSidebar: getDefaultShowSidebarState(false),
     };
   }
 
@@ -226,28 +230,34 @@ export default class RendererDemo extends PureComponent<
 
   render() {
     return (
-      <div ref="root" style={{ padding: 20 }}>
-        <fieldset style={{ marginBottom: 20 }}>
-          <legend>Input</legend>
-          <textarea
-            style={{
-              boxSizing: 'border-box',
-              border: '1px solid lightgray',
-              fontFamily: 'monospace',
-              fontSize: 16,
-              padding: 10,
-              width: '100%',
-              height: 320,
-            }}
-            ref="input"
-            onChange={this.onDocumentChange}
-            value={this.state.input}
-          />
-        </fieldset>
-        {this.renderRenderer()}
-        {this.renderText()}
-        {this.renderEmail()}
-      </div>
+      <Sidebar showSidebar={this.state.showSidebar}>
+        {additionalRendererProps => (
+          <div ref="root" style={{ padding: 20 }}>
+            <fieldset style={{ marginBottom: 20 }}>
+              <legend>Input</legend>
+              <textarea
+                id="renderer-value-input"
+                style={{
+                  boxSizing: 'border-box',
+                  border: '1px solid lightgray',
+                  fontFamily: 'monospace',
+                  fontSize: 16,
+                  padding: 10,
+                  width: '100%',
+                  height: 320,
+                }}
+                ref="input"
+                onChange={this.onDocumentChange}
+                value={this.state.input}
+              />
+              <button onClick={this.toggleSidebar}>Toggle Sidebar</button>
+            </fieldset>
+            {this.renderRenderer(additionalRendererProps)}
+            {this.renderText()}
+            {this.renderEmail()}
+          </div>
+        )}
+      </Sidebar>
     );
   }
 
@@ -274,13 +284,13 @@ export default class RendererDemo extends PureComponent<
     }));
   }
 
-  private renderRenderer() {
+  private renderRenderer(additionalRendererProps) {
     if (this.props.serializer !== 'react') {
       return null;
     }
 
     try {
-      const props: RendererProps = {
+      let props: RendererProps = {
         document: JSON.parse(this.state.input),
       };
 
@@ -300,6 +310,14 @@ export default class RendererDemo extends PureComponent<
       props.appearance = this.props.appearance;
       props.maxHeight = this.props.maxHeight;
       props.truncated = this.props.truncationEnabled && this.state.truncated;
+      props.allowDynamicTextSizing = this.props.allowDynamicTextSizing;
+
+      if (additionalRendererProps) {
+        props = {
+          ...props,
+          ...additionalRendererProps,
+        };
+      }
 
       const expandButton = (
         <div>
@@ -380,6 +398,10 @@ export default class RendererDemo extends PureComponent<
       return null;
     }
   }
+
+  private toggleSidebar = () => {
+    this.setState(prevState => ({ showSidebar: !prevState.showSidebar }));
+  };
 
   private onDocumentChange = () =>
     this.setState({ input: this.refs.input.value });

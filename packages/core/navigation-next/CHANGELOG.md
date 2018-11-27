@@ -1,5 +1,74 @@
 # @atlaskit/navigation-next
 
+## 4.0.6
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/drawer@2.5.2
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/global-navigation@5.3.4
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/onboarding@6.1.10
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/select@6.1.8
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/toggle@5.0.11
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/analytics-listeners@4.1.1
+  - @atlaskit/button@10.0.0
+
+## 4.0.5
+- [patch] [21bc705](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/21bc705):
+
+  - Fixing flowtype exports on @atlaskit/navigation-next entry points
+
+## 4.0.4
+- [patch] [abd3a39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abd3a39):
+
+  - Bump react-beautiful-dnd dependency to v10.0.2
+
+## 4.0.3
+- [patch] [d22baae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d22baae):
+
+  - Fixing entrypoint replacement script
+
+## 4.0.2
+- [patch] [01d913d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01d913d):
+
+  - fixing exports integration on JFE
+
+## 4.0.1
+- [patch] [f66f71f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f66f71f):
+
+  - Makes all entrypoints have a corresponding .flow file containing the //@flow comment
+
+## 4.0.0
+- [major] [8e753fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e753fc):
+
+  - View the [upgrade guide](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/upgrade-guide) to help you upgrade to v4
+  - The API for renderer items that use components as their `type` property have now changed to use a type value of `'InlineComponent'` and specify the component via a `component` prop instead. This allows the renderer item types to be typed correctly as disjoint unions on the type property.
+  - Rename `withNavigationUI` HOC to `withNavigationUIController`
+  - Rename `ViewRenderer` component to `ItemsRenderer`
+  - Rename AsyncLayoutManagerWithViewController's `viewRenderer` prop to `itemsRenderer`
+  - Remove icon prop from ConnectedItem and built-in renderer 'Item' type
+  - Remove deprecated `key` prop from GlobalNav's `primaryItems` and `secondaryItems` props
+  - Remove ScrollableSectionInner component. Remove scrollHint styles from theme.
+  - Remove peeking behaviour
+
+## 3.26.0
+- [minor] [5c6c893](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c6c893):
+
+  - Create an entrypoint for ViewController and UIController
+
+## 3.25.2
+- [patch] [5e99cb1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e99cb1):
+
+  - Replacing LayoutManagerWithViewController impl by composing AsyncLMWVC
+
 ## 3.25.1
 - [patch] [a22db3c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a22db3c):
 
@@ -8,6 +77,9 @@
 ## 3.25.0
 - [minor] [d96b032](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d96b032):
 
+  - BREAKING: A breaking change was accidentally released in this version.
+
+    The API for renderer items that use components as their \`type\` property have now changed to use a type value of \`'InlineComponent'\` and specify the component via a \`component\` prop instead. See the View the [v3 - v4 upgrade guide](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/upgrade-guide) for more information.
   - Export flow types for each built-in item renderer type
   - Export a generic flow typed version of the renderer, `TypedViewRenderer`, that is designed to be extended to pass custom component flow types
     so the renderer typechecks custom components. See the [View Renderer documentation](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/state-controllers#view-renderer) for more information.

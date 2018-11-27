@@ -34,7 +34,7 @@ export class MultiValueContainer extends React.PureComponent<any, State> {
   componentDidUpdate() {
     const { previousValueSize, valueSize } = this.state;
     if (valueSize > previousValueSize) {
-      setTimeout(() => this.bottomAnchor.scrollIntoView());
+      window.setTimeout(() => this.bottomAnchor.scrollIntoView());
     }
   }
 

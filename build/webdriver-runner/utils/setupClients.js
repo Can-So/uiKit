@@ -59,7 +59,7 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
         os_version: launchers[launchKey].os_version,
         browserName: launchers[launchKey].browserName,
         browser_version: launchers[launchKey].browser_version,
-        project: 'Atlaskit MK-2 Webdriver Tests',
+        project: 'Atlaskit Webdriver Tests',
         build: process.env.BITBUCKET_BRANCH,
         'browserstack.local': true,
         'browserstack.debug': true,
