@@ -49,35 +49,23 @@ export default class Groups extends React.Component<GroupsProps, GroupsState> {
   }
 
   resolveRoutes(pathname: string) {
-    const { docs, onClick, packages, patterns } = this.props;
+    const { docs, packages, patterns } = this.props;
 
     const menus = [
       <Route path="/">
-        <DefaultNav onClick={onClick} pathname={pathname} />
+        <DefaultNav pathname={pathname} />
       </Route>,
       <Route path="/docs">
-        <DocsNav onClick={onClick} pathname={pathname} docs={docs} />
+        <DocsNav pathname={pathname} docs={docs} />
       </Route>,
       <Route path="/packages">
-        <PackagesNav
-          onClick={onClick}
-          pathname={pathname}
-          packages={packages}
-        />
+        <PackagesNav pathname={pathname} packages={packages} />
       </Route>,
       <Route path="/packages">
-        <PackagesNav
-          onClick={onClick}
-          pathname={pathname}
-          packages={packages}
-        />
+        <PackagesNav pathname={pathname} packages={packages} />
       </Route>,
       <Route path="/patterns">
-        <PatternsNav
-          onClick={onClick}
-          pathname={pathname}
-          patterns={patterns}
-        />
+        <PatternsNav pathname={pathname} patterns={patterns} />
       </Route>,
     ];
 

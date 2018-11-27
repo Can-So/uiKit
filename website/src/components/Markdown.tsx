@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-import CommonMark from 'commonmark';
+import { CommonMark } from 'commonmark';
 import ReactRenderer from 'commonmark-react-renderer';
 import { AkCodeBlock, AkCode } from '@atlaskit/code';
 import Heading from './Markdown/Heading';

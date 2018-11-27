@@ -97,7 +97,7 @@ export default class ChangeLog extends React.Component<Props> {
       ? changelog.filter(e => semver.satisfies(e.version, range))
       : changelog;
 
-    let currentMajor: string = '0';
+    let currentMajor = '0';
 
     return (
       <div>
