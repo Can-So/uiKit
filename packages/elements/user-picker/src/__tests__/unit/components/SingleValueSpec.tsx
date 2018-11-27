@@ -38,20 +38,6 @@ describe('SingleValue', () => {
     });
   });
 
-  it('should render SingleValue with nickname when name is not defined', () => {
-    const component = shallowSingleValue({
-      data: {
-        label: 'Jace Beleren',
-        user: { name: 'Jace Beleren' },
-      },
-    });
-    expect(component.find(AvatarItem).props()).toMatchObject({
-      backgroundColor: 'transparent',
-      primaryText: 'Jace Beleren',
-      avatar: <SizeableAvatar name="Jace Beleren" appearance="normal" />,
-    });
-  });
-
   it('should render Avatar as xsmall when the appearance is compact', () => {
     const component = shallowSingleValue({
       selectProps: {
