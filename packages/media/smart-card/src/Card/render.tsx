@@ -3,6 +3,7 @@ import LazyRender from 'react-lazily-render';
 import { CardProps, CardWithData, CardWithUrl } from './types';
 import { CardWithUrlContent as CardWithUrlContentType } from './renderCardWithUrl';
 import { CardWithDataContent as CardWithDataContentType } from './renderCardWithData';
+import { CardLinkView } from '@atlaskit/media-ui';
 
 export const isCardWithData = (props: CardProps): props is CardWithData =>
   !!(props as CardWithData).data;
@@ -29,14 +30,14 @@ export class CardWithURLRenderer extends React.Component<CardWithUrl> {
     const { url, client, appearance, isSelected, onClick } = this.props;
 
     if (!url) {
-      throw new Error('@atlaskit/smart-card: you are ');
+      throw new Error('@atlaskit/smart-card: url property is missing.');
     }
 
     return (
       <LazyRender
         offset={100}
         component={appearance === 'inline' ? 'span' : 'div'}
-        placeholder={<a href={url}>{url}</a>}
+        placeholder={<CardLinkView text={url}>{url}</CardLinkView>}
         content={
           CardWithURLRenderer.CardContent !== null ? (
             <CardWithURLRenderer.CardContent
@@ -47,7 +48,7 @@ export class CardWithURLRenderer extends React.Component<CardWithUrl> {
               isSelected={isSelected}
             />
           ) : (
-            <a href={url}>{url}</a>
+            <CardLinkView text={url}>{url}</CardLinkView>
           )
         }
       />

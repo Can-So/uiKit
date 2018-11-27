@@ -200,6 +200,7 @@ export class Client implements Client {
 
     const entry = this.store.get(url);
 
+    // Only load the data from network after it's expired in the cache
     if (entry && entry.hasExpired()) {
       const data$ = this.startStreaming(url);
       const resolving$ = of(<ResolvingState>{ status: 'resolving' }).pipe(

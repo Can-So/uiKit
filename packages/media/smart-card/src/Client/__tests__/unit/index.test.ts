@@ -193,11 +193,13 @@ describe('Client', () => {
       client.resolve(card2.url);
     });
 
-    expect(result.length).toEqual(4);
+    expect(result.length).toEqual(6);
 
     expect(result).toMatchObject([
       null,
       null,
+      { status: 'resolved', definitionId },
+      { status: 'resolved', definitionId },
       { status: 'resolved', definitionId },
       { status: 'resolved', definitionId },
     ]);
@@ -269,30 +271,6 @@ describe('Client', () => {
     expect(actualResult.status).toEqual('errored');
     expect(actualResult.services).toBeUndefined();
     expect(actualResult.data).toBeUndefined();
-  });
-
-  it('should not call the update fn when reload and data is the same', async () => {
-    mockResolvedFetchCall();
-
-    const result = await new Promise<(ObjectState | null)[]>(resolve => {
-      const client = new Client();
-      const stack: (ObjectState | null)[] = [];
-      const uuid = v4();
-      const cardUpdateFn = (state: [ObjectState | null, boolean]) => {
-        stack.push(state[0]);
-        if (stack.length === 1) {
-          client.reload(OBJECT_URL);
-        }
-        if (stack.length === 2) {
-          resolve(stack);
-        }
-      };
-
-      client.register(OBJECT_URL).subscribe(uuid, cardUpdateFn);
-      client.resolve(OBJECT_URL);
-    });
-
-    expect(result).toMatchObject([null, { status: 'resolved' }]);
   });
 
   it('should be possible to extend the functionality of the default client', async () => {
@@ -437,8 +415,8 @@ describe('Client', () => {
 
     expect(customFetchMock.mock.calls).toEqual([[card1.url], [card2.url]]);
 
-    expect(card1.updateFn).toHaveBeenCalledTimes(2);
-    expect(card2.updateFn).toHaveBeenCalledTimes(1);
+    expect(card1.updateFn).toHaveBeenCalledTimes(3);
+    expect(card2.updateFn).toHaveBeenCalledTimes(2);
   });
 
   it('should not reload card that has already been resolved and not expired', async () => {
@@ -521,7 +499,7 @@ describe('Client', () => {
   });
 
   it('should show the resolve state when resolving takes longer than specified delay', async () => {
-    mockResolvedFetchCall();
+    // mockUnauthorizedFetchCall();
 
     const DELAY = 2;
 
@@ -529,7 +507,16 @@ describe('Client', () => {
       fetchData() {
         return new Promise<ResolveResponse>(res => {
           setTimeout(res, DELAY, {
-            data: { some: 'data' },
+            meta: {
+              visibility: 'restricted',
+              access: 'unauthorized',
+              auth: remoteResourceMetaAuth,
+              definitionId,
+            },
+            data: {
+              '@context': {},
+              generator,
+            },
           });
         });
       }

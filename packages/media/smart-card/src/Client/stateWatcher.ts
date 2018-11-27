@@ -51,15 +51,10 @@ export class StateWatch<T> {
   }
 
   update(state: T, lifespan: number): void {
-    if (
-      this.entry === null ||
-      JSON.stringify(this.entry.state) !== JSON.stringify(state)
-    ) {
-      this.entry = {
-        state,
-        goodTill: this.getNow() + lifespan,
-      };
-      this.subscribers.forEach(rec => rec.fn([state, false]));
-    }
+    this.entry = {
+      state,
+      goodTill: this.getNow() + lifespan,
+    };
+    this.subscribers.forEach(rec => rec.fn([state, false]));
   }
 }

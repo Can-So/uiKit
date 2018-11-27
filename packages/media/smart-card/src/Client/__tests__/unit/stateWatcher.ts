@@ -19,26 +19,6 @@ describe('StateWatch', () => {
       expect(callback).toHaveBeenCalledTimes(2);
       expect(callback.mock.calls).toEqual([[[null, true]], [[payload, false]]]);
     });
-
-    it('should not call the callback if the incoming data is the same', () => {
-      const getNowFn: GetNowTimeFn = () => 1;
-      const watcher = new StateWatch(getNowFn);
-      const callback = jest.fn();
-      const uuid = v4();
-      const payload = { some: 'data' };
-
-      watcher.subscribe(uuid, callback);
-      watcher.update(payload, 1);
-
-      expect(callback).toHaveBeenCalledTimes(2);
-      expect(callback.mock.calls).toEqual([[[null, true]], [[payload, false]]]);
-
-      callback.mockClear();
-
-      watcher.update(payload, 1);
-
-      expect(callback).toHaveBeenCalledTimes(0);
-    });
   });
 
   describe('subscribe, update and unsubscribe', () => {

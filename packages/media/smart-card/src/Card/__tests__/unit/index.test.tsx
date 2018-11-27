@@ -18,16 +18,21 @@ import {
   BlockCardResolvedView,
   InlineCardResolvedView,
   InlineCardResolvingView,
+  CardLinkView,
 } from '@atlaskit/media-ui';
+import { ClientConfig } from '../../../Client';
 
-function createClient(consequesntStates?: ObjectState[]): Client {
-  const client = new Client();
+function createClient(
+  consequentStates?: ObjectState[],
+  config?: ClientConfig,
+): Client {
+  const client = new Client(config);
   jest
     .spyOn(client, 'startStreaming')
     .mockReturnValue(
       from([
         { status: 'resolving', services: [] } as ObjectState,
-        ...(consequesntStates ? consequesntStates : []),
+        ...(consequentStates ? consequentStates : []),
       ]),
     );
   return client;
@@ -40,44 +45,120 @@ describe('Card', () => {
   // tslint:disable-next-line:no-console
   console.error = jest.fn();
 
-  it('should render the link as the first representation', () => {
-    const client = createClient();
-    const url = 'https://www.atlassian.com/';
-    const wrapper = mount(
-      <Card appearance="block" client={client} url={url} />,
-    );
-    expect(wrapper.find('a').exists()).toBeTruthy();
-  });
-
-  it('should render the link and then resolved state as came in sooner than loading state', async () => {
-    class CustomClient extends Client {
-      fetchData() {
-        return Promise.resolve({
-          meta: {
-            visibility: 'public',
-            access: 'granted',
-            auth: [],
-            definitionId: 'd1',
-          },
-          data: {
-            name: 'foobar',
-          },
-        } as ResolveResponse);
-      }
-    }
-    const client = new CustomClient({
-      cacheLifespan: 1,
-      getNowTimeFn: getNow([1, 2]),
-      loadingStateDelay: 10,
+  describe('Client.config.loadingStateDelay', () => {
+    it('should render the link placeholder for the initial state', () => {
+      const client = createClient();
+      const url = 'https://www.atlassian.com/';
+      const wrapper = mount(
+        <Card appearance="block" client={client} url={url} />,
+      );
+      expect(wrapper.find(CardLinkView).exists()).toBeTruthy();
     });
-    const url = 'https://www.atlassian.com/';
-    const wrapper = mount(
-      <Card appearance="block" client={client} url={url} />,
-    );
-    expect(wrapper.find('a').exists()).toBeTruthy();
-    await waitFor(1);
-    wrapper.update();
-    expect(wrapper.find(BlockCardResolvedView).exists()).toBeTruthy();
+
+    it('should render a link placeholder first, and if data comes within the delay, it should transition to resolved state', async () => {
+      class CustomClient extends Client {
+        fetchData() {
+          return Promise.resolve({
+            meta: {
+              visibility: 'public',
+              access: 'granted',
+              auth: [],
+              definitionId: 'd1',
+            },
+            data: {
+              name: 'foobar',
+            },
+          } as ResolveResponse);
+        }
+      }
+      const client = new CustomClient({
+        cacheLifespan: 1,
+        getNowTimeFn: getNow([1, 2]),
+        loadingStateDelay: 10,
+      });
+
+      const url = 'https://www.atlassian.com/';
+      const wrapper = mount(
+        <Card appearance="block" client={client} url={url} />,
+      );
+      expect(wrapper.find(CardLinkView).exists()).toBeTruthy();
+      await waitFor(1);
+      wrapper.update();
+      expect(wrapper.find(BlockCardResolvedView).exists()).toBeTruthy();
+    });
+
+    it('should work correctly with cache', async () => {
+      class CustomClient extends Client {
+        fetchData() {
+          return Promise.resolve({
+            meta: {
+              visibility: 'restricted',
+              access: 'unauthorized',
+              auth: [],
+              definitionId: 'd1',
+            },
+            data: {},
+          } as ResolveResponse);
+        }
+      }
+      const client = new CustomClient({
+        cacheLifespan: 9000,
+        getNowTimeFn: getNow([1, 2, 3, 4]),
+        loadingStateDelay: 10,
+      });
+
+      const url = 'https://www.atlassian.com/';
+      let wrapper = mount(
+        <Card appearance="block" client={client} url={url} />,
+      );
+      expect(wrapper.find(CardLinkView).exists()).toBeTruthy();
+      await waitFor(1);
+      wrapper.update();
+      expect(wrapper.find(BlockCardUnauthorisedView).exists()).toBeTruthy();
+      wrapper.unmount();
+
+      // We're mounting the card again and we should now be using the data from cache
+      wrapper = mount(<Card appearance="block" client={client} url={url} />);
+      expect(wrapper.find(BlockCardUnauthorisedView).exists()).toBeTruthy();
+    });
+
+    it('should work the same with stale cache after remounting', async () => {
+      class CustomClient extends Client {
+        fetchData() {
+          return Promise.resolve({
+            meta: {
+              visibility: 'restricted',
+              access: 'unauthorized',
+              auth: [],
+              definitionId: 'd1',
+            },
+            data: {},
+          } as ResolveResponse);
+        }
+      }
+      const client = new CustomClient({
+        cacheLifespan: 1,
+        getNowTimeFn: getNow([1, 10]),
+        loadingStateDelay: 10,
+      });
+
+      const url = 'https://www.atlassian.com/';
+      let wrapper = mount(
+        <Card appearance="block" client={client} url={url} />,
+      );
+      expect(wrapper.find(CardLinkView).exists()).toBeTruthy();
+      await waitFor(1);
+      wrapper.update();
+      expect(wrapper.find(BlockCardUnauthorisedView).exists()).toBeTruthy();
+      wrapper.unmount();
+
+      // We're mounting the card again, which should trigger a reload
+      wrapper = mount(<Card appearance="block" client={client} url={url} />);
+      expect(wrapper.find(CardLinkView).exists()).toBeTruthy();
+      await waitFor(1);
+      wrapper.update();
+      expect(wrapper.find(BlockCardUnauthorisedView).exists()).toBeTruthy();
+    });
   });
 
   it('should render the errored view when errored', async () => {
@@ -244,7 +325,7 @@ describe('Card', () => {
       />,
     );
 
-    // wait for the data to be loade
+    // wait for the data to be loaded
 
     wrapper.update();
     expect(wrapper.find(BlockCardResolvedView).props()).toEqual(

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  CardLinkView,
   BlockCardResolvingView,
   BlockCardErroredView,
   BlockCardUnauthorisedView,
@@ -35,7 +36,7 @@ const renderBlockCard = (
 ) => {
   switch (state.status) {
     case 'pending':
-      return <a href={url}>{url}</a>;
+      return <CardLinkView text={url}>{url}</CardLinkView>;
 
     case 'resolving':
       return (
@@ -108,7 +109,7 @@ const renderInlineCard = (
 ): React.ReactNode => {
   switch (state.status) {
     case 'pending':
-      return url ? <a href={url}>{url}</a> : null;
+      return <CardLinkView text={url}>{url}</CardLinkView>;
 
     case 'resolving':
       return (
