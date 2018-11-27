@@ -1,1 +1,0 @@
-- Adjust min-width nodes to support table resizing
