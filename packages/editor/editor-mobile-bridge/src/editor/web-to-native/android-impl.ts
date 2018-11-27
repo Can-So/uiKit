@@ -1,3 +1,5 @@
+import { Color as StatusColor } from '@atlaskit/status';
+import { EditorBridges, EditorPluginBridges } from './index';
 import {
   MentionBridge,
   TextFormattingBridge,
@@ -7,7 +9,8 @@ import {
   ListBridge,
   StatusBridge,
 } from './bridge';
-import { Color as StatusColor } from '@atlaskit/status';
+
+import { sendToBridge } from '../../bridge-utils';
 
 export default class AndroidBridge implements NativeBridge {
   mentionBridge: MentionBridge;
@@ -53,9 +56,11 @@ export default class AndroidBridge implements NativeBridge {
   submitPromise(name: string, uuid: string, args: string) {
     this.promiseBridge.submitPromise(name, uuid, args);
   }
+
   updateBlockState(currentBlockType: string) {
     this.textFormatBridge.updateBlockState(currentBlockType);
   }
+
   updateListState(listState: string) {
     this.listBridge.updateListState(listState);
   }
@@ -66,5 +71,13 @@ export default class AndroidBridge implements NativeBridge {
 
   dismissStatusPicker() {
     this.statusBridge.dismissStatusPicker();
+  }
+
+  call<T extends EditorPluginBridges>(
+    bridge: T,
+    event: keyof Exclude<EditorBridges[T], undefined>,
+    ...args
+  ) {
+    sendToBridge(bridge, event, ...args);
   }
 }

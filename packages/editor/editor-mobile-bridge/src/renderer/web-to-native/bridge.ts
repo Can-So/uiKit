@@ -10,10 +10,15 @@ export interface LinkBridge {
 
 export default interface WebBridge extends LinkBridge, TaskDecisionBridge {}
 
+export interface RendererBridges {
+  linkBridge?: LinkBridge;
+  taskDecisionBridge?: TaskDecisionBridge;
+}
+
+export type RendererPluginBridges = keyof RendererBridges;
+
 declare global {
-  interface Window {
-    linkBridge?: LinkBridge;
-    taskDecisionBridge?: TaskDecisionBridge;
+  interface Window extends RendererBridges {
     webkit?: any;
   }
 }
