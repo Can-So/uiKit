@@ -79,4 +79,5 @@ export default {
   'fabric.media.enable_fullscreen': 'enable fullscreen',
   'fabric.media.error_loading_file': 'Error loading file',
   'fabric.media.error_generating_preview': 'Error generating preview',
+  'fabric.media.download': 'Download',
 };
