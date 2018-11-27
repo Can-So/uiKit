@@ -1,5 +1,15 @@
 # @atlaskit/profilecard
 
+## 6.0.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/dynamic-table@10.0.18
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
 ## 6.0.1
 - [patch] [9d63842](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d63842):
 

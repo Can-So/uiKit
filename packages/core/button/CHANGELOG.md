@@ -1,5 +1,17 @@
 # @atlaskit/button
 
+## 10.0.0
+- [major] [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+
+  - Converted @atlaskit/button to Typescript
+    - Dist paths have changed, if you are importing by exact file path you will need to update your imports
+      - E.g. `import '@atlaskit/button/dist/cjs/components/ButtonGroup';` would need to be updated to `import '@atlaskit/button/dist/es5/components/ButtonGroup'`
+    - Flow types are not present any more, Typescript definitions are shipped instead
+
+- Updated dependencies [bfac186](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfac186):
+  - @atlaskit/analytics-next-types@3.1.2
+  - @atlaskit/type-helpers@2.0.0
+
 ## 9.0.16
 - [patch] Fix truncation in button [508ca2c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/508ca2c)
 

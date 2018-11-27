@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/analytics-next-types",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "TypeScript Type Definitions for @atlaskit/analytics-next",
   "config": {
     "access": "public"
@@ -34,6 +34,6 @@
     "react": "^16.4.0"
   },
   "dependencies": {
-    "@atlaskit/type-helpers": "^1.0.0"
+    "@atlaskit/type-helpers": "^2.0.0"
   }
 }
