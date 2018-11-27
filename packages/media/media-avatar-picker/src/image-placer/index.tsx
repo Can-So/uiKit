@@ -16,6 +16,11 @@ import {
   initialiseImagePreview,
   renderImageAtCurrentView,
 } from './imageProcessor';
+import {
+  zoomToFit,
+  applyConstraints,
+  transformVisibleBoundsToImageCoords,
+} from './constraints';
 
 /*
 "container(Width|Height)" is the outputed size of the final image plus "margin"s.
@@ -102,7 +107,7 @@ export class ImagePlacer extends React.Component<
   ImagePlacerProps,
   ImagePlacerState
 > {
-  imagesourceBounds = new Rectangle(
+  imageSourceRect = new Rectangle(
     0,
     0,
   ); /* original size of image (un-scaled) */
@@ -186,7 +191,7 @@ export class ImagePlacer extends React.Component<
 
   /* respond to prop changes */
   async UNSAFE_componentWillReceiveProps(nextProps: ImagePlacerProps) {
-    const { imagesourceBounds, state, props } = this;
+    const { imageSourceRect, state, props } = this;
     const { zoom } = state;
     const {
       useConstraints: currentUseConstraints,
@@ -229,8 +234,8 @@ export class ImagePlacer extends React.Component<
       this.setState(
         {
           zoom: 0,
-          imageWidth: imagesourceBounds.width,
-          imageHeight: imagesourceBounds.height,
+          imageWidth: imageSourceRect.width,
+          imageHeight: imageSourceRect.height,
         },
         this.update,
       );
@@ -265,7 +270,7 @@ export class ImagePlacer extends React.Component<
     );
     if (previewInfo) {
       const { width, height } = previewInfo;
-      this.imagesourceBounds = new Rectangle(width, height);
+      this.imageSourceRect = new Rectangle(width, height);
       this.setSrc(previewInfo.fileInfo);
     } else {
       this.setState({ errorMessage: 'Cannot load image' });
@@ -294,7 +299,7 @@ export class ImagePlacer extends React.Component<
   /* reset view  */
   reset() {
     const {
-      imagesourceBounds: { width: imageWidth, height: imageHeight },
+      imageSourceRect: { width: imageWidth, height: imageHeight },
     } = this;
     this.setState({
       imageWidth,
@@ -319,17 +324,15 @@ export class ImagePlacer extends React.Component<
   /* zoom image up or down to fit visibleBounds */
   zoomToFit() {
     const { imageWidth, imageHeight } = this.state;
-    const itemRect = new Rectangle(imageWidth, imageHeight);
-    const { visibleBounds } = this;
-    const scaleFactor = itemRect.scaleToFitSmallestSide(visibleBounds);
-    const {
-      width: newItemRectWidth,
-      height: newItemRectHeight,
-    } = itemRect.scaled(scaleFactor);
+    const { width: fittedWidth, height: fittedHeight } = zoomToFit(
+      imageWidth,
+      imageHeight,
+      this.visibleBounds,
+    );
     this.setState(
       {
-        imageWidth: newItemRectWidth,
-        imageHeight: newItemRectHeight,
+        imageWidth: fittedWidth,
+        imageHeight: fittedHeight,
         originX: 0,
         originY: 0,
         zoom: 0,
@@ -341,89 +344,16 @@ export class ImagePlacer extends React.Component<
 
   /* assuming zoom level is correct, move origin to ensure imageBounds edges stay within visibleBounds */
   applyConstraints() {
-    const { useConstraints } = this.props;
-    const { originX: currentOriginX, originY: currentOriginY } = this.state;
+    const { props, state, imageBounds, visibleBounds } = this;
+    const { useConstraints } = props;
+    const { originX, originY } = state;
 
-    let originX = currentOriginX;
-    let originY = currentOriginY;
-    let delta = new Vector2(0, 0);
-
-    if (useConstraints) {
-      delta = this.applyFullConstraints();
-    } else {
-      delta = this.applyPartialConstraints();
-    }
+    const delta = applyConstraints(useConstraints, imageBounds, visibleBounds);
 
     this.setState({
       originX: originX + delta.x,
       originY: originY + delta.y,
     });
-  }
-
-  /* stop imageBounds edges from going inside visibleBounds - this is when useConstraints is true */
-  private applyFullConstraints(): Vector2 {
-    const { visibleBounds, imageBounds } = this;
-    const deltaLeft = visibleBounds.left - imageBounds.left;
-    const deltaTop = visibleBounds.top - imageBounds.top;
-    const deltaBottom = visibleBounds.bottom - imageBounds.bottom;
-    const deltaRight = visibleBounds.right - imageBounds.right;
-
-    let deltaX = 0;
-    let deltaY = 0;
-
-    if (
-      imageBounds.right > visibleBounds.right &&
-      imageBounds.left > visibleBounds.left
-    ) {
-      deltaX += deltaLeft;
-    }
-    if (
-      imageBounds.bottom > visibleBounds.bottom &&
-      imageBounds.top > visibleBounds.top
-    ) {
-      deltaY += deltaTop;
-    }
-    if (
-      imageBounds.top < visibleBounds.top &&
-      imageBounds.bottom < visibleBounds.bottom
-    ) {
-      deltaY += deltaBottom;
-    }
-    if (
-      imageBounds.left < visibleBounds.left &&
-      imageBounds.right < visibleBounds.right
-    ) {
-      deltaX += deltaRight;
-    }
-
-    return new Vector2(deltaX, deltaY);
-  }
-
-  /* stop imageBounds edges from going outside visibleBounds - this is when useConstraints is false */
-  private applyPartialConstraints(): Vector2 {
-    const { visibleBounds, imageBounds } = this;
-    const deltaTop = visibleBounds.top - imageBounds.bottom;
-    const deltaBottom = visibleBounds.bottom - imageBounds.top;
-    const deltaLeft = visibleBounds.left - imageBounds.right;
-    const deltaRight = visibleBounds.right - imageBounds.left;
-
-    let deltaX = 0;
-    let deltaY = 0;
-
-    if (imageBounds.right < visibleBounds.left) {
-      deltaX += deltaLeft;
-    }
-    if (imageBounds.bottom < visibleBounds.top) {
-      deltaY += deltaTop;
-    }
-    if (imageBounds.top > visibleBounds.bottom) {
-      deltaY += deltaBottom;
-    }
-    if (imageBounds.left > visibleBounds.right) {
-      deltaX += deltaRight;
-    }
-
-    return new Vector2(deltaX, deltaY);
   }
 
   /* set zoom but apply constraints */
@@ -450,15 +380,14 @@ export class ImagePlacer extends React.Component<
     visibleBoundsX: number,
     visibleBoundsY: number,
   ): Vector2 {
-    const { imagesourceBounds, visibleBounds, imageBounds } = this;
-    const offset = visibleBounds.origin.sub(imageBounds.origin);
-    const rect = imageBounds.rect;
-    const x = (offset.x + visibleBoundsX) / rect.width;
-    const y = (offset.y + visibleBoundsY) / rect.height;
-    return new Vector2(
-      imagesourceBounds.width * x,
-      imagesourceBounds.height * y,
-    ).rounded();
+    const { imageSourceRect, visibleBounds, imageBounds } = this;
+    return transformVisibleBoundsToImageCoords(
+      visibleBoundsX,
+      visibleBoundsY,
+      imageSourceRect,
+      imageBounds,
+      visibleBounds,
+    );
   }
 
   /* convert the current visible region (zoomed / panned) to a correctly sized canvas with that view drawn */
@@ -508,7 +437,7 @@ export class ImagePlacer extends React.Component<
     height: number,
   ) => {
     const { onImageChange } = this.props;
-    this.imagesourceBounds = new Rectangle(width, height);
+    this.imageSourceRect = new Rectangle(width, height);
     this.imageElement = imageElement;
     this.setState({ imageWidth: width, imageHeight: height }, this.update);
     if (onImageChange) {
