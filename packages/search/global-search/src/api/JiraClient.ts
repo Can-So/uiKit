@@ -139,7 +139,7 @@ export default class JiraClientImpl implements JiraClient {
     const options: RequestServiceOptions = {
       path: RECENT_ITEMS_PATH,
       queryParams: {
-        ...recentItemCounts,
+        counts: this.getRecentCountQueryParam(recentItemCounts),
         search_id: searchSessionId,
       },
     };
@@ -257,5 +257,19 @@ export default class JiraClientImpl implements JiraClient {
             : item.metadata,
         };
     }
+  }
+
+  /**
+   * Private method to construct a valid value for the 'counts' query param
+   * for the Jira recent API. The format is as follows:
+   *
+   * ?counts=issues=8,boards=2,projects=2,filters=2
+   *
+   * @param recentCounts
+   */
+  private getRecentCountQueryParam(recentCounts: RecentItemsCounts): string {
+    const keys = Object.keys(recentCounts);
+
+    return keys.map(key => `${key}=${recentCounts[key]}`).join(',');
   }
 }
