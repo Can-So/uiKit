@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 89.0.3
+- [patch] [1e8d316](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e8d316):
+
+  - ED-5819: Fixes emitting text color plugin state on every key stroke, without the state changing.
+
 ## 89.0.2
 - [patch] [a2cae0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2cae0c):
 
