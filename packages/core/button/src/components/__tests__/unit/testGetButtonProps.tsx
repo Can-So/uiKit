@@ -5,11 +5,11 @@ import Button, { ButtonGroup } from '../../..';
 
 const Component = () => null;
 
-const customProps: any = { customProp: 1 };
+const customProps: Record<string, any> = { customProp: 1 };
 
 describe('getButtonProps', () => {
   it('should pass through all props to a custom component', () => {
-    const cmp = mount(<Button component={Component} />);
+    const cmp = mount(<Button {...customProps} component={Component} />);
     expect(cmp.find('StyledComponent').prop('customProp')).toBe(1);
   });
 
