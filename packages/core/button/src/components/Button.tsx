@@ -84,7 +84,7 @@ export const defaultProps: Pick<
 };
 
 export class Button extends React.Component<ButtonProps, ButtonState> {
-  button: HTMLElement;
+  button: HTMLElement | undefined;
 
   state = {
     isActive: false,

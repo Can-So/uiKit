@@ -3,9 +3,10 @@
   "version": "0.1.1",
   "description": "Textarea Component",
   "license": "Apache-2.0",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "atlaskit:src": "src/index.js",
+  "main": "dist/es5/index.js",
+  "module": "dist/es2015/index.js",
+  "types": "dist/es5/index.d.ts",
+  "atlaskit:src": "src/index.ts",
   "atlaskit:designLink": "https://atlassian.design/guidelines/product/components/text-field",
   "sideEffects": false,
   "files": [
@@ -20,7 +21,9 @@
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
     "@atlaskit/analytics-next": "^3.1.1",
+    "@atlaskit/analytics-next-types": "^3.1.2",
     "@atlaskit/theme": "^6.2.1",
+    "@atlaskit/type-helpers": "^2.0.0",
     "@babel/runtime": "^7.0.0"
   },
   "peerDependencies": {
