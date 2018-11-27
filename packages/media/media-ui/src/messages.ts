@@ -335,4 +335,29 @@ export const messages = defineMessages({
     defaultMessage: 'Download',
     description: '',
   },
+  unknown: {
+    id: 'fabric.media.unknown',
+    defaultMessage: 'unknown',
+    description: '',
+  },
+  document: {
+    id: 'fabric.media.document',
+    defaultMessage: 'document',
+    description: '',
+  },
+  audio: {
+    id: 'fabric.media.audio',
+    defaultMessage: 'audio',
+    description: '',
+  },
+  video: {
+    id: 'fabric.media.video',
+    defaultMessage: 'video',
+    description: '',
+  },
+  image: {
+    id: 'fabric.media.image',
+    defaultMessage: 'image',
+    description: '',
+  },
 });
