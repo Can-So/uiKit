@@ -1,59 +1,11 @@
 // @flow
 
-import {
-  cs,
-  da,
-  de,
-  en,
-  en_GB,
-  es,
-  et,
-  fi,
-  fr,
-  hu,
-  is,
-  it,
-  ja,
-  ko,
-  nb,
-  nl,
-  pl,
-  pt_BR,
-  pt_PT,
-  ro,
-  ru,
-  sk,
-  sv,
-  zh,
-} from '../i18n';
+import * as locales from '../i18n';
 
 const localesMessagesMap = {
-  cs,
-  da,
-  de,
-  en,
-  en_GB,
-  es,
-  et,
-  fi,
-  fr,
-  hu,
-  is,
-  it,
-  ja,
-  ko,
-  nb,
-  nl,
-  pl,
-  pt_BR,
-  'pt-BR': pt_BR, // should resolve pt-BR and pt_BR
-  pt_PT,
-  'pt-PT': pt_PT,
-  ro,
-  ru,
-  sk,
-  sv,
-  zh,
+  ...locales,
+  'pt-BR': locales.pt_BR, // should resolve pt-BR and pt_BR
+  'pt-PT': locales.pt_PT,
 };
 
 /**
@@ -75,7 +27,7 @@ export const getMessagesForLocale = (locale: string) => {
   }
 
   if (!messages) {
-    messages = en;
+    messages = locales.en;
   }
 
   return messages;
