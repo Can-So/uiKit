@@ -70,7 +70,7 @@ export type TextAreaThemeProps = {
 };
 export type ThemeProps = {
   textArea?: (
-    opts: { appearance: ThemeAppearance, isCompact: boolean },
+    opts: { appearance: ThemeAppearance; isCompact: boolean },
   ) => {
     borderColor?: string;
     borderColorFocus?: string;
@@ -112,11 +112,11 @@ const getTextAreaTheme = (mode: 'light' | 'dark') => ({
 
 export type TextAreaTheme = ReturnType<ReturnType<typeof getTextAreaTheme>>;
 
-export const theme = (props: ThemeProps): ThemeProps => {
+export const theme = <T extends ThemeProps>(props: ThemeProps): T => {
   const mode = props.mode || 'light';
   return {
     textArea: getTextAreaTheme(mode),
     mode,
-    ...props,
-  };
+    ...(props as ThemeProps),
+  } as T;
 };

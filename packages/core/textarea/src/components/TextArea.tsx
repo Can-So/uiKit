@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { Theme } from '@atlaskit/theme';
 import {
@@ -14,6 +13,8 @@ import { theme as defaultTheme, ThemeProps } from '../theme';
 import { TextAreaWrapper } from '../styled';
 import TextareaElement from './TextAreaElement';
 import { withDefaultProps, PropsOf } from '@atlaskit/type-helpers';
+
+type ThemeType = <T extends ThemeProps>(theme: ThemeProps) => T;
 
 export type Props = {
   /**
@@ -58,7 +59,7 @@ export type Props = {
    */
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none';
   /** The theme function TextArea consumes to derive theming constants for use in styling its components */
-  theme: <T extends ThemeProps>(theme: ThemeProps) => T;
+  theme: ThemeType;
   /**
    * Ref used to access the textarea dom element. NOTE we expose this via forwardRef,
    * so you can also use the ref prop of this component to the same effect.
@@ -144,7 +145,7 @@ class TextAreaWithoutForwardRef extends React.Component<Props, State> {
 
     return (
       <Theme values={theme}>
-        {themeInContext => (
+        {(themeInContext: any) => (
           <TextAreaWrapper
             resize={resize}
             maxHeight={maxHeight}

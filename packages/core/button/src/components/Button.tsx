@@ -92,7 +92,7 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
     isHover: false,
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: ButtonProps) {
     if (this.props.component !== nextProps.component) {
       delete this.customComponent;
     }
@@ -146,7 +146,9 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
   getStyledComponent() {
     if (this.props.component) {
       if (!this.customComponent) {
-        this.customComponent = createStyledComponent();
+        this.customComponent = createStyledComponent() as React.ComponentType<
+          any
+        >;
       }
       return this.customComponent;
     }

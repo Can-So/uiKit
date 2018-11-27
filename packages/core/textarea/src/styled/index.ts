@@ -1,10 +1,10 @@
-// @flow
-
 import styled, { css } from 'styled-components';
 import { codeFontFamily, fontSize, gridSize } from '@atlaskit/theme';
 
 import { ThemeProps, TextAreaTheme } from '../theme';
 import { Props } from '../components/TextArea';
+
+type StyleProps = Props & TextAreaTheme & { isFocused?: boolean; none?: any };
 
 const grid = gridSize();
 const borderRadius = '3px';
@@ -18,10 +18,10 @@ const getVerticalPadding = ({ isCompact }: Pick<Partial<Props>, 'isCompact'>) =>
 const horizontalPadding = grid;
 const transitionDuration = '0.2s';
 
-const getBorderStyle = props =>
+const getBorderStyle = (props: StyleProps) =>
   props.appearance === 'none' ? 'none;' : 'solid;';
 
-const getPlaceholderStyle = style => css`
+const getPlaceholderStyle = (style: typeof getPlaceholderColor) => css`
   &::placeholder {
     ${style}
   }
@@ -45,7 +45,7 @@ const getBorderAndPadding = () => {
   `;
 };
 
-const getHoverState = props => {
+const getHoverState = (props: StyleProps) => {
   if (props.readOnly || props.isFocused || props.none) {
     return null;
   }
@@ -84,7 +84,7 @@ const getResizeStyles = ({ resize }: Pick<Partial<Props>, 'resize'>) => {
   return `resize: none;`;
 };
 
-const getBorderColor = props => {
+const getBorderColor = (props: StyleProps) => {
   let borderColor = props.isFocused
     ? props.borderColorFocus
     : props.borderColor;
@@ -101,7 +101,7 @@ const getBorderColor = props => {
   return borderColor;
 };
 
-const getBackgroundColor = props => {
+const getBackgroundColor = (props: StyleProps) => {
   let backgroundColor = props.isFocused
     ? props.backgroundColorFocus
     : props.backgroundColor;
