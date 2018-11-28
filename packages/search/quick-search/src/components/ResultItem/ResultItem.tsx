@@ -57,17 +57,12 @@ class ResultItem extends React.PureComponent<Props> {
       <ResultItemTextAfter>{this.props.textAfter}</ResultItemTextAfter>
     ) : null;
 
-    const selectedIcon =
-      this.props.isSelected && this.props.selectedIcon ? (
-        <ResultItemIcon>{this.props.selectedIcon}</ResultItemIcon>
-      ) : null;
-
     const after =
       this.props.textAfter || this.props.selectedIcon ? (
         <ResultItemAfterWrapper>
           <ResultItemAfter shouldTakeSpace={!!this.props.textAfter}>
             {textAfter}
-            {selectedIcon}
+            {this.props.isSelected ? this.props.selectedIcon : null}
           </ResultItemAfter>
         </ResultItemAfterWrapper>
       ) : null;
