@@ -36,7 +36,8 @@ export default class ChangelogExplorer extends React.Component<Props, State> {
       });
   }
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // TODO: [strictFunctionTypes] Fix any
+  handleChange = (e: React.ChangeEvent<any>) => {
     const { groupId, pkgId } = this.props.match.params;
     const range = e.target.value;
     this.props.history.replace(

@@ -38,7 +38,8 @@ export const layoutColumn: NodeSpec = {
     },
     {
       tag: 'div[data-layout-column]',
-      getAttrs: (dom: HTMLElement) => {
+      getAttrs: domNode => {
+        const dom = domNode as HTMLElement;
         return {
           width: Number(dom.getAttribute('data-column-width')) || undefined,
         };

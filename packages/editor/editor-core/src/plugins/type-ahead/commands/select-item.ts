@@ -160,7 +160,9 @@ export const selectItem = (
       return insertFallbackCommand(start, end)(state, dispatch);
     }
 
-    dispatch(tr);
+    if (dispatch) {
+      dispatch(tr);
+    }
     return true;
   });
 };
@@ -171,7 +173,10 @@ export const insertFallbackCommand = (start: number, end: number): Command => (
 ) => {
   const { query, trigger } = pluginKey.getState(state);
   const node = state.schema.text(trigger + query);
-  dispatch(state.tr.replaceWith(start, end, node));
+
+  if (dispatch) {
+    dispatch(state.tr.replaceWith(start, end, node));
+  }
   return true;
 };
 

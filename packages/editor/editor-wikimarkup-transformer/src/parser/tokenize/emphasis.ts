@@ -8,7 +8,7 @@ export function emphasis(
   input: string,
   position: number,
   schema: Schema,
-  tokenErrCallback: TokenErrCallback,
+  tokenErrCallback?: TokenErrCallback,
 ): Token {
   /**
    * The following token types will be ignored in parsing

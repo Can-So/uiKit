@@ -26,7 +26,7 @@ export type TypeAheadHandler = {
     state: EditorState,
     item: TypeAheadItem,
     insert: (
-      node: Node | Object | string,
+      node?: Node | Object | string,
       opts?: { selectInlineNode?: boolean },
     ) => Transaction,
     meta: {

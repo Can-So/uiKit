@@ -24,8 +24,10 @@ export const dismissCommand = (): Command => (state, dispatch) => {
     typeAheadHandler.dismiss(state);
   }
 
-  dispatch(
-    state.tr.removeMark(start, end, markType).removeStoredMark(markType),
-  );
+  if (dispatch) {
+    dispatch(
+      state.tr.removeMark(start, end, markType).removeStoredMark(markType),
+    );
+  }
   return true;
 };

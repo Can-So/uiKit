@@ -3,9 +3,9 @@ import { PureComponent } from 'react';
 import { AkCodeBlock } from '@atlaskit/code';
 import overflowShadow, { OverflowShadowProps } from '../../ui/overflow-shadow';
 
-const identity = (text: string): string => {
+function identity<T = any>(text: T): T {
   return text;
-};
+}
 
 export interface Props {
   language: string;

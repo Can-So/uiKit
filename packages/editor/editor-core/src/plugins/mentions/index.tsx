@@ -234,32 +234,38 @@ export const ACTIONS = {
 };
 
 export const setProvider = (provider): Command => (state, dispatch) => {
-  dispatch(
-    state.tr.setMeta(mentionPluginKey, {
-      action: ACTIONS.SET_PROVIDER,
-      params: { provider },
-    }),
-  );
+  if (dispatch) {
+    dispatch(
+      state.tr.setMeta(mentionPluginKey, {
+        action: ACTIONS.SET_PROVIDER,
+        params: { provider },
+      }),
+    );
+  }
   return true;
 };
 
 export const setResults = (results): Command => (state, dispatch) => {
-  dispatch(
-    state.tr.setMeta(mentionPluginKey, {
-      action: ACTIONS.SET_RESULTS,
-      params: { results },
-    }),
-  );
+  if (dispatch) {
+    dispatch(
+      state.tr.setMeta(mentionPluginKey, {
+        action: ACTIONS.SET_RESULTS,
+        params: { results },
+      }),
+    );
+  }
   return true;
 };
 
 export const setContext = (context): Command => (state, dispatch) => {
-  dispatch(
-    state.tr.setMeta(mentionPluginKey, {
-      action: ACTIONS.SET_CONTEXT,
-      params: { context },
-    }),
-  );
+  if (dispatch) {
+    dispatch(
+      state.tr.setMeta(mentionPluginKey, {
+        action: ACTIONS.SET_CONTEXT,
+        params: { context },
+      }),
+    );
+  }
   return true;
 };
 
@@ -355,8 +361,8 @@ function mentionPluginFactory(
               );
             }
 
-            providerPromise
-              .then((provider: MentionProvider) => {
+            (providerPromise as Promise<MentionProvider>)
+              .then(provider => {
                 if (mentionProvider) {
                   mentionProvider.unsubscribe('mentionPlugin');
                 }
@@ -398,9 +404,11 @@ function mentionPluginFactory(
                 editorView.dispatch,
               );
             }
-            providerPromise.then((provider: ContextIdentifierProvider) => {
-              setContext(provider)(editorView.state, editorView.dispatch);
-            });
+            (providerPromise as Promise<ContextIdentifierProvider>).then(
+              provider => {
+                setContext(provider)(editorView.state, editorView.dispatch);
+              },
+            );
             break;
         }
       };

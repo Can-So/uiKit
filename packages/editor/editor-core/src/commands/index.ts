@@ -6,13 +6,7 @@ import {
   MarkType,
   Schema,
 } from 'prosemirror-model';
-import {
-  EditorState,
-  NodeSelection,
-  TextSelection,
-  Transaction,
-} from 'prosemirror-state';
-import { EditorView } from 'prosemirror-view';
+import { EditorState, NodeSelection, TextSelection } from 'prosemirror-state';
 import {
   canMoveDown,
   canMoveUp,
@@ -20,6 +14,7 @@ import {
   atTheBeginningOfBlock,
   isTableCell,
 } from '../utils';
+import { Command } from '../types';
 
 export function preventDefault(): Command {
   return function(state, dispatch) {
@@ -37,13 +32,17 @@ export function insertNewLine(): Command {
       const hardBreakNode = hardBreak.create();
 
       if (parent && parent.type.validContent(Fragment.from(hardBreakNode))) {
-        dispatch(state.tr.replaceSelectionWith(hardBreakNode));
+        if (dispatch) {
+          dispatch(state.tr.replaceSelectionWith(hardBreakNode));
+        }
         return true;
       }
     }
 
     if (state.selection instanceof TextSelection) {
-      dispatch(state.tr.insertText('\n'));
+      if (dispatch) {
+        dispatch(state.tr.insertText('\n'));
+      }
       return true;
     }
 
@@ -57,7 +56,9 @@ export function insertRule(): Command {
     const { rule } = state.schema.nodes;
     if (rule) {
       const ruleNode = rule.create();
-      dispatch(state.tr.insert(to + 1, ruleNode));
+      if (dispatch) {
+        dispatch(state.tr.insert(to + 1, ruleNode));
+      }
       return true;
     }
     return false;
@@ -84,15 +85,14 @@ export function insertNodesEndWithNewParagraph(nodes: PMNode[]): Command {
       tr.setSelection(TextSelection.create(state.doc, head, head));
     }
 
-    dispatch(tr);
+    if (dispatch) {
+      dispatch(tr);
+    }
     return true;
   };
 }
 
-export function createNewParagraphAbove(
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean {
+export const createNewParagraphAbove: Command = (state, dispatch) => {
   const append = false;
   if (!canMoveUp(state) && canCreateParagraphNear(state)) {
     createParagraphNear(append)(state, dispatch);
@@ -100,12 +100,9 @@ export function createNewParagraphAbove(
   }
 
   return false;
-}
+};
 
-export function createNewParagraphBelow(
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean {
+export const createNewParagraphBelow: Command = (state, dispatch) => {
   const append = true;
   if (!canMoveDown(state) && canCreateParagraphNear(state)) {
     createParagraphNear(append)(state, dispatch);
@@ -113,7 +110,7 @@ export function createNewParagraphBelow(
   }
 
   return false;
-}
+};
 
 function canCreateParagraphNear(state: EditorState): boolean {
   const {
@@ -146,7 +143,10 @@ export function createParagraphNear(append: boolean = true): Command {
 
     const tr = state.tr.insert(insertPos, paragraph.createAndFill() as PMNode);
     tr.setSelection(TextSelection.create(tr.doc, insertPos + 1));
-    dispatch(tr);
+
+    if (dispatch) {
+      dispatch(tr);
+    }
 
     return true;
   };
@@ -217,17 +217,11 @@ export function createParagraphAtEnd(): Command {
     }
     tr.setSelection(TextSelection.create(tr.doc, tr.doc.content.size - 1));
     tr.scrollIntoView();
-    dispatch(tr);
+    if (dispatch) {
+      dispatch(tr);
+    }
     return true;
   };
-}
-
-export interface Command {
-  (
-    state: EditorState,
-    dispatch: (tr: Transaction) => void,
-    view?: EditorView,
-  ): boolean;
 }
 
 /**
