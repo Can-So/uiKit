@@ -3,14 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
 import Checkbox from '@atlaskit/textfield';
-import { WithState } from './helpers';
 import Form, { CheckboxField } from '../../../src';
-import { HelperMessage, ErrorMessage } from '../../Messages';
-
-const touch = wrapper => {
-  wrapper.simulate('focus');
-  wrapper.simulate('blur');
-};
 
 test('should default to false value', () => {
   const spy = jest.fn();
@@ -89,7 +82,6 @@ test('fields with same name and defaultIsChecked should create array of values',
       )}
     </Form>,
   );
-  // wrapper.find('input').forEach(input => input.simulate('change'));
   wrapper.find(Button).simulate('click');
   expect(spy).toHaveBeenCalledWith({
     product: ['jira', 'confluence'],
@@ -120,12 +112,10 @@ test('checking checkbox should append value to field value', () => {
       )}
     </Form>,
   );
-  console.log('simulating change');
   wrapper
     .find('input')
     .last()
     .simulate('change', { target: { checked: true } });
-  console.log('submitting form');
   wrapper.find(Button).simulate('click');
   return wait(200).then(() => {
     expect(spy).toHaveBeenCalledWith({

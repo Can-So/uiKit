@@ -38,7 +38,7 @@ type Props = {
   /* The name of the field */
   name: string,
   /* Given what onChange was called with and the current field value return the next field value */
-  transform: <E, T>(event: E, current: T) => T,
+  transform: (event: any, current: any) => any,
   /* Register the Field with the Form. Internal prop - gets set through context. */
   registerField: (
     string,
@@ -63,6 +63,12 @@ type State = {
   submitError: any,
   registered: boolean,
 };
+
+const shallowEqual = (a, b) =>
+  a === b ||
+  typeof b === 'function' ||
+  (Array.isArray(b) && arrayShallowEqual(a, b)) ||
+  (typeof b === 'object' && objectShallowEqual(a, b));
 
 class FieldInner extends React.Component<Props, State> {
   static defaultProps = {
@@ -127,14 +133,10 @@ class FieldInner extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps: Props) {
     const { defaultValue, name } = this.props;
-    const defaultValueSame = ((a, b) => {
-      return (
-        a === b ||
-        (Array.isArray(b) && arrayShallowEqual(a, b)) ||
-        (typeof b === 'object' && objectShallowEqual(a, b))
-      );
-    })(prevProps.defaultValue, defaultValue);
-    if (!defaultValueSame || prevProps.name !== name) {
+    if (
+      !shallowEqual(prevProps.defaultValue, defaultValue) ||
+      prevProps.name !== name
+    ) {
       this.unregisterField();
       this.unregisterField = this.register();
     }
@@ -195,7 +197,7 @@ class FieldInner extends React.Component<Props, State> {
   }
 }
 
-// Make it easier to reference context value in lifecycle methods
+// Make it easier to reference context values in lifecycle methods
 const Field = (props: Props) => (
   <FormContext.Consumer>
     {registerField => (
@@ -216,6 +218,7 @@ Field.defaultProps = {
   defaultValue: undefined,
   isDisabled: false,
   registerField: () => {},
+  transform: translateEvent,
 };
 
 export default Field;

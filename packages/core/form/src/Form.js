@@ -37,19 +37,20 @@ type State = {
 const createFinalForm = (onSubmit, formRef) => {
   const form = createForm({
     onSubmit,
+    initialValues: {},
     mutators: {
       // https://medium.com/@erikras/final-form-arrays-and-mutators-13159cb7d285
       setDefaultValue: ([name, defaultValue], state) => {
-        // eslint-disable-next-line no-param-reassign
-        state.formState.initialValues = {
-          ...state.formState.initialValues,
-          [name]: defaultValue,
-        };
-        // eslint-disable-next-line no-param-reassign
-        state.formState.values = {
-          ...state.formState.values,
-          [name]: defaultValue,
-        };
+        if (state.formState.initialValues) {
+          const value =
+            typeof defaultValue === 'function'
+              ? defaultValue(state.formState.initialValues[name])
+              : defaultValue;
+          // eslint-disable-next-line no-param-reassign
+          state.formState.initialValues[name] = value;
+          // eslint-disable-next-line no-param-reassign
+          state.formState.values[name] = value;
+        }
       },
     },
   });
