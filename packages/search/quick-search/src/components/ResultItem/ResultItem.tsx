@@ -37,6 +37,8 @@ type Props = {
   text?: React.ReactNode;
   /** React component to be placed to the right of the main text. */
   textAfter?: React.ReactNode;
+  /** React component to be placed to the right of the main text when the item is selected. */
+  selectedIcon?: React.ReactNode;
   /** React component to be used for rendering links */
   linkComponent?: React.ComponentType;
 };
@@ -55,13 +57,20 @@ class ResultItem extends React.PureComponent<Props> {
       <ResultItemTextAfter>{this.props.textAfter}</ResultItemTextAfter>
     ) : null;
 
-    const after = this.props.textAfter ? (
-      <ResultItemAfterWrapper>
-        <ResultItemAfter shouldTakeSpace={!!this.props.textAfter}>
-          {textAfter}
-        </ResultItemAfter>
-      </ResultItemAfterWrapper>
-    ) : null;
+    const selectedIcon =
+      this.props.isSelected && this.props.selectedIcon ? (
+        <ResultItemIcon>{this.props.selectedIcon}</ResultItemIcon>
+      ) : null;
+
+    const after =
+      this.props.textAfter || this.props.selectedIcon ? (
+        <ResultItemAfterWrapper>
+          <ResultItemAfter shouldTakeSpace={!!this.props.textAfter}>
+            {textAfter}
+            {selectedIcon}
+          </ResultItemAfter>
+        </ResultItemAfterWrapper>
+      ) : null;
 
     const wrappedCaption = this.props.caption ? (
       <ResultItemCaption>{this.props.caption}</ResultItemCaption>
