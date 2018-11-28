@@ -7,10 +7,6 @@ export default md`
 
   It includes support for adding a custom set of emojis from a specified provider and uploading images as emojis to a service.
 
-  ## Try it out
-
-  Interact with a [live demo of the @atlaskit/emoji component](https://atlaskit.atlassian.com/packages/elements/emoji).
-
   ## Installation
 
   ~~~js
