@@ -59,16 +59,16 @@ const uniqueExactShortNameMatchIndex = (
   }
   query = query.toLowerCase();
   let matchIndex: number | undefined;
-  searchResult.emojis.forEach((emoji, index) => {
+
+  for (let [index, emoji] of searchResult.emojis.entries()) {
     if (query && emoji.shortName.toLowerCase() === query) {
       if (matchIndex === undefined) {
         matchIndex = index;
       } else {
-        matchIndex = undefined;
         return;
       }
     }
-  });
+  }
   return matchIndex;
 };
 

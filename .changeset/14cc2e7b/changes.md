@@ -1,0 +1,1 @@
+- FS-3259 Fixed bug that caused an emoji to be automatically inserted for a query including a closing colon even if there are multiple (an odd number specifically) emoji with an exact shortName match.
