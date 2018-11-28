@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.0.0
+- [major] [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+
+  - Introduced pending state (which is represented as a link) and a race between resolving state and the data fetch.
+
 ## 8.8.5
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

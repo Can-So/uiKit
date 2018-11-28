@@ -1,1 +1,0 @@
-- Introduced pending state (which is represented as a link) and a race between resolving state and the data fetch.
