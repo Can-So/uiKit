@@ -101,7 +101,7 @@ export default function quickInsertProviderFactory(): QuickInsertProvider {
   return {
     getItems() {
       return new Promise(resolve => {
-        setTimeout(() => resolve(items), 1000);
+        window.setTimeout(() => resolve(items), 1000);
       });
     },
   };

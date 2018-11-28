@@ -81,7 +81,7 @@ describe('UrlPreviewService', () => {
         );
       });
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       const mockedResponse = {
         data: {
           preview: linkPreviewResponse,
@@ -118,7 +118,7 @@ describe('UrlPreviewService', () => {
         );
       });
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       const mockedResponse = {
         data: {
           previewError: {

@@ -112,7 +112,7 @@ export class MemoryReactionsStore implements ReactionsStore {
 
   private flash = (reaction: ReactionSummary): void => {
     this.setFlash(reaction.containerAri, reaction.ari, reaction.emojiId, true);
-    setTimeout(
+    window.setTimeout(
       () =>
         this.setFlash(
           reaction.containerAri,

@@ -57,7 +57,7 @@ export class MockReactionsClient implements ReactionClient {
   }
 
   private delayPromise = () =>
-    new Promise(resolve => setTimeout(resolve, this.delay));
+    new Promise(resolve => window.setTimeout(resolve, this.delay));
 
   getReactions(containerAri: string, aris: string[]): Promise<Reactions> {
     return this.delayPromise().then(() =>

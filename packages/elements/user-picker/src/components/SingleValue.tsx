@@ -25,10 +25,11 @@ export const SingleValue = props => {
     data: {
       user: { avatarUrl, name, nickname },
     },
-    selectProps: { appearance },
+    selectProps: { appearance, isFocused },
   } = props;
   const displayName = name || nickname;
-  return (
+
+  return !isFocused ? (
     <AvatarItem
       backgroundColor="transparent"
       avatar={
@@ -41,5 +42,5 @@ export const SingleValue = props => {
       primaryText={displayName}
       component={AvatarItemComponent}
     />
-  );
+  ) : null;
 };

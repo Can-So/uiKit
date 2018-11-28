@@ -1,5 +1,16 @@
 # @atlaskit/docs
 
+## 5.2.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/button@10.0.1
+  - @atlaskit/icon@15.0.0
+
+## 5.2.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
 ## 5.2.0
 - [minor] Add ErrorBoundary to Examples so that errors in Example components don't leak out onto the containing page when embedding examples within docs. [5131102](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5131102)
 

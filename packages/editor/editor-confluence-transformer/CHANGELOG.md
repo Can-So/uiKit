@@ -1,5 +1,13 @@
 # @atlaskit/editor-cq-transformer
 
+## 5.0.19
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/editor-core@89.0.4
+  - @atlaskit/button@10.0.0
+
 ## 5.0.18
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/editor-common@22.0.0

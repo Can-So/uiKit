@@ -72,7 +72,9 @@ export function makePersonResult(
 }
 
 export function delay<T>(millis: number = 1, value?: T): Promise<T> {
-  return new Promise(resolve => setTimeout(() => resolve(value), millis));
+  return new Promise(resolve =>
+    window.setTimeout(() => resolve(value), millis),
+  );
 }
 
 export function waitUntil(
@@ -83,7 +85,7 @@ export function waitUntil(
   let waitingTime = 0;
   const timeToWait = timeBetweenRetries || 100;
   return new Promise((resolve, reject) => {
-    const id = setInterval(() => {
+    const id = window.setInterval(() => {
       if (condition()) {
         clearInterval(id);
         resolve();

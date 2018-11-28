@@ -73,7 +73,7 @@ export const ToolbarDownloadButton = (props: ToolbarDownloadButtonProps) => {
     <DownloadButton
       analyticsPayload={downloadEvent}
       label="Download"
-      appearance="toolbar"
+      appearance={'toolbar' as any}
       onClick={createItemDownloader(
         props.state,
         props.context,
@@ -86,8 +86,7 @@ export const ToolbarDownloadButton = (props: ToolbarDownloadButtonProps) => {
 
 export const DisabledToolbarDownloadButton = (
   <Button
-    label="Download"
-    appearance="toolbar"
+    appearance={'toolbar' as any}
     isDisabled={true}
     iconBefore={downloadIcon}
   />

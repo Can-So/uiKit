@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { messages } from './i18n';
+import { isChildInput } from './utils';
 
 export const ScrollAnchor = styled.div`
   align-self: flex-end;
@@ -34,7 +35,7 @@ export class MultiValueContainer extends React.PureComponent<any, State> {
   componentDidUpdate() {
     const { previousValueSize, valueSize } = this.state;
     if (valueSize > previousValueSize) {
-      setTimeout(() => this.bottomAnchor.scrollIntoView());
+      window.setTimeout(() => this.bottomAnchor.scrollIntoView());
     }
   }
 
@@ -60,10 +61,7 @@ export class MultiValueContainer extends React.PureComponent<any, State> {
         <FormattedMessage {...messages.addMore}>
           {addMore =>
             React.Children.map(children, child =>
-              typeof child === 'object' &&
-              child.props &&
-              child.props.type === 'text' &&
-              this.showPlaceholder()
+              isChildInput(child) && this.showPlaceholder()
                 ? React.cloneElement(child, { placeholder: addMore })
                 : child,
             )

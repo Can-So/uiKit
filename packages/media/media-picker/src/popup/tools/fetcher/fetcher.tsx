@@ -125,7 +125,7 @@ export class MediaApiFetcher implements Fetcher {
           ) {
             resolve(file);
           } else {
-            setTimeout(() => {
+            window.setTimeout(() => {
               this.pollFile(auth, fileId, collection).then(resolve, reject);
             }, METADATA_POLL_INTERVAL_MS);
           }

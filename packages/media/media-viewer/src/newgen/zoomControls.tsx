@@ -46,14 +46,14 @@ export class ZoomControlsBase extends Component<ZoomControlsProps, {}> {
       <ZoomWrapper className={hideControlsClassName}>
         <ZoomControlsWrapper>
           <Button
-            appearance="toolbar"
+            appearance={'toolbar' as any}
             isDisabled={!zoomLevel.canZoomOut}
             onClick={this.zoomOut}
             // TODO [i18n]
             iconBefore={<ZoomOutIcon label="zoom out" />}
           />
           <Button
-            appearance="toolbar"
+            appearance={'toolbar' as any}
             isDisabled={!zoomLevel.canZoomIn}
             onClick={this.zoomIn}
             // TODO [i18n]

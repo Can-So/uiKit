@@ -42,7 +42,7 @@ describe('MediaCollectionService', () => {
     headers = { 'Content-Type': 'application/json' },
     index = 0,
   ) => {
-    setTimeout(() => requests[index].respond(status, headers, body));
+    window.setTimeout(() => requests[index].respond(status, headers, body));
   };
 
   it('should have correct url', () => {

@@ -47,7 +47,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
   // and if it does recalculate the image height and width
 
   componentDidMount() {
-    const parent = ReactDOM.findDOMNode(this).parentElement;
+    const parent = ReactDOM.findDOMNode(this)!.parentElement;
     if (!parent) {
       return;
     }

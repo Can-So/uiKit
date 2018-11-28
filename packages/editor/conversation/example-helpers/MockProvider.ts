@@ -109,7 +109,7 @@ export class MockProvider extends AbstractConversationResource {
 
     dispatch({ type: CREATE_CONVERSATION_REQUEST, payload: result });
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       const errResult = {
         ...result,
         error: new HttpError(responseCode, RESPONSE_MESSAGES[responseCode]),
@@ -142,7 +142,7 @@ export class MockProvider extends AbstractConversationResource {
     dispatch({ type: ADD_COMMENT_REQUEST, payload: result });
 
     await new Promise(resolve => {
-      setTimeout(() => {
+      window.setTimeout(() => {
         const errResult = {
           ...result,
           error: new HttpError(responseCode, RESPONSE_MESSAGES[responseCode]),
@@ -201,7 +201,7 @@ export class MockProvider extends AbstractConversationResource {
     const { dispatch, responseCode } = this;
     dispatch({ type: UPDATE_COMMENT_REQUEST, payload: result });
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       const errResult = {
         conversationId,
         commentId,
@@ -236,7 +236,7 @@ export class MockProvider extends AbstractConversationResource {
     };
     dispatch({ type: DELETE_COMMENT_REQUEST, payload: result });
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       const type =
         responseCode >= 400 ? DELETE_COMMENT_ERROR : DELETE_COMMENT_SUCCESS;
       dispatch({ type, payload: result });

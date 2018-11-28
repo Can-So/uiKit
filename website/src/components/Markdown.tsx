@@ -11,15 +11,19 @@ export type Props = {
 };
 
 const parser = new CommonMark.Parser();
+const markdown = 'markdown';
 const renderer = new ReactRenderer({
   renderers: {
     CodeBlock: (props: Props) => (
       <p>
-        <AkCodeBlock text={props.literal} language={props.language} />
+        <AkCodeBlock
+          text={props.literal}
+          language={props.language || markdown}
+        />
       </p>
     ),
     Code: (props: Props) => (
-      <AkCode text={props.literal} language={props.language} />
+      <AkCode text={props.literal} language={props.language || markdown} />
     ),
     Heading,
   },

@@ -42,7 +42,7 @@ class UploaderExample extends Component<
       this.setState({ processingStatus });
 
       if (processingStatus === 'pending') {
-        setTimeout(() => this.fetchFile(id), 1000);
+        window.setTimeout(() => this.fetchFile(id), 1000);
       } else {
         const fileURL = await store.getFileImageURL(id);
 

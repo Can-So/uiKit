@@ -94,7 +94,7 @@ describe('Renderer bridge', () => {
     taskCheckbox.simulate('change');
 
     // Wait for next tick for provider to receive updates.
-    setTimeout(() => {
+    window.setTimeout(() => {
       expect(spy.calledTwice).to.equal(true);
       expect(spy.args).to.deep.equal([
         ['6bf53903-9438-42fb-a7f3-a6a41dd33fb8', 'DONE'],
@@ -119,7 +119,7 @@ describe('Renderer bridge', () => {
     taskCheckbox.simulate('change');
 
     // Wait for next tick for provider to receive updates.
-    setTimeout(() => {
+    window.setTimeout(() => {
       expect(spy.calledTwice).to.equal(true);
       expect(spy.args).to.deep.equal([
         // Initial change

@@ -89,7 +89,7 @@ export class TimerFactory implements Core.TimerFactoryInterop {
     callback: TimerCallback,
     msecInterval: number,
   ): TimerHandle {
-    return setInterval(callback, msecInterval);
+    return window.setInterval(callback, msecInterval);
   }
 
   private static defaultStopper(handle: TimerHandle): void {

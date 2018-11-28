@@ -74,6 +74,38 @@ const logoLocation = {
 };
 
 export default md`
+## v14.x to v15.x
+In Version 15, we removed the onClick props. Icons are not focusable elements, they are only presentational.
+We recommend to wrap them into a link or a button if you need to click on them.
+
+${code`
+import BookIcon from '@atlaskit/icon/glyph/book';
+<Button onClick={() => {}}>
+  <BookIcon
+    label="Book"
+    primaryColor={colors.N0}
+    secondaryColor={colors.B400}
+    size="small"         
+  />
+</Button>
+`}
+
+${code`
+import EmojiIcon from '@atlaskit/icon/glyph/emoji';
+<Link>
+  <EmojiIcon
+    label="Yay"
+    primaryColor={colors.N0}
+    secondaryColor={colors.P300}
+    size="medium"         
+  />
+</Link>
+`}
+
+
+
+
+## v13.x to v14.x
 Version 14 of icons resorts our icons into better locations.
 There is a full explanation below, but to start, here are the icons
 that are affected.

@@ -63,7 +63,7 @@ export const createPlugin = (
             const selection = getSendableSelection(newState.selection);
             // Delay sending selection till next tick so that participants info
             // can go before it
-            setTimeout(
+            window.setTimeout(
               collabEditProvider.sendMessage.bind(collabEditProvider),
               0,
               {
