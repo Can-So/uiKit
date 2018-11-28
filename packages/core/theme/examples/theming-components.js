@@ -48,8 +48,8 @@ class Button extends Component<Props, State> {
     return (
       <Theme.Provider value={this.props.theme}>
         <Theme.Consumer hover={this.state.hover}>
-          {theme => {
-            const { backgroundColor, textColor: color } = theme;
+          {tokens => {
+            const { backgroundColor, textColor: color } = tokens;
             return (
               <button
                 onMouseEnter={this.onMouseEnter}

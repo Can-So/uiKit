@@ -74,9 +74,9 @@ export function Reset(props: {
   return (
     <ResetTheme.Provider value={props.theme}>
       <ResetTheme.Consumer>
-        {theme => {
+        {tokens => {
           return (
-            <Div {...{ ...theme, mode: undefined }} {...props}>
+            <Div {...{ ...tokens, mode: undefined }} {...props}>
               {props.children}
             </Div>
           );

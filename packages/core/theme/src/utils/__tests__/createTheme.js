@@ -8,8 +8,8 @@ test('component as a consumer', done => {
   const Theme = createTheme(() => ({ test: true }));
   mount(
     <Theme.Consumer>
-      {theme => {
-        expect(theme.test).toBe(true);
+      {tokens => {
+        expect(tokens.test).toBe(true);
         done();
       }}
     </Theme.Consumer>,
@@ -24,9 +24,9 @@ test('component as a provider (uses composition)', done => {
   mount(
     <Theme.Provider value={theme => ({ ...theme(), test2: true })}>
       <Theme.Consumer>
-        {theme => {
-          expect(theme.test1).toBe(true);
-          expect(theme.test2).toBe(true);
+        {tokens => {
+          expect(tokens.test1).toBe(true);
+          expect(tokens.test2).toBe(true);
           done();
         }}
       </Theme.Consumer>
@@ -54,8 +54,8 @@ test('cascade order', done => {
     <Theme.Provider value={context}>
       <Theme.Provider value={supplied}>
         <Theme.Consumer test>
-          {theme => {
-            expect(theme).toEqual({
+          {tokens => {
+            expect(tokens).toEqual({
               default: undefined,
               context: undefined,
               supplied: true,

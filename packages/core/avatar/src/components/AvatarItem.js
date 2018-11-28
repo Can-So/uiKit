@@ -102,11 +102,11 @@ class AvatarItem extends Component<Props> {
         {({ mode }) => (
           <ThemeItem.Provider value={this.props.theme}>
             <ThemeItem.Consumer>
-              {theme => {
+              {tokens => {
                 // maintain the illusion of a mask around presence/status
                 const borderColor = getBackgroundColor({
                   ...this.props,
-                  ...theme,
+                  ...tokens,
                   mode,
                 });
 

@@ -10,7 +10,7 @@ export function withTheme<Props: {}>(InnerComponent: ComponentType<Props>) {
   return function ComponentWithTheme(props: Props) {
     return (
       <Theme.Consumer>
-        {theme => <InnerComponent {...props} theme={theme} />}
+        {tokens => <InnerComponent {...props} theme={tokens} />}
       </Theme.Consumer>
     );
   };

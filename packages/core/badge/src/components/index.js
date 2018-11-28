@@ -75,8 +75,8 @@ export default class Badge extends Component<Props> {
         <GlobalTheme.Consumer>
           {({ mode }) => (
             <Theme.Consumer appearance={props.appearance} mode={mode}>
-              {theme => (
-                <Container {...theme}>
+              {tokens => (
+                <Container {...tokens}>
                   {typeof props.children === 'string' ? (
                     props.children
                   ) : (

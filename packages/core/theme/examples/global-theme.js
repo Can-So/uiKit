@@ -5,9 +5,9 @@ import Theme from '../src';
 
 export default () => (
   <Theme.Consumer>
-    {theme => (
+    {tokens => (
       <div>
-        The default mode is <code>{theme.mode}</code>.
+        The default mode is <code>{tokens.mode}</code>.
       </div>
     )}
   </Theme.Consumer>

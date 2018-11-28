@@ -39,10 +39,10 @@ export default class Lozenge extends PureComponent<Props> {
     return (
       <Theme.Provider value={props.theme}>
         <Theme.Consumer {...props}>
-          {theme => {
+          {tokens => {
             return (
-              <Container {...theme}>
-                <Content {...theme}>{props.children}</Content>
+              <Container {...tokens}>
+                <Content {...tokens}>{props.children}</Content>
               </Container>
             );
           }}

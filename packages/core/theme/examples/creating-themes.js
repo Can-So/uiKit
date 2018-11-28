@@ -12,13 +12,13 @@ type ThemeTokens = {
 
 const DisplayThemeColors = () => (
   <Theme.Consumer>
-    {theme =>
-      Object.keys(theme).map(k => (
+    {tokens =>
+      Object.keys(tokens).map(k => (
         <div
           key={k}
           style={{
-            backgroundColor: theme[k],
-            color: color(theme[k]).negate(),
+            backgroundColor: tokens[k],
+            color: color(tokens[k]).negate(),
             display: 'inline-block',
             marginBottom: 10,
             marginRight: 10,
