@@ -2,6 +2,10 @@ import * as React from 'react';
 import Context from '../Context';
 import { Client, ObjectState } from '../Client';
 import { v4 } from 'uuid';
+import {
+  BlockCardErroredView,
+  InlineCardErroredView,
+} from '@atlaskit/media-ui';
 
 export interface WithObjectRenderProps {
   state: ObjectState;
@@ -90,19 +94,43 @@ class InnerWithObject extends React.Component<
 
 export interface WithObjectProps {
   client?: Client;
+  isSelected?: boolean;
+  appearance: 'block' | 'inline';
   url: string;
   children: (props: WithObjectRenderProps) => React.ReactNode;
 }
 
 export function WithObject(props: WithObjectProps) {
-  const { client: clientFromProps, url, children } = props;
+  const {
+    client: clientFromProps,
+    url,
+    children,
+    isSelected,
+    appearance,
+  } = props;
   return (
     <Context.Consumer>
       {clientFromContext => {
         const client = clientFromProps || clientFromContext;
         if (!client) {
-          throw new Error(
-            '@atlaskit/smart-card: No client provided. Provide a client like <Card client={new Client()} url=""/> or <Provider client={new Client()}><Card url=""/></Provider>.',
+          console.error(
+            `No Smart Card client provided. Provide a client via prop <Card client={new Client()} /> or by wrapping with <SmartCardProvider><Card /></SmartCardProvider>.'`,
+          );
+
+          return appearance === 'inline' ? (
+            <InlineCardErroredView
+              url={url}
+              isSelected={isSelected}
+              message="Smart Card provider missing"
+              onClick={() => window.open(url)}
+            />
+          ) : (
+            <BlockCardErroredView
+              url={url}
+              isSelected={isSelected}
+              message="Smart Card provider missing"
+              onClick={() => window.open(url)}
+            />
           );
         }
         return (
