@@ -1,4 +1,3 @@
-export { InlineCardLinkView, InlineCardLinkViewProps } from './LinkView';
 export {
   InlineCardResolvingView,
   InlineCardResolvingViewProps,
