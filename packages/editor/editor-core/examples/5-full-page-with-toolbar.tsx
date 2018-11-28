@@ -89,6 +89,7 @@ export class ExampleEditor extends React.Component<Props> {
                 allowBreakout={true}
                 allowTextColor={true}
                 allowTextAlignment={true}
+                allowIndentation={true}
                 allowTables={{
                   allowColumnResizing: true,
                   allowMergeCells: true,

@@ -47,6 +47,7 @@ import {
   gridPlugin,
   alignment,
   editorDisabledPlugin,
+  indentationPlugin,
 } from '../plugins';
 
 /**
@@ -201,6 +202,10 @@ export default function createPluginsList(
         ? props.allowStatus.menuDisabled
         : false;
     plugins.push(statusPlugin({ menuDisabled }));
+  }
+
+  if (props.allowIndentation) {
+    plugins.push(indentationPlugin);
   }
 
   // UI only plugins

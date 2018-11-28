@@ -19,3 +19,12 @@ export const LINK = 'link';
 
 // Marks group for colors (text-color, background-color, etc).
 export const COLOR = 'color';
+
+// They need to be on their own group so that they can exclude each other
+// and also work when one of them is disabled.
+
+// Marks group for alignment.
+export const ALIGNMENT = 'alignment';
+
+// Marks group for indentation.
+export const INDENTATION = 'indentation';
