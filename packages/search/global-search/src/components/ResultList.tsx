@@ -17,6 +17,7 @@ import {
 } from '../model/Result';
 import { getAvatarForConfluenceObjectResult } from '../util/confluence-avatar-util';
 import { getDefaultAvatar } from '../util/jira-avatar-util';
+import ShiftReturn from '../assets/ShiftReturn';
 
 export interface Props {
   results: Result[];
@@ -93,6 +94,7 @@ export default class ResultList extends React.Component<Props> {
               containerName={confluenceResult.containerName}
               avatar={getAvatarForConfluenceObjectResult(confluenceResult)}
               analyticsData={analyticsData}
+              selectedIcon={ShiftReturn}
             />
           );
         }
@@ -114,6 +116,7 @@ export default class ResultList extends React.Component<Props> {
               subText={containerNameElement}
               {...avatarData}
               analyticsData={analyticsData}
+              selectedIcon={ShiftReturn}
             />
           );
         }
@@ -132,6 +135,7 @@ export default class ResultList extends React.Component<Props> {
               containerName={jiraResult.containerName}
               {...avatarData}
               analyticsData={analyticsData}
+              selectedIcon={'HELLO'}
             />
           );
         }
@@ -146,6 +150,7 @@ export default class ResultList extends React.Component<Props> {
               type={containerResult.analyticsType}
               avatarUrl={containerResult.avatarUrl}
               analyticsData={analyticsData}
+              selectedIcon={'HELLO'}
             />
           );
         }
@@ -163,6 +168,7 @@ export default class ResultList extends React.Component<Props> {
               mentionName={personResult.mentionName}
               presenceMessage={personResult.presenceMessage}
               analyticsData={analyticsData}
+              selectedIcon={'HELLO'}
               target="_blank"
             />
           );
