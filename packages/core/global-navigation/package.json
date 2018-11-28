@@ -15,9 +15,6 @@
     "@atlaskit/analytics-namespaced-context": "^2.1.2",
     "@atlaskit/analytics-next": "^3.1.1",
     "@atlaskit/avatar": "^14.1.4",
-    "@atlaskit/badge": "^9.1.5",
-    "@atlaskit/blanket": "^7.0.10",
-    "@atlaskit/docs": "^5.2.1",
     "@atlaskit/drawer": "^2.5.2",
     "@atlaskit/dropdown-menu": "^6.1.22",
     "@atlaskit/icon": "^14.6.1",
@@ -30,10 +27,8 @@
     "emotion": "^9.1.1",
     "emotion-theming": "^9.0.0",
     "prop-types": "^15.5.10",
-    "raf-schd": "^2.1.0",
     "react-dom": "^16.4.2",
     "react-transition-group": "^2.2.1",
-    "styled-components": "^3.2.6",
     "url-parse": "^1.4.3"
   },
   "peerDependencies": {
@@ -41,6 +36,7 @@
   },
   "devDependencies": {
     "@atlaskit/analytics-listeners": "^4.1.1",
+    "@atlaskit/docs": "^5.2.1",
     "@atlaskit/app-switcher": "^8.0.1",
     "@atlaskit/button": "^10.0.0",
     "@atlaskit/field-radio-group": "^4.0.11",
@@ -50,7 +46,6 @@
     "@atlaskit/toggle": "^5.0.11",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "fetch-mock": "^6.5.2",
-    "jest-in-case": "^1.0.2",
     "react-lorem-component": "^0.12.2"
   }
 }
