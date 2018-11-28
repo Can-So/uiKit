@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Avatar from '@atlaskit/avatar';
 import Navigation, { AkSearchDrawer } from '@atlaskit/navigation';
 import {
   randomJiraIconUrl,
@@ -14,12 +13,6 @@ import {
   PersonResult,
   ResultItemGroup,
 } from '../src';
-
-const defaultProps = {
-  resultId: 'result_id',
-};
-
-import ShiftReturn from '../assets/ShiftReturn';
 
 export default class extends React.Component {
   render() {
