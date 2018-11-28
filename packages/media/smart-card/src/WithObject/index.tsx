@@ -113,8 +113,9 @@ export function WithObject(props: WithObjectProps) {
       {clientFromContext => {
         const client = clientFromProps || clientFromContext;
         if (!client) {
+          // tslint:disable-next-line:no-console
           console.error(
-            `No Smart Card client provided. Provide a client via prop <Card client={new Client()} /> or by wrapping with <SmartCardProvider><Card /></SmartCardProvider>.'`,
+            `No Smart Card client provided. Provide a client via prop <Card client={new Client()} /> or by wrapping with a provider <SmartCardProvider><Card /></SmartCardProvider>.'`,
           );
 
           return appearance === 'inline' ? (
