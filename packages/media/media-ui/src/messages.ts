@@ -292,7 +292,7 @@ export const messages = defineMessages({
   zoom_in: {
     id: 'fabric.media.zoom_in',
     defaultMessage: 'zoom in',
-    description: 'Indicates the user can zoom out a file',
+    description: 'Indicates the user can zoom in a file',
   },
   remove_image: {
     id: 'fabric.media.remove_image',
