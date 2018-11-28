@@ -1,0 +1,1 @@
+- AnalyticsListeners should accept any promise-like client
