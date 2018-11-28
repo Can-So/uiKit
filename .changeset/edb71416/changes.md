@@ -1,0 +1,1 @@
+- Responsive wide breakout mode
