@@ -16,6 +16,7 @@ export interface ImagePlacerImageProps {
   onError: (errorMessage: string) => void;
 }
 
+// TODO: i18n https://product-fabric.atlassian.net/browse/MS-1261
 export const IMAGE_ERRORS = {
   BAD_URL: 'Invalid image url',
   LOAD_FAIL: 'Image failed to load',

@@ -104,12 +104,12 @@ export async function initialiseImagePreview(
   let img: HTMLImageElement;
 
   try {
-    const [_orientation, _img] = await Promise.all([
+    const result = await Promise.all([
       getOrientation(fileInfo.file),
       loadImage(fileInfo.src),
     ]);
-    orientation = _orientation;
-    img = _img;
+    orientation = result[0];
+    img = result[1];
   } catch (e) {
     return null;
   }
