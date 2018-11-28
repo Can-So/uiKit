@@ -28,15 +28,6 @@ ${code`import Form {
   for your Fields.
   
   ${(
-    <Example
-      packageName="@atlaskit/form"
-      Component={require('../examples/00-form-layout-example').default}
-      title="Form Layout"
-      source={require('!!raw-loader!../examples/00-form-layout-example')}
-    />
-  )}
-
-  ${(
     <Props
       props={require('!!extract-react-types-loader!../src/Form')}
       heading="Form Props"

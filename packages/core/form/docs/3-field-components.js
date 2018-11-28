@@ -24,14 +24,5 @@ ${(
 
   ${<ComponentsTable components={fieldComponents} />}
 
-  ${(
-    <Example
-      packageName="@atlaskit/form"
-      Component={require('../examples/01-form-fields-example').default}
-      title="Fields"
-      source={require('!!raw-loader!../examples/01-form-fields-example')}
-    />
-  )}
-
 
 `;

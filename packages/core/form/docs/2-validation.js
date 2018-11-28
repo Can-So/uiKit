@@ -23,15 +23,6 @@ ${code`import Form { Field, Validator } from '@atlaskit/form';`}
   Validation is available for both the FormState & FieldState. If you don't need form state management or validation you will only need to import Field & Validator.
 
   ${(
-    <Example
-      packageName="@atlaskit/form"
-      Component={require('../examples/03-validation-example').default}
-      title="Form & Field Validation"
-      source={require('!!raw-loader!../examples/03-validation-example')}
-    />
-  )}
-
-  ${(
     <Props
       props={require('!!extract-react-types-loader!../src/Field')}
       heading="Field Props"
