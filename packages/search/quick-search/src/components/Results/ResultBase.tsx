@@ -98,6 +98,7 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
     const {
       caption,
       elemAfter,
+      selectedIcon,
       href,
       target,
       icon,
@@ -124,6 +125,7 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
             subText={subText}
             text={text}
             textAfter={elemAfter}
+            selectedIcon={selectedIcon}
             linkComponent={context.linkComponent}
           />
         )}
