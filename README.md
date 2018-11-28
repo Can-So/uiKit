@@ -96,6 +96,11 @@ Next, to install packages, we use bolt, just calling it:
 bolt
 ```
 
+Then you can run the examples for an individual pakckage
+```sh
+yarn run start:<package-name>
+```
+
 For contributing back, check out our [contribution guide](http://atlaskit.atlassian.com/docs/guides/contributing)
 
 # Documentation
