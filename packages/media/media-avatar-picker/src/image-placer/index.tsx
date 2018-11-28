@@ -40,7 +40,7 @@ import {
 +------------------------+
 */
 
-/* pass onSaveImage prop function to receive an object with this API to render/return image */
+/* pass onImageActions prop function to receive an object with this API to access image at current view */
 export interface ImageActions {
   toCanvas: () => HTMLCanvasElement;
   toDataURL: () => string;
@@ -66,17 +66,6 @@ export interface ImagePlacerProps {
   onRenderError?: (errorMessage: string) => JSX.Element;
 }
 
-export interface ImagePlacerState {
-  imageWidth: number;
-  imageHeight: number;
-  originX: number;
-  originY: number;
-  zoom: number;
-  errorMessage?: string;
-  dragOrigin?: Vector2;
-  src?: string | File;
-}
-
 /* immutable prop defaults */
 export const DEFAULT_MAX_ZOOM = 2;
 export const DEFAULT_MARGIN = 28;
@@ -93,8 +82,8 @@ export const defaultProps = {
   containerWidth: DEFAULT_CONTAINER_SIZE,
   containerHeight: DEFAULT_CONTAINER_SIZE,
   margin: DEFAULT_MARGIN,
-  maxZoom: DEFAULT_MAX_ZOOM,
   zoom: DEFAULT_ZOOM,
+  maxZoom: DEFAULT_MAX_ZOOM,
   originX: DEFAULT_ORIGIN_X,
   originY: DEFAULT_ORIGIN_Y,
   useConstraints: DEFAULT_USE_CONSTRAINTS,
@@ -102,6 +91,17 @@ export const defaultProps = {
   useCircularClipWithActions: DEFAULT_USE_CIRCULAR_CLIP_WITH_ACTIONS,
   backgroundColor: DEFAULT_BACKGROUND_COLOR,
 };
+
+export interface ImagePlacerState {
+  imageWidth: number;
+  imageHeight: number;
+  originX: number;
+  originY: number;
+  zoom: number;
+  errorMessage?: string;
+  dragOrigin?: Vector2;
+  src?: string | File;
+}
 
 export class ImagePlacer extends React.Component<
   ImagePlacerProps,
