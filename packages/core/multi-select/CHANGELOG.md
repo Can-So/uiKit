@@ -1,5 +1,16 @@
 # @atlaskit/multi-select
 
+## 11.0.11
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/droplist@7.0.14
+  - @atlaskit/field-base@11.0.11
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/tag@6.1.1
+  - @atlaskit/icon@15.0.0
+
 ## 11.0.10
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

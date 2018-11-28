@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/table-tree",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "description": "A React Component for displaying expandable tables with tree-like hierarchies",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -20,8 +20,8 @@
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
     "@atlaskit/analytics-next": "^3.1.1",
-    "@atlaskit/button": "^10.0.0",
-    "@atlaskit/icon": "^14.6.1",
+    "@atlaskit/button": "^10.0.1",
+    "@atlaskit/icon": "^15.0.0",
     "@atlaskit/spinner": "^9.0.11",
     "@atlaskit/theme": "^6.2.1",
     "@babel/runtime": "^7.0.0",
@@ -35,10 +35,10 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^5.2.1",
+    "@atlaskit/docs": "^5.2.2",
     "@atlaskit/empty-state": "^3.1.2",
-    "@atlaskit/section-message": "^1.0.11",
-    "@atlaskit/select": "^6.1.8",
+    "@atlaskit/section-message": "^1.0.12",
+    "@atlaskit/select": "^6.1.9",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.0",

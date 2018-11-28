@@ -27,12 +27,14 @@ export type UserPickerProps = {
 
 export type UserPickerState = {
   users: User[];
-  value?: UserOption[];
+  value?: UserOption[] | UserOption;
   resultVersion: number;
   inflightRequest: number;
   count: number;
   hoveringClearIndicator: boolean;
   menuIsOpen: boolean;
+  inputValue: string;
+  preventFilter: boolean;
 };
 
 export interface HighlightRange {

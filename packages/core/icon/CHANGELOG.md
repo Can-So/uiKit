@@ -1,5 +1,10 @@
 # @atlaskit/icon
 
+## 15.0.0
+- [major] [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+
+  - Remove onClick props as icon is only a presentational placeholder. Please wrap icon into a Button or a Link component.
+
 ## 14.6.1
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

@@ -7,7 +7,7 @@ import {
 } from '../../../components/MultiValueContainer';
 import { renderProp } from '../_testUtils';
 
-describe('ValueContainer', () => {
+describe('MultiValueContainer', () => {
   beforeEach(() => {
     jest.useFakeTimers();
   });
