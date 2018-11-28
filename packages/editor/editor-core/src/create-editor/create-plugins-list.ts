@@ -85,10 +85,6 @@ export default function createPluginsList(
     plugins.push(alignment);
   }
 
-  if (props.quickInsert) {
-    plugins.push(quickInsertPlugin);
-  }
-
   if (props.allowInlineAction) {
     plugins.push(inlineActionPlugin);
   }
@@ -220,6 +216,10 @@ export default function createPluginsList(
   plugins.push(submitEditorPlugin);
   plugins.push(fakeTextCursorPlugin);
   plugins.push(floatingToolbarPlugin);
+
+  if (props.appearance !== 'mobile') {
+    plugins.push(quickInsertPlugin);
+  }
 
   if (props.appearance === 'message') {
     plugins.push(isMultilineContentPlugin);
