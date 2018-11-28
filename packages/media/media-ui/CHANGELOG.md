@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 7.8.1
+- [patch] [4c0c2a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c0c2a0):
+
+  - Fix Cards throwing Error when client is not provided.
+
 ## 7.8.0
 - [minor] [5a6de24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6de24):
 

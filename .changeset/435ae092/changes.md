@@ -1,1 +1,0 @@
-- Fix Cards throwing Error when client is not provided.

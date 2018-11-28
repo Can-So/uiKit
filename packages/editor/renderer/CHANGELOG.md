@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 31.0.5
+- [patch] [4c0c2a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c0c2a0):
+
+  - Fix Cards throwing Error when client is not provided.
+
 ## 31.0.4
 - Updated dependencies [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
   - @atlaskit/editor-test-helpers@6.2.22
