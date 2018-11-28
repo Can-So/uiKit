@@ -1,0 +1,1 @@
+- Fix mention plugin state in plugin
