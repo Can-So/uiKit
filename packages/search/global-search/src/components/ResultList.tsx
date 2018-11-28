@@ -17,7 +17,7 @@ import {
 } from '../model/Result';
 import { getAvatarForConfluenceObjectResult } from '../util/confluence-avatar-util';
 import { getDefaultAvatar } from '../util/jira-avatar-util';
-import Return from '../assets/Return';
+import DarkReturn from '../assets/DarkReturn';
 
 export interface Props {
   results: Result[];
@@ -94,7 +94,7 @@ export default class ResultList extends React.Component<Props> {
               containerName={confluenceResult.containerName}
               avatar={getAvatarForConfluenceObjectResult(confluenceResult)}
               analyticsData={analyticsData}
-              selectedIcon={<Return />}
+              selectedIcon={<DarkReturn />}
             />
           );
         }
@@ -116,7 +116,7 @@ export default class ResultList extends React.Component<Props> {
               subText={containerNameElement}
               {...avatarData}
               analyticsData={analyticsData}
-              selectedIcon={<Return />}
+              selectedIcon={<DarkReturn />}
             />
           );
         }
@@ -135,7 +135,7 @@ export default class ResultList extends React.Component<Props> {
               containerName={jiraResult.containerName}
               {...avatarData}
               analyticsData={analyticsData}
-              selectedIcon={<Return />}
+              selectedIcon={<DarkReturn />}
             />
           );
         }
@@ -150,7 +150,7 @@ export default class ResultList extends React.Component<Props> {
               type={containerResult.analyticsType}
               avatarUrl={containerResult.avatarUrl}
               analyticsData={analyticsData}
-              selectedIcon={<Return />}
+              selectedIcon={<DarkReturn />}
             />
           );
         }
@@ -168,7 +168,7 @@ export default class ResultList extends React.Component<Props> {
               mentionName={personResult.mentionName}
               presenceMessage={personResult.presenceMessage}
               analyticsData={analyticsData}
-              selectedIcon={<Return />}
+              selectedIcon={<DarkReturn />}
               target="_blank"
             />
           );
