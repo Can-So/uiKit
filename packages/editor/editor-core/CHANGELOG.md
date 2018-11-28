@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 89.1.0
+- [minor] [7c9dcba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c9dcba):
+
+  - Responsive wide breakout mode
+
 ## 89.0.8
 - [patch] [6c90bb9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c90bb9):
 
