@@ -1,5 +1,10 @@
 # @atlaskit/analytics-listeners
 
+## 4.1.2
+- [patch] [e981882](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e981882):
+
+  - Add media tag to analytics tags sent by media listener
+
 ## 4.1.1
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

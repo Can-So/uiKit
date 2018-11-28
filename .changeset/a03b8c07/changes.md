@@ -1,1 +1,0 @@
-- FS-3208 only display 'name' if same value as 'publicName' 
