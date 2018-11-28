@@ -69,10 +69,10 @@ class Example extends Component<{}, ExampleState> {
   renderFileState = (): ReactNode => {
     const { fileStates } = this.state;
     const states = Object.keys(fileStates).map(id => {
-      let name: string = '';
-      const state = fileStates[id];
-      if (state.status !== 'error') {
-        name = state.name;
+      let name = '';
+      const fileState = fileStates[id];
+      if (fileState.status !== 'error') {
+        name = fileState.name;
       }
 
       return (
