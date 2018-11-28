@@ -16,7 +16,7 @@ export type RouterLinkProps = {
   replace?: boolean;
   subNav?: Array<NavGroup>;
   to?: string | Record<string, string | Location>;
-  title?: string;
+  text: string;
   isSelected?: ((param1: string, param2: string) => boolean) | boolean;
   isCompact?: boolean;
   iconSelected?: boolean;

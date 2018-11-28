@@ -54,7 +54,6 @@ export default class ChangelogExplorer extends React.Component<Props, State> {
       return currPath === filePath;
     });
     const { isInvalid, range } = this.state;
-
     const Content = Loadable<{}, ResolvedLog>({
       loading: () => <Loading />,
       loader: async () =>

@@ -1,10 +1,19 @@
 import { Logs } from '../components/ChangeLog';
 
-export const divvyChangelog = (
-  changelog: { default: string } | string,
-): Logs => {
-  const stringChangelog =
-    typeof changelog === 'string' ? changelog : changelog.default;
+export type Changelog = { default: { default: string } | string } | string;
+
+export const divvyChangelog = (changelog: Changelog): Logs => {
+  let stringChangelog;
+  if (
+    typeof changelog === 'object' &&
+    typeof changelog.default === 'object' &&
+    changelog.default.default
+  )
+    stringChangelog = changelog.default.default;
+  else if (typeof changelog === 'object' && changelog.default)
+    stringChangelog = changelog.default;
+  else if (typeof changelog === 'string') stringChangelog = changelog;
+
   const splitToken = `__CHANGELOG_SPLIT_${Date.now()}__`;
   return stringChangelog
     .replace(/[\n\r\s]## /g, `${splitToken}## `)

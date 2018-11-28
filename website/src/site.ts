@@ -3,9 +3,9 @@ import { Directory, File } from './types';
 // SITE_DATA is dynamically generated at runtime by bolt-fs-loader.
 // Configuration for bolt-fs-loader is in webpack.config.js since it needs to be dynamically created
 // depending on the subset of packages we want to represent on the website.
-// @ts-ignore
+// @ts-ignore: Those data are populated at run-time and it is not possible to declare those file in typescript.
 import data from './SITE_DATA';
-// @ts-ignore
+// @ts-ignore: Those data are populated at run-time and it is not possible to declare those file in typescript.
 import NAV_DATA from './NAV_DATA';
 import * as fs from './utils/fs';
 

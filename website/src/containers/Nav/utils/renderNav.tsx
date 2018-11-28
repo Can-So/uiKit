@@ -26,7 +26,6 @@ export default function renderNav(
         const isSelected = pathname === item.to;
         const icon =
           isSelected || isAncestor ? item.iconSelected || item.icon : item.icon;
-
         return item.external ? (
           <ExternalNavigationItem
             key={item.title}
@@ -41,7 +40,7 @@ export default function renderNav(
             href={item.to}
             icon={icon}
             onClick={onClick}
-            title={item.title}
+            text={item.title}
             isSelected={isSelected}
             pathname={pathname}
             subNav={item.items}

@@ -9,7 +9,7 @@ import { Window } from './types';
 insertStyleSheetInHead(cssResetStyles);
 
 const componentNode = document.getElementById('examples');
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && componentNode) {
   (window as Window).unmountApp = function unmountApp() {
     return unmountComponentAtNode(componentNode);
   };
