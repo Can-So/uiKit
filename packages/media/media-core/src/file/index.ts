@@ -26,22 +26,22 @@ const POLLING_INTERVAL = 1000;
 const maxNumberOfItemsPerCall = 100;
 
 export const getItemsFromKeys = (
-  keys: DataloaderKey[],
-  items: FileItem[],
+  dataloaderKeys: DataloaderKey[],
+  fileItems: FileItem[],
 ): DataloaderResult[] => {
-  const itemsByKey: { [id: string]: DataloaderResult } = items.reduce(
-    (prev: { [id: string]: DataloaderResult }, next) => {
-      const { id, collection } = next;
+  const itemsByKey: { [id: string]: DataloaderResult } = fileItems.reduce(
+    (prev, nextFileItem) => {
+      const { id, collection } = nextFileItem;
       const key = FileStreamCache.createKey(id, { collectionName: collection });
 
-      prev[key] = next.details;
+      prev[key] = nextFileItem.details;
 
       return prev;
     },
     {},
   );
 
-  return keys.map(dataloaderKey => {
+  return dataloaderKeys.map(dataloaderKey => {
     const { id, collection } = dataloaderKey;
     const key = FileStreamCache.createKey(id, { collectionName: collection });
 
@@ -69,7 +69,7 @@ export class FileFetcher {
   batchLoadingFunc = async (keys: DataloaderKey[]) => {
     const nonCollectionName = '__media-single-file-collection__';
     const fileIdsByCollection = keys.reduce(
-      (prev: { [collectionName: string]: string[] }, next) => {
+      (prev, next) => {
         const collectionName = next.collection || nonCollectionName;
         const fileIds = prev[collectionName] || [];
 

@@ -267,8 +267,6 @@ describe('Context', () => {
     });
 
     it('should poll for changes and return the latest file state', done => {
-      jest.useFakeTimers();
-
       const context = createContext();
       let getFileCalledTimes = 0;
       const getItems = jest.fn().mockImplementation(() => {
@@ -299,7 +297,6 @@ describe('Context', () => {
 
       const observer = context.file.getFileState(id);
       const next = jest.fn();
-
       observer.subscribe({
         next,
         complete() {
@@ -310,8 +307,6 @@ describe('Context', () => {
           done();
         },
       });
-
-      process.nextTick(jest.runAllTimers);
     });
 
     it('should pass options down', () => {
