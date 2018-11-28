@@ -90,6 +90,10 @@ export interface EditorProps {
   // To enable, you need to also provide a `taskDecisionProvider`. You will most likely need backend ADF storage for this feature.
   allowTasksAndDecisions?: boolean;
 
+  // Enables new breakout mark.
+  // This mark is being used for making code-blocks breakout.
+  allowBreakout?: boolean;
+
   // Enables horizontal rules.
   allowRule?: boolean;
 
@@ -112,7 +116,7 @@ export interface EditorProps {
   // This is a temporary setting for Confluence until we ship smart cards. **Please do not use.**
   allowJiraIssue?: boolean;
 
-  // Set this to allow unsupported content in the editor.
+  // Deprecated. Defaults to true.
   // Anything it doesn’t understand it will wrap in an unsupported block or inline node.
   // It will render a gray non editable box.
   allowUnsupportedContent?: boolean;
@@ -140,12 +144,22 @@ export interface EditorProps {
   allowInlineAction?: boolean;
 
   // Temporary flag to enable layouts while it's under development
-  allowLayouts?: boolean;
+  allowLayouts?:
+    | boolean
+    | {
+        allowBreakout: boolean;
+      };
 
-  // Enable status.
-  allowStatus?: boolean;
+  // Enable status, if menuDisabled is passed then plugin is enabled by default
+  allowStatus?:
+    | boolean
+    | {
+        menuDisabled: boolean;
+      };
 
   allowDynamicTextSizing?: boolean;
+
+  allowTextAlignment?: boolean;
 
   // Set to enable the quick insert menu i.e. '/' key trigger.
   // You can also provide your own insert menu options that will be shown in addition to the enabled

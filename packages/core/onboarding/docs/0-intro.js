@@ -1,42 +1,83 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  The spotlight component is used typically during onboarding to highlight elements
-  of the UI to the user in a modal dialog.
+  This package contains a number of components to help highlight product changes to users.
+  These components can be used together to implement various
+  [First Impressions](https://atlassian.design/guidelines/product/first-impressions/first-impressions-overview)
+  patterns.
 
-  ## Example
+  ## Usage
+
+  ${code`import {
+  Modal,
+  Spotlight,
+  SpotlightCard,
+  SpotlightManager,
+  SpotlightTarget,
+  SpotlightTransition,
+  SpotlightPulse
+} from '@atlaskit/onboarding';`}
+
+  ## Spotlight
+
+  This component can be used implement a spotlight tour.
+
   ${(
     <Example
       packageName="@atlaskit/onboarding"
       Component={require('../examples/10-spotlight-basic').default}
-      title="Basic"
+      title="Spotlight Tour"
       source={require('!!raw-loader!../examples/10-spotlight-basic')}
     />
   )}
-  ## Modal
+
   ${(
     <Props
-      props={require('!!extract-react-types-loader!../src/components/Modal')}
-    />
-  )}
-  ## Spotlight
-  ${(
-    <Props
+      heading="Spotlight Props"
       props={require('!!extract-react-types-loader!../src/components/Spotlight')}
     />
   )}
-  ## SpotlightManager
+
+  ## SpotlightCard
+
+  The example below the number of appearances.
+
   ${(
-    <Props
-      props={require('!!extract-react-types-loader!../src/components/SpotlightManager')}
+    <Example
+      packageName="@atlaskit/onboarding"
+      Component={require('../examples/00-different-spotlights').default}
+      title="Spotlight Cards"
+      source={require('!!raw-loader!../examples/00-different-spotlights')}
     />
   )}
-  ## SpotlightTarget
+
   ${(
     <Props
-      props={require('!!extract-react-types-loader!../src/components/SpotlightTarget')}
+      heading="SpotlightCard Props"
+      props={require('!!extract-react-types-loader!../src/components/SpotlightCard')}
+    />
+  )}
+
+  ## Benefits Modal
+
+  If the product change is large enough, this component can be used to outline the
+  benefits of the change to the user.
+
+  ${(
+    <Example
+      packageName="@atlaskit/onboarding"
+      Component={require('../examples/99-modal-basic').default}
+      title="Benefits Modal"
+      source={require('!!raw-loader!../examples/99-modal-basic')}
+    />
+  )}
+
+  ${(
+    <Props
+      heading="Benefits Modal Props"
+      props={require('!!extract-react-types-loader!../src/components/Modal')}
     />
   )}
 

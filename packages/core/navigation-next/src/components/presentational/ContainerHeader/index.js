@@ -33,9 +33,7 @@ const modifyStyles = defaultStyles => ({
   },
 });
 
-export default class ContainerHeader extends PureComponent<
-  ContainerHeaderProps,
-> {
+export default class ContainerHeader extends PureComponent<ContainerHeaderProps> {
   static defaultProps = {
     styles: styleReducerNoOp,
     isSelected: false,

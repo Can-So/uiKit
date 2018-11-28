@@ -49,7 +49,7 @@ export class MentionInternal extends React.PureComponent<Props, {}> {
     if (onMouseEnter) {
       onMouseEnter(id, text, e);
     }
-    this.hoverTimeout = setTimeout(() => {
+    this.hoverTimeout = window.setTimeout(() => {
       if (onHover) {
         onHover();
       }

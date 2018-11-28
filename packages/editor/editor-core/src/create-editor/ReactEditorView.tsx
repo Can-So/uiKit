@@ -1,15 +1,21 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { EditorState, Transaction, Selection } from 'prosemirror-state';
 import { EditorView, DirectEditorProps } from 'prosemirror-view';
 import { intlShape } from 'react-intl';
 
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { ProviderFactory, Transformer } from '@atlaskit/editor-common';
 import { EventDispatcher, createDispatch } from '../event-dispatcher';
 import { processRawValue } from '../utils';
 import createPluginList from './create-plugins-list';
-import { EditorState, Transaction, Selection } from 'prosemirror-state';
-import { ProviderFactory, Transformer } from '@atlaskit/editor-common';
 import { EditorProps, EditorConfig, EditorPlugin } from '../types';
 import { PortalProviderAPI } from '../ui/PortalProvider';
+import {
+  pluginKey as editorDisabledPluginKey,
+  EditorDisabledPluginState,
+} from '../plugins/editor-disabled';
+
 import {
   processPluginsList,
   createSchema,
@@ -20,6 +26,7 @@ import {
 
 export interface EditorViewProps {
   editorProps: EditorProps;
+  createAnalyticsEvent?: CreateUIAnalyticsEventSignature;
   providerFactory: ProviderFactory;
   portalProviderAPI: PortalProviderAPI;
   render?: (
@@ -49,7 +56,7 @@ export interface EditorViewProps {
   ) => void;
 }
 
-export default class ReactEditorView<T = {}> extends React.PureComponent<
+export default class ReactEditorView<T = {}> extends React.Component<
   EditorViewProps & T
 > {
   view?: EditorView;
@@ -71,11 +78,24 @@ export default class ReactEditorView<T = {}> extends React.PureComponent<
     this.editorState = this.createEditorState({ props, replaceDoc: true });
   }
 
+  private broadcastDisabled = (disabled: boolean) => {
+    const editorView = this.view;
+    if (editorView) {
+      const tr = editorView.state.tr.setMeta(editorDisabledPluginKey, {
+        editorDisabled: disabled,
+      } as EditorDisabledPluginState);
+
+      tr.setMeta('isLocal', true);
+      editorView.dispatch(tr);
+    }
+  };
+
   componentWillReceiveProps(nextProps: EditorViewProps) {
     if (
       this.view &&
       this.props.editorProps.disabled !== nextProps.editorProps.disabled
     ) {
+      this.broadcastDisabled(!!nextProps.editorProps.disabled);
       // Disables the contentEditable attribute of the editor if the editor is disabled
       this.view.setProps({
         editable: state => !nextProps.editorProps.disabled,
@@ -103,8 +123,11 @@ export default class ReactEditorView<T = {}> extends React.PureComponent<
   }
 
   // Helper to allow tests to inject plugins directly
-  getPlugins(editorProps: EditorProps): EditorPlugin[] {
-    return createPluginList(editorProps);
+  getPlugins(
+    editorProps: EditorProps,
+    createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
+  ): EditorPlugin[] {
+    return createPluginList(editorProps, createAnalyticsEvent);
   }
 
   createEditorState = (options: {
@@ -127,7 +150,10 @@ export default class ReactEditorView<T = {}> extends React.PureComponent<
     }
 
     this.config = processPluginsList(
-      this.getPlugins(options.props.editorProps),
+      this.getPlugins(
+        options.props.editorProps,
+        options.props.createAnalyticsEvent,
+      ),
       options.props.editorProps,
     );
     const schema = createSchema(this.config);
@@ -222,6 +248,10 @@ export default class ReactEditorView<T = {}> extends React.PureComponent<
         eventDispatcher: this.eventDispatcher,
         transformer: this.contentTransformer,
       });
+
+      // Set the state of the EditorDisabled plugin to the current value
+      this.broadcastDisabled(!!this.props.editorProps.disabled);
+
       // Force React to re-render so consumers get a reference to the editor view
       this.forceUpdate();
     } else if (this.view && !node) {

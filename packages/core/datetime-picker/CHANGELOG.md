@@ -1,5 +1,40 @@
 # @atlaskit/datetime-picker
 
+## 6.3.19
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/calendar@7.0.14
+  - @atlaskit/field-base@11.0.11
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/select@6.1.9
+  - @atlaskit/icon@15.0.0
+
+## 6.3.18
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/calendar@7.0.13
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/popper@0.3.2
+  - @atlaskit/select@6.1.8
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/field-range@5.0.9
+  - @atlaskit/button@10.0.0
+
+## 6.3.17
+- [patch] [b332c91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b332c91):
+
+  - upgrades verison of react-scrolllock to SSR safe version
+
+## 6.3.16
+- [patch] Datetime Picker modal sticks to bottom, if needed [0149735](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0149735)
+
+## 6.3.15
+- [patch] Added logic to onCalendarChange for impossibly large dates. These dates now get converted to the last day of the month, as opposed to default js behaviour. '2018-02-31' now converts to '2018-02-28' as opposed to '2018-03-02' [4b23458](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b23458)
+
 ## 6.3.14
 - [patch] Fixing blank state for datetime-picker in Firefox.  [0e6d838](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e6d838)
 

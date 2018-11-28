@@ -43,10 +43,6 @@ describe('JIRA wiki markup - Text effects', () => {
 another one is here and it should* not be applied`,
     ],
     [
-      'should render content inside code mark as plain text',
-      'This is a {{monospace *bold* thingy}}',
-    ],
-    [
       "should use code mark first if it's the inner mark",
       'This is a *bold {{monospace}} thingy*',
     ],
@@ -55,6 +51,14 @@ another one is here and it should* not be applied`,
       `https://app.datadoghq.com/screen/220506/product-fabric-content-service?tv_mode=true
 
 https://app.datadoghq.com/screen/282018/product-fabric-adf-service?tv_mode=true#close`,
+    ],
+    [
+      '[CS-576] should allow {color} macro in formatters',
+      'This is _{color:red}*Strong Red and Italic*{color}_',
+    ],
+    [
+      'should not apply strong when ending line is two strong symbols',
+      '*not valid strong **',
     ],
   ];
 

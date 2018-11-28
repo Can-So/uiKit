@@ -1,5 +1,58 @@
 # @atlaskit/drawer
 
+## 2.5.3
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/icon@15.0.0
+
+## 2.5.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/blanket@7.0.10
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 2.5.1
+- [patch] [f480bab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f480bab):
+
+  - Convert padding to margin to fix a scrolling issue in global-search
+
+## 2.5.0
+- [minor] [aacb208](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aacb208):
+
+  - Export a new component, DrawerItemTheme, for theming the Drawer with the navigation item theme.
+
+## 2.4.0
+- [minor] [6746a42](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6746a42):
+
+  - Add extended width option and width transitions
+
+## 2.3.1
+- [patch] [a6e5197](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6e5197):
+
+  - 1) Add canUseDOM to fix SSR issue in Drawer. 2) Update SSR tests in navigation-next to exclude the examples with Hash, Router or Dom
+
+## 2.3.0
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+- [minor] [670597d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/670597d):
+
+  - Make `width` prop optional and default it to 'narrow'
+
+## 2.2.0
+- [minor] [90f4995](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90f4995):
+
+  Update drawer width with 'medium' width
+
 ## 2.1.3
 - [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
 

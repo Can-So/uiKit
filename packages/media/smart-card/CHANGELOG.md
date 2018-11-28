@@ -1,5 +1,100 @@
 # @atlaskit/smart-card
 
+## 9.0.0
+- [major] [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+
+  - Introduced pending state (which is represented as a link) and a race between resolving state and the data fetch.
+
+## 8.8.5
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/checkbox@5.0.7
+  - @atlaskit/form@4.0.19
+  - @atlaskit/inline-message@7.0.8
+  - @atlaskit/radio@0.4.2
+  - @atlaskit/media-ui@7.6.2
+  - @atlaskit/icon-file-type@3.0.0
+  - @atlaskit/icon-object@3.0.0
+  - @atlaskit/icon@15.0.0
+
+## 8.8.4
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/checkbox@5.0.6
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/field-text-area@4.0.12
+  - @atlaskit/form@4.0.18
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/icon-file-type@2.0.1
+  - @atlaskit/icon-object@2.0.1
+  - @atlaskit/inline-message@7.0.7
+  - @atlaskit/page@8.0.11
+  - @atlaskit/radio@0.4.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/media-ui@7.6.1
+  - @atlaskit/field-range@5.0.9
+  - @atlaskit/button@10.0.0
+
+## 8.8.3
+- Updated dependencies [b42680b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b42680b):
+  - @atlaskit/form@4.0.17
+  - @atlaskit/radio@0.4.0
+
+## 8.8.2
+- [patch] [b859e08](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b859e08):
+
+  - Update dependent versions
+
+## 8.8.1
+- Updated dependencies [8199088](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8199088):
+  - @atlaskit/form@4.0.16
+  - @atlaskit/radio@0.3.0
+
+## 8.8.0
+- [minor] [93b31fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/93b31fa):
+
+  - Add support for nested <SmartCardProvider />
+
+## 8.7.1
+- [patch] [00cd9a8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00cd9a8):
+
+  - Add tag support for inline task card.
+
+## 8.7.0
+- [minor] [e89e244](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e89e244):
+
+  - Implemented time-based caching for the client.
+
+## 8.6.3
+- [patch] [4b989c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b989c3):
+
+  - Fix inline cards crashing after change to the format.
+
+## 8.6.2
+- [patch] [a567cc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a567cc9):
+
+  - Improve rendering of Smart Cards.
+
+## 8.6.1
+- [patch] [7bc4461](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7bc4461):
+
+  - ED-5565: support connecting external React.Context to nodeviews
+
+## 8.6.0
+- [minor] [1aa57ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1aa57ab):
+
+  Clean up for media up and new task converter for smart cards
+- [minor] [d310628](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d310628):
+
+  Added a converter for atlassian:task type
+
+## 8.5.2
+- [patch] ED-5439: add block smart cards, toolbar switcher [5f8bdfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f8bdfe)
+
+## 8.5.1
+- [patch] fix cards being reloaded with the same definition id [b4b6a45](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b4b6a45)
+
 ## 8.5.0
 - [minor] Added task converter  [8678076](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8678076)
 

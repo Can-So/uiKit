@@ -410,12 +410,12 @@ export const exampleDocument = {
     },
     {
       type: 'layoutSection',
-      attrs: {
-        layoutType: 'two_equal',
-      },
       content: [
         {
           type: 'layoutColumn',
+          attrs: {
+            width: 50,
+          },
           content: [
             {
               type: 'paragraph',
@@ -449,6 +449,9 @@ export const exampleDocument = {
         },
         {
           type: 'layoutColumn',
+          attrs: {
+            width: 50,
+          },
           content: [
             {
               type: 'paragraph',
@@ -497,12 +500,12 @@ export const exampleDocument = {
     },
     {
       type: 'layoutSection',
-      attrs: {
-        layoutType: 'three_equal',
-      },
       content: [
         {
           type: 'layoutColumn',
+          attrs: {
+            width: 33.33,
+          },
           content: [
             {
               type: 'paragraph',
@@ -536,6 +539,9 @@ export const exampleDocument = {
         },
         {
           type: 'layoutColumn',
+          attrs: {
+            width: 33.33,
+          },
           content: [
             {
               type: 'paragraph',
@@ -569,6 +575,9 @@ export const exampleDocument = {
         },
         {
           type: 'layoutColumn',
+          attrs: {
+            width: 33.33,
+          },
           content: [
             {
               type: 'paragraph',

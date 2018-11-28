@@ -1,5 +1,105 @@
 # @atlaskit/media-viewer
 
+## 27.0.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/media-ui@7.6.2
+  - @atlaskit/icon@15.0.0
+
+## 27.0.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/media-ui@7.6.1
+  - @atlaskit/field-range@5.0.9
+  - @atlaskit/button@10.0.0
+  - @atlaskit/analytics-next-types@3.1.2
+
+## 27.0.0
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 26.0.1
+- [patch] [8584c5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8584c5a):
+
+  - Fix zoom not sorting numerical values correctly
+
+## 26.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+  - @atlaskit/media-store@8.3.0
+
+## 25.0.3
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-test-helpers@18.2.11
+  - @atlaskit/media-card@42.0.0
+
+## 25.0.2
+- [patch] [714f6ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/714f6ba):
+
+  - Add analytics for navigation events in MediaViewer
+
+## 25.0.1
+- [patch] [74c9cd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/74c9cd1):
+
+  - Add analytics for zoom controls
+
+## 25.0.0
+- [major] [023cb45"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/023cb45"
+d):
+
+  - Add i18n support to MediaViewer
+
+## 24.1.11
+- [patch] [12afe80"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/12afe80"
+d):
+
+  - Move mocks directory structure to fix dist build issues
+
+## 24.1.10
+- [patch] [4b84e8b"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b84e8b"
+d):
+
+  - Avoid unnecessary render cycle in ItemViewer
+
+## 24.1.9
+- [patch] [a787ee9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a787ee9):
+
+  Add analytics for downloads
+
+## 24.1.8
+- [patch] Make DocViewer inherit from BaseViewer [a2ee570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2ee570)
+
+## 24.1.7
+- [patch] Make VideoViewer inherit from BaseViewer [2faedda](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2faedda)
+
+## 24.1.6
+- [patch] Make AudioViewer inherit from BaseViewer [5f7e58b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f7e58b)
+
+## 24.1.5
+- [patch] Add analytics for the header download button [4e8cacc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e8cacc)
+
+## 24.1.4
+- [patch] MS-1032: get rid of risky lifecycle hooks in ImageViewer [0795871](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0795871)
+
 ## 24.1.3
 - [patch] Updated dependencies [ced32d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ced32d0)
   - @atlaskit/media-card@41.1.2

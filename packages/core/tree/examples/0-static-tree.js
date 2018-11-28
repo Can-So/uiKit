@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Navigation, { AkNavigationItem } from '@atlaskit/navigation';
 import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
 import ChevronRightIcon from '@atlaskit/icon/glyph/chevron-right';
-import Tree, { type RenderItemParams, type TreeItem } from '../src/';
+import Tree, { type RenderItemParams, type TreeItem } from '../src';
 import { treeWithTwoBranches } from '../mockdata/treeWithTwoBranches';
 
 const Container = styled.div`

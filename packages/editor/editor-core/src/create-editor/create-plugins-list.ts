@@ -1,6 +1,8 @@
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 import { EditorPlugin, EditorProps } from '../types';
 import {
   basePlugin,
+  breakoutPlugin,
   blockTypePlugin,
   clearMarksOnChangeToEmptyDocumentPlugin,
   codeBlockPlugin,
@@ -43,12 +45,14 @@ import {
   floatingToolbarPlugin,
   statusPlugin,
   gridPlugin,
+  alignment,
+  editorDisabledPlugin,
 } from '../plugins';
 
 /**
  * Returns list of plugins that are absolutely necessary for editor to work
  */
-export function getDefaultPluginsList(props: EditorProps = {}): EditorPlugin[] {
+export function getDefaultPluginsList(props: EditorProps): EditorPlugin[] {
   return [
     pastePlugin,
     basePlugin,
@@ -59,14 +63,27 @@ export function getDefaultPluginsList(props: EditorProps = {}): EditorPlugin[] {
     textFormattingPlugin(props.textFormatting || {}),
     widthPlugin,
     typeAheadPlugin,
+    unsupportedContentPlugin,
+    editorDisabledPlugin,
   ];
 }
 
 /**
  * Maps EditorProps to EditorPlugins
  */
-export default function createPluginsList(props: EditorProps): EditorPlugin[] {
+export default function createPluginsList(
+  props: EditorProps,
+  createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
+): EditorPlugin[] {
   const plugins = getDefaultPluginsList(props);
+
+  if (props.allowBreakout) {
+    plugins.push(breakoutPlugin);
+  }
+
+  if (props.allowTextAlignment) {
+    plugins.push(alignment);
+  }
 
   if (props.quickInsert) {
     plugins.push(quickInsertPlugin);
@@ -98,7 +115,7 @@ export default function createPluginsList(props: EditorProps): EditorPlugin[] {
   }
 
   if (props.mentionProvider) {
-    plugins.push(mentionsPlugin);
+    plugins.push(mentionsPlugin(createAnalyticsEvent));
   }
 
   if (props.emojiProvider) {
@@ -146,10 +163,6 @@ export default function createPluginsList(props: EditorProps): EditorPlugin[] {
     plugins.push(jiraIssuePlugin);
   }
 
-  if (props.allowUnsupportedContent) {
-    plugins.push(unsupportedContentPlugin);
-  }
-
   if (props.allowPanel) {
     plugins.push(panelPlugin);
   }
@@ -191,7 +204,11 @@ export default function createPluginsList(props: EditorProps): EditorPlugin[] {
   }
 
   if (props.allowStatus) {
-    plugins.push(statusPlugin);
+    const menuDisabled =
+      typeof props.allowStatus === 'object'
+        ? props.allowStatus.menuDisabled
+        : false;
+    plugins.push(statusPlugin({ menuDisabled }));
   }
 
   // UI only plugins

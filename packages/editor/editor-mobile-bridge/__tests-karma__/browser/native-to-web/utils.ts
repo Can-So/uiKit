@@ -6,7 +6,9 @@ import {
 } from '@atlaskit/editor-test-helpers';
 
 export async function mountEditor() {
-  const place = document.body.appendChild(document.createElement('div'));
+  const elem = document.createElement('div');
+  elem.setAttribute('id', 'editor');
+  const place = document.body.appendChild(elem);
   const mediaProvider = storyMediaProviderFactory({});
   await mediaProvider;
   const editor = mount(mobileEditor({ mediaProvider: mediaProvider }), {

@@ -41,7 +41,7 @@ class TransformerPanels extends React.PureComponent<Props, State> {
   state: State = { source: '', output: '' };
 
   componentDidMount() {
-    setTimeout(() => {
+    window.setTimeout(() => {
       this.props.actions.replaceDocument(this.state.source);
     });
   }

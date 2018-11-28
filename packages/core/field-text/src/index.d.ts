@@ -29,6 +29,7 @@ export interface Props {
   shouldFitContainer?: boolean;
   type?: string;
   value?: string;
+  isValidationHidden?: boolean;
 }
 
 export class FieldTextStateless extends Component<Props, {}> {}

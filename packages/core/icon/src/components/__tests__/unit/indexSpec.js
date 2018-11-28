@@ -5,10 +5,9 @@ import { mount, shallow } from 'enzyme';
 import path from 'path';
 import fs from 'fs';
 import { name } from '../../../../package.json';
-import * as bundle from '../../..';
 import { size } from '../../Icon';
 import BookIcon from '../../../../glyph/book';
-import components from '../../../../utils/icons';
+import DefaultIcon, { metadata, size as defaultSize } from '../../../../src';
 
 // List all files in a directory in Node.js recursively in a synchronous fashion
 const walkSync = (dir: string, filelist: string[]) => {
@@ -120,6 +119,9 @@ describe(name, () => {
         'editor/align-center',
         'editor/align-left',
         'editor/align-right',
+        'editor/align-image-center',
+        'editor/align-image-left',
+        'editor/align-image-right',
         'editor/attachment',
         'editor/bold',
         'editor/bullet-list',
@@ -266,6 +268,7 @@ describe(name, () => {
         'media-services/zoom-out',
         'mention',
         'menu',
+        'menu-expand',
         'more-vertical',
         'more',
         'notification-all',
@@ -295,6 +298,7 @@ describe(name, () => {
         'recent',
         'redo',
         'refresh',
+        'retry',
         'room-menu',
         'schedule-filled',
         'schedule',
@@ -348,7 +352,6 @@ describe(name, () => {
         'watch',
         'world-small',
         'star-large',
-        'star-outline',
         'world',
         'suitcase',
         'select-clear',
@@ -376,6 +379,9 @@ describe(name, () => {
         'editor/background-color',
         'editor/divider',
         'editor/horizontal-rule',
+        'editor/collapse',
+        'editor/expand',
+        'editor/settings',
         'department',
         'child-issues',
         'chevron-right-large',
@@ -415,25 +421,28 @@ describe(name, () => {
     });
 
     describe('bundle', () => {
-      it('has size export', () => expect(bundle.size).toEqual(size));
+      it('has size export', () => expect(defaultSize).toEqual(size));
 
       it('exports the Icon component', () => {
-        const { default: Icon } = bundle;
-        expect(new Icon({ label: 'My icon' })).toBeInstanceOf(Component);
+        expect(new DefaultIcon({ label: 'My icon' })).toBeInstanceOf(Component);
       });
     });
   });
 
   describe('component structure', () => {
-    it('should be possible to create the components', () => {
-      Object.keys(components)
-        .map(index => components[index])
-        .forEach(iconData => {
-          const Icon = iconData.component;
-          const wrapper = shallow(<Icon label="My icon" />);
-          expect(wrapper).not.toBe(undefined);
-          expect(Icon).toBeInstanceOf(Function);
-        });
+    it('should be possible to create the components', async () => {
+      const components = await Promise.all(
+        Object.keys(metadata).map(async (
+          key, // $ExpectError - we are fine with this being dynamic
+        ) => import(`../../../../glyph/${key}`)),
+      );
+
+      for (const icon of components) {
+        const Icon = icon.default;
+        const wrapper = shallow(<Icon label="My icon" />);
+        expect(wrapper).not.toBe(undefined);
+        expect(Icon).toBeInstanceOf(Function);
+      }
     });
   });
 

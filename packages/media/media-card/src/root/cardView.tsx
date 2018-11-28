@@ -52,6 +52,7 @@ export interface CardViewOwnProps extends SharedCardProps {
   readonly dataURI?: string;
   readonly progress?: number;
   readonly disableOverlay?: boolean;
+  readonly previewOrientation?: number;
 }
 
 export interface CardViewState {
@@ -71,10 +72,7 @@ export class CardViewBase extends React.Component<
   CardViewBaseProps,
   CardViewState
 > {
-  constructor(props: CardViewBaseProps) {
-    super(props);
-    this.state = {};
-  }
+  state: CardViewState = {};
 
   componentDidMount() {
     this.saveElementWidth();
@@ -146,8 +144,8 @@ export class CardViewBase extends React.Component<
     const wrapperDimensions = dimensions
       ? dimensions
       : isFileLikeIdentifier
-        ? getDefaultCardDimensions(appearance)
-        : undefined;
+      ? getDefaultCardDimensions(appearance)
+      : undefined;
     let card;
 
     if (mediaItemType === 'link') {
@@ -213,6 +211,7 @@ export class CardViewBase extends React.Component<
       selected,
       disableOverlay,
       mediaItemType,
+      previewOrientation,
     } = this.props;
 
     return (
@@ -230,6 +229,7 @@ export class CardViewBase extends React.Component<
         selected={selected}
         disableOverlay={disableOverlay}
         mediaItemType={mediaItemType}
+        previewOrientation={previewOrientation}
       />
     );
   };

@@ -11,72 +11,52 @@ import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
 import IssuesIcon from '@atlaskit/icon/glyph/issues';
 import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
 import SearchIcon from '@atlaskit/icon/glyph/search';
+import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
 import { JiraIcon, JiraWordmark } from '@atlaskit/logo';
-import { colors } from '@atlaskit/theme';
+import { colors, gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import {
   ContainerHeader,
   GlobalNav,
   GroupHeading,
+  HeaderSection,
   Item,
   ItemAvatar,
   LayoutManager,
+  MenuSection,
   NavigationProvider,
-  Section,
   Separator,
-  UIControllerSubscriber,
   modeGenerator,
   ThemeProvider,
+  Wordmark,
 } from '../src';
 
-function makeTestItem(key) {
-  return ({ children, className }: *) => (
-    <div data-webdriver-test-key={key} className={className}>
-      {children}
-    </div>
-  );
-}
+const gridSize = gridSizeFn();
 
 /**
  * Data
  */
 const globalNavPrimaryItems = [
   {
-    key: 'jira',
-    component: ({ className, children }: *) => (
-      <UIControllerSubscriber>
-        {navigationUIController => {
-          function onClick() {
-            if (navigationUIController.state.isCollapsed) {
-              navigationUIController.expand();
-            }
-            navigationUIController.togglePeek();
-          }
-          return (
-            <button
-              className={className}
-              onClick={onClick}
-              onMouseEnter={navigationUIController.peekHint}
-              onMouseLeave={navigationUIController.unPeekHint}
-            >
-              {children}
-            </button>
-          );
-        }}
-      </UIControllerSubscriber>
-    ),
+    id: 'jira',
     icon: ({ label }: { label: string }) => (
       <JiraIcon size="medium" label={label} />
     ),
     label: 'Jira',
   },
-  { key: 'search', icon: SearchIcon, label: 'Search' },
-  { key: 'create', icon: AddIcon, label: 'Add' },
+  { id: 'search', icon: SearchIcon, label: 'Search' },
+  { id: 'create', icon: AddIcon, label: 'Add' },
 ];
 
 const globalNavSecondaryItems = [
-  { icon: QuestionCircleIcon, label: 'Help', size: 'small' },
   {
+    id: 'icon-11-navigation',
+    icon: QuestionCircleIcon,
+    label: 'Help',
+    size: 'small',
+  },
+  {
+    id: 'icon-11-navigation-2',
     icon: () => (
       <Avatar
         borderColor="transparent"
@@ -87,115 +67,6 @@ const globalNavSecondaryItems = [
     ),
     label: 'Profile',
     size: 'small',
-  },
-];
-
-const productNavSections = [
-  {
-    key: 'header',
-    isRootLevel: true,
-    items: [
-      {
-        type: () => (
-          <div
-            data-webdriver-test-key="product-header"
-            css={{ padding: '12px 0' }}
-          >
-            <JiraWordmark />
-          </div>
-        ),
-        key: 'jira-wordmark',
-      },
-    ],
-  },
-  {
-    key: 'menu',
-    isRootLevel: true,
-    items: [
-      {
-        children: 'Group heading',
-        key: 'title',
-        type: GroupHeading,
-      },
-      {
-        before: DashboardIcon,
-        component: makeTestItem('product-item-dashboards'),
-        key: 'dashboards',
-        text: 'Dashboards',
-        type: Item,
-        isSelected: true,
-      },
-      {
-        before: FolderIcon,
-        component: makeTestItem('product-item-projects'),
-        key: 'projects',
-        text: 'Projects',
-        type: Item,
-      },
-      {
-        before: IssuesIcon,
-        component: makeTestItem('product-item-issues'),
-        key: 'issues',
-        text: 'Issues',
-        type: Item,
-      },
-    ],
-  },
-];
-
-const containerNavSections = [
-  {
-    key: 'header',
-    isRootLevel: true,
-    items: [
-      {
-        type: ContainerHeader,
-        component: makeTestItem('container-header'),
-        key: 'project-switcher',
-        before: itemState => (
-          <ItemAvatar itemState={itemState} appearance="square" />
-        ),
-        text: 'My software project',
-        subText: 'Software project',
-      },
-    ],
-  },
-  {
-    key: 'menu',
-    isRootLevel: true,
-    items: [
-      {
-        children: 'Group heading',
-        key: 'title',
-        type: GroupHeading,
-      },
-      {
-        before: BacklogIcon,
-        component: makeTestItem('container-item-backlog'),
-        isSelected: true,
-        key: 'backlog',
-        text: 'Backlog',
-        type: Item,
-      },
-      {
-        before: BoardIcon,
-        component: makeTestItem('container-item-sprints'),
-        key: 'sprints',
-        text: 'Active sprints',
-        type: Item,
-      },
-      {
-        before: GraphLineIcon,
-        component: makeTestItem('container-item-reports'),
-        key: 'reports',
-        text: 'Reports',
-        type: Item,
-      },
-      {
-        key: 'separator',
-        type: Separator,
-      },
-    ],
   },
 ];
 
@@ -215,30 +86,90 @@ const GlobalNavigation = makeTestComponent(
   />,
 );
 
-const RenderSection = ({ section }: *) => (
-  <div css={{ paddingTop: '16px' }}>
-    {section.map(({ key, isRootLevel, items }) => (
-      <Section key={key}>
-        {({ css }) => (
-          <div
-            css={{ ...css, ...(isRootLevel ? { padding: '0 16px' } : null) }}
-          >
-            {items.map(({ type: Component, ...props }: any) => (
-              <Component {...props} />
-            ))}
-          </div>
-        )}
-      </Section>
-    ))}
+const ProductNavigation = () => (
+  <div data-webdriver-test-key="product-navigation">
+    <HeaderSection>
+      {({ className }) => (
+        <div className={className}>
+          <Wordmark wordmark={JiraWordmark} />
+        </div>
+      )}
+    </HeaderSection>
+    <MenuSection>
+      {({ className }) => (
+        <div className={className}>
+          <Item
+            before={DashboardIcon}
+            text="Dashboards"
+            testKey="product-item-dashboards"
+          />
+          <Item
+            before={FolderIcon}
+            text="Projects"
+            testKey="product-item-projects"
+          />
+          <Item
+            before={IssuesIcon}
+            text="Issues"
+            testKey="product-item-issues"
+          />
+        </div>
+      )}
+    </MenuSection>
   </div>
 );
-const ProductNavigation = makeTestComponent(
-  'product-navigation',
-  <RenderSection section={productNavSections} />,
-);
-const ContainerNavigation = makeTestComponent(
-  'container-navigation',
-  <RenderSection section={containerNavSections} />,
+const ContainerNavigation = () => (
+  <div data-webdriver-test-key="container-navigation">
+    <HeaderSection>
+      {({ css }) => (
+        <div
+          data-webdriver-test-key="container-header"
+          css={{
+            ...css,
+            paddingBottom: gridSize * 2.5,
+          }}
+        >
+          <ContainerHeader
+            before={itemState => (
+              <ItemAvatar
+                itemState={itemState}
+                appearance="square"
+                size="large"
+              />
+            )}
+            text="My software project"
+            subText="Software project"
+          />
+        </div>
+      )}
+    </HeaderSection>
+    <MenuSection>
+      {({ className }) => (
+        <div className={className}>
+          <Item
+            before={BacklogIcon}
+            text="Backlog"
+            isSelected
+            testKey="container-item-backlog"
+          />
+          <Item
+            before={BoardIcon}
+            text="Active sprints"
+            testKey="container-item-sprints"
+          />
+          <Item
+            before={GraphLineIcon}
+            text="Reports"
+            testKey="container-item-reports"
+          />
+          <Separator />
+          <GroupHeading>Shortcuts</GroupHeading>
+          <Item before={ShortcutIcon} text="Project space" />
+          <Item before={ShortcutIcon} text="Project repo" />
+        </div>
+      )}
+    </MenuSection>
+  </div>
 );
 const Content = makeTestComponent(
   'content',

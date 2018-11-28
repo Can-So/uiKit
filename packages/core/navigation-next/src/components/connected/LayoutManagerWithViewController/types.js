@@ -1,35 +1,15 @@
 // @flow
 
-import type { ComponentType, Node } from 'react';
-import type { WithAnalyticsEventsProps } from '@atlaskit/analytics-next';
+import type { ElementConfig } from 'react';
 
-import { UIController, ViewController } from '../../../';
+import AsyncLayoutManagerWithViewController from '../AsyncLayoutManagerWithViewController';
 
-import type {
-  CollapseListeners,
-  ExperimentalFeatureFlags,
-  GetRefs,
-} from '../../presentational/LayoutManager/types';
-
-import type { ViewControllerState } from '../../../view-controller/types';
-
-export type LayoutManagerWithViewControllerProps = CollapseListeners &
-  ExperimentalFeatureFlags & {
-    children: Node,
-    customComponents: { [string]: ComponentType<*> },
-    getRefs?: GetRefs,
-    globalNavigation: ComponentType<{}>,
-    navigationUIController: UIController,
-    navigationViewController: ViewController,
-    firstSkeletonToRender?: 'product' | 'container',
-  };
-
-export type LayoutManagerWithViewControllerState = {
-  hasInitialised: boolean,
-};
-
-export type LayerInitialisedProps = WithAnalyticsEventsProps & {
-  activeView: $PropertyType<ViewControllerState, 'activeView'>,
-  initialised: boolean,
-  onInitialised?: () => void,
-};
+export type LayoutManagerWithViewControllerProps = $Exact<
+  $Diff<
+    ElementConfig<typeof AsyncLayoutManagerWithViewController>,
+    {
+      itemsRenderer: *,
+      containerSkeleton: *,
+    },
+  >,
+>;

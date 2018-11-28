@@ -1,5 +1,13 @@
 # @atlaskit/logo
 
+## 9.2.4
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/field-radio-group@4.0.11
+  - @atlaskit/select@6.1.8
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
 ## 9.2.3
 - [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
 

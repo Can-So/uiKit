@@ -9,7 +9,7 @@ const radioValues = [
 ];
 
 type State = {
-  checkedValue: string,
+  value: string,
 };
 
 export default class ControlledRadioGroup extends Component<*, State> {
@@ -21,7 +21,7 @@ export default class ControlledRadioGroup extends Component<*, State> {
       <RadioGroup
         label={'Pick a color'}
         onChange={this.onChange}
-        defaultCheckedValue={radioValues[2].value}
+        defaultValue={radioValues[2].value}
         options={radioValues}
       />
     );

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { Subject } from 'rxjs/Subject';
+import Button from '@atlaskit/button';
 import { MediaItem, MediaItemType } from '@atlaskit/media-core';
 import { createContext } from '../_stubs';
 import { Content } from '../../../newgen/content';
@@ -81,9 +82,8 @@ describe('<MediaViewer />', () => {
     const { el, onClose } = createFixture([identifier], identifier);
 
     expect(el.find(CloseButtonWrapper)).toHaveLength(1);
-    el
-      .find(CloseButtonWrapper)
-      .find('Button')
+    el.find(CloseButtonWrapper)
+      .find(Button)
       .simulate('click');
     expect(onClose).toHaveBeenCalled();
   });

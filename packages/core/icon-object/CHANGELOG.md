@@ -1,5 +1,42 @@
 # @atlaskit/icon-object
 
+## 3.0.0
+- [major] [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+
+  - Remove onClick props as icon is only a presentational placeholder. Please wrap icon into a Button or a Link component.
+
+## 2.0.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/button@10.0.0
+
+## 2.0.0
+- [patch] [29b160f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29b160f):
+
+  - Simplify the icons build process
+
+  Icons no longer need a custom `build` step to be accurate on npm. This
+  has come about by renaming the `es5` folder to `cjs`. If you weren't reaching
+  into our package's internals, you shouldn't notice.
+
+- [major] [80304f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80304f0):
+
+  **NOTE** Unless you are using the `iconsInfo` export, this change is not breaking.
+
+  - Rename `iconsInfo` to `metadata` to more accurately reflect its role
+
+  This change comes with rethinking what is exported from this object,
+  which no longer includes copies of the icons. If you need to rely on the
+  metadata to get the packages, each should be required by your own code.
+
+  The `icon-explorer` has an example of how to do this.
+- Updated dependencies [b29bec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b29bec1):
+  - @atlaskit/icon-build-process@0.1.0
+
 ## 1.0.4
 - [patch] Update to use babel-7 for build processes [e7bb74d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7bb74d)
 

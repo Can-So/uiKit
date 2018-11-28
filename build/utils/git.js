@@ -31,9 +31,30 @@ async function getChangedFilesSince(ref, fullPath = false) {
   return files.map(file => path.resolve(file));
 }
 
+async function getChangedChangesetFilesSinceMaster(fullPath = false) {
+  let ref = await getMasterRef();
+  // First we need to find the commit where we diverged from `ref` at using `git merge-base`
+  let cmd = await spawn('git', ['merge-base', ref, 'HEAD']);
+  const divergedAt = cmd.stdout.trim();
+  // Now we can find which files we added
+  cmd = await spawn('git', [
+    'diff',
+    '--name-only',
+    '--diff-filter=d',
+    'master',
+  ]);
+
+  const files = cmd.stdout
+    .trim()
+    .split('\n')
+    .filter(file => file.includes('changes.json'));
+  if (!fullPath) return files;
+  return files.map(file => path.resolve(file));
+}
+
 async function getBranchName() {
-  const gitCmd = await spawn('git', ['rev-parse', '--abrev-ref', 'HEAD']);
-  return gitCmd.stdout.trim().split('\n');
+  const gitCmd = await spawn('git', ['rev-parse', '--abbrev-ref', 'HEAD']);
+  return gitCmd.stdout.trim();
 }
 
 async function getMasterRef() {
@@ -205,6 +226,22 @@ async function getLastPublishCommit() {
   return commit;
 }
 
+async function getCommitThatAddsFile(path) {
+  const gitCmd = await spawn('git', [
+    'log',
+    '--reverse',
+    '--max-count=1',
+    '--pretty=format:%h',
+    '-p',
+    path,
+  ]);
+  // For reasons I do not understand, passing pretty format through this is not working
+  // The slice below is aimed at achieving the same thing.
+  const commit = gitCmd.stdout.split('\n')[0];
+
+  return commit;
+}
+
 async function getUnpublishedChangesetCommits(since) {
   // Start one commit before the "since" if it's passed in so that we can find that commit if required
   const releaseCommits = await getAllReleaseCommits(
@@ -226,6 +263,7 @@ async function getUnpublishedChangesetCommits(since) {
 }
 
 module.exports = {
+  getCommitThatAddsFile,
   getCommitsSince,
   getChangedFilesSince,
   getBranchName,
@@ -237,6 +275,7 @@ module.exports = {
   rebase,
   rebaseAndPush,
   getUnpublishedChangesetCommits,
+  getChangedChangesetFilesSinceMaster,
   getAllReleaseCommits,
   getAllChangesetCommits,
   getLastPublishCommit,

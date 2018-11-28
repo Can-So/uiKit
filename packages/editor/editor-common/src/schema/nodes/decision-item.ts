@@ -7,7 +7,10 @@ import { uuid } from '../../utils';
  */
 export interface DecisionItemDefinition {
   type: 'decisionItem';
-  content: Array<Inline>;
+  /**
+   * @allowUnsupportedInline true
+   */
+  content?: Array<Inline>;
   attrs: {
     localId: string;
     state: string;
@@ -26,7 +29,7 @@ export const decisionItem: NodeSpec = {
     {
       tag: 'li[data-decision-local-id]',
 
-      // Default priority is 50. We normaly don't change this but since this node type is
+      // Default priority is 50. We normally don't change this but since this node type is
       // also used by list-item we need to make sure that we run this parser first.
       priority: 100,
 

@@ -5,7 +5,8 @@ import { colors, borderRadius, gridSize } from '@atlaskit/theme';
 import { StatusPicker as AkStatusPicker, Color } from '@atlaskit/status';
 import { dropShadow } from '../../../ui/styles';
 import withOuterListeners from '../../../ui/with-outer-listeners';
-import { StatusType, DEFAULT_STATUS } from '../actions';
+import { DEFAULT_STATUS } from '../actions';
+import { StatusType } from '../plugin';
 
 const PopupWithListeners = withOuterListeners(Popup);
 
@@ -15,6 +16,7 @@ export interface Props {
   onSelect: (status: StatusType) => void;
   onTextChanged: (status: StatusType) => void;
   onEnter: (status: StatusType) => void;
+  autoFocus?: boolean;
 }
 
 export interface State {
@@ -30,6 +32,10 @@ const PickerContainer = styled.div`
 `;
 
 export default class StatusPicker extends React.Component<Props, State> {
+  static defaultProps = {
+    autoFocus: false,
+  };
+
   constructor(props: Props) {
     super(props);
 
@@ -51,14 +57,14 @@ export default class StatusPicker extends React.Component<Props, State> {
     const state = { ...DEFAULT_STATUS };
     if (element) {
       state.color = (element.getAttribute('color') || 'neutral') as Color;
-      state.text = element.getAttribute('text') || 'Default';
+      state.text = element.getAttribute('text') || '';
     }
 
     return state;
   }
 
   render() {
-    const { element, closeStatusPicker } = this.props;
+    const { autoFocus, element, closeStatusPicker } = this.props;
 
     return (
       element && (
@@ -72,6 +78,7 @@ export default class StatusPicker extends React.Component<Props, State> {
         >
           <PickerContainer onClick={this.handlePopupClick}>
             <AkStatusPicker
+              autoFocus={autoFocus}
               selectedColor={this.state.color}
               text={this.state.text}
               onColorClick={this.onColorClick}

@@ -66,85 +66,93 @@ const gebForbiddenBody = (definitionId: string) => ({
   },
 });
 
-const delayP = (n: number) => new Promise(res => setTimeout(res, n));
+const responses = {
+  'google.com': {
+    'google.com/doc/1': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      gebForbiddenBody(googleDefinitionId),
+      undefined,
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+    ],
+    'google.com/doc/2': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      gebForbiddenBody(googleDefinitionId),
+      undefined,
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+    ],
+    'google.com/doc/3': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      undefined,
+      gebForbiddenBody(googleDefinitionId),
+      gebForbiddenBody(googleDefinitionId),
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+      undefined,
+    ],
+    'google.com/spreadshet/1': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      gebForbiddenBody(googleDefinitionId),
+      undefined,
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+    ],
+    'google.com/spreadshet/2': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      gebForbiddenBody(googleDefinitionId),
+      undefined,
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+    ],
+  },
+  'trello.com': {
+    'trello.com/task/a': [
+      (resourceUrl: string) => genResolvedBody(trelloDefinitionId, resourceUrl),
+      gebForbiddenBody(trelloDefinitionId),
+      genUnauthorisedBody(trelloDefinitionId),
+    ],
+  },
+  'dropbox.com': {
+    'dropbox.com/file/a': [
+      (resourceUrl: string) =>
+        genResolvedBody(dropboxDefinitionId, resourceUrl),
+      gebForbiddenBody(dropboxDefinitionId),
+      gebForbiddenBody(dropboxDefinitionId),
+      undefined,
+      genUnauthorisedBody(dropboxDefinitionId),
+      undefined,
+    ],
+  },
+};
+
+const random = (max: number) => Math.floor(Math.random() * max);
+const delayP = (n: number) => new Promise(res => window.setTimeout(res, n));
 
 export const mockMultipleCards = () => {
-  let c1 = 0;
-  let c2 = 0;
-  let c3 = 0;
   fm.mock('*', async (_, opts: any) => {
-    await delayP(1000);
+    const delay = random(2000);
+    await delayP(delay);
 
-    const resourceUrl = JSON.parse(opts.body).resourceUrl;
+    const resourceUrl = JSON.parse(opts.body).resourceUrl as string;
 
-    if (resourceUrl.startsWith('google')) {
-      c1++;
-      if (c1 >= 0 && c1 <= 6) {
-        console.log('MOCK:\tgoogle:\terror', c1);
-        return;
-      }
-      if (c1 >= 7 && c1 <= 11) {
-        console.log('MOCK:\tgoogle:\tunauthorisedBody', c1);
-        return genUnauthorisedBody(googleDefinitionId);
-      }
-      if (c1 >= 12 && c1 <= 16) {
-        console.log('MOCK:\tgoogle:\terror', c1);
-        return;
-      }
-      if (c1 >= 17 && c1 <= 21) {
-        console.log('MOCK:\tgoogle:\tforbiddenBody', c1);
-        return gebForbiddenBody(googleDefinitionId);
-      }
-      console.log('MOCK:\tgoogle:\tresolvedBody', c1);
-      return genResolvedBody(googleDefinitionId, resourceUrl);
+    const domain = resourceUrl.split('/')[0] as keyof typeof responses;
+
+    const perDomain = responses[domain];
+
+    if (!perDomain) {
+      throw new Error('Unknown domain name');
     }
 
-    if (resourceUrl.startsWith('trello')) {
-      switch (++c2) {
-        case 1: {
-          console.log('MOCK:\ttrello:\tunauthorisedBody');
-          return genUnauthorisedBody(trelloDefinitionId);
-        }
-        case 2: {
-          console.log('MOCK:\ttrello:\tforbiddenBody');
-          return gebForbiddenBody(trelloDefinitionId);
-        }
-        default: {
-          console.log('MOCK:\ttrello:\tresolvedBody');
-          return genResolvedBody(trelloDefinitionId, resourceUrl);
-        }
-      }
+    //@ts-ignore
+    let response = perDomain[resourceUrl].pop();
+
+    if (typeof response === 'function') {
+      response = response(resourceUrl);
     }
 
-    if (resourceUrl.startsWith('dropbox')) {
-      switch (++c3) {
-        case 1: {
-          console.log('MOCK:\tdropbox:\terror');
-          return;
-        }
-        case 2: {
-          console.log('MOCK:\tdropbox:\tunauthorisedBody');
-          return genUnauthorisedBody(dropboxDefinitionId);
-        }
-        case 3: {
-          console.log('MOCK:\tdropbox:\terror');
-          return;
-        }
-        case 4: {
-          console.log('MOCK:\tdropbox:\tforbiddenBody');
-          return gebForbiddenBody(dropboxDefinitionId);
-        }
-        case 5: {
-          console.log('MOCK:\tdropbox:\tforbiddenBody');
-          return gebForbiddenBody(dropboxDefinitionId);
-        }
-        default: {
-          console.log('MOCK:\tdropbox:\tresolvedBody');
-          return genResolvedBody(dropboxDefinitionId, resourceUrl);
-        }
-      }
-    }
+    console.log(`[SERVER] <${delay}> ${domain} ${resourceUrl}`, response);
 
-    throw new Error('Unkonws request type');
+    return response;
   });
 };

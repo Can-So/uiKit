@@ -1,6 +1,6 @@
 /*
-* wrapper on top of webdriver-io apis to give a feel of puppeeteer api
-*/
+ * wrapper on top of webdriver-io apis to give a feel of puppeeteer api
+ */
 
 //TODO :move this to a new npm-pkg
 const webdriverio = require('webdriverio');
@@ -129,7 +129,11 @@ export default class Page {
     return this.browser.close();
   }
   checkConsoleErrors() {
-    if (this.browser.log('browser').value) {
+    // Console errors can only be checked in Chrome
+    if (
+      this.browser.desiredCapabilities.browserName === 'chrome' &&
+      this.browser.log('browser').value
+    ) {
       this.browser.logs('browser').value.forEach(val => {
         assert.notEqual(
           val.level,

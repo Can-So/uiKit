@@ -1,5 +1,82 @@
 # @atlaskit/media-picker
 
+## 25.0.3
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/flag@9.1.6
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/toggle@5.0.12
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-editor@19.0.1
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/media-ui@7.6.2
+  - @atlaskit/icon@15.0.0
+
+## 25.0.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/flag@9.1.5
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/toggle@5.0.11
+  - @atlaskit/analytics-listeners@4.1.1
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/media-ui@7.6.1
+  - @atlaskit/button@10.0.0
+  - @atlaskit/analytics-next-types@3.1.2
+
+## 25.0.1
+- [patch] [b9d9e9a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9d9e9a):
+
+  - Support advanced i18n mode in MediaPicker
+
+## 25.0.0
+- [minor] [801fd18](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/801fd18):
+
+  - Ability to delete file from recents has been added; MediaFile now has optional fields userUpfrontId and userOccurrenceKey;
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/media-editor@19.0.0
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 24.0.1
+- [patch] [e151c1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e151c1a):
+
+  - Removes dependency on @atlaskit/layer-manager
+
+  As of component versions:
+
+  - \`@atlaskit/modal-dialog@7.0.0\`
+  - \`@atlaskit/tooltip@12.0.2\`
+  - \`@atlaskit/flag@9.0.6\`
+  - \`@atlaskit/onboarding@6.0.0\`
+
+  No component requires \`LayerManager\` to layer correctly.
+
+  You can safely remove this dependency and stop rendering \`LayerManager\` in your apps.
+
+## 24.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/media-editor@18.0.0
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+  - @atlaskit/media-store@8.3.0
+
+## 23.2.2
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-test-helpers@18.2.11
+  - @atlaskit/media-card@42.0.0
+
 ## 23.2.1
 - [patch] Updated dependencies [ced32d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ced32d0)
   - @atlaskit/media-card@41.1.2

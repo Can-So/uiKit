@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/user-picker",
-  "version": "0.0.3",
+  "version": "0.0.23",
   "config": {
     "access": "public"
   },
@@ -20,15 +20,19 @@
     "src"
   ],
   "dependencies": {
-    "@atlaskit/avatar": "^14.0.10",
-    "@atlaskit/icon": "^14.0.1",
+    "@atlaskit/avatar": "^14.1.5",
     "@atlaskit/lozenge": "^6.2.1",
-    "@atlaskit/select": "^6.0.2",
-    "@atlaskit/util-shared-styles": "^2.10.3"
+    "@atlaskit/select": "^6.1.9",
+    "@atlaskit/tag": "^6.1.1",
+    "@atlaskit/theme": "^6.2.0",
+    "@types/lodash.debounce": "^4.0.4",
+    "lodash.debounce": "^4.0.8",
+    "memoize-one": "^3.0.1"
   },
   "peerDependencies": {
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
+    "react-intl": "^2.6.0",
     "styled-components": "^3.2.6"
   },
   "author": "Atlassian Pty Ltd",
@@ -42,9 +46,11 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@atlaskit/docs": "^5.0.7",
-    "@atlaskit/util-data-test": "^10.0.17",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz"
+    "@atlaskit/docs": "^5.2.2",
+    "@atlaskit/i18n-tools": "^0.4.0",
+    "@atlaskit/util-data-test": "^10.0.19",
+    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "react-intl": "^2.6.0"
   },
   "repository": {
     "type": "git",

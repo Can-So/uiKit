@@ -1,6 +1,12 @@
 // @flow
 
-import React, { PureComponent, Fragment, type Node, type Ref } from 'react';
+import React, {
+  PureComponent,
+  Fragment,
+  type Node,
+  type Ref,
+  type ElementRef,
+} from 'react';
 import raf from 'raf-schd';
 import {
   withAnalyticsEvents,
@@ -17,6 +23,7 @@ import {
   GLOBAL_NAV_WIDTH,
   CONTENT_NAV_WIDTH,
   CONTENT_NAV_WIDTH_COLLAPSED,
+  GLOBAL_NAV_COLLAPSE_THRESHOLD,
 } from '../../../common/constants';
 import { Shadow } from '../../../common/primitives';
 import PropertyToggle from './PropertyToggle';
@@ -27,11 +34,14 @@ const HANDLE_OFFSET = 4;
 const INNER_WIDTH = 20;
 const OUTER_WIDTH = INNER_WIDTH + HANDLE_OFFSET;
 const HANDLE_WIDTH = 2;
+const shouldResetGrabArea = (width: number) => {
+  return width >= GLOBAL_NAV_COLLAPSE_THRESHOLD && width < CONTENT_NAV_WIDTH;
+};
 
 const Outer = (props: *) => (
   <div css={{ position: 'relative', width: OUTER_WIDTH }} {...props} />
 );
-const GrabArea = ({ showHandle, isBold, ...props }: *) => (
+export const GrabArea = ({ showHandle, isBold, ...props }: *) => (
   <div
     css={{
       cursor: 'ew-resize',
@@ -113,9 +123,9 @@ const Button = ({
   </button>
 );
 
-// tinker with the DOM directly by setting style properties, makes the
-function applyMutations(
-  elements: Array<{ property: string, ref: HTMLElement }>,
+// tinker with the DOM directly by setting style properties, updates the grab bar position by changing padding-left and width.
+function updateResizeAreaPosition(
+  elements: Array<{ property: 'padding-left' | 'width', ref: ElementRef<*> }>,
   width: number,
 ) {
   elements.forEach(({ property, ref }) => {
@@ -158,15 +168,20 @@ function makeTooltipNode({ text, char }: { text: string, char: string }) {
   );
 }
 
-type Props = WithAnalyticsEventsProps & {
+type Props = {
+  ...WithAnalyticsEventsProps,
   children: State => any,
-  collapseToggleTooltipContent: CollapseToggleTooltipContent,
+  collapseToggleTooltipContent?: CollapseToggleTooltipContent,
   expandCollapseAffordanceRef: Ref<'button'>,
   experimental_flyoutOnHover: boolean,
   flyoutIsOpen: boolean,
   isDisabled: boolean,
+  isGrabAreaDisabled: boolean,
   mouseIsOverNavigation: boolean,
-  mutationRefs: Array<{ ref: HTMLElement, property: string }>,
+  mutationRefs: Array<{
+    ref: ElementRef<*>,
+    property: 'padding-left' | 'width',
+  }>,
   navigation: Object,
 };
 type State = {
@@ -182,8 +197,6 @@ type State = {
 };
 
 /* NOTE: experimental props use an underscore */
-/* eslint-disable camelcase */
-
 class ResizeControl extends PureComponent<Props, State> {
   invalidDragAttempted = false;
   lastWidth: number;
@@ -199,12 +212,22 @@ class ResizeControl extends PureComponent<Props, State> {
     showGrabArea: true,
     width: this.props.navigation.state.productNavWidth,
   };
+
+  static defaultProps = {
+    isGrabAreaDisabled: false,
+  };
+
   static getDerivedStateFromProps(props: Props, state: State) {
-    const { experimental_flyoutOnHover, flyoutIsOpen, navigation } = props;
+    const {
+      // eslint-disable-next-line camelcase
+      experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
+      flyoutIsOpen,
+      navigation,
+    } = props;
     const { isCollapsed } = navigation.state;
 
     // resolve "hover locking" issue with resize grab area
-    if (experimental_flyoutOnHover) {
+    if (EXPERIMENTAL_FLYOUT_ON_HOVER) {
       const showGrabArea = !isCollapsed && !flyoutIsOpen;
       const mouseIsOverGrabArea = showGrabArea
         ? state.mouseIsOverGrabArea
@@ -233,7 +256,7 @@ class ResizeControl extends PureComponent<Props, State> {
 
   toggleCollapse = (trigger: string) => {
     const { navigation, createAnalyticsEvent } = this.props;
-    const newCollapsedState = !navigation.state.isCollapsed;
+    const newCollapsedState: boolean = !navigation.state.isCollapsed;
     navigation.toggleCollapse();
     navigationExpandedCollapsed(createAnalyticsEvent, {
       trigger,
@@ -297,7 +320,7 @@ class ResizeControl extends PureComponent<Props, State> {
     }
 
     // allow the product nav to be 75% of the available page width
-    const maxWidth = Math.round(window.innerWidth / 4 * 3);
+    const maxWidth = Math.round((window.innerWidth / 4) * 3);
     const minWidth = CONTENT_NAV_WIDTH_COLLAPSED;
     const adjustedMax = maxWidth - initialWidth - GLOBAL_NAV_WIDTH;
     const adjustedMin = minWidth - initialWidth;
@@ -309,7 +332,7 @@ class ResizeControl extends PureComponent<Props, State> {
     const width = initialWidth + delta;
 
     // apply updated styles to the applicable DOM nodes
-    applyMutations(mutationRefs, width);
+    updateResizeAreaPosition(mutationRefs, width);
 
     // NOTE: hijack the maual resize and force collapse, cancels mouse events
     if (event.screenX < window.screenX) {
@@ -322,27 +345,24 @@ class ResizeControl extends PureComponent<Props, State> {
   });
   handleResizeEnd = () => {
     const { navigation, createAnalyticsEvent } = this.props;
-    const { delta, didDragOpen, isDragging, width } = this.state;
-
-    let publishWidth = width;
-    let shouldCollapse;
+    const { delta, didDragOpen, isDragging, width: currentWidth } = this.state;
     const expandThreshold = 24;
-
     const resizerClicked = !isDragging && !this.invalidDragAttempted;
+    let publishWidth = currentWidth;
+    let shouldCollapse = false;
 
     // check if the intention was just a click, and toggle
     if (resizerClicked) {
-      publishWidth = Math.max(CONTENT_NAV_WIDTH, width);
+      publishWidth = Math.max(CONTENT_NAV_WIDTH, currentWidth);
       this.toggleCollapse('resizerClick');
     }
 
     // prevent the user from creating an unusable width
     if (publishWidth < CONTENT_NAV_WIDTH) {
       publishWidth = CONTENT_NAV_WIDTH;
-
       if (didDragOpen && delta > expandThreshold) {
         shouldCollapse = false;
-      } else {
+      } else if (currentWidth < GLOBAL_NAV_COLLAPSE_THRESHOLD) {
         shouldCollapse = true;
       }
     } else {
@@ -374,6 +394,10 @@ class ResizeControl extends PureComponent<Props, State> {
       isCollapsed: shouldCollapse,
     });
 
+    if (shouldResetGrabArea(currentWidth)) {
+      updateResizeAreaPosition(this.props.mutationRefs, CONTENT_NAV_WIDTH);
+    }
+
     // cleanup
     window.removeEventListener('mousemove', this.handleResize);
     window.removeEventListener('mouseup', this.handleResizeEnd);
@@ -392,13 +416,12 @@ class ResizeControl extends PureComponent<Props, State> {
       collapseToggleTooltipContent,
       expandCollapseAffordanceRef,
       flyoutIsOpen,
-      isDisabled,
+      isDisabled: isResizeDisabled,
+      isGrabAreaDisabled,
       mouseIsOverNavigation,
       navigation,
     } = this.props;
-    const { isCollapsed, isPeeking } = navigation.state;
-
-    const isResizeDisabled = isDisabled || isPeeking;
+    const { isCollapsed } = navigation.state;
 
     // the button shouldn't "flip" until the drag is complete
     let ButtonIcon = ChevronLeft;
@@ -425,7 +448,7 @@ class ResizeControl extends PureComponent<Props, State> {
           <Shadow direction={shadowDirection} isBold={mouseIsDown} />
           {!isResizeDisabled && (
             <Fragment>
-              {showGrabArea && (
+              {!isGrabAreaDisabled && showGrabArea && (
                 <GrabArea
                   isBold={mouseIsDown}
                   showHandle={mouseIsDown || mouseIsOverGrabArea}
@@ -437,7 +460,6 @@ class ResizeControl extends PureComponent<Props, State> {
               {collapseToggleTooltipContent ? (
                 <Tooltip
                   content={makeTooltipNode(
-                    // $FlowFixMe
                     collapseToggleTooltipContent(isCollapsed),
                   )}
                   delay={600}

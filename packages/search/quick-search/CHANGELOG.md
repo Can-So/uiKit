@@ -1,5 +1,30 @@
 # @atlaskit/quick-search
 
+## 5.1.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/drawer@2.5.3
+  - @atlaskit/field-base@11.0.11
+  - @atlaskit/item@8.0.12
+  - @atlaskit/navigation@33.3.6
+  - @atlaskit/icon@15.0.0
+
+## 5.1.1
+- [patch] [f480bab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f480bab):
+
+  - Convert padding to margin to fix a scrolling issue in global-search
+
+## 5.1.0
+- [minor] [e93ffe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e93ffe0):
+
+  - Change container result item to accept a react node as the subtext
+
+## 5.0.0
+- [major] [2da04ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2da04ed):
+
+  - Migrate component from flow to TypeScript. Upgrading should not cause any problems but we are releasing a new major version because of the amount of changes that were being made internally. Please reach out to the maintainers in case you are having trouble uprading to the latest version.
+
 ## 4.2.13
 - [patch] Fixes styling of item captions and subtext [d0d45ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d0d45ff)
 

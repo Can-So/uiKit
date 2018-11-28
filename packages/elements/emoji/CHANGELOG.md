@@ -1,5 +1,48 @@
 # @atlaskit/emoji
 
+## 47.0.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/field-base@11.0.11
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
+## 47.0.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/button@10.0.0
+
+## 47.0.0
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/util-data-test@10.0.21
+  - @atlaskit/media-core@24.5.0
+
+## 46.0.1
+- [patch] [49a2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49a2a58):
+
+  - Use onClick from button in emoji
+
+## 46.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/util-data-test@10.0.20
+  - @atlaskit/media-core@24.4.0
+
+## 45.0.4
+- [patch] [36c362f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36c362f):
+
+  - FS-3174 - Fix usage of gridSize() and borderRadius()
+
+## 45.0.3
+- [patch] [527b954](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/527b954):
+
+  - FS-3174 - Remove usage of util-shared-styles from elements components
+
 ## 45.0.2
 - [patch] Tweak emoji tests to work better with newest EmojiOne v4 metadata [c034007](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c034007)
 

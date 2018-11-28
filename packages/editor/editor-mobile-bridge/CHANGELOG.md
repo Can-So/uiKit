@@ -1,5 +1,124 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.3.1
+- [patch] [345b45c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/345b45c):
+
+  - Update @atlaskit/button inside @atlaskit/editor-mobile-bridge
+
+## 6.3.0
+- [minor] [086f816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/086f816):
+
+  - FS-3150 - Support status in the editor-mobile-bridge
+
+## 6.2.1
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/editor-core@89.0.0
+  - @atlaskit/renderer@31.0.0
+  - @atlaskit/emoji@47.0.0
+  - @atlaskit/editor-json-transformer@4.0.22
+  - @atlaskit/editor-test-helpers@6.2.19
+  - @atlaskit/task-decision@11.0.4
+  - @atlaskit/media-core@24.5.0
+
+## 6.2.0
+- [minor] [dfcb816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfcb816):
+
+  - ED-5818: Add support for inserting block nodes
+
+  Bridge API now supports inserting:
+  * Tables
+  * Panels
+  * Codeblocks
+  * Block Quotes
+  * Actions
+  * Decisions
+
+## 6.1.0
+- [minor] [ab6d96b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab6d96b):
+
+  - ED-5710: Fixes calling media upfront.
+
+  We now only call for the media auth, when rendering / loading a media item.
+
+## 6.0.0
+- [major] [6d6522b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d6522b):
+
+  - Refactor mentions to use TypeAhead plugin
+
+## 5.6.0
+- [minor] [d901563](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d901563):
+
+  - FM-1388: Add bridge API to both editor and renderer to set padding
+
+## 5.5.0
+- [minor] [586100b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/586100b):
+
+  - ED-5584: Added Emoji support to the renderer.
+
+## 5.4.1
+- [patch] [05a4cf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/05a4cf3):
+
+  - FM-1358: Fixes scrolling lag when encountering a shadow
+
+## 5.4.0
+- [minor] [611d8a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/611d8a5):
+
+  - ED-5707 Enable pinch to zoom in Renderer
+
+## 5.3.0
+- [minor] [13a108f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/13a108f):
+
+  - Updated package bundle
+
+## 5.2.4
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/renderer@30.0.0
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/task-decision@11.0.2
+  - @atlaskit/media-core@24.4.0
+
+## 5.2.3
+- [patch] [f6c3f01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6c3f01):
+
+  - ED-5586: Removes padding from editor and renderer for mobile.
+
+## 5.2.2
+- [patch] [3756327](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3756327):
+
+  - ED-5588: Fixes font size changing when rotating viewport on iOS.
+
+## 5.2.1
+- [patch] [a9eb99f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a9eb99f):
+
+  - ED-5510: fix deleting last character in a cell in Safari
+
+## 5.2.0
+- [minor] [f5696d5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5696d5):
+
+  - ED-5606: Added support for sending task update events to native for handling
+
+## 5.1.0
+- [minor] [d793999](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d793999):
+
+  - ED-5583: Pass all link events to native for handling
+
+## 5.0.4
+- [patch] [e5e040c"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e5e040c"
+d):
+
+  - Fixes passing null to renderer before we have content. ED-5587
+
+## 5.0.3
+- [patch] Fixed rendering media in the renderer. FM-1280 [00aaf8e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00aaf8e)
+
+## 5.0.2
+- [patch] Fixes rendering elements on iOS before scrolling ends. FM-1277 [9d3029b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d3029b)
+
 ## 5.0.1
 - [patch] ED-5513: render table that respects columns widths except on mobile [716bb9d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/716bb9d)
 

@@ -271,6 +271,21 @@ export const exampleDocument = {
       ],
     },
     {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'date',
+          attrs: {
+            timestamp: '1540425600000',
+          },
+        },
+        {
+          type: 'text',
+          text: ' ',
+        },
+      ],
+    },
+    {
       type: 'heading',
       attrs: { level: 1 },
       content: [
@@ -1160,7 +1175,6 @@ System.out.println("There are " + count + " values >= 5");`,
       attrs: {
         extensionType: 'com.atlassian.fabric',
         extensionKey: 'clock',
-        bodyType: 'rich',
       },
       content: [
         {
@@ -1173,6 +1187,62 @@ System.out.println("There are " + count + " values >= 5");`,
           ],
         },
       ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 1 },
+      content: [
+        {
+          type: 'text',
+          text: 'Sections',
+        },
+      ],
+    },
+    {
+      type: 'layoutSection',
+      content: [
+        {
+          type: 'layoutColumn',
+          attrs: {
+            width: 33.33,
+          },
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'text',
+                  text: 'This column is a 1/3rd.',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'layoutColumn',
+          attrs: {
+            width: 66.66,
+          },
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'text',
+                  text: 'This column is 2/3rds.',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'blockCard',
+      attrs: {
+        url:
+          'https://docs.google.com/document/d/1fUgIrY5s_iJpmA25np2BjLvDK5QEXAjNvaaYAmMrJuc/edit',
+      },
     },
   ],
 };

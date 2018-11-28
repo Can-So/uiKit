@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/radio",
-  "version": "0.2.4",
+  "version": "0.4.2",
   "description": "A radio group React component used for selecting discrete values in a form",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -19,11 +19,9 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/analytics-next": "^3.0.10",
-    "@atlaskit/field-base": "^11.0.9",
-    "@atlaskit/icon": "^14.0.2",
-    "@atlaskit/section-message": "^1.0.10",
-    "@atlaskit/theme": "^6.1.1",
+    "@atlaskit/analytics-next": "^3.1.1",
+    "@atlaskit/icon": "^15.0.0",
+    "@atlaskit/theme": "^6.2.1",
     "@babel/runtime": "^7.0.0"
   },
   "peerDependencies": {
@@ -32,9 +30,11 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^9.0.15",
-    "@atlaskit/docs": "^5.0.8",
-    "@atlaskit/form": "^4.0.12",
+    "@atlaskit/button": "^10.0.1",
+    "@atlaskit/checkbox": "^5.0.7",
+    "@atlaskit/docs": "^5.2.2",
+    "@atlaskit/form": "^4.0.19",
+    "@atlaskit/section-message": "^1.0.12",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-dom": "^16.4.2"
   },

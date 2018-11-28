@@ -28,13 +28,15 @@ export default md`
    - Reorganization of the tree by drag&drop
    - Mouse, touch and keyboard support
 
-  ## Examples
+  ## Usage
+
+  ${code`import Tree, { mutateTree, moveItemOnTree } from '@atlaskit/tree';`}
 
   ${(
     <Example
       packageName="@atlaskit/tree"
       Component={require('../examples/5-pure-tree').default}
-      title="Basic Drag-n-Drop Tree"
+      title="Drag-n-Drop Tree"
       source={require('!!raw-loader!../examples/5-pure-tree')}
     />
   )}
@@ -179,6 +181,7 @@ onDragEnd = (source: TreePosition, destination: ?TreePosition) => {
   ${(
     <Props
       title="API Reference"
+      heading="Tree Props"
       props={require('!!extract-react-types-loader!../src/components/Tree/Tree')}
     />
   )}

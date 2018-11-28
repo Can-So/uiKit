@@ -9,16 +9,14 @@ import {
   userAuthProvider,
   defaultMediaPickerCollectionName,
   createUploadContext,
-  defaultCollectionName,
 } from '@atlaskit/media-test-helpers';
-import { Card, CardList } from '@atlaskit/media-card';
+import { Card } from '@atlaskit/media-card';
 import { MediaPicker } from '../src';
 import {
   PopupContainer,
   PopupHeader,
   CardsWrapper,
   CardItemWrapper,
-  CardListWrapper,
 } from '../example-helpers/styled';
 import {
   UploadEndEventPayload,
@@ -121,21 +119,6 @@ class PopupWrapper extends Component<{}, PopupWrapperState> {
     return <CardsWrapper>{cards}</CardsWrapper>;
   };
 
-  renderCardList = () => {
-    return (
-      <CardListWrapper>
-        <h1>{`<CardList ${defaultMediaPickerCollectionName} />`}</h1>
-        <CardList
-          context={context}
-          collectionName={defaultCollectionName}
-          cardAppearance="small"
-          height={260}
-          useInfiniteScroll
-        />
-      </CardListWrapper>
-    );
-  };
-
   render() {
     const { uploadingFiles } = this.state;
     const length = uploadingFiles.length;
@@ -151,7 +134,6 @@ class PopupWrapper extends Component<{}, PopupWrapperState> {
           <div>Uploading files: {length}</div>
         </PopupHeader>
         {this.renderCards()}
-        {this.renderCardList()}
       </PopupContainer>
     );
   }

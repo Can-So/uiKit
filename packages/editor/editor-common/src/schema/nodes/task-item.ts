@@ -7,7 +7,10 @@ import { uuid } from '../../utils';
  */
 export interface TaskItemDefinition {
   type: 'taskItem';
-  content: Array<Inline>;
+  /**
+   * @allowUnsupportedInline true
+   */
+  content?: Array<Inline>;
   attrs: {
     localId: string;
     state: 'TODO' | 'DONE';

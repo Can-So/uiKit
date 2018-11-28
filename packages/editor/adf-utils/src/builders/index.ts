@@ -1,6 +1,7 @@
 // Marks Builders
 
 export { action } from './marks/action';
+export { breakout } from './marks/breakout';
 export { code } from './marks/code';
 export { em } from './marks/em';
 export { link } from './marks/link';
@@ -12,6 +13,7 @@ export { subsup } from './marks/subsup';
 export { textColor } from './marks/text-color';
 export { underline } from './marks/underline';
 export { underline as u } from './marks/underline';
+export { alignment } from './marks/alignment';
 
 // Nodes Builders
 
@@ -31,6 +33,8 @@ export { hardBreak } from './nodes/hard-break';
 export { hardBreak as br } from './nodes/hard-break';
 export { heading } from './nodes/heading';
 export { inlineExtension } from './nodes/inline-extension';
+export { layoutColumn } from './nodes/layout-column';
+export { layoutSection } from './nodes/layout-section';
 export { listItem } from './nodes/list-item';
 export { listItem as li } from './nodes/list-item';
 export { mediaGroup } from './nodes/media-group';

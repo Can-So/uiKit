@@ -4,7 +4,7 @@ import type {
   DraggableLocation,
   DraggableId,
   DroppableId,
-} from 'react-beautiful-dnd-next';
+} from 'react-beautiful-dnd';
 import type {
   TreeData,
   Path,

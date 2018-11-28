@@ -24,4 +24,50 @@ export default {
   'fabric.media.connect_to': 'Csatlakozás ehhez: {name}',
   'fabric.media.connect_account_description':
     'Megnyitunk egy új lapot, hogy könnyebben csatlakozhasson {name}-fiókjához',
+  'fabric.media.upload_an_avatar': 'Avatár feltöltése',
+  'fabric.media.save': 'Mentés',
+  'fabric.media.or': 'vagy',
+  'fabric.media.upload_photo': 'Fénykép feltöltése',
+  'fabric.media.default_avatars': 'Alapértelmezett avatárok',
+  'fabric.media.drag_and_drop_images_here': 'Húzza ide a képeket.',
+  'fabric.media.upload_image': 'Kép feltöltése',
+  'fabric.media.image_url_invalid_error':
+    'Nem sikerült feltölteni a képet, mert az URL-cím érvénytelen.',
+  'fabric.media.image_format_invalid_error':
+    'Nem sikerült feltölteni a képet, mert a formátum érvénytelen.',
+  'fabric.media.image_size_too_large_error':
+    'A kép túl nagy. Nem lehet {MAX_SIZE_MB}MB-nál nagyobb.',
+  'fabric.media.something_went_wrong': 'Hiba történt.',
+  'fabric.media.might_be_a_hiccup':
+    'Valószínűleg csak átmeneti hibáról van szó.',
+  'fabric.media.couldnt_generate_preview':
+    'Ehhez a fájlhoz nem tudtunk előnézetet létrehozni.',
+  'fabric.media.cant_preview_file_type':
+    'Ehhez a fájltípushoz nem tudunk előnézetet létrehozni.',
+  'fabric.media.item_not_found_in_list':
+    'A kijelölt elem nem található a listán.',
+  'fabric.media.no_pdf_artifacts':
+    'Nem található PDF-műtermék ehhez a fájlhoz.',
+  'fabric.media.give_feedback': 'Visszajelzés küldése',
+  'fabric.media.try_downloading_file':
+    'A megtekintéshez próbálja meg letölteni a fájlt.',
+  'fabric.media.webgl_warning_description':
+    'A böngészője nem támogatja a WebGL funkciót. A képek jegyzetekkel való ellátásához használjon a WebGL funkcióval kompatibilis böngészőt.',
+  'fabric.media.unable_to_annotate_image':
+    'Nem sikerült jegyzetet fűznie a képhez.',
+  'fabric.media.learn_more': 'További információ',
+  'fabric.media.accounts': 'Fiókok',
+  'fabric.media.actions': 'Műveletek',
+  'fabric.media.error_hint_retry':
+    'Próbálja meg újból, és teszünk még egy kísérletet.',
+  'fabric.media.error_hint_critical':
+    'Ha a probléma nem szűnik meg, lépjen kapcsolatba az ügyfélszolgálattal.',
+  'fabric.media.close': 'Bezárás',
+  'fabric.media.could_not_load_editor': 'Nem sikerült betölteni a szerkesztőt.',
+  'fabric.media.could_not_save_image': 'Nem sikerült betölteni a képet.',
+  'fabric.media.annotate': 'Jegyzet készítése',
+  'fabric.media.drop_your_files_here': 'Húzza ide a fájlokat.',
+  'fabric.media.share_files_instantly': 'Azonnal megosztjuk őket.',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insert a file} other{Insert {0} files}}',
 };

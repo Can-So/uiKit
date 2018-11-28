@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { akBorderRadius } from '@atlaskit/util-shared-styles';
 import { HTMLAttributes, ComponentClass } from 'react';
 import { MediaItemType } from '@atlaskit/media-core';
 import { CardDimensions, CardAppearance } from '../';
@@ -20,12 +20,12 @@ export interface WrapperProps {
 
 const getWrapperHeight = (dimensions?: CardDimensions) =>
   dimensions && dimensions.height
-    ? `height: ${getCSSUnitValue(dimensions.height)};`
+    ? `height: ${getCSSUnitValue(dimensions.height)}; max-height: 100%;`
     : '';
 
 const getWrapperWidth = (dimensions?: CardDimensions) =>
   dimensions && dimensions.width
-    ? `width: ${getCSSUnitValue(dimensions.width)};`
+    ? `width: ${getCSSUnitValue(dimensions.width)}; max-width: 100%;`
     : '';
 
 export const Wrapper: ComponentClass<
@@ -60,4 +60,14 @@ export const Wrapper: ComponentClass<
       ${getWrapperWidth(dimensions)}
     `;
   }};
+`;
+
+export const InlinePlayerWrapper = styled.div`
+  overflow: hidden;
+  border-radius: ${akBorderRadius};
+
+  video {
+    width: 100%;
+    height: 100%;
+  }
 `;

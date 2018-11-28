@@ -52,6 +52,8 @@ export default createSchema({
     'layoutColumn',
     'inlineCard',
     'blockCard',
+    'unsupportedBlock',
+    'unsupportedInline',
   ],
   marks: [
     'em',
@@ -66,6 +68,8 @@ export default createSchema({
     'typeAheadQuery',
     'textColor',
     'confluenceInlineComment',
+    'breakout',
+    'alignment',
   ],
   customNodeSpecs: {
     plain: { ...paragraph, content: 'text*', marks: '' },

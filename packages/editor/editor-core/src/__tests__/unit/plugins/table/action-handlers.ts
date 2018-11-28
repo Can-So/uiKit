@@ -20,17 +20,16 @@ import tablesPlugin from '../../../../plugins/table';
 import {
   handleSetFocus,
   handleSetTableRef,
-  handleSetTargetCellRef,
   handleSetTargetCellPosition,
   handleClearSelection,
   handleHoverColumns,
   handleHoverRows,
   handleHoverTable,
-  handleDocChanged,
+  handleDocOrSelectionChanged,
   handleToggleContextualMenu,
-  handleSelectionChanged,
   handleShowInsertColumnButton,
   handleShowInsertRowButton,
+  handleHideInsertColumnOrRowButton,
 } from '../../../../plugins/table/action-handlers';
 import { TableDecorations } from '../../../../plugins/table/types';
 
@@ -88,24 +87,6 @@ describe('table action handlers', () => {
       });
     });
   });
-  describe('#handleSetTargetCellRef', () => {
-    it('should return a new state with updated targetCellRef and isContextualMenuOpen props', () => {
-      const pluginState = {
-        ...defaultPluginState,
-        isContextualMenuOpen: true,
-      };
-      const targetCellRef = document.createElement('td');
-      const newState = handleSetTargetCellRef(targetCellRef)(
-        pluginState,
-        dispatch,
-      );
-      expect(newState).toEqual({
-        ...pluginState,
-        targetCellRef,
-        isContextualMenuOpen: false,
-      });
-    });
-  });
   describe('#handleSetTargetCellPosition', () => {
     it('should return a new state with updated targetCellPosition and isContextualMenuOpen props', () => {
       const pluginState = {
@@ -132,12 +113,9 @@ describe('table action handlers', () => {
         decorationSet: DecorationSet.create(editorView.state.doc, [
           getHoverDecoration(),
         ]),
-        dangerColumns: [1, 2, 3],
-        dangerRows: [1, 2, 3],
-        isTableInDanger: true,
-        isTableHovered: true,
-        insertColumnButtonIndex: 4,
-        insertRowButtonIndex: 2,
+        hoveredColumns: [1, 2, 3],
+        hoveredRows: [1, 2, 3],
+        isInDanger: true,
       };
       const newState = handleClearSelection(pluginState, dispatch);
       expect(newState).toEqual({
@@ -148,92 +126,52 @@ describe('table action handlers', () => {
     });
   });
   describe('#handleHoverColumns', () => {
-    it('should return a new state with updated dangerColumns and decorationSet props', () => {
+    it('should return a new state with updated hoveredColumns and decorationSet props', () => {
       const { editorView } = editor(doc(table()(tr(tdCursor, tdEmpty))));
       const pluginState = {
         ...defaultPluginState,
       };
-      const dangerColumns = [0];
+      const hoveredColumns = [0];
+      const isInDanger = true;
       const newState = handleHoverColumns(
         editorView.state,
         [getHoverDecoration()],
-        dangerColumns,
+        hoveredColumns,
+        isInDanger,
       )(pluginState, dispatch);
       expect(newState).toEqual({
         ...pluginState,
-        isTableInDanger: false,
         decorationSet: DecorationSet.create(editorView.state.doc, [
           getHoverDecoration(),
         ]),
-        dangerColumns,
-      });
-    });
-    describe('when dangerColumns === total number of columns', () => {
-      it('should return a new state with isTableInDanger = true', () => {
-        const { editorView } = editor(doc(table()(tr(tdCursor, tdEmpty))));
-        const pluginState = {
-          ...defaultPluginState,
-        };
-        const hoverDecoration: Decoration[] = [];
-        const dangerColumns = [0, 1];
-        const newState = handleHoverColumns(
-          editorView.state,
-          hoverDecoration,
-          dangerColumns,
-        )(pluginState, dispatch);
-        expect(newState).toEqual({
-          ...pluginState,
-          isTableInDanger: true,
-          decorationSet: DecorationSet.empty,
-          dangerColumns,
-        });
+        hoveredColumns,
+        isInDanger,
       });
     });
   });
   describe('#handleHoverRows', () => {
-    it('should return a new state with updated dangerRows and hoverDecoration props', () => {
+    it('should return a new state with updated hoveredRows and hoverDecoration props', () => {
       const { editorView } = editor(
         doc(table()(tr(tdCursor, tdEmpty), tr(tdEmpty, tdEmpty))),
       );
       const pluginState = {
         ...defaultPluginState,
       };
-      const dangerRows = [0];
+      const hoveredRows = [0];
+      const isInDanger = true;
       const newState = handleHoverRows(
         editorView.state,
         [getHoverDecoration()],
-        dangerRows,
+        hoveredRows,
+        isInDanger,
       )(pluginState, dispatch);
       expect(newState).toEqual({
         ...pluginState,
-        isTableInDanger: false,
         decorationSet: DecorationSet.create(editorView.state.doc, [
           getHoverDecoration(),
         ]),
-        dangerRows,
-      });
-    });
-    describe('when dangerRows === total number of columns', () => {
-      it('should return a new state with isTableInDanger = true', () => {
-        const { editorView } = editor(
-          doc(table()(tr(tdCursor, tdEmpty), tr(tdEmpty, tdEmpty))),
-        );
-        const pluginState = {
-          ...defaultPluginState,
-        };
-        const hoverDecoration: Decoration[] = [];
-        const dangerRows = [0, 1];
-        const newState = handleHoverRows(
-          editorView.state,
-          hoverDecoration,
-          dangerRows,
-        )(pluginState, dispatch);
-        expect(newState).toEqual({
-          ...pluginState,
-          isTableInDanger: true,
-          decorationSet: DecorationSet.empty,
-          dangerRows,
-        });
+        hoveredRows,
+        isInDanger,
       });
     });
   });
@@ -246,62 +184,64 @@ describe('table action handlers', () => {
         ...defaultPluginState,
       };
 
+      const isInDanger = true;
+      const hoveredColumns = [0];
+      const hoveredRows = [0];
       const newState = handleHoverTable(
         editorView.state,
         [getHoverDecoration()],
-        true,
+        hoveredColumns,
+        hoveredRows,
+        isInDanger,
       )(pluginState, dispatch);
       expect(newState).toEqual({
         ...pluginState,
         decorationSet: DecorationSet.create(editorView.state.doc, [
           getHoverDecoration(),
         ]),
-        isTableInDanger: true,
-        isTableHovered: true,
+        hoveredColumns,
+        hoveredRows,
+        isInDanger,
       });
     });
   });
   describe('#handleToggleContextualMenu', () => {
-    it('should return a new state with updated isContextualMenuOpen prop', () => {
-      const pluginState = {
-        ...defaultPluginState,
-        isContextualMenuOpen: false,
-      };
-      const newState = handleToggleContextualMenu(true)(pluginState, dispatch);
-      expect(newState).toEqual({
-        ...pluginState,
-        isContextualMenuOpen: true,
+    describe('when isContextualMenuOpen === false', () => {
+      it('should return a new state with isContextualMenuOpen = true', () => {
+        const pluginState = {
+          ...defaultPluginState,
+          isContextualMenuOpen: false,
+        };
+        const newState = handleToggleContextualMenu(pluginState, dispatch);
+        expect(newState).toEqual({
+          ...pluginState,
+          isContextualMenuOpen: true,
+        });
+      });
+    });
+    describe('when isContextualMenuOpen === true', () => {
+      it('should return a new state with isContextualMenuOpen = false', () => {
+        const pluginState = {
+          ...defaultPluginState,
+          isContextualMenuOpen: true,
+        };
+        const newState = handleToggleContextualMenu(pluginState, dispatch);
+        expect(newState).toEqual({
+          ...pluginState,
+          isContextualMenuOpen: false,
+        });
       });
     });
   });
-  describe('#handleDocChanged', () => {
+  describe('#handleDocOrSelectionChanged', () => {
     it('should return a new state with updated tableNode prop and reset selection', () => {
       const pluginState = {
         ...defaultPluginState,
-        dangerColumns: [1, 2, 3],
-        dangerRows: [1, 2, 3],
-        isTableInDanger: true,
-        isTableHovered: true,
+        hoveredColumns: [1, 2, 3],
+        hoveredRows: [1, 2, 3],
+        isInDanger: true,
         tableNode: undefined,
-      };
-      const { editorView } = editor(
-        doc(table()(tr(tdCursor, tdEmpty), tr(tdEmpty, tdEmpty))),
-      );
-      const newState = handleDocChanged(editorView.state.tr)(
-        pluginState,
-        dispatch,
-      );
-      expect(newState).toEqual({
-        ...pluginState,
-        ...defaultTableSelection,
-        tableNode: editorView.state.doc.firstChild,
-      });
-    });
-  });
-  describe('#handleSelectionChanged', () => {
-    it('should return a new state with updated targetCellPosition', () => {
-      const pluginState = {
-        ...defaultPluginState,
+        targetCellPosition: undefined,
       };
       const { editorView } = editor(
         doc(table()(tr(tdCursor, tdEmpty), tr(tdEmpty, tdEmpty))),
@@ -311,12 +251,14 @@ describe('table action handlers', () => {
       editorView.dispatch(
         state.tr.setSelection(new TextSelection(state.doc.resolve(cursorPos))),
       );
-      const newState = handleSelectionChanged(editorView.state)(
+      const newState = handleDocOrSelectionChanged(editorView.state.tr)(
         pluginState,
         dispatch,
       );
       expect(newState).toEqual({
         ...pluginState,
+        ...defaultTableSelection,
+        tableNode: editorView.state.doc.firstChild,
         targetCellPosition: cursorPos - 2,
       });
     });
@@ -352,6 +294,21 @@ describe('table action handlers', () => {
       expect(newState).toEqual({
         ...pluginState,
         insertRowButtonIndex,
+      });
+    });
+  });
+  describe('#handleHideInsertColumnOrRowButton', () => {
+    it('should return a new state with insertColumnButtonIndex and insertRowButtonIndex set to undefined', () => {
+      const pluginState = {
+        ...defaultPluginState,
+        insertColumnButtonIndex: 1,
+        insertRowButtonIndex: 1,
+      };
+      const newState = handleHideInsertColumnOrRowButton(pluginState, dispatch);
+      expect(newState).toEqual({
+        ...pluginState,
+        insertColumnButtonIndex: undefined,
+        insertRowButtonIndex: undefined,
       });
     });
   });

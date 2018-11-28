@@ -91,7 +91,9 @@ export const Slide = ({
 }: TransitionProps) => (
   <TransitionHandler
     defaultStyles={{
-      transition: `transform ${transitionDurationMs}ms ${transitionTimingFunction}`,
+      transition:
+        `transform ${transitionDurationMs}ms ${transitionTimingFunction}, ` +
+        `width ${transitionDurationMs}ms ${transitionTimingFunction}`,
       transform: 'translate3d(-100%,0,0)',
     }}
     transitionStyles={{

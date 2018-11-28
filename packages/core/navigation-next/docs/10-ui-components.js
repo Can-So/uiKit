@@ -12,6 +12,35 @@ ${<Contents />}
 
 ${<Hr />}
 
+${<H>BackItem</H>}
+
+BackItem is a pre-configured version of [ConnectedItem](#connecteditem) that is used to navigate back to a parent view.
+Its text prop defaults to 'Back' and its before prop defaults to an ArrowLeftCircle icon. See [ConnectedItem](#connecteditem) for props.
+
+${(
+      <Example
+        packageName="@atlaskit/navigation-next"
+        Component={require('./examples/ui-components/BackItem').default}
+        title="BackItem"
+        source={require('!!raw-loader!./examples/ui-components/BackItem')}
+      />
+    )}
+
+${<Hr />}
+
+${<H>ConnectedItem</H>}
+
+ConnectedItem is an Item that will render a [GoToItem](#gotoitem) if goTo prop is provided, otherwise it will render an [Item](#item).
+
+${(
+      <Props
+        heading="ConnectedItem props"
+        props={require('!!extract-react-types-loader!../src/components/connected/ConnectedItem')}
+      />
+    )}
+
+${<Hr />}
+
 ${<H>ContainerHeader</H>}
 
 The ContainerHeader is intended to be used in the container navigation layer for a project, space, etc. It is essentially an Item with some custom styles applied to it and has an almost identical props interface. The only difference is that the ContainerHeader does not accept a spacing prop.
@@ -27,7 +56,7 @@ ${(
 
 ## ContainerHeader props
 
-See [Item](#Item).
+See [Item](#item).
 
 ${<Hr />}
 
@@ -68,6 +97,22 @@ ${(
 
 ${<Hr />}
 
+${<H>GoToItem</H>}
+
+GoToItem is a special [Item](#item) that when clicked will cause a transition to the view specified by the 'goTo' prop. You will need to ensure that both the view you're
+transitioning from and to use the same [MenuSection](#menusection) component instance with the correct 'id' and parentId' props so that the transition animation works correctly.
+
+${(
+      <Example
+        packageName="@atlaskit/navigation-next"
+        Component={require('./examples/ui-components/GoToItem').default}
+        title="GoToItem"
+        source={require('!!raw-loader!./examples/ui-components/GoToItem')}
+      />
+    )}
+
+${<Hr />}
+
 ${<H>Group</H>}
 
 A useful component for rendering a group of Items with a heading and a separator. The heading and separator will only be rendered if the Group has children.
@@ -100,6 +145,28 @@ ${(
       <Props
         heading="GroupHeading props"
         props={require('!!extract-react-types-loader!../src/components/presentational/GroupHeading')}
+      />
+    )}
+
+${<Hr />}
+
+${<H>HeaderSection</H>}
+
+A section for the header of your nav view. Applies some minor styling to the standard section component.
+
+${(
+      <Example
+        packageName="@atlaskit/navigation-next"
+        Component={require('./examples/ui-components/HeaderSection').default}
+        title="Header Section"
+        source={require('!!raw-loader!./examples/ui-components/HeaderSection')}
+      />
+    )}
+
+${(
+      <Props
+        heading="HeaderSection props"
+        props={require('!!extract-react-types-loader!../src/components/presentational/HeaderSection')}
       />
     )}
 
@@ -151,11 +218,38 @@ ${(
 
 ${<Hr />}
 
+${<H>MenuSection</H>}
+
+A section for the main part of your nav view that enables animation into and out of nested views. Applies some minor styling to the standard section component and allows
+scrolling of content when there are too many items to display. If using directly, take care to ensure you share the same MenuSection component across
+views as animation relies on the component remaining mounted for view transitions.
+
+${(
+      <Example
+        packageName="@atlaskit/navigation-next"
+        Component={require('./examples/ui-components/MenuSection').default}
+        title="Menu Section"
+        source={require('!!raw-loader!./examples/ui-components/MenuSection')}
+      />
+    )}
+
+${(
+      <Props
+        heading="MenuSection props"
+        props={require('!!extract-react-types-loader!../src/components/presentational/MenuSection')}
+      />
+    )}
+
+${<Hr />}
+
 ${<H>Section</H>}
 
 The product or container navigation layers can be separated into Sections - a navigation is essentially a flat array of Sections. Within a Section, use Groups for further levels of division.
 
 Use Sections to perform nesting transitions. If a Section's props update and its parentId matches its previous id, or vice versa, it will automatically perform a nested navigation animation as it re-renders.
+
+In the majority of cases, you won't need to use Section directly and can use the specific [HeaderSection](#headersection) and [MenuSection](#menusection) components which provide some extra styling
+specific to headers and nested menu sections.
 
 ${(
       <Example
@@ -170,6 +264,56 @@ ${(
       <Props
         heading="Section props"
         props={require('!!extract-react-types-loader!../src/components/presentational/Section')}
+      />
+    )}
+
+${<Hr />}
+
+${<H>SortableContext</H>}
+
+Adds the ability to drag-and-drop items within a section. You must compose [SortableGroup](#sortablegroup) and [SortableItem](#sortableitem) components to achieve drag-and-drop behaviour.
+
+${(
+      <Example
+        packageName="@atlaskit/navigation-next"
+        Component={require('../examples/60-sortable-items').default}
+        title="Sortable items"
+        source={require('!!raw-loader!../examples/60-sortable-items')}
+      />
+    )}
+
+${(
+      <Props
+        heading="SortableContext props"
+        props={require('!!extract-react-types-loader!../src/components/connected/SortableContext')}
+      />
+    )}
+
+${<Hr />}
+
+${<H>SortableItem</H>}
+
+Sortable items are draggable versions of [Items](#item) and should be used within a [SortableGroup](#sortablegroup) that is inside a [SortableContext](#sortablecontext).
+Takes the same props as [Item](#item) as well as some additional props documented below.
+
+${(
+      <Props
+        heading="SortableItem props"
+        props={require('!!extract-react-types-loader!../src/components/connected/SortableItem')}
+      />
+    )}
+
+${<Hr />}
+
+${<H>SortableGroup</H>}
+
+Sortable groups are used to represent droppable areas within [SortableContext](#sortablecontext). The items within this group must be [SortableItems](#sortableitem) to achieve drag-and-drop behaviour.
+Takes the same props as [Group](#group) as well as some additional props documented below.
+
+${(
+      <Props
+        heading="SortableGroup props"
+        props={require('!!extract-react-types-loader!../src/components/connected/SortableGroup')}
       />
     )}
 
@@ -240,6 +384,38 @@ ${(
         }}
       />
     )}
+
+${<H>Changing Switcher styles</H>}
+
+The switcher component takes a styles prop which can be used to override the default styles.
+
+In case you want to override just a subset of the default styles, make sure to spread the **provided** argument on your styles Object.
+
+
+${(
+      <Example
+        packageName="@atlaskit/navigation-next"
+        Component={
+          require('./examples/ui-components/SwitcherCustomStyles').default
+        }
+        title="Switcher"
+        source={require('!!raw-loader!./examples/ui-components/SwitcherCustomStyles')}
+      />
+    )}
+
+${<Hr />}
+
+${<H>Wordmark</H>}
+
+Renders the provided icon or logo wordmark component with relevant padding.
+
+${(
+      <Props
+        heading="Wordmark props"
+        props={require('!!extract-react-types-loader!../src/components/presentational/Wordmark')}
+      />
+    )}
+
 `}
   </ContentsProvider>
 );

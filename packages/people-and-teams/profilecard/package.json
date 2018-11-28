@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/profilecard",
-  "version": "4.0.10",
+  "version": "6.0.3",
   "config": {
     "access": "public"
   },
@@ -11,16 +11,22 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "i18n:push": "i18n-tools push --resource profilecard .",
+    "i18n:pull": "rm -rf ./src/i18n && i18n-tools push --resource profilecard . --outputType js"
+  },
   "dependencies": {
-    "@atlaskit/avatar": "^14.0.11",
-    "@atlaskit/button": "^9.0.13",
-    "@atlaskit/icon": "^14.0.0",
+    "@atlaskit/avatar": "^14.1.5",
+    "@atlaskit/button": "^10.0.1",
+    "@atlaskit/icon": "^15.0.0",
     "@atlaskit/layer": "^5.0.5",
-    "@atlaskit/spinner": "^9.0.6",
-    "@atlaskit/theme": "^6.0.0",
+    "@atlaskit/lozenge": "^6.2.2",
+    "@atlaskit/spinner": "^9.0.11",
+    "@atlaskit/theme": "^6.2.1",
     "@atlaskit/util-common": "^1.5.2",
     "@atlaskit/util-shared-styles": "^2.10.3",
     "babel-runtime": "^6.26.0",
+    "date-fns": "^1.29.0",
     "es6-promise": "^4.0.5",
     "lodash.sample": "^4.2.1",
     "lru-fast": "^0.2.2",
@@ -28,13 +34,15 @@
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^5.0.8",
-    "@atlaskit/dynamic-table": "^10.0.9",
+    "@atlaskit/docs": "^5.2.2",
+    "@atlaskit/dynamic-table": "^10.0.18",
+    "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/util-common-test": "^2.4.2",
     "@atlaskit/util-data-test": "^10.0.7",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "fetch-mock": "^6.5.2",
     "loader-utils": "^1.1.0",
+    "mockdate": "^2.0.2",
     "sinon": "^2.2.0",
     "uid": "^0.0.2"
   },
@@ -46,6 +54,7 @@
   "peerDependencies": {
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
+    "react-intl": "^2.6.0",
     "styled-components": "^3.2.6"
   },
   "repository": {

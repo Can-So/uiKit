@@ -702,6 +702,14 @@ System.out.println("There are " + count + " values >= 5");`,
             collection: 'MediaServicesSample',
           },
         },
+        {
+          type: 'media',
+          attrs: {
+            type: 'file',
+            id: '2afaf845-4385-431f-9a15-3e21520cf896',
+            collection: 'MediaServicesSample',
+          },
+        },
       ],
     },
     {
@@ -805,6 +813,23 @@ System.out.println("There are " + count + " values >= 5");`,
           ],
         },
       ],
+    },
+    {
+      type: 'codeBlock',
+      marks: [{ type: 'breakout', attrs: { mode: 'wide' } }],
+      content: [
+        {
+          type: 'text',
+          text: `// Create a map.
+final IntIntOpenHashMap map = new IntIntOpenHashMap();
+map.put(1, 2);
+map.put(2, 5);
+map.put(3, 10);`,
+        },
+      ],
+      attrs: {
+        language: 'javascript',
+      },
     },
     {
       type: 'orderedList',
@@ -1459,9 +1484,6 @@ System.out.println("There are " + count + " values >= 5");`,
     },
     {
       type: 'mediaSingle',
-      attrs: {
-        layout: 'full-width',
-      },
       content: [
         {
           type: 'media',
@@ -1478,7 +1500,6 @@ System.out.println("There are " + count + " values >= 5");`,
       attrs: {
         extensionType: 'com.atlassian.fabric',
         extensionKey: 'clock',
-        bodyType: 'rich',
       },
       content: [
         {

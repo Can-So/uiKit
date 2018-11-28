@@ -7,7 +7,7 @@ export const vendorify = (
 ): string => {
   let prefix = '';
 
-  if (HTMLElement.prototype.webkitRequestFullscreen) {
+  if ((HTMLElement as any).prototype.webkitRequestFullscreen) {
     prefix = 'webkit';
   } else if ((HTMLElement as any).prototype['mozRequestFullScreen']) {
     prefix = 'moz';

@@ -1,7 +1,6 @@
 import { EditorState, Transaction } from 'prosemirror-state';
 import { findTable, findParentNodeOfType } from 'prosemirror-utils';
 import { DecorationSet, Decoration } from 'prosemirror-view';
-import { TableMap } from 'prosemirror-tables';
 import { Dispatch } from '../../event-dispatcher';
 import { pluginKey, defaultTableSelection } from './pm-plugins/main';
 import { TablePluginState, TableCssClassName as ClassName } from './types';
@@ -48,25 +47,6 @@ export const handleSetTableRef = (
   return nextPluginState;
 };
 
-export const handleSetTargetCellRef = (targetCellRef?: HTMLElement) => (
-  pluginState: TablePluginState,
-  dispatch: Dispatch,
-): TablePluginState => {
-  // If our target isn't an element (e.g. text node), we don't want to use it.
-  // Since we need bounding information etc.
-  if (targetCellRef && !(targetCellRef instanceof HTMLTableCellElement)) {
-    targetCellRef = undefined;
-  }
-
-  const nextPluginState = {
-    ...pluginState,
-    targetCellRef,
-    isContextualMenuOpen: false,
-  };
-  dispatch(pluginKey, nextPluginState);
-  return nextPluginState;
-};
-
 export const handleSetTargetCellPosition = (targetCellPosition?: number) => (
   pluginState: TablePluginState,
   dispatch: Dispatch,
@@ -99,11 +79,9 @@ export const handleClearSelection = (
 export const handleHoverColumns = (
   state: EditorState,
   hoverDecoration: Decoration[],
-  dangerColumns: number[],
+  hoveredColumns: number[],
+  isInDanger: boolean,
 ) => (pluginState: TablePluginState, dispatch: Dispatch): TablePluginState => {
-  const table = findTable(state.selection)!;
-  const map = TableMap.get(table.node);
-
   const nextPluginState = {
     ...pluginState,
     decorationSet: processDecorations(
@@ -112,8 +90,8 @@ export const handleHoverColumns = (
       hoverDecoration,
       findControlsHoverDecoration,
     ),
-    dangerColumns,
-    isTableInDanger: map.width === dangerColumns.length ? true : false,
+    hoveredColumns,
+    isInDanger,
   };
   dispatch(pluginKey, nextPluginState);
   return nextPluginState;
@@ -122,11 +100,9 @@ export const handleHoverColumns = (
 export const handleHoverRows = (
   state: EditorState,
   hoverDecoration: Decoration[],
-  dangerRows: number[],
+  hoveredRows: number[],
+  isInDanger: boolean,
 ) => (pluginState: TablePluginState, dispatch: Dispatch): TablePluginState => {
-  const table = findTable(state.selection)!;
-  const map = TableMap.get(table.node);
-
   const nextPluginState = {
     ...pluginState,
     decorationSet: processDecorations(
@@ -135,8 +111,8 @@ export const handleHoverRows = (
       hoverDecoration,
       findControlsHoverDecoration,
     ),
-    dangerRows,
-    isTableInDanger: map.height === dangerRows.length ? true : false,
+    hoveredRows,
+    isInDanger,
   };
   dispatch(pluginKey, nextPluginState);
   return nextPluginState;
@@ -145,7 +121,9 @@ export const handleHoverRows = (
 export const handleHoverTable = (
   state: EditorState,
   hoverDecoration: Decoration[],
-  isTableInDanger: boolean,
+  hoveredColumns: number[],
+  hoveredRows: number[],
+  isInDanger: boolean,
 ) => (pluginState: TablePluginState, dispatch: Dispatch): TablePluginState => {
   const nextPluginState = {
     ...pluginState,
@@ -155,28 +133,43 @@ export const handleHoverTable = (
       hoverDecoration,
       findControlsHoverDecoration,
     ),
-    isTableInDanger,
-    isTableHovered: true,
+    hoveredColumns,
+    hoveredRows,
+    isInDanger,
   };
   dispatch(pluginKey, nextPluginState);
   return nextPluginState;
 };
 
-export const handleDocChanged = (tr: Transaction) => (
+export const handleDocOrSelectionChanged = (tr: Transaction) => (
   pluginState: TablePluginState,
   dispatch: Dispatch,
 ): TablePluginState => {
+  let tableNode;
+  let targetCellPosition;
   const table = findTable(tr.selection);
-  const tableNode = table ? table.node : undefined;
-  const { decorationSet } = pluginState;
-  const hoverDecoration = findControlsHoverDecoration(decorationSet);
-  if (pluginState.tableNode !== tableNode || hoverDecoration.length) {
-    const { decorationSet } = pluginState;
+  if (table) {
+    tableNode = table.node;
+    const { tableCell, tableHeader } = tr.doc.type.schema.nodes;
+    const cell = findParentNodeOfType([tableCell, tableHeader])(tr.selection);
+    targetCellPosition = cell ? cell.pos : undefined;
+  }
+
+  const hoverDecoration = findControlsHoverDecoration(
+    pluginState.decorationSet,
+  );
+
+  if (
+    pluginState.tableNode !== tableNode ||
+    pluginState.targetCellPosition !== targetCellPosition ||
+    hoverDecoration.length
+  ) {
     const nextPluginState = {
       ...pluginState,
       ...defaultTableSelection,
       // @see: https://product-fabric.atlassian.net/browse/ED-3796
-      decorationSet: decorationSet.remove(hoverDecoration),
+      decorationSet: pluginState.decorationSet.remove(hoverDecoration),
+      targetCellPosition,
       tableNode,
     };
     dispatch(pluginKey, nextPluginState);
@@ -186,32 +179,13 @@ export const handleDocChanged = (tr: Transaction) => (
   return pluginState;
 };
 
-export const handleSelectionChanged = (state: EditorState) => (
-  pluginState: TablePluginState,
-  dispatch: Dispatch,
-): TablePluginState => {
-  const { tableCell, tableHeader } = state.schema.nodes;
-  const cell = findParentNodeOfType([tableCell, tableHeader])(state.selection);
-  const targetCellPosition = cell ? cell.pos : undefined;
-  if (pluginState.targetCellPosition !== targetCellPosition) {
-    const nextPluginState = {
-      ...pluginState,
-      targetCellPosition,
-    };
-    dispatch(pluginKey, nextPluginState);
-    return nextPluginState;
-  }
-
-  return pluginState;
-};
-
-export const handleToggleContextualMenu = (isContextualMenuOpen: boolean) => (
+export const handleToggleContextualMenu = (
   pluginState: TablePluginState,
   dispatch: Dispatch,
 ): TablePluginState => {
   const nextPluginState = {
     ...pluginState,
-    isContextualMenuOpen,
+    isContextualMenuOpen: !pluginState.isContextualMenuOpen,
   };
   dispatch(pluginKey, nextPluginState);
   return nextPluginState;
@@ -235,6 +209,19 @@ export const handleShowInsertRowButton = (insertRowButtonIndex?: number) => (
   const nextPluginState = {
     ...pluginState,
     insertRowButtonIndex,
+  };
+  dispatch(pluginKey, nextPluginState);
+  return nextPluginState;
+};
+
+export const handleHideInsertColumnOrRowButton = (
+  pluginState: TablePluginState,
+  dispatch: Dispatch,
+): TablePluginState => {
+  const nextPluginState = {
+    ...pluginState,
+    insertColumnButtonIndex: undefined,
+    insertRowButtonIndex: undefined,
   };
   dispatch(pluginKey, nextPluginState);
   return nextPluginState;

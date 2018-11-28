@@ -31,7 +31,7 @@ export default class FeedbackButton extends React.Component<Props> {
 
   handleSubmit = () => {
     this.hideDialog();
-    setTimeout(this.showFlag, 800);
+    window.setTimeout(this.showFlag, 800);
   };
 
   render() {

@@ -52,8 +52,12 @@ export class Footer extends Component<FooterProps> {
         onClick={onClick}
         isDisabled={!canInsert}
       >
-        {/* TODO [i18n] */}
-        {itemCount > 1 ? `Insert  ${itemCount} files` : 'Insert a file'}
+        <FormattedMessage
+          {...messages.insert_files}
+          values={{
+            0: itemCount,
+          }}
+        />
       </InsertButton>
     );
   }
@@ -88,4 +92,7 @@ const mapDispatchToProps = (
   onCancel: () => dispatch(hidePopup()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Footer);

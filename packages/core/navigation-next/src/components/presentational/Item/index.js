@@ -7,9 +7,9 @@ import InteractionStateManager from '../InteractionStateManager';
 import type { InteractionState } from '../InteractionStateManager/types';
 import { styleReducerNoOp } from '../../../theme';
 import ItemPrimitive from './primitives';
-import type { ConnectedItemProps } from './types';
+import type { ItemProps } from './types';
 
-export class ConnectedItem extends PureComponent<ConnectedItemProps> {
+class Item extends PureComponent<ItemProps> {
   static defaultProps = {
     styles: styleReducerNoOp,
     isSelected: false,
@@ -17,17 +17,16 @@ export class ConnectedItem extends PureComponent<ConnectedItemProps> {
     text: '',
   };
 
-  renderItem = (state: InteractionState) => (
-    <ItemPrimitive {...state} {...this.props} />
-  );
+  renderItem = (state: InteractionState) => {
+    const { createAnalyticsEvent, ...props } = this.props;
+    return <ItemPrimitive {...state} {...props} />;
+  };
 
   render() {
-    return (
-      <InteractionStateManager {...this.props}>
-        {this.renderItem}
-      </InteractionStateManager>
-    );
+    return <InteractionStateManager>{this.renderItem}</InteractionStateManager>;
   }
 }
 
-export default navigationItemClicked(ConnectedItem, 'item');
+export { Item as ItemBase };
+
+export default navigationItemClicked(Item, 'item');

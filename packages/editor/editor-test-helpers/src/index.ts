@@ -25,6 +25,7 @@ export {
   img,
   hr,
   em,
+  breakout,
   strong,
   code,
   a,
@@ -43,7 +44,6 @@ export {
   offsetRefs,
   panel,
   panelNote,
-  mentionQuery,
   hardBreak,
   emojiQuery,
   typeAheadQuery,
@@ -81,6 +81,7 @@ export {
   blockCard,
   clean,
   status,
+  alignment,
 } from './schema-builder';
 export { default as defaultSchema } from './schema';
 export * from './html-helpers';
@@ -103,10 +104,6 @@ export {
   bodiedExtensionData,
 } from './mock-extension-data';
 export * from './schema-element-builder';
-export {
-  cardProvider,
-  CardMockProvider,
-  DelayedCardMockProvider,
-} from './card-provider';
+export { cardProvider, EditorTestCardProvider } from './card-provider';
 export * from './enzyme';
 export { compareSelection } from './selection';

@@ -29,6 +29,7 @@ export interface GetFileOptions {
 export interface UploadingFileState {
   status: 'uploading';
   id: string;
+  occurrenceKey?: string;
   name: string;
   size: number;
   progress: number;
@@ -39,6 +40,7 @@ export interface UploadingFileState {
 export interface ProcessingFileState {
   status: 'processing';
   id: string;
+  occurrenceKey?: string;
   name: string;
   size: number;
   mediaType: MediaType;
@@ -49,6 +51,7 @@ export interface ProcessingFileState {
 export interface ProcessedFileState {
   status: 'processed';
   id: string;
+  occurrenceKey?: string;
   name: string;
   size: number;
   artifacts: MediaFileArtifacts;
@@ -59,6 +62,7 @@ export interface ProcessedFileState {
 export interface ProcessingFailedState {
   status: 'failed-processing';
   id: string;
+  occurrenceKey?: string;
   name: string;
   size: number;
   artifacts: Object;
@@ -69,6 +73,7 @@ export interface ProcessingFailedState {
 export interface ErrorFileState {
   status: 'error';
   id: string;
+  occurrenceKey?: string;
   message?: string;
 }
 export type FileState =

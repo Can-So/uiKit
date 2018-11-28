@@ -11,13 +11,13 @@ export interface WithObjectRenderProps {
 interface InnerWithObjectProps {
   client: Client;
   url: string;
-  children: (props: WithObjectRenderProps) => React.ReactNode;
+  children: (renderProps: WithObjectRenderProps) => React.ReactNode;
 }
 
 interface InnerWithObjectState {
   prevClient?: Client;
   prevUrl?: string;
-  state: ObjectState;
+  cardState: ObjectState;
   uuid: string;
 }
 
@@ -27,65 +27,50 @@ class InnerWithObject extends React.Component<
 > {
   state: InnerWithObjectState = {
     uuid: v4(),
-    state: {
-      status: 'resolving',
-      services: [],
-    },
+    cardState: { status: 'pending' },
   };
 
   reload = () => {
-    const { client, url } = this.props;
-    const {
-      state: { definitionId },
-    } = this.state;
-    client.reload(url, definitionId);
+    const { cardState } = this.state;
+    if (
+      cardState.status === 'errored' ||
+      cardState.status === 'unauthorized' ||
+      cardState.status === 'forbidden'
+    ) {
+      const { client, url } = this.props;
+      client.reload(url, cardState.definitionId);
+    }
   };
 
-  static getDerivedStateFromProps(
-    nextProps: InnerWithObjectProps,
-    prevState: InnerWithObjectState,
-  ) {
-    if (
-      nextProps.client !== prevState.prevClient ||
-      nextProps.url !== prevState.prevUrl
-    ) {
-      return {
-        state: {
-          status: 'resolving',
-          definitionId: prevState.state.definitionId,
-        },
-        prevClient: nextProps.client,
-        prevUrl: nextProps.url,
-      };
+  updateState = (incoming: [ObjectState | null, boolean]) => {
+    const { url, client } = this.props;
+    const [state, expired] = incoming;
+
+    if (state === null || expired) {
+      return client.resolve(url);
     }
-    return null;
-  }
+
+    return this.setState({
+      cardState: state,
+    });
+  };
 
   componentDidMount() {
     const { client, url } = this.props;
     const { uuid } = this.state;
-    const {
-      state: { definitionId },
-    } = this.state;
-    client.register(url, uuid, this.updateState).resolve(url, definitionId);
+    client.register(url).subscribe(uuid, this.updateState);
   }
-
-  updateState = (state: ObjectState) => {
-    this.setState({ state });
-  };
 
   componentDidUpdate(prevProps: InnerWithObjectProps) {
     const { client, url } = this.props;
     const { uuid } = this.state;
-    if (this.props.client !== prevProps.client) {
+    if (client !== prevProps.client) {
       prevProps.client.deregister(prevProps.url, uuid);
-      client.register(url, uuid, this.updateState).resolve(url);
+      client.register(url).subscribe(uuid, this.updateState);
     }
-    if (this.props.url !== prevProps.url) {
-      client
-        .deregister(prevProps.url, uuid)
-        .register(url, uuid, this.updateState)
-        .resolve(url);
+    if (url !== prevProps.url) {
+      client.deregister(prevProps.url, uuid);
+      client.register(url).subscribe(uuid, this.updateState);
     }
     return;
   }
@@ -93,14 +78,13 @@ class InnerWithObject extends React.Component<
   componentWillUnmount() {
     const { client, url } = this.props;
     const { uuid } = this.state;
-
     client.deregister(url, uuid);
   }
 
   render() {
     const { children } = this.props;
-    const { state } = this.state;
-    return children({ state, reload: this.reload });
+    const { cardState } = this.state;
+    return children({ state: cardState, reload: this.reload });
   }
 }
 

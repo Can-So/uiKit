@@ -19,6 +19,8 @@ import {
   transformSliceToAddTableHeaders,
   deleteColumns,
   deleteRows,
+  deleteSelectedColumns,
+  deleteSelectedRows,
   emptyMultipleCells,
   setMultipleCellAttrs,
   toggleContextualMenu,
@@ -199,6 +201,78 @@ describe('table plugin: actions', () => {
     });
   });
 
+  describe('#deleteSelectedColumns', () => {
+    describe('when some of the columns are merged', () => {
+      it('should delete columns and update colspans of cells DOM nodes', () => {
+        const { editorView } = editor(
+          doc(
+            p('text'),
+            table()(
+              tr(td({ colspan: 2 })(p('{<>}c1')), td({})(p('c2'))),
+              tr(td({})(p('c3')), td({})(p('c4')), td({})(p('c5'))),
+            ),
+          ),
+        );
+        const { state, dispatch } = editorView;
+        selectColumn(0)(state, dispatch);
+        deleteSelectedColumns(editorView.state, dispatch);
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            p('text'),
+            table()(
+              tr(td({ colspan: 1 })(p('c2'))),
+              tr(td({ colspan: 1 })(p('c5'))),
+            ),
+          ),
+        );
+        const cells = editorView.dom.querySelectorAll('td');
+        for (let i = 0, count = cells.length; i < count; i++) {
+          const cell = cells[i] as HTMLElement;
+          expect(cell.getAttribute('colspan')).not.toEqual('2');
+        }
+        editorView.destroy();
+      });
+    });
+  });
+
+  describe('#deleteSelectedRows', () => {
+    describe('when some of the rows are merged', () => {
+      it('should delete rows and update rowspans of cells DOM nodes', () => {
+        const { editorView } = editor(
+          doc(
+            p('text'),
+            table()(
+              tr(td({ rowspan: 2 })(p('{<>}c1')), td({})(p('c2'))),
+              tr(td({})(p('c3'))),
+              tr(td({})(p('c4')), td({})(p('c5')), td({})(p('c6'))),
+            ),
+          ),
+        );
+        const { state, dispatch } = editorView;
+        selectRow(0)(state, dispatch);
+        deleteSelectedRows(editorView.state, dispatch);
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            p('text'),
+            table()(
+              tr(
+                td({ rowspan: 1 })(p('c4')),
+                td({ rowspan: 1 })(p('c5')),
+                td({ rowspan: 1 })(p('c6')),
+              ),
+            ),
+          ),
+        );
+        const cells = editorView.dom.querySelectorAll('td');
+        for (let i = 0, count = cells.length; i < count; i++) {
+          const cell = cells[i] as HTMLElement;
+          expect(cell.getAttribute('rowspan')).not.toEqual('2');
+        }
+        editorView.destroy();
+      });
+    });
+  });
+
   describe('#deleteRows', () => {
     it('should delete rows by indexes', () => {
       const { editorView } = editor(
@@ -317,7 +391,7 @@ describe('table plugin: actions', () => {
         doc(p('text'), table()(tr(tdEmpty, tdEmpty))),
       );
       const { state, dispatch } = editorView;
-      toggleContextualMenu(true)(state, dispatch);
+      toggleContextualMenu(state, dispatch);
       const { isContextualMenuOpen } = getPluginState(editorView.state);
       expect(isContextualMenuOpen).toBe(true);
     });

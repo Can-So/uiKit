@@ -38,7 +38,7 @@ export type ButtonAppearance = 'subtle' | 'danger';
 export interface Props {
   title: string;
   icon: ReactElement<any>;
-  onClick: (event: Event) => void;
+  onClick: React.MouseEventHandler;
   onMouseEnter?: <T>(event: MouseEvent<T>) => void;
   onMouseLeave?: <T>(event: MouseEvent<T>) => void;
   selected?: boolean;

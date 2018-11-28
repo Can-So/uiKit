@@ -7,7 +7,7 @@ const jest = require('jest');
 const meow = require('meow');
 
 const browserstack = require('./utils/browserstack');
-const selenium = require('./utils/selenium');
+const local = require('./utils/chromeDriver');
 const webpack = require('./utils/webpack');
 const reportTestFailures = require('./reporting');
 
@@ -56,7 +56,13 @@ async function runJest(testPaths) {
 
 async function rerunFailedTests(result) {
   const failingTestPaths = result.testResults
-    .filter(testResult => testResult.numFailingTests > 0)
+    // If a test **suite** fails (where no tests are executed), we should check to see if
+    // failureMessage is truthy, as no tests have actually run in this scenario.
+    .filter(
+      testResult =>
+        testResult.numFailingTests > 0 ||
+        (testResult.failureMessage && result.numFailedTestSuites > 0),
+    )
     .map(testResult => testResult.testFilePath);
 
   if (!failingTestPaths.length) {
@@ -108,7 +114,7 @@ async function main() {
 
   isBrowserStack
     ? await browserstack.startBrowserStack()
-    : await selenium.startSelenium();
+    : await local.startChromeServer();
 
   const code = await runTestsWithRetry();
 
@@ -117,7 +123,7 @@ async function main() {
     webpack.stopDevServer();
   }
 
-  isBrowserStack ? browserstack.stopBrowserStack() : selenium.stopSelenium();
+  isBrowserStack ? browserstack.stopBrowserStack() : local.stopChromeServer();
   process.exit(code);
 }
 

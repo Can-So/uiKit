@@ -6,7 +6,11 @@ import { AtlasKitThemeProvider, colors, themed } from '@atlaskit/theme';
 import { profiles } from '../../mock-helpers';
 import { AkProfilecard } from '../../src';
 
-import type { PresenceTypes } from '../../src/types';
+import type {
+  PresenceTypes,
+  StatusTypes,
+  StatusModifiedDateType,
+} from '../../src/types';
 
 const StoryWrapper = styled.div`
   label {
@@ -43,13 +47,17 @@ type State = {
   presence: PresenceTypes,
   fullName: string,
   nickname: string,
+  companyName: string,
   meta: string,
   location: string,
   timeString: string,
+  statusModifiedDate?: number,
+  statusModifiedDateFieldName: StatusModifiedDateType,
 
   isBot: boolean,
-  isActive: boolean,
-  isCensored: boolean,
+  status: StatusTypes,
+  customElevation?: string,
+  hasCustomElevation: boolean,
 
   hasDarkTheme: boolean,
   hasWeekday: boolean,
@@ -75,17 +83,22 @@ export default class ProfilecardInteractive extends Component<Props, State> {
     nickname: 'natalie',
     meta: 'Senior Developer',
     location: 'Sydney, Australia',
+    companyName: 'Atlassian',
     timeString: getTimeString(),
+    statusModifiedDate: undefined,
+    statusModifiedDateFieldName: 'noDate',
+    customElevation: undefined,
+    hasCustomElevation: false,
 
     isBot: false,
-    isActive: true,
-    isCensored: false,
+    status: 'active',
 
     hasDarkTheme: false,
     hasWeekday: false,
     hasAvatar: true,
     hasMeta: true,
     hasLocation: true,
+    hasCompanyName: true,
     hasTime: true,
     hasLongName: false,
     hasLongRole: false,
@@ -136,7 +149,96 @@ export default class ProfilecardInteractive extends Component<Props, State> {
     );
   }
 
+  createRadioStatusAttribute(attribute: StatusTypes) {
+    const id = `label-${uid()}`;
+
+    return (
+      <label htmlFor={id}>
+        <input
+          checked={this.state.status === attribute}
+          id={id}
+          onChange={() => this.setState({ status: attribute })}
+          type="radio"
+        />
+        {attribute}
+      </label>
+    );
+  }
+
+  createRadioStatusModifiedDate(attribute: StatusModifiedDateType) {
+    const id = `label-${uid()}`;
+
+    return (
+      <label htmlFor={id}>
+        <input
+          checked={this.state.statusModifiedDateFieldName === attribute}
+          id={id}
+          onChange={() => {
+            let dateTimeInMilliSeconds;
+            const today = new Date();
+
+            switch (attribute) {
+              case 'thisWeek':
+                // if `today.getDate() - 1` === 0, the last date of previous month is returned
+                dateTimeInMilliSeconds = new Date(today).setDate(
+                  today.getDate() - 1,
+                );
+                break;
+
+              case 'thisMonth':
+                // in case, today is 1st or 2st, so we can not render "this month" period
+                // above periods can be displayed instead.
+                dateTimeInMilliSeconds = new Date(today).setDate(1);
+                break;
+
+              case 'lastMonth':
+                // if `today.getMonth() - 1` === -1, the last date of Dec of previous year is returned.
+                dateTimeInMilliSeconds = new Date(today).setMonth(
+                  today.getMonth() - 1,
+                );
+                break;
+
+              case 'aFewMonths':
+                dateTimeInMilliSeconds = new Date(today).setMonth(
+                  today.getMonth() - 3,
+                );
+                break;
+
+              case 'severalMonths':
+                dateTimeInMilliSeconds = new Date(today).setMonth(
+                  today.getMonth() - 7,
+                );
+                break;
+
+              case 'moreThanAYear':
+                dateTimeInMilliSeconds = new Date(today).setMonth(
+                  today.getMonth() - 13,
+                );
+                break;
+
+              default:
+                dateTimeInMilliSeconds = undefined;
+            }
+
+            const dateTimeInSeconds = dateTimeInMilliSeconds
+              ? dateTimeInMilliSeconds / 1000
+              : undefined;
+
+            return this.setState({
+              statusModifiedDate: dateTimeInSeconds,
+              statusModifiedDateFieldName: attribute,
+            });
+          }}
+          type="radio"
+        />
+        {attribute}
+      </label>
+    );
+  }
+
   render() {
+    const { hasCustomElevation } = this.state;
+
     const customActions = [
       { label: 'Foo', id: 'foo', callback: handleActionClick('Foo') },
       { label: 'Bar', id: 'bar', callback: handleActionClick('Bar') },
@@ -144,6 +246,7 @@ export default class ProfilecardInteractive extends Component<Props, State> {
     ];
 
     const actions = this.state.hasAltActions ? customActions : this.actions;
+    const customElevation = hasCustomElevation ? 'e100' : undefined;
 
     const meta = this.state.hasLongRole
       ? 'Sed do eiusmod tempor incididunt ut labore'
@@ -159,8 +262,9 @@ export default class ProfilecardInteractive extends Component<Props, State> {
               hasError={this.state.hasErrorState}
               actions={this.state.hasNoActions ? [] : actions}
               isBot={this.state.isBot}
-              isActive={this.state.isActive}
-              isCensored={this.state.isCensored}
+              status={this.state.status}
+              statusModifiedDate={this.state.statusModifiedDate}
+              customElevation={customElevation}
               avatarUrl={this.state.hasAvatar ? this.state.avatarUrl : ''}
               email={this.state.email}
               fullName={
@@ -169,6 +273,9 @@ export default class ProfilecardInteractive extends Component<Props, State> {
                   : this.state.fullName
               }
               location={this.state.hasLocation ? this.state.location : ''}
+              companyName={
+                this.state.hasCompanyName ? this.state.companyName : ''
+              }
               meta={this.state.hasMeta ? meta : ''}
               nickname={this.state.nickname}
               presence={this.state.presence}
@@ -184,13 +291,14 @@ export default class ProfilecardInteractive extends Component<Props, State> {
             />
           </ProfileCardWrapper>
 
-          <div style={{ marginTop: '16px' }}>
+          <div style={{ marginTop: '16px', clear: 'both', overflow: 'auto' }}>
             <ul>
               <li>{this.createCheckboxBooleanAttribute('hasAvatar')}</li>
               <li>{this.createCheckboxBooleanAttribute('hasAltActions')}</li>
               <li>{this.createCheckboxBooleanAttribute('hasNoActions')}</li>
               <li>{this.createCheckboxBooleanAttribute('hasMeta')}</li>
               <li>{this.createCheckboxBooleanAttribute('hasLocation')}</li>
+              <li>{this.createCheckboxBooleanAttribute('hasCompanyName')}</li>
               <li>{this.createCheckboxBooleanAttribute('hasTime')}</li>
             </ul>
 
@@ -204,8 +312,9 @@ export default class ProfilecardInteractive extends Component<Props, State> {
               <li>{this.createCheckboxBooleanAttribute('hasLoadingState')}</li>
               <li>{this.createCheckboxBooleanAttribute('hasErrorState')}</li>
               <li>{this.createCheckboxBooleanAttribute('isBot')}</li>
-              <li>{this.createCheckboxBooleanAttribute('isActive')}</li>
-              <li>{this.createCheckboxBooleanAttribute('isCensored')}</li>
+              <li>
+                {this.createCheckboxBooleanAttribute('hasCustomElevation')}
+              </li>
               <li>{this.createCheckboxBooleanAttribute('hasDarkTheme')}</li>
             </ul>
 
@@ -218,6 +327,29 @@ export default class ProfilecardInteractive extends Component<Props, State> {
               <li>
                 {this.createCheckboxBooleanAttribute('hasLongPresenceMessage')}
               </li>
+            </ul>
+          </div>
+
+          <div style={{ marginTop: '16px', clear: 'both', overflow: 'auto' }}>
+            <ul>
+              <li>{this.createRadioStatusAttribute('active')}</li>
+              <li>{this.createRadioStatusAttribute('inactive')}</li>
+              <li>{this.createRadioStatusAttribute('closed')}</li>
+            </ul>
+
+            <ul>
+              <li>
+                <strong>
+                  These are applied when `status` is `inactive` or `closed`
+                </strong>
+              </li>
+              <li>{this.createRadioStatusModifiedDate('noDate')}</li>
+              <li>{this.createRadioStatusModifiedDate('thisWeek')}</li>
+              <li>{this.createRadioStatusModifiedDate('thisMonth')}</li>
+              <li>{this.createRadioStatusModifiedDate('lastMonth')}</li>
+              <li>{this.createRadioStatusModifiedDate('aFewMonths')}</li>
+              <li>{this.createRadioStatusModifiedDate('severalMonths')}</li>
+              <li>{this.createRadioStatusModifiedDate('moreThanAYear')}</li>
             </ul>
           </div>
         </StoryWrapper>

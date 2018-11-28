@@ -53,4 +53,7 @@ export default connect<
   {},
   LocalBrowserButtonDispatchProps,
   LocalBrowserButtonProps
->(null, mapDispatchToProps)(LocalBrowserButton);
+>(
+  null,
+  mapDispatchToProps,
+)(LocalBrowserButton);

@@ -3,7 +3,7 @@ import { PureComponent } from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
 import TaskIcon from '@atlaskit/icon/glyph/editor/task';
-import { analyticsDecorator as analytics } from '../../../../analytics';
+import { withAnalytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import { insertTaskDecision } from '../../commands';
 import { messages } from '../../../insert-block/ui/ToolbarInsertBlock';
@@ -45,15 +45,17 @@ export class ToolbarTask extends PureComponent<
     );
   }
 
-  @analytics('atlassian.fabric.action.trigger.button')
-  private handleInsertTask = (): boolean => {
-    const { editorView } = this.props;
-    if (!editorView) {
-      return false;
-    }
-    insertTaskDecision(editorView, 'taskList');
-    return true;
-  };
+  private handleInsertTask = withAnalytics(
+    'atlassian.fabric.action.trigger.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      if (!editorView) {
+        return false;
+      }
+      insertTaskDecision(editorView, 'taskList');
+      return true;
+    },
+  );
 }
 
 export default injectIntl(ToolbarTask);

@@ -112,7 +112,7 @@ export class MemoryReactionsStore implements ReactionsStore {
 
   private flash = (reaction: ReactionSummary): void => {
     this.setFlash(reaction.containerAri, reaction.ari, reaction.emojiId, true);
-    setTimeout(
+    window.setTimeout(
       () =>
         this.setFlash(
           reaction.containerAri,
@@ -245,26 +245,28 @@ export class MemoryReactionsStore implements ReactionsStore {
     this.client.deleteReaction(containerAri, ari, emojiId);
   };
 
-  getReactions = batchByKey((containerAri: string, aris: string[][]): void => {
-    this.client
-      .getReactions(containerAri, aris.reduce(utils.flattenAris))
-      .then((value: Reactions) => {
-        Object.keys(value).map(ari => {
-          const reactionsState = this.getReactionsState(containerAri, ari);
-          const reactions =
-            reactionsState && reactionsState.status === ReactionStatus.ready
-              ? reactionsState.reactions
-              : undefined;
-          this.setReactions(
-            containerAri,
-            ari,
-            utils.readyState(
-              value[ari].sort(utils.getReactionsSortFunction(reactions)),
-            ),
-          );
+  getReactions = batchByKey(
+    (containerAri: string, aris: string[][]): void => {
+      this.client
+        .getReactions(containerAri, aris.reduce(utils.flattenAris))
+        .then((value: Reactions) => {
+          Object.keys(value).map(ari => {
+            const reactionsState = this.getReactionsState(containerAri, ari);
+            const reactions =
+              reactionsState && reactionsState.status === ReactionStatus.ready
+                ? reactionsState.reactions
+                : undefined;
+            this.setReactions(
+              containerAri,
+              ari,
+              utils.readyState(
+                value[ari].sort(utils.getReactionsSortFunction(reactions)),
+              ),
+            );
+          });
         });
-      });
-  });
+    },
+  );
 
   toggleReaction = this.withReaction(this.doRemoveReaction, this.doAddReaction);
   addReaction = this.withReaction(this.flash, this.doAddReaction);

@@ -7,7 +7,7 @@ import {
   randomId,
   storyMediaProviderFactory,
 } from '@atlaskit/editor-test-helpers';
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema, MediaAttributes } from '@atlaskit/editor-common';
 import {
   stateKey as mediaStateKey,
   DefaultMediaStateManager,
@@ -15,6 +15,7 @@ import {
 import MediaSingle from '../../../../../../plugins/media/nodeviews/mediaSingle';
 import Media from '../../../../../../plugins/media/nodeviews/media';
 import { ProviderFactory } from '@atlaskit/editor-common';
+import { EventDispatcher } from '../../../../../../event-dispatcher';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -30,15 +31,23 @@ const getFreshMediaProvider = () =>
 describe('nodeviews/mediaSingle', () => {
   let pluginState;
   const stateManager = new DefaultMediaStateManager();
-  const mediaNode = media({
+  const mediaNodeAttrs = {
     id: 'foo',
     type: 'file',
     collection: 'collection',
-  })();
+    width: 250,
+    height: 250,
+  };
+
+  const mediaNode = media(mediaNodeAttrs as MediaAttributes)();
   const externalMediaNode = media({
     type: 'external',
     url: 'http://image.jpg',
   })();
+
+  const view = {} as EditorView;
+  const eventDispatcher = {} as EventDispatcher;
+  const getPos = jest.fn();
 
   beforeEach(() => {
     const mediaProvider = getFreshMediaProvider();
@@ -53,6 +62,7 @@ describe('nodeviews/mediaSingle', () => {
         providerFactory: providerFactory,
       },
       handleMediaNodeMount: () => {},
+      updateElement: jest.fn(),
     };
 
     pluginState.stateManager = stateManager;
@@ -61,8 +71,6 @@ describe('nodeviews/mediaSingle', () => {
   });
 
   it('notifies plugin if node layout is updated', () => {
-    const getPos = jest.fn();
-    const view = {} as EditorView;
     const mediaSingleNode = mediaSingle({ layout: 'wrap-right' })(mediaNode);
     const updatedMediaSingleNode = mediaSingle({ layout: 'center' })(mediaNode)(
       defaultSchema,
@@ -74,6 +82,7 @@ describe('nodeviews/mediaSingle', () => {
     const wrapper = mount(
       <MediaSingle
         view={view}
+        eventDispatcher={eventDispatcher}
         node={mediaSingleNode(defaultSchema)}
         lineLength={680}
         getPos={getPos}
@@ -88,13 +97,11 @@ describe('nodeviews/mediaSingle', () => {
   });
 
   it('sets "onExternalImageLoaded" for external images', () => {
-    const getPos = jest.fn();
-    const view = {} as EditorView;
     const mediaSingleNode = mediaSingle()(externalMediaNode);
-
     const wrapper = mount(
       <MediaSingle
         view={view}
+        eventDispatcher={eventDispatcher}
         node={mediaSingleNode(defaultSchema)}
         lineLength={680}
         getPos={getPos}
@@ -104,6 +111,31 @@ describe('nodeviews/mediaSingle', () => {
     );
 
     expect(wrapper.find(Media).props().onExternalImageLoaded).toBeDefined();
+  });
+
+  it('passes the editor width down as cardDimensions', () => {
+    const mediaSingleNode = mediaSingle()(mediaNode);
+    const wrapper = mount(
+      <MediaSingle
+        view={view}
+        eventDispatcher={eventDispatcher}
+        node={mediaSingleNode(defaultSchema)}
+        lineLength={680}
+        getPos={getPos}
+        width={123}
+        selected={() => 1}
+      />,
+    );
+
+    const { cardDimensions } = wrapper.find(Media).props();
+    const imageAspectRatio = mediaNodeAttrs.height / mediaNodeAttrs.width;
+
+    expect(cardDimensions.width).toEqual('123px');
+    const cardHeight: string = cardDimensions.height as string;
+
+    expect(Number(cardHeight.substring(0, cardHeight.length - 2))).toBeCloseTo(
+      123 * imageAspectRatio,
+    );
   });
 
   afterEach(() => {

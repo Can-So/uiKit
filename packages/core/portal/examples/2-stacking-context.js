@@ -8,8 +8,9 @@ const StackingContextExample = () => (
       Each Portal component creates a new{' '}
       <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context">
         Stacking Context
-      </a>. Elements rendered with z-indexes inside the Portal are scoped to
-      that context.
+      </a>
+      . Elements rendered with z-indexes inside the Portal are scoped to that
+      context.
     </p>
     <Portal zIndex={200}>
       <div

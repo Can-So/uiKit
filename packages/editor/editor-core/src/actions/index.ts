@@ -5,7 +5,6 @@ import { Transformer } from '@atlaskit/editor-common';
 import {
   getEditorValueWithMedia,
   insertFileFromDataUrl as insertFileFromUrl,
-  preprocessDoc,
   toJSON,
   processRawValue,
 } from '../utils';
@@ -49,7 +48,7 @@ export default class EditorActions implements EditorActionsOptions {
     return this.editorView;
   }
 
-  _privateGetEventDispathcer(): EventDispatcher | undefined {
+  _privateGetEventDispatcher(): EventDispatcher | undefined {
     return this.eventDispatcher;
   }
 
@@ -128,14 +127,18 @@ export default class EditorActions implements EditorActionsOptions {
     return true;
   }
 
-  getValue(): Promise<any | undefined> {
-    return getEditorValueWithMedia(this.editorView).then(doc => {
-      const processedDoc = preprocessDoc(this.editorView!.state.schema, doc);
-      if (this.contentTransformer && processedDoc) {
-        return this.contentTransformer.encode(processedDoc);
-      }
-      return processedDoc ? toJSON(processedDoc) : processedDoc;
-    });
+  async getValue(): Promise<any | undefined> {
+    const doc = await getEditorValueWithMedia(this.editorView);
+
+    if (!doc) {
+      return;
+    }
+
+    if (this.contentTransformer) {
+      return this.contentTransformer.encode(doc);
+    }
+
+    return toJSON(doc);
   }
 
   replaceDocument(rawValue: any, shouldScrollToBottom = true): boolean {

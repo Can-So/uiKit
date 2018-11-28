@@ -10,7 +10,7 @@ import {
   type DraggableProvided,
   type DraggableStateSnapshot,
   type DroppableProvided,
-} from 'react-beautiful-dnd-next';
+} from 'react-beautiful-dnd';
 import { getBox } from 'css-box-model';
 import { calculateFinalDropPositions } from './Tree-utils';
 import type { Props, State, DragState } from './Tree-types';
@@ -110,6 +110,10 @@ export default class Tree extends Component<Props, State> {
       destination: update.destination,
       combine: update.combine,
     };
+  };
+
+  onDropAnimating = () => {
+    this.expandTimer.stop();
   };
 
   onDragEnd = (result: DropResult) => {
@@ -224,44 +228,49 @@ export default class Tree extends Component<Props, State> {
   };
 
   renderItems = (): Array<Node> => {
-    const {
-      renderItem,
-      onExpand,
-      onCollapse,
-      offsetPerLevel,
-      isDragEnabled,
-    } = this.props;
     const { flattenedTree } = this.state;
+    return flattenedTree.map(this.renderItem);
+  };
 
-    return flattenedTree.map((flatItem: FlattenedItem, index: number) => (
+  renderItem = (flatItem: FlattenedItem, index: number): Node => {
+    const { isDragEnabled } = this.props;
+
+    return (
       <Draggable
         draggableId={flatItem.item.id}
         index={index}
         key={flatItem.item.id}
         isDragDisabled={!isDragEnabled}
       >
-        {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => {
-          const currentPath: Path = this.calculateEffectivePath(
-            flatItem,
-            snapshot,
-          );
-          return (
-            <TreeItem
-              key={flatItem.item.id}
-              item={flatItem.item}
-              path={currentPath}
-              onExpand={onExpand}
-              onCollapse={onCollapse}
-              renderItem={renderItem}
-              provided={provided}
-              snapshot={snapshot}
-              itemRef={this.setItemRef}
-              offsetPerLevel={offsetPerLevel}
-            />
-          );
-        }}
+        {this.renderDraggableItem(flatItem)}
       </Draggable>
-    ));
+    );
+  };
+
+  renderDraggableItem = (flatItem: FlattenedItem) => (
+    provided: DraggableProvided,
+    snapshot: DraggableStateSnapshot,
+  ) => {
+    const { renderItem, onExpand, onCollapse, offsetPerLevel } = this.props;
+
+    const currentPath: Path = this.calculateEffectivePath(flatItem, snapshot);
+    if (snapshot.isDropAnimating) {
+      this.onDropAnimating();
+    }
+    return (
+      <TreeItem
+        key={flatItem.item.id}
+        item={flatItem.item}
+        path={currentPath}
+        onExpand={onExpand}
+        onCollapse={onCollapse}
+        renderItem={renderItem}
+        provided={provided}
+        snapshot={snapshot}
+        itemRef={this.setItemRef}
+        offsetPerLevel={offsetPerLevel}
+      />
+    );
   };
 
   render() {

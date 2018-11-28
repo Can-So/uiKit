@@ -80,7 +80,7 @@ export default class NotificationIndicator extends Component<Props, State> {
       clearInterval(this.intervalId);
     }
     if (refreshRate && refreshRate > 0) {
-      this.intervalId = setInterval(this.timerTick, refreshRate);
+      this.intervalId = window.setInterval(this.timerTick, refreshRate);
     }
   }
 

@@ -13,7 +13,7 @@ const baseStyles = {
     flexShrink: 0,
     fontSize: `${fontSize}px`,
     fontWeight: 600,
-    lineHeight: gridSize * 2 / fontSize,
+    lineHeight: (gridSize * 2) / fontSize,
     margin: `${gridSize * 4}px 0 ${gridSize}px`,
     padding: `0 ${gridSize * 1.5}px`,
     textTransform: 'uppercase',

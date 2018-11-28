@@ -8,7 +8,7 @@ export const handleEvent = (
   event: UIAnalyticsEventInterface,
   tag: string,
   logger: Logger,
-  client?: AnalyticsWebClient,
+  client?: AnalyticsWebClient | Promise<AnalyticsWebClient>,
 ) => {
   if (!event.payload) {
     return;

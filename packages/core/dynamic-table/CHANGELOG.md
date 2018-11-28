@@ -1,5 +1,27 @@
 # @atlaskit/dynamic-table
 
+## 10.0.18
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/pagination@8.0.6
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/toggle@5.0.11
+  - @atlaskit/button@10.0.0
+
+## 10.0.17
+- [patch] [abd3a39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abd3a39):
+
+  - Bump react-beautiful-dnd dependency to v10.0.2
+
+## 10.0.16
+- [patch] [85b3592](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85b3592):
+
+  - Passes analytics event through onSetPage prop when pagination component is clicked on
+
 ## 10.0.15
 - [patch] Fixing blank state for datetime-picker in Firefox.  [0e6d838](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e6d838)
 

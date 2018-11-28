@@ -1,5 +1,125 @@
 # @atlaskit/onboarding
 
+## 6.1.11
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/portal@0.0.16
+  - @atlaskit/icon@15.0.0
+
+## 6.1.10
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/popper@0.3.2
+  - @atlaskit/portal@0.0.15
+  - @atlaskit/progress-indicator@5.0.9
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 6.1.9
+- [patch] [e151c1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e151c1a):
+
+  - Removes dependency on @atlaskit/layer-manager
+
+  As of component versions:
+
+  - \`@atlaskit/modal-dialog@7.0.0\`
+  - \`@atlaskit/tooltip@12.0.2\`
+  - \`@atlaskit/flag@9.0.6\`
+  - \`@atlaskit/onboarding@6.0.0\`
+
+  No component requires \`LayerManager\` to layer correctly.
+
+  You can safely remove this dependency and stop rendering \`LayerManager\` in your apps.
+
+## 6.1.8
+- Updated dependencies [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+  - @atlaskit/modal-dialog@7.0.9
+  - @atlaskit/portal@0.0.14
+
+## 6.1.7
+- Updated dependencies [3f5a4dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5a4dd):
+  - @atlaskit/modal-dialog@7.0.8
+  - @atlaskit/portal@0.0.13
+
+## 6.1.6
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 6.1.5
+- [patch] [b332c91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b332c91):
+
+  - upgrades verison of react-scrolllock to SSR safe version
+
+## 6.1.4
+- [patch] [9f91ea0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f91ea0):
+
+  - Adds visual regression test for ie11
+
+## 6.1.3
+- [patch] [4872a19](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4872a19):
+
+  * actions prop officially accepts Node type for text. Adds optional key to action type.
+
+  Previously if you were using the actions prop like:
+
+  ```jsx
+  <Spotlight
+    actions={[
+      {
+        text: <FormattedMessage defaultMessage="Next" />,
+      },
+      {
+        text: <FormattedMessage defaultMessage="Skip" />,
+      },
+    ]}
+  >
+    Look at this feature
+  </Spotlight>
+  ```
+
+  React would complain about duplicate keys. Now you can pass in
+  a key for the action like:
+
+  ```jsx
+  <Spotlight
+    actions={[
+      {
+        text: <FormattedMessage defaultMessage="Next" />,
+        key: 'next',
+      },
+      {
+        text: <FormattedMessage defaultMessage="Skip" />,
+        key: 'skip',
+      },
+    ]}
+  >
+    Look at this feature
+  </Spotlight>
+  ```
+
+## 6.1.2
+- [patch] [2482922"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2482922"
+d):
+
+  - Remove unecessary alt text for modal image to avoid redundancy for screenreaders
+
+## 6.1.1
+- [patch] [0c7a57d"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c7a57d"
+d):
+
+  - Fixes layering of blanket and spotlight components in IE11 and Edge
+
+## 6.1.0
+- [minor] Creates new SpotlightCard component. Internal refactor of Spotlight components. Spotlight state managed through context rather than local variable. [f9ba552](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f9ba552)
+
 ## 6.0.4
 - [patch] Updated dependencies [aaab348](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aaab348)
   - @atlaskit/modal-dialog@7.0.4

@@ -1,4 +1,12 @@
-import { Node, Fragment, Schema } from 'prosemirror-model';
+import { Node, Schema } from 'prosemirror-model';
+import { Transaction } from 'prosemirror-state';
+import {
+  validator,
+  Entity,
+  VALIDATION_ERRORS,
+  ValidationError,
+} from '@atlaskit/adf-utils';
+import { analyticsService } from '../analytics';
 
 /**
  * Checks if node is an empty paragraph.
@@ -91,41 +99,32 @@ export function isEmptyDocument(node: Node): boolean {
   );
 }
 
-export const preprocessDoc = (
-  schema: Schema,
-  origDoc: Node | undefined,
-): Node | undefined => {
-  if (!origDoc) {
-    return;
-  }
+function wrapWithUnsupported(
+  originalValue: Entity,
+  type: 'block' | 'inline' = 'block',
+) {
+  return {
+    type: `unsupported${type === 'block' ? 'Block' : 'Inline'}`,
+    attrs: { originalValue },
+  };
+}
 
-  const content: Node[] = [];
-  // A flag to indicate if the element in the array is the last paragraph
-  let isLastParagraph = true;
-
-  for (let i = origDoc.content.childCount - 1; i >= 0; i--) {
-    const node = origDoc.content.child(i);
-    const { taskList, decisionList } = schema.nodes;
-    if (
-      !(
-        node.type.name === 'paragraph' &&
-        node.content.size === 0 &&
-        isLastParagraph
-      ) &&
-      ((node.type !== taskList && node.type !== decisionList) ||
-        node.textContent)
-    ) {
-      content.push(node);
-      isLastParagraph = false;
-    }
-  }
-
-  return schema.nodes.doc.create({}, Fragment.fromArray(content.reverse()));
-};
+function fireAnalyticsEvent(
+  entity: Entity,
+  error: ValidationError,
+  type: 'block' | 'inline' | 'mark' = 'block',
+) {
+  const { code } = error;
+  analyticsService.trackEvent('atlassian.editor.unsupported', {
+    name: entity.type || 'unknown',
+    type,
+    errorCode: code,
+  });
+}
 
 export function processRawValue(
   schema: Schema,
-  value?: string | Object,
+  value?: string | object,
 ): Node | undefined {
   if (!value) {
     return;
@@ -134,6 +133,7 @@ export function processRawValue(
   let node: {
     [key: string]: any;
   };
+
   if (typeof value === 'string') {
     try {
       node = JSON.parse(value);
@@ -155,18 +155,66 @@ export function processRawValue(
   }
 
   try {
+    const nodes = Object.keys(schema.nodes);
+    const marks = Object.keys(schema.marks);
+    const validate = validator(nodes, marks, { allowPrivateAttributes: true });
+    const emptyDoc: Entity = { type: 'doc', content: [] };
+
     // ProseMirror always require a child under doc
-    if (
-      node.type === 'doc' &&
-      Array.isArray(node.content) &&
-      node.content.length === 0
-    ) {
-      node.content.push({
-        type: 'paragraph',
-        content: [],
-      });
+    if (node.type === 'doc') {
+      if (Array.isArray(node.content) && node.content.length === 0) {
+        node.content.push({
+          type: 'paragraph',
+          content: [],
+        });
+      }
+      // Just making sure doc is always valid
+      if (!node.version) {
+        node.version = 1;
+      }
     }
-    const parsedDoc = Node.fromJSON(schema, node);
+
+    const { entity = emptyDoc } = validate(
+      node as Entity,
+      (entity, error, options) => {
+        // Remove any invalid marks
+        if (marks.indexOf(entity.type) > -1) {
+          fireAnalyticsEvent(entity, error, 'mark');
+          return;
+        }
+
+        /**
+         * There's a inconsistency between ProseMirror and ADF.
+         * `content` is actually optional in ProseMirror.
+         * And, also empty `text` node is not valid.
+         */
+        if (
+          error.code === VALIDATION_ERRORS.MISSING_PROPERTY &&
+          entity.type === 'paragraph'
+        ) {
+          return { type: 'paragraph', content: [] };
+        }
+
+        // Can't fix it by wrapping
+        // TODO: We can repair missing content like `panel` without a `paragraph`.
+        if (error.code === VALIDATION_ERRORS.INVALID_CONTENT_LENGTH) {
+          return entity;
+        }
+
+        if (options.allowUnsupportedBlock) {
+          fireAnalyticsEvent(entity, error);
+          return wrapWithUnsupported(entity);
+        } else if (options.allowUnsupportedInline) {
+          fireAnalyticsEvent(entity, error, 'inline');
+          return wrapWithUnsupported(entity, 'inline');
+        }
+
+        return entity;
+      },
+    );
+
+    const parsedDoc = Node.fromJSON(schema, entity);
+
     // throws an error if the document is invalid
     parsedDoc.check();
     return parsedDoc;
@@ -178,3 +226,23 @@ export function processRawValue(
     return;
   }
 }
+
+export const getStepRange = (
+  transaction: Transaction,
+): { from: number; to: number } | null => {
+  let from = -1;
+  let to = -1;
+
+  transaction.steps.forEach(step => {
+    step.getMap().forEach((_oldStart, _oldEnd, newStart, newEnd) => {
+      from = newStart < from || from === -1 ? newStart : from;
+      to = newEnd < to || to === -1 ? newEnd : to;
+    });
+  });
+
+  if (from !== -1) {
+    return { from, to };
+  }
+
+  return null;
+};

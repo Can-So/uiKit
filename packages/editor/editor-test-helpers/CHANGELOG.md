@@ -1,5 +1,84 @@
 # @atlaskit/editor-test-helpers
 
+## 6.2.22
+- Updated dependencies [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+  - @atlaskit/editor-core@89.0.7
+  - @atlaskit/smart-card@9.0.0
+
+## 6.2.21
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/smart-card@8.8.5
+  - @atlaskit/editor-common@22.0.2
+  - @atlaskit/editor-core@89.0.6
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/icon@15.0.0
+
+## 6.2.20
+- [patch] [a2cae0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2cae0c):
+
+  - Fix conversion of pasted urls via macroPlugin with html in clipboard (ED-5786)
+
+## 6.2.19
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/editor-core@89.0.0
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 6.2.18
+- [patch] [16ff8d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/16ff8d2):
+
+  - Add jira card editor example.
+
+## 6.2.17
+- [patch] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
+## 6.2.16
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+
+## 6.2.15
+- [patch] [a9eb99f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a9eb99f):
+
+  - ED-5510: fix deleting last character in a cell in Safari
+
+## 6.2.14
+- [patch] [798cff1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/798cff1):
+
+  - Adds an Import option in full-page example
+
+## 6.2.13
+- [patch] [7fc0ffb"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7fc0ffb"
+d):
+
+  - ED-5619 Change "Loren ipsun" to "Lorem ipsum" in the example
+
+## 6.2.12
+- [patch] [44d9c5b"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44d9c5b"
+d):
+
+  - ED-5632: mock Selection API globally; allows dispatching before Editor finishes mounting
+
+## 6.2.11
+- [patch] [1662ae0"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1662ae0"
+d):
+
+  - ED-5440 convert sections to use percentages
+
+## 6.2.10
+- [patch] ED-5439: add block smart cards, toolbar switcher [5f8bdfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f8bdfe)
+
+## 6.2.9
+- [patch] Wrap invalid node with unsupported node [fb60e39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb60e39)
+
 ## 6.2.8
 - [patch] Updated dependencies [052ce89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/052ce89)
   - @atlaskit/editor-core@87.0.0

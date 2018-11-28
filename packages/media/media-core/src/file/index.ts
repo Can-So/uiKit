@@ -10,6 +10,7 @@ import {
   uploadFile,
   MediaCollectionItemFullDetails,
   FileItem,
+  MediaFileArtifacts,
 } from '@atlaskit/media-store';
 import * as isValidId from 'uuid-validate';
 import {
@@ -121,6 +122,18 @@ export class FileFetcher {
     });
   }
 
+  getArtifactURL(
+    artifacts: MediaFileArtifacts,
+    artifactName: keyof MediaFileArtifacts,
+    collectionName?: string,
+  ): Promise<string> {
+    return this.mediaStore.getArtifactURL(
+      artifacts,
+      artifactName,
+      collectionName,
+    );
+  }
+
   private createDownloadFileStream = (
     id: string,
     collection?: string,
@@ -195,7 +208,7 @@ export class FileFetcher {
             });
           }
         },
-        onId: id => {
+        onId: (id, occurrenceKey) => {
           fileId = id;
           const key = FileStreamCache.createKey(fileId, { collectionName });
           fileStreamsCache.set(key, subject);
@@ -206,6 +219,7 @@ export class FileFetcher {
               mediaType,
               mimeType,
               id: fileId,
+              occurrenceKey,
               progress: 0,
               status: 'uploading',
               preview,

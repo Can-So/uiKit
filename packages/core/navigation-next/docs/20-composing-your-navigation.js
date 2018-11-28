@@ -30,13 +30,14 @@ ${code`
 }
 `}
 
-The \`LayoutManager\` will position these layers and handle UI state concerns such as resizing, collapsing, peeking, etc. out of the box. This state container can be accessed via context and we will explore how this works later on. For now, it means we'll need one more component before we can render anything - the \`NavigationProvider\`. With this, we can render the bare bones of an Atlassian application:
+The \`LayoutManager\` will position these layers and handle UI state concerns such as resizing, expanding, and collapsing out of the box. This state container can be accessed via context and we will explore how this works later on. For now, it means we'll need one more component before we can render anything - the \`NavigationProvider\`. With this, we can render the bare bones of an Atlassian application:
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-getting-started-layoutmanager')}
+      source={require('!!raw-loader!./examples/getting-started/layoutmanager')}
       title="The LayoutManager component"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=getting-started-layoutmanager"
+      id="layoutmanager"
+      path="/getting-started"
     />
   )}
 
@@ -60,9 +61,10 @@ We can then plug this component into our \`LayoutManager\` to render the global 
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-getting-started-configuring-the-global-navigation')}
+      source={require('!!raw-loader!./examples/getting-started/configuring-the-global-navigation')}
       title="Configuring the global navigation"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=getting-started-configuring-the-global-navigation"
+      id="configuring-the-global-navigation"
+      path="/getting-started"
     />
   )}
 
@@ -73,22 +75,21 @@ Let's move on to the next part of our navigation - the product area. This area w
 We can render basically anything we want in this section. All of the typical primitive UI components are provided by \`@atlaskit/navigation-next\` so let's start putting a few of these together.
 
 ${code`
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { AtlassianWordmark } from '@atlaskit/logo';
-import { GroupHeading, Item, Section, Separator } from '@atlaskit/navigation-next';
-
-const ProductNavigationWrapper = styled.div({ padding: '16px 0' });
+import { GroupHeading, Item, Section, Separator, Wordmark } from '@atlaskit/navigation-next';
 
 const MyProductNavigation = () => (
-  <ProductNavigationWrapper>
-    <Section>
+  <Fragment>
+    <HeaderSection>
       {({ className }) => (
         <div className={className}>
-          <AtlassianWordmark />
+          <Wordmark wordmark={AtlassianWordmark} />
         </div>
       )}
-    </Section>
-    <Section>
+    </HeaderSection>
+    <MenuSection>
       {({ className }) => (
         <div className={className}>
           <Item text="Dashboard" />
@@ -99,22 +100,23 @@ const MyProductNavigation = () => (
           <Item text="My plugin" />
         </div>
       )}
-    </Section>
-  </ProductNavigationWrapper>
+    </MenuSection>
+  </Fragment>
 );
 `}
 
 **Note:** We don't automatically apply padding or add wrapping elements around your product navigation or within \`Section\`s because we don't want to break your layout. Instead, we provide the \`Section\`'s children with styles through a render function.
 
-Read the [component props docs](/packages/core/navigation-next/docs/ui-components) for more information about the \`Section\`, along with every other UI primitive exported by this package.
+Read the [component props docs](/packages/core/navigation-next/docs/ui-components) for more information about \`HeaderSection\`, \`MenuSection\` and \`Section\`, along with every other UI primitive exported by this package.
 
 Putting it all together we can now render a somewhat complete navigation!
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-getting-started-composing-the-product-navigation')}
+      source={require('!!raw-loader!./examples/getting-started/composing-the-product-navigation')}
       title="Composing the product navigation"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=getting-started-composing-the-product-navigation"
+      id="composing-the-product-navigation"
+      path="/getting-started"
     />
   )}
 
@@ -124,9 +126,10 @@ The container layer can be composed using the same primitives as the product lay
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-getting-started-composing-the-container-navigation')}
+      source={require('!!raw-loader!./examples/getting-started/composing-the-container-navigation')}
       title="Composing the container navigation"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=getting-started-composing-the-container-navigation"
+      id="composing-the-container-navigation"
+      path="/getting-started"
     />
   )}
 
@@ -152,9 +155,10 @@ This component provides its children with access to the state of the navigation,
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-getting-started-managing-the-ui-state')}
+      source={require('!!raw-loader!./examples/getting-started/managing-the-ui-state')}
       title="Managing the UI state"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=getting-started-managing-the-ui-state"
+      id="managing-the-ui-state"
+      path="/getting-started"
     />
   )}
 

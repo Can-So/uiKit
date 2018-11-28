@@ -1,5 +1,37 @@
 # @atlaskit/profilecard
 
+## 6.0.3
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/icon@15.0.0
+
+## 6.0.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/dynamic-table@10.0.18
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 6.0.1
+- [patch] [9d63842](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d63842):
+
+  - Fixed a bug where content is not rendered for cards of users whose accounts are closed
+
+## 6.0.0
+- [major] [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+
+  - Replace "isActive" prop with new "status" prop and adding react-intl messages
+
+## 5.0.0
+- [major] [a6dd6e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6dd6e3):
+
+  - Removed isCensored prop as this state no longer exists
+
 ## 4.0.10
 - [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
   - @atlaskit/docs@5.0.8

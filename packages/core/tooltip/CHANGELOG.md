@@ -1,5 +1,40 @@
 # @atlaskit/tooltip
 
+## 12.1.11
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/portal@0.0.16
+  - @atlaskit/icon@15.0.0
+
+## 12.1.10
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/popper@0.3.2
+  - @atlaskit/portal@0.0.15
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 12.1.9
+- Updated dependencies [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+  - @atlaskit/portal@0.0.14
+
+## 12.1.8
+- Updated dependencies [3f5a4dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5a4dd):
+  - @atlaskit/portal@0.0.13
+
+## 12.1.7
+- [patch] [3b03f52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b03f52):
+
+  - Use @atlaskit/popper internally instead of a custom approach to position management
+
+## 12.1.6
+- [patch] [7f1ff28](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7f1ff28):
+
+  Fixes error when Tooltip attempts to setState on an unmounted component
+
 ## 12.1.5
 - [patch] Updated dependencies [aaab348](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aaab348)
   - @atlaskit/portal@0.0.12

@@ -39,7 +39,7 @@ export class MutableCard extends React.Component<
   renderCount: number = 0;
 
   componentDidMount() {
-    this.intervalId = setInterval(() => {
+    this.intervalId = window.setInterval(() => {
       const { isAnimating } = this.props;
       if (isAnimating) {
         this.forceUpdate();

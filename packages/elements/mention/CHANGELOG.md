@@ -1,5 +1,25 @@
 # @atlaskit/mention
 
+## 15.1.3
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
+## 15.1.2
+- [patch] [36c362f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36c362f):
+
+  - FS-3174 - Fix usage of gridSize() and borderRadius()
+
+## 15.1.1
+- [patch] [527b954](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/527b954):
+
+  - FS-3174 - Remove usage of util-shared-styles from elements components
+
+## 15.1.0
+- [minor] Use relative units for font size and paddings in Mention component [b711063](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b711063)
+
 ## 15.0.11
 - [patch] Analytics event's 'source' field from GasPayload type is now optional. In most cases, the 'source' field is expected to be set by the integrator through AnalyticsContext. Thus it's recommended that components do not set it to avoid overriding the one provided by the integrating product. Analytics listeners are handling the case where the 'source' field couldn't be found by setting the default value "unknown" before sending the event through the client. [1c0ea95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c0ea95)
 

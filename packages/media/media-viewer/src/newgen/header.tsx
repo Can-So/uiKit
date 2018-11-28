@@ -5,8 +5,6 @@ import {
   MediaType,
   ProcessedFileState,
 } from '@atlaskit/media-core';
-import Button from '@atlaskit/button';
-import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
 import { toHumanReadableMediaSize } from '@atlaskit/media-ui';
@@ -24,8 +22,11 @@ import {
 } from './styled';
 import { MediaTypeIcon } from './media-type-icon';
 import { FeedbackButton } from './feedback-button';
-import { createItemDownloader } from './domain/download';
 import { MediaViewerError, createError } from './error';
+import {
+  ToolbarDownloadButton,
+  DisabledToolbarDownloadButton,
+} from './download';
 
 export type Props = {
   readonly identifier: Identifier;
@@ -86,30 +87,14 @@ export default class Header extends React.Component<Props, State> {
   private renderDownload = () => {
     const { item } = this.state;
     const { identifier, context } = this.props;
-    const icon = <DownloadIcon label="Download" />;
-
-    const disabledDownloadButton = (
-      <Button
-        label="Download"
-        appearance="toolbar"
-        isDisabled={true}
-        iconBefore={icon}
-      />
-    );
-
     return item.match({
-      pending: () => disabledDownloadButton,
-      failed: () => disabledDownloadButton,
+      pending: () => DisabledToolbarDownloadButton,
+      failed: () => DisabledToolbarDownloadButton,
       successful: item => (
-        <Button
-          label="Download"
-          appearance="toolbar"
-          onClick={createItemDownloader(
-            item,
-            context,
-            identifier.collectionName,
-          )}
-          iconBefore={icon}
+        <ToolbarDownloadButton
+          state={item}
+          identifier={identifier}
+          context={context}
         />
       ),
     });

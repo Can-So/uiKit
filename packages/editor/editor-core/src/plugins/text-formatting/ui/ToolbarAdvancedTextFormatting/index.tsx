@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
-import MoreIcon from '@atlaskit/icon/glyph/editor/more';
 import { EditorView } from 'prosemirror-view';
+import MoreIcon from '@atlaskit/icon/glyph/editor/more';
+import { akEditorMenuZIndex } from '@atlaskit/editor-common';
 import { analyticsService } from '../../../../analytics';
 import { TextFormattingState } from '../../pm-plugins/main';
 import { ClearFormattingState } from '../../pm-plugins/clear-formatting';
@@ -169,6 +170,7 @@ class ToolbarAdvancedTextFormatting extends PureComponent<
             boundariesElement={popupsBoundariesElement}
             scrollableElement={popupsScrollableElement}
             isOpen={isOpen}
+            zIndex={akEditorMenuZIndex}
             fitHeight={188}
             fitWidth={136}
           >
@@ -250,19 +252,26 @@ class ToolbarAdvancedTextFormatting extends PureComponent<
         formatMessage(messages.clearFormatting),
         'clearFormatting',
         tooltip(clearFormattingKeymap),
+        !clearFormattingState.formattingIsPresent,
       );
     }
     return [{ items }];
   };
 
-  private addRecordToItems = (items, content, value, tooltip?) => {
+  private addRecordToItems = (
+    items,
+    content,
+    value,
+    tooltip?,
+    isDisabled?: boolean,
+  ) => {
     items.push({
       key: value,
       content,
       elemAfter: <Shortcut>{tooltip}</Shortcut>,
       value,
       isActive: this.state[`${value}Active`],
-      isDisabled: this.state[`${value}Disabled`],
+      isDisabled: isDisabled || this.state[`${value}Disabled`],
     });
   };
 

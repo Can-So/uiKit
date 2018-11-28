@@ -35,11 +35,10 @@ export default class FieldRadioGroup extends Component<
     // If there is a user-selected value, then select that item
     if (this.props.items) {
       if (this.state.selectedValue) {
-        return this.props.items.map(
-          item =>
-            item.value === this.state.selectedValue
-              ? { ...item, ...{ isSelected: true } }
-              : item,
+        return this.props.items.map(item =>
+          item.value === this.state.selectedValue
+            ? { ...item, ...{ isSelected: true } }
+            : item,
         );
       }
 
@@ -48,9 +47,8 @@ export default class FieldRadioGroup extends Component<
         item => item.defaultSelected,
       );
       if (hasDefaultSelected && this.props.items) {
-        return this.props.items.map(
-          item =>
-            item.defaultSelected ? { ...item, ...{ isSelected: true } } : item,
+        return this.props.items.map(item =>
+          item.defaultSelected ? { ...item, ...{ isSelected: true } } : item,
         );
       }
     }

@@ -12,7 +12,11 @@ export interface StatusDefinition {
      */
     text: string;
     color: 'neutral' | 'purple' | 'blue' | 'red' | 'yellow' | 'green';
-    localId: string;
+    localId?: string;
+    /**
+     * Supported values are bold and subtle
+     */
+    style?: string;
   };
 }
 
@@ -24,6 +28,7 @@ export const status: NodeSpec = {
     text: { default: '' },
     color: { default: '' },
     localId: { default: '' },
+    style: { default: null },
   },
   parseDOM: [
     {
@@ -32,16 +37,18 @@ export const status: NodeSpec = {
         text: dom.textContent!.replace(/\n/, '').trim(),
         color: dom.getAttribute('data-color'),
         localId: dom.getAttribute('data-local-id'),
+        style: dom.getAttribute('data-style'),
       }),
     },
   ],
   toDOM(node: PMNode) {
-    const { text, color, localId } = node.attrs;
+    const { text, color, localId, style } = node.attrs;
 
     const attrs = {
       'data-node-type': 'status',
       'data-color': color,
       'data-local-id': localId,
+      'data-style': style,
     };
     return ['span', attrs, text];
   },

@@ -2,6 +2,8 @@ declare var window: any;
 import * as React from 'react';
 import FeedbackIcon from '@atlaskit/icon/glyph/feedback';
 import Button from '@atlaskit/button';
+import { FormattedMessage } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
 import { FeedbackWrapper } from './styled';
 
 // The following function fetches the code to show a JIRA issue collector.
@@ -49,11 +51,11 @@ export class FeedbackButton extends React.Component<{}, {}> {
     return (
       <FeedbackWrapper>
         <Button
-          appearance="toolbar"
+          appearance={'toolbar' as any}
           onClick={this.showFeedbackDialog}
           iconBefore={<FeedbackIcon label="feedback" />}
         >
-          Give feedback
+          <FormattedMessage {...messages.give_feedback} />
         </Button>
       </FeedbackWrapper>
     );

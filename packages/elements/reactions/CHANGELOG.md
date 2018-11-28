@@ -1,5 +1,39 @@
 # @atlaskit/reactions
 
+## 15.0.6
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/emoji@47.0.2
+  - @atlaskit/icon@15.0.0
+
+## 15.0.5
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/emoji@47.0.1
+  - @atlaskit/button@10.0.0
+  - @atlaskit/analytics-next-types@3.1.2
+
+## 15.0.4
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/emoji@47.0.0
+  - @atlaskit/util-data-test@10.0.21
+
+## 15.0.3
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/emoji@46.0.0
+  - @atlaskit/util-data-test@10.0.20
+
+## 15.0.2
+- [patch] [36c362f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36c362f):
+
+  - FS-3174 - Fix usage of gridSize() and borderRadius()
+
 ## 15.0.1
 - [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
   - @atlaskit/emoji@45.0.0

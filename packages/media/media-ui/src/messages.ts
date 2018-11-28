@@ -110,4 +110,178 @@ export const messages = defineMessages({
     description:
       'Explains what will happen when the users connects to a new account',
   },
+  upload_an_avatar: {
+    id: 'fabric.media.upload_an_avatar',
+    defaultMessage: 'Upload an avatar',
+    description: 'Indicates that the user can upload a new avatar',
+  },
+  save: {
+    id: 'fabric.media.save',
+    defaultMessage: 'Save',
+    description: 'Just the "save" word',
+  },
+  or: {
+    id: 'fabric.media.or',
+    defaultMessage: 'or',
+    description: 'Just the "or" word',
+  },
+  upload_photo: {
+    id: 'fabric.media.upload_photo',
+    defaultMessage: 'Upload a photo',
+    description: 'Call to action for the user to upload a new photo',
+  },
+  default_avatars: {
+    id: 'fabric.media.default_avatars',
+    defaultMessage: 'Default avatars',
+    description: 'Showed above the default avatar list',
+  },
+  drag_and_drop_images_here: {
+    id: 'fabric.media.drag_and_drop_images_here',
+    defaultMessage: 'Drag and drop your images here',
+    description:
+      'Indicates that the user can drag and drop images in that area',
+  },
+  upload_image: {
+    id: 'fabric.media.upload_image',
+    defaultMessage: 'Upload image',
+    description: 'Call to action for the user to upload a new image',
+  },
+  image_url_invalid_error: {
+    id: 'fabric.media.image_url_invalid_error',
+    defaultMessage: 'Could not load image, the url is invalid.',
+    description: 'There was an error parsing the image url',
+  },
+  image_format_invalid_error: {
+    id: 'fabric.media.image_format_invalid_error',
+    defaultMessage: 'Could not load image, the format is invalid.',
+    description: 'The provided image format is not valid',
+  },
+  image_size_too_large_error: {
+    id: 'fabric.media.image_size_too_large_error',
+    defaultMessage:
+      'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
+    description: 'The provided image size is too big',
+  },
+  something_went_wrong: {
+    id: 'fabric.media.something_went_wrong',
+    defaultMessage: 'Something went wrong.',
+    description:
+      'Showed when an error happen but we dont have more info about it',
+  },
+  might_be_a_hiccup: {
+    id: 'fabric.media.might_be_a_hiccup',
+    defaultMessage: 'It might just be a hiccup.',
+    description:
+      'Used when an unknow error happens, just in a funny way of saying that we dont have more info about it',
+  },
+  couldnt_generate_preview: {
+    id: 'fabric.media.couldnt_generate_preview',
+    defaultMessage: "We couldn't generate a preview for this file.",
+    description:
+      'Error case for when the backend cant generate a preview for that file',
+  },
+  cant_preview_file_type: {
+    id: 'fabric.media.cant_preview_file_type',
+    defaultMessage: "We can't preview this file type.",
+    description:
+      'Error case for when we have no available preview for that file',
+  },
+  item_not_found_in_list: {
+    id: 'fabric.media.item_not_found_in_list',
+    defaultMessage: 'The selected item was not found on the list.',
+    description:
+      'Error case for when a provided item is not found within the list of items',
+  },
+  no_pdf_artifacts: {
+    id: 'fabric.media.no_pdf_artifacts',
+    defaultMessage: 'No PDF artifacts found for this file.',
+    description: 'Error case for when we cant preview a PDF file',
+  },
+  give_feedback: {
+    id: 'fabric.media.give_feedback',
+    defaultMessage: 'Give feedback',
+    description:
+      'Call to action that opens a popup to get feedback from the users',
+  },
+  try_downloading_file: {
+    id: 'fabric.media.try_downloading_file',
+    defaultMessage: 'Try downloading the file to view it.',
+    description: 'We show this message to allow users to download a file',
+  },
+  webgl_warning_description: {
+    id: 'fabric.media.webgl_warning_description',
+    defaultMessage:
+      'Your browser does not support WebGL. Use a WebGL enabled browser to annotate images.',
+    description:
+      'We show this error message when the browser doesnt support this feature',
+  },
+  unable_to_annotate_image: {
+    id: 'fabric.media.unable_to_annotate_image',
+    defaultMessage: "You're unable to annotate this image",
+    description:
+      'If there is an error trying to annotate an image we show this',
+  },
+  learn_more: {
+    id: 'fabric.media.learn_more',
+    defaultMessage: 'Learn More',
+    description: '',
+  },
+  accounts: {
+    id: 'fabric.media.accounts',
+    defaultMessage: 'Accounts',
+    description: '',
+  },
+  actions: {
+    id: 'fabric.media.actions',
+    defaultMessage: 'Actions',
+    description: '',
+  },
+  error_hint_retry: {
+    id: 'fabric.media.error_hint_retry',
+    defaultMessage: "Try again and we'll give it another shot.",
+    description: 'Generic message that we show if an action failed',
+  },
+  error_hint_critical: {
+    id: 'fabric.media.error_hint_critical',
+    defaultMessage: 'If the problem keeps happening contact support.',
+    description:
+      'We show this error message if we cant recover from the action',
+  },
+  close: {
+    id: 'fabric.media.close',
+    defaultMessage: 'Close',
+    description: '',
+  },
+  could_not_load_editor: {
+    id: 'fabric.media.could_not_load_editor',
+    defaultMessage: 'Ouch! We could not load the editor',
+    description: 'Error message to communicate that we cant load the editor',
+  },
+  could_not_save_image: {
+    id: 'fabric.media.could_not_save_image',
+    defaultMessage: 'Ouch! We could not save the image',
+    description: 'Error message to communicate that we cant save an image',
+  },
+  annotate: {
+    id: 'fabric.media.annotate',
+    defaultMessage: 'Annotate',
+    description: '',
+  },
+  drop_your_files_here: {
+    id: 'fabric.media.drop_your_files_here',
+    defaultMessage: 'Drop your files here',
+    description:
+      'Info message that we show to indicate that the user can drag and drop files',
+  },
+  share_files_instantly: {
+    id: 'fabric.media.share_files_instantly',
+    defaultMessage: "We'll share them instantly",
+    description:
+      'It means that we will upload the files you drag and drop automatically',
+  },
+  insert_files: {
+    id: 'fabric.media.insert_files',
+    defaultMessage: 'Insert {0, plural, one {a file} other {{0} files}}',
+    description: 'Showed when the user selects 1 or more files to insert',
+  },
 });

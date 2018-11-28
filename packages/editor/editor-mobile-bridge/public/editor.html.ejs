@@ -35,21 +35,21 @@
       border: 0;
     }
 
+    /**
+      * The following is required to fix the elements disappearing bug on WebViews 
+      * @see https://stackoverflow.com/a/26682113
+      */
+    *:not(html) {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+
     html,
-    body, {
+    body {
       height: 100%;
       width: 100%;
-
-      /**
-      The following is required to fix the elements disappearing bug on WebViews
-      https://stackoverflow.com/questions/9807620/ipad-safari-scrolling-causes-html-elements-to-disappear-and-reappear-with-a-dela/21024100
-      */
-
-      transform: translate3d(0, 0, 0);
-      -webkit-transform: translate3d(0, 0, 0);
-      perspective: 1000;
-      -webkit-perspective: 1000;
       -webkit-overflow-scrolling : touch !important;
+      -webkit-text-size-adjust: 100%;
       overflow: auto !important;
     }
 
@@ -358,8 +358,11 @@
       bottom: 0;
       height: 100%;
       width: 100%;
-      padding: 20px;
       box-sizing: border-box;
+    }
+
+    #editor .pm-table-container table {
+      margin-left: 0;
     }
   </style>
 </head>

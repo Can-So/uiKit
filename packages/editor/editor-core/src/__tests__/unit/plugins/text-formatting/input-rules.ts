@@ -13,7 +13,6 @@ import {
   emoji,
   code_block,
   hardBreak,
-  mentionQuery,
 } from '@atlaskit/editor-test-helpers';
 
 import {
@@ -203,25 +202,6 @@ describe('text-formatting input rules', () => {
       expect(editorView.state.doc).toEqualDocument(doc(p(strong(em('it’s')))));
     });
 
-    describe('should not work in mention query', () => {
-      trackEvent = jest.fn();
-      const { editorView } = editor(doc(p(mentionQuery()('@o{<>}'))));
-      typeText(editorView, 'it');
-      expect(editorView.state.doc).toEqualDocument(
-        doc(p(mentionQuery()('@oit{<>}'))),
-      );
-
-      typeText(editorView, "'s");
-      expect(editorView.state.doc).toEqualDocument(
-        doc(p(mentionQuery()("@oit's{<>}"))),
-      );
-
-      typeText(editorView, "'");
-      expect(editorView.state.doc).toEqualDocument(
-        doc(p(mentionQuery()("@oit's'{<>}"))),
-      );
-    });
-
     // test spacing
     autoformats(
       '  \t   "hello" \'world\'   ',
@@ -243,6 +223,7 @@ describe('text-formatting input rules', () => {
     notautoformats('->');
     notautoformats('-->');
     notautoformats('<-');
+    notautoformats('<->');
     notautoformats('<--');
     notautoformats('>');
     notautoformats('-!>');
@@ -251,13 +232,12 @@ describe('text-formatting input rules', () => {
     notautoformats('-->> ');
     notautoformats('->> ');
 
-    notautoformats(' <-> ');
-
     // autoformat only after space
     autoformats('-> ', p('→ '), 'arrow');
     autoformats('--> ', p('→ '), 'arrow');
     autoformats('<- ', p('← '), 'arrow');
     autoformats('<-- ', p('← '), 'arrow');
+    autoformats('<-> ', p('↔︎ '), 'arrow');
 
     // test spacing
     autoformatCombinations(

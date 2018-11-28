@@ -408,7 +408,10 @@ export class FilmstripView extends React.Component<
     // trigger a "real" scroll event so lazily loaded cards realize they've been shown
     // note: we have to wait for the transition to end, otherwise the cards not visible when the scroll
     // event is triggered will be forever stuck in the loading screen (due to the lazy load)
-    setTimeout(() => this.triggerScrollEvent(), this.transitionDuration * 1000);
+    window.setTimeout(
+      () => this.triggerScrollEvent(),
+      this.transitionDuration * 1000,
+    );
   }
 
   render(): JSX.Element {

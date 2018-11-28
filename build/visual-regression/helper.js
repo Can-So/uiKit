@@ -1,9 +1,9 @@
 //@flow
 'use strict';
 /*
-* Visual-regression snapshot test helper with util functions to do 
-* all the things ;)
-*/
+ * Visual-regression snapshot test helper with util functions to do
+ * all the things ;)
+ */
 
 const glob = require('glob');
 const path = require('path');

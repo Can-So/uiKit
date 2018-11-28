@@ -1,116 +1,279 @@
-import Select, { AsyncSelect } from '@atlaskit/select';
+import Select, { createFilter } from '@atlaskit/select';
+import * as debounce from 'lodash.debounce';
 import * as React from 'react';
-import { User } from '../types';
-import { UserMultiValueLabel } from './UserMultiValueLabel';
-import { UserMultiValueRemove } from './UserMultiValueRemove';
-import UserPickerItem from './UserPickerItem';
+import { FormattedMessage } from 'react-intl';
+import {
+  InputActionTypes,
+  User,
+  UserPickerProps,
+  UserPickerState,
+} from '../types';
+import { batchByKey } from './batch';
+import { getComponents } from './components';
+import { messages } from './i18n';
+import { getStyles } from './styles';
+import {
+  extractUserValue,
+  getOptions,
+  isIterable,
+  usersToOptions,
+  isSingleValue,
+} from './utils';
 
-type Value = User | User[] | undefined;
-type Action =
-  | 'select-option'
-  | 'deselect-option'
-  | 'remove-value'
-  | 'pop-value'
-  | 'set-value'
-  | 'clear'
-  | 'create-option';
-
-export type Props = {
-  users?: User[];
-  width?: number;
-  loadUsers?: (searchText?: string) => Promise<User[]>;
-  onChange?: (value: Value, action: Action) => void;
-  isMulti?: boolean;
-};
-
-const userToOption = (user: User) => ({
-  label: user.name || user.nickname,
-  value: user.id,
-  user,
-});
-
-const formatUserLabel = ({ user }, { context, ...other }) => {
-  return <UserPickerItem user={user} context={context} />;
-};
-
-export class UserPicker extends React.PureComponent<Props> {
+export class UserPicker extends React.Component<
+  UserPickerProps,
+  UserPickerState
+> {
   static defaultProps = {
     width: 350,
     isMulti: false,
+    appearance: 'normal',
+    subtle: false,
+    isClearable: true,
+    search: '',
   };
 
-  static components = {
-    MultiValueLabel: UserMultiValueLabel,
-    MultiValueRemove: UserMultiValueRemove,
-  };
+  private selectRef;
+  private static defaultFilter = createFilter();
 
-  private isAsync = () => Boolean(this.props.loadUsers);
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      resultVersion: 0,
+      inflightRequest: 0,
+      count: 0,
+      hoveringClearIndicator: false,
+      menuIsOpen: false,
+      inputValue: props.search,
+      preventFilter: false,
+    };
+  }
 
-  private loadOptions = (search: string) => {
-    const { loadUsers } = this.props;
-    if (loadUsers) {
-      return loadUsers(search).then(users => users.map(userToOption));
+  static getDerivedStateFromProps(
+    nextProps: UserPickerProps,
+    prevState: UserPickerState,
+  ) {
+    const derivedState: Partial<UserPickerState> = {};
+    if (nextProps.open !== undefined) {
+      derivedState.menuIsOpen = nextProps.open;
     }
-    return undefined;
-  };
-
-  private extractUserValue = value => {
-    const { isMulti } = this.props;
-    if (isMulti) {
-      return value.map(({ user }) => user);
+    if (nextProps.value) {
+      derivedState.value = usersToOptions(nextProps.value);
+    } else if (nextProps.defaultValue && !prevState.value) {
+      derivedState.value = usersToOptions(nextProps.defaultValue);
     }
-    return value.user;
-  };
+    return derivedState;
+  }
 
-  private handleChange = (value, { action }) => {
-    const { onChange } = this.props;
-    if (onChange) {
-      onChange(this.extractUserValue(value), action);
+  private withSelectRef = (callback: (selectRef: any) => void) => () => {
+    if (this.selectRef) {
+      callback(this.selectRef.select.select);
     }
   };
 
-  private getStyles = width => ({
-    menu: css => ({ ...css, width }),
-    control: css => ({
-      ...css,
-      width,
-      flexWrap: 'nowrap',
-    }),
-    input: css => ({ ...css, lineHeight: '44px' }),
-    valueContainer: css => ({
-      ...css,
-      flexGrow: 1,
-      overflow: 'hidden',
-    }),
-    multiValue: css => ({
-      ...css,
-      borderRadius: 24,
-    }),
-    multiValueRemove: css => ({
-      ...css,
-      backgroundColor: 'transparent',
-      '&:hover': {
-        backgroundColor: 'transparent',
-      },
-    }),
+  public nextOption = this.withSelectRef(select => select.focusOption('down'));
+
+  public previousOption = this.withSelectRef(select =>
+    select.focusOption('up'),
+  );
+
+  public selectOption = this.withSelectRef(select => {
+    const focusedOption = select.state.focusedOption;
+    select.selectOption(focusedOption);
   });
 
-  render() {
-    const { users, width, isMulti } = this.props;
-    const async = this.isAsync();
+  private handleChange = (value, { action, removedValue }) => {
+    if (removedValue && removedValue.user.fixed) {
+      return;
+    }
+    const { onChange, onSelection } = this.props;
 
-    const Root = async ? AsyncSelect : Select;
+    this.setState({ inputValue: '' });
+
+    if (onChange) {
+      onChange(extractUserValue(value), action);
+    }
+
+    if (action === 'select-option' && onSelection) {
+      onSelection(value.user);
+    }
+
+    if (!this.props.value) {
+      this.setState({ value });
+    }
+  };
+
+  private handleSelectRef = ref => {
+    this.selectRef = ref;
+  };
+
+  private addUsers = batchByKey(
+    (request: string, newUsers: (User | User[])[]) => {
+      this.setState(({ inflightRequest, users, resultVersion, count }) => {
+        if (inflightRequest.toString() === request) {
+          return {
+            users: (resultVersion === inflightRequest ? users : []).concat(
+              newUsers.reduce<User[]>(
+                (nextUsers, item) => nextUsers.concat(item[0]),
+                [],
+              ),
+            ),
+            resultVersion: inflightRequest,
+            count: count - newUsers.length,
+          };
+        }
+        return null;
+      });
+    },
+  );
+
+  private executeLoadOptions = debounce((search?: string) => {
+    const { loadUsers } = this.props;
+    if (loadUsers) {
+      this.setState(({ inflightRequest: previousRequest }) => {
+        const inflightRequest = previousRequest + 1;
+        const result = loadUsers(search);
+        const addUsers = this.addUsers.bind(this, inflightRequest.toString());
+        let count = 0;
+        if (isIterable(result)) {
+          for (const value of result) {
+            Promise.resolve(value).then(addUsers);
+            count++;
+          }
+        } else {
+          Promise.resolve(result).then(addUsers);
+          count++;
+        }
+        return {
+          inflightRequest,
+          count,
+        };
+      });
+    }
+  }, 200);
+
+  private handleFocus = (event: React.FocusEvent) => {
+    const { value } = this.state;
+    this.setState({ menuIsOpen: true });
+    const input = event.target;
+    if (!this.props.isMulti && isSingleValue(value)) {
+      this.setState({ inputValue: value.label, preventFilter: true }, () => {
+        if (input instanceof HTMLInputElement) {
+          input.select();
+        }
+      });
+    }
+  };
+
+  private handleBlur = () => {
+    this.setState({ menuIsOpen: false, inputValue: '', preventFilter: false });
+  };
+
+  private handleInputChange = (
+    search: string,
+    { action }: { action: InputActionTypes },
+  ) => {
+    const { onInputChange } = this.props;
+    if (action === 'input-change') {
+      if (onInputChange) {
+        onInputChange(search);
+      }
+      this.setState({ inputValue: search, preventFilter: false });
+
+      this.executeLoadOptions(search);
+    }
+  };
+
+  private triggerInputChange = this.withSelectRef(select => {
+    select.onInputChange(this.props.search, { action: 'input-change' });
+  });
+
+  componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
+    // trigger onInputChange
+    if (this.props.search !== prevProps.search) {
+      this.triggerInputChange();
+    }
+
+    // load options when the picker open
+    if (this.state.menuIsOpen && !prevState.menuIsOpen) {
+      this.executeLoadOptions();
+    }
+  }
+
+  private handleKeyDown = (event: React.KeyboardEvent) => {
+    // Escape
+    if (event.keyCode === 27) {
+      this.selectRef.blur();
+    }
+  };
+
+  handleClearIndicatorHover = (hoveringClearIndicator: boolean) => {
+    this.setState({ hoveringClearIndicator });
+  };
+
+  private configureNoOptionsMessage = (): string | undefined =>
+    this.props.noOptionsMessage;
+
+  private filterOption = (option, search: string) =>
+    this.state.preventFilter || UserPicker.defaultFilter(option, search);
+
+  render() {
+    const {
+      width,
+      isMulti,
+      anchor,
+      users,
+      isLoading,
+      appearance,
+      subtle,
+      placeholder,
+      isClearable,
+      isDisabled,
+    } = this.props;
+    const {
+      users: usersFromState,
+      count,
+      hoveringClearIndicator,
+      menuIsOpen,
+      value,
+      inputValue,
+    } = this.state;
 
     return (
-      <Root
+      <Select
+        value={value}
+        ref={this.handleSelectRef}
         isMulti={isMulti}
-        formatOptionLabel={formatUserLabel}
-        options={users && users.map(userToOption)}
-        defaultOptions={async}
-        loadOptions={this.loadOptions}
+        options={getOptions(usersFromState, users) || []}
         onChange={this.handleChange}
-        styles={this.getStyles(width)}
-        components={UserPicker.components}
+        styles={getStyles(width)}
+        components={getComponents(isMulti, anchor)}
+        inputValue={inputValue}
+        menuIsOpen={menuIsOpen}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        isLoading={count > 0 || isLoading}
+        onInputChange={this.handleInputChange}
+        menuPlacement="auto"
+        placeholder={
+          placeholder || <FormattedMessage {...messages.placeholder} />
+        }
+        classNamePrefix="fabric-user-picker"
+        onClearIndicatorHover={this.handleClearIndicatorHover}
+        hoveringClearIndicator={hoveringClearIndicator}
+        appearance={isMulti ? 'compact' : appearance}
+        isClearable={isClearable}
+        subtle={isMulti ? false : subtle}
+        blurInputOnSelect={!isMulti}
+        closeMenuOnSelect={!isMulti}
+        noOptionsMessage={this.configureNoOptionsMessage}
+        openMenuOnFocus
+        onKeyDown={this.handleKeyDown}
+        isDisabled={isDisabled}
+        isFocused={menuIsOpen}
+        backspaceRemovesValue={isMulti}
+        filterOption={this.filterOption}
       />
     );
   }

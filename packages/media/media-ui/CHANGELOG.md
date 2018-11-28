@@ -1,5 +1,85 @@
 # @atlaskit/media-ui
 
+## 7.7.0
+- [minor] [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+
+  - Introduced pending state (which is represented as a link) and a race between resolving state and the data fetch.
+
+## 7.6.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/avatar-group@2.1.7
+  - @atlaskit/button@10.0.1
+  - @atlaskit/checkbox@5.0.7
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
+## 7.6.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/avatar-group@2.1.6
+  - @atlaskit/checkbox@5.0.6
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/page@8.0.11
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/button@10.0.0
+
+## 7.6.0
+- [minor] [b9d9e9a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9d9e9a):
+
+  - Support advanced i18n mode in MediaPicker
+
+## 7.5.0
+- [minor] [2cac27f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2cac27f):
+
+  - InfiniteScroll component now triggers on load and on change (where is previously only onScroll event)
+
+## 7.4.1
+- [patch] [a567cc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a567cc9):
+
+  - Improve rendering of Smart Cards.
+
+## 7.4.0
+- [minor] [b758737](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b758737):
+
+  - add i18n support to media-avatar-picker
+
+## 7.3.1
+- [patch] [941a687](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/941a687):
+
+  Bump i18n-tools and refactor to support babel-plugin-transform-typescript
+
+## 7.3.0
+- [minor] [023cb45"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/023cb45"
+d):
+
+  - Add i18n support to MediaViewer
+
+## 7.2.1
+- [patch] [cf840fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf840fa):
+
+  MS-1069 Use physical pixel dimensions to determine scale factor of PNG
+
+## 7.2.0
+- [minor] [439dde6"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/439dde6"
+d):
+
+  - rotate local image preview in cards based on the file orientation
+
+## 7.1.1
+- [patch] [1aa57ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1aa57ab):
+
+  Clean up for media up and new task converter for smart cards
+
 ## 7.1.0
 - [minor] Added task converter  [8678076](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8678076)
 

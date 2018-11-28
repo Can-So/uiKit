@@ -20,6 +20,11 @@ if (!global.WEBSITE_ENV) {
   global.WEBSITE_ENV = 'local';
 }
 
+// Node promise rejection are now logged for debbugging
+process.on('unhandledRejection', reason => {
+  console.log('REJECTION', reason);
+});
+
 /*
   This file is executed after the test framework is setup for each test file. Addons that modify
   the `expect` object can be applied here.
@@ -346,10 +351,9 @@ if (process.env.VISUAL_REGRESSION) {
   });
 
   // TODO tweak failureThreshold to provide best results
+  // TODO: A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
   const toMatchProdImageSnapshot = configureToMatchImageSnapshot({
-    customDiffConfig: { threshold: 0.2 },
-    failureThreshold: '5',
-    failureThresholdType: 'percent',
+    customDiffConfig: { threshold: 0.3 },
     noColors: true,
   });
 

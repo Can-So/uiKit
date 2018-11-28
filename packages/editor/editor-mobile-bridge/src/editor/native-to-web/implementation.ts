@@ -1,9 +1,5 @@
-import NativeToWebBridge from './bridge';
-
-import { EditorView } from 'prosemirror-view';
-
 import {
-  MentionsState,
+  MentionPluginState,
   TextFormattingState,
   EditorActions,
   CustomMediaPicker,
@@ -20,15 +16,27 @@ import {
   toggleUnderline,
   toggleEm,
   toggleStrong,
+  StatusState,
+  updateStatus,
+  commitStatusPicker,
+  insertBlockType,
+  createTable,
+  insertTaskDecision,
 } from '@atlaskit/editor-core';
+import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-import { MentionDescription } from '@atlaskit/mention';
+import { Color as StatusColor } from '@atlaskit/status';
+
+import NativeToWebBridge from './bridge';
+import WebBridge from '../../web-bridge';
 import { rejectPromise, resolvePromise } from '../../cross-platform-promise';
 import { setBlockType } from '../../../../editor-core/src/plugins/block-type/commands';
 
-export default class WebBridgeImpl implements NativeToWebBridge {
+export default class WebBridgeImpl extends WebBridge
+  implements NativeToWebBridge {
   textFormattingPluginState: TextFormattingState | null = null;
-  mentionsPluginState: MentionsState | null = null;
+  mentionsPluginState: MentionPluginState | null = null;
+  statusPluginState: StatusState | null = null;
   editorView: EditorView | null = null;
   transformer: JSONTransformer = new JSONTransformer();
   editorActions: EditorActions = new EditorActions();
@@ -74,27 +82,28 @@ export default class WebBridgeImpl implements NativeToWebBridge {
       toggleSubscript()(this.editorView.state, this.editorView.dispatch);
     }
   }
-  onMentionSelect(mention: string) {
-    if (this.mentionsPluginState) {
-      this.mentionsPluginState.insertMention(JSON.parse(mention));
+
+  onStatusUpdate(text: string, color: StatusColor, uuid: string) {
+    if (this.statusPluginState && this.editorView) {
+      updateStatus({
+        text,
+        color,
+        localId: uuid,
+      })(this.editorView);
     }
   }
 
-  onMentionPickerResult(result: string) {
-    if (this.mentionsPluginState) {
-      let all: MentionDescription[] = JSON.parse(result);
-      this.mentionsPluginState.onMentionResult(
-        all,
-        this.mentionsPluginState.query ? this.mentionsPluginState.query : '',
-      );
+  onStatusPickerDismissed() {
+    if (this.statusPluginState && this.editorView) {
+      commitStatusPicker()(this.editorView);
     }
   }
 
-  onMentionPickerDismissed() {
-    if (this.mentionsPluginState) {
-      this.mentionsPluginState.dismiss();
-    }
-  }
+  onMentionSelect(mention: string) {}
+
+  onMentionPickerResult(result: string) {}
+
+  onMentionPickerDismissed() {}
 
   setContent(content: string) {
     if (this.editorActions) {
@@ -129,6 +138,14 @@ export default class WebBridgeImpl implements NativeToWebBridge {
           return;
         }
         case 'upload-end': {
+          if (payload.file.collectionName) {
+            /**
+             * We call this custom event instead of `upload-end` to set the collection
+             * As when emitting `upload-end`, the `ready` handler will usually fire before
+             * the `publicId` is resolved which causes a noop, resulting in bad ADF.
+             */
+            this.mediaPicker.emit('collection', payload);
+          }
           const getUploadPromise = this.mediaMap.get(payload.file.id);
           if (getUploadPromise) {
             getUploadPromise!(payload.file.publicId);
@@ -138,8 +155,8 @@ export default class WebBridgeImpl implements NativeToWebBridge {
       }
     }
   }
-  onPromiseResolved(uuid: string, paylaod: string) {
-    resolvePromise(uuid, JSON.parse(paylaod));
+  onPromiseResolved(uuid: string, payload: string) {
+    resolvePromise(uuid, JSON.parse(payload));
   }
 
   onPromiseRejected(uuid: string) {
@@ -174,5 +191,50 @@ export default class WebBridgeImpl implements NativeToWebBridge {
     if (this.listState && this.editorView) {
       outdentList()(this.editorView.state, this.editorView.dispatch);
     }
+  }
+
+  insertBlockType(type) {
+    if (!this.editorView) {
+      return;
+    }
+
+    switch (type) {
+      case 'blockquote':
+        insertBlockType('blockquote')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'codeblock':
+        insertBlockType('codeblock')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'panel':
+        insertBlockType('panel')(
+          this.editorView.state,
+          this.editorView.dispatch,
+        );
+        return;
+      case 'action':
+        insertTaskDecision(this.editorView, 'taskList');
+        return;
+      case 'decision':
+        insertTaskDecision(this.editorView, 'decisionList');
+        return;
+      case 'table':
+        createTable(this.editorView.state, this.editorView.dispatch);
+        return;
+
+      default:
+        // tslint:disable-next-line:no-console
+        console.error(`${type} cannot be inserted as it's not supported`);
+        return;
+    }
+  }
+
+  getRootElement(): HTMLElement | null {
+    return document.querySelector('#editor');
   }
 }

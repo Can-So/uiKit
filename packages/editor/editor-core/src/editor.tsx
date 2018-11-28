@@ -15,8 +15,11 @@ import { EditorProps } from './types/editor-props';
 import { ReactEditorView } from './create-editor';
 import { EventDispatcher } from './event-dispatcher';
 import EditorContext from './ui/EditorContext';
+import { WithCreateAnalyticsEvent } from './ui/WithCreateAnalyticsEvent';
 import { PortalProvider, PortalRenderer } from './ui/PortalProvider';
 import { nextMajorVersion } from './version';
+import { Context as CardContext } from '@atlaskit/smart-card';
+import { createContextAdapter } from './nodeviews';
 
 export * from './types';
 
@@ -25,6 +28,10 @@ type Context = {
   intl: IntlShape;
 };
 
+// allows connecting external React.Context through to nodeviews
+const ContextAdapter = createContextAdapter({
+  card: CardContext,
+});
 export default class Editor extends React.Component<EditorProps, {}> {
   static defaultProps: EditorProps = {
     appearance: 'message',
@@ -74,7 +81,7 @@ export default class Editor extends React.Component<EditorProps, {}> {
     );
     if (this.props.shouldFocus) {
       if (!instance.view.hasFocus()) {
-        setTimeout(() => {
+        window.setTimeout(() => {
           instance.view.focus();
         }, 0);
       }
@@ -116,6 +123,10 @@ export default class Editor extends React.Component<EditorProps, {}> {
       allowLists: {},
       allowHelpDialog: {},
       allowGapCursor: {},
+      allowUnsupportedContent: {
+        message: 'Deprecated. Defaults to true.',
+        type: 'removed',
+      },
     };
 
     Object.keys(deprecatedProperties).forEach(property => {
@@ -134,7 +145,7 @@ export default class Editor extends React.Component<EditorProps, {}> {
     if (!props.hasOwnProperty('appearance')) {
       // tslint:disable-next-line:no-console
       console.warn(
-        `The default appearence is changing from "message" to "comment", to main current behaviour use <Editor appearance="message" />. [Will be changed in editor-core@${nextVersion}]`,
+        `The default appearance is changing from "message" to "comment", to main current behaviour use <Editor appearance="message" />. [Will be changed in editor-core@${nextVersion}]`,
       );
     }
 
@@ -274,58 +285,72 @@ export default class Editor extends React.Component<EditorProps, {}> {
     const editor = (
       <WidthProvider>
         <EditorContext editorActions={this.editorActions}>
-          <PortalProvider
-            render={portalProviderAPI => (
-              <>
-                <ReactEditorView
-                  editorProps={overriddenEditorProps}
-                  portalProviderAPI={portalProviderAPI}
-                  providerFactory={this.providerFactory}
-                  onEditorCreated={this.onEditorCreated}
-                  onEditorDestroyed={this.onEditorDestroyed}
-                  render={({ editor, view, eventDispatcher, config }) => (
-                    <BaseTheme
-                      dynamicTextSizing={this.props.allowDynamicTextSizing}
-                    >
-                      <Component
-                        disabled={this.props.disabled}
-                        editorActions={this.editorActions}
-                        editorDOMElement={editor}
-                        editorView={view}
+          <WithCreateAnalyticsEvent
+            render={createAnalyticsEvent => (
+              <ContextAdapter>
+                <PortalProvider
+                  render={portalProviderAPI => (
+                    <>
+                      <ReactEditorView
+                        editorProps={overriddenEditorProps}
+                        createAnalyticsEvent={createAnalyticsEvent}
+                        portalProviderAPI={portalProviderAPI}
                         providerFactory={this.providerFactory}
-                        eventDispatcher={eventDispatcher}
-                        maxHeight={this.props.maxHeight}
-                        onSave={this.props.onSave ? this.handleSave : undefined}
-                        onCancel={this.props.onCancel}
-                        popupsMountPoint={this.props.popupsMountPoint}
-                        popupsBoundariesElement={
-                          this.props.popupsBoundariesElement
-                        }
-                        contentComponents={config.contentComponents}
-                        primaryToolbarComponents={
-                          config.primaryToolbarComponents
-                        }
-                        secondaryToolbarComponents={
-                          config.secondaryToolbarComponents
-                        }
-                        insertMenuItems={this.props.insertMenuItems}
-                        customContentComponents={this.props.contentComponents}
-                        customPrimaryToolbarComponents={
-                          this.props.primaryToolbarComponents
-                        }
-                        customSecondaryToolbarComponents={
-                          this.props.secondaryToolbarComponents
-                        }
-                        addonToolbarComponents={
-                          this.props.addonToolbarComponents
-                        }
-                        collabEdit={this.props.collabEdit}
+                        onEditorCreated={this.onEditorCreated}
+                        onEditorDestroyed={this.onEditorDestroyed}
+                        disabled={this.props.disabled}
+                        render={({ editor, view, eventDispatcher, config }) => (
+                          <BaseTheme
+                            dynamicTextSizing={
+                              this.props.allowDynamicTextSizing
+                            }
+                          >
+                            <Component
+                              disabled={this.props.disabled}
+                              editorActions={this.editorActions}
+                              editorDOMElement={editor}
+                              editorView={view}
+                              providerFactory={this.providerFactory}
+                              eventDispatcher={eventDispatcher}
+                              maxHeight={this.props.maxHeight}
+                              onSave={
+                                this.props.onSave ? this.handleSave : undefined
+                              }
+                              onCancel={this.props.onCancel}
+                              popupsMountPoint={this.props.popupsMountPoint}
+                              popupsBoundariesElement={
+                                this.props.popupsBoundariesElement
+                              }
+                              contentComponents={config.contentComponents}
+                              primaryToolbarComponents={
+                                config.primaryToolbarComponents
+                              }
+                              secondaryToolbarComponents={
+                                config.secondaryToolbarComponents
+                              }
+                              insertMenuItems={this.props.insertMenuItems}
+                              customContentComponents={
+                                this.props.contentComponents
+                              }
+                              customPrimaryToolbarComponents={
+                                this.props.primaryToolbarComponents
+                              }
+                              customSecondaryToolbarComponents={
+                                this.props.secondaryToolbarComponents
+                              }
+                              addonToolbarComponents={
+                                this.props.addonToolbarComponents
+                              }
+                              collabEdit={this.props.collabEdit}
+                            />
+                          </BaseTheme>
+                        )}
                       />
-                    </BaseTheme>
+                      <PortalRenderer portalProviderAPI={portalProviderAPI} />
+                    </>
                   )}
                 />
-                <PortalRenderer portalProviderAPI={portalProviderAPI} />
-              </>
+              </ContextAdapter>
             )}
           />
         </EditorContext>

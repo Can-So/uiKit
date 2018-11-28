@@ -212,7 +212,7 @@ export class JIRATransformer implements Transformer<string> {
   private makeDocument() {
     const doc = document.implementation.createHTMLDocument('');
     doc.body = doc.createElement('body');
-    doc.documentElement.appendChild(doc.body);
+    doc.documentElement!.appendChild(doc.body);
     return doc;
   }
 

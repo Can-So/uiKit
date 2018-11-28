@@ -1,48 +1,83 @@
+import { Fragment } from 'prosemirror-model';
 import {
   EditorState,
+  NodeSelection,
   Transaction,
-  // NodeSelection,
   Selection,
 } from 'prosemirror-state';
-import { pluginKey } from './plugin';
-import { Color as ColorType } from '@atlaskit/status';
-
-export type StatusType = {
-  color: ColorType;
-  text: string;
-  localId?: string;
-};
+import { EditorView } from 'prosemirror-view';
+import { uuid } from '@atlaskit/editor-common';
+import { pluginKey, StatusType } from './plugin';
 
 export const DEFAULT_STATUS: StatusType = {
-  text: 'Default',
+  text: '',
   color: 'neutral',
 };
 
-export const insertStatus = (status?: StatusType) => (
+export const createStatus = (showStatusPickerAtOffset = -2) => (
+  insert: (node?: Node | Object | string) => Transaction,
   state: EditorState,
-  dispatch: (tr: Transaction) => void,
+): Transaction => {
+  const statusNode = state.schema.nodes.status.createChecked({
+    ...DEFAULT_STATUS,
+    localId: uuid.generate(),
+  });
+
+  const selectedStatus = statusNode.attrs;
+
+  const tr = insert(statusNode);
+  const showStatusPickerAt = tr.selection.from + showStatusPickerAtOffset;
+  return tr
+    .setSelection(NodeSelection.create(tr.doc, showStatusPickerAt))
+    .setMeta(pluginKey, {
+      showStatusPickerAt,
+      autoFocus: true,
+      selectedStatus,
+    });
+};
+
+export const updateStatus = (status?: StatusType) => (
+  editorView: EditorView,
 ): boolean => {
+  const { state, dispatch } = editorView;
   const { schema } = state;
+  const selectedStatus = null;
 
-  const statusProps = { ...DEFAULT_STATUS, ...status };
+  const statusProps = {
+    ...DEFAULT_STATUS,
+    localId: uuid.generate(),
+    ...status,
+  };
 
-  const tr = state.tr;
+  let tr = state.tr;
   const { showStatusPickerAt } = pluginKey.getState(state);
 
   if (!showStatusPickerAt) {
+    // Same behaviour as quick insert (used in createStatus)
     const statusNode = schema.nodes.status.createChecked(statusProps);
-    dispatch(tr.replaceSelectionWith(statusNode).scrollIntoView());
+    const fragment = Fragment.fromArray([statusNode, state.schema.text(' ')]);
+
+    const newShowStatusPickerAt = tr.selection.from;
+    tr = tr.replaceWith(newShowStatusPickerAt, newShowStatusPickerAt, fragment);
+    tr = tr.setSelection(NodeSelection.create(tr.doc, newShowStatusPickerAt));
+    tr = tr
+      .setMeta(pluginKey, {
+        showStatusPickerAt: newShowStatusPickerAt,
+        selectedStatus,
+      })
+      .scrollIntoView();
+    dispatch(tr);
     return true;
   }
 
   if (state.doc.nodeAt(showStatusPickerAt)) {
-    dispatch(
-      tr
-        .setNodeMarkup(showStatusPickerAt, schema.nodes.status, statusProps)
-        .setSelection(Selection.near(tr.doc.resolve(showStatusPickerAt + 2)))
-        .setMeta(pluginKey, { showStatusPickerAt: showStatusPickerAt })
-        .scrollIntoView(),
-    );
+    tr = tr.setNodeMarkup(showStatusPickerAt, schema.nodes.status, statusProps);
+    tr = tr.setSelection(NodeSelection.create(tr.doc, showStatusPickerAt));
+    tr = tr
+      .setMeta(pluginKey, { showStatusPickerAt, selectedStatus })
+      .scrollIntoView();
+
+    dispatch(tr);
     return true;
   }
 
@@ -53,25 +88,49 @@ export const setStatusPickerAt = (showStatusPickerAt: number | null) => (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
-  dispatch(state.tr.setMeta(pluginKey, { showStatusPickerAt }));
+  dispatch(
+    state.tr.setMeta(pluginKey, {
+      showStatusPickerAt,
+      autoFocus: false,
+      selectedStatus: null,
+    }),
+  );
   return true;
 };
 
-export const closeStatusPicker = () => editorView => {
+export const commitStatusPicker = () => (editorView: EditorView) => {
   const { state, dispatch } = editorView;
   const { showStatusPickerAt } = pluginKey.getState(state);
 
   if (!showStatusPickerAt) {
-    return false;
+    return;
   }
 
-  dispatch(
-    state.tr
-      .setMeta(pluginKey, { showStatusPickerAt: null })
-      .setSelection(
-        Selection.near(state.tr.doc.resolve(showStatusPickerAt + 2)),
-      ),
-  );
+  const statusNode = state.tr.doc.nodeAt(showStatusPickerAt);
 
+  if (!statusNode) {
+    return;
+  }
+
+  let tr = state.tr;
+  tr = tr.setMeta(pluginKey, {
+    showStatusPickerAt: null,
+    autoFocus: false,
+    selectedStatus: null,
+  });
+
+  if (statusNode.attrs.text) {
+    // still has content - keep content, move selection after status
+    tr = tr.setSelection(
+      Selection.near(state.tr.doc.resolve(showStatusPickerAt + 2)),
+    );
+  } else {
+    // no content - remove node
+    tr = tr
+      .delete(showStatusPickerAt, showStatusPickerAt + 1)
+      .setSelection(Selection.near(state.tr.doc.resolve(showStatusPickerAt)));
+  }
+
+  dispatch(tr);
   editorView.focus();
 };

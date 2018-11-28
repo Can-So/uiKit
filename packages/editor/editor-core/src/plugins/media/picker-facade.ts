@@ -61,6 +61,7 @@ export default class PickerFacade {
     picker.on('upload-preview-update', this.handleUploadPreviewUpdate);
     picker.on('upload-end', this.handleUploadEnd);
     picker.on('upload-error', this.handleUploadError);
+    picker.on('collection', this.handleCollection);
 
     if (picker instanceof Dropzone) {
       picker.on('drag-enter', this.handleDragEnter);
@@ -214,18 +215,20 @@ export default class PickerFacade {
   ) => {
     let { file, preview } = event;
 
-    /** Check if error event occured even before preview */
+    /** Check if error event occurred even before preview */
     const existingImage = this.stateManager.getState(file.id);
     if (existingImage && existingImage.status === 'error') {
       return;
     }
 
+    const { dimensions, scaleFactor } = preview as ImagePreview;
     const states = this.stateManager.newState(file.id, {
       fileName: file.name,
       fileSize: file.size,
       fileMimeType: file.type,
       fileId: file.upfrontId,
-      dimensions: (<ImagePreview>preview).dimensions,
+      dimensions,
+      scaleFactor,
     });
 
     this.resolvePublicId(file);
@@ -235,7 +238,6 @@ export default class PickerFacade {
 
   private handleUploadEnd = (event: UploadEndEventPayload) => {
     const { file } = event;
-
     this.stateManager.updateState(file.id, {
       status: 'ready',
     });
@@ -255,6 +257,18 @@ export default class PickerFacade {
       id: error.fileId,
       status: 'error',
       error: error && { description: error.description, name: error.name },
+    });
+  };
+
+  private handleCollection = (
+    event: UploadEndEventPayload & {
+      file: { readonly collectionName?: string };
+    },
+  ) => {
+    const { file } = event;
+    this.stateManager.updateState(file.id, {
+      status: 'preview',
+      collection: file.collectionName,
     });
   };
 

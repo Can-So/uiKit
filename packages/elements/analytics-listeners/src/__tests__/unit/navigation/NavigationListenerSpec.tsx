@@ -79,7 +79,7 @@ describe('NavigationListener', () => {
           ? analyticsWebClientMock.sendOperationalEvent
           : analyticsWebClientMock.sendUIEvent;
 
-      setTimeout(() => {
+      window.setTimeout(() => {
         expect((mockFn as any).mock.calls[0][0]).toMatchObject(clientPayload);
         done();
       });

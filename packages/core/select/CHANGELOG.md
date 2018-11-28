@@ -1,5 +1,68 @@
 # @atlaskit/select
 
+## 6.1.9
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/checkbox@5.0.7
+  - @atlaskit/form@4.0.19
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
+## 6.1.8
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/checkbox@5.0.6
+  - @atlaskit/form@4.0.18
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/button@10.0.0
+
+## 6.1.7
+- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+
+  - Fixed issue where tooltips and modals would initially render in the wrong location
+
+## 6.1.6
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 6.1.5
+- [patch] [fcf97d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fcf97d8):
+
+  - Fix countries and mismatched flags
+
+## 6.1.4
+- [patch] [6ab8e95"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ab8e95"
+d):
+
+  - Removed wrapping div from around selects as it is no longer needed when using the latest inline-dialog component.
+
+## 6.1.3
+- [patch] [dab963b"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dab963b"
+d):
+
+  - Make sure portal binds to DOM only
+
+## 6.1.2
+- [patch] [0782e03"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0782e03"
+d):
+
+  - bumped react-select to 2.1.1 minor bug fixes including mirroring the logic for the backspace key to delete, and stripping theme props from Input and GroupHeading dom elements. See https://github.com/JedWatson/react-select/releases/tag/v2.1.1 for details
+
+## 6.1.1
+- [patch] fixed popupselect bug by replacing Fragment with div element containing the requisite event handlers [80dd688](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80dd688)
+
 ## 6.1.0
 - [minor] Change tabSelectsValue to default to false in @atlaskit/select, bumped react-select dep to 2.1.0, see release logs for details https://github.com/JedWatson/react-select/releases/tag/2.1.0 [dd4cbea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dd4cbea)
 

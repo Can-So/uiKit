@@ -5,25 +5,35 @@ import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
 import BacklogIcon from '@atlaskit/icon/glyph/backlog';
 import IssuesIcon from '@atlaskit/icon/glyph/issue';
 import ReportsIcon from '@atlaskit/icon/glyph/graph-line';
-import { gridSize as gridSizeFn } from '@atlaskit/theme';
+import { colors, gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import {
   GlobalNav,
   LayoutManager,
   NavigationProvider,
-  Section,
+  MenuSection,
   SkeletonContainerView,
   light,
   dark,
   settings,
   ContainerHeader,
+  HeaderSection,
   ItemAvatar,
   Item,
   ThemeProvider,
+  modeGenerator,
 } from '../src';
 
 const gridSize = gridSizeFn();
-const themeModes = { light, dark, settings };
+
+const customThemeMode = modeGenerator({
+  product: {
+    text: colors.N0,
+    background: colors.G500,
+  },
+});
+
+const themeModes = { light, dark, settings, custom: customThemeMode };
 
 const GlobalNavigation = () => (
   <GlobalNav primaryItems={[]} secondaryItems={[]} />
@@ -34,6 +44,7 @@ type State = {
   shouldShowContainer: boolean,
   shouldRenderSkeleton: boolean,
 };
+
 export default class Example extends Component<{}, State> {
   state = {
     themeMode: 'light',
@@ -44,12 +55,11 @@ export default class Example extends Component<{}, State> {
   renderNavigation = () => {
     return (
       <Fragment>
-        <Section>
+        <HeaderSection>
           {({ css }) => (
             <div
               css={{
                 ...css,
-                paddingTop: gridSize * 2.5,
                 paddingBottom: gridSize * 2.5,
               }}
             >
@@ -66,23 +76,28 @@ export default class Example extends Component<{}, State> {
               />
             </div>
           )}
-        </Section>
-        <Section>
-          {({ css }) => (
-            <div css={css}>
+        </HeaderSection>
+        <MenuSection>
+          {({ className }) => (
+            <div className={className}>
               <Item before={DashboardIcon} text="Dashboards" />
               <Item before={BacklogIcon} text="Backlog" />
               <Item before={IssuesIcon} text="Issues and filters" />
               <Item before={ReportsIcon} text="Reports" />
             </div>
           )}
-        </Section>
+        </MenuSection>
       </Fragment>
     );
   };
 
   renderSkeleton = () => {
-    return <SkeletonContainerView />;
+    const { shouldShowContainer } = this.state;
+    return (
+      <SkeletonContainerView
+        type={shouldShowContainer ? 'container' : 'product'}
+      />
+    );
   };
 
   handleThemeModeChange = ({ target: { value: themeMode } }: any) => {
@@ -143,6 +158,7 @@ export default class Example extends Component<{}, State> {
                   <option value="light">Light mode</option>
                   <option value="dark">Dark mode</option>
                   <option value="settings">Settings mode</option>
+                  <option value="custom">Custom mode</option>
                 </select>
               </p>
             </div>

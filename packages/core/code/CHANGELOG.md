@@ -1,5 +1,26 @@
 # @atlaskit/code
 
+## 8.2.0
+- [minor] [10fe416](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/10fe416):
+
+  - Props Language should be required and surfacing more props for code
+
+## 8.1.1
+- [patch] [84e8015](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84e8015):
+
+  - Bump react-syntax-highlighter to 10.0.1
+
+## 8.1.0
+- [minor] [26027dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/26027dd):
+
+  - Upgrade react syntax highlighter to version that ships its own async loaded languages and supports SSR
+
+## 8.0.12
+- [patch] Inline code should wrap [f1d9a54](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1d9a54)
+
+## 8.0.11
+- [patch] Fix webpack 3 support for page & code [03af95e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/03af95e)
+
 ## 8.0.10
 - [patch] Update babel config to transpile out dynamic imports for commonjs [2dae295](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2dae295)
 

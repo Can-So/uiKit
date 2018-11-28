@@ -1,5 +1,4 @@
 import { name } from '../../../../package.json';
-import { Node } from 'prosemirror-model';
 import {
   doc,
   p,
@@ -20,7 +19,6 @@ import {
   isEmptyNode,
   isEmptyParagraph,
   isEmptyDocument,
-  preprocessDoc,
   processRawValue,
   hasVisibleContent,
 } from '../../../utils/document';
@@ -123,30 +121,6 @@ describe(name, () => {
         expect(isEmptyDocument(doc(p(), hr())(schema))).toBe(false);
       });
     });
-
-    describe('preprocessDoc', () => {
-      it('should return true if node is empty', () => {
-        const editorContent = doc(
-          p('some text'),
-          decisionList({})(decisionItem({})()),
-        )(schema);
-        const processedContent = preprocessDoc(schema, editorContent);
-        expect(processedContent).not.toBe(undefined);
-        expect((processedContent as Node)!.content!.childCount).toEqual(1);
-        expect(
-          (processedContent as Node)!.content!.firstChild!.type.name,
-        ).toEqual('paragraph');
-      });
-
-      it('should return new document', () => {
-        const editorContent = doc(
-          p('some text'),
-          decisionList({})(decisionItem({})()),
-        )(schema);
-        const processedContent = preprocessDoc(schema, editorContent);
-        expect(processedContent).not.toEqual(editorContent);
-      });
-    });
   });
 
   describe('processRawValue', () => {
@@ -205,6 +179,55 @@ describe(name, () => {
             content: [{ type: 'text', text: 'text' }],
           }),
         ).toBeUndefined();
+      });
+    });
+
+    describe('Unsupported', () => {
+      it('should wrap unsupported block nodes', () => {
+        const result = processRawValue(schema, {
+          type: 'doc',
+          content: [{ type: 'x' }],
+        });
+
+        expect(result).toBeDefined();
+        expect(result!.toJSON()).toEqual({
+          type: 'doc',
+          content: [
+            {
+              type: 'unsupportedBlock',
+              attrs: { originalValue: { type: 'x' } },
+            },
+          ],
+        });
+      });
+
+      it('should wrap unsupported inline nodes', () => {
+        const result = processRawValue(schema, {
+          type: 'doc',
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'hello' }, { type: 'x' }],
+            },
+          ],
+        });
+
+        expect(result).toBeDefined();
+        expect(result!.toJSON()).toEqual({
+          type: 'doc',
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                { type: 'text', text: 'hello' },
+                {
+                  type: 'unsupportedInline',
+                  attrs: { originalValue: { type: 'x' } },
+                },
+              ],
+            },
+          ],
+        });
       });
     });
   });
