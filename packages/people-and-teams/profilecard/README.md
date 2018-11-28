@@ -2,6 +2,7 @@
 
 ## i18n
 
+`src/i18n` is generated folder by `yarn i18:pull`, so don't update any files in that folder manually.
 Contact Atlaskit team to get `TRANSIFEX_API_TOKEN` as a global variable 
 
 ### Pushing translation

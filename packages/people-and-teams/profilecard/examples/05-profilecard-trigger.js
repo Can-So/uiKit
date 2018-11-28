@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { AkProfilecardTrigger } from '../src';
 import { getMockProfileClient } from './helper/util';
-import LocaleIntlProvider from './helper/local-intl-provider';
+import LocaleIntlProvider from './helper/locale-intl-provider';
 
 const mockClient = getMockProfileClient(10, 0);
 

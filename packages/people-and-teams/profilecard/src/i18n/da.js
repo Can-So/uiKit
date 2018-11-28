@@ -1,35 +1,36 @@
 // Danish
 export default {
-  'pt.profile-card.inactive.account': 'Account deactivated',
+  'pt.profile-card.inactive.account': 'Konto deaktiveret',
   'pt.profile-card.general.msg.disabled.user':
-    'You can no longer collaborate with this person.',
+    'Du kan ikke længere samarbejde med denne person.',
   'pt.profile-card.inactive.account.no.date':
-    'Their account has been deactivated.',
+    'Personens konto er blevet deaktiveret.',
   'pt.profile-card.inactive.account.has.date.this.week':
-    'Their account was deactivated this week.',
+    'Personens konto blev deaktiveret i denne uge.',
   'pt.profile-card.inactive.account.has.date.this.month':
-    'Their account was deactivated this month.',
+    'Personens konto blev deaktiveret i denne måned.',
   'pt.profile-card.inactive.account.has.date.last.month':
-    'Their account was deactivated last month.',
+    'Personens konto blev deaktiveret i sidste måned.',
   'pt.profile-card.inactive.account.has.date.a.few.months':
-    'Their account has been deactivated for a few months.',
+    'Personens konto har været deaktiveret i nogle måneder.',
   'pt.profile-card.inactive.account.has.date.several.months':
-    'Their account has been deactivated for several months.',
+    'Personens konto har været deaktiveret i adskillige måneder.',
   'pt.profile-card.inactive.account.has.date.more.than.a.year':
-    'Their account has been deactivated for more than a year.',
-  'pt.profile-card.closed.account': 'Account deleted',
-  'pt.profile-card.closed.account.no.date': 'Their account has been deleted.',
+    'Personens konto har været deaktiveret i over et år.',
+  'pt.profile-card.closed.account': 'Konto slettet',
+  'pt.profile-card.closed.account.no.date':
+    'Personens konto er blevet slettet.',
   'pt.profile-card.closed.account.has.date.this.week':
-    'Their account was deleted this week.',
+    'Personens konto blev slettet i denne uge.',
   'pt.profile-card.closed.account.has.date.this.month':
-    'Their account was deleted this month.',
+    'Personens konto blev slettet i denne måned.',
   'pt.profile-card.closed.account.has.date.last.month':
-    'Their account was deleted last month.',
+    'Personens konto blev slettet i sidste måned.',
   'pt.profile-card.closed.account.has.date.a.few.months':
-    'Their account has been deleted for a few months.',
+    'Personens konto har været slettet i nogle måneder.',
   'pt.profile-card.closed.account.has.date.several.months':
-    'Their account has been deleted for several months.',
+    'Personens konto har været slettet i adskillige måneder.',
   'pt.profile-card.closed.account.has.date.more.than.a.year':
-    'Their account has been deleted for more than a year.',
-  'pt.profile-card.disabled.account.default.name': 'Former user',
+    'Personens konto har været slettet i over et år.',
+  'pt.profile-card.disabled.account.default.name': 'Forhenværende bruger',
 };

@@ -2,7 +2,7 @@
 import React from 'react';
 import AkProfilecardResourced from '../src';
 import { getMockProfileClient } from './helper/util';
-import LocaleIntlProvider from './helper/local-intl-provider';
+import LocaleIntlProvider from './helper/locale-intl-provider';
 
 const mockClient = getMockProfileClient(10, 0);
 // With a real client this would look like:

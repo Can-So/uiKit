@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ProfilecardInteractive from './helper/profile-interactive';
-import LocaleIntlProvider from './helper/local-intl-provider';
+import LocaleIntlProvider from './helper/locale-intl-provider';
 
 export const MainStage = styled.div`
   margin: 16px;

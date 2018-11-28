@@ -6,6 +6,7 @@ import AkButton from '@atlaskit/button';
 import { Presence } from '@atlaskit/avatar';
 import AkProfilecardResourced, { AkProfilecard, AkProfileClient } from '../..';
 import ErrorMessage from '../../components/ErrorMessage';
+import HeightTransitionWrapper from '../../components/HeightTransitionWrapper';
 import presences from '../../internal/presences';
 import { FullNameLabel, ActionButtonGroup } from '../../styled/Card';
 import mockGlobalDate from './helper/_mock-global-date';
@@ -65,7 +66,7 @@ describe('Profilecard', () => {
 
       it('should not render a card if full name is not set', () => {
         card.setProps({ fullName: undefined });
-        expect(card.find('HeightTransitionWrapper').children()).toHaveLength(0);
+        expect(card.find(HeightTransitionWrapper).children()).toHaveLength(0);
       });
     });
 
@@ -251,7 +252,7 @@ describe('Profilecard', () => {
       it('should have correct customElevation', () => {
         const wrapper = mount(<AkProfilecard customElevation="e400" />);
         expect(
-          wrapper.find('HeightTransitionWrapper').props().customElevation,
+          wrapper.find(HeightTransitionWrapper).props().customElevation,
         ).toEqual('e400');
       });
     });
