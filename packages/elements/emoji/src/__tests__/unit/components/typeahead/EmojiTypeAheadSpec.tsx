@@ -429,6 +429,23 @@ describe('EmojiTypeAhead', () => {
     );
   });
 
+  it('should not fire onSelection if a query ends in a colon and multiple emoji have an exact shortName match', () => {
+    const onSelection = sinon.spy();
+
+    return setupTypeAhead({
+      onSelection: onSelection as OnEmojiEvent,
+      query: ':ftfy:',
+    } as Props).then(component =>
+      waitUntil(() => doneLoading(component)).then(() => {
+        expect(
+          itemsVisibleCount(component) > 2,
+          'Multiple items match',
+        ).to.equal(true);
+        expect(onSelection.callCount, 'selected 0').to.equal(0);
+      }),
+    );
+  });
+
   it('should not fire onSelection if a query ends in a colon and no emojis have an exact shortName match', () => {
     const onSelection = sinon.spy();
 

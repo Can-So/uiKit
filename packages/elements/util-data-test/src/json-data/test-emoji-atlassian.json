@@ -106,6 +106,36 @@
       "shortName": ":ftfy:"
     },
     {
+      "id": "atlassian-ftfy2",
+      "name": "ftfy",
+      "fallback": ":ftfy:",
+      "type": "ATLASSIAN",
+      "category": "ATLASSIAN",
+      "order": -1000,
+      "representation": {
+        "imagePath": "https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/ftfy@4x.png",
+        "height": 120,
+        "width": 120
+      },
+      "searchable": true,
+      "shortName": ":ftfy:"
+    },
+    {
+      "id": "atlassian-ftfy3",
+      "name": "ftfy",
+      "fallback": ":ftfy:",
+      "type": "ATLASSIAN",
+      "category": "ATLASSIAN",
+      "order": -1000,
+      "representation": {
+        "imagePath": "https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/ftfy@4x.png",
+        "height": 120,
+        "width": 120
+      },
+      "searchable": true,
+      "shortName": ":ftfy:"
+    },
+    {
       "id": "atlassian-twss",
       "name": "twss",
       "fallback": ":twss:",

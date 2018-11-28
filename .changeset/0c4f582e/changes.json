@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/emoji", "type": "patch" },
+    { "name": "@atlaskit/util-data-test", "type": "patch" }
+  ],
+  "dependents": []
+}
