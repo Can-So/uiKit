@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 89.0.8
+- [patch] [6c90bb9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c90bb9):
+
+  - Fix mention plugin state in plugin
+
 ## 89.0.7
 - Updated dependencies [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
   - @atlaskit/editor-test-helpers@6.2.22
