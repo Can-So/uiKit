@@ -24,13 +24,13 @@ import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploada
 
 const POLLING_INTERVAL = 1000;
 const maxNumberOfItemsPerCall = 100;
-
+export type DataloaderMap = { [id: string]: DataloaderResult };
 export const getItemsFromKeys = (
   dataloaderKeys: DataloaderKey[],
   fileItems: FileItem[],
 ): DataloaderResult[] => {
-  const itemsByKey: { [id: string]: DataloaderResult } = fileItems.reduce(
-    (prev, nextFileItem) => {
+  const itemsByKey: DataloaderMap = fileItems.reduce(
+    (prev: DataloaderMap, nextFileItem) => {
       const { id, collection } = nextFileItem;
       const key = FileStreamCache.createKey(id, { collectionName: collection });
 
