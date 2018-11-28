@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
 import { ProcessedFileState } from '@atlaskit/media-core';
-import { awaitError } from '@atlaskit/media-test-helpers';
+import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
 import { Stubs, createContext } from '../../../_stubs';
 import {
   ImageViewer,
@@ -31,7 +30,7 @@ function createFixture(
   const context = createContext({ blobService });
   const onClose = jest.fn();
   const onLoaded = jest.fn();
-  const el = mount(
+  const el = mountWithIntlContext(
     <ImageViewer
       context={context}
       item={imageItem}

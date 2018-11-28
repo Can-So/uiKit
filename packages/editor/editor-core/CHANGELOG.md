@@ -1,5 +1,21 @@
 # @atlaskit/editor-core
 
+## 89.1.0
+- [minor] [7c9dcba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c9dcba):
+
+  - Responsive wide breakout mode
+
+## 89.0.8
+- [patch] [6c90bb9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c90bb9):
+
+  - Fix mention plugin state in plugin
+
+## 89.0.7
+- Updated dependencies [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+  - @atlaskit/editor-test-helpers@6.2.22
+  - @atlaskit/renderer@31.0.4
+  - @atlaskit/smart-card@9.0.0
+
 ## 89.0.6
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/smart-card@8.8.5

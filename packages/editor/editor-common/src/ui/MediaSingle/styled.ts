@@ -1,14 +1,13 @@
 import * as React from 'react';
+import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-// @ts-ignore: unused variable
-// prettier-ignore
-import { HTMLAttributes, ClassAttributes } from 'react';
 import { MediaSingleLayout } from '../../schema';
 import {
-  akEditorFullPageMaxWidth,
   akEditorWideLayoutWidth,
+  akEditorFullPageMaxWidth,
   akEditorBreakoutPadding,
 } from '../../styles';
+import { calcWideWidth } from '../../utils';
 
 function float(layout: MediaSingleLayout): string {
   switch (layout) {
@@ -40,9 +39,7 @@ function calcLegacyWidth(
         ? 'calc(50% - 12px)'
         : `${width}px`;
     case 'wide':
-      return containerWidth < akEditorWideLayoutWidth
-        ? '100%'
-        : `${akEditorWideLayoutWidth}px`;
+      return calcWideWidth(containerWidth);
     case 'full-width':
       return `${Math.min(width, containerWidth) - akEditorBreakoutPadding}px`;
     default:
@@ -74,9 +71,7 @@ function calcMaxWidth(
 ) {
   switch (layout) {
     case 'wide':
-      return containerWidth < akEditorWideLayoutWidth
-        ? '100%'
-        : `${akEditorWideLayoutWidth}px`;
+      return calcWideWidth(containerWidth);
     case 'full-width':
       return containerWidth < akEditorFullPageMaxWidth
         ? '100%'

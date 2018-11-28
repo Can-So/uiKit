@@ -3,7 +3,7 @@ import { Context, ProcessedFileState } from '@atlaskit/media-core';
 import { constructAuthTokenUrl } from '../../utils';
 import { Outcome, MediaViewerFeatureFlags } from '../../domain';
 import { Video } from '../../styled';
-import { CustomVideo } from './customVideo';
+import CustomVideo from './customVideo';
 import { getFeatureFlag } from '../../utils/getFeatureFlag';
 import { isIE } from '../../utils/isIE';
 import { createError, MediaViewerError } from '../../error';

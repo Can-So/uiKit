@@ -314,7 +314,7 @@ const dropdowns = [
     clickSelector: `span[aria-label="${
       insertBlockMessages.mention.defaultMessage
     }"]`,
-    nodeSelector: 'span[data-mention-query]',
+    nodeSelector: 'span[data-type-ahead-query]',
     appearance: ['full-page', 'comment', 'message'],
   },
   {
