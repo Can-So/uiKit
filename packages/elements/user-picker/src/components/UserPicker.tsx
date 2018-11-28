@@ -185,19 +185,20 @@ export class UserPicker extends React.Component<
     }
   };
 
-  private triggerInputChange = this.withSelectRef(select => {
-    select.onInputChange(this.props.search, { action: 'input-change' });
-  });
+  private triggerInputChange = (query?: string) =>
+    this.withSelectRef(select => {
+      select.onInputChange(query, { action: 'input-change' });
+    })();
 
   componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
     // trigger onInputChange
     if (this.props.search !== prevProps.search) {
-      this.triggerInputChange();
+      this.triggerInputChange(this.props.search);
     }
 
     // load options when the picker open
     if (this.state.menuIsOpen && !prevState.menuIsOpen) {
-      this.executeLoadOptions();
+      this.executeLoadOptions(this.props.search);
     }
   }
 
@@ -205,6 +206,11 @@ export class UserPicker extends React.Component<
     // Escape
     if (event.keyCode === 27) {
       this.selectRef.blur();
+    }
+    // Space
+    if (event.keyCode === 32 && !this.state.inputValue) {
+      event.preventDefault();
+      this.triggerInputChange(' ');
     }
   };
 
