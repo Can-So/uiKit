@@ -194,7 +194,6 @@ export const UserPicker = withAnalyticsEvents<WithAnalyticsEventProps>()(
     );
 
     private fireFailedAnalyticsEvent = () => {
-      console.log('fireFailed');
       createAndFireSafe(this.props.createAnalyticsEvent, failedEvent);
     };
 
