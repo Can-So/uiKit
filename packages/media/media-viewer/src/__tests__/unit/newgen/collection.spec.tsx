@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
 import { Subject } from 'rxjs/Subject';
 import { Context, MediaItemType, MediaCollection } from '@atlaskit/media-core';
 import { Stubs, createContext } from '../_stubs';
@@ -9,6 +8,7 @@ import { Identifier } from '../../../newgen/domain';
 import Spinner from '@atlaskit/spinner';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import { List } from '../../../newgen/list';
+import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 
 const collectionName = 'my-collection';
 
@@ -59,7 +59,7 @@ function createFixture(
   identifier: Identifier,
   onClose?: () => {},
 ) {
-  const el = mount(
+  const el = mountWithIntlContext(
     <Collection
       defaultSelectedItem={identifier}
       collectionName={collectionName}

@@ -83,7 +83,7 @@ export default class Example extends React.PureComponent<{}, State> {
           onBlur={this.handleInputBlur}
           onKeyDown={this.handleKeyDown}
         />
-        <div>SelectedOption: {user && user.nickname}</div>
+        <div>SelectedOption: {user && user.publicName}</div>
         <UserPicker
           ref={this.handleUserPickerRef}
           anchor={this.renderAnchor}

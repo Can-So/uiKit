@@ -1,5 +1,10 @@
 # @atlaskit/mention
 
+## 15.1.4
+- [patch] [01edbde](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01edbde):
+
+  - Force patch release
+
 ## 15.1.3
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

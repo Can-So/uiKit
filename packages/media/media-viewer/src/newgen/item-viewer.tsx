@@ -10,8 +10,7 @@ import { DocViewer } from './viewers/doc';
 import { Spinner } from './loading';
 import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
-import {
-  ErrorMessage,
+import ErrorMessage, {
   createError,
   MediaViewerError,
   ErrorName,

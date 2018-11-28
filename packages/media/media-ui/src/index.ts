@@ -4,6 +4,7 @@ const locales: { [key: string]: any } = untypedLocales;
 
 export * from './BlockCard';
 export * from './InlineCard';
+export * from './LinkView';
 export { Ellipsify, EllipsifyProps } from './ellipsify';
 export { toHumanReadableMediaSize } from './humanReadableSize';
 export * from './mixins';
