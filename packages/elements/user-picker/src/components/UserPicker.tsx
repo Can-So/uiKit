@@ -35,7 +35,7 @@ import {
 
 const defaultFilter = createFilter();
 
-export const UserPicker = withAnalyticsEvents<WithAnalyticsEventProps>()(
+export const UserPicker = withAnalyticsEvents()(
   class extends React.Component<
     UserPickerProps & WithAnalyticsEventProps,
     UserPickerState

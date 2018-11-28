@@ -3,7 +3,7 @@ import {
   createAndFireEvent,
   CreateAndFireEventFunction,
   CreateUIAnalyticsEventSignature,
-} from '@atlaskit/analytics-next';
+} from '@atlaskit/analytics-next-types';
 import {
   name as packageName,
   version as packageVersion,
