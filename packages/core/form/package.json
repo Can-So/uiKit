@@ -49,6 +49,7 @@
     "@atlaskit/section-message": "^1.0.12",
     "@atlaskit/select": "^6.1.9",
     "@atlaskit/single-select": "^6.0.9",
+    "@atlaskit/textarea": "^0.1.1",
     "@atlaskit/textfield": "^0.1.1",
     "@atlaskit/toggle": "^5.0.12",
     "@atlaskit/tooltip": "^12.1.11",
