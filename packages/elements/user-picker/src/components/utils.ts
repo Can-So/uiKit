@@ -71,3 +71,8 @@ export const isSingleValue = (
 
 export const hasValue = (value?: string): value is string =>
   !!value && value.trim().length > 0;
+
+export const callCallback = <U extends any[], R>(
+  callback: ((...U) => R) | undefined,
+  ...args: U
+): R | undefined => callback && callback(...args);

@@ -2,18 +2,21 @@ jest.mock('../../../components/styles', () => ({
   getStyles: jest.fn(),
 }));
 
+import { AnalyticsListener } from '@atlaskit/analytics-next';
 import Select from '@atlaskit/select';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { getStyles } from '../../../components/styles';
 import { UserPicker } from '../../../components/UserPicker';
-import { User, UserPickerProps as Props, UserOption } from '../../../types';
 import { usersToOptions, userToOption } from '../../../components/utils';
+import { User, UserOption, UserPickerProps as Props, UserPickerProps } from '../../../types';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<Props> = {}) =>
-    shallow(<UserPicker {...props} />);
+    shallow(<UserPicker {...props} />)
+      .dive()
+      .dive();
 
   const users: User[] = [
     {
@@ -427,5 +430,197 @@ describe('UserPicker', () => {
     const preventDefault = jest.fn();
     component.find(Select).simulate('keyDown', { keyCode: 32, preventDefault });
     expect(preventDefault).toHaveBeenCalledTimes(0);
+  });
+
+  describe.only('analytics', () => {
+    const onEvent = jest.fn();
+    let component;
+
+    const AnalyticsTestComponent = (props: Partial<UserPickerProps>) => (
+      <AnalyticsListener channel="fabric-elements" onEvent={onEvent}>
+        <UserPicker {...props} />
+      </AnalyticsListener>
+    );
+
+    beforeEach(() => {
+      component = mount(<AnalyticsTestComponent />);
+    });
+
+    afterEach(() => {
+      onEvent.mockClear();
+    });
+
+    it('should trigger cancel event', () => {
+      const input = component.find('input');
+      input.simulate('focus');
+      input.simulate('blur');
+      expect(onEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload: expect.objectContaining({
+            action: 'cancelled',
+            actionSubject: 'userPicker',
+            eventType: 'ui',
+            attributes: {
+              duration: expect.any(Number),
+              packageName: '@atlaskit/user-picker',
+              packageVersion: expect.any(String),
+              queryLength: 0,
+              spaceInQuery: false,
+              type: 'single',
+              upKeyCount: 0,
+              downKeyCount: 0,
+            },
+          }),
+        }),
+        'fabric-elements',
+      );
+    });
+
+    it('should trigger pressed event', () => {
+      const input = component.find('input');
+      input.simulate('focus');
+      component.setProps({ users });
+      input.simulate('keyDown', { keyCode: 40 });
+      input.simulate('keyDown', { keyCode: 40 });
+      input.simulate('keyDown', { keyCode: 40 });
+      input.simulate('keyDown', { keyCode: 38 });
+      input.simulate('keyDown', { keyCode: 13 });
+      component.find(Select).prop('onChange')(userToOption(users[0]), {
+        action: 'select-option',
+      });
+      expect(onEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload: expect.objectContaining({
+            action: 'pressed',
+            actionSubject: 'userPicker',
+            eventType: 'ui',
+            attributes: {
+              duration: expect.any(Number),
+              packageName: '@atlaskit/user-picker',
+              packageVersion: expect.any(String),
+              queryLength: 0,
+              spaceInQuery: false,
+              type: 'single',
+              upKeyCount: 1,
+              downKeyCount: 3,
+              position: 0,
+              userId: 'abc-123',
+            },
+          }),
+        }),
+        'fabric-elements',
+      );
+    });
+
+    it('should trigger clicked event', () => {
+      const input = component.find('input');
+      input.simulate('focus');
+      component.setProps({ users });
+      input.simulate('keyDown', { keyCode: 40 });
+      input.simulate('keyDown', { keyCode: 40 });
+      input.simulate('keyDown', { keyCode: 40 });
+      input.simulate('keyDown', { keyCode: 38 });
+      component.find(Select).prop('onChange')(userToOption(users[0]), {
+        action: 'select-option',
+      });
+      expect(onEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload: expect.objectContaining({
+            action: 'clicked',
+            actionSubject: 'userPicker',
+            eventType: 'ui',
+            attributes: {
+              duration: expect.any(Number),
+              packageName: '@atlaskit/user-picker',
+              packageVersion: expect.any(String),
+              queryLength: 0,
+              spaceInQuery: false,
+              type: 'single',
+              upKeyCount: 1,
+              downKeyCount: 3,
+              position: 0,
+              userId: 'abc-123',
+            },
+          }),
+        }),
+        'fabric-elements',
+      );
+    });
+
+    it('should trigger cleared event', () => {
+      const input = component.find('input');
+      input.simulate('focus');
+      component.find(Select).prop('onChange')(userToOption(users[0]), {
+        action: 'clear',
+      });
+      expect(onEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload: expect.objectContaining({
+            action: 'cleared',
+            actionSubject: 'userPicker',
+            eventType: 'ui',
+            attributes: {
+              packageName: '@atlaskit/user-picker',
+              packageVersion: expect.any(String),
+              type: 'single',
+              pickerOpen: true,
+            },
+          }),
+        }),
+        'fabric-elements',
+      );
+    });
+
+    it('should trigger deleted event', () => {
+      component.setProps({ isMulti: true });
+      const input = component.find('input');
+      input.simulate('focus');
+      component.find(Select).prop('onChange')([], {
+        action: 'remove-value',
+        removedValue: userToOption(users[0]),
+      });
+      expect(onEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload: expect.objectContaining({
+            action: 'deleted',
+            actionSubject: 'userPickerItem',
+            eventType: 'ui',
+            attributes: {
+              packageName: '@atlaskit/user-picker',
+              packageVersion: expect.any(String),
+              type: 'multi',
+              pickerOpen: true,
+              userId: users[0].id,
+            },
+          }),
+        }),
+        'fabric-elements',
+      );
+    });
+
+    it('should trigger failed event', () => {
+      component.setProps({
+        loadUsers: () => Promise.reject(new Error('some error')),
+      });
+      const input = component.find('input');
+      input.simulate('focus');
+      return Promise.resolve(() => {
+        expect(onEvent).toHaveBeenCalledWith(
+          expect.objectContaining({
+            payload: expect.objectContaining({
+              action: 'failed',
+              actionSubject: 'userPickerItem',
+              eventType: 'operational',
+              attributes: {
+                packageName: '@atlaskit/user-picker',
+                packageVersion: expect.any(String),
+                type: 'single',
+              },
+            }),
+          }),
+          'fabric-elements',
+        );
+      });
+    });
   });
 });
