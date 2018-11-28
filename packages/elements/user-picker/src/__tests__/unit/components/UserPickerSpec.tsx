@@ -432,7 +432,7 @@ describe('UserPicker', () => {
     expect(preventDefault).toHaveBeenCalledTimes(0);
   });
 
-  describe.only('analytics', () => {
+  describe('analytics', () => {
     const onEvent = jest.fn();
     let component;
 
