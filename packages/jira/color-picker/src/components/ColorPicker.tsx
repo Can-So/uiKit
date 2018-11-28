@@ -16,11 +16,6 @@ import {
 import { ColorCardWrapper } from '../styled/ColorPicker';
 import { PopperProps } from 'react-popper';
 
-type PopperPropsNoChildren = Pick<
-  PopperProps,
-  Exclude<keyof PopperProps, 'children'>
->;
-
 export interface Props {
   /** color picker button label */
   label?: string;
@@ -33,7 +28,7 @@ export interface Props {
   /** color of checkmark on selected color */
   checkMarkColor?: string;
   /** props for react-popper */
-  popperProps?: PopperPropsNoChildren;
+  popperProps?: PopperProps;
   /** onChange handler */
   onChange: (value: string, analyticsEvent?: object) => void;
   /** You should not be accessing this prop under any circumstances. It is provided by @atlaskit/analytics-next. */
