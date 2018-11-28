@@ -14,7 +14,6 @@ import {
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
 import { ColorCardWrapper } from '../styled/ColorPicker';
-import { PopperProps } from 'react-popper';
 
 export interface Props {
   /** color picker button label */
@@ -28,7 +27,7 @@ export interface Props {
   /** color of checkmark on selected color */
   checkMarkColor?: string;
   /** props for react-popper */
-  popperProps?: PopperProps;
+  popperProps?: Object;
   /** onChange handler */
   onChange: (value: string, analyticsEvent?: object) => void;
   /** You should not be accessing this prop under any circumstances. It is provided by @atlaskit/analytics-next. */
