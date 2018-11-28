@@ -108,9 +108,9 @@ export const MarginWrapperSquare: ComponentClass<
   top: 0;
   border-style: solid;
   border-color: rgba(255, 255, 255, 0.3);
-  border-width: ${(props: MarginWrapperProps) => props.size}px;
-  width: ${({ width }: MarginWrapperProps) => width}px;
-  height: ${({ height }: MarginWrapperProps) => height}px;
+  border-width: ${props => props.size}px;
+  width: ${({ width }) => width}px;
+  height: ${({ height }) => height}px;
 `;
 
 export const MarginWrapperCircle: ComponentClass<
@@ -120,17 +120,18 @@ export const MarginWrapperCircle: ComponentClass<
   overflow: hidden;
   left: 0px;
   top: 0px;
-  width: ${({ width, size }: MarginWrapperProps) => width + size * 2}px;
-  height: ${({ height, size }: MarginWrapperProps) => height + size * 2}px;
+  width: ${({ width, size }) => width + size * 2}px;
+  height: ${({ height, size }) => height + size * 2}px;
 
   &:after {
     content: '';
     position: absolute;
-    left: ${({ size }: MarginWrapperProps) => size}px;
-    top: ${({ size }: MarginWrapperProps) => size}px;
+    left: ${({ size }) => size}px;
+    top: ${({ size }) => size}px;
     border-radius: 100%;
-    width: ${({ width }: MarginWrapperProps) => width}px;
-    height: ${({ height }: MarginWrapperProps) => height}px;
-    box-shadow: 0px 0px 0px 20000px rgba(255, 255, 255, 0.3);
+    width: ${({ width }) => width}px;
+    height: ${({ height }) => height}px;
+    box-shadow: 0px 0px 0px ${({ width, height }) => Math.max(width, height)}px
+      rgba(255, 255, 255, 0.3);
   }
 `;
