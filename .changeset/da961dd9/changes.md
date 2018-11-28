@@ -1,0 +1,1 @@
+- FS-1596 Changed sizes of example emojis in test00.
