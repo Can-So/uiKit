@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 31.0.6
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
 ## 31.0.5
 - [patch] [4c0c2a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c0c2a0):
 

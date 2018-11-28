@@ -1,1 +1,0 @@
-- AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json

@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 89.1.1
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
 ## 89.1.0
 - [minor] [7c9dcba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c9dcba):
 
