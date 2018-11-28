@@ -1,1 +1,0 @@
-- translate component properties in media components

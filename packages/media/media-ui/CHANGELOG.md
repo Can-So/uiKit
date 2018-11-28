@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 7.8.0
+- [minor] [5a6de24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6de24):
+
+  - translate component properties in media components
+
 ## 7.7.0
 - [minor] [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
 
