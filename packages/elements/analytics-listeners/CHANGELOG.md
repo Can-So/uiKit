@@ -1,5 +1,10 @@
 # @atlaskit/analytics-listeners
 
+## 4.1.3
+- [patch] [dff4f0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dff4f0e):
+
+  - AnalyticsListeners should accept any promise-like client
+
 ## 4.1.2
 - [patch] [e981882](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e981882):
 
