@@ -17,7 +17,7 @@ import {
   PluginState as TypeAheadPluginState,
 } from '../../../plugins/type-ahead/pm-plugins/main';
 
-import { checkEditorState } from '../../../utils/action';
+import { dismissActiveTypeAheads } from '../../../utils/action';
 
 describe(name, () => {
   describe('Utils -> Action', () => {
@@ -43,8 +43,8 @@ describe(name, () => {
       editorView.updateState(editorView.state);
     }
 
-    describe('checkEditorState()', () => {
-      it('should dismiss emoji query if active', async () => {
+    describe('dismissActiveTypeAheads()', () => {
+      it('should dismiss emoji query if active', () => {
         const { editorView, pluginState } = createEditorWith({
           editorPlugins: [emojiPlugin],
           pluginKey: emojiPluginKey,
@@ -54,7 +54,9 @@ describe(name, () => {
         pluginState.emojiProvider = true;
 
         forceUpdate(editorView); // Force update to ensure active query.
-        checkEditorState(editorView);
+        expect(pluginState.queryActive).toBeTruthy();
+
+        dismissActiveTypeAheads(editorView);
 
         expect(spy).toHaveBeenCalled();
         expect(pluginState.queryActive).toBeFalsy();
@@ -77,7 +79,7 @@ describe(name, () => {
         expect(pluginState.active).toBeTruthy();
         const spy = jest.spyOn(pluginState.typeAheadHandler, 'dismiss');
 
-        checkEditorState(editorView);
+        dismissActiveTypeAheads(editorView);
 
         const newPluginState = typeAheadPluginKey.getState(
           editorView.state,
@@ -94,15 +96,12 @@ describe(name, () => {
       it('should dismiss quickInsert if active', () => {
         // editor created with default plugins list
         const { editorView, pluginState } = createEditorWith({
-          editorProps: {
-            quickInsert: true,
-          },
           pluginKey: typeAheadPluginKey,
         })(doc(p(typeAheadQuery({ trigger: '/' })('/a{<>}'))));
 
         expect(pluginState.active).toBeTruthy();
 
-        checkEditorState(editorView);
+        dismissActiveTypeAheads(editorView);
 
         const newPluginState = typeAheadPluginKey.getState(
           editorView.state,

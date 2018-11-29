@@ -3,7 +3,7 @@ import { TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Transformer } from '@atlaskit/editor-common';
 import {
-  checkEditorState,
+  dismissActiveTypeAheads,
   insertFileFromDataUrl as insertFileFromUrl,
   processRawValue,
   toJSON,
@@ -129,7 +129,7 @@ export default class EditorActions implements EditorActionsOptions {
   }
 
   async getValue(): Promise<any | undefined> {
-    checkEditorState(this.editorView);
+    dismissActiveTypeAheads(this.editorView);
 
     await waitForMediaPendingTasks(this.editorView);
 

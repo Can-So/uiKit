@@ -14,7 +14,7 @@ import {
   PluginState as TypeAheadPluginState,
 } from '../plugins/type-ahead/pm-plugins/main';
 
-export function checkEditorState(editorView?: EditorView): void {
+export function dismissActiveTypeAheads(editorView?: EditorView): void {
   if (!editorView) {
     return;
   }
