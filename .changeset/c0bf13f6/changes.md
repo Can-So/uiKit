@@ -1,0 +1,1 @@
+- CheckboxSelect options now have correct flex styles on the option value
