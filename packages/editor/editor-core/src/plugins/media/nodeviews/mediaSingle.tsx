@@ -16,7 +16,7 @@ import { setNodeSelection } from '../../../utils';
 import ResizableMediaSingle from '../ui/ResizableMediaSingle';
 import { createDisplayGrid } from '../../../plugins/grid';
 import { EventDispatcher } from '../../../event-dispatcher';
-import { MediaStateStatus, MediaProvider } from '../types';
+import { MediaProvider } from '../types';
 import { EditorAppearance } from '../../../types';
 import { browser } from '@atlaskit/editor-common';
 
@@ -38,7 +38,6 @@ export interface MediaSingleNodeProps {
 export interface MediaSingleNodeState {
   width?: number;
   height?: number;
-  lastMediaStatus?: MediaStateStatus;
 }
 
 export default class MediaSingleNode extends Component<
@@ -50,7 +49,6 @@ export default class MediaSingleNode extends Component<
   state = {
     height: undefined,
     width: undefined,
-    lastMediaStatus: undefined,
   };
 
   constructor(props) {
@@ -58,21 +56,6 @@ export default class MediaSingleNode extends Component<
     this.mediaPluginState = stateKey.getState(
       this.props.view.state,
     ) as MediaPluginState;
-  }
-
-  shouldComponentUpdate(nextProps: MediaSingleNodeProps) {
-    if (
-      this.props.node.attrs.width !== nextProps.node.attrs.width ||
-      this.props.selected() !== nextProps.selected() ||
-      this.props.node.attrs.layout !== nextProps.node.attrs.layout ||
-      this.props.width !== nextProps.width ||
-      this.props.lineLength !== nextProps.lineLength ||
-      this.props.getPos !== nextProps.getPos ||
-      this.mediaChildHasUpdated(nextProps)
-    ) {
-      return true;
-    }
-    return false;
   }
 
   componentDidUpdate() {
@@ -91,18 +74,6 @@ export default class MediaSingleNode extends Component<
       () => {
         this.forceUpdate();
       },
-    );
-  };
-
-  private mediaChildHasUpdated = nextProps => {
-    if (!this.props.node.firstChild || !nextProps.node.firstChild) {
-      return false;
-    }
-
-    return (
-      this.props.node.firstChild.attrs.collection !==
-        nextProps.node.firstChild.attrs.collection ||
-      this.props.node.firstChild.attrs.id !== nextProps.node.firstChild.attrs.id
     );
   };
 
@@ -206,6 +177,7 @@ export default class MediaSingleNode extends Component<
     return canResize ? (
       <ResizableMediaSingle
         {...props}
+        view={this.props.view}
         getPos={getPos}
         updateSize={this.updateSize}
         displayGrid={createDisplayGrid(this.props.eventDispatcher)}
@@ -224,6 +196,8 @@ export default class MediaSingleNode extends Component<
 }
 
 class MediaSingleNodeView extends ReactNodeView {
+  lastOffsetLeft = 0;
+
   render() {
     const { eventDispatcher, editorAppearance } = this.reactComponentProps;
     const mediaPluginState = stateKey.getState(
@@ -272,6 +246,19 @@ class MediaSingleNodeView extends ReactNodeView {
      * doesn't create copy events.
      */
     return document.createElement(browser.chrome ? 'object' : 'div');
+  }
+
+  ignoreMutation() {
+    if (this.dom) {
+      const offsetLeft = this.dom.offsetLeft;
+
+      if (offsetLeft !== this.lastOffsetLeft) {
+        this.lastOffsetLeft = offsetLeft;
+        this.update(this.node, [], () => true);
+      }
+    }
+
+    return true;
   }
 }
 
