@@ -3,8 +3,8 @@ import {
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
-import GlobalTheme, { ThemeProp } from '@atlaskit/theme';
-import React from 'react';
+import GlobalTheme from '@atlaskit/theme';
+import * as React from 'react';
 import {
   name as packageName,
   version as packageVersion,
@@ -57,7 +57,7 @@ export type Props = {
    */
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none';
   /** The theme function TextArea consumes to derive theming constants for use in styling its components */
-  theme?: ThemeProp<ThemeTokens>;
+  theme?: any;
   /** Ref used to access the textarea dom element. NOTE we expose this via forwardRef,
    so you can also use the ref prop of this component to the same effect. */
   forwardedRef: (e: HTMLTextAreaElement | null) => void;
@@ -139,10 +139,10 @@ class TextAreaWithoutForwardRef extends React.Component<Props, State> {
 
     return (
       <GlobalTheme.Consumer>
-        {({ mode }) => (
+        {({ mode }: { mode: 'dark' | 'light' }) => (
           <Theme.Provider value={theme}>
             <Theme.Consumer appearance={appearance} mode={mode}>
-              {tokens => (
+              {(tokens: ThemeTokens) => (
                 <TextAreaWrapper
                   {...tokens}
                   resize={resize}

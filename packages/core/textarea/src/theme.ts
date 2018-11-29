@@ -93,7 +93,13 @@ export const themeTokens = {
 };
 
 export const Theme = createTheme<ThemeTokens, ThemeProps>(
-  ({ appearance, mode }) => ({
+  ({
+    appearance,
+    mode,
+  }: {
+    appearance: ThemeAppearance;
+    mode: 'dark' | 'light';
+  }) => ({
     borderColor: borderColor[appearance][mode],
     borderColorFocus: borderColorFocus[appearance][mode],
     backgroundColorHover: backgroundColorHover[appearance][mode],

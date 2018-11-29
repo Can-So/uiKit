@@ -11,6 +11,7 @@ declare module '@atlaskit/theme' {
   export const typography: any;
   export const layers: any;
   export const colors: Record<string, string>;
-
   export const Theme: React.ComponentType<any>;
+  const d: any;
+  export default d;
 }
