@@ -1,0 +1,1 @@
+- Change adv search shortcut icon to Return instead of ShiftReturn for both Confluence and Jira
