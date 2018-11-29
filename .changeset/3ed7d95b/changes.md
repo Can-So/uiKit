@@ -1,0 +1,1 @@
+- - wrap profile card in IntlProvider and support i18n 
