@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.12.12
+- [patch] [f84ab96](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f84ab96):
+
+  - Add extra padding to the before pre-query advanced search component.
+
 ## 5.12.11
 - [patch] [f0bfc56](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0bfc56):
 
