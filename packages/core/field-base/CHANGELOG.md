@@ -1,5 +1,11 @@
 # @atlaskit/field-base
 
+## 11.0.11
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/inline-dialog@9.0.11
+  - @atlaskit/icon@15.0.0
+
 ## 11.0.10
 - [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
 

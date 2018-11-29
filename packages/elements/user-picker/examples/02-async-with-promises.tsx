@@ -8,7 +8,7 @@ function getUsers(search?: string): (User | Promise<User[]>)[] {
     unassigned,
     assignToMe,
     new Promise<User[]>(resolve => {
-      setTimeout(() => resolve(exampleUsers), 1000);
+      window.setTimeout(() => resolve(exampleUsers), 1000);
     }),
   ];
 }

@@ -1,4 +1,5 @@
 import NativeBridge from './bridge';
+import { Color as StatusColor } from '@atlaskit/status';
 
 export default class IosBridge implements NativeBridge {
   showMentions(query: String) {
@@ -78,6 +79,25 @@ export default class IosBridge implements NativeBridge {
       window.webkit.messageHandlers.listBridge.postMessage({
         name: 'updateListState',
         states: listState,
+      });
+    }
+  }
+
+  showStatusPicker(text: string, color: StatusColor, uuid: string) {
+    if (window.webkit && window.webkit.messageHandlers.statusBridge) {
+      window.webkit.messageHandlers.statusBridge.postMessage({
+        name: 'showStatusPicker',
+        text,
+        color,
+        uuid,
+      });
+    }
+  }
+
+  dismissStatusPicker() {
+    if (window.webkit && window.webkit.messageHandlers.statusBridge) {
+      window.webkit.messageHandlers.statusBridge.postMessage({
+        name: 'dismissStatusPicker',
       });
     }
   }

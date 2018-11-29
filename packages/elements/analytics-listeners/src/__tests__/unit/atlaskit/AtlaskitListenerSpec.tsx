@@ -70,7 +70,7 @@ describe('AtlaskitListener', () => {
 
       component.find(ButtonWithAnalytics).simulate('click');
 
-      setTimeout(() => {
+      window.setTimeout(() => {
         expect(
           (analyticsWebClientMock.sendUIEvent as any).mock.calls[0][0],
         ).toMatchObject(clientPayload);

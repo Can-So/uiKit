@@ -732,6 +732,66 @@ Object {
 }
 `;
 
+exports[`JIRA wiki markup - Tables should parse properly medias inside a cell 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "attrs": Object {
+        "__autoSize": false,
+        "isNumberColumnEnabled": false,
+        "layout": "default",
+      },
+      "content": Array [
+        Object {
+          "content": Array [
+            Object {
+              "attrs": Object {
+                "background": null,
+                "colspan": 1,
+                "colwidth": null,
+                "rowspan": 1,
+              },
+              "content": Array [
+                Object {
+                  "attrs": Object {
+                    "layout": "center",
+                    "width": null,
+                  },
+                  "content": Array [
+                    Object {
+                      "attrs": Object {
+                        "__displayType": null,
+                        "__fileMimeType": null,
+                        "__fileName": null,
+                        "__fileSize": null,
+                        "__key": null,
+                        "collection": "",
+                        "height": 400,
+                        "id": "quicktime.mov",
+                        "occurrenceKey": null,
+                        "type": "file",
+                        "url": null,
+                        "width": 300,
+                      },
+                      "type": "media",
+                    },
+                  ],
+                  "type": "mediaSingle",
+                },
+              ],
+              "type": "tableCell",
+            },
+          ],
+          "type": "tableRow",
+        },
+      ],
+      "type": "table",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
 exports[`JIRA wiki markup - Tables should remove trailing space before and after cell open and close 1`] = `
 Object {
   "content": Array [

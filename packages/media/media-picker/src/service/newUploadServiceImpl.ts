@@ -43,6 +43,12 @@ export interface CancellableFileUpload {
   cancel?: () => void;
 }
 
+export interface UpfrontIds {
+  upfrontId: Promise<string>;
+  userUpfrontId?: Promise<string>;
+  userOccurrenceKey?: Promise<string>;
+}
+
 export class NewUploadServiceImpl implements UploadService {
   private readonly userMediaStore?: MediaStore;
   private readonly tenantMediaStore: MediaStore;
@@ -66,7 +72,6 @@ export class NewUploadServiceImpl implements UploadService {
       authProvider: tenantAuthProvider,
     });
 
-    // TODO Would be nice to have two contexts: tenant and user ones
     if (userAuthProvider) {
       this.userMediaStore = new MediaStore({
         authProvider: userAuthProvider,
@@ -89,32 +94,61 @@ export class NewUploadServiceImpl implements UploadService {
     return new UploadController();
   }
 
-  getUpfrontId = (
+  getUpfrontIds = (
     observable?: Observable<FileState>,
-    occurrenceKey?: string,
-  ): Promise<string> => {
-    return new Promise<string>(async (resolve, reject) => {
-      const { shouldCopyFileToRecents } = this;
-
-      if (shouldCopyFileToRecents && observable) {
-        const subscrition = observable.subscribe({
+    tenantOccurrenceKey?: string,
+  ): UpfrontIds => {
+    const getIdFromObservable = (observable: Observable<FileState>) =>
+      new Promise<string>((resolve, reject) => {
+        const subscription = observable.subscribe({
           next: state => {
             resolve(state.id);
-            subscrition.unsubscribe();
+            subscription.unsubscribe();
           },
+          error: reject,
         });
-      } else if (this.userMediaStore) {
-        const { collection } = this.tenantUploadParams;
-        const options = { collection, occurrenceKey };
-        // We want to create an empty file in the tenant collection
-        const response = await this.tenantMediaStore.createFile(options);
-        const id = response.data.id;
+      });
 
-        resolve(id);
-      } else {
-        reject();
-      }
-    });
+    const getOccurrenceKeyFromObservable = (
+      observable: Observable<FileState>,
+    ) =>
+      new Promise<string>((resolve, reject) => {
+        const subscription = observable.subscribe({
+          next: state => {
+            resolve(state.occurrenceKey);
+            subscription.unsubscribe();
+          },
+          error: reject,
+        });
+      });
+
+    const { shouldCopyFileToRecents } = this;
+    if (shouldCopyFileToRecents && observable) {
+      return {
+        // We don't specify userUpfrontId since this is the case
+        // when we use upload directly to tenant first
+        upfrontId: getIdFromObservable(observable),
+      };
+    } else if (this.userMediaStore && observable) {
+      const userUpfrontId = getIdFromObservable(observable);
+      const userOccurrenceKey = getOccurrenceKeyFromObservable(observable);
+      const { collection } = this.tenantUploadParams;
+      const options = { collection, occurrenceKey: tenantOccurrenceKey };
+      // We want to create an empty file in the tenant collection
+      const upfrontId = this.tenantMediaStore
+        .createFile(options)
+        .then(response => response.data.id);
+      return {
+        userUpfrontId,
+        upfrontId,
+        userOccurrenceKey,
+      };
+    } else {
+      return {
+        userUpfrontId: Promise.reject(),
+        upfrontId: Promise.reject(),
+      };
+    }
   };
 
   addFiles(files: File[]): void {
@@ -172,10 +206,17 @@ export class NewUploadServiceImpl implements UploadService {
         }
 
         const occurrenceKey = uuid.v4();
-        const upfrontId = this.getUpfrontId(observable, occurrenceKey);
+        const {
+          upfrontId,
+          userUpfrontId,
+          userOccurrenceKey,
+        } = this.getUpfrontIds(observable, occurrenceKey);
+
         const mediaFile: MediaFile = {
           id,
           upfrontId,
+          userUpfrontId,
+          userOccurrenceKey,
           name: file.name,
           size: file.size,
           creationDate,

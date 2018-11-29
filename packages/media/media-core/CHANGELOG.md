@@ -1,5 +1,16 @@
 # @atlaskit/media-core
 
+## 24.5.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/button@10.0.0
+
+## 24.5.0
+- [minor] [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+
+  - Context.collection.removeFile has been added; occurrenceKey was added to all FileState flavours and filled as part of observable during upload;
+
 ## 24.4.1
 - [patch] [705dcf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/705dcf3):
 

@@ -182,7 +182,7 @@ describe(name, () => {
             .then(potentialValue => (resolved = potentialValue));
 
           return new Promise(resolve => {
-            setTimeout(() => {
+            window.setTimeout(() => {
               expect(resolved).to.equal(undefined);
               resolve();
             }, 50);
@@ -249,7 +249,7 @@ describe(name, () => {
           });
 
           return new Promise(resolve => {
-            setTimeout(() => {
+            window.setTimeout(() => {
               expect(resolved).to.equal(undefined);
               resolve();
             }, 50);
@@ -270,7 +270,7 @@ describe(name, () => {
           ]);
 
           // To simulate async behavior, trigger ready on next tick
-          setTimeout(() => {
+          window.setTimeout(() => {
             stateManager.updateState(testTempFileId, {
               status: 'ready',
               id: testTempFileId,
@@ -303,7 +303,7 @@ describe(name, () => {
           ]);
 
           // To simulate async behavior, trigger ready on next tick
-          setTimeout(() => {
+          window.setTimeout(() => {
             stateManager.updateState(testTempFileId, {
               status: 'ready',
               id: testTempFileId,

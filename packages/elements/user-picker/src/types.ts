@@ -27,12 +27,14 @@ export type UserPickerProps = {
 
 export type UserPickerState = {
   users: User[];
-  value?: UserOption[];
+  value?: UserOption[] | UserOption;
   resultVersion: number;
   inflightRequest: number;
   count: number;
   hoveringClearIndicator: boolean;
   menuIsOpen: boolean;
+  inputValue: string;
+  preventFilter: boolean;
 };
 
 export interface HighlightRange {
@@ -42,17 +44,17 @@ export interface HighlightRange {
 
 export interface Highlight {
   name: HighlightRange[];
-  nickname: HighlightRange[];
+  publicName: HighlightRange[];
 }
 
 export interface User {
   id: string;
   avatarUrl?: string;
-  name?: string;
-  nickname: string;
+  name: string;
+  publicName?: string;
   highlight?: Highlight;
-  badge?: string;
   fixed?: boolean;
+  byline?: string;
 }
 
 export type UserValue = User | Array<User> | null | undefined;

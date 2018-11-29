@@ -2,7 +2,7 @@ export function batch<T>(callback: (args: T[][]) => void) {
   let calls: T[][] = [];
   return (...args: T[]) => {
     if (calls.length === 0) {
-      setTimeout(() => {
+      window.setTimeout(() => {
         callback(calls);
         calls = [];
       });
@@ -18,7 +18,7 @@ export function batchByKey<T>(
   const calls = {};
   return (key: string, ...args: T[]) => {
     if (!calls[key]) {
-      setTimeout(() => {
+      window.setTimeout(() => {
         callback(key, calls[key]);
         calls[key] = undefined;
       });

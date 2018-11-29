@@ -1,5 +1,6 @@
 // For version "3.0.0"
 import * as React from 'react';
+import { PropsInjector } from '@atlaskit/type-helpers';
 
 /*
   UIAnalyticsEvent.js
@@ -118,9 +119,9 @@ export type WithAnalyticsContextProps = {
   analyticsContext?: ObjectType;
 };
 
-export type WithAnalyticsContextFunction = <TOwnProps>(
-  component: React.ComponentClass<TOwnProps>,
-) => React.ComponentClass<TOwnProps & WithAnalyticsContextProps>;
+export type WithAnalyticsContextFunction = PropsInjector<
+  WithAnalyticsContextProps
+>;
 
 export function withAnalyticsContext(
   defaultData?: any,
@@ -148,9 +149,7 @@ export interface WithAnalyticsEventProps {
   createAnalyticsEvent?: CreateUIAnalyticsEventSignature;
 }
 
-export type WithAnalyticsEventFunction = <TOwnProps>(
-  component: React.ComponentClass<WithAnalyticsEventProps & TOwnProps>,
-) => React.ComponentClass<TOwnProps>;
+export type WithAnalyticsEventFunction = PropsInjector<WithAnalyticsEventProps>;
 
 export function withAnalyticsEvents<TOwnProps>(
   createEventMap?: EventMap<TOwnProps>,

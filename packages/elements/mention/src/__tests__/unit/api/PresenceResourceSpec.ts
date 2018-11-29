@@ -196,7 +196,7 @@ describe('PresenceResource', () => {
         resource.refreshPresence(testIds);
         let calls = fetchMock.calls(mockName);
         expect(calls).toHaveLength(1);
-        setTimeout(() => {
+        window.setTimeout(() => {
           resource.refreshPresence(testIds.slice(0, 6));
         }, 5);
         calls = fetchMock.calls(mockName);

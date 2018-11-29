@@ -67,7 +67,7 @@ export default class Example extends React.PureComponent<{}, State> {
 
   private loadUsers = () =>
     new Promise<User[]>(resolve => {
-      setTimeout(() => resolve(exampleUsers), 2000);
+      window.setTimeout(() => resolve(exampleUsers), 2000);
     });
 
   private renderAnchor = () => <div>@{this.state.value}</div>;
@@ -83,7 +83,7 @@ export default class Example extends React.PureComponent<{}, State> {
           onBlur={this.handleInputBlur}
           onKeyDown={this.handleKeyDown}
         />
-        <div>SelectedOption: {user && user.nickname}</div>
+        <div>SelectedOption: {user && user.publicName}</div>
         <UserPicker
           ref={this.handleUserPickerRef}
           anchor={this.renderAnchor}

@@ -76,8 +76,10 @@ export class MediaPluginState {
   public pickers: PickerFacade[] = [];
   public binaryPicker?: PickerFacade;
   private popupPicker?: PickerFacade;
+  // @ts-ignore
   private clipboardPicker?: PickerFacade;
   private dropzonePicker?: PickerFacade;
+  // @ts-ignore
   private customPicker?: PickerFacade;
   public editorAppearance: EditorAppearance;
   private removeOnCloseListener: () => void = () => {};
@@ -231,7 +233,7 @@ export class MediaPluginState {
       clearTimeout(this.updateUploadStateDebounce);
     }
 
-    this.updateUploadStateDebounce = setTimeout(() => {
+    this.updateUploadStateDebounce = window.setTimeout(() => {
       this.updateUploadStateDebounce = null;
       this.allUploadsFinished = false;
       this.notifyPluginStateSubscribers();
@@ -365,7 +367,7 @@ export class MediaPluginState {
    * NOTE: The promise will resolve even if some of the media have failed to process.
    */
   waitForPendingTasks = (
-    timeout?: Number,
+    timeout?: number,
     lastTask?: Promise<MediaState | null>,
   ) => {
     if (lastTask && this.pendingTask === lastTask) {
@@ -384,7 +386,7 @@ export class MediaPluginState {
 
     let rejectTimeout: number;
     const timeoutPromise = new Promise((resolve, reject) => {
-      rejectTimeout = setTimeout(
+      rejectTimeout = window.setTimeout(
         () =>
           reject(new Error(`Media operations did not finish in ${timeout} ms`)),
         timeout,

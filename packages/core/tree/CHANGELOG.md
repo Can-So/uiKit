@@ -1,5 +1,17 @@
 # @atlaskit/tree
 
+## 4.1.7
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/navigation@33.3.6
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/icon@15.0.0
+
+## 4.1.6
+- [patch] [ce60809](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce60809):
+
+  - Replace react-beautiful-dnd-next dependency with react-beautiful-dnd@10.0.2
+
 ## 4.1.5
 - [patch] [6c250fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c250fe):
 

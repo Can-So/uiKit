@@ -1,5 +1,11 @@
 # @atlaskit/theme
 
+## 6.2.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/button@10.0.0
+
 ## 6.2.0
 - [minor] Add smallFontSize as an export to theme [3469f64](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3469f64)
 

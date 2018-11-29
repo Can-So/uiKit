@@ -6,7 +6,7 @@ import FieldTextAreaStateless from '@atlaskit/field-text-area';
 
 mockMultipleCards();
 
-const theClient = new Client(10 * 1000);
+const theClient = new Client({ cacheLifespan: 10 * 1000 });
 
 type State = {
   urls: string;
@@ -19,7 +19,7 @@ class CacheTimer extends React.Component<{ client: Client; url: string }, any> {
   };
   timer: number | undefined = undefined;
   componentDidMount() {
-    this.timer = setInterval(this.tick, 1000);
+    this.timer = window.setInterval(this.tick, 1000);
   }
   componentWillUnmount() {
     clearInterval(this.timer);

@@ -76,7 +76,7 @@ export default class JiraAdvancedSearch extends React.Component<Props> {
     return (
       <AdvancedSearchResult
         href={getJiraAdvancedSearchUrl(JiraEntityTypes.Issues, query)}
-        key="search_jira"
+        key={`search-jira-${Date.now()}`}
         resultId={ADVANCED_JIRA_SEARCH_RESULT_ID}
         text={
           <Container>

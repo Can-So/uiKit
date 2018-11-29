@@ -2,11 +2,10 @@ import * as util from '../../../../../newgen/utils';
 const constructAuthTokenUrlSpy = jest.spyOn(util, 'constructAuthTokenUrl');
 
 import * as React from 'react';
-import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
 import { Auth, ProcessedFileState } from '@atlaskit/media-core';
 import Spinner from '@atlaskit/spinner';
-import { awaitError } from '@atlaskit/media-test-helpers';
+import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
 import { createContext } from '../../../_stubs';
 import { VideoViewer, Props } from '../../../../../newgen/viewers/video';
 import { Video } from '../../../../../newgen/styled';
@@ -47,7 +46,7 @@ function createFixture(
   item?: ProcessedFileState,
 ) {
   const context = createContext({ authPromise });
-  const el = mount(
+  const el = mountWithIntlContext(
     <VideoViewer
       context={context}
       item={item || videoItem}
@@ -166,7 +165,7 @@ describe('Video viewer', () => {
     ) {
       const authPromise = Promise.resolve({ token, clientId, baseUrl });
       const context = createContext({ authPromise });
-      const el = mount(
+      const el = mountWithIntlContext(
         <VideoViewer
           context={context}
           previewCount={previewCount}

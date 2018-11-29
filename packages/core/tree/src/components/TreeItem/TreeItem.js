@@ -3,7 +3,7 @@ import { Component } from 'react';
 import type {
   DraggableProps,
   DraggableStateSnapshot,
-} from 'react-beautiful-dnd-next';
+} from 'react-beautiful-dnd';
 import { isSamePath } from '../../utils/path';
 import { sameProps } from '../../utils/react';
 import type {

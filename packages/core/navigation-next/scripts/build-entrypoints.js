@@ -11,12 +11,14 @@ const files = glob.sync(`${ENTRYPOINTS_FOLDER}/*.{js,flow}`, {
   cwd: __dirname,
 });
 
+const replaceFrom = new RegExp("'../", 'g');
+
 files.forEach(file => {
   const fileName = path.basename(file);
   const fileContent = fs.readFileSync(file, 'utf-8');
   fs.writeFileSync(
     `${PACKAGE_ROOT}/${fileName}`,
-    fileContent.replace("'../", "'./dist/esm/"),
+    fileContent.replace(replaceFrom, "'./dist/esm/"),
   );
   fs.unlinkSync(file);
 });

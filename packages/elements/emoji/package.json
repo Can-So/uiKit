@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/emoji",
-  "version": "46.0.0",
+  "version": "47.0.3",
   "config": {
     "access": "public"
   },
@@ -11,22 +11,17 @@
   "atlaskit:src": "src/index.ts",
   "sideEffects": false,
   "files": [
-    "dist/es5/**/*.js",
-    "dist/es5/**/*.d.ts",
-    "dist/es5/**/*.json",
-    "dist/es2015/**/*.js",
-    "dist/es2015/**/*.d.ts",
-    "dist/es2015/**/*.json",
+    "dist",
     "src"
   ],
   "dependencies": {
     "@atlaskit/analytics": "^4.0.4",
-    "@atlaskit/button": "^9.0.13",
-    "@atlaskit/field-base": "^11.0.8",
-    "@atlaskit/icon": "^14.0.0",
-    "@atlaskit/spinner": "^9.0.6",
-    "@atlaskit/theme": "^6.0.0",
-    "@atlaskit/tooltip": "^12.1.1",
+    "@atlaskit/button": "^10.0.1",
+    "@atlaskit/field-base": "^11.0.11",
+    "@atlaskit/icon": "^15.0.0",
+    "@atlaskit/spinner": "^9.0.11",
+    "@atlaskit/theme": "^6.2.1",
+    "@atlaskit/tooltip": "^12.1.11",
     "@atlaskit/util-common": "^1.5.2",
     "@atlaskit/util-service-support": "^3.0.3",
     "babel-runtime": "^6.26.0",
@@ -42,7 +37,7 @@
     "xregexp": "^3.2.0"
   },
   "peerDependencies": {
-    "@atlaskit/media-core": "^24.4.0",
+    "@atlaskit/media-core": "^24.5.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
     "rxjs": "^5.5.0"
@@ -58,11 +53,12 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@atlaskit/docs": "^5.0.8",
+    "@atlaskit/docs": "^5.2.2",
     "@atlaskit/layer": "^5.0.4",
-    "@atlaskit/media-core": "^24.4.0",
+    "@atlaskit/media-core": "^24.5.1",
     "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^10.0.20",
+    "@atlaskit/util-data-test": "^10.0.21",
+    "@atlaskit/visual-regression": "^0.0.1",
     "@types/chai": "^4.0.4",
     "canvas-prebuilt": "^2.0.0-alpha.14",
     "chai": "^4.1.2",

@@ -1,5 +1,39 @@
 # @atlaskit/global-navigation
 
+## 5.3.5
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/drawer@2.5.3
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/field-radio-group@4.0.12
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/navigation-next@4.0.7
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/toggle@5.0.12
+  - @atlaskit/icon@15.0.0
+
+## 5.3.4
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/blanket@7.0.10
+  - @atlaskit/drawer@2.5.2
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/field-radio-group@4.0.11
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/navigation-next@4.0.6
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/toggle@5.0.11
+  - @atlaskit/analytics-listeners@4.1.1
+  - @atlaskit/button@10.0.0
+
 ## 5.3.3
 - [patch] [4d9040d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d9040d):
 

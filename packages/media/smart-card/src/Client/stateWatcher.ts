@@ -32,11 +32,11 @@ export class StateWatch<T> {
     return this;
   }
 
-  getProp<K extends keyof T>(propName: K): T[K] | undefined {
+  getProp<P extends T>(propName: keyof P): P[typeof propName] | undefined {
     if (this.entry === null) {
       return;
     }
-    return this.entry.state[propName];
+    return (this.entry.state as P)[propName];
   }
 
   unsubscribe(uuid: string) {
@@ -51,15 +51,10 @@ export class StateWatch<T> {
   }
 
   update(state: T, lifespan: number): void {
-    if (
-      this.entry === null ||
-      JSON.stringify(this.entry.state) !== JSON.stringify(state)
-    ) {
-      this.entry = {
-        state,
-        goodTill: this.getNow() + lifespan,
-      };
-      this.subscribers.forEach(rec => rec.fn([state, false]));
-    }
+    this.entry = {
+      state,
+      goodTill: this.getNow() + lifespan,
+    };
+    this.subscribers.forEach(rec => rec.fn([state, false]));
   }
 }

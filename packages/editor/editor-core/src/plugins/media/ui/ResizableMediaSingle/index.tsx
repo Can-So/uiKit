@@ -9,6 +9,7 @@ import {
   MediaSingleLayout,
   akEditorBreakoutPadding,
   calcColumnsFromPx,
+  breakoutWideScaleRatio,
 } from '@atlaskit/editor-common';
 
 import { Wrapper } from './styled';
@@ -165,7 +166,8 @@ export default class ResizableMediaSingle extends React.Component<Props> {
 
     let pxWidth = origWidth;
     if (layout === 'wide') {
-      pxWidth = akEditorWideLayoutWidth;
+      const wideWidth = lineLength * breakoutWideScaleRatio;
+      pxWidth = wideWidth > containerWidth ? lineLength : wideWidth;
     } else if (layout === 'full-width') {
       pxWidth = containerWidth - akEditorBreakoutPadding;
     } else if (pctWidth && origWidth && origHeight) {

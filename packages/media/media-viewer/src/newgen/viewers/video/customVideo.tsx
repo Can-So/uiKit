@@ -39,6 +39,8 @@ import {
   vendorify,
 } from './fullscreen';
 import { Spinner } from '../../loading';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
 
 export interface CustomVideoProps {
   readonly src: string;
@@ -55,7 +57,10 @@ export interface CustomVideoState {
 
 export type ToggleButtonAction = () => void;
 
-export class CustomVideo extends Component<CustomVideoProps, CustomVideoState> {
+export class CustomVideo extends Component<
+  CustomVideoProps & InjectedIntlProps,
+  CustomVideoState
+> {
   videoWrapperRef?: HTMLElement;
 
   state: CustomVideoState = {
@@ -114,7 +119,7 @@ export class CustomVideo extends Component<CustomVideoProps, CustomVideoState> {
     const secondaryColor = isHDActive ? colors.white : colors.DN60;
     return (
       <Button
-        appearance="toolbar"
+        appearance={'toolbar' as any}
         isSelected={isHDActive}
         onClick={onHDToggleClick}
         iconBefore={
@@ -134,7 +139,7 @@ export class CustomVideo extends Component<CustomVideoProps, CustomVideoState> {
         <VolumeToggleWrapper isMuted={isMuted}>
           <MutedIndicator isMuted={isMuted} />
           <Button
-            appearance="toolbar"
+            appearance={'toolbar' as any}
             onClick={actions.toggleMute}
             iconBefore={<SoundIcon label="volume" />}
           />
@@ -153,18 +158,19 @@ export class CustomVideo extends Component<CustomVideoProps, CustomVideoState> {
   saveVideoWrapperRef = (el?: HTMLElement) => (this.videoWrapperRef = el);
 
   renderFullScreenButton = () => {
+    const {
+      intl: { formatMessage },
+    } = this.props;
     const { isFullScreenEnabled } = this.state;
     const icon = isFullScreenEnabled ? (
-      // TODO [i18n]
-      <FullScreenIconOff label="disable fullscreen" />
+      <FullScreenIconOff label={formatMessage(messages.disable_fullscreen)} />
     ) : (
-      // TODO [i18n]
-      <FullScreenIconOn label="enable fullscreen" />
+      <FullScreenIconOn label={formatMessage(messages.enable_fullscreen)} />
     );
 
     return (
       <Button
-        appearance="toolbar"
+        appearance={'toolbar' as any}
         onClick={this.onFullScreenClick}
         iconBefore={icon}
       />
@@ -178,7 +184,11 @@ export class CustomVideo extends Component<CustomVideoProps, CustomVideoState> {
   );
 
   render() {
-    const { src, isAutoPlay } = this.props;
+    const {
+      src,
+      isAutoPlay,
+      intl: { formatMessage },
+    } = this.props;
     return (
       <CustomVideoWrapper innerRef={this.saveVideoWrapperRef}>
         <Video src={src} autoPlay={isAutoPlay}>
@@ -192,16 +202,14 @@ export class CustomVideo extends Component<CustomVideoProps, CustomVideoState> {
             } = videoState;
             const isPlaying = status === 'playing';
             const toggleButtonIcon = isPlaying ? (
-              // TODO [i18n]
-              <PauseIcon label="play" />
+              <PauseIcon label={formatMessage(messages.play)} />
             ) : (
-              // TODO [i18n]
-              <PlayIcon label="pause" />
+              <PlayIcon label={formatMessage(messages.pause)} />
             );
             const toggleButtonAction = isPlaying ? actions.pause : actions.play;
             const button = (
               <Button
-                appearance="toolbar"
+                appearance={'toolbar' as any}
                 iconBefore={toggleButtonIcon}
                 onClick={toggleButtonAction}
               />
@@ -251,3 +259,5 @@ export class CustomVideo extends Component<CustomVideoProps, CustomVideoState> {
     );
   }
 }
+
+export default injectIntl(CustomVideo);

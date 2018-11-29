@@ -14,6 +14,8 @@ import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { channel } from './analytics';
 import { ZoomControlsGasPayload, createZoomEvent } from './analytics/zoom';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
 
 export type ZoomControlsProps = Readonly<{
   onChange: (newZoomLevel: ZoomLevel) => void;
@@ -21,7 +23,10 @@ export type ZoomControlsProps = Readonly<{
 }> &
   WithAnalyticsEventProps;
 
-export class ZoomControlsBase extends Component<ZoomControlsProps, {}> {
+export class ZoomControlsBase extends Component<
+  ZoomControlsProps & InjectedIntlProps,
+  {}
+> {
   zoomIn = () => {
     const { onChange, zoomLevel } = this.props;
     if (zoomLevel.canZoomIn) {
@@ -41,23 +46,27 @@ export class ZoomControlsBase extends Component<ZoomControlsProps, {}> {
   };
 
   render() {
-    const { zoomLevel } = this.props;
+    const {
+      zoomLevel,
+      intl: { formatMessage },
+    } = this.props;
+
     return (
       <ZoomWrapper className={hideControlsClassName}>
         <ZoomControlsWrapper>
           <Button
-            appearance="toolbar"
+            appearance={'toolbar' as any}
             isDisabled={!zoomLevel.canZoomOut}
             onClick={this.zoomOut}
-            // TODO [i18n]
-            iconBefore={<ZoomOutIcon label="zoom out" />}
+            iconBefore={
+              <ZoomOutIcon label={formatMessage(messages.zoom_out)} />
+            }
           />
           <Button
-            appearance="toolbar"
+            appearance={'toolbar' as any}
             isDisabled={!zoomLevel.canZoomIn}
             onClick={this.zoomIn}
-            // TODO [i18n]
-            iconBefore={<ZoomInIcon label="zoom in" />}
+            iconBefore={<ZoomInIcon label={formatMessage(messages.zoom_in)} />}
           />
         </ZoomControlsWrapper>
         <ZoomLevelIndicator>{zoomLevel.asPercentage}</ZoomLevelIndicator>
@@ -73,4 +82,6 @@ export class ZoomControlsBase extends Component<ZoomControlsProps, {}> {
   };
 }
 
-export const ZoomControls = withAnalyticsEvents({})(ZoomControlsBase);
+export const ZoomControls = withAnalyticsEvents({})(
+  injectIntl(ZoomControlsBase),
+);

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { MultiValue, scrollToValue } from '../../../components/MultiValue';
 import { SizeableAvatar } from '../../../components/SizeableAvatar';
+import { User } from '../../../types';
 import { renderProp } from '../_testUtils';
 
 const mockHtmlElement = (rect: Partial<DOMRect>): HTMLElement =>
@@ -17,9 +18,9 @@ describe('MultiValue', () => {
     user: {
       id: 'abc-123',
       name: 'Jace Beleren',
-      nickname: 'jbeleren',
+      publicName: 'jbeleren',
       avatarUrl: 'http://avatars.atlassian.com/jace.png',
-    },
+    } as User,
   };
   const onClick = jest.fn();
   const shallowMultiValue = (
@@ -110,5 +111,61 @@ describe('MultiValue', () => {
     scrollToValue(current, parent);
     expect(current.scrollIntoView).toHaveBeenCalled();
     expect(current.scrollIntoView).toHaveBeenCalledWith(false);
+  });
+
+  describe('shouldComponentUpdate', () => {
+    const defaultProps = {
+      data: data,
+      isFocused: false,
+      innerProps: {},
+    };
+    test.each([
+      [false, defaultProps],
+      [
+        true,
+        {
+          ...defaultProps,
+          isFocused: true,
+        },
+      ],
+      [
+        true,
+        {
+          ...defaultProps,
+          data: {
+            ...data,
+            user: {
+              ...data.user,
+              publicName: 'crazy_jace',
+            },
+          },
+        },
+      ],
+      [
+        true,
+        {
+          ...defaultProps,
+          data: {
+            ...data,
+            label: 'crazy_jace',
+          },
+        },
+      ],
+      [
+        true,
+        {
+          ...defaultProps,
+          innerProps: {},
+        },
+      ],
+    ])('should return %s for nextProps %p', (shouldUpdate, nextProps) => {
+      const component = shallowMultiValue(defaultProps);
+      const instance = component.instance();
+      expect(
+        instance &&
+          instance.shouldComponentUpdate &&
+          instance.shouldComponentUpdate(nextProps, {}, {}),
+      ).toEqual(shouldUpdate);
+    });
   });
 });

@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react';
-import { EditorViewProps } from './editorView/editorView';
+import { EditorViewOwnProps } from './editorView/editorView';
 
-export default (): Promise<ComponentClass<EditorViewProps>> =>
+export default (): Promise<ComponentClass<EditorViewOwnProps>> =>
   import(/* webpackChunkName:"@atlaskit-internal_media-editor-view" */
 
-  './editorView/editorView').then(module => module.EditorView);
+  './editorView/editorView').then(module => module.default);

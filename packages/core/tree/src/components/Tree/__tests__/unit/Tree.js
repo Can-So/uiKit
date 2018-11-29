@@ -7,7 +7,7 @@ import {
   type DragUpdate,
   type DragStart,
   Droppable,
-} from 'react-beautiful-dnd-next';
+} from 'react-beautiful-dnd';
 import { getBox } from 'css-box-model';
 import Tree from '../../Tree';
 import { mutateTree } from '../../../../utils/tree';
