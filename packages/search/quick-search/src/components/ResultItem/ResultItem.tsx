@@ -25,6 +25,8 @@ type Props = {
   isCompact?: boolean;
   /** Set whether the item should be highlighted as selected. Selected items have a different background color. */
   isSelected?: boolean;
+  /** Set whether the item has been highlighted using mouse navigation. */
+  isMouseSelected?: boolean;
   /** Function to be called on click. This is passed down to a custom link component, if one is provided.  */
   onClick?(e: MouseEvent): void;
   /** Standard onmouseenter event */
@@ -37,7 +39,7 @@ type Props = {
   text?: React.ReactNode;
   /** React component to be placed to the right of the main text. */
   textAfter?: React.ReactNode;
-  /** React component to be placed to the right of the main text when the item is selected. */
+  /** React component to be placed to the right of the main text when the item is selected with keyboard navigation. */
   selectedIcon?: React.ReactNode;
   /** React component to be used for rendering links */
   linkComponent?: React.ComponentType;
@@ -46,6 +48,7 @@ type Props = {
 class ResultItem extends React.PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     isSelected: false,
+    isMouseSelected: false,
   };
 
   render() {
@@ -56,13 +59,15 @@ class ResultItem extends React.PureComponent<Props> {
     const textAfter = this.props.textAfter ? (
       <ResultItemTextAfter>{this.props.textAfter}</ResultItemTextAfter>
     ) : null;
-
+    debugger;
     const after =
       this.props.textAfter || this.props.selectedIcon ? (
         <ResultItemAfterWrapper>
           <ResultItemAfter shouldTakeSpace={!!this.props.textAfter}>
             {textAfter}
-            {this.props.isSelected ? this.props.selectedIcon : null}
+            {this.props.isSelected && !this.props.isMouseSelected
+              ? this.props.selectedIcon
+              : null}
           </ResultItemAfter>
         </ResultItemAfterWrapper>
       ) : null;
