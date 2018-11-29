@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.3.4
+- [patch] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
+
+  - Adds support for links around images
+
 ## 6.3.3
 - [patch] [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
 
