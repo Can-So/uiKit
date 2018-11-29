@@ -140,7 +140,7 @@ export interface EditorProps {
 
   // Enable dates. You will most likely need backend ADF storage for this feature.
   allowDate?: boolean;
-  allowGapCursor?: boolean;
+
   allowInlineAction?: boolean;
 
   // Temporary flag to enable layouts while it's under development

@@ -1,0 +1,1 @@
+- ED-5677: enabled quickInsert and gapCursor by default (quickInsert: except for mobile appearance)
