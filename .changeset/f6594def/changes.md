@@ -1,0 +1,1 @@
+- Add extra padding to the before pre-query advanced search component.
