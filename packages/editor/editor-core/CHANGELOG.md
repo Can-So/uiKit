@@ -1,5 +1,15 @@
 # @atlaskit/editor-core
 
+## 89.1.3
+- [patch] [0e72eb6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e72eb6):
+
+  - Revert box-sizing change for node views
+
+## 89.1.2
+- [patch] [cf4e304](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf4e304):
+
+  - Fixed toolbar being positioned over a panel at the bottom of the page
+
 ## 89.1.1
 - [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
 

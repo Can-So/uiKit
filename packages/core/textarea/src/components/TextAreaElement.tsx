@@ -1,8 +1,7 @@
-// @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 
 type Props = {
-  forwardedRef?: (HTMLTextAreaElement | null) => void,
+  forwardedRef?: (elem: HTMLTextAreaElement | null) => void;
   /**
    * Enables the resizing of the textarea:
    * auto: both directions.
@@ -11,17 +10,17 @@ type Props = {
    * smart (default): vertically grows and shrinks the textarea automatically to wrap your input text.
    * none: explicitly disallow resizing on the textarea.
    */
-  resize?: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none',
+  resize?: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none';
   /** Handler to be called when the input changes. */
-  onChange?: (event: SyntheticInputEvent<HTMLTextAreaElement>) => void,
-};
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+} & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 type State = {
-  height: string,
+  height: string;
 };
 
-export default class TextAreaElement extends Component<Props, State> {
-  textareaElement: HTMLTextAreaElement | null;
+export default class TextAreaElement extends React.Component<Props, State> {
+  textareaElement: HTMLTextAreaElement | null = null;
 
   state = {
     height: '100%',
@@ -43,7 +42,7 @@ export default class TextAreaElement extends Component<Props, State> {
     }
   };
 
-  handleOnChange = (event: SyntheticInputEvent<HTMLTextAreaElement>) => {
+  handleOnChange: React.ChangeEventHandler<HTMLTextAreaElement> = event => {
     const { onChange } = this.props;
     if (this.props.resize === 'smart') {
       this.setState(

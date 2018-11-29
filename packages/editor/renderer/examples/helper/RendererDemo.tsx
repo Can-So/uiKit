@@ -187,10 +187,7 @@ export default class RendererDemo extends React.Component<
   textSerializer = new TextSerializer(defaultSchema);
   emailSerializer = new EmailSerializer();
   emailRef?: HTMLIFrameElement;
-
-  refs: {
-    input: HTMLTextAreaElement;
-  };
+  inputBox: HTMLTextAreaElement | null;
 
   constructor(props: DemoRendererProps) {
     super(props);
@@ -246,7 +243,9 @@ export default class RendererDemo extends React.Component<
                   width: '100%',
                   height: 320,
                 }}
-                ref="input"
+                ref={ref => {
+                  this.inputBox = ref;
+                }}
                 onChange={this.onDocumentChange}
                 value={this.state.input}
               />
@@ -403,6 +402,9 @@ export default class RendererDemo extends React.Component<
     this.setState(prevState => ({ showSidebar: !prevState.showSidebar }));
   };
 
-  private onDocumentChange = () =>
-    this.setState({ input: this.refs.input.value });
+  private onDocumentChange = () => {
+    if (this.inputBox) {
+      this.setState({ input: this.inputBox.value });
+    }
+  };
 }

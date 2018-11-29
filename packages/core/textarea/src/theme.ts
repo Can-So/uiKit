@@ -1,4 +1,3 @@
-// @flow
 import * as componentTokens from './component-tokens';
 
 const invalidRules = {
@@ -66,21 +65,23 @@ const borderColorFocus = {
 
 export type ThemeAppearance = 'standard' | 'subtle' | 'none';
 export type TextAreaThemeProps = {
-  appearance: ThemeAppearance,
-  isCompact: boolean,
+  appearance: ThemeAppearance;
+  isCompact: boolean;
 };
 export type ThemeProps = {
-  textArea?: ({ appearance: ThemeAppearance, isCompact: boolean }) => {
-    borderColor?: string,
-    borderColorFocus?: string,
-    backgroundColorHover?: string,
-    backgroundColorFocus?: string,
-    backgroundColor?: string,
-    textColor?: string,
-    disabledTextColor?: string,
-    placeholderTextColor?: string,
-  },
-  mode?: 'light' | 'dark',
+  textArea?: (
+    opts: { appearance: ThemeAppearance; isCompact: boolean },
+  ) => {
+    borderColor?: string;
+    borderColorFocus?: string;
+    backgroundColorHover?: string;
+    backgroundColorFocus?: string;
+    backgroundColor?: string;
+    textColor?: string;
+    disabledTextColor?: string;
+    placeholderTextColor?: string;
+  };
+  mode?: 'light' | 'dark';
 };
 
 export const themeTokens = {
@@ -95,7 +96,9 @@ export const themeTokens = {
   placeholderTextColor: componentTokens.placeholderTextColor,
 };
 
-const getTextAreaTheme = mode => ({ appearance }: TextAreaThemeProps) => ({
+const getTextAreaTheme = (mode: 'light' | 'dark') => ({
+  appearance,
+}: TextAreaThemeProps) => ({
   borderColor: borderColor[appearance][mode],
   borderColorFocus: borderColorFocus[appearance][mode],
   backgroundColorHover: backgroundColorHover[appearance][mode],
@@ -107,11 +110,13 @@ const getTextAreaTheme = mode => ({ appearance }: TextAreaThemeProps) => ({
   placeholderTextColor: componentTokens.placeholderTextColor[mode],
 });
 
-export const theme = (props: ThemeProps): ThemeProps => {
+export type TextAreaTheme = ReturnType<ReturnType<typeof getTextAreaTheme>>;
+
+export const theme = <T extends ThemeProps>(props: ThemeProps): T => {
   const mode = props.mode || 'light';
   return {
     textArea: getTextAreaTheme(mode),
     mode,
-    ...props,
-  };
+    ...(props as ThemeProps),
+  } as T;
 };

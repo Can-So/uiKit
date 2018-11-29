@@ -183,14 +183,14 @@ export class BlockCardResolvedView extends React.Component<
   alertTimeout?: number;
 
   /* prevent the parent link handler from opening a URL when clicked */
-  handleAvatarClick = ({ event }: { event: MouseEvent }) => {
+  handleAvatarClick = ({ event }: { event: React.MouseEvent }) => {
     event.preventDefault();
     event.stopPropagation();
   };
 
   /* prevent the parent link handler from opening a URL when clicked */
   /* NOTE: this prevents the dropdown from showing with more items */
-  handleMoreAvatarsClick = (event: MouseEvent) => {
+  handleMoreAvatarsClick = (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
   };
@@ -213,7 +213,7 @@ export class BlockCardResolvedView extends React.Component<
   }
 
   createActionHandler = (action: Action) => {
-    return (event: MouseEvent) => {
+    return (event: React.MouseEvent) => {
       /* prevent the parent handler from opening a URL when clicked */
       event.preventDefault();
       event.stopPropagation();

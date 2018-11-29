@@ -1,29 +1,33 @@
-// @flow
-
 import styled, { css } from 'styled-components';
 import { codeFontFamily, fontSize, gridSize } from '@atlaskit/theme';
+
+import { ThemeProps, TextAreaTheme } from '../theme';
+import { Props } from '../components/TextArea';
+
+type StyleProps = Props & TextAreaTheme & { isFocused?: boolean; none?: any };
 
 const grid = gridSize();
 const borderRadius = '3px';
 const borderWidth = 2;
 const lineHeightBase = grid * 2.5;
 const lineHeightCompact = grid * 2;
-const getLineHeight = ({ isCompact }) =>
+const getLineHeight = ({ isCompact }: Pick<Partial<Props>, 'isCompact'>) =>
   isCompact ? lineHeightBase : lineHeightCompact;
-const getVerticalPadding = ({ isCompact }) => (isCompact ? 2 : 6);
+const getVerticalPadding = ({ isCompact }: Pick<Partial<Props>, 'isCompact'>) =>
+  isCompact ? 2 : 6;
 const horizontalPadding = grid;
 const transitionDuration = '0.2s';
 
-const getBorderStyle = props =>
+const getBorderStyle = (props: StyleProps) =>
   props.appearance === 'none' ? 'none;' : 'solid;';
 
-const getPlaceholderStyle = style => css`
+const getPlaceholderStyle = (style: typeof getPlaceholderColor) => css`
   &::placeholder {
     ${style}
   }
 `;
 
-const getPlaceholderColor = css`
+const getPlaceholderColor = css<ReturnType<Required<ThemeProps>['textArea']>>`
   color: ${props => props.placeholderTextColor};
 `;
 
@@ -41,13 +45,17 @@ const getBorderAndPadding = () => {
   `;
 };
 
-const getHoverState = props => {
-  if (props.readOnly || props.isFocused || props.none) return null;
+const getHoverState = (props: StyleProps) => {
+  if (props.readOnly || props.isFocused || props.none) {
+    return null;
+  }
   let backgroundColorHover = props.backgroundColorHover;
-  if (props.isDisabled)
+  if (props.isDisabled) {
     backgroundColorHover = props.disabledRules.backgroundColorHover;
-  if (props.isInvalid)
+  }
+  if (props.isInvalid) {
     backgroundColorHover = props.invalidRules.backgroundColorHover;
+  }
   return css`
     &:hover {
       background-color: ${backgroundColorHover};
@@ -55,12 +63,15 @@ const getHoverState = props => {
   `;
 };
 
-const getMinimumRowsHeight = ({ minimumRows, isCompact }) => {
+const getMinimumRowsHeight = ({
+  minimumRows,
+  isCompact,
+}: Pick<Props, 'isCompact' | 'minimumRows'>) => {
   const lineHeight = getLineHeight({ isCompact });
   return `min-height: ${lineHeight * minimumRows}px;`;
 };
 
-const getResizeStyles = ({ resize }) => {
+const getResizeStyles = ({ resize }: Pick<Partial<Props>, 'resize'>) => {
   if (resize === 'auto') {
     return `resize: auto;`;
   }
@@ -73,7 +84,7 @@ const getResizeStyles = ({ resize }) => {
   return `resize: none;`;
 };
 
-const getBorderColor = props => {
+const getBorderColor = (props: StyleProps) => {
   let borderColor = props.isFocused
     ? props.borderColorFocus
     : props.borderColor;
@@ -90,7 +101,7 @@ const getBorderColor = props => {
   return borderColor;
 };
 
-const getBackgroundColor = props => {
+const getBackgroundColor = (props: StyleProps) => {
   let backgroundColor = props.isFocused
     ? props.backgroundColorFocus
     : props.backgroundColor;
@@ -107,7 +118,7 @@ const getBackgroundColor = props => {
   return backgroundColor;
 };
 
-export const TextAreaWrapper = styled.div`
+export const TextAreaWrapper = styled.div<Props & TextAreaTheme>`
   flex: 1 1 100%;
   position: relative;
   background-color: ${getBackgroundColor};
