@@ -1,5 +1,10 @@
 # @atlaskit/quick-search
 
+## 5.2.0
+- [minor] [347a474](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/347a474):
+
+  - Added icon on selected to quick search results
+
 ## 5.1.2
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2
