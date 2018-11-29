@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.12.11
+- [patch] [f0bfc56](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0bfc56):
+
+  - Change adv search shortcut icon to Return instead of ShiftReturn for both Confluence and Jira
+
 ## 5.12.10
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2
