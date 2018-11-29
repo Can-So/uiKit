@@ -4,7 +4,13 @@ declare module '@atlaskit/theme' {
   export const colors: Record<string, string>;
   export const createTheme: <ThemeTokens, ThemeProps>(
     theme: (props: ThemeProps) => ThemeTokens,
-  ) => ThemeTokens;
+  ) => {
+    Consumer: React.ReactType<ThemeTokens>;
+    Provider: React.ReactType<{
+      value: (tokens: ThemeTokens, props: ThemeProps) => ThemeTokens;
+    }>;
+  };
+  export const elevation: any;
   export const fontFamily: any;
   export const fontSize: any;
   export const gridSize: any;
