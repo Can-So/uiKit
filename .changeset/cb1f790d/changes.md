@@ -1,0 +1,1 @@
+- Wrap kitchen sink in smart card provider.
