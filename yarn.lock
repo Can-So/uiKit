@@ -12657,9 +12657,9 @@ prosemirror-utils@^0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/prosemirror-utils/-/prosemirror-utils-0.7.2.tgz#dbdd42c902892777f7fc04dbcb23dbfd9332a771"
 
-prosemirror-view@^1.0.0, prosemirror-view@^1.6.5:
-  version "1.6.5"
-  resolved "https://registry.yarnpkg.com/prosemirror-view/-/prosemirror-view-1.6.5.tgz#0427775fd68006a2270dfad549707e5a3d9880db"
+prosemirror-view@^1.0.0,prosemirror-view@^1.6.7:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/prosemirror-view/-/prosemirror-view-1.6.7.tgz#c89f078c7880d44cf5c193e8b1bd289da226fbd9"
   dependencies:
     prosemirror-model "^1.1.0"
     prosemirror-state "^1.0.0"

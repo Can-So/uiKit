@@ -11,6 +11,8 @@ import {
   codeBlock,
   text,
   alignment,
+  mediaSingle,
+  media,
 } from '../../../builders';
 
 describe('Builders', () => {
@@ -63,6 +65,32 @@ describe('Builders', () => {
       ),
     () => doc(breakout({ mode: 'wide' })(codeBlock({})(text('some code')))),
     () => doc(alignment({ align: 'end' })(p('hello'))),
+    () =>
+      doc(
+        mediaSingle({
+          layout: 'center',
+        })(
+          media({
+            type: 'file',
+            id: '1234',
+            collection: 'SampleCollection',
+          }),
+        ),
+      ),
+    () =>
+      doc(
+        a({ href: 'https://www.atlassian.com' })(
+          mediaSingle({
+            layout: 'center',
+          })(
+            media({
+              type: 'file',
+              id: '1234',
+              collection: 'SampleCollection',
+            }),
+          ),
+        ),
+      ),
   ];
 
   nodes.forEach((node, idx) => {

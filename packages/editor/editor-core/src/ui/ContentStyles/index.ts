@@ -20,6 +20,7 @@ import { textFormattingStyles } from '../../plugins/text-formatting/styles';
 import { placeholderTextStyles } from '../../plugins/placeholder-text/styles';
 import { tasksAndDecisionsStyles } from '../../plugins/tasks-and-decisions/ui/styles';
 import { gridStyles } from '../../plugins/grid/styles';
+import { linkStyles } from '../../plugins/hyperlink/styles';
 
 const ContentStyles: ComponentClass<HTMLAttributes<{}>> = styled.div`
   /* Hack for ie11 that is being used in code block.
@@ -92,6 +93,7 @@ const ContentStyles: ComponentClass<HTMLAttributes<{}>> = styled.div`
   ${mentionsStyles}
   ${tasksAndDecisionsStyles}
   ${gridStyles}
+  ${linkStyles}
 
   .mediaGroupView-content-wrap ul {
     padding: 0;

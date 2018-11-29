@@ -1,0 +1,1 @@
+- Adds support for links around images

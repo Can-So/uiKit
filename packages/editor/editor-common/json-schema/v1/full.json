@@ -137,47 +137,6 @@
       ],
       "additionalProperties": false
     },
-    "mediaSingle_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "mediaSingle"
-          ]
-        },
-        "content": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/media_node"
-          },
-          "minItems": 1,
-          "maxItems": 1
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "layout": {
-              "enum": [
-                "wrap-right",
-                "center",
-                "wrap-left",
-                "wide",
-                "full-width"
-              ]
-            }
-          },
-          "required": [
-            "layout"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
     "table_node": {
       "type": "object",
       "properties": {
@@ -194,9 +153,9 @@
             },
             "layout": {
               "enum": [
-                "wide",
+                "default",
                 "full-width",
-                "default"
+                "wide"
               ]
             }
           },
@@ -317,6 +276,92 @@
         },
         "content": {
           "$ref": "#/definitions/table_cell_content"
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "link_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "link"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "collection": {
+              "type": "string"
+            },
+            "occurrenceKey": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "mediaSingle_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "mediaSingle"
+          ]
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/media_node"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "layout": {
+              "enum": [
+                "full-width",
+                "wide",
+                "wrap-right",
+                "center",
+                "wrap-left"
+              ]
+            }
+          },
+          "required": [
+            "layout"
+          ],
+          "additionalProperties": false
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/link_mark"
+          }
         }
       },
       "required": [
@@ -1155,9 +1200,9 @@
             },
             "layout": {
               "enum": [
-                "wide",
+                "default",
                 "full-width",
-                "default"
+                "wide"
               ]
             }
           },
@@ -1236,9 +1281,9 @@
             },
             "layout": {
               "enum": [
-                "wide",
+                "default",
                 "full-width",
-                "default"
+                "wide"
               ]
             }
           },
@@ -1381,45 +1426,6 @@
       },
       "required": [
         "type"
-      ],
-      "additionalProperties": false
-    },
-    "link_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "link"
-          ]
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string"
-            },
-            "title": {
-              "type": "string"
-            },
-            "id": {
-              "type": "string"
-            },
-            "collection": {
-              "type": "string"
-            },
-            "occurrenceKey": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "href"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "type",
-        "attrs"
       ],
       "additionalProperties": false
     },
@@ -1684,10 +1690,10 @@
             "$ref": "#/definitions/orderedList_node"
           },
           {
-            "$ref": "#/definitions/mediaSingle_node"
+            "$ref": "#/definitions/table_node"
           },
           {
-            "$ref": "#/definitions/table_node"
+            "$ref": "#/definitions/mediaSingle_node"
           },
           {
             "$ref": "#/definitions/codeBlock_with_no_marks_node"
@@ -1739,6 +1745,9 @@
               "items": {
                 "anyOf": [
                   {
+                    "$ref": "#/definitions/link_mark"
+                  },
+                  {
                     "$ref": "#/definitions/em_mark"
                   },
                   {
@@ -1749,9 +1758,6 @@
                   },
                   {
                     "$ref": "#/definitions/underline_mark"
-                  },
-                  {
-                    "$ref": "#/definitions/link_mark"
                   },
                   {
                     "$ref": "#/definitions/subsup_mark"
@@ -1783,10 +1789,10 @@
               "items": {
                 "anyOf": [
                   {
-                    "$ref": "#/definitions/code_mark"
+                    "$ref": "#/definitions/link_mark"
                   },
                   {
-                    "$ref": "#/definitions/link_mark"
+                    "$ref": "#/definitions/code_mark"
                   }
                 ]
               }
@@ -1848,10 +1854,10 @@
                 "$ref": "#/definitions/orderedList_node"
               },
               {
-                "$ref": "#/definitions/mediaSingle_node"
+                "$ref": "#/definitions/table_node"
               },
               {
-                "$ref": "#/definitions/table_node"
+                "$ref": "#/definitions/mediaSingle_node"
               },
               {
                 "$ref": "#/definitions/codeBlock_with_no_marks_node"
