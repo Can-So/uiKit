@@ -1,23 +1,6 @@
 import { createTheme } from '@atlaskit/theme';
 import * as componentTokens from './component-tokens';
 
-const invalidRules = {
-  light: {
-    borderColor: componentTokens.invalidBorderColor.light,
-    borderColorFocus: componentTokens.defaultBorderColorFocus.light,
-    backgroundColor: componentTokens.defaultBackgroundColor.light,
-    backgroundColorFocus: componentTokens.defaultBackgroundColorFocus.light,
-    backgroundColorHover: componentTokens.defaultBackgroundColorHover.light,
-  },
-  dark: {
-    borderColor: componentTokens.invalidBorderColor.dark,
-    borderColorFocus: componentTokens.defaultBorderColorFocus.dark,
-    backgroundColor: componentTokens.defaultBackgroundColor.dark,
-    backgroundColorFocus: componentTokens.defaultBackgroundColorFocus.dark,
-    backgroundColorHover: componentTokens.defaultBackgroundColorHover.dark,
-  },
-};
-
 const disabledRules = {
   light: {
     backgroundColor: componentTokens.disabled.light,
@@ -34,6 +17,23 @@ const disabledRules = {
     borderColor: componentTokens.defaultBorderColor.dark,
     borderColorFocus: componentTokens.defaultBorderColorFocus.dark,
     textColor: componentTokens.disabledTextColor.dark,
+  },
+};
+
+const invalidRules = {
+  light: {
+    borderColor: componentTokens.invalidBorderColor.light,
+    borderColorFocus: componentTokens.defaultBorderColorFocus.light,
+    backgroundColor: componentTokens.defaultBackgroundColor.light,
+    backgroundColorFocus: componentTokens.defaultBackgroundColorFocus.light,
+    backgroundColorHover: componentTokens.defaultBackgroundColorHover.light,
+  },
+  dark: {
+    borderColor: componentTokens.invalidBorderColor.dark,
+    borderColorFocus: componentTokens.defaultBorderColorFocus.dark,
+    backgroundColor: componentTokens.defaultBackgroundColor.dark,
+    backgroundColorFocus: componentTokens.defaultBackgroundColorFocus.dark,
+    backgroundColorHover: componentTokens.defaultBackgroundColorHover.dark,
   },
 };
 
@@ -70,14 +70,28 @@ export type ThemeProps = {
   mode: 'dark' | 'light';
 };
 export type ThemeTokens = {
-  borderColor?: string;
-  borderColorFocus?: string;
-  backgroundColorHover?: string;
-  backgroundColorFocus?: string;
-  backgroundColor?: string;
-  textColor?: string;
-  disabledTextColor?: string;
-  placeholderTextColor?: string;
+  borderColor: string;
+  borderColorFocus: string;
+  backgroundColor: string;
+  backgroundColorFocus: string;
+  backgroundColorHover: string;
+  disabledRules: {
+    backgroundColor: string;
+    backgroundColorFocus: string;
+    backgroundColorHover: string;
+    borderColor: string;
+    borderColorFocus: string;
+    textColor: string;
+  };
+  invalidRules: {
+    borderColor: string;
+    borderColorFocus: string;
+    backgroundColor: string;
+    backgroundColorFocus: string;
+    backgroundColorHover: string;
+  };
+  textColor: string;
+  placeholderTextColor: string;
 };
 
 export const themeTokens = {
@@ -93,13 +107,7 @@ export const themeTokens = {
 };
 
 export const Theme = createTheme<ThemeTokens, ThemeProps>(
-  ({
-    appearance,
-    mode,
-  }: {
-    appearance: ThemeAppearance;
-    mode: 'dark' | 'light';
-  }) => ({
+  ({ appearance, mode }: ThemeProps): ThemeTokens => ({
     borderColor: borderColor[appearance][mode],
     borderColorFocus: borderColorFocus[appearance][mode],
     backgroundColorHover: backgroundColorHover[appearance][mode],

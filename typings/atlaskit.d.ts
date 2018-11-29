@@ -1,3 +1,5 @@
+import { any } from 'prop-types';
+
 declare module '@atlaskit/*';
 
 declare module '@atlaskit/theme' {
@@ -12,6 +14,7 @@ declare module '@atlaskit/theme' {
   export const layers: any;
   export const colors: Record<string, string>;
   export const Theme: React.ComponentType<any>;
+  export const createTheme: (defaultTheme: any) => any;
   const d: any;
   export default d;
 }

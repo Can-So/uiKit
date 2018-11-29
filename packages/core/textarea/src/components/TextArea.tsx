@@ -60,7 +60,7 @@ export type Props = {
   theme?: any;
   /** Ref used to access the textarea dom element. NOTE we expose this via forwardRef,
    so you can also use the ref prop of this component to the same effect. */
-  forwardedRef: (e: HTMLTextAreaElement | null) => void;
+  forwardedRef?: (e: HTMLTextAreaElement | null) => void;
 };
 type State = {
   isFocused: boolean;
@@ -144,7 +144,6 @@ class TextAreaWithoutForwardRef extends React.Component<Props, State> {
             <Theme.Consumer appearance={appearance} mode={mode}>
               {(tokens: ThemeTokens) => (
                 <TextAreaWrapper
-                  {...tokens}
                   resize={resize}
                   maxHeight={maxHeight}
                   appearance={appearance}
@@ -154,6 +153,8 @@ class TextAreaWithoutForwardRef extends React.Component<Props, State> {
                   isFocused={isFocused}
                   isInvalid={isInvalid}
                   minimumRows={minimumRows}
+                  forwardedRef={() => {}}
+                  {...tokens}
                 >
                   <TextareaElement
                     {...props}
