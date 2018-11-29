@@ -57,6 +57,10 @@ export type Props = {
    */
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none';
   /**
+   * Passed down to the <textarea /> element.
+   */
+  spellCheck?: boolean;
+  /**
    * The theme function TextArea consumes to derive theming constants for use in styling its components
    */
   theme?: any;
