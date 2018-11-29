@@ -52,8 +52,6 @@ const cssLoaderExceptions = (pkgJSONName, groupId, packageId) => [
   ],
 ];
 
-const tsMatch = /.+(\.ts|\.tsx)/;
-
 // TODO: Type correct once codesandbox is typed
 export type Props = {
   deployButton: any;
@@ -65,7 +63,11 @@ export type Props = {
   pkgJSON: any;
   afterDeployError?: any;
 };
-export default class CodeSandbox extends React.Component<Props, {}> {
+
+export type State = {
+  parameters: string;
+};
+export default class CodeSandbox extends React.Component<Props, State> {
   state = { parameters: '' };
 
   render() {
@@ -83,8 +85,6 @@ export default class CodeSandbox extends React.Component<Props, {}> {
       .split('.')
       .slice(0, -1)
       .join('-');
-
-    if (tsMatch.test(example.id)) return null;
 
     return (
       <CodeSandboxer

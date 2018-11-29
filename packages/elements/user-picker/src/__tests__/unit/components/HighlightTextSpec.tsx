@@ -26,10 +26,6 @@ describe('HighlightText', () => {
     it('should render plain text', testTemplate()('Some text'));
   });
 
-  describe('without text', () => {
-    it('should render nothing', testTemplate({ children: undefined })(null));
-  });
-
   describe('with highlight configuration', () => {
     it(
       'should highlight none with an empty highlights array',

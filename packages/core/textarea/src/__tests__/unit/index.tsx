@@ -1,5 +1,4 @@
-// @flow
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 import TextAreaWithAnalytics, {
   TextAreaWithoutAnalytics as TextArea,
@@ -134,7 +133,9 @@ describe('TextArea input focus', () => {
   it('should get focus when focus() is called', () => {
     let hasFocus = 0;
     const wrapper = mount(<TextArea onChange={() => {}} />);
-    const textInput = wrapper.find('textarea').instance();
+    const textInput = (wrapper
+      .find('textarea')
+      .instance() as any) as HTMLTextAreaElement;
     textInput.addEventListener(
       'focus',
       () => {
@@ -154,15 +155,15 @@ describe('TextAreaWithAnalytics', () => {
     jest.spyOn(global.console, 'error');
   });
   afterEach(() => {
-    global.console.warn.mockRestore();
-    global.console.error.mockRestore();
+    (global.console.warn as jest.Mock).mockRestore();
+    (global.console.error as jest.Mock).mockRestore();
   });
 
   it('should mount without errors', () => {
     mount(<TextAreaWithAnalytics onChange={() => {}} />);
-    /* eslint-disable no-console */
+    /* tslint:disable no-console */
     expect(console.warn).not.toHaveBeenCalled();
     expect(console.error).not.toHaveBeenCalled();
-    /* eslint-enable no-console */
+    /* tslint:disable no-console */
   });
 });

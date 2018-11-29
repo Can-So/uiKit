@@ -16,6 +16,9 @@ export default class MediaAnalyticsListener extends React.Component<
       const payload = {
         source: DEFAULT_SOURCE,
         ...event.payload,
+        tags: event.payload.tags
+          ? Array.from(new Set([...event.payload.tags, 'media']))
+          : ['media'],
       } as GasPayload;
       sendEvent(logger, client)(payload);
     }

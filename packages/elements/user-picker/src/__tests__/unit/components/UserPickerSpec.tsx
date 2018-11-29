@@ -19,12 +19,12 @@ describe('UserPicker', () => {
     {
       id: 'abc-123',
       name: 'Jace Beleren',
-      nickname: 'jbeleren',
+      publicName: 'jbeleren',
     },
     {
       id: '123-abc',
       name: 'Chandra Nalaar',
-      nickname: 'cnalaar',
+      publicName: 'cnalaar',
     },
   ];
 

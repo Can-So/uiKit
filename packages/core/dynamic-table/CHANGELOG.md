@@ -1,5 +1,10 @@
 # @atlaskit/dynamic-table
 
+## 10.0.19
+- [patch] [492b8ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/492b8ea):
+
+  - Added `colspan` to cell type. Added example using `colspan`.
+
 ## 10.0.18
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

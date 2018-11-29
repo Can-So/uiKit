@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ReactNode } from 'react';
 import {
   Context,
   FileState,
@@ -7,7 +8,8 @@ import {
 } from '@atlaskit/media-core';
 import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
-import { toHumanReadableMediaSize } from '@atlaskit/media-ui';
+import { messages, toHumanReadableMediaSize } from '@atlaskit/media-ui';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Outcome, Identifier } from './domain';
 import {
   Header as HeaderWrapper,
@@ -42,7 +44,7 @@ const initialState: State = {
   item: Outcome.pending(),
 };
 
-export default class Header extends React.Component<Props, State> {
+export class Header extends React.Component<Props & InjectedIntlProps, State> {
   state: State = initialState;
 
   private subscription?: Subscription;
@@ -129,7 +131,9 @@ export default class Header extends React.Component<Props, State> {
             {this.getMediaIcon(item.mediaType)}
           </MetadataIconWrapper>
           <MedatadataTextWrapper>
-            <MetadataFileName>{item.name || 'unknown'}</MetadataFileName>
+            <MetadataFileName>
+              {item.name || <FormattedMessage {...messages.unknown} />}
+            </MetadataFileName>
             <MetadataSubText>
               {this.renderFileTypeText(item.mediaType)}
               {this.renderSize(item)}
@@ -154,12 +158,18 @@ export default class Header extends React.Component<Props, State> {
     return ' · ';
   };
 
-  private renderFileTypeText = (mediaType?: MediaType): string => {
-    if (mediaType === 'doc') {
-      return 'document';
-    } else {
-      return mediaType || 'unknown';
-    }
+  private renderFileTypeText = (mediaType?: MediaType): ReactNode => {
+    const mediaTypeTranslationMap = {
+      doc: messages.document,
+      audio: messages.audio,
+      video: messages.video,
+      image: messages.image,
+      unknown: messages.unknown,
+    };
+    const message = mediaTypeTranslationMap[mediaType || 'unknown'];
+
+    // Defaulting to unknown again since backend has more mediaTypes than the current supported ones
+    return <FormattedMessage {...message || messages.unknown} />;
   };
 
   private getMediaIcon = (mediaType?: MediaType) => {
@@ -179,3 +189,5 @@ export default class Header extends React.Component<Props, State> {
     }
   }
 }
+
+export default injectIntl(Header);

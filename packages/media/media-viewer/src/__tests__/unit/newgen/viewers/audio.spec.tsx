@@ -5,7 +5,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { createContext } from '../../_stubs';
 import { Auth, ProcessedFileState } from '@atlaskit/media-core';
-import { awaitError } from '@atlaskit/media-test-helpers';
+import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
 import { AudioViewer } from '../../../../newgen/viewers/audio';
 import Spinner from '@atlaskit/spinner';
 import { DefaultCoverWrapper, AudioCover } from '../../../../newgen/styled';
@@ -42,7 +42,7 @@ function createFixture(
   item?: ProcessedFileState,
 ) {
   const context = createContext({ authPromise });
-  const el = mount(
+  const el = mountWithIntlContext(
     <AudioViewer
       context={context}
       item={item || audioItem}
