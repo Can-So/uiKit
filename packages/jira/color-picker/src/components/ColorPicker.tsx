@@ -38,6 +38,12 @@ export interface State {
   isOpen: boolean;
 }
 
+const defaultPopperProps = {
+  positionFixed: true,
+  modifiers: { offset: { offset: `0, 8` } },
+  placement: 'bottom-start',
+};
+
 const getOptions = memoizeOne((props: Props) => {
   const { palette, selectedColor } = props;
 
@@ -100,7 +106,7 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
     const {
       checkMarkColor,
       cols,
-      popperProps,
+      popperProps = defaultPopperProps,
       label = 'Color picker',
     } = this.props;
     const { options, value } = getOptions(this.props);
