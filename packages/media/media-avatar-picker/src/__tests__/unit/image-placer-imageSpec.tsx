@@ -4,7 +4,7 @@ import { ImageWrapper } from '../../image-placer/styled';
 
 // mock @atlaskit/media-ui::isImageRemote() ...
 const isImageRemote = jest.fn();
-jest.mock('@atlaskit/media-ui', () => ({
+jest.mock('@atlaskit/media-core', () => ({
   isImageRemote,
 }));
 

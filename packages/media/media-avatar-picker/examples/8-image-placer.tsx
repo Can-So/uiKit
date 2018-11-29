@@ -36,7 +36,7 @@ class Example extends React.Component<{}, ExampleState> {
     containerHeight: 200,
     margin: 30,
     zoom: 0,
-    maxZoom: 2,
+    maxZoom: 4,
     useConstraints: true,
     isCircular: false,
     useCircularClipWithActions: false,

@@ -19,7 +19,6 @@ import {
   fileToDataURI,
   getFileInfo,
   loadImage,
-  isImageRemote,
 } from '../../util';
 
 describe('Image Meta Data Util', () => {
@@ -163,37 +162,6 @@ describe('Image Meta Data Util', () => {
     it('should return an image async', async () => {
       const img = await loadImage('some-src');
       expect(img.src).toEqual('http://localhost/some-src');
-    });
-  });
-
-  describe('isImageRemote', () => {
-    let globalUrl: any = global.URL;
-
-    class MockURLWithoutHost {}
-    class MockURLWithHost {
-      host: string = 'some-host';
-      origin: string = 'some-origin';
-    }
-
-    afterEach(() => {
-      global.URL = globalUrl;
-    });
-
-    it('should detect remote image when no host', () => {
-      global.URL = MockURLWithoutHost;
-      const isRemote = isImageRemote('/some/url');
-      expect(isRemote).toEqual(false);
-    });
-
-    it('should detect remote image with host and different origins', () => {
-      global.URL = MockURLWithHost;
-      expect(isImageRemote('/some/url')).toEqual(true);
-      expect(isImageRemote('/some/url', 'some-origin')).toEqual(false);
-    });
-
-    it('should detect remote image when URL is not available', () => {
-      global.URL = null;
-      expect(isImageRemote('/some/url')).toEqual(true);
     });
   });
 });

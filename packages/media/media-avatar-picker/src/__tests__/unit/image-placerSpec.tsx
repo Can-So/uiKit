@@ -17,7 +17,6 @@ import {
   ImagePlacerProps,
   defaultProps as defaultComponentProps,
   ImageActions,
-  DEFAULT_MAX_ZOOM,
 } from '../../image-placer';
 import { ImagePlacerContainer } from '../../image-placer/container';
 import { ImagePlacerImage } from '../../image-placer/image';
@@ -42,6 +41,7 @@ const smallToMediumRatio = 2;
 const containerSize = mediumSize;
 const containerWidth = containerSize;
 const containerHeight = containerSize;
+const defaultMaxZoom = 2;
 const defaultProps = {
   src: 'some-src',
   containerWidth,
@@ -442,8 +442,8 @@ describe('Image Placer', () => {
         expect(instance.state.zoom).toEqual(1);
         expect(sourceBounds.left).toEqual(Math.round(mediumSize / 4));
         expect(sourceBounds.top).toEqual(Math.round(mediumSize / 4));
-        expect(sourceBounds.width).toEqual(mediumSize / DEFAULT_MAX_ZOOM);
-        expect(sourceBounds.height).toEqual(mediumSize / DEFAULT_MAX_ZOOM);
+        expect(sourceBounds.width).toEqual(mediumSize / defaultMaxZoom);
+        expect(sourceBounds.height).toEqual(mediumSize / defaultMaxZoom);
         done();
       });
     });

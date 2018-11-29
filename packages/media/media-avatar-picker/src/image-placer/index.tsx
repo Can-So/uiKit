@@ -67,7 +67,7 @@ export interface ImagePlacerProps {
 }
 
 /* immutable prop defaults */
-export const DEFAULT_MAX_ZOOM = 2;
+export const DEFAULT_MAX_ZOOM = 4;
 export const DEFAULT_MARGIN = 28;
 export const DEFAULT_CONTAINER_SIZE = 200;
 export const DEFAULT_ZOOM = 0;
@@ -178,6 +178,10 @@ export class ImagePlacer extends React.Component<
   }
 
   componentWillMount() {
+    this.provideImageActions();
+  }
+
+  private provideImageActions() {
     const { onImageActions } = this.props;
     if (onImageActions) {
       /* provide actions which will return current image at current view */
@@ -207,6 +211,7 @@ export class ImagePlacer extends React.Component<
       containerHeight: nextContainerHeight,
       margin: nextMargin,
       src: nextSrc,
+      onImageActions: nextOnImageActions,
     } = nextProps;
 
     const isZoomChange = nextZoom !== undefined && nextZoom !== zoom;
@@ -221,8 +226,7 @@ export class ImagePlacer extends React.Component<
       nextContainerHeight !== currentContainerHeight;
     const isMarginChange =
       nextMargin !== undefined && nextMargin !== currentMargin;
-    const isSrcChanged = typeof nextSrc === 'string' && nextSrc !== currentSrc;
-    const isFileChanged = nextSrc instanceof File && nextSrc !== currentSrc;
+    const isImageAction = typeof nextOnImageActions !== undefined;
 
     const zoomReset = { zoom: 0 };
 
@@ -248,16 +252,20 @@ export class ImagePlacer extends React.Component<
 
     let fileInfo;
 
-    if (isFileChanged) {
+    if (nextSrc instanceof File && nextSrc !== currentSrc) {
       fileInfo = await getFileInfo(nextSrc as File);
     }
 
-    if (isSrcChanged) {
+    if (typeof nextSrc === 'string' && nextSrc !== currentSrc) {
       fileInfo = await getFileInfoFromSrc(nextSrc as string);
     }
 
     if (fileInfo) {
       await this.preprocessFile(fileInfo);
+    }
+
+    if (isImageAction) {
+      this.provideImageActions();
     }
   }
 
@@ -273,6 +281,7 @@ export class ImagePlacer extends React.Component<
       this.imageSourceRect = new Rectangle(width, height);
       this.setSrc(previewInfo.fileInfo);
     } else {
+      /* TODO: i18n https://product-fabric.atlassian.net/browse/MS-1261 */
       this.setState({ errorMessage: 'Cannot load image' });
     }
   }

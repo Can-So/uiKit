@@ -148,7 +148,7 @@ export class Bounds extends Rectangle {
     return new Bounds(this.x, this.y, this.width, this.height);
   }
 
-  map(fn: any): Bounds {
+  map(fn: (value: number) => number): Bounds {
     return new Bounds(fn(this.x), fn(this.y), fn(this.width), fn(this.height));
   }
 
