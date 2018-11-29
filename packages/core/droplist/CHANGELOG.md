@@ -1,5 +1,10 @@
 # @atlaskit/droplist
 
+## 7.0.15
+- [patch] [7fbe95e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7fbe95e):
+
+  - Prevented onOpenChange from being called repeatedly when closed
+
 ## 7.0.14
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

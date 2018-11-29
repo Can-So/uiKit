@@ -1,1 +1,0 @@
-- Prevented onOpenChange from being called repeatedly when closed
