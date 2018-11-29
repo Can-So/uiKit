@@ -1,12 +1,7 @@
 //@flow
 import React, { Component } from 'react';
 import { gridSize } from '@atlaskit/theme';
-import { HashRouter, Route, Switch } from 'react-router-dom';
-import {
-  RouterLink,
-  RouterLinkLeft,
-  RouterLinkRight,
-} from './helpers/LinkComponent';
+import { HashRouter, Link, Route, Switch } from 'react-router-dom';
 import Pagination from '../src';
 
 const pages = [
@@ -26,7 +21,7 @@ const pages = [
 
 const Dashboard = () => (
   <div>
-    <h1>Dashboard page</h1>
+    <h1>Dashboard</h1>
     <PaginationWithSelectPage pageSelected={1} />
   </div>
 );
@@ -43,6 +38,30 @@ const Contact = () => (
   </div>
 );
 
+function renderLink(pageType: string) {
+  return class extends Component<*> {
+    render() {
+      const {
+        ariaLabel,
+        disabled,
+        page,
+        pages,
+        selectedIndex,
+        ...rest
+      } = this.props;
+      let href;
+      if (pageType === 'page') {
+        href = page.href;
+      } else if (pageType === 'previous') {
+        href = selectedIndex > 1 ? pages[selectedIndex - 2].href : '';
+      } else {
+        href = selectedIndex < pages.length ? pages[selectedIndex].href : '';
+      }
+      return disabled ? <div {...rest} /> : <Link {...rest} to={href} />;
+    }
+  };
+}
+
 const PaginationWithSelectPage = ({
   pageSelected,
 }: {
@@ -50,13 +69,14 @@ const PaginationWithSelectPage = ({
 }) => (
   <div style={{ marginTop: `${gridSize() * 3} px` }}>
     <Pagination
+      innerStyles={{ marginTop: '24px' }}
       getPageLabel={page => (typeof page === 'object' ? page.label : page)}
       selectedIndex={pageSelected}
       pages={pages}
       components={{
-        Page: RouterLink,
-        Previous: RouterLinkLeft,
-        Next: RouterLinkRight,
+        Page: renderLink('page'),
+        Previous: renderLink('previous'),
+        Next: renderLink('next'),
       }}
     />
   </div>
