@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
-import { md } from '@atlaskit/docs';
+import { md, code, Props } from '@atlaskit/docs';
 import SectionMessage from '@atlaskit/section-message';
-import { Link } from 'react-router-dom';
 
 export default md`
 ${(
@@ -17,31 +16,23 @@ ${(
   </SectionMessage>
 )}
 
-  ### Migrating existing forms
+This page covers how validation works at both form and field level.
 
-  If you have forms already using Atlaskit form components then you can migrate them relatively easily to
-  use the Form package.
+<a name="field-validation"></a>
+## Field-level validation
 
-  ${(
-    <ol>
-      <li>
-        <Link to="field-components">
-          Check your field component is supported
-        </Link>
-      </li>
-      <li>
-        <Link to="field-components">
-          Wrap your field component in &lt; Field &gt; using the sample code
-          here as a reference
-        </Link>
-      </li>
-      <li>
-        <Link to="validation">
-          Optional: Add validators to your fields and forms
-        </Link>
-      </li>
-    </ol>
-  )}
+The
 
+<a name="form-validation"></a>
+## Form validation
+
+
+${code`
+import Form, { ErrorMessage, HelperMessage, ValidMessage } from '@atlaskit/form';
+import Button from '@atlaskit/button';
+
+const MyField = () => {}
+
+`}
 
 `;

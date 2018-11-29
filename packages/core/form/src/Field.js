@@ -48,7 +48,11 @@ type Props = {
     Object,
   ) => any,
   /* validates the current value of field */
-  validate?: any => string | void | Promise<string | void>,
+  validate?: (
+    value: any,
+    formState: Object,
+    fieldState: Object,
+  ) => string | void | Promise<string | void>,
 };
 
 type State = {
@@ -76,7 +80,8 @@ class FieldInner extends React.Component<Props, State> {
   };
   unregisterField = () => {};
   state = {
-    onChange: () => {},
+    // eslint-disable-next-line no-unused-vars
+    onChange: (e, value) => {},
     onBlur: () => {},
     onFocus: () => {},
     dirty: false,

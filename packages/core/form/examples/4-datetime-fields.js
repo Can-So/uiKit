@@ -38,7 +38,7 @@ export default () => (
     >
       {({ formProps }) => (
         <form {...formProps}>
-          <Field name="DOB" label="Date of Birth">
+          <Field name="DOB" label="Date of Birth" isRequired>
             {({ fieldProps, error }) => (
               <Fragment>
                 <DatePicker
@@ -49,7 +49,7 @@ export default () => (
               </Fragment>
             )}
           </Field>
-          <Field name="preference" label="Appointment preference">
+          <Field name="preference" label="Appointment preference" isRequired>
             {({ fieldProps, error }) => {
               const validationState = error ? 'error' : 'none';
               return (

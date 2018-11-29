@@ -16,49 +16,6 @@ ${(
   </SectionMessage>
 )}
 
-${code`import Form, { Field, CheckboxField } from '@atlaskit/form';`}
-
-This page is the reference for [Form](#form-reference), [Field](#field-reference)
-and [CheckboxField](#checkboxfield-reference) components. These are the three
- main components used to compose a form.
-
-<a name="form-reference"></a>
-## Form
-
-Responsible for managing the state of the form. Provides props to spread onto
-a form element and others to check the form state.
-
-${code`
-import Form from '@atlaskit/form';
-import Button from '@atlaskit/button';
-
-const MyForm = () => (
-  <Form onSubmit={data => console.log('form data', data)}>
-    {({ formProps, dirty, submitting }) => (
-      <form {...formProps}>
-        {/* fields */}
-        <Button
-          type="submit"
-          appearance="primary"
-          isDisabled={!dirty || submitting}
-        >
-          Submit
-        </Button>
-      </form>
-    )}
-  </Form>
-);
-`}
-
-### Form props
-  
-  ${(
-    <Props
-      props={require('!!extract-react-types-loader!../src/Form')}
-      heading=""
-    />
-  )}
-
 <a name="field-reference"></a>
 ## Field
 
@@ -88,7 +45,7 @@ const UsernameField = () => (
 <a name="checkboxfield-reference"></a>
 ## CheckboxField
 
-Checkbox fields are different enough to warrent this a variation of Field.
+Checkbox fields are different enough to warrent this variation of Field.
 By default the value of a CheckboxField will be true or false. When the 
 component is rendered with a \`value\` prop the form value will be an array. 
 The array with contain the \`value\` depending on whether the field is checked.
