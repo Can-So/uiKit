@@ -54,6 +54,10 @@ const NoResultsAdvancedSearchContainer = styled.div`
   margin-top: ${4 * gridSize()}px;
 `;
 
+const BeforePreQueryStateContainer = styled.div`
+  margin-top: ${gridSize()}px;
+`;
+
 export interface Props {
   createAnalyticsEvent?: CreateAnalyticsEventFn;
   linkComponent?: LinkComponent;
@@ -148,7 +152,11 @@ export class JiraQuickSearchContainer extends React.Component<
             />
           </StickyFooter>
         )}
-        renderBeforePreQueryState={() => <AdvancedIssueSearchLink />}
+        renderBeforePreQueryState={() => (
+          <BeforePreQueryStateContainer>
+            <AdvancedIssueSearchLink />
+          </BeforePreQueryStateContainer>
+        )}
         getPreQueryGroups={() => mapRecentResultsToUIGroups(recentItems)}
         getPostQueryGroups={() =>
           mapSearchResultsToUIGroups(searchResults as JiraResultsMap)
