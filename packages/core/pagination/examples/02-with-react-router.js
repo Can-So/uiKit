@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from 'react';
-import { gridSize, math } from '@atlaskit/theme';
+import { gridSize } from '@atlaskit/theme';
 import { HashRouter, Link, Route, Switch } from 'react-router-dom';
 import Pagination from '../src';
 
