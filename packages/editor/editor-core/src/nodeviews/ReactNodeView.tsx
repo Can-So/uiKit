@@ -67,6 +67,7 @@ export default class ReactNodeView implements NodeView {
     // nodeView if DOM structure has nested plain "div"s, it doesn't see the
     // difference between them and it kills the nodeView
     this.domRef.className = `${this.node.type.name}View-content-wrap`;
+    this.domRef.style.boxSizing = 'border-box';
 
     this.renderReactComponent(() =>
       this.render(this.reactComponentProps, this.handleRef),
