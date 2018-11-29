@@ -13,8 +13,10 @@ const cloudId = 'DUMMY-158c8204-ff3b-47c2-adbb-a0906ccc722b';
 
 const Global = ({
   resetNotificationCount,
+  updateIframeUrl,
 }: {
   resetNotificationCount: () => void,
+  updateIframeUrl: () => void,
 }) => (
   <GlobalNavigation
     productIcon={EmojiAtlassianIcon}
@@ -24,6 +26,7 @@ const Global = ({
       // setTimeout is required to let the drawer close animation end in the example.
       setTimeout(resetNotificationCount, 350);
     }}
+    onNotificationDrawerOpen={updateIframeUrl}
     cloudId={cloudId}
   />
 );
@@ -55,6 +58,20 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
     fetchMock.restore();
   }
 
+  updateIframeUrl = () => {
+    // Flow doesn't know how to deal with querySelector
+    // Therefore casting the return value to HTMLIFrameElement
+    const iFrame = ((document.querySelector(
+      'iFrame[title="Notifications"',
+    ): any): HTMLIFrameElement);
+
+    if (iFrame) {
+      // Notification URL is unreachable from the examples.
+      // Hence setting it to root
+      iFrame.src = '/';
+    }
+  };
+
   resetNotificationCount = () => {
     this.setState({
       count: 0,
@@ -72,7 +89,10 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
       <NavigationProvider>
         <LayoutManager
           globalNavigation={() => (
-            <Global resetNotificationCount={this.resetNotificationCount} />
+            <Global
+              updateIframeUrl={this.updateIframeUrl}
+              resetNotificationCount={this.resetNotificationCount}
+            />
           )}
           productNavigation={() => null}
           containerNavigation={() => null}
