@@ -96,7 +96,7 @@ Next, to install packages, we use bolt, just calling it:
 bolt
 ```
 
-Then you can run the examples for an individual pakckage
+Then you can run the examples for an individual package
 ```sh
 yarn run start:<package-name>
 ```
