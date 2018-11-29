@@ -1,5 +1,10 @@
 # @atlaskit/color-picker
 
+## 0.2.0
+- [minor] [60fb1eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60fb1eb):
+
+  - Add popperProps property to allow consumers to change menu placement
+
 ## 0.1.2
 - [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
 

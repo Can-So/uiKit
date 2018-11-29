@@ -1,5 +1,10 @@
 # @atlaskit/profilecard
 
+## 6.1.0
+- [minor] [a2da489](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2da489):
+
+  - - wrap profile card in IntlProvider and support i18n
+
 ## 6.0.3
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

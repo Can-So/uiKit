@@ -43,6 +43,8 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
     analyticsData: {},
   };
 
+  state = { isMouseSelected: false };
+
   registerResult() {
     const { context } = this.props;
     context.registerResult(this);
@@ -92,12 +94,19 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
       resultId: this.props.resultId,
       type: this.props.type,
     });
+    this.setState({ isMouseSelected: true });
+  };
+
+  handleMouseLeave = e => {
+    this.props.context.onMouseLeave();
+    this.setState({ isMouseSelected: false });
   };
 
   render() {
     const {
       caption,
       elemAfter,
+      selectedIcon,
       href,
       target,
       icon,
@@ -107,6 +116,8 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
       resultId,
       context,
     } = this.props;
+
+    const { isMouseSelected } = this.state;
 
     return (
       <SelectedResultIdContext.Consumer>
@@ -120,10 +131,12 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
             isSelected={resultId === selectedResultId}
             onClick={this.handleClick}
             onMouseEnter={this.handleMouseEnter}
-            onMouseLeave={context.onMouseLeave}
+            onMouseLeave={this.handleMouseLeave}
+            isMouseSelected={isMouseSelected}
             subText={subText}
             text={text}
             textAfter={elemAfter}
+            selectedIcon={selectedIcon}
             linkComponent={context.linkComponent}
           />
         )}
