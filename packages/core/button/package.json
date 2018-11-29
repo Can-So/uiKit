@@ -30,7 +30,8 @@
     "@atlaskit/theme": "^6.2.1",
     "@atlaskit/type-helpers": "^2.0.0",
     "@babel/runtime": "^7.0.0",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "tslib": "^1.8.0"
   },
   "peerDependencies": {
     "react": "^16.4.0",
