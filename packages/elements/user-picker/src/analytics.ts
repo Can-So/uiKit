@@ -1,6 +1,6 @@
+import { createAndFireEvent } from '@atlaskit/analytics-next';
 import {
   AnalyticsEventPayload,
-  createAndFireEvent,
   CreateAndFireEventFunction,
   CreateUIAnalyticsEventSignature,
 } from '@atlaskit/analytics-next-types';
