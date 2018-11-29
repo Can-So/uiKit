@@ -49,7 +49,7 @@ We have created a codemod which aims to reduce the amount of busy work to upgrad
 - **renderEllipsis**: A function that returns a react node to be rendered instead of default ellipsis.
 - **innerStyles**: A styles object that is spread on the styles on the div wrapping pagination. Ideal for adding margins as required by the ADG guideline.
 
-### 🚨 Depcrecated Props:
+### 🚨 Deprecated Props:
 
 - **defaultValue**: Please use ***defaultSelectedIndex*** prop instead
 - **total**: Please use ***pages*** prop and pass in array of pages instead
