@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/textarea",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Textarea Component",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^10.0.0",
+    "@atlaskit/button": "^10.0.3",
     "@atlaskit/docs": "^5.2.1",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-dom": "^16.4.2"

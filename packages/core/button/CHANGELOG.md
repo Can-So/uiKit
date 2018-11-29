@@ -1,5 +1,12 @@
 # @atlaskit/button
 
+## 10.0.3
+- [patch] [76a8f1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76a8f1c):
+
+  - Convert @atlaskit/textarea to Typescript
+    - Dist paths have changed, if you are importing by exact file path you will need to update your imports `import '@atlaskit/button/dist/es5/components/ButtonGroup'`
+    - Flow types are not present any more, Typescript definitions are shipped instead
+
 ## 10.0.2
 - [patch] [8f89287](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8f89287):
 
