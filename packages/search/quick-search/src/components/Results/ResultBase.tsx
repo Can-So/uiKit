@@ -90,7 +90,6 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
   };
 
   handleMouseEnter = () => {
-    debugger;
     this.props.context.onMouseEnter({
       resultId: this.props.resultId,
       type: this.props.type,

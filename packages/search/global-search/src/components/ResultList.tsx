@@ -15,6 +15,7 @@ import {
   ConfluenceObjectResult,
   JiraProjectType,
 } from '../model/Result';
+import { SelectedIcon } from './styled';
 import { getAvatarForConfluenceObjectResult } from '../util/confluence-avatar-util';
 import { getDefaultAvatar } from '../util/jira-avatar-util';
 import DarkReturn from '../assets/DarkReturn';
@@ -31,6 +32,12 @@ const extractAvatarData = (jiraResult: JiraResult) =>
     : {
         avatar: getDefaultAvatar(jiraResult.contentType),
       };
+
+const selectedIcon = (
+  <SelectedIcon>
+    <DarkReturn />
+  </SelectedIcon>
+);
 
 const getI18nJiraContainerName = (
   projectType: JiraProjectType,
@@ -94,7 +101,7 @@ export default class ResultList extends React.Component<Props> {
               containerName={confluenceResult.containerName}
               avatar={getAvatarForConfluenceObjectResult(confluenceResult)}
               analyticsData={analyticsData}
-              selectedIcon={<DarkReturn />}
+              selectedIcon={selectedIcon}
             />
           );
         }
@@ -116,7 +123,7 @@ export default class ResultList extends React.Component<Props> {
               subText={containerNameElement}
               {...avatarData}
               analyticsData={analyticsData}
-              selectedIcon={<DarkReturn />}
+              selectedIcon={selectedIcon}
             />
           );
         }
@@ -135,7 +142,7 @@ export default class ResultList extends React.Component<Props> {
               containerName={jiraResult.containerName}
               {...avatarData}
               analyticsData={analyticsData}
-              selectedIcon={<DarkReturn />}
+              selectedIcon={selectedIcon}
             />
           );
         }
@@ -150,7 +157,7 @@ export default class ResultList extends React.Component<Props> {
               type={containerResult.analyticsType}
               avatarUrl={containerResult.avatarUrl}
               analyticsData={analyticsData}
-              selectedIcon={<DarkReturn />}
+              selectedIcon={selectedIcon}
             />
           );
         }
@@ -168,7 +175,7 @@ export default class ResultList extends React.Component<Props> {
               mentionName={personResult.mentionName}
               presenceMessage={personResult.presenceMessage}
               analyticsData={analyticsData}
-              selectedIcon={<DarkReturn />}
+              selectedIcon={selectedIcon}
               target="_blank"
             />
           );

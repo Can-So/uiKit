@@ -25,7 +25,7 @@ type Props = {
   isCompact?: boolean;
   /** Set whether the item should be highlighted as selected. Selected items have a different background color. */
   isSelected?: boolean;
-  /** Set whether the item has been highlighted using mouse navigation. */
+  /** Set whether the item has been highlighted using mouse navigation. Mouse selected items will not display the selectedIcon. */
   isMouseSelected?: boolean;
   /** Function to be called on click. This is passed down to a custom link component, if one is provided.  */
   onClick?(e: MouseEvent): void;
@@ -59,7 +59,6 @@ class ResultItem extends React.PureComponent<Props> {
     const textAfter = this.props.textAfter ? (
       <ResultItemTextAfter>{this.props.textAfter}</ResultItemTextAfter>
     ) : null;
-    debugger;
     const after =
       this.props.textAfter || this.props.selectedIcon ? (
         <ResultItemAfterWrapper>
