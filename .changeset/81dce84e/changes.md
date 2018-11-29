@@ -1,0 +1,1 @@
+- Added icon on selected to quick search results
