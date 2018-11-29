@@ -1,10 +1,10 @@
 //@flow
 import React, { Component } from 'react';
-import { gridSize } from '@atlaskit/theme';
+import { gridSize, math } from '@atlaskit/theme';
 import { HashRouter, Link, Route, Switch } from 'react-router-dom';
 import Pagination from '../src';
 
-const pages = [
+const PAGES = [
   {
     href: '/',
     label: '1',
@@ -57,6 +57,13 @@ function renderLink(pageType: string) {
       } else {
         href = selectedIndex < pages.length ? pages[selectedIndex].href : '';
       }
+      // We need this styling on the navigator since when using icons as children we need extra padding
+      if (pageType !== 'page') {
+        rest.style = {
+          paddingLeft: `${gridSize() / 2}px`,
+          paddingRight: `${gridSize() / 2}px`,
+        };
+      }
       return disabled ? <div {...rest} /> : <Link {...rest} to={href} />;
     }
   };
@@ -72,7 +79,7 @@ const PaginationWithSelectPage = ({
       innerStyles={{ marginTop: '24px' }}
       getPageLabel={page => (typeof page === 'object' ? page.label : page)}
       selectedIndex={pageSelected}
-      pages={pages}
+      pages={PAGES}
       components={{
         Page: renderLink('page'),
         Previous: renderLink('previous'),
@@ -82,6 +89,7 @@ const PaginationWithSelectPage = ({
   </div>
 );
 
+// eslint-disable-next-line react/no-multi-comp
 export default class WithReactRouterLink extends Component<{}> {
   render() {
     return (
