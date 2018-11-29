@@ -439,7 +439,7 @@ describe('EmojiTypeAhead', () => {
       waitUntil(() => doneLoading(component)).then(() => {
         expect(
           itemsVisibleCount(component) > 1 &&
-            itemsVisibleCount(component) % 2 == 1,
+            itemsVisibleCount(component) % 2 === 1,
           'An odd number of items match',
         ).to.equal(true);
         expect(onSelection.callCount, 'selected 0').to.equal(0);
