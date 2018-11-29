@@ -56,10 +56,15 @@ export type Props = {
    * none: explicitly disallow resizing on the textarea.
    */
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none';
-  /** The theme function TextArea consumes to derive theming constants for use in styling its components */
+  /**
+   * The theme function TextArea consumes to derive theming constants for use in styling its components
+   */
   theme?: any;
-  /** Ref used to access the textarea dom element. NOTE we expose this via forwardRef,
-   so you can also use the ref prop of this component to the same effect. */
+  /**
+   * Ref used to access the textarea dom element. NOTE we expose this via
+   * forwardRef, so you can also use the ref prop of this component to the
+   * same effect.
+   */
   forwardedRef?: (e: HTMLTextAreaElement | null) => void;
 };
 type State = {
