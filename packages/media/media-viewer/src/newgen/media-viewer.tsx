@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Context } from '@atlaskit/media-core';
+import { IntlProvider, intlShape } from 'react-intl';
 import { Identifier, ItemSource, MediaViewerFeatureFlags } from './domain';
 import { List } from './list';
 import { Collection } from './collection';
@@ -18,15 +19,25 @@ export type Props = Readonly<{
 }>;
 
 export class MediaViewer extends React.Component<Props, {}> {
+  static contextTypes = {
+    intl: intlShape,
+  };
+
   render() {
     const { onClose } = this.props;
-    return (
+    const content = (
       <ThemeProvider theme={theme}>
         <Blanket>
           {onClose && <Shortcut keyCode={27} handler={onClose} />}
           <Content onClose={onClose}>{this.renderContent()}</Content>
         </Blanket>
       </ThemeProvider>
+    );
+
+    return this.context.intl ? (
+      content
+    ) : (
+      <IntlProvider locale="en">{content}</IntlProvider>
     );
   }
 

@@ -1,5 +1,10 @@
 # @atlaskit/field-range
 
+## 5.0.10
+- [patch] [ebc1e9d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebc1e9d):
+
+  - Bump to fix the range in Section message
+
 ## 5.0.9
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

@@ -1,5 +1,18 @@
 # @atlaskit/media-test-helpers
 
+## 18.3.2
+- [patch] [5a6de24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6de24):
+
+  - translate component properties in media components
+
+## 18.3.1
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/select@6.1.9
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-ui@7.6.2
+  - @atlaskit/icon@15.0.0
+
 ## 18.3.0
 - [minor] [fa7d4c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa7d4c5):
 

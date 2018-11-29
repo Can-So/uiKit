@@ -15,6 +15,7 @@ import { toggleFullscreen } from '../../../newgen/viewers/video/fullscreen';
 import { TimeRange } from '../../../newgen/viewers/video/TimeRange';
 import { CurrentTime } from '../../../newgen/viewers/video/styled';
 import { Shortcut } from '../../../newgen/shortcut';
+import { fakeIntl } from '@atlaskit/media-test-helpers';
 
 describe('<CustomVideo />', () => {
   const setup = (props?: Partial<CustomVideoProps>) => {
@@ -24,6 +25,7 @@ describe('<CustomVideo />', () => {
         isAutoPlay={true}
         isHDAvailable={false}
         src="video-src"
+        intl={fakeIntl}
         {...props}
       />,
     );

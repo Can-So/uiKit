@@ -4,6 +4,7 @@ import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
 
 export type RowCellType = {
   key?: string | number,
+  colSpan?: number,
   content: Node,
 };
 

@@ -1,5 +1,10 @@
 # @atlaskit/util-data-test
 
+## 10.0.22
+- [patch] [10a728e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/10a728e):
+
+  - FS-3208 only display 'name' if same value as 'publicName'
+
 ## 10.0.21
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/emoji@47.0.0

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/onboarding",
-  "version": "6.1.10",
+  "version": "6.1.11",
   "description": "Highlight elements of the UI to the user and display a complementary dialog.",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -19,10 +19,10 @@
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
     "@atlaskit/analytics-next": "^3.1.1",
-    "@atlaskit/button": "^10.0.0",
-    "@atlaskit/modal-dialog": "^7.0.12",
+    "@atlaskit/button": "^10.0.1",
+    "@atlaskit/modal-dialog": "^7.0.13",
     "@atlaskit/popper": "^0.3.2",
-    "@atlaskit/portal": "^0.0.15",
+    "@atlaskit/portal": "^0.0.16",
     "@atlaskit/theme": "^6.2.1",
     "@babel/runtime": "^7.0.0",
     "memoize-one": "^3.0.1",
@@ -39,8 +39,8 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^5.2.1",
-    "@atlaskit/icon": "^14.6.1",
+    "@atlaskit/docs": "^5.2.2",
+    "@atlaskit/icon": "^15.0.0",
     "@atlaskit/progress-indicator": "^5.0.9",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",

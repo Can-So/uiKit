@@ -128,7 +128,7 @@ class Droplist extends Component<Props, void> {
   triggerRef: HTMLElement;
 
   handleEsc = (event: KeyboardEvent): void => {
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' && this.props.isOpen) {
       this.close(event);
     }
   };

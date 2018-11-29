@@ -1,5 +1,12 @@
 # @atlaskit/tag
 
+## 6.1.1
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/icon@15.0.0
+
 ## 6.1.0
 - [minor] [925de1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/925de1a):
 

@@ -2,6 +2,10 @@ import * as React from 'react';
 import Context from '../Context';
 import { Client, ObjectState } from '../Client';
 import { v4 } from 'uuid';
+import {
+  BlockCardErroredView,
+  InlineCardErroredView,
+} from '@atlaskit/media-ui';
 
 export interface WithObjectRenderProps {
   state: ObjectState;
@@ -11,7 +15,7 @@ export interface WithObjectRenderProps {
 interface InnerWithObjectProps {
   client: Client;
   url: string;
-  children: (props: WithObjectRenderProps) => React.ReactNode;
+  children: (renderProps: WithObjectRenderProps) => React.ReactNode;
 }
 
 interface InnerWithObjectState {
@@ -27,15 +31,19 @@ class InnerWithObject extends React.Component<
 > {
   state: InnerWithObjectState = {
     uuid: v4(),
-    cardState: {
-      status: 'resolving',
-      services: [],
-    },
+    cardState: { status: 'pending' },
   };
 
   reload = () => {
-    const { client, url } = this.props;
-    client.reload(url, this.state.cardState.definitionId);
+    const { cardState } = this.state;
+    if (
+      cardState.status === 'errored' ||
+      cardState.status === 'unauthorized' ||
+      cardState.status === 'forbidden'
+    ) {
+      const { client, url } = this.props;
+      client.reload(url, cardState.definitionId);
+    }
   };
 
   updateState = (incoming: [ObjectState | null, boolean]) => {
@@ -74,7 +82,6 @@ class InnerWithObject extends React.Component<
   componentWillUnmount() {
     const { client, url } = this.props;
     const { uuid } = this.state;
-
     client.deregister(url, uuid);
   }
 
@@ -87,21 +94,44 @@ class InnerWithObject extends React.Component<
 
 export interface WithObjectProps {
   client?: Client;
+  isSelected?: boolean;
+  appearance: 'block' | 'inline';
   url: string;
   children: (props: WithObjectRenderProps) => React.ReactNode;
 }
 
 export function WithObject(props: WithObjectProps) {
-  const { client: clientFromProps, url, children } = props;
+  const {
+    client: clientFromProps,
+    url,
+    children,
+    isSelected,
+    appearance,
+  } = props;
   return (
     <Context.Consumer>
       {clientFromContext => {
-        // TODO: Remove the last fallback - this is a temporary workaround for React context not penetrating the <Editor />
-        //       https://product-fabric.atlassian.net/browse/ED-5565
         const client = clientFromProps || clientFromContext;
         if (!client) {
-          throw new Error(
-            '@atlaskit/smart-card: No client provided. Provide a client like <Card client={new Client()} url=""/> or <Provider client={new Client()}><Card url=""/></Provider>.',
+          // tslint:disable-next-line:no-console
+          console.error(
+            `No Smart Card client provided. Provide a client via prop <Card client={new Client()} /> or by wrapping with a provider <SmartCardProvider><Card /></SmartCardProvider>.'`,
+          );
+
+          return appearance === 'inline' ? (
+            <InlineCardErroredView
+              url={url}
+              isSelected={isSelected}
+              message="Smart Card provider missing"
+              onClick={() => window.open(url)}
+            />
+          ) : (
+            <BlockCardErroredView
+              url={url}
+              isSelected={isSelected}
+              message="Smart Card provider missing"
+              onClick={() => window.open(url)}
+            />
           );
         }
         return (

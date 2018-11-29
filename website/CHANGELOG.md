@@ -1,5 +1,23 @@
 # @atlaskit/website
 
+## 4.1.25
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/flag@9.1.6
+  - @atlaskit/inline-dialog@9.0.11
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/navigation@33.3.6
+  - @atlaskit/single-select@6.0.9
+  - @atlaskit/tag@6.1.1
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-filmstrip@19.0.2
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/quick-search@5.1.2
+  - @atlaskit/icon-object@3.0.0
+  - @atlaskit/icon@15.0.0
+
 ## 4.1.24
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

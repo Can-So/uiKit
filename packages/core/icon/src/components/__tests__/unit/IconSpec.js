@@ -183,20 +183,6 @@ describe(name, () => {
       });
     });
 
-    describe('onClick property', () => {
-      it('should set a click handler', () => {
-        const handler = jest.fn().mockImplementation(() => {}); // eslint-disable-line no-undef
-
-        const wrapper = mount(
-          <Icon glyph={empty} label="My icon" onClick={handler} />,
-        );
-        expect(wrapper.prop('onClick')).toBe(handler);
-
-        wrapper.find('span').simulate('click');
-        expect(handler.mock.calls.length).toBe(1);
-      });
-    });
-
     describe('Svg', () => {
       it('should not be able to click on the svg', () => {
         const handler = jest.fn().mockImplementation(() => {});

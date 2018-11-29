@@ -5,7 +5,7 @@ import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { withTheme, ThemeProvider } from 'styled-components';
 import {
   normalizeLanguage,
-  type ADFSupportedLanguages,
+  type SupportedLanguages,
 } from './supportedLanguages';
 import { type Theme, type ThemeProps, applyTheme } from './themes/themeBuilder';
 
@@ -15,7 +15,7 @@ type CodeProps = {
   /** The element or custom react component to use in place of the default code tag */
   codeTagProps?: {},
   /** The language in which the code is written */
-  language: ADFSupportedLanguages | string,
+  language: SupportedLanguages | string,
   /** The style object to apply to the container that shows line number */
   lineNumberContainerStyle: {},
   /** The element or custom react component to use in place of the default span tag */
