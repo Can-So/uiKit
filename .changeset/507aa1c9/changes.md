@@ -1,0 +1,1 @@
+- Revert box-sizing change for node views
