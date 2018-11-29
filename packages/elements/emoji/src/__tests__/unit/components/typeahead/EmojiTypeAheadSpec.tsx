@@ -429,7 +429,7 @@ describe('EmojiTypeAhead', () => {
     );
   });
 
-  it('should not fire onSelection if a query ends in a colon and multiple emoji have an exact shortName match', () => {
+  it('should not fire onSelection if a query ends in a colon and an odd number of emoji have an exact shortName match', () => {
     const onSelection = sinon.spy();
 
     return setupTypeAhead({
@@ -438,8 +438,9 @@ describe('EmojiTypeAhead', () => {
     } as Props).then(component =>
       waitUntil(() => doneLoading(component)).then(() => {
         expect(
-          itemsVisibleCount(component) > 2,
-          'Multiple items match',
+          itemsVisibleCount(component) > 1 &&
+            itemsVisibleCount(component) % 2 == 1,
+          'An odd number of items match',
         ).to.equal(true);
         expect(onSelection.callCount, 'selected 0').to.equal(0);
       }),
