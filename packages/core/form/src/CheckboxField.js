@@ -29,61 +29,64 @@ type Props = {
   label?: Node,
   /* The name of the field */
   name: string,
-  /* The value of the checkbox. This will be the value used when the checkbox is checked */
+  /* The value of the checkbox. Used as the value in the form state when the checkbox is checked */
   value?: string,
 };
 
-const CheckboxField = ({
-  children,
-  defaultIsChecked = false,
-  value,
-  ...rest
-}: Props) => {
-  return value !== undefined ? (
-    <Field
-      {...rest}
-      defaultValue={(currentValue = []) =>
-        defaultIsChecked ? [...currentValue, value] : currentValue
-      }
-      transform={(event: SyntheticInputEvent<>, currentValue) =>
-        event.target.checked
-          ? [...currentValue, value]
-          : currentValue.filter(v => v !== value)
-      }
-    >
-      {({ fieldProps: { value: fieldValue, ...otherFieldProps }, ...others }) =>
-        children({
-          fieldProps: {
-            ...otherFieldProps,
-            isChecked: !!fieldValue.find(v => v === value),
-            value,
-          },
-          ...others,
-        })
-      }
-    </Field>
-  ) : (
-    <Field
-      {...rest}
-      defaultValue={defaultIsChecked}
-      transform={(event: SyntheticInputEvent<>) => event.target.checked}
-    >
-      {({ fieldProps: { value: fieldValue, ...otherFieldProps }, ...others }) =>
-        children({
-          fieldProps: {
-            ...otherFieldProps,
-            isChecked: fieldValue,
-            value,
-          },
-          ...others,
-        })
-      }
-    </Field>
-  );
-};
-
-CheckboxField.defaultProps = {
-  defaultIsChecked: false,
-};
+class CheckboxField extends React.Component<Props> {
+  static defaultProps = {
+    defaultIsChecked: false,
+  };
+  render() {
+    const { children, defaultIsChecked = false, value, ...rest } = this.props;
+    return value !== undefined ? (
+      <Field
+        {...rest}
+        defaultValue={(currentValue = []) =>
+          defaultIsChecked ? [...currentValue, value] : currentValue
+        }
+        transform={(event: SyntheticInputEvent<>, currentValue) =>
+          event.target.checked
+            ? [...currentValue, value]
+            : currentValue.filter(v => v !== value)
+        }
+      >
+        {({
+          fieldProps: { value: fieldValue, ...otherFieldProps },
+          ...others
+        }) =>
+          children({
+            fieldProps: {
+              ...otherFieldProps,
+              isChecked: !!fieldValue.find(v => v === value),
+              value,
+            },
+            ...others,
+          })
+        }
+      </Field>
+    ) : (
+      <Field
+        {...rest}
+        defaultValue={defaultIsChecked}
+        transform={(event: SyntheticInputEvent<>) => event.target.checked}
+      >
+        {({
+          fieldProps: { value: fieldValue, ...otherFieldProps },
+          ...others
+        }) =>
+          children({
+            fieldProps: {
+              ...otherFieldProps,
+              isChecked: fieldValue,
+              value,
+            },
+            ...others,
+          })
+        }
+      </Field>
+    );
+  }
+}
 
 export default CheckboxField;

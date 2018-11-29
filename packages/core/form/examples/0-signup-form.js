@@ -1,12 +1,11 @@
 // @flow
 import React from 'react';
-import FieldText from '@atlaskit/field-text';
+import TextField from '@atlaskit/textfield';
 import Button, { ButtonGroup } from '@atlaskit/button';
 import { Checkbox } from '@atlaskit/checkbox';
 import Form, {
   CheckboxField,
   Field,
-  FormHeader,
   FormFooter,
   HelperMessage,
   ErrorMessage,
@@ -31,11 +30,10 @@ export default () => (
     >
       {({ formProps, dirty, submitting }) => (
         <form {...formProps}>
-          <FormHeader title="Sign up" />
           <Field name="username" label="User name" isRequired defaultValue="">
             {({ fieldProps, error }) => (
               <>
-                <FieldText shouldFitContainer isLabelHidden {...fieldProps} />
+                <TextField {...fieldProps} />
                 {!error && (
                   <HelperMessage>
                     You can use letters, numbers & periods.
@@ -58,12 +56,7 @@ export default () => (
           >
             {({ fieldProps, error }) => (
               <>
-                <FieldText
-                  shouldFitContainer
-                  isLabelHidden
-                  type="password"
-                  {...fieldProps}
-                />
+                <TextField type="password" {...fieldProps} />
                 {!error && (
                   <HelperMessage>
                     Use 8 or more characters with a mix of letters, numbers &

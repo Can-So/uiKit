@@ -25,7 +25,7 @@ type Meta = {
 };
 
 type Props = {
-  /* Children to render in the field. Called with form information. */
+  /* Children to render in the field. Called with props for the field component and other information about the field. */
   children: ({ fieldProps: FieldProps, error: any, meta: Meta }) => Node,
   /* The default value of the field. If a function is provided it is called with the current default value of the field. */
   defaultValue: any,

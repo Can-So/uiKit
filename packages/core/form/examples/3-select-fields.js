@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import Select from '@atlaskit/select';
 import Button from '@atlaskit/button';
-import Form, { Field, FormFooter, ErrorMessage, HelperMessage } from '../src';
+import Form, { Field, FormFooter, ErrorMessage } from '../src';
 
 const colors = [
   { label: 'blue', value: 'blue' },
