@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/mention",
-  "version": "15.1.4",
+  "version": "15.1.5",
   "config": {
     "access": "public"
   },
@@ -11,12 +11,7 @@
   "atlaskit:src": "src/index.ts",
   "sideEffects": false,
   "files": [
-    "dist/es5/**/*.js",
-    "dist/es5/**/*.d.ts",
-    "dist/es5/**/*.json",
-    "dist/es2015/**/*.js",
-    "dist/es2015/**/*.d.ts",
-    "dist/es2015/**/*.json",
+    "dist",
     "src"
   ],
   "dependencies": {

@@ -1,5 +1,10 @@
 # @atlaskit/mention
 
+## 15.1.5
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
 ## 15.1.4
 - [patch] [01edbde](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01edbde):
 
