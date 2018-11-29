@@ -96,10 +96,8 @@ Next, to install packages, we use bolt, just calling it:
 bolt
 ```
 
-Then you can run the examples for an individual package
-```sh
-yarn run start:<package-name>
-```
+Then you can run the examples with `yarn start`. Check `package.json` for more commands to start specific package examples.
+
 
 For contributing back, check out our [contribution guide](http://atlaskit.atlassian.com/docs/guides/contributing)
 
