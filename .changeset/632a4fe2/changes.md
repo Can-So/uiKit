@@ -1,1 +1,0 @@
-- ED-5584: Capture emoji requests for native processing on iOS only.

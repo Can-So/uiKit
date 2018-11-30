@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.4.0
+- [minor] [008c694](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/008c694):
+
+  - ED-5584: Capture emoji requests for native processing on iOS only.
+
 ## 6.3.4
 - [patch] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
 
