@@ -80,7 +80,8 @@ async function copyFile({
   replaceFileId,
   occurrenceKey,
 }: CopyFileParams): Promise<SendUploadEventAction> {
-  const { deferredIdUpfronts, tenantContext } = store.getState();
+  const { deferredIdUpfronts, tenantContext, config } = store.getState();
+  const collection = config.uploadParams && config.uploadParams.collection;
   const deferred = deferredIdUpfronts[sourceFile.id];
   const mediaStore = new MediaStore({
     authProvider: tenantContext.config.authProvider,
@@ -89,7 +90,7 @@ async function copyFile({
     sourceFile,
   };
   const params: MediaStoreCopyFileWithTokenParams = {
-    collection: '', // TODO [MS-677] pass tenant collection name
+    collection,
     replaceFileId: replaceFileId ? await replaceFileId : undefined,
     occurrenceKey,
   };
@@ -120,11 +121,7 @@ async function copyFile({
       );
       const auth = await tenantContext.config.authProvider();
       // TODO [MS-725]: replace by context.getFile
-      return fetcher.pollFile(
-        auth,
-        publicId,
-        '', // TODO [MS-677] pass tenant collection name
-      );
+      return fetcher.pollFile(auth, publicId, collection);
     })
     .then(processedDestinationFile => {
       return store.dispatch(
