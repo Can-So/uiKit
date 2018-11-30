@@ -1,5 +1,10 @@
 # @atlaskit/emoji
 
+## 47.0.4
+- [patch] [90c4702](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90c4702):
+
+  - FS-1734 Removed the try it out section from Emoji and Mentions documentation pages to match other pages. The section only contained a link to the same page, so was essentially redundant and potentially confusing.
+
 ## 47.0.3
 - [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
 
