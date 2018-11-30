@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 22.2.1
+- [patch] [126b7b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/126b7b0):
+
+  - fix: Inline marks do not match between editor and renderer
+
 ## 22.2.0
 - [minor] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
 
