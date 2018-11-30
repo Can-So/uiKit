@@ -1,5 +1,10 @@
 # @atlaskit/emoji
 
+## 47.0.5
+- [patch] [31ac424](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/31ac424):
+
+  - FS-1596 Changed sizes of example emojis in test00.
+
 ## 47.0.4
 - [patch] [90c4702](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90c4702):
 
