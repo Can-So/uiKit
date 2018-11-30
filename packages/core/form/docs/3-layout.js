@@ -16,7 +16,6 @@ ${(
   </SectionMessage>
 )}
 
-<a name="form-layout"></a>
 ## FormHeader, FormSection & FormFooter
 
 These components are can be used to help layout your form. They provide

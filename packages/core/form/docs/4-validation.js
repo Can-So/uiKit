@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, code, Props } from '@atlaskit/docs';
+import { md, code, Example } from '@atlaskit/docs';
 import SectionMessage from '@atlaskit/section-message';
 
 export default md`
@@ -16,12 +16,24 @@ ${(
   </SectionMessage>
 )}
 
-This page covers how validation works at both form and field level.
+This page covers validation for fields and form submission. Below is an example
+of a field with both front-end and back-end validation.
+
+${(
+  <Example
+    packageName="@atlaskit/form"
+    Component={require('../examples/6-validation').default}
+    title="Field validation"
+    source={require('!!raw-loader!../examples/6-validation')}
+  />
+)}
+  
 
 <a name="field-validation"></a>
-## Field-level validation
 
-A field's value can be validated by using the "validate" prop. This prop accepts
+## Field-level validation [#](#field-validation)
+
+A field's value can be validated by using the \`validate\` prop. This prop accepts
 a function that is called whenever a field value changes. The validation function
 gets passed the current field value and form state. If the validation fails, 
 return the error. Otherwise, return undefined.
@@ -69,8 +81,10 @@ const UsernameField = () => {
 If the validation requires an async check the validation function can a Promise. Note
 that the promise should **resolve** the error rather than reject with the error.
 
+
 <a name="submission-validation"></a>
-## Submission validation
+
+## Submission validation [#](#submission-validation)
 
 When the form gets submitted, the current state gets passed to the onSubmit handler.
 You communicate submission errors in a similar way to field-level validation. 
@@ -89,7 +103,9 @@ import createUser from './api/createUser';
 const MyForm = () => (
   <Form
     onSubmit={data =>
-      createUser(data).catch(err => ({ [err.field]: err.value }))
+      createUser(data)
+        .then(ok => undefined)
+        .catch(err => ({ [err.field]: err.value }))
     }
   >
     {({ formProps }) => (

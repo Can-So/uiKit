@@ -93,19 +93,15 @@ const MyForm = () => (
 ${(
   <ul>
     <li>
-      <Link to="form/docs/components">
-        Learn more about Form and Field components
-      </Link>
+      <Link to="form/docs/fields">Learn more about and Field components</Link>
     </li>
     <li>
-      <Link to="form/docs/visual-components">
-        Browse the list of visual helper components
-      </Link>
-    </li>
-    <li>
-      <Link to="form/docs/migrating">
+      <Link to="form/docs/validation">
         See how Form and Field validation works
       </Link>
+    </li>
+    <li>
+      <Link to="form/docs/layout">Browse the list of layout components</Link>
     </li>
   </ul>
 )}

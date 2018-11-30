@@ -17,7 +17,8 @@ ${(
 )}
 
 <a name="field-reference"></a>
-## Field
+
+## Field [#](#field-reference)
 
 Each Field component is an entry in the form state. Passes down props to be spread
 onto the inner component as well as information about the field state.
@@ -43,7 +44,8 @@ const UsernameField = () => (
   )}
 
 <a name="checkboxfield-reference"></a>
-## CheckboxField
+
+## CheckboxField [#](#checkboxfield-reference)
 
 Checkbox fields are different enough to warrent this variation of Field.
 By default the value of a CheckboxField will be true or false. When the 
