@@ -421,4 +421,27 @@ describe('gap-cursor', () => {
       });
     });
   });
+
+  describe('when hit backspace at the start of the node on the left', () => {
+    it('should put gapcursor on the right of the previous node', () => {
+      const { editorView } = editor(
+        doc(
+          blockNodes['decisionList'](),
+          blockNodes['taskList']({ selected: true }),
+        ),
+      );
+      sendKeyToPm(editorView, 'ArrowLeft');
+      expect(editorView.state.selection instanceof GapCursorSelection).toBe(
+        true,
+      );
+      expect((editorView.state.selection as GapCursorSelection).side).toEqual(
+        Side.LEFT,
+      );
+      sendKeyToPm(editorView, 'Backspace');
+      expect((editorView.state.selection as GapCursorSelection).side).toEqual(
+        Side.RIGHT,
+      );
+      editorView.destroy();
+    });
+  });
 });
