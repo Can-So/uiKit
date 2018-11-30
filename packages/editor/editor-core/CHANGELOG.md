@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.2.2
+- [patch] [1668ce3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1668ce3):
+
+  - Wrap kitchen sink in smart card provider.
+
 ## 90.2.1
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3
