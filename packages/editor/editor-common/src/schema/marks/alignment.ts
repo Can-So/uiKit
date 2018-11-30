@@ -1,7 +1,15 @@
 import { MarkSpec } from 'prosemirror-model';
+import { ALIGNMENT, INDENTATION } from '../groups';
+
+/** TODO: Flip these positions for RTL */
+export const alignmentPositionMap = {
+  end: 'right',
+  right: 'end',
+  center: 'center',
+};
 
 export interface AlignmentAttributes {
-  align: 'start' | 'center' | 'end';
+  align: 'center' | 'end';
 }
 
 /**
@@ -14,24 +22,29 @@ export interface AlignmentMarkDefinition {
 }
 
 export const alignment: MarkSpec = {
+  excludes: `alignment ${INDENTATION}`,
+  group: ALIGNMENT,
   attrs: {
-    align: {
-      default: 'start',
-    },
+    align: {},
   },
   parseDOM: [
     {
+      tag: 'div.fabric-editor-block-mark',
       getAttrs: (dom: Element) => {
-        return {
-          align: dom.getAttribute('align'),
-        };
+        const align = dom.getAttribute('data-align');
+        return align ? { align } : false;
       },
     },
   ],
   toDOM(mark) {
     return [
       'div',
-      { class: `align-${mark.attrs.align}`, 'data-align': mark.attrs.align },
+      {
+        class: `fabric-editor-block-mark fabric-editor-align-${
+          mark.attrs.align
+        }`,
+        'data-align': mark.attrs.align,
+      },
       0,
     ];
   },

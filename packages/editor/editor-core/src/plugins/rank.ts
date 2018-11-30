@@ -23,6 +23,8 @@ export default {
     'typeAhead',
     'typeAheadKeymap',
     'typeAheadInputRule',
+    // This should be always after `typeAheadKeymap` & `emojiKeymap`
+    'indentationKeymap',
     'lists',
     'textColor',
     'alignmentPlugin',
@@ -140,5 +142,6 @@ export default {
     // Block marks
     'alignment',
     'breakout',
+    'indentation',
   ],
 };

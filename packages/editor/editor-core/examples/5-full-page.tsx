@@ -165,6 +165,7 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
                 allowBreakout: true,
               }}
               allowTextAlignment={true}
+              allowIndentation={true}
               allowTemplatePlaceholders={{ allowInserting: true }}
               UNSAFE_cards={{
                 provider: Promise.resolve(cardProvider),

@@ -3,6 +3,76 @@
   "description": "Schema for Atlassian Document Format.",
   "$ref": "#/definitions/doc_node",
   "definitions": {
+    "em_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "em"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "code_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "code"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "strike_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "strike"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "strong_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "strong"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "underline_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "underline"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
     "blockquote_node": {
       "type": "object",
       "properties": {
@@ -137,192 +207,6 @@
       ],
       "additionalProperties": false
     },
-    "table_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "table"
-          ]
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "isNumberColumnEnabled": {
-              "type": "boolean"
-            },
-            "layout": {
-              "enum": [
-                "default",
-                "full-width",
-                "wide"
-              ]
-            }
-          },
-          "additionalProperties": false
-        },
-        "content": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/table_row_node"
-          },
-          "minItems": 1
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "table_row_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "tableRow"
-          ]
-        },
-        "content": {
-          "anyOf": [
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/table_header_node"
-              }
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/table_cell_node"
-              }
-            }
-          ]
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "table_cell_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "tableCell"
-          ]
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "colspan": {
-              "type": "number"
-            },
-            "rowspan": {
-              "type": "number"
-            },
-            "colwidth": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            },
-            "background": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
-        },
-        "content": {
-          "$ref": "#/definitions/table_cell_content"
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "table_header_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "tableHeader"
-          ]
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "colspan": {
-              "type": "number"
-            },
-            "rowspan": {
-              "type": "number"
-            },
-            "colwidth": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            },
-            "background": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
-        },
-        "content": {
-          "$ref": "#/definitions/table_cell_content"
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "link_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "link"
-          ]
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string"
-            },
-            "title": {
-              "type": "string"
-            },
-            "id": {
-              "type": "string"
-            },
-            "collection": {
-              "type": "string"
-            },
-            "occurrenceKey": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "href"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "type",
-        "attrs"
-      ],
-      "additionalProperties": false
-    },
     "mediaSingle_node": {
       "type": "object",
       "properties": {
@@ -344,11 +228,11 @@
           "properties": {
             "layout": {
               "enum": [
-                "full-width",
-                "wide",
                 "wrap-right",
                 "center",
-                "wrap-left"
+                "wrap-left",
+                "wide",
+                "full-width"
               ]
             }
           },
@@ -711,6 +595,153 @@
             "$ref": "#/definitions/media_node"
           },
           "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "table_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "table"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "isNumberColumnEnabled": {
+              "type": "boolean"
+            },
+            "layout": {
+              "enum": [
+                "wide",
+                "full-width",
+                "default"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/table_row_node"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "table_row_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "tableRow"
+          ]
+        },
+        "content": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/table_header_node"
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/table_cell_node"
+              }
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "table_cell_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "tableCell"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "colspan": {
+              "type": "number"
+            },
+            "rowspan": {
+              "type": "number"
+            },
+            "colwidth": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "background": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "content": {
+          "$ref": "#/definitions/table_cell_content"
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "table_header_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "tableHeader"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "colspan": {
+              "type": "number"
+            },
+            "rowspan": {
+              "type": "number"
+            },
+            "colwidth": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "background": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "content": {
+          "$ref": "#/definitions/table_cell_content"
         }
       },
       "required": [
@@ -1200,9 +1231,9 @@
             },
             "layout": {
               "enum": [
-                "default",
+                "wide",
                 "full-width",
-                "wide"
+                "default"
               ]
             }
           },
@@ -1281,9 +1312,9 @@
             },
             "layout": {
               "enum": [
-                "default",
+                "wide",
                 "full-width",
-                "wide"
+                "default"
               ]
             }
           },
@@ -1359,73 +1390,42 @@
       ],
       "additionalProperties": false
     },
-    "em_mark": {
+    "link_mark": {
       "type": "object",
       "properties": {
         "type": {
           "enum": [
-            "em"
+            "link"
           ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "collection": {
+              "type": "string"
+            },
+            "occurrenceKey": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "href"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "code_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "code"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "strike_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "strike"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "strong_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "strong"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "underline_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "underline"
-          ]
-        }
-      },
-      "required": [
-        "type"
+        "type",
+        "attrs"
       ],
       "additionalProperties": false
     },
@@ -1690,9 +1690,6 @@
             "$ref": "#/definitions/orderedList_node"
           },
           {
-            "$ref": "#/definitions/table_node"
-          },
-          {
             "$ref": "#/definitions/mediaSingle_node"
           },
           {
@@ -1709,6 +1706,9 @@
           },
           {
             "$ref": "#/definitions/mediaGroup_node"
+          },
+          {
+            "$ref": "#/definitions/table_node"
           },
           {
             "$ref": "#/definitions/applicationCard_node"
@@ -1745,9 +1745,6 @@
               "items": {
                 "anyOf": [
                   {
-                    "$ref": "#/definitions/link_mark"
-                  },
-                  {
                     "$ref": "#/definitions/em_mark"
                   },
                   {
@@ -1758,6 +1755,9 @@
                   },
                   {
                     "$ref": "#/definitions/underline_mark"
+                  },
+                  {
+                    "$ref": "#/definitions/link_mark"
                   },
                   {
                     "$ref": "#/definitions/subsup_mark"
@@ -1789,10 +1789,10 @@
               "items": {
                 "anyOf": [
                   {
-                    "$ref": "#/definitions/link_mark"
+                    "$ref": "#/definitions/code_mark"
                   },
                   {
-                    "$ref": "#/definitions/code_mark"
+                    "$ref": "#/definitions/link_mark"
                   }
                 ]
               }
@@ -1854,9 +1854,6 @@
                 "$ref": "#/definitions/orderedList_node"
               },
               {
-                "$ref": "#/definitions/table_node"
-              },
-              {
                 "$ref": "#/definitions/mediaSingle_node"
               },
               {
@@ -1873,6 +1870,9 @@
               },
               {
                 "$ref": "#/definitions/mediaGroup_node"
+              },
+              {
+                "$ref": "#/definitions/table_node"
               },
               {
                 "$ref": "#/definitions/applicationCard_node"

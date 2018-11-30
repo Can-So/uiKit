@@ -50,17 +50,20 @@ import { UnderlineDefinition as Underline } from '../marks/underline';
 import { TextColorDefinition as TextColor } from '../marks/text-color';
 import { ActionDefinition as Action } from '../marks/action';
 
+// NOTE: BlockContent is only being used by layoutColumn now.
 /**
  * @name block_content
  */
 export type BlockContent =
   | Panel
   | Paragraph
+  | ParagraphWithMarks
   | Blockquote
   | OrderedList
   | BulletList
   | Rule
   | Heading
+  | HeadingWithMarks
   | CodeBlock
   | MediaGroup
   | MediaSingle
@@ -80,11 +83,13 @@ export type BlockContent =
 export type TableCellContent = Array<
   | Panel
   | Paragraph
+  | ParagraphWithMarks
   | Blockquote
   | OrderedList
   | BulletList
   | Rule
   | Heading
+  | HeadingWithMarks
   | CodeBlock
   | MediaGroup
   | MediaSingle
@@ -182,16 +187,10 @@ export interface DocNode {
   /**
    * @allowUnsupportedBlock true
    */
-  content: Array<
-    | BlockContent
-    | LayoutSection
-    | CodeBlockWithMarks
-    | ParagraphWithMarks
-    | HeadingWithMarks
-  >;
+  content: Array<BlockContent | LayoutSection | CodeBlockWithMarks>;
 }
 
 export const doc: NodeSpec = {
   content: '(block|layoutSection)+',
-  marks: 'breakout alignment link',
+  marks: 'alignment breakout indentation link',
 };
