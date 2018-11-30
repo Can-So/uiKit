@@ -9,7 +9,7 @@ import {
   FinalizeUploadAction,
   isFinalizeUploadAction,
 } from '../actions/finalizeUpload';
-import { State, Tenant, SourceFile } from '../domain';
+import { State, SourceFile } from '../domain';
 import { mapAuthToSourceFileOwner } from '../domain/source-file';
 import { MediaFile } from '../../domain/file';
 import {
@@ -33,7 +33,6 @@ export function finalizeUpload(
     file,
     uploadId,
     source,
-    tenant,
     replaceFileId,
     occurrenceKey,
   }: FinalizeUploadAction,
@@ -54,7 +53,6 @@ export function finalizeUpload(
         file,
         uploadId,
         sourceFile,
-        tenant,
         replaceFileId,
         occurrenceKey,
       };
@@ -69,7 +67,6 @@ type CopyFileParams = {
   file: MediaFile;
   uploadId: string;
   sourceFile: SourceFile;
-  tenant: Tenant;
   replaceFileId?: Promise<string>;
   occurrenceKey?: string;
 };
@@ -80,27 +77,26 @@ async function copyFile({
   file,
   uploadId,
   sourceFile,
-  tenant,
   replaceFileId,
   occurrenceKey,
 }: CopyFileParams): Promise<SendUploadEventAction> {
-  const { deferredIdUpfronts } = store.getState();
+  const { deferredIdUpfronts, tenantContext } = store.getState();
   const deferred = deferredIdUpfronts[sourceFile.id];
   const mediaStore = new MediaStore({
-    authProvider: () => Promise.resolve(tenant.auth),
+    authProvider: tenantContext.config.authProvider,
   });
   const body: MediaStoreCopyFileWithTokenBody = {
     sourceFile,
   };
   const params: MediaStoreCopyFileWithTokenParams = {
-    collection: tenant.uploadParams.collection,
+    collection: '', // TODO [MS-677] pass tenant collection name
     replaceFileId: replaceFileId ? await replaceFileId : undefined,
     occurrenceKey,
   };
 
   return mediaStore
     .copyFileWithToken(body, params)
-    .then(destinationFile => {
+    .then(async destinationFile => {
       const { id: publicId } = destinationFile.data;
       if (deferred) {
         const { resolver } = deferred;
@@ -122,12 +118,12 @@ async function copyFile({
           uploadId,
         }),
       );
-
+      const auth = await tenantContext.config.authProvider();
       // TODO [MS-725]: replace by context.getFile
       return fetcher.pollFile(
-        tenant.auth,
+        auth,
         publicId,
-        tenant.uploadParams.collection,
+        '', // TODO [MS-677] pass tenant collection name
       );
     })
     .then(processedDestinationFile => {

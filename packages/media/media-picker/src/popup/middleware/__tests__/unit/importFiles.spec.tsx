@@ -11,7 +11,7 @@ import {
   isRemoteService,
   importFiles,
 } from '../../importFiles';
-import { LocalUpload, LocalUploads, Tenant } from '../../../domain';
+import { LocalUpload, LocalUploads } from '../../../domain';
 import { RECENTS_COLLECTION } from '../../../config';
 import { finalizeUpload } from '../../../actions/finalizeUpload';
 import { startImport } from '../../../actions/startImport';
@@ -76,7 +76,6 @@ describe('importFiles middleware', () => {
       ...defaultOptions,
       ...opts,
     } as SetupOptions;
-    const tenant: Tenant = {} as Tenant;
 
     const makeLocalUpload = (index: number, total: number): LocalUpload => {
       const files: MediaFile[] = [];
@@ -145,7 +144,6 @@ describe('importFiles middleware', () => {
           uploadProcessingEvent,
           uploadEndEvent,
         ],
-        tenant,
         index,
         progress: null,
         timeStarted: 0,
@@ -162,7 +160,6 @@ describe('importFiles middleware', () => {
       withSelectedItems
         ? {
             uploads: localUploads,
-            tenant,
             selectedItems: [
               {
                 serviceName: 'upload',
@@ -205,7 +202,6 @@ describe('importFiles middleware', () => {
       wsConnectionHolder,
       store,
       nextDispatch,
-      tenant,
       eventEmitter: mockPopupUploadEventEmitter(),
     };
   };
@@ -321,7 +317,7 @@ describe('importFiles middleware', () => {
 
     describe('each selected and locally uploaded file', () => {
       it('should dispatch FINALIZE_UPLOAD action', () => {
-        const { eventEmitter, mockWsProvider, store, tenant } = setup();
+        const { eventEmitter, mockWsProvider, store } = setup();
 
         return importFiles(eventEmitter, store, mockWsProvider).then(() => {
           const localUploadsFinalizedNum = 2;
@@ -364,7 +360,6 @@ describe('importFiles middleware', () => {
                 id: 'some-selected-item-id-4',
                 collection: RECENTS_COLLECTION,
               },
-              tenant,
             ),
           );
         });

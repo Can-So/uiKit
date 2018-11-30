@@ -446,16 +446,6 @@ describe('analyticsProcessing middleware', () => {
       {
         remoteUploads: {
           upid1: {
-            tenant: {
-              auth: {
-                baseUrl: '',
-                clientId: '',
-                token: '',
-              },
-              uploadParams: {
-                collection: '',
-              },
-            },
             timeStarted: 0,
           },
         },
@@ -473,16 +463,6 @@ describe('analyticsProcessing middleware', () => {
       {
         remoteUploads: {
           upid1: {
-            tenant: {
-              auth: {
-                baseUrl: '',
-                clientId: '',
-                token: '',
-              },
-              uploadParams: {
-                collection: '',
-              },
-            },
             timeStarted: 0,
           },
         },
@@ -560,16 +540,6 @@ describe('analyticsProcessing middleware', () => {
               },
             ],
             index: 0,
-            tenant: {
-              auth: {
-                baseUrl: '',
-                clientId: '',
-                token: '',
-              },
-              uploadParams: {
-                collection: '',
-              },
-            },
             timeStarted: 0,
             progress: null,
           },
@@ -625,16 +595,6 @@ describe('analyticsProcessing middleware', () => {
               },
             ],
             index: 0,
-            tenant: {
-              auth: {
-                baseUrl: '',
-                clientId: '',
-                token: '',
-              },
-              uploadParams: {
-                collection: '',
-              },
-            },
             timeStarted: 0,
             progress: null,
           },

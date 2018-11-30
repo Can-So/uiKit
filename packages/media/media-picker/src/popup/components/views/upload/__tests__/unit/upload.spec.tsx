@@ -437,14 +437,6 @@ describe('<UploadView />', () => {
           },
           index: 0,
           events: [],
-          tenant: {
-            auth: {
-              clientId: 'some-tenant-client-id',
-              token: 'some-tenant-client-token',
-              baseUrl: 'some-base-url',
-            },
-            uploadParams: {},
-          },
           progress: 0,
           timeStarted: 0,
         },

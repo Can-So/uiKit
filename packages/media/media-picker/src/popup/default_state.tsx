@@ -7,7 +7,6 @@ export type DefaultStateKeys =
   | 'uploads'
   | 'remoteUploads'
   | 'recents'
-  | 'tenant'
   | 'view'
   | 'accounts'
   | 'selectedItems'
@@ -30,14 +29,6 @@ const defaultState: DefaultState = {
   remoteUploads: {},
   recents: {
     items: [],
-  },
-  tenant: {
-    auth: {
-      clientId: '',
-      token: '',
-      baseUrl: '',
-    },
-    uploadParams: {},
   },
   view: {
     isVisible: false,

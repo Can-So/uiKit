@@ -9,11 +9,10 @@ export default function remoteUploadStart(
   action: RemoteUploadStartAction,
 ): State {
   if (action.type === REMOTE_UPLOAD_START) {
-    const { uploadId, tenant } = action;
+    const { uploadId } = action;
     const remoteUploads = { ...state.remoteUploads };
 
     remoteUploads[uploadId] = {
-      tenant,
       timeStarted: Date.now(),
     };
 

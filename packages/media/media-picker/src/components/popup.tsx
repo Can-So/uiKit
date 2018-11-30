@@ -7,7 +7,6 @@ import App, { AppProxyReactContext } from '../popup/components/app';
 import { cancelUpload } from '../popup/actions/cancelUpload';
 import { showPopup } from '../popup/actions/showPopup';
 import { resetView } from '../popup/actions/resetView';
-import { setTenant } from '../popup/actions/setTenant';
 import { getFilesInRecents } from '../popup/actions/getFilesInRecents';
 import { getConnectedRemoteAccounts } from '../popup/actions/getConnectedRemoteAccounts';
 import { State } from '../popup/domain';
@@ -68,6 +67,8 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
       cacheSize,
       authProvider: userAuthProvider,
     });
+
+    // TODO [MS-677]: pass tenantUploadParams to store
     this.store = createStore(this, tenantContext, userContext, {
       proxyReactContext,
       singleSelect,
@@ -86,17 +87,6 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
 
   public async show(): Promise<void> {
     const { dispatch } = this.store;
-    // TODO [MS-677]: Improve opening time by removing call to authProvider + setTenant
-    const auth = await this.tenantContext.config.authProvider({
-      collectionName: this.tenantUploadParams.collection,
-    });
-
-    dispatch(
-      setTenant({
-        auth,
-        uploadParams: this.tenantUploadParams,
-      }),
-    );
 
     dispatch(resetView());
     dispatch(getFilesInRecents());

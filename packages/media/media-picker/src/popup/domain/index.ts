@@ -1,7 +1,6 @@
-import { Auth, Context } from '@atlaskit/media-core';
+import { Context } from '@atlaskit/media-core';
 import { MediaCollectionItem } from '@atlaskit/media-store';
 import { Subscription } from 'rxjs/Subscription';
-import { UploadParams } from '../../domain/config';
 import { LocalUploads } from './local-upload';
 
 export { AuthHeaders } from './auth';
@@ -30,7 +29,6 @@ export interface State {
   readonly editorData?: EditorData;
   readonly recents: Recents;
   readonly selectedItems: SelectedItem[];
-  readonly tenant: Tenant;
   readonly uploads: LocalUploads;
   readonly remoteUploads: RemoteUploads;
   readonly isCancelling: boolean;
@@ -59,7 +57,6 @@ export interface Recents {
 }
 
 export type RemoteUpload = {
-  readonly tenant: Tenant;
   readonly timeStarted: number;
 };
 
@@ -88,11 +85,6 @@ export interface EditorData {
 export interface EditorError {
   readonly message: string;
   readonly retryHandler?: () => void;
-}
-
-export interface Tenant {
-  readonly auth: Auth;
-  readonly uploadParams: UploadParams;
 }
 
 export type ServiceName = 'google' | 'dropbox' | 'upload' | 'giphy';

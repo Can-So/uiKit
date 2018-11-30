@@ -3,8 +3,6 @@ import { Store } from 'react-redux';
 import { Observable } from 'rxjs/Observable';
 import { ContextFactory } from '@atlaskit/media-core';
 
-const baseUrl = 'some-api-url';
-
 export const mockState: State = {
   redirectUrl: 'some-redirect-url',
   view: {
@@ -25,14 +23,6 @@ export const mockState: State = {
     items: [],
   },
   selectedItems: [],
-  tenant: {
-    auth: {
-      clientId: 'some-tenant-client-id',
-      token: 'some-tenant-client-token',
-      baseUrl,
-    },
-    uploadParams: {},
-  },
   lastUploadIndex: 0,
   uploads: {},
   remoteUploads: {},
