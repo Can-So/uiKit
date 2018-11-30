@@ -26,7 +26,6 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
               appearance="default"
               isBold={true}
               maxWidth={200}
-              theme={[Function]}
             >
               <FormattedMessage
                 defaultMessage="Account deleted"
@@ -87,7 +86,6 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
               appearance="default"
               isBold={true}
               maxWidth={200}
-              theme={[Function]}
             >
               <FormattedMessage
                 defaultMessage="Account deleted"
@@ -147,7 +145,6 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
               appearance="default"
               isBold={true}
               maxWidth={200}
-              theme={[Function]}
             >
               <FormattedMessage
                 defaultMessage="Account deactivated"
@@ -219,7 +216,6 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
               appearance="default"
               isBold={true}
               maxWidth={200}
-              theme={[Function]}
             >
               <FormattedMessage
                 defaultMessage="Account deactivated"
