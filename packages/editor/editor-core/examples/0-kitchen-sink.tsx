@@ -30,6 +30,7 @@ import {
   customInsertMenuItems,
 } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
+import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
 
 export type Props = {};
 export type State = {
@@ -63,7 +64,7 @@ const EditorColumn: React.ComponentClass<
       ? p.vertical
         ? `border-right: 1px solid ${colors.N30}; min-height: 85vh`
         : `border-bottom: 1px solid ${colors.N30}`
-      : ''}
+      : ''};
 `;
 
 const Controls = styled.div`
@@ -295,61 +296,63 @@ export default class FullPageRendererExample extends React.Component<
                     locale={this.getLocalTag(locale)}
                     messages={messages}
                   >
-                    <Editor
-                      appearance={this.state.appearance}
-                      analyticsHandler={analyticsHandler}
-                      quickInsert={{
-                        provider: Promise.resolve(quickInsertProvider),
-                      }}
-                      allowCodeBlocks={{ enableKeybindingsForIDE: true }}
-                      allowLists={true}
-                      allowTextColor={true}
-                      allowTables={{
-                        advanced: true,
-                      }}
-                      allowBreakout={true}
-                      allowJiraIssue={true}
-                      allowUnsupportedContent={true}
-                      allowPanel={true}
-                      allowExtension={{
-                        allowBreakout: true,
-                      }}
-                      allowRule={true}
-                      allowDate={true}
-                      allowLayouts={{
-                        allowBreakout: true,
-                      }}
-                      allowTextAlignment={true}
-                      allowTemplatePlaceholders={{ allowInserting: true }}
-                      UNSAFE_cards={{
-                        provider: Promise.resolve(cardProvider),
-                      }}
-                      allowStatus={true}
-                      {...providers}
-                      media={{
-                        provider: mediaProvider,
-                        allowMediaSingle: true,
-                        allowResizing: true,
-                      }}
-                      insertMenuItems={customInsertMenuItems}
-                      extensionHandlers={extensionHandlers}
-                      placeholder="Type something here, and watch it render to the side!"
-                      shouldFocus={true}
-                      defaultValue={this.state.adf}
-                      disabled={this.state.disabled}
-                      onChange={() => this.onEditorChange(actions)}
-                      popupsMountPoint={this.popupMountPoint || undefined}
-                      primaryToolbarComponents={
-                        <>
-                          <LanguagePicker
-                            languages={languages}
-                            locale={locale}
-                            onChange={this.loadLocale}
-                          />
-                          <SaveAndCancelButtons editorActions={actions} />
-                        </>
-                      }
-                    />
+                    <SmartCardProvider>
+                      <Editor
+                        appearance={this.state.appearance}
+                        analyticsHandler={analyticsHandler}
+                        quickInsert={{
+                          provider: Promise.resolve(quickInsertProvider),
+                        }}
+                        allowCodeBlocks={{ enableKeybindingsForIDE: true }}
+                        allowLists={true}
+                        allowTextColor={true}
+                        allowTables={{
+                          advanced: true,
+                        }}
+                        allowBreakout={true}
+                        allowJiraIssue={true}
+                        allowUnsupportedContent={true}
+                        allowPanel={true}
+                        allowExtension={{
+                          allowBreakout: true,
+                        }}
+                        allowRule={true}
+                        allowDate={true}
+                        allowLayouts={{
+                          allowBreakout: true,
+                        }}
+                        allowTextAlignment={true}
+                        allowTemplatePlaceholders={{ allowInserting: true }}
+                        UNSAFE_cards={{
+                          provider: Promise.resolve(cardProvider),
+                        }}
+                        allowStatus={true}
+                        {...providers}
+                        media={{
+                          provider: mediaProvider,
+                          allowMediaSingle: true,
+                          allowResizing: true,
+                        }}
+                        insertMenuItems={customInsertMenuItems}
+                        extensionHandlers={extensionHandlers}
+                        placeholder="Type something here, and watch it render to the side!"
+                        shouldFocus={true}
+                        defaultValue={this.state.adf}
+                        disabled={this.state.disabled}
+                        onChange={() => this.onEditorChange(actions)}
+                        popupsMountPoint={this.popupMountPoint || undefined}
+                        primaryToolbarComponents={
+                          <>
+                            <LanguagePicker
+                              languages={languages}
+                              locale={locale}
+                              onChange={this.loadLocale}
+                            />
+                            <SaveAndCancelButtons editorActions={actions} />
+                          </>
+                        }
+                      />
+                    </SmartCardProvider>
                   </IntlProvider>
                 </EditorColumn>
                 <Column>
@@ -362,16 +365,18 @@ export default class FullPageRendererExample extends React.Component<
                             : undefined,
                       }}
                     >
-                      <ReactRenderer
-                        document={this.state.adf}
-                        adfStage="stage0"
-                        dataProviders={ProviderFactory.create({
-                          ...providers,
-                          mediaProvider,
-                        })}
-                        // @ts-ignore
-                        appearance={this.state.appearance}
-                      />
+                      <SmartCardProvider>
+                        <ReactRenderer
+                          document={this.state.adf}
+                          adfStage="stage0"
+                          dataProviders={ProviderFactory.create({
+                            ...providers,
+                            mediaProvider,
+                          })}
+                          // @ts-ignore
+                          appearance={this.state.appearance}
+                        />
+                      </SmartCardProvider>
                     </div>
                   ) : (
                     <div
