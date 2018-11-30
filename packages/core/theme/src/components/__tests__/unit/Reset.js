@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import Reset from '../../Reset';
-import Theme from '../../Theme';
+import { Reset, ResetTheme } from '../../Reset';
 
 test('reset', () => {
   expect(mount(<Reset />)).toMatchSnapshot();
@@ -12,15 +11,16 @@ test('reset', () => {
 test('themed reset', () => {
   expect(
     mount(
-      <Theme
-        theme={() => ({
+      <ResetTheme.Provider
+        theme={t => ({
+          ...t,
           backgroundColor: '#000',
           textColor: '#fff',
           linkColor: 'blue',
         })}
       >
         <Reset />
-      </Theme>,
+      </ResetTheme.Provider>,
     ),
   ).toMatchSnapshot();
 });

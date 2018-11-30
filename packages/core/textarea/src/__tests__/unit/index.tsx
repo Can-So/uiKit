@@ -99,11 +99,10 @@ describe('TextArea', () => {
     { name: 'test' },
     { placeholder: 'test placeholder' },
     { maxLength: 5 },
-  ].forEach(prop =>
+  ].forEach((prop: { [s: string]: any }) =>
     describe(JSON.stringify(prop), () =>
       it('TextArea should have attribute defined', () => {
         const key = Object.keys(prop)[0];
-        // $FlowFixMe
         const value = prop[key];
         expect(
           mount(<TextArea onChange={() => {}} {...prop} />)

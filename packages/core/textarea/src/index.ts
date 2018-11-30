@@ -1,3 +1,3 @@
 export { default } from './components/TextArea';
-export { theme, themeTokens } from './theme';
-export { ThemeAppearance, ThemeProps } from './theme';
+export { Theme, themeTokens } from './theme';
+export { ThemeAppearance, ThemeProps, ThemeTokens } from './theme';
