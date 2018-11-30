@@ -7,10 +7,6 @@ export default md`
 
   It includes support for rest based searching and custom search implementations.
 
-  ## Try it out
-
-  Interact with a [live demo of the @atlaskit/mention component](https://atlaskit.atlassian.com/packages/elements/mention).
-
   ## Installation
 
   ~~~js
