@@ -14,7 +14,6 @@ describe('handleCloudFetchingEvent', () => {
   const bytes = 50;
   const fileSize = 1000;
   const client = { id: 'some-client-id', token: 'some-client-token' };
-  const tenant = { id: 'some-tenant-id', token: 'some-tenant-token' };
   const description = 'some-error-description';
   const deferredIdUpfronts = {};
   const upfrontId = Promise.resolve('1');
@@ -75,7 +74,7 @@ describe('handleCloudFetchingEvent', () => {
       payload: { fileId, uploadId },
     };
     const remoteUploads = {
-      'some-upload-id': { tenant },
+      'some-upload-id': {},
     };
 
     (store.getState as jest.Mock<any>).mockReturnValue({
@@ -100,7 +99,6 @@ describe('handleCloudFetchingEvent', () => {
         id: fileId,
         collection: RECENTS_COLLECTION,
       },
-      tenant,
     });
   });
 
