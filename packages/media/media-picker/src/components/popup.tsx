@@ -68,7 +68,6 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
       authProvider: userAuthProvider,
     });
 
-    // TODO [MS-677]: pass tenantUploadParams to store
     this.store = createStore(this, tenantContext, userContext, {
       proxyReactContext,
       singleSelect,
