@@ -30,7 +30,6 @@ export class UserPicker extends React.Component<
     appearance: 'normal',
     subtle: false,
     isClearable: true,
-    search: '',
   };
 
   private selectRef;
@@ -45,7 +44,7 @@ export class UserPicker extends React.Component<
       count: 0,
       hoveringClearIndicator: false,
       menuIsOpen: false,
-      inputValue: props.search,
+      inputValue: props.search || '',
       preventFilter: false,
     };
   }
@@ -63,6 +62,14 @@ export class UserPicker extends React.Component<
     } else if (nextProps.defaultValue && !prevState.value) {
       derivedState.value = usersToOptions(nextProps.defaultValue);
     }
+    // trigger onInputChange
+    if (
+      nextProps.search !== undefined &&
+      nextProps.search !== prevState.inputValue
+    ) {
+      derivedState.inputValue = nextProps.search;
+    }
+
     return derivedState;
   }
 
@@ -185,19 +192,10 @@ export class UserPicker extends React.Component<
     }
   };
 
-  private triggerInputChange = this.withSelectRef(select => {
-    select.onInputChange(this.props.search, { action: 'input-change' });
-  });
-
   componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
-    // trigger onInputChange
-    if (this.props.search !== prevProps.search) {
-      this.triggerInputChange();
-    }
-
     // load options when the picker open
     if (this.state.menuIsOpen && !prevState.menuIsOpen) {
-      this.executeLoadOptions();
+      this.executeLoadOptions(this.state.inputValue);
     }
   }
 
@@ -205,6 +203,11 @@ export class UserPicker extends React.Component<
     // Escape
     if (event.keyCode === 27) {
       this.selectRef.blur();
+    }
+    // Space
+    if (event.keyCode === 32 && !this.state.inputValue) {
+      event.preventDefault();
+      this.setState({ inputValue: ' ' });
     }
   };
 

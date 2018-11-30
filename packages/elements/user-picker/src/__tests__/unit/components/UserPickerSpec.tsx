@@ -396,4 +396,20 @@ describe('UserPicker', () => {
     component.find(Select).simulate('keyDown', { keyCode: 27 });
     expect(ref.blur).toHaveBeenCalled();
   });
+
+  it('should prevent default selection event when user inserts space on empty input', () => {
+    const component = shallowUserPicker({ users });
+    component.setState({ menuIsOpen: true });
+    const preventDefault = jest.fn();
+    component.find(Select).simulate('keyDown', { keyCode: 32, preventDefault });
+    expect(preventDefault).toHaveBeenCalled();
+  });
+
+  it('should not prevent default event when there is inputValue', () => {
+    const component = shallowUserPicker({ users });
+    component.setState({ menuIsOpen: true, inputValue: 'test' });
+    const preventDefault = jest.fn();
+    component.find(Select).simulate('keyDown', { keyCode: 32, preventDefault });
+    expect(preventDefault).toHaveBeenCalledTimes(0);
+  });
 });
