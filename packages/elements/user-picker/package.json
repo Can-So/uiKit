@@ -19,6 +19,7 @@
     "@atlaskit/lozenge": "^6.2.3",
     "@atlaskit/select": "^6.1.10",
     "@atlaskit/tag": "^6.1.2",
+    "@atlaskit/tooltip": "^12.1.12",
     "@atlaskit/theme": "^7.0.0",
     "@types/lodash.debounce": "^4.0.4",
     "lodash.debounce": "^4.0.8",

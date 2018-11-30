@@ -1,4 +1,5 @@
 import { components } from '@atlaskit/select';
+import Tooltip from '@atlaskit/tooltip';
 import * as React from 'react';
 
 export class ClearIndicator extends React.PureComponent<any> {
@@ -14,14 +15,19 @@ export class ClearIndicator extends React.PureComponent<any> {
   };
 
   render() {
+    const {
+      selectProps: { clearValueLabel },
+    } = this.props;
     return (
-      <components.ClearIndicator
-        {...this.props}
-        innerProps={{
-          ...this.props.innerProps,
-          onMouseDown: this.handleMouseDown,
-        }}
-      />
+      <Tooltip content={clearValueLabel}>
+        <components.ClearIndicator
+          {...this.props}
+          innerProps={{
+            ...this.props.innerProps,
+            onMouseDown: this.handleMouseDown,
+          }}
+        />
+      </Tooltip>
     );
   }
 }

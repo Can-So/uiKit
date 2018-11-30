@@ -15,6 +15,6 @@ function getUsers(search?: string): (User | Promise<User[]>)[] {
 
 export default class Example extends React.Component<{}> {
   render() {
-    return <UserPicker loadUsers={getUsers} />;
+    return <UserPicker loadUsers={getUsers} clearValueLabel="Unassign" />;
   }
 }
