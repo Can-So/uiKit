@@ -312,3 +312,61 @@ Object {
   "version": 1,
 }
 `;
+
+exports[`Builders should be able to generate correct ADF for example #6 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "attrs": Object {
+        "layout": "center",
+      },
+      "content": Array [
+        Object {
+          "attrs": Object {
+            "collection": "SampleCollection",
+            "id": "1234",
+            "type": "file",
+          },
+          "type": "media",
+        },
+      ],
+      "type": "mediaSingle",
+    },
+  ],
+  "type": "doc",
+  "version": 1,
+}
+`;
+
+exports[`Builders should be able to generate correct ADF for example #7 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "attrs": Object {
+        "layout": "center",
+      },
+      "content": Array [
+        Object {
+          "attrs": Object {
+            "collection": "SampleCollection",
+            "id": "1234",
+            "type": "file",
+          },
+          "type": "media",
+        },
+      ],
+      "marks": Array [
+        Object {
+          "attrs": Object {
+            "href": "https://www.atlassian.com",
+          },
+          "type": "link",
+        },
+      ],
+      "type": "mediaSingle",
+    },
+  ],
+  "type": "doc",
+  "version": 1,
+}
+`;

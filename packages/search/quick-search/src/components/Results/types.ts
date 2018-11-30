@@ -20,6 +20,8 @@ export type CommonResultProps = {
   avatar?: ReactNode;
   /** Content to be shown after the main content. Shown to the right of content (or to the left in RTL mode). */
   elemAfter?: ReactNode;
+  /** Icon to be shown after the main content when the result is selected */
+  selectedIcon?: ReactNode;
   /** Location to link out to on click. */
   href?: string;
   /** Target to open the link in. */

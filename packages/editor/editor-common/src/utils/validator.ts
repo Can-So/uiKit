@@ -502,6 +502,7 @@ export const getValidNode = (
             type,
             attrs,
             content,
+            marks,
           };
         }
         break;

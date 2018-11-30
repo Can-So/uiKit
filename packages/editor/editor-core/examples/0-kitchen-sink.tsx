@@ -319,7 +319,6 @@ export default class FullPageRendererExample extends React.Component<
                       allowLayouts={{
                         allowBreakout: true,
                       }}
-                      allowGapCursor={true}
                       allowTextAlignment={true}
                       allowTemplatePlaceholders={{ allowInserting: true }}
                       UNSAFE_cards={{

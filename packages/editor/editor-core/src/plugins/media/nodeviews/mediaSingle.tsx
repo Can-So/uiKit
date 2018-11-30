@@ -7,6 +7,7 @@ import {
   WithProviders,
   MediaSingleLayout,
 } from '@atlaskit/editor-common';
+import { CardEvent } from '@atlaskit/media-card';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
 import { stateKey, MediaPluginState } from '../pm-plugins/main';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';
@@ -105,7 +106,10 @@ export default class MediaSingleNode extends Component<
     return mediaState && mediaState.status === 'ready';
   }
 
-  selectMediaSingle = () => {
+  selectMediaSingle = ({ event }: CardEvent) => {
+    // We need to call "stopPropagation" here in order to prevent the browser from navigating to
+    // another URL if the media node is wrapped in a link mark.
+    event.stopPropagation();
     setNodeSelection(this.props.view, this.props.getPos() + 1);
   };
 

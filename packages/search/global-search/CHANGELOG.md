@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.13.0
+- [minor] [347a474](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/347a474):
+
+  - Added icon on selected to quick search results
+
 ## 5.12.12
 - [patch] [f84ab96](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f84ab96):
 

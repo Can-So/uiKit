@@ -30,7 +30,6 @@ describe('lists', () => {
       editorProps: {
         analyticsHandler: trackEvent,
         allowCodeBlocks: true,
-        allowGapCursor: true,
         allowPanel: true,
         allowLists: true,
         media: { allowMediaSingle: true },
