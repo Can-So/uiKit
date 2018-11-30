@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.3.0
+- [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
+
+  - ED-3890 Adds Indentation support on paragraphs and headings
+
 ## 5.2.0
 - [minor] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
 

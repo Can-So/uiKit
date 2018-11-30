@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 22.3.0
+- [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
+
+  - ED-3890 Adds Indentation support on paragraphs and headings
+
 ## 22.2.3
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/icon@15.0.1

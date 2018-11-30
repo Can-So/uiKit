@@ -1,5 +1,10 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.0
+- [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
+
+  - ED-3890 Adds Indentation support on paragraphs and headings
+
 ## 6.2.24
 - [patch] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
 
