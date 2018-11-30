@@ -1,1 +1,0 @@
-- Convert to use new theme API.

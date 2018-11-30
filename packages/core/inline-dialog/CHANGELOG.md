@@ -1,5 +1,16 @@
 # @atlaskit/inline-dialog
 
+## 9.0.12
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/datetime-picker@6.3.20
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/popper@0.3.3
+  - @atlaskit/select@6.1.10
+  - @atlaskit/single-select@6.0.10
+  - @atlaskit/theme@7.0.0
+
 ## 9.0.11
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

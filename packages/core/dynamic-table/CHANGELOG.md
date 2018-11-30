@@ -1,5 +1,16 @@
 # @atlaskit/dynamic-table
 
+## 10.0.20
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/pagination@8.0.8
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/toggle@5.0.13
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+
 ## 10.0.19
 - [patch] [492b8ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/492b8ea):
 

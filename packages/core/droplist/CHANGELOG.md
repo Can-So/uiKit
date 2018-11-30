@@ -1,5 +1,16 @@
 # @atlaskit/droplist
 
+## 7.0.16
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/field-base@11.0.12
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/item@8.0.13
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+
 ## 7.0.15
 - [patch] [7fbe95e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7fbe95e):
 

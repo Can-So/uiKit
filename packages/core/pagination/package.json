@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/pagination",
-  "version": "8.0.7",
+  "version": "8.0.8",
   "description": "Pagination component",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -20,9 +20,9 @@
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
     "@atlaskit/analytics-next": "^3.1.1",
-    "@atlaskit/button": "^10.0.1",
-    "@atlaskit/icon": "^15.0.0",
-    "@atlaskit/theme": "^6.2.1",
+    "@atlaskit/button": "^10.0.4",
+    "@atlaskit/icon": "^15.0.1",
+    "@atlaskit/theme": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0"
   },
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^5.2.2",
+    "@atlaskit/docs": "^5.2.3",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-dom": "^16.4.2"
   }
