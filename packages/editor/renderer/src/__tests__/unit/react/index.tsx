@@ -143,7 +143,7 @@ const headingDocFromSchema = schema.nodeFromJSON(headingDoc);
 
 describe('Renderer - ReactSerializer', () => {
   beforeAll(async () => {
-    /* 
+    /*
       Async nodes used need to be preloaded before testing, otherwise the first mount
       will have the loading component and not the actual node.
     */
@@ -216,7 +216,7 @@ describe('Renderer - ReactSerializer', () => {
   });
 
   describe('buildMarkStructure', () => {
-    const { strong } = schema.marks;
+    const { em, strong, link, textColor } = schema.marks;
 
     it('should wrap text nodes with marks', () => {
       const textNodes = [
@@ -230,6 +230,47 @@ describe('Renderer - ReactSerializer', () => {
       expect(output[1].type.name).to.equal('strong');
       expect((output[1] as any).content[0].type.name).to.equal('text');
       expect((output[1] as any).content[0].text).to.equal('World!');
+    });
+
+    it('should merge mark nodes with text color', () => {
+      const textNodes = [
+        schema.text('2Pac '),
+        schema.text('Ice Blue!', [
+          strong.create(),
+          textColor.create({ color: '#aaeebb' }),
+        ]),
+        schema.text('KL Jay', [strong.create()]),
+        schema.text('Rihana', [strong.create()]),
+      ];
+
+      const output = ReactSerializer.buildMarkStructure(textNodes);
+      expect(output.length).to.equal(3);
+      expect(output[0].type.name).to.equal('text');
+      expect(output[1].type.name).to.equal('strong');
+      expect(output[2].type.name).to.equal('strong');
+      expect((output[1] as any).content[0].attrs).to.deep.equal({
+        color: '#aaeebb',
+      });
+    });
+
+    it('should merge mark nodes with link', () => {
+      const textNodes = [
+        schema.text('2Pac '),
+        schema.text('This is', [link.create({ href: 'gnu.org' })]),
+        schema.text('the link. ', [
+          em.create(),
+          link.create({ href: 'gnu.org' }),
+        ]),
+        schema.text('not here', [strong.create()]),
+      ];
+
+      const output = ReactSerializer.buildMarkStructure(textNodes);
+      expect(output.length).to.equal(3);
+      expect(output[0].type.name).to.equal('text');
+      expect(output[1].type.name).to.equal('link');
+      expect(output[2].type.name).to.equal('strong');
+
+      expect((output[1] as any).content.length).to.equal(2);
     });
   });
 
