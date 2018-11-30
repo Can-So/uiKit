@@ -1,1 +1,0 @@
-- Fix bug where gap cursor would remove previous node on backspace

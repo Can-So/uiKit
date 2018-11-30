@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.1
+- [patch] [dcd8f90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dcd8f90):
+
+  - Fix bug where gap cursor would remove previous node on backspace
+
 ## 90.3.0
 - [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
 
