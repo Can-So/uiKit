@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 22.2.2
+- [patch] [755fd19](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/755fd19):
+
+  - Fixing null state for task item copy
+
 ## 22.2.1
 - [patch] [126b7b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/126b7b0):
 

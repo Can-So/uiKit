@@ -1,1 +1,0 @@
-- Fixing null state for task item copy
