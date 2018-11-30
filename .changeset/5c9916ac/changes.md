@@ -1,1 +1,0 @@
-- FS-3246 prevent space inserting a selection when no inputValue
