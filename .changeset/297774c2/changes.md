@@ -1,0 +1,1 @@
+- Add reset as it is listed as a valid type for button and is useful when building forms
