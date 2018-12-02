@@ -1,0 +1,1 @@
+- add touch event helpers and canvas mocking

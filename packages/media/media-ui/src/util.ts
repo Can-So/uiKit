@@ -73,6 +73,16 @@ export async function getFileInfo(file: File, src?: string): Promise<FileInfo> {
   };
 }
 
+export async function getFileInfoFromSrc(
+  src: string,
+  file?: File,
+): Promise<FileInfo> {
+  return {
+    file: file || (await dataURItoFile(src)),
+    src,
+  };
+}
+
 export function fileToArrayBuffer(file: File): Promise<Uint8Array> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

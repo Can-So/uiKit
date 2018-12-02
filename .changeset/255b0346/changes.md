@@ -1,0 +1,1 @@
+- add bounds to camera module
