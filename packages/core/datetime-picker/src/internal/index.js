@@ -37,11 +37,7 @@ export function padToTwo(number: number) {
 export const DropdownIndicator = ({
   selectProps: { dropdownIndicatorIcon: Icon },
 }: { selectProps: { dropdownIndicatorIcon?: any } } = {}) =>
-  Icon ? (
-    <span role="img">
-      <Icon />
-    </span>
-  ) : null;
+  Icon ? <Icon /> : null;
 
 export function parseDateIntoStateValues(
   value: string,
