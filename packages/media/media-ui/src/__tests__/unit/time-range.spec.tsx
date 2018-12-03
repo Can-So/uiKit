@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import {
-  TimeRange,
-  TimeRangeProps,
-} from '../../../newgen/viewers/video/TimeRange';
+import { TimeRange, TimeRangeProps } from '../../customVideoPlayer/timeRange';
 import {
   CurrentTimeLine,
   BufferedTime,
   CurrentTimeTooltip,
   Thumb,
   TimeRangeWrapper,
-} from '../../../newgen/viewers/video/styled';
+} from '../../customVideoPlayer/styled';
 
 describe('<TimeRange />', () => {
   const setup = (props?: Partial<TimeRangeProps>) => {

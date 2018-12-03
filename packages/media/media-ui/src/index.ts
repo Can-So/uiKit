@@ -18,6 +18,7 @@ export * from './infiniteScroll';
 export * from './imageMetaData';
 export * from './util';
 export { default as CustomVideoPlayer } from './customVideoPlayer/index';
+export * from './customVideoPlayer/timeRange';
 export * from './classNames';
 export * from './shortcut';
 export * from './formatDuration';

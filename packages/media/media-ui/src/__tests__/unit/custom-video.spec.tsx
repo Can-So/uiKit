@@ -7,15 +7,12 @@ import VidHdCircleIcon from '@atlaskit/icon/glyph/vid-hd-circle';
 import Button from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
 import FieldRange from '@atlaskit/field-range';
-import {
-  CustomVideo,
-  CustomVideoProps,
-} from '../../../newgen/viewers/video/customVideo';
-import { toggleFullscreen } from '../../../newgen/viewers/video/fullscreen';
-import { TimeRange } from '../../../newgen/viewers/video/TimeRange';
-import { CurrentTime } from '../../../newgen/viewers/video/styled';
-import { Shortcut } from '../../../newgen/shortcut';
 import { fakeIntl } from '@atlaskit/media-test-helpers';
+import { CustomVideo, CustomVideoProps } from '../../customVideoPlayer';
+import { toggleFullscreen } from '../../customVideoPlayer/fullscreen';
+import { TimeRange } from '../../customVideoPlayer/TimeRange';
+import { CurrentTime } from '../../customVideoPlayer/styled';
+import { Shortcut } from '../../';
 
 describe('<CustomVideo />', () => {
   const setup = (props?: Partial<CustomVideoProps>) => {

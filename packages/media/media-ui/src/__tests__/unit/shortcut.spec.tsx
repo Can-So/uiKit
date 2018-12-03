@@ -1,12 +1,8 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { Shortcut } from '../../../newgen/shortcut';
+import { KeyboardEventWithKeyCode } from '@atlaskit/media-test-helpers';
+import { Shortcut } from '../../shortcut';
 
-export class KeyboardEventWithKeyCode extends KeyboardEvent {
-  constructor(type: string, options: any) {
-    super(type, options);
-  }
-}
 /**
  * Skipped two tests in here that are failing due something with emitting key events
  * TODO: JEST-23 Fix these tests
