@@ -5,8 +5,11 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+const API_URL =
+  'https://api.bitbucket.org/2.0/repositories/atlassian/atlaskit-mk-2';
+
 const getBuildStatus = async (hashCommit, maxAttemps = 1, timeout = 2000) => {
-  const url = `https://api.bitbucket.org/2.0/repositories/atlassian/atlaskit-mk-2/commit/${hashCommit}/statuses`;
+  const url = `${API_URL}/commit/${hashCommit}/statuses`;
 
   let ready = false;
   let attempts = 1;
@@ -34,7 +37,7 @@ const getBuildStatus = async (hashCommit, maxAttemps = 1, timeout = 2000) => {
 };
 
 const getCommitHash = branchName => {
-  const url = `https://api.bitbucket.org/2.0/repositories/atlassian/atlaskit-mk-2/refs/branches/${branchName}`;
+  const url = `${API_URL}/refs/branches/${branchName}`;
 
   return fetch(url)
     .then(function(response) {
