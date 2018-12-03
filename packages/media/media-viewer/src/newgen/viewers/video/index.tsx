@@ -53,6 +53,7 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
         src={content}
         isHDActive={isHDActive}
         isHDAvailable={isHDAvailable(item)}
+        isShortcutEnabled={true}
       />
     ) : (
       <Video autoPlay={isAutoPlay} controls src={content} />

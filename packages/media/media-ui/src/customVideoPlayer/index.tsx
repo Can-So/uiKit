@@ -49,7 +49,7 @@ export interface CustomVideoProps {
   readonly isHDAvailable: boolean;
   readonly showControls?: () => void;
   readonly isAutoPlay: boolean;
-  readonly isShortcutEnabled?: boolean; // TODO: pass true from MV
+  readonly isShortcutEnabled?: boolean;
 }
 
 export interface CustomVideoState {
