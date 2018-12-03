@@ -57,7 +57,6 @@ const getManifest = hash => {
   return fetch(url).then(function(response) {
     return response.json();
   });
-  4;
 };
 
 const installFromBranch = async (branchName, options) => {
