@@ -37,7 +37,7 @@ describe('StatusPicker', () => {
     expect(component.find(FieldTextStateless).prop('value')).toBe(
       'In progress',
     );
-    expect(component.find(FieldTextStateless).prop('autoFocus')).toBe(true);
+    expect(component.find(FieldTextStateless).prop('innerRef')).toBeDefined();
   });
 
   it('should pass onColorClick handler prop to color palette', () => {
