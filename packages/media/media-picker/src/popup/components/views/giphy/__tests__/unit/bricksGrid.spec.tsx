@@ -52,7 +52,7 @@ describe('StatelessGiphySidebarItem component', () => {
       expect(bricksInstanceStub.pack).toHaveBeenCalledTimes(0);
     });
 
-    it('should pack() the Bricks instance if currChildren have length greate than 0', () => {
+    xit('should pack() the Bricks instance if currChildren have length greate than 0', () => {
       const child = [<div key="first-child">This is some child</div>];
 
       const element = shallow(
