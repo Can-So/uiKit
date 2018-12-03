@@ -199,4 +199,29 @@ export const messages = defineMessages({
     defaultMessage: 'Ops Project',
     description: '',
   },
+  jira_result_type_board: {
+    id: 'global_search.jira.result_type.board',
+    defaultMessage: 'Board',
+    description: '',
+  },
+  jira_result_type_filter: {
+    id: 'global_search.jira.result_type.filter',
+    defaultMessage: 'Filter',
+    description: '',
+  },
+  jira_issue_type_bug: {
+    id: 'global_search.jira.issue_type.bug',
+    defaultMessage: 'Bug',
+    description: '',
+  },
+  jira_issue_type_story: {
+    id: 'global_search.jira.issue_type.story',
+    defaultMessage: 'Story',
+    description: '',
+  },
+  jira_issue_type_task: {
+    id: 'global_search.jira.issue_type.task',
+    defaultMessage: 'Story',
+    description: '',
+  },
 });

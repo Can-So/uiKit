@@ -14,11 +14,13 @@ import {
   ResultType,
   ConfluenceObjectResult,
   JiraProjectType,
+  ContentType,
 } from '../model/Result';
 import { SelectedIcon } from './styled';
 import { getAvatarForConfluenceObjectResult } from '../util/confluence-avatar-util';
 import { getDefaultAvatar } from '../util/jira-avatar-util';
 import DarkReturn from '../assets/DarkReturn';
+import { addJiraResultQueryParams } from '../api/JiraItemMapper';
 
 export interface Props {
   results: Result[];
@@ -64,6 +66,69 @@ const getI18nJiraContainerName = (
       return <FormattedMessage {...messages.jira_project_type_ops_project} />;
     }
   }
+};
+
+const getTranslatedJiraType = (
+  contentType: ContentType,
+  containerName,
+): JSX.Element | undefined => {
+  switch (contentType) {
+    case 'jira-issue':
+      return get18nJiraIssueType(containerName);
+    case 'jira-project':
+      return get18nJiraProjectType(containerName);
+  }
+  return getI18nJiraContentType(contentType);
+};
+
+const getI18nJiraContentType = (
+  contentType: ContentType,
+): JSX.Element | undefined => {
+  switch (contentType) {
+    case ContentType.JiraBoard: {
+      return <FormattedMessage {...messages.jira_result_type_board} />;
+    }
+    case ContentType.JiraFilter: {
+      return <FormattedMessage {...messages.jira_result_type_filter} />;
+    }
+  }
+  debugger;
+  return undefined;
+};
+
+const get18nJiraIssueType = (issueType: string): JSX.Element | undefined => {
+  switch (issueType) {
+    case 'Bug': {
+      return <FormattedMessage {...messages.jira_issue_type_bug} />;
+    }
+    case 'Story': {
+      return <FormattedMessage {...messages.jira_issue_type_story} />;
+    }
+    case 'Task': {
+      return <FormattedMessage {...messages.jira_issue_type_task} />;
+    }
+  }
+  return <div>${issueType}</div>;
+};
+
+const get18nJiraProjectType = (
+  projectType: string,
+): JSX.Element | undefined => {
+  switch (projectType) {
+    case 'Service Desk project': {
+      return (
+        <FormattedMessage
+          {...messages.jira_project_type_service_desk_project}
+        />
+      );
+    }
+    case 'Software project': {
+      return (
+        <FormattedMessage {...messages.jira_project_type_software_project} />
+      );
+    }
+  }
+  return <div>${projectType}</div>;
 };
 
 export const getUniqueResultId = (result: Result): string =>
@@ -131,6 +196,17 @@ export default class ResultList extends React.Component<Props> {
           const jiraResult = result as JiraResult;
           const avatarData = extractAvatarData(jiraResult);
 
+          // This can be issue type, project type, component type or container
+          const translatedType = getTranslatedJiraType(
+            jiraResult.contentType,
+            jiraResult.containerName,
+          );
+          // In case of board containerName is <projectName - boardName> or only projectName. objectKey is undefined
+          const objectKey =
+            jiraResult.contentType === 'jira-board'
+              ? jiraResult.containerName
+              : jiraResult.objectKey;
+
           return (
             <ObjectResultComponent
               key={uniqueResultId}
@@ -138,8 +214,8 @@ export default class ResultList extends React.Component<Props> {
               name={jiraResult.name}
               href={jiraResult.href}
               type={jiraResult.analyticsType}
-              objectKey={jiraResult.objectKey}
-              containerName={jiraResult.containerName}
+              objectKey={objectKey}
+              containerName={translatedType}
               {...avatarData}
               analyticsData={analyticsData}
               selectedIcon={selectedIcon}
