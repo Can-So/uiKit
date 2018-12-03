@@ -13,7 +13,7 @@ export type Props = CommonResultProps & {
   /** Set whether to display a lock on the result's icon */
   isPrivate?: boolean;
   /** A key or identifier of the object. Ajoined to the `containerName` when provided. */
-  objectKey?: string;
+  objectKey?: React.ReactNode;
 };
 
 /**

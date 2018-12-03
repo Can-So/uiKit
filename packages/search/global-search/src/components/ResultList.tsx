@@ -69,12 +69,11 @@ const getI18nJiraContainerName = (
 
 const getTranslatedJiraType = (
   contentType: ContentType,
-  containerName: string,
-): JSX.Element | string | undefined => {
+): JSX.Element | undefined => {
   if (contentType === 'jira-board' || contentType === 'jira-filter') {
     return getI18nJiraContentType(contentType);
   }
-  return containerName;
+  return undefined;
 };
 
 const getI18nJiraContentType = (
@@ -156,16 +155,12 @@ export default class ResultList extends React.Component<Props> {
           const jiraResult = result as JiraResult;
           const avatarData = extractAvatarData(jiraResult);
 
-          // This can be issue type, project type, component type or container
-          const translatedType = getTranslatedJiraType(
-            jiraResult.contentType,
-            jiraResult.containerName,
-          );
-          // In case of board containerName is <projectName - boardName> or only projectName. objectKey is undefined
           const objectKey =
-            jiraResult.contentType === 'jira-board'
-              ? jiraResult.containerName
+            jiraResult.contentType === 'jira-board' ||
+            jiraResult.contentType === 'jira-filter'
+              ? getTranslatedJiraType(jiraResult.contentType)
               : jiraResult.objectKey;
+          var containerName = jiraResult.containerName;
 
           return (
             <ObjectResultComponent
@@ -175,7 +170,7 @@ export default class ResultList extends React.Component<Props> {
               href={jiraResult.href}
               type={jiraResult.analyticsType}
               objectKey={objectKey}
-              containerName={translatedType}
+              containerName={containerName}
               {...avatarData}
               analyticsData={analyticsData}
               selectedIcon={selectedIcon}
