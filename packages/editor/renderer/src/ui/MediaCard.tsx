@@ -17,6 +17,7 @@ import {
   // @ts-ignore
   ImageLoaderState,
 } from '@atlaskit/editor-common';
+import { RendererAppearance } from './Renderer';
 
 export interface MediaProvider {
   viewContext?: Context;
@@ -36,6 +37,7 @@ export interface MediaCardProps {
   cardDimensions?: CardDimensions;
   resizeMode?: ImageResizeMode;
   appearance?: CardAppearance;
+  rendererAppearance?: RendererAppearance;
   occurrenceKey?: string;
   imageStatus?: ImageStatus;
   disableOverlay?: boolean;
@@ -101,7 +103,7 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       collection,
       cardDimensions,
       resizeMode,
-      appearance,
+      rendererAppearance,
       disableOverlay,
     } = this.props;
 
@@ -134,7 +136,7 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
           eventHandlers && eventHandlers.media && eventHandlers.media.onClick
         }
         resizeMode={resizeMode}
-        appearance={appearance}
+        isLazy={rendererAppearance === 'mobile' ? false : true}
         disableOverlay={disableOverlay}
       />
     );
