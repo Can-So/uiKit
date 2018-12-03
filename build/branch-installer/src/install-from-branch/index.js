@@ -1,11 +1,36 @@
 const fetch = require('node-fetch');
 const spawndamnit = require('spawndamnit');
 
-const getBuildStatus = async branchName => {
-  const url =
-    '/2.0/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/';
-  console.log('TODO: Implement me');
-  return true;
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+const getBuildStatus = async (hashCommit, maxAttemps = 1, timeout = 2000) => {
+  const url = `https://api.bitbucket.org/2.0/repositories/atlassian/atlaskit-mk-2/commit/${hashCommit}/statuses`;
+
+  let ready = false;
+  let attempts = 1;
+
+  while (!ready && attempts <= maxAttemps) {
+    await fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        let result = Object.assign({}, { values: [] }, data);
+        const pipeline = result.values.filter(x => x.type === 'build')[0] || {};
+
+        if (pipeline.state === 'SUCCESSFUL') {
+          ready = true;
+        }
+
+        attempts++;
+      });
+
+    if (!ready) {
+      await sleep(timeout);
+    }
+  }
+
+  return ready;
 };
 
 const getCommitHash = branchName => {
@@ -36,13 +61,13 @@ const getManifest = hash => {
 };
 
 const installFromBranch = async (branchName, options) => {
-  const hasBuildFinished = await getBuildStatus(branchName);
+  const hash = await getCommitHash(branchName);
+  const hasBuildFinished = await getBuildStatus(hash);
 
   if (!hasBuildFinished) {
     throw 'Build is not finished yet'; //TODO: ADD BUILD STATUS MESSAGE
   }
 
-  const hash = await getCommitHash(branchName);
   const manifest = await getManifest(hash);
 
   console.log(manifest);
