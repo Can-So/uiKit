@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Component, CSSProperties } from 'react';
 import { Context } from '@atlaskit/media-core';
+import { Subscription } from 'rxjs/Subscription';
+import { CustomVideoPlayer } from '@atlaskit/media-ui';
 import { FileIdentifier } from './domain';
 import { InlinePlayerWrapper } from './styled';
 import { CardDimensions, defaultImageCardDimensions } from '..';
-import { Subscription } from 'rxjs/Subscription';
 import { CardLoading } from '../utils/cardLoading';
 
 export interface InlinePlayerProps {
@@ -110,7 +111,7 @@ export class InlinePlayer extends Component<
 
     return (
       <InlinePlayerWrapper style={this.style}>
-        <video src={fileSrc} autoPlay controls />
+        <CustomVideoPlayer src={fileSrc} isAutoPlay isHDAvailable={false} />
       </InlinePlayerWrapper>
     );
   }

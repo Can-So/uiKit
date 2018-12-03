@@ -7,6 +7,7 @@ import FullScreenIconOff from '@atlaskit/icon/glyph/vid-full-screen-off';
 import SoundIcon from '@atlaskit/icon/glyph/hipchat/outgoing-sound';
 import HDIcon from '@atlaskit/icon/glyph/vid-hd-circle';
 import Button from '@atlaskit/button';
+import Spinner from '@atlaskit/spinner';
 import Video, {
   SetVolumeFunction,
   NavigateFunction,
@@ -15,7 +16,7 @@ import Video, {
 } from 'react-video-renderer';
 import { colors } from '@atlaskit/theme';
 import FieldRange from '@atlaskit/field-range';
-import { TimeRange } from './TimeRange';
+import { TimeRange } from './timeRange';
 import {
   CurrentTime,
   VideoWrapper,
@@ -30,17 +31,16 @@ import {
   MutedIndicator,
   SpinnerWrapper,
 } from './styled';
-import { formatDuration } from '../../utils/formatDuration';
-import { hideControlsClassName } from '../../styled';
-import { Shortcut, keyCodes } from '../../shortcut';
+import { formatDuration } from '../formatDuration';
+import { hideControlsClassName } from '../classNames';
+import { Shortcut, keyCodes } from '../shortcut';
 import {
   toggleFullscreen,
   getFullscreenElement,
   vendorify,
 } from './fullscreen';
-import { Spinner } from '../../loading';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { messages } from '@atlaskit/media-ui';
+import { messages } from '../messages';
 
 export interface CustomVideoProps {
   readonly src: string;
@@ -49,6 +49,7 @@ export interface CustomVideoProps {
   readonly isHDAvailable: boolean;
   readonly showControls?: () => void;
   readonly isAutoPlay: boolean;
+  readonly isShortcutEnabled?: boolean; // TODO: pass true from MV
 }
 
 export interface CustomVideoState {
@@ -179,7 +180,7 @@ export class CustomVideo extends Component<
 
   renderSpinner = () => (
     <SpinnerWrapper>
-      <Spinner />
+      <Spinner invertColor size="large" />
     </SpinnerWrapper>
   );
 
@@ -187,6 +188,7 @@ export class CustomVideo extends Component<
     const {
       src,
       isAutoPlay,
+      isShortcutEnabled,
       intl: { formatMessage },
     } = this.props;
     return (
@@ -214,19 +216,24 @@ export class CustomVideo extends Component<
                 onClick={toggleButtonAction}
               />
             );
+            const shortcuts = isShortcutEnabled && [
+              <Shortcut
+                key="space-shortcut"
+                keyCode={keyCodes.space}
+                handler={this.shortcutHanler(toggleButtonAction)}
+              />,
+              <Shortcut
+                key="m-shortcut"
+                keyCode={keyCodes.m}
+                handler={this.shortcutHanler(actions.toggleMute)}
+              />,
+            ];
 
             return (
               <VideoWrapper>
                 {video}
                 {isLoading && this.renderSpinner()}
-                <Shortcut
-                  keyCode={keyCodes.space}
-                  handler={this.shortcutHanler(toggleButtonAction)}
-                />
-                <Shortcut
-                  keyCode={keyCodes.m}
-                  handler={this.shortcutHanler(actions.toggleMute)}
-                />
+                {shortcuts}
                 <ControlsWrapper className={hideControlsClassName}>
                   <TimeWrapper>
                     <TimeRange

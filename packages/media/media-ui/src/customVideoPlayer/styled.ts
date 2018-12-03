@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
-import { blanketColor } from '../../styled';
 
 // TODO: remove not used imports
+const blanketColor = colors.DN30;
+
 export interface MutedIndicatorProps {
   isMuted: boolean;
 }

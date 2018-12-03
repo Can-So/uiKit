@@ -65,9 +65,12 @@ export const Wrapper: ComponentClass<
 export const InlinePlayerWrapper = styled.div`
   overflow: hidden;
   border-radius: ${akBorderRadius};
+  position: relative;
 
   video {
     width: 100%;
     height: 100%;
   }
 `;
+
+InlinePlayerWrapper.displayName = 'InlinePlayerWrapper';
