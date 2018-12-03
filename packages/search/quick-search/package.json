@@ -39,7 +39,7 @@
     "@atlaskit/docs": "^5.2.3",
     "@atlaskit/drawer": "^2.5.4",
     "@atlaskit/navigation": "^33.3.7",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "enzyme": "^3.7.0",
     "prop-types": "^15.5.10",
     "react": "^16.4.0",
     "sinon": "^2.2.0",

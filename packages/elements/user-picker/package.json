@@ -44,7 +44,7 @@
     "@atlaskit/docs": "^5.2.3",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/util-data-test": "^10.0.22",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "enzyme": "^3.7.0",
     "react-intl": "^2.6.0"
   },
   "repository": {

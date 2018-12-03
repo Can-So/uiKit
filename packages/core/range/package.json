@@ -29,7 +29,7 @@
     "@atlaskit/checkbox": "^5.0.8",
     "@atlaskit/docs": "^5.2.3",
     "@atlaskit/tooltip": "^12.1.12",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },
   "keywords": [
