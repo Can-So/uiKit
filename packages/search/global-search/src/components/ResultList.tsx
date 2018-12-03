@@ -67,15 +67,6 @@ const getI18nJiraContainerName = (
   }
 };
 
-const getTranslatedJiraType = (
-  contentType: ContentType,
-): JSX.Element | undefined => {
-  if (contentType === 'jira-board' || contentType === 'jira-filter') {
-    return getI18nJiraContentType(contentType);
-  }
-  return undefined;
-};
-
 const getI18nJiraContentType = (
   contentType: ContentType,
 ): JSX.Element | undefined => {
@@ -158,7 +149,7 @@ export default class ResultList extends React.Component<Props> {
           const objectKey =
             jiraResult.contentType === 'jira-board' ||
             jiraResult.contentType === 'jira-filter'
-              ? getTranslatedJiraType(jiraResult.contentType)
+              ? getI18nJiraContentType(jiraResult.contentType)
               : jiraResult.objectKey;
           var containerName = jiraResult.containerName;
 
