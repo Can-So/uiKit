@@ -1,0 +1,1 @@
+- Added result type for boards and filters in global search result subtext
