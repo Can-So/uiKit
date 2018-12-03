@@ -1,0 +1,30 @@
+{
+  "name": "atlaskit-branch-installer",
+  "version": "0.0.1",
+  "private": true,
+  "description": "TODO: FILL IN",
+  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "atlaskit:src": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Atlassian Pty Ltd",
+  "maintainers": [
+    "Ben G"
+  ],
+  "files": [
+    "dist"
+  ],
+  "atlaskit": {
+    "internal": true
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {},
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "meow": "^5.0.0",
+    "node-fetch": "^2.2.0",
+    "spawndamnit": "^1.0.0"
+  }
+}
