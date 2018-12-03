@@ -1,0 +1,10 @@
+{
+  "releases": [{ "name": "@atlaskit/button", "type": "minor" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/feedback-collector",
+      "type": "major",
+      "dependencies": ["@atlaskit/button"]
+    }
+  ]
+}

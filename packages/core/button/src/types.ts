@@ -68,7 +68,7 @@ export type ButtonProps = {
   /** Pass target down to a link within the button component, if a href is provided. */
   target?: string;
   /** Set whether it is a button or a form submission. */
-  type: 'button' | 'submit';
+  type: 'button' | 'submit' | 'reset';
   /** Option to fit button width to its parent width */
   shouldFitContainer: boolean;
   /** Set the button to autofocus on mount. */
