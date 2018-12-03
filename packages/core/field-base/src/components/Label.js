@@ -43,6 +43,8 @@ export default class Label extends Component<Props, void> {
       onClick,
     } = this.props;
 
+    if (isLabelHidden) return null;
+
     return (
       <LabelWrapper htmlFor={htmlFor}>
         <LabelInner

@@ -41,8 +41,6 @@ export const LabelInner = styled.div`
   font-weight: 600;
   line-height: ${lineHeight};
   ${getPadding};
-
-  ${p => p.isHidden && 'display: none;'};
 `;
 
 export const RequiredIndicator = styled.span`
