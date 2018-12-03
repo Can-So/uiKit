@@ -4,7 +4,7 @@ exports[`navigation-next view renderer HeaderSection should render the HeaderSec
 <HeaderSection
   id="header"
 >
-  <unknown />
+  <Component />
 </HeaderSection>
 `;
 
@@ -47,7 +47,7 @@ Array [
     index={4}
     key="goto-item"
   />,
-  <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(InlineCustom)))
+  <WithAnalyticsContext(WithAnalyticsEvents(InlineCustom))
     components={
       Object {
         "BackItem": [Function],
@@ -78,7 +78,7 @@ Array [
     index={5}
     key="inlineCustom"
   />,
-  <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Corgie)))
+  <WithAnalyticsContext(WithAnalyticsEvents(Corgie))
     components={
       Object {
         "BackItem": [Function],
@@ -117,7 +117,7 @@ exports[`navigation-next view renderer MenuSection should render the MenuSection
   alwaysShowScrollHint={false}
   id="menu"
 >
-  <unknown />
+  <Component />
 </MenuSection>
 `;
 
