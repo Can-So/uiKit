@@ -1,11 +1,12 @@
 import * as React from 'react';
 import Button from '@atlaskit/button';
+import Drawer from '@atlaskit/drawer';
 import { AnalyticsListener } from '../../../core/analytics-next/src/';
 import { setupMocks, teardownMocks } from '../example-helpers/mockApis';
 import { GlobalQuickSearch } from '../src';
 import withNavigation from '../example-helpers/withNavigation';
 
-const GlobalQuickSearchInNavigation = withNavigation(GlobalQuickSearch);
+const GlobalQuickSearchWrapper = withNavigation(GlobalQuickSearch);
 
 const logEvent = event => {
   const { eventType, action, actionSubject, actionSubjectId } = event.payload;
@@ -44,16 +45,18 @@ export default class GlobalQuickSearchExample extends React.Component {
   }
 
   render() {
-    return this.state.isDrawerOpen ? (
-      <div style={{ padding: '2rem' }}>
-        <AnalyticsListener onEvent={logEvent} channel="fabric-elements">
-          <GlobalQuickSearchInNavigation />
-        </AnalyticsListener>
-      </div>
-    ) : (
-      <Button type="button" onClick={this.openDrawer}>
-        Open example
-      </Button>
+    return (
+      <>
+        <Drawer isOpen={this.state.isDrawerOpen} onClose={this.closeDrawer}>
+          <AnalyticsListener onEvent={logEvent} channel="fabric-elements">
+            <GlobalQuickSearchWrapper />
+          </AnalyticsListener>
+        </Drawer>
+
+        <Button type="button" onClick={this.openDrawer}>
+          Open example
+        </Button>
+      </>
     );
   }
 }
