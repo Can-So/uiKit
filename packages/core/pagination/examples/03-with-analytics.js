@@ -4,14 +4,16 @@ import { AnalyticsListener } from '@atlaskit/analytics-next';
 import Pagination from '../src';
 
 type State = {
-  analyticEvent: Object,
+  analyticEventContext: Object,
+  analyticEventPayload: Object,
   items: Array<{ value: number }>,
   selected: number,
 };
 
 export default class extends Component<{}, State> {
   state = {
-    analyticEvent: {},
+    analyticEventContext: {},
+    analyticEventPayload: {},
     items: pageLinks,
     selected: 1,
   };
@@ -36,20 +38,23 @@ export default class extends Component<{}, State> {
 
   sendAnalytics = (analyticEvent: Object) => {
     this.setState({
-      analyticEvent,
+      analyticEventContext: analyticEvent.context,
+      analyticEventPayload: analyticEvent.payload,
     });
   };
 
   render() {
-    const { analyticEvent, items } = this.state;
+    const { analyticEventContext, analyticEventPayload, items } = this.state;
     return (
       <AnalyticsListener channel="atlaskit" onEvent={this.sendAnalytics}>
         <Pagination
           getPageLabel={page => (typeof page === 'object' ? page.value : page)}
           pages={items}
         />
-        <h2>Analytics Event received</h2>
-        <pre>{JSON.stringify(analyticEvent, null, 2)}</pre>
+        <h2>Analytics event context received</h2>
+        <pre>{JSON.stringify(analyticEventContext, null, 2)}</pre>
+        <h2>Analytics event payload received</h2>
+        <pre>{JSON.stringify(analyticEventPayload, null, 2)}</pre>
       </AnalyticsListener>
     );
   }
