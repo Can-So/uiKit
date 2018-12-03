@@ -51,8 +51,7 @@ const getCdnUrl = hash => {
 };
 
 const getManifest = hash => {
-  // const url = `${getCdnUrl(hash)}/manifest.json`;
-  const url = `${getCdnUrl(hash)}/metadata.json`;
+  const url = `${getCdnUrl(hash)}/manifest.json`;
 
   return fetch(url).then(function(response) {
     return response.json();
