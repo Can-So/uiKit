@@ -1,0 +1,1 @@
+- use custom video player for inline video in media-card
