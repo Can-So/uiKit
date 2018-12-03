@@ -1,18 +1,7 @@
-// @ts-ignore: unused variable
-import styled, { StyledComponentClass } from 'styled-components';
-// @ts-ignore: unused variable
-import {
-  // @ts-ignore: unused variable
-  HTMLAttributes,
-  // @ts-ignore: unused variable
-  InputHTMLAttributes,
-  // @ts-ignore: unused variable
-  ClassAttributes,
-  // @ts-ignore: unused variable
-  ComponentClass,
-} from 'react';
+import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
-import { blanketColor } from '../../styled';
+
+const blanketColor = colors.DN30;
 
 export interface MutedIndicatorProps {
   isMuted: boolean;

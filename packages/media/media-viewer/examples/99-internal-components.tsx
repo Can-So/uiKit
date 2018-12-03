@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { TimeRange } from '../src/newgen/viewers/video/TimeRange';
+import { TimeRange } from '@atlaskit/media-ui';
 import { Container, Group, TimeRangeWrapper } from '../example-helpers/styled';
 
 export interface ExampleState {

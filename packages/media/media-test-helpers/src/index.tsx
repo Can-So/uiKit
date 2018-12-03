@@ -19,3 +19,4 @@ export * from './I18nWrapper';
 export * from './mountWithIntlContext';
 export * from './fakeI18n';
 export * from './mockCanvas';
+export * from './keyboardEventWithKeyCode';
