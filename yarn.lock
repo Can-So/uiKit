@@ -13160,7 +13160,6 @@ react-base16-styling@^0.5.1:
 react-beautiful-dnd@^10.0.2:
   version "10.0.2"
   resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-10.0.2.tgz#618fe3dcd841c65235fca89bdde99a172fe77e50"
-  integrity sha512-hLdSdUh7UHHCpFx/dMqtLmxVry8npxjdSpwmLG5dM6D578qv9LMF3uuAn37X6Wgyc2Hj5TYFoFL2iQWMnoR/Bg==
   dependencies:
     "@babel/runtime-corejs2" "^7.1.5"
     css-box-model "^1.1.1"
@@ -16600,9 +16599,9 @@ vfile@^2.0.0:
     unist-util-stringify-position "^1.0.0"
     vfile-message "^1.0.0"
 
-video-snapshot@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/video-snapshot/-/video-snapshot-1.0.1.tgz#691f2fc62018ca85df7b9f4fa429b6694c2d60c2"
+video-snapshot@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/video-snapshot/-/video-snapshot-1.0.2.tgz#601cd3ea3b387828689bd54b0e21a91000e3d594"
 
 vinyl-file@^2.0.0:
   version "2.0.0"
