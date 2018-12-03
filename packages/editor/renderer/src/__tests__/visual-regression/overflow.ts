@@ -1,28 +1,20 @@
-import {
-  getExampleUrl,
-  takeScreenShot,
-} from '@atlaskit/visual-regression/helper';
+import { goToRendererTestingExample, snapshot, mountRenderer } from './_utils';
+import * as document from '../../../examples/helper/overflow.adf.json';
 
 describe('Snapshot Test: Overflow shadows', () => {
   let page;
-  const url = getExampleUrl(
-    'editor',
-    'renderer',
-    'overflow',
-    // @ts-ignore
-    global.__BASEURL__,
-  );
-
   beforeAll(async () => {
     // @ts-ignore
     page = global.page;
-    await page.goto(url);
+    await goToRendererTestingExample(page);
     await page.setViewport({ width: 1280, height: 1080 });
   });
 
   it(`should render right shadows`, async () => {
-    const image = await takeScreenShot(page, url);
-    // @ts-ignore
-    expect(image).toMatchProdImageSnapshot();
+    await mountRenderer(page, {
+      appearance: 'full-page',
+      document,
+    });
+    await snapshot(page);
   });
 });

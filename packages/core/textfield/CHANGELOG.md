@@ -1,5 +1,10 @@
 # @atlaskit/textfield
 
+## 0.1.2
+- [patch] [480a57c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/480a57c):
+
+  - Convert to use new theme API.
+
 ## 0.1.1
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

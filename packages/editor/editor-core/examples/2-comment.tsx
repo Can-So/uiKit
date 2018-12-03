@@ -127,7 +127,6 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
                     allowRule={true}
                     allowTables={true}
                     allowHelpDialog={true}
-                    allowGapCursor={true}
                     disabled={disabled}
                     activityProvider={activityProvider}
                     mentionProvider={mentionProvider}

@@ -1,5 +1,16 @@
 # @atlaskit/field-range
 
+## 5.0.11
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/theme@7.0.0
+
+## 5.0.10
+- [patch] [ebc1e9d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebc1e9d):
+
+  - Bump to fix the range in Section message
+
 ## 5.0.9
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

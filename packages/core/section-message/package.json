@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/section-message",
-  "version": "1.0.11",
+  "version": "1.0.13",
   "description": "A react component used to alert users of a particular screen area that needs user action",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -16,9 +16,9 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/button": "^10.0.0",
-    "@atlaskit/icon": "^14.6.1",
-    "@atlaskit/theme": "^6.2.1",
+    "@atlaskit/button": "^10.0.4",
+    "@atlaskit/icon": "^15.0.1",
+    "@atlaskit/theme": "^7.0.0",
     "@babel/runtime": "^7.0.0"
   },
   "peerDependencies": {
@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^5.2.1",
-    "@atlaskit/field-range": "^5.0.9",
+    "@atlaskit/docs": "^5.2.3",
+    "@atlaskit/field-range": "^5.0.11",
     "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "jest-in-case": "^1.0.2",

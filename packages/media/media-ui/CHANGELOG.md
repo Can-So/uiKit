@@ -1,5 +1,52 @@
 # @atlaskit/media-ui
 
+## 7.9.0
+- [minor] [c61f828](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c61f828):
+
+  - add bounds to camera module
+
+## 7.8.2
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/avatar-group@2.1.8
+  - @atlaskit/button@10.0.4
+  - @atlaskit/checkbox@5.0.8
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/field-text@7.0.16
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/badge@9.2.1
+  - @atlaskit/lozenge@6.2.3
+
+## 7.8.1
+- [patch] [4c0c2a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c0c2a0):
+
+  - Fix Cards throwing Error when client is not provided.
+
+## 7.8.0
+- [minor] [5a6de24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6de24):
+
+  - translate component properties in media components
+
+## 7.7.0
+- [minor] [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+
+  - Introduced pending state (which is represented as a link) and a race between resolving state and the data fetch.
+
+## 7.6.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/avatar-group@2.1.7
+  - @atlaskit/button@10.0.1
+  - @atlaskit/checkbox@5.0.7
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
 ## 7.6.1
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

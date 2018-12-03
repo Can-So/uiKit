@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/user-picker",
-  "version": "0.0.21",
+  "version": "0.0.27",
   "config": {
     "access": "public"
   },
@@ -11,20 +11,15 @@
   "atlaskit:src": "src/index.ts",
   "sideEffects": false,
   "files": [
-    "dist/es5/**/*.js",
-    "dist/es5/**/*.d.ts",
-    "dist/es5/**/*.json",
-    "dist/es2015/**/*.js",
-    "dist/es2015/**/*.d.ts",
-    "dist/es2015/**/*.json",
+    "dist",
     "src"
   ],
   "dependencies": {
-    "@atlaskit/avatar": "^14.0.10",
-    "@atlaskit/lozenge": "^6.2.1",
-    "@atlaskit/select": "^6.0.2",
-    "@atlaskit/tag": "^6.0.9",
-    "@atlaskit/theme": "^6.2.0",
+    "@atlaskit/avatar": "^14.1.6",
+    "@atlaskit/lozenge": "^6.2.3",
+    "@atlaskit/select": "^6.1.10",
+    "@atlaskit/tag": "^6.1.2",
+    "@atlaskit/theme": "^7.0.0",
     "@types/lodash.debounce": "^4.0.4",
     "lodash.debounce": "^4.0.8",
     "memoize-one": "^3.0.1"
@@ -46,9 +41,9 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@atlaskit/docs": "^5.0.7",
+    "@atlaskit/docs": "^5.2.3",
     "@atlaskit/i18n-tools": "^0.4.0",
-    "@atlaskit/util-data-test": "^10.0.19",
+    "@atlaskit/util-data-test": "^10.0.22",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-intl": "^2.6.0"
   },

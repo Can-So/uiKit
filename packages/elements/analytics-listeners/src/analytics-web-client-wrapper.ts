@@ -5,6 +5,10 @@ import {
 } from '@atlaskit/analytics-gas-types';
 import Logger from './helpers/logger';
 
+const isPromise = (c: any): c is Promise<AnalyticsWebClient> => {
+  return typeof c.then === 'function';
+};
+
 export const sendEvent = (
   logger: Logger,
   client?: AnalyticsWebClient | Promise<AnalyticsWebClient>,
@@ -16,14 +20,16 @@ export const sendEvent = (
     delete gasEvent.eventType;
 
     const withClient = (cb: (analyticsClient: AnalyticsWebClient) => void) => {
-      if (client instanceof Promise) {
+      if (isPromise(client)) {
         client
           .then(cb)
-          .catch(() =>
-            logger.warn('AnalyticsWebClient instance could not be resolved'),
-          );
+          .catch(e => logger.warn('There was an error sending the event', e));
       } else {
-        cb(client);
+        try {
+          cb(client);
+        } catch (e) {
+          logger.warn('There was an error sending the event', e);
+        }
       }
     };
 

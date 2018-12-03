@@ -1,5 +1,32 @@
 # @atlaskit/button
 
+## 10.0.4
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/checkbox@5.0.8
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/theme@7.0.0
+
+## 10.0.3
+- [patch] [76a8f1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76a8f1c):
+
+  - Convert @atlaskit/textarea to Typescript
+    - Dist paths have changed, if you are importing by exact file path you will need to update your imports `import '@atlaskit/button/dist/es5/components/ButtonGroup'`
+    - Flow types are not present any more, Typescript definitions are shipped instead
+
+## 10.0.2
+- [patch] [8f89287](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8f89287):
+
+  - Add tslib to dependencies to stop load breaking when it's not there
+
+## 10.0.1
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/checkbox@5.0.7
+  - @atlaskit/icon@15.0.0
+
 ## 10.0.0
 - [major] [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
 

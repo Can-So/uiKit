@@ -40,7 +40,7 @@ export interface MediaNodeProps extends ReactNodeProps {
   cardDimensions: CardDimensions;
   isMediaSingle?: boolean;
   mediaProvider?: Promise<MediaProvider>;
-  onClick?: () => void;
+  onClick?: CardOnClickCallback;
   onExternalImageLoaded?: (
     dimensions: { width: number; height: number },
   ) => void;

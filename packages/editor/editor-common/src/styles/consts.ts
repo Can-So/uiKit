@@ -72,6 +72,7 @@ export const akEditorBreakoutPadding = 96;
 export const akEditorMobileBreakoutPoint = 720;
 export const akEditorTableCellMinWidth = 48;
 export const gridMediumMaxWidth = 1024;
+export const breakoutWideScaleRatio = 1.33;
 
 export const editorFontSize = ({ theme }) =>
   theme && theme.baseFontSize ? theme.baseFontSize : defaultFontSize();

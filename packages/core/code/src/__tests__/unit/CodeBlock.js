@@ -12,12 +12,12 @@ const code = `
 const theme = { mode: 'dark' };
 
 describe('CodeBlock', () => {
-  it('should have "clike" as the default language', () => {
+  it('should have "text" as the default language', () => {
     expect(
       mount(<ThemedCodeBlock text={code} />)
         .find(CodeBlock)
         .prop('language'),
-    ).toBe('clike');
+    ).toBe('text');
   });
 
   it('should have "showLineNumbers" enabled by default', () => {

@@ -26,6 +26,8 @@ export interface Props {
   cols?: number;
   /** color of checkmark on selected color */
   checkMarkColor?: string;
+  /** props for react-popper */
+  popperProps?: Object;
   /** onChange handler */
   onChange: (value: string, analyticsEvent?: object) => void;
   /** You should not be accessing this prop under any circumstances. It is provided by @atlaskit/analytics-next. */
@@ -35,6 +37,12 @@ export interface Props {
 export interface State {
   isOpen: boolean;
 }
+
+const defaultPopperProps = {
+  positionFixed: true,
+  modifiers: { offset: { offset: `0, 8` } },
+  placement: 'bottom-start',
+};
 
 const getOptions = memoizeOne((props: Props) => {
   const { palette, selectedColor } = props;
@@ -95,7 +103,12 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
   };
 
   render() {
-    const { checkMarkColor, cols, label = 'Color picker' } = this.props;
+    const {
+      checkMarkColor,
+      cols,
+      popperProps = defaultPopperProps,
+      label = 'Color picker',
+    } = this.props;
     const { options, value } = getOptions(this.props);
     const { isOpen } = this.state;
     const fullLabel = `${label}, ${value.label} selected`;
@@ -107,14 +120,7 @@ export class ColorPickerWithoutAnalytics extends React.Component<Props, State> {
             <Trigger {...value} label={fullLabel} expanded={isOpen} />
           </ColorCardWrapper>
         }
-        popperProps={{
-          modifiers: {
-            offset: { offset: '0, 5' },
-            preventOverflow: {
-              padding: 0,
-            },
-          },
-        }}
+        popperProps={popperProps}
         maxMenuWidth="auto"
         minMenuWidth="auto"
         options={options}

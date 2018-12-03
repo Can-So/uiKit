@@ -1,5 +1,36 @@
 # @atlaskit/mention
 
+## 15.1.7
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/lozenge@6.2.3
+
+## 15.1.6
+- [patch] [90c4702](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90c4702):
+
+  - FS-1734 Removed the try it out section from Emoji and Mentions documentation pages to match other pages. The section only contained a link to the same page, so was essentially redundant and potentially confusing.
+
+## 15.1.5
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
+## 15.1.4
+- [patch] [01edbde](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01edbde):
+
+  - Force patch release
+
+## 15.1.3
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
 ## 15.1.2
 - [patch] [36c362f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36c362f):
 

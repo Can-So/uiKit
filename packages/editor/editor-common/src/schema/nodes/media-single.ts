@@ -1,5 +1,6 @@
 import { NodeSpec, Node } from 'prosemirror-model';
 import { MediaDefinition as Media } from './media';
+import { LinkDefinition } from '../marks/link';
 
 export type Layout =
   | 'wrap-right'
@@ -19,6 +20,7 @@ export interface MediaSingleDefinition {
    */
   content: Array<Media>;
   attrs?: MediaSingleAttributes;
+  marks?: Array<LinkDefinition>;
 }
 export interface MediaSingleAttributes {
   /**

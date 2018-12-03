@@ -46,23 +46,16 @@ type Props = {
   dangerouslySetGlyph?: string,
   /** String to use as the aria-label for the icon. Set to an empty string if you are rendering the icon with visible text to prevent accessibility label duplication. */
   label: string,
-  /** onClick handler for the icon element */
-  onClick?: () => mixed,
   /** Control the size of the icon */
   size?: 'small' | 'medium' | 'xlarge',
 };
 
 export default class Icon extends Component<Props, {}> {
-  static defaultProps = {
-    onClick: () => {},
-  };
-
   render() {
-    const { dangerouslySetGlyph, onClick, size } = this.props;
+    const { dangerouslySetGlyph, size } = this.props;
 
     return (
       <IconWrapper
-        onClick={onClick}
         size={size}
         aria-label={this.props.label}
         dangerouslySetInnerHTML={{

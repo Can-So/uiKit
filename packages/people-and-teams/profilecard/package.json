@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/profilecard",
-  "version": "6.0.2",
+  "version": "6.1.1",
   "config": {
     "access": "public"
   },
@@ -12,17 +12,20 @@
     "dist"
   ],
   "scripts": {
-    "i18n:push": "i18n-tools push --resource profilecard .",
-    "i18n:pull": "rm -rf ./src/i18n && i18n-tools push --resource profilecard . --outputType js"
+    "build:flow": "bolt workspaces exec --only \"@atlaskit/profilecard\" -- flow-copy-source -v -i '**/__tests__/**' src dist/esm/src",
+    "build:babel": "NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --parallel  --only \"@atlaskit/profilecard\" -- babel src -d dist/esm/src --root-mode upward",
+    "build:for-i18n-push": "rm -rf ./dist && yarn build:flow && yarn build:babel",
+    "i18n:push": "yarn build:for-i18n-push && i18n-tools push --resource profilecard ./dist/esm",
+    "i18n:pull": "rm -rf ./src/i18n && i18n-tools pull --resource profilecard ."
   },
   "dependencies": {
-    "@atlaskit/avatar": "^14.1.4",
-    "@atlaskit/button": "^10.0.0",
-    "@atlaskit/icon": "^14.6.1",
+    "@atlaskit/avatar": "^14.1.6",
+    "@atlaskit/button": "^10.0.4",
+    "@atlaskit/icon": "^15.0.1",
     "@atlaskit/layer": "^5.0.5",
-    "@atlaskit/lozenge": "^6.2.2",
-    "@atlaskit/spinner": "^9.0.11",
-    "@atlaskit/theme": "^6.2.1",
+    "@atlaskit/lozenge": "^6.2.3",
+    "@atlaskit/spinner": "^9.0.12",
+    "@atlaskit/theme": "^7.0.0",
     "@atlaskit/util-common": "^1.5.2",
     "@atlaskit/util-shared-styles": "^2.10.3",
     "babel-runtime": "^6.26.0",
@@ -34,15 +37,14 @@
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^5.2.1",
-    "@atlaskit/dynamic-table": "^10.0.18",
+    "@atlaskit/docs": "^5.2.3",
+    "@atlaskit/dynamic-table": "^10.0.20",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/util-common-test": "^2.4.2",
     "@atlaskit/util-data-test": "^10.0.7",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "fetch-mock": "^6.5.2",
     "loader-utils": "^1.1.0",
-    "mockdate": "^2.0.2",
     "sinon": "^2.2.0",
     "uid": "^0.0.2"
   },

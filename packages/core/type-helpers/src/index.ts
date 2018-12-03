@@ -25,7 +25,7 @@ export const withDefaultProps = <P, DP extends Partial<P>>(
   type DefaultedProps = Omit<P, keyof NonDefaultProps>;
   type Props = Partial<DefaultedProps> & NonDefaultProps;
   Component.defaultProps = defaultProps;
-  return Component as React.ComponentClass<Props>;
+  return (Component as any) as React.ComponentClass<Props>;
 };
 
 export type ResultantProps<InjectedProps, P extends InjectedProps> = Omit<

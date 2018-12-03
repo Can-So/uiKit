@@ -46,6 +46,7 @@ export const markOrder = [
   'underline',
   'code',
   'confluenceInlineComment',
+  'textColor',
 ];
 
 export const isSubSupType = (type: string): type is 'sub' | 'sup' => {
@@ -502,6 +503,7 @@ export const getValidNode = (
             type,
             attrs,
             content,
+            marks,
           };
         }
         break;

@@ -35,11 +35,6 @@ export class GapCursorSelection extends Selection {
       return false;
     }
 
-    const override = (parent.type.spec as any).allowGapCursor;
-    if (override) {
-      return override;
-    }
-
     const deflt = (parent.contentMatchAt($pos.index()) as any).defaultType;
     return deflt && deflt.isTextblock;
   }
