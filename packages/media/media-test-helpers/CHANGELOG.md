@@ -1,5 +1,10 @@
 # @atlaskit/media-test-helpers
 
+## 18.5.0
+- [minor] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
+
+  - use custom video player for inline video in media-card
+
 ## 18.4.0
 - [minor] [b02ffa7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b02ffa7):
 

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/media-ui",
-  "version": "7.9.0",
+  "version": "7.10.0",
   "description": "Includes common components and utilities used by other media packages",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -62,7 +62,7 @@
     "@atlaskit/checkbox": "^5.0.8",
     "@atlaskit/docs": "^5.2.3",
     "@atlaskit/i18n-tools": "^0.4.0",
-    "@atlaskit/media-test-helpers": "^18.4.0",
+    "@atlaskit/media-test-helpers": "^18.5.0",
     "@types/enzyme": "^3.1.6",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "enzyme-adapter-react-16": "https://registry.npmjs.org/@pgleeson/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.1.7.tgz",

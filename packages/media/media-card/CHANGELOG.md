@@ -1,5 +1,10 @@
 # @atlaskit/media-image
 
+## 44.1.0
+- [minor] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
+
+  - use custom video player for inline video in media-card
+
 ## 44.0.2
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2
