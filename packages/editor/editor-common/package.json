@@ -23,6 +23,9 @@
     "Oscar W",
     "Stanislav S"
   ],
+  "atlaskit": {
+    "internal": true
+  },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
     "@atlaskit/emoji": "^47.0.6",

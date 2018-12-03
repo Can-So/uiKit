@@ -21,6 +21,9 @@
   "peerDependencies": {
     "react": "^16.4.0"
   },
+  "atlaskit": {
+    "internal": true
+  },
   "devDependencies": {},
   "keywords": [
     "atlaskit",
