@@ -19,17 +19,15 @@ export default md`
     </SectionMessage>
   )}
 
-  ### Usage
-
   This package provides the view components required to assemble the "Right to be forgotten" drawers.
+
+  ## Usage
 
   By providing the building blocks rather than a single complete solution, a simpler and more flexible API can be provided for adjustments, customizations and data-routing.
 
   Start by rendering a FocusedTaskCloseAccount then provide it the necessary screens, plugging in data providing callbacks where necessary.
 
   For example, to assemble the "Delete user" flow, provide the DeleteUserOverviewScreen and DeleteUserContentPreviewScreen.
-
-  ### Install
 
   ${code`
 import {
@@ -39,7 +37,6 @@ import {
 } from '@atlaskit/focused-task-close-account';
   `}
 
-### Examples
   ${(
     <Example
       packageName="@atlaskit/focused-task-close-account"
