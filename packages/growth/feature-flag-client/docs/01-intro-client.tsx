@@ -1,5 +1,5 @@
 import React from 'react';
-import { code, md, Example, Props } from '@atlaskit/docs';
+import { code, md, Example} from '@atlaskit/docs';
 
 export default md`
   This client makes it easy to work with feature flags and dark features.
