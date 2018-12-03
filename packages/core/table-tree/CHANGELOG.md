@@ -1,5 +1,10 @@
 # @atlaskit/table-tree
 
+## 5.0.1
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
 ## 5.0.0
 - [major] [90109e9"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90109e9"

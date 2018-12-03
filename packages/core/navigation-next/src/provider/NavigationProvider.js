@@ -10,8 +10,6 @@ import type { NavigationProviderProps } from './types';
 const LS_KEY = 'ATLASKIT_NAVIGATION_UI_STATE';
 
 const DEFAULT_UI_STATE = {
-  isPeekHinting: false,
-  isPeeking: false,
   isCollapsed: false,
   productNavWidth: CONTENT_NAV_WIDTH,
   isResizeDisabled: false,
@@ -31,15 +29,12 @@ function defaultSetCache(state: UIControllerCacheShape) {
   }
 }
 
-export default class NavigationProvider extends Component<
-  NavigationProviderProps,
-> {
+export default class NavigationProvider extends Component<NavigationProviderProps> {
   static defaultProps = {
     cache: {
       get: defaultGetCache,
       set: defaultSetCache,
     },
-    initialPeekViewId: null,
     isDebugEnabled: false,
   };
   uiState: UIController;
@@ -48,17 +43,9 @@ export default class NavigationProvider extends Component<
   constructor(props: NavigationProviderProps) {
     super(props);
 
-    const {
-      cache,
-      initialPeekViewId,
-      initialUIController,
-      isDebugEnabled,
-    } = props;
+    const { cache, initialUIController, isDebugEnabled } = props;
     this.uiState = new UIController(initialUIController, cache);
-    this.viewController = new ViewController({
-      isDebugEnabled,
-      initialPeekViewId,
-    });
+    this.viewController = new ViewController({ isDebugEnabled });
   }
 
   componentDidUpdate(prevProps: NavigationProviderProps) {

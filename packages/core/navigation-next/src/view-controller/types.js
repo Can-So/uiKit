@@ -1,38 +1,10 @@
 // @flow
 
-import type { ComponentType } from 'react';
+import type { ComponentType, ElementConfig } from 'react';
+import type { Diffable } from '../common/types';
+import ViewController from './ViewController';
 
-type ViewItemArgs = {
-  actionAfter?: string,
-  goTo?: string,
-  icon?: ComponentType<{
-    isActive: boolean,
-    isHover: boolean,
-    isSelected: boolean,
-    spacing: 'compact' | 'default',
-  }>,
-  iconName?: string,
-  id: string,
-  isLoading?: boolean,
-  isSelected?: boolean,
-  lozenge?: string,
-  onClick?: (SyntheticEvent<any>) => void,
-  route?: string,
-  target?: string,
-  text?: string,
-  type: ComponentType<*> | string,
-  url?: string,
-};
-
-type ViewGroupArgs = {
-  id: string,
-  items: ViewData,
-  nestedGroupKey?: string,
-  parentId?: string,
-  type: ComponentType<*> | string,
-};
-
-export type ViewData = Array<ViewItemArgs | ViewGroupArgs>;
+export type ViewData = Array<{ [string]: any }>;
 export type ViewID = string;
 export type ViewLayer = 'product' | 'container';
 type GetItemsSignature = () => Promise<ViewData> | ViewData;
@@ -45,7 +17,8 @@ export type View = {
    * Allowing extra attributes to be sent for analytics events. */
   getAnalyticsAttributes?: (items: ViewData) => {},
 };
-type ActiveView = {
+
+export type ActiveView = {
   analyticsAttributes?: {} | void,
   id: ViewID,
   type: ViewLayer,
@@ -59,7 +32,6 @@ type IncomingView = {
 export type Reducer = ViewData => ViewData;
 
 export type ViewControllerProps = {
-  initialPeekViewId?: ?ViewID,
   isDebugEnabled?: boolean,
 };
 
@@ -68,14 +40,6 @@ export type ViewControllerState = {
   activeView: ?ActiveView,
   /** The view which will become active once it has loaded. */
   incomingView: ?IncomingView,
-  /** The view which should be rendered on the product navigation layer when the
-   * active view is a 'container' view. @deprecated: The concept of peeking no
-   * longer exists in the UX spec, so this feature will be removed in a future
-   * release. */
-  activePeekView: ?ActiveView,
-  /** The view which will become the active peek view once it has loaded.
-   * @deprecated */
-  incomingPeekView: ?IncomingView,
 };
 
 export interface ViewControllerInterface {
@@ -87,9 +51,6 @@ export interface ViewControllerInterface {
   /** A map of reducer functions to be run over view items, keyed by the view's
    * ID. */
   reducers: { [ViewID]: Reducer[] };
-
-  /** The view which will be 'peeked' to. @deprecated */
-  initialPeekViewId: ?ViewID;
 
   /** In debug mode the view controller will log information about the usage of
    * reducers. */
@@ -113,9 +74,6 @@ export interface ViewControllerInterface {
   /** Remove a reducer from the view with the given ID. */
   removeReducer: (ViewID, Reducer) => void;
 
-  /** Specify which view should be treated as the initial peek view. */
-  setInitialPeekViewId: ViewID => void;
-
   /** Will re-resolve the active view and re-reduce its data. Accepts an
    * optional view ID to only re-resolve if the given ID matches the active
    * view. */
@@ -124,3 +82,18 @@ export interface ViewControllerInterface {
   /** Set whether the view controller is in debug mode. */
   setIsDebugEnabled: boolean => void;
 }
+
+/**
+ * withNavigationUIController
+ */
+
+export type WithNavigationViewControllerProps = {
+  navigationViewController: ViewController,
+};
+
+export type ViewControllerWrappedComp<C> = ComponentType<
+  $Diff<
+    ElementConfig<$Supertype<C>>,
+    Diffable<WithNavigationViewControllerProps>,
+  >,
+>;

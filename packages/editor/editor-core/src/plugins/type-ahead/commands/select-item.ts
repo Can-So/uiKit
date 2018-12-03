@@ -1,4 +1,4 @@
-import { Selection, EditorState } from 'prosemirror-state';
+import { Selection, EditorState, NodeSelection } from 'prosemirror-state';
 import { Fragment, Node } from 'prosemirror-model';
 import { safeInsert } from 'prosemirror-utils';
 import { analyticsService } from '../../../analytics';
@@ -9,7 +9,16 @@ import { TypeAheadHandler, TypeAheadItem } from '../types';
 import { findTypeAheadQuery } from '../utils/find-query-mark';
 import { dismissCommand } from './dismiss';
 
-export const selectCurrentItem = (): Command => (state, dispatch) => {
+export type SelectItemMode =
+  | 'shift-enter'
+  | 'enter'
+  | 'space'
+  | 'selected'
+  | 'tab';
+
+export const selectCurrentItem = (
+  mode: SelectItemMode = 'selected',
+): Command => (state, dispatch) => {
   const { active, currentIndex, items, typeAheadHandler } = pluginKey.getState(
     state,
   );
@@ -24,10 +33,15 @@ export const selectCurrentItem = (): Command => (state, dispatch) => {
     );
   }
 
-  return selectItem(typeAheadHandler, items[currentIndex])(state, dispatch);
+  return selectItem(typeAheadHandler, items[currentIndex], mode)(
+    state,
+    dispatch,
+  );
 };
 
-export const selectSingleItemOrDismiss = (): Command => (state, dispatch) => {
+export const selectSingleItemOrDismiss = (
+  mode: SelectItemMode = 'selected',
+): Command => (state, dispatch) => {
   const { active, items, typeAheadHandler } = pluginKey.getState(state);
 
   if (!active || !typeAheadHandler || !typeAheadHandler.selectItem) {
@@ -35,11 +49,12 @@ export const selectSingleItemOrDismiss = (): Command => (state, dispatch) => {
   }
 
   if (items.length === 1) {
-    return selectItem(typeAheadHandler, items[0])(state, dispatch);
+    return selectItem(typeAheadHandler, items[0], mode)(state, dispatch);
   }
 
   if (!items || items.length === 0) {
-    return dismissCommand()(state, dispatch);
+    dismissCommand()(state, dispatch);
+    return false;
   }
 
   return false;
@@ -63,9 +78,13 @@ export const selectByIndex = (index: number): Command => (state, dispatch) => {
 export const selectItem = (
   handler: TypeAheadHandler,
   item: TypeAheadItem,
+  mode: SelectItemMode = 'selected',
 ): Command => (state, dispatch) => {
   return withTypeAheadQueryMarkPosition(state, (start, end) => {
-    const insert = (maybeNode?: Node | Object | string) => {
+    const insert = (
+      maybeNode?: Node | Object | string,
+      opts: { selectInlineNode?: boolean } = {},
+    ) => {
       let tr = state.tr;
 
       tr = tr
@@ -82,8 +101,8 @@ export const selectItem = (
           maybeNode instanceof Node
             ? maybeNode
             : typeof maybeNode === 'string'
-              ? state.schema.text(maybeNode)
-              : Node.fromJSON(state.schema, maybeNode);
+            ? state.schema.text(maybeNode)
+            : Node.fromJSON(state.schema, maybeNode);
       } catch (e) {
         // tslint:disable-next-line:no-console
         console.error(e);
@@ -119,20 +138,23 @@ export const selectItem = (
           }
         }
 
-        // Placing cursor after node + space.
-        tr = tr.setSelection(
-          Selection.near(tr.doc.resolve(start + fragment.size)),
-        );
+        if (opts.selectInlineNode) {
+          // Select inserted node
+          tr = tr.setSelection(NodeSelection.create(tr.doc, start));
+        } else {
+          // Placing cursor after node + space.
+          tr = tr.setSelection(
+            Selection.near(tr.doc.resolve(start + fragment.size)),
+          );
+        }
       }
 
       return tr;
     };
 
-    analyticsService.trackEvent('atlassian.editor.typeahead.select', {
-      item: item.title,
-    });
+    analyticsService.trackEvent('atlassian.editor.typeahead.select', { mode });
 
-    const tr = handler.selectItem(state, item, insert);
+    const tr = handler.selectItem(state, item, insert, { mode });
 
     if (tr === false) {
       return insertFallbackCommand(start, end)(state, dispatch);

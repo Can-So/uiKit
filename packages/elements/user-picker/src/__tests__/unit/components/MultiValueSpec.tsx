@@ -1,11 +1,17 @@
-import Avatar from '@atlaskit/avatar';
-import Tag from '@atlaskit/tag';
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import { MultiValue } from '../../../components/MultiValue';
+import { FormattedMessage } from 'react-intl';
+import { MultiValue, scrollToValue } from '../../../components/MultiValue';
+import { SizeableAvatar } from '../../../components/SizeableAvatar';
+import { renderProp } from '../_testUtils';
+
+const mockHtmlElement = (rect: Partial<DOMRect>): HTMLElement =>
+  ({
+    getBoundingClientRect: jest.fn(() => rect),
+    scrollIntoView: jest.fn(),
+  } as any);
 
 describe('MultiValue', () => {
-  const Container = props => <div {...props} />;
   const data = {
     label: 'Jace Beleren',
     user: {
@@ -18,63 +24,147 @@ describe('MultiValue', () => {
   const onClick = jest.fn();
   const shallowMultiValue = (
     { components, ...props }: any = { components: {} },
-  ) =>
-    shallow(
-      <MultiValue
-        data={data}
-        components={{ Container, ...components }}
-        removeProps={{ onClick }}
-        {...props}
-      />,
-    );
+  ) => shallow(<MultiValue data={data} removeProps={{ onClick }} {...props} />);
 
   afterEach(() => {
     onClick.mockClear();
   });
 
-  it('should render the Container with a Tag', () => {
+  it('should render Tag', () => {
     const component = shallowMultiValue();
-    expect(component.find(Container)).toHaveLength(1);
-    const tag = component.find(Tag);
-    expect(tag).toHaveLength(1);
+    const tag = renderProp(
+      component.find(FormattedMessage),
+      'children',
+      'remove',
+    );
     expect(tag.props()).toMatchObject({
       appearance: 'rounded',
       text: 'Jace Beleren',
       elemBefore: (
-        <Avatar
-          size="xsmall"
+        <SizeableAvatar
+          appearance="compact"
           src="http://avatars.atlassian.com/jace.png"
-          label="Jace Beleren"
+          name="Jace Beleren"
         />
       ),
       removeButtonText: 'remove',
     });
-    expect(tag.prop('color')).toBeUndefined();
   });
 
-  it('should use greyLight color when focused', () => {
+  it('should use blueLight color when focused', () => {
     const component = shallowMultiValue({ isFocused: true });
-    expect(component.find(Container)).toHaveLength(1);
-    const tag = component.find(Tag);
-    expect(tag).toHaveLength(1);
+    const tag = renderProp(
+      component.find(FormattedMessage),
+      'children',
+      'remove',
+    );
     expect(tag.props()).toMatchObject({
       appearance: 'rounded',
       text: 'Jace Beleren',
       elemBefore: (
-        <Avatar
-          size="xsmall"
+        <SizeableAvatar
+          appearance="compact"
           src="http://avatars.atlassian.com/jace.png"
-          label="Jace Beleren"
+          name="Jace Beleren"
         />
       ),
       removeButtonText: 'remove',
-      color: 'greyLight',
+      color: 'blueLight',
     });
   });
 
   it('should call onClick onAfterRemoveAction', () => {
     const component = shallowMultiValue();
-    component.find(Tag).simulate('afterRemoveAction');
+    const tag = renderProp(
+      component.find(FormattedMessage),
+      'children',
+      'remove',
+    );
+    tag.simulate('afterRemoveAction');
     expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not render remove button for fixed value', () => {
+    const component = shallowMultiValue({
+      data: { ...data, user: { ...data.user, fixed: true } },
+    });
+    const tag = renderProp(
+      component.find(FormattedMessage),
+      'children',
+      'remove',
+    );
+    expect(tag.prop('removeButtonText')).toBeUndefined();
+  });
+
+  it('should scroll to open from bottom', () => {
+    const current: HTMLElement = mockHtmlElement({ top: 10, height: 20 });
+    const parent: HTMLElement = mockHtmlElement({ height: 100 });
+    scrollToValue(current, parent);
+    expect(current.scrollIntoView).toHaveBeenCalled();
+    expect(current.scrollIntoView).toHaveBeenCalledWith();
+  });
+
+  it('should scroll to open from top', () => {
+    const current: HTMLElement = mockHtmlElement({ top: 90, height: 20 });
+    const parent: HTMLElement = mockHtmlElement({ height: 100 });
+    scrollToValue(current, parent);
+    expect(current.scrollIntoView).toHaveBeenCalled();
+    expect(current.scrollIntoView).toHaveBeenCalledWith(false);
+  });
+
+  describe('shouldComponentUpdate', () => {
+    const defaultProps = {
+      data: data,
+      isFocused: false,
+      innerProps: {},
+    };
+    test.each([
+      [false, defaultProps],
+      [
+        true,
+        {
+          ...defaultProps,
+          isFocused: true,
+        },
+      ],
+      [
+        true,
+        {
+          ...defaultProps,
+          data: {
+            ...data,
+            user: {
+              ...data.user,
+              nickname: 'crazy_jace',
+            },
+          },
+        },
+      ],
+      [
+        true,
+        {
+          ...defaultProps,
+          data: {
+            ...data,
+            label: 'crazy_jace',
+          },
+        },
+      ],
+      [
+        true,
+        {
+          ...defaultProps,
+          innerProps: {},
+        },
+      ],
+    ])('should return %s for nextProps %p', (shouldUpdate, nextProps) => {
+      const component = shallowMultiValue(defaultProps);
+      const instance = component.instance();
+      expect(
+        instance &&
+          instance.shouldComponentUpdate &&
+          instance.shouldComponentUpdate(nextProps, {}, {}),
+      ).toEqual(shouldUpdate);
+    });
   });
 });

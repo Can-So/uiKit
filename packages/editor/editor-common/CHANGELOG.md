@@ -1,5 +1,112 @@
 # @atlaskit/editor-common
 
+## 22.0.0
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/emoji@47.0.0
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/editor-json-transformer@4.0.22
+  - @atlaskit/editor-test-helpers@6.2.19
+  - @atlaskit/media-core@24.5.0
+
+## 21.5.0
+- [minor] [cfba914](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cfba914):
+
+  - ED-5771: fix wide and full-width images in renderer
+
+## 21.4.1
+- [patch] [416fbb3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/416fbb3):
+
+  - ED-3298: codeBlocks inside lists
+
+## 21.4.0
+- [minor] [6d6522b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d6522b):
+
+  - Refactor mentions to use TypeAhead plugin
+
+## 21.3.2
+- [patch] [409e610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/409e610):
+
+  - Fix schema block marks name inconsistency
+
+## 21.3.1
+- [patch] [37d6258](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37d6258):
+
+  - ED-5796: fix setting background color to white
+
+## 21.3.0
+- [minor] [1e5cd32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e5cd32):
+
+  - Make layouts stack on small screens
+
+## 21.2.4
+- [patch] [df33a8b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df33a8b):
+
+  - Fix block marks validation
+
+## 21.2.3
+- [patch] [d3bb11f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3bb11f):
+
+  - Fixing validator for alignment marks
+
+## 21.2.2
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/profilecard@6.0.0
+
+## 21.2.1
+- [patch] [c31aaf0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c31aaf0):
+
+  - Fixing the first paragraph for alignment
+
+## 21.2.0
+- [minor] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
+## 21.1.7
+- [patch] [380928b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/380928b):
+
+  - ED-5293: fix merging cells
+
+## 21.1.6
+- [patch] [a1fb551](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1fb551):
+
+  - Fixed style attribute ADF error for Fabric Status
+
+## 21.1.5
+- [patch] [aadaeb9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aadaeb9):
+
+  - ED-5691 Allow unsupported block inside tableCell
+
+## 21.1.4
+- [patch] [5c148c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c148c8):
+
+  - ED-5739: fix updating cells DOM attributes when deleting rows/columns
+
+## 21.1.3
+- [patch] [fabc81f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fabc81f):
+
+  - ED-5197: bold toolbar button is inverted in table header cells
+
+## 21.1.2
+- [patch] [68f3e01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68f3e01):
+
+  - ED-5687: add full-width grid lines and other resizing fixes
+
+## 21.1.1
+- [patch] [b19b7bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b19b7bb):
+
+  - ED-5721 Make content optional for all eligible nodes
+
+## 21.1.0
+- [minor] [b440439](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b440439):
+
+  - Add breakout mark to editor, renderer and adf-utils
+
+## 21.0.1
+- [patch] [9390a7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9390a7e):
+
+  - ED-5685: add grid ruler marks
+
 ## 21.0.0
 - Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
   - @atlaskit/emoji@46.0.0

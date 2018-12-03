@@ -86,7 +86,9 @@ export class ExampleEditor extends React.Component<Props> {
                 quickInsert={{ provider: Promise.resolve(quickInsertProvider) }}
                 allowCodeBlocks={{ enableKeybindingsForIDE: true }}
                 allowLists={true}
+                allowBreakout={true}
                 allowTextColor={true}
+                allowTextAlignment={true}
                 allowTables={{
                   allowColumnResizing: true,
                   allowMergeCells: true,
@@ -117,7 +119,11 @@ export class ExampleEditor extends React.Component<Props> {
                 taskDecisionProvider={taskDecisionProvider}
                 contextIdentifierProvider={contextIdentifierProvider}
                 macroProvider={Promise.resolve(macroProvider)}
-                media={{ provider: mediaProvider, allowMediaSingle: true }}
+                media={{
+                  provider: mediaProvider,
+                  allowMediaSingle: true,
+                  allowResizing: true,
+                }}
                 placeholder="Write something..."
                 shouldFocus={false}
                 onChange={onChange}

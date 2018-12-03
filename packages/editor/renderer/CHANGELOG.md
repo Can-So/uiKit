@@ -1,5 +1,59 @@
 # @atlaskit/renderer
 
+## 31.0.0
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/media-filmstrip@19.0.0
+  - @atlaskit/editor-json-transformer@4.0.22
+  - @atlaskit/editor-test-helpers@6.2.19
+  - @atlaskit/task-decision@11.0.4
+  - @atlaskit/util-data-test@10.0.21
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 30.3.2
+- [patch] [030007e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/030007e):
+
+  - ED-5776: fix number column when first column is resized
+
+## 30.3.1
+- [patch] [f2cb9d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f2cb9d9):
+
+  - ED-5785: fix number column when header row is enabled
+
+## 30.3.0
+- [minor] [1e5cd32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e5cd32):
+
+  - Make layouts stack on small screens
+
+## 30.2.1
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/editor-common@21.2.2
+  - @atlaskit/profilecard@6.0.0
+
+## 30.2.0
+- [minor] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
+## 30.1.1
+- [patch] [b19b7bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b19b7bb):
+
+  - ED-5721 Adds support for rendering optional content
+
+  Renderer can now handle empty headings, actions & decisions
+
+## 30.1.0
+- [minor] [b440439](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b440439):
+
+  - Add breakout mark to editor, renderer and adf-utils
+
+## 30.0.1
+- [patch] [26027dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/26027dd):
+
+  - Upgrade react syntax highlighter to version that ships its own async loaded languages and supports SSR
+
 ## 30.0.0
 - Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
   - @atlaskit/editor-common@21.0.0

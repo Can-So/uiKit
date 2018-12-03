@@ -11,9 +11,9 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "Atlassian Home",
-    "Jimmy Kurniawan",
-    "Ryan Braganza"
+    "Notifications Platform",
+    "Ze'ev Gilovitz",
+    "Shaun Esther"
   ],
   "dependencies": {
     "@atlaskit/badge": "^9.1.1",

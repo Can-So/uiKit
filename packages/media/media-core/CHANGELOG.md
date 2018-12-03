@@ -1,5 +1,15 @@
 # @atlaskit/media-core
 
+## 24.5.0
+- [minor] [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+
+  - Context.collection.removeFile has been added; occurrenceKey was added to all FileState flavours and filled as part of observable during upload;
+
+## 24.4.1
+- [patch] [705dcf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/705dcf3):
+
+  - pass collectionName to MediaStore in order to use right auth token
+
 ## 24.4.0
 - [minor] [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
 

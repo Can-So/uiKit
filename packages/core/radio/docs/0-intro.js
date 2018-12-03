@@ -15,11 +15,12 @@ ${(
     </p>
   </SectionMessage>
 )}
-  ### Usage
 
-  #### With Radio Group
+  ## With Radio Group
 
   Provides a standard way to select a single option from a list.
+
+  ## Usage
 
   ${code`
   import { RadioGroup, Radio } from '@atlaskit/radio';
@@ -40,26 +41,26 @@ ${(
     />
   )}
 
-  #### defaultCheckedValue
-  RadioGroup component also exposes a defaultCheckedValue prop that allows you to specify the initially checked Radio instantiated within your RadioGroup instance.
+  ### defaultValue
+  RadioGroup component also exposes a defaultValue prop that allows you to specify the initially checked Radio instantiated within your RadioGroup instance.
 
   ${(
     <Example
       packageName="@atlaskit/radio"
       Component={require('../examples/03-default-checked-value').default}
-      title="defaultCheckedValue prop"
+      title="defaultValue prop"
       source={require('!!raw-loader!../examples/03-default-checked-value')}
     />
   )}
 
-  ### checkedValue
-  allows you to override the internally stored checkedValue in state, with the passed in checkedValue prop.
+  ### value
+  allows you to override the internally stored value in state, with the passed in value prop.
 
   ${(
     <Example
       packageName="@atlaskit/radio"
       Component={require('../examples/01-controlled-example').default}
-      title="checkedValue prop"
+      title="value prop"
       source={require('!!raw-loader!../examples/01-controlled-example')}
     />
   )}

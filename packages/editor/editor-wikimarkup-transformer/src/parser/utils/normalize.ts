@@ -60,5 +60,5 @@ function trimInlineNodes(nodes: PMNode[]) {
 
 export function isNextLineEmpty(input: string) {
   // Line with only spaces is considered an empty line
-  return input.trim().length === 0 ? true : false;
+  return input.trim().length === 0;
 }

@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
-import LayerManager from '@atlaskit/layer-manager';
 import { EditorView } from 'prosemirror-view';
 import { browser, createSchema, doc } from '@atlaskit/editor-common';
 import { createEditor, mountWithIntl } from '@atlaskit/editor-test-helpers';
@@ -33,9 +32,9 @@ describe('@atlaskit/editor-core/editor/ui/HelpDialog', () => {
 
   it('should not be null if isVisible is true', () => {
     const helpDialog = mountWithIntl(
-      <LayerManager>
+      <div>
         <HelpDialog editorView={editorView} isVisible={true} />
-      </LayerManager>,
+      </div>,
     );
 
     expect(helpDialog.find(HelpDialog).length).to.equal(1);
@@ -109,15 +108,7 @@ describe('@atlaskit/editor-core/editor/ui/HelpDialog', () => {
         'bulletList',
         'listItem',
       ],
-      marks: [
-        'link',
-        'em',
-        'underline',
-        'mentionQuery',
-        'emojiQuery',
-        'textColor',
-        'code',
-      ],
+      marks: ['link', 'em', 'underline', 'emojiQuery', 'textColor', 'code'],
       customNodeSpecs: { doc },
     });
     it('should return only the list of formatting supported by schema', () => {

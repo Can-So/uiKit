@@ -6,6 +6,6 @@ export default class EmptySchemaNode extends SchemaNode {
   }
 
   toSpec() {
-    return {};
+    return { type: 'object' };
   }
 }

@@ -12,6 +12,7 @@ export interface Props {
   onOpenChange?: (attrs) => void;
   fitWidth?: number;
   fitHeight?: number;
+  zIndex?: number;
 }
 
 export interface State {
@@ -52,6 +53,7 @@ export default class Dropdown extends PureComponent<Props, State> {
       onOpenChange,
       fitHeight,
       fitWidth,
+      zIndex,
     } = this.props;
 
     return (
@@ -63,6 +65,7 @@ export default class Dropdown extends PureComponent<Props, State> {
         onPlacementChanged={this.updatePopupPlacement}
         fitHeight={fitHeight}
         fitWidth={fitWidth}
+        zIndex={zIndex}
       >
         <div style={{ height: 0, minWidth: fitWidth || 0 }}>
           <DropdownList

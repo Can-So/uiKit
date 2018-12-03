@@ -1,10 +1,13 @@
 // @flow
 
 /*
-* util to support defining url for the examples website to be used in webdriver tests.
-*/
+ * util to support defining url for the examples website to be used in webdriver tests.
+ */
 
-const baseUrl = 'http://localhost:9000';
+/**
+ * @see https://www.browserstack.com/question/663
+ */
+const baseUrl = 'http://127.0.0.1:9000';
 
 const getExampleUrl = (
   group: string,

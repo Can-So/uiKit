@@ -2,13 +2,22 @@ import { NodeSpec } from 'prosemirror-model';
 
 // Nodes
 import { PanelDefinition as Panel } from './panel';
-import { ParagraphDefinition as Paragraph } from './paragraph';
+import {
+  ParagraphDefinition as Paragraph,
+  ParagraphWithMarksDefinition as ParagraphWithMarks,
+} from './paragraph';
 import { BlockQuoteDefinition as Blockquote } from './blockquote';
 import { OrderedListDefinition as OrderedList } from './ordered-list';
 import { BulletListDefinition as BulletList } from './bullet-list';
 import { RuleDefinition as Rule } from './rule';
-import { HeadingDefinition as Heading } from './heading';
-import { CodeBlockDefinition as CodeBlock } from './code-block';
+import {
+  HeadingDefinition as Heading,
+  HeadingWithMarksDefinition as HeadingWithMarks,
+} from './heading';
+import {
+  CodeBlockDefinition as CodeBlock,
+  CodeBlockWithMarksDefinition as CodeBlockWithMarks,
+} from './code-block';
 import { MediaGroupDefinition as MediaGroup } from './media-group';
 import { MediaSingleDefinition as MediaSingle } from './media-single';
 import { ApplicationCardDefinition as ApplicationCard } from './applicationCard';
@@ -173,9 +182,16 @@ export interface DocNode {
   /**
    * @allowUnsupportedBlock true
    */
-  content: Array<BlockContent | LayoutSection>;
+  content: Array<
+    | BlockContent
+    | LayoutSection
+    | CodeBlockWithMarks
+    | ParagraphWithMarks
+    | HeadingWithMarks
+  >;
 }
 
 export const doc: NodeSpec = {
   content: '(block|layoutSection)+',
+  marks: 'breakout alignment',
 };

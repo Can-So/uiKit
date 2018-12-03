@@ -1,5 +1,15 @@
 # @atlaskit/media-ui
 
+## 7.5.0
+- [minor] [2cac27f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2cac27f):
+
+  - InfiniteScroll component now triggers on load and on change (where is previously only onScroll event)
+
+## 7.4.1
+- [patch] [a567cc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a567cc9):
+
+  - Improve rendering of Smart Cards.
+
 ## 7.4.0
 - [minor] [b758737](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b758737):
 

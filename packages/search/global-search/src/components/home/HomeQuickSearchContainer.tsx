@@ -144,11 +144,11 @@ export class HomeQuickSearchContainer extends React.Component<Props, State> {
     searchPeoplePromise.catch(this.handleSearchErrorAnalytics('people'));
 
     /*
-    * Handle error state: Only show the error state when searching recent and xpsearch together fails.
-    * For a better degraded experience we still want to display partial results when it makes sense.
-    * So, if only recent or if only people search fails we can still display xpsearch results. However, if recent AND xpsearch
-    * fails, then we show the error state.
-    */
+     * Handle error state: Only show the error state when searching recent and xpsearch together fails.
+     * For a better degraded experience we still want to display partial results when it makes sense.
+     * So, if only recent or if only people search fails we can still display xpsearch results. However, if recent AND xpsearch
+     * fails, then we show the error state.
+     */
     (async () => {
       const criticalPromises = [searchRecentPromise, searchCrossProductPromise];
       const promiseResults = await settlePromises(criticalPromises);

@@ -10,10 +10,10 @@ inquirer.registerPrompt(
 );
 
 /* Notes on using inquirer:
-* Each question needs a key, as inquirer is assembling an object behind-the-scenes.
-* At each call, the entire responses object is returned, so we need a unique
-* identifier for the name every time. This is why we are using UUIDs.
-*/
+ * Each question needs a key, as inquirer is assembling an object behind-the-scenes.
+ * At each call, the entire responses object is returned, so we need a unique
+ * identifier for the name every time. This is why we are using UUIDs.
+ */
 
 async function askCheckboxPlus(message, choices) {
   const name = `CheckboxPlus-${uuid()}`;

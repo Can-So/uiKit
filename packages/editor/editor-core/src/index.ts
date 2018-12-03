@@ -31,8 +31,7 @@ export {
 
 // Used in mobile bridge
 export { stateKey as mediaPluginKey } from './plugins/media/pm-plugins/main';
-export { mentionPluginKey } from './plugins/mentions/pm-plugins/main';
-export { MentionsState } from './plugins/mentions/pm-plugins/main';
+export { mentionPluginKey, MentionPluginState } from './plugins/mentions';
 export {
   TextFormattingState,
   pluginKey as textFormattingStateKey,
@@ -57,6 +56,9 @@ export {
   toggleEm,
   toggleStrong,
 } from './plugins/text-formatting/commands/text-formatting';
+export { insertBlockType } from './plugins/block-type/commands';
+export { createTable } from './plugins/table/actions';
+export { insertTaskDecision } from './plugins/tasks-and-decisions/commands';
 export { EventDispatcher } from './event-dispatcher';
 
 // Used in editor-test-helpers

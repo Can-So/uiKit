@@ -1,10 +1,25 @@
 // @flow
+import { type ComponentType, type Element } from 'react';
 
-import type { ComponentType, Element } from 'react';
+type ComponentsType = { [key: string]: ComponentType<any> };
 
-type ComponentsType = { [key: string]: ComponentType<*> };
+export type OptionType = {
+  [string]: any,
+};
 
-export type SwitcherProps = {
+export type SelectStyles = {
+  [component: string]: (
+    baseStyles: {},
+    {
+      isActive: boolean,
+      isHover: boolean,
+      isFocused: boolean,
+      isSelected: boolean,
+    },
+  ) => {},
+};
+
+export type SwitcherBaseProps = {
   /* Close the menu when the user clicks create */
   closeMenuOnCreate?: boolean,
   /* Replaceable components */
@@ -17,6 +32,14 @@ export type SwitcherProps = {
   options: Array<Object>,
   /* The target element, which invokes the select menu */
   target: Element<*>,
+  /* A react-select Style object, which overrides the default components styles. */
+  styles?: SelectStyles,
+};
+
+export type SwitcherProps = {
+  ...$Exact<SwitcherBaseProps>,
+  // internal `navWidth` property isn't part of the public API
+  navWidth: number,
 };
 
 export type SwitcherState = {

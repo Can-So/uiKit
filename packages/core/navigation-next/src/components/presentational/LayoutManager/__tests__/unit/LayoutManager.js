@@ -4,13 +4,15 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
-import ContentNavigation from '../../ContentNavigation';
-import LayoutManager, { Page } from '../../LayoutManager';
+import ContentNavigation from '../../../ContentNavigation';
+import LayoutManager from '../../LayoutManager';
+import Page from '../../../PageContent';
+import ResizeTransition from '../../../ResizeTransition';
 import ResizeControl from '../../ResizeControl';
-import ResizeTransition from '../../ResizeTransition';
 import { LayoutEventListener } from '../../LayoutEvent';
 
-import { ContainerNavigationMask, NavigationContainer } from '../../primitives';
+import { NavigationContainer } from '../../primitives';
+import { ContainerNavigationMask } from '../../../ContentNavigation/primitives';
 import type { LayoutManagerProps } from '../../types';
 
 const GlobalNavigation = () => null;
@@ -32,6 +34,8 @@ describe('LayoutManager', () => {
       productNavigation: ProductNavigation,
       containerNavigation: null,
       children: <div>Page content</div>,
+      experimental_flyoutOnHover: false,
+      collapseToggleTooltipContent: () => ({ text: 'Expand', char: '[' }),
     };
   });
   // TODO: Please update this test, it should be deterministic,

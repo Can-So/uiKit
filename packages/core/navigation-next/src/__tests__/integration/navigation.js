@@ -28,7 +28,6 @@ BrowserTestCase(
     );
     expect(await page.isVisible(`${globalNav} [aria-label="Add"]`)).toBe(true);
     expect(await page.isVisible(`${globalNav} [aria-label="Help"]`)).toBe(true);
-
     await page.checkConsoleErrors();
   },
 );
@@ -44,7 +43,6 @@ BrowserTestCase(
     );
     expect(await page.isVisible(getByKey('product-item-projects'))).toBe(true);
     expect(await page.isVisible(getByKey('product-item-issues'))).toBe(true);
-
     await page.checkConsoleErrors();
   },
 );
@@ -58,7 +56,6 @@ BrowserTestCase(
     expect(await page.isVisible(getByKey('container-item-backlog'))).toBe(true);
     expect(await page.isVisible(getByKey('container-item-sprints'))).toBe(true);
     expect(await page.isVisible(getByKey('container-item-reports'))).toBe(true);
-
     await page.checkConsoleErrors();
   },
 );

@@ -31,6 +31,7 @@ import { GapCursorSelection, Side } from '../plugins/gap-cursor/selection';
 
 export * from './document';
 export * from './action';
+export * from './step';
 
 export { JSONDocNode, JSONNode };
 
@@ -748,4 +749,18 @@ export function filterChildrenBetween(
     }
   });
   return results;
+}
+
+export function dedupe<T>(
+  list: T[] = [],
+  iteratee?: (T) => (keyof T) | T,
+): T[] {
+  const transformed = iteratee ? list.map(iteratee) : list;
+
+  return transformed
+    .map((item, index, list) => (list.indexOf(item) === index ? item : null))
+    .reduce<T[]>(
+      (acc, item, index) => (!!item ? acc.concat(list[index]) : acc),
+      [],
+    );
 }

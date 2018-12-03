@@ -8,6 +8,7 @@ import { parseNewlineOnly } from './whitespace';
 
 const LIST_ITEM_REGEXP = /^ *([*\-#]+) /;
 const EMPTY_LINE_REGEXP = /^[ \t]*\r?\n/;
+const RULER_SYMBOL_REGEXP = /^-{4,5}/;
 
 const processState = {
   NEW_LINE: 0,
@@ -18,6 +19,7 @@ const processState = {
 
 export function list(
   input: string,
+  position: number,
   schema: Schema,
   tokenErrCallback?: TokenErrCallback,
 ): Token {
@@ -25,15 +27,9 @@ export function list(
    * The following token types will be ignored in parsing
    * the content of a listItem
    */
-  const ignoreTokenTypes = [
-    TokenType.DOUBLE_DASH_SYMBOL,
-    TokenType.TRIPLE_DASH_SYMBOL,
-    TokenType.QUADRUPLE_DASH_SYMBOL,
-    TokenType.LIST,
-    TokenType.RULER,
-  ];
+  const ignoreTokenTypes = [TokenType.QUADRUPLE_DASH_SYMBOL, TokenType.LIST];
 
-  let index = 0;
+  let index = position;
   let state = processState.NEW_LINE;
   let buffer = '';
   let lastListSymbols: string | null = null;
@@ -47,9 +43,28 @@ export function list(
     switch (state) {
       case processState.NEW_LINE: {
         const substring = input.substring(index);
+
         const listMatch = substring.match(LIST_ITEM_REGEXP);
         if (listMatch) {
           const [, symbols] = listMatch;
+
+          // Handle ruler in list
+          const rulerMatch = symbols.match(RULER_SYMBOL_REGEXP);
+          if (rulerMatch) {
+            const remainingAfterSymbol = input.substring(
+              index + rulerMatch[0].length,
+            );
+            const emptyLineMatch = remainingAfterSymbol.match(
+              EMPTY_LINE_REGEXP,
+            );
+
+            // If this is an empty line skip to the buffering step rather than match as a list element
+            if (emptyLineMatch) {
+              state = processState.BUFFER;
+              continue;
+            }
+          }
+
           if (!builder) {
             /**
              * It happens because this is the first item of the list
@@ -130,7 +145,7 @@ export function list(
           state = processState.BUFFER;
           break;
         }
-        const token = parseToken(input.substring(index), match.type, schema);
+        const token = parseToken(input, match.type, index, schema);
         if (token.type === 'text') {
           buffer += token.text;
         } else {
@@ -139,7 +154,7 @@ export function list(
            */
           if (!builder) {
             /** Something is really wrong here */
-            return fallback(input);
+            return fallback(input, position);
           }
           if (buffer.length > 0) {
             /**
@@ -167,7 +182,7 @@ export function list(
       case processState.END: {
         if (!builder) {
           /** Something is really wrong here */
-          return fallback(input);
+          return fallback(input, position);
         }
 
         if (buffer.length > 0) {
@@ -189,7 +204,7 @@ export function list(
         return {
           type: 'pmnode',
           nodes: output,
-          length: index,
+          length: index - position,
         };
       }
     }
@@ -218,7 +233,7 @@ export function list(
   return {
     type: 'pmnode',
     nodes: output,
-    length: index,
+    length: index - position,
   };
 }
 
@@ -265,10 +280,10 @@ function sanitize(nodes: PMNode[], schema: Schema) {
   }, []);
 }
 
-function fallback(input: string): Token {
+function fallback(input: string, position: number): Token {
   return {
     type: 'text',
-    text: input.substr(0, 1),
-    length: length,
+    text: input.substr(position, 1),
+    length: 1,
   };
 }
