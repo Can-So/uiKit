@@ -1,5 +1,10 @@
 # @atlaskit/media-test-helpers
 
+## 18.4.0
+- [minor] [b02ffa7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b02ffa7):
+
+  - add touch event helpers and canvas mocking
+
 ## 18.3.2
 - [patch] [5a6de24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6de24):
 

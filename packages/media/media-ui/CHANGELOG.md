@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 7.9.0
+- [minor] [c61f828](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c61f828):
+
+  - add bounds to camera module
+
 ## 7.8.2
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3
