@@ -1,5 +1,10 @@
 # @atlaskit/button
 
+## 10.1.0
+- [minor] [36929ef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36929ef):
+
+  - Add reset as it is listed as a valid type for button and is useful when building forms
+
 ## 10.0.4
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3
