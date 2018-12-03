@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Component, CSSProperties } from 'react';
+import { Component } from 'react';
 import { Context } from '@atlaskit/media-core';
 import { FileIdentifier } from './domain';
 import { InlinePlayerWrapper } from './styled';
@@ -92,14 +92,6 @@ export class InlinePlayer extends Component<
     this.revoke();
   }
 
-  get style(): CSSProperties {
-    const { width, height } = this.props.dimensions;
-    return {
-      width,
-      height,
-    };
-  }
-
   render() {
     const { fileSrc } = this.state;
 
@@ -109,7 +101,7 @@ export class InlinePlayer extends Component<
     }
 
     return (
-      <InlinePlayerWrapper style={this.style}>
+      <InlinePlayerWrapper>
         <video src={fileSrc} autoPlay controls />
       </InlinePlayerWrapper>
     );
