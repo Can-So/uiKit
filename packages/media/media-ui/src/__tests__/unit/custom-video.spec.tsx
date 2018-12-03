@@ -1,4 +1,4 @@
-jest.mock('../../../newgen/viewers/video/fullscreen');
+jest.mock('../../customVideoPlayer/fullscreen');
 import * as React from 'react';
 import { mount } from 'enzyme';
 import FullScreenIcon from '@atlaskit/icon/glyph/vid-full-screen-on';
@@ -10,7 +10,7 @@ import FieldRange from '@atlaskit/field-range';
 import { fakeIntl } from '@atlaskit/media-test-helpers';
 import { CustomVideo, CustomVideoProps } from '../../customVideoPlayer';
 import { toggleFullscreen } from '../../customVideoPlayer/fullscreen';
-import { TimeRange } from '../../customVideoPlayer/TimeRange';
+import { TimeRange } from '../../customVideoPlayer/timeRange';
 import { CurrentTime } from '../../customVideoPlayer/styled';
 import { Shortcut } from '../../';
 
@@ -108,7 +108,7 @@ describe('<CustomVideo />', () => {
   describe('interaction', () => {
     it('should use keyboard shortcuts to toggle video state', () => {
       const showControls = jest.fn();
-      const { component } = setup({ showControls });
+      const { component } = setup({ showControls, isShortcutEnabled: true });
 
       component
         .find(Shortcut)
