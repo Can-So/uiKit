@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 7.10.0
+- [minor] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
+
+  - use custom video player for inline video in media-card
+
 ## 7.9.0
 - [minor] [c61f828](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c61f828):
 

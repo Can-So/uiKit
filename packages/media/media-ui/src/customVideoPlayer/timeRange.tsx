@@ -8,7 +8,7 @@ import {
   CurrentTimeTooltip,
   TimeRangeWrapper,
 } from './styled';
-import { formatDuration } from '../../utils/formatDuration';
+import { formatDuration } from '../formatDuration';
 
 export interface TimeRangeProps {
   currentTime: number;

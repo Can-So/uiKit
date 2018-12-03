@@ -232,7 +232,7 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
       serializer: this,
       content: node.content ? node.content.toJSON() : undefined,
       allowDynamicTextSizing: this.allowDynamicTextSizing,
-      appearance: this.appearance,
+      rendererAppearance: this.appearance,
       ...node.attrs,
     };
   }

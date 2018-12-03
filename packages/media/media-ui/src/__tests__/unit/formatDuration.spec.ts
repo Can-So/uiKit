@@ -1,4 +1,4 @@
-import { formatDuration } from '../../../../newgen/utils/formatDuration';
+import { formatDuration } from '../../formatDuration';
 
 describe('formatDuration', () => {
   const minute = 60;

@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 31.1.1
+- [patch] [232238c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/232238c):
+
+  - ED-5866: Turn off lazy loading for images on mobile.
+
 ## 31.1.0
 - [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
 

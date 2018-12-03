@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.4.1
+- [patch] [232238c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/232238c):
+
+  - ED-5866: Turn off lazy loading for images on mobile.
+
 ## 6.4.0
 - [minor] [008c694](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/008c694):
 
