@@ -1,1 +1,0 @@
-- Fixes a double scrollbar issue that happens on windows when connected to a mouse
