@@ -20,7 +20,6 @@ import { SelectedIcon } from './styled';
 import { getAvatarForConfluenceObjectResult } from '../util/confluence-avatar-util';
 import { getDefaultAvatar } from '../util/jira-avatar-util';
 import DarkReturn from '../assets/DarkReturn';
-import { addJiraResultQueryParams } from '../api/JiraItemMapper';
 
 export interface Props {
   results: Result[];
