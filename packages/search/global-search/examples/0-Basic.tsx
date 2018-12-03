@@ -17,10 +17,6 @@ const logEvent = event => {
   );
 };
 
-type State = {
-  isDrawerOpen: boolean;
-};
-
 export default class GlobalQuickSearchExample extends React.Component {
   state = {
     isDrawerOpen: false,
