@@ -4,10 +4,10 @@ import { createEditor, doc, p } from '@atlaskit/editor-test-helpers';
 import Comment from '../../../ui/Appearance/Comment';
 
 describe('comment editor', () => {
-  let unmountEditor: () => void | undefined = undefined;
+  let unmountEditor = () => {};
 
   beforeEach(() => {
-    unmountEditor = undefined;
+    unmountEditor = () => {};
   });
 
   afterEach(() => {

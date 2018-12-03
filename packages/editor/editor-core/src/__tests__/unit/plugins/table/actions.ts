@@ -39,10 +39,10 @@ import {
 } from '../../../../plugins/table/pm-plugins/main';
 
 describe('table plugin: actions', () => {
-  let unmountEditor: () => void | undefined = undefined;
+  let unmountEditor = () => {};
 
   beforeEach(() => {
-    unmountEditor = undefined;
+    unmountEditor = () => {};
   });
 
   afterEach(() => {

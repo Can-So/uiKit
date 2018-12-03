@@ -22,10 +22,10 @@ import { panelPlugin } from '../../../../plugins';
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 describe('media-files', () => {
-  let unmountEditor: () => void | undefined = undefined;
+  let unmountEditor = () => {};
 
   beforeEach(() => {
-    unmountEditor = undefined;
+    unmountEditor = () => {};
   });
 
   afterEach(() => {
