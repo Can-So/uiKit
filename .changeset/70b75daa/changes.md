@@ -1,1 +1,0 @@
-- ED-5866: Turn off lazy loading for images on mobile.
