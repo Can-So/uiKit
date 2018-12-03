@@ -1,0 +1,1 @@
+- Make icon glyphs not import metadata
