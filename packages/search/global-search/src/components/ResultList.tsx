@@ -151,7 +151,6 @@ export default class ResultList extends React.Component<Props> {
             jiraResult.contentType === 'jira-filter'
               ? getI18nJiraContentType(jiraResult.contentType)
               : jiraResult.objectKey;
-          var containerName = jiraResult.containerName;
 
           return (
             <ObjectResultComponent
@@ -161,7 +160,7 @@ export default class ResultList extends React.Component<Props> {
               href={jiraResult.href}
               type={jiraResult.analyticsType}
               objectKey={objectKey}
-              containerName={containerName}
+              containerName={jiraResult.containerName}
               {...avatarData}
               analyticsData={analyticsData}
               selectedIcon={selectedIcon}
