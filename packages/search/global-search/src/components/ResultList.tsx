@@ -71,7 +71,7 @@ const getI18nJiraContainerName = (
 const getTranslatedJiraType = (
   contentType: ContentType,
   containerName,
-): JSX.Element | undefined => {
+): JSX.Element | string | undefined => {
   switch (contentType) {
     case 'jira-issue':
       return get18nJiraIssueType(containerName);
@@ -92,11 +92,10 @@ const getI18nJiraContentType = (
       return <FormattedMessage {...messages.jira_result_type_filter} />;
     }
   }
-  debugger;
   return undefined;
 };
 
-const get18nJiraIssueType = (issueType: string): JSX.Element | undefined => {
+const get18nJiraIssueType = (issueType: string): JSX.Element | string => {
   switch (issueType) {
     case 'Bug': {
       return <FormattedMessage {...messages.jira_issue_type_bug} />;
@@ -108,12 +107,10 @@ const get18nJiraIssueType = (issueType: string): JSX.Element | undefined => {
       return <FormattedMessage {...messages.jira_issue_type_task} />;
     }
   }
-  return <div>${issueType}</div>;
+  return issueType;
 };
 
-const get18nJiraProjectType = (
-  projectType: string,
-): JSX.Element | undefined => {
+const get18nJiraProjectType = (projectType: string): JSX.Element | string => {
   switch (projectType) {
     case 'Service Desk project': {
       return (
@@ -127,8 +124,13 @@ const get18nJiraProjectType = (
         <FormattedMessage {...messages.jira_project_type_software_project} />
       );
     }
+    case 'Business project': {
+      return (
+        <FormattedMessage {...messages.jira_project_type_business_project} />
+      );
+    }
   }
-  return <div>${projectType}</div>;
+  return projectType;
 };
 
 export const getUniqueResultId = (result: Result): string =>

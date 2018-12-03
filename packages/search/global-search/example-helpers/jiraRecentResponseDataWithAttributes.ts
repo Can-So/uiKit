@@ -16,7 +16,7 @@ export const jiraRecentResponseWithAttributes = [
           containerId: '10000',
           containerName: 'JIRA Development',
           issueTypeId: '1',
-          issueTypeName: 'Bug',
+          issueTypeName: 'CustomIssueType',
         },
         favourite: false,
       },
