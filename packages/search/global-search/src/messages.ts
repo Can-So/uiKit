@@ -209,19 +209,4 @@ export const messages = defineMessages({
     defaultMessage: 'Filter',
     description: '',
   },
-  jira_issue_type_bug: {
-    id: 'global_search.jira.issue_type.bug',
-    defaultMessage: 'Bug',
-    description: '',
-  },
-  jira_issue_type_story: {
-    id: 'global_search.jira.issue_type.story',
-    defaultMessage: 'Story',
-    description: '',
-  },
-  jira_issue_type_task: {
-    id: 'global_search.jira.issue_type.task',
-    defaultMessage: 'Story',
-    description: '',
-  },
 });
