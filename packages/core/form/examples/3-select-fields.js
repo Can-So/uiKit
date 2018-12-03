@@ -77,11 +77,12 @@ export default () => (
       {({ formProps }) => (
         <form {...formProps}>
           <Field name="colors" label="Select a colour" defaultValue={[]}>
-            {({ fieldProps, error }) => (
+            {({ fieldProps: { id, ...rest }, error }) => (
               <Fragment>
                 <Select
                   validationState={error ? 'error' : 'none'}
-                  {...fieldProps}
+                  inputId={id}
+                  {...rest}
                   options={colors}
                 />
                 {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -89,11 +90,12 @@ export default () => (
             )}
           </Field>
           <Field name="icecream" label="Select a flavor" defaultValue={[]}>
-            {({ fieldProps, error }) => (
+            {({ fieldProps: { id, ...rest }, error }) => (
               <Fragment>
                 <Select
                   validationState={error ? 'error' : 'none'}
-                  {...fieldProps}
+                  inputId={id}
+                  {...rest}
                   options={flavors}
                   isMulti
                 />

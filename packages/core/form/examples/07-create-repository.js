@@ -78,8 +78,9 @@ export default class LayoutExample extends PureComponent<void, State> {
                     value: 'atlassian',
                   }}
                 >
-                  {({ fieldProps }) => (
+                  {({ fieldProps: { id, ...rest } }) => (
                     <Select
+                      inputId={id}
                       isSearchable={false}
                       options={[
                         { label: 'Atlassian', value: 'atlassian' },
@@ -87,14 +88,15 @@ export default class LayoutExample extends PureComponent<void, State> {
                         { label: 'Mike Gardiner', value: 'mg' },
                         { label: 'Charles Lee', value: 'clee' },
                       ]}
-                      {...fieldProps}
+                      {...rest}
                     />
                   )}
                 </Field>
 
                 <Field name="project" label="Project" isRequired>
-                  {({ fieldProps }) => (
+                  {({ fieldProps: { id, ...rest } }) => (
                     <Select
+                      inputId={id}
                       options={[
                         { label: 'Atlaskit', value: 'brisbane' },
                         { label: 'Bitbucket', value: 'bb' },
@@ -103,7 +105,7 @@ export default class LayoutExample extends PureComponent<void, State> {
                         { label: 'Stride', value: 'stride' },
                       ]}
                       placeholder="Choose a project&hellip;"
-                      {...fieldProps}
+                      {...rest}
                     />
                   )}
                 </Field>

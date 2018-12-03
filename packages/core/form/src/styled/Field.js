@@ -19,7 +19,7 @@ export const Label = styled.label`
 `;
 
 export const RequiredIndicator = styled.span`
-  color: ${colors.red};
+  color: ${colors.R400};
   padding-left: 2px;
 `;
 

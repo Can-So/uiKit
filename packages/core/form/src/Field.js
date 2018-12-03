@@ -2,12 +2,14 @@
 import React, { type Node } from 'react';
 import arrayShallowEqual from 'shallow-equal/arrays';
 import objectShallowEqual from 'shallow-equal/objects';
+import uuid from 'uuid';
 import { type FieldState, type FieldSubscription } from 'final-form';
 import { FormContext, IsDisabledContext } from './Form';
 import FieldWrapper, { Label, RequiredIndicator } from './styled/Field';
 import translateEvent from './utils/translateEvent';
 
 type FieldProps = {
+  id: string,
   isRequired: boolean,
   isInvalid: boolean,
   onChange: any => any,
@@ -29,6 +31,8 @@ type Props = {
   children: ({ fieldProps: FieldProps, error: any, meta: Meta }) => Node,
   /* The default value of the field. If a function is provided it is called with the current default value of the field. */
   defaultValue: any,
+  /* Passed to the ID attribute of the field. Randomly generated if not specified */
+  id?: string,
   /* Whether the field is required for submission */
   isRequired?: boolean,
   /* Whether the field is disabled. Internal prop - gets set through context. */
@@ -78,7 +82,11 @@ class FieldInner extends React.Component<Props, State> {
   static defaultProps = {
     transform: translateEvent,
   };
+
   unregisterField = () => {};
+
+  id = `${this.props.name}-${this.props.id || uuid()}`;
+
   state = {
     // eslint-disable-next-line no-unused-vars
     onChange: (e, value) => {},
@@ -185,11 +193,12 @@ class FieldInner extends React.Component<Props, State> {
       isDisabled,
       isInvalid: Boolean(error),
       isRequired: Boolean(isRequired),
+      id: this.id,
     };
     return (
       <FieldWrapper>
         {label && (
-          <Label htmlFor={name}>
+          <Label htmlFor={this.id}>
             {label}
             {isRequired && (
               <RequiredIndicator role="presentation">*</RequiredIndicator>

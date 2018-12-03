@@ -13,7 +13,7 @@ const Message = styled.div`
     } else if (props.valid) {
       return colors.G400;
     }
-    return colors.N90;
+    return colors.N200;
   }};
   margin-top: ${math.multiply(gridSize, 0.5)}px;
   display: flex;
