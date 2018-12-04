@@ -1,1 +1,0 @@
-- Pinning react-popper to 1.0.2 to avoid recursive bug
