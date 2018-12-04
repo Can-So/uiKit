@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.4
+- [patch] [3c2c367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3c2c367):
+
+  - FS-3261 - Fix status selection growing as font size increases
+
 ## 90.3.3
 - [patch] [5390041](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5390041):
 
