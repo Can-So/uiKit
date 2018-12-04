@@ -22,3 +22,4 @@ export * from './customVideoPlayer/timeRange';
 export * from './classNames';
 export * from './shortcut';
 export * from './formatDuration';
+export { default as theme } from './theme';

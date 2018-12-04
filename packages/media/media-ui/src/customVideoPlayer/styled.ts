@@ -18,13 +18,6 @@ export const VideoWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-
-  video {
-    flex: 1;
-    width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-  }
 `;
 
 export const TimebarWrapper = styled.div`

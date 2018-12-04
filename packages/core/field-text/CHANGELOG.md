@@ -1,5 +1,10 @@
 # @atlaskit/field-text
 
+## 7.0.17
+- [patch] [48640fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/48640fb):
+
+  - FS-3227 - Prevent status popup focus from scrolling editor
+
 ## 7.0.16
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3

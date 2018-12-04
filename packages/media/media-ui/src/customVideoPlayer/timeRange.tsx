@@ -83,16 +83,15 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
     });
   };
 
-  onNavigate = (e: any) => {
+  onNavigate = (e: React.SyntheticEvent<HTMLDivElement>) => {
     // We don't want to navigate if the event was starting with a drag
     if (e.target === this.thumbElement) {
       return;
     }
 
     const { duration, onChange } = this.props;
-    const event = e.nativeEvent;
-    const thumbCorrection = 8; // This is to actually center the thumb in the middle of the cursor
-    const x = event.x - thumbCorrection;
+    const event = e.nativeEvent as MouseEvent;
+    const x = event.offsetX;
     const currentTime = (x * duration) / this.wrapperElementWidth;
 
     onChange(currentTime);
