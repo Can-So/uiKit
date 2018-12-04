@@ -15,6 +15,9 @@
   "maintainers": [
     "Stanislas S"
   ],
+  "atlaskit": {
+    "internal": true
+  },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
     "@atlaskit/analytics-next-types": "^3.1.0",

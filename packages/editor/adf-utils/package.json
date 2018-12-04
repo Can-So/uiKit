@@ -30,6 +30,9 @@
   "maintainers": [
     "Stanislav S"
   ],
+  "atlaskit": {
+    "internal": true
+  },
   "dependencies": {
     "@atlaskit/editor-common": "^22.3.0"
   },

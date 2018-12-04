@@ -21,6 +21,9 @@
   },
   "author": "Atlassian Pty. Ltd",
   "maintainers": [],
+  "atlaskit": {
+    "internal": true
+  },
   "license": "Apache-2.0",
   "repository": {
     "type": "git",

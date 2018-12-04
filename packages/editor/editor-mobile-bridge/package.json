@@ -19,6 +19,9 @@
     "editor",
     "mobile"
   ],
+  "atlaskit": {
+    "internal": true
+  },
   "author": "Atlassian Pty Ltd",
   "license": "Apache-2.0",
   "homepage": "https://bitbucket.org/atlaskit/atlaskit-mk-2#readme",

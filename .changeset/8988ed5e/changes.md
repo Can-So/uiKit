@@ -1,0 +1,1 @@
+- Packages should not be shown in the navigation, search and overview
