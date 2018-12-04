@@ -4,7 +4,7 @@ import { getArtifactUrl } from '@atlaskit/media-store';
 import { CustomVideoPlayer } from '@atlaskit/media-ui';
 import { constructAuthTokenUrl } from '../../utils';
 import { Outcome, MediaViewerFeatureFlags } from '../../domain';
-import { Video } from '../../styled';
+import { Video, CustomVideoPlayerWrapper } from '../../styled';
 import { getFeatureFlag } from '../../utils/getFeatureFlag';
 import { isIE } from '../../utils/isIE';
 import { createError, MediaViewerError } from '../../error';
@@ -46,15 +46,17 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
       !isIE() && getFeatureFlag('customVideoPlayer', featureFlags);
     const isAutoPlay = previewCount === 0;
     return useCustomVideoPlayer ? (
-      <CustomVideoPlayer
-        isAutoPlay={isAutoPlay}
-        onHDToggleClick={this.onHDChange}
-        showControls={showControls}
-        src={content}
-        isHDActive={isHDActive}
-        isHDAvailable={isHDAvailable(item)}
-        isShortcutEnabled={true}
-      />
+      <CustomVideoPlayerWrapper>
+        <CustomVideoPlayer
+          isAutoPlay={isAutoPlay}
+          onHDToggleClick={this.onHDChange}
+          showControls={showControls}
+          src={content}
+          isHDActive={isHDActive}
+          isHDAvailable={isHDAvailable(item)}
+          isShortcutEnabled={true}
+        />
+      </CustomVideoPlayerWrapper>
     ) : (
       <Video autoPlay={isAutoPlay} controls src={content} />
     );

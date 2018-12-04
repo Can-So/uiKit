@@ -31,4 +31,4 @@ const buttonTheme = {
   },
 };
 
-export const theme = { '@atlaskit-shared-theme/button': buttonTheme };
+export default { '@atlaskit-shared-theme/button': buttonTheme };
