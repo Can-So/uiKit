@@ -1,0 +1,1 @@
+- FS-3261 - Fix status selection growing as font size increases
