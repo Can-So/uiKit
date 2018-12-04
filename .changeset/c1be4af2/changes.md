@@ -1,0 +1,1 @@
+- Fix usage of PopupSelect inside ModalDialog
