@@ -52,6 +52,10 @@ const getI18nItemName = (i18nKeySuffix: string) => {
 };
 
 export default class JiraAdvancedSearch extends React.Component<Props, State> {
+  constructor(props) {
+    super(props);
+    this.enrichedAnalyticsData = props.analyticsData;
+  }
   static defaultProps = {
     showKeyboardLozenge: false,
     showSearchIcon: false,
@@ -73,11 +77,7 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
     ));
 
   selectedItem?: JiraEntityTypes;
-
-  getEnrichedAnalyticsData = () => ({
-    ...this.props.analyticsData,
-    contentType: this.selectedItem,
-  });
+  enrichedAnalyticsData?: object;
 
   render() {
     const { query, showKeyboardLozenge, showSearchIcon } = this.props;
@@ -98,6 +98,11 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
                   this.setState({
                     entity: this.selectedItem,
                   });
+                  this.enrichedAnalyticsData = {
+                    ...this.props.analyticsData,
+                    contentType: this.selectedItem,
+                  };
+                  this.selectedItem = undefined;
                 } else {
                   // we need to cancel on click event on the dropdown to stop navigation
                   e.preventDefault();
@@ -106,7 +111,7 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
               }}
             >
               <DropdownMenu
-                trigger={getI18nItemName(JiraEntityTypes.Issues)}
+                trigger={getI18nItemName(this.state.entity)}
                 triggerType="button"
                 shouldFlip={false}
                 position="right bottom"
@@ -129,7 +134,7 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
         showKeyboardLozenge={showKeyboardLozenge}
         // lazily pass analytics data because the analytic event fired as part of onclick handle
         // i.e. before the component update the new state, so can not add contentType from state
-        analyticsData={this.getEnrichedAnalyticsData}
+        analyticsData={() => this.enrichedAnalyticsData}
       />
     );
   }
