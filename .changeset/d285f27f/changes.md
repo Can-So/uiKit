@@ -1,1 +1,0 @@
-- FS-3160 - Prevent editor crash in some deletion use cases for status
