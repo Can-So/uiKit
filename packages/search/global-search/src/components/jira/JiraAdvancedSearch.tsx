@@ -18,7 +18,6 @@ import {
 
 export interface Props {
   query: string;
-  onAdvancedSearchChange?(entity: JiraEntityTypes): void;
   showKeyboardLozenge?: boolean;
   showSearchIcon?: boolean;
   analyticsData?: object;

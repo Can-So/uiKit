@@ -105,9 +105,6 @@ export class JiraQuickSearchContainer extends React.Component<
     redirectToJiraAdvancedSearch(this.state.selectedAdvancedSearchType, query);
   };
 
-  onAdvancedSearchChange = entityType =>
-    this.setState({ selectedAdvancedSearchType: entityType });
-
   getSearchResultsComponent = ({
     retrySearch,
     latestSearchQuery,
@@ -148,7 +145,6 @@ export class JiraQuickSearchContainer extends React.Component<
               query={query}
               showKeyboardLozenge={!isPreQuery && !keepPreQueryState}
               showSearchIcon
-              onAdvancedSearchChange={this.onAdvancedSearchChange}
             />
           </StickyFooter>
         )}
