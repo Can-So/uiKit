@@ -1,0 +1,1 @@
+- CustomVideoPlayer improvements: fix currentTime origin + apply custom theme

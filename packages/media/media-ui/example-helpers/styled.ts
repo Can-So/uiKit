@@ -51,3 +51,17 @@ export const OrientationSelectWrapper: ComponentClass = styled.label`
   margin-bottom: 20px;
   display: block;
 `;
+
+export const TimeRangeWrapper = styled.div`
+  margin-top: 40px;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+export const Group = styled.div`
+  width: 250px;
+  padding: 20px;
+`;

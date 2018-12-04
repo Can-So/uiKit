@@ -344,3 +344,12 @@ export const DownloadButtonWrapper = styled.div`
     font-weight: bold;
   }
 `;
+
+export const CustomVideoPlayerWrapper = styled.div`
+  video {
+    flex: 1;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+  }
+`;
