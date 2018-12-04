@@ -33,17 +33,24 @@ export const VolumeWrapper = styled.div`
   width: 35px;
   overflow: hidden;
   transition: width 0.3s;
+  transition-delay: 1s;
   align-items: center;
 
   &:hover {
-    padding-right: 20px;
     width: 152px;
+    transition: width 0.3s ease-out;
+  }
+
+  &:active {
+    width: 152px;
+    transition: width 0.3s ease-out;
   }
 
   input {
     transform: translateX(13px);
     height: 100%;
     cursor: pointer;
+    margin-right: 20px;
   }
 `;
 

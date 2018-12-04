@@ -45,6 +45,7 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { messages } from '../messages';
 
 export interface CustomVideoProps {
+  readonly type: 'audio' | 'video';
   readonly src: string;
   readonly isHDActive?: boolean;
   readonly onHDToggleClick?: () => void;
@@ -113,9 +114,9 @@ export class CustomVideo extends Component<
   };
 
   renderHDButton = () => {
-    const { isHDAvailable, isHDActive, onHDToggleClick } = this.props;
+    const { type, isHDAvailable, isHDActive, onHDToggleClick } = this.props;
 
-    if (!isHDAvailable) {
+    if (type === 'audio' || !isHDAvailable) {
       return;
     }
     const primaryColor = isHDActive ? colors.B200 : colors.DN400;
@@ -163,7 +164,13 @@ export class CustomVideo extends Component<
   renderFullScreenButton = () => {
     const {
       intl: { formatMessage },
+      type,
     } = this.props;
+
+    if (type === 'audio') {
+      return;
+    }
+
     const { isFullScreenEnabled } = this.state;
     const icon = isFullScreenEnabled ? (
       <FullScreenIconOff label={formatMessage(messages.disable_fullscreen)} />
@@ -188,6 +195,7 @@ export class CustomVideo extends Component<
 
   render() {
     const {
+      type,
       src,
       isAutoPlay,
       isShortcutEnabled,
@@ -196,7 +204,7 @@ export class CustomVideo extends Component<
     return (
       <ThemeProvider theme={theme}>
         <CustomVideoWrapper innerRef={this.saveVideoWrapperRef}>
-          <Video src={src} autoPlay={isAutoPlay}>
+          <Video sourceType={type} src={src} autoPlay={isAutoPlay}>
             {(video, videoState, actions) => {
               const {
                 status,

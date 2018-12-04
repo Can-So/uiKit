@@ -5,7 +5,6 @@ import { messages } from '@atlaskit/media-ui';
 import { Outcome, Identifier, MediaViewerFeatureFlags } from './domain';
 import { ImageViewer } from './viewers/image';
 import { VideoViewer } from './viewers/video';
-import { AudioViewer } from './viewers/audio';
 import { DocViewer } from './viewers/doc';
 import { Spinner } from './loading';
 import { Subscription } from 'rxjs/Subscription';
@@ -116,10 +115,18 @@ export class ItemViewerBase extends React.Component<Props, State> {
       case 'image':
         return <ImageViewer onLoad={this.onViewerLoaded} {...viewerProps} />;
       case 'audio':
-        return <AudioViewer {...viewerProps} />;
+        return (
+          <VideoViewer
+            type="audio"
+            showControls={showControls}
+            featureFlags={featureFlags}
+            {...viewerProps}
+          />
+        );
       case 'video':
         return (
           <VideoViewer
+            type="video"
             showControls={showControls}
             featureFlags={featureFlags}
             {...viewerProps}
