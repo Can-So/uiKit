@@ -1,1 +1,0 @@
-- FS-3227 - Prevent status popup focus from scrolling editor

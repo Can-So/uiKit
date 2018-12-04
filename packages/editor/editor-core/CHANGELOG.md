@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.2
+- [patch] [48640fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/48640fb):
+
+  - FS-3227 - Prevent status popup focus from scrolling editor
+
 ## 90.3.1
 - [patch] [dcd8f90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dcd8f90):
 

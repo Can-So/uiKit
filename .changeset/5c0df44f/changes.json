@@ -1,8 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/status", "type": "patch" },
-    { "name": "@atlaskit/field-text", "type": "patch" },
-    { "name": "@atlaskit/editor-core", "type": "patch" }
-  ],
-  "dependents": []
-}

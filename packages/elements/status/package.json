@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/status",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "config": {
     "access": "public"
   },
@@ -26,7 +26,7 @@
     "elements"
   ],
   "dependencies": {
-    "@atlaskit/field-text": "^7.0.16",
+    "@atlaskit/field-text": "^7.0.17",
     "@atlaskit/icon": "^15.0.1",
     "@atlaskit/lozenge": "^6.2.3",
     "@atlaskit/theme": "^7.0.0",
