@@ -23,6 +23,10 @@ export interface Props {
   analyticsData?: object;
 }
 
+interface State {
+  entity: JiraEntityTypes;
+}
+
 const TextContainer = styled.div`
   padding: ${gridSize()}px 0;
   margin-right: ${gridSize()}px;
@@ -47,22 +51,28 @@ const getI18nItemName = (i18nKeySuffix: string) => {
   return <FormattedMessage {...messages[id]} />;
 };
 
-export default class JiraAdvancedSearch extends React.Component<Props> {
+export default class JiraAdvancedSearch extends React.Component<Props, State> {
   static defaultProps = {
     showKeyboardLozenge: false,
     showSearchIcon: false,
+  };
+
+  state = {
+    entity: JiraEntityTypes.Issues,
   };
 
   renderDropdownItems = () =>
     itemI18nKeySuffix.map(item => (
       <DropdownItem
         href={getJiraAdvancedSearchUrl(item, this.props.query)}
-        onClick={e => e.stopPropagation()}
+        onClick={() => (this.selectedItem = item)}
         key={item}
       >
         {getI18nItemName(item)}
       </DropdownItem>
     ));
+
+  selectedItem?: JiraEntityTypes;
 
   render() {
     const {
@@ -72,9 +82,10 @@ export default class JiraAdvancedSearch extends React.Component<Props> {
       analyticsData,
     } = this.props;
 
+    let enricedAnalyticsData = analyticsData;
     return (
       <AdvancedSearchResult
-        href={getJiraAdvancedSearchUrl(JiraEntityTypes.Issues, query)}
+        href={getJiraAdvancedSearchUrl(this.state.entity, query)}
         key={`search-jira-${Date.now()}`}
         resultId={ADVANCED_JIRA_SEARCH_RESULT_ID}
         text={
@@ -84,9 +95,22 @@ export default class JiraAdvancedSearch extends React.Component<Props> {
             </TextContainer>
             <span
               onClick={e => {
-                // we need to cancel on click event on the dropdown to stop navigation
-                e.preventDefault();
-                e.stopPropagation();
+                if (this.selectedItem) {
+                  this.setState({
+                    entity: this.selectedItem,
+                  });
+
+                  enricedAnalyticsData = {
+                    ...analyticsData,
+                    contentType: this.selectedItem,
+                  };
+
+                  this.selectedItem = undefined;
+                } else {
+                  // we need to cancel on click event on the dropdown to stop navigation
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
               }}
             >
               <DropdownMenu
@@ -111,7 +135,9 @@ export default class JiraAdvancedSearch extends React.Component<Props> {
         }
         type={AnalyticsType.AdvancedSearchJira}
         showKeyboardLozenge={showKeyboardLozenge}
-        analyticsData={analyticsData}
+        // lazily pass analytics data because the analytic event fired as part of onclick handle
+        // i.e. before the component update the new state, so can not add contentType from state
+        analyticsData={() => enricedAnalyticsData}
       />
     );
   }
