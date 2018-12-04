@@ -1,15 +1,44 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, Example, Props, code } from '@atlaskit/docs';
+import StatusExample from '../examples/00-simple-status';
+const StatusSource = require('!!raw-loader!../examples/00-simple-status');
+import StatusPickerExample from '../examples/01-status-picker';
+const StatusPickerSource = require('!!raw-loader!../examples/01-status-picker');
+
+const StatusPickerProps = require('!!extract-react-types-loader!../src/components/StatusPicker');
 
 export default md`
-# Status
+This component is the implementation of the Status element in React.
 
-@atlaskit/status is the implementation of the Status element in React. Check out [live examples](https://atlaskit.atlassian.com/packages/elements/status/example/simple-status).
+## Usage
+  ### Status
+  ${code`import { Status, Color } from '@atlaskit/status';`}
 
-## Installation
+  ${(
+    <Example
+      packageName="@atlaskit/status"
+      Component={StatusExample}
+      title="Status Picker"
+      source={StatusSource}
+    />
+  )}
 
-~~~sh
-npm install @atlaskit/status
-# or
-yarn add @atlaskit/status
-~~~
+  ### Status Picker
+
+  ${code`import { StatusPicker } from '@atlaskit/status';`}
+
+
+
+  ${(
+    <Example
+      packageName="@atlaskit/status"
+      Component={StatusPickerExample}
+      title="Status Picker"
+      source={StatusPickerSource}
+    />
+  )}
+
+  ${<Props heading="StatusPicker Props" props={StatusPickerProps} />}
 `;
+
+// TODO: Add Props for Status when pretty prop types support function.

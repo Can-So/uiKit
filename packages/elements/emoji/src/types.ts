@@ -1,6 +1,67 @@
 import { SyntheticEvent } from 'react';
 import { CategoryId } from './components/picker/categories';
 
+export type EmojiProps = {
+  /**
+   * The emoji to render
+   */
+  emoji: EmojiDescription;
+
+  /**
+   * Show the emoji as selected
+   */
+  selected?: boolean;
+
+  /**
+   * Automatically show the emoji as selected based on mouse hover.
+   *
+   * CSS, fast, does not require a re-render, but selected state not
+   * externally controlled via props.
+   */
+  selectOnHover?: boolean;
+
+  /**
+   * Called when an emoji is selected
+   */
+  onSelected?: OnEmojiEvent;
+
+  /**
+   * Called when the mouse moved over the emoji.
+   */
+  onMouseMove?: OnEmojiEvent;
+
+  /**
+   * Called when an emoji is deleted
+   */
+  onDelete?: OnEmojiEvent;
+
+  /**
+   * Callback for if an emoji image fails to load.
+   */
+  onLoadError?: OnEmojiEvent<HTMLImageElement>;
+
+  /**
+   * Additional css classes, if required.
+   */
+  className?: string;
+
+  /**
+   * Show a tooltip on mouse hover.
+   */
+  showTooltip?: boolean;
+
+  /**
+   * Show a delete button on mouse hover
+   * Used only for custom emoji
+   */
+  showDelete?: boolean;
+
+  /**
+   * Fits emoji to height in pixels, keeping aspect ratio
+   */
+  fitToHeight?: number;
+};
+
 export type CategoryId = CategoryId;
 
 export type RelativePosition = 'above' | 'below' | 'auto';
