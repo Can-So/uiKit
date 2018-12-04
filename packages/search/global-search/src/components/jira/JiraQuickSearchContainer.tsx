@@ -50,6 +50,8 @@ import {
 import performanceNow from '../../util/performance-now';
 import AdvancedIssueSearchLink from './AdvancedIssueSearchLink';
 
+const JIRA_RESULT_LIMIT = 6;
+
 const NoResultsAdvancedSearchContainer = styled.div`
   margin-top: ${4 * gridSize()}px;
 `;
@@ -256,6 +258,7 @@ export class JiraQuickSearchContainer extends React.Component<
       query,
       { sessionId, referrerId },
       scopes,
+      JIRA_RESULT_LIMIT,
     );
 
     const searchPeoplePromise = handlePromiseError(
