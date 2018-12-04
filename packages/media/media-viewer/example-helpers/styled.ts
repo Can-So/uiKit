@@ -7,20 +7,6 @@ import styled, { StyledComponentClass } from 'styled-components';
 // prettier-ignore
 import { HTMLAttributes, VideoHTMLAttributes, AudioHTMLAttributes, ImgHTMLAttributes, ComponentClass, ClassAttributes } from 'react';
 
-export const TimeRangeWrapper = styled.div`
-  margin-top: 40px;
-`;
-
-export const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
-export const Group = styled.div`
-  width: 250px;
-  padding: 20px;
-`;
-
 export const ButtonList = styled.ul`
   padding-left: 0;
   list-style: none;
