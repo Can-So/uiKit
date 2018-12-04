@@ -306,7 +306,7 @@ export class Card extends Component<CardProps, CardState> {
 
   renderInlinePlayer = () => {
     const { identifier, context, dimensions } = this.props;
-
+    console.log('renderInlinePlayer', { dimensions });
     return (
       <InlinePlayer
         context={context}

@@ -24,6 +24,7 @@ export default class DefaultMediaStateManager extends EventDispatcher
   }
 
   updateState(id: string, newState: Partial<MediaState>) {
+    console.log('updateState', { id, newState });
     const state = this.newState(id, newState);
     this.emit(id, state);
     return state;

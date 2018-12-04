@@ -18,6 +18,7 @@ import { setNodeSelection } from '../../../utils';
 import ResizableMediaSingle from '../ui/ResizableMediaSingle';
 import { createDisplayGrid } from '../../../plugins/grid';
 import { EventDispatcher } from '../../../event-dispatcher';
+import { MediaStateStatus } from '../types';
 
 const DEFAULT_WIDTH = 250;
 const DEFAULT_HEIGHT = 200;
@@ -35,6 +36,7 @@ export interface MediaSingleNodeProps {
 export interface MediaSingleNodeState {
   width?: number;
   height?: number;
+  lastMediaStatus?: MediaStateStatus;
 }
 
 export default class MediaSingleNode extends Component<
@@ -46,6 +48,7 @@ export default class MediaSingleNode extends Component<
   state = {
     height: undefined,
     width: undefined,
+    lastMediaStatus: undefined,
   };
 
   constructor(props) {
@@ -56,6 +59,7 @@ export default class MediaSingleNode extends Component<
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.log('MediaSingleNode', { nextProps, nextState });
     if (
       this.props.node.attrs.width !== nextProps.node.attrs.width ||
       this.props.selected() !== nextProps.selected() ||
@@ -63,7 +67,8 @@ export default class MediaSingleNode extends Component<
       this.props.width !== nextProps.width ||
       this.props.lineLength !== nextProps.lineLength ||
       this.props.getPos !== nextProps.getPos ||
-      this.mediaChildHasUpdated(nextProps)
+      this.mediaChildHasUpdated(nextProps) ||
+      this.hasMediaStateUpdated()
     ) {
       return true;
     }
@@ -75,6 +80,7 @@ export default class MediaSingleNode extends Component<
     if (this.props.selected()) {
       this.mediaPluginState.updateLayout(layout);
     }
+    this.setState({ lastMediaStatus: this.getMediaNodeStatus() });
   }
 
   private onExternalImageLoaded = ({ width, height }) => {
@@ -89,6 +95,21 @@ export default class MediaSingleNode extends Component<
     );
   };
 
+  private getMediaNodeStatus = () => {
+    const childNode = this.props.node.firstChild;
+    if (childNode) {
+      const state = this.mediaPluginState.getMediaNodeState(
+        childNode.attrs.__key,
+      );
+      return state && state.status;
+    }
+    return undefined;
+  };
+
+  private hasMediaStateUpdated = () => {
+    return this.getMediaNodeStatus() !== this.state.lastMediaStatus;
+  };
+
   private mediaChildHasUpdated = nextProps => {
     if (!this.props.node.firstChild || !nextProps.node.firstChild) {
       return false;
@@ -100,10 +121,6 @@ export default class MediaSingleNode extends Component<
       this.props.node.firstChild.attrs.id !== nextProps.node.firstChild.attrs.id
     );
   };
-
-  mediaReady(mediaState) {
-    return mediaState && mediaState.status === 'ready';
-  }
 
   selectMediaSingle = () => {
     setNodeSelection(this.props.view, this.props.getPos() + 1);
@@ -132,6 +149,8 @@ export default class MediaSingleNode extends Component<
       view: { state },
     } = this.props;
 
+    const { lastMediaStatus } = this.state;
+
     const { layout, width: mediaSingleWidth } = node.attrs;
     const childNode = node.firstChild!;
 
@@ -149,11 +168,12 @@ export default class MediaSingleNode extends Component<
       }
     }
 
-    const mediaState = this.mediaPluginState.getMediaNodeState(
-      childNode.attrs.__key,
-    );
-
-    const isLoading = mediaState ? !this.mediaReady(mediaState) : false;
+    const isLoading = lastMediaStatus !== 'ready';
+    console.log({
+      lastMediaStatus,
+      'options.allowResizing': this.mediaPluginState.options.allowResizing,
+      isLoading,
+    });
     let canResize = !!this.mediaPluginState.options.allowResizing && !isLoading;
 
     const pos = getPos();
