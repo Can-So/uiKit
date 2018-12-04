@@ -28,7 +28,7 @@ export class StatusPicker extends PureComponent<Props, any> {
   };
 
   render() {
-    const { autoFocus, text, selectedColor, onColorClick } = this.props;
+    const { text, selectedColor, onColorClick } = this.props;
 
     // Using <React.Fragment> instead of [] to workaround Enzyme
     // (https://github.com/airbnb/enzyme/issues/1149)
@@ -40,8 +40,9 @@ export class StatusPicker extends PureComponent<Props, any> {
             isLabelHidden={true}
             shouldFitContainer={true}
             onChange={this.onChange}
-            autoFocus={autoFocus}
             onKeyPress={this.onKeyPress}
+            compact={true}
+            innerRef={this.handleInputRef}
           />
         </FieldTextWrapper>
         <ColorPalette
@@ -61,6 +62,15 @@ export class StatusPicker extends PureComponent<Props, any> {
   private onKeyPress = event => {
     if (event.key === 'Enter') {
       this.props.onEnter();
+    }
+  };
+
+  private handleInputRef = ref => {
+    if (ref && this.props.autoFocus) {
+      // Defer to prevent editor scrolling to top (See FS-3227, also ED-2992)
+      setTimeout(() => {
+        ref.focus();
+      });
     }
   };
 }
