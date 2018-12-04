@@ -1,5 +1,10 @@
 # @atlaskit/media-viewer
 
+## 27.0.6
+- [patch] [01697a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01697a6):
+
+  - CustomVideoPlayer improvements: fix currentTime origin + apply custom theme
+
 ## 27.0.5
 - [patch] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
 

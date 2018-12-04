@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 6.1.12
+- [patch] [82fc5f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82fc5f5):
+
+  - Pinning react-popper to 1.0.2 to avoid recursive bug
+
 ## 6.1.11
 - [patch] [bfc508c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfc508c):
 
