@@ -68,11 +68,11 @@ describe('<TimeRange />', () => {
     component.find(TimeRangeWrapper).simulate('click', {
       target: {},
       nativeEvent: {
-        x: 5,
+        offsetX: 5,
       },
     });
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).lastCalledWith(-0.6);
+    expect(onChange).lastCalledWith(1);
   });
 });
