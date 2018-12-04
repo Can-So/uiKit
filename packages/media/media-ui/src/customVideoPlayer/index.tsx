@@ -16,6 +16,8 @@ import Video, {
 } from 'react-video-renderer';
 import { colors } from '@atlaskit/theme';
 import FieldRange from '@atlaskit/field-range';
+import { ThemeProvider } from 'styled-components';
+import theme from '../theme';
 import { TimeRange } from './timeRange';
 import {
   CurrentTime,
@@ -192,77 +194,81 @@ export class CustomVideo extends Component<
       intl: { formatMessage },
     } = this.props;
     return (
-      <CustomVideoWrapper innerRef={this.saveVideoWrapperRef}>
-        <Video src={src} autoPlay={isAutoPlay}>
-          {(video, videoState, actions) => {
-            const {
-              status,
-              currentTime,
-              buffered,
-              duration,
-              isLoading,
-            } = videoState;
-            const isPlaying = status === 'playing';
-            const toggleButtonIcon = isPlaying ? (
-              <PauseIcon label={formatMessage(messages.play)} />
-            ) : (
-              <PlayIcon label={formatMessage(messages.pause)} />
-            );
-            const toggleButtonAction = isPlaying ? actions.pause : actions.play;
-            const button = (
-              <Button
-                appearance={'toolbar' as any}
-                iconBefore={toggleButtonIcon}
-                onClick={toggleButtonAction}
-              />
-            );
-            const shortcuts = isShortcutEnabled && [
-              <Shortcut
-                key="space-shortcut"
-                keyCode={keyCodes.space}
-                handler={this.shortcutHanler(toggleButtonAction)}
-              />,
-              <Shortcut
-                key="m-shortcut"
-                keyCode={keyCodes.m}
-                handler={this.shortcutHanler(actions.toggleMute)}
-              />,
-            ];
+      <ThemeProvider theme={theme}>
+        <CustomVideoWrapper innerRef={this.saveVideoWrapperRef}>
+          <Video src={src} autoPlay={isAutoPlay}>
+            {(video, videoState, actions) => {
+              const {
+                status,
+                currentTime,
+                buffered,
+                duration,
+                isLoading,
+              } = videoState;
+              const isPlaying = status === 'playing';
+              const toggleButtonIcon = isPlaying ? (
+                <PauseIcon label={formatMessage(messages.play)} />
+              ) : (
+                <PlayIcon label={formatMessage(messages.pause)} />
+              );
+              const toggleButtonAction = isPlaying
+                ? actions.pause
+                : actions.play;
+              const button = (
+                <Button
+                  appearance={'toolbar' as any}
+                  iconBefore={toggleButtonIcon}
+                  onClick={toggleButtonAction}
+                />
+              );
+              const shortcuts = isShortcutEnabled && [
+                <Shortcut
+                  key="space-shortcut"
+                  keyCode={keyCodes.space}
+                  handler={this.shortcutHanler(toggleButtonAction)}
+                />,
+                <Shortcut
+                  key="m-shortcut"
+                  keyCode={keyCodes.m}
+                  handler={this.shortcutHanler(actions.toggleMute)}
+                />,
+              ];
 
-            return (
-              <VideoWrapper>
-                {video}
-                {isLoading && this.renderSpinner()}
-                {shortcuts}
-                <ControlsWrapper className={hideControlsClassName}>
-                  <TimeWrapper>
-                    <TimeRange
-                      currentTime={currentTime}
-                      bufferedTime={buffered}
-                      duration={duration}
-                      onChange={this.onTimeChange(actions.navigate)}
-                    />
-                  </TimeWrapper>
-                  <TimebarWrapper>
-                    <LeftControls>
-                      {button}
-                      {this.renderVolume(videoState, actions)}
-                    </LeftControls>
-                    <RightControls>
-                      <CurrentTime>
-                        {formatDuration(currentTime)} /{' '}
-                        {formatDuration(duration)}
-                      </CurrentTime>
-                      {this.renderHDButton()}
-                      {this.renderFullScreenButton()}
-                    </RightControls>
-                  </TimebarWrapper>
-                </ControlsWrapper>
-              </VideoWrapper>
-            );
-          }}
-        </Video>
-      </CustomVideoWrapper>
+              return (
+                <VideoWrapper>
+                  {video}
+                  {isLoading && this.renderSpinner()}
+                  {shortcuts}
+                  <ControlsWrapper className={hideControlsClassName}>
+                    <TimeWrapper>
+                      <TimeRange
+                        currentTime={currentTime}
+                        bufferedTime={buffered}
+                        duration={duration}
+                        onChange={this.onTimeChange(actions.navigate)}
+                      />
+                    </TimeWrapper>
+                    <TimebarWrapper>
+                      <LeftControls>
+                        {button}
+                        {this.renderVolume(videoState, actions)}
+                      </LeftControls>
+                      <RightControls>
+                        <CurrentTime>
+                          {formatDuration(currentTime)} /{' '}
+                          {formatDuration(duration)}
+                        </CurrentTime>
+                        {this.renderHDButton()}
+                        {this.renderFullScreenButton()}
+                      </RightControls>
+                    </TimebarWrapper>
+                  </ControlsWrapper>
+                </VideoWrapper>
+              );
+            }}
+          </Video>
+        </CustomVideoWrapper>
+      </ThemeProvider>
     );
   }
 }
