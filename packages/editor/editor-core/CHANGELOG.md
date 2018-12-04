@@ -1,5 +1,191 @@
 # @atlaskit/editor-core
 
+## 90.3.1
+- [patch] [dcd8f90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dcd8f90):
+
+  - Fix bug where gap cursor would remove previous node on backspace
+
+## 90.3.0
+- [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
+
+  - ED-3890 Adds Indentation support on paragraphs and headings
+
+  **New Feature: Indentation**
+
+  Use the new `allowIndentation` prop to enable this feature.
+
+  ```
+  // Enable indentation support for `heading` and `paragraph`
+  allowIndentation?: boolean;
+  ```
+
+  **Minor bug fixes**
+
+  - ED-5841 Alignment is getting removed inside Table on load
+  - ED-5842 Alignment mark aligns empty placeholder
+  - ED-5843 Remove block marks on backspace when document is empty
+  - ED-5846 Fix React warning in renderer
+  - ED-5863 Fix alignment copy-paste
+  - ED-5865 Alignment shouldn't be disabled when Cmd + A
+
+## 90.2.2
+- [patch] [1668ce3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1668ce3):
+
+  - Wrap kitchen sink in smart card provider.
+
+## 90.2.1
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/avatar-group@2.1.8
+  - @atlaskit/button@10.0.4
+  - @atlaskit/calendar@7.0.15
+  - @atlaskit/code@8.2.1
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/droplist@7.0.16
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/item@8.0.13
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/select@6.1.10
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/editor-common@22.2.3
+  - @atlaskit/renderer@31.0.7
+  - @atlaskit/date@0.1.8
+  - @atlaskit/emoji@47.0.6
+  - @atlaskit/mention@15.1.7
+  - @atlaskit/pubsub@3.0.6
+  - @atlaskit/status@0.2.8
+  - @atlaskit/task-decision@11.0.7
+  - @atlaskit/smart-card@9.0.2
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/lozenge@6.2.3
+
+## 90.2.0
+- [minor] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
+
+  - Adds support for links around images
+
+## 90.1.0
+- [minor] [fef6755](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fef6755):
+
+  - Change the way we deal with transactions in collab edit
+
+## 90.0.0
+- [major] [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+
+  - ED-5677: enabled quickInsert and gapCursor by default (quickInsert: except for mobile appearance)
+
+## 89.1.3
+- [patch] [0e72eb6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e72eb6):
+
+  - Revert box-sizing change for node views
+
+## 89.1.2
+- [patch] [cf4e304](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf4e304):
+
+  - Fixed toolbar being positioned over a panel at the bottom of the page
+
+## 89.1.1
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
+## 89.1.0
+- [minor] [7c9dcba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c9dcba):
+
+  - Responsive wide breakout mode
+
+## 89.0.8
+- [patch] [6c90bb9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c90bb9):
+
+  - Fix mention plugin state in plugin
+
+## 89.0.7
+- Updated dependencies [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+  - @atlaskit/editor-test-helpers@6.2.22
+  - @atlaskit/renderer@31.0.4
+  - @atlaskit/smart-card@9.0.0
+
+## 89.0.6
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/smart-card@8.8.5
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/avatar-group@2.1.7
+  - @atlaskit/button@10.0.1
+  - @atlaskit/calendar@7.0.14
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/droplist@7.0.14
+  - @atlaskit/item@8.0.12
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/select@6.1.9
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/editor-common@22.0.2
+  - @atlaskit/editor-test-helpers@6.2.21
+  - @atlaskit/renderer@31.0.3
+  - @atlaskit/emoji@47.0.2
+  - @atlaskit/mention@15.1.3
+  - @atlaskit/status@0.2.6
+  - @atlaskit/task-decision@11.0.6
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-filmstrip@19.0.2
+  - @atlaskit/media-picker@25.0.3
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/icon@15.0.0
+
+## 89.0.5
+- [patch] [2db96d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db96d3):
+
+  - Adjust min-width nodes to support table resizing
+
+## 89.0.4
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/avatar-group@2.1.6
+  - @atlaskit/calendar@7.0.13
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/droplist@7.0.13
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/select@6.1.8
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/renderer@31.0.2
+  - @atlaskit/emoji@47.0.1
+  - @atlaskit/pubsub@3.0.5
+  - @atlaskit/task-decision@11.0.5
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/media-filmstrip@19.0.1
+  - @atlaskit/media-picker@25.0.2
+  - @atlaskit/smart-card@8.8.4
+  - @atlaskit/button@10.0.0
+  - @atlaskit/analytics-next-types@3.1.2
+
+## 89.0.3
+- [patch] [1e8d316](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e8d316):
+
+  - ED-5819: Fixes emitting text color plugin state on every key stroke, without the state changing.
+
+## 89.0.2
+- [patch] [a2cae0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2cae0c):
+
+  - Fix conversion of pasted urls via macroPlugin with html in clipboard (ED-5786)
+
+## 89.0.1
+- [patch] [086f816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/086f816):
+
+  - FS-3150 - Support status in the editor-mobile-bridge
+
 ## 89.0.0
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/editor-common@22.0.0

@@ -6,8 +6,8 @@ import {
   blockPluginStateKey,
   ListsState,
   listsStateKey,
+  statusPluginKey,
 } from '@atlaskit/editor-core';
-
 import { valueOf as valueOfMarkState } from './web-to-native/markState';
 import { valueOf as valueOfListState } from './web-to-native/listState';
 import { toNativeBridge } from './web-to-native';
@@ -19,7 +19,7 @@ import {
   TaskDecisionProvider,
 } from '../providers';
 
-const bridge: WebBridgeImpl = ((window as any).bridge = new WebBridgeImpl());
+export const bridge: WebBridgeImpl = ((window as any).bridge = new WebBridgeImpl());
 
 class EditorWithState extends Editor {
   onEditorCreated(instance: {
@@ -37,6 +37,7 @@ class EditorWithState extends Editor {
     subscribeForTextFormatChanges(view, eventDispatcher);
     subscribeForBlockStateChanges(view, eventDispatcher);
     subscribeForListStateChanges(view, eventDispatcher);
+    subscribeForStatusStateChange(view, eventDispatcher);
   }
 
   onEditorDestroyed(instance: {
@@ -49,6 +50,7 @@ class EditorWithState extends Editor {
     const { eventDispatcher, view } = instance;
     unsubscribeFromBlockStateChanges(view, eventDispatcher);
     unsubscribeFromListStateChanges(view, eventDispatcher);
+    unsubscribeFromStatusStateChanges(view, eventDispatcher);
 
     bridge.editorActions._privateUnregisterEditor();
     bridge.editorView = null;
@@ -56,6 +58,29 @@ class EditorWithState extends Editor {
     bridge.textFormattingPluginState = null;
   }
 }
+
+function subscribeForStatusStateChange(view: EditorView, eventDispatcher: any) {
+  let statusPluginState = statusPluginKey.getState(view.state);
+  bridge.statusPluginState = statusPluginState;
+  eventDispatcher.on((statusPluginKey as any).key, state => {
+    statusStateUpdated(view)(state);
+  });
+}
+
+const statusStateUpdated = view => state => {
+  const { selectedStatus: status, showStatusPickerAt } = state;
+  if (status) {
+    toNativeBridge.showStatusPicker(
+      status.text,
+      status.color,
+      status.localId as string,
+    );
+    return;
+  }
+  if (!showStatusPickerAt) {
+    toNativeBridge.dismissStatusPicker();
+  }
+};
 
 function subscribeForTextFormatChanges(view: EditorView, eventDispatcher: any) {
   let textFormattingPluginState = textFormattingStateKey.getState(view.state);
@@ -80,6 +105,14 @@ function unsubscribeFromBlockStateChanges(
 ) {
   eventDispatcher.off((blockPluginStateKey as any).key, blockStateUpdated);
   bridge.blockState = undefined;
+}
+
+function unsubscribeFromStatusStateChanges(
+  view: EditorView,
+  eventDispatcher: any,
+) {
+  eventDispatcher.off((statusPluginKey as any).key, statusStateUpdated);
+  bridge.statusPluginState = null;
 }
 
 const listStateUpdated = state => {
@@ -122,7 +155,7 @@ export default function mobileEditor(props) {
       allowTextColor={true}
       allowDate={true}
       allowRule={true}
-      allowGapCursor={true}
+      allowStatus={true}
       taskDecisionProvider={Promise.resolve(TaskDecisionProvider())}
     />
   );

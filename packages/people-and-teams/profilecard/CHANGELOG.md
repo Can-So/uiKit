@@ -1,5 +1,38 @@
 # @atlaskit/profilecard
 
+## 6.1.1
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/dynamic-table@10.0.20
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/lozenge@6.2.3
+
+## 6.1.0
+- [minor] [a2da489](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2da489):
+
+  - - wrap profile card in IntlProvider and support i18n
+
+## 6.0.3
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/icon@15.0.0
+
+## 6.0.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/dynamic-table@10.0.18
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
 ## 6.0.1
 - [patch] [9d63842](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d63842):
 

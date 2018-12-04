@@ -151,6 +151,11 @@ export function createPlugin(
           // linkify the text where possible
           slice = linkifyContent(state.schema, slice);
 
+          // run macro autoconvert prior to other conversions
+          if (handleMacroAutoConvert(text, slice)(state, dispatch, view)) {
+            return true;
+          }
+
           const { table, tableCell } = state.schema.nodes;
 
           // if we're pasting to outside a table or outside a table

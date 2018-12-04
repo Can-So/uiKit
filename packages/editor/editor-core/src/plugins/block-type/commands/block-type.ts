@@ -9,7 +9,7 @@ import {
   HEADINGS_BY_NAME,
   NORMAL_TEXT,
 } from '../types';
-import { removeAlignment } from '../../alignment/utils';
+import { removeBlockMarks } from '../../../utils/mark';
 
 export function setBlockType(name: string): Command {
   return (state, dispatch) => {
@@ -79,7 +79,7 @@ export function insertBlockType(name: string): Command {
 }
 
 /**
- * Function will add wraping node.
+ * Function will add wrapping node.
  * 1. If currently selected blocks can be wrapped in the warpper type it will wrap them.
  * 2. If current block can not be wrapped inside wrapping block it will create a new block below selection,
  *  and set selection on it.
@@ -89,9 +89,10 @@ function wrapSelectionIn(type): Command {
     let { tr } = state;
     const { $from, $to } = state.selection;
     const { paragraph } = state.schema.nodes;
+    const { alignment, indentation } = state.schema.marks;
 
-    /** Alignment is not valid inside block types */
-    const removeAlignTr = removeAlignment(state);
+    /** Alignment or Indentation is not valid inside block types */
+    const removeAlignTr = removeBlockMarks(state, [alignment, indentation]);
     tr = removeAlignTr || tr;
 
     const range = $from.blockRange($to) as any;
@@ -138,10 +139,7 @@ function insertCodeBlock(): Command {
   };
 }
 
-export const removeEmptyHeadingAtStartOfDocument: Command = (
-  state,
-  dispatch,
-) => {
+export const cleanUpAtTheStartOfDocument: Command = (state, dispatch) => {
   const { $cursor } = state.selection as TextSelection;
   if (
     $cursor &&
@@ -149,9 +147,20 @@ export const removeEmptyHeadingAtStartOfDocument: Command = (
     !$cursor.nodeAfter &&
     $cursor.pos === 1
   ) {
-    if ($cursor.parent.type === state.schema.nodes.heading) {
-      return setNormalText()(state, dispatch);
-    }
+    const { tr, schema } = state;
+    const { paragraph } = schema.nodes;
+    const { parent } = $cursor;
+
+    /**
+     * Use cases:
+     * 1. Change `heading` to `paragraph`
+     * 2. Remove block marks
+     *
+     * NOTE: We already know it's an empty doc so it's safe to use 0
+     */
+    tr.setNodeMarkup(0, paragraph, parent.attrs, []);
+    dispatch(tr);
+    return true;
   }
   return false;
 };

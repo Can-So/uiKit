@@ -1,5 +1,37 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.0
+- [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
+
+  - ED-3890 Adds Indentation support on paragraphs and headings
+
+## 6.2.24
+- [patch] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
+
+  - Adds support for links around images
+
+## 6.2.23
+- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+  - @atlaskit/editor-core@90.0.0
+
+## 6.2.22
+- Updated dependencies [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+  - @atlaskit/editor-core@89.0.7
+  - @atlaskit/smart-card@9.0.0
+
+## 6.2.21
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/smart-card@8.8.5
+  - @atlaskit/editor-common@22.0.2
+  - @atlaskit/editor-core@89.0.6
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/icon@15.0.0
+
+## 6.2.20
+- [patch] [a2cae0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2cae0c):
+
+  - Fix conversion of pasted urls via macroPlugin with html in clipboard (ED-5786)
+
 ## 6.2.19
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/editor-common@22.0.0

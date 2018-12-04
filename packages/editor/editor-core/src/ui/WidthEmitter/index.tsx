@@ -15,9 +15,7 @@ export default class WidthEmitter extends Component<Props> {
 
   render() {
     return (
-      <WidthConsumer>
-        {({ width }) => this.broadcastWidth(width) || null}
-      </WidthConsumer>
+      <WidthConsumer>{({ width }) => this.broadcastWidth(width)}</WidthConsumer>
     );
   }
 
@@ -29,7 +27,7 @@ export default class WidthEmitter extends Component<Props> {
       }
 
       // NodeViews will trigger multiple state change error without this debounce
-      this.debounce = setTimeout(() => {
+      this.debounce = window.setTimeout(() => {
         const pmDom = this.props.contentArea
           ? this.props.contentArea.querySelector('.ProseMirror')
           : undefined;
@@ -38,11 +36,11 @@ export default class WidthEmitter extends Component<Props> {
           lineLength: pmDom ? pmDom.clientWidth : undefined,
         });
 
-        tr.setMeta('isLocal', true);
         editorView.dispatch(tr);
         this.width = width;
         this.debounce = null;
       }, 10);
     }
+    return null;
   };
 }

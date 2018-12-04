@@ -1,5 +1,17 @@
 # @atlaskit/popper
 
+## 0.3.3
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/theme@7.0.0
+
+## 0.3.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
 ## 0.3.1
 - [patch] Fix referenceElement overriding ref from Reference component  [874d5bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/874d5bd)
 

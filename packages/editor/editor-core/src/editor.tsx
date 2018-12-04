@@ -81,7 +81,7 @@ export default class Editor extends React.Component<EditorProps, {}> {
     );
     if (this.props.shouldFocus) {
       if (!instance.view.hasFocus()) {
-        setTimeout(() => {
+        window.setTimeout(() => {
           instance.view.focus();
         }, 0);
       }
@@ -122,7 +122,9 @@ export default class Editor extends React.Component<EditorProps, {}> {
       },
       allowLists: {},
       allowHelpDialog: {},
-      allowGapCursor: {},
+      allowGapCursor: {
+        type: 'removed',
+      },
       allowUnsupportedContent: {
         message: 'Deprecated. Defaults to true.',
         type: 'removed',

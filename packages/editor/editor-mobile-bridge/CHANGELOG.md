@@ -1,5 +1,40 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.4.1
+- [patch] [232238c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/232238c):
+
+  - ED-5866: Turn off lazy loading for images on mobile.
+
+## 6.4.0
+- [minor] [008c694](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/008c694):
+
+  - ED-5584: Capture emoji requests for native processing on iOS only.
+
+## 6.3.4
+- [patch] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
+
+  - Adds support for links around images
+
+## 6.3.3
+- [patch] [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+
+  - ED-5677: enabled quickInsert and gapCursor by default (quickInsert: except for mobile appearance)
+
+## 6.3.2
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
+## 6.3.1
+- [patch] [345b45c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/345b45c):
+
+  - Update @atlaskit/button inside @atlaskit/editor-mobile-bridge
+
+## 6.3.0
+- [minor] [086f816](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/086f816):
+
+  - FS-3150 - Support status in the editor-mobile-bridge
+
 ## 6.2.1
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/editor-common@22.0.0

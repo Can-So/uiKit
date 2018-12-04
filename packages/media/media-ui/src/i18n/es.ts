@@ -24,19 +24,20 @@ export default {
   'fabric.media.connect_to': 'Conectarse a {name}',
   'fabric.media.connect_account_description':
     'Abriremos otra página para ayudarte a conectar tu cuenta de {name}',
-  'fabric.media.upload_an_avatar': 'Upload an avatar',
-  'fabric.media.save': 'Save',
-  'fabric.media.or': 'or',
-  'fabric.media.upload_photo': 'Upload a photo',
-  'fabric.media.default_avatars': 'Default avatars',
-  'fabric.media.drag_and_drop_images_here': 'Drag and drop your images here',
-  'fabric.media.upload_image': 'Upload image',
+  'fabric.media.upload_an_avatar': 'Carga un avatar',
+  'fabric.media.save': 'Guardar',
+  'fabric.media.or': 'o',
+  'fabric.media.upload_photo': 'Carga una foto',
+  'fabric.media.default_avatars': 'Avatares predeterminados',
+  'fabric.media.drag_and_drop_images_here':
+    'Arrastra y suelta las imágenes aquí',
+  'fabric.media.upload_image': 'Carga una imagen',
   'fabric.media.image_url_invalid_error':
-    'Could not load image, the url is invalid.',
+    'No se pudo cargar la imagen porque la URL no es válida.',
   'fabric.media.image_format_invalid_error':
-    'Could not load image, the format is invalid.',
+    'No se pudo cargar la imagen porque el formato no es válido.',
   'fabric.media.image_size_too_large_error':
-    'Image is too large, must be no larger than {MAX_SIZE_MB}Mb',
+    'La imagen es demasiado larga; no puede superar los {MAX_SIZE_MB} MB',
   'fabric.media.something_went_wrong': 'Algo ha ido mal.',
   'fabric.media.might_be_a_hiccup': 'Tal vez sea solo un tropiezo.',
   'fabric.media.couldnt_generate_preview':
@@ -50,4 +51,39 @@ export default {
   'fabric.media.give_feedback': 'Enviar comentarios',
   'fabric.media.try_downloading_file':
     'Prueba a descargar el archivo para verlo.',
+  'fabric.media.webgl_warning_description':
+    'Tu navegador no admite WebGL. Usa un navegador compatible con WebGL para anotar imágenes.',
+  'fabric.media.unable_to_annotate_image': 'No puedes anotar esta imagen',
+  'fabric.media.learn_more': 'Más información',
+  'fabric.media.accounts': 'Cuentas',
+  'fabric.media.actions': 'Acciones',
+  'fabric.media.error_hint_retry':
+    'Vuelve a probar y lo intentaremos otra vez.',
+  'fabric.media.error_hint_critical':
+    'Si el problema continúa, ponte en contacto con la asistencia.',
+  'fabric.media.close': 'Cerrar',
+  'fabric.media.could_not_load_editor':
+    '¡Qué pena! No hemos podido cargar el editor',
+  'fabric.media.could_not_save_image':
+    '¡Qué pena! No hemos podido guardar la imagen',
+  'fabric.media.annotate': 'Anotar',
+  'fabric.media.drop_your_files_here': 'Arrastra tus archivos hasta aquí',
+  'fabric.media.share_files_instantly': 'Los compartiremos al instante',
+  'fabric.media.insert_files':
+    '{0, plural, one{Insertar un archivo} other{Insertar {0} archivos}}',
+  'fabric.media.zoom_out': 'zoom out',
+  'fabric.media.zoom_in': 'zoom in',
+  'fabric.media.remove_image': 'Remove image',
+  'fabric.media.play': 'play',
+  'fabric.media.pause': 'pause',
+  'fabric.media.disable_fullscreen': 'disable fullscreen',
+  'fabric.media.enable_fullscreen': 'enable fullscreen',
+  'fabric.media.error_loading_file': 'Error loading file',
+  'fabric.media.error_generating_preview': 'Error generating preview',
+  'fabric.media.download': 'Download',
+  'fabric.media.unknown': 'unknown',
+  'fabric.media.document': 'document',
+  'fabric.media.audio': 'audio',
+  'fabric.media.video': 'video',
+  'fabric.media.image': 'image',
 };

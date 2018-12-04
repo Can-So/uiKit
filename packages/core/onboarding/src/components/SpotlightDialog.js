@@ -116,14 +116,18 @@ class SpotlightDialog extends Component<Props, State> {
             >
               <SpotlightCard
                 ref={ref}
-                theme={({ container }) => ({
-                  container: () => ({
-                    ...container(),
-                    ...style,
-                    ...animationStyles,
-                    width: `${dialogWidth}px`,
-                  }),
-                })}
+                theme={parent => {
+                  const { container, ...others } = parent();
+                  return {
+                    ...others,
+                    container: {
+                      ...container,
+                      ...style,
+                      ...animationStyles,
+                    },
+                  };
+                }}
+                width={dialogWidth}
                 actions={actions}
                 actionsBeforeElement={actionsBeforeElement}
                 image={image && <Image alt={heading} src={image} />}

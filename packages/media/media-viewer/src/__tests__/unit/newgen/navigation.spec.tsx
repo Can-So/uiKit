@@ -4,7 +4,7 @@ import { Navigation, NavigationBase } from '../../../newgen/navigation';
 import { Identifier } from '../../../newgen/domain';
 import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
-import { KeyboardEventWithKeyCode } from './shortcut.spec';
+import { KeyboardEventWithKeyCode } from '@atlaskit/media-test-helpers';
 
 /**
  * Skipped two tests in here that are failing due to an issue with synthetic keyboard events

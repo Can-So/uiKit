@@ -89,7 +89,7 @@ export class CollabProvider implements CollabEditProvider {
     this.queue = orderedQueue;
 
     if (!this.queueTimeout && !this.pauseQueue) {
-      this.queueTimeout = setTimeout(() => {
+      this.queueTimeout = window.setTimeout(() => {
         this.catchup();
       }, 1000);
     }

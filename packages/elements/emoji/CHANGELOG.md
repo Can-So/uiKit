@@ -1,5 +1,48 @@
 # @atlaskit/emoji
 
+## 47.0.6
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/field-base@11.0.12
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+
+## 47.0.5
+- [patch] [31ac424](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/31ac424):
+
+  - FS-1596 Changed sizes of example emojis in test00.
+
+## 47.0.4
+- [patch] [90c4702](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90c4702):
+
+  - FS-1734 Removed the try it out section from Emoji and Mentions documentation pages to match other pages. The section only contained a link to the same page, so was essentially redundant and potentially confusing.
+
+## 47.0.3
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
+## 47.0.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/field-base@11.0.11
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
+## 47.0.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/button@10.0.0
+
 ## 47.0.0
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/util-data-test@10.0.21

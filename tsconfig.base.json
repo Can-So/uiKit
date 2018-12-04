@@ -29,7 +29,7 @@
       "es2015.promise",
       "es2016.array.include"
     ],
-    "types": ["jest", "react", "enzyme", "css-color-names", "jest-styled-components", "styled-components"],
+    "types": ["jest", "react","react-router","history", "enzyme", "css-color-names", "jest-styled-components", "styled-components"],
     "typeRoots": ["./typings", "./node_modules/@types"]
   },
   "files": [
@@ -49,9 +49,10 @@
     "./typings/pdfjs-dist.d.ts",
     "./typings/postis.d.ts",
     "./typings/prosemirror-markdown.d.ts",
-    "./typings/react-dom.d.ts",
     "./typings/rusha.d.ts",
     "./typings/scrollparent.d.ts",
+    "./typings/snake-case.d.ts",
+    "./typings/static-assets.d.ts",
     "./typings/url.d.ts",
     "./typings/uuid.d.ts",
     "./typings/webpack.d.ts"

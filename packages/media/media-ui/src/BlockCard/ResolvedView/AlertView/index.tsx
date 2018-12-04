@@ -26,7 +26,7 @@ export default class AlertView extends React.Component<
 
   el?: HTMLDivElement;
 
-  handleRetry = (event: React.MouseEvent<HTMLAnchorElement>) => {
+  handleRetry = (event: React.MouseEvent) => {
     const { onRetry } = this.props;
     if (onRetry) {
       event.preventDefault();
@@ -35,7 +35,7 @@ export default class AlertView extends React.Component<
     }
   };
 
-  handleDismis = (event: React.MouseEvent<HTMLAnchorElement>) => {
+  handleDismis = (event: React.MouseEvent) => {
     const { onDismis } = this.props;
     if (onDismis) {
       event.preventDefault();

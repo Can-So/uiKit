@@ -764,3 +764,7 @@ export function dedupe<T>(
       [],
     );
 }
+
+export const isTextSelection = (
+  selection: Selection,
+): selection is TextSelection => selection instanceof TextSelection;

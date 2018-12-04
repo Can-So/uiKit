@@ -16,12 +16,16 @@ import {
   toggleUnderline,
   toggleEm,
   toggleStrong,
+  StatusState,
+  updateStatus,
+  commitStatusPicker,
   insertBlockType,
   createTable,
   insertTaskDecision,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+import { Color as StatusColor } from '@atlaskit/status';
 
 import NativeToWebBridge from './bridge';
 import WebBridge from '../../web-bridge';
@@ -32,6 +36,7 @@ export default class WebBridgeImpl extends WebBridge
   implements NativeToWebBridge {
   textFormattingPluginState: TextFormattingState | null = null;
   mentionsPluginState: MentionPluginState | null = null;
+  statusPluginState: StatusState | null = null;
   editorView: EditorView | null = null;
   transformer: JSONTransformer = new JSONTransformer();
   editorActions: EditorActions = new EditorActions();
@@ -78,6 +83,22 @@ export default class WebBridgeImpl extends WebBridge
     }
   }
 
+  onStatusUpdate(text: string, color: StatusColor, uuid: string) {
+    if (this.statusPluginState && this.editorView) {
+      updateStatus({
+        text,
+        color,
+        localId: uuid,
+      })(this.editorView);
+    }
+  }
+
+  onStatusPickerDismissed() {
+    if (this.statusPluginState && this.editorView) {
+      commitStatusPicker()(this.editorView);
+    }
+  }
+
   onMentionSelect(mention: string) {}
 
   onMentionPickerResult(result: string) {}
@@ -99,7 +120,6 @@ export default class WebBridgeImpl extends WebBridge
   setTextFormattingStateAndSubscribe(state: TextFormattingState) {
     this.textFormattingPluginState = state;
   }
-
   onMediaPicked(eventName: string, mediaPayload: string) {
     if (this.mediaPicker) {
       const payload = JSON.parse(mediaPayload);

@@ -47,6 +47,7 @@ import {
   gridPlugin,
   alignment,
   editorDisabledPlugin,
+  indentationPlugin,
 } from '../plugins';
 
 /**
@@ -83,10 +84,6 @@ export default function createPluginsList(
 
   if (props.allowTextAlignment) {
     plugins.push(alignment);
-  }
-
-  if (props.quickInsert) {
-    plugins.push(quickInsertPlugin);
   }
 
   if (props.allowInlineAction) {
@@ -195,10 +192,6 @@ export default function createPluginsList(
     plugins.push(layoutPlugin);
   }
 
-  if (props.allowGapCursor) {
-    plugins.push(gapCursorPlugin);
-  }
-
   if (props.UNSAFE_cards) {
     plugins.push(cardPlugin);
   }
@@ -211,6 +204,10 @@ export default function createPluginsList(
     plugins.push(statusPlugin({ menuDisabled }));
   }
 
+  if (props.allowIndentation) {
+    plugins.push(indentationPlugin);
+  }
+
   // UI only plugins
   plugins.push(
     insertBlockPlugin({
@@ -219,10 +216,15 @@ export default function createPluginsList(
     }),
   );
 
+  plugins.push(gapCursorPlugin);
   plugins.push(gridPlugin);
   plugins.push(submitEditorPlugin);
   plugins.push(fakeTextCursorPlugin);
   plugins.push(floatingToolbarPlugin);
+
+  if (props.appearance !== 'mobile') {
+    plugins.push(quickInsertPlugin);
+  }
 
   if (props.appearance === 'message') {
     plugins.push(isMultilineContentPlugin);

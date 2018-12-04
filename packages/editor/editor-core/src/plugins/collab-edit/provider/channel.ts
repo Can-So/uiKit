@@ -99,7 +99,7 @@ export class Channel {
       clearTimeout(this.debounced);
     }
 
-    this.debounced = setTimeout(() => {
+    this.debounced = window.setTimeout(() => {
       logger(`Sending debounced`);
       this.sendSteps(getState(), getState);
     }, 250);

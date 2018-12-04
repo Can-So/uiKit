@@ -3,20 +3,12 @@
 import memoizeOne from 'memoize-one';
 
 /*
- * Only load the base languages required to get other languages to work.
- */
-/*
-  Markup, markup-templating & clike are base languages required to get the others to work.
-  Technically we could probably also async load those, but for simplicity sake we're just always loading them.
-*/
-
-/*
  * These values all those are supported by ADF.
  * The comments show mappings of these values to the corresponding
  * language definition file, or to that of the most
  * syntactically similar language supported by highlightjs
  */
-export type ADFSupportedLanguages =
+export type SupportedLanguages =
   | 'abap' // → sql
   | 'actionscript'
   | 'ada'
@@ -86,7 +78,7 @@ export type ADFSupportedLanguages =
   | 'xml'
   | 'xquery';
 
-export const SUPPORTED_LANGUAGES = Object.freeze([
+export const SUPPORTED_LANGUAGE_ALIASES = Object.freeze([
   {
     name: 'PHP',
     alias: ['php', 'php3', 'php4', 'php5'],
@@ -456,7 +448,7 @@ export const normalizeLanguage = memoizeOne(
     if (!language) {
       return '';
     }
-    const match = SUPPORTED_LANGUAGES.find(val => {
+    const match = SUPPORTED_LANGUAGE_ALIASES.find(val => {
       return val.name === language || val.alias.includes(language);
     });
     // Fallback to plain monospaced text if language passed but not supported

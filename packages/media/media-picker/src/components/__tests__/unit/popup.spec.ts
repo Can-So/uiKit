@@ -26,7 +26,7 @@ describe('MediaPickerPopup', () => {
   };
 
   beforeEach(() => {
-    render.mockReset();
+    (render as jest.Mock).mockReset();
   });
 
   describe('constructor', () => {
@@ -89,7 +89,7 @@ describe('MediaPickerPopup', () => {
     it('should render <App /> with the right properties', () => {
       const mediaPicker = new Popup(context, popupConfig) as any;
 
-      expect(render.mock.calls[0][0].props).toEqual({
+      expect((render as jest.Mock).mock.calls[0][0].props).toEqual({
         proxyReactContext: undefined,
         store: mediaPicker.store,
         tenantUploadParams: {

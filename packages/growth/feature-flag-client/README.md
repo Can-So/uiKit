@@ -21,7 +21,7 @@ const client = new FrontendFeatureFlagClient({
       },
     },
     'my.boolean.flag': {
-      value: false
+      value: false,
     },
     'my.json.flag': {
       value: {
@@ -69,6 +69,7 @@ client.getJSONFlag('my.json.flag'); // > { nav: 'blue', footer: 'black' }
 ```
 
 ### Setting flags asynchronously?
+
 If you load your flags after the app bootstrap, you set the to the client through the 'setFlags' method.
 
 ```javascript
@@ -79,11 +80,12 @@ client.setFlags({
       kind: 'RULE_MATCH',
       ruleId: '333-bbbbb-ccc',
     },
-  }
+  },
 });
 ```
 
 ### How to avoid firing the exposure event?
+
 You can skip the exposure event by setting 'shouldTrackExposureEvent' to 'false'
 
 ```javascript
@@ -100,7 +102,7 @@ client.trackExposure('my.detailed.boolean.flag', {
   value: true,
   explanation: {
     kind: 'RULE_MATCH',
-    ruleId: 'aaaa-vbbbb-ccccc'
-  }
+    ruleId: 'aaaa-vbbbb-ccccc',
+  },
 });
 ```

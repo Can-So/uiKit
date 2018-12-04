@@ -20,8 +20,8 @@ import Flag, { FlagGroup } from '@atlaskit/flag';
 import AnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
 import EditorInfoIcon from '@atlaskit/icon/glyph/error';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import ModalDialog, { ModalTransition } from '@atlaskit/modal-dialog';
-import { FormattedMessage } from 'react-intl';
 import { messages, InfiniteScroll } from '@atlaskit/media-ui';
 import { Browser } from '../../../../components/browser';
 import { isWebGLAvailable } from '../../../tools/webgl';
@@ -52,9 +52,12 @@ import {
 import { RECENTS_COLLECTION } from '../../../config';
 import { removeFileFromRecents } from '../../../actions/removeFileFromRecents';
 
-const createEditCardAction = (handler: CardEventHandler): CardAction => {
+const createEditCardAction = (
+  handler: CardEventHandler,
+  label: string,
+): CardAction => {
   return {
-    label: menuEdit,
+    label,
     handler,
     icon: <AnnotateIcon label={menuEdit} size="medium" />,
   };
@@ -104,7 +107,8 @@ export interface UploadViewDispatchProps {
 
 export type UploadViewProps = UploadViewOwnProps &
   UploadViewStateProps &
-  UploadViewDispatchProps;
+  UploadViewDispatchProps &
+  InjectedIntlProps;
 
 export interface UploadViewState {
   readonly hasPopupBeenVisible: boolean;
@@ -259,19 +263,29 @@ export class StatelessUploadView extends Component<
     };
   }
 
-  // TODO [i18n]
-  private renderWebGLWarningFlag = (): JSX.Element => (
-    <FlagGroup onDismissed={this.onFlagDismissed}>
-      <Flag
-        shouldDismiss={this.state.shouldDismissWebGLWarningFlag}
-        description="Your browser does not support WebGL. Use a WebGL enabled browser to annotate images."
-        icon={<EditorInfoIcon label="info" />}
-        id="webgl-warning-flag"
-        title="You're unable to annotate this image"
-        actions={[{ content: 'Learn More', onClick: this.onLearnMoreClicked }]}
-      />
-    </FlagGroup>
-  );
+  private renderWebGLWarningFlag = (): JSX.Element => {
+    const {
+      intl: { formatMessage },
+    } = this.props;
+
+    return (
+      <FlagGroup onDismissed={this.onFlagDismissed}>
+        <Flag
+          shouldDismiss={this.state.shouldDismissWebGLWarningFlag}
+          description={formatMessage(messages.webgl_warning_description)}
+          icon={<EditorInfoIcon label="info" />}
+          id="webgl-warning-flag"
+          title={formatMessage(messages.unable_to_annotate_image)}
+          actions={[
+            {
+              content: formatMessage(messages.learn_more),
+              onClick: this.onLearnMoreClicked,
+            },
+          ]}
+        />
+      </FlagGroup>
+    );
+  };
 
   private renderCards() {
     const recentFilesCards = this.recentFilesCards();
@@ -364,6 +378,7 @@ export class StatelessUploadView extends Component<
       onFileClick,
       onEditRemoteImage,
       setUpfrontIdDeferred,
+      intl: { formatMessage },
     } = this.props;
     const { items } = recents;
     const selectedRecentFiles = selectedItems
@@ -421,7 +436,9 @@ export class StatelessUploadView extends Component<
       ];
 
       if ((details as FileDetails).mediaType === 'image') {
-        actions.unshift(createEditCardAction(editHandler));
+        actions.unshift(
+          createEditCardAction(editHandler, formatMessage(messages.annotate)),
+        );
       }
 
       return {
@@ -489,4 +506,4 @@ export default connect<
 >(
   mapStateToProps,
   mapDispatchToProps,
-)(StatelessUploadView);
+)(injectIntl(StatelessUploadView));

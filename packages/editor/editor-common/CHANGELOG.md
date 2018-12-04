@@ -1,5 +1,62 @@
 # @atlaskit/editor-common
 
+## 22.3.0
+- [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
+
+  - ED-3890 Adds Indentation support on paragraphs and headings
+
+## 22.2.3
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/emoji@47.0.6
+  - @atlaskit/mention@15.1.7
+  - @atlaskit/profilecard@6.1.1
+  - @atlaskit/theme@7.0.0
+
+## 22.2.2
+- [patch] [755fd19](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/755fd19):
+
+  - Fixing null state for task item copy
+
+## 22.2.1
+- [patch] [126b7b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/126b7b0):
+
+  - fix: Inline marks do not match between editor and renderer
+
+## 22.2.0
+- [minor] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
+
+  - Adds support for links around images
+
+## 22.1.1
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
+## 22.1.0
+- [minor] [7c9dcba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c9dcba):
+
+  - Responsive wide breakout mode
+
+## 22.0.3
+- [patch] [52606a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52606a5):
+
+  - ED-5560 Code block language in schema is now a string (ADF Change 33)
+
+## 22.0.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/editor-test-helpers@6.2.21
+  - @atlaskit/emoji@47.0.2
+  - @atlaskit/mention@15.1.3
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/profilecard@6.0.3
+  - @atlaskit/icon@15.0.0
+
+## 22.0.1
+- [patch] [2db96d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db96d3):
+
+  - Adjust min-width nodes to support table resizing
+
 ## 22.0.0
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/emoji@47.0.0

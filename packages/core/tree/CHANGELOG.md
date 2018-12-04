@@ -1,5 +1,21 @@
 # @atlaskit/tree
 
+## 4.1.8
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/navigation@33.3.7
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/theme@7.0.0
+
+## 4.1.7
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/navigation@33.3.6
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/icon@15.0.0
+
 ## 4.1.6
 - [patch] [ce60809](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce60809):
 

@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
 import { Context, FileState, isErrorFileState } from '@atlaskit/media-core';
 import { DownloadButtonWrapper } from './styled';
 import Button from '@atlaskit/button';
@@ -48,14 +50,13 @@ export const ErrorViewDownloadButton = (
       <DownloadButton
         analyticsPayload={downloadEvent}
         appearance="primary"
-        label="Download"
         onClick={createItemDownloader(
           props.state,
           props.context,
           props.collectionName,
         )}
       >
-        Download
+        <FormattedMessage {...messages.download} />
       </DownloadButton>
     </DownloadButtonWrapper>
   );
@@ -72,8 +73,7 @@ export const ToolbarDownloadButton = (props: ToolbarDownloadButtonProps) => {
   return (
     <DownloadButton
       analyticsPayload={downloadEvent}
-      label="Download"
-      appearance="toolbar"
+      appearance={'toolbar' as any}
       onClick={createItemDownloader(
         props.state,
         props.context,
@@ -86,8 +86,7 @@ export const ToolbarDownloadButton = (props: ToolbarDownloadButtonProps) => {
 
 export const DisabledToolbarDownloadButton = (
   <Button
-    label="Download"
-    appearance="toolbar"
+    appearance={'toolbar' as any}
     isDisabled={true}
     iconBefore={downloadIcon}
   />

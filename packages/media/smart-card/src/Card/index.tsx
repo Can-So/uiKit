@@ -1,11 +1,16 @@
-import { CardAppearance } from './CardContent';
+import * as React from 'react';
+import { CardAppearance } from './types';
 import { CardProps } from './types';
 import {
   isCardWithData,
-  renderCardWithData,
-  renderCardWithURL,
+  CardWithDataRenderer,
+  CardWithURLRenderer,
 } from './render';
 export { CardAppearance, CardProps };
 
 export const Card = (props: CardProps) =>
-  isCardWithData(props) ? renderCardWithData(props) : renderCardWithURL(props);
+  isCardWithData(props) ? (
+    <CardWithDataRenderer {...props} />
+  ) : (
+    <CardWithURLRenderer {...props} />
+  );

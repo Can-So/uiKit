@@ -65,6 +65,7 @@ export const Wrapper: ComponentClass<
 export const InlinePlayerWrapper = styled.div`
   overflow: hidden;
   border-radius: ${akBorderRadius};
+  position: relative;
   width: 100%;
   max-height: 100%;
 
@@ -73,3 +74,5 @@ export const InlinePlayerWrapper = styled.div`
     height: 100%;
   }
 `;
+
+InlinePlayerWrapper.displayName = 'InlinePlayerWrapper';

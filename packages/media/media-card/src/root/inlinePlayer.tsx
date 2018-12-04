@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { Context } from '@atlaskit/media-core';
+import { Subscription } from 'rxjs/Subscription';
+import { CustomVideoPlayer } from '@atlaskit/media-ui';
 import { FileIdentifier } from './domain';
 import { InlinePlayerWrapper } from './styled';
 import { CardDimensions, defaultImageCardDimensions } from '..';
-import { Subscription } from 'rxjs/Subscription';
 import { CardLoading } from '../utils/cardLoading';
 
 export interface InlinePlayerProps {
@@ -45,7 +46,7 @@ export class InlinePlayer extends Component<
             if (blob.type.indexOf('video/') === 0) {
               const fileSrc = URL.createObjectURL(state.preview.blob);
               this.setState({ fileSrc });
-              setImmediate(this.unsubscribe);
+              window.setTimeout(this.unsubscribe, 0);
               return;
             }
           }
@@ -61,7 +62,7 @@ export class InlinePlayer extends Component<
               );
 
               this.setState({ fileSrc });
-              setImmediate(this.unsubscribe);
+              window.setTimeout(this.unsubscribe, 0);
             } catch (error) {
               const { onError } = this.props;
 
@@ -102,7 +103,7 @@ export class InlinePlayer extends Component<
 
     return (
       <InlinePlayerWrapper>
-        <video src={fileSrc} autoPlay controls />
+        <CustomVideoPlayer src={fileSrc} isAutoPlay isHDAvailable={false} />
       </InlinePlayerWrapper>
     );
   }

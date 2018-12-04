@@ -42,6 +42,7 @@ const unsupportedMarks = [
   'action',
   'breakout',
   'alignment',
+  'indentation',
   'mentionQuery',
   'emojiQuery',
   '__colorGroupDeclaration',
@@ -84,7 +85,7 @@ const buildWithMarks = (nodeType: NodeType): Function[] => {
 };
 
 /**
- * Create test data for node type upto passed depth.
+ * Create test data for node type up to passed depth.
  */
 const getNodeMatches = (
   nodeType: NodeType,
@@ -147,7 +148,7 @@ const getDisplayName = (node: Node) => {
 };
 
 describe('ProseMirror and JSON schema tests', () => {
-  // create node test data upto 2 level depths.
+  // create node test data up to 2 level depths.
   const dataSet = getNodeMatches(defaultSchema.nodes.doc, 4, 4);
   const transformer = new JSONTransformer();
 

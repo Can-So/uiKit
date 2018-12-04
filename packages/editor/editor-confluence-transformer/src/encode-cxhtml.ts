@@ -26,7 +26,7 @@ export default function(node: Node): string {
   //
   // WARNING: This method will move `element` into a new parent element, but will put it back
   // before returning.
-  const doc = node.ownerDocument;
+  const doc = node.ownerDocument!;
   const marker = doc.createElement('marker');
 
   if (node.parentNode) {

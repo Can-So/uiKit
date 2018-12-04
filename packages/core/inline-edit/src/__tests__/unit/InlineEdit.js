@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import ConfirmIcon from '@atlaskit/icon/glyph/check';
-import CancelIcon from '@atlaskit/icon/glyph/cross';
+import Button from '@atlaskit/button';
 import FieldBase, { Label } from '@atlaskit/field-base';
 
 import InlineEditStatelessWithAnalytics, {
@@ -119,7 +118,10 @@ describe('@atlaskit/inline-edit', () => {
       const wrapper = mount(
         <InlineEditStateless {...defaultProps} isEditing onConfirm={spy} />,
       );
-      wrapper.find(ConfirmIcon).simulate('click');
+      wrapper
+        .find(Button)
+        .first()
+        .simulate('click');
       expect(spy).toHaveBeenCalled();
     }));
 
@@ -129,7 +131,10 @@ describe('@atlaskit/inline-edit', () => {
       const wrapper = mount(
         <InlineEditStateless {...defaultProps} isEditing onCancel={spy} />,
       );
-      wrapper.find(CancelIcon).simulate('click');
+      wrapper
+        .find(Button)
+        .last()
+        .simulate('click');
       expect(spy).toHaveBeenCalled();
     }));
 

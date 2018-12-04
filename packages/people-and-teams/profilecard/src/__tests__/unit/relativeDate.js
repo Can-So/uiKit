@@ -1,6 +1,6 @@
 // @flow
-import mockdate from 'mockdate';
 import relativeDate from '../../relative-date';
+import mockGlobalDate from './helper/_mock-global-date';
 
 describe('RelativeDate', () => {
   const TODAY = new Date(2018, 10, 20, 17, 30, 0, 0);
@@ -15,60 +15,60 @@ describe('RelativeDate', () => {
   const INVALID_DATE = new Date('');
   const FUTURE_DATE = new Date(new Date(TODAY).setMonth(11));
 
-  beforeEach(() => {
-    mockdate.set(TODAY);
+  beforeAll(() => {
+    mockGlobalDate.setToday(TODAY);
   });
 
-  afterEach(() => {
-    mockdate.reset();
+  afterAll(() => {
+    mockGlobalDate.reset();
   });
 
-  it('should match snapshot when date prop is today', () => {
+  it('should match when date prop is today', () => {
     const relativeDateKey = relativeDate(TODAY_2, TODAY);
     expect(relativeDateKey).toEqual('ThisWeek');
   });
 
-  it('should match snapshot when date prop is yesterday', () => {
+  it('should match when date prop is yesterday', () => {
     const relativeDateKey = relativeDate(YESTERDAY, TODAY);
     expect(relativeDateKey).toEqual('ThisWeek');
   });
 
-  it('should match snapshot when date prop is in this week', () => {
+  it('should match when date prop is in this week', () => {
     const relativeDateKey = relativeDate(THIS_WEEK, TODAY);
     expect(relativeDateKey).toEqual('ThisWeek');
   });
 
-  it('should match snapshot when date prop is in this month', () => {
+  it('should match when date prop is in this month', () => {
     const relativeDateKey = relativeDate(THIS_MONTH, TODAY);
     expect(relativeDateKey).toEqual('ThisMonth');
   });
 
-  it('should match snapshot when date prop is in last month', () => {
+  it('should match when date prop is in last month', () => {
     const relativeDateKey = relativeDate(LAST_MONTH, TODAY);
     expect(relativeDateKey).toEqual('LastMonth');
   });
 
-  it('should match snapshot when date prop is a few months ago', () => {
+  it('should match when date prop is a few months ago', () => {
     const relativeDateKey = relativeDate(A_FEW_MONTHS, TODAY);
     expect(relativeDateKey).toEqual('AFewMonths');
   });
 
-  it('should match snapshot when date prop is several months ago', () => {
+  it('should match when date prop is several months ago', () => {
     const relativeDateKey = relativeDate(SEVERAL_MONTHS, TODAY);
     expect(relativeDateKey).toEqual('SeveralMonths');
   });
 
-  it('should match snapshot when date prop is more than a year ago', () => {
+  it('should match when date prop is more than a year ago', () => {
     const relativeDateKey = relativeDate(MORE_THAN_A_YEAR, TODAY);
     expect(relativeDateKey).toEqual('MoreThanAYear');
   });
 
-  it('should match snapshot when date prop is invalid date', () => {
+  it('should match when date prop is invalid date', () => {
     const relativeDateKey = relativeDate(INVALID_DATE, TODAY);
     expect(relativeDateKey).toEqual(null);
   });
 
-  it('should match snapshot when date prop is a future date', () => {
+  it('should match when date prop is a future date', () => {
     const relativeDateKey = relativeDate(FUTURE_DATE, TODAY);
     expect(relativeDateKey).toEqual(null);
   });
