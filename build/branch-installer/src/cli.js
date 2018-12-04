@@ -20,14 +20,18 @@ let c = meow(
 `,
   {
     flags: {
-      config: {
+      maxAttempts: {
         type: 'string',
-        alias: 'c',
+        alias: 'a',
+      },
+      timeout: {
+        type: 'string',
+        alias: 't',
       },
     },
   },
 );
 
-installFromBranch(c.input[0]);
+installFromBranch(c.input[0], c.flags);
 
 // pretty(c.input[0], c.flags);
