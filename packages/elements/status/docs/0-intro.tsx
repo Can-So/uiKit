@@ -18,7 +18,7 @@ This component is the implementation of the Status element in React.
     <Example
       packageName="@atlaskit/status"
       Component={StatusExample}
-      title="Status Picker"
+      title="Status"
       source={StatusSource}
     />
   )}
