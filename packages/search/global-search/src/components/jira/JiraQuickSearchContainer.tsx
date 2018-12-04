@@ -261,16 +261,7 @@ export class JiraQuickSearchContainer extends React.Component<
       JIRA_RESULT_LIMIT,
     );
 
-    const searchPeoplePromise = handlePromiseError(
-      this.props.peopleSearchClient.search(query),
-      [] as Result[],
-      error =>
-        this.props.logger.safeError(
-          LOGGER_NAME,
-          'error in search people promise',
-          error,
-        ),
-    );
+    const searchPeoplePromise = Promise.resolve([] as Result[]);
 
     const mapPromiseToPerformanceTime = (p: Promise<any>) =>
       p.then(() => performanceNow() - startTime);

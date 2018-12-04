@@ -74,15 +74,14 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
 
   selectedItem?: JiraEntityTypes;
 
-  render() {
-    const {
-      query,
-      showKeyboardLozenge,
-      showSearchIcon,
-      analyticsData,
-    } = this.props;
+  getEnrichedAnalyticsData = () => ({
+    ...this.props.analyticsData,
+    contentType: this.selectedItem,
+  });
 
-    let enricedAnalyticsData = analyticsData;
+  render() {
+    const { query, showKeyboardLozenge, showSearchIcon } = this.props;
+
     return (
       <AdvancedSearchResult
         href={getJiraAdvancedSearchUrl(this.state.entity, query)}
@@ -99,13 +98,6 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
                   this.setState({
                     entity: this.selectedItem,
                   });
-
-                  enricedAnalyticsData = {
-                    ...analyticsData,
-                    contentType: this.selectedItem,
-                  };
-
-                  this.selectedItem = undefined;
                 } else {
                   // we need to cancel on click event on the dropdown to stop navigation
                   e.preventDefault();
@@ -137,7 +129,7 @@ export default class JiraAdvancedSearch extends React.Component<Props, State> {
         showKeyboardLozenge={showKeyboardLozenge}
         // lazily pass analytics data because the analytic event fired as part of onclick handle
         // i.e. before the component update the new state, so can not add contentType from state
-        analyticsData={() => enricedAnalyticsData}
+        analyticsData={this.getEnrichedAnalyticsData}
       />
     );
   }
