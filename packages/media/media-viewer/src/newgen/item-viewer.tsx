@@ -29,6 +29,7 @@ import {
   GasPayload,
   GasScreenEventPayload,
 } from '@atlaskit/analytics-gas-types';
+import { AudioViewer } from './viewers/audio';
 
 export type Props = Readonly<{
   identifier: Identifier;
@@ -116,8 +117,7 @@ export class ItemViewerBase extends React.Component<Props, State> {
         return <ImageViewer onLoad={this.onViewerLoaded} {...viewerProps} />;
       case 'audio':
         return (
-          <VideoViewer
-            type="audio"
+          <AudioViewer
             showControls={showControls}
             featureFlags={featureFlags}
             {...viewerProps}
@@ -126,7 +126,6 @@ export class ItemViewerBase extends React.Component<Props, State> {
       case 'video':
         return (
           <VideoViewer
-            type="video"
             showControls={showControls}
             featureFlags={featureFlags}
             {...viewerProps}

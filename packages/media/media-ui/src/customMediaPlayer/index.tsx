@@ -44,30 +44,30 @@ import {
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { messages } from '../messages';
 
-export interface CustomVideoProps {
+export interface CustomMediaPlayerProps {
   readonly type: 'audio' | 'video';
   readonly src: string;
   readonly isHDActive?: boolean;
   readonly onHDToggleClick?: () => void;
-  readonly isHDAvailable: boolean;
+  readonly isHDAvailable?: boolean;
   readonly showControls?: () => void;
   readonly isAutoPlay: boolean;
   readonly isShortcutEnabled?: boolean;
 }
 
-export interface CustomVideoState {
+export interface CustomMediaPlayerState {
   isFullScreenEnabled: boolean;
 }
 
 export type ToggleButtonAction = () => void;
 
-export class CustomVideo extends Component<
-  CustomVideoProps & InjectedIntlProps,
-  CustomVideoState
+export class CustomMediaPlayer extends Component<
+  CustomMediaPlayerProps & InjectedIntlProps,
+  CustomMediaPlayerState
 > {
   videoWrapperRef?: HTMLElement;
 
-  state: CustomVideoState = {
+  state: CustomMediaPlayerState = {
     isFullScreenEnabled: false,
   };
 
@@ -281,4 +281,4 @@ export class CustomVideo extends Component<
   }
 }
 
-export default injectIntl(CustomVideo);
+export default injectIntl(CustomMediaPlayer);

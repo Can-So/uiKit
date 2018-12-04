@@ -300,7 +300,7 @@ export const AudioPlayer = styled.div`
   align-items: center;
   justify-content: center;
   width: 400px;
-  height: 250px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
