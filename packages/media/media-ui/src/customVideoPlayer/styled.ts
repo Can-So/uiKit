@@ -48,7 +48,7 @@ export const VolumeWrapper = styled.div`
 
   input {
     transform: translateX(13px);
-    height: 100%;
+    height: 16px;
     cursor: pointer;
     margin-right: 20px;
   }
