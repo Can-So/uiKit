@@ -40,9 +40,9 @@ export default class ObjectResult extends React.PureComponent<Props> {
     const { objectKey, containerName } = this.props;
     if (objectKey && containerName) {
       return (
-        <div>
+        <text>
           {objectKey} · {containerName}
-        </div>
+        </text>
       );
     }
 
