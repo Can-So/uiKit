@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/popper", "type": "patch" },
+    { "name": "@atlaskit/select", "type": "patch" }
+  ],
+  "dependents": []
+}
