@@ -105,9 +105,6 @@ class Modal extends Component<Props, State> {
       this.props.onClose(e);
     }
   };
-  handleDialogClick = (e: SyntheticMouseEvent<>) => {
-    e.stopPropagation();
-  };
 
   render() {
     const {
