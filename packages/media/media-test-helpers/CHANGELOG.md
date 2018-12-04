@@ -1,5 +1,10 @@
 # @atlaskit/media-test-helpers
 
+## 18.5.1
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
 ## 18.5.0
 - [minor] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
 
