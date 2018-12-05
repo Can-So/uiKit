@@ -1,0 +1,1 @@
+- Move index.js to src folder
