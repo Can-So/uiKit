@@ -22,9 +22,9 @@ export default md`
 
   ${(
     <Example
-      Component={require('../examples/0-Basic').default}
-      title="Basic"
-      source={require('!!raw-loader!../examples/0-Basic')}
+      Component={require('../examples/11-Search-In-Drawer').default}
+      title="Search In Drawer"
+      source={require('!!raw-loader!../examples/11-Search-In-Drawer')}
     />
   )}
 
