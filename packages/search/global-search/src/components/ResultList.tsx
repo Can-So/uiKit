@@ -14,6 +14,7 @@ import {
   ResultType,
   ConfluenceObjectResult,
   JiraProjectType,
+  ContentType,
 } from '../model/Result';
 import { SelectedIcon } from './styled';
 import { getAvatarForConfluenceObjectResult } from '../util/confluence-avatar-util';
@@ -64,6 +65,20 @@ const getI18nJiraContainerName = (
       return <FormattedMessage {...messages.jira_project_type_ops_project} />;
     }
   }
+};
+
+const getI18nJiraContentType = (
+  contentType: ContentType,
+): JSX.Element | undefined => {
+  switch (contentType) {
+    case ContentType.JiraBoard: {
+      return <FormattedMessage {...messages.jira_result_type_board} />;
+    }
+    case ContentType.JiraFilter: {
+      return <FormattedMessage {...messages.jira_result_type_filter} />;
+    }
+  }
+  return undefined;
 };
 
 export const getUniqueResultId = (result: Result): string =>
@@ -131,6 +146,12 @@ export default class ResultList extends React.Component<Props> {
           const jiraResult = result as JiraResult;
           const avatarData = extractAvatarData(jiraResult);
 
+          const objectKey =
+            jiraResult.contentType === 'jira-board' ||
+            jiraResult.contentType === 'jira-filter'
+              ? getI18nJiraContentType(jiraResult.contentType)
+              : jiraResult.objectKey;
+
           return (
             <ObjectResultComponent
               key={uniqueResultId}
@@ -138,7 +159,7 @@ export default class ResultList extends React.Component<Props> {
               name={jiraResult.name}
               href={jiraResult.href}
               type={jiraResult.analyticsType}
-              objectKey={jiraResult.objectKey}
+              objectKey={objectKey}
               containerName={jiraResult.containerName}
               {...avatarData}
               analyticsData={analyticsData}
