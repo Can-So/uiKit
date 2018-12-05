@@ -8,6 +8,9 @@
   "scripts": {
     "test": "jest"
   },
+  "bin": {
+    "atlaskit-branch-installer": "dist/index.js"
+  },
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Luke B",
