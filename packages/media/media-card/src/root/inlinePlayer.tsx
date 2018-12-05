@@ -93,6 +93,13 @@ export class InlinePlayer extends Component<
     this.revoke();
   }
 
+  private getStyle = (): React.CSSProperties => {
+    const { dimensions } = this.props;
+    return {
+      width: dimensions.width,
+    };
+  };
+
   render() {
     const { fileSrc } = this.state;
 
@@ -102,7 +109,7 @@ export class InlinePlayer extends Component<
     }
 
     return (
-      <InlinePlayerWrapper>
+      <InlinePlayerWrapper style={this.getStyle()}>
         <CustomVideoPlayer src={fileSrc} isAutoPlay isHDAvailable={false} />
       </InlinePlayerWrapper>
     );

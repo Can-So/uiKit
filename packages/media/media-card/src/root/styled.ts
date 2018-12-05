@@ -66,7 +66,8 @@ export const InlinePlayerWrapper = styled.div`
   overflow: hidden;
   border-radius: ${akBorderRadius};
   position: relative;
-  width: 100%;
+
+  max-width: 100%;
   max-height: 100%;
 
   video {

@@ -15,7 +15,6 @@ import Video, {
   VideoActions,
 } from 'react-video-renderer';
 import { colors } from '@atlaskit/theme';
-import FieldRange from '@atlaskit/field-range';
 import { ThemeProvider } from 'styled-components';
 import theme from '../theme';
 import { TimeRange } from './timeRange';
@@ -32,6 +31,7 @@ import {
   VolumeToggleWrapper,
   MutedIndicator,
   SpinnerWrapper,
+  VolumeTimeRangeWrapper,
 } from './styled';
 import { formatDuration } from '../formatDuration';
 import { hideControlsClassName } from '../classNames';
@@ -102,7 +102,7 @@ export class CustomVideo extends Component<
   onVolumeChange = (setVolume: SetVolumeFunction) => (value: number) =>
     setVolume(value);
 
-  shortcutHanler = (toggleButtonAction: ToggleButtonAction) => () => {
+  shortcutHandler = (toggleButtonAction: ToggleButtonAction) => () => {
     const { showControls } = this.props;
 
     toggleButtonAction();
@@ -147,11 +147,15 @@ export class CustomVideo extends Component<
             iconBefore={<SoundIcon label="volume" />}
           />
         </VolumeToggleWrapper>
-        <FieldRange
-          max={1}
-          value={volume}
-          onChange={this.onVolumeChange(actions.setVolume)}
-        />
+        <VolumeTimeRangeWrapper>
+          <TimeRange
+            onChange={this.onVolumeChange(actions.setVolume)}
+            duration={1}
+            currentTime={volume}
+            bufferedTime={volume}
+            disableThumbTooltip={true}
+          />
+        </VolumeTimeRangeWrapper>
       </VolumeWrapper>
     );
   };
@@ -225,12 +229,12 @@ export class CustomVideo extends Component<
                 <Shortcut
                   key="space-shortcut"
                   keyCode={keyCodes.space}
-                  handler={this.shortcutHanler(toggleButtonAction)}
+                  handler={this.shortcutHandler(toggleButtonAction)}
                 />,
                 <Shortcut
                   key="m-shortcut"
                   keyCode={keyCodes.m}
-                  handler={this.shortcutHanler(actions.toggleMute)}
+                  handler={this.shortcutHandler(actions.toggleMute)}
                 />,
               ];
 

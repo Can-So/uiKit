@@ -15,6 +15,7 @@ export interface TimeRangeProps {
   bufferedTime: number;
   duration: number;
   onChange: (newTime: number) => void;
+  disableThumbTooltip: boolean;
 }
 
 export interface TimeRangeState {
@@ -31,9 +32,11 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
     isDragging: false,
   };
 
+  static defaultProps: Partial<TimeRangeProps> = {
+    disableThumbTooltip: false,
+  };
+
   componentDidMount() {
-    document.addEventListener('mousemove', this.onMouseMove);
-    document.addEventListener('mouseup', this.onMouseUp);
     window.addEventListener('resize', this.setWrapperWidth);
   }
 
@@ -69,30 +72,28 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
     onChange(newTimeWithBoundaries);
   };
 
-  onMouseUp = (e: MouseEvent) => {
-    e.stopPropagation();
-
+  onMouseUp = () => {
+    document.removeEventListener('mouseup', this.onMouseUp);
+    document.removeEventListener('mousemove', this.onMouseMove);
     this.setState({
       isDragging: false,
     });
   };
 
-  onThumbMouseDown = () => {
-    this.setState({
-      isDragging: true,
-    });
-  };
-
-  onNavigate = (e: React.SyntheticEvent<HTMLDivElement>) => {
-    // We don't want to navigate if the event was starting with a drag
-    if (e.target === this.thumbElement) {
-      return;
-    }
+  onThumbMouseDown = (e: React.SyntheticEvent<HTMLDivElement>) => {
+    // We need to recalculate every time, because width can change (thanks, editor ;-)
+    this.setWrapperWidth();
+    document.addEventListener('mouseup', this.onMouseUp);
+    document.addEventListener('mousemove', this.onMouseMove);
 
     const { duration, onChange } = this.props;
     const event = e.nativeEvent as MouseEvent;
     const x = event.offsetX;
     const currentTime = (x * duration) / this.wrapperElementWidth;
+
+    this.setState({
+      isDragging: true,
+    });
 
     onChange(currentTime);
   };
@@ -112,26 +113,32 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
 
   render() {
     const { isDragging } = this.state;
-    const { currentTime, duration, bufferedTime } = this.props;
+    const {
+      currentTime,
+      duration,
+      bufferedTime,
+      disableThumbTooltip,
+    } = this.props;
     const currentPosition = (currentTime * 100) / duration;
     const bufferedTimePercentage = (bufferedTime * 100) / duration;
 
     return (
-      <TimeRangeWrapper onClick={this.onNavigate}>
+      <TimeRangeWrapper onMouseDown={this.onThumbMouseDown}>
         <TimeLine className="timeline" innerRef={this.saveWrapperElement}>
           <BufferedTime style={{ width: `${bufferedTimePercentage}%` }} />
           <CurrentTimeLine style={{ width: `${currentPosition}%` }}>
             <Thumb
               innerRef={this.saveThumbElement}
-              onMouseDown={this.onThumbMouseDown}
               className="time-range-thumb"
             >
-              <CurrentTimeTooltip
-                isDragging={isDragging}
-                className="current-time-tooltip"
-              >
-                {formatDuration(currentTime)}
-              </CurrentTimeTooltip>
+              {disableThumbTooltip ? null : (
+                <CurrentTimeTooltip
+                  isDragging={isDragging}
+                  className="current-time-tooltip"
+                >
+                  {formatDuration(currentTime)}
+                </CurrentTimeTooltip>
+              )}
             </Thumb>
           </CurrentTimeLine>
         </TimeLine>

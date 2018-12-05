@@ -39,12 +39,6 @@ export const VolumeWrapper = styled.div`
     padding-right: 20px;
     width: 152px;
   }
-
-  input {
-    transform: translateX(13px);
-    height: 100%;
-    cursor: pointer;
-  }
 `;
 
 export const TimeWrapper = styled.div`
@@ -76,6 +70,7 @@ export const CurrentTimeLine = styled.div`
 `;
 
 export const Thumb = styled.div`
+  pointer-events: none;
   width: 14px;
   height: 14px;
   border-radius: 100%;
@@ -84,7 +79,7 @@ export const Thumb = styled.div`
   position: absolute;
   right: 0;
   top: 50%;
-  transform: translate(7px, -50%) scale(0);
+  transform: scale(0);
   transition: all 0.1s;
 
   &:hover .current-time-tooltip {
@@ -118,12 +113,17 @@ export const ControlsWrapper = styled.div`
 
 export const VolumeToggleWrapper = styled.div`
   position: relative;
+  margin-right: 13px;
 
   button {
     width: 36px;
     color: ${({ isMuted }: MutedIndicatorProps) =>
       isMuted ? `${colors.R300} !important;` : ''};
   }
+`;
+
+export const VolumeTimeRangeWrapper = styled.div`
+  width: 100px;
 `;
 
 export const MutedIndicator = styled.div`
@@ -166,13 +166,16 @@ export const CurrentTimeTooltip = styled.div`
 `;
 
 export const TimeRangeWrapper = styled.div`
-  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  height: 22px;
+
   cursor: pointer;
+  width: 100%;
 
   &:hover {
     .timeline {
       height: 4px;
-      transform: translateY(2px);
     }
 
     .time-range-thumb {
