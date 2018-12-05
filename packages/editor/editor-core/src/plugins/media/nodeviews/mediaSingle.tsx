@@ -60,7 +60,6 @@ export default class MediaSingleNode extends Component<
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('MediaSingleNode', { nextProps, nextState });
     if (
       this.props.node.attrs.width !== nextProps.node.attrs.width ||
       this.props.selected() !== nextProps.selected() ||
@@ -173,11 +172,6 @@ export default class MediaSingleNode extends Component<
     }
 
     const isLoading = lastMediaStatus !== 'ready';
-    console.log({
-      lastMediaStatus,
-      'options.allowResizing': this.mediaPluginState.options.allowResizing,
-      isLoading,
-    });
     let canResize = !!this.mediaPluginState.options.allowResizing && !isLoading;
 
     const pos = getPos();
