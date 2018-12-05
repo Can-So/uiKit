@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.13.2
+- [patch] [38debc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38debc1):
+
+  - trigger analytics on advanced search dropdown item clicked, disable jira people search
+
 ## 5.13.1
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3
