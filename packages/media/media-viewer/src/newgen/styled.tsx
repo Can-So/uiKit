@@ -307,6 +307,8 @@ export const AudioPlayer = styled.div`
   position: relative;
 `;
 
+AudioPlayer.displayName = 'AudioPlayer';
+
 export const Audio = styled.audio`
   width: 100%;
   position: absolute;
