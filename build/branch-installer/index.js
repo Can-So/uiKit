@@ -1,11 +1,8 @@
 #!/usr/bin/env node
 const log = console.log;
-
 const meow = require('meow');
-
 const chalk = require('chalk');
-
-const installFromBranch = require('./install-from-branch');
+const installFromBranch = require('./src/install-from-branch');
 
 let c = meow(
   `
