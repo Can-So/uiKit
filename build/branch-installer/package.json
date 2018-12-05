@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "bin": {
-    "atlaskit-branch-installer": "dist/index.js"
+    "atlaskit-branch-installer": "index.js"
   },
   "author": "Atlassian Pty Ltd",
   "maintainers": [
