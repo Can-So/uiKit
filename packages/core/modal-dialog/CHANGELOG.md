@@ -1,5 +1,10 @@
 # @atlaskit/modal-dialog
 
+## 7.1.0
+- [minor] [7f99dec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7f99dec):
+
+  - Fix usage of PopupSelect inside ModalDialog
+
 ## 7.0.14
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3
