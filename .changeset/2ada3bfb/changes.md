@@ -1,0 +1,1 @@
+- trigger analytics on advanced search dropdown item clicked, disable jira people search

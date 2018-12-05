@@ -31,5 +31,5 @@ export type CommonResultProps = {
   /** Triggered by mouseClick event. */
   onClick?: (resultData: ResultData) => void;
   /** key/value pairs of attributes to be send in analytics events. */
-  analyticsData?: AnalyticsData;
+  analyticsData?: AnalyticsData | (() => AnalyticsData);
 };
