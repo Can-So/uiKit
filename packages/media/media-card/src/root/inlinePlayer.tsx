@@ -95,6 +95,12 @@ export class InlinePlayer extends Component<
 
   private getStyle = (): React.CSSProperties => {
     const { dimensions } = this.props;
+    // We are given dimensions. But we can’t just blindly apply them as width and height.
+    // Because editor is giving us “maximum” dimensions (equal to what it can go to if resized to 100%
+    // of available width). And the same time we don’t want to ignore these dimensions completely,
+    // because if consumer do not constraint width/height of container we still want to stick to given dimensions.
+    // Here we put width as a style. In combination with max-width: 100%; and max-height: 100%;
+    // it would give us required effect.
     return {
       width: dimensions.width,
     };

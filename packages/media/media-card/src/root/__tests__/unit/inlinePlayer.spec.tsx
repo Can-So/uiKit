@@ -68,7 +68,7 @@ describe('<InlinePlayer />', () => {
 
   it('should use default dimensions', () => {});
 
-  it('should set dimensions in the wrapper element', async () => {
+  it('should set width according to dimensions in the wrapper element', async () => {
     const { component } = setup({
       dimensions: {
         width: 1,
@@ -79,7 +79,6 @@ describe('<InlinePlayer />', () => {
     await update(component);
     expect(component.find(InlinePlayerWrapper).prop('style')).toEqual({
       width: 1,
-      height: 1,
     });
   });
 

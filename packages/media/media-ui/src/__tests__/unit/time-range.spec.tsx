@@ -75,4 +75,12 @@ describe('<TimeRange />', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).lastCalledWith(1);
   });
+
+  it('should not display tooltip on top of tumb when flag disableThumbTooltip is set', () => {
+    const { component } = setup({
+      disableThumbTooltip: true,
+    });
+
+    expect(component.find(CurrentTimeTooltip)).toHaveLength(0);
+  });
 });

@@ -73,6 +73,7 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
   };
 
   onMouseUp = () => {
+    // As soon as user finished dragging, we should clean up events.
     document.removeEventListener('mouseup', this.onMouseUp);
     document.removeEventListener('mousemove', this.onMouseMove);
     this.setState({
@@ -83,6 +84,10 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
   onThumbMouseDown = (e: React.SyntheticEvent<HTMLDivElement>) => {
     // We need to recalculate every time, because width can change (thanks, editor ;-)
     this.setWrapperWidth();
+
+    // We are implementing drag and drop here. There is no reason to start listening for mouseUp or move
+    // before that. Also if we start listening for mouseup before that we could pick up someone else's event
+    // For example editors resizing of a inline video player.
     document.addEventListener('mouseup', this.onMouseUp);
     document.addEventListener('mousemove', this.onMouseMove);
 
@@ -95,6 +100,7 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
       isDragging: true,
     });
 
+    // As soon as user clicks timeline we want to move thumb over to that place.
     onChange(currentTime);
   };
 
