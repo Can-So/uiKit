@@ -1,26 +1,28 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
-  # editor-confluence-transformer
+This transformer allows encoding editor in Confluence content as markdown or converting HTML to editor content.
 
-  ## Installation
+  ## Usage
 
-  ~~~sh
-  npm install @atlaskit/editor-confluence-transformer
-  ~~~
+  Use the encoder with editor-confluence-transformer as follows:
 
-  ## Using the library
-
-  Use the component in your React app as follows:
-
-  ~~~js
-  import { ConfluenceTransformer } from '@atlaskit/editor-confluence-transformer';
+  ${code`import { ConfluenceTransformer } from '@atlaskit/editor-confluence-transformer';
   import { confluenceSchema as schema } from '@atlaskit/editor-common';
 
   const serializer = new ConfluenceTransformer(schema);
   // To encode editor content as markdown
   serializer.encode(editorContent);
   // To convert HTML to editor content
-  serializer.parse(html);
-  ~~~
+  serializer.parse(html);`}
+
+  ${(
+    <Example
+      packageName="@atlaskit/editor-confluence-transformer"
+      Component={require('../examples/0-cxhtml-transformer').default}
+      title="Cxhtml Transformer"
+      source={require('!!raw-loader!../examples/0-cxhtml-transformer')}
+    />
+  )}
 `;
