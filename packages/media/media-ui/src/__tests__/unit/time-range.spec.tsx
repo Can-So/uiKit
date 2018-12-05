@@ -65,7 +65,7 @@ describe('<TimeRange />', () => {
     const { component, onChange } = setup();
 
     (component as any).instance()['wrapperElementWidth'] = 100;
-    component.find(TimeRangeWrapper).simulate('click', {
+    component.find(TimeRangeWrapper).simulate('mouseDown', {
       target: {},
       nativeEvent: {
         offsetX: 5,
