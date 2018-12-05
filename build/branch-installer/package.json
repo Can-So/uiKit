@@ -18,7 +18,8 @@
     "Rodrigo V"
   ],
   "files": [
-    "dist"
+    "src",
+    "index.js"
   ],
   "license": "Apache-2.0",
   "devDependencies": {},
