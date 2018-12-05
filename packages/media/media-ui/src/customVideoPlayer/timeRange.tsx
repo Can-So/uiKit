@@ -16,9 +16,11 @@ export interface TimeRangeProps {
   duration: number;
   onChange: (newTime: number) => void;
   disableThumbTooltip: boolean;
+  isAlwaysActive: boolean;
 }
 
 export interface TimeRangeState {
+  isHovering: boolean;
   isDragging: boolean;
 }
 
@@ -30,10 +32,12 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
 
   state: TimeRangeState = {
     isDragging: false,
+    isHovering: false,
   };
 
   static defaultProps: Partial<TimeRangeProps> = {
     disableThumbTooltip: false,
+    isAlwaysActive: false,
   };
 
   componentDidMount() {
@@ -117,28 +121,41 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
     }
   };
 
+  private setIsHovering = (isHovering: boolean) => () => {
+    this.setState({ isHovering });
+  };
+
   render() {
-    const { isDragging } = this.state;
+    const { isDragging, isHovering } = this.state;
     const {
       currentTime,
       duration,
       bufferedTime,
       disableThumbTooltip,
+      isAlwaysActive,
     } = this.props;
     const currentPosition = (currentTime * 100) / duration;
     const bufferedTimePercentage = (bufferedTime * 100) / duration;
 
     return (
-      <TimeRangeWrapper onMouseDown={this.onThumbMouseDown}>
-        <TimeLine className="timeline" innerRef={this.saveWrapperElement}>
+      <TimeRangeWrapper
+        onMouseDown={this.onThumbMouseDown}
+        onMouseEnter={this.setIsHovering(true)}
+        onMouseLeave={this.setIsHovering(false)}
+      >
+        <TimeLine
+          innerRef={this.saveWrapperElement}
+          showAsActive={isHovering || isAlwaysActive}
+        >
           <BufferedTime style={{ width: `${bufferedTimePercentage}%` }} />
           <CurrentTimeLine style={{ width: `${currentPosition}%` }}>
             <Thumb
               innerRef={this.saveThumbElement}
-              className="time-range-thumb"
+              showAsActive={isHovering || isAlwaysActive}
             >
               {disableThumbTooltip ? null : (
                 <CurrentTimeTooltip
+                  draggable={false}
                   isDragging={isDragging}
                   className="current-time-tooltip"
                 >

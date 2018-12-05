@@ -35,7 +35,8 @@ export const VolumeWrapper = styled.div`
   transition: width 0.3s;
   align-items: center;
 
-  &:hover {
+  &:hover,
+  &:active {
     padding-right: 20px;
     width: 152px;
   }
@@ -51,9 +52,14 @@ export const CurrentTime = styled.div`
   user-select: none;
 `;
 
+interface WithAsActiveProps {
+  showAsActive: boolean;
+}
+
 export const TimeLine = styled.div`
   width: 100%;
-  height: 2px;
+  ${({ showAsActive }: WithAsActiveProps) =>
+    showAsActive ? 'height: 4px;' : 'height: 2px;'};
   background-color: #5d646f;
   border-radius: 5px;
   position: relative;
@@ -79,8 +85,13 @@ export const Thumb = styled.div`
   position: absolute;
   right: 0;
   top: 50%;
-  transform: scale(0);
+
   transition: all 0.1s;
+
+  ${({ showAsActive }: WithAsActiveProps) =>
+    showAsActive
+      ? 'transform: translate(7px, -50%) scale(1);'
+      : 'transform: scale(0);'};
 
   &:hover .current-time-tooltip {
     opacity: 1;
@@ -172,16 +183,6 @@ export const TimeRangeWrapper = styled.div`
 
   cursor: pointer;
   width: 100%;
-
-  &:hover {
-    .timeline {
-      height: 4px;
-    }
-
-    .time-range-thumb {
-      transform: translate(7px, -50%) scale(1);
-    }
-  }
 `;
 
 export const SpinnerWrapper = styled.div`

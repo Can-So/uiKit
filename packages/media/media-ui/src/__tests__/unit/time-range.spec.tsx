@@ -76,7 +76,7 @@ describe('<TimeRange />', () => {
     expect(onChange).lastCalledWith(1);
   });
 
-  it('should not display tooltip on top of tumb when flag disableThumbTooltip is set', () => {
+  it('should not display tooltip on top of thumb when flag disableThumbTooltip is set', () => {
     const { component } = setup({
       disableThumbTooltip: true,
     });

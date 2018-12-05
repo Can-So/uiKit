@@ -154,6 +154,7 @@ export class CustomVideo extends Component<
             currentTime={volume}
             bufferedTime={volume}
             disableThumbTooltip={true}
+            isAlwaysActive={true}
           />
         </VolumeTimeRangeWrapper>
       </VolumeWrapper>
@@ -258,7 +259,7 @@ export class CustomVideo extends Component<
                         {this.renderVolume(videoState, actions)}
                       </LeftControls>
                       <RightControls>
-                        <CurrentTime>
+                        <CurrentTime draggable={false}>
                           {formatDuration(currentTime)} /{' '}
                           {formatDuration(duration)}
                         </CurrentTime>
