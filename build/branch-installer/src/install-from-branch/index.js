@@ -68,7 +68,7 @@ const getManifest = hash => {
 const getPackagesVersionWithTarURL = (manifest, cdnURL) => {
   const packages = [];
   Object.keys(manifest).forEach(dependency => {
-    packages.push(`"${dependency}"@${cdnURL}/${manifest[dependency].tarFile}`);
+    packages.push(`"${dependency}@${cdnURL}/${manifest[dependency].tarFile}"`);
   });
 
   return packages;
