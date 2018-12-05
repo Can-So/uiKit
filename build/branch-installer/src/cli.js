@@ -9,12 +9,11 @@ const installFromBranch = require('./install-from-branch');
 
 let c = meow(
   `
-    Installs the AtlasKit dependency versions from the given branch.
-
     Usage
         $ atlaskit-branch-installer <branch-name>
       Options
-        TODO: Maybe?
+        --no-bolt Do not use bolt, use yarn.
+        --dry-run Do not install the packages just print it
       Examples
         $ atlaskit-branch-installer ED-1252-typofix
 `,
@@ -27,11 +26,24 @@ let c = meow(
       timeout: {
         type: 'string',
         alias: 't',
+      bolt: {
+        type: 'boolean',
+        alias: 'bolt',
+        default: true,
+      },
+      dryRun: {
+        type: 'boolean',
+        alias: 'd',
+        default: false,
       },
     },
   },
 );
 
-installFromBranch(c.input[0], c.flags);
+const branchName = c.input[0];
 
-// pretty(c.input[0], c.flags);
+if (branchName) {
+  installFromBranch(branchName, c.flags);
+} else {
+  console.log(chalk.red('no branch name, no work to do. :D'));
+}

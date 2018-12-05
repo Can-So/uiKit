@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const chalk = require('chalk');
 const spawndamnit = require('spawndamnit');
 
 function sleep(ms) {
@@ -61,6 +62,15 @@ const getManifest = hash => {
   });
 };
 
+const getPackagesVersionWithTarURL = (manifest, cdnURL) => {
+  const packages = [];
+  Object.keys(manifest).forEach(dependency => {
+    packages.push(`"${dependency}"@${cdnURL}/${manifest[dependency].tarFile}`);
+  });
+
+  return packages;
+};
+
 const installFromBranch = async (branchName, options) => {
   const hash = await getCommitHash(branchName);
   const hasBuildFinished = await getBuildStatus(hash, {
@@ -69,24 +79,26 @@ const installFromBranch = async (branchName, options) => {
   });
 
   if (!hasBuildFinished) {
-    throw 'Build is not finished yet'; //TODO: ADD BUILD STATUS MESSAGE
+    console.log(chalk.red(`Build is not finished yet`));
+    process.exit(1);
   }
 
   const manifest = await getManifest(hash);
+  const cdnURL = getCdnUrl(hash);
+  const packages = getPackagesVersionWithTarURL(manifest, cdnURL);
 
-  console.log(manifest);
+  const runner = options.bolt ? 'bolt' : 'yarn';
 
-  let boltString = '';
-  Object.keys(manifest).forEach(dependency => {
-    boltString += ` "${dependency}"@${getCdnUrl(hash)}/${
-      manifest[dependency].tarFile
-    }`;
-  });
-
-  return spawndamnit('bolt', ['upgrade', boltString], {
-    stdio: 'inherit',
-    tty: (process.stdout && process.stdout.isTTY) || false,
-  });
+  if (options.dryRun) {
+    packages.forEach(pkg => {
+      console.log(chalk.yellow(`${runner} upgrade ${pkg}`));
+    });
+  } else {
+    return spawndamnit(runner, ['upgrade', packages.join(' ')], {
+      stdio: 'inherit',
+      tty: (process.stdout && process.stdout.isTTY) || false,
+    });
+  }
 };
 
 module.exports = installFromBranch;
