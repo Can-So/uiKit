@@ -22,6 +22,7 @@ export interface TimeRangeProps {
 export interface TimeRangeState {
   isHovering: boolean;
   isDragging: boolean;
+  dragStartClientX: number; // clientX value at the beginning of a slider
 }
 
 export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
@@ -33,6 +34,7 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
   state: TimeRangeState = {
     isDragging: false,
     isHovering: false,
+    dragStartClientX: 0,
   };
 
   static defaultProps: Partial<TimeRangeProps> = {
@@ -59,19 +61,25 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
   };
 
   onMouseMove = (e: MouseEvent) => {
-    const { isDragging } = this.state;
+    const { isDragging, dragStartClientX } = this.state;
     if (!isDragging) {
       return;
     }
     e.stopPropagation();
 
-    const { currentTime, onChange, duration } = this.props;
-    const { movementX } = e;
-    const movementPercentage =
-      (Math.abs(movementX) * duration) / this.wrapperElementWidth;
-    const newTime =
-      currentTime + (movementX > 0 ? movementPercentage : -movementPercentage);
-    const newTimeWithBoundaries = Math.min(Math.max(newTime, 0), duration);
+    const { onChange, duration } = this.props;
+    const { clientX } = e;
+
+    const absolutePosition = clientX - dragStartClientX;
+
+    const isWithinBoundaries =
+      absolutePosition <= this.wrapperElementWidth || absolutePosition >= 0;
+    if (!isWithinBoundaries) {
+      return;
+    }
+
+    const newTimeWithBoundaries =
+      (absolutePosition * duration) / this.wrapperElementWidth;
 
     onChange(newTimeWithBoundaries);
   };
@@ -102,6 +110,7 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
 
     this.setState({
       isDragging: true,
+      dragStartClientX: event.clientX - x,
     });
 
     // As soon as user clicks timeline we want to move thumb over to that place.
