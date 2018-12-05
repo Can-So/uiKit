@@ -20,12 +20,15 @@ let c = meow(
   {
     flags: {
       maxAttempts: {
-        type: 'string',
+        type: 'number',
         alias: 'a',
+        default: 1,
       },
       timeout: {
-        type: 'string',
+        type: 'number',
         alias: 't',
+        default: 2000,
+      },
       bolt: {
         type: 'boolean',
         alias: 'bolt',

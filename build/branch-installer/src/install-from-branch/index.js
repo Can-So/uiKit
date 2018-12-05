@@ -9,7 +9,10 @@ function sleep(ms) {
 const API_URL =
   'https://api.bitbucket.org/2.0/repositories/atlassian/atlaskit-mk-2';
 
-const getBuildStatus = async (hashCommit, maxAttemps = 1, timeout = 2000) => {
+const getBuildStatus = async (
+  hashCommit,
+  { maxAttemps = 1, timeout = 2000 },
+) => {
   const url = `${API_URL}/commit/${hashCommit}/statuses`;
 
   let ready = false;
