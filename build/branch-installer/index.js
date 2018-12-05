@@ -11,6 +11,7 @@ let c = meow(
       Options
         --no-bolt Do not use bolt, use yarn.
         --dry-run Do not install the packages just print it
+        --verbose, -v Show what is going on
       Examples
         $ atlaskit-branch-installer ED-1252-typofix
 `,
@@ -34,6 +35,11 @@ let c = meow(
       dryRun: {
         type: 'boolean',
         alias: 'd',
+        default: false,
+      },
+      verbose: {
+        type: 'boolean',
+        alias: 'v',
         default: false,
       },
     },
