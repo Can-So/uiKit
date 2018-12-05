@@ -1,10 +1,12 @@
 // @flow
+
 import React from 'react';
 import { mount } from 'enzyme';
 import Blanket from '@atlaskit/blanket';
 import EmojiIcon from '@atlaskit/icon/glyph/emoji';
 
 import Drawer from '../../index';
+import DrawerPrimitive from '../../primitives';
 
 const findKeydownListenerCall = listenerFn =>
   listenerFn.mock.calls.find(e => e[0] === 'keydown');
@@ -159,6 +161,28 @@ describe('Drawer Transitions', () => {
     expect(onClose).not.toHaveBeenCalled();
     wrapper.find('button').simulate('click');
     expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should call onCloseComplete when DrawerPrimitive calls onCloseComplete', () => {
+    const onCloseComplete = jest.fn();
+    const wrapper = mount(
+      <Drawer isOpen width="wide" onCloseComplete={onCloseComplete}>
+        <code>Drawer contents</code>
+      </Drawer>,
+    );
+
+    const node = 'div';
+    const callsBeforeOnCloseComplete = [].concat(onCloseComplete.mock.calls);
+    wrapper
+      .find(DrawerPrimitive)
+      .props()
+      .onCloseComplete(node);
+    const callsAfterOnCloseComplete = onCloseComplete.mock.calls;
+
+    expect({ callsBeforeOnCloseComplete, callsAfterOnCloseComplete }).toEqual({
+      callsBeforeOnCloseComplete: [],
+      callsAfterOnCloseComplete: [[node]],
+    });
   });
 
   it('should call onKeyDown if user press ESC', () => {

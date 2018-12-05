@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import {
-  TimeRange,
-  TimeRangeProps,
-} from '../../../newgen/viewers/video/TimeRange';
+import { TimeRange, TimeRangeProps } from '../../customMediaPlayer/timeRange';
 import {
   CurrentTimeLine,
   BufferedTime,
   CurrentTimeTooltip,
   Thumb,
   TimeRangeWrapper,
-} from '../../../newgen/viewers/video/styled';
+} from '../../customMediaPlayer/styled';
 
 describe('<TimeRange />', () => {
   const setup = (props?: Partial<TimeRangeProps>) => {
@@ -71,11 +68,11 @@ describe('<TimeRange />', () => {
     component.find(TimeRangeWrapper).simulate('click', {
       target: {},
       nativeEvent: {
-        x: 5,
+        offsetX: 5,
       },
     });
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).lastCalledWith(-0.6);
+    expect(onChange).lastCalledWith(1);
   });
 });

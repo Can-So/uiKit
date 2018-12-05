@@ -1,5 +1,15 @@
 # @atlaskit/popper
 
+## 0.3.5
+- [patch] [82fc5f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82fc5f5):
+
+  - Pinning react-popper to 1.0.2 to avoid recursive bug
+
+## 0.3.4
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
 ## 0.3.3
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3

@@ -13,8 +13,12 @@ export type BaseProps = {
   /** Available drawer sizes */
   width: DrawerWidth,
 };
+
 export type DrawerPrimitiveProps = BaseProps & {
+  in: boolean,
   onClose?: (SyntheticMouseEvent<*>) => void,
+  onCloseComplete?: (node: HTMLElement) => void,
+  shouldUnmountOnExit?: boolean,
 };
 
 export type DrawerProps = BaseProps & {
@@ -26,6 +30,8 @@ export type DrawerProps = BaseProps & {
     SyntheticMouseEvent<*> | SyntheticKeyboardEvent<*>,
     analyticsEvent: any,
   ) => void,
+  /** A callback function that will be called when the drawer has finished its close transition. */
+  onCloseComplete?: (node: HTMLElement) => void,
   /**
       Callback function that will be called when the drawer is displayed and `keydown` event is triggered.
     */

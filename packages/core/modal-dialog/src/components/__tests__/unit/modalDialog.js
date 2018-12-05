@@ -122,14 +122,6 @@ describe('modal-dialog', () => {
         expect(spy).toHaveBeenCalledTimes(1);
       });
 
-      it('should trigger when blanket clicked below dialog (modalPositioner)', () => {
-        const spy = jest.fn();
-        const wrapper = mount(<ModalDialog onClose={spy} />);
-
-        wrapper.find(Positioner).simulate('click');
-        expect(spy).toHaveBeenCalledTimes(1);
-      });
-
       it('should not trigger when blanket content clicked', () => {
         const spy = jest.fn();
         const wrapper = mount(

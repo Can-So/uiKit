@@ -1,5 +1,20 @@
 # @atlaskit/media-viewer
 
+## 27.1.0
+- [minor] [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+
+  - CustomVideoPlayer is now CustomMediaPlayer and supports audio through type property. Media Viewer now uses custom audio player for audio everywhere except IE11.
+
+## 27.0.6
+- [patch] [01697a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01697a6):
+
+  - CustomVideoPlayer improvements: fix currentTime origin + apply custom theme
+
+## 27.0.5
+- [patch] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
+
+  - use custom video player for inline video in media-card
+
 ## 27.0.4
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Context, ProcessedFileState } from '@atlaskit/media-core';
-import { constructAuthTokenUrl } from '../../utils';
-import { Outcome, MediaViewerFeatureFlags } from '../../domain';
-import { Video } from '../../styled';
-import CustomVideo from './customVideo';
-import { getFeatureFlag } from '../../utils/getFeatureFlag';
-import { isIE } from '../../utils/isIE';
-import { createError, MediaViewerError } from '../../error';
 import { getArtifactUrl } from '@atlaskit/media-store';
-import { BaseState, BaseViewer } from '../base-viewer';
+import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import { constructAuthTokenUrl } from '../utils';
+import { Outcome, MediaViewerFeatureFlags } from '../domain';
+import { Video, CustomVideoPlayerWrapper } from '../styled';
+import { getFeatureFlag } from '../utils/getFeatureFlag';
+import { isIE } from '../utils/isIE';
+import { createError, MediaViewerError } from '../error';
+import { BaseState, BaseViewer } from './base-viewer';
 
 export type Props = Readonly<{
   item: ProcessedFileState;
@@ -21,10 +21,12 @@ export type Props = Readonly<{
 
 export type State = BaseState<string> & {
   isHDActive: boolean;
+  coverUrl?: string;
 };
 
 const sdArtifact = 'video_640.mp4';
 const hdArtifact = 'video_1280.mp4';
+
 export class VideoViewer extends BaseViewer<string, Props, State> {
   protected get initialState() {
     return {
@@ -46,14 +48,18 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
       !isIE() && getFeatureFlag('customVideoPlayer', featureFlags);
     const isAutoPlay = previewCount === 0;
     return useCustomVideoPlayer ? (
-      <CustomVideo
-        isAutoPlay={isAutoPlay}
-        onHDToggleClick={this.onHDChange}
-        showControls={showControls}
-        src={content}
-        isHDActive={isHDActive}
-        isHDAvailable={isHDAvailable(item)}
-      />
+      <CustomVideoPlayerWrapper>
+        <CustomMediaPlayer
+          type="video"
+          isAutoPlay={isAutoPlay}
+          onHDToggleClick={this.onHDChange}
+          showControls={showControls}
+          src={content}
+          isHDActive={isHDActive}
+          isHDAvailable={isHDAvailable(item)}
+          isShortcutEnabled={true}
+        />
+      </CustomVideoPlayerWrapper>
     ) : (
       <Video autoPlay={isAutoPlay} controls src={content} />
     );
@@ -62,14 +68,15 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
   protected async init(isHDActive?: boolean) {
     const { context, item, collectionName } = this.props;
     const preferHd = isHDActive && isHDAvailable(item);
-    const videoUrl = getVideoArtifactUrl(item, preferHd);
+
+    const contentUrl = getVideoArtifactUrl(item, preferHd);
     try {
-      if (!videoUrl) {
-        throw new Error('No video artifacts found');
+      if (!contentUrl) {
+        throw new Error(`No video artifacts found`);
       }
       this.setState({
         content: Outcome.successful(
-          await constructAuthTokenUrl(videoUrl, context, collectionName),
+          await constructAuthTokenUrl(contentUrl, context, collectionName),
         ),
       });
     } catch (err) {

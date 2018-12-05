@@ -105,7 +105,6 @@ export default class Nav extends React.Component<{}, State> {
             const headerKey = location.pathname.split('/').filter(p => p)[0];
 
             const header = headers[headerKey];
-
             const groups = (
               <Groups docs={docs} packages={packages} patterns={patterns} />
             );

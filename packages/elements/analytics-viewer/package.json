@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/analytics-viewer",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "config": {
     "access": "private"
   },
@@ -16,6 +16,9 @@
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+  },
+  "atlaskit": {
+    "internal": true
   },
   "author": "Atlassian Pty Ltd",
   "license": "Apache-2.0",

@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.3.7
+- [patch] [bee7762](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bee7762):
+
+  - Fixes a double scrollbar issue that happens on windows when connected to a mouse
+
 ## 5.3.6
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3

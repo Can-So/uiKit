@@ -18,6 +18,17 @@ const onClick = () => console.log('onClick');
 export default () => (
   <InlineCardVideoWrapper>
     <InlineCardVideoWrapperItem>
+      <h1>video large [disableOverlay=true] width=500 height=300</h1>
+      <Card
+        context={context}
+        identifier={videoLargeFileId}
+        dimensions={{ width: 500, height: 300 }}
+        disableOverlay={true}
+        onClick={onClick}
+        useInlinePlayer={true}
+      />
+    </InlineCardVideoWrapperItem>
+    <InlineCardVideoWrapperItem>
       <h1>Image file [disableOverlay=true]</h1>
       <Card
         context={context}
@@ -52,17 +63,6 @@ export default () => (
         context={context}
         identifier={videoFileId}
         dimensions={{ width: '100%', height: 300 }}
-        disableOverlay={true}
-        onClick={onClick}
-        useInlinePlayer={true}
-      />
-    </InlineCardVideoWrapperItem>
-    <InlineCardVideoWrapperItem>
-      <h1>video large [disableOverlay=true] width=500 height=300</h1>
-      <Card
-        context={context}
-        identifier={videoLargeFileId}
-        dimensions={{ width: 500, height: 300 }}
         disableOverlay={true}
         onClick={onClick}
         useInlinePlayer={true}

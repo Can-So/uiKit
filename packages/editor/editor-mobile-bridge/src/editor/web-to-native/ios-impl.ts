@@ -1,5 +1,7 @@
-import NativeBridge from './bridge';
 import { Color as StatusColor } from '@atlaskit/status';
+import { EditorBridges, EditorPluginBridges } from './index';
+import NativeBridge from './bridge';
+import { sendToBridge } from '../../bridge-utils';
 
 export default class IosBridge implements NativeBridge {
   showMentions(query: String) {
@@ -100,5 +102,13 @@ export default class IosBridge implements NativeBridge {
         name: 'dismissStatusPicker',
       });
     }
+  }
+
+  call<T extends EditorPluginBridges>(
+    bridge: T,
+    event: keyof Exclude<EditorBridges[T], undefined>,
+    ...args
+  ) {
+    sendToBridge(bridge, event, ...args);
   }
 }

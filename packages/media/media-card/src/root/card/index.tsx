@@ -6,6 +6,7 @@ import { AnalyticsContext } from '@atlaskit/analytics-next';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import { Subscription } from 'rxjs/Subscription';
+import { IntlProvider } from 'react-intl';
 import {
   CardAnalyticsContext,
   CardAction,
@@ -368,11 +369,15 @@ export class Card extends Component<CardProps, CardState> {
 
   render() {
     const { isPlayingFile } = this.state;
-    if (isPlayingFile) {
-      return this.renderInlinePlayer();
-    }
+    const content = isPlayingFile
+      ? this.renderInlinePlayer()
+      : this.renderCard();
 
-    return this.renderCard();
+    return this.context.intl ? (
+      content
+    ) : (
+      <IntlProvider locale="en">{content}</IntlProvider>
+    );
   }
 
   onCardInViewport = () => {
