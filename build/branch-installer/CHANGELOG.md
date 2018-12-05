@@ -1,5 +1,10 @@
 # @atlaskit/branch-installer
 
+## 0.0.6
+- [patch] [310d5ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/310d5ff):
+
+  - Fix bad quotes on package
+
 ## 0.0.5
 - [patch] [49e1a37](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49e1a37):
 
