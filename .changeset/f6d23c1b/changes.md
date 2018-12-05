@@ -1,0 +1,1 @@
+- Prepare/fix card to be displayed as video inline player in renderer/editor contexts
