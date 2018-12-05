@@ -1,0 +1,1 @@
+- Display media singles with video inside as inline video player
