@@ -55,6 +55,7 @@ export const VolumeWrapper = styled.div`
 
 export const TimeWrapper = styled.div`
   margin: 0 20px 10px 20px;
+  margin-bottom: 44px;
 `;
 
 export const CurrentTime = styled.div`
@@ -120,7 +121,7 @@ export const ControlsWrapper = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 65px;
+  height: auto;
   background: linear-gradient(to top, #0e1624, rgba(14, 22, 36, 0));
   position: absolute;
   bottom: 0px;

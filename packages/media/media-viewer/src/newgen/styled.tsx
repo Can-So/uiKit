@@ -327,7 +327,8 @@ export const Audio = styled.audio`
 export const AudioCover = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: scale-down;
+  background-color: #000000;
 `;
 
 export const DefaultCoverWrapper = styled.div`
