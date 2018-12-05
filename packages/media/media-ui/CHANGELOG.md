@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 8.0.0
+- [major] [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+
+  - CustomVideoPlayer is now CustomMediaPlayer and supports audio through type property. Media Viewer now uses custom audio player for audio everywhere except IE11.
+
 ## 7.11.0
 - [minor] [01697a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01697a6):
 
