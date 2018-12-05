@@ -63,7 +63,10 @@ const getManifest = hash => {
 
 const installFromBranch = async (branchName, options) => {
   const hash = await getCommitHash(branchName);
-  const hasBuildFinished = await getBuildStatus(hash);
+  const hasBuildFinished = await getBuildStatus(hash, {
+    timeout: options.timeout,
+    maxAttempts: options.maxAttempts,
+  });
 
   if (!hasBuildFinished) {
     throw 'Build is not finished yet'; //TODO: ADD BUILD STATUS MESSAGE
