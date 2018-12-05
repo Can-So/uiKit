@@ -67,21 +67,31 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
     }
     e.stopPropagation();
 
-    const { onChange, duration } = this.props;
+    const { onChange, duration, currentTime } = this.props;
     const { clientX } = e;
 
-    const absolutePosition = clientX - dragStartClientX;
+    let absolutePosition = clientX - dragStartClientX;
 
-    const isWithinBoundaries =
-      absolutePosition <= this.wrapperElementWidth || absolutePosition >= 0;
-    if (!isWithinBoundaries) {
-      return;
+    const isOutsideToRight = absolutePosition > this.wrapperElementWidth;
+    const isOutsideToLeft = absolutePosition < 0;
+
+    // Next to conditions take care of situation where user moves mouse very quickly out to the side
+    // left or right. It's very easy to leave thumb not at the end/beginning of a timeline.
+    // This will guarantee that in this case thumb will move to appropriate extreme.
+    if (isOutsideToRight) {
+      absolutePosition = this.wrapperElementWidth;
+    }
+    if (isOutsideToLeft) {
+      absolutePosition = 0;
     }
 
     const newTimeWithBoundaries =
       (absolutePosition * duration) / this.wrapperElementWidth;
 
-    onChange(newTimeWithBoundaries);
+    if (currentTime !== newTimeWithBoundaries) {
+      // If value hasn't changed we don't want to call "change"
+      onChange(newTimeWithBoundaries);
+    }
   };
 
   onMouseUp = () => {
