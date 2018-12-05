@@ -1,1 +1,0 @@
-- Fixes requesting media auth for empty string collections.

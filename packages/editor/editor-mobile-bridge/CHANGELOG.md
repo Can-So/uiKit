@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.4.3
+- [patch] [7515804](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7515804):
+
+  - Fixes requesting media auth for empty string collections.
+
 ## 6.4.2
 - [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
 
