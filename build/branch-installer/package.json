@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/branch-installer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "TODO: FILL IN",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",

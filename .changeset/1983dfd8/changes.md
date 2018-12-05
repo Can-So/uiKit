@@ -1,1 +1,0 @@
-- Expose maxAttempts & timeout through the CLI
