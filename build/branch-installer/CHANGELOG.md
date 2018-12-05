@@ -1,5 +1,10 @@
 # @atlaskit/branch-installer
 
+## 0.0.5
+- [patch] [49e1a37](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49e1a37):
+
+  - Add dry-run and no-bolt flags to CLI
+
 ## 0.0.3
 - [patch] [ab9320d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9320d):
 
