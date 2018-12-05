@@ -1,7 +1,11 @@
 import * as React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import { FocusedTaskCloseAccount } from '../../components/FocusedTaskCloseAccount';
+import {
+  FocusedTaskCloseAccount,
+  Props,
+  State,
+} from '../../components/FocusedTaskCloseAccount';
 
 import Footer from '../../components/Footer';
 
@@ -13,10 +17,10 @@ const defaultProps = {
   learnMoreLink: 'https://hello.atlassian.net',
 };
 
-const render = (
-  props = {},
-): ShallowWrapper<{}, { currentScreenIdx: number }, FocusedTaskCloseAccount> =>
-  shallow(<FocusedTaskCloseAccount {...defaultProps} {...props} />);
+const render = (props = {}) =>
+  shallow<Props, State>(
+    <FocusedTaskCloseAccount {...defaultProps} {...props} />,
+  );
 
 test('isOpen snapshot', () => {
   expect(render()).toMatchSnapshot();
