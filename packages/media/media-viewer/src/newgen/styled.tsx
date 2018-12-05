@@ -295,7 +295,15 @@ export const RightHeader = styled.div`
   }
 `;
 
+export const CustomAudioPlayerWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+`;
+
 export const AudioPlayer = styled.div`
+  background-color: ${blanketColor};
   border-radius: ${akBorderRadius};
   align-items: center;
   justify-content: center;

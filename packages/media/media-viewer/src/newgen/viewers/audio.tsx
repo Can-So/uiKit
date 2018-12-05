@@ -9,6 +9,7 @@ import {
   Audio,
   DefaultCoverWrapper,
   blanketColor,
+  CustomAudioPlayerWrapper,
 } from '../styled';
 import { createError, MediaViewerError } from '../error';
 import { getArtifactUrl } from '@atlaskit/media-store';
@@ -79,24 +80,28 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
     return useCustomAudioPlayer ? (
       <AudioPlayer>
         {this.renderCover()}
-        <CustomMediaPlayer
-          type="audio"
-          isAutoPlay={isAutoPlay}
-          src={src}
-          isShortcutEnabled={true}
-          showControls={showControls}
-        />
+        <CustomAudioPlayerWrapper>
+          <CustomMediaPlayer
+            type="audio"
+            isAutoPlay={isAutoPlay}
+            src={src}
+            isShortcutEnabled={true}
+            showControls={showControls}
+          />
+        </CustomAudioPlayerWrapper>
       </AudioPlayer>
     ) : (
       <AudioPlayer>
         {this.renderCover()}
-        <Audio
-          autoPlay={isAutoPlay}
-          controls
-          innerRef={this.saveAudioElement}
-          src={src}
-          preload="metadata"
-        />
+        <CustomAudioPlayerWrapper>
+          <Audio
+            autoPlay={isAutoPlay}
+            controls
+            innerRef={this.saveAudioElement}
+            src={src}
+            preload="metadata"
+          />
+        </CustomAudioPlayerWrapper>
       </AudioPlayer>
     );
   }

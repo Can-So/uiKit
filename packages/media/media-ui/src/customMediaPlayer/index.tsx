@@ -8,7 +8,7 @@ import SoundIcon from '@atlaskit/icon/glyph/hipchat/outgoing-sound';
 import HDIcon from '@atlaskit/icon/glyph/vid-hd-circle';
 import Button from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
-import Video, {
+import MediaPlayer, {
   SetVolumeFunction,
   NavigateFunction,
   VideoState,
@@ -204,7 +204,7 @@ export class CustomMediaPlayer extends Component<
     return (
       <ThemeProvider theme={theme}>
         <CustomVideoWrapper innerRef={this.saveVideoWrapperRef}>
-          <Video sourceType={type} src={src} autoPlay={isAutoPlay}>
+          <MediaPlayer sourceType={type} src={src} autoPlay={isAutoPlay}>
             {(video, videoState, actions) => {
               const {
                 status,
@@ -274,7 +274,7 @@ export class CustomMediaPlayer extends Component<
                 </VideoWrapper>
               );
             }}
-          </Video>
+          </MediaPlayer>
         </CustomVideoWrapper>
       </ThemeProvider>
     );
