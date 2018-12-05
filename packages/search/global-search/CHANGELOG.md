@@ -1,5 +1,13 @@
 # @atlaskit/global-search
 
+## 5.13.3
+- [patch] [d498de7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d498de7):
+
+  - Include type of result for boards and filters in jira search
+- [patch] [c6131a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c6131a6):
+
+  - Added result type for boards and filters in global search result subtext
+
 ## 5.13.2
 - [patch] [38debc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38debc1):
 

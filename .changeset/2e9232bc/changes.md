@@ -1,1 +1,0 @@
-- Include type of result for boards and filters in jira search
