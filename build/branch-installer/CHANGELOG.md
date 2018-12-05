@@ -1,5 +1,10 @@
 # @atlaskit/branch-installer
 
+## 0.0.7
+- [patch] [683b30c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/683b30c):
+
+  - Move index.js to src folder
+
 ## 0.0.6
 - [patch] [310d5ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/310d5ff):
 
