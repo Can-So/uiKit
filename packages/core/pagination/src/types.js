@@ -21,10 +21,7 @@ export type PaginationPropTypes = {
   /** Index of the page to be selected by default */
   defaultSelectedIndex: number,
   /** Helper function to get text displayed on the page button. It is helpful in scenarios when page the page passed in is an object  */
-  getPageLabel?: (
-    pageObj: string | number | Object,
-    pageIndex: number,
-  ) => number | string,
+  getPageLabel?: (page: any, pageIndex: number) => number | string,
   /** The aria-label for next and previous buttons */
   i18n: {
     prev: string,
@@ -37,7 +34,7 @@ export type PaginationPropTypes = {
   /** The onChange handler which is called when the page is changed */
   onChange?: (
     event: SyntheticEvent<>,
-    pageIndex: number,
+    page: any,
     analyticsEvent: ?UIAnalyticsEvent,
   ) => void,
   /** Array of the pages to display */

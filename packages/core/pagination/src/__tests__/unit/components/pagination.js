@@ -19,10 +19,10 @@ describe(`${name} - Pagination component`, () => {
       );
       const pages = wrapper.find(Page);
 
-      expect(pages.get(1).props.isSelected).toBe(true);
+      expect(pages.get(2).props.isSelected).toBe(true);
       // rest of the pages
       expect(pages.get(0).props.isSelected).toBe(false);
-      expect(pages.get(0).props.isSelected).toBe(false);
+      expect(pages.get(1).props.isSelected).toBe(false);
     });
 
     it('should select the next page if defaultSelectedIndex is passed page', () => {
@@ -31,18 +31,18 @@ describe(`${name} - Pagination component`, () => {
       );
       let pages = wrapper.find(Page);
 
-      expect(pages.get(1).props.isSelected).toBe(true);
+      expect(pages.get(2).props.isSelected).toBe(true);
       // rest of the pages
       expect(pages.get(0).props.isSelected).toBe(false);
-      expect(pages.get(2).props.isSelected).toBe(false);
+      expect(pages.get(1).props.isSelected).toBe(false);
 
       const leftNavigator = wrapper.find(LeftNavigator);
       leftNavigator.simulate('click');
       pages = wrapper.find(Page);
 
-      expect(pages.get(0).props.isSelected).toBe(true);
+      expect(pages.get(1).props.isSelected).toBe(true);
       // rest of the pages
-      expect(pages.get(1).props.isSelected).toBe(false);
+      expect(pages.get(0).props.isSelected).toBe(false);
       expect(pages.get(2).props.isSelected).toBe(false);
     });
   });
@@ -52,18 +52,18 @@ describe(`${name} - Pagination component`, () => {
       const wrapper = mount(<Pagination pages={[1, 2, 3]} selectedIndex={1} />);
       let pages = wrapper.find(Page);
 
-      expect(pages.get(0).props.isSelected).toBe(true);
+      expect(pages.get(1).props.isSelected).toBe(true);
       // rest of the pages
-      expect(pages.get(1).props.isSelected).toBe(false);
+      expect(pages.get(0).props.isSelected).toBe(false);
       expect(pages.get(2).props.isSelected).toBe(false);
 
       //Update the selectedIndex
       wrapper.setProps({ selectedIndex: 2 });
       pages = wrapper.find(Page);
-      expect(pages.get(1).props.isSelected).toBe(true);
+      expect(pages.get(2).props.isSelected).toBe(true);
       // rest of the pages
       expect(pages.get(0).props.isSelected).toBe(false);
-      expect(pages.get(2).props.isSelected).toBe(false);
+      expect(pages.get(1).props.isSelected).toBe(false);
     });
   });
 

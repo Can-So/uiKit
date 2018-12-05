@@ -16,7 +16,7 @@ type Props = {
 export default class ManagedPagination extends Component<Props> {
   onChange = (
     event: SyntheticEvent<>,
-    newValue: number,
+    newValue: any,
     analyticsEvent: ?UIAnalyticsEvent,
   ) => {
     this.props.onChange(newValue, analyticsEvent);
@@ -25,9 +25,12 @@ export default class ManagedPagination extends Component<Props> {
   render() {
     const { total, value = 1, i18n } = this.props;
     const pages = [...Array(total)].map((_, index) => index + 1);
+    // Pagination accepts array now thus selectedIndex starts with 0
+    // So, we are substracting value by one thus not breaking dynamic table
+    const selectedIndex = value - 1;
     return (
       <Pagination
-        selectedIndex={value}
+        selectedIndex={selectedIndex}
         i18n={i18n}
         onChange={this.onChange}
         pages={pages}

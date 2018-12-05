@@ -22,19 +22,19 @@ const PAGES = [
 const Dashboard = () => (
   <div>
     <h1>Dashboard</h1>
-    <PaginationWithSelectPage pageSelected={1} />
+    <PaginationWithSelectPage pageSelected={0} />
   </div>
 );
 const About = () => (
   <div>
     <h1>About page</h1>
-    <PaginationWithSelectPage pageSelected={2} />
+    <PaginationWithSelectPage pageSelected={1} />
   </div>
 );
 const Contact = () => (
   <div>
     <h1>Contact page</h1>
-    <PaginationWithSelectPage pageSelected={3} />
+    <PaginationWithSelectPage pageSelected={2} />
   </div>
 );
 
@@ -53,9 +53,10 @@ function renderLink(pageType: string) {
       if (pageType === 'page') {
         href = page.href;
       } else if (pageType === 'previous') {
-        href = selectedIndex > 1 ? pages[selectedIndex - 2].href : '';
+        href = selectedIndex > 1 ? pages[selectedIndex - 1].href : '';
       } else {
-        href = selectedIndex < pages.length ? pages[selectedIndex].href : '';
+        href =
+          selectedIndex < pages.length - 1 ? pages[selectedIndex + 1].href : '';
       }
       // We need this styling on the navigator since when using icons as children we need extra padding
       if (pageType !== 'page') {

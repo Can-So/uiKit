@@ -28,7 +28,7 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
       next: 'next',
     },
     onChange: () => {},
-    defaultSelectedIndex: 1,
+    defaultSelectedIndex: 0,
     max: 7,
     collapseRange: collapseRangeHelper,
     innerStyles: {},
@@ -40,7 +40,7 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
 
   static getDerivedStateFromProps(props) {
     // selectedIndex is controlled
-    if (props.selectedIndex) {
+    if (props.selectedIndex != null) {
       return {
         selectedIndex: props.selectedIndex,
       };
@@ -76,7 +76,11 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
     }
     const analyticsEvent = this.onChangeAnalyticsCaller();
     if (this.props.onChange) {
-      this.props.onChange(event, newSelectedPage, analyticsEvent);
+      this.props.onChange(
+        event,
+        this.props.pages[newSelectedPage],
+        analyticsEvent,
+      );
     }
   };
 
@@ -84,17 +88,15 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
     const { selectedIndex } = this.state;
     const { components, getPageLabel } = this.props;
     return pages.map((page, index) => {
-      // array is 0 indexed but our pages start with 1
-      const pageIndex = index + 1;
       return (
         <PageComponent
-          key={`page-${getPageLabel ? getPageLabel(page, pageIndex) : index}`}
+          key={`page-${getPageLabel ? getPageLabel(page, index) : index}`}
           component={components.Page}
-          onClick={event => this.onChange(event, pageIndex)}
-          isSelected={selectedIndex === pageIndex}
+          onClick={event => this.onChange(event, index)}
+          isSelected={selectedIndex === index}
           page={page}
         >
-          {getPageLabel ? getPageLabel(page, pageIndex) : page}
+          {getPageLabel ? getPageLabel(page, index) : page}
         </PageComponent>
       );
     });
@@ -125,7 +127,7 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
         key="left-navigator"
         component={components.Previous}
         onClick={event => this.onChange(event, selectedIndex - 1)}
-        isDisabled={selectedIndex === 1}
+        isDisabled={selectedIndex === 0}
         {...props}
       />
     );
@@ -144,7 +146,7 @@ class Pagination extends Component<PaginationPropTypes, StateType> {
         key="right-navigator"
         component={components.Next}
         onClick={event => this.onChange(event, selectedIndex + 1)}
-        isDisabled={selectedIndex === pages.length}
+        isDisabled={selectedIndex === pages.length - 1}
         {...props}
       />
     );
