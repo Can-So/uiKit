@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import { FocusedTaskCloseAccount } from '../../components/FocusedTaskCloseAccount';
 
@@ -13,7 +13,9 @@ const defaultProps = {
   learnMoreLink: 'https://hello.atlassian.net',
 };
 
-const render = (props = {}) =>
+const render = (
+  props = {},
+): ShallowWrapper<{}, { currentScreenIdx: number }, FocusedTaskCloseAccount> =>
   shallow(<FocusedTaskCloseAccount {...defaultProps} {...props} />);
 
 test('isOpen snapshot', () => {

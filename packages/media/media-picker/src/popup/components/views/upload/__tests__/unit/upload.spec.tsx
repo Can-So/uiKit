@@ -272,6 +272,7 @@ describe('<StatelessUploadView />', () => {
           removeFileFromRecents,
         ),
       );
+      // @ts-ignore
       const deleteActionHandler = getDeleteActionHandler(component);
       const readyIds = Promise.all([
         upfrontId,
@@ -356,6 +357,7 @@ describe('<StatelessUploadView />', () => {
           removeFileFromRecents,
         ),
       );
+      // @ts-ignore
       const deleteActionHandler = getDeleteActionHandler(component);
 
       return { component, deleteActionHandler };

@@ -11,7 +11,11 @@ import { Observable } from 'rxjs';
 import Spinner from '@atlaskit/spinner';
 import Button from '@atlaskit/button';
 import { MediaItemType, Context } from '@atlaskit/media-core';
-import { ItemViewer, ItemViewerBase } from '../../../newgen/item-viewer';
+import {
+  ItemViewer,
+  ItemViewerBase,
+  State as ItemViewerBaseState,
+} from '../../../newgen/item-viewer';
 import { ErrorMessage } from '../../../newgen/error';
 import { ImageViewer } from '../../../newgen/viewers/image';
 import { VideoViewer } from '../../../newgen/viewers/video';
@@ -345,7 +349,9 @@ describe('<ItemViewer />', () => {
       el.setProps({ context, identifier: identifier2 });
       el.update();
 
-      expect(el.instance().state.item.status).toEqual('PENDING');
+      expect((el.instance().state as ItemViewerBaseState).item.status).toEqual(
+        'PENDING',
+      );
     });
   });
 
