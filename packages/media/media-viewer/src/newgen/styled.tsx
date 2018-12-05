@@ -295,17 +295,27 @@ export const RightHeader = styled.div`
   }
 `;
 
+export const CustomAudioPlayerWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+`;
+
 export const AudioPlayer = styled.div`
+  background-color: ${blanketColor};
   border-radius: ${akBorderRadius};
   align-items: center;
   justify-content: center;
   width: 400px;
-  height: 250px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
 `;
+
+AudioPlayer.displayName = 'AudioPlayer';
 
 export const Audio = styled.audio`
   width: 100%;
@@ -317,7 +327,8 @@ export const Audio = styled.audio`
 export const AudioCover = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: scale-down;
+  background-color: #000000;
 `;
 
 export const DefaultCoverWrapper = styled.div`

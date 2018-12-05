@@ -437,7 +437,7 @@
     "react-select": "^2.1.1",
     "react-syntax-highlighter": "^10.0.1",
     "react-transition-group": "^2.2.1",
-    "react-video-renderer": "^2.0.1",
+    "react-video-renderer": "^2.2.1",
     "react-virtualized": "^9.8.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",

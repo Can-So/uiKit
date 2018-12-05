@@ -1,0 +1,33 @@
+{
+  "releases": [
+    { "name": "@atlaskit/media-card", "type": "patch" },
+    { "name": "@atlaskit/media-ui", "type": "major" },
+    { "name": "@atlaskit/media-viewer", "type": "minor" }
+  ],
+  "dependents": [
+    {
+      "name": "@atlaskit/media-avatar-picker",
+      "type": "patch",
+      "dependencies": ["@atlaskit/media-test-helpers", "@atlaskit/media-ui"]
+    },
+    {
+      "name": "@atlaskit/media-picker",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/media-test-helpers",
+        "@atlaskit/media-card",
+        "@atlaskit/media-ui"
+      ]
+    },
+    {
+      "name": "@atlaskit/media-test-helpers",
+      "type": "patch",
+      "dependencies": ["@atlaskit/media-card", "@atlaskit/media-ui"]
+    },
+    {
+      "name": "@atlaskit/smart-card",
+      "type": "patch",
+      "dependencies": ["@atlaskit/media-ui"]
+    }
+  ]
+}
