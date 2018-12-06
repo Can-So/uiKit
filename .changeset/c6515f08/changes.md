@@ -1,0 +1,1 @@
+- ED-5771: fix rendering of full-width resized images
