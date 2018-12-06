@@ -197,7 +197,7 @@ export class JiraQuickSearchContainer extends React.Component<
       )
       .then(({ issues = [], boards = [], projects = [], filters = [] }) => ({
         objects: issues,
-        containers: [...boards, ...filters, ...projects],
+        containers: [...boards, ...projects, ...filters],
       }));
 
     return handlePromiseError(
