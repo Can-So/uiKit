@@ -1,13 +1,17 @@
 import styled from 'styled-components';
-
-const gutter = 4;
+import { gridSize } from '@atlaskit/theme';
 
 export default styled.div`
   display: inline-flex;
-  margin: 0 -${gutter / 2}px;
 `;
 
 export const GroupItem = styled.div`
   flex: 1 0 auto;
-  margin: 0 ${gutter / 2}px;
+
+  /* margins don't flip when the layout uses dir="rtl", whereas pseudos do */
+  & + &::before {
+    content: '';
+    display: inline-block;
+    width: ${gridSize() / 2}px;
+  }
 `;
