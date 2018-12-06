@@ -1,0 +1,1 @@
+- FS-3278 - Prevent overflow of status in a table cell.
