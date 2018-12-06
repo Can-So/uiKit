@@ -21,6 +21,7 @@ export const StatusContainer = styled.span`
 
   display: inline-block;
   border-radius: 5px;
+  max-width: 100%;
 
   /* Prevent responsive layouts increasing height of container by changing
      font size and therefore line-height. */
