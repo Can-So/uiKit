@@ -35,13 +35,21 @@ const demoDoc: Document = {
 
 export default class MockServiceProvider implements Provider {
   private documents: Map<string, Document> = new Map();
-
   constructor() {
     this.documents.set('demo-doc', demoDoc);
   }
 
   async getDocument(documentId: string): Promise<Document | null> {
     const document = this.documents.get(documentId);
+    if (!document) {
+      return null;
+    }
+
+    return document;
+  }
+
+  async getDocumentByObjectId(objectId: string): Promise<Document | null> {
+    const document = this.documents.get(objectId);
     if (!document) {
       return null;
     }

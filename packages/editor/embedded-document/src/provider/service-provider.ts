@@ -4,6 +4,14 @@ import { Document } from '../model';
 
 export interface Config extends ServiceConfig {}
 
+function queryBuilder(data: { [k: string]: string }): string {
+  return Object.keys(data)
+    .map(key => {
+      return [key, data[key]].map(encodeURIComponent).join('=');
+    })
+    .join('&');
+}
+
 export default class ServiceProvider implements Provider {
   private config: Config;
 
@@ -20,6 +28,33 @@ export default class ServiceProvider implements Provider {
         path: `document/${documentId}/${language || ''}`,
       });
       return document;
+    } catch (err) {
+      // tslint:disable-next-line:no-console
+      console.warn(`Failed to get document: ${JSON.stringify(err)}`);
+      return null;
+    }
+  }
+
+  async getDocumentByObjectId(
+    objectId: string,
+    language?: string,
+  ): Promise<Document | null> {
+    try {
+      const queryStrig = queryBuilder({
+        objectId,
+        ...(language ? { language } : {}),
+      });
+      const documents = await utils.requestService<Array<Document>>(
+        this.config,
+        {
+          path: `document?${queryStrig}`,
+        },
+      );
+      if (documents && documents.length) {
+        return documents[0].language![language || 'default']
+          .versions[0] as Document;
+      }
+      return null;
     } catch (err) {
       // tslint:disable-next-line:no-console
       console.warn(`Failed to get document: ${JSON.stringify(err)}`);
