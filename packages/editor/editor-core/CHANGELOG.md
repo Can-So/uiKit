@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.7
+- [patch] [f0398a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0398a5):
+
+  - Display media singles with video inside as inline video player
+
 ## 90.3.6
 - [patch] [a60d8cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a60d8cd):
 

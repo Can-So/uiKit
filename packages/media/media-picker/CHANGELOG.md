@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 25.0.5
+- [patch] [92a6240](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/92a6240):
+
+  - Picking video file will now send dimensions same way as image would
+
 ## 25.0.4
 - Updated dependencies [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
   - @atlaskit/media-test-helpers@18.5.2

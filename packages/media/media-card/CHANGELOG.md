@@ -1,5 +1,10 @@
 # @atlaskit/media-image
 
+## 44.1.2
+- [patch] [676257b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/676257b):
+
+  - Prepare/fix card to be displayed as video inline player in renderer/editor contexts
+
 ## 44.1.1
 - [patch] [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
 

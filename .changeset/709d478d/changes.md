@@ -1,1 +1,0 @@
-- Change impl. of CustomVideoPlayer; add disableThumbTooltip property to TimeRange component; Add ability to mouse click and drag right away to TimeRange even if clicked outside of thumb control;

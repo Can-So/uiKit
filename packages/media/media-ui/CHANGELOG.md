@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 8.1.0
+- [minor] [8fbb36f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8fbb36f):
+
+  - Change impl. of CustomVideoPlayer; add disableThumbTooltip property to TimeRange component; Add ability to mouse click and drag right away to TimeRange even if clicked outside of thumb control;
+
 ## 8.0.0
 - [major] [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
 

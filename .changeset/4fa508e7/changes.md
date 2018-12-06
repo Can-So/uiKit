@@ -1,1 +1,0 @@
-- Picking video file will now send dimensions same way as image would
