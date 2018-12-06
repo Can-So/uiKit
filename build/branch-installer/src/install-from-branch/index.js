@@ -1,55 +1,68 @@
 const fetch = require('node-fetch');
 const chalk = require('chalk');
 const spawndamnit = require('spawndamnit');
+const prettyjson = require('prettyjson');
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+const log = debug => {
+  if (debug) {
+    return message => {
+      if (typeof message === 'string') {
+        console.log(chalk.cyan(message));
+      } else {
+        console.log(prettyjson.render(message));
+      }
+    };
+  }
 
+  return () => {};
+};
+
+const CUSTOM_BUILD_DEPLOY_BRANCH_BUILD_DISTS_KEY = '-1200669939';
 const API_URL =
   'https://api.bitbucket.org/2.0/repositories/atlassian/atlaskit-mk-2';
 
+const fetchVerbose = async (url, { info }) => {
+  info(`Trying to fetch ${url}`);
+
+  let response = await fetch(url);
+  info(`HTTP Code ${response.status}`);
+  let result = await response.json();
+  info(result);
+
+  return result;
+};
+
 const getBuildStatus = async (
   hashCommit,
-  { maxAttemps = 1, timeout = 2000 },
+  { maxAttempts = 1, timeout = 2000, info },
 ) => {
-  const url = `${API_URL}/commit/${hashCommit}/statuses`;
+  info(`Get build status for ${hashCommit} commit`);
+  const url = `${API_URL}/commit/${hashCommit}/statuses/build/${CUSTOM_BUILD_DEPLOY_BRANCH_BUILD_DISTS_KEY}`;
 
-  let ready = false;
+  let buildStatus = false;
   let attempts = 1;
 
-  while (!ready && attempts <= maxAttemps) {
-    await fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        let result = Object.assign({}, { values: [] }, data);
-        const pipeline = result.values.filter(x => x.type === 'build')[0] || {};
+  while (buildStatus !== 'SUCCESSFUL' && attempts <= maxAttempts) {
+    const pipeline = await fetchVerbose(url, { info });
 
-        if (pipeline.state === 'SUCCESSFUL') {
-          ready = true;
-        }
+    buildStatus = (pipeline || {}).state;
+    attempts++;
 
-        attempts++;
-      });
-
-    if (!ready) {
+    if (buildStatus !== 'SUCCESSFUL' && maxAttempts > 1) {
       await sleep(timeout);
     }
   }
 
-  return ready;
+  return buildStatus;
 };
 
-const getCommitHash = branchName => {
+const getCommitHash = async (branchName, { info }) => {
+  info(`Get commit hash for ${branchName}`);
   const url = `${API_URL}/refs/branches/${branchName}`;
+  const response = await fetchVerbose(url, { info });
 
-  return fetch(url)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(jsonResponse) {
-      return jsonResponse.target.hash;
-    });
+  return response.target.hash;
 };
 
 const getCdnUrl = hash => {
@@ -57,12 +70,9 @@ const getCdnUrl = hash => {
   return `http://s3-ap-southeast-2.amazonaws.com/atlaskit-artefacts/${hash}/dists`;
 };
 
-const getManifest = hash => {
-  const url = `${getCdnUrl(hash)}/manifest.json`;
-
-  return fetch(url).then(function(response) {
-    return response.json();
-  });
+const getManifest = (cdnURL, { info }) => {
+  const url = `${cdnURL}/manifest.json`;
+  return fetchVerbose(url, { info });
 };
 
 const getPackagesVersionWithTarURL = (manifest, cdnURL) => {
@@ -74,20 +84,57 @@ const getPackagesVersionWithTarURL = (manifest, cdnURL) => {
   return packages;
 };
 
+const checkBuildStatus = buildStatus => {
+  if (!buildStatus) {
+    console.log(
+      chalk.black.bgRed(
+        'Build for deploy-branch-build-dists does not exist, you should run it on custom pipeline options',
+      ),
+    );
+    return false;
+  }
+
+  if (buildStatus === 'INPROGRESS') {
+    console.log(
+      chalk.red(
+        'Build for deploy-branch-build-dists is running, you need to wait until the build finish',
+      ),
+    );
+    return false;
+  }
+
+  if (buildStatus !== 'SUCCESSFUL') {
+    console.log(
+      chalk.black.bgRed.bold(
+        'Build for deploy-branch-build-dists is broken, please check it and try again later',
+      ),
+    );
+    return false;
+  }
+
+  return true;
+};
+
 const installFromBranch = async (branchName, options) => {
-  const hash = await getCommitHash(branchName);
-  const hasBuildFinished = await getBuildStatus(hash, {
-    timeout: options.timeout,
-    maxAttempts: options.maxAttempts,
+  const info = log(options.verbose);
+  const hash = await getCommitHash(branchName, {
+    info,
   });
 
-  if (!hasBuildFinished) {
-    console.log(chalk.red(`Build is not finished yet`));
+  const buildStatus = await getBuildStatus(hash, {
+    timeout: options.timeout,
+    maxAttempts: options.maxAttempts,
+    info,
+  });
+
+  if (!checkBuildStatus(buildStatus)) {
     process.exit(1);
   }
 
-  const manifest = await getManifest(hash);
   const cdnURL = getCdnUrl(hash);
+  const manifest = await getManifest(cdnURL, {
+    info,
+  });
   const packages = getPackagesVersionWithTarURL(manifest, cdnURL);
 
   const runner = options.bolt ? 'bolt' : 'yarn';

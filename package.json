@@ -381,6 +381,7 @@
     "polished": "1.9.3",
     "postis": "^2.2.0",
     "pretty-proptypes": "^0.4.1",
+    "prettyjson": "^1.2.1",
     "prismjs": "^1.6.0",
     "prop-types": "^15.5.10",
     "prosemirror-collab": "^1.0.0",
