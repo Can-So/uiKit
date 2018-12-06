@@ -20,7 +20,6 @@ export interface TimeRangeProps {
 }
 
 export interface TimeRangeState {
-  isHovering: boolean;
   isDragging: boolean;
   dragStartClientX: number; // clientX value at the beginning of a slider
 }
@@ -33,7 +32,6 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
 
   state: TimeRangeState = {
     isDragging: false,
-    isHovering: false,
     dragStartClientX: 0,
   };
 
@@ -140,12 +138,8 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
     }
   };
 
-  private setIsHovering = (isHovering: boolean) => () => {
-    this.setState({ isHovering });
-  };
-
   render() {
-    const { isDragging, isHovering } = this.state;
+    const { isDragging } = this.state;
     const {
       currentTime,
       duration,
@@ -158,20 +152,13 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
 
     return (
       <TimeRangeWrapper
+        showAsActive={isAlwaysActive}
         onMouseDown={this.onThumbMouseDown}
-        onMouseEnter={this.setIsHovering(true)}
-        onMouseLeave={this.setIsHovering(false)}
       >
-        <TimeLine
-          innerRef={this.saveWrapperElement}
-          showAsActive={isHovering || isAlwaysActive}
-        >
+        <TimeLine innerRef={this.saveWrapperElement}>
           <BufferedTime style={{ width: `${bufferedTimePercentage}%` }} />
           <CurrentTimeLine style={{ width: `${currentPosition}%` }}>
-            <Thumb
-              innerRef={this.saveThumbElement}
-              showAsActive={isHovering || isAlwaysActive}
-            >
+            <Thumb innerRef={this.saveThumbElement}>
               {disableThumbTooltip ? null : (
                 <CurrentTimeTooltip
                   draggable={false}

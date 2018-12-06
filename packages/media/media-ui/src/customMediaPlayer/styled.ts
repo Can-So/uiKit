@@ -8,6 +8,7 @@ export interface MutedIndicatorProps {
 export const CustomVideoWrapper = styled.div`
   width: 100%;
   height: 100%;
+  user-select: none;
 `;
 
 export const VideoWrapper = styled.div`
@@ -32,7 +33,6 @@ export const VolumeWrapper = styled.div`
   width: 35px;
   overflow: hidden;
   transition: width 0.3s;
-  transition-delay: 1s;
   align-items: center;
 
   &:hover,
@@ -59,12 +59,12 @@ interface WithAsActiveProps {
 
 export const TimeLine = styled.div`
   width: 100%;
-  ${({ showAsActive }: WithAsActiveProps) =>
-    showAsActive ? 'height: 4px;' : 'height: 2px;'};
+  height: 2px;
+  transition-delay: 1s;
+  transition: all 0.1s;
   background-color: #5d646f;
   border-radius: 5px;
   position: relative;
-  transition: all 0.1s;
 `;
 
 export const CurrentTimeLine = styled.div`
@@ -87,12 +87,9 @@ export const Thumb = styled.div`
   right: 0;
   top: 50%;
 
+  transform: translate(7px, -50%) scale(0);
   transition: all 0.1s;
-
-  ${({ showAsActive }: WithAsActiveProps) =>
-    showAsActive
-      ? 'transform: translate(7px, -50%) scale(1);'
-      : 'transform: scale(0);'};
+  transition-delay: 1s;
 
   &:hover .current-time-tooltip {
     opacity: 1;
@@ -188,6 +185,26 @@ export const TimeRangeWrapper = styled.div`
 
   cursor: pointer;
   width: 100%;
+
+  &:hover ${TimeLine} {
+    height: 4px;
+    transition: all 0.1s;
+  }
+
+  &:hover ${Thumb} {
+    transition: all 0.1s;
+    transform: translate(7px, -50%) scale(1);
+  }
+
+  ${TimeLine} {
+    transition-delay: 1s;
+    ${({ showAsActive }: WithAsActiveProps) =>
+      showAsActive ? 'height: 4px;' : ''}
+  }
+  ${Thumb} {
+    ${({ showAsActive }: WithAsActiveProps) =>
+      showAsActive ? 'transform: translate(7px, -50%) scale(1);' : ''}
+  }
 `;
 
 export const SpinnerWrapper = styled.div`
