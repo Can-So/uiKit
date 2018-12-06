@@ -1,5 +1,10 @@
 # @atlaskit/branch-installer
 
+## 0.0.8
+- [patch] [d972e00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d972e00):
+
+  - Improve verbose and check the custom build using a UID
+
 ## 0.0.7
 - [patch] [683b30c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/683b30c):
 

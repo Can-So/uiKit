@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/branch-installer",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Installs the AtlasKit dependency versions from the given branch.",
   "main": "index.js",
   "scripts": {
