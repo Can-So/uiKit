@@ -1,1 +1,0 @@
-- FS-3219 add optional label on clear indicator
