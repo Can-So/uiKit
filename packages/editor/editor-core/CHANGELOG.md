@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.5
+- [patch] [ef1df96](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef1df96):
+
+  - Remove unused deps
+
 ## 90.3.4
 - [patch] [3c2c367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3c2c367):
 
