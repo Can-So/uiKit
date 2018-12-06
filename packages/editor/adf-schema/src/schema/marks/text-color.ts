@@ -1,7 +1,7 @@
 import { Mark, MarkSpec } from 'prosemirror-model';
 import { colors } from '@atlaskit/theme';
 import { COLOR } from '../groups';
-import { rgbToHex } from '../../utils';
+import { rgbToHex } from '../../utils/colors';
 
 const {
   N90,

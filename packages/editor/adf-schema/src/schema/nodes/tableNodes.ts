@@ -1,13 +1,7 @@
 import { Node as PmNode } from 'prosemirror-model';
-import { colors } from '@atlaskit/theme';
-import { hexToRgba, isHex } from '../../utils';
 import {
-  akEditorTableCellBackgroundOpacity,
-  akEditorTableNumberColumnWidth,
-} from '../../styles';
-import { TableCellContent } from './doc';
-
-const {
+  hexToRgba,
+  isHex,
   N20,
   B50,
   T50,
@@ -23,7 +17,11 @@ const {
   P75,
   T75,
   Y75,
-} = colors;
+} from '../../utils/colors';
+import { TableCellContent } from './doc';
+
+const akEditorTableCellBackgroundOpacity = 0.5;
+const akEditorTableNumberColumnWidth = 42;
 
 const getCellAttrs = (dom: HTMLElement) => {
   const widthAttr = dom.getAttribute('data-colwidth');

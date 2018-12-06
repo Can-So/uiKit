@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { MentionUserType as UserType } from '@atlaskit/adf-schema';
 import { PureComponent } from 'react';
 import MentionWithProviders from './mention-with-providers';
-import { MentionUserType as UserType } from '../../schema';
 
 import { MentionEventHandlers } from '../EventHandlers';
 import { ProfilecardProvider } from './types';
