@@ -1,8 +1,7 @@
-import { md, code } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, code, Example, Props } from '@atlaskit/docs';
 
 export default md`
-  # MediaCore
-
   This package is required by other Media Components, and should not be used
   directly.
 
@@ -12,13 +11,7 @@ export default md`
   * providers
   * interfaces
 
-  ## Installation
-
-  ${code`
-yarn add @atlaskit/media-core
-  `}
-
-  ## Using the component
+  ## Usage
 
   \`Context\` is the main object that is created with \`ContextFactory\`. It can
   be created using either \`token\` and either \`clientId\` or \`asapIssuer\`.
@@ -40,4 +33,12 @@ const config: ContextConfig = {
 };
 const context: Context = ContextFactory.create(config);
   `}
+
+  ${(
+    <Example
+      Component={require('../examples/1-get-file').default}
+      title="Get File"
+      source={require('!!raw-loader!../examples/1-get-file')}
+    />
+  )}
 `;

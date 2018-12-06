@@ -119,24 +119,37 @@ export default class Example extends Component<ExampleProps, ExampleState> {
             value={token}
             onChange={this.onTokenChange}
           />
-          <FieldText
-            label="Client id"
-            placeholder="Client id..."
-            value={clientId}
-            onChange={this.onClientIdChange}
-          />
-          <FieldText
-            label="Service host"
-            placeholder="Service host..."
-            value={baseUrl}
-            onChange={this.onBaseUrlChange}
-          />
+          <div>
+            style=
+            {{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            >
+            <FieldText
+              label="Client id"
+              placeholder="Client id..."
+              value={clientId}
+              onChange={this.onClientIdChange}
+            />
+            <FieldText
+              label="Service host"
+              placeholder="Service host..."
+              value={baseUrl}
+              onChange={this.onBaseUrlChange}
+            />
+          </div>
         </div>
         <div
           style={{
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: 'space-between',
+            textAlign: 'center',
+            borderBottom: '1px solid #ccc',
+            padding: '10px',
+            margin: '10px auto',
+            width: '1000px',
           }}
         >
           <MediaImage
