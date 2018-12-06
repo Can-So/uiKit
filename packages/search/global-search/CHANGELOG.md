@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.13.4
+- [patch] [e6d6651](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6d6651):
+
+  - fix jira recent results ordering; filters should be after projects
+
 ## 5.13.3
 - [patch] [d498de7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d498de7):
 

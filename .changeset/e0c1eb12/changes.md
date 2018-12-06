@@ -1,1 +1,0 @@
-- fix jira recent results ordering; filters should be after projects
