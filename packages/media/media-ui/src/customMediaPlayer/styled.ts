@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
 
-const blanketColor = colors.DN30;
-
 export interface MutedIndicatorProps {
   isMuted: boolean;
 }
@@ -10,7 +8,6 @@ export interface MutedIndicatorProps {
 export const CustomVideoWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${blanketColor};
 `;
 
 export const VideoWrapper = styled.div`
@@ -25,7 +22,9 @@ export const TimebarWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   color: white;
-  margin: 0 13px 0 9px;
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
 `;
 
 export const VolumeWrapper = styled.div`
@@ -33,23 +32,25 @@ export const VolumeWrapper = styled.div`
   width: 35px;
   overflow: hidden;
   transition: width 0.3s;
+  transition-delay: 1s;
   align-items: center;
 
-  &:hover,
-  &:active {
+  &:hover {
     padding-right: 20px;
     width: 152px;
+    transition: width 0.3s ease-out;
   }
 `;
 
 export const TimeWrapper = styled.div`
   margin: 0 20px 10px 20px;
+  margin-bottom: 44px;
 `;
 
 export const CurrentTime = styled.div`
-  width: 90px;
   color: #a4b4cb;
   user-select: none;
+  margin-right: 10px;
 `;
 
 interface WithAsActiveProps {
@@ -107,19 +108,23 @@ export const BufferedTime = styled.div`
 
 export const LeftControls = styled.div`
   display: flex;
+  margin-left: 10px;
 `;
 
 export const RightControls = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 10px;
 `;
 
 export const ControlsWrapper = styled.div`
-  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 20px 0 20px 0;
+  height: auto;
+  background: linear-gradient(to top, #0e1624, rgba(14, 22, 36, 0));
+  position: absolute;
+  bottom: 0px;
 `;
 
 export const VolumeToggleWrapper = styled.div`

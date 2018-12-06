@@ -58,12 +58,10 @@ const extractSpecificAttributes = (
       };
     case 'board':
       return {
-        objectKey: 'Board',
         containerName: attributes.containerName,
       };
     case 'filter':
       return {
-        objectKey: 'Filter',
         containerName: attributes.ownerName,
       };
     case 'project':

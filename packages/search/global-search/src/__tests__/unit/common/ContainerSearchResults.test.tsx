@@ -139,7 +139,6 @@ const assertJiraAdvancedSearchGroup = (element: JSX.Element) => {
       query: 'query',
       showKeyboardLozenge: true,
       showSearchIcon: true,
-      onAdvancedSearchChange: expect.any(Function),
     },
   });
 };
@@ -390,7 +389,6 @@ describe('jira', () => {
         query: '',
         showKeyboardLozenge: false,
         showSearchIcon: true,
-        onAdvancedSearchChange: expect.any(Function),
       },
     });
   });

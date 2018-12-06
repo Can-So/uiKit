@@ -199,4 +199,14 @@ export const messages = defineMessages({
     defaultMessage: 'Ops Project',
     description: '',
   },
+  jira_result_type_board: {
+    id: 'global_search.jira.result_type.board',
+    defaultMessage: 'Board',
+    description: '',
+  },
+  jira_result_type_filter: {
+    id: 'global_search.jira.result_type.filter',
+    defaultMessage: 'Filter',
+    description: '',
+  },
 });

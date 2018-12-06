@@ -1,4 +1,4 @@
-jest.mock('../../customVideoPlayer/fullscreen');
+jest.mock('../../customMediaPlayer/fullscreen');
 import * as React from 'react';
 import { mount } from 'enzyme';
 import FullScreenIcon from '@atlaskit/icon/glyph/vid-full-screen-on';
@@ -7,17 +7,21 @@ import VidHdCircleIcon from '@atlaskit/icon/glyph/vid-hd-circle';
 import Button from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
 import { fakeIntl } from '@atlaskit/media-test-helpers';
-import { CustomVideo, CustomVideoProps } from '../../customVideoPlayer';
-import { toggleFullscreen } from '../../customVideoPlayer/fullscreen';
-import { TimeRange, TimeRangeProps } from '../../customVideoPlayer/timeRange';
-import { CurrentTime } from '../../customVideoPlayer/styled';
+import {
+  CustomMediaPlayer,
+  CustomMediaPlayerProps,
+} from '../../customMediaPlayer';
+import { toggleFullscreen } from '../../customMediaPlayer/fullscreen';
+import { TimeRange, TimeRangeProps } from '../../customMediaPlayer/timeRange';
+import { CurrentTime } from '../../customMediaPlayer/styled';
 import { Shortcut } from '../../';
 
-describe('<CustomVideo />', () => {
-  const setup = (props?: Partial<CustomVideoProps>) => {
+describe('<CustomMediaPlayer />', () => {
+  const setup = (props?: Partial<CustomMediaPlayerProps>) => {
     const onChange = jest.fn();
     const component = mount(
-      <CustomVideo
+      <CustomMediaPlayer
+        type="video"
         isAutoPlay={true}
         isHDAvailable={false}
         src="video-src"

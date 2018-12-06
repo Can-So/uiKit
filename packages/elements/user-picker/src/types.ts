@@ -23,6 +23,8 @@ export type UserPickerProps = {
   isDisabled?: boolean;
   /** Display a remove button on the single picker. True by default. */
   isClearable?: boolean;
+  /** Optional tooltip to display on hover over the clear indicator */
+  clearValueLabel?: string;
 };
 
 export type UserPickerState = {

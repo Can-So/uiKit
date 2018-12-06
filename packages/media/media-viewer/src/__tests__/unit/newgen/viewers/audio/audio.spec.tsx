@@ -1,15 +1,15 @@
-import * as util from '../../../../newgen/utils';
+import * as util from '../../../../../newgen/utils';
 const constructAuthTokenUrlSpy = jest.spyOn(util, 'constructAuthTokenUrl');
 
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { createContext } from '../../_stubs';
+import { createContext } from '../../../_stubs';
 import { Auth, ProcessedFileState } from '@atlaskit/media-core';
 import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
-import { AudioViewer } from '../../../../newgen/viewers/audio';
+import { AudioViewer } from '../../../../../newgen/viewers/audio';
 import Spinner from '@atlaskit/spinner';
-import { DefaultCoverWrapper, AudioCover } from '../../../../newgen/styled';
-import { ErrorMessage } from '../../../../newgen/error';
+import { DefaultCoverWrapper, AudioCover } from '../../../../../newgen/styled';
+import { ErrorMessage } from '../../../../../newgen/error';
 import Button from '@atlaskit/button';
 
 const token = 'some-token';
@@ -44,6 +44,7 @@ function createFixture(
   const context = createContext({ authPromise });
   const el = mountWithIntlContext(
     <AudioViewer
+      featureFlags={{ customVideoPlayer: true }}
       context={context}
       item={item || audioItem}
       collectionName={collectionName}

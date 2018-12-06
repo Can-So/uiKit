@@ -1,12 +1,13 @@
 {
   "name": "@atlaskit/branch-installer",
-  "version": "0.0.2",
-  "description": "TODO: FILL IN",
-  "main": "dist/index.js",
-  "module": "dist/esm/index.js",
-  "atlaskit:src": "src/index.js",
+  "version": "0.0.7",
+  "description": "Installs the AtlasKit dependency versions from the given branch.",
+  "main": "index.js",
   "scripts": {
     "test": "jest"
+  },
+  "bin": {
+    "atlaskit-branch-installer": "index.js"
   },
   "author": "Atlassian Pty Ltd",
   "maintainers": [
@@ -15,7 +16,8 @@
     "Rodrigo V"
   ],
   "files": [
-    "dist"
+    "src",
+    "index.js"
   ],
   "license": "Apache-2.0",
   "devDependencies": {},

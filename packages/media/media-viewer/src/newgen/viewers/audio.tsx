@@ -2,23 +2,29 @@ import * as React from 'react';
 import { ProcessedFileState, Context } from '@atlaskit/media-core';
 import AudioIcon from '@atlaskit/icon/glyph/media-services/audio';
 import { constructAuthTokenUrl } from '../utils';
-import { Outcome } from '../domain';
+import { Outcome, MediaViewerFeatureFlags } from '../domain';
 import {
   AudioPlayer,
   AudioCover,
   Audio,
   DefaultCoverWrapper,
   blanketColor,
+  CustomAudioPlayerWrapper,
 } from '../styled';
 import { createError, MediaViewerError } from '../error';
 import { getArtifactUrl } from '@atlaskit/media-store';
 import { BaseState, BaseViewer } from './base-viewer';
+import { isIE } from '../utils/isIE';
+import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import { getFeatureFlag } from '../utils/getFeatureFlag';
 
 export type Props = Readonly<{
   item: ProcessedFileState;
   context: Context;
   collectionName?: string;
   previewCount: number;
+  featureFlags?: MediaViewerFeatureFlags;
+  showControls?: () => void;
 }>;
 
 export type State = BaseState<string> & {
@@ -65,17 +71,37 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
   };
 
   protected renderSuccessful(src: string) {
-    const { previewCount } = this.props;
-    return (
+    const { showControls, previewCount, featureFlags } = this.props;
+
+    const useCustomAudioPlayer =
+      !isIE() && getFeatureFlag('customVideoPlayer', featureFlags);
+    const isAutoPlay = previewCount === 0;
+
+    return useCustomAudioPlayer ? (
       <AudioPlayer>
         {this.renderCover()}
-        <Audio
-          autoPlay={previewCount === 0}
-          controls
-          innerRef={this.saveAudioElement}
-          src={src}
-          preload="metadata"
-        />
+        <CustomAudioPlayerWrapper>
+          <CustomMediaPlayer
+            type="audio"
+            isAutoPlay={isAutoPlay}
+            src={src}
+            isShortcutEnabled={true}
+            showControls={showControls}
+          />
+        </CustomAudioPlayerWrapper>
+      </AudioPlayer>
+    ) : (
+      <AudioPlayer>
+        {this.renderCover()}
+        <CustomAudioPlayerWrapper>
+          <Audio
+            autoPlay={isAutoPlay}
+            controls
+            innerRef={this.saveAudioElement}
+            src={src}
+            preload="metadata"
+          />
+        </CustomAudioPlayerWrapper>
       </AudioPlayer>
     );
   }
