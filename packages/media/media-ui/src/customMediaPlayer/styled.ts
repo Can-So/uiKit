@@ -35,9 +35,9 @@ export const VolumeWrapper = styled.div`
   transition-delay: 1s;
   align-items: center;
 
-  &:hover {
-    padding-right: 20px;
-    width: 152px;
+  &:hover,
+  &:active {
+    width: 159px;
     transition: width 0.3s ease-out;
   }
 `;
@@ -124,7 +124,6 @@ export const ControlsWrapper = styled.div`
   height: auto;
   background: linear-gradient(to top, #0e1624, rgba(14, 22, 36, 0));
   position: absolute;
-  bottom: 0px;
 `;
 
 export const VolumeToggleWrapper = styled.div`
@@ -139,7 +138,8 @@ export const VolumeToggleWrapper = styled.div`
 `;
 
 export const VolumeTimeRangeWrapper = styled.div`
-  width: 100px;
+  width: 100%;
+  margin-right: 20px;
 `;
 
 export const MutedIndicator = styled.div`
