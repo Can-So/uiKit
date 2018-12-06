@@ -121,14 +121,11 @@ const installFromBranch = async (branchName, options) => {
     info,
   });
 
-  const buildStatus = await getBuildStatus(
-    '15f66294775783083884b62c63b10a80a0957ca3',
-    {
-      timeout: options.timeout,
-      maxAttempts: options.maxAttempts,
-      info,
-    },
-  );
+  const buildStatus = await getBuildStatus(hash, {
+    timeout: options.timeout,
+    maxAttempts: options.maxAttempts,
+    info,
+  });
 
   if (!checkBuildStatus(buildStatus)) {
     process.exit(1);
