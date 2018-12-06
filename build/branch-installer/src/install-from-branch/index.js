@@ -116,6 +116,10 @@ const checkBuildStatus = buildStatus => {
 };
 
 const installFromBranch = async (branchName, options) => {
+  if (!branchName) {
+    process.exit(1);
+  }
+
   const info = log(options.verbose);
   const hash = await getCommitHash(branchName, {
     info,
