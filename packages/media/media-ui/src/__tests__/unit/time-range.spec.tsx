@@ -65,7 +65,7 @@ describe('<TimeRange />', () => {
     const { component, onChange } = setup();
 
     (component as any).instance()['wrapperElementWidth'] = 100;
-    component.find(TimeRangeWrapper).simulate('click', {
+    component.find(TimeRangeWrapper).simulate('mouseDown', {
       target: {},
       nativeEvent: {
         offsetX: 5,
@@ -74,5 +74,13 @@ describe('<TimeRange />', () => {
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).lastCalledWith(1);
+  });
+
+  it('should not display tooltip on top of thumb when flag disableThumbTooltip is set', () => {
+    const { component } = setup({
+      disableThumbTooltip: true,
+    });
+
+    expect(component.find(CurrentTimeTooltip)).toHaveLength(0);
   });
 });

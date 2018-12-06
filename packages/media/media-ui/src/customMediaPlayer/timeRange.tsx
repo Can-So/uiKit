@@ -15,10 +15,13 @@ export interface TimeRangeProps {
   bufferedTime: number;
   duration: number;
   onChange: (newTime: number) => void;
+  disableThumbTooltip: boolean;
+  isAlwaysActive: boolean;
 }
 
 export interface TimeRangeState {
   isDragging: boolean;
+  dragStartClientX: number; // clientX value at the beginning of a slider
 }
 
 export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
@@ -29,11 +32,15 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
 
   state: TimeRangeState = {
     isDragging: false,
+    dragStartClientX: 0,
+  };
+
+  static defaultProps: Partial<TimeRangeProps> = {
+    disableThumbTooltip: false,
+    isAlwaysActive: false,
   };
 
   componentDidMount() {
-    document.addEventListener('mousemove', this.onMouseMove);
-    document.addEventListener('mouseup', this.onMouseUp);
     window.addEventListener('resize', this.setWrapperWidth);
   }
 
@@ -52,48 +59,69 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
   };
 
   onMouseMove = (e: MouseEvent) => {
-    const { isDragging } = this.state;
+    const { isDragging, dragStartClientX } = this.state;
     if (!isDragging) {
       return;
     }
     e.stopPropagation();
 
-    const { currentTime, onChange, duration } = this.props;
-    const { movementX } = e;
-    const movementPercentage =
-      (Math.abs(movementX) * duration) / this.wrapperElementWidth;
-    const newTime =
-      currentTime + (movementX > 0 ? movementPercentage : -movementPercentage);
-    const newTimeWithBoundaries = Math.min(Math.max(newTime, 0), duration);
+    const { onChange, duration, currentTime } = this.props;
+    const { clientX } = e;
 
-    onChange(newTimeWithBoundaries);
+    let absolutePosition = clientX - dragStartClientX;
+
+    const isOutsideToRight = absolutePosition > this.wrapperElementWidth;
+    const isOutsideToLeft = absolutePosition < 0;
+
+    // Next to conditions take care of situation where user moves mouse very quickly out to the side
+    // left or right. It's very easy to leave thumb not at the end/beginning of a timeline.
+    // This will guarantee that in this case thumb will move to appropriate extreme.
+    if (isOutsideToRight) {
+      absolutePosition = this.wrapperElementWidth;
+    }
+    if (isOutsideToLeft) {
+      absolutePosition = 0;
+    }
+
+    const newTimeWithBoundaries =
+      (absolutePosition * duration) / this.wrapperElementWidth;
+
+    if (currentTime !== newTimeWithBoundaries) {
+      // If value hasn't changed we don't want to call "change"
+      onChange(newTimeWithBoundaries);
+    }
   };
 
-  onMouseUp = (e: MouseEvent) => {
-    e.stopPropagation();
-
+  onMouseUp = () => {
+    // As soon as user finished dragging, we should clean up events.
+    document.removeEventListener('mouseup', this.onMouseUp);
+    document.removeEventListener('mousemove', this.onMouseMove);
     this.setState({
       isDragging: false,
     });
   };
 
-  onThumbMouseDown = () => {
-    this.setState({
-      isDragging: true,
-    });
-  };
+  onThumbMouseDown = (e: React.SyntheticEvent<HTMLDivElement>) => {
+    // We need to recalculate every time, because width can change (thanks, editor ;-)
+    this.setWrapperWidth();
 
-  onNavigate = (e: React.SyntheticEvent<HTMLDivElement>) => {
-    // We don't want to navigate if the event was starting with a drag
-    if (e.target === this.thumbElement) {
-      return;
-    }
+    // We are implementing drag and drop here. There is no reason to start listening for mouseUp or move
+    // before that. Also if we start listening for mouseup before that we could pick up someone else's event
+    // For example editors resizing of a inline video player.
+    document.addEventListener('mouseup', this.onMouseUp);
+    document.addEventListener('mousemove', this.onMouseMove);
 
     const { duration, onChange } = this.props;
     const event = e.nativeEvent as MouseEvent;
     const x = event.offsetX;
     const currentTime = (x * duration) / this.wrapperElementWidth;
 
+    this.setState({
+      isDragging: true,
+      dragStartClientX: event.clientX - x,
+    });
+
+    // As soon as user clicks timeline we want to move thumb over to that place.
     onChange(currentTime);
   };
 
@@ -112,26 +140,34 @@ export class TimeRange extends Component<TimeRangeProps, TimeRangeState> {
 
   render() {
     const { isDragging } = this.state;
-    const { currentTime, duration, bufferedTime } = this.props;
+    const {
+      currentTime,
+      duration,
+      bufferedTime,
+      disableThumbTooltip,
+      isAlwaysActive,
+    } = this.props;
     const currentPosition = (currentTime * 100) / duration;
     const bufferedTimePercentage = (bufferedTime * 100) / duration;
 
     return (
-      <TimeRangeWrapper onClick={this.onNavigate}>
-        <TimeLine className="timeline" innerRef={this.saveWrapperElement}>
+      <TimeRangeWrapper
+        showAsActive={isAlwaysActive}
+        onMouseDown={this.onThumbMouseDown}
+      >
+        <TimeLine innerRef={this.saveWrapperElement}>
           <BufferedTime style={{ width: `${bufferedTimePercentage}%` }} />
           <CurrentTimeLine style={{ width: `${currentPosition}%` }}>
-            <Thumb
-              innerRef={this.saveThumbElement}
-              onMouseDown={this.onThumbMouseDown}
-              className="time-range-thumb"
-            >
-              <CurrentTimeTooltip
-                isDragging={isDragging}
-                className="current-time-tooltip"
-              >
-                {formatDuration(currentTime)}
-              </CurrentTimeTooltip>
+            <Thumb innerRef={this.saveThumbElement}>
+              {disableThumbTooltip ? null : (
+                <CurrentTimeTooltip
+                  draggable={false}
+                  isDragging={isDragging}
+                  className="current-time-tooltip"
+                >
+                  {formatDuration(currentTime)}
+                </CurrentTimeTooltip>
+              )}
             </Thumb>
           </CurrentTimeLine>
         </TimeLine>

@@ -8,6 +8,7 @@ export interface MutedIndicatorProps {
 export const CustomVideoWrapper = styled.div`
   width: 100%;
   height: 100%;
+  user-select: none;
 `;
 
 export const VideoWrapper = styled.div`
@@ -32,24 +33,12 @@ export const VolumeWrapper = styled.div`
   width: 35px;
   overflow: hidden;
   transition: width 0.3s;
-  transition-delay: 1s;
   align-items: center;
 
-  &:hover {
-    width: 152px;
-    transition: width 0.3s ease-out;
-  }
-
+  &:hover,
   &:active {
-    width: 152px;
+    width: 159px;
     transition: width 0.3s ease-out;
-  }
-
-  input {
-    transform: translateX(13px);
-    height: 16px;
-    cursor: pointer;
-    margin-right: 20px;
   }
 `;
 
@@ -64,13 +53,18 @@ export const CurrentTime = styled.div`
   margin-right: 10px;
 `;
 
+interface WithAsActiveProps {
+  showAsActive: boolean;
+}
+
 export const TimeLine = styled.div`
   width: 100%;
   height: 2px;
+  transition-delay: 1s;
+  transition: all 0.1s;
   background-color: #5d646f;
   border-radius: 5px;
   position: relative;
-  transition: all 0.1s;
 `;
 
 export const CurrentTimeLine = styled.div`
@@ -83,6 +77,7 @@ export const CurrentTimeLine = styled.div`
 `;
 
 export const Thumb = styled.div`
+  pointer-events: none;
   width: 14px;
   height: 14px;
   border-radius: 100%;
@@ -91,8 +86,10 @@ export const Thumb = styled.div`
   position: absolute;
   right: 0;
   top: 50%;
+
   transform: translate(7px, -50%) scale(0);
   transition: all 0.1s;
+  transition-delay: 1s;
 
   &:hover .current-time-tooltip {
     opacity: 1;
@@ -124,17 +121,22 @@ export const ControlsWrapper = styled.div`
   height: auto;
   background: linear-gradient(to top, #0e1624, rgba(14, 22, 36, 0));
   position: absolute;
-  bottom: 0px;
 `;
 
 export const VolumeToggleWrapper = styled.div`
   position: relative;
+  margin-right: 13px;
 
   button {
     width: 36px;
     color: ${({ isMuted }: MutedIndicatorProps) =>
       isMuted ? `${colors.R300} !important;` : ''};
   }
+`;
+
+export const VolumeTimeRangeWrapper = styled.div`
+  width: 100%;
+  margin-right: 20px;
 `;
 
 export const MutedIndicator = styled.div`
@@ -177,18 +179,31 @@ export const CurrentTimeTooltip = styled.div`
 `;
 
 export const TimeRangeWrapper = styled.div`
-  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  height: 22px;
+
   cursor: pointer;
+  width: 100%;
 
-  &:hover {
-    .timeline {
-      height: 4px;
-      transform: translateY(2px);
-    }
+  &:hover ${TimeLine} {
+    height: 4px;
+    transition: all 0.1s;
+  }
 
-    .time-range-thumb {
-      transform: translate(7px, -50%) scale(1);
-    }
+  &:hover ${Thumb} {
+    transition: all 0.1s;
+    transform: translate(7px, -50%) scale(1);
+  }
+
+  ${TimeLine} {
+    transition-delay: 1s;
+    ${({ showAsActive }: WithAsActiveProps) =>
+      showAsActive ? 'height: 4px;' : ''}
+  }
+  ${Thumb} {
+    ${({ showAsActive }: WithAsActiveProps) =>
+      showAsActive ? 'transform: translate(7px, -50%) scale(1);' : ''}
   }
 `;
 

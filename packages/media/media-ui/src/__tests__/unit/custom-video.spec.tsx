@@ -6,14 +6,13 @@ import VidPlayIcon from '@atlaskit/icon/glyph/vid-play';
 import VidHdCircleIcon from '@atlaskit/icon/glyph/vid-hd-circle';
 import Button from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
-import FieldRange from '@atlaskit/field-range';
 import { fakeIntl } from '@atlaskit/media-test-helpers';
 import {
   CustomMediaPlayer,
   CustomMediaPlayerProps,
 } from '../../customMediaPlayer';
 import { toggleFullscreen } from '../../customMediaPlayer/fullscreen';
-import { TimeRange } from '../../customMediaPlayer/timeRange';
+import { TimeRange, TimeRangeProps } from '../../customMediaPlayer/timeRange';
 import { CurrentTime } from '../../customMediaPlayer/styled';
 import { Shortcut } from '../../';
 
@@ -54,16 +53,29 @@ describe('<CustomMediaPlayer />', () => {
     it('should render a time range with the time properties', () => {
       const { component } = setup();
 
-      expect(component.find(TimeRange)).toHaveLength(1);
-      expect(component.find(TimeRange).prop('currentTime')).toEqual(0);
-      expect(component.find(TimeRange).prop('duration')).toEqual(0);
-      expect(component.find(TimeRange).prop('bufferedTime')).toEqual(0);
+      expect(component.find(TimeRange).length).toBeGreaterThan(1);
+      const expectedProps: Partial<TimeRangeProps> = {
+        currentTime: 0,
+        duration: 0,
+        bufferedTime: 0,
+      };
+      expect(
+        component
+          .find(TimeRange)
+          .at(0)
+          .props(),
+      ).toEqual(expect.objectContaining(expectedProps));
     });
 
     it('should render the volume controls', () => {
       const { component } = setup();
 
-      expect(component.find(FieldRange).prop('value')).toEqual(1);
+      expect(
+        component
+          .find(TimeRange)
+          .at(1)
+          .prop('currentTime'),
+      ).toEqual(1);
     });
 
     it('should render the time (current/total) in the right format', () => {
@@ -160,7 +172,12 @@ describe('<CustomMediaPlayer />', () => {
           buffered: [],
         },
       });
-      expect(component.find(TimeRange).prop('currentTime')).toEqual(10);
+      expect(
+        component
+          .find(TimeRange)
+          .at(0)
+          .prop('currentTime'),
+      ).toEqual(10);
     });
 
     it('should update buffered time when it changes', () => {
@@ -175,10 +192,15 @@ describe('<CustomMediaPlayer />', () => {
           },
         },
       });
-      expect(component.find(TimeRange).prop('bufferedTime')).toEqual(10);
+      expect(
+        component
+          .find(TimeRange)
+          .at(0)
+          .prop('bufferedTime'),
+      ).toEqual(10);
     });
 
-    it('should update FieldRange when volume changes', () => {
+    it("should update Volume's TimeRange when volume changes", () => {
       const { component } = setup();
 
       component.find('video').simulate('volumeChange', {
@@ -186,7 +208,12 @@ describe('<CustomMediaPlayer />', () => {
           volume: 0.3,
         },
       });
-      expect(component.find(FieldRange).prop('value')).toEqual(0.3);
+      expect(
+        component
+          .find(TimeRange)
+          .at(1)
+          .prop('currentTime'),
+      ).toEqual(0.3);
     });
   });
 

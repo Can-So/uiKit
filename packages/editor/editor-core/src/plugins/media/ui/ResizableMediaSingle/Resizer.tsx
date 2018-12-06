@@ -43,7 +43,7 @@ export default class Resizer extends React.Component<
     isResizing: false,
   };
 
-  handleResizeStart = (e, dir) => {
+  handleResizeStart = () => {
     this.setState({ isResizing: true }, () => {
       this.props.displayGrid(
         true,
