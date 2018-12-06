@@ -138,7 +138,7 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
         resizeMode={resizeMode}
         isLazy={rendererAppearance === 'mobile' ? false : true}
         disableOverlay={disableOverlay}
-        useInlinePlayer={true}
+        useInlinePlayer={false}
       />
     );
   }
