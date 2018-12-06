@@ -1,1 +1,0 @@
-- FS-3269 - Ensure status attributes are read even if in mark

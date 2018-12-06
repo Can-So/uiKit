@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.8
+- [patch] [7fdfac1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7fdfac1):
+
+  - FS-3269 - Ensure status attributes are read even if in mark
+
 ## 90.3.7
 - [patch] [f0398a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0398a5):
 
