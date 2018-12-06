@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.6
+- [patch] [a60d8cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a60d8cd):
+
+  - FS-3278 - Prevent overflow of status in a table cell.
+
 ## 90.3.5
 - [patch] [ef1df96](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef1df96):
 
