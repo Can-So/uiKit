@@ -68,7 +68,7 @@ export default class MediaSingleNode extends Component<
       this.props.lineLength !== nextProps.lineLength ||
       this.props.getPos !== nextProps.getPos ||
       this.mediaChildHasUpdated(nextProps) ||
-      this.hasMediaStateUpdated()
+      this.hasMediaStateUpdated(nextProps)
     ) {
       return true;
     }
@@ -80,7 +80,9 @@ export default class MediaSingleNode extends Component<
     if (this.props.selected()) {
       this.mediaPluginState.updateLayout(layout);
     }
-    this.setState({ lastMediaStatus: this.getMediaNodeStatus() });
+    this.setState({
+      lastMediaStatus: this.getMediaNodeStatus(this.props.node.firstChild),
+    });
   }
 
   private onExternalImageLoaded = ({ width, height }) => {
@@ -95,8 +97,7 @@ export default class MediaSingleNode extends Component<
     );
   };
 
-  private getMediaNodeStatus = () => {
-    const childNode = this.props.node.firstChild;
+  private getMediaNodeStatus = (childNode?: PMNode | null) => {
     if (childNode) {
       const state = this.mediaPluginState.getMediaNodeState(
         childNode.attrs.__key,
@@ -106,8 +107,11 @@ export default class MediaSingleNode extends Component<
     return undefined;
   };
 
-  private hasMediaStateUpdated = () => {
-    return this.getMediaNodeStatus() !== this.state.lastMediaStatus;
+  private hasMediaStateUpdated = (nextProps: MediaSingleNodeProps) => {
+    return (
+      this.getMediaNodeStatus(nextProps.node.firstChild) !==
+      this.state.lastMediaStatus
+    );
   };
 
   private mediaChildHasUpdated = nextProps => {
