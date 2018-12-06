@@ -15,7 +15,7 @@ import {
 import { colors } from '@atlaskit/theme';
 import ChevronLeft from '@atlaskit/icon/glyph/chevron-left';
 import ChevronRight from '@atlaskit/icon/glyph/chevron-right';
-import MenuIcon from '@atlaskit/icon/glyph/menu';
+import MenuExpandIcon from '@atlaskit/icon/glyph/menu-expand';
 import Tooltip from '@atlaskit/tooltip';
 
 import { navigationExpandedCollapsed } from '../../../common/analytics';
@@ -425,7 +425,7 @@ class ResizeControl extends PureComponent<Props, State> {
 
     // the button shouldn't "flip" until the drag is complete
     let ButtonIcon = ChevronLeft;
-    if (isCollapsed || (didDragOpen && isDragging)) ButtonIcon = MenuIcon;
+    if (isCollapsed || (didDragOpen && isDragging)) ButtonIcon = MenuExpandIcon;
     if (isCollapsed && flyoutIsOpen) ButtonIcon = ChevronRight;
 
     const button = (
