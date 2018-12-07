@@ -7,6 +7,7 @@ export default styled.div`
 
 export const GroupItem = styled.div`
   flex: 1 0 auto;
+  display: flex;
 
   /* margins don't flip when the layout uses dir="rtl", whereas pseudos do */
   & + &::before {
