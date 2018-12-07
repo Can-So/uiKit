@@ -34,6 +34,7 @@
     "@atlaskit/theme": "^7.0.0",
     "@atlaskit/util-data-test": "^10.0.21",
     "@types/prosemirror-model": "^1.5.0",
-    "chai-as-promised": "^6.0.0"
+    "chai-as-promised": "^6.0.0",
+    "pretty-data": "^0.40.0"
   }
 }

@@ -233,6 +233,7 @@ export class UserPicker extends React.Component<
       placeholder,
       isClearable,
       isDisabled,
+      clearValueLabel,
     } = this.props;
     const {
       users: usersFromState,
@@ -277,6 +278,7 @@ export class UserPicker extends React.Component<
         isFocused={menuIsOpen}
         backspaceRemovesValue={isMulti}
         filterOption={this.filterOption}
+        clearValueLabel={clearValueLabel}
       />
     );
   }

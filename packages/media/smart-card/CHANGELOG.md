@@ -1,5 +1,9 @@
 # @atlaskit/smart-card
 
+## 9.0.3
+- Updated dependencies [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+  - @atlaskit/media-ui@8.0.0
+
 ## 9.0.2
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3

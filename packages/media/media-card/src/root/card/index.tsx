@@ -32,6 +32,8 @@ import { getCardStatus } from './getCardStatus';
 import { InlinePlayer } from '../inlinePlayer';
 
 export class Card extends Component<CardProps, CardState> {
+  private hasBeenMounted: boolean = false;
+
   subscription?: Subscription;
   static defaultProps: Partial<CardProps> = {
     appearance: 'auto',
@@ -49,7 +51,7 @@ export class Card extends Component<CardProps, CardState> {
 
   componentDidMount() {
     const { identifier, context } = this.props;
-
+    this.hasBeenMounted = true;
     this.subscribe(identifier, context);
   }
 
@@ -84,6 +86,7 @@ export class Card extends Component<CardProps, CardState> {
   componentWillUnmount() {
     this.unsubscribe();
     this.releaseDataURI();
+    this.hasBeenMounted = false;
   }
 
   releaseDataURI = () => {
@@ -215,7 +218,9 @@ export class Card extends Component<CardProps, CardState> {
                   });
                   const dataURI = URL.createObjectURL(blob);
                   this.releaseDataURI();
-                  this.setState({ dataURI });
+                  if (this.hasBeenMounted) {
+                    this.setState({ dataURI });
+                  }
                 } catch (e) {
                   // We don't want to set status=error if the preview fails, we still want to display the metadata
                 }
@@ -307,7 +312,6 @@ export class Card extends Component<CardProps, CardState> {
 
   renderInlinePlayer = () => {
     const { identifier, context, dimensions } = this.props;
-
     return (
       <InlinePlayer
         context={context}

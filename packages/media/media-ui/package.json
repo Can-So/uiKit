@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/media-ui",
-  "version": "7.11.0",
+  "version": "8.1.0",
   "description": "Includes common components and utilities used by other media packages",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -32,7 +32,6 @@
     "@atlaskit/badge": "^9.2.1",
     "@atlaskit/button": "^10.0.4",
     "@atlaskit/dropdown-menu": "^6.1.24",
-    "@atlaskit/field-range": "^5.0.11",
     "@atlaskit/field-text": "^7.0.16",
     "@atlaskit/icon": "^15.0.1",
     "@atlaskit/lozenge": "^6.2.3",
@@ -49,7 +48,7 @@
     "png-chunks-extract": "^1.0.0",
     "react-render-image": "^1.1.2",
     "react-transition-group": "^2.2.1",
-    "react-video-renderer": "^2.0.1",
+    "react-video-renderer": "^2.2.1",
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
@@ -62,7 +61,7 @@
     "@atlaskit/checkbox": "^5.0.8",
     "@atlaskit/docs": "^5.2.3",
     "@atlaskit/i18n-tools": "^0.4.0",
-    "@atlaskit/media-test-helpers": "^18.5.0",
+    "@atlaskit/media-test-helpers": "^18.5.2",
     "@types/enzyme": "^3.1.15",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
