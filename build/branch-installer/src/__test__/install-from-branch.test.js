@@ -2,7 +2,11 @@ const fetchMock = require('fetch-mock').sandbox();
 jest.setMock('node-fetch', fetchMock);
 
 const installFromBranch = require('../install-from-branch');
-const { getCommitHash, getBuildStatus } = require('../install-from-branch');
+const {
+  getCommitHash,
+  getBuildStatus,
+  checkBuildStatus,
+} = require('../install-from-branch');
 
 describe('install-from-branch', () => {
   let stubExit;
@@ -39,6 +43,20 @@ describe('install-from-branch', () => {
 
       expect(result).toBe('SUCCESSFUL');
       done();
+    });
+  });
+
+  describe('#checkBuildStatus', () => {
+    it('should returns true for SUCCESSFUL status', () => {
+      const result = checkBuildStatus('SUCCESSFUL');
+
+      expect(result).toBeTruthy();
+    });
+
+    it('should returns false for any other status', () => {
+      const result = checkBuildStatus('OTHER');
+
+      expect(result).toBeFalsy();
     });
   });
 });

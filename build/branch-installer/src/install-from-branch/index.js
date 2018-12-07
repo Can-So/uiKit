@@ -159,3 +159,4 @@ const installFromBranch = async (branchName, options = {}) => {
 module.exports = installFromBranch;
 module.exports.getCommitHash = getCommitHash;
 module.exports.getBuildStatus = getBuildStatus;
+module.exports.checkBuildStatus = checkBuildStatus;
