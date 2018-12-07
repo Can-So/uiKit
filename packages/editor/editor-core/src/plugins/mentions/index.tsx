@@ -135,7 +135,6 @@ const mentionsPlugin = (
 
           return mentions.map(mention => ({
             title: mention.id,
-            keywords: [mention.mentionName, mention.nickname],
             render: ({ isSelected, onClick, onMouseMove }) => (
               <MentionItem
                 mention={mention}
