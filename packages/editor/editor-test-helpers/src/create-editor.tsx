@@ -53,7 +53,6 @@ export default function createEditorForTests<T = any>({
   pluginKey,
   createAnalyticsEvent,
 }: Options): EditorInstance & {
-  unmount: () => void;
   portalProviderAPI: PortalProviderAPI;
   refs: Refs;
   sel: number;
@@ -139,14 +138,13 @@ export default function createEditorForTests<T = any>({
     pluginState = pluginKey.getState(editorView!.state);
   }
 
-  const unmount = () => {
-    editorView!.destroy();
+  afterEach(() => {
     wrapper.unmount();
     wrapper.detach();
     if (place && place.parentNode) {
       place.parentNode.removeChild(place);
     }
-  };
+  });
 
   const {
     eventDispatcher,
@@ -157,7 +155,6 @@ export default function createEditorForTests<T = any>({
     },
   } = editor.instance() as ReactEditorView;
   return {
-    unmount,
     portalProviderAPI,
     editorView: editorView!,
     eventDispatcher,

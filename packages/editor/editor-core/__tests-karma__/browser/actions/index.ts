@@ -59,10 +59,11 @@ describe(name, () => {
     });
     let mediaPluginState: MediaPluginState;
     let providerFactory: ProviderFactory;
+    let unmountEditor = () => {};
 
     beforeEach(() => {
       providerFactory = new ProviderFactory();
-      const editor = createEditor({
+      const { editor, unmount } = createEditor({
         editorPlugins: [tasksAndDecisionsPlugin, mediaPlugin()],
         editorProps: {
           mediaProvider,
@@ -71,6 +72,7 @@ describe(name, () => {
         },
         providerFactory,
       });
+      unmountEditor = unmount;
       providerFactory.setProvider('mediaProvider', mediaProvider);
       editorActions = new EditorActions();
       editorActions._privateRegisterEditor(
@@ -87,7 +89,7 @@ describe(name, () => {
     });
 
     afterEach(() => {
-      editorView.destroy();
+      unmountEditor();
       providerFactory.destroy();
     });
 
