@@ -21,6 +21,7 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
+    "fetch-mock": "6.5.2",
     "jest": "^23.6.0"
   },
   "dependencies": {

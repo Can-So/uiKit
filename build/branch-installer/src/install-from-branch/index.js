@@ -22,7 +22,8 @@ const CUSTOM_BUILD_DEPLOY_BRANCH_BUILD_DISTS_KEY = '-1200669939';
 const API_URL =
   'https://api.bitbucket.org/2.0/repositories/atlassian/atlaskit-mk-2';
 
-const fetchVerbose = async (url, { info }) => {
+const fetchVerbose = async (url, options = {}) => {
+  const info = options.info || (() => {});
   info(`Trying to fetch ${url}`);
 
   let response = await fetch(url);
@@ -57,10 +58,11 @@ const getBuildStatus = async (
   return buildStatus;
 };
 
-const getCommitHash = async (branchName, { info }) => {
+const getCommitHash = async (branchName, options = {}) => {
+  const info = options.info || (() => {});
   info(`Get commit hash for ${branchName}`);
   const url = `${API_URL}/refs/branches/${branchName}`;
-  const response = await fetchVerbose(url, { info });
+  const response = await fetchVerbose(url, options);
 
   return response.target.hash;
 };
@@ -115,9 +117,10 @@ const checkBuildStatus = buildStatus => {
   return true;
 };
 
-const installFromBranch = async (branchName, options) => {
+const installFromBranch = async (branchName, options = {}) => {
   if (!branchName) {
     process.exit(1);
+    return false;
   }
 
   const info = log(options.verbose);
@@ -156,3 +159,4 @@ const installFromBranch = async (branchName, options) => {
 };
 
 module.exports = installFromBranch;
+module.exports.getCommitHash = getCommitHash;
