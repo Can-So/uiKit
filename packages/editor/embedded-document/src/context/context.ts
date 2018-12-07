@@ -18,7 +18,7 @@ export type Mode = 'view' | 'edit' | 'create';
 
 export interface Actions {
   getDocument(documentId: string, language?: string): void;
-  getDocumentByObjectId(documentId: string, language?: string): void;
+  getDocumentByObjectId(objectId: string, language?: string): void;
   setDocumentMode(mode: Mode): void;
   updateDocument(
     body: string,

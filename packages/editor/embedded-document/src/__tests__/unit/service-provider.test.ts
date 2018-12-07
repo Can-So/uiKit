@@ -6,6 +6,7 @@ import {
   providerUrl,
   validContent,
   validGetResponse,
+  validBatchGetResponse,
   validPutResponse,
   updatedContent,
   objectId,
@@ -32,7 +33,6 @@ describe('ServiceProvider', () => {
           if (url === `${providerUrl}/document/${docId}/`) {
             return validGetResponse;
           }
-
           return 404;
         },
       });
@@ -45,6 +45,35 @@ describe('ServiceProvider', () => {
 
     it('should return null if document does not exist', async () => {
       const response = await serviceProvider.getDocument('does-not-exist');
+      expect(response).toEqual(null);
+    });
+  });
+
+  describe('getDocumentByObjectId', () => {
+    beforeAll(() => {
+      fetchMock.get({
+        matcher: `begin:${providerUrl}`,
+        response: (url: string) => {
+          console.log('@@@@@@@@@@@@@@: ', url);
+          if (
+            url ===
+            `${providerUrl}/document?objectId=${encodeURIComponent(objectId)}`
+          ) {
+            return validBatchGetResponse;
+          }
+          return 404;
+        },
+      });
+    });
+    it('should return document from service with objectId', async () => {
+      const response = await serviceProvider.getDocumentByObjectId(objectId);
+      expect(response).toEqual(validGetResponse);
+    });
+
+    it('should return null if document does not exist', async () => {
+      const response = await serviceProvider.getDocumentByObjectId(
+        'does-not-exist',
+      );
       expect(response).toEqual(null);
     });
   });

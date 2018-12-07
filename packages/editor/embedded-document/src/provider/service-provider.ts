@@ -44,6 +44,8 @@ export default class ServiceProvider implements Provider {
         objectId,
         ...(language ? { language } : {}),
       });
+      console.log(queryStrig);
+
       const documents = await utils.requestService<Array<Document>>(
         this.config,
         {
@@ -51,8 +53,7 @@ export default class ServiceProvider implements Provider {
         },
       );
       if (documents && documents.length) {
-        return documents[0].language![language || 'default']
-          .versions[0] as Document;
+        return documents[0];
       }
       return null;
     } catch (err) {

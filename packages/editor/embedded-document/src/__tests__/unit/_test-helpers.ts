@@ -41,6 +41,12 @@ export const validGetResponse = {
   body: validContent,
 };
 
+export const validBatchGetResponse = [
+  {
+    ...validGetResponse,
+  },
+];
+
 export const validPutResponse = {
   id: docId,
   objectId,

@@ -108,7 +108,7 @@ export default class EmbeddedDocument extends Component<Props, State> {
       return this.createDocument(body);
     }
 
-    const document = await this.provider.updateDocument(
+    const doc = await this.provider.updateDocument(
       documentId,
       JSON.stringify(body),
       objectId,
@@ -116,12 +116,12 @@ export default class EmbeddedDocument extends Component<Props, State> {
       language,
     );
 
-    if (document) {
+    if (doc) {
       this.setState({
-        doc: document,
+        doc,
         mode: 'view',
       });
-      return document;
+      return doc;
     } else {
       this.setState({
         hasError: true,
