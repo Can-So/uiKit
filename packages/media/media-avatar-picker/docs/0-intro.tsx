@@ -74,8 +74,6 @@ ${(
   />
 )}
 
-Additional information of the props usage can be found [here](/packages/media/media-avatar-picker/docs/API).
-
 ${(
   <Props
     heading="Avatar List Props"

@@ -2,8 +2,10 @@ import * as React from 'react';
 import { Wrapper } from './styled';
 
 export interface FrameViewProps {
+  /**A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
   children?: React.ReactNode;
+  /** The optional click handler */
   onClick?: () => void;
 }
 

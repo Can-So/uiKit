@@ -5,7 +5,9 @@ export interface CollapsedFrameProps {
   minWidth?: number;
   maxWidth?: number;
   children?: React.ReactNode;
+  /** The optional click handler */
   onClick?: () => void;
+  /**A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
 }
 
