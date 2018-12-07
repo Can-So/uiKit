@@ -175,7 +175,7 @@ export default class MediaSingleNode extends Component<
       }
     }
 
-    const isLoading = lastMediaStatus !== 'ready';
+    const isLoading = lastMediaStatus ? lastMediaStatus !== 'ready' : false;
     let canResize = !!this.mediaPluginState.options.allowResizing && !isLoading;
 
     const pos = getPos();
