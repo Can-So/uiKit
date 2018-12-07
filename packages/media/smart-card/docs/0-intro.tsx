@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { code, md, Example } from '@atlaskit/docs';
+import { code, md, Example, Props } from '@atlaskit/docs';
 
 export default md`
   Turns a URL into a card with metadata sourced from either:
@@ -21,5 +21,11 @@ export default md`
     />
   )}
 
+${(
+  <Props
+    heading="renderCardWithData Props"
+    props={require('!!extract-react-types-loader!../src/Card/renderCardWithData')}
+  />
+)}
+
 `;
-// TODO: add props back -> https://github.com/atlassian/extract-react-types/issues/34
