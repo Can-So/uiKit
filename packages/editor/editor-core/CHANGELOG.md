@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.10
+- [patch] [fa596d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa596d9):
+
+  - display videos as mediaGroup for now
+
 ## 90.3.9
 - [patch] [7190767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7190767):
 

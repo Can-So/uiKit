@@ -1,1 +1,0 @@
-- display videos as mediaGroup for now
