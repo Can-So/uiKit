@@ -9,7 +9,7 @@ export interface InlineCardResolvingViewProps {
   url: string;
   /** The optional click handler */
   onClick?: () => void;
-  /**A flag that determines whether the card is selected in edit mode. */
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
 }
 

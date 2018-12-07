@@ -15,7 +15,7 @@ export interface InlineCardErroredViewProps {
   onClick?: () => void;
   /** What to do when a user clicks "Try again" button */
   onRetry?: () => void;
-  /**A flag that determines whether the card is selected in edit mode. */
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
 }
 

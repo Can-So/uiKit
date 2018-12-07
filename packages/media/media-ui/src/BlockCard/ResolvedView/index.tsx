@@ -76,7 +76,7 @@ export interface Action {
 }
 
 export interface BlockCardResolvedViewProps {
-  /** The context view model*/
+  /** The context view model */
   context?: ContextViewModel;
   /** The link to display */
   link?: string;

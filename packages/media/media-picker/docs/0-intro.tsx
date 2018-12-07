@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as path from 'path';
 import { md, code, Example } from '@atlaskit/docs';
 
 import dropzone from './dropzone.png';

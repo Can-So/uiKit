@@ -18,7 +18,7 @@ export interface ExpandedFrameProps {
   minWidth?: number;
   maxWidth?: number;
   children?: React.ReactNode;
-  /**A flag that determines whether the card is selected in edit mode. */
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
   /** The optional click handler */
   onClick?: () => void;

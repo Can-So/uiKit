@@ -13,7 +13,7 @@ export interface InlineCardResolvedViewProps {
   title: string;
   /** The the optional lozenge that might represent the statux of the resource */
   lozenge?: LozengeViewModel;
-  /**A flag that determines whether the card is selected in edit mode. */
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
   /** The optional click handler */
   onClick?: () => void;

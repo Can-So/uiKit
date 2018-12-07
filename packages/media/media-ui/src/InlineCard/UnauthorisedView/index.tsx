@@ -14,7 +14,7 @@ export interface InlineCardUnauthorizedViewProps {
   onClick?: () => void;
   /** What to do when a user hit "Try another account" button */
   onAuthorise?: () => void;
-  /**A flag that determines whether the card is selected in edit mode. */
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
 }
 

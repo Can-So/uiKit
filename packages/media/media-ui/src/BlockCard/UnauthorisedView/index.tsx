@@ -14,7 +14,7 @@ export interface BlockCardUnauthorisedViewProps {
   onClick?: () => void;
   /** The optional handler for "Connect" button */
   onAuthorise?: () => void;
-  /**A flag that determines whether the card is selected in edit mode. */
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
 }
 
