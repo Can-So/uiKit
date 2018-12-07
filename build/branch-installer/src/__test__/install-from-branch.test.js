@@ -2,7 +2,7 @@ const fetchMock = require('fetch-mock').sandbox();
 jest.setMock('node-fetch', fetchMock);
 
 const installFromBranch = require('../install-from-branch');
-const { getCommitHash } = require('../install-from-branch');
+const { getCommitHash, getBuildStatus } = require('../install-from-branch');
 
 describe('install-from-branch', () => {
   let stubExit;
@@ -28,6 +28,16 @@ describe('install-from-branch', () => {
       const result = await getCommitHash('fake-branch');
 
       expect(result).toBe('#fakeHash');
+      done();
+    });
+  });
+
+  describe('#getBuildStatus', () => {
+    it('should get build status from hash', async done => {
+      fetchMock.mock(/.*(statuses\/build).*/, { state: 'SUCCESSFUL' });
+      const result = await getBuildStatus('#hashCommit');
+
+      expect(result).toBe('SUCCESSFUL');
       done();
     });
   });

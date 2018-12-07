@@ -34,10 +34,8 @@ const fetchVerbose = async (url, options = {}) => {
   return result;
 };
 
-const getBuildStatus = async (
-  hashCommit,
-  { maxAttempts = 1, timeout = 2000, info },
-) => {
+const getBuildStatus = async (hashCommit, options) => {
+  const { maxAttempts = 1, timeout = 2000, info = () => {} } = options || {};
   info(`Get build status for ${hashCommit} commit`);
   const url = `${API_URL}/commit/${hashCommit}/statuses/build/${CUSTOM_BUILD_DEPLOY_BRANCH_BUILD_DISTS_KEY}`;
 
@@ -160,3 +158,4 @@ const installFromBranch = async (branchName, options = {}) => {
 
 module.exports = installFromBranch;
 module.exports.getCommitHash = getCommitHash;
+module.exports.getBuildStatus = getBuildStatus;
