@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.9
+- [patch] [7190767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7190767):
+
+  - Fixes empty collection name and API naming mismatches
+
 ## 90.3.8
 - [patch] [7fdfac1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7fdfac1):
 

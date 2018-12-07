@@ -1,1 +1,0 @@
-- Fixes empty collection name and API naming mismatches
