@@ -9,7 +9,8 @@ export default md`
 
   ## Usage
 
-  ${code`import { PubSubClient } from '@atlassian/pubsub';
+  ${code`
+  import { PubSubClient } from '@atlassian/pubsub';
 
   ### Using the component as a component developer
 

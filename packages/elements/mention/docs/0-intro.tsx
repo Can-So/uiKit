@@ -14,7 +14,8 @@ export default md`
 
   Import the component in your React app as follows:
 
-  ${code`import MentionPicker, { MentionResource } from '@atlaskit/mention';
+  ${code`
+  import MentionPicker, { MentionResource } from '@atlaskit/mention';
 
   const mentionProvider = new MentionResource({
     url: 'http://example-mention-server/service',
