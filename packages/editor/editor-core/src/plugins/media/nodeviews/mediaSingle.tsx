@@ -20,6 +20,7 @@ import ResizableMediaSingle from '../ui/ResizableMediaSingle';
 import { createDisplayGrid } from '../../../plugins/grid';
 import { EventDispatcher } from '../../../event-dispatcher';
 import { MediaStateStatus } from '../types';
+import { EditorAppearance } from '../../../types';
 
 const DEFAULT_WIDTH = 250;
 const DEFAULT_HEIGHT = 200;
@@ -32,6 +33,7 @@ export interface MediaSingleNodeProps {
   selected: Function;
   getPos: () => number;
   lineLength: number;
+  editorAppearance: EditorAppearance;
 }
 
 export interface MediaSingleNodeState {
@@ -154,6 +156,7 @@ export default class MediaSingleNode extends Component<
       getPos,
       node,
       view: { state },
+      editorAppearance,
     } = this.props;
 
     const { lastMediaStatus } = this.state;
@@ -175,7 +178,7 @@ export default class MediaSingleNode extends Component<
       }
     }
 
-    const isLoading = lastMediaStatus !== 'ready';
+    const isLoading = lastMediaStatus ? lastMediaStatus !== 'ready' : false;
     let canResize = !!this.mediaPluginState.options.allowResizing && !isLoading;
 
     const pos = getPos();
@@ -227,6 +230,7 @@ export default class MediaSingleNode extends Component<
               selected={selected()}
               onClick={this.selectMediaSingle}
               onExternalImageLoaded={this.onExternalImageLoaded}
+              editorAppearance={editorAppearance}
             />
           );
         }}
@@ -254,7 +258,7 @@ export default class MediaSingleNode extends Component<
 
 class MediaSingleNodeView extends ReactNodeView {
   render(props, forwardRef) {
-    const { eventDispatcher } = this.reactComponentProps;
+    const { eventDispatcher, editorAppearance } = this.reactComponentProps;
     return (
       <WithPluginState
         editorView={this.view}
@@ -272,6 +276,7 @@ class MediaSingleNodeView extends ReactNodeView {
               view={this.view}
               selected={() => this.getPos() + 1 === reactNodeViewState}
               eventDispatcher={eventDispatcher}
+              editorAppearance={editorAppearance}
             />
           );
         }}
@@ -280,12 +285,13 @@ class MediaSingleNodeView extends ReactNodeView {
   }
 }
 
-export const ReactMediaSingleNode = (portalProviderAPI, eventDispatcher) => (
-  node: PMNode,
-  view: EditorView,
-  getPos: () => number,
-): NodeView => {
+export const ReactMediaSingleNode = (
+  portalProviderAPI,
+  eventDispatcher,
+  editorAppearance,
+) => (node: PMNode, view: EditorView, getPos: () => number): NodeView => {
   return new MediaSingleNodeView(node, view, getPos, portalProviderAPI, {
     eventDispatcher,
+    editorAppearance,
   }).init();
 };

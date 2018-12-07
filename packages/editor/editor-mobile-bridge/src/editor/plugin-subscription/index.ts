@@ -59,7 +59,7 @@ const configs: Array<BridgePluginListener<Bridge>> = [
     pluginKey: textFormattingStateKey,
     updater: state => {
       toNativeBridge.call('textFormatBridge', 'updateTextFormat', {
-        state: JSON.stringify(valueOfMarkState(state)),
+        states: JSON.stringify(valueOfMarkState(state)),
       });
     },
   }),
@@ -68,7 +68,7 @@ const configs: Array<BridgePluginListener<Bridge>> = [
     pluginKey: blockPluginStateKey,
     updater: state => {
       toNativeBridge.call('blockFormatBridge', 'updateBlockState', {
-        state: state.currentBlockType.name,
+        states: state.currentBlockType.name,
       });
     },
   }),

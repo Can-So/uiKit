@@ -7,7 +7,6 @@ import {
   StyledTitle,
   ActionsWrapper,
   BottomBarWrapper,
-  BreadcrumbsContainer,
   TitleContainer,
 } from './styled';
 
@@ -43,11 +42,9 @@ export default class PageHeader extends Component<Props> {
     } = this.props;
     return (
       <Outer>
-        {breadcrumbs && (
-          <BreadcrumbsContainer> {breadcrumbs} </BreadcrumbsContainer>
-        )}
-        <TitleWrapper>
-          <TitleContainer>
+        {breadcrumbs}
+        <TitleWrapper truncate={truncateTitle}>
+          <TitleContainer truncate={truncateTitle}>
             {disableTitleStyles ? (
               children
             ) : (

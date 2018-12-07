@@ -1,5 +1,10 @@
 # @atlaskit/textfield
 
+## 0.1.3
+- [patch] [63f969d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/63f969d):
+
+  - Fixed height of compact textfields to correctly be 32px instead of 28px
+
 ## 0.1.2
 - [patch] [480a57c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/480a57c):
 

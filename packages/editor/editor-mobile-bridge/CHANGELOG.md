@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.4.4
+- [patch] [7190767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7190767):
+
+  - Fixes empty collection name and API naming mismatches
+
 ## 6.4.3
 - [patch] [7515804](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7515804):
 

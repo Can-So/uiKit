@@ -1,5 +1,10 @@
 # @atlaskit/breadcrumbs
 
+## 6.0.13
+- [patch] [c87112f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c87112f):
+
+  - Breadcrumbs items no longer have unnecessary indent on the first item
+
 ## 6.0.12
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3
