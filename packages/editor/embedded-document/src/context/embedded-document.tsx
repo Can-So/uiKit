@@ -105,13 +105,16 @@ export default class EmbeddedDocument extends Component<Props, State> {
   };
 
   private updateDocument = async (body: any) => {
-    const { documentId, objectId, language } = this.props;
+    let { documentId, objectId, language } = this.props;
+    if (this.state.doc) {
+      ({ documentId, objectId, language } = this.state.doc);
+    }
 
     if (!documentId) {
       return this.createDocument(body);
     }
 
-    const doc = await this.provider.updateDocument(
+    const document = await this.provider.updateDocument(
       documentId,
       JSON.stringify(body),
       objectId,
@@ -119,12 +122,12 @@ export default class EmbeddedDocument extends Component<Props, State> {
       language,
     );
 
-    if (doc) {
+    if (document) {
       this.setState({
-        doc,
+        doc: document,
         mode: 'view',
       });
-      return doc;
+      return document;
     } else {
       this.setState({
         hasError: true,
