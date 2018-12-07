@@ -38,7 +38,10 @@
   "devDependencies": {
     "@atlaskit/editor-json-transformer": "^4.0.22",
     "@atlaskit/editor-test-helpers": "^6.3.1",
-    "@atlaskit/json-schema-generator": "^1.2.0"
+    "@atlaskit/json-schema-generator": "^1.2.0",
+    "json-schema-diff-validator": "^0.2.0",
+    "ajv": "^4.11.3",
+    "axios": "^0.17.1"
   },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2"
 }

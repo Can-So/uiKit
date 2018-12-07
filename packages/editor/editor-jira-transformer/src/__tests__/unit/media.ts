@@ -10,7 +10,7 @@ import {
   checkEncode,
   checkParseEncodeRoundTrips,
 } from './_test-helpers';
-import { createJIRASchema } from '@atlaskit/editor-common';
+import { createJIRASchema } from '@atlaskit/adf-schema';
 import { JIRATransformer } from '../../index';
 
 const schema = createJIRASchema({ allowMedia: true });

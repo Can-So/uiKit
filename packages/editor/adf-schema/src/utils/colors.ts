@@ -7,12 +7,18 @@ import * as namedColors from 'css-color-names';
 
 export const R50 = '#FFEBE6';
 export const R75 = '#FFBDAD';
+export const R300 = '#FF5630';
+export const R500 = '#BF2600';
 
 export const Y50 = '#FFFAE6';
 export const Y75 = '#FFF0B3';
+export const Y400 = '#FF991F';
+export const Y500 = '#FF8B00';
 
 export const G50 = '#E3FCEF';
 export const G75 = '#ABF5D1';
+export const G300 = '#36B37E';
+export const G500 = '#006644';
 
 export const B50 = '#DEEBFF';
 export const B75 = '#B3D4FF';
@@ -22,12 +28,19 @@ export const N0 = '#FFFFFF';
 export const N20 = '#F4F5F7';
 export const N30 = '#EBECF0';
 export const N40 = '#DFE1E6';
+export const N80 = '#97A0AF';
+export const N90 = '#8993A4';
 
 export const P50 = '#EAE6FF';
 export const P75 = '#C0B6F2';
+export const P300 = '#6554C0';
+export const P500 = '#403294';
 
 export const T50 = '#E6FCFF';
 export const T75 = '#B3F5FF';
+export const T300 = '#00B8D9';
+export const T500 = '#008DA6';
+
 /**
  * @return String with HEX-coded color
  */
