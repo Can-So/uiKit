@@ -1,0 +1,1 @@
+- PageHeader without truncation now wraps actions below the heading to avoid the heading becoming too narrow

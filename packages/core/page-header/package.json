@@ -32,11 +32,10 @@
     "@atlaskit/build-utils": "^2.0.0",
     "@atlaskit/button": "^10.0.4",
     "@atlaskit/docs": "^5.2.3",
-    "@atlaskit/field-text": "^7.0.16",
     "@atlaskit/inline-edit": "^7.1.6",
-    "@atlaskit/input": "^4.0.8",
     "@atlaskit/page": "^8.0.11",
-    "@atlaskit/single-select": "^6.0.10",
+    "@atlaskit/select": "^6.1.12",
+    "@atlaskit/textfield": "^0.1.2",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-dom": "^16.4.2",
     "react-test-renderer": "^16.3.0"
