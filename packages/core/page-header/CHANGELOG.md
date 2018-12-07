@@ -1,5 +1,10 @@
 # @atlaskit/page-header
 
+## 6.1.0
+- [minor] [6cfa757](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6cfa757):
+
+  - PageHeader without truncation now wraps actions below the heading to avoid the heading becoming too narrow
+
 ## 6.0.9
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3

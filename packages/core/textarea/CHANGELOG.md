@@ -1,5 +1,10 @@
 # @atlaskit/textarea
 
+## 0.2.2
+- [patch] [9e6b592](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9e6b592):
+
+  - Added tslib import for textarea
+
 ## 0.2.1
 - [patch] [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
 

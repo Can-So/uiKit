@@ -1,1 +1,0 @@
-- Breadcrumbs items no longer have unnecessary indent on the first item

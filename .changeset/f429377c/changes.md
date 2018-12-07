@@ -1,1 +1,0 @@
-- Fixed height of compact textfields to correctly be 32px instead of 28px
