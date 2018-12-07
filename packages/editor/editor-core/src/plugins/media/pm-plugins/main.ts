@@ -696,7 +696,7 @@ export class MediaPluginState {
           id: state.publicId || state.id,
         };
 
-        if (state.collection) {
+        if (typeof state.collection === 'string') {
           attrs.collection = state.collection;
         }
 
