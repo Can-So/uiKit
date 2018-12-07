@@ -1,5 +1,35 @@
 # @atlaskit/editor-core
 
+## 90.3.10
+- [patch] [fa596d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa596d9):
+
+  - display videos as mediaGroup for now
+
+## 90.3.9
+- [patch] [7190767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7190767):
+
+  - Fixes empty collection name and API naming mismatches
+
+## 90.3.8
+- [patch] [7fdfac1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7fdfac1):
+
+  - FS-3269 - Ensure status attributes are read even if in mark
+
+## 90.3.7
+- [patch] [f0398a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0398a5):
+
+  - Display media singles with video inside as inline video player
+
+## 90.3.6
+- [patch] [a60d8cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a60d8cd):
+
+  - FS-3278 - Prevent overflow of status in a table cell.
+
+## 90.3.5
+- [patch] [ef1df96](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef1df96):
+
+  - Remove unused deps
+
 ## 90.3.4
 - [patch] [3c2c367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3c2c367):
 

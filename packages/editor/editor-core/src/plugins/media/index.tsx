@@ -77,6 +77,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
           errorReporter,
           portalProviderAPI,
           reactContext,
+          appearance,
         }) =>
           createPlugin(
             schema,
@@ -87,6 +88,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
                 mediaSingle: ReactMediaSingleNode(
                   portalProviderAPI,
                   eventDispatcher,
+                  appearance,
                 ),
               },
               errorReporter,

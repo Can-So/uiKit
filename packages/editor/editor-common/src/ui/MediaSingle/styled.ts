@@ -115,7 +115,7 @@ export const MediaSingleDimensionHelper = ({
   width: ${pctWidth
     ? calcResizedWidth(layout, width)
     : calcLegacyWidth(layout, width, containerWidth)};
-  max-width: ${pctWidth ? '100%' : calcMaxWidth(layout, width, containerWidth)};
+  max-width: ${calcMaxWidth(layout, width, containerWidth)};
   float: ${float(layout)};
   margin: ${calcMargin(layout)};
 

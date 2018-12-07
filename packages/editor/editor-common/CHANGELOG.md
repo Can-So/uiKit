@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 22.3.2
+- [patch] [60a4609](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60a4609):
+
+  - ED-5771: fix rendering of full-width resized images
+
 ## 22.3.1
 - [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
 

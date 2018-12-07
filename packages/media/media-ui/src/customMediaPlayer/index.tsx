@@ -8,14 +8,13 @@ import SoundIcon from '@atlaskit/icon/glyph/hipchat/outgoing-sound';
 import HDIcon from '@atlaskit/icon/glyph/vid-hd-circle';
 import Button from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
-import Video, {
+import MediaPlayer, {
   SetVolumeFunction,
   NavigateFunction,
   VideoState,
   VideoActions,
 } from 'react-video-renderer';
 import { colors } from '@atlaskit/theme';
-import FieldRange from '@atlaskit/field-range';
 import { ThemeProvider } from 'styled-components';
 import theme from '../theme';
 import { TimeRange } from './timeRange';
@@ -32,6 +31,7 @@ import {
   VolumeToggleWrapper,
   MutedIndicator,
   SpinnerWrapper,
+  VolumeTimeRangeWrapper,
 } from './styled';
 import { formatDuration } from '../formatDuration';
 import { hideControlsClassName } from '../classNames';
@@ -44,29 +44,30 @@ import {
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { messages } from '../messages';
 
-export interface CustomVideoProps {
+export interface CustomMediaPlayerProps {
+  readonly type: 'audio' | 'video';
   readonly src: string;
   readonly isHDActive?: boolean;
   readonly onHDToggleClick?: () => void;
-  readonly isHDAvailable: boolean;
+  readonly isHDAvailable?: boolean;
   readonly showControls?: () => void;
   readonly isAutoPlay: boolean;
   readonly isShortcutEnabled?: boolean;
 }
 
-export interface CustomVideoState {
+export interface CustomMediaPlayerState {
   isFullScreenEnabled: boolean;
 }
 
 export type ToggleButtonAction = () => void;
 
-export class CustomVideo extends Component<
-  CustomVideoProps & InjectedIntlProps,
-  CustomVideoState
+export class CustomMediaPlayer extends Component<
+  CustomMediaPlayerProps & InjectedIntlProps,
+  CustomMediaPlayerState
 > {
   videoWrapperRef?: HTMLElement;
 
-  state: CustomVideoState = {
+  state: CustomMediaPlayerState = {
     isFullScreenEnabled: false,
   };
 
@@ -102,7 +103,7 @@ export class CustomVideo extends Component<
   onVolumeChange = (setVolume: SetVolumeFunction) => (value: number) =>
     setVolume(value);
 
-  shortcutHanler = (toggleButtonAction: ToggleButtonAction) => () => {
+  shortcutHandler = (toggleButtonAction: ToggleButtonAction) => () => {
     const { showControls } = this.props;
 
     toggleButtonAction();
@@ -113,9 +114,9 @@ export class CustomVideo extends Component<
   };
 
   renderHDButton = () => {
-    const { isHDAvailable, isHDActive, onHDToggleClick } = this.props;
+    const { type, isHDAvailable, isHDActive, onHDToggleClick } = this.props;
 
-    if (!isHDAvailable) {
+    if (type === 'audio' || !isHDAvailable) {
       return;
     }
     const primaryColor = isHDActive ? colors.B200 : colors.DN400;
@@ -147,11 +148,16 @@ export class CustomVideo extends Component<
             iconBefore={<SoundIcon label="volume" />}
           />
         </VolumeToggleWrapper>
-        <FieldRange
-          max={1}
-          value={volume}
-          onChange={this.onVolumeChange(actions.setVolume)}
-        />
+        <VolumeTimeRangeWrapper>
+          <TimeRange
+            onChange={this.onVolumeChange(actions.setVolume)}
+            duration={1}
+            currentTime={volume}
+            bufferedTime={volume}
+            disableThumbTooltip={true}
+            isAlwaysActive={true}
+          />
+        </VolumeTimeRangeWrapper>
       </VolumeWrapper>
     );
   };
@@ -163,7 +169,13 @@ export class CustomVideo extends Component<
   renderFullScreenButton = () => {
     const {
       intl: { formatMessage },
+      type,
     } = this.props;
+
+    if (type === 'audio') {
+      return;
+    }
+
     const { isFullScreenEnabled } = this.state;
     const icon = isFullScreenEnabled ? (
       <FullScreenIconOff label={formatMessage(messages.disable_fullscreen)} />
@@ -188,6 +200,7 @@ export class CustomVideo extends Component<
 
   render() {
     const {
+      type,
       src,
       isAutoPlay,
       isShortcutEnabled,
@@ -196,7 +209,7 @@ export class CustomVideo extends Component<
     return (
       <ThemeProvider theme={theme}>
         <CustomVideoWrapper innerRef={this.saveVideoWrapperRef}>
-          <Video src={src} autoPlay={isAutoPlay}>
+          <MediaPlayer sourceType={type} src={src} autoPlay={isAutoPlay}>
             {(video, videoState, actions) => {
               const {
                 status,
@@ -225,12 +238,12 @@ export class CustomVideo extends Component<
                 <Shortcut
                   key="space-shortcut"
                   keyCode={keyCodes.space}
-                  handler={this.shortcutHanler(toggleButtonAction)}
+                  handler={this.shortcutHandler(toggleButtonAction)}
                 />,
                 <Shortcut
                   key="m-shortcut"
                   keyCode={keyCodes.m}
-                  handler={this.shortcutHanler(actions.toggleMute)}
+                  handler={this.shortcutHandler(actions.toggleMute)}
                 />,
               ];
 
@@ -254,7 +267,7 @@ export class CustomVideo extends Component<
                         {this.renderVolume(videoState, actions)}
                       </LeftControls>
                       <RightControls>
-                        <CurrentTime>
+                        <CurrentTime draggable={false}>
                           {formatDuration(currentTime)} /{' '}
                           {formatDuration(duration)}
                         </CurrentTime>
@@ -266,11 +279,11 @@ export class CustomVideo extends Component<
                 </VideoWrapper>
               );
             }}
-          </Video>
+          </MediaPlayer>
         </CustomVideoWrapper>
       </ThemeProvider>
     );
   }
 }
 
-export default injectIntl(CustomVideo);
+export default injectIntl(CustomMediaPlayer);

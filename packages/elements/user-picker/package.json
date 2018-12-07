@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/user-picker",
-  "version": "0.0.27",
+  "version": "0.0.29",
   "config": {
     "access": "public"
   },
@@ -19,6 +19,7 @@
     "@atlaskit/lozenge": "^6.2.3",
     "@atlaskit/select": "^6.1.10",
     "@atlaskit/tag": "^6.1.2",
+    "@atlaskit/tooltip": "^12.1.12",
     "@atlaskit/theme": "^7.0.0",
     "@types/lodash.debounce": "^4.0.4",
     "lodash.debounce": "^4.0.8",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@atlaskit/docs": "^5.2.3",
     "@atlaskit/i18n-tools": "^0.4.0",
+    "@atlaskit/section-message": "^1.0.13",
     "@atlaskit/util-data-test": "^10.0.22",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-intl": "^2.6.0"
@@ -50,9 +52,6 @@
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
-  },
-  "atlaskit": {
-    "internal": true
   },
   "keywords": [
     "fabric",

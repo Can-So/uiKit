@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
-import { CustomVideoPlayer } from '@atlaskit/media-ui';
+import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { InlinePlayer, InlinePlayerProps } from '../../../root/inlinePlayer';
 import { FileIdentifier } from '../../../root/domain';
 import { CardLoading } from '../../../utils';
@@ -68,7 +68,7 @@ describe('<InlinePlayer />', () => {
 
   it('should use default dimensions', () => {});
 
-  it('should set dimensions in the wrapper element', async () => {
+  it('should set width according to dimensions in the wrapper element', async () => {
     const { component } = setup({
       dimensions: {
         width: 1,
@@ -79,7 +79,6 @@ describe('<InlinePlayer />', () => {
     await update(component);
     expect(component.find(InlinePlayerWrapper).prop('style')).toEqual({
       width: 1,
-      height: 1,
     });
   });
 
@@ -101,7 +100,7 @@ describe('<InlinePlayer />', () => {
     const { component } = setup({ context });
 
     await update(component);
-    expect(component.find(CustomVideoPlayer).prop('src')).toEqual(
+    expect(component.find(CustomMediaPlayer).prop('src')).toEqual(
       'mock result of URL.createObjectURL()',
     );
   });
@@ -116,6 +115,6 @@ describe('<InlinePlayer />', () => {
       'video_1280.mp4',
       'some-collection',
     );
-    expect(component.find(CustomVideoPlayer).prop('src')).toEqual('some-url');
+    expect(component.find(CustomMediaPlayer).prop('src')).toEqual('some-url');
   });
 });

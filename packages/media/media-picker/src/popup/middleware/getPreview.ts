@@ -54,7 +54,7 @@ export async function getPreview(
         // We need to wait for the next tick since rxjs might call "next" before returning from "subscribe"
         window.setTimeout(() => subscription.unsubscribe());
 
-        if (mediaType === 'image') {
+        if (mediaType === 'image' || mediaType === 'video') {
           const metadata = await userContext.getImageMetadata(file.id, {
             collection,
           });

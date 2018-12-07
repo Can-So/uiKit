@@ -105,9 +105,6 @@ class Modal extends Component<Props, State> {
       this.props.onClose(e);
     }
   };
-  handleDialogClick = (e: SyntheticMouseEvent<>) => {
-    e.stopPropagation();
-  };
 
   render() {
     const {
@@ -162,7 +159,6 @@ class Modal extends Component<Props, State> {
               <Blanket isTinted onBlanketClicked={this.handleOverlayClick} />
               <Positioner
                 style={slide}
-                onClick={this.handleOverlayClick}
                 scrollBehavior={scrollBehavior}
                 widthName={widthName}
                 widthValue={widthValue}
@@ -170,7 +166,6 @@ class Modal extends Component<Props, State> {
                 <Dialog
                   heightValue={height}
                   isChromeless={isChromeless}
-                  onClick={this.handleDialogClick}
                   role="dialog"
                   tabIndex="-1"
                 >

@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 31.1.2
+- [patch] [0623610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0623610):
+
+  - Display media singles with video inside as inline video player
+
 ## 31.1.1
 - [patch] [232238c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/232238c):
 

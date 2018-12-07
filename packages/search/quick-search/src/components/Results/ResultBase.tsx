@@ -69,7 +69,7 @@ export class ResultBase extends React.PureComponent<DefaultProps & Props> {
       index: context.getIndex(resultId),
       type,
       resultId,
-      ...analyticsData,
+      ...(analyticsData instanceof Function ? analyticsData() : analyticsData),
     };
   }
 

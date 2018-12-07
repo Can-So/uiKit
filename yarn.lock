@@ -1193,10 +1193,6 @@
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.6.tgz#dbe8a666156d556ed018e15a4c65f08937c3f628"
 
-"@types/codemirror@^0.0.40":
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-0.0.40.tgz#0868ed9ba5bf3ef8072de80e245ecf4a8f0bbdfd"
-
 "@types/date-fns@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@types/date-fns/-/date-fns-2.6.0.tgz#b062ca46562002909be0c63a6467ed173136acc1"
@@ -1272,7 +1268,7 @@
   version "8.0.53"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.53.tgz#396b35af826fa66aad472c8cb7b8d5e277f4e6d8"
 
-"@types/orderedmap@*", "@types/orderedmap@^1.0.0":
+"@types/orderedmap@*":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/orderedmap/-/orderedmap-1.0.0.tgz#807455a192bba52cbbb4517044bc82bdbfa8c596"
 
@@ -7561,7 +7557,7 @@ he@1.1.1, he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
-highlight.js@^9.6.0, highlight.js@~9.12.0:
+highlight.js@~9.12.0:
   version "9.12.0"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
 
@@ -13290,9 +13286,9 @@ react-value@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/react-value/-/react-value-0.2.0.tgz#04d6e3351add34e9365d4597f207e2a13ba85564"
 
-react-video-renderer@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-video-renderer/-/react-video-renderer-2.0.1.tgz#b02068528dfe463be76cf7af6c8ab8f1a7d60747"
+react-video-renderer@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-video-renderer/-/react-video-renderer-2.2.1.tgz#97aed21fd105fcf15abd4a6874f94543c6ca764f"
 
 react-virtualized@^9.8.0:
   version "9.12.0"
@@ -15459,10 +15455,6 @@ textextensions@2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/textextensions/-/textextensions-2.2.0.tgz#38ac676151285b658654581987a0ce1a4490d286"
 
-thenable@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/thenable/-/thenable-1.0.0.tgz#88cd6df018dc5242b7e3afbb7493abb9aaa11f55"
-
 thread-loader@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/thread-loader/-/thread-loader-1.2.0.tgz#35dedb23cf294afbbce6c45c1339b950ed17e7a4"
@@ -16366,9 +16358,9 @@ vfile@^2.0.0:
     unist-util-stringify-position "^1.0.0"
     vfile-message "^1.0.0"
 
-video-snapshot@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/video-snapshot/-/video-snapshot-1.0.1.tgz#691f2fc62018ca85df7b9f4fa429b6694c2d60c2"
+video-snapshot@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/video-snapshot/-/video-snapshot-1.0.2.tgz#601cd3ea3b387828689bd54b0e21a91000e3d594"
 
 vinyl-file@^2.0.0:
   version "2.0.0"

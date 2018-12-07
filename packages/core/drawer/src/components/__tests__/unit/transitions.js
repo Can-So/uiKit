@@ -47,6 +47,13 @@ describe('Drawer Transitions', () => {
 
       expect(unmountOnExit).toBeFalsy();
     });
+
+    it('should pass onExited to the Transition', () => {
+      const onExited = jest.fn();
+      const slide = mount(<Slide in onExited={onExited} />);
+
+      expect(slide.find('Transition').props()).toMatchObject({ onExited });
+    });
   });
 
   describe('Fade', () => {
@@ -84,6 +91,13 @@ describe('Drawer Transitions', () => {
       const { unmountOnExit } = wrapper.find('Transition').props();
 
       expect(unmountOnExit).toBeTruthy();
+    });
+
+    it('should pass onExited to the Transition', () => {
+      const onExited = jest.fn();
+      const fade = mount(<Fade in onExited={onExited} />);
+
+      expect(fade.find('Transition').props()).toMatchObject({ onExited });
     });
   });
 });

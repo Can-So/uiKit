@@ -69,7 +69,6 @@ describe('mapJiraItemToResult', () => {
       analyticsType: AnalyticsType.ResultJira,
       resultType: ResultType.JiraObjectResult,
       contentType: ContentType.JiraFilter,
-      objectKey: 'Filter',
     });
   });
 
@@ -87,7 +86,6 @@ describe('mapJiraItemToResult', () => {
       analyticsType: AnalyticsType.ResultJira,
       resultType: ResultType.JiraObjectResult,
       contentType: ContentType.JiraBoard,
-      objectKey: 'Board',
     });
   });
 
