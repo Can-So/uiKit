@@ -145,9 +145,11 @@ const installFromBranch = async (branchName, options = {}) => {
   const runner = options.bolt ? 'bolt' : 'yarn';
 
   if (options.dryRun) {
-    packages.forEach(pkg => {
-      console.log(chalk.yellow(`${runner} upgrade ${pkg}`));
-    });
+    const dryRun = packages.map(pkg => `${runner} upgrade ${pkg}`);
+
+    dryRun.forEach(pkg => console.log(chalk.yellow(pkg)));
+
+    return dryRun;
   } else {
     return spawndamnit(runner, ['upgrade', packages.join(' ')], {
       stdio: 'inherit',

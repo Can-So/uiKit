@@ -27,6 +27,28 @@ describe('install-from-branch', () => {
     expect(stubExit).toHaveBeenCalledWith(1);
   });
 
+  describe('#installFromBranch', () => {
+    beforeEach(() => {
+      fetchMock
+        .mock(/branch-test$/, { target: { hash: '#fakeHash' } })
+        .mock(/.*(statuses\/build).*/, { state: 'SUCCESSFUL' })
+        .mock(/manifest\.json$/, {
+          dep1: {
+            tarFile: '111.tar',
+          },
+        });
+    });
+
+    it('should returns array of yarn/bolt upgrade packages', async done => {
+      const result = await installFromBranch('branch-test', { dryRun: true });
+      expect(result).toEqual([
+        'yarn upgrade "dep1@http://s3-ap-southeast-2.amazonaws.com/atlaskit-artefacts/#fakeHash/dists/111.tar"',
+      ]);
+
+      done();
+    });
+  });
+
   describe('#getCommitHash', () => {
     it('should get commit hash from branch name ', async done => {
       fetchMock.mock(/fake-branch$/, { target: { hash: '#fakeHash' } });
