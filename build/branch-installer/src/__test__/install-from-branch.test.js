@@ -6,6 +6,7 @@ const {
   getCommitHash,
   getBuildStatus,
   checkBuildStatus,
+  getPackagesVersionWithTarURL,
 } = require('../install-from-branch');
 
 describe('install-from-branch', () => {
@@ -57,6 +58,26 @@ describe('install-from-branch', () => {
       const result = checkBuildStatus('OTHER');
 
       expect(result).toBeFalsy();
+    });
+  });
+
+  describe('#getPackagesVersionWithTarURL', () => {
+    it('should returns the packages in install description mode', () => {
+      const cdnUrl = 'https://fake';
+      const packges = {
+        dep1: {
+          tarFile: '111.tar',
+        },
+        dep2: {
+          tarFile: '222.tar',
+        },
+      };
+      const result = getPackagesVersionWithTarURL(packges, cdnUrl);
+
+      expect(result).toEqual([
+        '"dep1@https://fake/111.tar"',
+        '"dep2@https://fake/222.tar"',
+      ]);
     });
   });
 });

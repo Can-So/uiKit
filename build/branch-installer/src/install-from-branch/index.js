@@ -160,3 +160,4 @@ module.exports = installFromBranch;
 module.exports.getCommitHash = getCommitHash;
 module.exports.getBuildStatus = getBuildStatus;
 module.exports.checkBuildStatus = checkBuildStatus;
+module.exports.getPackagesVersionWithTarURL = getPackagesVersionWithTarURL;
