@@ -1,6 +1,6 @@
 import { doc, p, textColor } from '@atlaskit/editor-test-helpers';
 import { checkParse, checkParseEncodeRoundTrips } from './_test-helpers';
-import { createJIRASchema } from '@atlaskit/editor-common';
+import { createJIRASchema } from '@atlaskit/adf-schema';
 
 const schema = createJIRASchema({ allowTextColor: true });
 

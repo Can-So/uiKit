@@ -1,6 +1,7 @@
 import * as React from 'react';
 import EmojiIcon from '@atlaskit/icon/glyph/editor/emoji';
-import { emoji, emojiQuery, WithProviders } from '@atlaskit/editor-common';
+import { emoji, emojiQuery } from '@atlaskit/adf-schema';
+import { WithProviders } from '@atlaskit/editor-common';
 
 import { EditorPlugin } from '../../types';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';

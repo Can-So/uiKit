@@ -2,7 +2,7 @@ import { Slice, Fragment } from 'prosemirror-model';
 import { TextSelection } from 'prosemirror-state';
 import { CellSelection } from 'prosemirror-tables';
 import { isColumnSelected, isRowSelected } from 'prosemirror-utils';
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   doc,
   p,

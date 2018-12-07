@@ -14,11 +14,8 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-import {
-  Transformer,
-  ProviderFactory,
-  defaultSchema,
-} from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
+import { Transformer, ProviderFactory } from '@atlaskit/editor-common';
 
 import {
   MediaPluginState,

@@ -31,7 +31,7 @@ import codeBlockPlugin from '../../../../plugins/code-block';
 import extensionPlugin from '../../../../plugins/extension';
 import tablesPlugin from '../../../../plugins/table';
 import macroPlugin, { setMacroProvider } from '../../../../plugins/macro';
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 
 describe('paste plugins', () => {

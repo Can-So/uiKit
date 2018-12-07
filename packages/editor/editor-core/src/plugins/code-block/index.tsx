@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import EditorCodeIcon from '@atlaskit/icon/glyph/editor/code';
-import { codeBlock } from '@atlaskit/editor-common';
+import { codeBlock } from '@atlaskit/adf-schema';
 
 import { createPlugin } from './pm-plugins/main';
 import { getToolbarConfig } from './toolbar';

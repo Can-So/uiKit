@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { TextSerializer } from '../../../index';
-import { defaultSchema as schema } from '@atlaskit/editor-common';
+import { defaultSchema as schema } from '@atlaskit/adf-schema';
 
 const serializer = TextSerializer.fromSchema(schema);
 
