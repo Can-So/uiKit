@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.11
+- [patch] [e0c91b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e0c91b6):
+
+  - FS-3310 Fix handling of duplicate users in mention typeahead causing HOT-85672
+
 ## 90.3.10
 - [patch] [fa596d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa596d9):
 

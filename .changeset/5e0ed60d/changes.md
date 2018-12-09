@@ -1,1 +1,0 @@
-- FS-3310 Fix handling of duplicate users in mention typeahead causing HOT-85672
