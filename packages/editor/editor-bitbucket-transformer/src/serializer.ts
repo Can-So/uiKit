@@ -211,17 +211,11 @@ const editorNodes = {
     parent: PMNode,
     index: number,
   ) {
-    if (!node.attrs.language) {
-      state.wrapBlock('    ', undefined, node, () =>
-        state.text(node.textContent ? node.textContent : '\u200c', false),
-      );
-    } else {
-      const backticks = generateOuterBacktickChain(node.textContent, 3);
-      state.write(backticks + node.attrs.language + '\n');
-      state.text(node.textContent ? node.textContent : '\u200c', false);
-      state.ensureNewLine();
-      state.write(backticks);
-    }
+    const backticks = generateOuterBacktickChain(node.textContent, 3);
+    state.write(backticks + (node.attrs.language || '') + '\n');
+    state.text(node.textContent ? node.textContent : '\u200c', false);
+    state.ensureNewLine();
+    state.write(backticks);
     state.closeBlock(node);
   },
   heading(
