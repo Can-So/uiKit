@@ -105,10 +105,7 @@ export default class EmbeddedDocument extends Component<Props, State> {
   };
 
   private updateDocument = async (body: any) => {
-    let { documentId, objectId, language } = this.props;
-    if (this.state.doc) {
-      ({ documentId, objectId, language } = this.state.doc);
-    }
+    const { documentId, objectId, language } = this.state.doc || this.props;
 
     if (!documentId) {
       return this.createDocument(body);
