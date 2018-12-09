@@ -9,6 +9,7 @@ import Form, {
   FormFooter,
   HelperMessage,
   ErrorMessage,
+  ValidMessage,
 } from '../src';
 
 export default () => (
@@ -28,19 +29,19 @@ export default () => (
         );
       }}
     >
-      {({ formProps, dirty, submitting }) => (
+      {({ formProps, submitting }) => (
         <form {...formProps}>
           <Field name="username" label="User name" isRequired defaultValue="">
             {({ fieldProps, error }) => (
               <>
-                <TextField {...fieldProps} />
+                <TextField autoComplete="off" {...fieldProps} />
                 {!error && (
-                  <HelperMessage>
+                  <HelperMessage fieldId={fieldProps.id}>
                     You can use letters, numbers & periods.
                   </HelperMessage>
                 )}
                 {error && (
-                  <ErrorMessage>
+                  <ErrorMessage fieldId={fieldProps.id}>
                     This user name is already in use, try another one.
                   </ErrorMessage>
                 )}
@@ -54,19 +55,24 @@ export default () => (
             isRequired
             validate={value => (value.length < 8 ? 'TOO_SHORT' : undefined)}
           >
-            {({ fieldProps, error }) => (
+            {({ fieldProps, error, meta }) => (
               <>
                 <TextField type="password" {...fieldProps} />
-                {!error && (
-                  <HelperMessage>
+                {!error && !meta.valid && (
+                  <HelperMessage fieldId={fieldProps.id}>
                     Use 8 or more characters with a mix of letters, numbers &
                     symbols.
                   </HelperMessage>
                 )}
                 {error && (
-                  <ErrorMessage>
+                  <ErrorMessage fieldId={fieldProps.id}>
                     Password needs to be more than 8 characters.
                   </ErrorMessage>
+                )}
+                {meta.valid && (
+                  <ValidMessage fieldId={fieldProps.id}>
+                    Awesome password!
+                  </ValidMessage>
                 )}
               </>
             )}
@@ -79,11 +85,7 @@ export default () => (
           <FormFooter>
             <ButtonGroup>
               <Button appearance="subtle">Cancel</Button>
-              <Button
-                type="submit"
-                appearance="primary"
-                isDisabled={!dirty || submitting}
-              >
+              <Button type="submit" appearance="primary" isLoading={submitting}>
                 Sign up
               </Button>
             </ButtonGroup>

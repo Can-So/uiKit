@@ -47,9 +47,9 @@ const MyForm = () => (
   ${(
     <Example
       packageName="@atlaskit/form"
-      Component={require('../examples/0-signup-form').default}
+      Component={require('../examples/00-signup-form').default}
       title="Sign up example"
-      source={require('!!raw-loader!../examples/0-signup-form')}
+      source={require('!!raw-loader!../examples/00-signup-form')}
     />
   )}
   

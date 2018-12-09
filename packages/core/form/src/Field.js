@@ -85,7 +85,7 @@ class FieldInner extends React.Component<Props, State> {
 
   unregisterField = () => {};
 
-  id = `${this.props.name}-${this.props.id || uuid()}`;
+  fieldId = `${this.props.name}-${this.props.id || uuid()}`;
 
   state = {
     // eslint-disable-next-line no-unused-vars
@@ -182,6 +182,10 @@ class FieldInner extends React.Component<Props, State> {
     } = this.state;
     const error =
       rest.submitError || ((rest.touched || rest.dirty) && rest.error);
+    const labelId = `${this.fieldId}-label`;
+    const helperId = `${this.fieldId}-helper`;
+    const validId = `${this.fieldId}-valid`;
+    const errorId = `${this.fieldId}-error`;
     const fieldProps = {
       onChange: e => {
         onChange(transform(e, value));
@@ -193,15 +197,17 @@ class FieldInner extends React.Component<Props, State> {
       isDisabled,
       isInvalid: Boolean(error),
       isRequired: Boolean(isRequired),
-      id: this.id,
+      'aria-invalid': error ? 'true' : 'false',
+      'aria-labelledby': `${labelId} ${helperId} ${errorId} ${validId}`,
+      id: this.fieldId,
     };
     return (
       <FieldWrapper>
         {label && (
-          <Label htmlFor={this.id}>
+          <Label id={labelId} htmlFor={this.fieldId}>
             {label}
             {isRequired && (
-              <RequiredIndicator role="presentation">*</RequiredIndicator>
+              <RequiredIndicator aria-hidden="true">*</RequiredIndicator>
             )}
           </Label>
         )}
