@@ -54,7 +54,6 @@ describe('ServiceProvider', () => {
       fetchMock.get({
         matcher: `begin:${providerUrl}`,
         response: (url: string) => {
-          console.log('@@@@@@@@@@@@@@: ', url);
           if (
             url ===
             `${providerUrl}/document?objectId=${encodeURIComponent(objectId)}`

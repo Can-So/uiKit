@@ -43,7 +43,12 @@ export const validGetResponse = {
 
 export const validBatchGetResponse = [
   {
-    ...validGetResponse,
+    id: docId,
+    language: {
+      default: {
+        versions: [validGetResponse],
+      },
+    },
   },
 ];
 
