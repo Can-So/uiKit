@@ -71,7 +71,7 @@ describe('<Header />', () => {
     const context = createContext({
       getFileState: () => Observable.of(processedImageState),
     });
-    const el: ReactWrapper<{}, HeaderState> = mount(
+    const el = mount<{}, HeaderState>(
       <Header intl={fakeIntl} context={context} identifier={identifier} />,
     );
 
@@ -90,7 +90,7 @@ describe('<Header />', () => {
     const context = createContext({
       getFileState: () => Observable.of(processedImageState),
     });
-    const el: ReactWrapper<{}, HeaderState> = mount(
+    const el = mount<{}, HeaderState>(
       <Header intl={fakeIntl} context={context} identifier={identifier} />,
     );
     expect(el.state().item.status).toEqual('SUCCESSFUL');
