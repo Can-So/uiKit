@@ -1,1 +1,0 @@
-- update should use documentId from current state
