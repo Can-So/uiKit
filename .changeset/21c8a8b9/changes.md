@@ -1,0 +1,1 @@
+- FS-3314 allow placeholder to truncate
