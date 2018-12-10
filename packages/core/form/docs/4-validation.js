@@ -22,9 +22,9 @@ of a field with both front-end and back-end validation.
 ${(
   <Example
     packageName="@atlaskit/form"
-    Component={require('../examples/6-validation').default}
+    Component={require('../examples/06-validation').default}
     title="Field validation"
-    source={require('!!raw-loader!../examples/6-validation')}
+    source={require('!!raw-loader!../examples/06-validation')}
   />
 )}
   

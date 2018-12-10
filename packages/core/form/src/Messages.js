@@ -25,27 +25,35 @@ const IconWrapper = styled.span`
 `;
 
 type Props = {
+  fieldId: string,
   children: Node,
 };
 
-export const HelperMessage = ({ children }: Props) => (
-  <Message>{children}</Message>
-);
+export const HelperMessage = ({ children, fieldId }: Props) => {
+  const id = fieldId ? `${fieldId}-helper` : null;
+  return <Message id={id}>{children}</Message>;
+};
 
-export const ErrorMessage = ({ children }: Props) => (
-  <Message error>
-    <IconWrapper>
-      <ErrorIcon size="small" role="presentation" />
-    </IconWrapper>
-    {children}
-  </Message>
-);
+export const ErrorMessage = ({ children, fieldId }: Props) => {
+  const id = fieldId ? `${fieldId}-error` : null;
+  return (
+    <Message error id={id}>
+      <IconWrapper>
+        <ErrorIcon size="small" />
+      </IconWrapper>
+      {children}
+    </Message>
+  );
+};
 
-export const ValidMessage = ({ children }: Props) => (
-  <Message valid>
-    <IconWrapper>
-      <SuccessIcon size="small" role="presentation" />
-    </IconWrapper>
-    {children}
-  </Message>
-);
+export const ValidMessage = ({ children, fieldId }: Props) => {
+  const id = fieldId ? `${fieldId}-valid` : null;
+  return (
+    <Message valid id={id}>
+      <IconWrapper>
+        <SuccessIcon size="small" />
+      </IconWrapper>
+      {children}
+    </Message>
+  );
+};
