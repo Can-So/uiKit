@@ -16,6 +16,7 @@ import {
   action,
   breakout,
   alignment,
+  indentation,
 } from './marks';
 
 import {
@@ -187,6 +188,7 @@ const marksInOrder: SchemaBuiltInItem[] = [
   { name: 'confluenceInlineComment', spec: confluenceInlineComment },
   ...markGroupDeclarations,
   { name: 'breakout', spec: breakout },
+  { name: 'indentation', spec: indentation },
 ];
 
 /**

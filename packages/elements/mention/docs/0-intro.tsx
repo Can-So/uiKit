@@ -1,26 +1,22 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, Props, Example, code } from '@atlaskit/docs';
+import SimpleMentionExample from '../examples/00-simple-mention-item';
+const SimpleMentionSource = require('!!raw-loader!../examples/00-simple-mention-item');
+
+const MentionProps = require('!!extract-react-types-loader!../src/components/Mention');
 
 export default md`
-  # Mention
-
   The main purpose of the mention component is to provide a mention picker for choosing users to mention within a text field or editor.
 
   It includes support for rest based searching and custom search implementations.
 
-  ## Installation
-
-  ~~~js
-  npm install @atlaskit/mention
-  # or
-  yarn add  @atlaskit/mention
-  ~~~
-
-  ## Using the component
+  ## Usage
 
   Import the component in your React app as follows:
 
-  ~~~js
+  ${code`
   import MentionPicker, { MentionResource } from '@atlaskit/mention';
+
   const mentionProvider = new MentionResource({
     url: 'http://example-mention-server/service',
     securityProvider: () => {
@@ -48,8 +44,7 @@ export default md`
       resourceProvider={mentionProvider}
       query="John"
       onSelection={(mention) => { /* do something */ }}
-    />, container);
-  ~~~
+    />, container);`}
 
   ### Note:
 
@@ -70,4 +65,16 @@ export default md`
   Key navigation can be bound to \`selectNext\` (e.g. down arrow),
   \`selectPrevious\` (e.g. up arrow), and \`chooseCurrentSelection\`
   (e.g. enter and tab).
+
+  ${(
+    <Example
+      packageName="@atlaskit/mention"
+      Component={SimpleMentionExample}
+      title="Simple Mention"
+      source={SimpleMentionSource}
+    />
+  )}
+
+  ${<Props props={MentionProps} />}
+
 `;

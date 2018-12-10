@@ -42,6 +42,7 @@ export default class WithPluginState extends React.Component<Props, State> {
   private debounce: number | null = null;
   private notAppliedState = {};
   private isSubscribed = false;
+  private hasBeenMounted = false;
 
   static contextTypes = {
     editorActions: PropTypes.object,
@@ -103,7 +104,9 @@ export default class WithPluginState extends React.Component<Props, State> {
     }
 
     this.debounce = window.setTimeout(() => {
-      this.setState(this.notAppliedState);
+      if (this.hasBeenMounted) {
+        this.setState(this.notAppliedState);
+      }
       this.debounce = null;
       this.notAppliedState = {};
     }, 10);
@@ -204,6 +207,7 @@ export default class WithPluginState extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    this.hasBeenMounted = true;
     this.subscribe(this.props);
     this.subscribeToContextUpdates(this.context);
   }
@@ -217,6 +221,7 @@ export default class WithPluginState extends React.Component<Props, State> {
   componentWillUnmount() {
     this.unsubscribeFromContextUpdates(this.context);
     this.unsubscribe();
+    this.hasBeenMounted = false;
   }
 
   render() {

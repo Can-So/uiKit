@@ -1,5 +1,10 @@
 # @atlaskit/onboarding
 
+## 6.1.12
+- [patch] [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+
+  - Change API to experimental theming API to namespace component themes into separate contexts and make theming simpler. Update all dependant components.
+
 ## 6.1.11
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

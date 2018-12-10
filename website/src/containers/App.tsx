@@ -1,10 +1,10 @@
+import { ModalTransition } from '@atlaskit/modal-dialog';
+import Page, { Grid, GridColumn } from '@atlaskit/page';
+import GlobalTheme from '@atlaskit/theme';
 import * as React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { withRouter, RouteComponentProps } from 'react-router';
 import styled, { injectGlobal } from 'styled-components';
-import { ModalTransition } from '@atlaskit/modal-dialog';
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import { Theme } from '@atlaskit/theme';
 
 import Home from '../pages/Home';
 import ChangeLogExplorer from '../pages/ChangeLogExplorer';
@@ -98,10 +98,8 @@ export default class App extends React.Component<{}, State> {
     }
   };
   render() {
-    const { mode } = this.state;
-    const theme = () => ({ mode });
     return (
-      <Theme values={theme}>
+      <GlobalTheme.Provider value={() => ({ mode: this.state.mode })}>
         <BrowserRouter>
           <AnalyticsListeners>
             <Route>
@@ -207,7 +205,7 @@ export default class App extends React.Component<{}, State> {
             </Switch>
           </AnalyticsListeners>
         </BrowserRouter>
-      </Theme>
+      </GlobalTheme.Provider>
     );
   }
 }

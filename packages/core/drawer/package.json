@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/drawer",
-  "version": "2.5.3",
+  "version": "2.6.0",
   "description": "React component the renders a Drawer from the left of the screen",
   "main": "dist/cjs/index.js",
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
@@ -13,11 +13,11 @@
   ],
   "dependencies": {
     "@atlaskit/analytics-next": "^3.1.1",
-    "@atlaskit/blanket": "^7.0.10",
-    "@atlaskit/docs": "^5.2.2",
-    "@atlaskit/icon": "^15.0.0",
-    "@atlaskit/item": "^8.0.12",
-    "@atlaskit/theme": "^6.2.1",
+    "@atlaskit/blanket": "^7.0.11",
+    "@atlaskit/docs": "^5.2.3",
+    "@atlaskit/icon": "^15.0.1",
+    "@atlaskit/item": "^8.0.13",
+    "@atlaskit/theme": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "chromatism": "^2.6.0",
     "emotion": "^9.1.1",
@@ -33,10 +33,10 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/button": "^10.0.1",
-    "@atlaskit/dropdown-menu": "^6.1.23",
-    "@atlaskit/quick-search": "^5.1.2",
-    "@atlaskit/section-message": "^1.0.12",
+    "@atlaskit/button": "^10.0.4",
+    "@atlaskit/dropdown-menu": "^6.1.24",
+    "@atlaskit/quick-search": "^5.2.1",
+    "@atlaskit/section-message": "^1.0.13",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-lorem-component": "^0.12.2"

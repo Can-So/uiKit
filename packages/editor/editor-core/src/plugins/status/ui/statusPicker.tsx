@@ -11,17 +11,21 @@ import { StatusType } from '../plugin';
 const PopupWithListeners = withOuterListeners(Popup);
 
 export interface Props {
-  element: HTMLElement | null;
+  target: HTMLElement | null;
   closeStatusPicker: () => void;
   onSelect: (status: StatusType) => void;
   onTextChanged: (status: StatusType) => void;
   onEnter: (status: StatusType) => void;
   autoFocus?: boolean;
+  defaultText?: string;
+  defaultColor?: Color;
+  defaultLocalId?: string;
 }
 
 export interface State {
   color: Color;
   text: string;
+  localId?: string;
 }
 
 const PickerContainer = styled.div`
@@ -39,7 +43,7 @@ export default class StatusPicker extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    this.state = this.extractStateFromElement(props.element);
+    this.state = this.extractStateFromProps(props);
   }
 
   componentDidUpdate(
@@ -47,29 +51,29 @@ export default class StatusPicker extends React.Component<Props, State> {
     prevState: Readonly<State>,
     snapshot?: any,
   ): void {
-    const element = this.props.element;
-    if (prevProps.element !== element) {
-      this.setState(this.extractStateFromElement(element));
+    const element = this.props.target;
+    if (prevProps.target !== element) {
+      this.setState(this.extractStateFromProps(this.props));
     }
   }
 
-  private extractStateFromElement(element: HTMLElement | null) {
-    const state = { ...DEFAULT_STATUS };
-    if (element) {
-      state.color = (element.getAttribute('color') || 'neutral') as Color;
-      state.text = element.getAttribute('text') || '';
-    }
+  private extractStateFromProps(props: Props): State {
+    let state = {} as State;
+    const { defaultColor, defaultText, defaultLocalId } = props;
+    state.color = defaultColor || DEFAULT_STATUS.color;
+    state.text = defaultText || DEFAULT_STATUS.text;
+    state.localId = defaultLocalId;
 
     return state;
   }
 
   render() {
-    const { autoFocus, element, closeStatusPicker } = this.props;
+    const { autoFocus, target, closeStatusPicker } = this.props;
 
     return (
-      element && (
+      target && (
         <PopupWithListeners
-          target={element}
+          target={target}
           offset={[0, 8]}
           handleClickOutside={closeStatusPicker}
           handleEscapeKeydown={closeStatusPicker}
@@ -92,19 +96,23 @@ export default class StatusPicker extends React.Component<Props, State> {
   }
 
   private onColorClick = color => {
+    const { text, localId } = this.state;
     this.setState({ color });
 
     this.props.onSelect({
-      text: this.state.text,
+      text,
       color,
+      localId,
     });
   };
 
-  private onTextChanged = value => {
-    this.setState({ text: value });
+  private onTextChanged = text => {
+    const { color, localId } = this.state;
+    this.setState({ text });
     this.props.onTextChanged({
-      text: value,
-      color: this.state.color,
+      text,
+      color,
+      localId,
     });
   };
 

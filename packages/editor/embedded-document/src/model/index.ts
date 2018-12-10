@@ -1,5 +1,5 @@
 export interface Document {
-  id: string;
+  documentId: string;
   objectId: string;
   containerId?: string;
   createdBy: User;

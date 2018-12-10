@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/button",
-  "version": "10.0.3",
+  "version": "10.1.0",
   "description": "A React component that is a base button.",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -26,8 +26,8 @@
   "dependencies": {
     "@atlaskit/analytics-next": "^3.1.1",
     "@atlaskit/analytics-next-types": "^3.1.2",
-    "@atlaskit/spinner": "9.0.11",
-    "@atlaskit/theme": "^6.2.1",
+    "@atlaskit/spinner": "9.0.12",
+    "@atlaskit/theme": "^7.0.0",
     "@atlaskit/type-helpers": "^2.0.0",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
@@ -39,10 +39,10 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/checkbox": "^5.0.7",
-    "@atlaskit/docs": "^5.2.2",
-    "@atlaskit/icon": "^15.0.0",
-    "@atlaskit/logo": "^9.2.4",
+    "@atlaskit/checkbox": "^5.0.8",
+    "@atlaskit/docs": "^5.2.3",
+    "@atlaskit/icon": "^15.0.1",
+    "@atlaskit/logo": "^9.2.5",
     "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-dom": "^16.4.2",

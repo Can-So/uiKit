@@ -1,5 +1,22 @@
 # @atlaskit/drawer
 
+## 2.6.0
+- [minor] [53bf8be](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/53bf8be):
+
+  - Support onCloseComplete
+
+## 2.5.4
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/blanket@7.0.11
+  - @atlaskit/button@10.0.4
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/item@8.0.13
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/quick-search@5.2.1
+  - @atlaskit/theme@7.0.0
+
 ## 2.5.3
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

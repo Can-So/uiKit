@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/color-picker",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Jira Color Picker Component",
   "main": "dist/es5/index.js",
   "modules": "dist/es2015/index.js",
@@ -27,9 +27,9 @@
   ],
   "dependencies": {
     "@atlaskit/analytics-next": "^3.1.0",
-    "@atlaskit/icon": "^15.0.0",
-    "@atlaskit/select": "^6.1.9",
-    "@atlaskit/theme": "^6.2.0",
+    "@atlaskit/icon": "^15.0.1",
+    "@atlaskit/select": "^6.1.10",
+    "@atlaskit/theme": "^7.0.0",
     "memoize-one": "^3.0.1",
     "styled-components": "^3.2.6"
   },
@@ -37,8 +37,8 @@
     "react": "^16.4.0"
   },
   "devDependencies": {
-    "@atlaskit/docs": "^5.2.2",
-    "@atlaskit/section-message": "^1.0.12",
+    "@atlaskit/docs": "^5.2.3",
+    "@atlaskit/section-message": "^1.0.13",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "enzyme-adapter-react-16": "https://registry.npmjs.org/@pgleeson/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.1.7.tgz",
     "react": "^16.4.0"

@@ -1,5 +1,46 @@
 # @atlaskit/media-ui
 
+## 8.1.0
+- [minor] [8fbb36f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8fbb36f):
+
+  - Change impl. of CustomVideoPlayer; add disableThumbTooltip property to TimeRange component; Add ability to mouse click and drag right away to TimeRange even if clicked outside of thumb control;
+
+## 8.0.0
+- [major] [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+
+  - CustomVideoPlayer is now CustomMediaPlayer and supports audio through type property. Media Viewer now uses custom audio player for audio everywhere except IE11.
+
+## 7.11.0
+- [minor] [01697a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01697a6):
+
+  - CustomVideoPlayer improvements: fix currentTime origin + apply custom theme
+
+## 7.10.0
+- [minor] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
+
+  - use custom video player for inline video in media-card
+
+## 7.9.0
+- [minor] [c61f828](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c61f828):
+
+  - add bounds to camera module
+
+## 7.8.2
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/avatar-group@2.1.8
+  - @atlaskit/button@10.0.4
+  - @atlaskit/checkbox@5.0.8
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/field-text@7.0.16
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/badge@9.2.1
+  - @atlaskit/lozenge@6.2.3
+
 ## 7.8.1
 - [patch] [4c0c2a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c0c2a0):
 

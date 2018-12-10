@@ -1,5 +1,28 @@
 # @atlaskit/editor-common
 
+## 22.3.2
+- [patch] [60a4609](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60a4609):
+
+  - ED-5771: fix rendering of full-width resized images
+
+## 22.3.1
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
+## 22.3.0
+- [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
+
+  - ED-3890 Adds Indentation support on paragraphs and headings
+
+## 22.2.3
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/emoji@47.0.6
+  - @atlaskit/mention@15.1.7
+  - @atlaskit/profilecard@6.1.1
+  - @atlaskit/theme@7.0.0
+
 ## 22.2.2
 - [patch] [755fd19](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/755fd19):
 

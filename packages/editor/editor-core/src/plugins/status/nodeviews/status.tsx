@@ -20,8 +20,12 @@ export const StatusContainer = styled.span`
   cursor: pointer;
 
   display: inline-block;
-  line-height: 1;
   border-radius: 5px;
+  max-width: 100%;
+
+  /* Prevent responsive layouts increasing height of container by changing
+     font size and therefore line-height. */
+  line-height: 0;
 
   opacity: ${(props: StatusContainerProps) =>
     props.placeholderStyle ? 0.5 : 1};

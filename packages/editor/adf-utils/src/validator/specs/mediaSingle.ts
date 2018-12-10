@@ -7,7 +7,7 @@ export default {
         width: { type: 'number', minimum: 0, maximum: 100, optional: true },
         layout: {
           type: 'enum',
-          values: ['full-width', 'wide', 'wrap-right', 'center', 'wrap-left'],
+          values: ['full-width', 'wide', 'center', 'wrap-right', 'wrap-left'],
         },
       },
       optional: true,

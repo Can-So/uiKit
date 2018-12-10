@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components';
 import { codeFontFamily, fontSize, gridSize } from '@atlaskit/theme';
-
-import { ThemeProps, TextAreaTheme } from '../theme';
+import { ThemeTokens } from '../theme';
 import { Props } from '../components/TextArea';
 
-type StyleProps = Props & TextAreaTheme & { isFocused?: boolean; none?: any };
+type StyleProps = Props & ThemeTokens & { isFocused?: boolean; none?: any };
 
 const grid = gridSize();
 const borderRadius = '3px';
@@ -27,7 +26,7 @@ const getPlaceholderStyle = (style: typeof getPlaceholderColor) => css`
   }
 `;
 
-const getPlaceholderColor = css<ReturnType<Required<ThemeProps>['textArea']>>`
+const getPlaceholderColor = css<ThemeTokens>`
   color: ${props => props.placeholderTextColor};
 `;
 
@@ -46,7 +45,7 @@ const getBorderAndPadding = () => {
 };
 
 const getHoverState = (props: StyleProps) => {
-  if (props.readOnly || props.isFocused || props.none) {
+  if (props.isReadOnly || props.isFocused || props.none) {
     return null;
   }
   let backgroundColorHover = props.backgroundColorHover;
@@ -118,7 +117,7 @@ const getBackgroundColor = (props: StyleProps) => {
   return backgroundColor;
 };
 
-export const TextAreaWrapper = styled.div<Props & TextAreaTheme>`
+export const TextAreaWrapper = styled.div<StyleProps>`
   flex: 1 1 100%;
   position: relative;
   background-color: ${getBackgroundColor};

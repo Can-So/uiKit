@@ -13,6 +13,8 @@ import {
   alignment,
   mediaSingle,
   media,
+  heading,
+  indentation,
 } from '../../../builders';
 
 describe('Builders', () => {
@@ -64,7 +66,16 @@ describe('Builders', () => {
         p(emoji({ shortName: ':wtf:', text: ':wtf:' }), ' '),
       ),
     () => doc(breakout({ mode: 'wide' })(codeBlock({})(text('some code')))),
-    () => doc(alignment({ align: 'end' })(p('hello'))),
+    () =>
+      doc(
+        alignment({ align: 'end' })(p('hello')),
+        alignment({ align: 'end' })(heading({ level: 2 })(text('world!'))),
+      ),
+    () =>
+      doc(
+        indentation({ level: 1 })(p('hello')),
+        indentation({ level: 2 })(heading({ level: 2 })(text('world!'))),
+      ),
     () =>
       doc(
         mediaSingle({

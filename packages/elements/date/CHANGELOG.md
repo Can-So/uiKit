@@ -1,5 +1,10 @@
 # @atlaskit/date
 
+## 0.1.8
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/theme@7.0.0
+
 ## 0.1.7
 - [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
 

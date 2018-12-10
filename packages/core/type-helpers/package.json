@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/type-helpers",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Some helpers for Typescript typing of Atlaskit",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -20,6 +20,9 @@
   },
   "peerDependencies": {
     "react": "^16.4.0"
+  },
+  "atlaskit": {
+    "internal": true
   },
   "devDependencies": {},
   "keywords": [

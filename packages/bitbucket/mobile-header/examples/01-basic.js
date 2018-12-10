@@ -17,48 +17,56 @@ const FakeSideBar = styled.div`
 
 type State = {
   drawerState: 'navigation' | 'sidebar' | 'none',
+  isOpen: boolean,
 };
 
 class MobileHeaderDemo extends Component<*, State> {
   state = {
     drawerState: 'none',
+    isOpen: false,
   };
 
   navOpened = () => {
-    this.setState({ drawerState: 'navigation' });
+    this.setState({ drawerState: 'navigation', isOpen: true });
   };
 
   sidebarOpened = () => {
-    this.setState({ drawerState: 'sidebar' });
+    this.setState({ drawerState: 'sidebar', isOpen: true });
   };
 
   drawerClosed = () => {
-    this.setState({ drawerState: 'none' });
+    this.setState({ drawerState: 'none', isOpen: false });
   };
 
   render() {
+    const isHeaderOpen = this.state.isOpen;
     return (
-      <MobileHeader
-        drawerState={this.state.drawerState}
-        menuIconLabel={'Menu'}
-        navigation={isOpen => isOpen && <Navigation onResize={() => {}} />}
-        secondaryContent={
-          <ButtonGroup>
-            <Button>One</Button>
-            <Button
-              iconBefore={<DetailViewIcon label="Show sidebar" />}
-              onClick={this.sidebarOpened}
-            />
-          </ButtonGroup>
-        }
-        sidebar={isOpen =>
-          isOpen && <FakeSideBar>Sidebar goes here...</FakeSideBar>
-        }
-        pageHeading="Page heading"
-        onNavigationOpen={this.navOpened}
-        onSidebarOpen={this.sidebarOpened}
-        onDrawerClose={this.drawerClosed}
-      />
+      <div>
+        <Button onClick={this.sidebarOpened}>Open Mobile Header</Button>
+        {isHeaderOpen && (
+          <MobileHeader
+            drawerState={this.state.drawerState}
+            menuIconLabel={'Menu'}
+            navigation={isOpen => isOpen && <Navigation onResize={() => {}} />}
+            secondaryContent={
+              <ButtonGroup>
+                <Button>One</Button>
+                <Button
+                  iconBefore={<DetailViewIcon label="Show sidebar" />}
+                  onClick={this.sidebarOpened}
+                />
+              </ButtonGroup>
+            }
+            sidebar={isOpen =>
+              isOpen && <FakeSideBar>Sidebar goes here...</FakeSideBar>
+            }
+            pageHeading="Page heading"
+            onNavigationOpen={this.navOpened}
+            onSidebarOpen={this.sidebarOpened}
+            onDrawerClose={this.drawerClosed}
+          />
+        )}
+      </div>
     );
   }
 }

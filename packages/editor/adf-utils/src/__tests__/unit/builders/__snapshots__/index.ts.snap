@@ -307,6 +307,26 @@ Object {
       ],
       "type": "paragraph",
     },
+    Object {
+      "attrs": Object {
+        "level": 2,
+      },
+      "content": Array [
+        Object {
+          "text": "world!",
+          "type": "text",
+        },
+      ],
+      "marks": Array [
+        Object {
+          "attrs": Object {
+            "align": "end",
+          },
+          "type": "alignment",
+        },
+      ],
+      "type": "heading",
+    },
   ],
   "type": "doc",
   "version": 1,
@@ -314,6 +334,52 @@ Object {
 `;
 
 exports[`Builders should be able to generate correct ADF for example #6 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "text": "hello",
+          "type": "text",
+        },
+      ],
+      "marks": Array [
+        Object {
+          "attrs": Object {
+            "level": 1,
+          },
+          "type": "indentation",
+        },
+      ],
+      "type": "paragraph",
+    },
+    Object {
+      "attrs": Object {
+        "level": 2,
+      },
+      "content": Array [
+        Object {
+          "text": "world!",
+          "type": "text",
+        },
+      ],
+      "marks": Array [
+        Object {
+          "attrs": Object {
+            "level": 2,
+          },
+          "type": "indentation",
+        },
+      ],
+      "type": "heading",
+    },
+  ],
+  "type": "doc",
+  "version": 1,
+}
+`;
+
+exports[`Builders should be able to generate correct ADF for example #7 1`] = `
 Object {
   "content": Array [
     Object {
@@ -338,7 +404,7 @@ Object {
 }
 `;
 
-exports[`Builders should be able to generate correct ADF for example #7 1`] = `
+exports[`Builders should be able to generate correct ADF for example #8 1`] = `
 Object {
   "content": Array [
     Object {

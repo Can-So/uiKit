@@ -1,5 +1,118 @@
 # @atlaskit/editor-core
 
+## 90.3.11
+- [patch] [e0c91b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e0c91b6):
+
+  - FS-3310 Fix handling of duplicate users in mention typeahead causing HOT-85672
+
+## 90.3.10
+- [patch] [fa596d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa596d9):
+
+  - display videos as mediaGroup for now
+
+## 90.3.9
+- [patch] [7190767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7190767):
+
+  - Fixes empty collection name and API naming mismatches
+
+## 90.3.8
+- [patch] [7fdfac1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7fdfac1):
+
+  - FS-3269 - Ensure status attributes are read even if in mark
+
+## 90.3.7
+- [patch] [f0398a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0398a5):
+
+  - Display media singles with video inside as inline video player
+
+## 90.3.6
+- [patch] [a60d8cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a60d8cd):
+
+  - FS-3278 - Prevent overflow of status in a table cell.
+
+## 90.3.5
+- [patch] [ef1df96](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef1df96):
+
+  - Remove unused deps
+
+## 90.3.4
+- [patch] [3c2c367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3c2c367):
+
+  - FS-3261 - Fix status selection growing as font size increases
+
+## 90.3.3
+- [patch] [5390041](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5390041):
+
+  - FS-3160 - Prevent editor crash in some deletion use cases for status
+
+## 90.3.2
+- [patch] [48640fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/48640fb):
+
+  - FS-3227 - Prevent status popup focus from scrolling editor
+
+## 90.3.1
+- [patch] [dcd8f90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dcd8f90):
+
+  - Fix bug where gap cursor would remove previous node on backspace
+
+## 90.3.0
+- [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
+
+  - ED-3890 Adds Indentation support on paragraphs and headings
+
+  **New Feature: Indentation**
+
+  Use the new `allowIndentation` prop to enable this feature.
+
+  ```
+  // Enable indentation support for `heading` and `paragraph`
+  allowIndentation?: boolean;
+  ```
+
+  **Minor bug fixes**
+
+  - ED-5841 Alignment is getting removed inside Table on load
+  - ED-5842 Alignment mark aligns empty placeholder
+  - ED-5843 Remove block marks on backspace when document is empty
+  - ED-5846 Fix React warning in renderer
+  - ED-5863 Fix alignment copy-paste
+  - ED-5865 Alignment shouldn't be disabled when Cmd + A
+
+## 90.2.2
+- [patch] [1668ce3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1668ce3):
+
+  - Wrap kitchen sink in smart card provider.
+
+## 90.2.1
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/avatar-group@2.1.8
+  - @atlaskit/button@10.0.4
+  - @atlaskit/calendar@7.0.15
+  - @atlaskit/code@8.2.1
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/droplist@7.0.16
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/item@8.0.13
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/select@6.1.10
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/editor-common@22.2.3
+  - @atlaskit/renderer@31.0.7
+  - @atlaskit/date@0.1.8
+  - @atlaskit/emoji@47.0.6
+  - @atlaskit/mention@15.1.7
+  - @atlaskit/pubsub@3.0.6
+  - @atlaskit/status@0.2.8
+  - @atlaskit/task-decision@11.0.7
+  - @atlaskit/smart-card@9.0.2
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/lozenge@6.2.3
+
 ## 90.2.0
 - [minor] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
 

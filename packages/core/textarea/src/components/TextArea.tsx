@@ -1,20 +1,18 @@
-import * as React from 'react';
-import { Theme } from '@atlaskit/theme';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
+import GlobalTheme from '@atlaskit/theme';
+import * as React from 'react';
 import {
   name as packageName,
   version as packageVersion,
 } from '../../package.json';
-import { theme as defaultTheme, ThemeProps } from '../theme';
+import { Theme, ThemeTokens } from '../theme';
 import { TextAreaWrapper } from '../styled';
 import TextareaElement from './TextAreaElement';
 import { withDefaultProps, PropsOf } from '@atlaskit/type-helpers';
-
-type ThemeType = <T extends ThemeProps>(theme: ThemeProps) => T;
 
 export type Props = {
   /**
@@ -58,15 +56,21 @@ export type Props = {
    * none: explicitly disallow resizing on the textarea.
    */
   resize: 'auto' | 'vertical' | 'horizontal' | 'smart' | 'none';
-  /** The theme function TextArea consumes to derive theming constants for use in styling its components */
-  theme: ThemeType;
   /**
-   * Ref used to access the textarea dom element. NOTE we expose this via forwardRef,
-   * so you can also use the ref prop of this component to the same effect.
+   * Passed down to the <textarea /> element.
    */
-  forwardedRef: (elem: HTMLTextAreaElement | null) => void;
-} & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
-
+  spellCheck?: boolean;
+  /**
+   * The theme function TextArea consumes to derive theming constants for use in styling its components
+   */
+  theme?: any;
+  /**
+   * Ref used to access the textarea dom element. NOTE we expose this via
+   * forwardRef, so you can also use the ref prop of this component to the
+   * same effect.
+   */
+  forwardedRef?: (e: HTMLTextAreaElement | null) => void;
+};
 type State = {
   isFocused: boolean;
 };
@@ -96,7 +100,6 @@ const defaultProps: Pick<
   isMonospaced: false,
   minimumRows: 1,
   maxHeight: '50vh',
-  theme: defaultTheme,
   forwardedRef: () => {},
 };
 
@@ -144,34 +147,40 @@ class TextAreaWithoutForwardRef extends React.Component<Props, State> {
     const { isFocused } = this.state;
 
     return (
-      <Theme values={theme}>
-        {(themeInContext: any) => (
-          <TextAreaWrapper
-            resize={resize}
-            maxHeight={maxHeight}
-            appearance={appearance}
-            isDisabled={isDisabled}
-            isReadOnly={isReadOnly}
-            isMonospaced={isMonospaced}
-            isFocused={isFocused}
-            isInvalid={isInvalid}
-            minimumRows={minimumRows}
-            {...themeInContext.textArea({ appearance, isCompact })}
-          >
-            <TextareaElement
-              {...props}
-              defaultValue={defaultValue ? `${defaultValue}` : undefined}
-              forwardedRef={forwardedRef}
-              resize={resize}
-              disabled={isDisabled}
-              readOnly={isReadOnly}
-              required={isRequired}
-              onFocus={this.handleOnFocus}
-              onBlur={this.handleOnBlur}
-            />
-          </TextAreaWrapper>
+      <GlobalTheme.Consumer>
+        {({ mode }: { mode: 'dark' | 'light' }) => (
+          <Theme.Provider value={theme}>
+            <Theme.Consumer appearance={appearance} mode={mode}>
+              {(tokens: ThemeTokens) => (
+                <TextAreaWrapper
+                  resize={resize}
+                  maxHeight={maxHeight}
+                  appearance={appearance}
+                  isDisabled={isDisabled}
+                  isReadOnly={isReadOnly}
+                  isMonospaced={isMonospaced}
+                  isFocused={isFocused}
+                  isInvalid={isInvalid}
+                  minimumRows={minimumRows}
+                  forwardedRef={() => {}}
+                  {...tokens}
+                >
+                  <TextareaElement
+                    {...props}
+                    forwardedRef={forwardedRef}
+                    resize={resize}
+                    disabled={isDisabled}
+                    readOnly={isReadOnly}
+                    required={isRequired}
+                    onFocus={this.handleOnFocus}
+                    onBlur={this.handleOnBlur}
+                  />
+                </TextAreaWrapper>
+              )}
+            </Theme.Consumer>
+          </Theme.Provider>
         )}
-      </Theme>
+      </GlobalTheme.Consumer>
     );
   }
 }

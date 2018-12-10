@@ -17,6 +17,8 @@ import {
   panelSharedStyles,
   ruleSharedStyles,
   paragraphSharedStyles,
+  indentationSharedStyles,
+  blockMarksSharedStyles,
   mediaSingleSharedStyle,
   blockNodesVerticalMargin,
   akEditorTableToolbar,
@@ -96,6 +98,8 @@ export const Wrapper = styled.div<Props & HTMLAttributes<{}>>`
   ${panelSharedStyles};
   ${ruleSharedStyles};
   ${paragraphSharedStyles};
+  ${indentationSharedStyles};
+  ${blockMarksSharedStyles}
 
   & .UnknownBlock {
     font-family: ${fontFamily()};

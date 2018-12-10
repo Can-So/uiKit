@@ -6,11 +6,11 @@ import Button from '@atlaskit/button';
 import { Auth, ProcessedFileState } from '@atlaskit/media-core';
 import Spinner from '@atlaskit/spinner';
 import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { createContext } from '../../../_stubs';
 import { VideoViewer, Props } from '../../../../../newgen/viewers/video';
 import { Video } from '../../../../../newgen/styled';
 import { ErrorMessage } from '../../../../../newgen/error';
-import { CustomVideo } from '../../../../../newgen/viewers/video/customVideo';
 
 const token = 'some-token';
 const clientId = 'some-client-id';
@@ -137,8 +137,8 @@ describe('Video viewer', () => {
     await (el as any).instance()['init']();
     el.update();
 
-    expect(el.find(CustomVideo)).toHaveLength(1);
-    expect(el.find(CustomVideo).prop('src')).toEqual(
+    expect(el.find(CustomMediaPlayer)).toHaveLength(1);
+    expect(el.find(CustomMediaPlayer).prop('src')).toEqual(
       'some-base-url/video?client=some-client-id&token=some-token',
     );
   });
@@ -180,25 +180,25 @@ describe('Video viewer', () => {
 
     it('should auto play custom video viewer when it is the first preview', async () => {
       const el = await createAutoPlayFixture(0, true);
-      expect(el.find(CustomVideo)).toHaveLength(1);
+      expect(el.find(CustomMediaPlayer)).toHaveLength(1);
       expect(el.find({ autoPlay: true })).toHaveLength(2);
     });
 
     it('should not auto play custom video viewer when it is not the first preview', async () => {
       const el = await createAutoPlayFixture(1, true);
-      expect(el.find(CustomVideo)).toHaveLength(1);
+      expect(el.find(CustomMediaPlayer)).toHaveLength(1);
       expect(el.find({ autoPlay: true })).toHaveLength(0);
     });
 
     it('should auto play native video viewer when it is the first preview', async () => {
       const el = await createAutoPlayFixture(0, false);
-      expect(el.find(CustomVideo)).toHaveLength(0);
+      expect(el.find(CustomMediaPlayer)).toHaveLength(0);
       expect(el.find({ autoPlay: true })).toHaveLength(2);
     });
 
     it('should not auto play native video viewer when it is not the first preview', async () => {
       const el = await createAutoPlayFixture(1, false);
-      expect(el.find(CustomVideo)).toHaveLength(0);
+      expect(el.find(CustomMediaPlayer)).toHaveLength(0);
       expect(el.find({ autoPlay: true })).toHaveLength(0);
     });
   });

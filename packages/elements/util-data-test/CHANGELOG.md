@@ -1,5 +1,15 @@
 # @atlaskit/util-data-test
 
+## 10.0.24
+- [patch] [e0c91b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e0c91b6):
+
+  - FS-3310 Fix handling of duplicate users in mention typeahead causing HOT-85672
+
+## 10.0.23
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
 ## 10.0.22
 - [patch] [10a728e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/10a728e):
 
