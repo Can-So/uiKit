@@ -61,7 +61,7 @@ export class JiraCardClient extends Client {
     //
     return new Promise(resolve => {
       // We simulate a 2s load time
-      setTimeout(() => {
+      window.setTimeout(() => {
         resolve({
           meta: {
             visibility: 'restricted',
@@ -108,7 +108,6 @@ export default function CommentWithJiraCardsExample() {
             allowRule={true}
             allowTables={true}
             allowHelpDialog={true}
-            allowGapCursor={true}
             allowExtension={true}
             extensionHandlers={extensionHandlers}
             UNSAFE_cards={{

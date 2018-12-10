@@ -36,7 +36,7 @@ class Example extends React.PureComponent<Props, State> {
   state: State = { source: exampleMarkdown };
 
   componentDidMount() {
-    setTimeout(() => {
+    window.setTimeout(() => {
       this.props.actions.replaceDocument(this.state.source);
     });
   }

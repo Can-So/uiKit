@@ -9,42 +9,45 @@ const truncationStyles = css`
   white-space: nowrap;
 `;
 
-const getTruncation = ({ truncate }) => (truncate ? truncationStyles : null);
+const getTruncationStyles = ({ truncate }) =>
+  truncate ? truncationStyles : null;
 
 export const Outer = styled.div`
-  margin: ${gridSize() * 3}px 0 0;
+  margin: ${gridSize() * 3}px 0 ${gridSize() * 2}px 0;
 `;
 
 export const StyledTitle = styled.h1`
   ${typography.h700()};
-  ${getTruncation} line-height: ${gridSize() * 4}px;
+  ${getTruncationStyles} line-height: ${gridSize() * 4}px;
   margin-top: 0;
-`;
-
-export const BreadcrumbsContainer = styled.div`
-  margin-left: -${gridSize() / 2}px;
 `;
 
 export const TitleWrapper = styled.div`
   align-items: flex-start;
   display: flex;
+  ${({ truncate }) =>
+    truncate
+      ? 'flex-wrap: no-wrap;'
+      : 'flex-wrap: wrap;'}
   justify-content: space-between;
-  margin-bottom: ${gridSize() * 3}px;
 `;
 
 export const TitleContainer = styled.div`
-  min-width: 0%;
-  flex-shrink: 1;
-  width: 100%;
+  flex: 1 0 auto;
+  ${({ truncate }) => (truncate ? 'flex-shrink: 1;' : null)}
+  margin-bottom: ${gridSize()}px;
+  max-width: 100%;
+  min-width: 0;
 `;
 
 export const ActionsWrapper = styled.div`
-  white-space: nowrap;
+  flex: 1 0 auto;
+  margin-bottom: ${gridSize()}px;
   padding-left: ${gridSize() * 4}px;
-  min-width: 0%;
-  flex-shrink: 0;
+  text-align: right;
+  white-space: nowrap;
 `;
 
 export const BottomBarWrapper = styled.div`
-  margin-bottom: ${gridSize() * 2}px;
+  margin-top: ${gridSize() * 2}px;
 `;

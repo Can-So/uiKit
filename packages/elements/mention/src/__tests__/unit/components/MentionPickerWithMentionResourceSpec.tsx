@@ -63,7 +63,7 @@ describe('MentionPicker', () => {
   it('should fire analytics when new mention data is fetched', () => {
     mentionResource.notify(Date.now(), mentionsResult, query, true);
 
-    return new Promise(resolve => setTimeout(resolve)).then(() => {
+    return new Promise(resolve => window.setTimeout(resolve)).then(() => {
       expect(fireAnalyticsMock).toHaveBeenCalled();
 
       const firstArgument = fireAnalyticsMock.mock.calls[0][0];
@@ -92,7 +92,7 @@ describe('MentionPicker', () => {
   it('should not fire analytics when mention data is from local search', () => {
     mentionResource.notify(Date.now(), mentionsResult, query, false);
 
-    return new Promise(resolve => setTimeout(resolve)).then(() => {
+    return new Promise(resolve => window.setTimeout(resolve)).then(() => {
       expect(fireAnalyticsMock).not.toHaveBeenCalled();
     });
   });

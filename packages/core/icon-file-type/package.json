@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/icon-file-type",
-  "version": "2.0.0",
+  "version": "3.0.1",
   "description": "A React package that contains file-type icons",
   "license": "SEE LICENSE IN LICENSE",
   "main": "cjs/index.js",
@@ -24,7 +24,7 @@
     "build:babel:cjs": "NODE_ENV=production BABEL_ENV=production:cjs babel src -d cjs --root-mode=\"upward\""
   },
   "dependencies": {
-    "@atlaskit/theme": "^6.1.1",
+    "@atlaskit/theme": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
     "uuid": "^3.1.0"
@@ -35,12 +35,12 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^9.0.15",
-    "@atlaskit/docs": "^5.0.8",
-    "@atlaskit/field-text": "^7.0.12",
+    "@atlaskit/button": "^10.0.4",
+    "@atlaskit/docs": "^5.2.3",
+    "@atlaskit/field-text": "^7.0.16",
     "@atlaskit/icon-build-process": "^0.1.0",
-    "@atlaskit/modal-dialog": "^7.0.3",
-    "@atlaskit/tooltip": "^12.1.4",
+    "@atlaskit/modal-dialog": "^7.0.14",
+    "@atlaskit/tooltip": "^12.1.12",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "fs-extra": "^4.0.2",
     "react-dom": "^16.4.2"

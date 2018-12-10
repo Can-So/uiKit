@@ -1,7 +1,7 @@
 // @flow
 
+import GlobalTheme from '@atlaskit/theme';
 import React, { Component } from 'react';
-import { Theme } from '@atlaskit/theme';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
@@ -13,8 +13,8 @@ import {
 } from '../../package.json';
 
 import Input from './Input';
-import defaultTheme from '../theme';
 import { Wrapper } from '../styled';
+import { Theme } from '../theme';
 import type { TextFieldProps } from '../types';
 
 type State = {
@@ -24,7 +24,6 @@ type State = {
 class Textfield extends Component<TextFieldProps, State> {
   static defaultProps = {
     appearance: 'standard',
-    theme: defaultTheme,
   };
 
   state = {
@@ -63,6 +62,7 @@ class Textfield extends Component<TextFieldProps, State> {
   render() {
     const { isFocused } = this.state;
     const {
+      appearance,
       width,
       forwardedRef,
       theme,
@@ -73,20 +73,26 @@ class Textfield extends Component<TextFieldProps, State> {
     } = this.props;
 
     return (
-      <Theme theme={theme}>
-        {t => (
-          <Wrapper width={width}>
-            <Input
-              {...rest}
-              theme={t}
-              isFocused={isFocused}
-              forwardedRef={forwardedRef}
-              onFocus={this.handleOnFocus}
-              onBlur={this.handleOnBlur}
-            />
-          </Wrapper>
-        )}
-      </Theme>
+      <Theme.Provider value={theme}>
+        <GlobalTheme.Consumer>
+          {({ mode }) => (
+            <Theme.Consumer appearance={appearance} mode={mode}>
+              {tokens => (
+                <Wrapper width={width}>
+                  <Input
+                    {...rest}
+                    theme={tokens}
+                    isFocused={isFocused}
+                    forwardedRef={forwardedRef}
+                    onFocus={this.handleOnFocus}
+                    onBlur={this.handleOnBlur}
+                  />
+                </Wrapper>
+              )}
+            </Theme.Consumer>
+          )}
+        </GlobalTheme.Consumer>
+      </Theme.Provider>
     );
   }
 }

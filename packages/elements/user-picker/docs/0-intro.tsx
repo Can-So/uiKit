@@ -1,29 +1,25 @@
 import * as React from 'react';
 import { md, code, Props, Example } from '@atlaskit/docs';
+import SectionMessage from '@atlaskit/section-message';
 
 export default md`
-  # User picker
-
-  # WARNING
-
-  This package is still in development and API will change frequently. There will likely be multiple breaking changes
-  in a short span of time and it should not be consumed by customers for the time being.
+  ${(
+    <SectionMessage appearance="warning">
+      <p>
+        <strong>
+          Note: @atlaskit/user-picker is currently a developer preview.
+        </strong>
+      </p>
+      <p>
+        Please experiment and test this package, but be aware that the API may
+        change at any time. Use at your own risk, preferrably not in production.
+      </p>
+    </SectionMessage>
+  )}
 
   The purpose of the user picker package is to provide UI for displaying a set of users in a scrollable dropdown.
 
-  ## Try it out
-
-  Interact with a [live demo of the @atlaskit/user-picker component](https://atlaskit.atlassian.com/packages/elements/user-picker).
-
-  ## Installation
-
-  ~~~js
-  npm install @atlaskit/user-picker
-  # or
-  yarn add @atlaskit/user-picker
-  ~~~
-
-  ## Using the component
+  ## Usage
 
   Import the component in your React app as follows:
 

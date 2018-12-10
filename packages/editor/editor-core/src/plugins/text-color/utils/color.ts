@@ -2,7 +2,7 @@ import { Mark, MarkType } from 'prosemirror-model';
 import { TextSelection } from 'prosemirror-state';
 import { DEFAULT_COLOR } from '../pm-plugins/main';
 
-export const getActiveColor = (state): string | undefined => {
+export const getActiveColor = (state): string | null => {
   const { $from, $to, $cursor } = state.selection as TextSelection;
   const { textColor } = state.schema.marks as { textColor: MarkType };
 
@@ -36,7 +36,7 @@ export const getActiveColor = (state): string | undefined => {
     marksWithColor.length > 1 ||
     (marksWithColor.length === 1 && marks.length > 2)
   ) {
-    return;
+    return null;
   }
   return marksWithColor.length
     ? marksWithColor[0].attrs.color

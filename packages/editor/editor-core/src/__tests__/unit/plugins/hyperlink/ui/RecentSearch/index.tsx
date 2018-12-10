@@ -43,7 +43,7 @@ class MockActivityResource extends ActivityResource {
 }
 
 const activityProvider = Promise.resolve(new MockActivityResource());
-const timeout = () => new Promise(resolve => setTimeout(resolve, 1));
+const timeout = () => new Promise(resolve => window.setTimeout(resolve, 1));
 
 function pressDownArrowInputField(recentSearch: ReactWrapper<any, any>) {
   recentSearch.find('input').simulate('keydown', { keyCode: 40 });

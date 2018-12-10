@@ -485,7 +485,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     const emojiPickerList = this.refs.emojiPickerList as EmojiPickerList;
     if (emojiPickerList) {
       // Wait a tick to ensure repaint and updated height for picker list
-      setTimeout(() => {
+      window.setTimeout(() => {
         emojiPickerList.scrollToBottom();
       }, 0);
     }

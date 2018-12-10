@@ -1040,6 +1040,31 @@ describe('Renderer - Validator', () => {
         expect(getValidNode(validADFChunk)).toEqual(validADFChunk);
       });
 
+      it('should return "mediaSingle" with link-mark', () => {
+        const validADFChunk = {
+          type: 'mediaSingle',
+          attrs: { layout: 'full-width' },
+          content: [
+            {
+              type: 'media',
+              attrs: {
+                type: 'file',
+                id: '5556346b-b081-482b-bc4a-4faca8ecd2de',
+                collection: 'MediaServicesSample',
+              },
+            },
+          ],
+          marks: [
+            {
+              type: 'link',
+              href: 'https://www.atlassian.com',
+            },
+          ],
+        };
+
+        expect(getValidNode(validADFChunk)).toEqual(validADFChunk);
+      });
+
       it('should return "unknownBlock" if some of its content is not media', () => {
         const invalidADFChunk = {
           type: 'mediaSingle',

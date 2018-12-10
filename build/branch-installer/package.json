@@ -1,0 +1,34 @@
+{
+  "name": "@atlaskit/branch-installer",
+  "version": "0.0.8",
+  "description": "Installs the AtlasKit dependency versions from the given branch.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "bin": {
+    "atlaskit-branch-installer": "index.js"
+  },
+  "author": "Atlassian Pty Ltd",
+  "maintainers": [
+    "Luke B",
+    "Marco D",
+    "Rodrigo V"
+  ],
+  "files": [
+    "src",
+    "index.js"
+  ],
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "fetch-mock": "^6.5.2",
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "meow": "^5.0.0",
+    "node-fetch": "^2.2.0",
+    "prettyjson": "^1.2.1",
+    "spawndamnit": "^1.0.0"
+  }
+}

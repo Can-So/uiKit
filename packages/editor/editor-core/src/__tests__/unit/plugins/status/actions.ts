@@ -84,7 +84,7 @@ describe('status plugin: actions', () => {
       expect(pluginState.showStatusPickerAt).toEqual(selectionFrom);
     });
 
-    it('should keep move selection when updating status', () => {
+    it('should keep selection when updating status', () => {
       const { editorView } = editor(
         doc(
           p(
@@ -106,7 +106,7 @@ describe('status plugin: actions', () => {
         localId: '666',
       })(editorView);
 
-      expect(editorView.state.selection.from).toBeGreaterThan(selectionFrom);
+      expect(editorView.state.selection.from).toEqual(selectionFrom);
     });
 
     it('should insert status if picker is not shown', () => {
@@ -127,6 +127,7 @@ describe('status plugin: actions', () => {
               color: 'blue',
               localId: '666',
             }),
+            ' ',
           ),
         ),
       );
@@ -300,12 +301,6 @@ describe('status plugin: actions', () => {
 
       pluginState = pluginKey.getState(editorView.state);
       expect(pluginState.autoFocus).toEqual(true);
-
-      commitStatusPicker()(editorView);
-
-      pluginState = pluginKey.getState(editorView.state);
-
-      expect(pluginState.autoFocus).toEqual(false);
     });
 
     it('focus on input field should not be set when updating', () => {

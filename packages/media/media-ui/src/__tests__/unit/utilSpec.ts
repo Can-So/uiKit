@@ -18,7 +18,7 @@ import {
   fileToArrayBuffer,
   fileToDataURI,
   getFileInfo,
-  // loadImage,
+  loadImage,
 } from '../../util';
 
 describe('Image Meta Data Util', () => {
@@ -143,13 +143,13 @@ describe('Image Meta Data Util', () => {
   });
 
   describe('loadImage', () => {
-    let globalImage: any;
+    let globalImage: any = global.Image;
 
     beforeEach(() => {
       class MockImage extends global.Image {
         constructor() {
           super();
-          setImmediate(() => this.onload());
+          window.setTimeout(() => this.onload());
         }
       }
       global.Image = MockImage;
@@ -159,10 +159,9 @@ describe('Image Meta Data Util', () => {
       global.Image = globalImage;
     });
 
-    // TODO: JEST-23 this started failing in landkid - must be investigated
-    // it('should return an image async', async () => {
-    //   const img = await loadImage('some-src');
-    //   expect(img.src).toEqual('some-src');
-    // });
+    it('should return an image async', async () => {
+      const img = await loadImage('some-src');
+      expect(img.src).toEqual('http://localhost/some-src');
+    });
   });
 });

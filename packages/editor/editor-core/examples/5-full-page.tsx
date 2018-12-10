@@ -63,9 +63,12 @@ export const Content: any = styled.div`
 Content.displayName = 'Content';
 
 // tslint:disable-next-line:no-console
-const analyticsHandler = (actionName, props) => console.log(actionName, props);
+export const analyticsHandler = (actionName, props) =>
+  console.log(actionName, props);
 // tslint:disable-next-line:no-console
 const SAVE_ACTION = () => console.log('Save');
+
+export const LOCALSTORAGE_defaultDocKey = 'fabric.editor.example.full-page';
 
 export const SaveAndCancelButtons = props => (
   <ButtonGroup>
@@ -77,7 +80,7 @@ export const SaveAndCancelButtons = props => (
           // tslint:disable-next-line:no-console
           console.log(value);
           localStorage.setItem(
-            'fabric.editor.example.full-page',
+            LOCALSTORAGE_defaultDocKey,
             JSON.stringify(value),
           );
         })
@@ -90,7 +93,7 @@ export const SaveAndCancelButtons = props => (
       appearance="subtle"
       onClick={() => {
         props.editorActions.clear();
-        localStorage.removeItem('fabric.editor.example.full-page');
+        localStorage.removeItem(LOCALSTORAGE_defaultDocKey);
       }}
     >
       Close
@@ -120,7 +123,7 @@ export const mediaProvider = storyMediaProviderFactory({
   includeUserAuthProvider: true,
 });
 
-const quickInsertProvider = quickInsertProviderFactory();
+export const quickInsertProvider = quickInsertProviderFactory();
 
 export class ExampleEditor extends React.Component<EditorProps, State> {
   state: State = { disabled: true };
@@ -161,8 +164,8 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               allowLayouts={{
                 allowBreakout: true,
               }}
-              allowGapCursor={true}
               allowTextAlignment={true}
+              allowIndentation={true}
               allowTemplatePlaceholders={{ allowInserting: true }}
               UNSAFE_cards={{
                 provider: Promise.resolve(cardProvider),

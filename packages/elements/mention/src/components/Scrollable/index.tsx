@@ -12,7 +12,7 @@ export default class Scrollable extends React.PureComponent<Props, {}> {
   // API
   reveal = child => {
     if (child && this.scrollableDiv) {
-      const childNode = findDOMNode(child);
+      const childNode = findDOMNode(child) as Element;
       // Not using Element.scrollIntoView as it scrolls even to top/bottom of view even if
       // already visible
       const scrollableRect = this.scrollableDiv.getBoundingClientRect();

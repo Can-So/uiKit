@@ -50,8 +50,14 @@ import {
 import performanceNow from '../../util/performance-now';
 import AdvancedIssueSearchLink from './AdvancedIssueSearchLink';
 
+const JIRA_RESULT_LIMIT = 6;
+
 const NoResultsAdvancedSearchContainer = styled.div`
   margin-top: ${4 * gridSize()}px;
+`;
+
+const BeforePreQueryStateContainer = styled.div`
+  margin-top: ${gridSize()}px;
 `;
 
 export interface Props {
@@ -101,9 +107,6 @@ export class JiraQuickSearchContainer extends React.Component<
     redirectToJiraAdvancedSearch(this.state.selectedAdvancedSearchType, query);
   };
 
-  onAdvancedSearchChange = entityType =>
-    this.setState({ selectedAdvancedSearchType: entityType });
-
   getSearchResultsComponent = ({
     retrySearch,
     latestSearchQuery,
@@ -144,11 +147,14 @@ export class JiraQuickSearchContainer extends React.Component<
               query={query}
               showKeyboardLozenge={!isPreQuery && !keepPreQueryState}
               showSearchIcon
-              onAdvancedSearchChange={this.onAdvancedSearchChange}
             />
           </StickyFooter>
         )}
-        renderBeforePreQueryState={() => <AdvancedIssueSearchLink />}
+        renderBeforePreQueryState={() => (
+          <BeforePreQueryStateContainer>
+            <AdvancedIssueSearchLink />
+          </BeforePreQueryStateContainer>
+        )}
         getPreQueryGroups={() => mapRecentResultsToUIGroups(recentItems)}
         getPostQueryGroups={() =>
           mapSearchResultsToUIGroups(searchResults as JiraResultsMap)
@@ -191,7 +197,7 @@ export class JiraQuickSearchContainer extends React.Component<
       )
       .then(({ issues = [], boards = [], projects = [], filters = [] }) => ({
         objects: issues,
-        containers: [...boards, ...filters, ...projects],
+        containers: [...boards, ...projects, ...filters],
       }));
 
     return handlePromiseError(
@@ -252,18 +258,10 @@ export class JiraQuickSearchContainer extends React.Component<
       query,
       { sessionId, referrerId },
       scopes,
+      JIRA_RESULT_LIMIT,
     );
 
-    const searchPeoplePromise = handlePromiseError(
-      this.props.peopleSearchClient.search(query),
-      [] as Result[],
-      error =>
-        this.props.logger.safeError(
-          LOGGER_NAME,
-          'error in search people promise',
-          error,
-        ),
-    );
+    const searchPeoplePromise = Promise.resolve([] as Result[]);
 
     const mapPromiseToPerformanceTime = (p: Promise<any>) =>
       p.then(() => performanceNow() - startTime);

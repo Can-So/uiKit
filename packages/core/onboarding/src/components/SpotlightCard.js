@@ -1,8 +1,9 @@
 // @flow
+
+import { colors, type ThemeProp } from '@atlaskit/theme';
 import React, { type Node, type ElementType } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { colors } from '@atlaskit/theme';
-import Card, { type CardTheme } from './Card';
+import Card, { type CardTokens } from './Card';
 import { getSpotlightTheme } from './theme';
 import type { ActionsType } from '../types';
 
@@ -27,7 +28,7 @@ type Props = {
   /** Removes elevation styles if set */
   isFlat: boolean,
   /** the theme of the card */
-  theme: CardTheme => CardTheme,
+  theme: ThemeProp<CardTokens>,
   /** width of the card in pixels */
   width: number,
   innerRef?: Function,
@@ -37,8 +38,8 @@ class SpotlightCard extends React.Component<Props> {
   static defaultProps = {
     width: 400,
     isFlat: false,
-    theme: x => x,
     components: {},
+    theme: x => x,
   };
   render() {
     const {
@@ -64,18 +65,21 @@ class SpotlightCard extends React.Component<Props> {
           actionsBeforeElement={actionsBeforeElement}
           components={components}
           image={image}
-          theme={parent => ({
-            container: () => ({
-              background: colors.P300,
-              color: colors.N0,
-              width: `${Math.min(Math.max(width, 160), 600)}px`,
-              boxShadow: !isFlat
-                ? `0 4px 8px -2px ${colors.N50A}, 0 0 1px ${colors.N60A}` // AK-5598
-                : undefined,
-              ...parent.container(),
-              ...theme(parent).container(),
-            }),
-          })}
+          theme={parent => {
+            const { container, ...others } = parent();
+            return theme(() => ({
+              ...others,
+              container: {
+                background: colors.P300,
+                color: colors.N0,
+                width: `${Math.min(Math.max(width, 160), 600)}px`,
+                boxShadow: isFlat
+                  ? undefined
+                  : `0 4px 8px -2px ${colors.N50A}, 0 0 1px ${colors.N60A}`, // AK-5598
+                ...container,
+              },
+            }));
+          }}
         >
           {children}
         </Card>

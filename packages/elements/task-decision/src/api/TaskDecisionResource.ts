@@ -197,7 +197,7 @@ export class ItemStateManager {
     return new Promise<TaskState>((resolve, reject) => {
       this.debouncedTaskToggle.set(
         stringKey,
-        setTimeout(() => {
+        window.setTimeout(() => {
           const options: RequestServiceOptions = {
             path: 'tasks',
             requestInit: {
@@ -390,7 +390,7 @@ export class ItemStateManager {
       clearTimeout(this.debouncedTaskStateQuery);
     }
 
-    this.debouncedTaskStateQuery = setTimeout(() => {
+    this.debouncedTaskStateQuery = window.setTimeout(() => {
       this.getTaskState(Array.from(this.batchedKeys.values())).then(tasks => {
         tasks.forEach(task => {
           const { containerAri, objectAri, localId } = task;

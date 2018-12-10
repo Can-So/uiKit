@@ -1,5 +1,41 @@
 # @atlaskit/quick-search
 
+## 5.2.3
+- [patch] [d498de7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d498de7):
+
+  - Include type of result for boards and filters in jira search
+
+## 5.2.2
+- [patch] [38debc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38debc1):
+
+  - trigger analytics on advanced search dropdown item clicked, disable jira people search
+
+## 5.2.1
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/drawer@2.5.4
+  - @atlaskit/field-base@11.0.12
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/item@8.0.13
+  - @atlaskit/navigation@33.3.7
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+
+## 5.2.0
+- [minor] [347a474](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/347a474):
+
+  - Added icon on selected to quick search results
+
+## 5.1.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/drawer@2.5.3
+  - @atlaskit/field-base@11.0.11
+  - @atlaskit/item@8.0.12
+  - @atlaskit/navigation@33.3.6
+  - @atlaskit/icon@15.0.0
+
 ## 5.1.1
 - [patch] [f480bab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f480bab):
 

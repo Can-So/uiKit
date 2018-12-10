@@ -140,7 +140,7 @@ export interface EditorProps {
 
   // Enable dates. You will most likely need backend ADF storage for this feature.
   allowDate?: boolean;
-  allowGapCursor?: boolean;
+
   allowInlineAction?: boolean;
 
   // Temporary flag to enable layouts while it's under development
@@ -159,7 +159,11 @@ export interface EditorProps {
 
   allowDynamicTextSizing?: boolean;
 
+  // Enable text alignment support inside `heading` and `paragraph`
   allowTextAlignment?: boolean;
+
+  // Enable indentation support for `heading` and `paragraph`
+  allowIndentation?: boolean;
 
   // Set to enable the quick insert menu i.e. '/' key trigger.
   // You can also provide your own insert menu options that will be shown in addition to the enabled

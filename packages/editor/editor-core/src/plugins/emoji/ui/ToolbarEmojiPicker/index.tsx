@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PureComponent, ReactElement } from 'react';
+import { PureComponent, ReactInstance } from 'react';
 import * as ReactDOM from 'react-dom';
 import { PluginKey } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
@@ -44,8 +44,8 @@ export interface State {
 const isDetachedElement = el => !document.body.contains(el);
 
 export default class ToolbarEmojiPicker extends PureComponent<Props, State> {
-  private pickerRef: ReactElement<any>;
-  private buttonRef: ReactElement<any>;
+  private pickerRef: ReactInstance;
+  private buttonRef: ReactInstance;
   private pluginState?: EmojiState;
 
   state: State = {

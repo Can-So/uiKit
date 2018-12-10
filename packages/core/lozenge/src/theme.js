@@ -1,6 +1,6 @@
 // @flow
 
-import { colors } from '@atlaskit/theme';
+import { colors, createTheme } from '@atlaskit/theme';
 
 /* Note:
  Lozenge does not support dark mode at the moment,
@@ -53,47 +53,38 @@ export type ThemeAppearance =
   | {};
 
 export type ThemeProps = {
-  lozenge?: ({
-    appearance: ThemeAppearance,
-    isBold: boolean,
-    maxWidth: number | string,
-  }) => {
-    backgroundColor?: string,
-    maxWidth?: number | string,
-    textColor?: string,
-  },
-  mode?: 'light' | 'dark',
+  appearance: ThemeAppearance | {},
+  isBold: boolean,
+  maxWidth: number | string,
 };
 
-export function theme(props: ThemeProps): ThemeProps {
-  const mode = props.mode || 'light';
-  return {
-    lozenge: ({ appearance, isBold, maxWidth }) => {
-      return {
-        ...(typeof appearance === 'object'
-          ? {
-              backgroundColor: (isBold ? boldBackgroundColor : backgroundColor)
-                .default.light,
-              textColor: (isBold ? boldTextColor : textColor).default.light,
-              ...appearance,
-            }
-          : {
-              backgroundColor: (isBold
-                ? boldBackgroundColor[appearance]
-                : backgroundColor[appearance]
-              ).light,
-              textColor: (isBold
-                ? boldTextColor[appearance]
-                : textColor[appearance]
-              ).light,
-            }),
-        maxWidth,
-        ...(props.lozenge
-          ? props.lozenge({ appearance, isBold, maxWidth })
-          : null),
-      };
-    },
-    mode,
-    ...props,
-  };
-}
+export type ThemeTokens = {
+  backgroundColor: string,
+  maxWidth: number | string,
+  textColor: string,
+};
+
+export const Theme = createTheme<ThemeTokens, ThemeProps>(
+  ({ appearance, isBold, maxWidth }) => {
+    return {
+      ...(typeof appearance === 'object'
+        ? {
+            backgroundColor: (isBold ? boldBackgroundColor : backgroundColor)
+              .default.light,
+            textColor: (isBold ? boldTextColor : textColor).default.light,
+            ...appearance,
+          }
+        : {
+            backgroundColor: (isBold
+              ? boldBackgroundColor[appearance]
+              : backgroundColor[appearance]
+            ).light,
+            textColor: (isBold
+              ? boldTextColor[appearance]
+              : textColor[appearance]
+            ).light,
+          }),
+      maxWidth,
+    };
+  },
+);

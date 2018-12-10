@@ -6,7 +6,7 @@ export default {
         isNumberColumnEnabled: { type: 'boolean', optional: true },
         layout: {
           type: 'enum',
-          values: ['wide', 'full-width', 'default'],
+          values: ['default', 'full-width', 'wide'],
           optional: true,
         },
       },

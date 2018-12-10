@@ -4,11 +4,12 @@ const constructAuthTokenUrlSpy = jest.spyOn(util, 'constructAuthTokenUrl');
 
 import * as React from 'react';
 import { Observable } from 'rxjs';
-import { mount, ReactWrapper } from 'enzyme';
+import { ReactWrapper, mount } from 'enzyme';
 import { MediaItemType, MediaType, FileState } from '@atlaskit/media-core';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
+import { fakeIntl } from '@atlaskit/media-test-helpers';
 import { createContext } from '../_stubs';
-import Header from '../../../newgen/header';
+import { Header } from '../../../newgen/header';
 import { FeedbackButton } from '../../../newgen/feedback-button';
 import { MetadataFileName, MetadataSubText } from '../../../newgen/styled';
 import { LeftHeader } from '../../../newgen/styled';
@@ -44,7 +45,9 @@ describe('<Header />', () => {
     const context = createContext({
       getFileState: () => Observable.empty(),
     });
-    const el = mount(<Header context={context} identifier={identifier} />);
+    const el = mount(
+      <Header intl={fakeIntl} context={context} identifier={identifier} />,
+    );
     const metadata = el.find(LeftHeader);
     expect(metadata.text()).toEqual('');
   });
@@ -53,7 +56,9 @@ describe('<Header />', () => {
     const context = createContext({
       getFileState: () => Observable.of(processedImageState),
     });
-    const el = mount(<Header context={context} identifier={identifier} />);
+    const el = mount(
+      <Header intl={fakeIntl} context={context} identifier={identifier} />,
+    );
     el.update();
     expect(el.find(MetadataFileName).text()).toEqual('my image');
 
@@ -66,7 +71,10 @@ describe('<Header />', () => {
     const context = createContext({
       getFileState: () => Observable.of(processedImageState),
     });
-    const el = mount(<Header context={context} identifier={identifier} />);
+    const el = mount(
+      <Header intl={fakeIntl} context={context} identifier={identifier} />,
+    );
+
     expect(el.state().item.status).toEqual('SUCCESSFUL');
 
     // since the test is executed synchronously
@@ -82,7 +90,9 @@ describe('<Header />', () => {
     const context = createContext({
       getFileState: () => Observable.of(processedImageState),
     });
-    const el = mount(<Header context={context} identifier={identifier} />);
+    const el = mount(
+      <Header intl={fakeIntl} context={context} identifier={identifier} />,
+    );
     expect(el.state().item.status).toEqual('SUCCESSFUL');
 
     // since the test is executed synchronously
@@ -101,7 +111,9 @@ describe('<Header />', () => {
         const context = createContext({
           getFileState: () => Observable.of(processedImageState),
         });
-        const el = mount(<Header context={context} identifier={identifier} />);
+        const el = mount(
+          <Header intl={fakeIntl} context={context} identifier={identifier} />,
+        );
         el.update();
         expect(el.find(MetadataFileName).text()).toEqual('my image');
       });
@@ -114,7 +126,9 @@ describe('<Header />', () => {
         const context = createContext({
           getFileState: () => Observable.of(unNamedImage),
         });
-        const el = mount(<Header context={context} identifier={identifier} />);
+        const el = mount(
+          <Header intl={fakeIntl} context={context} identifier={identifier} />,
+        );
         el.update();
         expect(el.find(MetadataFileName).text()).toEqual('unknown');
       });
@@ -137,7 +151,9 @@ describe('<Header />', () => {
         const context = createContext({
           getFileState: () => Observable.of(testItem),
         });
-        const el = mount(<Header context={context} identifier={identifier} />);
+        const el = mount(
+          <Header intl={fakeIntl} context={context} identifier={identifier} />,
+        );
         el.update();
         expect(el.find(MetadataSubText).text()).toEqual(
           `${expectedText} · 11.7 MB`,
@@ -160,7 +176,9 @@ describe('<Header />', () => {
         const context = createContext({
           getFileState: () => Observable.of(noSizeImage),
         });
-        const el = mount(<Header context={context} identifier={identifier} />);
+        const el = mount(
+          <Header intl={fakeIntl} context={context} identifier={identifier} />,
+        );
         el.update();
         expect(el.find(MetadataSubText).text()).toEqual('image');
       });
@@ -174,7 +192,9 @@ describe('<Header />', () => {
         const context = createContext({
           getFileState: () => Observable.of(noMediaTypeElement),
         });
-        const el = mount(<Header context={context} identifier={identifier} />);
+        const el = mount(
+          <Header intl={fakeIntl} context={context} identifier={identifier} />,
+        );
         el.update();
         expect(el.find(MetadataSubText).text()).toEqual('unknown · 22.2 MB');
       });
@@ -184,7 +204,9 @@ describe('<Header />', () => {
       const context = createContext({
         getFileState: () => Observable.throw('something bad happened!'),
       });
-      const el = mount(<Header context={context} identifier={identifier} />);
+      const el = mount(
+        <Header intl={fakeIntl} context={context} identifier={identifier} />,
+      );
       const metadata = el.find(LeftHeader);
       expect(metadata.text()).toEqual('');
     });
@@ -196,7 +218,11 @@ describe('<Header />', () => {
       });
       const identifierWithCollection = { ...identifier, collectionName };
       const el = mount(
-        <Header context={context} identifier={identifierWithCollection} />,
+        <Header
+          intl={fakeIntl}
+          context={context}
+          identifier={identifierWithCollection}
+        />,
       );
       el.update();
       expect(context.file.getFileState).toHaveBeenCalledWith('some-id', {
@@ -211,7 +237,11 @@ describe('<Header />', () => {
       });
       const identifierWithCollection = { ...identifier, collectionName };
       const el = mount(
-        <Header context={context} identifier={identifierWithCollection} />,
+        <Header
+          intl={fakeIntl}
+          context={context}
+          identifier={identifierWithCollection}
+        />,
       );
       el.update();
       el.find(DownloadIcon).simulate('click');
@@ -236,7 +266,9 @@ describe('<Header />', () => {
       const context = createContext({
         getFileState: () => Observable.of(processedImageState),
       });
-      const el = mount(<Header context={context} identifier={identifier} />);
+      const el = mount(
+        <Header intl={fakeIntl} context={context} identifier={identifier} />,
+      );
       expect(el.find(FeedbackButton).html()).toBeNull();
     });
 
@@ -245,7 +277,9 @@ describe('<Header />', () => {
         getFileState: () => Observable.of(processedImageState),
       });
       window.jQuery = {};
-      const el = mount(<Header context={context} identifier={identifier} />);
+      const el = mount(
+        <Header intl={fakeIntl} context={context} identifier={identifier} />,
+      );
       expect(el.find(FeedbackButton).html()).not.toBeNull();
     });
   });
@@ -255,9 +289,7 @@ describe('<Header />', () => {
       el: ReactWrapper<any, any>,
       enabled: boolean,
     ) => {
-      expect(
-        el.find({ type: 'button', label: 'Download', isDisabled: !enabled }),
-      ).toHaveLength(1);
+      expect(el.find({ type: 'button', isDisabled: !enabled })).toHaveLength(1);
       expect(el.find(DownloadIcon)).toHaveLength(1);
     };
 
@@ -265,7 +297,9 @@ describe('<Header />', () => {
       const context = createContext({
         getFileState: () => Observable.empty(),
       });
-      const el = mount(<Header context={context} identifier={identifier} />);
+      const el = mount(
+        <Header intl={fakeIntl} context={context} identifier={identifier} />,
+      );
       el.update();
       assertDownloadButton(el, false);
     });
@@ -274,7 +308,9 @@ describe('<Header />', () => {
       const context = createContext({
         getFileState: () => Observable.of(processedImageState),
       });
-      const el = mount(<Header context={context} identifier={identifier} />);
+      const el = mount(
+        <Header intl={fakeIntl} context={context} identifier={identifier} />,
+      );
       el.update();
       assertDownloadButton(el, true);
     });
@@ -283,7 +319,9 @@ describe('<Header />', () => {
       const context = createContext({
         getFileState: () => Observable.throw('something bad happened!'),
       });
-      const el = mount(<Header context={context} identifier={identifier} />);
+      const el = mount(
+        <Header intl={fakeIntl} context={context} identifier={identifier} />,
+      );
       el.update();
       assertDownloadButton(el, false);
     });

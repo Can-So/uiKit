@@ -9,12 +9,12 @@ function* getUsers(search?: string): Iterable<PromiseLike<User[]> | User> {
     yield assignToMe;
   }
   yield new Promise(resolve => {
-    setTimeout(() => resolve(exampleUsers), 1000);
+    window.setTimeout(() => resolve(exampleUsers), 1000);
   });
 }
 
 export default class Example extends React.Component<{}> {
   render() {
-    return <UserPicker loadUsers={getUsers} />;
+    return <UserPicker loadUsers={getUsers} clearValueLabel="Unassign" />;
   }
 }

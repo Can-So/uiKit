@@ -71,8 +71,8 @@ When upgrading an Atlaskit component, all changelogs can be found in the [Atlask
 
 #### Before you start
 
-* [node](https://nodejs.org/) version should be 6 or above (to check `node -v`) or use [nvm](https://github.com/creationix/nvm)
-* [npm](https://www.npmjs.com/) version should be 3 or above (to check `npm --version`)
+* [node](https://nodejs.org/) version should be as listed in .nvmrc (we recommend using [nvm](https://github.com/creationix/nvm)). Run `nvm use` in the root directory to install the correct version of node.
+* [npm](https://www.npmjs.com/) version should be 5 or above (to check `npm --version`)
 * [yarn](https://yarnpkg.com/) should be installed globally (see yarn website for installation instructions)
 
 #### Clone the repo and install
@@ -95,6 +95,9 @@ Next, to install packages, we use bolt, just calling it:
 ```sh
 bolt
 ```
+
+Then you can run the examples with `yarn start`. Check `package.json` for more commands to start specific package examples.
+
 
 For contributing back, check out our [contribution guide](http://atlaskit.atlassian.com/docs/guides/contributing)
 

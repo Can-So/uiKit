@@ -1,3 +1,5 @@
+import { Color as StatusColor } from '@atlaskit/status';
+import { EditorBridges, EditorPluginBridges } from './index';
 import {
   MentionBridge,
   TextFormattingBridge,
@@ -5,7 +7,10 @@ import {
   MediaBridge,
   PromiseBridge,
   ListBridge,
+  StatusBridge,
 } from './bridge';
+
+import { sendToBridge } from '../../bridge-utils';
 
 export default class AndroidBridge implements NativeBridge {
   mentionBridge: MentionBridge;
@@ -13,6 +18,7 @@ export default class AndroidBridge implements NativeBridge {
   mediaBridge: MediaBridge;
   promiseBridge: PromiseBridge;
   listBridge: ListBridge;
+  statusBridge: StatusBridge;
 
   constructor() {
     this.mentionBridge = window.mentionsBridge as MentionBridge;
@@ -20,6 +26,7 @@ export default class AndroidBridge implements NativeBridge {
     this.mediaBridge = window.mediaBridge as MediaBridge;
     this.promiseBridge = window.promiseBridge as PromiseBridge;
     this.listBridge = window.listBridge as ListBridge;
+    this.statusBridge = window.statusBridge as StatusBridge;
   }
 
   showMentions(query: String) {
@@ -49,10 +56,28 @@ export default class AndroidBridge implements NativeBridge {
   submitPromise(name: string, uuid: string, args: string) {
     this.promiseBridge.submitPromise(name, uuid, args);
   }
+
   updateBlockState(currentBlockType: string) {
     this.textFormatBridge.updateBlockState(currentBlockType);
   }
+
   updateListState(listState: string) {
     this.listBridge.updateListState(listState);
+  }
+
+  showStatusPicker(text: string, color: StatusColor, uuid: string) {
+    this.statusBridge.showStatusPicker(text, color, uuid);
+  }
+
+  dismissStatusPicker() {
+    this.statusBridge.dismissStatusPicker();
+  }
+
+  call<T extends EditorPluginBridges>(
+    bridge: T,
+    event: keyof Exclude<EditorBridges[T], undefined>,
+    ...args
+  ) {
+    sendToBridge(bridge, event, ...args);
   }
 }
