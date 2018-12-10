@@ -1,0 +1,10 @@
+{
+  "releases": [{ "name": "extract-react-types-loader", "type": "minor" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/website",
+      "type": "patch",
+      "dependencies": ["extract-react-types-loader"]
+    }
+  ]
+}
