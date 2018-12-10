@@ -1,0 +1,1 @@
+- FS-3315 do not display scrollbars on overflow

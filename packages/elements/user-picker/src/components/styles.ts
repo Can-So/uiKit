@@ -59,14 +59,14 @@ export const getStyles = memoizeOne(width => ({
       color: colors.R400,
     },
   }),
-  valueContainer: ({ paddingTop, paddingBottom, ...css }, state) => ({
+  valueContainer: ({ paddingTop, paddingBottom, position, ...css }, state) => ({
     ...css,
     flexGrow: 1,
     padding: 0,
     display: 'flex',
     flexDirection: 'row',
     maxHeight: 100,
-    overflow: 'auto',
+    overflow: 'hidden',
     flexWrap: state.selectProps.isMulti ? 'wrap' : 'nowrap',
   }),
   multiValue: css => ({
