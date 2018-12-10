@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.12
+- [patch] [85b71a9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85b71a9):
+
+  - ED-5704: Fixed invalid ADF sent when saving and mention/quickInsert/emoji is active
+
 ## 90.3.11
 - [patch] [e0c91b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e0c91b6):
 
