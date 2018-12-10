@@ -74,7 +74,7 @@ import { gridSize } from '@atlaskit/theme';
 
 export default evaluateInnerStyles()\`
   .header: {
-    margin-right: \${gridSize()}px;
+    margin-right: \${gridSize() * 1.5}px;
   }
 \`
 `}
