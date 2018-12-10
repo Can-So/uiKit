@@ -18,7 +18,7 @@ import type { LayoutManagerProps } from '../../types';
 const GlobalNavigation = () => null;
 const ProductNavigation = () => null;
 
-describe.skip('LayoutManager', () => {
+describe('LayoutManager', () => {
   let defaultProps: $Shape<LayoutManagerProps>;
   let mockNavigationUIController: any;
   beforeEach(() => {
@@ -46,7 +46,7 @@ describe.skip('LayoutManager', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe.skip('Flyout', () => {
+  describe('Flyout', () => {
     beforeEach(() => {
       defaultProps.experimental_flyoutOnHover = true;
       defaultProps.navigationUIController.state.isCollapsed = true;
