@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.7.4
+- [patch] [77df0db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/77df0db):
+
+  - use em dash for citation
+
 ## 2.7.3
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3

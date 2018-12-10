@@ -22,7 +22,8 @@ const CUSTOM_BUILD_DEPLOY_BRANCH_BUILD_DISTS_KEY = '-1200669939';
 const API_URL =
   'https://api.bitbucket.org/2.0/repositories/atlassian/atlaskit-mk-2';
 
-const fetchVerbose = async (url, { info }) => {
+const fetchVerbose = async (url, options = {}) => {
+  const info = options.info || (() => {});
   info(`Trying to fetch ${url}`);
 
   let response = await fetch(url);
@@ -33,10 +34,8 @@ const fetchVerbose = async (url, { info }) => {
   return result;
 };
 
-const getBuildStatus = async (
-  hashCommit,
-  { maxAttempts = 1, timeout = 2000, info },
-) => {
+const getBuildStatus = async (hashCommit, options) => {
+  const { maxAttempts = 1, timeout = 2000, info = () => {} } = options || {};
   info(`Get build status for ${hashCommit} commit`);
   const url = `${API_URL}/commit/${hashCommit}/statuses/build/${CUSTOM_BUILD_DEPLOY_BRANCH_BUILD_DISTS_KEY}`;
 
@@ -57,10 +56,11 @@ const getBuildStatus = async (
   return buildStatus;
 };
 
-const getCommitHash = async (branchName, { info }) => {
+const getCommitHash = async (branchName, options = {}) => {
+  const info = options.info || (() => {});
   info(`Get commit hash for ${branchName}`);
   const url = `${API_URL}/refs/branches/${branchName}`;
-  const response = await fetchVerbose(url, { info });
+  const response = await fetchVerbose(url, options);
 
   return response.target.hash;
 };
@@ -115,7 +115,12 @@ const checkBuildStatus = buildStatus => {
   return true;
 };
 
-const installFromBranch = async (branchName, options) => {
+const installFromBranch = async (branchName, options = {}) => {
+  if (!branchName) {
+    process.exit(1);
+    return false;
+  }
+
   const info = log(options.verbose);
   const hash = await getCommitHash(branchName, {
     info,
@@ -140,9 +145,11 @@ const installFromBranch = async (branchName, options) => {
   const runner = options.bolt ? 'bolt' : 'yarn';
 
   if (options.dryRun) {
-    packages.forEach(pkg => {
-      console.log(chalk.yellow(`${runner} upgrade ${pkg}`));
-    });
+    const dryRun = packages.map(pkg => `${runner} upgrade ${pkg}`);
+
+    dryRun.forEach(pkg => console.log(chalk.yellow(pkg)));
+
+    return dryRun;
   } else {
     return spawndamnit(runner, ['upgrade', packages.join(' ')], {
       stdio: 'inherit',
@@ -152,3 +159,7 @@ const installFromBranch = async (branchName, options) => {
 };
 
 module.exports = installFromBranch;
+module.exports.getCommitHash = getCommitHash;
+module.exports.getBuildStatus = getBuildStatus;
+module.exports.checkBuildStatus = checkBuildStatus;
+module.exports.getPackagesVersionWithTarURL = getPackagesVersionWithTarURL;
