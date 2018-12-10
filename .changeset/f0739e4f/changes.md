@@ -1,0 +1,1 @@
+- Bump to match @atlaskit/docs dep
