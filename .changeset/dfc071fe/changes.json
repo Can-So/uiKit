@@ -1,0 +1,10 @@
+{
+  "releases": [{ "name": "@atlaskit/pagination", "type": "major" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/dynamic-table",
+      "type": "patch",
+      "dependencies": ["@atlaskit/pagination"]
+    }
+  ]
+}
