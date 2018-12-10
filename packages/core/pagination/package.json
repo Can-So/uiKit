@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/pagination",
-  "version": "8.0.8",
+  "version": "9.0.0",
   "description": "A react component to be used for pagination in components like tables.",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -32,8 +32,8 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/dynamic-table": "^10.0.16",
     "@atlaskit/docs": "^5.2.3",
+    "@atlaskit/dynamic-table": "^10.0.21",
     "@atlaskit/section-message": "^1.0.10",
     "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
     "react-dom": "^16.4.2",
