@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import Navigation from '../../../newgen/navigation';
+import { Navigation, NavigationBase } from '../../../newgen/navigation';
 import { Identifier } from '../../../newgen/domain';
 import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
-import { KeyboardEventWithKeyCode } from './shortcut.spec';
+import { KeyboardEventWithKeyCode } from '@atlaskit/media-test-helpers';
 
 /**
  * Skipped two tests in here that are failing due to an issue with synthetic keyboard events
@@ -42,6 +42,20 @@ describe('Navigation', () => {
   };
 
   const items = [identifier, identifier2, identifier3, identifier2Duplicated];
+
+  function mountBaseComponent() {
+    const createAnalyticsEventSpy = jest.fn();
+    createAnalyticsEventSpy.mockReturnValue({ fire: jest.fn() });
+    const el = mount(
+      <NavigationBase
+        createAnalyticsEvent={createAnalyticsEventSpy}
+        items={[identifier, identifier2, identifier3]}
+        selectedItem={identifier2}
+        onChange={() => {}}
+      />,
+    );
+    return { el, createAnalyticsEventSpy };
+  }
 
   it('should show right arrow if there are items on the right', () => {
     const el = mount(
@@ -110,8 +124,7 @@ describe('Navigation', () => {
         selectedItem={identifier2}
       />,
     );
-    el
-      .find(ArrowLeftCircleIcon)
+    el.find(ArrowLeftCircleIcon)
       .first()
       .simulate('click');
     expect(onChange).toBeCalledWith(identifier);
@@ -126,8 +139,7 @@ describe('Navigation', () => {
         selectedItem={identifier}
       />,
     );
-    el
-      .find(ArrowRightCircleIcon)
+    el.find(ArrowRightCircleIcon)
       .first()
       .simulate('click');
     expect(onChange).toBeCalledWith(identifier2);
@@ -181,6 +193,24 @@ describe('Navigation', () => {
       });
       document.dispatchEvent(e);
       expect(onChange).toBeCalledWith(identifier2);
+    });
+  });
+
+  describe('Analytics', () => {
+    it('should fire analytics on right arrow click', () => {
+      const { el, createAnalyticsEventSpy } = mountBaseComponent();
+      el.find(ArrowRightCircleIcon)
+        .first()
+        .simulate('click');
+      expect(createAnalyticsEventSpy).toHaveBeenCalled();
+    });
+
+    it('should fire analytics on left arrow click', () => {
+      const { el, createAnalyticsEventSpy } = mountBaseComponent();
+      el.find(ArrowLeftCircleIcon)
+        .first()
+        .simulate('click');
+      expect(createAnalyticsEventSpy).toHaveBeenCalled();
     });
   });
 });

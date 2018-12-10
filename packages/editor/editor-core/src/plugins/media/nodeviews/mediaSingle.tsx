@@ -7,6 +7,7 @@ import {
   WithProviders,
   MediaSingleLayout,
 } from '@atlaskit/editor-common';
+import { CardEvent } from '@atlaskit/media-card';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
 import { stateKey, MediaPluginState } from '../pm-plugins/main';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';
@@ -16,40 +17,45 @@ import { pluginKey as widthPluginKey } from '../../width';
 import { stateKey as reactNodeViewStateKey } from '../../../plugins/base/pm-plugins/react-nodeview';
 import { setNodeSelection } from '../../../utils';
 import ResizableMediaSingle from '../ui/ResizableMediaSingle';
-import { displayGrid } from '../../../plugins/grid';
+import { createDisplayGrid } from '../../../plugins/grid';
+import { EventDispatcher } from '../../../event-dispatcher';
+import { MediaStateStatus } from '../types';
+import { EditorAppearance } from '../../../types';
 
 const DEFAULT_WIDTH = 250;
 const DEFAULT_HEIGHT = 200;
 
 export interface MediaSingleNodeProps {
   node: PMNode;
+  eventDispatcher: EventDispatcher;
   view: EditorView;
   width: number;
   selected: Function;
   getPos: () => number;
   lineLength: number;
+  editorAppearance: EditorAppearance;
 }
 
 export interface MediaSingleNodeState {
   width?: number;
   height?: number;
+  lastMediaStatus?: MediaStateStatus;
 }
 
 export default class MediaSingleNode extends Component<
   MediaSingleNodeProps,
   MediaSingleNodeState
 > {
-  private child: PMNode;
   private mediaPluginState: MediaPluginState;
 
   state = {
     height: undefined,
     width: undefined,
+    lastMediaStatus: undefined,
   };
 
   constructor(props) {
     super(props);
-    this.child = props.node.firstChild;
     this.mediaPluginState = stateKey.getState(
       this.props.view.state,
     ) as MediaPluginState;
@@ -60,7 +66,11 @@ export default class MediaSingleNode extends Component<
       this.props.node.attrs.width !== nextProps.node.attrs.width ||
       this.props.selected() !== nextProps.selected() ||
       this.props.node.attrs.layout !== nextProps.node.attrs.layout ||
-      this.props.width !== nextProps.width
+      this.props.width !== nextProps.width ||
+      this.props.lineLength !== nextProps.lineLength ||
+      this.props.getPos !== nextProps.getPos ||
+      this.mediaChildHasUpdated(nextProps) ||
+      this.hasMediaStateUpdated(nextProps)
     ) {
       return true;
     }
@@ -72,6 +82,9 @@ export default class MediaSingleNode extends Component<
     if (this.props.selected()) {
       this.mediaPluginState.updateLayout(layout);
     }
+    this.setState({
+      lastMediaStatus: this.getMediaNodeStatus(this.props.node.firstChild),
+    });
   }
 
   private onExternalImageLoaded = ({ width, height }) => {
@@ -86,11 +99,39 @@ export default class MediaSingleNode extends Component<
     );
   };
 
-  mediaReady(mediaState) {
-    return mediaState && mediaState.status === 'ready';
-  }
+  private getMediaNodeStatus = (childNode?: PMNode | null) => {
+    if (childNode) {
+      const state = this.mediaPluginState.getMediaNodeState(
+        childNode.attrs.__key,
+      );
+      return state && state.status;
+    }
+    return undefined;
+  };
 
-  selectMediaSingle = () => {
+  private hasMediaStateUpdated = (nextProps: MediaSingleNodeProps) => {
+    return (
+      this.getMediaNodeStatus(nextProps.node.firstChild) !==
+      this.state.lastMediaStatus
+    );
+  };
+
+  private mediaChildHasUpdated = nextProps => {
+    if (!this.props.node.firstChild || !nextProps.node.firstChild) {
+      return false;
+    }
+
+    return (
+      this.props.node.firstChild.attrs.collection !==
+        nextProps.node.firstChild.attrs.collection ||
+      this.props.node.firstChild.attrs.id !== nextProps.node.firstChild.attrs.id
+    );
+  };
+
+  selectMediaSingle = ({ event }: CardEvent) => {
+    // We need to call "stopPropagation" here in order to prevent the browser from navigating to
+    // another URL if the media node is wrapped in a link mark.
+    event.stopPropagation();
     setNodeSelection(this.props.view, this.props.getPos() + 1);
   };
 
@@ -109,23 +150,21 @@ export default class MediaSingleNode extends Component<
     );
   };
 
-  boundDisplayGrid = (show, gridType) => {
-    displayGrid(show, gridType)(
-      this.props.view.state,
-      this.props.view.dispatch,
-    );
-  };
-
   render() {
-    const { layout, width: mediaSingleWidth } = this.props.node.attrs;
-
     const {
       selected,
       getPos,
+      node,
       view: { state },
+      editorAppearance,
     } = this.props;
 
-    let { width, height, type } = this.child.attrs;
+    const { lastMediaStatus } = this.state;
+
+    const { layout, width: mediaSingleWidth } = node.attrs;
+    const childNode = node.firstChild!;
+
+    let { width, height, type } = childNode.attrs;
 
     if (type === 'external') {
       const { width: stateWidth, height: stateHeight } = this.state;
@@ -139,11 +178,7 @@ export default class MediaSingleNode extends Component<
       }
     }
 
-    const mediaState = this.mediaPluginState.getMediaNodeState(
-      this.child.attrs.__key,
-    );
-
-    const isLoading = mediaState ? !this.mediaReady(mediaState) : false;
+    const isLoading = lastMediaStatus ? lastMediaStatus !== 'ready' : false;
     let canResize = !!this.mediaPluginState.options.allowResizing && !isLoading;
 
     const pos = getPos();
@@ -157,10 +192,17 @@ export default class MediaSingleNode extends Component<
       canResize = canResize && !disabledNode;
     }
 
-    if (width === null) {
+    if (width === null || height === null) {
       width = DEFAULT_WIDTH;
       height = DEFAULT_HEIGHT;
     }
+
+    const cardWidth = this.props.width;
+    const cardHeight = (height / width) * cardWidth;
+    const cardDimensions = {
+      width: `${cardWidth}px`,
+      height: `${cardHeight}px`,
+    };
 
     const props = {
       layout,
@@ -180,17 +222,15 @@ export default class MediaSingleNode extends Component<
         renderNode={({ mediaProvider }) => {
           return (
             <MediaItem
-              node={this.child}
+              node={childNode}
               view={this.props.view}
               getPos={this.props.getPos}
-              cardDimensions={{
-                width: '100%',
-                height: '100%',
-              }}
+              cardDimensions={cardDimensions}
               mediaProvider={mediaProvider}
               selected={selected()}
               onClick={this.selectMediaSingle}
               onExternalImageLoaded={this.onExternalImageLoaded}
+              editorAppearance={editorAppearance}
             />
           );
         }}
@@ -202,10 +242,11 @@ export default class MediaSingleNode extends Component<
         {...props}
         getPos={getPos}
         updateSize={this.updateSize}
-        displayGrid={this.boundDisplayGrid}
+        displayGrid={createDisplayGrid(this.props.eventDispatcher)}
         gridSize={12}
         state={this.props.view.state}
         appearance={this.mediaPluginState.options.appearance}
+        selected={this.props.selected()}
       >
         {MediaChild}
       </ResizableMediaSingle>
@@ -217,6 +258,7 @@ export default class MediaSingleNode extends Component<
 
 class MediaSingleNodeView extends ReactNodeView {
   render(props, forwardRef) {
+    const { eventDispatcher, editorAppearance } = this.reactComponentProps;
     return (
       <WithPluginState
         editorView={this.view}
@@ -233,6 +275,8 @@ class MediaSingleNodeView extends ReactNodeView {
               getPos={this.getPos}
               view={this.view}
               selected={() => this.getPos() + 1 === reactNodeViewState}
+              eventDispatcher={eventDispatcher}
+              editorAppearance={editorAppearance}
             />
           );
         }}
@@ -241,10 +285,13 @@ class MediaSingleNodeView extends ReactNodeView {
   }
 }
 
-export const ReactMediaSingleNode = portalProviderAPI => (
-  node: PMNode,
-  view: EditorView,
-  getPos: () => number,
-): NodeView => {
-  return new MediaSingleNodeView(node, view, getPos, portalProviderAPI).init();
+export const ReactMediaSingleNode = (
+  portalProviderAPI,
+  eventDispatcher,
+  editorAppearance,
+) => (node: PMNode, view: EditorView, getPos: () => number): NodeView => {
+  return new MediaSingleNodeView(node, view, getPos, portalProviderAPI, {
+    eventDispatcher,
+    editorAppearance,
+  }).init();
 };

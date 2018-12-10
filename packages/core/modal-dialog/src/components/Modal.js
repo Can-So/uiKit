@@ -1,11 +1,11 @@
 // @flow
 import React, { Component } from 'react';
+import { canUseDOM } from 'exenv';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
-import { FocusLock } from '@atlaskit/layer-manager';
 import Blanket from '@atlaskit/blanket';
 
 import {
@@ -23,6 +23,7 @@ import {
 } from '../styled/Modal';
 import { Animation } from './Animation';
 import Content from './Content';
+import FocusLock from './FocusLock';
 import { type Props as OuterProps } from './ModalWrapper';
 
 export const Positioner = ({
@@ -44,13 +45,6 @@ function getScrollDistance() {
     (document.body && document.body.scrollTop) ||
     0
   );
-}
-function getInitialState() {
-  return {
-    dialogNode: null,
-    scrollDistance: getScrollDistance(),
-    isExiting: false,
-  };
 }
 
 type Props = OuterProps & {
@@ -78,9 +72,18 @@ class Modal extends Component<Props, State> {
     isHeadingMultiline: true,
   };
 
-  state: State = getInitialState();
+  state = {
+    dialogNode: null,
+    scrollDistance: canUseDOM ? getScrollDistance() : 0,
+    isExiting: false,
+  };
 
   componentDidMount() {
+    const scrollDistance = getScrollDistance();
+    if (getScrollDistance() !== this.state.scrollDistance) {
+      // eslint-disable-next-line react/no-did-mount-set-state
+      this.setState({ scrollDistance });
+    }
     window.addEventListener('scroll', this.handleWindowScroll);
   }
 
@@ -101,9 +104,6 @@ class Modal extends Component<Props, State> {
     if (this.props.shouldCloseOnOverlayClick) {
       this.props.onClose(e);
     }
-  };
-  handleDialogClick = (e: SyntheticMouseEvent<>) => {
-    e.stopPropagation();
   };
 
   render() {
@@ -153,13 +153,12 @@ class Modal extends Component<Props, State> {
             scrollDistance={scrollDistance}
           >
             <FocusLock
-              enabled={stackIndex === 0 && isOpen}
+              isEnabled={stackIndex === 0 && isOpen}
               autoFocus={autoFocus}
             >
               <Blanket isTinted onBlanketClicked={this.handleOverlayClick} />
               <Positioner
                 style={slide}
-                onClick={this.handleOverlayClick}
                 scrollBehavior={scrollBehavior}
                 widthName={widthName}
                 widthValue={widthValue}
@@ -167,7 +166,6 @@ class Modal extends Component<Props, State> {
                 <Dialog
                   heightValue={height}
                   isChromeless={isChromeless}
-                  onClick={this.handleDialogClick}
                   role="dialog"
                   tabIndex="-1"
                 >

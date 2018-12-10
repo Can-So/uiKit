@@ -3,6 +3,7 @@ import * as React from 'react';
 import { MouseEvent, SyntheticEvent } from 'react';
 import Tooltip from '@atlaskit/tooltip';
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
+import Button from '@atlaskit/button';
 import { colors } from '@atlaskit/theme';
 
 import * as styles from './styles';
@@ -160,9 +161,9 @@ const renderAsSprite = (props: Props) => {
   }
 
   const xPositionInPercent =
-    100 / (sprite.column - 1) * (representation.xIndex - 0);
+    (100 / (sprite.column - 1)) * (representation.xIndex - 0);
   const yPositionInPercent =
-    100 / (sprite.row - 1) * (representation.yIndex - 0);
+    (100 / (sprite.row - 1)) * (representation.yIndex - 0);
   const style = {
     backgroundImage: `url(${sprite.url})`,
     backgroundPosition: `${xPositionInPercent}% ${yPositionInPercent}%`,
@@ -243,11 +244,17 @@ const renderAsImage = (props: Props) => {
   if (showDelete) {
     deleteButton = (
       <span className={styles.deleteButton}>
-        <CrossCircleIcon
-          label={deleteEmojiLabel}
-          primaryColor={colors.N500}
-          size="small"
+        <Button
+          iconBefore={
+            <CrossCircleIcon
+              label={deleteEmojiLabel}
+              primaryColor={colors.N500}
+              size="small"
+            />
+          }
           onClick={event => handleDelete(props, event)}
+          appearance="subtle-link"
+          spacing="none"
         />
       </span>
     );
@@ -257,7 +264,7 @@ const renderAsImage = (props: Props) => {
   if (fitToHeight && width && height) {
     // Presize image, to prevent reflow due to size changes after loading
     sizing = {
-      width: fitToHeight / height * width,
+      width: (fitToHeight / height) * width,
       height: fitToHeight,
     };
   }

@@ -1,3 +1,44 @@
+export type UserPickerProps = {
+  users?: User[];
+  width?: number;
+  loadUsers?: LoadOptions;
+  onChange?: OnChange;
+  isMulti?: boolean;
+  search?: string;
+  anchor?: React.ComponentType<any>;
+  open?: boolean;
+  isLoading?: boolean;
+  onInputChange?: OnInputChange;
+  onSelection?: OnUser;
+  onFocus?: OnPicker;
+  onBlur?: OnPicker;
+  blurInputOnSelect?: boolean;
+  appearance?: 'normal' | 'compact';
+  subtle?: boolean;
+  defaultValue?: UserValue;
+  placeholder?: string;
+  noOptionsMessage?: string;
+  value?: UserValue;
+  /** Disable all interactions with the picker, putting it in a read-only state. */
+  isDisabled?: boolean;
+  /** Display a remove button on the single picker. True by default. */
+  isClearable?: boolean;
+  /** Optional tooltip to display on hover over the clear indicator */
+  clearValueLabel?: string;
+};
+
+export type UserPickerState = {
+  users: User[];
+  value?: UserOption[] | UserOption;
+  resultVersion: number;
+  inflightRequest: number;
+  count: number;
+  hoveringClearIndicator: boolean;
+  menuIsOpen: boolean;
+  inputValue: string;
+  preventFilter: boolean;
+};
+
 export interface HighlightRange {
   start: number;
   end: number;
@@ -5,16 +46,17 @@ export interface HighlightRange {
 
 export interface Highlight {
   name: HighlightRange[];
-  nickname: HighlightRange[];
+  publicName: HighlightRange[];
 }
 
 export interface User {
   id: string;
   avatarUrl?: string;
-  name?: string;
-  nickname: string;
+  name: string;
+  publicName?: string;
   highlight?: Highlight;
-  lozenge?: string;
+  fixed?: boolean;
+  byline?: string;
 }
 
 export type UserValue = User | Array<User> | null | undefined;
@@ -29,6 +71,12 @@ export type ActionTypes =
   | 'create-option';
 
 export type OnChange = (value: UserValue, action: ActionTypes) => void;
+
+export type OnInputChange = (query?: string) => void;
+
+export type OnPicker = () => void;
+
+export type OnUser = (value: UserValue) => void;
 
 export type UserOption = {
   label: string;

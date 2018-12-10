@@ -11,9 +11,9 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "Atlassian Home",
-    "Jimmy Kurniawan",
-    "Ryan Braganza"
+    "Notifications Platform",
+    "Ze'ev Gilovitz",
+    "Shaun Esther"
   ],
   "dependencies": {
     "@atlaskit/badge": "^9.1.1",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@atlaskit/docs": "^5.0.2",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "enzyme": "^3.7.0",
     "sinon": "^2.2.0"
   },
   "peerDependencies": {

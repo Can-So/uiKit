@@ -112,7 +112,7 @@ test('tooltip should render whatever is passed to component prop', () => {
 
 test('tooltip wrapping element should be a div by default', () => {
   wrapper = mount(
-    <Tooltip tag="span">
+    <Tooltip content="Tooltip content" tag="span">
       <Target>foo</Target>
     </Tooltip>,
   );
@@ -121,7 +121,7 @@ test('tooltip wrapping element should be a div by default', () => {
 
 test('tooltip wrapping element should be whatever is passed as tag prop', () => {
   wrapper = mount(
-    <Tooltip tag="span">
+    <Tooltip content="Tooltip content" tag="span">
       <Target>foo</Target>
     </Tooltip>,
   );
@@ -217,7 +217,6 @@ test('tooltips should show and hide immediately once one has opened', () => {
   wrapper.update();
   expect(wrapper.find(StyledTooltip).text()).toEqual('button two tooltip');
 });
-
 test('tooltip should render popup in Portal with specific z-index', () => {
   wrapper = mount(
     <Tooltip content="Tooltip content">

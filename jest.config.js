@@ -1,9 +1,13 @@
 //@flow
 /* eslint-disable no-console */
+const fs = require('fs');
+
 const CHANGED_PACKAGES = process.env.CHANGED_PACKAGES;
+const COVERAGE_PACKAGES = process.env.COVERAGE_PACKAGES;
 const INTEGRATION_TESTS = process.env.INTEGRATION_TESTS;
 const VISUAL_REGRESSION = process.env.VISUAL_REGRESSION;
 const PARALLELIZE_TESTS = process.env.PARALLELIZE_TESTS;
+const PARALLELIZE_TESTS_FILE = process.env.PARALLELIZE_TESTS_FILE;
 const TEST_ONLY_PATTERN = process.env.TEST_ONLY_PATTERN;
 const PROD = process.env.PROD;
 // These are set by Pipelines if you are running in a parallel steps
@@ -22,6 +26,11 @@ const STEPS = Number(process.env.STEPS);
  *
  * Run only tests for changed packages (in parallel)
  * PARALLELIZE_TESTS="$(CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js) yarn --silent jest --listTests)" yarn jest --listTests
+ *
+ * If the number of tests to run is too long for bash, you can pass a file containing the tests instead
+ * TMPFILE="$(mktemp /tmp/jest.XXXXX)"
+ * yarn --silent jest --listTests > $TMPFILE
+ * PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --listTests
  */
 
 const config = {
@@ -34,10 +43,17 @@ const config = {
     '/__tests__\\/_.*?',
     // ignore files under __tests__ that start with an underscore
     '/__tests__\\/.*?\\/_.*?',
+    // ignore tests under __tests__/flow
+    '/__tests__\\/flow/',
     // ignore tests under __tests__/integration (we override this if the INTEGRATION_TESTS flag is set)
     '/__tests__\\/integration/',
     // ignore tests under __tests__/vr (we override this if the VISUAL_REGRESSION flag is set)
     '/__tests__\\/visual-regression/',
+  ],
+  // NOTE: This ignored list is required because the script is bundling `@atlaskit/navigation-next`
+  // which causes infinite loop if run tests in watch mode
+  watchPathIgnorePatterns: [
+    '\\/packages\\/core\\/navigation-next\\/[^\\/]*\\.js$',
   ],
   modulePathIgnorePatterns: ['./node_modules', '/dist/'],
   // don't transform any files under node_modules except @atlaskit/* and react-syntax-highlighter (it
@@ -69,6 +85,10 @@ const config = {
     // Need this to have jsdom loading images.
     resources: 'usable',
   },
+  coverageReporters: ['lcov', 'html', 'text-summary'],
+  collectCoverage: false,
+  collectCoverageFrom: [],
+  coverageThreshold: {},
 };
 
 // If the CHANGED_PACKAGES variable is set, we parse it to get an array of changed packages and only
@@ -79,6 +99,19 @@ if (CHANGED_PACKAGES) {
     pkgPath => `${__dirname}/${pkgPath}/**/__tests__/**/*.(js|tsx|ts)`,
   );
   config.testMatch = changedPackagesTestGlobs;
+}
+
+// Adding code coverage thresold configuration for unit test only
+// This should add only the packages with code coverage threshold available
+// If not it will keep the same flow without code coverage check
+if (COVERAGE_PACKAGES) {
+  const coveragePackages = JSON.parse(COVERAGE_PACKAGES);
+
+  if (coveragePackages.collectCoverageFrom.length > 0) {
+    config.collectCoverage = true;
+    config.collectCoverageFrom = coveragePackages.collectCoverageFrom;
+    config.coverageThreshold = coveragePackages.coverageThreshold;
+  }
 }
 
 // If the INTEGRATION_TESTS / VISUAL_REGRESSION flag is set we need to
@@ -119,6 +152,7 @@ if (TEST_ONLY_PATTERN) {
   if (TEST_ONLY_PATTERN.startsWith('!')) {
     newIgnore = TEST_ONLY_PATTERN.substr(1);
   }
+
   config.testPathIgnorePatterns.push(newIgnore);
 }
 
@@ -128,9 +162,15 @@ if (TEST_ONLY_PATTERN) {
  * We do this by passing in a list of test files (PARALLELIZE_TESTS), the number of a parallel steps (STEPS)
  * and the (0 indexed) index of the current step (STEP_IDX). Using these we can split the test up evenly
  */
-if (PARALLELIZE_TESTS) {
-  const allTests = JSON.parse(PARALLELIZE_TESTS);
-  config.testMatch = allTests.filter((_, i) => i % STEPS - STEP_IDX === 0);
+if (PARALLELIZE_TESTS || PARALLELIZE_TESTS_FILE) {
+  const testStr = PARALLELIZE_TESTS_FILE
+    ? fs.readFileSync(PARALLELIZE_TESTS_FILE, 'utf8')
+    : PARALLELIZE_TESTS;
+  if (!testStr) {
+    throw new Error('Cannot read parallelized tests');
+  }
+  const allTests = JSON.parse(testStr);
+  config.testMatch = allTests.filter((_, i) => (i % STEPS) - STEP_IDX === 0);
 
   console.log('Parallelising jest tests.');
   console.log(`Parallel step ${String(STEP_IDX)} of ${String(STEPS)}`);
@@ -141,6 +181,7 @@ if (PARALLELIZE_TESTS) {
 // Annoyingly, if the array is empty, jest will fallback to its defaults and run everything
 if (config.testMatch.length === 0) {
   config.testMatch = ['DONT-RUN-ANYTHING'];
+  config.collectCoverage = false;
   // only log this message if we are running in an actual terminal (output not being piped to a file
   // or a subshell)
   if (process.stdout.isTTY) {

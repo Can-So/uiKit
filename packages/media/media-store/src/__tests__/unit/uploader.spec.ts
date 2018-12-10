@@ -16,9 +16,9 @@ describe('Uploader', () => {
     const createFileFromUpload = jest
       .fn()
       .mockReturnValue(Promise.resolve({ data: { id: '123' } }));
-    const createUpload = () => {
-      return Promise.resolve({ data: [{ id: 'upload-id-123' }] });
-    };
+    const createUpload = jest
+      .fn()
+      .mockReturnValue(Promise.resolve({ data: [{ id: 'upload-id-123' }] }));
     const appendChunksToUpload = jest.fn().mockReturnValue(Promise.resolve(1));
     const createFile = jest
       .fn()
@@ -84,6 +84,7 @@ describe('Uploader', () => {
       ChunkinatorMock,
       createFile,
       createFileFromUpload,
+      createUpload,
     } = setup();
 
     (chunkinator as any) = ChunkinatorMock;
@@ -98,6 +99,7 @@ describe('Uploader', () => {
     ).deferredFileId;
     const occurrenceKey = createFile.mock.calls[0][0].occurrenceKey;
 
+    expect(createUpload).toBeCalledWith(1, 'some-collection');
     expect(createFileFromUpload).toHaveBeenCalledTimes(1);
     expect(createFileFromUpload).toBeCalledWith(
       { uploadId: 'upload-id-123', name: 'file-name' },
@@ -235,6 +237,6 @@ describe('Uploader', () => {
     await createFileFromUpload();
 
     expect(onId).toHaveBeenCalledTimes(1);
-    expect(onId).toBeCalledWith('id-upfront-123');
+    expect(onId).toBeCalledWith('id-upfront-123', expect.any(String));
   });
 });

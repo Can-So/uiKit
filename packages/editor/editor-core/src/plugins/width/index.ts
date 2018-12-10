@@ -18,18 +18,27 @@ export function createPlugin(
       init: () => ({
         width: document.body.offsetWidth,
       }),
-      apply(tr, oldPluginState) {
-        const newPluginState = tr.getMeta(pluginKey);
+      apply(tr, pluginState: WidthPluginState) {
+        const meta: WidthPluginState | undefined = tr.getMeta(pluginKey);
+
+        if (!meta) {
+          return pluginState;
+        }
+
+        const newPluginState = {
+          ...pluginState,
+          ...meta,
+        };
 
         if (
           newPluginState &&
-          (oldPluginState.width !== newPluginState.newWidth ||
-            oldPluginState.lineLength !== newPluginState.lineLength)
+          (pluginState.width !== newPluginState.width ||
+            pluginState.lineLength !== newPluginState.lineLength)
         ) {
           dispatch(pluginKey, newPluginState);
           return newPluginState;
         }
-        return oldPluginState;
+        return pluginState;
       },
     },
   });
@@ -42,6 +51,20 @@ const widthPlugin: EditorPlugin = {
       plugin: ({ dispatch }) => createPlugin(dispatch),
     },
   ],
+
+  // do this early here, otherwise we have to wait for WidthEmitter to debounce
+  // which causes anything dependent on lineLength to jump around
+  contentComponent({ editorView, containerElement }) {
+    const pmDom = containerElement
+      ? containerElement.querySelector('.ProseMirror')
+      : undefined;
+
+    const tr = editorView.state.tr.setMeta(pluginKey, {
+      lineLength: pmDom ? pmDom.clientWidth : undefined,
+    });
+    editorView.dispatch(tr);
+    return null;
+  },
 };
 
 export default widthPlugin;

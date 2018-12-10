@@ -14,8 +14,6 @@ import type {
 import { CONTENT_NAV_WIDTH } from '../common/constants';
 
 const defaultState = {
-  isPeekHinting: false,
-  isPeeking: false,
   isResizing: false,
   isResizeDisabled: false,
   isCollapsed: false,
@@ -138,27 +136,5 @@ export default class UIController extends Container<UIControllerShape>
     // This is a page-level setting not a user preference so we don't cache
     // this.
     this.setState({ isCollapsed: false, isResizeDisabled: true });
-  };
-
-  peekHint = () => {
-    this.storeState({ isPeekHinting: true });
-  };
-  unPeekHint = () => {
-    this.storeState({ isPeekHinting: false });
-  };
-  togglePeekHint = () => {
-    const toggle = this.state.isPeekHinting ? this.unPeekHint : this.peekHint;
-    toggle();
-  };
-
-  peek = () => {
-    this.storeState({ isPeeking: true });
-  };
-  unPeek = () => {
-    this.storeState({ isPeeking: false });
-  };
-  togglePeek = () => {
-    const toggle = this.state.isPeeking ? this.unPeek : this.peek;
-    toggle();
   };
 }

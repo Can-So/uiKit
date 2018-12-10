@@ -247,7 +247,7 @@ class MentionResource extends AbstractMentionResource {
     }
 
     if (!config.securityProvider) {
-      config['securityProvider'] = emptySecurityProvider;
+      config.securityProvider = emptySecurityProvider;
     }
 
     this.config = config;

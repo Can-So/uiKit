@@ -59,7 +59,7 @@ class Mediator extends EventEmitter {
         );
 
         others(sid).forEach(({ sid: xSid }) => {
-          setTimeout(() => {
+          window.setTimeout(() => {
             this.emit(`${xSid}:presence`, { joined });
           }, 0);
         });

@@ -14,6 +14,7 @@ import { fixColumnSizes } from '../actions';
 
 export type LayoutState = {
   pos: number | null;
+  allowBreakout: boolean;
 };
 
 type Change = { from: number; to: number; slice: Slice };
@@ -54,84 +55,97 @@ const getNodeDecoration = (pos: number, node: Node) => [
   Decoration.node(pos, pos + node.nodeSize, { class: 'selected' }),
 ];
 
+const getInitialPluginState = (
+  pluginConfig: { allowBreakout?: boolean },
+  state: EditorState,
+): LayoutState => {
+  const maybeLayoutSection = findParentNodeOfType(
+    state.schema.nodes.layoutSection,
+  )(state.selection);
+
+  const allowBreakout =
+    typeof pluginConfig === 'object' ? !!pluginConfig.allowBreakout : false;
+  const pos = maybeLayoutSection ? maybeLayoutSection.pos : null;
+  return { pos, allowBreakout };
+};
+
 export const pluginKey = new PluginKey('layout');
-export default new Plugin({
-  key: pluginKey,
-  state: {
-    init: (_, state): LayoutState => {
-      const maybeLayoutSection = findParentNodeOfType(
-        state.schema.nodes.layoutSection,
-      )(state.selection);
-      return maybeLayoutSection
-        ? { pos: maybeLayoutSection.pos }
-        : { pos: null };
+
+export default pluginConfig =>
+  new Plugin({
+    key: pluginKey,
+    state: {
+      init: (_, state): LayoutState =>
+        getInitialPluginState(pluginConfig, state),
+
+      apply: (tr, pluginState, oldState, newState) => {
+        if (tr.docChanged || tr.selectionSet) {
+          const maybeLayoutSection = findParentNodeOfType(
+            newState.schema.nodes.layoutSection,
+          )(newState.selection);
+
+          const newPluginState = {
+            ...pluginState,
+            pos: maybeLayoutSection ? maybeLayoutSection.pos : null,
+          };
+          return newPluginState;
+        }
+        return pluginState;
+      },
     },
-    apply: (tr, pluginState, oldState, newState) => {
-      if (tr.docChanged || tr.selectionSet) {
-        const maybeLayoutSection = findParentNodeOfType(
-          newState.schema.nodes.layoutSection,
-        )(newState.selection);
-        return maybeLayoutSection
-          ? { pos: maybeLayoutSection.pos }
-          : { pos: null };
-      }
-      return pluginState;
+    props: {
+      decorations(state) {
+        const layoutState = pluginKey.getState(state) as LayoutState;
+        if (layoutState.pos !== null) {
+          return DecorationSet.create(
+            state.doc,
+            getNodeDecoration(layoutState.pos, state.doc.nodeAt(
+              layoutState.pos,
+            ) as Node),
+          );
+        }
+        return undefined;
+      },
+      handleKeyDown: keydownHandler({
+        Tab: filter(isWholeSelectionInsideLayoutColumn, moveCursorToNextColumn),
+      }),
     },
-  },
-  props: {
-    decorations(state) {
-      const layoutState = pluginKey.getState(state) as LayoutState;
-      if (layoutState.pos !== null) {
-        return DecorationSet.create(
-          state.doc,
-          getNodeDecoration(layoutState.pos, state.doc.nodeAt(
-            layoutState.pos,
-          ) as Node),
-        );
-      }
-      return undefined;
-    },
-    handleKeyDown: keydownHandler({
-      Tab: filter(isWholeSelectionInsideLayoutColumn, moveCursorToNextColumn),
-    }),
-  },
-  appendTransaction: (transactions, oldState, newState) => {
-    let changes: Change[] = [];
-    transactions.forEach(prevTr => {
-      // remap change segments across the transaction set
-      changes.map(change => {
-        return {
-          from: prevTr.mapping.map(change.from),
-          to: prevTr.mapping.map(change.to),
-          slice: change.slice,
-        };
+    appendTransaction: (transactions, oldState, newState) => {
+      let changes: Change[] = [];
+      transactions.forEach(prevTr => {
+        // remap change segments across the transaction set
+        changes.map(change => {
+          return {
+            from: prevTr.mapping.map(change.from),
+            to: prevTr.mapping.map(change.to),
+            slice: change.slice,
+          };
+        });
+
+        // don't consider transactions that don't mutate
+        if (!prevTr.docChanged) {
+          return;
+        }
+
+        const change = fixColumnSizes(prevTr, newState);
+        if (change) {
+          changes.push(change);
+        }
       });
 
-      // don't consider transactions that don't mutate
-      if (!prevTr.docChanged) {
-        return;
+      if (changes.length) {
+        const tr = newState.tr;
+        const selection = newState.selection;
+
+        changes.forEach(change => {
+          tr.replaceRange(change.from, change.to, change.slice);
+        });
+
+        if (tr.docChanged) {
+          tr.setSelection(selection);
+          tr.setMeta('addToHistory', false);
+          return tr;
+        }
       }
-
-      const change = fixColumnSizes(prevTr, newState);
-      if (change) {
-        changes.push(change);
-      }
-    });
-
-    if (changes.length) {
-      const tr = newState.tr;
-      const selection = newState.selection;
-
-      changes.forEach(change => {
-        tr.replaceRange(change.from, change.to, change.slice);
-      });
-
-      if (tr.docChanged) {
-        tr.setSelection(selection);
-        tr.setMeta('isLocal', true);
-        tr.setMeta('addToHistory', false);
-        return tr;
-      }
-    }
-  },
-});
+    },
+  });

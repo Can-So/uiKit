@@ -8,9 +8,7 @@ import type { ConnectedItemAvatarProps } from './types';
 
 const ItemAvatarWithTheme = withContentTheme(ItemAvatar);
 
-export default class ConnectedItemAvatar extends Component<
-  ConnectedItemAvatarProps,
-> {
+export default class ConnectedItemAvatar extends Component<ConnectedItemAvatarProps> {
   static defaultProps = {
     styles: styleReducerNoOp,
   };

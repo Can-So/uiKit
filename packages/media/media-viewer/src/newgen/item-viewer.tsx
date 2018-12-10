@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Context, FileState, ProcessedFileState } from '@atlaskit/media-core';
+import { FormattedMessage } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
 import { Outcome, Identifier, MediaViewerFeatureFlags } from './domain';
 import { ImageViewer } from './viewers/image';
 import { VideoViewer } from './viewers/video';
-import { AudioViewer } from './viewers/audio';
 import { DocViewer } from './viewers/doc';
 import { Spinner } from './loading';
 import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
-import {
-  ErrorMessage,
+import ErrorMessage, {
   createError,
   MediaViewerError,
   ErrorName,
@@ -29,6 +29,7 @@ import {
   GasPayload,
   GasScreenEventPayload,
 } from '@atlaskit/analytics-gas-types';
+import { AudioViewer } from './viewers/audio';
 
 export type Props = Readonly<{
   identifier: Identifier;
@@ -115,7 +116,13 @@ export class ItemViewerBase extends React.Component<Props, State> {
       case 'image':
         return <ImageViewer onLoad={this.onViewerLoaded} {...viewerProps} />;
       case 'audio':
-        return <AudioViewer {...viewerProps} />;
+        return (
+          <AudioViewer
+            showControls={showControls}
+            featureFlags={featureFlags}
+            {...viewerProps}
+          />
+        );
       case 'video':
         return (
           <VideoViewer
@@ -136,7 +143,9 @@ export class ItemViewerBase extends React.Component<Props, State> {
       const err = createError(errorName, undefined, file);
       return (
         <ErrorMessage error={err}>
-          <p>Try downloading the file to view it.</p>
+          <p>
+            <FormattedMessage {...messages.try_downloading_file} />
+          </p>
           {this.renderDownloadButton(file, err)}
         </ErrorMessage>
       );

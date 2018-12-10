@@ -2,17 +2,22 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
+import Badge from '@atlaskit/badge';
+import { DropdownItem } from '@atlaskit/dropdown-menu';
 import SearchIcon from '@atlaskit/icon/glyph/search';
 import CreateIcon from '@atlaskit/icon/glyph/add';
 import StarLargeIcon from '@atlaskit/icon/glyph/star-large';
 import NotificationIcon from '@atlaskit/icon/glyph/notification';
 import SignInIcon from '@atlaskit/icon/glyph/sign-in';
 import QuestionIcon from '@atlaskit/icon/glyph/question-circle';
+import { NotificationIndicator } from '@atlaskit/notification-indicator';
 import GlobalNavigation from '../../index';
 import ScreenTracker from '../../../ScreenTracker';
+import ItemComponent from '../../../ItemComponent';
 
 const DrawerContents = () => <div>drawer</div>;
 const EmojiAtlassianIcon = () => <button>EmojiAtlassianIcon</button>;
+const noop = () => {};
 
 const escKeyDown = () => {
   const event = document.createEvent('Events');
@@ -50,7 +55,7 @@ describe('GlobalNavigation', () => {
 
       const productIcon = wrapper.find(EmojiAtlassianIcon);
       expect(productIcon.exists()).toBeTruthy();
-      expect(wrapper.find('a').props().href).toEqual('/testtest');
+      expect(wrapper.find('a').prop('href')).toEqual('/testtest');
     });
 
     it('should pass both href and onClick for product logo', () => {
@@ -64,8 +69,10 @@ describe('GlobalNavigation', () => {
       );
 
       const productIcon = wrapper.find(EmojiAtlassianIcon);
+
       expect(productIcon.exists()).toBeTruthy();
-      expect(wrapper.find('a').props().href).toEqual('/testtest');
+      expect(wrapper.find('a').prop('href')).toEqual('/testtest');
+
       productIcon.simulate('click');
       expect(mockProductClick).toHaveBeenCalled();
     });
@@ -135,7 +142,7 @@ describe('GlobalNavigation', () => {
           const icon = wrapper.find(akIcon);
           icon.simulate('click');
           expect(
-            wrapper.find('DrawerBase').props().shouldUnmountOnExit,
+            wrapper.find('DrawerBase').prop('shouldUnmountOnExit'),
           ).toBeFalsy();
 
           wrapper.setProps({
@@ -143,11 +150,35 @@ describe('GlobalNavigation', () => {
           });
           wrapper.update();
           expect(
-            wrapper.find('DrawerBase').props().shouldUnmountOnExit,
+            wrapper.find('DrawerBase').prop('shouldUnmountOnExit'),
           ).toBeTruthy();
         });
 
-        describe('uncontrolled', () => {
+        it(`should default the width of the "${name}" drawer to "wide" when the drawer width is not passed in`, () => {
+          const props = {
+            [`${name}DrawerContents`]: DrawerContents,
+          };
+          // TODO: Convert to shallow once enzyme has been upgraded
+          const wrapper = mount(<GlobalNavigation {...props} />);
+          expect(wrapper.find('DrawerBase').props()).toMatchObject({
+            width: 'wide',
+          });
+        });
+
+        it(`should set the width of the "${name}" drawer when the drawer width is passed in`, () => {
+          const props = {
+            [`${name}DrawerWidth`]: 'full',
+            [`${name}DrawerContents`]: DrawerContents,
+          };
+
+          // TODO: Convert to shallow once enzyme has been upgraded
+          const wrapper = mount(<GlobalNavigation {...props} />);
+          expect(wrapper.find('DrawerBase').props()).toMatchObject({
+            width: 'full',
+          });
+        });
+
+        describe('Uncontrolled', () => {
           it(`should open "${name}" drawer when "${name}" icon is clicked`, () => {
             // Testing XDrawerContents positive
             const props = {
@@ -231,7 +262,7 @@ describe('GlobalNavigation', () => {
             // Cannot assert for the drawer to be absent because it is
             // dismounted by ReactTransitionGroup on animationEnd, which is not
             // being captured by enzyme.
-            expect(wrapper.find('DrawerPrimitive').props().in).toBeFalsy();
+            expect(wrapper.find('DrawerPrimitive').prop('in')).toBeFalsy();
           });
 
           //  There is no onXOpen callback for controlled drawers. A consumer can
@@ -247,7 +278,7 @@ describe('GlobalNavigation', () => {
             const wrapper = mount(<GlobalNavigation {...props} />);
 
             wrapper.setProps({
-              isSearchDrawerOpen: false,
+              [`is${capitalisedName}DrawerOpen`]: false,
             });
             wrapper.update();
             escKeyDown();
@@ -264,15 +295,15 @@ describe('GlobalNavigation', () => {
         productIcon={EmojiAtlassianIcon}
         productHref="#"
         productTooltip="product tooltip"
-        onProductClick={() => console.log('product clicked')}
+        onProductClick={noop}
         createTooltip="create tooltip"
-        onCreateClick={() => console.log('create clicked')}
+        onCreateClick={noop}
         searchTooltip="search tooltip"
-        onSearchClick={() => console.log('search clicked')}
+        onSearchClick={noop}
         starredTooltip="starred tooltip"
-        onStarredClick={() => console.log('your work clicked')}
+        onStarredClick={noop}
         notificationTooltip="notification tooltip"
-        onNotificationClick={() => console.log('notification clicked')}
+        onNotificationClick={noop}
         profileTooltip="profile tooltip"
         loginHref="#login"
         helpItems={() => <div>items</div>}
@@ -283,11 +314,11 @@ describe('GlobalNavigation', () => {
       <GlobalNavigation
         productIcon={EmojiAtlassianIcon}
         productHref="#"
-        onProductClick={() => console.log('product clicked')}
-        onCreateClick={() => console.log('create clicked')}
-        onSearchClick={() => console.log('search clicked')}
-        onStarredClick={() => console.log('your work clicked')}
-        onNotificationClick={() => console.log('notification clicked')}
+        onProductClick={noop}
+        onCreateClick={noop}
+        onSearchClick={noop}
+        onStarredClick={noop}
+        onNotificationClick={noop}
         loginHref="#login"
         helpItems={() => <div>items</div>}
       />,
@@ -337,9 +368,9 @@ describe('GlobalNavigation', () => {
           defaultWrapper
             .find(icon)
             .parents('Tooltip')
-            .props().content,
+            .prop('content'),
         ).toBe(defaultTooltip);
-        expect(defaultWrapper.find(icon).props().label).toBe(defaultTooltip);
+        expect(defaultWrapper.find(icon).prop('label')).toBe(defaultTooltip);
       });
     });
 
@@ -349,9 +380,9 @@ describe('GlobalNavigation', () => {
           customTooltipWrapper
             .find(icon)
             .parents('Tooltip')
-            .props().content,
+            .prop('content'),
         ).toBe(`${name} tooltip`);
-        expect(customTooltipWrapper.find(icon).props().label).toBe(
+        expect(customTooltipWrapper.find(icon).prop('label')).toBe(
           `${name} tooltip`,
         );
       });
@@ -363,11 +394,11 @@ describe('GlobalNavigation', () => {
       <GlobalNavigation
         productIcon={EmojiAtlassianIcon}
         productHref="#"
-        onProductClick={() => console.log('product clicked')}
-        onCreateClick={() => console.log('create clicked')}
-        onSearchClick={() => console.log('search clicked')}
-        onStarredClick={() => console.log('your work clicked')}
-        onNotificationClick={() => console.log('notification clicked')}
+        onProductClick={noop}
+        onCreateClick={noop}
+        onSearchClick={noop}
+        onStarredClick={noop}
+        onNotificationClick={noop}
         loginHref="#login"
         helpItems={() => <div>items</div>}
       />,
@@ -451,7 +482,7 @@ describe('GlobalNavigation', () => {
           notificationCount={5}
         />,
       );
-      expect(wrapper.find('Badge').text()).toEqual('5');
+      expect(wrapper.find(Badge).text()).toEqual('5');
     });
 
     it('should show "9+" when notificationCount is more than 10', () => {
@@ -462,7 +493,7 @@ describe('GlobalNavigation', () => {
         />,
       );
 
-      expect(wrapper.find('Badge').text()).toEqual('9+');
+      expect(wrapper.find(Badge).text()).toEqual('9+');
     });
 
     it('should not show a badge when notificationCount is 0', () => {
@@ -472,7 +503,232 @@ describe('GlobalNavigation', () => {
           notificationCount={0}
         />,
       );
-      expect(wrapper.find('Badge').exists()).toBeFalsy();
+      expect(wrapper.find(Badge).exists()).toBeFalsy();
+    });
+
+    it('should pass the correct badgeCount to ItemComponent', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          onNotificationClick={() => {}}
+          notificationCount={15}
+        />,
+      );
+
+      expect(wrapper.find(ItemComponent).prop('badgeCount')).toBe(15);
+    });
+  });
+
+  describe('Inbuilt Notification', () => {
+    const fabricNotificationLogUrl = '/gateway/api/notification-log/';
+    const cloudId = 'DUMMY-158c8204-ff3b-47c2-adbb-a0906ccc722b';
+    it('should not render when either fabricID or fabricNotificationLogUrl are missing', () => {
+      const wrapper = mount(<GlobalNavigation product="jira" locale="en" />);
+
+      const icon = wrapper.find(NotificationIcon);
+      expect(icon.exists()).toBeFalsy();
+    });
+
+    it('should render the notification icon when both fabricID and fabricNotificationLogUrl are present', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+      const icon = wrapper.find(NotificationIcon);
+      expect(icon.exists()).toBeTruthy();
+    });
+
+    it('should render tooltip passed from the product', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+          notificationTooltip="Notification tooltip from product"
+        />,
+      );
+
+      expect(
+        wrapper
+          .find(NotificationIcon)
+          .parents('Tooltip')
+          .prop('content'),
+      ).toBe('Notification tooltip from product');
+      expect(wrapper.find(NotificationIcon).prop('label')).toBe(
+        'Notification tooltip from product',
+      );
+    });
+
+    it('should open notification drawer when clicked', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+      const icon = wrapper.find(NotificationIcon);
+      icon.simulate('click');
+
+      expect(wrapper.find('NotificationDrawer').exists()).toBeTruthy();
+    });
+
+    it('should not render iframe in drawer when notificationDrawerContents is passed', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+          notificationDrawerContents={DrawerContents}
+        />,
+      );
+      const icon = wrapper.find(NotificationIcon);
+      icon.simulate('click');
+
+      expect(wrapper.find(DrawerContents).exists()).toBeTruthy();
+      expect(
+        wrapper
+          .find(DrawerContents)
+          .children('iframe')
+          .exists(),
+      ).toBeFalsy();
+    });
+
+    it('should poll for notification every 1 minute when there is no badge', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      wrapper.setState({
+        notificationCount: 5,
+      });
+      wrapper.update();
+
+      wrapper.setState({
+        notificationCount: 0,
+      });
+      wrapper.update();
+      expect(wrapper.find(NotificationIndicator).prop('refreshRate')).toEqual(
+        60000,
+      );
+    });
+
+    it('should poll for notification every 3 minutes when there is a badge', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      wrapper.setState({
+        notificationCount: 5,
+      });
+      wrapper.update();
+
+      expect(wrapper.find(NotificationIndicator).prop('refreshRate')).toEqual(
+        180000,
+      );
+    });
+
+    it('should pass "countOverride" to NotificationIndicator when local notificationCount is the NOT same as cachedCount', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      localStorage.setItem('notificationBadgeCountCache', '2');
+      wrapper.setState({
+        notificationCount: 5,
+      });
+
+      const spy = jest.spyOn(wrapper.instance(), 'onCountUpdating');
+      const spyReturn = spy(1); // 1 is the visibilityChangesSinceTimer, passed by NotificationIndicator
+
+      expect(spyReturn).toMatchObject({
+        countOverride: 2,
+      });
+    });
+
+    it('should pass "skip" to NotificationIndicator when local notificationCount is the same as cachedCount', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      localStorage.setItem('notificationBadgeCountCache', '5');
+      wrapper.setState({
+        notificationCount: 5,
+      });
+
+      const spy = jest.spyOn(wrapper.instance(), 'onCountUpdating');
+      const spyReturn = spy(1);
+
+      expect(spyReturn).toMatchObject({
+        skip: true,
+      });
+    });
+
+    it('should pass the correct badgeCount to ItemComponent', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          product="jira"
+          locale="en"
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+      wrapper.setState({
+        notificationCount: 5,
+      });
+
+      expect(wrapper.find(ItemComponent).prop('badgeCount')).toBe(5);
+    });
+
+    it('should unmount NotificationIndicator when notification drawer is open', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      const icon = wrapper.find(NotificationIcon);
+      icon.simulate('click');
+
+      expect(wrapper.find(NotificationIndicator).exists()).toBeFalsy();
+    });
+
+    it('should mount NotificationIndicator when notification drawer is closed', () => {
+      const wrapper = mount(
+        <GlobalNavigation
+          fabricNotificationLogUrl={fabricNotificationLogUrl}
+          cloudId={cloudId}
+        />,
+      );
+
+      expect(wrapper.find(NotificationIndicator).exists()).toBeTruthy();
     });
   });
 
@@ -490,11 +746,11 @@ describe('GlobalNavigation', () => {
       <GlobalNavigation
         productIcon={EmojiAtlassianIcon}
         productHref="#"
-        onProductClick={() => console.log('product clicked')}
-        onCreateClick={() => console.log('create clicked')}
-        onSearchClick={() => console.log('search clicked')}
-        onStarredClick={() => console.log('your work clicked')}
-        onNotificationClick={() => console.log('notification clicked')}
+        onProductClick={noop}
+        onCreateClick={noop}
+        onSearchClick={noop}
+        onStarredClick={noop}
+        onNotificationClick={noop}
         appSwitcherComponent={AppSwitcher}
         appSwitcherTooltip="appSwitcher tooltip"
         loginHref="#login"
@@ -502,15 +758,15 @@ describe('GlobalNavigation', () => {
       />,
     );
     it('should render the AppSwitcher component', () => {
-      expect(defaultWrapper.children().exists(AppSwitcher)).toBeTruthy();
+      expect(defaultWrapper.children().find(AppSwitcher)).toHaveLength(1);
     });
 
     it('should render the correct tooltip', () => {
       // AppSwitcher doesn't have a default tooltip in global navigation as it's handled by the base app switcher component
-      expect(defaultWrapper.find(AppSwitcher).props().label).toBe(
+      expect(defaultWrapper.find(AppSwitcher).prop('label')).toBe(
         'appSwitcher tooltip',
       );
-      expect(defaultWrapper.find(AppSwitcher).props().tooltip).toBe(
+      expect(defaultWrapper.find(AppSwitcher).prop('tooltip')).toBe(
         'appSwitcher tooltip',
       );
     });
@@ -537,7 +793,7 @@ describe('GlobalNavigation', () => {
   });
 
   describe('Help', () => {
-    it('should render help menu when "helpItems" is passed', () => {
+    xit('should render help menu when "helpItems" is passed', () => {
       const HelpItems = () => <div />;
       HelpItems.displayName = 'HelpItems';
       const wrapper = mount(<GlobalNavigation helpItems={HelpItems} />);
@@ -573,7 +829,7 @@ describe('GlobalNavigation', () => {
       expect(wrapper.find('SignInIcon').exists()).toBeTruthy();
     });
 
-    it('should render dropdown menu if profileItems is passed', () => {
+    xit('should render dropdown menu if profileItems is passed', () => {
       const ProfileItems = () => <div />;
       const wrapper = mount(
         <GlobalNavigation
@@ -583,7 +839,7 @@ describe('GlobalNavigation', () => {
       );
       expect(wrapper.find('[id="profile"]').exists()).toBeTruthy();
       expect(wrapper.children().exists(ProfileItems)).toBeTruthy();
-      expect(wrapper.children().exists('DropdownItem')).toBeTruthy();
+      expect(wrapper.children().exists(DropdownItem)).toBeTruthy();
     });
 
     it('should show default avatar when profileIconUrl is missing', () => {
@@ -602,7 +858,7 @@ describe('GlobalNavigation', () => {
       );
 
       expect(wrapper.find('DefaultImage').exists()).toBeFalsy();
-      expect(wrapper.find('Avatar').props().src).toEqual(
+      expect(wrapper.find('Avatar').prop('src')).toEqual(
         '//url.to.image/fancy',
       );
     });

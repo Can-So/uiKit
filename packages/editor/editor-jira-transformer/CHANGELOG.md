@@ -1,5 +1,34 @@
 # @atlaskit/editor-jira-transformer
 
+## 5.0.18
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/editor-common@22.2.3
+  - @atlaskit/editor-core@90.2.1
+  - @atlaskit/theme@7.0.0
+
+## 5.0.17
+- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+  - @atlaskit/editor-json-transformer@4.0.23
+  - @atlaskit/editor-test-helpers@6.2.23
+  - @atlaskit/editor-core@90.0.0
+
+## 5.0.16
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/editor-core@89.0.0
+  - @atlaskit/editor-json-transformer@4.0.22
+  - @atlaskit/editor-test-helpers@6.2.19
+  - @atlaskit/util-data-test@10.0.21
+
+## 5.0.15
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/util-data-test@10.0.20
+
 ## 5.0.14
 - [patch] Updated dependencies [052ce89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/052ce89)
   - @atlaskit/editor-json-transformer@4.0.19

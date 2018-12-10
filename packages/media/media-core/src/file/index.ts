@@ -7,6 +7,7 @@ import {
   UploadableFile,
   UploadController,
   uploadFile,
+  MediaFileArtifacts,
 } from '@atlaskit/media-store';
 import {
   FilePreview,
@@ -36,6 +37,18 @@ export class FileFetcher {
 
       return fileStream$;
     });
+  }
+
+  getArtifactURL(
+    artifacts: MediaFileArtifacts,
+    artifactName: keyof MediaFileArtifacts,
+    collectionName?: string,
+  ): Promise<string> {
+    return this.mediaStore.getArtifactURL(
+      artifacts,
+      artifactName,
+      collectionName,
+    );
   }
 
   private createDownloadFileStream = (
@@ -108,7 +121,7 @@ export class FileFetcher {
             });
           }
         },
-        onId: id => {
+        onId: (id, occurrenceKey) => {
           fileId = id;
           const key = FileStreamCache.createKey(fileId, { collectionName });
           fileStreamsCache.set(key, subject);
@@ -119,6 +132,7 @@ export class FileFetcher {
               mediaType,
               mimeType,
               id: fileId,
+              occurrenceKey,
               progress: 0,
               status: 'uploading',
               preview,

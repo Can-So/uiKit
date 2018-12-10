@@ -9,12 +9,14 @@ import {
   subsup,
   underline,
   code,
-  mentionQuery,
   emojiQuery,
   typeAheadQuery,
   textColor,
   confluenceInlineComment,
   action,
+  breakout,
+  alignment,
+  indentation,
 } from './marks';
 
 import {
@@ -178,13 +180,15 @@ const marksInOrder: SchemaBuiltInItem[] = [
   { name: 'subsup', spec: subsup },
   { name: 'underline', spec: underline },
   { name: 'code', spec: code },
-  { name: 'mentionQuery', spec: mentionQuery },
   { name: 'emojiQuery', spec: emojiQuery },
   { name: 'typeAheadQuery', spec: typeAheadQuery },
   { name: 'textColor', spec: textColor },
   { name: 'action', spec: action },
+  { name: 'alignment', spec: alignment },
   { name: 'confluenceInlineComment', spec: confluenceInlineComment },
   ...markGroupDeclarations,
+  { name: 'breakout', spec: breakout },
+  { name: 'indentation', spec: indentation },
 ];
 
 /**

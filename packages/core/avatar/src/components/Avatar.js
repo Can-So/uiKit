@@ -1,6 +1,5 @@
 // @flow
 
-import { Theme } from '@atlaskit/theme';
 import React, { Component } from 'react';
 import type { Node } from 'react';
 import {
@@ -21,7 +20,7 @@ import Outer, { PresenceWrapper, StatusWrapper } from '../styled/Avatar';
 import { omit } from '../utils';
 import { getProps, getStyledAvatar } from '../helpers';
 import { mapProps, withPseudoState } from '../hoc';
-import { theme } from '../theme';
+import { Theme } from '../theme';
 import type { AvatarPropTypes, SupportedSizeWithAnIcon } from '../types';
 
 const warn = (message: string) => {
@@ -37,7 +36,6 @@ class Avatar extends Component<AvatarPropTypes> {
     appearance: 'circle',
     enableTooltip: true,
     size: 'medium',
-    theme,
   };
 
   createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
@@ -132,9 +130,17 @@ class Avatar extends Component<AvatarPropTypes> {
       }
 
       // showStatus
+      const customStatusNode = typeof status === 'object' ? status : null;
+
       return (
         <StatusWrapper appearance={appearance} size={size}>
-          <Status status={status} borderColor={borderColor} size={size} />
+          <Status
+            borderColor={borderColor}
+            status={!customStatusNode && status}
+            size={size}
+          >
+            {customStatusNode}
+          </Status>
         </StatusWrapper>
       );
     })();
@@ -155,6 +161,7 @@ class Avatar extends Component<AvatarPropTypes> {
       src,
       stackIndex,
       onClick,
+      theme,
     } = this.props;
 
     // distill props from context, props, and state
@@ -167,7 +174,7 @@ class Avatar extends Component<AvatarPropTypes> {
     Inner.displayName = 'Inner';
 
     const AvatarNode = (
-      <Theme theme={this.props.theme}>
+      <Theme.Provider value={theme}>
         <Outer size={size} stackIndex={stackIndex}>
           <Inner
             innerRef={this.setRef}
@@ -183,7 +190,7 @@ class Avatar extends Component<AvatarPropTypes> {
           </Inner>
           {this.renderIcon()}
         </Outer>
-      </Theme>
+      </Theme.Provider>
     );
 
     return enableTooltip && name ? (

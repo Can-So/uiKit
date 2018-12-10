@@ -5,7 +5,7 @@ exports[`GlobalNavigationItemPrimitive should render a CustomComponent when a co
   display: inline-block;
 }
 
-<ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Tooltip)))
+<WithAnalyticsContext(WithAnalyticsEvents(Tooltip))
   delay={0}
   hideTooltipOnClick={true}
   hideTooltipOnMouseDown={true}
@@ -18,13 +18,14 @@ exports[`GlobalNavigationItemPrimitive should render a CustomComponent when a co
       className="emotion-0"
       component={[Function]}
       id="my-id"
+      isSelected={false}
       label="my-label"
       onClick={[Function]}
       size="large"
       styles={[Function]}
     />
   </div>
-</ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Tooltip)))>
+</WithAnalyticsContext(WithAnalyticsEvents(Tooltip))>
 `;
 
 exports[`GlobalNavigationItemPrimitive should render a button when an onClick prop is passed 1`] = `
@@ -32,7 +33,7 @@ exports[`GlobalNavigationItemPrimitive should render a button when an onClick pr
   display: inline-block;
 }
 
-<ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Tooltip)))
+<WithAnalyticsContext(WithAnalyticsEvents(Tooltip))
   delay={0}
   hideTooltipOnClick={true}
   hideTooltipOnMouseDown={true}
@@ -46,7 +47,7 @@ exports[`GlobalNavigationItemPrimitive should render a button when an onClick pr
       onClick={[Function]}
     />
   </div>
-</ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Tooltip)))>
+</WithAnalyticsContext(WithAnalyticsEvents(Tooltip))>
 `;
 
 exports[`GlobalNavigationItemPrimitive should render an anchor when an href prop is passed 1`] = `
@@ -54,7 +55,7 @@ exports[`GlobalNavigationItemPrimitive should render an anchor when an href prop
   display: inline-block;
 }
 
-<ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Tooltip)))
+<WithAnalyticsContext(WithAnalyticsEvents(Tooltip))
   delay={0}
   hideTooltipOnClick={true}
   hideTooltipOnMouseDown={true}
@@ -68,5 +69,5 @@ exports[`GlobalNavigationItemPrimitive should render an anchor when an href prop
       href="www.example.com"
     />
   </div>
-</ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Tooltip)))>
+</WithAnalyticsContext(WithAnalyticsEvents(Tooltip))>
 `;

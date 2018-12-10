@@ -3,19 +3,90 @@
   "description": "Schema for Atlassian Document Format.",
   "$ref": "#/definitions/doc_node",
   "definitions": {
-    "paragraph_node": {
+    "em_mark": {
       "type": "object",
       "properties": {
         "type": {
           "enum": [
-            "paragraph"
+            "em"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "code_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "code"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "strike_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "strike"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "strong_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "strong"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "underline_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "underline"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "blockquote_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "blockquote"
           ]
         },
         "content": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/inline_node"
-          }
+            "$ref": "#/definitions/paragraph_with_no_marks_node"
+          },
+          "minItems": 1
         }
       },
       "required": [
@@ -24,12 +95,12 @@
       ],
       "additionalProperties": false
     },
-    "bulletList_node": {
+    "orderedList_node": {
       "type": "object",
       "properties": {
         "type": {
           "enum": [
-            "bulletList"
+            "orderedList"
           ]
         },
         "content": {
@@ -38,6 +109,19 @@
             "$ref": "#/definitions/listItem_node"
           },
           "minItems": 1
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "order": {
+              "type": "number",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "order"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -156,6 +240,12 @@
             "layout"
           ],
           "additionalProperties": false
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/link_mark"
+          }
         }
       },
       "required": [
@@ -163,6 +253,91 @@
         "content"
       ],
       "additionalProperties": false
+    },
+    "text_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "text"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "marks": {
+          "type": "array"
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "codeBlock_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "codeBlock"
+          ]
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/text_node"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "marks": {
+                    "type": "array",
+                    "maxItems": 0
+                  }
+                },
+                "additionalProperties": true
+              }
+            ]
+          }
+        },
+        "marks": {
+          "type": "array"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "language": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "codeBlock_with_no_marks_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/codeBlock_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "maxItems": 0
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
     },
     "listItem_node": {
       "type": "object",
@@ -178,26 +353,32 @@
             {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/paragraph_node"
+                  "$ref": "#/definitions/mediaSingle_node"
                 },
                 {
-                  "$ref": "#/definitions/mediaSingle_node"
+                  "$ref": "#/definitions/codeBlock_with_no_marks_node"
+                },
+                {
+                  "$ref": "#/definitions/paragraph_with_no_marks_node"
                 }
               ]
             },
             {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/paragraph_node"
-                },
-                {
-                  "$ref": "#/definitions/bulletList_node"
+                  "$ref": "#/definitions/orderedList_node"
                 },
                 {
                   "$ref": "#/definitions/mediaSingle_node"
                 },
                 {
-                  "$ref": "#/definitions/orderedList_node"
+                  "$ref": "#/definitions/codeBlock_with_no_marks_node"
+                },
+                {
+                  "$ref": "#/definitions/bulletList_node"
+                },
+                {
+                  "$ref": "#/definitions/paragraph_with_no_marks_node"
                 }
               ]
             }
@@ -211,12 +392,12 @@
       ],
       "additionalProperties": false
     },
-    "orderedList_node": {
+    "bulletList_node": {
       "type": "object",
       "properties": {
         "type": {
           "enum": [
-            "orderedList"
+            "bulletList"
           ]
         },
         "content": {
@@ -225,152 +406,11 @@
             "$ref": "#/definitions/listItem_node"
           },
           "minItems": 1
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "order": {
-              "type": "number",
-              "minimum": 1
-            }
-          },
-          "required": [
-            "order"
-          ],
-          "additionalProperties": false
         }
       },
       "required": [
         "type",
         "content"
-      ],
-      "additionalProperties": false
-    },
-    "heading_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "heading"
-          ]
-        },
-        "content": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/inline_node"
-          },
-          "minItems": 0
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "number",
-              "minimum": 1,
-              "maximum": 6
-            }
-          },
-          "required": [
-            "level"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "required": [
-        "type",
-        "content",
-        "attrs"
-      ],
-      "additionalProperties": false
-    },
-    "panel_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "panel"
-          ]
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "panelType": {
-              "enum": [
-                "info",
-                "note",
-                "tip",
-                "warning",
-                "error",
-                "success"
-              ]
-            }
-          },
-          "required": [
-            "panelType"
-          ],
-          "additionalProperties": false
-        },
-        "content": {
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/paragraph_node"
-              },
-              {
-                "$ref": "#/definitions/bulletList_node"
-              },
-              {
-                "$ref": "#/definitions/orderedList_node"
-              },
-              {
-                "$ref": "#/definitions/heading_node"
-              }
-            ]
-          },
-          "minItems": 1
-        }
-      },
-      "required": [
-        "type",
-        "attrs",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "blockquote_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "blockquote"
-          ]
-        },
-        "content": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/paragraph_node"
-          },
-          "minItems": 1
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "rule_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "rule"
-          ]
-        }
-      },
-      "required": [
-        "type"
       ],
       "additionalProperties": false
     },
@@ -392,6 +432,75 @@
             }
           },
           "additionalProperties": false
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "heading_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "heading"
+          ]
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/inline_node"
+          }
+        },
+        "marks": {
+          "type": "array"
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 6
+            }
+          },
+          "required": [
+            "level"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "heading_with_no_marks_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/heading_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "maxItems": 0
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "rule_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "rule"
+          ]
         }
       },
       "required": [
@@ -469,28 +578,6 @@
       "required": [
         "type",
         "attrs"
-      ],
-      "additionalProperties": false
-    },
-    "text_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "text"
-          ]
-        },
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "marks": {
-          "type": "array"
-        }
-      },
-      "required": [
-        "type",
-        "text"
       ],
       "additionalProperties": false
     },
@@ -844,8 +931,8 @@
                       },
                       "appearance": {
                         "enum": [
-                          "success",
                           "default",
+                          "success",
                           "removed",
                           "inprogress",
                           "new",
@@ -1005,7 +1092,6 @@
       },
       "required": [
         "type",
-        "content",
         "attrs"
       ],
       "additionalProperties": false
@@ -1081,7 +1167,6 @@
       },
       "required": [
         "type",
-        "content",
         "attrs"
       ],
       "additionalProperties": false
@@ -1305,76 +1390,6 @@
       ],
       "additionalProperties": false
     },
-    "em_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "em"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "code_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "code"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "strike_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "strike"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "strong_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "strong"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "underline_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "underline"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
     "link_mark": {
       "type": "object",
       "properties": {
@@ -1519,111 +1534,22 @@
       ],
       "additionalProperties": false
     },
-    "codeBlock_node": {
+    "paragraph_node": {
       "type": "object",
       "properties": {
         "type": {
           "enum": [
-            "codeBlock"
+            "paragraph"
           ]
         },
         "content": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/text_node"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "marks": {
-                    "type": "array",
-                    "maxItems": 0
-                  }
-                },
-                "additionalProperties": true
-              }
-            ]
+            "$ref": "#/definitions/inline_node"
           }
         },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "language": {
-              "enum": [
-                "abap",
-                "actionscript",
-                "ada",
-                "arduino",
-                "autoit",
-                "c",
-                "c++",
-                "clojure",
-                "coffeescript",
-                "csharp",
-                "css",
-                "cuda",
-                "d",
-                "dart",
-                "delphi",
-                "elixir",
-                "erlang",
-                "fortran",
-                "foxpro",
-                "go",
-                "groovy",
-                "haskell",
-                "haxe",
-                "html",
-                "java",
-                "javascript",
-                "json",
-                "julia",
-                "kotlin",
-                "latex",
-                "livescript",
-                "lua",
-                "mathematica",
-                "matlab",
-                "objective-c",
-                "objective-j",
-                "objectpascal",
-                "ocaml",
-                "octave",
-                "perl",
-                "php",
-                "powershell",
-                "prolog",
-                "puppet",
-                "python",
-                "qml",
-                "r",
-                "racket",
-                "restructuredtext",
-                "ruby",
-                "rust",
-                "sass",
-                "scala",
-                "scheme",
-                "shell",
-                "smalltalk",
-                "sql",
-                "standardml",
-                "swift",
-                "tcl",
-                "tex",
-                "typescript",
-                "vala",
-                "vbnet",
-                "verilog",
-                "vhdl",
-                "xml",
-                "xquery"
-              ]
-            }
-          },
-          "additionalProperties": false
+        "marks": {
+          "type": "array"
         }
       },
       "required": [
@@ -1631,85 +1557,99 @@
       ],
       "additionalProperties": false
     },
-    "top_level_node": {
-      "type": "array",
-      "items": {
-        "anyOf": [
-          {
-            "$ref": "#/definitions/paragraph_node"
+    "paragraph_with_no_marks_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/paragraph_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "maxItems": 0
+            }
           },
-          {
-            "$ref": "#/definitions/bulletList_node"
+          "additionalProperties": true
+        }
+      ]
+    },
+    "panel_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "panel"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "panelType": {
+              "enum": [
+                "info",
+                "note",
+                "tip",
+                "warning",
+                "error",
+                "success"
+              ]
+            }
           },
-          {
-            "$ref": "#/definitions/mediaSingle_node"
+          "required": [
+            "panelType"
+          ],
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/orderedList_node"
+              },
+              {
+                "$ref": "#/definitions/bulletList_node"
+              },
+              {
+                "$ref": "#/definitions/heading_with_no_marks_node"
+              },
+              {
+                "$ref": "#/definitions/paragraph_with_no_marks_node"
+              }
+            ]
           },
-          {
-            "$ref": "#/definitions/orderedList_node"
-          },
-          {
-            "$ref": "#/definitions/heading_node"
-          },
-          {
-            "$ref": "#/definitions/panel_node"
-          },
-          {
-            "$ref": "#/definitions/blockquote_node"
-          },
-          {
-            "$ref": "#/definitions/rule_node"
-          },
-          {
-            "$ref": "#/definitions/mediaGroup_node"
-          },
-          {
-            "$ref": "#/definitions/table_node"
-          },
-          {
-            "$ref": "#/definitions/applicationCard_node"
-          },
-          {
-            "$ref": "#/definitions/decisionList_node"
-          },
-          {
-            "$ref": "#/definitions/taskList_node"
-          },
-          {
-            "$ref": "#/definitions/extension_node"
-          },
-          {
-            "$ref": "#/definitions/bodiedExtension_node"
-          },
-          {
-            "$ref": "#/definitions/codeBlock_node"
-          }
-        ]
-      }
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "attrs",
+        "content"
+      ],
+      "additionalProperties": false
     },
     "table_cell_content": {
       "type": "array",
       "items": {
         "anyOf": [
           {
-            "$ref": "#/definitions/paragraph_node"
-          },
-          {
-            "$ref": "#/definitions/bulletList_node"
-          },
-          {
-            "$ref": "#/definitions/mediaSingle_node"
+            "$ref": "#/definitions/blockquote_node"
           },
           {
             "$ref": "#/definitions/orderedList_node"
           },
           {
-            "$ref": "#/definitions/heading_node"
+            "$ref": "#/definitions/mediaSingle_node"
           },
           {
-            "$ref": "#/definitions/panel_node"
+            "$ref": "#/definitions/codeBlock_with_no_marks_node"
           },
           {
-            "$ref": "#/definitions/blockquote_node"
+            "$ref": "#/definitions/bulletList_node"
+          },
+          {
+            "$ref": "#/definitions/heading_with_no_marks_node"
           },
           {
             "$ref": "#/definitions/rule_node"
@@ -1730,7 +1670,10 @@
             "$ref": "#/definitions/extension_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_node"
+            "$ref": "#/definitions/paragraph_with_no_marks_node"
+          },
+          {
+            "$ref": "#/definitions/panel_node"
           }
         ]
       },
@@ -1741,25 +1684,22 @@
       "items": {
         "anyOf": [
           {
-            "$ref": "#/definitions/paragraph_node"
-          },
-          {
-            "$ref": "#/definitions/bulletList_node"
-          },
-          {
-            "$ref": "#/definitions/mediaSingle_node"
+            "$ref": "#/definitions/blockquote_node"
           },
           {
             "$ref": "#/definitions/orderedList_node"
           },
           {
-            "$ref": "#/definitions/heading_node"
+            "$ref": "#/definitions/mediaSingle_node"
           },
           {
-            "$ref": "#/definitions/panel_node"
+            "$ref": "#/definitions/codeBlock_with_no_marks_node"
           },
           {
-            "$ref": "#/definitions/blockquote_node"
+            "$ref": "#/definitions/bulletList_node"
+          },
+          {
+            "$ref": "#/definitions/heading_with_no_marks_node"
           },
           {
             "$ref": "#/definitions/rule_node"
@@ -1783,7 +1723,10 @@
             "$ref": "#/definitions/extension_node"
           },
           {
-            "$ref": "#/definitions/codeBlock_node"
+            "$ref": "#/definitions/paragraph_with_no_marks_node"
+          },
+          {
+            "$ref": "#/definitions/panel_node"
           }
         ]
       },
@@ -1901,7 +1844,59 @@
           ]
         },
         "content": {
-          "$ref": "#/definitions/top_level_node"
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/blockquote_node"
+              },
+              {
+                "$ref": "#/definitions/orderedList_node"
+              },
+              {
+                "$ref": "#/definitions/mediaSingle_node"
+              },
+              {
+                "$ref": "#/definitions/codeBlock_with_no_marks_node"
+              },
+              {
+                "$ref": "#/definitions/bulletList_node"
+              },
+              {
+                "$ref": "#/definitions/heading_with_no_marks_node"
+              },
+              {
+                "$ref": "#/definitions/rule_node"
+              },
+              {
+                "$ref": "#/definitions/mediaGroup_node"
+              },
+              {
+                "$ref": "#/definitions/table_node"
+              },
+              {
+                "$ref": "#/definitions/applicationCard_node"
+              },
+              {
+                "$ref": "#/definitions/decisionList_node"
+              },
+              {
+                "$ref": "#/definitions/taskList_node"
+              },
+              {
+                "$ref": "#/definitions/extension_node"
+              },
+              {
+                "$ref": "#/definitions/bodiedExtension_node"
+              },
+              {
+                "$ref": "#/definitions/paragraph_with_no_marks_node"
+              },
+              {
+                "$ref": "#/definitions/panel_node"
+              }
+            ]
+          }
         }
       },
       "required": [

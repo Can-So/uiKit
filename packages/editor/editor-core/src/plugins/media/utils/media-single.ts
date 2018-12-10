@@ -12,6 +12,7 @@ import { safeInsert } from 'prosemirror-utils';
 
 export interface MediaSingleState extends MediaState {
   dimensions: { width: number; height: number };
+  scaleFactor?: number;
 }
 
 export const insertMediaAsMediaSingle = (
@@ -40,7 +41,7 @@ export const insertMediaSingleNode = (
   mediaState: MediaState,
   collection?: string,
 ): boolean => {
-  if (!collection) {
+  if (collection === undefined) {
     return false;
   }
 
@@ -70,7 +71,7 @@ export const insertMediaSingleNode = (
 export const createMediaSingleNode = (schema: Schema, collection: string) => (
   mediaState: MediaSingleState,
 ) => {
-  const { id, dimensions } = mediaState;
+  const { id, dimensions, scaleFactor = 1 } = mediaState;
   const { width, height } = dimensions || {
     height: undefined,
     width: undefined,
@@ -81,8 +82,8 @@ export const createMediaSingleNode = (schema: Schema, collection: string) => (
     id,
     type: 'file',
     collection,
-    width,
-    height,
+    width: width / scaleFactor,
+    height: height / scaleFactor,
     __key: id,
   });
 

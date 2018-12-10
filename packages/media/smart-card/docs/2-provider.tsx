@@ -1,11 +1,11 @@
-import { md } from '@atlaskit/docs';
+import { md, code } from '@atlaskit/docs';
 
 export default md`
 # Intro
 
 The Provider component has one purpose: provide a custom client to cards:
 
-~~~
+${code`
 const myDefinitionId = uuid.v4();
 
   const customResponse = {
@@ -35,7 +35,7 @@ const myDefinitionId = uuid.v4();
     ...
   </Provider>
 ...
-~~~
+`}
 
 As such, we can customise the way the URL will be handeled.
 `;

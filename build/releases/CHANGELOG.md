@@ -1,5 +1,20 @@
 # @atlaskit/build-releases
 
+## 3.0.3
+- [patch] [c87337f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c87337f):
+
+  - The version command now removes empty folders before it starts. This should prevent a race condition in CI
+
+## 3.0.2
+- [patch] [f7b030a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f7b030a):
+
+  - Fixes potential infinite loop in parseChangesetCommit
+
+## 3.0.1
+- [patch] [494c1fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/494c1fe):
+
+  - Update git commit message to match previous tooling.
+
 ## 3.0.0
 - [major] [44ec8bf"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44ec8bf"

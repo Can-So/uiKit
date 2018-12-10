@@ -1,103 +1,194 @@
 import * as React from 'react';
-import { Plugin } from 'prosemirror-state';
+import * as classnames from 'classnames';
+import { withTheme } from 'styled-components';
+
 import { PluginKey } from 'prosemirror-state';
-import { EditorPlugin, Command } from '../../types';
+import { EditorPlugin, EditorAppearance } from '../../types';
 import {
   akEditorFullPageMaxWidth,
-  akEditorWideLayoutWidth,
   MediaSingleLayout,
-  mapBreakpointToLayoutMaxWidth,
-  getBreakpoint,
+  akEditorBreakoutPadding,
+  breakoutWideScaleRatio,
 } from '@atlaskit/editor-common';
 
-export const stateKey = new PluginKey('gridPlugin');
 import { GridPluginState, GridType } from './types';
 import { pluginKey as widthPlugin, WidthPluginState } from '../width/index';
 import WithPluginState from '../../ui/WithPluginState';
+import { EventDispatcher, createDispatch } from '../../event-dispatcher';
 
-export const DEFAULT_GRID_SIZE = 12;
+export const stateKey = new PluginKey('gridPlugin');
+export const GRID_SIZE = 12;
 
-const calcGridSize = (width: number | undefined) => {
-  return DEFAULT_GRID_SIZE;
-};
-
-export const displayGrid = (show: boolean, type: GridType): Command => {
-  return (state, dispatch) => {
-    dispatch(
-      state.tr.setMeta(stateKey, {
-        visible: show,
-        gridType: type,
-      }),
-    );
-    return true;
+export const createDisplayGrid = (eventDispatcher: EventDispatcher) => {
+  const dispatch = createDispatch(eventDispatcher);
+  return (
+    show: boolean,
+    type: GridType,
+    highlight: number[] | string[] = [],
+  ) => {
+    return dispatch(stateKey, {
+      visible: show,
+      gridType: type,
+      highlight: highlight,
+    } as GridPluginState);
   };
 };
 
 export const gridTypeForLayout = (layout: MediaSingleLayout): GridType =>
   layout === 'wrap-left' || layout === 'wrap-right' ? 'wrapped' : 'full';
 
-export const createPlugin = ({ dispatch }) =>
-  new Plugin({
-    key: stateKey,
-    state: {
-      init: (_, state): GridPluginState => {
-        const editorWidth = widthPlugin.getState(state) as WidthPluginState;
-        return {
-          gridSize: editorWidth
-            ? calcGridSize(editorWidth.width)
-            : DEFAULT_GRID_SIZE,
-          visible: false,
-          gridType: 'full',
-        };
-      },
-      apply: (tr, pluginState: GridPluginState, oldState, newState) => {
-        let newGridSize = pluginState.gridSize;
+type Side = 'left' | 'right';
+const sides: Side[] = ['left', 'right'];
 
-        // check to see if we have to change the grid size
-        const newWidth = tr.getMeta(widthPlugin);
-        if (typeof newWidth !== 'undefined') {
-          // have broadcasted new width, try to recalculate grid size
-          newGridSize = calcGridSize(newWidth);
-        }
+const overflowHighlight = (
+  highlights: number[],
+  side: Side,
+  start: number,
+  size?: number,
+) => {
+  if (!highlights.length) {
+    return false;
+  }
 
-        const meta = tr.getMeta(stateKey);
-        let newVisible = pluginState.visible;
-        let newGridType = pluginState.gridType;
-        if (typeof meta !== 'undefined') {
-          newVisible = meta.visible;
-          newGridType = meta.gridType || 'full';
-        }
+  const minHighlight = highlights.reduce((prev, cur) => Math.min(prev, cur));
+  const maxHighlight = highlights.reduce((prev, cur) => Math.max(prev, cur));
 
-        if (
-          newGridSize !== pluginState.gridSize ||
-          newVisible !== pluginState.visible ||
-          newGridType !== pluginState.gridType
-        ) {
-          const newPluginState = {
-            gridSize: newGridSize,
-            visible: newVisible,
-            gridType: newGridType,
-          };
+  if (side === 'left') {
+    return (
+      minHighlight < 0 &&
+      minHighlight <= -start &&
+      (typeof size === 'number' ? minHighlight >= -(start + size) : true)
+    );
+  } else {
+    return (
+      maxHighlight > GRID_SIZE &&
+      maxHighlight >= GRID_SIZE + start &&
+      (typeof size === 'number' ? maxHighlight <= GRID_SIZE + size : true)
+    );
+  }
+};
 
-          dispatch(stateKey, newPluginState);
-          return newPluginState;
-        }
+const gutterGridLines = (
+  appearance,
+  editorMaxWidth,
+  editorWidth,
+  highlights,
+): JSX.Element[] => {
+  const gridLines: JSX.Element[] = [];
+  if (appearance !== 'full-page') {
+    return gridLines;
+  }
 
-        return pluginState;
-      },
-    },
+  const wideSpacing =
+    (editorMaxWidth * breakoutWideScaleRatio - editorMaxWidth) / 2;
+  sides.forEach(side => {
+    gridLines.push(
+      <div
+        key={side}
+        className={classnames(
+          'gridLine',
+          overflowHighlight(highlights, side, 0, 4) ? 'highlight' : '',
+        )}
+        style={{ position: 'absolute', [side]: `-${wideSpacing}px` }}
+      />,
+    );
+
+    gridLines.push(
+      <div
+        key={side + '-bk'}
+        className={classnames(
+          'gridLine',
+          highlights.indexOf('full-width') > -1 ? 'highlight' : '',
+        )}
+        style={{
+          position: 'absolute',
+          [side]: `-${(editorWidth - editorMaxWidth - akEditorBreakoutPadding) /
+            2}px`,
+        }}
+      />,
+    );
   });
 
-const gridPlugin: EditorPlugin = {
-  pmPlugins() {
-    return [{ name: 'grid', plugin: createPlugin }];
-  },
+  return gridLines;
+};
 
-  contentComponent: ({
-    editorView: { state: editorState },
-    appearance,
-    containerElement,
-  }) => {
+const lineLengthGridLines = highlights => {
+  const gridLines: JSX.Element[] = [];
+  const gridSpacing = 100 / GRID_SIZE;
+
+  for (let i = 0; i <= GRID_SIZE; i++) {
+    const style = {
+      paddingLeft: `${gridSpacing}%`,
+    };
+    gridLines.push(
+      <div
+        key={i}
+        className={classnames(
+          'gridLine',
+          highlights.indexOf(i) > -1 ? 'highlight' : '',
+        )}
+        style={i < GRID_SIZE ? style : undefined}
+      />,
+    );
+  }
+
+  return gridLines;
+};
+
+type Props = {
+  theme: any;
+  appearance: EditorAppearance;
+  containerElement?: HTMLElement;
+  editorWidth: number;
+
+  visible: boolean;
+  gridType: GridType;
+  highlight: number[];
+};
+
+class Grid extends React.Component<Props> {
+  render() {
+    const {
+      highlight,
+      appearance,
+      theme,
+      containerElement,
+      editorWidth,
+      gridType,
+      visible,
+    } = this.props;
+    const editorMaxWidth = theme.layoutMaxWidth;
+
+    let gridLines = [
+      ...lineLengthGridLines(highlight),
+      ...gutterGridLines(appearance, editorMaxWidth, editorWidth, highlight),
+    ];
+
+    return (
+      <div className="gridParent">
+        <div
+          className={classnames(
+            'gridContainer',
+            gridType,
+            !visible ? 'hidden' : '',
+          )}
+          style={{
+            height: containerElement
+              ? `${containerElement.scrollHeight}px`
+              : undefined,
+          }}
+        >
+          {gridLines}
+        </div>
+      </div>
+    );
+  }
+}
+
+const ThemedGrid = withTheme(Grid);
+
+const gridPlugin: EditorPlugin = {
+  contentComponent: ({ editorView, appearance, containerElement }) => {
     return (
       <WithPluginState
         plugins={{
@@ -108,57 +199,20 @@ const gridPlugin: EditorPlugin = {
           grid,
           widthState = { width: akEditorFullPageMaxWidth },
         }: {
-          grid: GridPluginState;
+          grid?: GridPluginState;
           widthState?: WidthPluginState;
         }) => {
-          if (!grid.visible || !grid.gridSize) {
+          if (!grid) {
             return null;
           }
 
-          const editorMaxWidth = mapBreakpointToLayoutMaxWidth(
-            getBreakpoint(widthState.width),
-          );
-
-          const gridLines: JSX.Element[] = [];
-          const gridSpacing = 100 / grid.gridSize;
-
-          for (let i = 0; i < grid.gridSize; i++) {
-            gridLines.push(
-              <div
-                key={i}
-                className="gridLine"
-                style={{ paddingLeft: `${gridSpacing}%` }}
-              />,
-            );
-          }
-
-          // wide grid lines
-          if (appearance === 'full-page') {
-            const wideSpacing = (akEditorWideLayoutWidth - editorMaxWidth) / 2;
-            ['left', 'right'].forEach(side =>
-              gridLines.push(
-                <div
-                  key={side}
-                  className="gridLine"
-                  style={{ position: 'absolute', [side]: `-${wideSpacing}px` }}
-                />,
-              ),
-            );
-          }
-
           return (
-            <div className="gridParent">
-              <div
-                className={`gridContainer ${grid.gridType}`}
-                style={{
-                  height: containerElement
-                    ? `${containerElement.scrollHeight}px`
-                    : undefined,
-                }}
-              >
-                {gridLines}
-              </div>
-            </div>
+            <ThemedGrid
+              appearance={appearance}
+              editorWidth={widthState.width}
+              containerElement={containerElement}
+              {...grid}
+            />
           );
         }}
       />

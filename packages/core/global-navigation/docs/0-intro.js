@@ -10,6 +10,8 @@ If you are building an application that isn't an Atlassian product and you want 
 
 ${<Hr />}
 
+## Usage
+
 ${code`import GlobalNavigation from '@atlaskit/global-navigation';`}
 
 ${(

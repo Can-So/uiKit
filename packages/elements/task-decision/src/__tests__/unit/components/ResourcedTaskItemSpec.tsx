@@ -29,7 +29,9 @@ describe('<ResourcedTaskItem/>', () => {
   });
 
   afterEach(() => {
-    component.unmount();
+    if (component.length > 0) {
+      component.unmount();
+    }
   });
 
   it('should wrap TaskItem', () => {

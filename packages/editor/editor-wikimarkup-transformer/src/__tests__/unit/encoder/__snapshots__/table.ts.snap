@@ -40,9 +40,11 @@ This is a note panel
 This is a info panel
 {panel}|
 |{panel:bgColor=#e3fcef}
-This is a tip panel
+This is a success panel
 {panel}|{panel:bgColor=#fffae6}
 This is a warning panel
+{panel}|{panel:bgColor=#ffebe6}
+This is a error panel
 {panel}|"
 `;
 

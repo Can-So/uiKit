@@ -2,7 +2,6 @@ import * as React from 'react';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
 import Button from '@atlaskit/button';
 import {
-  InlineCardLinkView,
   InlineCardResolvedView,
   InlineCardResolvingView,
   InlineCardErroredView,
@@ -48,9 +47,6 @@ class Example extends React.Component {
         </Grid>
         <Grid>
           <GridColumn>
-            <h4>Paste link into editor</h4>
-            Labore sunt adipisicing esse magna.
-            <InlineCardLinkView text={url} onClick={onClick} />
             <h4>Unauthorised view</h4>
             Labore sunt adipisicing esse magna.
             <InlineCardUnauthorizedView

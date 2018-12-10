@@ -8,14 +8,21 @@ import {
   akEditorTableNumberColumnWidth,
   akEditorBreakoutPadding,
 } from '../consts';
+import { PanelSharedCssClassName } from './panel';
+import { calcWideWidth } from '../../utils';
 
-export const tableMarginTop = 32;
-export const tableMarginBottom = 20;
+export const tableMarginTop = 24;
+export const tableMarginBottom = 16;
 export const tableMarginSides = 8;
 
+const clPrefix = 'pm-table-';
+
 export const TableSharedCssClassName = {
-  TABLE_CONTAINER: 'pm-table-container',
-  TABLE_NODE_WRAPPER: 'pm-table-wrapper',
+  TABLE_CONTAINER: `${clPrefix}container`,
+  TABLE_NODE_WRAPPER: `${clPrefix}wrapper`,
+  TABLE_LEFT_SHADOW: `${clPrefix}with-left-shadow`,
+  TABLE_RIGHT_SHADOW: `${clPrefix}with-right-shadow`,
+  TABLE_CELL_NODEVIEW_CONTENT_DOM: `${clPrefix}cell-nodeview-content-dom`,
 };
 
 const tableSharedStyle = css`
@@ -23,6 +30,16 @@ const tableSharedStyle = css`
     position: relative;
     margin: 0 auto ${tableMarginBottom}px;
     box-sizing: border-box;
+
+    /**
+     * Fix block top alignment inside table cells.
+     */
+    .code-block,
+    .${PanelSharedCssClassName.PANEL_CONTAINER},
+    .taskItemView-content-wrap > div,
+    .decisionItemView-content-wrap > div {
+      margin-top: 0;
+    }
   }
   .${TableSharedCssClassName.TABLE_CONTAINER}[data-number-column='true'] {
     padding-left: ${akEditorTableNumberColumnWidth - 1}px;
@@ -73,10 +90,10 @@ const tableSharedStyle = css`
       th {
         background-color: ${akEditorTableToolbar};
         text-align: left;
-        & * {
+        & *:not(strong) {
           font-weight: normal;
         }
-        & > p {
+        & .${TableSharedCssClassName.TABLE_CELL_NODEVIEW_CONTENT_DOM} > p {
           font-weight: bold;
         }
       }
@@ -99,9 +116,7 @@ export const calcTableWidth = (
       if (containerWidth) {
         const targetWidth =
           containerWidth - (addControllerPadding ? akEditorBreakoutPadding : 0);
-        return targetWidth < akEditorWideLayoutWidth
-          ? `${targetWidth}px`
-          : `${akEditorWideLayoutWidth}px`;
+        return calcWideWidth(containerWidth, targetWidth, `${targetWidth}px`);
       } else {
         return `${akEditorWideLayoutWidth}px`;
       }

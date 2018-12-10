@@ -1,15 +1,12 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, code, Example, Props } from '@atlaskit/docs';
 
 export default md`
-  # MediaFilmstrip
+  This component displays multiple media cards horizontally. Allows to navigate through the stored cards.
 
-  Provides a component that shows multiple media cards horizontally. Allows to navigate through the stored cards.
+  ## Usage
 
-  ## FilmstripView
-
-  ### Usage
-
-  ~~~javascript
+  ${code`
   import React from 'react';
   import { FilmstripView } from '@atlaskit/media-filmstrip';
 
@@ -42,52 +39,17 @@ export default md`
       );
     }
   }
-  ~~~
+`}
 
-  ### Properties
+${(
+  <Example
+    Component={require('../examples/0-editable').default}
+    title="Editable"
+    source={require('!!raw-loader!../examples/0-editable')}
+  />
+)}
 
-  #### animate
-
-  A \`boolean\`. Defaults to \`false\`.
-
-  When \`true\`, any change to the \`offset\` property will be animated.
-
-  > Having \`animate=true\` results in an awkward UX when changing the \`offset\` property before the
-  > animation finishes.
-
-  #### offset
-
-  A \`number\`. Defaults to \`0\`.
-
-  Determines the visible portion of the filmstrip.
-
-  #### onSize
-
-  A \`function\` called when the size of the filmstrip has been changed e.g. when mounted, after the
-  window is resized or the children have changed.
-
-  **Arguments:**
-
-  * \`event\`
-    * \`width\` - A \`number\`. The visible width of the filmstrip;
-    * \`offset\` - A \`number\`.
-    * \`offsets\`: ChildOffset[];
-    * \`minOffset\` - A \`number\`.
-    * \`maxOffset\` - A \`number\`.
-
-  #### onScroll
-
-  A \`function\` called when the user has indicated they wish to change the visible porition of the filmstrip e.g. clicked
-  the left or right arrows, or scrolled the scroll wheel.
-
-  **Arguments:**
-
-  * \`event\`
-    * \`direction\` - Either \`"left"\` or \`"right"\`. The direction the user wants to move the filmstrip.
-    * \`offset\` - A \`number\`. The desired offset.
-    * \`animate\` - A \`boolean\`. Whether the change should be animated (this arg could probably do with a better name!)
-
-  #### children
-
-  Any React \`node\`.
+${(
+  <Props props={require('!!extract-react-types-loader!../src/filmstripView')} />
+)}
 `;

@@ -69,7 +69,6 @@ describe('mapJiraItemToResult', () => {
       analyticsType: AnalyticsType.ResultJira,
       resultType: ResultType.JiraObjectResult,
       contentType: ContentType.JiraFilter,
-      objectKey: 'Filter',
     });
   });
 
@@ -87,7 +86,6 @@ describe('mapJiraItemToResult', () => {
       analyticsType: AnalyticsType.ResultJira,
       resultType: ResultType.JiraObjectResult,
       contentType: ContentType.JiraBoard,
-      objectKey: 'Board',
     });
   });
 
@@ -103,7 +101,7 @@ describe('mapJiraItemToResult', () => {
       href: expect.stringMatching(project.url),
       containerName: project.attributes.projectType,
       analyticsType: AnalyticsType.ResultJira,
-      resultType: ResultType.JiraObjectResult,
+      resultType: ResultType.JiraProjectResult,
       contentType: ContentType.JiraProject,
     });
   });

@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-// @ts-ignore: unused variable
-// prettier-ignore
-import { HTMLAttributes, ClassAttributes, TableHTMLAttributes, ComponentClass } from 'react';
-import { editorFontSize, paragraphSharedStyles } from '@atlaskit/editor-common';
+import { HTMLAttributes, ComponentClass } from 'react';
+import {
+  editorFontSize,
+  paragraphSharedStyles,
+  indentationSharedStyles,
+  blockMarksSharedStyles,
+} from '@atlaskit/editor-common';
 import { telepointerStyle } from '../../plugins/collab-edit/styles';
 import { gapCursorStyles } from '../../plugins/gap-cursor/styles';
 import { tableStyles } from '../../plugins/table/ui/styles';
@@ -20,6 +23,7 @@ import { textFormattingStyles } from '../../plugins/text-formatting/styles';
 import { placeholderTextStyles } from '../../plugins/placeholder-text/styles';
 import { tasksAndDecisionsStyles } from '../../plugins/tasks-and-decisions/ui/styles';
 import { gridStyles } from '../../plugins/grid/styles';
+import { linkStyles } from '../../plugins/hyperlink/styles';
 
 const ContentStyles: ComponentClass<HTMLAttributes<{}>> = styled.div`
   /* Hack for ie11 that is being used in code block.
@@ -37,6 +41,7 @@ const ContentStyles: ComponentClass<HTMLAttributes<{}>> = styled.div`
     font-size: ${editorFontSize}px;
 
     ${paragraphSharedStyles};
+    ${indentationSharedStyles}
   }
 
   .ProseMirror-hideselection *::selection {
@@ -59,21 +64,21 @@ const ContentStyles: ComponentClass<HTMLAttributes<{}>> = styled.div`
     max-width: 100%;
   }
 
-  /**
-   * Fixes the weird cursor navigation bug
-   * for inline-nodes
-   * https://github.com/ProseMirror/prosemirror/issues/514
-  */
-  .mentionView-content-wrap,
-  .inlineExtensionView-content-wrap,
-  .emojiView-content-wrap,
-  .dateView-content-wrap,
   .inlineCardView-content-wrap,
   .blockCardView-content-wrap {
     display: inline-block;
   }
 
-  
+  /* fix cursor alignment */
+  .ProseMirror .emoji-common-node {
+    display: inline;
+    vertical-align: baseline;
+
+    img {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
 
   ${blocktypeStyles}
   ${textFormattingStyles}
@@ -92,10 +97,34 @@ const ContentStyles: ComponentClass<HTMLAttributes<{}>> = styled.div`
   ${mentionsStyles}
   ${tasksAndDecisionsStyles}
   ${gridStyles}
+  ${linkStyles}
+  ${blockMarksSharedStyles}
+
+  .panelView-content-wrap {
+    box-sizing: border-box;
+  }
 
   .mediaGroupView-content-wrap ul {
     padding: 0;
   }
+
+  /** Needed to override any cleared floats, e.g. image wrapping */
+  div.fabric-editor-block-mark[class^='align'] {
+    clear: none !important;
+  }
+
+  .fabric-editor-align-end {
+    text-align: right;
+  }
+
+  .fabric-editor-align-start {
+    text-align: left;
+  }
+
+  .fabric-editor-align-center {
+    text-align: center;
+  }
+
 `;
 
 export default ContentStyles;

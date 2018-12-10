@@ -19,6 +19,7 @@ import {
   Logger,
 } from '../GlobalQuickSearchWrapper';
 import QuickSearchContainer from '../common/QuickSearchContainer';
+import { messages } from '../../messages';
 import { sliceResults } from './JiraSearchResultsMapper';
 import SearchResultsComponent from '../common/SearchResults';
 import NoResultsState from './NoResultsState';
@@ -40,6 +41,7 @@ import {
   GenericResultMap,
   JiraResultsMap,
 } from '../../model/Result';
+import { getUniqueResultId } from '../ResultList';
 import {
   CrossProductSearchClient,
   CrossProductSearchResults,
@@ -48,8 +50,14 @@ import {
 import performanceNow from '../../util/performance-now';
 import AdvancedIssueSearchLink from './AdvancedIssueSearchLink';
 
+const JIRA_RESULT_LIMIT = 6;
+
 const NoResultsAdvancedSearchContainer = styled.div`
   margin-top: ${4 * gridSize()}px;
+`;
+
+const BeforePreQueryStateContainer = styled.div`
+  margin-top: ${gridSize()}px;
 `;
 
 export interface Props {
@@ -73,6 +81,7 @@ const scopes = [Scope.JiraIssue, Scope.JiraBoardProjectFilter];
 
 export interface State {
   selectedAdvancedSearchType: JiraEntityTypes;
+  selectedResultId?: string;
 }
 
 const LOGGER_NAME = 'AK.GlobalSearch.JiraQuickSearchContainer';
@@ -84,7 +93,7 @@ export class JiraQuickSearchContainer extends React.Component<
   Props & InjectedIntlProps,
   State
 > {
-  state = {
+  state: State = {
     selectedAdvancedSearchType: JiraEntityTypes.Issues,
   };
 
@@ -98,9 +107,6 @@ export class JiraQuickSearchContainer extends React.Component<
     redirectToJiraAdvancedSearch(this.state.selectedAdvancedSearchType, query);
   };
 
-  onAdvancedSearchChange = entityType =>
-    this.setState({ selectedAdvancedSearchType: entityType });
-
   getSearchResultsComponent = ({
     retrySearch,
     latestSearchQuery,
@@ -112,6 +118,7 @@ export class JiraQuickSearchContainer extends React.Component<
     searchSessionId,
   }) => {
     const query = latestSearchQuery;
+    const isPreQuery = !query; // it's true if the query is empty
     return (
       <SearchResultsComponent
         query={query}
@@ -124,7 +131,7 @@ export class JiraQuickSearchContainer extends React.Component<
         referralContextIdentifiers={this.props.referralContextIdentifiers}
         renderNoRecentActivity={() => (
           <>
-            <FormattedHTMLMessage id="global-search.jira.no-recent-activity-body" />
+            <FormattedHTMLMessage {...messages.jira_no_recent_activity_body} />
             <NoResultsAdvancedSearchContainer>
               <JiraAdvancedSearch
                 query={query}
@@ -138,13 +145,16 @@ export class JiraQuickSearchContainer extends React.Component<
             <JiraAdvancedSearch
               analyticsData={analyticsData}
               query={query}
-              showKeyboardLozenge
+              showKeyboardLozenge={!isPreQuery && !keepPreQueryState}
               showSearchIcon
-              onAdvancedSearchChange={this.onAdvancedSearchChange}
             />
           </StickyFooter>
         )}
-        renderBeforePreQueryState={() => <AdvancedIssueSearchLink />}
+        renderBeforePreQueryState={() => (
+          <BeforePreQueryStateContainer>
+            <AdvancedIssueSearchLink />
+          </BeforePreQueryStateContainer>
+        )}
         getPreQueryGroups={() => mapRecentResultsToUIGroups(recentItems)}
         getPostQueryGroups={() =>
           mapSearchResultsToUIGroups(searchResults as JiraResultsMap)
@@ -187,7 +197,7 @@ export class JiraQuickSearchContainer extends React.Component<
       )
       .then(({ issues = [], boards = [], projects = [], filters = [] }) => ({
         objects: issues,
-        containers: [...boards, ...filters, ...projects],
+        containers: [...boards, ...projects, ...filters],
       }));
 
     return handlePromiseError(
@@ -248,18 +258,10 @@ export class JiraQuickSearchContainer extends React.Component<
       query,
       { sessionId, referrerId },
       scopes,
+      JIRA_RESULT_LIMIT,
     );
 
-    const searchPeoplePromise = handlePromiseError(
-      this.props.peopleSearchClient.search(query),
-      [] as Result[],
-      error =>
-        this.props.logger.safeError(
-          LOGGER_NAME,
-          'error in search people promise',
-          error,
-        ),
-    );
+    const searchPeoplePromise = Promise.resolve([] as Result[]);
 
     const mapPromiseToPerformanceTime = (p: Promise<any>) =>
       p.then(() => performanceNow() - startTime);
@@ -283,30 +285,55 @@ export class JiraQuickSearchContainer extends React.Component<
         crossProductSearchElapsedMs,
         peopleElapsedMs,
         canSearchPeople,
-      ]) => ({
-        results: {
-          objects: xpsearchResults.results.get(Scope.JiraIssue) || [],
-          containers:
-            xpsearchResults.results.get(Scope.JiraBoardProjectFilter) || [],
-          people: canSearchPeople ? peopleResults : [],
-        },
-        timings: {
-          crossProductSearchElapsedMs,
-          peopleElapsedMs,
-        },
-        abTest: xpsearchResults.abTest,
-      }),
+      ]) => {
+        this.highlightMatchingFirstResult(query, xpsearchResults.results.get(
+          Scope.JiraIssue,
+        ) as JiraResult[]);
+        return {
+          results: {
+            objects: xpsearchResults.results.get(Scope.JiraIssue) || [],
+            containers:
+              xpsearchResults.results.get(Scope.JiraBoardProjectFilter) || [],
+            people: canSearchPeople ? peopleResults : [],
+          },
+          timings: {
+            crossProductSearchElapsedMs,
+            peopleElapsedMs,
+          },
+          abTest: xpsearchResults.abTest,
+        };
+      },
     );
   };
 
+  highlightMatchingFirstResult(query: string, issueResults: JiraResult[]) {
+    if (
+      issueResults &&
+      issueResults.length > 0 &&
+      typeof issueResults[0].objectKey === 'string' &&
+      issueResults[0].objectKey!.toLowerCase() === query.toLowerCase()
+    ) {
+      this.setState({
+        selectedResultId: getUniqueResultId(issueResults[0]),
+      });
+    }
+  }
+
+  handleSelectedResultIdChanged(newSelectedId) {
+    this.setState({
+      selectedResultId: newSelectedId,
+    });
+  }
+
   render() {
     const { linkComponent, createAnalyticsEvent, logger } = this.props;
+    const { selectedResultId } = this.state;
 
     return (
       <QuickSearchContainer
-        placeholder={this.props.intl.formatMessage({
-          id: 'global-search.jira.search-placeholder',
-        })}
+        placeholder={this.props.intl.formatMessage(
+          messages.jira_search_placeholder,
+        )}
         linkComponent={linkComponent}
         getDisplayedResults={sliceResults}
         getSearchResultsComponent={this.getSearchResultsComponent}
@@ -316,6 +343,10 @@ export class JiraQuickSearchContainer extends React.Component<
         handleSearchSubmit={this.handleSearchSubmit}
         createAnalyticsEvent={createAnalyticsEvent}
         logger={logger}
+        selectedResultId={selectedResultId}
+        onSelectedResultIdChanged={newId =>
+          this.handleSelectedResultIdChanged(newId)
+        }
       />
     );
   }

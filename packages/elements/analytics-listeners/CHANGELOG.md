@@ -1,5 +1,39 @@
 # @atlaskit/analytics-listeners
 
+## 4.1.3
+- [patch] [dff4f0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dff4f0e):
+
+  - AnalyticsListeners should accept any promise-like client
+
+## 4.1.2
+- [patch] [e981882](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e981882):
+
+  - Add media tag to analytics tags sent by media listener
+
+## 4.1.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/button@10.0.0
+  - @atlaskit/analytics-next-types@3.1.2
+
+## 4.1.0
+- [minor] [dd0a73c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dd0a73c):
+
+  - Allow consumers to pass promise of analytics web client as well as the client itself
+
+## 4.0.7
+- [patch] [1d30f7e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d30f7e):
+
+  - Make analytics-web-client non-mandatory
+
+## 4.0.6
+- [patch] [c525423"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c525423"
+d):
+
+  - Remove unnecessary sufix in import
+
 ## 4.0.5
 - [patch] Analytics event's 'source' field from GasPayload type is now optional. In most cases, the 'source' field is expected to be set by the integrator through AnalyticsContext. Thus it's recommended that components do not set it to avoid overriding the one provided by the integrating product. Analytics listeners are handling the case where the 'source' field couldn't be found by setting the default value "unknown" before sending the event through the client. [1c0ea95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c0ea95)
 

@@ -1,8 +1,11 @@
 import * as React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
 import * as jsc from 'jsverify';
 import Button from '@atlaskit/button';
-import { createMouseEvent } from '@atlaskit/media-test-helpers';
+import {
+  createMouseEvent,
+  mountWithIntlContext,
+} from '@atlaskit/media-test-helpers';
 import { Rectangle, Camera, Vector2 } from '@atlaskit/media-ui';
 import {
   InteractiveImg,
@@ -15,7 +18,7 @@ import { Outcome } from '../../../../../newgen/domain';
 
 function createFixture() {
   const onClose = jest.fn();
-  const el = mount(
+  const el = mountWithIntlContext(
     <InteractiveImg
       onLoad={jest.fn()}
       onError={jest.fn()}
@@ -36,16 +39,14 @@ function createFixture() {
 }
 
 function clickZoomIn(el: ReactWrapper<any, any>) {
-  el
-    .find(ZoomControls)
+  el.find(ZoomControls)
     .find(Button)
     .last()
     .simulate('click');
 }
 
 function clickZoomOut(el: ReactWrapper<any, any>) {
-  el
-    .find(ZoomControls)
+  el.find(ZoomControls)
     .find(Button)
     .first()
     .simulate('click');

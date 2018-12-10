@@ -1,14 +1,15 @@
+jest.mock('../../../components/styles', () => ({
+  getStyles: jest.fn(),
+}));
+
 import Select from '@atlaskit/select';
 import { shallow } from 'enzyme';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
-import { Props, UserPicker } from '../../../components/UserPicker';
-import UserPickerItem from '../../../components/UserPickerItem';
-import { User } from '../../../types';
-
-type Styles = {
-  [key: string]: <T extends {}>(css: T) => T;
-};
+import { getStyles } from '../../../components/styles';
+import { UserPicker } from '../../../components/UserPicker';
+import { User, UserPickerProps as Props, UserOption } from '../../../types';
+import { usersToOptions, userToOption } from '../../../components/utils';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<Props> = {}) =>
@@ -18,55 +19,51 @@ describe('UserPicker', () => {
     {
       id: 'abc-123',
       name: 'Jace Beleren',
-      nickname: 'jbeleren',
+      publicName: 'jbeleren',
     },
     {
       id: '123-abc',
       name: 'Chandra Nalaar',
-      nickname: 'cnalaar',
+      publicName: 'cnalaar',
     },
   ];
+
+  const userOptions: UserOption[] = usersToOptions(users);
 
   it('should render Select', () => {
     const component = shallowUserPicker({ users });
     const select = component.find(Select);
-    expect(select.prop('options')).toEqual([
-      { value: 'abc-123', user: users[0], label: 'Jace Beleren' },
-      { value: '123-abc', user: users[1], label: 'Chandra Nalaar' },
-    ]);
-    const styles: Styles = select.prop('styles');
-    expect(styles.menu({})).toMatchObject({
-      width: 350,
-    });
+    expect(select.prop('options')).toEqual(userOptions);
+    expect(getStyles).toHaveBeenCalledWith(350);
+    expect(select.prop('menuPlacement')).toBeTruthy();
+  });
 
-    expect(styles.control({})).toMatchObject({
-      width: 350,
-      flexWrap: 'nowrap',
-    });
-
-    expect(styles.input({})).toMatchObject({
-      lineHeight: '44px',
-    });
-
-    expect(styles.valueContainer({})).toMatchObject({
-      flexGrow: 1,
-      overflow: 'hidden',
-    });
+  it('should disable picker if isDisabled is true', () => {
+    const component = shallowUserPicker({ isDisabled: true });
+    const select = component.find(Select);
+    expect(select.prop('isDisabled')).toEqual(true);
   });
 
   it('should set width', () => {
-    const component = shallowUserPicker({ width: 500 });
+    shallowUserPicker({ width: 500 });
 
+    expect(getStyles).toHaveBeenCalledWith(500);
+  });
+
+  it('should set custom placeholder', () => {
+    const custom = 'Custom';
+    const component = shallowUserPicker({ placeholder: custom });
     const select = component.find(Select);
-    const styles: Styles = select.prop('styles');
-    expect(styles.menu({})).toMatchObject({
-      width: 500,
-    });
+    expect(select.prop('placeholder')).toEqual(custom);
+  });
 
-    expect(styles.control({})).toMatchObject({
-      width: 500,
-      flexWrap: 'nowrap',
-    });
+  it('should pass custom no options message to picker', () => {
+    const customMessage = 'Custom';
+    const component = shallowUserPicker({ noOptionsMessage: customMessage });
+    const select = component.find(Select);
+    expect(select.prop('noOptionsMessage')).toBeInstanceOf(Function);
+    const result = (select.prop('noOptionsMessage') as Function)();
+    expect(result).toEqual(customMessage);
   });
 
   it('should trigger onChange with User', () => {
@@ -74,27 +71,35 @@ describe('UserPicker', () => {
     const component = shallowUserPicker({ onChange });
 
     const select = component.find(Select);
-    select.simulate(
-      'change',
-      { value: 'abc-123', user: users[0] },
-      { action: 'select-option' },
-    );
+    select.simulate('change', userOptions[0], { action: 'select-option' });
 
     expect(onChange).toHaveBeenCalledWith(users[0], 'select-option');
   });
 
-  it('should render UserPickerItem as label', () => {
-    const component = shallowUserPicker({ users });
-    const formatOptionLabel: Function = component
-      .find(Select)
-      .prop('formatOptionLabel');
+  it('should trigger props.onSelection if onChange with select-option action', () => {
+    const onSelection = jest.fn();
+    const component = shallowUserPicker({ onSelection });
 
-    expect(
-      formatOptionLabel(
-        { id: 'abc-123', user: users[0], label: 'Jace Beleren' },
-        { context: 'menu' },
-      ),
-    ).toEqual(<UserPickerItem user={users[0]} context="menu" />);
+    const select = component.find(Select);
+    select.simulate('change', userOptions[0], { action: 'select-option' });
+
+    expect(onSelection).toHaveBeenCalledWith(users[0]);
+  });
+
+  it('should call onFocus handler', () => {
+    const onFocus = jest.fn();
+    const component = shallowUserPicker({ onFocus });
+
+    component.simulate('focus');
+    expect(onFocus).toHaveBeenCalled();
+  });
+
+  it('should call onBlur handler', () => {
+    const onBlur = jest.fn();
+    const component = shallowUserPicker({ onBlur });
+
+    component.simulate('blur');
+    expect(onBlur).toHaveBeenCalled();
   });
 
   describe('Multiple users select', () => {
@@ -102,18 +107,6 @@ describe('UserPicker', () => {
       const component = shallowUserPicker({ users, isMulti: true });
       const select = component.find(Select);
       expect(select.prop('isMulti')).toBeTruthy();
-
-      const styles: Styles = select.prop('styles');
-      expect(styles.multiValue({})).toMatchObject({
-        borderRadius: 24,
-      });
-
-      expect(styles.multiValueRemove({})).toMatchObject({
-        backgroundColor: 'transparent',
-        '&:hover': {
-          backgroundColor: 'transparent',
-        },
-      });
     });
 
     it('should call onChange with an array of users', () => {
@@ -122,14 +115,7 @@ describe('UserPicker', () => {
 
       component
         .find(Select)
-        .simulate(
-          'change',
-          [
-            { value: 'abc-123', user: users[0] },
-            { value: '123-abc', user: users[1] },
-          ],
-          { action: 'select-option' },
-        );
+        .simulate('change', userOptions, { action: 'select-option' });
 
       expect(onChange).toHaveBeenCalledWith(
         [users[0], users[1]],
@@ -138,35 +124,41 @@ describe('UserPicker', () => {
     });
   });
 
+  it('should set hovering clear indicator', () => {
+    const component = shallowUserPicker();
+    const select = component.find(Select);
+    select.simulate('clearIndicatorHover', true);
+    expect(component.state()).toHaveProperty('hoveringClearIndicator', true);
+  });
+
+  it('should set isClearable to false', () => {
+    const component = shallowUserPicker({ isClearable: false });
+    const select = component.find(Select);
+    expect(select.prop('isClearable')).toEqual(false);
+  });
+
+  it('should open menu onFocus', () => {
+    const component = shallowUserPicker();
+    const select = component.find(Select);
+    select.simulate('focus');
+    expect(component.state()).toHaveProperty('menuIsOpen', true);
+  });
+
+  it('should close menu onBlur', () => {
+    const component = shallowUserPicker();
+    component.setState({ menuIsOpen: true });
+    const select = component.find(Select);
+    select.simulate('blur');
+    expect(component.state()).toHaveProperty('menuIsOpen', false);
+  });
+
   describe('async load', () => {
     beforeEach(() => jest.useFakeTimers());
     afterEach(() => jest.useRealTimers());
 
-    it('should load users Async on focus', () => {
-      const usersPromise = new Promise<User[]>(resolve =>
-        setTimeout(() => resolve(users), 500),
-      );
-
-      const loadUsers = jest.fn(() => usersPromise);
-      const component = shallowUserPicker({ loadUsers });
-
-      const select = component.find(Select);
-      select.simulate('focus');
-      jest.runAllTimers();
-
-      expect(loadUsers).toHaveBeenCalled();
-
-      return usersPromise.then(() => {
-        jest.runAllTimers();
-        expect(component.state()).toMatchObject({
-          users,
-        });
-      });
-    });
-
     it('should load users when picker open', () => {
       const usersPromise = new Promise<User[]>(resolve =>
-        setTimeout(() => resolve(users), 500),
+        window.setTimeout(() => resolve(users), 500),
       );
       const loadUsers = jest.fn(() => usersPromise);
       const component = shallowUserPicker({ loadUsers });
@@ -184,7 +176,7 @@ describe('UserPicker', () => {
     describe('onInputChange', () => {
       it('should load users on input change', () => {
         const usersPromise = new Promise<User[]>(resolve =>
-          setTimeout(() => resolve(users), 500),
+          window.setTimeout(() => resolve(users), 500),
         );
         const loadUsers = jest.fn(() => usersPromise);
         const component = shallowUserPicker({ loadUsers });
@@ -201,9 +193,17 @@ describe('UserPicker', () => {
         });
       });
 
+      it('should call props.onInputChange', () => {
+        const onInputChange = jest.fn();
+        const component = shallowUserPicker({ onInputChange });
+        const select = component.find(Select);
+        select.simulate('inputChange', 'some text', { action: 'input-change' });
+        expect(onInputChange).toHaveBeenCalled();
+      });
+
       it('should debounce input change events', () => {
         const usersPromise = new Promise<User[]>(resolve =>
-          setTimeout(() => resolve(users), 500),
+          window.setTimeout(() => resolve(users), 500),
         );
         const loadUsers = jest.fn(() => usersPromise);
         shallowUserPicker({ loadUsers });
@@ -211,5 +211,221 @@ describe('UserPicker', () => {
         expect(debounce).toHaveBeenCalledWith(expect.any(Function), 200);
       });
     });
+  });
+
+  describe('with defaultOptions', () => {
+    it('should render with default options', () => {
+      const component = shallowUserPicker({
+        isMulti: true,
+        defaultValue: [users[0]],
+      });
+
+      expect(component.find(Select).prop('value')).toEqual([
+        { label: 'Jace Beleren', user: users[0], value: 'abc-123' },
+      ]);
+    });
+
+    it('should not remove fixed options', () => {
+      const onChange = jest.fn();
+      const component = shallowUserPicker({
+        isMulti: true,
+        defaultValue: [{ ...users[0], fixed: true }],
+        onChange,
+      });
+
+      const select = component.find(Select);
+      const fixedOption = userToOption({ ...users[0], fixed: true });
+      expect(select.prop('value')).toEqual([fixedOption]);
+
+      select.simulate('change', [], {
+        action: 'pop-value',
+        removedValue: fixedOption,
+      });
+
+      expect(onChange).not.toHaveBeenCalled();
+
+      expect(select.prop('value')).toEqual([fixedOption]);
+    });
+
+    it('should not remove fixed options with other values', () => {
+      const onChange = jest.fn();
+      const fixedUser = { ...users[0], fixed: true };
+      const component = shallowUserPicker({
+        isMulti: true,
+        defaultValue: [fixedUser],
+        onChange,
+      });
+
+      const fixedOption = userToOption(fixedUser);
+      expect(component.find(Select).prop('value')).toEqual([fixedOption]);
+
+      const removableOption = userToOption(users[1]);
+      component
+        .find(Select)
+        .simulate('change', [fixedOption, removableOption], {
+          action: 'select-option',
+        });
+
+      component.update();
+
+      expect(component.find(Select).prop('value')).toEqual([
+        fixedOption,
+        removableOption,
+      ]);
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(
+        [fixedUser, users[1]],
+        'select-option',
+      );
+
+      onChange.mockClear();
+
+      expect(component.find(Select).prop('value')).toEqual([
+        fixedOption,
+        removableOption,
+      ]);
+
+      component.find(Select).simulate('change', [removableOption], {
+        action: 'pop-value',
+        removedValue: fixedOption,
+      });
+
+      component.update();
+
+      expect(onChange).not.toHaveBeenCalled();
+
+      expect(component.find(Select).prop('value')).toEqual([
+        fixedOption,
+        removableOption,
+      ]);
+    });
+  });
+
+  describe('inputValue', () => {
+    it('should set inputValue to empty string by default', () => {
+      const component = shallowUserPicker({ value: users[0] });
+      expect(component.find(Select).prop('inputValue')).toEqual('');
+    });
+
+    it('onInputChange: should set inputValue to query', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('inputChange', 'some text', { action: 'input-change' });
+      expect(component.find(Select).prop('inputValue')).toEqual('some text');
+    });
+
+    it('onBlur: should clear inputValue', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('blur');
+      expect(component.find(Select).prop('inputValue')).toEqual('');
+    });
+
+    it('onChange: should clear inputValue', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('change', userOptions[0], { action: 'select-option' });
+      expect(component.find(Select).prop('inputValue')).toEqual('');
+    });
+
+    it('single onFocus with value: should set inputValue to value', () => {
+      const component = shallowUserPicker({ value: users[0] });
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.find(Select).prop('inputValue')).toEqual(users[0].name);
+    });
+
+    it('onFocus no value: should have set empty inputValue', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.find(Select).prop('inputValue')).toEqual('');
+    });
+
+    it('multi onFocus with value: should have empty inputValue', () => {
+      const component = shallowUserPicker({ value: users[0], isMulti: true });
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.find(Select).prop('inputValue')).toEqual('');
+    });
+
+    it('should highlight input value on focus', () => {
+      const component = shallowUserPicker({ value: users[0] });
+      const select = component.find(Select);
+      const highlightInput = jest.fn();
+      const input = document.createElement('input') as HTMLInputElement;
+      input.select = highlightInput;
+      select.simulate('focus', { target: input });
+      expect(highlightInput).toBeCalledTimes(1);
+    });
+  });
+
+  describe('preventFilter', () => {
+    it('default: should set preventFilter to false', () => {
+      const component = shallowUserPicker();
+      expect(component.state('preventFilter')).toBeFalsy();
+    });
+
+    it('onInputChange: should set preventFilter to false', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('inputChange', 'some text', { action: 'input-change' });
+      expect(component.state('preventFilter')).toBeFalsy();
+    });
+
+    it('onBlur: should set preventFilter to false', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('blur');
+      expect(component.state('preventFilter')).toBeFalsy();
+    });
+
+    it('onFocus with no value: should not set preventFilter to true', () => {
+      const component = shallowUserPicker();
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.state('preventFilter')).toBeFalsy();
+    });
+
+    it('multi onFocus with value: should not set preventFilter to true', () => {
+      const component = shallowUserPicker({ isMulti: true, value: users[0] });
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.state('preventFilter')).toBeFalsy();
+    });
+
+    it('single onFocus with value: should set preventFilter to true', () => {
+      const component = shallowUserPicker({ value: users[0] });
+      const select = component.find(Select);
+      select.simulate('focus', { target: {} });
+      expect(component.state('preventFilter')).toBeTruthy();
+    });
+  });
+
+  it('should blur on escape', () => {
+    const component = shallowUserPicker();
+    component.setState({ menuIsOpen: true });
+    const ref = { blur: jest.fn() };
+    (component.instance() as any).handleSelectRef(ref);
+
+    component.find(Select).simulate('keyDown', { keyCode: 27 });
+    expect(ref.blur).toHaveBeenCalled();
+  });
+
+  it('should prevent default selection event when user inserts space on empty input', () => {
+    const component = shallowUserPicker({ users });
+    component.setState({ menuIsOpen: true });
+    const preventDefault = jest.fn();
+    component.find(Select).simulate('keyDown', { keyCode: 32, preventDefault });
+    expect(preventDefault).toHaveBeenCalled();
+  });
+
+  it('should not prevent default event when there is inputValue', () => {
+    const component = shallowUserPicker({ users });
+    component.setState({ menuIsOpen: true, inputValue: 'test' });
+    const preventDefault = jest.fn();
+    component.find(Select).simulate('keyDown', { keyCode: 32, preventDefault });
+    expect(preventDefault).toHaveBeenCalledTimes(0);
   });
 });

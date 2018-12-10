@@ -9,18 +9,19 @@ import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/T
 export const getDocFromElement = el => el.pmViewDesc.node.toJSON();
 export const editable = '.ProseMirror';
 export const LONG_WAIT_FOR = 5000;
-export const mentionPicker = '.ak-mention-picker';
+export const typeAheadPicker = '.fabric-editor-typeahead';
+export const lozenge = '[data-mention-id="0"]';
 
 export const insertMention = async (browser, query: string) => {
   await browser.type(editable, '@');
-  await browser.waitForSelector(mentionPicker);
+  await browser.waitForSelector(typeAheadPicker);
   await browser.type(editable, query);
   await browser.type(editable, 'Return');
 };
 
 export const insertMentionUsingClick = async (browser, mentionId: string) => {
   await browser.type(editable, '@');
-  await browser.waitForSelector(mentionPicker);
+  await browser.waitForSelector(typeAheadPicker);
   await browser.isVisible(`div[data-mention-id="${mentionId}"`);
   await browser.click(`div[data-mention-id="${mentionId}"`);
 };
@@ -34,6 +35,12 @@ export const comment = {
 export const fullpage = {
   name: 'fullpage',
   path: getExampleUrl('editor', 'editor-core', 'full-page-with-toolbar'),
+  placeholder: '.ProseMirror',
+};
+
+export const fullpageDisabled = {
+  name: 'fullpage-disabled',
+  path: getExampleUrl('editor', 'editor-core', 'full-page-with-content'),
   placeholder: '.ProseMirror',
 };
 
@@ -111,7 +118,14 @@ export const insertMedia = async (
   if (browser.browser.desiredCapabilities) {
     await browser.browser.waitUntil(async () => {
       const mediaCards = await browser.$$(mediaCardSelector);
-      return get$$Length(mediaCards) === mediaCardCount;
+
+      // media picker can still be displayed after inserting an image after some small time
+      // wait until it's completely disappeared before continuing
+      const insertButtons = await browser.$$(insertMediaButton);
+      return (
+        get$$Length(mediaCards) === mediaCardCount &&
+        get$$Length(insertButtons) === 0
+      );
     });
   } else {
     await browser.evaluate(() => {
@@ -156,6 +170,12 @@ export const insertBlockMenuItem = async (
   const menuSelector = `${tagName}=${menuTitle}`;
   await browser.waitForSelector(menuSelector);
   await browser.click(menuSelector);
+};
+
+export const changeSelectedNodeLayout = async (page, layoutName) => {
+  const buttonSelector = `div[aria-label="Floating Toolbar"] span[aria-label="${layoutName}"]`;
+  await page.waitForSelector(buttonSelector, 3000);
+  await page.click(buttonSelector);
 };
 
 /**

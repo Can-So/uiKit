@@ -61,6 +61,7 @@ export default class GetPath extends Component<*, *> {
         </SelectWrapper>
         <p>This import statement will render the image below:</p>
         <AkCodeBlock
+          language="javascript"
           text={`import ${name} from '@atlaskit/logo/dist/esm/${
             selectedProduct.value
           }Logo/${selectedFile.value}'`}

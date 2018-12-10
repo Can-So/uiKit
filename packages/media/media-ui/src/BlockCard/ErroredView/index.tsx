@@ -7,10 +7,15 @@ import { minWidth, maxWidth } from '../dimensions';
 import { CollapsedIconTitleDescriptionLayout } from '../CollapsedIconTitleDescriptionLayout';
 
 export interface BlockCardErroredViewProps {
+  /** The url to display */
   url: string;
-  message: string;
+  /** The optional click handler */
   onClick?: () => void;
+  /** The error message to display */
+  message: string;
+  /** What to do when a user clicks "Try again" button. */
   onRetry?: () => void;
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
 }
 

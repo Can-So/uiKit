@@ -1,5 +1,79 @@
 # @atlaskit/icon
 
+## 15.0.1
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/dynamic-table@10.0.20
+  - @atlaskit/field-text@7.0.16
+  - @atlaskit/icon-file-type@3.0.1
+  - @atlaskit/icon-object@3.0.1
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+
+## 15.0.0
+- [major] [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+
+  - Remove onClick props as icon is only a presentational placeholder. Please wrap icon into a Button or a Link component.
+
+## 14.6.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/dynamic-table@10.0.18
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/icon-file-type@2.0.1
+  - @atlaskit/icon-object@2.0.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/button@10.0.0
+
+## 14.6.0
+- [minor] [29968f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29968f4):
+
+  - Add a menu expand icon
+
+## 14.5.0
+- [minor] [f5e26e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e26e1):
+
+  - Add a retry icon
+
+## 14.4.0
+- [patch] [29b160f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29b160f):
+
+  - Simplify the icons build process
+
+  Icons no longer need a custom `build` step to be accurate on npm. This
+  has come about by renaming the `es5` folder to `cjs`. If you weren't reaching
+  into our package's internals, you shouldn't notice.
+
+- [minor] [62a7c37](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/62a7c37):
+
+  - Add metadata export
+
+  In trying to align the icons packages, the core `@atlaskit/icon` package now exports
+  `metadata`, which includes information about every icon in this package.
+- Updated dependencies [b29bec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b29bec1):
+- Updated dependencies [80304f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80304f0):
+  - @atlaskit/icon-file-type@2.0.0
+  - @atlaskit/icon-object@2.0.0
+  - @atlaskit/icon-build-process@0.1.0
+
+## 14.3.0
+- [minor] [dced9bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dced9bf):
+
+  - Remove StarOutlineIcon as it is not used
+
+## 14.2.1
+- [patch] [d15caa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d15caa6):
+
+  - adding editor image alignment icons
+
 ## 14.2.0
 - [minor] [fe3c283"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe3c283"

@@ -1,5 +1,57 @@
 # @atlaskit/media-test-helpers
 
+## 18.5.2
+- Updated dependencies [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+  - @atlaskit/media-card@44.1.1
+  - @atlaskit/media-ui@8.0.0
+
+## 18.5.1
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
+## 18.5.0
+- [minor] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
+
+  - use custom video player for inline video in media-card
+
+## 18.4.0
+- [minor] [b02ffa7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b02ffa7):
+
+  - add touch event helpers and canvas mocking
+
+## 18.3.2
+- [patch] [5a6de24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6de24):
+
+  - translate component properties in media components
+
+## 18.3.1
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/select@6.1.9
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-ui@7.6.2
+  - @atlaskit/icon@15.0.0
+
+## 18.3.0
+- [minor] [fa7d4c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa7d4c5):
+
+  - asMock method was added; It can be used to convert any function into jest.Mock;
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/media-core@24.5.0
+
+## 18.2.12
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/media-core@24.4.0
+  - @atlaskit/media-store@8.3.0
+
+## 18.2.11
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-card@42.0.0
+
 ## 18.2.10
 - [patch] Updated dependencies [ced32d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ced32d0)
   - @atlaskit/media-card@41.1.2

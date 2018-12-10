@@ -11,7 +11,7 @@ import MediaAnalyticsListener from './media/MediaAnalyticsListener';
 export type Props = {
   /** Children! */
   children?: React.ReactNode;
-  client?: AnalyticsWebClient;
+  client?: AnalyticsWebClient | Promise<AnalyticsWebClient>;
   logLevel?: number;
   /** A list of individual listeners to exclude, identified by channel */
   excludedChannels?: FabricChannel[];
@@ -32,10 +32,6 @@ class FabricAnalyticsListeners extends React.Component<Props> {
     super(props);
 
     this.logger = new Logger({ logLevel: props.logLevel });
-
-    if (!props.client) {
-      throw new Error('Analytics client not provided');
-    }
   }
 
   render() {

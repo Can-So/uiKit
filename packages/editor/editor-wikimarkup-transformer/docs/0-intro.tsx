@@ -1,21 +1,23 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
-  # Editor-wikimarkup-Transformer
 
-  ## Installation
-
-  ~~~sh
-  npm install @atlaskit/editor-wikimarkup-transformer
-  ~~~
-
-  ## Using the library
+This package provides a transformer for ProseMirror Node <-> Wikimarkup conversion.
+  ## Usage
 
   Use the component in your React app as follows:
 
-  ~~~js
-  import { WikiMarkupTransformer } from '@atlaskit/editor-wikimarkup-transformer';
+  ${code`import { WikiMarkupTransformer } from '@atlaskit/editor-wikimarkup-transformer';
   const transformer = new WikiMarkupTransformer(schema);
-  const pmNode = transformer.parse(wikiMarkup);
-  ~~~
+  const pmNode = transformer.parse(wikiMarkup);`}
+
+  ${(
+    <Example
+      packageName="@atlaskit/editor-wikimarkup-transformer"
+      Component={require('../examples/0-adf-to-wikimarkup').default}
+      title="ADF to Wikimarkup"
+      source={require('!!raw-loader!../examples/0-adf-to-wikimarkup')}
+    />
+  )}
 `;

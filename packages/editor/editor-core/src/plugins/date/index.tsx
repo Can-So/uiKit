@@ -2,15 +2,22 @@ import * as React from 'react';
 import EditorDateIcon from '@atlaskit/icon/glyph/editor/date';
 import { date } from '@atlaskit/editor-common';
 import { findDomRefAtPos } from 'prosemirror-utils';
-import { NodeSelection } from 'prosemirror-state';
+import * as Loadable from 'react-loadable';
 
 import { EditorPlugin } from '../../types';
 import WithPluginState from '../../ui/WithPluginState';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';
 import { insertDate, setDatePickerAt } from './actions';
-import createDatePlugin, { DateState, pluginKey } from './plugin';
+import createDatePlugin, {
+  DateState,
+  pluginKey as datePluginKey,
+} from './plugin';
 import keymap from './keymap';
-import * as Loadable from 'react-loadable';
+
+import {
+  pluginKey as editorDisabledPluginKey,
+  EditorDisabledPluginState,
+} from '../editor-disabled';
 
 const DatePicker = Loadable({
   loader: () =>
@@ -52,23 +59,35 @@ const datePlugin: EditorPlugin = {
 
   contentComponent({ editorView }) {
     const { dispatch } = editorView;
+    const domAtPos = editorView.domAtPos.bind(editorView);
     return (
       <WithPluginState
         plugins={{
-          dateState: pluginKey,
+          datePlugin: datePluginKey,
+          editorDisabledPlugin: editorDisabledPluginKey,
         }}
-        render={({ dateState = {} as DateState }) => {
-          if (dateState.showDatePickerAt === null) {
+        render={({
+          editorDisabledPlugin,
+          datePlugin,
+        }: {
+          editorDisabledPlugin: EditorDisabledPluginState;
+          datePlugin: DateState;
+        }) => {
+          const { showDatePickerAt } = datePlugin;
+          if (
+            !showDatePickerAt ||
+            (editorDisabledPlugin || {}).editorDisabled
+          ) {
             return null;
           }
-
           const element = findDomRefAtPos(
-            dateState.showDatePickerAt,
-            editorView.domAtPos.bind(editorView),
+            showDatePickerAt,
+            domAtPos,
           ) as HTMLElement;
 
           return (
             <DatePicker
+              key={showDatePickerAt}
               element={element}
               onSelect={date => insertDate(date)(editorView.state, dispatch)}
               closeDatePicker={() =>
@@ -86,17 +105,17 @@ const datePlugin: EditorPlugin = {
       {
         title: formatMessage(messages.date),
         priority: 800,
-        keywords: ['time', '/'],
+        keywords: ['time', 'today', '/'],
         icon: () => <EditorDateIcon label={formatMessage(messages.date)} />,
         action(insert, state) {
           const dateNode = state.schema.nodes.date.createChecked({
-            timestamp: Date.now(),
+            timestamp: Date.now().toString(),
           });
 
-          const tr = insert(dateNode);
-          const showDatePickerAt = tr.selection.from - 2;
-          tr.setSelection(NodeSelection.create(tr.doc, showDatePickerAt));
-          return tr.setMeta(pluginKey, { showDatePickerAt });
+          const tr = insert(dateNode, { selectInlineNode: true });
+          return tr.setMeta(datePluginKey, {
+            showDatePickerAt: tr.selection.from,
+          });
         },
       },
     ],

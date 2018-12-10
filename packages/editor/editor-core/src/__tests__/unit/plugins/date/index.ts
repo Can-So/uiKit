@@ -62,7 +62,7 @@ describe('date plugin', () => {
           view.state.schema.nodes.date,
         );
         expect(view.state.selection.$from.nodeBefore!.attrs.timestamp).toEqual(
-          Date.UTC(2018, 4, 1),
+          Date.UTC(2018, 4, 1).toString(),
         );
         expect(
           view.state.selection.$from.nodeBefore!.attrs.timestamp,

@@ -8,6 +8,9 @@ import {
   LinkAttributes,
   TableAttributes,
   CardAttributes,
+  BreakoutMarkAttrs,
+  AlignmentAttributes,
+  IndentationMarkAttributes,
 } from '@atlaskit/editor-common';
 import {
   Fragment,
@@ -16,6 +19,7 @@ import {
   NodeType,
   Schema,
   Slice,
+  Mark,
 } from 'prosemirror-model';
 import matches from './matches';
 import sampleSchema from './schema';
@@ -194,8 +198,8 @@ export function flatten<T>(deep: (T | T[])[]): T[] {
  * Coerce builder content into ref nodes.
  */
 export function coerce(content: BuilderContent[], schema: Schema) {
-  const refsContent = content.map(
-    item => (typeof item === 'string' ? text(item, schema) : item(schema)),
+  const refsContent = content.map(item =>
+    typeof item === 'string' ? text(item, schema) : item(schema),
   ) as (RefsContentItem | RefsContentItem[])[];
   return sequence(...flatten<RefsContentItem>(refsContent));
 }
@@ -203,7 +207,7 @@ export function coerce(content: BuilderContent[], schema: Schema) {
 /**
  * Create a factory for nodes.
  */
-export function nodeFactory(type: NodeType, attrs = {}) {
+export function nodeFactory(type: NodeType, attrs = {}, marks?: Mark[]) {
   return function(...content: BuilderContent[]): (schema: Schema) => RefsNode {
     return schema => {
       const { nodes, refs } = coerce(content, schema);
@@ -217,7 +221,7 @@ export function nodeFactory(type: NodeType, attrs = {}) {
           ).join(', ')}`,
         );
       }
-      const node = nodeBuilder.createChecked(attrs, nodes) as RefsNode;
+      const node = nodeBuilder.createChecked(attrs, nodes, marks) as RefsNode;
       node.refs = refs;
       return node;
     };
@@ -409,13 +413,12 @@ export const underline = markFactory(sampleSchema.marks.underline, {});
 export const strong = markFactory(sampleSchema.marks.strong, {});
 export const code = markFactory(sampleSchema.marks.code, {});
 export const strike = markFactory(sampleSchema.marks.strike, {});
-export const mentionQuery = (attrs = { active: true }) =>
-  markFactory(sampleSchema.marks.mentionQuery, attrs ? attrs : {});
 export const a = (attrs: LinkAttributes) =>
   markFactory(sampleSchema.marks.link, attrs);
 export const emojiQuery = markFactory(sampleSchema.marks.emojiQuery, {});
-export const typeAheadQuery = (attrs = { trigger: '' }) =>
-  markFactory(sampleSchema.marks.typeAheadQuery, attrs);
+export const typeAheadQuery = (
+  attrs: { trigger: string; query?: string } = { trigger: '', query: '' },
+) => markFactory(sampleSchema.marks.typeAheadQuery, attrs);
 export const textColor = (attrs: { color: string }) =>
   markFactory(sampleSchema.marks.textColor, attrs);
 export const confluenceInlineComment = (attrs: { reference: string }) =>
@@ -424,3 +427,13 @@ export const confluenceInlineComment = (attrs: { reference: string }) =>
     attrs ? attrs : {},
     true,
   );
+
+//
+// Block Marks
+//
+export const alignment = (attrs: AlignmentAttributes) =>
+  markFactory(sampleSchema.marks.alignment, attrs);
+export const breakout = (attrs: BreakoutMarkAttrs) =>
+  markFactory(sampleSchema.marks.breakout, attrs);
+export const indentation = (attrs: IndentationMarkAttributes) =>
+  markFactory(sampleSchema.marks.indentation, attrs);

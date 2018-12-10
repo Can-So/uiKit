@@ -4,19 +4,19 @@ import { keymap } from 'prosemirror-keymap';
 import { doc, paragraph, text } from '@atlaskit/editor-common';
 import { EditorPlugin } from '../../types';
 import focusHandlerPlugin from './pm-plugins/focus-handler';
-import selectionHandlerPlugin from './pm-plugins/selection-handler';
+import inlineCursorTargetPlugin from './pm-plugins/inline-cursor-target';
 import { plugin as reactNodeView } from './pm-plugins/react-nodeview';
 
 const basePlugin: EditorPlugin = {
   pmPlugins() {
     return [
       {
-        name: 'focusHandlerPlugin',
-        plugin: ({ dispatch }) => focusHandlerPlugin(dispatch),
+        name: 'inlineCursorTargetPlugin',
+        plugin: () => inlineCursorTargetPlugin(),
       },
       {
-        name: 'selectionHandlerPlugin',
-        plugin: () => selectionHandlerPlugin(),
+        name: 'focusHandlerPlugin',
+        plugin: ({ dispatch }) => focusHandlerPlugin(dispatch),
       },
       { name: 'reactNodeView', plugin: () => reactNodeView },
       { name: 'history', plugin: () => history() },

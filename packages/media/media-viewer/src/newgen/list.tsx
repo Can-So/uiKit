@@ -4,8 +4,8 @@ import { ItemViewer } from './item-viewer';
 import { Identifier, MediaViewerFeatureFlags } from './domain';
 import { HeaderWrapper, hideControlsClassName, ListWrapper } from './styled';
 import { getSelectedIndex } from './utils';
-import { ErrorMessage, createError } from './error';
-import Navigation from './navigation';
+import ErrorMessage, { createError } from './error';
+import { Navigation } from './navigation';
 import Header from './header';
 
 export type Props = Readonly<{

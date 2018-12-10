@@ -15,7 +15,6 @@ import {
   findTable,
   getCellsInColumn,
   getCellsInRow,
-  getCellsInTable,
   addColumnAt,
   addRowAt,
   isCellSelection,
@@ -32,25 +31,24 @@ import {
   findCellClosestToPos,
   emptyCell,
   setCellAttrs,
-  selectColumn as selectColumnTransform,
-  selectRow as selectRowTransform,
+  getSelectionRangeInRow,
+  getSelectionRangeInColumn,
+  getSelectionRect,
 } from 'prosemirror-utils';
-import { TableLayout } from '@atlaskit/editor-common';
 import { getPluginState, pluginKey, ACTIONS } from './pm-plugins/main';
 import {
-  createControlsHoverDecoration,
-  getCellSelection,
   checkIfHeaderRowEnabled,
   checkIfHeaderColumnEnabled,
-  getSelectionRect,
   isHeaderRowSelected,
   isIsolating,
+  createControlsHoverDecoration,
 } from './utils';
 import { Command } from '../../types';
 import { analyticsService } from '../../analytics';
 import { outdentList } from '../lists/commands';
 import { mapSlice } from '../../utils/slice';
-import { Cell } from './types';
+import { TableCssClassName as ClassName } from './types';
+import { closestElement } from '../../utils';
 
 export const clearHoverSelection: Command = (
   state: EditorState,
@@ -62,80 +60,95 @@ export const clearHoverSelection: Command = (
   return true;
 };
 
-export const hoverColumns = (columns: number[], danger?: boolean): Command => (
+export const hoverColumns = (
+  columns: number[],
+  isInDanger?: boolean,
+): Command => (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
-  const table = findTable(state.selection);
-  if (table) {
-    const cells = columns.reduce((acc: Cell[], colIdx) => {
-      const colCells = getCellsInColumn(colIdx)(state.selection);
-      return colCells ? acc.concat(colCells) : acc;
-    }, []);
-    dispatch(
-      state.tr
-        .setMeta(pluginKey, {
-          action: ACTIONS.HOVER_COLUMNS,
-          data: {
-            hoverDecoration: createControlsHoverDecoration(cells, danger),
-            dangerColumns: danger ? columns : [],
-          },
-        })
-        .setMeta('addToHistory', false),
-    );
-    return true;
+  const hoveredColumns = columns.reduce((acc: number[], index) => {
+    const { indexes } = getSelectionRangeInColumn(index)(state.tr);
+    return acc.concat(indexes.filter(index => acc.indexOf(index) === -1));
+  }, []);
+  const cells = getCellsInColumn(hoveredColumns)(state.selection);
+  if (!cells) {
+    return false;
   }
-  return false;
+
+  dispatch(
+    state.tr
+      .setMeta(pluginKey, {
+        action: ACTIONS.HOVER_COLUMNS,
+        data: {
+          hoverDecoration: createControlsHoverDecoration(cells, isInDanger),
+          hoveredColumns,
+          isInDanger,
+        },
+      })
+      .setMeta('addToHistory', false),
+  );
+  return true;
 };
 
-export const hoverRows = (rows: number[], danger?: boolean): Command => (
+export const hoverRows = (rows: number[], isInDanger?: boolean): Command => (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
-  const table = findTable(state.selection);
-  if (table) {
-    const cells = rows.reduce((acc: Cell[], rowIdx) => {
-      const rowCells = getCellsInRow(rowIdx)(state.selection);
-      return rowCells ? acc.concat(rowCells) : acc;
-    }, []);
-    dispatch(
-      state.tr
-        .setMeta(pluginKey, {
-          action: ACTIONS.HOVER_ROWS,
-          data: {
-            hoverDecoration: createControlsHoverDecoration(cells, danger),
-            dangerRows: danger ? rows : [],
-          },
-        })
-        .setMeta('addToHistory', false),
-    );
-    return true;
+  const hoveredRows = rows.reduce((acc: number[], index) => {
+    const { indexes } = getSelectionRangeInRow(index)(state.tr);
+    return acc.concat(indexes.filter(index => acc.indexOf(index) === -1));
+  }, []);
+  const cells = getCellsInRow(hoveredRows)(state.selection);
+  if (!cells) {
+    return false;
   }
-  return false;
+
+  dispatch(
+    state.tr
+      .setMeta(pluginKey, {
+        action: ACTIONS.HOVER_ROWS,
+        data: {
+          hoverDecoration: createControlsHoverDecoration(cells, isInDanger),
+          hoveredRows,
+          isInDanger,
+        },
+      })
+      .setMeta('addToHistory', false),
+  );
+  return true;
 };
 
-export const hoverTable = (danger?: boolean): Command => (
+export const hoverTable = (isInDanger?: boolean): Command => (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
   const table = findTable(state.selection);
-  if (table) {
-    const cells = getCellsInTable(state.selection)!;
-    dispatch(
-      state.tr
-        .setMeta(pluginKey, {
-          action: ACTIONS.HOVER_TABLE,
-          data: {
-            hoverDecoration: createControlsHoverDecoration(cells, danger),
-            isTableInDanger: danger,
-          },
-        })
-        .setMeta('addToHistory', false),
-    );
-
-    return true;
+  if (!table) {
+    return false;
   }
-  return false;
+  const map = TableMap.get(table.node);
+  const hoveredColumns = Array.from(Array(map.width).keys());
+  const hoveredRows = Array.from(Array(map.height).keys());
+  const cells = getCellsInRow(hoveredRows)(state.selection);
+  if (!cells) {
+    return false;
+  }
+
+  dispatch(
+    state.tr
+      .setMeta(pluginKey, {
+        action: ACTIONS.HOVER_TABLE,
+        data: {
+          hoverDecoration: createControlsHoverDecoration(cells, isInDanger),
+          hoveredColumns,
+          hoveredRows,
+          isInDanger,
+        },
+      })
+      .setMeta('addToHistory', false),
+  );
+  return true;
 };
 
 export const clearSelection: Command = (
@@ -226,11 +239,10 @@ export const setCellAttr = (name: string, value: any): Command => (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
-  const { tr } = state;
-  const cellSelection = getCellSelection(state);
-  if (cellSelection) {
+  const { tr, selection } = state;
+  if (selection instanceof CellSelection) {
     let updated = false;
-    cellSelection.forEachCell((cell, pos) => {
+    selection.forEachCell((cell, pos) => {
       if (cell.attrs[name] !== value) {
         tr.setNodeMarkup(pos, cell.type, { ...cell.attrs, [name]: value });
         updated = true;
@@ -287,6 +299,34 @@ export const insertRow = (row: number): Command => (
   dispatch(tr.setSelection(Selection.near(tr.doc.resolve(table.start + pos))));
   analyticsService.trackEvent('atlassian.editor.format.table.row.button');
   return true;
+};
+
+export const triggerUnlessTableHeader = (command: Command): Command => (
+  state: EditorState,
+  dispatch: (tr: Transaction) => void,
+): boolean => {
+  const {
+    selection,
+    schema: {
+      nodes: { tableHeader },
+    },
+  } = state;
+
+  if (selection instanceof TextSelection) {
+    const cell = findCellClosestToPos(selection.$from);
+    if (cell && cell.node.type !== tableHeader) {
+      return command(state, dispatch);
+    }
+  }
+
+  if (selection instanceof CellSelection) {
+    const rect = getSelectionRect(selection);
+    if (!checkIfHeaderRowEnabled(state) || (rect && rect.top > 0)) {
+      return command(state, dispatch);
+    }
+  }
+
+  return false;
 };
 
 export function transformSliceToAddTableHeaders(
@@ -422,7 +462,7 @@ export const deleteSelectedRows: Command = (
   return true;
 };
 
-export const setTableLayout = (layout: TableLayout): Command => (
+export const toggleTableLayout: Command = (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
@@ -430,9 +470,20 @@ export const setTableLayout = (layout: TableLayout): Command => (
   if (!table) {
     return false;
   }
-  const { schema, tr } = state;
+  let layout;
+  switch (table.node.attrs.layout) {
+    case 'default':
+      layout = 'wide';
+      break;
+    case 'wide':
+      layout = 'full-width';
+      break;
+    case 'full-width':
+      layout = 'default';
+      break;
+  }
   dispatch(
-    tr.setNodeMarkup(table.pos, schema.nodes.table, {
+    state.tr.setNodeMarkup(table.pos, state.schema.nodes.table, {
       ...table.node.attrs,
       layout,
     }),
@@ -692,14 +743,21 @@ export const selectColumn = (column: number): Command => (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
-  const tr = selectColumnTransform(column)(state.tr);
-  const firstCell = getCellsInColumn(column)(tr.selection)![0];
+  const { tr } = state;
+  const { $anchor, $head, indexes } = getSelectionRangeInColumn(column)(tr);
+  tr.setSelection(new CellSelection($anchor, $head) as any);
+
+  let targetCellPosition;
+  const cells = getCellsInColumn(indexes[0])(tr.selection);
+  if (cells && cells.length) {
+    targetCellPosition = cells[0].pos;
+  }
   // update contextual menu target cell position on column selection
   dispatch(
     tr
       .setMeta(pluginKey, {
         action: ACTIONS.SET_TARGET_CELL_POSITION,
-        data: { targetCellPosition: firstCell.pos },
+        data: { targetCellPosition },
       })
       .setMeta('addToHistory', false),
   );
@@ -710,14 +768,21 @@ export const selectRow = (row: number): Command => (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
 ): boolean => {
-  const tr = selectRowTransform(row)(state.tr);
-  const firstCell = getCellsInRow(row)(tr.selection)![0];
+  const { tr } = state;
+  const { $anchor, $head, indexes } = getSelectionRangeInRow(row)(tr);
+  tr.setSelection(new CellSelection($anchor, $head) as any);
+
+  let targetCellPosition;
+  const cells = getCellsInRow(indexes[0])(tr.selection);
+  if (cells && cells.length) {
+    targetCellPosition = cells[0].pos;
+  }
   // update contextual menu target cell position on row selection
   dispatch(
     tr
       .setMeta(pluginKey, {
         action: ACTIONS.SET_TARGET_CELL_POSITION,
-        data: { targetCellPosition: firstCell.pos },
+        data: { targetCellPosition },
       })
       .setMeta('addToHistory', false),
   );
@@ -729,7 +794,7 @@ export const showInsertColumnButton = (columnIndex: number): Command => (
   dispatch,
 ) => {
   const { insertColumnButtonIndex } = getPluginState(state);
-  if (typeof insertColumnButtonIndex !== 'number') {
+  if (columnIndex > -1 && insertColumnButtonIndex !== columnIndex) {
     dispatch(
       state.tr
         .setMeta(pluginKey, {
@@ -750,7 +815,7 @@ export const showInsertRowButton = (rowIndex: number): Command => (
   dispatch,
 ) => {
   const { insertRowButtonIndex } = getPluginState(state);
-  if (typeof insertRowButtonIndex !== 'number') {
+  if (rowIndex > -1 && insertRowButtonIndex !== rowIndex) {
     dispatch(
       state.tr
         .setMeta(pluginKey, {
@@ -763,6 +828,27 @@ export const showInsertRowButton = (rowIndex: number): Command => (
     );
     return true;
   }
+  return false;
+};
+
+export const hideInsertColumnOrRowButton: Command = (state, dispatch) => {
+  const { insertColumnButtonIndex, insertRowButtonIndex } = getPluginState(
+    state,
+  );
+  if (
+    typeof insertColumnButtonIndex === 'number' ||
+    typeof insertRowButtonIndex === 'number'
+  ) {
+    dispatch(
+      state.tr
+        .setMeta(pluginKey, {
+          action: ACTIONS.HIDE_INSERT_COLUMN_OR_ROW_BUTTON,
+        })
+        .setMeta('addToHistory', false),
+    );
+    return true;
+  }
+
   return false;
 };
 
@@ -792,4 +878,50 @@ export const handleCut = (
   }
 
   return tr;
+};
+
+export const handleShiftSelection = (event: MouseEvent): Command => (
+  state,
+  dispatch,
+) => {
+  if (!(state.selection instanceof CellSelection) || !event.shiftKey) {
+    return false;
+  }
+  const { selection } = state;
+  if (selection.isRowSelection() || selection.isColSelection()) {
+    const selector = selection.isRowSelection()
+      ? `.${ClassName.ROW_CONTROLS_BUTTON_WRAP}`
+      : `.${ClassName.COLUMN_CONTROLS_BUTTON_WRAP}`;
+    const button = closestElement(event.target as HTMLElement, selector);
+    if (!button) {
+      return false;
+    }
+
+    const buttons = document.querySelectorAll(selector);
+    const index = Array.from(buttons).indexOf(button);
+    const rect = getSelectionRect(selection)!;
+    const startCells = selection.isRowSelection()
+      ? getCellsInRow(index >= rect.bottom ? rect.top : rect.bottom - 1)(
+          selection,
+        )
+      : getCellsInColumn(index >= rect.right ? rect.left : rect.right - 1)(
+          selection,
+        );
+    const endCells = selection.isRowSelection()
+      ? getCellsInRow(index)(selection)
+      : getCellsInColumn(index)(selection);
+    if (startCells && endCells) {
+      event.stopPropagation();
+      event.preventDefault();
+      dispatch(
+        state.tr.setSelection(new CellSelection(
+          state.doc.resolve(startCells[startCells.length - 1].pos),
+          state.doc.resolve(endCells[0].pos),
+        ) as any),
+      );
+      return true;
+    }
+  }
+
+  return false;
 };

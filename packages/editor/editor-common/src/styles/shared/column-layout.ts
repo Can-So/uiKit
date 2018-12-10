@@ -1,6 +1,5 @@
-// @ts-ignore: unused variable
-// prettier-ignore
-import { css, Styles, StyledComponentClass } from 'styled-components';
+import { css } from 'styled-components';
+import { gridMediumMaxWidth } from '../consts';
 
 const columnLayoutSharedStyle = css`
   [data-layout-section] {
@@ -8,6 +7,10 @@ const columnLayoutSharedStyle = css`
     flex-direction: row;
     & > * {
       flex: 1;
+    }
+
+    @media screen and (max-width: ${gridMediumMaxWidth}px) {
+      flex-direction: column;
     }
   }
 `;

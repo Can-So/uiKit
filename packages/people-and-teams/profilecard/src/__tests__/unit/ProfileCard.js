@@ -6,10 +6,41 @@ import AkButton from '@atlaskit/button';
 import { Presence } from '@atlaskit/avatar';
 import AkProfilecardResourced, { AkProfilecard, AkProfileClient } from '../..';
 import ErrorMessage from '../../components/ErrorMessage';
+import HeightTransitionWrapper from '../../components/HeightTransitionWrapper';
 import presences from '../../internal/presences';
 import { FullNameLabel, ActionButtonGroup } from '../../styled/Card';
+import mockGlobalDate from './helper/_mock-global-date';
+
+function MockMessagesIntlProvider(props: any) {
+  return props.children;
+}
+
+jest.mock(
+  '../../components/MessagesIntlProvider',
+  () => MockMessagesIntlProvider,
+);
 
 describe('Profilecard', () => {
+  const defaultProps = {
+    fullName: 'full name test',
+    status: 'active',
+    nickname: 'jscrazy',
+    companyName: 'Atlassian',
+  };
+
+  const TODAY = new Date(2018, 10, 19, 17, 30, 0, 0);
+
+  beforeAll(() => {
+    mockGlobalDate.setToday(TODAY);
+  });
+
+  afterAll(() => {
+    mockGlobalDate.reset();
+  });
+
+  const renderShallow = (props = {}) =>
+    shallow(<AkProfilecard {...defaultProps} {...props} />);
+
   it('should export default AkProfilecardResourced', () => {
     expect(AkProfilecardResourced).toBeInstanceOf(Object);
   });
@@ -35,7 +66,7 @@ describe('Profilecard', () => {
 
       it('should not render a card if full name is not set', () => {
         card.setProps({ fullName: undefined });
-        expect(card.children()).toHaveLength(0);
+        expect(card.find(HeightTransitionWrapper).children()).toHaveLength(0);
       });
     });
 
@@ -174,6 +205,55 @@ describe('Profilecard', () => {
         card.setProps({ actions: undefined });
         const actionsWrapper = card.find(ActionButtonGroup);
         expect(actionsWrapper.children().length).toBe(0);
+      });
+    });
+
+    describe('status property', () => {
+      it('should match snapshot when status=inactive and status modified date is unknown', () => {
+        const card = renderShallow({
+          status: 'inactive',
+          statusModifiedDate: undefined,
+        });
+
+        expect(card).toMatchSnapshot();
+      });
+
+      it('should match snapshot when status=inactive and status modified date is defined', () => {
+        const card = renderShallow({
+          status: 'inactive',
+          statusModifiedDate: 1542608651819,
+        });
+
+        expect(card).toMatchSnapshot();
+      });
+
+      it('should match snapshot when status=closed and status modified date is unknown', () => {
+        const card = renderShallow({
+          fullName: undefined,
+          status: 'closed',
+          statusModifiedDate: undefined,
+        });
+
+        expect(card).toMatchSnapshot();
+      });
+
+      it('should match snapshot when status=closed and status modified date is defined', () => {
+        const card = renderShallow({
+          fullName: undefined,
+          status: 'closed',
+          statusModifiedDate: 1542608651819,
+        });
+
+        expect(card).toMatchSnapshot();
+      });
+    });
+
+    describe('customElevation', () => {
+      it('should have correct customElevation', () => {
+        const wrapper = mount(<AkProfilecard customElevation="e400" />);
+        expect(
+          wrapper.find(HeightTransitionWrapper).props().customElevation,
+        ).toEqual('e400');
       });
     });
   });

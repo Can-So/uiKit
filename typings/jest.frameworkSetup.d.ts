@@ -6,5 +6,6 @@ declare namespace jest {
      */
     toEqualDocument(expected: any): R;
     toMatchDocSnapshot(): R;
+    toMatchProdImageSnapshot(): R;
   }
 }

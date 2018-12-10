@@ -26,6 +26,7 @@ import {
   makeConfluenceContainerResult,
 } from '../_test-util';
 import { ContentType } from '../../../model/Result';
+import { messages } from '../../../messages';
 import * as SearchResultUtils from '../../../components/SearchResultsUtil';
 import SearchResultsComponent, {
   Props as SearchResultsComponentProps,
@@ -93,7 +94,7 @@ const assertJiraNoRecentActivity = (element: JSX.Element) => {
   expect(formattedMessage).toMatchObject({
     type: FormattedHTMLMessage,
     props: {
-      id: 'global-search.jira.no-recent-activity-body',
+      id: 'global_search.jira.no_recent_activity_body',
     },
   });
 
@@ -113,7 +114,7 @@ const assertConfluenceNoRecentActivity = (element: JSX.Element) => {
   const { type = '', props = {} } = element || {};
   expect(type).toBe(FormattedHTMLMessage);
   expect(props).toMatchObject({
-    id: 'global-search.no-recent-activity-body',
+    id: 'global_search.no_recent_activity_body',
     values: { url: '/wiki/dosearchsite.action' },
   });
 };
@@ -138,7 +139,6 @@ const assertJiraAdvancedSearchGroup = (element: JSX.Element) => {
       query: 'query',
       showKeyboardLozenge: true,
       showSearchIcon: true,
-      onAdvancedSearchChange: expect.any(Function),
     },
   });
 };
@@ -163,6 +163,7 @@ const assertAdvancedSearchGroup = (product: Product, element: JSX.Element) => {
 const getSearchAndRecentItems = (
   product: Product,
   sessionId,
+  extraProps = {},
 ): SearchResultProps => {
   const commonProps = {
     retrySearch: jest.fn(),
@@ -175,6 +176,7 @@ const getSearchAndRecentItems = (
   if (product === 'jira') {
     return {
       ...commonProps,
+      ...extraProps,
       searchResults: {
         objects: issues,
         containers: boards,
@@ -188,6 +190,7 @@ const getSearchAndRecentItems = (
   }
   return {
     ...commonProps,
+    ...extraProps,
     searchResults: {
       objects: [],
       spaces: spaceResults,
@@ -204,16 +207,16 @@ const getJiraPreqQueryResults = () => [
   {
     items: [],
     key: 'issues',
-    titleI18nId: 'global-search.jira.recent-issues-heading',
+    title: messages.jira_recent_issues_heading,
   },
   {
     items: [],
     key: 'containers',
-    titleI18nId: 'global-search.jira.recent-containers',
+    title: messages.jira_recent_containers,
   },
   {
     items: recentlyInteractedPeople,
-    titleI18nId: 'global-search.jira.recent-people-heading',
+    title: messages.jira_recent_people_heading,
     key: 'people',
   },
 ];
@@ -221,16 +224,16 @@ const getConfluencePreQueryResults = () => [
   {
     items: [],
     key: 'objects',
-    titleI18nId: 'global-search.confluence.recent-pages-heading',
+    title: messages.confluence_recent_pages_heading,
   },
   {
     items: [],
     key: 'spaces',
-    titleI18nId: 'global-search.confluence.recent-spaces-heading',
+    title: messages.confluence_recent_spaces_heading,
   },
   {
     items: recentlyInteractedPeople,
-    titleI18nId: 'global-search.people.recent-people-heading',
+    title: messages.people_recent_people_heading,
     key: 'people',
   },
 ];
@@ -239,16 +242,16 @@ const getJiraPostQueryResults = () => [
   {
     items: issues,
     key: 'issues',
-    titleI18nId: 'global-search.jira.seach-result-issues-heading',
+    title: messages.jira_search_result_issues_heading,
   },
   {
     items: boards,
     key: 'containers',
-    titleI18nId: 'global-search.jira.seach-result-containers-heading',
+    title: messages.jira_search_result_containers_heading,
   },
   {
     items: [],
-    titleI18nId: 'global-search.jira.seach-result-people-heading',
+    title: messages.jira_search_result_people_heading,
     key: 'people',
   },
 ];
@@ -256,16 +259,16 @@ const getConfluencePostQueryResults = () => [
   {
     items: [],
     key: 'objects',
-    titleI18nId: 'global-search.confluence.confluence-objects-heading',
+    title: messages.confluence_confluence_objects_heading,
   },
   {
     items: spaceResults,
     key: 'spaces',
-    titleI18nId: 'global-search.confluence.spaces-heading',
+    title: messages.confluence_spaces_heading,
   },
   {
     items: [],
-    titleI18nId: 'global-search.people.people-heading',
+    title: messages.people_people_heading,
     key: 'people',
   },
 ];
@@ -363,6 +366,30 @@ const getPreqQueryResults = (product: Product) =>
       const { getPostQueryGroups } = getProps();
       const postQueryGroups = getPostQueryGroups();
       expect(postQueryGroups).toMatchObject(getPostQueryResults(product));
+    });
+  });
+});
+
+describe('jira', () => {
+  it('should not render lozenge for pre-query screen', () => {
+    const wrapper = renderComponent('jira');
+    const quickSearchContainer = wrapper.find(QuickSearchContainer);
+    const searchResultsComponent = (quickSearchContainer.props() as QuickSearchContainerProps).getSearchResultsComponent(
+      getSearchAndRecentItems('jira', 'abc', { latestSearchQuery: '' }),
+    );
+    const { props } = searchResultsComponent! as React.ReactElement<
+      SearchResultsComponentProps
+    >;
+    const { renderAdvancedSearchGroup } = props;
+    const advancedSearchGroup = renderAdvancedSearchGroup({ resultsCount: 10 });
+    expect(advancedSearchGroup.props.children).toMatchObject({
+      type: JiraAdvancedSearchGroup,
+      props: {
+        analyticsData: { resultsCount: 10 },
+        query: '',
+        showKeyboardLozenge: false,
+        showSearchIcon: true,
+      },
     });
   });
 });

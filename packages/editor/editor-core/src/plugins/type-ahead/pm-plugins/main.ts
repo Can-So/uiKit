@@ -1,5 +1,6 @@
 import { Plugin, PluginKey, Transaction, EditorState } from 'prosemirror-state';
 import { Dispatch } from '../../../event-dispatcher';
+import { isMarkTypeAllowedInCurrentSelection } from '../../../utils';
 import {
   TypeAheadHandler,
   TypeAheadItem,
@@ -13,6 +14,7 @@ import { findTypeAheadQuery } from '../utils/find-query-mark';
 export const pluginKey = new PluginKey('typeAheadPlugin');
 
 export type PluginState = {
+  isAllowed: boolean;
   active: boolean;
   prevActiveState: boolean;
   query: string | null;
@@ -22,6 +24,9 @@ export type PluginState = {
   itemsLoader: TypeAheadItemsLoader;
   currentIndex: number;
   queryMarkPos: number | null;
+  queryStarted: number;
+  upKeyCount: number;
+  downKeyCount: number;
 };
 
 export const ACTIONS = {
@@ -32,8 +37,12 @@ export const ACTIONS = {
   ITEMS_LIST_UPDATED: 'ITEMS_LIST_UPDATED',
 };
 
-export function createInitialPluginState(prevActiveState = false): PluginState {
+export function createInitialPluginState(
+  prevActiveState = false,
+  isAllowed = true,
+): PluginState {
   return {
+    isAllowed,
     active: false,
     prevActiveState,
     query: null,
@@ -43,6 +52,9 @@ export function createInitialPluginState(prevActiveState = false): PluginState {
     items: [],
     itemsLoader: null,
     queryMarkPos: null,
+    queryStarted: 0,
+    upKeyCount: 0,
+    downKeyCount: 0,
   };
 }
 
@@ -81,7 +93,19 @@ export function createPlugin(
             return itemsListUpdatedActionHandler({ dispatch, pluginState, tr });
 
           case ACTIONS.SELECT_CURRENT:
-            return selectCurrentActionHandler({ dispatch, pluginState, tr });
+            const { from, to } = tr.selection;
+            const { typeAheadQuery } = state.schema.marks;
+
+            // If inserted content has typeAheadQuery mark should fallback to default action handler
+            return tr.doc.rangeHasMark(from - 1, to, typeAheadQuery)
+              ? defaultActionHandler({
+                  dispatch,
+                  reactContext,
+                  typeAhead,
+                  state,
+                  pluginState,
+                })
+              : selectCurrentActionHandler({ dispatch, pluginState, tr });
 
           default:
             return defaultActionHandler({
@@ -98,38 +122,46 @@ export function createPlugin(
     view() {
       return {
         update(editorView) {
-          const pluginState = pluginKey.getState(editorView.state);
+          const pluginState = pluginKey.getState(
+            editorView.state,
+          ) as PluginState;
+
           if (!pluginState) {
             return;
           }
 
-          const dispatch = editorView.dispatch;
-          const state = editorView.state;
+          const { state, dispatch } = editorView;
           const { doc, selection } = state;
           const { from, to } = selection;
           const { typeAheadQuery } = state.schema.marks;
 
-          // Disable type ahead query when the first character is a space.
-          if (pluginState.active && pluginState.query.indexOf(' ') === 0) {
+          // Disable type ahead query when removing trigger.
+          if (
+            pluginState.active &&
+            !pluginState.query &&
+            !pluginState.trigger
+          ) {
             dismissCommand()(state, dispatch);
             return;
           }
 
-          // Disable type ahead query when removing trigger.
-          if (pluginState.active && !pluginState.query) {
-            const { nodeBefore } = selection.$from;
-            if (nodeBefore && !(nodeBefore.text || '').replace(/\s/g, '')) {
-              dismissCommand()(state, dispatch);
-              return;
-            }
+          // Disable type ahead query when the first character is a space.
+          if (
+            pluginState.active &&
+            (pluginState.query || '').indexOf(' ') === 0
+          ) {
+            dismissCommand()(state, dispatch);
+            return;
           }
 
           // Optimization to not call dismissCommand if plugin is in an inactive state.
-          if (!pluginState.active && pluginState.prevActiveState) {
-            if (!doc.rangeHasMark(from - 1, to, typeAheadQuery)) {
-              dismissCommand()(state, dispatch);
-              return;
-            }
+          if (
+            !pluginState.active &&
+            pluginState.prevActiveState &&
+            !doc.rangeHasMark(from - 1, to, typeAheadQuery)
+          ) {
+            dismissCommand()(state, dispatch);
+            return;
           }
 
           // Fetch type ahead items if handler returned a promise.
@@ -192,15 +224,25 @@ export function defaultActionHandler({
   const { typeAheadQuery } = state.schema.marks;
   const { doc, selection } = state;
   const { from, to } = selection;
-
   const isActive = isQueryActive(typeAheadQuery, doc, from - 1, to);
+  const isAllowed = isMarkTypeAllowedInCurrentSelection(typeAheadQuery, state);
+
+  if (!isAllowed && !isActive) {
+    const newPluginState = createInitialPluginState(
+      pluginState.active,
+      isAllowed,
+    );
+    dispatch(pluginKey, newPluginState);
+    return newPluginState;
+  }
+
   const { nodeBefore } = selection.$from;
 
   if (!isActive || !nodeBefore || !pluginState) {
     const newPluginState = createInitialPluginState(
       pluginState ? pluginState.active : false,
     );
-    if (!pluginState || pluginState.active) {
+    if (!pluginState || pluginState.active || !pluginState.isAllowed) {
       dispatch(pluginKey, newPluginState);
     }
     return newPluginState;
@@ -211,11 +253,20 @@ export function defaultActionHandler({
     return pluginState;
   }
 
+  const textContent = nodeBefore.textContent || '';
   const trigger = typeAheadMark.attrs.trigger.replace(
     /([^\x00-\xFF]|[\s\n])+/g,
     '',
   );
-  const query = (nodeBefore.textContent || '')
+
+  // If trigger has been removed, reset plugin state
+  if (!textContent.includes(trigger)) {
+    const newPluginState = { ...createInitialPluginState(true), active: true };
+    dispatch(pluginKey, newPluginState);
+    return newPluginState;
+  }
+
+  const query = textContent
     .replace(/^([^\x00-\xFF]|[\s\n])+/g, '')
     .replace(trigger, '');
 
@@ -245,6 +296,7 @@ export function defaultActionHandler({
   const queryMark = findTypeAheadQuery(state);
 
   const newPluginState = {
+    isAllowed,
     query,
     trigger,
     typeAheadHandler,
@@ -254,6 +306,9 @@ export function defaultActionHandler({
     itemsLoader: itemsLoader,
     currentIndex: pluginState.currentIndex,
     queryMarkPos: queryMark !== null ? queryMark.start : null,
+    queryStarted: Date.now(),
+    upKeyCount: 0,
+    downKeyCount: 0,
   };
 
   dispatch(pluginKey, newPluginState);
@@ -289,6 +344,7 @@ export function selectPrevActionHandler({
   const newPluginState = {
     ...pluginState,
     currentIndex: newIndex < 0 ? pluginState.items.length - 1 : newIndex,
+    upKeyCount: ++pluginState.upKeyCount,
   };
   dispatch(pluginKey, newPluginState);
   return newPluginState;
@@ -302,6 +358,7 @@ export function selectNextActionHandler({
   const newPluginState = {
     ...pluginState,
     currentIndex: newIndex > pluginState.items.length - 1 ? 0 : newIndex,
+    downKeyCount: ++pluginState.downKeyCount,
   };
   dispatch(pluginKey, newPluginState);
   return newPluginState;
@@ -328,7 +385,7 @@ export function selectCurrentActionHandler({
   dispatch,
   pluginState,
 }: ActionHandlerParams): PluginState {
-  const newPluginState = createInitialPluginState(pluginState.active);
+  const newPluginState = createInitialPluginState(false);
   dispatch(pluginKey, newPluginState);
   return newPluginState;
 }

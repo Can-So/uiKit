@@ -43,6 +43,9 @@ const editorTeam = [
   'ahixon_atlassian',
   'wangjerome',
   'nathanflew',
+  'fghilini',
+  'MichaelOates',
+  'wcalderipe',
 ];
 const elementsTeam = [
   'sguillope',

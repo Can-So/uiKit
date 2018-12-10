@@ -55,9 +55,11 @@ export class Story extends Component<{}, StoryState> {
           As a filmstrip user, I want to be able to navigate between link cards
           in the filmstrip. Previously, a bug was reported in filmstrip which
           prevented navigation within a filmstrip when it contained exclusively
-          link items (<a href="https://product-fabric.atlassian.net/browse/MSW-213">
+          link items (
+          <a href="https://product-fabric.atlassian.net/browse/MSW-213">
             MSW-213
-          </a>)
+          </a>
+          )
         </p>
 
         <FilmstripView

@@ -1,43 +1,39 @@
-import Select from '@atlaskit/select';
+import Select, { createFilter } from '@atlaskit/select';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
-import { InputActionTypes, LoadOptions, OnChange, User } from '../types';
+import { FormattedMessage } from 'react-intl';
+import {
+  InputActionTypes,
+  User,
+  UserPickerProps,
+  UserPickerState,
+} from '../types';
 import { batchByKey } from './batch';
 import { getComponents } from './components';
+import { messages } from './i18n';
 import { getStyles } from './styles';
 import {
   extractUserValue,
-  formatUserLabel,
   getOptions,
   isIterable,
+  usersToOptions,
+  isSingleValue,
 } from './utils';
 
-export type Props = {
-  users?: User[];
-  width?: number;
-  loadUsers?: LoadOptions;
-  onChange?: OnChange;
-  isMulti?: boolean;
-  search?: string;
-  anchor?: React.ComponentType<any>;
-  open?: boolean;
-  isLoading?: boolean;
-};
-
-export type State = {
-  users: User[];
-  resultVersion: number;
-  inflightRequest: number;
-  count: number;
-};
-
-export class UserPicker extends React.PureComponent<Props, State> {
+export class UserPicker extends React.Component<
+  UserPickerProps,
+  UserPickerState
+> {
   static defaultProps = {
     width: 350,
     isMulti: false,
+    appearance: 'normal',
+    subtle: false,
+    isClearable: true,
   };
 
   private selectRef;
+  private static defaultFilter = createFilter();
 
   constructor(props) {
     super(props);
@@ -46,7 +42,35 @@ export class UserPicker extends React.PureComponent<Props, State> {
       resultVersion: 0,
       inflightRequest: 0,
       count: 0,
+      hoveringClearIndicator: false,
+      menuIsOpen: false,
+      inputValue: props.search || '',
+      preventFilter: false,
     };
+  }
+
+  static getDerivedStateFromProps(
+    nextProps: UserPickerProps,
+    prevState: UserPickerState,
+  ) {
+    const derivedState: Partial<UserPickerState> = {};
+    if (nextProps.open !== undefined) {
+      derivedState.menuIsOpen = nextProps.open;
+    }
+    if (nextProps.value) {
+      derivedState.value = usersToOptions(nextProps.value);
+    } else if (nextProps.defaultValue && !prevState.value) {
+      derivedState.value = usersToOptions(nextProps.defaultValue);
+    }
+    // trigger onInputChange
+    if (
+      nextProps.search !== undefined &&
+      nextProps.search !== prevState.inputValue
+    ) {
+      derivedState.inputValue = nextProps.search;
+    }
+
+    return derivedState;
   }
 
   private withSelectRef = (callback: (selectRef: any) => void) => () => {
@@ -66,10 +90,24 @@ export class UserPicker extends React.PureComponent<Props, State> {
     select.selectOption(focusedOption);
   });
 
-  private handleChange = (value, { action }) => {
-    const { onChange } = this.props;
+  private handleChange = (value, { action, removedValue }) => {
+    if (removedValue && removedValue.user.fixed) {
+      return;
+    }
+    const { onChange, onSelection } = this.props;
+
+    this.setState({ inputValue: '' });
+
     if (onChange) {
       onChange(extractUserValue(value), action);
+    }
+
+    if (action === 'select-option' && onSelection) {
+      onSelection(value.user);
+    }
+
+    if (!this.props.value) {
+      this.setState({ value });
     }
   };
 
@@ -122,60 +160,131 @@ export class UserPicker extends React.PureComponent<Props, State> {
     }
   }, 200);
 
-  private handleFocus = () => {
-    this.executeLoadOptions();
+  private handleFocus = (event: React.FocusEvent) => {
+    const { value } = this.state;
+    this.setState({ menuIsOpen: true });
+    if (this.props.onFocus) {
+      this.props.onFocus();
+    }
+    if (!this.props.isMulti && isSingleValue(value) && event) {
+      const input = event.target;
+      this.setState({ inputValue: value.label, preventFilter: true }, () => {
+        if (input instanceof HTMLInputElement) {
+          input.select();
+        }
+      });
+    }
+  };
+
+  private handleBlur = () => {
+    if (this.props.onBlur) {
+      this.props.onBlur();
+    }
+    this.setState({ menuIsOpen: false, inputValue: '', preventFilter: false });
   };
 
   private handleInputChange = (
     search: string,
     { action }: { action: InputActionTypes },
   ) => {
+    const { onInputChange } = this.props;
     if (action === 'input-change') {
+      if (onInputChange) {
+        onInputChange(search);
+      }
+      this.setState({ inputValue: search, preventFilter: false });
+
       this.executeLoadOptions(search);
     }
   };
 
-  private triggerInputChange = this.withSelectRef(select => {
-    select.onInputChange(this.props.search, { action: 'input-change' });
-  });
-
-  componentDidUpdate(prevProps: Props) {
-    // trigger onInputChange
-    if (this.props.search !== prevProps.search) {
-      this.triggerInputChange();
-    }
-
+  componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
     // load options when the picker open
-    if (this.props.open && !prevProps.open) {
-      this.executeLoadOptions();
+    if (this.state.menuIsOpen && !prevState.menuIsOpen) {
+      this.executeLoadOptions(this.state.inputValue);
     }
   }
+
+  private handleKeyDown = (event: React.KeyboardEvent) => {
+    // Escape
+    if (event.keyCode === 27) {
+      this.selectRef.blur();
+    }
+    // Space
+    if (event.keyCode === 32 && !this.state.inputValue) {
+      event.preventDefault();
+      this.setState({ inputValue: ' ' });
+    }
+  };
+
+  handleClearIndicatorHover = (hoveringClearIndicator: boolean) => {
+    this.setState({ hoveringClearIndicator });
+  };
+
+  private configureNoOptionsMessage = (): string | undefined =>
+    this.props.noOptionsMessage;
+
+  private filterOption = (option, search: string) =>
+    this.state.preventFilter || UserPicker.defaultFilter(option, search);
 
   render() {
     const {
       width,
       isMulti,
-      search,
-      open,
       anchor,
       users,
       isLoading,
+      appearance,
+      subtle,
+      placeholder,
+      isClearable,
+      isDisabled,
+      clearValueLabel,
     } = this.props;
-    const { users: usersFromState, count } = this.state;
+    const {
+      users: usersFromState,
+      count,
+      hoveringClearIndicator,
+      menuIsOpen,
+      value,
+      inputValue,
+    } = this.state;
+
     return (
       <Select
+        value={value}
         ref={this.handleSelectRef}
         isMulti={isMulti}
-        formatOptionLabel={formatUserLabel}
-        options={getOptions(usersFromState, users)}
+        options={getOptions(usersFromState, users) || []}
         onChange={this.handleChange}
         styles={getStyles(width)}
-        components={getComponents(anchor)}
-        inputValue={search}
-        menuIsOpen={open}
+        components={getComponents(isMulti, anchor)}
+        inputValue={inputValue}
+        menuIsOpen={menuIsOpen}
         onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
         isLoading={count > 0 || isLoading}
         onInputChange={this.handleInputChange}
+        menuPlacement="auto"
+        placeholder={
+          placeholder || <FormattedMessage {...messages.placeholder} />
+        }
+        classNamePrefix="fabric-user-picker"
+        onClearIndicatorHover={this.handleClearIndicatorHover}
+        hoveringClearIndicator={hoveringClearIndicator}
+        appearance={isMulti ? 'compact' : appearance}
+        isClearable={isClearable}
+        subtle={isMulti ? false : subtle}
+        blurInputOnSelect={!isMulti}
+        closeMenuOnSelect={!isMulti}
+        noOptionsMessage={this.configureNoOptionsMessage}
+        openMenuOnFocus
+        onKeyDown={this.handleKeyDown}
+        isDisabled={isDisabled}
+        isFocused={menuIsOpen}
+        backspaceRemovesValue={isMulti}
+        filterOption={this.filterOption}
+        clearValueLabel={clearValueLabel}
       />
     );
   }

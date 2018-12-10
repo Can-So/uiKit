@@ -71,8 +71,8 @@ When upgrading an Atlaskit component, all changelogs can be found in the [Atlask
 
 #### Before you start
 
-* [node](https://nodejs.org/) version should be 6 or above (to check `node -v`) or use [nvm](https://github.com/creationix/nvm)
-* [npm](https://www.npmjs.com/) version should be 3 or above (to check `npm --version`)
+* [node](https://nodejs.org/) version should be as listed in .nvmrc (we recommend using [nvm](https://github.com/creationix/nvm)). Run `nvm use` in the root directory to install the correct version of node.
+* [npm](https://www.npmjs.com/) version should be 5 or above (to check `npm --version`)
 * [yarn](https://yarnpkg.com/) should be installed globally (see yarn website for installation instructions)
 
 #### Clone the repo and install
@@ -96,6 +96,9 @@ Next, to install packages, we use bolt, just calling it:
 bolt
 ```
 
+Then you can run the examples with `yarn start`. Check `package.json` for more commands to start specific package examples.
+
+
 For contributing back, check out our [contribution guide](http://atlaskit.atlassian.com/docs/guides/contributing)
 
 # Documentation
@@ -110,17 +113,26 @@ We believe in open contributions and the power of a strong development community
 
 # Contributors
 
-Pull requests, issues and comments are welcomed. For pull requests:
+Pull requests, issues and comments are welcomed. 
 
+For pull requests:
+
+* Do not raise pull requests from forks because our CI builds do not run on forks. Create a pull request from a branch instead.
 * Add tests for new features and bug fixes
 * Follow the existing style
 * Separate unrelated changes into multiple pull requests
 * Read [Contributing guidelines][contributing] for more details
 
-See the existing issues for things to start contributing.
+See the existing issues for things to start contributing. For bigger changes, make sure you start a discussion first by creating an issue and explaining the intended change.
 
-For bigger changes, make sure you start a discussion first by creating
-an issue and explaining the intended change.
+#### Become a contributor
+
+ If this is your _first time_ to raise a pull request, you need to be added to the 'atlaskit contributor' team in order to create branches for your pull requests. To be added, create an [issue](https://bitbucket.org/atlassian/atlaskit-mk-2/issues?status=new&status=open) and include the following:
+
+1. Issue title - __"Become an Atlaskit contributor"__
+2. Your Bitbucket username and
+3. Reasons you'd want to be a contributor - e.g. Reference another issue that you'd like to provide a PR for.
+4. Have signed or be ready to sign the Contributor License Agreement(CLA). See below.
 
 Atlassian requires contributors to sign a Contributor License Agreement,
 known as a CLA. This serves as a record stating that the contributor is

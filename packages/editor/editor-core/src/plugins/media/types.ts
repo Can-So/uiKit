@@ -14,10 +14,12 @@ export interface MediaState {
   fileName?: string;
   fileSize?: number;
   fileMimeType?: string;
+  collection?: string;
   dimensions?: {
     width: number | undefined;
     height: number | undefined;
   };
+  scaleFactor?: number;
   fileId: Promise<string>;
   publicId?: string;
   error?: {

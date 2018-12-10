@@ -48,6 +48,8 @@ TitleInput.displayName = 'TitleInput';
  *                                    80px - 48px (Outside of iframe)
  */
 export const Wrapper: any = styled.div`
+  box-sizing: border-box;
+  padding: 2px;
   height: calc(100vh - 32px);
 `;
 Wrapper.displayName = 'Wrapper';
@@ -61,9 +63,12 @@ export const Content: any = styled.div`
 Content.displayName = 'Content';
 
 // tslint:disable-next-line:no-console
-const analyticsHandler = (actionName, props) => console.log(actionName, props);
+export const analyticsHandler = (actionName, props) =>
+  console.log(actionName, props);
 // tslint:disable-next-line:no-console
 const SAVE_ACTION = () => console.log('Save');
+
+export const LOCALSTORAGE_defaultDocKey = 'fabric.editor.example.full-page';
 
 export const SaveAndCancelButtons = props => (
   <ButtonGroup>
@@ -71,10 +76,14 @@ export const SaveAndCancelButtons = props => (
       tabIndex="-1"
       appearance="primary"
       onClick={() =>
-        props.editorActions
-          .getValue()
+        props.editorActions.getValue().then(value => {
           // tslint:disable-next-line:no-console
-          .then(value => console.log(value))
+          console.log(value);
+          localStorage.setItem(
+            LOCALSTORAGE_defaultDocKey,
+            JSON.stringify(value),
+          );
+        })
       }
     >
       Publish
@@ -82,8 +91,10 @@ export const SaveAndCancelButtons = props => (
     <Button
       tabIndex="-1"
       appearance="subtle"
-      // tslint:disable-next-line:jsx-no-lambda
-      onClick={() => props.editorActions.clear()}
+      onClick={() => {
+        props.editorActions.clear();
+        localStorage.removeItem(LOCALSTORAGE_defaultDocKey);
+      }}
     >
       Close
     </Button>
@@ -92,7 +103,7 @@ export const SaveAndCancelButtons = props => (
 
 export type State = { disabled: boolean };
 
-const providers = {
+export const providers = {
   emojiProvider: emoji.storyData.getEmojiResource({
     uploadSupported: true,
     currentUser: {
@@ -108,11 +119,11 @@ const providers = {
   macroProvider: Promise.resolve(macroProvider),
 };
 
-const mediaProvider = storyMediaProviderFactory({
+export const mediaProvider = storyMediaProviderFactory({
   includeUserAuthProvider: true,
 });
 
-const quickInsertProvider = quickInsertProviderFactory();
+export const quickInsertProvider = quickInsertProviderFactory();
 
 export class ExampleEditor extends React.Component<EditorProps, State> {
   state: State = { disabled: true };
@@ -141,6 +152,7 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               allowTables={{
                 advanced: true,
               }}
+              allowBreakout={true}
               allowJiraIssue={true}
               allowUnsupportedContent={true}
               allowPanel={true}
@@ -149,8 +161,11 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               }}
               allowRule={true}
               allowDate={true}
-              allowLayouts={true}
-              allowGapCursor={true}
+              allowLayouts={{
+                allowBreakout: true,
+              }}
+              allowTextAlignment={true}
+              allowIndentation={true}
               allowTemplatePlaceholders={{ allowInserting: true }}
               UNSAFE_cards={{
                 provider: Promise.resolve(cardProvider),
@@ -161,6 +176,11 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               placeholder="Write something..."
               shouldFocus={false}
               disabled={this.state.disabled}
+              defaultValue={
+                (localStorage &&
+                  localStorage.getItem('fabric.editor.example.full-page')) ||
+                undefined
+              }
               contentComponents={
                 <WithEditorActions
                   // tslint:disable-next-line:jsx-no-lambda

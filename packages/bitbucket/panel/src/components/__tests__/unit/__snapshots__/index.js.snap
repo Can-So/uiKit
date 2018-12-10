@@ -7,7 +7,7 @@ exports[`Panel component header matches the snapshot 1`] = `
   <styled.div
     isHidden={false}
   >
-    <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))
+    <WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))
       appearance="subtle"
       ariaExpanded={false}
       iconBefore={

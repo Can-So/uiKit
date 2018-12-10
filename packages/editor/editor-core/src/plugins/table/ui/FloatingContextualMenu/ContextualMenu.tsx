@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
 import { splitCell, mergeCells } from 'prosemirror-tables';
-
+import { colors } from '@atlaskit/theme';
 import {
   tableBackgroundColorPalette,
   tableBackgroundBorderColors,
@@ -26,8 +26,8 @@ import { contextualMenuDropdownWidth } from '../styles';
 import { Shortcut } from '../../../../ui/styles';
 import DropdownMenu from '../../../../ui/DropdownMenu';
 import {
-  analyticsDecorator,
   analyticsService as analytics,
+  withAnalytics,
 } from '../../../../analytics';
 import ColorPalette from '../../../../ui/ColorPalette';
 import tableMessages from '../messages';
@@ -139,6 +139,8 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
         isOpen && targetCellPosition
           ? state.doc.nodeAt(targetCellPosition)
           : null;
+      const background =
+        node && node.attrs.background ? node.attrs.background : '#ffffff';
       items.push({
         content: formatMessage(messages.cellBackground),
         value: { name: 'background' },
@@ -146,9 +148,7 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
           <div>
             <div
               className={ClassName.CONTEXTUAL_MENU_ICON}
-              style={{
-                background: `${node ? node.attrs.background : 'white'}`,
-              }}
+              style={{ background }}
             />
             {isSubmenuOpen && (
               <div
@@ -159,6 +159,8 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
                   palette={tableBackgroundColorPalette}
                   borderColors={tableBackgroundBorderColors}
                   onClick={this.setColor}
+                  selectedColor={background}
+                  checkMarkColor={colors.N500}
                 />
               </div>
             )}
@@ -325,16 +327,18 @@ class ContextualMenu extends Component<Props & InjectedIntlProps, State> {
     }
   };
 
-  @analyticsDecorator('atlassian.editor.format.table.backgroundColor.button')
-  private setColor = color => {
-    const { targetCellPosition, editorView } = this.props;
-    const { state, dispatch } = editorView;
-    setMultipleCellAttrs({ background: color }, targetCellPosition)(
-      state,
-      dispatch,
-    );
-    this.toggleOpen();
-  };
+  private setColor = withAnalytics(
+    'atlassian.editor.format.table.backgroundColor.button',
+    color => {
+      const { targetCellPosition, editorView } = this.props;
+      const { state, dispatch } = editorView;
+      setMultipleCellAttrs({ background: color }, targetCellPosition)(
+        state,
+        dispatch,
+      );
+      this.toggleOpen();
+    },
+  );
 }
 
 export const getSelectedColumnIndexes = (selectionRect: CellRect): number[] => {

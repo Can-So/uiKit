@@ -8,6 +8,7 @@ export { default as GlobalItem } from './components/presentational/GlobalItem';
 export {
   default as GlobalItemPrimitive,
 } from './components/presentational/GlobalItem/primitives';
+
 export { default as GlobalNav } from './components/presentational/GlobalNav';
 export { default as Group } from './components/presentational/Group';
 export {
@@ -27,12 +28,6 @@ export {
 export {
   default as MenuSection,
 } from './components/presentational/MenuSection';
-export {
-  default as PeekToggleItem,
-} from './components/presentational/PeekToggleItem';
-export {
-  default as ScrollableSectionInner,
-} from './components/presentational/ScrollableSectionInner';
 export { default as Section } from './components/presentational/Section';
 export {
   default as SectionHeading,
@@ -57,13 +52,21 @@ export { default as GoToItem } from './components/connected/GoToItem';
 export {
   default as LayoutManagerWithViewController,
 } from './components/connected/LayoutManagerWithViewController';
+export {
+  default as AsyncLayoutManagerWithViewController,
+} from './components/connected/AsyncLayoutManagerWithViewController';
+export { default as SortableGroup } from './components/connected/SortableGroup';
+export { default as SortableItem } from './components/connected/SortableItem';
+export {
+  default as SortableContext,
+} from './components/connected/SortableContext';
 
 /** State */
 export { NavigationProvider } from './provider';
 export {
   UIController,
   UIControllerSubscriber,
-  withNavigationUI,
+  withNavigationUIController,
 } from './ui-controller';
 export {
   ViewController,
@@ -73,13 +76,54 @@ export {
 } from './view-controller';
 
 /** Renderer */
-export { default as ViewRenderer } from './renderer';
+export { default as ItemsRenderer, TypedItemsRenderer } from './renderer';
 
 /** Theme */
 export { dark, light, settings, modeGenerator, ThemeProvider } from './theme';
 
 /** Types */
-export {
+export type {
   ExternalGlobalItemProps as GlobalItemProps,
 } from './components/presentational/GlobalItem/types';
-export { GlobalTheme } from './theme';
+export type { GlobalTheme } from './theme';
+export type {
+  WithNavigationUIControllerProps,
+  UIControllerWrappedComp,
+} from './ui-controller/types';
+export type {
+  WithNavigationViewControllerProps,
+  ViewControllerWrappedComp,
+} from './view-controller/types';
+export type {
+  WithThemeProps,
+  ThemeWrappedComp,
+  WithContentThemeProps,
+  ContentThemeWrappedComp,
+  WithGlobalThemeProps,
+  GlobalThemeWrappedComp,
+} from './theme/types';
+
+export type {
+  NavigationRendererItemType,
+  LeafItemType,
+  BranchItemType,
+  BackItemType,
+  ContainerHeaderType,
+  DebugType,
+  GoToItemType,
+  GroupHeadingType,
+  ItemType,
+  SortableItemType,
+  SectionHeadingType,
+  SeparatorType,
+  SwitcherType,
+  WordmarkType,
+  GroupType,
+  HeaderSectionType,
+  MenuSectionType,
+  SectionType,
+  SortableContextType,
+  SortableGroupType,
+  InlineComponentType,
+  TypeShape as NavigationItemTypeShape,
+} from './renderer/types';

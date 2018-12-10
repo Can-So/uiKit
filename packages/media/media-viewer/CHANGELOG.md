@@ -1,5 +1,109 @@
 # @atlaskit/media-viewer
 
+## 27.1.0
+- [minor] [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+
+  - CustomVideoPlayer is now CustomMediaPlayer and supports audio through type property. Media Viewer now uses custom audio player for audio everywhere except IE11.
+
+## 27.0.6
+- [patch] [01697a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01697a6):
+
+  - CustomVideoPlayer improvements: fix currentTime origin + apply custom theme
+
+## 27.0.5
+- [patch] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
+
+  - use custom video player for inline video in media-card
+
+## 27.0.4
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/field-range@5.0.11
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/media-ui@7.8.2
+  - @atlaskit/theme@7.0.0
+
+## 27.0.3
+- [patch] [5a6de24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6de24):
+
+  - translate component properties in media components
+
+## 27.0.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/media-ui@7.6.2
+  - @atlaskit/icon@15.0.0
+
+## 27.0.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/media-ui@7.6.1
+  - @atlaskit/field-range@5.0.9
+  - @atlaskit/button@10.0.0
+  - @atlaskit/analytics-next-types@3.1.2
+
+## 27.0.0
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 26.0.1
+- [patch] [8584c5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8584c5a):
+
+  - Fix zoom not sorting numerical values correctly
+
+## 26.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+  - @atlaskit/media-store@8.3.0
+
+## 25.0.3
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-test-helpers@18.2.11
+  - @atlaskit/media-card@42.0.0
+
+## 25.0.2
+- [patch] [714f6ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/714f6ba):
+
+  - Add analytics for navigation events in MediaViewer
+
+## 25.0.1
+- [patch] [74c9cd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/74c9cd1):
+
+  - Add analytics for zoom controls
+
+## 25.0.0
+- [major] [023cb45"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/023cb45"
+d):
+
+  - Add i18n support to MediaViewer
+
+## 24.1.11
+- [patch] [12afe80"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/12afe80"
+d):
+
+  - Move mocks directory structure to fix dist build issues
+
 ## 24.1.10
 - [patch] [4b84e8b"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b84e8b"

@@ -1,0 +1,43 @@
+{
+  "name": "@atlaskit/textfield",
+  "version": "0.1.3",
+  "description": "Text Field Component",
+  "license": "Apache-2.0",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "atlaskit:src": "src/index.js",
+  "atlaskit:designLink": "https://atlassian.design/guidelines/product/components/textfield",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "author": "Atlassian Pty Ltd",
+  "maintainers": [
+    "Sean C",
+    "Charles L",
+    "Vito BZ"
+  ],
+  "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
+  "dependencies": {
+    "@atlaskit/analytics-next": "^3.1.1",
+    "@atlaskit/theme": "^7.0.0",
+    "@babel/runtime": "^7.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.4.0",
+    "styled-components": "^3.2.6"
+  },
+  "devDependencies": {
+    "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/button": "^10.0.4",
+    "@atlaskit/docs": "^5.2.3",
+    "@atlaskit/form": "^4.0.20",
+    "enzyme": "^3.7.0",
+    "react-dom": "^16.4.2"
+  },
+  "keywords": [
+    "atlaskit",
+    "react",
+    "ui"
+  ]
+}

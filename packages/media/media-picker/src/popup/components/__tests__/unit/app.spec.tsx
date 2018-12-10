@@ -5,7 +5,6 @@ import { Store } from 'react-redux';
 
 import { AuthProvider, ContextFactory } from '@atlaskit/media-core';
 import { waitUntil } from '@atlaskit/media-test-helpers';
-import LayerManager from '@atlaskit/layer-manager';
 
 import { State } from '../../../domain';
 import ConnectedApp, { App, AppDispatchProps } from '../../app';
@@ -65,7 +64,7 @@ const makeFile = (id: string): MediaFile => ({
 });
 
 const mockSetTimeout = () => {
-  const origSetTimeout = setTimeout;
+  const origSetTimeout = window.setTimeout;
   window.setTimeout = jest.fn().mockImplementation((cb, ms, ...args) => {
     cb(...args);
   });
@@ -383,9 +382,7 @@ describe('Connected App', () => {
     );
     const ConnectedAppWithStore = getComponentClassWithStore(ConnectedApp);
     const component = mount(
-      <LayerManager>
-        <ConnectedAppWithStore store={store} tenantUploadParams={{}} />
-      </LayerManager>,
+      <ConnectedAppWithStore store={store} tenantUploadParams={{}} />,
     );
     component.find(LocalBrowserButton).simulate('click');
     expect(handler).toBeCalledWith(
@@ -425,12 +422,10 @@ describe('Connected App', () => {
     );
     const ConnectedAppWithStore = getComponentClassWithStore(ConnectedApp);
     const wrapper = mount(
-      <LayerManager>
-        <ConnectedAppWithStore
-          store={store as Store<State>}
-          tenantUploadParams={{}}
-        />
-      </LayerManager>,
+      <ConnectedAppWithStore
+        store={store as Store<State>}
+        tenantUploadParams={{}}
+      />,
     );
 
     store.dispatch(showPopup());

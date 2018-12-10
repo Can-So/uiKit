@@ -2,6 +2,7 @@ import { EditorState, Transaction, Plugin, PluginKey } from 'prosemirror-state';
 import { findParentNodeOfType } from 'prosemirror-utils';
 import { isWrappingPossible } from '../utils';
 import { Dispatch } from '../../../event-dispatcher';
+import { removeBlockMarks } from '../../../utils/mark';
 
 export const pluginKey = new PluginKey('listsPlugin');
 
@@ -67,6 +68,26 @@ export const createPlugin = (dispatch: Dispatch) =>
 
         return pluginState;
       },
+    },
+    view: editorView => {
+      return {
+        update: ({ state, dispatch }) => {
+          const { bulletList, orderedList } = state.schema.nodes;
+          const { alignment, indentation } = state.schema.marks;
+          const listParent = findParentNodeOfType([bulletList, orderedList])(
+            state.tr.selection,
+          );
+          if (!listParent) {
+            return;
+          }
+
+          /** Block mark if exists should be removed when toggled to list items */
+          const removeMarks = removeBlockMarks(state, [alignment, indentation]);
+          if (removeMarks) {
+            dispatch(removeMarks);
+          }
+        },
+      };
     },
 
     key: pluginKey,

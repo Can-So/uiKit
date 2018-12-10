@@ -1,5 +1,97 @@
 # @atlaskit/modal-dialog
 
+## 7.1.0
+- [minor] [7f99dec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7f99dec):
+
+  - Fix usage of PopupSelect inside ModalDialog
+
+## 7.0.14
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/blanket@7.0.11
+  - @atlaskit/button@10.0.4
+  - @atlaskit/checkbox@5.0.8
+  - @atlaskit/field-radio-group@4.0.13
+  - @atlaskit/field-text@7.0.16
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/inline-dialog@9.0.12
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+
+## 7.0.13
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/checkbox@5.0.7
+  - @atlaskit/field-radio-group@4.0.12
+  - @atlaskit/inline-dialog@9.0.11
+  - @atlaskit/portal@0.0.16
+  - @atlaskit/icon@15.0.0
+
+## 7.0.12
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/blanket@7.0.10
+  - @atlaskit/checkbox@5.0.6
+  - @atlaskit/field-radio-group@4.0.11
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/inline-dialog@9.0.10
+  - @atlaskit/portal@0.0.15
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 7.0.11
+- [patch] [abd3a39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abd3a39):
+
+  - Bump react-beautiful-dnd dependency to v10.0.2
+
+## 7.0.10
+- [patch] [e151c1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e151c1a):
+
+  - Removes dependency on @atlaskit/layer-manager
+
+  As of component versions:
+
+  - \`@atlaskit/modal-dialog@7.0.0\`
+  - \`@atlaskit/tooltip@12.0.2\`
+  - \`@atlaskit/flag@9.0.6\`
+  - \`@atlaskit/onboarding@6.0.0\`
+
+  No component requires \`LayerManager\` to layer correctly.
+
+  You can safely remove this dependency and stop rendering \`LayerManager\` in your apps.
+
+## 7.0.9
+- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+
+  - Fixed issue where tooltips and modals would initially render in the wrong location
+
+## 7.0.8
+- Updated dependencies [3f5a4dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5a4dd):
+  - @atlaskit/portal@0.0.13
+
+## 7.0.7
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 7.0.6
+- [patch] [7cbd729](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7cbd729):
+
+  - Fixes visual bug where header and footer keylines appeared below textboxes and other components
+
+## 7.0.5
+- [patch] [72bc8da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72bc8da):
+
+  - Removes reference to window in initial state to properly support ssr
+- [patch] [b332c91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b332c91):
+
+  - upgrades verison of react-scrolllock to SSR safe version
+
 ## 7.0.4
 - [patch] Updated dependencies [aaab348](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aaab348)
   - @atlaskit/portal@0.0.12

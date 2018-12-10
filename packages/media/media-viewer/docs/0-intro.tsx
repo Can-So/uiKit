@@ -1,18 +1,15 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, code, Example, Props } from '@atlaskit/docs';
 
 export default md`
-  # @atlaskit/media-viewer
+MediaViewer is Atlassian's powerful solution for viewing files on the web. It's both powerful and extendable yet easy-to-integrate
 
-  ## Installation
+  ## Usage
 
-  ~~~sh
-  yarn add @atlaskit/media-viewer
-  ~~~
+  ### Using a collection as data source
 
-  ## Using a collection as data source
-
-  ~~~js
-  import { MediaViewer } from '../src';
+  ${code`
+  import { MediaViewer } from '@atlaskit/media-viewer';
   import {
     createStorybookContext,
     defaultCollectionName,
@@ -25,7 +22,6 @@ export default md`
     type: 'file',
   };
 
-  // if you use the CardList component, use the same pagination here
   const pageSize = 30;
 
   const dataSource = {
@@ -41,12 +37,12 @@ export default md`
       collectionName={defaultCollectionName}
     />
   );
-  ~~~
+  `}
 
-  ## Using a list of media items as data source
+  ### Using a list of media items as data source
 
-  ~~~js
-  import { MediaViewer } from '../src';
+  ${code`
+  import { MediaViewer } from '@atlaskit/media-viewer';
   import {
     createStorybookContext,
     defaultCollectionName,
@@ -86,10 +82,24 @@ export default md`
       collectionName={defaultCollectionName}
     />
   );
-  ~~~
+  `}
 
   ## About the collectionName parameter
 
   The collection name can be provided as top level prop \`collectionName\` for authentcation purposes
   (for collection scoped permissions) and / or as a \`dataSource\` for collection scoped navigation.
-`;
+
+  ${(
+    <Example
+      Component={require('../examples/0-single-file-previews').default}
+      title="Single File Preview"
+      source={require('!!raw-loader!../examples/0-single-file-previews')}
+    />
+  )}
+
+  ${(
+    <Props
+      props={require('!!extract-react-types-loader!../src/components/media-viewer')}
+    />
+  )}
+  `;

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/multi-select",
-  "version": "11.0.8",
+  "version": "11.0.12",
   "description": "React component which allows selection of multiple items from a dropdown list. Substitute for the native multiple select element",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -24,13 +24,13 @@
   },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/droplist": "^7.0.12",
-    "@atlaskit/field-base": "^11.0.9",
-    "@atlaskit/icon": "^14.0.2",
-    "@atlaskit/spinner": "^9.0.10",
-    "@atlaskit/tag": "^6.0.9",
+    "@atlaskit/droplist": "^7.0.16",
+    "@atlaskit/field-base": "^11.0.12",
+    "@atlaskit/icon": "^15.0.1",
+    "@atlaskit/spinner": "^9.0.12",
+    "@atlaskit/tag": "^6.1.2",
     "@atlaskit/tag-group": "^6.0.7",
-    "@atlaskit/theme": "^6.1.1",
+    "@atlaskit/theme": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "classnames": "^2.2.5",
     "uuid": "^3.1.0"
@@ -41,11 +41,11 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/avatar": "^14.1.2",
-    "@atlaskit/button": "^9.0.15",
-    "@atlaskit/docs": "^5.0.8",
-    "@atlaskit/section-message": "^1.0.10",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "@atlaskit/avatar": "^14.1.6",
+    "@atlaskit/button": "^10.0.4",
+    "@atlaskit/docs": "^5.2.3",
+    "@atlaskit/section-message": "^1.0.13",
+    "enzyme": "^3.7.0",
     "react-test-renderer": "^16.3.0"
   }
 }

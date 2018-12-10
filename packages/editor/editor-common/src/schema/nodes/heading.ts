@@ -1,15 +1,17 @@
 import { NodeSpec } from 'prosemirror-model';
-import { Inline } from './doc';
+import { Inline, MarksObject, NoMark } from './doc';
+import { AlignmentMarkDefinition, IndentationMarkDefinition } from '../marks';
 
 /**
  * @name heading_node
  */
-export interface HeadingDefinition {
+export interface HeadingBaseDefinition {
   type: 'heading';
   /**
    * @allowUnsupportedInline true
    */
-  content: Array<Inline>;
+  content?: Array<Inline>;
+  marks?: Array<any>;
   attrs: {
     /**
      * @minimum 1
@@ -18,6 +20,30 @@ export interface HeadingDefinition {
     level: number;
   };
 }
+
+/**
+ * @name heading_with_no_marks_node
+ */
+export type HeadingDefinition = HeadingBaseDefinition & NoMark;
+
+// Check `paragraph` node for why we are doing things like this
+/**
+ * @name heading_with_alignment_node
+ * @stage 0
+ */
+export type HeadingWithAlignmentDefinition = HeadingBaseDefinition &
+  MarksObject<AlignmentMarkDefinition>;
+
+/**
+ * @name heading_with_indentation_node
+ * @stage 0
+ */
+export type HeadingWithIndentationDefinition = HeadingBaseDefinition &
+  MarksObject<IndentationMarkDefinition>;
+
+export type HeadingWithMarksDefinition =
+  | HeadingWithAlignmentDefinition
+  | HeadingWithIndentationDefinition;
 
 export const heading: NodeSpec = {
   attrs: { level: { default: 1 } },

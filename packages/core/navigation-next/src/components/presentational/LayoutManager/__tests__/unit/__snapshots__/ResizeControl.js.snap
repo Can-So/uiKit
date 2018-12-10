@@ -1,5 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ResizeControlBase should not render GrabArea when \`isGrabAreaDisabled\` prop is true 1`] = `
+<Fragment>
+  <Outer>
+    <Shadow
+      direction="to left"
+      isBold={false}
+    />
+    <WithAnalyticsContext(WithAnalyticsEvents(Tooltip))
+      content={
+        <div
+          className="css-jeedki"
+        >
+          <span>
+            
+          </span>
+          <div
+            className="css-1cgkjdn"
+          >
+            
+          </div>
+        </div>
+      }
+      delay={600}
+      hideTooltipOnClick={true}
+      position="right"
+    >
+      <Button
+        hasHighlight={false}
+        innerRef={
+          Object {
+            "current": null,
+          }
+        }
+        isVisible={false}
+        onClick={[Function]}
+      >
+        <ChevronLeftIcon />
+      </Button>
+    </WithAnalyticsContext(WithAnalyticsEvents(Tooltip))>
+  </Outer>
+  <LifeCycleProvider
+    attributes={Object {}}
+    isActive={false}
+    styles={
+      Object {
+        "cursor": "ew-resize",
+      }
+    }
+    target={<body />}
+  />
+</Fragment>
+`;
+
 exports[`ResizeControlBase should render correctly 1`] = `
 <Fragment>
   <Outer>
@@ -7,47 +60,45 @@ exports[`ResizeControlBase should render correctly 1`] = `
       direction="to left"
       isBold={false}
     />
-    <Fragment>
-      <GrabArea
-        isBold={false}
-        onMouseDown={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        showHandle={false}
-      />
-      <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Tooltip)))
-        content={
-          <div
-            className="css-jeedki"
-          >
-            <span>
-              
-            </span>
-            <div
-              className="css-1cgkjdn"
-            >
-              
-            </div>
-          </div>
-        }
-        delay={600}
-        hideTooltipOnClick={true}
-        position="right"
-      >
-        <Button
-          hasHighlight={false}
-          innerRef={
-            Object {
-              "current": null,
-            }
-          }
-          isVisible={false}
-          onClick={[Function]}
+    <GrabArea
+      isBold={false}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      showHandle={false}
+    />
+    <WithAnalyticsContext(WithAnalyticsEvents(Tooltip))
+      content={
+        <div
+          className="css-jeedki"
         >
-          <ChevronLeftIcon />
-        </Button>
-      </ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Tooltip)))>
-    </Fragment>
+          <span>
+            
+          </span>
+          <div
+            className="css-1cgkjdn"
+          >
+            
+          </div>
+        </div>
+      }
+      delay={600}
+      hideTooltipOnClick={true}
+      position="right"
+    >
+      <Button
+        hasHighlight={false}
+        innerRef={
+          Object {
+            "current": null,
+          }
+        }
+        isVisible={false}
+        onClick={[Function]}
+      >
+        <ChevronLeftIcon />
+      </Button>
+    </WithAnalyticsContext(WithAnalyticsEvents(Tooltip))>
   </Outer>
   <LifeCycleProvider
     attributes={Object {}}

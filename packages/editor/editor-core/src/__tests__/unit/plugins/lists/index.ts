@@ -14,26 +14,26 @@ import {
   mediaSingle,
   randomId,
   br,
+  code_block,
 } from '@atlaskit/editor-test-helpers';
-import listPlugin from '../../../../plugins/lists';
 import {
   toggleOrderedList,
   toggleBulletList,
 } from '../../../../plugins/lists/commands';
-import panelPlugin from '../../../../plugins/panel';
 import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-single';
-import mediaPlugin from '../../../../plugins/media';
+import { GapCursorSelection } from '../../../../plugins/gap-cursor';
 
 describe('lists', () => {
   const editor = (doc: any, trackEvent?: () => {}) =>
     createEditor({
       doc,
-      editorPlugins: [
-        listPlugin,
-        panelPlugin,
-        mediaPlugin({ allowMediaSingle: true }),
-      ],
-      editorProps: { analyticsHandler: trackEvent },
+      editorProps: {
+        analyticsHandler: trackEvent,
+        allowCodeBlocks: true,
+        allowPanel: true,
+        allowLists: true,
+        media: { allowMediaSingle: true },
+      },
       pluginKey,
     });
 
@@ -450,6 +450,22 @@ describe('lists', () => {
       expect(pluginState).toHaveProperty('bulletListDisabled', true);
     });
 
+    describe('toggling a list', () => {
+      it("shouldn't affect text selection", () => {
+        const { editorView } = editor(doc(p('hello{<>}')));
+
+        toggleBulletList(editorView);
+        // If the text is not selected, pressing enter will
+        // create a new paragraph. If it is selected the
+        // 'hello' text will be removed
+        sendKeyToPm(editorView, 'Enter');
+
+        expect(editorView.state.doc).toEqualDocument(
+          doc(ul(li(p('hello')), li(p('')))),
+        );
+      });
+    });
+
     describe('untoggling a list', () => {
       const expectedOutput = doc(
         ol(li(p('One'))),
@@ -845,6 +861,45 @@ describe('lists', () => {
     });
 
     describe('Nested Lists', () => {
+      describe('When gap cursor is inside listItem before codeBlock', () => {
+        it('should increase the depth of list item when Tab key press', () => {
+          const { editorView } = editor(
+            doc(ol(li(p('text')), li(code_block()('{<>}text')), li(p('text')))),
+          );
+          // enable gap cursor
+          sendKeyToPm(editorView, 'ArrowLeft');
+          expect(editorView.state.selection instanceof GapCursorSelection).toBe(
+            true,
+          );
+          expect(editorView.state.selection.$from.depth).toEqual(2);
+
+          sendKeyToPm(editorView, 'Tab');
+
+          expect(editorView.state.selection.$from.depth).toEqual(4);
+        });
+
+        it('should decrease the depth of list item when Shift-Tab key press', () => {
+          const { editorView } = editor(
+            doc(
+              ol(
+                li(p('text'), ol(li(code_block()('{<>}text')))),
+                li(p('text')),
+              ),
+            ),
+          );
+          // enable gap cursor
+          sendKeyToPm(editorView, 'ArrowLeft');
+          expect(editorView.state.selection instanceof GapCursorSelection).toBe(
+            true,
+          );
+          expect(editorView.state.selection.$from.depth).toEqual(4);
+
+          sendKeyToPm(editorView, 'Shift-Tab');
+
+          expect(editorView.state.selection.$from.depth).toEqual(2);
+        });
+      });
+
       it('should increase the depth of list item when Tab key press', () => {
         const { editorView } = editor(
           doc(ol(li(p('text')), li(p('te{<>}xt')), li(p('text')))),

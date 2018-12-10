@@ -127,7 +127,6 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
                     allowRule={true}
                     allowTables={true}
                     allowHelpDialog={true}
-                    allowGapCursor={true}
                     disabled={disabled}
                     activityProvider={activityProvider}
                     mentionProvider={mentionProvider}
@@ -147,6 +146,7 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
                           packageVersion={version}
                           packageName={name}
                           key="toolbar-feedback"
+                          labels={['atlaskit-comment']}
                         />
                         <ToolbarHelp key="toolbar-help" />
                       </>

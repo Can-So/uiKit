@@ -1,5 +1,31 @@
 # @atlaskit/media-core
 
+## 24.5.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/button@10.0.0
+
+## 24.5.0
+- [minor] [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+
+  - Context.collection.removeFile has been added; occurrenceKey was added to all FileState flavours and filled as part of observable during upload;
+
+## 24.4.1
+- [patch] [705dcf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/705dcf3):
+
+  - pass collectionName to MediaStore in order to use right auth token
+
+## 24.4.0
+- [minor] [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+
+  - Allow to inline play video files in media-card
+
+## 24.3.1
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-test-helpers@18.2.11
+  - @atlaskit/media-card@42.0.0
+
 ## 24.3.0
 - [minor] Split Media + Editor cleanup part 1 [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
 

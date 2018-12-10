@@ -1,18 +1,23 @@
 import {
   setViewerPayload,
   ImageViewer as ImageViewerMock,
-} from '../../../../mocks/image-viewer';
+} from '../../mocks/_image-viewer';
 jest.mock('../../../newgen/viewers/image', () => ({
   ImageViewer: ImageViewerMock,
 }));
 
 import * as React from 'react';
+import { ReactWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
-import { mount } from 'enzyme';
 import Spinner from '@atlaskit/spinner';
 import Button from '@atlaskit/button';
 import { MediaItemType, Context } from '@atlaskit/media-core';
-import { ItemViewer, ItemViewerBase } from '../../../newgen/item-viewer';
+import {
+  ItemViewer,
+  ItemViewerBase,
+  Props as ItemViewerBaseProps,
+  State as ItemViewerBaseState,
+} from '../../../newgen/item-viewer';
 import { ErrorMessage } from '../../../newgen/error';
 import { ImageViewer } from '../../../newgen/viewers/image';
 import { VideoViewer } from '../../../newgen/viewers/video';
@@ -23,6 +28,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../../../package.json';
+import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 
 const identifier = {
   id: 'some-id',
@@ -39,7 +45,7 @@ const makeFakeContext = (observable: Observable<any>) =>
   } as any);
 
 function mountComponent(context: Context, identifier: Identifier) {
-  const el = mount(
+  const el = mountWithIntlContext(
     <ItemViewer previewCount={0} context={context} identifier={identifier} />,
   );
   const instance = el.find(ItemViewerBase).instance() as any;
@@ -49,7 +55,10 @@ function mountComponent(context: Context, identifier: Identifier) {
 function mountBaseComponent(context: Context, identifier: Identifier) {
   const createAnalyticsEventSpy = jest.fn();
   createAnalyticsEventSpy.mockReturnValue({ fire: jest.fn() });
-  const el = mount(
+  const el: ReactWrapper<
+    ItemViewerBaseProps,
+    ItemViewerBaseState
+  > = mountWithIntlContext(
     <ItemViewerBase
       createAnalyticsEvent={createAnalyticsEventSpy}
       previewCount={0}
@@ -57,7 +66,7 @@ function mountBaseComponent(context: Context, identifier: Identifier) {
       identifier={identifier}
     />,
   );
-  const instance = el.instance() as any;
+  const instance = el.instance() as ItemViewerBase;
   return { el, instance, createAnalyticsEventSpy };
 }
 
@@ -121,7 +130,7 @@ describe('<ItemViewer />', () => {
         status: 'processing',
       }),
     );
-    const el = mount(
+    const el = mountWithIntlContext(
       <ItemViewer previewCount={0} context={context} identifier={identifier} />,
     );
     el.update();
@@ -136,7 +145,7 @@ describe('<ItemViewer />', () => {
         status: 'uploading',
       }),
     );
-    const el = mount(
+    const el = mountWithIntlContext(
       <ItemViewer previewCount={0} context={context} identifier={identifier} />,
     );
     el.update();
@@ -151,7 +160,7 @@ describe('<ItemViewer />', () => {
         status: 'failed-processing',
       }),
     );
-    const el = mount(
+    const el = mountWithIntlContext(
       <ItemViewer previewCount={0} context={context} identifier={identifier} />,
     );
     el.update();
@@ -171,7 +180,7 @@ describe('<ItemViewer />', () => {
         status: 'error',
       }),
     );
-    const el = mount(
+    const el = mountWithIntlContext(
       <ItemViewer previewCount={0} context={context} identifier={identifier} />,
     );
     el.update();
@@ -345,7 +354,7 @@ describe('<ItemViewer />', () => {
       el.setProps({ context, identifier: identifier2 });
       el.update();
 
-      expect(el.instance().state.item.status).toEqual('PENDING');
+      expect(instance.state.item.status).toEqual('PENDING');
     });
   });
 

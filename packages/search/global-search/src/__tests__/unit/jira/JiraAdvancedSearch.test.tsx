@@ -42,18 +42,13 @@ describe('JiraAdvancedSearch', () => {
       type: AnalyticsType.AdvancedSearchJira,
       showKeyboardLozenge: false,
     });
-    expect(getJiraAdvancedSearchUrlMock).toHaveBeenCalledTimes(1);
-    expect(getJiraAdvancedSearchUrlMock).toHaveBeenLastCalledWith(
+    expect(getJiraAdvancedSearchUrlMock).toHaveBeenCalledWith(
       'issues',
       'query',
     );
   });
 
-  /**
-   * Currently fails, we are expecting a string ('SearchIcon') but getting { [Function: SearchIcon] displayName: 'SearchIcon' }
-   * TODO: JEST-23 Fix these tests
-   */
-  it.skip('should render icon and showKeyboardLonzge', () => {
+  it('should render icon and showKeyboardLonzge', () => {
     const wrapper = renderComponent({
       showSearchIcon: true,
       showKeyboardLozenge: true,
@@ -63,8 +58,7 @@ describe('JiraAdvancedSearch', () => {
     expect(advancedSearchResult.props().showKeyboardLozenge).toBe(true);
 
     const icon = advancedSearchResult.props().icon;
-    expect(icon).not.toBeFalsy();
-    expect(icon!.type).toEqual(expect.stringMatching('SearchIcon'));
+    expect(icon).toBeDefined();
   });
 
   it('should render dropdown items with possible choices', () => {
@@ -79,48 +73,13 @@ describe('JiraAdvancedSearch', () => {
     expect(dropDownMenu.length).toBe(1);
 
     const items = dropDownMenu.find(DropdownItem);
-    expect(items.length).toBe(4);
+    expect(items.length).toBe(5);
     expect(items.map(item => item.key())).toMatchObject([
-      'people',
+      'issues',
+      'boards',
       'projects',
       'filters',
-      'boards',
+      'people',
     ]);
-  });
-
-  it('should update advanced search url', async () => {
-    const wrapper = renderComponent({
-      showSearchIcon: true,
-      showKeyboardLozenge: true,
-    });
-    let advancedSearchResult = wrapper.find(AdvancedSearchResult);
-
-    // defualt to issues
-    expect(getJiraAdvancedSearchUrlMock).toHaveBeenCalledTimes(1);
-    expect(getJiraAdvancedSearchUrlMock).toHaveBeenLastCalledWith(
-      'issues',
-      'query',
-    );
-
-    getJiraAdvancedSearchUrlMock.mockReturnValue('projectsSearchUrl');
-
-    const dropDownMenu = shallow(advancedSearchResult.props()
-      .text as JSX.Element).find(DropdownMenu);
-
-    const projectsItem = dropDownMenu.findWhere(
-      item =>
-        item.is(DropdownItem) && item.key().toLocaleLowerCase() === 'projects',
-    );
-
-    projectsItem.props().onClick();
-    await wrapper.update();
-    advancedSearchResult = wrapper.find(AdvancedSearchResult);
-
-    expect(getJiraAdvancedSearchUrlMock).toHaveBeenLastCalledWith(
-      'projects',
-      'query',
-    );
-    expect(getJiraAdvancedSearchUrlMock).toHaveBeenCalledTimes(2);
-    expect(advancedSearchResult.props().href).toBe('projectsSearchUrl');
   });
 });

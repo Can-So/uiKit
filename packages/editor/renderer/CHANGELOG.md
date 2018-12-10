@@ -1,5 +1,195 @@
 # @atlaskit/renderer
 
+## 31.1.2
+- [patch] [0623610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0623610):
+
+  - Display media singles with video inside as inline video player
+
+## 31.1.1
+- [patch] [232238c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/232238c):
+
+  - ED-5866: Turn off lazy loading for images on mobile.
+
+## 31.1.0
+- [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
+
+  - ED-3890 Adds Indentation support on paragraphs and headings
+
+## 31.0.7
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/code@8.2.1
+  - @atlaskit/field-range@5.0.11
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/editor-common@22.2.3
+  - @atlaskit/mention@15.1.7
+  - @atlaskit/status@0.2.8
+  - @atlaskit/task-decision@11.0.7
+  - @atlaskit/smart-card@9.0.2
+  - @atlaskit/profilecard@6.1.1
+  - @atlaskit/theme@7.0.0
+
+## 31.0.6
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
+## 31.0.5
+- [patch] [4c0c2a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c0c2a0):
+
+  - Fix Cards throwing Error when client is not provided.
+
+## 31.0.4
+- Updated dependencies [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+  - @atlaskit/editor-test-helpers@6.2.22
+  - @atlaskit/smart-card@9.0.0
+
+## 31.0.3
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/smart-card@8.8.5
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/editor-common@22.0.2
+  - @atlaskit/editor-test-helpers@6.2.21
+  - @atlaskit/mention@15.1.3
+  - @atlaskit/status@0.2.6
+  - @atlaskit/task-decision@11.0.6
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-filmstrip@19.0.2
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/profilecard@6.0.3
+  - @atlaskit/icon@15.0.0
+
+## 31.0.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/analytics-listeners@4.1.1
+  - @atlaskit/task-decision@11.0.5
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/media-filmstrip@19.0.1
+  - @atlaskit/smart-card@8.8.4
+  - @atlaskit/profilecard@6.0.2
+  - @atlaskit/field-range@5.0.9
+  - @atlaskit/button@10.0.0
+
+## 31.0.1
+- [patch] [1c42021](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c42021):
+
+  - ED-5775: fix columns collapsing in renderer
+
+## 31.0.0
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/media-filmstrip@19.0.0
+  - @atlaskit/editor-json-transformer@4.0.22
+  - @atlaskit/editor-test-helpers@6.2.19
+  - @atlaskit/task-decision@11.0.4
+  - @atlaskit/util-data-test@10.0.21
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 30.3.2
+- [patch] [030007e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/030007e):
+
+  - ED-5776: fix number column when first column is resized
+
+## 30.3.1
+- [patch] [f2cb9d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f2cb9d9):
+
+  - ED-5785: fix number column when header row is enabled
+
+## 30.3.0
+- [minor] [1e5cd32](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e5cd32):
+
+  - Make layouts stack on small screens
+
+## 30.2.1
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/editor-common@21.2.2
+  - @atlaskit/profilecard@6.0.0
+
+## 30.2.0
+- [minor] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
+## 30.1.1
+- [patch] [b19b7bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b19b7bb):
+
+  - ED-5721 Adds support for rendering optional content
+
+  Renderer can now handle empty headings, actions & decisions
+
+## 30.1.0
+- [minor] [b440439](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b440439):
+
+  - Add breakout mark to editor, renderer and adf-utils
+
+## 30.0.1
+- [patch] [26027dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/26027dd):
+
+  - Upgrade react syntax highlighter to version that ships its own async loaded languages and supports SSR
+
+## 30.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/media-filmstrip@18.0.0
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/task-decision@11.0.2
+  - @atlaskit/util-data-test@10.0.20
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+
+## 29.5.2
+- [patch] [f6c3f01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6c3f01):
+
+  - ED-5586: Removes padding from editor and renderer for mobile.
+
+## 29.5.1
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/editor-common@20.3.7
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-filmstrip@17.0.2
+  - @atlaskit/media-test-helpers@18.2.11
+  - @atlaskit/media-card@42.0.0
+
+## 29.5.0
+- [minor] [ed15858](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ed15858):
+
+  - ED-5552: Adds shadow to overflow elements in the renderer.
+
+## 29.4.0
+- [minor] [abef80b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abef80b):
+
+  - ED-5527: apply max-width: 100% and pass container size to Card as dimension
+
+## 29.3.1
+- Updated dependencies [a6dd6e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6dd6e3):
+  - @atlaskit/editor-common@20.3.1
+  - @atlaskit/profilecard@5.0.0
+
+## 29.3.0
+- [minor] [d793999](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d793999):
+
+  - ED-5583: Add support for more EventHandlers in the renderer
+
+  * Added event handlers for `Link` mark, `BlockCard` node and `InlineCard` node.
+  * Removed `applicationCard` event handlers as this node no longer exists in the renderer.
+
+## 29.2.2
+- [patch] [f3d067d"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f3d067d"
+d):
+
+  - Fix font size for numbered column in tables with dynamic text sizing
+
 ## 29.2.1
 - [patch] [8636991"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8636991"

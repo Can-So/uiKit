@@ -122,14 +122,6 @@ describe('modal-dialog', () => {
         expect(spy).toHaveBeenCalledTimes(1);
       });
 
-      it('should trigger when blanket clicked below dialog (modalPositioner)', () => {
-        const spy = jest.fn();
-        const wrapper = mount(<ModalDialog onClose={spy} />);
-
-        wrapper.find(Positioner).simulate('click');
-        expect(spy).toHaveBeenCalledTimes(1);
-      });
-
       it('should not trigger when blanket content clicked', () => {
         const spy = jest.fn();
         const wrapper = mount(
@@ -149,6 +141,7 @@ describe('modal-dialog', () => {
       const CustomBody = ({ innerRef }: { innerRef: Function }) => {
         innerRef({
           addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
           clientHeight: 200,
           scrollHeight: 100,
           scrollTop: 10,
@@ -165,6 +158,7 @@ describe('modal-dialog', () => {
       const CustomBody = ({ innerRef }: { innerRef: Function }) => {
         innerRef({
           addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
           clientHeight: 100,
           scrollHeight: 200,
           scrollTop: 0,
@@ -278,6 +272,16 @@ test('no transform is applied to content', () => {
   wrapper.update();
   const style = wrapper.find(Positioner).prop('style');
   expect(style.transform).toEqual(null);
+});
+
+test('should throw deprecation error when using a function for auto focus', () => {
+  const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  expect(() =>
+    mount(<ModalDialog autoFocus={() => document.createElement('div')} />),
+  ).toThrowError();
+  expect(spy).toHaveBeenCalled();
+  // needed otherwise global no console check will fail
+  jest.resetAllMocks();
 });
 
 describe('ModalDialog', () => {

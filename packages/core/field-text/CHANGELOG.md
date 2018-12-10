@@ -1,5 +1,29 @@
 # @atlaskit/field-text
 
+## 7.0.17
+- [patch] [48640fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/48640fb):
+
+  - FS-3227 - Prevent status popup focus from scrolling editor
+
+## 7.0.16
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/field-base@11.0.12
+  - @atlaskit/theme@7.0.0
+
+## 7.0.15
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 7.0.14
+- [patch] [17dde74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/17dde74):
+
+  - Update TypeScript TD (Add isValidationHidden field)
+
 ## 7.0.13
 - [patch] [4035588"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4035588"

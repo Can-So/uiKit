@@ -10,7 +10,6 @@ export {
   toJSON as linkToJSON,
 } from './link';
 export { emojiQuery } from './emoji-query';
-export { mentionQuery } from './mention-query';
 export { typeAheadQuery } from './type-ahead-query';
 export { subsup, SubSupDefinition, SubSupAttributes } from './subsup';
 export {
@@ -27,3 +26,19 @@ export {
   ActionMarkAttributes,
   ActionDefinition,
 } from './action';
+export {
+  breakout,
+  BreakoutMarkAttrs,
+  BreakoutMarkDefinition,
+} from './breakout';
+export {
+  alignment,
+  alignmentPositionMap,
+  AlignmentAttributes,
+  AlignmentMarkDefinition,
+} from './alignment';
+export {
+  indentation,
+  IndentationMarkAttributes,
+  IndentationMarkDefinition,
+} from './indentation';

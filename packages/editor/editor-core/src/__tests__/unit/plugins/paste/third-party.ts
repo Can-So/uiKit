@@ -9,6 +9,8 @@ import googleTextPlain from './__third-party__/google-docs/text/plain';
 import msWordTextHTML from './__third-party__/microsoft-word/text/html';
 import msWordTextPlain from './__third-party__/microsoft-word/text/plain';
 import reactSyntaxHighlighterHTML from './__third-party__/react-syntax-highlighter/text/html';
+import vsCodeMultiLine from './__third-party__/vs-code/multi-line/html';
+import vsCodeSingleLine from './__third-party__/vs-code/single-line/html';
 
 import { toJSON } from '../../../../utils';
 import {
@@ -67,13 +69,31 @@ describe('paste plugin: third-party', () => {
     expect(toJSON(editorView.state.doc)).toMatchDocSnapshot();
   });
 
-  it('should handle pasting content from Microsoft Word', () => {
-    const { editorView } = editor(doc(p('')));
-    dispatchPasteEvent(editorView, {
+  describe('`Microsoft Word`: ', () => {
+    const blob = dataURItoBlob(smallImage);
+    const image = new File([blob], 'image.png', { type: 'image/png' });
+    const eventPayload = {
       html: msWordTextHTML,
       plain: msWordTextPlain,
+      files: [image],
+      types: ['Files', 'text/plain', 'text/html'],
+    };
+
+    it('should handle pasting content', () => {
+      const { editorView } = editor(doc(p('')));
+
+      dispatchPasteEvent(editorView, eventPayload);
+
+      expect(toJSON(editorView.state.doc)).toMatchDocSnapshot();
     });
-    expect(toJSON(editorView.state.doc)).toMatchDocSnapshot();
+
+    it('should ignore image on clipboard', () => {
+      const { editorView } = editor(doc(p('')));
+
+      const event = dispatchPasteEvent(editorView, eventPayload) as CustomEvent;
+
+      expect(event.cancelBubble).toBe(true);
+    });
   });
 
   it('should handle pasting content using react-syntax-highlighter', () => {
@@ -84,18 +104,21 @@ describe('paste plugin: third-party', () => {
     expect(toJSON(editorView.state.doc)).toMatchDocSnapshot();
   });
 
-  it('should ignore image on clipboard when pasting content from Microsoft Word', () => {
+  it('should convert multiple lines to a code-block when pasting content from Visual Studio Code', () => {
     const { editorView } = editor(doc(p('')));
-    const blob = dataURItoBlob(smallImage);
-    const image = new File([blob], 'image.png', { type: 'image/png' });
+    dispatchPasteEvent(editorView, {
+      html: vsCodeMultiLine,
+    });
 
-    const event = dispatchPasteEvent(editorView, {
-      html: msWordTextHTML,
-      plain: msWordTextPlain,
-      files: [image],
-      types: ['Files', 'text/plain', 'text/html'],
-    }) as CustomEvent;
+    expect(toJSON(editorView.state.doc)).toMatchDocSnapshot();
+  });
 
-    expect(event.cancelBubble).toBe(true);
+  it('should convert single line to a code mark when pasting content from Visual Studio Code', () => {
+    const { editorView } = editor(doc(p('')));
+    dispatchPasteEvent(editorView, {
+      html: vsCodeSingleLine,
+    });
+
+    expect(toJSON(editorView.state.doc)).toMatchDocSnapshot();
   });
 });

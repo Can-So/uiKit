@@ -60,62 +60,64 @@ export default class Toolbar extends Component<Props> {
         hasCompactLeftPadding={firstElementIsSelect}
       >
         <ButtonGroup>
-          {items.filter(item => !item.hidden).map((item, idx) => {
-            switch (item.type) {
-              case 'button':
-                const ButtonIcon = item.icon;
-                return (
-                  <Button
-                    key={idx}
-                    title={item.title}
-                    icon={<ButtonIcon label={item.title} />}
-                    appearance={item.appearance}
-                    onClick={() => dispatchCommand(item.onClick)}
-                    onMouseEnter={() => dispatchCommand(item.onMouseEnter)}
-                    onMouseLeave={() => dispatchCommand(item.onMouseLeave)}
-                    selected={item.selected}
-                    disabled={item.disabled}
-                  />
-                );
+          {items
+            .filter(item => !item.hidden)
+            .map((item, idx) => {
+              switch (item.type) {
+                case 'button':
+                  const ButtonIcon = item.icon;
+                  return (
+                    <Button
+                      key={idx}
+                      title={item.title}
+                      icon={<ButtonIcon label={item.title} />}
+                      appearance={item.appearance}
+                      onClick={() => dispatchCommand(item.onClick)}
+                      onMouseEnter={() => dispatchCommand(item.onMouseEnter)}
+                      onMouseLeave={() => dispatchCommand(item.onMouseLeave)}
+                      selected={item.selected}
+                      disabled={item.disabled}
+                    />
+                  );
 
-              case 'dropdown':
-                const DropdownIcon = item.icon;
-                return (
-                  <Dropdown
-                    key={idx}
-                    title={item.title}
-                    icon={<DropdownIcon label={item.title} />}
-                    dispatchCommand={dispatchCommand}
-                    options={item.options}
-                    hideExpandIcon={item.hideExpandIcon}
-                    mountPoint={popupsMountPoint}
-                    boundariesElement={popupsBoundariesElement}
-                    scrollableElement={popupsScrollableElement}
-                  />
-                );
+                case 'dropdown':
+                  const DropdownIcon = item.icon;
+                  return (
+                    <Dropdown
+                      key={idx}
+                      title={item.title}
+                      icon={<DropdownIcon label={item.title} />}
+                      dispatchCommand={dispatchCommand}
+                      options={item.options}
+                      hideExpandIcon={item.hideExpandIcon}
+                      mountPoint={popupsMountPoint}
+                      boundariesElement={popupsBoundariesElement}
+                      scrollableElement={popupsScrollableElement}
+                    />
+                  );
 
-              case 'select':
-                return (
-                  <Select
-                    key={idx}
-                    dispatchCommand={dispatchCommand}
-                    options={item.options}
-                    hideExpandIcon={item.hideExpandIcon}
-                    mountPoint={popupsMountPoint}
-                    boundariesElement={popupsBoundariesElement}
-                    scrollableElement={popupsScrollableElement}
-                    defaultValue={item.defaultValue}
-                    placeholder={item.placeholder}
-                    onChange={(selected: SelectOption) =>
-                      dispatchCommand(item.onChange(selected))
-                    }
-                  />
-                );
+                case 'select':
+                  return (
+                    <Select
+                      key={idx}
+                      dispatchCommand={dispatchCommand}
+                      options={item.options}
+                      hideExpandIcon={item.hideExpandIcon}
+                      mountPoint={popupsMountPoint}
+                      boundariesElement={popupsBoundariesElement}
+                      scrollableElement={popupsScrollableElement}
+                      defaultValue={item.defaultValue}
+                      placeholder={item.placeholder}
+                      onChange={(selected: SelectOption) =>
+                        dispatchCommand(item.onChange(selected))
+                      }
+                    />
+                  );
 
-              case 'separator':
-                return <Separator key={idx} />;
-            }
-          })}
+                case 'separator':
+                  return <Separator key={idx} />;
+              }
+            })}
         </ButtonGroup>
       </ToolbarContainer>
     );

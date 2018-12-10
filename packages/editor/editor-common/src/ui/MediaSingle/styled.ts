@@ -1,14 +1,13 @@
 import * as React from 'react';
+import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-// @ts-ignore: unused variable
-// prettier-ignore
-import { HTMLAttributes, ClassAttributes } from 'react';
 import { MediaSingleLayout } from '../../schema';
 import {
-  akEditorFullPageMaxWidth,
   akEditorWideLayoutWidth,
+  akEditorFullPageMaxWidth,
   akEditorBreakoutPadding,
 } from '../../styles';
+import { calcWideWidth } from '../../utils';
 
 function float(layout: MediaSingleLayout): string {
   switch (layout) {
@@ -21,10 +20,17 @@ function float(layout: MediaSingleLayout): string {
   }
 }
 
-function calcWidth(
+/**
+ * Calculates the image width for non-resized images.
+ *
+ * If an image has not been resized using the pctWidth attribute,
+ * then an image in wide or full-width can not be wider than the image's
+ * original width.
+ */
+function calcLegacyWidth(
   layout: MediaSingleLayout,
   width: number,
-  containerWidth?: number,
+  containerWidth: number = 0,
 ): string {
   switch (layout) {
     case 'wrap-right':
@@ -33,12 +39,28 @@ function calcWidth(
         ? 'calc(50% - 12px)'
         : `${width}px`;
     case 'wide':
-      return `${Math.min(akEditorWideLayoutWidth, width)}px`;
+      return calcWideWidth(containerWidth);
     case 'full-width':
-      return `${Math.min(width, containerWidth || 0) -
-        akEditorBreakoutPadding}px`;
+      return `${Math.min(width, containerWidth) - akEditorBreakoutPadding}px`;
     default:
       return width > akEditorFullPageMaxWidth ? '100%' : `${width}px`;
+  }
+}
+
+/**
+ * Calculates the image width for previously resized images.
+ *
+ * Wide and full-width images are always that size (960px and 100%); there is
+ * no distinction between max-width and width.
+ */
+function calcResizedWidth(layout: MediaSingleLayout, width: number) {
+  switch (layout) {
+    case 'wide':
+      return `${akEditorWideLayoutWidth}px`;
+    case 'full-width':
+      return '100%';
+    default:
+      return `${width}px`;
   }
 }
 
@@ -49,6 +71,7 @@ function calcMaxWidth(
 ) {
   switch (layout) {
     case 'wide':
+      return calcWideWidth(containerWidth);
     case 'full-width':
       return containerWidth < akEditorFullPageMaxWidth
         ? '100%'
@@ -89,7 +112,9 @@ export const MediaSingleDimensionHelper = ({
   containerWidth = 0,
   pctWidth,
 }: WrapperProps) => css`
-  width: ${pctWidth ? `${width}px` : calcWidth(layout, width, containerWidth)};
+  width: ${pctWidth
+    ? calcResizedWidth(layout, width)
+    : calcLegacyWidth(layout, width, containerWidth)};
   max-width: ${calcMaxWidth(layout, width, containerWidth)};
   float: ${float(layout)};
   margin: ${calcMargin(layout)};
@@ -108,7 +133,7 @@ const Wrapper: React.ComponentClass<
   &::after {
     content: '';
     display: block;
-    padding-bottom: ${p => p.height / p.width * 100}%;
+    padding-bottom: ${p => (p.height / p.width) * 100}%;
   }
 
   & > div {

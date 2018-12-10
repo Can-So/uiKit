@@ -254,8 +254,8 @@ describe('EmojiRepository', () => {
 
         emojiRepository.used(greenHeart);
 
-        // usage is recorded asynchronously so give it a chance to happen by running the asserts with setTimeout
-        setTimeout(() => {
+        // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
+        window.setTimeout(() => {
           const nextResult: EmojiDescription[] = emojiRepository.search(':hear')
             .emojis;
           heartIndex = nextResult.indexOf(heart);
@@ -560,8 +560,8 @@ describe('EmojiRepository', () => {
       } else {
         repository.used(heart);
 
-        // usage is recorded asynchronously so give it a chance to happen by running the asserts with setTimeout
-        setTimeout(() => {
+        // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
+        window.setTimeout(() => {
           expect(repository.getDynamicCategoryList()).to.deep.equal([
             'FREQUENT',
           ]);
@@ -586,8 +586,8 @@ describe('EmojiRepository', () => {
       const emojiRepository = newEmojiRepository();
       emojiRepository.used(thumbsupEmoji);
 
-      // usage is recorded asynchronously so give it a chance to happen by running the asserts with setTimeout
-      setTimeout(() => {
+      // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
+      window.setTimeout(() => {
         let emoji = emojiRepository.getFrequentlyUsed({ skinTone: 4 });
         expect(emoji).to.have.lengthOf(1);
         expect(emoji[0].shortName).to.equal(
@@ -617,8 +617,8 @@ describe('EmojiRepository', () => {
       const emojiRepository = newEmojiRepository();
       emojiRepository.used(thumbsupEmoji);
 
-      // usage is recorded asynchronously so give it a chance to happen by running the asserts with setTimeout
-      setTimeout(() => {
+      // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
+      window.setTimeout(() => {
         const thumbsUp = emojiRepository.findByShortName(':thumbsup:');
         expect(thumbsUp!.category).to.equal('PEOPLE');
 

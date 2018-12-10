@@ -68,6 +68,9 @@ export default createSchema({
     'typeAheadQuery',
     'textColor',
     'confluenceInlineComment',
+    'breakout',
+    'alignment',
+    'indentation',
   ],
   customNodeSpecs: {
     plain: { ...paragraph, content: 'text*', marks: '' },

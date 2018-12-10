@@ -1,10 +1,19 @@
 import { ABTest } from '../api/CrossProductSearchClient';
+import { FormattedMessage } from 'react-intl';
 
 export enum ResultType {
   JiraObjectResult = 'jira-object-result',
+  JiraProjectResult = 'jira-project-result',
   GenericContainerResult = 'generic-container-result',
   PersonResult = 'person-result',
   ConfluenceObjectResult = 'confluence-object-result',
+}
+
+export enum JiraProjectType {
+  Software = 'software',
+  ServiceDesk = 'service_desk',
+  Business = 'business',
+  Ops = 'ops',
 }
 
 export interface Result {
@@ -24,6 +33,7 @@ export interface Result {
   // optional id for the experiment that generated this result
   experimentId?: string;
   contentType: ContentType;
+  key?: string;
 }
 /**
  * Map of String keys and Array of results value, but can be empty as well
@@ -64,13 +74,14 @@ export interface ConfluenceObjectResult extends Result {
 export type ResultsGroup = {
   items: Result[];
   key: string;
-  titleI18nId: string;
+  title: FormattedMessage.MessageDescriptor;
 };
 
 export interface JiraResult extends Result {
   objectKey?: string;
   containerName?: string;
-  resultType: ResultType.JiraObjectResult;
+  projectType?: JiraProjectType;
+  resultType: ResultType.JiraObjectResult | ResultType.JiraProjectResult;
   contentType: ContentType;
 }
 

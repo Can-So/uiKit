@@ -1,5 +1,107 @@
 # @atlaskit/global-navigation
 
+## 5.3.7
+- [patch] [bee7762](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bee7762):
+
+  - Fixes a double scrollbar issue that happens on windows when connected to a mouse
+
+## 5.3.6
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/blanket@7.0.11
+  - @atlaskit/button@10.0.4
+  - @atlaskit/drawer@2.5.4
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/field-radio-group@4.0.13
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/navigation-next@4.0.8
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/toggle@5.0.13
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/badge@9.2.1
+
+## 5.3.5
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/drawer@2.5.3
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/field-radio-group@4.0.12
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/navigation-next@4.0.7
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/toggle@5.0.12
+  - @atlaskit/icon@15.0.0
+
+## 5.3.4
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/blanket@7.0.10
+  - @atlaskit/drawer@2.5.2
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/field-radio-group@4.0.11
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/navigation-next@4.0.6
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/toggle@5.0.11
+  - @atlaskit/analytics-listeners@4.1.1
+  - @atlaskit/button@10.0.0
+
+## 5.3.3
+- [patch] [4d9040d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4d9040d):
+
+  - Uses the latest version of @atlaskit/drawer
+
+## 5.3.2
+- Updated dependencies [8e753fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e753fc):
+  - @atlaskit/navigation-next@4.0.0
+
+## 5.3.1
+- [patch] [3e7125a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3e7125a):
+
+  - Fixes a bug that prevented the notification badge from clearing when the notification drawer is opened.
+
+## 5.3.0
+- [minor] [ffb0d5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ffb0d5a):
+
+  - Support global navigation drawer widths
+
+## 5.2.1
+- [patch] [ad45749](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad45749):
+
+  - Update flow types to use object spread instead of intersection and reference GlobalItem via ElementConfig rather than its props directly
+
+## 5.2.0
+- [minor] [0d4946e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0d4946e):
+
+  - Adds badgeCount to the analytics event that's fired when notification icon is clicked
+
+## 5.1.2
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 5.1.1
+- [patch] [d427e8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d427e8a):
+
+  - Adds tests to global-navigation. Removes a bit of dead code
+
+## 5.1.0
+- [minor] [96a854f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/96a854f):
+
+  - This release makes the notification icon and badge a built-in into global-navigation. Introduces 4 new props which let the products configure the notification.
+
 ## 5.0.5
 - [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
 

@@ -1,86 +1,32 @@
-import { NodeSpec, Node as PMNode } from 'prosemirror-model';
+import { NodeSpec, Node as PMNode, Schema, Fragment } from 'prosemirror-model';
 import { browser } from '../../utils';
 import { TextDefinition as Text } from './text';
-import { NoMark } from './doc';
+import { NoMark, MarksObject } from './doc';
+import { BreakoutMarkDefinition } from '../marks/breakout';
 
 /**
  * @name codeBlock_node
  */
-export interface CodeBlockDefinition {
+export type CodeBlockBaseDefinition = {
   type: 'codeBlock';
   content?: Array<Text & NoMark>;
+  marks?: Array<any>;
   attrs?: {
-    language?:
-      | 'abap'
-      | 'actionscript'
-      | 'ada'
-      | 'arduino'
-      | 'autoit'
-      | 'c'
-      | 'c++'
-      | 'clojure'
-      | 'coffeescript'
-      | 'csharp'
-      | 'css'
-      | 'cuda'
-      | 'd'
-      | 'dart'
-      | 'delphi'
-      | 'elixir'
-      | 'erlang'
-      | 'fortran'
-      | 'foxpro'
-      | 'go'
-      | 'groovy'
-      | 'haskell'
-      | 'haxe'
-      | 'html'
-      | 'java'
-      | 'javascript'
-      | 'json'
-      | 'julia'
-      | 'kotlin'
-      | 'latex'
-      | 'livescript'
-      | 'lua'
-      | 'mathematica'
-      | 'matlab'
-      | 'objective-c'
-      | 'objective-j'
-      | 'objectpascal'
-      | 'ocaml'
-      | 'octave'
-      | 'perl'
-      | 'php'
-      | 'powershell'
-      | 'prolog'
-      | 'puppet'
-      | 'python'
-      | 'qml'
-      | 'r'
-      | 'racket'
-      | 'restructuredtext'
-      | 'ruby'
-      | 'rust'
-      | 'sass'
-      | 'scala'
-      | 'scheme'
-      | 'shell'
-      | 'smalltalk'
-      | 'sql'
-      | 'standardml'
-      | 'swift'
-      | 'tcl'
-      | 'tex'
-      | 'typescript'
-      | 'vala'
-      | 'vbnet'
-      | 'verilog'
-      | 'vhdl'
-      | 'xml'
-      | 'xquery';
+    language?: string;
   };
-}
+};
+
+/**
+ * @name codeBlock_with_no_marks_node
+ */
+export type CodeBlockDefinition = CodeBlockBaseDefinition & NoMark;
+
+/**
+ * @name codeBlock_with_marks_node
+ * @stage 0
+ */
+export type CodeBlockWithMarksDefinition = CodeBlockBaseDefinition &
+  MarksObject<BreakoutMarkDefinition>;
 
 const getLanguageFromEditorStyle = (dom: HTMLElement): string | undefined => {
   return dom.getAttribute('data-language') || undefined;
@@ -155,6 +101,15 @@ export const codeBlock: NodeSpec = {
           return {};
         }
         return false;
+      },
+      // @see ED-5682
+      getContent: (dom: HTMLElement, schema: Schema) => {
+        const code = Array.from(dom.children)
+          .map(child => child.textContent)
+          // tslint:disable-next-line:triple-equals
+          .filter(x => x != undefined)
+          .join('\n');
+        return code ? Fragment.from(schema.text(code)) : Fragment.empty;
       },
     },
     // Handle GitHub/Gist paste

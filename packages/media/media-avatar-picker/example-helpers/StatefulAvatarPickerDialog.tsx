@@ -34,7 +34,7 @@ export default class StatefulAvatarPickerDialog extends React.Component<
   timeoutId: number = 0;
 
   state = {
-    isOpen: true,
+    isOpen: false,
     imagePreviewSource: '',
     isLoading: false,
   };
@@ -58,7 +58,7 @@ export default class StatefulAvatarPickerDialog extends React.Component<
       },
       () => {
         // Fake "uploading" call by adding a delay
-        this.timeoutId = setTimeout(() => {
+        this.timeoutId = window.setTimeout(() => {
           this.setState({
             imagePreviewSource: dataURI,
             isOpen: false,

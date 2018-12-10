@@ -34,7 +34,7 @@ export default function MediaSingle({
     );
 
     // scale, keeping aspect ratio
-    height = height / width * pxWidth;
+    height = (height / width) * pxWidth;
     width = pxWidth;
   }
 

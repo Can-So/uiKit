@@ -10,10 +10,6 @@ export const headingsSharedStyles = css`
     font-size: 1.714em;
     margin-top: 2.857em;
     margin-bottom: 0;
-
-    &:first-child {
-      margin-top: 0;
-    }
   }
 
   & h2 {
@@ -21,10 +17,6 @@ export const headingsSharedStyles = css`
     font-size: 1.43em;
     margin-top: 2.571em;
     margin-bottom: 0;
-
-    &:first-child {
-      margin-top: 0;
-    }
   }
 
   & h3 {
@@ -32,39 +24,23 @@ export const headingsSharedStyles = css`
     font-size: 1.142em;
     margin-top: 2.585em;
     margin-bottom: 0;
-
-    &:first-child {
-      margin-top: 0;
-    }
   }
 
   & h4 {
     line-height: 1.428;
     font-size: 1em;
     margin-top: 1.714em;
-
-    &:first-child {
-      margin-top: 0;
-    }
   }
 
   & h5 {
     line-height: 1.333;
     font-size: 0.857em;
     margin-top: 1.43em;
-
-    &:first-child {
-      margin-top: 0;
-    }
   }
 
   & h6 {
     line-height: 1.454;
     font-size: 0.785em;
     margin-top: 1.42em;
-
-    &:first-child {
-      margin-top: 0;
-    }
   }
 `;

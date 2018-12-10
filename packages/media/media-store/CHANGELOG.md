@@ -1,5 +1,20 @@
 # @atlaskit/media-store
 
+## 8.4.0
+- [minor] [602eaec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/602eaec):
+
+  - Media store object now has removeCollectionFile method; uploadFile third argument (UploadFileCallbacks) onId now will be supplied with occurrenceKey as second argument;
+
+## 8.3.1
+- [patch] [705dcf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/705dcf3):
+
+  - pass collectionName to MediaStore in order to use right auth token
+
+## 8.3.0
+- [minor] [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+
+  - Allow to inline play video files in media-card
+
 ## 8.2.0
 - [minor] Split Media + Editor cleanup part 1 [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
 

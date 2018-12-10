@@ -10,6 +10,7 @@ import {
   tr,
   td,
   tdCursor,
+  tdEmpty,
   decisionList,
   decisionItem,
   taskList,
@@ -66,17 +67,27 @@ describe('gap-cursor', () => {
   const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
   const temporaryFileId = `temporary:${randomId()}`;
 
+  const cursorIfSelected = (selected?: boolean) => (selected ? '{<>}' : '');
+
   const blockNodes = {
-    code_block: code_block({ language: 'java' })('{<>}'),
-    panel: panel()(p('{<>}')),
-    table: table()(tr(tdCursor)),
-    decisionList: decisionList({ localId: 'test' })(
-      decisionItem({ localId: 'test' })('{<>}'),
-    ),
-    taskList: taskList({ localId: 'test' })(
-      taskItem({ localId: 'test' })('{<>}'),
-    ),
-    bodiedExtension: bodiedExtension(extensionAttrs)(p('{<>}')),
+    code_block: (opts: { id?: string; selected?: boolean } = {}) =>
+      code_block({ language: 'java', uniqueId: opts.id })(
+        cursorIfSelected(opts.selected),
+      ),
+    panel: (opts: { id?: string; selected?: boolean } = {}) =>
+      panel({ localId: opts.id })(p(cursorIfSelected(opts.selected))),
+    table: (opts: { selected?: boolean } = {}) =>
+      table()(tr(opts.selected ? tdCursor : tdEmpty)),
+    decisionList: (opts: { id?: string; selected?: boolean } = {}) =>
+      decisionList({ localId: opts.id })(
+        decisionItem({ localId: opts.id })(cursorIfSelected(opts.selected)),
+      ),
+    taskList: (opts: { id?: string; selected?: boolean } = {}) =>
+      taskList({ localId: opts.id })(
+        taskItem({ localId: opts.id })(cursorIfSelected(opts.selected)),
+      ),
+    bodiedExtension: (opts: { selected?: boolean } = {}) =>
+      bodiedExtension(extensionAttrs)(p(cursorIfSelected(opts.selected))),
   };
 
   const leafBlockNodes = {
@@ -102,24 +113,64 @@ describe('gap-cursor', () => {
   };
 
   describe('when block nodes do not allow gap cursor', () => {
-    it('should not create a GapCursor selection for paragraph', () => {
-      const { editorView } = editor(doc(p('{<>}')));
-      sendKeyToPm(editorView, 'ArrowLeft');
-      expect(editorView.state.selection instanceof TextSelection).toBe(true);
-      editorView.destroy();
+    describe('on specific nodes', () => {
+      it('should not create a GapCursor selection for paragraph', () => {
+        const { editorView } = editor(doc(p('{<>}')));
+        sendKeyToPm(editorView, 'ArrowLeft');
+        expect(editorView.state.selection instanceof TextSelection).toBe(true);
+        editorView.destroy();
+      });
+      it('should not create a GapCursor selection for heading', () => {
+        const { editorView } = editor(doc(h1('{<>}')));
+        sendKeyToPm(editorView, 'ArrowLeft');
+        expect(editorView.state.selection instanceof TextSelection).toBe(true);
+        editorView.destroy();
+      });
+      it('should not create a GapCursor selection for blockquote', () => {
+        const { editorView } = editor(doc(blockquote(p('{<>}'))));
+        sendKeyToPm(editorView, 'ArrowLeft');
+        expect(editorView.state.selection instanceof TextSelection).toBe(true);
+        editorView.destroy();
+      });
     });
-    it('should not create a GapCursor selection for heading', () => {
-      const { editorView } = editor(doc(h1('{<>}')));
-      sendKeyToPm(editorView, 'ArrowLeft');
-      expect(editorView.state.selection instanceof TextSelection).toBe(true);
-      editorView.destroy();
-    });
-    it('should not create a GapCursor selection for blockquote', () => {
-      const { editorView } = editor(doc(blockquote(p('{<>}'))));
-      sendKeyToPm(editorView, 'ArrowLeft');
-      expect(editorView.state.selection instanceof TextSelection).toBe(true);
-      editorView.destroy();
-    });
+
+    describe('when selection moving to preceding block node', () =>
+      Object.keys(blockNodes).forEach(nodeName =>
+        describe(nodeName, () =>
+          it(`should create TextSelection on preceding ${nodeName}`, () => {
+            const { editorView } = editor(
+              doc(
+                blockNodes[nodeName](),
+                blockNodes[nodeName]({ selected: true }),
+              ),
+            );
+            sendKeyToPm(editorView, 'ArrowUp');
+            expect(editorView.state.selection instanceof TextSelection).toBe(
+              true,
+            );
+            editorView.destroy();
+          }),
+        ),
+      ));
+
+    describe('when selection moving to following block node', () =>
+      Object.keys(blockNodes).forEach(nodeName =>
+        describe(nodeName, () =>
+          it(`should create TextSelection on following ${nodeName}`, () => {
+            const { editorView } = editor(
+              doc(
+                blockNodes[nodeName]({ selected: true }),
+                blockNodes[nodeName](),
+              ),
+            );
+            sendKeyToPm(editorView, 'ArrowDown');
+            expect(editorView.state.selection instanceof TextSelection).toBe(
+              true,
+            );
+            editorView.destroy();
+          }),
+        ),
+      ));
   });
 
   describe('when block nodes allow gap cursor', () => {
@@ -129,7 +180,7 @@ describe('gap-cursor', () => {
           Object.keys(blockNodes).forEach(nodeName => {
             describe(nodeName, () => {
               it('should set GapCursorSelection', () => {
-                const { editorView } = editor(doc(blockNodes[nodeName]));
+                const { editorView } = editor(doc(blockNodes[nodeName]()));
                 sendKeyToPm(editorView, direction);
                 expect(
                   editorView.state.selection instanceof GapCursorSelection,
@@ -172,13 +223,14 @@ describe('gap-cursor', () => {
           });
         });
       });
+
       describe('when cursor is after a block node', () => {
         describe(`when pressing Backspace`, () => {
           Object.keys(blockNodes).forEach(nodeName => {
             describe(nodeName, () => {
               it(`should delete the ${nodeName}`, () => {
                 const { editorView, refs } = editor(
-                  doc(blockNodes[nodeName], '{pos}'),
+                  doc(blockNodes[nodeName](), '{pos}'),
                 );
                 setGapCursorSelection(editorView, refs.pos, Side.RIGHT);
                 sendKeyToPm(editorView, 'Backspace');
@@ -217,7 +269,7 @@ describe('gap-cursor', () => {
             describe(nodeName, () => {
               it(`should delete the ${nodeName}`, () => {
                 const { editorView, refs } = editor(
-                  doc('{pos}', blockNodes[nodeName]),
+                  doc('{pos}', blockNodes[nodeName]()),
                 );
                 setGapCursorSelection(editorView, refs.pos, Side.LEFT);
                 sendKeyToPm(editorView, 'Delete');
@@ -250,6 +302,26 @@ describe('gap-cursor', () => {
         });
       });
     });
+
+    ['ArrowLeft', 'ArrowUp'].forEach(direction =>
+      describe(`when pressing ${direction}`, () =>
+        describe('when cursor is inside first content block node of document', () =>
+          Object.keys(blockNodes).forEach(nodeName =>
+            describe(nodeName, () =>
+              it('should set GapCursorSelection', () => {
+                const { editorView } = editor(doc(blockNodes[nodeName]()));
+                sendKeyToPm(editorView, direction);
+                expect(
+                  editorView.state.selection instanceof GapCursorSelection,
+                ).toBe(true);
+                expect(
+                  (editorView.state.selection as GapCursorSelection).side,
+                ).toEqual(Side.LEFT);
+                editorView.destroy();
+              }),
+            ),
+          ))),
+    );
   });
 
   describe('when inside of a table', () => {
@@ -260,7 +332,7 @@ describe('gap-cursor', () => {
             describe(nodeName, () => {
               it('should set GapCursorSelection', () => {
                 const { editorView } = editor(
-                  doc(table()(tr(td()(blockNodes[nodeName]), tdCursor))),
+                  doc(table()(tr(td()(blockNodes[nodeName]()), tdCursor))),
                 );
                 sendKeyToPm(editorView, 'ArrowLeft');
                 expect(
@@ -304,7 +376,7 @@ describe('gap-cursor', () => {
                 const { editorView, refs } = editor(
                   doc(
                     table()(
-                      tr(td()(p('{nextPos}')), td()(blockNodes[nodeName])),
+                      tr(td()(p('{nextPos}')), td()(blockNodes[nodeName]())),
                     ),
                   ),
                 );
@@ -347,6 +419,29 @@ describe('gap-cursor', () => {
           });
         });
       });
+    });
+  });
+
+  describe('when hit backspace at the start of the node on the left', () => {
+    it('should put gapcursor on the right of the previous node', () => {
+      const { editorView } = editor(
+        doc(
+          blockNodes['decisionList'](),
+          blockNodes['taskList']({ selected: true }),
+        ),
+      );
+      sendKeyToPm(editorView, 'ArrowLeft');
+      expect(editorView.state.selection instanceof GapCursorSelection).toBe(
+        true,
+      );
+      expect((editorView.state.selection as GapCursorSelection).side).toEqual(
+        Side.LEFT,
+      );
+      sendKeyToPm(editorView, 'Backspace');
+      expect((editorView.state.selection as GapCursorSelection).side).toEqual(
+        Side.RIGHT,
+      );
+      editorView.destroy();
     });
   });
 });

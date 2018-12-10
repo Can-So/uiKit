@@ -1,5 +1,41 @@
 # @atlaskit/tree
 
+## 4.1.8
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/navigation@33.3.7
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/theme@7.0.0
+
+## 4.1.7
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/navigation@33.3.6
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/icon@15.0.0
+
+## 4.1.6
+- [patch] [ce60809](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce60809):
+
+  - Replace react-beautiful-dnd-next dependency with react-beautiful-dnd@10.0.2
+
+## 4.1.5
+- [patch] [6c250fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c250fe):
+
+  - Upgrading react-beautiful-dnd-next to 10.0.0-beta.2
+
+## 4.1.4
+- [patch] [7b08fd4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b08fd4):
+
+  - Solving race condition when dropping and nesting at the same time
+
+## 4.1.3
+- [patch] [5de65a9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de65a9):
+
+  - Upgrading react-beautiful-dnd-next to 10.0.0-alpha.5
+
 ## 4.1.2
 - [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
 

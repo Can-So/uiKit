@@ -4,7 +4,7 @@ import { setupMocks, teardownMocks } from '../example-helpers/mockApis';
 import { GlobalQuickSearch } from '../src';
 import withNavigation from '../example-helpers/withNavigation';
 
-const GlobalQuickSearchInNavigation = withNavigation(GlobalQuickSearch);
+const GlobalQuickSearchWrapper = withNavigation(GlobalQuickSearch);
 
 const logEvent = event => {
   const { eventType, action, actionSubject, actionSubjectId } = event.payload;
@@ -15,7 +15,7 @@ const logEvent = event => {
   );
 };
 
-export default class extends React.Component {
+export default class GlobalQuickSearchExample extends React.Component {
   componentWillMount() {
     setupMocks();
   }
@@ -27,7 +27,7 @@ export default class extends React.Component {
   render() {
     return (
       <AnalyticsListener onEvent={logEvent} channel="fabric-elements">
-        <GlobalQuickSearchInNavigation />
+        <GlobalQuickSearchWrapper />
       </AnalyticsListener>
     );
   }

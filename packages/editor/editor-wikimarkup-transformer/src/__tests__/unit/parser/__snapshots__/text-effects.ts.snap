@@ -1,5 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`JIRA wiki markup - Text effects [CS-576] should allow {color} macro in formatters 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "text": "This is ",
+          "type": "text",
+        },
+        Object {
+          "marks": Array [
+            Object {
+              "type": "strong",
+            },
+            Object {
+              "attrs": Object {
+                "color": "#ff0000",
+              },
+              "type": "textColor",
+            },
+            Object {
+              "type": "em",
+            },
+          ],
+          "text": "Strong Red and Italic",
+          "type": "text",
+        },
+      ],
+      "type": "paragraph",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
 exports[`JIRA wiki markup - Text effects should convert double baskslash to a hardBreak node 1`] = `
 Object {
   "content": Array [
@@ -166,6 +201,23 @@ Object {
 }
 `;
 
+exports[`JIRA wiki markup - Text effects should not apply strong when ending line is two strong symbols 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "content": Array [
+        Object {
+          "text": "*not valid strong **",
+          "type": "text",
+        },
+      ],
+      "type": "paragraph",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
 exports[`JIRA wiki markup - Text effects should not fail while applying marks to a string containing double backslash 1`] = `
 Object {
   "content": Array [
@@ -297,7 +349,7 @@ Object {
               "type": "em",
             },
           ],
-          "text": "-- citation",
+          "text": "— citation",
           "type": "text",
         },
       ],

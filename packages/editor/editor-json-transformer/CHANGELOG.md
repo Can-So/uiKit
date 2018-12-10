@@ -1,5 +1,24 @@
 # @atlaskit/editor-json-transformer
 
+## 4.0.23
+- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+  - @atlaskit/editor-test-helpers@6.2.23
+  - @atlaskit/editor-core@90.0.0
+
+## 4.0.22
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/editor-core@89.0.0
+  - @atlaskit/editor-test-helpers@6.2.19
+  - @atlaskit/util-data-test@10.0.21
+
+## 4.0.21
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/util-data-test@10.0.20
+
 ## 4.0.20
 - [patch] Wrap invalid node with unsupported node [fb60e39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb60e39)
 

@@ -1,5 +1,6 @@
 export default {
   plugins: [
+    'inlineCursorTargetPlugin',
     'focusHandlerPlugin',
     'submitEditor',
     'imageUpload',
@@ -22,8 +23,11 @@ export default {
     'typeAhead',
     'typeAheadKeymap',
     'typeAheadInputRule',
+    // This should be always after `typeAheadKeymap` & `emojiKeymap`
+    'indentationKeymap',
     'lists',
     'textColor',
+    'alignmentPlugin',
     'listsInputRule',
     'listsKeymap',
     'codeBlock',
@@ -121,6 +125,7 @@ export default {
     'blockCard',
   ],
   marks: [
+    // Inline marks
     'link',
     'confluenceInlineComment',
     'em',
@@ -130,9 +135,13 @@ export default {
     'subsup',
     'underline',
     'code',
-    'mentionQuery',
     'typeAheadQuery',
     'emojiQuery',
     'textColor',
+
+    // Block marks
+    'alignment',
+    'breakout',
+    'indentation',
   ],
 };

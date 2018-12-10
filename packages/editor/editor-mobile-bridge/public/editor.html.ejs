@@ -42,8 +42,6 @@
     *:not(html) {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
-      perspective: 1000;
-      -webkit-perspective: 1000;
     }
 
     html,
@@ -51,6 +49,7 @@
       height: 100%;
       width: 100%;
       -webkit-overflow-scrolling : touch !important;
+      -webkit-text-size-adjust: 100%;
       overflow: auto !important;
     }
 
@@ -359,8 +358,11 @@
       bottom: 0;
       height: 100%;
       width: 100%;
-      padding: 20px;
       box-sizing: border-box;
+    }
+
+    #editor .pm-table-container table {
+      margin-left: 0;
     }
   </style>
 </head>

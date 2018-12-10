@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
 import * as deepEqual from 'deep-equal';
 import { Context, ProcessedFileState } from '@atlaskit/media-core';
 import { Outcome } from '../domain';
-import { ErrorMessage, MediaViewerError } from '../error';
+import ErrorMessage, { MediaViewerError } from '../error';
 import { Spinner } from '../loading';
 import { ErrorViewDownloadButton } from '../download';
 
@@ -21,7 +23,7 @@ export abstract class BaseViewer<
   Props extends BaseProps,
   State extends BaseState<Content> = BaseState<Content>
 > extends React.Component<Props, State> {
-  state = this.initialState;
+  state = this.getInitialState();
 
   componentDidMount() {
     this.init();
@@ -55,11 +57,18 @@ export abstract class BaseViewer<
       successful: content => this.renderSuccessful(content),
       failed: err => (
         <ErrorMessage error={err}>
-          <p>Try downloading the file to view it.</p>
+          <p>
+            <FormattedMessage {...messages.try_downloading_file} />
+          </p>
           {this.renderDownloadButton(err)}
         </ErrorMessage>
       ),
     });
+  }
+
+  // Accessing abstract getters in a constructor is not allowed
+  private getInitialState() {
+    return this.initialState;
   }
 
   private renderDownloadButton(err: MediaViewerError) {

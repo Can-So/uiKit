@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=2.0, width=device-width, user-scalable=yes">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <style>
     /**
@@ -42,8 +42,6 @@
       *:not(html) {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
-      perspective: 1000;
-      -webkit-perspective: 1000;
     }
 
     html,
@@ -51,6 +49,7 @@
       height: 100%;
       width: 100%;
       -webkit-overflow-scrolling : touch !important;
+      -webkit-text-size-adjust: 100%;
       overflow: auto !important;
     }
 
@@ -360,7 +359,6 @@
       bottom: 0;
       height: 100%;
       width: 100%;
-      padding: 10px;
       box-sizing: border-box;
     }
   </style>

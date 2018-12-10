@@ -90,6 +90,10 @@ export interface EditorProps {
   // To enable, you need to also provide a `taskDecisionProvider`. You will most likely need backend ADF storage for this feature.
   allowTasksAndDecisions?: boolean;
 
+  // Enables new breakout mark.
+  // This mark is being used for making code-blocks breakout.
+  allowBreakout?: boolean;
+
   // Enables horizontal rules.
   allowRule?: boolean;
 
@@ -136,16 +140,30 @@ export interface EditorProps {
 
   // Enable dates. You will most likely need backend ADF storage for this feature.
   allowDate?: boolean;
-  allowGapCursor?: boolean;
+
   allowInlineAction?: boolean;
 
   // Temporary flag to enable layouts while it's under development
-  allowLayouts?: boolean;
+  allowLayouts?:
+    | boolean
+    | {
+        allowBreakout: boolean;
+      };
 
-  // Enable status.
-  allowStatus?: boolean;
+  // Enable status, if menuDisabled is passed then plugin is enabled by default
+  allowStatus?:
+    | boolean
+    | {
+        menuDisabled: boolean;
+      };
 
   allowDynamicTextSizing?: boolean;
+
+  // Enable text alignment support inside `heading` and `paragraph`
+  allowTextAlignment?: boolean;
+
+  // Enable indentation support for `heading` and `paragraph`
+  allowIndentation?: boolean;
 
   // Set to enable the quick insert menu i.e. '/' key trigger.
   // You can also provide your own insert menu options that will be shown in addition to the enabled

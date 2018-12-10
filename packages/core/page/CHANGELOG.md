@@ -1,5 +1,19 @@
 # @atlaskit/page
 
+## 8.0.11
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/banner@7.0.9
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/navigation@33.3.5
+  - @atlaskit/toggle@5.0.11
+  - @atlaskit/button@10.0.0
+
+## 8.0.10
+- [patch] [84e8015](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84e8015):
+
+  - Bump react-syntax-highlighter to 10.0.1
+
 ## 8.0.9
 - [patch] Fix webpack 3 support for page & code [03af95e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/03af95e)
 

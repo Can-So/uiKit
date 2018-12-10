@@ -1,5 +1,44 @@
 # @atlaskit/reduced-ui-pack
 
+## 10.5.2
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/css-reset@3.0.4
+  - @atlaskit/theme@7.0.0
+
+## 10.5.1
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/icon@15.0.0
+
+## 10.5.0
+- [minor] [29968f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29968f4):
+
+  - Add a menu expand icon
+
+## 10.4.0
+- [minor] [f5e26e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e26e1):
+
+  - Add a retry icon
+
+## 10.3.1
+- [patch] [f2f231c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f2f231c):
+
+  - Use fontSizeSmall from theme
+
+## 10.3.0
+- [minor] [dced9bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dced9bf):
+
+  - Remove StarOutlineIcon as it is not used
+
+## 10.2.1
+- [patch] [d15caa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d15caa6):
+
+  - adding editor image alignment icons
+
 ## 10.2.0
 - [minor] [fe3c283"
 d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe3c283"

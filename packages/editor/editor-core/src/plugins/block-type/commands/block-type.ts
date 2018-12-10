@@ -9,6 +9,7 @@ import {
   HEADINGS_BY_NAME,
   NORMAL_TEXT,
 } from '../types';
+import { removeBlockMarks } from '../../../utils/mark';
 
 export function setBlockType(name: string): Command {
   return (state, dispatch) => {
@@ -78,24 +79,31 @@ export function insertBlockType(name: string): Command {
 }
 
 /**
- * Function will add wraping node.
+ * Function will add wrapping node.
  * 1. If currently selected blocks can be wrapped in the warpper type it will wrap them.
  * 2. If current block can not be wrapped inside wrapping block it will create a new block below selection,
  *  and set selection on it.
  */
 function wrapSelectionIn(type): Command {
   return function(state: EditorState, dispatch) {
-    const { tr } = state;
+    let { tr } = state;
     const { $from, $to } = state.selection;
     const { paragraph } = state.schema.nodes;
+    const { alignment, indentation } = state.schema.marks;
+
+    /** Alignment or Indentation is not valid inside block types */
+    const removeAlignTr = removeBlockMarks(state, [alignment, indentation]);
+    tr = removeAlignTr || tr;
+
     const range = $from.blockRange($to) as any;
     const wrapping = range && (findWrapping(range, type) as any);
     if (range && wrapping) {
       tr.wrap(range, wrapping).scrollIntoView();
     } else {
+      /** We always want to append a block type */
       tr.replaceRangeWith(
-        $to.pos,
-        $to.pos,
+        $to.pos + 1,
+        $to.pos + 1,
         type.createAndFill({}, paragraph.create()),
       );
       tr.setSelection(Selection.near(tr.doc.resolve(state.selection.to + 1)));
@@ -113,20 +121,25 @@ function insertCodeBlock(): Command {
     const { tr } = state;
     const { $to } = state.selection;
     const { codeBlock } = state.schema.nodes;
-    const moveSel = $to.node($to.depth).textContent ? 1 : 0;
-    tr.replaceRangeWith($to.pos, $to.pos, codeBlock.createAndFill() as PMNode);
+
+    const getNextNode = state.doc.nodeAt($to.pos + 1);
+    const addPos = getNextNode && getNextNode.isText ? 0 : 1;
+
+    /** We always want to append a block type */
+    tr.replaceRangeWith(
+      $to.pos + addPos,
+      $to.pos + addPos,
+      codeBlock.createAndFill() as PMNode,
+    );
     tr.setSelection(
-      Selection.near(tr.doc.resolve(state.selection.to + moveSel)),
+      Selection.near(tr.doc.resolve(state.selection.to + addPos)),
     );
     dispatch(tr);
     return true;
   };
 }
 
-export const removeEmptyHeadingAtStartOfDocument: Command = (
-  state,
-  dispatch,
-) => {
+export const cleanUpAtTheStartOfDocument: Command = (state, dispatch) => {
   const { $cursor } = state.selection as TextSelection;
   if (
     $cursor &&
@@ -134,9 +147,20 @@ export const removeEmptyHeadingAtStartOfDocument: Command = (
     !$cursor.nodeAfter &&
     $cursor.pos === 1
   ) {
-    if ($cursor.parent.type === state.schema.nodes.heading) {
-      return setNormalText()(state, dispatch);
-    }
+    const { tr, schema } = state;
+    const { paragraph } = schema.nodes;
+    const { parent } = $cursor;
+
+    /**
+     * Use cases:
+     * 1. Change `heading` to `paragraph`
+     * 2. Remove block marks
+     *
+     * NOTE: We already know it's an empty doc so it's safe to use 0
+     */
+    tr.setNodeMarkup(0, paragraph, parent.attrs, []);
+    dispatch(tr);
+    return true;
   }
   return false;
 };

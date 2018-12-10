@@ -7,9 +7,9 @@ import InteractionStateManager from '../InteractionStateManager';
 import type { InteractionState } from '../InteractionStateManager/types';
 import { styleReducerNoOp } from '../../../theme';
 import ItemPrimitive from './primitives';
-import type { ItemBaseProps } from './types';
+import type { ItemProps } from './types';
 
-class Item extends PureComponent<ItemBaseProps> {
+class Item extends PureComponent<ItemProps> {
   static defaultProps = {
     styles: styleReducerNoOp,
     isSelected: false,
@@ -17,16 +17,13 @@ class Item extends PureComponent<ItemBaseProps> {
     text: '',
   };
 
-  renderItem = (state: InteractionState) => (
-    <ItemPrimitive {...state} {...this.props} />
-  );
+  renderItem = (state: InteractionState) => {
+    const { createAnalyticsEvent, ...props } = this.props;
+    return <ItemPrimitive {...state} {...props} />;
+  };
 
   render() {
-    return (
-      <InteractionStateManager {...this.props}>
-        {this.renderItem}
-      </InteractionStateManager>
-    );
+    return <InteractionStateManager>{this.renderItem}</InteractionStateManager>;
   }
 }
 

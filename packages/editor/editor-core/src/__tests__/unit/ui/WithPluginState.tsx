@@ -14,7 +14,7 @@ describe(name, () => {
   const pluginKey2 = new PluginKey('plugin2');
 
   const setTimeoutPromise = (cb, delay) =>
-    new Promise(resolve => setTimeout(() => resolve(cb()), delay));
+    new Promise(resolve => window.setTimeout(() => resolve(cb()), delay));
   const createPlugin = (state, key): EditorPlugin => {
     return {
       pmPlugins() {

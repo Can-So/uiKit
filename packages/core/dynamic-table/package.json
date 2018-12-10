@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/dynamic-table",
-  "version": "10.0.15",
+  "version": "10.0.21",
   "description": "Table component with pagination and sorting functionality",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -23,13 +23,13 @@
   },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/analytics-next": "^3.0.10",
-    "@atlaskit/pagination": "^8.0.4",
-    "@atlaskit/spinner": "^9.0.10",
-    "@atlaskit/theme": "^6.1.1",
+    "@atlaskit/analytics-next": "^3.1.1",
+    "@atlaskit/pagination": "^9.0.0",
+    "@atlaskit/spinner": "^9.0.12",
+    "@atlaskit/theme": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "prop-types": "^15.5.10",
-    "react-beautiful-dnd": "^9.0.0"
+    "react-beautiful-dnd": "^10.0.2"
   },
   "peerDependencies": {
     "react": "^16.4.0",
@@ -37,13 +37,13 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/avatar": "^14.1.2",
+    "@atlaskit/avatar": "^14.1.6",
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^9.0.15",
-    "@atlaskit/docs": "^5.0.6",
-    "@atlaskit/dropdown-menu": "^6.1.19",
-    "@atlaskit/toggle": "^5.0.10",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "@atlaskit/button": "^10.0.4",
+    "@atlaskit/docs": "^5.2.3",
+    "@atlaskit/dropdown-menu": "^6.1.24",
+    "@atlaskit/toggle": "^5.0.13",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   }
 }

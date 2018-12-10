@@ -10,7 +10,7 @@ export interface TaskItemDefinition {
   /**
    * @allowUnsupportedInline true
    */
-  content: Array<Inline>;
+  content?: Array<Inline>;
   attrs: {
     localId: string;
     state: 'TODO' | 'DONE';
@@ -35,7 +35,7 @@ export const taskItem: NodeSpec = {
 
       getAttrs: (dom: Element) => ({
         localId: uuid.generate(),
-        state: dom.getAttribute('data-task-state')!,
+        state: dom.getAttribute('data-task-state') || 'TODO',
       }),
     },
   ],
@@ -43,7 +43,7 @@ export const taskItem: NodeSpec = {
     const { localId, state } = node.attrs;
     const attrs = {
       'data-task-local-id': localId || 'local-task',
-      'data-task-state': state,
+      'data-task-state': state || 'TODO',
     };
     return ['li', attrs, 0];
   },

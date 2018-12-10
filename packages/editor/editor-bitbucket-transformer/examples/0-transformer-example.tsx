@@ -39,7 +39,7 @@ class TransformerPanels extends React.PureComponent<Props, State> {
   state: State = { source: exampleBitbucketHTML, output: '' };
 
   componentDidMount() {
-    setTimeout(() => {
+    window.setTimeout(() => {
       this.props.actions.replaceDocument(this.state.source);
     });
   }

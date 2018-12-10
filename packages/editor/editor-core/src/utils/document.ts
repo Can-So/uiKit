@@ -1,4 +1,4 @@
-import { Node, Fragment, Schema } from 'prosemirror-model';
+import { Node, Schema } from 'prosemirror-model';
 import { Transaction } from 'prosemirror-state';
 import {
   validator,
@@ -7,6 +7,8 @@ import {
   ValidationError,
 } from '@atlaskit/adf-utils';
 import { analyticsService } from '../analytics';
+
+const FALSE_POSITIVE_MARKS = ['code', 'alignment', 'indentation'];
 
 /**
  * Checks if node is an empty paragraph.
@@ -95,41 +97,10 @@ export function isEmptyDocument(node: Node): boolean {
   return (
     nodeChild.type.name === 'paragraph' &&
     !nodeChild.childCount &&
-    nodeChild.nodeSize === 2
+    nodeChild.nodeSize === 2 &&
+    (!nodeChild.marks || nodeChild.marks.length === 0)
   );
 }
-
-export const preprocessDoc = (
-  schema: Schema,
-  origDoc: Node | undefined,
-): Node | undefined => {
-  if (!origDoc) {
-    return;
-  }
-
-  const content: Node[] = [];
-  // A flag to indicate if the element in the array is the last paragraph
-  let isLastParagraph = true;
-
-  for (let i = origDoc.content.childCount - 1; i >= 0; i--) {
-    const node = origDoc.content.child(i);
-    const { taskList, decisionList } = schema.nodes;
-    if (
-      !(
-        node.type.name === 'paragraph' &&
-        node.content.size === 0 &&
-        isLastParagraph
-      ) &&
-      ((node.type !== taskList && node.type !== decisionList) ||
-        node.textContent)
-    ) {
-      content.push(node);
-      isLastParagraph = false;
-    }
-  }
-
-  return schema.nodes.doc.create({}, Fragment.fromArray(content.reverse()));
-};
 
 function wrapWithUnsupported(
   originalValue: Entity,
@@ -147,7 +118,7 @@ function fireAnalyticsEvent(
   type: 'block' | 'inline' | 'mark' = 'block',
 ) {
   const { code } = error;
-  analyticsService.trackEvent('fabric.editor.unsupported.node', {
+  analyticsService.trackEvent('atlassian.editor.unsupported', {
     name: entity.type || 'unknown',
     type,
     errorCode: code,
@@ -189,7 +160,7 @@ export function processRawValue(
   try {
     const nodes = Object.keys(schema.nodes);
     const marks = Object.keys(schema.marks);
-    const validate = validator(nodes, marks);
+    const validate = validator(nodes, marks, { allowPrivateAttributes: true });
     const emptyDoc: Entity = { type: 'doc', content: [] };
 
     // ProseMirror always require a child under doc
@@ -211,7 +182,14 @@ export function processRawValue(
       (entity, error, options) => {
         // Remove any invalid marks
         if (marks.indexOf(entity.type) > -1) {
-          fireAnalyticsEvent(entity, error, 'mark');
+          if (
+            !(
+              error.code === VALIDATION_ERRORS.INVALID_TYPE &&
+              FALSE_POSITIVE_MARKS.indexOf(entity.type) > -1
+            )
+          ) {
+            fireAnalyticsEvent(entity, error, 'mark');
+          }
           return;
         }
 

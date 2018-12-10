@@ -5,11 +5,16 @@ import Button from '@atlaskit/button';
 import { truncateUrlForErrorView } from '../utils';
 import { Frame } from '../Frame';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
+import { LockIconWrapper } from './styled';
 
 export interface InlineCardForbiddenViewProps {
+  /** The url to display */
   url: string;
+  /** The optional click handler */
   onClick?: () => void;
+  /** The optional handler for "Connect" button */
   onAuthorise?: () => void;
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
 }
 
@@ -31,7 +36,13 @@ export class InlineCardForbiddenView extends React.Component<
       <Frame onClick={onClick} isSelected={isSelected}>
         <IconAndTitleLayout
           icon={
-            <LockIcon label="error" size="medium" primaryColor={colors.B400} />
+            <LockIconWrapper>
+              <LockIcon
+                label="error"
+                size="medium"
+                primaryColor={colors.B400}
+              />
+            </LockIconWrapper>
           }
           title={
             truncateUrlForErrorView(url) +

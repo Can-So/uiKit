@@ -21,9 +21,8 @@ const content = <div style={layerStyles}>LayerContent</div>;
 export default () => (
   <div>
     <p>
-      Layer with position={"'right middle'"} and autoFlip={
-        "['top', 'left', 'bottom']"
-      }.
+      Layer with position={"'right middle'"} and autoFlip=
+      {"['top', 'left', 'bottom']"}.
     </p>
     <p>
       This layer will try to position itself on the right. If there is no space,
