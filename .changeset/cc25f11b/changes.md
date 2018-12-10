@@ -1,1 +1,0 @@
-- FS-3321 call onFocus/onBlur handlers on corresponding event
