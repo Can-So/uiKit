@@ -2,7 +2,7 @@ import * as React from 'react';
 import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
-This transformer allows encoding editor in Bitbucket content as markdown or converting HTML to editor content.
+This transformer allows encoding ProseMirror Node to markdown or converting Bitbucket HTML to  ProseMirror Node.
 
   ## Usage
 

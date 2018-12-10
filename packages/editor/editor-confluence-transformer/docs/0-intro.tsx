@@ -2,9 +2,9 @@ import * as React from 'react';
 import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
-This transformer allows encoding editor in Confluence content as markdown or converting HTML to editor content.
+This transformer allows encoding ProseMirror Node in CXHTML or converting Confluence HTML to ProseMirror Node.
 
-  ## Usage
+## Usage
 
   Use the encoder with editor-confluence-transformer as follows:
 

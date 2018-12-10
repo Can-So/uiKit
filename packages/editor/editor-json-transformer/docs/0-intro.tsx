@@ -2,7 +2,7 @@ import * as React from 'react';
 import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
-This transformer allows encoding editor in JSON format.
+This transformer allows encoding ProseMirror Node in JSON format.
 
   ## Usage
 
