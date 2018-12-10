@@ -1,0 +1,1 @@
+- ED-5704: Fixed invalid ADF sent when saving and mention/quickInsert/emoji is active
