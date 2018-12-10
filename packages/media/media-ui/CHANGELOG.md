@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 8.1.1
+- [patch] [e375b42](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e375b42):
+
+  - Update props description
+
 ## 8.1.0
 - [minor] [8fbb36f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8fbb36f):
 
