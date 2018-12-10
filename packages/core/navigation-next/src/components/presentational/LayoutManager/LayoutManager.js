@@ -297,7 +297,7 @@ export default class LayoutManager extends Component<
                     flyoutIsOpen={flyoutIsOpen}
                     isGrabAreaDisabled={itemIsDragging}
                     mouseIsOverNavigation={mouseIsOverNavigation}
-                    onMouseOver={this.closeFlyout}
+                    onMouseOverButtonBuffer={this.closeFlyout}
                     mutationRefs={[
                       { ref: this.pageRef, property: 'padding-left' },
                       { ref: this.productNavRef, property: 'width' },
