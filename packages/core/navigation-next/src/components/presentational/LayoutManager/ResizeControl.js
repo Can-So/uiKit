@@ -76,6 +76,7 @@ const Button = ({
   hasHighlight,
   innerRef,
   isVisible,
+  onMouseOver,
   ...props
 }: ButtonProps) => (
   <button
@@ -117,7 +118,14 @@ const Button = ({
   >
     <div
       // increase hit-area
-      css={{ position: 'absolute', left: -4, right: -4, bottom: -4, top: -4 }}
+      css={{
+        position: 'absolute',
+        left: -8,
+        right: -8,
+        bottom: -8,
+        top: -8,
+      }}
+      onMouseOver={onMouseOver}
     />
     {children}
   </button>
@@ -419,6 +427,7 @@ class ResizeControl extends PureComponent<Props, State> {
       isDisabled: isResizeDisabled,
       isGrabAreaDisabled,
       mouseIsOverNavigation,
+      onMouseOver,
       navigation,
     } = this.props;
     const { isCollapsed } = navigation.state;
@@ -431,6 +440,7 @@ class ResizeControl extends PureComponent<Props, State> {
     const button = (
       <Button
         onClick={this.onResizerChevronClick}
+        onMouseOver={onMouseOver}
         // maintain styles when user is dragging
         isVisible={isCollapsed || mouseIsDown || mouseIsOverNavigation}
         hasHighlight={mouseIsDown || mouseIsOverGrabArea}
