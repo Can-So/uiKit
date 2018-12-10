@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.13
+- [patch] [9a1dbaa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a1dbaa):
+
+  - Fixed toolbar being positioned over a panel at the bottom of the page
+
 ## 90.3.12
 - [patch] [85b71a9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85b71a9):
 
