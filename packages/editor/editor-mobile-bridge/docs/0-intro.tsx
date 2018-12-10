@@ -2,12 +2,12 @@ import * as React from 'react';
 import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
-This component allows mobile distribution of the Editor.
+This component is an integration layer between @atlaskit/editor-core and native iOS and Android editors.
 
   ## Usage
 
-  Use the encoder with editor-editor as follows:
-
+  Use the component in your React app as follows:
+  
   ${code`import { MobileEditor } from '@atlaskit/editor-mobile-bridge';`}
 
   ${(

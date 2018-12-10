@@ -2,7 +2,7 @@ import * as React from 'react';
 import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
-This transformer allows encoding editor in Jira content as markdown or converting HTML to editor content.
+This package provides a transformation from ProseMirror Node → wikimarkup and from HTML → ProseMirror Node.
 
   ## Usage
 

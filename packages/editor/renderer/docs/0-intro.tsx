@@ -6,9 +6,9 @@ declare const require: any;
 
 export default md`
 
-This is the Renderer component.
+This component provides a renderer for ADF documents.
 
-## Usage the component
+## Usage
 
 Use the component in your React app as follows:
 

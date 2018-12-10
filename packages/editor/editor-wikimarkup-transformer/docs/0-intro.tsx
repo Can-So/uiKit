@@ -3,8 +3,7 @@ import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
 
-This transformer allows encoding editor in Wikimarkup.
-
+This package provides a transformer for ProseMirror Node <-> Wikimarkup conversion.
   ## Usage
 
   Use the component in your React app as follows:
