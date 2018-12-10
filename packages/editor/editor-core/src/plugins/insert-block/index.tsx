@@ -22,7 +22,6 @@ import ToolbarInsertBlock from './ui/ToolbarInsertBlock';
 import { insertBlockType } from '../block-type/commands';
 import { startImageUpload } from '../image-upload/pm-plugins/commands';
 import { pluginKey as typeAheadPluginKey } from '../type-ahead/pm-plugins/main';
-import { pluginKey as statusPluginKey } from '../status/plugin';
 
 const toolbarSizeToButtons = toolbarSize => {
   switch (toolbarSize) {
