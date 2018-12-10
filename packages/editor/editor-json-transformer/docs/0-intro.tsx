@@ -1,21 +1,23 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
-  # Editor-JSON-Transformer
+This transformer allows encoding ProseMirror Node in JSON format.
 
-  ## Installation
+  ## Usage
 
-  ~~~sh
-  npm install @atlaskit/editor-json-transformer
-  ~~~
+  Use the encoder with editor-json-transformer as follows:
 
-  ## Using the library
+  ${code`import { JSONTransformer } from '@atlaskit/editor-json-transformer';
+  const serializer = new JSONTransformer(schema);
+  serializer.encode(editorContent);`}
 
-  Use the component in your React app as follows:
-
-  ~~~js
-  import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-  const serializer = new BitbucketTransformer(schema);
-  serializer.encode(editorContent);
-  ~~~
+  ${(
+    <Example
+      packageName="@atlaskit/editor-json-transformer"
+      Component={require('../examples/0-json-transformer').default}
+      title="Json Transformer"
+      source={require('!!raw-loader!../examples/0-json-transformer')}
+    />
+  )}
 `;

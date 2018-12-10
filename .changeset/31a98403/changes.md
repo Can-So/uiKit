@@ -1,0 +1,1 @@
+- Mobile bridge can be public and updated the description
