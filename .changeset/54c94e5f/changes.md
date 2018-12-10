@@ -1,0 +1,1 @@
+- Fix for visual bug in SpotlightCard component
