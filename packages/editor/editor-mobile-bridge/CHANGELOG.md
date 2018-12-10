@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.4.5
+- [patch] [d3d0d67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3d0d67):
+
+  - Mobile bridge can be public and updated the description
+
 ## 6.4.4
 - [patch] [7190767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7190767):
 
