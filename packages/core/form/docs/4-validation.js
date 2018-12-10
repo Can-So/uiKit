@@ -22,12 +22,12 @@ of a field with both front-end and back-end validation.
 ${(
   <Example
     packageName="@atlaskit/form"
-    Component={require('../examples/06-validation').default}
+    Component={require('../examples/05-validation').default}
     title="Field validation"
-    source={require('!!raw-loader!../examples/06-validation')}
+    source={require('!!raw-loader!../examples/05-validation')}
   />
 )}
-  
+
 
 <a name="field-validation"></a>
 
@@ -35,7 +35,7 @@ ${(
 
 A field's value can be validated by using the \`validate\` prop. This prop accepts
 a function that is called whenever a field value changes. The validation function
-gets passed the current field value and form state. If the validation fails, 
+gets passed the current field value and form state. If the validation fails,
 return the error. Otherwise, return undefined.
 
 ${code`
@@ -87,9 +87,9 @@ that the promise should **resolve** the error rather than reject with the error.
 ## Submission validation [#](#submission-validation)
 
 When the form gets submitted, the current state gets passed to the onSubmit handler.
-You communicate submission errors in a similar way to field-level validation. 
-If there was a submission error, the onSubmit handler should return an object. 
-Say there was a problem with the "password" field, the object should contain that 
+You communicate submission errors in a similar way to field-level validation.
+If there was a submission error, the onSubmit handler should return an object.
+Say there was a problem with the "password" field, the object should contain that
 key and the error as the value.
 
 If the submit succeeded, the onSubmit handler should return undefined.
