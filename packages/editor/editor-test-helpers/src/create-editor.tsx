@@ -139,7 +139,9 @@ export default function createEditorForTests<T = any>({
   }
 
   afterEach(() => {
-    wrapper.unmount();
+    if (wrapper.length > 0) {
+      wrapper.unmount();
+    }
     wrapper.detach();
     if (place && place.parentNode) {
       place.parentNode.removeChild(place);

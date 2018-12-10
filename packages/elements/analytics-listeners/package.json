@@ -38,7 +38,7 @@
   "devDependencies": {
     "@atlaskit/button": "^10.0.0",
     "@atlaskit/docs": "^5.2.1",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "enzyme": "^3.7.0",
     "jest-in-case": "^1.0.2",
     "react": "^16.4.0"
   },

@@ -2,7 +2,7 @@
 
 exports[`Item ItemBase should render an InteractionStateManager 1`] = `
 <InteractionStateManager>
-  <unknown />
+  <Component />
 </InteractionStateManager>
 `;
 
@@ -26,7 +26,7 @@ exports[`Item should render correctly 1`] = `
     }
   }
 >
-  <ForwardRef(WithAnalyticsEvents(Item))
+  <WithAnalyticsEvents(Item)
     text="My item"
   />
 </AnalyticsContext>

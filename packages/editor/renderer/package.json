@@ -55,7 +55,7 @@
     "@types/prosemirror-model": "^1.5.0",
     "@types/react-loadable": "^5.4.1",
     "chai": "^4.1.2",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "enzyme": "^3.7.0",
     "react": "^16.4.0",
     "react-live-clock": "^2.0.2",
     "sinon": "^2.2.0"

@@ -62,9 +62,9 @@
     "@atlaskit/docs": "^5.2.3",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/media-test-helpers": "^18.5.2",
-    "@types/enzyme": "^3.1.6",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
-    "enzyme-adapter-react-16": "https://registry.npmjs.org/@pgleeson/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.1.7.tgz",
+    "@types/enzyme": "^3.1.15",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
     "jsverify": "^0.8.3",
     "react": "^16.4.0",
     "react-intl": "^2.6.0"
