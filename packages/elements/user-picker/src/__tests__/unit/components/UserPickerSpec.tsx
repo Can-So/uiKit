@@ -10,7 +10,12 @@ import * as React from 'react';
 import { getStyles } from '../../../components/styles';
 import { UserPicker } from '../../../components/UserPicker';
 import { usersToOptions, userToOption } from '../../../components/utils';
-import { User, UserOption, UserPickerProps as Props, UserPickerProps } from '../../../types';
+import {
+  User,
+  UserOption,
+  UserPickerProps as Props,
+  UserPickerProps,
+} from '../../../types';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<Props> = {}) =>
@@ -464,9 +469,10 @@ describe('UserPicker', () => {
               duration: expect.any(Number),
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
+              sessionId: expect.any(String),
               queryLength: 0,
               spaceInQuery: false,
-              type: 'single',
+              pickerType: 'single',
               upKeyCount: 0,
               downKeyCount: 0,
             },
@@ -498,13 +504,14 @@ describe('UserPicker', () => {
               duration: expect.any(Number),
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
+              sessionId: expect.any(String),
               queryLength: 0,
               spaceInQuery: false,
-              type: 'single',
+              pickerType: 'single',
               upKeyCount: 1,
               downKeyCount: 3,
               position: 0,
-              userId: 'abc-123',
+              result: { id: 'abc-123' },
             },
           }),
         }),
@@ -533,13 +540,14 @@ describe('UserPicker', () => {
               duration: expect.any(Number),
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
+              sessionId: expect.any(String),
               queryLength: 0,
               spaceInQuery: false,
-              type: 'single',
+              pickerType: 'single',
               upKeyCount: 1,
               downKeyCount: 3,
               position: 0,
-              userId: 'abc-123',
+              result: { id: 'abc-123' },
             },
           }),
         }),
@@ -562,7 +570,7 @@ describe('UserPicker', () => {
             attributes: {
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
-              type: 'single',
+              pickerType: 'single',
               pickerOpen: true,
             },
           }),
@@ -588,9 +596,9 @@ describe('UserPicker', () => {
             attributes: {
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
-              type: 'multi',
+              sessionId: expect.any(String),
               pickerOpen: true,
-              userId: users[0].id,
+              value: { id: users[0].id },
             },
           }),
         }),

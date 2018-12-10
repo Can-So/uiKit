@@ -5,11 +5,14 @@ import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
+  cancelEvent,
   clearEvent,
-  createAndFireSafe,
+  createAndFireEventInElementsChannel,
   deleteEvent,
+  EventCreator,
   failedEvent,
-  fromSession,
+  focusEvent,
+  selectEvent,
   startSession,
   UserPickerSession,
 } from '../analytics';
@@ -27,7 +30,6 @@ import {
   callCallback,
   extractUserValue,
   getOptions,
-  getUsers,
   isIterable,
   isSingleValue,
   usersToOptions,
@@ -46,7 +48,6 @@ export const UserPicker = withAnalyticsEvents()(
       appearance: 'normal',
       subtle: false,
       isClearable: true,
-      search: '',
     };
 
     static getDerivedStateFromProps(
@@ -70,6 +71,10 @@ export const UserPicker = withAnalyticsEvents()(
         derivedState.inputValue = nextProps.search;
       }
 
+      if (nextProps.users !== undefined) {
+        derivedState.users = nextProps.users;
+      }
+
       return derivedState;
     }
 
@@ -86,7 +91,7 @@ export const UserPicker = withAnalyticsEvents()(
         count: 0,
         hoveringClearIndicator: false,
         menuIsOpen: false,
-        inputValue: props.search,
+        inputValue: props.search || '',
         preventFilter: false,
       };
     }
@@ -114,59 +119,27 @@ export const UserPicker = withAnalyticsEvents()(
       if (removedValue && removedValue.user.fixed) {
         return;
       }
-      const {
-        onChange,
-        onSelection,
-        isMulti,
-        createAnalyticsEvent,
-        users: propUsers,
-      } = this.props;
-      const { menuIsOpen, inputValue, users: stateUsers } = this.state;
-
+      const { onChange, onSelection, isMulti } = this.props;
       callCallback(onChange, extractUserValue(value), action);
 
       switch (action) {
         case 'select-option':
           callCallback(onSelection, value.user);
-          if (this.session) {
-            createAndFireSafe(
-              createAnalyticsEvent,
-              fromSession,
-              this.session,
-              'select',
-              inputValue,
-              value.value,
-              isMulti,
-              getUsers(stateUsers, propUsers),
-              isMulti ? option : value,
-            );
-            this.session = isMulti ? startSession() : undefined;
-          }
+          this.fireEvent(selectEvent, isMulti ? option : value);
+          this.session = isMulti ? startSession() : undefined;
           break;
         case 'clear':
-          createAndFireSafe(
-            createAnalyticsEvent,
-            clearEvent,
-            menuIsOpen,
-            isMulti,
-          );
+          this.fireEvent(clearEvent);
           break;
         case 'remove-value':
         case 'pop-value':
-          createAndFireSafe(
-            createAnalyticsEvent,
-            deleteEvent,
-            menuIsOpen,
-            removedValue && removedValue.value,
-            isMulti,
-          );
+          this.fireEvent(deleteEvent, removedValue && removedValue.value);
           break;
       }
 
-      this.setState({
-        inputValue: '',
-        value: !this.props.value ? value : undefined,
-      });
+      if (!this.props.value) {
+        this.setState({ value });
+      }
     };
 
     private handleSelectRef = ref => {
@@ -194,7 +167,7 @@ export const UserPicker = withAnalyticsEvents()(
     );
 
     private fireFailedAnalyticsEvent = () => {
-      createAndFireSafe(this.props.createAnalyticsEvent, failedEvent);
+      this.fireEvent(failedEvent);
     };
 
     private executeLoadOptions = debounce((search?: string) => {
@@ -264,27 +237,29 @@ export const UserPicker = withAnalyticsEvents()(
       }
     };
 
-    componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
-      const { isMulti, createAnalyticsEvent } = this.props;
-      const { inputValue } = this.state;
+    private fireEvent = (eventCreator: EventCreator, ...args: any[]) => {
+      const { createAnalyticsEvent } = this.props;
+      if (createAnalyticsEvent) {
+        createAndFireEventInElementsChannel(
+          eventCreator(this.props, this.state, this.session, ...args),
+        )(createAnalyticsEvent);
+      }
+    };
 
+    private startSession = () => {
+      this.session = startSession();
+      this.fireEvent(focusEvent);
+    };
+
+    componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
       // load options when the picker open
       if (this.state.menuIsOpen && !prevState.menuIsOpen) {
         this.executeLoadOptions();
-        this.session = startSession();
+        this.startSession();
       }
 
       if (!this.state.menuIsOpen && prevState.menuIsOpen && this.session) {
-        createAndFireSafe(
-          createAnalyticsEvent,
-          fromSession,
-          this.session,
-          'cancel',
-          inputValue,
-          undefined,
-          isMulti,
-          undefined,
-        );
+        this.fireEvent(cancelEvent);
         this.session = undefined;
       }
     }
@@ -326,8 +301,7 @@ export const UserPicker = withAnalyticsEvents()(
     private filterOption = (option, search: string) =>
       this.state.preventFilter || defaultFilter(option, search);
 
-    private getOptions = (): User[] =>
-      getOptions(this.state.users, this.props.users) || [];
+    private getOptions = (): User[] => getOptions(this.state.users) || [];
 
     render() {
       const {
@@ -349,7 +323,6 @@ export const UserPicker = withAnalyticsEvents()(
         value,
         inputValue,
       } = this.state;
-
       return (
         <Select
           value={value}

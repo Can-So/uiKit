@@ -2,24 +2,24 @@ import { createAndFireEvent } from '@atlaskit/analytics-next';
 import {
   AnalyticsEventPayload,
   CreateAndFireEventFunction,
-  CreateUIAnalyticsEventSignature,
 } from '@atlaskit/analytics-next-types';
+import * as uuid from 'uuid/v4';
 import {
   name as packageName,
   version as packageVersion,
 } from '../package.json';
-import { User } from './types.js';
+import { User, UserOption, UserPickerProps, UserPickerState } from './types.js';
 
 export type UserPickerSession = {
+  id: string;
   start: number;
   upCount: number;
   downCount: number;
   lastKey?: number;
 };
 
-type ActionType = 'select' | 'cancel';
-
 export const startSession = (): UserPickerSession => ({
+  id: uuid(),
   start: Date.now(),
   upCount: 0,
   downCount: 0,
@@ -30,88 +30,128 @@ export const createAndFireEventInElementsChannel: CreateAndFireEventFunction = c
   'fabric-elements',
 );
 
-export const createAndFireSafe = <
-  U extends any[],
-  T extends ((...args: U) => AnalyticsEventPayload)
->(
-  createAnalyticsEvent: CreateUIAnalyticsEventSignature | void,
-  creator: T,
-  ...args: U
-) => {
-  if (createAnalyticsEvent) {
-    createAndFireEventInElementsChannel(creator(...args))(createAnalyticsEvent);
+const createEvent = (
+  eventType: 'ui' | 'operational',
+  action: string,
+  actionSubject: string,
+  attributes = {},
+): AnalyticsEventPayload => ({
+  eventType,
+  action,
+  actionSubject,
+  attributes: {
+    packageName,
+    packageVersion,
+    ...attributes,
+  },
+});
+
+const buildValueForAnalytics = (value?: UserOption[] | UserOption) => {
+  if (value) {
+    const valueToConvert = Array.isArray(value) ? value : [value];
+    return valueToConvert.map(({ user }) => ({ id: user ? user.id : null }));
   }
+
+  return [];
 };
 
-const getAnalyticsAction = (session: UserPickerSession, action: ActionType) => {
-  switch (action) {
-    case 'select':
-      return session.lastKey === 13 ? 'pressed' : 'clicked';
-    case 'cancel':
-      return 'cancelled';
-  }
-};
+export interface EventCreator {
+  (
+    props: UserPickerProps,
+    state: UserPickerState,
+    session?: UserPickerSession,
+  ): AnalyticsEventPayload;
+  (
+    props: UserPickerProps,
+    state: UserPickerState,
+    session?: UserPickerSession,
+    ...args: any[]
+  ): AnalyticsEventPayload;
+}
 
-export const fromSession = (
-  session: UserPickerSession,
-  action: ActionType,
-  query: string,
-  userId?: string,
-  isMulti?: boolean,
-  users?: User[],
-  value?: { user: User },
-): AnalyticsEventPayload => ({
-  action: getAnalyticsAction(session, action),
-  actionSubject: 'userPicker',
-  eventType: 'ui',
-  attributes: {
-    packageName,
-    packageVersion,
-    duration: Date.now() - session.start,
-    upKeyCount: session.upCount,
-    downKeyCount: session.downCount,
-    queryLength: query.length,
-    spaceInQuery: query.indexOf(' ') !== -1,
-    type: isMulti ? 'multi' : 'single',
-    position: users && value ? users.indexOf(value.user) : undefined,
-    userId,
-  },
-});
+export const focusEvent: EventCreator = (props, state, session) =>
+  createEvent('ui', 'focused', 'userPicker', {
+    sessionId: sessionId(session),
+    values: buildValueForAnalytics(state.value),
+    pickerType: pickerType(props),
+  });
 
-export const clearEvent = (
-  pickerOpen: boolean,
-  isMulti?: boolean,
-): AnalyticsEventPayload => ({
-  action: 'cleared',
-  actionSubject: 'userPicker',
-  eventType: 'ui',
-  attributes: {
-    packageName,
-    packageVersion,
-    type: isMulti ? 'multi' : 'single',
-    pickerOpen,
-  },
-});
+export const clearEvent: EventCreator = (props, state) =>
+  createEvent('ui', 'cleared', 'userPicker', {
+    pickerType: pickerType(props),
+    pickerOpen: state.menuIsOpen,
+  });
 
-export const deleteEvent = (
-  pickerOpen: boolean,
-  userId: string,
-  isMulti?: boolean,
-): AnalyticsEventPayload => ({
-  action: 'deleted',
-  actionSubject: 'userPickerItem',
-  eventType: 'ui',
-  attributes: {
-    packageName,
-    packageVersion,
-    type: isMulti ? 'multi' : 'single',
-    userId,
-    pickerOpen,
-  },
-});
+export const deleteEvent: EventCreator = (props, state, session, ...args) =>
+  createEvent('ui', 'deleted', 'userPickerItem', {
+    sessionId: sessionId(session),
+    value: { id: args[0] },
+    pickerOpen: state.menuIsOpen,
+  });
 
-export const failedEvent = () => ({
-  action: 'failed',
-  actionSubject: 'userPicker',
-  eventType: 'Ops',
-});
+export const cancelEvent: EventCreator = (props, state, session) =>
+  createEvent('ui', 'cancelled', 'userPicker', {
+    sessionId: sessionId(session),
+    duration: duration(session),
+    queryLength: queryLength(state),
+    spaceInQuery: spaceInQuery(state),
+    upKeyCount: upKeyCount(session),
+    downKeyCount: downKeyCount(session),
+    pickerType: pickerType(props),
+  });
+
+export const selectEvent: EventCreator = (props, state, session, ...args) =>
+  createEvent('ui', selectEventType(session), 'userPicker', {
+    sessionId: sessionId(session),
+    pickerType: pickerType(props),
+    duration: duration(session),
+    position: position(state, args[0]),
+    queryLength: queryLength(state),
+    spaceInQuery: spaceInQuery(state),
+    upKeyCount: upKeyCount(session),
+    downKeyCount: downKeyCount(session),
+    result: result(args[0]),
+  });
+
+export const failedEvent: EventCreator = () =>
+  createEvent('operational', 'failed', 'userPicker');
+
+function queryLength(state: UserPickerState) {
+  return state.preventFilter ? 0 : state.inputValue.length;
+}
+
+function selectEventType(session?: UserPickerSession): string {
+  return session && session.lastKey === 13 ? 'pressed' : 'clicked';
+}
+
+function upKeyCount(session?: UserPickerSession) {
+  return session ? session.upCount : null;
+}
+
+function downKeyCount(session?: UserPickerSession) {
+  return session ? session.downCount : null;
+}
+
+function spaceInQuery(state: UserPickerState) {
+  return state.preventFilter ? false : state.inputValue.indexOf(' ') !== -1;
+}
+
+function duration(session?: UserPickerSession) {
+  return session ? Date.now() - session.start : null;
+}
+
+function sessionId(session?: UserPickerSession) {
+  return session && session.id;
+}
+
+function position(state: UserPickerState, value?: { user: User }) {
+  return value ? state.users.findIndex(user => user === value.user) : -1;
+}
+
+function pickerType(props: UserPickerProps) {
+  return props.isMulti ? 'multi' : 'single';
+}
+
+function result(value?: { user: User }) {
+  return value ? { id: value.user.id } : null;
+}
