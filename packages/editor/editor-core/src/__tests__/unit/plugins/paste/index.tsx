@@ -4,15 +4,19 @@ import {
   em,
   doc,
   p,
+  h1,
   code,
   mediaGroup,
   media,
   mediaSingle,
+  panel,
   createEditor,
   dispatchPasteEvent,
   bodiedExtension,
   inlineExtension,
   a as link,
+  ol,
+  li,
   taskList,
   taskItem,
   decisionList,
@@ -27,9 +31,12 @@ import {
   panel,
   MockMacroProvider,
 } from '@atlaskit/editor-test-helpers';
+import { TextSelection } from 'prosemirror-state';
 import mediaPlugin from '../../../../plugins/media';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import extensionPlugin from '../../../../plugins/extension';
+import listPlugin from '../../../../plugins/lists';
+import panelPlugin from '../../../../plugins/panel';
 import tablesPlugin from '../../../../plugins/table';
 import macroPlugin, { setMacroProvider } from '../../../../plugins/macro';
 import { uuid } from '@atlaskit/adf-schema';
@@ -45,6 +52,8 @@ describe('paste plugins', () => {
         macroPlugin,
         codeBlockPlugin(),
         extensionPlugin,
+        listPlugin,
+        panelPlugin,
         tasksAndDecisionsPlugin,
         tablesPlugin(),
         panelPlugin,
@@ -164,18 +173,233 @@ describe('paste plugins', () => {
       });
     });
 
-    it('should not create paragraph when plain text is copied in code-block', () => {
-      const { editorView } = editor(doc(code_block()('{<>}')));
-      dispatchPasteEvent(editorView, { plain: 'plain text' });
-      expect(editorView.state.doc).toEqualDocument(
-        doc(code_block()('plain text')),
-      );
+    describe('paste in code-block', () => {
+      it('should not create paragraph when plain text is copied in code-block', () => {
+        const { editorView } = editor(doc(code_block()('{<>}')));
+        dispatchPasteEvent(editorView, { plain: 'plain text' });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(code_block()('plain text')),
+        );
+      });
+
+      it('should create paragraph when plain text is not copied in code-block', () => {
+        const { editorView } = editor(doc(p('{<>}')));
+        dispatchPasteEvent(editorView, { plain: 'plain text' });
+        expect(editorView.state.doc).toEqualDocument(doc(p('plain text')));
+      });
     });
 
-    it('should create paragraph when plain text is not copied in code-block', () => {
-      const { editorView } = editor(doc(p('{<>}')));
-      dispatchPasteEvent(editorView, { plain: 'plain text' });
-      expect(editorView.state.doc).toEqualDocument(doc(p('plain text')));
+    describe('paste inline text', () => {
+      it('should preserve marks when pasting inline text into empty text selection', () => {
+        const { editorView } = editor(doc(p(strong(em('this is {<>}')))));
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>strong em text</p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p(strong(em('this is strong em text{<>}')))),
+        );
+      });
+
+      it('should preserve marks when pasting inline text into text selection', () => {
+        const { editorView } = editor(
+          doc(p(strong(em('this is strong em text')))),
+        );
+        editorView.dispatch(
+          editorView.state.tr.setSelection(
+            TextSelection.create(editorView.state.doc, 1, 8),
+          ),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>this is another</p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p(strong(em('this is another strong em text')))),
+        );
+      });
+
+      it('should preserve marks when pasting inline text into action/decision', () => {
+        const { editorView } = editor(
+          doc(
+            decisionList({ localId: 'local-decision' })(
+              decisionItem({ localId: 'local-decision' })(
+                strong(em('this is a {<>}text')),
+              ),
+            ),
+          ),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>strong em </p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            decisionList({ localId: 'local-decision' })(
+              decisionItem({ localId: 'local-decision' })(
+                strong(em('this is a strong em {<>}text')),
+              ),
+            ),
+          ),
+        );
+      });
+
+      it('should preserve marks when pasting inline text into panel', () => {
+        const { editorView } = editor(
+          doc(panel()(p(strong(em('this is a {<>}text'))))),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>strong em </p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(panel()(p(strong(em('this is a strong em {<>}text'))))),
+        );
+      });
+
+      it('should preserve marks when pasting inline text into heading', () => {
+        const { editorView } = editor(
+          doc(h1(strong(em('this is a {<>}text')))),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>strong em </p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(h1(strong(em('this is a strong em {<>}text')))),
+        );
+      });
+
+      it('should preserve marks when pasting inline text into list', () => {
+        const { editorView } = editor(
+          doc(ol(li(p(strong(em('this is a {<>}text')))))),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>strong em </p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(ol(li(p(strong(em('this is a strong em {<>}text')))))),
+        );
+      });
+    });
+
+    describe('paste paragraphs', () => {
+      it('should preserve marks when pasting paragraphs into empty text selection', () => {
+        const { editorView } = editor(doc(p(strong(em('this is {<>}')))));
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>strong em text</p><p>this is another paragraph</p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            p(strong(em('this is strong em text{<>}'))),
+            p(strong(em('this is another paragraph'))),
+          ),
+        );
+      });
+
+      it('should preserve marks when pasting paragraphs into text selection', () => {
+        const { editorView } = editor(
+          doc(p(strong(em('this is strong em text')))),
+        );
+        editorView.dispatch(
+          editorView.state.tr.setSelection(
+            TextSelection.create(editorView.state.doc, 1, 8),
+          ),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>this is another</p><p>hello</p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            p(strong(em('this is another'))),
+            p(strong(em('hello strong em text'))),
+          ),
+        );
+      });
+
+      it('should preserve marks when pasting paragraphs into action/decision', () => {
+        const { editorView } = editor(
+          doc(
+            decisionList({ localId: 'local-decision' })(
+              decisionItem({ localId: 'local-decision' })(
+                strong(em('this is a {<>}text')),
+              ),
+            ),
+          ),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>strong em </p><p>hello </p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            decisionList({ localId: 'local-decision' })(
+              decisionItem({ localId: 'local-decision' })(
+                strong(em('this is a strong em {<>}')),
+                hardBreak(),
+                strong(em('hello text')),
+              ),
+            ),
+          ),
+        );
+      });
+
+      it('should preserve marks when pasting paragraphs into panel', () => {
+        const { editorView } = editor(
+          doc(panel()(p(strong(em('this is a {<>}text'))))),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>strong em </p><p>hello </p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            panel()(
+              p(strong(em('this is a strong em {<>}'))),
+              p(strong(em('hello text'))),
+            ),
+          ),
+        );
+      });
+
+      it('should preserve marks when pasting paragraphs into heading', () => {
+        const { editorView } = editor(
+          doc(h1(strong(em('this is a {<>}text')))),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>strong em </p><p>hello </p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            h1(strong(em('this is a strong em {<>}'))),
+            p(strong(em('hello text'))),
+          ),
+        );
+      });
+
+      it('should preserve marks when pasting paragraphs into list', () => {
+        const { editorView } = editor(
+          doc(ol(li(p(strong(em('this is a {<>}text')))))),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'>strong em </p><p>hello </p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            ol(
+              li(
+                p(strong(em('this is a strong em {<>}'))),
+                p(strong(em('hello text'))),
+              ),
+            ),
+          ),
+        );
+      });
     });
 
     describe('hyperlink as a plain text', () => {

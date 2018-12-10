@@ -1,3 +1,5 @@
+import { Slice, Mark, Node, NodeType, Schema } from 'prosemirror-model';
+
 export function isPastedFromWord(html?: string): boolean {
   return !!html && html.indexOf('urn:schemas-microsoft-com:office:word') >= 0;
 }
@@ -98,4 +100,78 @@ export function escapeLinks(text) {
   return text.replace(/(\[([^\]]+)\]\()?((https?|ftp):\/\/[^\s]+)/g, str => {
     return str.match(/^(https?|ftp):\/\/[^\s]+$/) ? `<${str}>` : str;
   });
+}
+
+export function extractSingleTextNodeFromSlice(
+  slice?: Slice,
+): Node | undefined {
+  if (!slice) {
+    return;
+  }
+
+  // only parse slice if openStart and openEnd have same depth above 0
+  if (slice.openStart !== slice.openEnd || slice.openStart === 0) {
+    return;
+  }
+
+  let node: Node | undefined | null;
+  let hasSingleTextNode = slice.content.childCount === 1;
+
+  while (hasSingleTextNode) {
+    node = !!node ? node.firstChild : slice.content.firstChild;
+
+    hasSingleTextNode =
+      !!node &&
+      !node.isLeaf &&
+      (node.isTextblock || node.isBlock) &&
+      node.childCount === 1;
+  }
+
+  if (node && node.isText) {
+    return node;
+  }
+}
+
+export function hasOnlyNodesOfType(
+  ...nodeTypes: NodeType[]
+): (slice: Slice | undefined) => boolean {
+  return (slice: Slice | undefined) => {
+    let hasOnlyNodesOfType = true;
+
+    if (!slice) {
+      return true;
+    }
+
+    slice.content.descendants((node: Node) => {
+      hasOnlyNodesOfType =
+        hasOnlyNodesOfType && nodeTypes.indexOf(node.type) > -1;
+      return hasOnlyNodesOfType;
+    });
+
+    return hasOnlyNodesOfType;
+  };
+}
+
+export function applyTextMarksToSlice(
+  schema: Schema,
+  marks?: Mark<any>[],
+): (slice?: Slice) => Slice | undefined {
+  return (slice?: Slice) => {
+    if (!slice || !Array.isArray(marks) || marks.length === 0) {
+      return slice;
+    }
+
+    const sliceCopy = Slice.fromJSON(schema, slice.toJSON() || {});
+
+    sliceCopy.content.descendants((node, pos, parent) => {
+      if (node.isText && parent && parent.isBlock) {
+        node.marks = marks;
+        return false;
+      }
+
+      return true;
+    });
+
+    return sliceCopy;
+  };
 }
