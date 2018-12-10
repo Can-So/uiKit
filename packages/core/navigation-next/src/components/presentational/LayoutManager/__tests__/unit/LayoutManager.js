@@ -18,7 +18,7 @@ import type { LayoutManagerProps } from '../../types';
 const GlobalNavigation = () => null;
 const ProductNavigation = () => null;
 
-describe('LayoutManager', () => {
+describe.skip('LayoutManager', () => {
   let defaultProps: $Shape<LayoutManagerProps>;
   let mockNavigationUIController: any;
   beforeEach(() => {
