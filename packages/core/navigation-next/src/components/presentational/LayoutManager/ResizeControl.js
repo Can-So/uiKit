@@ -70,6 +70,7 @@ type ButtonProps = {
   hasHighlight: boolean,
   innerRef: Ref<'button'>,
   isVisible: boolean,
+  onMouseOver?: (SyntheticMouseEvent<>) => void,
 };
 const Button = ({
   children,
@@ -121,7 +122,7 @@ const Button = ({
       css={{
         position: 'absolute',
         left: -8,
-        right: -8,
+        right: -12,
         bottom: -8,
         top: -8,
       }}
@@ -440,7 +441,8 @@ class ResizeControl extends PureComponent<Props, State> {
     const button = (
       <Button
         onClick={this.onResizerChevronClick}
-        onMouseOver={onMouseOver}
+        onMouseOver={!flyoutIsOpen ? onMouseOver : null}
+        flyoutIsOpen={flyoutIsOpen}
         // maintain styles when user is dragging
         isVisible={isCollapsed || mouseIsDown || mouseIsOverNavigation}
         hasHighlight={mouseIsDown || mouseIsOverGrabArea}
