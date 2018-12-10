@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/onboarding",
-  "version": "6.1.12",
+  "version": "6.1.13",
   "description": "Highlight elements of the UI to the user and display a complementary dialog.",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -43,7 +43,7 @@
     "@atlaskit/icon": "^15.0.1",
     "@atlaskit/progress-indicator": "^5.0.10",
     "@atlaskit/webdriver-runner": "^0.1.0",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",
     "react-lorem-component": "^0.12.2"
   }

@@ -1,5 +1,10 @@
 # @atlaskit/onboarding
 
+## 6.1.13
+- [patch] [e59562a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e59562a):
+
+  - Fix for visual bug in SpotlightCard component
+
 ## 6.1.12
 - [patch] [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
 
