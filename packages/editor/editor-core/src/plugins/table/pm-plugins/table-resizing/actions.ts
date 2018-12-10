@@ -3,7 +3,10 @@ import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorState } from 'prosemirror-state';
 import { TableLayout } from '@atlaskit/adf-schema';
-import { tableCellMinWidth, akEditorTableNumberColumnWidth } from '@atlaskit/editor-common';
+import {
+  tableCellMinWidth,
+  akEditorTableNumberColumnWidth,
+} from '@atlaskit/editor-common';
 import { TableCssClassName as ClassName } from '../../types';
 import { addContainerLeftRightPadding } from './resizer/utils';
 

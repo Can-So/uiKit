@@ -27,8 +27,7 @@
   },
   "devDependencies": {
     "@atlaskit/docs": "^6.0.0",
-    "@atlaskit/adf-schema": "^1.0.0",
-    "@atlaskit/editor-common": "^23.0.0",
+    "@atlaskit/adf-schema": "^0.0.1",
     "@atlaskit/editor-core": "^91.0.0",
     "@atlaskit/editor-test-helpers": "^6.3.2",
     "@atlaskit/util-data-test": "^10.0.26",
