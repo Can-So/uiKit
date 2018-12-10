@@ -1,6 +1,11 @@
 // @flow
 
-import React, { Component, Fragment, type ElementRef } from 'react';
+import React, {
+  Component,
+  Fragment,
+  type ElementRef,
+  type SyntheticMouseEvent,
+} from 'react';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 import { colors } from '@atlaskit/theme';
 
@@ -124,6 +129,11 @@ export default class LayoutManager extends Component<
       this.setState({ flyoutIsOpen: true });
     }, FLYOUT_DELAY);
   };
+  closeFlyout = (e: SyntheticMouseEvent) => {
+    e.stopPropagation();
+    clearTimeout(this.flyoutMouseOverTimeout);
+    this.setState({ flyoutIsOpen: false });
+  };
 
   mouseEnter = () => {
     this.setState({ mouseIsOverNavigation: true });
@@ -147,21 +157,23 @@ export default class LayoutManager extends Component<
       globalNavigation: GlobalNavigation,
     } = this.props;
     return (
-      <ThemeProvider
-        theme={theme => ({
-          mode: light, // If no theme already exists default to light mode
-          ...theme,
-        })}
-      >
-        <Fragment>
-          <Shadow
-            isBold={!!containerNavigation}
-            isOverDarkBg
-            style={{ marginLeft: GLOBAL_NAV_WIDTH }}
-          />
-          <GlobalNavigation />
-        </Fragment>
-      </ThemeProvider>
+      <div onMouseOver={this.closeFlyout}>
+        <ThemeProvider
+          theme={theme => ({
+            mode: light, // If no theme already exists default to light mode
+            ...theme,
+          })}
+        >
+          <Fragment>
+            <Shadow
+              isBold={!!containerNavigation}
+              isOverDarkBg
+              style={{ marginLeft: GLOBAL_NAV_WIDTH }}
+            />
+            <GlobalNavigation />
+          </Fragment>
+        </ThemeProvider>
+      </div>
     );
   };
 
@@ -267,10 +279,15 @@ export default class LayoutManager extends Component<
                 isCollapsed && EXPERIMENTAL_FLYOUT_ON_HOVER && flyoutIsOpen
                   ? this.mouseOutFlyoutArea
                   : null;
+              const onMouseOver =
+                isCollapsed && EXPERIMENTAL_FLYOUT_ON_HOVER && !flyoutIsOpen
+                  ? this.mouseOverFlyoutArea
+                  : null;
               return (
                 <NavigationContainer
                   innerRef={this.getContainerRef}
                   onMouseEnter={this.mouseEnter}
+                  onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
                   onMouseLeave={this.mouseLeave}
                 >
@@ -292,16 +309,9 @@ export default class LayoutManager extends Component<
                     navigation={navigationUIController}
                   >
                     {({ isDragging, width }) => {
-                      const onMouseOver =
-                        isCollapsed &&
-                        EXPERIMENTAL_FLYOUT_ON_HOVER &&
-                        !flyoutIsOpen
-                          ? this.mouseOverFlyoutArea
-                          : null;
                       return (
                         <ContainerNavigationMask
                           disableInteraction={itemIsDragging}
-                          onMouseOver={onMouseOver}
                         >
                           <RenderBlocker
                             blockOnChange
