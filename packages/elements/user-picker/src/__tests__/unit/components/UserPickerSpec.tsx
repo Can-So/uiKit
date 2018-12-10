@@ -86,6 +86,22 @@ describe('UserPicker', () => {
     expect(onSelection).toHaveBeenCalledWith(users[0]);
   });
 
+  it('should call onFocus handler', () => {
+    const onFocus = jest.fn();
+    const component = shallowUserPicker({ onFocus });
+
+    component.simulate('focus');
+    expect(onFocus).toHaveBeenCalled();
+  });
+
+  it('should call onBlur handler', () => {
+    const onBlur = jest.fn();
+    const component = shallowUserPicker({ onBlur });
+
+    component.simulate('blur');
+    expect(onBlur).toHaveBeenCalled();
+  });
+
   describe('Multiple users select', () => {
     it('should set isMulti in Select', () => {
       const component = shallowUserPicker({ users, isMulti: true });
@@ -124,7 +140,7 @@ describe('UserPicker', () => {
   it('should open menu onFocus', () => {
     const component = shallowUserPicker();
     const select = component.find(Select);
-    select.simulate('focus', { target: {} });
+    select.simulate('focus');
     expect(component.state()).toHaveProperty('menuIsOpen', true);
   });
 
