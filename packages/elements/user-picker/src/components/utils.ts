@@ -42,7 +42,7 @@ export const getOptions = memoizeOne(
 
 export const usersToOptions = memoizeOne((defaultValue: UserValue) => {
   if (!defaultValue) {
-    return undefined;
+    return null;
   }
   if (Array.isArray(defaultValue)) {
     return defaultValue.map(userToOption);
