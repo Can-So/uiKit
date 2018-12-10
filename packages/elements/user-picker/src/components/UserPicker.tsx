@@ -163,8 +163,11 @@ export class UserPicker extends React.Component<
   private handleFocus = (event: React.FocusEvent) => {
     const { value } = this.state;
     this.setState({ menuIsOpen: true });
-    const input = event.target;
-    if (!this.props.isMulti && isSingleValue(value)) {
+    if (this.props.onFocus) {
+      this.props.onFocus();
+    }
+    if (!this.props.isMulti && isSingleValue(value) && event) {
+      const input = event.target;
       this.setState({ inputValue: value.label, preventFilter: true }, () => {
         if (input instanceof HTMLInputElement) {
           input.select();
@@ -174,6 +177,9 @@ export class UserPicker extends React.Component<
   };
 
   private handleBlur = () => {
+    if (this.props.onBlur) {
+      this.props.onBlur();
+    }
     this.setState({ menuIsOpen: false, inputValue: '', preventFilter: false });
   };
 
