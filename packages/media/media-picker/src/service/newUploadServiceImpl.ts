@@ -6,7 +6,6 @@ import {
   FileDetails,
   getMediaTypeFromMimeType,
   ContextFactory,
-  FileState,
   FileStreamCache,
   fileStreamsCache,
 } from '@atlaskit/media-core';
@@ -17,6 +16,7 @@ import {
   MediaStoreCopyFileWithTokenParams,
   MediaStoreResponse,
   MediaFile as MediaStoreMediaFile,
+  TouchFileDescriptor,
 } from '@atlaskit/media-store';
 import { EventEmitter2 } from 'eventemitter2';
 import { MediaFile, PublicMediaFile } from '../domain/file';
@@ -32,7 +32,6 @@ import {
   UploadServiceEventListener,
   UploadServiceEventPayloadTypes,
 } from './types';
-import { Observable } from 'rxjs/Observable';
 import { LocalFileSource, LocalFileWithSource } from '../service/types';
 import { getPreviewFromBlob } from '../util/getPreviewFromBlob';
 
@@ -94,63 +93,6 @@ export class NewUploadServiceImpl implements UploadService {
     return new UploadController();
   }
 
-  getUpfrontIds = (
-    observable?: Observable<FileState>,
-    tenantOccurrenceKey?: string,
-  ): UpfrontIds => {
-    const getIdFromObservable = (observable: Observable<FileState>) =>
-      new Promise<string>((resolve, reject) => {
-        const subscription = observable.subscribe({
-          next: state => {
-            resolve(state.id);
-            subscription.unsubscribe();
-          },
-          error: reject,
-        });
-      });
-
-    const getOccurrenceKeyFromObservable = (
-      observable: Observable<FileState>,
-    ) =>
-      new Promise<string>((resolve, reject) => {
-        const subscription = observable.subscribe({
-          next: state => {
-            resolve(state.occurrenceKey);
-            subscription.unsubscribe();
-          },
-          error: reject,
-        });
-      });
-
-    const { shouldCopyFileToRecents } = this;
-    if (shouldCopyFileToRecents && observable) {
-      return {
-        // We don't specify userUpfrontId since this is the case
-        // when we use upload directly to tenant first
-        upfrontId: getIdFromObservable(observable),
-      };
-    } else if (this.userMediaStore && observable) {
-      const userUpfrontId = getIdFromObservable(observable);
-      const userOccurrenceKey = getOccurrenceKeyFromObservable(observable);
-      const { collection } = this.tenantUploadParams;
-      const options = { collection, occurrenceKey: tenantOccurrenceKey };
-      // We want to create an empty file in the tenant collection
-      const upfrontId = this.tenantMediaStore
-        .createFile(options)
-        .then(response => response.data.id);
-      return {
-        userUpfrontId,
-        upfrontId,
-        userOccurrenceKey,
-      };
-    } else {
-      return {
-        userUpfrontId: Promise.reject(),
-        upfrontId: Promise.reject(),
-      };
-    }
-  };
-
   addFiles(files: File[]): void {
     this.addFilesWithSource(
       files.map((file: File) => ({
@@ -166,51 +108,81 @@ export class NewUploadServiceImpl implements UploadService {
     }
 
     const creationDate = Date.now();
+
+    const { userContext, tenantContext, shouldCopyFileToRecents } = this;
+    const context = shouldCopyFileToRecents ? tenantContext : userContext;
+    const collection = shouldCopyFileToRecents
+      ? this.tenantUploadParams.collection
+      : RECENTS_COLLECTION;
+
+    if (!context) {
+      return;
+    }
+
+    const touchFileDescriptors = new Array(files.length)
+      .fill(null)
+      .map<TouchFileDescriptor & { occurrenceKey: string }>(() => {
+        return {
+          fileId: uuid.v4(),
+          occurrenceKey: uuid.v4(),
+          collection,
+        };
+      });
+
+    const promisedTouchFiles = context.file.touchFiles(
+      touchFileDescriptors,
+      collection,
+    );
+
     const cancellableFileUploads: CancellableFileUpload[] = files.map(
-      fileWithSource => {
+      (fileWithSource, i) => {
         const { file, source } = fileWithSource;
-        const id = uuid.v4();
-        const { userContext, tenantContext, shouldCopyFileToRecents } = this;
+
+        const { fileId: id, occurrenceKey } = touchFileDescriptors[i];
+        const promisedUploadId = promisedTouchFiles.then(touchedFiles => {
+          const touchedFile = touchedFiles.created.find(
+            touchedFile => touchedFile.fileId === id,
+          );
+          if (!touchedFile) {
+            throw new Error(
+              'Cant retrieve uploadId from result of touch endpoint call',
+            );
+          }
+          return touchedFile.uploadId;
+        });
+
         const uploadableFile: UploadableFile = {
-          collection: shouldCopyFileToRecents
-            ? this.tenantUploadParams.collection
-            : RECENTS_COLLECTION,
+          collection,
           content: file,
           name: file.name,
           mimeType: file.type,
+          id,
+          occurrenceKey,
+          promisedUploadId,
         };
-        const context = shouldCopyFileToRecents ? tenantContext : userContext;
 
         const controller = this.createUploadController();
-        let observable: Observable<FileState> | undefined;
+        const observable = context.file.upload(uploadableFile, controller);
 
-        if (context) {
-          observable = context.file.upload(uploadableFile, controller);
+        let userUpfrontId: Promise<string> | undefined;
+        let userOccurrenceKey: Promise<string> | undefined;
 
-          const subscrition = observable.subscribe({
-            next: state => {
-              if (state.status === 'uploading') {
-                this.onFileProgress(cancellableFileUpload, state.progress);
-              }
+        let upfrontId = Promise.resolve(id);
 
-              if (state.status === 'processing') {
-                subscrition.unsubscribe();
-
-                this.onFileSuccess(cancellableFileUpload, state.id);
-              }
-            },
-            error: error => {
-              this.onFileError(mediaFile, 'upload_fail', error);
-            },
-          });
+        if (!shouldCopyFileToRecents) {
+          const tenantOccurrenceKey = uuid.v4();
+          const { collection } = this.tenantUploadParams;
+          const options = {
+            collection,
+            occurrenceKey: tenantOccurrenceKey,
+          };
+          // We want to create an empty file in the tenant collection
+          upfrontId = this.tenantMediaStore
+            .createFile(options)
+            .then(response => response.data.id);
+          userUpfrontId = Promise.resolve(id);
+          userOccurrenceKey = Promise.resolve(occurrenceKey);
         }
-
-        const occurrenceKey = uuid.v4();
-        const {
-          upfrontId,
-          userUpfrontId,
-          userOccurrenceKey,
-        } = this.getUpfrontIds(observable, occurrenceKey);
 
         const mediaFile: MediaFile = {
           id,
@@ -233,20 +205,33 @@ export class NewUploadServiceImpl implements UploadService {
           },
         };
 
+        const subscription = observable.subscribe({
+          next: state => {
+            if (state.status === 'uploading') {
+              this.onFileProgress(cancellableFileUpload, state.progress);
+            }
+
+            if (state.status === 'processing') {
+              subscription.unsubscribe();
+
+              this.onFileSuccess(cancellableFileUpload, id);
+            }
+          },
+          error: error => {
+            this.onFileError(mediaFile, 'upload_fail', error);
+          },
+        });
+
         this.cancellableFilesUploads[id] = cancellableFileUpload;
         // Save observable in the cache
-        upfrontId.then(id => {
-          if (context && observable) {
-            const key = FileStreamCache.createKey(id);
-            const keyWithCollection = FileStreamCache.createKey(id, {
-              collectionName: this.tenantUploadParams.collection,
-            });
-
-            // We want to save the observable without collection too, due consumers using cards without collection.
-            fileStreamsCache.set(key, observable);
-            fileStreamsCache.set(keyWithCollection, observable);
-          }
+        const key = FileStreamCache.createKey(id);
+        const keyWithCollection = FileStreamCache.createKey(id, {
+          collectionName: this.tenantUploadParams.collection,
         });
+
+        // We want to save the observable without collection too, due consumers using cards without collection.
+        fileStreamsCache.set(key, observable);
+        fileStreamsCache.set(keyWithCollection, observable);
 
         return cancellableFileUpload;
       },

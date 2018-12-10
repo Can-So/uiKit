@@ -8,6 +8,7 @@ import {
   UploadController,
   uploadFile,
   MediaFileArtifacts,
+  TouchFileDescriptor,
 } from '@atlaskit/media-store';
 import {
   FilePreview,
@@ -83,79 +84,73 @@ export class FileFetcher {
     });
   };
 
+  touchFiles(descriptors: TouchFileDescriptor[], collection?: string) {
+    return this.mediaStore
+      .touchFiles({ descriptors }, { collection })
+      .then(({ data }) => data);
+  }
+
   upload(
     file: UploadableFile,
     controller?: UploadController,
   ): Observable<FileState> {
-    let fileId: string;
+    const {
+      id,
+      content,
+      occurrenceKey,
+      name = '', // name property is not available in base64 image
+    } = file;
     let mimeType = '';
-    let preview: FilePreview;
+    let size = 0;
+    let preview: FilePreview | undefined;
     // TODO [MSW-796]: get file size for base64
-    const size = file.content instanceof Blob ? file.content.size : 0;
     const mediaType = getMediaTypeFromUploadableFile(file);
-    const collectionName = file.collection;
-    const name = file.name || ''; // name property is not available in base64 image
     const subject = new ReplaySubject<FileState>(1);
 
-    if (file.content instanceof Blob) {
-      mimeType = file.content.type;
+    if (content instanceof Blob) {
+      size = content.size;
+      mimeType = content.type;
       preview = {
-        blob: file.content,
+        blob: content,
       };
     }
-    const { deferredFileId: onUploadFinish, cancel } = uploadFile(
-      file,
-      this.mediaStore,
-      {
-        onProgress: progress => {
-          if (fileId) {
-            subject.next({
-              progress,
-              name,
-              size,
-              mediaType,
-              mimeType,
-              id: fileId,
-              status: 'uploading',
-              preview,
-            });
-          }
-        },
-        onId: (id, occurrenceKey) => {
-          fileId = id;
-          const key = FileStreamCache.createKey(fileId, { collectionName });
-          fileStreamsCache.set(key, subject);
-          if (file.content instanceof Blob) {
-            subject.next({
-              name,
-              size,
-              mediaType,
-              mimeType,
-              id: fileId,
-              occurrenceKey,
-              progress: 0,
-              status: 'uploading',
-              preview,
-            });
-          }
-        },
+    const stateBase = {
+      name,
+      size,
+      mediaType,
+      mimeType,
+      id,
+      occurrenceKey,
+      preview,
+    };
+
+    const { cancel, whenUploadFinish } = uploadFile(file, this.mediaStore, {
+      onProgress: progress => {
+        subject.next({
+          status: 'uploading',
+          ...stateBase,
+          progress,
+        });
       },
-    );
+    });
+
+    setTimeout(() => {
+      subject.next({
+        status: 'uploading',
+        ...stateBase,
+        progress: 0,
+      });
+    }, 0);
 
     if (controller) {
       controller.setAbort(cancel);
     }
 
-    onUploadFinish
+    whenUploadFinish
       .then(() => {
         subject.next({
-          id: fileId,
-          name,
-          size,
-          mediaType,
-          mimeType,
           status: 'processing',
-          preview,
+          ...stateBase,
         });
         subject.complete();
       })
