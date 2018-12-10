@@ -15,6 +15,7 @@ export interface Props {
   text: string;
   onEnter: () => void;
   onColorClick: (value: ColorType) => void;
+  onColorHover?: (value: ColorType) => void;
   onTextChanged: (value: string) => void;
   autoFocus?: boolean;
 }
@@ -28,7 +29,7 @@ export class StatusPicker extends PureComponent<Props, any> {
   };
 
   render() {
-    const { text, selectedColor, onColorClick } = this.props;
+    const { text, selectedColor, onColorClick, onColorHover } = this.props;
 
     // Using <React.Fragment> instead of [] to workaround Enzyme
     // (https://github.com/airbnb/enzyme/issues/1149)
@@ -48,6 +49,7 @@ export class StatusPicker extends PureComponent<Props, any> {
         <ColorPalette
           key={this.colorPaletteKey}
           onClick={onColorClick}
+          onHover={onColorHover}
           selectedColor={selectedColor}
         />
       </React.Fragment>

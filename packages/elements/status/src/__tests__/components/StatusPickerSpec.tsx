@@ -6,20 +6,24 @@ import ColorPalette from '../../components/internal/color-palette';
 
 describe('StatusPicker', () => {
   it('should render color palette', () => {
-    const onColorClick = () => {};
+    const onColorClick = jest.fn();
+    const onColorHover = jest.fn();
+
     const component = shallow(
       <StatusPicker
         selectedColor="red"
         text=""
         onColorClick={onColorClick}
+        onColorHover={onColorHover}
         onTextChanged={() => {}}
         onEnter={() => {}}
       />,
     );
-
-    expect(component.find(ColorPalette).length).toBe(1);
-    expect(component.find(ColorPalette).prop('selectedColor')).toBe('red');
-    expect(component.find(ColorPalette).prop('onClick')).toBe(onColorClick);
+    const colorPalette = component.find(ColorPalette);
+    expect(colorPalette.length).toBe(1);
+    expect(colorPalette.prop('selectedColor')).toBe('red');
+    expect(colorPalette.prop('onClick')).toBe(onColorClick);
+    expect(colorPalette.prop('onHover')).toBe(onColorHover);
   });
 
   it('should render field text', () => {

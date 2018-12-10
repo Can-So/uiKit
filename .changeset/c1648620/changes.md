@@ -1,0 +1,1 @@
+- added native status analytics
