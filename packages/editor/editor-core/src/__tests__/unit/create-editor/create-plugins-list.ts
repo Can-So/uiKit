@@ -127,7 +127,10 @@ describe('createPluginsList', () => {
       },
     ];
 
-    const props = { insertMenuItems: customItems };
+    const props = {
+      insertMenuItems: customItems,
+      nativeStatusSupported: false,
+    };
 
     createPluginsList(props);
     expect(insertBlockPlugin).toHaveBeenCalledTimes(1);
