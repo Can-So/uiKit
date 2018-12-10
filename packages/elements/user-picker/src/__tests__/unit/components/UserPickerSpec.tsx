@@ -160,6 +160,18 @@ describe('UserPicker', () => {
     expect(component.state()).toHaveProperty('menuIsOpen', false);
   });
 
+  describe('auto focus', () => {
+    it('should autoFocus if open by default', () => {
+      const component = shallowUserPicker({ open: true });
+      expect(component.find(Select).prop('autoFocus')).toBeTruthy();
+    });
+
+    it('should not autoFocus if not open by default', () => {
+      const component = shallowUserPicker();
+      expect(component.find(Select).prop('autoFocus')).toBeFalsy();
+    });
+  });
+
   describe('async load', () => {
     beforeEach(() => jest.useFakeTimers());
     afterEach(() => jest.useRealTimers());

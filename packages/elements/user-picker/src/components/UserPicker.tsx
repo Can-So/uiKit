@@ -62,7 +62,6 @@ export const UserPicker = withAnalyticsEvents()(
       } else if (nextProps.defaultValue && !prevState.value) {
         derivedState.value = usersToOptions(nextProps.defaultValue);
       }
-      // trigger onInputChange
       if (
         nextProps.search !== undefined &&
         nextProps.search !== prevState.inputValue
@@ -88,7 +87,7 @@ export const UserPicker = withAnalyticsEvents()(
         inflightRequest: 0,
         count: 0,
         hoveringClearIndicator: false,
-        menuIsOpen: false,
+        menuIsOpen: !!this.props.open,
         inputValue: props.search || '',
         preventFilter: false,
       };
@@ -334,6 +333,7 @@ export const UserPicker = withAnalyticsEvents()(
       return (
         <Select
           value={value}
+          autoFocus={menuIsOpen}
           ref={this.handleSelectRef}
           isMulti={isMulti}
           options={this.getOptions()}

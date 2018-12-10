@@ -1,0 +1,1 @@
+- FS-3319 focus if the picker is open by default
