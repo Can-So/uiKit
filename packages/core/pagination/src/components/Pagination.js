@@ -1,148 +1,173 @@
-// @flow
-import React, { Component } from 'react';
+//@flow
+import React, { Component, Fragment } from 'react';
 import {
   withAnalyticsEvents,
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
-import Button from '@atlaskit/button';
-import ChevronLeftLargeIcon from '@atlaskit/icon/glyph/chevron-left-large';
-import ChevronRightLargeIcon from '@atlaskit/icon/glyph/chevron-right-large';
-
+import PageComponent from './Page';
+import { LeftNavigator, RightNavigator } from './Navigators';
+import renderDefaultEllipsis from './renderEllipsis';
+import collapseRangeHelper from '../util/collapseRange';
 import {
   name as packageName,
   version as packageVersion,
 } from '../../package.json';
+import { type PaginationPropTypes } from '../types';
 
-import { type i18nShape, defaultI18n } from '../internal/props';
-import { Container, Ellipsis, StyledButton } from '../styled';
-import pageRange from '../internal/page-range';
-
-const MAX_VISIBLE_PAGES = 7;
-
-type Props = {|
-  /** The default current page. This makes the current page value uncontrolled. */
-  defaultValue: number,
-  /** Object that sets the labels for the previous and next buttons. It should
-  have the properties 'prev' and 'next', which should be strings. Defaults to
-  'Prev' and 'Next' */
-  i18n: i18nShape,
-  /** Called when the page is changed. Will be called with the number of the new page. */
-  onChange: number => void,
-  /** The total number of pages in the pagination. */
-  total: number,
-  /** The current page. This makes the current page value controlled */
-  value?: number,
-|};
-
-type State = {
-  current: number,
+type StateType = {
+  selectedIndex: number,
 };
 
-class Pagination extends Component<Props, State> {
+class Pagination extends Component<PaginationPropTypes, StateType> {
   static defaultProps = {
-    defaultValue: 1,
-    i18n: defaultI18n,
+    components: {},
+    renderEllipsis: renderDefaultEllipsis,
+    i18n: {
+      prev: 'previous',
+      next: 'next',
+    },
     onChange: () => {},
-    total: 0,
+    defaultSelectedIndex: 0,
+    max: 7,
+    collapseRange: collapseRangeHelper,
+    innerStyles: {},
   };
 
   state = {
-    current: this.props.defaultValue,
+    selectedIndex: this.props.defaultSelectedIndex,
   };
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (this.props.defaultValue !== nextProps.defaultValue) {
-      this.setState({ current: nextProps.defaultValue });
+  static getDerivedStateFromProps(props) {
+    // selectedIndex is controlled
+    if (props.selectedIndex != null) {
+      return {
+        selectedIndex: props.selectedIndex,
+      };
     }
+    return null;
   }
 
-  getCurrentPage() {
-    return this.props.value ? this.props.value : this.state.current;
-  }
+  createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
 
-  onPageChange = (page: number) => {
-    if (this.props.value) {
-      this.props.onChange(page);
-    } else {
-      this.setState({ current: page });
+  onChangeAnalyticsCaller = () => {
+    const { createAnalyticsEvent } = this.props;
+
+    if (createAnalyticsEvent) {
+      return this.createAndFireEventOnAtlaskit({
+        action: 'changed',
+        actionSubject: 'pageNumber',
+
+        attributes: {
+          componentName: 'pagination',
+          packageName,
+          packageVersion,
+        },
+      })(createAnalyticsEvent);
     }
+    return undefined;
+  };
+
+  onChange = (event: SyntheticEvent<>, newSelectedPage: number) => {
+    if (this.props.selectedIndex === undefined) {
+      this.setState({
+        selectedIndex: newSelectedPage,
+      });
+    }
+    const analyticsEvent = this.onChangeAnalyticsCaller();
+    if (this.props.onChange) {
+      this.props.onChange(
+        event,
+        this.props.pages[newSelectedPage],
+        analyticsEvent,
+      );
+    }
+  };
+
+  pagesToComponents = (pages: Array<any>) => {
+    const { selectedIndex } = this.state;
+    const { components, getPageLabel } = this.props;
+    return pages.map((page, index) => {
+      return (
+        <PageComponent
+          key={`page-${getPageLabel ? getPageLabel(page, index) : index}`}
+          component={components.Page}
+          onClick={event => this.onChange(event, index)}
+          isSelected={selectedIndex === index}
+          page={page}
+        >
+          {getPageLabel ? getPageLabel(page, index) : page}
+        </PageComponent>
+      );
+    });
+  };
+
+  renderPages = () => {
+    const { selectedIndex } = this.state;
+    const { pages, max, collapseRange, renderEllipsis } = this.props;
+    const pagesComponents = this.pagesToComponents(pages);
+
+    return collapseRange(pagesComponents, selectedIndex, {
+      max,
+      ellipsis: renderEllipsis,
+    });
+  };
+
+  renderLeftNavigator = () => {
+    const { components, pages, i18n } = this.props;
+    const { selectedIndex } = this.state;
+    const props = {
+      ariaLabel: i18n.prev,
+      pages,
+      selectedIndex,
+    };
+
+    return (
+      <LeftNavigator
+        key="left-navigator"
+        component={components.Previous}
+        onClick={event => this.onChange(event, selectedIndex - 1)}
+        isDisabled={selectedIndex === 0}
+        {...props}
+      />
+    );
+  };
+
+  renderRightNavigator = () => {
+    const { components, pages, i18n } = this.props;
+    const { selectedIndex } = this.state;
+    const props = {
+      ariaLabel: i18n.next,
+      selectedIndex,
+      pages,
+    };
+    return (
+      <RightNavigator
+        key="right-navigator"
+        component={components.Next}
+        onClick={event => this.onChange(event, selectedIndex + 1)}
+        isDisabled={selectedIndex === pages.length - 1}
+        {...props}
+      />
+    );
   };
 
   render() {
-    const { total, i18n } = this.props;
-    if (!i18n || !i18n.prev || !i18n.next) {
-      throw new Error('Pagination component provided unusable i18nShape');
-    }
-    const current = this.getCurrentPage();
-
-    if (total === 0) {
-      return null;
-    }
-
+    const { innerStyles } = this.props;
     return (
-      <Container>
-        <StyledButton
-          appearance="subtle"
-          ariaLabel={i18n.prev}
-          isDisabled={current === 1}
-          onClick={() => this.onPageChange(current - 1)}
-          spacing="none"
-        >
-          <ChevronLeftLargeIcon size="medium" />
-        </StyledButton>
-
-        {pageRange(MAX_VISIBLE_PAGES, current, total).map(
-          (pageNum: '...' | number, i) => {
-            const isSelected = pageNum === current;
-            const key = `${pageNum}-${i}`;
-            return pageNum === '...' ? (
-              <Ellipsis key={key}>...</Ellipsis>
-            ) : (
-              <Button
-                appearance="subtle"
-                isSelected={isSelected}
-                key={key}
-                // $FlowFixMe fails to narrow type after ternary
-                onClick={() => !isSelected && this.onPageChange(pageNum)}
-              >
-                {pageNum}
-              </Button>
-            );
-          },
-        )}
-        <StyledButton
-          appearance="subtle"
-          ariaLabel={i18n.next}
-          isDisabled={current === total}
-          onClick={() => this.onPageChange(current + 1)}
-          spacing="none"
-        >
-          <ChevronRightLargeIcon size="medium" />
-        </StyledButton>
-      </Container>
+      <div style={{ display: 'flex', ...innerStyles }}>
+        <Fragment>
+          {this.renderLeftNavigator()}
+          {this.renderPages()}
+          {this.renderRightNavigator()}
+        </Fragment>
+      </div>
     );
   }
 }
-
-export { Pagination as PaginationWithoutAnalytics };
-const createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
 
 export default withAnalyticsContext({
   componentName: 'pagination',
   packageName,
   packageVersion,
-})(
-  withAnalyticsEvents({
-    onChange: createAndFireEventOnAtlaskit({
-      action: 'changed',
-      actionSubject: 'pageNumber',
-
-      attributes: {
-        componentName: 'pagination',
-        packageName,
-        packageVersion,
-      },
-    }),
-  })(Pagination),
-);
+})(withAnalyticsEvents()(Pagination));

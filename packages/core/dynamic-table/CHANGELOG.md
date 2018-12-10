@@ -1,5 +1,9 @@
 # @atlaskit/dynamic-table
 
+## 10.0.21
+- Updated dependencies [1a09599](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a09599):
+  - @atlaskit/pagination@9.0.0
+
 ## 10.0.20
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3
