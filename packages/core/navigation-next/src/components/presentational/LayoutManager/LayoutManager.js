@@ -4,7 +4,7 @@ import React, {
   Component,
   Fragment,
   type ElementRef,
-  type SyntheticMouseEvent,
+  type SyntheticEvent,
 } from 'react';
 import { NavigationAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 import { colors } from '@atlaskit/theme';
@@ -129,7 +129,7 @@ export default class LayoutManager extends Component<
       this.setState({ flyoutIsOpen: true });
     }, FLYOUT_DELAY);
   };
-  closeFlyout = (e: SyntheticMouseEvent) => {
+  closeFlyout = (e: SyntheticEvent) => {
     e.stopPropagation();
     clearTimeout(this.flyoutMouseOverTimeout);
     this.setState({ flyoutIsOpen: false });
