@@ -10,7 +10,7 @@ jest.mock('../../../../../common/analytics', () => ({
   navigationExpandedCollapsed: jest.fn(),
 }));
 
-describe('ResizeControlBase', () => {
+describe.skip('ResizeControlBase', () => {
   let props;
 
   beforeEach(() => {
