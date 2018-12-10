@@ -34,7 +34,7 @@ export default class StatefulAvatarPickerDialog extends React.Component<
   timeoutId: number = 0;
 
   state = {
-    isOpen: true,
+    isOpen: false,
     imagePreviewSource: '',
     isLoading: false,
   };
