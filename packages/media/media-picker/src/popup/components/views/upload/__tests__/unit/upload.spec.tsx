@@ -264,7 +264,7 @@ describe('<StatelessUploadView />', () => {
           },
         ] as SelectedItem[],
       };
-      const component = mount(
+      const component = mount<UploadViewProps, UploadViewState>(
         getUploadViewElement(
           false,
           [],
@@ -272,7 +272,6 @@ describe('<StatelessUploadView />', () => {
           removeFileFromRecents,
         ),
       );
-      // @ts-ignore
       const deleteActionHandler = getDeleteActionHandler(component);
       const readyIds = Promise.all([
         upfrontId,
@@ -338,7 +337,7 @@ describe('<StatelessUploadView />', () => {
     });
 
     const setup = () => {
-      const component = mount(
+      const component = mount<UploadViewProps, UploadViewState>(
         getUploadViewElement(
           false,
           [
@@ -357,7 +356,6 @@ describe('<StatelessUploadView />', () => {
           removeFileFromRecents,
         ),
       );
-      // @ts-ignore
       const deleteActionHandler = getDeleteActionHandler(component);
 
       return { component, deleteActionHandler };
