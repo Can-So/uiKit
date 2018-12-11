@@ -1,0 +1,1 @@
+- reset Card state when props change
