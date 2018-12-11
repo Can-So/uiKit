@@ -119,6 +119,7 @@ export const UserPicker = withAnalyticsEvents()(
       if (removedValue && removedValue.user.fixed) {
         return;
       }
+      this.setState({ inputValue: '' });
       const { onChange, onSelection, isMulti } = this.props;
       callCallback(onChange, extractUserValue(value), action);
 

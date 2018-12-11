@@ -367,6 +367,15 @@ describe('UserPicker', () => {
       select.simulate('focus', { target: input });
       expect(highlightInput).toBeCalledTimes(1);
     });
+
+    it('should clear inputValue on change after focus', () => {
+      const component = shallowUserPicker({ value: users[0] });
+      const select = component.find(Select);
+      select.simulate('focus', {});
+      select.simulate('change', null, { action: 'clear' });
+      component.update();
+      expect(component.find(Select).prop('inputValue')).toBe('');
+    });
   });
 
   describe('preventFilter', () => {
