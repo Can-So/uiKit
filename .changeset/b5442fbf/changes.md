@@ -1,0 +1,1 @@
+- Use version 0.15.0 of extract-react-types - the breaking change cannot be absorbed by changes in this package.
