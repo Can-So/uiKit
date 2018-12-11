@@ -1,0 +1,1 @@
+- ED-5888 Add dark mode for media-card

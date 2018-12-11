@@ -31,6 +31,7 @@
     "@atlaskit/icon": "^15.0.2",
     "@atlaskit/media-ui": "^8.1.2",
     "@atlaskit/spinner": "^9.0.13",
+    "@atlaskit/theme": "^7.0.0",
     "@atlaskit/util-shared-styles": "^2.10.3",
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.5",

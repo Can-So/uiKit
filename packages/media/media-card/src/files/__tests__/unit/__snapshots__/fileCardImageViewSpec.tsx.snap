@@ -5,7 +5,7 @@ exports[`FileCardView should render correct background based on mediaType" 1`] =
   box-shadow: 0 1px 1px rgba(9,30,66,0.2),0 0 1px 0 rgba(9,30,66,0.24);
   cursor: pointer;
   border-radius: 3px;
-  background: #fff;
+  background: #FFF;
   line-height: normal;
   position: relative;
   width: 100%;
@@ -52,7 +52,7 @@ exports[`FileCardView should render correct background based on mediaType" 2`] =
   box-shadow: 0 1px 1px rgba(9,30,66,0.2),0 0 1px 0 rgba(9,30,66,0.24);
   cursor: pointer;
   border-radius: 3px;
-  background: #fff;
+  background: #FFF;
   line-height: normal;
   position: relative;
   width: 100%;

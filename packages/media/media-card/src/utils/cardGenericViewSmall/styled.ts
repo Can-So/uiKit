@@ -4,11 +4,8 @@ import styled from 'styled-components';
 import { HTMLAttributes, ComponentClass } from 'react';
 import { Root, cardShadow, antialiased, easeOutExpo } from '../../styles';
 import { center, ellipsis, borderRadius, size } from '@atlaskit/media-ui';
-import {
-  akColorN20,
-  akColorN70,
-  akColorB300,
-} from '@atlaskit/util-shared-styles';
+import { akColorN70, akColorB300 } from '@atlaskit/util-shared-styles';
+import { colors, themed } from '@atlaskit/theme';
 
 const imgSize = 32;
 
@@ -35,7 +32,7 @@ export const SmallCard: ComponentClass<
 
     return '';
   }} &:hover {
-    background-color: ${akColorN20};
+    background-color: ${themed({ light: colors.N20, dark: colors.DN50 })};
   }
 
   &.loading {
@@ -46,7 +43,7 @@ export const SmallCard: ComponentClass<
     .title,
     .subtitle {
       ${borderRadius} color: transparent;
-      background-color: ${akColorN20};
+      background-color: ${themed({ light: colors.N20, dark: colors.DN50 })};
       height: 10px;
     }
 
