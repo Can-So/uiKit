@@ -1,5 +1,15 @@
 # @atlaskit/editor-core
 
+## 90.3.16
+- [patch] [43501db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/43501db):
+
+  - ED-5812: Fixes some regressions in the mobile editor
+
+  Including:
+   * Disables mediaGoup lazy loading.
+   * Fixes unsupported emoji content.
+   * Fixes missed call to Android bridge for block state.
+
 ## 90.3.15
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2
