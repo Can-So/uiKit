@@ -1,5 +1,10 @@
 # @atlaskit/media-image
 
+## 44.1.4
+- [patch] [6f44079](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6f44079):
+
+  - ED-5612: make image preview display correctly after replacing Card props
+
 ## 44.1.3
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

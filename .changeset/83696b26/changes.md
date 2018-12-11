@@ -1,1 +1,0 @@
-- ED-5612: make image preview display correctly after replacing Card props
