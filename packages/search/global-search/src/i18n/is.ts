@@ -14,7 +14,7 @@ export default {
     'Eða notaðu<a href={url}>ítarleg leit</a> (`shift + enter`) til að þrengja niðurstöðurnar.',
   'global_search.no_results_title': 'Engar niðurstöður í titlum og fólki',
   'global_search.no_results_body':
-    'Reyndu að leita með öðru leitarorði. Þú getur líka leitað í síðuinnihaldi með ítarlegu leitinni eða leitað að fólki hér fyrir neðan.',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.people.recent_people_heading': 'Nýlega unnið með',
   'global_search.people.people_heading': 'Fólk',
   'global_search.people.advanced_search': 'Leita að fólki',
@@ -25,12 +25,12 @@ export default {
   'global_search.jira.search_placeholder': 'Leita í Jira',
   'global_search.jira.recent_issues_heading': 'Nýleg málefni',
   'global_search.jira.recent_people_heading': 'Nýlega unnið með',
-  'global_search.jira.recent_containers': 'Nýlegar töflur, síur og verkefni',
+  'global_search.jira.recent_containers': 'Recent boards, projects and filters',
   'global_search.jira.search_result_issues_heading': 'Málefni',
   'global_search.jira.search_result_containers_heading':
-    'Töflur, síur og verkefni',
+    'Boards, projects and filters',
   'global_search.jira.search_result_people_heading': 'Fólk',
-  'global_search.jira.advanced_search': 'Fara í ítarlega leit fyrir',
+  'global_search.jira.advanced_search': 'Advanced search for',
   'global_search.jira.advanced_search_issues': 'málefni',
   'global_search.jira.advanced_search_projects': 'verkefni',
   'global_search.jira.advanced_search_boards': 'Töflur',
@@ -38,9 +38,16 @@ export default {
   'global_search.jira.advanced_search_people': 'fólk',
   'global_search.jira.advanced_issue_search': 'Ítarleg leit fyrir málefni',
   'global_search.jira.no_results_title':
-    'Engar niðurstöður í málefnasamantektum, nöfnum og fólki',
+    "We couldn't find anything matching your search",
   'global_search.jira.no_results_body':
-    'Reyndu að leita með öðru leitarorði. Þú getur líka leitað í öllum textareitum í málefnum með ítarlegu leitinni eða leitað að öðrum atriðum á sértækari hátt.',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.jira.no_recent_activity_body':
     'Eða fínstillt niðurstöðurnar þínar með ítarlegu leitinni okkar.',
+  'global_search.jira.project_type.business_project': 'Business Project',
+  'global_search.jira.project_type.software_project': 'Software Project',
+  'global_search.jira.project_type.service_desk_project':
+    'Service Desk Project',
+  'global_search.jira.project_type.ops_project': 'Ops Project',
+  'global_search.jira.result_type.board': 'Board',
+  'global_search.jira.result_type.filter': 'Filter',
 };

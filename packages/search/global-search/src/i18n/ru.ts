@@ -15,9 +15,9 @@ export default {
   'global_search.no_recent_activity_body':
     'или используйте <a href={url}>расширенный поиск</a> (Shift + Enter), чтобы получить более точные результаты.',
   'global_search.no_results_title':
-    'Нет результатов среди должностей и пользователей',
+    'Нет результатов среди названий и пользователей',
   'global_search.no_results_body':
-    'Попробуйте изменить запрос. Чтобы найти людей, введите текст в поле ниже. Вы также можете найти контент на странице, используя расширенный поиск. ',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.people.recent_people_heading': 'Недавно работал (-а) с',
   'global_search.people.people_heading': 'Люди',
   'global_search.people.advanced_search': 'Искать людей',
@@ -27,12 +27,12 @@ export default {
   'global_search.jira.search_placeholder': 'Поиск в Jira',
   'global_search.jira.recent_issues_heading': 'Недавние задачи',
   'global_search.jira.recent_people_heading': 'Недавние',
-  'global_search.jira.recent_containers': 'Недавние доски, фильтры и проекты',
+  'global_search.jira.recent_containers': 'Recent boards, projects and filters',
   'global_search.jira.search_result_issues_heading': 'Задачи',
   'global_search.jira.search_result_containers_heading':
-    'Доски, фильтры и проекты',
+    'Boards, projects and filters',
   'global_search.jira.search_result_people_heading': 'Пользователи',
-  'global_search.jira.advanced_search': 'Расширенный поиск по',
+  'global_search.jira.advanced_search': 'Advanced search for',
   'global_search.jira.advanced_search_issues': 'задачам',
   'global_search.jira.advanced_search_projects': 'проектам',
   'global_search.jira.advanced_search_boards': 'доскам',
@@ -40,9 +40,16 @@ export default {
   'global_search.jira.advanced_search_people': 'пользователям',
   'global_search.jira.advanced_issue_search': 'Расширенный поиск по задачам',
   'global_search.jira.no_results_title':
-    'Нет результатов среди сводок задач, названий и пользователей',
+    "We couldn't find anything matching your search",
   'global_search.jira.no_results_body':
-    'Попробуйте изменить запрос. Заполните все текстовые поля, воспользуйтесь функцией расширенного поиска или введите более конкретный запрос.',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.jira.no_recent_activity_body':
     'или улучшите результаты с помощью расширенного поиска.',
+  'global_search.jira.project_type.business_project': 'Business Project',
+  'global_search.jira.project_type.software_project': 'Software Project',
+  'global_search.jira.project_type.service_desk_project':
+    'Service Desk Project',
+  'global_search.jira.project_type.ops_project': 'Ops Project',
+  'global_search.jira.result_type.board': 'Board',
+  'global_search.jira.result_type.filter': 'Filter',
 };

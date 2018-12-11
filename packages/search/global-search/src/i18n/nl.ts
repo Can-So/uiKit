@@ -17,7 +17,7 @@ export default {
   'global_search.no_results_title':
     'Geen resultaten gevonden in titels en gebruikers',
   'global_search.no_results_body':
-    "Probeer het opnieuw met een andere zoekterm. Je kunt met geavanceerd zoeken ook de content van pagina's doorzoeken, of hieronder naar gebruikers zoeken.",
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.people.recent_people_heading': 'Recent gewerkt met',
   'global_search.people.people_heading': 'Gebruikers',
   'global_search.people.advanced_search': 'Zoek naar gebruikers',
@@ -28,13 +28,12 @@ export default {
   'global_search.jira.search_placeholder': 'Jira doorzoeken',
   'global_search.jira.recent_issues_heading': 'Recente issues',
   'global_search.jira.recent_people_heading': 'Recent gewerkt met',
-  'global_search.jira.recent_containers':
-    'Recente borden, filters en projecten',
+  'global_search.jira.recent_containers': 'Recent boards, projects and filters',
   'global_search.jira.search_result_issues_heading': 'Issues',
   'global_search.jira.search_result_containers_heading':
-    'Borden, filters en projecten',
+    'Boards, projects and filters',
   'global_search.jira.search_result_people_heading': 'Gebruikers',
-  'global_search.jira.advanced_search': 'Ga naar geavanceerd zoeken voor',
+  'global_search.jira.advanced_search': 'Advanced search for',
   'global_search.jira.advanced_search_issues': 'issues',
   'global_search.jira.advanced_search_projects': 'projecten',
   'global_search.jira.advanced_search_boards': 'borden',
@@ -42,9 +41,16 @@ export default {
   'global_search.jira.advanced_search_people': 'gebruikers',
   'global_search.jira.advanced_issue_search': 'Geavanceerd zoeken naar issues',
   'global_search.jira.no_results_title':
-    'Geen resultaten in issue-omschrijvingen, namen en gebruikers',
+    "We couldn't find anything matching your search",
   'global_search.jira.no_results_body':
-    'Probeer het opnieuw met een andere zoekterm. Je kunt met geavanceerd zoeken ook alle tekstvelden van issues doorzoeken of specifieker naar andere items zoeken.',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.jira.no_recent_activity_body':
     'Of verfijn je resultaten met geavanceerd zoeken.',
+  'global_search.jira.project_type.business_project': 'Business Project',
+  'global_search.jira.project_type.software_project': 'Software Project',
+  'global_search.jira.project_type.service_desk_project':
+    'Service Desk Project',
+  'global_search.jira.project_type.ops_project': 'Ops Project',
+  'global_search.jira.result_type.board': 'Board',
+  'global_search.jira.result_type.filter': 'Filter',
 };

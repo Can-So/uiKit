@@ -16,7 +16,7 @@ export default {
     'Eller brug <a href={url}>avanceret søgning</a> ("shift + enter") for at målrette dine resultater.',
   'global_search.no_results_title': 'Ingen resultater for titler og personer',
   'global_search.no_results_body':
-    'Prøv et andet søgeord. Du kan også søge på sideindholdet via avanceret søgning eller søge efter personer nedenfor.',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.people.recent_people_heading': 'Senest arbejdet med',
   'global_search.people.people_heading': 'Personer',
   'global_search.people.advanced_search': 'Søg efter personer',
@@ -26,12 +26,12 @@ export default {
   'global_search.jira.search_placeholder': 'Søg i Jira',
   'global_search.jira.recent_issues_heading': 'Seneste opgaver',
   'global_search.jira.recent_people_heading': 'Senest arbejdet med',
-  'global_search.jira.recent_containers': 'Seneste tavler, filtre og projekter',
+  'global_search.jira.recent_containers': 'Recent boards, projects and filters',
   'global_search.jira.search_result_issues_heading': 'Opgaver',
   'global_search.jira.search_result_containers_heading':
-    'Tavler, filtre og projekter',
+    'Boards, projects and filters',
   'global_search.jira.search_result_people_heading': 'Personer',
-  'global_search.jira.advanced_search': 'Gå til avanceret søgning efter',
+  'global_search.jira.advanced_search': 'Advanced search for',
   'global_search.jira.advanced_search_issues': 'opgaver',
   'global_search.jira.advanced_search_projects': 'projekter',
   'global_search.jira.advanced_search_boards': 'tavler',
@@ -39,9 +39,16 @@ export default {
   'global_search.jira.advanced_search_people': 'personer',
   'global_search.jira.advanced_issue_search': 'Avanceret søgning efter opgaver',
   'global_search.jira.no_results_title':
-    'Ingen resultater i opgaveopsummeringer, navne og personer',
+    "We couldn't find anything matching your search",
   'global_search.jira.no_results_body':
-    'Prøv et andet søgeord. Du kan også søge i alle tekstfelter i opgaver via avanceret søgning eller søge på andre, specifikke parametre.',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.jira.no_recent_activity_body':
     'Eller få mere præcise søgeresultater med vores avancerede søgning.',
+  'global_search.jira.project_type.business_project': 'Business Project',
+  'global_search.jira.project_type.software_project': 'Software Project',
+  'global_search.jira.project_type.service_desk_project':
+    'Service Desk Project',
+  'global_search.jira.project_type.ops_project': 'Ops Project',
+  'global_search.jira.result_type.board': 'Board',
+  'global_search.jira.result_type.filter': 'Filter',
 };

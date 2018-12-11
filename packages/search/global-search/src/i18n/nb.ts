@@ -14,7 +14,7 @@ export default {
     'Eller bruk <a href={url}>avansert søk</a> (Skift + Enter) for å fokusere resultatene.',
   'global_search.no_results_title': 'Ingen resultater i titler eller personer',
   'global_search.no_results_body':
-    'Prøv å søke med et annet søkebegrep. Du kan også søke i sideinnhold med det avanserte søket eller søke etter personer under.',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.people.recent_people_heading': 'Jobbet nylig med',
   'global_search.people.people_heading': 'Personer',
   'global_search.people.advanced_search': 'Søk etter personer',
@@ -25,12 +25,12 @@ export default {
   'global_search.jira.search_placeholder': 'Søk Jira',
   'global_search.jira.recent_issues_heading': 'Siste saker',
   'global_search.jira.recent_people_heading': 'Nylig jobbet med',
-  'global_search.jira.recent_containers': 'Siste tavler, filtre og prosjekter',
+  'global_search.jira.recent_containers': 'Recent boards, projects and filters',
   'global_search.jira.search_result_issues_heading': 'Saker',
   'global_search.jira.search_result_containers_heading':
-    'Tavler, filtre og prosjekter',
+    'Boards, projects and filters',
   'global_search.jira.search_result_people_heading': 'Personer',
-  'global_search.jira.advanced_search': 'Gå til avansert søk for',
+  'global_search.jira.advanced_search': 'Advanced search for',
   'global_search.jira.advanced_search_issues': 'saker',
   'global_search.jira.advanced_search_projects': 'prosjekter',
   'global_search.jira.advanced_search_boards': 'tavler',
@@ -38,9 +38,16 @@ export default {
   'global_search.jira.advanced_search_people': 'personer',
   'global_search.jira.advanced_issue_search': 'Avansert søk for saker',
   'global_search.jira.no_results_title':
-    'Ingen resultater i sakssammendrag, navn eller personer',
+    "We couldn't find anything matching your search",
   'global_search.jira.no_results_body':
-    'Prøv å søke med et annet søkebegrep. Du kan søke i alle tekstfeltene i saker i tillegg til avansert søk eller søke mer spesifikt etter andre elementer.',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.jira.no_recent_activity_body':
     'Eller avgrense resultatene med vårt avanserte søk.',
+  'global_search.jira.project_type.business_project': 'Business Project',
+  'global_search.jira.project_type.software_project': 'Software Project',
+  'global_search.jira.project_type.service_desk_project':
+    'Service Desk Project',
+  'global_search.jira.project_type.ops_project': 'Ops Project',
+  'global_search.jira.result_type.board': 'Board',
+  'global_search.jira.result_type.filter': 'Filter',
 };

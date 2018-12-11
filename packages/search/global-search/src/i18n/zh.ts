@@ -13,7 +13,7 @@ export default {
     '或使用 <a href={url}>高级搜索</a> （`shift + enter` ）集中查看您的结果。',
   'global_search.no_results_title': '职称和人员中无结果',
   'global_search.no_results_body':
-    '尝试使用其他术语进行搜索。您也可以使用高级搜索搜索页面内容或搜索下方的人员。',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.people.recent_people_heading': '最近一起工作的人员',
   'global_search.people.people_heading': '用户',
   'global_search.people.advanced_search': '搜索用户',
@@ -23,20 +23,29 @@ export default {
   'global_search.jira.search_placeholder': '搜索 Jira',
   'global_search.jira.recent_issues_heading': '最近事务',
   'global_search.jira.recent_people_heading': '最近合作人员',
-  'global_search.jira.recent_containers': '最近面板、筛选器和项目',
+  'global_search.jira.recent_containers': 'Recent boards, projects and filters',
   'global_search.jira.search_result_issues_heading': '事务',
-  'global_search.jira.search_result_containers_heading': '面板、筛选器和项目',
+  'global_search.jira.search_result_containers_heading':
+    'Boards, projects and filters',
   'global_search.jira.search_result_people_heading': '人员',
-  'global_search.jira.advanced_search': '前往高级搜索',
+  'global_search.jira.advanced_search': 'Advanced search for',
   'global_search.jira.advanced_search_issues': '事务',
   'global_search.jira.advanced_search_projects': '项目',
   'global_search.jira.advanced_search_boards': '面板',
   'global_search.jira.advanced_search_filters': '筛选器',
   'global_search.jira.advanced_search_people': '人员',
   'global_search.jira.advanced_issue_search': '高级搜索事务',
-  'global_search.jira.no_results_title': '事务摘要、名称和人员中无结果',
+  'global_search.jira.no_results_title':
+    "We couldn't find anything matching your search",
   'global_search.jira.no_results_body':
-    '尝试使用其他术语进行搜索。您也可以在事务中使用高级搜索搜索全文字段或搜索更为具体的其他项目。',
+    'Try again with a different term, or refine your results with our advanced search.',
   'global_search.jira.no_recent_activity_body':
     '或使用高级搜索优化您的搜索结果。',
+  'global_search.jira.project_type.business_project': 'Business Project',
+  'global_search.jira.project_type.software_project': 'Software Project',
+  'global_search.jira.project_type.service_desk_project':
+    'Service Desk Project',
+  'global_search.jira.project_type.ops_project': 'Ops Project',
+  'global_search.jira.result_type.board': 'Board',
+  'global_search.jira.result_type.filter': 'Filter',
 };
