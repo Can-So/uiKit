@@ -10,8 +10,12 @@ export default class DisplayFeedback extends Component<void, State> {
 
   open = () => this.setState({ isOpen: true });
   close = () => this.setState({ isOpen: false });
-  submitForm = () => {
+  submitForm = (data: Object) => {
     // submit your form manually here
+    console.log('Submitting feedback form', data);
+
+    // on success:
+    // this.close();
   };
 
   render() {
