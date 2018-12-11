@@ -1,5 +1,13 @@
 # @atlaskit/status
 
+## 0.2.11
+- [patch] [d3f3e19](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3f3e19):
+
+  - restored StatusContainer to editor-core, avoid re-rendering on event handlers, removed unused props in the renderer
+- [patch] [44cc61d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44cc61d):
+
+  - added native status analytics
+
 ## 0.2.10
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/field-text@7.0.18
