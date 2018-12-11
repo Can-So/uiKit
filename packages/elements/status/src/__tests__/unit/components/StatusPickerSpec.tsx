@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { StatusPicker } from '../../';
+import { StatusPicker } from '../../..';
 import { FieldTextStateless } from '@atlaskit/field-text';
-import ColorPalette from '../../components/internal/color-palette';
+import ColorPalette from '../../../components/internal/color-palette';
 
 describe('StatusPicker', () => {
   it('should render color palette', () => {
