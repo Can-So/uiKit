@@ -1,1 +1,1 @@
-- reset Card state when props change
+- ED-5612: make image preview display correctly after replacing Card props
