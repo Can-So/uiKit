@@ -33,7 +33,7 @@ describe('Util Analytics', () => {
     expect(eventMock.fire).toBeCalledWith(ELEMENTS_CHANNEL);
   });
 
-  it('fireAnalyticsMentionTypeaheadEvent should pass undefined queryLength when query is undefined', () => {
+  it('fireAnalyticsMentionTypeaheadEvent should pass 0 for queryLength when query is undefined', () => {
     const eventMock = {
       fire: jest.fn(),
     };
