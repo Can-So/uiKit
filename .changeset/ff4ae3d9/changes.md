@@ -1,1 +1,0 @@
-- ED-5702: default new table resizing
