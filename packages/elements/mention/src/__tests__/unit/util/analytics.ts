@@ -50,7 +50,7 @@ describe('Util Analytics', () => {
         packageVersion,
         componentName: 'mention',
         duration: 10,
-        queryLength: undefined,
+        queryLength: 0,
         userIds: ['abc-123'],
       },
       eventType: 'operational',

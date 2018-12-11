@@ -31,7 +31,7 @@ export const fireAnalyticsMentionTypeaheadEvent = (
         componentName: 'mention',
         duration: Math.round(duration),
         userIds,
-        queryLength: query ? query.length : undefined,
+        queryLength: query ? query.length : 0,
       },
       eventType: 'operational',
     };
