@@ -17,6 +17,7 @@ import {
   pluginKey as editorDisabledPluginKey,
   EditorDisabledPluginState,
 } from '../../editor-disabled';
+import { EditorAppearance } from '../../../types';
 
 export interface Props {
   children?: React.ReactNode;
@@ -31,6 +32,7 @@ export type MediaGroupProps = {
   getPos: () => number;
   selected: number | null;
   disabled?: boolean;
+  editorAppearance: EditorAppearance;
 };
 
 export default class MediaGroup extends React.Component<MediaGroupProps> {
@@ -91,6 +93,7 @@ export default class MediaGroup extends React.Component<MediaGroupProps> {
       return {
         identifier,
         selectable: true,
+        isLazy: this.props.editorAppearance !== 'mobile',
         selected: this.props.selected === nodePos,
         onClick: () => {
           setNodeSelection(this.props.view, nodePos);
@@ -122,6 +125,7 @@ export default class MediaGroup extends React.Component<MediaGroupProps> {
 
 class MediaGroupNodeView extends ReactNodeView {
   render(props, forwardRef) {
+    const { editorAppearance } = this.reactComponentProps;
     return (
       <WithPluginState
         editorView={this.view}
@@ -146,6 +150,7 @@ class MediaGroupNodeView extends ReactNodeView {
               forwardRef={forwardRef}
               selected={isSelected ? $anchor.pos : null}
               disabled={(editorDisabledPlugin || {}).editorDisabled}
+              editorAppearance={editorAppearance}
             />
           );
         }}
@@ -159,10 +164,11 @@ class MediaGroupNodeView extends ReactNodeView {
   }
 }
 
-export const ReactMediaGroupNode = (portalProviderAPI: PortalProviderAPI) => (
-  node: PMNode,
-  view: EditorView,
-  getPos: () => number,
-): NodeView => {
-  return new MediaGroupNodeView(node, view, getPos, portalProviderAPI).init();
+export const ReactMediaGroupNode = (
+  portalProviderAPI: PortalProviderAPI,
+  editorAppearance: EditorAppearance,
+) => (node: PMNode, view: EditorView, getPos: () => number): NodeView => {
+  return new MediaGroupNodeView(node, view, getPos, portalProviderAPI, {
+    editorAppearance,
+  }).init();
 };

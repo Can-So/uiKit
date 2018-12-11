@@ -77,18 +77,20 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
           errorReporter,
           portalProviderAPI,
           reactContext,
-          appearance,
         }) =>
           createPlugin(
             schema,
             {
               providerFactory,
               nodeViews: {
-                mediaGroup: ReactMediaGroupNode(portalProviderAPI),
+                mediaGroup: ReactMediaGroupNode(
+                  portalProviderAPI,
+                  props.appearance,
+                ),
                 mediaSingle: ReactMediaSingleNode(
                   portalProviderAPI,
                   eventDispatcher,
-                  appearance,
+                  props.appearance,
                 ),
               },
               errorReporter,
