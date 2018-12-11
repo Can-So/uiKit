@@ -67,7 +67,18 @@ const configs: Array<BridgePluginListener<Bridge>> = [
     bridge: 'blockFormatBridge',
     pluginKey: blockPluginStateKey,
     updater: state => {
+      /**
+       * Currently `updateBlockState` is on different bridges in native land.
+       * We have a ticket to align on the naming.
+       * @see https://product-fabric.atlassian.net/browse/FM-1341
+       */
+
+      // iOS
       toNativeBridge.call('blockFormatBridge', 'updateBlockState', {
+        states: state.currentBlockType.name,
+      });
+      // Android
+      toNativeBridge.call('textFormatBridge', 'updateBlockState', {
         states: state.currentBlockType.name,
       });
     },

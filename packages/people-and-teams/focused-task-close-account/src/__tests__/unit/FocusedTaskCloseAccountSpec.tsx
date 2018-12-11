@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import { FocusedTaskCloseAccount } from '../../components/FocusedTaskCloseAccount';
+import {
+  FocusedTaskCloseAccount,
+  Props,
+  State,
+} from '../../components/FocusedTaskCloseAccount';
 
 import Footer from '../../components/Footer';
 
@@ -14,7 +18,9 @@ const defaultProps = {
 };
 
 const render = (props = {}) =>
-  shallow(<FocusedTaskCloseAccount {...defaultProps} {...props} />);
+  shallow<Props, State>(
+    <FocusedTaskCloseAccount {...defaultProps} {...props} />,
+  );
 
 test('isOpen snapshot', () => {
   expect(render()).toMatchSnapshot();

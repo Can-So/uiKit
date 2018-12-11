@@ -100,6 +100,10 @@ const ContentStyles: ComponentClass<HTMLAttributes<{}>> = styled.div`
   ${linkStyles}
   ${blockMarksSharedStyles}
 
+  .panelView-content-wrap {
+    box-sizing: border-box;
+  }
+
   .mediaGroupView-content-wrap ul {
     padding: 0;
   }

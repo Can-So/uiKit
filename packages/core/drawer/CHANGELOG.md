@@ -1,5 +1,18 @@
 # @atlaskit/drawer
 
+## 2.6.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/blanket@7.0.12
+  - @atlaskit/button@10.1.1
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/item@8.0.14
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/quick-search@5.2.4
+  - @atlaskit/docs@6.0.0
+
 ## 2.6.0
 - [minor] [53bf8be](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/53bf8be):
 

@@ -127,6 +127,7 @@ describe('Status - NodeView', () => {
 
       getPos = jest.fn();
 
+      // @ts-ignore
       wrapper = mountWithIntl(
         <StatusNodeView
           view={view}

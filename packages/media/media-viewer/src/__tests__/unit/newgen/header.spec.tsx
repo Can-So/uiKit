@@ -9,7 +9,7 @@ import { MediaItemType, MediaType, FileState } from '@atlaskit/media-core';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { fakeIntl } from '@atlaskit/media-test-helpers';
 import { createContext } from '../_stubs';
-import { Header } from '../../../newgen/header';
+import { Header, State as HeaderState } from '../../../newgen/header';
 import { FeedbackButton } from '../../../newgen/feedback-button';
 import { MetadataFileName, MetadataSubText } from '../../../newgen/styled';
 import { LeftHeader } from '../../../newgen/styled';
@@ -71,7 +71,7 @@ describe('<Header />', () => {
     const context = createContext({
       getFileState: () => Observable.of(processedImageState),
     });
-    const el = mount(
+    const el = mount<{}, HeaderState>(
       <Header intl={fakeIntl} context={context} identifier={identifier} />,
     );
 
@@ -90,7 +90,7 @@ describe('<Header />', () => {
     const context = createContext({
       getFileState: () => Observable.of(processedImageState),
     });
-    const el = mount(
+    const el = mount<{}, HeaderState>(
       <Header intl={fakeIntl} context={context} identifier={identifier} />,
     );
     expect(el.state().item.status).toEqual('SUCCESSFUL');

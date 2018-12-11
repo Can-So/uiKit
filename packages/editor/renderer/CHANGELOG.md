@@ -1,5 +1,28 @@
 # @atlaskit/renderer
 
+## 31.1.3
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/code@8.2.2
+  - @atlaskit/field-range@5.0.12
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/navigation-next@4.0.9
+  - @atlaskit/size-detector@5.0.9
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/editor-json-transformer@4.0.24
+  - @atlaskit/analytics-listeners@4.1.4
+  - @atlaskit/analytics-namespaced-context@2.1.5
+  - @atlaskit/mention@15.1.8
+  - @atlaskit/status@0.2.10
+  - @atlaskit/task-decision@11.0.8
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/media-card@44.1.3
+  - @atlaskit/media-core@24.5.2
+  - @atlaskit/media-filmstrip@19.0.3
+  - @atlaskit/smart-card@9.0.4
+  - @atlaskit/profilecard@6.1.2
+  - @atlaskit/docs@6.0.0
+
 ## 31.1.2
 - [patch] [0623610](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0623610):
 

@@ -89,24 +89,36 @@ describe('createPluginsList', () => {
   it('should not add statuPlugin if allowStatus prop is false', () => {
     createPluginsList({ allowStatus: false });
     expect(statusPlugin).not.toBeCalled();
+    expect(insertBlockPlugin).toBeCalledWith(
+      expect.objectContaining({ nativeStatusSupported: false }),
+    );
   });
 
   it('should add statuPlugin if allowStatus prop is true', () => {
     createPluginsList({ allowStatus: true });
     expect(statusPlugin).toHaveBeenCalledTimes(1);
     expect(statusPlugin).toHaveBeenCalledWith({ menuDisabled: false });
+    expect(insertBlockPlugin).toBeCalledWith(
+      expect.objectContaining({ nativeStatusSupported: true }),
+    );
   });
 
   it('should add statuPlugin if allowStatus prop is provided with menuDisabled true', () => {
     createPluginsList({ allowStatus: { menuDisabled: true } });
     expect(statusPlugin).toHaveBeenCalledTimes(1);
     expect(statusPlugin).toHaveBeenCalledWith({ menuDisabled: true });
+    expect(insertBlockPlugin).toBeCalledWith(
+      expect.objectContaining({ nativeStatusSupported: false }),
+    );
   });
 
   it('should add statuPlugin if allowStatus prop is provided with menuDisabled false', () => {
     createPluginsList({ allowStatus: { menuDisabled: false } });
     expect(statusPlugin).toHaveBeenCalledTimes(1);
     expect(statusPlugin).toHaveBeenCalledWith({ menuDisabled: false });
+    expect(insertBlockPlugin).toBeCalledWith(
+      expect.objectContaining({ nativeStatusSupported: true }),
+    );
   });
 
   it('should always add insertBlockPlugin to the editor with insertMenuItems', () => {
@@ -127,7 +139,10 @@ describe('createPluginsList', () => {
       },
     ];
 
-    const props = { insertMenuItems: customItems };
+    const props = {
+      insertMenuItems: customItems,
+      nativeStatusSupported: false,
+    };
 
     createPluginsList(props);
     expect(insertBlockPlugin).toHaveBeenCalledTimes(1);

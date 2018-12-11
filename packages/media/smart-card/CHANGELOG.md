@@ -1,5 +1,24 @@
 # @atlaskit/smart-card
 
+## 9.0.4
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/checkbox@5.0.9
+  - @atlaskit/field-range@5.0.12
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/field-text-area@4.0.14
+  - @atlaskit/form@4.0.21
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/icon-file-type@3.0.2
+  - @atlaskit/icon-object@3.0.2
+  - @atlaskit/inline-message@7.0.10
+  - @atlaskit/page@8.0.12
+  - @atlaskit/radio@0.4.4
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/media-ui@8.1.2
+  - @atlaskit/outbound-auth-flow-client@1.0.2
+  - @atlaskit/docs@6.0.0
+
 ## 9.0.3
 - Updated dependencies [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
   - @atlaskit/media-ui@8.0.0

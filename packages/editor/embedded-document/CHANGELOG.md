@@ -1,5 +1,10 @@
 # @atlaskit/embedded-document
 
+## 0.0.10
+- [patch] [062da38](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/062da38):
+
+  - update should use documentId from current state
+
 ## 0.0.9
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/button@10.0.4

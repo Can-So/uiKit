@@ -59,14 +59,14 @@ export const getStyles = memoizeOne(width => ({
       color: colors.R400,
     },
   }),
-  valueContainer: ({ paddingTop, paddingBottom, ...css }, state) => ({
+  valueContainer: ({ paddingTop, paddingBottom, position, ...css }, state) => ({
     ...css,
     flexGrow: 1,
     padding: 0,
     display: 'flex',
     flexDirection: 'row',
     maxHeight: 100,
-    overflow: 'auto',
+    overflow: 'hidden',
     flexWrap: state.selectProps.isMulti ? 'wrap' : 'nowrap',
   }),
   multiValue: css => ({
@@ -87,9 +87,11 @@ export const getStyles = memoizeOne(width => ({
           2 * BORDER_WIDTH[avatarSize] +
           AVATAR_SIZES[avatarSize]
         : PLACEHOLDER_PADDING,
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
+      display: 'block',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      width: '97%',
       paddingTop: 2,
     };
   },

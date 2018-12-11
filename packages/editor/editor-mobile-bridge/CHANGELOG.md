@@ -1,5 +1,25 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.4.7
+- [patch] [43501db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/43501db):
+
+  - ED-5812: Fixes some regressions in the mobile editor
+
+  Including:
+   * Disables mediaGoup lazy loading.
+   * Fixes unsupported emoji content.
+   * Fixes missed call to Android bridge for block state.
+
+## 6.4.6
+- [patch] [e01ea01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e01ea01):
+
+  - Bump to match @atlaskit/docs dep
+
+## 6.4.5
+- [patch] [d3d0d67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3d0d67):
+
+  - Mobile bridge can be public and updated the description
+
 ## 6.4.4
 - [patch] [7190767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7190767):
 

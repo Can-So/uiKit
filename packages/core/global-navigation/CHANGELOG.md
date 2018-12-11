@@ -1,5 +1,29 @@
 # @atlaskit/global-navigation
 
+## 5.3.8
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/badge@9.2.2
+  - @atlaskit/blanket@7.0.12
+  - @atlaskit/button@10.1.1
+  - @atlaskit/drawer@2.6.1
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/field-radio-group@4.0.14
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/navigation-next@4.0.9
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/toggle@5.0.14
+  - @atlaskit/analytics-listeners@4.1.4
+  - @atlaskit/analytics-namespaced-context@2.1.5
+  - @atlaskit/notification-indicator@4.0.6
+  - @atlaskit/notification-log-client@3.1.1
+  - @atlaskit/docs@6.0.0
+
 ## 5.3.7
 - [patch] [bee7762](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bee7762):
 

@@ -18,6 +18,7 @@ import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
 import LinkIcon from '@atlaskit/icon/glyph/editor/link';
 import EmojiIcon from '@atlaskit/icon/glyph/editor/emoji';
 import DateIcon from '@atlaskit/icon/glyph/editor/date';
+import LabelIcon from '@atlaskit/icon/glyph/label';
 import PlaceholderTextIcon from '@atlaskit/icon/glyph/media-services/text';
 import LayoutTwoEqualIcon from '@atlaskit/icon/glyph/editor/layout-two-equal';
 import HorizontalRuleIcon from '@atlaskit/icon/glyph/editor/horizontal-rule';
@@ -59,6 +60,7 @@ import { insertTaskDecision } from '../../../tasks-and-decisions/commands';
 import { Command } from '../../../../commands';
 import { showLinkToolbar } from '../../../hyperlink/commands';
 import { insertMentionQuery } from '../../../mentions/commands/insert-mention-query';
+import { updateStatus } from '../../../status/actions';
 
 export const messages = defineMessages({
   action: {
@@ -131,6 +133,12 @@ export const messages = defineMessages({
     defaultMessage: 'Columns',
     description: 'Create a multi column section or layout',
   },
+  status: {
+    id: 'fabric.editor.status',
+    defaultMessage: 'Status',
+    description:
+      'Inserts an item representing the status of an activity to task.',
+  },
   viewMore: {
     id: 'fabric.editor.viewMore',
     defaultMessage: 'View more',
@@ -172,6 +180,7 @@ export interface Props {
   linkDisabled?: boolean;
   emojiDisabled?: boolean;
   insertEmoji?: (emojiId: EmojiId) => void;
+  nativeStatusSupported?: boolean;
   popupsMountPoint?: HTMLElement;
   popupsBoundariesElement?: HTMLElement;
   popupsScrollableElement?: HTMLElement;
@@ -405,6 +414,7 @@ class ToolbarInsertBlock extends React.PureComponent<
       linkDisabled,
       emojiDisabled,
       emojiProvider,
+      nativeStatusSupported,
       insertMenuItems,
       dateEnabled,
       placeholderTextEnabled,
@@ -555,6 +565,15 @@ class ToolbarInsertBlock extends React.PureComponent<
       });
     }
 
+    if (nativeStatusSupported) {
+      const labelStatus = formatMessage(messages.status);
+      items.push({
+        content: labelStatus,
+        value: { name: 'status' },
+        elemBefore: <LabelIcon label={labelStatus} />,
+      });
+    }
+
     if (insertMenuItems) {
       items = items.concat(insertMenuItems);
       // keeping this here for backwards compatibility so confluence
@@ -625,6 +644,15 @@ class ToolbarInsertBlock extends React.PureComponent<
     (): boolean => {
       const { editorView } = this.props;
       insertLayoutColumns(editorView.state, editorView.dispatch);
+      return true;
+    },
+  );
+
+  private createStatus = withAnalytics(
+    'atlassian.editor.format.status.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      updateStatus(undefined, true)(editorView);
       return true;
     },
   );
@@ -757,6 +785,9 @@ class ToolbarInsertBlock extends React.PureComponent<
         break;
       case 'layout':
         this.insertLayoutColumns();
+        break;
+      case 'status':
+        this.createStatus();
         break;
       default:
         if (item && item.onClick) {

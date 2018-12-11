@@ -1,5 +1,23 @@
 # @atlaskit/pagination
 
+## 9.0.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 9.0.0
+- [major] [1a09599](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a09599):
+
+  New features in this release of @atlaskit/pagination
+
+  - Ability to extend the pagination UI with custom components
+  - Control the maximum number of pages to be displayed
+  - Ability to customise the logic to collapse the pagination affordance
+  - Pass in extra styling to the pagination container component so you can omit the use of style wrappers
+
 ## 8.0.8
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3
