@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.14
+- [patch] [b22d7e9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b22d7e9):
+
+  - FS-3309 - Include native status in insert menu when enabled
+
 ## 90.3.13
 - [patch] [9a1dbaa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a1dbaa):
 

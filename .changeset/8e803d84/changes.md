@@ -1,1 +1,0 @@
-- FS-3309 - Include native status in insert menu when enabled
