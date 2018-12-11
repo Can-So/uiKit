@@ -34,6 +34,7 @@ import {
 import { pluginKey as widthPluginKey } from '../../../width';
 
 import { Dispatch } from '../../../../event-dispatcher';
+import { closestElement } from '../../../../utils';
 
 export const pluginKey = new PluginKey('tableFlexiColumnResizing');
 
@@ -66,26 +67,35 @@ export function createPlugin(
     },
     view: () => ({
       update(view) {
-        const { doc, selection, schema } = view.state;
+        const { selection, schema } = view.state;
         const table = findParentNodeOfType(schema.nodes.table)(selection);
         const isInsideCells = hasParentNodeOfType([
-          schema.nodes.tableRow,
+          schema.nodes.tableCell,
           schema.nodes.tableHeader,
         ])(selection);
 
         if (table && isInsideCells) {
-          const $cell = doc.resolve(selection.from);
-          const start = $cell.start(-1);
-          const elem = view.domAtPos(start).node as HTMLElement;
+          const cell = findParentNodeOfType([
+            schema.nodes.tableCell,
+            schema.nodes.tableHeader,
+          ])(selection);
+          const elem = view.domAtPos(cell!.start).node as HTMLElement; // nodeview
+          const elemOrWrapper =
+            closestElement(
+              elem,
+              `.${ClassName.TABLE_HEADER_NODE_WRAPPER}, .${
+                ClassName.TABLE_CELL_NODE_WRAPPER
+              }`,
+            ) || elem;
           const { minWidth } = contentWidth(elem, elem);
 
           // if the contents of the element are wider than the cell
           // we resize the cell to the new min cell width.
           // which should cater to the nowrap element and wrap others.
-          if (elem && elem.offsetWidth < minWidth) {
+          if (elemOrWrapper && elemOrWrapper.offsetWidth < minWidth) {
             handleBreakoutContent(
               view,
-              elem,
+              elemOrWrapper,
               table.pos + 1,
               minWidth,
               table.node,
