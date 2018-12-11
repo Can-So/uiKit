@@ -113,6 +113,7 @@ class Modal extends Component<Props, State> {
       autoFocus,
       body,
       children,
+      components,
       footer,
       header,
       height,
@@ -172,6 +173,7 @@ class Modal extends Component<Props, State> {
                   <Content
                     actions={actions}
                     appearance={appearance}
+                    components={components}
                     footer={footer}
                     heading={heading}
                     isHeadingMultiline={isHeadingMultiline}

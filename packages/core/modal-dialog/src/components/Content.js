@@ -38,6 +38,10 @@ type Props = {
   */
   children?: Node,
   /**
+    Object describing internal components. Use this to swap out the default components. 
+  */
+  components: { Body: ElementType, Container: ElementType },
+  /**
     Component to render the header of the modal.
   */
   header?: ElementType,
@@ -89,6 +93,7 @@ type State = {
 export default class Content extends Component<Props, State> {
   static defaultProps = {
     autoFocus: false,
+    components: {},
     isChromeless: false,
     stackIndex: 0,
     body: Body,
@@ -189,6 +194,7 @@ export default class Content extends Component<Props, State> {
       actions,
       appearance,
       body: ModalBody,
+      components,
       children,
       footer,
       header,
@@ -198,40 +204,38 @@ export default class Content extends Component<Props, State> {
       isHeadingMultiline,
       shouldScroll,
     } = this.props;
+    const { Container = 'div' } = components;
     const { showFooterKeyline, showHeaderKeyline } = this.state;
 
-    if (isChromeless) {
-      return (
-        <Wrapper>
-          {children}
-          <ScrollLock />
-        </Wrapper>
-      );
-    }
-
     return (
-      <Wrapper>
-        <Header
-          appearance={appearance}
-          component={header}
-          heading={heading}
-          onClose={onClose}
-          isHeadingMultiline={isHeadingMultiline}
-          showKeyline={showHeaderKeyline}
-        />
-        <ModalBody
-          innerRef={this.getScrollContainer}
-          shouldScroll={shouldScroll}
-        >
-          {children}
-        </ModalBody>
-        <Footer
-          actions={actions}
-          appearance={appearance}
-          component={footer}
-          onClose={onClose}
-          showKeyline={showFooterKeyline}
-        />
+      <Wrapper component={Container}>
+        {isChromeless ? (
+          children
+        ) : (
+          <>
+            <Header
+              appearance={appearance}
+              component={header}
+              heading={heading}
+              onClose={onClose}
+              isHeadingMultiline={isHeadingMultiline}
+              showKeyline={showHeaderKeyline}
+            />
+            <ModalBody
+              innerRef={this.getScrollContainer}
+              shouldScroll={shouldScroll}
+            >
+              {children}
+            </ModalBody>
+            <Footer
+              actions={actions}
+              appearance={appearance}
+              component={footer}
+              onClose={onClose}
+              showKeyline={showFooterKeyline}
+            />
+          </>
+        )}
         <ScrollLock />
       </Wrapper>
     );
