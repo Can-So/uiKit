@@ -31,20 +31,9 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
-
-export type Props = {};
-export type State = {
-  locale: string;
-  messages: { [key: string]: string };
-
-  adf: object | undefined;
-  adfInput: string;
-
-  appearance: EditorAppearance;
-  showADF: boolean;
-  disabled: boolean;
-  vertical: boolean;
-};
+import { validator, ErrorCallback, Entity } from '@atlaskit/adf-utils';
+import ErrorReport, { Error } from '../example-helpers/ErrorReport';
+import { EditorView } from 'prosemirror-view';
 
 const Container = styled.div`
   display: flex;
@@ -170,6 +159,26 @@ export const Textarea: any = styled.textarea`
 
 const LOCALSTORAGE_orientationKey =
   'fabric.editor.example.kitchen-sink.orientation';
+
+const VALIDATION_TIMEOUT = 500;
+
+export type Props = {};
+export type State = {
+  locale: string;
+  messages: { [key: string]: string };
+
+  adf: object | undefined;
+  adfInput: string;
+
+  appearance: EditorAppearance;
+  showADF: boolean;
+  disabled: boolean;
+  vertical: boolean;
+
+  errors: Array<Error>;
+  showErrors: boolean;
+  waitingToValidate: boolean;
+};
 export default class FullPageRendererExample extends React.Component<
   Props,
   State
@@ -199,14 +208,23 @@ export default class FullPageRendererExample extends React.Component<
     showADF: false,
     disabled: false,
     vertical: this.getDefaultOrientation().vertical,
+    errors: [],
+    showErrors: false,
+    waitingToValidate: false,
   };
 
   private inputRef: HTMLTextAreaElement | null;
   private popupMountPoint: HTMLElement | null;
+  private validatorTimeout?: number;
 
   showHideADF = () =>
     this.setState(state => ({
       showADF: !state.showADF,
+    }));
+
+  showHideErrors = () =>
+    this.setState(state => ({
+      showErrors: !state.showErrors,
     }));
 
   enableDisableEditor = () =>
@@ -280,10 +298,34 @@ export default class FullPageRendererExample extends React.Component<
                       {!this.state.disabled ? 'Disable' : 'Enable'} editor
                     </Button>
 
-                    <Button appearance="primary" onClick={this.showHideADF}>
+                    <Button
+                      appearance={
+                        this.state.errors.length ? 'danger' : 'subtle'
+                      }
+                      isSelected={this.state.showErrors}
+                      onClick={this.showHideErrors}
+                      isLoading={this.state.waitingToValidate}
+                    >
+                      {this.state.errors.length} errors
+                    </Button>
+
+                    <Button
+                      appearance="primary"
+                      isSelected={this.state.showADF}
+                      onClick={this.showHideADF}
+                    >
                       {!this.state.showADF ? 'Show' : 'Hide'} current ADF
                     </Button>
                   </Column>
+                </Container>
+                <Container
+                  style={{
+                    overflowX: 'scroll',
+                  }}
+                >
+                  {this.state.showErrors && (
+                    <ErrorReport errors={this.state.errors} />
+                  )}
                 </Container>
               </Controls>
               <Container
@@ -409,7 +451,7 @@ export default class FullPageRendererExample extends React.Component<
       return;
     }
 
-    actions.replaceDocument(this.state.adfInput);
+    actions.replaceDocument(this.state.adfInput, false);
 
     this.setState({
       showADF: false,
@@ -425,12 +467,57 @@ export default class FullPageRendererExample extends React.Component<
     const docModule = await import(`../example-helpers/${opt.value}`);
     const adf = docModule.exampleDocument;
 
-    actions.replaceDocument(adf);
+    actions.replaceDocument(adf, false);
   };
 
-  private onEditorChange = async editorActions => {
+  private onEditorChange = async (editorActions: EditorActions) => {
     const adf = await editorActions.getValue();
     this.setState({ adf, adfInput: JSON.stringify(adf, null, 2) });
+
+    // prepare to validate
+    const editorView = editorActions._privateGetEditorView();
+    if (!editorView) {
+      return;
+    }
+
+    if (this.validatorTimeout) {
+      window.clearTimeout(this.validatorTimeout);
+    }
+
+    this.validatorTimeout = window.setTimeout(
+      () => this.validateDocument(editorView),
+      VALIDATION_TIMEOUT,
+    );
+
+    if (!this.state.waitingToValidate) {
+      this.setState({ waitingToValidate: true });
+    }
+  };
+
+  private validateDocument = (editorView: EditorView) => {
+    if (!this.state.adf) {
+      return;
+    }
+
+    const marks = Object.keys(editorView.state.schema.marks);
+    const nodes = Object.keys(editorView.state.schema.nodes);
+    const errors: Array<Error> = [];
+
+    const errorCb: ErrorCallback = (entity, error) => {
+      errors.push({
+        entity,
+        error,
+      });
+
+      return entity;
+    };
+
+    validator(nodes, marks, {
+      mode: 'loose',
+      allowPrivateAttributes: true,
+    })(this.state.adf as Entity, errorCb);
+
+    this.setState({ errors, waitingToValidate: false });
   };
 
   private handleInputChange = event => {
