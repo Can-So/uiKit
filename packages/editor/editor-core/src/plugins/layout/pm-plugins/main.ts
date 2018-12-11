@@ -143,7 +143,6 @@ export default pluginConfig =>
 
         if (tr.docChanged) {
           tr.setSelection(selection);
-          tr.setMeta('isLocal', true);
           tr.setMeta('addToHistory', false);
           return tr;
         }

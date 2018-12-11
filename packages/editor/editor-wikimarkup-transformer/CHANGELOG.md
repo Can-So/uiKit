@@ -1,5 +1,35 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.7.5
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/editor-core@90.3.15
+  - @atlaskit/editor-json-transformer@4.0.24
+  - @atlaskit/renderer@31.1.3
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/profilecard@6.1.2
+  - @atlaskit/docs@6.0.0
+
+## 2.7.4
+- [patch] [77df0db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/77df0db):
+
+  - use em dash for citation
+
+## 2.7.3
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/editor-common@22.2.3
+  - @atlaskit/editor-core@90.2.1
+  - @atlaskit/renderer@31.0.7
+  - @atlaskit/profilecard@6.1.1
+  - @atlaskit/theme@7.0.0
+
+## 2.7.2
+- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+  - @atlaskit/editor-json-transformer@4.0.23
+  - @atlaskit/editor-test-helpers@6.2.23
+  - @atlaskit/editor-core@90.0.0
+
 ## 2.7.1
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/editor-common@22.0.0

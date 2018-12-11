@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 
 export type ButtonAppearances =
@@ -49,15 +49,18 @@ export type ButtonProps = {
   /** Change the style to indicate the button is selected. */
   isSelected: boolean;
   /** Handler to be called on blur */
-  onBlur?: React.FocusEventHandler;
+  onBlur?: React.FocusEventHandler<HTMLButtonElement>;
   /** Handler to be called on click. The second argument can be used to track analytics data. See the tutorial in the analytics-next package for details. */
-  onClick?: (e: React.MouseEvent, analyticsEvent: UIAnalyticsEvent) => void;
-  onMouseDown?: React.MouseEventHandler;
-  onMouseEnter?: React.MouseEventHandler;
-  onMouseLeave?: React.MouseEventHandler;
-  onMouseUp?: React.MouseEventHandler;
+  onClick?: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    analyticsEvent: UIAnalyticsEvent,
+  ) => void;
+  onMouseDown?: React.MouseEventHandler<HTMLButtonElement>;
+  onMouseEnter?: React.MouseEventHandler<HTMLButtonElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLButtonElement>;
+  onMouseUp?: React.MouseEventHandler<HTMLButtonElement>;
   /** Handler to be called on focus */
-  onFocus?: React.FocusEventHandler;
+  onFocus?: React.FocusEventHandler<HTMLButtonElement>;
   /** Set the amount of padding in the button. */
   spacing: 'compact' | 'default' | 'none';
   /** Assign specific tabIndex order to the underlying html button. */
@@ -65,7 +68,7 @@ export type ButtonProps = {
   /** Pass target down to a link within the button component, if a href is provided. */
   target?: string;
   /** Set whether it is a button or a form submission. */
-  type: 'button' | 'submit';
+  type: 'button' | 'submit' | 'reset';
   /** Option to fit button width to its parent width */
   shouldFitContainer: boolean;
   /** Set the button to autofocus on mount. */

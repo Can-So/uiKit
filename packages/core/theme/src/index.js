@@ -60,7 +60,7 @@ export const assistive = () => css`
 `;
 
 // New API
-export { Consumer, Provider } from './components/Context';
-export { default as Reset } from './components/Reset';
-export { default as Theme } from './components/Theme';
-export { withTheme } from './hoc';
+export * from './components/Reset';
+export { default } from './components/Theme';
+export * from './hoc';
+export * from './utils/createTheme';

@@ -1,5 +1,11 @@
 # @atlaskit/notification-indicator
 
+## 4.0.6
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/badge@9.2.2
+  - @atlaskit/notification-log-client@3.1.1
+  - @atlaskit/docs@6.0.0
+
 ## 4.0.5
 - [patch] Ensure onCountUpdated is not called when the old and new count is zero [1d43367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d43367)
 

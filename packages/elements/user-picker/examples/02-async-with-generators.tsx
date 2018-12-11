@@ -15,6 +15,6 @@ function* getUsers(search?: string): Iterable<PromiseLike<User[]> | User> {
 
 export default class Example extends React.Component<{}> {
   render() {
-    return <UserPicker loadUsers={getUsers} />;
+    return <UserPicker loadUsers={getUsers} clearValueLabel="Unassign" />;
   }
 }

@@ -23,6 +23,8 @@ export type UserPickerProps = {
   isDisabled?: boolean;
   /** Display a remove button on the single picker. True by default. */
   isClearable?: boolean;
+  /** Optional tooltip to display on hover over the clear indicator */
+  clearValueLabel?: string;
 };
 
 export type UserPickerState = {
@@ -44,17 +46,17 @@ export interface HighlightRange {
 
 export interface Highlight {
   name: HighlightRange[];
-  nickname: HighlightRange[];
+  publicName: HighlightRange[];
 }
 
 export interface User {
   id: string;
   avatarUrl?: string;
-  name?: string;
-  nickname: string;
+  name: string;
+  publicName?: string;
   highlight?: Highlight;
-  badge?: string;
   fixed?: boolean;
+  byline?: string;
 }
 
 export type UserValue = User | Array<User> | null | undefined;

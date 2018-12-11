@@ -1,26 +1,18 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, Example, code } from '@atlaskit/docs';
+import PubSubExample from '../examples/00-client';
+
+const PubSubdSource = require('!!raw-loader!../examples/00-client');
 
 export default md`
-  # PubSub
+  This provides components for receiving events from the PubSub service.
 
-  This provides components for receiving events from the PubSub service
+  ## Usage
 
-  ## Try it out
-
-  Interact with a [live demo of the @atlaskit/pubsub component](https://atlaskit.atlassian.com/packages/elements/pubsub).
-
-  ## Installation
-
-  ~~~js
-  npm install @atlaskit/pubsub
-  # or
-  yarn add @atlaskit/pubsub
-  ~~~
-
-  ## Using the component as a component developer
-
-  ~~~js
+  ${code`
   import { PubSubClient } from '@atlassian/pubsub';
+
+  ### Using the component as a component developer
 
   class Component {
     private pubSubClient: PubSubClient;
@@ -37,13 +29,11 @@ export default md`
     onIssueUpdate = (event: string, payload) => {
 
     };
-  }
-  ~~~
+  };`}
 
-  ## Using the component as a product developer
+  ### Using the component as a product developer
 
-  ~~~js
-  import { default as Client } from '@atlassian/pubsub';
+  ${code`import { default as Client } from '@atlassian/pubsub';
 
   const pubSubClient = new Client({
     product: 'STRIDE',
@@ -59,7 +49,16 @@ export default md`
   pubSubClient.leave([
     'ari:cloud:banana:f7ebe2c0-0309-4687-b913-41d422f2110b:conversation/b17d8707-db6e-436e-95b9-102dd1986293',
   ]);
-  ~~~
+};`}
 
   You should then make the pubSubClient available to components.
+
+  ${(
+    <Example
+      packageName="@atlaskit/pubsub"
+      Component={PubSubExample}
+      title="Client"
+      source={PubSubdSource}
+    />
+  )}
 `;

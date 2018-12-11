@@ -3,6 +3,76 @@
   "description": "Schema for Atlassian Document Format.",
   "$ref": "#/definitions/doc_node",
   "definitions": {
+    "em_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "em"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "code_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "code"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "strike_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "strike"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "strong_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "strong"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "underline_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "underline"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
     "blockquote_node": {
       "type": "object",
       "properties": {
@@ -175,153 +245,12 @@
           "required": [
             "layout"
           ]
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "table_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "table"
-          ]
         },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "isNumberColumnEnabled": {
-              "type": "boolean"
-            },
-            "layout": {
-              "enum": [
-                "wide",
-                "full-width",
-                "default"
-              ]
-            }
-          },
-          "additionalProperties": false
-        },
-        "content": {
+        "marks": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/table_row_node"
-          },
-          "minItems": 1
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "table_row_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "tableRow"
-          ]
-        },
-        "content": {
-          "anyOf": [
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/table_header_node"
-              }
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/table_cell_node"
-              }
-            }
-          ]
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "table_cell_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "tableCell"
-          ]
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "colspan": {
-              "type": "number"
-            },
-            "rowspan": {
-              "type": "number"
-            },
-            "colwidth": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            },
-            "background": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
-        },
-        "content": {
-          "$ref": "#/definitions/table_cell_content"
-        }
-      },
-      "required": [
-        "type",
-        "content"
-      ],
-      "additionalProperties": false
-    },
-    "table_header_node": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "tableHeader"
-          ]
-        },
-        "attrs": {
-          "type": "object",
-          "properties": {
-            "colspan": {
-              "type": "number"
-            },
-            "rowspan": {
-              "type": "number"
-            },
-            "colwidth": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            },
-            "background": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
-        },
-        "content": {
-          "$ref": "#/definitions/table_cell_content"
+            "$ref": "#/definitions/link_mark"
+          }
         }
       },
       "required": [
@@ -619,7 +548,7 @@
         }
       ]
     },
-    "heading_with_marks_node": {
+    "heading_with_alignment_node": {
       "allOf": [
         {
           "$ref": "#/definitions/heading_node"
@@ -631,6 +560,25 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/alignment_mark"
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "heading_with_indentation_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/heading_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/indentation_mark"
               }
             }
           },
@@ -739,6 +687,153 @@
             "$ref": "#/definitions/media_node"
           },
           "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "table_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "table"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "isNumberColumnEnabled": {
+              "type": "boolean"
+            },
+            "layout": {
+              "enum": [
+                "wide",
+                "full-width",
+                "default"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/table_row_node"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "table_row_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "tableRow"
+          ]
+        },
+        "content": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/table_header_node"
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/table_cell_node"
+              }
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "table_cell_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "tableCell"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "colspan": {
+              "type": "number"
+            },
+            "rowspan": {
+              "type": "number"
+            },
+            "colwidth": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "background": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "content": {
+          "$ref": "#/definitions/table_cell_content"
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ],
+      "additionalProperties": false
+    },
+    "table_header_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "tableHeader"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "colspan": {
+              "type": "number"
+            },
+            "rowspan": {
+              "type": "number"
+            },
+            "colwidth": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "background": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "content": {
+          "$ref": "#/definitions/table_cell_content"
         }
       },
       "required": [
@@ -1573,76 +1668,6 @@
       ],
       "additionalProperties": false
     },
-    "em_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "em"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "code_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "code"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "strike_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "strike"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "strong_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "strong"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
-    "underline_mark": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": [
-            "underline"
-          ]
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "additionalProperties": false
-    },
     "link_mark": {
       "type": "object",
       "properties": {
@@ -1801,13 +1826,41 @@
             "align": {
               "enum": [
                 "center",
-                "start",
                 "end"
               ]
             }
           },
           "required": [
             "align"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "indentation_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "indentation"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 6
+            }
+          },
+          "required": [
+            "level"
           ],
           "additionalProperties": false
         }
@@ -1858,7 +1911,7 @@
         }
       ]
     },
-    "paragraph_with_marks_node": {
+    "paragraph_with_alignment_node": {
       "allOf": [
         {
           "$ref": "#/definitions/paragraph_node"
@@ -1870,6 +1923,25 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/alignment_mark"
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "paragraph_with_indentation_node": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/paragraph_node"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "marks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/indentation_mark"
               }
             }
           },
@@ -1944,9 +2016,6 @@
           "$ref": "#/definitions/mediaSingle_node"
         },
         {
-          "$ref": "#/definitions/table_node"
-        },
-        {
           "$ref": "#/definitions/codeBlock_with_no_marks_node"
         },
         {
@@ -1956,10 +2025,19 @@
           "$ref": "#/definitions/heading_with_no_marks_node"
         },
         {
+          "$ref": "#/definitions/heading_with_alignment_node"
+        },
+        {
+          "$ref": "#/definitions/heading_with_indentation_node"
+        },
+        {
           "$ref": "#/definitions/rule_node"
         },
         {
           "$ref": "#/definitions/mediaGroup_node"
+        },
+        {
+          "$ref": "#/definitions/table_node"
         },
         {
           "$ref": "#/definitions/applicationCard_node"
@@ -1981,6 +2059,12 @@
         },
         {
           "$ref": "#/definitions/paragraph_with_no_marks_node"
+        },
+        {
+          "$ref": "#/definitions/paragraph_with_alignment_node"
+        },
+        {
+          "$ref": "#/definitions/paragraph_with_indentation_node"
         },
         {
           "$ref": "#/definitions/panel_node"
@@ -2010,6 +2094,12 @@
             "$ref": "#/definitions/heading_with_no_marks_node"
           },
           {
+            "$ref": "#/definitions/heading_with_alignment_node"
+          },
+          {
+            "$ref": "#/definitions/heading_with_indentation_node"
+          },
+          {
             "$ref": "#/definitions/rule_node"
           },
           {
@@ -2034,6 +2124,12 @@
             "$ref": "#/definitions/paragraph_with_no_marks_node"
           },
           {
+            "$ref": "#/definitions/paragraph_with_alignment_node"
+          },
+          {
+            "$ref": "#/definitions/paragraph_with_indentation_node"
+          },
+          {
             "$ref": "#/definitions/panel_node"
           }
         ]
@@ -2054,9 +2150,6 @@
             "$ref": "#/definitions/mediaSingle_node"
           },
           {
-            "$ref": "#/definitions/table_node"
-          },
-          {
             "$ref": "#/definitions/codeBlock_with_no_marks_node"
           },
           {
@@ -2070,6 +2163,9 @@
           },
           {
             "$ref": "#/definitions/mediaGroup_node"
+          },
+          {
+            "$ref": "#/definitions/table_node"
           },
           {
             "$ref": "#/definitions/applicationCard_node"
@@ -2227,9 +2323,6 @@
                 "$ref": "#/definitions/mediaSingle_node"
               },
               {
-                "$ref": "#/definitions/table_node"
-              },
-              {
                 "$ref": "#/definitions/codeBlock_with_no_marks_node"
               },
               {
@@ -2242,13 +2335,19 @@
                 "$ref": "#/definitions/heading_with_no_marks_node"
               },
               {
-                "$ref": "#/definitions/heading_with_marks_node"
+                "$ref": "#/definitions/heading_with_alignment_node"
+              },
+              {
+                "$ref": "#/definitions/heading_with_indentation_node"
               },
               {
                 "$ref": "#/definitions/rule_node"
               },
               {
                 "$ref": "#/definitions/mediaGroup_node"
+              },
+              {
+                "$ref": "#/definitions/table_node"
               },
               {
                 "$ref": "#/definitions/applicationCard_node"
@@ -2275,7 +2374,10 @@
                 "$ref": "#/definitions/paragraph_with_no_marks_node"
               },
               {
-                "$ref": "#/definitions/paragraph_with_marks_node"
+                "$ref": "#/definitions/paragraph_with_alignment_node"
+              },
+              {
+                "$ref": "#/definitions/paragraph_with_indentation_node"
               },
               {
                 "$ref": "#/definitions/panel_node"

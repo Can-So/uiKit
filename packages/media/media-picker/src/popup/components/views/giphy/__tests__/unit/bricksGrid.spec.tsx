@@ -52,14 +52,11 @@ describe('StatelessGiphySidebarItem component', () => {
       expect(bricksInstanceStub.pack).toHaveBeenCalledTimes(0);
     });
 
-    it('should pack() the Bricks instance if currChildren have length greate than 0', () => {
+    it('should pack() the Bricks instance if currChildren have length greater than 0', () => {
       const child = [<div key="first-child">This is some child</div>];
 
-      const element = shallow(
-        <BricksLayout id={'some-id'}>{child}</BricksLayout>,
-      );
+      shallow(<BricksLayout id={'some-id'}>{child}</BricksLayout>);
 
-      element.setState({ instance: bricksInstanceStub });
       expect(bricksInstanceStub.pack).toHaveBeenCalledTimes(1);
     });
   });

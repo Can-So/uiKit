@@ -47,6 +47,7 @@ import {
   gridPlugin,
   alignment,
   editorDisabledPlugin,
+  indentationPlugin,
 } from '../plugins';
 
 /**
@@ -83,10 +84,6 @@ export default function createPluginsList(
 
   if (props.allowTextAlignment) {
     plugins.push(alignment);
-  }
-
-  if (props.quickInsert) {
-    plugins.push(quickInsertPlugin);
   }
 
   if (props.allowInlineAction) {
@@ -195,20 +192,21 @@ export default function createPluginsList(
     plugins.push(layoutPlugin);
   }
 
-  if (props.allowGapCursor) {
-    plugins.push(gapCursorPlugin);
-  }
-
   if (props.UNSAFE_cards) {
     plugins.push(cardPlugin);
   }
 
+  let statusMenuDisabled = true;
   if (props.allowStatus) {
-    const menuDisabled =
+    statusMenuDisabled =
       typeof props.allowStatus === 'object'
         ? props.allowStatus.menuDisabled
         : false;
-    plugins.push(statusPlugin({ menuDisabled }));
+    plugins.push(statusPlugin({ menuDisabled: statusMenuDisabled }));
+  }
+
+  if (props.allowIndentation) {
+    plugins.push(indentationPlugin);
   }
 
   // UI only plugins
@@ -216,13 +214,19 @@ export default function createPluginsList(
     insertBlockPlugin({
       insertMenuItems: props.insertMenuItems,
       horizontalRuleEnabled: props.allowRule,
+      nativeStatusSupported: !statusMenuDisabled,
     }),
   );
 
+  plugins.push(gapCursorPlugin);
   plugins.push(gridPlugin);
   plugins.push(submitEditorPlugin);
   plugins.push(fakeTextCursorPlugin);
   plugins.push(floatingToolbarPlugin);
+
+  if (props.appearance !== 'mobile') {
+    plugins.push(quickInsertPlugin);
+  }
 
   if (props.appearance === 'message') {
     plugins.push(isMultilineContentPlugin);

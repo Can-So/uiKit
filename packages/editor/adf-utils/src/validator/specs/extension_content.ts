@@ -2,10 +2,10 @@ export default {
   type: 'array',
   items: [
     [
+      'table',
       'paragraph_with_no_marks',
       'bulletList',
       'mediaSingle',
-      'table',
       'codeBlock_with_no_marks',
       'orderedList',
       'heading_with_no_marks',

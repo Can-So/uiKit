@@ -183,7 +183,12 @@ export interface CardWithUrlContentProps {
 export function CardWithUrlContent(props: CardWithUrlContentProps) {
   const { url, isSelected, onClick, client, appearance } = props;
   return (
-    <WithObject client={client} url={url}>
+    <WithObject
+      client={client}
+      url={url}
+      isSelected={isSelected}
+      appearance={appearance}
+    >
       {({ state, reload }) => {
         const handleAuthorise = () => {
           // TODO: figure out how to support multiple services

@@ -19,12 +19,12 @@ describe('UserPicker', () => {
     {
       id: 'abc-123',
       name: 'Jace Beleren',
-      nickname: 'jbeleren',
+      publicName: 'jbeleren',
     },
     {
       id: '123-abc',
       name: 'Chandra Nalaar',
-      nickname: 'cnalaar',
+      publicName: 'cnalaar',
     },
   ];
 
@@ -86,6 +86,22 @@ describe('UserPicker', () => {
     expect(onSelection).toHaveBeenCalledWith(users[0]);
   });
 
+  it('should call onFocus handler', () => {
+    const onFocus = jest.fn();
+    const component = shallowUserPicker({ onFocus });
+
+    component.simulate('focus');
+    expect(onFocus).toHaveBeenCalled();
+  });
+
+  it('should call onBlur handler', () => {
+    const onBlur = jest.fn();
+    const component = shallowUserPicker({ onBlur });
+
+    component.simulate('blur');
+    expect(onBlur).toHaveBeenCalled();
+  });
+
   describe('Multiple users select', () => {
     it('should set isMulti in Select', () => {
       const component = shallowUserPicker({ users, isMulti: true });
@@ -124,7 +140,7 @@ describe('UserPicker', () => {
   it('should open menu onFocus', () => {
     const component = shallowUserPicker();
     const select = component.find(Select);
-    select.simulate('focus', { target: {} });
+    select.simulate('focus');
     expect(component.state()).toHaveProperty('menuIsOpen', true);
   });
 
@@ -395,5 +411,21 @@ describe('UserPicker', () => {
 
     component.find(Select).simulate('keyDown', { keyCode: 27 });
     expect(ref.blur).toHaveBeenCalled();
+  });
+
+  it('should prevent default selection event when user inserts space on empty input', () => {
+    const component = shallowUserPicker({ users });
+    component.setState({ menuIsOpen: true });
+    const preventDefault = jest.fn();
+    component.find(Select).simulate('keyDown', { keyCode: 32, preventDefault });
+    expect(preventDefault).toHaveBeenCalled();
+  });
+
+  it('should not prevent default event when there is inputValue', () => {
+    const component = shallowUserPicker({ users });
+    component.setState({ menuIsOpen: true, inputValue: 'test' });
+    const preventDefault = jest.fn();
+    component.find(Select).simulate('keyDown', { keyCode: 32, preventDefault });
+    expect(preventDefault).toHaveBeenCalledTimes(0);
   });
 });

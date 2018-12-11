@@ -1,11 +1,12 @@
 // @flow
 
-import React, { Component, type Node } from 'react';
+import React, { type Node } from 'react';
 import styled, { css } from 'styled-components';
 import * as colors from '../colors';
-import { Consumer } from './Context';
+import { createTheme, type ThemeProp } from '../utils/createTheme';
 
-type ThemeReset = {
+export type ResetThemeProps = *;
+export type ResetThemeTokens = {
   backgroundColor: string,
   textColor: string,
   linkColor?: string,
@@ -17,7 +18,7 @@ type ThemeReset = {
   subtleTextColor?: string,
 };
 
-const orTextColor = (preferred: string) => (p: ThemeReset) =>
+const orTextColor = (preferred: string) => (p: ResetThemeTokens) =>
   p[preferred] || p.textColor;
 const Div = styled.div`
   ${p => css`
@@ -52,32 +53,35 @@ const Div = styled.div`
   `};
 `;
 
-const defaultTheme: ThemeReset = {
-  backgroundColor: colors.N0,
-  linkColor: colors.B400,
-  linkColorHover: colors.B300,
-  linkColorActive: colors.B500,
-  linkColorOutline: colors.B100,
-  headingColor: colors.N800,
-  subtleHeadingColor: colors.N200,
-  subtleTextColor: colors.N200,
-  textColor: colors.N900,
-};
+export const ResetTheme = createTheme<ResetThemeTokens, ResetThemeProps>(
+  () => ({
+    backgroundColor: colors.N0,
+    linkColor: colors.B400,
+    linkColorHover: colors.B300,
+    linkColorActive: colors.B500,
+    linkColorOutline: colors.B100,
+    headingColor: colors.N800,
+    subtleHeadingColor: colors.N200,
+    subtleTextColor: colors.N200,
+    textColor: colors.N900,
+  }),
+);
 
-type Props = {
+export function Reset(props: {
   children?: Node,
-};
-
-export default class Reset extends Component<Props> {
-  render() {
-    return (
-      <Consumer>
-        {theme => (
-          <Div {...defaultTheme} {...theme} {...this.props}>
-            {this.props.children}
-          </Div>
-        )}
-      </Consumer>
-    );
-  }
+  theme?: ThemeProp<ResetThemeTokens, ResetThemeProps>,
+}) {
+  return (
+    <ResetTheme.Provider value={props.theme}>
+      <ResetTheme.Consumer>
+        {tokens => {
+          return (
+            <Div {...{ ...tokens, mode: undefined }} {...props}>
+              {props.children}
+            </Div>
+          );
+        }}
+      </ResetTheme.Consumer>
+    </ResetTheme.Provider>
+  );
 }

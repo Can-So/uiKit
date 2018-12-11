@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-test-helpers",
-  "version": "6.2.22",
+  "version": "6.3.1",
   "description": "Test Helpers for Atlassian Editor components",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -15,21 +15,24 @@
   "maintainers": [
     "Stanislas S"
   ],
+  "atlaskit": {
+    "internal": true
+  },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
     "@atlaskit/analytics-next-types": "^3.1.0",
-    "@atlaskit/editor-common": "^22.0.2",
-    "@atlaskit/editor-core": "^89.0.7",
+    "@atlaskit/editor-common": "^22.3.1",
+    "@atlaskit/editor-core": "^90.3.0",
     "@atlaskit/icon": "^15.0.0",
     "@atlaskit/media-core": "^24.5.0",
-    "@atlaskit/media-test-helpers": "^18.3.1",
+    "@atlaskit/media-test-helpers": "^18.5.1",
     "@atlaskit/smart-card": "^9.0.0",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "enzyme": "^3.7.0",
     "prosemirror-commands": "^1.0.7",
     "prosemirror-keymap": "^1.0.1",
     "prosemirror-model": "^1.6.1",
     "prosemirror-state": "^1.2.2",
-    "prosemirror-view": "^1.6.5",
+    "prosemirror-view": "^1.6.7",
     "react-intl": "^2.6.0"
   },
   "peerDependencies": {

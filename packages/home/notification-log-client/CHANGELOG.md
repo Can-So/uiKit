@@ -1,5 +1,11 @@
 # @atlaskit/notification-log-service
 
+## 3.1.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/util-service-support@3.0.5
+  - @atlaskit/notification-indicator@4.0.6
+  - @atlaskit/docs@6.0.0
+
 ## 3.1.0
 - [minor] use new V2 notification API, add app-version header, add source query param [1583aea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1583aea)
 

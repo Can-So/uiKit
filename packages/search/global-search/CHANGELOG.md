@@ -1,5 +1,79 @@
 # @atlaskit/global-search
 
+## 5.13.5
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics@4.0.7
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/button@10.1.1
+  - @atlaskit/drawer@2.6.1
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/field-text-area@4.0.14
+  - @atlaskit/flag@9.1.8
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/icon-file-type@3.0.2
+  - @atlaskit/icon-object@3.0.2
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/navigation@33.3.8
+  - @atlaskit/page@8.0.12
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/analytics-gas-types@3.2.3
+  - @atlaskit/util-service-support@3.0.5
+  - @atlaskit/quick-search@5.2.4
+  - @atlaskit/docs@6.0.0
+
+## 5.13.4
+- [patch] [e6d6651](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6d6651):
+
+  - fix jira recent results ordering; filters should be after projects
+
+## 5.13.3
+- [patch] [d498de7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d498de7):
+
+  - Include type of result for boards and filters in jira search
+- [patch] [c6131a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c6131a6):
+
+  - Added result type for boards and filters in global search result subtext
+
+## 5.13.2
+- [patch] [38debc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38debc1):
+
+  - trigger analytics on advanced search dropdown item clicked, disable jira people search
+
+## 5.13.1
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/drawer@2.5.4
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/field-text-area@4.0.13
+  - @atlaskit/flag@9.1.7
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/icon-file-type@3.0.1
+  - @atlaskit/icon-object@3.0.1
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/navigation@33.3.7
+  - @atlaskit/quick-search@5.2.1
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+
+## 5.13.0
+- [minor] [347a474](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/347a474):
+
+  - Added icon on selected to quick search results
+
+## 5.12.12
+- [patch] [f84ab96](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f84ab96):
+
+  - Add extra padding to the before pre-query advanced search component.
+
+## 5.12.11
+- [patch] [f0bfc56](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0bfc56):
+
+  - Change adv search shortcut icon to Return instead of ShiftReturn for both Confluence and Jira
+
 ## 5.12.10
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

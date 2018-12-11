@@ -1,9 +1,9 @@
 import memoizeOne from 'memoize-one';
+import { ReactChild, ReactElement } from 'react';
 import { Promisable, User, UserOption, UserValue } from '../types';
-import { ReactElement, ReactChild } from 'react';
 
 export const userToOption = (user: User) => ({
-  label: user.name || user.nickname || '',
+  label: user.name,
   value: user.id,
   user,
 });
@@ -42,7 +42,7 @@ export const getOptions = memoizeOne(
 
 export const usersToOptions = memoizeOne((defaultValue: UserValue) => {
   if (!defaultValue) {
-    return undefined;
+    return null;
   }
   if (Array.isArray(defaultValue)) {
     return defaultValue.map(userToOption);
@@ -68,3 +68,6 @@ export const isChildInput = (child: ReactChild): child is ReactElement<any> =>
 export const isSingleValue = (
   value?: UserOption | UserOption[],
 ): value is UserOption => !!value && !Array.isArray(value);
+
+export const hasValue = (value?: string): value is string =>
+  !!value && value.trim().length > 0;

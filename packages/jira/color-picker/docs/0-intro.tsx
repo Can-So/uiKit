@@ -18,9 +18,7 @@ ${(
   </SectionMessage>
 )}
 
-# Color picker
-
-Allows to pick colors from color palette.
+This component allows to pick colors from color palette.
 
 ## Usage
 

@@ -1,5 +1,42 @@
 # @atlaskit/media-avatar-picker
 
+## 12.1.3
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-range@5.0.12
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/page@8.0.12
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/media-core@24.5.2
+  - @atlaskit/media-ui@8.1.2
+  - @atlaskit/docs@6.0.0
+
+## 12.1.2
+- [patch] [e375b42](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e375b42):
+
+  - Update props description
+
+## 12.1.1
+- Updated dependencies [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+  - @atlaskit/media-test-helpers@18.5.2
+  - @atlaskit/media-ui@8.0.0
+
+## 12.1.0
+- [minor] [87fe781](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/87fe781):
+
+  # Productionise ImagePlacer component
+
+  The ImagePlacer component provides a polished and flexible solution when
+  users require placement of an image inside a fixed area, such as avatar or header image selection.
+  The component is designed to work with mouse and touch events, respond to wheel events, is optimised
+  to handle large images, and can also respect Exif orientation values.
+
+## 12.0.3
+- [patch] [5a6de24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6de24):
+
+  - translate component properties in media components
+
 ## 12.0.2
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

@@ -1,6 +1,6 @@
 import { NodeSpec } from 'prosemirror-model';
 import { Inline, MarksObject, NoMark } from './doc';
-import { AlignmentMarkDefinition } from '..';
+import { AlignmentMarkDefinition, IndentationMarkDefinition } from '../marks';
 
 /**
  * @name heading_node
@@ -26,12 +26,24 @@ export interface HeadingBaseDefinition {
  */
 export type HeadingDefinition = HeadingBaseDefinition & NoMark;
 
+// Check `paragraph` node for why we are doing things like this
 /**
- * @name heading_with_marks_node
+ * @name heading_with_alignment_node
  * @stage 0
  */
-export type HeadingWithMarksDefinition = HeadingBaseDefinition &
+export type HeadingWithAlignmentDefinition = HeadingBaseDefinition &
   MarksObject<AlignmentMarkDefinition>;
+
+/**
+ * @name heading_with_indentation_node
+ * @stage 0
+ */
+export type HeadingWithIndentationDefinition = HeadingBaseDefinition &
+  MarksObject<IndentationMarkDefinition>;
+
+export type HeadingWithMarksDefinition =
+  | HeadingWithAlignmentDefinition
+  | HeadingWithIndentationDefinition;
 
 export const heading: NodeSpec = {
   attrs: { level: { default: 1 } },

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/progress-indicator",
-  "version": "5.0.9",
+  "version": "5.0.11",
   "description": "A set of UI elements for indicating progress through a user journey",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -19,8 +19,8 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/analytics-next": "^3.1.1",
-    "@atlaskit/theme": "^6.2.1",
+    "@atlaskit/analytics-next": "^3.1.2",
+    "@atlaskit/theme": "^7.0.1",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
     "prop-types": "^15.5.10"
@@ -31,9 +31,9 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/button": "^10.0.0",
-    "@atlaskit/docs": "^5.2.1",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "@atlaskit/button": "^10.1.1",
+    "@atlaskit/docs": "^6.0.0",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",
     "react-lorem-component": "^0.12.2"
   }

@@ -110,9 +110,14 @@ export const deleteNode = (dir: Direction): Command => (
   dispatch: (tr: Transaction) => void,
 ): boolean => {
   if (state.selection instanceof GapCursorSelection) {
-    const { $from } = state.selection;
+    const { $from, $anchor } = state.selection;
     let { tr } = state;
     if (isBackward(dir)) {
+      if (state.selection.side === 'left') {
+        tr.setSelection(new GapCursorSelection($anchor, Side.RIGHT));
+        dispatch(tr);
+        return true;
+      }
       tr = removeNodeBefore(state.tr);
     } else if ($from.nodeAfter) {
       tr = tr.delete($from.pos, $from.pos + $from.nodeAfter.nodeSize);

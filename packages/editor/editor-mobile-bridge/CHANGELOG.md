@@ -1,5 +1,55 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.4.6
+- [patch] [e01ea01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e01ea01):
+
+  - Bump to match @atlaskit/docs dep
+
+## 6.4.5
+- [patch] [d3d0d67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3d0d67):
+
+  - Mobile bridge can be public and updated the description
+
+## 6.4.4
+- [patch] [7190767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7190767):
+
+  - Fixes empty collection name and API naming mismatches
+
+## 6.4.3
+- [patch] [7515804](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7515804):
+
+  - Fixes requesting media auth for empty string collections.
+
+## 6.4.2
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
+## 6.4.1
+- [patch] [232238c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/232238c):
+
+  - ED-5866: Turn off lazy loading for images on mobile.
+
+## 6.4.0
+- [minor] [008c694](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/008c694):
+
+  - ED-5584: Capture emoji requests for native processing on iOS only.
+
+## 6.3.4
+- [patch] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
+
+  - Adds support for links around images
+
+## 6.3.3
+- [patch] [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+
+  - ED-5677: enabled quickInsert and gapCursor by default (quickInsert: except for mobile appearance)
+
+## 6.3.2
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
 ## 6.3.1
 - [patch] [345b45c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/345b45c):
 

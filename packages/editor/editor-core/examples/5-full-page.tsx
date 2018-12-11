@@ -164,8 +164,8 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
               allowLayouts={{
                 allowBreakout: true,
               }}
-              allowGapCursor={true}
               allowTextAlignment={true}
+              allowIndentation={true}
               allowTemplatePlaceholders={{ allowInserting: true }}
               UNSAFE_cards={{
                 provider: Promise.resolve(cardProvider),

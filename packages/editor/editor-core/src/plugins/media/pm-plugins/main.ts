@@ -269,7 +269,7 @@ export class MediaPluginState {
     const { stateManager } = this;
     const { mediaSingle } = this.view.state.schema.nodes;
     const collection = this.collectionFromProvider();
-    if (typeof collection !== 'string') {
+    if (collection === undefined) {
       return;
     }
 
@@ -696,7 +696,7 @@ export class MediaPluginState {
           id: state.publicId || state.id,
         };
 
-        if (state.collection) {
+        if (typeof state.collection === 'string') {
           attrs.collection = state.collection;
         }
 

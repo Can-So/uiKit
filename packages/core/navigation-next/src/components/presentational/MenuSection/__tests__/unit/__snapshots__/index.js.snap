@@ -6,7 +6,7 @@ exports[`MenuSection should render Section with correct props 1`] = `
   shouldGrow={true}
   styles={[Function]}
 >
-  <unknown />
+  <Component />
 </Section>
 `;
 

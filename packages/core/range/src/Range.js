@@ -1,8 +1,9 @@
 // @flow
+
+import { type ThemeProp } from '@atlaskit/theme';
 import React, { Component } from 'react';
-import { Theme } from '@atlaskit/theme';
 import { Input } from './styled';
-import { theme as baseTheme } from './theme';
+import { Theme, type ThemeTokens } from './theme';
 
 type Props = {
   /** if the field range needs to be disabled */
@@ -24,7 +25,7 @@ type Props = {
   /** The theme object to be passed down. See
   [@atlaskit/theme](https://atlaskit.atlassian.com/packages/core/theme) for more details on themeing.
   */
-  theme: Object,
+  theme?: ThemeProp<ThemeTokens>,
 };
 
 type State = {
@@ -47,7 +48,6 @@ export default class Slider extends Component<Props, State> {
     max: 100,
     step: 1,
     onChange: () => {},
-    theme: baseTheme,
   };
 
   state: State = {
@@ -93,22 +93,24 @@ export default class Slider extends Component<Props, State> {
     const value = this.getValue();
 
     return (
-      <Theme values={theme}>
-        {computedTheme => (
-          <Input
-            {...rest}
-            {...computedTheme.range()}
-            type="range"
-            value={value}
-            onChange={this.handleChange}
-            disabled={isDisabled}
-            valuePercent={getPercentValue(value, min, max)}
-            innerRef={r => {
-              this.range = r;
-            }}
-          />
-        )}
-      </Theme>
+      <Theme.Provider value={theme}>
+        <Theme.Consumer>
+          {computedTheme => (
+            <Input
+              {...rest}
+              {...computedTheme}
+              type="range"
+              value={value}
+              onChange={this.handleChange}
+              disabled={isDisabled}
+              valuePercent={getPercentValue(value, min, max)}
+              innerRef={r => {
+                this.range = r;
+              }}
+            />
+          )}
+        </Theme.Consumer>
+      </Theme.Provider>
     );
   }
 }

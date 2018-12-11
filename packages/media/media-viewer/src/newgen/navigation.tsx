@@ -4,6 +4,9 @@ import { Identifier } from './domain';
 import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import { colors } from '@atlaskit/theme';
+import { Shortcut } from '@atlaskit/media-ui';
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import {
   ArrowsWrapper,
   RightWrapper,
@@ -11,10 +14,7 @@ import {
   Arrow,
   hideControlsClassName,
 } from './styled';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { getSelectedIndex } from './utils';
-import { Shortcut } from './shortcut';
 import { channel } from './analytics';
 import {
   createNavigationEvent,

@@ -10,7 +10,7 @@ import { trackAndInvoke } from '../../../analytics';
 import * as blockTypes from '../types';
 import {
   insertBlockType,
-  removeEmptyHeadingAtStartOfDocument,
+  cleanUpAtTheStartOfDocument,
 } from '../../block-type/commands';
 
 const analyticsEventName = (blockTypeName: string, eventSource: string) =>
@@ -65,7 +65,7 @@ export default function keymapPlugin(schema: Schema): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.backspace.common!,
-    removeEmptyHeadingAtStartOfDocument,
+    cleanUpAtTheStartOfDocument,
     list,
   );
 

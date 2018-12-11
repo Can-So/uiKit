@@ -1,5 +1,21 @@
 # @atlaskit/mobile-header
 
+## 1.1.5
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/navigation@33.3.8
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 1.1.4
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/navigation@33.3.7
+  - @atlaskit/theme@7.0.0
+
 ## 1.1.3
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2
