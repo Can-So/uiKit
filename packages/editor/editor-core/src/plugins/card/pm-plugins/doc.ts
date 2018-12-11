@@ -49,7 +49,9 @@ export const replaceQueuedUrlWithCard = (
     });
   }
 
-  dispatch(resolveCard(url)(tr));
+  if (dispatch) {
+    dispatch(resolveCard(url)(tr));
+  }
   return true;
 };
 
@@ -109,7 +111,10 @@ export const changeSelectedCardToLink: Command = (state, dispatch) => {
     false,
   );
 
-  dispatch(tr.scrollIntoView());
+  if (dispatch) {
+    dispatch(tr.scrollIntoView());
+  }
+
   return true;
 };
 
@@ -139,7 +144,10 @@ export const setSelectedCardAppearance: (
         selectedNode.marks,
       ),
     );
-    dispatch(tr.scrollIntoView());
+
+    if (dispatch) {
+      dispatch(tr.scrollIntoView());
+    }
     return true;
   }
 
@@ -149,7 +157,10 @@ export const setSelectedCardAppearance: (
     selectedNode.attrs,
     selectedNode.marks,
   );
-  dispatch(tr.scrollIntoView());
+
+  if (dispatch) {
+    dispatch(tr.scrollIntoView());
+  }
 
   return true;
 };

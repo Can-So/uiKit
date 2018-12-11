@@ -106,7 +106,7 @@ export type Props = {
   // Internal: injected by withAnalytics(). Fire a private analytics event
   firePrivateAnalyticsEvent?: FireAnalyticsEvent;
   /** React component to be used for rendering links */
-  linkComponent?: React.ComponentType;
+  linkComponent?: React.ComponentType<any>;
 };
 
 export type State = {

@@ -57,7 +57,7 @@ import { createHorizontalRule } from '../../../rule/pm-plugins/input-rule';
 import { TriggerWrapper } from './styles';
 import { insertLayoutColumns } from '../../../layout/actions';
 import { insertTaskDecision } from '../../../tasks-and-decisions/commands';
-import { Command } from '../../../../commands';
+import { Command } from '../../../../types';
 import { showLinkToolbar } from '../../../hyperlink/commands';
 import { insertMentionQuery } from '../../../mentions/commands/insert-mention-query';
 import { updateStatus } from '../../../status/actions';

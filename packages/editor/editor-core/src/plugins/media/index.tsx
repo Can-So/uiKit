@@ -77,18 +77,20 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
           errorReporter,
           portalProviderAPI,
           reactContext,
-          appearance,
         }) =>
           createPlugin(
             schema,
             {
               providerFactory,
               nodeViews: {
-                mediaGroup: ReactMediaGroupNode(portalProviderAPI),
+                mediaGroup: ReactMediaGroupNode(
+                  portalProviderAPI,
+                  props.appearance,
+                ),
                 mediaSingle: ReactMediaSingleNode(
                   portalProviderAPI,
                   eventDispatcher,
-                  appearance,
+                  props.appearance,
                 ),
               },
               errorReporter,
@@ -105,7 +107,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
             props.appearance,
           ),
       },
-      { name: 'mediaKeymap', plugin: ({ schema }) => keymapPlugin(schema) },
+      { name: 'mediaKeymap', plugin: ({ schema }) => keymapPlugin() },
     ].concat(
       options && options.allowMediaSingle
         ? {
@@ -186,7 +188,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
         action(insert, state) {
           const pluginState = pluginKey.getState(state);
           pluginState.showMediaPicker();
-          return insert();
+          return insert('');
         },
       },
     ],

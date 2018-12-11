@@ -1,4 +1,3 @@
-import { EditorState, Transaction } from 'prosemirror-state';
 import { defineMessages } from 'react-intl';
 import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
 import SettingsIcon from '@atlaskit/icon/glyph/editor/settings';
@@ -53,7 +52,7 @@ const withAnalytics = (
   command: Command,
   eventName: string,
   properties?: AnalyticsProperties,
-) => (state: EditorState, dispatch: (tr: Transaction) => void) => {
+): Command => (state, dispatch) => {
   analytics.trackEvent(eventName, properties);
   return command(state, dispatch);
 };

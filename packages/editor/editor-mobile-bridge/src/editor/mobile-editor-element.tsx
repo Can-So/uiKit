@@ -13,6 +13,7 @@ import {
   MediaProvider,
   MentionProvider,
   TaskDecisionProvider,
+  MockEmojiProvider,
 } from '../providers';
 
 export const bridge: WebBridgeImpl = ((window as any).bridge = new WebBridgeImpl());
@@ -54,6 +55,7 @@ export default function mobileEditor(props) {
     <EditorWithState
       appearance="mobile"
       mentionProvider={MentionProvider}
+      emojiProvider={Promise.resolve(MockEmojiProvider)}
       media={{
         customMediaPicker: new MobilePicker(),
         provider: props.mediaProvider || MediaProvider,

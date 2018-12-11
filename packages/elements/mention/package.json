@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/mention",
-  "version": "15.1.8",
+  "version": "15.1.9",
   "config": {
     "access": "public"
   },

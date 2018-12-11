@@ -40,7 +40,7 @@ describe('MultiValueContainer', () => {
         selectProps: { ...selectProps, value, isLoading },
       });
       const children = renderProp(
-        component.find(FormattedMessage),
+        component.find(FormattedMessage as React.ComponentClass<any>),
         'children',
         'add more people...',
       );

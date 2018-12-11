@@ -50,9 +50,10 @@ import { Browser } from '../../../../../../components/browser';
 import { menuDelete } from '../../../editor/phrases';
 import { LocalUploadFileMetadata } from '../../../../../domain/local-upload';
 
+// TODO: Fix this
 const ConnectedUploadViewWithStore = getComponentClassWithStore(
   ConnectedUploadView,
-);
+) as any;
 
 const createConnectedComponent = (
   state: State,
