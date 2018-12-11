@@ -14,6 +14,7 @@ import TableComponent from './TableComponent';
 import WithPluginState from '../../../ui/WithPluginState';
 import { pluginKey as widthPluginKey } from '../../width';
 import { pluginKey, getPluginState } from '../pm-plugins/main';
+import { pluginKey as tableResizingPluginKey } from '../pm-plugins/table-resizing/index';
 import { pluginConfig as getPluginConfig } from '../index';
 
 export interface Props {
@@ -22,7 +23,6 @@ export interface Props {
   allowColumnResizing?: boolean;
   cellMinWidth?: number;
   portalProviderAPI: PortalProviderAPI;
-  UNSAFE_allowFlexiColumnResizing?: boolean;
   getPos: () => number;
 }
 
@@ -87,6 +87,7 @@ export default class TableView extends ReactNodeView {
         plugins={{
           containerWidth: widthPluginKey,
           pluginState: pluginKey,
+          tableResizingPluginState: tableResizingPluginKey,
         }}
         editorView={props.view}
         render={pluginStates => (
@@ -168,16 +169,12 @@ export const createTableView = (portalProviderAPI: PortalProviderAPI) => (
   getPos,
 ): NodeView => {
   const { pluginConfig } = getPluginState(view.state);
-  const {
-    allowColumnResizing,
-    UNSAFE_allowFlexiColumnResizing,
-  } = getPluginConfig(pluginConfig);
+  const { allowColumnResizing } = getPluginConfig(pluginConfig);
 
   return new TableView({
     node,
     view,
     allowColumnResizing,
-    UNSAFE_allowFlexiColumnResizing,
     portalProviderAPI,
     getPos,
   }).init();
