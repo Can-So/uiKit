@@ -34,7 +34,9 @@ export function setNormalText(): Command {
       selection: { $from, $to },
       schema,
     } = state;
-    dispatch(tr.setBlockType($from.pos, $to.pos, schema.nodes.paragraph));
+    if (dispatch) {
+      dispatch(tr.setBlockType($from.pos, $to.pos, schema.nodes.paragraph));
+    }
     return true;
   };
 }
@@ -46,9 +48,11 @@ export function setHeading(level: number): Command {
       selection: { $from, $to },
       schema,
     } = state;
-    dispatch(
-      tr.setBlockType($from.pos, $to.pos, schema.nodes.heading, { level }),
-    );
+    if (dispatch) {
+      dispatch(
+        tr.setBlockType($from.pos, $to.pos, schema.nodes.heading, { level }),
+      );
+    }
     return true;
   };
 }
@@ -108,7 +112,9 @@ function wrapSelectionIn(type): Command {
       );
       tr.setSelection(Selection.near(tr.doc.resolve(state.selection.to + 1)));
     }
-    dispatch(tr);
+    if (dispatch) {
+      dispatch(tr);
+    }
     return true;
   };
 }
@@ -134,7 +140,9 @@ function insertCodeBlock(): Command {
     tr.setSelection(
       Selection.near(tr.doc.resolve(state.selection.to + addPos)),
     );
-    dispatch(tr);
+    if (dispatch) {
+      dispatch(tr);
+    }
     return true;
   };
 }
@@ -159,7 +167,9 @@ export const cleanUpAtTheStartOfDocument: Command = (state, dispatch) => {
      * NOTE: We already know it's an empty doc so it's safe to use 0
      */
     tr.setNodeMarkup(0, paragraph, parent.attrs, []);
-    dispatch(tr);
+    if (dispatch) {
+      dispatch(tr);
+    }
     return true;
   }
   return false;

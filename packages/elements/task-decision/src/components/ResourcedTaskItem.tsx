@@ -7,6 +7,7 @@ import {
   TaskDecisionProvider,
   TaskState,
   User,
+  DecisionState,
 } from '../types';
 import { FabricElementsAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
@@ -114,7 +115,7 @@ export default class ResourcedTaskItem extends PureComponent<Props, State> {
     }
   }
 
-  private onUpdate = (state: TaskState) => {
+  private onUpdate = (state: TaskState | DecisionState) => {
     this.setState({ isDone: state === 'DONE' });
   };
 

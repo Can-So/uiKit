@@ -20,7 +20,6 @@ export const mediaGroup: NodeSpec = {
   parseDOM: [
     {
       tag: 'div[data-node-type="mediaGroup"]',
-      getAttrs: (dom: Element) => ({}),
     },
   ],
 

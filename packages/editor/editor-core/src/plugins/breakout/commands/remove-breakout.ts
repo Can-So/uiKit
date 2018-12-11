@@ -11,9 +11,16 @@ export function removeBreakout(): Command {
     }
 
     const marks = node.node.marks.filter(m => m.type.name !== 'breakout');
-    dispatch(
-      state.tr.setNodeMarkup(node.pos, node.node.type, node.node.attrs, marks),
-    );
+    if (dispatch) {
+      dispatch(
+        state.tr.setNodeMarkup(
+          node.pos,
+          node.node.type,
+          node.node.attrs,
+          marks,
+        ),
+      );
+    }
     return true;
   };
 }

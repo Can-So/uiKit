@@ -40,12 +40,14 @@ describe('table plugin: utils', () => {
     state,
     dispatch,
   ) => {
-    dispatch(
-      state.tr.setSelection(new CellSelection(
-        state.doc.resolve(anchor - 2),
-        state.doc.resolve(head - 2),
-      ) as any),
-    );
+    if (dispatch) {
+      dispatch(
+        state.tr.setSelection(new CellSelection(
+          state.doc.resolve(anchor - 2),
+          state.doc.resolve(head - 2),
+        ) as any),
+      );
+    }
     return true;
   };
 

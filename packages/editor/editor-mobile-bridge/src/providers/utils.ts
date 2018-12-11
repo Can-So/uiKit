@@ -1,4 +1,5 @@
 import { createPromise } from '../cross-platform-promise';
+import { NativeFetchResponse } from '../types';
 
 const globalFetch = window.fetch;
 export const mockFetchFor = (urls: Array<string> = []) => {
@@ -9,7 +10,10 @@ export const mockFetchFor = (urls: Array<string> = []) => {
       return globalFetch(url, options);
     }
 
-    return createPromise('nativeFetch', JSON.stringify({ url, options }))
+    return createPromise<NativeFetchResponse>(
+      'nativeFetch',
+      JSON.stringify({ url, options }),
+    )
       .submit()
       .then(({ response, status, statusText }) =>
         Promise.resolve(new Response(response, { status, statusText })),

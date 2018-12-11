@@ -11,9 +11,11 @@ import { pluginKey as quickInsertPluginKey } from '../quick-insert';
 
 export const pluginKey = new PluginKey('helpDialogPlugin');
 
-export const openHelpCommand = (tr: Transaction, dispatch: Function): void => {
+export const openHelpCommand = (tr: Transaction, dispatch?: Function): void => {
   tr = tr.setMeta(pluginKey, true);
-  dispatch(tr);
+  if (dispatch) {
+    dispatch(tr);
+  }
 };
 
 export const closeHelpCommand = (tr: Transaction, dispatch: Function): void => {
