@@ -2,7 +2,9 @@ import * as React from 'react';
 import { Link } from './styled';
 
 export interface CardLinkViewProps {
+  /** The text to display */
   text: string;
+  /** The optional click handler */
   onClick?: () => void;
 }
 

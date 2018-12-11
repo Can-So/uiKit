@@ -1,5 +1,9 @@
 # @atlaskit/feature-flag-client
 
+## 1.1.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/docs@6.0.0
+
 ## 1.1.0
 
 - [minor] Expect "kind" instead of "reason" from products [5930bab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5930bab)

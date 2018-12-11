@@ -36,7 +36,7 @@ export const createStatus = (showStatusPickerAtOffset = -2) => (
     });
 };
 
-export const updateStatus = (status?: StatusType) => (
+export const updateStatus = (status?: StatusType, autoFocus?: boolean) => (
   editorView: EditorView,
 ): boolean => {
   const { state, dispatch } = editorView;
@@ -64,6 +64,7 @@ export const updateStatus = (status?: StatusType) => (
       .setMeta(pluginKey, {
         showStatusPickerAt: newShowStatusPickerAt,
         selectedStatus,
+        autoFocus,
       })
       .scrollIntoView();
     dispatch(tr);

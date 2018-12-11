@@ -264,7 +264,7 @@ describe('<StatelessUploadView />', () => {
           },
         ] as SelectedItem[],
       };
-      const component = mount(
+      const component = mount<UploadViewProps, UploadViewState>(
         getUploadViewElement(
           false,
           [],
@@ -337,7 +337,7 @@ describe('<StatelessUploadView />', () => {
     });
 
     const setup = () => {
-      const component = mount(
+      const component = mount<UploadViewProps, UploadViewState>(
         getUploadViewElement(
           false,
           [

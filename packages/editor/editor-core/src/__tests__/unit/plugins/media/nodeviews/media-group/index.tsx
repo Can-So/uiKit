@@ -10,6 +10,8 @@ import {
 } from '../../../../../../plugins/media/pm-plugins/main';
 import MediaGroup from '../../../../../../plugins/media/nodeviews/mediaGroup';
 
+import { EditorAppearance } from '../../../../../../types';
+
 describe('nodeviews/mediaGroup', () => {
   let pluginState;
   const stateManager = new DefaultMediaStateManager();
@@ -39,6 +41,7 @@ describe('nodeviews/mediaGroup', () => {
       node: mediaGroupNode(defaultSchema),
       getPos: () => 1,
       selected: null,
+      editorAppearance: 'full-page' as EditorAppearance,
     };
 
     const wrapper = mount(<MediaGroup {...props} />);

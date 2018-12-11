@@ -1,5 +1,14 @@
 # @atlaskit/pubsub
 
+## 3.0.7
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/util-service-support@3.0.5
+  - @atlaskit/docs@6.0.0
+
 ## 3.0.6
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3

@@ -1,5 +1,25 @@
 # @atlaskit/media-image
 
+## 44.1.4
+- [patch] [6f44079](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6f44079):
+
+  - ED-5612: make image preview display correctly after replacing Card props
+
+## 44.1.3
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/field-radio-group@4.0.14
+  - @atlaskit/field-range@5.0.12
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/toggle@5.0.14
+  - @atlaskit/media-core@24.5.2
+  - @atlaskit/media-ui@8.1.2
+  - @atlaskit/docs@6.0.0
+
 ## 44.1.2
 - [patch] [676257b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/676257b):
 

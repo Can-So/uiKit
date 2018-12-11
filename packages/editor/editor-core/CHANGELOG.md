@@ -1,5 +1,73 @@
 # @atlaskit/editor-core
 
+## 90.3.16
+- [patch] [43501db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/43501db):
+
+  - ED-5812: Fixes some regressions in the mobile editor
+
+  Including:
+   * Disables mediaGoup lazy loading.
+   * Fixes unsupported emoji content.
+   * Fixes missed call to Android bridge for block state.
+
+## 90.3.15
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/avatar-group@2.1.9
+  - @atlaskit/button@10.1.1
+  - @atlaskit/calendar@7.0.16
+  - @atlaskit/code@8.2.2
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/droplist@7.0.17
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/item@8.0.14
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/select@6.1.13
+  - @atlaskit/size-detector@5.0.9
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/adf-utils@5.3.2
+  - @atlaskit/editor-bitbucket-transformer@4.0.21
+  - @atlaskit/editor-json-transformer@4.0.24
+  - @atlaskit/editor-markdown-transformer@2.0.22
+  - @atlaskit/renderer@31.1.3
+  - @atlaskit/analytics-gas-types@3.2.3
+  - @atlaskit/analytics-namespaced-context@2.1.5
+  - @atlaskit/date@0.1.9
+  - @atlaskit/emoji@47.0.7
+  - @atlaskit/mention@15.1.8
+  - @atlaskit/pubsub@3.0.7
+  - @atlaskit/status@0.2.10
+  - @atlaskit/task-decision@11.0.8
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/util-service-support@3.0.5
+  - @atlaskit/media-card@44.1.3
+  - @atlaskit/media-core@24.5.2
+  - @atlaskit/media-filmstrip@19.0.3
+  - @atlaskit/media-picker@25.0.6
+  - @atlaskit/smart-card@9.0.4
+  - @atlaskit/docs@6.0.0
+
+## 90.3.14
+- [patch] [b22d7e9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b22d7e9):
+
+  - FS-3309 - Include native status in insert menu when enabled
+
+## 90.3.13
+- [patch] [9a1dbaa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9a1dbaa):
+
+  - Fixed toolbar being positioned over a panel at the bottom of the page
+
+## 90.3.12
+- [patch] [85b71a9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85b71a9):
+
+  - ED-5704: Fixed invalid ADF sent when saving and mention/quickInsert/emoji is active
+
 ## 90.3.11
 - [patch] [e0c91b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e0c91b6):
 
