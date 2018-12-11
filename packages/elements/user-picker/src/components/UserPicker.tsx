@@ -16,8 +16,8 @@ import {
   extractUserValue,
   getOptions,
   isIterable,
-  usersToOptions,
   isSingleValue,
+  usersToOptions,
 } from './utils';
 
 export class UserPicker extends React.Component<
@@ -57,7 +57,7 @@ export class UserPicker extends React.Component<
     if (nextProps.open !== undefined) {
       derivedState.menuIsOpen = nextProps.open;
     }
-    if (nextProps.value) {
+    if (nextProps.value !== undefined) {
       derivedState.value = usersToOptions(nextProps.value);
     } else if (nextProps.defaultValue && !prevState.value) {
       derivedState.value = usersToOptions(nextProps.defaultValue);
