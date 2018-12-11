@@ -7,6 +7,7 @@ import {
   tableCell,
   tableHeader,
   tableRow,
+  tableCellMinWidth,
 } from '@atlaskit/editor-common';
 
 import LayoutButton from './ui/LayoutButton';
@@ -23,7 +24,6 @@ import FloatingContextualMenu from './ui/FloatingContextualMenu';
 import { isLayoutSupported } from './utils';
 
 export const HANDLE_WIDTH = 6;
-export const CELL_MIN_WIDTH = 48;
 
 export const pluginConfig = (tablesConfig?: PluginConfig | boolean) => {
   const config =
@@ -80,7 +80,7 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
           return allowColumnResizing
             ? createFlexiResizingPlugin(dispatch, {
                 handleWidth: HANDLE_WIDTH,
-                cellMinWidth: CELL_MIN_WIDTH,
+                cellMinWidth: tableCellMinWidth,
               } as ColumnResizingPlugin)
             : undefined;
         },

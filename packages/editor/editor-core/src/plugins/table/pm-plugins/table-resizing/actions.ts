@@ -4,6 +4,7 @@ import { Node as PMNode } from 'prosemirror-model';
 import { EditorState } from 'prosemirror-state';
 
 import {
+  tableCellMinWidth,
   TableLayout,
   akEditorTableNumberColumnWidth,
 } from '@atlaskit/editor-common';
@@ -17,7 +18,6 @@ import { getPluginState } from '../main';
 import { updateRightShadow } from '../../nodeviews/TableComponent';
 
 import { hasTableBeenResized } from '../../utils';
-import { CELL_MIN_WIDTH } from '../../index';
 import { getLayoutSize } from './utils';
 
 export function updateColumnWidth(view, cell, movedWidth, resizer) {
@@ -224,7 +224,7 @@ export function resizeColumnTo(
   }
 
   const resizer = Resizer.fromDOM(elem as HTMLTableElement, {
-    minWidth: CELL_MIN_WIDTH,
+    minWidth: tableCellMinWidth,
     maxSize: elem.offsetWidth,
     node: node,
   });
@@ -254,7 +254,7 @@ function scale(
   // If a table has not been resized yet, columns should be auto.
   if (hasTableBeenResized(node)) {
     const resizer = Resizer.fromDOM(tableElem, {
-      minWidth: CELL_MIN_WIDTH,
+      minWidth: tableCellMinWidth,
       maxSize: tableElem.offsetWidth,
       node,
     });
