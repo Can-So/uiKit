@@ -2,6 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { publishReplay } from 'rxjs/operators/publishReplay';
+import * as uuid from 'uuid/v4';
 import {
   MediaStore,
   UploadableFile,
@@ -19,6 +20,7 @@ import {
 import { fileStreamsCache } from '../context/fileStreamCache';
 import FileStreamCache from '../context/fileStreamCache';
 import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploadableFile';
+import { UploadableFileUpfrontIds } from '../../../media-store/src/uploader';
 
 const POLLING_INTERVAL = 1000;
 
@@ -90,16 +92,46 @@ export class FileFetcher {
       .then(({ data }) => data);
   }
 
+  private generateUploadbleFileUpfrontIds(
+    collection?: string,
+  ): UploadableFileUpfrontIds {
+    const id = uuid();
+    const occurrenceKey = uuid();
+    const touchFileDescriptor: TouchFileDescriptor = {
+      fileId: id,
+      occurrenceKey,
+      collection,
+    };
+
+    const promisedUploadId = this.touchFiles(
+      [touchFileDescriptor],
+      collection,
+    ).then(touchedFiles => touchedFiles.created[0].uploadId);
+
+    return {
+      id,
+      occurrenceKey,
+      promisedUploadId,
+    };
+  }
+
   upload(
     file: UploadableFile,
     controller?: UploadController,
+    uploadableFileUpfrontIds?: UploadableFileUpfrontIds,
   ): Observable<FileState> {
     const {
-      id,
       content,
-      occurrenceKey,
       name = '', // name property is not available in base64 image
     } = file;
+
+    if (!uploadableFileUpfrontIds) {
+      uploadableFileUpfrontIds = this.generateUploadbleFileUpfrontIds();
+    }
+
+    const id = uploadableFileUpfrontIds.id;
+    const occurrenceKey = uploadableFileUpfrontIds.occurrenceKey;
+
     let mimeType = '';
     let size = 0;
     let preview: FilePreview | undefined;
@@ -124,23 +156,25 @@ export class FileFetcher {
       preview,
     };
 
-    const { cancel, whenUploadFinish } = uploadFile(file, this.mediaStore, {
-      onProgress: progress => {
-        subject.next({
-          status: 'uploading',
-          ...stateBase,
-          progress,
-        });
-      },
-    });
-
-    setTimeout(() => {
+    const reportProgress = progress => {
       subject.next({
         status: 'uploading',
         ...stateBase,
-        progress: 0,
+        progress,
       });
-    }, 0);
+    };
+
+    const { cancel, whenUploadFinish } = uploadFile(
+      file,
+      this.mediaStore,
+      uploadableFileUpfrontIds,
+      {
+        onProgress: reportProgress,
+      },
+    );
+
+    // We should report progress asynchronously, since this is what consumer expects
+    setTimeout(() => reportProgress(0), 0);
 
     if (controller) {
       controller.setAbort(cancel);

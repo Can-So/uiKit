@@ -9,7 +9,9 @@ export type UploadableFile = {
   name?: string;
   mimeType?: string;
   collection?: string;
+};
 
+export type UploadableFileUpfrontIds = {
   id: string;
   occurrenceKey: string;
   promisedUploadId: Promise<string>;
@@ -67,17 +69,12 @@ const createProcessingFunction = (
 export const uploadFile = (
   file: UploadableFile,
   store: MediaStore,
+  uploadableFileUpfrontIds: UploadableFileUpfrontIds,
   callbacks?: UploadFileCallbacks,
 ): UploadFileResult => {
-  const {
-    content,
-    collection,
-    name,
-    mimeType,
-    id,
-    occurrenceKey,
-    promisedUploadId,
-  } = file;
+  const { content, collection, name, mimeType } = file;
+
+  const { id, occurrenceKey, promisedUploadId } = uploadableFileUpfrontIds;
 
   const { response, cancel } = chunkinator(
     content,

@@ -17,6 +17,7 @@ import {
   MediaStoreResponse,
   MediaFile as MediaStoreMediaFile,
   TouchFileDescriptor,
+  UploadableFileUpfrontIds,
 } from '@atlaskit/media-store';
 import { EventEmitter2 } from 'eventemitter2';
 import { MediaFile, PublicMediaFile } from '../domain/file';
@@ -156,13 +157,20 @@ export class NewUploadServiceImpl implements UploadService {
           content: file,
           name: file.name,
           mimeType: file.type,
+        };
+
+        const uploadableUpfrontIds: UploadableFileUpfrontIds = {
           id,
           occurrenceKey,
           promisedUploadId,
         };
 
         const controller = this.createUploadController();
-        const observable = context.file.upload(uploadableFile, controller);
+        const observable = context.file.upload(
+          uploadableFile,
+          controller,
+          uploadableUpfrontIds,
+        );
 
         let userUpfrontId: Promise<string> | undefined;
         let userOccurrenceKey: Promise<string> | undefined;
