@@ -13,6 +13,7 @@ import {
 import {
   MediaStoreGetFileParams,
   EmptyFile,
+  ItemsPayload,
   ImageMetadata,
 } from '../../media-store';
 import { MediaFileArtifacts } from '../../models/artifacts';
@@ -547,6 +548,66 @@ describe('MediaStore', () => {
         expect(fetchMock.lastUrl()).toEqual(
           `${baseUrl}/file/123/image?allowAnimated=true&client=some-client-id&max-age=3600&mode=full-fit&token=some-token&upscale=true&version=2`,
         );
+      });
+    });
+
+    describe('getItems', () => {
+      it('should POST to /items endpoint with correct options', () => {
+        const items = ['1', '2'];
+        const data: ItemsPayload[] = [
+          {
+            items: [
+              {
+                id: '1',
+                collection: 'collection-1',
+                type: 'file',
+                details: {
+                  artifacts: {} as any,
+                  mediaType: 'image',
+                  mimeType: 'png',
+                  name: 'file-1',
+                  processingStatus: 'succeeded',
+                  size: 1,
+                },
+              },
+            ],
+          },
+        ];
+
+        fetchMock.mock(`begin:${baseUrl}/items`, {
+          body: {
+            data,
+          },
+          status: 200,
+        });
+
+        return mediaStore.getItems(items, 'collection-1').then(response => {
+          expect(response).toEqual({ data });
+          expect(fetchMock.lastUrl()).toEqual(`${baseUrl}/items`);
+          expect(fetchMock.lastOptions()).toEqual({
+            method: 'POST',
+            headers: {
+              'X-Client-Id': clientId,
+              Authorization: `Bearer ${token}`,
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              descriptors: [
+                {
+                  type: 'file',
+                  id: '1',
+                  collection: 'collection-1',
+                },
+                {
+                  type: 'file',
+                  id: '2',
+                  collection: 'collection-1',
+                },
+              ],
+            }),
+          });
+        });
       });
     });
 

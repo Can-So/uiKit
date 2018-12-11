@@ -22,15 +22,18 @@
   "dependencies": {
     "@atlaskit/media-store": "^8.4.1",
     "axios": "^0.17.1",
+    "dataloader": "^1.4.0",
     "lru-fast": "^0.2.2",
     "tslib": "^1.8.0",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "uuid-validate": "^0.0.3"
   },
   "peerDependencies": {
     "react": "^16.4.0",
     "rxjs": "^5.5.0"
   },
   "devDependencies": {
+    "@types/uuid-validate": "^0.0.0",
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/media-card": "^44.1.3",

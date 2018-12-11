@@ -4,6 +4,7 @@ import {
   MediaStoreResponse,
   MediaType,
   MediaFileArtifacts,
+  MediaCollectionItemFullDetails,
 } from '@atlaskit/media-store';
 
 export type FileStatus =
@@ -148,4 +149,16 @@ export const mapMediaFileToFileState = (
         mimeType,
       } as ProcessingFailedState;
   }
+};
+
+export const mapMediaItemToFileState = (
+  id: string,
+  item: MediaCollectionItemFullDetails,
+): FileState => {
+  return mapMediaFileToFileState({
+    data: {
+      id,
+      ...item,
+    },
+  });
 };
