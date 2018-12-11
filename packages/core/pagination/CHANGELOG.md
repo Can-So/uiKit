@@ -1,5 +1,13 @@
 # @atlaskit/pagination
 
+## 9.0.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
 ## 9.0.0
 - [major] [1a09599](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a09599):
 

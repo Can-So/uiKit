@@ -1,1 +1,0 @@
-- Use latest version of pretty-proptypes - this is incompatible with `extract-react-types` versions under `0.15.0`

@@ -1,5 +1,13 @@
 # @atlaskit/status
 
+## 0.2.10
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
 ## 0.2.9
 - [patch] [48640fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/48640fb):
 

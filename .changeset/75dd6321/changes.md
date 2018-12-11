@@ -1,1 +1,0 @@
-- Bump to fix dep for @atlaskit/docs

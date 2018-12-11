@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.4.6
+- [patch] [e01ea01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e01ea01):
+
+  - Bump to match @atlaskit/docs dep
+
 ## 6.4.5
 - [patch] [d3d0d67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3d0d67):
 

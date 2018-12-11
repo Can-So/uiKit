@@ -1,5 +1,17 @@
 # @atlaskit/quick-search
 
+## 5.2.4
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics@4.0.7
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/drawer@2.6.1
+  - @atlaskit/field-base@11.0.13
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/item@8.0.14
+  - @atlaskit/navigation@33.3.8
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
 ## 5.2.3
 - [patch] [d498de7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d498de7):
 

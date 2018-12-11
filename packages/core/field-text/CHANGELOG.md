@@ -1,5 +1,13 @@
 # @atlaskit/field-text
 
+## 7.0.18
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-base@11.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
 ## 7.0.17
 - [patch] [48640fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/48640fb):
 

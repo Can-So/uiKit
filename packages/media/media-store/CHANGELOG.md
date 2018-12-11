@@ -1,5 +1,10 @@
 # @atlaskit/media-store
 
+## 8.4.1
+- [patch] [2c40be7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c40be7):
+
+  - Bump to fix dep for @atlaskit/docs
+
 ## 8.4.0
 - [minor] [602eaec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/602eaec):
 

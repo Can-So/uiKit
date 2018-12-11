@@ -1,5 +1,11 @@
 # @atlaskit/tag-group
 
+## 6.0.8
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/tag@6.1.3
+  - @atlaskit/docs@6.0.0
+
 ## 6.0.7
 - [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
 

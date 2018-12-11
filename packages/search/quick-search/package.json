@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/quick-search",
-  "version": "5.2.3",
+  "version": "5.2.4",
   "description": "A quick-search component",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -22,12 +22,12 @@
   },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/analytics": "^4.0.4",
-    "@atlaskit/avatar": "^14.1.6",
-    "@atlaskit/field-base": "^11.0.12",
-    "@atlaskit/icon": "^15.0.1",
-    "@atlaskit/item": "^8.0.13",
-    "@atlaskit/theme": "^7.0.0",
+    "@atlaskit/analytics": "^4.0.7",
+    "@atlaskit/avatar": "^14.1.7",
+    "@atlaskit/field-base": "^11.0.13",
+    "@atlaskit/icon": "^15.0.2",
+    "@atlaskit/item": "^8.0.14",
+    "@atlaskit/theme": "^7.0.1",
     "babel-runtime": "^6.26.0"
   },
   "peerDependencies": {
@@ -35,10 +35,10 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/avatar": "^14.1.6",
-    "@atlaskit/docs": "^5.2.3",
-    "@atlaskit/drawer": "^2.5.4",
-    "@atlaskit/navigation": "^33.3.7",
+    "@atlaskit/avatar": "^14.1.7",
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/drawer": "^2.6.1",
+    "@atlaskit/navigation": "^33.3.8",
     "enzyme": "^3.7.0",
     "prop-types": "^15.5.10",
     "react": "^16.4.0",

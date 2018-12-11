@@ -1,5 +1,15 @@
 # @atlaskit/breadcrumbs
 
+## 6.0.14
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/select@6.1.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/docs@6.0.0
+
 ## 6.0.13
 - [patch] [c87112f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c87112f):
 
