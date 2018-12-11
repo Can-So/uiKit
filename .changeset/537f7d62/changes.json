@@ -1,9 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/type-helpers", "type": "patch" },
-    { "name": "@atlaskit/editor-core", "type": "patch" },
-    { "name": "@atlaskit/emoji", "type": "patch" },
-    { "name": "@atlaskit/mention", "type": "patch" }
-  ],
-  "dependents": []
-}

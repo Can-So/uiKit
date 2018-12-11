@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.3.17
+- [patch] [b81da9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b81da9b):
+
+  - Fix typescript types to support strictFunctionTypes
+
 ## 90.3.16
 - [patch] [43501db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/43501db):
 

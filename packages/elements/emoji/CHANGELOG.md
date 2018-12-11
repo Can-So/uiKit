@@ -1,5 +1,10 @@
 # @atlaskit/emoji
 
+## 47.0.8
+- [patch] [b81da9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b81da9b):
+
+  - Fix typescript types to support strictFunctionTypes
+
 ## 47.0.7
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics@4.0.7

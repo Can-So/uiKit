@@ -1,1 +1,0 @@
-- Fix typescript types to support strictFunctionTypes
