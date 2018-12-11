@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { Status, StatusContainer } from '../../components/Status';
+import { Status } from '../../components/Status';
 import Lozenge from '@atlaskit/lozenge';
 import { AnalyticsListener as AnalyticsListenerNext } from '@atlaskit/analytics-next';
 import { ANALYTICS_HOVER_DELAY } from '../../components/constants';
@@ -102,10 +102,13 @@ describe('Status', () => {
       const component = createStatus('123', jest.fn(), onHover);
 
       dateNowStub.mockReturnValue(now);
-      component.find(StatusContainer).simulate('mouseenter');
+      const lozengeContainer = component.find(
+        'span[className="status-lozenge-span"]',
+      );
 
+      lozengeContainer.simulate('mouseenter');
       dateNowStub.mockReturnValue(now + ANALYTICS_HOVER_DELAY + 10);
-      component.find(StatusContainer).simulate('mouseleave');
+      lozengeContainer.simulate('mouseleave');
 
       expect(onHover).toHaveBeenCalled();
       expect(analyticsNextHandler).toHaveBeenCalledWith(
@@ -120,7 +123,11 @@ describe('Status', () => {
       const onClick = jest.fn();
       const component = createStatus('456', onClick, jest.fn());
 
-      component.find(StatusContainer).simulate('click');
+      const lozengeContainer = component.find(
+        'span[className="status-lozenge-span"]',
+      );
+      lozengeContainer.simulate('click');
+
       expect(onClick).toHaveBeenCalled();
       expect(analyticsNextHandler).toHaveBeenCalledWith(
         expect.objectContaining(

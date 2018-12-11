@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 import Lozenge from '@atlaskit/lozenge';
-import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
 import {
   WithAnalyticsEventProps,
   CreateUIAnalyticsEventSignature,
@@ -11,8 +9,6 @@ import {
 import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { createStatusAnalyticsAndFire } from './analytics';
 import { ANALYTICS_HOVER_DELAY } from './constants';
-
-const { B100 } = colors;
 
 export type Color = 'neutral' | 'purple' | 'blue' | 'red' | 'yellow' | 'green';
 
@@ -32,40 +28,11 @@ export interface OwnProps {
   text: string;
   color: Color;
   localId?: string;
-  selected?: boolean;
   onClick?: (event: React.SyntheticEvent<any>) => void;
   onHover?: () => void;
 }
 
 export type Props = OwnProps & WithAnalyticsEventProps;
-
-export interface StatusContainerProps {
-  selected: boolean;
-  placeholderStyle: boolean;
-}
-
-export const StatusContainer = styled.span`
-  cursor: pointer;
-
-  display: inline-block;
-  border-radius: 5px;
-  max-width: 100%;
-
-  /* Prevent responsive layouts increasing height of container by changing
-     font size and therefore line-height. */
-  line-height: 0;
-  
-  opacity: ${(props: StatusContainerProps) =>
-    props.placeholderStyle ? 0.5 : 1};
-
-  border: 2px solid ${(props: StatusContainerProps) =>
-    props.selected ? B100 : 'transparent'};
-  }
-
-  * ::selection {
-    background-color: transparent;
-  }
-`;
 
 class StatusInternal extends PureComponent<Props, any> {
   private hoverStartTime: number = 0;
@@ -89,24 +56,23 @@ class StatusInternal extends PureComponent<Props, any> {
   }
 
   render() {
-    const { text, color, selected, onClick } = this.props;
+    const { text, color, onClick } = this.props;
     if (text.trim().length === 0) {
       return null;
     }
 
     const appearance = colorToLozengeAppearanceMap[color] || DEFAULT_APPEARANCE;
     return (
-      <StatusContainer
+      <span
+        className="status-lozenge-span"
         onClick={onClick}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
-        selected={selected || false}
-        placeholderStyle={!text}
       >
         <Lozenge appearance={appearance} maxWidth={MAX_WIDTH}>
           {text}
         </Lozenge>
-      </StatusContainer>
+      </span>
     );
   }
 }

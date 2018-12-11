@@ -11,6 +11,7 @@ import { Status } from '@atlaskit/status';
 import StatusNodeView, {
   Props as StatusNodeViewProps,
   State as StatusNodeViewState,
+  StatusContainer,
   messages,
 } from '../../../../../plugins/status/nodeviews/status';
 import statusPlugin from '../../../../../plugins/status';
@@ -93,7 +94,7 @@ describe('Status - NodeView', () => {
         getPos={jest.fn()}
       />,
     );
-    wrapper.simulate('click');
+    wrapper.find(Status).simulate('click');
 
     expect(setStatusPickerAtSpy).toBeCalled();
   });
@@ -139,7 +140,7 @@ describe('Status - NodeView', () => {
 
     it('not selected after insert', () => {
       expect(wrapper.state().selected).toBe(false);
-      expect(wrapper.find(Status).prop('selected')).toBe(false);
+      expect(wrapper.find(StatusContainer).prop('selected')).toBe(false);
     });
 
     it('selection of status', () => {
@@ -150,7 +151,7 @@ describe('Status - NodeView', () => {
       );
       wrapper.update();
       expect(wrapper.state().selected).toBe(true);
-      expect(wrapper.find(Status).prop('selected')).toBe(true);
+      expect(wrapper.find(StatusContainer).prop('selected')).toBe(true);
     });
 
     it('collapsed selection immediately after status', () => {
@@ -161,7 +162,7 @@ describe('Status - NodeView', () => {
       );
       wrapper.update();
       expect(wrapper.state().selected).toBe(false);
-      expect(wrapper.find(Status).prop('selected')).toBe(false);
+      expect(wrapper.find(StatusContainer).prop('selected')).toBe(false);
     });
 
     it('selection including status', () => {
@@ -172,7 +173,7 @@ describe('Status - NodeView', () => {
       );
       wrapper.update();
       expect(wrapper.state().selected).toBe(true);
-      expect(wrapper.find(Status).prop('selected')).toBe(true);
+      expect(wrapper.find(StatusContainer).prop('selected')).toBe(true);
     });
   });
 });

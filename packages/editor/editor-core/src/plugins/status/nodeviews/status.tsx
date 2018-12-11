@@ -1,11 +1,43 @@
 import * as React from 'react';
 import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
+import styled from 'styled-components';
 import { Node as PMNode } from 'prosemirror-model';
 import { Selection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Status } from '@atlaskit/status';
 import { pluginKey } from '../plugin';
 import { setStatusPickerAt } from '../actions';
+import { colors } from '@atlaskit/theme';
+
+const { B100 } = colors;
+
+export interface StatusContainerProps {
+  selected: boolean;
+  placeholderStyle: boolean;
+}
+
+export const StatusContainer = styled.span`
+  cursor: pointer;
+
+  display: inline-block;
+  border-radius: 5px;
+  max-width: 100%;
+
+  /* Prevent responsive layouts increasing height of container by changing
+     font size and therefore line-height. */
+  line-height: 0;
+
+  opacity: ${(props: StatusContainerProps) =>
+    props.placeholderStyle ? 0.5 : 1};
+
+  border: 2px solid ${(props: StatusContainerProps) =>
+    props.selected ? B100 : 'transparent'};
+  }
+
+  * ::selection {
+    background-color: transparent;
+  }
+`;
 
 export const messages = defineMessages({
   placeholder: {
@@ -77,13 +109,14 @@ class StatusNodeView extends React.Component<Props & InjectedIntlProps, State> {
     const statusText = text ? text : formatMessage(messages.placeholder);
 
     return (
-      <Status
-        text={statusText}
-        color={color}
-        localId={localId}
-        selected={selected}
-        onClick={this.handleClick}
-      />
+      <StatusContainer selected={selected} placeholderStyle={!text}>
+        <Status
+          text={statusText}
+          color={color}
+          localId={localId}
+          onClick={this.handleClick}
+        />
+      </StatusContainer>
     );
   }
 

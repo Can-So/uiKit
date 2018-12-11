@@ -125,6 +125,14 @@ class StatusPicker extends React.Component<Props, State> {
     this.props.closeStatusPicker();
   };
 
+  private handleClickOutside = this.handleCloseStatusPicker(InputMethod.blur);
+  private handleEscapeKeydown = this.handleCloseStatusPicker(
+    InputMethod.escKey,
+  );
+  private handleEnterKeydown = this.handleCloseStatusPicker(
+    InputMethod.enterKey,
+  );
+
   render() {
     const { autoFocus, target } = this.props;
     const { color, text } = this.state;
@@ -133,11 +141,9 @@ class StatusPicker extends React.Component<Props, State> {
         <PopupWithListeners
           target={target}
           offset={[0, 8]}
-          handleClickOutside={this.handleCloseStatusPicker(InputMethod.blur)}
-          handleEscapeKeydown={this.handleCloseStatusPicker(InputMethod.escKey)}
-          handleEnterKeydown={this.handleCloseStatusPicker(
-            InputMethod.enterKey,
-          )}
+          handleClickOutside={this.handleClickOutside}
+          handleEscapeKeydown={this.handleEscapeKeydown}
+          handleEnterKeydown={this.handleEnterKeydown}
           zIndex={akEditorFloatingDialogZIndex}
           fitHeight={40}
         >
