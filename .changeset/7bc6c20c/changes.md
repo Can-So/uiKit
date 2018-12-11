@@ -1,0 +1,1 @@
+- restored StatusContainer to editor-core, avoid re-rendering on event handlers, removed unused props in the renderer
