@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import ColorPalette from '../../../components/internal/color-palette';
-import Color from '../../../components/internal/color';
+import ColorPalette from '../../../../components/internal/color-palette';
+import Color from '../../../../components/internal/color';
 
 describe('ColorPalette', () => {
   it('should render 6 colors', () => {

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { Status } from '../../components/Status';
+import { Status } from '../../../components/Status';
 import Lozenge from '@atlaskit/lozenge';
 import { AnalyticsListener as AnalyticsListenerNext } from '@atlaskit/analytics-next';
-import { ANALYTICS_HOVER_DELAY } from '../../components/constants';
-import { ELEMENTS_CHANNEL } from '../../components/analytics';
+import { ANALYTICS_HOVER_DELAY } from '../../../components/constants';
+import { ELEMENTS_CHANNEL } from '../../../components/analytics';
 
 const createPayload = (actionSubject, action, localId) => ({
   payload: {

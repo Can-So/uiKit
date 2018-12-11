@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import EditorDoneIcon from '@atlaskit/icon/glyph/editor/done';
-import Color from '../../../components/internal/color';
-import { ANALYTICS_HOVER_DELAY } from '../../../components/constants';
+import Color from '../../../../components/internal/color';
+import { ANALYTICS_HOVER_DELAY } from '../../../../components/constants';
 
 describe('Color', () => {
   it('should render color button', () => {
