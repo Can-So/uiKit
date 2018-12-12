@@ -1,4 +1,0 @@
-- Internal changes:
-	- Adding react-dom and build utils as dev dependencies
-	- Adding unit test for server side rendering use-case
-	- Adding unit test to cover Popper component
