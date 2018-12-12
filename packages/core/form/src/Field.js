@@ -3,6 +3,7 @@ import React, { type Node } from 'react';
 import arrayShallowEqual from 'shallow-equal/arrays';
 import objectShallowEqual from 'shallow-equal/objects';
 import uuid from 'uuid';
+import invariant from 'tiny-invariant';
 import { type FieldState, type FieldSubscription } from 'final-form';
 import { FormContext, IsDisabledContext } from './Form';
 import FieldWrapper, { Label, RequiredIndicator } from './styled/Field';
@@ -104,6 +105,14 @@ class FieldInner extends React.Component<Props, State> {
 
   register = () => {
     const { defaultValue, name, registerField, validate } = this.props;
+
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(
+        name,
+        '@atlaskit/form: Field components have a required name prop',
+      );
+    }
+
     return registerField(
       name,
       defaultValue,
@@ -230,7 +239,7 @@ const Field = (props: Props) => (
 Field.defaultProps = {
   defaultValue: undefined,
   isDisabled: false,
-  registerField: () => {},
+  registerField: () => () => {},
   transform: translateEvent,
 };
 
