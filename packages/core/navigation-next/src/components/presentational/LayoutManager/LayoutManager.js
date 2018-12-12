@@ -113,7 +113,6 @@ export default class LayoutManager extends Component<
 
   mouseOutFlyoutArea = ({ currentTarget, relatedTarget }: *) => {
     if (currentTarget.contains(relatedTarget)) return;
-    console.log('mouseOverFlyoutArea');
     clearTimeout(this.flyoutMouseOverTimeout);
     this.setState({ flyoutIsOpen: false });
   };

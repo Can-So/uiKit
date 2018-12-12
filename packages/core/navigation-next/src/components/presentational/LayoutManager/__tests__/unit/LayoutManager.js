@@ -87,8 +87,7 @@ describe('LayoutManager', () => {
         wrapper.setProps({});
 
         wrapper
-          .find('ThemeProvider')
-          .first()
+          .find('Global')
           .closest('div')
           .simulate('mouseover');
 
@@ -103,9 +102,11 @@ describe('LayoutManager', () => {
 
         wrapper
           .find('Button')
-          .children()
-          .children()
-          .first()
+          .findWhere(
+            el =>
+              el.name() === 'div' &&
+              typeof el.prop('onMouseOver') === 'function',
+          )
           .simulate('mouseover');
 
         expect(spy).toHaveBeenCalled();
