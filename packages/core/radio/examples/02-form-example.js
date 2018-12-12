@@ -55,13 +55,7 @@ export default class FormExample extends Component<
                     <RadioGroup {...fieldProps} options={fruitItems} />
                   )}
                 </Field>
-                <FormFooter
-                  actionsContent={[
-                    {
-                      id: 'submit-button',
-                    },
-                  ]}
-                >
+                <FormFooter>
                   <Button type="submit" appearance="primary">
                     Submit
                   </Button>
