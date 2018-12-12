@@ -1,0 +1,1 @@
+- FS-3220 add docs and release 1.0

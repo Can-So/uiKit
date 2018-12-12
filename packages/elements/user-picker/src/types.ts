@@ -1,23 +1,41 @@
 export type UserPickerProps = {
+  /** List of users to be used as options by the user picker */
   users?: User[];
+  /** Width of the user picker field */
   width?: number;
+  /** Function used to load options asynchronously */
   loadUsers?: LoadOptions;
+  /** Callback for value change events */
   onChange?: OnChange;
+  /** To enable multi user picker */
   isMulti?: boolean;
+  /** Input text value */
   search?: string;
+  /** Anchor for the user picker popup */
   anchor?: React.ComponentType<any>;
+  /** Set if the user picker popup is open */
   open?: boolean;
+  /** Show the loading indicator */
   isLoading?: boolean;
+  /** Callback for search input text change events */
   onInputChange?: OnInputChange;
+  /** Callback for when a selection is made  */
   onSelection?: OnUser;
+  /** Callback for when the field gains focus */
   onFocus?: OnPicker;
+  /** Callback for when the field lose focus */
   onBlur?: OnPicker;
-  blurInputOnSelect?: boolean;
+  /** Appearance of the user picker */
   appearance?: 'normal' | 'compact';
+  /** Display the picker with a subtle appearance */
   subtle?: boolean;
+  /** Default value for the field */
   defaultValue?: UserValue;
+  /** Placeholder text to be shown when there is no value in the field */
   placeholder?: string;
+  /** Message to be shown when the menu is open but no options are provided */
   noOptionsMessage?: string;
+  /** Value of the user picker */
   value?: UserValue;
   /** Disable all interactions with the picker, putting it in a read-only state. */
   isDisabled?: boolean;
