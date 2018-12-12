@@ -25,7 +25,9 @@ const IconWrapper = styled.span`
 `;
 
 type Props = {
-  fieldId: string,
+  /** The id of the field the message relates to */
+  fieldId?: string,
+  /** The content of the message */
   children: Node,
 };
 
