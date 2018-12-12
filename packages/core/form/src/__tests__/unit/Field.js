@@ -229,3 +229,50 @@ test('should never render with undefined fieldProp value', () => {
     });
   });
 });
+
+test('should always show most recent validation result', done => {
+  let resolveValidation = () => {};
+  const wrapper = mount(
+    <Form onSubmit={jest.fn()}>
+      {() => (
+        <Field
+          name="username"
+          defaultValue=""
+          validate={value => {
+            if (value.length < 3) {
+              return 'TOO_SHORT';
+            } else if (value === 'Joe Bloggs') {
+              return new Promise(res => {
+                resolveValidation = () => res('TAKEN_USERNAME');
+              });
+            }
+            return undefined;
+          }}
+        >
+          {({ fieldProps, error }) => (
+            <>
+              <TextField {...fieldProps} />
+              {error === 'TOO_SHORT' && <ErrorMessage>Too short</ErrorMessage>}
+              {error === 'TAKEN_USERNAME' && (
+                <ErrorMessage>Username is in use</ErrorMessage>
+              )}
+            </>
+          )}
+        </Field>
+      )}
+    </Form>,
+  );
+  // kick off an async validation that will fail
+  wrapper.find('input').simulate('change', { target: { value: 'Joe Bloggs' } });
+  // causes a sync validation failure
+  wrapper.find('input').simulate('change', { target: { value: 'Jo' } });
+  // now resolve previous async validation
+  resolveValidation();
+  // check that the most recent error message is visible - should be the sync validation error
+  setTimeout(() => {
+    wrapper.update();
+    expect(wrapper.find(ErrorMessage)).toHaveLength(1);
+    expect(wrapper.find(ErrorMessage).text()).toBe('Too short');
+    done();
+  });
+});
