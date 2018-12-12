@@ -1,1 +1,0 @@
-- UR-197: Add queryLength to mentionTypeahead rendered event

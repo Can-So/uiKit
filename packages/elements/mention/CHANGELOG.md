@@ -1,5 +1,10 @@
 # @atlaskit/mention
 
+## 15.2.1
+- [patch] [cae5adb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cae5adb):
+
+  - UR-197: Add queryLength to mentionTypeahead rendered event
+
 ## 15.2.0
 - [minor] [f62557c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f62557c):
 
