@@ -337,7 +337,6 @@ class ExtendingNavSubscriber extends React.Component<*, State> {
   render() {
     const { boxWidth, resizePending, isFlyoutAvailable } = this.state;
     const lastTen = this.getStack();
-    console.log('navState', this.props.navState);
 
     return (
       <LayoutManager
