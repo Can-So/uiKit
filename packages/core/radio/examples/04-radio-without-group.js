@@ -124,10 +124,10 @@ export default class RadioInputExample extends Component<*, State> {
               <Tr
                 isChecked={item.isChecked}
                 onClick={() => this.setChecked(item.value)}
+                key={`${item.value}${item.name}${item.id}`}
               >
                 <td style={{ width: 24, paddingRight: 0 }}>
                   <Radio
-                    key={`${item.value}${item.name}${item.id}`}
                     isChecked={item.isChecked}
                     onBlur={this.onBlur}
                     onFocus={this.onFocus}

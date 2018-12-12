@@ -25,7 +25,7 @@ const IconWrapper = styled.span`
 `;
 
 type Props = {
-  fieldId: string,
+  fieldId?: string,
   children: Node,
 };
 
