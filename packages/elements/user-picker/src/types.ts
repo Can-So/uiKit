@@ -1,10 +1,10 @@
 export type UserPickerProps = {
   /** List of users to be used as options by the user picker */
-  users?: User[];
+  options?: User[];
   /** Width of the user picker field */
   width?: number;
   /** Function used to load options asynchronously */
-  loadUsers?: LoadOptions;
+  loadOptions?: LoadOptions;
   /** Callback for value change events fired whenever a selection is inserted or removed */
   onChange?: OnChange;
   /** To enable multi user picker */
@@ -46,7 +46,7 @@ export type UserPickerProps = {
 };
 
 export type UserPickerState = {
-  users: User[];
+  options: User[];
   value?: UserOption[] | UserOption;
   inflightRequest: number;
   count: number;

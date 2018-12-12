@@ -102,7 +102,7 @@ export default class Example extends React.PureComponent<{}, State> {
             ))}
             <UserPicker
               ref={this.userPickerRef}
-              users={users.filter(user => value.indexOf(user) === -1)}
+              options={users.filter(user => value.indexOf(user) === -1)}
               value={null}
               onChange={this.handleOnChange}
               onInputChange={onInputChange}
