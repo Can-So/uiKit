@@ -193,10 +193,7 @@ export class MediaStore {
   ): Promise<MediaStoreResponse<TouchedFiles>> {
     return this.request('/upload/createWithFiles', {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+      headers: jsonHeaders,
       body: JSON.stringify(body),
       authContext: { collectionName: params.collection },
     }).then(mapResponseToJson);

@@ -13,6 +13,7 @@ import {
   FileItem,
   MediaFileArtifacts,
   TouchFileDescriptor,
+  UploadableFileUpfrontIds,
 } from '@atlaskit/media-store';
 import * as isValidId from 'uuid-validate';
 import {
@@ -23,7 +24,6 @@ import {
 } from '../fileState';
 import { fileStreamsCache, FileStreamCache } from '../context/fileStreamCache';
 import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploadableFile';
-import { UploadableFileUpfrontIds } from '../../../media-store/src/uploader';
 
 const POLLING_INTERVAL = 1000;
 const maxNumberOfItemsPerCall = 100;
@@ -179,7 +179,7 @@ export class FileFetcher {
       .then(({ data }) => data);
   }
 
-  private generateUploadbleFileUpfrontIds(
+  private generateUploadableFileUpfrontIds(
     collection?: string,
   ): UploadableFileUpfrontIds {
     const id = uuid();
@@ -213,7 +213,7 @@ export class FileFetcher {
     } = file;
 
     if (!uploadableFileUpfrontIds) {
-      uploadableFileUpfrontIds = this.generateUploadbleFileUpfrontIds();
+      uploadableFileUpfrontIds = this.generateUploadableFileUpfrontIds();
     }
 
     const id = uploadableFileUpfrontIds.id;
