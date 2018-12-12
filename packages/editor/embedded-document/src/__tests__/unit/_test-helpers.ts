@@ -41,6 +41,17 @@ export const validGetResponse = {
   body: validContent,
 };
 
+export const validBatchGetResponse = [
+  {
+    id: docId,
+    language: {
+      default: {
+        versions: [validGetResponse],
+      },
+    },
+  },
+];
+
 export const validPutResponse = {
   id: docId,
   objectId,
