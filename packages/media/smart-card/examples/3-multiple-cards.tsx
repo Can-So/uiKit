@@ -2,7 +2,7 @@ import * as React from 'react';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
 import { Provider, Card, Client } from '../src';
 import { mockMultipleCards } from '../mocks';
-import FieldTextAreaStateless from '@atlaskit/field-text-area';
+import Textarea from '@atlaskit/textarea';
 
 mockMultipleCards();
 
@@ -80,8 +80,8 @@ dropbox.com/file/a`,
       <Provider client={this.props.client}>
         <Page>
           <Grid>
-            <GridColumn>{urls.map(this.renderCard)}</GridColumn>
-            <GridColumn>
+            <GridColumn medium="6">{urls.map(this.renderCard)}</GridColumn>
+            <GridColumn medium="6">
               <h4>URLs pool</h4>
               <p>
                 This is a list of all mocked urls. Try to reshuffle them and see
@@ -89,16 +89,15 @@ dropbox.com/file/a`,
               </p>
               <p>
                 <em>
-                  Note: There one that is not listed here:{' '}
+                  Note: one that is not listed here —{' '}
                   <code>google.com/doc/3</code>
                 </em>
               </p>
-              <FieldTextAreaStateless
-                isMonospaced={true}
-                shouldFitContainer={true}
-                autoFocus={true}
+              <Textarea
+                isMonospaced
+                autoFocus
                 minimumRows={10}
-                enableResize={'vertical'}
+                resize="none"
                 value={this.state.urls}
                 onChange={(e: any) => this.setState({ urls: e.target.value })}
               />
