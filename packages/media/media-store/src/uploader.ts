@@ -19,10 +19,10 @@ export type UploadableFileUpfrontIds = {
 
 export type UploadFileCallbacks = {
   onProgress: (progress: number) => void;
+  onUploadFinish: (error?: any) => void;
 };
 
 export interface UploadFileResult {
-  whenUploadFinish: Promise<void>;
   cancel: () => void;
 }
 
@@ -95,27 +95,30 @@ export const uploadFile = (
     },
     {
       onProgress(progress: number) {
-        if (callbacks && callbacks.onProgress) {
+        if (callbacks) {
           callbacks.onProgress(progress);
         }
       },
     },
   );
 
-  const whenUploadFinish = Promise.all([deferredUploadId, response]).then(
-    async ([uploadId]) => {
-      await store.createFileFromUpload(
-        { uploadId, name, mimeType },
-        {
-          occurrenceKey,
-          collection,
-          replaceFileId: id,
-        },
-      );
-    },
-  );
+  if (callbacks) {
+    Promise.all([deferredUploadId, response])
+      .then(async ([uploadId]) => {
+        await store.createFileFromUpload(
+          { uploadId, name, mimeType },
+          {
+            occurrenceKey,
+            collection,
+            replaceFileId: id,
+          },
+        );
+        callbacks.onUploadFinish();
+      })
+      .catch(callbacks.onUploadFinish);
+  }
 
-  return { cancel, whenUploadFinish };
+  return { cancel };
 };
 
 const hashedChunks = (chunks: Chunk[]) => chunks.map(chunk => chunk.hash);

@@ -56,9 +56,12 @@ interface DataloaderKey {
   id: string;
   collection?: string;
 }
+
 type DataloaderResult = MediaCollectionItemFullDetails | undefined;
+
 export class FileFetcher {
   private readonly dataloader: Dataloader<DataloaderKey, DataloaderResult>;
+
   constructor(private readonly mediaStore: MediaStore) {
     this.dataloader = new Dataloader<DataloaderKey, DataloaderResult>(
       this.batchLoadingFunc,
@@ -243,7 +246,7 @@ export class FileFetcher {
       preview,
     };
 
-    const reportProgress = progress => {
+    const onProgress = progress => {
       subject.next({
         status: 'uploading',
         ...stateBase,
@@ -251,34 +254,34 @@ export class FileFetcher {
       });
     };
 
-    const { cancel, whenUploadFinish } = uploadFile(
+    const onUploadFinish = (error?: any) => {
+      if (error) {
+        return subject.error(error);
+      }
+
+      subject.next({
+        status: 'processing',
+        ...stateBase,
+      });
+      subject.complete();
+    };
+
+    const { cancel } = uploadFile(
       file,
       this.mediaStore,
       uploadableFileUpfrontIds,
       {
-        onProgress: reportProgress,
+        onUploadFinish,
+        onProgress,
       },
     );
 
     // We should report progress asynchronously, since this is what consumer expects
-    setTimeout(() => reportProgress(0), 0);
+    setTimeout(() => onProgress(0), 0);
 
     if (controller) {
       controller.setAbort(cancel);
     }
-
-    whenUploadFinish
-      .then(() => {
-        subject.next({
-          status: 'processing',
-          ...stateBase,
-        });
-        subject.complete();
-      })
-      .catch(error => {
-        // we can't use .catch(subject.error) due that will change the Subscriber context
-        subject.error(error);
-      });
 
     return subject;
   }
