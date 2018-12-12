@@ -1,5 +1,9 @@
 # @atlaskit/editor-core
 
+## 90.4.1
+- Updated dependencies [67d563a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/67d563a):
+  - @atlaskit/date@0.2.0
+
 ## 90.4.0
 - [minor] [e06b553](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e06b553):
 
