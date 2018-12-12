@@ -1,19 +1,14 @@
 import * as React from 'react';
-import { md, Example, code } from '@atlaskit/docs';
+import { md, Example, Props, code } from '@atlaskit/docs';
 
 // Otherwise tslint complains about require not being declared
 declare const require: any;
 
 export default md`
-# Renderer
 
-## Installation
+This component provides a renderer for ADF documents.
 
-\`\`\`sh
-npm install @atlaskit/renderer
-\`\`\`
-
-## Using the component
+## Usage
 
 Use the component in your React app as follows:
 
@@ -63,7 +58,6 @@ import { ReactRenderer } from '@atlaskit/renderer';
 ReactDOM.render(<ReactRenderer document={DOCUMENT} truncated={true} maxHeight={70} fadeOutHeight={30} />, container);
 `}
 
-### Example
 ${(
   <Example
     Component={require('../examples/15-truncated.tsx').default}
@@ -72,5 +66,10 @@ ${(
   />
 )}
 
-
+${(
+  <Props
+    heading="Props"
+    props={require('!!extract-react-types-loader!../src/ui/Renderer/index')}
+  />
+)}
 `;

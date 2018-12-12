@@ -9,7 +9,7 @@ import * as Styled from './styled';
 import Footer from '../Footer';
 import { commonMessages } from '../../messages';
 
-interface Props {
+export interface Props {
   isOpen: boolean;
   onClose: () => void;
   screens: React.ReactNode[];
@@ -17,8 +17,12 @@ interface Props {
   learnMoreLink: string;
 }
 
-export class FocusedTaskCloseAccount extends React.Component<Props> {
-  state = {
+export interface State {
+  currentScreenIdx: number;
+}
+
+export class FocusedTaskCloseAccount extends React.Component<Props, State> {
+  state: State = {
     currentScreenIdx: 0,
   };
 

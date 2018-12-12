@@ -1,6 +1,5 @@
 import { keymap } from 'prosemirror-keymap';
-import { EditorState, Plugin, Transaction } from 'prosemirror-state';
-import { EditorView } from 'prosemirror-view';
+import { Plugin } from 'prosemirror-state';
 import * as keymaps from '../../../keymaps';
 import { arrow, deleteNode } from '../actions';
 import { Direction } from '../direction';
@@ -10,11 +9,7 @@ export default function keymapPlugin(): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.moveLeft.common!,
-    (
-      state: EditorState,
-      dispatch: (tr: Transaction) => void,
-      view?: EditorView,
-    ) => {
+    (state, dispatch, view) => {
       const endOfTextblock = view ? view.endOfTextblock.bind(view) : undefined;
       return arrow(Direction.LEFT, endOfTextblock)(state, dispatch);
     },
@@ -23,11 +18,7 @@ export default function keymapPlugin(): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.moveRight.common!,
-    (
-      state: EditorState,
-      dispatch: (tr: Transaction) => void,
-      view?: EditorView,
-    ) => {
+    (state, dispatch, view) => {
       const endOfTextblock = view ? view.endOfTextblock.bind(view) : undefined;
       return arrow(Direction.RIGHT, endOfTextblock)(state, dispatch);
     },
@@ -36,11 +27,7 @@ export default function keymapPlugin(): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.moveUp.common!,
-    (
-      state: EditorState,
-      dispatch: (tr: Transaction) => void,
-      view?: EditorView,
-    ) => {
+    (state, dispatch, view) => {
       const endOfTextblock = view ? view.endOfTextblock.bind(view) : undefined;
       return arrow(Direction.UP, endOfTextblock)(state, dispatch);
     },
@@ -49,11 +36,7 @@ export default function keymapPlugin(): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.moveDown.common!,
-    (
-      state: EditorState,
-      dispatch: (tr: Transaction) => void,
-      view?: EditorView,
-    ) => {
+    (state, dispatch, view) => {
       const endOfTextblock = view ? view.endOfTextblock.bind(view) : undefined;
       return arrow(Direction.DOWN, endOfTextblock)(state, dispatch);
     },

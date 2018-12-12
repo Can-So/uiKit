@@ -5,7 +5,9 @@ import { minWidth, maxWidth } from '../dimensions';
 import { SingleLineLayout } from '../SingleLineLayout';
 
 export interface BlockCardResolvingViewProps {
+  /** The optional click handler */
   onClick?: () => void;
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
 }
 

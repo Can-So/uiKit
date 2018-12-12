@@ -12,7 +12,8 @@ export default md`
 
   Use the component in your React app as follows:
 
-  ${code`import { DecisionList, DecisionItem } from '@atlaskit/task-decision';
+  ${code`
+  import { DecisionList, DecisionItem } from '@atlaskit/task-decision';
   ReactDOM.render(<DecisionItem>A decision</DecisionItem>, container);
   ReactDOM.render(
     <DecisionList>

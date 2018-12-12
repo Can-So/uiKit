@@ -44,6 +44,7 @@ export default function withNavigation(
   WrappedComponent: ComponentType<Props>,
   props?: Config,
 ): ComponentType<Partial<Props>> {
+  // @ts-ignore
   return class WithNavigation extends React.Component<Props> {
     static displayName = `WithNavigation(${WrappedComponent.displayName ||
       WrappedComponent.name})`;

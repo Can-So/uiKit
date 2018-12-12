@@ -1,5 +1,29 @@
 # @atlaskit/navigation
 
+## 33.3.8
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics@4.0.7
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/blanket@7.0.12
+  - @atlaskit/button@10.1.1
+  - @atlaskit/checkbox@5.0.9
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/item@8.0.14
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/page@8.0.12
+  - @atlaskit/polyfills@3.0.4
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/single-select@6.0.11
+  - @atlaskit/size-detector@5.0.9
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/toggle@5.0.14
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/quick-search@5.2.4
+  - @atlaskit/docs@6.0.0
+
 ## 33.3.7
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3

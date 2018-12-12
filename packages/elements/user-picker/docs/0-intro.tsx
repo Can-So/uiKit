@@ -1,22 +1,21 @@
 import * as React from 'react';
 import { md, code, Props, Example } from '@atlaskit/docs';
-import { SectionMessage } from '@atlaskit/section-message';
+import SectionMessage from '@atlaskit/section-message';
 
 export default md`
-${(
-  <SectionMessage appearance="warning">
-    <p>
-      <strong>
-        Note: @atlaskit/user-picker is currently a developer preview.
-      </strong>
-    </p>
-    <p>
-      Please experiment with and test this package, but be aware that the API
-      may change at any time. Use at your own risk, preferrably not in
-      production.
-    </p>
-  </SectionMessage>
-)}
+  ${(
+    <SectionMessage appearance="warning">
+      <p>
+        <strong>
+          Note: @atlaskit/user-picker is currently a developer preview.
+        </strong>
+      </p>
+      <p>
+        Please experiment and test this package, but be aware that the API may
+        change at any time. Use at your own risk, preferrably not in production.
+      </p>
+    </SectionMessage>
+  )}
 
   The purpose of the user picker package is to provide UI for displaying a set of users in a scrollable dropdown.
 

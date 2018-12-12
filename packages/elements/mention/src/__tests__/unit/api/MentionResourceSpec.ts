@@ -7,7 +7,6 @@ import * as queryString from 'query-string';
 import { MentionDescription } from '../../../types';
 import MentionResource, {
   MentionResourceConfig,
-  MentionStats,
 } from '../../../api/MentionResource';
 import {
   resultC,
@@ -214,18 +213,15 @@ describe('MentionResource', () => {
   describe('#filter', () => {
     it('should add weight based on response order - bootstrap', done => {
       const resource = new MentionResource(apiConfig);
-      resource.subscribe(
-        'test1',
-        (mentions, query: string, stats?: MentionStats) => {
-          for (let i = 0; i < mentions.length; i++) {
-            expect(mentions[i].weight).toBe(i);
-          }
-          expect(stats).toBeDefined();
-          expect(stats!.duration).toBeGreaterThan(0);
-          expect(stats!.remoteSearch).toBeTruthy();
-          done();
-        },
-      );
+      resource.subscribe('test1', (mentions, query, stats) => {
+        for (let i = 0; i < mentions.length; i++) {
+          expect(mentions[i].weight).toBe(i);
+        }
+        expect(stats).toBeDefined();
+        expect(stats!.duration).toBeGreaterThan(0);
+        expect(stats!.remoteSearch).toBeTruthy();
+        done();
+      });
       resource.filter('');
     });
 

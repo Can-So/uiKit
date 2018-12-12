@@ -22,7 +22,8 @@ export function buildSubNavGroup(
   children: Array<File>,
   groupTitle: string,
   url: (id: string) => string,
-  Icon: React.ComponentType,
+  // TODO: [strictFunctionTypes] Fix any
+  Icon: React.ComponentType<any>,
 ): NavGroup | null {
   if (!children || !children.length) return null;
   return children

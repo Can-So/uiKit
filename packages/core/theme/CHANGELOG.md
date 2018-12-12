@@ -1,5 +1,12 @@
 # @atlaskit/theme
 
+## 7.0.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/docs@6.0.0
+
 ## 7.0.0
 - [major] [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
 

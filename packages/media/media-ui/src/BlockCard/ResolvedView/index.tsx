@@ -76,19 +76,33 @@ export interface Action {
 }
 
 export interface BlockCardResolvedViewProps {
+  /** The context view model */
   context?: ContextViewModel;
+  /** The link to display */
   link?: string;
+  /** The optional con of the service (e.g. Dropbox/Asana/Google/etc) to display */
   icon?: IconWithTooltip | React.ReactNode;
+  /** The user view model */
   user?: UserViewModel;
+  /** The thumbnail to display */
   thumbnail?: string;
+  /** The preview to display */
   preview?: string;
+  /** The name of the resource */
   title?: TextWithTooltip;
+  /** The line to display */
   byline?: TextWithTooltip | React.ReactNode;
+  /** The description to display */
   description?: TextWithTooltip;
+  /** The detail view model */
   details?: DetailViewModel[];
+  /** An array of user */
   users?: UserViewModel[];
+  /** An array of action */
   actions?: Action[];
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
+  /** The optional click handler */
   onClick?: () => void;
 }
 

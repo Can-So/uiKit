@@ -1,7 +1,7 @@
 {
   "name": "@atlaskit/pagination",
-  "version": "8.0.8",
-  "description": "Pagination component",
+  "version": "9.0.1",
+  "description": "A react component to be used for pagination in components like tables.",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -19,10 +19,10 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/analytics-next": "^3.1.1",
-    "@atlaskit/button": "^10.0.4",
-    "@atlaskit/icon": "^15.0.1",
-    "@atlaskit/theme": "^7.0.0",
+    "@atlaskit/analytics-next": "^3.1.2",
+    "@atlaskit/button": "^10.1.1",
+    "@atlaskit/icon": "^15.0.2",
+    "@atlaskit/theme": "^7.0.1",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0"
   },
@@ -32,8 +32,11 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/docs": "^5.2.3",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
-    "react-dom": "^16.4.2"
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/dynamic-table": "^10.0.22",
+    "@atlaskit/section-message": "^1.0.14",
+    "enzyme": "^3.7.0",
+    "react-dom": "^16.4.2",
+    "react-router-dom": "^4.2.2"
   }
 }

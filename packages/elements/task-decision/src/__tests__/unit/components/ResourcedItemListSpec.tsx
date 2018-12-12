@@ -435,7 +435,7 @@ describe('<ResourcedItemList/>', () => {
         />,
       );
       let resolver;
-      return waitUntil(() => component.state('items').length > 0)
+      return waitUntil(() => component.state<Item[]>('items').length > 0)
         .then(() => {
           const getItemsPromise = new Promise(resolve => {
             resolver = resolve;
@@ -444,15 +444,15 @@ describe('<ResourcedItemList/>', () => {
           component.setProps({
             initialQuery: { ...query },
           });
-          return waitUntil(() => component.state('items').length === 0);
+          return waitUntil(() => component.state<Item[]>('items').length === 0);
         })
         .then(() => {
-          expect(component.state('items').length).toBe(0);
+          expect(component.state<Item[]>('items').length).toBe(0);
           resolver(defaultResponse);
-          return waitUntil(() => component.state('items').length > 0);
+          return waitUntil(() => component.state<Item[]>('items').length > 0);
         })
         .then(() => {
-          expect(component.state('items').length).toBe(
+          expect(component.state<Item[]>('items').length).toBe(
             defaultResponse.items.length,
           );
         });

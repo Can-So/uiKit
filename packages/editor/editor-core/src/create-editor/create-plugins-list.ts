@@ -196,12 +196,13 @@ export default function createPluginsList(
     plugins.push(cardPlugin);
   }
 
+  let statusMenuDisabled = true;
   if (props.allowStatus) {
-    const menuDisabled =
+    statusMenuDisabled =
       typeof props.allowStatus === 'object'
         ? props.allowStatus.menuDisabled
         : false;
-    plugins.push(statusPlugin({ menuDisabled }));
+    plugins.push(statusPlugin({ menuDisabled: statusMenuDisabled }));
   }
 
   if (props.allowIndentation) {
@@ -213,6 +214,7 @@ export default function createPluginsList(
     insertBlockPlugin({
       insertMenuItems: props.insertMenuItems,
       horizontalRuleEnabled: props.allowRule,
+      nativeStatusSupported: !statusMenuDisabled,
     }),
   );
 

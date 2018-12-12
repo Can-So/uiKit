@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { exampleUsers } from '../example-helpers';
-import UserPicker, { User } from '../src';
+import UserPicker, { User, UserValue } from '../src';
 
 type State = {
   value?: string;
@@ -61,8 +61,10 @@ export default class Example extends React.PureComponent<{}, State> {
     this.userPickerRef = ref;
   };
 
-  handleSelectedOption = (user: User) => {
-    this.setState({ user, open: false });
+  handleSelectedOption = (user: UserValue) => {
+    if (user && !Array.isArray(user)) {
+      this.setState({ user, open: false });
+    }
   };
 
   private loadUsers = () =>

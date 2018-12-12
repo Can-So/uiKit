@@ -41,7 +41,9 @@ export const messages = defineMessages({
 });
 
 const remove: Command = (state, dispatch) => {
-  dispatch(removeSelectedNode(state.tr));
+  if (dispatch) {
+    dispatch(removeSelectedNode(state.tr));
+  }
   analyticsService.trackEvent('atlassian.editor.format.card.delete.button');
   return true;
 };

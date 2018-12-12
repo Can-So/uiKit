@@ -35,11 +35,11 @@ type Props = {
 };
 
 class SpotlightCard extends React.Component<Props> {
-  static defaultProps = {
+  static defaultProps: $Shape<Props> = {
     width: 400,
     isFlat: false,
     components: {},
-    theme: x => x,
+    theme: x => x(),
   };
   render() {
     const {

@@ -123,6 +123,7 @@ export const buildTypeAheadRenderedPayload = (
   userIds: Array<string>,
   query: string,
 ): GasPayload => {
+  const { queryLength, spaceInQuery } = extractAttributesFromQuery(query);
   return {
     action: 'rendered',
     actionSubject: 'mentionTypeAhead',
@@ -134,6 +135,8 @@ export const buildTypeAheadRenderedPayload = (
       duration,
       userIds,
       query,
+      queryLength,
+      spaceInQuery,
     },
   };
 };

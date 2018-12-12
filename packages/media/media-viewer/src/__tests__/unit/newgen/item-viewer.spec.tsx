@@ -7,11 +7,17 @@ jest.mock('../../../newgen/viewers/image', () => ({
 }));
 
 import * as React from 'react';
+import { ReactWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
 import Spinner from '@atlaskit/spinner';
 import Button from '@atlaskit/button';
 import { MediaItemType, Context } from '@atlaskit/media-core';
-import { ItemViewer, ItemViewerBase } from '../../../newgen/item-viewer';
+import {
+  ItemViewer,
+  ItemViewerBase,
+  Props as ItemViewerBaseProps,
+  State as ItemViewerBaseState,
+} from '../../../newgen/item-viewer';
 import { ErrorMessage } from '../../../newgen/error';
 import { ImageViewer } from '../../../newgen/viewers/image';
 import { VideoViewer } from '../../../newgen/viewers/video';
@@ -49,7 +55,10 @@ function mountComponent(context: Context, identifier: Identifier) {
 function mountBaseComponent(context: Context, identifier: Identifier) {
   const createAnalyticsEventSpy = jest.fn();
   createAnalyticsEventSpy.mockReturnValue({ fire: jest.fn() });
-  const el = mountWithIntlContext(
+  const el: ReactWrapper<
+    ItemViewerBaseProps,
+    ItemViewerBaseState
+  > = mountWithIntlContext(
     <ItemViewerBase
       createAnalyticsEvent={createAnalyticsEventSpy}
       previewCount={0}
@@ -57,7 +66,7 @@ function mountBaseComponent(context: Context, identifier: Identifier) {
       identifier={identifier}
     />,
   );
-  const instance = el.instance() as any;
+  const instance = el.instance() as ItemViewerBase;
   return { el, instance, createAnalyticsEventSpy };
 }
 
@@ -345,7 +354,7 @@ describe('<ItemViewer />', () => {
       el.setProps({ context, identifier: identifier2 });
       el.update();
 
-      expect(el.instance().state.item.status).toEqual('PENDING');
+      expect(instance.state.item.status).toEqual('PENDING');
     });
   });
 

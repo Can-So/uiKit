@@ -1,5 +1,10 @@
 # @atlaskit/docs
 
+## 6.0.0
+- [major] [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+
+  - Use latest version of pretty-proptypes - this is incompatible with `extract-react-types` versions under `0.15.0`
+
 ## 5.2.3
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/button@10.0.4

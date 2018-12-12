@@ -20,7 +20,10 @@
     "index.js"
   ],
   "license": "Apache-2.0",
-  "devDependencies": {},
+  "devDependencies": {
+    "fetch-mock": "^6.5.2",
+    "jest": "^23.6.0"
+  },
   "dependencies": {
     "chalk": "^2.1.0",
     "meow": "^5.0.0",

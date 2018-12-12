@@ -1,4 +1,4 @@
-import { NodeSpec, Node as PMNode, Schema, Fragment } from 'prosemirror-model';
+import { NodeSpec, Node as PMNode, Fragment } from 'prosemirror-model';
 import { browser } from '../../utils';
 import { TextDefinition as Text } from './text';
 import { NoMark, MarksObject } from './doc';
@@ -70,15 +70,16 @@ export const codeBlock: NodeSpec = {
     {
       tag: 'pre > code',
       preserveWhitespace: 'full',
-      getAttrs: (dom: HTMLElement) => {
-        const language = dom.getAttribute('data-language')!;
+      getAttrs: dom => {
+        const language = (dom as HTMLElement).getAttribute('data-language')!;
         return { language };
       },
     },
     {
       tag: 'pre',
       preserveWhitespace: 'full',
-      getAttrs: (dom: HTMLElement) => {
+      getAttrs: domNode => {
+        let dom = domNode as HTMLElement;
         const language =
           getLanguageFromBitbucketStyle(dom.parentElement!) ||
           getLanguageFromEditorStyle(dom.parentElement!) ||
@@ -92,7 +93,8 @@ export const codeBlock: NodeSpec = {
     {
       tag: 'div[style]',
       preserveWhitespace: 'full',
-      getAttrs: (dom: HTMLElement) => {
+      getAttrs: domNode => {
+        const dom = domNode as HTMLElement;
         if (
           dom.style.whiteSpace === 'pre' ||
           (dom.style.fontFamily &&
@@ -103,7 +105,8 @@ export const codeBlock: NodeSpec = {
         return false;
       },
       // @see ED-5682
-      getContent: (dom: HTMLElement, schema: Schema) => {
+      getContent: (domNode, schema) => {
+        const dom = domNode as HTMLElement;
         const code = Array.from(dom.children)
           .map(child => child.textContent)
           // tslint:disable-next-line:triple-equals
@@ -116,8 +119,8 @@ export const codeBlock: NodeSpec = {
     {
       tag: 'table[style]',
       preserveWhitespace: 'full',
-      getAttrs: (dom: HTMLElement) => {
-        if (dom.querySelector('td[class*="blob-code"]')) {
+      getAttrs: dom => {
+        if ((dom as HTMLElement).querySelector('td[class*="blob-code"]')) {
           return {};
         }
         return false;
@@ -126,7 +129,8 @@ export const codeBlock: NodeSpec = {
     {
       tag: 'div.CodeBlock',
       preserveWhitespace: 'full',
-      getAttrs: (dom: HTMLElement) => {
+      getAttrs: domNode => {
+        const dom = domNode as HTMLElement;
         // TODO: ED-5604 Fix it inside `react-syntax-highlighter`
         // Remove line numbers
         const linesCode = dom.querySelector('code');

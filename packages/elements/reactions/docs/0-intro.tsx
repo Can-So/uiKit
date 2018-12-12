@@ -13,7 +13,8 @@ export default md`
 
   Import the component in your React app as follows:
 
-  ${code`import { ReactionStore, ConnectedReactionsView } from '@atlaskit/reactions';
+  ${code`
+  import { ReactionStore, ConnectedReactionsView } from '@atlaskit/reactions';
   import { EmojiResource } from '@atlaskit/emoji';
 
   const emojiProvider = new EmojiResource({

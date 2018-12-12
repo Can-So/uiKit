@@ -32,7 +32,10 @@ export function setLinkHref(pos: number, href: string): Command {
         link.create({ ...mark.attrs, href: url }),
       );
     }
-    dispatch(tr);
+
+    if (dispatch) {
+      dispatch(tr);
+    }
     return true;
   });
 }
@@ -46,7 +49,10 @@ export function setLinkText(pos: number, text: string): Command {
       const tr = state.tr;
       tr.insertText(text, pos, pos + node.nodeSize);
       tr.addMark(pos, pos + text.length, mark);
-      dispatch(tr);
+
+      if (dispatch) {
+        dispatch(tr);
+      }
       return true;
     }
     return false;
@@ -75,7 +81,10 @@ export function insertLink(
         tr.addMark(from, to, link.create({ href: normalizeUrl(href) }));
         tr.setSelection(Selection.near(tr.doc.resolve(to)));
       }
-      dispatch(tr);
+
+      if (dispatch) {
+        dispatch(tr);
+      }
       return true;
     }
     return false;
@@ -88,14 +97,18 @@ export function removeLink(pos: number): Command {
 
 export function showLinkToolbar(): Command {
   return function(state, dispatch) {
-    dispatch(state.tr.setMeta(stateKey, LinkAction.SHOW_INSERT_TOOLBAR));
+    if (dispatch) {
+      dispatch(state.tr.setMeta(stateKey, LinkAction.SHOW_INSERT_TOOLBAR));
+    }
     return true;
   };
 }
 
 export function hideLinkToolbar(): Command {
   return function(state, dispatch) {
-    dispatch(state.tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR));
+    if (dispatch) {
+      dispatch(state.tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR));
+    }
     return true;
   };
 }

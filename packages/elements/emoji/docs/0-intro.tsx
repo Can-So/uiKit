@@ -14,7 +14,8 @@ export default md`
 
   Import the component in your React app as follows:
 
-  ${code`import EmojiPicker, { EmojiResource } from '@atlaskit/emoji';
+  ${code`
+  import EmojiPicker, { EmojiResource } from '@atlaskit/emoji';
 
   const emojiProvider = new EmojiResource({
     providers: [

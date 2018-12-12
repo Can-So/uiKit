@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Component } from 'react';
-import * as deepEqual from 'deep-equal';
 import { Context, FileDetails } from '@atlaskit/media-core';
 import { AnalyticsContext } from '@atlaskit/analytics-next';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
@@ -26,6 +25,7 @@ import {
   isFileIdentifier,
   isUrlPreviewIdentifier,
   isExternalImageIdentifier,
+  isDifferentIdentifier,
 } from '../../utils/identifier';
 import { isBigger } from '../../utils/dimensionComparer';
 import { getCardStatus } from './getCardStatus';
@@ -66,10 +66,14 @@ export class Card extends Component<CardProps, CardState> {
       identifier: nextIdenfifier,
       dimensions: nextDimensions,
     } = nextProps;
+    const isDifferent = isDifferentIdentifier(
+      currentIdentifier,
+      nextIdenfifier,
+    );
 
     if (
       currentContext !== nextContext ||
-      !deepEqual(currentIdentifier, nextIdenfifier) ||
+      isDifferent ||
       this.shouldRefetchImage(currentDimensions, nextDimensions)
     ) {
       this.subscribe(nextIdenfifier, nextContext);
@@ -248,6 +252,8 @@ export class Card extends Component<CardProps, CardState> {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+
+    this.setState({ dataURI: undefined });
   };
 
   // This method is called when card fails and user press 'Retry'

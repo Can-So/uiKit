@@ -26,6 +26,8 @@ import {
   ImageStatus,
 } from '@atlaskit/editor-common';
 
+import { EditorAppearance } from '../../../types';
+
 // This is being used by DropPlaceholder now
 export const MEDIA_HEIGHT = 125;
 export const FILE_WIDTH = 156;
@@ -44,6 +46,7 @@ export interface MediaNodeProps extends ReactNodeProps {
   onExternalImageLoaded?: (
     dimensions: { width: number; height: number },
   ) => void;
+  editorAppearance: EditorAppearance;
 }
 
 export interface Props extends Partial<MediaBaseAttributes> {
@@ -124,7 +127,13 @@ class MediaNode extends Component<
   };
 
   render() {
-    const { node, selected, cardDimensions, onClick } = this.props;
+    const {
+      node,
+      selected,
+      cardDimensions,
+      onClick,
+      editorAppearance,
+    } = this.props;
     const { id, type, collection, url, __key } = node.attrs;
 
     if (!this.state.viewContext) {
@@ -159,6 +168,7 @@ class MediaNode extends Component<
         disableOverlay={true}
         onClick={onClick}
         useInlinePlayer={false}
+        isLazy={editorAppearance !== 'mobile'}
       />
     );
   }

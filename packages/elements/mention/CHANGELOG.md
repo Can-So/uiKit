@@ -1,5 +1,34 @@
 # @atlaskit/mention
 
+## 15.2.1
+- [patch] [cae5adb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cae5adb):
+
+  - UR-197: Add queryLength to mentionTypeahead rendered event
+
+## 15.2.0
+- [minor] [f62557c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f62557c):
+
+  - ED-5888 Add dark mode for mention
+
+## 15.1.9
+- [patch] [b81da9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b81da9b):
+
+  - Fix typescript types to support strictFunctionTypes
+
+## 15.1.8
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics@4.0.7
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/analytics-gas-types@3.2.3
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/util-service-support@3.0.5
+  - @atlaskit/docs@6.0.0
+
 ## 15.1.7
 - Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
   - @atlaskit/docs@5.2.3

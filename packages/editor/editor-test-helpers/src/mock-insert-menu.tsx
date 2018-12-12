@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { bodiedExtensionData } from './mock-extension-data';
 import DevIcon from '@atlaskit/icon/glyph/editor/code';
-import { EditorActions } from '@atlaskit/editor-core';
 
 export const customInsertMenuItems = [
   {
@@ -10,7 +9,7 @@ export const customInsertMenuItems = [
     tooltipDescription: 'import',
     tooltipPosition: 'right',
     elemBefore: <DevIcon label="dev" />,
-    onClick: async (editorActions: EditorActions) => {
+    onClick: async editorActions => {
       const input = prompt('Import from?');
       if (input !== null) {
         editorActions.replaceDocument(input);

@@ -5,6 +5,7 @@ import { HTMLAttributes, ComponentClass, ButtonHTMLAttributes } from 'react';
 import { colors } from '@atlaskit/theme';
 import EditorDoneIcon from '@atlaskit/icon/glyph/editor/done';
 import { Color as ColorType } from '../Status';
+import { ANALYTICS_HOVER_DELAY } from '../constants';
 
 const Button: ComponentClass<ButtonHTMLAttributes<{}>> = styled.button`
   height: 24px;
@@ -37,11 +38,14 @@ export interface ColorProps {
   tabIndex?: number;
   isSelected?: boolean;
   onClick: (value: ColorType) => void;
+  onHover?: (value: ColorType) => void;
   backgroundColor: string;
   borderColor: string;
 }
 
 export default class Color extends PureComponent<ColorProps, any> {
+  private hoverStartTime: number = 0;
+
   render() {
     const {
       tabIndex,
@@ -55,6 +59,8 @@ export default class Color extends PureComponent<ColorProps, any> {
       <ButtonWrapper>
         <Button
           onClick={this.onClick}
+          onMouseEnter={this.onMouseEnter}
+          onMouseLeave={this.onMouseLeave}
           onMouseDown={this.onMouseDown}
           tabIndex={tabIndex}
           className={`${isSelected ? 'selected' : ''}`}
@@ -71,6 +77,24 @@ export default class Color extends PureComponent<ColorProps, any> {
       </ButtonWrapper>
     );
   }
+
+  componentWillUnmount() {
+    this.hoverStartTime = 0;
+  }
+
+  onMouseEnter = () => {
+    this.hoverStartTime = Date.now();
+  };
+
+  onMouseLeave = () => {
+    const { onHover } = this.props;
+    const delay = Date.now() - this.hoverStartTime;
+
+    if (delay >= ANALYTICS_HOVER_DELAY && onHover) {
+      onHover(this.props.value);
+    }
+    this.hoverStartTime = 0;
+  };
 
   onMouseDown = e => {
     e.preventDefault();

@@ -8,7 +8,8 @@ export type groupType = {
 };
 export default function buildNavGroups(
   prefix: string,
-  Icon: React.ComponentType,
+  // TODO: [strictFunctionTypes] Fix any
+  Icon: React.ComponentType<any>,
   pathname: string,
   dir: Directory,
 ) {

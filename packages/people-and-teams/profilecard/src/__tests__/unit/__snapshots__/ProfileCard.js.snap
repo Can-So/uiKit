@@ -7,7 +7,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
       isDisabledUser={true}
     >
       <styled.div>
-        <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar)))))
+        <WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar))))
           borderColor="#FFFFFF"
           size="xlarge"
           src={null}
@@ -67,7 +67,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
       isDisabledUser={true}
     >
       <styled.div>
-        <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar)))))
+        <WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar))))
           borderColor="#FFFFFF"
           size="xlarge"
           src={null}
@@ -127,7 +127,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
       isDisabledUser={true}
     >
       <styled.div>
-        <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar)))))
+        <WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar))))
           borderColor="#FFFFFF"
           size="xlarge"
         />
@@ -171,18 +171,16 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
               />
             </p>
           </styled.div>
-          <Fragment>
-            <IconLabel
-              icon="mention"
-            >
-              @jscrazy
-            </IconLabel>
-            <IconLabel
-              icon="companyName"
-            >
-              Atlassian
-            </IconLabel>
-          </Fragment>
+          <IconLabel
+            icon="mention"
+          >
+            @jscrazy
+          </IconLabel>
+          <IconLabel
+            icon="companyName"
+          >
+            Atlassian
+          </IconLabel>
         </styled.div>
         <styled.div />
       </styled.div>
@@ -198,7 +196,7 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
       isDisabledUser={true}
     >
       <styled.div>
-        <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar)))))
+        <WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar))))
           borderColor="#FFFFFF"
           size="xlarge"
         />
@@ -242,18 +240,16 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
               />
             </p>
           </styled.div>
-          <Fragment>
-            <IconLabel
-              icon="mention"
-            >
-              @jscrazy
-            </IconLabel>
-            <IconLabel
-              icon="companyName"
-            >
-              Atlassian
-            </IconLabel>
-          </Fragment>
+          <IconLabel
+            icon="mention"
+          >
+            @jscrazy
+          </IconLabel>
+          <IconLabel
+            icon="companyName"
+          >
+            Atlassian
+          </IconLabel>
         </styled.div>
         <styled.div />
       </styled.div>

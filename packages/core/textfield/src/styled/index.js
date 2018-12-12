@@ -9,7 +9,7 @@ const grid = gridSize();
 const lineHeight = grid * 2.5;
 const horizontalPadding = grid;
 const transitionDuration = '0.2s';
-const verticalPaddingCompact = grid / 4;
+const verticalPaddingCompact = grid / 2;
 const verticalPaddingBase = grid;
 
 const getPadding = ({ isCompact }) => {

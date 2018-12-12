@@ -40,6 +40,21 @@ ${(
     heading="Avatar Group Props"
     props={require('!!extract-react-types-loader!../src/components/AvatarGroup')}
     overrides={{
+      data: props => {
+        /* eslint-disable */
+        if (
+          props &&
+          props.typeValue &&
+          props.typeValue.typeParams &&
+          props.typeValue.typeParams.params
+        ) {
+          props.typeValue.typeParams.params = [
+            { kind: 'id', name: '@atlaskit/avatar props' },
+          ];
+        }
+        /* eslint-enable */
+        return <Prop {...props} type="Array<@atlaskit/avatar props>" />;
+      },
       avatar: props => {
         // Currently prett-proptypes does not have a good print type for function
         // calls, so we are overriding how this is printed. AK-5133 should resolve

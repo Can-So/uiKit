@@ -86,7 +86,7 @@ export const handleClick = (view: EditorView, event): boolean => {
 
 export const handleMouseOver = (
   view: EditorView,
-  mouseEvent: MouseEvent,
+  mouseEvent: Event,
 ): boolean => {
   const { state, dispatch } = view;
   const target = mouseEvent.target as HTMLElement;
@@ -136,14 +136,11 @@ export function handleTripleClick(view, pos) {
 
   return false;
 }
-export const handleMouseDown = (
-  view: EditorView,
-  event: MouseEvent,
-): boolean => {
+export const handleMouseDown = (view: EditorView, event: Event): boolean => {
   const { state, dispatch } = view;
 
   // shift-selecting table rows/columns
-  if (handleShiftSelection(event)(state, dispatch)) {
+  if (handleShiftSelection(event as MouseEvent)(state, dispatch)) {
     return true;
   }
 

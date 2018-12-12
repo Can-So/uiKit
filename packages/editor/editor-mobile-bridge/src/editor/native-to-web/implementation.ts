@@ -139,7 +139,7 @@ export default class WebBridgeImpl extends WebBridge
           return;
         }
         case 'upload-end': {
-          if (payload.file.collectionName) {
+          if (typeof payload.file.collectionName === 'string') {
             /**
              * We call this custom event instead of `upload-end` to set the collection
              * As when emitting `upload-end`, the `ready` handler will usually fire before

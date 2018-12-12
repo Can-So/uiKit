@@ -35,7 +35,10 @@ type Props = {
   /** Typically the background color that the avatar is presented on.
    Accepts any color argument that the CSS border-color property accepts. */
   borderColor?: string,
-  /** Array of avatar data passed to each `avatar` component */
+  /**
+    Array of avatar data passed to each `avatar` component. These props will be spread
+    on to the component passed into avatar.
+  */
   data: Array<AvatarPropTypes>,
   /** Handle the click event on the avatar item */
   onAvatarClick?: AvatarClickType,

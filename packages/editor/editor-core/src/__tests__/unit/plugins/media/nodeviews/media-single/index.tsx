@@ -88,6 +88,7 @@ describe('nodeviews/mediaSingle', () => {
         getPos={getPos}
         width={123}
         selected={() => 1}
+        editorAppearance="full-page"
       />,
     );
 
@@ -107,6 +108,7 @@ describe('nodeviews/mediaSingle', () => {
         getPos={getPos}
         width={123}
         selected={() => 1}
+        editorAppearance="full-page"
       />,
     );
 
@@ -124,6 +126,7 @@ describe('nodeviews/mediaSingle', () => {
         getPos={getPos}
         width={123}
         selected={() => 1}
+        editorAppearance="full-page"
       />,
     );
 

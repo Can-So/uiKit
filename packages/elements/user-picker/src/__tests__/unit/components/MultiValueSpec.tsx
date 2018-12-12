@@ -34,7 +34,7 @@ describe('MultiValue', () => {
   it('should render Tag', () => {
     const component = shallowMultiValue();
     const tag = renderProp(
-      component.find(FormattedMessage),
+      component.find(FormattedMessage as React.ComponentClass<any>),
       'children',
       'remove',
     );
@@ -55,7 +55,7 @@ describe('MultiValue', () => {
   it('should use blueLight color when focused', () => {
     const component = shallowMultiValue({ isFocused: true });
     const tag = renderProp(
-      component.find(FormattedMessage),
+      component.find(FormattedMessage as React.ComponentClass<any>),
       'children',
       'remove',
     );
@@ -77,7 +77,7 @@ describe('MultiValue', () => {
   it('should call onClick onAfterRemoveAction', () => {
     const component = shallowMultiValue();
     const tag = renderProp(
-      component.find(FormattedMessage),
+      component.find(FormattedMessage as React.ComponentClass<any>),
       'children',
       'remove',
     );
@@ -90,7 +90,7 @@ describe('MultiValue', () => {
       data: { ...data, user: { ...data.user, fixed: true } },
     });
     const tag = renderProp(
-      component.find(FormattedMessage),
+      component.find(FormattedMessage as React.ComponentClass<any>),
       'children',
       'remove',
     );

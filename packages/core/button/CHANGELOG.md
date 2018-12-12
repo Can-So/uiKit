@@ -1,5 +1,15 @@
 # @atlaskit/button
 
+## 10.1.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/checkbox@5.0.9
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
 ## 10.1.0
 - [minor] [36929ef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36929ef):
 

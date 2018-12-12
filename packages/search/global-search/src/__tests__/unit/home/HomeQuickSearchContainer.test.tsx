@@ -28,7 +28,7 @@ import {
   errorRecentSearchClient,
 } from '../mocks/_mockRecentSearchClient';
 
-function searchFor(query: string, wrapper: ShallowWrapper) {
+function searchFor(query: string, wrapper: ShallowWrapper<any, any>) {
   const quicksearch = wrapper.find(GlobalQuickSearch);
   const onSearchFn = quicksearch.prop('onSearch') as Function;
   onSearchFn(query);
@@ -39,7 +39,10 @@ function searchFor(query: string, wrapper: ShallowWrapper) {
  * This component uses a lot of internal state and async calls.
  * Make sure we wait for next tick and then force render update for React 16.
  */
-async function waitForRender(wrapper: ShallowWrapper, millis?: number) {
+async function waitForRender(
+  wrapper: ShallowWrapper<any, any>,
+  millis?: number,
+) {
   await delay(millis);
   wrapper.update();
 }

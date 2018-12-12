@@ -1,7 +1,7 @@
 import { Provider, Document } from '../../src';
 
 const demoDoc: Document = {
-  id: 'demo-doc',
+  documentId: 'demo-doc',
   objectId: 'ari:cloud:demo::document/1',
   createdBy: {},
   body: JSON.stringify({
@@ -57,7 +57,7 @@ export default class MockServiceProvider implements Provider {
     language?: string,
   ): Promise<Document | null> {
     const document: Document = {
-      id: documentId,
+      documentId,
       body,
       objectId,
       createdBy: {},
@@ -77,7 +77,7 @@ export default class MockServiceProvider implements Provider {
   ): Promise<Document | null> {
     const documentId = new Date().getTime().toString();
     const document: Document = {
-      id: documentId,
+      documentId,
       body,
       objectId,
       createdBy: {},
