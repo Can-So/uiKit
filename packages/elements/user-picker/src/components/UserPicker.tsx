@@ -107,6 +107,18 @@ export const UserPicker = withAnalyticsEvents()(
       select.focusOption('up'),
     );
 
+    public focus = () => {
+      if (this.selectRef) {
+        this.selectRef.focus();
+      }
+    };
+
+    public blur = () => {
+      if (this.selectRef) {
+        this.selectRef.blur();
+      }
+    };
+
     public selectOption = this.withSelectRef(select => {
       const focusedOption = select.state.focusedOption;
       select.selectOption(focusedOption);
