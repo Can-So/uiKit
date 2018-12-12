@@ -16,15 +16,4 @@ export default md`
   ~~~
 
   _Note_: this package uses an AbortController, so you might need to provide a polyfill for that.
-
-  ## Usage
-  ${(
-    <Example
-      Component={require('../examples/0-intro').default}
-      title="An editable example"
-      source={require('!!raw-loader!../examples/0-intro')}
-    />
-  )}
-
-
 `;

@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import Form, { Field } from '@atlaskit/form';
 import { RadioGroup } from '../src';
 import type { OptionsPropType } from '../src/types';
 
@@ -28,24 +29,39 @@ export default class StatelessExample extends Component<void, State> {
   render() {
     return (
       <div>
-        <RadioGroup
-          options={this.state.options}
-          value={this.state.value}
-          label="Pick a color (Checked state isn't managed by the component):"
-          onChange={this.setValue}
-        />
-        <div
-          style={{
-            borderStyle: 'dashed',
-            borderWidth: '1px',
-            borderColor: '#ccc',
-            padding: '0.5em',
-            color: '#ccc',
-            margin: '0.5em',
+        <Form onSubmit={data => console.log('form data', data)}>
+          {({ formProps }) => {
+            return (
+              <form {...formProps} name="form-example">
+                <Field
+                  name="color2"
+                  label="Pick a color (Checked state isn't managed by the component):"
+                  value={this.state.value}
+                >
+                  {({ fieldProps }) => (
+                    <RadioGroup
+                      {...fieldProps}
+                      options={this.state.options}
+                      onChange={this.setValue}
+                    />
+                  )}
+                </Field>
+                <div
+                  style={{
+                    borderStyle: 'dashed',
+                    borderWidth: '1px',
+                    borderColor: '#ccc',
+                    padding: '0.5em',
+                    color: '#ccc',
+                    margin: '0.5em',
+                  }}
+                >
+                  onChange called with value: {this.state.value}
+                </div>
+              </form>
+            );
           }}
-        >
-          onChange called with value: {this.state.value}
-        </div>
+        </Form>
       </div>
     );
   }

@@ -1,32 +1,33 @@
 // @flow
 
-import React, { Component, type ElementRef } from 'react';
-import Form, { Field, FormHeader, Validator } from '@atlaskit/form';
+import React, { Component, type ElementRef, Fragment } from 'react';
+import Button from '@atlaskit/button';
+import Form, {
+  Field,
+  FormFooter,
+  FormHeader,
+  ErrorMessage,
+  ValidMessage,
+} from '@atlaskit/form';
 import Textfield from '../src';
-
-const iframeStyles = {
-  width: '95%',
-  height: '300px',
-  borderStyle: 'dashed',
-  borderWidth: '1px',
-  borderColor: '#ccc',
-  padding: '0.5em',
-  color: '#ccc',
-  margin: '0.5em',
-};
 
 type Props = {};
 type FormRef = {
-  validate: () => any,
+  form: {
+    getState: () => any,
+  },
+  props: Object,
   submit: () => any,
 };
 
-function openSesame(value) {
-  if (value === 'open sesame') return true;
-  return false;
+function validate(value) {
+  if (value !== 'open sesame') {
+    return 'INCORRECT_PHRASE';
+  }
+  return undefined;
 }
 
-export default class extends Component<Props> {
+export default class extends Component<Props, State> {
   formRef: FormRef;
 
   handleRef = (ref: ElementRef<*>) => {
@@ -34,14 +35,9 @@ export default class extends Component<Props> {
   };
 
   handleSubmit = () => {
-    const validatedResult = this.formRef.validate();
-    console.log('validatedResult', validatedResult);
-
-    if (validatedResult.isInvalid) {
-      console.log('Invalid field values');
-    } else {
-      this.formRef.submit();
-    }
+    const formState = this.formRef.form.getState();
+    // you can now do stuff with the form.
+    console.log('form state', formState);
   };
 
   handleReset = () => {
@@ -56,33 +52,39 @@ export default class extends Component<Props> {
           name="validation-example"
           onSubmit={this.handleSubmit}
           onReset={this.handleReset}
-          action="//httpbin.org/get"
-          method="GET"
-          target="submitFrame"
         >
-          <FormHeader title="Validation" />
-          <Field
-            label="Only validates on input = open sesame"
-            isRequired
-            validators={[
-              <Validator
-                func={openSesame}
-                invalid="Incorrect, try 'open sesame'"
-                valid="Your wish granted"
-              />,
-            ]}
-          >
-            <Textfield name="command" />
-          </Field>
+          {({ formProps }) => (
+            <form {...formProps}>
+              <FormHeader title="Validation" />
+              <Field
+                label="Only validates on input = open sesame"
+                isRequired
+                name="command"
+                validate={validate}
+                defaultValue=""
+              >
+                {({ fieldProps, error, meta: { valid, touched } }) => (
+                  <Fragment>
+                    <Textfield {...fieldProps} />
+                    {valid && touched && (
+                      <ValidMessage>Your wish granted</ValidMessage>
+                    )}
+                    {touched && error === 'INCORRECT_PHRASE' && (
+                      <ErrorMessage>
+                        Incorrect, try &lsquo;open sesame&rsquo;
+                      </ErrorMessage>
+                    )}
+                  </Fragment>
+                )}
+              </Field>
+              <FormFooter>
+                <Button type="submit" appearance="primary">
+                  Submit
+                </Button>
+              </FormFooter>
+            </form>
+          )}
         </Form>
-        <p>The data submitted by the form will appear below:</p>
-        <iframe
-          src=""
-          title="Checkbox Resopnse Frame"
-          id="submitMojitoFrame"
-          name="submitFrame"
-          style={iframeStyles}
-        />
       </div>
     );
   }
