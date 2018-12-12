@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/analytics-viewer", "type": "patch" },
+    { "name": "@atlaskit/user-picker", "type": "patch" }
+  ],
+  "dependents": []
+}
