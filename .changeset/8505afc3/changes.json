@@ -1,0 +1,10 @@
+{
+  "releases": [{ "name": "@atlaskit/date", "type": "minor" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/editor-core",
+      "type": "patch",
+      "dependencies": ["@atlaskit/date"]
+    }
+  ]
+}
