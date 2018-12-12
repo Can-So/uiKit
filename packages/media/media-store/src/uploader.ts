@@ -14,7 +14,7 @@ export type UploadableFile = {
 export type UploadableFileUpfrontIds = {
   id: string;
   occurrenceKey: string;
-  promisedUploadId: Promise<string>;
+  deferredUploadId: Promise<string>;
 };
 
 export type UploadFileCallbacks = {
@@ -74,7 +74,7 @@ export const uploadFile = (
 ): UploadFileResult => {
   const { content, collection, name, mimeType } = file;
 
-  const { id, occurrenceKey, promisedUploadId } = uploadableFileUpfrontIds;
+  const { id, occurrenceKey, deferredUploadId } = uploadableFileUpfrontIds;
 
   const { response, cancel } = chunkinator(
     content,
@@ -89,7 +89,7 @@ export const uploadFile = (
       processingBatchSize: 1000,
       processingFunction: createProcessingFunction(
         store,
-        promisedUploadId,
+        deferredUploadId,
         collection,
       ),
     },
@@ -102,7 +102,7 @@ export const uploadFile = (
     },
   );
 
-  const whenUploadFinish = Promise.all([promisedUploadId, response]).then(
+  const whenUploadFinish = Promise.all([deferredUploadId, response]).then(
     async ([uploadId]) => {
       await store.createFileFromUpload(
         { uploadId, name, mimeType },

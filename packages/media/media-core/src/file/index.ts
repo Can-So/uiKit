@@ -190,7 +190,7 @@ export class FileFetcher {
       collection,
     };
 
-    const promisedUploadId = this.touchFiles(
+    const deferredUploadId = this.touchFiles(
       [touchFileDescriptor],
       collection,
     ).then(touchedFiles => touchedFiles.created[0].uploadId);
@@ -198,7 +198,7 @@ export class FileFetcher {
     return {
       id,
       occurrenceKey,
-      promisedUploadId,
+      deferredUploadId,
     };
   }
 

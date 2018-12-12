@@ -140,7 +140,7 @@ export class NewUploadServiceImpl implements UploadService {
         const { file, source } = fileWithSource;
 
         const { fileId: id, occurrenceKey } = touchFileDescriptors[i];
-        const promisedUploadId = promisedTouchFiles.then(touchedFiles => {
+        const deferredUploadId = promisedTouchFiles.then(touchedFiles => {
           const touchedFile = touchedFiles.created.find(
             touchedFile => touchedFile.fileId === id,
           );
@@ -162,7 +162,7 @@ export class NewUploadServiceImpl implements UploadService {
         const uploadableUpfrontIds: UploadableFileUpfrontIds = {
           id,
           occurrenceKey,
-          promisedUploadId,
+          deferredUploadId,
         };
 
         const controller = this.createUploadController();
