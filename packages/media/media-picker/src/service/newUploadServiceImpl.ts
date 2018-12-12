@@ -120,15 +120,16 @@ export class NewUploadServiceImpl implements UploadService {
       return;
     }
 
-    const touchFileDescriptors = new Array(files.length)
-      .fill(null)
-      .map<TouchFileDescriptor & { occurrenceKey: string }>(() => {
-        return {
-          fileId: uuid.v4(),
-          occurrenceKey: uuid.v4(),
-          collection,
-        };
+    const touchFileDescriptors: (TouchFileDescriptor & {
+      occurrenceKey: string;
+    })[] = [];
+    for (let i = 0; i < files.length; i++) {
+      touchFileDescriptors.push({
+        fileId: uuid.v4(),
+        occurrenceKey: uuid.v4(),
+        collection,
       });
+    }
 
     const promisedTouchFiles = context.file.touchFiles(
       touchFileDescriptors,
