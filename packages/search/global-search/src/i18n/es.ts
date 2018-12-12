@@ -17,7 +17,7 @@ export default {
   'global_search.no_results_title':
     'No hay resultados en los títulos ni en las personas',
   'global_search.no_results_body':
-    'Inténtalo otra vez con otro término o refina los resultados con la búsqueda avanzada.',
+    'Prueba con otro término o afina los resultados con la búsqueda avanzada.',
   'global_search.people.recent_people_heading': 'Colaboración reciente con',
   'global_search.people.people_heading': 'Personas',
   'global_search.people.advanced_search': 'Buscar personas',
@@ -44,16 +44,16 @@ export default {
   'global_search.jira.advanced_issue_search':
     'Búsqueda avanzada de incidencias',
   'global_search.jira.no_results_title':
-    "We couldn't find anything matching your search",
+    'No se han encontrado resultados de búsqueda',
   'global_search.jira.no_results_body':
-    'Inténtalo otra vez con otro término o refina los resultados con la búsqueda avanzada.',
+    'Prueba con otro término o afina los resultados con la búsqueda avanzada.',
   'global_search.jira.no_recent_activity_body':
     'También puedes afinar los resultados con nuestra búsqueda avanzada.',
-  'global_search.jira.project_type.business_project': 'Business Project',
-  'global_search.jira.project_type.software_project': 'Software Project',
+  'global_search.jira.project_type.business_project': 'Proyecto empresarial',
+  'global_search.jira.project_type.software_project': 'Proyecto de software',
   'global_search.jira.project_type.service_desk_project':
-    'Service Desk Project',
-  'global_search.jira.project_type.ops_project': 'Ops Project',
+    'Proyecto de servicio al cliente',
+  'global_search.jira.project_type.ops_project': 'Proyecto operativo',
   'global_search.jira.result_type.board': 'Tablero',
   'global_search.jira.result_type.filter': 'Filtro',
 };

@@ -17,7 +17,7 @@ export default {
     'Oder verwenden Sie die <a href={url}>erweiterte Suche</a> (Shift + Enter), um Ihre Suchergebnisse zu präzisieren.',
   'global_search.no_results_title': 'Keine Ergebnisse in Titeln und Personen',
   'global_search.no_results_body':
-    'Try again with a different term, or refine your results with our advanced search.',
+    'Versuchen Sie es mit einem anderen Suchbegriff oder verfeinern Sie Ihre Ergebnisse mit unserer erweiterten Suche.',
   'global_search.people.recent_people_heading': 'Hat kürzlich gearbeitet mit',
   'global_search.people.people_heading': 'Personen',
   'global_search.people.advanced_search': 'Personen suchen',
@@ -28,12 +28,13 @@ export default {
   'global_search.jira.search_placeholder': 'Jira durchsuchen',
   'global_search.jira.recent_issues_heading': 'Aktuelle Vorgänge',
   'global_search.jira.recent_people_heading': 'Hat kürzlich gearbeitet mit',
-  'global_search.jira.recent_containers': 'Recent boards, projects and filters',
+  'global_search.jira.recent_containers':
+    'Aktuelle Boards, Projekte und Filter',
   'global_search.jira.search_result_issues_heading': 'Vorgänge',
   'global_search.jira.search_result_containers_heading':
-    'Boards, projects and filters',
+    'Boards, Projekte und Filter',
   'global_search.jira.search_result_people_heading': 'Personen',
-  'global_search.jira.advanced_search': 'Advanced search for',
+  'global_search.jira.advanced_search': 'Erweiterte Suche für',
   'global_search.jira.advanced_search_issues': 'Vorgänge',
   'global_search.jira.advanced_search_projects': 'Projekte',
   'global_search.jira.advanced_search_boards': 'Boards',
@@ -41,16 +42,16 @@ export default {
   'global_search.jira.advanced_search_people': 'Personen',
   'global_search.jira.advanced_issue_search': 'Erweiterte Suche nach Vorgängen',
   'global_search.jira.no_results_title':
-    "We couldn't find anything matching your search",
+    'Es wurden keine Ergebnisse gefunden, die Ihrer Suche entsprechen.',
   'global_search.jira.no_results_body':
-    'Try again with a different term, or refine your results with our advanced search.',
+    'Versuchen Sie es mit einem anderen Suchbegriff oder verfeinern Sie Ihre Ergebnisse mit unserer erweiterten Suche.',
   'global_search.jira.no_recent_activity_body':
     'Oder verfeinern Sie Ihre Ergebnisse mit unserer erweiterten Suche.',
-  'global_search.jira.project_type.business_project': 'Business Project',
-  'global_search.jira.project_type.software_project': 'Software Project',
+  'global_search.jira.project_type.business_project': 'Geschäftsprojekt',
+  'global_search.jira.project_type.software_project': 'Softwareprojekt',
   'global_search.jira.project_type.service_desk_project':
-    'Service Desk Project',
-  'global_search.jira.project_type.ops_project': 'Ops Project',
+    'Service Desk-Projekt',
+  'global_search.jira.project_type.ops_project': 'Ops-Projekt',
   'global_search.jira.result_type.board': 'Board',
   'global_search.jira.result_type.filter': 'Filter',
 };
