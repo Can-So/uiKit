@@ -1,1 +1,0 @@
-- support fetch by objectId
