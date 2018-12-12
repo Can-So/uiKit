@@ -4,5 +4,6 @@
 /NavigationProvider.js*
 /ItemsRenderer.js*
 /AsyncLayoutManagerWithViewController.js*
+/GlobalNavigationSkeleton.js*
 /view-controller.js*
 /ui-controller.js*
