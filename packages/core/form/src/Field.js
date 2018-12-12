@@ -3,6 +3,7 @@ import React, { type Node } from 'react';
 import arrayShallowEqual from 'shallow-equal/arrays';
 import objectShallowEqual from 'shallow-equal/objects';
 import uuid from 'uuid';
+import invariant from 'tiny-invariant';
 import { type FieldState, type FieldSubscription } from 'final-form';
 import { FormContext, IsDisabledContext } from './Form';
 import FieldWrapper, { Label, RequiredIndicator } from './styled/Field';
@@ -69,7 +70,6 @@ type State = {
   value: any,
   error: any,
   submitError: any,
-  registered: boolean,
 };
 
 const shallowEqual = (a, b) =>
@@ -94,15 +94,25 @@ class FieldInner extends React.Component<Props, State> {
     onFocus: () => {},
     dirty: false,
     touched: false,
-    valid: true,
-    value: undefined,
+    valid: false,
+    value:
+      typeof this.props.defaultValue === 'function'
+        ? this.props.defaultValue()
+        : this.props.defaultValue,
     error: undefined,
     submitError: undefined,
-    registered: false,
   };
 
   register = () => {
     const { defaultValue, name, registerField, validate } = this.props;
+
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(
+        name,
+        '@atlaskit/form: Field components have a required name prop',
+      );
+    }
+
     return registerField(
       name,
       defaultValue,
@@ -118,7 +128,6 @@ class FieldInner extends React.Component<Props, State> {
         submitError,
       }) => {
         this.setState({
-          registered: true,
           onChange: change,
           onBlur: blur,
           onFocus: focus,
@@ -172,14 +181,7 @@ class FieldInner extends React.Component<Props, State> {
       name,
       transform,
     } = this.props;
-    const {
-      registered,
-      onChange,
-      onBlur,
-      onFocus,
-      value,
-      ...rest
-    } = this.state;
+    const { onChange, onBlur, onFocus, value, ...rest } = this.state;
     const error =
       rest.submitError || ((rest.touched || rest.dirty) && rest.error);
     const labelId = `${this.fieldId}-label`;
@@ -211,7 +213,7 @@ class FieldInner extends React.Component<Props, State> {
             )}
           </Label>
         )}
-        {registered && children({ fieldProps, error, meta: rest })}
+        {children({ fieldProps, error, meta: rest })}
       </FieldWrapper>
     );
   }
@@ -237,7 +239,7 @@ const Field = (props: Props) => (
 Field.defaultProps = {
   defaultValue: undefined,
   isDisabled: false,
-  registerField: () => {},
+  registerField: () => () => {},
   transform: translateEvent,
 };
 

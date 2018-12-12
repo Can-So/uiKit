@@ -207,3 +207,25 @@ test('isDisabled should disable all fields in form', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 });
+
+test('should never render with undefined fieldProp value', () => {
+  const spy = jest.fn(() => 'Hello');
+  mount(
+    <Form onSubmit={jest.fn()}>
+      {() => (
+        <Field name="username" defaultValue="Joe Bloggs">
+          {spy}
+        </Field>
+      )}
+    </Form>,
+  );
+  return Promise.resolve().then(() => {
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy.mock.calls[0][0]).toMatchObject({
+      fieldProps: { value: 'Joe Bloggs' },
+    });
+    expect(spy.mock.calls[1][0]).toMatchObject({
+      fieldProps: { value: 'Joe Bloggs' },
+    });
+  });
+});
