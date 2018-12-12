@@ -1,47 +1,47 @@
 export type UserPickerProps = {
-  /** List of users to be used as options by the user picker */
+  /** List of users to be used as options by the user picker. */
   options?: User[];
-  /** Width of the user picker field */
+  /** Width of the user picker field. */
   width?: number;
-  /** Function used to load options asynchronously */
+  /** Function used to load options asynchronously. */
   loadOptions?: LoadOptions;
-  /** Callback for value change events fired whenever a selection is inserted or removed */
+  /** Callback for value change events fired whenever a selection is inserted or removed. */
   onChange?: OnChange;
-  /** To enable multi user picker */
+  /** To enable multi user picker. */
   isMulti?: boolean;
-  /** Input text value */
+  /** Input text value. */
   search?: string;
-  /** Anchor for the user picker popup */
+  /** Anchor for the user picker popup. */
   anchor?: React.ComponentType<any>;
-  /** Set if the user picker popup is open */
+  /** Controls if user picker menu is open or not. If not provided, UserPicker will control menu state internally. */
   open?: boolean;
-  /** Show the loading indicator */
+  /** Show the loading indicator. */
   isLoading?: boolean;
-  /** Callback for search input text change events */
+  /** Callback for search input text change events. */
   onInputChange?: OnInputChange;
-  /** Callback for when a selection is made  */
+  /** Callback for when a selection is made. */
   onSelection?: OnUser;
-  /** Callback for when the field gains focus */
+  /** Callback for when the field gains focus. */
   onFocus?: OnPicker;
-  /** Callback for when the field loses focus */
+  /** Callback for when the field loses focus. */
   onBlur?: OnPicker;
-  /** Appearance of the user picker */
+  /** Appearance of the user picker. */
   appearance?: 'normal' | 'compact';
-  /** Display the picker with a subtle style */
+  /** Display the picker with a subtle style. */
   subtle?: boolean;
-  /** Default value for the field */
+  /** Default value for the field to be used on initial render. */
   defaultValue?: UserValue;
-  /** Placeholder text to be shown when there is no value in the field */
+  /** Placeholder text to be shown when there is no value in the field. */
   placeholder?: string;
-  /** Message to be shown when the menu is open but no options are provided */
+  /** Message to be shown when the menu is open but no options are provided. */
   noOptionsMessage?: string;
-  /** Value of the user picker */
+  /** Controls if the user picker has a value or not. If not provided, UserPicker will control the value internally. */
   value?: UserValue;
   /** Disable all interactions with the picker, putting it in a read-only state. */
   isDisabled?: boolean;
   /** Display a remove button on the single picker. True by default. */
   isClearable?: boolean;
-  /** Optional tooltip to display on hover over the clear indicator */
+  /** Optional tooltip to display on hover over the clear indicator. */
   clearValueLabel?: string;
 };
 
