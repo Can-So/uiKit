@@ -5,7 +5,7 @@ export type UserPickerProps = {
   width?: number;
   /** Function used to load options asynchronously */
   loadUsers?: LoadOptions;
-  /** Callback for value change events */
+  /** Callback for value change events fired whenever a selection is inserted or removed */
   onChange?: OnChange;
   /** To enable multi user picker */
   isMulti?: boolean;
@@ -23,11 +23,11 @@ export type UserPickerProps = {
   onSelection?: OnUser;
   /** Callback for when the field gains focus */
   onFocus?: OnPicker;
-  /** Callback for when the field lose focus */
+  /** Callback for when the field loses focus */
   onBlur?: OnPicker;
   /** Appearance of the user picker */
   appearance?: 'normal' | 'compact';
-  /** Display the picker with a subtle appearance */
+  /** Display the picker with a subtle style */
   subtle?: boolean;
   /** Default value for the field */
   defaultValue?: UserValue;
