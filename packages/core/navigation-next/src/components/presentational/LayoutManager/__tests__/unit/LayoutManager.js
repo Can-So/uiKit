@@ -18,7 +18,7 @@ import type { LayoutManagerProps } from '../../types';
 const GlobalNavigation = () => null;
 const ProductNavigation = () => null;
 
-describe.skip('LayoutManager', () => {
+describe('LayoutManager', () => {
   let defaultProps: $Shape<LayoutManagerProps>;
   let mockNavigationUIController: any;
   beforeEach(() => {
@@ -57,70 +57,79 @@ describe.skip('LayoutManager', () => {
         jest.useFakeTimers();
       });
 
-      it('should open when mousing over ProductNavigation with a delay of 350ms', () => {
-        const wrapper = mount(<LayoutManager {...defaultProps} />);
-        expect(wrapper.state('flyoutIsOpen')).toBe(false);
-        wrapper.find(ProductNavigation).simulate('mouseover');
-
-        console.log(wrapper.find(ProductNavigation).debug());
-        jest.advanceTimersByTime(349);
-        expect(wrapper.state('flyoutIsOpen')).toBe(false);
-
-        jest.advanceTimersByTime(1);
-        expect(wrapper.state('flyoutIsOpen')).toBe(true);
+      afterEach(() => {
+        jest.clearAllTimers();
       });
-      it('should open when mousing over outer buffer with a delay of 350ms', () => {
+
+      it('should open when mousing over NavigationContainer with a delay of 200ms', () => {
         const wrapper = mount(<LayoutManager {...defaultProps} />);
         expect(wrapper.state('flyoutIsOpen')).toBe(false);
-        wrapper.find('Outer').simulate('mouseover');
+        wrapper.find(NavigationContainer).simulate('mouseover');
 
-        jest.advanceTimersByTime(349);
-        expect(wrapper.state('flyoutIsOpen')).toBe(false);
+        expect(wrapper.contains(ProductNavigation)).toBeTruthy();
+        expect(wrapper.find('Outer').exists()).toBeTruthy();
 
-        jest.advanceTimersByTime(1);
-        expect(wrapper.state('flyoutIsOpen')).toBe(true);
-      });
-      it('should NOT open when mousing over GlobalNavigation with a delay of 350ms', () => {
-        const wrapper = mount(<LayoutManager {...defaultProps} />);
-        expect(wrapper.state('flyoutIsOpen')).toBe(false);
-        wrapper.find(GlobalNavigation).simulate('mouseover');
-
-        jest.advanceTimersByTime(349);
+        jest.advanceTimersByTime(199);
         expect(wrapper.state('flyoutIsOpen')).toBe(false);
 
         jest.advanceTimersByTime(1);
         expect(wrapper.state('flyoutIsOpen')).toBe(true);
       });
 
-      it('should NOT open when mousing over expand/collapse affordance with a delay of 350ms', () => {
-        const wrapper = mount(<LayoutManager {...defaultProps} />);
-        expect(wrapper.state('flyoutIsOpen')).toBe(false);
-        wrapper.find(GlobalNavigation).simulate('mouseover');
+      it('should NOT open when mousing over GlobalNavigation with a delay of 200ms', () => {
+        const Global = () => <div>Global</div>;
+        const wrapper = mount(
+          <LayoutManager {...defaultProps} globalNavigation={Global} />,
+        );
+        const instance = wrapper.instance();
+        const spy = jest.spyOn(instance, 'closeFlyout');
+        // to register the spy on the instance
+        wrapper.setProps({});
 
-        jest.advanceTimersByTime(349);
-        expect(wrapper.state('flyoutIsOpen')).toBe(false);
+        wrapper
+          .find('ThemeProvider')
+          .first()
+          .closest('div')
+          .simulate('mouseover');
 
-        jest.advanceTimersByTime(1);
-        expect(wrapper.state('flyoutIsOpen')).toBe(true);
+        expect(spy).toHaveBeenCalled();
       });
+
+      it('should NOT open when mousing over expand/collapse affordance with a delay of 200ms', () => {
+        const wrapper = mount(<LayoutManager {...defaultProps} />);
+        const instance = wrapper.instance();
+        const spy = jest.spyOn(instance, 'closeFlyout');
+        wrapper.setProps({});
+
+        wrapper
+          .find('Button')
+          .children()
+          .children()
+          .first()
+          .simulate('mouseover');
+
+        expect(spy).toHaveBeenCalled();
+      });
+
       it('should NOT close already expanded flyout when mousing over expand/collapse affordance', () => {
         const wrapper = mount(<LayoutManager {...defaultProps} />);
-        expect(wrapper.state('flyoutIsOpen')).toBe(false);
-        wrapper.find(GlobalNavigation).simulate('mouseover');
 
-        jest.advanceTimersByTime(349);
-        expect(wrapper.state('flyoutIsOpen')).toBe(false);
+        expect(wrapper.find('Button').prop('onMouseOver')).toBeInstanceOf(
+          Function,
+        );
 
-        jest.advanceTimersByTime(1);
-        expect(wrapper.state('flyoutIsOpen')).toBe(true);
+        wrapper.setState({ flyoutIsOpen: true });
+        wrapper.update();
+
+        expect(wrapper.find('Button').prop('onMouseOver')).toBeNull();
       });
 
-      it('should not open when mousing out before 350ms', () => {
+      it('should not open when mousing out before 200ms', () => {
         const wrapper = mount(<LayoutManager {...defaultProps} />);
         expect(wrapper.state('flyoutIsOpen')).toBe(false);
         wrapper.find(ContainerNavigationMask).simulate('mouseover');
 
-        jest.advanceTimersByTime(300);
+        jest.advanceTimersByTime(100);
         wrapper.find(NavigationContainer).simulate('mouseleave');
         expect(wrapper.state('flyoutIsOpen')).toBe(false);
 
@@ -172,23 +181,23 @@ describe.skip('LayoutManager', () => {
         expect(wrapper.state('flyoutIsOpen')).toBe(false);
       });
 
-      it('should NOT listen to mouseOvers over ContainerNavigationMask if flyout is already open', () => {
+      it('should NOT listen to mouseOvers over NavigationContainer if flyout is already open', () => {
         const wrapper = mount(<LayoutManager {...defaultProps} />);
-        expect(
-          wrapper.find(ContainerNavigationMask).prop('onMouseOver'),
-        ).toEqual(expect.any(Function));
-        wrapper.find(ContainerNavigationMask).simulate('mouseover');
+        expect(wrapper.find(NavigationContainer).prop('onMouseOver')).toEqual(
+          expect.any(Function),
+        );
+        wrapper.find(NavigationContainer).simulate('mouseover');
 
-        jest.advanceTimersByTime(349);
+        jest.advanceTimersByTime(199);
         wrapper.update();
-        expect(
-          wrapper.find(ContainerNavigationMask).prop('onMouseOver'),
-        ).toEqual(expect.any(Function));
+        expect(wrapper.find(NavigationContainer).prop('onMouseOver')).toEqual(
+          expect.any(Function),
+        );
 
         jest.advanceTimersByTime(1);
         wrapper.update();
         expect(
-          wrapper.find(ContainerNavigationMask).prop('onMouseOver'),
+          wrapper.find(NavigationContainer).prop('onMouseOver'),
         ).toBeNull();
       });
 
@@ -297,6 +306,11 @@ describe.skip('LayoutManager', () => {
         onCollapseStart: jest.fn(),
         onCollapseEnd: jest.fn(),
       };
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.clearAllTimers();
     });
 
     it('should be attached to the Page transition component', () => {
@@ -363,6 +377,7 @@ describe.skip('LayoutManager', () => {
 
       defaultProps.navigationUIController.state.isCollapsed = true;
       wrapper.setProps(defaultProps);
+      wrapper.update();
 
       jest.advanceTimersByTime(299);
       expect(handlers.onCollapseEnd).not.toHaveBeenCalled();

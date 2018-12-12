@@ -52,6 +52,10 @@ export default class App extends Component<
             customComponents={{ LinkItem, ProjectSwitcher }}
             experimental_flyoutOnHover={isFlyoutAvailable}
             globalNavigation={DefaultGlobalNavigation}
+            onExpandStart={() => console.log('expand started')}
+            onCollapseStart={() => console.log('collapse started')}
+            onExpandEnd={() => console.log('expand end')}
+            onCollapseEnd={() => console.log('collapse end')}
           >
             <div style={{ padding: 40 }}>
               <RootViews />
