@@ -27,6 +27,21 @@ export const defaultTimes = [
   '18:00',
 ];
 
+const map24 = {
+  '01': '13',
+  '02': '14',
+  '03': '15',
+  '04': '16',
+  '05': '17',
+  '06': '18',
+  '07': '19',
+  '08': '20',
+  '09': '21',
+  '10': '22',
+  '11': '23',
+  '12': '24',
+};
+
 export const defaultTimeFormat = 'h:mma';
 export const defaultDateFormat = 'YYYY/MM/DD';
 
@@ -73,9 +88,13 @@ export function parseTime(timeString: string): Date | typeof NaN {
   if (num.length > 4 || (num.length === 2 && parseInt(num, 10) > 12))
     return NaN;
 
-  // For valid 24hr times we ignore am/pm
+  // For valid 24hr times we need to check the meridiem.
   if (time24hr && time24hr[1] && time24hr[2]) {
-    hours = parseInt(time24hr[1], 10);
+    hours =
+      meridiem === 'p'
+        ? parseInt(map24[time24hr[1]], 10)
+        : parseInt(time24hr[1], 10);
+
     minutes = parseInt(time24hr[2], 10);
   } else if (time && time[1]) {
     // Handle times supplied as one value e.g 135pm
