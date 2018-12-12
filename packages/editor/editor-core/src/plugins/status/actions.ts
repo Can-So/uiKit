@@ -15,7 +15,7 @@ export const DEFAULT_STATUS: StatusType = {
 };
 
 export const createStatus = (showStatusPickerAtOffset = -2) => (
-  insert: (node?: Node | Object | string) => Transaction,
+  insert: (node: Node | Object | string) => Transaction,
   state: EditorState,
 ): Transaction => {
   const statusNode = state.schema.nodes.status.createChecked({

@@ -39,7 +39,9 @@ const SearchDrawer = ({
   isOpen: boolean;
   closeDrawer: (e: Event) => void;
   searchDrawerValue: string;
-  updateSearchValue: (e: React.SyntheticEvent) => void;
+
+  // TODO: [strictFunctionTypes] Fix any
+  updateSearchValue: (e: React.ChangeEvent<any>) => void;
   packages: Directory;
 }) => (
   <AkSearchDrawer

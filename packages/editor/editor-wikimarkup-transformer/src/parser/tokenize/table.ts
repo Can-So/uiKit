@@ -32,7 +32,7 @@ export function table(
   input: string,
   position: number,
   schema: Schema,
-  tokenErrCallback: TokenErrCallback,
+  tokenErrCallback?: TokenErrCallback,
 ): Token {
   /**
    * The following token types will be ignored in parsing
@@ -258,7 +258,7 @@ function bufferToCells(
   cellsBuffer: AddCellArgs[],
   schema: Schema,
   ignoreTokenTypes: TokenType[],
-  tokenErrCallback: TokenErrCallback,
+  tokenErrCallback?: TokenErrCallback,
 ) {
   if (buffer.length) {
     const contentNode = parseString(

@@ -15,30 +15,18 @@ import {
 import { valueOf as valueOfListState } from '../web-to-native/listState';
 import { valueOf as valueOfMarkState } from '../web-to-native/markState';
 import WebBridgeImpl from '../native-to-web';
-import { toNativeBridge } from '../web-to-native';
+import { toNativeBridge, EditorPluginBridges } from '../web-to-native';
 
-interface BridgeStates {
-  textFormatBridge: TextFormattingState;
-  listBridge: ListsState;
-  blockFormatBridge: BlockTypeState;
-  statusBridge: StatusState;
-}
-
-type Bridge = keyof BridgeStates;
-type StateUpdater<B extends Bridge> = (state: BridgeStates[B]) => void;
-
-interface BridgePluginListener<T extends Bridge> {
-  bridge: T;
+interface BridgePluginListener<T> {
+  bridge: EditorPluginBridges;
   pluginKey: PluginKey;
-  updater: StateUpdater<T>;
+  updater: (state: T) => void;
 }
 
-const createListenerConfig = <T extends Bridge>(
-  config: BridgePluginListener<T>,
-) => config;
+const createListenerConfig = <T>(config: BridgePluginListener<T>) => config;
 
-const configs: Array<BridgePluginListener<Bridge>> = [
-  createListenerConfig({
+const configs: Array<BridgePluginListener<any>> = [
+  createListenerConfig<StatusState>({
     bridge: 'statusBridge',
     pluginKey: statusPluginKey,
     updater: state => {
@@ -54,7 +42,7 @@ const configs: Array<BridgePluginListener<Bridge>> = [
       }
     },
   }),
-  createListenerConfig({
+  createListenerConfig<TextFormattingState>({
     bridge: 'textFormatBridge',
     pluginKey: textFormattingStateKey,
     updater: state => {
@@ -63,7 +51,7 @@ const configs: Array<BridgePluginListener<Bridge>> = [
       });
     },
   }),
-  createListenerConfig({
+  createListenerConfig<BlockTypeState>({
     bridge: 'blockFormatBridge',
     pluginKey: blockPluginStateKey,
     updater: state => {
@@ -83,7 +71,7 @@ const configs: Array<BridgePluginListener<Bridge>> = [
       });
     },
   }),
-  createListenerConfig({
+  createListenerConfig<ListsState>({
     bridge: 'listBridge',
     pluginKey: listsStateKey,
     updater: state => {

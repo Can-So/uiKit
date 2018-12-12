@@ -94,7 +94,7 @@ describe('Status - NodeView', () => {
         getPos={jest.fn()}
       />,
     );
-    wrapper.simulate('click');
+    wrapper.find(Status).simulate('click');
 
     expect(setStatusPickerAtSpy).toBeCalled();
   });

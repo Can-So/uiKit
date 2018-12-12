@@ -1,5 +1,10 @@
 # @atlaskit/editor-bitbucket-transformer
 
+## 4.0.22
+- [patch] [da43fb4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/da43fb4):
+
+  - ED-5840 Fixed Bitbucket markdown transformer to use triple backticks
+
 ## 4.0.21
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/editor-core@90.3.15

@@ -1,2 +1,2 @@
-export { columnResizing, key } from './plugin';
+export { createPlugin, pluginKey, ResizeState } from './plugin';
 export { scaleTable, setColumnWidths } from './actions';

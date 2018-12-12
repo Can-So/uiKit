@@ -7,8 +7,17 @@ import { dropShadow } from '../../../ui/styles';
 import withOuterListeners from '../../../ui/with-outer-listeners';
 import { DEFAULT_STATUS } from '../actions';
 import { StatusType } from '../plugin';
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import { createStatusAnalyticsAndFire } from '../analytics';
 
 const PopupWithListeners = withOuterListeners(Popup);
+
+export enum InputMethod {
+  blur = 'blur',
+  escKey = 'escKey',
+  enterKey = 'enterKey',
+}
 
 export interface Props {
   target: HTMLElement | null;
@@ -20,6 +29,7 @@ export interface Props {
   defaultText?: string;
   defaultColor?: Color;
   defaultLocalId?: string;
+  createAnalyticsEvent?: CreateUIAnalyticsEventSignature;
 }
 
 export interface State {
@@ -35,7 +45,11 @@ const PickerContainer = styled.div`
   ${dropShadow};
 `;
 
-export default class StatusPicker extends React.Component<Props, State> {
+class StatusPicker extends React.Component<Props, State> {
+  private startTime: number;
+  private inputMethod: InputMethod;
+  private createStatusAnalyticsAndFireFunc: Function;
+
   static defaultProps = {
     autoFocus: false,
   };
@@ -44,6 +58,45 @@ export default class StatusPicker extends React.Component<Props, State> {
     super(props);
 
     this.state = this.extractStateFromProps(props);
+    this.createStatusAnalyticsAndFireFunc = createStatusAnalyticsAndFire(
+      props.createAnalyticsEvent,
+    );
+  }
+
+  componentDidMount() {
+    const { color, text, localId } = this.state;
+
+    this.startTime = Date.now();
+    this.inputMethod = InputMethod.blur;
+
+    this.createStatusAnalyticsAndFireFunc({
+      action: 'opened',
+      actionSubject: 'statusPopup',
+      attributes: {
+        textLength: text ? text.length : 0,
+        selectedColor: color,
+        localId,
+      },
+    });
+  }
+
+  componentWillUnmount() {
+    const { color, text, localId } = this.state;
+    const inputMethod = this.inputMethod;
+
+    this.createStatusAnalyticsAndFireFunc({
+      action: 'closed',
+      actionSubject: 'statusPopup',
+      attributes: {
+        inputMethod,
+        duration: Date.now() - this.startTime,
+        textLength: text ? text.length : 0,
+        selectedColor: color,
+        localId,
+      },
+    });
+
+    this.startTime = 0;
   }
 
   componentDidUpdate(
@@ -67,25 +120,40 @@ export default class StatusPicker extends React.Component<Props, State> {
     return state;
   }
 
-  render() {
-    const { autoFocus, target, closeStatusPicker } = this.props;
+  private handleCloseStatusPicker = (inputMethod: InputMethod) => () => {
+    this.inputMethod = inputMethod;
+    this.props.closeStatusPicker();
+  };
 
+  private handleClickOutside = this.handleCloseStatusPicker(InputMethod.blur);
+  private handleEscapeKeydown = this.handleCloseStatusPicker(
+    InputMethod.escKey,
+  );
+  private handleEnterKeydown = this.handleCloseStatusPicker(
+    InputMethod.enterKey,
+  );
+
+  render() {
+    const { autoFocus, target } = this.props;
+    const { color, text } = this.state;
     return (
       target && (
         <PopupWithListeners
           target={target}
           offset={[0, 8]}
-          handleClickOutside={closeStatusPicker}
-          handleEscapeKeydown={closeStatusPicker}
+          handleClickOutside={this.handleClickOutside}
+          handleEscapeKeydown={this.handleEscapeKeydown}
+          handleEnterKeydown={this.handleEnterKeydown}
           zIndex={akEditorFloatingDialogZIndex}
           fitHeight={40}
         >
           <PickerContainer onClick={this.handlePopupClick}>
             <AkStatusPicker
               autoFocus={autoFocus}
-              selectedColor={this.state.color}
-              text={this.state.text}
+              selectedColor={color}
+              text={text}
               onColorClick={this.onColorClick}
+              onColorHover={this.onColorHover}
               onTextChanged={this.onTextChanged}
               onEnter={this.onEnter}
             />
@@ -95,6 +163,17 @@ export default class StatusPicker extends React.Component<Props, State> {
     );
   }
 
+  private onColorHover = color => {
+    this.createStatusAnalyticsAndFireFunc({
+      action: 'hovered',
+      actionSubject: 'statusColorPicker',
+      attributes: {
+        color,
+        localId: this.state.localId,
+      },
+    });
+  };
+
   private onColorClick = color => {
     const { text, localId } = this.state;
     this.setState({ color });
@@ -103,6 +182,15 @@ export default class StatusPicker extends React.Component<Props, State> {
       text,
       color,
       localId,
+    });
+
+    this.createStatusAnalyticsAndFireFunc({
+      action: 'clicked',
+      actionSubject: 'statusColorPicker',
+      attributes: {
+        color,
+        localId,
+      },
     });
   };
 
@@ -126,3 +214,5 @@ export default class StatusPicker extends React.Component<Props, State> {
   private handlePopupClick = event =>
     event.nativeEvent.stopImmediatePropagation();
 }
+
+export default withAnalyticsEvents()(StatusPicker);

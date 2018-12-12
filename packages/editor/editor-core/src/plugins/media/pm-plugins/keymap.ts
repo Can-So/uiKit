@@ -1,11 +1,11 @@
 import { keymap } from 'prosemirror-keymap';
-import { Schema } from 'prosemirror-model';
-import { EditorState, Plugin, Transaction } from 'prosemirror-state';
+import { Plugin } from 'prosemirror-state';
 
 import * as keymaps from '../../../keymaps';
 import { MediaPluginState, stateKey } from '../pm-plugins/main';
+import { Command } from '../../../types';
 
-export function keymapPlugin(schema: Schema): Plugin {
+export function keymapPlugin(): Plugin {
   const list = {};
 
   keymaps.bindKeymapWithCommand(
@@ -24,29 +24,20 @@ export function keymapPlugin(schema: Schema): Plugin {
   return keymap(list);
 }
 
-function removeMediaNode(
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean {
+const removeMediaNode: Command = state => {
   const mediaPluginState = stateKey.getState(state) as MediaPluginState;
   return mediaPluginState.removeSelectedMediaNode();
-}
+};
 
-function ignoreLinksInSteps(
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean {
+const ignoreLinksInSteps: Command = state => {
   const mediaPluginState = stateKey.getState(state) as MediaPluginState;
   mediaPluginState.ignoreLinks = true;
   return false;
-}
+};
 
-function splitMediaGroup(
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean {
+const splitMediaGroup: Command = state => {
   const mediaPluginState = stateKey.getState(state) as MediaPluginState;
   return mediaPluginState.splitMediaGroup();
-}
+};
 
 export default keymapPlugin;

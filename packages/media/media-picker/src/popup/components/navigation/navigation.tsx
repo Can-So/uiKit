@@ -232,8 +232,13 @@ export class Navigation extends Component<NavigationProps, NavigationState> {
   }
 }
 
-export default connect<NavigationStateProps, NavigationDispatchProps, {}>(
-  ({ accounts, view }: State) => ({
+export default connect<
+  NavigationStateProps,
+  NavigationDispatchProps,
+  {},
+  State
+>(
+  ({ accounts, view }) => ({
     accounts,
     path: view.path,
     service: view.service,

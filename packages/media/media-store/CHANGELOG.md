@@ -1,5 +1,10 @@
 # @atlaskit/media-store
 
+## 8.5.0
+- [minor] [0f42ec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f42ec1):
+
+  Use /items endpoint in media-core
+
 ## 8.4.1
 - [patch] [2c40be7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c40be7):
 

@@ -1,14 +1,8 @@
 import * as React from 'react';
 import memoizeOne from 'memoize-one';
-import HomeQuickSearchContainer, {
-  Props as HomeContainerProps,
-} from './home/HomeQuickSearchContainer';
-import ConfluenceQuickSearchContainer, {
-  Props as ConfContainerProps,
-} from './confluence/ConfluenceQuickSearchContainer';
-import JiraQuickSearchContainer, {
-  Props as JiraContainerProps,
-} from './jira/JiraQuickSearchContainer';
+import HomeQuickSearchContainer from './home/HomeQuickSearchContainer';
+import ConfluenceQuickSearchContainer from './confluence/ConfluenceQuickSearchContainer';
+import JiraQuickSearchContainer from './jira/JiraQuickSearchContainer';
 import configureSearchClients, { Config } from '../api/configureSearchClients';
 import MessagesIntlProvider from './MessagesIntlProvider';
 
@@ -153,9 +147,7 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
     return config;
   }
 
-  private getContainerComponent(): React.ComponentClass<
-    HomeContainerProps | ConfContainerProps | JiraContainerProps
-  > {
+  private getContainerComponent(): React.ComponentClass<any> {
     if (this.props.context === 'confluence') {
       return ConfluenceQuickSearchContainer;
     } else if (this.props.context === 'home') {

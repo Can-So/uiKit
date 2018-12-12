@@ -3,31 +3,114 @@ import { Observer } from 'rxjs/Observer';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { publishReplay } from 'rxjs/operators/publishReplay';
 import * as uuid from 'uuid/v4';
+import * as Dataloader from 'dataloader';
 import {
   MediaStore,
   UploadableFile,
   UploadController,
   uploadFile,
+  MediaCollectionItemFullDetails,
+  FileItem,
   MediaFileArtifacts,
   TouchFileDescriptor,
 } from '@atlaskit/media-store';
+import * as isValidId from 'uuid-validate';
 import {
   FilePreview,
   FileState,
   GetFileOptions,
-  mapMediaFileToFileState,
+  mapMediaItemToFileState,
 } from '../fileState';
-import { fileStreamsCache } from '../context/fileStreamCache';
-import FileStreamCache from '../context/fileStreamCache';
+import { fileStreamsCache, FileStreamCache } from '../context/fileStreamCache';
 import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploadableFile';
 import { UploadableFileUpfrontIds } from '../../../media-store/src/uploader';
 
 const POLLING_INTERVAL = 1000;
+const maxNumberOfItemsPerCall = 100;
+export type DataloaderMap = { [id: string]: DataloaderResult };
+export const getItemsFromKeys = (
+  dataloaderKeys: DataloaderKey[],
+  fileItems: FileItem[],
+): DataloaderResult[] => {
+  const itemsByKey: DataloaderMap = fileItems.reduce(
+    (prev: DataloaderMap, nextFileItem) => {
+      const { id, collection } = nextFileItem;
+      const key = FileStreamCache.createKey(id, { collectionName: collection });
 
+      prev[key] = nextFileItem.details;
+
+      return prev;
+    },
+    {},
+  );
+
+  return dataloaderKeys.map(dataloaderKey => {
+    const { id, collection } = dataloaderKey;
+    const key = FileStreamCache.createKey(id, { collectionName: collection });
+
+    return itemsByKey[key];
+  });
+};
+
+interface DataloaderKey {
+  id: string;
+  collection?: string;
+}
+type DataloaderResult = MediaCollectionItemFullDetails | undefined;
 export class FileFetcher {
-  constructor(private readonly mediaStore: MediaStore) {}
+  private readonly dataloader: Dataloader<DataloaderKey, DataloaderResult>;
+  constructor(private readonly mediaStore: MediaStore) {
+    this.dataloader = new Dataloader<DataloaderKey, DataloaderResult>(
+      this.batchLoadingFunc,
+      {
+        maxBatchSize: maxNumberOfItemsPerCall,
+      },
+    );
+  }
+
+  // Returns an array of the same length as the keys filled with file items
+  batchLoadingFunc = async (keys: DataloaderKey[]) => {
+    const nonCollectionName = '__media-single-file-collection__';
+    const fileIdsByCollection = keys.reduce(
+      (prev, next) => {
+        const collectionName = next.collection || nonCollectionName;
+        const fileIds = prev[collectionName] || [];
+
+        fileIds.push(next.id);
+        prev[collectionName] = fileIds;
+
+        return prev;
+      },
+      {} as { [collectionName: string]: string[] },
+    );
+    const items: FileItem[] = [];
+
+    await Promise.all(
+      Object.keys(fileIdsByCollection).map(async collectionNameKey => {
+        const fileIds = fileIdsByCollection[collectionNameKey];
+        const collectionName =
+          collectionNameKey === nonCollectionName
+            ? undefined
+            : collectionNameKey;
+        const response = await this.mediaStore.getItems(
+          fileIds,
+          collectionName,
+        );
+
+        items.push(...response.data.items);
+      }),
+    );
+
+    return getItemsFromKeys(keys, items);
+  };
 
   getFileState(id: string, options?: GetFileOptions): Observable<FileState> {
+    if (!isValidId(id)) {
+      return Observable.create((observer: Observer<FileState>) => {
+        observer.error(`${id} is not a valid file id`);
+      });
+    }
+
     const key = FileStreamCache.createKey(id, options);
 
     return fileStreamsCache.getOrInsert(key, () => {
@@ -63,9 +146,13 @@ export class FileFetcher {
 
       const fetchFile = async () => {
         try {
-          const response = await this.mediaStore.getFile(id, { collection });
-          const fileState = mapMediaFileToFileState(response);
+          const response = await this.dataloader.load({ id, collection });
 
+          if (!response) {
+            return;
+          }
+
+          const fileState = mapMediaItemToFileState(id, response);
           observer.next(fileState);
 
           if (fileState.status === 'processing') {

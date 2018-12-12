@@ -206,7 +206,11 @@ export class EmojiState {
     }
   };
 
-  handleProvider = (name: string, provider: Promise<any>): void => {
+  handleProvider = (name: string, provider: Promise<any> | undefined): void => {
+    if (!provider) {
+      return;
+    }
+
     switch (name) {
       case 'emojiProvider':
         provider

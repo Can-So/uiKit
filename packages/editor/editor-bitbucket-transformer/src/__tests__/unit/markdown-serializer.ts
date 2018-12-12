@@ -180,13 +180,13 @@ describe('BitbucketTransformer: serializer', () => {
     it('with simple text should be serialized', () => {
       expect(
         markdownSerializer.serialize(doc(pre('foo'))(defaultSchema)),
-      ).toEqual('    foo');
+      ).toEqual('```\nfoo\n```');
     });
 
     it('with newlines preserves newlines in markdown', () => {
       expect(
         markdownSerializer.serialize(doc(pre('foo\nbar'))(defaultSchema)),
-      ).toEqual('    foo\n    bar');
+      ).toEqual('```\nfoo\nbar\n```');
     });
 
     it('with adjacent code block keeps empty space between', () => {
@@ -194,7 +194,15 @@ describe('BitbucketTransformer: serializer', () => {
         markdownSerializer.serialize(
           doc(pre('foo'), pre('bar'))(defaultSchema),
         ),
-      ).toEqual('    foo\n\n    bar');
+      ).toEqual('```\nfoo\n```\n\n```\nbar\n```');
+    });
+
+    it('after a list should not disappear', () => {
+      expect(
+        markdownSerializer.serialize(
+          doc(ul(li(p('para'))), pre('hello'))(defaultSchema),
+        ),
+      ).toEqual('* para\n\n```\nhello\n```');
     });
 
     it('with attributes uses backtick notation and preserves attributes', () => {
@@ -210,15 +218,11 @@ describe('BitbucketTransformer: serializer', () => {
 
     it('with no text is preserved', () => {
       expect(markdownSerializer.serialize(doc(pre(''))(defaultSchema))).toEqual(
-        '    \u200c',
+        '```\n\u200c\n```',
       );
 
       expect(markdownSerializer.serialize(doc(pre())(defaultSchema))).toEqual(
-        '    \u200c',
-      );
-
-      expect(markdownSerializer.serialize(doc(pre())(defaultSchema))).toEqual(
-        '    \u200c',
+        '```\n\u200c\n```',
       );
     });
 
@@ -227,7 +231,7 @@ describe('BitbucketTransformer: serializer', () => {
         markdownSerializer.serialize(
           doc(pre('`foo`\n````bar\nbaz\n`````'))(defaultSchema),
         ),
-      ).toEqual('    `foo`\n    ````bar\n    baz\n    `````');
+      ).toEqual('``````\n`foo`\n````bar\nbaz\n`````\n``````');
     });
 
     it('via backticks that includes backticks is properly fenced', () => {

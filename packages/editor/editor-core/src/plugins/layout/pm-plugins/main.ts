@@ -9,7 +9,7 @@ import { DecorationSet, Decoration } from 'prosemirror-view';
 import { keydownHandler } from 'prosemirror-keymap';
 import { findParentNodeOfType } from 'prosemirror-utils';
 import { filter } from '../../../utils/commands';
-import { Command } from '../../../commands';
+import { Command } from '../../../types';
 import { fixColumnSizes } from '../actions';
 
 export type LayoutState = {
@@ -45,7 +45,10 @@ const moveCursorToNextColumn: Command = (state, dispatch) => {
   if (column.node !== section.node.lastChild) {
     const $nextColumn = state.doc.resolve(column.pos + column.node.nodeSize);
     const shiftedSelection = TextSelection.findFrom($nextColumn, 1);
-    dispatch(state.tr.setSelection(shiftedSelection as TextSelection));
+
+    if (dispatch) {
+      dispatch(state.tr.setSelection(shiftedSelection as TextSelection));
+    }
   }
   return true;
 };

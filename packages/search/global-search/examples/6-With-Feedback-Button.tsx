@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { withFeedbackButton } from '../src/index';
-import { GlobalQuickSearch } from '../src';
+import { GlobalQuickSearch, Props } from '../src';
 import withNavigation from '../example-helpers/withNavigation';
 
 const GlobalQuickSearchWithFeedbackInNavigation = withNavigation(
-  withFeedbackButton(GlobalQuickSearch),
+  // @ts-ignore
+  withFeedbackButton<Props>(GlobalQuickSearch),
 );
 
 // nothing is working except for the feedback button

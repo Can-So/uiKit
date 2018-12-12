@@ -1,3 +1,4 @@
+import * as uuid from 'uuid';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import {
@@ -219,29 +220,42 @@ describe('Context', () => {
     });
   });
 
-  describe('.file.getFile()', () => {
+  describe('.file.getFileState()', () => {
+    const id = uuid.v4();
+
     it('should fetch the file if it doesnt exist locally', done => {
       const context = createContext();
-      const getFile = jest.fn().mockReturnValue({
+      const response = Promise.resolve({
         data: {
-          processingStatus: 'succeeded',
-          id: '1',
-          name: 'file-one',
-          size: 1,
-          fooo: 'bar',
+          items: [
+            {
+              id,
+              collection: 'some-collection',
+              details: {
+                name: 'file-one',
+                size: 1,
+                processingStatus: 'succeeded',
+              },
+            },
+          ],
         },
       });
+      const getItems = jest.fn().mockReturnValue(response);
       const fakeStore = {
-        getFile,
+        getItems,
       };
       (context as any).mediaStore = fakeStore;
       (context.file as any).mediaStore = fakeStore;
-      const observer = context.file.getFileState('1');
+      const observer = context.file.getFileState(id, {
+        collectionName: 'some-collection',
+      });
 
       observer.subscribe({
         next(state) {
+          expect(getItems).toHaveBeenCalledTimes(1);
+          expect(getItems).lastCalledWith([id], 'some-collection');
           expect(state).toEqual({
-            id: '1',
+            id,
             status: 'processed',
             name: 'file-one',
             size: 1,
@@ -250,61 +264,61 @@ describe('Context', () => {
           done();
         },
       });
-
-      expect(getFile).toHaveBeenCalledTimes(1);
-      expect(getFile).lastCalledWith('1', { collection: undefined });
     });
 
     it('should poll for changes and return the latest file state', done => {
-      jest.useFakeTimers();
-
       const context = createContext();
       let getFileCalledTimes = 0;
-      const getFile = jest.fn().mockImplementation(() => {
+      const getItems = jest.fn().mockImplementation(() => {
         getFileCalledTimes++;
         const processingStatus =
           getFileCalledTimes === 2 ? 'succeeded' : 'pending';
 
-        return {
+        return Promise.resolve({
           data: {
-            processingStatus,
-            id: '1',
-            name: 'file-one',
-            size: 1,
+            items: [
+              {
+                id,
+                details: {
+                  name: 'file-one',
+                  size: 1,
+                  processingStatus,
+                },
+              },
+            ],
           },
-        };
+        });
       });
-      const fakeStore = { getFile };
+      const fakeStore = {
+        getItems,
+      };
       (context as any).mediaStore = fakeStore;
       (context.file as any).mediaStore = fakeStore;
 
-      const observer = context.file.getFileState('123');
+      const observer = context.file.getFileState(id);
       const next = jest.fn();
-
       observer.subscribe({
         next,
         complete() {
-          expect(getFile).toHaveBeenCalledTimes(2);
+          expect(getItems).toHaveBeenCalledTimes(2);
           expect(next).toHaveBeenCalledTimes(2);
           expect(next.mock.calls[0][0].status).toEqual('processing');
           expect(next.mock.calls[1][0].status).toEqual('processed');
           done();
         },
       });
-
-      process.nextTick(jest.runAllTimers);
     });
 
     it('should pass options down', () => {
       const context = createContext();
 
-      context.file.getFileState('1', {
+      context.file.getFileState(id, {
         collectionName: 'my-collection',
         occurrenceKey: 'some-occurrenceKey',
       });
 
       expect(getOrInsertSpy).toHaveBeenLastCalledWith(
-        '1-my-collection-some-occurrenceKey',
+        `${id}-my-collection-some-occurrenceKey`,
         expect.anything(),
       );
     });
@@ -321,7 +335,7 @@ describe('Context', () => {
       };
       (context as any).mediaStore = { getFile };
       uploadFileMock.mockImplementation((_, __, callbacks) => {
-        callbacks.onId('1');
+        callbacks.onId(id);
         return { deferredFileId };
       });
 

@@ -109,12 +109,13 @@ class StatusNodeView extends React.Component<Props & InjectedIntlProps, State> {
     const statusText = text ? text : formatMessage(messages.placeholder);
 
     return (
-      <StatusContainer
-        onClick={this.handleClick}
-        selected={selected}
-        placeholderStyle={!text}
-      >
-        <Status text={statusText} color={color} localId={localId} />
+      <StatusContainer selected={selected} placeholderStyle={!text}>
+        <Status
+          text={statusText}
+          color={color}
+          localId={localId}
+          onClick={this.handleClick}
+        />
       </StatusContainer>
     );
   }
