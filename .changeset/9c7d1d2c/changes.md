@@ -1,1 +1,0 @@
-- FS-3161 user-picker analytics

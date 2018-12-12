@@ -1,5 +1,13 @@
 # @atlaskit/analytics-viewer
 
+## 0.1.5
+- [patch] [7a58afe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a58afe):
+
+  - Show values even if they are falsy
+- [patch] [e506159](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e506159):
+
+  - FS-3161 user-picker analytics
+
 ## 0.1.4
 - [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
 

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/user-picker",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "config": {
     "access": "public"
   },
@@ -45,7 +45,7 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@atlaskit/analytics-viewer": "^0.1.2",
+    "@atlaskit/analytics-viewer": "^0.1.5",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/section-message": "^1.0.14",
