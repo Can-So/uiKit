@@ -280,3 +280,4 @@ export default class PickerFacade {
     this.onDragListeners.forEach(cb => cb.call(cb, 'leave'));
   };
 }
+// forcing tests
