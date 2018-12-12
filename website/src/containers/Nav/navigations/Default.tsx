@@ -60,6 +60,6 @@ export type DefaultNavProps = {
   pathname: string;
 };
 
-export default function DefaultNav({ pathname }: DefaultNavProps) {
-  return <div>{renderNav(defaultNavGroups, { pathname })}</div>;
+export default function DefaultNav({ pathname, onClick }: DefaultNavProps) {
+  return <div>{renderNav(defaultNavGroups, { pathname, onClick })}</div>;
 }
