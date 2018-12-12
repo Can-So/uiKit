@@ -1,6 +1,6 @@
 import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
-import Select, { createFilter } from '@atlaskit/select';
+import Select from '@atlaskit/select';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -12,6 +12,7 @@ import {
   EventCreator,
   failedEvent,
   focusEvent,
+  searchedEvent,
   selectEvent,
   startSession,
   UserPickerSession,
@@ -34,8 +35,6 @@ import {
   isSingleValue,
   usersToOptions,
 } from './utils';
-
-const defaultFilter = createFilter();
 
 export const UserPicker = withAnalyticsEvents()(
   class extends React.Component<
@@ -86,7 +85,6 @@ export const UserPicker = withAnalyticsEvents()(
       super(props);
       this.state = {
         users: [],
-        resultVersion: 0,
         inflightRequest: 0,
         count: 0,
         hoveringClearIndicator: false,
@@ -149,16 +147,15 @@ export const UserPicker = withAnalyticsEvents()(
 
     private addUsers = batchByKey(
       (request: string, newUsers: (User | User[])[]) => {
-        this.setState(({ inflightRequest, users, resultVersion, count }) => {
+        this.setState(({ inflightRequest, users, count }) => {
           if (inflightRequest.toString() === request) {
             return {
-              users: (resultVersion === inflightRequest ? users : []).concat(
+              users: users.concat(
                 newUsers.reduce<User[]>(
                   (nextUsers, item) => nextUsers.concat(item[0]),
                   [],
                 ),
               ),
-              resultVersion: inflightRequest,
               count: count - newUsers.length,
             };
           }
@@ -167,7 +164,7 @@ export const UserPicker = withAnalyticsEvents()(
       },
     );
 
-    private fireFailedAnalyticsEvent = () => {
+    private handleLoadOptionsError = () => {
       this.fireEvent(failedEvent);
     };
 
@@ -183,18 +180,19 @@ export const UserPicker = withAnalyticsEvents()(
             for (const value of result) {
               Promise.resolve(value)
                 .then(addUsers)
-                .catch(this.fireFailedAnalyticsEvent);
+                .catch(this.handleLoadOptionsError);
               count++;
             }
           } else {
             Promise.resolve(result)
               .then(addUsers)
-              .catch(this.fireFailedAnalyticsEvent);
+              .catch(this.handleLoadOptionsError);
             count++;
           }
           return {
             inflightRequest,
             count,
+            users: [],
           };
         });
       }
@@ -227,11 +225,7 @@ export const UserPicker = withAnalyticsEvents()(
       search: string,
       { action }: { action: InputActionTypes },
     ) => {
-      const { onInputChange } = this.props;
       if (action === 'input-change') {
-        if (onInputChange) {
-          onInputChange(search);
-        }
         this.setState({ inputValue: search, preventFilter: false });
 
         this.executeLoadOptions(search);
@@ -253,15 +247,31 @@ export const UserPicker = withAnalyticsEvents()(
     };
 
     componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
+      const { menuIsOpen, users } = this.state;
       // load options when the picker open
-      if (this.state.menuIsOpen && !prevState.menuIsOpen) {
-        this.executeLoadOptions();
+      if (menuIsOpen && !prevState.menuIsOpen) {
         this.startSession();
+        this.executeLoadOptions();
       }
 
-      if (!this.state.menuIsOpen && prevState.menuIsOpen && this.session) {
-        this.fireEvent(cancelEvent);
+      if (!menuIsOpen && prevState.menuIsOpen && this.session) {
+        this.fireEvent(cancelEvent, prevState);
         this.session = undefined;
+      }
+
+      if (
+        menuIsOpen &&
+        ((!prevState.menuIsOpen && users.length > 0) ||
+          users !== prevState.users)
+      ) {
+        this.fireEvent(searchedEvent);
+      }
+
+      if (
+        !this.state.preventFilter &&
+        this.state.inputValue !== prevState.inputValue
+      ) {
+        callCallback(this.props.onInputChange, this.state.inputValue);
       }
     }
 
@@ -298,9 +308,6 @@ export const UserPicker = withAnalyticsEvents()(
 
     private configureNoOptionsMessage = (): string | undefined =>
       this.props.noOptionsMessage;
-
-    private filterOption = (option, search: string) =>
-      this.state.preventFilter || defaultFilter(option, search);
 
     private getOptions = (): User[] => getOptions(this.state.users) || [];
 
@@ -357,7 +364,7 @@ export const UserPicker = withAnalyticsEvents()(
           isDisabled={isDisabled}
           isFocused={menuIsOpen}
           backspaceRemovesValue={isMulti}
-          filterOption={this.filterOption}
+          filterOption={null} // disable local filtering
           clearValueLabel={clearValueLabel}
         />
       );

@@ -76,10 +76,12 @@ export const focusEvent: EventCreator = (props, state, session) =>
     pickerType: pickerType(props),
   });
 
-export const clearEvent: EventCreator = (props, state) =>
+export const clearEvent: EventCreator = (props, state, session) =>
   createEvent('ui', 'cleared', 'userPicker', {
     pickerType: pickerType(props),
     pickerOpen: state.menuIsOpen,
+    sessionId: sessionId(session),
+    values: values(state),
   });
 
 export const deleteEvent: EventCreator = (props, state, session, ...args) =>
@@ -89,12 +91,12 @@ export const deleteEvent: EventCreator = (props, state, session, ...args) =>
     pickerOpen: state.menuIsOpen,
   });
 
-export const cancelEvent: EventCreator = (props, state, session) =>
+export const cancelEvent: EventCreator = (props, state, session, ...args) =>
   createEvent('ui', 'cancelled', 'userPicker', {
     sessionId: sessionId(session),
     duration: duration(session),
-    queryLength: queryLength(state),
-    spaceInQuery: spaceInQuery(state),
+    queryLength: queryLength(args[0]),
+    spaceInQuery: spaceInQuery(args[0]),
     upKeyCount: upKeyCount(session),
     downKeyCount: downKeyCount(session),
     pickerType: pickerType(props),
@@ -113,8 +115,21 @@ export const selectEvent: EventCreator = (props, state, session, ...args) =>
     result: result(args[0]),
   });
 
-export const failedEvent: EventCreator = () =>
-  createEvent('operational', 'failed', 'userPicker');
+export const searchedEvent: EventCreator = (props, state, session) =>
+  createEvent('operational', 'searched', 'userPicker', {
+    sessionId: sessionId(session),
+    duration: duration(session),
+    queryLength: queryLength(state),
+    isLoading: isLoading(props, state),
+    results: results(state),
+    pickerType: pickerType(props),
+  });
+
+export const failedEvent: EventCreator = (props, state, session) =>
+  createEvent('operational', 'failed', 'userPicker', {
+    pickerType: pickerType(props),
+    sessionId: sessionId(session),
+  });
 
 function queryLength(state: UserPickerState) {
   return state.preventFilter ? 0 : state.inputValue.length;
@@ -154,4 +169,20 @@ function pickerType(props: UserPickerProps) {
 
 function result(value?: { user: User }) {
   return value ? { id: value.user.id } : null;
+}
+
+function results(state: UserPickerState) {
+  return (state.users || []).map(({ id }) => ({ id }));
+}
+
+function isLoading(props: UserPickerProps, state: UserPickerState) {
+  return state.count > 0 || props.isLoading;
+}
+
+function values(state: UserPickerState) {
+  return state.value
+    ? Array.isArray(state.value)
+      ? state.value.map(userOption => userOption.user.id)
+      : [state.value.user.id]
+    : [];
 }

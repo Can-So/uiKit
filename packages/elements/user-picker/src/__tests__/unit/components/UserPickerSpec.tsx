@@ -579,6 +579,8 @@ describe('UserPicker', () => {
             attributes: {
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
+              sessionId: expect.any(String),
+              values: [],
               pickerType: 'single',
               pickerOpen: true,
             },
@@ -621,22 +623,104 @@ describe('UserPicker', () => {
       });
       const input = component.find('input');
       input.simulate('focus');
-      return Promise.resolve(() => {
-        expect(onEvent).toHaveBeenCalledWith(
-          expect.objectContaining({
-            payload: expect.objectContaining({
-              action: 'failed',
-              actionSubject: 'userPickerItem',
-              eventType: 'operational',
-              attributes: {
-                packageName: '@atlaskit/user-picker',
-                packageVersion: expect.any(String),
-                type: 'single',
-              },
+      onEvent.mockClear();
+      return Promise.resolve()
+        .then()
+        .then(() => {
+          expect(onEvent).toHaveBeenCalledWith(
+            expect.objectContaining({
+              payload: expect.objectContaining({
+                action: 'failed',
+                actionSubject: 'userPicker',
+                eventType: 'operational',
+                attributes: {
+                  packageName: '@atlaskit/user-picker',
+                  packageVersion: expect.any(String),
+                  pickerType: 'single',
+                  sessionId: expect.any(String),
+                },
+              }),
             }),
-          }),
-          'fabric-elements',
-        );
+            'fabric-elements',
+          );
+        });
+    });
+
+    describe('searched event', () => {
+      it('should fire when opening menu with options', () => {
+        component.setProps({
+          open: true,
+          users,
+        });
+        return Promise.resolve().then(() => {
+          expect(onEvent).toHaveBeenCalledTimes(2);
+          expect(onEvent).toHaveBeenCalledWith(
+            expect.objectContaining({
+              payload: expect.objectContaining({
+                action: 'searched',
+                actionSubject: 'userPicker',
+                eventType: 'operational',
+                attributes: expect.objectContaining({
+                  packageVersion: expect.any(String),
+                  packageName: '@atlaskit/user-picker',
+                  sessionId: expect.any(String),
+                  duration: expect.any(Number),
+                  queryLength: 0,
+                  results: [{ id: 'abc-123' }, { id: '123-abc' }],
+                  pickerType: 'single',
+                }),
+              }),
+            }),
+            'fabric-elements',
+          );
+        });
+      });
+
+      it('should not fire searched if the menu is not open', () => {
+        component.setProps({
+          users: [users[0]],
+        });
+        component.update();
+
+        return Promise.resolve().then(() => {
+          expect(onEvent).not.toHaveBeenCalled();
+        });
+      });
+
+      it('should fire searched when users change', () => {
+        component.setProps({
+          open: true,
+          users,
+        });
+
+        onEvent.mockClear();
+
+        component.setProps({
+          users: [users[0]],
+        });
+
+        return Promise.resolve().then(() => {
+          expect(onEvent).toHaveBeenCalledTimes(1);
+          expect(onEvent).toHaveBeenCalledWith(
+            expect.objectContaining({
+              payload: expect.objectContaining({
+                action: 'searched',
+                actionSubject: 'userPicker',
+                eventType: 'operational',
+                attributes: expect.objectContaining({
+                  packageVersion: expect.any(String),
+                  packageName: '@atlaskit/user-picker',
+                  sessionId: expect.any(String),
+                  duration: expect.any(Number),
+                  queryLength: 0,
+                  results: [{ id: 'abc-123' }],
+                  pickerType: 'single',
+                }),
+              }),
+            }),
+            'fabric-elements',
+          );
+        });
       });
     });
   });
