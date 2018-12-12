@@ -1,6 +1,7 @@
 // Norwegian Bokmål
 export default {
-  'fabric.elements.user-picker.placeholder': 'Find a person...',
-  'fabric.elements.user-picker.multi.remove-item': 'Remove',
-  'fabric.elements.user-picker.single.clear': 'Clear',
+  'fabric.elements.user-picker.placeholder': 'Finn en person …',
+  'fabric.elements.user-picker.placeholder.add-more': 'Legg til flere personer',
+  'fabric.elements.user-picker.multi.remove-item': 'Fjern',
+  'fabric.elements.user-picker.single.clear': 'Tøm',
 };
