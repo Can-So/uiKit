@@ -1,5 +1,10 @@
 # @atlaskit/icon
 
+## 15.0.3
+- [patch] [1d1f6d1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d1f6d1):
+
+  - Make icon glyphs not import metadata
+
 ## 15.0.2
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/button@10.1.1

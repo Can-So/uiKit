@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/icon-file-type",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A React package that contains file-type icons",
   "license": "SEE LICENSE IN LICENSE",
   "main": "cjs/index.js",

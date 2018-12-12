@@ -1,8 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/icon-file-type", "type": "patch" },
-    { "name": "@atlaskit/icon-object", "type": "patch" },
-    { "name": "@atlaskit/icon", "type": "patch" }
-  ],
-  "dependents": []
-}
