@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SortableItem should not trigger onClick if the item is dragged 1`] = `
-<ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Item)))
+<WithAnalyticsContext(WithAnalyticsEvents(Item))
   draggableProps={
     Object {
       "anotherProp": "bar",
@@ -18,7 +18,7 @@ exports[`SortableItem should not trigger onClick if the item is dragged 1`] = `
 `;
 
 exports[`SortableItem should render an Item component 1`] = `
-<ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(Item)))
+<WithAnalyticsContext(WithAnalyticsEvents(Item))
   draggableProps={
     Object {
       "anotherProp": "bar",
@@ -59,6 +59,6 @@ exports[`SortableItem should wrap Item with a Draggable component 1`] = `
   draggableId="my-item"
   index={0}
 >
-  <unknown />
+  <Component />
 </MockDraggable>
 `;
