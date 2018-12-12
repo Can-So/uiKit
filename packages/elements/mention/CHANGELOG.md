@@ -1,5 +1,10 @@
 # @atlaskit/mention
 
+## 15.2.0
+- [minor] [f62557c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f62557c):
+
+  - ED-5888 Add dark mode for mention
+
 ## 15.1.9
 - [patch] [b81da9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b81da9b):
 

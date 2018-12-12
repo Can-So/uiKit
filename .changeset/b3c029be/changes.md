@@ -1,1 +1,0 @@
-- ED-5888 Add dark mode for mention
