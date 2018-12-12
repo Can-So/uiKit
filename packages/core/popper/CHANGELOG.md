@@ -1,5 +1,13 @@
 # @atlaskit/popper
 
+## 0.3.7
+- [patch] [efc35d1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/efc35d1):
+
+  - Internal changes:
+  	- Adding react-dom and build utils as dev dependencies
+  	- Adding unit test for server side rendering use-case
+  	- Adding unit test to cover Popper component
+
 ## 0.3.6
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/button@10.1.1

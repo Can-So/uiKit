@@ -30,7 +30,6 @@ export type UserPickerProps = {
 export type UserPickerState = {
   users: User[];
   value?: UserOption[] | UserOption;
-  resultVersion: number;
   inflightRequest: number;
   count: number;
   hoveringClearIndicator: boolean;

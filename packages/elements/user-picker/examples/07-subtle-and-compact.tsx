@@ -1,16 +1,21 @@
 import * as React from 'react';
-import { exampleUsers } from '../example-helpers';
+import { ExampleWrapper } from '../example-helpers/ExampleWrapper';
 import { UserPicker } from '../src/components/UserPicker';
 
 export default class Example extends React.Component<{}> {
   render() {
     return (
-      <UserPicker
-        users={exampleUsers}
-        onChange={console.log}
-        subtle
-        appearance="compact"
-      />
+      <ExampleWrapper>
+        {({ users, onInputChange }) => (
+          <UserPicker
+            users={users}
+            onChange={console.log}
+            onInputChange={onInputChange}
+            subtle
+            appearance="compact"
+          />
+        )}
+      </ExampleWrapper>
     );
   }
 }

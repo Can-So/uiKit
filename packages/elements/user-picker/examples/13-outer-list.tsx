@@ -3,7 +3,7 @@ import Button from '@atlaskit/button';
 import SelectClearIcon from '@atlaskit/icon/glyph/select-clear';
 import * as React from 'react';
 import styled from 'styled-components';
-import { exampleUsers } from '../example-helpers';
+import { ExampleWrapper } from '../example-helpers/ExampleWrapper';
 import { User } from '../src';
 import { UserPicker } from '../src/components/UserPicker';
 
@@ -74,20 +74,25 @@ export default class Example extends React.PureComponent<{}, State> {
   render() {
     const { value } = this.state;
     return (
-      <div>
-        {value.map(user => (
-          <UserValue
-            key={user.id}
-            user={user}
-            onRemove={this.handleRemoveUser}
-          />
-        ))}
-        <UserPicker
-          users={exampleUsers.filter(user => value.indexOf(user) === -1)}
-          value={null}
-          onChange={this.handleOnChange}
-        />
-      </div>
+      <ExampleWrapper>
+        {({ users, onInputChange }) => (
+          <div>
+            {value.map(user => (
+              <UserValue
+                key={user.id}
+                user={user}
+                onRemove={this.handleRemoveUser}
+              />
+            ))}
+            <UserPicker
+              users={users.filter(user => value.indexOf(user) === -1)}
+              value={null}
+              onChange={this.handleOnChange}
+              onInputChange={onInputChange}
+            />
+          </div>
+        )}
+      </ExampleWrapper>
     );
   }
 }

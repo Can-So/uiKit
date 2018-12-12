@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 22.4.1
+- [patch] [a2ea6a7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2ea6a7):
+
+  - Use indexOf instead of bespoke/custom findIndex
+
 ## 22.4.0
 - [minor] [e06b553](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e06b553):
 
