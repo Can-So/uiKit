@@ -132,9 +132,9 @@ export function createPlugin(
       },
 
       decorations(state) {
-        let pluginState = pluginKey.getState(state);
-        if (pluginState.activeHandle > -1) {
-          return handleDecorations(state, pluginState.activeHandle);
+        const { activeHandle } = pluginKey.getState(state);
+        if (typeof activeHandle === 'number' && activeHandle > -1) {
+          return handleDecorations(state, activeHandle);
         }
       },
 
@@ -173,7 +173,7 @@ export class ResizeState {
     if (this.activeHandle > -1 && tr.docChanged) {
       let handle = tr.mapping.map(this.activeHandle, -1);
       if (!pointsAtCell(tr.doc.resolve(handle))) {
-        handle = null;
+        handle = -1;
       }
 
       return new ResizeState(handle, this.dragging);
@@ -199,7 +199,7 @@ function handleMouseMove(view, event, handleWidth, lastColumnResizable) {
       }
     }
 
-    if (cell !== pluginState.activeHandle) {
+    if (typeof cell === 'number' && cell !== pluginState.activeHandle) {
       if (!lastColumnResizable && cell !== -1) {
         let $cell = view.state.doc.resolve(cell);
         let table = $cell.node(-1);
