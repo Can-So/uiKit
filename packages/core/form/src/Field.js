@@ -69,7 +69,6 @@ type State = {
   value: any,
   error: any,
   submitError: any,
-  registered: boolean,
 };
 
 const shallowEqual = (a, b) =>
@@ -94,11 +93,13 @@ class FieldInner extends React.Component<Props, State> {
     onFocus: () => {},
     dirty: false,
     touched: false,
-    valid: true,
-    value: undefined,
+    valid: false,
+    value:
+      typeof this.props.defaultValue === 'function'
+        ? this.props.defaultValue()
+        : this.props.defaultValue,
     error: undefined,
     submitError: undefined,
-    registered: false,
   };
 
   register = () => {
@@ -118,7 +119,6 @@ class FieldInner extends React.Component<Props, State> {
         submitError,
       }) => {
         this.setState({
-          registered: true,
           onChange: change,
           onBlur: blur,
           onFocus: focus,
@@ -172,14 +172,7 @@ class FieldInner extends React.Component<Props, State> {
       name,
       transform,
     } = this.props;
-    const {
-      registered,
-      onChange,
-      onBlur,
-      onFocus,
-      value,
-      ...rest
-    } = this.state;
+    const { onChange, onBlur, onFocus, value, ...rest } = this.state;
     const error =
       rest.submitError || ((rest.touched || rest.dirty) && rest.error);
     const labelId = `${this.fieldId}-label`;
@@ -211,7 +204,7 @@ class FieldInner extends React.Component<Props, State> {
             )}
           </Label>
         )}
-        {registered && children({ fieldProps, error, meta: rest })}
+        {children({ fieldProps, error, meta: rest })}
       </FieldWrapper>
     );
   }

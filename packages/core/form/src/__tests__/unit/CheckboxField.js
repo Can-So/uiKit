@@ -2,7 +2,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
-import Checkbox from '@atlaskit/textfield';
+import { Checkbox } from '@atlaskit/checkbox';
 import Form, { CheckboxField } from '../../../src';
 
 test('should default to false value', () => {
