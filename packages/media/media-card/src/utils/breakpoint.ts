@@ -84,7 +84,7 @@ export const breakpointStyles = ({ breakpointSize }: BreakpointProps) => {
         .file-size {
           font-size: 14px;
         }
-
+        
         .wrapper, .img-wrapper {
           border-radius: 2px;
         }
