@@ -213,6 +213,7 @@ export class FileFetcher {
     const {
       content,
       name = '', // name property is not available in base64 image
+      collection,
     } = file;
 
     if (!uploadableFileUpfrontIds) {
@@ -277,7 +278,12 @@ export class FileFetcher {
     );
 
     // We should report progress asynchronously, since this is what consumer expects
-    setTimeout(() => onProgress(0), 0);
+    // (otherwise in newUploadService file-converting event will be emitted before files-added)
+    setTimeout(() => {
+      const key = FileStreamCache.createKey(id, { collectionName: collection });
+      fileStreamsCache.set(key, subject);
+      onProgress(0);
+    }, 0);
 
     if (controller) {
       controller.setAbort(cancel);
