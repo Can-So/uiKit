@@ -1,0 +1,1 @@
+- Fix extension delete when media is selected

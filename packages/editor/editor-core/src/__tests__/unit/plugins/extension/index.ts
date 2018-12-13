@@ -11,7 +11,10 @@ import {
   bodiedExtensionData,
   sleep,
   h5,
+  media,
+  mediaSingle,
   underline,
+  randomId,
 } from '@atlaskit/editor-test-helpers';
 import { NodeSelection } from 'prosemirror-state';
 import {
@@ -22,18 +25,24 @@ import {
 import { pluginKey } from '../../../../plugins/extension/plugin';
 import extensionPlugin from '../../../../plugins/extension';
 import { findParentNodeOfType } from 'prosemirror-utils';
+import { setNodeSelection } from '../../../../utils';
+import { mediaPlugin } from '../../../../plugins';
 
 const macroProviderPromise = Promise.resolve(macroProvider);
+
+const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
+const temporaryFileId = `temporary:${randomId()}`;
 
 describe('extension', () => {
   const editor = (doc: any) => {
     return createEditor({
       doc,
-      editorPlugins: [extensionPlugin],
+      editorPlugins: [extensionPlugin, mediaPlugin({ allowMediaSingle: true })],
       editorProps: {
         allowExtension: {
           allowBreakout: true,
         },
+        media: { allowMediaSingle: true },
       },
     });
   };
@@ -208,6 +217,34 @@ describe('extension', () => {
         expect(pluginState.element).toEqual(null);
         expect(editorView.state.doc).toEqualDocument(doc(paragraph('')));
       });
+    });
+
+    it('should remove the extension node even if other nodes like media is selected', () => {
+      const { editorView } = editor(
+        doc(
+          bodiedExtension(extensionAttrs)(
+            mediaSingle({ layout: 'center' })(
+              media({
+                id: temporaryFileId,
+                __key: temporaryFileId,
+                type: 'file',
+                collection: testCollectionName,
+                __fileMimeType: 'image/png',
+              })(),
+            ),
+          ),
+        ),
+      );
+
+      setNodeSelection(editorView, 2);
+
+      expect(removeExtension()(editorView.state, editorView.dispatch)).toBe(
+        true,
+      );
+
+      const pluginState = pluginKey.getState(editorView.state);
+      expect(pluginState.element).toEqual(null);
+      expect(editorView.state.doc).toEqualDocument(doc(paragraph('')));
     });
   });
 
