@@ -5,7 +5,7 @@ import createRequest, {
 } from './util/createRequest';
 import { MediaItem } from '../';
 
-export type ImageResizeMode = 'crop' | 'fit' | 'full-fit';
+export type ImageResizeMode = 'crop' | 'fit' | 'full-fit' | 'stretchy-fit';
 
 export interface FetchImageOptions {
   width: number;
