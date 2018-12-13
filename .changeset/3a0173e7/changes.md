@@ -1,1 +1,0 @@
-- Pass uploadParams to createStore when initializing MediaPicker popup. This fixes an issue when calling /copy/withToken endpoint
