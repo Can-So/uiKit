@@ -16,7 +16,7 @@ export default {
     'Nebo použijte <a href={url}>pokročilé vyhledávání</a> (Shift + Enter) a zaměřte se na konkrétní výsledky.',
   'global_search.no_results_title': 'Žádné výsledky v názvech či lidech',
   'global_search.no_results_body':
-    'Try again with a different term, or refine your results with our advanced search.',
+    'Zkuste hledat jiný termín nebo své výsledky upřesněte pokročilým vyhledáváním.',
   'global_search.people.recent_people_heading':
     'Nedávná spolupráce s uživateli',
   'global_search.people.people_heading': 'Lidé',
@@ -28,12 +28,12 @@ export default {
   'global_search.jira.search_placeholder': 'Vyhledávat v Jira',
   'global_search.jira.recent_issues_heading': 'Nedávné požadavky',
   'global_search.jira.recent_people_heading': 'Nedávná spolupráce s uživateli',
-  'global_search.jira.recent_containers': 'Recent boards, projects and filters',
+  'global_search.jira.recent_containers': 'Nedávné boardy, filtry a projekty',
   'global_search.jira.search_result_issues_heading': 'Požadavky',
   'global_search.jira.search_result_containers_heading':
-    'Boards, projects and filters',
+    'Boardy, filtry a projekty',
   'global_search.jira.search_result_people_heading': 'Lidé',
-  'global_search.jira.advanced_search': 'Advanced search for',
+  'global_search.jira.advanced_search': 'Pokročilé vyhledávání',
   'global_search.jira.advanced_search_issues': 'požadavky',
   'global_search.jira.advanced_search_projects': 'projekty',
   'global_search.jira.advanced_search_boards': 'boardy',
@@ -41,16 +41,16 @@ export default {
   'global_search.jira.advanced_search_people': 'lidé',
   'global_search.jira.advanced_issue_search': 'Pokročilé vyhledávání požadavků',
   'global_search.jira.no_results_title':
-    "We couldn't find anything matching your search",
+    'Vašemu vyhledávání neodpovídají žádné výsledky.',
   'global_search.jira.no_results_body':
-    'Try again with a different term, or refine your results with our advanced search.',
+    'Zkuste hledat jiný termín nebo své výsledky upřesněte pokročilým vyhledáváním.',
   'global_search.jira.no_recent_activity_body':
     'Nebo své výsledky upřesněte pokročilým vyhledáváním.',
-  'global_search.jira.project_type.business_project': 'Business Project',
-  'global_search.jira.project_type.software_project': 'Software Project',
+  'global_search.jira.project_type.business_project': 'Obchodní projekt',
+  'global_search.jira.project_type.software_project': 'Softwarový projekt',
   'global_search.jira.project_type.service_desk_project':
-    'Service Desk Project',
-  'global_search.jira.project_type.ops_project': 'Ops Project',
+    'Projekt Service Desk',
+  'global_search.jira.project_type.ops_project': 'Projekt operací',
   'global_search.jira.result_type.board': 'Board',
-  'global_search.jira.result_type.filter': 'Filter',
+  'global_search.jira.result_type.filter': 'Filtr',
 };

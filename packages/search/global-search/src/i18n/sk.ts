@@ -16,7 +16,7 @@ export default {
     'Alebo použite <a href={url}>rozšírené vyhľadávanie</a> (shift + enter`), aby ste upresnili výsledky.',
   'global_search.no_results_title': 'Žiadne výsledky v názvoch alebo ľuďoch',
   'global_search.no_results_body':
-    'Try again with a different term, or refine your results with our advanced search.',
+    'Skúste to znova s iným pojmom alebo upresnite výsledky pomocou rozšíreného vyhľadávania.',
   'global_search.people.recent_people_heading': 'Posledná spolupráca',
   'global_search.people.people_heading': 'Ľudia',
   'global_search.people.advanced_search': 'Vyhľadať ľudí',
