@@ -27,7 +27,7 @@ function validate(value) {
   return undefined;
 }
 
-export default class extends Component<Props, State> {
+export default class extends Component<Props> {
   formRef: FormRef;
 
   handleRef = (ref: ElementRef<*>) => {
