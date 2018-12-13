@@ -1,1 +1,0 @@
-- ED-5866: Fixes incorrect return from Mocked Emoji provider.
