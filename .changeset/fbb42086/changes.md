@@ -1,1 +1,0 @@
-- remove tenant property from MediaPicker + make show() faster
