@@ -41,7 +41,6 @@ type RenderContentNavigationArgs = {
 };
 type State = {
   flyoutIsOpen: boolean,
-  mouseIsOverNavigation: boolean,
   itemIsDragging: boolean,
 };
 
@@ -66,6 +65,7 @@ export default class LayoutManager extends Component<
   pageRef: HTMLElement;
   containerRef: HTMLElement;
   flyoutMouseOverTimeout: TimeoutID;
+  mouseIsOverNavigation: boolean;
 
   static defaultProps = {
     collapseToggleTooltipContent: defaultTooltipContent,
@@ -127,15 +127,17 @@ export default class LayoutManager extends Component<
   closeFlyout = (e: SyntheticMouseEvent<>) => {
     e.stopPropagation();
     clearTimeout(this.flyoutMouseOverTimeout);
-    this.setState({ flyoutIsOpen: false });
+    if (this.state.flyoutIsOpen) {
+      this.setState({ flyoutIsOpen: false });
+    }
   };
 
   mouseEnter = () => {
-    this.setState({ mouseIsOverNavigation: true });
+    this.mouseIsOverNavigation = true;
   };
   mouseLeave = () => {
     clearTimeout(this.flyoutMouseOverTimeout);
-    this.setState({ mouseIsOverNavigation: false });
+    this.mouseIsOverNavigation = false;
   };
 
   onItemDragStart = () => {
@@ -236,7 +238,8 @@ export default class LayoutManager extends Component<
       experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
       collapseToggleTooltipContent,
     } = this.props;
-    const { flyoutIsOpen, mouseIsOverNavigation, itemIsDragging } = this.state;
+    const { flyoutIsOpen, itemIsDragging } = this.state;
+    const { mouseIsOverNavigation } = this;
     const {
       isCollapsed,
       isResizeDisabled,
