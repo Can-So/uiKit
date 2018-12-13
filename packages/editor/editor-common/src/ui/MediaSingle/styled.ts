@@ -5,9 +5,8 @@ import { MediaSingleLayout } from '../../schema';
 import {
   akEditorWideLayoutWidth,
   akEditorFullPageMaxWidth,
-  akEditorBreakoutPadding,
 } from '../../styles';
-import { calcWideWidth } from '../../utils';
+import { calcWideWidth, calcBreakoutWidth } from '../../utils';
 
 function float(layout: MediaSingleLayout): string {
   switch (layout) {
@@ -41,7 +40,7 @@ function calcLegacyWidth(
     case 'wide':
       return calcWideWidth(containerWidth);
     case 'full-width':
-      return `${Math.min(width, containerWidth) - akEditorBreakoutPadding}px`;
+      return calcBreakoutWidth(layout, containerWidth);
     default:
       return width > akEditorFullPageMaxWidth ? '100%' : `${width}px`;
   }
@@ -53,12 +52,16 @@ function calcLegacyWidth(
  * Wide and full-width images are always that size (960px and 100%); there is
  * no distinction between max-width and width.
  */
-function calcResizedWidth(layout: MediaSingleLayout, width: number) {
+function calcResizedWidth(
+  layout: MediaSingleLayout,
+  width: number,
+  containerWidth: number = 0,
+) {
   switch (layout) {
     case 'wide':
       return `${akEditorWideLayoutWidth}px`;
     case 'full-width':
-      return '100%';
+      return calcBreakoutWidth(layout, containerWidth);
     default:
       return `${width}px`;
   }
@@ -73,9 +76,7 @@ function calcMaxWidth(
     case 'wide':
       return calcWideWidth(containerWidth);
     case 'full-width':
-      return containerWidth < akEditorFullPageMaxWidth
-        ? '100%'
-        : `${containerWidth}px`;
+      return calcBreakoutWidth(layout, containerWidth);
     default:
       return '100%';
   }
@@ -113,7 +114,7 @@ export const MediaSingleDimensionHelper = ({
   pctWidth,
 }: WrapperProps) => css`
   width: ${pctWidth
-    ? calcResizedWidth(layout, width)
+    ? calcResizedWidth(layout, width, containerWidth)
     : calcLegacyWidth(layout, width, containerWidth)};
   max-width: ${calcMaxWidth(layout, width, containerWidth)};
   float: ${float(layout)};
