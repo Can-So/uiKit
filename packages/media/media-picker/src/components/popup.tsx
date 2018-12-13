@@ -67,16 +67,18 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
       cacheSize,
       authProvider: userAuthProvider,
     });
+    const tenantUploadParams = {
+      ...defaultUploadParams,
+      ...uploadParams,
+    };
 
     this.store = createStore(this, tenantContext, userContext, {
       proxyReactContext,
       singleSelect,
+      uploadParams: tenantUploadParams,
     });
 
-    this.tenantUploadParams = {
-      ...defaultUploadParams,
-      ...uploadParams,
-    };
+    this.tenantUploadParams = tenantUploadParams;
 
     const popup = this.renderPopup();
 
