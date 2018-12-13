@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.4.6
+- [patch] [feb276c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/feb276c):
+
+  - Don't scroll cursor into view on remote transactions
+
 ## 90.4.5
 - [patch] [6beeada](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6beeada):
 
