@@ -282,7 +282,6 @@ export function createApiRouter(): Router<DatabaseSchema> {
     const records = descriptors.map((descriptor: any) => {
       const record = database.findOne('collectionItem', {
         id: descriptor.id,
-        collectionName: descriptor.collection,
       });
       return {
         type: 'file',
