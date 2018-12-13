@@ -382,7 +382,7 @@ describe('CardView', () => {
       });
       expect(actualContext.viewAttributes).toEqual({
         viewPreview: true,
-        viewSize: 'small',
+        viewSize: 'auto',
         viewActionmenu: true,
       });
       expect(actualContext.loadStatus).toEqual('loading_metadata');
