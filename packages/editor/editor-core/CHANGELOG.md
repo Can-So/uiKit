@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.4.5
+- [patch] [6beeada](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6beeada):
+
+  - Don't hide media-picker on initialisation
+
 ## 90.4.4
 - [patch] [f083737](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f083737):
 

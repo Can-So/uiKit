@@ -1,1 +1,0 @@
-- Don't hide media-picker on initialisation
