@@ -13,6 +13,9 @@ export {
   setupMediaMocksProviders,
   editable,
   changeSelectedNodeLayout,
+  rerenderEditor,
+  setFeature,
+  toggleFeature,
 } from '../integration/_helpers';
 
 const DEFAULT_WIDTH = 800;

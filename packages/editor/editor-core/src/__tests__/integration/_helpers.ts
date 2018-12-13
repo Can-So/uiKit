@@ -113,10 +113,6 @@ export const rerenderEditor = async browser => {
   await browser.click('.reloadEditorButton');
 };
 
-export const loadExampleDocument = async browser => {
-  await browser.click('.loadExampleDocument');
-};
-
 export const insertMedia = async (
   browser,
   filenames = ['one.svg'],

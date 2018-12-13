@@ -1,5 +1,4 @@
-import { initEditor, snapshot } from './_utils';
-import { toggleFeature, loadExampleDocument } from '../integration/_helpers';
+import { initEditor, snapshot, toggleFeature } from './_utils';
 
 export const viewportSizes = [
   { width: 1440, height: 3000 },
@@ -7,6 +6,10 @@ export const viewportSizes = [
   { width: 1000, height: 3000 },
   { width: 800, height: 3000 },
 ];
+
+const loadExampleDocument = async browser => {
+  await browser.click('.loadExampleDocument');
+};
 
 describe('Snapshot Test: Dynamic Text Sizing', () => {
   let page;
