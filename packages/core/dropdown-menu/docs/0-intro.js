@@ -41,6 +41,13 @@ ${(
 
 ${(
   <Props
+    heading="DropdownItem Props"
+    props={require('!!extract-react-types-loader!../../item/src/components/Item')}
+  />
+)}
+
+${(
+  <Props
     heading="DropdownItemGroup Props"
     props={require('!!extract-react-types-loader!../src/components/group/DropdownItemGroup')}
   />
