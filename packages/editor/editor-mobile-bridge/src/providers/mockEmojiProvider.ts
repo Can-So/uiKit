@@ -21,7 +21,7 @@ class EmojiProviderImpl implements EmojiProvider {
   }
 
   getAsciiMap() {
-    return new Map() as any;
+    return Promise.resolve(new Map());
   }
 
   getFrequentlyUsed() {
