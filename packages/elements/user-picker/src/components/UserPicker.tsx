@@ -69,8 +69,8 @@ export const UserPicker = withAnalyticsEvents()(
         derivedState.inputValue = nextProps.search;
       }
 
-      if (nextProps.users !== undefined) {
-        derivedState.users = nextProps.users;
+      if (nextProps.options !== undefined) {
+        derivedState.options = nextProps.options;
       }
 
       return derivedState;
@@ -83,7 +83,7 @@ export const UserPicker = withAnalyticsEvents()(
     constructor(props) {
       super(props);
       this.state = {
-        users: [],
+        options: [],
         inflightRequest: 0,
         count: 0,
         hoveringClearIndicator: false,
@@ -106,6 +106,18 @@ export const UserPicker = withAnalyticsEvents()(
     public previousOption = this.withSelectRef(select =>
       select.focusOption('up'),
     );
+
+    public focus = () => {
+      if (this.selectRef) {
+        this.selectRef.focus();
+      }
+    };
+
+    public blur = () => {
+      if (this.selectRef) {
+        this.selectRef.blur();
+      }
+    };
 
     public selectOption = this.withSelectRef(select => {
       const focusedOption = select.state.focusedOption;
@@ -144,18 +156,18 @@ export const UserPicker = withAnalyticsEvents()(
       this.selectRef = ref;
     };
 
-    private addUsers = batchByKey(
-      (request: string, newUsers: (User | User[])[]) => {
-        this.setState(({ inflightRequest, users, count }) => {
+    private addOptions = batchByKey(
+      (request: string, newOptions: (User | User[])[]) => {
+        this.setState(({ inflightRequest, options, count }) => {
           if (inflightRequest.toString() === request) {
             return {
-              users: users.concat(
-                newUsers.reduce<User[]>(
-                  (nextUsers, item) => nextUsers.concat(item[0]),
+              options: options.concat(
+                newOptions.reduce<User[]>(
+                  (nextOptions, item) => nextOptions.concat(item[0]),
                   [],
                 ),
               ),
-              count: count - newUsers.length,
+              count: count - newOptions.length,
             };
           }
           return null;
@@ -168,30 +180,33 @@ export const UserPicker = withAnalyticsEvents()(
     };
 
     private executeLoadOptions = debounce((search?: string) => {
-      const { loadUsers } = this.props;
-      if (loadUsers) {
+      const { loadOptions } = this.props;
+      if (loadOptions) {
         this.setState(({ inflightRequest: previousRequest }) => {
           const inflightRequest = previousRequest + 1;
-          const result = loadUsers(search);
-          const addUsers = this.addUsers.bind(this, inflightRequest.toString());
+          const result = loadOptions(search);
+          const addOptions = this.addOptions.bind(
+            this,
+            inflightRequest.toString(),
+          );
           let count = 0;
           if (isIterable(result)) {
             for (const value of result) {
               Promise.resolve(value)
-                .then(addUsers)
+                .then(addOptions)
                 .catch(this.handleLoadOptionsError);
               count++;
             }
           } else {
             Promise.resolve(result)
-              .then(addUsers)
+              .then(addOptions)
               .catch(this.handleLoadOptionsError);
             count++;
           }
           return {
             inflightRequest,
             count,
-            users: [],
+            options: [],
           };
         });
       }
@@ -246,7 +261,7 @@ export const UserPicker = withAnalyticsEvents()(
     };
 
     componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
-      const { menuIsOpen, users } = this.state;
+      const { menuIsOpen, options } = this.state;
       // load options when the picker open
       if (menuIsOpen && !prevState.menuIsOpen) {
         this.startSession();
@@ -260,8 +275,8 @@ export const UserPicker = withAnalyticsEvents()(
 
       if (
         menuIsOpen &&
-        ((!prevState.menuIsOpen && users.length > 0) ||
-          users !== prevState.users)
+        ((!prevState.menuIsOpen && options.length > 0) ||
+          options !== prevState.options)
       ) {
         this.fireEvent(searchedEvent);
       }
@@ -308,7 +323,7 @@ export const UserPicker = withAnalyticsEvents()(
     private configureNoOptionsMessage = (): string | undefined =>
       this.props.noOptionsMessage;
 
-    private getOptions = (): User[] => getOptions(this.state.users) || [];
+    private getOptions = (): User[] => getOptions(this.state.options) || [];
 
     render() {
       const {

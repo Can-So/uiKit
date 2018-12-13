@@ -4,11 +4,13 @@ const glob = require('glob');
 const { execSync } = require('child_process');
 const { resolve, join } = require('path');
 
-const NAV_NEXT_DIR = resolve(join(__dirname, './../../../'));
-const ATLASKIT_DIR = resolve(join(__dirname, './../../../../../../'));
+const NAV_NEXT_DIR = resolve(join(__dirname, './../../../../'));
+const ATLASKIT_DIR = resolve(join(__dirname, './../../../../../../../'));
 const ENTRY_POINTS = [
   'AsyncLayoutManagerWithViewController.js',
   'AsyncLayoutManagerWithViewController.js.flow',
+  'GlobalNavigationSkeleton.js',
+  'GlobalNavigationSkeleton.js.flow',
   'ItemsRenderer.js',
   'ItemsRenderer.js.flow',
   'LayoutManagerWithViewController.js',
@@ -32,7 +34,7 @@ execSync(
   `
 NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --parallel --only-fs packages/core/navigation-next -- babel src -d dist/esm --root-mode upward &&
 bolt workspaces exec --only-fs packages/core/navigation-next -- flow-copy-source -v -i '**/__tests__/**' src dist/esm &&
-node ${NAV_NEXT_DIR}/scripts/build-entrypoints.js
+node ${NAV_NEXT_DIR}/src/scripts/build-entrypoints.js
 `,
   { cwd: ATLASKIT_DIR },
 );

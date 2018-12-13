@@ -23,8 +23,8 @@ export const isIterable = (
 ): a is Iterable<Promisable<User | User[]>> =>
   typeof a[Symbol.iterator] === 'function';
 
-export const getOptions = memoizeOne((users: User[]) =>
-  users.map(userToOption),
+export const getOptions = memoizeOne((options: User[]) =>
+  options.map(userToOption),
 );
 
 export const usersToOptions = memoizeOne((defaultValue: UserValue) => {

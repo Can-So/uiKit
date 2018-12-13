@@ -33,7 +33,6 @@ export const proxyUploadEvents = (store: Store<State>) => (
 
       if (upload && upload.proxy && uploadHasProxy(upload)) {
         const event = { ...originalEvent };
-        const { tenant } = upload;
 
         upload.proxy.forEach(uploadId => {
           if (event.name === 'upload-processing') {
@@ -48,7 +47,6 @@ export const proxyUploadEvents = (store: Store<State>) => (
                 localFile,
                 uploadId,
                 source,
-                tenant,
                 localFile.upfrontId,
                 localFile.occurrenceKey,
               ),

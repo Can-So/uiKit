@@ -4,12 +4,10 @@ const fs = require('fs-extra');
 const path = require('path');
 const mkdirp = require('mkdirp');
 
-const PACKAGE_ROOT = path.resolve(__dirname, '../');
+const PACKAGE_ROOT = path.resolve(__dirname, '../../');
 const ENTRYPOINTS_FOLDER = `${PACKAGE_ROOT}/dist/esm/entrypoints`;
 
-const files = glob.sync(`${ENTRYPOINTS_FOLDER}/*.{js,flow}`, {
-  cwd: __dirname,
-});
+const files = glob.sync(`${ENTRYPOINTS_FOLDER}/*.{js,flow}`);
 
 const replaceFrom = new RegExp("'../", 'g');
 

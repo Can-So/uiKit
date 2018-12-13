@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/navigation-next",
-  "version": "4.0.9",
+  "version": "4.0.10",
   "description": "The Atlassian navigation component.",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -9,6 +9,7 @@
   "sideEffects": false,
   "files": [
     "dist",
+    "!dist/{esm,cjs}/scripts",
     "*.js*"
   ],
   "author": "Atlassian Pty Ltd",
@@ -70,6 +71,6 @@
     "react-router-dom": "^4.2.2"
   },
   "scripts": {
-    "build": "node scripts/build-entrypoints.js"
+    "build": "node src/scripts/build-entrypoints.js"
   }
 }
