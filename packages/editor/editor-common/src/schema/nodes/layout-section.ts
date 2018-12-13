@@ -1,18 +1,21 @@
 import { NodeSpec } from 'prosemirror-model';
 import { LayoutColumnDefinition } from './layout-column';
+import { BreakoutMarkDefinition } from '../marks';
 
 /**
  * @name layoutSection_node
  * @stage 0
  */
-export interface LayoutSectionDefinition {
+export type LayoutSectionDefinition = {
   type: 'layoutSection';
 
   /**
-   * @minItems 1
+   * @minItems 2
+   * @maxItems 3
    */
   content: Array<LayoutColumnDefinition>;
-}
+  marks?: Array<BreakoutMarkDefinition>;
+};
 
 export const layoutSection: NodeSpec = {
   content: 'layoutColumn{2,3}',

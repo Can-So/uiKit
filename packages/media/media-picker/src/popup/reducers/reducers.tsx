@@ -25,7 +25,6 @@ import editorShowError from './editorShowError';
 import editorShowImage from './editorShowImage';
 import editorShowLoading from './editorShowLoading';
 import deselectItem from './deselectItem';
-import setTenant from './setTenant';
 import isUploading from './isUploading';
 import remoteUploadStart from './remoteUploadStart';
 import {
@@ -67,7 +66,6 @@ const reducers = combineReducers([
   editorShowImage,
   editorShowLoading,
   deselectItem,
-  setTenant,
   isUploading,
   remoteUploadStart,
   giphySearchStarted,

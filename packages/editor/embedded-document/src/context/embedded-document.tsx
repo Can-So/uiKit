@@ -55,29 +55,36 @@ export default class EmbeddedDocument extends Component<Props, State> {
       setDocumentMode: this.setDocumentMode,
       updateDocument: this.updateDocument,
       createDocument: this.createDocument,
+      getDocumentByObjectId: this.getDocumentByObjectId,
     };
 
     this.provider = getProvider(props);
 
-    // Set initial mode.
-    if (!props.documentId) {
-      this.state = {
-        mode: 'create',
-      };
+    this.state = {
+      mode: props.mode || 'view',
+      isLoading: true,
+    };
+  }
+
+  async componentDidMount() {
+    const { documentId, language, objectId } = this.props;
+    if (documentId) {
+      await this.getDocument(documentId, language);
     } else {
-      this.state = {
-        mode: props.mode || 'view',
-        isLoading: true,
-      };
+      await this.getDocumentByObjectId(objectId, language);
     }
   }
 
-  componentDidMount() {
-    const { documentId, language } = this.props;
-    if (documentId) {
-      this.getDocument(documentId, language);
-    }
-  }
+  private getDocumentByObjectId = async (
+    objectId: string,
+    language?: string,
+  ) => {
+    this.setState({
+      isLoading: true,
+    });
+    const doc = await this.provider.getDocumentByObjectId(objectId, language);
+    this.setDocumentState(doc);
+  };
 
   private getDocument = async (documentId: string, language?: string) => {
     this.setState({
@@ -85,17 +92,7 @@ export default class EmbeddedDocument extends Component<Props, State> {
     });
 
     const doc = await this.provider.getDocument(documentId, language);
-    if (doc) {
-      this.setState({
-        isLoading: false,
-        doc,
-      });
-    } else {
-      this.setState({
-        isLoading: false,
-        hasError: true,
-      });
-    }
+    this.setDocumentState(doc);
   };
 
   private setDocumentMode = async (mode: Mode) => {
@@ -111,7 +108,7 @@ export default class EmbeddedDocument extends Component<Props, State> {
       return this.createDocument(body);
     }
 
-    const document = await this.provider.updateDocument(
+    const doc = await this.provider.updateDocument(
       documentId,
       JSON.stringify(body),
       objectId,
@@ -119,12 +116,12 @@ export default class EmbeddedDocument extends Component<Props, State> {
       language,
     );
 
-    if (document) {
+    if (doc) {
       this.setState({
-        doc: document,
+        doc,
         mode: 'view',
       });
-      return document;
+      return doc;
     } else {
       this.setState({
         hasError: true,
@@ -159,6 +156,20 @@ export default class EmbeddedDocument extends Component<Props, State> {
       });
 
       throw new Error('Failed to create document');
+    }
+  };
+
+  private setDocumentState = doc => {
+    if (doc) {
+      this.setState({
+        isLoading: false,
+        doc,
+      });
+    } else {
+      this.setState({
+        isLoading: false,
+        hasError: true,
+      });
     }
   };
 

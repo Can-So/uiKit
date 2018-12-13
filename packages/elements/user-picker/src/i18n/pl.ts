@@ -1,6 +1,8 @@
 // Polish
 export default {
-  'fabric.elements.user-picker.placeholder': 'Find a person...',
-  'fabric.elements.user-picker.multi.remove-item': 'Remove',
-  'fabric.elements.user-picker.single.clear': 'Clear',
+  'fabric.elements.user-picker.placeholder': 'Znajdź osobę…',
+  'fabric.elements.user-picker.placeholder.add-more':
+    'dodaj więcej użytkowników...',
+  'fabric.elements.user-picker.multi.remove-item': 'Usuń',
+  'fabric.elements.user-picker.single.clear': 'Wyczyść',
 };

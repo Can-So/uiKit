@@ -9,14 +9,11 @@ export default class Example extends React.Component<{}> {
       <ExampleWrapper>
         {({ users, onInputChange }) => (
           <UserPicker
-            users={users}
+            options={users}
             onChange={console.log}
             onInputChange={onInputChange}
             isMulti
-            defaultValue={[
-              { ...exampleUsers[0], fixed: true },
-              { ...exampleUsers[1], fixed: true },
-            ]}
+            defaultValue={[exampleUsers[0], exampleUsers[1]]}
           />
         )}
       </ExampleWrapper>

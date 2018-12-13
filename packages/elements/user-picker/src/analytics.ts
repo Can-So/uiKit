@@ -160,7 +160,7 @@ function sessionId(session?: UserPickerSession) {
 }
 
 function position(state: UserPickerState, value?: { user: User }) {
-  return value ? state.users.findIndex(user => user === value.user) : -1;
+  return value ? state.options.findIndex(user => user === value.user) : -1;
 }
 
 function pickerType(props: UserPickerProps) {
@@ -172,7 +172,7 @@ function result(value?: { user: User }) {
 }
 
 function results(state: UserPickerState) {
-  return (state.users || []).map(({ id }) => ({ id }));
+  return (state.options || []).map(({ id }) => ({ id }));
 }
 
 function isLoading(props: UserPickerProps, state: UserPickerState) {
