@@ -38,7 +38,7 @@ export default class ExampleRenderer extends React.Component {
                 Edit
               </Button>
             </div>
-            <h1 style={{ margin: '20px 0', textAlign: 'center' }}>
+            <h1 style={{ margin: '20px 0' }}>
               {localStorage
                 ? localStorage.getItem(LOCALSTORAGE_defaultTitleKey)
                 : null}
