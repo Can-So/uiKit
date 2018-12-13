@@ -16,11 +16,87 @@ main(process.argv[2], process.argv.includes('--analyze'));
 function main(filePath, isAnalyze) {
   const entryPoint = path.resolve(__dirname, '../../packages', filePath);
   const spinner = ora(chalk.cyan(`Compiling "${filePath}"`)).start();
+
   if (!fExists(entryPoint)) {
     spinner.fail(chalk.red(`File "${entryPoint}" doesn't exist.`));
     process.exit(1);
   }
-  const packagesGroups = createAtlaskitDepsGroups(filePath);
+
+  const mainStatsGroups = [
+    {
+      title: 'Source code',
+      stats: [
+        {
+          name: 'main',
+          fileName: 'main.js',
+        },
+        {
+          name: 'async',
+          fileName: 'main_async.js',
+          cacheGroup: {
+            name: 'main_async',
+            test: module =>
+              module.context &&
+              module.context.includes(`packages/${filePath}/`),
+            enforce: true,
+            chunks: 'async',
+          },
+        },
+      ],
+    },
+    {
+      title: 'External Dependencies',
+      stats: [
+        {
+          name: 'node_modules [main]',
+          fileName: 'node_modules.js',
+          cacheGroup: {
+            name: 'node_modules',
+            test: /[\\/]node_modules[\\/]/,
+            enforce: true,
+            chunks: 'all',
+            priority: -5,
+          },
+        },
+        {
+          name: 'node_modules [async]',
+          fileName: 'node_modules_async.js',
+          cacheGroup: {
+            name: 'node_modules_async',
+            test: /[\\/]node_modules[\\/]/,
+            enforce: true,
+            chunks: 'async',
+            priority: 4,
+          },
+        },
+      ],
+    },
+    {
+      title: 'Atlaskit Dependencies',
+      stats: createAtlaskitStatsGroups(filePath),
+    },
+  ];
+
+  const combinedStatsGroups = [
+    {
+      title: 'Combined',
+      stats: [
+        {
+          name: 'main',
+          fileName: 'combined_sync.js',
+        },
+        {
+          name: 'async',
+          fileName: 'combined_async.js',
+          cacheGroup: {
+            name: 'combined_async',
+            enforce: true,
+            chunks: 'async',
+          },
+        },
+      ],
+    },
+  ];
 
   /**
    * Main config for detailed breakdown of dependencies, includes:
@@ -29,23 +105,10 @@ function main(filePath, isAnalyze) {
    * – package groups bundles: e.g. core, media, editor, etc...
    */
   const mainConfig = createWebpackConfig({
-    entryPoint: {
-      main: entryPoint,
-    },
+    entryPoint: { main: entryPoint },
     optimization: {
       splitChunks: {
-        cacheGroups: {
-          node_modules: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'node_modules',
-            enforce: true,
-            chunks: 'all',
-          },
-          ...packagesGroups.reduce((acc, group) => {
-            acc[group.name] = group.cacheGroup;
-            return acc;
-          }, {}),
-        },
+        cacheGroups: buildCacheGroups(mainStatsGroups),
       },
     },
     isAnalyze,
@@ -56,18 +119,10 @@ function main(filePath, isAnalyze) {
    * size since gzip size is highly affected by the size of the input.
    */
   const combinedConfig = createWebpackConfig({
-    entryPoint: {
-      combined_sync: entryPoint,
-    },
+    entryPoint: { combined_sync: entryPoint },
     optimization: {
       splitChunks: {
-        cacheGroups: {
-          async: {
-            name: 'combined_async',
-            enforce: true,
-            chunks: 'async',
-          },
-        },
+        cacheGroups: buildCacheGroups(combinedStatsGroups),
       },
     },
   });
@@ -83,32 +138,54 @@ function main(filePath, isAnalyze) {
       return console.error(chalk.red(err));
     }
 
-    const packageOut = path.resolve(measureOutputPath, 'main.js');
-    const externalDepsOut = path.resolve(measureOutputPath, 'node_modules.js');
-    const combinedSyncOut = path.resolve(measureOutputPath, 'combined_sync.js');
-    const combinedAsyncOut = path.resolve(
+    const mainBuildStats = buildStats(measureOutputPath, mainStatsGroups);
+    const combinedBuildStats = buildStats(
       measureOutputPath,
-      'combined_async.js',
+      combinedStatsGroups,
     );
-    const stats = [
-      fStats(packageOut),
-      fStats(externalDepsOut),
-      fStats(combinedSyncOut),
-      fExists(combinedAsyncOut) && fStats(combinedAsyncOut),
-    ];
-
-    const packagesGroupsStats = packagesGroups
-      .filter(group =>
-        fExists(path.resolve(measureOutputPath, group.chunkName + '.js')),
-      )
-      .map(group => ({
-        name: group.name,
-        stats: fStats(path.resolve(measureOutputPath, group.chunkName + '.js')),
-      }));
-
     spinner.succeed(chalk.cyan(`Module "${filePath}" successfully built:\n`));
-    printReport(stats, packagesGroupsStats);
+    printReport([...mainBuildStats, ...combinedBuildStats]);
   });
+}
+
+function buildStats(outputPath, statsGroups) {
+  return statsGroups.map(group => {
+    return {
+      title: group.title,
+      group: group.group,
+      stats: group.stats.reduce((acc, stat) => {
+        if (stat.group) {
+          acc.push(...buildStats(outputPath, [stat]));
+          return acc;
+        }
+
+        if (!stat.fileName) return acc;
+
+        const filePath = path.resolve(outputPath, stat.fileName);
+        if (!fExists(filePath)) return acc;
+
+        acc.push({
+          name: stat.name,
+          stats: fStats(filePath),
+        });
+        return acc;
+      }, []),
+    };
+  });
+}
+
+function buildCacheGroups(statsGroups) {
+  return statsGroups.reduce((acc, group) => {
+    return group.stats.reduce((cacheGroups, item) => {
+      if (item.cacheGroup) {
+        cacheGroups[item.cacheGroup.name] = item.cacheGroup;
+      }
+      if (item.group) {
+        cacheGroups = { ...cacheGroups, ...buildCacheGroups([item]) };
+      }
+      return cacheGroups;
+    }, acc);
+  }, {});
 }
 
 function createWebpackConfig({
@@ -152,25 +229,45 @@ function createWebpackConfig({
  * Creates an array of all packages groups in the repo
  * and cacheGroups for them.
  */
-function createAtlaskitDepsGroups(packagePath) {
+function createAtlaskitStatsGroups(packagePath) {
   return fs
     .readdirSync(path.join(__dirname, '..', '..', 'packages'))
     .filter(gr => !gr.startsWith('.'))
     .map(name => {
       const chunkName = `atlaskit-${name}`;
+      const test = module =>
+        module.context &&
+        module.context.includes(`packages/${name}/`) &&
+        !module.context.includes('node_modules') &&
+        !module.context.includes(packagePath);
+
       return {
-        name,
-        chunkName,
-        cacheGroup: {
-          test: module =>
-            module.context &&
-            module.context.includes(`packages/${name}/`) &&
-            !module.context.includes('node_modules') &&
-            !module.context.includes(packagePath),
-          name: chunkName,
-          enforce: true,
-          chunks: 'all',
-        },
+        title: name,
+        group: true,
+        stats: [
+          {
+            name: 'main',
+            fileName: `${chunkName}.js`,
+            cacheGroup: {
+              name: chunkName,
+              test,
+              enforce: true,
+              chunks: 'all',
+              priority: -5,
+            },
+          },
+          {
+            name: 'async',
+            fileName: `${chunkName}-async.js`,
+            cacheGroup: {
+              name: `${chunkName}-async`,
+              test,
+              enforce: true,
+              chunks: 'async',
+              priority: 5,
+            },
+          },
+        ],
       };
     });
 }
@@ -191,33 +288,27 @@ function formatFileStats(fileStats) {
   ].join(' ');
 }
 
-function printReport(stats, atlaskitStats) {
-  console.log(chalk.yellow('  Source Code:'));
-  console.log(chalk.yellow.dim(`    –`), formatFileStats(stats[0]));
-  console.log();
+function printReport(stats, level = 1) {
+  stats.forEach(group => {
+    if (!group.stats.length) return;
 
-  console.log(chalk.yellow('  Atlaskit Dependencies:'));
-  atlaskitStats.forEach(group => {
-    console.log(
-      chalk.yellow.dim(`    – ${group.name}:`),
-      formatFileStats(group.stats),
-    );
+    const title = `${group.title}:`;
+    console.log(chalk.yellow(title.padStart(title.length + level * 2, ' ')));
+
+    group.stats.forEach(stat => {
+      if (stat.group) return printReport([stat], level + 1);
+
+      const subTitle = `– ${stat.name}:`;
+      console.log(
+        chalk.yellow.dim(subTitle.padStart(subTitle.length + level * 2 + 2)),
+        formatFileStats(stat.stats),
+      );
+    });
+
+    if (level === 1) {
+      console.log();
+    }
   });
-  console.log();
-
-  console.log(chalk.yellow('  External Dependencies:'));
-  console.log(
-    chalk.yellow.dim(`    – node_modules:`),
-    formatFileStats(stats[1]),
-  );
-  console.log();
-
-  console.log(chalk.yellow('  Combined:'));
-  console.log(chalk.yellow.dim(`    – main: `), formatFileStats(stats[2]));
-  console.log(
-    chalk.yellow.dim(`    – async:`),
-    stats[3] ? formatFileStats(stats[3]) : chalk.dim('n/a'),
-  );
 }
 
 function fStats(filePath) {
