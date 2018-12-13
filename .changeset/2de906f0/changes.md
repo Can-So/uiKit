@@ -1,0 +1,1 @@
+- Replace copied popper.js by the actual popper.js library. In addition, mocking popper.js with jest

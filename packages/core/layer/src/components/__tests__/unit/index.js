@@ -6,6 +6,21 @@ import createStub from 'raf-stub';
 import Layer from '../../..';
 import ContentContainer from '../../../styledContentContainer';
 
+jest.mock('popper.js', () => {
+  const PopperJS = jest.requireActual('popper.js');
+
+  return class Popper {
+    static placements = PopperJS.placements;
+
+    constructor() {
+      return {
+        destroy: () => {},
+        scheduleUpdate: () => {},
+      };
+    }
+  };
+});
+
 /* There is a lot in Layer that can not be tested easily in JSDom. Most of it should already be
    tested in Popper itself, but we should really have some sort of sanity checks for things like
    flipping behaviour.
