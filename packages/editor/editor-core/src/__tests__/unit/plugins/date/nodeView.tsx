@@ -46,7 +46,7 @@ describe('date plugin', () => {
       const dateNode = mount(
         <DateNodeView
           view={view}
-          node={view.state.selection.$from.nodeBefore!}
+          node={view.state.doc.nodeAt(view.state.selection.$from.pos)!}
         />,
       );
       expect(
@@ -73,7 +73,7 @@ describe('date plugin', () => {
       const dateNode = mount(
         <DateNodeView
           view={view}
-          node={view.state.selection.$from.nodeBefore!}
+          node={view.state.doc.nodeAt(view.state.selection.$from.pos)!}
         />,
       );
       expect(dateNode.find(n => n.prop('color') === 'red').length).toEqual(0);
