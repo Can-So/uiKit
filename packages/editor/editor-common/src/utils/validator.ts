@@ -655,6 +655,7 @@ export const getValidNode = (
         if (content) {
           return {
             type,
+            marks,
             content,
           };
         }

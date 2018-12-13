@@ -1,5 +1,20 @@
 # @atlaskit/editor-core
 
+## 90.4.6
+- [patch] [feb276c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/feb276c):
+
+  - Don't scroll cursor into view on remote transactions
+
+## 90.4.5
+- [patch] [6beeada](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6beeada):
+
+  - Don't hide media-picker on initialisation
+
+## 90.4.4
+- [patch] [f083737](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f083737):
+
+  - Fix copy-paste of external images
+
 ## 90.4.3
 - [patch] [4e483e7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e483e7):
 

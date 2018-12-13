@@ -342,7 +342,6 @@ describe('paste', () => {
 
         expect(editorView.state.doc).to.deep.equal(
           doc(
-            paragraph(),
             mediaSingle()(
               media({
                 type: 'external',

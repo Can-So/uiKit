@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 22.4.2
+- [patch] [34df084](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/34df084):
+
+  - Fix layout schema and enable breakout layouts in renderer
+
 ## 22.4.1
 - [patch] [a2ea6a7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2ea6a7):
 

@@ -90,7 +90,7 @@ export const applyRemoteSteps = (
   if (tr) {
     tr.setMeta('addToHistory', false);
     tr.setMeta('isRemote', true);
-    tr.scrollIntoView();
+
     const newState = state.apply(tr);
     view.updateState(newState);
   }

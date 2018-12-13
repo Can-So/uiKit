@@ -60,15 +60,17 @@ const configs: Array<BridgePluginListener<any>> = [
        * We have a ticket to align on the naming.
        * @see https://product-fabric.atlassian.net/browse/FM-1341
        */
-
-      // iOS
-      toNativeBridge.call('blockFormatBridge', 'updateBlockState', {
-        states: state.currentBlockType.name,
-      });
-      // Android
-      toNativeBridge.call('textFormatBridge', 'updateBlockState', {
-        states: state.currentBlockType.name,
-      });
+      if (window.webkit) {
+        // iOS
+        toNativeBridge.call('blockFormatBridge', 'updateBlockState', {
+          states: state.currentBlockType.name,
+        });
+      } else {
+        // Android
+        toNativeBridge.call('textFormatBridge', 'updateBlockState', {
+          states: state.currentBlockType.name,
+        });
+      }
     },
   }),
   createListenerConfig<ListsState>({
