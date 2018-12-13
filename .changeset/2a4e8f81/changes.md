@@ -1,1 +1,0 @@
-- New entry point for Global Navigation Skeleton
