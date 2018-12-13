@@ -24,9 +24,9 @@ import {
   ClearIndicator,
   defaultTimes,
   DropdownIndicator,
-  parseTime,
   defaultTimeFormat,
 } from '../internal';
+import parseTime from '../internal/parseTime';
 import FixedLayer from '../internal/FixedLayer';
 
 type Option = {
@@ -181,7 +181,7 @@ class TimePicker extends Component<Props, State> {
       const { parseInputValue, timeFormat } = this.props;
       // TODO parseInputValue doesn't accept `timeFormat` as an function arg yet...
       const value =
-        format(parseInputValue(inputValue, timeFormat), 'HH:mm') || '';
+        format(parseInputValue(inputValue, timeFormat), 'HH:mma') || '';
       this.setState({ value });
       this.props.onChange(value);
     } else {
