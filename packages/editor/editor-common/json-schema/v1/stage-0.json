@@ -1532,7 +1532,14 @@
           "items": {
             "$ref": "#/definitions/layoutColumn_node"
           },
-          "minItems": 1
+          "minItems": 2,
+          "maxItems": 3
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/breakout_mark"
+          }
         }
       },
       "required": [
