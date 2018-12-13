@@ -13,13 +13,21 @@ import {
   DropdownItemGroup,
   DropdownMenuStateless,
 } from '@atlaskit/dropdown-menu';
+import StarIcon from '@atlaskit/icon/glyph/star';
 import CreateIcon from '@atlaskit/icon/glyph/add';
 import SearchIcon from '@atlaskit/icon/glyph/search';
 import HelpIcon from '@atlaskit/icon/glyph/question-circle';
 import { AtlassianIcon } from '@atlaskit/logo';
 import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
+import { colors } from '@atlaskit/theme';
 
-import { GlobalItem, GlobalNav } from '../src';
+import {
+  GlobalItem,
+  GlobalNav,
+  GlobalNavigationSkeleton,
+  ThemeProvider,
+  modeGenerator,
+} from '../src';
 
 type GlobalItemWithDropdownProps = {
   items: Node,
@@ -94,6 +102,12 @@ const GlobalNavWithRegularItems = () => (
         id: 'logo',
         tooltip: 'Atlassian',
         onClick: () => console.log('Logo item clicked'),
+      },
+      {
+        icon: StarIcon,
+        id: 'star',
+        tooltip: 'Starred and recent',
+        onClick: () => console.log('Search item clicked'),
       },
       {
         icon: SearchIcon,
@@ -256,6 +270,13 @@ class GlobalNavWithModalsAndDrawers extends Component<{}, State> {
   }
 }
 
+const customMode = modeGenerator({
+  product: {
+    text: colors.N0,
+    background: colors.G500,
+  },
+});
+
 export default () => (
   <Row>
     <Variation>
@@ -269,6 +290,19 @@ export default () => (
     <Variation>
       <Title>Opening modals and drawers</Title>
       <GlobalNavWithModalsAndDrawers />
+    </Variation>
+    <Variation>
+      <Title>Global nav skeleton</Title>
+      <GlobalNavigationSkeleton />
+    </Variation>
+    <Variation>
+      <Title>Global nav skeleton with theming</Title>
+
+      <ThemeProvider
+        theme={theme => ({ ...theme, mode: customMode, context: 'product' })}
+      >
+        <GlobalNavigationSkeleton />
+      </ThemeProvider>
     </Variation>
   </Row>
 );
