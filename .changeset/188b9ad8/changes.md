@@ -1,0 +1,1 @@
+- ED-5900: store resize handle always as a number
