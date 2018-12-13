@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 25.0.8
+- [patch] [ff8b31d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ff8b31d):
+
+  - Pass uploadParams to createStore when initializing MediaPicker popup. This fixes an issue when calling /copy/withToken endpoint
+
 ## 25.0.7
 - [patch] [5f12909](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f12909):
 

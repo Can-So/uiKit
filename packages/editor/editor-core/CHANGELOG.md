@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.4.7
+- [patch] [f621523](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f621523):
+
+  - fix MediaMocker router
+
 ## 90.4.6
 - [patch] [feb276c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/feb276c):
 
