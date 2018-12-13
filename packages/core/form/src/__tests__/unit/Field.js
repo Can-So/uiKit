@@ -230,7 +230,9 @@ test('should never render with undefined fieldProp value', () => {
   });
 });
 
-test('should always show most recent validation result', done => {
+// unskip as part of https://ecosystem.atlassian.net/browse/AK-5752
+// eslint-disable-next-line jest/no-disabled-tests
+xtest('should always show most recent validation result', done => {
   let resolveValidation = () => {};
   const wrapper = mount(
     <Form onSubmit={jest.fn()}>
