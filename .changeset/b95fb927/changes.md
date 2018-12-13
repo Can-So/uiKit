@@ -1,1 +1,0 @@
-- ED-5880: allow breakout mode only in full-page editor

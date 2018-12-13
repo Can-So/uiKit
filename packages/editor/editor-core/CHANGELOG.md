@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.4.2
+- [patch] [ebd73f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebd73f4):
+
+  - ED-5880: allow breakout mode only in full-page editor
+
 ## 90.4.1
 - Updated dependencies [67d563a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/67d563a):
   - @atlaskit/date@0.2.0
