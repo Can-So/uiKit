@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.4.3
+- [patch] [4e483e7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e483e7):
+
+  - ED-5900: store resize handle always as a number
+
 ## 90.4.2
 - [patch] [ebd73f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebd73f4):
 
