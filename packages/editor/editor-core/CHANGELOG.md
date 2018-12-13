@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 90.4.4
+- [patch] [f083737](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f083737):
+
+  - Fix copy-paste of external images
+
 ## 90.4.3
 - [patch] [4e483e7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e483e7):
 

@@ -1,1 +1,0 @@
-- Fix copy-paste of external images
