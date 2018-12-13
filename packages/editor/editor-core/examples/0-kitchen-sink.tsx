@@ -49,11 +49,9 @@ const EditorColumn: React.ComponentClass<
 > = styled.div`
   flex: 1;
   ${p =>
-    typeof p.vertical === 'boolean'
-      ? p.vertical
-        ? `border-right: 1px solid ${colors.N30}; min-height: 85vh`
-        : `border-bottom: 1px solid ${colors.N30}`
-      : ''};
+    p.vertical
+      ? `border-right: 1px solid ${colors.N30}; min-height: 85vh`
+      : `border-bottom: 1px solid ${colors.N30}`};
 `;
 
 const Controls = styled.div`
@@ -318,11 +316,7 @@ export default class FullPageRendererExample extends React.Component<
                     </Button>
                   </Column>
                 </Container>
-                <Container
-                  style={{
-                    overflowX: 'scroll',
-                  }}
-                >
+                <Container>
                   {this.state.showErrors && (
                     <ErrorReport errors={this.state.errors} />
                   )}
