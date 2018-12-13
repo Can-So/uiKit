@@ -160,15 +160,7 @@ const renderInlineCard = (
       );
 
     case 'errored':
-      return (
-        <InlineCardErroredView
-          url={url}
-          isSelected={isSelected}
-          message="We couldn't load this link"
-          onClick={handleFrameClick}
-          onRetry={handleErrorRetry}
-        />
-      );
+      return <CardLinkView text={url}>{url}</CardLinkView>;
   }
 };
 
