@@ -9,6 +9,7 @@
   "sideEffects": false,
   "files": [
     "dist",
+    "!dist/{esm,cjs}/scripts",
     "*.js*"
   ],
   "author": "Atlassian Pty Ltd",
@@ -70,6 +71,6 @@
     "react-router-dom": "^4.2.2"
   },
   "scripts": {
-    "build": "node scripts/build-entrypoints.js"
+    "build": "node src/scripts/build-entrypoints.js"
   }
 }
