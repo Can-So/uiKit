@@ -94,7 +94,7 @@ function main(filePath, isAnalyze) {
       fStats(packageOut),
       fStats(externalDepsOut),
       fStats(combinedSyncOut),
-      fStats(combinedAsyncOut),
+      fExists(combinedAsyncOut) && fStats(combinedAsyncOut),
     ];
 
     const packagesGroupsStats = packagesGroups
@@ -214,7 +214,10 @@ function printReport(stats, atlaskitStats) {
 
   console.log(chalk.yellow('  Combined:'));
   console.log(chalk.yellow.dim(`    – main: `), formatFileStats(stats[2]));
-  console.log(chalk.yellow.dim(`    – async: `), formatFileStats(stats[3]));
+  console.log(
+    chalk.yellow.dim(`    – async:`),
+    stats[3] ? formatFileStats(stats[3]) : chalk.dim('n/a'),
+  );
 }
 
 function fStats(filePath) {
