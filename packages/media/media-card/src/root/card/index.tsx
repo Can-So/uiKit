@@ -212,13 +212,12 @@ export class Card extends Component<CardProps, CardState> {
                 const width = getDataURIDimension('width', options);
                 const height = getDataURIDimension('height', options);
                 try {
-                  const allowAnimated = appearance !== 'small';
                   const blob = await context.getImage(resolvedId, {
                     collection: collectionName,
                     mode: resizeMode,
                     height,
                     width,
-                    allowAnimated,
+                    allowAnimated: true,
                   });
                   const dataURI = URL.createObjectURL(blob);
                   this.releaseDataURI();

@@ -353,12 +353,10 @@ describe('Card', () => {
       <Card
         context={context}
         identifier={fileIdentifier}
-        appearance="small"
         dimensions={{ width: 100, height: 50 }}
       />,
     );
 
-    expect(card.find(CardView).props().appearance).toBe('small');
     expect(card.find(CardView).props().dimensions).toEqual({
       width: 100,
       height: 50,
@@ -371,7 +369,6 @@ describe('Card', () => {
       <Card
         context={context}
         identifier={fileIdentifier}
-        appearance="small"
         dimensions={{ width: 100, height: 50 }}
       />,
     );
@@ -380,15 +377,9 @@ describe('Card', () => {
     );
     const filePlaceholder = fileCard.find(CardView);
     const linkPlaceholder = linkCard.find(CardView);
-    const {
-      status,
-      appearance,
-      mediaItemType,
-      dimensions,
-    } = filePlaceholder.props();
+    const { status, mediaItemType, dimensions } = filePlaceholder.props();
 
     expect(status).toBe('loading');
-    expect(appearance).toBe('small');
     expect(mediaItemType).toBe('file');
     expect(dimensions).toEqual({ width: 100, height: 50 });
     expect(linkPlaceholder.prop('mediaItemType')).toBe('link');
@@ -638,25 +629,6 @@ describe('Card', () => {
       height: 125,
       width: 156,
       allowAnimated: true,
-      mode: 'crop',
-    });
-  });
-
-  it('should use allowAnimated=false for small cards', async () => {
-    const context = createContextWithGetFile();
-    setup(context, {
-      appearance: 'small',
-    });
-
-    // we need to wait for 2 promises: fetch metadata + fetch preview
-    await nextTick();
-    await nextTick();
-
-    expect(context.getImage).toBeCalledWith('some-random-id', {
-      collection: 'some-collection-name',
-      height: 32,
-      width: 32,
-      allowAnimated: false,
       mode: 'crop',
     });
   });

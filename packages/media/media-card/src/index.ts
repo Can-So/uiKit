@@ -35,12 +35,7 @@ export type CardStatus =
   | 'error'
   | 'failed-processing';
 
-export type CardAppearance =
-  | 'auto'
-  | 'small'
-  | 'image'
-  | 'square'
-  | 'horizontal';
+export type CardAppearance = 'auto' | 'image' | 'square' | 'horizontal';
 
 export type CardDimensionValue = number | string;
 
