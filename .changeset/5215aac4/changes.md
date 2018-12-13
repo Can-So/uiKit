@@ -1,0 +1,1 @@
+- Don't scroll cursor into view on remote transactions
