@@ -93,8 +93,8 @@ type State = { isOpen: string | null };
 // eslint-disable-next-line react/no-multi-comp
 export default class ModalDemo extends Component<{}, State> {
   state = { isOpen: null };
+  close = (isOpen: any) => this.setState({ isOpen });
   open = (isOpen: string) => this.setState({ isOpen });
-  close = (isOpen: string) => this.setState({ isOpen });
   secondaryAction = ({ target }: Object) => console.log(target.innerText);
   render() {
     const { isOpen } = this.state;
@@ -122,14 +122,16 @@ export default class ModalDemo extends Component<{}, State> {
                 actions={
                   ['footer', 'both'].includes(name) ? actions : undefined
                 }
-                footer={name === 'custom footer' ? Footer : undefined}
-                header={name === 'custom header' ? Header : undefined}
+                components={{
+                  Header: name === 'custom header' ? Header : undefined,
+                  Footer: name === 'custom footer' ? Footer : undefined,
+                }}
                 heading={
                   ['header', 'both'].includes(name)
                     ? `Modal: ${name}`
                     : undefined
                 }
-                onClose={() => this.close(name)}
+                onClose={this.close}
                 width={name === 'custom header' ? 300 : undefined}
                 {...this.props}
               >

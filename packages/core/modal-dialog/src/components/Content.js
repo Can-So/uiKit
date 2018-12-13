@@ -40,7 +40,11 @@ type Props = {
   /**
     Object describing internal components. Use this to swap out the default components. 
   */
-  components: { Body: ElementType, Container: ElementType },
+  components: {
+    Header?: ElementType,
+    Footer?: ElementType,
+    Container?: ElementType,
+  },
   /**
     Component to render the header of the modal.
   */
@@ -215,7 +219,7 @@ export default class Content extends Component<Props, State> {
           <>
             <Header
               appearance={appearance}
-              component={header}
+              component={components.Header ? components.Header : header}
               heading={heading}
               onClose={onClose}
               isHeadingMultiline={isHeadingMultiline}
@@ -230,7 +234,7 @@ export default class Content extends Component<Props, State> {
             <Footer
               actions={actions}
               appearance={appearance}
-              component={footer}
+              component={components.Footer ? components.Footer : footer}
               onClose={onClose}
               showKeyline={showFooterKeyline}
             />

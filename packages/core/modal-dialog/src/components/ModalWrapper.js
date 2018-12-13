@@ -25,7 +25,18 @@ export type Props = {
     Boolean indicating whether to focus on the first tabbable element inside the focus lock.
   */
   autoFocus: boolean | (() => HTMLElement | null),
-  components?: { Body: ElementType },
+
+  /**
+    Object containing header, footer, body and container elements, as well as the element type 
+    the components are wrapped in. Use this to allow forms to work across sibling Header, Body 
+    and Footer elements.
+  */
+  components?: {
+    Header?: ElementType,
+    Footer?: ElementType,
+    Body?: ElementType,
+    Container?: ElementType,
+  },
   /**
     Content of the modal
   */
