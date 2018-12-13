@@ -1,0 +1,1 @@
+- Simplified error state in inline cards: no red state anymore, just blue link
