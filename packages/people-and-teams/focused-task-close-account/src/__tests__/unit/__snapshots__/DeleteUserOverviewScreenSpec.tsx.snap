@@ -35,7 +35,7 @@ exports[`DeleteUserOverviewScreen 1`] = `
   <styled.ul>
     <li>
       <FormattedHTMLMessage
-        defaultMessage="{fullName} will <b>immediately lose access</b> to all Atlassian account services, including sites and products. They currently have access to: "
+        defaultMessage="{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to: "
         description="A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app."
         id="focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin"
         values={
@@ -433,7 +433,7 @@ exports[`deactivateUserHandler display warning section is not displayed if the d
   <styled.ul>
     <li>
       <FormattedHTMLMessage
-        defaultMessage="{fullName} will <b>immediately lose access</b> to all Atlassian account services, including sites and products. They currently have access to: "
+        defaultMessage="{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to: "
         description="A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app."
         id="focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin"
         values={
