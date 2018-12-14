@@ -32,9 +32,9 @@ export function removeSpacer(time: string): string {
 }
 
 export function formatSemi24(time: string): string {
-  if (time.length === 1) return '0' + time + '00';
-  if (time.length === 2) return time + '00';
-  if (time.length === 3) return '0' + time;
+  if (time.length === 1) return `0${time}00`;
+  if (time.length === 2) return `${time}00`;
+  if (time.length === 3) return `0${time}`;
   return time;
 }
 
@@ -42,12 +42,12 @@ export function checkHour(hour: string, meridiem: string): string | null {
   if (hour > '24') return null;
   if (hour === '12' && meridiem === 'a') return '00';
   else if (hour < '12' && meridiem === 'p') return map24[hour];
-  else return hour;
+  return hour;
 }
 
 export function checkMinute(minute: string): string | null {
   if (minute > '59') return null;
-  else return minute;
+  return minute;
 }
 
 export function convertTo24hrTime(
