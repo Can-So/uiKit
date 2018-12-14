@@ -160,4 +160,36 @@ describe('finalizeUploadMiddleware', () => {
       expect(resolver).toBeCalledWith('some-copied-file-id');
     });
   });
+
+  it('should call copyFileWithToken with the right params', async () => {
+    const { fetcher, store, action } = setup({
+      config: { uploadParams: { collection: 'some-tenant-collection' } },
+    });
+    const copyFileWithToken = jest.fn().mockReturnValue(Promise.resolve({}));
+
+    (MediaStore as any).mockImplementation(() => ({
+      copyFileWithToken,
+    }));
+
+    await finalizeUpload(fetcher, store, action);
+
+    expect(copyFileWithToken).toBeCalledTimes(1);
+    expect(copyFileWithToken).toBeCalledWith(
+      {
+        sourceFile: {
+          collection: 'some-collection',
+          id: 'some-file-id',
+          owner: {
+            clientId: 'some-client-id',
+            token: 'some-token',
+          },
+        },
+      },
+      {
+        collection: 'some-tenant-collection',
+        occurrenceKey: undefined,
+        replaceFileId: undefined,
+      },
+    );
+  });
 });
