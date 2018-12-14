@@ -97,6 +97,7 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
     popupsMountPoint,
     popupsBoundariesElement,
     popupsScrollableElement,
+    appearance,
   }) {
     return (
       <WithPluginState
@@ -113,15 +114,16 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
               isOpen={pluginState.isContextualMenuOpen}
               pluginConfig={pluginState.pluginConfig}
             />
-            {isLayoutSupported(editorView.state) && (
-              <LayoutButton
-                editorView={editorView}
-                mountPoint={popupsMountPoint}
-                boundariesElement={popupsBoundariesElement}
-                scrollableElement={popupsScrollableElement}
-                targetRef={pluginState.tableFloatingToolbarTarget}
-              />
-            )}
+            {appearance === 'full-page' &&
+              isLayoutSupported(editorView.state) && (
+                <LayoutButton
+                  editorView={editorView}
+                  mountPoint={popupsMountPoint}
+                  boundariesElement={popupsBoundariesElement}
+                  scrollableElement={popupsScrollableElement}
+                  targetRef={pluginState.tableFloatingToolbarTarget}
+                />
+              )}
           </>
         )}
       />

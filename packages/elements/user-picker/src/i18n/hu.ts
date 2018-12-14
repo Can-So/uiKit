@@ -1,6 +1,8 @@
 // Hungarian
 export default {
-  'fabric.elements.user-picker.placeholder': 'Find a person...',
-  'fabric.elements.user-picker.multi.remove-item': 'Remove',
-  'fabric.elements.user-picker.single.clear': 'Clear',
+  'fabric.elements.user-picker.placeholder': 'Személy keresése...',
+  'fabric.elements.user-picker.placeholder.add-more':
+    'további személyek hozzáadása...',
+  'fabric.elements.user-picker.multi.remove-item': 'Eltávolítás',
+  'fabric.elements.user-picker.single.clear': 'Törlés',
 };

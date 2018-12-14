@@ -82,11 +82,9 @@ export const handleCloudFetchingEvent = (store: Store<State>) => (
     file: MediaFile,
     data: RemoteUploadEndPayload,
   ) => {
-    const { remoteUploads, deferredIdUpfronts } = store.getState();
+    const { deferredIdUpfronts } = store.getState();
     const { uploadId, fileId } = data;
     const deferred = deferredIdUpfronts[uploadId];
-    const remoteUpload = remoteUploads[uploadId];
-    const { tenant } = remoteUpload;
     const source = {
       id: fileId,
       collection: RECENTS_COLLECTION,
@@ -102,7 +100,7 @@ export const handleCloudFetchingEvent = (store: Store<State>) => (
       store.dispatch(setUpfrontIdDeferred(fileId, resolver, rejecter));
     }
 
-    store.dispatch(finalizeUpload(uploadedFile, uploadId, source, tenant));
+    store.dispatch(finalizeUpload(uploadedFile, uploadId, source));
   };
 
   // Handle cloud upload fail

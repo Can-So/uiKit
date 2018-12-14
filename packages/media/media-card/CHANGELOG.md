@@ -1,5 +1,10 @@
 # @atlaskit/media-image
 
+## 44.2.0
+- [minor] [34369e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/34369e4):
+
+  - ED-5888 Add dark mode for media-card
+
 ## 44.1.4
 - [patch] [6f44079](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6f44079):
 

@@ -277,6 +277,32 @@ export function createApiRouter(): Router<DatabaseSchema> {
     }
   });
 
+  router.post('/items', ({ body }, database) => {
+    const { descriptors } = JSON.parse(body);
+    const records = descriptors.map((descriptor: any) => {
+      const record = database.findOne('collectionItem', {
+        id: descriptor.id,
+        collectionName: descriptor.collection,
+      });
+      return {
+        type: 'file',
+        id: descriptor.id,
+        collection: descriptor.collection,
+        details: record.data.details,
+      };
+    });
+
+    if (records.length) {
+      return {
+        data: {
+          items: records,
+        },
+      };
+    } else {
+      return new Response(404, undefined, {});
+    }
+  });
+
   router.post('/file/copy/withToken', (request, database) => {
     const { body, query } = request;
     const { sourceFile } = JSON.parse(body);

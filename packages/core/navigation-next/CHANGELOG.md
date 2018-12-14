@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 4.0.10
+- [patch] [3a33b6b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a33b6b):
+
+  - New entry point for Global Navigation Skeleton
+
 ## 4.0.9
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

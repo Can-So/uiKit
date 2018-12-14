@@ -9,8 +9,8 @@ import {
   akColorB300,
   akColorB400,
   akColorB500,
-  akColorN900,
 } from '@atlaskit/util-shared-styles';
+import { colors, themed } from '@atlaskit/theme';
 
 export interface WrapperProps {
   valign?: 'top' | 'bottom';
@@ -38,7 +38,7 @@ export const Wrapper: ComponentClass<
 
 export const Title: ComponentClass<HTMLAttributes<{}>> = styled.div`
   ${antialiased} ${ellipsis()} font-weight: bold;
-  color: ${akColorN900};
+  color: ${themed({ light: colors.N900, dark: colors.DN100 })};
   font-size: 12px;
   line-height: 15px;
 `;

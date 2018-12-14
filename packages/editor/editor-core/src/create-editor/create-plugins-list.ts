@@ -78,7 +78,7 @@ export default function createPluginsList(
 ): EditorPlugin[] {
   const plugins = getDefaultPluginsList(props);
 
-  if (props.allowBreakout) {
+  if (props.allowBreakout && props.appearance === 'full-page') {
     plugins.push(breakoutPlugin);
   }
 

@@ -27,6 +27,7 @@ import {
   akColorB400,
   akColorB300,
 } from '@atlaskit/util-shared-styles';
+import { colors, themed } from '@atlaskit/theme';
 
 export interface OverlayProps {
   hasError?: boolean;
@@ -294,7 +295,7 @@ export const ErrorWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
 export const TitleWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
   box-sizing: border-box;
   word-wrap: break-word;
-  color: ${akColorN800};
+  color: ${themed({ light: colors.N800, dark: colors.DN900 })};
   font-size: 12px;
   line-height: 18px;
 `;

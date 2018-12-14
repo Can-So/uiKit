@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.4.8
+- [patch] [f5d4e83](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5d4e83):
+
+  - ED-5866: Fixes incorrect return from Mocked Emoji provider.
+
 ## 6.4.7
 - [patch] [43501db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/43501db):
 
