@@ -113,7 +113,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin',
     defaultMessage:
-      '{fullName} will <b>immediately lose access</b> to all Atlassian account services, including sites and products. They currently have access to: ',
+      '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to: ',
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app.',
   },
@@ -121,7 +121,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self',
     defaultMessage:
-      "You'll <b>immediately lose access</b> to all Atlassian account services, including sites and products. You currently have access to:",
+      "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access.',
   },
@@ -348,7 +348,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self',
     defaultMessage:
-      'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the your profile information.',
+      'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
     description:
       'Text elaborating on the note about apps storing personal data',
   },
