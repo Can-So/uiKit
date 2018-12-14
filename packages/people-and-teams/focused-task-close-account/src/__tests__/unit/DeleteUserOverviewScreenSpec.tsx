@@ -50,6 +50,16 @@ describe('accessibleSites display', () => {
       }),
     ).toMatchSnapshot();
   });
+
+  test('text displayed is different when no accessibleSites prop is passed for current user', () => {
+    expect(
+      render({
+        deactivateUserHandler: () => {},
+        accessibleSites: [],
+        isCurrentUser: true,
+      }),
+    ).toMatchSnapshot();
+  });
 });
 
 describe('deactivateUserHandler display', () => {

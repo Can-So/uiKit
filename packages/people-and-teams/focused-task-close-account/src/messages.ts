@@ -130,7 +130,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites',
     defaultMessage:
-      '{fullName} will <b>immediately lose access</b> to all Atlassian services. Currently, they don’t have access to any, except services like Community and Marketplace. ',
+      '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace. ',
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app.',
   },
@@ -138,7 +138,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites',
     defaultMessage:
-      "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to to any, except services like Community and Marketplace.",
+      "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access.',
   },
