@@ -45,6 +45,8 @@ export type UserPickerProps = {
   isClearable?: boolean;
   /** Optional tooltip to display on hover over the clear indicator. */
   clearValueLabel?: string;
+  /** Whether the menu should use a portal, and where it should attach.  */
+  menuPortalTarget?: HTMLElement;
 };
 
 export type UserPickerState = {
