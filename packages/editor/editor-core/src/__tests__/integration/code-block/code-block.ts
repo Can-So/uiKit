@@ -11,6 +11,7 @@ import { messages } from '../../../plugins/block-type/types';
 
 const selectQuery =
   'div[aria-label="CodeBlock floating controls"] input[aria-autocomplete="list"]';
+const floatingToolbarLanguageSelector = 'div[aria-label="Floating Toolbar"]';
 
 // https://product-fabric.atlassian.net/browse/ED-5564
 // Fix wrong ADF for code block when language is selected
@@ -31,3 +32,111 @@ BrowserTestCase(
     expect(doc).toMatchDocSnapshot();
   },
 );
+
+BrowserTestCase(
+  'code-block: code block language is preserved after floating toolbar loses and gains focus',
+  { skip: ['ie', 'safari'] },
+  async client => {
+    const page = new Page(client);
+    await page.goto(fullpage.path);
+    await page.waitForSelector(fullpage.placeholder);
+    await page.click(fullpage.placeholder);
+    // Insert code block
+    await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+    await page.waitForSelector(selectQuery);
+    // Change code block language
+    await page.type(selectQuery, ['javascript', 'Return']);
+    await page.click(fullpage.placeholder);
+    // Unfocus code block (so floating toolbar hides)
+    await page.type(fullpage.placeholder, ['ArrowRight', 'ArrowRight']);
+    await page.type(fullpage.placeholder, 'test paragraph');
+    // Focus code block again
+    await page.click('pre');
+    // Check that the language is still selected
+    await page.waitForSelector(floatingToolbarLanguageSelector);
+    const language = await page.getText(floatingToolbarLanguageSelector);
+    expect(language.trim()).toEqual('JavaScript');
+  },
+);
+
+BrowserTestCase(
+  'code-block: code block selected language correctly changes when moving selection directly from one code block to another',
+  { skip: ['ie', 'safari'] },
+  async client => {
+    const page = new Page(client);
+    await page.goto(fullpage.path);
+    await page.waitForSelector(fullpage.placeholder);
+    await page.click(fullpage.placeholder);
+    // Insert code block
+    await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+    await page.waitForSelector(selectQuery);
+    // Change code block language
+    await page.type(selectQuery, ['javascript', 'Return']);
+    await page.click(fullpage.placeholder);
+    // Move out of code block
+    await page.type(fullpage.placeholder, ['ArrowDown']);
+    // Insert a second code block
+    await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+    // Make sure the second code block doesn't have a language set.
+    await page.waitForSelector(selectQuery);
+    const secondCodeblockInitialLanguage = await page.getText(
+      floatingToolbarLanguageSelector,
+    );
+    expect(secondCodeblockInitialLanguage.trim()).toEqual('Select language');
+    // Set a language on the second code block
+    await page.type(selectQuery, ['Arduino', 'Return']);
+    // await page.click(fullpage.placeholder);
+
+    // Check that the language on the first code block is still the same
+    await page.click('code[data-language="javascript"]');
+    await page.waitForSelector(floatingToolbarLanguageSelector);
+    const firstCodeBlock = await page.getText(floatingToolbarLanguageSelector);
+    expect(firstCodeBlock.trim()).toEqual('JavaScript');
+    await page.click(fullpage.placeholder);
+
+    // Check that the language on the second code block is still the same
+    // not sure if this is working 100%
+    await page.click('code[data-language="arduino"]');
+    await page.waitForSelector(floatingToolbarLanguageSelector);
+    const secondCodeBlock = await page.getText(floatingToolbarLanguageSelector);
+    expect(secondCodeBlock.trim()).toEqual('Arduino');
+  },
+);
+
+// This bug isn't fixed. See ticket for details.
+// https://product-fabric.atlassian.net/browse/ED-5963
+/*
+BrowserTestCase(
+  'code-block: code block selected language correctly changes when moving selection directly from one code block to another where one blocks selected is undefined',
+  { skip: ['ie', 'safari'] },
+  async client => {
+    const page = new Page(client);
+    await page.goto(fullpage.path);
+    await page.waitForSelector(fullpage.placeholder);
+    await page.click(fullpage.placeholder);
+    // Insert code block
+    await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+    await page.waitForSelector(selectQuery);
+    // Move out of code block
+    await page.type(fullpage.placeholder, ['ArrowDown']);
+    // Insert a second code block
+    await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+    // Make sure the second code block doesn't have a language set.
+    await page.waitForSelector(selectQuery);
+    const secondCodeblockInitialLanguage = await page.getText(
+      floatingToolbarLanguageSelector,
+    );
+    expect(secondCodeblockInitialLanguage.trim()).toEqual('Select language');
+    // Set a language on the second code block
+    await page.type(selectQuery, ['C', 'Return']);
+
+    // Check that the language on the first code block is still the same
+    await page.click('code');
+    await page.waitForSelector(floatingToolbarLanguageSelector);
+    const firstBlockLanguage = await page.getText(
+      floatingToolbarLanguageSelector,
+    );
+    expect(firstBlockLanguage.trim()).toEqual('Select language');
+  },
+);
+*/

@@ -6,11 +6,9 @@ import {
 } from 'prosemirror-utils';
 
 import codeBlockNodeView from '../nodeviews/code-block';
-import { SelectOption } from '../../floating-toolbar/ui/Select';
 
 export type CodeBlockState = {
   element?: HTMLElement;
-  language?: SelectOption | undefined;
   toolbarVisible?: boolean | undefined;
 };
 
@@ -75,11 +73,11 @@ export const createPlugin = ({
           )(selection);
           if (parentDOM !== pluginState.element) {
             const parent = findParentNodeOfType(codeBlock)(selection);
-            setPluginState({
-              element: parentDOM,
-              language: parent && parent!.node.attrs['language'],
+            const newState: CodeBlockState = {
+              element: parentDOM as HTMLElement,
               toolbarVisible: !!parent,
-            })(view.state, view.dispatch);
+            };
+            setPluginState(newState)(view.state, view.dispatch);
             return true;
           }
 

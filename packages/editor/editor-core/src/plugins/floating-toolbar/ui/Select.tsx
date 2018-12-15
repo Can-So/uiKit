@@ -64,7 +64,7 @@ export default class Search extends Component<Props, State> {
       <SelectWrapper width={width}>
         <Select
           options={options}
-          defaultValue={defaultValue}
+          value={defaultValue}
           onChange={onChange}
           placeholder={placeholder}
           spacing={'compact'}
