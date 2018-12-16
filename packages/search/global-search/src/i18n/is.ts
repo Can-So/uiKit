@@ -38,7 +38,7 @@ export default {
   'global_search.jira.advanced_search_people': 'fólk',
   'global_search.jira.advanced_issue_search': 'Ítarleg leit fyrir málefni',
   'global_search.jira.no_results_title':
-    "We couldn't find anything matching your search",
+    'Okkur tókst ekki að finna neitt sem samræmdust leit þinni',
   'global_search.jira.no_results_body':
     'Reyndu aftur með öðru leitarorði, eða fínstillt niðurstöðurnar þínar með ítarlegu leitinni okkar.',
   'global_search.jira.no_recent_activity_body':
