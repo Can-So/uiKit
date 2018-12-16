@@ -3,7 +3,6 @@ import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { MediaSingleLayout } from '../../schema';
 import {
-  akEditorWideLayoutWidth,
   akEditorFullPageMaxWidth,
 } from '../../styles';
 import { calcWideWidth, calcBreakoutWidth } from '../../utils';
@@ -26,7 +25,7 @@ function float(layout: MediaSingleLayout): string {
  * then an image in wide or full-width can not be wider than the image's
  * original width.
  */
-function calcLegacyWidth(
+export function calcLegacyWidth(
   layout: MediaSingleLayout,
   width: number,
   containerWidth: number = 0,
@@ -52,14 +51,14 @@ function calcLegacyWidth(
  * Wide and full-width images are always that size (960px and 100%); there is
  * no distinction between max-width and width.
  */
-function calcResizedWidth(
+export function calcResizedWidth(
   layout: MediaSingleLayout,
   width: number,
   containerWidth: number = 0,
 ) {
   switch (layout) {
     case 'wide':
-      return `${akEditorWideLayoutWidth}px`;
+      return calcWideWidth(containerWidth);
     case 'full-width':
       return calcBreakoutWidth(layout, containerWidth);
     default:
