@@ -70,7 +70,8 @@ const changeAppearance = (selectedOption: SelectOption) => {
   }
 };
 
-const buildDropdown = (
+// Temporarily disabled after https://product-fabric.atlassian.net/browse/MS-1308
+/* const buildDropdown = (
   state: EditorState,
   intl: InjectedIntl,
 ): FloatingToolbarItem<Command> => {
@@ -125,7 +126,7 @@ const buildDropdown = (
     defaultValue: options.find(option => !!option.selected),
     onChange: changeAppearance,
   };
-};
+}; */
 
 export const floatingToolbar = (
   state: EditorState,
@@ -137,8 +138,9 @@ export const floatingToolbar = (
     title: 'Card floating controls',
     nodeType: [inlineCard, blockCard],
     items: [
-      buildDropdown(state, intl),
-      { type: 'separator' },
+      // Temporarily disabled after https://product-fabric.atlassian.net/browse/MS-1308
+      // buildDropdown(state, intl),
+      // { type: 'separator' },
       {
         type: 'button',
         icon: OpenIcon,
