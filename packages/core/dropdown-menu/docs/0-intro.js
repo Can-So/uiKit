@@ -3,10 +3,6 @@
 import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
-// Note: DropdownItem props are the same as Item props.
-// Unfortunately, we can't pass props direclty from DropdownItem as it is wrapped by a function and extract-react-type can't access it.
-// We decided to render directly the props from Item to help the consumer.
-
 export default md`
 The dropdown menu has two exports, a default stateful component, and a stateless component when you want to have more direct control over all actions.
 
@@ -43,12 +39,17 @@ ${(
   />
 )}
 
-${(
-  <Props
-    heading="DropdownItem Props"
-    props={require('!!extract-react-types-loader!../../item/src/components/Item')}
-  />
-)}
+${
+  (
+    // Note: DropdownItem props are the same as Item props.
+    // Unfortunately, we can't pass props direclty from DropdownItem as it is wrapped by a function and extract-react-type can't access it.
+    // We decided to render directly the props from Item to help the consumer.
+    <Props
+      heading="DropdownItem Props"
+      props={require('!!extract-react-types-loader!../../item/src/components/Item')}
+    />
+  )
+}
 
 ${(
   <Props
