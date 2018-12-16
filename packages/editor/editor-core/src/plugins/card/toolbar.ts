@@ -8,18 +8,7 @@ import OpenIcon from '@atlaskit/icon/glyph/open';
 import { analyticsService } from '../../analytics';
 import commonMessages from '../../messages';
 import { Command } from '../../../src/types';
-import {
-  FloatingToolbarConfig,
-  FloatingToolbarItem,
-} from '../../../src/plugins/floating-toolbar/types';
-import { SelectOption } from '../floating-toolbar/ui/Select';
-import {
-  changeSelectedCardToLink,
-  setSelectedCardAppearance,
-} from './pm-plugins/doc';
-import { appearanceForNodeType } from './utils';
-import { CardAppearance } from './types';
-import { Fragment } from 'prosemirror-model';
+import { FloatingToolbarConfig } from '../../../src/plugins/floating-toolbar/types';
 
 export const messages = defineMessages({
   block: {
@@ -62,6 +51,8 @@ const visit: Command = state => {
   return false;
 };
 
+// Temporarily disabled after https://product-fabric.atlassian.net/browse/MS-1308
+/*
 const changeAppearance = (selectedOption: SelectOption) => {
   if (selectedOption.value === 'link') {
     return changeSelectedCardToLink;
@@ -70,8 +61,7 @@ const changeAppearance = (selectedOption: SelectOption) => {
   }
 };
 
-// Temporarily disabled after https://product-fabric.atlassian.net/browse/MS-1308
-/* const buildDropdown = (
+const buildDropdown = (
   state: EditorState,
   intl: InjectedIntl,
 ): FloatingToolbarItem<Command> => {
