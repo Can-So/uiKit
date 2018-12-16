@@ -6,8 +6,9 @@ import createRequest, {
 import { MediaItem } from '../';
 
 export type ImageResizeMode = 'crop' | 'fit' | 'full-fit' | 'stretchy-fit';
-const convertToBackendResizeMode = (mode: ImageResizeMode): ImageResizeMode =>
-  mode === 'stretchy-fit' ? 'full-fit' : mode;
+const convertToResizeModeForBackend = (
+  mode: ImageResizeMode,
+): ImageResizeMode => (mode === 'stretchy-fit' ? 'full-fit' : mode);
 
 export interface FetchImageOptions {
   width: number;
@@ -69,7 +70,7 @@ export class MediaBlobService implements BlobService {
     return this.fetchSomeBlob(`/file/${mediaItem.details.id}/image`, {
       width,
       height,
-      mode: convertToBackendResizeMode(mode),
+      mode: convertToResizeModeForBackend(mode),
       allowAnimated,
       'max-age': 3600,
       collection: this.collectionName,

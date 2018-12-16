@@ -71,7 +71,6 @@ export default class MediaGroup extends PureComponent<
     surroundingItems: Identifier[],
   ) {
     return React.cloneElement(child, {
-      resizeMode: 'stretchy-fit',
       eventHandlers: {
         ...child.props.eventHandlers,
         media: {
