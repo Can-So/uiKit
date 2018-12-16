@@ -3,7 +3,7 @@ export type UserPickerProps = {
   options?: User[];
   /** Width of the user picker field. */
   width?: number;
-  /** Sets the minWidth for the menu. */
+  /** Sets the minimum width for the menu. If not set, menu will always have the same width of the field */
   menuMinWidth?: number;
   /** Function used to load options asynchronously. */
   loadOptions?: LoadOptions;
