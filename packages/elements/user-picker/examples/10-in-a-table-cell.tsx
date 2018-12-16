@@ -21,6 +21,25 @@ const Cell = styled.div<{ width?: number }>`
   width: ${({ width }) => `${width}px` || 'auto'};
 `;
 
+const renderRows = (count: number) => {
+  const rows: React.ReactNode[] = [];
+  for (let i = 0; i < count; i++) {
+    rows.push(
+      <Row>
+        <Cell width={300}>KEY-{i}</Cell>
+        <Cell width={100}>
+          <UserPicker
+            menuPortalTarget={document.body}
+            options={exampleUsers}
+            onChange={console.log}
+          />
+        </Cell>
+      </Row>,
+    );
+  }
+  return rows;
+};
+
 export default class Example extends React.Component<{}> {
   render() {
     return (
@@ -29,176 +48,7 @@ export default class Example extends React.Component<{}> {
           <Cell width={300}>Issue</Cell>
           <Cell width={100}>Assign</Cell>
         </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
-        <Row>
-          <Cell width={300}>KEY-123</Cell>
-          <Cell width={100}>
-            <UserPicker
-              menuPortalTarget={document.body}
-              options={exampleUsers}
-              onChange={console.log}
-            />
-          </Cell>
-        </Row>
+        {renderRows(50)}
       </Table>
     );
   }
