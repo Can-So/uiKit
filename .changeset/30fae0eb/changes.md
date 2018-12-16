@@ -1,0 +1,1 @@
+- Remove option to change appearance mode on Smart Cards.
