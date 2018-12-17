@@ -239,6 +239,11 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
       style.transform += ` ${transform}`;
     }
 
+    if (style.maxWidth === undefined) {
+      // This to override unexpected css coming from Prose mirror
+      style.maxWidth = 'none !important';
+    }
+
     return (
       <ImageComponent
         draggable={false}
