@@ -337,6 +337,8 @@ export const UserPicker = withAnalyticsEvents()(
         isClearable,
         isDisabled,
         clearValueLabel,
+        menuMinWidth,
+        menuPortalTarget,
       } = this.props;
       const {
         count,
@@ -381,6 +383,8 @@ export const UserPicker = withAnalyticsEvents()(
           backspaceRemovesValue={isMulti}
           filterOption={null} // disable local filtering
           clearValueLabel={clearValueLabel}
+          menuMinWidth={menuMinWidth}
+          menuPortalTarget={menuPortalTarget}
         />
       );
     }
