@@ -1,1 +1,0 @@
-- Move schema to its own package

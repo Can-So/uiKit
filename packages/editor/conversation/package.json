@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/conversation",
-  "version": "11.1.5",
+  "version": "11.1.6",
   "config": {
     "access": "public"
   },
@@ -27,10 +27,10 @@
     "@atlaskit/analytics-next": "^3.1.2",
     "@atlaskit/avatar": "^14.1.7",
     "@atlaskit/comment": "^6.0.31",
-    "@atlaskit/editor-common": "^23.0.0",
-    "@atlaskit/editor-core": "^91.0.0",
+    "@atlaskit/editor-common": "^24.0.0",
+    "@atlaskit/editor-core": "^91.1.0",
     "@atlaskit/reactions": "^15.0.10",
-    "@atlaskit/renderer": "^32.0.0",
+    "@atlaskit/renderer": "^32.1.0",
     "date-fns": "^1.29.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.5.10",

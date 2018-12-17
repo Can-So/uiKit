@@ -1,5 +1,10 @@
 # @atlaskit/editor-bitbucket-transformer
 
+## 4.1.0
+- [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+
+  - Move schema to its own package
+
 ## 4.0.23
 - Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
   - @atlaskit/editor-common@23.0.0
