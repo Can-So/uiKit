@@ -1,1 +1,0 @@
-- Add stretchy-fit resize mode that acts as full-fit but scales up small image in big container

@@ -1,1 +1,0 @@
-- Use stretchy-fit resizeMode for media card components instead of full-fit or undefined values;

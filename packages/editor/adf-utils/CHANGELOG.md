@@ -1,5 +1,9 @@
 # @atlaskit/adf-utils
 
+## 5.3.4
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+
 ## 5.3.3
 - [patch] [34df084](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/34df084):
 
