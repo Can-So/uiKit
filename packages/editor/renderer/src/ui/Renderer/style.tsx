@@ -7,6 +7,7 @@ import {
   fontFamily,
   fontSize,
   borderRadius,
+  themed,
 } from '@atlaskit/theme';
 import {
   tableSharedStyle,
@@ -82,7 +83,7 @@ export const Wrapper = styled.div<Props & HTMLAttributes<{}>>`
 
   font-size: ${editorFontSize}px;
   ${getLineHeight};
-  color: ${colors.N800};
+  color: ${themed({ light: colors.N800, dark: '#B8C7E0' })};
   word-wrap: break-word;
 
   & span.akActionMark {
