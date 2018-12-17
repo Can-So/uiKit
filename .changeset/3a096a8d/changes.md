@@ -1,1 +1,0 @@
-- ED-5882: fixed delayed scroll to top after page load
