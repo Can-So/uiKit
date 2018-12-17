@@ -82,7 +82,9 @@ describe('LayoutManager', () => {
           <LayoutManager {...defaultProps} globalNavigation={Global} />,
         );
         const instance = wrapper.instance();
-        const spy = jest.spyOn(instance, 'closeFlyout');
+        const spy = jest
+          .spyOn(instance, 'closeFlyout')
+          .mockImplementation(() => {});
         // to register the spy on the instance
         wrapper.setProps({});
 
@@ -97,7 +99,9 @@ describe('LayoutManager', () => {
       it('should NOT open when mousing over expand/collapse affordance with a delay of 200ms', () => {
         const wrapper = mount(<LayoutManager {...defaultProps} />);
         const instance = wrapper.instance();
-        const spy = jest.spyOn(instance, 'closeFlyout');
+        const spy = jest
+          .spyOn(instance, 'closeFlyout')
+          .mockImplementation(() => {});
         wrapper.setProps({});
 
         wrapper
