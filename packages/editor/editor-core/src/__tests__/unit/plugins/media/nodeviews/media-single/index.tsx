@@ -7,7 +7,7 @@ import {
   randomId,
   storyMediaProviderFactory,
 } from '@atlaskit/editor-test-helpers';
-import { defaultSchema, MediaAttributes } from '@atlaskit/editor-common';
+import { defaultSchema, MediaAttributes } from '@atlaskit/adf-schema';
 import {
   stateKey as mediaStateKey,
   DefaultMediaStateManager,

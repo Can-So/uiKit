@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { orderedList, bulletList, listItem } from '@atlaskit/editor-common';
+import { orderedList, bulletList, listItem } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import { ToolbarSize } from '../../ui/Toolbar';
 import ToolbarLists from './ui/ToolbarLists';

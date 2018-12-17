@@ -28,14 +28,14 @@ const ignoredNodes = [
   'image',
 ];
 
-const editorCommonNodesPath = path.join(
+const adfSchemaNodesPath = path.join(
   __dirname,
   '..',
   '..',
   '..',
   '..',
   '..',
-  'editor-common',
+  'adf-schema',
   'src',
   'schema',
   'nodes',
@@ -57,14 +57,14 @@ const ignoredMarks = [
   'type-ahead-query',
 ];
 
-const editorCommonMarksPath = path.join(
+const adfSchemaMarksPath = path.join(
   __dirname,
   '..',
   '..',
   '..',
   '..',
   '..',
-  'editor-common',
+  'adf-schema',
   'src',
   'schema',
   'marks',
@@ -79,15 +79,15 @@ const marksBuildersPath = path.join(
   'marks',
 );
 
-describe('adf-utils <-> editor-common/schema consistency', () => {
-  it('should have builders for all nodes from editor-common/schema/nodes', () => {
-    const nodes = buildFilesList(editorCommonNodesPath, ignoredNodes);
+describe('adf-utils <-> adf-schema/schema consistency', () => {
+  it('should have builders for all nodes from adf-schema/schema/nodes', () => {
+    const nodes = buildFilesList(adfSchemaNodesPath, ignoredNodes);
     const builders = buildFilesList(nodeBuildersPath, ignoredNodes);
     expect(builders).toEqual(nodes);
   });
 
-  it('should have builders for all marks from editor-common/schema/marks', () => {
-    const marks = buildFilesList(editorCommonMarksPath, ignoredMarks);
+  it('should have builders for all marks from adf-schema/schema/marks', () => {
+    const marks = buildFilesList(adfSchemaMarksPath, ignoredMarks);
     const builders = buildFilesList(marksBuildersPath);
     expect(builders).toEqual(marks);
   });

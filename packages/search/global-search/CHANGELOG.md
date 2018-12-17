@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.13.6
+- [patch] [d6bd32b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d6bd32b):
+
+  - Updated global-search translations
+
 ## 5.13.5
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics@4.0.7

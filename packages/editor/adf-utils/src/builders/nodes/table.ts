@@ -1,4 +1,4 @@
-import { TableDefinition, TableRowDefinition } from '@atlaskit/editor-common';
+import { TableDefinition, TableRowDefinition } from '@atlaskit/adf-schema';
 
 export const table = (
   ...content: Array<TableRowDefinition>

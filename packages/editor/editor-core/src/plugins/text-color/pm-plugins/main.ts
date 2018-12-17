@@ -1,6 +1,6 @@
 import { Plugin, PluginKey, Transaction, EditorState } from 'prosemirror-state';
 
-import { colorPalette, borderColorPalette } from '@atlaskit/editor-common';
+import { colorPalette, borderColorPalette } from '@atlaskit/adf-schema';
 import { colors } from '@atlaskit/theme';
 
 import { Dispatch } from '../../../event-dispatcher';

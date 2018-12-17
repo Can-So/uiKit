@@ -1,6 +1,6 @@
 import { blockquote, doc, li, p, ul } from '@atlaskit/editor-test-helpers';
 import { checkParseEncodeRoundTrips } from '../../_test-helpers';
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 
 // Nodes
 

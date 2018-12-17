@@ -1,5 +1,18 @@
 # @atlaskit/media-image
 
+## 45.0.0
+- [minor] [b5ab1a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5ab1a5):
+
+  - Add stretch as a prop for CardContent and MediaImage; Convert new stretchy-fit resizeMode to stretch=true;
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/media-test-helpers@18.6.2
+  - @atlaskit/media-core@24.6.0
+
+## 44.2.0
+- [minor] [34369e4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/34369e4):
+
+  - ED-5888 Add dark mode for media-card
+
 ## 44.1.4
 - [patch] [6f44079](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6f44079):
 

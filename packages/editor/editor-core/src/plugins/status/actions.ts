@@ -6,7 +6,7 @@ import {
   Selection,
 } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 import { pluginKey, StatusType } from './plugin';
 
 export const DEFAULT_STATUS: StatusType = {

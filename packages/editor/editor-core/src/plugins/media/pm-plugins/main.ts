@@ -12,11 +12,8 @@ import {
 } from 'prosemirror-state';
 import { Context } from '@atlaskit/media-core';
 import { UploadParams } from '@atlaskit/media-picker';
-import {
-  MediaType,
-  MediaSingleLayout,
-  ErrorReporter,
-} from '@atlaskit/editor-common';
+import { MediaType, MediaSingleLayout } from '@atlaskit/adf-schema';
+import { ErrorReporter } from '@atlaskit/editor-common';
 
 import analyticsService from '../../../analytics/service';
 import { isImage, SetAttrsStep } from '../../../utils';
@@ -621,10 +618,6 @@ export class MediaPluginState {
         picker.onNewMedia(this.insertFiles);
         picker.onNewMedia(this.trackNewMediaEvent(picker.type));
       });
-    }
-
-    if (this.popupPicker) {
-      this.popupPicker.hide();
     }
 
     // set new upload params for the pickers

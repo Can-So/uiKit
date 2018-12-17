@@ -1,5 +1,6 @@
 import { Plugin, PluginKey } from 'prosemirror-state';
-import { uuid, ProviderFactory } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
+import { ProviderFactory } from '@atlaskit/editor-common';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 import { decisionItemNodeView } from '../nodeviews/decisionItem';
 import { taskItemNodeViewFactory } from '../nodeviews/taskItem';

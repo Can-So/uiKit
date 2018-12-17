@@ -1,6 +1,12 @@
-import { DocNode, BlockContent } from '@atlaskit/editor-common';
+import {
+  DocNode,
+  BlockContent,
+  LayoutSectionDefinition,
+} from '@atlaskit/adf-schema';
 
-export const doc = (...content: Array<BlockContent>): DocNode => ({
+export const doc = (
+  ...content: Array<BlockContent | LayoutSectionDefinition>
+): DocNode => ({
   type: 'doc',
   version: 1,
   content,

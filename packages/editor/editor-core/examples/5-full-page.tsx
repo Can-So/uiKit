@@ -69,6 +69,8 @@ export const analyticsHandler = (actionName, props) =>
 const SAVE_ACTION = () => console.log('Save');
 
 export const LOCALSTORAGE_defaultDocKey = 'fabric.editor.example.full-page';
+export const LOCALSTORAGE_defaultTitleKey =
+  'fabric.editor.example.full-page.title';
 
 export const SaveAndCancelButtons = props => (
   <ButtonGroup>
@@ -101,7 +103,7 @@ export const SaveAndCancelButtons = props => (
   </ButtonGroup>
 );
 
-export type State = { disabled: boolean };
+export type State = { disabled: boolean; title: string };
 
 export const providers = {
   emojiProvider: emoji.storyData.getEmojiResource({
@@ -125,8 +127,18 @@ export const mediaProvider = storyMediaProviderFactory({
 
 export const quickInsertProvider = quickInsertProviderFactory();
 
-export class ExampleEditor extends React.Component<EditorProps, State> {
-  state: State = { disabled: true };
+export interface ExampleProps {
+  onTitleChange?: (title: string) => void;
+}
+
+export class ExampleEditor extends React.Component<
+  EditorProps & ExampleProps,
+  State
+> {
+  state: State = {
+    disabled: true,
+    title: localStorage.getItem(LOCALSTORAGE_defaultTitleKey) || '',
+  };
 
   componentDidMount() {
     // tslint:disable-next-line:no-console
@@ -186,14 +198,16 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
                   // tslint:disable-next-line:jsx-no-lambda
                   render={actions => (
                     <TitleInput
+                      value={this.state.title}
+                      onChange={this.handleTitleChange}
                       placeholder="Give this page a title..."
                       // tslint:disable-next-line:jsx-no-lambda
                       innerRef={this.handleTitleRef}
                       onFocus={this.handleTitleOnFocus}
                       onBlur={this.handleTitleOnBlur}
-                      onKeyDown={(e: KeyboardEvent) =>
-                        this.onKeyPressed(e, actions)
-                      }
+                      onKeyDown={(e: KeyboardEvent) => {
+                        this.onKeyPressed(e, actions);
+                      }}
                     />
                   )}
                 />
@@ -227,6 +241,17 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
     }
   };
 
+  private handleTitleChange = (e: KeyboardEvent) => {
+    const title = (e.target as HTMLInputElement).value;
+    this.setState({
+      title,
+    });
+
+    if (this.props.onTitleChange) {
+      this.props.onTitleChange(title);
+    }
+  };
+
   private handleTitleOnFocus = () => this.setState({ disabled: true });
   private handleTitleOnBlur = () => this.setState({ disabled: false });
   private handleTitleRef = (ref?: HTMLElement) => {
@@ -236,7 +261,7 @@ export class ExampleEditor extends React.Component<EditorProps, State> {
   };
 }
 
-export default function Example(props: EditorProps) {
+export default function Example(props: EditorProps & ExampleProps) {
   return (
     <EditorContext>
       <div style={{ height: '100%' }}>

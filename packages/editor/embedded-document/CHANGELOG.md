@@ -1,5 +1,15 @@
 # @atlaskit/embedded-document
 
+## 0.0.12
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/renderer@32.0.0
+
+## 0.0.11
+- [patch] [5b00acc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b00acc):
+
+  - support fetch by objectId
+
 ## 0.0.10
 - [patch] [062da38](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/062da38):
 

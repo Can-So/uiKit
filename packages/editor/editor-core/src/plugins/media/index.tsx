@@ -1,6 +1,6 @@
 import * as React from 'react';
 import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
-import { media, mediaGroup, mediaSingle } from '@atlaskit/editor-common';
+import { media, mediaGroup, mediaSingle } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import {
   stateKey as pluginKey,
@@ -118,7 +118,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
     );
   },
 
-  contentComponent({ editorView }) {
+  contentComponent({ editorView, appearance }) {
     if (!options) {
       return null;
     }
@@ -145,12 +145,14 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
         render={({ mediaState }) => {
           const { element: target, layout } = mediaState as MediaPluginState;
           const node = mediaState.selectedMediaNode();
+          const isFullPage = appearance === 'full-page';
           const allowBreakout = !!(
             node &&
             node.attrs &&
-            node.attrs.width > akEditorFullPageMaxWidth
+            node.attrs.width > akEditorFullPageMaxWidth &&
+            isFullPage
           );
-          const allowLayout = !!mediaState.isLayoutSupported();
+          const allowLayout = isFullPage && !!mediaState.isLayoutSupported();
           return (
             <MediaSingleEdit
               pluginState={mediaState}

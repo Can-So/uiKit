@@ -8,7 +8,7 @@ import {
   taskItem,
   taskList,
   uuid,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import { messages as insertBlockMessages } from '../insert-block/ui/ToolbarInsertBlock';
 import { createPlugin } from './pm-plugins/main';

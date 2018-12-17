@@ -1,5 +1,5 @@
 import * as sinon from 'sinon';
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   doc,
   p,

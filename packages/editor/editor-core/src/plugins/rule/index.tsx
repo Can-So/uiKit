@@ -1,6 +1,6 @@
 import * as React from 'react';
 import HorizontalRuleIcon from '@atlaskit/icon/glyph/editor/divider';
-import { rule } from '@atlaskit/editor-common';
+import { rule } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';
 import keymapPlugin from './pm-plugins/keymap';
