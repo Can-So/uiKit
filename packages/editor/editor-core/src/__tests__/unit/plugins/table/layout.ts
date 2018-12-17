@@ -14,7 +14,7 @@ import {
   layoutSection,
   layoutColumn,
 } from '@atlaskit/editor-test-helpers';
-import { TableLayout } from '@atlaskit/editor-common';
+import { TableLayout } from '@atlaskit/adf-schema';
 import {
   pluginKey as tablePluginKey,
   getPluginState,

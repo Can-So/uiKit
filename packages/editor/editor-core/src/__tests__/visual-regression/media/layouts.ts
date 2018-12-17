@@ -6,7 +6,7 @@ import {
   setupMediaMocksProviders,
 } from '../_utils';
 
-const mediaSingleLayouts = {
+export const mediaSingleLayouts = {
   center: 'Center',
   'wrap-left': 'Wrap left',
   'wrap-right': 'Wrap right',

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { status } from '@atlaskit/editor-common';
+import { status } from '@atlaskit/adf-schema';
 import LabelIcon from '@atlaskit/icon/glyph/label';
 import { findDomRefAtPos } from 'prosemirror-utils';
 import { EditorPlugin } from '../../types';

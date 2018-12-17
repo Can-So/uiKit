@@ -1,7 +1,7 @@
 import {
   LayoutColumnDefinition,
   LayoutSectionDefinition,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 export const layoutSection = () => (
   content: Array<LayoutColumnDefinition>,

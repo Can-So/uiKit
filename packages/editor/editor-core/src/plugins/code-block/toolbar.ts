@@ -4,7 +4,7 @@ import {
   createLanguageList,
   DEFAULT_LANGUAGES,
   getLanguageIdentifier,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 import {
   FloatingToolbarHandler,

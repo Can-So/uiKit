@@ -1,7 +1,4 @@
-import {
-  BulletListDefinition,
-  ListItemDefinition,
-} from '@atlaskit/editor-common';
+import { BulletListDefinition, ListItemDefinition } from '@atlaskit/adf-schema';
 
 export const bulletList = (
   ...content: Array<ListItemDefinition>

@@ -3,6 +3,11 @@ declare var global: any;
 // TO-DO remove chai validation
 import { expect } from 'chai';
 import {
+  isSafeUrl,
+  defaultSchema as schema,
+  createSchema,
+} from '@atlaskit/adf-schema';
+import {
   ADDoc,
   isSubSupType,
   getValidDocument,
@@ -14,9 +19,6 @@ import {
   markOrder,
   ADNode,
 } from '../../../utils/validator';
-import { isSafeUrl } from '../../../utils/url';
-import { defaultSchema as schema } from '../../../schema/default-schema';
-import { createSchema } from '../../../schema/create-schema';
 
 describe('Renderer - Validator', () => {
   describe('isSafeUrl', () => {

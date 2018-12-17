@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Plugin } from 'prosemirror-state';
-import { breakout, calcBreakoutWidth } from '@atlaskit/editor-common';
+import { breakout } from '@atlaskit/adf-schema';
+import { calcBreakoutWidth } from '@atlaskit/editor-common';
 import { EditorPlugin } from '../../types';
 import { ReactNodeView } from '../../nodeviews';
 import WithPluginState from '../../ui/WithPluginState';
