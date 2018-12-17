@@ -64,6 +64,12 @@ describe('CardView', () => {
       renderOptions,
     );
 
+  it('should render FileCard when no metadata is passed', () => {
+    const element = mount(<CardView status="loading" />);
+    const fileCard = element.find(FileCard);
+    expect(fileCard).toHaveLength(1);
+  });
+
   it('should render LinkCard with details', () => {
     const element = shallowCardViewBaseElement({ metadata: link });
 
@@ -72,12 +78,34 @@ describe('CardView', () => {
     expect(linkCard.props().details).toBe(link);
   });
 
+  it('should render LinkCard with other props', () => {
+    const element = shallowCardViewBaseElement({
+      metadata: link,
+      appearance: 'image',
+    });
+
+    const linkCard = element.find(LinkCard);
+    expect(linkCard).toHaveLength(1);
+    expect(linkCard.prop('appearance')).toEqual('image');
+  });
+
   it('should render FileCard with details', () => {
     const element = shallowCardViewBaseElement({ metadata: file });
 
     const card = element.find(FileCard);
     expect(card).toHaveLength(1);
     expect(card.props().details).toBe(file);
+  });
+
+  it('should render FileCard with other props', () => {
+    const element = shallowCardViewBaseElement({
+      metadata: file,
+      appearance: 'image',
+    });
+
+    const fileCard = element.find(FileCard);
+    expect(fileCard).toHaveLength(1);
+    expect(fileCard.prop('appearance')).toEqual('image');
   });
 
   it('should render LinkCard and NOT use details to determine which card to render when mediaItemType is "link"', () => {
@@ -243,6 +271,33 @@ describe('CardView', () => {
       expect(element.find(Wrapper).props().dimensions).toEqual({
         width: 156,
         height: 125,
+      });
+    });
+
+    it('should use default dimensions based on passed appearance', () => {
+      const element = shallowCardViewBaseElement({
+        status: 'loading',
+        metadata: file,
+      });
+      expect(element.find(Wrapper).props().dimensions).toEqual({
+        width: 156,
+        height: 125,
+      });
+    });
+
+    it('should use passed dimensions when provided', () => {
+      const element = shallowCardViewBaseElement(
+        {
+          status: 'loading',
+          metadata: file,
+          dimensions: { width: '70%', height: 100 },
+        },
+        { disableLifecycleMethods: true },
+      );
+
+      expect(element.find(Wrapper).props().dimensions).toEqual({
+        width: '70%',
+        height: 100,
       });
     });
 
