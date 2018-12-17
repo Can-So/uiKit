@@ -1,5 +1,10 @@
 # @atlaskit/media-core
 
+## 24.5.3
+- [patch] [0f42ec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f42ec1):
+
+  Use /items endpoint in media-core
+
 ## 24.5.2
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/button@10.1.1

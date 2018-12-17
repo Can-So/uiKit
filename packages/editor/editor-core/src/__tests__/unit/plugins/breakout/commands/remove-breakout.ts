@@ -10,7 +10,11 @@ describe('Breakout Commands: remove-breakout', () => {
   it('should remove breakout mark from a given node', () => {
     const { editorView } = createEditor({
       doc: doc(breakout({ mode: 'wide' })(code_block()('Hel{<>}lo'))),
-      editorProps: { allowCodeBlocks: true, allowBreakout: true },
+      editorProps: {
+        allowCodeBlocks: true,
+        allowBreakout: true,
+        appearance: 'full-page',
+      },
     });
 
     removeBreakout()(editorView.state, editorView.dispatch);

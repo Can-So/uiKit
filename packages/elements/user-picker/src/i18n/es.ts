@@ -1,6 +1,7 @@
 // Spanish
 export default {
-  'fabric.elements.user-picker.placeholder': 'Find a person...',
-  'fabric.elements.user-picker.multi.remove-item': 'Remove',
-  'fabric.elements.user-picker.single.clear': 'Clear',
+  'fabric.elements.user-picker.placeholder': 'Busca a una persona...',
+  'fabric.elements.user-picker.placeholder.add-more': 'añade a más personas...',
+  'fabric.elements.user-picker.multi.remove-item': 'Eliminar',
+  'fabric.elements.user-picker.single.clear': 'Borrar',
 };

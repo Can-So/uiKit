@@ -1,5 +1,15 @@
 # @atlaskit/media-test-helpers
 
+## 18.6.1
+- [patch] [f621523](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f621523):
+
+  - fix MediaMocker router
+
+## 18.6.0
+- [minor] [0f42ec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f42ec1):
+
+  Use /items endpoint in media-core
+
 ## 18.5.2
 - Updated dependencies [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
   - @atlaskit/media-card@44.1.1

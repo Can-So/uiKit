@@ -1,5 +1,20 @@
 # @atlaskit/editor-common
 
+## 22.4.2
+- [patch] [34df084](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/34df084):
+
+  - Fix layout schema and enable breakout layouts in renderer
+
+## 22.4.1
+- [patch] [a2ea6a7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2ea6a7):
+
+  - Use indexOf instead of bespoke/custom findIndex
+
+## 22.4.0
+- [minor] [e06b553](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e06b553):
+
+  - ED-5702: default new table resizing
+
 ## 22.3.2
 - [patch] [60a4609](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/60a4609):
 

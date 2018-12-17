@@ -1,5 +1,10 @@
 # @atlaskit/date
 
+## 0.2.0
+- [minor] [67d563a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/67d563a):
+
+  - ED-5888 Add dark mode for date
+
 ## 0.1.9
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/theme@7.0.1

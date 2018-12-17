@@ -19,7 +19,7 @@ export const PropertyViewer = <T extends {}>({
   object,
   property,
 }: Props<T>) => {
-  if (object[property]) {
+  if (object[property] !== undefined) {
     return (
       <PropertyViewerContainer>
         {property}: {JSON.stringify(object[property])}

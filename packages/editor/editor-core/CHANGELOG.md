@@ -1,5 +1,44 @@
 # @atlaskit/editor-core
 
+## 90.4.7
+- [patch] [f621523](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f621523):
+
+  - fix MediaMocker router
+
+## 90.4.6
+- [patch] [feb276c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/feb276c):
+
+  - Don't scroll cursor into view on remote transactions
+
+## 90.4.5
+- [patch] [6beeada](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6beeada):
+
+  - Don't hide media-picker on initialisation
+
+## 90.4.4
+- [patch] [f083737](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f083737):
+
+  - Fix copy-paste of external images
+
+## 90.4.3
+- [patch] [4e483e7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e483e7):
+
+  - ED-5900: store resize handle always as a number
+
+## 90.4.2
+- [patch] [ebd73f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ebd73f4):
+
+  - ED-5880: allow breakout mode only in full-page editor
+
+## 90.4.1
+- Updated dependencies [67d563a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/67d563a):
+  - @atlaskit/date@0.2.0
+
+## 90.4.0
+- [minor] [e06b553](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e06b553):
+
+  - ED-5702: default new table resizing
+
 ## 90.3.18
 - [patch] [d3f3e19](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3f3e19):
 

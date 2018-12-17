@@ -1,6 +1,5 @@
 import * as React from 'react';
 import rafSchedule from 'raf-schd';
-import { updateColumnsOnResize } from 'prosemirror-tables';
 import { Node as PmNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
 import {
@@ -13,10 +12,13 @@ import TableFloatingControls from '../ui/TableFloatingControls';
 import ColumnControls from '../ui/TableFloatingControls/ColumnControls';
 
 import { getPluginState } from '../pm-plugins/main';
-import { scaleTable, setColumnWidths } from '../pm-plugins/table-resizing';
+import {
+  ResizeState,
+  scaleTable,
+  setColumnWidths,
+} from '../pm-plugins/table-resizing';
 
 import { TablePluginState, TableCssClassName as ClassName } from '../types';
-import { getCellMinWidth } from '../';
 import * as classnames from 'classnames';
 const isIE11 = browser.ie_version === 11;
 
@@ -31,13 +33,13 @@ import { WidthPluginState } from '../../width';
 export interface ComponentProps extends Props {
   view: EditorView;
   node: PmNode;
-  UNSAFE_allowFlexiColumnResizing: boolean;
   allowColumnResizing: boolean;
   onComponentMount: () => void;
   contentDOM: (element: HTMLElement | undefined) => void;
 
   containerWidth: WidthPluginState;
   pluginState: TablePluginState;
+  tableResizingPluginState?: ResizeState;
   width: number;
 }
 
@@ -70,11 +72,7 @@ class TableComponent extends React.Component<ComponentProps> {
   }
 
   componentDidMount() {
-    const {
-      onComponentMount,
-      allowColumnResizing,
-      UNSAFE_allowFlexiColumnResizing,
-    } = this.props;
+    const { onComponentMount, allowColumnResizing } = this.props;
 
     onComponentMount();
 
@@ -82,7 +80,7 @@ class TableComponent extends React.Component<ComponentProps> {
       this.wrapper.addEventListener('scroll', this.handleScrollDebounced);
     }
 
-    if (allowColumnResizing && UNSAFE_allowFlexiColumnResizing) {
+    if (allowColumnResizing) {
       const { node, containerWidth } = this.props;
 
       setColumnWidths(
@@ -113,21 +111,19 @@ class TableComponent extends React.Component<ComponentProps> {
     updateRightShadow(this.wrapper, this.table, this.rightShadow);
 
     if (this.props.allowColumnResizing && this.table) {
-      if (this.props.UNSAFE_allowFlexiColumnResizing) {
-        this.handleTableResizing(prevProps);
-      } else {
-        updateColumnsOnResize(
-          this.props.node,
-          this.table.querySelector('colgroup')!,
-          this.table,
-          getCellMinWidth(false),
-        );
-      }
+      this.handleTableResizing(prevProps);
     }
   }
 
   render() {
-    const { view, node, pluginState, containerWidth, width } = this.props;
+    const {
+      view,
+      node,
+      pluginState,
+      tableResizingPluginState,
+      width,
+    } = this.props;
+
     const {
       pluginConfig: { allowControls = true },
     } = pluginState;
@@ -142,7 +138,9 @@ class TableComponent extends React.Component<ComponentProps> {
     } = getPluginState(view.state);
 
     const tableRef = this.table || undefined;
-    const tableActive = this.table === pluginState.tableRef;
+    const tableActive =
+      this.table === pluginState.tableRef &&
+      (!tableResizingPluginState || !tableResizingPluginState.dragging);
     const { scroll } = this.state;
 
     const rowControls = [
@@ -190,7 +188,7 @@ class TableComponent extends React.Component<ComponentProps> {
     return (
       <div
         style={{
-          width: this.getTableContainerWidth(node.attrs.layout, containerWidth),
+          width: this.state.tableContainerWidth,
         }}
         className={classnames(ClassName.TABLE_CONTAINER, {
           [ClassName.WITH_CONTROLS]: tableActive,
@@ -231,14 +229,6 @@ class TableComponent extends React.Component<ComponentProps> {
   };
 
   private handleScrollDebounced = rafSchedule(this.handleScroll);
-
-  private getTableContainerWidth(layout, containerWidth: WidthPluginState) {
-    if (this.props.UNSAFE_allowFlexiColumnResizing) {
-      return this.state.tableContainerWidth;
-    } else {
-      return calcTableWidth(layout, containerWidth.width);
-    }
-  }
 
   private handleTableResizing(prevProps) {
     const { view, node, getPos, containerWidth } = this.props;

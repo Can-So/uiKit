@@ -1,5 +1,15 @@
 # @atlaskit/media-picker
 
+## 25.0.8
+- [patch] [ff8b31d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ff8b31d):
+
+  - Pass uploadParams to createStore when initializing MediaPicker popup. This fixes an issue when calling /copy/withToken endpoint
+
+## 25.0.7
+- [patch] [5f12909](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f12909):
+
+  - remove tenant property from MediaPicker + make show() faster
+
 ## 25.0.6
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2
