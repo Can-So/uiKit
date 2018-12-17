@@ -82,12 +82,14 @@ export const PositionerAbsolute = styled.div`
   top: ${gutter}px;
   width: ${dialogWidth};
   z-index: ${layers.modal};
+  pointer-events: none;
 `;
 export const PositionerRelative = styled.div`
   margin: ${gutter}px auto;
   position: relative;
   width: ${dialogWidth};
   z-index: ${layers.modal};
+  pointer-events: none;
 `;
 
 export const Dialog = styled.div`
@@ -104,6 +106,7 @@ export const Dialog = styled.div`
   height: ${dialogHeight};
   ${flexMaxHeightIEFix};
   outline: 0;
+  pointer-events: auto;
 `;
 
 PositionerAbsolute.displayName = 'PositionerAbsolute';

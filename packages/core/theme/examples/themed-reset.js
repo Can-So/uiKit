@@ -1,10 +1,12 @@
 // @flow
 
 import React from 'react';
-import { Reset, Theme } from '../src';
+import { Reset, ResetTheme } from '../src';
 
 export default () => (
-  <Theme values={() => ({ backgroundColor: '#333', textColor: '#eee' })}>
+  <ResetTheme.Provider
+    value={t => ({ ...t(), backgroundColor: '#333', textColor: '#eee' })}
+  >
     <Reset style={{ padding: 10 }}>You can also theme a reset.</Reset>
-  </Theme>
+  </ResetTheme.Provider>
 );

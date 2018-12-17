@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { MultiValue, scrollToValue } from '../../../components/MultiValue';
 import { SizeableAvatar } from '../../../components/SizeableAvatar';
+import { User } from '../../../types';
 import { renderProp } from '../_testUtils';
 
 const mockHtmlElement = (rect: Partial<DOMRect>): HTMLElement =>
@@ -17,9 +18,9 @@ describe('MultiValue', () => {
     user: {
       id: 'abc-123',
       name: 'Jace Beleren',
-      nickname: 'jbeleren',
+      publicName: 'jbeleren',
       avatarUrl: 'http://avatars.atlassian.com/jace.png',
-    },
+    } as User,
   };
   const onClick = jest.fn();
   const shallowMultiValue = (
@@ -33,7 +34,7 @@ describe('MultiValue', () => {
   it('should render Tag', () => {
     const component = shallowMultiValue();
     const tag = renderProp(
-      component.find(FormattedMessage),
+      component.find(FormattedMessage as React.ComponentClass<any>),
       'children',
       'remove',
     );
@@ -54,7 +55,7 @@ describe('MultiValue', () => {
   it('should use blueLight color when focused', () => {
     const component = shallowMultiValue({ isFocused: true });
     const tag = renderProp(
-      component.find(FormattedMessage),
+      component.find(FormattedMessage as React.ComponentClass<any>),
       'children',
       'remove',
     );
@@ -76,7 +77,7 @@ describe('MultiValue', () => {
   it('should call onClick onAfterRemoveAction', () => {
     const component = shallowMultiValue();
     const tag = renderProp(
-      component.find(FormattedMessage),
+      component.find(FormattedMessage as React.ComponentClass<any>),
       'children',
       'remove',
     );
@@ -89,7 +90,7 @@ describe('MultiValue', () => {
       data: { ...data, user: { ...data.user, fixed: true } },
     });
     const tag = renderProp(
-      component.find(FormattedMessage),
+      component.find(FormattedMessage as React.ComponentClass<any>),
       'children',
       'remove',
     );
@@ -135,7 +136,7 @@ describe('MultiValue', () => {
             ...data,
             user: {
               ...data.user,
-              nickname: 'crazy_jace',
+              publicName: 'crazy_jace',
             },
           },
         },

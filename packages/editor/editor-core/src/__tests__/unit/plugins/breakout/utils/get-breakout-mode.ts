@@ -10,7 +10,11 @@ describe('Breakout Commands: getBreakoutMode', () => {
   it('should return a breakout mode of current node', () => {
     const { editorView } = createEditor({
       doc: doc(breakout({ mode: 'wide' })(code_block()('Hel{<>}lo'))),
-      editorProps: { allowCodeBlocks: true, allowBreakout: true },
+      editorProps: {
+        allowCodeBlocks: true,
+        allowBreakout: true,
+        appearance: 'full-page',
+      },
     });
 
     expect(getBreakoutMode(editorView.state)).toEqual('wide');
@@ -19,7 +23,11 @@ describe('Breakout Commands: getBreakoutMode', () => {
   it('should return undefined for not breakout node', () => {
     const { editorView } = createEditor({
       doc: doc(code_block()('Hel{<>}lo')),
-      editorProps: { allowCodeBlocks: true, allowBreakout: true },
+      editorProps: {
+        allowCodeBlocks: true,
+        allowBreakout: true,
+        appearance: 'full-page',
+      },
     });
 
     expect(getBreakoutMode(editorView.state)).toBeUndefined();

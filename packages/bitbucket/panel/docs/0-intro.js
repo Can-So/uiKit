@@ -1,10 +1,13 @@
 // @flow
-
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { code, md, Example, Props } from '@atlaskit/docs';
 
 export default md`
 This panel component is designed hold content and expand and collapse with user interaction. It animates its opening and closing.
+
+## Usage
+
+${code`import Panel from '@atlaskit/panel';`}
 
 ${(
   <Example

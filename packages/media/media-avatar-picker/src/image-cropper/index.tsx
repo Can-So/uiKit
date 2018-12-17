@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { isImageRemote } from './isImageRemote';
 import CrossIcon from '@atlaskit/icon/glyph/cross';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
+import { isImageRemote } from './isImageRemote';
 import {
   CircularMask,
   Container,
@@ -14,7 +16,6 @@ import {
 } from './styled';
 import { ERROR } from '../avatar-picker-dialog';
 import { CONTAINER_INNER_SIZE } from '../image-navigator';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 export interface LoadParameters {
   export: () => string;
@@ -100,6 +101,7 @@ export class ImageCropper extends Component<
       left,
       imageSource,
       onRemoveImage,
+      intl: { formatMessage },
     } = this.props;
     const containerStyle = {
       width: `${containerSize}px`,
@@ -132,8 +134,10 @@ export class ImageCropper extends Component<
         <DragOverlay onMouseDown={this.onDragStarted} />
         <RemoveImageContainer>
           <RemoveImageButton onClick={onRemoveImage}>
-            {/* TODO [i18n] [MS-1089] */}
-            <CrossIcon size="small" label="Remove image" />
+            <CrossIcon
+              size="small"
+              label={formatMessage(messages.remove_image)}
+            />
           </RemoveImageButton>
         </RemoveImageContainer>
       </Container>

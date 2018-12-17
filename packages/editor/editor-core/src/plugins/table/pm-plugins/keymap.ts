@@ -1,5 +1,5 @@
 import { keymap } from 'prosemirror-keymap';
-import { Plugin, EditorState, Selection, Transaction } from 'prosemirror-state';
+import { Plugin, Selection } from 'prosemirror-state';
 import {
   addColumnBefore,
   addColumnAfter,
@@ -37,7 +37,7 @@ export function keymapPlugin(): Plugin {
   keymaps.bindKeymapWithCommand(keymaps.toggleTable.common!, createTable, list);
   keymaps.bindKeymapWithCommand(
     keymaps.backspace.common!,
-    (state: EditorState, dispatch: (tr: Transaction) => void) => {
+    (state, dispatch) => {
       if (!isCellSelection(state.selection)) {
         return false;
       }
@@ -53,7 +53,11 @@ export function keymapPlugin(): Plugin {
         if (textSelection) {
           tr.setSelection(textSelection);
         }
-        dispatch(tr);
+
+        if (dispatch) {
+          dispatch(tr);
+        }
+
         analyticsService.trackEvent(
           'atlassian.editor.format.table.delete_content.keyboard',
         );

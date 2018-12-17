@@ -1,5 +1,4 @@
 import { UploadEvent } from '../../domain/uploadEvent';
-import { Tenant } from './index';
 
 export interface LocalUploadFileMetadata {
   readonly id: string;
@@ -21,7 +20,6 @@ export interface LocalUploadFile {
 export interface LocalUpload {
   readonly file: LocalUploadFile;
   readonly events: UploadEvent[];
-  readonly tenant: Tenant;
   readonly index: number;
   readonly timeStarted: number;
 

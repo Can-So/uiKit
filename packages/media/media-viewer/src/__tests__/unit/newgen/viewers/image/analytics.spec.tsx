@@ -8,9 +8,8 @@ jest.mock('../../../../../newgen/viewers/image/interactive-img', () => ({
 }));
 
 import * as React from 'react';
-import { mount } from 'enzyme';
 import { ProcessedFileState } from '@atlaskit/media-core';
-import { awaitError } from '@atlaskit/media-test-helpers';
+import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
 import { ImageViewer } from '../../../../../newgen/viewers/image';
 import { Stubs, createContext } from '../../../_stubs';
 
@@ -37,7 +36,7 @@ export function createFixture(
   const context = createContext({ blobService });
   const onClose = jest.fn();
   const onLoaded = jest.fn();
-  const el = mount(
+  const el = mountWithIntlContext(
     <ImageViewer
       context={context}
       item={imageItem}

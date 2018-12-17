@@ -19,6 +19,7 @@ import {
   InlineCardResolvedView,
   InlineCardResolvingView,
   CardLinkView,
+  InlineCardErroredView,
 } from '@atlaskit/media-ui';
 import { ClientConfig } from '../../../Client';
 
@@ -474,5 +475,50 @@ describe('Card', () => {
         },
       }),
     );
+  });
+
+  describe('CardProvider context', () => {
+    it('should render an ErroredView if the client is not provided', async () => {
+      let wrapper = mount(
+        <Card appearance="block" url="https://www.atlassian.com/" />,
+      );
+      expect(wrapper.find(BlockCardErroredView).exists()).toBeTruthy();
+
+      wrapper = mount(
+        <Card appearance="inline" url="https://www.atlassian.com/" />,
+      );
+      expect(wrapper.find(InlineCardErroredView).exists()).toBeTruthy();
+    });
+
+    it('should consume Client from context', async () => {
+      const client = createClient([
+        {
+          status: 'resolved',
+          definitionId: '1',
+          services: [],
+          data: {
+            name: 'The best of EAC',
+            summary:
+              'The most popular voted pages and posts from EAC as voted for all time.',
+          },
+        },
+      ]);
+
+      const wrapper = mount(
+        <Provider client={client}>
+          <Card appearance="block" url="https://www.atlassian.com/" />
+        </Provider>,
+      );
+      wrapper.update();
+      expect(wrapper.find(BlockCardResolvedView).props()).toEqual(
+        expect.objectContaining({
+          title: { text: 'The best of EAC' },
+          description: {
+            text:
+              'The most popular voted pages and posts from EAC as voted for all time.',
+          },
+        }),
+      );
+    });
   });
 });

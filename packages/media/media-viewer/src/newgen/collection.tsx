@@ -6,7 +6,7 @@ import {
   isError,
 } from '@atlaskit/media-core';
 import { Outcome, Identifier, MediaViewerFeatureFlags } from './domain';
-import { ErrorMessage, createError, MediaViewerError } from './error';
+import ErrorMessage, { createError, MediaViewerError } from './error';
 import { List } from './list';
 import { Subscription } from 'rxjs/Subscription';
 import { toIdentifier } from './utils';

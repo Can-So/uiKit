@@ -191,31 +191,6 @@ describe('Jira Quick Search Container', () => {
   });
 
   describe('getSearchResults', () => {
-    it('should not throw when people search return error', async () => {
-      const getSearchResults = getQuickSearchProperty(
-        renderComponent({ peopleSearchClient: errorPeopleSearchClient }),
-        'getSearchResults',
-      );
-      const searchResults = await getSearchResults('query', sessionId, 100);
-      expect(searchResults).toMatchObject({
-        results: {
-          objects: [],
-          containers: [],
-          people: [],
-        },
-        timings: {
-          crossProductSearchElapsedMs: expect.any(Number),
-          peopleElapsedMs: expect.any(Number),
-        },
-      });
-      expect(logger.safeError).toHaveBeenCalledTimes(1);
-      expect(logger.safeError.mock.calls[0]).toMatchObject([
-        'AK.GlobalSearch.JiraQuickSearchContainer',
-        'error in search people promise',
-        'error',
-      ]);
-    });
-
     it('should return an error when cross product search has error', async () => {
       const getSearchResults = getQuickSearchProperty(
         renderComponent({
@@ -253,7 +228,6 @@ describe('Jira Quick Search Container', () => {
         results: {
           objects: issues,
           containers: boards,
-          people: people,
         },
         timings: {
           crossProductSearchElapsedMs: expect.any(Number),

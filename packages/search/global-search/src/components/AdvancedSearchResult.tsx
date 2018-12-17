@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ResultBase, ResultBaseProps } from '@atlaskit/quick-search';
 
-import ShiftReturn from '../assets/ShiftReturn';
+import Return from '../assets/Return';
 
 export interface Props extends ResultBaseProps {
   showKeyboardLozenge?: boolean;
@@ -18,8 +18,8 @@ export default class AdvancedSearchResult extends React.Component<Props> {
       return null;
     }
 
-    // Supposed to render ShiftReturnHighlighted when the result isSelected, but that doesn't work anymore. See QS-281.
-    return <ShiftReturn />;
+    // Supposed to render ReturnHighlighted when the result isSelected, but that doesn't work anymore. See QS-281.
+    return <Return />;
   }
 
   render() {

@@ -1,6 +1,8 @@
 // @flow
+
+import type { ThemeProp } from '@atlaskit/theme';
 import type { ElementRef } from 'react';
-import type { ThemeProps } from './theme';
+import type { ThemeProps, ThemeTokens } from './theme';
 
 export type InputProps = {
   /** Controls the appearance of the field.
@@ -24,7 +26,7 @@ export type InputProps = {
   isRequired?: boolean,
   /** Forwarded ref */
   forwardedRef: ElementRef<*>,
-  theme: ThemeProps => ThemeProps,
+  theme: ThemeTokens,
 };
 
 export type TextFieldProps = {
@@ -32,7 +34,7 @@ export type TextFieldProps = {
    * `subtle` shows styling on hover.
    * `none` hides all field styling.
    */
-  appearance?: 'standard' | 'none' | 'subtle',
+  appearance: 'standard' | 'none' | 'subtle',
   /** This prop is injected by analytics-next and has no use within textfield */
   createAnalyticsEvent: (SyntheticEvent<>) => void,
   /** Sets a default value as input value */
@@ -62,5 +64,5 @@ export type TextFieldProps = {
   /** Forwarded ref */
   forwardedRef: ElementRef<*>,
   /** The theme the component should use. */
-  theme: ThemeProps => ThemeProps,
+  theme?: ThemeProp<ThemeTokens, ThemeProps>,
 };

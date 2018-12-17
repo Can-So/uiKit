@@ -30,16 +30,16 @@ export const renderColgroupFromNode = (node: PmNode) => {
 };
 
 export const insertColgroupFromNode = (
-  table: HTMLTableElement,
+  tableElem: HTMLTableElement,
   node: PmNode,
 ): HTMLCollection => {
-  let colgroup = table.querySelector('colgroup') as HTMLElement;
+  let colgroup = tableElem.querySelector('colgroup') as HTMLElement;
   if (colgroup) {
-    table.removeChild(colgroup);
+    tableElem.removeChild(colgroup);
   }
 
   colgroup = renderColgroupFromNode(node) as HTMLElement;
-  table.insertBefore(colgroup, table.firstChild);
+  tableElem.insertBefore(colgroup, tableElem.firstChild);
 
   return colgroup.children;
 };

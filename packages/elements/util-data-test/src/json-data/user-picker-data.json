@@ -2,114 +2,124 @@
   {
     "id": "0",
     "name": "Raina Halper",
-    "nickname": "Carolyn",
+    "publicName": "Carolyn",
     "avatarUrl": "https://api.adorable.io/avatars/1"
   },
   {
     "id": "1",
-    "nickname": "Kaity",
+    "name": "Kaity",
+    "publicName": "Kaity",
     "avatarUrl": "https://api.adorable.io/avatars/2"
   },
   {
     "id": "2",
-    "nickname": "Verdie",
+    "name": "Verdie",
     "avatarUrl": "https://api.adorable.io/avatars/3"
   },
   {
     "id": "3",
-    "nickname": "Shae",
-    "avatarUrl": "https://api.adorable.io/avatars/4"
+    "name": "Shae",
+    "avatarUrl": "https://api.adorable.io/avatars/4",
+    "byline": "Teammate"
   },
   {
     "id": "4",
     "name": "Fredericka Kollar",
-    "nickname": "Summer",
+    "publicName": "Summer",
     "avatarUrl": "https://api.adorable.io/avatars/5"
   },
   {
     "id": "5",
-    "nickname": "Lorri Tremble",
+    "name": "Lorri Tremble",
+    "publicName": "Lorri Tremble",
     "avatarUrl": "https://api.adorable.io/avatars/6"
   },
   {
     "id": "6",
     "name": "Dorene Rieger",
-    "nickname": "April",
+    "publicName": "April",
     "avatarUrl": "https://api.adorable.io/avatars/7"
   },
   {
     "id": "7",
-    "nickname": "Erwin Petrovich",
+    "name": "Erwin Petrovich",
+    "publicName": "Erwin Petrovich",
     "avatarUrl": "https://api.adorable.io/avatars/8"
   },
   {
     "id": "8",
-    "nickname": "Ty Bopp",
+    "name": "Ty Bopp",
+    "publicName": "Ty Bopp",
     "avatarUrl": "https://api.adorable.io/avatars/9"
   },
   {
     "id": "9",
-    "nickname": "Helga Wetherbee",
+    "name": "Helga Wetherbee",
+    "publicName": "Helga Wetherbee",
     "avatarUrl": "https://api.adorable.io/avatars/10"
   },
   {
     "id": "10",
     "name": "Yuri Seals",
-    "nickname": "Boris",
+    "publicName": "Boris",
     "avatarUrl": "https://api.adorable.io/avatars/11"
   },
   {
     "id": "11",
-    "nickname": "Elaine",
+    "name": "Elaine",
+    "publicName": "Elaine",
     "avatarUrl": "https://api.adorable.io/avatars/12"
   },
   {
     "id": "12",
-    "nickname": "Marlys",
+    "name": "Marlys",
+    "publicName": "Marlys",
     "avatarUrl": "https://api.adorable.io/avatars/13"
   },
   {
     "id": "13",
     "name": "Cheryll Maust",
-    "nickname": "Amber",
+    "publicName": "Amber",
     "avatarUrl": "https://api.adorable.io/avatars/14"
   },
   {
     "id": "14",
-    "nickname": "Alvin",
+    "name": "Alvin",
+    "publicName": "Alvin",
     "avatarUrl": "https://api.adorable.io/avatars/15"
   },
   {
     "id": "15",
-    "nickname": "Arlena",
+    "name": "Arlena",
+    "publicName": "Arlena",
     "avatarUrl": "https://api.adorable.io/avatars/16"
   },
   {
     "id": "16",
     "name": "Vonda Wing",
-    "nickname": "Ariel",
+    "publicName": "Ariel",
     "avatarUrl": "https://api.adorable.io/avatars/17"
   },
   {
     "id": "17",
-    "nickname": "Critelli",
+    "name": "Critelli",
     "avatarUrl": "https://api.adorable.io/avatars/18"
   },
   {
     "id": "18",
     "name": "Alica Woods",
-    "nickname": "awoods",
+    "publicName": "awoods",
     "avatarUrl": "https://api.adorable.io/avatars/19"
   },
   {
     "id": "19",
     "name": "Alica Armwood",
-    "nickname": "Jasmine"
+    "publicName": "Jasmine"
   },
   {
     "id":"20",
     "name":"Penelope Gill",
-    "nickname": "gill",
+    "publicName": "gill",
     "lozenge":"DEFAULT",
     "highlight":{
       "name":[
@@ -118,24 +128,24 @@
           "end":11
         }
       ],
-      "nickname":[]
+      "publicName":[]
     }
   },
   {
     "id":"21",
     "name":"Jill Jackson",
-    "nickname": "gill"
+    "publicName": "gill"
   },
   {
     "id":"22",
     "name":"Penelope Lim",
-    "nickname": "penelope"
+    "publicName": "penelope"
   },
   {
     "id":"Assignee",
     "name":"Assignee",
     "avatarUrl":"",
-    "nickname":"",
+    "publicName":"",
     "lozenge":"SPECIAL",
     "highlight":{
       "name":[
@@ -144,7 +154,7 @@
           "end":3
         }
       ],
-      "nickname":[
+      "publicName":[
         {
           "start":0,
           "end":3
@@ -156,7 +166,7 @@
     "id":"Unassigned",
     "name":"Unassigned",
     "avatarUrl":"",
-    "nickname":"unassigned",
+    "publicName":"unassigned",
     "lozenge":"APP",
     "highlight":{
       "name":[
@@ -165,7 +175,7 @@
           "end":3
         }
       ],
-      "nickname":[
+      "publicName":[
         {
           "start":0,
           "end":3
@@ -177,7 +187,7 @@
     "id":"team",
     "name":"team",
     "avatarUrl":"",
-    "nickname":"team",
+    "publicName":"team",
     "lozenge":"APP",
     "highlight":{
       "name":[
@@ -186,7 +196,7 @@
           "end":3
         }
       ],
-      "nickname":[
+      "publicName":[
         {
           "start":0,
           "end":3
@@ -196,12 +206,13 @@
   },
   {
     "id":"fabric",
-    "nickname":"Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric ",
+    "name":"Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric ",
+    "publicName":"Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric Fabric ",
     "avatarUrl":"",
     "lozenge":"SPECIAL",
     "highlight":{
       "name":[],
-      "nickname":[
+      "publicName":[
         {
           "start":0,
           "end":3

@@ -4,7 +4,7 @@ import { messages } from '@atlaskit/media-ui';
 import * as deepEqual from 'deep-equal';
 import { Context, ProcessedFileState } from '@atlaskit/media-core';
 import { Outcome } from '../domain';
-import { ErrorMessage, MediaViewerError } from '../error';
+import ErrorMessage, { MediaViewerError } from '../error';
 import { Spinner } from '../loading';
 import { ErrorViewDownloadButton } from '../download';
 

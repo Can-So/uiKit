@@ -1,11 +1,10 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, code, Example, Props } from '@atlaskit/docs';
 
 export default md`
-  # MediaUI
+  This package includes common components and utilities used by other media packages.
 
-  > Includes common components and utilities used by other media packages.
-
-  This package exports two componets:
+  It exports two componets:
 
   - BlockCard
   - InlineCard
@@ -18,87 +17,120 @@ export default md`
   - Errored
   - Resolved
 
-  ## Props
+  ## Usage
 
   ### InlineCard
 
-  - Link:
-
-    - \`text: string\` - text to display
-    - \`onClick?: () => void\` - the optional click handler
-
-  - Resolving:
-
-    - \`url: string\` - the url to display
-    - \`onClick?: () => void\` - the optional click handler
-
-  - Forbidden
-
-    - \`url: string\` - the url to display
-    - \`onClick?: () => void\` - the optional click handler
-    - \`onAuthorise?: () => void\` - what to do when a user hit "Try another account" button
-
-  - Unauthorized
-
-    - \`url: string\` - the url to display
-    - \`icon?: string\` - the icon of the service (e.g. Dropbox/Asana/Google/etc) to display
-    - \`onClick?: () => void\` - the optional click handler
-    - \`onAuthorise?: () => void\` - handler for "Connect" button
-
-  - Errored
-
-    - \`url: string\` - the url to display
-    - \`message: string\` - the error message to display
-    - \`onClick?: () => void\` - the optional click handler
-    - \`onRetry?: () => void\` - what to do when a user clicks "Try again" button
-
-  - Resolved
-
-    - \`icon?: string\` - the icon of the service (e.g. Dropbox/Asana/Google/etc) to display
-    - \`title: string\` - the name of the resource
-    - \`lozenge?: LozengeViewModel\` - the optional lozenge that might represent the statu of the resource, for example
-    - \`isSelected?: boolean\` - a flag that determines whether the card is selected in edit mode
-    - \`onClick?: () => void\` - the optional click handler
+  ${code`import {
+    InlineCardResolvedView,
+    InlineCardResolvingView,
+    InlineCardErroredView,
+    InlineCardForbiddenView,
+    InlineCardUnauthorizedView,
+  } from '@atlaskit/media-ui';`}
 
   ### BlockCard
 
-  - Resolving:
+  ${code`import {
+    BlockCardResolvingView,
+    BlockCardErroredView,
+    BlockCardUnauthorisedView,
+    BlockCardForbiddenView,
+    BlockCardResolvedView,
+  } from '@atlaskit/media-ui';`}
 
-    - \`onClick?\` - the optional click handler
+    ${(
+      <Example
+        Component={require('../examples/inline-card-view').default}
+        title="Inline Card View"
+        source={require('!!raw-loader!../examples/inline-card-view')}
+      />
+    )}
 
-  - Forbidden
+    ${(
+      <Props
+        heading="LinkView Props"
+        props={require('!!extract-react-types-loader!../src/LinkView')}
+      />
+    )}
 
-    - \`url: string\` - the url of the resorce to display
-    - \`onClick?: () => void\` - the click hander that determines what to do when used clicked on the card
-    - \`onAuthorise?: () => void\` - what to do when a user hit "Try another account" button
+    ${(
+      <Props
+        heading="InlineCard ResolvingView Props"
+        props={require('!!extract-react-types-loader!../src/InlineCard/ResolvingView')}
+      />
+    )}
 
-  - Unauthorized
+    ${(
+      <Props
+        heading="InlineCard ResolvedView Props"
+        props={require('!!extract-react-types-loader!../src/InlineCard/ResolvedView')}
+      />
+    )}
 
-    - \`icon?: string;\` - the icon of the service (e.g. Dropbox/Asana/Google/etc) to display
-    - \`url: string\` - the url of the resorce to display
-    - \`onClick?: () => void\` - the click hander that determines what to do when used clicked on the card
-    - \`onAuthorise?: () => void\` - handler for "Connect" button
+    ${(
+      <Props
+        heading="InlineCard ErroredView Props"
+        props={require('!!extract-react-types-loader!../src/InlineCard/ErroredView')}
+      />
+    )}
 
-  - Errored
+    ${(
+      <Props
+        heading="InlineCard ForbiddenView Props"
+        props={require('!!extract-react-types-loader!../src/InlineCard/ForbiddenView')}
+      />
+    )}
 
-    - \`url: string\` - the url of the resorce to display
-    - \`message: string\` - the error message
-    - \`onClick?: () => void\` - the optional click hander
-    - \`onRetry?: () => void\` - what to do when a user clicks "Try again" button
+    ${(
+      <Props
+        heading="InlineCard Frame Props"
+        props={require('!!extract-react-types-loader!../src/InlineCard/Frame')}
+      />
+    )}
 
-  - Resolved
+    ${(
+      <Props
+        heading="InlineCard UnauthorisedView Props"
+        props={require('!!extract-react-types-loader!../src/InlineCard/UnauthorisedView')}
+      />
+    )}
 
-    - \`context?: ContextViewModel\`
-    - \`link?: string\`
-    - \`icon?: IconWithTooltip\`
-    - \`user?: UserViewModel\`
-    - \`thumbnail?: string\`
-    - \`preview?: string\`
-    - \`title?: TextWithTooltip\`
-    - \`byline?: TextWithTooltip\`
-    - \`description?: TextWithTooltip\`
-    - \`details?: DetailViewModel[]\`
-    - \`users?: UserViewModel[]\`
-    - \`actions?: Action[]\`
-    - \`onClick?: () => void\`
+    ${(
+      <Props
+        heading="BlockCard ResolvingView Props"
+        props={require('!!extract-react-types-loader!../src/BlockCard/ResolvingView')}
+      />
+    )}
+
+    ${(
+      <Props
+        heading="BlockCard ResolvedView Props"
+        props={require('!!extract-react-types-loader!../src/BlockCard/ResolvedView')}
+      />
+    )}
+
+    ${(
+      <Props
+        heading="BlockCard ErroredView Props"
+        props={require('!!extract-react-types-loader!../src/BlockCard/ErroredView')}
+      />
+    )}
+
+    ${(
+      <Props
+        heading="BlockCard ForbiddenView Props"
+        props={require('!!extract-react-types-loader!../src/BlockCard/ForbiddenView')}
+      />
+    )}
+
+    ${(
+      <Props
+        heading="BlockCard UnauthorisedView Props"
+        props={require('!!extract-react-types-loader!../src/BlockCard/UnauthorisedView')}
+      />
+    )}
+    
+
 `;
+// TODO: Add props for each subviews using Props from extract react-type

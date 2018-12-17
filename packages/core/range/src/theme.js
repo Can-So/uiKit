@@ -1,5 +1,30 @@
 // @flow
-import { colors } from '@atlaskit/theme';
+
+import { colors, createTheme } from '@atlaskit/theme';
+
+type ThemeTokensThumb = {
+  background: string,
+  border: string,
+};
+
+type ThemeTokensTrack = {
+  lower: string,
+  upper: string,
+};
+
+export type ThemeTokens = {
+  thumb: {
+    default: ThemeTokensThumb,
+    disabled: { boxShadow: string },
+    focus: ThemeTokensThumb,
+  },
+  track: {
+    background: string,
+    default: ThemeTokensTrack,
+    disabled: ThemeTokensTrack,
+    hover: ThemeTokensTrack,
+  },
+};
 
 export const thumb = {
   default: {
@@ -7,13 +32,13 @@ export const thumb = {
     // This border color is not being used - awaiting focus state lift to props
     border: colors.N800,
   },
+  disabled: {
+    boxShadow: colors.N60A,
+  },
   focus: {
     // This border color is not being used - awaiting focus state lift to props
     background: colors.N0,
     border: colors.B200,
-  },
-  disabled: {
-    boxShadow: colors.N60A,
   },
 };
 
@@ -33,6 +58,7 @@ export const track = {
   },
 };
 
-export function theme() {
-  return { range: () => ({ track, thumb }) };
-}
+export const Theme = createTheme<ThemeTokens, *>(() => ({
+  thumb,
+  track,
+}));

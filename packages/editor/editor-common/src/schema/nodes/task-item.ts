@@ -33,9 +33,9 @@ export const taskItem: NodeSpec = {
       // also used by list-item we need to make sure that we run this parser first.
       priority: 100,
 
-      getAttrs: (dom: Element) => ({
+      getAttrs: dom => ({
         localId: uuid.generate(),
-        state: dom.getAttribute('data-task-state')!,
+        state: (dom as HTMLElement).getAttribute('data-task-state') || 'TODO',
       }),
     },
   ],
@@ -43,7 +43,7 @@ export const taskItem: NodeSpec = {
     const { localId, state } = node.attrs;
     const attrs = {
       'data-task-local-id': localId || 'local-task',
-      'data-task-state': state,
+      'data-task-state': state || 'TODO',
     };
     return ['li', attrs, 0];
   },

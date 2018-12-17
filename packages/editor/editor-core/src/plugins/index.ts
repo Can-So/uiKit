@@ -49,3 +49,4 @@ export { default as gridPlugin } from './grid';
 export { default as breakoutPlugin } from './breakout';
 export { default as alignment } from './alignment';
 export { default as editorDisabledPlugin } from './editor-disabled';
+export { default as indentationPlugin } from './indentation';

@@ -1,6 +1,27 @@
 // @flow
 
-import { colors } from '@atlaskit/theme';
+import { colors, createTheme } from '@atlaskit/theme';
+
+export type ThemeAppearance =
+  | 'added'
+  | 'default'
+  | 'important'
+  | 'primary'
+  | 'primaryInverted'
+  | 'removed'
+  | {};
+
+export type ThemeMode = 'dark' | 'light';
+
+export type ThemeProps = {
+  appearance: ThemeAppearance,
+  mode: ThemeMode,
+};
+
+export type ThemeTokens = {
+  backgroundColor: string,
+  textColor: string,
+};
 
 export const backgroundColors = {
   added: { light: colors.G50, dark: colors.G50 },
@@ -23,42 +44,18 @@ export const textColors = {
   removed: { light: colors.R500, dark: colors.R500 },
 };
 
-export type ThemeAppearance =
-  | 'added'
-  | 'default'
-  | 'important'
-  | 'primary'
-  | 'primaryInverted'
-  | 'removed'
-  | {};
-
-export type ThemeProps = {
-  badge?: ({ appearance: ThemeAppearance }) => {
-    backgroundColor?: string,
-    textColor?: string,
+export const Theme = createTheme<ThemeTokens, ThemeProps>(
+  ({ appearance, mode }) => {
+    if (typeof appearance === 'object') {
+      return {
+        backgroundColor: backgroundColors.default.light,
+        textColor: textColors.default.light,
+        ...appearance,
+      };
+    }
+    return {
+      backgroundColor: backgroundColors[appearance][mode],
+      textColor: textColors[appearance][mode],
+    };
   },
-  mode?: 'light' | 'dark',
-};
-
-export function theme(props: ThemeProps): ThemeProps {
-  const mode = props.mode || 'light';
-  return {
-    badge: ({ appearance }) => ({
-      ...(typeof appearance === 'object'
-        ? {
-            ...{
-              backgroundColor: backgroundColors.default.light,
-              textColor: textColors.default.light,
-            },
-            ...appearance,
-          }
-        : {
-            backgroundColor: backgroundColors[appearance][mode],
-            textColor: textColors[appearance][mode],
-          }),
-      ...(props.badge ? props.badge({ appearance }) : null),
-    }),
-    mode,
-    ...props,
-  };
-}
+);

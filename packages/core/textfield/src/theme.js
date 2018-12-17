@@ -1,4 +1,6 @@
 // @flow
+
+import { createTheme } from '@atlaskit/theme';
 import * as componentTokens from './component-tokens';
 
 const disabledRules = {
@@ -61,6 +63,36 @@ const borderColorFocus = {
   none: componentTokens.transparent,
 };
 
+export type ThemeAppearance = 'subtle' | 'standard' | 'none';
+export type ThemeProps = {
+  appearance: ThemeAppearance,
+  mode: 'dark' | 'light',
+};
+export type ThemeTokens = {
+  backgroundColor?: string,
+  backgroundColorFocus?: string,
+  backgroundColorHover?: string,
+  borderColor?: string,
+  borderColorFocus?: string,
+  textColor?: string,
+  disabledTextColor?: string,
+  placeholderTextColor?: string,
+};
+
+export const Theme = createTheme<ThemeTokens, ThemeProps>(
+  ({ appearance, mode }) => ({
+    backgroundColor: backgroundColor[appearance][mode],
+    backgroundColorFocus: backgroundColorFocus[appearance][mode],
+    backgroundColorHover: backgroundColorHover[appearance][mode],
+    borderColor: borderColor[appearance][mode],
+    borderColorFocus: borderColorFocus[appearance][mode],
+    placeholderTextColor: componentTokens.placeholderTextColor[mode],
+    textColor: componentTokens.textColor[mode],
+    invalidRules: invalidRules[mode],
+    disabledRules: disabledRules[mode],
+  }),
+);
+
 export const themeTokens = {
   backgroundColor,
   backgroundColorFocus,
@@ -71,40 +103,4 @@ export const themeTokens = {
   textColor: componentTokens.textColor,
   invalidRules,
   disabledRules,
-};
-
-export type ThemeProps = {
-  textField?: ThemeAppearance => {
-    backgroundColor?: string,
-    backgroundColorFocus?: string,
-    backgroundColorHover?: string,
-    borderColor?: string,
-    borderColorFocus?: string,
-    textColor?: string,
-    disabledTextColor?: string,
-    placeholderTextColor?: string,
-  },
-  mode?: 'light' | 'dark',
-};
-export type ThemeAppearance = {
-  appearance: 'subtle' | 'standard' | 'none',
-};
-
-export default (props: ThemeProps): ThemeProps => {
-  const mode = props.mode || 'light';
-  return {
-    textField: ({ appearance }: ThemeAppearance) => ({
-      backgroundColor: backgroundColor[appearance][mode],
-      backgroundColorFocus: backgroundColorFocus[appearance][mode],
-      backgroundColorHover: backgroundColorHover[appearance][mode],
-      borderColor: borderColor[appearance][mode],
-      borderColorFocus: borderColorFocus[appearance][mode],
-      placeholderTextColor: componentTokens.placeholderTextColor[mode],
-      textColor: componentTokens.textColor[mode],
-      invalidRules: invalidRules[mode],
-      disabledRules: disabledRules[mode],
-    }),
-    mode,
-    ...props,
-  };
 };

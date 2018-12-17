@@ -16,6 +16,7 @@ import {
   action,
   breakout,
   alignment,
+  indentation,
 } from './marks';
 
 import {
@@ -187,6 +188,7 @@ const marksInOrder: SchemaBuiltInItem[] = [
   { name: 'confluenceInlineComment', spec: confluenceInlineComment },
   ...markGroupDeclarations,
   { name: 'breakout', spec: breakout },
+  { name: 'indentation', spec: indentation },
 ];
 
 /**
@@ -202,7 +204,7 @@ export function createSchema(config: SchemaConfig): Schema {
   let nodes = addItems(nodesInOrder, nodesConfig, customNodeSpecs);
   let marks = addItems(marksInOrder, marksConfig, customMarkSpecs);
   nodes = sanitizeNodes(nodes, marks);
-  return new Schema({
+  return new Schema<string, string>({
     nodes,
     marks,
   });

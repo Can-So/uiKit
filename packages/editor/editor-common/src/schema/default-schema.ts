@@ -62,5 +62,6 @@ export const defaultSchema: Schema = createSchema({
     'confluenceInlineComment',
     'breakout',
     'alignment',
+    'indentation',
   ],
 });

@@ -110,6 +110,32 @@ describe('paste plugins', () => {
         });
       });
 
+      describe('when an external image is copied', () => {
+        const externalMediaHtml = `
+         <meta charset='utf-8'><img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;w=1000&amp;q=80" alt="Image result for cat"/>
+        `;
+
+        it('should insert as external media single', () => {
+          const { editorView } = editor(doc(p('{<>}')));
+          dispatchPasteEvent(editorView, {
+            html: externalMediaHtml,
+          });
+
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              mediaSingle({ layout: 'center' })(
+                media({
+                  type: 'external',
+                  url:
+                    'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+                })(),
+              ),
+              p(),
+            ),
+          );
+        });
+      });
+
       describe('when message is not a media image node', () => {
         it('does nothing', () => {
           const { editorView } = editor(doc(p('{<>}')));

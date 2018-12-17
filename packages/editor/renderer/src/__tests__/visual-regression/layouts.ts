@@ -1,5 +1,4 @@
-import { getExampleUrl } from '@atlaskit/visual-regression/helper';
-import { renderDocument, snapshot } from './_utils';
+import { goToRendererTestingExample, mountRenderer, snapshot } from './_utils';
 
 const twoColumnLayout = {
   version: 1,
@@ -50,16 +49,9 @@ const twoColumnLayout = {
 describe('Snapshot Test: Layouts', () => {
   let page;
   beforeAll(async () => {
-    const url = getExampleUrl(
-      'editor',
-      'renderer',
-      'full-page',
-      // @ts-ignore
-      global.__BASEURL__,
-    );
     // @ts-ignore
     page = global.page;
-    await page.goto(url);
+    await goToRendererTestingExample(page);
   });
 
   [{ width: 1120, height: 500 }, { width: 800, height: 500 }].forEach(size => {
@@ -68,7 +60,10 @@ describe('Snapshot Test: Layouts', () => {
     }`, async () => {
       await page.setViewport(size);
       await page.waitFor(100);
-      await renderDocument(page, twoColumnLayout);
+      mountRenderer(page, {
+        document: twoColumnLayout,
+        appearance: 'full-page',
+      });
       await snapshot(page);
     });
   });

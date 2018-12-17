@@ -4,9 +4,22 @@ import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
 import FieldText from '@atlaskit/field-text';
 import TextField from '@atlaskit/textfield';
-import { WithState } from './helpers';
 import Form, { Field } from '../../../src';
 import { HelperMessage, ErrorMessage } from '../../Messages';
+
+export class WithState extends React.Component<
+  { defaultState: any, children: (any, Function) => any },
+  { currentState: any },
+> {
+  state = {
+    currentState: this.props.defaultState,
+  };
+  render() {
+    return this.props.children(this.state.currentState, state =>
+      this.setState({ currentState: state }),
+    );
+  }
+}
 
 const touch = wrapper => {
   wrapper.simulate('focus');
@@ -230,7 +243,9 @@ test('should never render with undefined fieldProp value', () => {
   });
 });
 
-test('should always show most recent validation result', done => {
+// unskip as part of https://ecosystem.atlassian.net/browse/AK-5752
+// eslint-disable-next-line jest/no-disabled-tests
+xtest('should always show most recent validation result', done => {
   let resolveValidation = () => {};
   const wrapper = mount(
     <Form onSubmit={jest.fn()}>

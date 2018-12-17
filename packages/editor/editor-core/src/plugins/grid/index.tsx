@@ -6,9 +6,9 @@ import { PluginKey } from 'prosemirror-state';
 import { EditorPlugin, EditorAppearance } from '../../types';
 import {
   akEditorFullPageMaxWidth,
-  akEditorWideLayoutWidth,
   MediaSingleLayout,
   akEditorBreakoutPadding,
+  breakoutWideScaleRatio,
 } from '@atlaskit/editor-common';
 
 import { GridPluginState, GridType } from './types';
@@ -79,7 +79,8 @@ const gutterGridLines = (
     return gridLines;
   }
 
-  const wideSpacing = (akEditorWideLayoutWidth - editorMaxWidth) / 2;
+  const wideSpacing =
+    (editorMaxWidth * breakoutWideScaleRatio - editorMaxWidth) / 2;
   sides.forEach(side => {
     gridLines.push(
       <div

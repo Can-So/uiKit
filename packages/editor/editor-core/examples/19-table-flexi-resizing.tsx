@@ -13,7 +13,6 @@ export default function Example() {
       allowHeaderColumn: true,
       permittedLayouts: 'all',
       stickToolbarToBottom: true,
-      UNSAFE_allowFlexiColumnResizing: true,
     },
   });
 }

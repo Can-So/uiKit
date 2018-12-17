@@ -25,7 +25,7 @@ describe('MediaSingle', () => {
 
     const mediaSingle = mount(
       <WidthProvider>
-        <MediaSingle layout={'center'} appearance={'full-page'}>
+        <MediaSingle layout={'center'} rendererAppearance={'full-page'}>
           <Media
             id={imageFileId.id}
             type={imageFileId.mediaItemType}

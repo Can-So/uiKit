@@ -62,5 +62,21 @@ export default {
   'fabric.media.drop_your_files_here': 'Перетащите файлы сюда',
   'fabric.media.share_files_instantly': 'Мы загрузим их автоматически',
   'fabric.media.insert_files':
-    '{0, plural, one{Insert a file} few{Insert {0} files} many{Insert {0} files} other{Insert {0} files}}',
+    '{0, plural, one{Вставить файл} few{Вставить {0} файла} many{Вставить {0} файлов} other{Вставить {0} файла}}',
+  'fabric.media.zoom_out': 'уменьшить',
+  'fabric.media.zoom_in': 'увеличить',
+  'fabric.media.remove_image': 'Удалить изображение',
+  'fabric.media.play': 'воспроизведение',
+  'fabric.media.pause': 'пауза',
+  'fabric.media.disable_fullscreen': 'отключить полноэкранный режим',
+  'fabric.media.enable_fullscreen': 'включить полноэкранный режим',
+  'fabric.media.error_loading_file': 'При загрузке файла произошла ошибка',
+  'fabric.media.error_generating_preview':
+    'Не удалось выполнить предварительный просмотр',
+  'fabric.media.download': 'Скачать',
+  'fabric.media.unknown': 'неизвестно',
+  'fabric.media.document': 'документ',
+  'fabric.media.audio': 'аудио',
+  'fabric.media.video': 'видео',
+  'fabric.media.image': 'изображение',
 };

@@ -70,6 +70,7 @@ export default createSchema({
     'confluenceInlineComment',
     'breakout',
     'alignment',
+    'indentation',
   ],
   customNodeSpecs: {
     plain: { ...paragraph, content: 'text*', marks: '' },

@@ -23,7 +23,7 @@ import { isImage, SetAttrsStep } from '../../../utils';
 import { Dispatch } from '../../../event-dispatcher';
 import { ProsemirrorGetPosHandler } from '../../../nodeviews';
 import { EditorAppearance } from '../../../types/editor-props';
-import DropPlaceholder from '../ui/Media/DropPlaceholder';
+import DropPlaceholder, { PlaceholderType } from '../ui/Media/DropPlaceholder';
 import { MediaPluginOptions } from '../media-plugin-options';
 import { insertMediaGroupNode, isNonImagesBanned } from '../utils/media-files';
 import { removeMediaNode, splitMediaGroup } from '../utils/media-common';
@@ -109,7 +109,7 @@ export class MediaPluginState {
     this.stateManager = new DefaultMediaStateManager();
     options.providerFactory.subscribe(
       'mediaProvider',
-      (name, provider: Promise<MediaProvider>) =>
+      (name, provider?: Promise<MediaProvider>) =>
         this.setMediaProvider(provider),
     );
 
@@ -269,7 +269,7 @@ export class MediaPluginState {
     const { stateManager } = this;
     const { mediaSingle } = this.view.state.schema.nodes;
     const collection = this.collectionFromProvider();
-    if (typeof collection !== 'string') {
+    if (collection === undefined) {
       return;
     }
 
@@ -623,10 +623,6 @@ export class MediaPluginState {
       });
     }
 
-    if (this.popupPicker) {
-      this.popupPicker.hide();
-    }
-
     // set new upload params for the pickers
     pickers.forEach(picker => picker.setUploadParams(uploadParams));
   }
@@ -696,7 +692,7 @@ export class MediaPluginState {
           id: state.publicId || state.id,
         };
 
-        if (state.collection) {
+        if (typeof state.collection === 'string') {
           attrs.collection = state.collection;
         }
 
@@ -793,7 +789,9 @@ const createDropPlaceholder = (editorAppearance?: EditorAppearance) => {
   const dropPlaceholder = document.createElement('div');
   if (editorAppearance === 'full-page') {
     ReactDOM.render(
-      React.createElement(DropPlaceholder, { type: 'single' }),
+      React.createElement(DropPlaceholder, { type: 'single' } as {
+        type: PlaceholderType;
+      }),
       dropPlaceholder,
     );
   } else {

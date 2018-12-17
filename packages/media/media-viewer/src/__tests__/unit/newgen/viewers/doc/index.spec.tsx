@@ -2,13 +2,13 @@ import * as util from '../../../../../newgen/utils';
 const constructAuthTokenUrlSpy = jest.spyOn(util, 'constructAuthTokenUrl');
 
 import * as React from 'react';
-import { mount } from 'enzyme';
 import { ProcessedFileState } from '@atlaskit/media-core';
 import { createContext } from '../../../_stubs';
 import { Spinner } from '../../../../../newgen/loading';
 import { DocViewer } from '../../../../../newgen/viewers/doc/index';
 import { ErrorMessage, createError } from '../../../../../newgen/error';
 import Button from '@atlaskit/button';
+import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 
 function createFixture(
   fetchPromise: Promise<any>,
@@ -17,7 +17,7 @@ function createFixture(
 ) {
   const context = createContext(undefined as any);
   const onClose = jest.fn(() => fetchPromise);
-  const el = mount(
+  const el = mountWithIntlContext(
     <DocViewer item={item} context={context} collectionName={collectionName} />,
   );
   (el as any).instance()['fetch'] = jest.fn();

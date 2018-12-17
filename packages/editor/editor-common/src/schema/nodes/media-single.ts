@@ -1,5 +1,6 @@
 import { NodeSpec, Node } from 'prosemirror-model';
 import { MediaDefinition as Media } from './media';
+import { LinkDefinition } from '../marks/link';
 
 export type Layout =
   | 'wrap-right'
@@ -19,6 +20,7 @@ export interface MediaSingleDefinition {
    */
   content: Array<Media>;
   attrs?: MediaSingleAttributes;
+  marks?: Array<LinkDefinition>;
 }
 export interface MediaSingleAttributes {
   /**
@@ -43,9 +45,9 @@ export const mediaSingle: NodeSpec = {
   parseDOM: [
     {
       tag: 'div[data-node-type="mediaSingle"]',
-      getAttrs: (dom: HTMLElement) => ({
-        layout: dom.getAttribute('data-layout') || 'center',
-        width: Number(dom.getAttribute('data-width')) || null,
+      getAttrs: dom => ({
+        layout: (dom as HTMLElement).getAttribute('data-layout') || 'center',
+        width: Number((dom as HTMLElement).getAttribute('data-width')) || null,
       }),
     },
   ],

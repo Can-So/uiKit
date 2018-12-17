@@ -34,29 +34,27 @@ exports[`DeleteUserOverviewScreen 1`] = `
   />
   <styled.ul>
     <li>
-      <Fragment>
-        <FormattedHTMLMessage
-          defaultMessage="{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. They currently have access to: "
-          description="A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app."
-          id="focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin"
-          values={
-            Object {
-              "fullName": "Catherine Hirons",
-            }
+      <FormattedHTMLMessage
+        defaultMessage="{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. They currently have access to: "
+        description="A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app."
+        id="focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin"
+        values={
+          Object {
+            "fullName": "Catherine Hirons",
           }
-        />
-        <DropdownList
-          accessibleSites={
-            Array [
-              "hello.atlassian.net",
-              "acme.atlassian.net",
-              "test.atlassian.net",
-              "bitflix.atlassian.net",
-              "Bitbucket",
-            ]
-          }
-        />
-      </Fragment>
+        }
+      />
+      <DropdownList
+        accessibleSites={
+          Array [
+            "hello.atlassian.net",
+            "acme.atlassian.net",
+            "test.atlassian.net",
+            "bitflix.atlassian.net",
+            "Bitbucket",
+          ]
+        }
+      />
     </li>
     <li>
       <FormattedHTMLMessage
@@ -188,7 +186,7 @@ exports[`DeleteUserOverviewScreen 1`] = `
         values={Object {}}
       />
       <p>
-        <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))
+        <WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))
           appearance="link"
           onClick={[Function]}
           spacing="none"
@@ -199,7 +197,7 @@ exports[`DeleteUserOverviewScreen 1`] = `
             id="focused-task-close-account.deactivate-account"
             values={Object {}}
           />
-        </ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))>
+        </WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))>
       </p>
     </SectionMessage>
   </styled.div>
@@ -381,7 +379,7 @@ exports[`accessibleSites display text displayed is different when no accessibleS
         values={Object {}}
       />
       <p>
-        <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))
+        <WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))
           appearance="link"
           onClick={[Function]}
           spacing="none"
@@ -392,7 +390,7 @@ exports[`accessibleSites display text displayed is different when no accessibleS
             id="focused-task-close-account.deactivate-account"
             values={Object {}}
           />
-        </ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))>
+        </WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))>
       </p>
     </SectionMessage>
   </styled.div>
@@ -433,29 +431,27 @@ exports[`deactivateUserHandler display warning section is not displayed if the d
   />
   <styled.ul>
     <li>
-      <Fragment>
-        <FormattedHTMLMessage
-          defaultMessage="{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. They currently have access to: "
-          description="A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app."
-          id="focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin"
-          values={
-            Object {
-              "fullName": "Catherine Hirons",
-            }
+      <FormattedHTMLMessage
+        defaultMessage="{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. They currently have access to: "
+        description="A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app."
+        id="focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin"
+        values={
+          Object {
+            "fullName": "Catherine Hirons",
           }
-        />
-        <DropdownList
-          accessibleSites={
-            Array [
-              "hello.atlassian.net",
-              "acme.atlassian.net",
-              "test.atlassian.net",
-              "bitflix.atlassian.net",
-              "Bitbucket",
-            ]
-          }
-        />
-      </Fragment>
+        }
+      />
+      <DropdownList
+        accessibleSites={
+          Array [
+            "hello.atlassian.net",
+            "acme.atlassian.net",
+            "test.atlassian.net",
+            "bitflix.atlassian.net",
+            "Bitbucket",
+          ]
+        }
+      />
     </li>
     <li>
       <FormattedHTMLMessage

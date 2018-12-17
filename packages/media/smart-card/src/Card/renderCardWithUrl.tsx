@@ -103,7 +103,6 @@ const renderInlineCard = (
   url: string,
   state: ObjectState,
   handleAuthorise: () => void,
-  handleErrorRetry: () => void,
   handleFrameClick: () => void,
   isSelected?: boolean,
 ): React.ReactNode => {
@@ -160,15 +159,7 @@ const renderInlineCard = (
       );
 
     case 'errored':
-      return (
-        <InlineCardErroredView
-          url={url}
-          isSelected={isSelected}
-          message="We couldn't load this link"
-          onClick={handleFrameClick}
-          onRetry={handleErrorRetry}
-        />
-      );
+      return <CardLinkView text={url}>{url}</CardLinkView>;
   }
 };
 
@@ -183,7 +174,12 @@ export interface CardWithUrlContentProps {
 export function CardWithUrlContent(props: CardWithUrlContentProps) {
   const { url, isSelected, onClick, client, appearance } = props;
   return (
-    <WithObject client={client} url={url}>
+    <WithObject
+      client={client}
+      url={url}
+      isSelected={isSelected}
+      appearance={appearance}
+    >
       {({ state, reload }) => {
         const handleAuthorise = () => {
           // TODO: figure out how to support multiple services
@@ -191,7 +187,17 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
           auth(service.startAuthUrl).then(() => reload(), () => reload());
         };
 
-        return (appearance === 'inline' ? renderInlineCard : renderBlockCard)(
+        if (appearance === 'inline') {
+          return renderInlineCard(
+            url,
+            state,
+            handleAuthorise,
+            () => (onClick ? onClick() : window.open(url)),
+            isSelected,
+          );
+        }
+
+        return renderBlockCard(
           url,
           state,
           handleAuthorise,

@@ -8,15 +8,12 @@ type Part = {
 
 export interface Props {
   highlights?: HighlightRange[];
-  children?: string;
+  children: string;
 }
 
 export class HighlightText extends React.PureComponent<Props> {
   render() {
     const { children, highlights } = this.props;
-    if (!children) {
-      return null;
-    }
 
     const parts: Part[] = [];
 

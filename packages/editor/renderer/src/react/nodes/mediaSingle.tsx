@@ -39,7 +39,7 @@ export default class MediaSingle extends Component<
     layout: MediaSingleLayout;
     width?: number;
     allowDynamicTextSizing?: boolean;
-    appearance: RendererAppearance;
+    rendererAppearance: RendererAppearance;
   },
   State
 > {
@@ -83,7 +83,7 @@ export default class MediaSingle extends Component<
 
     // TODO: put appearance-based padding into theme instead
     const padding =
-      this.props.appearance === 'full-page' ? FullPagePadding * 2 : 0;
+      this.props.rendererAppearance === 'full-page' ? FullPagePadding * 2 : 0;
 
     return (
       <WidthConsumer>

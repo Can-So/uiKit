@@ -1,9 +1,9 @@
 import memoizeOne from 'memoize-one';
+import { ReactChild, ReactElement } from 'react';
 import { Promisable, User, UserOption, UserValue } from '../types';
-import { ReactElement, ReactChild } from 'react';
 
 export const userToOption = (user: User) => ({
-  label: user.name || user.nickname || '',
+  label: user.name,
   value: user.id,
   user,
 });
@@ -23,26 +23,13 @@ export const isIterable = (
 ): a is Iterable<Promisable<User | User[]>> =>
   typeof a[Symbol.iterator] === 'function';
 
-export const getUsers = (usersFromState: User[], usersFromProps?: User[]) => {
-  if (usersFromState.length > 0) {
-    return usersFromState;
-  }
-  return usersFromProps;
-};
-
-export const getOptions = memoizeOne(
-  (usersFromState: User[], usersFromProps?: User[]) => {
-    const users = getUsers(usersFromState, usersFromProps);
-    if (users) {
-      return users.map(userToOption);
-    }
-    return undefined;
-  },
+export const getOptions = memoizeOne((options: User[]) =>
+  options.map(userToOption),
 );
 
 export const usersToOptions = memoizeOne((defaultValue: UserValue) => {
   if (!defaultValue) {
-    return undefined;
+    return null;
   }
   if (Array.isArray(defaultValue)) {
     return defaultValue.map(userToOption);
@@ -68,3 +55,11 @@ export const isChildInput = (child: ReactChild): child is ReactElement<any> =>
 export const isSingleValue = (
   value?: UserOption | UserOption[],
 ): value is UserOption => !!value && !Array.isArray(value);
+
+export const hasValue = (value?: string): value is string =>
+  !!value && value.trim().length > 0;
+
+export const callCallback = <U extends any[], R>(
+  callback: ((...U) => R) | undefined,
+  ...args: U
+): R | undefined => callback && callback(...args);

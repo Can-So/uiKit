@@ -148,7 +148,7 @@ const removeCommentFromConversation = (
   conversations: Conversation[],
   commentToRemove: Comment,
 ): Conversation[] => {
-  return conversations.reduce((current, conversation) => {
+  return conversations.reduce<Array<Conversation>>((current, conversation) => {
     if (conversation.conversationId === commentToRemove.conversationId) {
       const comments = removeComment(conversation.comments, commentToRemove);
 
@@ -178,22 +178,25 @@ const getCommentFromConversation = (
     return null;
   }
 
-  const [comment = null] = conversations.reduce((acc, conversation) => {
-    if (
-      conversation.conversationId !== conversationId ||
-      !conversation.comments
-    ) {
-      return acc;
-    }
-
-    return conversation.comments.reduce((commentsAcc, comment) => {
-      if (comment.commentId !== commentId) {
-        return commentsAcc;
+  const [comment = null] = conversations.reduce<Array<Comment>>(
+    (acc, conversation) => {
+      if (
+        conversation.conversationId !== conversationId ||
+        !conversation.comments
+      ) {
+        return acc;
       }
 
-      return [...commentsAcc, comment];
-    }, acc);
-  }, []);
+      return conversation.comments.reduce((commentsAcc, comment) => {
+        if (comment.commentId !== commentId) {
+          return commentsAcc;
+        }
+
+        return [...commentsAcc, comment];
+      }, acc);
+    },
+    [],
+  );
 
   return comment;
 };

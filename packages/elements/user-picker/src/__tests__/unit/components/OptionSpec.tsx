@@ -3,12 +3,13 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 import { Option } from '../../../components/Option';
 import { UserOption } from '../../../components/UserOption';
+import { User } from '../../../types';
 
 describe('Option', () => {
-  const user = {
+  const user: User = {
     id: 'abc-123',
     name: 'Jace Beleren',
-    nickname: 'jbeleren',
+    publicName: 'jbeleren',
     avatarUrl: 'http://avatars.atlassian.com/jace.png',
   };
   const shallowOption = (

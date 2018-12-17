@@ -10,6 +10,7 @@ import AkLozenge from '@atlaskit/lozenge';
 import ErrorMessage from './components/ErrorMessage';
 import HeightTransitionWrapper from './components/HeightTransitionWrapper';
 import IconLabel from './components/IconLabel';
+import MessagesIntlProvider from './components/MessagesIntlProvider';
 import relativeDate from './relative-date';
 import presences from './internal/presences';
 import messages from './messages';
@@ -302,9 +303,11 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
     }
 
     return (
-      <HeightTransitionWrapper customElevation={customElevation}>
-        {cardContent}
-      </HeightTransitionWrapper>
+      <MessagesIntlProvider>
+        <HeightTransitionWrapper customElevation={customElevation}>
+          {cardContent}
+        </HeightTransitionWrapper>
+      </MessagesIntlProvider>
     );
   }
 }

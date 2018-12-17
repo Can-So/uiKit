@@ -27,7 +27,10 @@ export const insertMediaAsMediaSingle = (
   }
 
   // if not an image type media node
-  if (node.type !== media || !isImage(node.attrs.__fileMimeType)) {
+  if (
+    node.type !== media ||
+    (!isImage(node.attrs.__fileMimeType) && node.attrs.type !== 'external')
+  ) {
     return false;
   }
 
@@ -41,7 +44,7 @@ export const insertMediaSingleNode = (
   mediaState: MediaState,
   collection?: string,
 ): boolean => {
-  if (typeof collection !== 'string') {
+  if (collection === undefined) {
     return false;
   }
 

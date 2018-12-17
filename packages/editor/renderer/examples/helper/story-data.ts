@@ -513,6 +513,86 @@ export const document = {
       ],
     },
     {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 1 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 1 level of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 2 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 2 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 3 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 3 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 4 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 4 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 5 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 5 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 6 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 6 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'alignment', attrs: { align: 'center' } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with center alignment',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'alignment', attrs: { align: 'end' } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with end alignment',
+        },
+      ],
+    },
+    {
       type: 'heading',
       attrs: { level: 1 },
       content: [
@@ -577,6 +657,105 @@ export const document = {
         {
           type: 'text',
           text: 'Heading 6',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 1 },
+      marks: [{ type: 'indentation', attrs: { level: 1 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 1 with 1 level of indentation',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 2 },
+      marks: [{ type: 'indentation', attrs: { level: 2 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 2 with 2 levels of indentation',
+          marks: [
+            {
+              type: 'link',
+              attrs: {
+                href: 'www.atlassian.com',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 3 },
+      marks: [{ type: 'indentation', attrs: { level: 3 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 3 with 3 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 4 },
+      marks: [{ type: 'indentation', attrs: { level: 4 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 4 with 4 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 5 },
+      marks: [{ type: 'indentation', attrs: { level: 5 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 5 with 5 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 6 },
+      marks: [{ type: 'indentation', attrs: { level: 6 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 6 with 6 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 2 },
+      marks: [{ type: 'alignment', attrs: { align: 'center' } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 2 with center alignment',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 3 },
+      marks: [
+        { type: 'alignment', attrs: { align: 'end' } },
+        { type: 'indentation', attrs: { level: 3 } },
+      ],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 3 with end alignment',
         },
       ],
     },
@@ -1355,7 +1534,7 @@ map.put(3, 10);`,
             {
               type: 'tableHeader',
               attrs: {
-                background: '#DEEBFF',
+                background: '#deebff',
               },
               content: [
                 {

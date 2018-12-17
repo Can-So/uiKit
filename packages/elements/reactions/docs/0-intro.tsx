@@ -1,23 +1,19 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, Example, Props, code } from '@atlaskit/docs';
+import ReactionsExample from '../examples/00-picker-and-reactions';
+
+const ReactionsSource = require('!!raw-loader!../examples/00-picker-and-reactions');
+
+const ReactionsProps = require('!!extract-react-types-loader!../examples/examples-util/ReactionsExampleWrapper');
 
 export default md`
-  # Reactions
-
   The main purpose of the Reactions component is to provide users the ability to react to pieces of content.
 
-  ## Installation
-
-  ~~~js
-  npm install @atlaskit/reactions
-  # or
-  yarn add  @atlaskit/reactions
-  ~~~
-
-  ## Using the component
+  ## Usage
 
   Import the component in your React app as follows:
 
-  ~~~js
+  ${code`
   import { ReactionStore, ConnectedReactionsView } from '@atlaskit/reactions';
   import { EmojiResource } from '@atlaskit/emoji';
 
@@ -50,7 +46,7 @@ export default md`
     </ReactionStore>,
     container,
   );
-  ~~~
+  };`}
 
   ### Note:
 
@@ -60,4 +56,16 @@ export default md`
   Key navigation can be bound to \`selectNext\` (e.g. down arrow),
   \`selectPrevious\` (e.g. up arrow), and \`chooseCurrentSelection\`
   (e.g. enter and tab).
+
+  ${(
+    <Example
+      packageName="@atlaskit/reactions"
+      Component={ReactionsExample}
+      title="Picker and Reactions"
+      source={ReactionsSource}
+    />
+  )}
+
+  ${<Props props={ReactionsProps} />}
+
 `;

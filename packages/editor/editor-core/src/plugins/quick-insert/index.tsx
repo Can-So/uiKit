@@ -88,7 +88,9 @@ const processItems = (items: Array<QuickInsertHandler>, intl: InjectedIntl) => {
 export const pluginKey = new PluginKey('quickInsertPluginKey');
 
 export const setProvider = (provider): Command => (state, dispatch) => {
-  dispatch(state.tr.setMeta(pluginKey, provider));
+  if (dispatch) {
+    dispatch(state.tr.setMeta(pluginKey, provider));
+  }
   return true;
 };
 

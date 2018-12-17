@@ -7,7 +7,7 @@ import { PDFWrapper } from '../../styled';
 import { closeOnDirectClick } from '../../utils/closeOnDirectClick';
 import { Outcome } from '../../domain';
 import { Spinner } from '../../loading';
-import { ErrorMessage, createError, MediaViewerError } from '../../error';
+import ErrorMessage, { createError, MediaViewerError } from '../../error';
 import { ZoomLevel } from '../../domain/zoomLevel';
 
 export const pdfViewerClassName = 'pdfViewer';

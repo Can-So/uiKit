@@ -1,6 +1,5 @@
 import { browser } from '@atlaskit/editor-common';
-import { EditorState, Transaction } from 'prosemirror-state';
-import { EditorView } from 'prosemirror-view';
+import { Command } from '../types';
 
 export const toggleBold = makeKeyMapWithCommon('Bold', 'Mod-b');
 export const toggleItalic = makeKeyMapWithCommon('Italic', 'Mod-i');
@@ -55,6 +54,8 @@ export const addLink = makeKeyMapWithCommon('Link', 'Mod-k');
 export const submit = makeKeyMapWithCommon('Submit Content', 'Mod-Enter');
 export const enter = makeKeyMapWithCommon('Enter', 'Enter');
 export const tab = makeKeyMapWithCommon('Tab', 'Tab');
+export const indent = makeKeyMapWithCommon('Indent', 'Tab');
+export const outdent = makeKeyMapWithCommon('Outdent', 'Shift-Tab');
 export const backspace = makeKeyMapWithCommon('Backspace', 'Backspace');
 export const deleteKey = makeKeyMapWithCommon('Delete', 'Delete');
 export const space = makeKeyMapWithCommon('Space', 'Space');
@@ -183,21 +184,13 @@ export interface Keymap {
 
 export function bindKeymapWithCommand(
   shortcut: string,
-  cmd: (
-    state: EditorState,
-    dispatch: (tr: Transaction) => void,
-    editorView?: EditorView,
-  ) => boolean,
+  cmd: Command,
   keymap: { [key: string]: Function },
 ) {
   const oldCmd = keymap[shortcut];
   let newCmd = cmd;
   if (keymap[shortcut]) {
-    newCmd = (
-      state: EditorState,
-      dispatch: (tr: Transaction) => void,
-      editorView?: EditorView,
-    ): boolean => {
+    newCmd = (state, dispatch, editorView) => {
       return oldCmd(state, dispatch) || cmd(state, dispatch, editorView);
     };
   }

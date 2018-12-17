@@ -1,28 +1,26 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import {
+  alignmentPositionMap,
+  AlignmentAttributes,
+} from '@atlaskit/editor-common';
 
-export type Props = {
-  align: 'start' | 'end' | 'center';
+export interface Props extends AlignmentAttributes {
   children: React.Props<any>;
-};
+}
 
-/** TODO: Flip these positions for RTL */
-const positionMap = {
-  start: 'left',
-  end: 'right',
-  center: 'center',
-};
-
-const MarkWrapper: React.ComponentClass<
-  React.HTMLAttributes<{}> & Props
-> = styled.div`
-  ${({ align }) =>
-    align &&
+const MarkWrapper = styled.div`
+  ${props =>
+    props['data-align'] &&
     css`
-      text-align: ${positionMap[align]};
+      text-align: ${alignmentPositionMap[props['data-align']]};
     `};
 `;
 
 export default function Alignment(props: Props) {
-  return <MarkWrapper align={props.align}>{props.children}</MarkWrapper>;
+  return (
+    <MarkWrapper className="fabric-editor-block-mark" data-align={props.align}>
+      {props.children}
+    </MarkWrapper>
+  );
 }

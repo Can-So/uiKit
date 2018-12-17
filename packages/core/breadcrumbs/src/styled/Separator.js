@@ -8,10 +8,10 @@ const ThemeColor = {
 
 const Separator = styled.div`
   color: ${ThemeColor.text};
-  padding-left: ${gridSize}px;
+  flex-shrink: 0;
+  padding: 0 ${gridSize}px;
   text-align: center;
   width: ${gridSize}px;
-  flex-shrink: 0;
 `;
 
 Separator.displayName = 'Separator';

@@ -284,4 +284,80 @@ export const messages = defineMessages({
     defaultMessage: 'Insert {0, plural, one {a file} other {{0} files}}',
     description: 'Showed when the user selects 1 or more files to insert',
   },
+  zoom_out: {
+    id: 'fabric.media.zoom_out',
+    defaultMessage: 'zoom out',
+    description: 'Indicates the user can zoom out a file',
+  },
+  zoom_in: {
+    id: 'fabric.media.zoom_in',
+    defaultMessage: 'zoom in',
+    description: 'Indicates the user can zoom in a file',
+  },
+  remove_image: {
+    id: 'fabric.media.remove_image',
+    defaultMessage: 'Remove image',
+    description: 'Allows the user to remove a file',
+  },
+  play: {
+    id: 'fabric.media.play',
+    defaultMessage: 'play',
+    description: '',
+  },
+  pause: {
+    id: 'fabric.media.pause',
+    defaultMessage: 'pause',
+    description: '',
+  },
+  disable_fullscreen: {
+    id: 'fabric.media.disable_fullscreen',
+    defaultMessage: 'disable fullscreen',
+    description: 'Hint to let the user know he can disable the fullscreen mode',
+  },
+  enable_fullscreen: {
+    id: 'fabric.media.enable_fullscreen',
+    defaultMessage: 'enable fullscreen',
+    description: 'Hint to let the user know he can enable the fullscreen mode',
+  },
+  error_loading_file: {
+    id: 'fabric.media.error_loading_file',
+    defaultMessage: 'Error loading file',
+    description: 'Message showed when we had an error trying to load the file',
+  },
+  error_generating_preview: {
+    id: 'fabric.media.error_generating_preview',
+    defaultMessage: 'Error generating preview',
+    description:
+      'Message showed when we had an error trying generate a preview for a file',
+  },
+  download: {
+    id: 'fabric.media.download',
+    defaultMessage: 'Download',
+    description: '',
+  },
+  unknown: {
+    id: 'fabric.media.unknown',
+    defaultMessage: 'unknown',
+    description: '',
+  },
+  document: {
+    id: 'fabric.media.document',
+    defaultMessage: 'document',
+    description: '',
+  },
+  audio: {
+    id: 'fabric.media.audio',
+    defaultMessage: 'audio',
+    description: '',
+  },
+  video: {
+    id: 'fabric.media.video',
+    defaultMessage: 'video',
+    description: '',
+  },
+  image: {
+    id: 'fabric.media.image',
+    defaultMessage: 'image',
+    description: '',
+  },
 });

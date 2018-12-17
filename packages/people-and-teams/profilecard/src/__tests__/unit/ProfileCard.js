@@ -4,11 +4,21 @@ import { shallow, mount } from 'enzyme';
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
 import AkButton from '@atlaskit/button';
 import { Presence } from '@atlaskit/avatar';
-import mockdate from 'mockdate';
 import AkProfilecardResourced, { AkProfilecard, AkProfileClient } from '../..';
 import ErrorMessage from '../../components/ErrorMessage';
+import HeightTransitionWrapper from '../../components/HeightTransitionWrapper';
 import presences from '../../internal/presences';
 import { FullNameLabel, ActionButtonGroup } from '../../styled/Card';
+import mockGlobalDate from './helper/_mock-global-date';
+
+function MockMessagesIntlProvider(props: any) {
+  return props.children;
+}
+
+jest.mock(
+  '../../components/MessagesIntlProvider',
+  () => MockMessagesIntlProvider,
+);
 
 describe('Profilecard', () => {
   const defaultProps = {
@@ -20,12 +30,12 @@ describe('Profilecard', () => {
 
   const TODAY = new Date(2018, 10, 19, 17, 30, 0, 0);
 
-  beforeEach(() => {
-    mockdate.set(TODAY);
+  beforeAll(() => {
+    mockGlobalDate.setToday(TODAY);
   });
 
-  afterEach(() => {
-    mockdate.reset();
+  afterAll(() => {
+    mockGlobalDate.reset();
   });
 
   const renderShallow = (props = {}) =>
@@ -56,7 +66,7 @@ describe('Profilecard', () => {
 
       it('should not render a card if full name is not set', () => {
         card.setProps({ fullName: undefined });
-        expect(card.children()).toHaveLength(0);
+        expect(card.find(HeightTransitionWrapper).children()).toHaveLength(0);
       });
     });
 
@@ -242,7 +252,7 @@ describe('Profilecard', () => {
       it('should have correct customElevation', () => {
         const wrapper = mount(<AkProfilecard customElevation="e400" />);
         expect(
-          wrapper.find('HeightTransitionWrapper').props().customElevation,
+          wrapper.find(HeightTransitionWrapper).props().customElevation,
         ).toEqual('e400');
       });
     });
