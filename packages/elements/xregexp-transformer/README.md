@@ -1,16 +1,9 @@
-# XRegexp Unicode Tokenizer
+# XRegexp Transformer
 
 Currently xregexp library is big in bundles and the idea is to use it at compilation time rather than runtime.
 Basically the idea is to transpile the regex scripts to full unicode character ranges using the xregexp library at compilation time.
 
-## Transformer
-
-The custom transformer code was inspired by:
-
-https://github.com/josephfrazier/babel-plugin-transform-xregexp
-
-Unfortunately I was not able to run the xregexp/Babel 6 and that plugin.
-The babel plugin worked fine with Babel 7 but we are using Babel 6 in AK repo still.
+This is was implemented through a typescript custom transformer. 
 
 ## Dependencies
 
@@ -44,7 +37,6 @@ npm run sample
 ```
 Check the output for the generated regex unicode in dist/sample.js.
 
-## Customize the regex
+## HOWTO: compile your Xregexp expression
 
-Replace the regex in src/sample.ts with your own and run it to get compiled into unicode charsets and then replace it back in your component.
-
+Replace the regex in src/sample.ts with your desired xregexp expression and run it to get compiled into unicode charsets and then replace it back in your component.

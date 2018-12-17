@@ -8,13 +8,15 @@
   "scripts": {
     "dist:delete": "rm -rf dist/*",
     "delete": "rm -rf node_modules && npm run dist:delete",
-    "samples": "./node_modules/ttypescript/bin/tsc src/samples.ts",
     "sample": "./node_modules/ttypescript/bin/tsc src/sample.ts"
   },
-  "devDependencies": {
-    "ttypescript": "^1.5.5",
+  "dependencies": {
     "typescript": "~3.1.0",
     "xregexp": "^4.1.1"
+  },
+  "devDependencies": {
+    "@atlaskit/docs": "^6.0.0",
+    "ttypescript": "^1.5.5"
   },
   "maintainers": [
     {

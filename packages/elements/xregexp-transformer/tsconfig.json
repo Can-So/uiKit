@@ -4,7 +4,7 @@
     "baseUrl": "./",    
     "outDir": "./dist",
     "plugins": [
-      { "transform": "./transformers/transfomer-xregexp.ts" }
+      { "transform": "./src/transformers/xregexpTransformer.ts" }
     ],
     "allowJs": false,
     "alwaysStrict": false,
@@ -30,7 +30,12 @@
       "es2015.iterable",
       "es2015.promise"
     ],
-    "types": [],      
+    "types": ["jest"],
+    "typeRoots": ["../../../typings", "./node_modules/@types"],    
   },
+  "files": [
+    "../../../typings/jest-in-case.d.ts",
+    "../../../typings/jest.frameworkSetup.d.ts",
+  ],  
   "exclude": ["transformers/**/*"]
 }
