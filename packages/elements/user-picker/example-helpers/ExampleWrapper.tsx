@@ -46,7 +46,6 @@ export class ExampleWrapper extends React.PureComponent<
   };
 
   private onInputChange = (searchText?: string) => {
-    console.log('onInputChange', searchText);
     this.setState({
       users:
         searchText && searchText.length > 0

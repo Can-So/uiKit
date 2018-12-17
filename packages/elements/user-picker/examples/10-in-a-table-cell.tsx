@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { exampleUsers } from '../example-helpers';
+import { ExampleWrapper } from '../example-helpers/ExampleWrapper';
 import UserPicker from '../src';
 
 const Table = styled.div`
@@ -28,11 +28,16 @@ const renderRows = (count: number) => {
       <Row>
         <Cell width={300}>KEY-{i}</Cell>
         <Cell width={100}>
-          <UserPicker
-            menuPortalTarget={document.body}
-            options={exampleUsers}
-            onChange={console.log}
-          />
+          <ExampleWrapper>
+            {({ users, onInputChange }) => (
+              <UserPicker
+                menuPortalTarget={document.body}
+                options={users}
+                onInputChange={onInputChange}
+                onChange={console.log}
+              />
+            )}
+          </ExampleWrapper>
         </Cell>
       </Row>,
     );
