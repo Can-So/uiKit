@@ -580,8 +580,10 @@ export const moveCursorBackward: Command = (state, dispatch) => {
     return false;
   }
 
-  // ensure we're just at a top level paragraph
-  // otherwise, perform regular backspace behaviour
+  /*
+    ensure we're just at a top level paragraph
+    otherwise, perform regular backspace behaviour
+   */
   const grandparent = $cursor.node($cursor.depth - 1);
   const { listItem } = state.schema.nodes;
 

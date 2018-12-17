@@ -19,14 +19,14 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
       os: 'Windows',
       os_version: '10',
       browserName: 'chrome',
-      browser_version: '70.0',
+      browser_version: '69.0',
       resolution: '1440x900',
     },
     firefox: {
       os: 'Windows',
       os_version: '10',
       browserName: 'firefox',
-      browser_version: '63.0',
+      browser_version: '61.0',
       resolution: '1440x900',
     },
     ie: {
@@ -38,16 +38,16 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
     },
     safari: {
       os: 'OS X',
-      os_version: 'High Sierra',
-      browserName: 'Safari',
-      browser_version: '11.0',
+      os_version: 'Sierra',
+      browserName: 'safari',
+      browser_version: '10.1',
       resolution: '1920x1080',
     },
     edge: {
       os: 'Windows',
       os_version: '10',
       browserName: 'edge',
-      browser_version: '18',
+      browser_version: '16',
       resolution: '1440x900',
     },
   };
