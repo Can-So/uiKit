@@ -5,7 +5,7 @@ import { gridSize } from '@atlaskit/theme';
 import { Label } from './styled/Field';
 
 const FieldsetLabel = styled(Label)`
-  margin-bottom: 0px;
+  margin-bottom: 0;
 `;
 
 const Fieldset = styled.fieldset`
