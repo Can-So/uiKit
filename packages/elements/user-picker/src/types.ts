@@ -3,6 +3,8 @@ export type UserPickerProps = {
   options?: User[];
   /** Width of the user picker field. */
   width?: number;
+  /** Sets the minimum width for the menu. If not set, menu will always have the same width of the field */
+  menuMinWidth?: number;
   /** Function used to load options asynchronously. */
   loadOptions?: LoadOptions;
   /** Callback for value change events fired whenever a selection is inserted or removed. */
@@ -43,6 +45,8 @@ export type UserPickerProps = {
   isClearable?: boolean;
   /** Optional tooltip to display on hover over the clear indicator. */
   clearValueLabel?: string;
+  /** Whether the menu should use a portal, and where it should attach.  */
+  menuPortalTarget?: HTMLElement;
 };
 
 export type UserPickerState = {
