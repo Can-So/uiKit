@@ -52,6 +52,7 @@
     "@atlaskit/select": "^6.1.13",
     "@atlaskit/single-select": "^6.0.11",
     "@atlaskit/textarea": "^0.2.3",
+    "@atlaskit/textfield": "^0.1.4",
     "@atlaskit/toggle": "^5.0.14",
     "@atlaskit/tooltip": "^12.1.13",
     "@atlaskit/webdriver-runner": "^0.1.0",
