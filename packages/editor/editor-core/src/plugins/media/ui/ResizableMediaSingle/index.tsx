@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
-
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import {
   akEditorWideLayoutWidth,
   calcPxFromColumns,
   calcPctFromPx,
   calcPxFromPct,
-  MediaSingleLayout,
   akEditorBreakoutPadding,
   calcColumnsFromPx,
   breakoutWideScaleRatio,

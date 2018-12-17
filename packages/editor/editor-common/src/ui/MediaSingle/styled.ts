@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import { MediaSingleLayout } from '../../schema';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import { akEditorFullPageMaxWidth } from '../../styles';
 import { calcWideWidth, calcBreakoutWidth } from '../../utils';
 

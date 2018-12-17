@@ -1,6 +1,6 @@
 import { Node, NodeSpec } from 'prosemirror-model';
 import { Inline } from './doc';
-import { uuid } from '../../utils';
+import { uuid } from '../../utils/uuid';
 
 /**
  * @name taskItem_node

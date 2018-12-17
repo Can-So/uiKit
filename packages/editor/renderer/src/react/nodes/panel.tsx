@@ -7,7 +7,7 @@ import SuccessIcon from '@atlaskit/icon/glyph/editor/success';
 import ErrorIcon from '@atlaskit/icon/glyph/editor/error';
 import NoteIcon from '@atlaskit/icon/glyph/editor/note';
 import WarningIcon from '@atlaskit/icon/glyph/warning';
-import { PanelType } from '@atlaskit/editor-common';
+import { PanelType } from '@atlaskit/adf-schema';
 
 export interface Props {
   panelType: PanelType;

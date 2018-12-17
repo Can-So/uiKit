@@ -1,6 +1,6 @@
 import { CardEvent, Identifier } from '@atlaskit/media-card';
 import { SyntheticEvent } from 'react';
-import { ActionMarkAction } from '../../schema';
+import { ActionMarkAction } from '@atlaskit/adf-schema';
 
 export interface CardSurroundings {
   collectionName: string;

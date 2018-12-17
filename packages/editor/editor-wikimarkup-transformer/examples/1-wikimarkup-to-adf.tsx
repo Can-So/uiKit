@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { defaultSchema, ProviderFactory } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
+import { ProviderFactory } from '@atlaskit/editor-common';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
 import { WikiMarkupTransformer } from '../src';
 import { ReactRenderer } from '@atlaskit/renderer';

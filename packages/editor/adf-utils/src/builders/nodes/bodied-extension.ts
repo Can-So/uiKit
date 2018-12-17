@@ -1,7 +1,7 @@
 import {
   BodiedExtensionDefinition,
   ExtensionContent,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 export const bodiedExtension = (attrs: BodiedExtensionDefinition['attrs']) => (
   ...content: ExtensionContent

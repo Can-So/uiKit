@@ -1,4 +1,4 @@
-import { indentation } from '@atlaskit/editor-common';
+import { indentation } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import { keymapPlugin } from './pm-plugins/keymap';
 

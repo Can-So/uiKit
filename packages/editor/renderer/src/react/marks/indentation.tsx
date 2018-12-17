@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IndentationMarkAttributes } from '@atlaskit/editor-common';
+import { IndentationMarkAttributes } from '@atlaskit/adf-schema';
 
 interface Props extends IndentationMarkAttributes {
   children: React.Props<any>;

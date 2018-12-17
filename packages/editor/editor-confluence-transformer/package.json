@@ -18,6 +18,7 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
+    "@atlaskit/adf-schema": "^0.0.1",
     "@atlaskit/editor-common": "^23.0.0",
     "collapse-whitespace": "^1.1.6",
     "prosemirror-model": "^1.6.1"

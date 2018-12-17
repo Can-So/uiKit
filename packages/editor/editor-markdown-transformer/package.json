@@ -16,6 +16,7 @@
   "author": "Atlassian Pty. Ltd",
   "license": "MIT",
   "dependencies": {
+    "@atlaskit/adf-schema": "^0.0.1",
     "@atlaskit/editor-common": "^23.0.0",
     "markdown-it": "^8.4.0",
     "markdown-it-table": "^2.0.4",

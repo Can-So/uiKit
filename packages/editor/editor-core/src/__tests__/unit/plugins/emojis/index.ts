@@ -1,6 +1,7 @@
 import { Node as PMNode } from 'prosemirror-model';
 import { emoji as emojiData } from '@atlaskit/util-data-test';
-import { emoji as emojiNode, ProviderFactory } from '@atlaskit/editor-common';
+import { emoji as emojiNode } from '@atlaskit/adf-schema';
+import { ProviderFactory } from '@atlaskit/editor-common';
 import {
   createEditor,
   sendKeyToPm,

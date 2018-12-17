@@ -1,4 +1,4 @@
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import WikiMarkupTransformer from '../../../index';
 
 import { doc, h1, h2, h3, h4, h5, h6 } from '@atlaskit/editor-test-helpers';

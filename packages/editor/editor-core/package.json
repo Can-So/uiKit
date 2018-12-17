@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@atlaskit/activity": "^1.0.1",
+    "@atlaskit/adf-schema": "^0.0.1",
     "@atlaskit/adf-utils": "^5.3.4",
     "@atlaskit/analytics-gas-types": "^3.2.3",
     "@atlaskit/analytics-namespaced-context": "^2.1.5",

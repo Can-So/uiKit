@@ -1,4 +1,4 @@
-import { PanelDefinition, PanelAttributes } from '@atlaskit/editor-common';
+import { PanelDefinition, PanelAttributes } from '@atlaskit/adf-schema';
 
 export const panel = (attrs: PanelAttributes) => (
   ...content: PanelDefinition['content']

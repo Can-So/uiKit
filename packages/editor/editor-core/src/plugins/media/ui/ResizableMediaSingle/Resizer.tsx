@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import {
-  MediaSingleLayout,
   calcColumnsFromPx,
   akEditorWideLayoutWidth,
 } from '@atlaskit/editor-common';

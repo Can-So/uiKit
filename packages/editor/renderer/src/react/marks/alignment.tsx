@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import {
   alignmentPositionMap,
   AlignmentAttributes,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 export interface Props extends AlignmentAttributes {
   children: React.Props<any>;

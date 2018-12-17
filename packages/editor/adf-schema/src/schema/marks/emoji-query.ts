@@ -1,6 +1,6 @@
-import { colors } from '@atlaskit/theme';
 import { MarkSpec } from 'prosemirror-model';
 import { SEARCH_QUERY } from '../groups';
+import { B400 } from '../../utils/colors';
 
 export const emojiQuery: MarkSpec = {
   inclusive: true,
@@ -11,7 +11,7 @@ export const emojiQuery: MarkSpec = {
       'span',
       {
         'data-emoji-query': 'true',
-        style: `color: ${colors.B400}`,
+        style: `color: ${B400}`,
       },
     ];
   },

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
 import { JIRATransformer } from '../src';
 

@@ -15,7 +15,6 @@ export {
   confluenceSchemaWithMediaSingle,
 } from './confluence-schema';
 export { defaultSchema } from './default-schema';
-export { hipchatSchema } from './hipchat-schema';
 
 export {
   default as createJIRASchema,

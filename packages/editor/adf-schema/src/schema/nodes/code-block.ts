@@ -1,5 +1,4 @@
 import { NodeSpec, Node as PMNode, Fragment } from 'prosemirror-model';
-import { browser } from '../../utils';
 import { TextDefinition as Text } from './text';
 import { NoMark, MarksObject } from './doc';
 import { BreakoutMarkDefinition } from '../marks/breakout';
@@ -147,11 +146,7 @@ export const codeBlock: NodeSpec = {
     },
   ],
   toDOM(node) {
-    const className = browser.ie && browser.ie_version <= 11 ? 'ie11' : '';
-    return [
-      'pre',
-      ['code', { 'data-language': node.attrs.language, class: className }, 0],
-    ];
+    return ['pre', ['code', { 'data-language': node.attrs.language }, 0]];
   },
 };
 
