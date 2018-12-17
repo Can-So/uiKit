@@ -29,6 +29,7 @@ import {
   CONTENT_NAV_WIDTH_FLYOUT,
   GLOBAL_NAV_WIDTH,
   FLYOUT_DELAY,
+  ALTERNATE_FLYOUT_DELAY,
 } from '../../../common/constants';
 import RenderBlocker from '../../common/RenderBlocker';
 import { LayoutEventListener } from './LayoutEvent';
@@ -71,6 +72,7 @@ export default class LayoutManager extends Component<
     collapseToggleTooltipContent: defaultTooltipContent,
     // eslint-disable-next-line camelcase
     experimental_flyoutOnHover: false,
+    experimental_alternateFlyoutBehaviour: false,
   };
 
   static getDerivedStateFromProps(props: LayoutManagerProps, state: State) {
@@ -118,11 +120,20 @@ export default class LayoutManager extends Component<
   };
   mouseOverFlyoutArea = ({ currentTarget, target }: *) => {
     if (!currentTarget.contains(target)) return;
+
+    const {
+      // eslint-disable-next-line camelcase
+      experimental_alternateFlyoutBehaviour: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
+    } = this.props;
+    const delay = EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR
+      ? ALTERNATE_FLYOUT_DELAY
+      : FLYOUT_DELAY;
+
     clearTimeout(this.flyoutMouseOverTimeout);
 
     this.flyoutMouseOverTimeout = setTimeout(() => {
       this.setState({ flyoutIsOpen: true });
-    }, FLYOUT_DELAY);
+    }, delay);
   };
   closeFlyout = (e: any) => {
     if (e.currentTarget.contains(e.relatedTarget)) return;
@@ -154,9 +165,15 @@ export default class LayoutManager extends Component<
     const {
       containerNavigation,
       globalNavigation: GlobalNavigation,
+      // eslint-disable-next-line camelcase
+      experimental_alternateFlyoutBehaviour: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
     } = this.props;
     return (
-      <div onMouseOver={this.closeFlyout}>
+      <div
+        onMouseOver={
+          EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR ? this.closeFlyout : null
+        }
+      >
         <ThemeProvider
           theme={theme => ({
             mode: light, // If no theme already exists default to light mode
@@ -238,6 +255,8 @@ export default class LayoutManager extends Component<
       navigationUIController,
       // eslint-disable-next-line camelcase
       experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
+      // eslint-disable-next-line camelcase
+      experimental_alternateFlyoutBehaviour: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
       collapseToggleTooltipContent,
     } = this.props;
     const { flyoutIsOpen, mouseIsOverNavigation, itemIsDragging } = this.state;
@@ -258,6 +277,7 @@ export default class LayoutManager extends Component<
             attributes: {
               isExpanded: !isCollapsed,
               flyoutOnHoverEnabled: EXPERIMENTAL_FLYOUT_ON_HOVER,
+              alternateFlyoutBehaviourEnabled: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
             },
             componentName: 'navigation',
             packageName,
@@ -286,7 +306,9 @@ export default class LayoutManager extends Component<
                 <NavigationContainer
                   innerRef={this.getContainerRef}
                   onMouseEnter={this.mouseEnter}
-                  onMouseOver={onMouseOver}
+                  onMouseOver={
+                    EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR ? onMouseOver : null
+                  }
                   onMouseOut={onMouseOut}
                   onMouseLeave={this.mouseLeave}
                 >
@@ -301,7 +323,11 @@ export default class LayoutManager extends Component<
                     flyoutIsOpen={flyoutIsOpen}
                     isGrabAreaDisabled={itemIsDragging}
                     mouseIsOverNavigation={mouseIsOverNavigation}
-                    onMouseOverButtonBuffer={this.closeFlyout}
+                    onMouseOverButtonBuffer={
+                      EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR
+                        ? this.closeFlyout
+                        : null
+                    }
                     mutationRefs={[
                       { ref: this.pageRef, property: 'padding-left' },
                       { ref: this.productNavRef, property: 'width' },
@@ -312,6 +338,11 @@ export default class LayoutManager extends Component<
                       return (
                         <ContainerNavigationMask
                           disableInteraction={itemIsDragging}
+                          onMouseOver={
+                            EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR
+                              ? null
+                              : onMouseOver
+                          }
                         >
                           <RenderBlocker
                             blockOnChange

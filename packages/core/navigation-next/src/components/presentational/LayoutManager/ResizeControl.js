@@ -65,12 +65,25 @@ export const GrabArea = ({ showHandle, isBold, ...props }: *) => (
     />
   </div>
 );
+const largeHitArea = {
+  left: -8,
+  right: -12,
+  bottom: -8,
+  top: -8,
+};
+const smallHitArea = {
+  left: -4,
+  right: -4,
+  bottom: -4,
+  top: -4,
+};
 type ButtonProps = {
   children: Node,
   hasHighlight: boolean,
   innerRef: Ref<'button'>,
   isVisible: boolean,
   onMouseOver: ?(SyntheticMouseEvent<>) => void,
+  hitAreaSize: 'small' | 'large',
 };
 const Button = ({
   children,
@@ -78,6 +91,7 @@ const Button = ({
   innerRef,
   isVisible,
   onMouseOver,
+  hitAreaSize,
   ...props
 }: ButtonProps) => (
   <button
@@ -121,10 +135,7 @@ const Button = ({
       // increase hit-area
       css={{
         position: 'absolute',
-        left: -8,
-        right: -12,
-        bottom: -8,
-        top: -8,
+        ...(hitAreaSize === 'small' ? smallHitArea : largeHitArea),
       }}
       onMouseOver={onMouseOver}
     />
@@ -191,7 +202,7 @@ type Props = {
     ref: ElementRef<*>,
     property: 'padding-left' | 'width',
   }>,
-  onMouseOverButtonBuffer: (e: SyntheticMouseEvent<>) => void,
+  onMouseOverButtonBuffer: ?(e: SyntheticMouseEvent<>) => void,
   navigation: Object,
 };
 type State = {
@@ -442,6 +453,7 @@ class ResizeControl extends PureComponent<Props, State> {
     const button = (
       <Button
         onClick={this.onResizerChevronClick}
+        hitAreaSize={onMouseOverButtonBuffer ? 'large' : 'small'}
         onMouseOver={!flyoutIsOpen ? onMouseOverButtonBuffer : null}
         // maintain styles when user is dragging
         isVisible={isCollapsed || mouseIsDown || mouseIsOverNavigation}

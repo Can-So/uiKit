@@ -32,6 +32,13 @@ export type ExperimentalFeatureFlags = {|
     mouse over the nav area whilst in a collapsed state.
   */
   experimental_flyoutOnHover: boolean,
+  /**
+    NOTE: This property is experimental and may be removed in a minor release.
+
+    FF to control the flyout activation area according to
+    https://product-fabric.atlassian.net/browse/NAV-197
+  */
+  experimental_alternateFlyoutBehaviour: boolean,
 |};
 
 export type GetRefs = ({
