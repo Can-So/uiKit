@@ -1,0 +1,1 @@
+- FS-3316 add menuMinWidth property to UserPicker
