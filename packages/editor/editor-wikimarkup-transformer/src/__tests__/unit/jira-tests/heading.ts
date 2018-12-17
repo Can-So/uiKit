@@ -1,4 +1,4 @@
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   doc,
   h1,

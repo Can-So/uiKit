@@ -1,9 +1,11 @@
-import { generateUuid as uuid } from './uuid';
-import { defaultSchema } from '../schema';
+import {
+  generateUuid as uuid,
+  defaultSchema,
+  isSafeUrl,
+  inlineNodes,
+  CellAttributes,
+} from '@atlaskit/adf-schema';
 import { Mark as PMMark, Schema } from 'prosemirror-model';
-import { isSafeUrl } from '.';
-import { inlineNodes } from '../schema';
-import { CellAttributes } from '../schema/nodes/tableNodes';
 
 export type ADFStage = 'stage0' | 'final';
 
@@ -655,6 +657,7 @@ export const getValidNode = (
         if (content) {
           return {
             type,
+            marks,
             content,
           };
         }

@@ -18,13 +18,8 @@ import {
   CardOnClickCallback,
   Identifier,
 } from '@atlaskit/media-card';
-
-import {
-  MediaType,
-  MediaBaseAttributes,
-  withImageLoader,
-  ImageStatus,
-} from '@atlaskit/editor-common';
+import { MediaType, MediaBaseAttributes } from '@atlaskit/adf-schema';
+import { withImageLoader, ImageStatus } from '@atlaskit/editor-common';
 
 import { EditorAppearance } from '../../../types';
 
@@ -160,7 +155,7 @@ class MediaNode extends Component<
     return (
       <Card
         context={this.state.viewContext!}
-        resizeMode="full-fit"
+        resizeMode="stretchy-fit"
         dimensions={cardDimensions}
         identifier={identifier}
         selectable={true}

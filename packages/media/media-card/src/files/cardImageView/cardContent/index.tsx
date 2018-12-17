@@ -13,6 +13,7 @@ export interface CardContentProps {
   dataURI?: string;
   loading?: boolean;
   crop?: boolean;
+  stretch?: boolean;
   readonly previewOrientation?: number;
 }
 
@@ -37,6 +38,7 @@ export class CardContent extends PureComponent<CardContentProps, {}> {
       mediaItemType,
       dataURI,
       crop,
+      stretch,
       previewOrientation,
     } = this.props;
 
@@ -50,6 +52,7 @@ export class CardContent extends PureComponent<CardContentProps, {}> {
           key="media-image"
           dataURI={dataURI}
           crop={crop}
+          stretch={stretch}
           previewOrientation={previewOrientation}
         />,
         this.renderPlayButton(),

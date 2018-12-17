@@ -1,5 +1,10 @@
 # @atlaskit/media-core
 
+## 24.6.0
+- [minor] [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+
+  - Add stretchy-fit resize mode that acts as full-fit but scales up small image in big container
+
 ## 24.5.3
 - [patch] [0f42ec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f42ec1):
 

@@ -1,4 +1,4 @@
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 import { inputRules, InputRule } from 'prosemirror-inputrules';
 import { Schema, NodeType, Node } from 'prosemirror-model';
 import {

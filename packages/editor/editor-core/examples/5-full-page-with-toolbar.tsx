@@ -12,6 +12,7 @@ import ToolsDrawer from '../example-helpers/ToolsDrawer';
 
 import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
+import { exampleDocument } from '../example-helpers/example-document';
 import quickInsertProviderFactory from '../example-helpers/quick-insert-provider';
 import { DevTools } from '../example-helpers/DevTools';
 import { Wrapper, Content } from './5-full-page';
@@ -36,6 +37,14 @@ const SAVE_ACTION = () => console.log('Save');
 
 const SaveAndCancelButtons = props => (
   <ButtonGroup>
+    <Button
+      className="loadExampleDocument"
+      onClick={() =>
+        props.editorActions.replaceDocument(exampleDocument, false)
+      }
+    >
+      Load Example
+    </Button>
     <Button
       appearance="primary"
       onClick={() =>
@@ -78,12 +87,15 @@ export class ExampleEditor extends React.Component<Props> {
               contextIdentifierProvider,
               onChange,
               disabled,
+              enabledFeatures,
             }) => (
               <Editor
                 defaultValue={this.props.defaultValue}
                 appearance="full-page"
                 analyticsHandler={analyticsHandler}
-                quickInsert={{ provider: Promise.resolve(quickInsertProvider) }}
+                quickInsert={{
+                  provider: Promise.resolve(quickInsertProvider),
+                }}
                 allowCodeBlocks={{ enableKeybindingsForIDE: true }}
                 allowLists={true}
                 allowBreakout={true}
@@ -122,8 +134,9 @@ export class ExampleEditor extends React.Component<Props> {
                 media={{
                   provider: mediaProvider,
                   allowMediaSingle: true,
-                  allowResizing: true,
+                  allowResizing: enabledFeatures.imageResizing,
                 }}
+                allowDynamicTextSizing={enabledFeatures.dynamicTextSizing}
                 placeholder="Write something..."
                 shouldFocus={false}
                 onChange={onChange}

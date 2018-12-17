@@ -1,6 +1,6 @@
 import * as React from 'react';
 import LayoutTwoEqualIcon from '@atlaskit/icon/glyph/editor/layout-two-equal';
-import { layoutSection, layoutColumn } from '@atlaskit/editor-common';
+import { layoutSection, layoutColumn } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import { FloatingToolbarConfig } from '../floating-toolbar/types';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';

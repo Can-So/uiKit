@@ -6,7 +6,7 @@ import {
   TextSelection,
 } from 'prosemirror-state';
 import { PluginKey } from 'prosemirror-state';
-import { placeholder } from '@atlaskit/editor-common';
+import { placeholder } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types/editor-plugin';
 import WithPluginState from '../../ui/WithPluginState';
 import { Dispatch } from '../../event-dispatcher';

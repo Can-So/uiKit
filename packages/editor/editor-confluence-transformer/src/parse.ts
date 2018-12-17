@@ -5,6 +5,8 @@ import {
   acNameToEmoji,
   acShortcutToEmoji,
   tableBackgroundColorNames,
+} from '@atlaskit/adf-schema';
+import {
   akEditorFullPageMaxWidth,
   akEditorTableNumberColumnWidth,
 } from '@atlaskit/editor-common';

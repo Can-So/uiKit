@@ -15,7 +15,7 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { taskDecision } from '@atlaskit/util-data-test';
 import { ProviderFactory } from '@atlaskit/editor-common';
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 
 import { pluginKey as blockTypePluginKey } from '../../../../../plugins/block-type/pm-plugins/main';
 import { messages as blockTypeMessages } from '../../../../../plugins/block-type/types';

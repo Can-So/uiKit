@@ -2,11 +2,8 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView, NodeView } from 'prosemirror-view';
-import {
-  MediaSingle,
-  WithProviders,
-  MediaSingleLayout,
-} from '@atlaskit/editor-common';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingle, WithProviders } from '@atlaskit/editor-common';
 import { CardEvent } from '@atlaskit/media-card';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
 import { stateKey, MediaPluginState } from '../pm-plugins/main';

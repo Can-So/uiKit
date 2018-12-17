@@ -8,8 +8,8 @@ import {
   tableToJSON,
   toJSONTableCell,
   toJSONTableHeader,
-  Transformer,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
+import { Transformer } from '@atlaskit/editor-common';
 import { Node as PMNode, Mark as PMMark } from 'prosemirror-model';
 
 export type JSONNode = {

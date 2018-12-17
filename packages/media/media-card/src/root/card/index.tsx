@@ -212,9 +212,11 @@ export class Card extends Component<CardProps, CardState> {
                 const width = getDataURIDimension('width', options);
                 const height = getDataURIDimension('height', options);
                 try {
+                  const mode =
+                    resizeMode === 'stretchy-fit' ? 'full-fit' : resizeMode;
                   const blob = await context.getImage(resolvedId, {
                     collection: collectionName,
-                    mode: resizeMode,
+                    mode,
                     height,
                     width,
                     allowAnimated: true,

@@ -1,4 +1,4 @@
-import { HardBreakDefinition } from '@atlaskit/editor-common';
+import { HardBreakDefinition } from '@atlaskit/adf-schema';
 
 export const hardBreak = (
   attrs?: HardBreakDefinition['attrs'],

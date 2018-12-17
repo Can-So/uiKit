@@ -52,7 +52,7 @@ export default class MediaGroup extends PureComponent<
 
   renderSingleFile(child: ReactElement<MediaProps>) {
     return React.cloneElement(child, {
-      resizeMode: 'full-fit',
+      resizeMode: 'stretchy-fit',
       cardDimensions: {
         width: '300px',
         height: '200px',
@@ -71,7 +71,6 @@ export default class MediaGroup extends PureComponent<
     surroundingItems: Identifier[],
   ) {
     return React.cloneElement(child, {
-      resizeMode: 'full-fit',
       eventHandlers: {
         ...child.props.eventHandlers,
         media: {
