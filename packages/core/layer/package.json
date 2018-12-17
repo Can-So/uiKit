@@ -10,9 +10,6 @@
   "files": [
     "dist"
   ],
-  "scripts": {
-    "build": "mkdir -p dist && cp -r popper dist"
-  },
   "author": "Atlassian Pty Ltd",
   "maintainers": [
     "Trey S",
@@ -21,6 +18,7 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
+    "popper.js": "^1.14.1",
     "@babel/runtime": "^7.0.0",
     "raf-schd": "^2.1.0",
     "react-scrolllock": "^3.0.2"
