@@ -124,10 +124,10 @@ export default class LayoutManager extends Component<
       this.setState({ flyoutIsOpen: true });
     }, FLYOUT_DELAY);
   };
-  closeFlyout = ({ currentTarget, relatedTarget, nativeEvent }: any) => {
-    if (currentTarget.contains(relatedTarget)) return;
+  closeFlyout = (e: any) => {
+    if (e.currentTarget.contains(e.relatedTarget)) return;
 
-    nativeEvent.stopPropagation();
+    e.stopPropagation();
     clearTimeout(this.flyoutMouseOverTimeout);
     if (this.state.flyoutIsOpen) {
       this.setState({ flyoutIsOpen: false });
