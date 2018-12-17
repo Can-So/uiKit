@@ -235,6 +235,14 @@ describe('CardView', () => {
     expect(card.find('MediaImage').prop('crop')).toBe(true);
   });
 
+  it('should render a non-stretched image by default', () => {
+    const card = mount(
+      <CardView status="complete" dataURI="a" metadata={file} />,
+    );
+
+    expect(card.find('MediaImage').prop('stretch')).toBe(false);
+  });
+
   it('should render not render a cropped image if we specify a different resizeMode', () => {
     const card = mount(
       <CardView
@@ -246,6 +254,19 @@ describe('CardView', () => {
     );
 
     expect(card.find('MediaImage').prop('crop')).toBe(false);
+  });
+
+  it('should render a stretched image if we specify stretchy-fit resizeMode', () => {
+    const card = mount(
+      <CardView
+        status="complete"
+        dataURI="a"
+        metadata={file}
+        resizeMode="stretchy-fit"
+      />,
+    );
+
+    expect(card.find('MediaImage').prop('stretch')).toBe(true);
   });
 
   describe('Dimensions', () => {

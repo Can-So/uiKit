@@ -17,7 +17,7 @@ export default {
   'global_search.no_results_title':
     'Nessun risultato trovato tra titoli e persone',
   'global_search.no_results_body':
-    'Prova a eseguire la ricerca con un termine diverso. Puoi cercare nel contenuto delle pagine anche con la ricerca avanzata, oppure cercare persone qui di seguito.',
+    'Riprova con un altro termine o restringi i risultati con la nostra ricerca avanzata.',
   'global_search.people.recent_people_heading': 'Lavorato di recente con',
   'global_search.people.people_heading': 'Persone',
   'global_search.people.advanced_search': 'Cerca persone',
@@ -29,22 +29,28 @@ export default {
   'global_search.jira.search_placeholder': 'Ricerca in Jira',
   'global_search.jira.recent_issues_heading': 'Ticket recenti',
   'global_search.jira.recent_people_heading': 'Lavorato di recente con',
-  'global_search.jira.recent_containers': 'Board, filtri e progetti recenti',
+  'global_search.jira.recent_containers': 'Board, progetti e filtri recenti',
   'global_search.jira.search_result_issues_heading': 'Ticket',
   'global_search.jira.search_result_containers_heading':
-    'Board, filtri e progetti',
+    'Board, progetti e filtri',
   'global_search.jira.search_result_people_heading': 'Persone',
-  'global_search.jira.advanced_search': 'Vai a ricerca avanzata per',
+  'global_search.jira.advanced_search': 'Ricerca avanzata di',
   'global_search.jira.advanced_search_issues': 'ticket',
   'global_search.jira.advanced_search_projects': 'progetti',
   'global_search.jira.advanced_search_boards': 'board',
   'global_search.jira.advanced_search_filters': 'filtri',
   'global_search.jira.advanced_search_people': 'persone',
   'global_search.jira.advanced_issue_search': 'Ricerca avanzata per ticket',
-  'global_search.jira.no_results_title':
-    'Nessun risultato trovato tra riepiloghi ticket, nomi e persone',
+  'global_search.jira.no_results_title': 'Nessun risultato per la tua ricerca',
   'global_search.jira.no_results_body':
-    'Prova a eseguire la ricerca con un termine diverso. Puoi cercare tra tutti i campi di testo nei ticket anche con la ricerca avanzata, oppure cerca altre voci più specificamente.',
+    'Riprova con un altro termine o restringi i risultati con la nostra ricerca avanzata.',
   'global_search.jira.no_recent_activity_body':
     'Oppure restringi i tuoi risultati con la nostra ricerca avanzata.',
+  'global_search.jira.project_type.business_project': 'Progetto aziendale',
+  'global_search.jira.project_type.software_project': 'Progetto software',
+  'global_search.jira.project_type.service_desk_project':
+    'Progetto Service Desk',
+  'global_search.jira.project_type.ops_project': 'Progetto Ops',
+  'global_search.jira.result_type.board': 'Board',
+  'global_search.jira.result_type.filter': 'Filtro',
 };

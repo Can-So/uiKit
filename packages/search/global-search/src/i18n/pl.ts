@@ -18,7 +18,7 @@ export default {
     'Lub użyj <a href={url}>wyszukiwania zaawansowanego</a> („shit+enter”), aby skupić się na wynikach.',
   'global_search.no_results_title': 'Brak wyników w tytułach i użytkownikach',
   'global_search.no_results_body':
-    'Spróbuj wyszukać inny termin. Możesz przeszukać stronę z zawartością za pomocą opcji wyszukiwania zaawansowanego lub wyszukiwania użytkowników, które są dostępne poniżej.',
+    'Spróbuj wyszukać inny termin lub doprecyzuj swoje wyniki dzięki zaawansowanemu wyszukiwaniu.',
   'global_search.people.recent_people_heading': 'Pracowano ostatnio z',
   'global_search.people.people_heading': 'Użytkownicy',
   'global_search.people.advanced_search': 'Wyszukaj użytkowników',
@@ -30,13 +30,13 @@ export default {
   'global_search.jira.search_placeholder': 'Wyszukiwanie Jira',
   'global_search.jira.recent_issues_heading': 'Ostatnie zgłoszenia',
   'global_search.jira.recent_people_heading': 'Pracowano ostatnio z',
-  'global_search.jira.recent_containers': 'Ostatnie tablice, filtry i projekty',
+  'global_search.jira.recent_containers':
+    'Ostatnie tablice, projekty i filtry ',
   'global_search.jira.search_result_issues_heading': 'Zgłoszenia',
   'global_search.jira.search_result_containers_heading':
-    'Tablice, filtry i projekty',
+    'Tablice, projekty i filtry ',
   'global_search.jira.search_result_people_heading': 'Użytkownicy',
-  'global_search.jira.advanced_search':
-    'Przejdź do wyszukiwania zaawansowanego dla',
+  'global_search.jira.advanced_search': 'Zaawansowane wyszukiwanie',
   'global_search.jira.advanced_search_issues': 'zgłoszenia',
   'global_search.jira.advanced_search_projects': 'projekty',
   'global_search.jira.advanced_search_boards': 'tablice',
@@ -45,9 +45,16 @@ export default {
   'global_search.jira.advanced_issue_search':
     'Zaawansowane wyszukiwanie zgłoszeń',
   'global_search.jira.no_results_title':
-    'Brak wyników w podsumowaniach zgłoszeń, nazwach i użytkownikach',
+    'Nie znaleziono żadnych filtrów pasujących do kryteriów wyszukiwania',
   'global_search.jira.no_results_body':
-    'Spróbuj wyszukać inny termin. Możesz przeszukać wszystkie pola tekstowe w zgłoszeniach za pomocą opcji wyszukiwania zaawansowanego lub bardziej szczegółowego wyszukiwania innych elementów.',
+    'Spróbuj wyszukać inny termin lub doprecyzuj swoje wyniki dzięki zaawansowanemu wyszukiwaniu.',
   'global_search.jira.no_recent_activity_body':
     'Lub doprecyzuj swoje wyniki dzięki zaawansowanemu wyszukiwaniu.',
+  'global_search.jira.project_type.business_project': 'Projekt biznesowy',
+  'global_search.jira.project_type.software_project': 'Projekt oprogramowania',
+  'global_search.jira.project_type.service_desk_project':
+    'Projekt pomocy technicznej',
+  'global_search.jira.project_type.ops_project': 'Projekt Ops',
+  'global_search.jira.result_type.board': 'Tablica',
+  'global_search.jira.result_type.filter': 'Filtr',
 };

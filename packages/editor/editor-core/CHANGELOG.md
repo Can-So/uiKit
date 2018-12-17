@@ -1,5 +1,26 @@
 # @atlaskit/editor-core
 
+## 91.0.0
+- [patch] [8ae67fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ae67fc):
+
+  - Use stretchy-fit resizeMode for media card components instead of full-fit or undefined values;
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/renderer@32.0.0
+  - @atlaskit/emoji@48.0.0
+  - @atlaskit/media-card@45.0.0
+  - @atlaskit/media-filmstrip@20.0.0
+  - @atlaskit/media-picker@26.0.0
+  - @atlaskit/adf-utils@5.3.4
+  - @atlaskit/editor-bitbucket-transformer@4.0.23
+  - @atlaskit/editor-json-transformer@4.0.25
+  - @atlaskit/editor-markdown-transformer@2.0.23
+  - @atlaskit/editor-test-helpers@6.3.2
+  - @atlaskit/task-decision@11.0.9
+  - @atlaskit/util-data-test@10.0.26
+  - @atlaskit/media-test-helpers@18.6.2
+  - @atlaskit/media-core@24.6.0
+
 ## 90.4.7
 - [patch] [f621523](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f621523):
 
