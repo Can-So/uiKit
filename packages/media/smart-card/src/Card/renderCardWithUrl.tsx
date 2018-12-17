@@ -10,6 +10,7 @@ import {
   InlineCardResolvingView,
   InlineCardErroredView,
   InlineCardForbiddenView,
+  InlineCardUnauthorizedView,
 } from '@atlaskit/media-ui';
 import { auth } from '@atlaskit/outbound-auth-flow-client';
 import { ObjectState, Client } from '../Client';
@@ -29,7 +30,7 @@ const getCollapsedIcon = (state: DefinedState): string | undefined => {
 const renderBlockCard = (
   url: string,
   state: ObjectState,
-  handleAuthorise: () => void,
+  handleAuthorise: (() => void) | undefined,
   handleErrorRetry: () => void,
   handleFrameClick: () => void,
   isSelected?: boolean,
@@ -102,7 +103,7 @@ const renderBlockCard = (
 const renderInlineCard = (
   url: string,
   state: ObjectState,
-  handleAuthorise: () => void,
+  handleAuthorise: (() => void) | undefined,
   handleErrorRetry: () => void,
   handleFrameClick: () => void,
   isSelected?: boolean,
@@ -131,7 +132,8 @@ const renderInlineCard = (
 
     case 'unauthorized':
       return (
-        <InlineCardForbiddenView
+        <InlineCardUnauthorizedView
+          icon={getCollapsedIcon(state)}
           url={url}
           isSelected={isSelected}
           onClick={handleFrameClick}
@@ -190,16 +192,22 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
       appearance={appearance}
     >
       {({ state, reload }) => {
+        // TODO: support multiple auth services
+        const firstAuthService =
+          (state as DefinedState).services &&
+          (state as DefinedState).services[0];
+
         const handleAuthorise = () => {
-          // TODO: figure out how to support multiple services
-          const service = (state as DefinedState).services[0];
-          auth(service.startAuthUrl).then(() => reload(), () => reload());
+          auth(firstAuthService.startAuthUrl).then(
+            () => reload(),
+            () => reload(),
+          );
         };
 
         return (appearance === 'inline' ? renderInlineCard : renderBlockCard)(
           url,
           state,
-          handleAuthorise,
+          firstAuthService ? handleAuthorise : undefined,
           reload,
           () => (onClick ? onClick() : window.open(url)),
           isSelected,
