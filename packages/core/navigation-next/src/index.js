@@ -10,6 +10,9 @@ export {
 } from './components/presentational/GlobalItem/primitives';
 
 export { default as GlobalNav } from './components/presentational/GlobalNav';
+export {
+  default as GlobalNavigationSkeleton,
+} from './components/presentational/GlobalNavigationSkeleton';
 export { default as Group } from './components/presentational/Group';
 export {
   default as GroupHeading,

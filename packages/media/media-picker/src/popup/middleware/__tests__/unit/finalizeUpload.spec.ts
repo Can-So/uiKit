@@ -3,12 +3,11 @@ import { MediaStore } from '@atlaskit/media-store';
 import { mockStore, mockFetcher } from '../../../mocks';
 import { sendUploadEvent } from '../../../actions/sendUploadEvent';
 import finalizeUploadMiddleware, { finalizeUpload } from '../../finalizeUpload';
-import { UploadParams } from '../../../../domain/config';
 import {
   FinalizeUploadAction,
   FINALIZE_UPLOAD,
 } from '../../../actions/finalizeUpload';
-import { Tenant, State } from '../../../domain';
+import { State } from '../../../domain';
 
 describe('finalizeUploadMiddleware', () => {
   const auth = {
@@ -34,18 +33,7 @@ describe('finalizeUploadMiddleware', () => {
     id: file.id,
     collection,
   };
-  const tenant: Tenant = {
-    auth: {
-      clientId: 'some-tenant-client-id',
-      token: 'some-tenant-token',
-      baseUrl: 'some-base-url',
-    },
-    uploadParams: {},
-  };
-  const setup = (
-    uploadParams: UploadParams = {},
-    state: Partial<State> = {},
-  ) => {
+  const setup = (state: Partial<State> = {}) => {
     const store = mockStore(state);
     const { userContext } = store.getState();
     (userContext.config.authProvider as jest.Mock<any>).mockReturnValue(
@@ -67,10 +55,6 @@ describe('finalizeUploadMiddleware', () => {
         file,
         uploadId,
         source,
-        tenant: {
-          ...tenant,
-          uploadParams,
-        },
       } as FinalizeUploadAction,
     };
   };
@@ -162,7 +146,7 @@ describe('finalizeUploadMiddleware', () => {
   it('Should resolve deferred id when the source id is on the store', () => {
     const resolver = jest.fn();
     const rejecter = jest.fn();
-    const { fetcher, store, action } = setup(undefined, {
+    const { fetcher, store, action } = setup({
       deferredIdUpfronts: {
         'some-file-id': {
           resolver,
@@ -175,5 +159,37 @@ describe('finalizeUploadMiddleware', () => {
       expect(resolver).toHaveBeenCalledTimes(1);
       expect(resolver).toBeCalledWith('some-copied-file-id');
     });
+  });
+
+  it('should call copyFileWithToken with the right params', async () => {
+    const { fetcher, store, action } = setup({
+      config: { uploadParams: { collection: 'some-tenant-collection' } },
+    });
+    const copyFileWithToken = jest.fn().mockReturnValue(Promise.resolve({}));
+
+    (MediaStore as any).mockImplementation(() => ({
+      copyFileWithToken,
+    }));
+
+    await finalizeUpload(fetcher, store, action);
+
+    expect(copyFileWithToken).toBeCalledTimes(1);
+    expect(copyFileWithToken).toBeCalledWith(
+      {
+        sourceFile: {
+          collection: 'some-collection',
+          id: 'some-file-id',
+          owner: {
+            clientId: 'some-client-id',
+            token: 'some-token',
+          },
+        },
+      },
+      {
+        collection: 'some-tenant-collection',
+        occurrenceKey: undefined,
+        replaceFileId: undefined,
+      },
+    );
   });
 });

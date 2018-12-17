@@ -623,10 +623,6 @@ export class MediaPluginState {
       });
     }
 
-    if (this.popupPicker) {
-      this.popupPicker.hide();
-    }
-
     // set new upload params for the pickers
     pickers.forEach(picker => picker.setUploadParams(uploadParams));
   }

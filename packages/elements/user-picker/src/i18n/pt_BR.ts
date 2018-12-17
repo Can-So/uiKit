@@ -1,6 +1,8 @@
 // Portuguese (Brazil)
 export default {
-  'fabric.elements.user-picker.placeholder': 'Find a person...',
-  'fabric.elements.user-picker.multi.remove-item': 'Remove',
-  'fabric.elements.user-picker.single.clear': 'Clear',
+  'fabric.elements.user-picker.placeholder': 'Encontre uma pessoa...',
+  'fabric.elements.user-picker.placeholder.add-more':
+    'adicionar mais pessoas...',
+  'fabric.elements.user-picker.multi.remove-item': 'Remover',
+  'fabric.elements.user-picker.single.clear': 'Limpar',
 };

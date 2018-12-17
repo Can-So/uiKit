@@ -4,11 +4,14 @@
   "content": [
     {
       "type": "layoutSection",
+      "marks": [
+        { "type": "breakout", "attrs": { "mode": "wide" } }
+      ],
       "content": [
         {
           "type": "layoutColumn",
           "attrs": {
-            "width": 25
+            "width": 50
           },
           "content": [{
             "type": "paragraph",
@@ -21,39 +24,13 @@
         {
           "type": "layoutColumn",
           "attrs": {
-            "width": 25
+            "width": 50
           },
           "content": [{
             "type": "paragraph",
             "content": [{
               "type": "text",
               "text": "Second Column"
-            }]
-          }]
-        },
-        {
-          "type": "layoutColumn",
-          "attrs": {
-            "width": 25
-          },
-          "content": [{
-            "type": "paragraph",
-            "content": [{
-              "type": "text",
-              "text": "Third Column"
-            }]
-          }]
-        },
-        {
-          "type": "layoutColumn",
-          "attrs": {
-            "width": 25
-          },
-          "content": [{
-            "type": "paragraph",
-            "content": [{
-              "type": "text",
-              "text": "Fourth Column"
             }]
           }]
         }

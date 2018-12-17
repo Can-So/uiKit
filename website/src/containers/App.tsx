@@ -59,7 +59,17 @@ const ScrollHandler = withRouter(ScrollToTop);
 class Boundary extends React.Component {
   state = { hasError: false };
 
+  componentDidMount() {
+    if (sessionStorage.getItem('loadedOnce') !== 'true') {
+      sessionStorage.setItem('loadedOnce', 'false');
+    }
+  }
+
   componentDidCatch(error, info) {
+    if (sessionStorage.getItem('loadedOnce') === 'false') {
+      sessionStorage.setItem('loadedOnce', 'true');
+      window.location.reload();
+    }
     this.setState({ hasError: true });
   }
 

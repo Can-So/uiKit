@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.1.0
+- [minor] [1175616](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1175616):
+
+  - Simplified error state in inline cards: no red state anymore, just blue link
+
 ## 9.0.4
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/button@10.1.1
