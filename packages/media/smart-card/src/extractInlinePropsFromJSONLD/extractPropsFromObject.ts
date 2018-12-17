@@ -16,5 +16,9 @@ export function extractPropsFromObject(json: any): InlineCardResolvedViewProps {
         : json.generator.icon;
   }
 
+  if (json.url) {
+    props.link = String(json.url);
+  }
+
   return props;
 }
