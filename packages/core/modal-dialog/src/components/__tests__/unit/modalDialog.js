@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Blanket from '@atlaskit/blanket';
 
 import ModalDialog, { ModalTransition } from '../../..';
@@ -9,6 +9,7 @@ import Content from '../../Content';
 import Header from '../../Header';
 import Footer from '../../Footer';
 import { dialogHeight, dialogWidth, Dialog } from '../../../styled/Modal';
+import { Wrapper as ModalWrapper } from '../../../styled/Content';
 
 jest.mock('raf-schd', () => fn => fn);
 
@@ -71,30 +72,91 @@ describe('modal-dialog', () => {
       TSHIRT_SIZES.forEach(width => {
         it(`width = "${width}" is applied uniquely`, () => {
           const wrapper = mount(<ModalDialog width={width} onClose={noop} />);
-          const widthProp = wrapper.find(Positioner).prop('widthName');
+          const widthProp = wrapper.find('Positioner').prop('widthName');
           expect(widthProp).toEqual(width);
         });
       });
     });
 
+    describe('container', () => {
+      it('should render element set via components prop', () => {
+        const wrapper = mount(
+          <ModalDialog components={{ Container: 'form' }} onClose={noop} />,
+        );
+
+        expect(
+          wrapper
+            .find(ModalWrapper)
+            .children()
+            .at(0)
+            .children()
+            .at(0)
+            .type(),
+        ).toEqual('form');
+      });
+    });
+
     describe('header', () => {
-      it('should render when set', () => {
+      it('should render when set via components prop', () => {
+        const node = <span>My header</span>;
+        const wrapper = mount(
+          <ModalDialog components={{ Header: () => node }} onClose={noop} />,
+        );
+        expect(wrapper.contains(node)).toBe(true);
+      });
+      it('should render when set via (deprecated) header prop', () => {
         const node = <span>My header</span>;
         const wrapper = mount(
           <ModalDialog header={() => node} onClose={noop} />,
         );
         expect(wrapper.contains(node)).toBe(true);
       });
+      it('should prefer the components prop over header prop ', () => {
+        const node = <span>My header</span>;
+        const nodeDeprecated = <span>My deprecated header</span>;
+        const wrapper = mount(
+          <ModalDialog
+            header={() => nodeDeprecated}
+            components={{ Header: () => node }}
+            onClose={noop}
+          />,
+        );
+
+        expect(wrapper.contains(node)).toBe(true);
+        expect(wrapper.contains(nodeDeprecated)).toBe(false);
+      });
     });
 
     describe('footer', () => {
-      it('should render when set', () => {
+      it('should render when set via components prop', () => {
+        const node = <span>My footer</span>;
+        const wrapper = mount(
+          <ModalDialog components={{ Footer: () => node }} onClose={noop} />,
+        );
+
+        expect(wrapper.contains(node)).toBe(true);
+      });
+      it('should render when  via (deprecated) footer prop', () => {
         const node = <span>My footer</span>;
         const wrapper = mount(
           <ModalDialog footer={() => node} onClose={noop} />,
         );
 
         expect(wrapper.contains(node)).toBe(true);
+      });
+      it('should prefer the components prop over footer prop ', () => {
+        const node = <span>My footer</span>;
+        const nodeDeprecated = <span>My deprecated footer</span>;
+        const wrapper = mount(
+          <ModalDialog
+            footer={() => nodeDeprecated}
+            components={{ Footer: () => node }}
+            onClose={noop}
+          />,
+        );
+
+        expect(wrapper.contains(node)).toBe(true);
+        expect(wrapper.contains(nodeDeprecated)).toBe(false);
       });
     });
 
@@ -207,6 +269,7 @@ test('multiple modals should stack on one another', () => {
   expect(indexes).toEqual([2, 1, 0]);
 });
 
+// problem child
 test('nested modals should stack on one another', () => {
   const wrapper = mount(
     <div>
@@ -221,6 +284,7 @@ test('nested modals should stack on one another', () => {
     .find(Content)
     .map(content => content.prop('stackIndex'));
   expect(indexes).toEqual([2, 1, 0]);
+  // wrapper.unmount();
 });
 
 test('multiple modals update stack on unmount', () => {
@@ -242,7 +306,7 @@ test('multiple modals update stack on unmount', () => {
       );
     }
   }
-  const wrapper = mount(<Wrapper />);
+  const wrapper = mount(<Wrapper key="hello" />);
   wrapper.find('button').simulate('click');
   const indexes = wrapper
     .find(Content)
@@ -271,7 +335,7 @@ test('no transform is applied to content', () => {
   // update enzyme's view of component tree after animations have finished
   wrapper.update();
   const style = wrapper.find(Positioner).prop('style');
-  expect(style.transform).toEqual(null);
+  expect(style.transform).toBeNull();
 });
 
 test('should throw deprecation error when using a function for auto focus', () => {

@@ -14,6 +14,14 @@ export const keylineHeight = 2;
 
 // Wrapper
 // ==============================
+
+const DefaultWrapperComponent = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  ${flexMaxHeightIEFix};
+`;
+
 export const Wrapper = ({
   component,
   children,
@@ -21,12 +29,15 @@ export const Wrapper = ({
   component: ElementType,
   children: Node,
 }) => {
-  const StyledComponent = styled(component)`
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    ${flexMaxHeightIEFix};
-  `;
+  let StyledComponent = DefaultWrapperComponent;
+  if (component !== 'div') {
+    StyledComponent = styled(component)`
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      ${flexMaxHeightIEFix};
+    `;
+  }
   return <StyledComponent>{children}</StyledComponent>;
 };
 

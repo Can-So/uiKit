@@ -125,6 +125,7 @@ export default class ModalDemo extends Component<{}, State> {
                 components={{
                   Header: name === 'custom header' ? Header : undefined,
                   Footer: name === 'custom footer' ? Footer : undefined,
+                  Container: 'div',
                 }}
                 heading={
                   ['header', 'both'].includes(name)
