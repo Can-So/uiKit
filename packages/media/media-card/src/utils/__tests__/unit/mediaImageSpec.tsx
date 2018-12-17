@@ -105,7 +105,6 @@ describe('MediaImage', () => {
         });
         expect(component.props().style).toEqual({
           maxHeight: '100%',
-          maxWidth: 'none !important',
           ...defaultTransform,
         });
       });
@@ -131,7 +130,6 @@ describe('MediaImage', () => {
         });
         expect(component.props().style).toEqual({
           height: '100%',
-          maxWidth: 'none !important',
           ...defaultTransform,
         });
       });
@@ -143,7 +141,6 @@ describe('MediaImage', () => {
         });
         expect(component.props().style).toEqual({
           width: '100%',
-          maxWidth: 'none !important',
           ...defaultTransform,
         });
       });
@@ -184,7 +181,6 @@ describe('MediaImage', () => {
         });
         expect(component.props().style).toEqual({
           width: '100%',
-          maxWidth: 'none !important',
           ...defaultTransform,
         });
       });
@@ -196,7 +192,6 @@ describe('MediaImage', () => {
         });
         expect(component.props().style).toEqual({
           height: '100%',
-          maxWidth: 'none !important',
           ...defaultTransform,
         });
       });
@@ -229,18 +224,5 @@ describe('MediaImage', () => {
         );
       });
     });
-  });
-
-  it('should define max-width none when not defined otherwise', () => {
-    const component = setup({
-      isCoverStrategy: false,
-      isImageMoreLandscapyThanContainer: false,
-      isStretchingProhibited: false,
-    });
-    expect(component.props().style).toEqual(
-      expect.objectContaining({
-        maxWidth: 'none !important',
-      }),
-    );
   });
 });

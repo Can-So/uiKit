@@ -2,9 +2,7 @@ import * as React from 'react';
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { MediaSingleLayout } from '../../schema';
-import {
-  akEditorFullPageMaxWidth,
-} from '../../styles';
+import { akEditorFullPageMaxWidth } from '../../styles';
 import { calcWideWidth, calcBreakoutWidth } from '../../utils';
 
 function float(layout: MediaSingleLayout): string {
@@ -141,6 +139,7 @@ const Wrapper: React.ComponentClass<
     height: 100%;
   }
 `;
+
 Wrapper.displayName = 'WrapperMediaSingle';
 
 export default Wrapper;
