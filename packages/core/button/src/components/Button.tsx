@@ -15,7 +15,6 @@ import IconWrapper from '../styled/IconWrapper';
 import LoadingSpinner from '../styled/LoadingSpinner';
 
 import { ButtonProps } from '../types';
-
 import {
   name as packageName,
   version as packageVersion,
