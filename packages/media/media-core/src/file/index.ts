@@ -217,7 +217,9 @@ export class FileFetcher {
     } = file;
 
     if (!uploadableFileUpfrontIds) {
-      uploadableFileUpfrontIds = this.generateUploadableFileUpfrontIds();
+      uploadableFileUpfrontIds = this.generateUploadableFileUpfrontIds(
+        collection,
+      );
     }
 
     const id = uploadableFileUpfrontIds.id;
@@ -247,7 +249,7 @@ export class FileFetcher {
       preview,
     };
 
-    const onProgress = progress => {
+    const onProgress = (progress: number) => {
       subject.next({
         status: 'uploading',
         ...stateBase,
