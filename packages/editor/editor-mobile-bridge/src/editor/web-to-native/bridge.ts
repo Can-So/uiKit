@@ -1,4 +1,5 @@
 import { Color as StatusColor } from '@atlaskit/status';
+import { EditorBridges, EditorPluginBridges } from './index';
 
 export interface MentionBridge {
   showMentions(query: String);
@@ -34,4 +35,10 @@ export default interface NativeBridge
     TextFormattingBridge,
     PromiseBridge,
     ListBridge,
-    StatusBridge {}
+    StatusBridge {
+  call<T extends EditorPluginBridges>(
+    bridge: T,
+    event: keyof Exclude<EditorBridges[T], undefined>,
+    ...args
+  );
+}

@@ -22,7 +22,44 @@ const Experimental = ({ children }: { children: Node }) => (
 export default md`
   The theme package is a combined component and utility set, exporting abstractions for creating and consuming themes, as well as utilities for both audiences.
 
-  ## For component consumers
+  ${<Experimental>Creating themes</Experimental>}
+
+  The \`createTheme\` function is at the heart of the theming API and is used in the global theme and reset theme. Much like React's \`createContext\`, the \`createTheme\` function returns you a \`Consumer\` and \`Provider\` that you use to get and set a theme, respectively.
+
+  ${(
+    <Example
+      packageName="@atlaskit/theme"
+      Component={require('../examples/creating-themes').default}
+      source={require('!!raw-loader!../examples/creating-themes')}
+      title="Creating themes"
+    />
+  )}
+
+  ${<Experimental>Theming components</Experimental>}
+
+  Whenever you create a new theme, it provides you a context specific to that theme. When theming a component, you use this context to provide a theme for your component. It is recommended that you, at the very least, export the provider for your theme so consumers can customise the look and feel of your component.
+  
+  ${(
+    <Example
+      packageName="@atlaskit/theme"
+      Component={require('../examples/theming-components').default}
+      source={require('!!raw-loader!../examples/theming-components')}
+      title="Creating themes"
+    />
+  )}
+
+  ${<Experimental>The global theme</Experimental>}
+
+  The global theme is the \`default\` export of the theme package. It is defined by using the \`createTheme\` function, so it will give you both a \`Consumer\` and \`Provider\` for you to use or customise as you see fit.
+    
+  ${(
+    <Example
+      packageName="@atlaskit/theme"
+      Component={require('../examples/global-theme').default}
+      source={require('!!raw-loader!../examples/global-theme')}
+      title="Creating themes"
+    />
+  )}
 
   ${<Experimental>Reset</Experimental>}
 
@@ -37,7 +74,7 @@ export default md`
     />
   )}
 
-  As shown above, the \`Reset\` comes with defaults based on the ADG, but it also uses a \`Consumer\` internally which means you can wrap it in any number of providers to customise it.
+  As shown above, the \`Reset\` comes with defaults based on the ADG, but it also allows you to customise it via a theme.
 
   ${(
     <Example
@@ -76,112 +113,6 @@ export default md`
   ${(
     <Props
       props={require('!!extract-react-types-loader!../src/components/AtlaskitThemeProvider')}
-    />
-  )}
-
-  ## For component authors
-
-  ${<Experimental>Consumer</Experimental>}
-
-  The raw \`Consumer\` returned by \`React.createContext()\`.
-
-  To see the usage of a \`Consumer\` with a \`Theme\`, see the \`Theme\` API. We do export a raw \`Provider\` but it's likely you'll want the \`Theme\` component instead.
-
-  ${<Experimental>Provider</Experimental>}
-
-  The raw \`Provider\` returned by \`React.createContext()\`.
-
-  ${<Experimental>Theme</Experimental>}
-
-  The \`Theme\` component is at the center of the theming API.
-
-  ${(
-    <Props
-      props={require('!!extract-react-types-loader!../src/components/Theme')}
-    />
-  )}
-
-  #### Defining a theme
-
-  When provided a subtree, the \`Theme\` component takes the values you provide and sets them on the new context.
-
-  ${(
-    <Example
-      packageName="@atlaskit/theme"
-      Component={require('../examples/defining-a-theme').default}
-      source={require('!!raw-loader!../examples/defining-a-theme')}
-      title="Defining a theme"
-    />
-  )}
-
-  #### Composing themes
-
-  When themes are composed together, values in the ancestor context are merged with the provided values and are then set on the new context.
-
-  ${(
-    <Example
-      packageName="@atlaskit/theme"
-      Component={require('../examples/composing-themes').default}
-      source={require('!!raw-loader!../examples/composing-themes')}
-      title="Composing themes"
-    />
-  )}
-
-  #### Pre-defined themes
-
-  To create a predefined theme, all you have to do is write a function that returns your theme object. The function is provided the parent theme and it is up to you to mix in the parent theme values into the new theme you're returning.
-
-  ${(
-    <Example
-      packageName="@atlaskit/theme"
-      Component={require('../examples/pre-defined-themes').default}
-      source={require('!!raw-loader!../examples/pre-defined-themes')}
-      title="Pre-defined themes"
-    />
-  )}
-
-  The example below shows the above example, but split out into two separate themes that are composed together.
-
-  ${(
-    <Example
-      packageName="@atlaskit/theme"
-      Component={require('../examples/pre-defined-themes-composed').default}
-      source={require('!!raw-loader!../examples/pre-defined-themes-composed')}
-      title="Pre-defined themes (composed)"
-    />
-  )}
-
-  #### Theming components
-
-  To theme a specific component, you simply define a function as a value on your theme, and then you call that function in the component that requires the values from it.
-
-  ${(
-    <Example
-      packageName="@atlaskit/theme"
-      Component={require('../examples/theming-components').default}
-      source={require('!!raw-loader!../examples/theming-components')}
-      title="Theming components"
-    />
-  )}
-
-  #### Default themes
-
-  Default themes are mostly the same as normal themes, except for that they mixin the ancestor component theme *after* the default theme declarations in the component theming function. This can be seen in the above example in the \`defaultButtonTheme\`.
-
-  We recommend using \`defaultProps\` and a prop such as \`theme\` to apply the default theme for your components. This allows a consumer to pass a custom theme to the component using \`theme\` and you don't have to change your usage.
-
-  ## For both authors and consumers
-
-  ### colors
-
-  An object containing the colors defined by the ADG color pallete. The available colors are shown below.
-
-  ${(
-    <Example
-      packageName="@atlaskit/theme"
-      Component={require('../examples/colors').default}
-      source={require('!!raw-loader!../examples/colors')}
-      title="colors"
     />
   )}
 

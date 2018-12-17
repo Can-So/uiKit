@@ -57,7 +57,9 @@ const getInteractionProps = (component: ButtonType) => {
   };
 };
 
-const getLinkElementProps = props => {
+const getLinkElementProps = (
+  props: React.AnchorHTMLAttributes<HTMLAnchorElement>,
+) => {
   const { href, target } = props;
 
   return { href, target };

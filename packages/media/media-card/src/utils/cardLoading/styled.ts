@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 import styled, { keyframes } from 'styled-components';
 import { center } from '@atlaskit/media-ui';
-import { akColorN20 } from '@atlaskit/util-shared-styles';
+import { colors, themed } from '@atlaskit/theme';
 import { CardDimensions } from '../..';
 
 export const blinkLoadingAnimation = keyframes`
@@ -23,8 +23,8 @@ export interface WrapperProps {
 }
 
 export const Wrapper = styled.div`
-  ${center} background: ${akColorN20};
-  color: #cfd4db;
+  ${center} background: ${themed({ light: colors.N20, dark: colors.DN50 })};
+  color: ${themed({ light: colors.N50, dark: colors.DN100 })};
   border-radius: inherit;
   max-height: 100%;
   max-width: 100%;

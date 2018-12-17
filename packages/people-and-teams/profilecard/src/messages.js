@@ -79,42 +79,42 @@ const messages = defineMessages({
   },
 
   closedAccountDescMsgHasDateThisWeek: {
-    id: 'pt.profile-card.inactive.account.has.date.this.week',
+    id: 'pt.profile-card.closed.account.has.date.this.week',
     defaultMessage: 'Their account was deleted this week.',
     description:
       'A long text explains this user is closed when we know the date of starting to close',
   },
 
   closedAccountDescMsgHasDateThisMonth: {
-    id: 'pt.profile-card.inactive.account.has.date.this.month',
+    id: 'pt.profile-card.closed.account.has.date.this.month',
     defaultMessage: 'Their account was deleted this month.',
     description:
       'A long text explains this user is closed when we know the date of starting to close',
   },
 
   closedAccountDescMsgHasDateLastMonth: {
-    id: 'pt.profile-card.inactive.account.has.date.last.month',
+    id: 'pt.profile-card.closed.account.has.date.last.month',
     defaultMessage: 'Their account was deleted last month.',
     description:
       'A long text explains this user is closed when we know the date of starting to close',
   },
 
   closedAccountDescMsgHasDateAFewMonths: {
-    id: 'pt.profile-card.inactive.account.has.date.a.few.months',
+    id: 'pt.profile-card.closed.account.has.date.a.few.months',
     defaultMessage: 'Their account has been deleted for a few months.',
     description:
       'A long text explains this user is closed when we know the date of starting to close',
   },
 
   closedAccountDescMsgHasDateSeveralMonths: {
-    id: 'pt.profile-card.inactive.account.has.date.several.months',
+    id: 'pt.profile-card.closed.account.has.date.several.months',
     defaultMessage: 'Their account has been deleted for several months.',
     description:
       'A long text explains this user is closed when we know the date of starting to close',
   },
 
   closedAccountDescMsgHasDateMoreThanAYear: {
-    id: 'pt.profile-card.inactive.account.has.date.more.than.a.year',
+    id: 'pt.profile-card.closed.account.has.date.more.than.a.year',
     defaultMessage: 'Their account has been deleted for more than a year.',
     description:
       'A long text explains this user is closed when we know the date of starting to close',
@@ -125,54 +125,6 @@ const messages = defineMessages({
     defaultMessage: 'Former user',
     description:
       'A default name when we cannot get name of an inactive or closed user',
-  },
-
-  today: {
-    id: 'pt.profile-card.today',
-    defaultMessage: 'today',
-    description: 'a relative date is showed when a user is closed/deactivated',
-  },
-
-  yesterday: {
-    id: 'pt.profile-card.yesterday',
-    defaultMessage: 'yesterday',
-    description: 'a relative date is showed when a user is closed/deactivated',
-  },
-
-  thisWeek: {
-    id: 'pt.profile-card.this.week',
-    defaultMessage: 'this week',
-    description: 'a relative date is showed when a user is closed/deactivated',
-  },
-
-  thisMonth: {
-    id: 'pt.profile-card.this.month',
-    defaultMessage: 'this month',
-    description: 'a relative date is showed when a user is closed/deactivated',
-  },
-
-  lastMonth: {
-    id: 'pt.profile-card.last.month',
-    defaultMessage: 'last month',
-    description: 'a relative date is showed when a user is closed/deactivated',
-  },
-
-  aFewMonths: {
-    id: 'pt.profile-card.a.few.months',
-    defaultMessage: 'a few months',
-    description: 'a relative date is showed when a user is closed/deactivated',
-  },
-
-  severalMonths: {
-    id: 'pt.profile.several.months',
-    defaultMessage: 'several months',
-    description: 'a relative date is showed when a user is closed/deactivated',
-  },
-
-  moreThanAYear: {
-    id: 'pt.profile-card.more.than.a.year',
-    defaultMessage: 'more than a year',
-    description: 'a relative date is showed when a user is closed/deactivated',
   },
 });
 

@@ -23,7 +23,7 @@ describe('Renderer - React/Nodes/TableHeader', () => {
     expect(tableHeader.prop('colSpan')).to.equal(6);
 
     expect(tableHeader.prop('style')).to.deep.equal({
-      'background-color': '#fab',
+      backgroundColor: '#fab',
     });
   });
 });

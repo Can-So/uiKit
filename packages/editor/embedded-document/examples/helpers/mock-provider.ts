@@ -1,7 +1,7 @@
 import { Provider, Document } from '../../src';
 
 const demoDoc: Document = {
-  id: 'demo-doc',
+  documentId: 'demo-doc',
   objectId: 'ari:cloud:demo::document/1',
   createdBy: {},
   body: JSON.stringify({
@@ -35,13 +35,21 @@ const demoDoc: Document = {
 
 export default class MockServiceProvider implements Provider {
   private documents: Map<string, Document> = new Map();
-
   constructor() {
     this.documents.set('demo-doc', demoDoc);
   }
 
   async getDocument(documentId: string): Promise<Document | null> {
     const document = this.documents.get(documentId);
+    if (!document) {
+      return null;
+    }
+
+    return document;
+  }
+
+  async getDocumentByObjectId(objectId: string): Promise<Document | null> {
+    const document = this.documents.get(objectId);
     if (!document) {
       return null;
     }
@@ -57,7 +65,7 @@ export default class MockServiceProvider implements Provider {
     language?: string,
   ): Promise<Document | null> {
     const document: Document = {
-      id: documentId,
+      documentId,
       body,
       objectId,
       createdBy: {},
@@ -77,7 +85,7 @@ export default class MockServiceProvider implements Provider {
   ): Promise<Document | null> {
     const documentId = new Date().getTime().toString();
     const document: Document = {
-      id: documentId,
+      documentId,
       body,
       objectId,
       createdBy: {},

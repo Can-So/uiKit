@@ -5,6 +5,7 @@ export {
   tableMarginTop,
   tableMarginBottom,
   tableMarginSides,
+  tableCellMinWidth,
   calcTableWidth,
   TableSharedCssClassName,
 } from './shared/table';
@@ -16,3 +17,6 @@ export { headingsSharedStyles } from './shared/headings';
 export { panelSharedStyles } from './shared/panel';
 export { ruleSharedStyles } from './shared/rule';
 export { paragraphSharedStyles } from './shared/paragraph';
+export { linkSharedStyle } from './shared/link';
+export { indentationSharedStyles } from './shared/indentation';
+export { blockMarksSharedStyles } from './shared/block-marks';

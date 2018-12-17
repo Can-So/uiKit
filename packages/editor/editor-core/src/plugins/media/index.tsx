@@ -83,10 +83,14 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
             {
               providerFactory,
               nodeViews: {
-                mediaGroup: ReactMediaGroupNode(portalProviderAPI),
+                mediaGroup: ReactMediaGroupNode(
+                  portalProviderAPI,
+                  props.appearance,
+                ),
                 mediaSingle: ReactMediaSingleNode(
                   portalProviderAPI,
                   eventDispatcher,
+                  props.appearance,
                 ),
               },
               errorReporter,
@@ -103,7 +107,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
             props.appearance,
           ),
       },
-      { name: 'mediaKeymap', plugin: ({ schema }) => keymapPlugin(schema) },
+      { name: 'mediaKeymap', plugin: ({ schema }) => keymapPlugin() },
     ].concat(
       options && options.allowMediaSingle
         ? {
@@ -114,7 +118,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
     );
   },
 
-  contentComponent({ editorView }) {
+  contentComponent({ editorView, appearance }) {
     if (!options) {
       return null;
     }
@@ -141,12 +145,14 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
         render={({ mediaState }) => {
           const { element: target, layout } = mediaState as MediaPluginState;
           const node = mediaState.selectedMediaNode();
+          const isFullPage = appearance === 'full-page';
           const allowBreakout = !!(
             node &&
             node.attrs &&
-            node.attrs.width > akEditorFullPageMaxWidth
+            node.attrs.width > akEditorFullPageMaxWidth &&
+            isFullPage
           );
-          const allowLayout = !!mediaState.isLayoutSupported();
+          const allowLayout = isFullPage && !!mediaState.isLayoutSupported();
           return (
             <MediaSingleEdit
               pluginState={mediaState}
@@ -184,7 +190,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
         action(insert, state) {
           const pluginState = pluginKey.getState(state);
           pluginState.showMediaPicker();
-          return insert();
+          return insert('');
         },
       },
     ],

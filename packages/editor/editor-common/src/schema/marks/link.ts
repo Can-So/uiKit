@@ -45,7 +45,8 @@ export const link: MarkSpec = {
   parseDOM: [
     {
       tag: 'a[href]',
-      getAttrs: (dom: Element) => {
+      getAttrs: domNode => {
+        const dom = domNode as HTMLLinkElement;
         let href = dom.getAttribute('href') || '';
         const attrs: { __confluenceMetadata: string; href?: string } = {
           __confluenceMetadata: dom.hasAttribute('__confluenceMetadata')
@@ -67,20 +68,30 @@ export const link: MarkSpec = {
       },
     },
   ],
-  toDOM(node): [string, any] {
+  toDOM(node, isInline) {
+    const attrs = Object.keys(node.attrs).reduce((attrs, key) => {
+      if (key === '__confluenceMetadata') {
+        if (node.attrs[key] !== null) {
+          attrs[key] = JSON.stringify(node.attrs[key]);
+        }
+      } else {
+        attrs[key] = node.attrs[key];
+      }
+
+      return attrs;
+    }, {});
+
+    if (isInline) {
+      return ['a', attrs];
+    }
+
     return [
       'a',
-      Object.keys(node.attrs).reduce((attrs, key) => {
-        if (key === '__confluenceMetadata') {
-          if (node.attrs[key] !== null) {
-            attrs[key] = JSON.stringify(node.attrs[key]);
-          }
-        } else {
-          attrs[key] = node.attrs[key];
-        }
-
-        return attrs;
-      }, {}),
+      {
+        ...attrs,
+        class: 'blockLink',
+      },
+      0,
     ];
   },
 };

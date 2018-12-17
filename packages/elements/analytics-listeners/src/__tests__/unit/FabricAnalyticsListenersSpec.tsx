@@ -34,6 +34,7 @@ const AtlaskitIncorrectEventType = IncorrectEventType(FabricChannel.atlaskit);
 describe('<FabricAnalyticsListeners />', () => {
   let analyticsWebClientMock: AnalyticsWebClient;
   let originalConsoleError;
+  let originalConsoleWarn;
 
   beforeEach(() => {
     analyticsWebClientMock = {
@@ -43,11 +44,14 @@ describe('<FabricAnalyticsListeners />', () => {
       sendScreenEvent: jest.fn(),
     };
     originalConsoleError = global.console.error;
+    originalConsoleWarn = global.console.warn;
     global.console.error = jest.fn();
   });
 
   afterEach(() => {
     global.console.error = originalConsoleError;
+    global.console.warn = originalConsoleWarn;
+
     analyticsWebClientMock = {
       sendUIEvent: jest.fn(),
       sendOperationalEvent: jest.fn(),
@@ -69,6 +73,53 @@ describe('<FabricAnalyticsListeners />', () => {
       ).not.toThrow();
     });
 
+    it('should accept and handle a promise-like client', done => {
+      const promiseLikeClient = {
+        then: jest.fn(() => promiseLikeClient),
+        catch: jest.fn(() => done()),
+      };
+
+      const compOnClick = jest.fn();
+      const component = mount(
+        <FabricAnalyticsListeners
+          client={promiseLikeClient}
+          logLevel={LOG_LEVEL.ERROR}
+        >
+          <DummyElementsCompWithAnalytics onClick={compOnClick} />
+        </FabricAnalyticsListeners>,
+      );
+
+      const analyticsListener = component.find(FabricElementsListener);
+      const dummyComponent = analyticsListener.find(DummyElementsComponent);
+      expect(dummyComponent).toHaveLength(1);
+
+      dummyComponent.simulate('click');
+    });
+
+    it('should not explode if something explodes in callback', () => {
+      const promiseLikeClient = {
+        sendUIEvent: jest.fn(() => {
+          throw new Error('Boom!');
+        }),
+      };
+
+      const compOnClick = jest.fn();
+      const component = mount(
+        <FabricAnalyticsListeners
+          client={promiseLikeClient as any}
+          logLevel={LOG_LEVEL.WARN}
+        >
+          <DummyElementsCompWithAnalytics onClick={compOnClick} />
+        </FabricAnalyticsListeners>,
+      );
+
+      const analyticsListener = component.find(FabricElementsListener);
+      const dummyComponent = analyticsListener.find(DummyElementsComponent);
+      expect(dummyComponent).toHaveLength(1);
+
+      dummyComponent.simulate('click');
+    });
+
     it('should log an error when an invalid event type is captured and error logging is enabled', () => {
       const compOnClick = jest.fn();
       const component = mount(
@@ -86,37 +137,6 @@ describe('<FabricAnalyticsListeners />', () => {
 
       dummyComponent.simulate('click');
       expect(global.console.error).toHaveBeenCalledTimes(1);
-    });
-
-    it('should log a warning when a promisified client can not be resolved', done => {
-      const oldWarn = global.console.warn;
-
-      global.console.warn = jest.fn((...args: Array<any>) => {
-        oldWarn(...args);
-        expect(args[0]).toEqual(
-          'AnalyticsWebClient instance could not be resolved',
-        );
-        global.console.warn = oldWarn;
-        done();
-      });
-
-      const compOnClick = jest.fn();
-      const component = mount(
-        <FabricAnalyticsListeners
-          client={Promise.reject(analyticsWebClientMock)}
-          logLevel={LOG_LEVEL.WARN}
-        >
-          <DummyElementsCompWithAnalytics onClick={compOnClick} />
-        </FabricAnalyticsListeners>,
-      );
-
-      const analyticsListener = component.find(FabricElementsListener);
-      const dummyComponent = analyticsListener.find(
-        DummyElementsCompWithAnalytics,
-      );
-      expect(dummyComponent).toHaveLength(1);
-
-      dummyComponent.simulate('click');
     });
 
     it('should render all listeners', () => {

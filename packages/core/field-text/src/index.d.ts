@@ -30,6 +30,7 @@ export interface Props {
   type?: string;
   value?: string;
   isValidationHidden?: boolean;
+  innerRef?: (node: HTMLInputElement) => void;
 }
 
 export class FieldTextStateless extends Component<Props, {}> {}

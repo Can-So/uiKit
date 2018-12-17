@@ -1,5 +1,61 @@
 # @atlaskit/website
 
+## 4.1.27
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+- Updated dependencies [882a85c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/882a85c):
+  - @atlaskit/badge@9.2.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/code@8.2.2
+  - @atlaskit/dynamic-table@10.0.22
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/flag@9.1.8
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/icon-object@3.0.2
+  - @atlaskit/inline-dialog@9.0.13
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/navigation@33.3.8
+  - @atlaskit/page@8.0.12
+  - @atlaskit/single-select@6.0.11
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/tag@6.1.3
+  - @atlaskit/tag-group@6.0.8
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/css-reset@3.0.5
+  - @atlaskit/analytics-listeners@4.1.4
+  - @atlaskit/media-card@44.1.3
+  - @atlaskit/media-core@24.5.2
+  - @atlaskit/media-filmstrip@19.0.3
+  - @atlaskit/quick-search@5.2.4
+  - @atlaskit/docs@6.0.0
+  - extract-react-types-loader@0.3.0
+
+## 4.1.26
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/code@8.2.1
+  - @atlaskit/dynamic-table@10.0.20
+  - @atlaskit/field-text@7.0.16
+  - @atlaskit/flag@9.1.7
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/icon-object@3.0.1
+  - @atlaskit/inline-dialog@9.0.12
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/navigation@33.3.7
+  - @atlaskit/single-select@6.0.10
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/tag@6.1.2
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/css-reset@3.0.4
+  - @atlaskit/quick-search@5.2.1
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/badge@9.2.1
+  - @atlaskit/lozenge@6.2.3
+
 ## 4.1.25
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

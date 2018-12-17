@@ -18,7 +18,7 @@ export default ({
   ...props
 }: InputProps) => (
   <InputWrapper
-    {...theme.textField({ appearance })}
+    {...theme}
     appearance={appearance}
     isCompact={isCompact}
     isDisabled={isDisabled}

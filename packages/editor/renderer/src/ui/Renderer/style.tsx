@@ -17,6 +17,8 @@ import {
   panelSharedStyles,
   ruleSharedStyles,
   paragraphSharedStyles,
+  indentationSharedStyles,
+  blockMarksSharedStyles,
   mediaSingleSharedStyle,
   blockNodesVerticalMargin,
   akEditorTableToolbar,
@@ -37,10 +39,10 @@ export const shadowClassNames = {
   LEFT_SHADOW: 'left-shadow',
 };
 
-export interface Props {
+export type Props = {
   appearance?: RendererAppearance;
   theme?: any;
-}
+};
 
 const getLineHeight = ({ appearance }: Props) => {
   return `line-height: ${appearance === 'message' ? 20 : 24}px`;
@@ -54,7 +56,13 @@ const tableStyles = ({ appearance }: Props) => {
   return '';
 };
 
-const fullPageStyles = ({ theme, appearance }) => {
+const fullPageStyles = ({
+  theme,
+  appearance,
+}: {
+  appearance?: 'full-page' | 'mobile';
+  theme?: any;
+}) => {
   if (appearance !== 'full-page' && appearance !== 'mobile') {
     return '';
   }
@@ -96,6 +104,8 @@ export const Wrapper = styled.div<Props & HTMLAttributes<{}>>`
   ${panelSharedStyles};
   ${ruleSharedStyles};
   ${paragraphSharedStyles};
+  ${indentationSharedStyles};
+  ${blockMarksSharedStyles}
 
   & .UnknownBlock {
     font-family: ${fontFamily()};

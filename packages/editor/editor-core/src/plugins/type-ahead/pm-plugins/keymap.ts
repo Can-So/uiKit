@@ -30,7 +30,9 @@ export function keymapPlugin(): Plugin {
       if (!pluginState || !pluginState.active) {
         return false;
       }
-      dispatch(state.tr.setMeta(pluginKey, { action: ACTIONS.SELECT_PREV }));
+      if (dispatch) {
+        dispatch(state.tr.setMeta(pluginKey, { action: ACTIONS.SELECT_PREV }));
+      }
       return true;
     },
     list,
@@ -43,7 +45,9 @@ export function keymapPlugin(): Plugin {
       if (!pluginState || !pluginState.active) {
         return false;
       }
-      dispatch(state.tr.setMeta(pluginKey, { action: ACTIONS.SELECT_NEXT }));
+      if (dispatch) {
+        dispatch(state.tr.setMeta(pluginKey, { action: ACTIONS.SELECT_NEXT }));
+      }
       return true;
     },
     list,

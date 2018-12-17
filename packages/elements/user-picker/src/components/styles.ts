@@ -6,7 +6,11 @@ import { getAvatarSize } from './utils';
 export const PLACEHOLDER_PADDING = 8;
 
 export const getStyles = memoizeOne(width => ({
-  menu: css => ({ ...css, width }),
+  menu: (css, state) => ({
+    ...css,
+    width,
+    minWidth: state.selectProps.menuMinWidth,
+  }),
   control: (css, state) => ({
     ...css,
     width,
@@ -20,9 +24,7 @@ export const getStyles = memoizeOne(width => ({
       : state.selectProps.subtle
       ? 'transparent'
       : colors.N10,
-    '&:hover .fabric-user-picker__clear-indicator': {
-      opacity: 1,
-    },
+    '&:hover .fabric-user-picker__clear-indicator': { opacity: 1 },
     ':hover': {
       ...css[':hover'],
       borderColor: state.isFocused
@@ -42,6 +44,7 @@ export const getStyles = memoizeOne(width => ({
     padding: 0,
     minHeight: state.selectProps.appearance === 'compact' ? 32 : 44,
     alignItems: 'stretch',
+    maxWidth: '100%',
   }),
   clearIndicator: ({
     paddingTop,
@@ -59,14 +62,14 @@ export const getStyles = memoizeOne(width => ({
       color: colors.R400,
     },
   }),
-  valueContainer: ({ paddingTop, paddingBottom, ...css }, state) => ({
+  valueContainer: ({ paddingTop, paddingBottom, position, ...css }, state) => ({
     ...css,
     flexGrow: 1,
     padding: 0,
     display: 'flex',
     flexDirection: 'row',
     maxHeight: 100,
-    overflow: 'auto',
+    overflow: 'hidden',
     flexWrap: state.selectProps.isMulti ? 'wrap' : 'nowrap',
   }),
   multiValue: css => ({
@@ -82,15 +85,19 @@ export const getStyles = memoizeOne(width => ({
     const avatarSize = getAvatarSize(state.selectProps.appearance);
     return {
       ...css,
-      marginLeft: !state.selectProps.isMulti
+      paddingLeft: !state.selectProps.isMulti
         ? 2 * PLACEHOLDER_PADDING +
           2 * BORDER_WIDTH[avatarSize] +
           AVATAR_SIZES[avatarSize]
         : PLACEHOLDER_PADDING,
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
+      paddingRight: 2,
+      display: 'block',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
       paddingTop: 2,
+      maxWidth: '100%',
+      margin: 0,
     };
   },
   option: css => ({

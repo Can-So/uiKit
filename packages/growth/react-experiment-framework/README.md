@@ -1,6 +1,6 @@
-# README #
+# README
 
-## What is this package for? ##
+## What is this package for?
 
 A set of React components that facilitate experimentation in product, by allowing React
 components to be swapped dynamically at run-time.
@@ -14,8 +14,8 @@ npm i -S @atlaskit/react-experiment-framework
 ## Usage
 
 Wrap your React app in the ExperimentController component
-```js
 
+```js
 import { ExperimentController } from '@atlaskit/react-experiment-framework';
 
 ReactDOM.render(
@@ -27,6 +27,7 @@ ReactDOM.render(
 ```
 
 The experimentEnrollmentConfig prop provided to the ExperimentController should be a map of experimentKey (string) to an enrollmentResolver. The resolver should return a promise that resolves to a cohort and provide eligiblity details of the user for the experiment
+
 ```js
 
 // example of a resolver
@@ -35,7 +36,7 @@ import type { EnrollmentDetails, ExperimentEnrollmentConfig } from '@atlaskit/re
 const experimentEnrollmentResolver = async (): EnrollmentDetails => {
     // example where the cohort is provided by an async feature flag fetch, e.g., LD client, or graphql query
     const featureFlagValue = await getFeatureFlag('myExperimentFeatureFlag');
-    
+
     return {
         cohort: featureFlagValue,
         isEligble: true,
@@ -70,11 +71,11 @@ export default asExperiment({
     // example cohort names used here, control and variant, but they can be whatever you like
     control: ExistingComponent,
     variant: ExperimentReplacementComponent,
-    
+
     // fallback is not optional, however, this is what is rendered in the event of a error encountered or when the user
     // is ineligible
     fallback: ExistingComponent,
-}, 'myExperimentKey', 
+}, 'myExperimentKey',
 {
     // callbacks to trigger tracking on exposure and errors, these are just examples provide your own
     onExposure: (data) => analyticsClient.trigger('experiment-exposure', data),

@@ -22,7 +22,7 @@ exports[`SortableGroup should disable pointerEvents on the group while it is bei
     id="my-group"
   >
     Group children
-    <unknown />
+    <Component />
   </Group>
 </div>
 `;
@@ -48,7 +48,7 @@ exports[`SortableGroup should render a Group component 1`] = `
     id="my-group"
   >
     Group children
-    <unknown />
+    <Component />
   </Group>
 </div>
 `;
@@ -75,7 +75,7 @@ exports[`SortableGroup should style the div wrapper with default styles and \`in
     id="my-group"
   >
     Group children
-    <unknown />
+    <Component />
   </Group>
 </div>
 `;
@@ -84,6 +84,6 @@ exports[`SortableGroup should wrap Group with a Droppable Component 1`] = `
 <MockDroppable
   droppableId="my-group"
 >
-  <unknown />
+  <Component />
 </MockDroppable>
 `;

@@ -1,5 +1,9 @@
 # @atlaskit/layer
 
+## 5.0.10
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/docs@6.0.0
+
 ## 5.0.9
 - [patch] [b332c91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b332c91):
 

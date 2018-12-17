@@ -208,7 +208,7 @@ export default class JiraClientImpl implements JiraClient {
       name: item.title,
       href,
       analyticsType: AnalyticsType.RecentJira,
-      avatarUrl: `${item.avatarUrl}`,
+      avatarUrl: item.avatarUrl,
       containerId: containerId,
       contentType,
       ...this.getTypeSpecificAttributes(item, jiraGroup),

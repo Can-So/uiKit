@@ -9,11 +9,11 @@ export type Props = CommonResultProps & {
   /** Text to appear to the right of the text. It has a lower font-weight. */
   caption?: string;
   /** Name of the container to which the object belongs. Displayed alongside the name */
-  containerName?: string;
+  containerName?: React.ReactNode;
   /** Set whether to display a lock on the result's icon */
   isPrivate?: boolean;
   /** A key or identifier of the object. Ajoined to the `containerName` when provided. */
-  objectKey?: string;
+  objectKey?: React.ReactNode;
 };
 
 /**
@@ -38,9 +38,12 @@ export default class ObjectResult extends React.PureComponent<Props> {
 
   getSubtext() {
     const { objectKey, containerName } = this.props;
-
     if (objectKey && containerName) {
-      return `${objectKey} · ${containerName}`;
+      return (
+        <text>
+          {objectKey} · {containerName}
+        </text>
+      );
     }
 
     return containerName || objectKey;

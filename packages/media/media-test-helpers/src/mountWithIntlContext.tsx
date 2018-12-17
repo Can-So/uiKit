@@ -6,7 +6,7 @@ export const mountWithIntlContext = (
   component: ReactElement<any>,
   reactContext?: Object,
   childContextTypes?: Object,
-): ReactWrapper => {
+): ReactWrapper<any, any> => {
   const intlProvider = new IntlProvider({
     locale: 'en',
     messages: {},

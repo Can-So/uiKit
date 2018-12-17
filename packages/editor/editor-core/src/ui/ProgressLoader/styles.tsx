@@ -1,10 +1,7 @@
 import styled, { css } from 'styled-components';
-import { HTMLAttributes, ComponentClass } from 'react';
 import { colors, borderRadius } from '@atlaskit/theme';
 
-export const BackgroundWrapper: ComponentClass<
-  HTMLAttributes<{}> & { maxWidth: number }
-> = styled.div`
+export const BackgroundWrapper = styled.div<{ maxWidth: number }>`
   height: 2px;
   background-color: ${colors.N20};
   border: transparent;
@@ -15,46 +12,36 @@ export const BackgroundWrapper: ComponentClass<
     `};
 `;
 
-export const ProgressLoaderWrapper: ComponentClass<
-  HTMLAttributes<{}>
-> = styled.div`
+export const ProgressLoaderWrapper = styled.div`
   flex-grow: 1;
 `;
 
-export const Container: ComponentClass<HTMLAttributes<{}>> = styled.div`
+export const Container = styled.div`
   display: flex;
   align-items: center;
 `;
 
-export const LoaderStyle: ComponentClass<
-  HTMLAttributes<{}> & {
-    width?: number;
-    progress: number;
-    maxWidth?: number;
-    showCancel?: boolean;
-  }
-> = styled.div`
+export type LoaderProps = {
+  width?: number;
+  progress: number;
+  maxWidth?: number;
+  showCancel?: boolean;
+};
+
+export const LoaderStyle = styled.div<LoaderProps>`
   background-color: ${colors.B400};
   height: 2px;
   border: transparent;
   border-radius: ${borderRadius()}px;
 
-  /** 
-   * This value was found to be ideal 
+  /**
+   * This value was found to be ideal
    * http://cubic-bezier.com/#.52,.27,0,1.03
    **/
   transition: 1s all cubic-bezier(0.52, 0.27, 0, 1.03);
 
-  ${({
-    progress,
-    maxWidth,
-  }: {
-    progress: number;
-    maxWidth: number;
-    showCancel: boolean;
-    width: number;
-  }) =>
+  ${({ progress, maxWidth }: LoaderProps) =>
     css`
-      width: ${progress * maxWidth}px;
+      width: ${progress * (maxWidth || 1)}px;
     `};
 `;

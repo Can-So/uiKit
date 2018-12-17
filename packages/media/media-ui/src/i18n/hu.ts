@@ -69,5 +69,21 @@ export default {
   'fabric.media.drop_your_files_here': 'Húzza ide a fájlokat.',
   'fabric.media.share_files_instantly': 'Azonnal megosztjuk őket.',
   'fabric.media.insert_files':
-    '{0, plural, one{Insert a file} other{Insert {0} files}}',
+    '{0, plural, one{Fájl beszúrása} other{{0} fájl beszúrása}}',
+  'fabric.media.zoom_out': 'kicsinyítés',
+  'fabric.media.zoom_in': 'nagyítás',
+  'fabric.media.remove_image': 'Kép eltávolítása',
+  'fabric.media.play': 'lejátszás',
+  'fabric.media.pause': 'szüneteltetés',
+  'fabric.media.disable_fullscreen': 'teljes képernyős mód letiltása',
+  'fabric.media.enable_fullscreen': 'teljes képernyős mód engedélyezése',
+  'fabric.media.error_loading_file': 'Hiba történt a fájl betöltésekor.',
+  'fabric.media.error_generating_preview':
+    'Hiba történt az előnézet létrehozásakor.',
+  'fabric.media.download': 'Letöltés',
+  'fabric.media.unknown': 'ismeretlen',
+  'fabric.media.document': 'dokumentum',
+  'fabric.media.audio': 'hang',
+  'fabric.media.video': 'videó',
+  'fabric.media.image': 'kép',
 };

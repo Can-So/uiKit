@@ -7,10 +7,11 @@ export default {
         width: { type: 'number', minimum: 0, maximum: 100, optional: true },
         layout: {
           type: 'enum',
-          values: ['wrap-right', 'center', 'wrap-left', 'wide', 'full-width'],
+          values: ['full-width', 'wide', 'center', 'wrap-right', 'wrap-left'],
         },
       },
       optional: true,
     },
+    marks: { type: 'array', items: ['link'], optional: true },
   },
 };

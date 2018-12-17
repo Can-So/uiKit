@@ -2,10 +2,10 @@ import { initEditor, clearEditor, snapshot } from './_utils';
 import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
 import { messages as blockTypeMessages } from '../../plugins/block-type/ui/ToolbarBlockType';
 
+const table = `span[aria-label="${insertBlockMessages.table.defaultMessage}"]`;
+
 const insertTable = async page => {
-  await page.click(
-    `span[aria-label="${insertBlockMessages.table.defaultMessage}"`,
-  );
+  await page.click(table);
   await page.waitForSelector('table td p');
 };
 
@@ -23,7 +23,7 @@ const emojiPicker = 'div[data-emoji-picker-container="true"]';
 const mentionButton = `span[aria-label="${
   insertBlockMessages.mention.defaultMessage
 }"]`;
-const mentionPicker = 'span[data-mention-query="true"]';
+const mentionQuery = 'span[data-type-ahead-query]';
 
 describe('Snapshot Test: z-indexes', () => {
   ['full-page', 'comment'].forEach(appearance => {
@@ -40,7 +40,7 @@ describe('Snapshot Test: z-indexes', () => {
         await clearEditor(page);
       });
 
-      // TODO enable after fixing selctors on tables
+      // TODO enable after fixing selectors on tables
       it.skip('should always position table trash icon below dropdowns from main menu', async () => {
         await insertTable(page);
         await page.waitForSelector(removeTablePopup);
@@ -57,7 +57,7 @@ describe('Snapshot Test: z-indexes', () => {
         await page.click(emojiButton);
         await page.waitForSelector(emojiPicker);
         await page.click(mentionButton);
-        await page.waitForSelector(mentionPicker);
+        await page.waitForSelector(mentionQuery);
         await snapshot(page);
       });
 

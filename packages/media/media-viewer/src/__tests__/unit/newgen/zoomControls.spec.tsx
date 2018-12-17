@@ -11,6 +11,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../../../package.json';
+import { fakeIntl } from '@atlaskit/media-test-helpers';
 
 describe('Zooming', () => {
   describe('<ZoomControls />', () => {
@@ -24,6 +25,7 @@ describe('Zooming', () => {
           createAnalyticsEvent={createAnalyticsEventSpy}
           zoomLevel={new ZoomLevel(1)}
           onChange={onChange}
+          intl={fakeIntl}
           {...props}
         />,
       );

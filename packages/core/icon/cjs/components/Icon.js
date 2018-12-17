@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.size = exports.default = exports.IconWrapper = void 0;
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
@@ -18,8 +20,6 @@ var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime
 var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
-
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -66,14 +66,12 @@ function (_Component) {
       var _this$props = this.props,
           Glyph = _this$props.glyph,
           dangerouslySetGlyph = _this$props.dangerouslySetGlyph,
-          onClick = _this$props.onClick,
           primaryColor = _this$props.primaryColor,
           secondaryColor = _this$props.secondaryColor,
           size = _this$props.size; // handling the glyphs as strings
 
       if (dangerouslySetGlyph) {
         return _react.default.createElement(IconWrapper, {
-          onClick: onClick,
           primaryColor: primaryColor,
           secondaryColor: secondaryColor,
           size: size,
@@ -86,7 +84,6 @@ function (_Component) {
 
 
       return _react.default.createElement(IconWrapper, {
-        onClick: onClick,
         primaryColor: primaryColor,
         secondaryColor: secondaryColor,
         size: size,
@@ -116,9 +113,6 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = Icon;
-(0, _defineProperty2.default)(Icon, "defaultProps", {
-  onClick: function onClick() {}
-});
 var size = Object.keys(_constants.sizes).reduce(function (p, c) {
   return Object.assign(p, (0, _defineProperty2.default)({}, c, c));
 }, {});

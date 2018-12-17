@@ -99,6 +99,23 @@ describe(`${name} - core`, () => {
       expect(hasItemGroup()).toBe(true);
       expect(isContentVisible()).toBe(true);
     });
+
+    it('should not call onOpenChange when closed', () => {
+      const onOpenSpy = jest.fn();
+      mount(
+        <Droplist trigger="text" isOpen={false} onOpenChange={onOpenSpy}>
+          {itemsList}
+        </Droplist>,
+      );
+
+      const event = new KeyboardEvent('keydown', {
+        keyCode: 27,
+        key: 'Escape',
+      });
+      document.dispatchEvent(event);
+
+      expect(onOpenSpy).not.toHaveBeenCalled();
+    });
   });
 
   describe('loading', () => {

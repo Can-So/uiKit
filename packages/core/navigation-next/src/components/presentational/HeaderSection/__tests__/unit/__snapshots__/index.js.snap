@@ -6,7 +6,7 @@ exports[`HeaderSection should render Section with correct props 1`] = `
   shouldGrow={false}
   styles={[Function]}
 >
-  <unknown />
+  <Component />
 </Section>
 `;
 

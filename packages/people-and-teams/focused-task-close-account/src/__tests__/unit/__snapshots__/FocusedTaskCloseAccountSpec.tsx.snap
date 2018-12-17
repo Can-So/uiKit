@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`isOpen snapshot 1`] = `
-<ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(DrawerBase)))
+<WithAnalyticsContext(WithAnalyticsEvents(DrawerBase))
   icon={[Function]}
   isOpen={false}
   onClose={[MockFunction]}
@@ -42,11 +42,11 @@ exports[`isOpen snapshot 1`] = `
       }
     />
   </styled.div>
-</ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(DrawerBase)))>
+</WithAnalyticsContext(WithAnalyticsEvents(DrawerBase))>
 `;
 
 exports[`learnMoreLink display Learn more link is displayed when the link is passed in the props 1`] = `
-<ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))
+<WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))
   appearance="subtle-link"
   href="https://hello.atlassian.net"
   spacing="none"
@@ -63,5 +63,5 @@ exports[`learnMoreLink display Learn more link is displayed when the link is pas
     label=""
     size="small"
   />
-</ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))>
+</WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))>
 `;

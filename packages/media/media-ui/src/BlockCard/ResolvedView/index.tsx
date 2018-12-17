@@ -76,19 +76,33 @@ export interface Action {
 }
 
 export interface BlockCardResolvedViewProps {
+  /** The context view model */
   context?: ContextViewModel;
+  /** The link to display */
   link?: string;
+  /** The optional con of the service (e.g. Dropbox/Asana/Google/etc) to display */
   icon?: IconWithTooltip | React.ReactNode;
+  /** The user view model */
   user?: UserViewModel;
+  /** The thumbnail to display */
   thumbnail?: string;
+  /** The preview to display */
   preview?: string;
+  /** The name of the resource */
   title?: TextWithTooltip;
+  /** The line to display */
   byline?: TextWithTooltip | React.ReactNode;
+  /** The description to display */
   description?: TextWithTooltip;
+  /** The detail view model */
   details?: DetailViewModel[];
+  /** An array of user */
   users?: UserViewModel[];
+  /** An array of action */
   actions?: Action[];
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
+  /** The optional click handler */
   onClick?: () => void;
 }
 
@@ -183,14 +197,14 @@ export class BlockCardResolvedView extends React.Component<
   alertTimeout?: number;
 
   /* prevent the parent link handler from opening a URL when clicked */
-  handleAvatarClick = ({ event }: { event: MouseEvent }) => {
+  handleAvatarClick = ({ event }: { event: React.MouseEvent }) => {
     event.preventDefault();
     event.stopPropagation();
   };
 
   /* prevent the parent link handler from opening a URL when clicked */
   /* NOTE: this prevents the dropdown from showing with more items */
-  handleMoreAvatarsClick = (event: MouseEvent) => {
+  handleMoreAvatarsClick = (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
   };
@@ -213,7 +227,7 @@ export class BlockCardResolvedView extends React.Component<
   }
 
   createActionHandler = (action: Action) => {
-    return (event: MouseEvent) => {
+    return (event: React.MouseEvent) => {
       /* prevent the parent handler from opening a URL when clicked */
       event.preventDefault();
       event.stopPropagation();

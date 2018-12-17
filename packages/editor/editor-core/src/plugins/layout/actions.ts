@@ -30,7 +30,9 @@ export const createDefaultLayoutSection = (state: EditorState) => {
 };
 
 export const insertLayoutColumns: Command = (state, dispatch) => {
-  dispatch(safeInsert(createDefaultLayoutSection(state))(state.tr));
+  if (dispatch) {
+    dispatch(safeInsert(createDefaultLayoutSection(state))(state.tr));
+  }
   return true;
 };
 
@@ -146,7 +148,9 @@ export const setPresetLayout = (layout: PresetLayout): Command => (
   }
   const tr = forceSectionToPresetLayout(state, node, pos, layout);
   if (tr) {
-    dispatch(tr.scrollIntoView());
+    if (dispatch) {
+      dispatch(tr.scrollIntoView());
+    }
     return true;
   }
 
@@ -193,7 +197,9 @@ export const deleteActiveLayoutNode: Command = (state, dispatch) => {
   const { pos } = pluginKey.getState(state) as LayoutState;
   if (pos !== null) {
     const node = state.doc.nodeAt(pos) as Node;
-    dispatch(state.tr.delete(pos, pos + node.nodeSize));
+    if (dispatch) {
+      dispatch(state.tr.delete(pos, pos + node.nodeSize));
+    }
     return true;
   }
   return false;

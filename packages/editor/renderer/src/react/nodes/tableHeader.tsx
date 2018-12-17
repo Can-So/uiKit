@@ -1,11 +1,11 @@
 import * as React from 'react';
+import { CSSProperties } from 'react';
 
-// tslint:disable-next-line:variable-name
 const TableHeader = props => {
-  let style = {};
+  let style: CSSProperties = {};
 
   if (props.background) {
-    style['background-color'] = props.background;
+    style.backgroundColor = props.background;
   }
 
   return (

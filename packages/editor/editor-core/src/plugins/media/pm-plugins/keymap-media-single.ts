@@ -1,8 +1,9 @@
 import { keymap } from 'prosemirror-keymap';
 import { Schema } from 'prosemirror-model';
-import { EditorState, Plugin, Transaction } from 'prosemirror-state';
+import { Plugin } from 'prosemirror-state';
 import * as keymaps from '../../../keymaps';
 import { isEmptyNode } from '../../../utils';
+import { Command } from '../../../types';
 
 /**
  * When there's any empty block before another paragraph with wrap-right
@@ -17,9 +18,9 @@ import { isEmptyNode } from '../../../utils';
  * x x x x x x x x x x       |  mediaSingle  |
  * x x x x x.                +---------------+
  */
-const maybeRemoveMediaSingleNode = (schema: Schema) => {
+const maybeRemoveMediaSingleNode = (schema: Schema): Command => {
   const isEmptyNodeInSchema = isEmptyNode(schema);
-  return (state: EditorState, dispatch: (tr: Transaction) => void): boolean => {
+  return (state, dispatch) => {
     const { selection } = state;
     // Check if we have a structure like
     // anyBlock[empty] > mediaSingle[wrap-right] > [selection{empty, at start}]
@@ -50,7 +51,10 @@ const maybeRemoveMediaSingleNode = (schema: Schema) => {
     }
 
     const tr = state.tr.replace(index - 2, maybeAnyBlock.nodeSize);
-    dispatch(tr);
+
+    if (dispatch) {
+      dispatch(tr);
+    }
 
     return true;
   };

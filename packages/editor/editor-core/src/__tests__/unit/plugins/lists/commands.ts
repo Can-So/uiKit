@@ -60,7 +60,6 @@ describe('backspaceKeyCommand', () => {
         editorProps: {
           allowLists: true,
           allowCodeBlocks: true,
-          allowGapCursor: true,
         },
       });
 
@@ -83,7 +82,6 @@ describe('backspaceKeyCommand', () => {
         editorProps: {
           allowLists: true,
           allowCodeBlocks: true,
-          allowGapCursor: true,
         },
       });
 

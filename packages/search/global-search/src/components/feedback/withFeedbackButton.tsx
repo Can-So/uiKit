@@ -9,7 +9,7 @@ export interface WithFeedbackButtonProps {
   feedbackCollectorId: string;
 }
 
-export default function withFeedbackButton<P>(
+export default function withFeedbackButton<P extends {}>(
   WrappedComponent: ComponentType<P>,
 ): ComponentType<P & WithFeedbackButtonProps> {
   return class WithFeedbackButton extends React.Component<

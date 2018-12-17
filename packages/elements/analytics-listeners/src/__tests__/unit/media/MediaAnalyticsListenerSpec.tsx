@@ -78,6 +78,7 @@ describe('MediaAnalyticsListener', () => {
         action: 'someAction',
         actionSubject: 'someComponent',
         source: DEFAULT_SOURCE,
+        tags: expect.arrayContaining(['media']),
       },
     );
   });
@@ -94,6 +95,43 @@ describe('MediaAnalyticsListener', () => {
         action: 'someAction',
         actionSubject: 'someComponent',
         source: 'mySource',
+        tags: expect.arrayContaining(['media']),
+      },
+    );
+  });
+
+  it('should append media tag if tags are not empty', () => {
+    fireAndVerify(
+      {
+        eventType: UI_EVENT_TYPE,
+        action: 'someAction',
+        actionSubject: 'someComponent',
+        source: 'mySource',
+        tags: ['atlaskit'],
+      },
+      {
+        action: 'someAction',
+        actionSubject: 'someComponent',
+        source: 'mySource',
+        tags: expect.arrayContaining(['media']),
+      },
+    );
+  });
+
+  it('should not remove any existing tags if tags are not empty', () => {
+    fireAndVerify(
+      {
+        eventType: UI_EVENT_TYPE,
+        action: 'someAction',
+        actionSubject: 'someComponent',
+        source: 'mySource',
+        tags: ['atlaskit'],
+      },
+      {
+        action: 'someAction',
+        actionSubject: 'someComponent',
+        source: 'mySource',
+        tags: expect.arrayContaining(['media', 'atlaskit']),
       },
     );
   });

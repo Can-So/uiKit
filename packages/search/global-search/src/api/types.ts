@@ -6,7 +6,7 @@ export enum Scope {
   JiraBoard = 'jira.board',
   JiraProject = 'jira.project',
   JiraFilter = 'jira.filter',
-  JiraBoardProjectFilter = 'jira.board,filter,project',
+  JiraBoardProjectFilter = 'jira.board,project,filter',
   People = 'cpus.user',
 }
 

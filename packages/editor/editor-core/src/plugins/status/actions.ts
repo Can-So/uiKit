@@ -15,7 +15,7 @@ export const DEFAULT_STATUS: StatusType = {
 };
 
 export const createStatus = (showStatusPickerAtOffset = -2) => (
-  insert: (node?: Node | Object | string) => Transaction,
+  insert: (node: Node | Object | string) => Transaction,
   state: EditorState,
 ): Transaction => {
   const statusNode = state.schema.nodes.status.createChecked({
@@ -36,7 +36,7 @@ export const createStatus = (showStatusPickerAtOffset = -2) => (
     });
 };
 
-export const updateStatus = (status?: StatusType) => (
+export const updateStatus = (status?: StatusType, autoFocus?: boolean) => (
   editorView: EditorView,
 ): boolean => {
   const { state, dispatch } = editorView;
@@ -64,6 +64,7 @@ export const updateStatus = (status?: StatusType) => (
       .setMeta(pluginKey, {
         showStatusPickerAt: newShowStatusPickerAt,
         selectedStatus,
+        autoFocus,
       })
       .scrollIntoView();
     dispatch(tr);

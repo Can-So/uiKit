@@ -33,6 +33,12 @@ export {
 } from './breakout';
 export {
   alignment,
+  alignmentPositionMap,
   AlignmentAttributes,
   AlignmentMarkDefinition,
 } from './alignment';
+export {
+  indentation,
+  IndentationMarkAttributes,
+  IndentationMarkDefinition,
+} from './indentation';

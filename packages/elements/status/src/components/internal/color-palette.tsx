@@ -26,6 +26,7 @@ const ColorPaletteWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
 interface ColorPaletteProps {
   selectedColor?: ColorType;
   onClick: (value: ColorType) => void;
+  onHover?: (value: ColorType) => void;
   cols?: number;
   className?: string;
 }
@@ -35,7 +36,7 @@ export default class ColorPalette extends PureComponent<
   any
 > {
   render() {
-    const { cols = 7, onClick, selectedColor, className } = this.props;
+    const { cols = 7, onClick, selectedColor, className, onHover } = this.props;
 
     return (
       <ColorPaletteWrapper
@@ -50,6 +51,7 @@ export default class ColorPalette extends PureComponent<
             borderColor={borderColor}
             label={label}
             onClick={onClick}
+            onHover={onHover}
             isSelected={colorValue === selectedColor}
           />
         ))}

@@ -50,7 +50,7 @@ const isString = (s): s is string =>
 const isPlainObject = x =>
   typeof x === 'object' && x !== null && !Array.isArray(x);
 
-const copy = (source: object, dest: object, key: string) => {
+const copy = <T = object>(source: object, dest: T, key: string) => {
   dest[key] = source[key];
   return dest;
 };

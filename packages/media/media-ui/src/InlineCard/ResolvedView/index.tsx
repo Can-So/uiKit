@@ -7,10 +7,15 @@ import { Title } from './styled';
 import { Icon } from '../Icon';
 
 export interface InlineCardResolvedViewProps {
+  /** The optional con of the service (e.g. Dropbox/Asana/Google/etc) to display */
   icon?: string | React.ReactNode;
+  /** The name of the resource */
   title: string;
+  /** The the optional lozenge that might represent the statux of the resource */
   lozenge?: LozengeViewModel;
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
+  /** The optional click handler */
   onClick?: () => void;
 }
 

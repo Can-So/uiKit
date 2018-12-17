@@ -42,6 +42,7 @@ describe('nodeviews/media', () => {
         providerFactory={providerFactory}
         cardDimensions={cardDimensions}
         selected={false}
+        editorAppearance="full-page"
       />,
     );
 

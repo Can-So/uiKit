@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
 import { ProcessedFileState } from '@atlaskit/media-core';
 import { BaseProps, BaseViewer } from '../../../../newgen/viewers/base-viewer';
@@ -11,6 +10,7 @@ import {
   MediaViewerError,
 } from '../../../../newgen/error';
 import { Spinner } from '../../../../newgen/loading';
+import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 
 function createItem(): ProcessedFileState {
   return {
@@ -51,7 +51,7 @@ function createTestViewer(props: BaseProps) {
     protected release = releaseSpy;
     protected renderSuccessful = renderSuccessfulSpy;
   }
-  const el = mount(<TestViewer {...props} />);
+  const el = mountWithIntlContext(<TestViewer {...props} />);
   return { el, initSpy, releaseSpy, renderSuccessfulSpy };
 }
 

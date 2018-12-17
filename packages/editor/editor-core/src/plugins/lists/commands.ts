@@ -25,10 +25,7 @@ import { liftFollowingList, liftSelectionList } from './transforms';
 import { Command } from '../../types';
 import { GapCursorSelection } from '../gap-cursor';
 
-const deletePreviousEmptyListItem = (
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean => {
+const deletePreviousEmptyListItem: Command = (state, dispatch) => {
   const { $from } = state.selection;
   const { listItem } = state.schema.nodes;
 
@@ -43,21 +40,21 @@ const deletePreviousEmptyListItem = (
 
   if (previousListItemEmpty) {
     const { tr } = state;
-    dispatch(
-      tr
-        .delete($cut.pos - $cut.nodeBefore.nodeSize, $from.pos)
-        .scrollIntoView(),
-    );
+
+    if (dispatch) {
+      dispatch(
+        tr
+          .delete($cut.pos - $cut.nodeBefore.nodeSize, $from.pos)
+          .scrollIntoView(),
+      );
+    }
     return true;
   }
 
   return false;
 };
 
-const joinToPreviousListItem = (
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean => {
+const joinToPreviousListItem: Command = (state, dispatch) => {
   const { $from } = state.selection;
   const {
     paragraph,
@@ -136,7 +133,9 @@ const joinToPreviousListItem = (
         tr = tr.join($postCut.pos);
       }
 
-      dispatch(tr.scrollIntoView());
+      if (dispatch) {
+        dispatch(tr.scrollIntoView());
+      }
       return true;
     }
   }
@@ -187,10 +186,7 @@ const canOutdent = (state: EditorState): boolean => {
   );
 };
 
-export const enterKeyCommand = (
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean => {
+export const enterKeyCommand: Command = (state, dispatch): boolean => {
   const { selection } = state;
   if (selection.empty) {
     const { $from } = selection;
@@ -376,7 +372,9 @@ export function outdentList(): Command {
           }
         }
 
-        dispatch(tr.scrollIntoView());
+        if (dispatch) {
+          dispatch(tr.scrollIntoView());
+        }
         return true;
       }
     }
@@ -425,7 +423,9 @@ export function liftListItems(): Command {
       }
     });
 
-    dispatch(tr);
+    if (dispatch) {
+      dispatch(tr);
+    }
 
     return true;
   };
@@ -514,17 +514,22 @@ export const toggleList = (
   }
 };
 
-export function toggleListCommand(listType: 'bulletList' | 'orderedList') {
-  return function(
-    state: EditorState,
-    dispatch: (tr: Transaction) => void,
-    view: EditorView,
-  ): boolean {
-    dispatch(
-      state.tr.setSelection(
-        adjustSelectionInList(state.doc, state.selection as TextSelection),
-      ),
-    );
+export function toggleListCommand(
+  listType: 'bulletList' | 'orderedList',
+): Command {
+  return function(state, dispatch, view) {
+    if (dispatch) {
+      dispatch(
+        state.tr.setSelection(
+          adjustSelectionInList(state.doc, state.selection as TextSelection),
+        ),
+      );
+    }
+
+    if (!view) {
+      return false;
+    }
+
     state = view.state;
 
     const { $from, $to } = state.selection;

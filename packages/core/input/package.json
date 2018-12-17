@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/input",
-  "version": "4.0.7",
+  "version": "4.0.9",
   "description": "Internal component used by field-base to create field-text. DO NOT USE DIRECTLY",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -18,7 +18,7 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/theme": "^6.1.1",
+    "@atlaskit/theme": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
     "keycode": "^2.1.7"
@@ -30,13 +30,16 @@
   },
   "devDependencies": {
     "@atlaskit/build-utils": "^2.0.0",
-    "@atlaskit/field-base": "^11.0.9",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "@atlaskit/field-base": "^11.0.12",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },
   "keywords": [
     "atlaskit",
     "ui",
     "internal"
-  ]
+  ],
+  "atlaskit": {
+    "internal": true
+  }
 }

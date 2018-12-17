@@ -1,5 +1,22 @@
 # @atlaskit/avatar
 
+## 14.1.7
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-base@11.0.13
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/toggle@5.0.14
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/docs@6.0.0
+
+## 14.1.6
+- [patch] [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+
+  - Change API to experimental theming API to namespace component themes into separate contexts and make theming simpler. Update all dependant components.
+
 ## 14.1.5
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

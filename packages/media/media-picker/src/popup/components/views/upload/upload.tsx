@@ -502,7 +502,8 @@ const mapDispatchToProps = (
 export default connect<
   UploadViewStateProps,
   UploadViewDispatchProps,
-  UploadViewOwnProps
+  UploadViewOwnProps,
+  State
 >(
   mapStateToProps,
   mapDispatchToProps,

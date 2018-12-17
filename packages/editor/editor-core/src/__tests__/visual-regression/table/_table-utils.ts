@@ -1,4 +1,8 @@
-import { selectByTextAndClick, getSelectorForTableCell } from '../_utils';
+import {
+  selectByTextAndClick,
+  getSelectorForTableCell,
+  getBoundingRect,
+} from '../_utils';
 
 import { messages as insertBlockMessages } from '../../../plugins/insert-block/ui/ToolbarInsertBlock';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
@@ -126,19 +130,11 @@ export const focusTable = async page => {
   await page.click('table td p');
 };
 
-const getCellBoundingRect = async (page, selector) => {
-  return await page.evaluate(selector => {
-    const element = document.querySelector(selector);
-    const { x, y, width, height } = element.getBoundingClientRect();
-    return { left: x, top: y, width, height, id: element.id };
-  }, selector);
-};
-
 export const resizeColumn = async (
   page,
   { colIdx, amount, row = 1 }: ResizeColumnOpts,
 ) => {
-  let cell = await getCellBoundingRect(
+  let cell = await getBoundingRect(
     page,
     getSelectorForTableCell({ row, cell: colIdx }),
   );

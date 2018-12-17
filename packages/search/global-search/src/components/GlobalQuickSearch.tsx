@@ -42,7 +42,7 @@ export interface Props {
   createAnalyticsEvent?: CreateAnalyticsEventFn;
   isSendSearchTermsEnabled?: boolean;
   selectedResultId?: string;
-  onSelectedResultIdChanged?: (id: string) => void;
+  onSelectedResultIdChanged?: (id: string | number | null) => void;
 }
 
 export interface State {

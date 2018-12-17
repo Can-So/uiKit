@@ -1,4 +1,4 @@
-import { md } from '@atlaskit/docs';
+import { md, code } from '@atlaskit/docs';
 
 export default md`
   # Intro
@@ -9,7 +9,7 @@ export default md`
 
   Say you have a mechnism to handle certain types of links. You can utilise that for smart cards. You'll need to build a function that will return an Promise of ResolveResponse. Having that, you can use a Provider to provide a "custom" client:
 
-  ~~~
+  ${code`
   const myDefinitionId = uuid.v4();
 
   const customResponse = {
@@ -39,7 +39,7 @@ export default md`
     ...
   </Provider>
   ...
-  ~~~
+ `}
 
   ## Customizing Client
 
@@ -47,14 +47,14 @@ export default md`
 
   2. Also, you can pass a custom function that will return "current time".
 
-  ~~~
+  ${code`
   // 60 seconds for data and mocked time
   new Client(60*1000, () => mockedDate.now());
-  ~~~
+  `}
 
   ## ResolveResponse type
 
-  ~~~
+  ${code`
   type RemoteResourceAuthConfig = {
     key: string;
     displayName: string;
@@ -72,7 +72,7 @@ export default md`
       [name: string]: any;
     };
   }
-  ~~~
+  `}
 
   ## Internal workflow
 

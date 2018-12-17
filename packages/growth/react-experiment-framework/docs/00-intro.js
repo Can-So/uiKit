@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example } from '@atlaskit/docs';
+import { md, Example, code, Props } from '@atlaskit/docs';
 import SectionMessage from '@atlaskit/section-message';
 
 export default md`
@@ -27,9 +27,18 @@ export default md`
   Each targeted react component is wrapped in an ExperimentSwitch component, that toggles which component will render
   based on context passed down from an ExperimentController component.
 
+  ## Usage
+
   The ExperimentController is passed a configuration object - an map of experimentKey: string to enrollmentResolver: () => Promise\\\<EnrollmentDetails\\\>.
   This resolver based approach allows the rendering of targeted components to be blocked until the resolver, an async method is completed, and the
   appropriate experience is only then shown to the user; thus preventing a swapping of experience. A loading component can be provided, to show while the enrollment is being processed.
+
+  ${code`import { 
+    asExperiment, 
+    CohortTracker,
+    ExperimentProvider,
+    ExperimentConsumer,
+    ExperimentController } from '@atlaskit/@atlaskit/react-experiment-framework';`}
 
   In some cases the enrollmentResolver will just be a sync call to featureFlag client, to lookup the cohort that a given user is in. However, sometimes it might be required to
   additionally do REST calls, or other adhoc checks to see whether your user should get an experience, e.g., a message that should only show once to a customer could require
@@ -40,13 +49,27 @@ export default md`
   E.g., eligiblilty might require the user to have a locale where English is the dominant language. In these cases where isEligible is set to false,  the user is shown the fallback experience, i.e., the control component.
 
   In terms of tracking the success and failures of the experiment; the framework provides callbacks for onExposure (when an experience is shown), and onError (when an error was encountered due to misconfiguration or the component provided threw at render)
-
+  
   ${(
     <Example
       packageName="@atlaskit/growth"
-      Component={require('../examples/00-basic-usage').default}
-      title="Basic example"
-      source={require('!!raw-loader!../examples/00-basic-usage')}
+      Component={require('../examples/00-basic').default}
+      title="Basic"
+      source={require('!!raw-loader!../examples/00-basic')}
+    />
+  )}
+
+  ${(
+    <Props
+      heading="ExperimentController Props"
+      props={require('!!extract-react-types-loader!../src/ExperimentController')}
+    />
+  )}
+
+  ${(
+    <Props
+      heading="CohortTracker Props"
+      props={require('!!extract-react-types-loader!../src/CohortTracker')}
     />
   )}
 `;

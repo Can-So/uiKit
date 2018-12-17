@@ -23,6 +23,8 @@ module.exports = function createWebpackConfig(
     websiteDir = process.cwd(), // if not passed in, we must be in the websiteDir already
     noMinimize = false,
     report = false,
+    entry,
+    output,
   } /*: {
     globs?: Array<string>,
     websiteDir?: string,
@@ -30,6 +32,8 @@ module.exports = function createWebpackConfig(
     websiteEnv: string,
     noMinimize?: boolean,
     report?: boolean,
+    entry?: any,
+    output?: any
   }*/,
 ) {
   const isProduction = mode === 'production';
@@ -42,19 +46,19 @@ module.exports = function createWebpackConfig(
       hints: false,
     },
     // parallelism: ??, TODO
-    entry: {
+    entry: entry || {
       main: getEntries({
         isProduction,
         websiteDir,
-        entryPath: './src/index.js',
+        entryPath: './src/index.tsx',
       }),
       examples: getEntries({
         isProduction,
         websiteDir,
-        entryPath: './src/examples-entry.js',
+        entryPath: './src/examples-entry.tsx',
       }),
     },
-    output: {
+    output: output || {
       filename: '[name].js',
       path: path.resolve(websiteDir, 'dist'),
       publicPath: '/',
@@ -187,7 +191,7 @@ module.exports = function createWebpackConfig(
       ],
     },
     resolve: {
-      mainFields: ['atlaskit:src', 'browser', 'main'],
+      mainFields: ['module', 'atlaskit:src', 'browser', 'main'],
       extensions: ['.js', '.ts', '.tsx'],
     },
     resolveLoader: {

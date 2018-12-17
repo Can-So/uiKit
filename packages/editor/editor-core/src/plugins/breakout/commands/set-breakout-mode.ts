@@ -12,11 +12,13 @@ export function setBreakoutMode(mode: BreakoutMode): Command {
       return false;
     }
 
-    dispatch(
-      state.tr.setNodeMarkup(node.pos, node.node.type, node.node.attrs, [
-        state.schema.marks.breakout.create({ mode }),
-      ]),
-    );
+    if (dispatch) {
+      dispatch(
+        state.tr.setNodeMarkup(node.pos, node.node.type, node.node.attrs, [
+          state.schema.marks.breakout.create({ mode }),
+        ]),
+      );
+    }
 
     return true;
   };

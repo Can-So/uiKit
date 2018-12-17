@@ -1,5 +1,23 @@
 # @atlaskit/analytics-listeners
 
+## 4.1.4
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/analytics-gas-types@3.2.3
+  - @atlaskit/analytics-namespaced-context@2.1.5
+  - @atlaskit/docs@6.0.0
+
+## 4.1.3
+- [patch] [dff4f0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dff4f0e):
+
+  - AnalyticsListeners should accept any promise-like client
+
+## 4.1.2
+- [patch] [e981882](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e981882):
+
+  - Add media tag to analytics tags sent by media listener
+
 ## 4.1.1
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

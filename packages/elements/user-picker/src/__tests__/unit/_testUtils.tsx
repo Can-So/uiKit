@@ -18,6 +18,6 @@ export const renderProp = (
 export const testUser: User = {
   id: 'abc-123',
   name: 'Jace Beleren',
-  nickname: 'jbeleren',
+  publicName: 'jbeleren',
   avatarUrl: 'http://avatars.atlassian.com/jace.png',
 };

@@ -52,6 +52,7 @@ export interface CrossProductSearchClient {
     query: string,
     searchSession: SearchSession,
     scopes: Scope[],
+    resultLimit?: Number,
   ): Promise<CrossProductSearchResults>;
 
   getAbTestData(
@@ -83,11 +84,13 @@ export default class CrossProductSearchClientImpl
     query: string,
     searchSession: SearchSession,
     scopes: Scope[],
+    resultLimit?: Number,
   ): Promise<CrossProductSearchResults> {
     const response = await this.makeRequest(
       query.trim(),
       scopes,
       searchSession,
+      resultLimit,
     );
     return this.parseResponse(response, searchSession.sessionId);
   }
@@ -108,11 +111,12 @@ export default class CrossProductSearchClientImpl
     query: string,
     scopes: Scope[],
     searchSession: SearchSession,
+    resultLimit?: Number,
   ): Promise<CrossProductSearchResponse> {
     const body = {
       query: query,
       cloudId: this.cloudId,
-      limit: this.RESULT_LIMIT,
+      limit: resultLimit || this.RESULT_LIMIT,
       scopes: scopes,
       searchSession,
     };

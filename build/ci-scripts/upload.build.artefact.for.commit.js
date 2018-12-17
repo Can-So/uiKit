@@ -5,6 +5,8 @@ const npmRun = require('npm-run');
 const BITBUCKET_COMMIT = process.env.BITBUCKET_COMMIT;
 const AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 const AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+const ARGS_LENGTH_WITHOUT_OUTPUT_PATH = 3;
+const ARGS_LENGTH_WITH_OUTPUT_PATH = 4;
 const BUCKET_NAME = 'atlaskit-artefacts';
 const BUCKET_REGION = 'ap-southeast-2';
 
@@ -16,9 +18,18 @@ if (!AWS_ACCESS_KEY || !AWS_SECRET_KEY || !BITBUCKET_COMMIT) {
   process.exit(1);
 }
 
-if (process.argv.length !== 3) {
+if (
+  ![ARGS_LENGTH_WITH_OUTPUT_PATH, ARGS_LENGTH_WITHOUT_OUTPUT_PATH].includes(
+    process.argv.length,
+  )
+) {
   console.error(
-    `Usage ${path.basename(process.argv[1])} path/to/file/to/upload`,
+    `Usage ${path.basename(
+      process.argv[1],
+    )} path/to/file/to/upload [path/on/s3]`,
+  );
+  console.error(
+    'Note: You only need the path for the (optional) second arg, not the basename',
   );
   process.exit(1);
 }
@@ -30,13 +41,18 @@ if (!fs.existsSync(path.resolve(process.argv[2]))) {
 const pathToFile = path.resolve(process.argv[2]);
 const fileName = path.basename(pathToFile);
 const commitHash = BITBUCKET_COMMIT.substring(0, 12);
-const bucketPath = `s3://${BUCKET_NAME}/${commitHash}/${fileName}`;
+let outputPath = process.argv[3] || '';
+
+if (outputPath && !outputPath.endsWith('/')) {
+  outputPath += '/';
+}
+const bucketPath = `s3://${BUCKET_NAME}/${commitHash}/${outputPath}${fileName}`;
 
 npmRun.sync(
   `s3-cli --region="${BUCKET_REGION}" put ${pathToFile} ${bucketPath}`,
 );
 
-const publicUrl = `s3-${BUCKET_REGION}.amazonaws.com/${BUCKET_NAME}/${commitHash}/${fileName}`;
+const publicUrl = `s3-${BUCKET_REGION}.amazonaws.com/${BUCKET_NAME}/${commitHash}/${outputPath}${fileName}`;
 console.log('Successfully published to', publicUrl);
 console.log('You can also fetch this file again by running:');
-console.log(`node ./build/download.build.artefact.for.commit.js ${fileName}`);
+console.log(`node ./build/download.build.artefact.for.commit.js ${outputPath}`);

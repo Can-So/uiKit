@@ -122,7 +122,9 @@ export default class Editor extends React.Component<EditorProps, {}> {
       },
       allowLists: {},
       allowHelpDialog: {},
-      allowGapCursor: {},
+      allowGapCursor: {
+        type: 'removed',
+      },
       allowUnsupportedContent: {
         message: 'Deprecated. Defaults to true.',
         type: 'removed',

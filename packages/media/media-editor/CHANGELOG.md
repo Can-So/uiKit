@@ -1,5 +1,11 @@
 # @atlaskit/media-editor
 
+## 19.0.2
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/media-core@24.5.2
+  - @atlaskit/docs@6.0.0
+
 ## 19.0.1
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

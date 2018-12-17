@@ -1,0 +1,23 @@
+{
+  "name": "@atlaskit/measure",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Tool for measuring bundle size of an individual package in Atlaskit",
+  "main": "./measure.js",
+  "bin": {
+    "measure": "./measure.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Atlassian Pty Ltd",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@atlaskit/webpack-config": "^2.0.5",
+    "chalk": "^2.1.0",
+    "gzip-size":"^5.0.0",
+    "pretty-bytes": "^5.1.0",
+    "ora": "^3.0.0",
+    "webpack": "^4.16.1"
+  }
+}

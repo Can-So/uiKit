@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { borderRadius, colors } from '@atlaskit/theme';
+import { borderRadius, colors, themed } from '@atlaskit/theme';
 import styled from 'styled-components';
 
 export type Color = 'grey' | 'red' | 'blue' | 'green' | 'purple' | 'yellow';
@@ -9,13 +9,26 @@ export type Props = React.HTMLProps<HTMLSpanElement> & {
   color?: Color;
 };
 
-export const resolveColors = (color?: Color): [string, string, string] => {
+type ColoursTuple = [string, string, string];
+export const resolveColors = (
+  color?: Color,
+): { light: ColoursTuple; dark: ColoursTuple } => {
   if (!color || color === 'grey') {
-    return [colors.N30A, colors.N800, colors.N40];
+    return {
+      light: [colors.N30A, colors.N800, colors.N40],
+      dark: [colors.DN70, colors.DN800, colors.DN60],
+    };
   }
-
   const letter = color.toUpperCase().charAt(0);
-  return [colors[`${letter}50`], colors[`${letter}500`], colors[`${letter}75`]];
+  const resolvedColors: ColoursTuple = [
+    colors[`${letter}50`],
+    colors[`${letter}500`],
+    colors[`${letter}75`],
+  ];
+  return {
+    light: resolvedColors,
+    dark: resolvedColors,
+  };
 };
 
 /**
@@ -32,7 +45,9 @@ export const DateLozenge = styled.span`
   cursor: ${(props: Props) => (props.onClick ? 'pointer' : 'unset')};
 
   ${(props: Props) => {
-    const [background, color, hoverBackground] = resolveColors(props.color);
+    const [background, color, hoverBackground]: ColoursTuple = themed(
+      resolveColors(props.color),
+    )(props);
     return `
       background: ${background};
       color: ${color};

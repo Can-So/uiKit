@@ -14,8 +14,9 @@ describe('Option', () => {
   const user = {
     id: 'abc-123',
     name: 'Jace Beleren',
-    nickname: 'jbeleren',
+    publicName: 'jbeleren',
     avatarUrl: 'http://avatars.atlassian.com/jace.png',
+    byline: 'Teammate',
   };
   const shallowOption = (props: Partial<UserOptionProps> = {}) =>
     shallow(
@@ -40,8 +41,18 @@ describe('Option', () => {
           name="Jace Beleren"
         />
       ),
-      primaryText: <TextWrapper color={colors.N800}>Jace Beleren</TextWrapper>,
-      secondaryText: <TextWrapper color={colors.N800}>jbeleren</TextWrapper>,
+      primaryText: [
+        <TextWrapper key="name" color={colors.N800}>
+          <HighlightText>Jace Beleren</HighlightText>
+        </TextWrapper>,
+        <React.Fragment key="publicName">
+          {' '}
+          <TextWrapper color={colors.N200}>
+            (<HighlightText>jbeleren</HighlightText>)
+          </TextWrapper>
+        </React.Fragment>,
+      ],
+      secondaryText: <TextWrapper color={colors.N200}>Teammate</TextWrapper>,
     });
   });
 
@@ -58,8 +69,17 @@ describe('Option', () => {
           name="Jace Beleren"
         />
       ),
-      primaryText: <TextWrapper color={colors.N0}>Jace Beleren</TextWrapper>,
-      secondaryText: <TextWrapper color={colors.N0}>jbeleren</TextWrapper>,
+      primaryText: [
+        <TextWrapper key="name" color={colors.N0}>
+          <HighlightText>Jace Beleren</HighlightText>
+        </TextWrapper>,
+        <React.Fragment key="publicName">
+          {' '}
+          <TextWrapper color={colors.N50}>
+            (<HighlightText>jbeleren</HighlightText>)
+          </TextWrapper>
+        </React.Fragment>,
+      ],
     });
   });
 
@@ -68,47 +88,77 @@ describe('Option', () => {
       ...user,
       highlight: {
         name: [{ start: 0, end: 2 }],
-        nickname: [{ start: 2, end: 4 }],
+        publicName: [{ start: 2, end: 4 }],
       },
     };
     const component = shallowOption({ user: userWithHighlight });
     const avatarItem = component.find(AvatarItem);
     expect(avatarItem.props()).toMatchObject({
-      primaryText: (
-        <TextWrapper color={colors.N800}>
+      primaryText: [
+        <TextWrapper key="name" color={colors.N800}>
           <HighlightText highlights={[{ start: 0, end: 2 }]}>
             Jace Beleren
           </HighlightText>
-        </TextWrapper>
-      ),
-      secondaryText: (
-        <TextWrapper color={colors.N800}>
-          <HighlightText highlights={[{ start: 2, end: 4 }]}>
-            jbeleren
-          </HighlightText>
-        </TextWrapper>
-      ),
+        </TextWrapper>,
+        <React.Fragment key="publicName">
+          {' '}
+          <TextWrapper color={colors.N200}>
+            (
+            <HighlightText highlights={[{ start: 2, end: 4 }]}>
+              jbeleren
+            </HighlightText>
+            )
+          </TextWrapper>
+        </React.Fragment>,
+      ],
     });
   });
 
-  it('should use nickname if name is not provided', () => {
+  it('should show only the name when no publicName is provided', () => {
     const userWithoutName = {
       id: 'abc-123',
-      nickname: 'jbeleren',
+      name: 'jbeleren',
       highlight: {
-        nickname: [{ start: 2, end: 4 }],
-        name: [],
+        name: [{ start: 2, end: 4 }],
+        publicName: [],
       },
     };
     const component = shallowOption({ user: userWithoutName });
     const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.prop('primaryText')).toEqual(
-      <TextWrapper color={colors.N800}>
+    expect(avatarItem.prop('primaryText')).toEqual([
+      <TextWrapper key="name" color={colors.N800}>
         <HighlightText highlights={[{ start: 2, end: 4 }]}>
           jbeleren
         </HighlightText>
       </TextWrapper>,
-    );
-    expect(avatarItem.prop('secondaryText')).toBeUndefined();
+    ]);
+  });
+
+  it('should show only name', () => {
+    const userWithSamePublicName = {
+      ...user,
+      publicName: user.name,
+    };
+    const component = shallowOption({ user: userWithSamePublicName });
+    const avatarItem = component.find(AvatarItem);
+    expect(avatarItem.prop('primaryText')).toEqual([
+      <TextWrapper key="name" color={colors.N800}>
+        <HighlightText>Jace Beleren</HighlightText>
+      </TextWrapper>,
+    ]);
+  });
+
+  it('should ignore blank spaces while comparing', () => {
+    const userWithSamePublicName = {
+      ...user,
+      publicName: `  ${user.name}  `,
+    };
+    const component = shallowOption({ user: userWithSamePublicName });
+    const avatarItem = component.find(AvatarItem);
+    expect(avatarItem.prop('primaryText')).toEqual([
+      <TextWrapper key="name" color={colors.N800}>
+        <HighlightText>Jace Beleren</HighlightText>
+      </TextWrapper>,
+    ]);
   });
 });

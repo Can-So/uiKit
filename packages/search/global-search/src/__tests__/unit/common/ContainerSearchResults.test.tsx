@@ -139,7 +139,6 @@ const assertJiraAdvancedSearchGroup = (element: JSX.Element) => {
       query: 'query',
       showKeyboardLozenge: true,
       showSearchIcon: true,
-      onAdvancedSearchChange: expect.any(Function),
     },
   });
 };
@@ -284,7 +283,7 @@ const getPreqQueryResults = (product: Product) =>
     ? getJiraPreqQueryResults()
     : getConfluencePreQueryResults();
 
-['confluence', 'jira'].forEach((product: Product) => {
+(['confluence', 'jira'] as Array<Product>).forEach((product: Product) => {
   describe(`${product} SearchResultsComponent`, () => {
     let searchResultsComponent;
     let getAdvancedSearchUrlSpy;
@@ -390,7 +389,6 @@ describe('jira', () => {
         query: '',
         showKeyboardLozenge: false,
         showSearchIcon: true,
-        onAdvancedSearchChange: expect.any(Function),
       },
     });
   });
