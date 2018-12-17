@@ -28,6 +28,7 @@ exports[`ResizeControlBase should not render GrabArea when \`isGrabAreaDisabled\
     >
       <Button
         hasHighlight={false}
+        hitAreaSize="large"
         innerRef={
           Object {
             "current": null,
@@ -89,6 +90,7 @@ exports[`ResizeControlBase should render correctly 1`] = `
     >
       <Button
         hasHighlight={false}
+        hitAreaSize="large"
         innerRef={
           Object {
             "current": null,

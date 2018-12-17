@@ -35,6 +35,7 @@ describe('LayoutManager', () => {
       containerNavigation: null,
       children: <div>Page content</div>,
       experimental_flyoutOnHover: false,
+      experimental_alternateFlyoutBehaviour: false,
       collapseToggleTooltipContent: () => ({ text: 'Expand', char: '[' }),
     };
   });
@@ -57,84 +58,24 @@ describe('LayoutManager', () => {
         jest.useFakeTimers();
       });
 
-      afterEach(() => {
-        jest.clearAllTimers();
-      });
-
-      it('should open when mousing over NavigationContainer with a delay of 200ms', () => {
+      it('should open when mousing over ContainerNavigationMask with a delay of 350ms', () => {
         const wrapper = mount(<LayoutManager {...defaultProps} />);
         expect(wrapper.state('flyoutIsOpen')).toBe(false);
-        wrapper.find(NavigationContainer).simulate('mouseover');
+        wrapper.find(ContainerNavigationMask).simulate('mouseover');
 
-        expect(wrapper.contains(ProductNavigation)).toBeTruthy();
-        expect(wrapper.find('Outer').exists()).toBeTruthy();
-
-        jest.advanceTimersByTime(199);
+        jest.advanceTimersByTime(349);
         expect(wrapper.state('flyoutIsOpen')).toBe(false);
 
         jest.advanceTimersByTime(1);
         expect(wrapper.state('flyoutIsOpen')).toBe(true);
       });
 
-      it('should NOT open when mousing over GlobalNavigation with a delay of 200ms', () => {
-        const Global = () => <div>Global</div>;
-        const wrapper = mount(
-          <LayoutManager {...defaultProps} globalNavigation={Global} />,
-        );
-        const instance = wrapper.instance();
-        const spy = jest
-          .spyOn(instance, 'closeFlyout')
-          .mockImplementation(() => {});
-        // to register the spy on the instance
-        wrapper.setProps({});
-
-        wrapper
-          .find('Global')
-          .closest('div')
-          .simulate('mouseover');
-
-        expect(spy).toHaveBeenCalled();
-      });
-
-      it('should NOT open when mousing over expand/collapse affordance with a delay of 200ms', () => {
-        const wrapper = mount(<LayoutManager {...defaultProps} />);
-        const instance = wrapper.instance();
-        const spy = jest
-          .spyOn(instance, 'closeFlyout')
-          .mockImplementation(() => {});
-        wrapper.setProps({});
-
-        wrapper
-          .find('Button')
-          .findWhere(
-            el =>
-              el.name() === 'div' &&
-              typeof el.prop('onMouseOver') === 'function',
-          )
-          .simulate('mouseover');
-
-        expect(spy).toHaveBeenCalled();
-      });
-
-      it('should NOT close already expanded flyout when mousing over expand/collapse affordance', () => {
-        const wrapper = mount(<LayoutManager {...defaultProps} />);
-
-        expect(wrapper.find('Button').prop('onMouseOver')).toBeInstanceOf(
-          Function,
-        );
-
-        wrapper.setState({ flyoutIsOpen: true });
-        wrapper.update();
-
-        expect(wrapper.find('Button').prop('onMouseOver')).toBeNull();
-      });
-
-      it('should not open when mousing out before 200ms', () => {
+      it('should not open when mousing out before 350ms', () => {
         const wrapper = mount(<LayoutManager {...defaultProps} />);
         expect(wrapper.state('flyoutIsOpen')).toBe(false);
         wrapper.find(ContainerNavigationMask).simulate('mouseover');
 
-        jest.advanceTimersByTime(100);
+        jest.advanceTimersByTime(300);
         wrapper.find(NavigationContainer).simulate('mouseleave');
         expect(wrapper.state('flyoutIsOpen')).toBe(false);
 
@@ -186,23 +127,23 @@ describe('LayoutManager', () => {
         expect(wrapper.state('flyoutIsOpen')).toBe(false);
       });
 
-      it('should NOT listen to mouseOvers over NavigationContainer if flyout is already open', () => {
+      it('should NOT listen to mouseOvers over ContainerNavigationMask if flyout is already open', () => {
         const wrapper = mount(<LayoutManager {...defaultProps} />);
-        expect(wrapper.find(NavigationContainer).prop('onMouseOver')).toEqual(
-          expect.any(Function),
-        );
-        wrapper.find(NavigationContainer).simulate('mouseover');
+        expect(
+          wrapper.find(ContainerNavigationMask).prop('onMouseOver'),
+        ).toEqual(expect.any(Function));
+        wrapper.find(ContainerNavigationMask).simulate('mouseover');
 
-        jest.advanceTimersByTime(199);
+        jest.advanceTimersByTime(349);
         wrapper.update();
-        expect(wrapper.find(NavigationContainer).prop('onMouseOver')).toEqual(
-          expect.any(Function),
-        );
+        expect(
+          wrapper.find(ContainerNavigationMask).prop('onMouseOver'),
+        ).toEqual(expect.any(Function));
 
         jest.advanceTimersByTime(1);
         wrapper.update();
         expect(
-          wrapper.find(NavigationContainer).prop('onMouseOver'),
+          wrapper.find(ContainerNavigationMask).prop('onMouseOver'),
         ).toBeNull();
       });
 
@@ -311,11 +252,6 @@ describe('LayoutManager', () => {
         onCollapseStart: jest.fn(),
         onCollapseEnd: jest.fn(),
       };
-      jest.useFakeTimers();
-    });
-
-    afterEach(() => {
-      jest.clearAllTimers();
     });
 
     it('should be attached to the Page transition component', () => {
@@ -382,7 +318,6 @@ describe('LayoutManager', () => {
 
       defaultProps.navigationUIController.state.isCollapsed = true;
       wrapper.setProps(defaultProps);
-      wrapper.update();
 
       jest.advanceTimersByTime(299);
       expect(handlers.onCollapseEnd).not.toHaveBeenCalled();
@@ -404,6 +339,7 @@ describe('LayoutManager', () => {
         attributes: {
           isExpanded: false,
           flyoutOnHoverEnabled: false,
+          alternateFlyoutBehaviourEnabled: false,
         },
         componentName: 'navigation',
         packageName: '@atlaskit/navigation-next',
@@ -422,6 +358,7 @@ describe('LayoutManager', () => {
         attributes: {
           isExpanded: true,
           flyoutOnHoverEnabled: false,
+          alternateFlyoutBehaviourEnabled: false,
         },
         componentName: 'navigation',
         packageName: '@atlaskit/navigation-next',
@@ -440,6 +377,27 @@ describe('LayoutManager', () => {
         attributes: {
           isExpanded: true,
           flyoutOnHoverEnabled: true,
+          alternateFlyoutBehaviourEnabled: false,
+        },
+        componentName: 'navigation',
+        packageName: '@atlaskit/navigation-next',
+        packageVersion: expect.any(String),
+      });
+    });
+
+    it('should render NavigationAnalyticsContext with correct payload when alternateFlyoutBehaviour experiment is enabled', () => {
+      defaultProps.experimental_flyoutOnHover = true;
+      defaultProps.experimental_alternateFlyoutBehaviour = true;
+      const wrapper = shallow(<LayoutManager {...defaultProps} />);
+
+      const analyticsContext = wrapper.find(NavigationAnalyticsContext);
+
+      expect(analyticsContext).toHaveLength(1);
+      expect(analyticsContext.prop('data')).toEqual({
+        attributes: {
+          isExpanded: true,
+          flyoutOnHoverEnabled: true,
+          alternateFlyoutBehaviourEnabled: true,
         },
         componentName: 'navigation',
         packageName: '@atlaskit/navigation-next',
