@@ -1,1 +1,0 @@
-- FS-3318 add menuPortalTarget property to UserPicker
