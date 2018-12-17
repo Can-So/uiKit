@@ -1,0 +1,1 @@
+- Do not show connect button if there are no auth methods.
