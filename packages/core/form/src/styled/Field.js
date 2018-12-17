@@ -1,12 +1,12 @@
 // @flow
 import styled from 'styled-components';
-import { typography, colors } from '@atlaskit/theme';
+import { typography, colors, gridSize, math } from '@atlaskit/theme';
 
 /**
  * Provide a styled container for field components
  */
 const FieldWrapper = styled.div`
-  margin-top: 8px;
+  margin-top: ${gridSize}px;
 `;
 
 /**
@@ -14,13 +14,13 @@ const FieldWrapper = styled.div`
  */
 export const Label = styled.label`
   ${typography.h200()} display: inline-block;
-  margin-bottom: 4px;
+  margin-bottom: ${math.multiply(gridSize, 0.5)}px;
   margin-top: 0;
 `;
 
 export const RequiredIndicator = styled.span`
   color: ${colors.R400};
-  padding-left: 2px;
+  padding-left: ${math.multiply(gridSize, 0.25)}px;
 `;
 
 export default FieldWrapper;

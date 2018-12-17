@@ -16,10 +16,11 @@ ${(
     </p>
   </SectionMessage>
 )}
-  ## Getting started
 
   This package contains a number of components to help manage form **state**, **validation** and **layout**.
   Below is an example of a form with a single text field.
+
+  ## Usage
 
   ${code`
 import Form, { Field } from '@atlaskit/form';
@@ -40,7 +41,7 @@ const MyForm = () => (
     )}
   </Form>
 );
-`}
+  `}
 
   This working example shows off different field types, validation and submission.
 
@@ -52,7 +53,7 @@ const MyForm = () => (
       source={require('!!raw-loader!../examples/00-signup-form')}
     />
   )}
-  
+
   ## Concepts
 
   This outlines the main concepts in the package and how they work together.
