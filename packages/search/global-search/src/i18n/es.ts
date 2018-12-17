@@ -17,7 +17,7 @@ export default {
   'global_search.no_results_title':
     'No hay resultados en los títulos ni en las personas',
   'global_search.no_results_body':
-    'Prueba buscando otro término. A continuación, también puedes buscar contenido de páginas con la búsqueda avanzada, o personas.',
+    'Prueba con otro término o afina los resultados con la búsqueda avanzada.',
   'global_search.people.recent_people_heading': 'Colaboración reciente con',
   'global_search.people.people_heading': 'Personas',
   'global_search.people.advanced_search': 'Buscar personas',
@@ -30,12 +30,12 @@ export default {
   'global_search.jira.recent_issues_heading': 'Incidencias recientes',
   'global_search.jira.recent_people_heading': 'Colaboración reciente con',
   'global_search.jira.recent_containers':
-    'Tableros, filtros y proyectos recientes',
+    'Tableros, proyectos y filtros recientes',
   'global_search.jira.search_result_issues_heading': 'Incidencias',
   'global_search.jira.search_result_containers_heading':
-    'Tableros, filtros y proyectos',
+    'Tableros, proyectos y filtros',
   'global_search.jira.search_result_people_heading': 'Personas',
-  'global_search.jira.advanced_search': 'Ir a la búsqueda avanzada de',
+  'global_search.jira.advanced_search': 'Búsqueda avanzada para',
   'global_search.jira.advanced_search_issues': 'incidencias',
   'global_search.jira.advanced_search_projects': 'proyectos',
   'global_search.jira.advanced_search_boards': 'tableros',
@@ -44,9 +44,16 @@ export default {
   'global_search.jira.advanced_issue_search':
     'Búsqueda avanzada de incidencias',
   'global_search.jira.no_results_title':
-    'No hay resultados en los resúmenes de incidencias, en los nombres ni en las personas',
+    'No se han encontrado resultados de búsqueda',
   'global_search.jira.no_results_body':
-    'Prueba buscando otro término. También puedes buscar todos los campos de texto de las incidencias con la búsqueda avanzada, u otros elementos de forma más concreta.',
+    'Prueba con otro término o afina los resultados con la búsqueda avanzada.',
   'global_search.jira.no_recent_activity_body':
     'También puedes afinar los resultados con nuestra búsqueda avanzada.',
+  'global_search.jira.project_type.business_project': 'Proyecto empresarial',
+  'global_search.jira.project_type.software_project': 'Proyecto de software',
+  'global_search.jira.project_type.service_desk_project':
+    'Proyecto de servicio al cliente',
+  'global_search.jira.project_type.ops_project': 'Proyecto operativo',
+  'global_search.jira.result_type.board': 'Tablero',
+  'global_search.jira.result_type.filter': 'Filtro',
 };

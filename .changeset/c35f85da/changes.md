@@ -1,0 +1,1 @@
+- Updated global-search translations
