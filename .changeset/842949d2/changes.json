@@ -1,0 +1,8 @@
+{
+  "releases": [
+    { "name": "@atlaskit/renderer", "type": "patch" },
+    { "name": "@atlaskit/media-ui", "type": "minor" },
+    { "name": "@atlaskit/smart-card", "type": "minor" }
+  ],
+  "dependents": []
+}

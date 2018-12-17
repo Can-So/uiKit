@@ -1,0 +1,1 @@
+- User can click on a smart card to open a new window/tab
