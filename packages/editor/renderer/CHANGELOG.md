@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 32.1.1
+- [patch] [d9815ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9815ba):
+
+  - ED-5888 Add dark mode for task-decision
+
 ## 32.1.0
 - [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
 

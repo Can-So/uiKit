@@ -1,7 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/renderer", "type": "patch" },
-    { "name": "@atlaskit/task-decision", "type": "minor" }
-  ],
-  "dependents": []
-}
