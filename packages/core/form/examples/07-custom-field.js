@@ -164,6 +164,54 @@ class MyTextArea extends React.Component<TextAreaProps> {
   }
 }
 
+const ColorButton = ({
+  color,
+  changeHandler,
+}: {
+  color: string,
+  changeHandler: Function,
+}) => {
+  return (
+    <button
+      style={{
+        backgroundColor: color,
+        color: 'transparent',
+        display: 'inline-block',
+        height: '40px',
+        width: '40px',
+        margin: '0 5px',
+        overflow: 'hidden',
+      }}
+      onClick={e => {
+        e.preventDefault();
+        /*
+         * For custom non-form-field fields, the relevant detail of this event handler
+         * is that it ends up calling the onChange method that is passed in to the render prop's
+         * fieldProps (i.e. fieldProps.onChange). It is called with the new value of the field
+         * and that will propagate the value up to the Form and back to the Field.
+         */
+        changeHandler(color);
+      }}
+    >
+      {color}
+    </button>
+  );
+};
+
+const ColorButtons = ({
+  colors,
+  changeHandler,
+}: {
+  colors: Array<string>,
+  changeHandler: Function,
+}) => (
+  <React.Fragment>
+    {colors.map(color => (
+      <ColorButton color={color} changeHandler={changeHandler} key={color} />
+    ))}
+  </React.Fragment>
+);
+
 export default () => (
   <div
     style={{
@@ -176,7 +224,7 @@ export default () => (
     <Form onSubmit={data => console.log(data)}>
       {({ formProps }) => (
         <form {...formProps}>
-          <Field name="firstname" defaultValue="" label="First name" isRequired>
+          <Field name="firstname" defaultValue="" label="First name">
             {({ fieldProps }) => <MyInputField {...fieldProps} />}
           </Field>
           <Field name="comments" defaultValue="" label="Additional comments">
@@ -188,6 +236,26 @@ export default () => (
                 placeholder="Add your comments..."
                 {...fieldProps}
               />
+            )}
+          </Field>
+          <Field name="favourite-color" defaultValue="" label="Favourite color">
+            {({ fieldProps }) => (
+              <div data-name={fieldProps.id} data-value={fieldProps.value}>
+                <p style={{ margin: '10px 0' }}>
+                  Selected color:{' '}
+                  {fieldProps.value ? (
+                    <span style={{ color: fieldProps.value }}>
+                      {fieldProps.value}
+                    </span>
+                  ) : (
+                    'none'
+                  )}
+                </p>
+                <ColorButtons
+                  colors={['red', 'green', 'orange', 'blue']}
+                  changeHandler={fieldProps.onChange}
+                />
+              </div>
             )}
           </Field>
           <FormFooter>
