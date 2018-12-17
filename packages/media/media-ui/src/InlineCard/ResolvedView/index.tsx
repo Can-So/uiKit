@@ -3,7 +3,6 @@ import { Frame } from '../Frame';
 import Lozenge from '@atlaskit/lozenge';
 import { LozengeViewModel } from '../../common';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
-// import { Title } from './styled';
 import { Icon } from '../Icon';
 
 export interface InlineCardResolvedViewProps {
