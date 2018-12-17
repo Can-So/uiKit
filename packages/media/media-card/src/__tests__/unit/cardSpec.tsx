@@ -679,6 +679,24 @@ describe('Card', () => {
     );
   });
 
+  it('should change mode from stretchy-fit to full-fit while passing down to getImage call', async () => {
+    const context = createContextWithGetFile();
+    setup(context, {
+      resizeMode: 'stretchy-fit',
+    });
+
+    // we need to wait for 2 promises: fetch metadata + fetch preview
+    await nextTick();
+    await nextTick();
+
+    expect(context.getImage).toBeCalledWith(
+      'some-random-id',
+      expect.objectContaining({
+        mode: 'full-fit',
+      }),
+    );
+  });
+
   it('should render CardView with expected props', async () => {
     const context = createContextWithGetFile();
 

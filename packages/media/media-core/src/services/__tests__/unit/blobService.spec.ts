@@ -80,5 +80,21 @@ describe('MediaBlobService', () => {
 
       expect(fetchSomeBlobSpy.mock.calls[0][1].mode).toBe('full-fit');
     });
+
+    it('should convert stretchy-fit to full-fit when calling backend', () => {
+      const fetchSomeBlobSpy = createFetchSomeBlobSpy();
+      service.fetchSomeBlob = fetchSomeBlobSpy;
+
+      service.fetchImageBlob(
+        { type: 'file', details: { id: 'id' } },
+        {
+          width: 100,
+          height: 100,
+          mode: 'stretchy-fit',
+        },
+      );
+
+      expect(fetchSomeBlobSpy.mock.calls[0][1].mode).toBe('full-fit');
+    });
   });
 });

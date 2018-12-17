@@ -62,10 +62,6 @@ const ContentStyles: ComponentClass<
     outline: 2px solid #8cf;
   }
 
-  .ProseMirror img {
-    max-width: 100%;
-  }
-
   .inlineCardView-content-wrap,
   .blockCardView-content-wrap {
     display: inline-block;

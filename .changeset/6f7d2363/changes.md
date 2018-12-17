@@ -1,0 +1,1 @@
+- Add stretch as a prop for CardContent and MediaImage; Convert new stretchy-fit resizeMode to stretch=true;
