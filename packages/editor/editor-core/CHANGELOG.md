@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 91.1.4
+- [patch] [3780be2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3780be2):
+
+  - Fix extension delete when media is selected
+
 ## 91.1.3
 - [patch] [462b70f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/462b70f):
 
