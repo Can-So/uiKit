@@ -1,5 +1,5 @@
 // @flow
-import React, { type ElementType, type Node } from 'react';
+import React, { Component, type ElementType, type Node } from 'react';
 import styled, { css } from 'styled-components';
 import { colors, gridSize, math, themed } from '@atlaskit/theme';
 
@@ -106,10 +106,12 @@ export const TitleIconWrapper = styled.span`
   children. The combined vertical spacing is maintained by subtracting the
   keyline height from header and footer.
 */
-export const Body = styled.div`
+
+// export const Body = styled.div`
+const DefaultBodyComponent = styled.div`
   flex: 1 1 auto;
-  ${p =>
-    p.shouldScroll
+  ${p => {
+    return p.shouldScroll
       ? `
           overflow-y: auto;
           overflow-x: hidden;
@@ -117,8 +119,53 @@ export const Body = styled.div`
         `
       : `
           padding: 0 ${outerGutter}px;
-        `};
+        `;
+  }};
 `;
+
+export const Body = ({
+  component,
+  children,
+  innerRef,
+  shouldScroll,
+}: {
+  component: ElementType,
+  children: Node,
+  innerRef: Function,
+  shouldScroll: boolean,
+}) => {
+  let BodyStyledComponent = DefaultBodyComponent;
+  if (component !== 'div') {
+    BodyStyledComponent = styled(component)`
+      flex: 1 1 auto;
+      color: ${colors.R400};
+      ${p => {
+        return p.shouldScroll
+          ? `
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: ${keylineHeight}px ${outerGutter}px;
+          `
+          : `
+            border-radius: 0px;
+            color: '#00FF00'
+            padding: 0 ${outerGutter}px;
+    `;
+      }};
+    `;
+  }
+
+  return (
+    <BodyStyledComponent shouldScroll={shouldScroll} innerRef={innerRef}>
+      {children}
+    </BodyStyledComponent>
+  );
+};
+
+Body.defaultProps = {
+  component: 'div',
+  innerRef: () => {},
+};
 
 // Footer
 // ==============================

@@ -42,6 +42,7 @@ type Props = {
   */
   components: {
     Header?: ElementType,
+    Body?: ElementType,
     Footer?: ElementType,
     Container?: ElementType,
   },
@@ -100,7 +101,7 @@ export default class Content extends Component<Props, State> {
     components: {},
     isChromeless: false,
     stackIndex: 0,
-    body: Body,
+    // body: Body,    // Components should be the default now
     isHeadingMultiline: true,
   };
 
@@ -197,7 +198,7 @@ export default class Content extends Component<Props, State> {
     const {
       actions,
       appearance,
-      body: ModalBody,
+      body: PropBody,
       components,
       children,
       footer,
@@ -208,6 +209,13 @@ export default class Content extends Component<Props, State> {
       isHeadingMultiline,
       shouldScroll,
     } = this.props;
+
+    // Only load in 'div' default if there's no deprecated 'body' prop provided
+    let BodyContainer = components.Body;
+    if (!PropBody) {
+      if (!components.Body) BodyContainer = 'div';
+    }
+
     const { Container = 'div' } = components;
     const { showFooterKeyline, showHeaderKeyline } = this.state;
 
@@ -225,12 +233,22 @@ export default class Content extends Component<Props, State> {
               isHeadingMultiline={isHeadingMultiline}
               showKeyline={showHeaderKeyline}
             />
-            <ModalBody
-              innerRef={this.getScrollContainer}
-              shouldScroll={shouldScroll}
-            >
-              {children}
-            </ModalBody>
+            {BodyContainer ? (
+              <Body
+                component={BodyContainer}
+                innerRef={this.getScrollContainer}
+                shouldScroll={shouldScroll}
+              >
+                {children}
+              </Body>
+            ) : (
+              <PropBody
+                innerRef={this.getScrollContainer}
+                shouldScroll={shouldScroll}
+              >
+                {children}
+              </PropBody>
+            )}
             <Footer
               actions={actions}
               appearance={appearance}

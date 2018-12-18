@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, type Node } from 'react';
 import styled from 'styled-components';
 import Lorem from 'react-lorem-component';
 
@@ -17,6 +17,7 @@ const variants = [
   'both',
   'neither',
   'custom header',
+  'custom body',
   'custom footer',
 ];
 const H4 = styled.h4`
@@ -53,6 +54,35 @@ const Header = ({ onClose }: { onClose: Function }) => (
     </span>
   </div>
 );
+
+const bodyStyles = {
+  padding: 90,
+  backgroundColor: colors.N30,
+  overflowY: 'auto',
+  overflowX: 'hidden',
+};
+type BodyProps = {
+  children?: Node,
+  onClose: Function,
+  innerRef: Function,
+};
+
+// $FlowFixMe
+const Body = React.forwardRef((props: BodyProps, ref) => {
+  return (
+    <div ref={ref} style={bodyStyles}>
+      {props.children}
+      <Button onClick={props.onClose} appearance="link">
+        <CrossIcon
+          label="Close Modal"
+          primaryColor={colors.R400}
+          size="small"
+        />
+      </Button>
+    </div>
+  );
+});
+
 type FooterProps = {
   onClose: Function,
   showKeyline: boolean,
@@ -60,6 +90,8 @@ type FooterProps = {
 type FooterState = {
   isOpen: boolean,
 };
+
+// eslint-disable-next-line react/no-multi-comp
 class Footer extends Component<FooterProps, FooterState> {
   state = { isOpen: false };
   open = () => this.setState({ isOpen: true });
@@ -124,6 +156,7 @@ export default class ModalDemo extends Component<{}, State> {
                 }
                 components={{
                   Header: name === 'custom header' ? Header : undefined,
+                  Body: name === 'custom body' ? Body : undefined,
                   Footer: name === 'custom footer' ? Footer : undefined,
                   Container: 'div',
                 }}
