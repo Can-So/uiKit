@@ -135,6 +135,7 @@ class TimePicker extends Component<Props, State> {
     onChange: () => {},
     onFocus: () => {},
     placeholder: 'e.g. 8:00am',
+    // $FlowFixMe - TODO: it looks like Flow lost the context in parseTime and expect a number: string [1] is incompatible with number [2].
     parseInputValue: (time: string, timeFormat: string) => parseTime(time), // eslint-disable-line no-unused-vars
     selectProps: {},
     spacing: 'default',
