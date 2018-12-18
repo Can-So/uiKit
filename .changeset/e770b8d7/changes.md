@@ -1,1 +1,0 @@
-- Field-base no longer renders empty <label> if isLabelHidden is true
