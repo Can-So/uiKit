@@ -34,6 +34,7 @@
     "@atlaskit/select": "^6.1.9",
     "axios": "^0.17.1",
     "enzyme": "^3.7.0",
+    "exenv": "^1.2.2",
     "kakapo": "^3.3.4",
     "lodash.matches": "^4.6.0",
     "react-intl": "^2.6.0",

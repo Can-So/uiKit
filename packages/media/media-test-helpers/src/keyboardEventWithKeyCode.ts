@@ -3,7 +3,9 @@ import * as exenv from 'exenv';
 class FakeKeyboardEvent {
   constructor(_: string, __: any) {}
 }
-class KeyboardEventWithKeyCode extends KeyboardEvent {
+class KeyboardEventWithKeyCode extends (exenv.canUseDOM
+  ? KeyboardEvent
+  : ({} as any)) {
   constructor(type: string, options: any) {
     super(type, options);
   }
