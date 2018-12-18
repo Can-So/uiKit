@@ -36,9 +36,6 @@ import {
       // paste the link
       await browser.paste(editable);
 
-      // selectors on the nodeview do not work correctly in chrome
-      await browser.waitForSelector('.inlineCardView-content-wrap');
-
       const doc = await browser.$eval(editable, getDocFromElement);
       expect(doc).toMatchDocSnapshot();
     },
