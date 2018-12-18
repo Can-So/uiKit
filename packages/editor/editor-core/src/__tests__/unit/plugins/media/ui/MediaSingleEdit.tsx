@@ -105,11 +105,7 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
       'mediaSingle',
     );
 
-    expect(
-      mediaSingleEdit.find(ToolbarButton).findWhere(child => {
-        return child.type() === ToolbarButton && child.prop('disabled');
-      }).length,
-    ).toEqual(7);
+    expect(mediaSingleEdit.find(ToolbarButton).length).toEqual(1);
     mediaSingleEdit.unmount();
   });
 
@@ -148,11 +144,7 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
     expect(editorView.state.selection.$from.node().type.name).toEqual(
       'mediaSingle',
     );
-    expect(
-      mediaSingleEdit.find(ToolbarButton).findWhere(child => {
-        return child.type() === ToolbarButton && child.prop('disabled');
-      }).length,
-    ).toEqual(7);
+    expect(mediaSingleEdit.find(ToolbarButton).length).toEqual(1);
     mediaSingleEdit.unmount();
   });
 
@@ -192,11 +184,7 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
     expect(editorView.state.selection.$from.node().type.name).toEqual(
       'mediaSingle',
     );
-    expect(
-      mediaSingleEdit.find(ToolbarButton).findWhere(child => {
-        return child.type() === ToolbarButton && child.prop('disabled');
-      }).length,
-    ).toEqual(5);
+    expect(mediaSingleEdit.find(ToolbarButton).length).toEqual(1);
     mediaSingleEdit.unmount();
   });
 });
