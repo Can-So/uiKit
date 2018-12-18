@@ -37,6 +37,9 @@ export type ExperimentalFeatureFlags = {|
 
     FF to control the flyout activation area according to
     https://product-fabric.atlassian.net/browse/NAV-197
+    This FF works in tandem with the other FF -> experimental_flyoutOnHover.
+    Setting this prop to true will have no effect unless the prior prop is
+    set to true as well.
   */
   experimental_alternateFlyoutBehaviour: boolean,
 |};
