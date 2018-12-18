@@ -92,7 +92,12 @@ class FieldInner extends React.Component<InnerProps, State> {
 
   unregisterField = () => {};
 
-  fieldId = `${this.props.name}-${this.props.id || uuid()}`;
+  getFieldId = () => {
+    if (this.props.id) {
+      return this.props.id;
+    }
+    return `${this.props.name}-${uuid()}`;
+  };
 
   state = {
     // eslint-disable-next-line no-unused-vars
@@ -191,10 +196,10 @@ class FieldInner extends React.Component<InnerProps, State> {
     const { onChange, onBlur, onFocus, value, ...rest } = this.state;
     const error =
       rest.submitError || ((rest.touched || rest.dirty) && rest.error);
-    const labelId = `${this.fieldId}-label`;
-    const helperId = `${this.fieldId}-helper`;
-    const validId = `${this.fieldId}-valid`;
-    const errorId = `${this.fieldId}-error`;
+    const labelId = `${this.getFieldId()}-label`;
+    const helperId = `${this.getFieldId()}-helper`;
+    const validId = `${this.getFieldId()}-valid`;
+    const errorId = `${this.getFieldId()}-error`;
     const fieldProps = {
       onChange: e => {
         onChange(transform(e, value));
@@ -208,12 +213,12 @@ class FieldInner extends React.Component<InnerProps, State> {
       isRequired: Boolean(isRequired),
       'aria-invalid': error ? 'true' : 'false',
       'aria-labelledby': `${labelId} ${helperId} ${errorId} ${validId}`,
-      id: this.fieldId,
+      id: this.getFieldId(),
     };
     return (
       <FieldWrapper>
         {label && (
-          <Label id={labelId} htmlFor={this.fieldId}>
+          <Label id={labelId} htmlFor={this.getFieldId()}>
             {label}
             {isRequired && (
               <RequiredIndicator aria-hidden="true">*</RequiredIndicator>

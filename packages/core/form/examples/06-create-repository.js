@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import Select from '@atlaskit/select';
-import FieldText from '@atlaskit/field-text';
+import Textfield from '@atlaskit/textfield';
 import Button from '@atlaskit/button';
 import { RadioGroup } from '@atlaskit/radio';
 import { Checkbox } from '@atlaskit/checkbox';
@@ -74,6 +74,7 @@ export default class LayoutExample extends PureComponent<void, State> {
                 <Field
                   label="Owner"
                   name="owner"
+                  id="owner"
                   defaultValue={{
                     label: 'Atlassian',
                     value: 'atlassian',
@@ -81,7 +82,7 @@ export default class LayoutExample extends PureComponent<void, State> {
                 >
                   {({ fieldProps: { id, ...rest } }) => (
                     <Select
-                      inputId={id}
+                      id={`${id}-select`}
                       isSearchable={false}
                       options={[
                         { label: 'Atlassian', value: 'atlassian' },
@@ -94,10 +95,10 @@ export default class LayoutExample extends PureComponent<void, State> {
                   )}
                 </Field>
 
-                <Field name="project" label="Project" isRequired>
+                <Field name="project" id="project" label="Project" isRequired>
                   {({ fieldProps: { id, ...rest } }) => (
                     <Select
-                      inputId={id}
+                      id={`${id}-select`}
                       options={[
                         { label: 'Atlaskit', value: 'brisbane' },
                         { label: 'Bitbucket', value: 'bb' },
@@ -111,14 +112,8 @@ export default class LayoutExample extends PureComponent<void, State> {
                   )}
                 </Field>
 
-                <Field name="repo_name" label="Repository name" defaultValue="">
-                  {({ fieldProps }) => (
-                    <FieldText
-                      shouldFitContainer
-                      isLabelHidden
-                      {...fieldProps}
-                    />
-                  )}
+                <Field name="repo-name" label="Repository name" defaultValue="">
+                  {({ fieldProps }) => <Textfield {...fieldProps} />}
                 </Field>
 
                 <Field name="access-level" label="Access level">
@@ -149,12 +144,14 @@ export default class LayoutExample extends PureComponent<void, State> {
                   )}
                 </Field>
                 <Field
-                  name="include_readme"
+                  name="include-readme"
+                  id="include-readme"
                   label="Include a README?"
                   defaultValue={{ label: 'No', value: 'no' }}
                 >
-                  {({ fieldProps }) => (
+                  {({ fieldProps: { id, ...rest } }) => (
                     <Select
+                      id={`${id}-select`}
                       isSearchable={false}
                       options={[
                         { label: 'No', value: 'no' },
@@ -167,17 +164,23 @@ export default class LayoutExample extends PureComponent<void, State> {
                           value: 'yes-with-tutorial',
                         },
                       ]}
-                      {...fieldProps}
+                      {...rest}
                     />
                   )}
                 </Field>
               </FormSection>
 
               <FormFooter>
-                <Button appearance="primary" type="submit">
+                <Button
+                  appearance="primary"
+                  id="create-repo-button"
+                  type="submit"
+                >
                   Create repository
                 </Button>
-                <Button appearance="subtle">Cancel</Button>
+                <Button appearance="subtle" id="create-repo-cancel">
+                  Cancel
+                </Button>
               </FormFooter>
             </form>
           )}
