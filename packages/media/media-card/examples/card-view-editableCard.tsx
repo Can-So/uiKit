@@ -112,7 +112,7 @@ export const generateStoriesForEditableCards = () => {
   };
   const getStateFromLocalStorage = (): EditableCardState | null => {
     if (!exenv.canUseDOM) {
-      return;
+      return null;
     }
 
     const previousState = localStorage.getItem(localStorageKeyName);

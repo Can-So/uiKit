@@ -6,7 +6,6 @@ import * as React from 'react';
 import { Component } from 'react';
 import Button from '@atlaskit/button';
 import {
-  userAuthProvider,
   defaultMediaPickerCollectionName,
   createUploadContext,
 } from '@atlaskit/media-test-helpers';
