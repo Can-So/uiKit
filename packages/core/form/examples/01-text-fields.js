@@ -24,10 +24,11 @@ export default () => (
           </Field>
 
           <Field name="lastname" defaultValue="" label="Last name" isRequired>
-            {({ fieldProps: { isRequired, ...others } }) => (
+            {({ fieldProps: { isRequired, isDisabled, ...others } }) => (
               <FieldTextStateless
                 isLabelHidden
                 shouldFitContainer
+                disabled={isDisabled}
                 required={isRequired}
                 {...others}
               />
@@ -39,11 +40,13 @@ export default () => (
           </Field>
 
           <Field name="comments" defaultValue="" label="Additional comments">
-            {({ fieldProps }) => (
+            {({ fieldProps: { isRequired, isDisabled, ...others } }) => (
               <FieldTextAreaStateless
                 isLabelHidden
                 shouldFitContainer
-                {...fieldProps}
+                disabled={isDisabled}
+                required={isRequired}
+                {...others}
               />
             )}
           </Field>
