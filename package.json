@@ -483,7 +483,7 @@
     "url-search-params": "^0.10.0",
     "uuid": "^3.1.0",
     "uuid-validate": "^0.0.3",
-    "video-snapshot": "^1.0.2",
+    "video-snapshot": "^1.0.3",
     "webpack-cli": "^3.1.0",
     "xregexp": "^3.2.0"
   },
