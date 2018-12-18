@@ -221,6 +221,7 @@
     "tslint-react": "^3.2.0",
     "tty-table": "^2.6.8",
     "typescript": "~3.1.0",
+    "ttypescript": "^1.5.5",
     "uid": "^0.0.2",
     "url-loader": "^1.0.1",
     "validator": "^9.4.1",
@@ -485,7 +486,7 @@
     "uuid-validate": "^0.0.3",
     "video-snapshot": "^1.0.2",
     "webpack-cli": "^3.1.0",
-    "xregexp": "^3.2.0"
+    "xregexp": "^4.1.1"
   },
   "resolutions": {
     "**/@atlaskit/theme/styled-components": "^3.2.6",

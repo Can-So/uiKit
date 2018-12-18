@@ -61,6 +61,20 @@ describe('SearchIndex', () => {
     expect(result.mentions).toHaveLength(1);
   });
 
+  it('should search chinese characters - more than one result', async () => {
+    searchIndex.indexResults([
+      { id: 'id1', name: '我是法国人', mentionName: '法国人' },
+      { id: 'id2', name: '我想你', mentionName: '我想你' },
+      { id: 'id3', name: '象形字', mentionName: '象形字' },
+      { id: 'id4', name: '我字', mentionName: '我字' },
+    ]);
+    const result = await searchIndex.search('字');
+
+    expect(result.mentions).toHaveLength(2);
+    expect(result.mentions[0].id).toEqual('id3');
+    expect(result.mentions[1].id).toEqual('id4');
+  });
+
   it('should search by token in name', async () => {
     searchIndex.indexResults([
       {
