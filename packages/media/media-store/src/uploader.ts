@@ -102,21 +102,20 @@ export const uploadFile = (
     },
   );
 
-  if (callbacks) {
-    Promise.all([deferredUploadId, response])
-      .then(async ([uploadId]) => {
-        await store.createFileFromUpload(
-          { uploadId, name, mimeType },
-          {
-            occurrenceKey,
-            collection,
-            replaceFileId: id,
-          },
-        );
-        callbacks.onUploadFinish();
-      })
-      .catch(callbacks.onUploadFinish);
-  }
+  const onUploadFinish = (callbacks && callbacks.onUploadFinish) || (() => {});
+  Promise.all([deferredUploadId, response])
+    .then(async ([uploadId]) => {
+      await store.createFileFromUpload(
+        { uploadId, name, mimeType },
+        {
+          occurrenceKey,
+          collection,
+          replaceFileId: id,
+        },
+      );
+      onUploadFinish();
+    })
+    .catch(onUploadFinish);
 
   return { cancel };
 };
