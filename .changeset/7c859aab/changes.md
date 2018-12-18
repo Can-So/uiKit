@@ -1,0 +1,1 @@
+- ED-5880: disable media layout buttons
