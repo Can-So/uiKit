@@ -125,11 +125,10 @@ export default class ResizableMediaSingle extends React.Component<
 
   calcOffsetLeft() {
     let offsetLeft = 0;
+
     if (this.wrapper && this.insideInlineLike) {
       let currentNode: HTMLElement | null = this.wrapper;
-
-      // FIXME: get rid of this
-      const pm = document.querySelector('.ProseMirror')! as HTMLElement;
+      const pm = this.props.view.dom as HTMLElement;
 
       while (
         currentNode &&
