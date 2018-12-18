@@ -13,8 +13,8 @@ export type UploadableFile = {
 
 export type UploadableFileUpfrontIds = {
   id: string;
-  occurrenceKey: string;
   deferredUploadId: Promise<string>;
+  occurrenceKey?: string;
 };
 
 export type UploadFileCallbacks = {
