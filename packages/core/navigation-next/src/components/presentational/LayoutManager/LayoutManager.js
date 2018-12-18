@@ -136,8 +136,6 @@ export default class LayoutManager extends Component<
     }, delay);
   };
   closeFlyout = (e: any) => {
-    if (e.currentTarget.contains(e.relatedTarget)) return;
-
     e.stopPropagation();
     clearTimeout(this.flyoutMouseOverTimeout);
     if (this.state.flyoutIsOpen) {
