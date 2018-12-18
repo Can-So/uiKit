@@ -1,11 +1,16 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import { getDocFromElement, comment, fullpage, editable } from '../_helpers';
+import {
+  getDocFromElement,
+  comment,
+  fullpage,
+  editable,
+  linkToolbar,
+} from '../_helpers';
 import { messages } from '../../../plugins/insert-block/ui/ToolbarInsertBlock';
 
 const linkText1 = 'http://hello.com ';
 const linkText2 = 'FAB-983';
-const linkToolbar = '[placeholder="Paste link or search recently viewed"]';
 
 // https://product-fabric.atlassian.net/browse/ED-4162 - Firefox
 // Floating toolbar is not showin up on IE and edge
