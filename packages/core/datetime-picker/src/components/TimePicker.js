@@ -66,7 +66,7 @@ type Props = {
   onChange: string => void,
   /** Called when the field is focused. */
   onFocus: () => void,
-  parseInputValue: (time: string, timeFormat: string) => Date | typeof NaN,
+  parseInputValue: (time: string, timeFormat: string) => string | Date,
   /** Props to apply to the select. */
   selectProps: Object,
   /* This prop affects the height of the select control. Compact is gridSize() * 4, default is gridSize * 5  */
@@ -135,7 +135,6 @@ class TimePicker extends Component<Props, State> {
     onChange: () => {},
     onFocus: () => {},
     placeholder: 'e.g. 8:00am',
-    // $FlowFixMe - TODO: it looks like Flow lost the context in parseTime and expect a number: string [1] is incompatible with number [2].
     parseInputValue: (time: string, timeFormat: string) => parseTime(time), // eslint-disable-line no-unused-vars
     selectProps: {},
     spacing: 'default',

@@ -75,7 +75,7 @@ export function assignToDate(time: { hour: number, minute: number }): Date {
   return dateTime;
 }
 
-export default function(time: string | number): string | Date {
+export default function(time: string): string | Date {
   if (!isValid(time.toString())) return 'invalid time format';
   const time1 = removeSpacer(time.toString());
   const time2 = convertTo24hrTime(time1);
