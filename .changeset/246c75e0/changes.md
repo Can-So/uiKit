@@ -1,0 +1,3 @@
+- [Update flyout hover activation zone](https://product-fabric.atlassian.net/browse/NAV-197)
+	- It is controlled by a new FF prop called `experimental_alternateFlyoutBehaviour` which defaults to false. ::NOTE:: For this feature to be enabled, it’s is necessary to have the FF  `experimental_flyoutOnHover` to be set to true.
+- Update expand affordance icon
