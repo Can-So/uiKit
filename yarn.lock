@@ -6359,9 +6359,9 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-extract-react-types@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/extract-react-types/-/extract-react-types-0.15.0.tgz#4007633ffaacabc62f4e013971cebace91d9bb35"
+extract-react-types@^0.15.1:
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/extract-react-types/-/extract-react-types-0.15.1.tgz#cc3c7d98a135a5f3c6663dcc638e3226b68015f9"
   dependencies:
     "@babel/core" "7.0.0-beta.56"
     "@babel/types" "^7.0.0-beta.56"
