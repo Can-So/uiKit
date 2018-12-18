@@ -1,0 +1,1 @@
+- Adjusted unit tests to test for the bug noticed in FS-3259. Added multiple atlassian-ftfy emoji to test this, so updated a unit test to confirm that there are 14 Atlassian emoji, and also added an additional unit test to confirm that FS-3259 was corrected.
