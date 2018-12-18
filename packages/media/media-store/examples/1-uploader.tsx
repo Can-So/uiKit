@@ -109,7 +109,7 @@ class UploaderExample extends Component<
     this.setState({ error });
   };
 
-  private readonly onChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  private readonly onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
       currentTarget: { files },
     } = e;

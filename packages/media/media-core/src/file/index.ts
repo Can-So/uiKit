@@ -13,6 +13,7 @@ import {
   FileItem,
   MediaFileArtifacts,
   TouchFileDescriptor,
+  TouchedFiles,
   UploadableFileUpfrontIds,
 } from '@atlaskit/media-store';
 import * as isValidId from 'uuid-validate';
@@ -24,7 +25,6 @@ import {
 } from '../fileState';
 import { fileStreamsCache, FileStreamCache } from '../context/fileStreamCache';
 import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploadableFile';
-import { TouchedFiles } from '../../../media-store/src/media-store';
 
 const POLLING_INTERVAL = 1000;
 const maxNumberOfItemsPerCall = 100;
