@@ -42,6 +42,8 @@
     "@atlaskit/inline-message": "^7.0.10",
     "@atlaskit/page": "^8.0.12",
     "@atlaskit/radio": "^0.4.4",
+    "@atlaskit/textarea": "^0.2.3",
+    "@atlaskit/textfield": "^0.1.4",
     "@types/enzyme": "^3.1.15",
     "@types/fetch-mock": "^6.0.3",
     "@types/lorem-ipsum": "^1.0.2",
