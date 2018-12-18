@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Blanket from '@atlaskit/blanket';
 
 import ModalDialog, { ModalTransition } from '../../..';
@@ -136,7 +136,7 @@ describe('modal-dialog', () => {
 
         expect(wrapper.contains(node)).toBe(true);
       });
-      it('should render when  via (deprecated) footer prop', () => {
+      it('should render when set via (deprecated) footer prop', () => {
         const node = <span>My footer</span>;
         const wrapper = mount(
           <ModalDialog footer={() => node} onClose={noop} />,
@@ -151,6 +151,44 @@ describe('modal-dialog', () => {
           <ModalDialog
             footer={() => nodeDeprecated}
             components={{ Footer: () => node }}
+            onClose={noop}
+          />,
+        );
+
+        expect(wrapper.contains(node)).toBe(true);
+        expect(wrapper.contains(nodeDeprecated)).toBe(false);
+      });
+    });
+
+    describe('body', () => {
+      it('should render when set via components prop', () => {
+        // $FlowFixMe
+        const node = React.forwardRef((props, ref) => {
+          return <span ref={ref}>My body</span>;
+        });
+        const wrapper = mount(
+          <ModalDialog components={{ Body: node }} onClose={noop} />,
+        );
+        expect(wrapper.contains(node)).toBe(true);
+      });
+
+      it('should render when set via (deprecated) body prop', () => {
+        const node = <span>My body</span>;
+        const wrapper = mount(<ModalDialog body={() => node} onClose={noop} />);
+
+        expect(wrapper.contains(node)).toBe(true);
+      });
+
+      it('should prefer the components prop over body prop ', () => {
+        // $FlowFixMe
+        const node = React.forwardRef((props, ref) => {
+          return <span ref={ref}>My body</span>;
+        });
+        const nodeDeprecated = <span>My deprecated body</span>;
+        const wrapper = mount(
+          <ModalDialog
+            body={() => nodeDeprecated}
+            components={{ Body: node }}
             onClose={noop}
           />,
         );
@@ -269,7 +307,6 @@ test('multiple modals should stack on one another', () => {
   expect(indexes).toEqual([2, 1, 0]);
 });
 
-// problem child
 test('nested modals should stack on one another', () => {
   const wrapper = mount(
     <div>
