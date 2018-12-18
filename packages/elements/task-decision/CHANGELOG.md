@@ -1,5 +1,10 @@
 # @atlaskit/task-decision
 
+## 11.1.0
+- [minor] [d9815ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9815ba):
+
+  - ED-5888 Add dark mode for task-decision
+
 ## 11.0.10
 - Updated dependencies [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
   - @atlaskit/editor-common@24.0.0

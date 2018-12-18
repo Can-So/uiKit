@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 91.1.1
+- [patch] [9f444e9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f444e9):
+
+  - ED-5882: fixed delayed scroll to top after page load
+
 ## 91.1.0
 - [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
 

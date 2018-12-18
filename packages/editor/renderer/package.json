@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/renderer",
-  "version": "32.1.0",
+  "version": "32.1.1",
   "description": "Renderer component",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -29,7 +29,7 @@
     "@atlaskit/mention": "^15.1.8",
     "@atlaskit/smart-card": "^9.0.4",
     "@atlaskit/status": "^0.2.11",
-    "@atlaskit/task-decision": "^11.0.10",
+    "@atlaskit/task-decision": "^11.1.0",
     "@atlaskit/theme": "^7.0.1",
     "prosemirror-model": "^1.6.1",
     "raf-schd": "^2.1.0",
