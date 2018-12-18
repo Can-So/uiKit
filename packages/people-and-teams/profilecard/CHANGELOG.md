@@ -1,5 +1,10 @@
 # @atlaskit/profilecard
 
+## 6.1.3
+- [patch] [3ef5292](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ef5292):
+
+  - Include type definitions in npm package
+
 ## 6.1.2
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/avatar@14.1.7

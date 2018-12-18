@@ -29,6 +29,8 @@ export function calcLegacyWidth(
   containerWidth: number = 0,
 ): string {
   switch (layout) {
+    case 'align-start':
+    case 'align-end':
     case 'wrap-right':
     case 'wrap-left':
       return width > akEditorFullPageMaxWidth / 2
@@ -90,6 +92,17 @@ function calcMargin(layout: MediaSingleLayout): string {
   }
 }
 
+function isImageAligned(layout: MediaSingleLayout): string {
+  switch (layout) {
+    case 'align-end':
+      return 'margin-right: 0';
+    case 'align-start':
+      return 'margin-left: 0';
+    default:
+      return '';
+  }
+}
+
 export interface WrapperProps {
   layout: MediaSingleLayout;
   width: number;
@@ -110,16 +123,16 @@ export const MediaSingleDimensionHelper = ({
   containerWidth = 0,
   pctWidth,
 }: WrapperProps) => css`
+  tr & {
+    max-width: 100%;
+  }
   width: ${pctWidth
     ? calcResizedWidth(layout, width, containerWidth)
     : calcLegacyWidth(layout, width, containerWidth)};
   max-width: ${calcMaxWidth(layout, width, containerWidth)};
   float: ${float(layout)};
   margin: ${calcMargin(layout)};
-
-  tr & {
-    max-width: 100%;
-  }
+  ${isImageAligned(layout)};
 `;
 
 const Wrapper: React.ComponentClass<

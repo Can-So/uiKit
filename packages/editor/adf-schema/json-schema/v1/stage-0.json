@@ -513,7 +513,9 @@
                 "full-width",
                 "center",
                 "wrap-right",
-                "wrap-left"
+                "wrap-left",
+                "align-end",
+                "align-start"
               ]
             }
           },

@@ -6,7 +6,12 @@ import {
   MarkType,
   Schema,
 } from 'prosemirror-model';
-import { EditorState, NodeSelection, TextSelection } from 'prosemirror-state';
+import {
+  EditorState,
+  NodeSelection,
+  TextSelection,
+  Transaction,
+} from 'prosemirror-state';
 import {
   canMoveDown,
   canMoveUp,
@@ -15,6 +20,7 @@ import {
   isTableCell,
 } from '../utils';
 import { Command } from '../types';
+import { EditorView } from 'prosemirror-view';
 
 export function preventDefault(): Command {
   return function(state, dispatch) {
@@ -223,6 +229,36 @@ export function createParagraphAtEnd(): Command {
     return true;
   };
 }
+
+export interface Command {
+  (
+    state: EditorState,
+    dispatch: (tr: Transaction) => void,
+    view?: EditorView,
+  ): boolean;
+}
+
+export const changeImageAlignment = (align): Command => (state, dispatch) => {
+  const { from, to } = state.selection;
+
+  const tr = state.tr;
+
+  state.doc.nodesBetween(from, to, (node, pos, parent) => {
+    if (node.type === state.schema.nodes.mediaSingle) {
+      tr.setNodeMarkup(pos, undefined, {
+        ...node.attrs,
+        layout: align === 'center' ? 'center' : `align-${align}`,
+      });
+    }
+  });
+
+  if (tr.docChanged && dispatch) {
+    dispatch(tr.scrollIntoView());
+    return true;
+  }
+
+  return false;
+};
 
 /**
  * Toggles block mark based on the return type of `getAttrs`.

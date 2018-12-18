@@ -1,10 +1,4 @@
 import { ITokenizer, Search, UnorderedSearchIndex } from 'js-search';
-
-import * as XRegExp from 'xregexp/src/xregexp'; // Not using 'xregexp' directly to only include what we use
-import * as XRegExpUnicodeBase from 'xregexp/src/addons/unicode-base';
-import * as XRegExpUnicodeScripts from 'xregexp/src/addons/unicode-scripts';
-import * as XRegExpUnicodeCategories from 'xregexp/src/addons/unicode-categories';
-
 import { defaultCategories, frequentCategory } from '../constants';
 import {
   EmojiDescription,
@@ -23,17 +17,7 @@ import {
 } from './internal/Comparators';
 import { UsageFrequencyTracker } from './internal/UsageFrequencyTracker';
 import { CategoryId } from '../components/picker/categories';
-
-XRegExpUnicodeBase(XRegExp);
-XRegExpUnicodeScripts(XRegExp);
-XRegExpUnicodeCategories(XRegExp);
-
-// \p{Han} => each chinese character is a separate token
-// \p{L}+[\p{Mn}|']*\p{L} => consecutive letters, including non spacing mark and apostrophe are a single token
-const tokenizerRegex = XRegExp.cache(
-  "\\p{Han}|[\\p{L}|\\p{N}]+[\\p{Mn}|']*\\p{L}*",
-  'gi',
-);
+import { tokenizerRegex } from './EmojiRepositoryRegex';
 
 type Token = {
   token: string;

@@ -177,12 +177,185 @@ const frequentTest: EmojiDescription = {
   searchable: true,
 };
 
+export const siteEmojiChinese1 = {
+  id: 'chinese1',
+  name: '我想你',
+  fallback: ':chinese1:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':我想你:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
+export const siteEmojiChinese2 = {
+  id: 'chinese2',
+  name: '象形字',
+  fallback: ':chinese2:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':象形字:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
+export const siteEmojiChinese3 = {
+  id: 'chinese3',
+  name: '我字',
+  fallback: ':chinese3:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':我字:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
+export const siteEmojiGreek1 = {
+  id: 'greek1',
+  name: 'ΦΏϖϘώ',
+  fallback: ':greek1:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':ΦΏϖϘώ:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
+export const siteEmojiGreek2 = {
+  id: 'greek2',
+  name: 'ϪϮϼϠ',
+  fallback: ':greek2:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':ϪϮϼϠ:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
+export const siteEmojiGreek3 = {
+  id: 'greek3',
+  name: 'ϪϮϘώ',
+  fallback: ':greek3:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':ϪϮϘώ:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
 describe('EmojiRepository', () => {
   let emojiRepository;
 
   beforeEach(() => {
     // emojiRepository has state that can influence search results so make it fresh for each test.
     emojiRepository = newEmojiRepository();
+  });
+
+  describe('Search with non standard characters', () => {
+    it('one match expected when searching emoji with chinese characters', () => {
+      const repository = new EmojiRepository([
+        cowboy,
+        frequentTest,
+        siteEmojiChinese1,
+        siteEmojiChinese2,
+        siteEmojiChinese3,
+      ]);
+      const emojis = repository.search(':想').emojis;
+      expect(emojis.length).to.equal(1);
+      expect(emojis[0].shortName).to.equal(':我想你:');
+    });
+
+    it('two matches expected when searching emoji with chinese characters', () => {
+      const repository = new EmojiRepository([
+        cowboy,
+        frequentTest,
+        siteEmojiChinese1,
+        siteEmojiChinese2,
+        siteEmojiChinese3,
+      ]);
+      const emojis = repository.search(':字').emojis;
+      expect(emojis.length).to.equal(2);
+
+      expect(emojis[0].shortName).to.equal(':我字:');
+      expect(emojis[1].shortName).to.equal(':象形字:');
+    });
+
+    it('one match expected when searching emoji with greek characters', () => {
+      const repository = new EmojiRepository([
+        cowboy,
+        frequentTest,
+        siteEmojiChinese1,
+        siteEmojiGreek1,
+        siteEmojiGreek2,
+        siteEmojiGreek3,
+      ]);
+      const emojis = repository.search(':ϪϮϼ').emojis;
+      expect(emojis.length).to.equal(1);
+      expect(emojis[0].id).to.equal('greek2');
+    });
+
+    it('two matches expected when searching emoji with greek characters', () => {
+      const repository = new EmojiRepository([
+        cowboy,
+        frequentTest,
+        siteEmojiChinese1,
+        siteEmojiGreek1,
+        siteEmojiGreek2,
+        siteEmojiGreek3,
+      ]);
+      const emojis = repository.search(':ϪϮ').emojis;
+      expect(emojis.length).to.equal(2);
+      expect(emojis[0].id).to.equal('greek3');
+      expect(emojis[1].id).to.equal('greek2');
+    });
   });
 
   describe('#search', () => {

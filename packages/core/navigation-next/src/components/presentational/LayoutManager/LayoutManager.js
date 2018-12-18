@@ -29,6 +29,7 @@ import {
   CONTENT_NAV_WIDTH_FLYOUT,
   GLOBAL_NAV_WIDTH,
   FLYOUT_DELAY,
+  ALTERNATE_FLYOUT_DELAY,
 } from '../../../common/constants';
 import RenderBlocker from '../../common/RenderBlocker';
 import { LayoutEventListener } from './LayoutEvent';
@@ -71,6 +72,7 @@ export default class LayoutManager extends Component<
     collapseToggleTooltipContent: defaultTooltipContent,
     // eslint-disable-next-line camelcase
     experimental_flyoutOnHover: false,
+    experimental_alternateFlyoutBehaviour: false,
   };
 
   static getDerivedStateFromProps(props: LayoutManagerProps, state: State) {
@@ -118,11 +120,27 @@ export default class LayoutManager extends Component<
   };
   mouseOverFlyoutArea = ({ currentTarget, target }: *) => {
     if (!currentTarget.contains(target)) return;
+
+    const {
+      // eslint-disable-next-line camelcase
+      experimental_alternateFlyoutBehaviour: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
+    } = this.props;
+    const delay = EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR
+      ? ALTERNATE_FLYOUT_DELAY
+      : FLYOUT_DELAY;
+
     clearTimeout(this.flyoutMouseOverTimeout);
 
     this.flyoutMouseOverTimeout = setTimeout(() => {
       this.setState({ flyoutIsOpen: true });
-    }, FLYOUT_DELAY);
+    }, delay);
+  };
+  closeFlyout = (e: any) => {
+    e.stopPropagation();
+    clearTimeout(this.flyoutMouseOverTimeout);
+    if (this.state.flyoutIsOpen) {
+      this.setState({ flyoutIsOpen: false });
+    }
   };
 
   mouseEnter = () => {
@@ -145,23 +163,31 @@ export default class LayoutManager extends Component<
     const {
       containerNavigation,
       globalNavigation: GlobalNavigation,
+      // eslint-disable-next-line camelcase
+      experimental_alternateFlyoutBehaviour: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
     } = this.props;
     return (
-      <ThemeProvider
-        theme={theme => ({
-          mode: light, // If no theme already exists default to light mode
-          ...theme,
-        })}
+      <div
+        onMouseOver={
+          EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR ? this.closeFlyout : null
+        }
       >
-        <Fragment>
-          <Shadow
-            isBold={!!containerNavigation}
-            isOverDarkBg
-            style={{ marginLeft: GLOBAL_NAV_WIDTH }}
-          />
-          <GlobalNavigation />
-        </Fragment>
-      </ThemeProvider>
+        <ThemeProvider
+          theme={theme => ({
+            mode: light, // If no theme already exists default to light mode
+            ...theme,
+          })}
+        >
+          <Fragment>
+            <Shadow
+              isBold={!!containerNavigation}
+              isOverDarkBg
+              style={{ marginLeft: GLOBAL_NAV_WIDTH }}
+            />
+            <GlobalNavigation />
+          </Fragment>
+        </ThemeProvider>
+      </div>
     );
   };
 
@@ -227,6 +253,8 @@ export default class LayoutManager extends Component<
       navigationUIController,
       // eslint-disable-next-line camelcase
       experimental_flyoutOnHover: EXPERIMENTAL_FLYOUT_ON_HOVER,
+      // eslint-disable-next-line camelcase
+      experimental_alternateFlyoutBehaviour: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
       collapseToggleTooltipContent,
     } = this.props;
     const { flyoutIsOpen, mouseIsOverNavigation, itemIsDragging } = this.state;
@@ -247,6 +275,7 @@ export default class LayoutManager extends Component<
             attributes: {
               isExpanded: !isCollapsed,
               flyoutOnHoverEnabled: EXPERIMENTAL_FLYOUT_ON_HOVER,
+              alternateFlyoutBehaviourEnabled: EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR,
             },
             componentName: 'navigation',
             packageName,
@@ -267,10 +296,17 @@ export default class LayoutManager extends Component<
                 isCollapsed && EXPERIMENTAL_FLYOUT_ON_HOVER && flyoutIsOpen
                   ? this.mouseOutFlyoutArea
                   : null;
+              const onMouseOver =
+                isCollapsed && EXPERIMENTAL_FLYOUT_ON_HOVER && !flyoutIsOpen
+                  ? this.mouseOverFlyoutArea
+                  : null;
               return (
                 <NavigationContainer
                   innerRef={this.getContainerRef}
                   onMouseEnter={this.mouseEnter}
+                  onMouseOver={
+                    EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR ? onMouseOver : null
+                  }
                   onMouseOut={onMouseOut}
                   onMouseLeave={this.mouseLeave}
                 >
@@ -285,6 +321,11 @@ export default class LayoutManager extends Component<
                     flyoutIsOpen={flyoutIsOpen}
                     isGrabAreaDisabled={itemIsDragging}
                     mouseIsOverNavigation={mouseIsOverNavigation}
+                    onMouseOverButtonBuffer={
+                      EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR
+                        ? this.closeFlyout
+                        : null
+                    }
                     mutationRefs={[
                       { ref: this.pageRef, property: 'padding-left' },
                       { ref: this.productNavRef, property: 'width' },
@@ -292,16 +333,14 @@ export default class LayoutManager extends Component<
                     navigation={navigationUIController}
                   >
                     {({ isDragging, width }) => {
-                      const onMouseOver =
-                        isCollapsed &&
-                        EXPERIMENTAL_FLYOUT_ON_HOVER &&
-                        !flyoutIsOpen
-                          ? this.mouseOverFlyoutArea
-                          : null;
                       return (
                         <ContainerNavigationMask
                           disableInteraction={itemIsDragging}
-                          onMouseOver={onMouseOver}
+                          onMouseOver={
+                            EXPERIMENTAL_ALTERNATE_FLYOUT_BEHAVIOUR
+                              ? null
+                              : onMouseOver
+                          }
                         >
                           <RenderBlocker
                             blockOnChange
