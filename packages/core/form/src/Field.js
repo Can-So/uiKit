@@ -36,7 +36,7 @@ type Props = {
   id?: string,
   /* Whether the field is required for submission */
   isRequired?: boolean,
-  /* Whether the field is disabled. Internal prop - gets set through context. */
+  /* Whether the field is disabled. Defaults to value from context via Form otherwise uses value of this prop. */
   isDisabled: boolean,
   /* Label displayed above the field */
   label?: Node,
@@ -44,6 +44,15 @@ type Props = {
   name: string,
   /* Given what onChange was called with and the current field value return the next field value */
   transform: (event: any, current: any) => any,
+  /* validates the current value of field */
+  validate?: (
+    value: any,
+    formState: Object,
+    fieldState: Object,
+  ) => string | void | Promise<string | void>,
+};
+
+type InnerProps = Props & {
   /* Register the Field with the Form. Internal prop - gets set through context. */
   registerField: (
     string,
@@ -52,12 +61,6 @@ type Props = {
     FieldSubscription,
     Object,
   ) => any,
-  /* validates the current value of field */
-  validate?: (
-    value: any,
-    formState: Object,
-    fieldState: Object,
-  ) => string | void | Promise<string | void>,
 };
 
 type State = {
@@ -78,8 +81,9 @@ const shallowEqual = (a, b) =>
   (Array.isArray(b) && arrayShallowEqual(a, b)) ||
   (typeof b === 'object' && objectShallowEqual(a, b));
 
-class FieldInner extends React.Component<Props, State> {
+class FieldInner extends React.Component<InnerProps, State> {
   static defaultProps = {
+    registerField: () => () => {},
     transform: translateEvent,
   };
 
@@ -224,11 +228,11 @@ const Field = (props: Props) => (
   <FormContext.Consumer>
     {registerField => (
       <IsDisabledContext.Consumer>
-        {isDisabled => (
+        {formIsDisabled => (
           <FieldInner
             {...props}
             registerField={registerField}
-            isDisabled={isDisabled}
+            isDisabled={formIsDisabled || props.isDisabled}
           />
         )}
       </IsDisabledContext.Consumer>
@@ -239,7 +243,6 @@ const Field = (props: Props) => (
 Field.defaultProps = {
   defaultValue: undefined,
   isDisabled: false,
-  registerField: () => () => {},
   transform: translateEvent,
 };
 
