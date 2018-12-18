@@ -9,6 +9,7 @@ import {
   Database,
 } from 'kakapo';
 import * as uuid from 'uuid';
+import { TouchFileDescriptor } from '@atlaskit/media-store';
 
 import { mapDataUriToBlob } from '../../utils';
 import { mockDataUri } from '../database/mockData';
@@ -19,6 +20,7 @@ import {
 } from '../database';
 import { defaultBaseUrl } from '../..';
 import { Chunk } from '../database/chunk';
+import { createUpload } from '../database/upload';
 
 class RouterWithLogging<M extends DatabaseSchema> extends Router<M> {
   constructor(options?: RouterOptions) {
@@ -327,6 +329,33 @@ export function createApiRouter(): Router<DatabaseSchema> {
 
     return {
       data: record.data,
+    };
+  });
+
+  router.post('/upload/createWithFiles', ({ body }, database) => {
+    const { descriptors } = JSON.parse(body);
+    const descriptor: TouchFileDescriptor = descriptors[0];
+    database.push(
+      'collectionItem',
+      createCollectionItem({
+        id: descriptor.fileId,
+        collectionName: descriptor.collection,
+        occurrenceKey: descriptor.occurrenceKey,
+      }),
+    );
+
+    const uploadRecord = createUpload();
+    database.push('upload', uploadRecord);
+
+    return {
+      data: {
+        created: [
+          {
+            fileId: descriptor.fileId,
+            uploadId: uploadRecord.id,
+          },
+        ],
+      },
     };
   });
 
