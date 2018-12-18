@@ -1,4 +1,4 @@
-import { ExtensionDefinition } from '@atlaskit/editor-common';
+import { ExtensionDefinition } from '@atlaskit/adf-schema';
 
 export const extension = (
   attrs: ExtensionDefinition['attrs'],

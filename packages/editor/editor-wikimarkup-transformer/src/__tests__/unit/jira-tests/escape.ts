@@ -1,6 +1,6 @@
 import { a as link, doc, p, hardBreak } from '@atlaskit/editor-test-helpers';
 import { checkParseEncodeRoundTrips } from '../_test-helpers';
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 
 // Nodes
 

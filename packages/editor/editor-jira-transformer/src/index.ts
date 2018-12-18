@@ -13,8 +13,8 @@ import {
   isSchemaWithBlockQuotes,
   isSchemaWithMedia,
   isSchemaWithTables,
-  Transformer,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
+import { Transformer } from '@atlaskit/editor-common';
 
 export type CustomEncoder = (userId: string) => string;
 

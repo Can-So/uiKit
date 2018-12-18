@@ -13,8 +13,8 @@ import {
   MentionDescription,
   ELEMENTS_CHANNEL,
 } from '@atlaskit/mention';
+import { mention } from '@atlaskit/adf-schema';
 import {
-  mention,
   ProviderFactory,
   ContextIdentifierProvider,
 } from '@atlaskit/editor-common';

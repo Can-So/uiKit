@@ -9,7 +9,7 @@ This transformer allows encoding ProseMirror Node to markdown or converting Bitb
   Use the encoder with editor-bitbucket-transformer as follows:
 
   ${code`import { BitbucketTransformer } from '@atlaskit/editor-bitbucket-transformer';
-  import { bitbucketSchema as schema } from '@atlaskit/editor-common';
+  import { bitbucketSchema as schema } from '@atlaskit/adf-schema';
 
   const serializer = new BitbucketTransformer(schema);
   // To encode editor content as markdown

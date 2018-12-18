@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { alignment } from '@atlaskit/editor-common';
+import { alignment } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import WithPluginState from '../../ui/WithPluginState';
 import { pluginKey, createPlugin, AlignmentState } from './pm-plugins/main';

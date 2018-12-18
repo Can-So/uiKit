@@ -1,4 +1,4 @@
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import WikiMarkupTransformer from '../../../index';
 import { EM_DASH } from '../../../char';
 

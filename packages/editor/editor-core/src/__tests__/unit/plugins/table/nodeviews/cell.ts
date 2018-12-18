@@ -8,7 +8,7 @@ import {
   td,
   tdEmpty,
 } from '@atlaskit/editor-test-helpers';
-import { tableBackgroundColorNames } from '@atlaskit/editor-common';
+import { tableBackgroundColorNames } from '@atlaskit/adf-schema';
 import { TablePluginState } from '../../../../../plugins/table/types';
 import { pluginKey } from '../../../../../plugins/table/pm-plugins/main';
 

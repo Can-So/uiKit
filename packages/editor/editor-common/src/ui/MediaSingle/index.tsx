@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MediaSingleLayout } from '../../schema';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import Wrapper from './styled';
 import * as classnames from 'classnames';
 import { calcPxFromPct, layoutSupportsWidth } from './grid';

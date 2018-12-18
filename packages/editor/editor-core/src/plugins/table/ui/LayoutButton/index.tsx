@@ -2,7 +2,8 @@ import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
 import { findTable } from 'prosemirror-utils';
-import { Popup, TableLayout, tableMarginTop } from '@atlaskit/editor-common';
+import { TableLayout } from '@atlaskit/adf-schema';
+import { Popup, tableMarginTop } from '@atlaskit/editor-common';
 import ExpandIcon from '@atlaskit/icon/glyph/editor/expand';
 import CollapseIcon from '@atlaskit/icon/glyph/editor/collapse';
 

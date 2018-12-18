@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { link, WithProviders } from '@atlaskit/editor-common';
+import { link } from '@atlaskit/adf-schema';
+import { WithProviders } from '@atlaskit/editor-common';
 import { EditorPlugin } from '../../types';
 import WithPluginState from '../../ui/WithPluginState';
 import { createInputRulePlugin } from './pm-plugins/input-rule';

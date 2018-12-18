@@ -2,7 +2,7 @@ import {
   CodeBlockDefinition,
   TextDefinition,
   NoMark,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 export type CodeBlockContent = TextDefinition & NoMark;
 

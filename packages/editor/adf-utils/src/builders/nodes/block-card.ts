@@ -1,4 +1,4 @@
-import { BlockCardDefinition, CardAttributes } from '@atlaskit/editor-common';
+import { BlockCardDefinition, CardAttributes } from '@atlaskit/adf-schema';
 
 export const blockCard = (attrs: CardAttributes): BlockCardDefinition => ({
   type: 'blockCard',
