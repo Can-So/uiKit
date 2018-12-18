@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.8.1
+- [patch] [0a28c41](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a28c41):
+
+  - bq. doesn't need a following space
+
 ## 2.8.0
 - [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
 
