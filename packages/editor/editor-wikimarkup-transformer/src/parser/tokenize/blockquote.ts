@@ -3,7 +3,7 @@ import { rawContentProcessor } from './quote-macro';
 import { Token, TokenErrCallback } from './';
 
 // bq. sadfsdf
-const BLOCKQUOTE_REGEXP = /^bq\.\s(.*)/;
+const BLOCKQUOTE_REGEXP = /^bq\.(.*)/;
 
 export function blockquote(
   input: string,
