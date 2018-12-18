@@ -9360,9 +9360,10 @@ junk@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/junk/-/junk-2.1.0.tgz#f431b4b7f072dc500a5f10ce7f4ec71930e70134"
 
-kakapo@^3.3.3:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/kakapo/-/kakapo-3.3.3.tgz#9adbb1e7b8aaafd021207dadb340b1f20367bea1"
+kakapo@^3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/kakapo/-/kakapo-3.3.4.tgz#15154ac3332a0479da1380e61078b4fd1a34fab3"
+  integrity sha512-7fdKRQMnLkBeailCg0ICIm1VIE/j7ocmP2HwWW/BCq0RH9/OS//Qobt5kQqh1DrwaOqAsyvjLS2J4382mFuscA==
   dependencies:
     "@types/lodash" "^4.14.106"
     faker "^3.1.0"
@@ -13321,9 +13322,10 @@ react-value@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/react-value/-/react-value-0.2.0.tgz#04d6e3351add34e9365d4597f207e2a13ba85564"
 
-react-video-renderer@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/react-video-renderer/-/react-video-renderer-2.2.1.tgz#97aed21fd105fcf15abd4a6874f94543c6ca764f"
+react-video-renderer@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/react-video-renderer/-/react-video-renderer-2.4.2.tgz#d412f8677ad173822105c370095715c70eee55b1"
+  integrity sha512-ue+epb8Q2goOqa3LPchs+50r3xR3F23l2RZkS01wOmlNu+J3kFVbC2jdwzQK+/Pq67Tq31bLrYzdQJqksJrpEg==
 
 react-virtualized@^9.8.0:
   version "9.12.0"

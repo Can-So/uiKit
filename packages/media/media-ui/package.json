@@ -44,6 +44,7 @@
     "babel-runtime": "^6.26.0",
     "blueimp-load-image": "^2.19.0",
     "bytes": "^2.4.0",
+    "exenv": "^1.2.2",
     "lodash.debounce": "^4.0.8",
     "png-chunks-extract": "^1.0.0",
     "react-render-image": "^1.1.2",
