@@ -66,6 +66,7 @@ export default class LayoutExample extends PureComponent<void, State> {
               action="//httpbin.org/get"
               method="GET"
               target="submitFrame"
+              name="create-repo"
             >
               <FormHeader title="Create a new repository" />
 
