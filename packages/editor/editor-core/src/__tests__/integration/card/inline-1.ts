@@ -13,7 +13,7 @@ import {
   BrowserTestCase(
     `inline-1.ts: pasting an link converts to inline card`,
     {
-      skip: ['chrome', 'ie', 'safari'],
+      skip: ['ie', 'safari'],
     },
     async client => {
       let browser = new Page(client);

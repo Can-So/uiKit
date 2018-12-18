@@ -130,7 +130,7 @@ export const moveLeft = (
         return true;
       }
 
-      // exiting code mark (or at the beginning of the line): don't move the cursor, just remove the mark.
+      // exiting code mark (or at the beginning of the line): don't move the cursor, just remove the mark
       const isFirstChild = $cursor.index($cursor.depth - 1) === 0;
       if (
         insideCode &&
