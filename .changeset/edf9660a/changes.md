@@ -1,0 +1,1 @@
+- Add touchFiles function to store; Add mandatory upfrontIds object to uploadFile function - now it's responsibility of consumer to create file and give promise of upload id that will be used as part of upload
