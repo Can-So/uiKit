@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 91.2.0
+- [minor] [b9f8a8f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9f8a8f):
+
+  - Adding alignment options to media
+
 ## 91.1.4
 - [patch] [3780be2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3780be2):
 

@@ -1,1 +1,0 @@
-- Adding alignment options to media
