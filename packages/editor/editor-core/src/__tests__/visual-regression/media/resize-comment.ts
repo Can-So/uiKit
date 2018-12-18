@@ -8,7 +8,6 @@ import {
 } from '../_utils';
 import { TestPageConfig, resizeWithSnapshots } from './_utils';
 import { viewportSizes as dynamicTextViewportSizes } from '../dynamic-text-sizing';
-import { mediaSingleLayouts } from './layouts';
 
 const editorConfigs: Array<TestPageConfig> = [
   // all sizes where dynamic text sizing is enabled
@@ -71,58 +70,6 @@ describe('Snapshot Test: Media', () => {
               await resizeWithSnapshots(
                 page,
                 -((editorWidth / 2) * ((12 - cols) / 12)),
-              );
-            });
-          });
-        });
-
-        describe('wrap-left layout', () => {
-          [1, 2, 6, 10, 11].forEach(cols => {
-            it(`can make an wrap-left image ${cols} columns wide`, async () => {
-              await insertMedia(page);
-              await page.click('.media-single');
-
-              // change layout
-              const layoutButton = `[aria-label="${
-                mediaSingleLayouts['wrap-left']
-              }"]`;
-              await page.waitForSelector(layoutButton);
-              await page.click(layoutButton);
-
-              await page.waitForSelector(`.media-single.wrap-left`);
-
-              // resize from right handle
-              await page.waitForSelector('.mediaSingle-resize-handle-right');
-
-              await resizeWithSnapshots(
-                page,
-                -((editorWidth / 12) * (12 - cols)),
-              );
-            });
-          });
-        });
-
-        describe('wrap-right layout', () => {
-          [1, 2, 6, 10, 11].forEach(cols => {
-            it(`can make an wrap-right image ${cols} columns wide`, async () => {
-              await insertMedia(page);
-              await page.click('.media-single');
-
-              // change layout
-              const layoutButton = `[aria-label="${
-                mediaSingleLayouts['wrap-right']
-              }"]`;
-              await page.waitForSelector(layoutButton);
-              await page.click(layoutButton);
-
-              await page.waitForSelector(`.media-single.wrap-right`);
-
-              // resize from left handle
-              await page.waitForSelector('.mediaSingle-resize-handle-left');
-              await resizeWithSnapshots(
-                page,
-                (editorWidth / 12) * (12 - cols),
-                'left',
               );
             });
           });
