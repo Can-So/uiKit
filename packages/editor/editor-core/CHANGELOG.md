@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 91.1.2
+- [patch] [8be04eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8be04eb):
+
+  - Remove option to change appearance mode on Smart Cards.
+
 ## 91.1.1
 - [patch] [9f444e9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f444e9):
 
