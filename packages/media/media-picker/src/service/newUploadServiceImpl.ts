@@ -43,12 +43,6 @@ export interface CancellableFileUpload {
   cancel?: () => void;
 }
 
-export interface UpfrontIds {
-  upfrontId: Promise<string>;
-  userUpfrontId?: Promise<string>;
-  userOccurrenceKey?: Promise<string>;
-}
-
 export class NewUploadServiceImpl implements UploadService {
   private readonly userMediaStore?: MediaStore;
   private readonly tenantMediaStore: MediaStore;
@@ -416,9 +410,9 @@ export class NewUploadServiceImpl implements UploadService {
       return Promise.resolve();
     }
     const { collection: sourceCollection } = tenantUploadParams;
-    return this.tenantContext.config
-      .authProvider({ collectionName: sourceCollection })
-      .then(auth => {
+    const { authProvider: tenantAuthProvider } = this.tenantContext.config;
+    return tenantAuthProvider({ collectionName: sourceCollection }).then(
+      auth => {
         const body: MediaStoreCopyFileWithTokenBody = {
           sourceFile: {
             id: sourceFileId,
@@ -433,6 +427,7 @@ export class NewUploadServiceImpl implements UploadService {
         };
 
         return userMediaStore.copyFileWithToken(body, params);
-      });
+      },
+    );
   }
 }
