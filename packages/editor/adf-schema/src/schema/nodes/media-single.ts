@@ -7,7 +7,9 @@ export type Layout =
   | 'center'
   | 'wrap-left'
   | 'wide'
-  | 'full-width';
+  | 'full-width'
+  | 'align-end'
+  | 'align-start';
 
 /**
  * @name mediaSingle_node

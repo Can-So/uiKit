@@ -1,6 +1,6 @@
 import { Plugin, PluginKey, Transaction, EditorState } from 'prosemirror-state';
 import { Dispatch } from '../../../event-dispatcher';
-import { changeAlignment } from '../commands';
+import { isAlignable } from '../commands';
 import { getActiveAlignment } from '../utils';
 
 export type AlignmentState = 'start' | 'end' | 'center';
@@ -41,7 +41,7 @@ export function createPlugin(dispatch: Dispatch, pluginConfig): Plugin {
       },
       apply(tr, state: AlignmentPluginState, prevState, nextState) {
         const nextPluginState = getActiveAlignment(nextState);
-        const isEnabled = changeAlignment(nextPluginState)(
+        const isEnabled = isAlignable(nextPluginState)(
           nextState,
           /**
            * NOTE: Stan is already making dispatch optional in another PR.

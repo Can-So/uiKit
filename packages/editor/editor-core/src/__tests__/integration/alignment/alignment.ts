@@ -9,7 +9,7 @@ import {
 import { messages } from '../../../plugins/block-type/types';
 
 const alignButton = 'button[aria-label="Text alignment"]';
-const alignCenterButton = 'span[aria-label="Align center"]';
+const alignRightButton = 'span[aria-label="Align right"]';
 const headingButton = 'button[aria-label="Font style"]';
 const headingh1 = 'div[role="group"] h1';
 
@@ -26,8 +26,8 @@ BrowserTestCase(
     await page.type(editable, 'hello');
     await page.waitFor(alignButton);
     await page.click(alignButton);
-    await page.waitForSelector(alignCenterButton);
-    await page.click(alignCenterButton);
+    await page.waitForSelector(alignRightButton);
+    await page.click(alignRightButton);
     expect(await page.$eval(editable, getDocFromElement)).toMatchDocSnapshot();
   },
 );
@@ -49,8 +49,8 @@ BrowserTestCase(
     await page.click(headingh1);
     await page.waitFor(alignButton);
     await page.click(alignButton);
-    await page.waitForSelector(alignCenterButton);
-    await page.click(alignCenterButton);
+    await page.waitForSelector(alignRightButton);
+    await page.click(alignRightButton);
     expect(await page.$eval(editable, getDocFromElement)).toMatchDocSnapshot();
   },
 );
