@@ -86,9 +86,9 @@ const MyForm = () => (
   
   We have tried to make easy to wrap other Atlaskit components in a Field component.
   That said, any component with a value and an on change handler can be a field. 
-  If you have a colourful example of a field, try boil it down to something with 
-  value and onChange props. Wire that component under a Field and you have 
-  got a custom field working in your form.
+  If you have a colourful example of a field, try boil it down to a component with a
+  value and onChange prop. That component can be rendered inside a Field which
+  will add an entry to the form state.
 
   ## More examples & reference
 ${(

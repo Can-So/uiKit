@@ -50,7 +50,7 @@ const UsernameField = () => (
 Checkbox fields are different enough to warrent this variation of Field.
 By default the value of a CheckboxField will be true or false. When the 
 component is rendered with a \`value\` prop the form value will be an array. 
-The array with contain the \`value\` depending on whether the field is checked.
+The array will contain \`value\` depending on whether the field is checked.
 
 ${code`
 import { CheckboxField } from '@atlaskit/form';
