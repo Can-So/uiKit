@@ -293,6 +293,20 @@ describe('LayoutManager', () => {
           expect(wrapper.state('flyoutIsOpen')).toBe(false);
         });
 
+        it('should close when mousing over of GlobalNavigation', () => {
+          const Global = () => <div>Global</div>;
+          defaultProps.globalNavigation = Global;
+          const wrapper = mount(<LayoutManager {...defaultProps} />);
+
+          wrapper.find(ContainerNavigationMask).simulate('mouseover');
+          wrapper
+            .find('Global')
+            .closest('div')
+            .simulate('mouseover');
+
+          expect(wrapper.state('flyoutIsOpen')).toBe(false);
+        });
+
         it('should display ContentNavigation when flyout is open', () => {
           const wrapper = mount(<LayoutManager {...defaultProps} />);
 
