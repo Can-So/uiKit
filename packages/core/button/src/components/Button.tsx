@@ -5,6 +5,7 @@ import {
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
+
 import withDeprecationWarnings from './withDeprecationWarnings';
 import getButtonProps from './getButtonProps';
 import CustomComponentProxy from './CustomComponentProxy';

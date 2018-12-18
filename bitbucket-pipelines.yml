@@ -78,9 +78,9 @@ pipelines:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
               # Run the non-editor tests, --passWithNoTests has been added in case of no tests found to avoid failure in CI.
-              - TEST_ONLY_PATTERN='!packages/editor' yarn run test:changed --passWithNoTests
-              # Run the editor tests (runInBand is required or it fails in CI).
-              - TEST_ONLY_PATTERN='packages/editor' yarn run test:changed --runInBand --passWithNoTests
+               - TEST_ONLY_PATTERN='!packages/editor' yarn run test:dependents:direct --passWithNoTests
+              # Run the editor tests (runInBand is required or it fails in CI)
+              - TEST_ONLY_PATTERN='packages/editor' yarn run test:dependents:direct --runInBand --passWithNoTests
               # This script acts like a unit test to check changes to @atlaskit/adf-schema.
               - node build/ci-scripts/run.if.package.changed.js @atlaskit/adf-schema -- yarn build:adf-schema:checkuptodate
             caches:
