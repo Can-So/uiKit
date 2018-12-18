@@ -1,4 +1,4 @@
-import { DecisionItemDefinition, Inline } from '@atlaskit/editor-common';
+import { DecisionItemDefinition, Inline } from '@atlaskit/adf-schema';
 
 export const decisionItem = (attrs: DecisionItemDefinition['attrs']) => (
   ...content: Array<Inline>

@@ -10,6 +10,7 @@ import { ImageComponent } from './styled';
 export interface MediaImageProps {
   dataURI: string;
   crop?: boolean;
+  stretch?: boolean;
   previewOrientation?: number;
 }
 
@@ -24,6 +25,7 @@ export interface MediaImageState {
 export class MediaImage extends Component<MediaImageProps, MediaImageState> {
   static defaultProps = {
     crop: true,
+    stretch: false,
     width: '100%',
     height: '100%',
     className: '',
@@ -71,7 +73,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
   };
 
   render() {
-    const { crop, dataURI, previewOrientation } = this.props;
+    const { crop, stretch, dataURI, previewOrientation } = this.props;
     const {
       parentWidth,
       parentHeight,
@@ -80,8 +82,6 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
       isImageLoaded,
     } = this.state;
 
-    const isImageSmallerThanContainer =
-      imgWidth < parentWidth && imgHeight < parentHeight;
     const parentRatio = parentWidth / parentHeight;
     const imgRatio = imgWidth / imgHeight;
 
@@ -131,10 +131,8 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
       When isStretchingAllowed is false image is as big as it is, but as small as container
       (according to strategy - cover or fit).
       isStretchingAllowed is true if image is bigger then container.
-      This is mostly requirement for resizing feature of editor's. When image is initially bigger
-      than it's container user must be able to resize it even larger then image itself.
      */
-    const isStretchingAllowed = !isImageSmallerThanContainer;
+    const isStretchingAllowed = stretch;
 
     /*
       We do not want to show image until we finish deciding on sizing strategy.

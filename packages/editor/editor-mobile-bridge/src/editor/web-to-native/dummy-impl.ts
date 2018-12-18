@@ -44,4 +44,6 @@ export default class DummyBridge implements NativeBridge {
   ) {
     sendToBridge(bridge, event, ...args);
   }
+
+  updateTextColor() {}
 }

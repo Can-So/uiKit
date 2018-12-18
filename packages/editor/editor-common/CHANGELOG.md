@@ -1,5 +1,18 @@
 # @atlaskit/editor-common
 
+## 24.0.0
+- [major] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+
+  - Move schema to its own package
+
+## 23.0.0
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/emoji@48.0.0
+  - @atlaskit/media-card@45.0.0
+  - @atlaskit/editor-json-transformer@4.0.25
+  - @atlaskit/editor-test-helpers@6.3.2
+  - @atlaskit/media-core@24.6.0
+
 ## 22.4.2
 - [patch] [34df084](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/34df084):
 

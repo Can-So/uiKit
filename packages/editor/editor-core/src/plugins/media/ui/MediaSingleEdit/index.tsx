@@ -8,7 +8,7 @@ import CenterIcon from '@atlaskit/icon/glyph/editor/media-center';
 import WideIcon from '@atlaskit/icon/glyph/editor/media-wide';
 import FullWidthIcon from '@atlaskit/icon/glyph/editor/media-full-width';
 import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import { MediaSingleLayout } from '@atlaskit/editor-common';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import { colors } from '@atlaskit/theme';
 
 import commonMessages from '../../../../messages';

@@ -11,6 +11,21 @@ import DroplistWithAnalytics from '../../../src';
 import { DroplistWithoutAnalytics as Droplist } from '../../components/Droplist';
 import { Trigger, Content } from '../../styled/Droplist';
 
+jest.mock('popper.js', () => {
+  const PopperJS = jest.requireActual('popper.js');
+
+  return class Popper {
+    static placements = PopperJS.placements;
+
+    constructor() {
+      return {
+        destroy: () => {},
+        scheduleUpdate: () => {},
+      };
+    }
+  };
+});
+
 const itemsList = (
   <ItemGroup heading="test1">
     <Item>Some text</Item>

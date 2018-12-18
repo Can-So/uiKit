@@ -1,4 +1,4 @@
-import { isSafeUrl } from '@atlaskit/editor-common';
+import { isSafeUrl } from '@atlaskit/adf-schema';
 import { Schema } from 'prosemirror-model';
 import { Token } from './';
 

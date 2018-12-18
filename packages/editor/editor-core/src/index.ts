@@ -36,6 +36,8 @@ export {
   TextFormattingState,
   pluginKey as textFormattingStateKey,
 } from './plugins/text-formatting/pm-plugins/main';
+export { textColorPluginKey, TextColorPluginState } from './plugins/text-color';
+export { changeColor } from './plugins/text-color/commands/change-color';
 export { blockPluginStateKey, BlockTypeState } from './plugins';
 export {
   ListsPluginState as ListsState,

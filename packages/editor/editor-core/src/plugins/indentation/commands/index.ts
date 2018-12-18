@@ -1,5 +1,5 @@
 import { Node as PmNode, Schema } from 'prosemirror-model';
-import { IndentationMarkAttributes } from '@atlaskit/editor-common';
+import { IndentationMarkAttributes } from '@atlaskit/adf-schema';
 import { toggleBlockMark } from '../../../commands';
 import { Command } from '../../../types/command';
 

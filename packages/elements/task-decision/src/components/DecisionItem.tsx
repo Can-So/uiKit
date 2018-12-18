@@ -2,7 +2,6 @@ import * as React from 'react';
 import { PureComponent } from 'react';
 
 import DecisionIcon from '@atlaskit/icon/glyph/editor/decision';
-import { colors } from '@atlaskit/theme';
 
 import { EditorIconWrapper } from '../styled/DecisionItem';
 import Item from './Item';
@@ -45,10 +44,9 @@ export default class DecisionItem extends PureComponent<Props, {}> {
       placeholder,
       showPlaceholder,
     } = this.props;
-    const iconColor = showPlaceholder ? colors.N100 : colors.G300;
 
     const icon = (
-      <EditorIconWrapper color={iconColor}>
+      <EditorIconWrapper showPlaceholder={showPlaceholder}>
         <DecisionIcon label="Decision" size="large" />
       </EditorIconWrapper>
     );

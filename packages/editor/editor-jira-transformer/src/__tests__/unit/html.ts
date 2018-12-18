@@ -24,7 +24,7 @@ import {
   parseWithSchema,
 } from './_test-helpers';
 
-import { createJIRASchema } from '@atlaskit/editor-common';
+import { createJIRASchema } from '@atlaskit/adf-schema';
 
 export const schema = createJIRASchema({ allowSubSup: true });
 

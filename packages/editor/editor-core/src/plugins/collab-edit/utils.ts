@@ -98,7 +98,6 @@ export const replaceDocument = (
     tr.setMeta('addToHistory', false);
     tr.replaceWith(0, state.doc.nodeSize - 2, content);
     tr.setSelection(Selection.atStart(tr.doc));
-    tr.scrollIntoView();
 
     if (typeof version !== undefined && (options && options.useNativePlugin)) {
       const collabState = { version, unconfirmed: [] };

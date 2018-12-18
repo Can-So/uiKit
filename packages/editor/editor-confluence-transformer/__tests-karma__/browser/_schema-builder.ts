@@ -9,7 +9,7 @@ import {
   confluenceSchemaWithMediaSingle as schema,
   MediaAttributes,
   MediaSingleAttributes,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 export { RefsNode, RefsTracker, Node };
 // Nodes

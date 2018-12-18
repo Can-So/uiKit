@@ -1,0 +1,1 @@
+- Rengenerate JSON schema after moving packages

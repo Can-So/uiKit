@@ -14,7 +14,7 @@ import {
   br,
   panel,
 } from '@atlaskit/editor-test-helpers';
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 import {
   TaskDecisionListType,
   insertTaskDecision,

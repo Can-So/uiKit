@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { textColor } from '@atlaskit/editor-common';
+import { textColor } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import WithPluginState from '../../ui/WithPluginState';
 import {
-  pluginKey,
+  pluginKey as textColorPluginKey,
   createPlugin,
   TextColorPluginConfig,
+  TextColorPluginState,
 } from './pm-plugins/main';
 import ToolbarTextColor from './ui/ToolbarTextColor';
 import { changeColor } from './commands/change-color';
@@ -48,7 +49,7 @@ const textColorPlugin: EditorPlugin = {
     return (
       <WithPluginState
         plugins={{
-          textColor: pluginKey,
+          textColor: textColorPluginKey,
         }}
         render={({ textColor }) => (
           <ToolbarTextColor
@@ -67,4 +68,5 @@ const textColorPlugin: EditorPlugin = {
   },
 };
 
+export { TextColorPluginState, textColorPluginKey };
 export default textColorPlugin;

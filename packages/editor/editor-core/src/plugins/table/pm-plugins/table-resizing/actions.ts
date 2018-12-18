@@ -2,10 +2,9 @@ import { TableMap } from 'prosemirror-tables';
 import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorState } from 'prosemirror-state';
-
+import { TableLayout } from '@atlaskit/adf-schema';
 import {
   tableCellMinWidth,
-  TableLayout,
   akEditorTableNumberColumnWidth,
 } from '@atlaskit/editor-common';
 import { TableCssClassName as ClassName } from '../../types';

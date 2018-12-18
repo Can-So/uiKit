@@ -7,7 +7,7 @@ import { colors } from '@atlaskit/theme';
 import {
   tableBackgroundColorPalette,
   tableBackgroundBorderColors,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 import {
   hoverColumns,

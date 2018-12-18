@@ -30,4 +30,11 @@ export const sendToBridge = (bridgeName, eventName, props = {}) => {
       bridge[eventName as any](...args);
     }
   }
+
+  let logs = (window as any).logBridge;
+  if (logs) {
+    const logName = `${bridgeName}:${eventName}`;
+    logs[logName] = logs[logName] || [];
+    logs[logName] = logs[logName].concat(props);
+  }
 };

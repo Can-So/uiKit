@@ -1,7 +1,7 @@
 import {
   ListItemDefinition,
   OrderedListDefinition,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 export const orderedList = (attrs?: OrderedListDefinition['attrs']) => (
   ...content: Array<ListItemDefinition>

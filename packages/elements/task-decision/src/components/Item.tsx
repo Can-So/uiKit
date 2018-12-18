@@ -62,7 +62,7 @@ export default class Item extends PureComponent<Props, {}> {
   renderCardAppearance() {
     const { appearance, contentRef, children, icon } = this.props;
     return (
-      <Wrapper theme={{ appearance }}>
+      <Wrapper appearance={appearance}>
         <CardHeadingWrapper>
           {icon}
           {this.renderParticipants()}
@@ -77,7 +77,7 @@ export default class Item extends PureComponent<Props, {}> {
   renderMessageAppearance() {
     const { appearance, contentRef, children, icon } = this.props;
     return (
-      <Wrapper theme={{ appearance }}>
+      <Wrapper appearance={appearance}>
         {icon}
         {this.renderPlaceholder()}
         <ContentWrapper innerRef={contentRef}>{children}</ContentWrapper>
