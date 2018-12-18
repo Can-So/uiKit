@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 91.1.3
+- [patch] [462b70f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/462b70f):
+
+  - ED-5819: Enables support for text color on mobile
+
 ## 91.1.2
 - [patch] [8be04eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8be04eb):
 

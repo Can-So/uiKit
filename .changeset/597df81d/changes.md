@@ -1,1 +1,0 @@
-- ED-5819: Enables support for text color on mobile

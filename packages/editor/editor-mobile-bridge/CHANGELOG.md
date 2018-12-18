@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.5.0
+- [minor] [462b70f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/462b70f):
+
+  - ED-5819: Enables support for text color on mobile
+
 ## 6.4.10
 - Updated dependencies [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
   - @atlaskit/task-decision@11.0.10
