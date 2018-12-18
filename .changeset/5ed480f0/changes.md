@@ -1,1 +1,0 @@
-- Include type definitions in npm package
