@@ -1,0 +1,1 @@
+- Copy changes along with addition on new prop, isUserDeactivated
