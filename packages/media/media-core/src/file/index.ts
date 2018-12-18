@@ -24,6 +24,7 @@ import {
 } from '../fileState';
 import { fileStreamsCache, FileStreamCache } from '../context/fileStreamCache';
 import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploadableFile';
+import { TouchedFiles } from '../../../media-store/src/media-store';
 
 const POLLING_INTERVAL = 1000;
 const maxNumberOfItemsPerCall = 100;
@@ -176,7 +177,10 @@ export class FileFetcher {
     });
   };
 
-  touchFiles(descriptors: TouchFileDescriptor[], collection?: string) {
+  touchFiles(
+    descriptors: TouchFileDescriptor[],
+    collection?: string,
+  ): Promise<TouchedFiles> {
     return this.mediaStore
       .touchFiles({ descriptors }, { collection })
       .then(({ data }) => data);
