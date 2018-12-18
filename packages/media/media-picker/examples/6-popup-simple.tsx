@@ -4,7 +4,7 @@ import {
   userAuthProvider,
   mediaMock,
 } from '@atlaskit/media-test-helpers';
-
+import * as exenv from 'exenv';
 import * as React from 'react';
 import { Component } from 'react';
 import Button from '@atlaskit/button';
@@ -16,11 +16,11 @@ mediaMock.enable();
 
 const context = ContextFactory.create({
   authProvider: defaultMediaPickerAuthProvider,
-  userAuthProvider: userAuthProvider,
+  userAuthProvider,
 });
 
 const popup = MediaPicker('popup', context, {
-  container: document.body,
+  container: exenv.canUseDOM && document.body,
   uploadParams: {
     collection: defaultCollectionName,
   },

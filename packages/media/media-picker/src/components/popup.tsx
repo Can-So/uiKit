@@ -2,7 +2,7 @@ import { Context, ContextFactory } from '@atlaskit/media-core';
 import { Store } from 'redux';
 import * as React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-
+import * as exenv from 'exenv';
 import App, { AppProxyReactContext } from '../popup/components/app';
 import { cancelUpload } from '../popup/actions/cancelUpload';
 import { showPopup } from '../popup/actions/showPopup';
@@ -81,6 +81,9 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
     this.tenantUploadParams = tenantUploadParams;
 
     const popup = this.renderPopup();
+    if (!popup) {
+      return;
+    }
 
     this.container = popup;
     container.appendChild(popup);
@@ -127,8 +130,12 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
     this.emit('closed', undefined);
   }
 
-  private renderPopup(): HTMLElement {
+  private renderPopup(): HTMLElement | undefined {
+    if (!exenv.canUseDOM) {
+      return;
+    }
     const container = document.createElement('div');
+
     render(
       <App
         store={this.store}

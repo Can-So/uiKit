@@ -11,6 +11,7 @@ import {
   createUploadContext,
 } from '@atlaskit/media-test-helpers';
 import { Card } from '@atlaskit/media-card';
+import * as exenv from 'exenv';
 import { MediaPicker } from '../src';
 import {
   PopupContainer,
@@ -26,7 +27,7 @@ import {
 
 const context = createUploadContext();
 const popup = MediaPicker('popup', context, {
-  container: document.body,
+  container: exenv.canUseDOM && document.body,
   uploadParams: {
     collection: defaultMediaPickerCollectionName,
   },
@@ -89,8 +90,6 @@ class PopupWrapper extends Component<{}, PopupWrapperState> {
   };
 
   onShow = () => {
-    // Populate cache in userAuthProvider.
-    userAuthProvider();
     // Synchronously with next command tenantAuthProvider will be requested.
     popup.show().catch(console.error);
   };

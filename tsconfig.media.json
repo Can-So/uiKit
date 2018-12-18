@@ -36,6 +36,7 @@
     },
     "files": [
       "./typings/atlaskit.d.ts",
+      "./typings/exenv.d.ts",
       "./typings/package.json.d.ts",
       "./typings/json.d.ts",
       "./typings/node.d.ts",
