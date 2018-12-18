@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 32.1.2
+- [patch] [95f98cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95f98cc):
+
+  - User can click on a smart card to open a new window/tab
+
 ## 32.1.1
 - [patch] [d9815ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9815ba):
 
