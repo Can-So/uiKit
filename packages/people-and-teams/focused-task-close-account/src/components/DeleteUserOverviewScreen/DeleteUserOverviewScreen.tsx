@@ -10,10 +10,6 @@ import UserInfo from '../UserInfo';
 import { DeleteUserOverviewScreenProps } from './types';
 import * as Styled from './styled';
 import { DropdownList } from '../DropdownList';
-/**
- * Copy not final - ROCKET-1610
- * i18n yet to be applied - ROCKET-1610
- */
 
 export class DeleteUserOverviewScreen extends React.Component<
   DeleteUserOverviewScreenProps
@@ -28,32 +24,37 @@ export class DeleteUserOverviewScreen extends React.Component<
 
   displayFirstListElement = () => {
     const { accessibleSites, user, isUserDeactivated } = this.props;
+
+    if (isUserDeactivated) {
+      return null;
+    }
+
+    const hasAccessibleSites = accessibleSites && accessibleSites.length > 0;
     return (
-      !isUserDeactivated && (
-        <li>
-          {!accessibleSites || accessibleSites.length === 0 ? (
+      <li>
+        {!hasAccessibleSites && (
+          <FormattedHTMLMessage
+            {...this.selectAdminOrSelfCopy(
+              overviewMessages.paragraphLoseAccessAdminNoSites,
+              overviewMessages.paragraphLoseAccessSelfNoSites,
+            )}
+            values={{ fullName: user.fullName }}
+          />
+        )}
+        {hasAccessibleSites && (
+          <>
             <FormattedHTMLMessage
               {...this.selectAdminOrSelfCopy(
-                overviewMessages.paragraphLoseAccessAdminNoSites,
-                overviewMessages.paragraphLoseAccessSelfNoSites,
+                overviewMessages.paragraphLoseAccessAdmin,
+                overviewMessages.paragraphLoseAccessSelf,
               )}
               values={{ fullName: user.fullName }}
+              tagName={'p'}
             />
-          ) : (
-            <>
-              <FormattedHTMLMessage
-                {...this.selectAdminOrSelfCopy(
-                  overviewMessages.paragraphLoseAccessAdmin,
-                  overviewMessages.paragraphLoseAccessSelf,
-                )}
-                values={{ fullName: user.fullName }}
-              />
-              <p />
-              <DropdownList accessibleSites={accessibleSites} />
-            </>
-          )}
-        </li>
-      )
+            <DropdownList accessibleSites={accessibleSites} />
+          </>
+        )}
+      </li>
     );
   };
 
@@ -211,24 +212,18 @@ export class DeleteUserOverviewScreen extends React.Component<
           {this.displayThirdListElement()}
           {this.displayFourthListElement()}
         </Styled.MainInformationList>
-        {deactivateUserHandler && (
+        {!isUserDeactivated && deactivateUserHandler && (
           <Styled.SectionMessageOuter>
             <SectionMessage appearance="warning">
-              <FormattedMessage
-                {...(isUserDeactivated
-                  ? overviewMessages.warningSectionBodyDeactivated
-                  : overviewMessages.warningSectionBody)}
-              />
+              <FormattedMessage {...overviewMessages.warningSectionBody} />
               <p>
-                {!isUserDeactivated && (
-                  <Button
-                    appearance="link"
-                    spacing="none"
-                    onClick={deactivateUserHandler}
-                  >
-                    <FormattedMessage {...commonMessages.deactivateAccount} />
-                  </Button>
-                )}
+                <Button
+                  appearance="link"
+                  spacing="none"
+                  onClick={deactivateUserHandler}
+                >
+                  <FormattedMessage {...commonMessages.deactivateAccount} />
+                </Button>
               </p>
             </SectionMessage>
           </Styled.SectionMessageOuter>
