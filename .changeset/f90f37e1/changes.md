@@ -1,0 +1,1 @@
+- FS-3353 changed compact to use small avatar
