@@ -1,1 +1,0 @@
-- removed xregexp library dependency from emoji and mention components, added xregexp-transformer package to compile xregexp expressions to unicode charsets
