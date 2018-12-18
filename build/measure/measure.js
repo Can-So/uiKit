@@ -1,20 +1,37 @@
 #!/usr/bin/env node
 
+const fs = require('fs');
 const path = require('path');
 const exec = require('child_process').execSync;
 const chalk = require('chalk').default;
 const ora = require('ora');
 const webpack = require('webpack');
 const { fExists } = require('./utils/fs');
-const { buildStats, createAtlaskitStatsGroups } = require('./utils/stats');
+const {
+  buildStats,
+  createAtlaskitStatsGroups,
+  diff,
+  clearStats,
+} = require('./utils/stats');
 const { buildCacheGroups, createWebpackConfig } = require('./utils/webpack');
+const { prepareForPrint } = require('./utils/print');
 const { printReport } = require('./reporters/console');
 
 const measureOutputPath = path.join(__dirname, '..', '..', '.measure-output');
 
-main(process.argv[2], process.argv.includes('--analyze'));
+main(
+  process.argv[2],
+  process.argv.includes('--analyze'),
+  process.argv.includes('--json'),
+  process.argv.includes('--lint'),
+);
 
-function main(filePath, isAnalyze) {
+function main(filePath, isAnalyze, isJson, isLint) {
+  const sanitizedFilePath = filePath.replace('/', '__');
+  const measureCompiledOutputPath = path.join(
+    measureOutputPath,
+    sanitizedFilePath,
+  );
   const entryPoint = path.resolve(__dirname, '../../packages', filePath);
   const spinner = ora(chalk.cyan(`Compiling "${filePath}"`)).start();
 
@@ -26,13 +43,16 @@ function main(filePath, isAnalyze) {
   // Async indicates group's combined size of all code-splitts.
   const mainStatsGroups = [
     {
-      title: 'Source code',
+      name: 'Source code',
+      group: true,
       stats: [
         {
+          id: 'src.main',
           name: 'main',
           fileName: 'main.js',
         },
         {
+          id: 'src.async',
           name: 'async',
           fileName: 'main_async.js',
           cacheGroup: {
@@ -47,9 +67,11 @@ function main(filePath, isAnalyze) {
       ],
     },
     {
-      title: 'External Dependencies',
+      name: 'External Dependencies',
+      group: true,
       stats: [
         {
+          id: 'node_modules.main',
           name: 'node_modules [main]',
           fileName: 'node_modules.js',
           cacheGroup: {
@@ -61,6 +83,7 @@ function main(filePath, isAnalyze) {
           },
         },
         {
+          id: 'node_modules.async',
           name: 'node_modules [async]',
           fileName: 'node_modules_async.js',
           cacheGroup: {
@@ -74,7 +97,8 @@ function main(filePath, isAnalyze) {
       ],
     },
     {
-      title: 'Atlaskit Dependencies',
+      name: 'Atlaskit Dependencies',
+      group: true,
       stats: createAtlaskitStatsGroups(
         path.join(__dirname, '..', '..', 'packages'),
         filePath,
@@ -84,13 +108,18 @@ function main(filePath, isAnalyze) {
 
   const combinedStatsGroups = [
     {
-      title: 'Combined',
+      name: 'Combined',
+      group: true,
       stats: [
         {
+          threshold: 0.01,
+          id: 'combined.main',
           name: 'main',
           fileName: 'combined_sync.js',
         },
         {
+          threshold: 0.02,
+          id: 'combined.async',
           name: 'async',
           fileName: 'combined_async.js',
           cacheGroup: {
@@ -110,7 +139,7 @@ function main(filePath, isAnalyze) {
    * – package groups bundles: e.g. core, media, editor, etc...
    */
   const mainConfig = createWebpackConfig({
-    outputDir: measureOutputPath,
+    outputDir: measureCompiledOutputPath,
     entryPoint: { main: entryPoint },
     optimization: {
       splitChunks: {
@@ -125,7 +154,7 @@ function main(filePath, isAnalyze) {
    * size since gzip size is highly affected by the size of the input.
    */
   const combinedConfig = createWebpackConfig({
-    outputDir: measureOutputPath,
+    outputDir: measureCompiledOutputPath,
     entryPoint: { combined_sync: entryPoint },
     optimization: {
       splitChunks: {
@@ -133,11 +162,6 @@ function main(filePath, isAnalyze) {
       },
     },
   });
-
-  // Cleanup measure output directory
-  try {
-    exec(`rm -rf ${measureOutputPath}`);
-  } catch (e) {}
 
   /**
    * Run both main and combined builds in parallel.
@@ -148,12 +172,48 @@ function main(filePath, isAnalyze) {
       return console.error(chalk.red(err));
     }
 
-    const mainBuildStats = buildStats(measureOutputPath, mainStatsGroups);
-    const combinedBuildStats = buildStats(
-      measureOutputPath,
-      combinedStatsGroups,
-    );
+    const joinedStatsGroups = [...mainStatsGroups, ...combinedStatsGroups];
+    const stats = buildStats(measureCompiledOutputPath, joinedStatsGroups);
     spinner.succeed(chalk.cyan(`Module "${filePath}" successfully built:\n`));
-    printReport([...mainBuildStats, ...combinedBuildStats]);
+
+    // Cleanup measure output directory
+    try {
+      exec(`rm -rf ${measureCompiledOutputPath}`);
+    } catch (e) {}
+
+    const prevStatsPath = path.join(
+      measureOutputPath,
+      `${sanitizedFilePath}–stats.json`,
+    );
+
+    let prevStats;
+    if (fExists(prevStatsPath)) {
+      prevStats = JSON.parse(fs.readFileSync(prevStatsPath, 'utf8'));
+    }
+
+    const statsWithDiff = prevStats ? diff(prevStats, stats) : stats;
+
+    if (isJson) {
+      return console.log(JSON.stringify(stats, null, 2));
+    } else {
+      printReport(prepareForPrint(joinedStatsGroups, statsWithDiff));
+    }
+
+    const statsExceededSizeLimit = statsWithDiff.filter(stat => stat.isTooBig);
+
+    if (!isLint || (isLint && !statsExceededSizeLimit.length)) {
+      fs.writeFileSync(
+        prevStatsPath,
+        JSON.stringify(clearStats(stats), null, 2),
+        'utf8',
+      );
+    }
+
+    if (statsExceededSizeLimit.length) {
+      console.error(
+        chalk.red(`  ✖ Entry "${filePath}" has exceeded size limit!`),
+      );
+      process.exit(1);
+    }
   });
 }

@@ -3,33 +3,27 @@ const fs = require('fs');
 const { fStats, fExists } = require('./fs');
 
 function buildStats(outputPath, statsGroups) {
-  return statsGroups
-    .map(group => {
-      return {
-        title: group.title,
-        group: group.group,
-        stats: group.stats.reduce((acc, stat) => {
-          if (stat.group) {
-            acc.push(...buildStats(outputPath, [stat]));
-            return acc;
-          }
+  return statsGroups.reduce((acc, group) => {
+    return group.stats.reduce((acc, stat) => {
+      if (stat.group) {
+        acc.push(...buildStats(outputPath, [stat]));
+        return acc;
+      }
 
-          if (!stat.fileName) return acc;
+      if (!stat.fileName) return acc;
 
-          const filePath = path.resolve(outputPath, stat.fileName);
-          if (!fExists(filePath)) return acc;
+      const filePath = path.resolve(outputPath, stat.fileName);
+      if (!fExists(filePath)) return acc;
 
-          acc.push({
-            name: stat.name,
-            stats: fStats(filePath),
-          });
-          return acc;
-        }, []),
-      };
-    })
-    .filter(group =>
-      Array.isArray(group.stats) ? group.stats.length : group.stats,
-    );
+      acc.push({
+        id: stat.id,
+        name: stat.name,
+        threshold: stat.threshold,
+        stats: fStats(filePath),
+      });
+      return acc;
+    }, acc);
+  }, []);
 }
 
 /**
@@ -50,10 +44,11 @@ function createAtlaskitStatsGroups(packagesDir, packagePath) {
         !module.context.includes(packagePath);
 
       return {
-        title: name,
+        name,
         group: true,
         stats: [
           {
+            id: `atlaskit.${name}.main`,
             name: 'main',
             fileName: `${chunkName}.js`,
             cacheGroup: {
@@ -65,6 +60,7 @@ function createAtlaskitStatsGroups(packagesDir, packagePath) {
             },
           },
           {
+            id: `atlaskit.${name}.async`,
             name: 'async',
             fileName: `${chunkName}-async.js`,
             cacheGroup: {
@@ -80,4 +76,65 @@ function createAtlaskitStatsGroups(packagesDir, packagePath) {
     });
 }
 
-module.exports = { buildStats, createAtlaskitStatsGroups };
+function diff(origOldStats, origNewStats) {
+  const oldStats = [].concat(origOldStats);
+  const newStats = [].concat(origNewStats);
+  const statsWithDiff = [];
+
+  while (oldStats.length) {
+    const old = oldStats.shift();
+    const matchIndex = newStats.findIndex(st => st.id === old.id);
+    if (matchIndex > -1) {
+      let isTooBig;
+      const match = newStats[matchIndex];
+      const gzipSizeDiff = match.stats.gzipSize - old.stats.gzipSize;
+
+      if (match.threshold) {
+        const maxSize =
+          match.threshold * old.stats.gzipSize + old.stats.gzipSize;
+        isTooBig = maxSize < match.stats.gzipSize;
+      }
+
+      statsWithDiff.push({
+        ...match,
+        isTooBig,
+        stats: {
+          ...match.stats,
+          sizeDiff: match.stats.size - old.stats.size,
+          gzipSizeDiff,
+        },
+      });
+
+      newStats.splice(matchIndex, 1);
+    } else {
+      statsWithDiff.push({
+        ...old,
+        deleted: true,
+        stats: {
+          size: 0,
+          gzipSize: 0,
+          sizeDiff: -old.stats.size,
+          gzipSizeDiff: -old.stats.gzipSize,
+        },
+      });
+    }
+  }
+
+  return [
+    ...statsWithDiff,
+    ...newStats.map(stat => {
+      stat.new = true;
+      return stat;
+    }),
+  ];
+}
+
+function clearStats(stats) {
+  return stats.map(item => ({
+    ...item,
+    threshold: undefined,
+    isTooBig: undefined,
+  }));
+}
+
+module.exports = { buildStats, createAtlaskitStatsGroups, diff, clearStats };
