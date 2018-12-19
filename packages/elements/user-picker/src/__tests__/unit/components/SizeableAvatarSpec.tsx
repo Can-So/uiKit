@@ -19,10 +19,10 @@ describe('SizeableAvatar', () => {
     expect(avatar.prop('size')).toEqual('small');
   });
 
-  it('should render xsmall Avatar with compact appearance', () => {
+  it('should render small Avatar with compact appearance', () => {
     const component = shallowSizeableAvatar({ appearance: 'compact' });
     const avatar = component.find(Avatar);
-    expect(avatar.prop('size')).toEqual('xsmall');
+    expect(avatar.prop('size')).toEqual('small');
   });
 
   it('should render medium Avatar with big appearance', () => {

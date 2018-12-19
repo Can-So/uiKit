@@ -37,14 +37,8 @@ export const usersToOptions = memoizeOne((defaultValue: UserValue) => {
   return userToOption(defaultValue);
 });
 
-export const getAvatarSize = (
-  appearance: string,
-): 'small' | 'xsmall' | 'medium' =>
-  appearance === 'normal'
-    ? 'small'
-    : appearance === 'big'
-    ? 'medium'
-    : 'xsmall';
+export const getAvatarSize = (appearance: string): 'small' | 'medium' =>
+  appearance === 'big' ? 'medium' : 'small';
 
 export const isChildInput = (child: ReactChild): child is ReactElement<any> =>
   child &&

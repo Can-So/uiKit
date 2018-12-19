@@ -38,7 +38,7 @@ describe('SingleValue', () => {
     });
   });
 
-  it('should render Avatar as xsmall when the appearance is compact', () => {
+  it('should render SizeableAvatar when the appearance is compact', () => {
     const component = shallowSingleValue({
       selectProps: {
         appearance: 'compact',
