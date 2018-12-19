@@ -31,6 +31,7 @@ export default class DeleteUserDrawerExample extends React.Component {
   state = {
     isCurrentUser: false,
     isOpen: false,
+    isUserDeactivated: false,
   };
 
   openDrawer = () => this.setState({ isOpen: true });
@@ -42,12 +43,16 @@ export default class DeleteUserDrawerExample extends React.Component {
   toggleIsCurrentUser = event =>
     this.setState({ isCurrentUser: event.target.checked });
 
+  toggleIsUserDeactivated = event =>
+    this.setState({ isUserDeactivated: event.target.checked });
+
   renderDeleteUserOverviewScreen = () => (
     <DeleteUserOverviewScreen
       accessibleSites={accessibleSites}
       isCurrentUser={this.state.isCurrentUser}
       user={catherineHirons}
       deactivateUserHandler={this.handleDeactivateUser}
+      isUserDeactivated={this.state.isUserDeactivated}
     />
   );
 
@@ -72,6 +77,18 @@ export default class DeleteUserDrawerExample extends React.Component {
               }
               onChange={this.toggleIsCurrentUser}
               name="toggle-is-current-user"
+            />
+            <Checkbox
+              label={
+                <StatefulInlineDialog
+                  placement="right"
+                  content="Toggles between active and deactivated user."
+                >
+                  Is user deactivated
+                </StatefulInlineDialog>
+              }
+              onChange={this.toggleIsUserDeactivated}
+              name="toggle-is-user-deactivated"
             />
           </Controls>
           {this.state.isOpen && (
