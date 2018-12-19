@@ -8,8 +8,8 @@ import {
   RequestHandler,
   Database,
 } from 'kakapo';
-import * as uuid from 'uuid';
 import { TouchFileDescriptor } from '@atlaskit/media-store';
+import * as uuid from 'uuid/v4';
 
 import { mapDataUriToBlob } from '../../utils';
 import { mockDataUri } from '../database/mockData';
@@ -311,7 +311,11 @@ export function createApiRouter(): Router<DatabaseSchema> {
   router.post('/file/copy/withToken', (request, database) => {
     const { body, query } = request;
     const { sourceFile } = JSON.parse(body);
-    const { collection: destinationCollection, replaceFileId } = query;
+    const {
+      collection: destinationCollection,
+      replaceFileId,
+      occurrenceKey,
+    } = query;
 
     const sourceRecord = database.findOne('collectionItem', {
       id: sourceFile.id,
@@ -321,9 +325,9 @@ export function createApiRouter(): Router<DatabaseSchema> {
     const { details, type, blob } = sourceRecord.data;
 
     const record = database.push('collectionItem', {
-      id: replaceFileId,
+      id: replaceFileId ? replaceFileId : uuid(),
       insertedAt: Date.now(),
-      occurrenceKey: uuid.v4(),
+      occurrenceKey: occurrenceKey ? occurrenceKey : uuid(),
       type,
       details,
       blob,
