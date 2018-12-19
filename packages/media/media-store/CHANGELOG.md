@@ -1,5 +1,17 @@
 # @atlaskit/media-store
 
+## 9.0.0
+- [minor] [46cacba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46cacba):
+
+  - Add touchEndpoint() method that calls /upload/createWithFiles and creates uploads & files with given ids
+- [major] [096f898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/096f898):
+
+  - Add touchFiles function to store; Add mandatory upfrontIds object to `uploadFile` function - now it's responsibility of consumer to create file and give promise of upload id that will be used as part of upload; `uploadFile` function's callback object: `onId` callback is removed and replaced with `onUploadFinish` that can be called with an error object as an argument in case of an error; `deferredFileId` value is removed from `uploadFile` return object.
+
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/media-card@46.0.0
+  - @atlaskit/media-test-helpers@18.7.0
+
 ## 8.5.1
 - Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
   - @atlaskit/media-card@45.0.0

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/emoji",
-  "version": "48.0.2",
+  "version": "49.0.0",
   "config": {
     "access": "public"
   },
@@ -36,7 +36,7 @@
     "uuid": "^3.1.0"
   },
   "peerDependencies": {
-    "@atlaskit/media-core": "^24.6.0",
+    "@atlaskit/media-core": "^24.7.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.2",
     "rxjs": "^5.5.0"
@@ -54,10 +54,10 @@
   "devDependencies": {
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/layer": "^5.0.10",
-    "@atlaskit/media-core": "^24.6.0",
+    "@atlaskit/media-core": "^24.7.0",
     "@atlaskit/section-message": "^1.0.14",
     "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^10.0.27",
+    "@atlaskit/util-data-test": "^10.0.28",
     "@atlaskit/visual-regression": "^0.0.1",
     "@types/chai": "^4.0.4",
     "canvas-prebuilt": "^2.0.0-alpha.14",
