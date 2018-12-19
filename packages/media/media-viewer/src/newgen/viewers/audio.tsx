@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ProcessedFileState, Context } from '@atlaskit/media-core';
+import { ProcessedFileState, Context, FileState } from '@atlaskit/media-core';
 import AudioIcon from '@atlaskit/icon/glyph/media-services/audio';
 import { constructAuthTokenUrl } from '../utils';
 import { Outcome, MediaViewerFeatureFlags } from '../domain';
@@ -19,7 +19,7 @@ import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { getFeatureFlag } from '../utils/getFeatureFlag';
 
 export type Props = Readonly<{
-  item: ProcessedFileState;
+  item: FileState;
   context: Context;
   collectionName?: string;
   previewCount: number;
@@ -55,7 +55,7 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
     const { item } = this.props;
     const { coverUrl } = this.state;
 
-    if (coverUrl) {
+    if (coverUrl && item.status !== 'error') {
       return <AudioCover src={coverUrl} alt={item.name} />;
     } else {
       return defaultCover;
@@ -118,6 +118,9 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
 
   private setCoverUrl = async () => {
     const { context, item, collectionName } = this.props;
+    if (item.status !== 'processed') {
+      return;
+    }
     const coverUrl = await getCoverUrl(item, context, collectionName);
 
     try {
@@ -128,16 +131,28 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
 
   protected async init() {
     const { context, item, collectionName } = this.props;
-    const audioUrl = getArtifactUrl(item.artifacts, 'audio.mp3');
     try {
+      let audioUrl: string | undefined;
+
+      if (item.status === 'processed') {
+        audioUrl = await constructAuthTokenUrl(
+          getArtifactUrl(item.artifacts, 'audio.mp3') || '',
+          context,
+          collectionName,
+        );
+      } else if (item.status !== 'error') {
+        const { preview } = item;
+        if (preview) {
+          audioUrl = URL.createObjectURL(preview.blob);
+        }
+      }
+
       if (!audioUrl) {
         throw new Error('No audio artifacts found');
       }
       this.setCoverUrl();
       this.setState({
-        content: Outcome.successful(
-          await constructAuthTokenUrl(audioUrl, context, collectionName),
-        ),
+        content: Outcome.successful(audioUrl),
       });
     } catch (err) {
       this.setState({

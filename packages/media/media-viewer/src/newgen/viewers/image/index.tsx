@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, ProcessedFileState, MediaItem } from '@atlaskit/media-core';
+import { Context, MediaItem, FileState } from '@atlaskit/media-core';
 import { Outcome } from '../../domain';
 import { createError, MediaViewerError } from '../../error';
 import { InteractiveImg } from './interactive-img';
@@ -11,12 +11,12 @@ export const REQUEST_CANCELLED = 'request_cancelled';
 
 export type ImageViewerProps = AnalyticViewerProps & {
   context: Context;
-  item: ProcessedFileState;
+  item: FileState;
   collectionName?: string;
   onClose?: () => void;
 };
 
-function processedFileStateToMediaItem(file: ProcessedFileState): MediaItem {
+function processedFileStateToMediaItem(file: FileState): MediaItem {
   return {
     type: 'file',
     details: {
@@ -41,18 +41,35 @@ export class ImageViewer extends BaseViewer<ObjectUrl, ImageViewerProps> {
 
   protected async init() {
     const { item: file, context } = this.props;
+    if (file.status === 'error') {
+      return;
+    }
+
     try {
-      const service = context.getBlobService(this.props.collectionName);
-      // MSW-922: once we make getImage cancelable we can use it instead of fetchImageBlobCancelable
-      const item = processedFileStateToMediaItem(file);
-      const { response, cancel } = service.fetchImageBlobCancelable(item, {
-        width: 1920,
-        height: 1080,
-        mode: 'fit',
-        allowAnimated: true,
-      });
-      this.cancelImageFetch = () => cancel(REQUEST_CANCELLED);
-      const objectUrl = URL.createObjectURL(await response);
+      let imagePreview: Blob | undefined;
+
+      if (file.status === 'processed') {
+        const service = context.getBlobService(this.props.collectionName);
+        // MSW-922: once we make getImage cancelable we can use it instead of fetchImageBlobCancelable
+        const item = processedFileStateToMediaItem(file);
+        const { response, cancel } = service.fetchImageBlobCancelable(item, {
+          width: 1920,
+          height: 1080,
+          mode: 'fit',
+          allowAnimated: true,
+        });
+
+        imagePreview = await response;
+
+        this.cancelImageFetch = () => cancel(REQUEST_CANCELLED);
+      } else {
+        const { preview } = file;
+        if (preview) {
+          imagePreview = preview.blob;
+        }
+      }
+
+      const objectUrl = URL.createObjectURL(imagePreview);
       this.setState({
         content: Outcome.successful(objectUrl),
       });

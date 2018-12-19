@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, FileState, ProcessedFileState } from '@atlaskit/media-core';
+import { Context, FileState } from '@atlaskit/media-core';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '@atlaskit/media-ui';
 import { Outcome, Identifier, MediaViewerFeatureFlags } from './domain';
@@ -95,7 +95,11 @@ export class ItemViewerBase extends React.Component<Props, State> {
     });
   };
 
-  private renderProcessedFile(item: ProcessedFileState) {
+  private renderFileState(item: FileState) {
+    if (item.status === 'error') {
+      return this.renderError('previewFailed', item);
+    }
+
     const {
       context,
       identifier,
@@ -112,6 +116,7 @@ export class ItemViewerBase extends React.Component<Props, State> {
       onClose,
       previewCount,
     };
+
     switch (item.mediaType) {
       case 'image':
         return <ImageViewer onLoad={this.onViewerLoaded} {...viewerProps} />;
@@ -132,7 +137,12 @@ export class ItemViewerBase extends React.Component<Props, State> {
           />
         );
       case 'doc':
-        return <DocViewer {...viewerProps} />;
+        // TODO: add support to non processed files to DocViewer
+        if (item.status === 'processed') {
+          return <DocViewer {...viewerProps} item={item} />;
+        } else {
+          return <Spinner />;
+        }
       default:
         return this.renderError('unsupported', item);
     }
@@ -159,13 +169,12 @@ export class ItemViewerBase extends React.Component<Props, State> {
       successful: item => {
         switch (item.status) {
           case 'processed':
-            return this.renderProcessedFile(item);
+          case 'uploading':
+          case 'processing':
+            return this.renderFileState(item);
           case 'failed-processing':
           case 'error':
             return this.renderError('previewFailed', item);
-          case 'uploading':
-          case 'processing':
-            return <Spinner />;
         }
       },
       pending: () => <Spinner />,

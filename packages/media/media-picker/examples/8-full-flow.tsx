@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   defaultCollectionName,
   createUploadContext,
-  mediaMock,
 } from '@atlaskit/media-test-helpers';
 import { MediaPicker } from '../src';
 import { Card, FileIdentifier } from '@atlaskit/media-card';
@@ -55,7 +54,15 @@ export default class Example extends React.Component<{}, State> {
               mediaItemType: 'file',
               collectionName: defaultCollectionName,
             };
-            console.log({ identifier });
+
+            if (typeof identifier.id !== 'string') {
+              identifier.id.then(idString =>
+                console.log('identifier', idString),
+              );
+            } else {
+              console.log('identifier', identifier.id);
+            }
+
             return (
               <Card
                 key={key}
@@ -66,11 +73,13 @@ export default class Example extends React.Component<{}, State> {
                   height: 200,
                 }}
                 onClick={async event => {
+                  const details = event.mediaItemDetails as FileDetails;
+                  console.log('event id', details.id);
                   this.setState({
                     selectedItem: {
                       //id: await identifier.id,
-                      id: (event.mediaItemDetails as FileDetails).id,
-                      occurrenceKey: 'bs',
+                      id: details.id,
+                      occurrenceKey: '',
                       type: 'file',
                     },
                   });

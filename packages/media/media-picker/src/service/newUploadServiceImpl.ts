@@ -236,7 +236,7 @@ export class NewUploadServiceImpl implements UploadService {
         this.cancellableFilesUploads[id] = cancellableFileUpload;
         // Save observable in the cache
         upfrontId.then(id => {
-          if (context && observable) {
+          if (observable) {
             const key = FileStreamCache.createKey(id);
             const keyWithCollection = FileStreamCache.createKey(id, {
               collectionName: this.tenantUploadParams.collection,
@@ -247,6 +247,26 @@ export class NewUploadServiceImpl implements UploadService {
             fileStreamsCache.set(keyWithCollection, observable);
           }
         });
+
+        // TODO: cleanup this if we decide to go with this approach
+        if (userUpfrontId && observable) {
+          // Save user id in the cache
+          userUpfrontId.then(id => {
+            if (observable) {
+              const key = FileStreamCache.createKey(id);
+              const keyWithRecentsCollection = FileStreamCache.createKey(id, {
+                collectionName: RECENTS_COLLECTION,
+              });
+              const keyWithTenantCollection = FileStreamCache.createKey(id, {
+                collectionName: this.tenantUploadParams.collection,
+              });
+
+              fileStreamsCache.set(key, observable);
+              fileStreamsCache.set(keyWithTenantCollection, observable);
+              fileStreamsCache.set(keyWithRecentsCollection, observable);
+            }
+          });
+        }
 
         return cancellableFileUpload;
       },

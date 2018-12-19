@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, ProcessedFileState } from '@atlaskit/media-core';
+import { Context, ProcessedFileState, FileState } from '@atlaskit/media-core';
 import { getArtifactUrl } from '@atlaskit/media-store';
 import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { constructAuthTokenUrl } from '../utils';
@@ -11,7 +11,7 @@ import { createError, MediaViewerError } from '../error';
 import { BaseState, BaseViewer } from './base-viewer';
 
 export type Props = Readonly<{
-  item: ProcessedFileState;
+  item: FileState;
   context: Context;
   collectionName?: string;
   featureFlags?: MediaViewerFeatureFlags;
@@ -69,15 +69,26 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
     const { context, item, collectionName } = this.props;
     const preferHd = isHDActive && isHDAvailable(item);
 
-    const contentUrl = getVideoArtifactUrl(item, preferHd);
     try {
+      let contentUrl: string | undefined;
+      if (item.status === 'processed') {
+        contentUrl = await constructAuthTokenUrl(
+          getVideoArtifactUrl(item, preferHd) || '',
+          context,
+          collectionName,
+        );
+      } else if (item.status !== 'error') {
+        const { preview } = item;
+        if (preview) {
+          contentUrl = URL.createObjectURL(preview.blob);
+        }
+      }
+
       if (!contentUrl) {
         throw new Error(`No video artifacts found`);
       }
       this.setState({
-        content: Outcome.successful(
-          await constructAuthTokenUrl(contentUrl, context, collectionName),
-        ),
+        content: Outcome.successful(contentUrl),
       });
     } catch (err) {
       this.setState({
@@ -89,7 +100,10 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
   protected release() {}
 }
 
-function isHDAvailable(file: ProcessedFileState): boolean {
+function isHDAvailable(file: FileState): boolean {
+  if (file.status !== 'processed') {
+    return false;
+  }
   return !!getArtifactUrl(file.artifacts, hdArtifact);
 }
 
