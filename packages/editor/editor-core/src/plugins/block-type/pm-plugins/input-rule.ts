@@ -19,6 +19,7 @@ import {
   transformToCodeBlockAction,
 } from '../commands/transform-to-code-block';
 import { insertBlock } from '../commands/insert-block';
+import { safeInsert } from 'prosemirror-utils';
 
 export function headingRule(nodeType: NodeType, maxLevel: number) {
   return textblockTypeInputRule(
@@ -109,8 +110,8 @@ export function inputRulePlugin(schema: Schema): Plugin | undefined {
           if (match[4]) {
             attributes.language = match[4];
           }
+          const newStart = match[0][0] === ' ' ? start + 1 : start;
           if (isConvertableToCodeBlock(state)) {
-            const newStart = match[0][0] === ' ' ? start + 1 : start;
             analyticsService.trackEvent(
               `atlassian.editor.format.codeblock.autoformatting`,
             );
@@ -121,7 +122,10 @@ export function inputRulePlugin(schema: Schema): Plugin | undefined {
                 .scrollIntoView()
             );
           }
-          return null;
+          let { tr } = state;
+          tr = tr.delete(newStart, end);
+          const codeBlock = state.schema.nodes.codeBlock.createChecked();
+          return safeInsert(codeBlock)(tr);
         },
         true,
       ),

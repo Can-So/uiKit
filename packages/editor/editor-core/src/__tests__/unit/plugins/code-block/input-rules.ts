@@ -28,13 +28,13 @@ describe('inputrules', () => {
 
   describe('codeblock rule', () => {
     describe('when node is not convertable to code block', () => {
-      it('should not convert "```" to a code block\t', () => {
+      it('should append a code block to the doc', () => {
         const { editorView, sel } = editor(doc(panel()(p('{<>}hello'))));
 
         insertText(editorView, '```', sel);
 
         expect(editorView.state.doc).toEqualDocument(
-          doc(panel()(p('```hello'))),
+          doc(panel()(p('hello')), code_block()()),
         );
         editorView.destroy();
       });
