@@ -121,13 +121,15 @@ class FieldTextAreaStateless extends Component<Props, void> {
 
     return (
       <Wrapper>
-        <Label
-          htmlFor={id}
-          isDisabled={disabled}
-          isLabelHidden={isLabelHidden}
-          isRequired={required}
-          label={label}
-        />
+        {!isLabelHidden && (
+          <Label
+            htmlFor={id}
+            isDisabled={disabled}
+            isLabelHidden={isLabelHidden}
+            isRequired={required}
+            label={label}
+          />
+        )}
         <Base
           isCompact={compact}
           isDisabled={disabled}

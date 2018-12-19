@@ -1168,6 +1168,40 @@ describe('Media plugin', () => {
           editorView.destroy();
           pluginState.destroy();
         });
+
+        it('respects alignment in layout', () => {
+          const { editorView, pluginState } = editor(
+            doc(
+              mediaGroup(
+                media({
+                  id: 'media',
+                  type: 'file',
+                  collection: testCollectionName,
+                })(),
+              ),
+              p('hello'),
+            ),
+          );
+
+          setNodeSelection(editorView, 1);
+
+          pluginState.align('align-start');
+
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              mediaSingle({ layout: 'align-start' })(
+                media({
+                  id: 'media',
+                  type: 'file',
+                  collection: testCollectionName,
+                })(),
+              ),
+              p('hello'),
+            ),
+          );
+          editorView.destroy();
+          pluginState.destroy();
+        });
       });
 
       describe('when selection is not a media node', () => {

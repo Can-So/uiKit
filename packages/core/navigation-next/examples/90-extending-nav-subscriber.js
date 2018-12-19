@@ -264,6 +264,7 @@ type State = {
   callStack: Array<StatusEvent>,
   resizePending: boolean,
   isFlyoutAvailable: boolean,
+  isAlternateFlyoutBehaviourEnabled: boolean,
 };
 function makeKey() {
   return Math.random()
@@ -278,6 +279,7 @@ class ExtendingNavSubscriber extends React.Component<*, State> {
     boxWidth: 'auto',
     resizePending: false,
     isFlyoutAvailable: true,
+    isAlternateFlyoutBehaviourEnabled: false,
   };
   componentDidMount() {
     this.updateWidth();
@@ -333,11 +335,20 @@ class ExtendingNavSubscriber extends React.Component<*, State> {
   onFlyoutToggle = () => {
     this.setState(state => ({ isFlyoutAvailable: !state.isFlyoutAvailable }));
   };
+  onAlternateBehaviourToggle = () => {
+    this.setState(state => ({
+      isAlternateFlyoutBehaviourEnabled: !state.isAlternateFlyoutBehaviourEnabled,
+    }));
+  };
 
   render() {
-    const { boxWidth, resizePending, isFlyoutAvailable } = this.state;
+    const {
+      boxWidth,
+      resizePending,
+      isFlyoutAvailable,
+      isAlternateFlyoutBehaviourEnabled,
+    } = this.state;
     const lastTen = this.getStack();
-    console.log('navState', this.props.navState);
 
     return (
       <LayoutManager
@@ -349,6 +360,9 @@ class ExtendingNavSubscriber extends React.Component<*, State> {
         onExpandStart={this.onExpandStart}
         onExpandEnd={this.onExpandEnd}
         experimental_flyoutOnHover={isFlyoutAvailable}
+        experimental_alternateFlyoutBehaviour={
+          isAlternateFlyoutBehaviourEnabled
+        }
       >
         <CollapseStatusListener
           onResizeEnd={this.onResizeEnd}
@@ -362,6 +376,11 @@ class ExtendingNavSubscriber extends React.Component<*, State> {
               <ToggleStateless
                 isChecked={isFlyoutAvailable}
                 onChange={this.onFlyoutToggle}
+              />
+              <Label label="Toggle alternate hover behaviour (experimental)" />
+              <ToggleStateless
+                isChecked={isAlternateFlyoutBehaviourEnabled}
+                onChange={this.onAlternateBehaviourToggle}
               />
             </div>
             <Logger>

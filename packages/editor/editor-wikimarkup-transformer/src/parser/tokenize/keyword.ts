@@ -87,7 +87,7 @@ export function parseOtherKeyword(input: string) {
 const leadingKeywordTokenMap = [
   {
     type: TokenType.QUOTE,
-    regex: /^bq\. /,
+    regex: /^bq\./,
   },
   {
     type: TokenType.HEADING,

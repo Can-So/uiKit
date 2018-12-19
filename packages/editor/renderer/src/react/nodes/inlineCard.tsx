@@ -11,16 +11,6 @@ export default function InlineCard(props: {
 }) {
   const { url, data, eventHandlers } = props;
   const handler = getEventHandler(eventHandlers, 'smartCard');
-  return (
-    <Card
-      appearance="inline"
-      url={url}
-      data={data}
-      onClick={() => {
-        if (url && handler) {
-          handler(url);
-        }
-      }}
-    />
-  );
+  const onClick = url && handler ? () => handler(url) : undefined;
+  return <Card appearance="inline" url={url} data={data} onClick={onClick} />;
 }

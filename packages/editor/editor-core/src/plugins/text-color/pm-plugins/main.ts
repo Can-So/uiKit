@@ -9,7 +9,9 @@ import { getDisabledState } from '../utils/disabled';
 
 export type TextColorPluginState = {
   palette: Map<string, string>;
-  borderColorPalette: Object;
+  borderColorPalette: {
+    [name: string]: string;
+  };
   defaultColor: string;
   disabled?: boolean;
   color: string | null;

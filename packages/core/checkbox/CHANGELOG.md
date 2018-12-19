@@ -1,5 +1,10 @@
 # @atlaskit/checkbox
 
+## 5.0.10
+- [patch] [fad28be](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fad28be):
+
+  - Fixing invalid type for checkbox id prop
+
 ## 5.0.9
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

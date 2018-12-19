@@ -1,5 +1,12 @@
 # @atlaskit/navigation-next
 
+## 4.1.0
+- [minor] [86aaacd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/86aaacd):
+
+  - [Update flyout hover activation zone](https://product-fabric.atlassian.net/browse/NAV-197)
+  	- It is controlled by a new FF prop called `experimental_alternateFlyoutBehaviour` which defaults to false. ::NOTE:: For this feature to be enabled, it’s is necessary to have the FF  `experimental_flyoutOnHover` to be set to true.
+  - Update expand affordance icon
+
 ## 4.0.10
 - [patch] [3a33b6b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a33b6b):
 

@@ -12,6 +12,8 @@ export const editable = '.ProseMirror';
 export const LONG_WAIT_FOR = 5000;
 export const typeAheadPicker = '.fabric-editor-typeahead';
 export const lozenge = '[data-mention-id="0"]';
+export const linkToolbar =
+  '[placeholder="Paste link or search recently viewed"]';
 
 export const insertMention = async (browser, query: string) => {
   await browser.type(editable, '@');

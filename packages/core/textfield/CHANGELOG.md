@@ -1,5 +1,12 @@
 # @atlaskit/textfield
 
+## 0.1.5
+- [patch] [2e5dd50](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e5dd50):
+
+  - Update validation example to be compatible with the new Forms API
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/form@5.0.0
+
 ## 0.1.4
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

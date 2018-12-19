@@ -63,7 +63,7 @@ const config = {
   ],
   resolver: `${__dirname}/resolver.js`,
   transform: {
-    '^.+\\.tsx?$': 'ts-jest/preprocessor',
+    '^.+\\.tsx?$': 'ts-jest',
     '^.+\\.js$': 'babel-jest',
   },
   globals: {

@@ -1,0 +1,41 @@
+{
+  "include": ["./src/**.ts"],
+  "compilerOptions": {
+    "baseUrl": "./",    
+    "outDir": "./dist",
+    "plugins": [
+      { "transform": "./src/transformers/xregexpTransformer.ts" }
+    ],
+    "allowJs": false,
+    "alwaysStrict": false,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noUnusedLocals": true,
+    "sourceMap": false,
+    "strictNullChecks": true,
+    "target": "es5",
+    "module": "esnext",
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015.core",
+      "es2015.collection",
+      "es2015.symbol",
+      "es2015.iterable",
+      "es2015.promise"
+    ],
+    "types": ["jest"],
+    "typeRoots": ["../../../typings", "./node_modules/@types"],    
+  },
+  "files": [
+    "../../../typings/jest-in-case.d.ts",
+    "../../../typings/jest.frameworkSetup.d.ts",
+  ],  
+  "exclude": ["transformers/**/*"]
+}

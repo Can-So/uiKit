@@ -107,7 +107,7 @@ const ContentStyles: ComponentClass<
   }
 
   /** Needed to override any cleared floats, e.g. image wrapping */
-  div.fabric-editor-block-mark[class^='align'] {
+  div.fabric-editor-block-mark[class^='fabric-editor-align'] {
     clear: none !important;
   }
 

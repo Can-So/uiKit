@@ -7,6 +7,8 @@ const validWidthModes: MediaSingleLayout[] = [
   'center',
   'wrap-left',
   'wrap-right',
+  'align-start',
+  'align-end',
 ];
 
 export const layoutSupportsWidth = (layout: MediaSingleLayout) =>

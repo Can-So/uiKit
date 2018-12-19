@@ -13,7 +13,8 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "David R"
+    "Ahmed Fouad",
+    "Patrick Teen"
   ],
   "atlaskit": {
     "name": "Global search",

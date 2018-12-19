@@ -111,4 +111,6 @@ export default class IosBridge implements NativeBridge {
   ) {
     sendToBridge(bridge, event, ...args);
   }
+
+  updateTextColor() {}
 }

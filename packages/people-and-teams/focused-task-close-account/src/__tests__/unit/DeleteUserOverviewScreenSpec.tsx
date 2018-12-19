@@ -9,6 +9,7 @@ const defaultProps: Partial<DeleteUserOverviewScreenProps> = {
   accessibleSites,
   isCurrentUser: false,
   user: catherineHirons,
+  isUserDeactivated: false,
 };
 
 const render = (props = {}) =>
@@ -49,10 +50,26 @@ describe('accessibleSites display', () => {
       }),
     ).toMatchSnapshot();
   });
+
+  test('text displayed is different when no accessibleSites prop is passed for current user', () => {
+    expect(
+      render({
+        deactivateUserHandler: () => {},
+        accessibleSites: [],
+        isCurrentUser: true,
+      }),
+    ).toMatchSnapshot();
+  });
 });
 
 describe('deactivateUserHandler display', () => {
   test('warning section is not displayed if the deactivateUserHandler prop is not passed', () => {
     expect(render()).toMatchSnapshot();
+  });
+});
+
+describe('delete screen display', () => {
+  test('content is different when user is deactivated', () => {
+    expect(render({ isUserDeactivated: true })).toMatchSnapshot();
   });
 });
