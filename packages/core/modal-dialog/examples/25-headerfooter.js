@@ -17,6 +17,7 @@ const variants = [
   'both',
   'neither',
   'custom header',
+  'custom body (deprecated)',
   'custom body',
   'custom footer',
 ];
@@ -82,6 +83,21 @@ const Body = React.forwardRef((props: BodyProps, ref) => {
     </div>
   );
 });
+
+const BodyOld = (props: BodyProps) => {
+  return (
+    <div style={bodyStyles}>
+      <Button onClick={props.onClose} appearance="link">
+        <CrossIcon
+          label="Close Modal"
+          primaryColor={colors.R400}
+          size="small"
+        />
+      </Button>
+      {props.children}
+    </div>
+  );
+};
 
 type FooterProps = {
   onClose: Function,
@@ -165,6 +181,7 @@ export default class ModalDemo extends Component<{}, State> {
                     ? `Modal: ${name}`
                     : undefined
                 }
+                body={name === 'custom body (deprecated)' ? BodyOld : undefined}
                 onClose={this.close}
                 width={name === 'custom header' ? 300 : undefined}
                 {...this.props}

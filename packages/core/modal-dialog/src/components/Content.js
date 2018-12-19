@@ -7,7 +7,7 @@ import Footer from './Footer';
 import Header from './Header';
 
 import type { AppearanceType, KeyboardOrMouseEvent } from '../types';
-import { Body, keylineHeight, Wrapper } from '../styled/Content';
+import { Body, CustomBody, keylineHeight, Wrapper } from '../styled/Content';
 
 function getInitialState() {
   return {
@@ -210,11 +210,8 @@ export default class Content extends Component<Props, State> {
     } = this.props;
 
     // Only load in 'div' default if there's no deprecated 'body' prop provided
-    let BodyContainer = components.Body;
-    if (!BodyProp) {
-      if (!components.Body) BodyContainer = 'div';
-    }
-    const BodyPropComponent = BodyProp || Body;
+    const BodyComponent = BodyProp || Body;
+    const CustomBodyComponent = components.Body;
 
     const { Container = 'div' } = components;
     const { showFooterKeyline, showHeaderKeyline } = this.state;
@@ -233,21 +230,21 @@ export default class Content extends Component<Props, State> {
               isHeadingMultiline={isHeadingMultiline}
               showKeyline={showHeaderKeyline}
             />
-            {BodyContainer ? (
-              <Body
-                component={BodyContainer}
+            {CustomBodyComponent ? (
+              <CustomBody
+                component={CustomBodyComponent}
                 innerRef={this.getScrollContainer}
                 shouldScroll={shouldScroll}
               >
                 {children}
-              </Body>
+              </CustomBody>
             ) : (
-              <BodyPropComponent
+              <BodyComponent
                 innerRef={this.getScrollContainer}
                 shouldScroll={shouldScroll}
               >
                 {children}
-              </BodyPropComponent>
+              </BodyComponent>
             )}
             <Footer
               actions={actions}

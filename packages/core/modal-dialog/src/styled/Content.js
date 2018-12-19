@@ -108,7 +108,7 @@ export const TitleIconWrapper = styled.span`
 */
 
 // export const Body = styled.div`
-const DefaultBodyComponent = styled.div`
+export const Body = styled.div`
   flex: 1 1 auto;
   ${p => {
     return p.shouldScroll
@@ -123,7 +123,7 @@ const DefaultBodyComponent = styled.div`
   }};
 `;
 
-export const Body = ({
+export const CustomBody = ({
   component,
   children,
   innerRef,
@@ -134,7 +134,7 @@ export const Body = ({
   innerRef: Function,
   shouldScroll?: boolean,
 }) => {
-  let BodyStyledComponent = DefaultBodyComponent;
+  let BodyStyledComponent = Body;
   if (component !== 'div') {
     BodyStyledComponent = styled(component)`
       flex: 1 1 auto;
@@ -160,7 +160,7 @@ export const Body = ({
   );
 };
 
-Body.defaultProps = {
+CustomBody.defaultProps = {
   component: 'div',
   innerRef: () => {},
 };
