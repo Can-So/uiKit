@@ -16,7 +16,6 @@ yep
 still going
 yeah good luck closing this`,
     ],
-    ['should be able to parse macros in table', `|{panel}123{panel}|`],
     ['should not render trailing space into a new cell', '|cell 1|cell 2|   '],
     [
       'should remove trailing space before and after cell open and close',
@@ -48,4 +47,22 @@ this is a new line text, not in the table`,
       expect(transformer.parse(markup)).toMatchSnapshot();
     });
   }
+
+  describe('macros', () => {
+    const testCases: Array<[string, string]> = [
+      ['should parse panel', `|{panel}foo{panel}|`],
+      ['should parse color', `|{color:red}foo{panel}|`],
+      ['should parse noformat', `|{noformat}foo{noformat}|`],
+      ['should parse code', `|{code}foo{code}|`],
+      ['should parse quote', `|{quote}foo{quote}|`],
+      ['should parse anchor', `|{anchor}foo{anchor}|`],
+    ];
+
+    for (const [testCaseDescription, markup] of testCases) {
+      it(testCaseDescription, () => {
+        const transformer = new WikiMarkupTransformer();
+        expect(transformer.parse(markup)).toMatchSnapshot();
+      });
+    }
+  });
 });
