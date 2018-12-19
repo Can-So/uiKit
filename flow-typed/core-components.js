@@ -1,0 +1,14 @@
+// This file is used to create flow definitions for core packages that
+// have been converted to typescript. This is a temporary solution
+// while we are converting all core packages to typescript.
+
+// If you are importing a typscript package into a flow package,
+// you will have to add a definition here.
+
+declare module '@atlaskit/button' {
+  declare module.exports: any;
+}
+
+declare module '@atlaskit/textarea' {
+  declare module.exports: any;
+}
