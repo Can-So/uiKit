@@ -1,46 +1,15 @@
+import { Node } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
 import { EditorState } from 'prosemirror-state';
-
-import { emojiPluginKey, EmojiState } from '../plugins/emoji/pm-plugins/main';
 
 import {
   stateKey as mediaStateKey,
   MediaPluginState,
 } from '../plugins/media/pm-plugins/main';
 
-import { dismissCommand as typeAheadDismiss } from '../plugins/type-ahead/commands/dismiss';
-import {
-  pluginKey as typeAheadPluginKey,
-  PluginState as TypeAheadPluginState,
-} from '../plugins/type-ahead/pm-plugins/main';
-
-export function checkEditorState(editorView?: EditorView): void {
-  if (!editorView) {
-    return;
-  }
-
-  const { dispatch, state } = editorView;
-
-  // if typeAhead is currently active => dismiss it
-  const typeAheadPluginState =
-    state && (typeAheadPluginKey.getState(state) as TypeAheadPluginState);
-
-  if (typeAheadPluginState && typeAheadPluginState.active) {
-    typeAheadDismiss()(state, dispatch);
-  }
-
-  // if emoji is currently active => dismiss it
-  const emojiPluginState =
-    state && (emojiPluginKey.getState(state) as EmojiState);
-
-  if (emojiPluginState && emojiPluginState.queryActive) {
-    emojiPluginState.dismiss();
-  }
-}
-
-export async function waitForMediaPendingTasks(
+export async function getEditorValueWithMedia(
   editorView?: EditorView,
-): Promise<void> {
+): Promise<Node | undefined> {
   if (!editorView) {
     return;
   }
@@ -53,6 +22,8 @@ export async function waitForMediaPendingTasks(
   if (mediaPluginState && mediaPluginState.waitForMediaUpload) {
     await mediaPluginState.waitForPendingTasks();
   }
+
+  return editorView.state.doc;
 }
 
 export function insertFileFromDataUrl(

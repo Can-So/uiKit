@@ -3,11 +3,10 @@ import { TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Transformer } from '@atlaskit/editor-common';
 import {
-  checkEditorState,
+  getEditorValueWithMedia,
   insertFileFromDataUrl as insertFileFromUrl,
-  processRawValue,
   toJSON,
-  waitForMediaPendingTasks,
+  processRawValue,
 } from '../utils';
 import { EventDispatcher } from '../event-dispatcher';
 import { safeInsert } from 'prosemirror-utils';
@@ -129,15 +128,7 @@ export default class EditorActions implements EditorActionsOptions {
   }
 
   async getValue(): Promise<any | undefined> {
-    checkEditorState(this.editorView);
-
-    await waitForMediaPendingTasks(this.editorView);
-
-    const {
-      state: {
-        tr: { doc },
-      },
-    } = this.editorView!;
+    const doc = await getEditorValueWithMedia(this.editorView);
 
     if (!doc) {
       return;
