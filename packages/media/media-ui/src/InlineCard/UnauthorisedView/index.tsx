@@ -23,29 +23,33 @@ export class InlineCardUnauthorizedView extends React.Component<
 > {
   handleConnectAccount = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { onAuthorise } = this.props;
-    if (onAuthorise) {
-      event.preventDefault();
-      event.stopPropagation();
-      return onAuthorise();
-    }
+    event.preventDefault();
+    event.stopPropagation();
+    return onAuthorise!();
   };
 
   render() {
-    const { url, icon, onClick, isSelected } = this.props;
+    const { url, icon, onClick, isSelected, onAuthorise } = this.props;
     return (
       <Frame onClick={onClick} isSelected={isSelected}>
         <IconAndTitleLayout
-          icon={<Icon src={icon} />}
+          icon={typeof icon === 'string' ? <Icon src={icon} /> : icon}
           title={truncateUrlForErrorView(url)}
         />
-        {' - '}
-        <Button
-          spacing="none"
-          appearance="link"
-          onClick={this.handleConnectAccount}
-        >
-          Connect your account to preview links
-        </Button>
+        {!onAuthorise ? (
+          ''
+        ) : (
+          <>
+            {' - '}
+            <Button
+              spacing="none"
+              appearance="link"
+              onClick={this.handleConnectAccount}
+            >
+              Connect your account to preview links
+            </Button>
+          </>
+        )}
       </Frame>
     );
   }

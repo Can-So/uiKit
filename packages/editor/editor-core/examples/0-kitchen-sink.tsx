@@ -365,18 +365,23 @@ export default class FullPageRendererExample extends React.Component<
                             : undefined,
                       }}
                     >
-                      <SmartCardProvider>
-                        <ReactRenderer
-                          document={this.state.adf}
-                          adfStage="stage0"
-                          dataProviders={ProviderFactory.create({
-                            ...providers,
-                            mediaProvider,
-                          })}
-                          // @ts-ignore
-                          appearance={this.state.appearance}
-                        />
-                      </SmartCardProvider>
+                      <IntlProvider
+                        locale={this.getLocalTag(locale)}
+                        messages={messages}
+                      >
+                        <SmartCardProvider>
+                          <ReactRenderer
+                            document={this.state.adf}
+                            adfStage="stage0"
+                            dataProviders={ProviderFactory.create({
+                              ...providers,
+                              mediaProvider,
+                            })}
+                            // @ts-ignore
+                            appearance={this.state.appearance}
+                          />
+                        </SmartCardProvider>
+                      </IntlProvider>
                     </div>
                   ) : (
                     <div

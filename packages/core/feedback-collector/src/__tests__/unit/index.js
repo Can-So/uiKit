@@ -5,7 +5,6 @@ import { mount } from 'enzyme';
 import Select from '@atlaskit/select';
 import { Checkbox } from '@atlaskit/checkbox';
 import { Field } from '@atlaskit/form';
-import { FieldTextAreaStateless } from '@atlaskit/field-text-area';
 
 import FeedbackCollector from '../../components/FeedbackCollector';
 import FeedbackForm, { fieldLabel } from '../../components/FeedbackForm';
@@ -226,19 +225,22 @@ describe('Feedback Collector unit tests', () => {
       );
 
       expect(wrapper.find(Select)).toHaveLength(1);
-      expect(wrapper.find(FieldTextAreaStateless)).toHaveLength(0);
+      expect(wrapper.find('textarea')).toHaveLength(0);
       expect(wrapper.find(Checkbox)).toHaveLength(0);
     });
 
-    test('FeedbackForm should render checkboxes and fieldtext when something is selected', () => {
+    test('FeedbackForm should render checkboxes and textarea when something is selected', () => {
       const wrapper = mount(
         <FeedbackForm onClose={() => {}} onSubmit={() => {}} />,
       );
 
       wrapper.setState({ type: 'comment' });
 
+      // explicitly update the wrapper to ensure the subsequent renders are flushed.
+      wrapper.update();
+
       expect(wrapper.find(Select)).toHaveLength(1);
-      expect(wrapper.find(FieldTextAreaStateless)).toHaveLength(1);
+      expect(wrapper.find('textarea')).toHaveLength(1);
       expect(wrapper.find(Checkbox)).toHaveLength(2);
     });
 

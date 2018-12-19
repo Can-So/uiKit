@@ -32,7 +32,7 @@ export type CheckboxProps = {
   /** Sets whether the checkbox begins checked. */
   defaultChecked: boolean,
   /** id assigned to input */
-  id?: boolean,
+  id?: string,
   /** Callback to receive a reference.  */
   inputRef?: (input: ?HTMLInputElement) => mixed,
   /** Sets whether the checkbox is checked or unchecked. */

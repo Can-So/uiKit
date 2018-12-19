@@ -1,5 +1,15 @@
 # @atlaskit/media-ui
 
+## 8.2.1
+- [patch] [9c50550](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c50550):
+
+  - Do not show connect button if there are no auth methods.
+
+## 8.2.0
+- [minor] [95f98cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95f98cc):
+
+  - User can click on a smart card to open a new window/tab
+
 ## 8.1.2
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/avatar@14.1.7

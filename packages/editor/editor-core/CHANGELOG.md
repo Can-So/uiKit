@@ -1,5 +1,53 @@
 # @atlaskit/editor-core
 
+## 92.0.0
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+- Updated dependencies [6cb6696](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6cb6696):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/renderer@33.0.0
+  - @atlaskit/emoji@49.0.0
+  - @atlaskit/media-card@46.0.0
+  - @atlaskit/media-filmstrip@21.0.0
+  - @atlaskit/media-picker@27.0.0
+  - @atlaskit/editor-bitbucket-transformer@4.1.1
+  - @atlaskit/editor-json-transformer@4.1.1
+  - @atlaskit/editor-markdown-transformer@2.1.1
+  - @atlaskit/editor-test-helpers@6.3.4
+  - @atlaskit/task-decision@11.1.1
+  - @atlaskit/util-data-test@10.0.28
+  - @atlaskit/media-test-helpers@18.7.0
+  - @atlaskit/media-core@24.7.0
+
+## 91.2.2
+- [patch] [af32972](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af32972):
+
+  - ED-5880: disable media layout buttons
+
+## 91.2.1
+- [patch] [e714e7a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e714e7a):
+
+  - ED-5667 Added hyperlink to quick insert
+
+## 91.2.0
+- [minor] [b9f8a8f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9f8a8f):
+
+  - Adding alignment options to media
+
+## 91.1.4
+- [patch] [3780be2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3780be2):
+
+  - Fix extension delete when media is selected
+
+## 91.1.3
+- [patch] [462b70f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/462b70f):
+
+  - ED-5819: Enables support for text color on mobile
+
+## 91.1.2
+- [patch] [8be04eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8be04eb):
+
+  - Remove option to change appearance mode on Smart Cards.
+
 ## 91.1.1
 - [patch] [9f444e9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f444e9):
 

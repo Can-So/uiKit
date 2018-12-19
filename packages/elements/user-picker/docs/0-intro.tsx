@@ -41,7 +41,7 @@ export default md`
   ${(
     <Props
       heading="User Picker Props"
-      props={require('!!extract-react-types-loader!../src/index')}
+      props={require('!!extract-react-types-loader!../example-helpers/PropsWrapper')}
     />
   )}
 `;

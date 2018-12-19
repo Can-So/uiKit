@@ -3,7 +3,6 @@ import { Frame } from '../Frame';
 import Lozenge from '@atlaskit/lozenge';
 import { LozengeViewModel } from '../../common';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
-import { Title } from './styled';
 import { Icon } from '../Icon';
 
 export interface InlineCardResolvedViewProps {
@@ -15,6 +14,8 @@ export interface InlineCardResolvedViewProps {
   lozenge?: LozengeViewModel;
   /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
+  /** The optional url */
+  link?: string;
   /** The optional click handler */
   onClick?: () => void;
 }
@@ -51,13 +52,10 @@ export class InlineCardResolvedView extends React.Component<
   }
 
   render() {
-    const { title, isSelected, onClick } = this.props;
+    const { title, isSelected, onClick, link } = this.props;
     return (
-      <Frame isSelected={isSelected} onClick={onClick}>
-        <IconAndTitleLayout
-          icon={this.renderIcon()}
-          title={<Title isSelected={isSelected}>{title}</Title>}
-        >
+      <Frame link={link} isSelected={isSelected} onClick={onClick}>
+        <IconAndTitleLayout icon={this.renderIcon()} title={title}>
           {this.renderLozenge()}
         </IconAndTitleLayout>
       </Frame>

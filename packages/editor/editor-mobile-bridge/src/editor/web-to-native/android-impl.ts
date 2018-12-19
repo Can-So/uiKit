@@ -80,4 +80,6 @@ export default class AndroidBridge implements NativeBridge {
   ) {
     sendToBridge(bridge, event, ...args);
   }
+
+  updateTextColor() {}
 }

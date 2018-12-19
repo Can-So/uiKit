@@ -106,6 +106,7 @@ export default class SiteEmojiResource {
               baseUrl: url,
             }),
         });
+
         const subscription = context.file
           .upload({
             content: upload.dataURL,

@@ -1,5 +1,13 @@
 # @atlaskit/feedback-collector
 
+## 2.0.2
+- [patch] [a048a85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a048a85):
+
+  - Updated to be compatible with new Forms API
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/select@6.1.14
+  - @atlaskit/form@5.0.0
+
 ## 2.0.1
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/button@10.1.1

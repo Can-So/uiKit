@@ -22,6 +22,7 @@ import {
   insertBlockType,
   createTable,
   insertTaskDecision,
+  changeColor,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
@@ -119,6 +120,12 @@ export default class WebBridgeImpl extends WebBridge
 
   setTextFormattingStateAndSubscribe(state: TextFormattingState) {
     this.textFormatBridgeState = state;
+  }
+
+  setTextColor(color: string) {
+    if (this.editorView) {
+      changeColor(color)(this.editorView.state, this.editorView.dispatch);
+    }
   }
 
   onMediaPicked(eventName: string, mediaPayload: string) {

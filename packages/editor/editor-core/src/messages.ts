@@ -20,6 +20,21 @@ export default defineMessages({
     description:
       'Display your element (image, table, extension, etc) as full width',
   },
+  alignImageRight: {
+    id: 'fabric.editor.alignImageRight',
+    defaultMessage: 'Align right',
+    description: 'Aligns image to the right',
+  },
+  alignImageCenter: {
+    id: 'fabric.editor.alignImageCenter',
+    defaultMessage: 'Align center',
+    description: 'Aligns image to the center',
+  },
+  alignImageLeft: {
+    id: 'fabric.editor.alignImageLeft',
+    defaultMessage: 'Align left',
+    description: 'Aligns image to the left',
+  },
   remove: {
     id: 'fabric.editor.remove',
     defaultMessage: 'Remove',

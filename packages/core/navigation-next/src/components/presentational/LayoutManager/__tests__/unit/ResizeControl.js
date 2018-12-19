@@ -24,6 +24,7 @@ describe('ResizeControlBase', () => {
       flyoutIsOpen: false,
       isDisabled: false,
       mouseIsOverNavigation: false,
+      onMouseOverButtonBuffer: () => {},
       mutationRefs: [
         {
           property: 'width',

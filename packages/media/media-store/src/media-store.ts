@@ -187,6 +187,18 @@ export class MediaStore {
     }).then(mapResponseToJson);
   }
 
+  touchFiles(
+    body: MediaStoreTouchFileBody,
+    params: MediaStoreTouchFileParams = {},
+  ): Promise<MediaStoreResponse<TouchedFiles>> {
+    return this.request('/upload/createWithFiles', {
+      method: 'POST',
+      headers: jsonHeaders,
+      body: JSON.stringify(body),
+      authContext: { collectionName: params.collection },
+    }).then(mapResponseToJson);
+  }
+
   createFile(
     params: MediaStoreCreateFileParams = {},
   ): Promise<MediaStoreResponse<EmptyFile>> {
@@ -403,6 +415,22 @@ export type MediaStoreCreateFileParams = {
   readonly collection?: string;
 };
 
+export interface MediaStoreTouchFileParams {
+  readonly collection?: string;
+}
+
+export interface TouchFileDescriptor {
+  fileId: string;
+  collection?: string;
+  occurrenceKey?: string;
+  expireAfter?: number;
+  deletable?: boolean;
+}
+
+export interface MediaStoreTouchFileBody {
+  descriptors: TouchFileDescriptor[];
+}
+
 export type MediaStoreCreateFileFromBinaryParams = {
   readonly replaceFileId?: string;
   readonly collection?: string;
@@ -470,6 +498,15 @@ export type AppendChunksToUploadRequestBody = {
 
   readonly hash?: string;
   readonly offset?: number;
+};
+
+export interface CreatedTouchedFile {
+  fileId: string;
+  uploadId: string;
+}
+
+export type TouchedFiles = {
+  created: CreatedTouchedFile[];
 };
 
 export interface EmptyFile {
