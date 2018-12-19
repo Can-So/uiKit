@@ -44,7 +44,7 @@ export const sendPerformanceMetrics = (opts: PerformanceMetrictsOpts) => {
     version: '-',
   });
   const attributes = {
-    metricName: opts.value,
+    [opts.metricName]: opts.value,
     loadTimeInMs: opts.timing,
     path: opts.location,
     isInitial: opts.isInitial || false,
