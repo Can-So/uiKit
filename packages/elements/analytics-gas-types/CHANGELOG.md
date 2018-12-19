@@ -1,5 +1,10 @@
 # @atlaskit/analytics-gas-types
 
+## 3.2.4
+- [patch] [a3b8046](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3b8046):
+
+  - Add more specific types to analytics-listener webclient type
+
 ## 3.2.3
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/docs@6.0.0

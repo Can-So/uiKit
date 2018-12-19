@@ -1,7 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/analytics-gas-types", "type": "patch" },
-    { "name": "@atlaskit/analytics-listeners", "type": "patch" }
-  ],
-  "dependents": []
-}
