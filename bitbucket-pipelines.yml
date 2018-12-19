@@ -279,6 +279,13 @@ pipelines:
                 - bolt install --pure-lockfile
                 - export TMPFILE=$(mktemp /tmp/jest.XXXXXX) && yarn --silent jest --listTests --json > $TMPFILE
                 - STEPS="4" STEP_IDX="3" PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --runInBand
+          - step:
+              name: Running Browser Integration tests
+              script:
+                - source ./build-setup.sh
+                - git merge master --no-edit
+                - bolt install --pure-lockfile
+                - LANKDID=true yarn test:webdriver:browserstack:changed
       - step:
           name: Wait until no master is running
           script:
