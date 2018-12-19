@@ -3,7 +3,8 @@ import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock/src/client';
 
 import * as React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl } from 'enzyme-react-intl';
 
 import * as UtilAnalytics from '../../../util/analytics';
 
@@ -17,7 +18,7 @@ const mentionResource = new MentionResource({
 });
 
 function setupPicker(props?: Props): ReactWrapper<Props, State> {
-  return mount(
+  return mountWithIntl(
     <MentionPicker
       resourceProvider={mentionResource}
       query=""
