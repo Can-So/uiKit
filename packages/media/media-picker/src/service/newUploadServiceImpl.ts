@@ -234,7 +234,14 @@ export class NewUploadServiceImpl implements UploadService {
         // We want to save the observable without collection too, due consumers using cards without collection.
         fileStreamsCache.set(key, observable);
         fileStreamsCache.set(keyWithCollection, observable);
-
+        upfrontId.then(id => {
+          const key = FileStreamCache.createKey(id);
+          const keyWithCollection = FileStreamCache.createKey(id, {
+            collectionName: this.tenantUploadParams.collection,
+          });
+          fileStreamsCache.set(key, observable);
+          fileStreamsCache.set(keyWithCollection, observable);
+        });
         // TODO: cleanup this if we decide to go with this approach
         if (userUpfrontId) {
           // Save user id in the cache
