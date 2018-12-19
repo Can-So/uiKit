@@ -30,9 +30,9 @@ type Props = {
   */
   appearance?: AppearanceType,
   /**
-    Component to render the body of the modal.
+    deprecated, use components prop: Component to render the body of the modal.
   */
-  body: ElementType,
+  body?: ElementType,
   /**
     Content of the modal
   */
@@ -47,11 +47,11 @@ type Props = {
     Container?: ElementType,
   },
   /**
-    Component to render the header of the modal.
+    deprecated, use components prop: Component to render the header of the modal.
   */
   header?: ElementType,
   /**
-    Component to render the footer of the moda.l
+    deprecated, use components prop: Component to render the footer of the moda.l
   */
   footer?: ElementType,
   /**
@@ -101,7 +101,6 @@ export default class Content extends Component<Props, State> {
     components: {},
     isChromeless: false,
     stackIndex: 0,
-    // body: Body,    // Components should be the default now
     isHeadingMultiline: true,
   };
 
@@ -198,7 +197,7 @@ export default class Content extends Component<Props, State> {
     const {
       actions,
       appearance,
-      body: PropBody,
+      body: BodyProp,
       components,
       children,
       footer,
@@ -212,9 +211,10 @@ export default class Content extends Component<Props, State> {
 
     // Only load in 'div' default if there's no deprecated 'body' prop provided
     let BodyContainer = components.Body;
-    if (!PropBody) {
+    if (!BodyProp) {
       if (!components.Body) BodyContainer = 'div';
     }
+    const BodyPropComponent = BodyProp || Body;
 
     const { Container = 'div' } = components;
     const { showFooterKeyline, showHeaderKeyline } = this.state;
@@ -242,12 +242,12 @@ export default class Content extends Component<Props, State> {
                 {children}
               </Body>
             ) : (
-              <PropBody
+              <BodyPropComponent
                 innerRef={this.getScrollContainer}
                 shouldScroll={shouldScroll}
               >
                 {children}
-              </PropBody>
+              </BodyPropComponent>
             )}
             <Footer
               actions={actions}

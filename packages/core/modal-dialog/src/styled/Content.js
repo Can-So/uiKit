@@ -132,7 +132,7 @@ export const Body = ({
   component: ElementType,
   children: Node,
   innerRef: Function,
-  shouldScroll: boolean,
+  shouldScroll?: boolean,
 }) => {
   let BodyStyledComponent = DefaultBodyComponent;
   if (component !== 'div') {
