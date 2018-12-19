@@ -1,0 +1,43 @@
+{
+  "releases": [{ "name": "@atlaskit/form", "type": "major" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/feedback-collector",
+      "type": "patch",
+      "dependencies": ["@atlaskit/select", "@atlaskit/form"]
+    },
+    {
+      "name": "@atlaskit/radio",
+      "type": "patch",
+      "dependencies": ["@atlaskit/form"]
+    },
+    {
+      "name": "@atlaskit/select",
+      "type": "patch",
+      "dependencies": ["@atlaskit/form"]
+    },
+    {
+      "name": "@atlaskit/textfield",
+      "type": "patch",
+      "dependencies": ["@atlaskit/form"]
+    },
+    {
+      "name": "@atlaskit/editor-mobile-bridge",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/select",
+        "@atlaskit/textfield",
+        "@atlaskit/form"
+      ]
+    },
+    {
+      "name": "@atlaskit/smart-card",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/radio",
+        "@atlaskit/textfield",
+        "@atlaskit/form"
+      ]
+    }
+  ]
+}

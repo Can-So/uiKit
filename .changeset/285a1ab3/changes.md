@@ -1,0 +1,4 @@
+- **Breaking:** this version is a major overhaul of the package.
+  - **Conceptual changes:** The `Form` component must be the source of truth for the form state. This means you keep track of far less state in your application.
+  - **API changes:** `Form`, `Field` and `CheckboxField` components use render props. This was done to maximise the flexiblity of the what can be rendered inside `Form` or `Field`s.
+  - **Accessibility:** Creating accessible forms is easier than ever with this release. It is straight forward to link validation messages or helper text with a field. See the examples for details.
