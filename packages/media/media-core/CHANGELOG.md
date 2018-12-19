@@ -1,5 +1,13 @@
 # @atlaskit/media-core
 
+## 24.7.0
+- [minor] [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+
+  - New method context.file.touchFiles is added; Optional third parameter is added to context.file.upload - loadableFileUpfrontIds where you can define file id, and promise of upload id upfront
+- Updated dependencies [096f898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/096f898):
+  - @atlaskit/media-test-helpers@18.7.0
+  - @atlaskit/media-store@9.0.0
+
 ## 24.6.0
 - [minor] [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
 

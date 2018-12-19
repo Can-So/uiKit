@@ -1,5 +1,14 @@
 # @atlaskit/conversation
 
+## 11.1.7
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/renderer@33.0.0
+  - @atlaskit/comment@6.0.32
+  - @atlaskit/reactions@15.0.11
+  - @atlaskit/util-data-test@10.0.28
+
 ## 11.1.6
 - Updated dependencies [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
   - @atlaskit/editor-common@24.0.0
