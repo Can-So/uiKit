@@ -313,8 +313,8 @@ export function createApiRouter(): Router<DatabaseSchema> {
     const { sourceFile } = JSON.parse(body);
     const {
       collection: destinationCollection,
-      replaceFileId,
-      occurrenceKey,
+      replaceFileId = uuid(),
+      occurrenceKey = uuid(),
     } = query;
 
     const sourceRecord = database.findOne('collectionItem', {
@@ -325,9 +325,9 @@ export function createApiRouter(): Router<DatabaseSchema> {
     const { details, type, blob } = sourceRecord.data;
 
     const record = database.push('collectionItem', {
-      id: replaceFileId ? replaceFileId : uuid(),
+      id: replaceFileId,
       insertedAt: Date.now(),
-      occurrenceKey: occurrenceKey ? occurrenceKey : uuid(),
+      occurrenceKey: occurrenceKey,
       type,
       details,
       blob,

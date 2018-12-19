@@ -4,11 +4,12 @@ import {
   createUploadContext,
   //  mediaMock,
 } from '@atlaskit/media-test-helpers';
-import { MediaPicker } from '../src';
-import { Card, FileIdentifier } from '@atlaskit/media-card';
-import { CardWrapper } from '../src/popup/components/views/upload/styled';
+import { Card, FileIdentifier, CardEvent } from '@atlaskit/media-card';
 import { MediaViewer, MediaViewerItem } from '@atlaskit/media-viewer';
 import { FileDetails } from '@atlaskit/media-core';
+import Button from '@atlaskit/button';
+import { CardWrapper } from '../src/popup/components/views/upload/styled';
+import { MediaPicker } from '../src';
 
 //mediaMock.enable();
 
@@ -29,10 +30,7 @@ export interface State {
 }
 
 export default class Example extends React.Component<{}, State> {
-  constructor(readonly props: any) {
-    super(props);
-    this.state = { events: [] };
-  }
+  state: State = { events: [] };
 
   componentDidMount() {
     popup.on('uploads-start', payload => {
@@ -43,55 +41,51 @@ export default class Example extends React.Component<{}, State> {
     });
   }
 
-  render() {
-    const { events, selectedItem } = this.state;
+  private onCardClick = (event: CardEvent) => {
+    this.setState({
+      selectedItem: {
+        id: (event.mediaItemDetails as FileDetails).id,
+        occurrenceKey: '',
+        type: 'file',
+      },
+    });
+  };
 
-    console.log(selectedItem);
+  private renderCards = () => {
+    const { events } = this.state;
+
+    return events.map((id, key) => {
+      const identifier: FileIdentifier = {
+        id,
+        mediaItemType: 'file',
+        collectionName: defaultCollectionName,
+      };
+
+      return (
+        <Card
+          key={key}
+          context={context}
+          identifier={identifier}
+          dimensions={{
+            width: 200,
+            height: 200,
+          }}
+          onClick={this.onCardClick}
+        />
+      );
+    });
+  };
+
+  render() {
+    const { selectedItem } = this.state;
 
     return (
       <>
-        <CardWrapper>
-          {events.map((id, key) => {
-            const identifier: FileIdentifier = {
-              id,
-              mediaItemType: 'file',
-              collectionName: defaultCollectionName,
-            };
-
-            if (typeof identifier.id !== 'string') {
-              identifier.id.then(idString =>
-                console.log('identifier', idString),
-              );
-            } else {
-              console.log('identifier', identifier.id);
-            }
-
-            return (
-              <Card
-                key={key}
-                context={context}
-                identifier={identifier}
-                dimensions={{
-                  width: 200,
-                  height: 200,
-                }}
-                onClick={async event => {
-                  const details = event.mediaItemDetails as FileDetails;
-                  console.log('event id', details.id);
-
-                  this.setState({
-                    selectedItem: {
-                      id: (event.mediaItemDetails as FileDetails).id,
-                      occurrenceKey: '',
-                      type: 'file',
-                    },
-                  });
-                }}
-              />
-            );
-          })}
-        </CardWrapper>
-        {selectedItem && (
+        <Button id="show" onClick={() => popup.show()}>
+          Show
+        </Button>
+        <CardWrapper>{this.renderCards()}</CardWrapper>
+        {selectedItem ? (
           <MediaViewer
             featureFlags={{ customVideoPlayer: true }}
             context={context}
@@ -100,7 +94,7 @@ export default class Example extends React.Component<{}, State> {
             collectionName={defaultCollectionName}
             onClose={() => this.setState({ selectedItem: undefined })}
           />
-        )}
+        ) : null}
       </>
     );
   }
