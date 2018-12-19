@@ -201,6 +201,7 @@ export function table(
           }
           output.push(builder.buildPMNode());
         }
+
         return {
           type: 'pmnode',
           nodes: output,
@@ -232,6 +233,7 @@ export function table(
           currentState = processState.BUFFER;
           continue;
         }
+        break;
       }
       case processState.MACRO: {
         const match = parseMacroKeyword(input.substring(index));
@@ -248,6 +250,7 @@ export function table(
         continue;
       }
     }
+
     index++;
   }
 
