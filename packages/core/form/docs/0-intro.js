@@ -66,7 +66,7 @@ const MyForm = () => (
   pass in default values and wait for the callback when the form is submitted.
   
   Form does not render anything itself. Instead it passes down props it expects to be
-  spread onto a form element. It also passes to it's children global form information.
+  spread onto a form element. It also passes to its children global form information.
   This includes whether the form is dirty, disabled or submitting.
   
   The onSubmit function gets called when all fields are valid and the form gets
