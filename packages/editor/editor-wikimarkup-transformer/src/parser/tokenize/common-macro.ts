@@ -27,7 +27,7 @@ export function commonMacro(
    * Forging the opening regex, the result would look something like
    * /^\{(quote)(?::([^\{\n\}]*))?\}/i
    */
-  const opening = new RegExp(`^{(${opt.keyword})(?::([^\{\n\}]*))?\}`, 'i');
+  const opening = new RegExp(`^\{(${opt.keyword})(?::([^\{\n\}]*))?\}`, 'i');
   const matchOpening = input.match(opening);
 
   if (!matchOpening) {

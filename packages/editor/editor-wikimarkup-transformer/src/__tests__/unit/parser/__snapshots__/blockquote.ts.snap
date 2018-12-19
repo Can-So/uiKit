@@ -6,11 +6,16 @@ Object {
     Object {
       "content": Array [
         Object {
-          "text": "bq.this is a blockquote node",
-          "type": "text",
+          "content": Array [
+            Object {
+              "text": "this is a blockquote node",
+              "type": "text",
+            },
+          ],
+          "type": "paragraph",
         },
       ],
-      "type": "paragraph",
+      "type": "blockquote",
     },
   ],
   "type": "doc",
