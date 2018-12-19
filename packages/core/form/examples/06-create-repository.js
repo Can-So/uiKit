@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import Select from '@atlaskit/select';
 import Textfield from '@atlaskit/textfield';
-import Button from '@atlaskit/button';
+import Button, { ButtonGroup } from '@atlaskit/button';
 import { RadioGroup } from '@atlaskit/radio';
 import { Checkbox } from '@atlaskit/checkbox';
 
@@ -171,16 +171,18 @@ export default class LayoutExample extends PureComponent<void, State> {
               </FormSection>
 
               <FormFooter>
-                <Button
-                  appearance="primary"
-                  id="create-repo-button"
-                  type="submit"
-                >
-                  Create repository
-                </Button>
-                <Button appearance="subtle" id="create-repo-cancel">
-                  Cancel
-                </Button>
+                <ButtonGroup>
+                  <Button appearance="subtle" id="create-repo-cancel">
+                    Cancel
+                  </Button>
+                  <Button
+                    appearance="primary"
+                    id="create-repo-button"
+                    type="submit"
+                  >
+                    Create repository
+                  </Button>
+                </ButtonGroup>
               </FormFooter>
             </form>
           )}
