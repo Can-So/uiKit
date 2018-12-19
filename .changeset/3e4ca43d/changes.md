@@ -1,1 +1,0 @@
-- Removing extraneous wrapping span around icons which was causing an accessibility error

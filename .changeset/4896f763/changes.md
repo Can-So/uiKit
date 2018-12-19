@@ -1,1 +1,0 @@
-- Update validation example to be compatible with the new Forms API

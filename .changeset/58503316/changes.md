@@ -1,1 +1,0 @@
-- Changes to isLabelHidden behavour. Previously when isLabelHidden was true, a label with display none would be rendered. Now when isLabelHidden is true, no label element is rendered.

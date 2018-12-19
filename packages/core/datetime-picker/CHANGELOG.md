@@ -1,5 +1,10 @@
 # @atlaskit/datetime-picker
 
+## 6.3.22
+- [patch] [5c548ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c548ea):
+
+  - Removing extraneous wrapping span around icons which was causing an accessibility error
+
 ## 6.3.21
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2
