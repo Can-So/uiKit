@@ -1,1 +1,0 @@
-- Parse macros inside table cells

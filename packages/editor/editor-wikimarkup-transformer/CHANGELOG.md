@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.9.0
+- [minor] [a4b49b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4b49b2):
+
+  - Parse macros inside table cells
+
 ## 2.8.2
 - Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
   - @atlaskit/editor-common@25.0.0
