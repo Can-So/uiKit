@@ -57,7 +57,15 @@ export default class Example extends React.Component<{}, State> {
               mediaItemType: 'file',
               collectionName: defaultCollectionName,
             };
-            console.log({ identifier });
+
+            if (typeof identifier.id !== 'string') {
+              identifier.id.then(idString =>
+                console.log('identifier', idString),
+              );
+            } else {
+              console.log('identifier', identifier.id);
+            }
+
             return (
               <Card
                 key={key}
@@ -68,6 +76,9 @@ export default class Example extends React.Component<{}, State> {
                   height: 200,
                 }}
                 onClick={async event => {
+                  const details = event.mediaItemDetails as FileDetails;
+                  console.log('event id', details.id);
+
                   this.setState({
                     selectedItem: {
                       id: (event.mediaItemDetails as FileDetails).id,
