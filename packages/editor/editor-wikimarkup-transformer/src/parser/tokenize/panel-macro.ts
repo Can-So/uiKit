@@ -16,8 +16,8 @@ export function panelMacro(
   tokenErrCallback?: TokenErrCallback,
 ): Token {
   return commonMacro(input.substring(position), schema, {
-    opening: /^\{panel(?::([^\{\n\}]*))?\}/,
-    closing: /\{panel\}/,
+    keyword: 'panel',
+    paired: true,
     rawContentProcessor,
     tokenErrCallback,
   });
