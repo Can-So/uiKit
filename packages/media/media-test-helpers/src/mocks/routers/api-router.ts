@@ -284,12 +284,15 @@ export function createApiRouter(): Router<DatabaseSchema> {
         id: descriptor.id,
         collectionName: descriptor.collection,
       });
-      return {
-        type: 'file',
-        id: descriptor.id,
-        collection: descriptor.collection,
-        details: record.data.details,
-      };
+      if (record) {
+        return {
+          type: 'file',
+          id: descriptor.id,
+          collection: descriptor.collection,
+          details: record.data.details,
+        };
+      }
+      return null;
     });
 
     if (records.length) {
@@ -306,7 +309,7 @@ export function createApiRouter(): Router<DatabaseSchema> {
   router.post('/file/copy/withToken', (request, database) => {
     const { body, query } = request;
     const { sourceFile } = JSON.parse(body);
-    const { collection: destinationCollection } = query;
+    const { collection: destinationCollection, replaceFileId } = query;
 
     const sourceRecord = database.findOne('collectionItem', {
       id: sourceFile.id,
@@ -316,7 +319,7 @@ export function createApiRouter(): Router<DatabaseSchema> {
     const { details, type, blob } = sourceRecord.data;
 
     const record = database.push('collectionItem', {
-      id: uuid.v4(),
+      id: replaceFileId,
       insertedAt: Date.now(),
       occurrenceKey: uuid.v4(),
       type,
