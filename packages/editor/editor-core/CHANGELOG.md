@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 91.2.2
+- [patch] [af32972](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af32972):
+
+  - ED-5880: disable media layout buttons
+
 ## 91.2.1
 - [patch] [e714e7a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e714e7a):
 
