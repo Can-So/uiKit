@@ -192,7 +192,7 @@ describe('<StatelessUploadView />', () => {
               id: 'id1',
               mimeType: 'image/jpeg',
               name: 'some-file-name',
-              upfrontId,
+              userUpfrontId: upfrontId,
             },
           },
         } as LocalUpload,
