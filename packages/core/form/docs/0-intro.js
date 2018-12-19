@@ -94,7 +94,9 @@ const MyForm = () => (
 ${(
   <ul>
     <li>
-      <Link to="form/docs/fields">Learn more about Form and Field components</Link>
+      <Link to="form/docs/fields">
+        Learn more about Form and Field components
+      </Link>
     </li>
     <li>
       <Link to="form/docs/validation">
