@@ -140,28 +140,31 @@ class MediaSingleEdit extends React.Component<Props & InjectedIntlProps, {}> {
           fitHeight={32}
           alignX="center"
         >
-          {toolbarIcons.map((layout, index) => {
-            // Don't render Wide and Full width button for image smaller than editor content width
-            const { value, Icon } = layout;
+          {allowLayout && (
+            <>
+              {toolbarIcons.map((layout, index) => {
+                // Don't render Wide and Full width button for image smaller than editor content width
+                const { value, Icon } = layout;
 
-            if (value === 'separator') {
-              return <Separator key={index} />;
-            }
-            const label = formatMessage(layoutToMessages[value]);
+                if (value === 'separator') {
+                  return <Separator key={index} />;
+                }
+                const label = formatMessage(layoutToMessages[value]);
 
-            return (
-              <ToolbarButton
-                spacing="compact"
-                key={index}
-                disabled={!allowLayout}
-                selected={value === selectedLayout}
-                onClick={this.handleChangeLayout.bind(this, value)}
-                title={label}
-                iconBefore={Icon && <Icon label={label} />}
-              />
-            );
-          })}
-          <Separator />
+                return (
+                  <ToolbarButton
+                    spacing="compact"
+                    key={index}
+                    selected={value === selectedLayout}
+                    onClick={this.handleChangeLayout.bind(this, value)}
+                    title={label}
+                    iconBefore={Icon && <Icon label={label} />}
+                  />
+                );
+              })}
+              <Separator />
+            </>
+          )}
           <ToolbarButtonDestructive
             spacing="compact"
             onClick={this.handleRemove}
