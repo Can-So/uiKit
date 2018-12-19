@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.1
+- [patch] [a83bedb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a83bedb):
+
+  - Fix codeblock input rules inside unsupported blocks
+
 ## 92.0.0
 - Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
 - Updated dependencies [6cb6696](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6cb6696):
