@@ -34,6 +34,7 @@ export interface FileDetails {
   creationDate?: number; // timestamp in milliseconds from EPOCH
   processingStatus?: FileProcessingStatus;
   artifacts?: Artifacts;
+  occurenceKey?: string;
 }
 
 export interface LinkItem {

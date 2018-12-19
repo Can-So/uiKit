@@ -327,7 +327,7 @@ export function createApiRouter(): Router<DatabaseSchema> {
     const record = database.push('collectionItem', {
       id: replaceFileId,
       insertedAt: Date.now(),
-      occurrenceKey: occurrenceKey,
+      occurrenceKey,
       type,
       details,
       blob,

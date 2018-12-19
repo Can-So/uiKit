@@ -51,6 +51,7 @@ import {
 } from './styled';
 import { RECENTS_COLLECTION } from '../../../config';
 import { removeFileFromRecents } from '../../../actions/removeFileFromRecents';
+import * as uuid from 'uuid/v4';
 
 const createEditCardAction = (
   handler: CardEventHandler,
@@ -401,6 +402,7 @@ export class StatelessUploadView extends Component<
             mimeType: fileDetails.mimeType || '',
             size: fileDetails.size || 0,
             upfrontId,
+            occurrenceKey: uuid(),
           },
           'recent_files',
         );

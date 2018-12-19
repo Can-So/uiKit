@@ -171,7 +171,9 @@ export const importFilesFromRecentFiles = (
     collection: RECENTS_COLLECTION,
   };
 
-  store.dispatch(finalizeUpload(file, uploadId, source));
+  store.dispatch(
+    finalizeUpload(file, uploadId, source, undefined, file.occurrenceKey),
+  );
   store.dispatch(getPreview(uploadId, file, RECENTS_COLLECTION));
 };
 
