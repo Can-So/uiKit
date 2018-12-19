@@ -1,0 +1,1 @@
+- ED-5923: don't grow page while using resize handles on images
