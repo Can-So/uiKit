@@ -169,7 +169,6 @@ export class NewUploadServiceImpl implements UploadService {
 
         let userUpfrontId: Promise<string> | undefined;
         let userOccurrenceKey: Promise<string> | undefined;
-
         let upfrontId = Promise.resolve(id);
 
         if (!shouldCopyFileToRecents) {
@@ -227,21 +226,17 @@ export class NewUploadServiceImpl implements UploadService {
 
         this.cancellableFilesUploads[id] = cancellableFileUpload;
         // Save observable in the cache
-        upfrontId.then(id => {
-          if (observable) {
-            const key = FileStreamCache.createKey(id);
-            const keyWithCollection = FileStreamCache.createKey(id, {
-              collectionName: this.tenantUploadParams.collection,
-            });
-
-            // We want to save the observable without collection too, due consumers using cards without collection.
-            fileStreamsCache.set(key, observable);
-            fileStreamsCache.set(keyWithCollection, observable);
-          }
+        const key = FileStreamCache.createKey(id);
+        const keyWithCollection = FileStreamCache.createKey(id, {
+          collectionName: this.tenantUploadParams.collection,
         });
 
+        // We want to save the observable without collection too, due consumers using cards without collection.
+        fileStreamsCache.set(key, observable);
+        fileStreamsCache.set(keyWithCollection, observable);
+
         // TODO: cleanup this if we decide to go with this approach
-        if (userUpfrontId && observable) {
+        if (userUpfrontId) {
           // Save user id in the cache
           userUpfrontId.then(id => {
             if (observable) {
