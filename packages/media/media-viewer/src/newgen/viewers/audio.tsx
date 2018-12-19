@@ -118,6 +118,7 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
 
   private setCoverUrl = async () => {
     const { context, item, collectionName } = this.props;
+
     if (item.status !== 'processed') {
       return;
     }
@@ -131,12 +132,17 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
 
   protected async init() {
     const { context, item, collectionName } = this.props;
+
     try {
       let audioUrl: string | undefined;
 
       if (item.status === 'processed') {
+        const artifactUrl = getArtifactUrl(item.artifacts, 'audio.mp3');
+        if (!artifactUrl) {
+          throw new Error('No audio artifacts found');
+        }
         audioUrl = await constructAuthTokenUrl(
-          getArtifactUrl(item.artifacts, 'audio.mp3') || '',
+          artifactUrl,
           context,
           collectionName,
         );
@@ -146,7 +152,6 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
           audioUrl = URL.createObjectURL(preview.blob);
         }
       }
-
       if (!audioUrl) {
         throw new Error('No audio artifacts found');
       }

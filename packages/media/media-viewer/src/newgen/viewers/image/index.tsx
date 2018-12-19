@@ -58,10 +58,8 @@ export class ImageViewer extends BaseViewer<ObjectUrl, ImageViewerProps> {
           mode: 'fit',
           allowAnimated: true,
         });
-
-        imagePreview = await response;
-
         this.cancelImageFetch = () => cancel(REQUEST_CANCELLED);
+        imagePreview = await response;
       } else {
         const { preview } = file;
         if (preview) {

@@ -72,8 +72,12 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
     try {
       let contentUrl: string | undefined;
       if (item.status === 'processed') {
+        const artifactUrl = getVideoArtifactUrl(item, preferHd);
+        if (!artifactUrl) {
+          throw new Error(`No video artifacts found`);
+        }
         contentUrl = await constructAuthTokenUrl(
-          getVideoArtifactUrl(item, preferHd) || '',
+          artifactUrl,
           context,
           collectionName,
         );
