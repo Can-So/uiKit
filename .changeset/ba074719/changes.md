@@ -1,1 +1,0 @@
-- macros keyword can be case insensitive
