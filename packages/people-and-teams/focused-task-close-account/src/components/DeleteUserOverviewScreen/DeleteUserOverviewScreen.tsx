@@ -229,7 +229,6 @@ export class DeleteUserOverviewScreen extends React.Component<
                   >
                     <FormattedMessage {...commonMessages.deactivateAccount} />
                   </Button>
-                  )}
                 </p>
               )}
             </SectionMessage>
