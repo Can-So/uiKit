@@ -1,0 +1,1 @@
+- **feature:** Uses context to automatically assosiate a message to field. No upgrade changes required. Can remove fieldId prop on Message components if you are using that prop currently.

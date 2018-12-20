@@ -3,6 +3,7 @@ import React, { type Node } from 'react';
 import arrayShallowEqual from 'shallow-equal/arrays';
 import objectShallowEqual from 'shallow-equal/objects';
 import uuid from 'uuid';
+import memozie from 'memoize-one';
 import invariant from 'tiny-invariant';
 import { type FieldState, type FieldSubscription } from 'final-form';
 import { FormContext, IsDisabledContext } from './Form';
@@ -84,6 +85,10 @@ const shallowEqual = (a, b) =>
   (Array.isArray(b) && arrayShallowEqual(a, b)) ||
   (typeof b === 'object' && objectShallowEqual(a, b));
 
+// Provides the id of the field to message components.
+// This links the message with the field for screen-readers.
+export const FieldId = React.createContext();
+
 class FieldInner extends React.Component<InnerProps, State> {
   static defaultProps = {
     registerField: () => () => {},
@@ -92,12 +97,7 @@ class FieldInner extends React.Component<InnerProps, State> {
 
   unregisterField = () => {};
 
-  getFieldId = () => {
-    if (this.props.id) {
-      return this.props.id;
-    }
-    return `${this.props.name}-${uuid()}`;
-  };
+  getFieldId = memozie(name => `${name}-${uuid()}`);
 
   state = {
     // eslint-disable-next-line no-unused-vars
@@ -191,15 +191,13 @@ class FieldInner extends React.Component<InnerProps, State> {
       isDisabled,
       label,
       name,
+      id,
       transform,
     } = this.props;
     const { onChange, onBlur, onFocus, value, ...rest } = this.state;
     const error =
       rest.submitError || ((rest.touched || rest.dirty) && rest.error);
-    const labelId = `${this.getFieldId()}-label`;
-    const helperId = `${this.getFieldId()}-helper`;
-    const validId = `${this.getFieldId()}-valid`;
-    const errorId = `${this.getFieldId()}-error`;
+    const fieldId = id || this.getFieldId(name);
     const fieldProps = {
       onChange: e => {
         onChange(transform(e, value));
@@ -212,20 +210,22 @@ class FieldInner extends React.Component<InnerProps, State> {
       isInvalid: Boolean(error),
       isRequired: Boolean(isRequired),
       'aria-invalid': error ? 'true' : 'false',
-      'aria-labelledby': `${labelId} ${helperId} ${errorId} ${validId}`,
-      id: this.getFieldId(),
+      'aria-labelledby': `${fieldId}-label ${fieldId}-helper ${fieldId}-valid ${fieldId}-error`,
+      id: fieldId,
     };
     return (
       <FieldWrapper>
         {label && (
-          <Label id={labelId} htmlFor={this.getFieldId()}>
+          <Label id={`${fieldId}-label`} htmlFor={fieldId}>
             {label}
             {isRequired && (
               <RequiredIndicator aria-hidden="true">*</RequiredIndicator>
             )}
           </Label>
         )}
-        {children({ fieldProps, error, meta: rest })}
+        <FieldId.Provider value={fieldId}>
+          {children({ fieldProps, error, meta: rest })}
+        </FieldId.Provider>
       </FieldWrapper>
     );
   }
