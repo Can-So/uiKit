@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 25.0.2
+- [patch] [ce65803](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce65803):
+
+  - Fix issue where panel icons were small in tables
+
 ## 25.0.1
 - [patch] [3585da7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3585da7):
 
