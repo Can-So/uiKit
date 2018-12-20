@@ -54,6 +54,7 @@ export class Card extends Component<CardProps, CardState> {
   };
 
   componentDidMount() {
+    console.log('componentDidMount');
     const { identifier, context } = this.props;
     this.hasBeenMounted = true;
     this.subscribe(identifier, context);
@@ -403,7 +404,7 @@ export class Card extends Component<CardProps, CardState> {
     const content = isPlayingFile
       ? this.renderInlinePlayer()
       : this.renderCard();
-
+    console.log({ isPlayingFile });
     return this.context.intl ? (
       content
     ) : (

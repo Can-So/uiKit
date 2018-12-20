@@ -56,9 +56,12 @@ export class InlinePlayer extends Component<
             const { artifacts } = state;
 
             try {
+              const preferedArtifact = artifacts['video_1280.mp4']
+                ? 'video_1280.mp4'
+                : 'video_640.mp4';
               const fileSrc = await context.file.getArtifactURL(
                 artifacts,
-                'video_1280.mp4',
+                preferedArtifact,
                 collectionName,
               );
 
