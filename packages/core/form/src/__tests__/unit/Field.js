@@ -4,8 +4,13 @@ import { mount } from 'enzyme';
 import Button from '@atlaskit/button';
 import FieldText from '@atlaskit/field-text';
 import TextField from '@atlaskit/textfield';
-import Form, { Field } from '../../../src';
-import { HelperMessage, ErrorMessage } from '../../Messages';
+import Form, {
+  Field,
+  HelperMessage,
+  ErrorMessage,
+  ValidMessage,
+} from '../../../src';
+import { Label } from '../../styled/Field';
 
 export class WithState extends React.Component<
   { defaultState: any, children: (any, Function) => any },
@@ -164,6 +169,64 @@ test('change in defaultValue should reset form field', () => {
     expect(wrapper.find(ErrorMessage)).toHaveLength(0);
     expect(wrapper.find(FieldText).props()).toMatchObject({ value: 'jill' });
   });
+});
+
+test('should assosiate messages with field', () => {
+  const wrapper = mount(
+    <Form onSubmit={jest.fn()}>
+      {() => (
+        <Field name="username" id="username" defaultValue="">
+          {({ fieldProps }) => (
+            <>
+              <TextField {...fieldProps} />
+              <HelperMessage>Helper text</HelperMessage>
+              <ErrorMessage>Error message</ErrorMessage>
+              <ValidMessage>Valid message</ValidMessage>
+            </>
+          )}
+        </Field>
+      )}
+    </Form>,
+  );
+  const labelledBy = wrapper
+    .find(TextField)
+    .prop('aria-labelledby')
+    .split(' ');
+  expect(labelledBy).toContain(
+    wrapper
+      .find(HelperMessage)
+      .find('div')
+      .prop('id'),
+  );
+  expect(labelledBy).toContain(
+    wrapper
+      .find(ErrorMessage)
+      .find('div')
+      .prop('id'),
+  );
+  expect(labelledBy).toContain(
+    wrapper
+      .find(ValidMessage)
+      .find('div')
+      .prop('id'),
+  );
+});
+
+test('should assosiate label with field', () => {
+  const wrapper = mount(
+    <Form onSubmit={jest.fn()}>
+      {() => (
+        <Field name="username" id="username" label="User name" defaultValue="">
+          {({ fieldProps }) => <TextField {...fieldProps} />}
+        </Field>
+      )}
+    </Form>,
+  );
+  const labelledBy = wrapper
+    .find(TextField)
+    .prop('aria-labelledby')
+    .split(' ');
+  expect(labelledBy).toContain(wrapper.find(Label).prop('id'));
 });
 
 test('should indicate whether form is submitting', () => {

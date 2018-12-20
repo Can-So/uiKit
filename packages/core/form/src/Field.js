@@ -84,6 +84,10 @@ const shallowEqual = (a, b) =>
   (Array.isArray(b) && arrayShallowEqual(a, b)) ||
   (typeof b === 'object' && objectShallowEqual(a, b));
 
+// Provides the id of the field to message components.
+// This links the message with the field for screen-readers.
+export const FieldId = React.createContext();
+
 class FieldInner extends React.Component<InnerProps, State> {
   static defaultProps = {
     registerField: () => () => {},
@@ -196,10 +200,7 @@ class FieldInner extends React.Component<InnerProps, State> {
     const { onChange, onBlur, onFocus, value, ...rest } = this.state;
     const error =
       rest.submitError || ((rest.touched || rest.dirty) && rest.error);
-    const labelId = `${this.getFieldId()}-label`;
-    const helperId = `${this.getFieldId()}-helper`;
-    const validId = `${this.getFieldId()}-valid`;
-    const errorId = `${this.getFieldId()}-error`;
+    const fieldId = this.getFieldId();
     const fieldProps = {
       onChange: e => {
         onChange(transform(e, value));
@@ -212,20 +213,22 @@ class FieldInner extends React.Component<InnerProps, State> {
       isInvalid: Boolean(error),
       isRequired: Boolean(isRequired),
       'aria-invalid': error ? 'true' : 'false',
-      'aria-labelledby': `${labelId} ${helperId} ${errorId} ${validId}`,
+      'aria-labelledby': `${fieldId}-label ${fieldId}-helper ${fieldId}-valid ${fieldId}-error`,
       id: this.getFieldId(),
     };
     return (
       <FieldWrapper>
         {label && (
-          <Label id={labelId} htmlFor={this.getFieldId()}>
+          <Label id={`${fieldId}-label`} htmlFor={fieldId}>
             {label}
             {isRequired && (
               <RequiredIndicator aria-hidden="true">*</RequiredIndicator>
             )}
           </Label>
         )}
-        {children({ fieldProps, error, meta: rest })}
+        <FieldId.Provider value={fieldId}>
+          {children({ fieldProps, error, meta: rest })}
+        </FieldId.Provider>
       </FieldWrapper>
     );
   }
