@@ -108,7 +108,6 @@ export async function importFiles(
     if (serviceName === 'upload') {
       const localUpload: LocalUpload = uploads[selectedItemId];
       const replaceFileId = file.upfrontId;
-      const occurrenceKey = file.occurrenceKey;
 
       importFilesFromLocalUpload(
         selectedItemId,
@@ -116,7 +115,6 @@ export async function importFiles(
         store,
         localUpload,
         replaceFileId,
-        occurrenceKey,
       );
     } else if (serviceName === 'recent_files') {
       importFilesFromRecentFiles(selectedUploadFile, store);
@@ -138,7 +136,6 @@ export const importFilesFromLocalUpload = (
   store: Store<State>,
   localUpload: LocalUpload,
   replaceFileId?: Promise<string>,
-  occurrenceKey?: string,
 ): void => {
   localUpload.events.forEach(originalEvent => {
     const event = { ...originalEvent };
@@ -150,9 +147,7 @@ export const importFilesFromLocalUpload = (
         collection: RECENTS_COLLECTION,
       };
 
-      store.dispatch(
-        finalizeUpload(file, uploadId, source, replaceFileId, occurrenceKey),
-      );
+      store.dispatch(finalizeUpload(file, uploadId, source, replaceFileId));
     } else if (event.name !== 'upload-end') {
       store.dispatch(sendUploadEvent({ event, uploadId }));
     }
@@ -171,9 +166,7 @@ export const importFilesFromRecentFiles = (
     collection: RECENTS_COLLECTION,
   };
 
-  store.dispatch(
-    finalizeUpload(file, uploadId, source, undefined, file.occurrenceKey),
-  );
+  store.dispatch(finalizeUpload(file, uploadId, source, undefined));
   store.dispatch(getPreview(uploadId, file, RECENTS_COLLECTION));
 };
 
