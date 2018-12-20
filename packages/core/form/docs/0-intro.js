@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 
 export default md`
 
-  This package contains a number of components to help manage form **state**, **validation** and **layout**.
-  Below is an example of a form with a single text field.
+  Build quality forms fast. This package provides **form behaviour**, 
+  helps with **form layout** and creates **accessible forms** by default.
 
   ## Usage
+  Below is an example of a form with a single text field.
 
   ${code`
 import Form, { Field } from '@atlaskit/form';
