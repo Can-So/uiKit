@@ -29,13 +29,7 @@ export default function(fetcher: Fetcher): Middleware {
 export function finalizeUpload(
   fetcher: Fetcher,
   store: Store<State>,
-  {
-    file,
-    uploadId,
-    source,
-    replaceFileId,
-    occurrenceKey,
-  }: FinalizeUploadAction,
+  { file, uploadId, source, replaceFileId }: FinalizeUploadAction,
 ): Promise<SendUploadEventAction> {
   const { userContext } = store.getState();
   return userContext.config
@@ -54,7 +48,6 @@ export function finalizeUpload(
         uploadId,
         sourceFile,
         replaceFileId,
-        occurrenceKey,
       };
 
       return copyFile(copyFileParams);
@@ -68,7 +61,6 @@ type CopyFileParams = {
   uploadId: string;
   sourceFile: SourceFile;
   replaceFileId?: Promise<string>;
-  occurrenceKey?: string;
 };
 
 async function copyFile({
@@ -78,7 +70,6 @@ async function copyFile({
   uploadId,
   sourceFile,
   replaceFileId,
-  occurrenceKey,
 }: CopyFileParams): Promise<SendUploadEventAction> {
   const { deferredIdUpfronts, tenantContext, config } = store.getState();
   const collection = config.uploadParams && config.uploadParams.collection;
@@ -92,7 +83,7 @@ async function copyFile({
   const params: MediaStoreCopyFileWithTokenParams = {
     collection,
     replaceFileId: replaceFileId ? await replaceFileId : undefined,
-    occurrenceKey,
+    occurrenceKey: file.occurrenceKey,
   };
 
   return mediaStore
