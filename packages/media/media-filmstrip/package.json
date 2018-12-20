@@ -41,6 +41,7 @@
     "@atlaskit/media-core": "^24.7.0",
     "@atlaskit/media-test-helpers": "^18.7.0",
     "enzyme": "^3.7.0",
-    "react": "^16.4.0"
+    "react": "^16.4.0",
+    "react-dom": "^16.4.2"
   }
 }

@@ -32,6 +32,7 @@
     "@atlaskit/build-utils": "^2.1.0",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/media-core": "^24.7.0",
-    "@atlaskit/media-test-helpers": "^18.7.0"
+    "@atlaskit/media-test-helpers": "^18.7.0",
+    "react-dom": "^16.4.2"
   }
 }
