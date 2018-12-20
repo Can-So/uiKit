@@ -1,0 +1,1 @@
+- Fix issue where panel icons were small in tables
