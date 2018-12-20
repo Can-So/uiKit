@@ -66,6 +66,10 @@
     "type": "git",
     "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
   },
+  "scripts": {
+    "i18n:push": "i18n-tools push --resource mention . --type ts",
+    "i18n:pull": "i18n-tools pull --resource mention . --type ts"
+  },
   "keywords": [
     "ui",
     "mention",
