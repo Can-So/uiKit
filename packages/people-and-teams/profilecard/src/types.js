@@ -1,5 +1,6 @@
 // @flow
 import { type Element as ReactElement } from 'react';
+import type { IntlShape } from 'react-intl';
 
 export type PresenceTypes =
   | 'none'
@@ -53,6 +54,7 @@ export type ProfilecardProps = {
 
 export type MessageIntlProviderProps = {
   children: ReactElement<*>,
+  intl: IntlShape,
 };
 
 export type RelativeDateKeyType =

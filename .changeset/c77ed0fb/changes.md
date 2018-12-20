@@ -1,0 +1,1 @@
+- Remove typescript type InjectedIntlProps from flow js code
