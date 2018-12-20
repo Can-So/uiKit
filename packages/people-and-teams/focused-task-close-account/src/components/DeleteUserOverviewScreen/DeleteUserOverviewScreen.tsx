@@ -212,19 +212,26 @@ export class DeleteUserOverviewScreen extends React.Component<
           {this.displayThirdListElement()}
           {this.displayFourthListElement()}
         </Styled.MainInformationList>
-        {!isUserDeactivated && deactivateUserHandler && (
+        {deactivateUserHandler && (
           <Styled.SectionMessageOuter>
             <SectionMessage appearance="warning">
-              <FormattedMessage {...overviewMessages.warningSectionBody} />
-              <p>
-                <Button
-                  appearance="link"
-                  spacing="none"
-                  onClick={deactivateUserHandler}
-                >
-                  <FormattedMessage {...commonMessages.deactivateAccount} />
-                </Button>
-              </p>
+              <FormattedMessage
+                {...(isUserDeactivated
+                  ? overviewMessages.warningSectionBodyDeactivated
+                  : overviewMessages.warningSectionBody)}
+              />
+              {!isUserDeactivated && (
+                <p>
+                  <Button
+                    appearance="link"
+                    spacing="none"
+                    onClick={deactivateUserHandler}
+                  >
+                    <FormattedMessage {...commonMessages.deactivateAccount} />
+                  </Button>
+                  )}
+                </p>
+              )}
             </SectionMessage>
           </Styled.SectionMessageOuter>
         )}
