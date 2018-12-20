@@ -3,6 +3,7 @@ import React, { type Node } from 'react';
 import arrayShallowEqual from 'shallow-equal/arrays';
 import objectShallowEqual from 'shallow-equal/objects';
 import uuid from 'uuid';
+import memozie from 'memoize-one';
 import invariant from 'tiny-invariant';
 import { type FieldState, type FieldSubscription } from 'final-form';
 import { FormContext, IsDisabledContext } from './Form';
@@ -96,12 +97,7 @@ class FieldInner extends React.Component<InnerProps, State> {
 
   unregisterField = () => {};
 
-  getFieldId = () => {
-    if (this.props.id) {
-      return this.props.id;
-    }
-    return `${this.props.name}-${uuid()}`;
-  };
+  getFieldId = memozie(name => `${name}-${uuid()}`);
 
   state = {
     // eslint-disable-next-line no-unused-vars
@@ -195,12 +191,13 @@ class FieldInner extends React.Component<InnerProps, State> {
       isDisabled,
       label,
       name,
+      id,
       transform,
     } = this.props;
     const { onChange, onBlur, onFocus, value, ...rest } = this.state;
     const error =
       rest.submitError || ((rest.touched || rest.dirty) && rest.error);
-    const fieldId = this.getFieldId();
+    const fieldId = id || this.getFieldId(name);
     const fieldProps = {
       onChange: e => {
         onChange(transform(e, value));
@@ -214,7 +211,7 @@ class FieldInner extends React.Component<InnerProps, State> {
       isRequired: Boolean(isRequired),
       'aria-invalid': error ? 'true' : 'false',
       'aria-labelledby': `${fieldId}-label ${fieldId}-helper ${fieldId}-valid ${fieldId}-error`,
-      id: this.getFieldId(),
+      id: fieldId,
     };
     return (
       <FieldWrapper>
