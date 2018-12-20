@@ -2,16 +2,13 @@ import * as React from 'react';
 import {
   defaultCollectionName,
   createUploadContext,
-  //  mediaMock,
 } from '@atlaskit/media-test-helpers';
 import { Card, FileIdentifier, CardEvent } from '@atlaskit/media-card';
 import { MediaViewer, MediaViewerItem } from '@atlaskit/media-viewer';
 import { FileDetails } from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
-import { MediaPicker } from '../src';
 import * as uuid from 'uuid/v4';
-
-//mediaMock.enable();
+import { MediaPicker } from '../src';
 
 const context = createUploadContext();
 
@@ -39,8 +36,8 @@ export default class Example extends React.Component<{}, State> {
 
   componentDidMount() {
     popup.on('uploads-start', payload => {
-      console.log('upload-start emitted');
       const { events } = this.state;
+
       this.setState({
         events: [
           ...events,
@@ -76,8 +73,6 @@ export default class Example extends React.Component<{}, State> {
         occurrenceKey: fileRecord.occKey,
       };
 
-      console.log(identifier);
-
       return (
         <div key={uuid()} style={{ display: 'inline-block', margin: '10px' }}>
           <Card
@@ -95,36 +90,41 @@ export default class Example extends React.Component<{}, State> {
     });
   };
 
-  render() {
-    const { events, selectedItem } = this.state;
+  private onCloseMediaViewer = () => {
+    this.setState({ selectedItem: undefined });
+  };
 
+  private renderMediaViewer = () => {
+    const { events, selectedItem } = this.state;
+    if (!selectedItem) {
+      return null;
+    }
+
+    const dataSource =
+      events.length > 1
+        ? { collectionName: defaultCollectionName }
+        : { list: [selectedItem] };
+
+    return (
+      <MediaViewer
+        featureFlags={{ customVideoPlayer: true }}
+        context={context}
+        selectedItem={selectedItem}
+        dataSource={dataSource}
+        collectionName={defaultCollectionName}
+        onClose={this.onCloseMediaViewer}
+      />
+    );
+  };
+
+  render() {
     return (
       <>
         <Button id="show" onClick={() => popup.show()}>
           Show
         </Button>
         <div>{this.renderCards()}</div>
-        {selectedItem ? (
-          events.length > 1 ? (
-            <MediaViewer
-              featureFlags={{ customVideoPlayer: true }}
-              context={context}
-              selectedItem={selectedItem}
-              dataSource={{ collectionName: defaultCollectionName }}
-              collectionName={defaultCollectionName}
-              onClose={() => this.setState({ selectedItem: undefined })}
-            />
-          ) : (
-            <MediaViewer
-              featureFlags={{ customVideoPlayer: true }}
-              context={context}
-              selectedItem={selectedItem}
-              dataSource={{ list: [selectedItem] }}
-              collectionName={defaultCollectionName}
-              onClose={() => this.setState({ selectedItem: undefined })}
-            />
-          )
-        ) : null}
+        {this.renderMediaViewer()}
       </>
     );
   }
