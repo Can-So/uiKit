@@ -1,1 +1,0 @@
-- Ignore typeAheadQuery mark in jira transformer
