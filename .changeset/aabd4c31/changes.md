@@ -1,0 +1,1 @@
+- trim escape in link href
