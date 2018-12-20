@@ -39,7 +39,7 @@ export interface PopupUploadEventEmitter extends UploadEventEmitter {
 
 export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   implements PopupUploadEventEmitter {
-  private readonly container: HTMLElement;
+  private readonly container?: HTMLElement;
   private readonly store: Store<State>;
   private tenantUploadParams: UploadParams;
   private proxyReactContext?: AppProxyReactContext;
@@ -112,6 +112,9 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   }
 
   public teardown(): void {
+    if (!this.container) {
+      return;
+    }
     unmountComponentAtNode(this.container);
   }
 
