@@ -1,1 +1,0 @@
-- Removed example demonstrating deprecated reference behaviour
