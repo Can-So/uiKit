@@ -70,6 +70,11 @@ describe('deactivateUserHandler display', () => {
 
 describe('delete screen display', () => {
   test('content is different when user is deactivated', () => {
-    expect(render({ isUserDeactivated: true })).toMatchSnapshot();
+    expect(
+      render({
+        isUserDeactivated: true,
+        deactivateUserHandler: () => {},
+      }),
+    ).toMatchSnapshot();
   });
 });
