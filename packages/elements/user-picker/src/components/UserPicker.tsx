@@ -19,7 +19,8 @@ import {
 } from '../analytics';
 import {
   InputActionTypes,
-  User,
+  Option,
+  SelectableOption,
   UserPickerProps,
   UserPickerState,
 } from '../types';
@@ -29,11 +30,11 @@ import { messages } from './i18n';
 import { getStyles } from './styles';
 import {
   callCallback,
-  extractUserValue,
+  extractOptionValue,
   getOptions,
   isIterable,
   isSingleValue,
-  usersToOptions,
+  optionToSelectableOptions,
 } from './utils';
 
 class UserPickerInternal extends React.Component<
@@ -57,9 +58,9 @@ class UserPickerInternal extends React.Component<
       derivedState.menuIsOpen = nextProps.open;
     }
     if (nextProps.value !== undefined) {
-      derivedState.value = usersToOptions(nextProps.value);
+      derivedState.value = optionToSelectableOptions(nextProps.value);
     } else if (nextProps.defaultValue && !prevState.value) {
-      derivedState.value = usersToOptions(nextProps.defaultValue);
+      derivedState.value = optionToSelectableOptions(nextProps.defaultValue);
     }
     if (
       nextProps.search !== undefined &&
@@ -122,16 +123,16 @@ class UserPickerInternal extends React.Component<
   });
 
   private handleChange = (value, { action, removedValue, option }) => {
-    if (removedValue && removedValue.user.fixed) {
+    if (removedValue && removedValue.option.fixed) {
       return;
     }
     this.setState({ inputValue: '' });
     const { onChange, onSelection, isMulti } = this.props;
-    callCallback(onChange, extractUserValue(value), action);
+    callCallback(onChange, extractOptionValue(value), action);
 
     switch (action) {
       case 'select-option':
-        callCallback(onSelection, value.user);
+        callCallback(onSelection, value.option);
         this.fireEvent(selectEvent, isMulti ? option : value);
         this.session = isMulti ? startSession() : undefined;
         break;
@@ -154,12 +155,12 @@ class UserPickerInternal extends React.Component<
   };
 
   private addOptions = batchByKey(
-    (request: string, newOptions: (User | User[])[]) => {
+    (request: string, newOptions: (Option | Option[])[]) => {
       this.setState(({ inflightRequest, options, count }) => {
         if (inflightRequest.toString() === request) {
           return {
             options: options.concat(
-              newOptions.reduce<User[]>(
+              newOptions.reduce<Option[]>(
                 (nextOptions, item) => nextOptions.concat(item[0]),
                 [],
               ),
@@ -320,7 +321,8 @@ class UserPickerInternal extends React.Component<
   private configureNoOptionsMessage = (): string | undefined =>
     this.props.noOptionsMessage;
 
-  private getOptions = (): User[] => getOptions(this.state.options) || [];
+  private getOptions = (): SelectableOption[] =>
+    getOptions(this.state.options) || [];
 
   render() {
     const {

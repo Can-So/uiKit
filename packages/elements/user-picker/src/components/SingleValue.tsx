@@ -24,7 +24,7 @@ export const SingleValue = props => {
   const {
     data: {
       label,
-      user: { avatarUrl },
+      option: { avatarUrl },
     },
     selectProps: { appearance, isFocused },
   } = props;

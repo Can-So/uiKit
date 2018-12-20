@@ -8,7 +8,7 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../package.json';
-import { User, UserOption, UserPickerProps, UserPickerState } from './types.js';
+import { UserPickerProps, UserPickerState, SelectableOption } from './types.js';
 
 export type UserPickerSession = {
   id: string;
@@ -46,10 +46,14 @@ const createEvent = (
   },
 });
 
-const buildValueForAnalytics = (value?: UserOption[] | UserOption) => {
+const buildValueForAnalytics = (
+  value?: SelectableOption[] | SelectableOption,
+) => {
   if (value) {
     const valueToConvert = Array.isArray(value) ? value : [value];
-    return valueToConvert.map(({ user }) => ({ id: user ? user.id : null }));
+    return valueToConvert.map(({ option }) => ({
+      id: option ? option.id : null,
+    }));
   }
 
   return [];
@@ -159,16 +163,18 @@ function sessionId(session?: UserPickerSession) {
   return session && session.id;
 }
 
-function position(state: UserPickerState, value?: { user: User }) {
-  return value ? state.options.findIndex(user => user === value.user) : -1;
+function position(state: UserPickerState, value?: SelectableOption) {
+  return value
+    ? state.options.findIndex(option => option === value.option)
+    : -1;
 }
 
 function pickerType(props: UserPickerProps) {
   return props.isMulti ? 'multi' : 'single';
 }
 
-function result(value?: { user: User }) {
-  return value ? { id: value.user.id } : null;
+function result(value?: SelectableOption) {
+  return value ? { id: value.option.id } : null;
 }
 
 function results(state: UserPickerState) {
@@ -182,7 +188,7 @@ function isLoading(props: UserPickerProps, state: UserPickerState) {
 function values(state: UserPickerState) {
   return state.value
     ? Array.isArray(state.value)
-      ? state.value.map(userOption => userOption.user.id)
-      : [state.value.user.id]
+      ? state.value.map(selectableOption => selectableOption.option.id)
+      : [state.value.option.id]
     : [];
 }

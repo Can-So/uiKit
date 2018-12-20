@@ -7,7 +7,7 @@ import { SizeableAvatar } from '../../../components/SizeableAvatar';
 describe('SingleValue', () => {
   const data = {
     label: 'Jace Beleren',
-    user: {
+    option: {
       id: 'abc-123',
       name: 'Jace Beleren',
       publicName: 'jbeleren',

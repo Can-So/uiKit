@@ -1,41 +1,58 @@
 import memoizeOne from 'memoize-one';
 import { ReactChild, ReactElement } from 'react';
-import { Promisable, User, UserOption, UserValue } from '../types';
+import {
+  Option,
+  OptionValue,
+  Promisable,
+  SelectableOption,
+  Team,
+  User,
+} from '../types';
 
-export const userToOption = (user: User) => ({
-  label: user.name,
-  value: user.id,
-  user,
+export const isUser = (option: Option): option is User =>
+  option.type === undefined || option.type === 'User';
+
+export const isTeam = (option: Option): option is Team =>
+  option.type === 'Team';
+
+export const optionToSelectableOption = (option: Option): SelectableOption => ({
+  label: option.name,
+  value: option.id,
+  option,
 });
 
-export const extractUserValue = (value?: UserOption | UserOption[]) => {
+export const extractOptionValue = (
+  value?: SelectableOption | SelectableOption[],
+) => {
   if (!value) {
     return undefined;
   }
   if (Array.isArray(value)) {
-    return value.map(({ user }) => user);
+    return value.map(({ option }) => option);
   }
-  return value.user;
+  return value.option;
 };
 
 export const isIterable = (
-  a: Promisable<User | User[]> | Iterable<Promisable<User | User[]>>,
-): a is Iterable<Promisable<User | User[]>> =>
+  a: Promisable<Option | Option[]> | Iterable<Promisable<Option | Option[]>>,
+): a is Iterable<Promisable<Option | Option[]>> =>
   typeof a[Symbol.iterator] === 'function';
 
-export const getOptions = memoizeOne((options: User[]) =>
-  options.map(userToOption),
+export const getOptions = memoizeOne((options: Option[]) =>
+  options.map(optionToSelectableOption),
 );
 
-export const usersToOptions = memoizeOne((defaultValue: UserValue) => {
-  if (!defaultValue) {
-    return null;
-  }
-  if (Array.isArray(defaultValue)) {
-    return defaultValue.map(userToOption);
-  }
-  return userToOption(defaultValue);
-});
+export const optionToSelectableOptions = memoizeOne(
+  (defaultValue: OptionValue) => {
+    if (!defaultValue) {
+      return null;
+    }
+    if (Array.isArray(defaultValue)) {
+      return defaultValue.map(optionToSelectableOption);
+    }
+    return optionToSelectableOption(defaultValue);
+  },
+);
 
 export const getAvatarSize = (appearance: string): 'small' | 'medium' =>
   appearance === 'big' ? 'medium' : 'small';
@@ -47,8 +64,8 @@ export const isChildInput = (child: ReactChild): child is ReactElement<any> =>
   child.props.type === 'text';
 
 export const isSingleValue = (
-  value?: UserOption | UserOption[],
-): value is UserOption => !!value && !Array.isArray(value);
+  value?: SelectableOption | SelectableOption[],
+): value is SelectableOption => !!value && !Array.isArray(value);
 
 export const hasValue = (value?: string): value is string =>
   !!value && value.trim().length > 0;

@@ -37,13 +37,13 @@ export class MultiValue extends React.Component<any> {
 
   shouldComponentUpdate(nextProps) {
     const {
-      data: { label, user },
+      data: { label, option },
       innerProps,
       isFocused,
     } = this.props;
 
     const {
-      data: { label: nextLabel, user: nextUser },
+      data: { label: nextLabel, option: nextOption },
       innerProps: nextInnerProps,
       isFocused: nextIsFocused,
     } = nextProps;
@@ -51,7 +51,7 @@ export class MultiValue extends React.Component<any> {
     // We can ignore onRemove here because it is a anonymous function
     // that will recreated every time but with the same implementation.
     return (
-      user !== nextUser ||
+      option !== nextOption ||
       label !== nextLabel ||
       innerProps !== nextInnerProps ||
       isFocused !== nextIsFocused
@@ -62,7 +62,7 @@ export class MultiValue extends React.Component<any> {
     const {
       data: {
         label,
-        user: { avatarUrl, fixed },
+        option: { avatarUrl, fixed },
       },
       innerProps,
       removeProps: { onClick: onRemove },
