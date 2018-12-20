@@ -1,1 +1,0 @@
-- Section message updated when the user is alreaady deactivated
