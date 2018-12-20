@@ -1,1 +1,0 @@
-- ED-5956: don't close the typeaheads when calling getValue from EditorActions

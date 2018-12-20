@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.2
+- [patch] [dc39f5b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc39f5b):
+
+  - ED-5956: don't close the typeaheads when calling getValue from EditorActions
+
 ## 92.0.1
 - [patch] [a83bedb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a83bedb):
 
