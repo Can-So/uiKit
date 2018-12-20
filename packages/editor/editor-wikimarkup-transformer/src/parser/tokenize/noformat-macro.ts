@@ -11,8 +11,8 @@ export function noformatMacro(
   tokenErrCallback?: TokenErrCallback,
 ): Token {
   return commonMacro(input.substring(position), schema, {
-    opening: /^\{noformat(?::([^\{\n\}]*))?\}/,
-    closing: /\{noformat\}/,
+    keyword: 'noformat',
+    paired: true,
     rawContentProcessor,
     tokenErrCallback,
   });
