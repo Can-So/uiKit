@@ -33,6 +33,10 @@ import { InlinePlayer } from '../inlinePlayer';
 
 export class Card extends Component<CardProps, CardState> {
   private hasBeenMounted: boolean = false;
+  private onClickPayload?: {
+    result: CardEvent;
+    analyticsEvent?: UIAnalyticsEventInterface;
+  };
 
   subscription?: Subscription;
   static defaultProps: Partial<CardProps> = {
@@ -298,6 +302,12 @@ export class Card extends Component<CardProps, CardState> {
   onClick = (result: CardEvent, analyticsEvent?: UIAnalyticsEventInterface) => {
     const { onClick, useInlinePlayer } = this.props;
     const { mediaItemDetails } = result;
+
+    this.onClickPayload = {
+      result,
+      analyticsEvent,
+    };
+
     if (onClick) {
       onClick(result, analyticsEvent);
     }
@@ -318,6 +328,14 @@ export class Card extends Component<CardProps, CardState> {
     });
   };
 
+  onInlinePlayerClick = () => {
+    const { onClick } = this.props;
+
+    if (onClick && this.onClickPayload) {
+      onClick(this.onClickPayload.result, this.onClickPayload.analyticsEvent);
+    }
+  };
+
   renderInlinePlayer = () => {
     const { identifier, context, dimensions } = this.props;
     return (
@@ -326,6 +344,7 @@ export class Card extends Component<CardProps, CardState> {
         dimensions={dimensions}
         identifier={identifier as FileIdentifier}
         onError={this.onInlinePlayerError}
+        onClick={this.onInlinePlayerClick}
       />
     );
   };

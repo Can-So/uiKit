@@ -162,7 +162,7 @@ class MediaNode extends Component<
         selected={selected}
         disableOverlay={true}
         onClick={onClick}
-        useInlinePlayer={false}
+        useInlinePlayer={true}
         isLazy={editorAppearance !== 'mobile'}
       />
     );
