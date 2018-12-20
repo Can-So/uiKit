@@ -2,7 +2,7 @@ import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { EmojiProvider } from '@atlaskit/emoji';
 import Tooltip from '@atlaskit/tooltip';
 import { emoji } from '@atlaskit/util-data-test';
-import { mount, shallow } from 'enzyme';
+import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
 import * as React from 'react';
 import { reaction } from '../../../client/MockReactionsClient';
 import { Reaction } from '../../../components/Reaction';
@@ -15,7 +15,7 @@ const { getEmojiResourcePromise } = emoji.testData;
 
 describe('@atlaskit/reactions/reactions', () => {
   const renderReactions = (extraProps: Partial<Props> = {}) =>
-    shallow(
+    shallowWithIntl(
       <Reactions
         emojiProvider={getEmojiResourcePromise() as Promise<EmojiProvider>}
         reactions={[
@@ -30,6 +30,7 @@ describe('@atlaskit/reactions/reactions', () => {
       />,
     )
       .dive()
+      .dive()
       .dive();
 
   it('should trigger "onReactionClick" when Reaction is clicked', () => {
@@ -40,6 +41,7 @@ describe('@atlaskit/reactions/reactions', () => {
       .find(Reaction)
       .first()
       .simulate('click');
+
     expect(onReactionClick).toHaveBeenCalled();
   });
 
@@ -93,7 +95,7 @@ describe('@atlaskit/reactions/reactions', () => {
     );
 
     beforeEach(() => {
-      component = mount(<TestComponent />);
+      component = mountWithIntl(<TestComponent />);
       component.setProps({ status: ReactionStatus.ready });
     });
 

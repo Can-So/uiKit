@@ -1,7 +1,7 @@
 import { EmojiPicker, EmojiProvider } from '@atlaskit/emoji';
 import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
 import { emoji } from '@atlaskit/util-data-test';
-import { mount, shallow } from 'enzyme';
+import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
 import * as React from 'react';
 import { EmojiButton } from '../../../components/EmojiButton';
 import { ReactionPicker } from '../../../components/ReactionPicker';
@@ -38,19 +38,19 @@ describe('@atlaskit/reactions/reaction-picker', () => {
   });
 
   it('should render a trigger', () => {
-    const picker = shallow(renderPicker());
+    const picker = shallowWithIntl(renderPicker());
     expect(picker.find(Trigger).length).toEqual(1);
   });
 
   it('should render selector when trigger is clicked', () => {
-    const picker = mount(renderPicker());
+    const picker = mountWithIntl(renderPicker());
     const trigger = picker.find(Trigger);
     trigger.simulate('click');
     expect(picker.find(Selector).length).toEqual(1);
   });
 
   it('should render emoji picker when "..." button is clicked', () => {
-    const picker = mount(renderPicker());
+    const picker = mountWithIntl(renderPicker());
     const trigger = picker.find(Trigger);
     trigger.simulate('click');
     const moreButton = picker.find(EditorMoreIcon);
@@ -60,7 +60,7 @@ describe('@atlaskit/reactions/reaction-picker', () => {
 
   it('should call "onSelection" when an emoji is seleted', () => {
     const onSelectionSpy = jest.fn();
-    const picker = mount(renderPicker(onSelectionSpy));
+    const picker = mountWithIntl(renderPicker(onSelectionSpy));
     const trigger = picker.find(Trigger);
     trigger.simulate('click');
     const selector = picker.find(Selector);
@@ -75,7 +75,7 @@ describe('@atlaskit/reactions/reaction-picker', () => {
 
   it('should disable trigger', () => {
     const onSelectionSpy = jest.fn();
-    const picker = mount(renderPicker(onSelectionSpy, true));
+    const picker = mountWithIntl(renderPicker(onSelectionSpy, true));
     expect(picker.find(Trigger).prop('disabled')).toBeTruthy();
   });
 });

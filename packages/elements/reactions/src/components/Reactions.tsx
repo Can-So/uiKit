@@ -17,6 +17,8 @@ import { ReactionStatus } from '../types/ReactionStatus';
 import { ReactionSummary } from '../types/ReactionSummary';
 import { Reaction } from './Reaction';
 import { ReactionPicker } from './ReactionPicker';
+import { messages } from './i18n';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 const reactionStyle = style({
   display: 'inline-block',
@@ -54,7 +56,7 @@ export interface Props {
 }
 
 class ReactionsWithoutAnalytics extends React.PureComponent<
-  Props & WithAnalyticsEventProps
+  Props & WithAnalyticsEventProps & InjectedIntlProps
 > {
   static defaultProps = {
     flash: {},
@@ -94,13 +96,20 @@ class ReactionsWithoutAnalytics extends React.PureComponent<
     this.props.status !== ReactionStatus.ready;
 
   private getTooltip = (): string | undefined => {
-    const { status, errorMessage } = this.props;
+    const {
+      status,
+      errorMessage,
+      intl: { formatMessage },
+    } = this.props;
+
     switch (status) {
       case ReactionStatus.error:
-        return errorMessage ? errorMessage : 'Sorry... something went wrong';
+        return errorMessage
+          ? errorMessage
+          : formatMessage(messages.unexpectedError);
       case ReactionStatus.loading:
       case ReactionStatus.notLoaded:
-        return 'Loading...';
+        return formatMessage(messages.loadingReactions);
       default:
         return undefined;
     }
@@ -196,4 +205,6 @@ class ReactionsWithoutAnalytics extends React.PureComponent<
   }
 }
 
-export const Reactions = withAnalyticsEvents()(ReactionsWithoutAnalytics);
+export const Reactions = withAnalyticsEvents()(
+  injectIntl(ReactionsWithoutAnalytics),
+);
