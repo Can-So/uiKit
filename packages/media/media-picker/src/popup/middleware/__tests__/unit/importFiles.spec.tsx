@@ -11,7 +11,7 @@ import {
   isRemoteService,
   importFiles,
 } from '../../importFiles';
-import { LocalUpload, LocalUploads } from '../../../domain';
+import { LocalUpload, LocalUploads, ServiceFile } from '../../../domain';
 import { RECENTS_COLLECTION } from '../../../config';
 import { finalizeUpload } from '../../../actions/finalizeUpload';
 import { startImport } from '../../../actions/startImport';
@@ -47,12 +47,14 @@ describe('importFiles middleware', () => {
     withSelectedItems: true,
   };
   const upfrontId = Promise.resolve('1');
-  const makeFileData = (index: number) => ({
+  const makeFileData = (index: number): ServiceFile => ({
     id: `some-selected-item-id-${index}`,
     name: `picture${index}.jpg`,
     mimeType: 'image/jpg',
     size: 42 + index,
     upfrontId,
+    occurrenceKey: `occurrence-key-${index}`,
+    date: 0,
   });
 
   const getSendUploadEventPayloads = (
@@ -83,7 +85,14 @@ describe('importFiles middleware', () => {
       // Each LocalUpload will have a list of events with one of them being uploads-start,
       // and each of those events will contain all UploadFiles.
       for (let i = 1; i <= total; i++) {
-        const { id, name, mimeType: type, size, upfrontId } = makeFileData(i);
+        const {
+          id,
+          name,
+          mimeType: type,
+          size,
+          upfrontId,
+          occurrenceKey,
+        } = makeFileData(i);
         files.push({
           id,
           name,
@@ -91,6 +100,7 @@ describe('importFiles middleware', () => {
           size,
           upfrontId,
           creationDate: todayDate,
+          occurrenceKey,
         });
       }
 
@@ -254,6 +264,7 @@ describe('importFiles middleware', () => {
             size: 43,
             creationDate: todayDate,
             upfrontId,
+            occurrenceKey: 'occurrence-key-1',
           },
           {
             id: 'uuid2',
@@ -262,6 +273,7 @@ describe('importFiles middleware', () => {
             size: 45,
             creationDate: todayDate,
             upfrontId,
+            occurrenceKey: 'occurrence-key-3',
           },
           {
             id: 'uuid3',
@@ -270,6 +282,7 @@ describe('importFiles middleware', () => {
             size: 46,
             creationDate: todayDate,
             upfrontId,
+            occurrenceKey: 'occurrence-key-4',
           },
           {
             id: 'uuid4',
@@ -278,6 +291,7 @@ describe('importFiles middleware', () => {
             size: 47,
             creationDate: expect.any(Number),
             upfrontId,
+            occurrenceKey: 'occurrence-key-5',
           },
         ]);
       });
@@ -307,6 +321,7 @@ describe('importFiles middleware', () => {
                 size: 46,
                 creationDate: todayDate,
                 upfrontId,
+                occurrenceKey: 'occurrence-key-4',
               },
               RECENTS_COLLECTION,
             ),
@@ -354,6 +369,7 @@ describe('importFiles middleware', () => {
                 size: 46,
                 creationDate: todayDate,
                 upfrontId,
+                occurrenceKey: 'occurrence-key-4',
               },
               'uuid3',
               {

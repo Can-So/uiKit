@@ -7,7 +7,7 @@ export type MediaFile = {
   readonly size: number;
   readonly creationDate: number;
   readonly type: string;
-  readonly occurrenceKey?: string;
+  readonly occurrenceKey: string;
 };
 
 export type PublicMediaFile = MediaFile & {

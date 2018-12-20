@@ -139,11 +139,16 @@ export interface ServiceFile {
   readonly name: string;
   readonly size: number;
   readonly date: number;
-  readonly occurrenceKey?: string;
+  readonly occurrenceKey: string;
 }
 
 export interface SelectedItem extends ServiceFile {
-  readonly serviceName: string;
+  readonly serviceName:
+    | 'upload'
+    | 'recent_files'
+    | 'dropbox'
+    | 'google'
+    | 'giphy';
   readonly accountId?: string;
 }
 
