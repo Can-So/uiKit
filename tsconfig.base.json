@@ -35,7 +35,6 @@
   },
   "files": [
     "./typings/atlaskit.d.ts",
-    "./typings/exenv.d.ts",
     "./typings/deep-equal.d.ts",
     "./typings/deepcopy.d.ts",
     "./typings/events.d.ts",

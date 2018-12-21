@@ -10,4 +10,6 @@ const checkDomReady = (): Promise<{} | void> => {
   });
 };
 
-export const whenDomReady = exenv.canUseDOM && checkDomReady();
+export const whenDomReady = exenv.canUseDOM
+  ? checkDomReady()
+  : Promise.resolve();

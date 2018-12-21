@@ -10,7 +10,6 @@ import {
   createUploadContext,
 } from '@atlaskit/media-test-helpers';
 import { Card } from '@atlaskit/media-card';
-import * as exenv from 'exenv';
 import { MediaPicker } from '../src';
 import {
   PopupContainer,
@@ -26,7 +25,6 @@ import {
 
 const context = createUploadContext();
 const popup = MediaPicker('popup', context, {
-  container: exenv.canUseDOM && document.body,
   uploadParams: {
     collection: defaultMediaPickerCollectionName,
   },
