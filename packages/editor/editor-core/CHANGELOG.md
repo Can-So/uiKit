@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.4
+- [patch] [be12a8e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be12a8e):
+
+  - Fix popup picker dismiss on escape for Jira
+
 ## 92.0.3
 - [patch] [88c8373](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/88c8373):
 

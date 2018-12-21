@@ -1,1 +1,0 @@
-- Fix popup picker dismiss on escape for Jira
