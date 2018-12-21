@@ -244,25 +244,6 @@ export class NewUploadServiceImpl implements UploadService {
           fileStreamsCache.set(key, observable);
           fileStreamsCache.set(keyWithCollection, observable);
         });
-        // TODO: cleanup this if we decide to go with this approach
-        if (userUpfrontId) {
-          // Save user id in the cache
-          userUpfrontId.then(id => {
-            if (observable) {
-              const key = FileStreamCache.createKey(id);
-              const keyWithRecentsCollection = FileStreamCache.createKey(id, {
-                collectionName: RECENTS_COLLECTION,
-              });
-              const keyWithTenantCollection = FileStreamCache.createKey(id, {
-                collectionName: this.tenantUploadParams.collection,
-              });
-
-              fileStreamsCache.set(key, observable);
-              fileStreamsCache.set(keyWithTenantCollection, observable);
-              fileStreamsCache.set(keyWithRecentsCollection, observable);
-            }
-          });
-        }
 
         return cancellableFileUpload;
       },

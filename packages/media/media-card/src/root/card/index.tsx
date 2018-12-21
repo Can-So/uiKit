@@ -162,13 +162,10 @@ export class Card extends Component<CardProps, CardState> {
             dataURI: currentDataURI,
             metadata: currentMetadata,
           } = this.state;
-          const extendedMetadada = extendMetadata(
+          const metadata = extendMetadata(
             state,
             currentMetadata as FileDetails,
           );
-          // TODO: we override the id to keep the passed one, what implications does this have?
-          // should we just populate cache with user id?
-          const metadata = { ...extendedMetadada, ...{ id: resolvedId } };
           let dataURI: string | undefined;
 
           if (!currentDataURI) {
