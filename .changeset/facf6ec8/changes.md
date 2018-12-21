@@ -1,0 +1,1 @@
+- Add new example and ensure occurrenceKey is set for all copy/withToken calls
