@@ -2,7 +2,7 @@ import {
   DocNode,
   BlockContent,
   LayoutSectionDefinition,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 export const doc = (
   ...content: Array<BlockContent | LayoutSectionDefinition>

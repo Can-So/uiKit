@@ -1,16 +1,40 @@
 import { TokenType } from './';
 import { EMOJIS } from './emoji';
 
-const macroKeywordTokenMap = {
-  '{adf': TokenType.ADF_MACRO,
-  '{anchor': TokenType.ANCHOR_MACRO,
-  '{code': TokenType.CODE_MACRO,
-  '{quote': TokenType.QUOTE_MACRO,
-  '{noformat': TokenType.NOFORMAT_MACRO,
-  '{panel': TokenType.PANEL_MACRO,
-  '{color': TokenType.COLOR_MACRO,
-  '{loremipsum': TokenType.LOREM_MACRO,
-};
+const macroKeywordTokenMap = [
+  {
+    type: TokenType.ADF_MACRO,
+    regex: /^{adf/i,
+  },
+  {
+    type: TokenType.ANCHOR_MACRO,
+    regex: /^{anchor/i,
+  },
+  {
+    type: TokenType.CODE_MACRO,
+    regex: /^{code/i,
+  },
+  {
+    type: TokenType.QUOTE_MACRO,
+    regex: /^{quote/i,
+  },
+  {
+    type: TokenType.NOFORMAT_MACRO,
+    regex: /^{noformat/i,
+  },
+  {
+    type: TokenType.PANEL_MACRO,
+    regex: /^{panel/i,
+  },
+  {
+    type: TokenType.COLOR_MACRO,
+    regex: /^{color/,
+  },
+  {
+    type: TokenType.LOREM_MACRO,
+    regex: /^{loremipsum/i,
+  },
+];
 
 /**
  * The order of this mapping determind which keyword
@@ -39,10 +63,10 @@ const keywordTokenMap = {
 };
 
 export function parseMacroKeyword(input: string) {
-  for (const name in macroKeywordTokenMap) {
-    if (macroKeywordTokenMap.hasOwnProperty(name) && input.startsWith(name)) {
+  for (const keyword of macroKeywordTokenMap) {
+    if (keyword.regex.test(input)) {
       return {
-        type: macroKeywordTokenMap[name],
+        type: keyword.type,
       };
     }
   }
@@ -82,12 +106,10 @@ export function parseOtherKeyword(input: string) {
  * The order of the mapping matters. We should not put
  * LIST in front of RULER for example.
  */
-// These keywords only take effect when it's at the
-// beginning of the line
 const leadingKeywordTokenMap = [
   {
     type: TokenType.QUOTE,
-    regex: /^bq\. /,
+    regex: /^bq\./,
   },
   {
     type: TokenType.HEADING,

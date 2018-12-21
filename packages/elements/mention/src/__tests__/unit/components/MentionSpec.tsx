@@ -1,5 +1,5 @@
-import { mount } from 'enzyme';
 import * as React from 'react';
+import { mountWithIntl } from 'enzyme-react-intl';
 import Tooltip from '@atlaskit/tooltip';
 import { AnalyticsListener } from '@atlaskit/analytics';
 import { AnalyticsListener as AnalyticsListenerNext } from '@atlaskit/analytics-next';
@@ -40,19 +40,19 @@ describe('<Mention />', () => {
 
   describe('Mention', () => {
     it('should render based on mention data', () => {
-      const mention = mount(<Mention {...mentionData} />);
+      const mention = mountWithIntl(<Mention {...mentionData} />);
       expect(mention.html()).toContain(mentionData.text);
     });
 
     it('should render a default lozenge if no accessLevel data and is not being mentioned', () => {
-      const mention = mount(<Mention {...mentionData} />);
+      const mention = mountWithIntl(<Mention {...mentionData} />);
       expect(mention.find(MentionStyle).prop('mentionType')).toEqual(
         MentionType.DEFAULT,
       );
     });
 
     it('should render a default lozenge if the user has CONTAINER permissions but is not being mentioned', () => {
-      const mention = mount(
+      const mention = mountWithIntl(
         <Mention {...mentionData} accessLevel={'CONTAINER'} />,
       );
       expect(mention.find(MentionStyle).prop('mentionType')).toEqual(
@@ -61,37 +61,45 @@ describe('<Mention />', () => {
     });
 
     it('should add a highlighted lozenge if `isHighlighted` is set to true', () => {
-      const mention = mount(<Mention {...mentionData} isHighlighted={true} />);
+      const mention = mountWithIntl(
+        <Mention {...mentionData} isHighlighted={true} />,
+      );
       expect(mention.find(MentionStyle).prop('mentionType')).toEqual(
         MentionType.SELF,
       );
     });
 
     it('should render a restricted style lozenge if the user has non-CONTAINER permissions', () => {
-      const mention = mount(<Mention {...mentionData} accessLevel={'NONE'} />);
+      const mention = mountWithIntl(
+        <Mention {...mentionData} accessLevel={'NONE'} />,
+      );
       expect(mention.find(MentionStyle).prop('mentionType')).toEqual(
         MentionType.RESTRICTED,
       );
     });
 
     it('should not display a tooltip if no accessLevel data', () => {
-      const mention = mount(<Mention {...mentionData} />);
+      const mention = mountWithIntl(<Mention {...mentionData} />);
       expect(mention.find(Tooltip)).toHaveLength(0);
     });
 
     it('should display tooltip if mentioned user does not have container permission', () => {
-      const mention = mount(<Mention {...mentionData} accessLevel="NONE" />);
+      const mention = mountWithIntl(
+        <Mention {...mentionData} accessLevel="NONE" />,
+      );
       expect(mention.find(Tooltip)).toHaveLength(1);
     });
 
     it('should not display tooltip if mention is highlighted', () => {
-      const mention = mount(<Mention {...mentionData} isHighlighted={true} />);
+      const mention = mountWithIntl(
+        <Mention {...mentionData} isHighlighted={true} />,
+      );
       expect(mention.find(Tooltip)).toHaveLength(0);
     });
 
     it('should dispatch onClick-event', () => {
       const spy = jest.fn();
-      const mention = mount(<Mention {...mentionData} onClick={spy} />);
+      const mention = mountWithIntl(<Mention {...mentionData} onClick={spy} />);
       mention.find(MentionStyle).simulate('click');
       expect(spy).toBeCalled();
       expect(spy).toHaveBeenCalledWith(
@@ -105,7 +113,7 @@ describe('<Mention />', () => {
     it('should dispatch lozenge.select analytics onClick-event', () => {
       const analyticsSpy = jest.fn();
       const analyticsNextHandlerSpy = jest.fn();
-      const mention = mount(
+      const mention = mountWithIntl(
         <AnalyticsListenerNext
           onEvent={analyticsNextHandlerSpy}
           channel={ELEMENTS_CHANNEL}
@@ -130,7 +138,9 @@ describe('<Mention />', () => {
 
     it('should dispatch onMouseEnter-event', () => {
       const spy = jest.fn();
-      const mention = mount(<Mention {...mentionData} onMouseEnter={spy} />);
+      const mention = mountWithIntl(
+        <Mention {...mentionData} onMouseEnter={spy} />,
+      );
       mention.find(MentionStyle).simulate('mouseenter');
       expect(spy).toBeCalled();
       expect(spy).toHaveBeenCalledWith(
@@ -142,7 +152,9 @@ describe('<Mention />', () => {
 
     it('should dispatch onMouseLeave-event', () => {
       const spy = jest.fn();
-      const mention = mount(<Mention {...mentionData} onMouseLeave={spy} />);
+      const mention = mountWithIntl(
+        <Mention {...mentionData} onMouseLeave={spy} />,
+      );
       mention.find(MentionStyle).simulate('mouseleave');
       expect(spy).toBeCalled();
       expect(spy).toHaveBeenCalledWith(
@@ -155,7 +167,7 @@ describe('<Mention />', () => {
     it('should dispatch lozenge.hover analytics event if hover delay is greater than the threshold', () => {
       const analyticsSpy = jest.fn();
       const analyticsNextHandlerSpy = jest.fn();
-      const mention = mount(
+      const mention = mountWithIntl(
         <AnalyticsListenerNext
           onEvent={analyticsNextHandlerSpy}
           channel={ELEMENTS_CHANNEL}
@@ -183,7 +195,7 @@ describe('<Mention />', () => {
     it('should not dispatch lozenge.hover analytics event for a hover delay bellow the threshold', () => {
       const analyticsSpy = jest.fn();
       const analyticsNextHandlerSpy = jest.fn();
-      const mention = mount(
+      const mention = mountWithIntl(
         <AnalyticsListenerNext
           onEvent={analyticsNextHandlerSpy}
           channel={ELEMENTS_CHANNEL}
@@ -205,7 +217,9 @@ describe('<Mention />', () => {
     });
 
     it('should render a stateless mention component with correct data attributes', () => {
-      const mention = mount(<Mention {...mentionData} accessLevel="NONE" />);
+      const mention = mountWithIntl(
+        <Mention {...mentionData} accessLevel="NONE" />,
+      );
       expect(
         mention.getDOMNode().attributes.getNamedItem('data-mention-id')!.value,
       ).toEqual(mentionData.id);
@@ -216,7 +230,7 @@ describe('<Mention />', () => {
     });
 
     it('should have spell check disabled', () => {
-      const mention = mount(<Mention {...mentionData} />);
+      const mention = mountWithIntl(<Mention {...mentionData} />);
       expect(
         mention.getDOMNode().attributes.getNamedItem('spellcheck')!.value,
       ).toEqual('false');
@@ -225,7 +239,7 @@ describe('<Mention />', () => {
 
   describe('ResourcedMention', () => {
     it('should render a stateless mention component based on mention data', () => {
-      const mention = mount(
+      const mention = mountWithIntl(
         <ResourcedMention {...mentionData} mentionProvider={mentionProvider} />,
       );
       expect(
@@ -237,7 +251,7 @@ describe('<Mention />', () => {
     });
 
     it('should render a highlighted stateless mention component if mentionProvider.shouldHighlightMention returns true', async () => {
-      const mention = mount(
+      const mention = mountWithIntl(
         <ResourcedMention
           id="oscar"
           text="@Oscar Wallhult"
@@ -257,7 +271,7 @@ describe('<Mention />', () => {
     });
 
     it('should not render highlighted mention component if there is no mentionProvider', () => {
-      const mention = mount(
+      const mention = mountWithIntl(
         <ResourcedMention id="oscar" text="@Oscar Wallhult" />,
       );
       expect(
@@ -271,7 +285,7 @@ describe('<Mention />', () => {
 
     it('should dispatch onClick-event', () => {
       const spy = jest.fn();
-      const mention = mount(
+      const mention = mountWithIntl(
         <ResourcedMention
           {...mentionData}
           mentionProvider={mentionProvider}
@@ -290,7 +304,7 @@ describe('<Mention />', () => {
 
     it('should dispatch onMouseEnter-event', () => {
       const spy = jest.fn();
-      const mention = mount(
+      const mention = mountWithIntl(
         <ResourcedMention
           {...mentionData}
           mentionProvider={mentionProvider}
@@ -308,7 +322,7 @@ describe('<Mention />', () => {
 
     it('should dispatch onMouseLeave-event', () => {
       const spy = jest.fn();
-      const mention = mount(
+      const mention = mountWithIntl(
         <ResourcedMention
           {...mentionData}
           mentionProvider={mentionProvider}

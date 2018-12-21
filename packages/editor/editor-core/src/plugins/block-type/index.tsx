@@ -1,6 +1,6 @@
 import * as React from 'react';
 import EditorQuoteIcon from '@atlaskit/icon/glyph/editor/quote';
-import { heading, blockquote, hardBreak } from '@atlaskit/editor-common';
+import { heading, blockquote, hardBreak } from '@atlaskit/adf-schema';
 import { EditorPlugin, AllowedBlockTypes } from '../../types';
 import { ToolbarSize } from '../../ui/Toolbar';
 import { createPlugin, pluginKey } from './pm-plugins/main';

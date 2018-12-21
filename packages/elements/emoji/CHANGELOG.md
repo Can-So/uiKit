@@ -1,5 +1,31 @@
 # @atlaskit/emoji
 
+## 49.0.0
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/util-data-test@10.0.28
+  - @atlaskit/media-core@24.7.0
+
+## 48.0.2
+- [patch] [0f19693](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f19693):
+
+  - added tests for xregexp transformer, updated README and simplified code
+- [patch] [b789b3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b789b3a):
+
+  - removed xregexp library dependency from emoji and mention components, added xregexp-transformer package to compile xregexp expressions to unicode charsets
+
+## 48.0.1
+- [patch] [015fcd0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/015fcd0):
+
+  - Adjusted unit tests to test for the bug noticed in FS-3259. Added multiple atlassian-ftfy emoji to test this, so updated a unit test to confirm that there are 14 Atlassian emoji, and also added an additional unit test to confirm that FS-3259 was corrected.
+- [patch] [18203e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/18203e6):
+
+  - FS-3259 Fixed bug that caused an emoji to be automatically inserted for a query including a closing colon even if there are multiple (an odd number specifically) emoji with an exact shortName match.
+
+## 48.0.0
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/util-data-test@10.0.26
+  - @atlaskit/media-core@24.6.0
+
 ## 47.0.8
 - [patch] [b81da9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b81da9b):
 

@@ -1,4 +1,5 @@
-import { MediaSingleLayout, MediaSingleProps } from '@atlaskit/editor-common';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { MediaSingleProps } from '@atlaskit/editor-common';
 import { EditorState } from 'prosemirror-state';
 import { EditorAppearance } from '../../../../types';
 import { GridType } from '../../../grid/types';

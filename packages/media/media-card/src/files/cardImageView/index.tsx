@@ -177,6 +177,7 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
             mediaType={mediaType}
             dataURI={dataURI}
             crop={this.isCropped}
+            stretch={this.isStretched}
             previewOrientation={previewOrientation}
           />
         </div>
@@ -214,6 +215,12 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
     const { resizeMode } = this.props;
 
     return resizeMode === 'crop';
+  }
+
+  get isStretched() {
+    const { resizeMode } = this.props;
+
+    return resizeMode === 'stretchy-fit';
   }
 }
 

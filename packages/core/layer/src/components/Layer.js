@@ -3,7 +3,7 @@ import React, { Component, type Node, type ElementRef } from 'react';
 import styled from 'styled-components';
 import rafSchedule from 'raf-schd';
 
-import Popper from '../../popper/index-min';
+import Popper from 'popper.js';
 import ScrollBlock from './internal/ScrollBlock';
 import {
   getFlipBehavior,

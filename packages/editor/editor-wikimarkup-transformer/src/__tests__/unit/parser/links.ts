@@ -76,6 +76,10 @@ describe('JIRA wiki markup - Links', () => {
       '[EX-500] should jump over the link if it is invalid',
       'This \\\\[waves hands around\\\\]. Be',
     ],
+    [
+      '[CS-676] should trim escape in href',
+      'This is a link https://extranet.atlassian.com/display/JPLAT/AtlasKit\\+components\\+needed\\+for\\+Bento',
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

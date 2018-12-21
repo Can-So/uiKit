@@ -4,7 +4,7 @@ import EditorWarningIcon from '@atlaskit/icon/glyph/editor/warning';
 import EditorErrorIcon from '@atlaskit/icon/glyph/editor/error';
 import EditorSuccessIcon from '@atlaskit/icon/glyph/editor/success';
 import EditorNoteIcon from '@atlaskit/icon/glyph/editor/note';
-import { panel, PanelType } from '@atlaskit/editor-common';
+import { panel, PanelType } from '@atlaskit/adf-schema';
 
 import { EditorPlugin } from '../../types';
 import { messages } from '../block-type/types';

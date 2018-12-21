@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
-import { MediaType } from '@atlaskit/editor-common';
+import { MediaType } from '@atlaskit/adf-schema';
 import { MediaCard } from '../../../../ui/MediaCard';
 import Media from '../../../../react/nodes/media';
 

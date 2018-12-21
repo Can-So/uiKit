@@ -6,11 +6,11 @@ import {
   taskDecision,
 } from '@atlaskit/util-data-test';
 import { CardEvent } from '@atlaskit/media-card';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   CardSurroundings,
   ProviderFactory,
   ExtensionHandlers,
-  defaultSchema,
 } from '@atlaskit/editor-common';
 import Button from '@atlaskit/button';
 import {

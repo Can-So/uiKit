@@ -1,4 +1,4 @@
-import { BlockContent, LayoutColumnDefinition } from '@atlaskit/editor-common';
+import { BlockContent, LayoutColumnDefinition } from '@atlaskit/adf-schema';
 
 export const layoutColumn = (attrs: { width: number }) => (
   content: BlockContent[],

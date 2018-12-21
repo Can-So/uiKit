@@ -10,10 +10,6 @@ import UserInfo from '../UserInfo';
 import { DeleteUserOverviewScreenProps } from './types';
 import * as Styled from './styled';
 import { DropdownList } from '../DropdownList';
-/**
- * Copy not final - ROCKET-1610
- * i18n yet to be applied - ROCKET-1610
- */
 
 export class DeleteUserOverviewScreen extends React.Component<
   DeleteUserOverviewScreenProps
@@ -27,10 +23,16 @@ export class DeleteUserOverviewScreen extends React.Component<
   };
 
   displayFirstListElement = () => {
-    const { accessibleSites, user } = this.props;
+    const { accessibleSites, user, isUserDeactivated } = this.props;
+
+    if (isUserDeactivated) {
+      return null;
+    }
+
+    const hasAccessibleSites = accessibleSites && accessibleSites.length > 0;
     return (
       <li>
-        {!accessibleSites || accessibleSites.length === 0 ? (
+        {!hasAccessibleSites && (
           <FormattedHTMLMessage
             {...this.selectAdminOrSelfCopy(
               overviewMessages.paragraphLoseAccessAdminNoSites,
@@ -38,7 +40,8 @@ export class DeleteUserOverviewScreen extends React.Component<
             )}
             values={{ fullName: user.fullName }}
           />
-        ) : (
+        )}
+        {hasAccessibleSites && (
           <>
             <FormattedHTMLMessage
               {...this.selectAdminOrSelfCopy(
@@ -46,6 +49,7 @@ export class DeleteUserOverviewScreen extends React.Component<
                 overviewMessages.paragraphLoseAccessSelf,
               )}
               values={{ fullName: user.fullName }}
+              tagName={'p'}
             />
             <DropdownList accessibleSites={accessibleSites} />
           </>
@@ -176,12 +180,17 @@ export class DeleteUserOverviewScreen extends React.Component<
   };
 
   render() {
-    const { user, deactivateUserHandler } = this.props;
+    const { user, deactivateUserHandler, isUserDeactivated } = this.props;
 
     return (
       <Styled.Screen>
         <Styled.Title>
-          <FormattedMessage {...overviewMessages.heading} />
+          <FormattedMessage
+            {...this.selectAdminOrSelfCopy(
+              overviewMessages.headingAdmin,
+              overviewMessages.headingSelf,
+            )}
+          />
         </Styled.Title>
         <FormattedMessage
           {...this.selectAdminOrSelfCopy(
@@ -206,16 +215,22 @@ export class DeleteUserOverviewScreen extends React.Component<
         {deactivateUserHandler && (
           <Styled.SectionMessageOuter>
             <SectionMessage appearance="warning">
-              <FormattedMessage {...overviewMessages.warningSectionBody} />
-              <p>
-                <Button
-                  appearance="link"
-                  spacing="none"
-                  onClick={deactivateUserHandler}
-                >
-                  <FormattedMessage {...commonMessages.deactivateAccount} />
-                </Button>
-              </p>
+              <FormattedMessage
+                {...(isUserDeactivated
+                  ? overviewMessages.warningSectionBodyDeactivated
+                  : overviewMessages.warningSectionBody)}
+              />
+              {!isUserDeactivated && (
+                <p>
+                  <Button
+                    appearance="link"
+                    spacing="none"
+                    onClick={deactivateUserHandler}
+                  >
+                    <FormattedMessage {...commonMessages.deactivateAccount} />
+                  </Button>
+                </p>
+              )}
             </SectionMessage>
           </Styled.SectionMessageOuter>
         )}

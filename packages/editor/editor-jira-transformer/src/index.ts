@@ -13,8 +13,8 @@ import {
   isSchemaWithBlockQuotes,
   isSchemaWithMedia,
   isSchemaWithTables,
-  Transformer,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
+import { Transformer } from '@atlaskit/editor-common';
 
 export type CustomEncoder = (userId: string) => string;
 
@@ -259,7 +259,7 @@ export class JIRATransformer implements Transformer<string> {
         code,
         em,
         link,
-        mentionQuery,
+        typeAheadQuery,
         strike,
         strong,
         subsup,
@@ -310,7 +310,7 @@ export class JIRATransformer implements Transformer<string> {
             fontElem.setAttribute('color', mark.attrs['color']);
             elem = elem.appendChild(fontElem);
             break;
-          case mentionQuery:
+          case typeAheadQuery:
             break;
           default:
             throw new Error(`Unable to encode mark '${mark.type.name}'`);

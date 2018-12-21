@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/profilecard",
-  "version": "6.1.2",
+  "version": "6.1.4",
   "config": {
     "access": "public"
   },
@@ -9,7 +9,8 @@
   "module": "dist/esm/index.js",
   "atlaskit:src": "src/index.js",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "scripts": {
     "build:flow": "bolt workspaces exec --only \"@atlaskit/profilecard\" -- flow-copy-source -v -i '**/__tests__/**' src dist/esm/src",

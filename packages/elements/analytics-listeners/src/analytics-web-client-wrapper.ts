@@ -2,6 +2,8 @@ import { AnalyticsWebClient } from './types';
 import {
   GasPayload,
   GasScreenEventPayload,
+  GasPureScreenEventPayload,
+  GasPurePayload,
 } from '@atlaskit/analytics-gas-types';
 import Logger from './helpers/logger';
 
@@ -36,7 +38,7 @@ export const sendEvent = (
     switch (event.eventType) {
       case 'ui':
         logger.debug('Sending UI Event via analytics client', gasEvent);
-        withClient(client => client.sendUIEvent(gasEvent));
+        withClient(client => client.sendUIEvent(gasEvent as GasPurePayload));
         break;
 
       case 'operational':
@@ -44,17 +46,21 @@ export const sendEvent = (
           'Sending Operational Event via analytics client',
           gasEvent,
         );
-        withClient(client => client.sendOperationalEvent(gasEvent));
+        withClient(client =>
+          client.sendOperationalEvent(gasEvent as GasPurePayload),
+        );
         break;
 
       case 'track':
         logger.debug('Sending Track Event via analytics client', gasEvent);
-        withClient(client => client.sendTrackEvent(gasEvent));
+        withClient(client => client.sendTrackEvent(gasEvent as GasPurePayload));
         break;
 
       case 'screen':
         logger.debug('Sending Screen Event via analytics client', gasEvent);
-        withClient(client => client.sendScreenEvent(gasEvent));
+        withClient(client =>
+          client.sendScreenEvent(gasEvent as GasPureScreenEventPayload),
+        );
         break;
 
       default:

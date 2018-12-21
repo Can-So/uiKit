@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import {
   tableBackgroundColorPalette,
   tableBackgroundBorderColors,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 import { colors } from '@atlaskit/theme';
 import Button, { ButtonGroup } from '@atlaskit/button';
 import { Skeleton } from '@atlaskit/icon';

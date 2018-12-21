@@ -1,0 +1,38 @@
+{
+  "name": "@atlaskit/xregexp-transformer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Xregexp transformer to compile regex scripts to unicode charsets.",
+  "author": "Atlassian Pty Ltd",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dist:delete": "rm -rf dist/*",
+    "delete": "rm -rf node_modules && npm run dist:delete",
+    "sample": "./node_modules/ttypescript/bin/tsc src/sample.ts"
+  },
+  "dependencies": {
+    "typescript": "~3.1.0",
+    "xregexp": "^4.1.1"
+  },
+  "devDependencies": {
+    "@atlaskit/docs": "^6.0.0",
+    "ttypescript": "^1.5.5"
+  },
+  "maintainers": [
+    {
+      "name": "Eduardo S"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+  },
+  "atlaskit": {
+    "internal": true
+  },
+  "keywords": [
+    "fabric",
+    "elements",
+    "private"
+  ]
+}

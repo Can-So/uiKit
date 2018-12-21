@@ -18,7 +18,7 @@ export default {
   'global_search.no_results_title':
     'Nincs találat a címek és a személyek között.',
   'global_search.no_results_body':
-    'Próbáljon meg másik kifejezés alapján keresni. Az alábbiakban keresést végezhet az oldalak tartalmában, használhatja a speciális keresést, vagy személyekre is kereshet.',
+    'Próbálja meg egy másik kifejezéssel, vagy pontosítsa a találatokat a speciális keresési funkciónkkal.',
   'global_search.people.recent_people_heading': 'Legutóbbi munkák',
   'global_search.people.people_heading': 'Személyek',
   'global_search.people.advanced_search': 'Személyek keresése',
@@ -31,22 +31,28 @@ export default {
   'global_search.jira.recent_people_heading':
     'Legutóbbi közös munka résztvevői',
   'global_search.jira.recent_containers':
-    'Legutóbbi táblák, szűrők és projektek',
+    'Legutóbbi táblák, projektek és szűrők',
   'global_search.jira.search_result_issues_heading': 'Ügyek',
   'global_search.jira.search_result_containers_heading':
-    'Táblák, szűrők és projektek',
+    'Táblák, projektek és szűrők',
   'global_search.jira.search_result_people_heading': 'Személyek',
-  'global_search.jira.advanced_search': 'Speciális keresés erre:',
+  'global_search.jira.advanced_search': 'Speciális keresés a következőre:',
   'global_search.jira.advanced_search_issues': 'ügyek',
   'global_search.jira.advanced_search_projects': 'projektek',
   'global_search.jira.advanced_search_boards': 'táblák',
   'global_search.jira.advanced_search_filters': 'szűrők',
   'global_search.jira.advanced_search_people': 'személyek',
   'global_search.jira.advanced_issue_search': 'Speciális keresés ügyekre',
-  'global_search.jira.no_results_title':
-    'Nincs találat az ügyösszefoglalók, a nevek és a személyek között.',
+  'global_search.jira.no_results_title': 'Nincs találat a keresésre',
   'global_search.jira.no_results_body':
-    'Próbáljon meg másik kifejezés alapján keresni. Keresést végezhet az ügyek összes szövegmezőjében, használhatja a speciális keresést, vagy egyéb konkrét elemekre is rákereshet.',
+    'Próbálja meg egy másik kifejezéssel, vagy pontosítsa a találatokat a speciális keresési funkciónkkal.',
   'global_search.jira.no_recent_activity_body':
     'Vagy pontosítsa a találatokat a speciális keresési funkciónkkal.',
+  'global_search.jira.project_type.business_project': 'Üzleti projekt',
+  'global_search.jira.project_type.software_project': 'Szoftverprojekt',
+  'global_search.jira.project_type.service_desk_project':
+    'Ügyfélszolgálati projekt',
+  'global_search.jira.project_type.ops_project': 'Ops-projekt',
+  'global_search.jira.result_type.board': 'Tábla',
+  'global_search.jira.result_type.filter': 'Szűrő',
 };

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Form, { Field, FormHeader } from '@atlaskit/form';
+import Textfield from '@atlaskit/textfield';
 import { Card, Client, Provider, ResolveResponse } from '..';
-import { FieldTextStateless } from '@atlaskit/field-text';
 import { ClientConfig } from '../src/Client';
 
 const customResponse = (url: string): ResolveResponse => ({
@@ -81,37 +82,46 @@ class Example extends React.Component<any, ExampleState> {
     return (
       <Page>
         <Grid>
-          <GridColumn>
-            <FieldTextStateless
-              shouldFitContainer={true}
-              label="The delay for response"
-              value={String(this.state.responseDelay)}
-              onChange={this.setResponseDelay}
-            />
+          <GridColumn medium={8}>
+            <div style={{ margin: '20px 0', minHeight: 150 }}>
+              <Provider client={this.state.client} key={this.state.url}>
+                <Card url={this.state.url} appearance="block" />
+              </Provider>
+            </div>
           </GridColumn>
-          <GridColumn>
-            <FieldTextStateless
-              shouldFitContainer={true}
-              label="The delay for loading state"
-              value={String(this.state.loadingStateDelay)}
-              onChange={this.setLoadingStateDelay}
-            />
-          </GridColumn>
-          <GridColumn>
-            <FieldTextStateless
-              shouldFitContainer={true}
-              label="Url to display"
-              value={this.state.url}
-              onChange={this.setUrl}
-            />
-          </GridColumn>
-        </Grid>
-        <Grid>
-          <GridColumn>
-            <hr />
-            <Provider client={this.state.client} key={this.state.url}>
-              <Card url={this.state.url} appearance="block" />
-            </Provider>
+          <GridColumn medium={4}>
+            <Form onSubmit={() => {}}>
+              {() => (
+                <form>
+                  <FormHeader title="Card options" />
+                  <Field name="response-delay" label="Response delay">
+                    {() => (
+                      <Textfield
+                        autoFocus
+                        value={String(this.state.responseDelay)}
+                        onChange={this.setResponseDelay}
+                      />
+                    )}
+                  </Field>
+                  <Field name="state-delay" label="Loading state delay">
+                    {() => (
+                      <Textfield
+                        value={String(this.state.loadingStateDelay)}
+                        onChange={this.setLoadingStateDelay}
+                      />
+                    )}
+                  </Field>
+                  <Field name="url" label="Url to display">
+                    {() => (
+                      <Textfield
+                        value={this.state.url}
+                        onChange={this.setUrl}
+                      />
+                    )}
+                  </Field>
+                </form>
+              )}
+            </Form>
           </GridColumn>
         </Grid>
       </Page>

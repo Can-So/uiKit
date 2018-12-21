@@ -17,7 +17,7 @@ export default {
     'Tai käytä <a href={url}>laajennettua hakua</a> (`vaihtonäppäin + syöttönäppäin`) tarkentaaksesi tuloksesi.',
   'global_search.no_results_title': 'Ei tuloksia otsikoista eikä henkilöistä',
   'global_search.no_results_body':
-    'Kokeile eri hakutermiä. Laajennetulla haulla voit hakea sivun sisältöä tai henkilöitä alla olevasta kohdasta.',
+    'Yritä uudelleen toisella hakutermillä tai tarkenna tuloksiasi laajennetun hakumme avulla.',
   'global_search.people.recent_people_heading':
     'Työskenteli äskettäin jonkun kanssa',
   'global_search.people.people_heading': 'Ihmiset',
@@ -31,13 +31,12 @@ export default {
   'global_search.jira.recent_people_heading':
     'Työskenteli äskettäin tämän henkilön kanssa:',
   'global_search.jira.recent_containers':
-    'Viimeaikaiset taulut, suodattimet ja projektit',
+    'Viimeaikaiset taulut, projektit ja suodattimet',
   'global_search.jira.search_result_issues_heading': 'Asiat',
   'global_search.jira.search_result_containers_heading':
-    'Taulut, suodattimet ja projektit',
+    'Taulut, projektit ja suodattimet',
   'global_search.jira.search_result_people_heading': 'Henkilöt',
-  'global_search.jira.advanced_search':
-    'Siirry laajennettuun hakuun hakeaksesi',
+  'global_search.jira.advanced_search': 'Laajennettu haku kohteelle',
   'global_search.jira.advanced_search_issues': 'asiat',
   'global_search.jira.advanced_search_projects': 'projektit',
   'global_search.jira.advanced_search_boards': 'taulut',
@@ -45,9 +44,15 @@ export default {
   'global_search.jira.advanced_search_people': 'henkilöt',
   'global_search.jira.advanced_issue_search': 'Laajennettu haku asioille',
   'global_search.jira.no_results_title':
-    'Ei tuloksia asiayhteenvedoista, nimistä eikä henkilöistä',
+    'Emme löytäneet yhtään hakuasi vastaavaa tulosta',
   'global_search.jira.no_results_body':
-    'Kokeile eri hakutermiä. Laajennetulla haulla voit hakea kaikista asioiden tekstikentistä tai hakea tarkemmin tiettyjä kohteita.',
+    'Yritä uudelleen toisella hakutermillä tai tarkenna tuloksiasi laajennetun hakumme avulla.',
   'global_search.jira.no_recent_activity_body':
     'Tai tarkenna tuloksiasi laajennetun hakumme avulla.',
+  'global_search.jira.project_type.business_project': 'Liiketoimintaprojekti',
+  'global_search.jira.project_type.software_project': 'Ohjelmistoprojekti',
+  'global_search.jira.project_type.service_desk_project': 'Asiakastukiprojekti',
+  'global_search.jira.project_type.ops_project': 'Ops-projekti',
+  'global_search.jira.result_type.board': 'Taulu',
+  'global_search.jira.result_type.filter': 'Suodatin',
 };

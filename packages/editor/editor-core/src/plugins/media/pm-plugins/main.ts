@@ -12,11 +12,8 @@ import {
 } from 'prosemirror-state';
 import { Context } from '@atlaskit/media-core';
 import { UploadParams } from '@atlaskit/media-picker';
-import {
-  MediaType,
-  MediaSingleLayout,
-  ErrorReporter,
-} from '@atlaskit/editor-common';
+import { MediaType, MediaSingleLayout } from '@atlaskit/adf-schema';
+import { ErrorReporter } from '@atlaskit/editor-common';
 
 import analyticsService from '../../../analytics/service';
 import { isImage, SetAttrsStep } from '../../../utils';
@@ -450,6 +447,7 @@ export class MediaPluginState {
 
     let width = mediaSingleNode.attrs.width;
     const oldLayout: MediaSingleLayout = mediaSingleNode.attrs.layout;
+    const wrappedLayouts: MediaSingleLayout[] = ['wrap-left', 'wrap-right'];
 
     if (width) {
       const cols = Math.round((width / 100) * gridSize);
@@ -460,7 +458,6 @@ export class MediaPluginState {
         'wide',
         'full-width',
       ];
-      const wrappedLayouts: MediaSingleLayout[] = ['wrap-left', 'wrap-right'];
 
       if (
         wrappedLayouts.indexOf(oldLayout) > -1 &&

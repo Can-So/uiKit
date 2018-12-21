@@ -1,5 +1,47 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.5.2
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/renderer@33.0.0
+  - @atlaskit/emoji@49.0.0
+  - @atlaskit/editor-json-transformer@4.1.1
+  - @atlaskit/editor-test-helpers@6.3.4
+  - @atlaskit/task-decision@11.1.1
+  - @atlaskit/media-core@24.7.0
+
+## 6.5.1
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/select@6.1.14
+  - @atlaskit/textfield@0.1.5
+  - @atlaskit/form@5.0.0
+
+## 6.5.0
+- [minor] [462b70f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/462b70f):
+
+  - ED-5819: Enables support for text color on mobile
+
+## 6.4.10
+- Updated dependencies [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+  - @atlaskit/task-decision@11.0.10
+  - @atlaskit/editor-common@24.0.0
+  - @atlaskit/editor-core@91.1.0
+  - @atlaskit/editor-json-transformer@4.1.0
+  - @atlaskit/editor-test-helpers@6.3.3
+  - @atlaskit/renderer@32.1.0
+
+## 6.4.9
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/renderer@32.0.0
+  - @atlaskit/emoji@48.0.0
+  - @atlaskit/editor-json-transformer@4.0.25
+  - @atlaskit/editor-test-helpers@6.3.2
+  - @atlaskit/task-decision@11.0.9
+  - @atlaskit/media-core@24.6.0
+
 ## 6.4.8
 - [patch] [f5d4e83](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5d4e83):
 

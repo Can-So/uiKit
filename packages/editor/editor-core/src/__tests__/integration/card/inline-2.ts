@@ -26,7 +26,7 @@ const moveUp = (page, selector) => {
   BrowserTestCase(
     `inline-2.ts: pasting an link then typing still converts to inline card`,
     {
-      skip: ['chrome', 'ie', 'safari'],
+      skip: ['ie', 'safari'],
     },
     async client => {
       let browser = new Page(client);
@@ -53,9 +53,6 @@ const moveUp = (page, selector) => {
       await browser.type(editable, ' more typing');
       await moveUp(browser, editable);
       await browser.type(editable, 'more typing ');
-
-      // selectors on the nodeview do not work correctly in chrome
-      await browser.waitForSelector('.inlineCardView-content-wrap');
 
       const doc = await browser.$eval(editable, getDocFromElement);
       expect(doc).toMatchDocSnapshot();

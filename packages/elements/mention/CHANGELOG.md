@@ -1,5 +1,21 @@
 # @atlaskit/mention
 
+## 15.3.0
+- [minor] [c238c00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c238c00):
+
+  - added i18n support to mentions
+- [minor] [3b1de17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b1de17):
+
+  - added i18n translated files
+
+## 15.2.2
+- [patch] [0f19693](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f19693):
+
+  - added tests for xregexp transformer, updated README and simplified code
+- [patch] [b789b3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b789b3a):
+
+  - removed xregexp library dependency from emoji and mention components, added xregexp-transformer package to compile xregexp expressions to unicode charsets
+
 ## 15.2.1
 - [patch] [cae5adb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cae5adb):
 

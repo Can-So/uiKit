@@ -6,12 +6,14 @@ export const AccessibleSitesList = styled.ul`
   padding-left: 0;
   font-weight: 600;
   margin-left: ${gridSizeTimes(1)}px;
+  > li {
+    margin-top: 0;
+  }
 `;
 
 export const AccessibleSitesListFootnote = styled.div`
   padding-left: 0;
   margin-left: ${gridSizeTimes(1)}px;
-  margin-top: ${gridSizeTimes(0.5)}px;
 `;
 
 export const ButtonWrapper = styled.div`

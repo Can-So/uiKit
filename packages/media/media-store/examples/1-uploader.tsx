@@ -1,9 +1,10 @@
+import { Component, ChangeEvent } from 'react';
+import * as React from 'react';
 import {
   defaultMediaPickerAuthProvider,
   tallImage,
 } from '@atlaskit/media-test-helpers';
-import { Component, ChangeEvent } from 'react';
-import * as React from 'react';
+import uuid from 'uuid/v4';
 import {
   ImagePreview,
   MetadataWrapper,
@@ -11,7 +12,8 @@ import {
   Wrapper,
   FileInput,
 } from '../example-helpers/styled';
-import { uploadFile, MediaStore } from '../src';
+import { uploadFile, MediaStore, UploadableFileUpfrontIds } from '../src';
+import { UploadableFile, UploadFileCallbacks } from '../src/uploader';
 
 type UploaderExampleProps = {};
 export interface UploaderExampleState {
@@ -98,15 +100,9 @@ class UploaderExample extends Component<
   };
 
   onUploadStringClick = () => {
-    uploadFile(
-      { content: tallImage },
-      new MediaStore({ authProvider: defaultMediaPickerAuthProvider }),
-      {
-        onProgress: this.onProgress,
-      },
-    )
-      .deferredFileId.then(this.fetchFile)
-      .catch(this.onError);
+    const uploadableFile: UploadableFile = { content: tallImage };
+
+    this.uploadFile(uploadableFile);
   };
 
   onError = (error: any) => {
@@ -121,17 +117,43 @@ class UploaderExample extends Component<
       return;
     }
     const file = files[0];
+    const uploadableFile: UploadableFile = {
+      content: file,
+      name: file.name,
+      mimeType: file.type,
+    };
 
-    uploadFile(
-      { content: file, name: file.name, mimeType: file.type },
-      new MediaStore({ authProvider: defaultMediaPickerAuthProvider }),
-      {
-        onProgress: this.onProgress,
-      },
-    )
-      .deferredFileId.then(this.fetchFile)
-      .catch(this.onError);
+    this.uploadFile(uploadableFile);
   };
+
+  private uploadFile(uploadableFile: UploadableFile) {
+    const mediaStore = new MediaStore({
+      authProvider: defaultMediaPickerAuthProvider,
+    });
+    const fileId = uuid();
+    const deferredTouchedFiles = mediaStore.touchFiles({
+      descriptors: [
+        {
+          fileId,
+        },
+      ],
+    });
+    const deferredUploadId = deferredTouchedFiles.then(
+      touchedFiles => touchedFiles.data.created[0].uploadId,
+    );
+
+    const uploadableFileUpfrontIds: UploadableFileUpfrontIds = {
+      id: fileId,
+      deferredUploadId,
+    };
+    const callbacks: UploadFileCallbacks = {
+      onProgress: this.onProgress,
+      onUploadFinish: error =>
+        error ? this.onError(error) : this.fetchFile(fileId),
+    };
+
+    uploadFile(uploadableFile, mediaStore, uploadableFileUpfrontIds, callbacks);
+  }
 }
 
 export default () => <UploaderExample />;

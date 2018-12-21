@@ -2,7 +2,6 @@
 
 exports[`Wrapper it should have interactive styles 1`] = `
 .c0 {
-  color: #5E6C84;
   line-height: 1.1428571428571428;
   margin: 2px 2px 2px 0;
   padding: 1px 2px 2px 2px;
@@ -16,26 +15,39 @@ exports[`Wrapper it should have interactive styles 1`] = `
 
 .c0:hover {
   background-color: #F4F5F7;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .c0:active {
   background-color: #DEEBFF;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .c0:focus {
   cursor: pointer;
   box-shadow: 0 0 0 2px #4C9AFF;
   outline: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-<span
+.c0:focus,
+.c0:focus:hover,
+.c0:focus:focus,
+.c0:focus:active {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<a
   className="c0"
 />
 `;
 
 exports[`Wrapper it should have selected styles 1`] = `
 .c0 {
-  color: #5E6C84;
   line-height: 1.1428571428571428;
   margin: 2px 2px 2px 0;
   padding: 1px 2px 2px 2px;
@@ -49,14 +61,21 @@ exports[`Wrapper it should have selected styles 1`] = `
   outline: none;
 }
 
-<span
+.c0,
+.c0:hover,
+.c0:focus,
+.c0:active {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<a
   className="c0"
 />
 `;
 
 exports[`Wrapper it should not have interactive or selected styles 1`] = `
 .c0 {
-  color: #5E6C84;
   line-height: 1.1428571428571428;
   margin: 2px 2px 2px 0;
   padding: 1px 2px 2px 2px;
@@ -67,7 +86,7 @@ exports[`Wrapper it should not have interactive or selected styles 1`] = `
   user-select: none;
 }
 
-<span
+<a
   className="c0"
 />
 `;

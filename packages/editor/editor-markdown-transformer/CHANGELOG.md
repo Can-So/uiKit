@@ -1,5 +1,24 @@
 # @atlaskit/editor-markdown-transformer
 
+## 2.1.1
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/editor-test-helpers@6.3.4
+  - @atlaskit/util-data-test@10.0.28
+
+## 2.1.0
+- [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+
+  - Move schema to its own package
+
+## 2.0.23
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/editor-test-helpers@6.3.2
+  - @atlaskit/util-data-test@10.0.26
+
 ## 2.0.22
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/editor-core@90.3.15

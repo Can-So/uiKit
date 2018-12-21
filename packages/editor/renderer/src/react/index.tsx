@@ -18,14 +18,13 @@ import {
 } from './nodes';
 
 import { toReact as markToReact } from './marks';
-
+import { calcTableColumnWidths } from '@atlaskit/adf-schema';
 import {
   ProviderFactory,
   getMarksByOrder,
   isSameMark,
   EventHandlers,
   ExtensionHandlers,
-  calcTableColumnWidths,
 } from '@atlaskit/editor-common';
 import { bigEmojiHeight } from '../utils';
 

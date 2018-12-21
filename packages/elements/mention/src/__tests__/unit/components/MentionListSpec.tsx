@@ -1,7 +1,7 @@
 import { waitUntil } from '@atlaskit/util-common-test';
 import * as React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
-
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl } from 'enzyme-react-intl';
 import { mention } from '@atlaskit/util-data-test';
 import MentionList, { Props, State } from '../../../components/MentionList';
 import MentionItem from '../../../components/MentionItem';
@@ -14,10 +14,9 @@ describe('MentionList', () => {
   let component;
   let defaultMentionItemsShow;
   const setupList = (props?: Props) =>
-    mount(<MentionList mentions={mentions} {...props} />) as ReactWrapper<
-      Props,
-      State
-    >;
+    mountWithIntl(
+      <MentionList mentions={mentions} {...props} />,
+    ) as ReactWrapper<Props, State>;
 
   beforeEach(() => {
     component = setupList();

@@ -54,13 +54,15 @@ class FieldTextStateless extends Component<Props, void> {
   render() {
     return (
       <Wrapper>
-        <Label
-          htmlFor={this.props.id}
-          isDisabled={this.props.disabled}
-          isLabelHidden={this.props.isLabelHidden}
-          isRequired={this.props.required}
-          label={this.props.label || ''}
-        />
+        {!this.props.isLabelHidden && (
+          <Label
+            htmlFor={this.props.id}
+            isDisabled={this.props.disabled}
+            isLabelHidden={this.props.isLabelHidden}
+            isRequired={this.props.required}
+            label={this.props.label || ''}
+          />
+        )}
         <Base
           invalidMessage={this.props.invalidMessage}
           isCompact={this.props.compact}

@@ -1,5 +1,21 @@
 # @atlaskit/smart-card
 
+## 9.2.2
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/radio@0.4.5
+  - @atlaskit/textfield@0.1.5
+  - @atlaskit/form@5.0.0
+
+## 9.2.1
+- [patch] [9c50550](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c50550):
+
+  - Do not show connect button if there are no auth methods.
+
+## 9.2.0
+- [minor] [95f98cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95f98cc):
+
+  - User can click on a smart card to open a new window/tab
+
 ## 9.1.0
 - [minor] [1175616](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1175616):
 

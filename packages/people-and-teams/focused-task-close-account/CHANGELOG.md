@@ -1,5 +1,15 @@
 # @atlaskit/focused-task-close-account
 
+## 0.5.0
+- [minor] [49bd44d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49bd44d):
+
+  - Section message updated when the user is alreaady deactivated
+
+## 0.4.0
+- [minor] [81299f6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/81299f6):
+
+  - Copy changes along with addition on new prop, isUserDeactivated
+
 ## 0.3.4
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/avatar@14.1.7

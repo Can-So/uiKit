@@ -1,5 +1,10 @@
 # @atlaskit/field-text
 
+## 7.0.19
+- [patch] [1c8779d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c8779d):
+
+  - Changes to isLabelHidden behavour. Previously when isLabelHidden was true, a label with display none would be rendered. Now when isLabelHidden is true, no label element is rendered.
+
 ## 7.0.18
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

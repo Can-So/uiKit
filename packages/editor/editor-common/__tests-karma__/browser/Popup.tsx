@@ -609,6 +609,7 @@ describe('Popup', () => {
         <Popup target={target} onPositionCalculated={onPositionCalculated} />,
       );
 
+      stub.step();
       expect(onPositionCalculated.calledOnce).to.eq(true);
 
       popup.setProps({ fitHeight: 10 });
@@ -623,20 +624,36 @@ describe('Popup', () => {
     it('should replace position with a result of onPositionCalculated callback', () => {
       const position = {};
       const onPositionCalculated = () => position;
+      let stub = createStub();
+      const sinonStub = sinon
+        .stub(window, 'requestAnimationFrame')
+        .callsFake(stub.add);
+
       const popup = mount(
         <Popup target={target} onPositionCalculated={onPositionCalculated} />,
       );
+
+      stub.step();
       expect((popup.state() as any).position).to.eq(position);
       popup.unmount();
+      sinonStub.restore();
     });
 
     it('should call onPlacementChanged callback once placment is changed', () => {
       const onPlacementChanged = sinon.stub();
+      let stub = createStub();
+      const sinonStub = sinon
+        .stub(window, 'requestAnimationFrame')
+        .callsFake(stub.add);
+
       const popup = mount(
         <Popup target={target} onPlacementChanged={onPlacementChanged} />,
       );
+
+      stub.step();
       expect(onPlacementChanged.calledOnce).to.eq(true);
       popup.unmount();
+      sinonStub.restore();
     });
 
     // TODO: https://github.com/airbnb/enzyme/issues/1466

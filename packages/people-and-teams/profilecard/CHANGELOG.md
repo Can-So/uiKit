@@ -1,5 +1,15 @@
 # @atlaskit/profilecard
 
+## 6.1.4
+- [patch] [ba95c0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ba95c0e):
+
+  - Remove typescript type InjectedIntlProps from flow js code
+
+## 6.1.3
+- [patch] [3ef5292](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ef5292):
+
+  - Include type definitions in npm package
+
 ## 6.1.2
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/avatar@14.1.7

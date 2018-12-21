@@ -1,5 +1,48 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.9.2
+- [patch] [1d9228c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d9228c):
+
+  - trim escape in link href
+
+## 2.9.1
+- [patch] [75046da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/75046da):
+
+  - macros keyword can be case insensitive
+
+## 2.9.0
+- [minor] [a4b49b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4b49b2):
+
+  - Parse macros inside table cells
+
+## 2.8.2
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/renderer@33.0.0
+  - @atlaskit/editor-json-transformer@4.1.1
+  - @atlaskit/editor-test-helpers@6.3.4
+  - @atlaskit/util-data-test@10.0.28
+
+## 2.8.1
+- [patch] [0a28c41](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a28c41):
+
+  - bq. doesn't need a following space
+
+## 2.8.0
+- [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+
+  - Move schema to its own package
+
+## 2.7.6
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/renderer@32.0.0
+  - @atlaskit/editor-json-transformer@4.0.25
+  - @atlaskit/editor-test-helpers@6.3.2
+  - @atlaskit/util-data-test@10.0.26
+
 ## 2.7.5
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/theme@7.0.1

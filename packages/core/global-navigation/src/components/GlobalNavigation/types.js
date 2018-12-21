@@ -33,6 +33,8 @@ export type GlobalNavDrawerProps = {
   /** A callback function which will be fired when the create drawer is closed.
    * */
   onCreateDrawerClose?: () => void,
+  /** A callback function which will be fired when the create drawer has finished its close transition. **/
+  onCreateDrawerCloseComplete?: (node: HTMLElement) => void,
   /** A prop to decide if the contents of the drawer should unmount on drawer
    * close. It is true by default. */
   shouldCreateDrawerUnmountOnExit?: boolean,
@@ -51,6 +53,8 @@ export type GlobalNavDrawerProps = {
   /** A callback function which will be called when the search drawer is closed.
    * */
   onSearchDrawerClose?: () => void,
+  /** A callback function which will be fired when the search drawer has finished its close transition. **/
+  onSearchDrawerCloseComplete?: (node: HTMLElement) => void,
   /** A prop to decide if the contents of the drawer should unmount on drawer
    * close. It is true by default. */
   shouldSearchDrawerUnmountOnExit?: boolean,
@@ -68,6 +72,8 @@ export type GlobalNavDrawerProps = {
   /** A callback function which will be called when the notifications drawer is
    * closed. */
   onNotificationDrawerClose?: () => void,
+  /** A callback function which will be fired when the notification drawer has finished its close transition. **/
+  onNotificationDrawerCloseComplete?: (node: HTMLElement) => void,
 
   /** Locale to be passed to the notification iFrame */
   locale?: string,
@@ -95,6 +101,8 @@ export type GlobalNavDrawerProps = {
   /** A callback function which will be called when the starred drawer is
    * closed. */
   onStarredDrawerClose?: () => void,
+  /** A callback function which will be fired when the starred drawer has finished its close transition. **/
+  onStarredDrawerCloseComplete?: (node: HTMLElement) => void,
   /** A prop to decide if the contents of the drawer should unmount on drawer
    * close. It is true by default. */
   shouldStarredDrawerUnmountOnExit?: boolean,

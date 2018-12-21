@@ -1,5 +1,18 @@
 # @atlaskit/datetime-picker
 
+## 6.3.23
+- [patch] [4c4bdc5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c4bdc5):
+
+  - AK-5672 - Refactor parseTime by separating logic and concerns into smaller, testable functions. Fixes meridiem issues.
+- [patch] [58a40bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58a40bf):
+
+  - Factoring in meridiem for 24hr time in editable
+
+## 6.3.22
+- [patch] [5c548ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c548ea):
+
+  - Removing extraneous wrapping span around icons which was causing an accessibility error
+
 ## 6.3.21
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/global-search",
-  "version": "5.13.5",
+  "version": "5.13.6",
   "description": "A cross-product search component (batteries included)",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -13,7 +13,8 @@
   ],
   "author": "Atlassian Pty Ltd",
   "maintainers": [
-    "David R"
+    "Ahmed Fouad",
+    "Patrick Teen"
   ],
   "atlaskit": {
     "name": "Global search",

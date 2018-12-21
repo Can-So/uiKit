@@ -108,6 +108,16 @@ const providers = {
 };
 rejectedPromise.catch(() => {});
 
+export type ToolbarFeatures = {
+  dynamicTextSizing: boolean;
+  imageResizing: boolean;
+};
+
+const enabledFeatureNames: { [P in keyof ToolbarFeatures]: string } = {
+  dynamicTextSizing: 'dynamic text sizing',
+  imageResizing: 'image resizing',
+};
+
 export interface State {
   reloadEditor: boolean;
   editorEnabled: boolean;
@@ -120,6 +130,7 @@ export interface State {
   activityProvider: string;
   jsonDocument?: string;
   mediaMockEnabled: boolean;
+  enabledFeatures: ToolbarFeatures;
 }
 
 export interface Props {
@@ -144,6 +155,10 @@ export default class ToolsDrawer extends React.Component<Props & any, State> {
       activityProvider: 'resolved',
       jsonDocument: '{}',
       mediaMockEnabled: false,
+      enabledFeatures: {
+        dynamicTextSizing: false,
+        imageResizing: false,
+      },
     };
 
     if (this.state.mediaMockEnabled) {
@@ -177,6 +192,17 @@ export default class ToolsDrawer extends React.Component<Props & any, State> {
     });
   };
 
+  private toggleFeature = name => {
+    this.setState(prevState => ({
+      ...prevState,
+
+      enabledFeatures: {
+        ...prevState.enabledFeatures,
+        [name]: !prevState.enabledFeatures[name],
+      },
+    }));
+  };
+
   render() {
     const {
       mentionProvider,
@@ -190,6 +216,7 @@ export default class ToolsDrawer extends React.Component<Props & any, State> {
       reloadEditor,
       editorEnabled,
       mediaMockEnabled,
+      enabledFeatures,
     } = this.state;
     return (
       <AnalyticsListener channel="atlaskit" onEvent={e => console.log(e)}>
@@ -210,6 +237,7 @@ export default class ToolsDrawer extends React.Component<Props & any, State> {
                 ? ''
                 : this.props.renderEditor({
                     disabled: !editorEnabled,
+                    enabledFeatures,
                     imageUploadProvider:
                       providers.imageUploadProvider[imageUploadProvider],
                     mediaProvider: providers.mediaProvider[mediaProvider],
@@ -276,6 +304,23 @@ export default class ToolsDrawer extends React.Component<Props & any, State> {
                     >
                       Reload Editor
                     </Button>
+
+                    {Object.keys(enabledFeatureNames).map(key => (
+                      <Button
+                        key={key}
+                        onClick={() => this.toggleFeature(key)}
+                        theme="dark"
+                        spacing="compact"
+                        className={`toggleFeature-${key} ${
+                          this.state.enabledFeatures[key] ? 'disable' : 'enable'
+                        }Feature-${key}`}
+                      >
+                        {this.state.enabledFeatures[key]
+                          ? `Disable ${enabledFeatureNames[key]}`
+                          : `Enable ${enabledFeatureNames[key]}`}
+                      </Button>
+                    ))}
+
                     <Tooltip content="Hot reload is not supported. Enable or disable before opening media-picker">
                       <Button
                         onClick={this.toggleMediaMock}

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
+import { TableLayout } from '@atlaskit/adf-schema';
 import {
   calcTableWidth,
   WidthConsumer,
   TableSharedCssClassName,
-  TableLayout,
   akEditorTableNumberColumnWidth,
 } from '@atlaskit/editor-common';
 import overflowShadow, { OverflowShadowProps } from '../../ui/overflow-shadow';

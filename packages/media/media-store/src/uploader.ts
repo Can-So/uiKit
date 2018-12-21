@@ -1,4 +1,3 @@
-import * as uuid from 'uuid';
 import chunkinator, { Chunk, ChunkinatorFile } from 'chunkinator';
 
 import { MediaStore } from './media-store';
@@ -12,13 +11,18 @@ export type UploadableFile = {
   collection?: string;
 };
 
+export type UploadableFileUpfrontIds = {
+  id: string;
+  deferredUploadId: Promise<string>;
+  occurrenceKey?: string;
+};
+
 export type UploadFileCallbacks = {
   onProgress: (progress: number) => void;
-  onId?: (id: string, occurrenceKey: string) => void;
+  onUploadFinish: (error?: any) => void;
 };
 
 export interface UploadFileResult {
-  deferredFileId: Promise<string>;
   cancel: () => void;
 }
 
@@ -65,14 +69,13 @@ const createProcessingFunction = (
 export const uploadFile = (
   file: UploadableFile,
   store: MediaStore,
+  uploadableFileUpfrontIds: UploadableFileUpfrontIds,
   callbacks?: UploadFileCallbacks,
 ): UploadFileResult => {
   const { content, collection, name, mimeType } = file;
-  const occurrenceKey = uuid.v4();
-  const deferredUploadId = store
-    .createUpload(1, collection)
-    .then(response => response.data[0].id);
-  const deferredEmptyFile = store.createFile({ collection, occurrenceKey });
+
+  const { id, occurrenceKey, deferredUploadId } = uploadableFileUpfrontIds;
+
   const { response, cancel } = chunkinator(
     content,
     {
@@ -92,41 +95,29 @@ export const uploadFile = (
     },
     {
       onProgress(progress: number) {
-        if (callbacks && callbacks.onProgress) {
+        if (callbacks) {
           callbacks.onProgress(progress);
         }
       },
     },
   );
 
-  const onId = callbacks && callbacks.onId;
-  if (onId) {
-    deferredEmptyFile.then(emptyFile => {
-      const fileId = emptyFile.data.id;
-      onId(fileId, occurrenceKey);
-    });
-  }
-
-  const fileId = Promise.all([
-    deferredUploadId,
-    deferredEmptyFile,
-    response,
-  ]).then(([uploadId, emptyFile]) => {
-    const fileId = emptyFile.data.id;
-
-    return store
-      .createFileFromUpload(
+  const onUploadFinish = (callbacks && callbacks.onUploadFinish) || (() => {});
+  Promise.all([deferredUploadId, response])
+    .then(async ([uploadId]) => {
+      await store.createFileFromUpload(
         { uploadId, name, mimeType },
         {
           occurrenceKey,
           collection,
-          replaceFileId: fileId,
+          replaceFileId: id,
         },
-      )
-      .then(() => fileId);
-  });
+      );
+      onUploadFinish();
+    })
+    .catch(onUploadFinish);
 
-  return { deferredFileId: fileId, cancel };
+  return { cancel };
 };
 
 const hashedChunks = (chunks: Chunk[]) => chunks.map(chunk => chunk.hash);

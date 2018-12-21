@@ -7,6 +7,7 @@ import {
   fontFamily,
   fontSize,
   borderRadius,
+  themed,
 } from '@atlaskit/theme';
 import {
   tableSharedStyle,
@@ -77,12 +78,12 @@ const fullPageStyles = ({
 };
 
 // prettier-ignore
-export const Wrapper = styled.div<Props & HTMLAttributes<{}>>`
+export const Wrapper = styled.div < Props & HTMLAttributes < {} >> `
   ${fullPageStyles}
 
   font-size: ${editorFontSize}px;
   ${getLineHeight};
-  color: ${colors.N800};
+  color: ${themed({ light: colors.N800, dark: '#B8C7E0' })};
   word-wrap: break-word;
 
   & span.akActionMark {
@@ -202,18 +203,16 @@ export const Wrapper = styled.div<Props & HTMLAttributes<{}>>`
     margin: ${gridSize() * 3}px 0;
   }
 
-  & div > .media-wrapped + .media-wrapped + *:not(.media-wrapped) {
-    clear: both;
-  }
-
-  & .media-wrapped + div:not(.media-wrapped) {
+  .media-single.media-wrapped + .media-single:not(.media-wrapped) {
     clear: both;
   }
 
   & .CodeBlock,
   & blockquote,
   & hr,
-  & > div > div:not(.media-wrapped) {
+  & > div > div:not(.media-wrapped),
+  .media-single.media-wrapped + .media-wrapped + *:not(.media-wrapped),
+  .media-single.media-wrapped + div:not(.media-wrapped) {
     clear: both;
   }
 
@@ -228,8 +227,8 @@ export const Wrapper = styled.div<Props & HTMLAttributes<{}>>`
     }
   }
 
-  ${mediaSingleSharedStyle} & .wrap-left + .wrap-right,
-  & .wrap-right + .wrap-left {
+  ${mediaSingleSharedStyle} & 
+  div[class^='image-wrap-'] + div[class^='image-wrap-'] {
     margin-left: 0;
     margin-right: 0;
   }

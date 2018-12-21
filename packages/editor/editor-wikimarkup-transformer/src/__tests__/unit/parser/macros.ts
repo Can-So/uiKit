@@ -125,6 +125,12 @@ green
 red
 {panel}`,
     ],
+    [
+      '[CS-602] macro keyword is case insensitive',
+      `{panEl:bgColor=red}
+red
+{panEl}`,
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {

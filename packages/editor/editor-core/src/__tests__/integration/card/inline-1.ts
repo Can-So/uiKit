@@ -13,7 +13,7 @@ import {
   BrowserTestCase(
     `inline-1.ts: pasting an link converts to inline card`,
     {
-      skip: ['chrome', 'ie', 'safari'],
+      skip: ['ie', 'safari'],
     },
     async client => {
       let browser = new Page(client);
@@ -35,9 +35,6 @@ import {
 
       // paste the link
       await browser.paste(editable);
-
-      // selectors on the nodeview do not work correctly in chrome
-      await browser.waitForSelector('.inlineCardView-content-wrap');
 
       const doc = await browser.$eval(editable, getDocFromElement);
       expect(doc).toMatchDocSnapshot();

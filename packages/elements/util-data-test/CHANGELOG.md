@@ -1,5 +1,20 @@
 # @atlaskit/util-data-test
 
+## 10.0.28
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/emoji@49.0.0
+  - @atlaskit/task-decision@11.1.1
+
+## 10.0.27
+- [patch] [015fcd0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/015fcd0):
+
+  - Adjusted unit tests to test for the bug noticed in FS-3259. Added multiple atlassian-ftfy emoji to test this, so updated a unit test to confirm that there are 14 Atlassian emoji, and also added an additional unit test to confirm that FS-3259 was corrected.
+
+## 10.0.26
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/emoji@48.0.0
+  - @atlaskit/task-decision@11.0.9
+
 ## 10.0.25
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/emoji@47.0.7
