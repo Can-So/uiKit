@@ -5,6 +5,8 @@ import { HTMLAttributes, ComponentClass } from 'react';
 import { colors, gridSize } from '@atlaskit/theme';
 import Color from './color';
 import { Color as ColorType } from '../Status';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { messages } from '../i18n';
 
 // color value, label, background, borderColor
 const palette: [ColorType, string, string, string][] = [
@@ -31,31 +33,41 @@ interface ColorPaletteProps {
   className?: string;
 }
 
-export default class ColorPalette extends PureComponent<
-  ColorPaletteProps,
+class ColorPalette extends PureComponent<
+  ColorPaletteProps & InjectedIntlProps,
   any
 > {
   render() {
-    const { cols = 7, onClick, selectedColor, className, onHover } = this.props;
-
+    const {
+      cols = 7,
+      onClick,
+      selectedColor,
+      className,
+      onHover,
+      intl: { formatMessage },
+    } = this.props;
     return (
       <ColorPaletteWrapper
         className={className}
         style={{ maxWidth: cols * 32 }}
       >
-        {palette.map(([colorValue, label, backgroundColor, borderColor]) => (
-          <Color
-            key={colorValue}
-            value={colorValue}
-            backgroundColor={backgroundColor}
-            borderColor={borderColor}
-            label={label}
-            onClick={onClick}
-            onHover={onHover}
-            isSelected={colorValue === selectedColor}
-          />
-        ))}
+        {palette.map(([colorValue, label, backgroundColor, borderColor]) => {
+          return (
+            <Color
+              key={colorValue}
+              value={colorValue}
+              backgroundColor={backgroundColor}
+              borderColor={borderColor}
+              label={formatMessage(messages[`statusColor${label}`])}
+              onClick={onClick}
+              onHover={onHover}
+              isSelected={colorValue === selectedColor}
+            />
+          );
+        })}
       </ColorPaletteWrapper>
     );
   }
 }
+
+export default injectIntl(ColorPalette);

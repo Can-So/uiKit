@@ -36,12 +36,19 @@
     "styled-components": "^3.2.6"
   },
   "peerDependencies": {
-    "react": "^16.4.0"
+    "react": "^16.4.0",
+    "react-intl": "^2.6.0"
   },
   "devDependencies": {
     "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/i18n-tools": "^0.4.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
-    "react": "^16.4.0"
-  }
+    "enzyme-react-intl": "^2.0.3",
+    "react": "^16.4.0",
+    "react-intl": "^2.6.0"
+  },
+  "scripts": {
+    "i18n:push": "i18n-tools push --resource status . --type ts"
+  }  
 }

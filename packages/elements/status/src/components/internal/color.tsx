@@ -71,7 +71,7 @@ export default class Color extends PureComponent<ColorProps, any> {
           }}
         >
           {isSelected && (
-            <EditorDoneIcon primaryColor={borderColor} label="Selected" />
+            <EditorDoneIcon primaryColor={borderColor} label={label} />
           )}
         </Button>
       </ButtonWrapper>

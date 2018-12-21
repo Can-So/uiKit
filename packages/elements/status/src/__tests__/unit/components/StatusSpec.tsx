@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
 import { Status } from '../../../components/Status';
 import Lozenge from '@atlaskit/lozenge';
 import { AnalyticsListener as AnalyticsListenerNext } from '@atlaskit/analytics-next';
 import { ANALYTICS_HOVER_DELAY } from '../../../components/constants';
 import { ELEMENTS_CHANNEL } from '../../../components/analytics';
+import { mountWithIntl } from 'enzyme-react-intl';
 
 const createPayload = (actionSubject, action, localId) => ({
   payload: {
@@ -22,12 +22,12 @@ const createPayload = (actionSubject, action, localId) => ({
 
 describe('Status', () => {
   it('should render', () => {
-    const component = mount(<Status text="In progress" color="blue" />);
+    const component = mountWithIntl(<Status text="In progress" color="blue" />);
     expect(component.find(Lozenge).length).toBe(1);
   });
 
   it('should have max-width 200px', () => {
-    const component = mount(<Status text="In progress" color="blue" />);
+    const component = mountWithIntl(<Status text="In progress" color="blue" />);
     expect(component.find(Lozenge).prop('maxWidth')).toBe(200);
   });
 
@@ -42,7 +42,9 @@ describe('Status', () => {
     };
 
     function checkColorMapping(color, appearance) {
-      const component = mount(<Status text="In progress" color={color} />);
+      const component = mountWithIntl(
+        <Status text="In progress" color={color} />,
+      );
       expect(component.find(Lozenge).prop('appearance')).toBe(appearance);
     }
 
@@ -53,13 +55,15 @@ describe('Status', () => {
 
   it('should use default color if color is unknown', () => {
     // @ts-ignore: passing an invalid color
-    const component = mount(<Status text="In progress" color="unknown" />);
+    const component = mountWithIntl(
+      <Status text="In progress" color="unknown" />,
+    );
 
     expect(component.find(Lozenge).prop('appearance')).toBe('default');
   });
 
   it('should not render it if text is empty', () => {
-    const component = mount(<Status text=" " color="blue" />);
+    const component = mountWithIntl(<Status text=" " color="blue" />);
 
     expect(component.find(Lozenge).length).toBe(0);
   });
@@ -81,7 +85,7 @@ describe('Status', () => {
     });
 
     const createStatus = (localId: string, onClick: any, onHover: any) =>
-      mount(
+      mountWithIntl(
         <AnalyticsListenerNext
           onEvent={analyticsNextHandler}
           channel={ELEMENTS_CHANNEL}
