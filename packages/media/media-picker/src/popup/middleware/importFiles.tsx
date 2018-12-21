@@ -166,7 +166,7 @@ export const importFilesFromRecentFiles = (
     collection: RECENTS_COLLECTION,
   };
 
-  store.dispatch(finalizeUpload(file, uploadId, source, undefined));
+  store.dispatch(finalizeUpload(file, uploadId, source));
   store.dispatch(getPreview(uploadId, file, RECENTS_COLLECTION));
 };
 

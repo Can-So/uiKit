@@ -504,6 +504,7 @@ describe('UploadService', () => {
         type: 'video/mp4',
         upfrontId,
       };
+
       expect(fileUploadErrorCallback).toHaveBeenCalledWith({
         file: expectedMediaFile,
         error: {

@@ -100,15 +100,7 @@ export const handleCloudFetchingEvent = (store: Store<State>) => (
       store.dispatch(setUpfrontIdDeferred(fileId, resolver, rejecter));
     }
 
-    store.dispatch(
-      finalizeUpload(
-        uploadedFile,
-        uploadId,
-        source,
-        undefined,
-        uploadedFile.occurrenceKey,
-      ),
-    );
+    store.dispatch(finalizeUpload(uploadedFile, uploadId, source, undefined));
   };
 
   // Handle cloud upload fail

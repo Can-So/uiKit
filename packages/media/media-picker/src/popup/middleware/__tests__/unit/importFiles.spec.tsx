@@ -11,7 +11,7 @@ import {
   isRemoteService,
   importFiles,
 } from '../../importFiles';
-import { LocalUpload, LocalUploads, ServiceFile } from '../../../domain';
+import { LocalUpload, LocalUploads } from '../../../domain';
 import { RECENTS_COLLECTION } from '../../../config';
 import { finalizeUpload } from '../../../actions/finalizeUpload';
 import { startImport } from '../../../actions/startImport';
@@ -47,14 +47,13 @@ describe('importFiles middleware', () => {
     withSelectedItems: true,
   };
   const upfrontId = Promise.resolve('1');
-  const makeFileData = (index: number): ServiceFile => ({
+  const makeFileData = (index: number) => ({
     id: `some-selected-item-id-${index}`,
     name: `picture${index}.jpg`,
     mimeType: 'image/jpg',
     size: 42 + index,
     upfrontId,
     occurrenceKey: `occurrence-key-${index}`,
-    date: 0,
   });
 
   const getSendUploadEventPayloads = (
