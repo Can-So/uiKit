@@ -47,7 +47,7 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   constructor(
     readonly tenantContext: Context,
     {
-      container = document.body,
+      container = exenv.canUseDOM ? document.body : undefined,
       uploadParams, // tenant
       proxyReactContext,
       singleSelect,
@@ -86,7 +86,9 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
     }
 
     this.container = popup;
-    container.appendChild(popup);
+    if (container) {
+      container.appendChild(popup);
+    }
   }
 
   public async show(): Promise<void> {
