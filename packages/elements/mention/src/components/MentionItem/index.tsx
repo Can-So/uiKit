@@ -2,7 +2,6 @@ import * as React from 'react';
 import Avatar from '@atlaskit/avatar';
 import Lozenge from '@atlaskit/lozenge';
 import LockCircleIcon from '@atlaskit/icon/glyph/lock-circle';
-import Tooltip from '@atlaskit/tooltip';
 import { colors } from '@atlaskit/theme';
 import {
   HighlightDetail,
@@ -23,6 +22,8 @@ import {
   RowStyle,
   TimeStyle,
 } from './styles';
+import { NoAccessLabel } from '../../util/i18n';
+import { NoAccessTooltip } from '../NoAccessTooltip';
 
 type ReactComponentConstructor = new (props: any) => React.Component<any, any>;
 
@@ -170,14 +171,15 @@ export default class MentionItem extends React.PureComponent<Props, {}> {
             {renderTime(time)}
           </InfoSectionStyle>
           {restricted ? (
-            <Tooltip
-              content={`${name} won't be notified as they have no access`}
-              position="right"
-            >
+            <NoAccessTooltip name={name!}>
               <AccessSectionStyle>
-                <LockCircleIcon label="No access" />
+                <NoAccessLabel>
+                  {text => (
+                    <LockCircleIcon label={text as string} />
+                  ) /* safe to cast to string given there is no value binding */}
+                </NoAccessLabel>
               </AccessSectionStyle>
-            </Tooltip>
+            </NoAccessTooltip>
           ) : null}
         </RowStyle>
       </MentionItemStyle>

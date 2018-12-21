@@ -1,13 +1,11 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { IntlProvider, injectIntl, InjectedIntlProps } from 'react-intl';
+import { IntlProvider, injectIntl } from 'react-intl';
 import { getMessagesForLocale } from '../internal/i18n-util';
 import type { MessageIntlProviderProps } from '../types';
 
-class MessagesIntlProvider extends PureComponent<
-  MessageIntlProviderProps & InjectedIntlProps,
-> {
+class MessagesIntlProvider extends PureComponent<MessageIntlProviderProps> {
   render() {
     const { intl, children } = this.props;
 

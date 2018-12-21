@@ -5749,6 +5749,13 @@ enzyme-adapter-utils@^1.9.0:
     prop-types "^15.6.2"
     semver "^5.6.0"
 
+enzyme-react-intl@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/enzyme-react-intl/-/enzyme-react-intl-2.0.3.tgz#d108330f6c5ada94bb1417ad1dae29637ae43091"
+  integrity sha512-POlJiYr5cmSURXhhE08LkVsP8w4V/KdPEPjQ6dni2CGbbcVNimlFEVezt/3peMzGbXFhBbORX6xw6YkhuZEZmA==
+  optionalDependencies:
+    jsonfile "^4.0.0"
+
 enzyme-to-json@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/enzyme-to-json/-/enzyme-to-json-3.3.0.tgz#553e23a09ffb4b0cf09287e2edf9c6539fddaa84"

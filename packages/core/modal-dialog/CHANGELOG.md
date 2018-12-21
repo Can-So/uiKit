@@ -1,5 +1,10 @@
 # @atlaskit/modal-dialog
 
+## 7.1.2
+- [patch] [2686f21](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2686f21):
+
+  - Removed example demonstrating deprecated reference behaviour
+
 ## 7.1.1
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

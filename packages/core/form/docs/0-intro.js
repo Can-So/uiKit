@@ -1,26 +1,15 @@
 // @flow
 import React from 'react';
 import { md, code, Example } from '@atlaskit/docs';
-import SectionMessage from '@atlaskit/section-message';
 import { Link } from 'react-router-dom';
 
 export default md`
-${(
-  <SectionMessage appearance="warning">
-    <p>
-      <strong>Note: @atlaskit/form is currently a developer preview.</strong>
-    </p>
-    <p>
-      Please experiment with and test this package but be aware that the API may
-      & probably will change with future releases.
-    </p>
-  </SectionMessage>
-)}
 
-  This package contains a number of components to help manage form **state**, **validation** and **layout**.
-  Below is an example of a form with a single text field.
+  Build quality forms fast. This package provides **form behaviour**, 
+  helps with **form layout** and creates **accessible forms** by default.
 
   ## Usage
+  Below is an example of a form with a single text field.
 
   ${code`
 import Form, { Field } from '@atlaskit/form';

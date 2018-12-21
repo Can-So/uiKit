@@ -230,7 +230,7 @@ export const quickInsert = async (browser, insertTitle) => {
     await quickInsertActiveElement(browser, firstTitleWord);
   } else {
     await browser.keys('/');
-    await browser.waitFor('div[aria-label="Popup"]');
+    await browser.waitForSelector('div[aria-label="Popup"]');
     await browser.keys(firstTitleWord);
   }
 

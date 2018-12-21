@@ -13,8 +13,8 @@ export function colorMacro(
   tokenErrCallback?: TokenErrCallback,
 ): Token {
   return commonMacro(input.substring(position), schema, {
-    opening: /^\{color(?::([^\{\n\}]*))?\}/,
-    closing: /\{color\}/,
+    keyword: 'color',
+    paired: true,
     rawContentProcessor,
     tokenErrCallback,
   });

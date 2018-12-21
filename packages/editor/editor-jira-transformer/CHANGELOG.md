@@ -1,5 +1,10 @@
 # @atlaskit/editor-jira-transformer
 
+## 5.1.2
+- [patch] [ad41550](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad41550):
+
+  - Ignore typeAheadQuery mark in jira transformer
+
 ## 5.1.1
 - Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
   - @atlaskit/editor-common@25.0.0

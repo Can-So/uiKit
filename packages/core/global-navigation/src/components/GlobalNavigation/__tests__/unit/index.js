@@ -1,9 +1,10 @@
 // @flow
 
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Badge from '@atlaskit/badge';
 import { DropdownItem } from '@atlaskit/dropdown-menu';
+import Drawer from '@atlaskit/drawer';
 import SearchIcon from '@atlaskit/icon/glyph/search';
 import CreateIcon from '@atlaskit/icon/glyph/add';
 import StarLargeIcon from '@atlaskit/icon/glyph/star-large';
@@ -158,9 +159,8 @@ describe('GlobalNavigation', () => {
           const props = {
             [`${name}DrawerContents`]: DrawerContents,
           };
-          // TODO: Convert to shallow once enzyme has been upgraded
-          const wrapper = mount(<GlobalNavigation {...props} />);
-          expect(wrapper.find('DrawerBase').props()).toMatchObject({
+          const wrapper = shallow(<GlobalNavigation {...props} />);
+          expect(wrapper.find(Drawer).props()).toMatchObject({
             width: 'wide',
           });
         });
@@ -171,10 +171,22 @@ describe('GlobalNavigation', () => {
             [`${name}DrawerContents`]: DrawerContents,
           };
 
-          // TODO: Convert to shallow once enzyme has been upgraded
-          const wrapper = mount(<GlobalNavigation {...props} />);
-          expect(wrapper.find('DrawerBase').props()).toMatchObject({
+          const wrapper = shallow(<GlobalNavigation {...props} />);
+          expect(wrapper.find(Drawer).props()).toMatchObject({
             width: 'full',
+          });
+        });
+
+        it(`should pass onCloseComplete to the "${name}" drawer`, () => {
+          const onCloseComplete = jest.fn();
+          const props = {
+            [`${name}DrawerContents`]: DrawerContents,
+            [`on${capitalisedName}DrawerCloseComplete`]: onCloseComplete,
+          };
+
+          const wrapper = shallow(<GlobalNavigation {...props} />);
+          expect(wrapper.find(Drawer).props()).toMatchObject({
+            onCloseComplete,
           });
         });
 

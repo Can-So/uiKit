@@ -1,5 +1,10 @@
 # @atlaskit/form
 
+## 5.1.0
+- [minor] [b36a82f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b36a82f):
+
+  - **feature:** Uses context to automatically assosiate a message to field. No upgrade changes required. Can remove fieldId prop on Message components if you are using that prop currently.
+
 ## 5.0.0
 - [major] [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
 
