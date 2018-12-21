@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 27.0.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
 ## 27.0.0
 - [major] [6cb6696](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6cb6696):
 

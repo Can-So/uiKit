@@ -1,5 +1,10 @@
 # @atlaskit/media-test-helpers
 
+## 18.7.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
 ## 18.7.0
 - [minor] [5c06476](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c06476):
 

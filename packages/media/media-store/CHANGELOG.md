@@ -1,5 +1,10 @@
 # @atlaskit/media-store
 
+## 9.0.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
 ## 9.0.0
 - [minor] [46cacba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46cacba):
 
