@@ -5,7 +5,11 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { createContext } from '../../../_stubs';
 import { Auth, ProcessedFileState } from '@atlaskit/media-core';
-import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import {
+  awaitError,
+  mountWithIntlContext,
+  nextTick,
+} from '@atlaskit/media-test-helpers';
 import { AudioViewer } from '../../../../../newgen/viewers/audio';
 import Spinner from '@atlaskit/spinner';
 import { DefaultCoverWrapper, AudioCover } from '../../../../../newgen/styled';
@@ -138,6 +142,7 @@ describe('Audio viewer', () => {
       instance['loadCover'] = () => promiseSrc;
       await instance['init']();
       await promiseSrc;
+      await nextTick();
       el.update();
 
       expect(el.find(DefaultCoverWrapper)).toHaveLength(0);
