@@ -1,5 +1,13 @@
 # @atlaskit/mention
 
+## 15.3.0
+- [minor] [c238c00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c238c00):
+
+  - added i18n support to mentions
+- [minor] [3b1de17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b1de17):
+
+  - added i18n translated files
+
 ## 15.2.2
 - [patch] [0f19693](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f19693):
 
