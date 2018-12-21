@@ -85,6 +85,14 @@ export function keymapPlugin(): Plugin {
         return false;
       }
 
+      /**
+       * Jira uses escape to toggle the collapsed editor
+       * stop the event propagation when the picker is open
+       */
+      if (window.event) {
+        window.event.stopPropagation();
+      }
+
       return dismissCommand()(state, dispatch);
     },
     list,
