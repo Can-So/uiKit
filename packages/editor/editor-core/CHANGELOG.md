@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.3
+- [patch] [88c8373](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/88c8373):
+
+  - ED-5704: filtering out invalid marks from JSON output of editorActions.getValue()
+
 ## 92.0.2
 - [patch] [dc39f5b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc39f5b):
 

@@ -1,1 +1,0 @@
-- ED-5704: filtering out invalid marks from JSON output of editorActions.getValue()
