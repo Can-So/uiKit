@@ -93,13 +93,19 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
     return item.match({
       pending: () => DisabledToolbarDownloadButton,
       failed: () => DisabledToolbarDownloadButton,
-      successful: item => (
-        <ToolbarDownloadButton
-          state={item}
-          identifier={identifier}
-          context={context}
-        />
-      ),
+      successful: item => {
+        if (item.status === 'processing') {
+          return DisabledToolbarDownloadButton;
+        }
+
+        return (
+          <ToolbarDownloadButton
+            state={item}
+            identifier={identifier}
+            context={context}
+          />
+        );
+      },
     });
   };
 
