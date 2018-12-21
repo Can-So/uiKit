@@ -78,7 +78,7 @@ export interface TeamHighlight {
 export interface Option {
   id: string;
   name: string;
-  type?: string;
+  type?: 'User' | 'Team';
   fixed?: boolean;
 }
 

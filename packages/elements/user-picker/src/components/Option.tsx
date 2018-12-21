@@ -16,8 +16,9 @@ export const Option = props => {
       </components.Option>
     );
   }
+  // This will be implemented in TEAMS-169
   // if (isTeam(option)) {
-  //   return null;
+  //   return Something;
   // }
   return null;
 };
