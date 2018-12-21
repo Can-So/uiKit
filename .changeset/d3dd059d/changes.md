@@ -1,1 +1,0 @@
-- ED-5806 Fix disappearing language in code block language picker

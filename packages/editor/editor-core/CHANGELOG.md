@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.5
+- [patch] [50d9b26](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/50d9b26):
+
+  - ED-5806 Fix disappearing language in code block language picker
+
 ## 92.0.4
 - [patch] [be12a8e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be12a8e):
 
