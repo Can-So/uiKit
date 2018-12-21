@@ -6,7 +6,6 @@ import * as React from 'react';
 import { Component } from 'react';
 import Button from '@atlaskit/button';
 import {
-  userAuthProvider,
   defaultMediaPickerCollectionName,
   createUploadContext,
 } from '@atlaskit/media-test-helpers';
@@ -26,7 +25,6 @@ import {
 
 const context = createUploadContext();
 const popup = MediaPicker('popup', context, {
-  container: document.body,
   uploadParams: {
     collection: defaultMediaPickerCollectionName,
   },
@@ -89,8 +87,6 @@ class PopupWrapper extends Component<{}, PopupWrapperState> {
   };
 
   onShow = () => {
-    // Populate cache in userAuthProvider.
-    userAuthProvider();
     // Synchronously with next command tenantAuthProvider will be requested.
     popup.show().catch(console.error);
   };

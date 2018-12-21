@@ -32,6 +32,7 @@
     "@atlaskit/theme": "^7.0.1",
     "@atlaskit/util-shared-styles": "^2.10.3",
     "deep-equal": "^1.0.1",
+    "exenv": "^1.2.2",
     "pdfjs-dist": "^2.0.489",
     "query-string": "^4.3.2",
     "tslib": "^1.8.0"
@@ -44,6 +45,7 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
+    "@atlaskit/build-utils": "^2.1.0",
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/media-card": "^46.0.0",
@@ -55,6 +57,7 @@
     "@types/sinon-chai": "^2.7.27",
     "enzyme": "^3.7.0",
     "jsverify": "^0.8.3",
+    "react-dom": "^16.4.2",
     "react-intl": "^2.6.0",
     "sinon-chai": "^2.9.0"
   }

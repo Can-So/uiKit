@@ -2,7 +2,7 @@ import { Context, ContextFactory } from '@atlaskit/media-core';
 import { Store } from 'redux';
 import * as React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-
+import * as exenv from 'exenv';
 import App, { AppProxyReactContext } from '../popup/components/app';
 import { cancelUpload } from '../popup/actions/cancelUpload';
 import { showPopup } from '../popup/actions/showPopup';
@@ -39,7 +39,7 @@ export interface PopupUploadEventEmitter extends UploadEventEmitter {
 
 export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   implements PopupUploadEventEmitter {
-  private readonly container: HTMLElement;
+  private readonly container?: HTMLElement;
   private readonly store: Store<State>;
   private tenantUploadParams: UploadParams;
   private proxyReactContext?: AppProxyReactContext;
@@ -47,7 +47,7 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   constructor(
     readonly tenantContext: Context,
     {
-      container = document.body,
+      container = exenv.canUseDOM ? document.body : undefined,
       uploadParams, // tenant
       proxyReactContext,
       singleSelect,
@@ -81,9 +81,14 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
     this.tenantUploadParams = tenantUploadParams;
 
     const popup = this.renderPopup();
+    if (!popup) {
+      return;
+    }
 
     this.container = popup;
-    container.appendChild(popup);
+    if (container) {
+      container.appendChild(popup);
+    }
   }
 
   public async show(): Promise<void> {
@@ -109,6 +114,9 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   }
 
   public teardown(): void {
+    if (!this.container) {
+      return;
+    }
     unmountComponentAtNode(this.container);
   }
 
@@ -127,8 +135,12 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
     this.emit('closed', undefined);
   }
 
-  private renderPopup(): HTMLElement {
+  private renderPopup(): HTMLElement | undefined {
+    if (!exenv.canUseDOM) {
+      return;
+    }
     const container = document.createElement('div');
+
     render(
       <App
         store={this.store}
