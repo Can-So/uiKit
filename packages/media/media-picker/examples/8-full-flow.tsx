@@ -120,9 +120,12 @@ export default class Example extends React.Component<{}, State> {
   render() {
     return (
       <>
-        <Button id="show" onClick={() => popup.show()}>
-          Show
-        </Button>
+        <div style={{ margin: '10px', 'margin-bottom': '0px' }}>
+          <Button id="show" onClick={() => popup.show()}>
+            Show
+          </Button>
+        </div>
+
         <div>{this.renderCards()}</div>
         {this.renderMediaViewer()}
       </>
