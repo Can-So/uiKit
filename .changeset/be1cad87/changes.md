@@ -1,0 +1,1 @@
+- remove "small" appearance from media-card
