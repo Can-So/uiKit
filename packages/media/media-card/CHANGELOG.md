@@ -1,5 +1,10 @@
 # @atlaskit/media-image
 
+## 47.0.0
+- [major] [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+
+  - remove "small" appearance from media-card
+
 ## 46.0.1
 - [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
 
