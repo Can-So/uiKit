@@ -31,6 +31,8 @@ import {
   CategoryId,
 } from './categories';
 import CategoryTracker from './CategoryTracker';
+import { messages } from '../i18n';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 const categoryClassname = 'emoji-category';
 
@@ -74,8 +76,8 @@ type Orderable = {
 const byOrder = (orderableA: Orderable, orderableB: Orderable) =>
   (orderableA.order || 0) - (orderableB.order || 0);
 
-export default class EmojiPickerVirtualList extends PureComponent<
-  Props,
+class EmojiPickerVirtualList extends PureComponent<
+  Props & InjectedIntlProps,
   State
 > {
   static contextTypes = {
@@ -117,7 +119,7 @@ export default class EmojiPickerVirtualList extends PureComponent<
     };
   }
 
-  componentWillUpdate(nextProps: Props, nextState: State) {
+  componentWillUpdate(nextProps: Props & InjectedIntlProps, nextState: State) {
     if (
       this.props.emojis !== nextProps.emojis ||
       this.props.selectedTone !== nextProps.selectedTone ||
@@ -195,8 +197,16 @@ export default class EmojiPickerVirtualList extends PureComponent<
     return items;
   };
 
-  private buildVirtualItems = (props: Props, state: State): void => {
-    const { emojis, loading, query } = props;
+  private buildVirtualItems = (
+    props: Props & InjectedIntlProps,
+    state: State,
+  ): void => {
+    const {
+      emojis,
+      loading,
+      query,
+      intl: { formatMessage },
+    } = props;
 
     let items: Items.VirtualItem<any>[] = [];
 
@@ -219,7 +229,7 @@ export default class EmojiPickerVirtualList extends PureComponent<
           ...items,
           ...this.buildVirtualItemFromGroup({
             category: 'SEARCH',
-            title: search.name,
+            title: formatMessage(messages[search.name]),
             emojis,
             order: search.order,
           }),
@@ -264,11 +274,15 @@ export default class EmojiPickerVirtualList extends PureComponent<
     emoji: EmojiDescription,
     category: CategoryGroupKey,
   ): CategoryKeyToGroup => {
+    const {
+      intl: { formatMessage },
+    } = this.props;
+
     if (!categoryToGroupMap[category]) {
       const categoryDefinition = CategoryDescriptionMap[category];
       categoryToGroupMap[category] = {
         emojis: [],
-        title: categoryDefinition.name,
+        title: formatMessage(messages[categoryDefinition.name]),
         category,
         order: categoryDefinition.order,
       };
@@ -388,3 +402,5 @@ export default class EmojiPickerVirtualList extends PureComponent<
     );
   }
 }
+
+export default injectIntl(EmojiPickerVirtualList);

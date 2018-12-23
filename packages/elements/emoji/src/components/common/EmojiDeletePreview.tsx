@@ -7,6 +7,8 @@ import { EmojiDescription } from '../../types';
 import * as styles from './styles';
 import CachingEmoji from './CachingEmoji';
 import RetryableButton from './RetryableButton';
+import { messages } from '../i18n';
+import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 
 export interface OnDeleteEmoji {
   (emoji: EmojiDescription): Promise<boolean>;
@@ -24,7 +26,7 @@ export interface State {
   error: boolean;
 }
 
-export default class EmojiDeletePreview extends Component<Props, State> {
+class EmojiDeletePreview extends Component<Props & InjectedIntlProps, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,36 +62,43 @@ export default class EmojiDeletePreview extends Component<Props, State> {
   };
 
   render() {
-    const { emoji } = this.props;
+    const {
+      emoji,
+      intl: { formatMessage },
+    } = this.props;
     const { loading, error } = this.state;
 
     return (
       <div className={styles.deletePreview}>
         <div className={styles.deleteText}>
-          <h5>Remove emoji</h5>
-          All existing instances of this emoji will be replaced with{' '}
-          {emoji.shortName}
+          <h5>
+            <FormattedMessage {...messages.deleteEmojiTitle} />
+          </h5>
+          <FormattedMessage
+            {...messages.deleteEmojiDescription}
+            values={{ 0: emoji.shortName }}
+          />
         </div>
         <div className={styles.deleteFooter}>
           <CachingEmoji emoji={emoji} />
           <div className={styles.previewButtonGroup}>
             {error ? (
               <EmojiErrorMessage
-                message="Remove failed"
+                message={formatMessage(messages.deleteEmojiFailed)}
                 className={styles.emojiDeleteErrorMessage}
               />
             ) : null}
             <RetryableButton
               className={styles.submitDelete}
               retryClassName={styles.submitDelete}
-              label="Remove"
+              label={formatMessage(messages.deleteEmojiLabel)}
               onSubmit={this.onSubmit}
               appearance="danger"
               loading={loading}
               error={error}
             />
             <AkButton appearance="subtle" onClick={this.onCancel}>
-              Cancel
+              <FormattedMessage {...messages.cancelLabel} />
             </AkButton>
           </div>
         </div>
@@ -97,3 +106,5 @@ export default class EmojiDeletePreview extends Component<Props, State> {
     );
   }
 }
+
+export default injectIntl(EmojiDeletePreview);

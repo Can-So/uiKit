@@ -14,6 +14,7 @@ import { LoadingItem } from './EmojiPickerVirtualItems';
 import { OnEmojiEvent } from '../../types';
 import { EmojiProvider } from '../../api/EmojiResource';
 import { FireAnalyticsEvent, withAnalytics } from '@atlaskit/analytics';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 const emojiPickerModuleLoader = () =>
   import(/* webpackChunkName:"@atlaskit-internal_emojiPickerComponent" */ './EmojiPickerComponent');
@@ -29,7 +30,7 @@ export interface Props extends LoadingProps {
 }
 
 export class EmojiPickerInternal extends LoadingEmojiComponent<
-  Props,
+  Props & InjectedIntlProps,
   LoadingState
 > {
   // state initialised with static component to prevent
@@ -86,4 +87,4 @@ const EmojiPicker = withAnalytics<typeof EmojiPickerInternal>(
 );
 type EmojiPicker = EmojiPickerInternal;
 
-export default EmojiPicker;
+export default injectIntl(EmojiPicker);

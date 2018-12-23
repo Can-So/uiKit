@@ -7,6 +7,8 @@ import { CategoryDescription, OnCategory } from '../../types';
 import { defaultCategories } from '../../constants';
 
 import { CategoryDescriptionMap, CategoryId } from './categories';
+import { messages } from '../i18n';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 export interface Props {
   dynamicCategories?: CategoryId[];
@@ -40,13 +42,13 @@ const addNewCategories = (
     .sort(sortCategories);
 };
 
-export default class CategorySelector extends PureComponent<Props, State> {
+class CategorySelector extends PureComponent<Props & InjectedIntlProps, State> {
   static defaultProps = {
     onCategorySelected: () => {},
     dynamicCategories: [],
   };
 
-  constructor(props: Props) {
+  constructor(props: Props & InjectedIntlProps) {
     super(props);
     const { dynamicCategories } = props;
 
@@ -78,7 +80,10 @@ export default class CategorySelector extends PureComponent<Props, State> {
   }
 
   render() {
-    const { disableCategories } = this.props;
+    const {
+      disableCategories,
+      intl: { formatMessage },
+    } = this.props;
     const { categories } = this.state;
     let categoriesSection;
     if (categories) {
@@ -104,15 +109,15 @@ export default class CategorySelector extends PureComponent<Props, State> {
 
             // tslint:disable-next-line:variable-name
             const Icon = category.icon;
-
+            const categoryName = formatMessage(messages[category.name]);
             return (
-              <li key={category.name}>
+              <li key={category.id}>
                 <button
                   className={classNames(categoryClasses)}
                   onClick={onClick}
-                  title={category.name}
+                  title={categoryName}
                 >
-                  <Icon label={category.name} />
+                  <Icon label={categoryName} />
                 </button>
               </li>
             );
@@ -127,3 +132,5 @@ export default class CategorySelector extends PureComponent<Props, State> {
     );
   }
 }
+
+export default injectIntl(CategorySelector);

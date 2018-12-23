@@ -50,6 +50,7 @@ describe('<UploadingEmojiPicker />', () => {
   const uploadPreviewShown = component => {
     const uploadPreview = helper.findUploadPreview(component);
     expect(uploadPreview).toHaveLength(1);
+
     const uploadPreviewEmoji = uploadPreview.find(Emoji);
     // Should show two emoji in EmojiUploadPrevew
     expect(uploadPreviewEmoji).toHaveLength(2);

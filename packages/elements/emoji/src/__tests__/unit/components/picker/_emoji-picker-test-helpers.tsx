@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl } from 'enzyme-react-intl';
 import { getEmojiResourcePromise, newEmojiRepository } from '../../_test-data';
 import EmojiPicker, { Props } from '../../../../components/picker/EmojiPicker';
 import EmojiPickerComponent from '../../../../components/picker/EmojiPickerComponent';
@@ -41,7 +42,7 @@ export function setupPicker(
     pickerProps.emojiProvider = getEmojiResourcePromise(config);
   }
 
-  const picker = mount(<EmojiPicker {...pickerProps} />);
+  const picker = mountWithIntl(<EmojiPicker {...pickerProps} />);
 
   return waitUntil(() => hasSelector(picker, EmojiPickerComponent)).then(
     () => picker,

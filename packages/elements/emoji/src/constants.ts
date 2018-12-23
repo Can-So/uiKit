@@ -3,8 +3,9 @@ import { CategoryId } from './components/picker/categories';
 export const customCategory = 'CUSTOM';
 export const frequentCategory = 'FREQUENT';
 export const customType = 'SITE';
-export const customTitle = 'All uploads';
-export const userCustomTitle = 'Your uploads';
+
+export const customTitle = 'allUploadsCustomCategory';
+export const userCustomTitle = 'userUploadsCustomCategory';
 
 export const dataURLPrefix = 'data:';
 export const deleteEmojiLabel = 'delete-emoji';

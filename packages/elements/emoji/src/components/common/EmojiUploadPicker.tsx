@@ -11,6 +11,8 @@ import FileChooser from './FileChooser';
 import EmojiErrorMessage from './EmojiErrorMessage';
 import { UploadStatus } from './internal-types';
 import EmojiUploadPreview from './EmojiUploadPreview';
+import { messages } from '../i18n';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 export interface OnUploadEmoji {
   (upload: EmojiUpload): void;
@@ -69,7 +71,10 @@ interface ChooseEmojiFileProps {
   errorMessage?: string;
 }
 
-class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
+class ChooseEmojiFileInternal extends PureComponent<
+  ChooseEmojiFileProps & InjectedIntlProps,
+  {}
+> {
   private onKeyDown = event => {
     if (event.key === 'Escape') {
       this.props.onUploadCancelled();
@@ -77,7 +82,13 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
   };
 
   render() {
-    const { name = '', onChooseFile, onNameChange, errorMessage } = this.props;
+    const {
+      name = '',
+      onChooseFile,
+      onNameChange,
+      errorMessage,
+      intl: { formatMessage },
+    } = this.props;
     const disableChooser = !name;
 
     // Note: FileChooser.accept does not work in Electron due to a bug: https://product-fabric.atlassian.net/browse/FS-1626
@@ -96,7 +107,7 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
               isFitContainerWidthEnabled={true}
             >
               <input
-                placeholder="Emoji name"
+                placeholder={formatMessage(messages.emojiPlaceholder)}
                 maxLength={maxNameLength}
                 onChange={onNameChange}
                 onKeyDown={this.onKeyDown}
@@ -108,7 +119,7 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
           </span>
           <span className={styles.uploadChooseFileBrowse}>
             <FileChooser
-              label="Choose file"
+              label={formatMessage(messages.emojiChooseFileTitle)}
               onChange={onChooseFile}
               accept="image/png,image/jpeg,image/gif"
               isDisabled={disableChooser}
@@ -117,7 +128,7 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
         </div>
         <div className={styles.emojiUploadBottom}>
           {!errorMessage ? (
-            <p>JPG, PNG or GIF. Max size 1 MB.</p>
+            <p>{formatMessage(messages.emojiImageRequirements)}</p>
           ) : (
             <EmojiErrorMessage
               className={styles.emojiChooseFileErrorMessage}
@@ -130,13 +141,18 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
   }
 }
 
-export default class EmojiUploadPicker extends PureComponent<Props, State> {
+const ChooseEmojiFile = injectIntl(ChooseEmojiFileInternal);
+
+class EmojiUploadPicker extends PureComponent<
+  Props & InjectedIntlProps,
+  State
+> {
   state = {
     uploadStatus: UploadStatus.Waiting,
     chooseEmojiErrorMessage: undefined,
   } as State;
 
-  constructor(props: Props) {
+  constructor(props: Props & InjectedIntlProps) {
     super(props);
     if (props.errorMessage) {
       this.state.uploadStatus = UploadStatus.Error;
@@ -213,14 +229,20 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
   };
 
   private errorOnUpload = (event: any): void => {
+    const {
+      intl: { formatMessage },
+    } = this.props;
     debug('File load error: ', event);
     this.setState({
-      chooseEmojiErrorMessage: 'Upload failed',
+      chooseEmojiErrorMessage: formatMessage(messages.emojiUploadFailed),
     });
     this.cancelChooseFile();
   };
 
   private onFileLoad = (file: File) => (f): Promise<any> => {
+    const {
+      intl: { formatMessage },
+    } = this.props;
     return ImageUtil.parseImage(f.target.result)
       .then(() => {
         const state = {
@@ -231,7 +253,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
       })
       .catch(() => {
         this.setState({
-          chooseEmojiErrorMessage: 'Selected image is invalid',
+          chooseEmojiErrorMessage: formatMessage(messages.emojiInvalidImage),
         });
         this.cancelChooseFile();
       });
@@ -244,6 +266,9 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
   };
 
   private onChooseFile = (event: ChangeEvent<any>): void => {
+    const {
+      intl: { formatMessage },
+    } = this.props;
     const files = event.target.files;
 
     if (files.length) {
@@ -253,7 +278,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
 
       if (ImageUtil.hasFileExceededSize(file)) {
         this.setState({
-          chooseEmojiErrorMessage: 'Selected image is more than 1 MB',
+          chooseEmojiErrorMessage: formatMessage(messages.emojiImageTooBig),
         });
         this.cancelChooseFile();
         return;
@@ -304,3 +329,5 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
     );
   }
 }
+
+export default injectIntl(EmojiUploadPicker);

@@ -8,6 +8,8 @@ import AkButton from '@atlaskit/button';
 import * as styles from './styles';
 import RetryableButton from './RetryableButton';
 import EmojiErrorMessage from './EmojiErrorMessage';
+import { messages } from '../i18n';
+import { FormattedMessage } from 'react-intl';
 
 export interface EmojiUploadPreviewProps {
   name: string;
@@ -56,8 +58,13 @@ export default class EmojiUploadPreview extends PureComponent<
       <div className={styles.uploadPreviewFooter}>
         <div className={styles.uploadPreview}>
           <div className={styles.uploadPreviewText}>
-            <h5>Preview</h5>
-            Your new emoji {emojiComponent} looks great
+            <h5>
+              <FormattedMessage {...messages.emojiPreviewTitle} />
+            </h5>
+            <FormattedMessage
+              {...messages.emojiPreview}
+              values={{ emoji: emojiComponent }}
+            />
           </div>
           <div className={styles.bigEmojiPreview}>{emojiComponent}</div>
         </div>
@@ -68,21 +75,25 @@ export default class EmojiUploadPreview extends PureComponent<
               message={errorMessage}
             />
           ) : null}
-          <RetryableButton
-            className={styles.uploadEmojiButton}
-            retryClassName={styles.uploadRetryButton}
-            label="Add emoji"
-            onSubmit={onAddEmoji}
-            appearance="primary"
-            loading={uploading}
-            error={!!errorMessage}
-          />
+          <FormattedMessage {...messages.addEmojiLabel}>
+            {label => (
+              <RetryableButton
+                className={styles.uploadEmojiButton}
+                retryClassName={styles.uploadRetryButton}
+                label={label as string}
+                onSubmit={onAddEmoji}
+                appearance="primary"
+                loading={uploading}
+                error={!!errorMessage}
+              />
+            )}
+          </FormattedMessage>
           <AkButton
             onClick={onUploadCancelled}
             appearance="subtle"
             isDisabled={uploading}
           >
-            Cancel
+            <FormattedMessage {...messages.cancelLabel} />
           </AkButton>
         </div>
       </div>

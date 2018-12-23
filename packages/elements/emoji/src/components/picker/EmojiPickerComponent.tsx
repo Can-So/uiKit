@@ -40,6 +40,8 @@ import {
 import { getEmojiVariation } from '../../api/EmojiRepository';
 import { FireAnalyticsEvent } from '@atlaskit/analytics';
 import { CategoryId } from './categories';
+import { messages } from '../i18n';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 const FREQUENTLY_USED_MAX = 16;
 
@@ -78,7 +80,10 @@ export interface State {
   showUploadButton: boolean;
 }
 
-export default class EmojiPickerComponent extends PureComponent<Props, State> {
+class EmojiPickerComponent extends PureComponent<
+  Props & InjectedIntlProps,
+  State
+> {
   static childContextTypes = {
     emoji: PropTypes.object,
   };
@@ -87,7 +92,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     onSelection: () => {},
   };
 
-  constructor(props: Props) {
+  constructor(props: Props & InjectedIntlProps) {
     super(props);
     const { emojiProvider, hideToneSelector } = props;
 
@@ -437,7 +442,10 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
   };
 
   private onUploadEmoji = (upload: EmojiUpload) => {
-    const { emojiProvider } = this.props;
+    const {
+      emojiProvider,
+      intl: { formatMessage },
+    } = this.props;
     this.setState({
       uploadErrorMessage: undefined, // clear previous errors
     });
@@ -459,7 +467,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
         })
         .catch(err => {
           this.setState({
-            uploadErrorMessage: 'Upload failed',
+            uploadErrorMessage: formatMessage(messages.emojiUploadFailed),
           });
           // tslint:disable-next-line
           console.error('Unable to upload emoji', err);
@@ -614,3 +622,5 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     return picker;
   }
 }
+
+export default injectIntl(EmojiPickerComponent);

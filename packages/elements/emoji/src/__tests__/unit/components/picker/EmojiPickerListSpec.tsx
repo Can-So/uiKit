@@ -1,4 +1,5 @@
-import { mount, ReactWrapper } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl } from 'enzyme-react-intl';
 import * as React from 'react';
 import { expect } from 'chai';
 
@@ -28,13 +29,13 @@ const customEmojis: EmojiDescription[] = [siteEmojiFoo, siteEmojiWtf];
 describe('<EmojiPickerList />', () => {
   describe('list', () => {
     it('should contain search ', () => {
-      const wrapper = mount(<EmojiPickerList emojis={emojis} />);
+      const wrapper = mountWithIntl(<EmojiPickerList emojis={emojis} />);
 
       expect(wrapper.find(`.${styles.pickerSearch}`)).to.have.length(1);
     });
 
     it('should show people category first if no frequently used', () => {
-      const wrapper = mount(<EmojiPickerList emojis={emojis} />);
+      const wrapper = mountWithIntl(<EmojiPickerList emojis={emojis} />);
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
       expect(categoryHeadings.get(0).props.id).to.equal('PEOPLE');
@@ -59,7 +60,9 @@ describe('<EmojiPickerList />', () => {
 
       const emojisWithFrequent = [...emojis, frequentEmoji];
 
-      const wrapper = mount(<EmojiPickerList emojis={emojisWithFrequent} />);
+      const wrapper = mountWithIntl(
+        <EmojiPickerList emojis={emojisWithFrequent} />,
+      );
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
       expect(categoryHeadings.get(0).props.id).to.equal('FREQUENT');
@@ -77,7 +80,9 @@ describe('<EmojiPickerList />', () => {
           order: 0,
         },
       ];
-      const wrapper = mount(<EmojiPickerList emojis={outOfOrderEmojis} />);
+      const wrapper = mountWithIntl(
+        <EmojiPickerList emojis={outOfOrderEmojis} />,
+      );
 
       const cachingEmojis: ReactWrapper<
         CachingEmojiProps,
@@ -107,7 +112,7 @@ describe('<EmojiPickerList />', () => {
         },
       ];
 
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList emojis={frequentCategoryEmojis} />,
       );
 
@@ -128,7 +133,7 @@ describe('<EmojiPickerList />', () => {
 
   describe('custom upload display', () => {
     it('should render user custom emojis under Your Uploads', () => {
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList emojis={customEmojis} currentUser={{ id: 'hulk' }} />,
       );
 
@@ -147,7 +152,7 @@ describe('<EmojiPickerList />', () => {
     });
 
     it('should not render user custom emojis section if user has none', () => {
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList emojis={customEmojis} currentUser={{ id: 'alex' }} />,
       );
 
@@ -163,7 +168,7 @@ describe('<EmojiPickerList />', () => {
     });
 
     it('should not render user custom emojis section if currentUser is undefined', () => {
-      const wrapper = mount(<EmojiPickerList emojis={customEmojis} />);
+      const wrapper = mountWithIntl(<EmojiPickerList emojis={customEmojis} />);
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
       expect(categoryHeadings.length).to.equal(1);
@@ -178,7 +183,7 @@ describe('<EmojiPickerList />', () => {
 
     it('should trigger onCategoryActivated', () => {
       const onCategoryActivated = jest.fn();
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList
           emojis={allEmojis}
           onCategoryActivated={onCategoryActivated}
@@ -199,7 +204,7 @@ describe('<EmojiPickerList />', () => {
 
     it('should not break while finding category in an empty list', () => {
       const onCategoryActivated = jest.fn();
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList
           emojis={[]}
           onCategoryActivated={onCategoryActivated}
@@ -219,7 +224,7 @@ describe('<EmojiPickerList />', () => {
 
     it('should trigger onCategoryActivated for first category', () => {
       const onCategoryActivated = jest.fn();
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList
           emojis={allEmojis}
           onCategoryActivated={onCategoryActivated}
@@ -240,7 +245,7 @@ describe('<EmojiPickerList />', () => {
 
     it('should trigger onCategoryActivated for bottom category', () => {
       const onCategoryActivated = jest.fn();
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList
           emojis={allEmojis}
           onCategoryActivated={onCategoryActivated}
@@ -261,7 +266,7 @@ describe('<EmojiPickerList />', () => {
 
   describe('delete', () => {
     it('should render user custom emoji with delete button', () => {
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList emojis={customEmojis} currentUser={{ id: 'hulk' }} />,
       );
       const yourEmoji = wrapper.find(CachingEmoji).at(0);
@@ -271,7 +276,7 @@ describe('<EmojiPickerList />', () => {
     });
 
     it('should not render delete button if not user custom emoji', () => {
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList emojis={customEmojis} currentUser={{ id: 'alex' }} />,
       );
       const emoji = wrapper.find(CachingEmoji).at(0);
@@ -281,7 +286,7 @@ describe('<EmojiPickerList />', () => {
     });
 
     it('should have label "delete-emoji" on delete button', () => {
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList emojis={customEmojis} currentUser={{ id: 'hulk' }} />,
       );
       const deleteButton = wrapper
@@ -297,7 +302,7 @@ describe('<EmojiPickerList />', () => {
 
     it('should call onEmojiDelete if delete button is clicked', () => {
       const onDelete = jest.fn();
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList
           emojis={customEmojis}
           currentUser={{ id: 'hulk' }}
@@ -314,7 +319,7 @@ describe('<EmojiPickerList />', () => {
 
     it('should not call onEmojiSelected if delete button is clicked', () => {
       const onSelection = jest.fn();
-      const wrapper = mount(
+      const wrapper = mountWithIntl(
         <EmojiPickerList
           emojis={customEmojis}
           currentUser={{ id: 'hulk' }}

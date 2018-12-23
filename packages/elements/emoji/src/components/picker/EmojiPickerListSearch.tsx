@@ -5,6 +5,8 @@ import SearchIcon from '@atlaskit/icon/glyph/search';
 
 import * as styles from './styles';
 import { Styles } from '../../types';
+import { messages } from '../i18n';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 export interface Props {
   style?: Styles;
@@ -18,7 +20,7 @@ interface InputSelection {
   selectionDirection?: string;
 }
 
-export default class EmojiPickerListSearch extends PureComponent<Props> {
+class EmojiPickerListSearch extends PureComponent<Props & InjectedIntlProps> {
   static defaultProps = {
     style: {},
   };
@@ -98,26 +100,30 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
   };
 
   render() {
-    const { style, query } = this.props;
+    const {
+      style,
+      query,
+      intl: { formatMessage },
+    } = this.props;
 
     return (
       <div className={styles.pickerSearch} style={style}>
         <AkFieldBase
           appearance="standard"
-          label="Search"
+          label={formatMessage(messages.searchLabel)}
           isCompact={true}
           isLabelHidden={true}
           isFitContainerWidthEnabled={true}
         >
           <span className={styles.searchIcon}>
-            <SearchIcon label="Search" />
+            <SearchIcon label={formatMessage(messages.searchLabel)} />
           </span>
           <input
             className={styles.input}
             autoComplete="off"
             disabled={false}
             name="search"
-            placeholder="Search..."
+            placeholder={`${formatMessage(messages.searchLabel)}...`}
             required={false}
             onChange={this.onChange}
             value={query || ''}
@@ -129,3 +135,5 @@ export default class EmojiPickerListSearch extends PureComponent<Props> {
     );
   }
 }
+
+export default injectIntl(EmojiPickerListSearch);

@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Component } from 'react';
 import AkButton from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
+import { messages } from '../i18n';
+import { FormattedMessage } from 'react-intl';
 
 export interface Props {
   className: string;
@@ -18,24 +20,34 @@ export default class RetryableButton extends Component<Props, {}> {
     super(props);
   }
 
+  renderRetry() {
+    const { loading, retryClassName, onSubmit } = this.props;
+    return (
+      <FormattedMessage {...messages.retryLabel}>
+        {retryLabel => (
+          <AkButton
+            className={retryClassName}
+            appearance="warning"
+            onClick={onSubmit}
+          >
+            {loading ? <Spinner invertColor={false} /> : retryLabel}
+          </AkButton>
+        )}
+      </FormattedMessage>
+    );
+  }
+
   render() {
     const {
       loading,
       error,
       className,
-      retryClassName,
       appearance,
       onSubmit,
       label,
     } = this.props;
     return error ? (
-      <AkButton
-        className={retryClassName}
-        appearance="warning"
-        onClick={onSubmit}
-      >
-        {loading ? <Spinner invertColor={false} /> : 'Retry'}
-      </AkButton>
+      this.renderRetry()
     ) : (
       <AkButton
         className={className}
