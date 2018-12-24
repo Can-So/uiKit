@@ -95,6 +95,19 @@ describe('NotificationIndicator', () => {
     expect(badge.prop('appearance')).toEqual('primary');
   });
 
+  it('Should render data-test-selector="NotificationIndicator"', async () => {
+    const wrapper = await renderNotificationIndicator(returnCount(5), {
+      max: 10,
+      appearance: 'primary',
+    });
+    wrapper.update();
+    const dataTestSelector = wrapper.childAt(0);
+
+    expect(dataTestSelector.prop('data-test-selector')).toEqual(
+      'NotificationIndicator',
+    );
+  });
+
   it('Should not render indicator when there are no new notifications', async () => {
     const wrapper = await renderNotificationIndicator(returnCount(0));
     expect(wrapper.find(Badge).length).toEqual(0);
