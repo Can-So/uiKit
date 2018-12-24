@@ -172,7 +172,7 @@ export interface TableRow {
   /**
    * @minItems 1
    */
-  content: Array<TableHeader> | Array<TableCell>;
+  content: Array<TableHeader | TableCell>;
 }
 
 /**

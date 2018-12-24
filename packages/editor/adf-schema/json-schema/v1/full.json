@@ -1249,20 +1249,18 @@
           ]
         },
         "content": {
-          "anyOf": [
-            {
-              "type": "array",
-              "items": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/table_cell_node"
+              },
+              {
                 "$ref": "#/definitions/table_header_node"
               }
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/table_cell_node"
-              }
-            }
-          ]
+            ]
+          },
+          "minItems": 1
         }
       },
       "required": [
