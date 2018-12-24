@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.7
+- [patch] [7c10292](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c10292):
+
+  - ED-5923: don't grow page while using resize handles on images
+
 ## 92.0.6
 - Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
   - @atlaskit/editor-common@25.0.3
