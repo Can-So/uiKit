@@ -8,7 +8,6 @@ import { changeCloudAccountFolder } from '../../../../actions/changeCloudAccount
 import { fetchNextCloudFilesPage } from '../../../../actions/fetchNextCloudFilesPage';
 import AkButton from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
-import * as uuid from 'uuid/v4';
 
 /* Actions */
 import { fileClick } from '../../../../actions/fileClick';
@@ -267,7 +266,6 @@ export class FolderViewer extends Component<FolderViewerProps, {}> {
         const file: ServiceFile = {
           ...item,
           upfrontId,
-          occurrenceKey: uuid(),
         };
         onFileClick(service.name, service.accountId, file);
       }

@@ -1,4 +1,4 @@
-import * as uuid from 'uuid';
+import * as uuid from 'uuid/v4';
 import { Store, Dispatch, Middleware } from 'redux';
 
 import { State, SelectedItem, LocalUpload } from '../domain';
@@ -54,7 +54,7 @@ const mapSelectedItemToSelectedUploadFile = ({
   serviceName,
   accountId,
   upfrontId,
-  occurrenceKey,
+  occurrenceKey = uuid(),
 }: SelectedItem): SelectedUploadFile => ({
   file: {
     id,
@@ -67,7 +67,7 @@ const mapSelectedItemToSelectedUploadFile = ({
   },
   serviceName,
   accountId,
-  uploadId: uuid.v4(),
+  uploadId: uuid(),
 });
 
 export function importFilesMiddleware(

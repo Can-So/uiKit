@@ -120,8 +120,8 @@ export default class Example extends React.Component<{}, State> {
   render() {
     return (
       <>
-        <div style={{ margin: '10px', 'margin-bottom': '0px' }}>
-          <Button id="show" onClick={() => popup.show()}>
+        <div style={{ margin: '10px', marginBottom: '0px' }}>
+          <Button id="show" onClick={popup.show}>
             Show
           </Button>
         </div>

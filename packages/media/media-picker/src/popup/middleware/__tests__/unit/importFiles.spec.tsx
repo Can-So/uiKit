@@ -1,5 +1,3 @@
-import * as uuid from 'uuid';
-
 import {
   mockStore,
   mockWsConnectionHolder,
@@ -215,15 +213,6 @@ describe('importFiles middleware', () => {
     };
   };
 
-  beforeEach(() => {
-    jest
-      .spyOn(uuid, 'v4')
-      .mockReturnValueOnce('uuid1')
-      .mockReturnValueOnce('uuid2')
-      .mockReturnValueOnce('uuid3')
-      .mockReturnValueOnce('uuid4');
-  });
-
   afterEach(() => {
     jest.resetAllMocks();
   });
@@ -257,7 +246,7 @@ describe('importFiles middleware', () => {
       return importFiles(eventEmitter, store, mockWsProvider).then(() => {
         expect(eventEmitter.emitUploadsStart).toBeCalledWith([
           {
-            id: 'uuid1',
+            id: expect.stringMatching(/[a-f0-9\-]+/),
             name: 'picture1.jpg',
             type: 'image/jpg',
             size: 43,
@@ -266,7 +255,7 @@ describe('importFiles middleware', () => {
             occurrenceKey: 'occurrence-key-1',
           },
           {
-            id: 'uuid2',
+            id: expect.stringMatching(/[a-f0-9\-]+/),
             name: 'picture3.jpg',
             type: 'image/jpg',
             size: 45,
@@ -275,7 +264,7 @@ describe('importFiles middleware', () => {
             occurrenceKey: 'occurrence-key-3',
           },
           {
-            id: 'uuid3',
+            id: expect.stringMatching(/[a-f0-9\-]+/),
             name: 'picture4.jpg',
             type: 'image/jpg',
             size: 46,
@@ -284,7 +273,7 @@ describe('importFiles middleware', () => {
             occurrenceKey: 'occurrence-key-4',
           },
           {
-            id: 'uuid4',
+            id: expect.stringMatching(/[a-f0-9\-]+/),
             name: 'picture5.jpg',
             type: 'image/jpg',
             size: 47,
@@ -312,7 +301,7 @@ describe('importFiles middleware', () => {
         return importFiles(eventEmitter, store, mockWsProvider).then(() => {
           expect(store.dispatch).toBeCalledWith(
             getPreview(
-              'uuid3',
+              expect.stringMatching(/[a-f0-9\-]+/),
               {
                 id: 'some-selected-item-id-4',
                 name: 'picture4.jpg',
@@ -370,7 +359,7 @@ describe('importFiles middleware', () => {
                 upfrontId,
                 occurrenceKey: 'occurrence-key-4',
               },
-              'uuid3',
+              expect.stringMatching(/[a-f0-9\-]+/),
               {
                 id: 'some-selected-item-id-4',
                 collection: RECENTS_COLLECTION,
@@ -434,10 +423,16 @@ describe('importFiles middleware', () => {
           ) as SetEventProxyAction[];
           expect(setEventProxyCalls).toHaveLength(2);
           expect(setEventProxyCalls[0]).toEqual(
-            setEventProxy('some-selected-item-id-1', 'uuid1'),
+            setEventProxy(
+              'some-selected-item-id-1',
+              expect.stringMatching(/[a-f0-9\-]+/),
+            ),
           );
           expect(setEventProxyCalls[1]).toEqual(
-            setEventProxy('some-selected-item-id-3', 'uuid2'),
+            setEventProxy(
+              'some-selected-item-id-3',
+              expect.stringMatching(/[a-f0-9\-]+/),
+            ),
           );
           done();
         });
@@ -469,7 +464,7 @@ describe('importFiles middleware', () => {
               fileId: 'some-selected-item-id-5',
               fileName: 'picture5.jpg',
               collection: RECENTS_COLLECTION,
-              jobId: 'uuid4',
+              jobId: expect.stringMatching(/[a-f0-9\-]+/),
             },
           });
           done();
