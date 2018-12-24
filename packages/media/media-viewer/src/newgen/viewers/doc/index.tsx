@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, ProcessedFileState, FileState } from '@atlaskit/media-core';
+import { Context, FileState } from '@atlaskit/media-core';
 import { Outcome } from '../../domain';
 import { createError, MediaViewerError } from '../../error';
 import { Spinner } from '../../loading';
