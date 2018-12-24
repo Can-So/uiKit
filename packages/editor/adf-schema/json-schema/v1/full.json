@@ -1259,8 +1259,7 @@
                 "$ref": "#/definitions/table_header_node"
               }
             ]
-          },
-          "minItems": 1
+          }
         }
       },
       "required": [

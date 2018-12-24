@@ -169,9 +169,6 @@ export interface TableDefinition {
  */
 export interface TableRow {
   type: 'tableRow';
-  /**
-   * @minItems 1
-   */
   content: Array<TableHeader | TableCell>;
 }
 
