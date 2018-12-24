@@ -17,10 +17,6 @@ export const fakeContext = (
   const getMediaItemProvider = returns({
     observable: returns(of('nothing')),
   });
-
-  const getMediaCollectionProvider = returns({
-    observable: returns(of('nothing')),
-  });
   const getDataUriService = returns({
     fetchOriginalDataUri: returns(Promise.resolve('fake-original-data-uri')),
     fetchImageDataUri: returns(Promise.resolve('fake-image-data-uri')),
@@ -36,7 +32,6 @@ export const fakeContext = (
   const getLocalPreview = jest.fn();
   const setLocalPreview = jest.fn();
   const removeLocalPreview = jest.fn();
-  const refreshCollection = jest.fn();
   const getBlobService = jest.fn();
   const uploadFile = jest.fn();
   const collection = {
@@ -57,11 +52,9 @@ export const fakeContext = (
     setLocalPreview,
     removeLocalPreview,
     getMediaItemProvider,
-    getMediaCollectionProvider,
     getDataUriService,
     addLinkItem,
     getUrlPreviewProvider,
-    refreshCollection,
     uploadFile,
     config,
     collection,

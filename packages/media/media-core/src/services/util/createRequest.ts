@@ -1,9 +1,8 @@
-import axios from 'axios';
 import {
-  Auth,
-  isAsapBasedAuth,
-  isClientBasedAuth,
   MediaApiConfig,
+  request,
+  RequestMethod,
+  RequestHeaders,
 } from '@atlaskit/media-store';
 import { checkWebpSupport } from '../../utils';
 
@@ -17,18 +16,19 @@ export type Response<R = any> = {
 
 export interface RequesterOptions {
   collectionName?: string;
-  preventPreflight?: boolean;
   config: MediaApiConfig;
 }
 
 export interface RequestOptions {
-  method?: string;
+  method?: RequestMethod;
   url: string;
   params?: Object;
-  headers?: Object;
+  headers?: RequestHeaders;
   data?: Object;
   responseType?: ResponseType;
 }
+
+// TODO: we should add this to MediaStore
 const addAcceptHeader = (headers: any) =>
   checkWebpSupport().then(isWebpSupported => {
     // q=0.8 stands for 'quality factor' => http://stackoverflow.com/a/10496722
@@ -41,111 +41,33 @@ const addAcceptHeader = (headers: any) =>
     return headers;
   });
 
-const buildHeaders = (
-  auth: Auth,
-  baseHeaders?: Object,
-  preventPreflight?: boolean,
-  responseType?: ResponseType,
-): Promise<object> => {
-  const headers: any = {
-    ...baseHeaders,
-    'Content-Type': 'application/json',
-  };
-
-  // We can add custom headers if we don't want to avoid preflight - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Request-Method
-  if (!preventPreflight) {
-    if (isAsapBasedAuth(auth)) {
-      headers['X-Issuer'] = auth.asapIssuer;
-    } else if (isClientBasedAuth(auth)) {
-      headers['X-Client-Id'] = auth.clientId;
-    }
-    headers['Authorization'] = `Bearer ${auth.token}`;
-  }
-
-  if (responseType === 'image') {
-    return addAcceptHeader(headers);
-  }
-
-  return Promise.resolve(headers);
-};
-
-const buildParams = (
-  auth: Auth,
-  baseParams?: Object,
-  preventPreflight?: boolean,
-  collection?: string,
-): Promise<object> => {
-  const authParams = {} as any;
-
-  if (preventPreflight) {
-    authParams.token = auth.token;
-    if (isClientBasedAuth(auth)) {
-      authParams.client = auth.clientId;
-    } else if (isAsapBasedAuth(auth)) {
-      authParams.issuer = auth.asapIssuer;
-    }
-  }
-
-  return Promise.resolve({
-    collection,
-    ...baseParams,
-    ...authParams,
-  });
-};
-
-const responseTypeToAxios = (responseType?: ResponseType): string => {
-  responseType = responseType || 'json';
-
-  const responseTypeMap = {
-    image: 'blob',
-    json: 'json',
-  };
-
-  return responseTypeMap[responseType];
-};
-
 export default (requesterOptions: RequesterOptions): CreateRequestFunc => {
   const {
-    preventPreflight,
     collectionName,
     config: { authProvider },
   } = requesterOptions;
 
   return requestOptions => {
-    const { url, headers, params, responseType, method, data } = requestOptions;
-    const acquireAuth: Promise<Auth> = authProvider({ collectionName });
-
-    const createHeadersAndParams = (auth: Auth) =>
-      Promise.all([
-        buildHeaders(auth, headers, preventPreflight, responseType),
-        buildParams(auth, params, preventPreflight, collectionName),
-        auth.baseUrl,
-      ]);
-
-    const source = axios.CancelToken.source();
-    const sendAxiosRequest = ([headers, params, baseUrl]: [
-      object,
-      object,
-      string
-    ]) =>
-      axios({
-        method: method || 'get',
-        url,
-        baseURL: baseUrl,
+    const { url, headers, params, method, responseType, data } = requestOptions;
+    const response = new Promise(async resolve => {
+      const auth = await authProvider({ collectionName });
+      // TODO: allow to pass AbortController to request
+      const response = await request(`${auth.baseUrl}${url}`, {
+        method: method || 'GET',
         headers,
         params,
-        data,
-        responseType: responseTypeToAxios(responseType),
-        cancelToken: source.token,
+        body: data,
+        auth,
       });
 
-    const response = acquireAuth
-      .then(createHeadersAndParams)
-      .then(sendAxiosRequest)
-      .then(response => response.data);
+      if (responseType === 'json') {
+        resolve(await response.json().data);
+      } else {
+        resolve(response.blob());
+      }
+    });
 
-    const cancel = (message?: string) => source.cancel(message);
-
+    const cancel = () => {};
     return { response, cancel };
   };
 };

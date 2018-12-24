@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import {
   Context,
   ContextConfig,
-  MediaCollection,
-  MediaCollectionProvider,
   MediaItemProvider,
   MediaItem,
   BlobService,
@@ -44,14 +42,6 @@ export class Stubs {
     return jest.fn(() => Stubs.mediaViewer(overrides || {}));
   }
 
-  static mediaCollectionProvider(subject?: Subject<MediaCollection>) {
-    return {
-      observable: jest.fn(() => subject || new Subject<MediaCollection>()),
-      refresh: jest.fn(),
-      loadNextPage: jest.fn(),
-    };
-  }
-
   static mediaItemProvider(subject?: Subject<MediaItem>) {
     return {
       observable: jest.fn(() => subject || new Subject<MediaItem>()),
@@ -75,16 +65,12 @@ export class Stubs {
 
   static context(
     config: ContextConfig,
-    collectionProvider?: MediaCollectionProvider,
     mediaItemProvider?: MediaItemProvider,
     blobService?: BlobService,
     getFileState?: () => Observable<FileState>,
   ): Partial<Context> {
     return {
       config,
-      getMediaCollectionProvider: jest.fn(
-        () => collectionProvider || Stubs.mediaCollectionProvider(),
-      ),
       getMediaItemProvider: jest.fn(
         () => mediaItemProvider || Stubs.mediaItemProvider(),
       ),
@@ -100,7 +86,6 @@ export class Stubs {
 
 export interface CreateContextOptions {
   subject?: Subject<any>;
-  provider?: MediaCollectionProvider;
   authPromise?: Promise<Auth>;
   blobService?: BlobService;
   getFileState?: () => Observable<FileState>;
@@ -110,7 +95,6 @@ export interface CreateContextOptions {
 export const createContext = (options?: CreateContextOptions) => {
   const defaultOptions: CreateContextOptions = {
     subject: undefined,
-    provider: undefined,
     authPromise: Promise.resolve<Auth>({
       token: 'some-token',
       clientId: 'some-client-id',
@@ -120,7 +104,7 @@ export const createContext = (options?: CreateContextOptions) => {
     getFileState: undefined,
     config: undefined,
   };
-  const { subject, provider, authPromise, blobService, getFileState, config } =
+  const { subject, authPromise, blobService, getFileState, config } =
     options || defaultOptions;
   const authProvider = jest.fn(() => authPromise);
   const contextConfig: ContextConfig = {
@@ -128,7 +112,6 @@ export const createContext = (options?: CreateContextOptions) => {
   };
   return Stubs.context(
     config || contextConfig,
-    provider || Stubs.mediaCollectionProvider(subject),
     Stubs.mediaItemProvider(subject),
     blobService,
     getFileState,

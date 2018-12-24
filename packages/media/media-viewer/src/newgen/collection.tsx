@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  Context,
-  MediaCollectionItem,
-  MediaCollectionProvider,
-  isError,
-} from '@atlaskit/media-core';
+import { Context } from '@atlaskit/media-core';
 import { Outcome, Identifier, MediaViewerFeatureFlags } from './domain';
 import ErrorMessage, { createError, MediaViewerError } from './error';
 import { List } from './list';
@@ -32,7 +27,6 @@ export class Collection extends React.Component<Props, State> {
   state: State = initialState;
 
   private subscription?: Subscription;
-  private provider?: MediaCollectionProvider;
 
   componentWillUpdate(nextProps: Props) {
     if (this.needsReset(this.props, nextProps)) {
@@ -83,32 +77,33 @@ export class Collection extends React.Component<Props, State> {
   private init(props: Props) {
     this.setState(initialState);
     const { collectionName, context, defaultSelectedItem, pageSize } = props;
-    this.provider = context.getMediaCollectionProvider(
-      collectionName,
-      pageSize,
-    );
     const collectionFileItemFilter = (item: MediaCollectionItem) =>
       item.type === 'file';
-    this.subscription = this.provider.observable().subscribe({
-      next: collection => {
-        if (isError(collection)) {
-          this.setState({
-            items: Outcome.failed(createError('metadataFailed', collection)),
-          });
-        } else {
-          this.setState({
-            items: Outcome.successful(
-              collection.items.filter(collectionFileItemFilter),
-            ),
-          });
-          if (defaultSelectedItem && this.shouldLoadNext(defaultSelectedItem)) {
-            if (this.provider) {
-              this.provider.loadNextPage();
+    this.subscription = context.collection
+      .getItems(collectionName, { limit: pageSize })
+      .subscribe({
+        next: collection => {
+          if (isError(collection)) {
+            this.setState({
+              items: Outcome.failed(createError('metadataFailed', collection)),
+            });
+          } else {
+            this.setState({
+              items: Outcome.successful(
+                collection.items.filter(collectionFileItemFilter),
+              ),
+            });
+            if (
+              defaultSelectedItem &&
+              this.shouldLoadNext(defaultSelectedItem)
+            ) {
+              context.collection.loadNextPage(collectionName, {
+                limit: pageSize,
+              });
             }
           }
-        }
-      },
-    });
+        },
+      });
   }
 
   private release() {

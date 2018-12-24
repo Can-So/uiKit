@@ -1,11 +1,7 @@
 /* tslint:disable:no-console */
 
 import * as React from 'react';
-import {
-  MediaCollectionItem,
-  MediaCollection,
-  Context,
-} from '@atlaskit/media-core';
+import { Context } from '@atlaskit/media-core';
 import { createStorybookContext } from '@atlaskit/media-test-helpers';
 import CrossIcon from '@atlaskit/icon/glyph/cross';
 import AnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';

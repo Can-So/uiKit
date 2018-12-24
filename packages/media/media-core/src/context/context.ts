@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs/Observable';
-
 import { of } from 'rxjs/observable/of';
 import { startWith } from 'rxjs/operators/startWith';
 
@@ -13,12 +12,7 @@ import {
   ImageMetadata,
 } from '@atlaskit/media-store';
 import { CollectionFetcher } from '../collection';
-import {
-  MediaItemProvider,
-  MediaCollectionProvider,
-  MediaUrlPreviewProvider,
-} from '../providers/';
-import { RemoteMediaCollectionProviderFactory } from '../providers/remoteMediaCollectionProviderFactory';
+import { MediaItemProvider, MediaUrlPreviewProvider } from '../providers/';
 import { MediaItemType, MediaItem, UrlPreview } from '../';
 import {
   MediaDataUriService,
@@ -27,7 +21,6 @@ import {
 import { BlobService, MediaBlobService } from '../services/blobService';
 import { MediaLinkService } from '../services/linkService';
 import { LRUCache } from 'lru-fast';
-import { DEFAULT_COLLECTION_PAGE_SIZE } from '../services/collectionService';
 import { FileItem } from '../item';
 import { GetFileOptions, FileState } from '../fileState';
 import { FileFetcher } from '../file';
@@ -41,11 +34,6 @@ export interface Context {
     collectionName?: string,
     mediaItem?: MediaItem,
   ): MediaItemProvider;
-
-  getMediaCollectionProvider(
-    collectionName: string,
-    pageSize: number,
-  ): MediaCollectionProvider;
 
   getUrlPreviewProvider(url: string): MediaUrlPreviewProvider;
 
@@ -64,8 +52,6 @@ export interface Context {
     collectionName: string,
     metadata?: UrlPreview,
   ): Promise<string>;
-
-  refreshCollection(collectionName: string, pageSize: number): void;
 
   // TODO Next two methods are deprecated and will be removed with next major release.
   // Please use .file.getFile and .file.uploadFile APIs
@@ -93,7 +79,6 @@ export class ContextFactory {
 }
 
 class ContextImpl implements Context {
-  private readonly collectionPool = RemoteMediaCollectionProviderFactory.createPool();
   private readonly itemPool = MediaItemProvider.createPool();
   private readonly urlPreviewPool = MediaUrlPreviewProvider.createPool();
   private readonly fileItemCache: LRUCache<string, FileItem>;
@@ -160,18 +145,6 @@ class ContextImpl implements Context {
     return provider;
   }
 
-  getMediaCollectionProvider(
-    collectionName: string,
-    pageSize: number = DEFAULT_COLLECTION_PAGE_SIZE,
-  ): MediaCollectionProvider {
-    return RemoteMediaCollectionProviderFactory.fromPool(
-      this.collectionPool,
-      this.apiConfig,
-      collectionName,
-      pageSize,
-    );
-  }
-
   getDataUriService(collectionName?: string): DataUriService {
     return new MediaDataUriService(this.config.authProvider, collectionName);
   }
@@ -188,6 +161,7 @@ class ContextImpl implements Context {
     this.localPreviewCache.remove(id);
   }
 
+  // TODO: remove usage from MV and use getImage
   getBlobService(collectionName?: string): BlobService {
     return new MediaBlobService(this.config.authProvider, collectionName);
   }
@@ -218,10 +192,6 @@ class ContextImpl implements Context {
       'context.uploadFile is deprecated. Please use context.file.upload instead',
     );
     return this.file.upload(file, controller);
-  }
-
-  refreshCollection(collectionName: string, pageSize: number): void {
-    this.getMediaCollectionProvider(collectionName, pageSize).refresh();
   }
 
   getImage(id: string, params?: MediaStoreGetFileImageParams): Promise<Blob> {
