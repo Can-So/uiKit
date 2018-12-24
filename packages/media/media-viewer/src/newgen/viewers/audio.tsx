@@ -165,5 +165,12 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
       });
     }
   }
-  protected release() {}
+  protected release() {
+    const { content } = this.state;
+    if (!content.data) {
+      return;
+    }
+
+    URL.revokeObjectURL(content.data);
+  }
 }

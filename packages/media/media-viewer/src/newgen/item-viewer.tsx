@@ -137,12 +137,7 @@ export class ItemViewerBase extends React.Component<Props, State> {
           />
         );
       case 'doc':
-        // TODO: add support to non processed files to DocViewer
-        if (item.status === 'processed') {
-          return <DocViewer {...viewerProps} item={item} />;
-        } else {
-          return <Spinner />;
-        }
+        return <DocViewer {...viewerProps} item={item} />;
       default:
         return this.renderError('unsupported', item);
     }

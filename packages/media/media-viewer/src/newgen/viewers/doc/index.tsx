@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Context, ProcessedFileState } from '@atlaskit/media-core';
+import { Context, ProcessedFileState, FileState } from '@atlaskit/media-core';
 import { Outcome } from '../../domain';
 import { createError, MediaViewerError } from '../../error';
 import { Spinner } from '../../loading';
@@ -17,7 +17,7 @@ const componentLoader: () => Promise<ComponentClass<RendererProps>> = () =>
 
 export type Props = {
   context: Context;
-  item: ProcessedFileState;
+  item: FileState;
   collectionName?: string;
   onClose?: () => void;
 };
@@ -41,28 +41,39 @@ export class DocViewer extends BaseViewer<string, Props> {
     }
     const { item, context, collectionName } = this.props;
 
-    const pdfArtifactUrl = getArtifactUrl(item.artifacts, 'document.pdf');
-    if (!pdfArtifactUrl) {
-      this.setState({
-        content: Outcome.failed(
-          createError('noPDFArtifactsFound', undefined, item),
-        ),
-      });
-      return;
-    }
-    try {
-      const src = await constructAuthTokenUrl(
-        pdfArtifactUrl,
-        context,
-        collectionName,
-      );
-      this.setState({
-        content: Outcome.successful(src),
-      });
-    } catch (err) {
-      this.setState({
-        content: Outcome.failed(createError('previewFailed', err, item)),
-      });
+    if (item.status === 'processed') {
+      const pdfArtifactUrl = getArtifactUrl(item.artifacts, 'document.pdf');
+      if (!pdfArtifactUrl) {
+        this.setState({
+          content: Outcome.failed(
+            createError('noPDFArtifactsFound', undefined, item),
+          ),
+        });
+        return;
+      }
+      try {
+        const src = await constructAuthTokenUrl(
+          pdfArtifactUrl,
+          context,
+          collectionName,
+        );
+        this.setState({
+          content: Outcome.successful(src),
+        });
+      } catch (err) {
+        this.setState({
+          content: Outcome.failed(createError('previewFailed', err, item)),
+        });
+      }
+    } else if (item.status !== 'error') {
+      const { preview } = item;
+      if (preview) {
+        const src = URL.createObjectURL(preview.blob);
+
+        this.setState({
+          content: Outcome.successful(src),
+        });
+      }
     }
   }
 
@@ -71,7 +82,14 @@ export class DocViewer extends BaseViewer<string, Props> {
     this.forceUpdate();
   }
 
-  protected release() {}
+  protected release() {
+    const { content } = this.state;
+    if (!content.data) {
+      return;
+    }
+
+    URL.revokeObjectURL(content.data);
+  }
 
   protected renderSuccessful(content: string) {
     const { onClose } = this.props;
