@@ -4,6 +4,7 @@ import FeedbackIcon from '@atlaskit/icon/glyph/feedback';
 import Button from '@atlaskit/button';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '@atlaskit/media-ui';
+import * as exenv from 'exenv';
 import { FeedbackWrapper } from './styled';
 
 // The following function fetches the code to show a JIRA issue collector.
@@ -44,7 +45,8 @@ const loadIssueCollector: () => Promise<ShowIssueCollectorFn> = (function() {
 
 export class FeedbackButton extends React.Component<{}, {}> {
   render() {
-    const isJQueryAvailable = typeof window.jQuery !== 'undefined';
+    const isJQueryAvailable =
+      exenv.canUseDOM && typeof window.jQuery !== 'undefined';
     if (!isJQueryAvailable) {
       return null;
     }

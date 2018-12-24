@@ -20,20 +20,9 @@ const fileIdentifier: FileIdentifier = {
 };
 
 // file cards
-const smallFileCard = (
-  <Card context={context} identifier={fileIdentifier} appearance="small" />
-);
 const imageFileCard = <Card context={context} identifier={fileIdentifier} />;
 
 // link cards
-const smallLinkCard = (
-  <Card
-    context={context}
-    identifier={genericUrlIdentifier}
-    appearance="small"
-    dimensions={{ width: '200px' }}
-  />
-);
 const linkCardImage = (
   <Card
     context={context}
@@ -73,9 +62,6 @@ export default () => (
         <tr>
           <td>File Cards</td>
           <td>
-            <div>{smallFileCard}</div>
-          </td>
-          <td>
             <div>{imageFileCard}</div>
           </td>
           <td>No design implemented</td>
@@ -84,9 +70,6 @@ export default () => (
         <tr>
           <td>
             <div>Link Cards</div>
-          </td>
-          <td>
-            <div>{smallLinkCard}</div>
           </td>
           <td>
             <div>{linkCardImage}</div>

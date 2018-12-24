@@ -26,6 +26,7 @@ import {
   areBlockTypesDisabled,
   isEmptyNode,
   dedupe,
+  compose,
 } from '../../../utils';
 import mediaPlugin from '../../../plugins/media';
 import codeBlockPlugin from '../../../plugins/code-block';
@@ -420,6 +421,20 @@ describe('@atlaskit/editore-core/utils', () => {
       ];
 
       expect(dedupe(l, item => item.item)).toEqual(deduped);
+    });
+  });
+
+  describe('#compose', () => {
+    it('should compose functions right to left', () => {
+      const f1 = (a: string) => `#${a}`;
+      const f2 = (b: string) => `!${b}`;
+
+      expect(
+        compose(
+          f1,
+          f2,
+        )('test'),
+      ).toEqual('#!test');
     });
   });
 });

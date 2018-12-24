@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 import * as React from 'react';
 import styled, { ThemedOuterStyledProps } from 'styled-components';
-
+import * as exenv from 'exenv';
 export interface WrapperProps {
   inline?: boolean;
 }
@@ -76,7 +76,10 @@ const setEllipsis = (props: EllipsifyProps) => (element: HTMLElement) => {
   delayRun(() => (element.textContent = textContent));
 };
 
-const timeout = (fn: Function) => window.setTimeout(fn, 1);
-const delayRun = window.requestAnimationFrame || timeout;
+const timeout = (fn: Function) => setTimeout(fn, 1);
+const delayRun =
+  exenv.canUseDOM && window.requestAnimationFrame
+    ? window.requestAnimationFrame
+    : timeout;
 
 export default Ellipsify;

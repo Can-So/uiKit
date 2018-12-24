@@ -10,9 +10,11 @@ export type CodeBlockBaseDefinition = {
   type: 'codeBlock';
   content?: Array<Text & NoMark>;
   marks?: Array<any>;
-  attrs?: {
-    language?: string;
-  };
+  attrs?: CodeBlockAttrs;
+};
+
+export type CodeBlockAttrs = {
+  language?: string;
 };
 
 /**

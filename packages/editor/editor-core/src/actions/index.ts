@@ -3,9 +3,11 @@ import { TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Transformer } from '@atlaskit/editor-common';
 import {
+  compose,
   getEditorValueWithMedia,
   insertFileFromDataUrl as insertFileFromUrl,
   toJSON,
+  removeQueryMarksFromJSON,
   processRawValue,
 } from '../utils';
 import { EventDispatcher } from '../event-dispatcher';
@@ -138,7 +140,10 @@ export default class EditorActions implements EditorActionsOptions {
       return this.contentTransformer.encode(doc);
     }
 
-    return toJSON(doc);
+    return compose(
+      removeQueryMarksFromJSON,
+      toJSON,
+    )(doc);
   }
 
   replaceDocument(rawValue: any, shouldScrollToBottom = true): boolean {

@@ -10,7 +10,6 @@ import {
 import { SharedCardProps, CardStatus } from '../..';
 import { CardAction } from '../../actions';
 import { FileCardImageView } from '../cardImageView';
-import { CardGenericViewSmall } from '../../utils/cardGenericViewSmall';
 import { toHumanReadableMediaSize } from '../../utils';
 
 export interface FileCardProps extends SharedCardProps {
@@ -59,49 +58,30 @@ export class FileCard extends Component<FileCardProps, {}> {
     const errorMessage = this.isError && (
       <FormattedMessage {...messages.failed_to_load} />
     );
+    const fileSize =
+      mediaItemType === 'external-image'
+        ? ''
+        : toHumanReadableMediaSize(size || 0);
 
-    if (this._isSmall()) {
-      const subtitle = toHumanReadableMediaSize(size || 0);
-      return (
-        <CardGenericViewSmall
-          error={errorMessage}
-          type="file"
-          mediaType={mediaType}
-          title={name}
-          subtitle={subtitle}
-          thumbnailUrl={dataURI}
-          dimensions={dimensions}
-          loading={this.isLoading}
-          onRetry={onRetry}
-          actions={this._getActions()}
-        />
-      );
-    } else {
-      const fileSize =
-        mediaItemType === 'external-image'
-          ? ''
-          : toHumanReadableMediaSize(size || 0);
-
-      return (
-        <FileCardImageView
-          error={errorMessage}
-          dimensions={dimensions}
-          selectable={selectable}
-          selected={selected}
-          dataURI={dataURI}
-          mediaName={name}
-          mediaType={mediaType}
-          fileSize={fileSize}
-          status={status}
-          progress={progress}
-          resizeMode={resizeMode}
-          onRetry={onRetry}
-          actions={this._getActions()}
-          disableOverlay={disableOverlay}
-          previewOrientation={previewOrientation}
-        />
-      );
-    }
+    return (
+      <FileCardImageView
+        error={errorMessage}
+        dimensions={dimensions}
+        selectable={selectable}
+        selected={selected}
+        dataURI={dataURI}
+        mediaName={name}
+        mediaType={mediaType}
+        fileSize={fileSize}
+        status={status}
+        progress={progress}
+        resizeMode={resizeMode}
+        onRetry={onRetry}
+        actions={this._getActions()}
+        disableOverlay={disableOverlay}
+        previewOrientation={previewOrientation}
+      />
+    );
   }
 
   private _getActions(): Array<CardAction> {
@@ -119,15 +99,6 @@ export class FileCard extends Component<FileCardProps, {}> {
         },
       };
     });
-  }
-
-  private _isSmall(): boolean {
-    return this.props.appearance === 'small';
-  }
-
-  private get isLoading(): boolean {
-    const { status } = this.props;
-    return status === 'loading' || status === 'processing';
   }
 
   private get isError(): boolean {

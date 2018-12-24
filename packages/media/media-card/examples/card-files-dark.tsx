@@ -21,16 +21,6 @@ const context = createStorybookContext();
 const successIdentifier: FileIdentifier = imageFileId;
 const standardCards = [
   {
-    title: 'Small',
-    content: (
-      <Card
-        identifier={successIdentifier}
-        context={context}
-        appearance="small"
-      />
-    ),
-  },
-  {
     title: 'Image',
     content: (
       <Card
@@ -45,12 +35,6 @@ const standardCards = [
 // errors
 const errorCards = [
   {
-    title: 'Small',
-    content: (
-      <Card identifier={errorFileId} context={context} appearance="small" />
-    ),
-  },
-  {
     title: 'Image',
     content: (
       <Card identifier={errorFileId} context={context} appearance="image" />
@@ -59,17 +43,6 @@ const errorCards = [
 ];
 
 const menuCards = [
-  {
-    title: 'Small',
-    content: (
-      <Card
-        identifier={successIdentifier}
-        context={context}
-        appearance="small"
-        actions={actions}
-      />
-    ),
-  },
   {
     title: 'Image',
     content: (
@@ -88,12 +61,6 @@ const apiCards = createApiCards('image', successIdentifier);
 
 // no thumbnail
 const noThumbnailCards = [
-  {
-    title: 'Small',
-    content: (
-      <Card identifier={unknownFileId} context={context} appearance="small" />
-    ),
-  },
   {
     title: 'Image',
     content: (

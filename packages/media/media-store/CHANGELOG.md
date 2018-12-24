@@ -1,5 +1,15 @@
 # @atlaskit/media-store
 
+## 9.0.2
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/media-test-helpers@18.7.2
+  - @atlaskit/media-card@47.0.0
+
+## 9.0.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
 ## 9.0.0
 - [minor] [46cacba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46cacba):
 

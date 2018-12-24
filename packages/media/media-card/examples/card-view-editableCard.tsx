@@ -26,6 +26,7 @@ import {
 import { ImageResizeMode, MediaItemType } from '@atlaskit/media-core';
 import Toggle from '@atlaskit/toggle';
 import Slider from '@atlaskit/field-range';
+import * as exenv from 'exenv';
 import { CardView } from '../src/root/cardView';
 import { CardAppearance, CardStatus, CardDimensions, CardAction } from '../src';
 import {
@@ -110,6 +111,10 @@ export const generateStoriesForEditableCards = () => {
     noTitleLink: noTitleLinkDetails,
   };
   const getStateFromLocalStorage = (): EditableCardState | null => {
+    if (!exenv.canUseDOM) {
+      return null;
+    }
+
     const previousState = localStorage.getItem(localStorageKeyName);
 
     try {

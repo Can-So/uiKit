@@ -182,7 +182,6 @@ class Example extends Component<{}, ExampleState> {
 
   render() {
     const { items } = this.state;
-
     return (
       <ExampleWrapper>
         <FilmstripWrapper>

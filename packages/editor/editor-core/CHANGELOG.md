@@ -1,5 +1,35 @@
 # @atlaskit/editor-core
 
+## 92.0.7
+- [patch] [7c10292](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c10292):
+
+  - ED-5923: don't grow page while using resize handles on images
+
+## 92.0.6
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/editor-common@25.0.3
+  - @atlaskit/renderer@33.0.1
+  - @atlaskit/media-core@24.7.2
+  - @atlaskit/media-filmstrip@21.0.2
+  - @atlaskit/media-picker@27.0.2
+  - @atlaskit/media-test-helpers@18.7.2
+  - @atlaskit/media-card@47.0.0
+
+## 92.0.5
+- [patch] [50d9b26](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/50d9b26):
+
+  - ED-5806 Fix disappearing language in code block language picker
+
+## 92.0.4
+- [patch] [be12a8e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be12a8e):
+
+  - Fix popup picker dismiss on escape for Jira
+
+## 92.0.3
+- [patch] [88c8373](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/88c8373):
+
+  - ED-5704: filtering out invalid marks from JSON output of editorActions.getValue()
+
 ## 92.0.2
 - [patch] [dc39f5b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc39f5b):
 

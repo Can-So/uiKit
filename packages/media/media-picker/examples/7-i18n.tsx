@@ -12,7 +12,7 @@ import { intlShape } from 'react-intl';
 
 const mediaContext = ContextFactory.create({
   authProvider: defaultMediaPickerAuthProvider,
-  userAuthProvider: userAuthProvider,
+  userAuthProvider,
 });
 
 interface ExampleChildrenProps {}

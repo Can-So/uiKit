@@ -212,7 +212,6 @@ export class Card extends Component<CardProps, CardState> {
                 const width = getDataURIDimension('width', options);
                 const height = getDataURIDimension('height', options);
                 try {
-                  const allowAnimated = appearance !== 'small';
                   const mode =
                     resizeMode === 'stretchy-fit' ? 'full-fit' : resizeMode;
                   const blob = await context.getImage(resolvedId, {
@@ -220,7 +219,7 @@ export class Card extends Component<CardProps, CardState> {
                     mode,
                     height,
                     width,
-                    allowAnimated,
+                    allowAnimated: true,
                   });
                   const dataURI = URL.createObjectURL(blob);
                   this.releaseDataURI();
