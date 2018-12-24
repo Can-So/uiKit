@@ -17,6 +17,7 @@ import { BaseState, BaseViewer } from './base-viewer';
 import { isIE } from '../utils/isIE';
 import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { getFeatureFlag } from '../utils/getFeatureFlag';
+import { getObjectUrlFromFileState } from '../utils/getObjectUrlFromFileState';
 
 export type Props = Readonly<{
   item: FileState;
@@ -146,11 +147,8 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
           context,
           collectionName,
         );
-      } else if (item.status !== 'error') {
-        const { preview } = item;
-        if (preview) {
-          audioUrl = URL.createObjectURL(preview.blob);
-        }
+      } else {
+        audioUrl = getObjectUrlFromFileState(item);
       }
       if (!audioUrl) {
         throw new Error('No audio artifacts found');

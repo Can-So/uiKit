@@ -8,6 +8,7 @@ import { Props as RendererProps } from './pdfRenderer';
 import { ComponentClass } from 'react';
 import { getArtifactUrl } from '@atlaskit/media-store';
 import { BaseViewer } from '../base-viewer';
+import { getObjectUrlFromFileState } from '../../utils/getObjectUrlFromFileState';
 
 const moduleLoader = () =>
   import(/* webpackChunkName:"@atlaskit-internal_media-viewer-pdf-viewer" */ './pdfRenderer');
@@ -65,15 +66,14 @@ export class DocViewer extends BaseViewer<string, Props> {
           content: Outcome.failed(createError('previewFailed', err, item)),
         });
       }
-    } else if (item.status !== 'error') {
-      const { preview } = item;
-      if (preview) {
-        const src = URL.createObjectURL(preview.blob);
-
-        this.setState({
-          content: Outcome.successful(src),
-        });
+    } else {
+      const src = getObjectUrlFromFileState(item);
+      if (!src) {
+        return;
       }
+      this.setState({
+        content: Outcome.successful(src),
+      });
     }
   }
 

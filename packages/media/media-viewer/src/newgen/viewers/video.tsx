@@ -9,6 +9,7 @@ import { getFeatureFlag } from '../utils/getFeatureFlag';
 import { isIE } from '../utils/isIE';
 import { createError, MediaViewerError } from '../error';
 import { BaseState, BaseViewer } from './base-viewer';
+import { getObjectUrlFromFileState } from '../utils/getObjectUrlFromFileState';
 
 export type Props = Readonly<{
   item: FileState;
@@ -81,11 +82,8 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
           context,
           collectionName,
         );
-      } else if (item.status !== 'error') {
-        const { preview } = item;
-        if (preview) {
-          contentUrl = URL.createObjectURL(preview.blob);
-        }
+      } else {
+        contentUrl = getObjectUrlFromFileState(item);
       }
 
       if (!contentUrl) {
