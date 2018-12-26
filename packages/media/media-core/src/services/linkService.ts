@@ -17,7 +17,6 @@ export class MediaLinkService implements LinkService {
     const request = createRequest({
       config: this.config,
       collectionName: collectionName,
-      preventPreflight: true,
     });
 
     return request({ url: `/link/${linkId}` })
@@ -51,7 +50,7 @@ export class MediaLinkService implements LinkService {
     });
 
     return request({
-      method: 'post',
+      method: 'POST',
       url: '/link',
       data: { url, metadata },
     }).response.then(json => json.data.id);

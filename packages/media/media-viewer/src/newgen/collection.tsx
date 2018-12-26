@@ -6,6 +6,7 @@ import { List } from './list';
 import { Subscription } from 'rxjs/Subscription';
 import { toIdentifier } from './utils';
 import { Spinner } from './loading';
+import { MediaCollectionItem } from '@atlaskit/media-store';
 
 export type Props = Readonly<{
   onClose?: () => void;
@@ -77,31 +78,23 @@ export class Collection extends React.Component<Props, State> {
   private init(props: Props) {
     this.setState(initialState);
     const { collectionName, context, defaultSelectedItem, pageSize } = props;
-    const collectionFileItemFilter = (item: MediaCollectionItem) =>
-      item.type === 'file';
     this.subscription = context.collection
       .getItems(collectionName, { limit: pageSize })
       .subscribe({
-        next: collection => {
-          if (isError(collection)) {
-            this.setState({
-              items: Outcome.failed(createError('metadataFailed', collection)),
+        next: items => {
+          this.setState({
+            items: Outcome.successful(items),
+          });
+          if (defaultSelectedItem && this.shouldLoadNext(defaultSelectedItem)) {
+            context.collection.loadNextPage(collectionName, {
+              limit: pageSize,
             });
-          } else {
-            this.setState({
-              items: Outcome.successful(
-                collection.items.filter(collectionFileItemFilter),
-              ),
-            });
-            if (
-              defaultSelectedItem &&
-              this.shouldLoadNext(defaultSelectedItem)
-            ) {
-              context.collection.loadNextPage(collectionName, {
-                limit: pageSize,
-              });
-            }
           }
+        },
+        error: () => {
+          this.setState({
+            items: Outcome.failed(createError('metadataFailed')),
+          });
         },
       });
   }
@@ -120,8 +113,9 @@ export class Collection extends React.Component<Props, State> {
   }
 
   private onNavigationChange = (item: Identifier) => {
-    if (this.shouldLoadNext(item) && this.provider) {
-      this.provider.loadNextPage();
+    const { context, collectionName } = this.props;
+    if (this.shouldLoadNext(item)) {
+      context.collection.loadNextPage(collectionName);
     }
   };
 
@@ -138,8 +132,8 @@ export class Collection extends React.Component<Props, State> {
   private isLastItem(selectedItem: Identifier, items: MediaCollectionItem[]) {
     const lastItem = items[items.length - 1];
     const isLastItem =
-      selectedItem.id === lastItem.details.id &&
-      selectedItem.occurrenceKey === lastItem.details.occurrenceKey;
+      selectedItem.id === lastItem.id &&
+      selectedItem.occurrenceKey === lastItem.occurrenceKey;
     return isLastItem;
   }
 }

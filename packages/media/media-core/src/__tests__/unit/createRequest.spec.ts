@@ -74,31 +74,6 @@ describe('createRequest()', () => {
         );
       });
     });
-
-    it('should send auth arguments using queryParams when preventPreflight is true', () => {
-      const request = createRequest({
-        config: {
-          authProvider,
-        },
-        preventPreflight: true,
-      });
-
-      mockServer.respondWith(
-        'GET',
-        `http://example.com/some-api/links?token=${token}&client=${clientId}`,
-        '{}',
-      );
-
-      return request({ url: '/some-api/links' }).response.then(() => {
-        expect(authProvider).toHaveBeenCalled();
-        expect(
-          mockServer.requests[0].requestHeaders['X-Client-Id'],
-        ).toBeUndefined();
-        expect(
-          mockServer.requests[0].requestHeaders['Authorization'],
-        ).toBeUndefined();
-      });
-    });
   });
 
   describe('with asapIssuer/token auth method', () => {
@@ -129,31 +104,6 @@ describe('createRequest()', () => {
         );
       });
     });
-
-    it('should send auth arguments using queryParams when preventPreflight is true', () => {
-      const request = createRequest({
-        config: {
-          authProvider,
-        },
-        preventPreflight: true,
-      });
-
-      mockServer.respondWith(
-        'GET',
-        `http://example.com/some-api/links?token=${token}&issuer=${asapIssuer}`,
-        '{}',
-      );
-
-      return request({ url: '/some-api/links' }).response.then(() => {
-        expect(authProvider).toHaveBeenCalled();
-        expect(
-          mockServer.requests[0].requestHeaders['X-Issuer'],
-        ).toBeUndefined();
-        expect(
-          mockServer.requests[0].requestHeaders['Authorization'],
-        ).toBeUndefined();
-      });
-    });
   });
 
   describe('with responseType === image', () => {
@@ -176,7 +126,6 @@ describe('createRequest()', () => {
           config: {
             authProvider,
           },
-          preventPreflight: true,
         });
 
         mockServer.respondWith(
@@ -206,7 +155,6 @@ describe('createRequest()', () => {
           config: {
             authProvider,
           },
-          preventPreflight: false,
         });
 
         mockServer.respondWith(

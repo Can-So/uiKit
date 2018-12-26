@@ -22,7 +22,6 @@ export class MediaFileService implements FileService {
       const request = createRequest({
         config: this.config,
         collectionName,
-        preventPreflight: true,
       });
 
       return request({ url: `/file/${fileId}` })
