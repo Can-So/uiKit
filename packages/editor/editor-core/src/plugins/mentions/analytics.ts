@@ -133,7 +133,6 @@ export const buildTypeAheadRenderedPayload = (
       componentName,
       duration,
       userIds,
-      query,
       queryLength,
       spaceInQuery,
     },
