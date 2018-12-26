@@ -13,7 +13,6 @@ import { MediaPicker } from '../src';
 const context = createUploadContext();
 
 const popup = MediaPicker('popup', context, {
-  container: document.body,
   uploadParams: {
     collection: defaultCollectionName,
   },
