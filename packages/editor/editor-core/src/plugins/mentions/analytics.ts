@@ -25,7 +25,6 @@ export const buildAnalyticsPayload = (
     sessionId,
     ...otherAttributes,
   },
-  source: 'unknown',
 });
 
 type QueryAttributes = Partial<{

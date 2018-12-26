@@ -40,7 +40,6 @@ describe('mentionTypeahead', () => {
         action: 'cancelled',
         actionSubject: 'mentionTypeahead',
         eventType: 'ui',
-        source: 'unknown',
         attributes: expect.objectContaining({
           packageName: '@atlaskit/editor-core',
           packageVersion: expect.any(String),
@@ -86,7 +85,6 @@ describe('mentionTypeahead', () => {
         action: 'pressed',
         actionSubject: 'mentionTypeahead',
         eventType: 'ui',
-        source: 'unknown',
         attributes: expect.objectContaining({
           packageName: '@atlaskit/editor-core',
           packageVersion: expect.any(String),
@@ -136,7 +134,6 @@ describe('mentionTypeahead', () => {
         action: 'clicked',
         actionSubject: 'mentionTypeahead',
         eventType: 'ui',
-        source: 'unknown',
         attributes: expect.objectContaining({
           packageName: '@atlaskit/editor-core',
           packageVersion: expect.any(String),
