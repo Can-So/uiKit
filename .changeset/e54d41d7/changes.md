@@ -1,1 +1,0 @@
-- FS-3398 Fix incorrect event type for mention's "rendered" analytics event, ui -> operational
