@@ -16,7 +16,6 @@ export {
   MediaType,
 } from '@atlaskit/media-store';
 export * from './context/context';
-export * from './providers';
 export * from './services';
 export * from './utils';
 export * from './fileState';

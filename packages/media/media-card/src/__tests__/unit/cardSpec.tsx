@@ -167,29 +167,6 @@ describe('Card', () => {
     expect(component.find(CardView)).toHaveLength(1);
   });
 
-  it('should create a new subscription when the identifier changes', async () => {
-    const firstIdentifier: FileIdentifier = fileIdentifier;
-    const secondIdentifier: LinkIdentifier = linkIdentifier;
-    const dummyProvider = { observable: 'dummy provider ftw!' };
-    const context = fakeContext({
-      getMediaItemProvider: dummyProvider,
-    }) as Context;
-    const { component } = setup(context, { identifier: firstIdentifier });
-    component.setProps({ context, identifier: secondIdentifier });
-
-    const { id, mediaItemType, collectionName } = secondIdentifier;
-    await nextTick();
-    expect(context.file.getFileState).toHaveBeenCalledTimes(1);
-    expect(context.getMediaItemProvider).toHaveBeenCalledTimes(1);
-    expect(context.getMediaItemProvider).toBeCalledWith(
-      id,
-      mediaItemType,
-      collectionName,
-    );
-
-    expect(component.find(CardView)).toHaveLength(1);
-  });
-
   it('should refetch the image when width changes to a higher value', async () => {
     const initialDimensions: CardDimensions = {
       width: 100,

@@ -14,26 +14,9 @@ export const fakeContext = (
   config: ContextConfig = defaultContextConfig,
 ): Context => {
   const returns = (value: any) => jest.fn().mockReturnValue(value);
-  const getMediaItemProvider = returns({
-    observable: returns(of('nothing')),
-  });
-  const getDataUriService = returns({
-    fetchOriginalDataUri: returns(Promise.resolve('fake-original-data-uri')),
-    fetchImageDataUri: returns(Promise.resolve('fake-image-data-uri')),
-  });
-  const addLinkItem = returns({
-    observable: returns(of('nothing')),
-  });
-  const getUrlPreviewProvider = returns({
-    observable: returns(of('nothing')),
-  });
   const getFile = jest.fn().mockReturnValue(of({}));
   const downloadBinary = jest.fn();
-  const getLocalPreview = jest.fn();
-  const setLocalPreview = jest.fn();
-  const removeLocalPreview = jest.fn();
   const getBlobService = jest.fn();
-  const uploadFile = jest.fn();
   const collection = {
     getItems: returns(of([])),
     loadNextPage: jest.fn(),
@@ -47,16 +30,7 @@ export const fakeContext = (
   const defaultContext: Context = {
     getImageMetadata,
     getImage,
-    getFile,
     getBlobService,
-    getLocalPreview,
-    setLocalPreview,
-    removeLocalPreview,
-    getMediaItemProvider,
-    getDataUriService,
-    addLinkItem,
-    getUrlPreviewProvider,
-    uploadFile,
     config,
     collection,
     file,

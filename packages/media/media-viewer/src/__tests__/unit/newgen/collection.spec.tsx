@@ -12,7 +12,7 @@ import {
   mountWithIntlContext,
   fakeContext,
 } from '@atlaskit/media-test-helpers';
-import { MediaCollection, MediaCollectionItem } from '@atlaskit/media-store';
+import { MediaCollectionItem } from '@atlaskit/media-store';
 import { Observable } from 'rxjs';
 
 const collectionName = 'my-collection';
@@ -120,8 +120,7 @@ describe('<Collection />', () => {
     const el = createFixture(context, identifier);
     expect(context.collection.getItems).toHaveBeenCalledTimes(1);
 
-    const subject2 = new Subject<MediaCollection | Error>();
-    const context2 = createContext({ subject: subject2 });
+    const context2 = createContext();
     el.setProps({ context: context2 });
 
     expect(context.collection.getItems).toHaveBeenCalledTimes(1);

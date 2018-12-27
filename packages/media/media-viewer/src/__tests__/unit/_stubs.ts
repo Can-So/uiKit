@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import {
   Context,
   ContextConfig,
-  MediaItemProvider,
   MediaItem,
   BlobService,
   Auth,
@@ -65,15 +64,11 @@ export class Stubs {
 
   static context(
     config: ContextConfig,
-    mediaItemProvider?: MediaItemProvider,
     blobService?: BlobService,
     getFileState?: () => Observable<FileState>,
   ): Partial<Context> {
     return {
       config,
-      getMediaItemProvider: jest.fn(
-        () => mediaItemProvider || Stubs.mediaItemProvider(),
-      ),
       getBlobService: jest.fn(() => blobService || Stubs.blobService()),
       file: {
         downloadBinary: jest.fn(),
@@ -89,7 +84,6 @@ export class Stubs {
 }
 
 export interface CreateContextOptions {
-  subject?: Subject<any>;
   authPromise?: Promise<Auth>;
   blobService?: BlobService;
   getFileState?: () => Observable<FileState>;
@@ -98,7 +92,6 @@ export interface CreateContextOptions {
 
 export const createContext = (options?: CreateContextOptions) => {
   const defaultOptions: CreateContextOptions = {
-    subject: undefined,
     authPromise: Promise.resolve<Auth>({
       token: 'some-token',
       clientId: 'some-client-id',
@@ -108,7 +101,7 @@ export const createContext = (options?: CreateContextOptions) => {
     getFileState: undefined,
     config: undefined,
   };
-  const { subject, authPromise, blobService, getFileState, config } =
+  const { authPromise, blobService, getFileState, config } =
     options || defaultOptions;
   const authProvider = jest.fn(() => authPromise);
   const contextConfig: ContextConfig = {
@@ -116,7 +109,6 @@ export const createContext = (options?: CreateContextOptions) => {
   };
   return Stubs.context(
     config || contextConfig,
-    Stubs.mediaItemProvider(subject),
     blobService,
     getFileState,
   ) as Context;

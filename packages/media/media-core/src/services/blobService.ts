@@ -18,12 +18,6 @@ export interface FetchImageOptions {
 }
 
 export interface BlobService {
-  fetchOriginalBlob(mediaItem: MediaItem): Promise<Blob>;
-  fetchOriginalBlobCancelable(mediaItem: MediaItem): Response<Blob>;
-  fetchImageBlob(
-    mediaItem: MediaItem,
-    options: FetchImageOptions,
-  ): Promise<Blob>;
   fetchImageBlobCancelable(
     mediaItem: MediaItem,
     options: FetchImageOptions,
@@ -43,24 +37,6 @@ export class MediaBlobService implements BlobService {
       },
       collectionName: this.collectionName,
     });
-  }
-
-  fetchOriginalBlob(mediaItem: MediaItem): Promise<Blob> {
-    return this.fetchOriginalBlobCancelable(mediaItem).response;
-  }
-
-  fetchOriginalBlobCancelable(mediaItem: MediaItem): Response<Blob> {
-    return this.fetchSomeBlob(`/file/${mediaItem.details.id}/binary`, {
-      'max-age': 3600,
-      collection: this.collectionName,
-    });
-  }
-
-  fetchImageBlob(
-    mediaItem: MediaItem,
-    options: FetchImageOptions,
-  ): Promise<Blob> {
-    return this.fetchImageBlobCancelable(mediaItem, options).response;
   }
 
   fetchImageBlobCancelable(
