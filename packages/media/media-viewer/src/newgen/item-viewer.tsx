@@ -165,6 +165,7 @@ export class ItemViewerBase extends React.Component<Props, State> {
             return this.renderError('previewFailed', item);
           case 'uploading':
           case 'processing':
+          default:
             return <Spinner />;
         }
       },

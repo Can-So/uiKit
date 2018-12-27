@@ -37,7 +37,7 @@ const mediaCollectionItems: MediaCollectionItem[] = [
     type: 'file',
     details: {
       artifacts: {},
-      mediaType: 'audio',
+      mediaType: 'image',
       mimeType: '',
       name: '',
       processingStatus: 'succeeded',
@@ -51,7 +51,7 @@ const mediaCollectionItems: MediaCollectionItem[] = [
     insertedAt: 1,
     details: {
       artifacts: {},
-      mediaType: 'audio',
+      mediaType: 'image',
       mimeType: '',
       name: '',
       processingStatus: 'succeeded',
@@ -144,9 +144,15 @@ describe('<Collection />', () => {
   });
 
   it('MSW-720: adds the collectionName to all identifiers passed to the List component', () => {
-    const context = createContext();
+    const subject = new Subject();
+    const context = fakeContext({
+      collection: {
+        getItems: subject,
+        loadNextPage: jest.fn(),
+      },
+    });
     const el = createFixture(context, identifier);
-    // subject.next(mediaCollection);
+    subject.next(mediaCollectionItems);
     el.update();
     const listProps = el.find(List).props();
     expect(listProps.defaultSelectedItem.collectionName).toEqual(
@@ -159,10 +165,15 @@ describe('<Collection />', () => {
 
   describe('Next page', () => {
     it('should load next page if we instantiate the component with the last item of the page as selectedItem', () => {
-      // const provider = Stubs.mediaCollectionProvider(subject);
-      const context = createContext();
+      const subject = new Subject();
+      const context = fakeContext({
+        collection: {
+          getItems: subject,
+          loadNextPage: jest.fn(),
+        },
+      });
       createFixture(context, identifier2);
-      // subject.next(mediaCollection);
+      subject.next(mediaCollectionItems);
       expect(context.collection.getItems).toHaveBeenCalledTimes(1);
       expect(context.collection.loadNextPage).toHaveBeenCalled();
     });
@@ -170,15 +181,20 @@ describe('<Collection />', () => {
     it('should NOT load next page if we instantiate the component normally', () => {
       const context = createContext();
       createFixture(context, identifier);
-      // subject.next(mediaCollection);
       expect(context.collection.getItems).toHaveBeenCalledTimes(1);
       expect(context.collection.loadNextPage).not.toHaveBeenCalled();
     });
 
     it('should load next page if we navigate to the last item of the list', () => {
-      const context = createContext();
+      const subject = new Subject();
+      const context = fakeContext({
+        collection: {
+          getItems: subject,
+          loadNextPage: jest.fn(),
+        },
+      });
       const el = createFixture(context, identifier);
-      // subject.next(mediaCollection);
+      subject.next(mediaCollectionItems);
       el.update();
 
       expect(context.collection.loadNextPage).not.toHaveBeenCalled();

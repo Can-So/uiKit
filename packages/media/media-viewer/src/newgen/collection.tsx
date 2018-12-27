@@ -60,6 +60,7 @@ export class Collection extends React.Component<Props, State> {
         const item = defaultSelectedItem
           ? { ...defaultSelectedItem, collectionName }
           : identifiers[0];
+
         return (
           <List
             items={identifiers}
