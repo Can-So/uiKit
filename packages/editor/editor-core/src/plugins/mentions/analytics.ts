@@ -125,7 +125,7 @@ export const buildTypeAheadRenderedPayload = (
   const { queryLength, spaceInQuery } = extractAttributesFromQuery(query);
   return {
     action: 'rendered',
-    actionSubject: 'mentionTypeAhead',
+    actionSubject: 'mentionTypeahead',
     eventType: 'ui',
     attributes: {
       packageName,
