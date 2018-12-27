@@ -9,8 +9,8 @@ export function adfMacro(
   tokenErrCallback?: TokenErrCallback,
 ): Token {
   return commonMacro(input.substring(position), schema, {
-    opening: /^\{adf(?::([^\{\n\}]*))?\}/,
-    closing: /\{adf\}/,
+    keyword: 'adf',
+    paired: true,
     rawContentProcessor,
     tokenErrCallback,
   });

@@ -1,5 +1,10 @@
 # @atlaskit/analytics-listeners
 
+## 4.1.5
+- [patch] [a3b8046](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3b8046):
+
+  - Add more specific types to analytics-listener webclient type
+
 ## 4.1.4
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

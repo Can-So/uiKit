@@ -373,12 +373,16 @@ export default class GlobalNavigation extends Component<
             }
 
             const width = this.props[`${drawerName}DrawerWidth`] || 'wide';
+            const onCloseComplete = this.props[
+              `on${capitalisedDrawerName}CloseComplete`
+            ];
 
             return (
               <Drawer
                 key={drawerName}
                 isOpen={this.state[`is${capitalisedDrawerName}Open`]}
                 onClose={this.closeDrawer(drawerName)}
+                onCloseComplete={onCloseComplete}
                 shouldUnmountOnExit={shouldUnmountOnExit}
                 width={width}
               >

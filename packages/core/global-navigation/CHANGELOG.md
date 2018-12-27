@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.4.0
+- [minor] [6ce6b0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ce6b0c):
+
+  - Support onCloseComplete
+
 ## 5.3.8
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

@@ -1,5 +1,7 @@
 import { Node, Mark, MarkType } from 'prosemirror-model';
 import { SelectionRange, EditorState, Transaction } from 'prosemirror-state';
+import { traverse } from '@atlaskit/adf-utils';
+import { JSONDocNode } from '@atlaskit/editor-json-transformer';
 
 export const isMarkAllowedInRange = (
   doc: Node,
@@ -70,3 +72,22 @@ export const removeBlockMarks = (
   });
   return blockMarksExists ? tr : undefined;
 };
+
+export function removeQueryMarksFromJSON(json: JSONDocNode): JSONDocNode {
+  const sanitizedJSON = traverse(json as any, {
+    text: node => {
+      if (!node || !Array.isArray(node.marks)) {
+        return node;
+      }
+
+      return {
+        ...node,
+        marks: node.marks.filter(
+          mark => ['emojiQuery', 'typeAheadQuery'].indexOf(mark.type) === -1,
+        ),
+      };
+    },
+  }) as JSONDocNode;
+
+  return sanitizedJSON;
+}

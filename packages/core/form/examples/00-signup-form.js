@@ -36,12 +36,12 @@ export default () => (
               <>
                 <TextField autoComplete="off" {...fieldProps} />
                 {!error && (
-                  <HelperMessage fieldId={fieldProps.id}>
+                  <HelperMessage>
                     You can use letters, numbers & periods.
                   </HelperMessage>
                 )}
                 {error && (
-                  <ErrorMessage fieldId={fieldProps.id}>
+                  <ErrorMessage>
                     This user name is already in use, try another one.
                   </ErrorMessage>
                 )}
@@ -59,21 +59,17 @@ export default () => (
               <>
                 <TextField type="password" {...fieldProps} />
                 {!error && !meta.valid && (
-                  <HelperMessage fieldId={fieldProps.id}>
+                  <HelperMessage>
                     Use 8 or more characters with a mix of letters, numbers &
                     symbols.
                   </HelperMessage>
                 )}
                 {error && (
-                  <ErrorMessage fieldId={fieldProps.id}>
+                  <ErrorMessage>
                     Password needs to be more than 8 characters.
                   </ErrorMessage>
                 )}
-                {meta.valid && (
-                  <ValidMessage fieldId={fieldProps.id}>
-                    Awesome password!
-                  </ValidMessage>
-                )}
+                {meta.valid && <ValidMessage>Awesome password!</ValidMessage>}
               </>
             )}
           </Field>

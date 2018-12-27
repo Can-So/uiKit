@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/analytics-listeners",
-  "version": "4.1.4",
+  "version": "4.1.5",
   "description": "Fabric analytics listeners to be used by the products",
   "config": {
     "access": "public"
@@ -15,7 +15,7 @@
     "src"
   ],
   "dependencies": {
-    "@atlaskit/analytics-gas-types": "^3.2.3",
+    "@atlaskit/analytics-gas-types": "^3.2.4",
     "@atlaskit/analytics-namespaced-context": "^2.1.5",
     "@atlaskit/analytics-next": "^3.1.2",
     "@atlaskit/analytics-next-types": "^3.1.2",

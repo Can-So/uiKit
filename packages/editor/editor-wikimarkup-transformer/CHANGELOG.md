@@ -1,5 +1,15 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.9.2
+- [patch] [1d9228c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d9228c):
+
+  - trim escape in link href
+
+## 2.9.1
+- [patch] [75046da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/75046da):
+
+  - macros keyword can be case insensitive
+
 ## 2.9.0
 - [minor] [a4b49b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4b49b2):
 

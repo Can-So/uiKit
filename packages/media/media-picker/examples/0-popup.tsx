@@ -216,8 +216,6 @@ class PopupWrapper extends Component<{}, PopupWrapperState> {
         collection,
       });
 
-      // Populate cache in userAuthProvider.
-      userAuthProvider();
       // Synchronously with next command tenantAuthProvider will be requested.
       popup.show().catch(console.error);
     }

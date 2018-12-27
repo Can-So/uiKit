@@ -14,7 +14,6 @@ export default class ModalDemo extends Component<
   { isOpen: string | null },
 > {
   state = { isOpen: null };
-  focusTarget: HTMLElement | null;
   open = (isOpen: string) => this.setState({ isOpen });
   close = () => this.setState({ isOpen: null });
   secondaryAction = ({ target }: Object) => console.log(target.innerText);
@@ -35,9 +34,6 @@ export default class ModalDemo extends Component<
         <H4>Variants</H4>
         <ButtonGroup>
           <Button onClick={() => this.open('root')}>Boolean on dialog</Button>
-          <Button onClick={() => this.open('ref')}>
-            Function returns a ref
-          </Button>
           <Button onClick={() => this.open('autoFocus')}>
             using autoFocus attribute
           </Button>
@@ -66,28 +62,6 @@ export default class ModalDemo extends Component<
             <StubDialog heading="input has autoFocus">
               <p>The textbox should be focused</p>
               <input autoFocus type="text" />
-            </StubDialog>
-          )}
-        </ModalTransition>
-        <ModalTransition>
-          {isOpen === 'ref' && (
-            <StubDialog
-              autoFocus={() => this.focusTarget}
-              heading="Function returns a ref"
-            >
-              <p>
-                The second button sets a reference to itself on the class and
-                passes that node to the modal, which calls the focus method on
-                it once mounted.
-              </p>
-              <button>I am NOT focused</button>
-              <button
-                ref={r => {
-                  this.focusTarget = r;
-                }}
-              >
-                I am focused!
-              </button>
             </StubDialog>
           )}
         </ModalTransition>

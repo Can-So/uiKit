@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 6.1.15
+- [patch] [6195ac3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6195ac3):
+
+  - remove animated functionality to temporarily resolve blocking issue with portal
+
 ## 6.1.14
 - [patch] [a048a85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a048a85):
 

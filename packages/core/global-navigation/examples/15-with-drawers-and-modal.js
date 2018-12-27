@@ -167,6 +167,8 @@ class GlobalNavWithDrawers extends Component<Props, State> {
 
   secondaryAction = ({ target }: Object) => console.log(target.innerText);
 
+  onCloseComplete = (node: HTMLElement) => console.log('onCloseComplete', node);
+
   renderCreateDrawerContents = () => (
     <DrawerContent
       drawerTitle="Create drawer"
@@ -216,11 +218,13 @@ class GlobalNavWithDrawers extends Component<Props, State> {
           onProductClick={() => console.log('product clicked')}
           // Starred
           starredDrawerContents={this.renderStarredDrawerContents}
+          onStarredDrawerCloseComplete={this.onCloseComplete}
           shouldStarredDrawerUnmountOnExit={unmountOnExit}
           // Create
           onCreateClick={
             createItemOpens === 'modal' ? this.openCreateModal : null
           }
+          onCreateDrawerCloseComplete={this.onCloseComplete}
           createDrawerContents={this.renderCreateDrawerContents}
           shouldCreateDrawerUnmountOnExit={unmountOnExit}
           // Search
@@ -229,10 +233,12 @@ class GlobalNavWithDrawers extends Component<Props, State> {
           isSearchDrawerOpen={this.state.isSearchDrawerOpen}
           searchDrawerContents={this.renderSearchDrawerContents}
           onSearchDrawerClose={this.closeSearchDrawer}
+          onSearchDrawerCloseComplete={this.onCloseComplete}
           shouldSearchDrawerUnmountOnExit={unmountOnExit}
           // Notifications
           notificationDrawerContents={this.renderNotificationDrawerContents}
           onNotificationDrawerOpen={onNotificationDrawerOpen}
+          onNotificationDrawerCloseComplete={this.onCloseComplete}
           notificationCount={notificationCount}
           shouldNotificationDrawerUnmountOnExit={unmountOnExit}
           // App switcher

@@ -4,10 +4,8 @@ import { UrlPreview, ImageResizeMode, Resource } from '@atlaskit/media-core';
 
 import { SharedCardProps, CardStatus, CardAppearance } from '../..';
 import { LinkCardGenericView } from '../cardGenericView';
-import { CardGenericViewSmall } from '../../utils/cardGenericViewSmall';
 import { URLEmbedCard } from '../embed/urlEmbedCard';
 import { HTMLEmbedCard } from '../embed/htmlEmbedCard';
-import { A } from './styled';
 
 export interface LinkCardProps extends SharedCardProps {
   readonly status: CardStatus;
@@ -26,9 +24,6 @@ export class LinkCard extends Component<LinkCardProps, {}> {
     const { appearance } = this.props;
 
     switch (appearance) {
-      case 'small':
-        return this.renderSmallCard();
-
       case 'horizontal':
         return this.renderGenericLink(appearance);
 
@@ -43,19 +38,6 @@ export class LinkCard extends Component<LinkCardProps, {}> {
         } else {
           return this.renderGenericLink(defaultLinkCardAppearance);
         }
-    }
-  }
-
-  private renderInLink(link: any, child: any): JSX.Element {
-    const { isLoading, isError } = this;
-    if (link && !isLoading && !isError) {
-      return (
-        <A linkUrl={link} className="link-wrapper">
-          {child}
-        </A>
-      );
-    } else {
-      return child;
     }
   }
 
@@ -136,28 +118,6 @@ export class LinkCard extends Component<LinkCardProps, {}> {
         isLoading={this.isLoading}
         onRetry={onRetry}
       />
-    );
-  }
-
-  private renderSmallCard(): JSX.Element {
-    const { url, title, site } = this.urlPreview;
-    const { dimensions, actions, onRetry } = this.props;
-    const { iconUrl, thumbnailUrl, isLoading, errorMessage } = this;
-    return this.renderInLink(
-      url,
-      <CardGenericViewSmall
-        title={title}
-        subtitle={site || url}
-        iconUrl={iconUrl}
-        thumbnailUrl={thumbnailUrl}
-        dimensions={dimensions}
-        loading={isLoading}
-        actions={actions}
-        error={errorMessage}
-        type="link"
-        mediaType="image"
-        onRetry={onRetry}
-      />,
     );
   }
 

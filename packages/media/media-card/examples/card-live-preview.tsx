@@ -54,19 +54,6 @@ class LiveUrlConverter extends Component<{}, LiveUrlConverterState> {
 
     const cards = [
       {
-        title: 'small',
-        content: (
-          <Card
-            identifier={identifier}
-            context={context}
-            appearance="small"
-            onClick={eventHandler('click')}
-            onMouseEnter={eventHandler('mouseEnter')}
-            actions={menuActions}
-          />
-        ),
-      },
-      {
         title: 'image',
         content: (
           <Card

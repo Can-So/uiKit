@@ -922,5 +922,17 @@ exports[`delete screen display content is different when user is deactivated 1`]
       </styled.span>
     </li>
   </styled.ul>
+  <styled.div>
+    <SectionMessage
+      appearance="warning"
+    >
+      <FormattedMessage
+        defaultMessage="After a 14-day grace period, you won’t be able to cancel the deletion of the account."
+        description="A warning message shown to deactivated users when they try to delete their account."
+        id="focused-task-close-account.delete-account.overview.warning-section.deactivated.body"
+        values={Object {}}
+      />
+    </SectionMessage>
+  </styled.div>
 </styled.div>
 `;
