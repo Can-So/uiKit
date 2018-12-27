@@ -56,6 +56,7 @@
     "@atlaskit/field-range": "^5.0.12",
     "@atlaskit/field-text": "^7.0.18",
     "@atlaskit/media-core": "^24.7.0",
+    "@atlaskit/media-store": "^9.0.0",
     "@atlaskit/media-test-helpers": "^18.7.0",
     "@atlaskit/toggle": "^5.0.14",
     "@types/classnames": "^2.2.6",
