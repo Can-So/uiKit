@@ -37,7 +37,7 @@ export class MockMentionResource extends AbstractMentionResource {
     const notify = (mentions: MentionsResult) => {
       if (searchTime >= this.lastReturnedSearch) {
         this.lastReturnedSearch = searchTime;
-        this._notifyListeners(mentions);
+        this._notifyListeners(mentions, { remoteSearch: true, duration: 100 });
       } else {
         const date = new Date(searchTime).toISOString().substr(17, 6);
         debug('Stale search result, skipping', date, query); // eslint-disable-line no-console, max-len

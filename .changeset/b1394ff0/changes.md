@@ -1,0 +1,1 @@
+- Remove 'query' attribute from mention's "rendered" analytics event. This attribute basically contains UGC and should not have been captured in the first place. It seems like it was added by accident as it wasn't part of the original specs.
