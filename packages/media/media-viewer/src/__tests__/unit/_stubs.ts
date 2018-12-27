@@ -80,6 +80,10 @@ export class Stubs {
         getFileState: jest.fn(getFileState || (() => Observable.empty())),
         upload: jest.fn(),
       } as any,
+      collection: {
+        getItems: jest.fn(() => Observable.empty()),
+        loadNextPage: jest.fn(),
+      } as any,
     };
   }
 }
@@ -115,5 +119,5 @@ export const createContext = (options?: CreateContextOptions) => {
     Stubs.mediaItemProvider(subject),
     blobService,
     getFileState,
-  ) as any;
+  ) as Context;
 };

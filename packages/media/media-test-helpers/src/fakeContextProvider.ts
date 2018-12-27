@@ -35,6 +35,7 @@ export const fakeContext = (
   const getBlobService = jest.fn();
   const uploadFile = jest.fn();
   const collection = {
+    getItems: returns(of([])),
     loadNextPage: jest.fn(),
   } as any;
   const getImage = jest.fn() as any;

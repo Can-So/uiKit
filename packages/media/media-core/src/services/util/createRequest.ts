@@ -47,7 +47,7 @@ export default (requesterOptions: RequesterOptions): CreateRequestFunc => {
       });
 
       if (responseType === 'json') {
-        resolve(await response.json().data);
+        resolve((await response.json()).data);
       } else {
         resolve(response.blob());
       }
