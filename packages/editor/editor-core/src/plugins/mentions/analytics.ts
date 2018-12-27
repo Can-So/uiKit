@@ -1,4 +1,9 @@
-import { EventType, GasPayload } from '@atlaskit/analytics-gas-types';
+import {
+  EventType,
+  GasPayload,
+  OPERATIONAL_EVENT_TYPE,
+  UI_EVENT_TYPE,
+} from '@atlaskit/analytics-gas-types';
 import { isSpecialMention, MentionDescription } from '@atlaskit/mention';
 import {
   name as packageName,
@@ -58,7 +63,7 @@ export const buildTypeAheadCancelPayload = (
   return buildAnalyticsPayload(
     'mentionTypeahead',
     'cancelled',
-    'ui',
+    UI_EVENT_TYPE,
     sessionId,
     {
       duration,
@@ -99,7 +104,7 @@ export const buildTypeAheadInsertedPayload = (
   return buildAnalyticsPayload(
     'mentionTypeahead',
     isClicked(insertType) ? 'clicked' : 'pressed',
-    'ui',
+    UI_EVENT_TYPE,
     sessionId,
     {
       duration,
@@ -126,7 +131,7 @@ export const buildTypeAheadRenderedPayload = (
   return {
     action: 'rendered',
     actionSubject: 'mentionTypeahead',
-    eventType: 'ui',
+    eventType: OPERATIONAL_EVENT_TYPE,
     attributes: {
       packageName,
       packageVersion,
