@@ -6,6 +6,8 @@ export type FourOhFourProps = {};
 export default class FourOhFour extends React.PureComponent<FourOhFourProps> {
   props: FourOhFourProps;
 
+  // Not able to use getDerivedStateFromProps because it logs error on console that state was not set properly
+  // Cannot use use componentWillMount as it will be deprecated
   componentDidMount() {
     if (
       sessionStorage.getItem('loadedOnce') === null ||
