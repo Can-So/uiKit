@@ -82,7 +82,22 @@ describe('Card', () => {
 
   describe('Client.config.loadingStateDelay', () => {
     it('should render the link placeholder for the initial state', () => {
-      const client = createClient();
+      class CustomClient extends Client {
+        fetchData() {
+          return new Promise<ResolveResponse>(resolve =>
+            setTimeout(resolve, 1, {
+              meta: {
+                visibility: 'public',
+                access: 'granted',
+                auth: [],
+                definitionId: 'd1',
+              },
+              data: {},
+            } as ResolveResponse),
+          );
+        }
+      }
+      const client = new CustomClient();
       const url = 'https://www.atlassian.com/';
       const wrapper = mount(
         <Card appearance="block" client={client} url={url} />,
