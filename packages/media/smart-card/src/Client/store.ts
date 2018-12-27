@@ -1,10 +1,13 @@
 import { StateWatch } from './stateWatcher';
 import { GetNowTimeFn } from './types';
+import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { F1 } from './utils';
 
 export class Store<T> {
   constructor(private getNowTimeFn: GetNowTimeFn) {}
 
   store: { [K: string]: StateWatch<T> } = {};
+  analyticsCallbacksPool: { [K: string]: Array<F1<GasPayload, any>> } = {};
 
   get(url: string): StateWatch<T> | undefined {
     return this.store[url];

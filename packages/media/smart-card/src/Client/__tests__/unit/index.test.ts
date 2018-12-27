@@ -4,6 +4,7 @@ import * as fetchMock from 'fetch-mock';
 import { Client, RemoteResourceAuthConfig, ResolveResponse } from '../..';
 import { ObjectState, GetNowTimeFn, DefinedState } from '../../types';
 import { v4 } from 'uuid';
+import { resolvedEvent } from '../../analytics';
 
 const getNow = (nows: number[]): GetNowTimeFn => () =>
   nows.shift() || new Date().getTime();
@@ -535,5 +536,30 @@ describe('Client', () => {
     await waitFor(4);
 
     expect(updateFn).toBeCalledWith([null, true]);
+  });
+
+  describe('Analytics', () => {
+    it('should fire the provided analytics event handler', done => {
+      mockResolvedFetchCall();
+      const client = new Client();
+      const mockedHandler = jest.fn().mockImplementation(() => {
+        expect(mockedHandler).toBeCalledTimes(1);
+        done();
+      });
+      client.register('some.url');
+      client.resolve('some.url', mockedHandler);
+    });
+
+    it('should fire a proper analytics event handler', done => {
+      mockResolvedFetchCall();
+      const client = new Client();
+      const expectedEvent = resolvedEvent('some.url');
+      const mockedHandler = jest.fn().mockImplementation(() => {
+        expect(mockedHandler).toBeCalledWith(expectedEvent);
+        done();
+      });
+      client.register('some.url');
+      client.resolve('some.url', mockedHandler);
+    });
   });
 });

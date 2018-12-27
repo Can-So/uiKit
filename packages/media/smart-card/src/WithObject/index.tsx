@@ -6,17 +6,20 @@ import {
   BlockCardErroredView,
   InlineCardErroredView,
 } from '@atlaskit/media-ui';
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import { GasPayload } from '@atlaskit/analytics-gas-types';
 
 export interface WithObjectRenderProps {
   state: ObjectState;
   reload: () => void;
 }
 
-interface InnerWithObjectProps {
+type InnerWithObjectProps = {
   client: Client;
   url: string;
   children: (renderProps: WithObjectRenderProps) => React.ReactNode;
-}
+} & WithAnalyticsEventProps;
 
 interface InnerWithObjectState {
   prevClient?: Client;
@@ -34,6 +37,13 @@ class InnerWithObject extends React.Component<
     cardState: { status: 'pending' },
   };
 
+  private fireAnalyticsEvent = (payload: GasPayload) => {
+    const { createAnalyticsEvent } = this.props;
+    if (createAnalyticsEvent) {
+      createAnalyticsEvent(payload).fire();
+    }
+  };
+
   reload = () => {
     const { cardState } = this.state;
     if (
@@ -42,7 +52,7 @@ class InnerWithObject extends React.Component<
       cardState.status === 'forbidden'
     ) {
       const { client, url } = this.props;
-      client.reload(url, cardState.definitionId);
+      client.reload(url, this.fireAnalyticsEvent, cardState.definitionId);
     }
   };
 
@@ -51,7 +61,7 @@ class InnerWithObject extends React.Component<
     const [state, expired] = incoming;
 
     if (state === null || expired) {
-      return client.resolve(url);
+      return client.resolve(url, this.fireAnalyticsEvent);
     }
 
     return this.setState({
@@ -100,6 +110,8 @@ export interface WithObjectProps {
   children: (props: WithObjectRenderProps) => React.ReactNode;
 }
 
+const WithAnalytics = withAnalyticsEvents()(InnerWithObject);
+
 export function WithObject(props: WithObjectProps) {
   const {
     client: clientFromProps,
@@ -135,9 +147,9 @@ export function WithObject(props: WithObjectProps) {
           );
         }
         return (
-          <InnerWithObject client={client} url={url}>
+          <WithAnalytics client={client} url={url}>
             {children}
-          </InnerWithObject>
+          </WithAnalytics>
         );
       }}
     </Context.Consumer>
