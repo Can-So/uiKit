@@ -66,8 +66,7 @@ export default class MediaSingleNode extends Component<
       this.props.width !== nextProps.width ||
       this.props.lineLength !== nextProps.lineLength ||
       this.props.getPos !== nextProps.getPos ||
-      this.mediaChildHasUpdated(nextProps) ||
-      this.hasMediaStateUpdated(nextProps)
+      this.mediaChildHasUpdated(nextProps)
     ) {
       return true;
     }
@@ -104,13 +103,6 @@ export default class MediaSingleNode extends Component<
       return state && state.status;
     }
     return undefined;
-  };
-
-  private hasMediaStateUpdated = (nextProps: MediaSingleNodeProps) => {
-    return (
-      this.getMediaNodeStatus(nextProps.node.firstChild) !==
-      this.state.lastMediaStatus
-    );
   };
 
   private mediaChildHasUpdated = nextProps => {
