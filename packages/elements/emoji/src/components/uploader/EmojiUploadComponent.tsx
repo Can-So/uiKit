@@ -5,7 +5,6 @@ import * as classNames from 'classnames';
 
 import * as styles from './styles';
 
-import { analyticsEmojiPrefix } from '../../constants';
 import {
   OptionalEmojiDescriptionWithVariations,
   EmojiUpload,
@@ -89,21 +88,7 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     }
   }
 
-  onFileChosen = () => {
-    this.fireAnalytics('upload.file.selected');
-  };
-
-  private fireAnalytics = (eventName: string, data: any = {}): void => {
-    const { firePrivateAnalyticsEvent } = this.props;
-
-    if (firePrivateAnalyticsEvent) {
-      firePrivateAnalyticsEvent(`${analyticsEmojiPrefix}.${eventName}`, data);
-    }
-  };
-
-  private calculateElapsedTime = () => {
-    return Date.now() - this.openTime;
-  };
+  onFileChosen = () => {};
 
   private onUploadSupported = (supported: boolean) => {
     this.setState({
@@ -116,14 +101,10 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     this.setState({
       uploadErrorMessage: undefined, // clear previous errors
     });
-    this.fireAnalytics('upload.start');
     if (supportsUploadFeature(emojiProvider)) {
       emojiProvider
         .uploadCustomEmoji(upload)
         .then(() => {
-          this.fireAnalytics('upload.successful', {
-            duration: this.calculateElapsedTime(),
-          });
           this.primeUpload();
         })
         .catch(err => {
@@ -132,7 +113,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
           });
           // tslint:disable-next-line
           console.error('Unable to upload emoji', err);
-          this.fireAnalytics('upload.failed');
         });
     }
   };
@@ -141,7 +121,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     this.setState({
       uploadErrorMessage: undefined,
     });
-    this.fireAnalytics('upload.cancel');
     this.primeUpload();
   };
 
