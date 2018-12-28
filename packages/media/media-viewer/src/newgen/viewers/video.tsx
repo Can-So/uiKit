@@ -29,9 +29,11 @@ const hdArtifact = 'video_1280.mp4';
 
 export class VideoViewer extends BaseViewer<string, Props, State> {
   protected get initialState() {
+    const { item } = this.props;
+
     return {
       content: Outcome.pending<string, MediaViewerError>(),
-      isHDActive: false,
+      isHDActive: isHDAvailable(item),
     };
   }
 
@@ -65,11 +67,11 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
     );
   }
 
-  protected async init(isHDActive?: boolean) {
+  protected async init(isHDActive: boolean = this.state.isHDActive) {
     const { context, item, collectionName } = this.props;
     const preferHd = isHDActive && isHDAvailable(item);
-
     const contentUrl = getVideoArtifactUrl(item, preferHd);
+
     try {
       if (!contentUrl) {
         throw new Error(`No video artifacts found`);
