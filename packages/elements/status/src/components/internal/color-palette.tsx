@@ -1,12 +1,9 @@
-import * as React from 'react';
-import { PureComponent } from 'react';
-import styled from 'styled-components';
-import { HTMLAttributes, ComponentClass } from 'react';
 import { colors, gridSize } from '@atlaskit/theme';
-import Color from './color';
+import * as React from 'react';
+import { ComponentClass, HTMLAttributes } from 'react';
+import styled from 'styled-components';
 import { Color as ColorType } from '../Status';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { messages } from '../i18n';
+import Color from './color';
 
 // color value, label, background, borderColor
 const palette: [ColorType, string, string][] = [
@@ -33,41 +30,24 @@ interface ColorPaletteProps {
   className?: string;
 }
 
-class ColorPalette extends PureComponent<
-  ColorPaletteProps & InjectedIntlProps,
-  any
-> {
-  render() {
-    const {
-      cols = 7,
-      onClick,
-      selectedColor,
-      className,
-      onHover,
-      intl: { formatMessage },
-    } = this.props;
-    return (
-      <ColorPaletteWrapper
-        className={className}
-        style={{ maxWidth: cols * 32 }}
-      >
-        {palette.map(([colorValue, backgroundColor, borderColor]) => {
-          return (
-            <Color
-              key={colorValue}
-              value={colorValue}
-              backgroundColor={backgroundColor}
-              borderColor={borderColor}
-              label={formatMessage(messages[`${colorValue}Color`])}
-              onClick={onClick}
-              onHover={onHover}
-              isSelected={colorValue === selectedColor}
-            />
-          );
-        })}
-      </ColorPaletteWrapper>
-    );
-  }
-}
-
-export default injectIntl(ColorPalette);
+export default ({
+  cols = 7,
+  onClick,
+  selectedColor,
+  className,
+  onHover,
+}: ColorPaletteProps) => (
+  <ColorPaletteWrapper className={className} style={{ maxWidth: cols * 32 }}>
+    {palette.map(([colorValue, backgroundColor, borderColor]) => (
+      <Color
+        key={colorValue}
+        value={colorValue}
+        backgroundColor={backgroundColor}
+        borderColor={borderColor}
+        onClick={onClick}
+        onHover={onHover}
+        isSelected={colorValue === selectedColor}
+      />
+    ))}
+  </ColorPaletteWrapper>
+);
