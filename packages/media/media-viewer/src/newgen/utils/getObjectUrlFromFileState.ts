@@ -1,6 +1,5 @@
 import { FileState } from '@atlaskit/media-core';
 
-// TODO: add test
 export const getObjectUrlFromFileState = (
   state: FileState,
 ): string | undefined => {
