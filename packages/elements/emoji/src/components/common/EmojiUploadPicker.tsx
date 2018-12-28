@@ -271,6 +271,14 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
     }
   };
 
+  clearUploadPicker = () => {
+    this.setState({
+      name: undefined,
+      previewImage: undefined,
+      uploadStatus: UploadStatus.Waiting,
+    });
+  };
+
   render() {
     const { errorMessage, onUploadCancelled } = this.props;
     const {
@@ -281,10 +289,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
     } = this.state;
 
     const cancelUpload = () => {
-      this.setState({
-        name: undefined,
-        previewImage: undefined,
-      });
+      this.clearUploadPicker();
       onUploadCancelled();
     };
 

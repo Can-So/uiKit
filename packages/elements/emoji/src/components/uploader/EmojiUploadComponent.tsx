@@ -29,7 +29,6 @@ export interface State {
   toneEmoji?: OptionalEmojiDescriptionWithVariations;
   uploadErrorMessage?: string;
   uploadSupported: boolean;
-  uploading: boolean;
   // the picker is considered loaded when at least 1 set of emojis have loaded
   loading: boolean;
   showUploadButton: boolean;
@@ -39,6 +38,8 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
   static childContextTypes = {
     emoji: PropTypes.object,
   };
+
+  private emojiUploadPicker;
 
   constructor(props: Props) {
     super(props);
@@ -51,7 +52,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     this.state = {
       loading: true,
       uploadSupported: false,
-      uploading: true,
       showUploadButton: true,
     };
 
@@ -70,7 +70,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
 
   componentWillMount() {
     this.openTime = Date.now();
-    // this.fireAnalytics('open');
   }
 
   componentDidMount() {
@@ -78,10 +77,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     if (supportsUploadFeature(emojiProvider)) {
       emojiProvider.isUploadSupported().then(this.onUploadSupported);
     }
-  }
-
-  componentWillUnmount() {
-    // this.fireAnalytics('close');
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -126,9 +121,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
       emojiProvider
         .uploadCustomEmoji(upload)
         .then(() => {
-          this.setState({
-            uploading: false,
-          });
           this.fireAnalytics('upload.successful', {
             duration: this.calculateElapsedTime(),
           });
@@ -147,7 +139,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
 
   private onUploadCancelled = () => {
     this.setState({
-      uploading: false,
       uploadErrorMessage: undefined,
     });
     this.fireAnalytics('upload.cancel');
@@ -168,33 +159,32 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
 
     this.setState({
       uploadErrorMessage: undefined,
-      uploading: true,
     });
+
+    if (this.emojiUploadPicker) {
+      this.emojiUploadPicker.clearUploadPicker();
+    }
   };
 
   private getFooter = () => {
-    const { uploadErrorMessage, uploading } = this.state;
+    const { uploadErrorMessage } = this.state;
 
     const previewFooterClassnames = classNames([styles.emojiPickerFooter]);
 
-    const myUploadEmoji = (emoji: EmojiUpload) => {
-      this.onUploadEmoji(emoji);
-      this.primeUpload();
-    };
-
-    if (uploading) {
-      return (
-        <div className={previewFooterClassnames}>
-          <EmojiUploadPicker
-            onUploadCancelled={this.onUploadCancelled}
-            onUploadEmoji={myUploadEmoji}
-            onFileChosen={this.onFileChosen}
-            errorMessage={uploadErrorMessage}
-            initialUploadName=""
-          />
-        </div>
-      );
-    }
+    return (
+      <div className={previewFooterClassnames}>
+        <EmojiUploadPicker
+          ref={emojiUploadPicker => {
+            this.emojiUploadPicker = emojiUploadPicker;
+          }}
+          onUploadCancelled={this.onUploadCancelled}
+          onUploadEmoji={this.onUploadEmoji}
+          onFileChosen={this.onFileChosen}
+          errorMessage={uploadErrorMessage}
+          initialUploadName=""
+        />
+      </div>
+    );
   };
 
   render() {
