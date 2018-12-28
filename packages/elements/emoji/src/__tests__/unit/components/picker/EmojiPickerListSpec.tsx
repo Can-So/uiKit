@@ -1,27 +1,26 @@
+import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
+import { expect } from 'chai';
 import { ReactWrapper } from 'enzyme';
 import { mountWithIntl } from 'enzyme-react-intl';
 import * as React from 'react';
-import { expect } from 'chai';
-
 import { List as VirtualList } from 'react-virtualized/dist/commonjs/List';
-import * as styles from '../../../../components/picker/styles';
-import EmojiPickerList from '../../../../components/picker/EmojiPickerList';
-import EmojiPickerCategoryHeading from '../../../../components/picker/EmojiPickerCategoryHeading';
-import {
-  imageEmoji,
-  siteEmojiFoo,
-  siteEmojiWtf,
-  emojis as allEmojis,
-  onRowsRenderedArgs,
-  atlassianEmojis,
-} from '../../_test-data';
-import { EmojiDescription } from '../../../../types';
-import { deleteEmojiLabel } from '../../../../constants';
 import {
   CachingEmoji,
   CachingEmojiProps,
 } from '../../../../components/common/CachingEmoji';
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
+import EmojiPickerCategoryHeading from '../../../../components/picker/EmojiPickerCategoryHeading';
+import EmojiPickerList from '../../../../components/picker/EmojiPickerList';
+import * as styles from '../../../../components/picker/styles';
+import { deleteEmojiLabel } from '../../../../constants';
+import { EmojiDescription } from '../../../../types';
+import {
+  atlassianEmojis,
+  emojis as allEmojis,
+  imageEmoji,
+  onRowsRenderedArgs,
+  siteEmojiFoo,
+  siteEmojiWtf,
+} from '../../_test-data';
 
 const emojis = [imageEmoji];
 const customEmojis: EmojiDescription[] = [siteEmojiFoo, siteEmojiWtf];
@@ -139,8 +138,12 @@ describe('<EmojiPickerList />', () => {
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
       expect(categoryHeadings.length).to.equal(2);
-      expect(categoryHeadings.get(0).props.title).to.equal('Your uploads');
-      expect(categoryHeadings.get(1).props.title).to.equal('All uploads');
+      expect(categoryHeadings.get(0).props.title).to.equal(
+        'userUploadsCustomCategory',
+      );
+      expect(categoryHeadings.get(1).props.title).to.equal(
+        'allUploadsCustomCategory',
+      );
 
       const cachedEmojis = wrapper.find(CachingEmoji);
 
@@ -158,7 +161,9 @@ describe('<EmojiPickerList />', () => {
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
       expect(categoryHeadings.length).to.equal(1);
-      expect(categoryHeadings.get(0).props.title).to.equal('All uploads');
+      expect(categoryHeadings.get(0).props.title).to.equal(
+        'allUploadsCustomCategory',
+      );
 
       const cachedEmojis = wrapper.find(CachingEmoji);
 
@@ -172,7 +177,9 @@ describe('<EmojiPickerList />', () => {
 
       const categoryHeadings = wrapper.find(EmojiPickerCategoryHeading);
       expect(categoryHeadings.length).to.equal(1);
-      expect(categoryHeadings.get(0).props.title).to.equal('All uploads');
+      expect(categoryHeadings.get(0).props.title).to.equal(
+        'allUploadsCustomCategory',
+      );
 
       const cachedEmojis = wrapper.find(CachingEmoji);
 

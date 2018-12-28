@@ -1,9 +1,8 @@
-import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import { PureComponent } from 'react';
 import * as classNames from 'classnames';
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import { PureComponent } from 'react';
 import { List as VirtualList } from 'react-virtualized/dist/commonjs/List';
-
 import { customCategory, userCustomTitle } from '../../constants';
 import {
   EmojiDescription,
@@ -13,17 +12,6 @@ import {
   ToneSelection,
   User,
 } from '../../types';
-import { sizes } from './EmojiPickerSizes';
-import {
-  CategoryHeadingItem,
-  EmojisRowItem,
-  LoadingItem,
-  SearchItem,
-  virtualItemRenderer,
-  VirtualItem,
-} from './EmojiPickerVirtualItems';
-import * as Items from './EmojiPickerVirtualItems';
-import * as styles from './styles';
 import { EmojiContext } from '../common/internal-types';
 import {
   CategoryDescriptionMap,
@@ -31,8 +19,17 @@ import {
   CategoryId,
 } from './categories';
 import CategoryTracker from './CategoryTracker';
-import { messages } from '../i18n';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { sizes } from './EmojiPickerSizes';
+import * as Items from './EmojiPickerVirtualItems';
+import {
+  CategoryHeadingItem,
+  EmojisRowItem,
+  LoadingItem,
+  SearchItem,
+  VirtualItem,
+  virtualItemRenderer,
+} from './EmojiPickerVirtualItems';
+import * as styles from './styles';
 
 const categoryClassname = 'emoji-category';
 
@@ -76,8 +73,8 @@ type Orderable = {
 const byOrder = (orderableA: Orderable, orderableB: Orderable) =>
   (orderableA.order || 0) - (orderableB.order || 0);
 
-class EmojiPickerVirtualList extends PureComponent<
-  Props & InjectedIntlProps,
+export default class EmojiPickerVirtualList extends PureComponent<
+  Props,
   State
 > {
   static contextTypes = {
@@ -119,7 +116,7 @@ class EmojiPickerVirtualList extends PureComponent<
     };
   }
 
-  componentWillUpdate(nextProps: Props & InjectedIntlProps, nextState: State) {
+  componentWillUpdate(nextProps: Props, nextState: State) {
     if (
       this.props.emojis !== nextProps.emojis ||
       this.props.selectedTone !== nextProps.selectedTone ||
@@ -197,16 +194,8 @@ class EmojiPickerVirtualList extends PureComponent<
     return items;
   };
 
-  private buildVirtualItems = (
-    props: Props & InjectedIntlProps,
-    state: State,
-  ): void => {
-    const {
-      emojis,
-      loading,
-      query,
-      intl: { formatMessage },
-    } = props;
+  private buildVirtualItems = (props: Props, state: State): void => {
+    const { emojis, loading, query } = props;
 
     let items: Items.VirtualItem<any>[] = [];
 
@@ -229,7 +218,7 @@ class EmojiPickerVirtualList extends PureComponent<
           ...items,
           ...this.buildVirtualItemFromGroup({
             category: 'SEARCH',
-            title: formatMessage(messages[search.name]),
+            title: search.name,
             emojis,
             order: search.order,
           }),
@@ -274,15 +263,11 @@ class EmojiPickerVirtualList extends PureComponent<
     emoji: EmojiDescription,
     category: CategoryGroupKey,
   ): CategoryKeyToGroup => {
-    const {
-      intl: { formatMessage },
-    } = this.props;
-
     if (!categoryToGroupMap[category]) {
       const categoryDefinition = CategoryDescriptionMap[category];
       categoryToGroupMap[category] = {
         emojis: [],
-        title: formatMessage(messages[categoryDefinition.name]),
+        title: categoryDefinition.name,
         category,
         order: categoryDefinition.order,
       };
@@ -402,5 +387,3 @@ class EmojiPickerVirtualList extends PureComponent<
     );
   }
 }
-
-export default injectIntl(EmojiPickerVirtualList);

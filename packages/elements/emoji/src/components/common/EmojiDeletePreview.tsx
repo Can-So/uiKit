@@ -1,14 +1,13 @@
+import AkButton from '@atlaskit/button';
 import * as React from 'react';
 import { Component } from 'react';
-import EmojiErrorMessage from './EmojiErrorMessage';
-import AkButton from '@atlaskit/button';
-
+import { FormattedMessage } from 'react-intl';
 import { EmojiDescription } from '../../types';
-import * as styles from './styles';
-import CachingEmoji from './CachingEmoji';
-import RetryableButton from './RetryableButton';
 import { messages } from '../i18n';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import CachingEmoji from './CachingEmoji';
+import EmojiErrorMessage from './EmojiErrorMessage';
+import RetryableButton from './RetryableButton';
+import * as styles from './styles';
 
 export interface OnDeleteEmoji {
   (emoji: EmojiDescription): Promise<boolean>;
@@ -26,7 +25,7 @@ export interface State {
   error: boolean;
 }
 
-class EmojiDeletePreview extends Component<Props & InjectedIntlProps, State> {
+export default class EmojiDeletePreview extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,10 +61,7 @@ class EmojiDeletePreview extends Component<Props & InjectedIntlProps, State> {
   };
 
   render() {
-    const {
-      emoji,
-      intl: { formatMessage },
-    } = this.props;
+    const { emoji } = this.props;
     const { loading, error } = this.state;
 
     return (
@@ -76,27 +72,35 @@ class EmojiDeletePreview extends Component<Props & InjectedIntlProps, State> {
           </h5>
           <FormattedMessage
             {...messages.deleteEmojiDescription}
-            values={{ 0: emoji.shortName }}
+            values={{ emojiShortName: emoji.shortName }}
           />
         </div>
         <div className={styles.deleteFooter}>
           <CachingEmoji emoji={emoji} />
           <div className={styles.previewButtonGroup}>
             {error ? (
-              <EmojiErrorMessage
-                message={formatMessage(messages.deleteEmojiFailed)}
-                className={styles.emojiDeleteErrorMessage}
-              />
+              <FormattedMessage {...messages.deleteEmojiFailed}>
+                {message => (
+                  <EmojiErrorMessage
+                    message={message as string}
+                    className={styles.emojiDeleteErrorMessage}
+                  />
+                )}
+              </FormattedMessage>
             ) : null}
-            <RetryableButton
-              className={styles.submitDelete}
-              retryClassName={styles.submitDelete}
-              label={formatMessage(messages.deleteEmojiLabel)}
-              onSubmit={this.onSubmit}
-              appearance="danger"
-              loading={loading}
-              error={error}
-            />
+            <FormattedMessage {...messages.deleteEmojiLabel}>
+              {message => (
+                <RetryableButton
+                  className={styles.submitDelete}
+                  retryClassName={styles.submitDelete}
+                  label={message as string}
+                  onSubmit={this.onSubmit}
+                  appearance="danger"
+                  loading={loading}
+                  error={error}
+                />
+              )}
+            </FormattedMessage>
             <AkButton appearance="subtle" onClick={this.onCancel}>
               <FormattedMessage {...messages.cancelLabel} />
             </AkButton>
@@ -106,5 +110,3 @@ class EmojiDeletePreview extends Component<Props & InjectedIntlProps, State> {
     );
   }
 }
-
-export default injectIntl(EmojiDeletePreview);

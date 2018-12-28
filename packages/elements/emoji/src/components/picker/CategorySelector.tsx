@@ -1,14 +1,12 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';
-import * as classNames from 'classnames';
-
-import * as styles from './styles';
-import { CategoryDescription, OnCategory } from '../../types';
+import { FormattedMessage } from 'react-intl';
 import { defaultCategories } from '../../constants';
-
-import { CategoryDescriptionMap, CategoryId } from './categories';
+import { CategoryDescription, OnCategory } from '../../types';
 import { messages } from '../i18n';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { CategoryDescriptionMap, CategoryId } from './categories';
+import * as styles from './styles';
 
 export interface Props {
   dynamicCategories?: CategoryId[];
@@ -42,13 +40,13 @@ const addNewCategories = (
     .sort(sortCategories);
 };
 
-class CategorySelector extends PureComponent<Props & InjectedIntlProps, State> {
+export default class CategorySelector extends PureComponent<Props, State> {
   static defaultProps = {
     onCategorySelected: () => {},
     dynamicCategories: [],
   };
 
-  constructor(props: Props & InjectedIntlProps) {
+  constructor(props: Props) {
     super(props);
     const { dynamicCategories } = props;
 
@@ -80,10 +78,7 @@ class CategorySelector extends PureComponent<Props & InjectedIntlProps, State> {
   }
 
   render() {
-    const {
-      disableCategories,
-      intl: { formatMessage },
-    } = this.props;
+    const { disableCategories } = this.props;
     const { categories } = this.state;
     let categoriesSection;
     if (categories) {
@@ -109,16 +104,20 @@ class CategorySelector extends PureComponent<Props & InjectedIntlProps, State> {
 
             // tslint:disable-next-line:variable-name
             const Icon = category.icon;
-            const categoryName = formatMessage(messages[category.name]);
             return (
               <li key={category.id}>
-                <button
-                  className={classNames(categoryClasses)}
-                  onClick={onClick}
-                  title={categoryName}
-                >
-                  <Icon label={categoryName} />
-                </button>
+                <FormattedMessage {...messages[category.name]}>
+                  {(categoryName: string) => (
+                    <button
+                      data-category-id={category.id}
+                      className={classNames(categoryClasses)}
+                      onClick={onClick}
+                      title={categoryName}
+                    >
+                      <Icon label={categoryName} />
+                    </button>
+                  )}
+                </FormattedMessage>
               </li>
             );
           })}
@@ -132,5 +131,3 @@ class CategorySelector extends PureComponent<Props & InjectedIntlProps, State> {
     );
   }
 }
-
-export default injectIntl(CategorySelector);

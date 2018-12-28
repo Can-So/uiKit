@@ -1,13 +1,14 @@
+import ErrorIcon from '@atlaskit/icon/glyph/error';
 import * as React from 'react';
 import { PureComponent } from 'react';
-import ErrorIcon from '@atlaskit/icon/glyph/error';
+import { Message } from '../../types';
 
 export interface Props {
-  message: string;
+  message: Message;
   className: string;
 }
 
-export default class EmojiErrorMessage extends PureComponent<Props, {}> {
+export default class EmojiErrorMessage extends PureComponent<Props> {
   render() {
     return (
       <div className={this.props.className}>

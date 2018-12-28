@@ -1,12 +1,11 @@
-import * as React from 'react';
-import { PureComponent } from 'react';
 import AkFieldBase from '@atlaskit/field-base';
 import SearchIcon from '@atlaskit/icon/glyph/search';
-
-import * as styles from './styles';
+import * as React from 'react';
+import { PureComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Styles } from '../../types';
 import { messages } from '../i18n';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import * as styles from './styles';
 
 export interface Props {
   style?: Styles;
@@ -20,7 +19,7 @@ interface InputSelection {
   selectionDirection?: string;
 }
 
-class EmojiPickerListSearch extends PureComponent<Props & InjectedIntlProps> {
+export default class EmojiPickerListSearch extends PureComponent<Props> {
   static defaultProps = {
     style: {},
   };
@@ -100,40 +99,37 @@ class EmojiPickerListSearch extends PureComponent<Props & InjectedIntlProps> {
   };
 
   render() {
-    const {
-      style,
-      query,
-      intl: { formatMessage },
-    } = this.props;
+    const { style, query } = this.props;
 
     return (
       <div className={styles.pickerSearch} style={style}>
-        <AkFieldBase
-          appearance="standard"
-          label={formatMessage(messages.searchLabel)}
-          isCompact={true}
-          isLabelHidden={true}
-          isFitContainerWidthEnabled={true}
-        >
-          <span className={styles.searchIcon}>
-            <SearchIcon label={formatMessage(messages.searchLabel)} />
-          </span>
-          <input
-            className={styles.input}
-            autoComplete="off"
-            disabled={false}
-            name="search"
-            placeholder={`${formatMessage(messages.searchLabel)}...`}
-            required={false}
-            onChange={this.onChange}
-            value={query || ''}
-            ref={this.handleInputRef}
-            onBlur={this.onBlur}
-          />
-        </AkFieldBase>
+        <FormattedMessage {...messages.searchLabel}>
+          {searchLabel => (
+            <AkFieldBase
+              appearance="standard"
+              isCompact={true}
+              isLabelHidden={true}
+              isFitContainerWidthEnabled={true}
+            >
+              <span className={styles.searchIcon}>
+                <SearchIcon label={searchLabel as string} />
+              </span>
+              <input
+                className={styles.input}
+                autoComplete="off"
+                disabled={false}
+                name="search"
+                placeholder={`${searchLabel as string}...`}
+                required={false}
+                onChange={this.onChange}
+                value={query || ''}
+                ref={this.handleInputRef}
+                onBlur={this.onBlur}
+              />
+            </AkFieldBase>
+          )}
+        </FormattedMessage>
       </div>
     );
   }
 }
-
-export default injectIntl(EmojiPickerListSearch);
