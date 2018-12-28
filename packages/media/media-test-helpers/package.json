@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/media-test-helpers",
-  "version": "18.7.2",
+  "version": "18.7.3",
   "description": "Collection of test helpers used in media component stories and specs",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",

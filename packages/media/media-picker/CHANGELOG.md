@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 27.0.3
+- [patch] [b677631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b677631):
+
+  - Add new example and ensure occurrenceKey is set for all copy/withToken calls
+
 ## 27.0.2
 - Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
   - @atlaskit/media-core@24.7.2
