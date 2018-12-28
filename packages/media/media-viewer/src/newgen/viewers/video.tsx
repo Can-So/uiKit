@@ -29,9 +29,11 @@ const hdArtifact = 'video_1280.mp4';
 
 export class VideoViewer extends BaseViewer<string, Props, State> {
   protected get initialState() {
+    const { item } = this.props;
+
     return {
       content: Outcome.pending<string, MediaViewerError>(),
-      isHDActive: false,
+      isHDActive: isHDAvailable(item),
     };
   }
 
