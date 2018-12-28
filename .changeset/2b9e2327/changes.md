@@ -1,0 +1,1 @@
+- FS-1230 New standalone emoji upload component added
