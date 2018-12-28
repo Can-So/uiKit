@@ -7,7 +7,7 @@ import LoadingEmojiComponent, {
   State as LoadingState,
 } from '../common/LoadingEmojiComponent';
 import {
-  PickerRefHandler,
+  UploadRefHandler,
   Props as ComponentProps,
 } from './EmojiUploadComponent';
 import { LoadingItem } from '../picker/EmojiPickerVirtualItems';
@@ -21,7 +21,7 @@ const emojiUploadLoader: () => Promise<ComponentClass<ComponentProps>> = () =>
   emojiUploadModuleLoader().then(module => module.default);
 
 export interface Props extends LoadingProps {
-  onPickerRef?: PickerRefHandler;
+  onPickerRef?: UploadRefHandler;
   firePrivateAnalyticsEvent?: FireAnalyticsEvent;
 }
 
@@ -49,13 +49,13 @@ export class EmojiUploaderInternal extends LoadingEmojiComponent<
 
   renderLoading(): JSX.Element | null {
     const item = new LoadingItem();
-    const handlePickerRef = (ref: any) => {
+    const handleUploadRef = (ref: any) => {
       if (this.props.onPickerRef) {
         this.props.onPickerRef(ref);
       }
     };
     return (
-      <div className={styles.emojiUploadWidget} ref={handlePickerRef}>
+      <div className={styles.emojiUploadWidget} ref={handleUploadRef}>
         {item.renderItem()}
       </div>
     );
@@ -63,11 +63,11 @@ export class EmojiUploaderInternal extends LoadingEmojiComponent<
 
   renderLoaded(
     loadedEmojiProvider: EmojiProvider,
-    EmojiPickerComponent: ComponentClass<ComponentProps>,
+    EmojiUploaderComponent: ComponentClass<ComponentProps>,
   ) {
     const { emojiProvider, ...otherProps } = this.props;
     return (
-      <EmojiPickerComponent
+      <EmojiUploaderComponent
         emojiProvider={loadedEmojiProvider}
         {...otherProps}
       />

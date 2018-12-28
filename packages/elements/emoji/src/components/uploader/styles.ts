@@ -19,6 +19,6 @@ export const emojiUploadWidget = style({
 });
 
 /// Footer
-export const emojiPickerFooter = style({
+export const emojiUploadFooter = style({
   flex: '0 0 auto',
 });

@@ -14,13 +14,13 @@ import { EmojiProvider, supportsUploadFeature } from '../../api/EmojiResource';
 import { FireAnalyticsEvent } from '@atlaskit/analytics';
 import EmojiUploadPicker from '../common/EmojiUploadPicker';
 
-export interface PickerRefHandler {
+export interface UploadRefHandler {
   (ref: any): any;
 }
 
 export interface Props {
   emojiProvider: EmojiProvider;
-  onPickerRef?: PickerRefHandler;
+  onUploadRef?: UploadRefHandler;
   firePrivateAnalyticsEvent?: FireAnalyticsEvent;
 }
 
@@ -28,8 +28,6 @@ export interface State {
   toneEmoji?: OptionalEmojiDescriptionWithVariations;
   uploadErrorMessage?: string;
   uploadSupported: boolean;
-  // the picker is considered loaded when at least 1 set of emojis have loaded
-  loading: boolean;
   showUploadButton: boolean;
 }
 
@@ -49,7 +47,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     }
 
     this.state = {
-      loading: true,
       uploadSupported: false,
       showUploadButton: true,
     };
@@ -124,9 +121,9 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     this.primeUpload();
   };
 
-  private handlePickerRef = (ref: any) => {
-    if (this.props.onPickerRef) {
-      this.props.onPickerRef(ref);
+  private handleUploadRef = (ref: any) => {
+    if (this.props.onUploadRef) {
+      this.props.onUploadRef(ref);
     }
   };
 
@@ -148,7 +145,7 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
   private getFooter = () => {
     const { uploadErrorMessage } = this.state;
 
-    const previewFooterClassnames = classNames([styles.emojiPickerFooter]);
+    const previewFooterClassnames = classNames([styles.emojiUploadFooter]);
 
     return (
       <div className={previewFooterClassnames}>
@@ -172,7 +169,7 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     return (
       <div
         className={classNames(classes)}
-        ref={this.handlePickerRef}
+        ref={this.handleUploadRef}
         data-emoji-picker-container
       >
         {this.getFooter()}
