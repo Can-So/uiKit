@@ -4,7 +4,7 @@ import * as fetchMock from 'fetch-mock';
 import { Client, RemoteResourceAuthConfig, ResolveResponse } from '../..';
 import { ObjectState, GetNowTimeFn, DefinedState } from '../../types';
 import { v4 } from 'uuid';
-import { resolvedEvent } from '../../analytics';
+import { resolvedEvent, unresolvedEvent } from '../../analytics';
 
 const getNow = (nows: number[]): GetNowTimeFn => () =>
   nows.shift() || new Date().getTime();
@@ -539,7 +539,7 @@ describe('Client', () => {
   });
 
   describe('Analytics', () => {
-    it('should fire the provided analytics event handler', done => {
+    it('should accept a callback to handle an analytics event', done => {
       mockResolvedFetchCall();
       const client = new Client();
       const mockedHandler = jest.fn().mockImplementation(() => {
@@ -550,10 +550,24 @@ describe('Client', () => {
       client.resolve('some.url', mockedHandler);
     });
 
-    it('should fire a proper analytics event handler', done => {
+    it('should fire a resolved event when a url gets resolved', done => {
       mockResolvedFetchCall();
       const client = new Client();
       const expectedEvent = resolvedEvent('some.url');
+      const mockedHandler = jest.fn().mockImplementation(() => {
+        expect(mockedHandler).toBeCalledWith(expectedEvent);
+        done();
+      });
+      client.register('some.url');
+      client.resolve('some.url', mockedHandler);
+    });
+
+    it('should fire an unresolved analytics event otherwise', done => {
+      mockNotFoundFetchCall();
+      const client = new Client();
+      const expectedEvent = unresolvedEvent('some.url', {
+        status: 'not-found',
+      });
       const mockedHandler = jest.fn().mockImplementation(() => {
         expect(mockedHandler).toBeCalledWith(expectedEvent);
         done();

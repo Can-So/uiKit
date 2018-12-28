@@ -20,7 +20,7 @@ import {
 import { Store } from './store';
 import { StateWatch } from './stateWatcher';
 import { F1 } from './utils';
-import { resolvedEvent } from './analytics';
+import { resolvedEvent, unresolvedEvent } from './analytics';
 import { GasPayload } from '@atlaskit/analytics-gas-types';
 
 // TODO: add some form of caching so that urls not currently loaded will still be fast
@@ -219,6 +219,8 @@ export class Client implements Client {
         if (handleAnalyticsCallback) {
           if (state.status === 'resolved') {
             handleAnalyticsCallback(resolvedEvent(url));
+          } else {
+            handleAnalyticsCallback(unresolvedEvent(url, state));
           }
         }
 
