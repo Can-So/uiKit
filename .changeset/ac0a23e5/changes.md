@@ -1,1 +1,0 @@
-- Add panel type to fix copy-paste
