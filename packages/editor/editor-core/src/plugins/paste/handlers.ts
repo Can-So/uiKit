@@ -10,11 +10,14 @@ import { runMacroAutoConvert } from '../macro';
 import { closeHistory } from 'prosemirror-history';
 import {
   applyTextMarksToSlice,
-  extractSingleTextNodeFromSlice,
   getPasteSource,
   hasOnlyNodesOfType,
 } from './util';
 import { queueCardsFromChangedTr } from '../card/pm-plugins/doc';
+import {
+  pluginKey as textFormattingPluginKey,
+  TextFormattingState,
+} from '../text-formatting/pm-plugins/main';
 import { compose } from '../../utils';
 
 export function handlePasteIntoTaskAndDecision(
@@ -22,69 +25,57 @@ export function handlePasteIntoTaskAndDecision(
 ): (state: EditorState, dispatch) => boolean {
   return (state: EditorState, dispatch): boolean => {
     const {
-      schema: {
-        nodes: {
-          decisionItem,
-          decisionList,
-          emoji,
-          hardBreak,
-          paragraph,
-          taskList,
-          taskItem,
-          text,
-        },
-      },
+      schema,
+      tr: { selection },
     } = state;
 
+    const {
+      marks: { code: codeMark },
+      nodes: {
+        decisionItem,
+        decisionList,
+        emoji,
+        hardBreak,
+        mention,
+        paragraph,
+        taskList,
+        taskItem,
+        text,
+      },
+    } = schema;
+
     if (
-      (!decisionItem && !decisionList && !taskList && !taskItem) ||
+      !decisionItem ||
+      !decisionList ||
+      !taskList ||
+      !taskItem ||
       !hasParentNodeOfType([decisionItem, taskItem])(state.selection)
     ) {
       return false;
     }
 
-    const { schema } = state;
-
-    let transformedSlice = compose(
+    const filters: Array<(slice: Slice) => Slice> = [
       linkifyContent(schema),
       taskDecisionSliceFilter(schema),
-    )(slice);
+    ];
 
-    const singleTextNode = extractSingleTextNodeFromSlice(transformedSlice);
+    const selectionMarks = selection.$head.marks();
 
-    // if single text node containing no link => inherit container marks
+    const textFormattingState: TextFormattingState = textFormattingPluginKey.getState(
+      state,
+    );
+
     if (
-      singleTextNode &&
-      (!singleTextNode.marks ||
-        !singleTextNode.marks.some(mark => mark.type === schema.marks.link))
+      selection instanceof TextSelection &&
+      Array.isArray(selectionMarks) &&
+      selectionMarks.length > 0 &&
+      hasOnlyNodesOfType(paragraph, text, emoji, mention, hardBreak)(slice) &&
+      (!codeMark.isInSet(selectionMarks) || textFormattingState.codeActive) // for codeMarks let's make sure mark is active
     ) {
-      const tr = closeHistory(state.tr)
-        .replaceSelectionWith(singleTextNode, true)
-        .scrollIntoView();
-      dispatch(tr);
-      return true;
+      filters.push(applyTextMarksToSlice(schema, selection.$head.marks()));
     }
 
-    // if list of paragraphs and selection contains marks => apply selection marks
-    if (state.tr.selection instanceof TextSelection) {
-      const selectionMarks = state.tr.selection.$cursor
-        ? state.tr.selection.$cursor.marks()
-        : state.tr.selection.$head
-        ? state.tr.selection.$head.marks()
-        : [];
-
-      if (
-        Array.isArray(selectionMarks) &&
-        selectionMarks.length > 0 &&
-        hasOnlyNodesOfType(paragraph, text, emoji, hardBreak)(slice)
-      ) {
-        transformedSlice = compose(
-          linkifyContent(schema),
-          taskDecisionSliceFilter(schema),
-          applyTextMarksToSlice(schema, selectionMarks),
-        )(slice);
-      }
-    }
+    const transformedSlice = compose.apply(null, filters)(slice);
 
     const tr = closeHistory(state.tr)
       .replaceSelection(transformedSlice)
@@ -131,35 +122,59 @@ export function handlePastePreservingMarks(
   slice: Slice,
 ): (state: EditorState, dispatch) => boolean {
   return (state: EditorState, dispatch): boolean => {
-    const { schema, tr } = state;
     const {
-      nodes: { emoji, hardBreak, paragraph, text },
+      schema,
+      tr: { selection },
+    } = state;
+
+    const {
+      marks: { code: codeMark, link: linkMark },
+      nodes: {
+        bulletList,
+        emoji,
+        hardBreak,
+        heading,
+        listItem,
+        mention,
+        orderedList,
+        paragraph,
+        text,
+      },
     } = schema;
 
-    if (!(tr.selection instanceof TextSelection)) {
+    if (!(selection instanceof TextSelection)) {
       return false;
     }
 
-    const selectionMarks = tr.selection.$cursor
-      ? tr.selection.$cursor.marks()
-      : tr.selection.$head
-      ? tr.selection.$head.marks()
-      : [];
-
-    if (!Array.isArray(selectionMarks) || selectionMarks.length === 0) {
+    const selectionMarks = selection.$head.marks();
+    if (selectionMarks.length === 0) {
       return false;
     }
 
-    // if single text node containing no link => inherit container marks
-    const singleTextNode = extractSingleTextNodeFromSlice(slice);
+    const textFormattingState: TextFormattingState = textFormattingPluginKey.getState(
+      state,
+    );
 
+    // special case for codeMark: will preserve mark only if codeMark is currently active
+    // won't preserve mark if cursor is on the edge on the mark (namely inactive)
+    if (codeMark.isInSet(selectionMarks) && !textFormattingState.codeActive) {
+      return false;
+    }
+
+    const isPlainTextSlice =
+      slice.content.childCount === 1 &&
+      slice.content.firstChild!.type === paragraph &&
+      slice.content.firstChild!.content.childCount === 1 &&
+      slice.content.firstChild!.firstChild!.type === text;
+
+    // special case for plainTextSlice & linkMark: merge into existing link
     if (
-      singleTextNode &&
-      (!singleTextNode.marks ||
-        !singleTextNode.marks.some(mark => mark.type === schema.marks.link))
+      isPlainTextSlice &&
+      linkMark.isInSet(selectionMarks) &&
+      selectionMarks.length === 1
     ) {
       const tr = closeHistory(state.tr)
-        .replaceSelectionWith(singleTextNode, true)
+        .replaceSelectionWith(slice.content.firstChild!.firstChild!, true)
         .setStoredMarks(selectionMarks)
         .scrollIntoView();
 
@@ -168,15 +183,22 @@ export function handlePastePreservingMarks(
       return true;
     }
 
-    // if list of paragraphs and selection contains marks => apply selection marks
-    if (hasOnlyNodesOfType(paragraph, text, emoji, hardBreak)(slice)) {
+    if (
+      hasOnlyNodesOfType(
+        bulletList,
+        hardBreak,
+        heading,
+        listItem,
+        paragraph,
+        text,
+        emoji,
+        mention,
+        orderedList,
+      )(slice)
+    ) {
       const transformedSlice = applyTextMarksToSlice(schema, selectionMarks)(
         slice,
       );
-
-      if (!transformedSlice) {
-        return false;
-      }
 
       const tr = closeHistory(state.tr)
         .replaceSelection(transformedSlice)

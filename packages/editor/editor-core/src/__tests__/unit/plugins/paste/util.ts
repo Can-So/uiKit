@@ -1,6 +1,5 @@
 import { Slice } from 'prosemirror-model';
 import {
-  blockquote,
   defaultSchema,
   doc,
   em,
@@ -12,7 +11,6 @@ import {
 import { toJSON } from '../../../../utils';
 import {
   applyTextMarksToSlice,
-  extractSingleTextNodeFromSlice,
   hasOnlyNodesOfType,
   isSingleLine,
 } from '../../../../plugins/paste/util';
@@ -28,96 +26,7 @@ describe('paste util', () => {
     });
   });
 
-  describe('extractSingleTextNodeFromSlice()', () => {
-    it('should return nothing for undefined slice', () => {
-      expect(extractSingleTextNodeFromSlice()).toBeFalsy();
-    });
-
-    it('should return nothing for slice with different openStart/openEnd depth', () => {
-      const json = toJSON(p('some text')(defaultSchema));
-      const slice = Slice.fromJSON(defaultSchema, {
-        content: json.content,
-        openStart: 1,
-        openEnd: 2,
-      });
-      const node = extractSingleTextNodeFromSlice(slice);
-
-      expect(node).toBeFalsy();
-    });
-
-    it('should return text node for slice containing single text node', () => {
-      const json = toJSON(p('some text')(defaultSchema));
-      const slice = Slice.fromJSON(defaultSchema, {
-        content: json.content,
-        openStart: 1,
-        openEnd: 1,
-      });
-      const node = extractSingleTextNodeFromSlice(slice);
-
-      expect(node).toBeTruthy();
-      expect(node!.isText).toBeTruthy();
-    });
-
-    it('should return nothing for slice containing multiple text nodes', () => {
-      const json = toJSON(
-        p('some text', strong('another text'))(defaultSchema),
-      );
-      const slice = Slice.fromJSON(defaultSchema, {
-        content: json.content,
-        openStart: 1,
-        openEnd: 1,
-      });
-      const node = extractSingleTextNodeFromSlice(slice);
-
-      expect(node).toBeFalsy();
-    });
-
-    it('should return text node for slice containing single paragraph & text node', () => {
-      const json = toJSON(doc(p('some text'))(defaultSchema));
-      const slice = Slice.fromJSON(defaultSchema, {
-        content: json.content,
-        openStart: 2,
-        openEnd: 2,
-      });
-      const node = extractSingleTextNodeFromSlice(slice);
-
-      expect(node).toBeTruthy();
-      expect(node!.isText).toBeTruthy();
-    });
-
-    it('should return text node for slice containing single blockquote, paragraph & text node', () => {
-      const json = toJSON(doc(blockquote(p('some text')))(defaultSchema));
-      const slice = Slice.fromJSON(defaultSchema, {
-        content: json.content,
-        openStart: 3,
-        openEnd: 3,
-      });
-      const node = extractSingleTextNodeFromSlice(slice);
-
-      expect(node).toBeTruthy();
-      expect(node!.isText).toBeTruthy();
-    });
-
-    it('should return nothing for slice containing multiple parapgraphs', () => {
-      const json = toJSON(
-        doc(p('some text'), p('another text'))(defaultSchema),
-      );
-      const slice = Slice.fromJSON(defaultSchema, {
-        content: json.content,
-        openStart: 2,
-        openEnd: 2,
-      });
-      const node = extractSingleTextNodeFromSlice(slice);
-
-      expect(node).toBeFalsy();
-    });
-  });
-
   describe('hasOnlyNodesOfType()', () => {
-    it('should return true for undefined slice', () => {
-      expect(hasOnlyNodesOfType()).toBeTruthy();
-    });
-
     it('should return true for a slice containing only specified nodes', () => {
       const {
         nodes: { paragraph, text },
@@ -166,10 +75,6 @@ describe('paste util', () => {
       });
 
       expect(applyTextMarksToSlice(defaultSchema, [])(slice)).toEqual(slice);
-    });
-
-    it('should return input slice when undefined', () => {
-      expect(applyTextMarksToSlice(defaultSchema)()).toBeUndefined();
     });
 
     it('should return new slice when marks', () => {

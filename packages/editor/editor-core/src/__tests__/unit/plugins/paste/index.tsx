@@ -28,7 +28,6 @@ import {
   tdCursor,
   hardBreak,
   a,
-  panel,
   MockMacroProvider,
 } from '@atlaskit/editor-test-helpers';
 import { TextSelection } from 'prosemirror-state';
@@ -36,7 +35,6 @@ import mediaPlugin from '../../../../plugins/media';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import extensionPlugin from '../../../../plugins/extension';
 import listPlugin from '../../../../plugins/lists';
-import panelPlugin from '../../../../plugins/panel';
 import tablesPlugin from '../../../../plugins/table';
 import macroPlugin, { setMacroProvider } from '../../../../plugins/macro';
 import { uuid } from '@atlaskit/adf-schema';
@@ -56,7 +54,6 @@ describe('paste plugins', () => {
         panelPlugin,
         tasksAndDecisionsPlugin,
         tablesPlugin(),
-        panelPlugin,
       ],
     });
 
@@ -280,6 +277,54 @@ describe('paste plugins', () => {
         });
         expect(editorView.state.doc).toEqualDocument(
           doc(ol(li(p(strong(em('this is a strong em {<>}text')))))),
+        );
+      });
+
+      it('should preserve marks + link when pasting URL', () => {
+        const href = 'http://www.google.com';
+        const { editorView } = editor(
+          doc(panel()(p(strong(em('this is a {<>}text'))))),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'><a href='http://www.google.com'>www.google.com</a></p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(
+            panel()(
+              p(
+                strong(em('this is a ')),
+                link({ href })(strong(em('www.google.com'))),
+                strong(em('text')),
+              ),
+            ),
+          ),
+        );
+      });
+
+      it('should preserve marks + link when pasting plain text', () => {
+        const href = 'http://www.google.com';
+        const { editorView } = editor(
+          doc(p(link({ href })('www.google{<>}.com'))),
+        );
+        dispatchPasteEvent(editorView, {
+          html: "<meta charset='utf-8'><p data-pm-slice='1 1 []'>doc</p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(p(link({ href })('www.googledoc.com'))),
+        );
+      });
+
+      it('should filter link mark when pasting URL into code mark', () => {
+        const { editorView } = editor(
+          doc(panel()(p(code('code line 1: {<>}')))),
+        );
+        dispatchPasteEvent(editorView, {
+          html:
+            "<meta charset='utf-8'><p data-pm-slice='1 1 []'><a href='http://www.google.com'>www.google.com</a></p>",
+        });
+        expect(editorView.state.doc).toEqualDocument(
+          doc(panel()(p(code('code line 1: www.google.com')))),
         );
       });
     });

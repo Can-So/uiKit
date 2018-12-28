@@ -102,49 +102,16 @@ export function escapeLinks(text) {
   });
 }
 
-export function extractSingleTextNodeFromSlice(
-  slice?: Slice,
-): Node | undefined {
-  if (!slice) {
-    return;
-  }
-
-  // only parse slice if openStart and openEnd have same depth above 0
-  if (slice.openStart !== slice.openEnd || slice.openStart === 0) {
-    return;
-  }
-
-  let node: Node | undefined | null;
-  let hasSingleTextNode = slice.content.childCount === 1;
-
-  while (hasSingleTextNode) {
-    node = !!node ? node.firstChild : slice.content.firstChild;
-
-    hasSingleTextNode =
-      !!node &&
-      !node.isLeaf &&
-      (node.isTextblock || node.isBlock) &&
-      node.childCount === 1;
-  }
-
-  if (node && node.isText) {
-    return node;
-  }
-}
-
 export function hasOnlyNodesOfType(
   ...nodeTypes: NodeType[]
-): (slice: Slice | undefined) => boolean {
-  return (slice: Slice | undefined) => {
+): (slice: Slice) => boolean {
+  return (slice: Slice) => {
     let hasOnlyNodesOfType = true;
-
-    if (!slice) {
-      return true;
-    }
 
     slice.content.descendants((node: Node) => {
       hasOnlyNodesOfType =
         hasOnlyNodesOfType && nodeTypes.indexOf(node.type) > -1;
+
       return hasOnlyNodesOfType;
     });
 
@@ -155,9 +122,13 @@ export function hasOnlyNodesOfType(
 export function applyTextMarksToSlice(
   schema: Schema,
   marks?: Mark<any>[],
-): (slice?: Slice) => Slice | undefined {
-  return (slice?: Slice) => {
-    if (!slice || !Array.isArray(marks) || marks.length === 0) {
+): (slice: Slice) => Slice {
+  return (slice: Slice) => {
+    const {
+      marks: { code: codeMark, link: linkMark },
+    } = schema;
+
+    if (!Array.isArray(marks) || marks.length === 0) {
       return slice;
     }
 
@@ -165,7 +136,15 @@ export function applyTextMarksToSlice(
 
     sliceCopy.content.descendants((node, pos, parent) => {
       if (node.isText && parent && parent.isBlock) {
-        node.marks = marks;
+        node.marks = [
+          ...((node.marks &&
+            !codeMark.isInSet(marks) &&
+            node.marks.filter(mark => mark.type === linkMark)) ||
+            []),
+          ...parent.type
+            .allowedMarks(marks)
+            .filter(mark => mark.type !== linkMark),
+        ];
         return false;
       }
 

@@ -139,6 +139,11 @@ export function createPlugin(
         // If the clipboard only contains plain text, attempt to parse it as Markdown
         if (text && !html && markdownSlice) {
           analyticsService.trackEvent('atlassian.editor.paste.markdown');
+
+          if (handlePastePreservingMarks(markdownSlice)(state, dispatch)) {
+            return true;
+          }
+
           const tr = closeHistory(state.tr);
           tr.replaceSelection(markdownSlice);
 
