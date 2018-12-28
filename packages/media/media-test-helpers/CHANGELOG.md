@@ -1,5 +1,10 @@
 # @atlaskit/media-test-helpers
 
+## 18.8.0
+- [minor] [6bc785d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bc785d):
+
+  - default to HD video if available in video viewer
+
 ## 18.7.3
 - [patch] [b677631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b677631):
 

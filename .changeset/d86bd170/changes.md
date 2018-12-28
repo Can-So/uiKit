@@ -1,1 +1,0 @@
-- default to HD video if available in video viewer
