@@ -4,7 +4,9 @@ import Tooltip from '@atlaskit/tooltip';
 import { emoji } from '@atlaskit/util-data-test';
 import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { reaction } from '../../../client/MockReactionsClient';
+import { messages } from '../../../components/i18n';
 import { Reaction } from '../../../components/Reaction';
 import { ReactionPicker } from '../../../components/ReactionPicker';
 import { Props, Reactions } from '../../../components/Reactions';
@@ -30,7 +32,6 @@ describe('@atlaskit/reactions/reactions', () => {
       />,
     )
       .dive()
-      .dive()
       .dive();
 
   it('should trigger "onReactionClick" when Reaction is clicked', () => {
@@ -47,7 +48,9 @@ describe('@atlaskit/reactions/reactions', () => {
 
   it('should show loading tooltip and disable picker', () => {
     const reactions = renderReactions({ status: ReactionStatus.loading });
-    expect(reactions.find(Tooltip).prop('content')).toEqual('Loading...');
+    expect(reactions.find(Tooltip).prop('content')).toEqual(
+      <FormattedMessage {...messages.loadingReactions} />,
+    );
 
     expect(reactions.find(ReactionPicker).prop('disabled')).toBeTruthy();
   });

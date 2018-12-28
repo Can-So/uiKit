@@ -3,6 +3,7 @@ import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { EmojiProvider } from '@atlaskit/emoji';
 import Tooltip from '@atlaskit/tooltip';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { style } from 'typestyle';
 import {
   createAndFireSafe,
@@ -15,10 +16,9 @@ import {
 import { OnEmoji, OnReaction } from '../types';
 import { ReactionStatus } from '../types/ReactionStatus';
 import { ReactionSummary } from '../types/ReactionSummary';
+import { messages } from './i18n';
 import { Reaction } from './Reaction';
 import { ReactionPicker } from './ReactionPicker';
-import { messages } from './i18n';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 const reactionStyle = style({
   display: 'inline-block',
@@ -56,7 +56,7 @@ export interface Props {
 }
 
 class ReactionsWithoutAnalytics extends React.PureComponent<
-  Props & WithAnalyticsEventProps & InjectedIntlProps
+  Props & WithAnalyticsEventProps
 > {
   static defaultProps = {
     flash: {},
@@ -95,21 +95,19 @@ class ReactionsWithoutAnalytics extends React.PureComponent<
   private isDisabled = (): boolean =>
     this.props.status !== ReactionStatus.ready;
 
-  private getTooltip = (): string | undefined => {
-    const {
-      status,
-      errorMessage,
-      intl: { formatMessage },
-    } = this.props;
+  private getTooltip = (): React.ReactNode | undefined => {
+    const { status, errorMessage } = this.props;
 
     switch (status) {
       case ReactionStatus.error:
-        return errorMessage
-          ? errorMessage
-          : formatMessage(messages.unexpectedError);
+        return errorMessage ? (
+          errorMessage
+        ) : (
+          <FormattedMessage {...messages.unexpectedError} />
+        );
       case ReactionStatus.loading:
       case ReactionStatus.notLoaded:
-        return formatMessage(messages.loadingReactions);
+        return <FormattedMessage {...messages.loadingReactions} />;
       default:
         return undefined;
     }
@@ -205,6 +203,4 @@ class ReactionsWithoutAnalytics extends React.PureComponent<
   }
 }
 
-export const Reactions = withAnalyticsEvents()(
-  injectIntl(ReactionsWithoutAnalytics),
-);
+export const Reactions = withAnalyticsEvents()(ReactionsWithoutAnalytics);
