@@ -26,19 +26,24 @@ export type State = BaseState<string> & {
 
 const sdArtifact = 'video_640.mp4';
 const hdArtifact = 'video_1280.mp4';
+const localStorageKeyName = 'mv_video_player_quality';
 
 export class VideoViewer extends BaseViewer<string, Props, State> {
   protected get initialState() {
     const { item } = this.props;
+    const preferedQuality = localStorage.getItem(localStorageKeyName);
 
     return {
       content: Outcome.pending<string, MediaViewerError>(),
-      isHDActive: isHDAvailable(item),
+      isHDActive: isHDAvailable(item) && preferedQuality !== 'sd',
     };
   }
 
   private onHDChange = () => {
     const isHDActive = !this.state.isHDActive;
+    const preferedQuality = isHDActive ? 'hd' : 'sd';
+
+    localStorage.setItem(localStorageKeyName, preferedQuality);
     this.setState({ isHDActive });
     this.init(isHDActive);
   };
