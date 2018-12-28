@@ -1,0 +1,1 @@
+- Remember video quality in video player in MediaViewer
