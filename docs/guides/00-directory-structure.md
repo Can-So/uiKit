@@ -12,7 +12,6 @@ Atlaskit
 ├─ docs ··········· Project documentation
 ├─ flow-typed ····· Flow types for untyped dependencies
 ├─ packages ······· Public packages
-├─ patterns ······· Overarching component patterns
 ├─ releases ······· Release documentation
 ├─ typings ········ Exported Flow / TypeScript types
 ├─ website ········ Website package
@@ -169,10 +168,6 @@ The `package.json` file contains all the information and configuration that NPM 
 #### `README.md`
 
 The `README.md` file contains a introduction for each package.
-
-## Patterns
-
-The `patterns` directory is a single package that houses all of our overarching component patterns. For example, this may contain a rough implementation of `@atlaskit/navigation` for Jira.
 
 ## Releases
 
