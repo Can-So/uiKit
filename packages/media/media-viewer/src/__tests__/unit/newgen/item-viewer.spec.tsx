@@ -11,7 +11,11 @@ import { ReactWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
 import Spinner from '@atlaskit/spinner';
 import Button from '@atlaskit/button';
-import { MediaItemType, Context } from '@atlaskit/media-core';
+import {
+  MediaItemType,
+  Context,
+  ProcessedFileState,
+} from '@atlaskit/media-core';
 import {
   ItemViewer,
   ItemViewerBase,
@@ -193,13 +197,16 @@ describe('<ItemViewer />', () => {
   });
 
   it('should show the video viewer if media type is video', () => {
-    const context = makeFakeContext(
-      Observable.of({
-        id: identifier.id,
-        mediaType: 'video',
-        status: 'processed',
-      }),
-    );
+    const state: ProcessedFileState = {
+      id: identifier.id,
+      mediaType: 'video',
+      status: 'processed',
+      mimeType: '',
+      name: '',
+      size: 1,
+      artifacts: {},
+    };
+    const context = makeFakeContext(Observable.of(state));
     const { el } = mountComponent(context, identifier);
     el.update();
     expect(el.find(VideoViewer)).toHaveLength(1);
