@@ -67,11 +67,11 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
     );
   }
 
-  protected async init(isHDActive?: boolean) {
+  protected async init(isHDActive: boolean = this.state.isHDActive) {
     const { context, item, collectionName } = this.props;
     const preferHd = isHDActive && isHDAvailable(item);
-
     const contentUrl = getVideoArtifactUrl(item, preferHd);
+
     try {
       if (!contentUrl) {
         throw new Error(`No video artifacts found`);
