@@ -82,7 +82,7 @@ describe('Video viewer', () => {
     await (el as any).instance()['init']();
     el.update();
     expect(el.find(Video).prop('src')).toEqual(
-      'some-base-url/video?client=some-client-id&token=some-token',
+      'some-base-url/video_hd?client=some-client-id&token=some-token',
     );
   });
 
@@ -153,7 +153,7 @@ describe('Video viewer', () => {
 
     expect(el.find(CustomMediaPlayer)).toHaveLength(1);
     expect(el.find(CustomMediaPlayer).prop('src')).toEqual(
-      'some-base-url/video?client=some-client-id&token=some-token',
+      'some-base-url/video_hd?client=some-client-id&token=some-token',
     );
   });
 
