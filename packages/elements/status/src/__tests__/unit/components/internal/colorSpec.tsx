@@ -1,15 +1,14 @@
-import * as React from 'react';
 import EditorDoneIcon from '@atlaskit/icon/glyph/editor/done';
-import Color from '../../../../components/internal/color';
-import { ANALYTICS_HOVER_DELAY } from '../../../../components/constants';
 import { mountWithIntl } from 'enzyme-react-intl';
+import * as React from 'react';
+import { ANALYTICS_HOVER_DELAY } from '../../../../components/constants';
+import Color from '../../../../components/internal/color';
 
 describe('Color', () => {
   it('should render color button', () => {
     const component = mountWithIntl(
       <Color
         value={'red'}
-        label={'Red'}
         onClick={jest.fn()}
         backgroundColor={'backgroundColor'}
         borderColor={'borderColor'}
@@ -23,7 +22,6 @@ describe('Color', () => {
     const component = mountWithIntl(
       <Color
         value={'red'}
-        label={'Red'}
         onClick={jest.fn()}
         backgroundColor={'backgroundColor'}
         borderColor={'borderColor'}
@@ -38,7 +36,6 @@ describe('Color', () => {
     const component = mountWithIntl(
       <Color
         value={'red'}
-        label={'Red'}
         onClick={jest.fn()}
         backgroundColor={'backgroundColor'}
         borderColor={'borderColor'}
@@ -55,7 +52,6 @@ describe('Color', () => {
     const component = mountWithIntl(
       <Color
         value={value}
-        label={'Red'}
         onClick={onClick}
         backgroundColor={'backgroundColor'}
         borderColor={'borderColor'}
@@ -88,7 +84,6 @@ describe('Color', () => {
       const component = mountWithIntl(
         <Color
           value={value}
-          label={'Purple'}
           onClick={jest.fn()}
           onHover={onHover}
           backgroundColor={'backgroundColor'}
