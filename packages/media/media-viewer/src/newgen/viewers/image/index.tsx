@@ -74,6 +74,11 @@ export class ImageViewer extends BaseViewer<
         if (preview) {
           imagePreview = preview.blob;
           orientation = await getOrientation(imagePreview as File);
+        } else {
+          this.setState({
+            content: Outcome.pending(),
+          });
+          return;
         }
       }
 

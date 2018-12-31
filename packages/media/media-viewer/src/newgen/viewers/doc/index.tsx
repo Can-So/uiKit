@@ -69,6 +69,9 @@ export class DocViewer extends BaseViewer<string, Props> {
     } else {
       const src = getObjectUrlFromFileState(item);
       if (!src) {
+        this.setState({
+          content: Outcome.pending(),
+        });
         return;
       }
       this.setState({

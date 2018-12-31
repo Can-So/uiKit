@@ -94,10 +94,6 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
       pending: () => DisabledToolbarDownloadButton,
       failed: () => DisabledToolbarDownloadButton,
       successful: item => {
-        if (item.status === 'processing') {
-          return DisabledToolbarDownloadButton;
-        }
-
         return (
           <ToolbarDownloadButton
             state={item}

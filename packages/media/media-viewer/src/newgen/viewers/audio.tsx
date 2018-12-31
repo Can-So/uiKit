@@ -147,11 +147,17 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
           context,
           collectionName,
         );
+        if (!audioUrl) {
+          throw new Error('No audio artifacts found');
+        }
       } else {
         audioUrl = getObjectUrlFromFileState(item);
-      }
-      if (!audioUrl) {
-        throw new Error('No audio artifacts found');
+        if (!audioUrl) {
+          this.setState({
+            content: Outcome.pending(),
+          });
+          return;
+        }
       }
       this.setCoverUrl();
       this.setState({
