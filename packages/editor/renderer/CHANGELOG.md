@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 33.0.2
+- [patch] [40510b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/40510b0):
+
+  - Add panel type to fix copy-paste
+
 ## 33.0.1
 - Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
   - @atlaskit/editor-common@25.0.3

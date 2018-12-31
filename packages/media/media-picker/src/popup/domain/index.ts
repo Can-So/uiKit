@@ -87,7 +87,12 @@ export interface EditorError {
   readonly retryHandler?: () => void;
 }
 
-export type ServiceName = 'google' | 'dropbox' | 'upload' | 'giphy';
+export type ServiceName =
+  | 'recent_files'
+  | 'google'
+  | 'dropbox'
+  | 'upload'
+  | 'giphy';
 
 export const isRemoteCloudAccount = (serviceName: ServiceName): boolean => {
   return serviceName === 'google' || serviceName === 'dropbox';
@@ -143,7 +148,7 @@ export interface ServiceFile {
 }
 
 export interface SelectedItem extends ServiceFile {
-  readonly serviceName: string;
+  readonly serviceName: ServiceName;
   readonly accountId?: string;
 }
 
