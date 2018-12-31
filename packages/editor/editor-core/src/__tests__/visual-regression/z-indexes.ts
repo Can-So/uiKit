@@ -15,7 +15,7 @@ const dropList = 'div[data-role="droplistContent"]';
 const insertBlockDropdown = `span[aria-label="${
   insertBlockMessages.insertMenu.defaultMessage
 }"]`;
-const popupPresent = 'div[data-editor-popup="true"]';
+//const popupPresent = 'div[data-editor-popup="true"]';
 const emojiButton = `span[aria-label="${
   insertBlockMessages.emoji.defaultMessage
 }"]`;
