@@ -9,32 +9,6 @@ import { parseToken, TokenType, TokenErrCallback } from './tokenize';
 import { parseWhitespaceOnly } from './tokenize/whitespace';
 import { escapeHandler } from './utils/escape';
 
-/**
- * In Jira, following characters are escaped
- * private static final Pattern ESCAPING_PATTERN = Pattern.compile("(^|(?<!\\\\))\\\\([\\-\\#\\*\\_\\+\\?\\^\\~\\|\\%\\{\\}\\[\\]\\(\\)\\!\\@])");
- * https://stash.atlassian.com/projects/JIRACLOUD/repos/jira/browse/jira-components/jira-renderer/src/main/java/com/atlassian/renderer/v2/components/BackslashEscapeRendererComponent.java
- */
-const escapedChar = [
-  '-',
-  '#',
-  '*',
-  '_',
-  '+',
-  '?',
-  '^',
-  '~',
-  '|',
-  '%',
-  '{',
-  '}',
-  '[',
-  ']',
-  '(',
-  ')',
-  '!',
-  '@',
-];
-
 const processState = {
   NEWLINE: 0,
   BUFFER: 1,
