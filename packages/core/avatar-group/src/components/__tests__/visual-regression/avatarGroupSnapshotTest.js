@@ -5,10 +5,10 @@ import {
 } from '@atlaskit/visual-regression/helper';
 
 describe('Snapshot Test', () => {
-  it('basicAvatarGroup-should match production example', async () => {
+  it('basicAvatarGroup should match production example', async () => {
     const url = getExampleUrl(
       'core',
-      'avatar',
+      'avatar-group',
       'basicAvatarGroup',
       global.__BASEURL__,
     );
