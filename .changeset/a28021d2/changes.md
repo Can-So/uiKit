@@ -1,1 +1,0 @@
-- fixed typo in i18n messages and code improvements

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/status",
-  "version": "0.2.11",
+  "version": "0.3.0",
   "config": {
     "access": "public"
   },
@@ -51,5 +51,5 @@
   "scripts": {
     "i18n:push": "i18n-tools push --resource status . --type ts",
     "i18n:pull": "i18n-tools pull --resource status . --type ts"
-  }  
+  }
 }
