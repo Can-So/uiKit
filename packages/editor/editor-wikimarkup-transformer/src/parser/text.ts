@@ -7,6 +7,7 @@ import {
 } from './tokenize/keyword';
 import { parseToken, TokenType, TokenErrCallback } from './tokenize';
 import { parseWhitespaceOnly } from './tokenize/whitespace';
+import { escapeHandler } from './utils/escape';
 
 /**
  * In Jira, following characters are escaped
@@ -144,19 +145,10 @@ export function parseString(
       }
 
       case processState.ESCAPE: {
-        const prevChar = input.charAt(index - 1);
-        const nextChar = input.charAt(index + 1);
-        /**
-         * Ported from Jira:
-         * If previous char is also a backslash, then this is not a valid escape
-         */
-        if (escapedChar.indexOf(nextChar) === -1 || prevChar === '\\') {
-          // Insert \ in buffer mode
-          buffer += char;
-        }
-        buffer += nextChar;
+        const token = escapeHandler(input, index);
+        buffer += token.text;
+        index += token.length;
         state = processState.BUFFER;
-        index += 2;
         continue;
       }
       default:

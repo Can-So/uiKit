@@ -4,6 +4,7 @@ import { linkFormat } from './links/link-format';
 import { parseNewlineOnly } from './whitespace';
 import { parseMacroKeyword } from './keyword';
 import { parseToken } from '.';
+import { escapeHandler } from '../utils/escape';
 
 export interface FormatterOption {
   /** The opening symbol */
@@ -20,6 +21,7 @@ const processState = {
   END: 2,
   INLINE_MACRO: 3,
   LINK_FORMAT: 4,
+  ESCAPE: 5,
 };
 
 export function commonFormatter(
@@ -82,6 +84,9 @@ export function commonFormatter(
           continue;
         } else if (char === '[') {
           state = processState.LINK_FORMAT;
+          continue;
+        } else if (char === '\\') {
+          state = processState.ESCAPE;
           continue;
         } else {
           buffer += char;
@@ -166,6 +171,13 @@ export function commonFormatter(
           continue;
         }
         return fallback(input, position, openingSymbolLength);
+      }
+      case processState.ESCAPE: {
+        const token = escapeHandler(input, index);
+        buffer += token.text;
+        index += token.length;
+        state = processState.BUFFER;
+        continue;
       }
       default:
     }
