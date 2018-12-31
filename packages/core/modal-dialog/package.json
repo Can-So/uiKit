@@ -47,6 +47,7 @@
     "@atlaskit/field-text": "^7.0.18",
     "@atlaskit/inline-dialog": "^9.0.13",
     "@atlaskit/select": "^6.1.13",
+    "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-beautiful-dnd": "^10.0.2",
     "react-dom": "^16.4.2",
