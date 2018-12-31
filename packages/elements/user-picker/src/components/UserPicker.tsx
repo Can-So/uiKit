@@ -18,9 +18,10 @@ import {
   UserPickerSession,
 } from '../analytics';
 import {
+  AtlasKitSelectChange,
   InputActionTypes,
   Option,
-  SelectableOption,
+  OptionData,
   UserPickerProps,
   UserPickerState,
 } from '../types';
@@ -122,8 +123,11 @@ class UserPickerInternal extends React.Component<
     select.selectOption(focusedOption);
   });
 
-  private handleChange = (value, { action, removedValue, option }) => {
-    if (removedValue && removedValue.option.fixed) {
+  private handleChange: AtlasKitSelectChange = (
+    value,
+    { action, removedValue, option },
+  ) => {
+    if (removedValue && removedValue.data.fixed) {
       return;
     }
     this.setState({ inputValue: '' });
@@ -132,7 +136,9 @@ class UserPickerInternal extends React.Component<
 
     switch (action) {
       case 'select-option':
-        callCallback(onSelection, value.option);
+        if (value && !Array.isArray(value)) {
+          callCallback(onSelection, value.data);
+        }
         this.fireEvent(selectEvent, isMulti ? option : value);
         this.session = isMulti ? startSession() : undefined;
         break;
@@ -141,7 +147,7 @@ class UserPickerInternal extends React.Component<
         break;
       case 'remove-value':
       case 'pop-value':
-        this.fireEvent(deleteEvent, removedValue && removedValue.value);
+        this.fireEvent(deleteEvent, removedValue && removedValue.data);
         break;
     }
 
@@ -155,12 +161,12 @@ class UserPickerInternal extends React.Component<
   };
 
   private addOptions = batchByKey(
-    (request: string, newOptions: (Option | Option[])[]) => {
+    (request: string, newOptions: (OptionData | OptionData[])[]) => {
       this.setState(({ inflightRequest, options, count }) => {
         if (inflightRequest.toString() === request) {
           return {
             options: options.concat(
-              newOptions.reduce<Option[]>(
+              newOptions.reduce<OptionData[]>(
                 (nextOptions, item) => nextOptions.concat(item[0]),
                 [],
               ),
@@ -321,8 +327,7 @@ class UserPickerInternal extends React.Component<
   private configureNoOptionsMessage = (): string | undefined =>
     this.props.noOptionsMessage;
 
-  private getOptions = (): SelectableOption[] =>
-    getOptions(this.state.options) || [];
+  private getOptions = (): Option[] => getOptions(this.state.options) || [];
 
   render() {
     const {

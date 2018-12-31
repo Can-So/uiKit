@@ -5,20 +5,17 @@ import { isUser } from './utils';
 
 export const Option = props => {
   const {
-    data: { option },
+    data: { data },
     status,
     isSelected,
   } = props;
-  if (isUser(option)) {
+  if (isUser(data)) {
     return (
       <components.Option {...props}>
-        <UserOption user={option} status={status} isSelected={isSelected} />
+        <UserOption user={data} status={status} isSelected={isSelected} />
       </components.Option>
     );
   }
-  // This will be implemented in TEAMS-169
-  // if (isTeam(option)) {
-  //   return Something;
-  // }
+  // TODO TEAMS-169
   return null;
 };

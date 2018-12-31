@@ -8,7 +8,12 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../package.json';
-import { UserPickerProps, UserPickerState, SelectableOption } from './types.js';
+import {
+  Option,
+  OptionData,
+  UserPickerProps,
+  UserPickerState,
+} from './types.js';
 
 export type UserPickerSession = {
   id: string;
@@ -46,14 +51,15 @@ const createEvent = (
   },
 });
 
-const buildValueForAnalytics = (
-  value?: SelectableOption[] | SelectableOption,
-) => {
+const optionData2Analytics = ({ id, type }: OptionData) => ({
+  id,
+  type: type || 'User',
+});
+
+const buildValueForAnalytics = (value?: Option[] | Option) => {
   if (value) {
     const valueToConvert = Array.isArray(value) ? value : [value];
-    return valueToConvert.map(({ option }) => ({
-      id: option ? option.id : null,
-    }));
+    return valueToConvert.map(({ data }) => optionData2Analytics(data));
   }
 
   return [];
@@ -91,7 +97,7 @@ export const clearEvent: EventCreator = (props, state, session) =>
 export const deleteEvent: EventCreator = (props, state, session, ...args) =>
   createEvent('ui', 'deleted', 'userPickerItem', {
     sessionId: sessionId(session),
-    value: { id: args[0] },
+    value: optionData2Analytics(args[0]),
     pickerOpen: state.menuIsOpen,
   });
 
@@ -163,22 +169,20 @@ function sessionId(session?: UserPickerSession) {
   return session && session.id;
 }
 
-function position(state: UserPickerState, value?: SelectableOption) {
-  return value
-    ? state.options.findIndex(option => option === value.option)
-    : -1;
+function position(state: UserPickerState, value?: Option) {
+  return value ? state.options.findIndex(option => option === value.data) : -1;
 }
 
 function pickerType(props: UserPickerProps) {
   return props.isMulti ? 'multi' : 'single';
 }
 
-function result(value?: SelectableOption) {
-  return value ? { id: value.option.id } : null;
+function result(option?: Option) {
+  return option ? optionData2Analytics(option.data) : null;
 }
 
 function results(state: UserPickerState) {
-  return (state.options || []).map(({ id }) => ({ id }));
+  return (state.options || []).map(optionData2Analytics);
 }
 
 function isLoading(props: UserPickerProps, state: UserPickerState) {
@@ -188,7 +192,7 @@ function isLoading(props: UserPickerProps, state: UserPickerState) {
 function values(state: UserPickerState) {
   return state.value
     ? Array.isArray(state.value)
-      ? state.value.map(selectableOption => selectableOption.option.id)
-      : [state.value.option.id]
+      ? state.value.map(option => optionData2Analytics(option.data))
+      : [optionData2Analytics(state.value.data)]
     : [];
 }

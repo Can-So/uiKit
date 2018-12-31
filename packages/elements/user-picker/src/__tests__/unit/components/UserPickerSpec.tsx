@@ -10,10 +10,10 @@ import * as React from 'react';
 import { getStyles } from '../../../components/styles';
 import { UserPicker } from '../../../components/UserPicker';
 import {
-  optionToSelectableOptions,
   optionToSelectableOption,
+  optionToSelectableOptions,
 } from '../../../components/utils';
-import { User, SelectableOption, UserPickerProps } from '../../../types';
+import { Option, User, UserPickerProps } from '../../../types';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<UserPickerProps> = {}) =>
@@ -34,7 +34,7 @@ describe('UserPicker', () => {
     },
   ];
 
-  const userOptions: SelectableOption[] = optionToSelectableOptions(options);
+  const userOptions: Option[] = optionToSelectableOptions(options);
 
   it('should render Select', () => {
     const component = shallowUserPicker({ options });
@@ -239,7 +239,7 @@ describe('UserPicker', () => {
       });
 
       expect(component.find(Select).prop('value')).toEqual([
-        { label: 'Jace Beleren', option: options[0], value: 'abc-123' },
+        { label: 'Jace Beleren', data: options[0], value: 'abc-123' },
       ]);
     });
 
@@ -538,7 +538,7 @@ describe('UserPicker', () => {
               upKeyCount: 1,
               downKeyCount: 3,
               position: 0,
-              result: { id: 'abc-123' },
+              result: { id: 'abc-123', type: 'User' },
             },
           }),
         }),
@@ -577,7 +577,7 @@ describe('UserPicker', () => {
               upKeyCount: 1,
               downKeyCount: 3,
               position: 0,
-              result: { id: 'abc-123' },
+              result: { id: 'abc-123', type: 'User' },
             },
           }),
         }),
@@ -633,7 +633,7 @@ describe('UserPicker', () => {
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
               pickerOpen: true,
-              value: { id: options[0].id },
+              value: { id: options[0].id, type: 'User' },
             },
           }),
         }),
@@ -690,7 +690,10 @@ describe('UserPicker', () => {
                   sessionId: expect.any(String),
                   duration: expect.any(Number),
                   queryLength: 0,
-                  results: [{ id: 'abc-123' }, { id: '123-abc' }],
+                  results: [
+                    { id: 'abc-123', type: 'User' },
+                    { id: '123-abc', type: 'User' },
+                  ],
                   pickerType: 'single',
                 }),
               }),
@@ -737,7 +740,7 @@ describe('UserPicker', () => {
                   sessionId: expect.any(String),
                   duration: expect.any(Number),
                   queryLength: 0,
-                  results: [{ id: 'abc-123' }],
+                  results: [{ id: 'abc-123', type: 'User' }],
                   pickerType: 'single',
                 }),
               }),

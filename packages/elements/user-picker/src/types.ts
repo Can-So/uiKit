@@ -1,6 +1,6 @@
 export type UserPickerProps = {
   /** List of users or teams to be used as options by the user picker. */
-  options?: Option[];
+  options?: OptionData[];
   /** Width of the user picker field. */
   width?: number;
   /** Sets the minimum width for the menu. If not set, menu will always have the same width of the field */
@@ -32,13 +32,13 @@ export type UserPickerProps = {
   /** Display the picker with a subtle style. */
   subtle?: boolean;
   /** Default value for the field to be used on initial render. */
-  defaultValue?: OptionValue;
+  defaultValue?: Value;
   /** Placeholder text to be shown when there is no value in the field. */
   placeholder?: string;
   /** Message to be shown when the menu is open but no options are provided. */
   noOptionsMessage?: string;
   /** Controls if the user picker has a value or not. If not provided, UserPicker will control the value internally. */
-  value?: OptionValue;
+  value?: Value;
   /** Disable all interactions with the picker, putting it in a read-only state. */
   isDisabled?: boolean;
   /** Display a remove button on the single picker. True by default. */
@@ -50,8 +50,8 @@ export type UserPickerProps = {
 };
 
 export type UserPickerState = {
-  options: Option[];
-  value?: SelectableOption[] | SelectableOption;
+  options: OptionData[];
+  value?: AtlaskitSelectValue;
   inflightRequest: number;
   count: number;
   hoveringClearIndicator: boolean;
@@ -75,14 +75,14 @@ export interface TeamHighlight {
   description?: HighlightRange[];
 }
 
-export interface Option {
+export interface OptionData {
   id: string;
   name: string;
   type?: 'User' | 'Team';
   fixed?: boolean;
 }
 
-export interface User extends Option {
+export interface User extends OptionData {
   avatarUrl?: string;
   publicName?: string;
   highlight?: UserHighlight;
@@ -90,7 +90,7 @@ export interface User extends Option {
   type?: 'User';
 }
 
-export interface Team extends Option {
+export interface Team extends OptionData {
   avatarUrl?: string;
   description?: string;
   memberCount?: number;
@@ -98,7 +98,7 @@ export interface Team extends Option {
   type: 'Team';
 }
 
-export type OptionValue = Option | Array<Option> | null | undefined;
+export type Value = OptionData | Array<OptionData> | null | undefined;
 
 export type ActionTypes =
   | 'select-option'
@@ -109,24 +109,26 @@ export type ActionTypes =
   | 'clear'
   | 'create-option';
 
-export type OnChange = (value: OptionValue, action: ActionTypes) => void;
+export type OnChange = (value: Value, action: ActionTypes) => void;
 
 export type OnInputChange = (query?: string) => void;
 
 export type OnPicker = () => void;
 
-export type OnOption = (value: OptionValue) => void;
+export type OnOption = (value: Value) => void;
 
-export type SelectableOption = {
+export type Option = {
   label: string;
   value: string;
-  option: Option;
+  data: OptionData;
 };
 
 export interface LoadOptions {
   (searchText?: string):
-    | Promisable<Option | Option[]>
-    | Iterable<Promisable<Option[] | Option> | Option | Option[]>;
+    | Promisable<OptionData | OptionData[]>
+    | Iterable<
+        Promisable<OptionData[] | OptionData> | OptionData | OptionData[]
+      >;
 }
 
 export type Promisable<T> = T | PromiseLike<T>;
@@ -136,3 +138,14 @@ export type InputActionTypes =
   | 'input-change'
   | 'input-blur'
   | 'menu-close';
+
+export type AtlaskitSelectValue = Option | Array<Option> | null | undefined;
+
+export type AtlasKitSelectChange = (
+  value: AtlaskitSelectValue,
+  extraInfo: {
+    removedValue?: Option;
+    option?: Option;
+    action: ActionTypes;
+  },
+) => void;
