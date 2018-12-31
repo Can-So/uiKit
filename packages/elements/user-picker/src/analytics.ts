@@ -13,7 +13,8 @@ import {
   OptionData,
   UserPickerProps,
   UserPickerState,
-} from './types.js';
+  UserType,
+} from './types';
 
 export type UserPickerSession = {
   id: string;
@@ -53,7 +54,7 @@ const createEvent = (
 
 const optionData2Analytics = ({ id, type }: OptionData) => ({
   id,
-  type: type || 'User',
+  type: type || UserType,
 });
 
 const buildValueForAnalytics = (value?: Option[] | Option) => {

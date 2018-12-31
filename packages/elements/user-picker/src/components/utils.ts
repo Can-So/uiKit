@@ -6,15 +6,17 @@ import {
   OptionData,
   Promisable,
   Team,
+  TeamType,
   User,
+  UserType,
   Value,
 } from '../types';
 
 export const isUser = (option: OptionData): option is User =>
-  option.type === undefined || option.type === 'User';
+  option.type === undefined || option.type === UserType;
 
 export const isTeam = (option: OptionData): option is Team =>
-  option.type === 'Team';
+  option.type === TeamType;
 
 export const optionToSelectableOption = (option: OptionData): Option => ({
   label: option.name,

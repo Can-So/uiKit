@@ -78,24 +78,28 @@ export interface TeamHighlight {
 export interface OptionData {
   id: string;
   name: string;
-  type?: 'User' | 'Team';
+  type?: 'user' | 'team';
   fixed?: boolean;
 }
+
+export const UserType = 'user';
 
 export interface User extends OptionData {
   avatarUrl?: string;
   publicName?: string;
   highlight?: UserHighlight;
   byline?: string;
-  type?: 'User';
+  type?: 'user';
 }
+
+export const TeamType = 'team';
 
 export interface Team extends OptionData {
   avatarUrl?: string;
   description?: string;
   memberCount?: number;
   highlight?: TeamHighlight;
-  type: 'Team';
+  type: 'team';
 }
 
 export type Value = OptionData | Array<OptionData> | null | undefined;

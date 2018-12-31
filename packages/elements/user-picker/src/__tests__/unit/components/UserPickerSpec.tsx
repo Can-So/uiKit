@@ -13,7 +13,7 @@ import {
   optionToSelectableOption,
   optionToSelectableOptions,
 } from '../../../components/utils';
-import { Option, User, UserPickerProps } from '../../../types';
+import { Option, User, UserPickerProps, UserType } from '../../../types';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<UserPickerProps> = {}) =>
@@ -538,7 +538,7 @@ describe('UserPicker', () => {
               upKeyCount: 1,
               downKeyCount: 3,
               position: 0,
-              result: { id: 'abc-123', type: 'User' },
+              result: { id: 'abc-123', type: UserType },
             },
           }),
         }),
@@ -577,7 +577,7 @@ describe('UserPicker', () => {
               upKeyCount: 1,
               downKeyCount: 3,
               position: 0,
-              result: { id: 'abc-123', type: 'User' },
+              result: { id: 'abc-123', type: UserType },
             },
           }),
         }),
@@ -633,7 +633,7 @@ describe('UserPicker', () => {
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
               pickerOpen: true,
-              value: { id: options[0].id, type: 'User' },
+              value: { id: options[0].id, type: UserType },
             },
           }),
         }),
@@ -691,8 +691,8 @@ describe('UserPicker', () => {
                   duration: expect.any(Number),
                   queryLength: 0,
                   results: [
-                    { id: 'abc-123', type: 'User' },
-                    { id: '123-abc', type: 'User' },
+                    { id: 'abc-123', type: UserType },
+                    { id: '123-abc', type: UserType },
                   ],
                   pickerType: 'single',
                 }),
@@ -740,7 +740,7 @@ describe('UserPicker', () => {
                   sessionId: expect.any(String),
                   duration: expect.any(Number),
                   queryLength: 0,
-                  results: [{ id: 'abc-123', type: 'User' }],
+                  results: [{ id: 'abc-123', type: UserType }],
                   pickerType: 'single',
                 }),
               }),
