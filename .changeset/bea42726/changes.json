@@ -1,0 +1,24 @@
+{
+  "releases": [{ "name": "@atlaskit/status", "type": "minor" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/editor-core",
+      "type": "patch",
+      "dependencies": ["@atlaskit/renderer", "@atlaskit/status"]
+    },
+    {
+      "name": "@atlaskit/editor-mobile-bridge",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-core",
+        "@atlaskit/renderer",
+        "@atlaskit/status"
+      ]
+    },
+    {
+      "name": "@atlaskit/renderer",
+      "type": "patch",
+      "dependencies": ["@atlaskit/status"]
+    }
+  ]
+}
