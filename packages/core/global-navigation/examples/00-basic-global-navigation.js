@@ -28,11 +28,12 @@ const Global = () => (
     onCreateClick={() => console.log('create clicked')}
     onSearchClick={() => console.log('search clicked')}
     onStarredClick={() => console.log('starred clicked')}
-    onSettingsClick={() => console.log('settings clicked')}
     onNotificationClick={() => console.log('notification clicked')}
     appSwitcherComponent={AppSwitcherComponent}
     appSwitcherTooltip="Switch to ..."
     helpItems={() => <div />}
+    shouldShowSettingsIcon
+    onSettingsClick={() => console.log('settings clicked')}
     loginHref="#login"
   />
 );

@@ -43,6 +43,7 @@ const generateAvatar = profileIconUrl => {
 type OtherConfig = {
   href?: string,
   badge?: ?StatelessFunctionalComponent<*>,
+  shouldNotRender?: boolean,
 };
 
 function configFactory(
@@ -50,8 +51,8 @@ function configFactory(
   tooltip,
   otherConfig: OtherConfig = {},
 ) {
-  const { href } = otherConfig;
-  const shouldNotRenderItem = !onClick && !href;
+  const { href, shouldNotRender } = otherConfig;
+  const shouldNotRenderItem = shouldNotRender || (!onClick && !href);
 
   if (shouldNotRenderItem && (tooltip || isNotEmpty(otherConfig))) {
     // eslint-disable-next-line no-console
@@ -192,6 +193,7 @@ export default function generateProductConfig(
     onSettingsClick,
     settingsTooltip,
     settingsDrawerContents,
+    shouldShowSettingsIcon,
 
     profileItems,
     profileTooltip,
@@ -219,6 +221,7 @@ export default function generateProductConfig(
     settings: configFactory(
       onSettingsClick || (settingsDrawerContents && openDrawer('settings')),
       settingsTooltip,
+      { shouldNotRender: !shouldShowSettingsIcon },
     ),
     notification: notificationConfigFactory(
       notificationTooltip,
