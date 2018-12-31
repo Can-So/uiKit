@@ -61,14 +61,14 @@ describe('Snapshot Test: z-indexes', () => {
         await snapshot(page);
       });
 
-      it('should always position code block language picker below dropdowns from main menu', async () => {
-        await insertTable(page);
-        await page.keyboard.type('```');
-        await page.waitForSelector(popupPresent);
-        await page.click(insertBlockDropdown);
-        await page.waitForSelector(dropList);
-        await snapshot(page);
-      });
+      // it('should always position code block language picker below dropdowns from main menu', async () => {
+      //   await insertTable(page);
+      //   await page.keyboard.type('```');
+      //   await page.waitForSelector(popupPresent);
+      //   await page.click(insertBlockDropdown);
+      //   await page.waitForSelector(dropList);
+      //   await snapshot(page);
+      // });
     });
   });
 });
