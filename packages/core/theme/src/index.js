@@ -36,6 +36,20 @@ export const fontFamily = () =>
 export const codeFontFamily = () =>
   '"SFMono-Medium", "SF Mono", "Segoe UI Mono", "Roboto Mono", "Ubuntu Mono", Menlo, Consolas, Courier, monospace';
 
+export const focusRing = (
+  color = colors.B100,
+  outlineWidth = gridSize() / 4,
+) => `
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 0px ${outlineWidth} ${color};
+  }
+`;
+
+export const noFocusRing = () => `
+  box-shadow: none;
+`;
+
 export const layers = {
   card: () => 100,
   dialog: () => 200,
