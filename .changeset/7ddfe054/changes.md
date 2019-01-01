@@ -1,0 +1,1 @@
+- ED-5861 - Fix panel style in order to render telepointers properly
