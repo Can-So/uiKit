@@ -1,7 +1,7 @@
 import { AvatarItem } from '@atlaskit/avatar';
 import * as React from 'react';
-import { Option } from 'src/types';
 import styled from 'styled-components';
+import { Option } from '../types';
 import { SizeableAvatar } from './SizeableAvatar';
 import { getAvatarUrl } from './utils';
 
