@@ -1,7 +1,7 @@
 import { EmojiProvider, OnEmojiEvent } from '@atlaskit/emoji';
 import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
 import { emoji } from '@atlaskit/util-data-test';
-import { mount, shallow } from 'enzyme';
+import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
 import * as React from 'react';
 import { EmojiButton } from '../../../components/EmojiButton';
 import {
@@ -38,7 +38,7 @@ describe('@atlaskit/reactions/selector', () => {
   });
 
   it('should render default reactions', () => {
-    const selector = shallow(renderSelector());
+    const selector = shallowWithIntl(renderSelector());
     const emojis = selector.find(EmojiButton);
 
     expect(emojis.length).toEqual(defaultReactions.length);
@@ -52,7 +52,7 @@ describe('@atlaskit/reactions/selector', () => {
 
   it('should call "onSelection" on selection', () => {
     const onSelection = jest.fn();
-    const selector = mount(renderSelector(onSelection));
+    const selector = mountWithIntl(renderSelector(onSelection));
     selector
       .find(EmojiButton)
       .first()
@@ -65,7 +65,9 @@ describe('@atlaskit/reactions/selector', () => {
   it('should call "onMoreClick" when more button is clicked', () => {
     const onSelection = jest.fn();
     const onMoreClick = jest.fn();
-    const selector = mount(renderSelector(onSelection, true, onMoreClick));
+    const selector = mountWithIntl(
+      renderSelector(onSelection, true, onMoreClick),
+    );
 
     selector.find(EditorMoreIcon).simulate('mousedown');
 
@@ -73,7 +75,7 @@ describe('@atlaskit/reactions/selector', () => {
   });
 
   it('should calculate animation delay based on reaction index', () => {
-    const selector = mount(renderSelector());
+    const selector = mountWithIntl(renderSelector());
 
     expect(
       selector

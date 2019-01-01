@@ -4,6 +4,8 @@ import Tooltip from '@atlaskit/tooltip';
 import * as cx from 'classnames';
 import * as React from 'react';
 import { style } from 'typestyle';
+import { messages } from './i18n';
+import { FormattedMessage } from 'react-intl';
 
 const moreEmojiContainerStyle = style({ display: 'flex' });
 
@@ -59,15 +61,19 @@ export class ShowMore extends React.PureComponent<Props> {
         style={style!.container}
       >
         <div className={separatorStyle} />
-        <Tooltip content="More emoji">
-          <button
-            className={cx(moreButtonStyle, classNameProp!.button)}
-            style={style!.button}
-            onMouseDown={onClick}
-          >
-            <EditorMoreIcon label="More" />
-          </button>
-        </Tooltip>
+        <FormattedMessage {...messages.moreEmoji}>
+          {text => (
+            <Tooltip content={text}>
+              <button
+                className={cx(moreButtonStyle, classNameProp!.button)}
+                style={style!.button}
+                onMouseDown={onClick}
+              >
+                <EditorMoreIcon label="More" />
+              </button>
+            </Tooltip>
+          )}
+        </FormattedMessage>
       </div>
     );
   }

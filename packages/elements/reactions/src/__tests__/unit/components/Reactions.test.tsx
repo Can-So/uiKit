@@ -2,9 +2,11 @@ import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { EmojiProvider } from '@atlaskit/emoji';
 import Tooltip from '@atlaskit/tooltip';
 import { emoji } from '@atlaskit/util-data-test';
-import { mount, shallow } from 'enzyme';
+import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { reaction } from '../../../client/MockReactionsClient';
+import { messages } from '../../../components/i18n';
 import { Reaction } from '../../../components/Reaction';
 import { ReactionPicker } from '../../../components/ReactionPicker';
 import { Props, Reactions } from '../../../components/Reactions';
@@ -15,7 +17,7 @@ const { getEmojiResourcePromise } = emoji.testData;
 
 describe('@atlaskit/reactions/reactions', () => {
   const renderReactions = (extraProps: Partial<Props> = {}) =>
-    shallow(
+    shallowWithIntl(
       <Reactions
         emojiProvider={getEmojiResourcePromise() as Promise<EmojiProvider>}
         reactions={[
@@ -40,12 +42,15 @@ describe('@atlaskit/reactions/reactions', () => {
       .find(Reaction)
       .first()
       .simulate('click');
+
     expect(onReactionClick).toHaveBeenCalled();
   });
 
   it('should show loading tooltip and disable picker', () => {
     const reactions = renderReactions({ status: ReactionStatus.loading });
-    expect(reactions.find(Tooltip).prop('content')).toEqual('Loading...');
+    expect(reactions.find(Tooltip).prop('content')).toEqual(
+      <FormattedMessage {...messages.loadingReactions} />,
+    );
 
     expect(reactions.find(ReactionPicker).prop('disabled')).toBeTruthy();
   });
@@ -93,7 +98,7 @@ describe('@atlaskit/reactions/reactions', () => {
     );
 
     beforeEach(() => {
-      component = mount(<TestComponent />);
+      component = mountWithIntl(<TestComponent />);
       component.setProps({ status: ReactionStatus.ready });
     });
 
