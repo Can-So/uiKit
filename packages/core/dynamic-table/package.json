@@ -43,6 +43,7 @@
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/dropdown-menu": "^6.1.25",
     "@atlaskit/toggle": "^5.0.14",
+    "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   }

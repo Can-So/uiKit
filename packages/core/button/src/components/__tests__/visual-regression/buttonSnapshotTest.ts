@@ -4,7 +4,7 @@ import {
 } from '@atlaskit/visual-regression/helper';
 
 describe('Snapshot Test', () => {
-  it('ButtonAppearances-should match production example', async () => {
+  it('ButtonAppearances should match production example', async () => {
     const url = getExampleUrl(
       'core',
       'button',

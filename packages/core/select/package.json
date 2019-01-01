@@ -53,6 +53,7 @@
     "@atlaskit/logo": "^9.2.6",
     "@atlaskit/modal-dialog": "^7.1.1",
     "@atlaskit/tooltip": "^12.1.13",
+    "@atlaskit/visual-regression": "^0.0.1",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",
