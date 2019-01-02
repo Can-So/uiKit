@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 27.0.4
+- [patch] [442821a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/442821a):
+
+  - Fix the issue with being unable to save image inserted into the editor: pass collection to tenant auth for file polling
+
 ## 27.0.3
 - [patch] [b677631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b677631):
 
