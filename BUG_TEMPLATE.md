@@ -1,12 +1,12 @@
 ### Prerequisites
 
-Checked that your bug report hasn't already being filed [here](https://ecosystem.atlassian.net/issues/?filter=61467)
+Check that your bug report hasn't already being filed [here](https://ecosystem.atlassian.net/issues/?filter=61467)
 
 ### Description
 
 [Description of the issue]
 
-Add a link to a codepen example using [this codesandbox](http://go.atlassian.com/ak-sandbox) as starting point.
+Add an example using [this codesandbox](http://go.atlassian.com/ak-sandbox) as starting point.
 
 ### Steps to reproduce
 
