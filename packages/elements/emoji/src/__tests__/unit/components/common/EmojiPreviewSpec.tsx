@@ -1,4 +1,4 @@
-import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
+import { mountWithIntl, shallowWithIntl } from '@atlaskit/editor-test-helpers';
 import * as React from 'react';
 import { expect } from 'chai';
 

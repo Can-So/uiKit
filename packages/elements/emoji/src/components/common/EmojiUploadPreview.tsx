@@ -69,10 +69,11 @@ export default class EmojiUploadPreview extends PureComponent<
           <div className={styles.bigEmojiPreview}>{emojiComponent}</div>
         </div>
         <div className={styles.uploadAddRow}>
-          {errorMessage ? (
+          {!uploading && errorMessage ? (
             <EmojiErrorMessage
               className={styles.emojiPreviewErrorMessage}
               message={errorMessage}
+              tooltip
             />
           ) : null}
           <FormattedMessage {...messages.addEmojiLabel}>
@@ -92,6 +93,7 @@ export default class EmojiUploadPreview extends PureComponent<
             onClick={onUploadCancelled}
             appearance="subtle"
             isDisabled={uploading}
+            className={styles.cancelButton}
           >
             <FormattedMessage {...messages.cancelLabel} />
           </AkButton>

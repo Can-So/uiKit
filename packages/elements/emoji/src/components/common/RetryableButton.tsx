@@ -4,6 +4,7 @@ import AkButton from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
 import { messages } from '../i18n';
 import { FormattedMessage } from 'react-intl';
+import * as styles from './styles';
 
 export interface Props {
   className: string;
@@ -20,9 +21,19 @@ export default class RetryableButton extends Component<Props, {}> {
     super(props);
   }
 
+  renderLoading() {
+    return (
+      <span className={styles.buttonSpinner}>
+        <Spinner invertColor={false} />
+      </span>
+    );
+  }
+
   renderRetry() {
     const { loading, retryClassName, onSubmit } = this.props;
-    return (
+    return loading ? (
+      this.renderLoading()
+    ) : (
       <FormattedMessage {...messages.retryLabel}>
         {retryLabel => (
           <AkButton
@@ -30,7 +41,7 @@ export default class RetryableButton extends Component<Props, {}> {
             appearance="warning"
             onClick={onSubmit}
           >
-            {loading ? <Spinner invertColor={false} /> : retryLabel}
+            {retryLabel}
           </AkButton>
         )}
       </FormattedMessage>
@@ -48,13 +59,15 @@ export default class RetryableButton extends Component<Props, {}> {
     } = this.props;
     return error ? (
       this.renderRetry()
+    ) : loading ? (
+      this.renderLoading()
     ) : (
       <AkButton
         className={className}
         appearance={appearance as any}
         onClick={onSubmit}
       >
-        {loading ? <Spinner invertColor={true} /> : label}
+        {label}
       </AkButton>
     );
   }

@@ -54,6 +54,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/editor-test-helpers": "^6.3.4",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/layer": "^5.0.10",
     "@atlaskit/media-core": "^24.7.0",
@@ -66,7 +67,6 @@
     "chai": "^4.1.2",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
-    "enzyme-react-intl": "^2.0.3",
     "es6-promise": "^4.0.5",
     "fetch-mock": "^6.5.2",
     "p-wait-for": "^1.0.0",
@@ -80,6 +80,10 @@
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+  },
+  "scripts": {
+    "i18n:push": "i18n-tools push --resource emoji . --type ts",
+    "i18n:pull": "i18n-tools pull --resource emoji . --type ts"
   },
   "keywords": [
     "fabric",

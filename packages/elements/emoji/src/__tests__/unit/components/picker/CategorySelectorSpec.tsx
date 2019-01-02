@@ -1,5 +1,5 @@
 import { ReactWrapper } from 'enzyme';
-import { mountWithIntl } from 'enzyme-react-intl';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 import * as React from 'react';
 import { expect } from 'chai';
 

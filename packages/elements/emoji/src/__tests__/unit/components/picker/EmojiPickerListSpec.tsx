@@ -1,7 +1,7 @@
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
 import { expect } from 'chai';
 import { ReactWrapper } from 'enzyme';
-import { mountWithIntl } from 'enzyme-react-intl';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 import * as React from 'react';
 import { List as VirtualList } from 'react-virtualized/dist/commonjs/List';
 import {

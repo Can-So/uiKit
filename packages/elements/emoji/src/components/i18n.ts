@@ -50,27 +50,22 @@ export const messages = defineMessages({
   addEmojiLabel: {
     id: 'fabric.emoji.add.label',
     defaultMessage: 'Add emoji',
-    description: 'Button label to add emoji',
+    description: 'verb - Button label to add emoji',
   },
   retryLabel: {
     id: 'fabric.emoji.retry.label',
     defaultMessage: 'Retry',
-    description: 'Button label to retry upload',
+    description: 'verb - Button label to retry upload',
   },
   cancelLabel: {
     id: 'fabric.emoji.cancel.label',
     defaultMessage: 'Cancel',
-    description: 'button label to cancel operation',
+    description: 'verb - button label to cancel operation',
   },
   searchLabel: {
     id: 'fabric.emoji.search.label',
     defaultMessage: 'Search',
-    description: 'search label',
-  },
-  searchPlaceholder: {
-    id: 'fabric.emoji.search.placeholder',
-    defaultMessage: 'Search',
-    description: 'search placeholder',
+    description: 'verb - button label to search',
   },
   categoriesSearchResults: {
     id: 'fabric.emoji.categories.search.results',

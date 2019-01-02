@@ -450,7 +450,7 @@ export const emojiPreviewErrorMessage = style({
 });
 
 export const uploadRetryButton = style({
-  width: '93px',
+  maxWidth: '175px',
   justifyContent: 'center',
   fontWeight: 'bold',
   marginRight: '4px',
@@ -462,7 +462,6 @@ export const uploadRetryButton = style({
 });
 
 export const uploadEmojiButton = style({
-  width: '93px',
   justifyContent: 'center',
   marginRight: '4px',
   $nest: {
@@ -470,4 +469,13 @@ export const uploadEmojiButton = style({
       display: 'flex',
     },
   },
+});
+
+export const cancelButton = style({
+  maxWidth: '100px',
+});
+
+export const buttonSpinner = style({
+  marginRight: '10px',
+  marginLeft: '10px',
 });

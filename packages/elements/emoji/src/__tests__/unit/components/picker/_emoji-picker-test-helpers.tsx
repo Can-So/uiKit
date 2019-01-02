@@ -1,7 +1,7 @@
 import AkButton from '@atlaskit/button';
 import { waitUntil } from '@atlaskit/util-common-test';
 import { ReactWrapper } from 'enzyme';
-import { mountWithIntl } from 'enzyme-react-intl';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 import * as React from 'react';
 import Emoji from '../../../../components/common/Emoji';
 import EmojiDeletePreview from '../../../../components/common/EmojiDeletePreview';

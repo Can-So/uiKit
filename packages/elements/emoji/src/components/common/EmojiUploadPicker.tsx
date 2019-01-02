@@ -84,7 +84,9 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
     return (
       <div className={styles.emojiUpload}>
         <div className={styles.uploadChooseFileMessage}>
-          <h5>Add your own emoji</h5>
+          <FormattedMessage {...messages.addCustomEmojiLabel}>
+            {message => <h5>{message}</h5>}
+          </FormattedMessage>
         </div>
         <div className={styles.uploadChooseFileRow}>
           <span className={styles.uploadChooseFileEmojiName}>

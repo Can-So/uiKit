@@ -80,19 +80,22 @@ export default class EmojiDeletePreview extends Component<Props, State> {
           <div className={styles.previewButtonGroup}>
             {error ? (
               <FormattedMessage {...messages.deleteEmojiFailed}>
-                {message => (
-                  <EmojiErrorMessage
-                    message={message as string}
-                    className={styles.emojiDeleteErrorMessage}
-                  />
-                )}
+                {message =>
+                  !loading ? (
+                    <EmojiErrorMessage
+                      message={message as string}
+                      className={styles.emojiDeleteErrorMessage}
+                      tooltip
+                    />
+                  ) : null
+                }
               </FormattedMessage>
             ) : null}
             <FormattedMessage {...messages.deleteEmojiLabel}>
               {message => (
                 <RetryableButton
-                  className={styles.submitDelete}
-                  retryClassName={styles.submitDelete}
+                  className={styles.uploadEmojiButton}
+                  retryClassName={styles.uploadRetryButton}
                   label={message as string}
                   onSubmit={this.onSubmit}
                   appearance="danger"
@@ -101,7 +104,11 @@ export default class EmojiDeletePreview extends Component<Props, State> {
                 />
               )}
             </FormattedMessage>
-            <AkButton appearance="subtle" onClick={this.onCancel}>
+            <AkButton
+              appearance="subtle"
+              onClick={this.onCancel}
+              className={styles.cancelButton}
+            >
               <FormattedMessage {...messages.cancelLabel} />
             </AkButton>
           </div>
