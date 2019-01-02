@@ -1,0 +1,1 @@
+- Fix the issue with being unable to save image inserted into the editor: pass collection to tenant auth for file polling
