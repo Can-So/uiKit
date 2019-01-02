@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.11
+- [patch] [53c513c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/53c513c):
+
+  - ED-5947: fix preserving CellSelection  when clicking on context menu
+
 ## 92.0.10
 - [patch] [6d435cf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d435cf):
 

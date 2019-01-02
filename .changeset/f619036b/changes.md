@@ -1,1 +1,0 @@
-- ED-5947: fix preserving CellSelection  when clicking on context menu
