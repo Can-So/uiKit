@@ -16,9 +16,9 @@ Our service desk is now open to public, you can access it [here](https://ecosyst
 
 ### How do I submit a (good) bug report?
 
-This section guides you through submitting a bug report for Atlaskit. Following these guidelines helps us and the community understand your issue, reproduce the behavior, and find related issues.
+Follow these guidelines to help us and the community understand your issue, reproduce the behavior, and find other related/duplicate issues.
 
-When you are creating a bug report, please include as many details as possible. Fill out [the required template](BUG_TEMPLATE.md), the information it asks helps us resolve issues faster.
+When you are creating a bug report, please include as many details as possible. Fill out [the required template](BUG_TEMPLATE.md) thoroughly to help us resolve issues faster.
 
 * **Use a clear and descriptive title** for the issue to identify the problem.
 * **Describe the exact steps which reproduce the problem** in as many details as possible. Add a link to a codesanbox example using [this codesanbox](http://go.atlassian.com/ak-sandbox) as starting point. When listing steps, **don't just say what you did, but explain how you did it**. For example, if you opened a inline dialog, explain if you used the mouse, or a keyboard shortcut.
