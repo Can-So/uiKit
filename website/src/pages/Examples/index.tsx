@@ -10,7 +10,7 @@ import Button from '@atlaskit/button';
 import CodeIcon from '@atlaskit/icon/glyph/code';
 import ErrorIcon from '@atlaskit/icon/glyph/error';
 import Flag, { FlagGroup } from '@atlaskit/flag';
-import SingleSelect from '@atlaskit/single-select';
+import Select from '@atlaskit/select';
 import Tooltip from '@atlaskit/tooltip';
 import { colors } from '@atlaskit/theme';
 
@@ -41,33 +41,41 @@ export const SANDBOX_DEPLOY_ENDPOINT =
 function PackageSelector(props) {
   let selectedPackageItem;
 
-  const packagesSelectItems = props.groups.map(group => {
-    return {
-      heading: fs.titleize(group.id),
-      items: fs.getDirectories(group.children).map(pkg => {
-        const item = {
-          content: fs.titleize(pkg.id),
-          value: `${group.id}/${pkg.id}`,
-        };
+  const packagesSelectItems = props.groups.map(group => ({
+    label: fs.titleize(group.id),
+    options: fs.getDirectories(group.children).map(pkg => {
+      const item = {
+        label: fs.titleize(pkg.id),
+        value: `${group.id}/${pkg.id}`,
+      };
 
-        if (props.groupId === group.id && props.packageId === pkg.id) {
-          selectedPackageItem = item;
-        }
+      if (props.groupId === group.id && props.packageId === pkg.id) {
+        selectedPackageItem = item;
+      }
 
-        return item;
-      }),
-    };
-  });
+      return item;
+    }),
+  }));
 
   return (
     <Control>
-      <SingleSelect
-        appearance="subtle"
-        items={packagesSelectItems}
-        hasAutocomplete
+      <Select
+        styles={{
+          container: styles => ({
+            ...styles,
+            flex: '1 1 0',
+          }),
+          control: styles => ({
+            ...styles,
+            backgroundColor: '#fff',
+          }),
+        }}
+        options={packagesSelectItems}
         placeholder="Select Package"
-        onSelected={props.onSelected}
-        defaultSelected={selectedPackageItem}
+        onChange={(value, { action }) =>
+          action === 'select-option' && props.onSelected(value)
+        }
+        defaultValue={selectedPackageItem}
       />
     </Control>
   );
@@ -78,11 +86,11 @@ function ExampleSelector(props) {
 
   const examplesSelectItems = [
     {
-      heading: 'Examples',
-      items: props.examples
+      label: 'Examples',
+      options: props.examples
         ? fs.flatMap(props.examples, (file, filePath) => {
             const item = {
-              content: fs.titleize(file.id),
+              label: fs.titleize(file.id),
               value: fs.normalize(filePath.replace('examples/', '')),
             };
 
@@ -98,13 +106,23 @@ function ExampleSelector(props) {
 
   return (
     <Control>
-      <SingleSelect
-        appearance="subtle"
-        items={examplesSelectItems}
-        hasAutocomplete
+      <Select
+        styles={{
+          container: styles => ({
+            ...styles,
+            flex: '1 1 0',
+          }),
+          control: styles => ({
+            ...styles,
+            backgroundColor: '#fff',
+          }),
+        }}
+        options={examplesSelectItems}
         placeholder="Select Example"
-        onSelected={props.onSelected}
-        defaultSelected={selectedExampleItem}
+        onChange={(value, { action }) =>
+          action === 'select-option' && props.onSelected(value)
+        }
+        defaultValue={selectedExampleItem}
       />
     </Control>
   );
@@ -239,16 +257,16 @@ export default class Examples extends React.Component<Props, State> {
     router: PropTypes.object.isRequired,
   };
 
-  onPackageSelected = (selected: { item: { value: string } }) => {
-    const [groupId, packageId] = selected.item.value.split('/');
+  onPackageSelected = (selected: { value: string }) => {
+    const [groupId, packageId] = selected.value.split('/');
     this.updateSelected(groupId, packageId);
   };
 
-  onExampleSelected = (selected: { item: { value: string } }) => {
+  onExampleSelected = (selected: { value: string }) => {
     this.updateSelected(
       this.props.match.params.groupId,
       this.props.match.params.pkgId,
-      selected.item.value,
+      selected.value,
     );
   };
 
