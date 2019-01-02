@@ -1,1 +1,0 @@
-- Remove scroll listener in componentWillMount in Tooltip to fix potential memory leak from 'close' tooltip not properly unmounting when hiding Examples modal via the X button
