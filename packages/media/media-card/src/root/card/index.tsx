@@ -54,7 +54,6 @@ export class Card extends Component<CardProps, CardState> {
   };
 
   componentDidMount() {
-    console.log('Card componentDidMount');
     const { identifier, context } = this.props;
     this.hasBeenMounted = true;
     this.subscribe(identifier, context);
@@ -330,7 +329,6 @@ export class Card extends Component<CardProps, CardState> {
 
   onInlinePlayerClick = () => {
     const { onClick } = this.props;
-    console.log('onInlinePlayerClick');
     if (onClick && this.onClickPayload) {
       onClick(this.onClickPayload.result, this.onClickPayload.analyticsEvent);
     }

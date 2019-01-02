@@ -225,7 +225,6 @@ export default class MediaSingleNode extends Component<
         }}
       />
     );
-    console.log({ canResize });
 
     return canResize ? (
       <ResizableMediaSingle
