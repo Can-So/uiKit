@@ -1,0 +1,1 @@
+- Use @atlaskit/select instead of @atlaskit/single-select on the Fullscreen examples on website
