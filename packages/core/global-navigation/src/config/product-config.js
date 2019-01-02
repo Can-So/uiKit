@@ -52,9 +52,10 @@ function configFactory(
   otherConfig: OtherConfig = {},
 ) {
   const { href, shouldNotRender } = otherConfig;
-  const shouldNotRenderItem = shouldNotRender || (!onClick && !href);
+  const isRequiredPropertyMissing = !onClick && !href;
+  const shouldNotRenderItem = shouldNotRender || isRequiredPropertyMissing;
 
-  if (shouldNotRenderItem && (tooltip || isNotEmpty(otherConfig))) {
+  if (isRequiredPropertyMissing && (tooltip || isNotEmpty(otherConfig))) {
     // eslint-disable-next-line no-console
     console.warn(
       `One of the items in the Global Navigation is missing an onClick (or an href in case of the productIcon). This item will not be rendered in Global Navigation.`,

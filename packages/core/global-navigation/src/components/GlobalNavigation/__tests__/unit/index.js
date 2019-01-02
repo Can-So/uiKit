@@ -81,6 +81,12 @@ describe('GlobalNavigation', () => {
   });
 
   describe('Drawers', () => {
+    const settingsDrawer = {
+      akIcon: SettingsIcon,
+      capitalisedName: 'Settings',
+      name: 'settings',
+    };
+
     const drawerItems = [
       {
         akIcon: SearchIcon,
@@ -102,11 +108,7 @@ describe('GlobalNavigation', () => {
         capitalisedName: 'Notification',
         name: 'notification',
       },
-      {
-        akIcon: SettingsIcon,
-        capitalisedName: 'Settings',
-        name: 'settings',
-      },
+      settingsDrawer,
     ];
 
     drawerItems.forEach(({ name, akIcon, capitalisedName }) => {
@@ -124,6 +126,7 @@ describe('GlobalNavigation', () => {
         it(`should not bind "${name}Drawer" when "on${capitalisedName}Click" prop is passed`, () => {
           // Testing onXClick positive
           const props = {
+            shouldShowSettingsIcon: name === settingsDrawer.name,
             [`on${capitalisedName}Click`]: jest.fn(),
           };
           const wrapper = mount(<GlobalNavigation {...props} />);
@@ -140,6 +143,7 @@ describe('GlobalNavigation', () => {
         it(`should honour the shouldUnmountOnExit prop for "${name}" drawer`, () => {
           // test shouldXUnmountOnExit
           const props = {
+            shouldShowSettingsIcon: name === settingsDrawer.name,
             [`${name}DrawerContents`]: DrawerContents,
             [`on${capitalisedName}DrawerClose`]: jest.fn(),
             [`on${capitalisedName}DrawerOpen`]: jest.fn(),
@@ -163,6 +167,7 @@ describe('GlobalNavigation', () => {
 
         it(`should default the width of the "${name}" drawer to "wide" when the drawer width is not passed in`, () => {
           const props = {
+            shouldShowSettingsIcon: name === settingsDrawer.name,
             [`${name}DrawerContents`]: DrawerContents,
           };
           const wrapper = shallow(<GlobalNavigation {...props} />);
@@ -173,6 +178,7 @@ describe('GlobalNavigation', () => {
 
         it(`should set the width of the "${name}" drawer when the drawer width is passed in`, () => {
           const props = {
+            shouldShowSettingsIcon: name === settingsDrawer.name,
             [`${name}DrawerWidth`]: 'full',
             [`${name}DrawerContents`]: DrawerContents,
           };
@@ -186,6 +192,7 @@ describe('GlobalNavigation', () => {
         it(`should pass onCloseComplete to the "${name}" drawer`, () => {
           const onCloseComplete = jest.fn();
           const props = {
+            shouldShowSettingsIcon: name === settingsDrawer.name,
             [`${name}DrawerContents`]: DrawerContents,
             [`on${capitalisedName}DrawerCloseComplete`]: onCloseComplete,
           };
@@ -200,6 +207,7 @@ describe('GlobalNavigation', () => {
           it(`should open "${name}" drawer when "${name}" icon is clicked`, () => {
             // Testing XDrawerContents positive
             const props = {
+              shouldShowSettingsIcon: name === settingsDrawer.name,
               [`${name}DrawerContents`]: DrawerContents,
             };
             const wrapper = mount(<GlobalNavigation {...props} />);
@@ -214,6 +222,7 @@ describe('GlobalNavigation', () => {
           it(`should trigger drawer "on${capitalisedName}DrawerOpen" for uncontrolled "${name}" drawer`, () => {
             // Test  onXDrawerClose, onXDrawerOpen
             const props = {
+              shouldShowSettingsIcon: name === settingsDrawer.name,
               [`${name}DrawerContents`]: DrawerContents,
               [`on${capitalisedName}DrawerOpen`]: jest.fn(),
             };
@@ -227,6 +236,7 @@ describe('GlobalNavigation', () => {
           it(`should fire drawer "on${capitalisedName}DrawerClose" for uncontrolled "${name}" drawer`, () => {
             // Test  onXDrawerClose, onXDrawerOpen
             const props = {
+              shouldShowSettingsIcon: name === settingsDrawer.name,
               [`${name}DrawerContents`]: DrawerContents,
               [`on${capitalisedName}DrawerClose`]: jest.fn(),
             };
@@ -244,6 +254,7 @@ describe('GlobalNavigation', () => {
           it(`should allow "${name}" drawer to be controlled by passing "is${capitalisedName}DrawerOpen"`, () => {
             // Test onXClick, onXDrawerClose, isXDrawerOpen
             const props = {
+              shouldShowSettingsIcon: name === settingsDrawer.name,
               [`${name}DrawerContents`]: DrawerContents,
               [`is${capitalisedName}DrawerOpen`]: false,
               [`on${capitalisedName}Click`]: jest.fn(),
@@ -260,6 +271,7 @@ describe('GlobalNavigation', () => {
 
           it(`should display "${name}" drawer when "is${capitalisedName}DrawerOpen" is true`, () => {
             const props = {
+              shouldShowSettingsIcon: name === settingsDrawer.name,
               [`${name}DrawerContents`]: DrawerContents,
               [`is${capitalisedName}DrawerOpen`]: true,
               [`on${capitalisedName}Click`]: jest.fn(),
@@ -271,6 +283,7 @@ describe('GlobalNavigation', () => {
 
           it(`should NOT display "${name}" drawer when "is${capitalisedName}DrawerOpen" is false`, () => {
             const props = {
+              shouldShowSettingsIcon: name === settingsDrawer.name,
               [`${name}DrawerContents`]: DrawerContents,
               [`is${capitalisedName}DrawerOpen`]: false,
               [`on${capitalisedName}Click`]: jest.fn(),
@@ -289,6 +302,7 @@ describe('GlobalNavigation', () => {
           it(`should trigger "on${capitalisedName}DrawerClose" callback for "${name}" drawer`, () => {
             // Test  onXDrawerClose
             const props = {
+              shouldShowSettingsIcon: name === settingsDrawer.name,
               [`is${capitalisedName}DrawerOpen`]: true,
               [`${name}DrawerContents`]: DrawerContents,
               [`on${capitalisedName}DrawerClose`]: jest.fn(),
@@ -326,6 +340,7 @@ describe('GlobalNavigation', () => {
         loginHref="#login"
         helpItems={() => <div>items</div>}
         helpTooltip="help tooltip"
+        shouldShowSettingsIcon
         onSettingsClick={noop}
         settingsTooltip="settings tooltip"
       />,
@@ -342,6 +357,7 @@ describe('GlobalNavigation', () => {
         onSettingsClick={noop}
         loginHref="#login"
         helpItems={() => <div>items</div>}
+        shouldShowSettingsIcon
       />,
     );
 
@@ -416,95 +432,108 @@ describe('GlobalNavigation', () => {
   });
 
   describe('Section and ranking of global nav items', () => {
-    const wrapper = mount(
-      <GlobalNavigation
-        productIcon={EmojiAtlassianIcon}
-        productHref="#"
-        onProductClick={noop}
-        onCreateClick={noop}
-        onSearchClick={noop}
-        onStarredClick={noop}
-        onNotificationClick={noop}
-        onSettingsClick={noop}
-        loginHref="#login"
-        helpItems={() => <div>items</div>}
-      />,
+    const shouldShowSettingsIconPossibleValues = [true, false];
+
+    shouldShowSettingsIconPossibleValues.forEach(
+      shouldShowSettingsIconValue => {
+        describe(`when shouldShowSettingsIcon === ${shouldShowSettingsIconValue}`, () => {
+          const wrapper = mount(
+            <GlobalNavigation
+              productIcon={EmojiAtlassianIcon}
+              productHref="#"
+              onProductClick={noop}
+              onCreateClick={noop}
+              onSearchClick={noop}
+              onStarredClick={noop}
+              onNotificationClick={noop}
+              onSettingsClick={noop}
+              loginHref="#login"
+              helpItems={() => <div>items</div>}
+              shouldShowSettingsIcon={shouldShowSettingsIconValue}
+            />,
+          );
+
+          const navItems = [
+            {
+              id: 'productLogo',
+              name: 'product',
+              section: 'primary',
+              rank: 1,
+            },
+            {
+              id: 'starDrawer',
+              name: 'starred',
+              section: 'primary',
+              rank: 2,
+            },
+            {
+              id: 'quickSearch',
+              name: 'search',
+              section: 'primary',
+              rank: 3,
+            },
+            {
+              id: 'create',
+              name: 'create',
+              section: 'primary',
+              rank: 4,
+            },
+            {
+              id: 'notifications',
+              name: 'notification',
+              section: 'secondary',
+              rank: 1,
+            },
+            {
+              id: 'profile',
+              name: 'profile',
+              section: 'secondary',
+              rank: shouldShowSettingsIconValue ? 4 : 3,
+            },
+            {
+              id: 'help',
+              name: 'help',
+              section: 'secondary',
+              rank: 2,
+            },
+          ];
+
+          if (shouldShowSettingsIconValue) {
+            navItems.push({
+              id: 'settings',
+              name: 'settings',
+              section: 'secondary',
+              rank: 3,
+            });
+          }
+
+          navItems.forEach(({ id, section, rank, name }) => {
+            const globalSection =
+              section === 'primary' ? 'PrimaryItemsList' : 'SecondaryItemsList';
+
+            it(`should pick up section for "${name}" from defaultConfig`, () => {
+              expect(
+                wrapper
+                  .find(`[id="${id}"]`)
+                  .filter('GlobalItemBase')
+                  .parents()
+                  .exists(globalSection),
+              ).toBeTruthy();
+            });
+
+            it(`should pick up rank for "${name}" from defaultConfig`, () => {
+              expect(
+                wrapper
+                  .find(globalSection)
+                  .find('GlobalItemBase')
+                  .at(rank - 1) // arrays start at 0
+                  .is(`[id="${id}"]`),
+              ).toBeTruthy();
+            });
+          });
+        });
+      },
     );
-    const navItems = [
-      {
-        id: 'productLogo',
-        name: 'product',
-        section: 'primary',
-        rank: 1,
-      },
-      {
-        id: 'starDrawer',
-        name: 'starred',
-        section: 'primary',
-        rank: 2,
-      },
-      {
-        id: 'quickSearch',
-        name: 'search',
-        section: 'primary',
-        rank: 3,
-      },
-      {
-        id: 'create',
-        name: 'create',
-        section: 'primary',
-        rank: 4,
-      },
-      {
-        id: 'notifications',
-        name: 'notification',
-        section: 'secondary',
-        rank: 1,
-      },
-      {
-        id: 'profile',
-        name: 'profile',
-        section: 'secondary',
-        rank: 4,
-      },
-      {
-        id: 'help',
-        name: 'help',
-        section: 'secondary',
-        rank: 2,
-      },
-      {
-        id: 'settings',
-        name: 'settings',
-        section: 'secondary',
-        rank: 3,
-      },
-    ];
-
-    navItems.forEach(({ id, section, rank, name }) => {
-      const globalSection =
-        section === 'primary' ? 'PrimaryItemsList' : 'SecondaryItemsList';
-
-      it(`should pick up section for "${name}" from defaultConfig`, () => {
-        expect(
-          wrapper
-            .find(`[id="${id}"]`)
-            .filter('GlobalItemBase')
-            .parents()
-            .exists(globalSection),
-        ).toBeTruthy();
-      });
-
-      it(`should pick up rank for "${name}" from defaultConfig`, () => {
-        expect(
-          wrapper
-            .find(globalSection)
-            .find('GlobalItemBase')
-            .at(rank - 1) // arrays start at 0
-            .is(`[id="${id}"]`),
-        ).toBeTruthy();
-      });
-    });
   });
 
   describe('Notification', () => {
