@@ -1,0 +1,1 @@
+- Disable alignment when editor is disabled
