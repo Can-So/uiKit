@@ -1,0 +1,1 @@
+- Remove deprecated methods from media-core + adopt new ones in other media components + remove link support from media-card
