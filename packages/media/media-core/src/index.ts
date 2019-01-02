@@ -16,8 +16,8 @@ export {
   MediaType,
 } from '@atlaskit/media-store';
 export * from './context/context';
-export * from './services';
 export * from './utils';
 export * from './fileState';
 export * from './utils/getMediaTypeFromMimeType';
 export * from './context/fileStreamCache';
+export type ImageResizeMode = 'crop' | 'fit' | 'full-fit' | 'stretchy-fit';

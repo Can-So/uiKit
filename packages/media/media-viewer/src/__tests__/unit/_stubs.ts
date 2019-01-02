@@ -5,7 +5,6 @@ import {
   Context,
   ContextConfig,
   MediaItem,
-  BlobService,
   Auth,
   FileState,
 } from '@atlaskit/media-core';
@@ -47,29 +46,12 @@ export class Stubs {
     };
   }
 
-  static blobService() {
-    return {
-      fetchImageBlob: jest.fn(() => Promise.resolve(new Blob())),
-      fetchOriginalBlob: jest.fn(() => Promise.resolve(new Blob())),
-      fetchImageBlobCancelable: jest.fn(() => ({
-        response: Promise.resolve(new Blob()),
-        cancel: jest.fn(),
-      })),
-      fetchOriginalBlobCancelable: jest.fn(() => ({
-        response: Promise.resolve(new Blob()),
-        cancel: jest.fn(),
-      })),
-    };
-  }
-
   static context(
     config: ContextConfig,
-    blobService?: BlobService,
     getFileState?: () => Observable<FileState>,
   ): Partial<Context> {
     return {
       config,
-      getBlobService: jest.fn(() => blobService || Stubs.blobService()),
       file: {
         downloadBinary: jest.fn(),
         getFileState: jest.fn(getFileState || (() => Observable.empty())),
@@ -85,7 +67,6 @@ export class Stubs {
 
 export interface CreateContextOptions {
   authPromise?: Promise<Auth>;
-  blobService?: BlobService;
   getFileState?: () => Observable<FileState>;
   config?: ContextConfig;
 }
@@ -97,19 +78,13 @@ export const createContext = (options?: CreateContextOptions) => {
       clientId: 'some-client-id',
       baseUrl: 'some-service-host',
     }),
-    blobService: undefined,
     getFileState: undefined,
     config: undefined,
   };
-  const { authPromise, blobService, getFileState, config } =
-    options || defaultOptions;
+  const { authPromise, getFileState, config } = options || defaultOptions;
   const authProvider = jest.fn(() => authPromise);
   const contextConfig: ContextConfig = {
     authProvider,
   };
-  return Stubs.context(
-    config || contextConfig,
-    blobService,
-    getFileState,
-  ) as Context;
+  return Stubs.context(config || contextConfig, getFileState) as Context;
 };

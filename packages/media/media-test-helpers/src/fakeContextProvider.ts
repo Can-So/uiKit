@@ -16,7 +16,6 @@ export const fakeContext = (
   const returns = (value: any) => jest.fn().mockReturnValue(value);
   const getFile = jest.fn().mockReturnValue(of({}));
   const downloadBinary = jest.fn();
-  const getBlobService = jest.fn();
   const collection = {
     getItems: returns(of([])),
     loadNextPage: jest.fn(),
@@ -30,7 +29,6 @@ export const fakeContext = (
   const defaultContext: Context = {
     getImageMetadata,
     getImage,
-    getBlobService,
     config,
     collection,
     file,

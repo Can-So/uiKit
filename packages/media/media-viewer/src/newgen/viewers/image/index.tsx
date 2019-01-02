@@ -40,18 +40,19 @@ export class ImageViewer extends BaseViewer<ObjectUrl, ImageViewerProps> {
   }
 
   protected async init() {
-    const { item: file, context } = this.props;
+    const { item: file, context, collectionName } = this.props;
     try {
-      const service = context.getBlobService(this.props.collectionName);
-      // MSW-922: once we make getImage cancelable we can use it instead of fetchImageBlobCancelable
       const item = processedFileStateToMediaItem(file);
-      const { response, cancel } = service.fetchImageBlobCancelable(item, {
+      const controller =
+        typeof AbortController !== 'undefined' && new AbortController();
+      const response = context.getImage(item.details.id, {
         width: 1920,
         height: 1080,
         mode: 'fit',
         allowAnimated: true,
+        collection: collectionName,
       });
-      this.cancelImageFetch = () => cancel(REQUEST_CANCELLED);
+      this.cancelImageFetch = () => controller && controller.abort();
       const objectUrl = URL.createObjectURL(await response);
       this.setState({
         content: Outcome.successful(objectUrl),

@@ -17,22 +17,10 @@ export type RequestOptions = {
   readonly body?: any;
 };
 
-// TODO: use this for requests
-// const addAcceptHeader = (headers: any) =>
-//   checkWebpSupport().then(isWebpSupported => {
-//     // q=0.8 stands for 'quality factor' => http://stackoverflow.com/a/10496722
-//     if (isWebpSupported) {
-//       headers.accept = 'image/webp,image/*,*/*;q=0.8';
-//     } else {
-//       headers.accept = 'image/*,*/*;q=0.8';
-//     }
-
-//     return headers;
-//   });
-
 export function request(
   url: string,
   options: RequestOptions = {},
+  controller?: AbortController,
 ): Promise<Response> {
   const { method = 'GET', auth, params, headers, body } = options;
 
@@ -49,6 +37,7 @@ export function request(
       method,
       body,
       headers,
+      signal: controller && controller.signal,
     }).then(processFetchResponse);
   } else {
     return fetch(createUrl(url, { params }), {

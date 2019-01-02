@@ -5,12 +5,14 @@ import {
   ImageMetadata,
 } from '@atlaskit/media-store';
 import { CollectionFetcher } from '../collection';
-import { BlobService, MediaBlobService } from '../services/blobService';
 import { FileFetcher } from '../file';
 
 export interface Context {
-  getBlobService(collectionName?: string): BlobService;
-  getImage(id: string, params?: MediaStoreGetFileImageParams): Promise<Blob>;
+  getImage(
+    id: string,
+    params?: MediaStoreGetFileImageParams,
+    controller?: AbortController,
+  ): Promise<Blob>;
   getImageMetadata(
     id: string,
     params?: MediaStoreGetFileImageParams,
@@ -40,13 +42,12 @@ class ContextImpl implements Context {
     this.file = new FileFetcher(this.mediaStore);
   }
 
-  // TODO: remove usage from MV and use getImage
-  getBlobService(collectionName?: string): BlobService {
-    return new MediaBlobService(this.config.authProvider, collectionName);
-  }
-
-  getImage(id: string, params?: MediaStoreGetFileImageParams): Promise<Blob> {
-    return this.mediaStore.getImage(id, params);
+  getImage(
+    id: string,
+    params?: MediaStoreGetFileImageParams,
+    controller?: AbortController,
+  ): Promise<Blob> {
+    return this.mediaStore.getImage(id, params, controller);
   }
 
   async getImageMetadata(
