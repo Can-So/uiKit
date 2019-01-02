@@ -6,7 +6,6 @@ import {
   BlockCardErroredView,
   InlineCardErroredView,
 } from '@atlaskit/media-ui';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { GasPayload } from '@atlaskit/analytics-gas-types';
 
@@ -102,15 +101,13 @@ class InnerWithObject extends React.Component<
   }
 }
 
-export interface WithObjectProps {
+export type WithObjectProps = {
   client?: Client;
   isSelected?: boolean;
   appearance: 'block' | 'inline';
   url: string;
   children: (props: WithObjectRenderProps) => React.ReactNode;
-}
-
-const WithAnalytics = withAnalyticsEvents()(InnerWithObject);
+} & WithAnalyticsEventProps;
 
 export function WithObject(props: WithObjectProps) {
   const {
@@ -119,6 +116,7 @@ export function WithObject(props: WithObjectProps) {
     children,
     isSelected,
     appearance,
+    createAnalyticsEvent,
   } = props;
   return (
     <Context.Consumer>
@@ -147,9 +145,13 @@ export function WithObject(props: WithObjectProps) {
           );
         }
         return (
-          <WithAnalytics client={client} url={url}>
+          <InnerWithObject
+            client={client}
+            url={url}
+            createAnalyticsEvent={createAnalyticsEvent}
+          >
             {children}
-          </WithAnalytics>
+          </InnerWithObject>
         );
       }}
     </Context.Consumer>

@@ -25,7 +25,7 @@ import {
 import { ClientConfig } from '../../../Client';
 import Button from '@atlaskit/button';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
-import { resolvedEvent } from '../../../Client/analytics';
+import { resolvedEvent } from '../../../analytics';
 
 function createClient(
   consequentStates?: ObjectState[],

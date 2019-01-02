@@ -4,7 +4,7 @@ import * as fetchMock from 'fetch-mock';
 import { Client, RemoteResourceAuthConfig, ResolveResponse } from '../..';
 import { ObjectState, GetNowTimeFn, DefinedState } from '../../types';
 import { v4 } from 'uuid';
-import { resolvedEvent, unresolvedEvent } from '../../analytics';
+import { resolvedEvent, unresolvedEvent } from '../../../analytics';
 
 const getNow = (nows: number[]): GetNowTimeFn => () =>
   nows.shift() || new Date().getTime();

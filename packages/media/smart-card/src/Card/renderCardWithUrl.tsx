@@ -13,12 +13,14 @@ import {
   InlineCardUnauthorizedView,
 } from '@atlaskit/media-ui';
 import { auth } from '@atlaskit/outbound-auth-flow-client';
+import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { ObjectState, Client } from '../Client';
 import { extractBlockPropsFromJSONLD } from '../extractBlockPropsFromJSONLD';
 import { extractInlinePropsFromJSONLD } from '../extractInlinePropsFromJSONLD';
 import { DefinedState } from '../Client/types';
 import { CardAppearance } from './types';
 import { WithObject } from '../WithObject';
+import { connectFailedEvent, connectSucceededEvent } from '../analytics';
 
 const getCollapsedIcon = (state: DefinedState): string | undefined => {
   const { data } = state;
@@ -165,22 +167,30 @@ const renderInlineCard = (
   }
 };
 
-export interface CardWithUrlContentProps {
+export type CardWithUrlContentProps = {
   client: Client;
   url: string;
   appearance: CardAppearance;
   onClick?: () => void;
   isSelected?: boolean;
-}
+} & WithAnalyticsEventProps;
 
 export function CardWithUrlContent(props: CardWithUrlContentProps) {
-  const { url, isSelected, onClick, client, appearance } = props;
+  const {
+    url,
+    isSelected,
+    onClick,
+    client,
+    appearance,
+    createAnalyticsEvent,
+  } = props;
   return (
     <WithObject
       client={client}
       url={url}
       isSelected={isSelected}
       appearance={appearance}
+      createAnalyticsEvent={createAnalyticsEvent}
     >
       {({ state, reload }) => {
         // TODO: support multiple auth services
@@ -190,8 +200,27 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
 
         const handleAuthorise = () => {
           auth(firstAuthService.startAuthUrl).then(
-            () => reload(),
-            () => reload(),
+            () => {
+              if (createAnalyticsEvent) {
+                createAnalyticsEvent(connectSucceededEvent(url, state)).fire(
+                  'media',
+                );
+              }
+              reload();
+            },
+            () => {
+              if (createAnalyticsEvent) {
+                createAnalyticsEvent(
+                  // The outbound-auth-flow-client lib, when
+                  // outbound-auth:failure happens rejects with
+                  // a data.message.
+                  // But I am not sure if I can use this message here
+                  // as it might contain sensitive data.
+                  connectFailedEvent('unknown', url, state),
+                ).fire('media');
+              }
+              reload();
+            },
           );
         };
 

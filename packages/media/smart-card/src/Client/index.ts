@@ -20,7 +20,7 @@ import {
 import { Store } from './store';
 import { StateWatch } from './stateWatcher';
 import { F1 } from './utils';
-import { resolvedEvent, unresolvedEvent } from './analytics';
+import { resolvedEvent, unresolvedEvent } from '../analytics';
 import { GasPayload } from '@atlaskit/analytics-gas-types';
 
 // TODO: add some form of caching so that urls not currently loaded will still be fast
