@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.9.3
+- [patch] [df74239](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df74239):
+
+  - Parse mailto text
+
 ## 2.9.2
 - [patch] [1d9228c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d9228c):
 
