@@ -1,0 +1,1 @@
+- Parse mailto text

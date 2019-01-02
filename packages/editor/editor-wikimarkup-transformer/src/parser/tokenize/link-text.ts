@@ -3,7 +3,7 @@ import { Schema } from 'prosemirror-model';
 import { Token } from './';
 
 // https://www.atlassian.com
-export const LINK_TEXT_REGEXP = /^(https?|irc):\/\/[\w.?\/\\#-=]+/;
+export const LINK_TEXT_REGEXP = /^(https?:\/\/|irc:\/\/|mailto:)([\w.?\/\\#-=@]+)/;
 
 export function linkText(
   input: string,
@@ -16,7 +16,8 @@ export function linkText(
     return fallback(input, position);
   }
 
-  const textRepresentation = match[0];
+  // Remove mailto:
+  const textRepresentation = match[1] === 'mailto:' ? match[2] : match[0];
   const url = unescape(match[0]);
 
   if (!isSafeUrl(url)) {
