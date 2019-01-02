@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.9.4
+- [patch] [aca2425](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aca2425):
+
+  - Escaping in common formatter
+
 ## 2.9.3
 - [patch] [df74239](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df74239):
 

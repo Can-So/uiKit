@@ -1,1 +1,0 @@
-- Escaping in common formatter
