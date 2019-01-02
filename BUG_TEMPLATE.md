@@ -1,9 +1,6 @@
 ### Prerequisites
 
-Checked that your issue isn't already filed: 
-* [https://bitbucket.org/atlassian/atlaskit-mk-2/issues?status=new&status=open](https://bitbucket.org/atlassian/atlaskit-mk-2/issues?status=new&status=open)
-
-* If you have access to Atlaskit Jira project, use this query: "project = AK and issuetype = Bug ORDER BY createdDate"
+Checked that your bug report hasn't already being filed [here](https://ecosystem.atlassian.net/issues/?filter=61467)
 
 ### Description
 
