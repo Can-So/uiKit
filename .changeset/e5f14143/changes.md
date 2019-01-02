@@ -1,0 +1,1 @@
+- added maxWidth to other buttons

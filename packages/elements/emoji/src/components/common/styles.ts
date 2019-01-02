@@ -449,8 +449,12 @@ export const emojiPreviewErrorMessage = style({
   alignItems: 'center',
 });
 
+export const addCustomEmojiButton = style({
+  maxWidth: '285px',
+});
+
 export const uploadRetryButton = style({
-  maxWidth: '175px',
+  maxWidth: '172px',
   justifyContent: 'center',
   fontWeight: 'bold',
   marginRight: '4px',
@@ -462,6 +466,7 @@ export const uploadRetryButton = style({
 });
 
 export const uploadEmojiButton = style({
+  maxWidth: '187px',
   justifyContent: 'center',
   marginRight: '4px',
   $nest: {

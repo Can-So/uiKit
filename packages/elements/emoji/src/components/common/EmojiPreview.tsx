@@ -122,6 +122,7 @@ export default class EmojiPreview extends PureComponent<Props, State> {
     );
   }
 
+  // note: emoji-picker-add-emoji className is used by pollinator synthetic checks
   renderAddOwnEmoji() {
     const { onOpenUpload, uploadEnabled } = this.props;
     const { selectingTone } = this.state;
@@ -137,7 +138,9 @@ export default class EmojiPreview extends PureComponent<Props, State> {
               onClick={onOpenUpload}
               iconBefore={<AddIcon label={label as string} size="small" />}
               appearance="subtle"
-              className="emoji-picker-add-emoji"
+              className={
+                styles.addCustomEmojiButton + ' emoji-picker-add-emoji'
+              }
             >
               {label as string}
             </AkButton>
