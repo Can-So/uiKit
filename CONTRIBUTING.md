@@ -6,17 +6,19 @@ This project is bound by a [Code of Conduct][codeofconduct].
 
 Lots more information about contributing to this project can also be found on our website. See [getting-started][getting-started] for more.
 
-## Reporting Issues
+## Reporting Tickets
 
-This section guides you through submitting a bug report for Atlaskit. Following these guidelines helps us and the community understand your issue, reproduce the behavior, and find related issues.
+Our service desk is now open to public, you can access it [here](https://ecosystem.atlassian.net/servicedesk/customer/portal/24).
 
-When you are creating an issue, please include as many details as possible. Fill out [the required template](ISSUE_TEMPLATE.md), the information it asks helps us resolve issues faster.
-
-### Before submitting an issue
+### Before submitting a ticket
 
 * **Perform a [cursory search][issuetracker]** to see if the problem has already been reported. If it has, add a comment to the existing issue instead of opening a new one.
 
-### How do I submit a (good) issue?
+### How do I submit a (good) bug report?
+
+Follow these guidelines to help us and the community understand your issue, reproduce the behavior, and find other related/duplicate issues.
+
+When you are creating a bug report, please include as many details as possible. Fill out [the required template](BUG_TEMPLATE.md) thoroughly to help us resolve issues faster.
 
 * **Use a clear and descriptive title** for the issue to identify the problem.
 * **Describe the exact steps which reproduce the problem** in as many details as possible. Add a link to a codesanbox example using [this codesanbox](http://go.atlassian.com/ak-sandbox) as starting point. When listing steps, **don't just say what you did, but explain how you did it**. For example, if you opened a inline dialog, explain if you used the mouse, or a keyboard shortcut.
@@ -31,14 +33,10 @@ Include details about your configuration and environment:
 
 #### Why should I contribute?
 
-1. While we strive to look at new issues as soon as we can, because of the many priorities we juggle and limited resources, issues raised often don't get looked into soon enough.
+1. While we strive to look at new tickets as soon as we can, because of the many priorities we juggle and limited resources, tickets raised often don't get looked into soon enough.
 2. We want your contributions. We are always trying to improve our docs, processes and tools to make it easier to submit your own changes.
 3. With the build system and auto-deployment to npm, using Atlaskit components in your projects simplifies your development stack. Treat Atlaskit as part of your codebase and make changes in it.
 4. At Atlassian, "Play, As A Team" is one of our values. We encourage cross team contributions and collaborations.
-
-Please raise a new issue:
-* For Atlassians staff, please use this [internal link][atlassianbug].
-* For External contributors, please use this [link][issuetracker].
 
 # Contributing
 
@@ -387,8 +385,7 @@ create the changelog entry for each package being released.
 More information about this can be found [here][releasing-packages] and in the [faq][faq]
 
 [codeofconduct]: ./CODE_OF_CONDUCT.md
-[issuetracker]: https://bitbucket.org/atlassian/atlaskit-mk-2/issues?status=new&status=open
-[atlassianbug]: http://go/ak-bug
+[issuetracker]: https://ecosystem.atlassian.net/issues/?filter=56701
 [testing]: https://atlaskit.atlassian.com/docs/guides/testing
 [releasing-packages]: https://atlaskit.atlassian.com/docs/guides/releasing-packages
 [getting-started]: https://atlaskit.atlassian.com/docs/getting-started
