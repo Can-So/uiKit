@@ -280,7 +280,7 @@ export class MediaStore {
     });
   };
 
-  // TODO: add WEBP header
+  // TODO [MS-1352]: add WEBP header
   getImage = (
     id: string,
     params?: MediaStoreGetFileImageParams,

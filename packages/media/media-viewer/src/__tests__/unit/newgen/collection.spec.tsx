@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs';
 import { Context, MediaItemType } from '@atlaskit/media-core';
-import { createContext } from '../_stubs';
-import { Collection } from '../../../newgen/collection';
-import { ErrorMessage } from '../../../newgen/error';
-import { Identifier } from '../../../newgen/domain';
-import Spinner from '@atlaskit/spinner';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
-import { List } from '../../../newgen/list';
 import {
   mountWithIntlContext,
   fakeContext,
 } from '@atlaskit/media-test-helpers';
 import { MediaCollectionItem } from '@atlaskit/media-store';
-import { Observable } from 'rxjs';
+import Spinner from '@atlaskit/spinner';
+import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
+import { createContext } from '../_stubs';
+import { Collection } from '../../../newgen/collection';
+import { ErrorMessage } from '../../../newgen/error';
+import { Identifier } from '../../../newgen/domain';
+import { List } from '../../../newgen/list';
 
 const collectionName = 'my-collection';
 
