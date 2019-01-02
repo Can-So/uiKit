@@ -186,8 +186,6 @@ export type GlobalNavigationProps = {
   onSettingsClick?: ?() => void,
   /** The text to display in the tooltip for the settings drawer item. */
   settingsTooltip?: string,
-  /** Determines whether to show settings icon in global navigation or not. Is false by default, since not every user has access to settings */
-  shouldShowSettingsIcon?: boolean,
 
   ...$Exact<GlobalNavDrawerProps>,
 };

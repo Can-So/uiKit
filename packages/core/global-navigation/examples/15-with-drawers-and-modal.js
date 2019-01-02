@@ -254,7 +254,6 @@ class GlobalNavWithDrawers extends Component<Props, State> {
           // Help
           helpItems={HelpDropdown}
           // Settings
-          shouldShowSettingsIcon
           settingsDrawerContents={this.renderSettingsDrawerContents}
           onSettingsDrawerCloseComplete={this.onCloseComplete}
           shouldSettingsDrawerUnmountOnExit={unmountOnExit}

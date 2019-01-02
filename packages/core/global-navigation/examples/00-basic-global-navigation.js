@@ -32,7 +32,6 @@ const Global = () => (
     appSwitcherComponent={AppSwitcherComponent}
     appSwitcherTooltip="Switch to ..."
     helpItems={() => <div />}
-    shouldShowSettingsIcon
     onSettingsClick={() => console.log('settings clicked')}
     loginHref="#login"
   />
