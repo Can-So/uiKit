@@ -58,15 +58,15 @@ export default class MediaSingleNode extends Component<
     ) as MediaPluginState;
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: MediaSingleNodeProps) {
     if (
       this.props.node.attrs.width !== nextProps.node.attrs.width ||
       this.props.selected() !== nextProps.selected() ||
       this.props.node.attrs.layout !== nextProps.node.attrs.layout ||
       this.props.width !== nextProps.width ||
       this.props.lineLength !== nextProps.lineLength ||
-      this.props.getPos !== nextProps.getPos ||
-      this.mediaChildHasUpdated(nextProps)
+      this.props.getPos !== nextProps.getPos
+      // this.mediaChildHasUpdated(nextProps)
     ) {
       return true;
     }
@@ -225,6 +225,7 @@ export default class MediaSingleNode extends Component<
         }}
       />
     );
+    console.log({ canResize });
 
     return canResize ? (
       <ResizableMediaSingle

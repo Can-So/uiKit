@@ -34,7 +34,7 @@ export class InlinePlayer extends Component<
   async componentDidMount() {
     const { context, identifier } = this.props;
     const { id, collectionName } = identifier;
-
+    console.log('inlinePlayer componentDidMount');
     this.revoke();
     this.unsubscribe();
     this.subscription = context.file
@@ -115,9 +115,10 @@ export class InlinePlayer extends Component<
     const { fileSrc } = this.state;
 
     if (!fileSrc) {
+      console.log('inlinePlayer loading');
       return <CardLoading mediaItemType="file" dimensions={dimensions} />;
     }
-
+    console.log('inlinePlayer loaded');
     return (
       <InlinePlayerWrapper style={this.getStyle()} onClick={onClick}>
         <CustomMediaPlayer
