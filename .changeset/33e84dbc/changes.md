@@ -1,1 +1,0 @@
-- replaced enzyme-react-intl with @atlaskit/editor-test-helpers
