@@ -1,8 +1,10 @@
 import Tag from '@atlaskit/tag';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Option } from '../types';
 import { messages } from './i18n';
 import { SizeableAvatar } from './SizeableAvatar';
+import { getAvatarUrl } from './utils';
 
 export const scrollToValue = (
   valueContainer: HTMLElement,
@@ -18,7 +20,14 @@ export const scrollToValue = (
   }
 };
 
-export class MultiValue extends React.Component<any> {
+type Props = {
+  isFocused?: boolean;
+  data: Option;
+  innerProps: any;
+  removeProps: { onClick: Function };
+};
+
+export class MultiValue extends React.Component<Props> {
   private containerRef;
   constructor(props) {
     super(props);
@@ -35,15 +44,15 @@ export class MultiValue extends React.Component<any> {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     const {
-      data: { label, user },
+      data: { label, data },
       innerProps,
       isFocused,
     } = this.props;
 
     const {
-      data: { label: nextLabel, user: nextUser },
+      data: { label: nextLabel, data: nextData },
       innerProps: nextInnerProps,
       isFocused: nextIsFocused,
     } = nextProps;
@@ -51,7 +60,7 @@ export class MultiValue extends React.Component<any> {
     // We can ignore onRemove here because it is a anonymous function
     // that will recreated every time but with the same implementation.
     return (
-      user !== nextUser ||
+      data !== nextData ||
       label !== nextLabel ||
       innerProps !== nextInnerProps ||
       isFocused !== nextIsFocused
@@ -60,10 +69,7 @@ export class MultiValue extends React.Component<any> {
 
   render() {
     const {
-      data: {
-        label,
-        user: { avatarUrl, fixed },
-      },
+      data: { label, data },
       innerProps,
       removeProps: { onClick: onRemove },
       isFocused,
@@ -80,11 +86,11 @@ export class MultiValue extends React.Component<any> {
               elemBefore={
                 <SizeableAvatar
                   appearance="compact"
-                  src={avatarUrl}
+                  src={getAvatarUrl(data)}
                   name={label}
                 />
               }
-              removeButtonText={fixed ? undefined : remove}
+              removeButtonText={data.fixed ? undefined : remove}
               onAfterRemoveAction={onRemove}
               color={isFocused ? 'blueLight' : undefined}
             />

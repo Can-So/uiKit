@@ -10,7 +10,7 @@ const PlaceholderIconContainer = styled.div`
 `;
 
 const showUserAvatar = (inputValue, value) =>
-  value && value.user && inputValue === value.label;
+  value && value.option && inputValue === value.label;
 
 export class SingleValueContainer extends React.Component<any> {
   private renderAvatar = () => {
@@ -24,7 +24,9 @@ export class SingleValueContainer extends React.Component<any> {
         <SizeableAvatar
           appearance={appearance}
           src={
-            showUserAvatar(inputValue, value) ? value.user.avatarUrl : undefined
+            showUserAvatar(inputValue, value)
+              ? value.option.avatarUrl
+              : undefined
           }
         />
       );
