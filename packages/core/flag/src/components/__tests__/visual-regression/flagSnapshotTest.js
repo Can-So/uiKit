@@ -5,7 +5,7 @@ import {
 } from '@atlaskit/visual-regression/helper';
 
 describe('Snapshot Test', () => {
-  it('Flag-without-flagGroup-should match production example', async () => {
+  it('Flag-without-flagGroup should match production example', async () => {
     const url = getExampleUrl(
       'core',
       'flag',

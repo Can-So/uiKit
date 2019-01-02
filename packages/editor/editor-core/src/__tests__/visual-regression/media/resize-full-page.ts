@@ -109,7 +109,7 @@ describe('Snapshot Test: Media', () => {
               await page.waitForSelector(layoutButton);
               await page.click(layoutButton);
 
-              await page.waitForSelector(`.media-single.wrap-left`);
+              await page.waitForSelector(`.media-single.image-wrap-left`);
 
               // resize from right handle
               await page.waitForSelector('.mediaSingle-resize-handle-right');
@@ -135,7 +135,7 @@ describe('Snapshot Test: Media', () => {
               await page.waitForSelector(layoutButton);
               await page.click(layoutButton);
 
-              await page.waitForSelector(`.media-single.wrap-right`);
+              await page.waitForSelector(`.media-single.image-wrap-right`);
 
               // resize from left handle
               await page.waitForSelector('.mediaSingle-resize-handle-left');

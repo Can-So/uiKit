@@ -614,41 +614,6 @@ export const tableStyles = css`
       padding: 0;
     }
   }
-  .${ClassName.CONTEXTUAL_SUBMENU} {
-    border-radius: ${borderRadius()}px;
-    background: white;
-    box-shadow: 0 4px 8px -2px ${N60A}, 0 0 1px ${N60A};
-    display: block;
-    position: absolute;
-    width: 130px;
-    height: 64px;
-    top: 0;
-    left: ${contextualMenuDropdownWidth}px;
-    padding: 5px;
-
-    > div {
-      padding: 0;
-    }
-  }
-  .${ClassName.CONTEXTUAL_MENU_ICON} {
-    border: 1px solid ${N30};
-    border-radius: ${borderRadius()}px;
-    display: block;
-    width: 20px;
-    height: 20px;
-    position: relative;
-    left: -10px;
-
-    &::after {
-      content: '›';
-      display: inline-block;
-      width: 1px;
-      position: relative;
-      left: 25px;
-      top: 9px;
-      color: ${N90};
-    }
-  }
 `;
 
 export const tableFullPageEditorStyles = css`
@@ -672,5 +637,44 @@ export const tableCommentEditorStyles = css`
     margin-right: 0;
 
     ${scrollbarStyles};
+  }
+`;
+
+export const tablePopupStyles = css`
+  .${ClassName.CONTEXTUAL_SUBMENU} {
+    border-radius: ${borderRadius()}px;
+    background: white;
+    box-shadow: 0 4px 8px -2px ${N60A}, 0 0 1px ${N60A};
+    display: block;
+    position: absolute;
+    width: 130px;
+    height: 64px;
+    top: 0;
+    left: ${contextualMenuDropdownWidth}px;
+    padding: 5px;
+
+    > div {
+      padding: 0;
+    }
+  }
+
+  .${ClassName.CONTEXTUAL_MENU_ICON} {
+    border: 1px solid ${N30};
+    border-radius: ${borderRadius()}px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    left: -10px;
+
+    &::after {
+      content: '›';
+      display: inline-block;
+      width: 1px;
+      position: relative;
+      left: 25px;
+      top: 9px;
+      color: ${N90};
+    }
   }
 `;

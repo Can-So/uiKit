@@ -1,5 +1,13 @@
 # @atlaskit/reactions
 
+## 15.1.0
+- [minor] [1296324](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1296324):
+
+  - added i18n support to reactions
+- [minor] [ccf385a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ccf385a):
+
+  - added i18n translations
+
 ## 15.0.11
 - Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
   - @atlaskit/emoji@49.0.0

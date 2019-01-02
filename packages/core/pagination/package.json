@@ -35,6 +35,7 @@
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/dynamic-table": "^10.0.22",
     "@atlaskit/section-message": "^1.0.14",
+    "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",
     "react-router-dom": "^4.2.2"

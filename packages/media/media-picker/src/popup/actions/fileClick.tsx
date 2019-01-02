@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 
-import { ServiceFile, SelectedItem } from '../domain';
+import { ServiceFile, SelectedItem, ServiceName } from '../domain';
 
 export const FILE_CLICK = 'FILE_CLICK';
 
@@ -15,7 +15,7 @@ export function isFileClickAction(action: Action): action is FileClickAction {
 
 export function fileClick(
   file: ServiceFile,
-  serviceName: string,
+  serviceName: ServiceName,
   accountId?: string,
 ): FileClickAction {
   return {

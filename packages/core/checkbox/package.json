@@ -35,6 +35,7 @@
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/section-message": "^1.0.14",
+    "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },

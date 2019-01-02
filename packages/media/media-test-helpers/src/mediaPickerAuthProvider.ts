@@ -1,5 +1,6 @@
 import { Auth, AuthContext, AuthProvider } from '@atlaskit/media-core';
 import { userAuthProviderBaseURL } from './userAuthProvider';
+import { defaultCollectionName } from './collectionNames';
 
 const cachedAuths: { [key: string]: Promise<Auth> } = {};
 
@@ -52,7 +53,7 @@ export const mediaPickerAuthProvider = (authEnvironment: string = 'asap') => (
   context?: AuthContext,
 ) => {
   const collectionName =
-    (context && context.collectionName) || 'MediaServicesSample';
+    (context && context.collectionName) || defaultCollectionName;
   authEnvironment = authEnvironment === 'asap' ? 'asap' : '';
   const cacheKey = `${collectionName}:${authEnvironment}`;
 

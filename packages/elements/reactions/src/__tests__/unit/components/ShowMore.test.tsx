@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { mountWithIntl } from 'enzyme-react-intl';
 import * as React from 'react';
 import { Props, ShowMore } from '../../../components/ShowMore';
 
@@ -7,7 +7,7 @@ describe('ShowMore', () => {
 
   it('should trigger onClick', () => {
     const onClick = jest.fn();
-    const showMore = mount(renderShowMore({ onClick }));
+    const showMore = mountWithIntl(renderShowMore({ onClick }));
 
     showMore.find('button').simulate('mouseDown');
     expect(onClick).toHaveBeenCalledTimes(1);
@@ -18,7 +18,7 @@ describe('ShowMore', () => {
       container: 'container-class',
       button: 'button-class',
     };
-    const showMore = mount(renderShowMore({ className }));
+    const showMore = mountWithIntl(renderShowMore({ className }));
 
     expect(
       showMore
@@ -34,7 +34,7 @@ describe('ShowMore', () => {
       container: { display: 'flex' },
       button: { backgroundColor: '#fff' },
     };
-    const showMore = mount(renderShowMore({ style }));
+    const showMore = mountWithIntl(renderShowMore({ style }));
 
     expect(
       showMore
