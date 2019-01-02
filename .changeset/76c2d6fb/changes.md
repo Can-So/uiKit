@@ -1,1 +1,0 @@
-- show emoji preview error in a tooltip, render spinner outside button, css changes
