@@ -1,1 +1,0 @@
-- Fix issue where table contextual menu had incorrect styling when using a popups mount point outside of the editor

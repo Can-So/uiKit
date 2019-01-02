@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.10
+- [patch] [6d435cf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d435cf):
+
+  - Fix issue where table contextual menu had incorrect styling when using a popups mount point outside of the editor
+
 ## 92.0.9
 - Updated dependencies [00c648e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00c648e):
 - Updated dependencies [a17bb0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a17bb0e):
