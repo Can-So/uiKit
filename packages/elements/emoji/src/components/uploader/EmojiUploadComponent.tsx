@@ -5,17 +5,14 @@ import * as classNames from 'classnames';
 
 import * as styles from './styles';
 
-import {
-  OptionalEmojiDescriptionWithVariations,
-  EmojiUpload,
-} from '../../types';
+import { EmojiUpload } from '../../types';
 import { EmojiContext } from '../common/internal-types';
 import { EmojiProvider, supportsUploadFeature } from '../../api/EmojiResource';
 import { FireAnalyticsEvent } from '@atlaskit/analytics';
 import EmojiUploadPicker from '../common/EmojiUploadPicker';
 
 export interface UploadRefHandler {
-  (ref: any): any;
+  (ref: HTMLDivElement): void;
 }
 
 export interface Props {
@@ -25,10 +22,8 @@ export interface Props {
 }
 
 export interface State {
-  toneEmoji?: OptionalEmojiDescriptionWithVariations;
   uploadErrorMessage?: string;
   uploadSupported: boolean;
-  showUploadButton: boolean;
 }
 
 export default class EmojiUploadComponent extends PureComponent<Props, State> {
@@ -48,7 +43,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
 
     this.state = {
       uploadSupported: false,
-      showUploadButton: true,
     };
 
     this.openTime = 0;
@@ -121,12 +115,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     this.primeUpload();
   };
 
-  private handleUploadRef = (ref: any) => {
-    if (this.props.onUploadRef) {
-      this.props.onUploadRef(ref);
-    }
-  };
-
   private primeUpload = () => {
     const { emojiProvider } = this.props;
     if (supportsUploadFeature(emojiProvider)) {
@@ -169,7 +157,7 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     return (
       <div
         className={classNames(classes)}
-        ref={this.handleUploadRef}
+        ref={this.props.onUploadRef}
         data-emoji-picker-container
       >
         {this.getFooter()}

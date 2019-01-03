@@ -102,6 +102,13 @@ describe('<UploadingEmojiPicker />', () => {
         .spyOn(ImageUtil, 'hasFileExceededSize')
         .mockImplementation(() => false);
 
+      jest.spyOn(ImageUtil, 'getNaturalImageSize').mockImplementation(() =>
+        Promise.resolve({
+          width: 30,
+          height: 30,
+        }),
+      );
+
       emojiProviderPromise = getEmojiResourcePromise({
         uploadSupported: true,
       });
@@ -180,7 +187,7 @@ describe('<UploadingEmojiPicker />', () => {
       expect(addEmoji.length).toEqual(1);
     });
 
-    it.skip('Upload main flow interaction', async () => {
+    it('Upload main flow interaction', async () => {
       const emojiProvider = getEmojiResourcePromise({
         uploadSupported: true,
       });
