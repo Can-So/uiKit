@@ -236,7 +236,6 @@ export class NewUploadServiceImpl implements UploadService {
         // We want to save the observable without collection too, due consumers using cards without collection.
         fileStreamsCache.set(key, observable);
         fileStreamsCache.set(keyWithCollection, observable);
-        // TODO: add test for this
         upfrontId.then(id => {
           // We assign the tenant id to the observable to not emit user id instead
           const tenantObservable = observable.pipe(
