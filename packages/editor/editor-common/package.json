@@ -37,7 +37,7 @@
     "css-color-names": "0.0.4",
     "date-fns": "^1.29.0",
     "prosemirror-model": "^1.6.1",
-    "prosemirror-view": "^1.6.7",
+    "prosemirror-view": "1.6.8",
     "raf-schd": "^2.1.0"
   },
   "peerDependencies": {
