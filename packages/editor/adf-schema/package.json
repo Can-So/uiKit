@@ -33,7 +33,7 @@
     "css-color-names": "0.0.4",
     "linkify-it": "^2.0.3",
     "prosemirror-model": "^1.6.1",
-    "prosemirror-view": "1.6.8"
+    "prosemirror-view": "^1.6.8"
   },
   "devDependencies": {
     "@atlaskit/editor-json-transformer": "^4.1.0",
