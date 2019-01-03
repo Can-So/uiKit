@@ -20,6 +20,7 @@ import {
   UploadableFileUpfrontIds,
 } from '@atlaskit/media-store';
 import { EventEmitter2 } from 'eventemitter2';
+import { map } from 'rxjs/operators/map';
 import { MediaFile, PublicMediaFile } from '../domain/file';
 
 import { RECENTS_COLLECTION } from '../popup/config';
@@ -232,18 +233,24 @@ export class NewUploadServiceImpl implements UploadService {
         const keyWithCollection = FileStreamCache.createKey(id, {
           collectionName: this.tenantUploadParams.collection,
         });
-
         // We want to save the observable without collection too, due consumers using cards without collection.
         fileStreamsCache.set(key, observable);
         fileStreamsCache.set(keyWithCollection, observable);
         // TODO: add test for this
         upfrontId.then(id => {
+          // We assign the tenant id to the observable to not emit user id instead
+          const tenantObservable = observable.pipe(
+            map(file => ({
+              ...file,
+              id,
+            })),
+          );
           const key = FileStreamCache.createKey(id);
           const keyWithCollection = FileStreamCache.createKey(id, {
             collectionName: this.tenantUploadParams.collection,
           });
-          fileStreamsCache.set(key, observable);
-          fileStreamsCache.set(keyWithCollection, observable);
+          fileStreamsCache.set(key, tenantObservable);
+          fileStreamsCache.set(keyWithCollection, tenantObservable);
         });
 
         return cancellableFileUpload;
