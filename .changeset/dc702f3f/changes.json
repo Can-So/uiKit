@@ -1,4 +1,0 @@
-{
-  "releases": [{ "name": "@atlaskit/adf-schema", "type": "minor" }],
-  "dependents": []
-}

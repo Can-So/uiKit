@@ -1,1 +1,0 @@
-- Allow mixed of cell types in a table row
