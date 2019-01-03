@@ -138,9 +138,9 @@ class TableComponent extends React.Component<ComponentProps> {
     } = getPluginState(view.state);
 
     const tableRef = this.table || undefined;
-    const tableActive =
-      this.table === pluginState.tableRef &&
-      (!tableResizingPluginState || !tableResizingPluginState.dragging);
+    const tableActive = this.table === pluginState.tableRef;
+    const isResizing =
+      !!tableResizingPluginState && !!tableResizingPluginState.dragging;
     const { scroll } = this.state;
 
     const rowControls = [
@@ -156,6 +156,7 @@ class TableComponent extends React.Component<ComponentProps> {
           tableActive={tableActive}
           hoveredRows={hoveredRows}
           isInDanger={isInDanger}
+          isResizing={isResizing}
           isNumberColumnEnabled={node.attrs.isNumberColumnEnabled}
           isHeaderColumnEnabled={checkIfHeaderColumnEnabled(view.state)}
           isHeaderRowEnabled={checkIfHeaderRowEnabled(view.state)}
@@ -177,6 +178,7 @@ class TableComponent extends React.Component<ComponentProps> {
           ref={elem => (this.columnControls = elem)}
           hoveredColumns={hoveredColumns}
           isInDanger={isInDanger}
+          isResizing={isResizing}
           // pass `selection` and `numberOfColumns` to control re-render
           selection={view.state.selection}
           numberOfColumns={node.firstChild!.childCount}

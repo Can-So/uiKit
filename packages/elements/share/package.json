@@ -1,0 +1,50 @@
+{
+  "name": "@atlaskit/share",
+  "version": "0.1.0",
+  "config": {
+    "access": "private"
+  },
+  "atlaskit": {
+    "internal": true
+  },
+  "description": "Fabric Share Element",
+  "main": "dist/es5/index.js",
+  "modules": "dist/es2015/index.js",
+  "types": "dist/es5/types.d.ts",
+  "atlaskit:src": "src/index.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+  },
+  "author": "Atlassian Pty Ltd",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ui",
+    "share",
+    "fabric",
+    "elements"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "^16.4.0",
+    "react-intl": "^2.6.0"
+  },
+  "devDependencies": {
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/i18n-tools": "^0.4.0",
+    "@atlaskit/section-message": "^1.0.14",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-react-intl": "^2.0.3",
+    "react": "^16.4.0",
+    "react-intl": "^2.6.0"
+  },
+  "scripts": {
+    "i18n:push": "i18n-tools push --resource share . --type ts",
+    "i18n:pull": "i18n-tools pull --resource share . --type ts"
+  }
+}

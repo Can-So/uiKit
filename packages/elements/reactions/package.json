@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/reactions",
-  "version": "15.1.0",
+  "version": "15.2.0",
   "config": {
     "access": "public"
   },
@@ -57,13 +57,13 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/editor-test-helpers": "^6.3.4",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/tooltip": "^12.1.13",
     "@atlaskit/util-common-test": "^2.4.2",
     "@atlaskit/util-data-test": "^10.0.28",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
-    "enzyme-react-intl": "^2.0.3",
     "es6-promise": "^4.0.5",
     "fetch-mock": "^6.5.2",
     "react": "^16.4.0",

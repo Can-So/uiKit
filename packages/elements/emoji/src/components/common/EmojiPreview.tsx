@@ -14,6 +14,8 @@ import {
   OnToneSelected,
   ToneSelection,
 } from '../../types';
+import { messages } from '../i18n';
+import { FormattedMessage } from 'react-intl';
 
 export interface Props {
   emoji?: EmojiDescription;
@@ -120,6 +122,7 @@ export default class EmojiPreview extends PureComponent<Props, State> {
     );
   }
 
+  // note: emoji-picker-add-emoji className is used by pollinator synthetic checks
   renderAddOwnEmoji() {
     const { onOpenUpload, uploadEnabled } = this.props;
     const { selectingTone } = this.state;
@@ -129,14 +132,20 @@ export default class EmojiPreview extends PureComponent<Props, State> {
     }
     return (
       <div className={styles.AddCustomEmoji}>
-        <AkButton
-          onClick={onOpenUpload}
-          iconBefore={<AddIcon label="add custom emoji" size="small" />}
-          appearance="subtle"
-          className="emoji-picker-add-emoji"
-        >
-          Add your own emoji
-        </AkButton>
+        <FormattedMessage {...messages.addCustomEmojiLabel}>
+          {label => (
+            <AkButton
+              onClick={onOpenUpload}
+              iconBefore={<AddIcon label={label as string} size="small" />}
+              appearance="subtle"
+              className={
+                styles.addCustomEmojiButton + ' emoji-picker-add-emoji'
+              }
+            >
+              {label as string}
+            </AkButton>
+          )}
+        </FormattedMessage>
       </div>
     );
   }
