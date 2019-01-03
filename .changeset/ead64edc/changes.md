@@ -1,0 +1,1 @@
+- ED-5991: bumped prosemirror-view to 1.6.8
