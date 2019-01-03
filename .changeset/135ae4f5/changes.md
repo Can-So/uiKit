@@ -1,0 +1,1 @@
+- ED-5958: fix "getBoundingClientRect" errors
