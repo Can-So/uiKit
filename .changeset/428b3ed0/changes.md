@@ -1,1 +1,0 @@
-- Add data-test-selector to various components to help open and close the Notification Drawer programmatically. This would support test automation
