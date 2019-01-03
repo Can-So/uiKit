@@ -219,7 +219,6 @@ describe('MentionResource', () => {
         }
         expect(stats).toBeDefined();
         expect(stats!.duration).toBeGreaterThan(0);
-        expect(stats!.remoteSearch).toBeTruthy();
         done();
       });
       resource.filter('');

@@ -380,15 +380,13 @@ function mentionPluginFactory(
                   (mentions, query, stats) => {
                     setResults(mentions)(editorView.state, editorView.dispatch);
 
-                    if (stats && stats.remoteSearch) {
-                      fireEvent(
-                        buildTypeAheadRenderedPayload(
-                          stats.duration,
-                          mentions.map(mention => mention.id),
-                          query || '',
-                        ),
-                      );
-                    }
+                    fireEvent(
+                      buildTypeAheadRenderedPayload(
+                        stats ? stats.duration : undefined,
+                        mentions.map(mention => mention.id),
+                        query || '',
+                      ),
+                    );
                   },
                 );
               })

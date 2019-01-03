@@ -93,7 +93,6 @@ const emptySecurityProvider = () => {
 
 type SearchResponse = {
   mentions: Promise<MentionsResult>;
-  remoteSearch: boolean;
 };
 
 class AbstractResource<Result> implements ResourceProvider<Result> {
@@ -261,17 +260,11 @@ class MentionResource extends AbstractMentionResource {
     return false;
   }
 
-  notify(
-    searchTime: number,
-    mentionResult: MentionsResult,
-    query?: string,
-    remoteSearch?: boolean,
-  ) {
+  notify(searchTime: number, mentionResult: MentionsResult, query?: string) {
     if (searchTime > this.lastReturnedSearch) {
       this.lastReturnedSearch = searchTime;
       this._notifyListeners(mentionResult, {
         duration: Date.now() - searchTime,
-        remoteSearch,
       });
     } else {
       const date = new Date(searchTime).toISOString().substr(17, 6);
@@ -293,7 +286,7 @@ class MentionResource extends AbstractMentionResource {
 
     if (!query) {
       this.initialState(contextIdentifier).then(
-        results => this.notify(searchTime, results, query, true),
+        results => this.notify(searchTime, results, query),
         error => this.notifyError(error, query),
       );
     } else {
@@ -302,7 +295,7 @@ class MentionResource extends AbstractMentionResource {
 
       searchResponse.mentions.then(
         results => {
-          this.notify(searchTime, results, query, searchResponse.remoteSearch);
+          this.notify(searchTime, results, query);
         },
         error => this.notifyError(error, query),
       );
@@ -373,7 +366,6 @@ class MentionResource extends AbstractMentionResource {
   ): SearchResponse {
     return {
       mentions: this.remoteSearch(query, contextIdentifier),
-      remoteSearch: true,
     };
   }
 
