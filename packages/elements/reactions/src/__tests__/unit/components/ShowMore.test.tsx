@@ -1,4 +1,4 @@
-import { mountWithIntl } from 'enzyme-react-intl';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 import * as React from 'react';
 import { Props, ShowMore } from '../../../components/ShowMore';
 

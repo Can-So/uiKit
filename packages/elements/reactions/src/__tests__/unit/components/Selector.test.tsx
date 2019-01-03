@@ -1,7 +1,7 @@
 import { EmojiProvider, OnEmojiEvent } from '@atlaskit/emoji';
 import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
 import { emoji } from '@atlaskit/util-data-test';
-import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
+import { mountWithIntl, shallowWithIntl } from '@atlaskit/editor-test-helpers';
 import * as React from 'react';
 import { EmojiButton } from '../../../components/EmojiButton';
 import {

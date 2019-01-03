@@ -78,4 +78,11 @@ another line`;
     const transformer = new WikiMarkupTransformer();
     expect(transformer.parse(wiki)).toMatchSnapshot();
   });
+
+  test('should not be a citation mark if it is escaped', () => {
+    const wiki = 'This is not a ??citation\\?? text';
+
+    const transformer = new WikiMarkupTransformer();
+    expect(transformer.parse(wiki)).toMatchSnapshot();
+  });
 });

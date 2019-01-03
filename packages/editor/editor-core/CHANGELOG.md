@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.13
+- [patch] [e79f8b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e79f8b0):
+
+  - Disable alignment when editor is disabled
+
 ## 92.0.12
 - [patch] [80cadc7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80cadc7):
 

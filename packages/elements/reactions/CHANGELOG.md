@@ -1,5 +1,10 @@
 # @atlaskit/reactions
 
+## 15.2.0
+- [minor] [277edda](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/277edda):
+
+  - replaced enzyme-react-intl with @atlaskit/editor-test-helpers
+
 ## 15.1.0
 - [minor] [1296324](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1296324):
 

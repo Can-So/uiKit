@@ -1,24 +1,24 @@
-import * as React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
-import { getEmojiResourcePromise, newEmojiRepository } from '../../_test-data';
-import EmojiPicker, { Props } from '../../../../components/picker/EmojiPicker';
-import EmojiPickerComponent from '../../../../components/picker/EmojiPickerComponent';
-import { waitUntil } from '@atlaskit/util-common-test';
 import AkButton from '@atlaskit/button';
-import * as commonStyles from '../../../../components/common/styles';
-
-import EmojiPickerEmojiRow from '../../../../components/picker/EmojiPickerEmojiRow';
-import CategorySelector from '../../../../components/picker/CategorySelector';
+import { waitUntil } from '@atlaskit/util-common-test';
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import * as React from 'react';
 import Emoji from '../../../../components/common/Emoji';
-import EmojiPickerCategoryHeading from '../../../../components/picker/EmojiPickerCategoryHeading';
-import EmojiPickerList from '../../../../components/picker/EmojiPickerList';
-import EmojiPickerListSearch from '../../../../components/picker/EmojiPickerListSearch';
-import { hasSelector } from '../../_emoji-selectors';
-import { EmojiDescription } from '../../../../types';
 import EmojiDeletePreview from '../../../../components/common/EmojiDeletePreview';
 import EmojiErrorMessage from '../../../../components/common/EmojiErrorMessage';
 import EmojiUploadPreview from '../../../../components/common/EmojiUploadPreview';
-import { CategoryDescriptionMap } from '../../../../components/picker/categories';
+import * as commonStyles from '../../../../components/common/styles';
+import { CategoryGroupKey } from '../../../../components/picker/categories';
+import CategorySelector from '../../../../components/picker/CategorySelector';
+import EmojiPicker, { Props } from '../../../../components/picker/EmojiPicker';
+import EmojiPickerCategoryHeading from '../../../../components/picker/EmojiPickerCategoryHeading';
+import EmojiPickerComponent from '../../../../components/picker/EmojiPickerComponent';
+import EmojiPickerEmojiRow from '../../../../components/picker/EmojiPickerEmojiRow';
+import EmojiPickerList from '../../../../components/picker/EmojiPickerList';
+import EmojiPickerListSearch from '../../../../components/picker/EmojiPickerListSearch';
+import { EmojiDescription } from '../../../../types';
+import { hasSelector } from '../../_emoji-selectors';
+import { getEmojiResourcePromise, newEmojiRepository } from '../../_test-data';
 
 export function setupPickerWithoutToneSelector(): Promise<
   ReactWrapper<any, any>
@@ -41,7 +41,7 @@ export function setupPicker(
     pickerProps.emojiProvider = getEmojiResourcePromise(config);
   }
 
-  const picker = mount(<EmojiPicker {...pickerProps} />);
+  const picker = mountWithIntl(<EmojiPicker {...pickerProps} />);
 
   return waitUntil(() => hasSelector(picker, EmojiPickerComponent)).then(
     () => picker,
@@ -60,11 +60,14 @@ export const findEmoji = list => list.find(Emoji);
  * @param list child EmojiPickerList
  */
 export const emojisVisible = (picker, list) => hasSelector(picker, Emoji, list);
-// @ts-ignore
+
 const nodeIsCategory = (category: CategoryGroupKey, n) =>
   n.is(EmojiPickerCategoryHeading) && n.prop('id') === category;
-// @ts-ignore
-export const findCategoryHeading = (category: CategoryGroupKey, component) =>
+
+export const findCategoryHeading = (
+  category: CategoryGroupKey,
+  component: ReactWrapper<Props>,
+) =>
   component
     .find(EmojiPickerCategoryHeading)
     .filterWhere(n => nodeIsCategory(category, n));
@@ -78,9 +81,8 @@ const findAllVirtualRows = component =>
       n.is(EmojiPickerEmojiRow),
     // ignore spinner
   );
-// @ts-ignore
+
 export const emojiRowsVisibleInCategory = (
-  // @ts-ignore
   category: CategoryGroupKey,
   component,
 ) => {
@@ -108,22 +110,18 @@ export const emojiRowsVisibleInCategory = (
     return false;
   });
 };
-// @ts-ignore
-const getCategoryButton = (category: CategoryGroupKey, picker) => {
-  const categorySelector = picker.find(CategorySelector);
-  return categorySelector.findWhere(
-    n =>
-      n.name() === 'button' &&
-      n.prop('title').toLocaleLowerCase() ===
-        CategoryDescriptionMap[category]!.name.toLocaleLowerCase(),
-  );
-};
-// @ts-ignore
+
+const getCategoryButton = (category: CategoryGroupKey, picker) =>
+  picker
+    .find(CategorySelector)
+    .findWhere(
+      n => n.name() === 'button' && n.prop('data-category-id') === category,
+    );
+
 export const categoryVisible = (category: CategoryGroupKey, component) =>
   findCategoryHeading(category, component).length > 0;
 
 export const showCategory = (
-  // @ts-ignore
   category: CategoryGroupKey,
   component,
   categoryTitle?: string,
@@ -144,7 +142,6 @@ export const showCategory = (
 
 export const findEmojiInCategory = (
   emojis,
-  // @ts-ignore
   categoryId: CategoryGroupKey,
 ): EmojiDescription | undefined => {
   const upperCategoryId = categoryId.toLocaleUpperCase();
