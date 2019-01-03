@@ -1,1 +1,0 @@
-- FS-3291 add share skeleton

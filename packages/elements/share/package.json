@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/share",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "config": {
     "access": "private"
   },
@@ -28,8 +28,7 @@
     "fabric",
     "elements"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "^16.4.0",
     "react-intl": "^2.6.0"
