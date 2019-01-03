@@ -62,7 +62,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
 
   get $pos() {
     const pos = this.props.getPos();
-    if (typeof pos !== 'number') {
+    if (Number.isNaN(pos as any) || typeof pos !== 'number') {
       return null;
     }
 

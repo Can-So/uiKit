@@ -47,7 +47,7 @@ const alignmentPlugin: EditorPlugin = {
               changeAlignment={(align: AlignmentState) =>
                 changeAlignment(align)(editorView.state, editorView.dispatch)
               }
-              disabled={!align.isEnabled}
+              disabled={disabled || !align.isEnabled}
               popupsMountPoint={popupsMountPoint}
               popupsBoundariesElement={popupsBoundariesElement}
               popupsScrollableElement={popupsScrollableElement}

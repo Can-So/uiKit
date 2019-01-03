@@ -5,6 +5,7 @@ import {
   fullpage,
   editable,
   insertBlockMenuItem,
+  fullpageDisabled,
 } from '../_helpers';
 import { messages } from '../../../plugins/block-type/types';
 
@@ -65,6 +66,20 @@ BrowserTestCase(
     await page.click(fullpage.placeholder);
     await page.waitForSelector(editable);
     await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+    await page.waitFor(alignButton);
+    const isEnabled = await page.isEnabled(alignButton);
+    expect(isEnabled).toBe(false);
+  },
+);
+
+BrowserTestCase(
+  'alignment: disabled when editor is disabled',
+  { skip: [] },
+  async client => {
+    const page = new Page(client);
+    await page.goto(fullpageDisabled.path);
+    await page.waitForSelector(fullpageDisabled.placeholder);
+    await page.waitForSelector(editable);
     await page.waitFor(alignButton);
     const isEnabled = await page.isEnabled(alignButton);
     expect(isEnabled).toBe(false);

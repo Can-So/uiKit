@@ -1,12 +1,13 @@
+import AkButton from '@atlaskit/button';
 import * as React from 'react';
 import { Component } from 'react';
-import EmojiErrorMessage from './EmojiErrorMessage';
-import AkButton from '@atlaskit/button';
-
+import { FormattedMessage } from 'react-intl';
 import { EmojiDescription } from '../../types';
-import * as styles from './styles';
+import { messages } from '../i18n';
 import CachingEmoji from './CachingEmoji';
+import EmojiErrorMessage from './EmojiErrorMessage';
 import RetryableButton from './RetryableButton';
+import * as styles from './styles';
 
 export interface OnDeleteEmoji {
   (emoji: EmojiDescription): Promise<boolean>;
@@ -66,30 +67,49 @@ export default class EmojiDeletePreview extends Component<Props, State> {
     return (
       <div className={styles.deletePreview}>
         <div className={styles.deleteText}>
-          <h5>Remove emoji</h5>
-          All existing instances of this emoji will be replaced with{' '}
-          {emoji.shortName}
+          <h5>
+            <FormattedMessage {...messages.deleteEmojiTitle} />
+          </h5>
+          <FormattedMessage
+            {...messages.deleteEmojiDescription}
+            values={{ emojiShortName: emoji.shortName }}
+          />
         </div>
         <div className={styles.deleteFooter}>
           <CachingEmoji emoji={emoji} />
           <div className={styles.previewButtonGroup}>
             {error ? (
-              <EmojiErrorMessage
-                message="Remove failed"
-                className={styles.emojiDeleteErrorMessage}
-              />
+              <FormattedMessage {...messages.deleteEmojiFailed}>
+                {message =>
+                  !loading ? (
+                    <EmojiErrorMessage
+                      message={message as string}
+                      className={styles.emojiDeleteErrorMessage}
+                      tooltip
+                    />
+                  ) : null
+                }
+              </FormattedMessage>
             ) : null}
-            <RetryableButton
-              className={styles.submitDelete}
-              retryClassName={styles.submitDelete}
-              label="Remove"
-              onSubmit={this.onSubmit}
-              appearance="danger"
-              loading={loading}
-              error={error}
-            />
-            <AkButton appearance="subtle" onClick={this.onCancel}>
-              Cancel
+            <FormattedMessage {...messages.deleteEmojiLabel}>
+              {message => (
+                <RetryableButton
+                  className={styles.uploadEmojiButton}
+                  retryClassName={styles.uploadRetryButton}
+                  label={message as string}
+                  onSubmit={this.onSubmit}
+                  appearance="danger"
+                  loading={loading}
+                  error={error}
+                />
+              )}
+            </FormattedMessage>
+            <AkButton
+              appearance="subtle"
+              onClick={this.onCancel}
+              className={styles.cancelButton}
+            >
+              <FormattedMessage {...messages.cancelLabel} />
             </AkButton>
           </div>
         </div>

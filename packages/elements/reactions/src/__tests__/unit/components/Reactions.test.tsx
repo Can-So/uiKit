@@ -2,7 +2,7 @@ import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { EmojiProvider } from '@atlaskit/emoji';
 import Tooltip from '@atlaskit/tooltip';
 import { emoji } from '@atlaskit/util-data-test';
-import { mountWithIntl, shallowWithIntl } from 'enzyme-react-intl';
+import { mountWithIntl, shallowWithIntl } from '@atlaskit/editor-test-helpers';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { reaction } from '../../../client/MockReactionsClient';
