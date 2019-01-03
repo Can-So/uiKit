@@ -1,1 +1,0 @@
-- ED-5991: fixed Position NaN out of range when resizing tables
