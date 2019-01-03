@@ -30,6 +30,7 @@ export interface Props {
   editorView: EditorView;
   hoveredColumns?: number[];
   isInDanger?: boolean;
+  isResizing?: boolean;
   insertColumnButtonIndex?: number;
   numberOfColumns?: number;
   selection?: Selection;
@@ -45,6 +46,7 @@ export default class ColumnControls extends Component<Props, any> {
       hoveredColumns,
       insertColumnButtonIndex,
       isInDanger,
+      isResizing,
     } = this.props;
 
     if (nextProps.tableRef) {
@@ -62,6 +64,7 @@ export default class ColumnControls extends Component<Props, any> {
       tableRef !== nextProps.tableRef ||
       insertColumnButtonIndex !== nextProps.insertColumnButtonIndex ||
       isInDanger !== nextProps.isInDanger ||
+      isResizing !== nextProps.isResizing ||
       numberOfColumns !== nextProps.numberOfColumns ||
       hoveredColumns !== nextProps.hoveredColumns ||
       isSelectionUpdated(selection!, nextProps.selection)
@@ -75,6 +78,7 @@ export default class ColumnControls extends Component<Props, any> {
       insertColumnButtonIndex,
       hoveredColumns,
       isInDanger,
+      isResizing,
     } = this.props;
     if (!tableRef || !tableRef.querySelector('tr')) {
       return null;
@@ -102,6 +106,7 @@ export default class ColumnControls extends Component<Props, any> {
                     selection,
                     hoveredColumns,
                     isInDanger,
+                    isResizing,
                   )}`}
                   key={startIndex}
                   style={{ width }}
@@ -132,7 +137,9 @@ export default class ColumnControls extends Component<Props, any> {
                       type="column"
                       tableRef={tableRef}
                       index={endIndex}
-                      showInsertButton={insertColumnButtonIndex === endIndex}
+                      showInsertButton={
+                        !isResizing && insertColumnButtonIndex === endIndex
+                      }
                       onMouseDown={() => this.insertColumn(endIndex)}
                     />
                   )}

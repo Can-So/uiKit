@@ -31,6 +31,7 @@ import { setTextSelection } from '../../../../../index';
 const ColumnControlsButtonWrap = `.${ClassName.COLUMN_CONTROLS_BUTTON_WRAP}`;
 const DeleteColumnButton = `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP}`;
 const InsertColumnButton = `.${ClassName.CONTROLS_INSERT_BUTTON_WRAP}`;
+const InsertColumnButtonInner = `.${ClassName.CONTROLS_INSERT_BUTTON_INNER}`;
 
 const selectColumns = columnIdxs => tr => {
   const cells: { pos: number; start: number; node: Node }[] = columnIdxs.reduce(
@@ -251,7 +252,7 @@ describe('ColumnControls', () => {
     floatingControls.unmount();
   });
 
-  describe('hides an add button when delete button overlaps it', () => {
+  describe('hides add button when delete button overlaps it', () => {
     it('hides one when two columns are selected', () => {
       const { editorView } = editor(
         doc(
@@ -308,6 +309,57 @@ describe('ColumnControls', () => {
       floatingControls.setProps({ numberOfColumns: 3 });
 
       expect(floatingControls.find(DeleteColumnButton).length).toBe(1);
+
+      floatingControls.unmount();
+    });
+  });
+
+  describe('hides add button when isResizing prop is truthy', () => {
+    it('unaffected add button when isRsizing is falsy', () => {
+      const { editorView } = editor(
+        doc(
+          table()(
+            tr(thEmpty, thEmpty, thEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+          ),
+        ),
+      );
+
+      const floatingControls = mountWithIntl(
+        <ColumnControls
+          tableRef={document.querySelector('table')!}
+          editorView={editorView}
+          insertColumnButtonIndex={1}
+        />,
+      );
+
+      expect(floatingControls.find(InsertColumnButtonInner).length).toBe(1);
+
+      floatingControls.unmount();
+    });
+
+    it('hides add button when isRsizing is truthy', () => {
+      const { editorView } = editor(
+        doc(
+          table()(
+            tr(thEmpty, thEmpty, thEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+          ),
+        ),
+      );
+
+      const floatingControls = mountWithIntl(
+        <ColumnControls
+          tableRef={document.querySelector('table')!}
+          editorView={editorView}
+          insertColumnButtonIndex={1}
+          isResizing={true}
+        />,
+      );
+
+      expect(floatingControls.find(InsertColumnButtonInner).length).toBe(0);
 
       floatingControls.unmount();
     });

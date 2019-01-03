@@ -12,7 +12,10 @@ import { messages } from '../insert-block/ui/ToolbarInsertBlock';
 import { PluginConfig, PermittedLayoutsDescriptor } from './types';
 import { createPlugin, pluginKey } from './pm-plugins/main';
 import { keymapPlugin } from './pm-plugins/keymap';
-import { createPlugin as createFlexiResizingPlugin } from './pm-plugins/table-resizing';
+import {
+  createPlugin as createFlexiResizingPlugin,
+  pluginKey as tableResizingPluginKey,
+} from './pm-plugins/table-resizing';
 import { getToolbarConfig } from './toolbar';
 import { ColumnResizingPlugin } from './types';
 import FloatingContextualMenu from './ui/FloatingContextualMenu';
@@ -98,8 +101,9 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
       <WithPluginState
         plugins={{
           pluginState: pluginKey,
+          tableResizingPluginState: tableResizingPluginKey,
         }}
-        render={({ pluginState }) => (
+        render={({ pluginState, tableResizingPluginState }) => (
           <>
             <FloatingContextualMenu
               editorView={editorView}
@@ -117,6 +121,10 @@ const tablesPlugin = (options?: PluginConfig | boolean): EditorPlugin => ({
                   boundariesElement={popupsBoundariesElement}
                   scrollableElement={popupsScrollableElement}
                   targetRef={pluginState.tableFloatingToolbarTarget}
+                  isResizing={
+                    !!tableResizingPluginState &&
+                    !!tableResizingPluginState.dragging
+                  }
                 />
               )}
           </>
