@@ -19,6 +19,7 @@ import * as fs from '../../utils/fs';
 import { getConfig } from '../../site';
 import packageResolver, { getLoaderUrl } from '../../utils/packageResolver';
 import { packageUrl } from '../../utils/url';
+import { externalPackages } from '../../site';
 import CodeSandbox from '../Package/CodeSandbox';
 import CodeSandboxLogo from '../Package/CodeSandboxLogo';
 
@@ -41,7 +42,7 @@ export const SANDBOX_DEPLOY_ENDPOINT =
 function PackageSelector(props) {
   let selectedPackageItem;
 
-  const packagesSelectItems = props.groups.map(group => ({
+  const packagesSelectOptions = externalPackages.children.map(group => ({
     label: fs.titleize(group.id),
     options: fs.getDirectories(group.children).map(pkg => {
       const item = {
@@ -70,7 +71,7 @@ function PackageSelector(props) {
             backgroundColor: '#fff',
           }),
         }}
-        options={packagesSelectItems}
+        options={packagesSelectOptions}
         placeholder="Select Package"
         onChange={(value, { action }) =>
           action === 'select-option' && props.onSelected(value)
@@ -133,7 +134,6 @@ export type ExampleNavigationProps = {
   onExampleSelected?: (selected: { item: { value: string } }) => void;
   examples?: any;
   onPackageSelected?: (selected: { item: { value: string } }) => void;
-  groups?: any;
   exampleId?: string;
   groupId: string;
   loaderUrl?: string | null;
@@ -151,7 +151,6 @@ class ExampleNavigation extends React.Component<ExampleNavigationProps> {
       onExampleSelected,
       examples,
       onPackageSelected,
-      groups,
       exampleId,
       groupId,
       loaderUrl,
@@ -177,7 +176,6 @@ class ExampleNavigation extends React.Component<ExampleNavigationProps> {
           <PackageSelector
             groupId={groupId}
             packageId={packageId}
-            groups={groups}
             onSelected={onPackageSelected}
           />
           <ExampleSelector
@@ -377,7 +375,6 @@ export default class Examples extends React.Component<Props, State> {
   render() {
     const {
       hasChanged,
-      groups,
       examples,
       packageId,
       groupId,
@@ -404,7 +401,6 @@ export default class Examples extends React.Component<Props, State> {
           groupId={groupId}
           packageId={packageId}
           exampleId={exampleId}
-          groups={groups}
           examples={examples}
           loaderUrl={loaderUrl}
           codeIsVisible={this.state.displayCode}

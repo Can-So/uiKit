@@ -333,7 +333,6 @@ export default class ExamplesModal extends React.Component<Props, State> {
   render() {
     const {
       hasChanged,
-      groups,
       examples,
       packageId,
       groupId,
@@ -397,7 +396,6 @@ export default class ExamplesModal extends React.Component<Props, State> {
             groupId={groupId}
             packageId={packageId}
             exampleId={exampleId}
-            groups={groups}
             examples={examples}
             onPackageSelected={this.onPackageSelected}
             onExampleSelected={this.onExampleSelected}
