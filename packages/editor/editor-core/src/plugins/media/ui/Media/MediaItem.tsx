@@ -13,8 +13,8 @@ import { MediaStateManager } from '../../pm-plugins/main';
 import MediaComponent, { Appearance } from './MediaComponent';
 
 export interface Props {
-  __key: string;
   id: string;
+  tempId: string;
   providers?: ProviderFactory;
   type: MediaType;
   collection: string;
@@ -51,7 +51,6 @@ export default class MediaItem extends PureComponent<Props, {}> {
   private renderWithProvider = providers => {
     const {
       id,
-      __key,
       type,
       collection,
       cardDimensions,
@@ -61,6 +60,7 @@ export default class MediaItem extends PureComponent<Props, {}> {
       appearance,
       stateManagerFallback,
       selected,
+      tempId,
       url,
       onExternalImageLoaded,
       disableOverlay,
@@ -69,7 +69,7 @@ export default class MediaItem extends PureComponent<Props, {}> {
     return (
       <MediaComponent
         id={id}
-        __key={__key}
+        tempId={tempId}
         mediaProvider={providers.mediaProvider}
         type={type}
         collection={collection}

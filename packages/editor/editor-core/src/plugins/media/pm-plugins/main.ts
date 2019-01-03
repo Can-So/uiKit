@@ -18,6 +18,7 @@ import { MediaType, MediaSingleLayout } from '@atlaskit/editor-common';
 import analyticsService from '../../../analytics/service';
 import { ErrorReporter, isImage } from '../../../utils';
 import { Dispatch } from '../../../event-dispatcher';
+import { ProsemirrorGetPosHandler } from '../../../nodeviews';
 import { EditorAppearance } from '../../../types/editor-props';
 import DropPlaceholder from '../ui/Media/DropPlaceholder';
 import { MediaPluginOptions } from '../media-plugin-options';
@@ -40,7 +41,6 @@ import DefaultMediaStateManager from '../default-state-manager';
 import { insertMediaSingleNode } from '../utils/media-single';
 
 import { hasParentNodeOfType } from 'prosemirror-utils';
-import { getPosHandler } from '../../../nodeviews/ReactNodeView';
 import { FileIdentifier } from '@atlaskit/media-card';
 export { DefaultMediaStateManager };
 export { MediaState, MediaProvider, MediaStateStatus, MediaStateManager };
@@ -53,7 +53,7 @@ export type PluginStateChangeSubscriber = (state: MediaPluginState) => any;
 
 export interface MediaNodeWithPosHandler {
   node: PMNode;
-  getPos: getPosHandler;
+  getPos: ProsemirrorGetPosHandler;
 }
 
 export class MediaPluginState {
@@ -465,7 +465,7 @@ export class MediaPluginState {
    * Called from React UI Component when user clicks on "Delete" icon
    * inside of it
    */
-  handleMediaNodeRemoval = (node: PMNode, getPos: getPosHandler) => {
+  handleMediaNodeRemoval = (node: PMNode, getPos: ProsemirrorGetPosHandler) => {
     removeMediaNode(this.view, node, getPos);
   };
 
@@ -489,7 +489,7 @@ export class MediaPluginState {
   /**
    * Called from React UI Component on componentDidMount
    */
-  handleMediaNodeMount = (node: PMNode, getPos: getPosHandler) => {
+  handleMediaNodeMount = (node: PMNode, getPos: ProsemirrorGetPosHandler) => {
     this.mediaNodes.push({ node, getPos });
   };
 
@@ -498,9 +498,7 @@ export class MediaPluginState {
    * when React component's underlying node property is replaced with a new node
    */
   handleMediaNodeUnmount = (oldNode: PMNode) => {
-    this.mediaNodes = this.mediaNodes.filter(
-      ({ node }) => oldNode.attrs.__key !== node.attrs.__key,
-    );
+    this.mediaNodes = this.mediaNodes.filter(({ node }) => oldNode !== node);
   };
 
   edit = () => {
@@ -650,15 +648,7 @@ export class MediaPluginState {
         }
 
         const { node } = nodeWithPos;
-        // console.log(
-        //   '\tlooking for node with id',
-        //   id,
-        //   'have id',
-        //   node.attrs.id,
-        //   '__key',
-        //   node.attrs.__key,
-        // );
-        if (node.attrs.__key === id) {
+        if (node.attrs.id === id) {
           return nodeWithPos;
         }
 
@@ -818,12 +808,7 @@ export class MediaPluginState {
     );
   }
 
-  // upload from cloud picker:
-  //  preview -> processing -> ready
-  // upload from drag-drop:
-  //  uploading -> preview -> uploading -> processing -> ready
   private handleMediaState = async (state: MediaState) => {
-    // console.log('new media state', state.status, state);
     switch (state.status) {
       case 'error':
         this.removeNodeById(state.id);
@@ -835,7 +820,7 @@ export class MediaPluginState {
         break;
 
       case 'preview':
-        this.updateNodeAttrs(state);
+        this.replaceTemporaryNode(state);
         if (state.ready) {
           this.stateManager.off(state.id, this.handleMediaState);
         }
@@ -848,13 +833,13 @@ export class MediaPluginState {
           viewContext.setLocalPreview(state.publicId, state.thumbnail.src);
         }
         if (state.publicId) {
-          this.updateNodeAttrs(state);
+          this.replaceTemporaryNode(state);
         }
         break;
 
       case 'ready':
         if (state.publicId && this.nodeHasNoPublicId(state)) {
-          this.updateNodeAttrs(state);
+          this.replaceTemporaryNode(state);
         }
         if (state.preview) {
           this.stateManager.off(state.id, this.handleMediaState);
@@ -893,16 +878,14 @@ export class MediaPluginState {
     }
   };
 
-  private updateNodeAttrs = (state: MediaState) => {
+  private replaceTemporaryNode = (state: MediaState) => {
     const { view } = this;
     if (!view) {
-      console.error('no view');
       return;
     }
     const { id, thumbnail, fileName, fileSize, publicId, fileMimeType } = state;
     const mediaNodeWithPos = this.findMediaNode(id);
     if (!mediaNodeWithPos) {
-      console.warn('could not find media node with id', id);
       return;
     }
     const { width, height } = (thumbnail && thumbnail.dimensions) || {
@@ -910,7 +893,7 @@ export class MediaPluginState {
       height: mediaNodeWithPos.node.attrs.height,
     };
     const { getPos, node: mediaNode } = mediaNodeWithPos;
-    const attrs = {
+    const newNode = view.state.schema.nodes.media!.create({
       ...mediaNode.attrs,
       id: publicId || id,
       width: width,
@@ -918,16 +901,7 @@ export class MediaPluginState {
       __fileName: fileName,
       __fileSize: fileSize,
       __fileMimeType: fileMimeType,
-    };
-
-    // console.log(
-    //   'setting attributes on',
-    //   mediaNode,
-    //   'to',
-    //   attrs,
-    //   'at pos',
-    //   getPos(),
-    // );
+    });
 
     // replace the old node with a new one
     const nodePos = getPos();

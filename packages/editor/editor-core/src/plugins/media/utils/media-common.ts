@@ -15,7 +15,7 @@ import {
   endPositionOfParent,
   startPositionOfParent,
 } from '../../../utils';
-import { getPosHandler } from '../../../nodeviews/ReactNodeView';
+import { ProsemirrorGetPosHandler } from '../../../nodeviews';
 import { MediaState } from '../types';
 
 export const posOfMediaGroupNearby = (
@@ -171,17 +171,13 @@ export function endPositionForMedia(
 export const removeMediaNode = (
   view: EditorView,
   node: PMNode,
-  getPos: getPosHandler,
+  getPos: ProsemirrorGetPosHandler,
 ) => {
   const { id } = node.attrs;
   const { state } = view;
   const { tr, selection, doc } = state;
 
   const currentMediaNodePos = getPos();
-  if (typeof currentMediaNodePos === 'undefined') {
-    return;
-  }
-
   tr.deleteRange(currentMediaNodePos, currentMediaNodePos + node.nodeSize);
 
   if (isTemporary(id)) {

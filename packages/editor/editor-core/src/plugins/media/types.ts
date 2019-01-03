@@ -11,7 +11,7 @@ export type MediaStateStatus =
   | 'preview';
 
 export interface MediaState {
-  id: string; // the static ID for this media object
+  id: string;
   status?: MediaStateStatus;
   publicId?: string;
   fileName?: string;

@@ -3,6 +3,9 @@ import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
 import { media, mediaGroup, mediaSingle } from '@atlaskit/editor-common';
 import { SmartMediaEditor } from '@atlaskit/media-editor';
 import { EditorPlugin } from '../../types';
+import { legacyNodeViewFactory } from '../../nodeviews';
+import WithPluginState from '../../ui/WithPluginState';
+import { pluginKey as widthPluginKey } from '../width';
 
 import {
   stateKey as pluginKey,
@@ -17,8 +20,9 @@ import keymapMediaSinglePlugin from './pm-plugins/keymap-media-single';
 import keymapPlugin from './pm-plugins/keymap';
 import ToolbarMedia from './ui/ToolbarMedia';
 import MediaSingleEdit from './ui/MediaSingleEdit';
-import { mediaSingleNodeView } from './nodeviews/media-single';
-import { mediaGroupNodeView } from './nodeviews/media-group';
+import ReactMediaGroupNode from './nodeviews/media-group';
+import ReactMediaNode from './nodeviews/media';
+import ReactMediaSingleNode from './nodeviews/media-single';
 import { CustomMediaPicker } from './types';
 import { FileIdentifier } from '@atlaskit/media-card';
 import WithPluginState from '../../ui/WithPluginState';
@@ -84,14 +88,37 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
             {
               providerFactory,
               nodeViews: {
-                mediaGroup: mediaGroupNodeView(
+                mediaGroup: legacyNodeViewFactory(
                   portalProviderAPI,
                   providerFactory,
+                  {
+                    mediaGroup: ReactMediaGroupNode,
+                    media: ReactMediaNode,
+                  },
                 ),
-                mediaSingle: mediaSingleNodeView(
+                mediaSingle: legacyNodeViewFactory(
                   portalProviderAPI,
-                  eventDispatcher,
                   providerFactory,
+                  {
+                    mediaSingle: ({ view, node, ...props }) => (
+                      <WithPluginState
+                        editorView={view}
+                        eventDispatcher={eventDispatcher}
+                        plugins={{
+                          width: widthPluginKey,
+                        }}
+                        render={({ width }) => (
+                          <ReactMediaSingleNode
+                            view={view}
+                            node={node}
+                            width={width}
+                            {...props}
+                          />
+                        )}
+                      />
+                    ),
+                    media: ReactMediaNode,
+                  },
                 ),
               },
               errorReporter,

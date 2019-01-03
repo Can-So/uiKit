@@ -51,6 +51,7 @@ export interface Props extends Partial<MediaBaseAttributes> {
   appearance?: Appearance;
   stateManagerFallback?: MediaStateManager;
   selected?: boolean;
+  tempId?: string;
   url?: string;
   imageStatus?: ImageStatus;
   disableOverlay?: boolean;
@@ -122,8 +123,11 @@ export class MediaComponentInternal extends Component<Props, State> {
     }
   }
 
-  private unregisterFromEvents(props, state) {
-    const { mediaProvider, id } = state;
+  componentWillUnmount() {
+    this.destroyed = true;
+
+    const { id } = this.props;
+    const { mediaProvider } = this.state;
 
     if (mediaProvider) {
       const { stateManager } = mediaProvider;
@@ -136,11 +140,6 @@ export class MediaComponentInternal extends Component<Props, State> {
     if (stateManagerFallback && id) {
       stateManagerFallback.off(id, this.handleMediaStateChange);
     }
-  }
-
-  componentWillUnmount() {
-    this.destroyed = true;
-    this.unregisterFromEvents(this.props, this.state);
   }
 
   render() {
@@ -311,12 +310,12 @@ export class MediaComponentInternal extends Component<Props, State> {
     return (
       <CardView
         // CardViewProps
-        status={mapMediaStatusIntoCardStatus(this.state, this.state.progress)}
+        status={mapMediaStatusIntoCardStatus(this.state, progress)}
         mediaItemType="file"
         metadata={fileDetails}
         // FileCardProps
         dataURI={dataURI}
-        progress={this.state.progress}
+        progress={progress}
         // SharedCardProps
         dimensions={cardDimensions}
         appearance={appearance}
@@ -370,16 +369,15 @@ export class MediaComponentInternal extends Component<Props, State> {
      * `cancelled` gets triggered when we do the node swap, so we can ignore it here.
      * Because on real `canceled` event it will get removed anyways.
      */
-    // if (this.destroyed || mediaState.status === 'cancelled') {
-    //   return;
-    // }
+    if (this.destroyed || mediaState.status === 'cancelled') {
+      return;
+    }
 
-    console.warn('setting state', mediaState);
     this.setState({ ...mediaState });
   };
 
   private handleMediaProvider = async (mediaProvider: MediaProvider) => {
-    const { __key } = this.props;
+    const { id, tempId } = this.props;
 
     if (this.destroyed) {
       return;
@@ -393,12 +391,11 @@ export class MediaComponentInternal extends Component<Props, State> {
 
     this.setState({ mediaProvider });
 
-    if (stateManager && __key) {
-      const mediaState = stateManager.getState(__key);
+    if (stateManager && id) {
+      const mediaState = stateManager.getState(tempId || id);
 
-      stateManager.on(__key, this.handleMediaStateChange);
-      console.warn('setting state via mediaProvider', mediaState);
-      this.setState({ id: __key, ...mediaState });
+      stateManager.on(id, this.handleMediaStateChange);
+      this.setState({ id, ...mediaState });
     }
 
     await this.setContext('viewContext', mediaProvider);
