@@ -10,6 +10,10 @@ import ToolbarButton from '../../../ui/ToolbarButton';
 import WithPluginState from '../../../ui/WithPluginState';
 import messages from '../ui/messages';
 import { pluginKey } from '../pm-plugins/main';
+import {
+  pluginKey as tableResizingPluginKey,
+  ResizeState,
+} from '../pm-plugins/table-resizing/index';
 import { toggleContextualMenu } from '../actions';
 import { TableCssClassName as ClassName, TablePluginState } from '../types';
 import { EditorAppearance } from '../../../types';
@@ -31,6 +35,7 @@ export type CellProps = {
   view: EditorView;
   forwardRef: (ref: HTMLElement | null) => void;
   withCursor: boolean;
+  isResizing?: boolean;
   isContextualMenuOpen: boolean;
   disabled: boolean;
   appearance?: EditorAppearance;
@@ -40,6 +45,7 @@ class Cell extends React.Component<CellProps & InjectedIntlProps> {
   shouldComponentUpdate(nextProps) {
     return (
       this.props.withCursor !== nextProps.withCursor ||
+      this.props.isResizing !== nextProps.isResizing ||
       this.props.isContextualMenuOpen !== nextProps.isContextualMenuOpen
     );
   }
@@ -47,6 +53,7 @@ class Cell extends React.Component<CellProps & InjectedIntlProps> {
   render() {
     const {
       withCursor,
+      isResizing,
       isContextualMenuOpen,
       forwardRef,
       intl: { formatMessage },
@@ -60,6 +67,7 @@ class Cell extends React.Component<CellProps & InjectedIntlProps> {
         {withCursor && !disabled && appearance !== 'mobile' && (
           <div className={ClassName.CONTEXTUAL_MENU_BUTTON}>
             <ToolbarButton
+              disabled={isResizing}
               selected={isContextualMenuOpen}
               title={labelCellOptions}
               onClick={this.handleClick}
@@ -117,19 +125,25 @@ class CellView extends ReactNodeView {
       <WithPluginState
         plugins={{
           pluginState: pluginKey,
+          tableResizingPluginState: tableResizingPluginKey,
           editorDisabledPlugin: editorDisabledPluginKey,
         }}
         editorView={props.view}
         render={({
           pluginState,
+          tableResizingPluginState,
           editorDisabledPlugin,
         }: {
           pluginState: TablePluginState;
+          tableResizingPluginState: ResizeState;
           editorDisabledPlugin: EditorDisabledPluginState;
         }) => (
           <CellComponent
             forwardRef={forwardRef}
             withCursor={this.getPos() === pluginState.targetCellPosition}
+            isResizing={
+              !!tableResizingPluginState && !!tableResizingPluginState.dragging
+            }
             isContextualMenuOpen={!!pluginState.isContextualMenuOpen}
             view={props.view}
             appearance={props.appearance}

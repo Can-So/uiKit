@@ -123,11 +123,12 @@ export const getColumnClassNames = (
   selection: Selection,
   hoveredColumns: number[] = [],
   isInDanger?: boolean,
+  isResizing?: boolean,
 ): string => {
   const classNames: string[] = [];
   if (
     isColumnSelected(index)(selection) ||
-    hoveredColumns.indexOf(index) > -1
+    (hoveredColumns.indexOf(index) > -1 && !isResizing)
   ) {
     classNames.push('active');
     if (isInDanger) {

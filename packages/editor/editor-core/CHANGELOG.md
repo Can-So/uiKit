@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.16
+- [patch] [e251065](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e251065):
+
+  - ED-5894: fix table controls disappearing while dragging resize handle
+
 ## 92.0.15
 - [patch] [4b1567c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b1567c):
 

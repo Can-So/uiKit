@@ -186,7 +186,7 @@ class GlobalNavWithDrawers extends Component<Props, State> {
   renderStarredDrawerContents = () => (
     <DrawerContent
       drawerTitle="Starred drawer"
-      drawerBody="Sets notification count to 5 in `onStarredDrawerOpen` callback"
+      drawerBody="Can be controlled by passing the onStarredClick prop"
     />
   );
 
@@ -194,6 +194,13 @@ class GlobalNavWithDrawers extends Component<Props, State> {
     <DrawerContent
       drawerTitle="Notification drawer"
       drawerBody="Resets notification count in `onNotificationDrawerOpen` callback"
+    />
+  );
+
+  renderSettingsDrawerContents = () => (
+    <DrawerContent
+      drawerTitle="Settings drawer"
+      drawerBody="Can be controlled by passing the onSettingsClick prop"
     />
   );
 
@@ -246,6 +253,10 @@ class GlobalNavWithDrawers extends Component<Props, State> {
           appSwitcherTooltip="Switch apps..."
           // Help
           helpItems={HelpDropdown}
+          // Settings
+          settingsDrawerContents={this.renderSettingsDrawerContents}
+          onSettingsDrawerCloseComplete={this.onCloseComplete}
+          shouldSettingsDrawerUnmountOnExit={unmountOnExit}
         />
         <ModalTransition>
           {this.state.isCreateModalOpen && (
