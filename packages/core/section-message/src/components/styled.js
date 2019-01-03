@@ -38,8 +38,8 @@ export const Action = styled.li`
   display: inline;
   & + &::before {
     color: ${colors.N500};
-    content: '\00a0\00a0·  ';
-    display: inline;
+    content: '·';
+    display: inline-block;
     text-align: center;
     vertical-align: middle;
     width: ${math.multiply(gridSize, 2)}px;
