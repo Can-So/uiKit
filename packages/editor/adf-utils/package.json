@@ -34,7 +34,8 @@
     "internal": true
   },
   "dependencies": {
-    "@atlaskit/adf-schema": "^1.0.0"
+    "@atlaskit/adf-schema": "^1.0.0",
+    "tslib": "^1.8.0"
   },
   "devDependencies": {
     "@atlaskit/docs": "^6.0.0",
