@@ -1,0 +1,1 @@
+- i18n support added for focused task component
