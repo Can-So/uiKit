@@ -169,10 +169,7 @@ export interface TableDefinition {
  */
 export interface TableRow {
   type: 'tableRow';
-  /**
-   * @minItems 1
-   */
-  content: Array<TableHeader> | Array<TableCell>;
+  content: Array<TableHeader | TableCell>;
 }
 
 /**
