@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.14
+- [patch] [88a8605](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/88a8605):
+
+  - ED-5958: fix "getBoundingClientRect" errors
+
 ## 92.0.13
 - [patch] [e79f8b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e79f8b0):
 
