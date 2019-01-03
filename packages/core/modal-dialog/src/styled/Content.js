@@ -31,6 +31,7 @@ export const Wrapper = ({
 }) => {
   let StyledComponent = DefaultWrapperComponent;
   if (component !== 'div') {
+    // $FlowFixMe
     StyledComponent = styled(component)`
       display: flex;
       flex-direction: column;
@@ -136,6 +137,7 @@ export const CustomBody = ({
 }) => {
   let BodyStyledComponent = Body;
   if (component !== 'div') {
+    // $FlowFixMe
     BodyStyledComponent = styled(component)`
       flex: 1 1 auto;
       ${p => {
