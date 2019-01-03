@@ -11,16 +11,15 @@ import { colors } from '@atlaskit/theme';
 
 import ModalDialog, { ModalFooter, ModalTransition } from '../src';
 
-const variants = [
-  'header',
-  'footer',
-  'both',
-  'neither',
+const defaults = ['header', 'footer', 'both', 'neither'];
+const custom = [
   'custom header',
-  'custom body (deprecated)',
   'custom body',
   'custom footer',
+  'custom body (deprecated)',
 ];
+const variants = defaults.concat(custom);
+
 const H4 = styled.h4`
   margin-bottom: 0.66em;
 `;
@@ -62,41 +61,18 @@ const bodyStyles = {
   overflowY: 'auto',
   overflowX: 'hidden',
 };
-type BodyProps = {
-  children?: Node,
-  onClose: Function,
-  innerRef: Function,
-};
 
 // $FlowFixMe
-const Body = React.forwardRef((props: BodyProps, ref) => {
+const Body = React.forwardRef((props: { children?: Node }, ref) => {
   return (
     <div ref={ref} style={bodyStyles}>
       {props.children}
-      <Button onClick={props.onClose} appearance="link">
-        <CrossIcon
-          label="Close Modal"
-          primaryColor={colors.R400}
-          size="small"
-        />
-      </Button>
     </div>
   );
 });
 
-const BodyOld = (props: BodyProps) => {
-  return (
-    <div style={bodyStyles}>
-      <Button onClick={props.onClose} appearance="link">
-        <CrossIcon
-          label="Close Modal"
-          primaryColor={colors.R400}
-          size="small"
-        />
-      </Button>
-      {props.children}
-    </div>
-  );
+const BodyOld = (props: { children?: Node }) => {
+  return <div>{props.children}</div>;
 };
 
 type FooterProps = {
@@ -158,8 +134,11 @@ export default class ModalDemo extends Component<{}, State> {
 
     return (
       <div style={{ padding: 16 }}>
-        <H4>Variants</H4>
-        <ButtonGroup>{variants.map(btn)}</ButtonGroup>
+        <H4>Default Header/Footer</H4>
+        <ButtonGroup>{defaults.map(btn)}</ButtonGroup>
+
+        <H4>Custom</H4>
+        <ButtonGroup>{custom.map(btn)}</ButtonGroup>
 
         <ModalTransition>
           {variants
