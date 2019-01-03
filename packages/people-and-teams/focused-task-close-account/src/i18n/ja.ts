@@ -21,7 +21,7 @@ export default {
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
     'When you delete the account:',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
-    'When you delete your account: + sdgdafws',
+    'When you delete your account:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
     '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
