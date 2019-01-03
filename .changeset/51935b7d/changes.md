@@ -1,0 +1,1 @@
+- Update css styles to `display: flex` for Actions and replace the content by a mid-dot without escape characters
