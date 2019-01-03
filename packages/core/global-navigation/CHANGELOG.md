@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.5.0
+- [minor] [52224f1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52224f1):
+
+  - Add new properties to global-navigation to be able to inject and use new Settings drawer
+
 ## 5.4.0
 - [minor] [6ce6b0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ce6b0c):
 
