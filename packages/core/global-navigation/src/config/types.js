@@ -37,6 +37,7 @@ export type DefaultConfigShape = {
     rank: number,
   },
   help: DefaultItemShape,
+  settings: DefaultItemShape,
   profile: DefaultItemShape,
 };
 
@@ -50,6 +51,7 @@ export type ProductConfigShape = {
     itemComponent: ComponentType<*>,
   },
   help: ?DropdownItem,
+  settings: ?ItemShape,
   profile: ?DropdownItem,
 };
 

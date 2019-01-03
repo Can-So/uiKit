@@ -1,5 +1,10 @@
 # @atlaskit/tooltip
 
+## 12.1.14
+- [patch] [8f179c4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8f179c4):
+
+  - Remove scroll listener in componentWillMount in Tooltip to fix potential memory leak from 'close' tooltip not properly unmounting when hiding Examples modal via the X button
+
 ## 12.1.13
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

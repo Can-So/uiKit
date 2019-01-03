@@ -78,4 +78,11 @@ another line`;
     const transformer = new WikiMarkupTransformer();
     expect(transformer.parse(wiki)).toMatchSnapshot();
   });
+
+  test('should not be a emphasis mark if it is escaped', () => {
+    const wiki = 'This is not a _emphasis\\_ text';
+
+    const transformer = new WikiMarkupTransformer();
+    expect(transformer.parse(wiki)).toMatchSnapshot();
+  });
 });

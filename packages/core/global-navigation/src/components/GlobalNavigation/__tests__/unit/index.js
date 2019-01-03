@@ -9,6 +9,7 @@ import SearchIcon from '@atlaskit/icon/glyph/search';
 import CreateIcon from '@atlaskit/icon/glyph/add';
 import StarLargeIcon from '@atlaskit/icon/glyph/star-large';
 import NotificationIcon from '@atlaskit/icon/glyph/notification';
+import SettingsIcon from '@atlaskit/icon/glyph/settings';
 import SignInIcon from '@atlaskit/icon/glyph/sign-in';
 import QuestionIcon from '@atlaskit/icon/glyph/question-circle';
 import { NotificationIndicator } from '@atlaskit/notification-indicator';
@@ -100,6 +101,11 @@ describe('GlobalNavigation', () => {
         akIcon: NotificationIcon,
         capitalisedName: 'Notification',
         name: 'notification',
+      },
+      {
+        akIcon: SettingsIcon,
+        capitalisedName: 'Settings',
+        name: 'settings',
       },
     ];
 
@@ -320,6 +326,8 @@ describe('GlobalNavigation', () => {
         loginHref="#login"
         helpItems={() => <div>items</div>}
         helpTooltip="help tooltip"
+        onSettingsClick={noop}
+        settingsTooltip="settings tooltip"
       />,
     );
     const defaultWrapper = mount(
@@ -331,6 +339,7 @@ describe('GlobalNavigation', () => {
         onSearchClick={noop}
         onStarredClick={noop}
         onNotificationClick={noop}
+        onSettingsClick={noop}
         loginHref="#login"
         helpItems={() => <div>items</div>}
       />,
@@ -372,6 +381,11 @@ describe('GlobalNavigation', () => {
         name: 'help',
         defaultTooltip: 'Help',
       },
+      {
+        icon: SettingsIcon,
+        name: 'settings',
+        defaultTooltip: 'Settings',
+      },
     ];
 
     navItems.forEach(({ icon, name, defaultTooltip }) => {
@@ -411,10 +425,12 @@ describe('GlobalNavigation', () => {
         onSearchClick={noop}
         onStarredClick={noop}
         onNotificationClick={noop}
+        onSettingsClick={noop}
         loginHref="#login"
         helpItems={() => <div>items</div>}
       />,
     );
+
     const navItems = [
       {
         id: 'productLogo',
@@ -450,13 +466,19 @@ describe('GlobalNavigation', () => {
         id: 'profile',
         name: 'profile',
         section: 'secondary',
-        rank: 3,
+        rank: 4,
       },
       {
         id: 'help',
         name: 'help',
         section: 'secondary',
         rank: 2,
+      },
+      {
+        id: 'settings',
+        name: 'settings',
+        section: 'secondary',
+        rank: 3,
       },
     ];
 
@@ -763,6 +785,7 @@ describe('GlobalNavigation', () => {
         onSearchClick={noop}
         onStarredClick={noop}
         onNotificationClick={noop}
+        onSettingsClick={noop}
         appSwitcherComponent={AppSwitcher}
         appSwitcherTooltip="appSwitcher tooltip"
         loginHref="#login"
@@ -926,6 +949,10 @@ describe('GlobalNavigation', () => {
       {
         drawerName: 'starred',
         analyticsId: 'starDrawer',
+      },
+      {
+        drawerName: 'settings',
+        analyticsId: 'settingsDrawer',
       },
     ].forEach(({ drawerName, analyticsId }) => {
       it(`should render ScreenTracker with correct props for "${drawerName}" drawer when drawer is open`, () => {
