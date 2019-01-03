@@ -23,11 +23,7 @@ const Hint = styled.span`
 const HintText = styled.span`
   margin-left: 1em;
 `;
-const Body = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-`;
+
 const Image = styled.img`
   max-width: 100%;
   margin-bottom: 1em;
@@ -35,8 +31,7 @@ const Image = styled.img`
 `;
 
 type Props = { onClose: Function, showKeyline: boolean };
-
-const Header = ({ onClose, showKeyline }: Props) => (
+const CustomHeader = ({ onClose, showKeyline }: Props) => (
   <ModalHeader showKeyline={showKeyline}>
     <ModalTitle>Custom Modal</ModalTitle>
     <Button onClick={onClose} appearance="link" spacing="none">
@@ -45,12 +40,29 @@ const Header = ({ onClose, showKeyline }: Props) => (
   </ModalHeader>
 );
 
+const bodyStyles = {
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  padding: 30,
+};
+
+// $FlowFixMe
+const CustomBody = React.forwardRef((props, ref) => {
+  return (
+    <div ref={ref} style={bodyStyles}>
+      {props.children}
+      <Button onClick={() => {}}>Custom Body Component</Button>
+    </div>
+  );
+});
+
 type FooterState = { isOpen: boolean };
-class Footer extends Component<Props, FooterState> {
+// eslint-disable-next-line react/no-multi-comp
+class CustomFooter extends Component<Props, FooterState> {
   state = { isOpen: false };
   open = () => this.setState({ isOpen: true });
   close = () => this.setState({ isOpen: false });
-
   render() {
     const { onClose, showKeyline } = this.props;
     const { isOpen } = this.state;
@@ -81,19 +93,20 @@ export default class ExampleCustom extends Component<{}, ExampleCustomState> {
   state = { isOpen: false };
   open = () => this.setState({ isOpen: true });
   close = () => this.setState({ isOpen: false });
-
   render() {
     const { isOpen } = this.state;
 
     return (
       <div>
         <Button onClick={this.open}>Open Modal</Button>
-
         <ModalTransition>
           {isOpen && (
             <Modal
-              footer={Footer}
-              header={Header}
+              components={{
+                Header: CustomHeader,
+                Body: CustomBody,
+                Footer: CustomFooter,
+              }}
               onClose={this.close}
               onCloseComplete={node =>
                 console.log('exit transition complete', node)
@@ -102,11 +115,9 @@ export default class ExampleCustom extends Component<{}, ExampleCustomState> {
               shouldCloseOnOverlayClick={false}
               width={400}
             >
-              <Body>
-                <Lorem count={1} />
-                <Image src="https://atlaskit.atlassian.com/a857e9e1cf8677895f76f7763098083b.svg" />
-                <Lorem count={1} />
-              </Body>
+              <Lorem count={1} />
+              <Image src="https://atlassian.design/react_assets/images/cards/personality.png" />
+              <Lorem count={1} />
             </Modal>
           )}
         </ModalTransition>
