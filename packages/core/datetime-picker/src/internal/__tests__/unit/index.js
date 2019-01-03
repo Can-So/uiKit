@@ -80,37 +80,6 @@ test('parseDateIntoStateValues', () => {
   });
 });
 
-test('TimePicker invalid times should be cleared', () => {
-  const timePickerWrapper = mount(
-    <TimePicker id="timepicker-1" timeIsEditable />,
-  );
-  // Simulate user entering invalid date
-  timePickerWrapper
-    .find('Control Input')
-    .simulate('focus')
-    .simulate('keydown', { key: 'a' })
-    .simulate('keydown', { key: 's' })
-    .simulate('keydown', { key: 'd' })
-    .simulate('keydown', { key: 'Enter' })
-    .simulate('blur');
-
-  expect(timePickerWrapper.state().value).toEqual('');
-});
-
-test('DatePicker default parseInputValue parses valid dates to the expected value', () => {
-  const onChangeSpy = jest.fn();
-  const expectedResult = '2018-01-02';
-  const datePickerWrapper = mount(
-    <DatePicker
-      id="defaultDatePicker-ParseInputValue"
-      onChange={onChangeSpy}
-    />,
-  );
-
-  datePickerWrapper.instance().onSelectInput({ target: { value: '01/02/18' } });
-  expect(onChangeSpy).toBeCalledWith(expectedResult);
-});
-
 test('DatePicker, supplying a custom parseInputValue prop, produces the expected result', () => {
   const parseInputValue = (date, dateFormat) => new Date('01/01/1970'); //eslint-disable-line no-unused-vars
   const onChangeSpy = jest.fn();
