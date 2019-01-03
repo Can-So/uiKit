@@ -72,7 +72,7 @@ const Body = React.forwardRef((props: { children?: Node }, ref) => {
 });
 
 const BodyOld = (props: { children?: Node }) => {
-  return <div>{props.children}</div>;
+  return <div style={bodyStyles}>{props.children}</div>;
 };
 
 type FooterProps = {
