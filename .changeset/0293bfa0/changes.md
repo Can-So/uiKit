@@ -1,0 +1,1 @@
+- Add new properties to global-navigation to be able to inject and use new Settings drawer
