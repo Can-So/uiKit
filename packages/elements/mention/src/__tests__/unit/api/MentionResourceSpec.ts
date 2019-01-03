@@ -363,26 +363,6 @@ describe('MentionResource', () => {
       });
       resource.filter('polly');
     });
-
-    it('should use users in context to sort', done => {
-      const craig = { id: '84029', name: 'Craig Petchell', nickname: 'homer' };
-      const resource = new MentionResource({
-        ...apiConfig,
-        getUsersInContext: () => Promise.resolve([craig]),
-      });
-
-      const results: MentionDescription[][] = [];
-      resource.subscribe('test1', undefined, undefined, undefined, mentions => {
-        results.push(mentions);
-
-        if (results.length === 1) {
-          expect(results[0][0].name).toEqual(craig.name);
-          done();
-        }
-      });
-
-      resource.filter('craig');
-    });
   });
 
   describe('#filter auth issues', () => {
