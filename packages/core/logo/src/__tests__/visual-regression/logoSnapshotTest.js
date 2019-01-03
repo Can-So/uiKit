@@ -1,24 +1,14 @@
 // @flow
 import {
-  getExamplesFor,
   getExampleUrl,
   takeScreenShot,
 } from '@atlaskit/visual-regression/helper';
 
-const examples = getExamplesFor('logo');
-
 describe('Snapshot Test', () => {
-  examples.forEach(example => {
-    it(`${example.exampleName}-should match production example`, async () => {
-      const url = getExampleUrl(
-        example.team,
-        example.package,
-        example.exampleName,
-        global.__BASEURL__,
-      );
-      const image = await takeScreenShot(global.page, url);
-      //$FlowFixMe
-      expect(image).toMatchProdImageSnapshot();
-    });
+  it('Basic example should match production example', async () => {
+    const url = getExampleUrl('core', 'logo', 'basic', global.__BASEURL__);
+    const image = await takeScreenShot(global.page, url);
+    //$FlowFixMe
+    expect(image).toMatchProdImageSnapshot();
   });
 });

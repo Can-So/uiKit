@@ -45,14 +45,6 @@ One solution is to not make empty changeset commits (**reccomended**) or to use 
 git rebase -i --keep-empty origin/master
 ```
 
-### I'm getting a failure in CI during the `build` step that has nothing to do with my changes. Is this normal?
-
-Yes (sort of). It's a known issue that we believe is caused by a race condition between some of the `TypeScript` components.
-
-We are tracking the issue [here](https://ecosystem.atlassian.net/browse/AK-3974) and will likely be solving it with [this](https://github.com/thejameskyle/graph-sequencer) (currently WIP).
-
-In the meantime, simply rerunning should solve the issue (eventually...).
-
 ## Master has gone red suddenly and is complaining about not depending on the latest version of an internal package. What gives?
 
 There are a couple of ways this can happen. At it's core, the issue is when a branch is merged that was not up to date with master.

@@ -16,6 +16,7 @@ export {
   codeBlock,
   toJSON as codeBlockToJSON,
   CodeBlockDefinition,
+  CodeBlockAttrs,
 } from './code-block';
 export { hardBreak, HardBreakDefinition } from './hard-break';
 export { heading, HeadingDefinition } from './heading';

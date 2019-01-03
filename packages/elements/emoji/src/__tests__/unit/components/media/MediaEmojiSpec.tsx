@@ -1,28 +1,25 @@
-import { mount } from 'enzyme';
-import * as React from 'react';
-import { expect } from 'chai';
-
 import { waitUntil } from '@atlaskit/util-common-test';
-
+import { expect } from 'chai';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import * as React from 'react';
 import { EmojiProvider } from '../../../../api/EmojiResource';
 import { CachingMediaEmoji } from '../../../../components/common/CachingEmoji';
 import Emoji from '../../../../components/common/Emoji';
+import EmojiPreview from '../../../../components/common/EmojiPreview';
 import ResourcedEmoji from '../../../../components/common/ResourcedEmoji';
 import EmojiPicker from '../../../../components/picker/EmojiPicker';
 import EmojiPickerList from '../../../../components/picker/EmojiPickerList';
-import EmojiPreview from '../../../../components/common/EmojiPreview';
 import EmojiTypeAhead from '../../../../components/typeahead/EmojiTypeAhead';
-
+import { hasSelector } from '../../_emoji-selectors';
 import {
   getEmojiResourcePromiseFromRepository,
   mediaEmoji,
   mediaEmojiId,
   newSiteEmojiRepository,
 } from '../../_test-data';
-import { hasSelector } from '../../_emoji-selectors';
 import {
-  setupPicker,
   emojisVisible,
+  setupPicker,
 } from '../picker/_emoji-picker-test-helpers';
 
 describe('Media Emoji Handling across components', () => {
@@ -36,7 +33,7 @@ describe('Media Emoji Handling across components', () => {
 
   describe('<ResourcedEmoji/>', () => {
     it('ResourcedEmoji renders media emoji via CachingEmoji', () => {
-      const component = mount(
+      const component = mountWithIntl(
         <ResourcedEmoji emojiProvider={emojiProvider} emojiId={mediaEmojiId} />,
       );
       return waitUntil(() => hasSelector(component, Emoji)).then(() => {
@@ -52,7 +49,9 @@ describe('Media Emoji Handling across components', () => {
 
   describe('<EmojiPicker/>', () => {
     it('Media emoji rendered in picker', () => {
-      const component = mount(<EmojiPicker emojiProvider={emojiProvider} />);
+      const component = mountWithIntl(
+        <EmojiPicker emojiProvider={emojiProvider} />,
+      );
       return waitUntil(() => hasSelector(component, EmojiPickerList)).then(
         () => {
           const list = component.find(EmojiPickerList);
@@ -106,7 +105,9 @@ describe('Media Emoji Handling across components', () => {
 
   describe('<EmojiTypeAhead/>', () => {
     it('Media emoji rendered in type ahead', () => {
-      const component = mount(<EmojiTypeAhead emojiProvider={emojiProvider} />);
+      const component = mountWithIntl(
+        <EmojiTypeAhead emojiProvider={emojiProvider} />,
+      );
       return waitUntil(() => hasSelector(component, Emoji)).then(() => {
         const emojiDescription = component.find(Emoji).prop('emoji');
         expect(emojiDescription, 'Is media emoji').to.deep.equal(mediaEmoji);

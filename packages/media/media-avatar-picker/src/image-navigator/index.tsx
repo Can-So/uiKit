@@ -15,6 +15,7 @@ import {
   Vector2,
   messages,
 } from '@atlaskit/media-ui';
+import * as exenv from 'exenv';
 import {
   Container,
   SliderContainer,
@@ -101,6 +102,9 @@ export class ImageNavigator extends Component<
   state: State = defaultState;
 
   componentWillMount() {
+    if (!exenv.canUseDOM) {
+      return;
+    }
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
   }

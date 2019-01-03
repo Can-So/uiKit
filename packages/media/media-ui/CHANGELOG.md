@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 8.2.2
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
 ## 8.2.1
 - [patch] [9c50550](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c50550):
 

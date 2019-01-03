@@ -59,8 +59,6 @@ export class FullEditor extends React.Component<
       addShadow: defaultShapeParameters.addShadow,
       tool: defaultTool,
     };
-
-    console.log(this.state);
   }
 
   componentDidMount() {

@@ -42,6 +42,7 @@
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/icon": "^15.0.2",
     "@atlaskit/progress-indicator": "^5.0.11",
+    "@atlaskit/visual-regression": "^0.0.1",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",

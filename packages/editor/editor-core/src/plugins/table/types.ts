@@ -95,9 +95,10 @@ export const TableCssClassName = {
   NUMBERED_COLUMN_BUTTON: `${clPrefix}numbered-column__button`,
 
   HOVERED_CELL: `${clPrefix}hovered-cell`,
-  HOVERED_TABLE: `${clPrefix}hovered-table`,
-  RESIZING: `${clPrefix}resizing`,
   WITH_CONTROLS: `${clPrefix}with-controls`,
+  RESIZING_PLUGIN: `${clPrefix}resizing-plugin`,
+  RESIZE_CURSOR: `${clPrefix}resize-cursor`,
+  IS_RESIZING: `${clPrefix}is-resizing`,
 
   CONTEXTUAL_SUBMENU: `${clPrefix}contextual-submenu`,
   CONTEXTUAL_MENU_BUTTON: `${clPrefix}contextual-menu-button`,

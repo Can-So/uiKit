@@ -1,12 +1,12 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';
-import * as classNames from 'classnames';
-
-import * as styles from './styles';
-import { CategoryDescription, OnCategory } from '../../types';
+import { FormattedMessage } from 'react-intl';
 import { defaultCategories } from '../../constants';
-
+import { CategoryDescription, OnCategory } from '../../types';
+import { messages } from '../i18n';
 import { CategoryDescriptionMap, CategoryId } from './categories';
+import * as styles from './styles';
 
 export interface Props {
   dynamicCategories?: CategoryId[];
@@ -104,16 +104,20 @@ export default class CategorySelector extends PureComponent<Props, State> {
 
             // tslint:disable-next-line:variable-name
             const Icon = category.icon;
-
             return (
-              <li key={category.name}>
-                <button
-                  className={classNames(categoryClasses)}
-                  onClick={onClick}
-                  title={category.name}
-                >
-                  <Icon label={category.name} />
-                </button>
+              <li key={category.id}>
+                <FormattedMessage {...messages[category.name]}>
+                  {(categoryName: string) => (
+                    <button
+                      data-category-id={category.id}
+                      className={classNames(categoryClasses)}
+                      onClick={onClick}
+                      title={categoryName}
+                    >
+                      <Icon label={categoryName} />
+                    </button>
+                  )}
+                </FormattedMessage>
               </li>
             );
           })}

@@ -1,5 +1,13 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.5.3
+- Updated dependencies [00c648e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00c648e):
+- Updated dependencies [a17bb0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a17bb0e):
+- Updated dependencies [99f08a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99f08a0):
+  - @atlaskit/editor-core@92.0.9
+  - @atlaskit/renderer@33.0.3
+  - @atlaskit/status@0.3.0
+
 ## 6.5.2
 - Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
   - @atlaskit/editor-common@25.0.0

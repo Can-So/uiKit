@@ -9,8 +9,11 @@ import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { getStyles } from '../../../components/styles';
 import { UserPicker } from '../../../components/UserPicker';
-import { usersToOptions, userToOption } from '../../../components/utils';
-import { User, UserOption, UserPickerProps } from '../../../types';
+import {
+  optionToSelectableOption,
+  optionToSelectableOptions,
+} from '../../../components/utils';
+import { Option, User, UserPickerProps, UserType } from '../../../types';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<UserPickerProps> = {}) =>
@@ -31,7 +34,7 @@ describe('UserPicker', () => {
     },
   ];
 
-  const userOptions: UserOption[] = usersToOptions(options);
+  const userOptions: Option[] = optionToSelectableOptions(options);
 
   it('should render Select', () => {
     const component = shallowUserPicker({ options });
@@ -236,7 +239,7 @@ describe('UserPicker', () => {
       });
 
       expect(component.find(Select).prop('value')).toEqual([
-        { label: 'Jace Beleren', user: options[0], value: 'abc-123' },
+        { label: 'Jace Beleren', data: options[0], value: 'abc-123' },
       ]);
     });
 
@@ -249,7 +252,10 @@ describe('UserPicker', () => {
       });
 
       const select = component.find(Select);
-      const fixedOption = userToOption({ ...options[0], fixed: true });
+      const fixedOption = optionToSelectableOption({
+        ...options[0],
+        fixed: true,
+      });
       expect(select.prop('value')).toEqual([fixedOption]);
 
       select.simulate('change', [], {
@@ -271,10 +277,10 @@ describe('UserPicker', () => {
         onChange,
       });
 
-      const fixedOption = userToOption(fixedUser);
+      const fixedOption = optionToSelectableOption(fixedUser);
       expect(component.find(Select).prop('value')).toEqual([fixedOption]);
 
-      const removableOption = userToOption(options[1]);
+      const removableOption = optionToSelectableOption(options[1]);
       component
         .find(Select)
         .simulate('change', [fixedOption, removableOption], {
@@ -509,9 +515,12 @@ describe('UserPicker', () => {
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 38 });
       input.simulate('keyDown', { keyCode: 13 });
-      component.find(Select).prop('onChange')(userToOption(options[0]), {
-        action: 'select-option',
-      });
+      component.find(Select).prop('onChange')(
+        optionToSelectableOption(options[0]),
+        {
+          action: 'select-option',
+        },
+      );
       expect(onEvent).toHaveBeenCalledWith(
         expect.objectContaining({
           payload: expect.objectContaining({
@@ -529,7 +538,7 @@ describe('UserPicker', () => {
               upKeyCount: 1,
               downKeyCount: 3,
               position: 0,
-              result: { id: 'abc-123' },
+              result: { id: 'abc-123', type: UserType },
             },
           }),
         }),
@@ -545,9 +554,12 @@ describe('UserPicker', () => {
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 38 });
-      component.find(Select).prop('onChange')(userToOption(options[0]), {
-        action: 'select-option',
-      });
+      component.find(Select).prop('onChange')(
+        optionToSelectableOption(options[0]),
+        {
+          action: 'select-option',
+        },
+      );
       expect(onEvent).toHaveBeenCalledWith(
         expect.objectContaining({
           payload: expect.objectContaining({
@@ -565,7 +577,7 @@ describe('UserPicker', () => {
               upKeyCount: 1,
               downKeyCount: 3,
               position: 0,
-              result: { id: 'abc-123' },
+              result: { id: 'abc-123', type: UserType },
             },
           }),
         }),
@@ -576,9 +588,12 @@ describe('UserPicker', () => {
     it('should trigger cleared event', () => {
       const input = component.find('input');
       input.simulate('focus');
-      component.find(Select).prop('onChange')(userToOption(options[0]), {
-        action: 'clear',
-      });
+      component.find(Select).prop('onChange')(
+        optionToSelectableOption(options[0]),
+        {
+          action: 'clear',
+        },
+      );
       expect(onEvent).toHaveBeenCalledWith(
         expect.objectContaining({
           payload: expect.objectContaining({
@@ -605,7 +620,7 @@ describe('UserPicker', () => {
       input.simulate('focus');
       component.find(Select).prop('onChange')([], {
         action: 'remove-value',
-        removedValue: userToOption(options[0]),
+        removedValue: optionToSelectableOption(options[0]),
       });
       expect(onEvent).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -618,7 +633,7 @@ describe('UserPicker', () => {
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
               pickerOpen: true,
-              value: { id: options[0].id },
+              value: { id: options[0].id, type: UserType },
             },
           }),
         }),
@@ -675,7 +690,10 @@ describe('UserPicker', () => {
                   sessionId: expect.any(String),
                   duration: expect.any(Number),
                   queryLength: 0,
-                  results: [{ id: 'abc-123' }, { id: '123-abc' }],
+                  results: [
+                    { id: 'abc-123', type: UserType },
+                    { id: '123-abc', type: UserType },
+                  ],
                   pickerType: 'single',
                 }),
               }),
@@ -722,7 +740,7 @@ describe('UserPicker', () => {
                   sessionId: expect.any(String),
                   duration: expect.any(Number),
                   queryLength: 0,
-                  results: [{ id: 'abc-123' }],
+                  results: [{ id: 'abc-123', type: UserType }],
                   pickerType: 'single',
                 }),
               }),

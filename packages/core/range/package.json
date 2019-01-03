@@ -29,6 +29,7 @@
     "@atlaskit/checkbox": "^5.0.9",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/tooltip": "^12.1.13",
+    "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },

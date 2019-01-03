@@ -1,5 +1,15 @@
 # @atlaskit/editor-common
 
+## 25.0.4
+- [patch] [80cadc7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80cadc7):
+
+  - ED-5861 - Fix panel style in order to render telepointers properly
+
+## 25.0.3
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/media-core@24.7.2
+  - @atlaskit/media-card@47.0.0
+
 ## 25.0.2
 - [patch] [ce65803](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce65803):
 

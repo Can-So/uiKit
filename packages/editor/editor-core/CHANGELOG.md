@@ -1,5 +1,89 @@
 # @atlaskit/editor-core
 
+## 92.0.16
+- [patch] [e251065](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e251065):
+
+  - ED-5894: fix table controls disappearing while dragging resize handle
+
+## 92.0.15
+- [patch] [4b1567c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b1567c):
+
+  - ED-5991: fixed Position NaN out of range when resizing tables
+
+## 92.0.14
+- [patch] [88a8605](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/88a8605):
+
+  - ED-5958: fix "getBoundingClientRect" errors
+
+## 92.0.13
+- [patch] [e79f8b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e79f8b0):
+
+  - Disable alignment when editor is disabled
+
+## 92.0.12
+- [patch] [80cadc7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80cadc7):
+
+  - ED-5861 - Fix panel style in order to render telepointers properly
+
+## 92.0.11
+- [patch] [53c513c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/53c513c):
+
+  - ED-5947: fix preserving CellSelection  when clicking on context menu
+
+## 92.0.10
+- [patch] [6d435cf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d435cf):
+
+  - Fix issue where table contextual menu had incorrect styling when using a popups mount point outside of the editor
+
+## 92.0.9
+- Updated dependencies [00c648e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00c648e):
+- Updated dependencies [a17bb0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a17bb0e):
+- Updated dependencies [99f08a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99f08a0):
+  - @atlaskit/renderer@33.0.3
+  - @atlaskit/status@0.3.0
+
+## 92.0.8
+- [patch] [4611d97](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4611d97):
+
+  - Remove hardcoded "unknown" value for mention's analytics 'source' attribute. In general the 'source' attribute is not meant to be set by components and are supposed to be populated by products.
+- [patch] [551696e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/551696e):
+
+  - FS-3398 Fix incorrect event type for mention's "rendered" analytics event, ui -> operational
+- [patch] [77b3be7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/77b3be7):
+
+  - FS-3398 Fix case typo in actionSubject of mention's "rendered" analytics event, mentionTypeAhead -> mentionTypeahead
+- [patch] [f6a1b31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6a1b31):
+
+  - Remove 'query' attribute from mention's "rendered" analytics event. This attribute basically contains UGC and should not have been captured in the first place. It seems like it was added by accident as it wasn't part of the original specs.
+- [patch] [551696e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/551696e):
+
+  - FS-3398 Fix incorrect event type for mention's "rendered" analytics event, ui -> operational
+
+## 92.0.7
+- [patch] [7c10292](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c10292):
+
+  - ED-5923: don't grow page while using resize handles on images
+
+## 92.0.6
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/editor-common@25.0.3
+  - @atlaskit/renderer@33.0.1
+  - @atlaskit/media-core@24.7.2
+  - @atlaskit/media-filmstrip@21.0.2
+  - @atlaskit/media-picker@27.0.2
+  - @atlaskit/media-test-helpers@18.7.2
+  - @atlaskit/media-card@47.0.0
+
+## 92.0.5
+- [patch] [50d9b26](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/50d9b26):
+
+  - ED-5806 Fix disappearing language in code block language picker
+
+## 92.0.4
+- [patch] [be12a8e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be12a8e):
+
+  - Fix popup picker dismiss on escape for Jira
+
 ## 92.0.3
 - [patch] [88c8373](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/88c8373):
 
