@@ -10,6 +10,7 @@ import UserInfo from '../UserInfo';
 import { DeleteUserOverviewScreenProps } from './types';
 import * as Styled from './styled';
 import { DropdownList } from '../DropdownList';
+import MessagesIntlProvider from '../MessagesIntlProvider';
 
 export class DeleteUserOverviewScreen extends React.Component<
   DeleteUserOverviewScreenProps
@@ -183,58 +184,60 @@ export class DeleteUserOverviewScreen extends React.Component<
     const { user, deactivateUserHandler, isUserDeactivated } = this.props;
 
     return (
-      <Styled.Screen>
-        <Styled.Title>
+      <MessagesIntlProvider>
+        <Styled.Screen>
+          <Styled.Title>
+            <FormattedMessage
+              {...this.selectAdminOrSelfCopy(
+                overviewMessages.headingAdmin,
+                overviewMessages.headingSelf,
+              )}
+            />
+          </Styled.Title>
           <FormattedMessage
             {...this.selectAdminOrSelfCopy(
-              overviewMessages.headingAdmin,
-              overviewMessages.headingSelf,
+              overviewMessages.firstLineAdmin,
+              overviewMessages.firstLineSelf,
+            )}
+            tagName="p"
+          />
+          <UserInfo user={user} />
+          <FormattedMessage
+            {...this.selectAdminOrSelfCopy(
+              overviewMessages.paragraphAboutToDeleteAdmin,
+              overviewMessages.paragraphAboutToDeleteSelf,
             )}
           />
-        </Styled.Title>
-        <FormattedMessage
-          {...this.selectAdminOrSelfCopy(
-            overviewMessages.firstLineAdmin,
-            overviewMessages.firstLineSelf,
+          <Styled.MainInformationList>
+            {this.displayFirstListElement()}
+            {this.displaySecondListElement()}
+            {this.displayThirdListElement()}
+            {this.displayFourthListElement()}
+          </Styled.MainInformationList>
+          {deactivateUserHandler && (
+            <Styled.SectionMessageOuter>
+              <SectionMessage appearance="warning">
+                <FormattedMessage
+                  {...(isUserDeactivated
+                    ? overviewMessages.warningSectionBodyDeactivated
+                    : overviewMessages.warningSectionBody)}
+                />
+                {!isUserDeactivated && (
+                  <p>
+                    <Button
+                      appearance="link"
+                      spacing="none"
+                      onClick={deactivateUserHandler}
+                    >
+                      <FormattedMessage {...commonMessages.deactivateAccount} />
+                    </Button>
+                  </p>
+                )}
+              </SectionMessage>
+            </Styled.SectionMessageOuter>
           )}
-          tagName="p"
-        />
-        <UserInfo user={user} />
-        <FormattedMessage
-          {...this.selectAdminOrSelfCopy(
-            overviewMessages.paragraphAboutToDeleteAdmin,
-            overviewMessages.paragraphAboutToDeleteSelf,
-          )}
-        />
-        <Styled.MainInformationList>
-          {this.displayFirstListElement()}
-          {this.displaySecondListElement()}
-          {this.displayThirdListElement()}
-          {this.displayFourthListElement()}
-        </Styled.MainInformationList>
-        {deactivateUserHandler && (
-          <Styled.SectionMessageOuter>
-            <SectionMessage appearance="warning">
-              <FormattedMessage
-                {...(isUserDeactivated
-                  ? overviewMessages.warningSectionBodyDeactivated
-                  : overviewMessages.warningSectionBody)}
-              />
-              {!isUserDeactivated && (
-                <p>
-                  <Button
-                    appearance="link"
-                    spacing="none"
-                    onClick={deactivateUserHandler}
-                  >
-                    <FormattedMessage {...commonMessages.deactivateAccount} />
-                  </Button>
-                </p>
-              )}
-            </SectionMessage>
-          </Styled.SectionMessageOuter>
-        )}
-      </Styled.Screen>
+        </Styled.Screen>
+      </MessagesIntlProvider>
     );
   }
 }
