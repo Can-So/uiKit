@@ -42,21 +42,23 @@ export const SANDBOX_DEPLOY_ENDPOINT =
 function PackageSelector(props) {
   let selectedPackageItem;
 
-  const packagesSelectOptions = externalPackages.children.map(group => ({
-    label: fs.titleize(group.id),
-    options: fs.getDirectories(group.children).map(pkg => {
-      const item = {
-        label: fs.titleize(pkg.id),
-        value: `${group.id}/${pkg.id}`,
-      };
+  const packagesSelectOptions = externalPackages.children.map(
+    ({ id, children }) => ({
+      label: fs.titleize(id),
+      options: fs.getDirectories(children).map(pkg => {
+        const item = {
+          label: fs.titleize(pkg.id),
+          value: `${id}/${pkg.id}`,
+        };
 
-      if (props.groupId === group.id && props.packageId === pkg.id) {
-        selectedPackageItem = item;
-      }
+        if (props.groupId === id && props.packageId === pkg.id) {
+          selectedPackageItem = item;
+        }
 
-      return item;
+        return item;
+      }),
     }),
-  }));
+  );
 
   return (
     <Control>
@@ -131,9 +133,9 @@ function ExampleSelector(props) {
 
 // TODO: Type correct once codesandbox is typed
 export type ExampleNavigationProps = {
-  onExampleSelected?: (selected: { item: { value: string } }) => void;
+  onExampleSelected?: (selected: { value: string }) => void;
   examples?: any;
-  onPackageSelected?: (selected: { item: { value: string } }) => void;
+  onPackageSelected?: (selected: { value: string }) => void;
   exampleId?: string;
   groupId: string;
   loaderUrl?: string | null;
