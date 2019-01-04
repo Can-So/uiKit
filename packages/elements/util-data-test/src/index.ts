@@ -2,7 +2,7 @@ import profilecard from './profilecard';
 import * as mention from './mention';
 import * as emoji from './emoji';
 import taskDecision from './task-decision';
-import { userPickerUserData, userPickerTeamData } from './user-picker';
+import { userPickerData } from './user-picker';
 
 export {
   MockEmojiResource,
@@ -26,13 +26,6 @@ export {
   MockMentionResourceWithInfoHints,
 } from './mention/MockMentionResourceWithInfoHints';
 
-export {
-  profilecard,
-  mention,
-  emoji,
-  taskDecision,
-  userPickerUserData,
-  userPickerTeamData,
-};
+export { profilecard, mention, emoji, taskDecision, userPickerData };
 
 export default {};

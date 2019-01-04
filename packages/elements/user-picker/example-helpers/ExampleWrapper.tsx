@@ -2,7 +2,7 @@ import { AnalyticsViewerContainer } from '@atlaskit/analytics-viewer';
 import * as React from 'react';
 import {
   assignToMe,
-  exampleUsers,
+  exampleOptions,
   filterUsers,
   unassigned,
 } from '../example-helpers';
@@ -26,7 +26,7 @@ export class ExampleWrapper extends React.PureComponent<
   constructor(props) {
     super(props);
     this.state = {
-      options: exampleUsers,
+      options: exampleOptions,
     };
   }
 
@@ -40,7 +40,7 @@ export class ExampleWrapper extends React.PureComponent<
       unassigned,
       assignToMe,
       new Promise<OptionData[]>(resolve => {
-        window.setTimeout(() => resolve(exampleUsers), 1000);
+        window.setTimeout(() => resolve(exampleOptions), 1000);
       }),
     ];
   };
@@ -50,7 +50,7 @@ export class ExampleWrapper extends React.PureComponent<
       options:
         searchText && searchText.length > 0
           ? filterUsers(searchText)
-          : exampleUsers,
+          : exampleOptions,
     });
   };
 
