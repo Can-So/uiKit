@@ -62,7 +62,7 @@ export default class PickerFacade {
     }
 
     picker.on('upload-preview-update', this.handleUploadPreviewUpdate);
-    picker.on('upload-end', this.handleUploadEnd);
+    picker.on('upload-processing', this.handleUploadEnd);
     picker.on('upload-error', this.handleUploadError);
     picker.on('collection', this.handleCollection);
 
@@ -220,9 +220,7 @@ export default class PickerFacade {
       fileName: file.name,
       fileSize: file.size,
       fileMimeType: file.type,
-      fileId: Promise.resolve(file.id),
       dimensions,
-      publicId: file.id,
       scaleFactor,
     });
 
