@@ -68,6 +68,7 @@
     "@atlaskit/media-core": "^24.7.2",
     "@atlaskit/media-test-helpers": "^18.7.3",
     "@atlaskit/media-viewer": "^29.0.2",
+    "@atlaskit/select": "^6.1.15",
     "@atlaskit/toggle": "^5.0.14",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "@types/dateformat": "^1.0.1",
