@@ -326,7 +326,7 @@ if (process.env.CI) {
 expect.addSnapshotSerializer(createSerializer(emotion));
 
 // set up for visual regression
-if (process.env.VISUAL_REGRESSION) {
+if (process.env.VISUAL_REGRESSION && global.VISUAL_REGRESSION) {
   const puppeteer = require('puppeteer');
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 
@@ -337,7 +337,6 @@ if (process.env.VISUAL_REGRESSION) {
     if (isWatch) {
       headless = false;
     }
-    console.log(global);
     global.browser = await puppeteer.launch({
       // run test in headless mode
       headless: headless,
@@ -345,7 +344,6 @@ if (process.env.VISUAL_REGRESSION) {
       slowMo: 100,
       args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
     });
-    console.log(global.browser);
     global.page = await global.browser.newPage();
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);
 
