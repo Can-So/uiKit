@@ -337,6 +337,7 @@ if (process.env.VISUAL_REGRESSION) {
     if (isWatch) {
       headless = false;
     }
+    console.log(global);
     global.browser = await puppeteer.launch({
       // run test in headless mode
       headless: headless,
@@ -344,10 +345,12 @@ if (process.env.VISUAL_REGRESSION) {
       slowMo: 100,
       args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
     });
+    console.log(global.browser);
     global.page = await global.browser.newPage();
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);
 
   afterAll(async () => {
+    console.log(global.browser);
     await global.browser.close();
   });
 
