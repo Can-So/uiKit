@@ -15,7 +15,7 @@ const mockHtmlElement = (rect: Partial<DOMRect>): HTMLElement =>
 describe('MultiValue', () => {
   const data = {
     label: 'Jace Beleren',
-    user: {
+    data: {
       id: 'abc-123',
       name: 'Jace Beleren',
       publicName: 'jbeleren',
@@ -87,7 +87,7 @@ describe('MultiValue', () => {
 
   it('should not render remove button for fixed value', () => {
     const component = shallowMultiValue({
-      data: { ...data, user: { ...data.user, fixed: true } },
+      data: { ...data, data: { ...data.data, fixed: true } },
     });
     const tag = renderProp(
       component.find(FormattedMessage as React.ComponentClass<any>),
@@ -134,8 +134,8 @@ describe('MultiValue', () => {
           ...defaultProps,
           data: {
             ...data,
-            user: {
-              ...data.user,
+            data: {
+              ...data.data,
               publicName: 'crazy_jace',
             },
           },

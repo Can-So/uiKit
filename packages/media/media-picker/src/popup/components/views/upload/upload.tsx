@@ -39,6 +39,7 @@ import {
   SelectedItem,
   ServiceFile,
   State,
+  ServiceName,
 } from '../../../domain';
 import { menuDelete, menuEdit } from '../editor/phrases';
 import {
@@ -87,7 +88,10 @@ export interface UploadViewStateProps {
 }
 
 export interface UploadViewDispatchProps {
-  readonly onFileClick: (serviceFile: ServiceFile, serviceName: string) => void;
+  readonly onFileClick: (
+    serviceFile: ServiceFile,
+    serviceName: ServiceName,
+  ) => void;
   readonly onEditorShowImage: (file: FileReference, dataUri: string) => void;
   readonly onEditRemoteImage: (
     file: FileReference,

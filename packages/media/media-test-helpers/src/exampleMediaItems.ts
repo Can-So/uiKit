@@ -158,6 +158,12 @@ export const videoLargeFileId = {
   collectionName,
 };
 
+export const videoSquareFileId = {
+  id: 'cdff20d6-2c0a-4d0d-b2a9-22cc728a0368',
+  mediaItemType: fileType,
+  collectionName,
+};
+
 export const videoProcessingFailedId = {
   id: 'e558199f-f982-4d23-93eb-313be5998d1b',
   mediaItemType: fileType,

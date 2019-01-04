@@ -9,6 +9,7 @@ export const analyticsIdMap: { [drawerName: DrawerName]: string } = {
   notification: 'notificationsDrawer',
   create: 'createDrawer',
   starred: 'starDrawer',
+  settings: 'settingsDrawer',
 };
 
 export const fireDrawerDismissedEvents = (

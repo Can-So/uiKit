@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
+import * as classnames from 'classnames';
 import { EditorView } from 'prosemirror-view';
 import { isTableSelected, selectTable, findTable } from 'prosemirror-utils';
 import { TableMap } from 'prosemirror-tables';
@@ -16,6 +17,7 @@ export interface Props {
   editorView: EditorView;
   tableRef?: HTMLTableElement;
   isInDanger?: boolean;
+  isResizing?: boolean;
   isHeaderColumnEnabled?: boolean;
   isHeaderRowEnabled?: boolean;
   isNumberColumnEnabled?: boolean;
@@ -28,6 +30,7 @@ export default class CornerControls extends Component<Props, any> {
   render() {
     const {
       isInDanger,
+      isResizing,
       isHeaderRowEnabled,
       isHeaderColumnEnabled,
       insertColumnButtonIndex,
@@ -41,13 +44,15 @@ export default class CornerControls extends Component<Props, any> {
 
     return (
       <div
-        className={`${ClassName.CORNER_CONTROLS} ${isActive ? 'active' : ''}`}
+        className={classnames(ClassName.CORNER_CONTROLS, {
+          active: isActive,
+        })}
       >
         <button
           type="button"
-          className={`${ClassName.CONTROLS_CORNER_BUTTON} ${
-            isActive && isInDanger ? 'danger' : ''
-          }`}
+          className={classnames(ClassName.CONTROLS_CORNER_BUTTON, {
+            danger: isActive && isInDanger,
+          })}
           onClick={this.selectTable}
           onMouseOver={this.hoverTable}
           onMouseOut={this.clearHoverSelection}
@@ -57,7 +62,7 @@ export default class CornerControls extends Component<Props, any> {
             type="column"
             tableRef={tableRef}
             index={0}
-            showInsertButton={insertColumnButtonIndex === 0}
+            showInsertButton={!isResizing && insertColumnButtonIndex === 0}
             onMouseDown={this.insertColumn}
           />
         )}
@@ -66,7 +71,7 @@ export default class CornerControls extends Component<Props, any> {
             type="row"
             tableRef={tableRef}
             index={0}
-            showInsertButton={insertRowButtonIndex === 0}
+            showInsertButton={!isResizing && insertRowButtonIndex === 0}
             onMouseDown={this.insertRow}
           />
         )}
@@ -75,7 +80,7 @@ export default class CornerControls extends Component<Props, any> {
   }
 
   private isActive = () => {
-    const { editorView, hoveredRows } = this.props;
+    const { editorView, hoveredRows, isResizing } = this.props;
     const { selection } = editorView.state;
     const table = findTable(selection);
     if (!table) {
@@ -83,7 +88,9 @@ export default class CornerControls extends Component<Props, any> {
     }
     return (
       isTableSelected(selection) ||
-      (hoveredRows && hoveredRows.length === TableMap.get(table.node).height)
+      (hoveredRows &&
+        hoveredRows.length === TableMap.get(table.node).height &&
+        !isResizing)
     );
   };
 

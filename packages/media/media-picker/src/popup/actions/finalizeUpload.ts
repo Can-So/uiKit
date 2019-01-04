@@ -28,7 +28,6 @@ export function finalizeUpload(
   uploadId: string,
   source: FinalizeUploadSource,
   replaceFileId?: Promise<string>,
-  occurrenceKey?: string,
 ): FinalizeUploadAction {
   return {
     type: FINALIZE_UPLOAD,
@@ -36,6 +35,5 @@ export function finalizeUpload(
     uploadId,
     source,
     replaceFileId,
-    occurrenceKey,
   };
 }

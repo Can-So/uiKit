@@ -11,7 +11,11 @@ import { ReactWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
 import Spinner from '@atlaskit/spinner';
 import Button from '@atlaskit/button';
-import { MediaItemType, Context } from '@atlaskit/media-core';
+import {
+  MediaItemType,
+  Context,
+  ProcessedFileState,
+} from '@atlaskit/media-core';
 import {
   ItemViewer,
   ItemViewerBase,
@@ -122,36 +126,6 @@ describe('<ItemViewer />', () => {
     expect(errorMessage.find(Button)).toHaveLength(1);
   });
 
-  it('should show the spinner if the item is being processed', () => {
-    const context = makeFakeContext(
-      Observable.of({
-        id: '123',
-        mediaType: 'video',
-        status: 'processing',
-      }),
-    );
-    const el = mountWithIntlContext(
-      <ItemViewer previewCount={0} context={context} identifier={identifier} />,
-    );
-    el.update();
-    expect(el.find(Spinner)).toHaveLength(1);
-  });
-
-  it('should show the spinner if the item is being uploaded', () => {
-    const context = makeFakeContext(
-      Observable.of({
-        id: '123',
-        mediaType: 'video',
-        status: 'uploading',
-      }),
-    );
-    const el = mountWithIntlContext(
-      <ItemViewer previewCount={0} context={context} identifier={identifier} />,
-    );
-    el.update();
-    expect(el.find(Spinner)).toHaveLength(1);
-  });
-
   it('should should error and download button if file is processing failed', () => {
     const context = makeFakeContext(
       Observable.of({
@@ -193,13 +167,16 @@ describe('<ItemViewer />', () => {
   });
 
   it('should show the video viewer if media type is video', () => {
-    const context = makeFakeContext(
-      Observable.of({
-        id: identifier.id,
-        mediaType: 'video',
-        status: 'processed',
-      }),
-    );
+    const state: ProcessedFileState = {
+      id: identifier.id,
+      mediaType: 'video',
+      status: 'processed',
+      mimeType: '',
+      name: '',
+      size: 1,
+      artifacts: {},
+    };
+    const context = makeFakeContext(Observable.of(state));
     const { el } = mountComponent(context, identifier);
     el.update();
     expect(el.find(VideoViewer)).toHaveLength(1);

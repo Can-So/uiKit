@@ -6,6 +6,7 @@ import { tableMarginTop } from '@atlaskit/editor-common';
 import { GapCursorSelection, Side } from './selection';
 import { TableCssClassName } from '../table/types';
 import { tableInsertColumnButtonSize } from '../table/ui/styles';
+import { closestElement } from '../../utils';
 
 // we don't show gap cursor for those nodes
 const IGNORED_NODES = [
@@ -241,7 +242,7 @@ export const fixCursorAlignment = (view: EditorView) => {
 };
 
 export const isIgnoredClick = (elem: HTMLElement) => {
-  if (elem.nodeName === 'BUTTON') {
+  if (elem.nodeName === 'BUTTON' || closestElement(elem, 'button')) {
     return true;
   }
 

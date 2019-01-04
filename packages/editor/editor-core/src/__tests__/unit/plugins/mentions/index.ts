@@ -40,7 +40,6 @@ describe('mentionTypeahead', () => {
         action: 'cancelled',
         actionSubject: 'mentionTypeahead',
         eventType: 'ui',
-        source: 'unknown',
         attributes: expect.objectContaining({
           packageName: '@atlaskit/editor-core',
           packageVersion: expect.any(String),
@@ -86,7 +85,6 @@ describe('mentionTypeahead', () => {
         action: 'pressed',
         actionSubject: 'mentionTypeahead',
         eventType: 'ui',
-        source: 'unknown',
         attributes: expect.objectContaining({
           packageName: '@atlaskit/editor-core',
           packageVersion: expect.any(String),
@@ -136,7 +134,6 @@ describe('mentionTypeahead', () => {
         action: 'clicked',
         actionSubject: 'mentionTypeahead',
         eventType: 'ui',
-        source: 'unknown',
         attributes: expect.objectContaining({
           packageName: '@atlaskit/editor-core',
           packageVersion: expect.any(String),
@@ -148,6 +145,50 @@ describe('mentionTypeahead', () => {
           accessLevel: 'CONTAINER',
           userType: 'SPECIAL',
           userId: 'all',
+        }),
+      }),
+    );
+    expect(event.fire).toHaveBeenCalledTimes(1);
+    expect(event.fire).toHaveBeenCalledWith('fabric-elements');
+  });
+
+  it('should fire typeahead rendered event', async () => {
+    const event: any = { fire: jest.fn() };
+    const providerFactory = new ProviderFactory();
+    providerFactory.setProvider('mentionProvider', mentionProvider);
+    providerFactory.setProvider(
+      'contextIdentifierProvider',
+      contextIdentifierProvider,
+    );
+    createAnalyticsEvent.mockReturnValueOnce(event);
+    const { editorView, sel } = createEditor({
+      doc: doc(p(typeAheadQuery({ trigger: '@' })('@{<>}'))),
+      editorProps: { mentionProvider, contextIdentifierProvider },
+      providerFactory,
+      createAnalyticsEvent,
+    });
+
+    // Waiting for mention provider to resolve
+    await sleep(100);
+
+    insertText(editorView, 'all', sel);
+
+    // After querying mentions search need to wait for promise to resolve
+    await sleep(100);
+
+    expect(createAnalyticsEvent).toHaveBeenCalledWith(
+      expect.objectContaining({
+        action: 'rendered',
+        actionSubject: 'mentionTypeahead',
+        eventType: 'operational',
+        attributes: expect.objectContaining({
+          packageName: '@atlaskit/editor-core',
+          packageVersion: expect.any(String),
+          duration: expect.any(Number),
+          queryLength: 3,
+          spaceInQuery: false,
+          userIds: expect.any(Array),
+          sessionId: expect.any(String),
         }),
       }),
     );

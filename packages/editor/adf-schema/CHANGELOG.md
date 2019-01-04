@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.2.0
+- [minor] [5b11b69](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b11b69):
+
+  - Allow mixed of cell types in a table row
+
 ## 1.1.0
 - [minor] [b9f8a8f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9f8a8f):
 

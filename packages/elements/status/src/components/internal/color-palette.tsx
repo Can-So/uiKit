@@ -1,19 +1,18 @@
-import * as React from 'react';
-import { PureComponent } from 'react';
-import styled from 'styled-components';
-import { HTMLAttributes, ComponentClass } from 'react';
 import { colors, gridSize } from '@atlaskit/theme';
-import Color from './color';
+import * as React from 'react';
+import { ComponentClass, HTMLAttributes } from 'react';
+import styled from 'styled-components';
 import { Color as ColorType } from '../Status';
+import Color from './color';
 
 // color value, label, background, borderColor
-const palette: [ColorType, string, string, string][] = [
-  ['neutral', 'Grey', colors.N40, colors.N400],
-  ['purple', 'Purple', colors.P50, colors.P400],
-  ['blue', 'Blue', colors.B50, colors.B400],
-  ['red', 'Red', colors.R50, colors.R400],
-  ['yellow', 'Yellow', colors.Y75, colors.Y400],
-  ['green', 'Green', colors.G50, colors.G400],
+const palette: [ColorType, string, string][] = [
+  ['neutral', colors.N40, colors.N400],
+  ['purple', colors.P50, colors.P400],
+  ['blue', colors.B50, colors.B400],
+  ['red', colors.R50, colors.R400],
+  ['yellow', colors.Y75, colors.Y400],
+  ['green', colors.G50, colors.G400],
 ];
 
 const ColorPaletteWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
@@ -31,31 +30,24 @@ interface ColorPaletteProps {
   className?: string;
 }
 
-export default class ColorPalette extends PureComponent<
-  ColorPaletteProps,
-  any
-> {
-  render() {
-    const { cols = 7, onClick, selectedColor, className, onHover } = this.props;
-
-    return (
-      <ColorPaletteWrapper
-        className={className}
-        style={{ maxWidth: cols * 32 }}
-      >
-        {palette.map(([colorValue, label, backgroundColor, borderColor]) => (
-          <Color
-            key={colorValue}
-            value={colorValue}
-            backgroundColor={backgroundColor}
-            borderColor={borderColor}
-            label={label}
-            onClick={onClick}
-            onHover={onHover}
-            isSelected={colorValue === selectedColor}
-          />
-        ))}
-      </ColorPaletteWrapper>
-    );
-  }
-}
+export default ({
+  cols = 7,
+  onClick,
+  selectedColor,
+  className,
+  onHover,
+}: ColorPaletteProps) => (
+  <ColorPaletteWrapper className={className} style={{ maxWidth: cols * 32 }}>
+    {palette.map(([colorValue, backgroundColor, borderColor]) => (
+      <Color
+        key={colorValue}
+        value={colorValue}
+        backgroundColor={backgroundColor}
+        borderColor={borderColor}
+        onClick={onClick}
+        onHover={onHover}
+        isSelected={colorValue === selectedColor}
+      />
+    ))}
+  </ColorPaletteWrapper>
+);

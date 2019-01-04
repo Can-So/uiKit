@@ -155,7 +155,9 @@ export default class NotificationIndicator extends Component<Props, State> {
     const { appearance, max } = this.props;
 
     return count ? (
-      <Badge max={max} appearance={appearance} value={count} />
+      <div data-test-selector="NotificationIndicator">
+        <Badge max={max} appearance={appearance} value={count} />
+      </div>
     ) : null;
   }
 }

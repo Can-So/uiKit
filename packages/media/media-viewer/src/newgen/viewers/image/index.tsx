@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Context, ProcessedFileState, MediaItem } from '@atlaskit/media-core';
+import { Context, MediaItem, FileState } from '@atlaskit/media-core';
+import { getOrientation } from '@atlaskit/media-ui';
 import { Outcome } from '../../domain';
 import { createError, MediaViewerError } from '../../error';
 import { InteractiveImg } from './interactive-img';
@@ -11,12 +12,17 @@ export const REQUEST_CANCELLED = 'request_cancelled';
 
 export type ImageViewerProps = AnalyticViewerProps & {
   context: Context;
-  item: ProcessedFileState;
+  item: FileState;
   collectionName?: string;
   onClose?: () => void;
 };
 
-function processedFileStateToMediaItem(file: ProcessedFileState): MediaItem {
+export interface ImageViewerContent {
+  objectUrl: ObjectUrl;
+  orientation?: number;
+}
+
+function processedFileStateToMediaItem(file: FileState): MediaItem {
   return {
     type: 'file',
     details: {
@@ -25,9 +31,12 @@ function processedFileStateToMediaItem(file: ProcessedFileState): MediaItem {
   };
 }
 
-export class ImageViewer extends BaseViewer<ObjectUrl, ImageViewerProps> {
+export class ImageViewer extends BaseViewer<
+  ImageViewerContent,
+  ImageViewerProps
+> {
   protected get initialState() {
-    return { content: Outcome.pending<ObjectUrl, MediaViewerError>() };
+    return { content: Outcome.pending<ImageViewerContent, MediaViewerError>() };
   }
 
   private cancelImageFetch?: () => void;
@@ -41,21 +50,44 @@ export class ImageViewer extends BaseViewer<ObjectUrl, ImageViewerProps> {
 
   protected async init() {
     const { item: file, context, collectionName } = this.props;
+    if (file.status === 'error') {
+      return;
+    }
+
     try {
-      const item = processedFileStateToMediaItem(file);
-      const controller =
-        typeof AbortController !== 'undefined' && new AbortController();
-      const response = context.getImage(item.details.id, {
-        width: 1920,
-        height: 1080,
-        mode: 'fit',
-        allowAnimated: true,
-        collection: collectionName,
-      });
-      this.cancelImageFetch = () => controller && controller.abort();
-      const objectUrl = URL.createObjectURL(await response);
+      let imagePreview: Blob | undefined;
+      let orientation = 1;
+      if (file.status === 'processed') {
+        const item = processedFileStateToMediaItem(file);
+        const controller =
+          typeof AbortController !== 'undefined' && new AbortController();
+        const response = context.getImage(item.details.id, {
+          width: 1920,
+          height: 1080,
+          mode: 'fit',
+          allowAnimated: true,
+          collection: collectionName,
+        });
+        this.cancelImageFetch = () => controller && controller.abort();
+        // imagePreview = URL.createObjectURL(await response);
+        imagePreview = await response;
+      } else {
+        const { preview } = file;
+        if (preview) {
+          imagePreview = preview.blob;
+          orientation = await getOrientation(imagePreview as File);
+        } else {
+          this.setState({
+            content: Outcome.pending(),
+          });
+          return;
+        }
+      }
+
+      const objectUrl = URL.createObjectURL(imagePreview);
+
       this.setState({
-        content: Outcome.successful(objectUrl),
+        content: Outcome.successful({ objectUrl, orientation }),
       });
     } catch (err) {
       if (err.message === REQUEST_CANCELLED) {
@@ -74,7 +106,7 @@ export class ImageViewer extends BaseViewer<ObjectUrl, ImageViewerProps> {
       this.cancelImageFetch();
     }
 
-    this.state.content.whenSuccessful(objectUrl => {
+    this.state.content.whenSuccessful(({ objectUrl }) => {
       this.revokeObjectUrl(objectUrl);
     });
   }
@@ -84,13 +116,14 @@ export class ImageViewer extends BaseViewer<ObjectUrl, ImageViewerProps> {
     URL.revokeObjectURL(objectUrl);
   }
 
-  protected renderSuccessful(content: ObjectUrl) {
+  protected renderSuccessful(content: ImageViewerContent) {
     const { onClose } = this.props;
     return (
       <InteractiveImg
         onLoad={this.onLoad}
         onError={this.onError}
-        src={content}
+        src={content.objectUrl}
+        orientation={content.orientation}
         onClose={onClose}
       />
     );

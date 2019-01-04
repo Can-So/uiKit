@@ -5,6 +5,7 @@ import {
   FileState,
   MediaType,
   ProcessedFileState,
+  ProcessingFileState,
 } from '@atlaskit/media-core';
 import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
@@ -124,7 +125,7 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
   }
 
   private renderMetadataLayout(item: FileState) {
-    if (item.status === 'processed') {
+    if (item.status === 'processed' || item.status === 'processing') {
       return (
         <MetadataWrapper>
           <MetadataIconWrapper>
@@ -146,7 +147,7 @@ export class Header extends React.Component<Props & InjectedIntlProps, State> {
     }
   }
 
-  private renderSize = (item: ProcessedFileState) => {
+  private renderSize = (item: ProcessedFileState | ProcessingFileState) => {
     if (item.size) {
       return this.renderSeparator() + toHumanReadableMediaSize(item.size);
     } else {
