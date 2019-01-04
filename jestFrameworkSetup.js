@@ -348,7 +348,6 @@ if (process.env.VISUAL_REGRESSION) {
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);
 
   afterAll(async () => {
-    console.log(global.browser);
     await global.browser.close();
   });
 
