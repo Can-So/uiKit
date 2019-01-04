@@ -1,1 +1,7 @@
-- Remove deprecated methods from media-core + adopt new ones in other media components + remove link support from media-card
+- Remove deprecated methods from media-core 
+- Use context.collection methods in MediaViewer
+- Remove link support from media-card
+- Remove legacy services + providers from media-core
+- Remove link related methods from media-core
+- Remove axios dependency
+- Make context.getImage cancelable
