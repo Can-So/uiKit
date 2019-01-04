@@ -1,9 +1,16 @@
 FROM node:8.9.0-alpine
 
-# Install git & bash
+ENV CHROME_BIN="/usr/bin/chromium-browser" \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
+
+# Install git, bash, chromium and puppeteer
 RUN apk update && apk upgrade && \
     apk add curl && \
-    apk add --no-cache bash git openssh
+    apk add --no-cache bash git openssh \
+    udev \
+    ttf-freefont \
+    chromium \
+    && npm install puppeteer@1.10.0
 
 # Update yarn version
 # NOTE: This version of yarn is not the one that is used to install dependencies at the root. That yarn
