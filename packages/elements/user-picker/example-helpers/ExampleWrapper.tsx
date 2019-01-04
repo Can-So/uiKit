@@ -6,7 +6,7 @@ import {
   filterUsers,
   unassigned,
 } from '../example-helpers';
-import { LoadOptions, OnInputChange, User, OptionData } from '../src/types';
+import { LoadOptions, OnInputChange, OptionData } from '../src/types';
 
 type ChildrenProps = {
   loadUsers: LoadOptions;
@@ -32,14 +32,14 @@ export class ExampleWrapper extends React.PureComponent<
 
   private loadUsers = (searchText?: string) => {
     if (searchText && searchText.length > 0) {
-      return new Promise<User[]>(resolve => {
+      return new Promise<OptionData[]>(resolve => {
         window.setTimeout(() => resolve(filterUsers(searchText)), 1000);
       });
     }
     return [
       unassigned,
       assignToMe,
-      new Promise<User[]>(resolve => {
+      new Promise<OptionData[]>(resolve => {
         window.setTimeout(() => resolve(exampleUsers), 1000);
       }),
     ];

@@ -3,9 +3,5 @@ declare var require: {
 };
 
 // tslint:disable-next-line:no-var-requires
-const userPickerUserData = require('../json-data/user-picker-user-data.json') as any; // User from @atlaskit/user-picker
-const userPickerTeamData = require('../json-data/user-picker-team-data.json') as any; // Team from @atlaskit/user-picker
-
-const userPickerData = userPickerUserData.concat(userPickerTeamData);
-
-export default userPickerData;
+export const userPickerUserData = require('../json-data/user-picker-user-data.json') as any; // User from @atlaskit/user-picker
+export const userPickerTeamData = require('../json-data/user-picker-team-data.json') as any; // Team from @atlaskit/user-picker

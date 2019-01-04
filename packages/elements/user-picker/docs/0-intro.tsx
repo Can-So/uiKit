@@ -2,7 +2,7 @@ import { code, Example, md, Props } from '@atlaskit/docs';
 import * as React from 'react';
 
 export default md`
-  This is the platform field for selecting users.
+  This is the platform field for selecting users and teams.
   This package provides two different modes of selection: single and multi user picker.
 
   ## Usage
