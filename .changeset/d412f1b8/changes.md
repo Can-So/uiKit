@@ -1,1 +1,6 @@
-- - *Feature*: `components` prop now has an optional `container` entry that is wrapped around the header, body and footer. This provides compatibility for forms with fields in the body, and submit buttons in the footer \n - *API changes:* \n - The `header`, `body` and `footer` props have been deprecated; such custom components should be passed via the `components` prop instead. \n - Custom `Body` components passed in using the new method must contain a ‘ref’ element; this can be done using forwardRef, as seen in the ‘headerfooter’ example. \n -                 - Backwards compatibility has been maintained for this release; this change is not currently breaking
+- **Feature**: `components` prop now has an optional `container` entry that is wrapped around the header, body and footer. This provides compatibility for forms with fields in the body, and submit buttons in the footer
+- **API changes:**
+  - The `header`, `body` and `footer` props have been deprecated; such custom components should be passed within the `components` prop instead.
+  - Custom `Body` components passed in using the new method must contain a `ref` element; this can be done using forwardRef, as seen in the `headerfooter` example.
+  - Backwards compatibility has been maintained for this release; this change is not currently breaking
+- **Documentation:** Examples have been updated to demonstrate the new container prop, as well as utilise the new composition method for custom header/body/footers.
