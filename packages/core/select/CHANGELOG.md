@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 6.1.16
+- [patch] [b9b1900](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9b1900):
+
+  - Use @atlaskit/select instead of @atlaskit/single-select on the Fullscreen examples on website
+
 ## 6.1.15
 - [patch] [6195ac3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6195ac3):
 
