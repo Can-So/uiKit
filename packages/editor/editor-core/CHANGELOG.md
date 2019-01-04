@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.17
+- [patch] [561f6cb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/561f6cb):
+
+  - ED-5336 Disallow nesting lists past 6 levels
+
 ## 92.0.16
 - [patch] [e251065](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e251065):
 

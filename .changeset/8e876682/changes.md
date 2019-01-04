@@ -1,1 +1,0 @@
-- ED-5336 Disallow nesting lists past 6 levels
