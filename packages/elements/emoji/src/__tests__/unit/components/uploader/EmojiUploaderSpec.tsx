@@ -9,20 +9,26 @@ import {
   getEmojiResourcePromise,
   createPngFile,
   pngDataURL,
-  pngFileUploadData, // pngFileUploadData,
+  pngFileUploadData,
 } from '../../_test-data';
 
 import FileChooser from '../../../../components/common/FileChooser';
 import AkFieldBase from '@atlaskit/field-base';
 
 import Emoji from '../../../../components/common/Emoji';
-import { EmojiUpload } from '../../../../types';
 import EmojiUploadComponent from '../../../../components/uploader/EmojiUploadComponent';
 import EmojiUploader, {
   Props,
 } from '../../../../components/uploader/EmojiUploader';
 import { mount, ReactWrapper } from 'enzyme';
 import EmojiErrorMessage from '../../../../components/common/EmojiErrorMessage';
+
+const sampleEmoji = {
+  name: 'Sample',
+  shortName: ':sample:',
+  width: 30,
+  height: 30,
+};
 
 export function setupUploader(
   props?: Props,
@@ -51,7 +57,7 @@ describe('<EmojiUploader />', () => {
     const uploadPreviewEmoji = uploadPreview.find(Emoji);
     expect(uploadPreviewEmoji).toHaveLength(2);
     let emoji = uploadPreviewEmoji.at(0).prop('emoji');
-    expect(emoji.shortName).toEqual(':sample:');
+    expect(emoji.shortName).toEqual(sampleEmoji.shortName);
     expect(emoji.representation.imagePath).toEqual(pngDataURL);
   };
 
@@ -63,10 +69,9 @@ describe('<EmojiUploader />', () => {
     nameInput.simulate('focus');
     nameInput.simulate('change', {
       target: {
-        value: ':sample:',
+        value: sampleEmoji.shortName,
       },
     });
-    component.update();
   };
 
   const chooseFile = (component, file) => {
@@ -106,7 +111,10 @@ describe('<EmojiUploader />', () => {
   });
 
   describe('upload', () => {
-    beforeEach(() => {
+    let emojiProvider;
+    let component;
+
+    beforeEach(async () => {
       jest
         .spyOn(ImageUtil, 'parseImage')
         .mockImplementation(() => Promise.resolve(new Image()));
@@ -117,19 +125,20 @@ describe('<EmojiUploader />', () => {
 
       jest.spyOn(ImageUtil, 'getNaturalImageSize').mockImplementation(() =>
         Promise.resolve({
-          width: 32,
-          height: 32,
+          width: 30,
+          height: 30,
         }),
       );
+
+      emojiProvider = getEmojiResourcePromise({
+        uploadSupported: true,
+      });
+      component = await setupUploader({
+        emojiProvider,
+      });
     });
 
     it('Main upload flow', async () => {
-      const emojiProvider = getEmojiResourcePromise({
-        uploadSupported: true,
-      });
-      const component = await setupUploader({
-        emojiProvider,
-      });
       const provider = await emojiProvider;
 
       await typeEmojiName(component);
@@ -148,11 +157,8 @@ describe('<EmojiUploader />', () => {
       expect(uploads).toHaveLength(1);
       const upload = uploads[0];
       expect(upload.upload).toEqual({
-        name: 'Sample',
-        shortName: ':sample:',
+        ...sampleEmoji,
         ...pngFileUploadData,
-        width: 32,
-        height: 32,
       });
       // Check display reset correctly
       await waitUntil(() => component.update().find(FileChooser).length > 0);
@@ -163,16 +169,10 @@ describe('<EmojiUploader />', () => {
         .spyOn(ImageUtil, 'parseImage')
         .mockImplementation(() => Promise.reject(new Error('file error')));
 
-      const emojiProvider = getEmojiResourcePromise({ uploadSupported: true });
-      const component = await setupUploader({
-        emojiProvider,
-      });
-
       await emojiProvider;
       typeEmojiName(component);
 
       chooseFile(component, createPngFile());
-      expect(component.find('FileChooser')).toHaveLength(1);
 
       await waitUntil(() => helper.errorMessageVisible(component));
 
@@ -186,16 +186,11 @@ describe('<EmojiUploader />', () => {
         .spyOn(ImageUtil, 'hasFileExceededSize')
         .mockImplementation(() => true);
 
-      const emojiProvider = getEmojiResourcePromise({ uploadSupported: true });
-      const component = await setupUploader({
-        emojiProvider,
-      });
-
       await emojiProvider;
       typeEmojiName(component);
 
       chooseFile(component, createPngFile());
-      expect(component.find('FileChooser')).toHaveLength(1);
+      expect(component.find(FileChooser)).toHaveLength(1);
 
       await waitUntil(() => helper.errorMessageVisible(component));
 
@@ -205,11 +200,6 @@ describe('<EmojiUploader />', () => {
     });
 
     it('should go back when cancel clicked', async () => {
-      const emojiProvider = getEmojiResourcePromise({ uploadSupported: true });
-      const component = await setupUploader({
-        emojiProvider,
-      });
-
       typeEmojiName(component);
 
       chooseFile(component, createPngFile());
@@ -221,7 +211,7 @@ describe('<EmojiUploader />', () => {
       cancelLink.simulate('click');
       // Should be back to initial screen
       await waitUntil(() => component.update().find(FileChooser).length > 0);
-      expect(component.update().find(FileChooser)).toHaveLength(1);
+      expect(component.find(FileChooser)).toHaveLength(1);
     });
   });
 });

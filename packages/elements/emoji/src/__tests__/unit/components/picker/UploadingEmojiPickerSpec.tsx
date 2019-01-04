@@ -34,11 +34,6 @@ import EmojiRepository from '../../../../api/EmojiRepository';
 import EmojiErrorMessage from '../../../../components/common/EmojiErrorMessage';
 import EmojiUploadPreview from '../../../../components/common/EmojiUploadPreview';
 
-/**
- * Skipping 4 tests here that are not working since the jest 23 upgrade
- * TODO: JEST-23
- */
-
 describe('<UploadingEmojiPicker />', () => {
   let firePrivateAnalyticsEvent;
 
@@ -89,7 +84,7 @@ describe('<UploadingEmojiPicker />', () => {
 
   describe('upload', () => {
     let consoleError;
-    let emojiProviderPromise;
+    let emojiProvider;
 
     beforeEach(() => {
       consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -109,7 +104,7 @@ describe('<UploadingEmojiPicker />', () => {
         }),
       );
 
-      emojiProviderPromise = getEmojiResourcePromise({
+      emojiProvider = getEmojiResourcePromise({
         uploadSupported: true,
       });
     });
@@ -176,7 +171,6 @@ describe('<UploadingEmojiPicker />', () => {
     });
 
     it('UploadingEmojiResource - "with media token" - upload UI', async () => {
-      const emojiProvider = getEmojiResourcePromise({ uploadSupported: true });
       const component = await helper.setupPicker({ emojiProvider });
       await helper.showCategory(customCategory, component, customTitle);
       await waitUntil(() =>
@@ -188,9 +182,6 @@ describe('<UploadingEmojiPicker />', () => {
     });
 
     it('Upload main flow interaction', async () => {
-      const emojiProvider = getEmojiResourcePromise({
-        uploadSupported: true,
-      });
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
@@ -283,7 +274,6 @@ describe('<UploadingEmojiPicker />', () => {
         .spyOn(ImageUtil, 'parseImage')
         .mockImplementation(() => Promise.reject(new Error('file error')));
 
-      const emojiProvider = getEmojiResourcePromise({ uploadSupported: true });
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
@@ -317,7 +307,6 @@ describe('<UploadingEmojiPicker />', () => {
         .spyOn(ImageUtil, 'hasFileExceededSize')
         .mockImplementation(() => true);
 
-      const emojiProvider = getEmojiResourcePromise({ uploadSupported: true });
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
@@ -347,10 +336,7 @@ describe('<UploadingEmojiPicker />', () => {
       );
     });
 
-    it.skip('Upload after searching', async () => {
-      const emojiProvider = getEmojiResourcePromise({
-        uploadSupported: true,
-      });
+    it('Upload after searching', async () => {
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
@@ -435,9 +421,6 @@ describe('<UploadingEmojiPicker />', () => {
     });
 
     it('Upload cancel interaction', async () => {
-      const emojiProvider = getEmojiResourcePromise({
-        uploadSupported: true,
-      });
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
@@ -500,14 +483,11 @@ describe('<UploadingEmojiPicker />', () => {
       );
     });
 
-    it.skip('Upload error interaction', async () => {
+    it('Upload error interaction', async () => {
       const spy = jest
         .spyOn(MockEmojiResource.prototype, 'uploadCustomEmoji')
         .mockImplementation(() => Promise.reject(new Error('upload error')));
 
-      const emojiProvider = getEmojiResourcePromise({
-        uploadSupported: true,
-      });
       const component = await helper.setupPicker({
         emojiProvider,
         hideToneSelector: true,
@@ -601,13 +581,13 @@ describe('<UploadingEmojiPicker />', () => {
       spy.mockReset();
     });
 
-    it.skip('Retry on upload error', async () => {
+    it('Retry on upload error', async () => {
       const spy = jest
         .spyOn(MockEmojiResource.prototype, 'uploadCustomEmoji')
         .mockImplementation(() => Promise.reject(new Error('upload error')));
 
-      const component = await navigateToUploadPreview(emojiProviderPromise);
-      const provider = await emojiProviderPromise;
+      const component = await navigateToUploadPreview(emojiProvider);
+      const provider = await emojiProvider;
 
       // add emoji
       const addEmojiButton = helper.findAddEmojiButton(component);
@@ -641,7 +621,9 @@ describe('<UploadingEmojiPicker />', () => {
 
   describe('delete', () => {
     let getUserProvider;
-    beforeEach(() => {
+    let emojiProvider;
+    let component;
+    beforeEach(async () => {
       // Initialise repository with clone of siteEmojis
       const repository = new EmojiRepository(
         JSON.parse(JSON.stringify([mediaEmoji, siteEmojiFoo])),
@@ -650,6 +632,8 @@ describe('<UploadingEmojiPicker />', () => {
         getEmojiResourcePromiseFromRepository(repository, {
           currentUser: { id: 'hulk' },
         });
+      emojiProvider = getUserProvider();
+      component = await helper.setupPicker({ emojiProvider });
     });
 
     // Click delete button on user emoji in picker
@@ -664,18 +648,13 @@ describe('<UploadingEmojiPicker />', () => {
         .simulate('click');
 
     it('shows the emoji delete preview when the delete button is clicked', async () => {
-      const component = await helper.setupPicker({
-        emojiProvider: getUserProvider(),
-      });
       openDeletePrompt(component);
       expect(component.find(EmojiDeletePreview)).toHaveLength(1);
     });
 
     it('calls #deleteSiteEmoji with the emoji to delete when button is clicked', async () => {
       const spy = jest.spyOn(MockEmojiResource.prototype, 'deleteSiteEmoji');
-      const component = await helper.setupPicker({
-        emojiProvider: getUserProvider(),
-      });
+
       openDeletePrompt(component);
       clickRemove(component);
       // Delete called with user custom emoji
@@ -683,9 +662,6 @@ describe('<UploadingEmojiPicker />', () => {
     });
 
     it('closes the delete preview onCancel', async () => {
-      const component = await helper.setupPicker({
-        emojiProvider: getUserProvider(),
-      });
       await helper.showCategory(customCategory, component, userCustomTitle);
       openDeletePrompt(component);
       const deletePreview = component.find(EmojiDeletePreview);
@@ -698,8 +674,6 @@ describe('<UploadingEmojiPicker />', () => {
     });
 
     it('cannot find deleted emoji from provider', async () => {
-      const emojiProvider = getUserProvider();
-      const component = await helper.setupPicker({ emojiProvider });
       const provider = await emojiProvider;
       expect(await provider.findById('foo')).toEqual(siteEmojiFoo);
       openDeletePrompt(component);
@@ -709,9 +683,6 @@ describe('<UploadingEmojiPicker />', () => {
     });
 
     it('deleting user emoji removes from both sections', async () => {
-      const component = await helper.setupPicker({
-        emojiProvider: getUserProvider(),
-      });
       expect(component.find(Emoji)).toHaveLength(3);
       openDeletePrompt(component);
       clickRemove(component);
@@ -721,9 +692,6 @@ describe('<UploadingEmojiPicker />', () => {
     });
 
     it('removes Your Uploads if the only user emoji was deleted', async () => {
-      const component = await helper.setupPicker({
-        emojiProvider: getUserProvider(),
-      });
       // show 'Your uploads'
       expect(
         component
@@ -747,9 +715,7 @@ describe('<UploadingEmojiPicker />', () => {
       const spy = jest
         .spyOn(MockEmojiResource.prototype, 'deleteSiteEmoji')
         .mockImplementation(() => Promise.resolve(false));
-      const component = await helper.setupPicker({
-        emojiProvider: getUserProvider(),
-      });
+
       openDeletePrompt(component);
       // Emoji found for 3 in list + 1 in preview
       expect(component.find(Emoji)).toHaveLength(4);
@@ -765,9 +731,7 @@ describe('<UploadingEmojiPicker />', () => {
       const spy = jest
         .spyOn(MockEmojiResource.prototype, 'deleteSiteEmoji')
         .mockImplementation(() => Promise.resolve(false));
-      const component = await helper.setupPicker({
-        emojiProvider: getUserProvider(),
-      });
+
       openDeletePrompt(component);
       clickRemove(component);
       // Expect error to occur
@@ -784,9 +748,7 @@ describe('<UploadingEmojiPicker />', () => {
       const spy = jest
         .spyOn(MockEmojiResource.prototype, 'deleteSiteEmoji')
         .mockImplementation(() => Promise.resolve(false));
-      const component = await helper.setupPicker({
-        emojiProvider: getUserProvider(),
-      });
+
       openDeletePrompt(component);
       clickRemove(component);
       const deleteCalls = spy.mock.calls.length;
