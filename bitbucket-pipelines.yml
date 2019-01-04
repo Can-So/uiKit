@@ -173,7 +173,7 @@ pipelines:
             # Install puppeteer so it's available in the container.
             # Even if it is present in the package.json
             # For further details see: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
-            - yarn add puppeteer
+            # - yarn add puppeteer
             - yarn test:vr
           caches:
             - node
