@@ -180,7 +180,7 @@ export class NewUploadServiceImpl implements UploadService {
             occurrenceKey: tenantOccurrenceKey,
           };
           // We want to create an empty file in the tenant collection
-          // TODO: using context.file.touchFiles instead of createFile will speed up things
+          // TODO [MS-1355]: using context.file.touchFiles instead of createFile will speed up things
           // since we can lookup the id in the cache without wait for this to finish
           upfrontId = this.tenantMediaStore
             .createFile(options)
