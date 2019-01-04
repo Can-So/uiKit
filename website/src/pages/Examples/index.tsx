@@ -10,7 +10,7 @@ import Button from '@atlaskit/button';
 import CodeIcon from '@atlaskit/icon/glyph/code';
 import ErrorIcon from '@atlaskit/icon/glyph/error';
 import Flag, { FlagGroup } from '@atlaskit/flag';
-import SingleSelect from '@atlaskit/single-select';
+import Select from '@atlaskit/select';
 import Tooltip from '@atlaskit/tooltip';
 import { colors } from '@atlaskit/theme';
 
@@ -19,6 +19,7 @@ import * as fs from '../../utils/fs';
 import { getConfig } from '../../site';
 import packageResolver, { getLoaderUrl } from '../../utils/packageResolver';
 import { packageUrl } from '../../utils/url';
+import { externalPackages } from '../../site';
 import CodeSandbox from '../Package/CodeSandbox';
 import CodeSandboxLogo from '../Package/CodeSandboxLogo';
 
@@ -41,33 +42,43 @@ export const SANDBOX_DEPLOY_ENDPOINT =
 function PackageSelector(props) {
   let selectedPackageItem;
 
-  const packagesSelectItems = props.groups.map(group => {
-    return {
-      heading: fs.titleize(group.id),
-      items: fs.getDirectories(group.children).map(pkg => {
+  const packagesSelectOptions = externalPackages.children.map(
+    ({ id, children }) => ({
+      label: fs.titleize(id),
+      options: fs.getDirectories(children).map(pkg => {
         const item = {
-          content: fs.titleize(pkg.id),
-          value: `${group.id}/${pkg.id}`,
+          label: fs.titleize(pkg.id),
+          value: `${id}/${pkg.id}`,
         };
 
-        if (props.groupId === group.id && props.packageId === pkg.id) {
+        if (props.groupId === id && props.packageId === pkg.id) {
           selectedPackageItem = item;
         }
 
         return item;
       }),
-    };
-  });
+    }),
+  );
 
   return (
     <Control>
-      <SingleSelect
-        appearance="subtle"
-        items={packagesSelectItems}
-        hasAutocomplete
+      <Select
+        styles={{
+          container: styles => ({
+            ...styles,
+            flex: '1 1 0',
+          }),
+          control: styles => ({
+            ...styles,
+            backgroundColor: '#fff',
+          }),
+        }}
+        options={packagesSelectOptions}
         placeholder="Select Package"
-        onSelected={props.onSelected}
-        defaultSelected={selectedPackageItem}
+        onChange={(value, { action }) =>
+          action === 'select-option' && props.onSelected(value)
+        }
+        defaultValue={selectedPackageItem}
       />
     </Control>
   );
@@ -78,11 +89,11 @@ function ExampleSelector(props) {
 
   const examplesSelectItems = [
     {
-      heading: 'Examples',
-      items: props.examples
+      label: 'Examples',
+      options: props.examples
         ? fs.flatMap(props.examples, (file, filePath) => {
             const item = {
-              content: fs.titleize(file.id),
+              label: fs.titleize(file.id),
               value: fs.normalize(filePath.replace('examples/', '')),
             };
 
@@ -98,13 +109,23 @@ function ExampleSelector(props) {
 
   return (
     <Control>
-      <SingleSelect
-        appearance="subtle"
-        items={examplesSelectItems}
-        hasAutocomplete
+      <Select
+        styles={{
+          container: styles => ({
+            ...styles,
+            flex: '1 1 0',
+          }),
+          control: styles => ({
+            ...styles,
+            backgroundColor: '#fff',
+          }),
+        }}
+        options={examplesSelectItems}
         placeholder="Select Example"
-        onSelected={props.onSelected}
-        defaultSelected={selectedExampleItem}
+        onChange={(value, { action }) =>
+          action === 'select-option' && props.onSelected(value)
+        }
+        defaultValue={selectedExampleItem}
       />
     </Control>
   );
@@ -112,10 +133,9 @@ function ExampleSelector(props) {
 
 // TODO: Type correct once codesandbox is typed
 export type ExampleNavigationProps = {
-  onExampleSelected?: (selected: { item: { value: string } }) => void;
+  onExampleSelected?: (selected: { value: string }) => void;
   examples?: any;
-  onPackageSelected?: (selected: { item: { value: string } }) => void;
-  groups?: any;
+  onPackageSelected?: (selected: { value: string }) => void;
   exampleId?: string;
   groupId: string;
   loaderUrl?: string | null;
@@ -133,7 +153,6 @@ class ExampleNavigation extends React.Component<ExampleNavigationProps> {
       onExampleSelected,
       examples,
       onPackageSelected,
-      groups,
       exampleId,
       groupId,
       loaderUrl,
@@ -159,7 +178,6 @@ class ExampleNavigation extends React.Component<ExampleNavigationProps> {
           <PackageSelector
             groupId={groupId}
             packageId={packageId}
-            groups={groups}
             onSelected={onPackageSelected}
           />
           <ExampleSelector
@@ -239,16 +257,16 @@ export default class Examples extends React.Component<Props, State> {
     router: PropTypes.object.isRequired,
   };
 
-  onPackageSelected = (selected: { item: { value: string } }) => {
-    const [groupId, packageId] = selected.item.value.split('/');
+  onPackageSelected = (selected: { value: string }) => {
+    const [groupId, packageId] = selected.value.split('/');
     this.updateSelected(groupId, packageId);
   };
 
-  onExampleSelected = (selected: { item: { value: string } }) => {
+  onExampleSelected = (selected: { value: string }) => {
     this.updateSelected(
       this.props.match.params.groupId,
       this.props.match.params.pkgId,
-      selected.item.value,
+      selected.value,
     );
   };
 
@@ -359,7 +377,6 @@ export default class Examples extends React.Component<Props, State> {
   render() {
     const {
       hasChanged,
-      groups,
       examples,
       packageId,
       groupId,
@@ -386,7 +403,6 @@ export default class Examples extends React.Component<Props, State> {
           groupId={groupId}
           packageId={packageId}
           exampleId={exampleId}
-          groups={groups}
           examples={examples}
           loaderUrl={loaderUrl}
           codeIsVisible={this.state.displayCode}
