@@ -1,7 +1,8 @@
 import { components } from '@atlaskit/select';
 import * as React from 'react';
 import { UserOption } from './UserOption';
-import { isUser } from './utils';
+import { TeamOption } from './TeamOption';
+import { isUser, isTeam } from './utils';
 
 export const Option = props => {
   const {
@@ -16,6 +17,13 @@ export const Option = props => {
       </components.Option>
     );
   }
-  // TODO TEAMS-169
+
+  if (isTeam(data)) {
+    return (
+      <components.Option {...props}>
+        <TeamOption team={data} status={status} isSelected={isSelected} />
+      </components.Option>
+    );
+  }
   return null;
 };
