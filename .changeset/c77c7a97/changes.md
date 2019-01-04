@@ -1,0 +1,1 @@
+- Fix issue where date was not respecting user's local date for initial date selection in quick insert
