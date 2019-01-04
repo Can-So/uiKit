@@ -1,7 +1,7 @@
 import { waitUntil } from '@atlaskit/util-common-test';
 import * as React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
-
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl } from 'enzyme-react-intl';
 import { MentionDescription } from '../../../types';
 import { HttpError } from '../../../api/MentionResource';
 import { mention, MockMentionResource } from '@atlaskit/util-data-test';
@@ -25,7 +25,7 @@ function setupPicker(props?: Props): ReactWrapper<Props, State> {
     minWait: 0,
     maxWait: 0,
   });
-  return mount(
+  return mountWithIntl(
     <MentionPicker
       resourceProvider={resourceProvider}
       query=""

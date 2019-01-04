@@ -19,13 +19,6 @@ describe('Root Wrapper', () => {
       const defaultWithDimensions = shallow(
         <Wrapper mediaItemType="file" dimensions={dimensions} />,
       );
-      const small = shallow(
-        <Wrapper
-          mediaItemType="file"
-          appearance="small"
-          dimensions={dimensions}
-        />,
-      );
       const auto = shallow(
         <Wrapper
           mediaItemType="file"
@@ -35,15 +28,11 @@ describe('Root Wrapper', () => {
       );
 
       expect(defaultWithDimensions).toMatchSnapshot();
-      expect(small).toMatchSnapshot();
       expect(auto).toMatchSnapshot();
     });
 
     it('should render properly with different appeareances', () => {
       const auto = shallow(<Wrapper mediaItemType="file" appearance="auto" />);
-      const small = shallow(
-        <Wrapper mediaItemType="file" appearance="small" />,
-      );
       const image = shallow(
         <Wrapper mediaItemType="file" appearance="image" />,
       );
@@ -55,7 +44,6 @@ describe('Root Wrapper', () => {
       );
 
       expect(auto).toMatchSnapshot();
-      expect(small).toMatchSnapshot();
       expect(image).toMatchSnapshot();
       expect(square).toMatchSnapshot();
       expect(horizontal).toMatchSnapshot();
@@ -93,13 +81,6 @@ describe('Root Wrapper', () => {
       const defaultWithDimensions = shallow(
         <Wrapper mediaItemType="link" dimensions={dimensions} />,
       );
-      const small = shallow(
-        <Wrapper
-          mediaItemType="link"
-          appearance="small"
-          dimensions={dimensions}
-        />,
-      );
       const auto = shallow(
         <Wrapper
           mediaItemType="link"
@@ -109,15 +90,11 @@ describe('Root Wrapper', () => {
       );
 
       expect(defaultWithDimensions).toMatchSnapshot();
-      expect(small).toMatchSnapshot();
       expect(auto).toMatchSnapshot();
     });
 
     it('should render properly with different appeareances', () => {
       const auto = shallow(<Wrapper mediaItemType="link" appearance="auto" />);
-      const small = shallow(
-        <Wrapper mediaItemType="link" appearance="small" />,
-      );
       const image = shallow(
         <Wrapper mediaItemType="link" appearance="image" />,
       );
@@ -129,7 +106,6 @@ describe('Root Wrapper', () => {
       );
 
       expect(auto).toMatchSnapshot();
-      expect(small).toMatchSnapshot();
       expect(image).toMatchSnapshot();
       expect(square).toMatchSnapshot();
       expect(horizontal).toMatchSnapshot();

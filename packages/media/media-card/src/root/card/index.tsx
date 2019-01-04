@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Component } from 'react';
-import * as deepEqual from 'deep-equal';
 import { Context, FileDetails } from '@atlaskit/media-core';
 import { AnalyticsContext } from '@atlaskit/analytics-next';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import { Subscription } from 'rxjs/Subscription';
+import { IntlProvider } from 'react-intl';
 import {
   CardAnalyticsContext,
   CardAction,
@@ -25,12 +25,15 @@ import {
   isFileIdentifier,
   isUrlPreviewIdentifier,
   isExternalImageIdentifier,
+  isDifferentIdentifier,
 } from '../../utils/identifier';
 import { isBigger } from '../../utils/dimensionComparer';
 import { getCardStatus } from './getCardStatus';
 import { InlinePlayer } from '../inlinePlayer';
 
 export class Card extends Component<CardProps, CardState> {
+  private hasBeenMounted: boolean = false;
+
   subscription?: Subscription;
   static defaultProps: Partial<CardProps> = {
     appearance: 'auto',
@@ -48,7 +51,7 @@ export class Card extends Component<CardProps, CardState> {
 
   componentDidMount() {
     const { identifier, context } = this.props;
-
+    this.hasBeenMounted = true;
     this.subscribe(identifier, context);
   }
 
@@ -63,10 +66,14 @@ export class Card extends Component<CardProps, CardState> {
       identifier: nextIdenfifier,
       dimensions: nextDimensions,
     } = nextProps;
+    const isDifferent = isDifferentIdentifier(
+      currentIdentifier,
+      nextIdenfifier,
+    );
 
     if (
       currentContext !== nextContext ||
-      !deepEqual(currentIdentifier, nextIdenfifier) ||
+      isDifferent ||
       this.shouldRefetchImage(currentDimensions, nextDimensions)
     ) {
       this.subscribe(nextIdenfifier, nextContext);
@@ -83,6 +90,7 @@ export class Card extends Component<CardProps, CardState> {
   componentWillUnmount() {
     this.unsubscribe();
     this.releaseDataURI();
+    this.hasBeenMounted = false;
   }
 
   releaseDataURI = () => {
@@ -204,17 +212,20 @@ export class Card extends Component<CardProps, CardState> {
                 const width = getDataURIDimension('width', options);
                 const height = getDataURIDimension('height', options);
                 try {
-                  const allowAnimated = appearance !== 'small';
+                  const mode =
+                    resizeMode === 'stretchy-fit' ? 'full-fit' : resizeMode;
                   const blob = await context.getImage(resolvedId, {
                     collection: collectionName,
-                    mode: resizeMode,
+                    mode,
                     height,
                     width,
-                    allowAnimated,
+                    allowAnimated: true,
                   });
                   const dataURI = URL.createObjectURL(blob);
                   this.releaseDataURI();
-                  this.setState({ dataURI });
+                  if (this.hasBeenMounted) {
+                    this.setState({ dataURI });
+                  }
                 } catch (e) {
                   // We don't want to set status=error if the preview fails, we still want to display the metadata
                 }
@@ -242,6 +253,8 @@ export class Card extends Component<CardProps, CardState> {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+
+    this.setState({ dataURI: undefined });
   };
 
   // This method is called when card fails and user press 'Retry'
@@ -306,7 +319,6 @@ export class Card extends Component<CardProps, CardState> {
 
   renderInlinePlayer = () => {
     const { identifier, context, dimensions } = this.props;
-
     return (
       <InlinePlayer
         context={context}
@@ -368,11 +380,15 @@ export class Card extends Component<CardProps, CardState> {
 
   render() {
     const { isPlayingFile } = this.state;
-    if (isPlayingFile) {
-      return this.renderInlinePlayer();
-    }
+    const content = isPlayingFile
+      ? this.renderInlinePlayer()
+      : this.renderCard();
 
-    return this.renderCard();
+    return this.context.intl ? (
+      content
+    ) : (
+      <IntlProvider locale="en">{content}</IntlProvider>
+    );
   }
 
   onCardInViewport = () => {

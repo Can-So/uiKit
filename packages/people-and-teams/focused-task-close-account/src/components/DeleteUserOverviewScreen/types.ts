@@ -5,4 +5,5 @@ export interface DeleteUserOverviewScreenProps {
   isCurrentUser: boolean;
   user: User;
   deactivateUserHandler?: () => void;
+  isUserDeactivated: boolean;
 }

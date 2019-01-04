@@ -1,6 +1,7 @@
 // Slovak
 export default {
-  'fabric.elements.user-picker.placeholder': 'Find a person...',
-  'fabric.elements.user-picker.multi.remove-item': 'Remove',
-  'fabric.elements.user-picker.single.clear': 'Clear',
+  'fabric.elements.user-picker.placeholder': 'Nájsť osobu...',
+  'fabric.elements.user-picker.placeholder.add-more': 'pridať ďalších ľudí...',
+  'fabric.elements.user-picker.multi.remove-item': 'Odstrániť',
+  'fabric.elements.user-picker.single.clear': 'Vymazať',
 };

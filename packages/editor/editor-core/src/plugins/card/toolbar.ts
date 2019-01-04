@@ -8,18 +8,7 @@ import OpenIcon from '@atlaskit/icon/glyph/open';
 import { analyticsService } from '../../analytics';
 import commonMessages from '../../messages';
 import { Command } from '../../../src/types';
-import {
-  FloatingToolbarConfig,
-  FloatingToolbarItem,
-} from '../../../src/plugins/floating-toolbar/types';
-import { SelectOption } from '../floating-toolbar/ui/Select';
-import {
-  changeSelectedCardToLink,
-  setSelectedCardAppearance,
-} from './pm-plugins/doc';
-import { appearanceForNodeType } from './utils';
-import { CardAppearance } from './types';
-import { Fragment } from 'prosemirror-model';
+import { FloatingToolbarConfig } from '../../../src/plugins/floating-toolbar/types';
 
 export const messages = defineMessages({
   block: {
@@ -41,7 +30,9 @@ export const messages = defineMessages({
 });
 
 const remove: Command = (state, dispatch) => {
-  dispatch(removeSelectedNode(state.tr));
+  if (dispatch) {
+    dispatch(removeSelectedNode(state.tr));
+  }
   analyticsService.trackEvent('atlassian.editor.format.card.delete.button');
   return true;
 };
@@ -60,6 +51,8 @@ const visit: Command = state => {
   return false;
 };
 
+// Temporarily disabled after https://product-fabric.atlassian.net/browse/MS-1308
+/*
 const changeAppearance = (selectedOption: SelectOption) => {
   if (selectedOption.value === 'link') {
     return changeSelectedCardToLink;
@@ -123,7 +116,7 @@ const buildDropdown = (
     defaultValue: options.find(option => !!option.selected),
     onChange: changeAppearance,
   };
-};
+}; */
 
 export const floatingToolbar = (
   state: EditorState,
@@ -135,8 +128,9 @@ export const floatingToolbar = (
     title: 'Card floating controls',
     nodeType: [inlineCard, blockCard],
     items: [
-      buildDropdown(state, intl),
-      { type: 'separator' },
+      // Temporarily disabled after https://product-fabric.atlassian.net/browse/MS-1308
+      // buildDropdown(state, intl),
+      // { type: 'separator' },
       {
         type: 'button',
         icon: OpenIcon,

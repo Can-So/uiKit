@@ -27,14 +27,12 @@ const localStorage = typeof window === 'object' ? window.localStorage : {};
 
 type GlobalNavigationState = {
   [any]: boolean, // Need an indexer property to appease flow for is${capitalisedDrawerName}Open
-  isSearchDrawerOpen: boolean,
-  isNotificationDrawerOpen: boolean,
-  isStarredDrawerOpen: boolean,
-  notificationCount: number,
   isCreateDrawerOpen: boolean,
   isSearchDrawerOpen: boolean,
   isNotificationDrawerOpen: boolean,
   isStarredDrawerOpen: boolean,
+  isSettingsDrawerOpen: boolean,
+  notificationCount: number,
 };
 
 type DrawerInstanceState = {
@@ -57,6 +55,9 @@ export default class GlobalNavigation extends Component<
     starred: {
       isControlled: false,
     },
+    settings: {
+      isControlled: false,
+    },
     create: {
       isControlled: false,
     },
@@ -71,6 +72,7 @@ export default class GlobalNavigation extends Component<
       isSearchDrawerOpen: false,
       isNotificationDrawerOpen: false,
       isStarredDrawerOpen: false,
+      isSettingsDrawerOpen: false,
       notificationCount: 0,
     };
 
@@ -373,12 +375,16 @@ export default class GlobalNavigation extends Component<
             }
 
             const width = this.props[`${drawerName}DrawerWidth`] || 'wide';
+            const onCloseComplete = this.props[
+              `on${capitalisedDrawerName}CloseComplete`
+            ];
 
             return (
               <Drawer
                 key={drawerName}
                 isOpen={this.state[`is${capitalisedDrawerName}Open`]}
                 onClose={this.closeDrawer(drawerName)}
+                onCloseComplete={onCloseComplete}
                 shouldUnmountOnExit={shouldUnmountOnExit}
                 width={width}
               >

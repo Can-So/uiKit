@@ -22,6 +22,7 @@ import {
   insertBlockType,
   createTable,
   insertTaskDecision,
+  changeColor,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
@@ -34,57 +35,57 @@ import { setBlockType } from '../../../../editor-core/src/plugins/block-type/com
 
 export default class WebBridgeImpl extends WebBridge
   implements NativeToWebBridge {
-  textFormattingPluginState: TextFormattingState | null = null;
+  textFormatBridgeState: TextFormattingState | null = null;
+  statusBridgeState: StatusState | null = null;
+  blockFormatBridgeState: BlockTypeState | null = null;
+  listBridgeState: ListsState | null = null;
   mentionsPluginState: MentionPluginState | null = null;
-  statusPluginState: StatusState | null = null;
   editorView: EditorView | null = null;
   transformer: JSONTransformer = new JSONTransformer();
   editorActions: EditorActions = new EditorActions();
   mediaPicker: CustomMediaPicker | undefined;
-  blockState: BlockTypeState | undefined;
-  listState: ListsState | undefined;
   mediaMap: Map<string, Function> = new Map();
 
   onBoldClicked() {
-    if (this.textFormattingPluginState && this.editorView) {
+    if (this.textFormatBridgeState && this.editorView) {
       toggleStrong()(this.editorView.state, this.editorView.dispatch);
     }
   }
 
   onItalicClicked() {
-    if (this.textFormattingPluginState && this.editorView) {
+    if (this.textFormatBridgeState && this.editorView) {
       toggleEm()(this.editorView.state, this.editorView.dispatch);
     }
   }
 
   onUnderlineClicked() {
-    if (this.textFormattingPluginState && this.editorView) {
+    if (this.textFormatBridgeState && this.editorView) {
       toggleUnderline()(this.editorView.state, this.editorView.dispatch);
     }
   }
   onCodeClicked() {
-    if (this.textFormattingPluginState && this.editorView) {
+    if (this.textFormatBridgeState && this.editorView) {
       toggleCode()(this.editorView.state, this.editorView.dispatch);
     }
   }
   onStrikeClicked() {
-    if (this.textFormattingPluginState && this.editorView) {
+    if (this.textFormatBridgeState && this.editorView) {
       toggleStrike()(this.editorView.state, this.editorView.dispatch);
     }
   }
   onSuperClicked() {
-    if (this.textFormattingPluginState && this.editorView) {
+    if (this.textFormatBridgeState && this.editorView) {
       toggleSuperscript()(this.editorView.state, this.editorView.dispatch);
     }
   }
   onSubClicked() {
-    if (this.textFormattingPluginState && this.editorView) {
+    if (this.textFormatBridgeState && this.editorView) {
       toggleSubscript()(this.editorView.state, this.editorView.dispatch);
     }
   }
 
   onStatusUpdate(text: string, color: StatusColor, uuid: string) {
-    if (this.statusPluginState && this.editorView) {
+    if (this.statusBridgeState && this.editorView) {
       updateStatus({
         text,
         color,
@@ -94,7 +95,7 @@ export default class WebBridgeImpl extends WebBridge
   }
 
   onStatusPickerDismissed() {
-    if (this.statusPluginState && this.editorView) {
+    if (this.statusBridgeState && this.editorView) {
       commitStatusPicker()(this.editorView);
     }
   }
@@ -118,8 +119,15 @@ export default class WebBridgeImpl extends WebBridge
   }
 
   setTextFormattingStateAndSubscribe(state: TextFormattingState) {
-    this.textFormattingPluginState = state;
+    this.textFormatBridgeState = state;
   }
+
+  setTextColor(color: string) {
+    if (this.editorView) {
+      changeColor(color)(this.editorView.state, this.editorView.dispatch);
+    }
+  }
+
   onMediaPicked(eventName: string, mediaPayload: string) {
     if (this.mediaPicker) {
       const payload = JSON.parse(mediaPayload);
@@ -138,7 +146,7 @@ export default class WebBridgeImpl extends WebBridge
           return;
         }
         case 'upload-end': {
-          if (payload.file.collectionName) {
+          if (typeof payload.file.collectionName === 'string') {
             /**
              * We call this custom event instead of `upload-end` to set the collection
              * As when emitting `upload-end`, the `ready` handler will usually fire before
@@ -171,24 +179,24 @@ export default class WebBridgeImpl extends WebBridge
   }
 
   onOrderedListSelected() {
-    if (this.listState && this.editorView) {
+    if (this.listBridgeState && this.editorView) {
       toggleOrderedList(this.editorView);
     }
   }
   onBulletListSelected() {
-    if (this.listState && this.editorView) {
+    if (this.listBridgeState && this.editorView) {
       toggleBulletList(this.editorView);
     }
   }
 
   onIndentList() {
-    if (this.listState && this.editorView) {
+    if (this.listBridgeState && this.editorView) {
       indentList()(this.editorView.state, this.editorView.dispatch);
     }
   }
 
   onOutdentList() {
-    if (this.listState && this.editorView) {
+    if (this.listBridgeState && this.editorView) {
       outdentList()(this.editorView.state, this.editorView.dispatch);
     }
   }

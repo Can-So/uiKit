@@ -6,7 +6,7 @@ import {
   ParseRule,
   Schema,
 } from 'prosemirror-model';
-import { paragraph, createSchema } from '@atlaskit/editor-common';
+import { paragraph, createSchema } from '@atlaskit/adf-schema';
 
 export { AttributeSpec, MarkSpec, Node, NodeSpec, ParseRule, Schema };
 export default createSchema({
@@ -70,6 +70,7 @@ export default createSchema({
     'confluenceInlineComment',
     'breakout',
     'alignment',
+    'indentation',
   ],
   customNodeSpecs: {
     plain: { ...paragraph, content: 'text*', marks: '' },

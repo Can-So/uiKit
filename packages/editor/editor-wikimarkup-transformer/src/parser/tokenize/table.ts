@@ -7,6 +7,8 @@ import { linkFormat } from './links/link-format';
 import { media } from './media';
 import { Token, TokenType, TokenErrCallback } from './';
 import { parseNewlineOnly } from './whitespace';
+import { parseMacroKeyword } from './keyword';
+import { parseToken } from './';
 
 /*
   The following are currently NOT supported
@@ -26,13 +28,14 @@ const processState = {
   LINE_BREAK: 7,
   LINK: 8,
   MEDIA: 9,
+  MACRO: 10,
 };
 
 export function table(
   input: string,
   position: number,
   schema: Schema,
-  tokenErrCallback: TokenErrCallback,
+  tokenErrCallback?: TokenErrCallback,
 ): Token {
   /**
    * The following token types will be ignored in parsing
@@ -160,6 +163,11 @@ export function table(
             continue;
           }
 
+          case '{': {
+            currentState = processState.MACRO;
+            continue;
+          }
+
           default: {
             buffer += char;
             index++;
@@ -193,6 +201,7 @@ export function table(
           }
           output.push(builder.buildPMNode());
         }
+
         return {
           type: 'pmnode',
           nodes: output,
@@ -224,8 +233,24 @@ export function table(
           currentState = processState.BUFFER;
           continue;
         }
+        break;
+      }
+      case processState.MACRO: {
+        const match = parseMacroKeyword(input.substring(index));
+        if (!match) {
+          buffer += char;
+          currentState = processState.BUFFER;
+          break;
+        }
+
+        const token = parseToken(input, match.type, index, schema);
+        buffer += input.substr(index, token.length);
+        index += token.length;
+        currentState = processState.BUFFER;
+        continue;
       }
     }
+
     index++;
   }
 
@@ -258,7 +283,7 @@ function bufferToCells(
   cellsBuffer: AddCellArgs[],
   schema: Schema,
   ignoreTokenTypes: TokenType[],
-  tokenErrCallback: TokenErrCallback,
+  tokenErrCallback?: TokenErrCallback,
 ) {
   if (buffer.length) {
     const contentNode = parseString(

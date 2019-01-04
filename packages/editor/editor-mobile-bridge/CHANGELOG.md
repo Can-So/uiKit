@@ -1,5 +1,120 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.5.3
+- Updated dependencies [00c648e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00c648e):
+- Updated dependencies [a17bb0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a17bb0e):
+- Updated dependencies [99f08a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99f08a0):
+  - @atlaskit/editor-core@92.0.9
+  - @atlaskit/renderer@33.0.3
+  - @atlaskit/status@0.3.0
+
+## 6.5.2
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/renderer@33.0.0
+  - @atlaskit/emoji@49.0.0
+  - @atlaskit/editor-json-transformer@4.1.1
+  - @atlaskit/editor-test-helpers@6.3.4
+  - @atlaskit/task-decision@11.1.1
+  - @atlaskit/media-core@24.7.0
+
+## 6.5.1
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/select@6.1.14
+  - @atlaskit/textfield@0.1.5
+  - @atlaskit/form@5.0.0
+
+## 6.5.0
+- [minor] [462b70f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/462b70f):
+
+  - ED-5819: Enables support for text color on mobile
+
+## 6.4.10
+- Updated dependencies [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+  - @atlaskit/task-decision@11.0.10
+  - @atlaskit/editor-common@24.0.0
+  - @atlaskit/editor-core@91.1.0
+  - @atlaskit/editor-json-transformer@4.1.0
+  - @atlaskit/editor-test-helpers@6.3.3
+  - @atlaskit/renderer@32.1.0
+
+## 6.4.9
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/renderer@32.0.0
+  - @atlaskit/emoji@48.0.0
+  - @atlaskit/editor-json-transformer@4.0.25
+  - @atlaskit/editor-test-helpers@6.3.2
+  - @atlaskit/task-decision@11.0.9
+  - @atlaskit/media-core@24.6.0
+
+## 6.4.8
+- [patch] [f5d4e83](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5d4e83):
+
+  - ED-5866: Fixes incorrect return from Mocked Emoji provider.
+
+## 6.4.7
+- [patch] [43501db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/43501db):
+
+  - ED-5812: Fixes some regressions in the mobile editor
+
+  Including:
+   * Disables mediaGoup lazy loading.
+   * Fixes unsupported emoji content.
+   * Fixes missed call to Android bridge for block state.
+
+## 6.4.6
+- [patch] [e01ea01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e01ea01):
+
+  - Bump to match @atlaskit/docs dep
+
+## 6.4.5
+- [patch] [d3d0d67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3d0d67):
+
+  - Mobile bridge can be public and updated the description
+
+## 6.4.4
+- [patch] [7190767](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7190767):
+
+  - Fixes empty collection name and API naming mismatches
+
+## 6.4.3
+- [patch] [7515804](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7515804):
+
+  - Fixes requesting media auth for empty string collections.
+
+## 6.4.2
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
+## 6.4.1
+- [patch] [232238c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/232238c):
+
+  - ED-5866: Turn off lazy loading for images on mobile.
+
+## 6.4.0
+- [minor] [008c694](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/008c694):
+
+  - ED-5584: Capture emoji requests for native processing on iOS only.
+
+## 6.3.4
+- [patch] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
+
+  - Adds support for links around images
+
+## 6.3.3
+- [patch] [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+
+  - ED-5677: enabled quickInsert and gapCursor by default (quickInsert: except for mobile appearance)
+
+## 6.3.2
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
 ## 6.3.1
 - [patch] [345b45c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/345b45c):
 

@@ -18,7 +18,6 @@ const extraState: Partial<State> = {
         },
       },
       events: [],
-      tenant: {} as any,
       index: 0,
       timeStarted: 42,
       progress: null,
@@ -36,7 +35,6 @@ const extraState: Partial<State> = {
         },
       },
       events: [],
-      tenant: {} as any,
       index: 0,
       timeStarted: 42,
       progress: null,
@@ -62,7 +60,7 @@ const extraState: Partial<State> = {
   },
   selectedItems: [
     {
-      serviceName: 'some-service',
+      serviceName: 'recent_files',
       mimeType: 'some-type',
       id: 'some-id',
       upfrontId: Promise.resolve('some-id'),
@@ -72,7 +70,7 @@ const extraState: Partial<State> = {
       occurrenceKey: 'some-other-occurrence-key',
     },
     {
-      serviceName: 'some-other-service',
+      serviceName: 'upload',
       mimeType: 'some-other-type',
       id: 'other-id',
       upfrontId: Promise.resolve('other-id'),

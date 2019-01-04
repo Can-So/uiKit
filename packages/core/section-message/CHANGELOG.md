@@ -1,5 +1,26 @@
 # @atlaskit/section-message
 
+## 1.0.15
+- [patch] [6d08da6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d08da6):
+
+  - Update css styles to `display: flex` for Actions and replace the content by a mid-dot without escape characters
+
+## 1.0.14
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-range@5.0.12
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 1.0.13
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/field-range@5.0.11
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/theme@7.0.0
+
 ## 1.0.12
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

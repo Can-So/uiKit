@@ -30,20 +30,10 @@ import {
   customInsertMenuItems,
 } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
-
-export type Props = {};
-export type State = {
-  locale: string;
-  messages: { [key: string]: string };
-
-  adf: object | undefined;
-  adfInput: string;
-
-  appearance: EditorAppearance;
-  showADF: boolean;
-  disabled: boolean;
-  vertical: boolean;
-};
+import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
+import { validator, ErrorCallback, Entity } from '@atlaskit/adf-utils';
+import ErrorReport, { Error } from '../example-helpers/ErrorReport';
+import { EditorView } from 'prosemirror-view';
 
 const Container = styled.div`
   display: flex;
@@ -59,11 +49,9 @@ const EditorColumn: React.ComponentClass<
 > = styled.div`
   flex: 1;
   ${p =>
-    typeof p.vertical === 'boolean'
-      ? p.vertical
-        ? `border-right: 1px solid ${colors.N30}; min-height: 85vh`
-        : `border-bottom: 1px solid ${colors.N30}`
-      : ''}
+    p.vertical
+      ? `border-right: 1px solid ${colors.N30}; min-height: 85vh`
+      : `border-bottom: 1px solid ${colors.N30}`};
 `;
 
 const Controls = styled.div`
@@ -169,6 +157,26 @@ export const Textarea: any = styled.textarea`
 
 const LOCALSTORAGE_orientationKey =
   'fabric.editor.example.kitchen-sink.orientation';
+
+const VALIDATION_TIMEOUT = 500;
+
+export type Props = {};
+export type State = {
+  locale: string;
+  messages: { [key: string]: string };
+
+  adf: object | undefined;
+  adfInput: string;
+
+  appearance: EditorAppearance;
+  showADF: boolean;
+  disabled: boolean;
+  vertical: boolean;
+
+  errors: Array<Error>;
+  showErrors: boolean;
+  waitingToValidate: boolean;
+};
 export default class FullPageRendererExample extends React.Component<
   Props,
   State
@@ -198,14 +206,23 @@ export default class FullPageRendererExample extends React.Component<
     showADF: false,
     disabled: false,
     vertical: this.getDefaultOrientation().vertical,
+    errors: [],
+    showErrors: false,
+    waitingToValidate: false,
   };
 
   private inputRef: HTMLTextAreaElement | null;
   private popupMountPoint: HTMLElement | null;
+  private validatorTimeout?: number;
 
   showHideADF = () =>
     this.setState(state => ({
       showADF: !state.showADF,
+    }));
+
+  showHideErrors = () =>
+    this.setState(state => ({
+      showErrors: !state.showErrors,
     }));
 
   enableDisableEditor = () =>
@@ -279,10 +296,30 @@ export default class FullPageRendererExample extends React.Component<
                       {!this.state.disabled ? 'Disable' : 'Enable'} editor
                     </Button>
 
-                    <Button appearance="primary" onClick={this.showHideADF}>
+                    <Button
+                      appearance={
+                        this.state.errors.length ? 'danger' : 'subtle'
+                      }
+                      isSelected={this.state.showErrors}
+                      onClick={this.showHideErrors}
+                      isLoading={this.state.waitingToValidate}
+                    >
+                      {this.state.errors.length} errors
+                    </Button>
+
+                    <Button
+                      appearance="primary"
+                      isSelected={this.state.showADF}
+                      onClick={this.showHideADF}
+                    >
                       {!this.state.showADF ? 'Show' : 'Hide'} current ADF
                     </Button>
                   </Column>
+                </Container>
+                <Container>
+                  {this.state.showErrors && (
+                    <ErrorReport errors={this.state.errors} />
+                  )}
                 </Container>
               </Controls>
               <Container
@@ -295,62 +332,63 @@ export default class FullPageRendererExample extends React.Component<
                     locale={this.getLocalTag(locale)}
                     messages={messages}
                   >
-                    <Editor
-                      appearance={this.state.appearance}
-                      analyticsHandler={analyticsHandler}
-                      quickInsert={{
-                        provider: Promise.resolve(quickInsertProvider),
-                      }}
-                      allowCodeBlocks={{ enableKeybindingsForIDE: true }}
-                      allowLists={true}
-                      allowTextColor={true}
-                      allowTables={{
-                        advanced: true,
-                      }}
-                      allowBreakout={true}
-                      allowJiraIssue={true}
-                      allowUnsupportedContent={true}
-                      allowPanel={true}
-                      allowExtension={{
-                        allowBreakout: true,
-                      }}
-                      allowRule={true}
-                      allowDate={true}
-                      allowLayouts={{
-                        allowBreakout: true,
-                      }}
-                      allowGapCursor={true}
-                      allowTextAlignment={true}
-                      allowTemplatePlaceholders={{ allowInserting: true }}
-                      UNSAFE_cards={{
-                        provider: Promise.resolve(cardProvider),
-                      }}
-                      allowStatus={true}
-                      {...providers}
-                      media={{
-                        provider: mediaProvider,
-                        allowMediaSingle: true,
-                        allowResizing: true,
-                      }}
-                      insertMenuItems={customInsertMenuItems}
-                      extensionHandlers={extensionHandlers}
-                      placeholder="Type something here, and watch it render to the side!"
-                      shouldFocus={true}
-                      defaultValue={this.state.adf}
-                      disabled={this.state.disabled}
-                      onChange={() => this.onEditorChange(actions)}
-                      popupsMountPoint={this.popupMountPoint || undefined}
-                      primaryToolbarComponents={
-                        <>
-                          <LanguagePicker
-                            languages={languages}
-                            locale={locale}
-                            onChange={this.loadLocale}
-                          />
-                          <SaveAndCancelButtons editorActions={actions} />
-                        </>
-                      }
-                    />
+                    <SmartCardProvider>
+                      <Editor
+                        appearance={this.state.appearance}
+                        analyticsHandler={analyticsHandler}
+                        quickInsert={{
+                          provider: Promise.resolve(quickInsertProvider),
+                        }}
+                        allowCodeBlocks={{ enableKeybindingsForIDE: true }}
+                        allowLists={true}
+                        allowTextColor={true}
+                        allowTables={{
+                          advanced: true,
+                        }}
+                        allowBreakout={true}
+                        allowJiraIssue={true}
+                        allowUnsupportedContent={true}
+                        allowPanel={true}
+                        allowExtension={{
+                          allowBreakout: true,
+                        }}
+                        allowRule={true}
+                        allowDate={true}
+                        allowLayouts={{
+                          allowBreakout: true,
+                        }}
+                        allowTextAlignment={true}
+                        allowTemplatePlaceholders={{ allowInserting: true }}
+                        UNSAFE_cards={{
+                          provider: Promise.resolve(cardProvider),
+                        }}
+                        allowStatus={true}
+                        {...providers}
+                        media={{
+                          provider: mediaProvider,
+                          allowMediaSingle: true,
+                          allowResizing: true,
+                        }}
+                        insertMenuItems={customInsertMenuItems}
+                        extensionHandlers={extensionHandlers}
+                        placeholder="Type something here, and watch it render to the side!"
+                        shouldFocus={true}
+                        defaultValue={this.state.adf}
+                        disabled={this.state.disabled}
+                        onChange={() => this.onEditorChange(actions)}
+                        popupsMountPoint={this.popupMountPoint || undefined}
+                        primaryToolbarComponents={
+                          <>
+                            <LanguagePicker
+                              languages={languages}
+                              locale={locale}
+                              onChange={this.loadLocale}
+                            />
+                            <SaveAndCancelButtons editorActions={actions} />
+                          </>
+                        }
+                      />
+                    </SmartCardProvider>
                   </IntlProvider>
                 </EditorColumn>
                 <Column>
@@ -363,16 +401,23 @@ export default class FullPageRendererExample extends React.Component<
                             : undefined,
                       }}
                     >
-                      <ReactRenderer
-                        document={this.state.adf}
-                        adfStage="stage0"
-                        dataProviders={ProviderFactory.create({
-                          ...providers,
-                          mediaProvider,
-                        })}
-                        // @ts-ignore
-                        appearance={this.state.appearance}
-                      />
+                      <IntlProvider
+                        locale={this.getLocalTag(locale)}
+                        messages={messages}
+                      >
+                        <SmartCardProvider>
+                          <ReactRenderer
+                            document={this.state.adf}
+                            adfStage="stage0"
+                            dataProviders={ProviderFactory.create({
+                              ...providers,
+                              mediaProvider,
+                            })}
+                            // @ts-ignore
+                            appearance={this.state.appearance}
+                          />
+                        </SmartCardProvider>
+                      </IntlProvider>
                     </div>
                   ) : (
                     <div
@@ -405,7 +450,7 @@ export default class FullPageRendererExample extends React.Component<
       return;
     }
 
-    actions.replaceDocument(this.state.adfInput);
+    actions.replaceDocument(this.state.adfInput, false);
 
     this.setState({
       showADF: false,
@@ -421,12 +466,57 @@ export default class FullPageRendererExample extends React.Component<
     const docModule = await import(`../example-helpers/${opt.value}`);
     const adf = docModule.exampleDocument;
 
-    actions.replaceDocument(adf);
+    actions.replaceDocument(adf, false);
   };
 
-  private onEditorChange = async editorActions => {
+  private onEditorChange = async (editorActions: EditorActions) => {
     const adf = await editorActions.getValue();
     this.setState({ adf, adfInput: JSON.stringify(adf, null, 2) });
+
+    // prepare to validate
+    const editorView = editorActions._privateGetEditorView();
+    if (!editorView) {
+      return;
+    }
+
+    if (this.validatorTimeout) {
+      window.clearTimeout(this.validatorTimeout);
+    }
+
+    this.validatorTimeout = window.setTimeout(
+      () => this.validateDocument(editorView),
+      VALIDATION_TIMEOUT,
+    );
+
+    if (!this.state.waitingToValidate) {
+      this.setState({ waitingToValidate: true });
+    }
+  };
+
+  private validateDocument = (editorView: EditorView) => {
+    if (!this.state.adf) {
+      return;
+    }
+
+    const marks = Object.keys(editorView.state.schema.marks);
+    const nodes = Object.keys(editorView.state.schema.nodes);
+    const errors: Array<Error> = [];
+
+    const errorCb: ErrorCallback = (entity, error) => {
+      errors.push({
+        entity,
+        error,
+      });
+
+      return entity;
+    };
+
+    validator(nodes, marks, {
+      mode: 'loose',
+      allowPrivateAttributes: true,
+    })(this.state.adf as Entity, errorCb);
+
+    this.setState({ errors, waitingToValidate: false });
   };
 
   private handleInputChange = event => {

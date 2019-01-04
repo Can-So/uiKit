@@ -2,13 +2,15 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { EditorView } from 'prosemirror-view';
 import { mediaGroup, media } from '@atlaskit/editor-test-helpers';
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   MediaPluginState,
   stateKey as mediaStateKey,
   DefaultMediaStateManager,
 } from '../../../../../../plugins/media/pm-plugins/main';
 import MediaGroup from '../../../../../../plugins/media/nodeviews/mediaGroup';
+
+import { EditorAppearance } from '../../../../../../types';
 
 describe('nodeviews/mediaGroup', () => {
   let pluginState;
@@ -39,6 +41,7 @@ describe('nodeviews/mediaGroup', () => {
       node: mediaGroupNode(defaultSchema),
       getPos: () => 1,
       selected: null,
+      editorAppearance: 'full-page' as EditorAppearance,
     };
 
     const wrapper = mount(<MediaGroup {...props} />);

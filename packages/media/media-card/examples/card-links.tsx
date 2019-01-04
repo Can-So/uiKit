@@ -37,16 +37,6 @@ const standardCards = [
     ),
   },
   {
-    title: 'Small',
-    content: (
-      <Card
-        identifier={genericUrlPreviewId}
-        context={context}
-        appearance="small"
-      />
-    ),
-  },
-  {
     title: 'Image',
     content: (
       <Card
@@ -83,12 +73,6 @@ const apiCards = createApiCards('horizontal', genericUrlPreviewId);
 
 // errors
 const errorCards = [
-  {
-    title: 'Small',
-    content: (
-      <Card identifier={errorLinkId} context={context} appearance="small" />
-    ),
-  },
   {
     title: 'Image',
     content: (
@@ -129,16 +113,6 @@ const smartCards = [
 ];
 
 const smartCardsAppearances = [
-  {
-    title: 'Small',
-    content: (
-      <Card
-        identifier={publicTrelloBoardUrlPreviewId}
-        context={context}
-        appearance="small"
-      />
-    ),
-  },
   {
     title: 'Image',
     content: (

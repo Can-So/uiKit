@@ -30,7 +30,9 @@ export function keymapPlugin(): Plugin {
       if (!pluginState || !pluginState.active) {
         return false;
       }
-      dispatch(state.tr.setMeta(pluginKey, { action: ACTIONS.SELECT_PREV }));
+      if (dispatch) {
+        dispatch(state.tr.setMeta(pluginKey, { action: ACTIONS.SELECT_PREV }));
+      }
       return true;
     },
     list,
@@ -43,7 +45,9 @@ export function keymapPlugin(): Plugin {
       if (!pluginState || !pluginState.active) {
         return false;
       }
-      dispatch(state.tr.setMeta(pluginKey, { action: ACTIONS.SELECT_NEXT }));
+      if (dispatch) {
+        dispatch(state.tr.setMeta(pluginKey, { action: ACTIONS.SELECT_NEXT }));
+      }
       return true;
     },
     list,
@@ -79,6 +83,14 @@ export function keymapPlugin(): Plugin {
       const pluginState = pluginKey.getState(state);
       if (!pluginState || !pluginState.active) {
         return false;
+      }
+
+      /**
+       * Jira uses escape to toggle the collapsed editor
+       * stop the event propagation when the picker is open
+       */
+      if (window.event) {
+        window.event.stopPropagation();
       }
 
       return dismissCommand()(state, dispatch);

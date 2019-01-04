@@ -14,11 +14,7 @@ exports[`DropdownIndicator 2`] = `
     }
   }
 >
-  <span
-    role="img"
-  >
-    <asdf />
-  </span>
+  <asdf />
 </DropdownIndicator>
 `;
 

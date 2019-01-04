@@ -108,7 +108,6 @@ export default function CommentWithJiraCardsExample() {
             allowRule={true}
             allowTables={true}
             allowHelpDialog={true}
-            allowGapCursor={true}
             allowExtension={true}
             extensionHandlers={extensionHandlers}
             UNSAFE_cards={{

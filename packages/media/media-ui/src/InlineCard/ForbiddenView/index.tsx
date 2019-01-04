@@ -8,9 +8,13 @@ import { IconAndTitleLayout } from '../IconAndTitleLayout';
 import { LockIconWrapper } from './styled';
 
 export interface InlineCardForbiddenViewProps {
+  /** The url to display */
   url: string;
+  /** The optional click handler */
   onClick?: () => void;
+  /** The optional handler for "Connect" button */
   onAuthorise?: () => void;
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
 }
 

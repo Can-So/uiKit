@@ -1,7 +1,7 @@
-import * as uuid from 'uuid';
+import * as uuid from 'uuid/v4';
 import { Store, Dispatch, Middleware } from 'redux';
 
-import { State, Tenant, SelectedItem, LocalUpload } from '../domain';
+import { State, SelectedItem, LocalUpload } from '../domain';
 
 import { isStartImportAction } from '../actions/startImport';
 import { finalizeUpload } from '../actions/finalizeUpload';
@@ -54,7 +54,7 @@ const mapSelectedItemToSelectedUploadFile = ({
   serviceName,
   accountId,
   upfrontId,
-  occurrenceKey,
+  occurrenceKey = uuid(),
 }: SelectedItem): SelectedUploadFile => ({
   file: {
     id,
@@ -67,7 +67,7 @@ const mapSelectedItemToSelectedUploadFile = ({
   },
   serviceName,
   accountId,
-  uploadId: uuid.v4(),
+  uploadId: uuid(),
 });
 
 export function importFilesMiddleware(
@@ -87,7 +87,7 @@ export async function importFiles(
   store: Store<State>,
   wsProvider: WsProvider,
 ): Promise<void> {
-  const { uploads, tenant, selectedItems, userContext } = store.getState();
+  const { uploads, selectedItems, userContext } = store.getState();
 
   store.dispatch(hidePopup());
 
@@ -108,25 +108,21 @@ export async function importFiles(
     if (serviceName === 'upload') {
       const localUpload: LocalUpload = uploads[selectedItemId];
       const replaceFileId = file.upfrontId;
-      const occurrenceKey = file.occurrenceKey;
 
       importFilesFromLocalUpload(
         selectedItemId,
-        tenant,
         uploadId,
         store,
         localUpload,
         replaceFileId,
-        occurrenceKey,
       );
     } else if (serviceName === 'recent_files') {
-      importFilesFromRecentFiles(selectedUploadFile, tenant, store);
+      importFilesFromRecentFiles(selectedUploadFile, store);
     } else if (isRemoteService(serviceName)) {
       const wsConnectionHolder = wsProvider.getWsConnectionHolder(auth);
 
       importFilesFromRemoteService(
         selectedUploadFile,
-        tenant,
         store,
         wsConnectionHolder,
       );
@@ -136,12 +132,10 @@ export async function importFiles(
 
 export const importFilesFromLocalUpload = (
   selectedItemId: string,
-  tenant: Tenant,
   uploadId: string,
   store: Store<State>,
   localUpload: LocalUpload,
   replaceFileId?: Promise<string>,
-  occurrenceKey?: string,
 ): void => {
   localUpload.events.forEach(originalEvent => {
     const event = { ...originalEvent };
@@ -153,16 +147,7 @@ export const importFilesFromLocalUpload = (
         collection: RECENTS_COLLECTION,
       };
 
-      store.dispatch(
-        finalizeUpload(
-          file,
-          uploadId,
-          source,
-          tenant,
-          replaceFileId,
-          occurrenceKey,
-        ),
-      );
+      store.dispatch(finalizeUpload(file, uploadId, source, replaceFileId));
     } else if (event.name !== 'upload-end') {
       store.dispatch(sendUploadEvent({ event, uploadId }));
     }
@@ -173,7 +158,6 @@ export const importFilesFromLocalUpload = (
 
 export const importFilesFromRecentFiles = (
   selectedUploadFile: SelectedUploadFile,
-  tenant: Tenant,
   store: Store<State>,
 ): void => {
   const { file, uploadId } = selectedUploadFile;
@@ -182,13 +166,12 @@ export const importFilesFromRecentFiles = (
     collection: RECENTS_COLLECTION,
   };
 
-  store.dispatch(finalizeUpload(file, uploadId, source, tenant));
+  store.dispatch(finalizeUpload(file, uploadId, source));
   store.dispatch(getPreview(uploadId, file, RECENTS_COLLECTION));
 };
 
 export const importFilesFromRemoteService = (
   selectedUploadFile: SelectedUploadFile,
-  tenant: Tenant,
   store: Store<State>,
   wsConnectionHolder: WsConnectionHolder,
 ): void => {
@@ -237,7 +220,7 @@ export const importFilesFromRemoteService = (
   );
 
   uploadActivity.on('Started', () => {
-    store.dispatch(remoteUploadStart(uploadId, tenant));
+    store.dispatch(remoteUploadStart(uploadId));
   });
 
   wsConnectionHolder.openConnection(uploadActivity);

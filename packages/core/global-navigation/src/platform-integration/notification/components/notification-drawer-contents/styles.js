@@ -1,8 +1,10 @@
 // @flow
 
+import { gridSize } from '@atlaskit/theme';
+
 const externalContent = (hasIframeLoaded: boolean) => ({
   visibility: hasIframeLoaded ? 'visible' : 'hidden',
-  height: '100%',
+  height: `calc(100% - ${3 * gridSize()}px)`,
   width: '100%',
   border: 0,
   flex: '1 1 auto',

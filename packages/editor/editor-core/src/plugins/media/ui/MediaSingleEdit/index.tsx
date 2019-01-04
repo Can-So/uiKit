@@ -4,11 +4,14 @@ import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 
 import WrapLeftIcon from '@atlaskit/icon/glyph/editor/media-wrap-left';
 import WrapRightIcon from '@atlaskit/icon/glyph/editor/media-wrap-right';
-import CenterIcon from '@atlaskit/icon/glyph/editor/media-center';
 import WideIcon from '@atlaskit/icon/glyph/editor/media-wide';
 import FullWidthIcon from '@atlaskit/icon/glyph/editor/media-full-width';
 import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import { MediaSingleLayout } from '@atlaskit/editor-common';
+import EditorAlignImageLeft from '@atlaskit/icon/glyph/editor/align-image-left';
+import EditorAlignImageRight from '@atlaskit/icon/glyph/editor/align-image-right';
+import EditorAlignImageCenter from '@atlaskit/icon/glyph/editor/align-image-center';
+
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import { colors } from '@atlaskit/theme';
 
 import commonMessages from '../../../../messages';
@@ -17,11 +20,6 @@ import UiSeparator from '../../../../ui/Separator';
 import UiFloatingToolbar from '../../../../ui/FloatingToolbar';
 import { closestElement } from '../../../../utils';
 import { MediaPluginState } from '../../pm-plugins/main';
-import WithPluginState from '../../../../ui/WithPluginState';
-import {
-  EditorDisabledPluginState,
-  pluginKey as editorDisabledPluginKey,
-} from '../../../editor-disabled';
 
 export const messages = defineMessages({
   wrapLeft: {
@@ -42,22 +40,35 @@ export interface Props {
   allowBreakout: boolean;
   allowLayout: boolean;
   pluginState: MediaPluginState;
+  allowResizing?: boolean;
+  editorDisabled?: boolean;
 }
 
-const icons = {
-  'wrap-left': WrapLeftIcon,
-  center: CenterIcon,
-  'wrap-right': WrapRightIcon,
-  wide: WideIcon,
-  'full-width': FullWidthIcon,
-};
+export type IconMap = { value: string; Icon?: React.ComponentClass<any> }[];
+
+const icons: IconMap = [
+  { value: 'align-start', Icon: EditorAlignImageLeft },
+  { value: 'center', Icon: EditorAlignImageCenter },
+  { value: 'align-end', Icon: EditorAlignImageRight },
+  { value: 'separator' },
+  { value: 'wrap-left', Icon: WrapLeftIcon },
+  { value: 'wrap-right', Icon: WrapRightIcon },
+];
+
+const breakoutIcons: IconMap = [
+  { value: 'separator' },
+  { value: 'wide', Icon: WideIcon },
+  { value: 'full-width', Icon: FullWidthIcon },
+];
 
 const layoutToMessages = {
   'wrap-left': messages.wrapLeft,
-  center: commonMessages.layoutFixedWidth,
+  center: commonMessages.alignImageCenter,
   'wrap-right': messages.wrapRight,
   wide: commonMessages.layoutWide,
   'full-width': commonMessages.layoutFullWidth,
+  'align-end': commonMessages.alignImageRight,
+  'align-start': commonMessages.alignImageLeft,
 };
 
 const ToolbarButton = styled(UiToolbarButton)`
@@ -96,6 +107,14 @@ const ToolbarButtonDestructive = styled(ToolbarButton)`
 `;
 
 class MediaSingleEdit extends React.Component<Props & InjectedIntlProps, {}> {
+  getItems = (allowResizing, allowBreakout) => {
+    if (!allowResizing) {
+      return icons.concat(breakoutIcons);
+    }
+
+    return icons;
+  };
+
   render() {
     const { formatMessage } = this.props.intl;
     const {
@@ -103,66 +122,60 @@ class MediaSingleEdit extends React.Component<Props & InjectedIntlProps, {}> {
       layout: selectedLayout,
       allowBreakout,
       allowLayout,
+      allowResizing,
+      editorDisabled,
     } = this.props;
+    const toolbarIcons = this.getItems(allowResizing, allowBreakout);
+    if (
+      target &&
+      !closestElement(target, 'li') &&
+      !closestElement(target, 'table') &&
+      !editorDisabled
+    ) {
+      const labelRemove = formatMessage(commonMessages.remove);
+      return (
+        <FloatingToolbar
+          target={target}
+          offset={[0, 12]}
+          fitHeight={32}
+          alignX="center"
+        >
+          {allowLayout && (
+            <>
+              {toolbarIcons.map((layout, index) => {
+                // Don't render Wide and Full width button for image smaller than editor content width
+                const { value, Icon } = layout;
 
-    return (
-      <WithPluginState
-        plugins={{
-          editorDisabledPlugin: editorDisabledPluginKey,
-        }}
-        render={({
-          editorDisabledPlugin,
-        }: {
-          editorDisabledPlugin: EditorDisabledPluginState;
-        }) => {
-          if (
-            target &&
-            !closestElement(target, 'li') &&
-            !closestElement(target, 'table') &&
-            !(editorDisabledPlugin || {}).editorDisabled
-          ) {
-            const labelRemove = formatMessage(commonMessages.remove);
-            return (
-              <FloatingToolbar
-                target={target}
-                offset={[0, 12]}
-                fitHeight={32}
-                alignX="center"
-              >
-                {Object.keys(icons).map((layout, index) => {
-                  // Don't render Wide and Full width button for image smaller than editor content width
-                  if (index > 2 && !allowBreakout) {
-                    return;
-                  }
-                  const Icon = icons[layout];
-                  const label = formatMessage(layoutToMessages[layout]);
-                  return (
-                    <ToolbarButton
-                      spacing="compact"
-                      key={index}
-                      disabled={!allowLayout}
-                      selected={layout === selectedLayout}
-                      onClick={this.handleChangeLayout.bind(this, layout)}
-                      title={label}
-                      iconBefore={<Icon label={label} />}
-                    />
-                  );
-                })}
-                <Separator />
-                <ToolbarButtonDestructive
-                  spacing="compact"
-                  onClick={this.handleRemove}
-                  title={labelRemove}
-                  iconBefore={<RemoveIcon label={labelRemove} />}
-                />
-              </FloatingToolbar>
-            );
-          } else {
-            return null;
-          }
-        }}
-      />
-    );
+                if (value === 'separator') {
+                  return <Separator key={index} />;
+                }
+                const label = formatMessage(layoutToMessages[value]);
+
+                return (
+                  <ToolbarButton
+                    spacing="compact"
+                    key={index}
+                    selected={value === selectedLayout}
+                    onClick={this.handleChangeLayout.bind(this, value)}
+                    title={label}
+                    iconBefore={Icon && <Icon label={label} />}
+                  />
+                );
+              })}
+              <Separator />
+            </>
+          )}
+          <ToolbarButtonDestructive
+            spacing="compact"
+            onClick={this.handleRemove}
+            title={labelRemove}
+            iconBefore={<RemoveIcon label={labelRemove} />}
+          />
+        </FloatingToolbar>
+      );
+    } else {
+      return null;
+    }
   }
 
   private handleRemove = () => {

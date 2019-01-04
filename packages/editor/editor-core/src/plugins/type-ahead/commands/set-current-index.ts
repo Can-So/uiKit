@@ -5,11 +5,13 @@ export const setCurrentIndex = (currentIndex: number): Command => (
   state,
   dispatch,
 ) => {
-  dispatch(
-    state.tr.setMeta(pluginKey, {
-      action: ACTIONS.SET_CURRENT_INDEX,
-      params: { currentIndex },
-    }),
-  );
+  if (dispatch) {
+    dispatch(
+      state.tr.setMeta(pluginKey, {
+        action: ACTIONS.SET_CURRENT_INDEX,
+        params: { currentIndex },
+      }),
+    );
+  }
   return true;
 };

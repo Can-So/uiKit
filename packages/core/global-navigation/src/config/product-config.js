@@ -189,6 +189,10 @@ export default function generateProductConfig(
     helpItems,
     helpTooltip,
 
+    onSettingsClick,
+    settingsTooltip,
+    settingsDrawerContents,
+
     profileItems,
     profileTooltip,
     loginHref,
@@ -211,6 +215,10 @@ export default function generateProductConfig(
     starred: configFactory(
       onStarredClick || (starredDrawerContents && openDrawer('starred')),
       starredTooltip,
+    ),
+    settings: configFactory(
+      onSettingsClick || (settingsDrawerContents && openDrawer('settings')),
+      settingsTooltip,
     ),
     notification: notificationConfigFactory(
       notificationTooltip,

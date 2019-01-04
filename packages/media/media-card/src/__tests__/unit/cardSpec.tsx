@@ -353,12 +353,10 @@ describe('Card', () => {
       <Card
         context={context}
         identifier={fileIdentifier}
-        appearance="small"
         dimensions={{ width: 100, height: 50 }}
       />,
     );
 
-    expect(card.find(CardView).props().appearance).toBe('small');
     expect(card.find(CardView).props().dimensions).toEqual({
       width: 100,
       height: 50,
@@ -371,7 +369,6 @@ describe('Card', () => {
       <Card
         context={context}
         identifier={fileIdentifier}
-        appearance="small"
         dimensions={{ width: 100, height: 50 }}
       />,
     );
@@ -380,15 +377,9 @@ describe('Card', () => {
     );
     const filePlaceholder = fileCard.find(CardView);
     const linkPlaceholder = linkCard.find(CardView);
-    const {
-      status,
-      appearance,
-      mediaItemType,
-      dimensions,
-    } = filePlaceholder.props();
+    const { status, mediaItemType, dimensions } = filePlaceholder.props();
 
     expect(status).toBe('loading');
-    expect(appearance).toBe('small');
     expect(mediaItemType).toBe('file');
     expect(dimensions).toEqual({ width: 100, height: 50 });
     expect(linkPlaceholder.prop('mediaItemType')).toBe('link');
@@ -642,29 +633,28 @@ describe('Card', () => {
     });
   });
 
-  it('should use allowAnimated=false for small cards', async () => {
+  it('should pass resize mode down to getImage call', async () => {
     const context = createContextWithGetFile();
     setup(context, {
-      appearance: 'small',
+      resizeMode: 'full-fit',
     });
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();
     await nextTick();
 
-    expect(context.getImage).toBeCalledWith('some-random-id', {
-      collection: 'some-collection-name',
-      height: 32,
-      width: 32,
-      allowAnimated: false,
-      mode: 'crop',
-    });
+    expect(context.getImage).toBeCalledWith(
+      'some-random-id',
+      expect.objectContaining({
+        mode: 'full-fit',
+      }),
+    );
   });
 
-  it('should pass resize mode down to getImage call', async () => {
+  it('should change mode from stretchy-fit to full-fit while passing down to getImage call', async () => {
     const context = createContextWithGetFile();
     setup(context, {
-      resizeMode: 'full-fit',
+      resizeMode: 'stretchy-fit',
     });
 
     // we need to wait for 2 promises: fetch metadata + fetch preview

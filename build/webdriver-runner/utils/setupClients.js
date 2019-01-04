@@ -12,21 +12,21 @@ const commit = process.env.BITBUCKET_COMMIT
 if (!process.env.BITBUCKET_BRANCH && process.env.USER) {
   process.env.BITBUCKET_BRANCH = process.env.USER + '_local_run';
 }
-
 function setBrowserStackClients() /*: Array<?Object>*/ {
-  const launchers = {
+  let isLandKid = process.env.LANDKID !== 'false';
+  let launchers = {
     chrome: {
       os: 'Windows',
       os_version: '10',
       browserName: 'chrome',
-      browser_version: '69.0',
+      browser_version: '71.0',
       resolution: '1440x900',
     },
     firefox: {
       os: 'Windows',
       os_version: '10',
       browserName: 'firefox',
-      browser_version: '61.0',
+      browser_version: '63.0',
       resolution: '1440x900',
     },
     ie: {
@@ -38,19 +38,26 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
     },
     safari: {
       os: 'OS X',
-      os_version: 'Sierra',
-      browserName: 'safari',
-      browser_version: '10.1',
+      os_version: 'High Sierra',
+      browserName: 'Safari',
+      browser_version: '11.0',
       resolution: '1920x1080',
     },
     edge: {
       os: 'Windows',
       os_version: '10',
       browserName: 'edge',
-      browser_version: '16',
+      browser_version: '18',
       resolution: '1440x900',
     },
   };
+  if (isLandKid) {
+    delete launchers.safari;
+    delete launchers.ie;
+    delete launchers.firefox;
+    delete launchers.edge;
+    process.env.BITBUCKET_BRANCH = 'Landkid';
+  }
   const launchKeys = Object.keys(launchers);
   const options = launchKeys.map(launchKey => {
     const option = {

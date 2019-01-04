@@ -9,7 +9,7 @@ exports[`GlobalItem GlobalItemBase should render an InteractionStateManager 1`] 
   className="emotion-0"
 >
   <InteractionStateManager>
-    <unknown />
+    <Component />
   </InteractionStateManager>
 </div>
 `;
@@ -23,7 +23,7 @@ exports[`GlobalItem GlobalItemBase should render an item wrapper with the global
   className="emotion-0"
 >
   <InteractionStateManager>
-    <unknown />
+    <Component />
   </InteractionStateManager>
 </div>
 `;
@@ -37,7 +37,7 @@ exports[`GlobalItem GlobalItemBase should render an item wrapper with the global
   className="emotion-0"
 >
   <InteractionStateManager>
-    <unknown />
+    <Component />
   </InteractionStateManager>
 </div>
 `;
@@ -62,7 +62,7 @@ exports[`GlobalItem should render correctly 1`] = `
     }
   }
 >
-  <ForwardRef(WithAnalyticsEvents(WithTheme(GlobalItemBase)))
+  <WithAnalyticsEvents(WithTheme(GlobalItemBase))
     icon={[Function]}
   />
 </AnalyticsContext>

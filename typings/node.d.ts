@@ -2,6 +2,7 @@ declare namespace NodeJS {
   interface ReadableStream {}
   interface EventEmitter {}
   interface Process {
+    env: Record<string, string | undefined>;
     stdin: any;
     stdout: any;
     cwd(): string;

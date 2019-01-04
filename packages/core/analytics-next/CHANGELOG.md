@@ -1,5 +1,11 @@
 # @atlaskit/analytics-next
 
+## 3.1.2
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/docs@6.0.0
+
 ## 3.1.1
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

@@ -3,13 +3,13 @@ import { mount } from 'enzyme';
 import { Subject } from 'rxjs/Subject';
 import Button from '@atlaskit/button';
 import { MediaItem, MediaItemType } from '@atlaskit/media-core';
+import { KeyboardEventWithKeyCode } from '@atlaskit/media-test-helpers';
 import { createContext } from '../_stubs';
 import { Content } from '../../../newgen/content';
 import { MediaViewer } from '../../../newgen/media-viewer';
 import { CloseButtonWrapper } from '../../../newgen/styled';
 import { ErrorMessage } from '../../../newgen/error';
 import Header from '../../../newgen/header';
-import { KeyboardEventWithKeyCode } from './shortcut.spec';
 import { ItemSource, Identifier } from '../../../newgen/domain';
 
 function createFixture(items: Identifier[], identifier: Identifier) {

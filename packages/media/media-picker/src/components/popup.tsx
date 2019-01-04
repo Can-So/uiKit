@@ -2,12 +2,11 @@ import { Context, ContextFactory } from '@atlaskit/media-core';
 import { Store } from 'redux';
 import * as React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-
+import * as exenv from 'exenv';
 import App, { AppProxyReactContext } from '../popup/components/app';
 import { cancelUpload } from '../popup/actions/cancelUpload';
 import { showPopup } from '../popup/actions/showPopup';
 import { resetView } from '../popup/actions/resetView';
-import { setTenant } from '../popup/actions/setTenant';
 import { getFilesInRecents } from '../popup/actions/getFilesInRecents';
 import { getConnectedRemoteAccounts } from '../popup/actions/getConnectedRemoteAccounts';
 import { State } from '../popup/domain';
@@ -40,7 +39,7 @@ export interface PopupUploadEventEmitter extends UploadEventEmitter {
 
 export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   implements PopupUploadEventEmitter {
-  private readonly container: HTMLElement;
+  private readonly container?: HTMLElement;
   private readonly store: Store<State>;
   private tenantUploadParams: UploadParams;
   private proxyReactContext?: AppProxyReactContext;
@@ -48,7 +47,7 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   constructor(
     readonly tenantContext: Context,
     {
-      container = document.body,
+      container = exenv.canUseDOM ? document.body : undefined,
       uploadParams, // tenant
       proxyReactContext,
       singleSelect,
@@ -68,35 +67,32 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
       cacheSize,
       authProvider: userAuthProvider,
     });
-    this.store = createStore(this, tenantContext, userContext, {
-      proxyReactContext,
-      singleSelect,
-    });
-
-    this.tenantUploadParams = {
+    const tenantUploadParams = {
       ...defaultUploadParams,
       ...uploadParams,
     };
 
+    this.store = createStore(this, tenantContext, userContext, {
+      proxyReactContext,
+      singleSelect,
+      uploadParams: tenantUploadParams,
+    });
+
+    this.tenantUploadParams = tenantUploadParams;
+
     const popup = this.renderPopup();
+    if (!popup) {
+      return;
+    }
 
     this.container = popup;
-    container.appendChild(popup);
+    if (container) {
+      container.appendChild(popup);
+    }
   }
 
   public async show(): Promise<void> {
     const { dispatch } = this.store;
-    // TODO [MS-677]: Improve opening time by removing call to authProvider + setTenant
-    const auth = await this.tenantContext.config.authProvider({
-      collectionName: this.tenantUploadParams.collection,
-    });
-
-    dispatch(
-      setTenant({
-        auth,
-        uploadParams: this.tenantUploadParams,
-      }),
-    );
 
     dispatch(resetView());
     dispatch(getFilesInRecents());
@@ -118,6 +114,9 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   }
 
   public teardown(): void {
+    if (!this.container) {
+      return;
+    }
     unmountComponentAtNode(this.container);
   }
 
@@ -136,8 +135,12 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
     this.emit('closed', undefined);
   }
 
-  private renderPopup(): HTMLElement {
+  private renderPopup(): HTMLElement | undefined {
+    if (!exenv.canUseDOM) {
+      return;
+    }
     const container = document.createElement('div');
+
     render(
       <App
         store={this.store}

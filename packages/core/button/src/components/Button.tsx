@@ -84,7 +84,7 @@ export const defaultProps: Pick<
 };
 
 export class Button extends React.Component<ButtonProps, ButtonState> {
-  button: HTMLElement;
+  button: HTMLElement | undefined;
 
   state = {
     isActive: false,
@@ -92,7 +92,7 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
     isHover: false,
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: ButtonProps) {
     if (this.props.component !== nextProps.component) {
       delete this.customComponent;
     }
@@ -121,14 +121,14 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
 
   onMouseUp = () => this.setState({ isActive: false });
 
-  onFocus: React.FocusEventHandler = event => {
+  onFocus: React.FocusEventHandler<HTMLButtonElement> = event => {
     this.setState({ isFocus: true });
     if (this.props.onFocus) {
       this.props.onFocus(event);
     }
   };
 
-  onBlur: React.FocusEventHandler = event => {
+  onBlur: React.FocusEventHandler<HTMLButtonElement> = event => {
     this.setState({ isFocus: false });
     if (this.props.onBlur) {
       this.props.onBlur(event);
@@ -136,7 +136,7 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
   };
 
   /* Swallow click events when the button is disabled to prevent inner child clicks bubbling up */
-  onInnerClick: React.MouseEventHandler = e => {
+  onInnerClick: React.MouseEventHandler<HTMLButtonElement> = e => {
     if (!this.isInteractive()) {
       e.stopPropagation();
     }
@@ -146,7 +146,9 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
   getStyledComponent() {
     if (this.props.component) {
       if (!this.customComponent) {
-        this.customComponent = createStyledComponent();
+        this.customComponent = createStyledComponent() as React.ComponentType<
+          any
+        >;
       }
       return this.customComponent;
     }

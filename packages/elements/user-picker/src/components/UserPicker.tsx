@@ -1,10 +1,27 @@
-import Select, { createFilter } from '@atlaskit/select';
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
+import Select from '@atlaskit/select';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
+  cancelEvent,
+  clearEvent,
+  createAndFireEventInElementsChannel,
+  deleteEvent,
+  EventCreator,
+  failedEvent,
+  focusEvent,
+  searchedEvent,
+  selectEvent,
+  startSession,
+  UserPickerSession,
+} from '../analytics';
+import {
+  AtlasKitSelectChange,
   InputActionTypes,
-  User,
+  Option,
+  OptionData,
   UserPickerProps,
   UserPickerState,
 } from '../types';
@@ -13,42 +30,25 @@ import { getComponents } from './components';
 import { messages } from './i18n';
 import { getStyles } from './styles';
 import {
-  extractUserValue,
+  callCallback,
+  extractOptionValue,
   getOptions,
   isIterable,
-  usersToOptions,
   isSingleValue,
+  optionToSelectableOptions,
 } from './utils';
 
-export class UserPicker extends React.Component<
-  UserPickerProps,
+class UserPickerInternal extends React.Component<
+  UserPickerProps & WithAnalyticsEventProps,
   UserPickerState
 > {
-  static defaultProps = {
+  static defaultProps: UserPickerProps = {
     width: 350,
     isMulti: false,
     appearance: 'normal',
     subtle: false,
     isClearable: true,
-    search: '',
   };
-
-  private selectRef;
-  private static defaultFilter = createFilter();
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: [],
-      resultVersion: 0,
-      inflightRequest: 0,
-      count: 0,
-      hoveringClearIndicator: false,
-      menuIsOpen: false,
-      inputValue: props.search,
-      preventFilter: false,
-    };
-  }
 
   static getDerivedStateFromProps(
     nextProps: UserPickerProps,
@@ -58,12 +58,40 @@ export class UserPicker extends React.Component<
     if (nextProps.open !== undefined) {
       derivedState.menuIsOpen = nextProps.open;
     }
-    if (nextProps.value) {
-      derivedState.value = usersToOptions(nextProps.value);
+    if (nextProps.value !== undefined) {
+      derivedState.value = optionToSelectableOptions(nextProps.value);
     } else if (nextProps.defaultValue && !prevState.value) {
-      derivedState.value = usersToOptions(nextProps.defaultValue);
+      derivedState.value = optionToSelectableOptions(nextProps.defaultValue);
     }
+    if (
+      nextProps.search !== undefined &&
+      nextProps.search !== prevState.inputValue
+    ) {
+      derivedState.inputValue = nextProps.search;
+    }
+
+    if (nextProps.options !== undefined) {
+      derivedState.options = nextProps.options;
+    }
+
     return derivedState;
+  }
+
+  private selectRef;
+
+  private session?: UserPickerSession;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      options: [],
+      inflightRequest: 0,
+      count: 0,
+      hoveringClearIndicator: false,
+      menuIsOpen: !!this.props.open,
+      inputValue: props.search || '',
+      preventFilter: false,
+    };
   }
 
   private withSelectRef = (callback: (selectRef: any) => void) => () => {
@@ -78,25 +106,49 @@ export class UserPicker extends React.Component<
     select.focusOption('up'),
   );
 
+  public focus = () => {
+    if (this.selectRef) {
+      this.selectRef.focus();
+    }
+  };
+
+  public blur = () => {
+    if (this.selectRef) {
+      this.selectRef.blur();
+    }
+  };
+
   public selectOption = this.withSelectRef(select => {
     const focusedOption = select.state.focusedOption;
     select.selectOption(focusedOption);
   });
 
-  private handleChange = (value, { action, removedValue }) => {
-    if (removedValue && removedValue.user.fixed) {
+  private handleChange: AtlasKitSelectChange = (
+    value,
+    { action, removedValue, option },
+  ) => {
+    if (removedValue && removedValue.data.fixed) {
       return;
     }
-    const { onChange, onSelection } = this.props;
-
     this.setState({ inputValue: '' });
+    const { onChange, onSelection, isMulti } = this.props;
+    callCallback(onChange, extractOptionValue(value), action);
 
-    if (onChange) {
-      onChange(extractUserValue(value), action);
-    }
-
-    if (action === 'select-option' && onSelection) {
-      onSelection(value.user);
+    switch (action) {
+      case 'select-option':
+        if (value && !Array.isArray(value)) {
+          callCallback(onSelection, value.data);
+        }
+        this.fireEvent(selectEvent, isMulti ? option : value);
+        this.session = isMulti ? startSession() : undefined;
+        break;
+      case 'clear':
+        this.fireEvent(clearEvent);
+        break;
+      case 'remove-value':
+      case 'pop-value':
+        this.fireEvent(deleteEvent, removedValue && removedValue.data);
+        break;
     }
 
     if (!this.props.value) {
@@ -108,19 +160,18 @@ export class UserPicker extends React.Component<
     this.selectRef = ref;
   };
 
-  private addUsers = batchByKey(
-    (request: string, newUsers: (User | User[])[]) => {
-      this.setState(({ inflightRequest, users, resultVersion, count }) => {
+  private addOptions = batchByKey(
+    (request: string, newOptions: (OptionData | OptionData[])[]) => {
+      this.setState(({ inflightRequest, options, count }) => {
         if (inflightRequest.toString() === request) {
           return {
-            users: (resultVersion === inflightRequest ? users : []).concat(
-              newUsers.reduce<User[]>(
-                (nextUsers, item) => nextUsers.concat(item[0]),
+            options: options.concat(
+              newOptions.reduce<OptionData[]>(
+                (nextOptions, item) => nextOptions.concat(item[0]),
                 [],
               ),
             ),
-            resultVersion: inflightRequest,
-            count: count - newUsers.length,
+            count: count - newOptions.length,
           };
         }
         return null;
@@ -128,26 +179,38 @@ export class UserPicker extends React.Component<
     },
   );
 
+  private handleLoadOptionsError = () => {
+    this.fireEvent(failedEvent);
+  };
+
   private executeLoadOptions = debounce((search?: string) => {
-    const { loadUsers } = this.props;
-    if (loadUsers) {
+    const { loadOptions } = this.props;
+    if (loadOptions) {
       this.setState(({ inflightRequest: previousRequest }) => {
         const inflightRequest = previousRequest + 1;
-        const result = loadUsers(search);
-        const addUsers = this.addUsers.bind(this, inflightRequest.toString());
+        const result = loadOptions(search);
+        const addOptions = this.addOptions.bind(
+          this,
+          inflightRequest.toString(),
+        );
         let count = 0;
         if (isIterable(result)) {
           for (const value of result) {
-            Promise.resolve(value).then(addUsers);
+            Promise.resolve(value)
+              .then(addOptions)
+              .catch(this.handleLoadOptionsError);
             count++;
           }
         } else {
-          Promise.resolve(result).then(addUsers);
+          Promise.resolve(result)
+            .then(addOptions)
+            .catch(this.handleLoadOptionsError);
           count++;
         }
         return {
           inflightRequest,
           count,
+          options: [],
         };
       });
     }
@@ -156,8 +219,9 @@ export class UserPicker extends React.Component<
   private handleFocus = (event: React.FocusEvent) => {
     const { value } = this.state;
     this.setState({ menuIsOpen: true });
-    const input = event.target;
+    callCallback(this.props.onFocus);
     if (!this.props.isMulti && isSingleValue(value)) {
+      const input = event.target;
       this.setState({ inputValue: value.label, preventFilter: true }, () => {
         if (input instanceof HTMLInputElement) {
           input.select();
@@ -167,37 +231,65 @@ export class UserPicker extends React.Component<
   };
 
   private handleBlur = () => {
-    this.setState({ menuIsOpen: false, inputValue: '', preventFilter: false });
+    callCallback(this.props.onBlur);
+    this.setState({
+      menuIsOpen: false,
+      inputValue: '',
+      preventFilter: false,
+    });
   };
 
   private handleInputChange = (
     search: string,
     { action }: { action: InputActionTypes },
   ) => {
-    const { onInputChange } = this.props;
     if (action === 'input-change') {
-      if (onInputChange) {
-        onInputChange(search);
-      }
       this.setState({ inputValue: search, preventFilter: false });
 
       this.executeLoadOptions(search);
     }
   };
 
-  private triggerInputChange = this.withSelectRef(select => {
-    select.onInputChange(this.props.search, { action: 'input-change' });
-  });
+  private fireEvent = (eventCreator: EventCreator, ...args: any[]) => {
+    const { createAnalyticsEvent } = this.props;
+    if (createAnalyticsEvent) {
+      createAndFireEventInElementsChannel(
+        eventCreator(this.props, this.state, this.session, ...args),
+      )(createAnalyticsEvent);
+    }
+  };
+
+  private startSession = () => {
+    this.session = startSession();
+    this.fireEvent(focusEvent);
+  };
 
   componentDidUpdate(prevProps: UserPickerProps, prevState: UserPickerState) {
-    // trigger onInputChange
-    if (this.props.search !== prevProps.search) {
-      this.triggerInputChange();
+    const { menuIsOpen, options } = this.state;
+    // load options when the picker open
+    if (menuIsOpen && !prevState.menuIsOpen) {
+      this.startSession();
+      this.executeLoadOptions();
     }
 
-    // load options when the picker open
-    if (this.state.menuIsOpen && !prevState.menuIsOpen) {
-      this.executeLoadOptions();
+    if (!menuIsOpen && prevState.menuIsOpen && this.session) {
+      this.fireEvent(cancelEvent, prevState);
+      this.session = undefined;
+    }
+
+    if (
+      menuIsOpen &&
+      ((!prevState.menuIsOpen && options.length > 0) ||
+        options !== prevState.options)
+    ) {
+      this.fireEvent(searchedEvent);
+    }
+
+    if (
+      !this.state.preventFilter &&
+      this.state.inputValue !== prevState.inputValue
+    ) {
+      callCallback(this.props.onInputChange, this.state.inputValue);
     }
   }
 
@@ -205,6 +297,26 @@ export class UserPicker extends React.Component<
     // Escape
     if (event.keyCode === 27) {
       this.selectRef.blur();
+    }
+
+    // Space
+    if (event.keyCode === 32 && !this.state.inputValue) {
+      event.preventDefault();
+      this.setState({ inputValue: ' ' });
+    }
+
+    if (this.session) {
+      this.session.lastKey = event.keyCode;
+      switch (event.keyCode) {
+        // KeyUp 38
+        case 38:
+          this.session.upCount++;
+          break;
+        // KeyDown 40
+        case 40:
+          this.session.downCount++;
+          break;
+      }
     }
   };
 
@@ -215,37 +327,37 @@ export class UserPicker extends React.Component<
   private configureNoOptionsMessage = (): string | undefined =>
     this.props.noOptionsMessage;
 
-  private filterOption = (option, search: string) =>
-    this.state.preventFilter || UserPicker.defaultFilter(option, search);
+  private getOptions = (): Option[] => getOptions(this.state.options) || [];
 
   render() {
     const {
       width,
       isMulti,
       anchor,
-      users,
       isLoading,
       appearance,
       subtle,
       placeholder,
       isClearable,
       isDisabled,
+      clearValueLabel,
+      menuMinWidth,
+      menuPortalTarget,
     } = this.props;
     const {
-      users: usersFromState,
       count,
       hoveringClearIndicator,
       menuIsOpen,
       value,
       inputValue,
     } = this.state;
-
     return (
       <Select
         value={value}
+        autoFocus={menuIsOpen}
         ref={this.handleSelectRef}
         isMulti={isMulti}
-        options={getOptions(usersFromState, users) || []}
+        options={this.getOptions()}
         onChange={this.handleChange}
         styles={getStyles(width)}
         components={getComponents(isMulti, anchor)}
@@ -273,8 +385,15 @@ export class UserPicker extends React.Component<
         isDisabled={isDisabled}
         isFocused={menuIsOpen}
         backspaceRemovesValue={isMulti}
-        filterOption={this.filterOption}
+        filterOption={null} // disable local filtering
+        clearValueLabel={clearValueLabel}
+        menuMinWidth={menuMinWidth}
+        menuPortalTarget={menuPortalTarget}
       />
     );
   }
 }
+
+export const UserPicker: React.ComponentClass<
+  UserPickerProps
+> = withAnalyticsEvents()(UserPickerInternal);

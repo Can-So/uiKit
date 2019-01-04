@@ -21,7 +21,7 @@ exports[`Dropdown list button renders sites list 1`] = `
   </styled.ul>
   <styled.div>
     <FormattedMessage
-      defaultMessage="Other Atlassian services, such as Atlassian Community and Marketplace. "
+      defaultMessage="Other Atlassian account services, such as Atlassian Community and Marketplace. "
       description="A paragraph explaining that upon deletion the user may also lose access to services that weren't listed prior."
       id="focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote"
       values={Object {}}
@@ -56,14 +56,14 @@ exports[`Dropdown list button renders sites list with collapse button for more t
   </styled.ul>
   <styled.div>
     <FormattedMessage
-      defaultMessage="Other Atlassian services, such as Atlassian Community and Marketplace. "
+      defaultMessage="Other Atlassian account services, such as Atlassian Community and Marketplace. "
       description="A paragraph explaining that upon deletion the user may also lose access to services that weren't listed prior."
       id="focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote"
       values={Object {}}
     />
   </styled.div>
   <styled.div>
-    <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))
+    <WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))
       appearance="link"
       iconBefore={
         <ChevronUpIcon
@@ -79,7 +79,7 @@ exports[`Dropdown list button renders sites list with collapse button for more t
         id="focused-task-close-account.delete-account.drop-down-collapse-button"
         values={Object {}}
       />
-    </ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))>
+    </WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))>
   </styled.div>
 </Fragment>
 `;
@@ -104,7 +104,7 @@ exports[`Dropdown list button renders sites list with expand button for more tha
     </li>
   </styled.ul>
   <styled.div>
-    <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))
+    <WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))
       appearance="link"
       iconBefore={
         <ChevronDownIcon
@@ -124,7 +124,7 @@ exports[`Dropdown list button renders sites list with expand button for more tha
           }
         }
       />
-    </ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))>
+    </WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))>
   </styled.div>
 </Fragment>
 `;
@@ -149,7 +149,7 @@ exports[`Dropdown list button renders sites list with expand button for more tha
     </li>
   </styled.ul>
   <styled.div>
-    <ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))
+    <WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))
       appearance="link"
       iconBefore={
         <ChevronDownIcon
@@ -169,7 +169,7 @@ exports[`Dropdown list button renders sites list with expand button for more tha
           }
         }
       />
-    </ForwardRef(WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button))))>
+    </WithAnalyticsContext(WithAnalyticsEvents(WithDeprecationWarnings(Button)))>
   </styled.div>
 </Fragment>
 `;

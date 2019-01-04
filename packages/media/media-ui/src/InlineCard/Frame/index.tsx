@@ -2,8 +2,11 @@ import * as React from 'react';
 import { Wrapper } from './styled';
 
 export interface FrameViewProps {
+  /** A flag that determines whether the card is selected in edit mode. */
   isSelected?: boolean;
   children?: React.ReactNode;
+  link?: string;
+  /** The optional click handler */
   onClick?: () => void;
 }
 
@@ -30,10 +33,12 @@ export class Frame extends React.Component<FrameViewProps> {
   };
 
   render() {
-    const { isSelected, children, onClick } = this.props;
+    const { isSelected, children, onClick, link } = this.props;
     const isInteractive = Boolean(onClick);
     return (
       <Wrapper
+        target="_blank"
+        href={link}
         isSelected={isSelected}
         isInteractive={isInteractive}
         tabIndex={isInteractive ? 0 : undefined}

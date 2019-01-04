@@ -1,408 +1,257 @@
 // @flow
-/* eslint-disable no-console */ // While in dev preview console.info will be used
-/* eslint-disable react/no-unused-prop-types */
-import React, { Component, type Node } from 'react';
-import { colors } from '@atlaskit/theme';
-import styled from 'styled-components';
-import { type FormRef } from './Form';
-import FieldWrapper, { HelperText, Label } from './styled/Field';
-import { ValidatorMessage } from './';
+import React, { type Node } from 'react';
+import arrayShallowEqual from 'shallow-equal/arrays';
+import objectShallowEqual from 'shallow-equal/objects';
+import uuid from 'uuid';
+import memozie from 'memoize-one';
+import invariant from 'tiny-invariant';
+import { type FieldState, type FieldSubscription } from 'final-form';
+import { FormContext, IsDisabledContext } from './Form';
+import FieldWrapper, { Label, RequiredIndicator } from './styled/Field';
+import translateEvent from './utils/translateEvent';
+
+type FieldProps = {
+  id: string,
+  isRequired: boolean,
+  isDisabled: boolean,
+  isInvalid: boolean,
+  onChange: any => any,
+  onBlur: () => any,
+  onFocus: () => any,
+  value: any,
+  'aria-invalid': 'true' | 'false',
+  'aria-labelledby': string,
+};
+
+type Meta = {
+  dirty: boolean,
+  touched: boolean,
+  valid: boolean,
+  error: any,
+  submitError: any,
+};
 
 type Props = {
-  label?: string,
-  /** The input name that would be passed to the server on a POST */
-  name?: string,
-  /** The id for the input component which can be referenced via getElementById */
+  /* Children to render in the field. Called with props for the field component and other information about the field. */
+  children: ({ fieldProps: FieldProps, error: any, meta: Meta }) => Node,
+  /* The default value of the field. If a function is provided it is called with the current default value of the field. */
+  defaultValue: any,
+  /* Passed to the ID attribute of the field. Randomly generated if not specified */
   id?: string,
-  /** Array of Field Validators for input value to be validated */
-  validators?: Array<any>,
-  /** If a valuee is required for form to be valid */
+  /* Whether the field is required for submission */
   isRequired?: boolean,
-  /** Field helper text */
-  helperText?: string,
-  /** Message to display when field is invalid */
-  invalidMessage?: string,
-  /** Message to be displayed when field is valid */
-  validMessage?: string,
-  /** Is the field input valid */
-  isInvalid?: boolean | void,
-  /** One child which is an input component */
-  children?: Node,
-  /** One child which is an input component */
-  component?: React$Element<*>, //
-  /** Parent Form Reference & API */
-  form?: FormRef,
-  /** Handler to be called when the value changes. */
-  onChange?: (e: any, meta?: any) => mixed, // TODO: This should be typed to SyntheticEvent<HTMLInputElement> | Event once form API is set.
-  /** Validate when the component value has changed */
-  validateOnChange?: boolean,
-  /** Validate field component value when it loses focus */
-  validateOnBlur?: boolean,
-  /** Validate field component on change when it is invalid. NOT IMPLEMENTED */
-  validateOnInvalid?: boolean,
-  //labelAfter?: boolean,
+  /* Whether the field is disabled. Defaults to value from context via Form otherwise uses value of this prop. */
+  isDisabled: boolean,
+  /* Label displayed above the field */
+  label?: Node,
+  /* The name of the field */
+  name: string,
+  /* Given what onChange was called with and the current field value return the next field value */
+  transform: (event: any, current: any) => any,
+  /* validates the current value of field */
+  validate?: (
+    value: any,
+    formState: Object,
+    fieldState: Object,
+  ) => string | void | Promise<string | void>,
+};
+
+type InnerProps = Props & {
+  /* Register the Field with the Form. Internal prop - gets set through context. */
+  registerField: (
+    string,
+    any,
+    (FieldState) => any,
+    FieldSubscription,
+    Object,
+  ) => any,
 };
 
 type State = {
-  fieldState: FieldState,
-  component: React$Element<*>,
+  onChange: any => any,
+  onBlur: () => any,
+  onFocus: () => any,
+  dirty: boolean,
+  touched: boolean,
+  valid: boolean,
+  value: any,
+  error: any,
+  submitError: any,
 };
 
-/**
- * The Field State exposed to the Form and other fields
- */
-export type FieldState = {
-  validators?: Array<any>,
-  id?: string,
-  name?: string,
-  isValidated?: boolean,
-  isInvalid?: boolean,
-  isRequired?: boolean,
-  /** A string for most inputs but can also be an object or array e.g. Select */
-  value?: any,
-  label?: string,
-  invalidMessage?: string,
-  validMessage?: string,
-  validate?: () => FieldState,
-  helperText?: string,
-  validateOnChange?: boolean,
-  validateOnBlur?: boolean,
-  validateOnInvalid?: boolean,
-  /** The value type passed for onChange from the field component. Most are html-input */
-  componentType: string,
-  /** List of validators messages that the field failed on validate */
-  invalidMessages: Array<string>,
-};
+const shallowEqual = (a, b) =>
+  a === b ||
+  typeof b === 'function' ||
+  (Array.isArray(b) && arrayShallowEqual(a, b)) ||
+  (typeof b === 'object' && objectShallowEqual(a, b));
 
-export type FieldComponent = React$Element<*> & {
-  onChange: () => {},
-};
+// Provides the id of the field to message components.
+// This links the message with the field for screen-readers.
+export const FieldId = React.createContext();
 
-const RequiredIndicator = styled.span`
-  color: ${colors.red};
-  padding-left: 2px;
-`;
-
-// TODO: Decide & implement how multiple error messages should be displayed. Likely an UO list
-const messageSeperator: string = ' ';
-
-export default class Field extends Component<Props, State> {
+class FieldInner extends React.Component<InnerProps, State> {
   static defaultProps = {
-    validators: [],
-    isInvalid: undefined,
-    invalidMessage: '',
-    validMessage: '',
-    helperText: '',
-    validateOnChange: false,
-    validateOnBlur: true,
-    validateOnInvalid: true,
+    registerField: () => () => {},
+    transform: translateEvent,
   };
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      fieldState: this.getFieldStateFromProps(props),
-      component: this.getComponentFromProps(props),
-    };
-    // Register the field in the parent form if there is one
-    if (props.form && this.state.fieldState)
-      props.form.registerField(this.state.fieldState);
-  }
-  /** Register the field in the form if there is one */
-  componentDidMount() {}
+  unregisterField = () => {};
 
-  /** Handle prop or children prop changes */
-  componentWillReceiveProps(nextProps: Props) {
-    this.setState({
-      fieldState: this.getFieldStateFromProps(nextProps),
-      component: this.getComponentFromProps(nextProps),
-    });
-  }
+  getFieldId = memozie(name => `${name}-${uuid()}`);
 
-  /** Return the component from children or the component prop */
-  getComponentFromProps = (props: Props): FieldComponent => {
-    // Field must have component passed in or a single child
-    if (React.Children.only(props.children) && props.component) {
-      console.warn(
-        'Field expects the component to be passed as a child OR component. Both have been passed and child is being used.',
-      );
-    } else if (!React.Children.only(props.children) && !props.component) {
-      console.warn(
-        'Field must have one valid child which is a field component. E.g FieldText, Select',
-      );
-    }
-    return React.Children.only(props.children) || props.component || {};
+  state = {
+    // eslint-disable-next-line no-unused-vars
+    onChange: (e, value) => {},
+    onBlur: () => {},
+    onFocus: () => {},
+    dirty: false,
+    touched: false,
+    valid: false,
+    value:
+      typeof this.props.defaultValue === 'function'
+        ? this.props.defaultValue()
+        : this.props.defaultValue,
+    error: undefined,
+    submitError: undefined,
   };
 
-  /** Return the fieldState from Props */
-  getFieldStateFromProps = (props: Props): FieldState => {
-    const {
-      id,
-      name,
-      label,
-      validators,
-      isInvalid,
-      invalidMessage,
-      validMessage,
-      isRequired,
-      helperText,
-      validateOnChange,
-      validateOnBlur,
-      validateOnInvalid,
-    } = props;
-    const childComponent: React$Element<*> = this.getComponentFromProps(props);
-    const fieldState: FieldState = {
-      validators,
-      isInvalid,
-      invalidMessage,
-      validMessage,
-      isRequired,
-      name: childComponent.props.name || name,
-      id: childComponent.props.id || id || name,
-      label: childComponent.props.label || label,
-      value: childComponent.props.value || '',
-      validate: this.validate,
-      helperText,
-      validateOnChange,
-      validateOnBlur,
-      validateOnInvalid,
-      componentType:
-        childComponent.props.componentType || childComponent.type.name,
-      invalidMessages: [],
-    };
-    // For some components like Checkbox that are wrapped in withTheme and exported via anon function
-    // we need to check for known props to idenitfy them. TODO: Fix this in the affected components and remove this hack
-    if (!fieldState.componentType || !fieldState.componentType.length) {
-      // Checkbox stateless
-      if (childComponent.props.isChecked !== undefined)
-        fieldState.componentType = 'CheckboxStateless';
-    }
-    return fieldState;
-  };
+  register = () => {
+    const { defaultValue, name, registerField, validate } = this.props;
 
-  /**
-   * Until we have a Form API we need to account for different onChange event types.
-   * TODO: replace the hacks with a map of Field onChange event types
-   */
-  getValueFromEvent = () => {
-    // Can we use
-  };
-
-  /**
-   * Handle onChange for components that dispatch an input event.
-   */
-  handleOnChange = (event: any, meta: any) => {
-    const fieldState = this.state.fieldState;
-
-    // Call any onChange defined for Field or the component.
-    // This is required to support stateless components
-    if (this.state.component.props && this.state.component.props.onChange) {
-      this.state.component.props.onChange(event);
-    }
-
-    // TODO: review if we need to expose this? Might make more sense to just have an onUpdate which fires
-    // when fieldState is updated
-    if (this.props.onChange) {
-      this.props.onChange(event, meta);
-    }
-
-    // TODO: move mapping event types to field components to json
-    // Most Inputs - Event from HTMLInput | Event
-
-    // Checkbox
-    if (this.state.fieldState.componentType === 'Checkbox') {
-      fieldState.value = event.isChecked ? event.value : '';
-
-      // Stateless checkbox
-    } else if (this.state.fieldState.componentType === 'CheckboxStateless') {
-      fieldState.value = event.currentTarget.checked
-        ? event.currentTarget.value
-        : '';
-      // Most Inputs - Event from HTMLInput | Event
-    } else if (event && event.target) {
-      fieldState.value = event.target.value || '';
-      // Strings from inputs, objects & arrays of objects from select
-    } else if (event) {
-      fieldState.value = event;
-      // Default to empty string
-    } else {
-      fieldState.value = '';
-    }
-
-    // Update Field State and pass on
-    this.setState({ fieldState });
-
-    // Update form field state from the validate result or use the current state
-    if (this.props.validateOnChange) {
-      this.updateFormState(this.validate());
-    } else {
-      this.updateFormState(this.state.fieldState);
-    }
-  };
-
-  /** Handle onChange for components that dispatch an input event.
-   * Until we have a Form API we need to account for different event types
-   */
-  handleOnBlur = () => {
-    if (this.props.validateOnBlur) {
-      this.updateFormState(this.validate());
-    }
-  };
-
-  /**
-   * Run any validators passed for this field
-   */
-  validate = (): FieldState => {
-    const { validators, value } = this.state.fieldState;
-    const { isRequired } = this.props;
-    const {
-      isInvalid,
-      invalidMessage,
-      validMessage,
-      invalidMessages,
-      ...rest
-    } = this.state.fieldState;
-
-    let result = true;
-    let invalid: string = '';
-    let valid: string = '';
-    let invalidCount = 0;
-    let validatedFieldState = {};
-
-    // Is the field required?
-    if (
-      (isRequired && !value) ||
-      (isRequired && !String(value).trim().length)
-    ) {
-      invalidCount++;
-      invalid = 'This field is required';
-    } else if (validators && validators.length) {
-      for (let i = 0; i < validators.length; i++) {
-        if (validators[i].props.func) {
-          result = validators[i].props.func(value, validators[i].props.options);
-
-          // Invert result if validOn prop is false
-          if (validators[i].props.validOnFalse) result = !result;
-
-          // Most validators will only have an invalid message
-          if (result) {
-            valid = valid.concat(validators[i].props.valid + messageSeperator);
-          } else {
-            invalidCount++;
-            invalid = invalid.concat(
-              validators[i].props.invalid + messageSeperator,
-            );
-
-            invalidMessages.push(validators[i].props.invalid);
-          }
-        }
-      }
-    }
-
-    validatedFieldState = {
-      fieldState: {
-        isInvalid: !!invalidCount,
-        invalidMessage: invalid,
-        invalidMessages,
-        validMessage: valid,
-        ...rest,
-      },
-    };
-    this.setState(validatedFieldState);
-    return validatedFieldState.fieldState;
-  };
-
-  /** If a parent Form exists we update this fields state  */
-  updateFormState = (fieldState?: FieldState) => {
-    if (this.props.form && this.props.form.setFieldState) {
-      this.props.form.setFieldState(fieldState || this.state.fieldState);
-    }
-  };
-
-  /** Render a label & make it required / not required. */
-  renderLabel = () => {
-    if (this.props.label && this.props.label.length) {
-      return (
-        <Label htmlFor={this.props.id}>
-          {this.props.label}
-          {this.props.isRequired ? (
-            <RequiredIndicator role="presentation">*</RequiredIndicator>
-          ) : null}
-        </Label>
-      );
-    }
-    return null;
-  };
-
-  /**
-   * Render the field component passed as children and inject props from this field.
-   * We always overide field components validation display.
-   * TODO: audit all current field components to map others.
-   */
-  renderFieldComponent = () => {
-    const {
-      id,
-      name,
-      isInvalid,
-      isRequired,
-      label,
-      invalidMessage,
-    } = this.state.fieldState;
-    const component: any = this.state.component;
-    let validationState = 'default';
-
-    if (component) {
-      // validationState & validationMessage are used to support AtlaskitSelect dev preview
-      if (isInvalid !== undefined) {
-        validationState = isInvalid ? 'error' : 'success';
-      }
-      return React.cloneElement(component, {
-        id,
+    if (process.env.NODE_ENV !== 'production') {
+      invariant(
         name,
-        isInvalid,
-        isRequired,
-        label,
-        invalidMessage,
-        isLabelHidden: true,
-        isValidationHidden: true,
-        validationMessage: invalidMessage,
-        validationState,
-        onChange: this.handleOnChange,
-        onUpdate: this.handleOnChange,
-        onBlur: this.handleOnBlur,
-      });
+        '@atlaskit/form: Field components have a required name prop',
+      );
     }
-    return null;
+
+    return registerField(
+      name,
+      defaultValue,
+      ({
+        change,
+        blur,
+        focus,
+        dirty,
+        touched,
+        valid,
+        value,
+        error,
+        submitError,
+      }) => {
+        this.setState({
+          onChange: change,
+          onBlur: blur,
+          onFocus: focus,
+          dirty,
+          touched,
+          valid,
+          value,
+          error,
+          submitError,
+        });
+      },
+      {
+        dirty: true,
+        touched: true,
+        valid: true,
+        value: true,
+        error: true,
+        submitError: true,
+      },
+      {
+        getValidator: () => validate,
+      },
+    );
   };
 
-  /**
-   * When we render Label, Helper & Validation are only handled only if passed as props. This allows for
-   * components that currently roll their own to still be wrapped by Field.
-   */
+  componentDidUpdate(prevProps: Props) {
+    const { defaultValue, name } = this.props;
+    if (
+      !shallowEqual(prevProps.defaultValue, defaultValue) ||
+      prevProps.name !== name
+    ) {
+      this.unregisterField();
+      this.unregisterField = this.register();
+    }
+  }
+
+  componentDidMount() {
+    this.unregisterField = this.register();
+  }
+
+  componentWillUnmount() {
+    this.unregisterField();
+  }
+
   render() {
     const {
-      helperText,
-      isInvalid,
-      invalidMessage,
-      validMessage,
-    } = this.state.fieldState;
-
+      children,
+      isRequired,
+      isDisabled,
+      label,
+      name,
+      id,
+      transform,
+    } = this.props;
+    const { onChange, onBlur, onFocus, value, ...rest } = this.state;
+    const error =
+      rest.submitError || ((rest.touched || rest.dirty) && rest.error);
+    const fieldId = id || this.getFieldId(name);
+    const fieldProps = {
+      onChange: e => {
+        onChange(transform(e, value));
+      },
+      onBlur,
+      onFocus,
+      value,
+      name,
+      isDisabled,
+      isInvalid: Boolean(error),
+      isRequired: Boolean(isRequired),
+      'aria-invalid': error ? 'true' : 'false',
+      'aria-labelledby': `${fieldId}-label ${fieldId}-helper ${fieldId}-valid ${fieldId}-error`,
+      id: fieldId,
+    };
     return (
       <FieldWrapper>
-        {this.renderLabel()}
-
-        {this.renderFieldComponent()}
-
-        {helperText && helperText.length ? (
-          <HelperText>{helperText}</HelperText>
-        ) : null}
-
-        <ValidatorMessage
-          isInvalid={isInvalid}
-          validMessage={validMessage}
-          invalidMessage={invalidMessage}
-        />
+        {label && (
+          <Label id={`${fieldId}-label`} htmlFor={fieldId}>
+            {label}
+            {isRequired && (
+              <RequiredIndicator aria-hidden="true">*</RequiredIndicator>
+            )}
+          </Label>
+        )}
+        <FieldId.Provider value={fieldId}>
+          {children({ fieldProps, error, meta: rest })}
+        </FieldId.Provider>
       </FieldWrapper>
     );
   }
 }
+
+// Make it easier to reference context values in lifecycle methods
+const Field = (props: Props) => (
+  <FormContext.Consumer>
+    {registerField => (
+      <IsDisabledContext.Consumer>
+        {formIsDisabled => (
+          <FieldInner
+            {...props}
+            registerField={registerField}
+            isDisabled={formIsDisabled || props.isDisabled}
+          />
+        )}
+      </IsDisabledContext.Consumer>
+    )}
+  </FormContext.Consumer>
+);
+
+Field.defaultProps = {
+  defaultValue: undefined,
+  isDisabled: false,
+  transform: translateEvent,
+};
+
+export default Field;

@@ -9,7 +9,7 @@ import {
   FinalizeUploadAction,
   isFinalizeUploadAction,
 } from '../actions/finalizeUpload';
-import { State, Tenant, SourceFile } from '../domain';
+import { State, SourceFile } from '../domain';
 import { mapAuthToSourceFileOwner } from '../domain/source-file';
 import { MediaFile } from '../../domain/file';
 import {
@@ -29,14 +29,7 @@ export default function(fetcher: Fetcher): Middleware {
 export function finalizeUpload(
   fetcher: Fetcher,
   store: Store<State>,
-  {
-    file,
-    uploadId,
-    source,
-    tenant,
-    replaceFileId,
-    occurrenceKey,
-  }: FinalizeUploadAction,
+  { file, uploadId, source, replaceFileId }: FinalizeUploadAction,
 ): Promise<SendUploadEventAction> {
   const { userContext } = store.getState();
   return userContext.config
@@ -54,9 +47,7 @@ export function finalizeUpload(
         file,
         uploadId,
         sourceFile,
-        tenant,
         replaceFileId,
-        occurrenceKey,
       };
 
       return copyFile(copyFileParams);
@@ -69,9 +60,7 @@ type CopyFileParams = {
   file: MediaFile;
   uploadId: string;
   sourceFile: SourceFile;
-  tenant: Tenant;
   replaceFileId?: Promise<string>;
-  occurrenceKey?: string;
 };
 
 async function copyFile({
@@ -80,27 +69,26 @@ async function copyFile({
   file,
   uploadId,
   sourceFile,
-  tenant,
   replaceFileId,
-  occurrenceKey,
 }: CopyFileParams): Promise<SendUploadEventAction> {
-  const { deferredIdUpfronts } = store.getState();
+  const { deferredIdUpfronts, tenantContext, config } = store.getState();
+  const collection = config.uploadParams && config.uploadParams.collection;
   const deferred = deferredIdUpfronts[sourceFile.id];
   const mediaStore = new MediaStore({
-    authProvider: () => Promise.resolve(tenant.auth),
+    authProvider: tenantContext.config.authProvider,
   });
   const body: MediaStoreCopyFileWithTokenBody = {
     sourceFile,
   };
   const params: MediaStoreCopyFileWithTokenParams = {
-    collection: tenant.uploadParams.collection,
+    collection,
     replaceFileId: replaceFileId ? await replaceFileId : undefined,
-    occurrenceKey,
+    occurrenceKey: file.occurrenceKey,
   };
 
   return mediaStore
     .copyFileWithToken(body, params)
-    .then(destinationFile => {
+    .then(async destinationFile => {
       const { id: publicId } = destinationFile.data;
       if (deferred) {
         const { resolver } = deferred;
@@ -122,13 +110,11 @@ async function copyFile({
           uploadId,
         }),
       );
-
+      const auth = await tenantContext.config.authProvider({
+        collectionName: collection,
+      });
       // TODO [MS-725]: replace by context.getFile
-      return fetcher.pollFile(
-        tenant.auth,
-        publicId,
-        tenant.uploadParams.collection,
-      );
+      return fetcher.pollFile(auth, publicId, collection);
     })
     .then(processedDestinationFile => {
       return store.dispatch(

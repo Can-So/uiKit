@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, type ComponentType, type ElementRef } from 'react';
-import { mergeStyles, makeAnimated } from 'react-select';
+import { mergeStyles } from 'react-select';
 import memoizeOne from 'memoize-one';
 import isEqual from 'react-fast-compare';
 import { colors, gridSize } from '@atlaskit/theme';
@@ -266,10 +266,10 @@ export default function createSelect(WrappedComponent: ComponentType<*>) {
       this.cacheComponents(nextProps.components);
     }
     cacheComponents = (components?: {}) => {
-      this.components = makeAnimated({
+      this.components = {
         ...defaultComponents,
         ...components,
-      });
+      };
     };
     focus() {
       this.select.focus();

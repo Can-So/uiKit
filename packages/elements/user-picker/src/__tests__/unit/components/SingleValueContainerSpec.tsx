@@ -9,7 +9,7 @@ describe('SingleValueContainer', () => {
     shallow(<SingleValueContainer {...props} />);
 
   const userValue = {
-    user: testUser,
+    option: testUser,
     label: testUser.name,
   };
 

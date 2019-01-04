@@ -18,14 +18,13 @@ import {
 } from './nodes';
 
 import { toReact as markToReact } from './marks';
-
+import { calcTableColumnWidths } from '@atlaskit/adf-schema';
 import {
   ProviderFactory,
   getMarksByOrder,
   isSameMark,
   EventHandlers,
   ExtensionHandlers,
-  calcTableColumnWidths,
 } from '@atlaskit/editor-common';
 import { bigEmojiHeight } from '../utils';
 
@@ -232,7 +231,7 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
       serializer: this,
       content: node.content ? node.content.toJSON() : undefined,
       allowDynamicTextSizing: this.allowDynamicTextSizing,
-      appearance: this.appearance,
+      rendererAppearance: this.appearance,
       ...node.attrs,
     };
   }

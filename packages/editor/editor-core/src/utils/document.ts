@@ -8,6 +8,8 @@ import {
 } from '@atlaskit/adf-utils';
 import { analyticsService } from '../analytics';
 
+const FALSE_POSITIVE_MARKS = ['code', 'alignment', 'indentation'];
+
 /**
  * Checks if node is an empty paragraph.
  */
@@ -95,7 +97,8 @@ export function isEmptyDocument(node: Node): boolean {
   return (
     nodeChild.type.name === 'paragraph' &&
     !nodeChild.childCount &&
-    nodeChild.nodeSize === 2
+    nodeChild.nodeSize === 2 &&
+    (!nodeChild.marks || nodeChild.marks.length === 0)
   );
 }
 
@@ -179,7 +182,14 @@ export function processRawValue(
       (entity, error, options) => {
         // Remove any invalid marks
         if (marks.indexOf(entity.type) > -1) {
-          fireAnalyticsEvent(entity, error, 'mark');
+          if (
+            !(
+              error.code === VALIDATION_ERRORS.INVALID_TYPE &&
+              FALSE_POSITIVE_MARKS.indexOf(entity.type) > -1
+            )
+          ) {
+            fireAnalyticsEvent(entity, error, 'mark');
+          }
           return;
         }
 

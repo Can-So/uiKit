@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import {
-  MediaSingleLayout,
   calcColumnsFromPx,
   akEditorWideLayoutWidth,
 } from '@atlaskit/editor-common';
@@ -13,6 +13,12 @@ import { ResizableDirection, NumberSize } from 're-resizable';
 import { gridTypeForLayout } from '../../../grid';
 
 export const handleSides = ['left', 'right'];
+export const alignementLayouts = [
+  'align-start',
+  'align-end',
+  'wrap-left',
+  'wrap-right',
+];
 
 const snapTo = (target: number, points: number[]): number =>
   points.reduce((point, closest) => {
@@ -43,7 +49,7 @@ export default class Resizer extends React.Component<
     isResizing: false,
   };
 
-  handleResizeStart = (e, dir) => {
+  handleResizeStart = () => {
     this.setState({ isResizing: true }, () => {
       this.props.displayGrid(
         true,
@@ -97,10 +103,16 @@ export default class Resizer extends React.Component<
     const columnWidth = Math.round(columns);
 
     const highlight: number[] = [];
-    if (this.props.layout === 'wrap-left') {
+    if (
+      this.props.layout === 'wrap-left' ||
+      this.props.layout === 'align-start'
+    ) {
       highlight.push(0);
       highlight.push(columnWidth);
-    } else if (this.props.layout === 'wrap-right') {
+    } else if (
+      this.props.layout === 'wrap-right' ||
+      this.props.layout === 'align-end'
+    ) {
       highlight.push(this.props.gridSize);
       highlight.push(this.props.gridSize - columnWidth);
     } else if (this.props.isInlineLike) {
@@ -153,6 +165,11 @@ export default class Resizer extends React.Component<
   };
 
   render() {
+    /** equivalent to `calc: (50% - 12px)` from 40:MediaSingle/styled.ts */
+    const halfSize = this.props.lineLength * 0.5 - 12;
+    const shouldHalfSize =
+      alignementLayouts.indexOf(this.props.layout) > -1 &&
+      this.props.width > this.props.lineLength;
     const handleStyles = {};
     const handles = {};
     handleSides.forEach(side => {
@@ -171,15 +188,16 @@ export default class Resizer extends React.Component<
         ref={this.setResizableRef}
         onResize={this.handleResize}
         size={{
-          width: this.props.width || 0,
+          width: shouldHalfSize ? halfSize : this.props.width || 0,
         }}
         className={classnames(
           'media-single',
-          this.props.layout,
+          `image-${this.props.layout}`,
           this.props.className,
           {
             'is-loading': this.props.isLoading,
             'is-resizing': this.state.isResizing,
+            'not-resized': !this.props.pctWidth,
             'mediaSingle-selected': this.props.selected,
             'media-wrapped':
               this.props.layout === 'wrap-left' ||

@@ -18,13 +18,10 @@ import {
   CardOnClickCallback,
   Identifier,
 } from '@atlaskit/media-card';
+import { MediaType, MediaBaseAttributes } from '@atlaskit/adf-schema';
+import { withImageLoader, ImageStatus } from '@atlaskit/editor-common';
 
-import {
-  MediaType,
-  MediaBaseAttributes,
-  withImageLoader,
-  ImageStatus,
-} from '@atlaskit/editor-common';
+import { EditorAppearance } from '../../../types';
 
 // This is being used by DropPlaceholder now
 export const MEDIA_HEIGHT = 125;
@@ -40,10 +37,11 @@ export interface MediaNodeProps extends ReactNodeProps {
   cardDimensions: CardDimensions;
   isMediaSingle?: boolean;
   mediaProvider?: Promise<MediaProvider>;
-  onClick?: () => void;
+  onClick?: CardOnClickCallback;
   onExternalImageLoaded?: (
     dimensions: { width: number; height: number },
   ) => void;
+  editorAppearance: EditorAppearance;
 }
 
 export interface Props extends Partial<MediaBaseAttributes> {
@@ -71,6 +69,7 @@ class MediaNode extends Component<
 > {
   private pluginState: MediaPluginState;
   private mediaProvider;
+  private hasBeenMounted: boolean = false;
 
   state = {
     viewContext: undefined,
@@ -97,6 +96,7 @@ class MediaNode extends Component<
   }
 
   componentDidMount() {
+    this.hasBeenMounted = true;
     this.handleNewNode(this.props);
     this.updateMediaContext();
   }
@@ -104,6 +104,7 @@ class MediaNode extends Component<
   componentWillUnmount() {
     const { node } = this.props;
     this.pluginState.handleMediaNodeUnmount(node);
+    this.hasBeenMounted = false;
   }
 
   componentDidUpdate() {
@@ -114,14 +115,20 @@ class MediaNode extends Component<
     const mediaProvider = await this.mediaProvider;
     if (mediaProvider) {
       const viewContext = await mediaProvider.viewContext;
-      if (viewContext) {
+      if (viewContext && this.hasBeenMounted) {
         this.setState({ viewContext });
       }
     }
   };
 
   render() {
-    const { node, selected, cardDimensions, onClick } = this.props;
+    const {
+      node,
+      selected,
+      cardDimensions,
+      onClick,
+      editorAppearance,
+    } = this.props;
     const { id, type, collection, url, __key } = node.attrs;
 
     if (!this.state.viewContext) {
@@ -148,13 +155,15 @@ class MediaNode extends Component<
     return (
       <Card
         context={this.state.viewContext!}
-        resizeMode="full-fit"
+        resizeMode="stretchy-fit"
         dimensions={cardDimensions}
         identifier={identifier}
         selectable={true}
         selected={selected}
         disableOverlay={true}
         onClick={onClick}
+        useInlinePlayer={false}
+        isLazy={editorAppearance !== 'mobile'}
       />
     );
   }

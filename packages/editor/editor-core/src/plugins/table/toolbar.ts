@@ -1,4 +1,3 @@
-import { EditorState, Transaction } from 'prosemirror-state';
 import { defineMessages } from 'react-intl';
 import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
 import SettingsIcon from '@atlaskit/icon/glyph/editor/settings';
@@ -12,6 +11,10 @@ import {
 import { FloatingToolbarHandler } from '../floating-toolbar/types';
 import { TablePluginState } from './types';
 import { pluginKey } from './pm-plugins/main';
+import {
+  pluginKey as tableResizingPluginKey,
+  ResizeState,
+} from './pm-plugins/table-resizing/index';
 import {
   hoverTable,
   deleteTable,
@@ -53,7 +56,7 @@ const withAnalytics = (
   command: Command,
   eventName: string,
   properties?: AnalyticsProperties,
-) => (state: EditorState, dispatch: (tr: Transaction) => void) => {
+): Command => (state, dispatch) => {
   analytics.trackEvent(eventName, properties);
   return command(state, dispatch);
 };
@@ -63,6 +66,9 @@ export const getToolbarConfig: FloatingToolbarHandler = (
   { formatMessage },
 ) => {
   const tableState: TablePluginState | undefined = pluginKey.getState(state);
+  const resizeState: ResizeState | undefined = tableResizingPluginKey.getState(
+    state,
+  );
   if (
     tableState &&
     tableState.tableRef &&
@@ -126,6 +132,7 @@ export const getToolbarConfig: FloatingToolbarHandler = (
           appearance: 'danger',
           icon: RemoveIcon,
           onClick: deleteTable,
+          disabled: !!resizeState && !!resizeState.dragging,
           onMouseEnter: hoverTable(true),
           onMouseLeave: clearHoverSelection,
           title: formatMessage(commonMessages.remove),

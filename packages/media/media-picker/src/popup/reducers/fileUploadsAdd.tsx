@@ -5,7 +5,7 @@ import { LocalUpload, State, SelectedItem } from '../domain';
 
 export default function fileUploadsAdd(state: State, action: Action): State {
   if (isFileUploadsStartAction(action)) {
-    const { tenant, uploads, selectedItems, lastUploadIndex } = state;
+    const { uploads, selectedItems, lastUploadIndex } = state;
 
     const files = action.files;
     const newUploads: { [id: string]: LocalUpload } = {};
@@ -40,24 +40,24 @@ export default function fileUploadsAdd(state: State, action: Action): State {
             progress: 0,
             events: [], // uploads-start is not part of events. It will be emitted manually in importFiles.tsx
             index: newLastUploadIndex++, // this index helps to sort upload items, so that latest come first
-            tenant,
           };
         }
       },
     );
 
     const newSelectedItems: SelectedItem[] = files.map(
-      ({ id, name, type, size, upfrontId, occurrenceKey }) => ({
-        date: 0,
-        id,
-        upfrontId,
-        occurrenceKey,
-        mimeType: type,
-        name,
-        parentId: '',
-        size,
-        serviceName: 'upload',
-      }),
+      ({ id, name, type, size, upfrontId, occurrenceKey }) =>
+        ({
+          date: 0,
+          id,
+          upfrontId,
+          occurrenceKey,
+          mimeType: type,
+          name,
+          parentId: '',
+          size,
+          serviceName: 'upload',
+        } as SelectedItem),
     );
 
     return {

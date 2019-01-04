@@ -39,6 +39,7 @@ import {
   SelectedItem,
   ServiceFile,
   State,
+  ServiceName,
 } from '../../../domain';
 import { menuDelete, menuEdit } from '../editor/phrases';
 import {
@@ -87,7 +88,10 @@ export interface UploadViewStateProps {
 }
 
 export interface UploadViewDispatchProps {
-  readonly onFileClick: (serviceFile: ServiceFile, serviceName: string) => void;
+  readonly onFileClick: (
+    serviceFile: ServiceFile,
+    serviceName: ServiceName,
+  ) => void;
   readonly onEditorShowImage: (file: FileReference, dataUri: string) => void;
   readonly onEditRemoteImage: (
     file: FileReference,
@@ -348,7 +352,7 @@ export class StatelessUploadView extends Component<
       ]; // TODO [MS-1017]: allow file annotation for uploading files
 
       const identifier: FileIdentifier = {
-        id: upfrontId,
+        id: userUpfrontId,
         mediaItemType: 'file',
       };
 
@@ -502,7 +506,8 @@ const mapDispatchToProps = (
 export default connect<
   UploadViewStateProps,
   UploadViewDispatchProps,
-  UploadViewOwnProps
+  UploadViewOwnProps,
+  State
 >(
   mapStateToProps,
   mapDispatchToProps,

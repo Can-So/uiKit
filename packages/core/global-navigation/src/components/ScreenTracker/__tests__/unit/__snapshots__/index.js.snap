@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScreenTracker should render correctly 1`] = `
-<ForwardRef(WithAnalyticsEvents(ScreenTrackerBase))
+<WithAnalyticsEvents(ScreenTrackerBase)
   isVisible={false}
   name="test"
 >
@@ -12,5 +12,5 @@ exports[`ScreenTracker should render correctly 1`] = `
       name="test"
     />
   </AnalyticsContextConsumer>
-</ForwardRef(WithAnalyticsEvents(ScreenTrackerBase))>
+</WithAnalyticsEvents(ScreenTrackerBase)>
 `;

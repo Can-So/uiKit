@@ -3,7 +3,8 @@ import { mount } from 'enzyme';
 import { CardDimensions } from '@atlaskit/media-card';
 import { EditorView } from 'prosemirror-view';
 import { media } from '@atlaskit/editor-test-helpers';
-import { ProviderFactory, defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
+import { ProviderFactory } from '@atlaskit/editor-common';
 import Media from '../../../../../plugins/media/nodeviews/media';
 import {
   MediaPluginState,
@@ -42,6 +43,7 @@ describe('nodeviews/media', () => {
         providerFactory={providerFactory}
         cardDimensions={cardDimensions}
         selected={false}
+        editorAppearance="full-page"
       />,
     );
 

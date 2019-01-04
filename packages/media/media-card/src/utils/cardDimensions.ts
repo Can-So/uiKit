@@ -62,26 +62,6 @@ export const maxSquareCardDimensions = {
   height: 348,
 };
 
-export const getCardMinHeight = (appearance?: CardAppearance) => {
-  if (appearance === 'small') {
-    return minSmallCardDimensions.height;
-  }
-
-  if (appearance === 'image') {
-    return minImageCardDimensions.height;
-  }
-
-  if (appearance === 'horizontal') {
-    return minHorizontalCardDimensions.height;
-  }
-
-  if (appearance === 'square') {
-    return minSquareCardDimensions.height;
-  }
-
-  return minSmallCardDimensions.height;
-};
-
 export const getCardMaxHeight = (appearance?: CardAppearance) => {
   if (appearance === 'image') {
     return maxImageCardDimensions.height;
@@ -99,10 +79,6 @@ export const getCardMaxHeight = (appearance?: CardAppearance) => {
 };
 
 export const getCardMinWidth = (appearance?: CardAppearance) => {
-  if (appearance === 'small') {
-    return minSmallCardDimensions.width;
-  }
-
   if (appearance === 'image') {
     return minImageCardDimensions.width;
   }
@@ -153,10 +129,6 @@ export const getCSSBoundaries = (appearance?: CardAppearance) => {
 export const getDefaultCardDimensions = (
   appearance?: CardAppearance,
 ): CardDimensions => {
-  if (appearance === 'small') {
-    return defaultSmallCardDimensions;
-  }
-
   if (appearance === 'image') {
     return defaultImageCardDimensions;
   }

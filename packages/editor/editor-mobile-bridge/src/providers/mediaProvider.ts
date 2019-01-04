@@ -14,7 +14,7 @@ function createMediaProvider() {
     ContextFactory.create({
       authProvider: context => {
         // This will prevent empty collections from being used.
-        if (!context || !context.collectionName) {
+        if (!context || context.collectionName === null) {
           return Promise.reject();
         }
 
@@ -27,7 +27,7 @@ function createMediaProvider() {
     uploadContext: createMediaContext,
     viewContext: createMediaContext,
     uploadParams: {
-      collection: '',
+      collection: null,
     },
   });
 }

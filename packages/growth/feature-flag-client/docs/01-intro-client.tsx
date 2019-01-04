@@ -2,8 +2,6 @@ import React from 'react';
 import { code, md, Example } from '@atlaskit/docs';
 
 export default md`
-  # Feature flag client
-
   This client makes it easy to work with feature flags and dark features.
   By using it, exposure events will be fired automatically allowing analysis of important metrics out of the box.
 
@@ -110,9 +108,9 @@ export default md`
 
   ${(
     <Example
-      Component={require('../examples/00-basic-usage').default}
-      title="Example"
-      source={require('!!raw-loader!../examples/00-basic-usage')}
+      Component={require('../examples/00-basic').default}
+      title="Basic"
+      source={require('!!raw-loader!../examples/00-basic')}
     />
   )}
 `;

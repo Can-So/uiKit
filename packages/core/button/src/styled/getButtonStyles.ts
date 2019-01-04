@@ -10,18 +10,23 @@ const getProvidedTheme = ({ theme }: StyleProps) =>
   (theme && theme[themeNamespace]) || {};
 
 type StyleProps = Partial<ReturnType<typeof getButtonProps>> & {
-  theme?: string;
+  theme?: any;
 };
 
 const getAppearanceProperty = (
   property: string,
-  appearance,
-  providedTheme,
-  inBuiltTheme,
+  appearance: string | undefined,
+  providedTheme: any,
+  inBuiltTheme: any,
 ) => {
+  const defaultAppearanceStyles = inBuiltTheme.default;
+
+  if (!appearance) {
+    return defaultAppearanceStyles[property];
+  }
+
   const providedAppearanceStyles = providedTheme[appearance];
   const inBuiltAppearanceStyles = inBuiltTheme[appearance];
-  const defaultAppearanceStyles = inBuiltTheme.default;
 
   return (
     (providedAppearanceStyles && providedAppearanceStyles[property]) ||
@@ -160,7 +165,8 @@ export default function getButtonStyles(props: StyleProps) {
   }
 
   // Loading
-  const isLoadingStyles = p => (p.isLoading ? 'pointer-events: none;' : null);
+  const isLoadingStyles = (p: StyleProps) =>
+    p.isLoading ? 'pointer-events: none;' : null;
 
   // Fit to parent width
   if (props.fit) {
@@ -169,7 +175,7 @@ export default function getButtonStyles(props: StyleProps) {
 
   /* Note use of !important to override the ThemeReset on anchor tag styles */
 
-  return css`
+  return css<StyleProps>`
     align-items: baseline;
     background: ${background};
     border-radius: ${borderRadius}px;

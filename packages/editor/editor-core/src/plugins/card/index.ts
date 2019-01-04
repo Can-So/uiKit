@@ -1,5 +1,5 @@
 import { PluginKey } from 'prosemirror-state';
-import { inlineCard, blockCard } from '@atlaskit/editor-common';
+import { inlineCard, blockCard } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import { createPlugin } from './pm-plugins/main';
 import { floatingToolbar } from './toolbar';

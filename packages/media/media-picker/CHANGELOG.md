@@ -1,5 +1,87 @@
 # @atlaskit/media-picker
 
+## 27.0.4
+- [patch] [442821a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/442821a):
+
+  - Fix the issue with being unable to save image inserted into the editor: pass collection to tenant auth for file polling
+
+## 27.0.3
+- [patch] [b677631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b677631):
+
+  - Add new example and ensure occurrenceKey is set for all copy/withToken calls
+
+## 27.0.2
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/media-core@24.7.2
+  - @atlaskit/media-store@9.0.2
+  - @atlaskit/media-test-helpers@18.7.2
+  - @atlaskit/media-card@47.0.0
+
+## 27.0.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
+## 27.0.0
+- [major] [6cb6696](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6cb6696):
+
+  - All file ids returned in any of the triggered events (including syncronouse one like uploads-start) are real file IDs and not a temp. one;
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+- Updated dependencies [096f898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/096f898):
+  - @atlaskit/media-card@46.0.0
+  - @atlaskit/media-editor@21.0.0
+  - @atlaskit/media-store@9.0.0
+  - @atlaskit/media-test-helpers@18.7.0
+  - @atlaskit/media-core@24.7.0
+
+## 26.0.0
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/media-card@45.0.0
+  - @atlaskit/media-editor@20.0.0
+  - @atlaskit/media-store@8.5.1
+  - @atlaskit/media-test-helpers@18.6.2
+  - @atlaskit/media-core@24.6.0
+
+## 25.0.8
+- [patch] [ff8b31d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ff8b31d):
+
+  - Pass uploadParams to createStore when initializing MediaPicker popup. This fixes an issue when calling /copy/withToken endpoint
+
+## 25.0.7
+- [patch] [5f12909](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f12909):
+
+  - remove tenant property from MediaPicker + make show() faster
+
+## 25.0.6
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/flag@9.1.8
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/toggle@5.0.14
+  - @atlaskit/analytics-gas-types@3.2.3
+  - @atlaskit/analytics-listeners@4.1.4
+  - @atlaskit/media-card@44.1.3
+  - @atlaskit/media-core@24.5.2
+  - @atlaskit/media-editor@19.0.2
+  - @atlaskit/media-ui@8.1.2
+  - @atlaskit/docs@6.0.0
+
+## 25.0.5
+- [patch] [92a6240](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/92a6240):
+
+  - Picking video file will now send dimensions same way as image would
+
+## 25.0.4
+- Updated dependencies [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+  - @atlaskit/media-test-helpers@18.5.2
+  - @atlaskit/media-card@44.1.1
+  - @atlaskit/media-ui@8.0.0
+
 ## 25.0.3
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

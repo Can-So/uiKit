@@ -1,43 +1,67 @@
-import { Command } from '../../../types';
-import { findParentNode } from 'prosemirror-utils';
 import { AlignmentState } from '../pm-plugins/main';
-import { isAlignmentAllowed } from '../utils';
+import { toggleBlockMark, changeImageAlignment } from '../../../commands';
+import { Command } from '../../../types/command';
+import { EditorState } from 'prosemirror-state';
 
-const allowedBlocksForAlignment = ['paragraph', 'heading'];
+/**
+ * Iterates over the commands one after the other,
+ * passes the tr through and dispatches the cumulated transaction
+ */
+export const cascadeCommands = (cmds: Array<Command>) => (
+  state: EditorState,
+  dispatch,
+) => {
+  let { tr: baseTr } = state;
+  let shouldDispatch = false;
 
-export function changeAlignment(align: AlignmentState): Command {
-  return (state, dispatch) => {
-    const { selection, tr } = state;
-    const nodesToAlign = [] as any;
-
-    /** Check if any node encountered in the selection is align-able */
-    state.doc.nodesBetween(selection.from, selection.to, (node, pos) => {
-      const resolvedPos = state.doc.resolve(pos);
-      if (isAlignmentAllowed(state, node, resolvedPos)) {
-        nodesToAlign.push({
-          node,
-          depth: resolvedPos.depth,
-          pos,
-        });
-      }
+  const onDispatchAction = tr => {
+    tr.steps.forEach(st => {
+      baseTr.step(st);
     });
-
-    const node = findParentNode(
-      node => allowedBlocksForAlignment.indexOf(node.type.name) > -1,
-    )(state.selection);
-
-    if (!node) {
-      return false;
-    }
-
-    nodesToAlign.forEach(node => {
-      tr.setNodeMarkup(node.pos, undefined, node.node.attrs, [
-        state.schema.marks.alignment.create({ align }),
-      ]);
-    });
-
-    dispatch(tr);
-
-    return true;
+    shouldDispatch = true;
   };
-}
+
+  cmds.forEach(cmd => {
+    cmd(state, onDispatchAction);
+  });
+
+  if (dispatch && shouldDispatch) {
+    dispatch(baseTr);
+    return true;
+  }
+  return false;
+};
+
+export const isAlignable = (align?: AlignmentState): Command => (
+  state,
+  dispatch,
+) => {
+  const {
+    nodes: { paragraph, heading },
+    marks: { alignment },
+  } = state.schema;
+  return toggleBlockMark(
+    alignment,
+    () => (!align ? undefined : align === 'start' ? false : { align }),
+    [paragraph, heading],
+  )(state, dispatch);
+};
+
+export const changeAlignment = (align?: AlignmentState): Command => (
+  state,
+  dispatch,
+) => {
+  const {
+    nodes: { paragraph, heading },
+    marks: { alignment },
+  } = state.schema;
+
+  return cascadeCommands([
+    changeImageAlignment(align),
+    toggleBlockMark(
+      alignment,
+      () => (!align ? undefined : align === 'start' ? false : { align }),
+      [paragraph, heading],
+    ),
+  ])(state, dispatch);
+};

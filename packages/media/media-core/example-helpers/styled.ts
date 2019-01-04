@@ -7,11 +7,12 @@ export interface FilesWrapperProps {
   status: FileStatus;
 }
 
-const statusColorMap = {
+const statusColorMap: { [key in FileStatus]: string } = {
   uploading: 'cornflowerblue',
   processing: 'peachpuff',
   processed: 'darkseagreen',
   error: 'indianred',
+  'failed-processing': 'indianred',
 };
 
 export const FileWrapper = styled.div`
@@ -44,4 +45,11 @@ export const Header = styled.div`
   button {
     margin: 5px;
   }
+`;
+
+export const FileStateWrapper = styled.div`
+  border: 1px solid;
+  margin: 10px;
+  padding: 10px;
+  width: 500px;
 `;

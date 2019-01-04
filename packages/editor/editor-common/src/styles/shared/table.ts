@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
+import { TableLayout } from '@atlaskit/adf-schema';
 import { fontSize } from '@atlaskit/theme';
-import { TableLayout } from '../../schema';
 import {
   akEditorTableBorder,
   akEditorTableToolbar,
@@ -9,10 +9,12 @@ import {
   akEditorBreakoutPadding,
 } from '../consts';
 import { PanelSharedCssClassName } from './panel';
+import { calcWideWidth } from '../../utils';
 
 export const tableMarginTop = 24;
 export const tableMarginBottom = 16;
 export const tableMarginSides = 8;
+export const tableCellMinWidth = 48;
 
 const clPrefix = 'pm-table-';
 
@@ -71,7 +73,7 @@ const tableSharedStyle = css`
       }
       th,
       td {
-        min-width: 128px;
+        min-width: ${tableCellMinWidth}px;
         height: 3em;
         vertical-align: top;
         border: 1px solid ${akEditorTableBorder};
@@ -115,9 +117,7 @@ export const calcTableWidth = (
       if (containerWidth) {
         const targetWidth =
           containerWidth - (addControllerPadding ? akEditorBreakoutPadding : 0);
-        return targetWidth < akEditorWideLayoutWidth
-          ? `${targetWidth}px`
-          : `${akEditorWideLayoutWidth}px`;
+        return calcWideWidth(containerWidth, targetWidth, `${targetWidth}px`);
       } else {
         return `${akEditorWideLayoutWidth}px`;
       }

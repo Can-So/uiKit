@@ -3,30 +3,16 @@ import { shallow } from 'enzyme';
 import { UrlPreview } from '@atlaskit/media-core';
 import {
   genericLinkDetails,
-  emptyLinkDetails,
   spotifyLinkDetails,
   youtubeLinkDetails,
 } from '@atlaskit/media-test-helpers';
 
 import { LinkCard, LinkCardGenericView } from '../..';
-import { A } from '../../card/styled';
-import { CardGenericViewSmall } from '../../../utils/cardGenericViewSmall';
 import { URLEmbedCard } from '../../embed/urlEmbedCard';
 import { HTMLEmbedCard } from '../../embed/htmlEmbedCard';
 
 describe('LinkCard', () => {
   describe('.render()', () => {
-    it('should render LinkCardViewSmall when appearance="small"', () => {
-      const card = shallow(
-        <LinkCard
-          status="complete"
-          appearance="small"
-          details={genericLinkDetails}
-        />,
-      );
-      expect(card.find(CardGenericViewSmall).exists()).toBeTruthy();
-    });
-
     it('should render LinkCardGenericView when appearance="image"', () => {
       const card = shallow(
         <LinkCard
@@ -129,34 +115,6 @@ describe('LinkCard', () => {
         <LinkCard status="complete" details={genericLinkDetails} />,
       );
       expect(element.find(LinkCardGenericView).exists()).toBeTruthy();
-    });
-
-    it('should not render an A tag when status is "loading"', () => {
-      const element = shallow(
-        <LinkCard status="loading" details={genericLinkDetails} />,
-      );
-      expect(element.find(A)).toHaveLength(0);
-    });
-
-    it('should not render an A tag when status is "processing"', () => {
-      const element = shallow(
-        <LinkCard status="processing" details={genericLinkDetails} />,
-      );
-      expect(element.find(A)).toHaveLength(0);
-    });
-
-    it('should not render an A tag when status is "error"', () => {
-      const element = shallow(
-        <LinkCard status="error" details={genericLinkDetails} />,
-      );
-      expect(element.find(A)).toHaveLength(0);
-    });
-
-    it('should not render an A tag when URL is not present', () => {
-      const element = shallow(
-        <LinkCard status="complete" details={emptyLinkDetails} />,
-      );
-      expect(element.find(A)).toHaveLength(0);
     });
   });
 });

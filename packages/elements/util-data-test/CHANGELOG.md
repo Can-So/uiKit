@@ -1,5 +1,43 @@
 # @atlaskit/util-data-test
 
+## 10.0.29
+- [patch] [551696e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/551696e):
+
+  - FS-3398 Fix incorrect event type for mention's "rendered" analytics event, ui -> operational
+
+## 10.0.28
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/emoji@49.0.0
+  - @atlaskit/task-decision@11.1.1
+
+## 10.0.27
+- [patch] [015fcd0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/015fcd0):
+
+  - Adjusted unit tests to test for the bug noticed in FS-3259. Added multiple atlassian-ftfy emoji to test this, so updated a unit test to confirm that there are 14 Atlassian emoji, and also added an additional unit test to confirm that FS-3259 was corrected.
+
+## 10.0.26
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/emoji@48.0.0
+  - @atlaskit/task-decision@11.0.9
+
+## 10.0.25
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/emoji@47.0.7
+  - @atlaskit/mention@15.1.8
+  - @atlaskit/task-decision@11.0.8
+  - @atlaskit/util-service-support@3.0.5
+  - @atlaskit/docs@6.0.0
+
+## 10.0.24
+- [patch] [e0c91b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e0c91b6):
+
+  - FS-3310 Fix handling of duplicate users in mention typeahead causing HOT-85672
+
+## 10.0.23
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
 ## 10.0.22
 - [patch] [10a728e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/10a728e):
 

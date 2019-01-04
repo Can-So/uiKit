@@ -331,7 +331,7 @@ export const TransformedResponse = [
     href:
       'https://product-fabric.atlassian.net/issues/?filter=-3&searchSessionId=session&searchContentType=filter&searchObjectId=-3',
     analyticsType: 'recent-jira',
-    avatarUrl: 'undefined',
+    avatarUrl: undefined,
     contentType: 'jira-filter',
     objectKey: 'Filters',
     containerName: 'Ahmed Fouad',

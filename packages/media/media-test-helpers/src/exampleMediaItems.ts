@@ -5,7 +5,10 @@ import {
   FileDetails,
 } from '@atlaskit/media-core';
 import { ExternalImageIdentifier } from '@atlaskit/media-card';
-import { defaultCollectionName as collectionName } from './collectionNames';
+import {
+  defaultCollectionName as collectionName,
+  onlyAnimatedGifsCollectionName,
+} from './collectionNames';
 
 const fileType: MediaItemType = 'file';
 const linkType: MediaItemType = 'link';
@@ -155,6 +158,12 @@ export const videoLargeFileId = {
   collectionName,
 };
 
+export const videoSquareFileId = {
+  id: 'cdff20d6-2c0a-4d0d-b2a9-22cc728a0368',
+  mediaItemType: fileType,
+  collectionName,
+};
+
 export const videoProcessingFailedId = {
   id: 'e558199f-f982-4d23-93eb-313be5998d1b',
   mediaItemType: fileType,
@@ -230,6 +239,12 @@ export const noMetadataFileId = {
   id: '1adaf6f9-37f6-4171-ab6b-455ec3115381',
   mediaItemType: fileType,
   collectionName,
+};
+
+export const animatedFileId = {
+  id: 'af637c7a-75c3-4254-b074-d16e6ae2e04b',
+  mediaItemType: fileType,
+  collectionName: onlyAnimatedGifsCollectionName,
 };
 // === EXTERNAL IMAGE ===
 

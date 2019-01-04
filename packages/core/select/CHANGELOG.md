@@ -1,5 +1,59 @@
 # @atlaskit/select
 
+## 6.1.16
+- [patch] [b9b1900](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9b1900):
+
+  - Use @atlaskit/select instead of @atlaskit/single-select on the Fullscreen examples on website
+
+## 6.1.15
+- [patch] [6195ac3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6195ac3):
+
+  - remove animated functionality to temporarily resolve blocking issue with portal
+
+## 6.1.14
+- [patch] [a048a85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a048a85):
+
+  - Updated to be compatible with new Forms API
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/form@5.0.0
+
+## 6.1.13
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/checkbox@5.0.9
+  - @atlaskit/form@4.0.21
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/docs@6.0.0
+
+## 6.1.12
+- [patch] [82fc5f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82fc5f5):
+
+  - Pinning react-popper to 1.0.2 to avoid recursive bug
+
+## 6.1.11
+- [patch] [bfc508c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfc508c):
+
+  - CheckboxSelect options now have correct flex styles on the option value
+
+## 6.1.10
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/checkbox@5.0.8
+  - @atlaskit/form@4.0.20
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+
 ## 6.1.9
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

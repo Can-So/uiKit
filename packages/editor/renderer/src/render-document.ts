@@ -1,6 +1,6 @@
 import { Serializer } from './serializer';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import {
-  defaultSchema,
   getValidDocument,
   getValidNode,
   ADNode,

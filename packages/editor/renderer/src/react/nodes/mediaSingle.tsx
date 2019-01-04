@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { Component, ReactElement } from 'react';
 import styled from 'styled-components';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import {
   MediaSingle as UIMediaSingle,
-  MediaSingleLayout,
   WidthConsumer,
   akEditorFullPageMaxWidth,
   mapBreakpointToLayoutMaxWidth,
+  ImageLoaderProps,
 } from '@atlaskit/editor-common';
 import { FullPagePadding } from '../../ui/Renderer/style';
 import { RendererAppearance } from '../../ui/Renderer';
+import { MediaProps } from './media';
 
 export interface Props {
   children: ReactElement<any>;
@@ -39,7 +41,7 @@ export default class MediaSingle extends Component<
     layout: MediaSingleLayout;
     width?: number;
     allowDynamicTextSizing?: boolean;
-    appearance: RendererAppearance;
+    rendererAppearance: RendererAppearance;
   },
   State
 > {
@@ -57,7 +59,6 @@ export default class MediaSingle extends Component<
 
   render() {
     const { props } = this;
-    let hideProgress = false;
 
     const child = React.Children.only(
       React.Children.toArray(props.children)[0],
@@ -78,12 +79,11 @@ export default class MediaSingle extends Component<
     if (width === null) {
       width = DEFAULT_WIDTH;
       height = DEFAULT_HEIGHT;
-      hideProgress = true;
     }
 
     // TODO: put appearance-based padding into theme instead
     const padding =
-      this.props.appearance === 'full-page' ? FullPagePadding * 2 : 0;
+      this.props.rendererAppearance === 'full-page' ? FullPagePadding * 2 : 0;
 
     return (
       <WidthConsumer>
@@ -111,11 +111,11 @@ export default class MediaSingle extends Component<
               pctWidth={props.width}
             >
               {React.cloneElement(child, {
+                resizeMode: 'stretchy-fit',
                 cardDimensions,
                 onExternalImageLoaded: this.onExternalImageLoaded,
                 disableOverlay: true,
-                hideProgress,
-              })}
+              } as MediaProps & ImageLoaderProps)}
             </ExtendedUIMediaSingle>
           );
         }}

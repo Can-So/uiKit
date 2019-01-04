@@ -6,11 +6,11 @@ import Button from '@atlaskit/button';
 import { Auth, ProcessedFileState } from '@atlaskit/media-core';
 import Spinner from '@atlaskit/spinner';
 import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { createContext } from '../../../_stubs';
 import { VideoViewer, Props } from '../../../../../newgen/viewers/video';
 import { Video } from '../../../../../newgen/styled';
 import { ErrorMessage } from '../../../../../newgen/error';
-import { CustomVideo } from '../../../../../newgen/viewers/video/customVideo';
 
 const token = 'some-token';
 const clientId = 'some-client-id';
@@ -30,6 +30,20 @@ const videoItem: ProcessedFileState = {
     },
     'video_1280.mp4': {
       url: '/video_hd',
+      processingStatus: 'succeeded',
+    },
+  },
+};
+const sdVideoItem: ProcessedFileState = {
+  id: 'some-id',
+  status: 'processed',
+  name: 'my video',
+  size: 11222,
+  mediaType: 'video',
+  mimeType: 'mp4',
+  artifacts: {
+    'video_640.mp4': {
+      url: '/video',
       processingStatus: 'succeeded',
     },
   },
@@ -68,7 +82,7 @@ describe('Video viewer', () => {
     await (el as any).instance()['init']();
     el.update();
     expect(el.find(Video).prop('src')).toEqual(
-      'some-base-url/video?client=some-client-id&token=some-token',
+      'some-base-url/video_hd?client=some-client-id&token=some-token',
     );
   });
 
@@ -137,9 +151,9 @@ describe('Video viewer', () => {
     await (el as any).instance()['init']();
     el.update();
 
-    expect(el.find(CustomVideo)).toHaveLength(1);
-    expect(el.find(CustomVideo).prop('src')).toEqual(
-      'some-base-url/video?client=some-client-id&token=some-token',
+    expect(el.find(CustomMediaPlayer)).toHaveLength(1);
+    expect(el.find(CustomMediaPlayer).prop('src')).toEqual(
+      'some-base-url/video_hd?client=some-client-id&token=some-token',
     );
   });
 
@@ -151,11 +165,37 @@ describe('Video viewer', () => {
 
     await (el as any).instance()['init']();
     el.update();
-    expect(el.state('isHDActive')).toBeFalsy();
+    expect(el.state('isHDActive')).toBeTruthy();
     el.find(Button)
       .at(2)
       .simulate('click');
+    expect(el.state('isHDActive')).toBeFalsy();
+  });
+
+  it('should default to hd if available', async () => {
+    const authPromise = Promise.resolve({ token, clientId, baseUrl });
+    const { el } = createFixture(authPromise, {
+      featureFlags: { customVideoPlayer: true },
+    });
+
+    await (el as any).instance()['init']();
+    el.update();
     expect(el.state('isHDActive')).toBeTruthy();
+  });
+
+  it('should default to sd if hd is not available', async () => {
+    const authPromise = Promise.resolve({ token, clientId, baseUrl });
+    const { el } = createFixture(
+      authPromise,
+      {
+        featureFlags: { customVideoPlayer: true },
+      },
+      sdVideoItem,
+    );
+
+    await (el as any).instance()['init']();
+    el.update();
+    expect(el.state('isHDActive')).toBeFalsy();
   });
 
   describe('AutoPlay', () => {
@@ -180,25 +220,25 @@ describe('Video viewer', () => {
 
     it('should auto play custom video viewer when it is the first preview', async () => {
       const el = await createAutoPlayFixture(0, true);
-      expect(el.find(CustomVideo)).toHaveLength(1);
+      expect(el.find(CustomMediaPlayer)).toHaveLength(1);
       expect(el.find({ autoPlay: true })).toHaveLength(2);
     });
 
     it('should not auto play custom video viewer when it is not the first preview', async () => {
       const el = await createAutoPlayFixture(1, true);
-      expect(el.find(CustomVideo)).toHaveLength(1);
+      expect(el.find(CustomMediaPlayer)).toHaveLength(1);
       expect(el.find({ autoPlay: true })).toHaveLength(0);
     });
 
     it('should auto play native video viewer when it is the first preview', async () => {
       const el = await createAutoPlayFixture(0, false);
-      expect(el.find(CustomVideo)).toHaveLength(0);
+      expect(el.find(CustomMediaPlayer)).toHaveLength(0);
       expect(el.find({ autoPlay: true })).toHaveLength(2);
     });
 
     it('should not auto play native video viewer when it is not the first preview', async () => {
       const el = await createAutoPlayFixture(1, false);
-      expect(el.find(CustomVideo)).toHaveLength(0);
+      expect(el.find(CustomMediaPlayer)).toHaveLength(0);
       expect(el.find({ autoPlay: true })).toHaveLength(0);
     });
   });

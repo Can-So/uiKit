@@ -1,4 +1,4 @@
-import { md } from '@atlaskit/docs';
+import { md, code } from '@atlaskit/docs';
 
 export default md`
   # Intro
@@ -9,7 +9,7 @@ export default md`
 
   Say you have a mechnism to handle certain types of links. You can utilise that for smart cards. You'll need to build a function that will return an Promise of ResolveResponse. Having that, you can use a Provider to provide a "custom" client:
 
-  ~~~
+  ${code`
   const myDefinitionId = uuid.v4();
 
   const customResponse = {
@@ -39,22 +39,32 @@ export default md`
     ...
   </Provider>
   ...
-  ~~~
+ `}
 
   ## Customizing Client
 
-  1. You can set the timeout for cache. Meaning that when resolving happens, the resolved data will be good for ~date.now + lifespan~ time.
+  You can set the timeout for cache. Meaning that when resolving happens, the resolved data will be good for \`date.now + lifespan\`.
 
-  2. Also, you can pass a custom function that will return "current time".
+  Also, you can pass a custom function that will return "current time".
 
-  ~~~
-  // 60 seconds for data and mocked time
-  new Client(60*1000, () => mockedDate.now());
-  ~~~
+  ${code`
+  new Client({
+    cacheLifespan: 60000,                  // 60s
+    getNowTimeFn: () => mockedDate.now()), // mock the time
+  })
+  `}
+
+  The cards will delay showing loading indicator. You can control that behaviour with an option:
+
+  ${code`
+  new Client({
+    loadingStateDelay: 5000 // show loading animation after 5s
+  })
+  `}
 
   ## ResolveResponse type
 
-  ~~~
+  ${code`
   type RemoteResourceAuthConfig = {
     key: string;
     displayName: string;
@@ -72,7 +82,7 @@ export default md`
       [name: string]: any;
     };
   }
-  ~~~
+  `}
 
   ## Internal workflow
 

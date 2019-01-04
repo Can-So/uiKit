@@ -24,6 +24,7 @@ import {
   tdCursor,
   hardBreak,
   a,
+  panel,
   MockMacroProvider,
 } from '@atlaskit/editor-test-helpers';
 import mediaPlugin from '../../../../plugins/media';
@@ -31,8 +32,9 @@ import codeBlockPlugin from '../../../../plugins/code-block';
 import extensionPlugin from '../../../../plugins/extension';
 import tablesPlugin from '../../../../plugins/table';
 import macroPlugin, { setMacroProvider } from '../../../../plugins/macro';
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
+import { panelPlugin } from '../../../../plugins';
 
 describe('paste plugins', () => {
   const editor = (doc: any) =>
@@ -45,6 +47,7 @@ describe('paste plugins', () => {
         extensionPlugin,
         tasksAndDecisionsPlugin,
         tablesPlugin(),
+        panelPlugin,
       ],
     });
 
@@ -52,7 +55,7 @@ describe('paste plugins', () => {
     createEditor({
       doc,
       editorPlugins: [mediaPlugin(), codeBlockPlugin()],
-      editorProps: { appearance: 'message' },
+      editorProps: { appearance: 'message', allowPanel: true },
     });
 
   describe('handlePaste', () => {
@@ -102,6 +105,32 @@ describe('paste plugins', () => {
                   type: 'file',
                   collection: 'MediaServicesSample',
                   __fileMimeType: 'image/jpeg',
+                })(),
+              ),
+              p(),
+            ),
+          );
+        });
+      });
+
+      describe('when an external image is copied', () => {
+        const externalMediaHtml = `
+         <meta charset='utf-8'><img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;w=1000&amp;q=80" alt="Image result for cat"/>
+        `;
+
+        it('should insert as external media single', () => {
+          const { editorView } = editor(doc(p('{<>}')));
+          dispatchPasteEvent(editorView, {
+            html: externalMediaHtml,
+          });
+
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              mediaSingle({ layout: 'center' })(
+                media({
+                  type: 'external',
+                  url:
+                    'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
                 })(),
               ),
               p(),
@@ -503,6 +532,23 @@ describe('paste plugins', () => {
 
       expect(editorView.state.doc).toEqualDocument(
         doc(bodiedExtension(attrs)(p('Hello')), p('llo')),
+      );
+    });
+  });
+
+  describe('panel copy-paste', () => {
+    it('should paste a panel when it is copied from editor / renderer', () => {
+      const html = `
+        <meta charset='utf-8'>
+          <p>hello</p>
+          <div class="ak-editor-panel" data-panel-type="info"><span class="ak-editor-panel__icon"><span class="Icon__IconWrapper-dyhwwi-0 bcqBjl" aria-label="Panel info"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" role="presentation"><path d="M12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-8.5a1 1 0 0 0-1 1V15a1 1 0 0 0 2 0v-2.5a1 1 0 0 0-1-1zm0-1.125a1.375 1.375 0 1 0 0-2.75 1.375 1.375 0 0 0 0 2.75z" fill="currentColor" fill-rule="evenodd"></path></svg></span></span><div class="ak-editor-panel__content"><p>Inside panel</p></div></div>
+          <p>world</p>
+      `;
+
+      const { editorView } = editor(doc(p('{<>}')));
+      dispatchPasteEvent(editorView, { html });
+      expect(editorView.state.doc).toEqualDocument(
+        doc(p('hello'), panel()(p('Inside panel')), p('world')),
       );
     });
   });

@@ -3,6 +3,11 @@ declare var global: any;
 // TO-DO remove chai validation
 import { expect } from 'chai';
 import {
+  isSafeUrl,
+  defaultSchema as schema,
+  createSchema,
+} from '@atlaskit/adf-schema';
+import {
   ADDoc,
   isSubSupType,
   getValidDocument,
@@ -14,9 +19,6 @@ import {
   markOrder,
   ADNode,
 } from '../../../utils/validator';
-import { isSafeUrl } from '../../../utils/url';
-import { defaultSchema as schema } from '../../../schema/default-schema';
-import { createSchema } from '../../../schema/create-schema';
 
 describe('Renderer - Validator', () => {
   describe('isSafeUrl', () => {
@@ -1033,6 +1035,31 @@ describe('Renderer - Validator', () => {
                 id: '5556346b-b081-482b-bc4a-4faca8ecd2de',
                 collection: 'MediaServicesSample',
               },
+            },
+          ],
+        };
+
+        expect(getValidNode(validADFChunk)).toEqual(validADFChunk);
+      });
+
+      it('should return "mediaSingle" with link-mark', () => {
+        const validADFChunk = {
+          type: 'mediaSingle',
+          attrs: { layout: 'full-width' },
+          content: [
+            {
+              type: 'media',
+              attrs: {
+                type: 'file',
+                id: '5556346b-b081-482b-bc4a-4faca8ecd2de',
+                collection: 'MediaServicesSample',
+              },
+            },
+          ],
+          marks: [
+            {
+              type: 'link',
+              href: 'https://www.atlassian.com',
             },
           ],
         };

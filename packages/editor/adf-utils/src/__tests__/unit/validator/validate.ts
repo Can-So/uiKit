@@ -4,7 +4,7 @@ import { validator } from '../../../validator';
 const validate = validator();
 
 declare var __dirname: string;
-const BASE_DIR = `${__dirname}/../../../../../editor-common/src/__tests__/unit/json-schema/v1-reference`;
+const BASE_DIR = `${__dirname}/../../../../../adf-schema/src/__tests__/unit/json-schema/v1-reference`;
 
 const readFilesSync = (path: string) =>
   fs.readdirSync(path).reduce(
@@ -21,7 +21,7 @@ const readFilesSync = (path: string) =>
   );
 
 describe('validate', () => {
-  ['stage-0'].forEach(schemaType => {
+  ['full', 'stage-0'].forEach(schemaType => {
     const valid = readFilesSync(`${BASE_DIR}/${schemaType}/valid`);
     valid.forEach(file => {
       // Don't test Application Card

@@ -33,6 +33,7 @@ import { setTextSelection } from '../../../../../index';
 const RowControlsButtonWrap = `.${ClassName.ROW_CONTROLS_BUTTON_WRAP}`;
 const DeleteRowButton = `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP}`;
 const InsertRowButton = `.${ClassName.CONTROLS_INSERT_BUTTON_WRAP}`;
+const InsertColumnButtonInner = `.${ClassName.CONTROLS_INSERT_BUTTON_INNER}`;
 
 const selectRows = rowIdxs => tr => {
   const cells: { pos: number; start: number; node: Node }[] = rowIdxs.reduce(
@@ -270,7 +271,7 @@ describe('RowControls', () => {
     floatingControls.unmount();
   });
 
-  describe('hides an add button when delete button overlaps it', () => {
+  describe('hides add button when delete button overlaps it', () => {
     it('hides one when two rows are selected', () => {
       const { editorView } = editor(
         doc(
@@ -345,6 +346,69 @@ describe('RowControls', () => {
       floatingControls.setProps({ tableHeight: 100 });
 
       expect(floatingControls.find(DeleteRowButton).length).toBe(1);
+
+      floatingControls.unmount();
+    });
+  });
+
+  describe('hides add button when isResizing prop is truthy', () => {
+    it('unaffected add button when isRsizing is falsy', () => {
+      const { editorView } = editor(
+        doc(
+          table()(
+            tr(thEmpty, thEmpty, thEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+          ),
+        ),
+      );
+
+      const floatingControls = mountWithIntl(
+        <RowControls
+          tableRef={document.querySelector('table')!}
+          editorView={editorView}
+          hoverRows={(rows, danger) => {
+            hoverRows(rows, danger)(editorView.state, editorView.dispatch);
+          }}
+          selectRow={row => {
+            editorView.dispatch(selectRow(row)(editorView.state.tr));
+          }}
+          insertRowButtonIndex={1}
+        />,
+      );
+
+      expect(floatingControls.find(InsertColumnButtonInner).length).toBe(1);
+
+      floatingControls.unmount();
+    });
+
+    it('hides add button when isRsizing is truthy', () => {
+      const { editorView } = editor(
+        doc(
+          table()(
+            tr(thEmpty, thEmpty, thEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+            tr(tdEmpty, tdEmpty, tdEmpty),
+          ),
+        ),
+      );
+
+      const floatingControls = mountWithIntl(
+        <RowControls
+          tableRef={document.querySelector('table')!}
+          editorView={editorView}
+          hoverRows={(rows, danger) => {
+            hoverRows(rows, danger)(editorView.state, editorView.dispatch);
+          }}
+          selectRow={row => {
+            editorView.dispatch(selectRow(row)(editorView.state.tr));
+          }}
+          insertRowButtonIndex={1}
+          isResizing={true}
+        />,
+      );
+
+      expect(floatingControls.find(InsertColumnButtonInner).length).toBe(0);
 
       floatingControls.unmount();
     });

@@ -14,6 +14,7 @@ export { textColor } from './marks/text-color';
 export { underline } from './marks/underline';
 export { underline as u } from './marks/underline';
 export { alignment } from './marks/alignment';
+export { indentation } from './marks/indentation';
 
 // Nodes Builders
 

@@ -3,14 +3,14 @@
 import React, { Component, type Node } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider } from 'styled-components';
-
+import exenv from 'exenv';
 import type { ThemeModes, ThemeProps } from '../types';
 import * as colors from '../colors';
 
 import { CHANNEL, DEFAULT_THEME_MODE } from '../constants';
 
 // For forward-compat until everything is upgraded.
-import { Provider } from './Context';
+import Theme from './Theme';
 
 function getStylesheetResetCSS(state: ThemeProps) {
   const backgroundColor = colors.background(state);
@@ -89,7 +89,7 @@ export default class AtlaskitThemeProvider extends Component<
     return { hasAtlaskitThemeProvider: true };
   }
   componentWillMount() {
-    if (!this.context.hasAtlaskitThemeProvider) {
+    if (!this.context.hasAtlaskitThemeProvider && exenv.canUseDOM) {
       const css = getStylesheetResetCSS(this.state);
       this.stylesheet = document.createElement('style');
       this.stylesheet.type = 'text/css';
@@ -124,11 +124,11 @@ export default class AtlaskitThemeProvider extends Component<
       allows us to use components converted to use the new API with consumers
       using the old provider along side components that may still be using the
       old theming API. */
-      <Provider value={{ mode: theme[CHANNEL].mode }}>
+      <Theme.Provider value={() => ({ mode: theme[CHANNEL].mode })}>
         <ThemeProvider theme={theme}>
           <LegacyReset>{children}</LegacyReset>
         </ThemeProvider>
-      </Provider>
+      </Theme.Provider>
     );
   }
 }

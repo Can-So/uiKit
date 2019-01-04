@@ -1,5 +1,55 @@
 # @atlaskit/datetime-picker
 
+## 6.3.24
+- [patch] [55e0a3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55e0a3a):
+
+  - Fixes keyboard entry bug
+- [patch] [075dfa2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/075dfa2):
+
+  - Allowing control of input value in datetime-picker
+
+## 6.3.23
+- [patch] [4c4bdc5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c4bdc5):
+
+  - AK-5672 - Refactor parseTime by separating logic and concerns into smaller, testable functions. Fixes meridiem issues.
+- [patch] [58a40bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58a40bf):
+
+  - Factoring in meridiem for 24hr time in editable
+
+## 6.3.22
+- [patch] [5c548ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c548ea):
+
+  - Removing extraneous wrapping span around icons which was causing an accessibility error
+
+## 6.3.21
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/calendar@7.0.16
+  - @atlaskit/field-base@11.0.13
+  - @atlaskit/field-range@5.0.12
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/popper@0.3.6
+  - @atlaskit/select@6.1.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 6.3.20
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/calendar@7.0.15
+  - @atlaskit/field-base@11.0.12
+  - @atlaskit/field-range@5.0.11
+  - @atlaskit/field-text@7.0.16
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/popper@0.3.3
+  - @atlaskit/select@6.1.10
+  - @atlaskit/theme@7.0.0
+
 ## 6.3.19
 - Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
   - @atlaskit/docs@5.2.2

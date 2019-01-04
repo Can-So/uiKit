@@ -50,9 +50,10 @@ import { Browser } from '../../../../../../components/browser';
 import { menuDelete } from '../../../editor/phrases';
 import { LocalUploadFileMetadata } from '../../../../../domain/local-upload';
 
+// TODO: Fix this
 const ConnectedUploadViewWithStore = getComponentClassWithStore(
   ConnectedUploadView,
-);
+) as any;
 
 const createConnectedComponent = (
   state: State,
@@ -191,7 +192,7 @@ describe('<StatelessUploadView />', () => {
               id: 'id1',
               mimeType: 'image/jpeg',
               name: 'some-file-name',
-              upfrontId,
+              userUpfrontId: upfrontId,
             },
           },
         } as LocalUpload,
@@ -264,7 +265,7 @@ describe('<StatelessUploadView />', () => {
           },
         ] as SelectedItem[],
       };
-      const component = mount(
+      const component = mount<UploadViewProps, UploadViewState>(
         getUploadViewElement(
           false,
           [],
@@ -337,7 +338,7 @@ describe('<StatelessUploadView />', () => {
     });
 
     const setup = () => {
-      const component = mount(
+      const component = mount<UploadViewProps, UploadViewState>(
         getUploadViewElement(
           false,
           [
@@ -437,14 +438,6 @@ describe('<UploadView />', () => {
           },
           index: 0,
           events: [],
-          tenant: {
-            auth: {
-              clientId: 'some-tenant-client-id',
-              token: 'some-tenant-client-token',
-              baseUrl: 'some-base-url',
-            },
-            uploadParams: {},
-          },
           progress: 0,
           timeStarted: 0,
         },

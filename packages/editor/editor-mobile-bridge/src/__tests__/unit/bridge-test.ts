@@ -27,12 +27,12 @@ describe('lists should work', () => {
   let bridge: any = new WebBridgeImpl();
   beforeEach(() => {
     bridge.editorView = {};
-    bridge.listState = {};
+    bridge.listBridgeState = {};
   });
 
   afterEach(() => {
     bridge.editorView = undefined;
-    bridge.listState = undefined;
+    bridge.listBridgeState = undefined;
   });
 
   it('should call ordered list toggle', () => {
@@ -47,7 +47,7 @@ describe('lists should work', () => {
   });
 
   it('should not call ordered list if state is undefined', () => {
-    bridge.listState = undefined;
+    bridge.listBridgeState = undefined;
     bridge.onOrderedListSelected();
     expect(toggleOrderedList).not.toBeCalled();
   });
@@ -64,7 +64,7 @@ describe('lists should work', () => {
   });
 
   it('should not call bullet list if state is undefined', () => {
-    bridge.listState = undefined;
+    bridge.listBridgeState = undefined;
     bridge.onBulletListSelected();
     expect(toggleBulletList).not.toBeCalled();
   });
@@ -81,7 +81,7 @@ describe('lists should work', () => {
   });
 
   it('should not call indent list if state is undefined', () => {
-    bridge.listState = undefined;
+    bridge.listBridgeState = undefined;
     bridge.onIndentList();
     expect(indentList).not.toBeCalled();
   });
@@ -98,7 +98,7 @@ describe('lists should work', () => {
   });
 
   it('should not call outdent list if state is undefined', () => {
-    bridge.listState = undefined;
+    bridge.listBridgeState = undefined;
     bridge.onOutdentList();
     expect(outdentList).not.toBeCalled();
   });

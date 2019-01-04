@@ -1,5 +1,40 @@
 # @atlaskit/media-core
 
+## 24.7.2
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/media-store@9.0.2
+  - @atlaskit/media-test-helpers@18.7.2
+  - @atlaskit/media-card@47.0.0
+
+## 24.7.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
+## 24.7.0
+- [minor] [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+
+  - New method context.file.touchFiles is added; Optional third parameter is added to context.file.upload - loadableFileUpfrontIds where you can define file id, and promise of upload id upfront
+- Updated dependencies [096f898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/096f898):
+  - @atlaskit/media-test-helpers@18.7.0
+  - @atlaskit/media-store@9.0.0
+
+## 24.6.0
+- [minor] [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+
+  - Add stretchy-fit resize mode that acts as full-fit but scales up small image in big container
+
+## 24.5.3
+- [patch] [0f42ec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f42ec1):
+
+  Use /items endpoint in media-core
+
+## 24.5.2
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/media-card@44.1.3
+  - @atlaskit/docs@6.0.0
+
 ## 24.5.1
 - Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
   - @atlaskit/docs@5.2.1

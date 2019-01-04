@@ -9,3 +9,9 @@ export interface MediaAuthConfig {
   clientId: string;
   baseUrl: string;
 }
+
+export interface NativeFetchResponse {
+  response: string;
+  status: number;
+  statusText: string;
+}

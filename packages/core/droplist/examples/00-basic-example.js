@@ -7,10 +7,12 @@ import DropList from '../src';
 
 type State = {|
   eventResult: string,
+  isOpen: boolean,
 |};
 export default class BasicExample extends PureComponent<void, State> {
   state = {
     eventResult: 'Click into and out of the content to trigger event handlers',
+    isOpen: false,
   };
 
   onKeyDown = () => {
@@ -22,11 +24,13 @@ export default class BasicExample extends PureComponent<void, State> {
   onClick = () => {
     this.setState({
       eventResult: 'onClick called',
+      isOpen: !this.state.isOpen,
     });
   };
   onOpenChange = () => {
     this.setState({
       eventResult: 'onOpenChange called',
+      isOpen: false,
     });
   };
   onItemActivated = () => {
@@ -57,8 +61,8 @@ export default class BasicExample extends PureComponent<void, State> {
           isTriggerNotTabbable
           onOpenChange={this.onOpenChange}
           onClick={this.onClick}
-          isOpen
-          trigger={<Button isSelected>...</Button>}
+          isOpen={this.state.isOpen}
+          trigger={<Button>...</Button>}
         >
           <ItemGroup title="Australia">
             <Item href="//atlassian.com" target="_blank">

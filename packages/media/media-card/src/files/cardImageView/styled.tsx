@@ -3,9 +3,9 @@
 import styled from 'styled-components';
 
 import { ComponentClass } from 'react';
-import { akColorN20, akColorB200 } from '@atlaskit/util-shared-styles';
 import { Root, cardShadow } from '../../styles';
 import { borderRadius, size } from '@atlaskit/media-ui';
+import { colors, themed } from '@atlaskit/theme';
 
 export interface WrapperProps {
   disableOverlay?: boolean;
@@ -28,17 +28,25 @@ const getCursorAttribute = () => {
 const getBorderAttribute = (props: WrapperProps) => {
   const { selected, selectable } = props;
   return `border: 2px solid ${
-    selected && selectable ? akColorB200 : 'transparent'
+    selected && selectable ? colors.B200 : 'transparent'
   };`;
 };
 
 const getBackgroundColor = (props: WrapperProps) => {
   const { mediaType } = props;
-  return `background: ${mediaType === 'image' ? 'transparent' : akColorN20};`;
+  return `background: ${
+    mediaType === 'image'
+      ? 'transparent'
+      : themed({ light: colors.N20, dark: colors.DN50 })(props)
+  };`;
 };
 
 export const Wrapper: ComponentClass<WrapperProps> = styled(Root)`
-  ${getShadowAttribute} ${getCursorAttribute} ${borderRadius} background: #fff;
+  ${getShadowAttribute}
+  ${getCursorAttribute}
+  ${borderRadius}
+  background: ${themed({ light: '#FFF', dark: colors.DN50 })};
+
   line-height: normal;
   position: relative;
 

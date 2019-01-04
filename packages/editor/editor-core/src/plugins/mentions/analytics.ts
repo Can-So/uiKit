@@ -1,4 +1,9 @@
-import { EventType, GasPayload } from '@atlaskit/analytics-gas-types';
+import {
+  EventType,
+  GasPayload,
+  OPERATIONAL_EVENT_TYPE,
+  UI_EVENT_TYPE,
+} from '@atlaskit/analytics-gas-types';
 import { isSpecialMention, MentionDescription } from '@atlaskit/mention';
 import {
   name as packageName,
@@ -25,7 +30,6 @@ export const buildAnalyticsPayload = (
     sessionId,
     ...otherAttributes,
   },
-  source: 'unknown',
 });
 
 type QueryAttributes = Partial<{
@@ -59,7 +63,7 @@ export const buildTypeAheadCancelPayload = (
   return buildAnalyticsPayload(
     'mentionTypeahead',
     'cancelled',
-    'ui',
+    UI_EVENT_TYPE,
     sessionId,
     {
       duration,
@@ -100,7 +104,7 @@ export const buildTypeAheadInsertedPayload = (
   return buildAnalyticsPayload(
     'mentionTypeahead',
     isClicked(insertType) ? 'clicked' : 'pressed',
-    'ui',
+    UI_EVENT_TYPE,
     sessionId,
     {
       duration,
@@ -123,17 +127,19 @@ export const buildTypeAheadRenderedPayload = (
   userIds: Array<string>,
   query: string,
 ): GasPayload => {
+  const { queryLength, spaceInQuery } = extractAttributesFromQuery(query);
   return {
     action: 'rendered',
-    actionSubject: 'mentionTypeAhead',
-    eventType: 'ui',
+    actionSubject: 'mentionTypeahead',
+    eventType: OPERATIONAL_EVENT_TYPE,
     attributes: {
       packageName,
       packageVersion,
       componentName,
       duration,
       userIds,
-      query,
+      queryLength,
+      spaceInQuery,
     },
   };
 };

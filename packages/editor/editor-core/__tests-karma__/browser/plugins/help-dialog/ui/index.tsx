@@ -2,7 +2,8 @@ import { expect } from 'chai';
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
-import { browser, createSchema, doc } from '@atlaskit/editor-common';
+import { createSchema, doc } from '@atlaskit/adf-schema';
+import { browser } from '@atlaskit/editor-common';
 import { createEditor, mountWithIntl } from '@atlaskit/editor-test-helpers';
 import HelpDialog, {
   formatting,

@@ -1,5 +1,14 @@
 # @atlaskit/layer
 
+## 5.1.0
+- [minor] [f292408](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f292408):
+
+  - Replace copied popper.js by the actual popper.js library. In addition, mocking popper.js with jest
+
+## 5.0.10
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/docs@6.0.0
+
 ## 5.0.9
 - [patch] [b332c91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b332c91):
 

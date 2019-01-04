@@ -1,10 +1,20 @@
 import * as React from 'react';
 import {
   NavigationProvider,
-  LayoutManagerWithViewController,
+  LayoutManager,
+  HeaderSection,
+  MenuSection,
   GlobalNav,
+  Item,
+  ItemAvatar,
+  ContainerHeader,
+  Separator,
+  Wordmark,
 } from '@atlaskit/navigation-next';
-import { JiraIcon } from '@atlaskit/logo';
+import { JiraIcon, JiraWordmark } from '@atlaskit/logo';
+import BacklogIcon from '@atlaskit/icon/glyph/backlog';
+import BoardIcon from '@atlaskit/icon/glyph/board';
+import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
 import Avatar from '@atlaskit/avatar';
 import AddIcon from '@atlaskit/icon/glyph/add';
 import SearchIcon from '@atlaskit/icon/glyph/search';
@@ -40,6 +50,64 @@ const Nav = () => (
   />
 );
 
+const ContainerNavigation = () => (
+  <div>
+    <HeaderSection>
+      {({ css }) => (
+        <div
+          style={{
+            ...css,
+            paddingBottom: '16px',
+          }}
+        >
+          <ContainerHeader
+            before={itemState => (
+              <ItemAvatar
+                itemState={itemState}
+                appearance="square"
+                size="large"
+              />
+            )}
+            text="Fabric Editor"
+            subText="Renderer"
+          />
+        </div>
+      )}
+    </HeaderSection>
+    <MenuSection>
+      {({ className }) => (
+        <div className={className}>
+          <Item before={BacklogIcon} text="Backlog" isSelected />
+          <Item before={BoardIcon} text="Active sprints" />
+          <Item before={GraphLineIcon} text="Reports" />
+          <Separator />
+        </div>
+      )}
+    </MenuSection>
+  </div>
+);
+
+const ProductNavigation = () => (
+  <div>
+    <HeaderSection>
+      {({ className }) => (
+        <div className={className}>
+          <Wordmark wordmark={JiraWordmark} />
+        </div>
+      )}
+    </HeaderSection>
+    <MenuSection>
+      {({ className }) => (
+        <div className={className}>
+          <Item text="Dashboards" />
+          <Item text="Projects" />
+          <Item text="Issues" />
+        </div>
+      )}
+    </MenuSection>
+  </div>
+);
+
 const LOCALSTORAGE_renderer_sidebar_key =
   'fabric.editor.examples.renderer.sidebar';
 
@@ -59,9 +127,13 @@ export const getDefaultShowSidebarState = (defaultValue = false) => {
 export function NavigationNext({ children }) {
   return (
     <NavigationProvider>
-      <LayoutManagerWithViewController globalNavigation={Nav}>
+      <LayoutManager
+        globalNavigation={Nav}
+        productNavigation={ProductNavigation}
+        containerNavigation={ContainerNavigation}
+      >
         <div style={{ padding: 40 }}>{children}</div>
-      </LayoutManagerWithViewController>
+      </LayoutManager>
     </NavigationProvider>
   );
 }

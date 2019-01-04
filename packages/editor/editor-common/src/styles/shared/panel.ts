@@ -23,6 +23,7 @@ export const panelSharedStyles = css`
       flex-shrink: 0;
       height: ${gridSize() * 3}px;
       width: ${gridSize() * 3}px;
+      box-sizing: content-box;
       padding-right: ${gridSize()}px;
 
       > span {
@@ -33,6 +34,7 @@ export const panelSharedStyles = css`
 
     .ak-editor-panel__content {
       margin: 1px 0 1px;
+      flex: 1 0 0;
     }
   }
 `;

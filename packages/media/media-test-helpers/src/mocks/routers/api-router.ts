@@ -8,7 +8,8 @@ import {
   RequestHandler,
   Database,
 } from 'kakapo';
-import * as uuid from 'uuid';
+import { TouchFileDescriptor } from '@atlaskit/media-store';
+import * as uuid from 'uuid/v4';
 
 import { mapDataUriToBlob } from '../../utils';
 import { mockDataUri } from '../database/mockData';
@@ -19,6 +20,7 @@ import {
 } from '../database';
 import { defaultBaseUrl } from '../..';
 import { Chunk } from '../database/chunk';
+import { createUpload } from '../database/upload';
 
 class RouterWithLogging<M extends DatabaseSchema> extends Router<M> {
   constructor(options?: RouterOptions) {
@@ -277,10 +279,43 @@ export function createApiRouter(): Router<DatabaseSchema> {
     }
   });
 
+  router.post('/items', ({ body }, database) => {
+    const { descriptors } = JSON.parse(body);
+    const records = descriptors.map((descriptor: any) => {
+      const record = database.findOne('collectionItem', {
+        id: descriptor.id,
+        collectionName: descriptor.collection,
+      });
+      if (record) {
+        return {
+          type: 'file',
+          id: descriptor.id,
+          collection: descriptor.collection,
+          details: record.data.details,
+        };
+      }
+      return null;
+    });
+
+    if (records.length) {
+      return {
+        data: {
+          items: records,
+        },
+      };
+    } else {
+      return new Response(404, undefined, {});
+    }
+  });
+
   router.post('/file/copy/withToken', (request, database) => {
     const { body, query } = request;
     const { sourceFile } = JSON.parse(body);
-    const { collection: destinationCollection } = query;
+    const {
+      collection: destinationCollection,
+      replaceFileId = uuid(),
+      occurrenceKey = uuid(),
+    } = query;
 
     const sourceRecord = database.findOne('collectionItem', {
       id: sourceFile.id,
@@ -290,9 +325,9 @@ export function createApiRouter(): Router<DatabaseSchema> {
     const { details, type, blob } = sourceRecord.data;
 
     const record = database.push('collectionItem', {
-      id: uuid.v4(),
+      id: replaceFileId,
       insertedAt: Date.now(),
-      occurrenceKey: uuid.v4(),
+      occurrenceKey,
       type,
       details,
       blob,
@@ -301,6 +336,33 @@ export function createApiRouter(): Router<DatabaseSchema> {
 
     return {
       data: record.data,
+    };
+  });
+
+  router.post('/upload/createWithFiles', ({ body }, database) => {
+    const { descriptors } = JSON.parse(body);
+    const descriptor: TouchFileDescriptor = descriptors[0];
+    database.push(
+      'collectionItem',
+      createCollectionItem({
+        id: descriptor.fileId,
+        collectionName: descriptor.collection,
+        occurrenceKey: descriptor.occurrenceKey,
+      }),
+    );
+
+    const uploadRecord = createUpload();
+    database.push('upload', uploadRecord);
+
+    return {
+      data: {
+        created: [
+          {
+            fileId: descriptor.fileId,
+            uploadId: uploadRecord.id,
+          },
+        ],
+      },
     };
   });
 

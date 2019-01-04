@@ -1,13 +1,7 @@
 import * as React from 'react';
-import { md, code, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@atlaskit/docs';
 
 export default md`
-  # Installing @atlaskit/editor-core
-
-${code`
-  npm install @atlaskit/editor-core
-`}
-
   ### Note:
 
   Don't forget to add these polyfills to your product build if you're using emoji or mentions in the editor and you want to target older browsers:
@@ -231,15 +225,20 @@ ${code`
   };
 `}
 
+${(
+  <Example
+    packageName="@atlaskit/editor-core"
+    Component={require('../examples/1-basic').default}
+    title="Basic"
+    source={require('!!raw-loader!../examples/1-basic')}
+  />
+)}
 
   ${(
     <Props
       shouldCollapseProps
-      heading="Editor Props"
-      props={
-        // @ts-ignore
-        require('!!extract-react-types-loader!../src/editor')
-      }
+      heading="Props"
+      props={require('!!extract-react-types-loader!../src/editor')}
     />
   )}
 `;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Example } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@atlaskit/docs';
 
 export default md`
   \`\`\`NotificationIndicator\`\`\` is a React component that wraps an existing @atlaskit/badge component with
@@ -9,11 +9,22 @@ export default md`
   * Sets up automatic refresh when \`\`\`refreshRate\`\`\` is specified.
   * Disables automatic refresh when tab is inactive, unless forced.
 
+  ## Usage
+
+  ${code`import { NotificationIndicator } from '@atlaskit/notification-indicator';`}
+
   ${(
     <Example
-      Component={require('../examples/00-basic-example').default}
-      title="Basic example"
-      source={require('!!raw-loader!../examples/00-basic-example')}
+      Component={require('../examples/00-basic').default}
+      title="Basic"
+      source={require('!!raw-loader!../examples/00-basic')}
+    />
+  )}
+
+  ${(
+    <Props
+      heading="Props"
+      props={require('!!extract-react-types-loader!../src/NotificationIndicator')}
     />
   )}
 `;

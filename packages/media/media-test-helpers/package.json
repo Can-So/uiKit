@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/media-test-helpers",
-  "version": "18.3.2",
+  "version": "18.8.0",
   "description": "Collection of test helpers used in media component stories and specs",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -20,18 +20,22 @@
     "Ali C",
     "Michael J"
   ],
+  "atlaskit": {
+    "internal": true
+  },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
     "@atlaskit/dropdown-menu": "^6.1.23",
     "@atlaskit/icon": "^15.0.0",
-    "@atlaskit/media-card": "^44.0.2",
-    "@atlaskit/media-core": "^24.5.0",
-    "@atlaskit/media-store": "^8.4.0",
-    "@atlaskit/media-ui": "^7.8.0",
+    "@atlaskit/media-card": "^47.0.0",
+    "@atlaskit/media-core": "^24.7.2",
+    "@atlaskit/media-store": "^9.0.2",
+    "@atlaskit/media-ui": "^8.2.2",
     "@atlaskit/select": "^6.1.9",
     "axios": "^0.17.1",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
-    "kakapo": "^3.3.3",
+    "enzyme": "^3.7.0",
+    "exenv": "^1.2.2",
+    "kakapo": "^3.3.4",
     "lodash.matches": "^4.6.0",
     "react-intl": "^2.6.0",
     "styled-components": "^3.2.6",

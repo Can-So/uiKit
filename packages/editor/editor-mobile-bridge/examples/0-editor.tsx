@@ -15,6 +15,9 @@ export const Wrapper: any = styled.div`
 
 Wrapper.displayName = 'Wrapper';
 
+// @ts-ignore
+window.logBridge = window.logBridge || [];
+
 export default function Example() {
   return (
     <Wrapper>

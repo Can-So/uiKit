@@ -1,29 +1,13 @@
 // @flow
 import React from 'react';
-import { md, Example, code } from '@atlaskit/docs';
+import { md, Example, code, Props } from '@atlaskit/docs';
 
 export default md`
-  # @atlaskit/profilecard
+  A React component to display a card with user information.
 
-  ${(
-    <Example
-      packageName="@atlaskit/profilecard"
-      Component={require('../examples/01-profilecard').default}
-      title="Profilecard"
-      source={require('!!raw-loader!../examples/01-profilecard')}
-    />
-  )}
+  ## Usage
 
-  ${(
-    <Example
-      packageName="@atlaskit/profilecard"
-      Component={require('../examples/02-profilecard-resourced').default}
-      title="ProfilecardResourced"
-      source={require('!!raw-loader!../examples/02-profilecard-resourced')}
-    />
-  )}
-
-  ## Using the AkProfilecardClient
+  ### Using the AkProfilecardClient
 
   ${code`
 import AkProfilecardResourced, { AkProfileClient } from '@atlaskit/profilecard';
@@ -115,6 +99,38 @@ const profileClient = new CustomProfileClient({
   url: 'https://rest-api/endpoint', // Custom REST API endpoint
   cacheSize: 10,
   cacheMaxAge: 5000,
-});
-  `}
+});`}
+
+  ${(
+    <Example
+      packageName="@atlaskit/profilecard"
+      Component={require('../examples/01-profilecard').default}
+      title="Profilecard"
+      source={require('!!raw-loader!../examples/01-profilecard')}
+    />
+  )}
+
+  ${(
+    <Example
+      packageName="@atlaskit/profilecard"
+      Component={require('../examples/02-profilecard-resourced').default}
+      title="ProfilecardResourced"
+      source={require('!!raw-loader!../examples/02-profilecard-resourced')}
+    />
+  )}
+
+  ${(
+    <Props
+      heading="ProfileCard Props"
+      props={require('!!extract-react-types-loader!../src/profilecard')}
+    />
+  )}
+
+  ${(
+    <Props
+      heading="ProfileCardResourced Props"
+      props={require('!!extract-react-types-loader!../src/profilecard-resourced')}
+    />
+  )}
+ 
 `;

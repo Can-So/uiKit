@@ -4,6 +4,7 @@ import {
   MediaCollectionItems,
   MediaUpload,
   MediaChunksProbe,
+  MediaCollectionItemFullDetails,
 } from './models/media';
 import {
   AsapBasedAuth,
@@ -39,6 +40,10 @@ const extendImageParams = (
 ): MediaStoreGetFileImageParams => {
   return { ...defaultImageOptions, ...params };
 };
+const jsonHeaders = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+};
 
 export class MediaStore {
   constructor(private readonly config: MediaApiConfig) {}
@@ -50,10 +55,7 @@ export class MediaStore {
       method: 'POST',
       body: JSON.stringify({ name: collectionName }),
       authContext: { collectionName },
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
+      headers: jsonHeaders,
     }).then(mapResponseToJson);
   }
 
@@ -168,10 +170,7 @@ export class MediaStore {
       body: JSON.stringify({
         chunks,
       }),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+      headers: jsonHeaders,
     }).then(mapResponseToJson);
   }
 
@@ -184,10 +183,19 @@ export class MediaStore {
       authContext: { collectionName: params.collection },
       params,
       body: JSON.stringify(body),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+      headers: jsonHeaders,
+    }).then(mapResponseToJson);
+  }
+
+  touchFiles(
+    body: MediaStoreTouchFileBody,
+    params: MediaStoreTouchFileParams = {},
+  ): Promise<MediaStoreResponse<TouchedFiles>> {
+    return this.request('/upload/createWithFiles', {
+      method: 'POST',
+      headers: jsonHeaders,
+      body: JSON.stringify(body),
+      authContext: { collectionName: params.collection },
     }).then(mapResponseToJson);
   }
 
@@ -282,6 +290,24 @@ export class MediaStore {
     }).then(mapResponseToBlob);
   };
 
+  getItems = (
+    ids: string[],
+    collectionName?: string,
+  ): Promise<MediaStoreResponse<ItemsPayload>> => {
+    const descriptors = ids.map(id => ({
+      type: 'file',
+      id,
+      collection: collectionName,
+    }));
+
+    return this.request('/items', {
+      method: 'POST',
+      body: JSON.stringify({ descriptors }),
+      headers: jsonHeaders,
+      authContext: { collectionName },
+    }).then(mapResponseToJson);
+  };
+
   getImageMetadata = (
     id: string,
     params?: MediaStoreGetFileImageParams,
@@ -301,10 +327,7 @@ export class MediaStore {
       method: 'PUT',
       authContext: { collectionName },
       body: JSON.stringify(body),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+      headers: jsonHeaders,
     }).then(mapResponseToVoid);
   }
 
@@ -316,10 +339,7 @@ export class MediaStore {
       method: 'POST',
       authContext: { collectionName: params.collection }, // Contains collection name to write to
       body: JSON.stringify(body), // Contains collection name to read from
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+      headers: jsonHeaders,
       params, // Contains collection name to write to
     }).then(mapResponseToJson);
   }
@@ -344,6 +364,17 @@ export class MediaStore {
       body,
     });
   }
+}
+
+export interface FileItem {
+  id: string;
+  type: 'file';
+  details: MediaCollectionItemFullDetails;
+  collection?: string;
+}
+
+export interface ItemsPayload {
+  items: FileItem[];
 }
 
 export type ImageMetadataArtifact = {
@@ -383,6 +414,22 @@ export type MediaStoreCreateFileParams = {
   readonly occurrenceKey?: string;
   readonly collection?: string;
 };
+
+export interface MediaStoreTouchFileParams {
+  readonly collection?: string;
+}
+
+export interface TouchFileDescriptor {
+  fileId: string;
+  collection?: string;
+  occurrenceKey?: string;
+  expireAfter?: number;
+  deletable?: boolean;
+}
+
+export interface MediaStoreTouchFileBody {
+  descriptors: TouchFileDescriptor[];
+}
 
 export type MediaStoreCreateFileFromBinaryParams = {
   readonly replaceFileId?: string;
@@ -451,6 +498,15 @@ export type AppendChunksToUploadRequestBody = {
 
   readonly hash?: string;
   readonly offset?: number;
+};
+
+export interface CreatedTouchedFile {
+  fileId: string;
+  uploadId: string;
+}
+
+export type TouchedFiles = {
+  created: CreatedTouchedFile[];
 };
 
 export interface EmptyFile {

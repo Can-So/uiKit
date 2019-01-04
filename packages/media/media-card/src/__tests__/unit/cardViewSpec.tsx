@@ -14,7 +14,6 @@ import { AnalyticsListener } from '@atlaskit/analytics-next';
 
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
-import { Retry } from '../../../src/utils/cardGenericViewSmall/styled';
 import {
   CardView,
   CardViewBase,
@@ -66,7 +65,7 @@ describe('CardView', () => {
     );
 
   it('should render FileCard when no metadata is passed', () => {
-    const element = mount(<CardView status="loading" appearance="small" />);
+    const element = mount(<CardView status="loading" />);
     const fileCard = element.find(FileCard);
     expect(fileCard).toHaveLength(1);
   });
@@ -82,12 +81,12 @@ describe('CardView', () => {
   it('should render LinkCard with other props', () => {
     const element = shallowCardViewBaseElement({
       metadata: link,
-      appearance: 'small',
+      appearance: 'image',
     });
 
     const linkCard = element.find(LinkCard);
     expect(linkCard).toHaveLength(1);
-    expect(linkCard.prop('appearance')).toBe('small');
+    expect(linkCard.prop('appearance')).toEqual('image');
   });
 
   it('should render FileCard with details', () => {
@@ -101,12 +100,12 @@ describe('CardView', () => {
   it('should render FileCard with other props', () => {
     const element = shallowCardViewBaseElement({
       metadata: file,
-      appearance: 'small',
+      appearance: 'image',
     });
 
     const fileCard = element.find(FileCard);
     expect(fileCard).toHaveLength(1);
-    expect(fileCard.prop('appearance')).toBe('small');
+    expect(fileCard.prop('appearance')).toEqual('image');
   });
 
   it('should render LinkCard and NOT use details to determine which card to render when mediaItemType is "link"', () => {
@@ -177,29 +176,6 @@ describe('CardView', () => {
     expect(hoverHandlerArg.mediaItemDetails).toEqual(link);
   });
 
-  it('should render retry element for small cards when an error occurs', () => {
-    const onRetryHandler = jest.fn();
-    const linkCard = mountWithIntlContext(
-      <CardView
-        status="error"
-        appearance="small"
-        metadata={link}
-        onRetry={onRetryHandler}
-      />,
-    );
-    const fileCard = mountWithIntlContext(
-      <CardView
-        status="error"
-        appearance="small"
-        metadata={file}
-        onRetry={onRetryHandler}
-      />,
-    );
-
-    expect(linkCard.find(Retry)).toHaveLength(1);
-    expect(fileCard.find(Retry)).toHaveLength(1);
-  });
-
   it('should NOT fire onSelectChange when card is NOT selectable', () => {
     const handler = jest.fn();
     const element = shallowCardViewBaseElement({
@@ -235,6 +211,14 @@ describe('CardView', () => {
     expect(card.find('MediaImage').prop('crop')).toBe(true);
   });
 
+  it('should render a non-stretched image by default', () => {
+    const card = mount(
+      <CardView status="complete" dataURI="a" metadata={file} />,
+    );
+
+    expect(card.find('MediaImage').prop('stretch')).toBe(false);
+  });
+
   it('should render not render a cropped image if we specify a different resizeMode', () => {
     const card = mount(
       <CardView
@@ -246,6 +230,19 @@ describe('CardView', () => {
     );
 
     expect(card.find('MediaImage').prop('crop')).toBe(false);
+  });
+
+  it('should render a stretched image if we specify stretchy-fit resizeMode', () => {
+    const card = mount(
+      <CardView
+        status="complete"
+        dataURI="a"
+        metadata={file}
+        resizeMode="stretchy-fit"
+      />,
+    );
+
+    expect(card.find('MediaImage').prop('stretch')).toBe(true);
   });
 
   describe('Dimensions', () => {
@@ -281,11 +278,10 @@ describe('CardView', () => {
       const element = shallowCardViewBaseElement({
         status: 'loading',
         metadata: file,
-        appearance: 'small',
       });
       expect(element.find(Wrapper).props().dimensions).toEqual({
-        width: '100%',
-        height: 42,
+        width: 156,
+        height: 125,
       });
     });
 
@@ -294,7 +290,6 @@ describe('CardView', () => {
         {
           status: 'loading',
           metadata: file,
-          appearance: 'small',
           dimensions: { width: '70%', height: 100 },
         },
         { disableLifecycleMethods: true },
@@ -436,7 +431,6 @@ describe('CardView', () => {
       <AnalyticsListener channel="media" onEvent={analyticsEventHandler}>
         <CardView
           status="processing"
-          appearance="small"
           actions={[cardAction]}
           metadata={{ ...file }}
           onClick={clickHandler}
@@ -464,7 +458,7 @@ describe('CardView', () => {
       });
       expect(actualContext.viewAttributes).toEqual({
         viewPreview: true,
-        viewSize: 'small',
+        viewSize: 'auto',
         viewActionmenu: true,
       });
       expect(actualContext.loadStatus).toEqual('loading_metadata');

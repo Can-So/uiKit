@@ -1,7 +1,7 @@
 import {
   DecisionListDefinition,
   DecisionItemDefinition,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 export const decisionList = (attrs: DecisionListDefinition['attrs']) => (
   ...content: Array<DecisionItemDefinition>

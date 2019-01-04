@@ -48,11 +48,18 @@ export const commonMessages = {
 };
 
 export const overviewMessages = {
-  heading: {
-    id: 'focused-task-close-account.delete-account.overview.heading',
-    defaultMessage: 'Delete account',
+  headingSelf: {
+    id: 'focused-task-close-account.delete-account.overview.heading.self',
+    defaultMessage: 'Delete your account',
     description:
       "Heading for the screen that explains what happens when a user's account is deleted",
+  },
+
+  headingAdmin: {
+    id: 'focused-task-close-account.delete-account.overview.heading.admin',
+    defaultMessage: 'Delete account',
+    description:
+      "Heading for the screen that explains what happens when an admin deletes a user's account",
   },
 
   firstLineSelf: {
@@ -78,6 +85,15 @@ export const overviewMessages = {
       'A warning message shown to users when they try to delete their account.',
   },
 
+  warningSectionBodyDeactivated: {
+    id:
+      'focused-task-close-account.delete-account.overview.warning-section.deactivated.body',
+    defaultMessage:
+      'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    description:
+      'A warning message shown to deactivated users when they try to delete their account.',
+  },
+
   paragraphAboutToDeleteAdmin: {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin',
@@ -97,7 +113,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin',
     defaultMessage:
-      '{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. They currently have access to: ',
+      '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to: ',
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app.',
   },
@@ -105,7 +121,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self',
     defaultMessage:
-      "You'll <b>immediately lose access</b> to all Atlassian services, including sites and products. You currently have access to:",
+      "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access.',
   },
@@ -114,8 +130,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites',
     defaultMessage:
-      '{fullName} will <b>immediately lose access</b> to all Atlassian services, including sites and products. Currently, they don’t have access to any, except <a href="https://confluence.atlassian.com/display/Cloud/Organization+administration">services</a> ' +
-      'like Community and Marketplace. ',
+      '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace. ',
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access. {fullName} is filled in by the web app.',
   },
@@ -123,7 +138,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites',
     defaultMessage:
-      "You'll <b>immediately lose access</b> to all Atlassian services, including sites and products.",
+      "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
     description:
       'A paragraph explaining that upon deletion the user will lose access to certain services. The second sentence is to begin a list of services the user-to-be-deleted can currently access.',
   },
@@ -132,7 +147,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote',
     defaultMessage:
-      'Other Atlassian services, such as Atlassian Community and Marketplace. ',
+      'Other Atlassian account services, such as Atlassian Community and Marketplace. ',
     description:
       "A paragraph explaining that upon deletion the user may also lose access to services that weren't listed prior.",
   },
@@ -141,7 +156,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.content-created.admin',
     defaultMessage:
-      "The content they've created will remain in Atlassian services.",
+      "The content they've created will remain in Atlassian account services.",
     description:
       "A paragraph explaining that although the user's details will be deleted, content they have created will remain.",
   },
@@ -149,7 +164,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.content-created.self',
     defaultMessage:
-      "The content you've created will remain in Atlassian services.",
+      "The content you've created will remain in Atlassian account services.",
     description:
       "A paragraph explaining that although the user's details will be deleted, content they have created will remain.",
   },
@@ -175,7 +190,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin',
     defaultMessage:
-      "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian services within 30 days, " +
+      "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, " +
       'except in a few cases where required for legitimate business or legal purposes. ',
     description:
       "A paragraph explaining what parts of the user's personal data will be deleted",
@@ -184,7 +199,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self',
     defaultMessage:
-      "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian services within 30 days, " +
+      "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, " +
       'except in a few cases where required for legitimate business or legal purposes. ',
     description:
       "A paragraph explaining what parts of the user's personal data will be deleted",
@@ -333,7 +348,7 @@ export const overviewMessages = {
     id:
       'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self',
     defaultMessage:
-      'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+      'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
     description:
       'Text elaborating on the note about apps storing personal data',
   },

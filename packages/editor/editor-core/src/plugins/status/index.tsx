@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { status } from '@atlaskit/editor-common';
+import { status } from '@atlaskit/adf-schema';
 import LabelIcon from '@atlaskit/icon/glyph/label';
 import { findDomRefAtPos } from 'prosemirror-utils';
 import { EditorPlugin } from '../../types';
@@ -23,25 +23,40 @@ const baseStatusPlugin = (): EditorPlugin => ({
   },
 
   contentComponent({ editorView }) {
+    const domAtPos = editorView.domAtPos.bind(editorView);
     return (
       <WithPluginState
         plugins={{
           statusState: pluginKey,
         }}
         render={({ statusState = {} as StatusState }) => {
-          if (statusState.showStatusPickerAt === null) {
+          const { showStatusPickerAt } = statusState;
+          if (showStatusPickerAt === null) {
             return null;
           }
 
-          const element = findDomRefAtPos(
-            statusState.showStatusPickerAt,
-            editorView.domAtPos.bind(editorView),
+          const target = findDomRefAtPos(
+            showStatusPickerAt,
+            domAtPos,
           ) as HTMLElement;
+
+          const statusNode: any = editorView.state.doc.nodeAt(
+            showStatusPickerAt,
+          );
+
+          if (!statusNode || statusNode.type.name !== 'status') {
+            return null;
+          }
+
+          const { text, color, localId } = statusNode.attrs;
 
           return (
             <StatusPicker
               autoFocus={statusState.autoFocus}
-              element={element}
+              target={target}
+              defaultText={text}
+              defaultColor={color}
+              defaultLocalId={localId}
               onSelect={status => {
                 updateStatus(status)(editorView);
               }}

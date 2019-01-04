@@ -4,6 +4,10 @@ import { Identifier } from './domain';
 import ArrowLeftCircleIcon from '@atlaskit/icon/glyph/chevron-left-circle';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import { colors } from '@atlaskit/theme';
+import Button from '@atlaskit/button';
+import { Shortcut } from '@atlaskit/media-ui';
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import {
   ArrowsWrapper,
   RightWrapper,
@@ -11,10 +15,7 @@ import {
   Arrow,
   hideControlsClassName,
 } from './styled';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
-import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { getSelectedIndex } from './utils';
-import { Shortcut } from './shortcut';
 import { channel } from './analytics';
 import {
   createNavigationEvent,
@@ -80,11 +81,15 @@ export class NavigationBase extends Component<NavigationProps, {}> {
           {isLeftVisible ? (
             <Arrow className={hideControlsClassName}>
               <Shortcut keyCode={37} handler={prev('keyboard')} />
-              <ArrowLeftCircleIcon
+              <Button
                 onClick={prev('mouse')}
-                primaryColor={colors.N800}
-                size="xlarge"
-                label="Previous"
+                iconBefore={
+                  <ArrowLeftCircleIcon
+                    primaryColor={colors.N800}
+                    size="xlarge"
+                    label="Previous"
+                  />
+                }
               />
             </Arrow>
           ) : null}
@@ -94,11 +99,15 @@ export class NavigationBase extends Component<NavigationProps, {}> {
           {isRightVisible ? (
             <Arrow className={hideControlsClassName}>
               <Shortcut keyCode={39} handler={next('keyboard')} />
-              <ArrowRightCircleIcon
+              <Button
                 onClick={next('mouse')}
-                primaryColor={colors.N800}
-                size="xlarge"
-                label="Next"
+                iconBefore={
+                  <ArrowRightCircleIcon
+                    primaryColor={colors.N800}
+                    size="xlarge"
+                    label="Next"
+                  />
+                }
               />
             </Arrow>
           ) : null}

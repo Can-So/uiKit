@@ -8,7 +8,6 @@ import {
   sleep,
   sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
-import { pluginKey as typeAheadPluginKey } from '../../../../plugins/type-ahead/pm-plugins/main';
 import { pluginKey as quickInsertPluginKey } from '../../../../plugins/quick-insert';
 
 describe('Quick Insert', () => {
@@ -69,28 +68,5 @@ describe('Quick Insert', () => {
     expect(editorView.state.doc).toEqualDocument(
       doc(panel({ panelType: 'info' })(p())),
     );
-  });
-
-  const disabledEditor = (doc: any, providerFactory?: any) =>
-    createEditor({
-      doc,
-      pluginKey: quickInsertPluginKey,
-      providerFactory,
-      editorProps: {
-        quickInsert: false,
-        allowPanel: true,
-        allowCodeBlocks: true,
-      },
-    });
-
-  it("shouldn't start quick insert with quickInsert:false", async () => {
-    const { editorView, sel } = disabledEditor(doc(p('{<>}')));
-    insertText(editorView, '/Panel', sel);
-    await sleep(50);
-    const activePlugin = typeAheadPluginKey.get(editorView.state);
-    expect(activePlugin).not.toBe(undefined);
-
-    const pluginState = typeAheadPluginKey.getState(editorView.state);
-    expect(pluginState.items.length).toBe(0);
   });
 });

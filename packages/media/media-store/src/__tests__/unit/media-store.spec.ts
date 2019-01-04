@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock';
 import { stringify } from 'query-string';
 
-import { Auth, AuthProvider, MediaStore } from '../..';
+import { Auth, AuthProvider, CreatedTouchedFile, MediaStore } from '../..';
 import {
   MediaUpload,
   MediaChunksProbe,
@@ -13,7 +13,12 @@ import {
 import {
   MediaStoreGetFileParams,
   EmptyFile,
+  ItemsPayload,
   ImageMetadata,
+  MediaStoreTouchFileBody,
+  TouchFileDescriptor,
+  TouchedFiles,
+  MediaStoreTouchFileParams,
 } from '../../media-store';
 import { MediaFileArtifacts } from '../../models/artifacts';
 
@@ -471,6 +476,89 @@ describe('MediaStore', () => {
       });
     });
 
+    describe('touchFiles', () => {
+      const createdTouchedFile1: CreatedTouchedFile = {
+        fileId: 'some-file-id',
+        uploadId: 'some-upload-id',
+      };
+      const createdTouchedFile2: CreatedTouchedFile = {
+        fileId: 'some-other-file-id',
+        uploadId: 'some-other-upload-id',
+      };
+      const params: MediaStoreTouchFileParams = {
+        collection: 'some-collection-name',
+      };
+
+      const descriptor1: TouchFileDescriptor = {
+        fileId: 'some-file-id',
+      };
+      const descriptor2: TouchFileDescriptor = {
+        fileId: 'some-other-file-id',
+        occurrenceKey: 'some-occurrence-key',
+        collection: 'some-collection',
+        deletable: false,
+        expireAfter: 42,
+      };
+
+      it('should POST to /upload/createWithFiles', () => {
+        const data: TouchedFiles = {
+          created: [createdTouchedFile1, createdTouchedFile2],
+        };
+        fetchMock.mock(`begin:${baseUrl}/upload/createWithFiles`, {
+          body: {
+            data,
+          },
+          status: 201,
+        });
+
+        const body: MediaStoreTouchFileBody = {
+          descriptors: [descriptor1, descriptor2],
+        };
+        return mediaStore.touchFiles(body, params).then(response => {
+          expect(response).toEqual({ data });
+          expect(fetchMock.lastUrl()).toEqual(
+            `${baseUrl}/upload/createWithFiles`,
+          );
+          expect(fetchMock.lastOptions()).toEqual({
+            method: 'POST',
+            headers: {
+              'X-Client-Id': clientId,
+              Authorization: `Bearer ${token}`,
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          });
+          expect(authProvider).toHaveBeenCalledWith({
+            collectionName: params.collection,
+          });
+        });
+      });
+
+      it('should fail if error status is returned', () => {
+        const error = {
+          error: 'something wrong',
+        };
+        fetchMock.mock(`begin:${baseUrl}/upload/createWithFiles`, {
+          body: error,
+          status: 403,
+        });
+
+        const body: MediaStoreTouchFileBody = {
+          descriptors: [descriptor1],
+        };
+        return mediaStore.touchFiles(body, params).then(
+          result => {
+            expect(result).not.toBeDefined();
+          },
+          async (response: Response) => {
+            const reason = await response.json();
+            expect(reason).toEqual(error);
+          },
+        );
+      });
+    });
+
     describe('createFile', () => {
       it('should POST to /file with empty body and params', () => {
         const data: EmptyFile = {
@@ -547,6 +635,66 @@ describe('MediaStore', () => {
         expect(fetchMock.lastUrl()).toEqual(
           `${baseUrl}/file/123/image?allowAnimated=true&client=some-client-id&max-age=3600&mode=full-fit&token=some-token&upscale=true&version=2`,
         );
+      });
+    });
+
+    describe('getItems', () => {
+      it('should POST to /items endpoint with correct options', () => {
+        const items = ['1', '2'];
+        const data: ItemsPayload[] = [
+          {
+            items: [
+              {
+                id: '1',
+                collection: 'collection-1',
+                type: 'file',
+                details: {
+                  artifacts: {} as any,
+                  mediaType: 'image',
+                  mimeType: 'png',
+                  name: 'file-1',
+                  processingStatus: 'succeeded',
+                  size: 1,
+                },
+              },
+            ],
+          },
+        ];
+
+        fetchMock.mock(`begin:${baseUrl}/items`, {
+          body: {
+            data,
+          },
+          status: 200,
+        });
+
+        return mediaStore.getItems(items, 'collection-1').then(response => {
+          expect(response).toEqual({ data });
+          expect(fetchMock.lastUrl()).toEqual(`${baseUrl}/items`);
+          expect(fetchMock.lastOptions()).toEqual({
+            method: 'POST',
+            headers: {
+              'X-Client-Id': clientId,
+              Authorization: `Bearer ${token}`,
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              descriptors: [
+                {
+                  type: 'file',
+                  id: '1',
+                  collection: 'collection-1',
+                },
+                {
+                  type: 'file',
+                  id: '2',
+                  collection: 'collection-1',
+                },
+              ],
+            }),
+          });
+        });
       });
     });
 

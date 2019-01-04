@@ -1,38 +1,37 @@
-import * as React from 'react';
+import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
 import { waitUntil } from '@atlaskit/util-common-test';
-
+import { MockEmojiResource } from '@atlaskit/util-data-test';
+import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+import EmojiRepository from '../../../../api/EmojiRepository';
+import Emoji from '../../../../components/common/Emoji';
+import EmojiDeletePreview from '../../../../components/common/EmojiDeletePreview';
+import EmojiErrorMessage from '../../../../components/common/EmojiErrorMessage';
+import EmojiUploadPreview from '../../../../components/common/EmojiUploadPreview';
+import FileChooser from '../../../../components/common/FileChooser';
+import { messages } from '../../../../components/i18n';
+import EmojiPickerCategoryHeading from '../../../../components/picker/EmojiPickerCategoryHeading';
+import EmojiPickerList from '../../../../components/picker/EmojiPickerList';
+import {
+  analyticsEmojiPrefix,
+  customCategory,
+  customTitle,
+  userCustomTitle,
+} from '../../../../constants';
+import {} from '../../../../types';
 import * as ImageUtil from '../../../../util/image';
-
 import {
   createPngFile,
   getEmojiResourcePromise,
-  getNonUploadingEmojiResourcePromise,
-  pngFileUploadData,
   getEmojiResourcePromiseFromRepository,
-  siteEmojiFoo,
+  getNonUploadingEmojiResourcePromise,
   mediaEmoji,
   pngDataURL,
+  pngFileUploadData,
+  siteEmojiFoo,
 } from '../../_test-data';
-
-import Emoji from '../../../../components/common/Emoji';
-import EmojiPickerList from '../../../../components/picker/EmojiPickerList';
-import FileChooser from '../../../../components/common/FileChooser';
-import {} from '../../../../types';
-import {
-  customCategory,
-  customTitle,
-  analyticsEmojiPrefix,
-  userCustomTitle,
-} from '../../../../constants';
-import * as helper from './_emoji-picker-test-helpers';
 import * as commonHelper from '../common/_common-test-helpers';
-import EmojiPickerCategoryHeading from '../../../../components/picker/EmojiPickerCategoryHeading';
-import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
-import EmojiDeletePreview from '../../../../components/common/EmojiDeletePreview';
-import { MockEmojiResource } from '@atlaskit/util-data-test';
-import EmojiRepository from '../../../../api/EmojiRepository';
-import EmojiErrorMessage from '../../../../components/common/EmojiErrorMessage';
-import EmojiUploadPreview from '../../../../components/common/EmojiUploadPreview';
+import * as helper from './_emoji-picker-test-helpers';
 
 describe('<UploadingEmojiPicker />', () => {
   let firePrivateAnalyticsEvent;
@@ -45,6 +44,7 @@ describe('<UploadingEmojiPicker />', () => {
   const uploadPreviewShown = component => {
     const uploadPreview = helper.findUploadPreview(component);
     expect(uploadPreview).toHaveLength(1);
+
     const uploadPreviewEmoji = uploadPreview.find(Emoji);
     // Should show two emoji in EmojiUploadPrevew
     expect(uploadPreviewEmoji).toHaveLength(2);
@@ -297,9 +297,12 @@ describe('<UploadingEmojiPicker />', () => {
 
       await waitUntil(() => helper.errorMessageVisible(component));
 
-      expect(component.find(EmojiErrorMessage).prop('message')).toEqual(
-        'Selected image is invalid',
-      );
+      expect(
+        component
+          .find(EmojiErrorMessage)
+          .find(FormattedMessage)
+          .props(),
+      ).toMatchObject(messages.emojiInvalidImage);
     });
 
     it('Upload failure with file too big', async () => {
@@ -331,9 +334,12 @@ describe('<UploadingEmojiPicker />', () => {
 
       await waitUntil(() => helper.errorMessageVisible(component));
 
-      expect(component.find(EmojiErrorMessage).prop('message')).toEqual(
-        'Selected image is more than 1 MB',
-      );
+      expect(
+        component
+          .find(EmojiErrorMessage)
+          .find(FormattedMessage)
+          .props(),
+      ).toMatchObject(messages.emojiImageTooBig);
     });
 
     it('Upload after searching', async () => {
@@ -465,7 +471,7 @@ describe('<UploadingEmojiPicker />', () => {
       // "add custom emoji" button should appear
       await safeFindCustomEmojiButton(component);
 
-      // No uploads occured
+      // No uploads occurred
       const uploads = provider.getUploads();
       expect(uploads).toHaveLength(0);
 
@@ -554,7 +560,7 @@ describe('<UploadingEmojiPicker />', () => {
       // "add custom emoji" button should appear
       await safeFindCustomEmojiButton(component);
 
-      // No uploads occured
+      // No uploads occurred
       uploads = provider.getUploads();
       expect(uploads).toHaveLength(0);
 

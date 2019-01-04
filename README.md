@@ -2,7 +2,7 @@
 
 [![node v8.4.0+](https://img.shields.io/badge/node-v8.4.0%2B-brightgreen.svg)](https://nodejs.org/en/) 
 [![bolt v0.20.6+](https://img.shields.io/badge/bolt-v0.20.6%2B-brightgreen.svg)](http://boltpkg.com/)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://bitbucket.org/atlassian/atlaskit-mk-2/issues?status=new&status=open)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://ecosystem.atlassian.net/servicedesk/customer/portal/24)
 
 Atlaskit is the technical implementation of the [Atlassian Design Guidelines][adg]. It is a collection of reusable components that can be downloaded independently into your projects. Each component is also independently versioned and published to npm.
 
@@ -71,8 +71,8 @@ When upgrading an Atlaskit component, all changelogs can be found in the [Atlask
 
 #### Before you start
 
-* [node](https://nodejs.org/) version should be 6 or above (to check `node -v`) or use [nvm](https://github.com/creationix/nvm)
-* [npm](https://www.npmjs.com/) version should be 3 or above (to check `npm --version`)
+* [node](https://nodejs.org/) version should be as listed in .nvmrc (we recommend using [nvm](https://github.com/creationix/nvm)). Run `nvm use` in the root directory to install the correct version of node.
+* [npm](https://www.npmjs.com/) version should be 5 or above (to check `npm --version`)
 * [yarn](https://yarnpkg.com/) should be installed globally (see yarn website for installation instructions)
 
 #### Clone the repo and install
@@ -95,6 +95,9 @@ Next, to install packages, we use bolt, just calling it:
 ```sh
 bolt
 ```
+
+Then you can run the examples with `yarn start`. Check `package.json` for more commands to start specific package examples.
+
 
 For contributing back, check out our [contribution guide](http://atlaskit.atlassian.com/docs/guides/contributing)
 

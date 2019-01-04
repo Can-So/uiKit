@@ -115,12 +115,21 @@ const IconWrapper = (props: IconWrapperProps) => (
 
 export default class DrawerPrimitive extends Component<DrawerPrimitiveProps> {
   render() {
-    const { children, icon: Icon, onClose, ...props } = this.props;
+    const {
+      children,
+      icon: Icon,
+      onClose,
+      onCloseComplete,
+      ...props
+    } = this.props;
 
     return (
-      <Slide component={Wrapper} {...props}>
+      <Slide component={Wrapper} onExited={onCloseComplete} {...props}>
         <Sidebar>
-          <IconWrapper onClick={onClose}>
+          <IconWrapper
+            onClick={onClose}
+            data-test-selector="DrawerPrimitiveSidebarCloseButton"
+          >
             {Icon ? <Icon size="large" /> : <ArrowLeft />}
           </IconWrapper>
         </Sidebar>

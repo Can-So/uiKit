@@ -16,7 +16,7 @@ export default {
     'Eller använd <a href={url}>Avancerad sökning</a> (skift + retur) för att söka mer fokuserat.',
   'global_search.no_results_title': 'Inga resultat i titlar och personer',
   'global_search.no_results_body':
-    'Prova med ett annat sökord. Du kan söka innehåll på sidor, använda Avancerad sökning eller söka efter personer nedan.',
+    'Försök igen med ett annat sökord eller förfina ditt resultat med avancerad sökning.',
   'global_search.people.recent_people_heading': 'Arbetade nyligen med',
   'global_search.people.people_heading': 'Personer',
   'global_search.people.advanced_search': 'Sök efter person',
@@ -33,7 +33,7 @@ export default {
   'global_search.jira.search_result_containers_heading':
     'Anslagstavlor, filter och projekt',
   'global_search.jira.search_result_people_heading': 'Personer',
-  'global_search.jira.advanced_search': 'Gå till avancerad sökning efter',
+  'global_search.jira.advanced_search': 'Avancerad sökning efter',
   'global_search.jira.advanced_search_issues': 'ärenden',
   'global_search.jira.advanced_search_projects': 'projekt',
   'global_search.jira.advanced_search_boards': 'anslagstavlor',
@@ -41,9 +41,16 @@ export default {
   'global_search.jira.advanced_search_people': 'personer',
   'global_search.jira.advanced_issue_search': 'Avancerad sökning efter ärenden',
   'global_search.jira.no_results_title':
-    'Inga resultat i ärendesammanfattningar, namn och personer',
+    'Vi hittade inget som matchade din sökning',
   'global_search.jira.no_results_body':
-    'Prova med ett annat sökord. Du kan söka i alla textfält i ärenden, använda avancerad sökning eller söka efter andra ärenden mer specifikt.',
+    'Försök igen med ett annat sökord eller förfina ditt resultat med avancerad sökning.',
   'global_search.jira.no_recent_activity_body':
     'Eller förfina ditt resultat med avancerad sökning.',
+  'global_search.jira.project_type.business_project': 'Företagsprojekt',
+  'global_search.jira.project_type.software_project': 'Mjukvaruprojekt',
+  'global_search.jira.project_type.service_desk_project':
+    'Service Desk-projekt',
+  'global_search.jira.project_type.ops_project': 'Ops-projekt',
+  'global_search.jira.result_type.board': 'Anslagstavla',
+  'global_search.jira.result_type.filter': 'Filter',
 };

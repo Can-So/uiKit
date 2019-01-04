@@ -8,6 +8,10 @@ import Theme from './components/Theme';
 // in styled-components.
 export function withTheme<Props: {}>(InnerComponent: ComponentType<Props>) {
   return function ComponentWithTheme(props: Props) {
-    return <Theme>{t => <InnerComponent {...props} theme={t} />}</Theme>;
+    return (
+      <Theme.Consumer>
+        {tokens => <InnerComponent {...props} theme={tokens} />}
+      </Theme.Consumer>
+    );
   };
 }

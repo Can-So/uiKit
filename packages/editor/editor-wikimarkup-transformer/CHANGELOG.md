@@ -1,5 +1,88 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.9.4
+- [patch] [aca2425](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aca2425):
+
+  - Escaping in common formatter
+
+## 2.9.3
+- [patch] [df74239](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df74239):
+
+  - Parse mailto text
+
+## 2.9.2
+- [patch] [1d9228c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d9228c):
+
+  - trim escape in link href
+
+## 2.9.1
+- [patch] [75046da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/75046da):
+
+  - macros keyword can be case insensitive
+
+## 2.9.0
+- [minor] [a4b49b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4b49b2):
+
+  - Parse macros inside table cells
+
+## 2.8.2
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/renderer@33.0.0
+  - @atlaskit/editor-json-transformer@4.1.1
+  - @atlaskit/editor-test-helpers@6.3.4
+  - @atlaskit/util-data-test@10.0.28
+
+## 2.8.1
+- [patch] [0a28c41](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a28c41):
+
+  - bq. doesn't need a following space
+
+## 2.8.0
+- [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+
+  - Move schema to its own package
+
+## 2.7.6
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/renderer@32.0.0
+  - @atlaskit/editor-json-transformer@4.0.25
+  - @atlaskit/editor-test-helpers@6.3.2
+  - @atlaskit/util-data-test@10.0.26
+
+## 2.7.5
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/editor-core@90.3.15
+  - @atlaskit/editor-json-transformer@4.0.24
+  - @atlaskit/renderer@31.1.3
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/profilecard@6.1.2
+  - @atlaskit/docs@6.0.0
+
+## 2.7.4
+- [patch] [77df0db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/77df0db):
+
+  - use em dash for citation
+
+## 2.7.3
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/editor-common@22.2.3
+  - @atlaskit/editor-core@90.2.1
+  - @atlaskit/renderer@31.0.7
+  - @atlaskit/profilecard@6.1.1
+  - @atlaskit/theme@7.0.0
+
+## 2.7.2
+- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+  - @atlaskit/editor-json-transformer@4.0.23
+  - @atlaskit/editor-test-helpers@6.2.23
+  - @atlaskit/editor-core@90.0.0
+
 ## 2.7.1
 - Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
   - @atlaskit/editor-common@22.0.0

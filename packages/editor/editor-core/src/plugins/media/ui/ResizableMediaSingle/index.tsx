@@ -1,24 +1,34 @@
 import * as React from 'react';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
-
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import {
   akEditorWideLayoutWidth,
   calcPxFromColumns,
   calcPctFromPx,
   calcPxFromPct,
-  MediaSingleLayout,
   akEditorBreakoutPadding,
   calcColumnsFromPx,
+  breakoutWideScaleRatio,
 } from '@atlaskit/editor-common';
 
 import { Wrapper } from './styled';
 import { Props, EnabledHandles } from './types';
 import Resizer, { handleSides } from './Resizer';
 
+const imageAlignmentMap = {
+  left: 'start',
+  right: 'end',
+};
+
 export default class ResizableMediaSingle extends React.Component<Props> {
   get wrappedLayout() {
     const { layout } = this.props;
-    return layout === 'wrap-left' || layout === 'wrap-right';
+    return (
+      layout === 'wrap-left' ||
+      layout === 'wrap-right' ||
+      layout === 'align-start' ||
+      layout === 'align-end'
+    );
   }
 
   calcNewSize = (newWidth: number, stop: boolean) => {
@@ -52,7 +62,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
 
   get $pos() {
     const pos = this.props.getPos();
-    if (typeof pos !== 'number') {
+    if (Number.isNaN(pos as any) || typeof pos !== 'number') {
       return null;
     }
 
@@ -165,7 +175,8 @@ export default class ResizableMediaSingle extends React.Component<Props> {
 
     let pxWidth = origWidth;
     if (layout === 'wide') {
-      pxWidth = akEditorWideLayoutWidth;
+      const wideWidth = lineLength * breakoutWideScaleRatio;
+      pxWidth = wideWidth > containerWidth ? lineLength : wideWidth;
     } else if (layout === 'full-width') {
       pxWidth = containerWidth - akEditorBreakoutPadding;
     } else if (pctWidth && origWidth && origHeight) {
@@ -184,6 +195,9 @@ export default class ResizableMediaSingle extends React.Component<Props> {
       enable[side] =
         ['full-width', 'wide', 'center']
           .concat(`wrap-${oppositeSide}` as MediaSingleLayout)
+          .concat(`align-${
+            imageAlignmentMap[oppositeSide]
+          }` as MediaSingleLayout)
           .indexOf(layout) > -1;
 
       if (side === 'left' && this.insideInlineLike) {

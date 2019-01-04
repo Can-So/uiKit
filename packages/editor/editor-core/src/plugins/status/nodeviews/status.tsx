@@ -20,8 +20,12 @@ export const StatusContainer = styled.span`
   cursor: pointer;
 
   display: inline-block;
-  line-height: 1;
   border-radius: 5px;
+  max-width: 100%;
+
+  /* Prevent responsive layouts increasing height of container by changing
+     font size and therefore line-height. */
+  line-height: 0;
 
   opacity: ${(props: StatusContainerProps) =>
     props.placeholderStyle ? 0.5 : 1};
@@ -105,12 +109,13 @@ class StatusNodeView extends React.Component<Props & InjectedIntlProps, State> {
     const statusText = text ? text : formatMessage(messages.placeholder);
 
     return (
-      <StatusContainer
-        onClick={this.handleClick}
-        selected={selected}
-        placeholderStyle={!text}
-      >
-        <Status text={statusText} color={color} localId={localId} />
+      <StatusContainer selected={selected} placeholderStyle={!text}>
+        <Status
+          text={statusText}
+          color={color}
+          localId={localId}
+          onClick={this.handleClick}
+        />
       </StatusContainer>
     );
   }

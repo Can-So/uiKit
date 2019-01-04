@@ -1,14 +1,9 @@
 import * as React from 'react';
+import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-// @ts-ignore: unused variable
-// prettier-ignore
-import { HTMLAttributes, ClassAttributes } from 'react';
-import { MediaSingleLayout } from '../../schema';
-import {
-  akEditorFullPageMaxWidth,
-  akEditorWideLayoutWidth,
-  akEditorBreakoutPadding,
-} from '../../styles';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { akEditorFullPageMaxWidth } from '../../styles';
+import { calcWideWidth, calcBreakoutWidth } from '../../utils';
 
 function float(layout: MediaSingleLayout): string {
   switch (layout) {
@@ -28,23 +23,23 @@ function float(layout: MediaSingleLayout): string {
  * then an image in wide or full-width can not be wider than the image's
  * original width.
  */
-function calcLegacyWidth(
+export function calcLegacyWidth(
   layout: MediaSingleLayout,
   width: number,
   containerWidth: number = 0,
 ): string {
   switch (layout) {
+    case 'align-start':
+    case 'align-end':
     case 'wrap-right':
     case 'wrap-left':
       return width > akEditorFullPageMaxWidth / 2
         ? 'calc(50% - 12px)'
         : `${width}px`;
     case 'wide':
-      return containerWidth < akEditorWideLayoutWidth
-        ? '100%'
-        : `${akEditorWideLayoutWidth}px`;
+      return calcWideWidth(containerWidth);
     case 'full-width':
-      return `${Math.min(width, containerWidth) - akEditorBreakoutPadding}px`;
+      return calcBreakoutWidth(layout, containerWidth);
     default:
       return width > akEditorFullPageMaxWidth ? '100%' : `${width}px`;
   }
@@ -56,12 +51,16 @@ function calcLegacyWidth(
  * Wide and full-width images are always that size (960px and 100%); there is
  * no distinction between max-width and width.
  */
-function calcResizedWidth(layout: MediaSingleLayout, width: number) {
+export function calcResizedWidth(
+  layout: MediaSingleLayout,
+  width: number,
+  containerWidth: number = 0,
+) {
   switch (layout) {
     case 'wide':
-      return `${akEditorWideLayoutWidth}px`;
+      return calcWideWidth(containerWidth);
     case 'full-width':
-      return '100%';
+      return calcBreakoutWidth(layout, containerWidth);
     default:
       return `${width}px`;
   }
@@ -74,13 +73,9 @@ function calcMaxWidth(
 ) {
   switch (layout) {
     case 'wide':
-      return containerWidth < akEditorWideLayoutWidth
-        ? '100%'
-        : `${akEditorWideLayoutWidth}px`;
+      return calcWideWidth(containerWidth);
     case 'full-width':
-      return containerWidth < akEditorFullPageMaxWidth
-        ? '100%'
-        : `${containerWidth}px`;
+      return calcBreakoutWidth(layout, containerWidth);
     default:
       return '100%';
   }
@@ -94,6 +89,17 @@ function calcMargin(layout: MediaSingleLayout): string {
       return '12px 24px 12px auto';
     default:
       return '24px auto';
+  }
+}
+
+function isImageAligned(layout: MediaSingleLayout): string {
+  switch (layout) {
+    case 'align-end':
+      return 'margin-right: 0';
+    case 'align-start':
+      return 'margin-left: 0';
+    default:
+      return '';
   }
 }
 
@@ -117,16 +123,16 @@ export const MediaSingleDimensionHelper = ({
   containerWidth = 0,
   pctWidth,
 }: WrapperProps) => css`
-  width: ${pctWidth
-    ? calcResizedWidth(layout, width)
-    : calcLegacyWidth(layout, width, containerWidth)};
-  max-width: ${pctWidth ? '100%' : calcMaxWidth(layout, width, containerWidth)};
-  float: ${float(layout)};
-  margin: ${calcMargin(layout)};
-
   tr & {
     max-width: 100%;
   }
+  width: ${pctWidth
+    ? calcResizedWidth(layout, width, containerWidth)
+    : calcLegacyWidth(layout, width, containerWidth)};
+  max-width: ${calcMaxWidth(layout, width, containerWidth)};
+  float: ${float(layout)};
+  margin: ${calcMargin(layout)};
+  ${isImageAligned(layout)};
 `;
 
 const Wrapper: React.ComponentClass<
@@ -146,6 +152,7 @@ const Wrapper: React.ComponentClass<
     height: 100%;
   }
 `;
+
 Wrapper.displayName = 'WrapperMediaSingle';
 
 export default Wrapper;

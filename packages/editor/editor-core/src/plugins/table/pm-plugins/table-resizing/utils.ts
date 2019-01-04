@@ -1,7 +1,7 @@
 import { cellAround, TableMap } from 'prosemirror-tables';
+import { TableLayout } from '@atlaskit/adf-schema';
 import {
   calcTableWidth,
-  TableLayout,
   akEditorWideLayoutWidth,
   akEditorDefaultLayoutWidth,
 } from '@atlaskit/editor-common';

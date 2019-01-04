@@ -11,6 +11,21 @@ import DroplistWithAnalytics from '../../../src';
 import { DroplistWithoutAnalytics as Droplist } from '../../components/Droplist';
 import { Trigger, Content } from '../../styled/Droplist';
 
+jest.mock('popper.js', () => {
+  const PopperJS = jest.requireActual('popper.js');
+
+  return class Popper {
+    static placements = PopperJS.placements;
+
+    constructor() {
+      return {
+        destroy: () => {},
+        scheduleUpdate: () => {},
+      };
+    }
+  };
+});
+
 const itemsList = (
   <ItemGroup heading="test1">
     <Item>Some text</Item>
@@ -98,6 +113,23 @@ describe(`${name} - core`, () => {
       wrapper.setProps({ isOpen: true });
       expect(hasItemGroup()).toBe(true);
       expect(isContentVisible()).toBe(true);
+    });
+
+    it('should not call onOpenChange when closed', () => {
+      const onOpenSpy = jest.fn();
+      mount(
+        <Droplist trigger="text" isOpen={false} onOpenChange={onOpenSpy}>
+          {itemsList}
+        </Droplist>,
+      );
+
+      const event = new KeyboardEvent('keydown', {
+        keyCode: 27,
+        key: 'Escape',
+      });
+      document.dispatchEvent(event);
+
+      expect(onOpenSpy).not.toHaveBeenCalled();
     });
   });
 

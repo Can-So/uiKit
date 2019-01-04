@@ -18,22 +18,15 @@ export interface CardWithDataContentProps {
 export class CardWithDataContent extends React.Component<
   CardWithDataContentProps
 > {
-  handleFrameClick = () => {
-    const { onClick } = this.props;
-    if (onClick) {
-      onClick();
-    }
-  };
-
   render() {
-    const { data, isSelected, appearance } = this.props;
+    const { data, isSelected, appearance, onClick } = this.props;
 
     if (appearance === 'inline') {
       return (
         <InlineCardResolvedView
           {...extractInlinePropsFromJSONLD(data || {})}
           isSelected={isSelected}
-          onClick={this.handleFrameClick}
+          onClick={onClick}
         />
       );
     } else {
@@ -41,7 +34,7 @@ export class CardWithDataContent extends React.Component<
         <BlockCardResolvedView
           {...extractBlockPropsFromJSONLD(data || {})}
           isSelected={isSelected}
-          onClick={this.handleFrameClick}
+          onClick={onClick}
         />
       );
     }

@@ -167,6 +167,8 @@ class GlobalNavWithDrawers extends Component<Props, State> {
 
   secondaryAction = ({ target }: Object) => console.log(target.innerText);
 
+  onCloseComplete = (node: HTMLElement) => console.log('onCloseComplete', node);
+
   renderCreateDrawerContents = () => (
     <DrawerContent
       drawerTitle="Create drawer"
@@ -184,7 +186,7 @@ class GlobalNavWithDrawers extends Component<Props, State> {
   renderStarredDrawerContents = () => (
     <DrawerContent
       drawerTitle="Starred drawer"
-      drawerBody="Sets notification count to 5 in `onStarredDrawerOpen` callback"
+      drawerBody="Can be controlled by passing the onStarredClick prop"
     />
   );
 
@@ -192,6 +194,13 @@ class GlobalNavWithDrawers extends Component<Props, State> {
     <DrawerContent
       drawerTitle="Notification drawer"
       drawerBody="Resets notification count in `onNotificationDrawerOpen` callback"
+    />
+  );
+
+  renderSettingsDrawerContents = () => (
+    <DrawerContent
+      drawerTitle="Settings drawer"
+      drawerBody="Can be controlled by passing the onSettingsClick prop"
     />
   );
 
@@ -216,11 +225,13 @@ class GlobalNavWithDrawers extends Component<Props, State> {
           onProductClick={() => console.log('product clicked')}
           // Starred
           starredDrawerContents={this.renderStarredDrawerContents}
+          onStarredDrawerCloseComplete={this.onCloseComplete}
           shouldStarredDrawerUnmountOnExit={unmountOnExit}
           // Create
           onCreateClick={
             createItemOpens === 'modal' ? this.openCreateModal : null
           }
+          onCreateDrawerCloseComplete={this.onCloseComplete}
           createDrawerContents={this.renderCreateDrawerContents}
           shouldCreateDrawerUnmountOnExit={unmountOnExit}
           // Search
@@ -229,10 +240,12 @@ class GlobalNavWithDrawers extends Component<Props, State> {
           isSearchDrawerOpen={this.state.isSearchDrawerOpen}
           searchDrawerContents={this.renderSearchDrawerContents}
           onSearchDrawerClose={this.closeSearchDrawer}
+          onSearchDrawerCloseComplete={this.onCloseComplete}
           shouldSearchDrawerUnmountOnExit={unmountOnExit}
           // Notifications
           notificationDrawerContents={this.renderNotificationDrawerContents}
           onNotificationDrawerOpen={onNotificationDrawerOpen}
+          onNotificationDrawerCloseComplete={this.onCloseComplete}
           notificationCount={notificationCount}
           shouldNotificationDrawerUnmountOnExit={unmountOnExit}
           // App switcher
@@ -240,6 +253,10 @@ class GlobalNavWithDrawers extends Component<Props, State> {
           appSwitcherTooltip="Switch apps..."
           // Help
           helpItems={HelpDropdown}
+          // Settings
+          settingsDrawerContents={this.renderSettingsDrawerContents}
+          onSettingsDrawerCloseComplete={this.onCloseComplete}
+          shouldSettingsDrawerUnmountOnExit={unmountOnExit}
         />
         <ModalTransition>
           {this.state.isCreateModalOpen && (

@@ -25,10 +25,9 @@ import { liftFollowingList, liftSelectionList } from './transforms';
 import { Command } from '../../types';
 import { GapCursorSelection } from '../gap-cursor';
 
-const deletePreviousEmptyListItem = (
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean => {
+const maxIndentation = 5;
+
+const deletePreviousEmptyListItem: Command = (state, dispatch) => {
   const { $from } = state.selection;
   const { listItem } = state.schema.nodes;
 
@@ -43,21 +42,21 @@ const deletePreviousEmptyListItem = (
 
   if (previousListItemEmpty) {
     const { tr } = state;
-    dispatch(
-      tr
-        .delete($cut.pos - $cut.nodeBefore.nodeSize, $from.pos)
-        .scrollIntoView(),
-    );
+
+    if (dispatch) {
+      dispatch(
+        tr
+          .delete($cut.pos - $cut.nodeBefore.nodeSize, $from.pos)
+          .scrollIntoView(),
+      );
+    }
     return true;
   }
 
   return false;
 };
 
-const joinToPreviousListItem = (
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean => {
+const joinToPreviousListItem: Command = (state, dispatch) => {
   const { $from } = state.selection;
   const {
     paragraph,
@@ -136,7 +135,9 @@ const joinToPreviousListItem = (
         tr = tr.join($postCut.pos);
       }
 
-      dispatch(tr.scrollIntoView());
+      if (dispatch) {
+        dispatch(tr.scrollIntoView());
+      }
       return true;
     }
   }
@@ -187,10 +188,7 @@ const canOutdent = (state: EditorState): boolean => {
   );
 };
 
-export const enterKeyCommand = (
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean => {
+export const enterKeyCommand: Command = (state, dispatch): boolean => {
   const { selection } = state;
   if (selection.empty) {
     const { $from } = selection;
@@ -376,7 +374,9 @@ export function outdentList(): Command {
           }
         }
 
-        dispatch(tr.scrollIntoView());
+        if (dispatch) {
+          dispatch(tr.scrollIntoView());
+        }
         return true;
       }
     }
@@ -388,6 +388,31 @@ export function indentList(): Command {
   return function(state, dispatch) {
     const { listItem } = state.schema.nodes;
     if (isInsideListItem(state)) {
+      const initialIndentationLevel = numberNestedLists(
+        state.selection.$from,
+        state.schema.nodes,
+      );
+      /*
+      - Record initial list indentation
+      - Keep going forward in document until indentation of the node is < than the initial 
+      - If indentation is EVER > max indentation, return true and don't sink the list
+      */
+      let currentIndentationLevel;
+      let currentPos = state.tr.selection.$to.pos;
+      do {
+        const resolvedPos = state.doc.resolve(currentPos);
+        currentIndentationLevel = numberNestedLists(
+          resolvedPos,
+          state.schema.nodes,
+        );
+        if (currentIndentationLevel > maxIndentation) {
+          // Cancel sink list.
+          // If current indentation less than the initial, it won't be
+          // larger than the max, and the loop will terminate at end of this iteration
+          return true;
+        }
+        currentPos++;
+      } while (currentIndentationLevel >= initialIndentationLevel);
       baseListCommand.sinkListItem(listItem)(state, dispatch);
       return true;
     }
@@ -425,7 +450,9 @@ export function liftListItems(): Command {
       }
     });
 
-    dispatch(tr);
+    if (dispatch) {
+      dispatch(tr);
+    }
 
     return true;
   };
@@ -470,6 +497,39 @@ export function adjustSelectionInList(
   return new TextSelection(doc.resolve(startPos), doc.resolve(endPos));
 }
 
+// Get the depth of the nearest ancestor list
+export const rootListDepth = (pos: ResolvedPos, nodes) => {
+  const { bulletList, orderedList, listItem } = nodes;
+  let depth;
+  for (let i = pos.depth - 1; i > 0; i--) {
+    const node = pos.node(i);
+    if (node.type === bulletList || node.type === orderedList) {
+      depth = i;
+    }
+    if (
+      node.type !== bulletList &&
+      node.type !== orderedList &&
+      node.type !== listItem
+    ) {
+      break;
+    }
+  }
+  return depth;
+};
+
+// Returns the number of nested lists that are ancestors of the given selection
+export const numberNestedLists = (resolvedPos: ResolvedPos, nodes) => {
+  const { bulletList, orderedList } = nodes;
+  let count = 0;
+  for (let i = resolvedPos.depth - 1; i > 0; i--) {
+    const node = resolvedPos.node(i);
+    if (node.type === bulletList || node.type === orderedList) {
+      count += 1;
+    }
+  }
+  return count;
+};
+
 export const toggleList = (
   state: EditorState,
   dispatch: (tr: Transaction) => void,
@@ -477,7 +537,6 @@ export const toggleList = (
   listType: 'bulletList' | 'orderedList',
 ): boolean => {
   const { selection } = state;
-  const { bulletList, orderedList, listItem } = state.schema.nodes;
   const fromNode = selection.$from.node(selection.$from.depth - 2);
   const endNode = selection.$to.node(selection.$to.depth - 2);
   if (
@@ -487,25 +546,12 @@ export const toggleList = (
   ) {
     return toggleListCommand(listType)(state, dispatch, view);
   } else {
-    let rootListDepth;
-    for (let i = selection.$to.depth - 1; i > 0; i--) {
-      const node = selection.$to.node(i);
-      if (node.type === bulletList || node.type === orderedList) {
-        rootListDepth = i;
-      }
-      if (
-        node.type !== bulletList &&
-        node.type !== orderedList &&
-        node.type !== listItem
-      ) {
-        break;
-      }
-    }
+    const depth = rootListDepth(selection.$to, state.schema.nodes);
     let tr = liftFollowingList(
       state,
       selection.$to.pos,
-      selection.$to.end(rootListDepth),
-      rootListDepth,
+      selection.$to.end(depth),
+      depth,
       state.tr,
     );
     tr = liftSelectionList(state, tr);
@@ -514,17 +560,22 @@ export const toggleList = (
   }
 };
 
-export function toggleListCommand(listType: 'bulletList' | 'orderedList') {
-  return function(
-    state: EditorState,
-    dispatch: (tr: Transaction) => void,
-    view: EditorView,
-  ): boolean {
-    dispatch(
-      state.tr.setSelection(
-        adjustSelectionInList(state.doc, state.selection as TextSelection),
-      ),
-    );
+export function toggleListCommand(
+  listType: 'bulletList' | 'orderedList',
+): Command {
+  return function(state, dispatch, view) {
+    if (dispatch) {
+      dispatch(
+        state.tr.setSelection(
+          adjustSelectionInList(state.doc, state.selection as TextSelection),
+        ),
+      );
+    }
+
+    if (!view) {
+      return false;
+    }
+
     state = view.state;
 
     const { $from, $to } = state.selection;

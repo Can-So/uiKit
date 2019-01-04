@@ -1,23 +1,16 @@
-import { md } from '@atlaskit/docs';
+import { md, code } from '@atlaskit/docs';
 
 export default md`
-
-``
   # Auth Provider
 
   **AuthProvider** type can be described as:
 
-  ~~~javascript
-  function(context)
-  ~~~
-
-  ~~~typescript
-  function(context?: AuthContext): Promise<Auth>
-  ~~~
+  ${code`
+  function(context?: AuthContext): Promise<Auth>`}
 
   Media Picker requires a signed JWT for uploading files into the Media API. The token is usually created on the backend by your service with a function similar to this:
 
-  ~~~javascript
+  ${code`
   function createFileStoreToken() {
     const tolerance = 60 * 1; // 1 minute
     const now = Math.floor(Date.now() / 1000) - tolerance;
@@ -37,7 +30,7 @@ export default md`
       { issuer: YOUR_CLIENT_ID },
     );
   }
-  ~~~
+ `}
 
   Please note, that you need access to the upload API filestore:upload to perform requests.
 
@@ -45,7 +38,7 @@ export default md`
 
   Note: ASAP based authentication is currently not implemented yet. To track the progress, see: https://product-fabric.atlassian.net/browse/MSW-195
 
-  ~~~typescript
+  ${code`
   export interface ClientBasedAuth {
     readonly clientId: string;
     readonly token: string;
@@ -63,7 +56,7 @@ export default md`
   }
 
   export type AuthProvider = (context?: AuthContext) => Promise<Auth>;
-  ~~~
+ `}
 
   The function takes 1 argument:
 
@@ -73,9 +66,9 @@ export default md`
 
   The code might look like this:
 
-  ~~~javascript
+  ${code`
   function authProvider(context) {
     return fetch(https://get-auth?collection=context.collectionName);
   }
-  ~~~
-```;
+ `}
+ `;
