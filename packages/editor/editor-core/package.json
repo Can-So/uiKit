@@ -45,7 +45,7 @@
     "@atlaskit/item": "^8.0.14",
     "@atlaskit/logo": "^9.2.6",
     "@atlaskit/media-card": "^47.0.0",
-    "@atlaskit/media-editor": "^11.0.0",
+    "@atlaskit/media-editor": "^21.0.1",
     "@atlaskit/media-filmstrip": "^21.0.2",
     "@atlaskit/media-picker": "^27.0.2",
     "@atlaskit/mention": "^15.1.9",
