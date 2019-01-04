@@ -28,11 +28,11 @@ export type TenantFileRecord = {
   id: Promise<string>;
   occurrenceKey?: string;
 };
-
+export type DataSourceType = 'collection' | 'list';
 export interface State {
   events: Array<TenantFileRecord>;
   selectedItem?: MediaViewerItem;
-  dataSourceType: 'collection' | 'list';
+  dataSourceType: DataSourceType;
 }
 
 export default class Example extends React.Component<{}, State> {
@@ -97,7 +97,7 @@ export default class Example extends React.Component<{}, State> {
     this.setState({ selectedItem: undefined });
   };
 
-  private onDataSourceChange = (event: any) => {
+  private onDataSourceChange = (event: { value: DataSourceType }) => {
     this.setState({
       dataSourceType: event.value,
     });
