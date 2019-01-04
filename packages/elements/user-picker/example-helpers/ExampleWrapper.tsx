@@ -6,11 +6,11 @@ import {
   filterUsers,
   unassigned,
 } from '../example-helpers';
-import { LoadOptions, OnInputChange, User } from '../src/types';
+import { LoadOptions, OnInputChange, User, OptionData } from '../src/types';
 
 type ChildrenProps = {
   loadUsers: LoadOptions;
-  users: User[];
+  options: OptionData[];
   onInputChange: OnInputChange;
 };
 
@@ -21,12 +21,12 @@ export type Props = {
 
 export class ExampleWrapper extends React.PureComponent<
   Props,
-  { users: User[] }
+  { options: OptionData[] }
 > {
   constructor(props) {
     super(props);
     this.state = {
-      users: exampleUsers,
+      options: exampleUsers,
     };
   }
 
@@ -47,7 +47,7 @@ export class ExampleWrapper extends React.PureComponent<
 
   private onInputChange = (searchText?: string) => {
     this.setState({
-      users:
+      options:
         searchText && searchText.length > 0
           ? filterUsers(searchText)
           : exampleUsers,
@@ -56,10 +56,10 @@ export class ExampleWrapper extends React.PureComponent<
 
   render() {
     const { children, analytics } = this.props;
-    const { users } = this.state;
+    const { options } = this.state;
 
     const example = children({
-      users,
+      options,
       loadUsers: this.loadUsers,
       onInputChange: this.onInputChange,
     });

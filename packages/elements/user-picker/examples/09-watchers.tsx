@@ -91,7 +91,7 @@ export default class Example extends React.PureComponent<{}, State> {
     const { value } = this.state;
     return (
       <ExampleWrapper>
-        {({ users, onInputChange }) => (
+        {({ options, onInputChange }) => (
           <div>
             {value.map(user => (
               <UserValue
@@ -102,7 +102,7 @@ export default class Example extends React.PureComponent<{}, State> {
             ))}
             <UserPicker
               ref={this.userPickerRef}
-              options={users.filter(user => value.indexOf(user) === -1)}
+              options={options.filter(user => value.indexOf(user) === -1)}
               value={null}
               onChange={this.handleOnChange}
               onInputChange={onInputChange}

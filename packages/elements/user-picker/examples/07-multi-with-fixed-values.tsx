@@ -7,9 +7,9 @@ export default class Example extends React.Component<{}> {
   render() {
     return (
       <ExampleWrapper>
-        {({ users, onInputChange }) => (
+        {({ options, onInputChange }) => (
           <UserPicker
-            options={users}
+            options={options}
             onChange={console.log}
             onInputChange={onInputChange}
             isMulti
