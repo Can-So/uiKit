@@ -1,5 +1,49 @@
 # @atlaskit/item
 
+## 8.0.14
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/docs@6.0.0
+
+## 8.0.13
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/lozenge@6.2.3
+
+## 8.0.12
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
+## 8.0.11
+- [patch] Consume smallFontSize from @atlaskit/theme [a6f8a43](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6f8a43)
+
+## 8.0.10
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 8.0.9
+- [patch] Fixing selected style for Item and Fixing focus on Quick search when component is not remounted [9532a1b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9532a1b)
+
+## 8.0.8
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/avatar@14.0.11
+  - @atlaskit/tooltip@12.1.1
+  - @atlaskit/icon@14.0.0
+
+## 8.0.7
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 8.0.5
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

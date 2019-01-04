@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import ExpandIcon from '@atlaskit/icon/glyph/chevron-down';
-import TextColourIcon from '@atlaskit/icon/glyph/editor/text-color';
-import { analyticsDecorator as analytics } from '../../../../analytics';
+import TextColorIcon from '@atlaskit/icon/glyph/editor/text-color';
+import { akEditorMenuZIndex } from '@atlaskit/editor-common';
+import { withAnalytics } from '../../../../analytics';
 import ToolbarButton from '../../../../ui/ToolbarButton';
 import ColorPalette from '../../../../ui/ColorPalette';
 import Dropdown from '../../../../ui/Dropdown';
@@ -12,6 +14,14 @@ import {
   Wrapper,
   ExpandIconWrapper,
 } from './styles';
+
+export const messages = defineMessages({
+  textColor: {
+    id: 'fabric.editor.textColor',
+    defaultMessage: 'Text color',
+    description: '',
+  },
+});
 
 export interface State {
   isOpen: boolean;
@@ -26,7 +36,10 @@ export interface Props {
   isReducedSpacing?: boolean;
 }
 
-export default class ToolbarTextColor extends React.Component<Props, State> {
+class ToolbarTextColor extends React.Component<
+  Props & InjectedIntlProps,
+  State
+> {
   state: State = {
     isOpen: false,
   };
@@ -39,8 +52,10 @@ export default class ToolbarTextColor extends React.Component<Props, State> {
       popupsScrollableElement,
       isReducedSpacing,
       pluginState,
+      intl: { formatMessage },
     } = this.props;
 
+    const labelTextColor = formatMessage(messages.textColor);
     return (
       <Wrapper>
         <Dropdown
@@ -51,24 +66,25 @@ export default class ToolbarTextColor extends React.Component<Props, State> {
           onOpenChange={this.handleOpenChange}
           fitWidth={242}
           fitHeight={80}
+          zIndex={akEditorMenuZIndex}
           trigger={
             <ToolbarButton
               spacing={isReducedSpacing ? 'none' : 'default'}
               disabled={pluginState.disabled}
               selected={isOpen}
-              title="Text color"
+              title={labelTextColor}
               onClick={this.toggleOpen}
               iconBefore={
                 <TriggerWrapper>
-                  <TextColourIcon
+                  <TextColorIcon
                     primaryColor={this.getIconColor(
                       pluginState.color,
                       pluginState.defaultColor,
                     )}
-                    label="Text color"
+                    label={labelTextColor}
                   />
                   <ExpandIconWrapper>
-                    <ExpandIcon label="expand-dropdown-menu" />
+                    <ExpandIcon label={labelTextColor} />
                   </ExpandIconWrapper>
                 </TriggerWrapper>
               }
@@ -87,15 +103,17 @@ export default class ToolbarTextColor extends React.Component<Props, State> {
     );
   }
 
-  @analytics('atlassian.editor.format.textcolor.button')
-  private changeTextColor = (color, disabled) => {
-    if (!disabled) {
-      this.toggleOpen();
-      return this.props.changeColor(color);
-    }
+  private changeTextColor = withAnalytics(
+    'atlassian.editor.format.textcolor.button',
+    (color, disabled) => {
+      if (!disabled) {
+        this.toggleOpen();
+        return this.props.changeColor(color);
+      }
 
-    return false;
-  };
+      return false;
+    },
+  );
 
   private toggleOpen = () => {
     this.handleOpenChange({ isOpen: !this.state.isOpen });
@@ -111,3 +129,5 @@ export default class ToolbarTextColor extends React.Component<Props, State> {
     return isOpen || isDefaultColor ? undefined : color;
   };
 }
+
+export default injectIntl(ToolbarTextColor);

@@ -1,7 +1,7 @@
-import * as uuid from 'uuid';
+import * as uuid from 'uuid/v4';
 import { Store, Dispatch, Middleware } from 'redux';
 
-import { State, Tenant, SelectedItem, LocalUpload } from '../domain';
+import { State, SelectedItem, LocalUpload } from '../domain';
 
 import { isStartImportAction } from '../actions/startImport';
 import { finalizeUpload } from '../actions/finalizeUpload';
@@ -19,7 +19,10 @@ import { RemoteUploadActivity } from '../tools/websocket/upload/remoteUploadActi
 import { MediaFile, copyMediaFileForUpload } from '../../domain/file';
 import { PopupUploadEventEmitter } from '../../components/popup';
 import { sendUploadEvent } from '../actions/sendUploadEvent';
+import { setUpfrontIdDeferred } from '../actions/setUpfrontIdDeferred';
+import { WsNotifyMetadata } from '../tools/websocket/wsMessageData';
 
+import { getPreviewFromMetadata } from '../../domain/preview';
 export interface RemoteFileItem extends SelectedItem {
   accountId: string;
   publicId: string;
@@ -50,6 +53,8 @@ const mapSelectedItemToSelectedUploadFile = ({
   date,
   serviceName,
   accountId,
+  upfrontId,
+  occurrenceKey = uuid(),
 }: SelectedItem): SelectedUploadFile => ({
   file: {
     id,
@@ -57,10 +62,12 @@ const mapSelectedItemToSelectedUploadFile = ({
     size,
     creationDate: date || Date.now(),
     type: mimeType,
+    upfrontId,
+    occurrenceKey,
   },
   serviceName,
   accountId,
-  uploadId: uuid.v4(),
+  uploadId: uuid(),
 });
 
 export function importFilesMiddleware(
@@ -80,11 +87,11 @@ export async function importFiles(
   store: Store<State>,
   wsProvider: WsProvider,
 ): Promise<void> {
-  const { uploads, tenant, selectedItems, userAuthProvider } = store.getState();
+  const { uploads, selectedItems, userContext } = store.getState();
 
   store.dispatch(hidePopup());
 
-  const auth = await userAuthProvider();
+  const auth = await userContext.config.authProvider();
   const selectedUploadFiles = selectedItems.map(
     mapSelectedItemToSelectedUploadFile,
   );
@@ -100,20 +107,22 @@ export async function importFiles(
     const selectedItemId = file.id;
     if (serviceName === 'upload') {
       const localUpload: LocalUpload = uploads[selectedItemId];
+      const replaceFileId = file.upfrontId;
+
       importFilesFromLocalUpload(
         selectedItemId,
-        tenant,
         uploadId,
         store,
         localUpload,
+        replaceFileId,
       );
     } else if (serviceName === 'recent_files') {
-      importFilesFromRecentFiles(selectedUploadFile, tenant, store);
+      importFilesFromRecentFiles(selectedUploadFile, store);
     } else if (isRemoteService(serviceName)) {
       const wsConnectionHolder = wsProvider.getWsConnectionHolder(auth);
+
       importFilesFromRemoteService(
         selectedUploadFile,
-        tenant,
         store,
         wsConnectionHolder,
       );
@@ -123,10 +132,10 @@ export async function importFiles(
 
 export const importFilesFromLocalUpload = (
   selectedItemId: string,
-  tenant: Tenant,
   uploadId: string,
   store: Store<State>,
   localUpload: LocalUpload,
+  replaceFileId?: Promise<string>,
 ): void => {
   localUpload.events.forEach(originalEvent => {
     const event = { ...originalEvent };
@@ -138,7 +147,7 @@ export const importFilesFromLocalUpload = (
         collection: RECENTS_COLLECTION,
       };
 
-      store.dispatch(finalizeUpload(file, uploadId, source, tenant));
+      store.dispatch(finalizeUpload(file, uploadId, source, replaceFileId));
     } else if (event.name !== 'upload-end') {
       store.dispatch(sendUploadEvent({ event, uploadId }));
     }
@@ -149,7 +158,6 @@ export const importFilesFromLocalUpload = (
 
 export const importFilesFromRecentFiles = (
   selectedUploadFile: SelectedUploadFile,
-  tenant: Tenant,
   store: Store<State>,
 ): void => {
   const { file, uploadId } = selectedUploadFile;
@@ -158,34 +166,61 @@ export const importFilesFromRecentFiles = (
     collection: RECENTS_COLLECTION,
   };
 
-  store.dispatch(finalizeUpload(file, uploadId, source, tenant));
+  store.dispatch(finalizeUpload(file, uploadId, source));
   store.dispatch(getPreview(uploadId, file, RECENTS_COLLECTION));
 };
 
 export const importFilesFromRemoteService = (
   selectedUploadFile: SelectedUploadFile,
-  tenant: Tenant,
   store: Store<State>,
   wsConnectionHolder: WsConnectionHolder,
 ): void => {
   const { uploadId, serviceName, accountId, file } = selectedUploadFile;
+  const { deferredIdUpfronts } = store.getState();
+  const deferred = deferredIdUpfronts[file.id];
+
+  if (deferred) {
+    const { rejecter, resolver } = deferred;
+    // We asociate the temporary file.id with the uploadId
+    store.dispatch(setUpfrontIdDeferred(uploadId, resolver, rejecter));
+  }
   const uploadActivity = new RemoteUploadActivity(
     uploadId,
     (event, payload) => {
-      // TODO figure out the difference between this uploadId and the last MSW-405
-      const { uploadId } = payload;
-      const newFile: MediaFile = {
-        ...file,
-        id: uploadId,
-        creationDate: Date.now(),
-      };
+      if (event === 'NotifyMetadata') {
+        const preview = getPreviewFromMetadata(
+          (payload as WsNotifyMetadata).metadata,
+        );
 
-      store.dispatch(handleCloudFetchingEvent(newFile, event, payload));
+        // TODO [MS-1011]: store preview url in context cache
+        store.dispatch(
+          sendUploadEvent({
+            event: {
+              name: 'upload-preview-update',
+              data: {
+                file,
+                preview,
+              },
+            },
+            uploadId,
+          }),
+        );
+      } else {
+        // TODO figure out the difference between this uploadId and the last MSW-405
+        const { uploadId: newUploadId } = payload;
+        const newFile: MediaFile = {
+          ...file,
+          id: newUploadId,
+          creationDate: Date.now(),
+        };
+
+        store.dispatch(handleCloudFetchingEvent(newFile, event, payload));
+      }
     },
   );
 
   uploadActivity.on('Started', () => {
-    store.dispatch(remoteUploadStart(uploadId, tenant));
+    store.dispatch(remoteUploadStart(uploadId));
   });
 
   wsConnectionHolder.openConnection(uploadActivity);

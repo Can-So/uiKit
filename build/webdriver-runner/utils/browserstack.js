@@ -1,8 +1,8 @@
 //@flow
 
 /*
-* util module to support connect and disconnect from browserstack.
-*/
+ * util module to support connect and disconnect from browserstack.
+ */
 
 const browserstack = require('browserstack-local');
 const bsLocal = new browserstack.Local();
@@ -12,8 +12,8 @@ const bsKey = process.env.BROWSERSTACK_KEY;
 const commit = process.env.BITBUCKET_COMMIT
   ? process.env.BITBUCKET_COMMIT + uniqIdentifierStamp
   : process.env.USER
-    ? process.env.USER + uniqIdentifierStamp
-    : uniqIdentifierStamp;
+  ? process.env.USER + uniqIdentifierStamp
+  : uniqIdentifierStamp;
 
 async function startBrowserStack() {
   return new Promise((resolve, reject) => {

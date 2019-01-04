@@ -1,5 +1,91 @@
 # @atlaskit/button
 
+## 10.1.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/checkbox@5.0.9
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 10.1.0
+- [minor] [36929ef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36929ef):
+
+  - Add reset as it is listed as a valid type for button and is useful when building forms
+
+## 10.0.4
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/checkbox@5.0.8
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/theme@7.0.0
+
+## 10.0.3
+- [patch] [76a8f1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76a8f1c):
+
+  - Convert @atlaskit/textarea to Typescript
+    - Dist paths have changed, if you are importing by exact file path you will need to update your imports `import '@atlaskit/button/dist/es5/components/ButtonGroup'`
+    - Flow types are not present any more, Typescript definitions are shipped instead
+
+## 10.0.2
+- [patch] [8f89287](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8f89287):
+
+  - Add tslib to dependencies to stop load breaking when it's not there
+
+## 10.0.1
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/checkbox@5.0.7
+  - @atlaskit/icon@15.0.0
+
+## 10.0.0
+- [major] [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+
+  - Converted @atlaskit/button to Typescript
+    - Dist paths have changed, if you are importing by exact file path you will need to update your imports
+      - E.g. `import '@atlaskit/button/dist/cjs/components/ButtonGroup';` would need to be updated to `import '@atlaskit/button/dist/es5/components/ButtonGroup'`
+    - Flow types are not present any more, Typescript definitions are shipped instead
+
+- Updated dependencies [bfac186](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfac186):
+  - @atlaskit/analytics-next-types@3.1.2
+  - @atlaskit/type-helpers@2.0.0
+
+## 9.0.16
+- [patch] Fix truncation in button [508ca2c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/508ca2c)
+
+## 9.0.15
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 9.0.14
+- [patch] Fix styling of button rendering icon in IE [b4c5b87](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b4c5b87)
+
+## 9.0.13
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/checkbox@5.0.2
+  - @atlaskit/icon@14.0.0
+
+## 9.0.12
+- [patch] Add help appearance [3548c3f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3548c3f)
+
+## 9.0.11
+- [patch] Update the appearance of selected for Help [196603f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/196603f)
+
+## 9.0.10
+- [patch] Updated dependencies [7d51a09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d51a09)
+  - @atlaskit/spinner@9.0.9
+
+## 9.0.9
+- [patch] Updated dependencies [80e1925](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80e1925)
+  - @atlaskit/checkbox@5.0.0
+
+## 9.0.8
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 9.0.6
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

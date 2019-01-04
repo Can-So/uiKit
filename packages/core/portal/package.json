@@ -1,11 +1,12 @@
 {
   "name": "@atlaskit/portal",
-  "version": "0.0.6",
+  "version": "0.0.17",
   "description": "Atlaskit wrapper for rendering components in React portals",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "atlaskit:src": "src/index.js",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
@@ -17,7 +18,9 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
+    "exenv": "^1.2.2",
     "tiny-invariant": "^0.0.3"
   },
   "peerDependencies": {
@@ -25,15 +28,16 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "@atlaskit/button": "^9.0.5",
-    "@atlaskit/docs": "^5.0.2",
-    "@atlaskit/flag": "^9.0.4",
-    "@atlaskit/icon": "^13.2.4",
-    "@atlaskit/inline-dialog": "^9.0.0",
-    "@atlaskit/modal-dialog": "^6.0.8",
-    "@atlaskit/onboarding": "^5.1.4",
-    "@atlaskit/tooltip": "^12.0.8",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "@atlaskit/button": "^10.1.1",
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/flag": "^9.1.8",
+    "@atlaskit/icon": "^15.0.2",
+    "@atlaskit/inline-dialog": "^9.0.13",
+    "@atlaskit/modal-dialog": "^7.1.1",
+    "@atlaskit/onboarding": "^6.1.14",
+    "@atlaskit/tooltip": "^12.1.13",
+    "@atlaskit/visual-regression": "^0.0.1",
+    "enzyme": "^3.7.0",
     "styled-components": "^3.2.6"
   },
   "keywords": [

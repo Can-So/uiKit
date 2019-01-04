@@ -19,7 +19,7 @@ import { Card } from '../src';
 import { createApiCards } from '../example-helpers';
 
 const context = createStorybookContext();
-const onClick = ({ event, mediaItemDetails }, analyticsEvent) => {
+const onClick = (_: any, analyticsEvent: any) => {
   console.log('public analytics onClick event', analyticsEvent);
 };
 
@@ -33,16 +33,6 @@ const standardCards = [
         context={context}
         appearance="auto"
         onClick={onClick}
-      />
-    ),
-  },
-  {
-    title: 'Small',
-    content: (
-      <Card
-        identifier={genericUrlPreviewId}
-        context={context}
-        appearance="small"
       />
     ),
   },
@@ -84,12 +74,6 @@ const apiCards = createApiCards('horizontal', genericUrlPreviewId);
 // errors
 const errorCards = [
   {
-    title: 'Small',
-    content: (
-      <Card identifier={errorLinkId} context={context} appearance="small" />
-    ),
-  },
-  {
     title: 'Image',
     content: (
       <Card identifier={errorLinkId} context={context} appearance="image" />
@@ -129,16 +113,6 @@ const smartCards = [
 ];
 
 const smartCardsAppearances = [
-  {
-    title: 'Small',
-    content: (
-      <Card
-        identifier={publicTrelloBoardUrlPreviewId}
-        context={context}
-        appearance="small"
-      />
-    ),
-  },
   {
     title: 'Image',
     content: (

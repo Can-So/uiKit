@@ -1,20 +1,18 @@
 import * as React from 'react';
-import { md, Example } from '@atlaskit/docs';
+import { code, md, Example, Props } from '@atlaskit/docs';
 
 export default md`
-  # @atlaskit/smart-card
+  Turns a URL into a card with metadata sourced from either:
 
-  Turns a URL into a card with metadata sourced from the vendor.
-
-  ## Installation
-
-  ~~~
-  yarn add @atlaskit/smart-card
-  ~~~
+  - a vendor or...
+  - a custom fetch function that can be provided.
 
   _Note_: this package uses an AbortController, so you might need to provide a polyfill for that.
 
   ## Usage
+
+  ${code`import { Provider, Card } from '@atlaskit/smart-card';`}
+
   ${(
     <Example
       Component={require('../examples/0-intro').default}
@@ -23,5 +21,11 @@ export default md`
     />
   )}
 
+${(
+  <Props
+    heading="renderCardWithData Props"
+    props={require('!!extract-react-types-loader!../src/Card/renderCardWithData')}
+  />
+)}
 
 `;

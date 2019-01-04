@@ -9,7 +9,7 @@ export async function waitUntil(
         if (predicate()) {
           resolve();
         } else {
-          setTimeout(check, timeout, retry - 1);
+          window.setTimeout(check, timeout, retry - 1);
         }
       } else {
         reject('timed out');

@@ -1,12 +1,13 @@
 {
   "name": "@atlaskit/lozenge",
-  "version": "6.1.5",
+  "version": "6.2.4",
   "description": "A React component that highlights status for quick recognition",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "atlaskit:src": "src/index.js",
   "atlaskit:designLink": "https://atlassian.design/guidelines/product/components/lozenges",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
@@ -22,8 +23,8 @@
   },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/theme": "^6.0.0",
-    "@atlaskit/util-shared-styles": "^2.10.3",
+    "@atlaskit/theme": "^7.0.1",
+    "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0"
   },
   "peerDependencies": {
@@ -31,9 +32,10 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^1.11.0",
-    "@atlaskit/docs": "^5.0.6",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/visual-regression": "^0.0.1",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",
     "react-test-renderer": "^16.3.0"
   }

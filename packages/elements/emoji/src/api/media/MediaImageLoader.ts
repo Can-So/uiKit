@@ -35,12 +35,12 @@ export default class MediaImageLoader {
   }
 
   loadMediaImage(url: string): Promise<DataURL> {
-    let pending = this.pendingRequests.get(url);
-    if (pending !== undefined) {
-      return pending;
+    const maybePending = this.pendingRequests.get(url);
+    if (maybePending !== undefined) {
+      return maybePending;
     }
 
-    pending = new Promise((resolve, reject) => {
+    const pending = new Promise<string>((resolve, reject) => {
       this.mediaImageQueue.push({
         url,
         resolve,
@@ -48,7 +48,7 @@ export default class MediaImageLoader {
       });
       this.processFromQueue();
     })
-      .then((result: string) => {
+      .then(result => {
         this.pendingRequests.delete(url);
         return result;
       })
@@ -119,7 +119,7 @@ export default class MediaImageLoader {
         },
       };
 
-      return fetch(new Request(url, options)).then(response => {
+      return fetch(url, options).then(response => {
         if (response.status === 403 && retryOnAuthError) {
           // retry once if 403
           return this.tokenManager
@@ -141,7 +141,8 @@ export default class MediaImageLoader {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
 
-      reader.addEventListener('load', () => resolve(reader.result));
+      // TODO: [ts30] Add proper handling for null and ArrayBuffer
+      reader.addEventListener('load', () => resolve(reader.result as string));
       reader.addEventListener('error', () => reject(reader.error));
 
       reader.readAsDataURL(blob);

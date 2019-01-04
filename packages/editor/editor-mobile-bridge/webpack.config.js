@@ -5,67 +5,14 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = {
-  entry: {
-    bundle: './src/index.tsx',
-  },
-  stats: {
-    warnings: false,
-  },
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist', 'bundle'),
-  },
-  resolve: {
-    mainFields: ['atlaskit:src', 'browser', 'main'],
-    extensions: ['.js', '.ts', '.tsx'],
-    alias: {
-      '@atlaskit/media-picker': `${path.resolve(__dirname)}/empty.ts`,
-      '@atlaskit/tooltip': `${path.resolve(__dirname)}/empty.ts`,
-      '@atlaskit/modal-dialog': `${path.resolve(__dirname)}/empty.ts`,
-      '@atlaskit/logo': `${path.resolve(__dirname)}/empty.ts`,
-      '@atlaskit/avatar': `${path.resolve(__dirname)}/empty.ts`,
-      '@atlaskit/avatar-group': `${path.resolve(__dirname)}/empty.ts`,
-      '@atlaskit/profilecard': `${path.resolve(__dirname)}/empty.ts`,
-      '@atlaskit/select': `${path.resolve(__dirname)}/empty.ts`,
-      'react-select': `${path.resolve(__dirname)}/empty.ts`,
-      'components/picker/EmojiPicker': `${path.resolve(__dirname)}/empty.ts`,
-      'react-virtualized/dist/commonjs/List': `${path.resolve(
-        __dirname,
-      )}/empty.ts`,
-      'react-virtualized': `${path.resolve(__dirname)}/empty.ts`,
-    },
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: require.resolve('babel-loader'),
-        options: {
-          cacheDirectory: true,
-        },
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        loader: require.resolve('ts-loader'),
-        options: {
-          transpileOnly: true,
-        },
-      },
-    ],
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV':
-        process.env.NODE_ENV === 'production'
-          ? '"production"'
-          : '"development"',
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'public/index.html.ejs'),
-    }),
+const emptyExportPath = `${path.resolve(__dirname)}/empty.ts`;
+
+const mode = process.env.NODE_ENV || 'development';
+
+const envPlugins = [];
+
+if (mode === 'production') {
+  envPlugins.push(
     new UglifyJsPlugin({
       test: /\.js($|\?)/i,
       sourceMap: true,
@@ -81,5 +28,80 @@ module.exports = {
         },
       },
     }),
-  ],
+  );
+}
+
+module.exports = {
+  mode,
+  entry: {
+    editor: './src/editor/index.tsx',
+    renderer: './src/renderer/index.tsx',
+  },
+  stats: {
+    warnings: false,
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist/bundle'),
+  },
+  resolve: {
+    mainFields: ['atlaskit:src', 'browser', 'main'],
+    extensions: ['.js', '.ts', '.tsx'],
+    alias: {
+      '@atlaskit/media-picker': emptyExportPath,
+      '@atlaskit/modal-dialog': emptyExportPath,
+      '@atlaskit/logo': emptyExportPath,
+      '@atlaskit/avatar': emptyExportPath,
+      '@atlaskit/avatar-group': emptyExportPath,
+      '@atlaskit/profilecard': emptyExportPath,
+      '@atlaskit/select': emptyExportPath,
+      'react-select': emptyExportPath,
+      'components/picker/EmojiPicker': emptyExportPath,
+      'react-virtualized/dist/commonjs/List': emptyExportPath,
+      'react-virtualized': emptyExportPath,
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: require.resolve('babel-loader'),
+        options: {
+          cacheDirectory: true,
+          babelrc: true,
+          rootMode: 'upward',
+          envName: 'production:cjs',
+        },
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: require.resolve('ts-loader'),
+        options: {
+          transpileOnly: true,
+        },
+      },
+    ],
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(
+        mode === 'production' ? 'production' : 'development',
+      ),
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'public/editor.html.ejs'),
+      excludeChunks: ['renderer'],
+      filename: 'editor.html',
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'public/renderer.html.ejs'),
+      excludeChunks: ['editor'],
+      filename: 'renderer.html',
+    }),
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    }),
+  ].concat(envPlugins),
 };

@@ -1,22 +1,38 @@
-import { EditorState } from 'prosemirror-state';
-import { Node as PmNode } from 'prosemirror-model';
 import { Decoration, DecorationSet } from 'prosemirror-view';
+import {
+  TableCssClassName as ClassName,
+  TableDecorations,
+  Cell,
+} from '../types';
 
-export const createHoverDecorationSet = (
-  cells: { pos: number; node: PmNode }[],
-  state: EditorState,
+export const createControlsHoverDecoration = (
+  cells: Cell[],
   danger?: boolean,
-): DecorationSet => {
+): Decoration[] => {
   const deco = cells.map(cell => {
-    const classes = ['hoveredCell'];
+    const classes = [ClassName.HOVERED_CELL];
     if (danger) {
       classes.push('danger');
     }
 
-    return Decoration.node(cell.pos, cell.pos + cell.node.nodeSize, {
-      class: classes.join(' '),
-    });
+    return Decoration.node(
+      cell.pos,
+      cell.pos + cell.node.nodeSize,
+      {
+        class: classes.join(' '),
+      },
+      { key: TableDecorations.CONTROLS_HOVER },
+    );
   });
 
-  return DecorationSet.create(state.doc, deco);
+  return deco;
 };
+
+export const findControlsHoverDecoration = (
+  decorationSet: DecorationSet,
+): Decoration[] =>
+  decorationSet.find(
+    undefined,
+    undefined,
+    spec => spec.key === TableDecorations.CONTROLS_HOVER,
+  );

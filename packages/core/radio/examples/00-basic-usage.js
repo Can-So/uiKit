@@ -1,39 +1,52 @@
 // @flow
 import React, { PureComponent } from 'react';
-import FieldRadioGroup from '../src';
-import type { ItemsPropTypeSmart } from '../src/types';
+import { Checkbox } from '@atlaskit/checkbox';
+import { RadioGroup } from '../src';
+import type { OptionsPropType } from '../src/types';
 
-const items: ItemsPropTypeSmart = [
+const options: OptionsPropType = [
   { name: 'color', value: 'red', label: 'Red' },
-  { name: 'color', value: 'blue', label: 'Blue', defaultSelected: true },
+  { name: 'color', value: 'blue', label: 'Blue' },
   { name: 'color', value: 'yellow', label: 'Yellow' },
   { name: 'color', value: 'green', label: 'Green' },
+  { name: 'color', value: 'black', label: 'Black' },
 ];
 
 type State = {
-  onRadioChangeResult: string,
+  currentValue: string | null,
+  isDisabled?: boolean,
+  onChangeResult: string,
 };
 
 export default class BasicExample extends PureComponent<void, State> {
   state = {
-    onRadioChangeResult: 'Click on a radio field to trigger onRadioChange',
+    currentValue: null,
+    isDisabled: undefined,
+    onChangeResult: 'Click on a radio field to trigger onChange',
   };
 
-  onRadioChange = (event: any) => {
+  onChange = (event: SyntheticEvent<HTMLInputElement>) => {
     this.setState({
-      onRadioChangeResult: `onRadioChange called with value: ${
-        event.target.value
+      onChangeResult: `onChange called with value: ${
+        event.currentTarget.value
       }`,
+    });
+  };
+
+  toggleCheckbox = (event: SyntheticEvent<HTMLInputElement>) => {
+    this.setState({
+      [event.currentTarget.value]: event.currentTarget.checked,
     });
   };
 
   render() {
     return (
       <div>
-        <FieldRadioGroup
-          items={items}
-          label="Pick a color:"
-          onRadioChange={this.onRadioChange}
+        <h4>Choose a color:</h4>
+        <RadioGroup
+          isDisabled={this.state.isDisabled}
+          options={options}
+          onChange={this.onChange}
         />
         <div
           style={{
@@ -45,8 +58,13 @@ export default class BasicExample extends PureComponent<void, State> {
             margin: '0.5em',
           }}
         >
-          {this.state.onRadioChangeResult}
+          {this.state.onChangeResult}
         </div>
+        <Checkbox
+          value="isDisabled"
+          label="is disabled"
+          onChange={this.toggleCheckbox}
+        />
       </div>
     );
   }

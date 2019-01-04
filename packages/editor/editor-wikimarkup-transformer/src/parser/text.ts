@@ -1,8 +1,13 @@
 import { Node as PMNode, Schema } from 'prosemirror-model';
 import { createTextNode } from './nodes/text';
-import { parseToken, TokenType } from './tokenize';
-import { parseKeyword, parseLeadingKeyword } from './tokenize/keyword';
+import {
+  parseOtherKeyword,
+  parseLeadingKeyword,
+  parseMacroKeyword,
+} from './tokenize/keyword';
+import { parseToken, TokenType, TokenErrCallback } from './tokenize';
 import { parseWhitespaceOnly } from './tokenize/whitespace';
+import { escapeHandler } from './utils/escape';
 
 const processState = {
   NEWLINE: 0,
@@ -15,6 +20,7 @@ export function parseString(
   input: string,
   schema: Schema,
   ignoreTokens: TokenType[] = [],
+  tokenErrCallback?: TokenErrCallback,
 ): PMNode[] {
   let index = 0;
   let state = processState.NEWLINE;
@@ -38,7 +44,10 @@ export function parseString(
           continue;
         }
 
-        const match = parseLeadingKeyword(substring) || parseKeyword(substring);
+        const match =
+          parseLeadingKeyword(substring) ||
+          parseMacroKeyword(substring) ||
+          parseOtherKeyword(substring);
 
         if (match && ignoreTokens.indexOf(match.type) === -1) {
           tokenType = match.type;
@@ -56,9 +65,21 @@ export function parseString(
          * saving plantext into the buffer until it hits
          * a keyword
          */
-        const match = parseKeyword(input.substring(index));
+        const substring = input.substring(index);
+        /**
+         * If the previous char is not a alphanumeric, we will parse
+         * format keywords.
+         * If the previous char is '{', we need to skip parse macro
+         * keyword
+         */
+        let match: { type: TokenType } | null = null;
+        if (buffer.endsWith('{')) {
+          match = parseOtherKeyword(substring);
+        } else {
+          match = parseMacroKeyword(substring) || parseOtherKeyword(substring);
+        }
 
-        if (match) {
+        if (match && ignoreTokens.indexOf(match.type) === -1) {
           tokenType = match.type;
           state = processState.TOKEN;
           continue;
@@ -66,7 +87,7 @@ export function parseString(
 
         if (char === '\\') {
           state = processState.ESCAPE;
-          break;
+          continue;
         }
 
         buffer += char;
@@ -74,7 +95,13 @@ export function parseString(
       }
 
       case processState.TOKEN: {
-        const token = parseToken(input.substring(index), tokenType, schema);
+        const token = parseToken(
+          input,
+          tokenType,
+          index,
+          schema,
+          tokenErrCallback,
+        );
         if (token.type === 'text') {
           buffer += token.text;
         } else if (token.type === 'pmnode') {
@@ -92,28 +119,11 @@ export function parseString(
       }
 
       case processState.ESCAPE: {
-        /**
-         * During this state, the parser will see if the escaped
-         * char is a keyword. If it's not a valid keyword, the '\'
-         * will be included in the buffer as well
-         */
-        if (char === '\\') {
-          // '\\' is a linebreak
-          buffer += '\n';
-          state = processState.BUFFER;
-          break;
-        }
-
-        const match =
-          parseLeadingKeyword(input.substring(index)) ||
-          parseKeyword(input.substring(index));
-
-        if (!match) {
-          buffer += '\\';
-        }
-        buffer += char;
+        const token = escapeHandler(input, index);
+        buffer += token.text;
+        index += token.length;
         state = processState.BUFFER;
-        break;
+        continue;
       }
       default:
     }

@@ -6,17 +6,21 @@ import {
 } from './styles';
 import { HttpError } from '../../api/MentionResource';
 import { GenericErrorIllustration } from './GenericErrorIllustration';
+import {
+  DefaultAdvisedAction,
+  DefaultHeadline,
+  DifferentText,
+  LoginAgain,
+} from '../../util/i18n';
 
 export interface Props {
   error?: Error;
 }
 
-const defaultHeadline = 'Something went wrong';
-const defaultSecondary = 'Try again in a few seconds';
-
-type ErrorMessage = {
-  headline: string;
-  advisedAction: string;
+const advisedActionMessages = {
+  '401': LoginAgain,
+  '403': DifferentText,
+  default: DefaultAdvisedAction,
 };
 
 export default class MentionListError extends React.PureComponent<Props, {}> {
@@ -25,38 +29,30 @@ export default class MentionListError extends React.PureComponent<Props, {}> {
    *
    * @param error the error to be displayed
    */
-  private static prepareError(error: Error | undefined): ErrorMessage {
-    const errorMessage = {
-      headline: defaultHeadline,
-      advisedAction: defaultSecondary,
-    };
+  private static getAdvisedActionMessage(
+    error: Error | undefined,
+  ): React.ComponentType<{}> {
     if (error && error.hasOwnProperty('statusCode')) {
       const httpError = error as HttpError;
-
-      if (httpError.statusCode === 401) {
-        errorMessage.advisedAction = 'Try logging out then in again';
-      }
-
-      if (httpError.statusCode === 403) {
-        errorMessage.advisedAction = 'Try entering different text';
-      }
+      return (
+        advisedActionMessages[httpError.statusCode.toString()] ||
+        advisedActionMessages.default
+      );
     }
-
-    return errorMessage;
+    return advisedActionMessages.default;
   }
 
   render() {
     const { error } = this.props;
-    const errorMessage = MentionListError.prepareError(error);
-
+    const ErrorMessage = MentionListError.getAdvisedActionMessage(error);
     return (
       <MentionListErrorStyle>
         <GenericErrorIllustration />
         <MentionListErrorHeadlineStyle>
-          {errorMessage.headline}
+          <DefaultHeadline />
         </MentionListErrorHeadlineStyle>
         <MentionListAdviceStyle>
-          {errorMessage.advisedAction}
+          <ErrorMessage />
         </MentionListAdviceStyle>
       </MentionListErrorStyle>
     );

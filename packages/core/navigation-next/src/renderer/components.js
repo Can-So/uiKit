@@ -1,49 +1,49 @@
 // @flow
 
-import React from 'react';
-import ArrowLeftIcon from '@atlaskit/icon/glyph/arrow-left';
-import ArrowRightIcon from '@atlaskit/icon/glyph/arrow-right';
-import BacklogIcon from '@atlaskit/icon/glyph/backlog';
-import BoardIcon from '@atlaskit/icon/glyph/board';
-import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
-import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
-import FolderIcon from '@atlaskit/icon/glyph/folder';
-import IssuesIcon from '@atlaskit/icon/glyph/issues';
-import ShipIcon from '@atlaskit/icon/glyph/ship';
-import Spinner from '@atlaskit/spinner';
+import React, {
+  PureComponent,
+  type ComponentType,
+  type ElementConfig,
+  type Node,
+} from 'react';
 import { gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import { navigationItemClicked } from '../common/analytics';
-import ContainerHeader from '../components/ContainerHeader';
-import BaseItem from '../components/Item';
-import ItemPrimitive from '../components/Item/primitives';
-import SectionComponent from '../components/Section';
-import Separator from '../components/Separator';
-import GroupComponent from '../components/Group';
-import GroupHeadingComponent from '../components/GroupHeading';
-import Switcher from '../components/Switcher';
-import { withNavigationUI } from '../ui-controller';
-import { withNavigationViewController } from '../view-controller';
+
+import RenderBlocker from '../components/common/RenderBlocker';
+
+import ContainerHeaderComponent from '../components/presentational/ContainerHeader';
+import GroupComponent from '../components/presentational/Group';
+import GroupHeadingComponent from '../components/presentational/GroupHeading';
+import HeaderSectionComponent from '../components/presentational/HeaderSection';
+import MenuSectionComponent from '../components/presentational/MenuSection';
+import SectionComponent from '../components/presentational/Section';
+import SectionHeadingComponent from '../components/presentational/SectionHeading';
+import Separator from '../components/presentational/Separator';
+import Switcher from '../components/presentational/Switcher';
+import Wordmark from '../components/presentational/Wordmark';
+
+import BackItem from '../components/connected/BackItem';
+import ConnectedItem from '../components/connected/ConnectedItem';
+import GoToItem from '../components/connected/GoToItem';
+import SortableContextComponent from '../components/connected/SortableContext';
+import SortableGroupComponent from '../components/connected/SortableGroup';
+import SortableItem from '../components/connected/SortableItem';
 
 import type {
-  GoToItemProps,
+  CustomComponents,
   GroupProps,
-  ItemProps,
-  ItemsRendererProps,
-  SectionProps,
   GroupHeadingProps,
+  HeaderSectionProps,
+  ItemsRendererProps,
+  MenuSectionProps,
+  SectionHeadingProps,
+  SectionProps,
+  SortableContextProps,
+  SortableGroupProps,
+  NavigationRendererItemType,
+  TypeShape,
 } from './types';
-
-const iconMap = {
-  ArrowRightIcon,
-  BacklogIcon,
-  BoardIcon,
-  DashboardIcon,
-  GraphLineIcon,
-  FolderIcon,
-  IssuesIcon,
-  ShipIcon,
-};
 
 const gridSize = gridSizeFn();
 
@@ -51,100 +51,28 @@ const gridSize = gridSizeFn();
  * ITEMS
  */
 
-// GoToItem
-const GoToItemBase = ({
-  after: afterProp,
-  goTo,
-  navigationUIController,
-  navigationViewController,
-  spinnerDelay = 200,
-  ...rest
-}: GoToItemProps) => {
-  let after;
-  if (typeof afterProp === 'undefined') {
-    after = ({ isActive, isHover }: *) => {
-      const { incomingView } = navigationViewController.state;
-      if (incomingView && incomingView.id === goTo) {
-        return <Spinner delay={spinnerDelay} invertColor size="small" />;
-      }
-      if (isActive || isHover) {
-        return <ArrowRightIcon size="small" />;
-      }
-      return null;
-    };
-  }
-
-  const props = { ...rest, after };
-  const handleClick = e => {
-    e.preventDefault();
-
-    const { activeView } = navigationViewController.state;
-
-    if (navigationUIController.state.isPeeking) {
-      if (activeView && goTo === activeView.id) {
-        // If we're peeking and goTo points to the active view, unpeek.
-        navigationUIController.unPeek();
-      } else {
-        // If we're peeking and goTo does not point to the active view, update
-        // the peek view.
-        navigationViewController.setPeekView(goTo);
-      }
-    } else {
-      // If we're not peeking, update the active view.
-      navigationViewController.setView(goTo);
-    }
-  };
-
-  return <Item onClick={e => handleClick(e)} {...props} />;
-};
-const GoToItem = withNavigationUI(withNavigationViewController(GoToItemBase));
-
-// Item
-const Item = ({ before: beforeProp, icon, ...rest }: ItemProps) => {
-  let before = beforeProp;
-  if (!before && icon && iconMap[icon]) {
-    before = iconMap[icon];
-  }
-
-  const props = { ...rest, before };
-  return props.goTo ? <GoToItem {...props} /> : <BaseItem {...props} />;
-};
-
-// BackItem
-const backItemPrimitiveStyles = styles => ({
-  ...styles,
-  itemBase: { ...styles.itemBase, cursor: 'default' },
-});
-
-const BackItem = ({ goTo, href, subText, id, index, text = 'Back' }: *) => (
-  <div css={{ display: 'flex', marginBottom: '8px' }}>
-    <div css={{ flexShrink: 0 }}>
-      <GoToItem
-        after={null}
-        goTo={goTo}
-        href={href}
-        text={<ArrowLeftIcon size="small" />}
-        id={id}
-        index={index}
-      />
-    </div>
-    <div css={{ flexGrow: 1 }}>
-      <ItemPrimitive
-        spacing="compact"
-        styles={backItemPrimitiveStyles}
-        subText={subText}
-        text={text}
-      />
-    </div>
-  </div>
-);
-
 // Title
-const GroupHeading = ({ text, ...props }: GroupHeadingProps) => (
+const GroupHeading = ({ text, ...props }: GroupHeadingProps): Node => (
   <GroupHeadingComponent {...props}>{text}</GroupHeadingComponent>
 );
 
-const Debug = (props: *) => (
+// SectionHeading
+const SectionHeading = ({ text, ...props }: SectionHeadingProps): Node => (
+  <SectionHeadingComponent {...props}>{text}</SectionHeadingComponent>
+);
+
+// ContainerHeader
+const ContainerHeader = (
+  props: ElementConfig<typeof ContainerHeaderComponent>,
+): Node => (
+  // -2px here to account for the extra space at the top of a MenuSection for
+  // the scroll hint.
+  <div css={{ paddingBottom: gridSize * 2.5 - 2 }}>
+    <ContainerHeaderComponent {...props} />
+  </div>
+);
+
+const Debug = (props: any) => (
   <pre
     css={{
       backgroundColor: 'rgba(0, 0, 0, 0.1)',
@@ -162,51 +90,248 @@ const Debug = (props: *) => (
  */
 
 // Group
-const Group = ({
+const Group = <T: TypeShape>({
   customComponents,
   hasSeparator,
   heading,
   items,
   id,
-}: GroupProps) =>
+}: GroupProps<T>) =>
   items.length ? (
     <GroupComponent heading={heading} hasSeparator={hasSeparator} id={id}>
-      <ItemsRenderer items={items} customComponents={customComponents} />
+      <TypedItemsRenderer items={items} customComponents={customComponents} />
     </GroupComponent>
   ) : null;
 
+const SortableGroup = <T: TypeShape>({
+  customComponents,
+  hasSeparator,
+  heading,
+  items,
+  id,
+}: SortableGroupProps<T>) =>
+  items && items.length ? (
+    <SortableGroupComponent
+      heading={heading}
+      hasSeparator={hasSeparator}
+      id={id}
+    >
+      <RenderBlocker items={items} customComponents={customComponents}>
+        <TypedItemsRenderer items={items} customComponents={customComponents} />
+      </RenderBlocker>
+    </SortableGroupComponent>
+  ) : null;
+
 // Section
-const Section = ({
+const Section = <T: TypeShape>({
+  alwaysShowScrollHint = false,
   customComponents,
   id,
   items,
   nestedGroupKey,
   parentId,
-}: SectionProps) =>
+  shouldGrow,
+}: SectionProps<T>) =>
   items.length ? (
-    <SectionComponent id={id} key={nestedGroupKey} parentId={parentId}>
+    <SectionComponent
+      alwaysShowScrollHint={alwaysShowScrollHint}
+      id={id}
+      key={nestedGroupKey}
+      parentId={parentId}
+      shouldGrow={shouldGrow}
+    >
       {({ className }) => (
         <div className={className}>
-          <ItemsRenderer items={items} customComponents={customComponents} />
+          <TypedItemsRenderer
+            items={items}
+            customComponents={customComponents}
+          />
         </div>
       )}
     </SectionComponent>
   ) : null;
 
+const HeaderSection = <T: TypeShape>({
+  customComponents,
+  id,
+  items,
+  nestedGroupKey,
+}: HeaderSectionProps<T>) =>
+  items.length ? (
+    <HeaderSectionComponent id={id} key={nestedGroupKey}>
+      {({ className }) => (
+        <div className={className}>
+          <TypedItemsRenderer
+            items={items}
+            customComponents={customComponents}
+          />
+        </div>
+      )}
+    </HeaderSectionComponent>
+  ) : null;
+
+const MenuSection = <T: TypeShape>({
+  alwaysShowScrollHint,
+  customComponents,
+  id,
+  items,
+  nestedGroupKey,
+  parentId,
+}: MenuSectionProps<T>) => (
+  <MenuSectionComponent
+    alwaysShowScrollHint={alwaysShowScrollHint}
+    id={id}
+    key={nestedGroupKey}
+    parentId={parentId}
+  >
+    {({ className }) => (
+      <div className={className}>
+        <TypedItemsRenderer items={items} customComponents={customComponents} />
+      </div>
+    )}
+  </MenuSectionComponent>
+);
+
+const SortableContext = <T: TypeShape>({
+  customComponents,
+  id,
+  items,
+  onDragStart,
+  onDragUpdate,
+  onDragEnd,
+}: SortableContextProps<T>) =>
+  items && items.length ? (
+    <SortableContextComponent
+      id={id}
+      onDragStart={onDragStart}
+      onDragUpdate={onDragUpdate}
+      onDragEnd={onDragEnd}
+    >
+      <TypedItemsRenderer items={items} customComponents={customComponents} />
+    </SortableContextComponent>
+  ) : null;
+
 const itemComponents = {
+  BackItem,
   ContainerHeader,
   Debug,
   GoToItem,
-  Item,
-  BackItem,
-  Separator,
   GroupHeading,
+  Item: ConnectedItem,
+  SortableItem,
+  SectionHeading,
+  Separator,
   Switcher,
+  Wordmark,
+};
+
+const renderItemComponent = <T: empty>(
+  props: NavigationRendererItemType<T>,
+  key: string,
+  index: number,
+) => {
+  let element = null;
+  // We need an explicit conditional against each type for flow type refinement to work
+  if (props.type === 'BackItem') {
+    const { type, ...compProps } = props;
+    element = <BackItem key={key} {...compProps} index={index} />;
+  } else if (props.type === 'ContainerHeader') {
+    const { type, ...compProps } = props;
+    element = <ContainerHeader key={key} {...compProps} />;
+  } else if (props.type === 'Debug') {
+    const { type, ...compProps } = props;
+    element = <Debug key={key} {...compProps} />;
+  } else if (props.type === 'GoToItem') {
+    const { type, ...compProps } = props;
+    element = <GoToItem key={key} {...compProps} index={index} />;
+  } else if (props.type === 'Item') {
+    const { type, ...compProps } = props;
+    element = <ConnectedItem key={key} {...compProps} index={index} />;
+  } else if (props.type === 'SortableItem') {
+    const { type, ...compProps } = props;
+    element = <SortableItem key={key} {...compProps} index={index} />;
+  } else if (props.type === 'SectionHeading') {
+    const { type, id, ...compProps } = props;
+    element = <SectionHeading key={key} {...compProps} />;
+  } else if (props.type === 'Separator') {
+    const { type, id, ...compProps } = props;
+    element = <Separator key={key} {...compProps} />;
+  } else if (props.type === 'Switcher') {
+    const { type, ...compProps } = props;
+    element = <Switcher key={key} {...compProps} />;
+  } else if (props.type === 'Wordmark') {
+    const { type, id, ...compProps } = props;
+    element = <Wordmark key={key} {...compProps} />;
+  }
+
+  return element;
 };
 
 const groupComponents = {
   Group,
+  HeaderSection,
+  MenuSection,
   Section,
+  SortableContext,
+  SortableGroup,
+};
+
+const renderGroupComponent = <T: empty>(
+  props: NavigationRendererItemType<T>,
+  key: string,
+  customComponents: CustomComponents,
+) => {
+  let element = null;
+  // We need an explicit conditional against each type for flow type refinement to work
+  if (props.type === 'Group') {
+    const { type, ...compProps } = props;
+    element = (
+      <Group key={key} {...compProps} customComponents={customComponents} />
+    );
+  } else if (props.type === 'HeaderSection') {
+    const { type, ...compProps } = props;
+    element = (
+      <HeaderSection
+        key={key}
+        {...compProps}
+        customComponents={customComponents}
+      />
+    );
+  } else if (props.type === 'MenuSection') {
+    const { type, ...compProps } = props;
+    element = (
+      <MenuSection
+        key={key}
+        {...compProps}
+        customComponents={customComponents}
+      />
+    );
+  } else if (props.type === 'Section') {
+    const { type, ...compProps } = props;
+    element = (
+      <Section key={key} {...compProps} customComponents={customComponents} />
+    );
+  } else if (props.type === 'SortableContext') {
+    const { type, ...compProps } = props;
+    element = (
+      <SortableContext
+        key={key}
+        {...compProps}
+        customComponents={customComponents}
+      />
+    );
+  } else if (props.type === 'SortableGroup') {
+    const { type, ...compProps } = props;
+    element = (
+      <SortableGroup
+        key={key}
+        {...compProps}
+        customComponents={customComponents}
+      />
+    );
+  }
+
+  return element;
 };
 
 // Exported for testing purposes only.
@@ -215,58 +340,75 @@ export const components = { ...itemComponents, ...groupComponents };
 /**
  * RENDERER
  */
-const ItemsRenderer = ({ customComponents = {}, items }: ItemsRendererProps) =>
-  items.map(({ type, ...props }, index) => {
-    const key =
-      typeof props.nestedGroupKey === 'string'
-        ? props.nestedGroupKey
-        : props.id;
+class TypedItemsRenderer<T: TypeShape = empty> extends PureComponent<
+  ItemsRendererProps<T>,
+> {
+  customComponentsWithAnalytics: Map<
+    string | ComponentType<*>,
+    ComponentType<*>,
+  > = new Map();
 
-    // If they've provided a component as the type
-    if (typeof type === 'function') {
-      const CustomComponent = navigationItemClicked(
-        type,
-        type.displayName || 'inlineCustomComponent',
-      );
-      return (
-        <CustomComponent
-          key={key}
-          {...props}
-          index={index}
-          // We pass our in-built components through to custom components so
-          // they can wrap/render them if they want to.
-          components={components}
-          customComponents={customComponents}
-        />
-      );
+  getCustomComponent = (component: string | ComponentType<*>) => {
+    // cache custom components wrapped with analytics
+    // to prevent re-mounting of component on re-render
+    const { customComponents = {} } = this.props;
+    let cachedComponent = this.customComponentsWithAnalytics.get(component);
+    if (!cachedComponent) {
+      cachedComponent =
+        typeof component === 'string'
+          ? navigationItemClicked(customComponents[component], component)
+          : navigationItemClicked(
+              component,
+              component.displayName || 'inlineCustomComponent',
+            );
+      this.customComponentsWithAnalytics.set(component, cachedComponent);
     }
+    return cachedComponent;
+  };
 
-    if (typeof type === 'string') {
-      // If they've provided a type which matches one of our in-built group
-      // components
-      if (groupComponents[type]) {
-        const G = groupComponents[type];
-        return <G key={key} {...props} customComponents={customComponents} />;
-      }
+  render() {
+    const { customComponents = {}, items } = this.props;
 
-      // If they've provided a type which matches one of our in-built item
-      // components.
-      if (itemComponents[type]) {
-        const I = itemComponents[type];
-        return <I key={key} {...props} index={index} />;
-      }
+    // We cannot destructure props.type otherwise flow type refinment does not work
+    // https://github.com/facebook/flow/issues/5259
+    return items.map((props, index) => {
+      const key =
+        typeof props.nestedGroupKey === 'string'
+          ? props.nestedGroupKey
+          : props.id;
 
-      // If they've provided a type which matches one of their defined custom
-      // components.
-      if (customComponents[type]) {
-        const CustomComponent = navigationItemClicked(
-          customComponents[type],
-          type,
-        );
+      if (props.type === 'InlineComponent') {
+        const { type, component, ...componentProps } = props;
+        // If they've provided a component as the type
+        const CustomComponent = this.getCustomComponent(props.component);
         return (
           <CustomComponent
             key={key}
-            {...props}
+            {...componentProps}
+            index={index}
+            // We pass our in-built components through to custom components so
+            // they can wrap/render them if they want to.
+            components={components}
+            customComponents={customComponents}
+          />
+        );
+      } else if (Object.keys(groupComponents).includes(props.type)) {
+        // If they've provided a type which matches one of our in-built group
+        // components
+        return renderGroupComponent(props, key, customComponents);
+        // If they've provided a type which matches one of our in-built item
+        // components.
+      } else if (Object.keys(itemComponents).includes(props.type)) {
+        return renderItemComponent(props, key, index);
+      } else if (Object.keys(customComponents).includes(props.type)) {
+        const { type, ...componentProps } = props;
+        // If they've provided a type which matches one of their defined custom
+        // components.
+        const CustomComponent = this.getCustomComponent(type);
+        return (
+          <CustomComponent
+            key={key}
+            {...componentProps}
             index={index}
             // We pass our in-built components through to custom components so
             // they can wrap/render them if they want to.
@@ -275,9 +417,10 @@ const ItemsRenderer = ({ customComponents = {}, items }: ItemsRendererProps) =>
           />
         );
       }
-    }
 
-    return <Debug key={key} type={type} {...props} />;
-  });
+      return <Debug key={key} type={props.type} {...props} />;
+    });
+  }
+}
 
-export default ItemsRenderer;
+export default TypedItemsRenderer;

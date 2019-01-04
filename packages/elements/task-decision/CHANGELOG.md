@@ -1,5 +1,162 @@
 # @atlaskit/task-decision
 
+## 11.1.1
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/renderer@33.0.0
+  - @atlaskit/util-data-test@10.0.28
+
+## 11.1.0
+- [minor] [d9815ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9815ba):
+
+  - ED-5888 Add dark mode for task-decision
+
+## 11.0.10
+- Updated dependencies [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+  - @atlaskit/editor-common@24.0.0
+  - @atlaskit/renderer@32.1.0
+
+## 11.0.9
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/renderer@32.0.0
+  - @atlaskit/util-data-test@10.0.26
+
+## 11.0.8
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/avatar-group@2.1.9
+  - @atlaskit/button@10.1.1
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/renderer@31.1.3
+  - @atlaskit/analytics-listeners@4.1.4
+  - @atlaskit/analytics-namespaced-context@2.1.5
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/util-service-support@3.0.5
+  - @atlaskit/docs@6.0.0
+
+## 11.0.7
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/avatar-group@2.1.8
+  - @atlaskit/button@10.0.4
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/editor-common@22.2.3
+  - @atlaskit/renderer@31.0.7
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+
+## 11.0.6
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/avatar-group@2.1.7
+  - @atlaskit/button@10.0.1
+  - @atlaskit/editor-common@22.0.2
+  - @atlaskit/renderer@31.0.3
+  - @atlaskit/icon@15.0.0
+
+## 11.0.5
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/avatar-group@2.1.6
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/renderer@31.0.2
+  - @atlaskit/analytics-listeners@4.1.1
+  - @atlaskit/button@10.0.0
+  - @atlaskit/analytics-next-types@3.1.2
+
+## 11.0.4
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/renderer@31.0.0
+  - @atlaskit/util-data-test@10.0.21
+
+## 11.0.3
+- [patch] [a706ffd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a706ffd):
+
+  ED-4427 Editor disabled state applies to floating toolbars and task decision checkboxes
+
+## 11.0.2
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/renderer@30.0.0
+  - @atlaskit/util-data-test@10.0.20
+
+## 11.0.1
+- [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+  - @atlaskit/editor-common@20.0.0
+  - @atlaskit/renderer@29.0.0
+  - @atlaskit/util-data-test@10.0.16
+
+## 11.0.0
+- [major] FS-1311 - i18n support for task-decsions. task-decisions now require the placeholder text to be passed in. [8a1ccf2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a1ccf2)
+
+## 10.0.3
+- [patch] Updated dependencies [6e510d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e510d8)
+  - @atlaskit/editor-common@19.3.2
+  - @atlaskit/renderer@28.0.0
+
+## 10.0.2
+- [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+  - @atlaskit/editor-common@19.0.0
+  - @atlaskit/renderer@27.0.0
+  - @atlaskit/util-data-test@10.0.14
+
+## 10.0.1
+- [patch] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [patch] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+  - @atlaskit/editor-common@18.0.0
+  - @atlaskit/renderer@26.0.0
+  - @atlaskit/util-data-test@10.0.12
+
+## 10.0.0
+- [major] Upgrade task and decisions and editor to use @atlaskit/analytics-next. Remove usage of @atlaskit/analytics. [23c7eca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23c7eca)
+
+## 9.0.2
+- [patch] Async load avatargroup because it also pulls in dropdown [fb13496](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb13496)
+
+## 9.0.1
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/avatar@14.0.11
+  - @atlaskit/avatar-group@2.1.3
+  - @atlaskit/button@9.0.13
+  - @atlaskit/editor-common@17.0.7
+  - @atlaskit/renderer@24.2.1
+  - @atlaskit/icon@14.0.0
+
+## 9.0.0
+- [major] Update RXJS dependency to ^5.5.0 [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+
+## 8.1.10
+- [patch] Updated dependencies [2a6410f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2a6410f)
+  - @atlaskit/editor-common@16.2.0
+  - @atlaskit/renderer@23.0.0
+
+## 8.1.9
+- [patch] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+  - @atlaskit/editor-common@16.0.0
+  - @atlaskit/renderer@22.0.0
+  - @atlaskit/util-data-test@10.0.9
+
+## 8.1.8
+- [patch] FS-2941 Stop using Request object and upgrade fetch-mock [dff332a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dff332a)
+
+## 8.1.7
+- [patch] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
+  - @atlaskit/editor-common@15.0.0
+  - @atlaskit/renderer@21.0.0
+  - @atlaskit/util-data-test@10.0.8
+
 ## 8.1.6
 - [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
   - @atlaskit/renderer@20.0.11

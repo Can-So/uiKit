@@ -4,7 +4,6 @@ import { blockquote } from './nodes/blockquote';
 import { bulletList } from './nodes/bullet-list';
 import { codeBlock } from './nodes/code-block';
 import { doc } from './nodes/doc';
-import { extension } from './nodes/extension';
 import { heading } from './nodes/heading';
 import { mediaGroup } from './nodes/media-group';
 import { orderedList } from './nodes/ordered-list';
@@ -15,14 +14,13 @@ import { table } from './nodes/table';
 import { unknown } from './nodes/unknown';
 
 export type MarkEncoder = (text: string, attrs: any) => string;
-export type NodeEncoder = (node: PMNode) => string;
+export type NodeEncoder = (node: PMNode, parent?: PMNode) => string;
 
 const nodeEncoderMapping = {
   blockquote,
   bulletList,
   codeBlock,
   doc,
-  extension,
   heading,
   mediaGroup,
   mediaSingle: mediaGroup,

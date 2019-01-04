@@ -12,9 +12,9 @@ export default md`
   The render prop receives row's data and should return a React component — a row of cells displaying
   the data for the row.
   
-  ## Examples
   ${(
     <Example
+      packageName="@atlaskit/table-tree"
       Component={
         require('../examples/render-prop-async-with-update-items').default
       }
@@ -28,6 +28,7 @@ export default md`
   
   ${(
     <Example
+      packageName="@atlaskit/table-tree"
       Component={require('../examples/render-prop-no-headers').default}
       source={require('!!raw-loader!../examples/render-prop-no-headers')}
       title="No headers"
@@ -36,10 +37,17 @@ export default md`
   )}
   
   ## Subcomponents
-  ### Headers
+
+  ## Headers
   A row holding the \`Header\` components. Can be skipped if no headers are needed.
+
+  ${(
+    <Props
+      props={require('!!extract-react-types-loader!../src/components/Headers')}
+    />
+  )}
   
-  ### Header
+  ## Header
   A header cell for the given column.
     
   ${(
@@ -48,7 +56,7 @@ export default md`
     />
   )}
   
-  ### Rows
+  ## Rows
   A placeholder that is automatically expanded into nested rows. Contains
   the render prop that is called to display the individual rows.
   The data is supplied by the \`items\` property.
@@ -59,7 +67,7 @@ export default md`
     />
   )}
   
-  ### Row
+  ## Row
   A row holding the data cells.
   
   ${(
@@ -68,7 +76,7 @@ export default md`
     />
   )}
   
-  ### Cell
+  ## Cell
   A cell of data to display.
   
   ${(

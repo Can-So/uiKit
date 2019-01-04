@@ -5,20 +5,20 @@ import { connect } from 'react-redux';
 
 import { BinaryUploader } from '../../../../components/binary';
 import { State, EditorData, EditorError, FileReference } from '../../../domain';
-import { ErrorView } from './errorView/errorView';
+import ErrorView from './errorView/errorView';
 import { SpinnerView } from './spinnerView/spinnerView';
 import { MainContainer } from './styles';
-import { editorClose } from '../../../actions/editorClose';
+import { Selection, editorClose } from '../../../actions/editorClose';
 import { editorShowError } from '../../../actions/editorShowError';
 import { editorShowImage } from '../../../actions/editorShowImage';
-import { EditorViewProps } from '@atlaskit/media-editor';
+import { EditorViewOwnProps } from '@atlaskit/media-editor';
 import editorViewLoader from './editorViewLoader';
 export interface MainEditorViewStateProps {
   readonly editorData?: EditorData;
 }
 
 export interface MainEditorViewState {
-  EditorViewComponent?: ComponentClass<EditorViewProps>;
+  EditorViewComponent?: ComponentClass<EditorViewOwnProps>;
 }
 
 export interface MainEditorViewOwnProps {
@@ -26,7 +26,7 @@ export interface MainEditorViewOwnProps {
 }
 
 export interface MainEditorViewDispatchProps {
-  readonly onCloseEditor: () => void;
+  readonly onCloseEditor: (selection: Selection) => void;
   readonly onShowEditorError: (error: EditorError) => void;
   readonly onShowEditorImage: (
     imageUrl: string,
@@ -43,7 +43,7 @@ export class MainEditorView extends Component<
   MainEditorViewProps,
   MainEditorViewState
 > {
-  static EditorViewComponent: ComponentClass<EditorViewProps>;
+  static EditorViewComponent: ComponentClass<EditorViewOwnProps>;
 
   state: MainEditorViewState = {
     EditorViewComponent: MainEditorView.EditorViewComponent,
@@ -89,7 +89,6 @@ export class MainEditorView extends Component<
     } else if (imageUrl && originalFile && EditorViewComponent) {
       return (
         <EditorViewComponent
-          imageUrl={imageUrl}
           onSave={this.onEditorSave(originalFile)}
           onCancel={this.onCancel}
           onError={this.onEditorError}
@@ -124,24 +123,27 @@ export class MainEditorView extends Component<
 
     binaryUploader.upload(image, originalFile.name);
     onDeselectFile(originalFile.id);
-    onCloseEditor();
+    onCloseEditor('Save');
   };
 
   private onCancel = (): void => {
-    this.props.onCloseEditor();
+    this.props.onCloseEditor('Close');
   };
 }
 
-export default connect<{}, MainEditorViewDispatchProps, MainEditorViewOwnProps>(
-  ({ editorData }: State) => ({
-    editorData,
-  }),
+export default connect<
+  {},
+  MainEditorViewDispatchProps,
+  MainEditorViewOwnProps,
+  State
+>(
+  ({ editorData }) => ({ editorData }),
   dispatch => ({
     onShowEditorImage: (imageUrl, originalFile) =>
       dispatch(editorShowImage(imageUrl, originalFile)),
     onShowEditorError: ({ message, retryHandler }) =>
       dispatch(editorShowError(message, retryHandler)),
-    onCloseEditor: () => dispatch(editorClose()),
+    onCloseEditor: (selection: Selection) => dispatch(editorClose(selection)),
     onDeselectFile: fileId => dispatch(deselectItem(fileId)),
   }),
 )(MainEditorView);

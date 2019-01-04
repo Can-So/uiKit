@@ -2,7 +2,7 @@
 /* eslint-disable react/no-multi-comp */
 import React, { Component, Fragment } from 'react';
 
-import AtlassianIcon from '@atlaskit/icon/glyph/atlassian';
+import { AtlassianIcon } from '@atlaskit/logo';
 import SearchIcon from '@atlaskit/icon/glyph/search';
 import CreateIcon from '@atlaskit/icon/glyph/add';
 import ArrowLeft from '@atlaskit/icon/glyph/arrow-left';
@@ -11,7 +11,8 @@ import Page from '@atlaskit/page';
 import Tooltip from '@atlaskit/tooltip';
 import Button, { ButtonGroup } from '@atlaskit/button';
 import { FieldTextStateless } from '@atlaskit/field-text';
-import Checkbox from '@atlaskit/checkbox';
+import { Checkbox } from '@atlaskit/checkbox';
+// $FlowFixMe: cannot resolve TS module
 import { AkSearch } from '@atlaskit/quick-search';
 
 import Navigation, {
@@ -45,7 +46,9 @@ const NavOptionsGroup = ({
   <Fragment>
     <AkNavigationItemGroup title="All Nav Item Options">
       <AkNavigationItem
-        icon={showIcon ? <AtlassianIcon label="Atlassian" /> : null}
+        icon={
+          showIcon ? <AtlassianIcon label="Atlassian" size="small" /> : null
+        }
         isCompact={compactItems}
         text="Auto focused item"
         autoFocus
@@ -218,7 +221,9 @@ class SearchDrawer extends Component<*, *> {
         >
           {items
             .filter(item => item.includes(this.state.value))
-            .map(item => <AkNavigationItem key={item} text={item} />)}
+            .map(item => (
+              <AkNavigationItem key={item} text={item} />
+            ))}
         </AkSearch>
       </AkSearchDrawer>
     );
@@ -254,10 +259,10 @@ class ExampleNav extends Component<void, State> {
   openCustomDrawer = () => this.setState({ openDrawer: 'customDrawer' });
 
   toggleNavCollapse = () => this.setState({ isOpen: !this.state.isOpen });
-  setCompact = (e: { event: SyntheticEvent<any>, isChecked: boolean }) =>
-    this.setState({ compactItems: e.isChecked });
-  setShowIcon = (e: { event: SyntheticEvent<any>, isChecked: boolean }) =>
-    this.setState({ showIcon: e.isChecked });
+  setCompact = (e: SyntheticInputEvent<HTMLInputElement>) =>
+    this.setState({ compactItems: e.target.checked });
+  setShowIcon = (e: SyntheticInputEvent<HTMLInputElement>) =>
+    this.setState({ showIcon: e.target.checked });
 
   handleResize = (pr: { isOpen: boolean, width: number }) => this.setState(pr);
 

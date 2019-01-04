@@ -11,7 +11,7 @@ export default {
             key: { type: 'string' },
           },
         },
-        parameters: { optional: true },
+        parameters: { type: 'object', optional: true },
       },
     },
   },

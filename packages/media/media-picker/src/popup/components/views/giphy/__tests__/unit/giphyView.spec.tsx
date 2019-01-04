@@ -7,6 +7,7 @@ import Button from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
 import FieldText from '@atlaskit/field-text';
 import { CardView } from '@atlaskit/media-card';
+import { fakeIntl, mountWithIntlContext } from '@atlaskit/media-test-helpers';
 
 import {
   mockStore,
@@ -34,14 +35,17 @@ const ConnectedGiphyViewWithStore = getComponentClassWithStore(
 const createConnectedComponent = () => {
   const store = mockStore();
   const dispatch = store.dispatch;
-  const component = shallow(<ConnectedGiphyViewWithStore store={store} />).find(
-    GiphyView,
-  );
+  const component = mountWithIntlContext(
+    <ConnectedGiphyViewWithStore store={store} />,
+  ).find(GiphyView);
 
   return { component, dispatch };
 };
 
 describe('<ConnectedGiphyView />', () => {
+  const setUpfrontIdDeferred = jest.fn();
+  const upfrontId = Promise.resolve('1');
+
   it('should deliver all required props to stateless component', () => {
     const { component } = createConnectedComponent();
     const props = component.props();
@@ -75,9 +79,9 @@ describe('<ConnectedGiphyView />', () => {
 
     const cardModel = { metadata: { id, name, size } };
 
-    component.props().onCardClick(cardModel as any);
+    component.props().onCardClick(cardModel as any, upfrontId);
     expect(dispatch).toBeCalledWith(
-      fileClick({ id, name, size, mimeType, date: 10 }, 'giphy'),
+      fileClick({ id, name, size, mimeType, upfrontId, date: 10 }, 'giphy'),
     );
     (Date.now as any).mockClear();
   });
@@ -126,6 +130,8 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
+          intl={fakeIntl}
         />,
       );
 
@@ -138,6 +144,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should render a CardView for each item passed in', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={false}
           isLoading={true}
           cardModels={cardModels}
@@ -146,6 +153,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -169,6 +177,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should render CardView with selected=true for selectedItems which are in items', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={false}
           isLoading={true}
           cardModels={cardModels}
@@ -177,6 +186,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -189,6 +199,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should NOT render bricks layout when cardModels is an empty array', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={false}
           isLoading={false}
           cardModels={[]}
@@ -197,6 +208,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -206,6 +218,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should render error components when hasError is true', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={true}
           isLoading={false}
           cardModels={[]}
@@ -214,6 +227,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -229,6 +243,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should call onSearchQueryChange() when the "Try again" button is clicked', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={true}
           isLoading={false}
           cardModels={cardModels}
@@ -237,6 +252,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -250,6 +266,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should render empty state when isLoading is false and items is an empty array', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={false}
           isLoading={false}
           cardModels={[]}
@@ -258,6 +275,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -271,6 +289,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should show the load more button when totalResultCount is undefined', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={false}
           isLoading={true}
           cardModels={[]}
@@ -279,6 +298,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -288,6 +308,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should disable the load more button and show a spinner when isLoading is true', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={false}
           isLoading={true}
           cardModels={cardModels}
@@ -296,6 +317,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -307,6 +329,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should NOT show the load more button when the totalResultCount equals the number of cardModels and the card is NOT loading', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={false}
           isLoading={false}
           cardModels={cardModels}
@@ -315,6 +338,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -324,6 +348,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should call onSearchQueryChange() when FieldText fires onChange after one second', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={false}
           isLoading={true}
           cardModels={[]}
@@ -332,6 +357,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -344,6 +370,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should call onLoadMoreButtonClick() when the load more button is clicked', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={false}
           isLoading={false}
           cardModels={cardModels}
@@ -352,6 +379,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -368,6 +396,7 @@ describe('<ConnectedGiphyView />', () => {
     it('should call onCardClick() when a CardView is clicked', () => {
       const giphyView = shallow(
         <GiphyView
+          intl={fakeIntl}
           hasError={false}
           isLoading={true}
           cardModels={cardModels}
@@ -376,6 +405,7 @@ describe('<ConnectedGiphyView />', () => {
           onSearchQueryChange={onSearchQueryChange}
           onLoadMoreButtonClick={onLoadMoreButtonClick}
           onCardClick={onCardClick}
+          setUpfrontIdDeferred={setUpfrontIdDeferred}
         />,
       );
 
@@ -383,11 +413,12 @@ describe('<ConnectedGiphyView />', () => {
         .find(CardView)
         .first()
         .simulate('click');
+
       expect(onCardClick).toHaveBeenCalledTimes(1);
-      expect(onCardClick).toHaveBeenCalledWith({
-        dimensions: {},
-        metadata: { id: 'id-1' },
-      });
+      expect(onCardClick).toHaveBeenCalledWith(
+        { dimensions: {}, metadata: { id: 'id-1' } },
+        expect.anything(),
+      );
     });
   });
 });

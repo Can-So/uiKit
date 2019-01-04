@@ -1,10 +1,14 @@
 {
-  "extends": "../../../tsconfig.fabric.json",
+  "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "declaration": false,
   },
   "include": [
     "./src/**/*.ts",
-    "./src/**/*.tsx"
+    "./src/**/*.tsx",
+    "./examples/**/*.ts",
+    "./examples/**/*.tsx",
+    "./example-helpers/**/*.ts",
+    "./example-helpers/**/*.tsx"
   ]
 }

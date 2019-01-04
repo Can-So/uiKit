@@ -1,7 +1,17 @@
 import * as React from 'react';
+import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import { PureComponent, ReactElement } from 'react';
 import { ProviderFactory, WithProviders } from '@atlaskit/editor-common';
 import TaskItemWithProviders from './task-item-with-providers';
+
+const messages = defineMessages({
+  placeholder: {
+    id: 'fabric.editor.taskPlaceholder',
+    defaultMessage: "Type your action, use '@' to assign to someone.",
+    description:
+      'Placeholder description for an empty action/task in the editor',
+  },
+});
 
 export interface TaskProps {
   taskId: string;
@@ -11,9 +21,10 @@ export interface TaskProps {
   showPlaceholder?: boolean;
   children?: ReactElement<any>;
   providers?: ProviderFactory;
+  disabled?: boolean;
 }
 
-export default class TaskItem extends PureComponent<TaskProps, {}> {
+export class TaskItem extends PureComponent<TaskProps & InjectedIntlProps, {}> {
   private providerFactory: ProviderFactory;
 
   constructor(props) {
@@ -30,12 +41,18 @@ export default class TaskItem extends PureComponent<TaskProps, {}> {
   }
 
   private renderWithProvider = providerFactory => {
-    const { providers, ...otherProps } = this.props;
+    const {
+      providers,
+      intl: { formatMessage },
+      ...otherProps
+    } = this.props;
     const { taskDecisionProvider, contextIdentifierProvider } = providerFactory;
+    const placeholder = formatMessage(messages.placeholder);
 
     return (
       <TaskItemWithProviders
         {...otherProps}
+        placeholder={placeholder}
         taskDecisionProvider={taskDecisionProvider}
         contextIdentifierProvider={contextIdentifierProvider}
       />
@@ -52,3 +69,5 @@ export default class TaskItem extends PureComponent<TaskProps, {}> {
     );
   }
 }
+
+export default injectIntl(TaskItem);

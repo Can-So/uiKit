@@ -1,11 +1,17 @@
-import { Fragment, Slice, Node as PMNode } from 'prosemirror-model';
+import {
+  Fragment,
+  Slice,
+  Node as PMNode,
+  NodeType,
+  MarkType,
+  Schema,
+} from 'prosemirror-model';
 import {
   EditorState,
   NodeSelection,
   TextSelection,
   Transaction,
 } from 'prosemirror-state';
-import { EditorView } from 'prosemirror-view';
 import {
   canMoveDown,
   canMoveUp,
@@ -13,6 +19,8 @@ import {
   atTheBeginningOfBlock,
   isTableCell,
 } from '../utils';
+import { Command } from '../types';
+import { EditorView } from 'prosemirror-view';
 
 export function preventDefault(): Command {
   return function(state, dispatch) {
@@ -30,13 +38,17 @@ export function insertNewLine(): Command {
       const hardBreakNode = hardBreak.create();
 
       if (parent && parent.type.validContent(Fragment.from(hardBreakNode))) {
-        dispatch(state.tr.replaceSelectionWith(hardBreakNode));
+        if (dispatch) {
+          dispatch(state.tr.replaceSelectionWith(hardBreakNode));
+        }
         return true;
       }
     }
 
     if (state.selection instanceof TextSelection) {
-      dispatch(state.tr.insertText('\n'));
+      if (dispatch) {
+        dispatch(state.tr.insertText('\n'));
+      }
       return true;
     }
 
@@ -50,39 +62,43 @@ export function insertRule(): Command {
     const { rule } = state.schema.nodes;
     if (rule) {
       const ruleNode = rule.create();
-      dispatch(state.tr.insert(to + 1, ruleNode));
+      if (dispatch) {
+        dispatch(state.tr.insert(to + 1, ruleNode));
+      }
       return true;
     }
     return false;
   };
 }
 
-export function shouldAppendParagraphAfterBlockNode(state) {
-  return (
-    (atTheEndOfDoc(state) && atTheBeginningOfBlock(state)) || isTableCell(state)
-  );
+export function shouldAppendParagraphAfterBlockNode(state: EditorState) {
+  return atTheEndOfDoc(state) && atTheBeginningOfBlock(state);
 }
 
 export function insertNodesEndWithNewParagraph(nodes: PMNode[]): Command {
   return function(state, dispatch) {
     const { tr, schema } = state;
     const { paragraph } = schema.nodes;
+    const { head } = state.selection;
 
     if (shouldAppendParagraphAfterBlockNode(state)) {
       nodes.push(paragraph.create());
     }
 
+    /** If table cell, the default is to move to the next cell, override to select paragraph */
     tr.replaceSelection(new Slice(Fragment.from(nodes), 0, 0));
+    if (isTableCell(state)) {
+      tr.setSelection(TextSelection.create(state.doc, head, head));
+    }
 
-    dispatch(tr);
+    if (dispatch) {
+      dispatch(tr);
+    }
     return true;
   };
 }
 
-export function createNewParagraphAbove(
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean {
+export const createNewParagraphAbove: Command = (state, dispatch) => {
   const append = false;
   if (!canMoveUp(state) && canCreateParagraphNear(state)) {
     createParagraphNear(append)(state, dispatch);
@@ -90,12 +106,9 @@ export function createNewParagraphAbove(
   }
 
   return false;
-}
+};
 
-export function createNewParagraphBelow(
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-): boolean {
+export const createNewParagraphBelow: Command = (state, dispatch) => {
   const append = true;
   if (!canMoveDown(state) && canCreateParagraphNear(state)) {
     createParagraphNear(append)(state, dispatch);
@@ -103,7 +116,7 @@ export function createNewParagraphBelow(
   }
 
   return false;
-}
+};
 
 function canCreateParagraphNear(state: EditorState): boolean {
   const {
@@ -136,13 +149,19 @@ export function createParagraphNear(append: boolean = true): Command {
 
     const tr = state.tr.insert(insertPos, paragraph.createAndFill() as PMNode);
     tr.setSelection(TextSelection.create(tr.doc, insertPos + 1));
-    dispatch(tr);
+
+    if (dispatch) {
+      dispatch(tr);
+    }
 
     return true;
   };
 }
 
-function getInsertPosFromTextBlock(state: EditorState, append: boolean): void {
+function getInsertPosFromTextBlock(
+  state: EditorState,
+  append: boolean,
+): number {
   const { $from, $to } = state.selection;
   let pos;
   if (!append) {
@@ -156,7 +175,7 @@ function getInsertPosFromTextBlock(state: EditorState, append: boolean): void {
 function getInsertPosFromNonTextBlock(
   state: EditorState,
   append: boolean,
-): void {
+): number {
   const { $from, $to } = state.selection;
   const nodeAtSelection =
     state.selection instanceof NodeSelection &&
@@ -177,7 +196,7 @@ function getInsertPosFromNonTextBlock(
   return pos;
 }
 
-function topLevelNodeIsEmptyTextBlock(state): boolean {
+function topLevelNodeIsEmptyTextBlock(state: EditorState): boolean {
   const topLevelNode = state.selection.$from.node(1);
   return (
     topLevelNode.isTextblock &&
@@ -204,7 +223,9 @@ export function createParagraphAtEnd(): Command {
     }
     tr.setSelection(TextSelection.create(tr.doc, tr.doc.content.size - 1));
     tr.scrollIntoView();
-    dispatch(tr);
+    if (dispatch) {
+      dispatch(tr);
+    }
     return true;
   };
 }
@@ -216,3 +237,85 @@ export interface Command {
     view?: EditorView,
   ): boolean;
 }
+
+export const changeImageAlignment = (align): Command => (state, dispatch) => {
+  const { from, to } = state.selection;
+
+  const tr = state.tr;
+
+  state.doc.nodesBetween(from, to, (node, pos, parent) => {
+    if (node.type === state.schema.nodes.mediaSingle) {
+      tr.setNodeMarkup(pos, undefined, {
+        ...node.attrs,
+        layout: align === 'center' ? 'center' : `align-${align}`,
+      });
+    }
+  });
+
+  if (tr.docChanged && dispatch) {
+    dispatch(tr.scrollIntoView());
+    return true;
+  }
+
+  return false;
+};
+
+/**
+ * Toggles block mark based on the return type of `getAttrs`.
+ * This is similar to ProseMirror's `getAttrs` from `AttributeSpec`
+ * return `false` to remove the mark.
+ * return `undefined for no-op.
+ * return an `object` to update the mark.
+ */
+export const toggleBlockMark = <T = object>(
+  markType: MarkType,
+  getAttrs: ((prevAttrs?: T) => T | undefined | false),
+  allowedBlocks?:
+    | Array<NodeType>
+    | ((schema: Schema, node: PMNode, parent: PMNode) => boolean),
+): Command => (state, dispatch) => {
+  const { from, to } = state.selection;
+
+  let markApplied = false;
+  const tr = state.tr;
+
+  state.doc.nodesBetween(from, to, (node, pos, parent) => {
+    if (!node.type.isBlock) {
+      return false;
+    }
+
+    if (
+      (!allowedBlocks ||
+        (Array.isArray(allowedBlocks)
+          ? allowedBlocks.indexOf(node.type) > -1
+          : allowedBlocks(state.schema, node, parent))) &&
+      parent.type.allowsMarkType(markType)
+    ) {
+      const oldMarks = node.marks.filter(mark => mark.type === markType);
+      const newAttrs = getAttrs(
+        oldMarks.length ? (oldMarks[0].attrs as T) : undefined,
+      );
+
+      if (newAttrs !== undefined) {
+        tr.setNodeMarkup(
+          pos,
+          node.type,
+          node.attrs,
+          node.marks
+            .filter(mark => !markType.excludes(mark.type))
+            .concat(newAttrs === false ? [] : markType.create(newAttrs)),
+        );
+        markApplied = true;
+      }
+    }
+  });
+
+  if (markApplied && tr.docChanged) {
+    if (dispatch) {
+      dispatch(tr.scrollIntoView());
+    }
+    return true;
+  }
+
+  return false;
+};

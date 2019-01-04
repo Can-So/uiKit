@@ -1,5 +1,192 @@
 # @atlaskit/emoji
 
+## 49.1.0
+- [patch] [53cb129](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/53cb129):
+
+  - show emoji preview error in a tooltip, render spinner outside button, css changes
+- [minor] [514790b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/514790b):
+
+  - added i18n support to emoji
+- [patch] [686de31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/686de31):
+
+  - added maxWidth to other buttons
+
+## 49.0.0
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/util-data-test@10.0.28
+  - @atlaskit/media-core@24.7.0
+
+## 48.0.2
+- [patch] [0f19693](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f19693):
+
+  - added tests for xregexp transformer, updated README and simplified code
+- [patch] [b789b3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b789b3a):
+
+  - removed xregexp library dependency from emoji and mention components, added xregexp-transformer package to compile xregexp expressions to unicode charsets
+
+## 48.0.1
+- [patch] [015fcd0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/015fcd0):
+
+  - Adjusted unit tests to test for the bug noticed in FS-3259. Added multiple atlassian-ftfy emoji to test this, so updated a unit test to confirm that there are 14 Atlassian emoji, and also added an additional unit test to confirm that FS-3259 was corrected.
+- [patch] [18203e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/18203e6):
+
+  - FS-3259 Fixed bug that caused an emoji to be automatically inserted for a query including a closing colon even if there are multiple (an odd number specifically) emoji with an exact shortName match.
+
+## 48.0.0
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/util-data-test@10.0.26
+  - @atlaskit/media-core@24.6.0
+
+## 47.0.8
+- [patch] [b81da9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b81da9b):
+
+  - Fix typescript types to support strictFunctionTypes
+
+## 47.0.7
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics@4.0.7
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-base@11.0.13
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/layer@5.0.10
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/util-service-support@3.0.5
+  - @atlaskit/media-core@24.5.2
+  - @atlaskit/docs@6.0.0
+
+## 47.0.6
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/field-base@11.0.12
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+
+## 47.0.5
+- [patch] [31ac424](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/31ac424):
+
+  - FS-1596 Changed sizes of example emojis in test00.
+
+## 47.0.4
+- [patch] [90c4702](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90c4702):
+
+  - FS-1734 Removed the try it out section from Emoji and Mentions documentation pages to match other pages. The section only contained a link to the same page, so was essentially redundant and potentially confusing.
+
+## 47.0.3
+- [patch] [3061b52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3061b52):
+
+  - AK-5723 - adjust files in package.json to ensure correct publishing of dist/package.json
+
+## 47.0.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/field-base@11.0.11
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
+## 47.0.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/button@10.0.0
+
+## 47.0.0
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/util-data-test@10.0.21
+  - @atlaskit/media-core@24.5.0
+
+## 46.0.1
+- [patch] [49a2a58](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49a2a58):
+
+  - Use onClick from button in emoji
+
+## 46.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/util-data-test@10.0.20
+  - @atlaskit/media-core@24.4.0
+
+## 45.0.4
+- [patch] [36c362f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36c362f):
+
+  - FS-3174 - Fix usage of gridSize() and borderRadius()
+
+## 45.0.3
+- [patch] [527b954](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/527b954):
+
+  - FS-3174 - Remove usage of util-shared-styles from elements components
+
+## 45.0.2
+- [patch] Tweak emoji tests to work better with newest EmojiOne v4 metadata [c034007](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c034007)
+
+## 45.0.1
+- [patch] Move canvas-prebuilt to devDep [7c3512e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c3512e)
+
+## 45.0.0
+- [major] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+  - @atlaskit/util-data-test@10.0.16
+  - @atlaskit/media-core@24.3.0
+
+## 44.0.0
+- [major] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+  - @atlaskit/util-data-test@10.0.14
+  - @atlaskit/media-core@24.2.0
+
+## 43.0.0
+- [patch] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [major] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [major] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+  - @atlaskit/util-data-test@10.0.12
+  - @atlaskit/media-core@24.1.0
+
+## 42.0.2
+- [patch] Remove ua-parser-js to save some pageweight [cf18b9f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cf18b9f)
+
+## 42.0.1
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/button@9.0.13
+  - @atlaskit/field-base@11.0.8
+  - @atlaskit/tooltip@12.1.1
+  - @atlaskit/icon@14.0.0
+
+## 42.0.0
+- [major] Update RXJS dependency to ^5.5.0 [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+- [major] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+  - @atlaskit/util-data-test@10.0.10
+  - @atlaskit/media-core@24.0.0
+
+## 41.0.1
+- [patch] FS-1583 size placeholders in picker to square [a836b20](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a836b20)
+
+## 41.0.0
+- [major] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+  - @atlaskit/util-data-test@10.0.9
+  - @atlaskit/media-core@23.2.0
+
+## 40.0.2
+- [patch] Update TS to 3.0 [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+- [none] Updated dependencies [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+  - @atlaskit/media-core@23.1.1
+
+## 40.0.1
+- [patch] FS-2941 Stop using Request object and upgrade fetch-mock [dff332a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dff332a)
+
+## 40.0.0
+- [major] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
+  - @atlaskit/util-data-test@10.0.8
+  - @atlaskit/media-core@23.1.0
+
 ## 39.1.1
 - [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
   - @atlaskit/util-data-test@10.0.7

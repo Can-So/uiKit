@@ -54,8 +54,8 @@ function renderNotificationIndicator(
 export default function Example() {
   const refreshingClient = new MockNotificationLogClient();
   let count = 1;
-  setInterval(() => {
-    count = count % 10 + 1;
+  window.setInterval(() => {
+    count = (count % 10) + 1;
     refreshingClient.setResponse(Promise.resolve({ count }));
   }, 950);
 

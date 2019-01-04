@@ -7,6 +7,8 @@ import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { runMacroAutoConvert } from '../macro';
 import { closeHistory } from 'prosemirror-history';
+import { getPasteSource } from './util';
+import { queueCardsFromChangedTr } from '../card/pm-plugins/doc';
 
 export const handlePasteIntoTaskAndDecision = (slice: Slice) => (
   state: EditorState,
@@ -20,17 +22,14 @@ export const handlePasteIntoTaskAndDecision = (slice: Slice) => (
   if (decisionItem && decisionList && taskList && taskItem) {
     if (hasParentNodeOfType([decisionItem, taskItem])(state.selection)) {
       if (state.selection.empty) {
-        analyticsService.trackEvent(
-          'atlassian.fabric.action-decision.editor.paste',
-        );
         slice = taskDecisionSliceFilter(slice, state.schema);
         slice = linkifyContent(state.schema, slice);
+        const tr = closeHistory(state.tr)
+          .replaceSelection(slice)
+          .scrollIntoView();
 
-        dispatch(
-          closeHistory(state.tr)
-            .replaceSelection(slice)
-            .scrollIntoView(),
-        );
+        queueCardsFromChangedTr(state, tr);
+        dispatch(tr);
         return true;
       }
     }
@@ -38,7 +37,7 @@ export const handlePasteIntoTaskAndDecision = (slice: Slice) => (
   return false;
 };
 
-export const handlePasteAsPlainText = (slice: Slice) => (
+export const handlePasteAsPlainText = (slice: Slice, event: ClipboardEvent) => (
   state: EditorState,
   dispatch,
   view: EditorView,
@@ -52,7 +51,10 @@ export const handlePasteAsPlainText = (slice: Slice) => (
   const tr = closeHistory(state.tr);
   if ((view as any).shiftKey) {
     // <- using the same internal flag that prosemirror-view is using
-    analyticsService.trackEvent('atlassian.editor.paste.alt');
+    analyticsService.trackEvent('atlassian.editor.paste.alt', {
+      source: getPasteSource(event),
+    });
+
     tr.replaceSelection(slice);
     (state.storedMarks || []).forEach(mark => {
       tr.addMark(tr.selection.from, tr.selection.from + slice.size, mark);
@@ -64,15 +66,25 @@ export const handlePasteAsPlainText = (slice: Slice) => (
   return false;
 };
 
-export const handleMacroAutoConvert = (text: string) => (
+export const handleMacroAutoConvert = (text: string, slice: Slice) => (
   state: EditorState,
   dispatch,
+  view: EditorView,
 ) => {
   const macro = runMacroAutoConvert(state, text);
   if (macro) {
+    const selection = state.tr.selection;
+    const tr = state.tr.replaceSelection(slice);
+    const before = tr.mapping.map(selection.from, -1);
+
+    // insert the text or linkified/md-converted clipboard data
+    dispatch(tr);
+
+    // replace the text with the macro as a separate transaction
+    // so the autoconversion generates 2 undo steps
     dispatch(
-      closeHistory(state.tr)
-        .replaceSelectionWith(macro)
+      closeHistory(view.state.tr)
+        .replaceRangeWith(before, before + slice.size, macro)
         .scrollIntoView(),
     );
   }

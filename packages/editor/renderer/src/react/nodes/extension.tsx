@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { RendererContext, BreakoutConsumer } from '..';
+import { RendererContext } from '..';
 import { renderNodes, Serializer } from '../..';
+import { ExtensionLayout } from '@atlaskit/adf-schema';
 import {
   ADNode,
   ExtensionHandlers,
-  ExtensionLayout,
+  WidthConsumer,
 } from '@atlaskit/editor-common';
-import { calcExtensionWidth } from '@atlaskit/editor-common';
+import { calcBreakoutWidth } from '@atlaskit/editor-common';
+import { RendererCssClassName } from '../../consts';
 
 export interface Props {
   serializer: Serializer<any>;
@@ -20,18 +22,19 @@ export interface Props {
 }
 
 export const renderExtension = (content: any, layout: string) => (
-  <BreakoutConsumer>
-    {containerWidth => (
+  <WidthConsumer>
+    {({ width }) => (
       <div
-        className={`Extension-${layout}`}
+        className={RendererCssClassName.EXTENSION}
         style={{
-          width: calcExtensionWidth(layout, containerWidth),
+          width: calcBreakoutWidth(layout, width),
         }}
+        data-layout={layout}
       >
         {content}
       </div>
     )}
-  </BreakoutConsumer>
+  </WidthConsumer>
 );
 
 const Extension: React.StatelessComponent<Props> = ({

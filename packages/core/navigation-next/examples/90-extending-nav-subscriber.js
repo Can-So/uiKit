@@ -9,23 +9,31 @@ import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
 import FolderIcon from '@atlaskit/icon/glyph/folder';
 import GraphLineIcon from '@atlaskit/icon/glyph/graph-line';
 import IssuesIcon from '@atlaskit/icon/glyph/issues';
-import JiraIcon from '@atlaskit/icon/glyph/jira';
 import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
 import SearchIcon from '@atlaskit/icon/glyph/search';
-import { JiraWordmark } from '@atlaskit/logo';
+import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
+import { JiraIcon, JiraWordmark } from '@atlaskit/logo';
+import { gridSize as gridSizeFn } from '@atlaskit/theme';
+
+import { Label } from '@atlaskit/field-base';
+import { ToggleStateless } from '@atlaskit/toggle';
 
 import {
   ContainerHeader,
   GlobalNav,
   GroupHeading,
+  HeaderSection,
   Item,
   ItemAvatar,
   LayoutManager,
   NavigationProvider,
-  Section,
+  MenuSection,
   Separator,
   UIControllerSubscriber,
+  Wordmark,
 } from '../src';
+
+const gridSize = gridSizeFn();
 
 // ==============================
 // Data
@@ -33,39 +41,20 @@ import {
 
 const globalNavPrimaryItems = [
   {
-    key: 'jira',
-    component: ({ className, children }: *) => (
-      <UIControllerSubscriber>
-        {navigationUIController => {
-          function onClick() {
-            if (navigationUIController.state.isCollapsed) {
-              navigationUIController.expand();
-            }
-            navigationUIController.togglePeek();
-          }
-          return (
-            <button
-              className={className}
-              onClick={onClick}
-              onMouseEnter={navigationUIController.peekHint}
-              onMouseLeave={navigationUIController.unPeekHint}
-            >
-              {children}
-            </button>
-          );
-        }}
-      </UIControllerSubscriber>
+    id: 'jira',
+    icon: ({ label }: { label: string }) => (
+      <JiraIcon size="medium" label={label} />
     ),
-    icon: JiraIcon,
     label: 'Jira',
   },
-  { key: 'search', icon: SearchIcon },
-  { key: 'create', icon: AddIcon },
+  { id: 'search', icon: SearchIcon },
+  { id: 'create', icon: AddIcon },
 ];
 
 const globalNavSecondaryItems = [
-  { icon: QuestionCircleIcon, label: 'Help', size: 'small' },
+  { id: 'icon-123', icon: QuestionCircleIcon, label: 'Help', size: 'small' },
   {
+    id: 'icon-321',
     icon: () => (
       <Avatar
         borderColor="transparent"
@@ -76,66 +65,6 @@ const globalNavSecondaryItems = [
     ),
     label: 'Profile',
     size: 'small',
-  },
-];
-
-const productRootNavSections = [
-  {
-    key: 'header',
-    isRootLevel: true,
-    items: [
-      {
-        type: () => (
-          <div css={{ padding: '12px 0' }}>
-            <JiraWordmark />
-          </div>
-        ),
-        key: 'jira-wordmark',
-      },
-    ],
-  },
-  {
-    key: 'menu',
-    isRootLevel: true,
-    items: [
-      {
-        type: Item,
-        key: 'dashboards',
-        text: 'Dashboards',
-        before: DashboardIcon,
-      },
-      { type: Item, key: 'projects', text: 'Projects', before: FolderIcon },
-      { type: Item, key: 'issues', text: 'Issues', before: IssuesIcon },
-    ],
-  },
-];
-
-const productContainerNavSections = [
-  {
-    key: 'header',
-    isRootLevel: true,
-    items: [
-      {
-        type: ContainerHeader,
-        key: 'project-switcher',
-        before: itemState => (
-          <ItemAvatar itemState={itemState} appearance="square" />
-        ),
-        text: 'My software project',
-        subText: 'Software project',
-      },
-    ],
-  },
-  {
-    key: 'menu',
-    isRootLevel: true,
-    items: [
-      { type: GroupHeading, key: 'title', children: 'Group heading' },
-      { type: Item, key: 'backlog', text: 'Backlog', before: BacklogIcon },
-      { type: Item, key: 'sprints', text: 'Active sprints', before: BoardIcon },
-      { type: Item, key: 'reports', text: 'Reports', before: GraphLineIcon },
-      { type: Separator, key: 'separator' },
-    ],
   },
 ];
 
@@ -150,28 +79,90 @@ const GlobalNavigation = () => (
   />
 );
 
-const RenderSection = ({ section }: *) => (
-  <div css={{ paddingTop: '16px' }}>
-    {section.map(({ key, isRootLevel, items }) => (
-      <Section key={key}>
-        {({ css }) => (
-          <div
-            css={{ ...css, ...(isRootLevel ? { padding: '0 16px' } : null) }}
-          >
-            {items.map(({ type: Component, ...props }: any) => (
-              <Component {...props} />
-            ))}
-          </div>
-        )}
-      </Section>
-    ))}
+const ProductNavigation = () => (
+  <div data-webdriver-test-key="product-navigation">
+    <HeaderSection>
+      {({ className }) => (
+        <div className={className}>
+          <Wordmark wordmark={JiraWordmark} />
+        </div>
+      )}
+    </HeaderSection>
+    <MenuSection>
+      {({ className }) => (
+        <div className={className}>
+          <Item
+            before={DashboardIcon}
+            text="Dashboards"
+            testKey="product-item-dashboards"
+          />
+          <Item
+            before={FolderIcon}
+            text="Projects"
+            testKey="product-item-projects"
+          />
+          <Item
+            before={IssuesIcon}
+            text="Issues"
+            testKey="product-item-issues"
+          />
+        </div>
+      )}
+    </MenuSection>
   </div>
 );
-const ProductNavigation = () => (
-  <RenderSection section={productRootNavSections} />
-);
 const ContainerNavigation = () => (
-  <RenderSection section={productContainerNavSections} />
+  <div data-webdriver-test-key="container-navigation">
+    <HeaderSection>
+      {({ css }) => (
+        <div
+          data-webdriver-test-key="container-header"
+          css={{
+            ...css,
+            paddingBottom: gridSize * 2.5,
+          }}
+        >
+          <ContainerHeader
+            before={itemState => (
+              <ItemAvatar
+                itemState={itemState}
+                appearance="square"
+                size="large"
+              />
+            )}
+            text="My software project"
+            subText="Software project"
+          />
+        </div>
+      )}
+    </HeaderSection>
+    <MenuSection>
+      {({ className }) => (
+        <div className={className}>
+          <Item
+            before={BacklogIcon}
+            text="Backlog"
+            isSelected
+            testKey="container-item-backlog"
+          />
+          <Item
+            before={BoardIcon}
+            text="Active sprints"
+            testKey="container-item-sprints"
+          />
+          <Item
+            before={GraphLineIcon}
+            text="Reports"
+            testKey="container-item-reports"
+          />
+          <Separator />
+          <GroupHeading>Shortcuts</GroupHeading>
+          <Item before={ShortcutIcon} text="Project space" />
+          <Item before={ShortcutIcon} text="Project repo" />
+        </div>
+      )}
+    </MenuSection>
+  </div>
 );
 
 // ==============================
@@ -183,15 +174,9 @@ function NOOP() {}
 type StatusEvents = {
   onResizeEnd: number => void,
   onResizeStart: number => void,
-  onPeekHint: () => void,
-  onUnpeekHint: () => void,
-  onPeek: () => void,
-  onUnpeek: () => void,
 };
 type NavState = {
   isCollapsed: boolean,
-  isPeekHinting: boolean,
-  isPeeking: boolean,
   isResizing: boolean,
   productNavWidth: number,
 };
@@ -211,20 +196,8 @@ class CollapseStatus extends React.Component<StatusProps> {
     onResizeStart: NOOP,
   };
   componentDidUpdate(prevProps: StatusProps) {
-    const {
-      onResizeStart,
-      onResizeEnd,
-      onPeekHint,
-      onUnpeekHint,
-      onPeek,
-      onUnpeek,
-    } = this.props;
-    const {
-      isPeekHinting,
-      isPeeking,
-      isResizing,
-      productNavWidth,
-    } = this.props.navState;
+    const { onResizeStart, onResizeEnd } = this.props;
+    const { isResizing, productNavWidth } = this.props.navState;
 
     // manual resize
     if (isResizing && !prevProps.navState.isResizing) {
@@ -232,22 +205,6 @@ class CollapseStatus extends React.Component<StatusProps> {
     }
     if (!isResizing && prevProps.navState.isResizing) {
       onResizeEnd(productNavWidth);
-    }
-
-    // hinting
-    if (isPeekHinting && !prevProps.navState.isPeekHinting) {
-      onPeekHint();
-    }
-    if (!isPeekHinting && prevProps.navState.isPeekHinting) {
-      onUnpeekHint();
-    }
-
-    // peeking
-    if (isPeeking && !prevProps.navState.isPeeking) {
-      onPeek();
-    }
-    if (!isPeeking && prevProps.navState.isPeeking) {
-      onUnpeek();
     }
   }
   render() {
@@ -306,6 +263,8 @@ type State = {
   boxWidth: number | 'auto',
   callStack: Array<StatusEvent>,
   resizePending: boolean,
+  isFlyoutAvailable: boolean,
+  isAlternateFlyoutBehaviourEnabled: boolean,
 };
 function makeKey() {
   return Math.random()
@@ -315,7 +274,13 @@ function makeKey() {
 
 // eslint-disable-next-line react/no-multi-comp
 class ExtendingNavSubscriber extends React.Component<*, State> {
-  state = { callStack: [], boxWidth: 'auto', resizePending: false };
+  state = {
+    callStack: [],
+    boxWidth: 'auto',
+    resizePending: false,
+    isFlyoutAvailable: true,
+    isAlternateFlyoutBehaviourEnabled: false,
+  };
   componentDidMount() {
     this.updateWidth();
   }
@@ -366,10 +331,24 @@ class ExtendingNavSubscriber extends React.Component<*, State> {
   makePending = () => {
     this.setState({ resizePending: true });
   };
+
+  onFlyoutToggle = () => {
+    this.setState(state => ({ isFlyoutAvailable: !state.isFlyoutAvailable }));
+  };
+  onAlternateBehaviourToggle = () => {
+    this.setState(state => ({
+      isAlternateFlyoutBehaviourEnabled: !state.isAlternateFlyoutBehaviourEnabled,
+    }));
+  };
+
   render() {
-    const { boxWidth, resizePending } = this.state;
+    const {
+      boxWidth,
+      resizePending,
+      isFlyoutAvailable,
+      isAlternateFlyoutBehaviourEnabled,
+    } = this.state;
     const lastTen = this.getStack();
-    console.log('navState', this.props.navState);
 
     return (
       <LayoutManager
@@ -380,36 +359,50 @@ class ExtendingNavSubscriber extends React.Component<*, State> {
         onCollapseEnd={this.onCollapseEnd}
         onExpandStart={this.onExpandStart}
         onExpandEnd={this.onExpandEnd}
+        experimental_flyoutOnHover={isFlyoutAvailable}
+        experimental_alternateFlyoutBehaviour={
+          isAlternateFlyoutBehaviourEnabled
+        }
       >
         <CollapseStatusListener
           onResizeEnd={this.onResizeEnd}
           onResizeStart={this.onResizeStart}
-          onPeek={this.onEmit('onPeek')}
-          onUnpeek={this.onEmit('onUnpeek')}
-          onPeekHint={this.onEmit('onPeekHint')}
-          onUnpeekHint={this.onEmit('onUnpeekHint')}
         />
         <div>
           <ResizeBox width={boxWidth} pending={resizePending} />
-          <Logger>
-            <button
-              style={{ position: 'absolute', right: 10, top: 10 }}
-              onClick={() => this.setState({ callStack: [] })}
-            >
-              Clear
-            </button>
-            {lastTen.length ? (
-              lastTen.map(e => (
-                <div key={e.key}>
-                  <code>
-                    {e.name}({e.value})
-                  </code>
-                </div>
-              ))
-            ) : (
-              <div>Events logged here...</div>
-            )}
-          </Logger>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <div>
+              <Label label="Toggle flyout on hover (experimental)" />
+              <ToggleStateless
+                isChecked={isFlyoutAvailable}
+                onChange={this.onFlyoutToggle}
+              />
+              <Label label="Toggle alternate hover behaviour (experimental)" />
+              <ToggleStateless
+                isChecked={isAlternateFlyoutBehaviourEnabled}
+                onChange={this.onAlternateBehaviourToggle}
+              />
+            </div>
+            <Logger>
+              <button
+                style={{ position: 'absolute', right: 10, top: 10 }}
+                onClick={() => this.setState({ callStack: [] })}
+              >
+                Clear
+              </button>
+              {lastTen.length ? (
+                lastTen.map(e => (
+                  <div key={e.key}>
+                    <code>
+                      {e.name}({e.value})
+                    </code>
+                  </div>
+                ))
+              ) : (
+                <div>Events logged here...</div>
+              )}
+            </Logger>
+          </div>
         </div>
       </LayoutManager>
     );

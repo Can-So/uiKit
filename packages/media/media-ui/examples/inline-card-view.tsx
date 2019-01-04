@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
+import Button from '@atlaskit/button';
 import {
-  LinkView,
-  ResolvedView,
-  ResolvingView,
-  ErroredView,
-  ForbiddenView,
-  UnauthorizedView,
+  InlineCardResolvedView,
+  InlineCardResolvingView,
+  InlineCardErroredView,
+  InlineCardForbiddenView,
+  InlineCardUnauthorizedView,
 } from '../src/InlineCard';
 
 interface Lozenge {
@@ -24,67 +24,86 @@ const lozenge: Lozenge = {
 };
 const onClick = () => window.open(url);
 
-export default () => (
-  <Page>
-    <Grid>
-      <GridColumn>
-        <h4>Paste link into editor</h4>
-        Labore sunt adipisicing esse magna.
-        <LinkView text={url} onClick={onClick} />
-        <h4>Unauthorised view</h4>
-        Labore sunt adipisicing esse magna.
-        <UnauthorizedView
-          icon={icon}
-          onClick={() => {}}
-          onAuthorise={() => {
-            alert('Does nothing...');
-          }}
-          url={url}
-        />
-        <h4>ResolvingView</h4>
-        Labore sunt adipisicing esse magna.
-        <ResolvingView url={url} onClick={onClick} />
-        Labore sunt adipisicing esse magna.
-        <h4>No Permissions View</h4>
-        Labore sunt adipisicing esse magna.
-        <ForbiddenView
-          url={url}
-          onClick={() => {
-            alert("Clicking me won't fix the permissions...");
-          }}
-          onAuthorise={() => {
-            alert('Okay, what else have we got...');
-          }}
-        />
-        <h4>Errored View</h4>
-        Labore sunt adipisicing esse magna.
-        <ErroredView
-          message="Ooops, something went wrong!"
-          url={url}
-          onClick={() => {}}
-          onRetry={() => {
-            alert('Trying really hard!');
-          }}
-        />
-        Labore sunt adipisicing esse magna.
-        <h4>Resolved view</h4>
-        Labore sunt adipisicing esse magna.
-        <ResolvedView
-          icon={icon}
-          title={title}
-          lozenge={lozenge}
-          onClick={onClick}
-        />
-        <h4>Resolved selecetd view</h4>
-        Labore sunt adipisicing esse magna.
-        <ResolvedView
-          icon={icon}
-          title={title}
-          lozenge={lozenge}
-          isSelected={true}
-          onClick={onClick}
-        />
-      </GridColumn>
-    </Grid>
-  </Page>
-);
+class Example extends React.Component {
+  state = {
+    isSelected: false,
+  };
+
+  handleSelectedClick = () => {
+    this.setState({
+      isSelected: !this.state.isSelected,
+    });
+  };
+
+  render() {
+    return (
+      <Page>
+        <Grid>
+          <GridColumn>
+            <Button label="Is selected?" onClick={this.handleSelectedClick}>
+              {this.state.isSelected ? 'Deselect' : 'Make those selected'}
+            </Button>
+          </GridColumn>
+        </Grid>
+        <Grid>
+          <GridColumn>
+            <h4>Unauthorised view</h4>
+            Labore sunt adipisicing esse magna.
+            <InlineCardUnauthorizedView
+              isSelected={this.state.isSelected}
+              icon={icon}
+              onClick={() => {}}
+              onAuthorise={() => {
+                alert('Does nothing...');
+              }}
+              url={url}
+            />
+            <h4>ResolvingView</h4>
+            Labore sunt adipisicing esse magna.
+            <InlineCardResolvingView
+              isSelected={this.state.isSelected}
+              url={url}
+              onClick={onClick}
+            />
+            Labore sunt adipisicing esse magna.
+            <h4>No Permissions View</h4>
+            Labore sunt adipisicing esse magna.
+            <InlineCardForbiddenView
+              isSelected={this.state.isSelected}
+              url={url}
+              onClick={() => {
+                alert("Clicking me won't fix the permissions...");
+              }}
+              onAuthorise={() => {
+                alert('Okay, what else have we got...');
+              }}
+            />
+            <h4>Errored View</h4>
+            Labore sunt adipisicing esse magna.
+            <InlineCardErroredView
+              isSelected={this.state.isSelected}
+              message="Ooops, something went wrong!"
+              url={url}
+              onClick={() => {}}
+              onRetry={() => {
+                alert('Trying really hard!');
+              }}
+            />
+            Labore sunt adipisicing esse magna.
+            <h4>Resolved view</h4>
+            Labore sunt adipisicing esse magna.
+            <InlineCardResolvedView
+              isSelected={this.state.isSelected}
+              icon={icon}
+              title={title}
+              lozenge={lozenge}
+              onClick={onClick}
+            />
+          </GridColumn>
+        </Grid>
+      </Page>
+    );
+  }
+}
+
+export default () => <Example />;

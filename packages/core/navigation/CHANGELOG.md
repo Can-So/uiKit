@@ -1,5 +1,141 @@
 # @atlaskit/navigation
 
+## 33.3.8
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics@4.0.7
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/blanket@7.0.12
+  - @atlaskit/button@10.1.1
+  - @atlaskit/checkbox@5.0.9
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/item@8.0.14
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/page@8.0.12
+  - @atlaskit/polyfills@3.0.4
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/single-select@6.0.11
+  - @atlaskit/size-detector@5.0.9
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/toggle@5.0.14
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/quick-search@5.2.4
+  - @atlaskit/docs@6.0.0
+
+## 33.3.7
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/blanket@7.0.11
+  - @atlaskit/button@10.0.4
+  - @atlaskit/checkbox@5.0.8
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/field-text@7.0.16
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/item@8.0.13
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/single-select@6.0.10
+  - @atlaskit/toggle@5.0.13
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/quick-search@5.2.1
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+
+## 33.3.6
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/checkbox@5.0.7
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/item@8.0.12
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/single-select@6.0.9
+  - @atlaskit/toggle@5.0.12
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/quick-search@5.1.2
+  - @atlaskit/icon@15.0.0
+
+## 33.3.5
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/blanket@7.0.10
+  - @atlaskit/checkbox@5.0.6
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/page@8.0.11
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/single-select@6.0.8
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/toggle@5.0.11
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/button@10.0.0
+
+## 33.3.4
+- [patch] [abd3a39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abd3a39):
+
+  - Bump react-beautiful-dnd dependency to v10.0.2
+
+## 33.3.3
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 33.3.2
+- [patch] [b332c91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b332c91):
+
+  - upgrades verison of react-scrolllock to SSR safe version
+
+## 33.3.1
+- Updated dependencies [2da04ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2da04ed):
+  - @atlaskit/quick-search@5.0.0
+
+## 33.3.0
+- [minor] [90f4995](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90f4995):
+
+  Update drawer width with 'medium' width
+
+## 33.2.1
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 33.2.0
+- [minor] Fire navigationItem clicked event on navigation channel for global item clicks if an id prop is provided [480d00b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/480d00b)
+- [minor] Fire expand/collapse analytics on navigation channel [6e90e67](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e90e67)
+
+## 33.1.11
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/avatar@14.0.11
+  - @atlaskit/button@9.0.13
+  - @atlaskit/checkbox@5.0.2
+  - @atlaskit/dropdown-menu@6.1.17
+  - @atlaskit/item@8.0.8
+  - @atlaskit/single-select@6.0.6
+  - @atlaskit/toggle@5.0.9
+  - @atlaskit/tooltip@12.1.1
+  - @atlaskit/quick-search@4.2.9
+  - @atlaskit/icon@14.0.0
+
+## 33.1.10
+- [patch] Pulling the shared styles from @atlaskit/theme and removed dependency on util-shraed-styles [7d51a09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d51a09)
+
+## 33.1.9
+- [patch] Updated dependencies [80e1925](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80e1925)
+  - @atlaskit/button@9.0.9
+  - @atlaskit/checkbox@5.0.0
+
+## 33.1.8
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 33.1.7
+- [patch] Make navigation SSR-friendly [59f7cb4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/59f7cb4)
+
 ## 33.1.5
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

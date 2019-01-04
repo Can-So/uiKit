@@ -2,7 +2,7 @@ import {
   TableRowDefinition,
   TableHeaderDefinition,
   TableCellDefinition,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 
 export const tableRow = (
   content: Array<TableHeaderDefinition> | Array<TableCellDefinition>,

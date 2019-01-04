@@ -1,9 +1,14 @@
-import { Token } from './';
+import { TextToken } from './';
+import { createDashTokenParser } from './dash-token-creator';
 
-export function doubleDashSymbol(input: string): Token {
-  return {
-    type: 'text',
-    text: '–',
-    length: 2,
-  };
-}
+const token: TextToken = {
+  type: 'text',
+  text: '\u2013', // EN DASH
+  length: 2,
+};
+const fallback: TextToken = {
+  ...token,
+  text: '--',
+};
+
+export const doubleDashSymbol = createDashTokenParser(token, fallback);

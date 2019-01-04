@@ -108,24 +108,9 @@ describe('SectionMessage', () => {
     },
     appearancesCase,
   );
-  describe('dom snapshot', () => {
-    cases(
-      'appearances',
-      ({ type }: { type: Appearance }) => {
-        const wrapper = mount(
-          <SectionMessage appearance={type}>
-            The section message is awesome!
-          </SectionMessage>,
-        );
-        expect(wrapper).toMatchSnapshot();
-      },
-      appearancesCase,
-    );
-  });
   describe('styled rule', () => {
     it('should have background color and default color', () => {
-      // $FlowFixMe - https://github.com/facebook/flow/issues/396
-      expect(shallow(<SectionMessage />)).toHaveStyleRule(
+      expect(shallow(<SectionMessage>test</SectionMessage>)).toHaveStyleRule(
         'background-color',
         '#DEEBFF',
       );

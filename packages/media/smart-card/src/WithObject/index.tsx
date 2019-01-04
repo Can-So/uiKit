@@ -1,7 +1,11 @@
 import * as React from 'react';
-import { Subscription } from 'rxjs/Subscription';
 import Context from '../Context';
 import { Client, ObjectState } from '../Client';
+import { v4 } from 'uuid';
+import {
+  BlockCardErroredView,
+  InlineCardErroredView,
+} from '@atlaskit/media-ui';
 
 export interface WithObjectRenderProps {
   state: ObjectState;
@@ -11,113 +15,123 @@ export interface WithObjectRenderProps {
 interface InnerWithObjectProps {
   client: Client;
   url: string;
-  children: (props: WithObjectRenderProps) => React.ReactNode;
+  children: (renderProps: WithObjectRenderProps) => React.ReactNode;
 }
 
 interface InnerWithObjectState {
   prevClient?: Client;
   prevUrl?: string;
-  state: ObjectState;
+  cardState: ObjectState;
+  uuid: string;
 }
 
 class InnerWithObject extends React.Component<
   InnerWithObjectProps,
   InnerWithObjectState
 > {
-  private subscription?: Subscription;
-
   state: InnerWithObjectState = {
-    state: {
-      status: 'resolving',
-      services: [],
-    },
+    uuid: v4(),
+    cardState: { status: 'pending' },
   };
-
-  unsubscribe() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-      this.subscription = undefined;
-    }
-  }
-
-  subscribe() {
-    const { client, url } = this.props;
-    const subscription = client.get(url).subscribe(state =>
-      this.setState({
-        state,
-      }),
-    );
-
-    this.subscription = subscription;
-  }
 
   reload = () => {
-    const { client } = this.props;
-    const { state } = this.state;
-    if (state && state.provider) {
-      client.reload(state.provider);
+    const { cardState } = this.state;
+    if (
+      cardState.status === 'errored' ||
+      cardState.status === 'unauthorized' ||
+      cardState.status === 'forbidden'
+    ) {
+      const { client, url } = this.props;
+      client.reload(url, cardState.definitionId);
     }
   };
 
-  static getDerivedStateFromProps(
-    nextProps: InnerWithObjectProps,
-    prevState: InnerWithObjectState,
-  ) {
-    if (
-      nextProps.client !== prevState.prevClient ||
-      nextProps.url !== prevState.prevUrl
-    ) {
-      return {
-        state: {
-          status: 'resolving',
-        },
-        prevClient: nextProps.client,
-        prevUrl: nextProps.url,
-      };
+  updateState = (incoming: [ObjectState | null, boolean]) => {
+    const { url, client } = this.props;
+    const [state, expired] = incoming;
+
+    if (state === null || expired) {
+      return client.resolve(url);
     }
-    return null;
-  }
+
+    return this.setState({
+      cardState: state,
+    });
+  };
 
   componentDidMount() {
-    this.subscribe();
+    const { client, url } = this.props;
+    const { uuid } = this.state;
+    client.register(url).subscribe(uuid, this.updateState);
   }
 
   componentDidUpdate(prevProps: InnerWithObjectProps) {
-    if (
-      this.props.client !== prevProps.client ||
-      this.props.url !== prevProps.url
-    ) {
-      this.unsubscribe();
-      this.subscribe();
+    const { client, url } = this.props;
+    const { uuid } = this.state;
+    if (client !== prevProps.client) {
+      prevProps.client.deregister(prevProps.url, uuid);
+      client.register(url).subscribe(uuid, this.updateState);
     }
+    if (url !== prevProps.url) {
+      client.deregister(prevProps.url, uuid);
+      client.register(url).subscribe(uuid, this.updateState);
+    }
+    return;
   }
 
   componentWillUnmount() {
-    this.unsubscribe();
+    const { client, url } = this.props;
+    const { uuid } = this.state;
+    client.deregister(url, uuid);
   }
 
   render() {
     const { children } = this.props;
-    const { state } = this.state;
-    return children({ state, reload: this.reload });
+    const { cardState } = this.state;
+    return children({ state: cardState, reload: this.reload });
   }
 }
 
 export interface WithObjectProps {
   client?: Client;
+  isSelected?: boolean;
+  appearance: 'block' | 'inline';
   url: string;
   children: (props: WithObjectRenderProps) => React.ReactNode;
 }
 
 export function WithObject(props: WithObjectProps) {
-  const { client: clientFromProps, url, children } = props;
+  const {
+    client: clientFromProps,
+    url,
+    children,
+    isSelected,
+    appearance,
+  } = props;
   return (
     <Context.Consumer>
       {clientFromContext => {
         const client = clientFromProps || clientFromContext;
         if (!client) {
-          throw new Error(
-            '@atlaskit/smart-card: No client provided. Provide a client like <Card client={new Client()} url=""/> or <Provider client={new Client()}><Card url=""/></Provider>.',
+          // tslint:disable-next-line:no-console
+          console.error(
+            `No Smart Card client provided. Provide a client via prop <Card client={new Client()} /> or by wrapping with a provider <SmartCardProvider><Card /></SmartCardProvider>.'`,
+          );
+
+          return appearance === 'inline' ? (
+            <InlineCardErroredView
+              url={url}
+              isSelected={isSelected}
+              message="Smart Card provider missing"
+              onClick={() => window.open(url)}
+            />
+          ) : (
+            <BlockCardErroredView
+              url={url}
+              isSelected={isSelected}
+              message="Smart Card provider missing"
+              onClick={() => window.open(url)}
+            />
           );
         }
         return (

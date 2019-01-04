@@ -5,7 +5,12 @@ import styled from 'styled-components';
 import ArrowUpIcon from '@atlaskit/icon/glyph/arrow-up';
 import ArrowDownIcon from '@atlaskit/icon/glyph/arrow-down';
 
-import { Spotlight, SpotlightManager, SpotlightTarget } from '../src';
+import {
+  Spotlight,
+  SpotlightManager,
+  SpotlightTarget,
+  SpotlightTransition,
+} from '../src';
 import { Code, Highlight } from './styled';
 
 const Wrapper = styled.div`
@@ -73,36 +78,41 @@ export default class SpotlightDialogWidthExample extends Component<{}, State> {
     );
 
     return (
-      <SpotlightManager component={Wrapper}>
-        <SpotlightTarget name="width-example">
-          <Highlight color="neutral">Target</Highlight>
-        </SpotlightTarget>
+      <Wrapper>
+        <SpotlightManager>
+          <SpotlightTarget name="width-example">
+            <Highlight color="neutral">Target</Highlight>
+          </SpotlightTarget>
 
-        <p>
-          Spotlight&apos;s supported dialog widths are between{' '}
-          <Code>160px</Code> and <Code>600px</Code>.
-        </p>
-        <p>
-          +/- buttons passed to the <Code>actionsBeforeElement</Code> property.
-        </p>
-        <p>
-          <button onClick={this.start}>Show</button>
-        </p>
+          <p>
+            Spotlight&apos;s supported dialog widths are between{' '}
+            <Code>160px</Code> and <Code>600px</Code>.
+          </p>
+          <p>
+            +/- buttons passed to the <Code>actionsBeforeElement</Code>{' '}
+            property.
+          </p>
+          <p>
+            <button onClick={this.start}>Show</button>
+          </p>
 
-        {value && (
-          <Spotlight
-            actions={[{ onClick: this.finish, text: 'Done' }]}
-            actionsBeforeElement={deltaButtons}
-            dialogPlacement="top center"
-            dialogWidth={value}
-            heading={`${value}px`}
-            key="width-example"
-            target="width-example"
-          >
-            <Lorem count={1} />
-          </Spotlight>
-        )}
-      </SpotlightManager>
+          <SpotlightTransition>
+            {value && (
+              <Spotlight
+                actions={[{ onClick: this.finish, text: 'Done' }]}
+                actionsBeforeElement={deltaButtons}
+                dialogPlacement="top center"
+                dialogWidth={value}
+                heading={`${value}px`}
+                key="width-example"
+                target="width-example"
+              >
+                <Lorem count={1} />
+              </Spotlight>
+            )}
+          </SpotlightTransition>
+        </SpotlightManager>
+      </Wrapper>
     );
   }
 }

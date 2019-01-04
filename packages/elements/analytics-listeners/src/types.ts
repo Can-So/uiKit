@@ -1,32 +1,26 @@
 import Logger from './helpers/logger';
+import {
+  GasPurePayload,
+  GasPureScreenEventPayload,
+} from '@atlaskit/analytics-gas-types';
 
 export type AnalyticsWebClient = {
-  sendUIEvent: (event: any) => void;
-  sendOperationalEvent: (event: any) => void;
-  sendTrackEvent: (event: any) => void;
-  sendScreenEvent: (event: any) => void;
+  sendUIEvent: (event: GasPurePayload) => void;
+  sendOperationalEvent: (event: GasPurePayload) => void;
+  sendTrackEvent: (event: GasPurePayload) => void;
+  sendScreenEvent: (event: GasPureScreenEventPayload) => void;
 };
-export type Client = Promise<AnalyticsWebClient>;
 
 export type ListenerProps = {
   children?: React.ReactNode;
-  client: Client;
+  client?: AnalyticsWebClient | Promise<AnalyticsWebClient>;
   logger: Logger;
 };
-
-export type EventNextType = {
-  payload: {
-    action: string;
-    [key: string]: any;
-  };
-  context: Array<{}>;
-};
-
-export type ListenerFunction = (event: EventNextType) => void;
 
 export enum FabricChannel {
   atlaskit = 'atlaskit',
   elements = 'fabric-elements',
   navigation = 'navigation',
   editor = 'editor',
+  media = 'media',
 }

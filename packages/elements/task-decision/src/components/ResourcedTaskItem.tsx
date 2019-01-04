@@ -7,7 +7,9 @@ import {
   TaskDecisionProvider,
   TaskState,
   User,
+  DecisionState,
 } from '../types';
+import { FabricElementsAnalyticsContext } from '@atlaskit/analytics-namespaced-context';
 
 export interface Props {
   taskId: string;
@@ -19,11 +21,13 @@ export interface Props {
   objectAri?: string;
   containerAri?: string;
   showPlaceholder?: boolean;
+  placeholder?: string;
   appearance?: Appearance;
   participants?: User[];
   showParticipants?: boolean;
   creator?: User;
   lastUpdater?: User;
+  disabled?: boolean;
 }
 
 export interface State {
@@ -111,7 +115,7 @@ export default class ResourcedTaskItem extends PureComponent<Props, State> {
     }
   }
 
-  private onUpdate = (state: TaskState) => {
+  private onUpdate = (state: TaskState | DecisionState) => {
     this.setState({ isDone: state === 'DONE' });
   };
 
@@ -165,29 +169,42 @@ export default class ResourcedTaskItem extends PureComponent<Props, State> {
     const {
       appearance,
       children,
+      containerAri,
       contentRef,
       creator,
+      objectAri,
       participants,
       showParticipants,
       showPlaceholder,
+      placeholder,
       taskId,
+      disabled,
     } = this.props;
 
     return (
-      <TaskItem
-        isDone={isDone}
-        taskId={taskId}
-        onChange={this.handleOnChange}
-        appearance={appearance}
-        contentRef={contentRef}
-        participants={participants}
-        showParticipants={showParticipants}
-        showPlaceholder={showPlaceholder}
-        creator={creator}
-        lastUpdater={lastUpdater}
+      <FabricElementsAnalyticsContext
+        data={{
+          containerAri,
+          objectAri,
+        }}
       >
-        {children}
-      </TaskItem>
+        <TaskItem
+          isDone={isDone}
+          taskId={taskId}
+          onChange={this.handleOnChange}
+          appearance={appearance}
+          contentRef={contentRef}
+          participants={participants}
+          showParticipants={showParticipants}
+          showPlaceholder={showPlaceholder}
+          placeholder={placeholder}
+          creator={creator}
+          lastUpdater={lastUpdater}
+          disabled={disabled}
+        >
+          {children}
+        </TaskItem>
+      </FabricElementsAnalyticsContext>
     );
   }
 }

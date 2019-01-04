@@ -4,7 +4,8 @@ import { EventDispatcher } from '../event-dispatcher';
 import EditorActions from '../actions';
 import {
   UIComponentFactory,
-  ReactElement,
+  ToolbarUIComponentFactory,
+  ReactComponents,
   InsertMenuCustomItem,
 } from '../types';
 import { CollabEditOptions } from '../plugins/collab-edit';
@@ -24,15 +25,15 @@ export interface EditorAppearanceComponentProps {
   maxHeight?: number;
 
   contentComponents?: UIComponentFactory[];
-  primaryToolbarComponents?: UIComponentFactory[];
+  primaryToolbarComponents?: ToolbarUIComponentFactory[];
   secondaryToolbarComponents?: UIComponentFactory[];
 
-  customContentComponents?: ReactElement;
-  customPrimaryToolbarComponents?: ReactElement;
-  customSecondaryToolbarComponents?: ReactElement;
+  customContentComponents?: ReactComponents;
+  customPrimaryToolbarComponents?: ReactComponents;
+  customSecondaryToolbarComponents?: ReactComponents;
   insertMenuItems?: InsertMenuCustomItem[];
 
-  addonToolbarComponents?: ReactElement;
+  addonToolbarComponents?: ReactComponents;
 
   popupsMountPoint?: HTMLElement;
   popupsBoundariesElement?: HTMLElement;

@@ -1,5 +1,430 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.9.4
+- [patch] [aca2425](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aca2425):
+
+  - Escaping in common formatter
+
+## 2.9.3
+- [patch] [df74239](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df74239):
+
+  - Parse mailto text
+
+## 2.9.2
+- [patch] [1d9228c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d9228c):
+
+  - trim escape in link href
+
+## 2.9.1
+- [patch] [75046da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/75046da):
+
+  - macros keyword can be case insensitive
+
+## 2.9.0
+- [minor] [a4b49b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4b49b2):
+
+  - Parse macros inside table cells
+
+## 2.8.2
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/renderer@33.0.0
+  - @atlaskit/editor-json-transformer@4.1.1
+  - @atlaskit/editor-test-helpers@6.3.4
+  - @atlaskit/util-data-test@10.0.28
+
+## 2.8.1
+- [patch] [0a28c41](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a28c41):
+
+  - bq. doesn't need a following space
+
+## 2.8.0
+- [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+
+  - Move schema to its own package
+
+## 2.7.6
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/renderer@32.0.0
+  - @atlaskit/editor-json-transformer@4.0.25
+  - @atlaskit/editor-test-helpers@6.3.2
+  - @atlaskit/util-data-test@10.0.26
+
+## 2.7.5
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/editor-core@90.3.15
+  - @atlaskit/editor-json-transformer@4.0.24
+  - @atlaskit/renderer@31.1.3
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/profilecard@6.1.2
+  - @atlaskit/docs@6.0.0
+
+## 2.7.4
+- [patch] [77df0db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/77df0db):
+
+  - use em dash for citation
+
+## 2.7.3
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/editor-common@22.2.3
+  - @atlaskit/editor-core@90.2.1
+  - @atlaskit/renderer@31.0.7
+  - @atlaskit/profilecard@6.1.1
+  - @atlaskit/theme@7.0.0
+
+## 2.7.2
+- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+  - @atlaskit/editor-json-transformer@4.0.23
+  - @atlaskit/editor-test-helpers@6.2.23
+  - @atlaskit/editor-core@90.0.0
+
+## 2.7.1
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/editor-core@89.0.0
+  - @atlaskit/renderer@31.0.0
+  - @atlaskit/editor-json-transformer@4.0.22
+  - @atlaskit/editor-test-helpers@6.2.19
+  - @atlaskit/util-data-test@10.0.21
+
+## 2.7.0
+- [minor] [37eaced](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37eaced):
+
+  - Fix media items inside table cells
+
+## 2.6.2
+- [patch] [352fbc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/352fbc9):
+
+  - Should not ignore double and triple dashes in list item
+
+## 2.6.1
+- [patch] [f11c6e2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f11c6e2):
+
+  - Escape properly
+
+## 2.6.0
+- [minor] [8451c11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8451c11):
+
+  - Fly over links inside table cells
+
+## 2.5.2
+- [patch] [c93eb36](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c93eb36):
+
+  - Do not jump over the link if invalid
+
+## 2.5.1
+- [patch] [fce377d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fce377d):
+
+  - fix issue with mentions in list
+
+## 2.5.0
+- [minor] [6fb9918](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6fb9918):
+
+  - Fix strong bug when ending line finishes with two strong symbols
+
+## 2.4.6
+- Updated dependencies [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+  - @atlaskit/editor-common@21.2.2
+  - @atlaskit/renderer@30.2.1
+  - @atlaskit/profilecard@6.0.0
+
+## 2.4.5
+- [patch] [3148c95](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3148c95):
+
+  - add error and success color
+
+## 2.4.4
+- [patch] [01a92e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01a92e1):
+
+  - Title for panel and noformat changes
+
+## 2.4.3
+- [patch] [131e012](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/131e012):
+
+  - Port from Jira regex for dashes
+
+## 2.4.2
+- [patch] [171443f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/171443f):
+
+  - Re-wrtie table parser
+
+## 2.4.1
+- [patch] [930ca26](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/930ca26):
+
+  - Fixed issue with library importing from a path within the editor common package
+
+## 2.4.0
+- [minor] [8681fc0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8681fc0):
+
+  - Improve wikimarkup link handling with formatting and titles
+
+## 2.3.6
+- [patch] [56007b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56007b3):
+
+  - Allow {color} in formatter
+
+## 2.3.5
+- [patch] [d76aa5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d76aa5a):
+
+  - Adds in support for multiple -
+
+## 2.3.4
+- [patch] [7b8efea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b8efea):
+
+  - Heading doesn't need a following space
+
+## 2.3.3
+- [patch] [5f2efe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f2efe0):
+
+  - Change triple dash symbol and update parser rules
+
+## 2.3.2
+- [patch] [904b74c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/904b74c):
+
+  - Fix the behaivor of \\ for line break
+
+## 2.3.1
+- [patch] [5b4474f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b4474f):
+
+  - Improve handling of 'rules' in lists and at end of content
+
+## 2.3.0
+- [minor] [640e01f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/640e01f):
+
+  - Ignore double dash symbol when sticked with alphanumerical, unicode without space, or parenthesis
+
+## 2.2.0
+- [minor] [fd35bec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fd35bec):
+
+  - Refactor tokenizer to accpt the whole input and its position
+
+## 2.1.27
+- [patch] [fd0ed3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fd0ed3a):
+
+  - Changed parser to only start a list if it is led with a single dash
+
+## 2.1.26
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/renderer@30.0.0
+  - @atlaskit/editor-json-transformer@4.0.21
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/util-data-test@10.0.20
+
+## 2.1.25
+- [patch] [b64fc55](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b64fc55):
+
+  - Adds roundtrip for external image
+
+## 2.1.24
+- Updated dependencies [a6dd6e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6dd6e3):
+  - @atlaskit/editor-common@20.3.1
+  - @atlaskit/renderer@29.3.1
+  - @atlaskit/profilecard@5.0.0
+
+## 2.1.23
+- [patch] [7ca5551](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7ca5551):
+
+  - allow list to jump over empty lines in macro successfully
+
+## 2.1.22
+- [patch] [674b3d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/674b3d9):
+
+  - convert unknow macros to plain text
+
+## 2.1.21
+- [patch] [c6763e2"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c6763e2"
+d):
+
+  - new pattern for mention
+
+## 2.1.20
+- [patch] Make common-formatter more generic for citation and monospace [c727890](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c727890)
+
+## 2.1.19
+- [patch] Fix link format with | in url [d4a84b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d4a84b3)
+
+## 2.1.18
+- [patch] space in list item content doesn't matter [d56abbd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d56abbd)
+
+## 2.1.17
+- [patch] List item symbol followed by line break is not valid [df6c74a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df6c74a)
+
+## 2.1.16
+- [patch] Fix common-formater ending symbol behavior and use external media for links in media [b1926a8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1926a8)
+
+## 2.1.15
+- [patch] Updated dependencies [052ce89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/052ce89)
+  - @atlaskit/editor-json-transformer@4.0.19
+  - @atlaskit/editor-test-helpers@6.2.8
+  - @atlaskit/editor-core@87.0.0
+  - @atlaskit/editor-common@20.1.2
+
+## 2.1.14
+- [patch] Ignore heading text when fails [d2ac796](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d2ac796)
+
+## 2.1.13
+- [patch] common formater can be valid if surrounded by non alphanumeric characters [5576cc2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5576cc2)
+
+## 2.1.12
+- [patch] list items should allow leading spaces [2aad896](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2aad896)
+
+## 2.1.11
+- [patch] Adds escape for macro, mention and media [8a89d20](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8a89d20)
+
+## 2.1.10
+- [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+  - @atlaskit/editor-common@20.0.0
+  - @atlaskit/editor-core@86.0.0
+  - @atlaskit/renderer@29.0.0
+  - @atlaskit/editor-json-transformer@4.0.18
+  - @atlaskit/editor-test-helpers@6.2.7
+  - @atlaskit/util-data-test@10.0.16
+
+## 2.1.9
+- [patch] Updated dependencies [6e510d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e510d8)
+  - @atlaskit/editor-core@85.5.1
+  - @atlaskit/editor-common@19.3.2
+  - @atlaskit/renderer@28.0.0
+
+## 2.1.8
+- [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+  - @atlaskit/editor-common@19.0.0
+  - @atlaskit/editor-core@85.0.0
+  - @atlaskit/renderer@27.0.0
+  - @atlaskit/editor-json-transformer@4.0.17
+  - @atlaskit/editor-test-helpers@6.2.6
+  - @atlaskit/util-data-test@10.0.14
+
+## 2.1.7
+- [patch] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [patch] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+  - @atlaskit/editor-common@18.0.0
+  - @atlaskit/editor-core@84.0.0
+  - @atlaskit/renderer@26.0.0
+  - @atlaskit/editor-json-transformer@4.0.16
+  - @atlaskit/editor-test-helpers@6.2.5
+  - @atlaskit/util-data-test@10.0.12
+
+## 2.1.6
+- [patch] Updated dependencies [23c7eca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23c7eca)
+  - @atlaskit/editor-json-transformer@4.0.15
+  - @atlaskit/editor-test-helpers@6.2.4
+  - @atlaskit/util-data-test@10.0.11
+  - @atlaskit/editor-core@83.0.0
+  - @atlaskit/renderer@25.0.0
+
+## 2.1.5
+- [patch] change grey to gray to keep consistent across editor pkgs [1b2a0b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1b2a0b3)
+
+## 2.1.4
+- [patch] Ignore link text in link format [dc46cae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc46cae)
+
+## 2.1.3
+- [patch] Updated dependencies [ef76f1f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef76f1f)
+  - @atlaskit/editor-json-transformer@4.0.13
+  - @atlaskit/editor-common@17.0.1
+  - @atlaskit/editor-core@82.0.0
+  - @atlaskit/editor-test-helpers@6.1.3
+
+## 2.1.2
+- [patch] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+  - @atlaskit/editor-common@17.0.0
+  - @atlaskit/editor-core@81.0.0
+  - @atlaskit/util-data-test@10.0.10
+  - @atlaskit/editor-test-helpers@6.1.2
+  - @atlaskit/renderer@24.0.0
+  - @atlaskit/editor-json-transformer@4.0.12
+
+## 2.1.1
+- [patch] Use proper marks for texts under blockquote [7d31a25](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d31a25)
+
+## 2.1.0
+- [minor] Support an errorCallback for collection fail information [86e0d88](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/86e0d88)
+
+## 2.0.28
+- [patch] Updated dependencies [2a6410f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2a6410f)
+  - @atlaskit/editor-common@16.2.0
+  - @atlaskit/editor-core@80.5.0
+  - @atlaskit/renderer@23.0.0
+
+## 2.0.27
+- [patch] link format takes higher priority over common formatters [b05205f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b05205f)
+
+## 2.0.26
+- [patch] fix link regex to know where to stop [ee04ad4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ee04ad4)
+
+## 2.0.25
+- [patch] Fix encoder for missing closing \! [c585e27](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c585e27)
+
+## 2.0.24
+- [patch] New rules for formatter [50edbb0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/50edbb0)
+
+## 2.0.23
+- [patch] should convert content inside monospace as plain text [f5e9f01](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e9f01)
+
+## 2.0.22
+- [patch] Sometimes the leading dashes is not list [7cf3406](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7cf3406)
+
+## 2.0.21
+- [patch] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+  - @atlaskit/editor-common@16.0.0
+  - @atlaskit/editor-core@80.0.0
+  - @atlaskit/renderer@22.0.0
+  - @atlaskit/editor-json-transformer@4.0.11
+  - @atlaskit/editor-test-helpers@6.0.9
+  - @atlaskit/util-data-test@10.0.9
+
+## 2.0.20
+- [patch] Convert file link to media group [d9331e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9331e6)
+
+## 2.0.19
+- [patch] Updated transformation of productivity emoji [83cdd9f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/83cdd9f)
+
+## 2.0.18
+- [patch] Convert to mediaSingle with width and height [5b1d869](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b1d869)
+
+## 2.0.17
+- [patch] Convert to same cell types [9571a76](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9571a76)
+
+## 2.0.16
+- [patch] keep width and height when transform back to wiki attachment [4acc88a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4acc88a)
+
+## 2.0.15
+- [patch] should parse empty wiki [03f0b1b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/03f0b1b)
+
+## 2.0.14
+- [patch] Fix color error [2b513c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2b513c5)
+
+## 2.0.13
+- [patch] Keep title of code block [95f9654](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95f9654)
+
+## 2.0.12
+- [patch] Trailing spaces of a table should not create a empty cell [eade148](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/eade148)
+
+## 2.0.11
+- [patch] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
+  - @atlaskit/editor-common@15.0.0
+  - @atlaskit/editor-core@79.0.0
+  - @atlaskit/renderer@21.0.0
+  - @atlaskit/editor-json-transformer@4.0.8
+  - @atlaskit/editor-test-helpers@6.0.6
+  - @atlaskit/util-data-test@10.0.8
+
+## 2.0.10
+- [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+  - @atlaskit/editor-json-transformer@4.0.7
+  - @atlaskit/renderer@20.1.1
+  - @atlaskit/editor-test-helpers@6.0.5
+  - @atlaskit/editor-core@78.0.0
+
 ## 2.0.9
 - [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
   - @atlaskit/renderer@20.0.11

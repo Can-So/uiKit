@@ -1,25 +1,25 @@
 // @flow
 import React, { PureComponent } from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter/prism-light';
 import { withTheme, ThemeProvider } from 'styled-components';
 import {
   normalizeLanguage,
-  type ADFSupportedLanguages,
+  type SupportedLanguages,
 } from './supportedLanguages';
 import { type Theme, type ThemeProps, applyTheme } from './themes/themeBuilder';
+import { Code } from './Code';
 
 type CodeBlockProps = {
   /** The code to be formatted */
   text: string,
   /** The language in which the code is written */
-  language?: ADFSupportedLanguages | string,
+  language: SupportedLanguages | string,
   /** Indicates whether or not to show line numbers */
   showLineNumbers?: boolean,
   /** A custom theme to be applied, implements the Theme interface */
   theme?: Theme | ThemeProps,
 };
 
-const LANGUAGE_FALLBACK = 'clike';
+const LANGUAGE_FALLBACK = 'text';
 
 export class CodeBlock extends PureComponent<CodeBlockProps, {}> {
   static displayName = 'CodeBlock';
@@ -53,19 +53,14 @@ export class CodeBlock extends PureComponent<CodeBlockProps, {}> {
     } = applyTheme(this.props.theme);
     const props = {
       language: normalizeLanguage(this.props.language || LANGUAGE_FALLBACK),
-      style: codeBlockStyle,
+      codeStyle: codeBlockStyle,
       showLineNumbers: this.props.showLineNumbers,
-      PreTag: 'span',
       codeTagProps: { style: codeContainerStyle },
       lineNumberContainerStyle,
+      text: this.props.text.toString(),
     };
-    const codeText = this.props.text.toString();
 
-    return (
-      <SyntaxHighlighter {...props} onCopy={this.handleCopy}>
-        {codeText}
-      </SyntaxHighlighter>
-    );
+    return <Code {...props} />;
   }
 }
 

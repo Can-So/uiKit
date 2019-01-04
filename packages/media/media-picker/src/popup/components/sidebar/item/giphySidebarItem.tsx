@@ -46,4 +46,7 @@ export default connect<
   undefined,
   SidebarItemDispatchProps,
   SidebarItemOwnProps
->(null, mapDispatchToProps)(StatelessGiphySidebarItem);
+>(
+  null,
+  mapDispatchToProps,
+)(StatelessGiphySidebarItem);

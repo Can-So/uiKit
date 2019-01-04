@@ -1,5 +1,45 @@
 # @atlaskit/field-text-area
 
+## 4.0.15
+- [patch] [1c8779d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c8779d):
+
+  - Changes to isLabelHidden behavour. Previously when isLabelHidden was true, a label with display none would be rendered. Now when isLabelHidden is true, no label element is rendered.
+
+## 4.0.14
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-base@11.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 4.0.13
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/field-base@11.0.12
+  - @atlaskit/theme@7.0.0
+
+## 4.0.12
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 4.0.11
+- [patch] [4035588"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4035588"
+d):
+
+  - Add isMonospaced prop
+
+## 4.0.10
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 4.0.9
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 4.0.7
 - [patch] Textfield and textarea components now play nicer with flex parents in IE [4e81369](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e81369)
 - [none] Updated dependencies [4e81369](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e81369)

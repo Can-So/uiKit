@@ -31,11 +31,9 @@ import { GapCursorSelection, Side } from '../plugins/gap-cursor/selection';
 
 export * from './document';
 export * from './action';
+export * from './step';
+export * from './mark';
 
-export {
-  default as ErrorReporter,
-  ErrorReportingHandler,
-} from './error-reporter';
 export { JSONDocNode, JSONNode };
 
 export { filterContentByType } from './filter';
@@ -55,12 +53,15 @@ function isMarkTypeAllowedInNode(
   return toggleMark(markType)(state);
 }
 
-function closest(node: HTMLElement | null, s: string): HTMLElement | null {
+function closest(
+  node: HTMLElement | null | undefined,
+  s: string,
+): HTMLElement | null {
   let el = node as HTMLElement;
   if (!el) {
     return null;
   }
-  if (!document.documentElement.contains(el)) {
+  if (!document.documentElement || !document.documentElement.contains(el)) {
     return null;
   }
   const matches = el.matches ? 'matches' : 'msMatchesSelector';
@@ -535,7 +536,8 @@ export function liftAndSelectSiblingNodes(view: EditorView): Transaction {
   const { $from, $to } = view.state.selection;
   const blockStart = tr.doc.resolve($from.start($from.depth - 1));
   const blockEnd = tr.doc.resolve($to.end($to.depth - 1));
-  const range = blockStart.blockRange(blockEnd)!;
+  // TODO: [ts30] handle void and null properly
+  const range = blockStart.blockRange(blockEnd) as NodeRange;
   tr.setSelection(new TextSelection(blockStart, blockEnd));
   tr.lift(range as NodeRange, blockStart.depth - 1);
   return tr;
@@ -583,7 +585,7 @@ export function arrayFrom(obj: any): any[] {
  * Returns the ancestor element of a particular type if exists or null
  */
 export function closestElement(
-  node: HTMLElement | null,
+  node: HTMLElement | null | undefined,
   s: string,
 ): HTMLElement | null {
   return closest(node, s);
@@ -745,4 +747,53 @@ export function filterChildrenBetween(
     }
   });
   return results;
+}
+
+export function dedupe<T>(
+  list: T[] = [],
+  iteratee?: (T) => (keyof T) | T,
+): T[] {
+  const transformed = iteratee ? list.map(iteratee) : list;
+
+  return transformed
+    .map((item, index, list) => (list.indexOf(item) === index ? item : null))
+    .reduce<T[]>(
+      (acc, item, index) => (!!item ? acc.concat(list[index]) : acc),
+      [],
+    );
+}
+
+export const isTextSelection = (
+  selection: Selection,
+): selection is TextSelection => selection instanceof TextSelection;
+
+/** Helper type for single arg function */
+type Func<A, B> = (a: A) => B;
+
+/**
+ * Compose 1 to n functions.
+ * @param func first function
+ * @param funcs additional functions
+ */
+export function compose<
+  F1 extends Func<any, any>,
+  FN extends Array<Func<any, any>>,
+  R extends FN extends []
+    ? F1
+    : FN extends [Func<infer A, any>]
+    ? (a: A) => ReturnType<F1>
+    : FN extends [any, Func<infer A, any>]
+    ? (a: A) => ReturnType<F1>
+    : FN extends [any, any, Func<infer A, any>]
+    ? (a: A) => ReturnType<F1>
+    : FN extends [any, any, any, Func<infer A, any>]
+    ? (a: A) => ReturnType<F1>
+    : FN extends [any, any, any, any, Func<infer A, any>]
+    ? (a: A) => ReturnType<F1>
+    : Func<any, ReturnType<F1>> // Doubtful we'd ever want to pipe this many functions, but in the off chance someone does, we can still infer the return type
+>(func: F1, ...funcs: FN): R {
+  const allFuncs = [func, ...funcs];
+  return function composed(raw: any) {
+    return allFuncs.reduceRight((memo, func) => func(memo), raw);
+  } as R;
 }

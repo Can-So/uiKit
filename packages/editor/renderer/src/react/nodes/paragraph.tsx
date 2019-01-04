@@ -1,4 +1,10 @@
 import * as React from 'react';
-export default function Paragraph(props: React.Props<any>) {
-  return <p>{props.children}</p>;
+import Inline from './inline';
+
+export default function Paragraph({ children }: React.Props<{}>) {
+  return (
+    <p>
+      <Inline>{children}</Inline>
+    </p>
+  );
 }

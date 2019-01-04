@@ -3,13 +3,22 @@
 import * as React from 'react';
 
 import { Editor, EditorContext, CollapsedEditor } from '@atlaskit/editor-core';
+import { taskDecision } from '@atlaskit/util-data-test';
 import ToolsDrawer from '../example-helpers/ToolsDrawer';
+import { storyMediaProviderFactory } from '@atlaskit/editor-test-helpers';
 
 const SAVE_ACTION = () => console.log('Save');
 const CANCEL_ACTION = () => console.log('Cancel');
 const EXPAND_ACTION = () => console.log('Expand');
 
 const analyticsHandler = (actionName, props) => console.log(actionName, props);
+
+const mediaProvider = storyMediaProviderFactory({
+  useMediaPickerAuthProvider: true,
+  includeUploadContext: true,
+  includeUserAuthProvider: true,
+  collectionName: 'test',
+});
 
 export type Props = {};
 export type State = {
@@ -59,7 +68,6 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
                     placeholder="What do you want to say?"
                     analyticsHandler={analyticsHandler}
                     shouldFocus={true}
-                    allowTasksAndDecisions={true}
                     allowCodeBlocks={true}
                     allowTextColor={true}
                     allowLists={true}
@@ -75,8 +83,12 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
                       stickToolbarToBottom: true,
                     }}
                     allowDate={true}
+                    media={{ provider: mediaProvider, allowMediaSingle: true }}
                     disabled={disabled}
                     mentionProvider={mentionProvider}
+                    taskDecisionProvider={Promise.resolve(
+                      taskDecision.getMockTaskDecisionResource(),
+                    )}
                     onChange={onChange}
                     onSave={SAVE_ACTION}
                     onCancel={CANCEL_ACTION}

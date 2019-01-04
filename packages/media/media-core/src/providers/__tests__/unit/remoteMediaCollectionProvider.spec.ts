@@ -8,7 +8,7 @@ import { CollectionServiceStub } from '../../../../test-helpers/collection-servi
 import { RemoteMediaCollectionProviderFactory } from '../../remoteMediaCollectionProviderFactory';
 import { Subscription } from 'rxjs/Subscription';
 import { isError } from '../../../error';
-import { MediaCollection } from '../../../collection';
+import { MediaCollection } from '../../../providers/types';
 import { RemoteMediaCollectionProvider } from '../../remoteMediaCollectionProvider';
 import { CollectionNotFoundError } from '../../..';
 
@@ -66,7 +66,10 @@ describe('RemoteMediaCollectionProvider', () => {
     // Load next page when we have finished loading the first one.
     const subscription1: Subscription = collectionProvider
       .observable()
-      .pipe(take(1), tap(() => collectionProvider.loadNextPage()))
+      .pipe(
+        take(1),
+        tap(() => collectionProvider.loadNextPage()),
+      )
       .subscribe({
         next: () => subscription1.unsubscribe(),
       });

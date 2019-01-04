@@ -1,16 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { mount, shallow, render } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 import path from 'path';
 import fs from 'fs';
 import { name } from '../../../../package.json';
-import * as bundle from '../../..';
 import { size } from '../../Icon';
-import AtlassianIcon from '../../../../glyph/atlassian';
-import BitbucketIcon from '../../../../glyph/bitbucket';
-import ConfluenceIcon from '../../../../glyph/confluence';
-import components from '../../../../utils/icons';
+import BookIcon from '../../../../glyph/book';
+import DefaultIcon, { metadata, size as defaultSize } from '../../../../src';
 
 // List all files in a directory in Node.js recursively in a synchronous fashion
 const walkSync = (dir: string, filelist: string[]) => {
@@ -55,14 +52,12 @@ describe(name, () => {
         'arrow-right',
         'arrow-up-circle',
         'arrow-up',
-        'atlassian',
         'attachment',
         'audio-circle',
         'audio',
         'backlog',
         'billing-filled',
         'billing',
-        'bitbucket',
         'bitbucket/branches',
         'bitbucket/builds',
         'bitbucket/clone',
@@ -100,7 +95,6 @@ describe(name, () => {
         'code',
         'comment',
         'component',
-        'confluence',
         'copy',
         'creditcard-filled',
         'creditcard',
@@ -115,6 +109,7 @@ describe(name, () => {
         'document',
         'documents',
         'download',
+        'drag-handler',
         'dropbox',
         'edit-filled',
         'edit',
@@ -124,6 +119,9 @@ describe(name, () => {
         'editor/align-center',
         'editor/align-left',
         'editor/align-right',
+        'editor/align-image-center',
+        'editor/align-image-left',
+        'editor/align-image-right',
         'editor/attachment',
         'editor/bold',
         'editor/bullet-list',
@@ -198,7 +196,6 @@ describe(name, () => {
         'graph-line',
         'gsuite',
         'highlights',
-        'hipchat',
         'hipchat/audio-only',
         'hipchat/chevron-double-down',
         'hipchat/chevron-double-up',
@@ -219,10 +216,6 @@ describe(name, () => {
         'issue-raise',
         'issue',
         'issues',
-        'jira',
-        'jira-core',
-        'jira-service-desk',
-        'jira-software',
         'jira/blocker',
         'jira/capture',
         'jira/critical',
@@ -275,6 +268,7 @@ describe(name, () => {
         'media-services/zoom-out',
         'mention',
         'menu',
+        'menu-expand',
         'more-vertical',
         'more',
         'notification-all',
@@ -304,6 +298,7 @@ describe(name, () => {
         'recent',
         'redo',
         'refresh',
+        'retry',
         'room-menu',
         'schedule-filled',
         'schedule',
@@ -318,8 +313,6 @@ describe(name, () => {
         'sign-out',
         'star-filled',
         'star',
-        'statuspage',
-        'stride',
         'subtask',
         'switcher',
         'table',
@@ -337,6 +330,7 @@ describe(name, () => {
         'vid-audio-on',
         'vid-backward',
         'vid-camera-off',
+        'vid-camera-on',
         'vid-connection-circle',
         'vid-forward',
         'vid-full-screen-off',
@@ -348,13 +342,52 @@ describe(name, () => {
         'vid-raised-hand',
         'vid-share-screen',
         'vid-speaking-circle',
+        'vid-volume-full',
+        'vid-volume-half',
+        'vid-volume-muted',
         'video-circle',
         'video-filled',
         'warning',
         'watch-filled',
         'watch',
         'world-small',
+        'star-large',
         'world',
+        'suitcase',
+        'select-clear',
+        'roadmap',
+        'questions',
+        'app-switcher',
+        'media-services/no-image',
+        'label',
+        'media-services/fit-to-page',
+        'media-services/full-screen',
+        'emoji/productivity',
+        'emoji-add',
+        'editor/success',
+        'editor/table-display-options',
+        'editor/media-center',
+        'editor/media-full-width',
+        'editor/media-wide',
+        'editor/media-wrap-left',
+        'editor/media-wrap-right',
+        'editor/layout-three-equal',
+        'editor/layout-three-with-sidebars',
+        'editor/layout-two-equal',
+        'editor/layout-two-left-sidebar',
+        'editor/layout-two-right-sidebar',
+        'editor/background-color',
+        'editor/divider',
+        'editor/horizontal-rule',
+        'editor/collapse',
+        'editor/expand',
+        'editor/settings',
+        'department',
+        'child-issues',
+        'chevron-right-large',
+        'chevron-left-large',
+        'check-circle-outline',
+        'like',
       ];
 
       const expectedPaths = expected.map(a => {
@@ -366,7 +399,14 @@ describe(name, () => {
         [],
       ).filter(ab => /.*\.js$/.test(ab));
 
-      expect(actual).toEqual(expect.arrayContaining(expectedPaths));
+      // Additional notes on this check:
+      // We are doing an equality check on the sorted versions of the lists as we want to
+      // ensure that every icon we expect exists, and also that only icons that we expect
+      // exist. This ensures that a new icon cannot be removed without causing this test
+      // to error.
+      // If an icon is Recieved but not expected, it is a new icon we do not expect.
+      // If it is Expected but not received, it means it is an existing icon that has been removed
+      expect(actual.sort()).toEqual(expectedPaths.sort());
       // If you find yourself here and wonder why this list is not auto-generated, then bear in
       // mind that tests are supposed to tell you when a piece of software breaks.
       // As the sole purpose of this component is providing icons:
@@ -381,25 +421,28 @@ describe(name, () => {
     });
 
     describe('bundle', () => {
-      it('has size export', () => expect(bundle.size).toEqual(size));
+      it('has size export', () => expect(defaultSize).toEqual(size));
 
       it('exports the Icon component', () => {
-        const { default: Icon } = bundle;
-        expect(new Icon({ label: 'My icon' })).toBeInstanceOf(Component);
+        expect(new DefaultIcon({ label: 'My icon' })).toBeInstanceOf(Component);
       });
     });
   });
 
   describe('component structure', () => {
-    it('should be possible to create the components', () => {
-      Object.keys(components)
-        .map(index => components[index])
-        .forEach(iconData => {
-          const Icon = iconData.component;
-          const wrapper = shallow(<Icon label="My icon" />);
-          expect(wrapper).not.toBe(undefined);
-          expect(Icon).toBeInstanceOf(Function);
-        });
+    it('should be possible to create the components', async () => {
+      const components = await Promise.all(
+        Object.keys(metadata).map(async (
+          key, // $ExpectError - we are fine with this being dynamic
+        ) => import(`../../../../glyph/${key}`)),
+      );
+
+      for (const icon of components) {
+        const Icon = icon.default;
+        const wrapper = shallow(<Icon label="My icon" />);
+        expect(wrapper).not.toBe(undefined);
+        expect(Icon).toBeInstanceOf(Function);
+      }
     });
   });
 
@@ -407,71 +450,11 @@ describe(name, () => {
     describe('label property', () => {
       it('should accept a label', () => {
         const label = 'my label';
-        const wrapper = mount(<AtlassianIcon label={label} />);
+        const wrapper = mount(<BookIcon label={label} />);
         const span = wrapper.find('span').first();
 
         expect(span.is('[aria-label="my label"]')).toBe(true);
       });
-    });
-  });
-
-  describe('gradients', () => {
-    it('multiple gradients in a single icon should use unique ids', () => {
-      const wrapper = render(<ConfluenceIcon label="My icon" />);
-      // For some reason cheerio will not find linearGradient elements anymore.
-      // Instead we find all the elements inside <defs> and confirm that they are linearGradients
-      const linearGradients = wrapper.find('defs > *');
-
-      expect(linearGradients.length).toBe(2);
-      expect(linearGradients[0].name).toBe('linearGradient');
-      expect(linearGradients[1].name).toBe('linearGradient');
-
-      // now check that they id's are different
-      expect(linearGradients[0].attribs.id).not.toBe(
-        linearGradients[1].attribs.id,
-      );
-    });
-
-    it('ids should be referenced correctly in fill properties', () => {
-      const wrapper = render(<BitbucketIcon label="My icon" />);
-      // for some reason cheerio will no longer find linear gradient elements. Instead we look
-      // inside defs and confirm that we have a linearGradient
-      const gradientEls = wrapper.find('defs > *');
-      expect(gradientEls.length).toBe(1);
-      expect(gradientEls[0].name).toBe('linearGradient');
-
-      // now we can get the ide
-      const gradientId = gradientEls[0].attribs.id;
-      const gradientFillPaths = wrapper
-        .find('path')
-        .filter((i, el) => /^url\(#/.test(el.attribs.fill));
-
-      expect(gradientFillPaths.length).toBeGreaterThanOrEqual(1);
-
-      gradientFillPaths.each((i, el) => {
-        expect(el.attribs.fill).toBe(`url(#${gradientId})`);
-      });
-    });
-
-    it('should have unique ids across icon instances', () => {
-      const icon1 = render(<BitbucketIcon label="My icon" />);
-      const icon2 = render(<BitbucketIcon label="My icon" />);
-      // Again, for some reason cheerio will no longer find linear gradient elements.
-      // Instead we look inside defs and confirm that we have a linearGradient
-      const gradientEls1 = icon1.find('defs > *');
-      expect(gradientEls1.length).toBe(1);
-      expect(gradientEls1[0].name).toBe('linearGradient');
-
-      // and again
-      const gradientEls2 = icon2.find('defs > *');
-      expect(gradientEls2.length).toBe(1);
-      expect(gradientEls2[0].name).toBe('linearGradient');
-
-      // now we can check the id's
-      const gradientId1 = gradientEls1[0].attribs.id;
-      const gradientId2 = gradientEls2[0].attribs.id;
-
-      expect(gradientId1).not.toBe(gradientId2);
     });
   });
 });

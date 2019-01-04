@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { md, Props, Example } from '@atlaskit/docs';
+import { code, md, Props, Example } from '@atlaskit/docs';
 
 const newConversationSource = `import { Conversation, ConversationResource } from '@atlaskit/conversation';
 
@@ -327,7 +327,9 @@ export default md`
   The conversation component is a mini-app which comes with an internal store. It's completely driven by a provider (\`ConversationResource\`).
 
   Using the component is fairly straight forward. Just import \`Conversation\` and \`ConversationResource\` from \`@atlaskit/conversation\`. The component can then be used like below.
-
+  
+  ${code`import { Conversation, ConversationResource } from '@atlaskit/conversation';`}
+  
   ${(
     <Example
       Component={require('../examples/0-New-Conversation').default}

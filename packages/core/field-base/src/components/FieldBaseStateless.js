@@ -5,9 +5,7 @@ import { Content, ContentWrapper, ChildWrapper } from '../styled/Content';
 import ValidationElement from './ValidationElement';
 import type { FieldBaseStatelessProps } from '../types';
 
-export default class FieldBaseStateless extends Component<
-  FieldBaseStatelessProps,
-> {
+export default class FieldBaseStateless extends Component<FieldBaseStatelessProps> {
   static defaultProps = {
     appearance: 'standard',
     invalidMessage: '',

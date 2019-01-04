@@ -41,7 +41,7 @@ export const createPlugin = (
       apply(tr, prevPluginState: PluginState, oldState, newState) {
         const pluginState = prevPluginState.apply(tr);
 
-        if (tr.getMeta('isLocal')) {
+        if (tr.getMeta('isRemote') !== true) {
           if (collabEditProvider) {
             collabEditProvider.send(tr, oldState, newState);
           }
@@ -52,8 +52,9 @@ export const createPlugin = (
 
         if (collabEditProvider) {
           const selectionChanged = !oldState.selection.eq(newState.selection);
-          const participantsChanged =
-            prevActiveParticipants !== activeParticipants;
+          const participantsChanged = !prevActiveParticipants.eq(
+            activeParticipants,
+          );
 
           if (
             (sessionId && selectionChanged && !tr.docChanged) ||
@@ -62,7 +63,7 @@ export const createPlugin = (
             const selection = getSendableSelection(newState.selection);
             // Delay sending selection till next tick so that participants info
             // can go before it
-            setTimeout(
+            window.setTimeout(
               collabEditProvider.sendMessage.bind(collabEditProvider),
               0,
               {
@@ -79,7 +80,7 @@ export const createPlugin = (
       },
     },
     props: {
-      decorations(state) {
+      decorations(this: Plugin, state) {
         return this.getState(state).decorations;
       },
     },
@@ -109,6 +110,16 @@ export const createPlugin = (
               .on('data', data => applyRemoteData(data, view, options))
               .on('presence', data => handlePresence(data, view))
               .on('telepointer', data => handleTelePointer(data, view))
+              .on('local-steps', data => {
+                const { steps } = data;
+                const { state } = view;
+
+                const { tr } = state;
+                steps.forEach(step => tr.step(step));
+
+                const newState = state.apply(tr);
+                view.updateState(newState);
+              })
               .on('error', err => {
                 // TODO: Handle errors property (ED-2580)
               })
@@ -140,8 +151,14 @@ const isReplaceStep = (step: Step) => step instanceof ReplaceStep;
  */
 const getValidPos = (tr: Transaction, pos: number) => {
   const resolvedPos = tr.doc.resolve(pos);
-  const validSelection = Selection.findFrom(resolvedPos, -1, true);
-  return validSelection ? validSelection.$anchor.pos : pos;
+  const backwardSelection = Selection.findFrom(resolvedPos, -1, true);
+  // if there's no correct cursor position before the `pos`, we try to find it after the `pos`
+  const forwardSelection = Selection.findFrom(resolvedPos, 1, true);
+  return backwardSelection
+    ? backwardSelection.from
+    : forwardSelection
+    ? forwardSelection.from
+    : pos;
 };
 
 export class PluginState {
@@ -253,7 +270,7 @@ export class PluginState {
       try {
         decorationSet = decorationSet.map(tr.mapping, tr.doc, {
           // Reapplies decorators those got removed by the state change
-          onRemove: (spec: { pointer: { sessionId: string } }) => {
+          onRemove: spec => {
             if (spec.pointer && spec.pointer.sessionId) {
               const step = tr.steps.filter(isReplaceStep)[0];
               if (step) {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as uuid from 'uuid/v4';
-import { LinkComponent } from '../GlobalQuickSearchWrapper';
+import { LinkComponent, Logger } from '../GlobalQuickSearchWrapper';
 import GlobalQuickSearch from '../GlobalQuickSearch';
 import performanceNow from '../../util/performance-now';
 import {
@@ -16,15 +16,22 @@ import {
 import {
   firePreQueryShownEvent,
   firePostQueryShownEvent,
+  fireExperimentExposureEvent,
 } from '../../util/analytics-event-helper';
-
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { CreateAnalyticsEventFn } from '../analytics/types';
+import { objectValues } from '../SearchResultsUtil';
+import { ABTest } from '../../api/CrossProductSearchClient';
+
+const resultMapToArray = (results: GenericResultMap): Result[][] =>
+  objectValues(results).reduce((acc: Result[][], value) => [...acc, value], []);
 
 export interface SearchResultProps extends State {
   retrySearch: Function;
 }
 
 export interface Props {
+  logger: Logger;
   linkComponent?: LinkComponent;
   getSearchResultsComponent(state: SearchResultProps): React.ReactNode;
   getRecentItems(sessionId: string): Promise<ResultsWithTiming>;
@@ -33,6 +40,7 @@ export interface Props {
     sessionId: string,
     startTime: number,
   ): Promise<ResultsWithTiming>;
+  getAbTestData(sessionId: string): Promise<ABTest | undefined>;
 
   /**
    * return displayed groups from result groups
@@ -40,11 +48,13 @@ export interface Props {
    * for example in jira we pass (issues, boards, filters and projects but we display only 2 groups issues and others combined)
    * @param results
    */
-  getDisplayedResults?(results: GenericResultMap): Result[][];
+  getDisplayedResults?(results: GenericResultMap | null): GenericResultMap;
   createAnalyticsEvent?: CreateAnalyticsEventFn;
-  handleSearchSubmit?({ target: string }): void;
+  handleSearchSubmit?(event: React.KeyboardEvent<HTMLInputElement>): void;
   isSendSearchTermsEnabled?: boolean;
   placeholder?: string;
+  selectedResultId?: string;
+  onSelectedResultIdChanged?: (id: string) => void;
 }
 
 export interface State {
@@ -57,14 +67,13 @@ export interface State {
   recentItems: GenericResultMap | null;
 }
 
+const LOGGER_NAME = 'AK.GlobalSearch.QuickSearchContainer';
 /**
  * Container/Stateful Component that handles the data fetching and state handling when the user interacts with Search.
  */
 export class QuickSearchContainer extends React.Component<Props, State> {
   static defaultProps = {
-    getDisplayedResults(results: GenericResultMap) {
-      return Object.keys(results).map(key => results[key]);
-    },
+    getDisplayedResults: results => results || ({} as GenericResultMap),
   };
 
   constructor(props) {
@@ -79,6 +88,27 @@ export class QuickSearchContainer extends React.Component<Props, State> {
       keepPreQueryState: true,
     };
   }
+
+  componentDidCatch(error, info) {
+    this.props.logger.safeError(LOGGER_NAME, 'component did catch an error', {
+      error,
+      info,
+      safeState: {
+        searchSessionId: this.state.searchSessionId,
+        latestSearchQuery: !!this.state.latestSearchQuery,
+        isLoading: this.state.isLoading,
+        isError: this.state.isError,
+        keepPreQueryState: this.state.keepPreQueryState,
+        recentItems: !!this.state.recentItems,
+        searchResults: !!this.state.searchResults,
+      },
+    });
+
+    this.setState({
+      isError: true,
+    });
+  }
+
   doSearch = async (query: string) => {
     const startTime: number = performanceNow();
 
@@ -114,12 +144,35 @@ export class QuickSearchContainer extends React.Component<Props, State> {
           },
         );
       }
-    } catch {
+    } catch (e) {
+      this.props.logger.safeError(
+        LOGGER_NAME,
+        'error while getting search results',
+        e,
+      );
       this.setState({
         isError: true,
         isLoading: false,
         keepPreQueryState: false,
       });
+    }
+  };
+
+  fireExperimentExposureEvent = async (searchSessionId: string) => {
+    const { createAnalyticsEvent, getAbTestData, logger } = this.props;
+    if (createAnalyticsEvent) {
+      try {
+        const abTest = await getAbTestData(searchSessionId);
+        if (abTest) {
+          fireExperimentExposureEvent(
+            abTest,
+            searchSessionId,
+            createAnalyticsEvent,
+          );
+        }
+      } catch (e) {
+        logger.safeWarn(LOGGER_NAME, 'error while getting abtest data', e);
+      }
     }
   };
 
@@ -134,8 +187,11 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         ? performanceNow() - requestStartTime
         : 0;
 
+      const resultsArray: Result[][] = resultMapToArray(
+        getDisplayedResults(recentItems),
+      );
       const eventAttributes: ShownAnalyticsAttributes = buildShownEventDetails(
-        ...getDisplayedResults(recentItems),
+        ...resultsArray,
       );
 
       firePreQueryShownEvent(
@@ -163,8 +219,11 @@ export class QuickSearchContainer extends React.Component<Props, State> {
 
     const { createAnalyticsEvent, getDisplayedResults } = this.props;
     if (createAnalyticsEvent && getDisplayedResults) {
+      const resultsArray: Result[][] = resultMapToArray(
+        getDisplayedResults(searchResults),
+      );
       const resultsDetails: ShownAnalyticsAttributes = buildShownEventDetails(
-        ...getDisplayedResults(searchResults),
+        ...resultsArray,
       );
 
       firePostQueryShownEvent(
@@ -217,10 +276,12 @@ export class QuickSearchContainer extends React.Component<Props, State> {
       });
     }
 
-    const sessionId = this.state.searchSessionId;
+    this.fireExperimentExposureEvent(this.state.searchSessionId);
 
     try {
-      const { results } = await this.props.getRecentItems(sessionId);
+      const { results } = await this.props.getRecentItems(
+        this.state.searchSessionId,
+      );
       this.setState(
         {
           recentItems: results,
@@ -233,7 +294,12 @@ export class QuickSearchContainer extends React.Component<Props, State> {
             startTime,
           ),
       );
-    } catch {
+    } catch (e) {
+      this.props.logger.safeError(
+        LOGGER_NAME,
+        'error while getting recent items',
+        e,
+      );
       if (this.state.isLoading) {
         this.setState({
           isLoading: false,
@@ -248,6 +314,8 @@ export class QuickSearchContainer extends React.Component<Props, State> {
       isSendSearchTermsEnabled,
       getSearchResultsComponent,
       placeholder,
+      selectedResultId,
+      onSelectedResultIdChanged,
     } = this.props;
     const {
       isLoading,
@@ -269,6 +337,8 @@ export class QuickSearchContainer extends React.Component<Props, State> {
         linkComponent={linkComponent}
         searchSessionId={searchSessionId}
         isSendSearchTermsEnabled={isSendSearchTermsEnabled}
+        selectedResultId={selectedResultId}
+        onSelectedResultIdChanged={onSelectedResultIdChanged}
       >
         {getSearchResultsComponent({
           retrySearch: this.retrySearch,
@@ -284,3 +354,5 @@ export class QuickSearchContainer extends React.Component<Props, State> {
     );
   }
 }
+
+export default withAnalyticsEvents()(QuickSearchContainer);

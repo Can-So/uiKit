@@ -1,5 +1,45 @@
 # @atlaskit/field-base
 
+## 11.0.13
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/inline-dialog@9.0.13
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 11.0.12
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/inline-dialog@9.0.12
+  - @atlaskit/input@4.0.8
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/theme@7.0.0
+
+## 11.0.11
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/inline-dialog@9.0.11
+  - @atlaskit/icon@15.0.0
+
+## 11.0.10
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 11.0.9
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 11.0.8
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/inline-dialog@9.0.6
+  - @atlaskit/icon@14.0.0
+
+## 11.0.7
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 11.0.5
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

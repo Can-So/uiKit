@@ -1,6 +1,5 @@
-import { ListItemDefinition, ListItemArray } from '@atlaskit/editor-common';
+import { ListItemDefinition, ListItemArray } from '@atlaskit/adf-schema';
 
-// TODO: figure this out :)
 export const listItem = (content: ListItemArray): ListItemDefinition => ({
   type: 'listItem',
   content,

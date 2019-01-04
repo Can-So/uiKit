@@ -34,14 +34,13 @@ export {
   UploadEndEventPayload,
   UploadErrorEventPayload,
   UploadEventPayloadMap,
+  isImagePreview,
 } from './domain/uploadEvent';
 
 export { MediaFile, PublicMediaFile } from './domain/file';
 export { MediaProgress } from './domain/progress';
 export { MediaError } from './domain/error';
 export { ImagePreview, Preview, NonImagePreview } from './domain/preview';
-
-export { MediaFileData } from './service/mediaApi';
 
 // Constructor public API and types
 export interface MediaPickerConstructors {

@@ -14,7 +14,7 @@ import {
   storyMediaProviderFactory,
 } from '@atlaskit/editor-test-helpers';
 
-import { mediaMock } from '@atlaskit/media-test-helpers';
+import mediaMock from './media-mock';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 
 const rejectedPromise = Promise.reject(
@@ -108,6 +108,16 @@ const providers = {
 };
 rejectedPromise.catch(() => {});
 
+export type ToolbarFeatures = {
+  dynamicTextSizing: boolean;
+  imageResizing: boolean;
+};
+
+const enabledFeatureNames: { [P in keyof ToolbarFeatures]: string } = {
+  dynamicTextSizing: 'dynamic text sizing',
+  imageResizing: 'image resizing',
+};
+
 export interface State {
   reloadEditor: boolean;
   editorEnabled: boolean;
@@ -120,6 +130,7 @@ export interface State {
   activityProvider: string;
   jsonDocument?: string;
   mediaMockEnabled: boolean;
+  enabledFeatures: ToolbarFeatures;
 }
 
 export interface Props {
@@ -144,6 +155,10 @@ export default class ToolsDrawer extends React.Component<Props & any, State> {
       activityProvider: 'resolved',
       jsonDocument: '{}',
       mediaMockEnabled: false,
+      enabledFeatures: {
+        dynamicTextSizing: false,
+        imageResizing: false,
+      },
     };
 
     if (this.state.mediaMockEnabled) {
@@ -152,7 +167,7 @@ export default class ToolsDrawer extends React.Component<Props & any, State> {
   }
 
   private switchProvider = (providerType, providerName) => {
-    this.setState({ [providerType]: providerName });
+    this.setState({ [providerType]: providerName } as any);
   };
 
   private reloadEditor = () => {
@@ -177,6 +192,17 @@ export default class ToolsDrawer extends React.Component<Props & any, State> {
     });
   };
 
+  private toggleFeature = name => {
+    this.setState(prevState => ({
+      ...prevState,
+
+      enabledFeatures: {
+        ...prevState.enabledFeatures,
+        [name]: !prevState.enabledFeatures[name],
+      },
+    }));
+  };
+
   render() {
     const {
       mentionProvider,
@@ -190,106 +216,132 @@ export default class ToolsDrawer extends React.Component<Props & any, State> {
       reloadEditor,
       editorEnabled,
       mediaMockEnabled,
+      enabledFeatures,
     } = this.state;
     return (
       <AnalyticsListener channel="atlaskit" onEvent={e => console.log(e)}>
         <AnalyticsListener channel="media" onEvent={e => console.log(e)}>
-          <Content>
-            <div style={{ padding: '5px 0' }}>
-              ️️️⚠️ Atlassians, for Media integration to work in non-mocked
-              state, make sure you're logged into{' '}
-              <a href="https://id.stg.internal.atlassian.com" target="_blank">
-                staging Identity server.
-              </a>
-            </div>
-            {reloadEditor
-              ? ''
-              : this.props.renderEditor({
-                  disabled: !editorEnabled,
-                  imageUploadProvider:
-                    providers.imageUploadProvider[imageUploadProvider],
-                  mediaProvider: providers.mediaProvider[mediaProvider],
-                  mentionProvider: providers.mentionProvider[mentionProvider],
-                  emojiProvider: providers.emojiProvider[emojiProvider],
-                  taskDecisionProvider:
-                    providers.taskDecisionProvider[taskDecisionProvider],
-                  contextIdentifierProvider:
-                    providers.contextIdentifierProvider[
-                      contextIdentifierProvider
-                    ],
-                  activityProvider:
-                    providers.activityProvider[activityProvider],
-                  onChange: this.onChange,
-                })}
-            <div className="toolsDrawer">
-              {Object.keys(providers).map(providerKey => (
-                <div key={providerKey}>
+          <AnalyticsListener
+            channel="fabric-elements"
+            onEvent={e => console.log(e)}
+          >
+            <Content>
+              <div style={{ padding: '5px 0' }}>
+                ️️️⚠️ Atlassians, for Media integration to work in non-mocked
+                state, make sure you're logged into{' '}
+                <a href="https://id.stg.internal.atlassian.com" target="_blank">
+                  staging Identity server.
+                </a>
+              </div>
+              {reloadEditor
+                ? ''
+                : this.props.renderEditor({
+                    disabled: !editorEnabled,
+                    enabledFeatures,
+                    imageUploadProvider:
+                      providers.imageUploadProvider[imageUploadProvider],
+                    mediaProvider: providers.mediaProvider[mediaProvider],
+                    mentionProvider: providers.mentionProvider[mentionProvider],
+                    emojiProvider: providers.emojiProvider[emojiProvider],
+                    taskDecisionProvider:
+                      providers.taskDecisionProvider[taskDecisionProvider],
+                    contextIdentifierProvider:
+                      providers.contextIdentifierProvider[
+                        contextIdentifierProvider
+                      ],
+                    activityProvider:
+                      providers.activityProvider[activityProvider],
+                    onChange: this.onChange,
+                  })}
+              <div className="toolsDrawer">
+                {Object.keys(providers).map(providerKey => (
+                  <div key={providerKey}>
+                    <ButtonGroup>
+                      <label>{providerKey}: </label>
+                      {Object.keys(providers[providerKey]).map(
+                        providerStateName => (
+                          <Button
+                            key={`${providerKey}-${providerStateName}`}
+                            onClick={this.switchProvider.bind(
+                              this,
+                              providerKey,
+                              providerStateName,
+                            )}
+                            className={`${providerKey}-${providerStateName
+                              .replace(/[()]/g, '')
+                              .replace(/ /g, '-')}`}
+                            appearance={
+                              providerStateName === this.state[providerKey]
+                                ? 'primary'
+                                : 'default'
+                            }
+                            theme="dark"
+                            spacing="compact"
+                          >
+                            {providerStateName}
+                          </Button>
+                        ),
+                      )}
+                    </ButtonGroup>
+                  </div>
+                ))}
+                <div>
                   <ButtonGroup>
-                    <label>{providerKey}: </label>
-                    {Object.keys(providers[providerKey]).map(
-                      providerStateName => (
-                        <Button
-                          key={`${providerKey}-${providerStateName}`}
-                          onClick={this.switchProvider.bind(
-                            this,
-                            providerKey,
-                            providerStateName,
-                          )}
-                          className={`${providerKey}-${providerStateName
-                            .replace(/[()]/g, '')
-                            .replace(/ /g, '-')}`}
-                          appearance={
-                            providerStateName === this.state[providerKey]
-                              ? 'primary'
-                              : 'default'
-                          }
-                          theme="dark"
-                          spacing="compact"
-                        >
-                          {providerStateName}
-                        </Button>
-                      ),
-                    )}
-                  </ButtonGroup>
-                </div>
-              ))}
-              <div>
-                <ButtonGroup>
-                  <Button
-                    onClick={this.toggleDisabled}
-                    theme="dark"
-                    spacing="compact"
-                  >
-                    {this.state.editorEnabled
-                      ? 'Disable editor'
-                      : 'Enable editor'}
-                  </Button>
-                  <Button
-                    onClick={this.reloadEditor}
-                    theme="dark"
-                    spacing="compact"
-                    className="reloadEditorButton"
-                  >
-                    Reload Editor
-                  </Button>
-                  <Tooltip content="Hot reload is not supported. Enable or disable before opening media-picker">
                     <Button
-                      onClick={this.toggleMediaMock}
-                      appearance={mediaMockEnabled ? 'primary' : 'default'}
+                      onClick={this.toggleDisabled}
                       theme="dark"
                       spacing="compact"
-                      className="mediaPickerMock"
                     >
-                      {mediaMockEnabled ? 'Disable' : 'Enable'} Media-Picker
-                      Mock
+                      {this.state.editorEnabled
+                        ? 'Disable editor'
+                        : 'Enable editor'}
                     </Button>
-                  </Tooltip>
-                </ButtonGroup>
+                    <Button
+                      onClick={this.reloadEditor}
+                      theme="dark"
+                      spacing="compact"
+                      className="reloadEditorButton"
+                    >
+                      Reload Editor
+                    </Button>
+
+                    {Object.keys(enabledFeatureNames).map(key => (
+                      <Button
+                        key={key}
+                        onClick={() => this.toggleFeature(key)}
+                        theme="dark"
+                        spacing="compact"
+                        className={`toggleFeature-${key} ${
+                          this.state.enabledFeatures[key] ? 'disable' : 'enable'
+                        }Feature-${key}`}
+                      >
+                        {this.state.enabledFeatures[key]
+                          ? `Disable ${enabledFeatureNames[key]}`
+                          : `Enable ${enabledFeatureNames[key]}`}
+                      </Button>
+                    ))}
+
+                    <Tooltip content="Hot reload is not supported. Enable or disable before opening media-picker">
+                      <Button
+                        onClick={this.toggleMediaMock}
+                        appearance={mediaMockEnabled ? 'primary' : 'default'}
+                        theme="dark"
+                        spacing="compact"
+                        className="mediaPickerMock"
+                      >
+                        {mediaMockEnabled ? 'Disable' : 'Enable'} Media-Picker
+                        Mock
+                      </Button>
+                    </Tooltip>
+                  </ButtonGroup>
+                </div>
               </div>
-            </div>
-            <legend>JSON output:</legend>
-            <pre>{jsonDocument}</pre>
-          </Content>
+              <div className="json-output">
+                <legend>JSON output:</legend>
+                <pre>{jsonDocument}</pre>
+              </div>
+            </Content>
+          </AnalyticsListener>
         </AnalyticsListener>
       </AnalyticsListener>
     );

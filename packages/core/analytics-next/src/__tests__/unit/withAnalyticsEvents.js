@@ -10,7 +10,8 @@ import {
   type WithAnalyticsEventsProps,
 } from '../..';
 
-type WrappedProps = WithAnalyticsEventsProps & {
+type WrappedProps = {
+  ...WithAnalyticsEventsProps,
   children: any,
   onClick?: Function,
 };

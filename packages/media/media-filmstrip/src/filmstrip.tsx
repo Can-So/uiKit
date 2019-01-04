@@ -9,10 +9,11 @@ import {
   CardEvent,
   OnSelectChangeFunc,
   OnLoadingChangeFunc,
-  isUrlPreviewIdentifier,
+  defaultImageCardDimensions,
 } from '@atlaskit/media-card';
 import { Context } from '@atlaskit/media-core';
 import { FilmstripView } from './filmstripView';
+import { generateIdentifierKey } from './utils/generateIdentifierKey';
 
 export interface FilmstripItem {
   readonly identifier: Identifier;
@@ -35,14 +36,6 @@ export interface FilmstripState {
   offset: number;
 }
 
-const getIdentifierKey = (identifier: Identifier): string => {
-  if (isUrlPreviewIdentifier(identifier)) {
-    return identifier.url;
-  } else {
-    return identifier.id;
-  }
-};
-
 export class Filmstrip extends Component<FilmstripProps, FilmstripState> {
   state: FilmstripState = {
     animate: false,
@@ -56,10 +49,13 @@ export class Filmstrip extends Component<FilmstripProps, FilmstripState> {
   private renderCards() {
     const { items, context } = this.props;
     const cards = items.map(item => {
+      const key = generateIdentifierKey(item.identifier);
+
       return (
         <Card
-          key={getIdentifierKey(item.identifier)}
+          key={key}
           context={context}
+          dimensions={defaultImageCardDimensions}
           {...item}
         />
       );

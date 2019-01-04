@@ -93,58 +93,49 @@ export default class Example extends Component<ExampleProps, ExampleState> {
         <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
-            textAlign: 'center',
-            borderBottom: '1px solid #ccc',
             padding: '10px',
-            margin: '10px auto',
-            width: '1000px',
           }}
         >
-          <FieldText
-            label="Image id"
-            placeholder="Image id..."
-            value={imageId}
-            onChange={this.onIdChange}
-          />
-          <FieldText
-            label="Collection name"
-            placeholder="Collection name..."
-            value={collectionName}
-            onChange={this.onCollectionChange}
-          />
-          <FieldText
-            label="Token"
-            placeholder="Token..."
-            value={token}
-            onChange={this.onTokenChange}
-          />
-          <FieldText
-            label="Client id"
-            placeholder="Client id..."
-            value={clientId}
-            onChange={this.onClientIdChange}
-          />
-          <FieldText
-            label="Service host"
-            placeholder="Service host..."
-            value={baseUrl}
-            onChange={this.onBaseUrlChange}
-          />
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <MediaImage
-            id={imageId}
-            mediaApiConfig={apiConfig}
-            collectionName={collectionName}
-            width={300}
-          />
+          <div>
+            <FieldText
+              label="Image id"
+              placeholder="Image id..."
+              value={imageId}
+              onChange={this.onIdChange}
+            />
+            <FieldText
+              label="Collection name"
+              placeholder="Collection name..."
+              value={collectionName}
+              onChange={this.onCollectionChange}
+            />
+            <FieldText
+              label="Token"
+              placeholder="Token..."
+              value={token}
+              onChange={this.onTokenChange}
+            />
+            <FieldText
+              label="Client id"
+              placeholder="Client id..."
+              value={clientId}
+              onChange={this.onClientIdChange}
+            />
+            <FieldText
+              label="Service host"
+              placeholder="Service host..."
+              value={baseUrl}
+              onChange={this.onBaseUrlChange}
+            />
+          </div>
+          <div style={{ marginLeft: 'auto' }}>
+            <MediaImage
+              id={imageId}
+              mediaApiConfig={apiConfig}
+              collectionName={collectionName}
+              width={300}
+            />
+          </div>
         </div>
       </div>
     );

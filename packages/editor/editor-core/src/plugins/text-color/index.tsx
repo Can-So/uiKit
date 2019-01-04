@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { textColor } from '@atlaskit/editor-common';
+import { textColor } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import WithPluginState from '../../ui/WithPluginState';
 import {
-  pluginKey,
+  pluginKey as textColorPluginKey,
   createPlugin,
   TextColorPluginConfig,
   TextColorPluginState,
@@ -49,9 +49,9 @@ const textColorPlugin: EditorPlugin = {
     return (
       <WithPluginState
         plugins={{
-          textColor: pluginKey,
+          textColor: textColorPluginKey,
         }}
-        render={({ textColor }: { textColor: TextColorPluginState }) => (
+        render={({ textColor }) => (
           <ToolbarTextColor
             pluginState={textColor}
             isReducedSpacing={isToolbarReducedSpacing}
@@ -68,4 +68,5 @@ const textColorPlugin: EditorPlugin = {
   },
 };
 
+export { TextColorPluginState, textColorPluginKey };
 export default textColorPlugin;

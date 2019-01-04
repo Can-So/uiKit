@@ -1,13 +1,7 @@
-// @flow
-import { md, code } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, code, Example, Props } from '@atlaskit/docs';
 
 export default md`
-  # Installing @atlaskit/editor-core
-
-${code`
-  npm install @atlaskit/editor-core
-`}
-
   ### Note:
 
   Don't forget to add these polyfills to your product build if you're using emoji or mentions in the editor and you want to target older browsers:
@@ -197,4 +191,54 @@ ${code`
 `}
 
   We’d love to hear your feedback.
+
+  ## Tab indexing / focus
+  If you are displaying a title you may need to listen for a tab event to 
+  explicitly enable and focus the editor.
+  
+  Shift + Tab will move from the title bar to the toolbar preserving tab order.
+
+  See the Full Page Example code for a complete implementation.
+  
+  For example:
+
+${code`
+  <WithEditorActions
+    // tslint:disable-next-line:jsx-no-lambda
+    render={actions => (
+      <TitleInput
+        placeholder="Give this page a title..."
+        onKeyDown={(e: KeyboardEvent) =>
+          this.onKeyPressed(e, actions)
+        }
+      />
+    )}
+  />
+`}
+
+${code`
+  private onKeyPressed = (e: KeyboardEvent, actions: EditorActions) => {
+    if (e.key === 'Tab' && !e.shiftKey) {
+      actions.focus();
+      return false;
+    }
+  };
+`}
+
+${(
+  <Example
+    packageName="@atlaskit/editor-core"
+    Component={require('../examples/1-basic').default}
+    title="Basic"
+    source={require('!!raw-loader!../examples/1-basic')}
+  />
+)}
+
+  ${(
+    <Props
+      shouldCollapseProps
+      heading="Props"
+      props={require('!!extract-react-types-loader!../src/editor')}
+    />
+  )}
 `;

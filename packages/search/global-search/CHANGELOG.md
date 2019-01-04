@@ -1,5 +1,313 @@
 # @atlaskit/global-search
 
+## 5.13.6
+- [patch] [d6bd32b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d6bd32b):
+
+  - Updated global-search translations
+
+## 5.13.5
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics@4.0.7
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/button@10.1.1
+  - @atlaskit/drawer@2.6.1
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/field-text-area@4.0.14
+  - @atlaskit/flag@9.1.8
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/icon-file-type@3.0.2
+  - @atlaskit/icon-object@3.0.2
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/navigation@33.3.8
+  - @atlaskit/page@8.0.12
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/analytics-gas-types@3.2.3
+  - @atlaskit/util-service-support@3.0.5
+  - @atlaskit/quick-search@5.2.4
+  - @atlaskit/docs@6.0.0
+
+## 5.13.4
+- [patch] [e6d6651](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6d6651):
+
+  - fix jira recent results ordering; filters should be after projects
+
+## 5.13.3
+- [patch] [d498de7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d498de7):
+
+  - Include type of result for boards and filters in jira search
+- [patch] [c6131a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c6131a6):
+
+  - Added result type for boards and filters in global search result subtext
+
+## 5.13.2
+- [patch] [38debc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38debc1):
+
+  - trigger analytics on advanced search dropdown item clicked, disable jira people search
+
+## 5.13.1
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/drawer@2.5.4
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/field-text-area@4.0.13
+  - @atlaskit/flag@9.1.7
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/icon-file-type@3.0.1
+  - @atlaskit/icon-object@3.0.1
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/navigation@33.3.7
+  - @atlaskit/quick-search@5.2.1
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+
+## 5.13.0
+- [minor] [347a474](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/347a474):
+
+  - Added icon on selected to quick search results
+
+## 5.12.12
+- [patch] [f84ab96](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f84ab96):
+
+  - Add extra padding to the before pre-query advanced search component.
+
+## 5.12.11
+- [patch] [f0bfc56](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0bfc56):
+
+  - Change adv search shortcut icon to Return instead of ShiftReturn for both Confluence and Jira
+
+## 5.12.10
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/flag@9.1.6
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/navigation@33.3.6
+  - @atlaskit/quick-search@5.1.2
+  - @atlaskit/icon-file-type@3.0.0
+  - @atlaskit/icon-object@3.0.0
+  - @atlaskit/icon@15.0.0
+
+## 5.12.9
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/drawer@2.5.2
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/field-text-area@4.0.12
+  - @atlaskit/flag@9.1.5
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/icon-file-type@2.0.1
+  - @atlaskit/icon-object@2.0.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/navigation@33.3.5
+  - @atlaskit/page@8.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 5.12.8
+- [patch] [124cdc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/124cdc1):
+
+  - fix keyboard navigation
+
+## 5.12.7
+- [patch] [225c0aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/225c0aa):
+
+  - Auto-highlight of exact issue matches is case-sensitive
+
+## 5.12.6
+- [patch] [9c3e374](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c3e374):
+
+  - Update the order of advanced search links and container headings
+
+## 5.12.5
+- [patch] [82842ad](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82842ad):
+
+  - Hide the 'shift+enter' on jira quick search pre-query screen
+
+## 5.12.4
+- [patch] [a1e1821](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1e1821):
+
+  - Title case for "Software project", "Service Desk project", "Ops project"
+
+## 5.12.3
+- [patch] [6c50eb1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c50eb1):
+
+  - Pre-highlight exact matches of Jira issues and remove the split button
+
+## 5.12.2
+- Updated dependencies [80304f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80304f0):
+  - @atlaskit/icon@14.4.0
+  - @atlaskit/icon-file-type@2.0.0
+  - @atlaskit/icon-object@2.0.0
+
+## 5.12.1
+- [patch] [e93ffe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e93ffe0):
+
+  - Change container result item to accept a react node as the subtext
+
+## 5.12.0
+- [minor] [6506916](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6506916):
+
+  - Refactor how i18n is handled internally
+
+## 5.11.3
+- Updated dependencies [2da04ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2da04ed):
+  - @atlaskit/navigation@33.3.1
+  - @atlaskit/quick-search@5.0.0
+
+## 5.11.2
+- [patch] Fix duplicate keyboard selection for results [d0674c1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d0674c1)
+
+## 5.11.1
+- [patch] Filter out unsupported groups from jira recent items resource [f429535](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f429535)
+
+## 5.11.0
+- [minor] Adds a check for the Jira version of global search to ensure the user has browse user permission before showing people results. [ce58d96](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce58d96)
+
+## 5.10.4
+- [patch] Change dependency on all icon package to be caret [9961f6d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9961f6d)
+- [patch] Updated dependencies [e7bb74d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7bb74d)
+  - @atlaskit/icon-file-type@1.0.4
+  - @atlaskit/icon-object@1.0.4
+  - @atlaskit/icon@14.0.3
+
+## 5.10.3
+- [patch] Fix navigation issues when clicking the advanced search button in JIra [3b321ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b321ab)
+
+## 5.10.2
+- [patch] Updated dependencies [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+  - @atlaskit/analytics-next@3.0.10
+  - @atlaskit/analytics@4.0.6
+  - @atlaskit/avatar@14.1.2
+  - @atlaskit/button@9.0.15
+  - @atlaskit/dropdown-menu@6.1.19
+  - @atlaskit/field-text-area@4.0.10
+  - @atlaskit/flag@9.1.1
+  - @atlaskit/icon-file-type@1.0.3
+  - @atlaskit/icon-object@1.0.3
+  - @atlaskit/icon@14.0.2
+  - @atlaskit/logo@9.2.3
+  - @atlaskit/modal-dialog@7.0.3
+  - @atlaskit/navigation@33.2.1
+  - @atlaskit/page@8.0.8
+  - @atlaskit/theme@6.1.1
+
+## 5.10.1
+- [patch] remove hyphen from qs and convert values to camel case [ec5a8c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ec5a8c3)
+
+## 5.10.0
+- [minor] Add link to advanced issue search at the top of the jira pre query screen. [f0f66b7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f0f66b7)
+
+## 5.9.9
+- [patch] Adds small amount of padding between the Jira advanced search footer and the result list [5e8fe66](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e8fe66)
+
+## 5.9.8
+- [patch] add session id, object id, container id and content type as query params to jira results [e4c4eff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e4c4eff)
+
+## 5.9.7
+- [patch] remove extra comma in no results screen [ceb1fbb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ceb1fbb)
+
+## 5.9.6
+- [patch] Update icon-file-type [a3b51ef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3b51ef)
+- [patch] Updated dependencies [272208b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/272208b)
+  - @atlaskit/icon-file-type@1.0.2
+  - @atlaskit/icon-object@1.0.2
+
+## 5.9.5
+- [patch] fix higlight problem due to duplicate react keys [beeba8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/beeba8a)
+
+## 5.9.4
+- [patch] icon-file-type and icon-object publish glyphs, svgs, and es5 instead of just dist [0823d35](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0823d35)
+
+## 5.9.3
+- [patch] Exposure event gets trigger on initial load instead when search results return [b89cda9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b89cda9)
+
+## 5.9.2
+- [patch] Trim search input [488257d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/488257d)
+
+## 5.9.1
+- [patch] Updated dependencies [709b239](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/709b239)
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/icon@14.0.0
+  - @atlaskit/icon-file-type@1.0.0
+  - @atlaskit/icon-object@1.0.0
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/avatar@14.0.11
+  - @atlaskit/button@9.0.13
+  - @atlaskit/dropdown-menu@6.1.17
+  - @atlaskit/flag@9.0.11
+  - @atlaskit/modal-dialog@7.0.2
+  - @atlaskit/navigation@33.1.11
+  - @atlaskit/quick-search@4.2.9
+
+## 5.9.0
+- [minor] Feature to use quicknav for people search [9f1d252](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f1d252)
+
+## 5.8.4
+- [patch] fix jira quick search analytics [1e8a048](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1e8a048)
+
+## 5.8.3
+- [patch] Add logger to global quick search [aeb0219](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aeb0219)
+
+## 5.8.2
+- [patch] Parse Jira recent response with optional attributes [f6f81ca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f6f81ca)
+
+## 5.8.1
+- [patch] Add support for Jira default icons for boards, filters and issues [deb791d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/deb791d)
+
+## 5.8.0
+- [minor] Use CPUS for people search [7cb2b57](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7cb2b57)
+
+## 5.7.6
+- [patch] ED-5150 Editor i18n: Main toolbar [ef76f1f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef76f1f)
+
+## 5.7.5
+- [patch] pass search session id and referrer id to backend [e7d5a30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7d5a30)
+
+## 5.7.4
+- [patch] dynamic import Modal dialog based on the product [4367651](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4367651)
+
+## 5.7.3
+- [patch] remove ak modal dialog dependency [e66a9d9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e66a9d9)
+
+## 5.7.2
+- [patch] fix jira response parser [1502daa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1502daa)
+
+## 5.7.1
+- [patch] remove forward slash that breaks jira requests [08d26e0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/08d26e0)
+
+## 5.7.0
+- [minor] alpha jira quick search [090b5f7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/090b5f7)
+
+## 5.6.0
+- [minor] Update product icons to come from logo [7b446f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b446f0)
+
+## 5.5.12
+- [patch] add more analytics attribute (abTest related attributes, query attributes to search result analytics) [317bc68](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/317bc68)
+
+## 5.5.11
+- [patch] Update TS to 3.0 [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+
+## 5.5.10
+- [patch] Updated dependencies [d5a043a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5a043a)
+  - @atlaskit/icon@13.8.1
+  - @atlaskit/flag@9.0.10
+  - @atlaskit/modal-dialog@7.0.0
+
+## 5.5.9
+- [patch] Add experiment exposure event to track which search sessions should be attributed to what search experiment [dfe8371](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfe8371)
+
+## 5.5.8
+- [patch] Ensure SPA transitions are happening for Confluence pages. [0909b85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0909b85)
+
 ## 5.5.7
 - [patch] Fixes import in relative import in global search. [0147e49](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0147e49)
 

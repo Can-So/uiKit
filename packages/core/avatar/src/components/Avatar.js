@@ -1,4 +1,5 @@
 // @flow
+
 import React, { Component } from 'react';
 import type { Node } from 'react';
 import {
@@ -19,6 +20,7 @@ import Outer, { PresenceWrapper, StatusWrapper } from '../styled/Avatar';
 import { omit } from '../utils';
 import { getProps, getStyledAvatar } from '../helpers';
 import { mapProps, withPseudoState } from '../hoc';
+import { Theme } from '../theme';
 import type { AvatarPropTypes, SupportedSizeWithAnIcon } from '../types';
 
 const warn = (message: string) => {
@@ -34,6 +36,26 @@ class Avatar extends Component<AvatarPropTypes> {
     appearance: 'circle',
     enableTooltip: true,
     size: 'medium',
+  };
+
+  createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
+
+  clickAnalyticsCaller = () => {
+    const { createAnalyticsEvent } = this.props;
+
+    if (createAnalyticsEvent) {
+      return this.createAndFireEventOnAtlaskit({
+        action: 'clicked',
+        actionSubject: 'avatar',
+
+        attributes: {
+          componentName: 'avatar',
+          packageName,
+          packageVersion,
+        },
+      })(createAnalyticsEvent);
+    }
+    return undefined;
   };
 
   // expose blur/focus to consumers via ref
@@ -53,7 +75,9 @@ class Avatar extends Component<AvatarPropTypes> {
 
     const item = omit(this.props, ...propsOmittedFromClickData);
 
-    onClick({ item, event });
+    const analyticsEvent = this.clickAnalyticsCaller();
+
+    onClick({ item, event }, analyticsEvent);
   };
 
   // enforce status / presence rules
@@ -106,9 +130,17 @@ class Avatar extends Component<AvatarPropTypes> {
       }
 
       // showStatus
+      const customStatusNode = typeof status === 'object' ? status : null;
+
       return (
         <StatusWrapper appearance={appearance} size={size}>
-          <Status status={status} borderColor={borderColor} size={size} />
+          <Status
+            borderColor={borderColor}
+            status={!customStatusNode && status}
+            size={size}
+          >
+            {customStatusNode}
+          </Status>
         </StatusWrapper>
       );
     })();
@@ -129,6 +161,7 @@ class Avatar extends Component<AvatarPropTypes> {
       src,
       stackIndex,
       onClick,
+      theme,
     } = this.props;
 
     // distill props from context, props, and state
@@ -138,23 +171,26 @@ class Avatar extends Component<AvatarPropTypes> {
     // TODO: why not enhanced props?
     const Inner: any = getStyledAvatar(this.props);
 
-    const AvatarNode = (
-      <Outer size={size} stackIndex={stackIndex}>
-        <Inner
-          innerRef={this.setRef}
-          {...enhancedProps}
-          onClick={onClick != null ? this.guardedClick : undefined}
-        >
-          <AvatarImage
-            alt={name}
-            appearance={appearance}
-            size={size}
-            src={src}
-          />
-        </Inner>
+    Inner.displayName = 'Inner';
 
-        {this.renderIcon()}
-      </Outer>
+    const AvatarNode = (
+      <Theme.Provider value={theme}>
+        <Outer size={size} stackIndex={stackIndex}>
+          <Inner
+            innerRef={this.setRef}
+            {...enhancedProps}
+            onClick={onClick != null ? this.guardedClick : undefined}
+          >
+            <AvatarImage
+              alt={name}
+              appearance={appearance}
+              size={size}
+              src={src}
+            />
+          </Inner>
+          {this.renderIcon()}
+        </Outer>
+      </Theme.Provider>
     );
 
     return enableTooltip && name ? (
@@ -175,23 +211,8 @@ export const AvatarWithoutAnalytics = mapProps({
     ), // 2
 })(withPseudoState(Avatar));
 
-const createAndFireEventOnAtlaskit = createAndFireEvent('atlaskit');
-
 export default withAnalyticsContext({
   componentName: 'avatar',
   packageName,
   packageVersion,
-})(
-  withAnalyticsEvents({
-    onClick: createAndFireEventOnAtlaskit({
-      action: 'clicked',
-      actionSubject: 'avatar',
-
-      attributes: {
-        componentName: 'avatar',
-        packageName,
-        packageVersion,
-      },
-    }),
-  })(AvatarWithoutAnalytics),
-);
+})(withAnalyticsEvents()(AvatarWithoutAnalytics));

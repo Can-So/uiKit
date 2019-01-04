@@ -1,14 +1,17 @@
-import { AuthProvider, Context } from '@atlaskit/media-core';
-
+import { Context } from '@atlaskit/media-core';
+import { IntlProvider, InjectedIntl } from 'react-intl';
 import { LocalUploadComponent, LocalUploadConfig } from '../localUpload';
 import { whenDomReady } from '../../util/documentReady';
 import dropzoneUI from './dropzoneUI';
 import { UploadEventPayloadMap } from '../..';
 
+export interface DropzoneReactContext {
+  intl?: InjectedIntl;
+}
 export interface DropzoneConfig extends LocalUploadConfig {
-  userAuthProvider?: AuthProvider;
   container?: HTMLElement;
   headless?: boolean;
+  proxyReactContext?: DropzoneReactContext;
 }
 
 export interface DropzoneConstructor {
@@ -19,10 +22,14 @@ export interface DropzoneDragEnterEventPayload {
   length: number;
 }
 
+export interface DropzoneDragLeaveEventPayload {
+  length: number;
+}
+
 export type DropzoneUploadEventPayloadMap = UploadEventPayloadMap & {
   readonly drop: undefined;
   readonly 'drag-enter': DropzoneDragEnterEventPayload;
-  readonly 'drag-leave': undefined;
+  readonly 'drag-leave': DropzoneDragLeaveEventPayload;
 };
 
 const toArray = (arr: any) => [].slice.call(arr, 0);
@@ -31,16 +38,18 @@ export class Dropzone extends LocalUploadComponent<
   DropzoneUploadEventPayloadMap
 > {
   private container: HTMLElement;
-  private instance: HTMLElement;
+  private instance?: HTMLElement;
   private headless: boolean;
   private uiActive: boolean;
+  private proxyReactContext?: DropzoneReactContext;
 
   constructor(context: Context, config: DropzoneConfig = { uploadParams: {} }) {
     super(context, config);
-    const { container, headless } = config;
+    const { container, headless, proxyReactContext } = config;
     this.container = container || document.body;
     this.headless = headless || false;
     this.uiActive = false;
+    this.proxyReactContext = proxyReactContext;
   }
 
   public activate(): Promise<void> {
@@ -60,6 +69,10 @@ export class Dropzone extends LocalUploadComponent<
   }
 
   private readonly onFileDropped = (dragEvent: DragEvent) => {
+    if (!dragEvent.dataTransfer) {
+      return;
+    }
+
     dragEvent.preventDefault();
     dragEvent.stopPropagation();
     this.onDrop(dragEvent);
@@ -85,7 +98,7 @@ export class Dropzone extends LocalUploadComponent<
   private onDragOver = (e: DragEvent): void => {
     e.preventDefault();
 
-    if (this.instance && Dropzone.dragContainsFiles(e)) {
+    if (this.instance && e.dataTransfer && Dropzone.dragContainsFiles(e)) {
       const dataTransfer = e.dataTransfer;
       let allowed;
 
@@ -118,10 +131,15 @@ export class Dropzone extends LocalUploadComponent<
   }
 
   private onDragLeave = (e: DragEvent): void => {
-    if (this.instance) {
+    if (this.instance && e.dataTransfer) {
       e.preventDefault();
       this.instance.classList.remove('active');
-      this.emitDragLeave();
+      let length = 0;
+      if (Dropzone.dragContainsFiles(e)) {
+        const dataTransfer = e.dataTransfer;
+        length = this.getDraggedItemsLength(dataTransfer);
+      }
+      this.emitDragLeave({ length });
     }
   };
 
@@ -132,19 +150,32 @@ export class Dropzone extends LocalUploadComponent<
 
   private getDropzoneUI(): HTMLElement {
     if (this.headless) {
-      return document.createElement('DIV');
+      const container = document.createElement('DIV');
+      container.classList.add('headless-dropzone');
+      return container;
     } else {
-      return dropzoneUI;
+      if (this.proxyReactContext && this.proxyReactContext.intl) {
+        const { formatMessage } = this.proxyReactContext.intl;
+
+        return dropzoneUI(formatMessage);
+      }
+      const defaultFormatMessage = new IntlProvider({
+        locale: 'en',
+      }).getChildContext().intl.formatMessage;
+
+      return dropzoneUI(defaultFormatMessage);
     }
   }
 
   private onDrop = (e: DragEvent): void => {
     const { instance } = this;
 
-    if (instance && Dropzone.dragContainsFiles(e)) {
+    if (instance && e.dataTransfer && Dropzone.dragContainsFiles(e)) {
       instance.classList.remove('active');
+      const dataTransfer = e.dataTransfer;
+      const length = this.getDraggedItemsLength(dataTransfer);
       this.emit('drop', undefined);
-      this.emitDragLeave();
+      this.emitDragLeave({ length });
     }
   };
 
@@ -155,7 +186,7 @@ export class Dropzone extends LocalUploadComponent<
     }
   }
 
-  private emitDragLeave(): void {
+  private emitDragLeave(payload: DropzoneDragLeaveEventPayload): void {
     if (this.uiActive) {
       this.uiActive = false;
       /*
@@ -164,13 +195,17 @@ export class Dropzone extends LocalUploadComponent<
        */
       window.setTimeout(() => {
         if (!this.uiActive) {
-          this.emit('drag-leave', undefined);
+          this.emit('drag-leave', payload);
         }
       }, 50);
     }
   }
 
   private static dragContainsFiles(event: DragEvent): boolean {
+    if (!event.dataTransfer) {
+      return false;
+    }
+
     const { types } = event.dataTransfer;
 
     return toArray(types).indexOf('Files') > -1;

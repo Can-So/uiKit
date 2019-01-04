@@ -1,10 +1,10 @@
 //@flow
 'use strict';
 /*
-* util module to build webpack-dev-server for running integration test.
-* const CHANGED_PACKAGES accepts environment variable which is used to
-* identify changed packages and return changed packages containing webdriverTests to be built.
-*/
+ * util module to build webpack-dev-server for running integration test.
+ * const CHANGED_PACKAGES accepts environment variable which is used to
+ * identify changed packages and return changed packages containing webdriverTests to be built.
+ */
 
 // Start of the hack for the issue with the webpack watcher that leads to it dying in attempt of watching files
 // in node_modules folder which contains circular symbolic links
@@ -86,8 +86,9 @@ async function getPackagesWithTests() /*: Promise<Array<string>> */ {
 //
 async function startDevServer() {
   const workspacesGlob = await getPackagesWithTests();
-  const mode = 'production';
-  const websiteEnv = 'production';
+  const isWatchEnabled = process.env.WATCH === 'true';
+  const mode = 'development';
+  const websiteEnv = 'local';
   const projectRoot = (await bolt.getProject({ cwd: process.cwd() })).dir;
   const workspaces = await bolt.getWorkspaces();
   const filteredWorkspaces = workspacesGlob
@@ -96,9 +97,22 @@ async function startDevServer() {
       )
     : workspaces;
 
-  const globs = workspacesGlob
+  let globs = workspacesGlob
     ? utils.createWorkspacesGlob(flattenDeep(filteredWorkspaces), projectRoot)
     : utils.createDefaultGlob();
+
+  /* At the moment, the website does not build a package and it is not possible to test it.
+  ** The current workaround, we build another package that builds the homepage and indirectly test the website.
+  ** We picked the package polyfills:
+   - the package is internal.
+   - no integration tests will be added.
+   - changes to the package will not impact the build system.
+  */
+  if (globs.indexOf('website') === -1) {
+    globs = globs.map(glob =>
+      glob.replace('website', 'packages/core/polyfills'),
+    );
+  }
 
   if (!globs.length) {
     console.info('Nothing to run or pattern does not match!');
@@ -107,12 +121,21 @@ async function startDevServer() {
 
   config = createConfig({
     globs,
-    websiteEnv,
     mode,
+    websiteEnv,
     websiteDir: path.join(__dirname, '../../..', 'website'),
   });
 
-  const compiler = webpack(config);
+  let extraOpts = {};
+  let ignored;
+  if (!isWatchEnabled) {
+    extraOpts = {
+      watch: false,
+    };
+    ignored = ['**/*'];
+  }
+
+  const compiler = webpack({ ...config, ...extraOpts });
 
   //
   // Starting Webpack Dev Server
@@ -124,27 +147,27 @@ async function startDevServer() {
     historyApiFallback: true,
 
     //silence webpack logs
-    quiet: false,
+    quiet: true,
     noInfo: false,
     overlay: false,
     hot: false,
 
-    //change stats to verbose to get detailed information
-    stats: 'minimal',
-    clientLogLevel: 'none',
-
     // disable hot reload for tests - they don't need it for running
     hot: false,
     inline: false,
+    watchOptions: {
+      ignored,
+    },
   });
 
   return new Promise((resolve, reject) => {
     let hasValidDepGraph = true;
 
-    compiler.plugin('invalid', () => {
+    compiler.plugin('invalid', fileName => {
       hasValidDepGraph = false;
       console.log(
         'Something has changed and Webpack needs to invalidate dependencies graph',
+        fileName,
       );
     });
 
@@ -153,7 +176,7 @@ async function startDevServer() {
       setTimeout(() => {
         if (hasValidDepGraph) {
           resolve();
-          console.log('Compiled Packages!!');
+          console.log('Compiled Packages!');
         }
       }, WEBPACK_BUILD_TIMEOUT);
     });

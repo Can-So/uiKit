@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, code, Example } from '@atlaskit/docs';
 
 export default md`
-  # MediaCore
-
   This package is required by other Media Components, and should not be used
   directly.
 
@@ -13,32 +11,34 @@ export default md`
   * providers
   * interfaces
 
-  ## Installation
-
-  ~~~sh
-  yarn add @atlaskit/media-core
-  ~~~
-
-  ## Using the component
+  ## Usage
 
   \`Context\` is the main object that is created with \`ContextFactory\`. It can
   be created using either \`token\` and either \`clientId\` or \`asapIssuer\`.
 
-  ~~~js
-  import { Context, ContextConfig, ContextFactory } from '@atlaskit/media-core';
+  ${code`
+import { Context, ContextConfig, ContextFactory } from '@atlaskit/media-core';
 
-  const authProvider = ({ collectionName }) =>
-    new Promise((resolve, reject) => {
-      resolve({
-        token: 'token-that-was-recieved-in-some-async-way',
-        clientId: 'some-client-id',
-        baseUrl: 'http://example.com',
-        //  asapIssuer: 'asap-issuer'
-      });
+const authProvider = ({ collectionName }) =>
+  new Promise((resolve, reject) => {
+    resolve({
+      token: 'token-that-was-recieved-in-some-async-way',
+      clientId: 'some-client-id',
+      baseUrl: 'http://example.com',
+      //  asapIssuer: 'asap-issuer'
     });
-  const config: ContextConfig = {
-    authProvider,
-  };
-  const context: Context = ContextFactory.create(config);
-  ~~~
+  });
+const config: ContextConfig = {
+  authProvider,
+};
+const context: Context = ContextFactory.create(config);
+  `}
+
+  ${(
+    <Example
+      Component={require('../examples/1-get-file').default}
+      title="Get File"
+      source={require('!!raw-loader!../examples/1-get-file')}
+    />
+  )}
 `;

@@ -5,7 +5,7 @@ import {
   LinkAction,
   canLinkBeCreatedInRange,
 } from './pm-plugins/main';
-import { EditorState } from 'prosemirror-state';
+import { EditorState, Selection } from 'prosemirror-state';
 import { filter } from '../../utils/commands';
 import { Mark, Node } from 'prosemirror-model';
 
@@ -32,7 +32,10 @@ export function setLinkHref(pos: number, href: string): Command {
         link.create({ ...mark.attrs, href: url }),
       );
     }
-    dispatch(tr);
+
+    if (dispatch) {
+      dispatch(tr);
+    }
     return true;
   });
 }
@@ -46,7 +49,10 @@ export function setLinkText(pos: number, text: string): Command {
       const tr = state.tr;
       tr.insertText(text, pos, pos + node.nodeSize);
       tr.addMark(pos, pos + text.length, mark);
-      dispatch(tr);
+
+      if (dispatch) {
+        dispatch(tr);
+      }
       return true;
     }
     return false;
@@ -62,7 +68,7 @@ export function insertLink(
   return filter(canLinkBeCreatedInRange(from, to), (state, dispatch) => {
     const link = state.schema.marks.link;
     if (href.trim()) {
-      const tr = state.tr;
+      const { tr } = state;
       if (from === to) {
         const textContent = text || href;
         tr.insertText(textContent, from, to);
@@ -73,8 +79,12 @@ export function insertLink(
         );
       } else {
         tr.addMark(from, to, link.create({ href: normalizeUrl(href) }));
+        tr.setSelection(Selection.near(tr.doc.resolve(to)));
       }
-      dispatch(tr);
+
+      if (dispatch) {
+        dispatch(tr);
+      }
       return true;
     }
     return false;
@@ -87,14 +97,18 @@ export function removeLink(pos: number): Command {
 
 export function showLinkToolbar(): Command {
   return function(state, dispatch) {
-    dispatch(state.tr.setMeta(stateKey, LinkAction.SHOW_INSERT_TOOLBAR));
+    if (dispatch) {
+      dispatch(state.tr.setMeta(stateKey, LinkAction.SHOW_INSERT_TOOLBAR));
+    }
     return true;
   };
 }
 
 export function hideLinkToolbar(): Command {
   return function(state, dispatch) {
-    dispatch(state.tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR));
+    if (dispatch) {
+      dispatch(state.tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR));
+    }
     return true;
   };
 }

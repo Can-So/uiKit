@@ -1,7 +1,7 @@
 import { Fragment, Schema } from 'prosemirror-model';
 
 import { Serializer } from '../serializer';
-import { defaultSchema } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import { reduce } from './nodes';
 
 export default class TextSerializer implements Serializer<string> {

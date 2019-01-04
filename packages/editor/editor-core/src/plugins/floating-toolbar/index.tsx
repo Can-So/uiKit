@@ -1,45 +1,77 @@
 import * as React from 'react';
 import { EditorView } from 'prosemirror-view';
 import { Plugin, PluginKey } from 'prosemirror-state';
-import { findParentDomRefOfType } from 'prosemirror-utils';
+import { findDomRefAtPos, findSelectedNodeOfType } from 'prosemirror-utils';
 import { Popup } from '@atlaskit/editor-common';
 
 import WithPluginState from '../../ui/WithPluginState';
 import { EditorPlugin } from '../../types';
 import { Dispatch } from '../../event-dispatcher';
-import Toolbar from './ui/Toolbar';
+import { ToolbarLoader } from './ui/ToolbarLoader';
 import { FloatingToolbarHandler, FloatingToolbarConfig } from './types';
+
+import {
+  pluginKey as editorDisabledPluginKey,
+  EditorDisabledPluginState,
+} from '../editor-disabled';
 
 const getRelevantConfig = (
   view: EditorView,
   configs: Array<FloatingToolbarConfig>,
-): FloatingToolbarConfig => {
-  if (configs.length > 1) {
-    const domAtPos = view.domAtPos.bind(view);
-    const nodeTypes = configs.map(config => config.nodeType);
-    const domRef = findParentDomRefOfType(nodeTypes, domAtPos)(
-      view.state.selection,
-    );
-    const relevantConfig = configs.filter(
-      config => config.getDomRef(view) === domRef,
-    );
-    if (relevantConfig.length) {
-      return relevantConfig[0];
+): FloatingToolbarConfig | undefined => {
+  // node selections always take precedence, see if
+  const selectedConfig = configs.find(
+    config => !!findSelectedNodeOfType(config.nodeType)(view.state.selection),
+  );
+
+  if (selectedConfig) {
+    return selectedConfig;
+  }
+
+  // create mapping of node type name to configs
+  const configByNodeType = {};
+  configs.forEach(config => {
+    if (Array.isArray(config.nodeType)) {
+      config.nodeType.forEach(nodeType => {
+        configByNodeType[nodeType.name] = config;
+      });
+    } else {
+      configByNodeType[config.nodeType.name] = config;
+    }
+  });
+
+  // search up the tree from selection
+  const { $from } = view.state.selection;
+  for (let i = $from.depth; i > 0; i--) {
+    const node = $from.node(i);
+
+    const matchedConfig = configByNodeType[node.type.name];
+    if (matchedConfig) {
+      return matchedConfig;
     }
   }
-  return configs[0];
 };
+
+const getDomRefFromSelection = (view: EditorView) =>
+  findDomRefAtPos(
+    view.state.selection.from,
+    view.domAtPos.bind(view),
+  ) as HTMLElement;
 
 const floatingToolbarPlugin: EditorPlugin = {
   name: 'floatingToolbar',
 
-  pmPlugins(floatingToolbar: Array<FloatingToolbarHandler> = []) {
+  pmPlugins(floatingToolbarHandlers: Array<FloatingToolbarHandler> = []) {
     return [
       {
         // Should be after all toolbar plugins
         name: 'floatingToolbar',
-        plugin: ({ dispatch }) =>
-          floatingToolbarPluginFactory(dispatch, floatingToolbar),
+        plugin: ({ dispatch, reactContext }) =>
+          floatingToolbarPluginFactory({
+            dispatch,
+            floatingToolbarHandlers,
+            reactContext,
+          }),
       },
     ];
   },
@@ -52,19 +84,29 @@ const floatingToolbarPlugin: EditorPlugin = {
   }) {
     return (
       <WithPluginState
-        plugins={{ floatingToolbarConfigs: pluginKey }}
+        plugins={{
+          floatingToolbarConfigs: pluginKey,
+          editorDisabledPlugin: editorDisabledPluginKey,
+        }}
         render={({
+          editorDisabledPlugin,
           floatingToolbarConfigs,
         }: {
           floatingToolbarConfigs?: Array<FloatingToolbarConfig>;
+          editorDisabledPlugin: EditorDisabledPluginState;
         }) => {
-          if (floatingToolbarConfigs && floatingToolbarConfigs.length > 0) {
-            const { title, getDomRef, items } = getRelevantConfig(
-              editorView,
-              floatingToolbarConfigs,
-            );
+          const relevantConfig =
+            floatingToolbarConfigs &&
+            getRelevantConfig(editorView, floatingToolbarConfigs);
+          if (relevantConfig) {
+            const {
+              title,
+              getDomRef = getDomRefFromSelection,
+              items,
+            } = relevantConfig;
             const targetRef = getDomRef(editorView);
-            if (targetRef) {
+
+            if (targetRef && !(editorDisabledPlugin || {}).editorDisabled) {
               return (
                 <Popup
                   ariaLabel={title}
@@ -77,7 +119,7 @@ const floatingToolbarPlugin: EditorPlugin = {
                   boundariesElement={popupsBoundariesElement}
                   scrollableElement={popupsScrollableElement}
                 >
-                  <Toolbar
+                  <ToolbarLoader
                     items={items}
                     dispatchCommand={fn =>
                       fn && fn(editorView.state, editorView.dispatch)
@@ -107,18 +149,22 @@ export default floatingToolbarPlugin;
 
 export const pluginKey = new PluginKey('floatingToolbarPluginKey');
 
-function floatingToolbarPluginFactory(
-  dispatch: Dispatch<Array<FloatingToolbarConfig> | undefined>,
-  floatingToolbarHandlers: Array<FloatingToolbarHandler>,
-) {
+function floatingToolbarPluginFactory(options: {
+  floatingToolbarHandlers: Array<FloatingToolbarHandler>;
+  dispatch: Dispatch<Array<FloatingToolbarConfig> | undefined>;
+  reactContext: () => { [key: string]: any };
+}) {
+  const { floatingToolbarHandlers, dispatch, reactContext } = options;
   return new Plugin({
     key: pluginKey,
     state: {
-      init: () => undefined,
-
+      init: () => {
+        ToolbarLoader.preload();
+      },
       apply(tr, pluginState, oldState, newState) {
+        const { intl } = reactContext();
         const newPluginState = floatingToolbarHandlers
-          .map(handler => handler(newState))
+          .map(handler => handler(newState, intl))
           .filter(Boolean) as Array<FloatingToolbarConfig>;
 
         dispatch(pluginKey, newPluginState);

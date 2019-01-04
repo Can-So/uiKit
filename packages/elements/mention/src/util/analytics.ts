@@ -31,10 +31,9 @@ export const fireAnalyticsMentionTypeaheadEvent = (
         componentName: 'mention',
         duration: Math.round(duration),
         userIds,
-        query,
+        queryLength: query ? query.length : 0,
       },
       eventType: 'operational',
-      source: 'unknown',
     };
     const analyticsEvent: UIAnalyticsEventInterface = props.createAnalyticsEvent(
       eventPayload,
@@ -64,7 +63,6 @@ export const fireAnalyticsMentionEvent = (
       isSpecial: isSpecialMentionText(text),
       userId: id,
     },
-    source: 'unknown',
   };
   const event = createEvent(payload);
   event.fire(ELEMENTS_CHANNEL);

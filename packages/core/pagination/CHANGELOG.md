@@ -1,5 +1,65 @@
 # @atlaskit/pagination
 
+## 9.0.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 9.0.0
+- [major] [1a09599](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a09599):
+
+  New features in this release of @atlaskit/pagination
+
+  - Ability to extend the pagination UI with custom components
+  - Control the maximum number of pages to be displayed
+  - Ability to customise the logic to collapse the pagination affordance
+  - Pass in extra styling to the pagination container component so you can omit the use of style wrappers
+
+## 8.0.8
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/theme@7.0.0
+
+## 8.0.7
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/icon@15.0.0
+
+## 8.0.6
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 8.0.5
+- [patch] Fix for pagination in IE [bd9046e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bd9046e)
+
+## 8.0.4
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 8.0.3
+- [patch] Fix styling of button rendering icon in IE [b4c5b87](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b4c5b87)
+
+## 8.0.2
+- [patch] Fix styling in IE and maintain it in other browsers [0d67e69](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0d67e69)
+
+## 8.0.1
+- [patch] Bump to add icon [8010540](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8010540)
+
+## 8.0.0
+- [major] updated the pagination component as per ADG spec [8276156](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8276156)
+
+## 7.0.6
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 7.0.4
 - [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
 - [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)

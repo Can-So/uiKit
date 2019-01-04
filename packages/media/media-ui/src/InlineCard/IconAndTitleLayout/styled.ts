@@ -5,11 +5,7 @@ export const IconWrapper: ComponentClass<ImgHTMLAttributes<{}>> = styled.span`
   vertical-align: middle;
   display: inline-flex;
   overflow: hidden;
-  > span {
-    margin-top: -3px;
-    height: 23px;
-    width: 23px;
-  }
+  margin-right: 5px;
 `;
 
 export const OtherWrapper: ComponentClass<HTMLAttributes<{}>> = styled.span`

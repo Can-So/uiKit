@@ -24,9 +24,9 @@ import {
   ClearIndicator,
   defaultTimes,
   DropdownIndicator,
-  parseTime,
   defaultTimeFormat,
 } from '../internal';
+import parseTime from '../internal/parseTime';
 import FixedLayer from '../internal/FixedLayer';
 
 type Option = {
@@ -66,7 +66,7 @@ type Props = {
   onChange: string => void,
   /** Called when the field is focused. */
   onFocus: () => void,
-  parseInputValue: (time: string, timeFormat: string) => Date | typeof NaN,
+  parseInputValue: (time: string, timeFormat: string) => string | Date,
   /** Props to apply to the select. */
   selectProps: Object,
   /* This prop affects the height of the select control. Compact is gridSize() * 4, default is gridSize * 5  */
@@ -108,14 +108,13 @@ const menuStyles = {
   overflowY: 'auto',
 };
 
-const FixedLayerMenu = ({ selectProps, ...props }: Object) => {
-  return (
-    <FixedLayer
-      containerRef={selectProps.fixedLayerRef}
-      content={<components.Menu {...props} menuShouldScrollIntoView={false} />}
-    />
-  );
-};
+const FixedLayerMenu = ({ selectProps, ...rest }: { selectProps: any }) => (
+  <FixedLayer
+    inputValue={selectProps.inputValue}
+    containerRef={selectProps.fixedLayerRef}
+    content={<components.Menu {...rest} menuShouldScrollIntoView={false} />}
+  />
+);
 
 class TimePicker extends Component<Props, State> {
   containerRef: ?HTMLElement;
@@ -160,13 +159,14 @@ class TimePicker extends Component<Props, State> {
   };
 
   getOptions(): Array<Option> {
-    return this.props.times.map((time: string): Option => {
-      return {
-        /* $FlowFixMe - Flow complaining timeFormat is undefined but it has a default... */
-        label: formatTime(time, this.props.timeFormat),
-        value: time,
-      };
-    });
+    return this.props.times.map(
+      (time: string): Option => {
+        return {
+          label: formatTime(time, this.props.timeFormat),
+          value: time,
+        };
+      },
+    );
   }
 
   onChange = (v: Object | null): void => {
@@ -177,10 +177,11 @@ class TimePicker extends Component<Props, State> {
 
   /** Only allow custom times if timeIsEditable prop is true  */
   onCreateOption = (inputValue: any): void => {
-    const { parseInputValue, timeFormat } = this.props;
-    const value =
-      format(parseInputValue(inputValue, timeFormat), 'HH:mm') || '';
     if (this.props.timeIsEditable) {
+      const { parseInputValue, timeFormat } = this.props;
+      // TODO parseInputValue doesn't accept `timeFormat` as an function arg yet...
+      const value =
+        format(parseInputValue(inputValue, timeFormat), 'HH:mma') || '';
       this.setState({ value });
       this.props.onChange(value);
     } else {
@@ -235,12 +236,12 @@ class TimePicker extends Component<Props, State> {
       innerProps,
       isDisabled,
       name,
-      selectProps,
-      timeFormat,
       placeholder,
+      selectProps,
       spacing,
+      timeFormat,
     } = this.props;
-    const { value, isOpen } = this.getState();
+    const { value = '', isOpen } = this.getState();
     const validationState = this.props.isInvalid ? 'error' : 'default';
     const icon =
       this.props.appearance === 'subtle' || this.props.hideIcon
@@ -256,10 +257,14 @@ class TimePicker extends Component<Props, State> {
       ? CreatableSelect
       : Select;
 
+    const labelAndValue = value && {
+      label: formatDisplayLabel(value, timeFormat),
+      value,
+    };
+
     return (
       <div {...innerProps} ref={this.getContainerRef}>
         <input name={name} type="hidden" value={value} />
-        {/* $FlowFixMe - complaining about required args that aren't required. */}
         <SelectComponent
           autoFocus={autoFocus}
           components={{
@@ -297,13 +302,7 @@ class TimePicker extends Component<Props, State> {
               },
             }),
           })}
-          value={
-            value && {
-              /* $FlowFixMe - complaining about required args that aren't required. */
-              label: formatDisplayLabel(value, timeFormat),
-              value,
-            }
-          }
+          value={labelAndValue}
           spacing={spacing}
           dropdownIndicatorIcon={icon}
           fixedLayerRef={this.containerRef}

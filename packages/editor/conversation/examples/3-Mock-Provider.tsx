@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {
-  MockProvider as ConversationResource,
-  getDataProviderFactory,
-} from '../example-helpers/MockProvider';
 import { Demo } from '../example-helpers/DemoPage';
 import { MOCK_USERS } from '../example-helpers/MockData';
+import {
+  getDataProviderFactory,
+  MockProvider as ConversationResource,
+} from '../example-helpers/MockProvider';
 
 const provider = new ConversationResource({
   url: 'http://localhost:8080',

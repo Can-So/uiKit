@@ -4,6 +4,7 @@ import { Component } from 'react';
 import {
   userAuthProvider,
   defaultMediaPickerAuthProvider,
+  defaultMediaPickerCollectionName,
 } from '@atlaskit/media-test-helpers';
 import Button from '@atlaskit/button';
 import Toggle from '@atlaskit/toggle';
@@ -27,8 +28,8 @@ export interface ClipboardWrapperState {
 }
 
 class ClipboardWrapper extends Component<{}, ClipboardWrapperState> {
-  clipboard: Clipboard;
-  dropzoneContainer: HTMLDivElement;
+  clipboard?: Clipboard;
+  dropzoneContainer?: HTMLDivElement;
 
   state: ClipboardWrapperState = {
     isConnectedToUsersCollection: true,
@@ -86,17 +87,25 @@ class ClipboardWrapper extends Component<{}, ClipboardWrapperState> {
         ? userAuthProvider
         : undefined,
     });
-    const clipboard = MediaPicker('clipboard', context);
+    const clipboard = MediaPicker('clipboard', context, {
+      uploadParams: {
+        collection: defaultMediaPickerCollectionName,
+      },
+    });
 
     this.clipboard = clipboard;
 
     clipboard.on('upload-end', data => {
       console.log('upload finished');
-      console.log(data);
+      console.log('upload-end:', data);
     });
 
     clipboard.on('upload-error', mpError => {
-      console.log('Error', mpError);
+      console.log('upload-error:', mpError);
+    });
+
+    clipboard.on('upload-preview-update', data => {
+      console.log('upload-preview-update:', data);
     });
 
     isActive ? clipboard.activate() : clipboard.deactivate();
@@ -112,7 +121,9 @@ class ClipboardWrapper extends Component<{}, ClipboardWrapperState> {
 
   onActiveChange = () => {
     const { clipboard } = this;
-
+    if (!clipboard) {
+      return;
+    }
     this.setState({ isActive: !this.state.isActive }, () => {
       const { isActive } = this.state;
       isActive ? clipboard.activate() : clipboard.deactivate();

@@ -1,5 +1,46 @@
 # @atlaskit/theme
 
+## 7.0.2
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
+## 7.0.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/docs@6.0.0
+
+## 7.0.0
+- [major] [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+
+  - Change API to experimental theming API to namespace component themes into separate contexts and make theming simpler. Update all dependant components.
+
+## 6.2.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/button@10.0.0
+
+## 6.2.0
+- [minor] Add smallFontSize as an export to theme [3469f64](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3469f64)
+
+## 6.1.1
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 6.1.0
+- [minor] Adds new theming API to Avatar and AvatarItem components [79dd93f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/79dd93f)
+
+## 6.0.4
+- [patch] Added assistive styles from util-shared-styles [dc563c1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dc563c1)
+
+## 6.0.3
+- [patch] fixed font-size and font-weight of h100 in theme to 11px and 700 respectively [9742864](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9742864)
+
+## 6.0.2
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 6.0.0
 - [major] Update badge to the new theming API. Rework experimental theming API. [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
 - [none] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)

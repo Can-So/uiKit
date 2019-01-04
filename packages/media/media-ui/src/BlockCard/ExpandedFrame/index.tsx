@@ -18,6 +18,9 @@ export interface ExpandedFrameProps {
   minWidth?: number;
   maxWidth?: number;
   children?: React.ReactNode;
+  /** A flag that determines whether the card is selected in edit mode. */
+  isSelected?: boolean;
+  /** The optional click handler */
   onClick?: () => void;
 }
 
@@ -58,7 +61,7 @@ export class ExpandedFrame extends React.Component<ExpandedFrameProps> {
 
   render() {
     const { isInteractive } = this;
-    const { isPlaceholder, href, minWidth, maxWidth } = this.props;
+    const { isPlaceholder, isSelected, href, minWidth, maxWidth } = this.props;
     if (!isPlaceholder && href) {
       return (
         <LinkWrapper
@@ -66,6 +69,7 @@ export class ExpandedFrame extends React.Component<ExpandedFrameProps> {
           rel="noopener"
           className={className}
           isInteractive={isInteractive}
+          isSelected={isSelected}
           href={href}
           minWidth={minWidth}
           maxWidth={maxWidth}
@@ -80,6 +84,7 @@ export class ExpandedFrame extends React.Component<ExpandedFrameProps> {
         <Wrapper
           className={className}
           isInteractive={isInteractive}
+          isSelected={isSelected}
           minWidth={minWidth}
           maxWidth={maxWidth}
           onClick={this.handleClick}

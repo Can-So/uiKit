@@ -12,8 +12,12 @@ type Props = {
   actions?: Array<Element<any>>,
   createIcon?: Element<any>,
   linkComponent?: ComponentType<*>,
-  onCreateActivate?: (event: Event) => void,
-  onSearchActivate?: (event: Event) => void,
+  onCreateActivate?: (
+    event: SyntheticMouseEvent<*> | SyntheticKeyboardEvent<*>,
+  ) => void,
+  onSearchActivate?: (
+    event: SyntheticMouseEvent<*> | SyntheticKeyboardEvent<*>,
+  ) => void,
   primaryIcon?: Element<any>,
   primaryIconAppearance?: IconAppearance,
   primaryItemHref?: string,
@@ -38,6 +42,7 @@ export default class GlobalPrimaryActions extends PureComponent<Props> {
         {primaryIcon ? (
           <GlobalPrimaryActionsPrimaryItem>
             <GlobalItem
+              id="productLogo"
               href={primaryItemHref}
               linkComponent={linkComponent}
               size="medium"

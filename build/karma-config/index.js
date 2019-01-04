@@ -5,23 +5,32 @@ const ChromiumRevision = require('puppeteer/package.json').puppeteer
 
 const boltQuery = require('bolt-query');
 const path = require('path');
-const babelPolyfill = require.resolve('babel-polyfill');
+const babelPolyfill = require.resolve('@babel/polyfill');
 const customEventPolyfill = require.resolve('custom-event-polyfill');
 const entry = require.resolve('./entry');
 const browserFetcher = puppeteer.createBrowserFetcher();
 
 const webpackConfig = {
+  mode: 'development',
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'ts-loader?transpileOnly=true',
+        loader: require.resolve('ts-loader'),
+        options: {
+          transpileOnly: true,
+        },
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: require.resolve('babel-loader'),
+        options: {
+          babelrc: true,
+          rootMode: 'upward',
+          envName: 'production:cjs',
+        },
       },
     ],
   },
@@ -95,7 +104,7 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
     singleRun: !watch,
     concurrency: 20,
     reporters: ['mocha'],
-    browsers: ['ChromeHeadless'],
+    browsers: [watch ? 'Chrome' : 'ChromeHeadless'],
     mochaReporter: {
       showDiff: true,
     },
@@ -154,7 +163,7 @@ async function getKarmaConfig({ cwd, watch, browserstack }) {
         startTunnel: true,
         tunnelIdentifier: process.env.BITBUCKET_COMMIT || 'ak_tunnel',
         localIdentifier: `${process.env.BITBUCKET_COMMIT}_unit_tests`,
-        project: 'Atlaskit',
+        project: 'Atlaskit Karma Tests',
         build: `${process.env.BITBUCKET_BRANCH} ${time} ${
           process.env.BITBUCKET_COMMIT
         }`,

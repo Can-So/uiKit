@@ -119,9 +119,7 @@ describe(name, () => {
         const iconWrapper = wrapper.find(IconWrapper);
 
         it(`with value ${s}`, () => {
-          // $FlowFixMe - https://github.com/facebook/flow/issues/396
           expect(iconWrapper).toHaveStyleRule('height', sizeValues[s]);
-          // $FlowFixMe - https://github.com/facebook/flow/issues/396
           expect(iconWrapper).toHaveStyleRule('width', sizeValues[s]);
         });
       });
@@ -132,7 +130,6 @@ describe(name, () => {
         const wrapper = mount(<MyIcon label="default primaryColor" />);
         const iconWrapper = wrapper.find(IconWrapper);
 
-        // $FlowFixMe - https://github.com/facebook/flow/issues/396
         expect(iconWrapper).toHaveStyleRule('color', 'currentColor');
       });
       it('can be changed to a hex value', () => {
@@ -142,7 +139,6 @@ describe(name, () => {
         );
         const iconWrapper = wrapper.find(IconWrapper);
 
-        // $FlowFixMe - https://github.com/facebook/flow/issues/396
         expect(iconWrapper).toHaveStyleRule('color', primaryColor);
       });
       it('can be changed to a named color', () => {
@@ -152,7 +148,6 @@ describe(name, () => {
         );
         const iconWrapper = wrapper.find(IconWrapper);
 
-        // $FlowFixMe - https://github.com/facebook/flow/issues/396
         expect(iconWrapper).toHaveStyleRule('color', primaryColor);
       });
     });
@@ -163,8 +158,10 @@ describe(name, () => {
         const props = wrapper.props();
         const iconWrapper = wrapper.find(IconWrapper);
 
-        // $FlowFixMe - https://github.com/facebook/flow/issues/396
-        expect(iconWrapper).toHaveStyleRule('fill', colors.background(props));
+        expect(iconWrapper).toHaveStyleRule(
+          'fill',
+          colors.background(props).toString(),
+        );
       });
       it('can be changed to a hex value', () => {
         const secondaryColor = '#ff0000';
@@ -173,7 +170,6 @@ describe(name, () => {
         );
         const iconWrapper = wrapper.find(IconWrapper);
 
-        // $FlowFixMe - https://github.com/facebook/flow/issues/396
         expect(iconWrapper).toHaveStyleRule('fill', secondaryColor);
       });
       it('can be changed to a named color', () => {
@@ -183,22 +179,7 @@ describe(name, () => {
         );
         const iconWrapper = wrapper.find(IconWrapper);
 
-        // $FlowFixMe - https://github.com/facebook/flow/issues/396
         expect(iconWrapper).toHaveStyleRule('fill', secondaryColor);
-      });
-    });
-
-    describe('onClick property', () => {
-      it('should set a click handler', () => {
-        const handler = jest.fn().mockImplementation(() => {}); // eslint-disable-line no-undef
-
-        const wrapper = mount(
-          <Icon glyph={empty} label="My icon" onClick={handler} />,
-        );
-        expect(wrapper.prop('onClick')).toBe(handler);
-
-        wrapper.find('span').simulate('click');
-        expect(handler.mock.calls.length).toBe(1);
       });
     });
 

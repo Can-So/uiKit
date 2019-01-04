@@ -1,75 +1,107 @@
 import * as React from 'react';
 import { Component } from 'react';
+import * as classnames from 'classnames';
 import { EditorView } from 'prosemirror-view';
-import { isTableSelected, selectTable } from 'prosemirror-utils';
-import { Selection } from 'prosemirror-state';
-import { toolbarSize } from '../styles';
-import { CornerContainer, CornerButton } from './styles';
-import InsertColumnButton from '../ColumnControls/InsertColumnButton';
-import InsertRowButton from '../RowControls/InsertRowButton';
-import { hoverTable, insertColumn, insertRow } from '../../../actions';
-import { getLineMarkerWidth } from '../utils';
+import { isTableSelected, selectTable, findTable } from 'prosemirror-utils';
+import { TableMap } from 'prosemirror-tables';
+import InsertButton from '../InsertButton';
+import {
+  clearHoverSelection,
+  hoverTable,
+  insertColumn,
+  insertRow,
+} from '../../../actions';
+import { TableCssClassName as ClassName } from '../../../types';
 
 export interface Props {
   editorView: EditorView;
-  selection?: Selection;
-  tableRef: HTMLElement;
-  clearHoverSelection: () => void;
-  isTableInDanger?: boolean;
+  tableRef?: HTMLTableElement;
+  isInDanger?: boolean;
+  isResizing?: boolean;
   isHeaderColumnEnabled?: boolean;
   isHeaderRowEnabled?: boolean;
   isNumberColumnEnabled?: boolean;
+  insertColumnButtonIndex?: number;
+  insertRowButtonIndex?: number;
+  hoveredRows?: number[];
 }
 
 export default class CornerControls extends Component<Props, any> {
-  static defaultProps = {
-    scroll: 0,
-  };
-
   render() {
     const {
-      tableRef,
-      editorView: { state },
-      isTableInDanger,
+      isInDanger,
+      isResizing,
       isHeaderRowEnabled,
       isHeaderColumnEnabled,
-      isNumberColumnEnabled,
+      insertColumnButtonIndex,
+      insertRowButtonIndex,
+      tableRef,
     } = this.props;
-    const tableHeight = tableRef.offsetHeight;
+    if (!tableRef) {
+      return null;
+    }
+    const isActive = this.isActive();
+
     return (
-      <CornerContainer
-        className={isTableSelected(state.selection) ? 'active' : ''}
+      <div
+        className={classnames(ClassName.CORNER_CONTROLS, {
+          active: isActive,
+        })}
       >
-        <CornerButton
+        <button
+          type="button"
+          className={classnames(ClassName.CONTROLS_CORNER_BUTTON, {
+            danger: isActive && isInDanger,
+          })}
           onClick={this.selectTable}
           onMouseOver={this.hoverTable}
-          onMouseOut={this.props.clearHoverSelection}
-          className={isTableInDanger ? 'danger' : ''}
+          onMouseOut={this.clearHoverSelection}
         />
-        {!isHeaderColumnEnabled &&
-          !isNumberColumnEnabled && (
-            <InsertColumnButton
-              onClick={this.insertColumn}
-              lineMarkerHeight={tableHeight + toolbarSize}
-            />
-          )}
-        {!isHeaderRowEnabled && (
-          <InsertRowButton
-            style={{ top: 2 }}
-            onClick={this.insertRow}
-            lineMarkerWidth={getLineMarkerWidth(
-              tableRef,
-              (tableRef.parentNode as HTMLElement).scrollLeft,
-            )}
+        {!isHeaderColumnEnabled && (
+          <InsertButton
+            type="column"
+            tableRef={tableRef}
+            index={0}
+            showInsertButton={!isResizing && insertColumnButtonIndex === 0}
+            onMouseDown={this.insertColumn}
           />
         )}
-      </CornerContainer>
+        {!isHeaderRowEnabled && (
+          <InsertButton
+            type="row"
+            tableRef={tableRef}
+            index={0}
+            showInsertButton={!isResizing && insertRowButtonIndex === 0}
+            onMouseDown={this.insertRow}
+          />
+        )}
+      </div>
     );
   }
 
+  private isActive = () => {
+    const { editorView, hoveredRows, isResizing } = this.props;
+    const { selection } = editorView.state;
+    const table = findTable(selection);
+    if (!table) {
+      return false;
+    }
+    return (
+      isTableSelected(selection) ||
+      (hoveredRows &&
+        hoveredRows.length === TableMap.get(table.node).height &&
+        !isResizing)
+    );
+  };
+
+  private clearHoverSelection = () => {
+    const { state, dispatch } = this.props.editorView;
+    clearHoverSelection(state, dispatch);
+  };
+
   private selectTable = () => {
     const { state, dispatch } = this.props.editorView;
-    dispatch(selectTable(state.tr));
+    dispatch(selectTable(state.tr).setMeta('addToHistory', false));
   };
 
   private hoverTable = () => {

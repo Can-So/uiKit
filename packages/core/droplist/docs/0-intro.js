@@ -3,9 +3,10 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  ### Usage
 
-  An internal base component for implementing dropdown and select components.
+An internal base component for implementing dropdown and select components.
+
+ ## Usage
 
 ${code`
 import DropList, {
@@ -19,9 +20,9 @@ import DropList, {
   very basic logic. It does not have any keyboard interactions, selectable logic or
   open/close functionality
 
-
   ${(
     <Example
+      packageName="@atlaskit/droplist"
       Component={require('../examples/00-basic-example').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-example')}
@@ -30,6 +31,7 @@ import DropList, {
 
   ${(
     <Example
+      packageName="@atlaskit/droplist"
       Component={require('../examples/01-bound-example').default}
       title="With Label"
       source={require('!!raw-loader!../examples/01-bound-example')}

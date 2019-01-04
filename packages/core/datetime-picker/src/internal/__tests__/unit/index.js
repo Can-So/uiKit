@@ -12,8 +12,11 @@ import {
   ClearIndicator,
   defaultTimes,
   DropdownIndicator,
+  formatDateTimeZoneIntoIso,
   parseDateIntoStateValues,
 } from '../..';
+
+import { isValid, removeSpacer, convertTo24hrTime } from '../../parseTime';
 
 test('ClearIndicator', () => {
   expect(ClearIndicator).toBe(null);
@@ -32,8 +35,8 @@ test('DropdownIndicator', () => {
   ).toMatchSnapshot();
 });
 
-// Convert our test values to the local timezone and use those as expected values so that
-// test results don't rely on a specific timezone
+// Convert our test values to the local timezone and use those as expected values
+//  so that test results don't rely on a specific timezone.
 const testISODate = parse('2018-04-12T09:30+1000');
 const testValue = format(testISODate);
 const testDateValue = format(testISODate, 'YYYY-MM-DD');
@@ -126,7 +129,7 @@ test('DatePicker, supplying a custom parseInputValue prop, produces the expected
 
 test('TimePicker default parseInputValue', () => {
   const onChangeSpy = jest.fn();
-  const expectedResult = '01:30';
+  const expectedResult = '01:30am';
   const timePickerWrapper = mount(
     <TimePicker timeIsEditable onChange={onChangeSpy} />,
   );
@@ -140,7 +143,7 @@ test('TimePicker custom parseInputValue', () => {
     return new Date('1970-01-02 01:15:00');
   };
   const onChangeSpy = jest.fn();
-  const expectedResult = '01:15';
+  const expectedResult = '01:15am';
   const timePickerWrapper = mount(
     <TimePicker
       timeIsEditable
@@ -218,4 +221,73 @@ test('DateTimePicker, custom parseValue', () => {
   expect(dateTimePickerState.dateValue).toEqual('2018-05-02');
   expect(dateTimePickerState.timeValue).toEqual('08:00');
   expect(dateTimePickerState.zoneValue).toEqual('+0800');
+});
+
+test('DateTimePicker, formatDateTimeZoneIntoIso returns empty value if there is no date', () => {
+  const date = '';
+  const time = '11:30';
+  const zone = '+1100';
+  const value = formatDateTimeZoneIntoIso(date, time, zone);
+  expect(value).toEqual('');
+});
+
+test('DateTimePicker, formatDateTimeZoneIntoIso returns Iso string value if date', () => {
+  const date = '2018-10-18';
+  const time = '11:30';
+  const zone = '+1100';
+  const value = formatDateTimeZoneIntoIso(date, time, zone);
+  expect(value).toEqual('2018-10-18T11:30+1100');
+});
+
+test('DatePicker, onCalendarChange if the iso date is greater than the last day of the month, focus the last day of the month instead', () => {
+  const date = '2018-02-31';
+  const fallbackDate = '2018-02-28';
+  const datePickerWrapper = mount(<DatePicker />);
+  datePickerWrapper.instance().onCalendarChange({ iso: date });
+  datePickerWrapper.update();
+  expect(datePickerWrapper.instance().state.view).toEqual(fallbackDate);
+});
+
+// ParseTime
+const correctTimes = [
+  '12:45am',
+  '12:45pm',
+  '1:13pm',
+  '1',
+  '113pm',
+  '01',
+  '0113',
+  '01pm',
+];
+
+const incorrectTimes = ['watermelon', '34675y83u4534ui59', '1111111'];
+
+const convertedTimes = [
+  { hour: 0, minute: 45 },
+  { hour: 12, minute: 45 },
+  { hour: 13, minute: 13 },
+  { hour: 1, minute: 0 },
+  { hour: 13, minute: 13 },
+  { hour: 1, minute: 0 },
+  { hour: 1, minute: 13 },
+  { hour: 13, minute: 0 },
+];
+
+test('"isValid" - accept valid times.', () => {
+  correctTimes.forEach(time => {
+    expect(isValid(time)).toEqual(true);
+  });
+});
+
+test('"isValid" - reject invalid times.', () => {
+  incorrectTimes.forEach(time => {
+    expect(isValid(time)).toEqual(false);
+  });
+});
+
+test('"convertTo24hrTime" - takes a time and returns an object with parsed 24hr times', () => {
+  correctTimes.forEach((time, i) => {
+    const tester = removeSpacer(time);
+    expect(convertTo24hrTime(tester)).toEqual(convertedTimes[i]);
+  });
 });

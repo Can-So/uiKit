@@ -1,5 +1,91 @@
 # @atlaskit/flag
 
+## 9.1.8
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-radio-group@4.0.14
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/portal@0.0.17
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 9.1.7
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/field-radio-group@4.0.13
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/theme@7.0.0
+
+## 9.1.6
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/field-radio-group@4.0.12
+  - @atlaskit/portal@0.0.16
+  - @atlaskit/icon@15.0.0
+
+## 9.1.5
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/field-radio-group@4.0.11
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/portal@0.0.15
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 9.1.4
+- Updated dependencies [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+  - @atlaskit/portal@0.0.14
+
+## 9.1.3
+- Updated dependencies [3f5a4dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5a4dd):
+  - @atlaskit/portal@0.0.13
+
+## 9.1.2
+- [patch] Updated dependencies [aaab348](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aaab348)
+  - @atlaskit/portal@0.0.12
+
+## 9.1.1
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 9.1.0
+- [minor] Now the flag actions accept href and target [65af057](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65af057)
+- [patch] Updated the flag actions to accept the href and target as props [43ac1ec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/43ac1ec)
+
+## 9.0.13
+- [patch] Updated the flag to use atlaskit button [d2084ad](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d2084ad)
+
+## 9.0.12
+- [patch] Updated the flag actions use gridSize and fontSize properly [3e7da11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3e7da11)
+
+## 9.0.11
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/button@9.0.13
+  - @atlaskit/field-radio-group@4.0.8
+  - @atlaskit/portal@0.0.10
+  - @atlaskit/icon@14.0.0
+
+## 9.0.10
+- [patch] Updated dependencies [d5a043a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5a043a)
+  - @atlaskit/icon@13.8.1
+  - @atlaskit/portal@0.0.9
+
+## 9.0.9
+- [patch] Updated dependencies [d9d2f0d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9d2f0d)
+- [none] Updated dependencies [89be4f1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/89be4f1)
+  - @atlaskit/portal@0.0.8
+  - @atlaskit/layer-manager@5.0.11
+
+## 9.0.8
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 9.0.6
 - [patch] Updated flags to use atlaskit portal instead of Layer manger [b9e6757](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9e6757)
 - [none] Updated dependencies [b9e6757](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9e6757)

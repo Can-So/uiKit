@@ -8,19 +8,14 @@ import {
   blockquote,
   decisionList,
   decisionItem,
-  taskList,
-  taskItem,
   randomId,
   storyMediaProviderFactory,
   bodiedExtension,
 } from '@atlaskit/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
-import {
-  Transformer,
-  ProviderFactory,
-  defaultSchema,
-} from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
+import { Transformer, ProviderFactory } from '@atlaskit/editor-common';
 
 import {
   MediaPluginState,
@@ -162,24 +157,11 @@ describe(name, () => {
         expect(val).to.deep.equal(toJSON(result));
       });
 
-      it('should filter out task and decision items', async () => {
-        const decisionsAndTasks = doc(
-          decisionList({})(decisionItem({})()),
-          taskList({})(taskItem({})()),
-          p('text'),
-        )(defaultSchema);
-        const expected = doc(p('text'))(defaultSchema);
-        editorActions.replaceDocument(decisionsAndTasks.toJSON());
-
-        const actual = await editorActions.getValue();
-        expect(actual).to.deep.equal({ ...expected.toJSON(), version: 1 });
-      });
-
       describe('with waitForMediaUpload === true', () => {
         it('should not resolve when all media operations are pending', async () => {
           stateManager.updateState(testTempFileId, {
             id: testTempFileId,
-            status: 'uploading',
+            fileId: Promise.resolve('id'),
           });
 
           await pickerFacadeLoader();
@@ -187,7 +169,7 @@ describe(name, () => {
           await provider.uploadContext;
 
           mediaPluginState.insertFiles([
-            { id: testTempFileId, status: 'uploading' },
+            { id: testTempFileId, fileId: Promise.resolve('id') },
           ]);
 
           let resolved: any;
@@ -197,7 +179,7 @@ describe(name, () => {
             .then(potentialValue => (resolved = potentialValue));
 
           return new Promise(resolve => {
-            setTimeout(() => {
+            window.setTimeout(() => {
               expect(resolved).to.equal(undefined);
               resolve();
             }, 50);
@@ -207,7 +189,7 @@ describe(name, () => {
         it('should reject after timeout is reached', async () => {
           stateManager.updateState(testTempFileId, {
             id: testTempFileId,
-            status: 'uploading',
+            fileId: Promise.resolve('id'),
           });
 
           await pickerFacadeLoader();
@@ -215,7 +197,7 @@ describe(name, () => {
           await provider.uploadContext;
 
           mediaPluginState.insertFiles([
-            { id: testTempFileId, status: 'uploading' },
+            { id: testTempFileId, fileId: Promise.resolve('id') },
           ]);
 
           // Note: getValue() public API doesn't yet support timeout, but the
@@ -231,12 +213,12 @@ describe(name, () => {
         it('should not resolve when some media operations are pending', async () => {
           stateManager.updateState(testTempFileId, {
             id: testTempFileId,
-            status: 'uploading',
+            fileId: Promise.resolve('id'),
           });
 
           stateManager.updateState(testTempFileId2, {
             id: testTempFileId2,
-            status: 'uploading',
+            fileId: Promise.resolve('id'),
           });
 
           await pickerFacadeLoader();
@@ -244,7 +226,7 @@ describe(name, () => {
           await provider.uploadContext;
 
           mediaPluginState.insertFiles([
-            { id: testTempFileId, status: 'uploading' },
+            { id: testTempFileId, fileId: Promise.resolve('id') },
           ]);
 
           let resolved: any;
@@ -254,7 +236,7 @@ describe(name, () => {
             .then(potentialValue => (resolved = potentialValue));
 
           mediaPluginState.insertFiles([
-            { id: testTempFileId2, status: 'uploading' },
+            { id: testTempFileId2, fileId: Promise.resolve('id') },
           ]);
 
           stateManager.updateState(testTempFileId, {
@@ -264,7 +246,7 @@ describe(name, () => {
           });
 
           return new Promise(resolve => {
-            setTimeout(() => {
+            window.setTimeout(() => {
               expect(resolved).to.equal(undefined);
               resolve();
             }, 50);
@@ -274,18 +256,18 @@ describe(name, () => {
         it('should resolve after media have resolved', async () => {
           stateManager.updateState(testTempFileId, {
             id: testTempFileId,
-            status: 'uploading',
+            fileId: Promise.resolve('id'),
           });
           await pickerFacadeLoader();
           const provider = await mediaProvider;
           await provider.uploadContext;
 
           mediaPluginState.insertFiles([
-            { id: testTempFileId, status: 'uploading' },
+            { id: testTempFileId, fileId: Promise.resolve('id') },
           ]);
 
           // To simulate async behavior, trigger ready on next tick
-          setTimeout(() => {
+          window.setTimeout(() => {
             stateManager.updateState(testTempFileId, {
               status: 'ready',
               id: testTempFileId,
@@ -296,7 +278,7 @@ describe(name, () => {
           const value = (await editorActions.getValue()) as any;
 
           expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(1);
+          expect(value.content).to.be.of.length(2);
           expect(value.content[0].type).to.be.eq('mediaGroup');
           expect(value.content[0].content[0].type).to.be.eq('media');
           expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
@@ -305,21 +287,22 @@ describe(name, () => {
         it('should resolve after processing status', async () => {
           stateManager.updateState(testTempFileId, {
             id: testTempFileId,
-            status: 'uploading',
+            fileId: Promise.resolve('id'),
           });
 
           await pickerFacadeLoader();
           const provider = await mediaProvider;
           await provider.uploadContext;
+          await provider.viewContext;
 
           mediaPluginState.insertFiles([
-            { id: testTempFileId, status: 'uploading' },
+            { id: testTempFileId, fileId: Promise.resolve('id') },
           ]);
 
           // To simulate async behavior, trigger ready on next tick
-          setTimeout(() => {
+          window.setTimeout(() => {
             stateManager.updateState(testTempFileId, {
-              status: 'processing',
+              status: 'ready',
               id: testTempFileId,
               publicId: testTempFileId,
             });
@@ -328,7 +311,7 @@ describe(name, () => {
           const value = (await editorActions.getValue()) as any;
 
           expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(1);
+          expect(value.content).to.be.of.length(2);
           expect(value.content[0].type).to.be.eq('mediaGroup');
           expect(value.content[0].content[0].type).to.be.eq('media');
           expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);
@@ -362,7 +345,7 @@ describe(name, () => {
 
           stateManager.updateState(testTempFileId, {
             id: testTempFileId,
-            status: 'uploading',
+            fileId: Promise.resolve('id'),
           });
 
           await pickerFacadeLoader();
@@ -370,13 +353,13 @@ describe(name, () => {
           await provider.uploadContext;
 
           mediaPluginState.insertFiles([
-            { id: testTempFileId, status: 'uploading' },
+            { id: testTempFileId, fileId: Promise.resolve('id') },
           ]);
 
           const value = (await editorActions.getValue()) as any;
 
           expect(value).to.be.an('object');
-          expect(value.content).to.be.of.length(1);
+          expect(value.content).to.be.of.length(2);
           expect(value.content[0].type).to.be.eq('mediaGroup');
           expect(value.content[0].content[0].type).to.be.eq('media');
           expect(value.content[0].content[0].attrs.id).to.be.eq(testTempFileId);

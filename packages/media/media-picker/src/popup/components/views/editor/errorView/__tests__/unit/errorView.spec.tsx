@@ -1,22 +1,16 @@
 import * as React from 'react'; // eslint-disable-line
-import { mount } from 'enzyme';
 import { expect } from 'chai';
 import Button from '@atlaskit/button';
+import { messages } from '@atlaskit/media-ui';
+import ConnectedErrorView from '../../errorView';
 
-import { ErrorView } from '../../errorView';
-import {
-  errorHintRetry,
-  errorHintCritical,
-  errorButtonRetry,
-  errorButtonCancel,
-  errorButtonClose,
-} from '../../../phrases';
 import {
   ErrorPopup,
   ErrorIconWrapper,
   ErrorMessage,
   ErrorHint,
 } from '../../styles';
+import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 
 describe('ErrorView', () => {
   const message = 'some-message';
@@ -24,8 +18,8 @@ describe('ErrorView', () => {
   const onCancel = () => {};
 
   it('should display one button in case of critical error', () => {
-    const errorView = mount(
-      <ErrorView message={message} onCancel={onCancel} />,
+    const errorView = mountWithIntlContext(
+      <ConnectedErrorView message={message} onCancel={onCancel} />,
     );
     expect(errorView.find(ErrorPopup)).to.have.length(1);
     expect(errorView.find(ErrorIconWrapper)).to.have.length(1);
@@ -36,16 +30,23 @@ describe('ErrorView', () => {
 
     const hint = errorView.find(ErrorHint);
     expect(hint).to.have.length(1);
-    expect(hint.first().text()).to.equal(errorHintCritical);
+
+    expect(hint.first().text()).to.equal(
+      messages.error_hint_critical.defaultMessage,
+    );
 
     const buttons = errorView.find(Button);
     expect(buttons).to.have.length(1);
-    expect(buttons.first().text()).to.equal(errorButtonClose);
+    expect(buttons.first().text()).to.equal(messages.close.defaultMessage);
   });
 
   it('should display two buttons in case of retriable error', () => {
-    const errorView = mount(
-      <ErrorView message={message} onRetry={onRetry} onCancel={onCancel} />,
+    const errorView = mountWithIntlContext(
+      <ConnectedErrorView
+        message={message}
+        onRetry={onRetry}
+        onCancel={onCancel}
+      />,
     );
     expect(errorView.find(ErrorPopup)).to.have.length(1);
     expect(errorView.find(ErrorIconWrapper)).to.have.length(1);
@@ -56,11 +57,13 @@ describe('ErrorView', () => {
 
     const hint = errorView.find(ErrorHint);
     expect(hint).to.have.length(1);
-    expect(hint.first().text()).to.equal(errorHintRetry);
+    expect(hint.first().text()).to.equal(
+      messages.error_hint_retry.defaultMessage,
+    );
 
     const buttons = errorView.find(Button);
     expect(buttons).to.have.length(2);
-    expect(buttons.at(0).text()).to.equal(errorButtonRetry);
-    expect(buttons.at(1).text()).to.equal(errorButtonCancel);
+    expect(buttons.at(0).text()).to.equal(messages.try_again.defaultMessage);
+    expect(buttons.at(1).text()).to.equal(messages.cancel.defaultMessage);
   });
 });

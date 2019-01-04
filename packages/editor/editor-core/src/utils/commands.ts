@@ -1,20 +1,13 @@
-import { EditorState, Transaction } from 'prosemirror-state';
+import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { ResolvedPos } from 'prosemirror-model';
+import { GapCursorSelection } from '../plugins/gap-cursor';
+import { Command } from '../types';
 
-type Command = (
-  state: EditorState,
-  dispatch: (tr: Transaction) => void,
-  view?: EditorView,
-) => boolean;
 type Predicate = (state: EditorState, view?: EditorView) => boolean;
 
 const filter = (predicates: Predicate[] | Predicate, cmd: Command): Command => {
-  return function(
-    state: EditorState,
-    dispatch: (tr: Transaction) => void,
-    view?: EditorView,
-  ): boolean {
+  return function(state, dispatch, view): boolean {
     if (!Array.isArray(predicates)) {
       predicates = [predicates];
     }
@@ -32,7 +25,10 @@ const isEmptySelectionAtStart = (
   view?: EditorView,
 ): boolean => {
   const { empty, $from } = state.selection;
-  return empty && $from.parentOffset === 0;
+  return (
+    empty &&
+    ($from.parentOffset === 0 || state.selection instanceof GapCursorSelection)
+  );
 };
 
 const isFirstChildOfParent = (
@@ -40,7 +36,11 @@ const isFirstChildOfParent = (
   view?: EditorView,
 ): boolean => {
   const { $from } = state.selection;
-  return $from.depth > 1 ? $from.index($from.depth - 1) === 0 : true;
+  return $from.depth > 1
+    ? (state.selection instanceof GapCursorSelection &&
+        $from.parentOffset === 0) ||
+        $from.index($from.depth - 1) === 0
+    : true;
 };
 
 /**
@@ -55,7 +55,7 @@ const isNthParentOfType = (
   nodeType,
   depthAway,
 ): ((state: EditorState, view?: EditorView) => boolean) => {
-  return (state: EditorState, view?: EditorView): boolean => {
+  return (state: EditorState): boolean => {
     const { $from } = state.selection;
     const parent = $from.node($from.depth - depthAway);
 

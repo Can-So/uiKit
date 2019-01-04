@@ -3,9 +3,9 @@
 import styled from 'styled-components';
 
 import { ComponentClass } from 'react';
-import { akColorN20, akColorB200 } from '@atlaskit/util-shared-styles';
-import { Root, cardShadow, centerSelf } from '../../styles';
+import { Root, cardShadow } from '../../styles';
 import { borderRadius, size } from '@atlaskit/media-ui';
+import { colors, themed } from '@atlaskit/theme';
 
 export interface WrapperProps {
   disableOverlay?: boolean;
@@ -20,7 +20,7 @@ const getShadowAttribute = (props: WrapperProps) => {
   return disableOverlay ? '' : cardShadow;
 };
 
-const getCursorAttribute = (props: WrapperProps) => {
+const getCursorAttribute = () => {
   // TODO MSW-661: Figure out pointer logic for image card component
   return 'cursor: pointer;';
 };
@@ -28,17 +28,25 @@ const getCursorAttribute = (props: WrapperProps) => {
 const getBorderAttribute = (props: WrapperProps) => {
   const { selected, selectable } = props;
   return `border: 2px solid ${
-    selected && selectable ? akColorB200 : 'transparent'
+    selected && selectable ? colors.B200 : 'transparent'
   };`;
 };
 
 const getBackgroundColor = (props: WrapperProps) => {
   const { mediaType } = props;
-  return `background: ${mediaType === 'image' ? 'transparent' : akColorN20};`;
+  return `background: ${
+    mediaType === 'image'
+      ? 'transparent'
+      : themed({ light: colors.N20, dark: colors.DN50 })(props)
+  };`;
 };
 
 export const Wrapper: ComponentClass<WrapperProps> = styled(Root)`
-  ${getShadowAttribute} ${getCursorAttribute} ${borderRadius} background: #fff;
+  ${getShadowAttribute}
+  ${getCursorAttribute}
+  ${borderRadius}
+  background: ${themed({ light: '#FFF', dark: colors.DN50 })};
+
   line-height: normal;
   position: relative;
 
@@ -70,11 +78,37 @@ export const Wrapper: ComponentClass<WrapperProps> = styled(Root)`
       height: inherit;
       display: block;
       overflow: hidden;
-      ${borderRadius} img {
-        ${centerSelf} max-height: 100%;
-        max-width: 100%;
-        display: block;
-      }
+      ${borderRadius}
     }
+  }
+`;
+
+export const PlayIconWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+  /* we want to override default icon size and hover state */
+  &:hover > * {
+    width: 64px;
+    height: 64px;
+  }
+
+  > * {
+    background: rgba(23, 43, 77, 0.7);
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s;
   }
 `;

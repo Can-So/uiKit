@@ -1,9 +1,7 @@
-const createChangesetCommit = require('./createChangesetCommit');
-const createRelease = require('./createRelease');
+const writeChangeset = require('./writeChangeset');
 const changesetCommand = require('./changesetCommand');
 
 module.exports = {
-  createChangesetCommit,
-  createRelease,
+  writeChangeset,
   changesetCommand,
 };

@@ -4,8 +4,9 @@ import { encode, NodeEncoder } from '..';
 const panelTypeColorMapping = {
   info: '#deebff',
   note: '#eae6ff',
-  tip: '#e3fcef',
+  success: '#e3fcef',
   warning: '#fffae6',
+  error: '#ffebe6',
 };
 
 export const panel: NodeEncoder = (node: PMNode): string => {

@@ -1,25 +1,28 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, Example, code } from '@atlaskit/docs';
 
 export default md`
-  # Editor-Jira-Transformer
+This package provides a transformation from ProseMirror Node → wikimarkup and from HTML → ProseMirror Node.
 
-  ## Installation
+  ## Usage
 
-  ~~~sh
-  npm install @atlaskit/editor-jira-transformer
-  ~~~
+  Use the encoder with editor-jira-transformer as follows:
 
-  ## Using the library
-
-  Use the component in your React app as follows:
-
-  ~~~js
-  import { JiraTransformer } from '@atlaskit/editor-jira-transformer';
+  ${code`import { JiraTransformer } from '@atlaskit/editor-jira-transformer';
+  import { JiraSchema as schema } from '@atlaskit/editor-common';
 
   const serializer = new JiraTransformer(schema);
   // To encode editor content as markdown
   serializer.encode(editorContent);
   // To convert HTML to editor content
-  serializer.parse(html);
-  ~~~
+  serializer.parse(html);`}
+
+  ${(
+    <Example
+      packageName="@atlaskit/editor-jira-transformer"
+      Component={require('../examples/1-jira-html-input').default}
+      title="Jira HTML Input"
+      source={require('!!raw-loader!../examples/1-jira-html-input')}
+    />
+  )}
 `;

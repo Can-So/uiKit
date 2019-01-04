@@ -1,10 +1,4 @@
-// @ts-ignore
-import { TextDefinition } from '@atlaskit/editor-common';
-
-import {
-  TextColorDefinition,
-  TextColorAttributes,
-} from '@atlaskit/editor-common';
+import { TextColorDefinition, TextColorAttributes } from '@atlaskit/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

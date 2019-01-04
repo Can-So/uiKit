@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, type ComponentType, type ElementRef } from 'react';
-import { mergeStyles, makeAnimated } from 'react-select';
+import { mergeStyles } from 'react-select';
 import memoizeOne from 'memoize-one';
 import isEqual from 'react-fast-compare';
 import { colors, gridSize } from '@atlaskit/theme';
@@ -260,15 +260,16 @@ export default function createSelect(WrappedComponent: ComponentType<*>) {
       validationState: 'default',
       spacing: 'default',
       onClickPreventDefault: true,
+      tabSelectsValue: false,
     };
     componentWillReceiveProps(nextProps: Props) {
       this.cacheComponents(nextProps.components);
     }
     cacheComponents = (components?: {}) => {
-      this.components = makeAnimated({
+      this.components = {
         ...defaultComponents,
         ...components,
-      });
+      };
     };
     focus() {
       this.select.focus();
@@ -278,12 +279,6 @@ export default function createSelect(WrappedComponent: ComponentType<*>) {
     }
     onSelectRef = (ref: ElementRef<*>) => {
       this.select = ref;
-    };
-    /** Menu click events aren't handled or exposed in react-select so we set preventDefault to work with dialog & layer components */
-    onClick = (e: MouseEvent) => {
-      if (this.props.onClickPreventDefault) {
-        e.preventDefault();
-      }
     };
     render() {
       const {
@@ -297,16 +292,13 @@ export default function createSelect(WrappedComponent: ComponentType<*>) {
 
       // props must be spread first to stop `components` being overridden
       return (
-        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-        <div onClick={this.onClick}>
-          <WrappedComponent
-            ref={this.onSelectRef}
-            isMulti={isMulti}
-            {...props}
-            components={this.components}
-            styles={mergeStyles(baseStyles(validationState, isCompact), styles)}
-          />
-        </div>
+        <WrappedComponent
+          ref={this.onSelectRef}
+          isMulti={isMulti}
+          {...props}
+          components={this.components}
+          styles={mergeStyles(baseStyles(validationState, isCompact), styles)}
+        />
       );
     }
   };

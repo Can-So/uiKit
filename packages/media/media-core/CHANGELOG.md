@@ -1,5 +1,123 @@
 # @atlaskit/media-core
 
+## 24.7.2
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/media-store@9.0.2
+  - @atlaskit/media-test-helpers@18.7.2
+  - @atlaskit/media-card@47.0.0
+
+## 24.7.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
+## 24.7.0
+- [minor] [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+
+  - New method context.file.touchFiles is added; Optional third parameter is added to context.file.upload - loadableFileUpfrontIds where you can define file id, and promise of upload id upfront
+- Updated dependencies [096f898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/096f898):
+  - @atlaskit/media-test-helpers@18.7.0
+  - @atlaskit/media-store@9.0.0
+
+## 24.6.0
+- [minor] [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+
+  - Add stretchy-fit resize mode that acts as full-fit but scales up small image in big container
+
+## 24.5.3
+- [patch] [0f42ec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f42ec1):
+
+  Use /items endpoint in media-core
+
+## 24.5.2
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/media-card@44.1.3
+  - @atlaskit/docs@6.0.0
+
+## 24.5.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/button@10.0.0
+
+## 24.5.0
+- [minor] [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+
+  - Context.collection.removeFile has been added; occurrenceKey was added to all FileState flavours and filled as part of observable during upload;
+
+## 24.4.1
+- [patch] [705dcf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/705dcf3):
+
+  - pass collectionName to MediaStore in order to use right auth token
+
+## 24.4.0
+- [minor] [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+
+  - Allow to inline play video files in media-card
+
+## 24.3.1
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-test-helpers@18.2.11
+  - @atlaskit/media-card@42.0.0
+
+## 24.3.0
+- [minor] Split Media + Editor cleanup part 1 [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+
+## 24.2.2
+- [patch] Updated dependencies [6e510d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e510d8)
+  - @atlaskit/media-test-helpers@18.2.7
+  - @atlaskit/media-card@40.0.0
+
+## 24.2.1
+- [patch] Fix bug with download binary [71ebe0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/71ebe0b)
+
+## 24.2.0
+- [minor] Media-card: allow to download binary when processing failed, add failed-processing to CardStatus; Media-core: add context.file.downloadBinary, add failed-processing to FileStatus; Media-store: add getFileBinaryURL; [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+
+## 24.1.1
+- [patch] Add pagination to recents view in MediaPicker [4b3c1f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b3c1f5)
+
+## 24.1.0
+- [minor] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [minor] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+
+## 24.0.3
+- [patch] Updated dependencies [2d848cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d848cd)
+  - @atlaskit/media-test-helpers@18.2.2
+  - @atlaskit/media-store@7.0.0
+
+## 24.0.2
+- [patch] Updated dependencies [dae7792](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dae7792)
+  - @atlaskit/media-card@37.0.0
+  - @atlaskit/media-test-helpers@18.2.0
+
+## 24.0.1
+- [patch] Support external image identifiers in media-card [82c8bb9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82c8bb9)
+
+## 24.0.0
+- [major] Update RXJS dependency to ^5.5.0 [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+
+## 23.2.1
+- [patch] Updated dependencies [1be4bb8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1be4bb8)
+  - @atlaskit/media-card@35.0.0
+
+## 23.2.0
+- [minor] expose new context.collection methods [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+
+## 23.1.1
+- [patch] Update TS to 3.0 [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+- [none] Updated dependencies [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+  - @atlaskit/media-test-helpers@17.0.2
+
+## 23.1.0
+- [minor] Expose upfrontId in MediaPicker [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
+
+## 23.0.2
+- [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+  - @atlaskit/media-test-helpers@17.0.0
+  - @atlaskit/media-store@6.0.1
+
 ## 23.0.1
 - [patch] Removing mutational rxjs imports and replace with explicit operators [353f9db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/353f9db)
 - [patch] Removing mutational rxjs imports and replace with explicit operators [56c2df9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56c2df9)

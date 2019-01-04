@@ -1,5 +1,12 @@
 /* tslint:disable:variable-name */
 
+/**
+ * Everything about this file change is just wrong.
+ * Mostly because we do bad things with classes.
+ * This is all wrong and hopefully will be removed from existence with card v3,
+ * so please don’t be too sad about all this!
+ */
+
 import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
@@ -20,9 +27,11 @@ import {
   akColorB400,
   akColorB300,
 } from '@atlaskit/util-shared-styles';
+import { colors, themed } from '@atlaskit/theme';
 
 export interface OverlayProps {
   hasError?: boolean;
+  noHover?: boolean;
 }
 
 export const TickBox: ComponentClass<
@@ -59,8 +68,8 @@ export const Overlay: ComponentClass<
   transition: 0.3s background ${easeOutCubic}, 0.3s border-color;
   padding: 16px;
 
-  ${({ hasError }: OverlayProps) => {
-    if (hasError) {
+  ${({ hasError, noHover }: OverlayProps) => {
+    if (hasError || noHover) {
       return `
         cursor: default;
 
@@ -71,7 +80,7 @@ export const Overlay: ComponentClass<
     }
 
     return '';
-  }} &:hover, &.active {
+  }} &:not(.persistent):hover, &.active {
     .top-row {
       .title {
         color: ${akColorB400};
@@ -84,13 +93,21 @@ export const Overlay: ComponentClass<
       }
     }
   }
+  
+  &.noHover:hover {
+   .top-row {
+     .title {
+        color: ${akColorN800};
+     }
+   }
+  }
 
   .file-type-icon {
     display: block;
   }
 
   &:not(.persistent) {
-    &:not(.error):hover {
+    &:not(.error, .noHover):hover {
       background-color: ${rgba(akColorN900, 0.06)};
     }
 
@@ -278,7 +295,7 @@ export const ErrorWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
 export const TitleWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
   box-sizing: border-box;
   word-wrap: break-word;
-  color: ${akColorN800};
+  color: ${themed({ light: colors.N800, dark: colors.DN900 })};
   font-size: 12px;
   line-height: 18px;
 `;

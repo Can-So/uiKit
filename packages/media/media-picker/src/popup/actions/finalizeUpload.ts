@@ -1,6 +1,4 @@
 import { Action } from 'redux';
-
-import { Tenant } from '../domain';
 import { MediaFile } from '../../domain/file';
 
 export const FINALIZE_UPLOAD = 'FINALIZE_UPLOAD';
@@ -15,7 +13,8 @@ export interface FinalizeUploadAction extends Action {
   readonly file: MediaFile;
   readonly uploadId: string;
   readonly source: FinalizeUploadSource;
-  readonly tenant: Tenant;
+  readonly replaceFileId?: Promise<string>;
+  readonly occurrenceKey?: string;
 }
 
 export function isFinalizeUploadAction(
@@ -28,13 +27,13 @@ export function finalizeUpload(
   file: MediaFile,
   uploadId: string,
   source: FinalizeUploadSource,
-  tenant: Tenant,
+  replaceFileId?: Promise<string>,
 ): FinalizeUploadAction {
   return {
     type: FINALIZE_UPLOAD,
     file,
     uploadId,
     source,
-    tenant,
+    replaceFileId,
   };
 }

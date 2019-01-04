@@ -1,28 +1,39 @@
 // @flow
 
-import React, { Component } from 'react';
-import { ThemeProvider } from 'emotion-theming';
+import React, { Component, Fragment } from 'react';
 import DashboardIcon from '@atlaskit/icon/glyph/dashboard';
 import BacklogIcon from '@atlaskit/icon/glyph/backlog';
 import IssuesIcon from '@atlaskit/icon/glyph/issue';
 import ReportsIcon from '@atlaskit/icon/glyph/graph-line';
+import { colors, gridSize as gridSizeFn } from '@atlaskit/theme';
 
 import {
   GlobalNav,
   LayoutManager,
   NavigationProvider,
-  Section,
-  SkeletonContainerHeader,
-  SkeletonItem,
+  MenuSection,
+  SkeletonContainerView,
   light,
   dark,
   settings,
   ContainerHeader,
+  HeaderSection,
   ItemAvatar,
   Item,
+  ThemeProvider,
+  modeGenerator,
 } from '../src';
 
-const themeModes = { light, dark, settings };
+const gridSize = gridSizeFn();
+
+const customThemeMode = modeGenerator({
+  product: {
+    text: colors.N0,
+    background: colors.G500,
+  },
+});
+
+const themeModes = { light, dark, settings, custom: customThemeMode };
 
 const GlobalNavigation = () => (
   <GlobalNav primaryItems={[]} secondaryItems={[]} />
@@ -31,81 +42,61 @@ const GlobalNavigation = () => (
 type State = {
   themeMode: 'light' | 'dark' | 'settings',
   shouldShowContainer: boolean,
-  shouldRenderIcons: boolean,
   shouldRenderSkeleton: boolean,
 };
+
 export default class Example extends Component<{}, State> {
   state = {
     themeMode: 'light',
     shouldShowContainer: true,
-    shouldRenderIcons: false,
     shouldRenderSkeleton: true,
   };
 
   renderNavigation = () => {
-    const { shouldRenderIcons } = this.state;
     return (
-      <div css={{ padding: '16px 0' }}>
-        <Section>
+      <Fragment>
+        <HeaderSection>
           {({ css }) => (
-            <div css={css}>
+            <div
+              css={{
+                ...css,
+                paddingBottom: gridSize * 2.5,
+              }}
+            >
               <ContainerHeader
                 before={itemState => (
-                  <ItemAvatar itemState={itemState} appearance="square" />
+                  <ItemAvatar
+                    itemState={itemState}
+                    appearance="square"
+                    size="large"
+                  />
                 )}
                 text="Container title"
                 subText="Container description"
               />
             </div>
           )}
-        </Section>
-        <Section>
-          {({ css }) => (
-            <div css={css}>
-              <Item
-                before={shouldRenderIcons ? DashboardIcon : undefined}
-                text="Dashboards"
-              />
-              <Item
-                before={shouldRenderIcons ? BacklogIcon : undefined}
-                text="Backlog"
-              />
-              <Item
-                before={shouldRenderIcons ? IssuesIcon : undefined}
-                text="Issues and filters"
-              />
-              <Item
-                before={shouldRenderIcons ? ReportsIcon : undefined}
-                text="Reports"
-              />
+        </HeaderSection>
+        <MenuSection>
+          {({ className }) => (
+            <div className={className}>
+              <Item before={DashboardIcon} text="Dashboards" />
+              <Item before={BacklogIcon} text="Backlog" />
+              <Item before={IssuesIcon} text="Issues and filters" />
+              <Item before={ReportsIcon} text="Reports" />
             </div>
           )}
-        </Section>
-      </div>
+        </MenuSection>
+      </Fragment>
     );
   };
 
   renderSkeleton = () => {
-    const { shouldRenderIcons } = this.state;
+    const { shouldShowContainer } = this.state;
     return (
-      <div css={{ padding: '16px 0' }}>
-        <Section>
-          {({ css }) => (
-            <div css={css}>
-              <SkeletonContainerHeader hasBefore />
-            </div>
-          )}
-        </Section>
-        <Section>
-          {({ css }) => (
-            <div css={css}>
-              <SkeletonItem hasBefore={shouldRenderIcons} />
-              <SkeletonItem hasBefore={shouldRenderIcons} />
-              <SkeletonItem hasBefore={shouldRenderIcons} />
-            </div>
-          )}
-        </Section>
-      </div>
+      <SkeletonContainerView
+        type={shouldShowContainer ? 'container' : 'product'}
+      />
     );
   };
 
@@ -121,17 +112,8 @@ export default class Example extends Component<{}, State> {
     this.setState({ shouldRenderSkeleton: !this.state.shouldRenderSkeleton });
   };
 
-  handleRenderIconsChange = () => {
-    this.setState({ shouldRenderIcons: !this.state.shouldRenderIcons });
-  };
-
   render() {
-    const {
-      shouldRenderIcons,
-      shouldRenderSkeleton,
-      shouldShowContainer,
-      themeMode,
-    } = this.state;
+    const { shouldRenderSkeleton, shouldShowContainer, themeMode } = this.state;
     const renderer = shouldRenderSkeleton
       ? this.renderSkeleton
       : this.renderNavigation;
@@ -148,7 +130,7 @@ export default class Example extends Component<{}, State> {
             productNavigation={renderer}
             containerNavigation={shouldShowContainer ? renderer : null}
           >
-            <div css={{ padding: 30 }}>
+            <div css={{ padding: '32px 40px' }}>
               <p>
                 <label htmlFor="should-render-skeleton-toggle">
                   <input
@@ -172,21 +154,11 @@ export default class Example extends Component<{}, State> {
                 </label>
               </p>
               <p>
-                <label htmlFor="should-render-icons-toggle">
-                  <input
-                    checked={shouldRenderIcons}
-                    id="should-render-icons-toggle"
-                    onChange={this.handleRenderIconsChange}
-                    type="checkbox"
-                  />{' '}
-                  Render icons
-                </label>
-              </p>
-              <p>
                 <select onChange={this.handleThemeModeChange} value={themeMode}>
                   <option value="light">Light mode</option>
                   <option value="dark">Dark mode</option>
                   <option value="settings">Settings mode</option>
+                  <option value="custom">Custom mode</option>
                 </select>
               </p>
             </div>

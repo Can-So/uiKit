@@ -1,11 +1,12 @@
 {
   "name": "@atlaskit/size-detector",
-  "version": "5.0.4",
+  "version": "5.0.9",
   "description": "Wrapper for components that need to respond to size changes",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "atlaskit:src": "src/index.js",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
@@ -21,6 +22,7 @@
   },
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "babel-runtime": "^6.26.0",
     "raf-schd": "^2.1.0"
   },
@@ -29,9 +31,10 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^1.11.0",
-    "@atlaskit/docs": "^5.0.2",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/visual-regression": "^0.0.1",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   }
 }

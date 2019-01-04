@@ -1,9 +1,9 @@
 // @flow
-import React, { createElement, Component } from 'react';
+import React, { createElement, Component, type ElementType } from 'react';
 import ErrorIcon from '@atlaskit/icon/glyph/error';
 import WarningIcon from '@atlaskit/icon/glyph/warning';
 
-import type { AppearanceType, ComponentType, FunctionType } from '../types';
+import type { AppearanceType } from '../types';
 import {
   Header,
   Title,
@@ -33,11 +33,11 @@ type Props = {
     Providing a function should return the element you want to focus
   */
   /** Component to render the header of the modal. */
-  component?: ComponentType,
+  component?: ElementType,
   /** The modal heading */
   heading?: string,
   /** Function to close the dialog */
-  onClose: FunctionType,
+  onClose: Function,
   /** Whether or not to display a line under the header */
   showKeyline?: boolean,
   /**

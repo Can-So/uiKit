@@ -106,7 +106,7 @@ describe('MediaLinkService', () => {
           `some-host/link/some-link-id?collection=some-collection&${authParams}`,
         );
       });
-    setTimeout(() => {
+    window.setTimeout(() => {
       const mockedResponse = {
         data: linkServerFakedResponse,
       };
@@ -129,7 +129,7 @@ describe('MediaLinkService', () => {
         error => expect(error).toBeDefined(),
       );
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       requests[0].respond(500, {}, '');
     });
     return response;
@@ -156,7 +156,7 @@ describe('MediaLinkService', () => {
         );
       });
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       const mockedResponse = {
         data: { id: linkId },
       };
@@ -173,11 +173,14 @@ describe('MediaLinkService', () => {
   it('should reject add link when server responded with 500', () => {
     const response = linkService
       .addLinkItem(linkUrl, collection, linkMetadata)
-      .then(() => {
-        throw new Error('The function addLinkItem should fail');
-      }, error => expect(error).toBeDefined);
+      .then(
+        () => {
+          throw new Error('The function addLinkItem should fail');
+        },
+        error => expect(error).toBeDefined,
+      );
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       requests[0].respond(500, {}, '');
     });
 

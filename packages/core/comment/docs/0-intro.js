@@ -4,7 +4,12 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-The comment component exports both the wrapper component for comments, as well as several smaller components designed to be passed in to the comment component to display a richer comment. The complete export is:
+
+The comment component exports both the wrapper component for comments, as well as several smaller components designed to be passed in to the comment component to display a richer comment.
+
+## Usage
+
+The complete export is:
 
 ${code`
 import Comment, {
@@ -22,22 +27,25 @@ All children components are displayed indented after the comment body, allowing 
 
 ${(
   <Example
+    packageName="@atlaskit/comment"
     Component={require('../examples/01-example-comment').default}
-    title="Example Comment"
+    title="Basic"
     source={require('!!raw-loader!../examples/01-example-comment')}
   />
 )}
 
 ${(
   <Example
+    packageName="@atlaskit/comment"
     Component={require('../examples/02-comment-components').default}
-    title="Comment Components"
+    title="Comment as Components"
     source={require('!!raw-loader!../examples/02-comment-components')}
   />
 )}
 
 ${(
   <Example
+    packageName="@atlaskit/comment"
     Component={require('../examples/03-nested-comments').default}
     title="Nested Comments"
     source={require('!!raw-loader!../examples/03-nested-comments')}

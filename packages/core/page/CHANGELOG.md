@@ -1,5 +1,43 @@
 # @atlaskit/page
 
+## 8.0.12
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/banner@7.0.12
+  - @atlaskit/button@10.1.1
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/navigation@33.3.8
+  - @atlaskit/toggle@5.0.14
+  - @atlaskit/docs@6.0.0
+
+## 8.0.11
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/banner@7.0.9
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/navigation@33.3.5
+  - @atlaskit/toggle@5.0.11
+  - @atlaskit/button@10.0.0
+
+## 8.0.10
+- [patch] [84e8015](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84e8015):
+
+  - Bump react-syntax-highlighter to 10.0.1
+
+## 8.0.9
+- [patch] Fix webpack 3 support for page & code [03af95e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/03af95e)
+
+## 8.0.8
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 8.0.7
+- [patch] Upgrade react-syntax-highlighter again and use async loaded prism [260d66a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/260d66a)
+
+## 8.0.6
+- [patch] Upgraded react-syntax-highlighter to 8.0.2 [7cc7000](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7cc7000)
+
+## 8.0.5
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 8.0.3
 - [patch] update the dependency of react-dom to 16.4.2 due to vulnerability in previous versions read https://reactjs.org/blog/2018/08/01/react-v-16-4-2.html for details [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)
 - [none] Updated dependencies [a4bd557](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4bd557)

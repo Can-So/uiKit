@@ -12,8 +12,8 @@ describe('Renderer - React/Nodes/DecisionItem', () => {
     expect(listItem.is(AkDecisionItem)).to.equal(true);
   });
 
-  it('should not render if no children', () => {
+  it('should render if no children', () => {
     const decisionItem = shallow(<DecisionItem />);
-    expect(decisionItem.isEmptyRender()).to.equal(true);
+    expect(decisionItem.isEmptyRender()).to.equal(false);
   });
 });

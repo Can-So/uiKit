@@ -1,5 +1,30 @@
 # @atlaskit/lozenge
 
+## 6.2.4
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 6.2.3
+- [patch] [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+
+  - Change API to experimental theming API to namespace component themes into separate contexts and make theming simpler. Update all dependant components.
+
+## 6.2.2
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 6.2.1
+- [patch] Pulling the shared styles from @atlaskit/theme and removed dependency on util-shraed-styles [7d51a09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d51a09)
+
+## 6.2.0
+- [minor] Use new theme API. Adds "theme" prop and exports new theme types. [4b36fd6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b36fd6)
+
+## 6.1.8
+- [patch] AK-5321 Lozenge with maxWidth should be constrained by container width [969233e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/969233e)
+
+## 6.1.7
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 6.1.5
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

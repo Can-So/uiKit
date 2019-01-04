@@ -3,6 +3,11 @@ declare var global: any;
 // TO-DO remove chai validation
 import { expect } from 'chai';
 import {
+  isSafeUrl,
+  defaultSchema as schema,
+  createSchema,
+} from '@atlaskit/adf-schema';
+import {
   ADDoc,
   isSubSupType,
   getValidDocument,
@@ -14,9 +19,6 @@ import {
   markOrder,
   ADNode,
 } from '../../../utils/validator';
-import { isSafeUrl } from '../../../utils/url';
-import { defaultSchema as schema } from '../../../schema/default-schema';
-import { createSchema } from '../../../schema/create-schema';
 
 describe('Renderer - Validator', () => {
   describe('isSafeUrl', () => {
@@ -622,6 +624,45 @@ describe('Renderer - Validator', () => {
       });
     });
 
+    describe('status', () => {
+      it('should pass through attrs', () => {
+        const attributes = {
+          text: 'Done',
+          color: 'green',
+          localId: '666',
+          style: 'bold',
+        };
+        const { type, attrs } = getValidNode({
+          type: 'status',
+          attrs: attributes,
+        });
+        expect(type).to.equal('status');
+        expect(attrs).to.deep.equal(attributes);
+      });
+
+      it('should reject status without text', () => {
+        const { type } = getValidNode({
+          type: 'status',
+          attrs: {
+            color: 'neutral',
+            localId: '666',
+          },
+        });
+        expect(type).to.equal('text');
+      });
+
+      it('should reject status without color', () => {
+        const { type } = getValidNode({
+          type: 'status',
+          attrs: {
+            text: 'Done',
+            localId: '666',
+          },
+        });
+        expect(type).to.equal('text');
+      });
+    });
+
     describe('bodiedExtension', () => {
       it('should pass through attrs as extension', () => {
         const extensionAttrs = {
@@ -1001,6 +1042,31 @@ describe('Renderer - Validator', () => {
         expect(getValidNode(validADFChunk)).toEqual(validADFChunk);
       });
 
+      it('should return "mediaSingle" with link-mark', () => {
+        const validADFChunk = {
+          type: 'mediaSingle',
+          attrs: { layout: 'full-width' },
+          content: [
+            {
+              type: 'media',
+              attrs: {
+                type: 'file',
+                id: '5556346b-b081-482b-bc4a-4faca8ecd2de',
+                collection: 'MediaServicesSample',
+              },
+            },
+          ],
+          marks: [
+            {
+              type: 'link',
+              href: 'https://www.atlassian.com',
+            },
+          ],
+        };
+
+        expect(getValidNode(validADFChunk)).toEqual(validADFChunk);
+      });
+
       it('should return "unknownBlock" if some of its content is not media', () => {
         const invalidADFChunk = {
           type: 'mediaSingle',
@@ -1332,6 +1398,33 @@ describe('Renderer - Validator', () => {
           attrs: imageAttrs,
         });
         expect(type).to.equal('text');
+      });
+    });
+
+    describe('listItem', () => {
+      it('should handle invalid child nodes without crashing', () => {
+        const itemContent = [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: '[confluenceUnsupportedBlock]',
+              },
+            ],
+          },
+        ];
+
+        const { content } = getValidNode({
+          type: 'listItem',
+          content: [
+            {
+              type: 'confluenceUnsupportedBlock',
+              attrs: {},
+            },
+          ],
+        });
+        expect(content).to.deep.equal(itemContent);
       });
     });
 

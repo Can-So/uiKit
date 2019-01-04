@@ -11,7 +11,6 @@ import {
   docFileDetails,
   unknownFileDetails,
   genericLinkDetails,
-  gifDataUri,
   smallImage,
   smallTransparentImage,
   tallImage,
@@ -27,6 +26,7 @@ import {
 import { ImageResizeMode, MediaItemType } from '@atlaskit/media-core';
 import Toggle from '@atlaskit/toggle';
 import Slider from '@atlaskit/field-range';
+import * as exenv from 'exenv';
 import { CardView } from '../src/root/cardView';
 import { CardAppearance, CardStatus, CardDimensions, CardAction } from '../src';
 import {
@@ -73,7 +73,6 @@ const mediaItemTypeOptions = [
   { value: 'link', label: 'Link' },
 ];
 const dataURIOptions = [
-  { value: gifDataUri, label: 'Gif' },
   { value: smallImage, label: 'Small' },
   { value: smallTransparentImage, label: 'Small transparent' },
   { value: tallImage, label: 'Tall' },
@@ -96,7 +95,7 @@ const resizeModeOptions = [
 
 export const generateStoriesForEditableCards = () => {
   const localStorageKeyName = 'editableCardState';
-  const metadataOptionsMap = {
+  const metadataOptionsMap: any = {
     fileImage: imageFileDetails,
     fileVideo: videoFileDetails,
     fileAudio: audioFileDetails,
@@ -112,6 +111,10 @@ export const generateStoriesForEditableCards = () => {
     noTitleLink: noTitleLinkDetails,
   };
   const getStateFromLocalStorage = (): EditableCardState | null => {
+    if (!exenv.canUseDOM) {
+      return null;
+    }
+
     const previousState = localStorage.getItem(localStorageKeyName);
 
     try {
@@ -160,13 +163,13 @@ export const generateStoriesForEditableCards = () => {
   class EditableCard extends Component<EditableCardProps, EditableCardState> {
     debounced: any;
 
-    constructor(props) {
+    constructor(props: EditableCardProps) {
       super(props);
       const defaultState: EditableCardState = {
         appearance: 'auto',
         status: 'complete',
         metadata: 'fileImage',
-        dataURI: gifDataUri,
+        dataURI: tallImage,
         dimensions: {
           width: defaultImageCardDimensions.width,
           height: defaultImageCardDimensions.height,
@@ -225,7 +228,7 @@ export const generateStoriesForEditableCards = () => {
       const height = parseInt(`${dimensions.height}`, 0);
       const metadata = metadataOptionsMap[metadataKey];
       const { width: parentWidth, height: parentHeight } = parentDimensions;
-      const parentStyle = { height: parentHeight };
+      const parentStyle: any = { height: parentHeight };
       const newDimensions: CardDimensions = { width, height };
 
       if (isParentInlineBlock) {
@@ -487,17 +490,18 @@ export const generateStoriesForEditableCards = () => {
       }
     };
 
-    onSelectedChange = e => {
+    onSelectedChange = () => {
       this.setState({ selected: !this.state.selected });
     };
 
-    onSelectableChange = e => {
+    onSelectableChange = () => {
       this.setState({ selectable: !this.state.selectable });
     };
 
-    isActionChecked = action => this.state.menuActions.indexOf(action) !== -1;
+    isActionChecked = (action: any) =>
+      this.state.menuActions.indexOf(action) !== -1;
 
-    onActionsChange = action => e => {
+    onActionsChange = (action: any) => (e: any) => {
       const { checked } = e.target;
       const { menuActions } = this.state;
 
@@ -510,62 +514,62 @@ export const generateStoriesForEditableCards = () => {
       this.setState({ menuActions });
     };
 
-    onAppearanceChange = e => {
+    onAppearanceChange = (e: any) => {
       const appearance = e.target.value;
       this.setState({ appearance });
     };
 
-    onMediaItemTypeChange = e => {
+    onMediaItemTypeChange = (e: any) => {
       const mediaItemType = e.target.value;
       this.setState({ mediaItemType });
     };
 
-    onMetadataChange = e => {
+    onMetadataChange = (e: any) => {
       const metadata = e.target.value;
 
       this.setState({ metadata });
     };
 
-    onDataURIChange = e => {
+    onDataURIChange = (e: any) => {
       const dataURI = e.target.value;
 
       this.setState({ dataURI });
     };
 
-    onStatusChange = e => {
+    onStatusChange = (e: any) => {
       const status = e.target.value;
 
       this.setState({ status });
     };
 
-    onResizeModeChange = e => {
+    onResizeModeChange = (e: any) => {
       const resizeMode = e.target.value;
 
       this.setState({ resizeMode });
     };
 
-    onWidthChange = e => {
+    onWidthChange = (e: any) => {
       const dimensions = this.state.dimensions;
 
       dimensions.width = e;
       this.setState({ dimensions });
     };
 
-    onHeightChange = e => {
+    onHeightChange = (e: any) => {
       const dimensions = this.state.dimensions;
 
       dimensions.height = e;
       this.setState({ dimensions });
     };
 
-    onParentWidthChange = width => {
+    onParentWidthChange = (width: any) => {
       const parentDimensions = this.state.parentDimensions;
 
       parentDimensions.width = width;
       this.setState({ parentDimensions });
     };
 
-    onParentHeightChange = height => {
+    onParentHeightChange = (height: any) => {
       const parentDimensions = this.state.parentDimensions;
 
       parentDimensions.height = height;
@@ -580,7 +584,7 @@ export const generateStoriesForEditableCards = () => {
       this.setState({ doesParentHasWidth: !this.state.doesParentHasWidth });
     };
 
-    onProgressChange = progress => {
+    onProgressChange = (progress: any) => {
       this.setState({ progress });
     };
 

@@ -3,7 +3,9 @@ import { Node, Fragment, Slice } from 'prosemirror-model';
 /**
  * A helper to get the underlying array of a fragment.
  */
-function getFragmentBackingArray(fragment: Fragment): ReadonlyArray<Node> {
+export function getFragmentBackingArray(
+  fragment: Fragment,
+): ReadonlyArray<Node> {
   return (fragment as any).content as Node[];
 }
 
@@ -71,4 +73,22 @@ export function flatmap(
     }
   }
   return Fragment.fromArray(fragmentContent);
+}
+
+export type MapWithCallback<T> = (
+  node: Node,
+  index: number,
+  fragment: Fragment,
+) => T;
+
+export function mapChildren<T>(
+  node: Node,
+  callback: MapWithCallback<T>,
+): Array<T> {
+  const array: Array<T> = [];
+  for (let i = 0; i < node.childCount; i++) {
+    array.push(callback(node.child(i), i, node.content));
+  }
+
+  return array;
 }

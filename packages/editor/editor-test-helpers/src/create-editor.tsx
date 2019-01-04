@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { IntlProvider } from 'react-intl';
 import {
   EditorProps,
   EditorInstance,
@@ -6,6 +7,9 @@ import {
   setTextSelection,
   getDefaultPluginsList,
   EditorPlugin,
+  PortalProvider,
+  PortalProviderAPI,
+  PortalRenderer,
 } from '@atlaskit/editor-core';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { mount } from 'enzyme';
@@ -13,19 +17,23 @@ import { RefsNode, Refs } from './schema-builder';
 import { Schema } from 'prosemirror-model';
 import { PluginKey } from 'prosemirror-state';
 import patchEditorViewForJSDOM from './jsdom-fixtures';
-import {
-  PortalProvider,
-  PortalProviderAPI,
-  PortalRenderer,
-} from '../../editor-core/src/ui/PortalProvider';
+import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
 
 class TestReactEditorView extends ReactEditorView<{
   plugins?: EditorPlugin[];
 }> {
   getPlugins(editorProps: EditorProps): EditorPlugin[] {
-    return this.props.plugins || super.getPlugins(editorProps);
+    return (
+      this.props.plugins ||
+      super.getPlugins(editorProps, this.props.createAnalyticsEvent)
+    );
   }
 }
+
+/**
+ * Currently skipping these three failing tests
+ * TODO: JEST-23 Fix these tests
+ */
 
 export type Options = {
   doc?: (schema: Schema) => RefsNode;
@@ -34,6 +42,7 @@ export type Options = {
   editorProps?: EditorProps;
   providerFactory?: ProviderFactory;
   pluginKey?: PluginKey;
+  createAnalyticsEvent?: CreateUIAnalyticsEventSignature;
 };
 
 export default function createEditorForTests<T = any>({
@@ -42,6 +51,7 @@ export default function createEditorForTests<T = any>({
   editorPlugins,
   providerFactory,
   pluginKey,
+  createAnalyticsEvent,
 }: Options): EditorInstance & {
   portalProviderAPI: PortalProviderAPI;
   refs: Refs;
@@ -56,22 +66,25 @@ export default function createEditorForTests<T = any>({
   let portalProviderAPI;
   const wrapper = mount(
     <PortalProvider
-      render={portalProvider => {
+      render={(portalProvider: any) => {
         portalProviderAPI = portalProvider;
         return (
-          <>
-            <TestReactEditorView
-              editorProps={editorProps}
-              portalProviderAPI={portalProvider}
-              providerFactory={
-                providerFactory ? providerFactory : new ProviderFactory()
-              }
-              onEditorCreated={() => {}}
-              onEditorDestroyed={() => {}}
-              plugins={plugins}
-            />
-            <PortalRenderer portalProviderAPI={portalProviderAPI} />
-          </>
+          <IntlProvider locale="en">
+            <>
+              <TestReactEditorView
+                editorProps={editorProps}
+                createAnalyticsEvent={createAnalyticsEvent}
+                portalProviderAPI={portalProvider}
+                providerFactory={
+                  providerFactory ? providerFactory : new ProviderFactory()
+                }
+                onEditorCreated={() => {}}
+                onEditorDestroyed={() => {}}
+                plugins={plugins}
+              />
+              <PortalRenderer portalProviderAPI={portalProviderAPI} />
+            </>
+          </IntlProvider>
         );
       }}
     />,
@@ -80,10 +93,8 @@ export default function createEditorForTests<T = any>({
   const editor = wrapper.find(TestReactEditorView);
 
   // Work around JSDOM/Node not supporting DOM Selection API
-  if (
-    !('getSelection' in window) &&
-    navigator.userAgent.indexOf('Node.js') !== -1
-  ) {
+  if (!('getSelection' in window)) {
+    // TODO JEST-23
     patchEditorViewForJSDOM((editor.instance() as ReactEditorView).view);
   }
 
@@ -128,7 +139,9 @@ export default function createEditorForTests<T = any>({
   }
 
   afterEach(() => {
-    wrapper.unmount();
+    if (wrapper.length > 0) {
+      wrapper.unmount();
+    }
     wrapper.detach();
     if (place && place.parentNode) {
       place.parentNode.removeChild(place);

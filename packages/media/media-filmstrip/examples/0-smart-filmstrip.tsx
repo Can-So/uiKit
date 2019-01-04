@@ -6,6 +6,7 @@ import {
   audioFileId,
   errorFileId,
   gifFileId,
+  externalImageIdentifier,
   defaultCollectionName,
 } from '@atlaskit/media-test-helpers';
 import { CardEvent, FileIdentifier, CardAction } from '@atlaskit/media-card';
@@ -44,7 +45,7 @@ class Example extends Component<{}, ExampleState> {
     }
   };
 
-  getItemIndex = (id: string): number => {
+  getItemIndex = (id: string | Promise<string>): number => {
     const { items } = this.state;
     const item = items.find(
       item => (item.identifier as FileIdentifier).id === id,
@@ -88,6 +89,10 @@ class Example extends Component<{}, ExampleState> {
     items: [
       {
         identifier: genericFileId,
+        ...this.cardProps,
+      },
+      {
+        identifier: externalImageIdentifier,
         ...this.cardProps,
       },
       {
@@ -144,8 +149,8 @@ class Example extends Component<{}, ExampleState> {
       collection: defaultCollectionName,
     };
 
-    context
-      .uploadFile(uplodableFile)
+    context.file
+      .upload(uplodableFile)
       .first()
       .subscribe({
         next: state => {
@@ -177,7 +182,6 @@ class Example extends Component<{}, ExampleState> {
 
   render() {
     const { items } = this.state;
-
     return (
       <ExampleWrapper>
         <FilmstripWrapper>

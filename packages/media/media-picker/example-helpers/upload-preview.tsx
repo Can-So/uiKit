@@ -1,40 +1,41 @@
 import * as React from 'react';
-import {
-  PreviewImage,
-  PreviewImageWrapper,
-  ProgressCircleWrapper,
-} from './styled';
-import { isImagePreview } from '../src/domain/preview';
-import Circle from 'react-circle';
+import { PreviewImageWrapper, InfoWrapper } from './styled';
 import { PreviewData } from './types';
+import { Card, FileIdentifier } from '@atlaskit/media-card';
+import { createUploadContext } from '@atlaskit/media-test-helpers';
+import { Preview, ImagePreview } from '../src/domain/preview';
+
+const context = createUploadContext();
 
 export class UploadPreview extends React.Component<PreviewData> {
-  render() {
-    const { isProcessed, preview, fileId, uploadingProgress } = this.props;
-
-    let dimensions;
-    if (isImagePreview(preview)) {
-      dimensions = preview.dimensions;
+  getPreviewInfo(preview: Preview): string | null {
+    if ('scaleFactor' in preview) {
+      const imgPreview = preview as ImagePreview;
+      return `${imgPreview.dimensions.width} x ${
+        imgPreview.dimensions.height
+      } @${imgPreview.scaleFactor}x`;
+    } else {
+      return null;
     }
-    const dimensionsInfo = dimensions ? (
-      <div>
-        Original dimensions ({dimensions.width} x {dimensions.height})
-      </div>
-    ) : null;
+  }
+
+  render() {
+    const { upfrontId, preview } = this.props;
+
+    if (!upfrontId) {
+      return <div />;
+    }
+
+    const identifier: FileIdentifier = {
+      id: upfrontId,
+      mediaItemType: 'file',
+    };
 
     return (
       <PreviewImageWrapper>
-        {dimensionsInfo}
-        <PreviewImage fadedOut={!isProcessed} src={preview.src} id={fileId} />
-        {!isProcessed ? (
-          <ProgressCircleWrapper>
-            <Circle
-              textColor="#172B4D"
-              progressColor="#0052CC"
-              bgColor="#DEEBFF"
-              progress={uploadingProgress}
-            />
-          </ProgressCircleWrapper>
+        <Card identifier={identifier} context={context} />
+        {preview ? (
+          <InfoWrapper>{this.getPreviewInfo(preview)}</InfoWrapper>
         ) : null}
       </PreviewImageWrapper>
     );

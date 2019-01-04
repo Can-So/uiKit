@@ -21,6 +21,7 @@ export type CreateCollectionItemOptions = {
   readonly collectionName?: string;
   readonly occurrenceKey?: string;
   readonly blob?: Blob;
+  readonly id?: string;
 };
 
 export function createCollectionItem({
@@ -29,10 +30,11 @@ export function createCollectionItem({
   collectionName,
   occurrenceKey,
   blob = new Blob(['Hello World'], { type: 'text/plain' }),
+  id,
 }: CreateCollectionItemOptions = {}): CollectionItem {
   const extension = getTextFileType();
   return {
-    id: uuid.v4(),
+    id: id || uuid.v4(),
     insertedAt: getPastDate().valueOf(),
     occurrenceKey: occurrenceKey || uuid.v4(),
     type: 'file',

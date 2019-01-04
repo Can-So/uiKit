@@ -3,6 +3,7 @@ import {
   audioFileId,
   audioNoCoverFileId,
   docFileId,
+  largePdfFileId,
   imageFileId,
   largeImageFileId,
   smallImageFileId,
@@ -13,6 +14,8 @@ import {
   videoProcessingFailedId,
   wideImageFileId,
   genericLinkId,
+  errorFileId,
+  videoSquareFileId,
 } from '@atlaskit/media-test-helpers';
 import { MediaViewerItem } from '../src';
 
@@ -33,6 +36,12 @@ export const wideImageIdentifier: MediaViewerItem = {
 export const docIdentifier: MediaViewerItem = {
   type: 'file',
   id: docFileId.id,
+  occurrenceKey: 'testOccurrenceKey',
+};
+
+export const largePdfIdentifier: MediaViewerItem = {
+  type: 'file',
+  id: largePdfFileId.id,
   occurrenceKey: 'testOccurrenceKey',
 };
 
@@ -108,6 +117,12 @@ export const videoProcessingFailedItem: MediaViewerItem = {
   occurrenceKey: 'testOccurrenceKey',
 };
 
+export const videoSquareFileIdItem: MediaViewerItem = {
+  type: 'file',
+  id: videoSquareFileId.id,
+  occurrenceKey: 'testOccurrenceKey',
+};
+
 export const audioItem: MediaViewerItem = {
   type: 'file',
   id: audioFileId.id,
@@ -129,6 +144,12 @@ export const archiveItem: MediaViewerItem = {
 export const unsupportedItem: MediaViewerItem = {
   type: 'file',
   id: unknownFileId.id,
+  occurrenceKey: 'testOccurrenceKey',
+};
+
+export const errorItem: MediaViewerItem = {
+  type: 'file',
+  id: errorFileId.id,
   occurrenceKey: 'testOccurrenceKey',
 };
 

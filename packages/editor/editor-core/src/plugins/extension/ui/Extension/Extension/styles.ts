@@ -1,24 +1,24 @@
 import styled from 'styled-components';
-// @ts-ignore: unused variable
-// prettier-ignore
-import { HTMLAttributes, ClassAttributes, ComponentClass } from 'react';
-import { akColorN30, akBorderRadius } from '@atlaskit/util-shared-styles';
+import { colors, borderRadius } from '@atlaskit/theme';
+import { blockNodesVerticalMargin } from '@atlaskit/editor-common';
 import { Wrapper as WrapperDefault, padding } from '../styles';
 
-export const Wrapper: ComponentClass<HTMLAttributes<{}>> = styled(
-  WrapperDefault,
-)`
-  margin: 12px 0;
+export const Wrapper = styled(WrapperDefault)`
+  margin: ${blockNodesVerticalMargin} 0;
 
-  /* extension container breakout */
-  &[data-layout='full-width'],
-  &[data-layout='wide'] {
+  /* extension container breakout, only works on top level */
+  .ProseMirror > [extensiontype] &[data-layout='full-width'],
+  .ProseMirror > [extensiontype] &[data-layout='wide'] {
     margin-left: 50%;
     transform: translateX(-50%);
   }
+  .ProseMirror > * [extensiontype] &[data-layout='wide'],
+  .ProseMirror > * [extensiontype] &[data-layout='wide'] {
+    width: 100% !important;
+  }
 `;
 
-export const Header: ComponentClass<HTMLAttributes<{}>> = styled.div`
+export const Header = styled.div`
   cursor: pointer;
   padding: ${padding / 2}px ${padding / 2}px ${padding / 4}px;
   vertical-align: middle;
@@ -29,15 +29,13 @@ export const Header: ComponentClass<HTMLAttributes<{}>> = styled.div`
   }
 `;
 
-export const Content: ComponentClass<
-  HTMLAttributes<{}> & { innerRef?: any }
-> = styled.div`
+export const Content = styled.div`
   padding: ${padding}px;
   background: white;
-  border: 1px solid ${akColorN30};
-  border-radius: ${akBorderRadius};
+  border: 1px solid ${colors.N30};
+  border-radius: ${borderRadius()}px;
 `;
 
-export const ContentWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
+export const ContentWrapper = styled.div`
   padding: 0 ${padding}px ${padding}px;
 `;

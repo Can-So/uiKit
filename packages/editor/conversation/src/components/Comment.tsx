@@ -1,25 +1,26 @@
-import * as React from 'react';
-import * as distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import AkAvatar from '@atlaskit/avatar';
 import AkComment, {
-  CommentAuthor,
   CommentAction,
+  CommentAuthor,
   CommentTime,
 } from '@atlaskit/comment';
-
 import { WithProviders } from '@atlaskit/editor-common';
-import { ResourcedReactions } from '@atlaskit/reactions';
+import { ConnectedReactionsView } from '@atlaskit/reactions';
 import { ReactRenderer } from '@atlaskit/renderer';
+import * as distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
+import * as React from 'react';
 import styled from 'styled-components';
-import Editor from './Editor';
-import { Comment as CommentType, User } from '../model';
-import CommentContainer from '../containers/Comment';
 import { HttpError } from '../api/HttpError';
+import CommentContainer from '../containers/Comment';
 import {
-  fireEvent,
   actionSubjectIds,
   AnalyticsEvent,
+  eventTypes,
+  fireEvent,
+  trackEventActions,
 } from '../internal/analytics';
+import { Comment as CommentType, User } from '../model';
+import Editor from './Editor';
 import { SharedProps } from './types';
 
 export interface Props extends SharedProps {
@@ -131,7 +132,10 @@ export default class Comment extends React.Component<Props, State> {
   private onReply = (value: any, analyticsEvent: AnalyticsEvent) => {
     const { containerId } = this.props;
 
-    fireEvent(analyticsEvent, actionSubjectIds.replyButton, containerId);
+    fireEvent(analyticsEvent, {
+      actionSubjectId: actionSubjectIds.replyButton,
+      containerId,
+    });
 
     this.setState({
       isReplying: true,
@@ -145,13 +149,27 @@ export default class Comment extends React.Component<Props, State> {
       sendAnalyticsEvent,
     } = this.props;
 
-    sendAnalyticsEvent(actionSubjectIds.saveButton);
+    sendAnalyticsEvent({
+      actionSubjectId: actionSubjectIds.saveButton,
+    });
 
     this.dispatch(
       'onAddComment',
       conversationId,
       parentComment.commentId,
       value,
+      undefined,
+      id => {
+        sendAnalyticsEvent({
+          actionSubjectId: id,
+          action: trackEventActions.created,
+          eventType: eventTypes.TRACK,
+          actionSubject: 'comment',
+          attributes: {
+            nestedDepth: (parentComment.nestedDepth || 0) + 1,
+          },
+        });
+      },
     );
 
     this.setState({
@@ -160,7 +178,10 @@ export default class Comment extends React.Component<Props, State> {
   };
 
   private onCancelReply = () => {
-    this.props.sendAnalyticsEvent(actionSubjectIds.cancelButton);
+    this.props.sendAnalyticsEvent({
+      actionSubjectId: actionSubjectIds.cancelButton,
+    });
+
     this.setState({
       isReplying: false,
     });
@@ -168,32 +189,73 @@ export default class Comment extends React.Component<Props, State> {
 
   private onDelete = (value: any, analyticsEvent: AnalyticsEvent) => {
     const {
-      comment: { commentId },
+      comment: { nestedDepth, commentId },
       containerId,
       conversationId,
+      sendAnalyticsEvent,
     } = this.props;
 
-    fireEvent(analyticsEvent, actionSubjectIds.deleteButton, containerId);
+    fireEvent(analyticsEvent, {
+      actionSubjectId: actionSubjectIds.deleteButton,
+      containerId,
+    });
 
-    this.dispatch('onDeleteComment', conversationId, commentId);
+    this.dispatch('onDeleteComment', conversationId, commentId, id => {
+      sendAnalyticsEvent({
+        actionSubjectId: id,
+        action: trackEventActions.deleted,
+        eventType: eventTypes.TRACK,
+        actionSubject: 'comment',
+        attributes: {
+          nestedDepth: nestedDepth || 0,
+        },
+      });
+    });
   };
 
   private onEdit = (value: any, analyticsEvent: AnalyticsEvent) => {
     const { containerId } = this.props;
 
-    fireEvent(analyticsEvent, actionSubjectIds.editButton, containerId);
+    fireEvent(analyticsEvent, {
+      actionSubjectId: actionSubjectIds.editButton,
+      containerId,
+    });
 
     this.setState({
       isEditing: true,
     });
   };
 
+  private handleCommentEditorChange = (value: any) => {
+    const { comment } = this.props;
+
+    this.dispatch('onEditorChange', value, comment.commentId);
+  };
+
   private onSaveEdit = async (value: any) => {
     const { conversationId, comment, sendAnalyticsEvent } = this.props;
 
-    sendAnalyticsEvent(actionSubjectIds.saveButton);
+    sendAnalyticsEvent({
+      actionSubjectId: actionSubjectIds.saveButton,
+    });
 
-    this.dispatch('onUpdateComment', conversationId, comment.commentId, value);
+    this.dispatch(
+      'onUpdateComment',
+      conversationId,
+      comment.commentId,
+      value,
+      id => {
+        sendAnalyticsEvent({
+          actionSubjectId: id,
+          action: trackEventActions.updated,
+          eventType: eventTypes.TRACK,
+          actionSubject: 'comment',
+          attributes: {
+            nestedDepth: comment.nestedDepth || 0,
+          },
+        });
+      },
+    );
 
     this.setState({
       isEditing: false,
@@ -201,7 +263,9 @@ export default class Comment extends React.Component<Props, State> {
   };
 
   private onCancelEdit = () => {
-    this.props.sendAnalyticsEvent(actionSubjectIds.cancelButton);
+    this.props.sendAnalyticsEvent({
+      actionSubjectId: actionSubjectIds.cancelButton,
+    });
 
     this.setState({
       isEditing: false,
@@ -216,11 +280,10 @@ export default class Comment extends React.Component<Props, State> {
       onCancel();
     }
 
-    fireEvent(
-      analyticsEvent,
-      actionSubjectIds.cancelFailedRequestButton,
+    fireEvent(analyticsEvent, {
+      actionSubjectId: actionSubjectIds.cancelFailedRequestButton,
       containerId,
-    );
+    });
 
     this.dispatch('onRevertComment', comment.conversationId, comment.commentId);
   };
@@ -237,11 +300,10 @@ export default class Comment extends React.Component<Props, State> {
       return onRetry(localId);
     }
 
-    fireEvent(
-      analyticsEvent,
-      actionSubjectIds.retryFailedRequestButton,
+    fireEvent(analyticsEvent, {
+      actionSubjectId: actionSubjectIds.retryFailedRequestButton,
       containerId,
-    );
+    });
 
     if (!lastDispatch) {
       return;
@@ -288,6 +350,7 @@ export default class Comment extends React.Component<Props, State> {
           onCancel={this.onCancelEdit}
           onClose={onEditorClose}
           onOpen={onEditorOpen}
+          onChange={this.handleCommentEditorChange}
           dataProviders={dataProviders}
           user={user}
           renderEditor={renderEditor}
@@ -301,6 +364,7 @@ export default class Comment extends React.Component<Props, State> {
       <ReactRenderer
         document={comment.document.adf}
         dataProviders={dataProviders}
+        disableHeadingIDs={true}
       />
     );
   }
@@ -324,6 +388,7 @@ export default class Comment extends React.Component<Props, State> {
       disableScrollTo,
       onEditorClose,
       onEditorOpen,
+      onEditorChange,
       sendAnalyticsEvent,
     } = this.props;
 
@@ -342,6 +407,7 @@ export default class Comment extends React.Component<Props, State> {
         onDeleteComment={onDeleteComment}
         onEditorClose={onEditorClose}
         onEditorOpen={onEditorOpen}
+        onEditorChange={onEditorChange}
         onRevertComment={onRevertComment}
         onHighlightComment={onHighlightComment}
         onRetry={onRetry}
@@ -381,6 +447,7 @@ export default class Comment extends React.Component<Props, State> {
         dataProviders={dataProviders}
         onOpen={onEditorOpen}
         onClose={onEditorClose}
+        onChange={this.handleCommentEditorChange}
         user={user}
         renderEditor={renderEditor}
         disableScrollTo={disableScrollTo}
@@ -421,22 +488,22 @@ export default class Comment extends React.Component<Props, State> {
       containerId &&
       commentAri &&
       dataProviders &&
-      dataProviders.hasProvider('reactionsProvider') &&
+      dataProviders.hasProvider('reactionsStore') &&
       dataProviders.hasProvider('emojiProvider')
     ) {
       actions = [
         ...actions,
         <WithProviders
           key="reactions"
-          providers={['emojiProvider', 'reactionsProvider']}
+          providers={['emojiProvider', 'reactionsStore']}
           providerFactory={dataProviders}
-          renderNode={({ emojiProvider, reactionsProvider }) => (
+          renderNode={({ emojiProvider, reactionsStore }) => (
             <Reactions>
-              <ResourcedReactions
+              <ConnectedReactionsView
+                store={reactionsStore}
                 containerAri={containerId}
                 ari={commentAri}
                 emojiProvider={emojiProvider}
-                reactionsProvider={reactionsProvider}
               />
             </Reactions>
           )}

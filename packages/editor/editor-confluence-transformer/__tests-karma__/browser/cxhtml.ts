@@ -2,7 +2,7 @@ import * as chai from 'chai';
 import { expect } from 'chai';
 import * as assert from 'assert';
 import { Node as PMNode, Schema } from 'prosemirror-model';
-import { confluenceSchemaWithMediaSingle as schema } from '@atlaskit/editor-common';
+import { confluenceSchemaWithMediaSingle as schema } from '@atlaskit/adf-schema';
 import { chaiPlugin } from '@atlaskit/editor-test-helpers';
 import {
   blockquote,
@@ -59,11 +59,7 @@ import {
   CONFLUENCE_LANGUAGE_MAP as LANGUAGE_MAP,
 } from '../../src';
 import { mapPanelTypeToPm } from '../../src/utils';
-import {
-  akColorG50,
-  akColorB50,
-  akColorR50,
-} from '../../../editor-core/node_modules/@atlaskit/util-shared-styles';
+import { colors } from '@atlaskit/theme';
 
 chai.use(chaiPlugin);
 
@@ -764,61 +760,61 @@ describe('ConfluenceTransformer: encode - parse:', () => {
         doc(
           table({ isNumberColumnEnabled: true })(
             tr(
-              th({ colwidth: [40] })(p(hardBreak())),
+              th({ colwidth: [42] })(p(hardBreak())),
               th({ colwidth: [table2ColumnPx[0]] })(p('one')),
               th({ colwidth: [table2ColumnPx[1]] })(p('two')),
               th({ colwidth: [table2ColumnPx[2]] })(p('three')),
             ),
             tr(
-              td({ colwidth: [40] })(p('1')),
+              td({ colwidth: [42] })(p('1')),
               td({ colwidth: [table2ColumnPx[0]] })(p('14')),
               td({ colwidth: [table2ColumnPx[1]] })(p('2')),
               td({ colwidth: [table2ColumnPx[2]] })(p('3')),
             ),
             tr(
-              td({ colwidth: [40] })(p('2')),
+              td({ colwidth: [42] })(p('2')),
               td({ colwidth: [table2ColumnPx[0]] })(p(hardBreak())),
               td({
                 colwidth: [table2ColumnPx[1]],
-                background: akColorG50.toLowerCase(),
+                background: colors.G50.toLowerCase(),
               })(p('5')),
               td({
                 colwidth: [table2ColumnPx[2]],
-                background: akColorG50.toLowerCase(),
+                background: colors.G50.toLowerCase(),
               })(p('6')),
             ),
             tr(
-              td({ colwidth: [40] })(p('3')),
+              td({ colwidth: [42] })(p('3')),
               td({ colwidth: [table2ColumnPx[0]] })(p(hardBreak())),
               td({
                 colwidth: [table2ColumnPx[1]],
-                background: akColorB50.toLowerCase(),
+                background: colors.B50.toLowerCase(),
               })(p(hardBreak())),
               td({
                 colwidth: [table2ColumnPx[2]],
-                background: akColorB50.toLowerCase(),
+                background: colors.B50.toLowerCase(),
               })(p(hardBreak())),
             ),
             tr(
-              th({ colwidth: [40] })(p('123')),
+              th({ colwidth: [42] })(p('123')),
               th({ colwidth: [table2ColumnPx[0]] })(p('qwe')),
               th({ colwidth: [table2ColumnPx[1]] })(p(hardBreak())),
               th({ colwidth: [table2ColumnPx[2]] })(p(hardBreak())),
             ),
             tr(
-              td({ colwidth: [40] })(p('4')),
+              td({ colwidth: [42] })(p('4')),
               td({ colwidth: [table2ColumnPx[0]] })(p(hardBreak())),
               td({ colwidth: [table2ColumnPx[1]] })(p(hardBreak())),
               td({ colwidth: [table2ColumnPx[2]] })(p(hardBreak())),
             ),
             tr(
-              td({ colwidth: [40] })(p('5')),
+              td({ colwidth: [42] })(p('5')),
               td({ colwidth: [table2ColumnPx[0]] })(p(hardBreak())),
               td({ colwidth: [table2ColumnPx[1]] })(p(hardBreak())),
               td({ colwidth: [table2ColumnPx[2]] })(p(hardBreak())),
             ),
             tr(
-              td({ colwidth: [40], background: akColorR50.toLowerCase() })(
+              td({ colwidth: [42], background: colors.R50.toLowerCase() })(
                 p('6'),
               ),
               td({ colwidth: [table2ColumnPx[0]] })(p(hardBreak())),
@@ -826,7 +822,7 @@ describe('ConfluenceTransformer: encode - parse:', () => {
               td({ colwidth: [table2ColumnPx[2]] })(p(hardBreak())),
             ),
             tr(
-              td({ colwidth: [40], background: akColorR50.toLowerCase() })(
+              td({ colwidth: [42], background: colors.R50.toLowerCase() })(
                 p('7'),
               ),
               td({ colwidth: [table2ColumnPx[0]] })(p(hardBreak())),

@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { shallow, mount } from 'enzyme';
 import AkAvatar from '@atlaskit/avatar';
-import AkComment, { CommentAuthor, CommentAction } from '@atlaskit/comment';
-import { ResourcedReactions } from '@atlaskit/reactions';
+import AkComment, { CommentAction, CommentAuthor } from '@atlaskit/comment';
+import { ConnectedReactionsView } from '@atlaskit/reactions';
+import { mount, shallow } from 'enzyme';
+import * as React from 'react';
 import {
   mockComment,
   mockInlineComment,
@@ -17,6 +17,7 @@ import CommentContainer from '../../../../src/containers/Comment';
 function findEditAction(comment) {}
 // avoid polluting test logs with error message in console
 // please ensure you fix it if you expect console.error to be thrown
+// tslint:disable-next-line:no-console
 let consoleError = console.error;
 describe('Comment', () => {
   const defaultProps = {
@@ -25,9 +26,11 @@ describe('Comment', () => {
 
   let comment;
   beforeEach(() => {
+    // tslint:disable-next-line:no-console
     console.error = jest.fn();
   });
   afterEach(() => {
+    // tslint:disable-next-line:no-console
     console.error = consoleError;
   });
   describe('rendering', () => {
@@ -392,27 +395,23 @@ describe('Comment', () => {
         />,
       );
 
-      expect(comment.first().find(ResourcedReactions).length).toEqual(1);
+      expect(comment.first().find(ConnectedReactionsView).length).toEqual(1);
       comment.unmount();
     });
 
-    it('should not render reactions-component if reactionsProvider is missing', () => {
+    it('should render reactions-component if dataProvider contains emojiProvider', () => {
       const comment = mount(
         <Comment
           {...defaultProps}
           conversationId={mockComment.conversationId}
           containerId="ari:cloud:platform::conversation/demo"
           comment={mockComment}
-          dataProviders={getDataProviderFactory([
-            'mentionProvider',
-            'emojiProvider',
-          ])}
+          dataProviders={getDataProviderFactory()}
           user={user}
         />,
       );
 
-      expect(comment.first().find(ResourcedReactions).length).toEqual(0);
-
+      expect(comment.first().find(ConnectedReactionsView).length).toEqual(1);
       comment.unmount();
     });
 
@@ -423,15 +422,12 @@ describe('Comment', () => {
           conversationId={mockComment.conversationId}
           containerId="ari:cloud:platform::conversation/demo"
           comment={mockComment}
-          dataProviders={getDataProviderFactory([
-            'mentionProvider',
-            'reactionsProvider',
-          ])}
+          dataProviders={getDataProviderFactory(['mentionProvider'])}
           user={user}
         />,
       );
 
-      expect(comment.first().find(ResourcedReactions).length).toEqual(0);
+      expect(comment.first().find(ConnectedReactionsView).length).toEqual(0);
 
       comment.unmount();
     });
@@ -447,7 +443,7 @@ describe('Comment', () => {
         />,
       );
 
-      expect(comment.first().find(ResourcedReactions).length).toEqual(0);
+      expect(comment.first().find(ConnectedReactionsView).length).toEqual(0);
 
       comment.unmount();
     });
@@ -467,7 +463,7 @@ describe('Comment', () => {
         />,
       );
 
-      expect(comment.first().find(ResourcedReactions).length).toEqual(0);
+      expect(comment.first().find(ConnectedReactionsView).length).toEqual(0);
 
       comment.unmount();
     });
@@ -483,7 +479,7 @@ describe('Comment', () => {
         />,
       );
 
-      expect(comment.first().find(ResourcedReactions).length).toEqual(0);
+      expect(comment.first().find(ConnectedReactionsView).length).toEqual(0);
 
       comment.unmount();
     });

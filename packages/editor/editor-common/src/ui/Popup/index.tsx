@@ -40,7 +40,6 @@ export default class Popup extends React.Component<Props, State> {
   scrollElement: undefined | false | HTMLElement;
   static defaultProps = {
     offset: [0, 0],
-    boundariesElement: document.body,
   };
 
   state: State = {
@@ -73,7 +72,7 @@ export default class Popup extends React.Component<Props, State> {
 
     const placement = calculatePlacement(
       target,
-      boundariesElement!,
+      boundariesElement || document.body,
       fitWidth,
       fitHeight,
       alignX,
@@ -105,7 +104,6 @@ export default class Popup extends React.Component<Props, State> {
      * Currently Popup isn't capable of position itself correctly in case 2,
      * Add "position: relative" to "overflow: scroll" container or to some other FloatingPanel wrapper inside it.
      */
-
     return (
       (document.body.contains(target) &&
         (popup.offsetParent && !popup.offsetParent.contains(target!))) ||
@@ -126,7 +124,10 @@ export default class Popup extends React.Component<Props, State> {
       return;
     }
 
-    this.setState({ popup, overflowScrollParent }, () => this.updatePosition());
+    this.setState(
+      { popup, overflowScrollParent },
+      this.scheduledUpdatePosition,
+    );
   }
 
   private handleRef = (popup: HTMLDivElement) => {

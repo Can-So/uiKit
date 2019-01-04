@@ -6,6 +6,7 @@ import Button from '@atlaskit/button';
 import { ImageIcon } from '../ImageIcon';
 import LinkGlyph from '@atlaskit/icon/glyph/link';
 import { minWidth, maxWidth } from '../dimensions';
+import { LozengeViewModel } from '../../common';
 import { ExpandedFrame } from '../ExpandedFrame';
 import AlertView from './AlertView';
 import { PreviewView } from './PreviewView';
@@ -25,7 +26,6 @@ import {
   AlertWrapper,
 } from './styled';
 import Transition from './Transition';
-import { LozengeViewModel } from '../../types';
 
 export interface ContextViewModel {
   icon?: string;
@@ -56,7 +56,7 @@ export interface BadgeViewModel {
 
 export interface DetailViewModel {
   title?: string;
-  icon?: string;
+  icon?: string | React.ReactNode;
   badge?: BadgeViewModel;
   lozenge?: LozengeViewModel;
   text?: string;
@@ -75,19 +75,34 @@ export interface Action {
   handler: (callbacks: ActionHandlerCallbacks) => void;
 }
 
-export interface ResolvedViewProps {
+export interface BlockCardResolvedViewProps {
+  /** The context view model */
   context?: ContextViewModel;
+  /** The link to display */
   link?: string;
-  icon?: IconWithTooltip;
+  /** The optional con of the service (e.g. Dropbox/Asana/Google/etc) to display */
+  icon?: IconWithTooltip | React.ReactNode;
+  /** The user view model */
   user?: UserViewModel;
+  /** The thumbnail to display */
   thumbnail?: string;
+  /** The preview to display */
   preview?: string;
+  /** The name of the resource */
   title?: TextWithTooltip;
-  byline?: TextWithTooltip;
+  /** The line to display */
+  byline?: TextWithTooltip | React.ReactNode;
+  /** The description to display */
   description?: TextWithTooltip;
+  /** The detail view model */
   details?: DetailViewModel[];
+  /** An array of user */
   users?: UserViewModel[];
+  /** An array of action */
   actions?: Action[];
+  /** A flag that determines whether the card is selected in edit mode. */
+  isSelected?: boolean;
+  /** The optional click handler */
   onClick?: () => void;
 }
 
@@ -171,8 +186,8 @@ function clearActionFailureState(): Pick<
   };
 }
 
-export class ResolvedView extends React.Component<
-  ResolvedViewProps,
+export class BlockCardResolvedView extends React.Component<
+  BlockCardResolvedViewProps,
   ResolvedViewState
 > {
   state: ResolvedViewState = {
@@ -182,14 +197,14 @@ export class ResolvedView extends React.Component<
   alertTimeout?: number;
 
   /* prevent the parent link handler from opening a URL when clicked */
-  handleAvatarClick = ({ event }: { event: MouseEvent }) => {
+  handleAvatarClick = ({ event }: { event: React.MouseEvent }) => {
     event.preventDefault();
     event.stopPropagation();
   };
 
   /* prevent the parent link handler from opening a URL when clicked */
   /* NOTE: this prevents the dropdown from showing with more items */
-  handleMoreAvatarsClick = (event: MouseEvent) => {
+  handleMoreAvatarsClick = (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
   };
@@ -200,7 +215,7 @@ export class ResolvedView extends React.Component<
       success: (message?: string) => {
         this.setState(getActionSuccessState(action, message), () => {
           // hide the alert after 2s
-          this.alertTimeout = setTimeout(
+          this.alertTimeout = window.setTimeout(
             () => this.setState(clearActionSuccessState()),
             2000,
           );
@@ -212,7 +227,7 @@ export class ResolvedView extends React.Component<
   }
 
   createActionHandler = (action: Action) => {
-    return (event: MouseEvent) => {
+    return (event: React.MouseEvent) => {
       /* prevent the parent handler from opening a URL when clicked */
       event.preventDefault();
       event.stopPropagation();
@@ -253,14 +268,18 @@ export class ResolvedView extends React.Component<
       return null;
     }
 
-    // TODO: handle if there is an error loading the image -> show the placeholder
-    return (
-      <IconWrapper>
-        <Tooltip content={icon.tooltip}>
-          <ImageIcon src={icon.url} size={24} />
-        </Tooltip>
-      </IconWrapper>
-    );
+    if ((icon as IconWithTooltip).url) {
+      // TODO: handle if there is an error loading the image -> show the placeholder
+      return (
+        <IconWrapper>
+          <Tooltip content={(icon as IconWithTooltip).tooltip}>
+            <ImageIcon src={(icon as IconWithTooltip).url} size={24} />
+          </Tooltip>
+        </IconWrapper>
+      );
+    }
+
+    return icon;
   }
 
   renderThumbnail() {
@@ -362,6 +381,21 @@ export class ResolvedView extends React.Component<
     );
   }
 
+  renderWithToolTip(
+    Elem: React.ComponentClass<any>,
+    model: { text: string; tooltip?: string },
+  ) {
+    if (model.tooltip) {
+      return (
+        <Tooltip content={model.tooltip}>
+          <Elem>{model.text}</Elem>
+        </Tooltip>
+      );
+    } else {
+      return <Elem>{model.text}</Elem>;
+    }
+  }
+
   render() {
     const {
       link,
@@ -374,11 +408,13 @@ export class ResolvedView extends React.Component<
       preview,
       details,
       onClick,
+      isSelected,
     } = this.props;
     return (
       <ExpandedFrame
         minWidth={minWidth}
         maxWidth={maxWidth}
+        isSelected={isSelected}
         href={link}
         icon={
           <ImageIcon
@@ -389,36 +425,26 @@ export class ResolvedView extends React.Component<
         text={context && context.text}
         onClick={onClick}
       >
-        {preview ? <PreviewView url={preview} /> : null}
+        {preview && <PreviewView url={preview} />}
         <ContentWrapper>
           {this.renderAlert()}
-          {icon || user ? (
+          {(icon || user) && (
             <LeftWrapper>
               {this.renderIcon()}
               {!icon && this.renderUser()}
             </LeftWrapper>
-          ) : null}
+          )}
           <RightWrapper>
             {this.renderThumbnail()}
-            <Tooltip content={title ? title.tooltip : undefined}>
-              <Title>{title ? title.text : undefined}</Title>
-            </Tooltip>
-            {byline &&
-              byline.text && (
-                <Tooltip content={byline ? byline.tooltip : undefined}>
-                  <Byline>{byline ? byline.text : undefined}</Byline>
-                </Tooltip>
-              )}
+            {title && title.text && this.renderWithToolTip(Title, title)}
+            {!byline ? null : !(byline as TextWithTooltip).text ? (
+              <Byline>{byline}</Byline>
+            ) : (
+              this.renderWithToolTip(Byline, byline as TextWithTooltip)
+            )}
             {description &&
-              description.text && (
-                <Tooltip
-                  content={description ? description.tooltip : undefined}
-                >
-                  <Description>
-                    {description ? description.text : undefined}
-                  </Description>
-                </Tooltip>
-              )}
+              description.text &&
+              this.renderWithToolTip(Description, description)}
             <Widgets details={details} />
             {this.renderUsers()}
             {this.renderActions()}

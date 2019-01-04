@@ -2,7 +2,7 @@ import {
   inlineExtension,
   extension,
   bodiedExtension,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import createPlugin from './plugin';
 import { getToolbarConfig } from './toolbar';
@@ -20,13 +20,7 @@ const extensionPlugin: EditorPlugin = {
     return [
       {
         name: 'extension',
-        plugin: ({
-          schema,
-          props,
-          dispatch,
-          providerFactory,
-          portalProviderAPI,
-        }) =>
+        plugin: ({ props, dispatch, providerFactory, portalProviderAPI }) =>
           createPlugin(
             dispatch,
             providerFactory,

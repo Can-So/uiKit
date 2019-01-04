@@ -7,11 +7,12 @@ import {
   Dimensions,
   LoadParameters,
   ShapeParameters,
-} from '../..';
-
-import { Toolbar, tools } from './toolbar/toolbar';
-import { couldNotLoadEditor, couldNotSaveImage } from './phrases';
+} from '@atlaskit/media-editor';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
+import Toolbar, { tools } from './toolbar/toolbar';
 import { EditorContainer } from './styles';
+import { couldNotLoadEditor, couldNotSaveImage } from './phrases';
 
 const DEFAULT_WIDTH = 845;
 const DEFAULT_HEIGHT = 530;
@@ -33,7 +34,9 @@ export interface EditorViewOwnProps {
   readonly onError: (message: string) => void;
 }
 
-export type EditorViewProps = EditorViewStateProps & EditorViewOwnProps;
+export type EditorViewProps = EditorViewStateProps &
+  EditorViewOwnProps &
+  InjectedIntlProps;
 
 export interface EditorViewState {
   readonly dimensions: Dimensions;
@@ -43,24 +46,22 @@ export interface EditorViewState {
 }
 
 export class EditorView extends Component<EditorViewProps, EditorViewState> {
-  private loadParameters: LoadParameters;
-  private rootDiv: HTMLDivElement;
-
-  constructor(props: EditorViewProps) {
-    super(props);
-
-    this.state = {
-      dimensions: {
-        width: DEFAULT_WIDTH,
-        height: DEFAULT_HEIGHT - TOOLBAR_HEIGHT,
-      },
-      color: { red: 0xbf, green: 0x26, blue: 0x00 },
-      lineWidth: 8,
-      tool: 'arrow',
-    };
-  }
+  private loadParameters?: LoadParameters;
+  private rootDiv?: HTMLDivElement;
+  state: EditorViewState = {
+    dimensions: {
+      width: DEFAULT_WIDTH,
+      height: DEFAULT_HEIGHT - TOOLBAR_HEIGHT,
+    },
+    color: { red: 0xbf, green: 0x26, blue: 0x00 },
+    lineWidth: 8,
+    tool: 'arrow',
+  };
 
   componentDidMount() {
+    if (!this.rootDiv) {
+      return;
+    }
     const rect = this.rootDiv.getBoundingClientRect();
     const dimensions = {
       width: rect.width || DEFAULT_WIDTH,
@@ -89,7 +90,7 @@ export class EditorView extends Component<EditorViewProps, EditorViewState> {
   }
 
   renderEditor(): JSX.Element {
-    const onError = (url: string, error: Error) => this.onError(error);
+    const onError = () => this.onError();
     const onShapeParametersChanged = ({
       color,
       lineWidth,
@@ -136,23 +137,34 @@ export class EditorView extends Component<EditorViewProps, EditorViewState> {
     );
   }
 
-  private onLoad = (url: string, loadParameters: LoadParameters): void => {
+  private onLoad = (_: string, loadParameters: LoadParameters): void => {
     this.loadParameters = loadParameters;
   };
 
-  private onError = (error: Error): void => {
-    this.props.onError(couldNotLoadEditor);
+  private onError = (): void => {
+    const {
+      onError,
+      intl: { formatMessage },
+    } = this.props;
+    onError(formatMessage(messages.could_not_load_editor));
   };
 
   private onSave = (): void => {
+    if (!this.loadParameters) {
+      return;
+    }
     const { imageGetter } = this.loadParameters;
     const image = imageGetter();
+    const {
+      onSave,
+      onError,
+      intl: { formatMessage },
+    } = this.props;
     this.saveProperties();
-
     if (image.isExported && image.content) {
-      this.props.onSave(image.content);
+      onSave(image.content);
     } else {
-      this.props.onError(couldNotSaveImage);
+      onError(formatMessage(messages.could_not_save_image));
     }
   };
 
@@ -207,3 +219,9 @@ export class EditorView extends Component<EditorViewProps, EditorViewState> {
 function isTool(value: string): value is Tool {
   return tools.some(tool => tool === value);
 }
+
+export default connect<EditorViewStateProps, {}, EditorViewOwnProps, State>(
+  ({ editorData }) => ({
+    imageUrl: editorData ? editorData.imageUrl || '' : '',
+  }),
+)(injectIntl(EditorView));

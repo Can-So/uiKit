@@ -3,11 +3,11 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  ### Usage
-
   The inline editor is designed to not stand out as an input when it is not
   focused or being interacted with. It is designed to be used as a wrapper
-  to control an input component
+  to control an input component.
+
+## Usage
 
 ${code`
 import InlineEdit, { InlineEditStateless } from '@atlaskit/inline-edit';
@@ -21,6 +21,7 @@ import InlineEdit, { InlineEditStateless } from '@atlaskit/inline-edit';
 
   ${(
     <Example
+      packageName="@atlaskit/inline-edit"
       Component={require('../examples/00-basic-usage').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-usage')}
@@ -29,6 +30,7 @@ import InlineEdit, { InlineEditStateless } from '@atlaskit/inline-edit';
 
   ${(
     <Example
+      packageName="@atlaskit/inline-edit"
       Component={require('../examples/01-stateless-example').default}
       title="Stateless Example"
       source={require('!!raw-loader!../examples/01-stateless-example')}
@@ -37,6 +39,7 @@ import InlineEdit, { InlineEditStateless } from '@atlaskit/inline-edit';
 
   ${(
     <Example
+      packageName="@atlaskit/inline-edit"
       Component={require('../examples/02-select-example').default}
       title="Select Example"
       source={require('!!raw-loader!../examples/02-select-example')}
@@ -45,6 +48,7 @@ import InlineEdit, { InlineEditStateless } from '@atlaskit/inline-edit';
 
   ${(
     <Example
+      packageName="@atlaskit/inline-edit"
       Component={require('../examples/03-waiting-example').default}
       title="Waiting Example"
       source={require('!!raw-loader!../examples/03-waiting-example')}
@@ -53,6 +57,7 @@ import InlineEdit, { InlineEditStateless } from '@atlaskit/inline-edit';
 
   ${(
     <Example
+      packageName="@atlaskit/inline-edit"
       Component={require('../examples/04-text-example').default}
       title="Text Example"
       source={require('!!raw-loader!../examples/04-text-example')}

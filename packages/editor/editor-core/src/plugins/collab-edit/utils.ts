@@ -1,33 +1,24 @@
+import { EditorState, Selection } from 'prosemirror-state';
 import { Decoration, DecorationSet } from 'prosemirror-view';
-import {
-  akColorR400,
-  akColorY400,
-  akColorG400,
-  akColorB400,
-  akColorT400,
-  akColorP400,
-  akColorN800,
-} from '@atlaskit/util-shared-styles';
+import { colors as themeColors } from '@atlaskit/theme';
 
 import { hexToRgba } from '@atlaskit/editor-common';
+
+import { CollabEditOptions } from './types';
 
 export interface Color {
   solid: string;
   selection: string;
 }
 
-export const colors: Color[] = [
-  akColorR400,
-  akColorY400,
-  akColorG400,
-  akColorT400,
-  akColorB400,
-  akColorP400,
-  akColorN800,
-].map(solid => ({
-  solid,
-  selection: hexToRgba(solid, 0.2)!,
-}));
+const { R400, Y400, G400, B400, T400, P400, N800 } = themeColors;
+
+export const colors: Color[] = [R400, Y400, G400, T400, B400, P400, N800].map(
+  solid => ({
+    solid,
+    selection: hexToRgba(solid, 0.2)!,
+  }),
+);
 
 // tslint:disable:no-bitwise
 export const getAvatarColor = (str: string) => {
@@ -91,4 +82,28 @@ export const createTelepointers = (
   return decorations.concat(
     (Decoration as any).widget(to, cursor, { pointer: { sessionId } }),
   );
+};
+
+export const replaceDocument = (
+  doc: any,
+  state: EditorState,
+  version?: number,
+  options?: CollabEditOptions,
+) => {
+  const { schema, tr } = state;
+
+  const content = (doc.content || []).map(child => schema.nodeFromJSON(child));
+
+  if (content.length) {
+    tr.setMeta('addToHistory', false);
+    tr.replaceWith(0, state.doc.nodeSize - 2, content);
+    tr.setSelection(Selection.atStart(tr.doc));
+
+    if (typeof version !== undefined && (options && options.useNativePlugin)) {
+      const collabState = { version, unconfirmed: [] };
+      tr.setMeta('collab$', collabState);
+    }
+  }
+
+  return tr;
 };

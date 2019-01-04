@@ -13,8 +13,8 @@ import {
   isSchemaWithBlockQuotes,
   isSchemaWithMedia,
   isSchemaWithTables,
-  Transformer,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
+import { Transformer } from '@atlaskit/editor-common';
 
 export type CustomEncoder = (userId: string) => string;
 
@@ -147,6 +147,7 @@ export class JIRATransformer implements Transformer<string> {
       paragraph,
       rule,
       mediaGroup,
+      mediaSingle,
       media,
       table,
     } = this.schema.nodes;
@@ -192,6 +193,8 @@ export class JIRATransformer implements Transformer<string> {
     if (isSchemaWithMedia(this.schema)) {
       if (node.type === mediaGroup) {
         return this.encodeMediaGroup(node);
+      } else if (node.type === mediaSingle) {
+        return this.encodeMediaSingle(node);
       } else if (node.type === media) {
         return this.encodeMedia(node);
       }
@@ -209,7 +212,7 @@ export class JIRATransformer implements Transformer<string> {
   private makeDocument() {
     const doc = document.implementation.createHTMLDocument('');
     doc.body = doc.createElement('body');
-    doc.documentElement.appendChild(doc.body);
+    doc.documentElement!.appendChild(doc.body);
     return doc;
   }
 
@@ -256,7 +259,7 @@ export class JIRATransformer implements Transformer<string> {
         code,
         em,
         link,
-        mentionQuery,
+        typeAheadQuery,
         strike,
         strong,
         subsup,
@@ -307,7 +310,7 @@ export class JIRATransformer implements Transformer<string> {
             fontElem.setAttribute('color', mark.attrs['color']);
             elem = elem.appendChild(fontElem);
             break;
-          case mentionQuery:
+          case typeAheadQuery:
             break;
           default:
             throw new Error(`Unable to encode mark '${mark.type.name}'`);
@@ -432,12 +435,27 @@ export class JIRATransformer implements Transformer<string> {
     return elem;
   }
 
+  private encodeMediaSingle(node: PMNode) {
+    const elem = this.doc.createElement('p');
+    elem.setAttribute('class', 'mediaSingle');
+    elem.appendChild(this.encodeFragment(node.content));
+    return elem;
+  }
+
   private addDataToNode(
     domNode: HTMLElement,
     mediaNode: PMNode,
     defaultDisplayType = 'thumbnail',
   ) {
-    const { id, type, collection, __fileName, __displayType } = mediaNode.attrs;
+    const {
+      id,
+      type,
+      collection,
+      __fileName,
+      __displayType,
+      width,
+      height,
+    } = mediaNode.attrs;
     // Order of dataset matters in IE Edge, please keep the current order
     domNode.setAttribute(
       'data-attachment-type',
@@ -446,6 +464,14 @@ export class JIRATransformer implements Transformer<string> {
 
     if (__fileName) {
       domNode.setAttribute('data-attachment-name', __fileName);
+    }
+
+    if (width) {
+      domNode.setAttribute('data-width', width);
+    }
+
+    if (height) {
+      domNode.setAttribute('data-height', height);
     }
 
     domNode.setAttribute('data-media-services-type', type);

@@ -1,24 +1,18 @@
-import * as uuid from 'uuid';
 import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+
 import { of } from 'rxjs/observable/of';
-import { Subscriber } from 'rxjs/Subscriber';
-import { defer } from 'rxjs/observable/defer';
-import { concat } from 'rxjs/operators/concat';
-import { refCount } from 'rxjs/operators/refCount';
 import { startWith } from 'rxjs/operators/startWith';
-import { publishReplay } from 'rxjs/operators/publishReplay';
 
 import {
   MediaStore,
-  uploadFile,
   UploadableFile,
   ContextConfig,
   MediaApiConfig,
   UploadController,
   MediaStoreGetFileImageParams,
+  ImageMetadata,
 } from '@atlaskit/media-store';
-
+import { CollectionFetcher } from '../collection';
 import {
   MediaItemProvider,
   MediaCollectionProvider,
@@ -35,13 +29,8 @@ import { MediaLinkService } from '../services/linkService';
 import { LRUCache } from 'lru-fast';
 import { DEFAULT_COLLECTION_PAGE_SIZE } from '../services/collectionService';
 import { FileItem } from '../item';
-import {
-  GetFileOptions,
-  FileState,
-  mapMediaFileToFileState,
-} from '../fileState';
-import FileStreamCache from './fileStreamCache';
-import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploadableFile';
+import { GetFileOptions, FileState } from '../fileState';
+import { FileFetcher } from '../file';
 
 const DEFAULT_CACHE_SIZE = 200;
 
@@ -78,6 +67,8 @@ export interface Context {
 
   refreshCollection(collectionName: string, pageSize: number): void;
 
+  // TODO Next two methods are deprecated and will be removed with next major release.
+  // Please use .file.getFile and .file.uploadFile APIs
   getFile(id: string, options?: GetFileOptions): Observable<FileState>;
   uploadFile(
     file: UploadableFile,
@@ -85,11 +76,17 @@ export interface Context {
   ): Observable<FileState>;
 
   getImage(id: string, params?: MediaStoreGetFileImageParams): Promise<Blob>;
+  getImageMetadata(
+    id: string,
+    params?: MediaStoreGetFileImageParams,
+  ): Promise<ImageMetadata>;
   getImageUrl(
     id: string,
     params?: MediaStoreGetFileImageParams,
   ): Promise<string>;
 
+  readonly collection: CollectionFetcher;
+  readonly file: FileFetcher;
   readonly config: ContextConfig;
 }
 
@@ -99,72 +96,33 @@ export class ContextFactory {
   }
 }
 
-const pollingInterval = 1000;
-
 class ContextImpl implements Context {
   private readonly collectionPool = RemoteMediaCollectionProviderFactory.createPool();
   private readonly itemPool = MediaItemProvider.createPool();
   private readonly urlPreviewPool = MediaUrlPreviewProvider.createPool();
   private readonly fileItemCache: LRUCache<string, FileItem>;
   private readonly localPreviewCache: LRUCache<string, string>;
-  private readonly fileStreamsCache: FileStreamCache;
   private readonly mediaStore: MediaStore;
+  readonly collection: CollectionFetcher;
+  readonly file: FileFetcher;
 
   constructor(readonly config: ContextConfig) {
     this.fileItemCache = new LRUCache(config.cacheSize || DEFAULT_CACHE_SIZE);
     this.localPreviewCache = new LRUCache(10);
-    this.fileStreamsCache = new FileStreamCache();
     this.mediaStore = new MediaStore({
       authProvider: config.authProvider,
     });
+    this.collection = new CollectionFetcher(this.mediaStore);
+    this.file = new FileFetcher(this.mediaStore);
   }
 
   getFile(id: string, options?: GetFileOptions): Observable<FileState> {
-    const key = FileStreamCache.createKey(id, options);
-
-    return this.fileStreamsCache.getOrInsert(key, () => {
-      const collection = options && options.collectionName;
-      const fileStream$ = publishReplay<FileState>(1)(
-        this.createDownloadFileStream(id, collection),
-      );
-
-      fileStream$.connect();
-
-      return fileStream$;
-    });
+    /* tslint:disable-next-line:no-console */
+    console.warn(
+      'context.getFile is deprecated. Please use context.file.getFileState instead',
+    );
+    return this.file.getFileState(id, options);
   }
-
-  private createDownloadFileStream = (
-    id: string,
-    collection?: string,
-  ): Observable<FileState> => {
-    return Observable.create(async (observer: Observer<FileState>) => {
-      let timeoutId: number;
-
-      const fetchFile = async () => {
-        try {
-          const response = await this.mediaStore.getFile(id, { collection });
-          const fileState = mapMediaFileToFileState(response);
-
-          observer.next(fileState);
-
-          if (fileState.status === 'processing') {
-            timeoutId = window.setTimeout(fetchFile, pollingInterval);
-          } else {
-            observer.complete();
-          }
-        } catch (e) {
-          observer.error(e);
-        }
-      };
-
-      fetchFile();
-
-      return () => {
-        window.clearTimeout(timeoutId);
-      };
-    });
-  };
 
   getMediaItemProvider(
     id: string,
@@ -259,86 +217,11 @@ class ContextImpl implements Context {
     file: UploadableFile,
     controller?: UploadController,
   ): Observable<FileState> {
-    let fileId: string;
-    // TODO [MSW-796]: get file size for base64
-    const size = file.content instanceof Blob ? file.content.size : 0;
-    const mediaType = getMediaTypeFromUploadableFile(file);
-    const collectionName = file.collection;
-    const name = file.name || ''; // name property is not available in base64 image
-    // TODO [MSW-678]: remove when id upfront is exposed
-    const tempFileId = uuid.v4();
-    const tempKey = FileStreamCache.createKey(tempFileId, { collectionName });
-    let mimeType = '';
-
-    const fileStreamSubscribe = (observer: Subscriber<FileState>) => {
-      if (file.content instanceof Blob) {
-        mimeType = file.content.type;
-        observer.next({
-          name,
-          size,
-          mediaType,
-          mimeType,
-          id: tempFileId,
-          progress: 0,
-          status: 'uploading',
-          preview: {
-            blob: file.content,
-          },
-        });
-      }
-
-      const { deferredFileId, cancel } = uploadFile(file, this.apiConfig, {
-        onProgress: progress => {
-          observer.next({
-            progress,
-            name,
-            size,
-            mediaType,
-            mimeType,
-            id: tempFileId,
-            status: 'uploading',
-          });
-        },
-      });
-
-      if (controller) {
-        controller.setAbort(cancel);
-      }
-
-      deferredFileId
-        .then(id => {
-          fileId = id;
-          const key = FileStreamCache.createKey(id, { collectionName });
-
-          // we create a new entry in the cache with the same stream to make the temp/public id mapping to work
-          this.fileStreamsCache.set(key, fileStream);
-          observer.next({
-            id,
-            name,
-            size,
-            mediaType,
-            mimeType,
-            status: 'processing',
-          });
-          observer.complete();
-        })
-        .catch(error => {
-          // we can't use .catch(observer.error) due that will change the Subscriber context
-          observer.error(error);
-        });
-    };
-
-    const fileStream = new Observable<FileState>(fileStreamSubscribe).pipe(
-      concat(
-        defer(() => this.createDownloadFileStream(fileId, collectionName)),
-      ),
-      publishReplay(1),
-      refCount(),
+    /* tslint:disable-next-line:no-console */
+    console.warn(
+      'context.uploadFile is deprecated. Please use context.file.upload instead',
     );
-
-    this.fileStreamsCache.set(tempKey, fileStream);
-
-    return fileStream;
+    return this.file.upload(file, controller);
   }
 
   refreshCollection(collectionName: string, pageSize: number): void {
@@ -347,6 +230,13 @@ class ContextImpl implements Context {
 
   getImage(id: string, params?: MediaStoreGetFileImageParams): Promise<Blob> {
     return this.mediaStore.getImage(id, params);
+  }
+
+  async getImageMetadata(
+    id: string,
+    params?: MediaStoreGetFileImageParams,
+  ): Promise<ImageMetadata> {
+    return (await this.mediaStore.getImageMetadata(id, params)).metadata;
   }
 
   getImageUrl(

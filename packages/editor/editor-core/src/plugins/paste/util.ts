@@ -1,11 +1,56 @@
-export function isPastedFromWord(event: ClipboardEvent): boolean {
-  const html = event.clipboardData.getData('text/html');
-  return !!html && html.indexOf('urn:schemas-microsoft-com:office:office') >= 0;
+export function isPastedFromWord(html?: string): boolean {
+  return !!html && html.indexOf('urn:schemas-microsoft-com:office:word') >= 0;
+}
+
+export function isPastedFromExcel(html?: string): boolean {
+  return !!html && html.indexOf('urn:schemas-microsoft-com:office:excel') >= 0;
+}
+
+export function isPastedFromDropboxPaper(html?: string): boolean {
+  return !!html && !!html.match(/class=\"\s?author-d-.+"/gim);
+}
+
+export function isPastedFromGoogleDocs(html?: string): boolean {
+  return !!html && !!html.match(/id=\"docs-internal-guid-.+"/gim);
+}
+
+export function isPastedFromGoogleSpreadSheets(html?: string): boolean {
+  return !!html && !!html.match(/data-sheets-.+=/gim);
+}
+
+export function isPastedFromPages(html?: string): boolean {
+  return !!html && html.indexOf('content="Cocoa HTML Writer"') >= 0;
+}
+
+export function isPastedFromFabricEditor(html?: string): boolean {
+  return !!html && html.indexOf('data-pm-slice="') >= 0;
 }
 
 export const isSingleLine = (text: string): boolean => {
   return !!text && text.trim().split('\n').length === 1;
 };
+
+export function getPasteSource(event: ClipboardEvent): string {
+  const html = event.clipboardData.getData('text/html');
+
+  if (isPastedFromDropboxPaper(html)) {
+    return 'dropbox-paper';
+  } else if (isPastedFromWord(html)) {
+    return 'microsoft-word';
+  } else if (isPastedFromExcel(html)) {
+    return 'microsoft-excel';
+  } else if (isPastedFromGoogleDocs(html)) {
+    return 'google-docs';
+  } else if (isPastedFromGoogleSpreadSheets(html)) {
+    return 'google-spreadsheets';
+  } else if (isPastedFromPages(html)) {
+    return 'apple-pages';
+  } else if (isPastedFromFabricEditor(html)) {
+    return 'fabric-editor';
+  }
+
+  return 'other';
+}
 
 // TODO: Write JEST tests for this part
 export function isCode(str) {

@@ -1,16 +1,11 @@
 import * as React from 'react';
 import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
-import { media, mediaGroup, mediaSingle } from '@atlaskit/editor-common';
+import { media, mediaGroup, mediaSingle } from '@atlaskit/adf-schema';
 import { SmartMediaEditor } from '@atlaskit/media-editor';
 import { EditorPlugin } from '../../types';
-import { legacyNodeViewFactory } from '../../nodeviews';
-import WithPluginState from '../../ui/WithPluginState';
-import { pluginKey as widthPluginKey } from '../width';
-
 import {
   stateKey as pluginKey,
   createPlugin,
-  MediaProvider,
   MediaState,
   MediaStateManager,
   DefaultMediaStateManager,
@@ -20,6 +15,13 @@ import keymapMediaSinglePlugin from './pm-plugins/keymap-media-single';
 import keymapPlugin from './pm-plugins/keymap';
 import ToolbarMedia from './ui/ToolbarMedia';
 import MediaSingleEdit from './ui/MediaSingleEdit';
+import { ReactMediaGroupNode } from './nodeviews/mediaGroup';
+import { ReactMediaSingleNode } from './nodeviews/mediaSingle';
+import { CustomMediaPicker, MediaProvider } from './types';
+import WithPluginState from '../../ui/WithPluginState';
+import { akEditorFullPageMaxWidth } from '@atlaskit/editor-common';
+import { messages } from '../insert-block/ui/ToolbarInsertBlock';
+import { pluginKey as editorDisabledPluginKey } from '../editor-disabled';
 import ReactMediaGroupNode from './nodeviews/media-group';
 import ReactMediaNode from './nodeviews/media';
 import ReactMediaSingleNode from './nodeviews/media-single';
@@ -41,6 +43,7 @@ export interface MediaOptions {
   allowMediaGroup?: boolean;
   customDropzoneContainer?: HTMLElement;
   customMediaPicker?: CustomMediaPicker;
+  allowResizing?: boolean;
 }
 
 export interface MediaSingleOptions {
@@ -88,37 +91,14 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
             {
               providerFactory,
               nodeViews: {
-                mediaGroup: legacyNodeViewFactory(
+                mediaGroup: ReactMediaGroupNode(
                   portalProviderAPI,
-                  providerFactory,
-                  {
-                    mediaGroup: ReactMediaGroupNode,
-                    media: ReactMediaNode,
-                  },
+                  props.appearance,
                 ),
-                mediaSingle: legacyNodeViewFactory(
+                mediaSingle: ReactMediaSingleNode(
                   portalProviderAPI,
-                  providerFactory,
-                  {
-                    mediaSingle: ({ view, node, ...props }) => (
-                      <WithPluginState
-                        editorView={view}
-                        eventDispatcher={eventDispatcher}
-                        plugins={{
-                          width: widthPluginKey,
-                        }}
-                        render={({ width }) => (
-                          <ReactMediaSingleNode
-                            view={view}
-                            node={node}
-                            width={width}
-                            {...props}
-                          />
-                        )}
-                      />
-                    ),
-                    media: ReactMediaNode,
-                  },
+                  eventDispatcher,
+                  props.appearance,
                 ),
               },
               errorReporter,
@@ -127,13 +107,15 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
               customDropzoneContainer:
                 options && options.customDropzoneContainer,
               customMediaPicker: options && options.customMediaPicker,
+              appearance: props.appearance,
+              allowResizing: !!(options && options.allowResizing),
             },
             reactContext,
             dispatch,
             props.appearance,
           ),
       },
-      { name: 'mediaKeymap', plugin: ({ schema }) => keymapPlugin(schema) },
+      { name: 'mediaKeymap', plugin: ({ schema }) => keymapPlugin() },
     ].concat(
       options && options.allowMediaSingle
         ? {
@@ -144,7 +126,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
     );
   },
 
-  contentComponent({ editorView }) {
+  contentComponent({ editorView, appearance }) {
     if (!options) {
       return null;
     }
@@ -160,54 +142,79 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
     ) {
       return null;
     }
-    const pluginState = pluginKey.getState(editorView.state);
 
     return (
-      <>
-        <MediaSingleEdit pluginState={pluginState} />
-        <WithPluginState
-          plugins={{
-            mediaState: pluginKey,
-          }}
-          render={({ mediaState }) => {
-            const node = pluginState.selectedMediaNode();
+      <WithPluginState
+        editorView={editorView}
+        plugins={{
+          mediaState: pluginKey,
+          disabled: editorDisabledPluginKey,
+        }}
+        render={({ mediaState, disabled }) => {
+          const { element: target, layout } = mediaState as MediaPluginState;
+          const node = mediaState.selectedMediaNode();
+          const isFullPage = appearance === 'full-page';
+          const allowBreakout = !!(
+            node &&
+            node.attrs &&
+            node.attrs.width > akEditorFullPageMaxWidth &&
+            isFullPage
+          );
+          const allowLayout = isFullPage && !!mediaState.isLayoutSupported();
+          const { allowResizing } = mediaState.getMediaOptions();
 
-            if (!pluginState.resolvedUploadContext) {
-              return null;
-            }
+          let smartMediaEditor;
 
-            if (node && pluginState.showEditingDialog) {
-              const identifier: FileIdentifier = {
-                id: node.attrs.id,
-                mediaItemType: 'file',
-                collectionName: node.attrs.collection,
-              };
-              return (
-                <SmartMediaEditor
-                  identifier={identifier}
-                  context={
-                    (pluginState as MediaPluginState).resolvedUploadContext!
-                  }
-                  onUploadStart={(
-                    deferredIdentifier: Promise<FileIdentifier>,
-                    preview: string,
-                  ) => {
-                    pluginState.onCloseEditing(preview);
+          if (
+            mediaState.resolvedUploadContext &&
+            node &&
+            pluginState.showEditingDialog
+          ) {
+            const identifier: FileIdentifier = {
+              id: node.attrs.id,
+              mediaItemType: 'file',
+              collectionName: node.attrs.collection,
+            };
 
-                    deferredIdentifier.then(identifier =>
-                      pluginState.onFinishEditing(identifier, preview, node),
-                    );
-                  }}
-                  onFinish={finish => {
-                    pluginState.onCloseEditing();
-                  }}
-                />
-              );
-            }
-            return null;
-          }}
-        />
-      </>
+            smartMediaEditor = (
+              <SmartMediaEditor
+                identifier={identifier}
+                context={
+                  (mediaState as MediaPluginState).resolvedUploadContext!
+                }
+                onUploadStart={(
+                  deferredIdentifier: Promise<FileIdentifier>,
+                  preview: string,
+                ) => {
+                  mediaState.onCloseEditing(preview);
+
+                  deferredIdentifier.then(identifier =>
+                    mediaState.onFinishEditing(identifier, preview, node),
+                  );
+                }}
+                onFinish={finish => {
+                  mediaState.onCloseEditing();
+                }}
+              />
+            );
+          }
+
+          return (
+            <>
+              <MediaSingleEdit
+                pluginState={mediaState}
+                allowBreakout={allowBreakout}
+                allowLayout={allowLayout}
+                layout={layout}
+                target={target}
+                allowResizing={allowResizing}
+                editorDisabled={disabled.editorDisabled}
+              />
+              {smartMediaEditor}
+            </>
+          );
+        }}
+      />
     );
   },
 
@@ -223,16 +230,18 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
   },
 
   pluginsOptions: {
-    quickInsert: [
+    quickInsert: ({ formatMessage }) => [
       {
-        title: 'Files and images',
-        priority: 200,
+        title: formatMessage(messages.filesAndImages),
+        priority: 400,
         keywords: ['media'],
-        icon: () => <EditorImageIcon label="Files and images" />,
+        icon: () => (
+          <EditorImageIcon label={formatMessage(messages.filesAndImages)} />
+        ),
         action(insert, state) {
           const pluginState = pluginKey.getState(state);
           pluginState.showMediaPicker();
-          return insert();
+          return insert('');
         },
       },
     ],

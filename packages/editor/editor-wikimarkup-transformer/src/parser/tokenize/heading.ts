@@ -1,11 +1,16 @@
 import { Schema } from 'prosemirror-model';
 import { parseString } from '../text';
-import { Token, TokenType } from './';
+import { Token, TokenType, TokenErrCallback } from './';
 
 // h1. HEADING
-const HEADING_REGEXP = /^h([1|2|3|4|5|6])\.\s(.*)/;
+const HEADING_REGEXP = /^h([1-6])\.(.*)/;
 
-export function heading(input: string, schema: Schema): Token {
+export function heading(
+  input: string,
+  position: number,
+  schema: Schema,
+  tokenErrCallback?: TokenErrCallback,
+): Token {
   /**
    * The following token types will be ignored in parsing
    * the content of a strong mark
@@ -16,33 +21,50 @@ export function heading(input: string, schema: Schema): Token {
     TokenType.QUADRUPLE_DASH_SYMBOL,
   ];
 
-  const match = input.match(HEADING_REGEXP);
+  const match = input.substring(position).match(HEADING_REGEXP);
 
   if (!match) {
-    return fallback(input);
+    return fallback(input, position);
   }
 
   const level = parseInt(match[1], 10);
-  const content = parseString(match[2], schema, ignoreTokenTypes);
-
-  const headingNode = schema.nodes.heading.createChecked(
-    {
-      level,
-    },
-    content,
+  const content = parseString(
+    match[2],
+    schema,
+    ignoreTokenTypes,
+    tokenErrCallback,
   );
 
-  return {
-    type: 'pmnode',
-    nodes: [headingNode],
-    length: match[0].length,
-  };
+  try {
+    const headingNode = schema.nodes.heading.createChecked(
+      {
+        level,
+      },
+      content,
+    );
+
+    return {
+      type: 'pmnode',
+      nodes: [headingNode],
+      length: match[0].length,
+    };
+  } catch (err) {
+    /**
+     * If the heading fails to rendering, we want to skip the text
+     * "h1."
+     */
+    return {
+      type: 'text',
+      text: '',
+      length: 4,
+    };
+  }
 }
 
-function fallback(input: string): Token {
+function fallback(input: string, position: number): Token {
   return {
     type: 'text',
-    text: input.substr(0, 1),
+    text: input.substr(position, 1),
     length: 1,
   };
 }

@@ -1,5 +1,174 @@
 # @atlaskit/select
 
+## 6.1.15
+- [patch] [6195ac3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6195ac3):
+
+  - remove animated functionality to temporarily resolve blocking issue with portal
+
+## 6.1.14
+- [patch] [a048a85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a048a85):
+
+  - Updated to be compatible with new Forms API
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/form@5.0.0
+
+## 6.1.13
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/checkbox@5.0.9
+  - @atlaskit/form@4.0.21
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/docs@6.0.0
+
+## 6.1.12
+- [patch] [82fc5f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82fc5f5):
+
+  - Pinning react-popper to 1.0.2 to avoid recursive bug
+
+## 6.1.11
+- [patch] [bfc508c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfc508c):
+
+  - CheckboxSelect options now have correct flex styles on the option value
+
+## 6.1.10
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/checkbox@5.0.8
+  - @atlaskit/form@4.0.20
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+
+## 6.1.9
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/checkbox@5.0.7
+  - @atlaskit/form@4.0.19
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
+## 6.1.8
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/checkbox@5.0.6
+  - @atlaskit/form@4.0.18
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/button@10.0.0
+
+## 6.1.7
+- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+
+  - Fixed issue where tooltips and modals would initially render in the wrong location
+
+## 6.1.6
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 6.1.5
+- [patch] [fcf97d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fcf97d8):
+
+  - Fix countries and mismatched flags
+
+## 6.1.4
+- [patch] [6ab8e95"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ab8e95"
+d):
+
+  - Removed wrapping div from around selects as it is no longer needed when using the latest inline-dialog component.
+
+## 6.1.3
+- [patch] [dab963b"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dab963b"
+d):
+
+  - Make sure portal binds to DOM only
+
+## 6.1.2
+- [patch] [0782e03"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0782e03"
+d):
+
+  - bumped react-select to 2.1.1 minor bug fixes including mirroring the logic for the backspace key to delete, and stripping theme props from Input and GroupHeading dom elements. See https://github.com/JedWatson/react-select/releases/tag/v2.1.1 for details
+
+## 6.1.1
+- [patch] fixed popupselect bug by replacing Fragment with div element containing the requisite event handlers [80dd688](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80dd688)
+
+## 6.1.0
+- [minor] Change tabSelectsValue to default to false in @atlaskit/select, bumped react-select dep to 2.1.0, see release logs for details https://github.com/JedWatson/react-select/releases/tag/2.1.0 [dd4cbea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dd4cbea)
+
+## 6.0.4
+- [patch] fix issues with PopupSelect and NavigationSwitcher [b4e19c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b4e19c3)
+
+## 6.0.3
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 6.0.2
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/button@9.0.13
+  - @atlaskit/checkbox@5.0.2
+  - @atlaskit/form@4.0.10
+  - @atlaskit/modal-dialog@7.0.2
+  - @atlaskit/tooltip@12.1.1
+  - @atlaskit/icon@14.0.0
+
+## 6.0.1
+- [patch] Fixing analytics events for checkbox/radio/select [3e428e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3e428e3)
+
+## 6.0.0
+- [major] Bumped react-select dep from 2.0.0-beta.7 to 2.0.0. This includes a breaking change to custom components, the innerRef property is now declared on the root of the props object, as opposed to being part of the innerProps object passed to each component. For a full list of changes in 2.0.0 please see the react-select changelog here. https://github.com/JedWatson/react-select/blob/master/HISTORY.md [4194aa4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4194aa4)
+
+## 5.0.19
+- [patch] Added a multi-select example for PopupSelect [483a335](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/483a335)
+
+## 5.0.18
+- [patch] Updated dependencies [80e1925](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80e1925)
+  - @atlaskit/button@9.0.9
+  - @atlaskit/form@4.0.5
+  - @atlaskit/modal-dialog@7.0.1
+  - @atlaskit/checkbox@5.0.0
+
+## 5.0.17
+- [patch] Updated dependencies [d5a043a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5a043a)
+  - @atlaskit/form@4.0.3
+  - @atlaskit/icon@13.8.1
+  - @atlaskit/tooltip@12.0.14
+  - @atlaskit/modal-dialog@7.0.0
+
+## 5.0.16
+- [patch] Updated dependencies [9c66d4d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c66d4d)
+  - @atlaskit/form@4.0.2
+  - @atlaskit/webdriver-runner@0.1.0
+
+## 5.0.15
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 5.0.14
+- [patch] Updated dependencies [d8d8107](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d8d8107)
+  - @atlaskit/form@4.0.0
+
+## 5.0.13
+- [patch] Using the latest popper to avoid recursive setState calls. [9dceca9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9dceca9)
+
 ## 5.0.11
 - [patch] Updating datetime-picker and select styles [981b96c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/981b96c)
 

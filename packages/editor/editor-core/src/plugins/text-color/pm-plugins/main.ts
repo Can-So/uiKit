@@ -1,7 +1,7 @@
 import { Plugin, PluginKey, Transaction, EditorState } from 'prosemirror-state';
 
-import { colorPalette, borderColorPalette } from '@atlaskit/editor-common';
-import { akColorN800 } from '@atlaskit/util-shared-styles';
+import { colorPalette, borderColorPalette } from '@atlaskit/adf-schema';
+import { colors } from '@atlaskit/theme';
 
 import { Dispatch } from '../../../event-dispatcher';
 import { getActiveColor } from '../utils/color';
@@ -9,10 +9,12 @@ import { getDisabledState } from '../utils/disabled';
 
 export type TextColorPluginState = {
   palette: Map<string, string>;
-  borderColorPalette: Object;
+  borderColorPalette: {
+    [name: string]: string;
+  };
   defaultColor: string;
   disabled?: boolean;
-  color?: string;
+  color: string | null;
 };
 
 export type ActionHandlerParams = {
@@ -35,8 +37,8 @@ export interface TextColorPluginConfig {
 }
 
 export const DEFAULT_COLOR = {
-  color: akColorN800.toLowerCase(),
-  label: 'Dark grey',
+  color: colors.N800.toLowerCase(),
+  label: 'Dark gray',
 };
 
 export function createInitialPluginState(
@@ -45,6 +47,7 @@ export function createInitialPluginState(
 ): TextColorPluginState {
   const defaultColor =
     (pluginConfig && pluginConfig.defaultColor) || DEFAULT_COLOR;
+
   const palette = new Map<string, string>([
     [defaultColor.color, defaultColor.label],
   ]);
@@ -104,8 +107,15 @@ export function createPlugin(
             };
         }
 
-        dispatch(pluginKey, nextState);
-        return nextState;
+        if (
+          (pluginState && pluginState.color !== nextState.color) ||
+          (pluginState && pluginState.disabled !== nextState.disabled)
+        ) {
+          dispatch(pluginKey, nextState);
+          return nextState;
+        }
+
+        return pluginState;
       },
     },
   });

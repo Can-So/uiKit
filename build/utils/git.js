@@ -1,7 +1,7 @@
 const spawn = require('projector-spawn');
 const path = require('path');
 
-const parseChangesetCommit = require('../releases/changeset/parseChangesetCommit');
+const parseChangesetCommit = require('@atlaskit/build-releases/changeset/parseChangesetCommit');
 
 // Parses lines that are in the form 'HASH message goes here'
 const parseCommitLine = line => {
@@ -31,9 +31,30 @@ async function getChangedFilesSince(ref, fullPath = false) {
   return files.map(file => path.resolve(file));
 }
 
+async function getChangedChangesetFilesSinceMaster(fullPath = false) {
+  let ref = await getMasterRef();
+  // First we need to find the commit where we diverged from `ref` at using `git merge-base`
+  let cmd = await spawn('git', ['merge-base', ref, 'HEAD']);
+  const divergedAt = cmd.stdout.trim();
+  // Now we can find which files we added
+  cmd = await spawn('git', [
+    'diff',
+    '--name-only',
+    '--diff-filter=d',
+    'master',
+  ]);
+
+  const files = cmd.stdout
+    .trim()
+    .split('\n')
+    .filter(file => file.includes('changes.json'));
+  if (!fullPath) return files;
+  return files.map(file => path.resolve(file));
+}
+
 async function getBranchName() {
-  const gitCmd = await spawn('git', ['rev-parse', '--abrev-ref', 'HEAD']);
-  return gitCmd.stdout.trim().split('\n');
+  const gitCmd = await spawn('git', ['rev-parse', '--abbrev-ref', 'HEAD']);
+  return gitCmd.stdout.trim();
 }
 
 async function getMasterRef() {
@@ -122,16 +143,18 @@ async function rebaseAndPush(maxAttempts = 3) {
 }
 
 // helper method for getAllReleaseCommits and getAllChangesetCommits as they are almost identical
-async function getAndParseJsonFromCommitsStartingWith(str) {
+async function getAndParseJsonFromCommitsStartingWith(str, since) {
   // --grep lets us pass a regex, -z splits commits using NUL instead of newlines
-  const gitCmd = await spawn('git', [
-    'log',
-    '--grep',
-    `^${str}`,
-    '-z',
-    '--no-merges',
-  ]);
-  const result = gitCmd.stdout.trim().split('\0');
+  const cmdArgs = ['log', '--grep', `^${str}`, '-z', '--no-merges'];
+  if (since) {
+    cmdArgs.push(`${since}..`);
+  }
+  const gitCmd = await spawn('git', cmdArgs);
+  const result = gitCmd.stdout
+    .trim()
+    .split('\0')
+    .filter(Boolean);
+  if (result.length === 0) return [];
   const parsedCommits = result
     .map(parseFullCommit)
     // unfortunately, we have left some test data in the repo, which wont parse properly, so we
@@ -146,16 +169,17 @@ async function getAndParseJsonFromCommitsStartingWith(str) {
     })
     // this filter is for the same reason as above due to some unparsable JSON strings
     .filter(parsed => !!parsed);
-
   return parsedCommits;
 }
 
-async function getAllReleaseCommits() {
-  return getAndParseJsonFromCommitsStartingWith('RELEASING: ');
+// TODO: Don't parse these, just return the commits
+// LB: BETTER DO THIS SOON
+async function getAllReleaseCommits(since) {
+  return getAndParseJsonFromCommitsStartingWith('RELEASING: ', since);
 }
 
-async function getAllChangesetCommits() {
-  return getAndParseJsonFromCommitsStartingWith('CHANGESET: ');
+async function getAllChangesetCommits(since) {
+  return getAndParseJsonFromCommitsStartingWith('CHANGESET: ', since);
 }
 
 // TODO: This function could be a lot cleaner, simpler and less error prone if we played with
@@ -163,7 +187,6 @@ async function getAllChangesetCommits() {
 // (i.e this function breaks if you dont put '--no-merges' in the git log command)
 function parseFullCommit(commitStr) {
   const lines = commitStr.trim().split('\n');
-
   const hash = lines
     .shift()
     .replace('commit ', '')
@@ -190,24 +213,41 @@ function parseFullCommit(commitStr) {
 }
 
 async function getLastPublishCommit() {
-  const isPublishCommit = msg => msg.startsWith('RELEASING: ');
+  const gitCmd = await spawn('git', [
+    'log',
+    '--grep',
+    '^RELEASING: ',
+    '--no-merges',
+    '--max-count=1',
+    '--format="%H"',
+  ]);
+  const commit = gitCmd.stdout.trim().replace(/"/g, '');
 
-  const gitCmd = await spawn('git', ['log', '-n', '500', '--oneline']);
-  const result = gitCmd.stdout
-    .trim()
-    .split('\n')
-    .map(line => parseCommitLine(line));
-  const latestPublishCommit = result.find(res => isPublishCommit(res.message));
-
-  return latestPublishCommit.commit;
+  return commit;
 }
 
-async function getUnpublishedChangesetCommits() {
-  // We fetch **all** of the commits because otherwise we can end up in race conditions where a
-  // master build is running and another changeset is merged whilst its still running (the new
-  // changeset would be released without being tested)
-  const releaseCommits = await getAllReleaseCommits();
-  const changesetCommits = await getAllChangesetCommits();
+async function getCommitThatAddsFile(path) {
+  const gitCmd = await spawn('git', [
+    'log',
+    '--reverse',
+    '--max-count=1',
+    '--pretty=format:%h',
+    '-p',
+    path,
+  ]);
+  // For reasons I do not understand, passing pretty format through this is not working
+  // The slice below is aimed at achieving the same thing.
+  const commit = gitCmd.stdout.split('\n')[0];
+
+  return commit;
+}
+
+async function getUnpublishedChangesetCommits(since) {
+  // Start one commit before the "since" if it's passed in so that we can find that commit if required
+  const releaseCommits = await getAllReleaseCommits(
+    since ? `${since}~1` : undefined,
+  );
+  const changesetCommits = await getAllChangesetCommits(since);
   // to find unpublished commits, we'll go through them one by one and compare them to all release
   // commits and see if there are any that dont have a release commit that matches them
   const unpublishedCommits = changesetCommits.filter(cs => {
@@ -223,6 +263,7 @@ async function getUnpublishedChangesetCommits() {
 }
 
 module.exports = {
+  getCommitThatAddsFile,
   getCommitsSince,
   getChangedFilesSince,
   getBranchName,
@@ -234,6 +275,7 @@ module.exports = {
   rebase,
   rebaseAndPush,
   getUnpublishedChangesetCommits,
+  getChangedChangesetFilesSinceMaster,
   getAllReleaseCommits,
   getAllChangesetCommits,
   getLastPublishCommit,

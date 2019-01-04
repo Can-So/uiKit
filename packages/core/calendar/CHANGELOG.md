@@ -1,5 +1,59 @@
 # @atlaskit/calendar
 
+## 7.0.16
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 7.0.15
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/theme@7.0.0
+
+## 7.0.14
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/icon@15.0.0
+
+## 7.0.13
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 7.0.12
+- [patch] [21f5216](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/21f5216):
+
+  - Remove enzyme-to-json as it is used in our jestFrameworkSetup.js
+
+## 7.0.11
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 7.0.10
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 7.0.9
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/button@9.0.13
+  - @atlaskit/icon@14.0.0
+
+## 7.0.8
+- [patch] Fixes bug on next and prev month navigation. [c4770a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c4770a0)
+
+## 7.0.7
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 7.0.5
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

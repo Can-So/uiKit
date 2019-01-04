@@ -33,7 +33,6 @@ export const proxyUploadEvents = (store: Store<State>) => (
 
       if (upload && upload.proxy && uploadHasProxy(upload)) {
         const event = { ...originalEvent };
-        const { tenant } = upload;
 
         upload.proxy.forEach(uploadId => {
           if (event.name === 'upload-processing') {
@@ -43,7 +42,9 @@ export const proxyUploadEvents = (store: Store<State>) => (
               collection: RECENTS_COLLECTION,
             };
 
-            store.dispatch(finalizeUpload(localFile, uploadId, source, tenant));
+            store.dispatch(
+              finalizeUpload(localFile, uploadId, source, localFile.upfrontId),
+            );
           } else if (event.name !== 'upload-end') {
             // TODO: MSW-376 upload-status-update events from the user has a public Id that should be sanitized here.
             store.dispatch(sendUploadEvent({ event, uploadId }));

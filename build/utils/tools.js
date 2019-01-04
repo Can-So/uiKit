@@ -18,7 +18,10 @@ async function getPackagesInfo(cwd /*: string */) {
         path.join(pkg.dir, '__tests-karma__'),
       );
       let testWebdriverExists = await exists(
-        path.join(pkg.dir, '__tests__', 'integration'),
+        path.join(pkg.dir, 'src', '__tests__', 'integration'),
+      );
+      let testVisualRegressionExists = await exists(
+        path.join(pkg.dir, 'src', '__tests__', 'visual-regression'),
       );
 
       let isBrowserPackage = !relativeDir.startsWith('build');
@@ -33,7 +36,7 @@ async function getPackagesInfo(cwd /*: string */) {
 
       let hasKarmaDep = !!allDependencies.karma;
 
-      let isTypeScript = tsConfigExists;
+      let isTypeScript = tsConfigExists && !isWebsitePackage; // The website does not need to be built
       let isTSLint = isTypeScript || tslintConfigExists;
 
       let isBabel = srcExists && !isTypeScript && !isWebsitePackage;
@@ -43,7 +46,8 @@ async function getPackagesInfo(cwd /*: string */) {
       let isKarma = testBrowserExists || hasKarmaDep;
       let isBrowserStack = isKarma;
       let isStylelint = srcExists && isBrowserPackage;
-      let isWebdriver = testWebdriverExists && !isWebsitePackage; // The website has an integration tests that will only run on a schedule build
+      let isWebdriver = testWebdriverExists;
+      let isVisualRegression = testVisualRegressionExists;
 
       return {
         dir: pkg.dir,
@@ -59,6 +63,7 @@ async function getPackagesInfo(cwd /*: string */) {
         isBrowserStack,
         isStylelint,
         isWebdriver,
+        isVisualRegression,
       };
     }),
   );
@@ -74,6 +79,7 @@ const TOOL_NAME_TO_FILTERS /*: { [key: string]: (pkg: Object) => boolean } */ = 
   browserstack: pkg => pkg.isBrowserStack,
   stylelint: pkg => pkg.isStylelint,
   webdriver: pkg => pkg.isWebdriver,
+  vr: pkg => pkg.isVisualRegression,
 };
 
 async function getPackageDirsForTools(cwd /*: string */) {

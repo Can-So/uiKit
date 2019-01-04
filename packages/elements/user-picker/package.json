@@ -1,0 +1,65 @@
+{
+  "name": "@atlaskit/user-picker",
+  "version": "1.0.3",
+  "config": {
+    "access": "public"
+  },
+  "description": "Fabric component for positioning and scrolling a dropdown",
+  "main": "dist/es5/index.js",
+  "module": "dist/es2015/index.js",
+  "types": "dist/es5/index.d.ts",
+  "atlaskit:src": "src/index.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "src"
+  ],
+  "dependencies": {
+    "@atlaskit/analytics-next": "^3.1.0",
+    "@atlaskit/analytics-next-types": "^3.1.1",
+    "@atlaskit/avatar": "^14.1.7",
+    "@atlaskit/lozenge": "^6.2.4",
+    "@atlaskit/select": "^6.1.13",
+    "@atlaskit/tag": "^6.1.3",
+    "@atlaskit/theme": "^7.0.1",
+    "@atlaskit/tooltip": "^12.1.13",
+    "@types/lodash.debounce": "^4.0.4",
+    "lodash.debounce": "^4.0.8",
+    "memoize-one": "^3.0.1",
+    "uuid": "^3.1.0"
+  },
+  "peerDependencies": {
+    "react": "^16.4.0",
+    "react-dom": "^16.4.2",
+    "react-intl": "^2.6.0",
+    "styled-components": "^3.2.6"
+  },
+  "author": "Atlassian Pty Ltd",
+  "maintainers": [
+    {
+      "name": "Tara T"
+    },
+    {
+      "name": "Luiz P"
+    }
+  ],
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@atlaskit/analytics-viewer": "^0.1.5",
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/i18n-tools": "^0.4.0",
+    "@atlaskit/section-message": "^1.0.14",
+    "@atlaskit/util-data-test": "^10.0.25",
+    "@types/uuid": "^3.4.4",
+    "enzyme": "^3.7.0",
+    "react-intl": "^2.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/atlassian/atlaskit-mk-2"
+  },
+  "keywords": [
+    "fabric",
+    "ui"
+  ]
+}

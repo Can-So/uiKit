@@ -6,7 +6,7 @@ import {
   InputRule,
 } from 'prosemirror-inputrules';
 import { Schema, NodeType } from 'prosemirror-model';
-import { Plugin, Transaction } from 'prosemirror-state';
+import { Plugin } from 'prosemirror-state';
 import { analyticsService, trackAndInvoke } from '../../../analytics';
 import {
   createInputRule,
@@ -19,6 +19,7 @@ import {
   transformToCodeBlockAction,
 } from '../commands/transform-to-code-block';
 import { insertBlock } from '../commands/insert-block';
+import { safeInsert } from 'prosemirror-utils';
 
 export function headingRule(nodeType: NodeType, maxLevel: number) {
   return textblockTypeInputRule(
@@ -56,7 +57,7 @@ export function inputRulePlugin(schema: Schema): Plugin | undefined {
     rules.push(
       createInputRule(
         new RegExp(`${leafNodeReplacementCharacter}(#{1,6})\\s$`),
-        (state, match, start, end): Transaction | undefined => {
+        (state, match, start, end) => {
           const level = match[1].length;
           return insertBlock(
             state,
@@ -86,7 +87,7 @@ export function inputRulePlugin(schema: Schema): Plugin | undefined {
     rules.push(
       createInputRule(
         new RegExp(`${leafNodeReplacementCharacter}\\s*>\\s$`),
-        (state, match, start, end): Transaction | undefined => {
+        (state, match, start, end) => {
           return insertBlock(
             state,
             schema.nodes.blockquote,
@@ -104,13 +105,13 @@ export function inputRulePlugin(schema: Schema): Plugin | undefined {
     rules.push(
       createInputRule(
         /((^`{3,})|(\s`{3,}))(\S*)$/,
-        (state, match, start, end): Transaction | undefined => {
+        (state, match, start, end) => {
           const attributes: any = {};
           if (match[4]) {
             attributes.language = match[4];
           }
+          const newStart = match[0][0] === ' ' ? start + 1 : start;
           if (isConvertableToCodeBlock(state)) {
-            const newStart = match[0][0] === ' ' ? start + 1 : start;
             analyticsService.trackEvent(
               `atlassian.editor.format.codeblock.autoformatting`,
             );
@@ -121,6 +122,10 @@ export function inputRulePlugin(schema: Schema): Plugin | undefined {
                 .scrollIntoView()
             );
           }
+          let { tr } = state;
+          tr = tr.delete(newStart, end);
+          const codeBlock = state.schema.nodes.codeBlock.createChecked();
+          return safeInsert(codeBlock)(tr);
         },
         true,
       ),
@@ -130,7 +135,7 @@ export function inputRulePlugin(schema: Schema): Plugin | undefined {
         new RegExp(
           `((${leafNodeReplacementCharacter}\`{3,})|(\\s\`{3,}))(\\S*)$`,
         ),
-        (state, match, start, end): Transaction | undefined => {
+        (state, match, start, end) => {
           const attributes: any = {};
           if (match[4]) {
             attributes.language = match[4];

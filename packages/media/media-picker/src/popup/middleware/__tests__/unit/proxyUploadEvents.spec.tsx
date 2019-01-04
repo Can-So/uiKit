@@ -8,20 +8,21 @@ describe('proxyUploadEvents middleware', () => {
   const client: any = { id: 'some-client-id' };
   const firstUploadId = 'first-upload-id';
   const secondUploadId = 'second-upload-id';
-  const tenant: any = { id: 'some-tenant' };
   const uploads: any = {
     'first-id': {},
     'second-id': { proxy: 'wrong-proxy ' },
-    'third-id': { proxy: [firstUploadId, secondUploadId], tenant },
+    'third-id': { proxy: [firstUploadId, secondUploadId] },
   };
   const state = { uploads, client };
   const publicId = 'some-public-id';
+  const upfrontId = Promise.resolve('1');
   const file = {
     id: 'third-id',
     name: 'some-name',
     size: 12345,
     creationDate: Date.now(),
     type: 'image/jpg',
+    upfrontId,
   };
 
   const setup = () => {
@@ -72,14 +73,14 @@ describe('proxyUploadEvents middleware', () => {
       uploadId: firstUploadId,
       file: originalEvent.data.file,
       source,
-      tenant,
+      replaceFileId: upfrontId,
     });
     expect(calls[1][0]).toEqual({
       type: FINALIZE_UPLOAD,
       uploadId: secondUploadId,
       file: originalEvent.data.file,
       source,
-      tenant,
+      replaceFileId: upfrontId,
     });
   });
 });

@@ -1,6 +1,6 @@
 import * as specs from './specs';
 
-export type Content = Array<string | [string, object]>;
+export type Content = Array<string | [string, object] | Array<string>>;
 
 export interface Entity {
   type: string;
@@ -19,7 +19,14 @@ type AttributesSpec =
 interface ValidatorSpec {
   props?: {
     attrs?: { props: { [key: string]: AttributesSpec } };
-    content?: { type: 'array'; items: Array<Array<string>>; minItems?: number };
+    content?: {
+      type: 'array';
+      items: Array<Array<string>>;
+      minItems?: number;
+      optional?: boolean;
+      allowUnsupportedBlock: boolean;
+      allowUnsupportedInline: boolean;
+    };
     text?: AttributesSpec;
     marks?: { type: 'array'; items: Array<Array<string>>; maxItems?: number };
   };
@@ -31,7 +38,7 @@ interface ValidatorSpec {
 const isDefined = x => x != null;
 
 const isNumber = (x): x is number =>
-  typeof x === 'number' && isFinite(x) && Math.floor(x) === x;
+  typeof x === 'number' && !isNaN(x) && isFinite(x);
 
 const isBoolean = (x): x is boolean =>
   x === true || x === false || toString.call(x) === '[object Boolean]';
@@ -42,6 +49,114 @@ const isString = (s): s is string =>
 
 const isPlainObject = x =>
   typeof x === 'object' && x !== null && !Array.isArray(x);
+
+const copy = <T = object>(source: object, dest: T, key: string) => {
+  dest[key] = source[key];
+  return dest;
+};
+
+// Helpers
+const makeArray = <T>(maybeArray: T | Array<T>) =>
+  Array.isArray(maybeArray) ? maybeArray : [maybeArray];
+
+function mapMarksItems(spec, fn = x => x) {
+  const { items, ...rest } = spec.props.marks;
+  return {
+    ...spec,
+    props: {
+      ...spec.props,
+      marks: {
+        ...rest,
+        /**
+         * `Text & MarksObject<Mark-1>` produces `items: ['mark-1']`
+         * `Text & MarksObject<Mark-1 | Mark-2>` produces `items: [['mark-1', 'mark-2']]`
+         */
+        items: items.length
+          ? Array.isArray(items[0])
+            ? items.map(fn)
+            : [fn(items)]
+          : [[]],
+      },
+    },
+  };
+}
+
+function createSpec(nodes?: Array<string>, marks?: Array<string>) {
+  return Object.keys(specs).reduce((newSpecs, k) => {
+    const spec = { ...specs[k] };
+    if (spec.props) {
+      spec.props = { ...spec.props };
+      if (isString(spec.props.content)) {
+        spec.props.content = specs[spec.props.content];
+      }
+      if (spec.props.content) {
+        if (!spec.props.content.items) {
+          /**
+           * Flatten
+           *
+           * Input:
+           * [ { type: 'array', items: [ 'tableHeader' ] }, { type: 'array', items: [ 'tableCell' ] } ]
+           *
+           * Output:
+           * { type: 'array', items: [ [ 'tableHeader' ], [ 'tableCell' ] ] }
+           */
+          spec.props.content = {
+            type: 'array',
+            items: (spec.props.content || []).map(arr => arr.items),
+          };
+        } else {
+          spec.props.content = { ...spec.props.content };
+        }
+
+        spec.props.content.items = spec.props.content.items
+          // ['inline'] => [['emoji', 'hr', ...]]
+          // ['media'] => [['media']]
+          .map(item =>
+            isString(item)
+              ? Array.isArray(specs[item])
+                ? specs[item]
+                : [item]
+              : item,
+          )
+          // [['emoji', 'hr', 'inline_code']] => [['emoji', 'hr', ['text', { marks: {} }]]]
+          .map(item =>
+            item
+              .map(subItem =>
+                Array.isArray(specs[subItem])
+                  ? specs[subItem]
+                  : isString(subItem)
+                  ? subItem
+                  : // Now `NoMark` produces `items: []`, should be fixed in generator
+                    ['text', subItem],
+              )
+              // Remove unsupported nodes & marks
+              // Filter nodes
+              .filter(subItem =>
+                // When Mark or `nodes` is undefined don't filter
+                !nodes
+                  ? true
+                  : nodes.indexOf(
+                      Array.isArray(subItem) ? subItem[0] : subItem,
+                    ) > -1,
+              )
+              // Filter marks
+              .map(subItem =>
+                Array.isArray(subItem) && marks
+                  ? /**
+                     * TODO: Probably try something like immer, but it's 3.3kb gzipped.
+                     * Not worth it just for this.
+                     */
+                    [subItem[0], mapMarksItems(subItem[1])]
+                  : subItem,
+              ),
+          );
+      }
+    }
+
+    newSpecs[k] = spec;
+    return newSpecs;
+  }, {});
+}
 
 function getOptionsForType(type: string, list?: Content): false | object {
   if (!list) {
@@ -92,299 +207,432 @@ function validateAttrs(spec: AttributesSpec, value): boolean {
   }
 }
 
-export interface Output {
-  valid: boolean;
-  entity: Entity;
-}
+const getUnsupportedOptions = (spec?: ValidatorSpec) => {
+  if (spec && spec.props && spec.props.content) {
+    const {
+      allowUnsupportedBlock,
+      allowUnsupportedInline,
+    } = spec.props.content;
+    return { allowUnsupportedBlock, allowUnsupportedInline };
+  }
+  return {};
+};
 
-export type ErrorCallback = (entity: Entity, err: string) => Entity;
-
-const invalidChildContent = (child: Entity, errorCallback?: ErrorCallback) => {
-  const errMsg = `${child.type}: invalid content.`;
+const invalidChildContent = (
+  child: Entity,
+  errorCallback?: ErrorCallback,
+  parentSpec?: ValidatorSpec,
+) => {
+  const message = `${child.type}: invalid content.`;
   if (!errorCallback) {
-    throw new Error(errMsg);
+    throw new Error(message);
   } else {
-    return errorCallback({ ...child }, errMsg);
+    return errorCallback(
+      { ...child },
+      {
+        code: VALIDATION_ERRORS.INVALID_CONTENT,
+        message,
+      },
+      getUnsupportedOptions(parentSpec),
+    );
   }
 };
 
-export function validate(
+export const enum VALIDATION_ERRORS {
+  MISSING_PROPERTY = 'MISSING_PROPERTY',
+  REDUNDANT_PROPERTIES = 'REDUNDANT_PROPERTIES',
+  REDUNDANT_ATTRIBUTES = 'REDUNDANT_ATTRIBUTES',
+  REDUNDANT_MARKS = 'REDUNDANT_MARKS',
+  INVALID_TYPE = 'INVALID_TYPE',
+  INVALID_TEXT = 'INVALID_TEXT',
+  INVALID_CONTENT = 'INVALID_CONTENT',
+  INVALID_CONTENT_LENGTH = 'INVALID_CONTENT_LENGTH',
+  INVALID_ATTRIBUTES = 'INVALID_ATTRIBUTES',
+  DEPRECATED = 'DEPRECATED',
+}
+
+type ErrorMetadata = { [key: string]: any };
+
+export interface ValidationError {
+  code: VALIDATION_ERRORS;
+  message: string;
+  meta?: ErrorMetadata;
+}
+
+export type ErrorCallback = (
   entity: Entity,
-  errorCallback?: ErrorCallback,
-  parentContent?: Content,
-): Output {
-  const { type } = entity;
-  const newEntity = { ...entity };
+  /**
+   * I couldn't find any way to do index based typing for enum using TS 2.6.
+   * We can change it to 'MISSING_PROPERTY' | 'REDUNDANT_PROPERTIES' | ...
+   * if you need type for meta in future.
+   */
+  error: ValidationError,
+  options: {
+    allowUnsupportedBlock?: boolean;
+    allowUnsupportedInline?: boolean;
+  },
+) => Entity | undefined;
 
-  const err = (msg: string): Output => {
-    const errMsg = `${type}: ${msg}.`;
-    if (errorCallback) {
-      return {
-        valid: false,
-        entity: errorCallback(newEntity, errMsg) as Entity,
-      };
-    } else {
-      throw new Error(errMsg);
-    }
-  };
+// `loose` - ignore and filter extra props or attributes
+export type ValidationMode = 'strict' | 'loose';
 
-  // Don't validate applicationCard
-  if (type === 'applicationCard') {
-    return err('applicationCard is not supported');
-  }
+export interface ValidationOptions {
+  mode?: ValidationMode;
+  // Allow attributes starting with `__` without validation
+  allowPrivateAttributes?: boolean;
+}
 
-  if (type) {
-    const options = getOptionsForType(type, parentContent);
-    if (options === false) {
-      return err('type not allowed here');
-    }
+export interface Output {
+  valid: boolean;
+  entity?: Entity;
+}
 
-    const spec = specs[type];
-    if (!spec) {
-      throw new Error(`${type}: No validation spec found for type!`);
-    }
+export function validator(
+  nodes?: Array<string>,
+  marks?: Array<string>,
+  options?: ValidationOptions,
+) {
+  const validatorSpecs = createSpec(nodes, marks);
+  const { mode = 'strict', allowPrivateAttributes = false } = options || {};
 
-    const validator: ValidatorSpec = {
-      ...spec,
-      ...options,
-      // options with props can override props of spec
-      ...(spec.props
-        ? { props: { ...spec.props, ...(options['props'] || {}) } }
-        : {}),
+  const validate = (
+    entity: Entity,
+    errorCallback?: ErrorCallback,
+    allowed?: Content,
+    parentSpec?: ValidatorSpec,
+  ): Output => {
+    const { type } = entity;
+    let newEntity = { ...entity };
+
+    const err = (
+      code: VALIDATION_ERRORS,
+      msg: string,
+      meta?: ErrorMetadata,
+    ): Output => {
+      const message = `${type}: ${msg}.`;
+      if (errorCallback) {
+        return {
+          valid: false,
+          entity: errorCallback(
+            newEntity,
+            { code, message, meta },
+            getUnsupportedOptions(parentSpec),
+          ),
+        };
+      } else {
+        throw new Error(message);
+      }
     };
 
-    if (validator) {
-      // Required
-      if (validator.required) {
-        if (!validator.required.every(prop => isDefined(entity[prop]))) {
-          return err('required prop missing');
-        }
+    // Don't validate applicationCard
+    if (type === 'applicationCard') {
+      return err(
+        VALIDATION_ERRORS.DEPRECATED,
+        'applicationCard is not supported',
+      );
+    }
+
+    if (type) {
+      const typeOptions = getOptionsForType(type, allowed);
+      if (typeOptions === false) {
+        return err(VALIDATION_ERRORS.INVALID_TYPE, 'type not allowed here');
       }
 
-      if (validator.props) {
-        // Accumulate the Content validator
-        if (isString(validator.props.content)) {
-          validator.props.content = specs[validator.props.content];
-        }
+      const spec = validatorSpecs[type];
+      if (!spec) {
+        return err(
+          VALIDATION_ERRORS.INVALID_TYPE,
+          `${type}: No validation spec found for type!`,
+        );
+      }
 
-        // It's possible to cache some of the values to improve performance
-        if (validator.props.content) {
-          // Normalize [{ type: 'array', items: []}]
-          if (!validator.props.content.items) {
-            validator.props.content = {
-              type: 'array',
-              items: ((validator.props.content as any) || []).map(
-                arr => arr.items,
-              ),
-            };
-          }
-          validator.props.content.items = validator.props.content.items
-            // ['inline'] => [['emoji', 'hr', ...]]
-            // ['media'] => [['media']]
-            .map(
-              item =>
-                isString(item)
-                  ? Array.isArray(specs[item])
-                    ? specs[item]
-                    : [item]
-                  : item,
-            )
-            // [['emoji', 'hr', 'inline_code']] => [['emoji', 'hr', ['text', { marks: {} }]]]
-            .map(item =>
-              item.map(
-                subItem =>
-                  Array.isArray(specs[subItem]) ? specs[subItem] : subItem,
-              ),
+      const validator: ValidatorSpec = {
+        ...spec,
+        ...typeOptions,
+        // options with props can override props of spec
+        ...(spec.props
+          ? { props: { ...spec.props, ...(typeOptions['props'] || {}) } }
+          : {}),
+      };
+
+      if (validator) {
+        // Required
+        if (validator.required) {
+          if (!validator.required.every(prop => isDefined(entity[prop]))) {
+            return err(
+              VALIDATION_ERRORS.MISSING_PROPERTY,
+              'required prop missing',
             );
+          }
         }
 
-        // Check text
-        if (validator.props.text) {
+        if (validator.props) {
+          // Accumulate the Content validator
+          if (validator.props.content) {
+          }
+
+          // Check text
+          if (validator.props.text) {
+            if (
+              isDefined(entity.text) &&
+              !validateAttrs(validator.props.text, entity.text)
+            ) {
+              return err(
+                VALIDATION_ERRORS.INVALID_TEXT,
+                `'text' validation failed`,
+              );
+            }
+          }
+
+          // Content Length
           if (
-            isDefined(entity.text) &&
-            !validateAttrs(validator.props.text, entity.text)
+            validator.props.content &&
+            isDefined(validator.props.content.minItems) &&
+            validator.props.content.minItems! >
+              ((entity.content && entity.content.length) || 0)
           ) {
-            return err(`'text' validation failed`);
-          }
-        }
-
-        // Content Length
-        if (
-          validator.props.content &&
-          isDefined(validator.props.content.minItems) &&
-          validator.props.content.minItems! >
-            ((entity.content && entity.content.length) || 0)
-        ) {
-          return err(
-            `'content' should have more than ${
-              validator.props.content.minItems
-            } child`,
-          );
-        }
-
-        // Required Props
-        if (
-          !Object.keys(validator.props).every(
-            v => validator.props![v].optional || entity[v],
-          )
-        ) {
-          return err('required prop missing');
-        }
-
-        // Attributes
-        let validatorProps;
-        // media attrs is an array
-        if (Array.isArray(validator.props.attrs)) {
-          const { type } = entity.attrs;
-          if (!type) {
-            return err(`'attrs' validation failed`);
-          }
-          const validatorPropsArr = validator.props.attrs.filter(
-            attr => attr.props.type.values.indexOf(entity.attrs.type) > -1,
-          );
-
-          if (validatorPropsArr.length === 0) {
-            return err(`'attrs' type '${type}' is invalid`);
+            const { minItems, ...rest } = validator.props.content;
+            return err(
+              VALIDATION_ERRORS.INVALID_CONTENT_LENGTH,
+              `'content' should have more than ${minItems} child`,
+              { minItems, rest },
+            );
           }
 
-          validatorProps = validatorPropsArr[0];
-        } else {
-          validatorProps = validator.props.attrs;
-        }
-
-        // Attributes Validation
-        if (validatorProps && validatorProps.props) {
+          // Required Props
           if (
-            entity.attrs &&
-            !Object.keys(validatorProps.props).every(k =>
-              validateAttrs(validatorProps.props[k], entity.attrs[k]),
+            !Object.keys(validator.props).every(
+              v => validator.props![v].optional || entity[v],
             )
-          ) {
-            return err(`'attrs' validation failed`);
-          }
-        }
-
-        // Extra Props
-        if (!Object.keys(entity).every(k => !!validator.props![k])) {
-          return err(`redundant props found: ${JSON.stringify(entity)}`);
-        }
-
-        // Extra Attributes
-        if (entity.attrs && validator.props) {
-          if (
-            !validatorProps ||
-            !Object.keys(entity.attrs).every(k => !!validatorProps.props[k])
           ) {
             return err(
-              `redundant attributes found: ${JSON.stringify(entity.attrs)}`,
+              VALIDATION_ERRORS.MISSING_PROPERTY,
+              'required prop missing',
             );
           }
-        }
 
-        // Children
-        if (validator.props.content) {
-          if (entity.content) {
-            newEntity.content = entity.content.map((child, index) => {
-              // Only go inside valid branch
-              const validSets = validator.props!.content!.items.filter(
-                set =>
-                  /**
-                   * Manually treat listItem content as Tuple,
-                   * hopefully tsc has new AST for Tuple in v3.0
-                   */
-                  type === 'listItem'
-                    ? true
-                    : set.some(
-                        // [p, hr, ...] or [p, [text, {}], ...]
-                        spec =>
-                          (Array.isArray(spec) ? spec[0] : spec) === child.type,
-                      ),
+          // Attributes
+          let validatorAttrs;
+
+          // Attributes Validation
+          if (validator.props.attrs && entity.attrs) {
+            const attrOptions = makeArray(validator.props.attrs);
+            let invalidAttrs;
+
+            /**
+             * Attrs can be union type so try each path
+             * attrs: [{ props: { url: { type: 'string' } } }, { props: { data: {} } }],
+             * Gotcha: It will always report the last failure.
+             */
+            for (let i = 0, length = attrOptions.length; i < length; ++i) {
+              const attrOption = attrOptions[i];
+              invalidAttrs = Object.keys(attrOption.props).reduce<
+                Array<string>
+              >(
+                (attrs, k) =>
+                  validateAttrs(attrOption.props[k], entity.attrs[k])
+                    ? attrs
+                    : attrs.concat(k),
+                [],
               );
-
-              if (validSets.length) {
-                /**
-                 * In case of multiple valid branches, we are treating them as Tuple.
-                 * Thought this assumption is incorrect but it works for us since we don't
-                 * have any valid alternative branches.
-                 */
-                const setIndex =
-                  validSets.length > 1
-                    ? Math.min(index, validSets.length - 1)
-                    : 0;
-                const set = validSets[setIndex].filter(
-                  item => (Array.isArray(item) ? item[0] : item) === child.type,
-                );
-
-                if (set.length === 0) {
-                  return invalidChildContent(child, errorCallback);
-                }
-
-                /**
-                 * When there's multiple possible branches try all of them.
-                 * If all of them fails, throw the first one.
-                 * e.g.- [['text', { marks: ['a'] }], ['text', { marks: ['b'] }]]
-                 */
-                let firstError;
-                let firstChild;
-                for (let i = 0, len = set.length; i < len; i++) {
-                  try {
-                    const { valid, entity: newChildEntity } = validate(
-                      child,
-                      errorCallback,
-                      [set[i]],
-                    );
-                    if (valid) {
-                      return newChildEntity;
-                    } else {
-                      firstChild = firstChild || newChildEntity;
-                    }
-                  } catch (error) {
-                    firstError = firstError || error;
-                  }
-                }
-                if (!errorCallback) {
-                  throw firstError;
-                } else {
-                  return firstChild;
-                }
-              } else {
-                return invalidChildContent(child, errorCallback);
+              if (!invalidAttrs.length) {
+                validatorAttrs = attrOption;
+                break;
               }
-            });
-          } else {
-            return err('missing `content` prop');
-          }
-        }
+            }
 
-        // Marks
-        if (entity.marks) {
-          if (validator.props.marks) {
-            const { items, maxItems } = validator.props!.marks!;
-            newEntity.marks = entity.marks.map(
-              child =>
-                validate(
-                  child,
-                  errorCallback,
-                  /**
-                   * Kind of handling `maxItems` manually, can be fixed through generator.
-                   * Now NoMark produces `items: []`, we need it to be `items: [[]]`.
-                   */
-                  maxItems === 0 ? [] : items[0] || [],
-                ).entity,
-            );
-          } else {
-            return err('redundant marks');
+            if (invalidAttrs.length) {
+              return err(
+                VALIDATION_ERRORS.INVALID_ATTRIBUTES,
+                `'attrs' validation failed`,
+                { attrs: invalidAttrs },
+              );
+            }
           }
-        }
-      } else {
-        // If there's no validator.props then there shouldn't be any key except `type`
-        if (Object.keys(entity).length > 1) {
-          return err(`redundant props found: ${JSON.stringify(entity)}`);
+
+          // Extra Props
+          // Filter out private and required properties
+          const props = Object.keys(entity).filter(
+            k => !(validator.props![k] && !validator.props![k].optional),
+          );
+
+          if (!props.every(p => !!validator.props![p])) {
+            if (mode === 'loose') {
+              newEntity = { type };
+              props
+                .filter(p => !!validator.props![p])
+                .reduce((acc, p) => copy(entity, acc, p), newEntity);
+            } else {
+              return err(
+                VALIDATION_ERRORS.REDUNDANT_PROPERTIES,
+                `redundant props found: ${props.join(', ')}`,
+              );
+            }
+          }
+
+          // Extra Attributes
+          if (entity.attrs) {
+            const attrs = Object.keys(entity.attrs).filter(
+              k => !(allowPrivateAttributes && k.startsWith('__')),
+            );
+            if (
+              !validatorAttrs ||
+              !attrs.every(a => !!validatorAttrs.props[a])
+            ) {
+              if (mode === 'loose') {
+                newEntity.attrs = {};
+                attrs
+                  .filter(a => !!validatorAttrs.props![a])
+                  .reduce(
+                    (acc, p) => copy(entity.attrs, acc, p),
+                    newEntity.attrs,
+                  );
+              } else {
+                return err(
+                  VALIDATION_ERRORS.REDUNDANT_ATTRIBUTES,
+                  `redundant attributes found: ${attrs
+                    .filter(a => !validatorAttrs.props![a])
+                    .join(', ')}`,
+                );
+              }
+            }
+          }
+
+          // Children
+          if (validator.props.content) {
+            if (entity.content) {
+              newEntity.content = entity.content
+                .map((child, index) => {
+                  // Only go inside valid branch
+                  const validSets = validator.props!.content!.items.filter(
+                    set =>
+                      /**
+                       * Manually treat listItem content as Tuple,
+                       * hopefully tsc has new AST for Tuple in v3.0
+                       */
+                      type === 'listItem'
+                        ? true
+                        : set.some(
+                            // [p, hr, ...] or [p, [text, {}], ...]
+                            spec =>
+                              (Array.isArray(spec) ? spec[0] : spec) ===
+                              child.type,
+                          ),
+                  );
+
+                  if (validSets.length) {
+                    /**
+                     * In case of multiple valid branches, we are treating them as Tuple.
+                     * Thought this assumption is incorrect but it works for us since we don't
+                     * have any valid alternative branches.
+                     */
+                    const setIndex =
+                      validSets.length > 1
+                        ? Math.min(index, validSets.length - 1)
+                        : 0;
+                    const set = validSets[setIndex].filter(
+                      item =>
+                        (Array.isArray(item) ? item[0] : item) === child.type,
+                    );
+
+                    if (set.length === 0) {
+                      return invalidChildContent(
+                        child,
+                        errorCallback,
+                        validator,
+                      );
+                    }
+
+                    /**
+                     * When there's multiple possible branches try all of them.
+                     * If all of them fails, throw the first one.
+                     * e.g.- [['text', { marks: ['a'] }], ['text', { marks: ['b'] }]]
+                     */
+                    let firstError;
+                    let firstChild;
+                    for (let i = 0, len = set.length; i < len; i++) {
+                      try {
+                        const { valid, entity: newChildEntity } = validate(
+                          child,
+                          errorCallback,
+                          [set[i]],
+                          validator,
+                        );
+                        if (valid) {
+                          return newChildEntity;
+                        } else {
+                          firstChild = firstChild || newChildEntity;
+                        }
+                      } catch (error) {
+                        firstError = firstError || error;
+                      }
+                    }
+                    if (!errorCallback) {
+                      throw firstError;
+                    } else {
+                      return firstChild;
+                    }
+                  } else {
+                    return invalidChildContent(child, errorCallback, validator);
+                  }
+                })
+                .filter(Boolean);
+            } else if (!validator.props.content.optional) {
+              return err(
+                VALIDATION_ERRORS.MISSING_PROPERTY,
+                'missing `content` prop',
+              );
+            }
+          }
+
+          // Marks
+          if (entity.marks) {
+            if (validator.props.marks) {
+              const { items } = validator.props!.marks!;
+              const marksSet = items.length
+                ? Array.isArray(items[0])
+                  ? items[0]
+                  : items
+                : [];
+              const newMarks = entity.marks
+                .filter(mark =>
+                  mode === 'strict' && marks
+                    ? marks.indexOf(mark.type) > -1
+                    : true,
+                )
+                .map(
+                  mark =>
+                    validate(mark, errorCallback, marksSet, validator).entity,
+                )
+                .filter(Boolean) as Entity[];
+              if (newMarks.length) {
+                newEntity.marks = newMarks;
+              } else {
+                delete newEntity.marks;
+                return { valid: false, entity: newEntity };
+              }
+            } else {
+              return err(VALIDATION_ERRORS.REDUNDANT_MARKS, 'redundant marks');
+            }
+          }
+        } else {
+          // If there's no validator.props then there shouldn't be any key except `type`
+          if (Object.keys(entity).length > 1) {
+            return err(
+              VALIDATION_ERRORS.REDUNDANT_PROPERTIES,
+              `redundant props found: ${Object.keys(entity).join(', ')}`,
+            );
+          }
         }
       }
+    } else {
+      return err(
+        VALIDATION_ERRORS.INVALID_TYPE,
+        'ProseMirror Node/Mark should contain a `type`',
+      );
     }
-  } else {
-    return err('ProseMirror Node/Mark should contain a `type`');
-  }
-  return { valid: true, entity: newEntity };
+    return { valid: true, entity: newEntity };
+  };
+
+  return validate;
 }

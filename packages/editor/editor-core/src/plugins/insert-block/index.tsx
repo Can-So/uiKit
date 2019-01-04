@@ -4,7 +4,7 @@ import { WithProviders } from '@atlaskit/editor-common';
 import { pluginKey as blockTypeStateKey } from '../block-type/pm-plugins/main';
 import { stateKey as mediaStateKey } from '../media/pm-plugins/main';
 import { stateKey as hyperlinkPluginKey } from '../hyperlink/pm-plugins/main';
-import { mentionPluginKey as mentionStateKey } from '../mentions/pm-plugins/main';
+import { mentionPluginKey } from '../mentions';
 import { pluginKey as tablesStateKey } from '../table/pm-plugins/main';
 import { stateKey as imageUploadStateKey } from '../image-upload/pm-plugins/main';
 import { pluginKey as placeholderTextStateKey } from '../placeholder-text';
@@ -20,6 +20,8 @@ import WithPluginState from '../../ui/WithPluginState';
 import { ToolbarSize } from '../../ui/Toolbar';
 import ToolbarInsertBlock from './ui/ToolbarInsertBlock';
 import { insertBlockType } from '../block-type/commands';
+import { startImageUpload } from '../image-upload/pm-plugins/commands';
+import { pluginKey as typeAheadPluginKey } from '../type-ahead/pm-plugins/main';
 
 const toolbarSizeToButtons = toolbarSize => {
   switch (toolbarSize) {
@@ -27,7 +29,7 @@ const toolbarSizeToButtons = toolbarSize => {
     case ToolbarSize.XL:
     case ToolbarSize.L:
     case ToolbarSize.M:
-      return 5;
+      return 6;
 
     case ToolbarSize.S:
       return 2;
@@ -40,6 +42,7 @@ const toolbarSizeToButtons = toolbarSize => {
 export interface InsertBlockOptions {
   insertMenuItems?: any;
   horizontalRuleEnabled?: boolean;
+  nativeStatusSupported?: boolean;
 }
 
 const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
@@ -61,10 +64,11 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
       return (
         <WithPluginState
           plugins={{
+            typeAheadState: typeAheadPluginKey,
             blockTypeState: blockTypeStateKey,
             mediaState: mediaStateKey,
+            mentionState: mentionPluginKey,
             tablesState: tablesStateKey,
-            mentionsState: mentionStateKey,
             macroState: macroStateKey,
             hyperlinkState: hyperlinkPluginKey,
             emojiState: emojiPluginKey,
@@ -74,9 +78,10 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
             layoutState: layoutStateKey,
           }}
           render={({
+            typeAheadState,
+            mentionState,
             blockTypeState,
             mediaState,
-            mentionsState,
             tablesState,
             macroState = {} as MacroState,
             hyperlinkState,
@@ -90,27 +95,24 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               buttons={buttons}
               isReducedSpacing={isToolbarReducedSpacing}
               isDisabled={disabled}
+              isTypeAheadAllowed={typeAheadState.isAllowed}
               editorView={editorView}
               tableSupported={!!tablesState}
-              mentionsEnabled={mentionsState && mentionsState.enabled}
+              actionSupported={!!editorView.state.schema.nodes.taskItem}
+              mentionsSupported={!!(mentionState && mentionState.provider)}
+              mentionsEnabled={mentionState}
               decisionSupported={!!editorView.state.schema.nodes.decisionItem}
               dateEnabled={!!dateState}
               placeholderTextEnabled={
                 placeholderTextState && placeholderTextState.allowInserting
               }
               layoutSectionEnabled={!!layoutState}
-              insertMentionQuery={
-                mentionsState && mentionsState.insertMentionQuery
-              }
-              mentionsSupported={!!mentionsState}
               mediaUploadsEnabled={mediaState && mediaState.allowsUploads}
               onShowMediaPicker={mediaState && mediaState.showMediaPicker}
               mediaSupported={!!mediaState}
               imageUploadSupported={!!imageUpload}
               imageUploadEnabled={imageUpload && imageUpload.enabled}
-              handleImageUpload={
-                imageUpload && imageUpload.handleImageUpload.bind(imageUpload)
-              }
+              handleImageUpload={startImageUpload}
               availableWrapperBlockTypes={
                 blockTypeState.availableWrapperBlockTypes
               }
@@ -123,6 +125,7 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               emojiDisabled={!emojiState || !emojiState.enabled}
               insertEmoji={emojiState && emojiState.insertEmoji}
               emojiProvider={providers.emojiProvider}
+              nativeStatusSupported={options.nativeStatusSupported}
               horizontalRuleEnabled={options.horizontalRuleEnabled}
               onInsertBlockType={insertBlockType}
               onInsertMacroFromMacroBrowser={insertMacroFromMacroBrowser}

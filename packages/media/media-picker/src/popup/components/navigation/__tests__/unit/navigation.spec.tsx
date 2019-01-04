@@ -4,6 +4,7 @@ import Dropdown from '@atlaskit/dropdown-menu';
 import RefreshIcon from '@atlaskit/icon/glyph/refresh';
 import DropdownMenu, { DropdownItem } from '@atlaskit/dropdown-menu';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
+import { mountWithIntlContext, fakeIntl } from '@atlaskit/media-test-helpers';
 import {
   getComponentClassWithStore,
   mockStore,
@@ -42,9 +43,10 @@ const ConnectedNavigationWithStore = getComponentClassWithStore(
 const createConnectedComponent = () => {
   const store = mockStore();
   const dispatch = store.dispatch;
-  const component = shallow(
+  const component = mountWithIntlContext(
     <ConnectedNavigationWithStore store={store} />,
   ).find(Navigation);
+
   return { component, dispatch };
 };
 
@@ -156,6 +158,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 
@@ -190,6 +193,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 
@@ -207,6 +211,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 
@@ -232,6 +237,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 
@@ -244,12 +250,12 @@ describe('<Navigation />', () => {
       expect(component.find(DropdownItem).get(1).props.children).toEqual(
         'you@google.com',
       );
-      expect(component.find(DropdownItem).get(2).props.children).toEqual(
-        'Add account',
-      );
-      expect(component.find(DropdownItem).get(3).props.children).toEqual(
-        'Unlink Account',
-      );
+      expect(
+        component.find(DropdownItem).get(2).props.children.props.defaultMessage,
+      ).toEqual('Add account');
+      expect(
+        component.find(DropdownItem).get(3).props.children.props.defaultMessage,
+      ).toEqual('Unlink Account');
     });
 
     it('should retrieve available Dropbox Accounts', () => {
@@ -262,6 +268,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 
@@ -274,12 +281,12 @@ describe('<Navigation />', () => {
       expect(component.find(DropdownItem).get(1).props.children).toEqual(
         'you@dropbox.com',
       );
-      expect(component.find(DropdownItem).get(2).props.children).toEqual(
-        'Add account',
-      );
-      expect(component.find(DropdownItem).get(3).props.children).toEqual(
-        'Unlink Account',
-      );
+      expect(
+        component.find(DropdownItem).get(2).props.children.props.defaultMessage,
+      ).toEqual('Add account');
+      expect(
+        component.find(DropdownItem).get(3).props.children.props.defaultMessage,
+      ).toEqual('Unlink Account');
     });
 
     it('should switch active account when clicking on inactive one', () => {
@@ -292,6 +299,7 @@ describe('<Navigation />', () => {
           onChangePath={onChangePath}
           onStartAuth={onStartAuth}
           onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
         />,
       );
 

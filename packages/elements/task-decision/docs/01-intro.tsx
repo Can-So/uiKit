@@ -1,27 +1,18 @@
-import { md } from '@atlaskit/docs';
+import * as React from 'react';
+import { md, Example, Props, code } from '@atlaskit/docs';
+import TaskDecisionExample from '../examples/00-decision-item';
+const TaskDecisionSource = require('!!raw-loader!../examples/00-decision-item');
+
+const TaskDecisionProps = require('!!extract-react-types-loader!../src/components/DecisionItem');
 
 export default md`
-  # Task/Decision
+  This component provides components for rendering tasks and decisions.
 
-  This provides components for rendering tasks and decisions.
-
-  ## Try it out
-
-  Interact with a [live demo of the @atlaskit/task-decision component](https://atlaskit.atlassian.com/packages/elements/task-decision).
-
-  ## Installation
-
-  ~~~js
-  npm install @atlaskit/task-decision
-  # or
-  yarn add @atlaskit/task-decision
-  ~~~
-
-  ## Using the component
+  ## Usage
 
   Use the component in your React app as follows:
 
-  ~~~js
+  ${code`
   import { DecisionList, DecisionItem } from '@atlaskit/task-decision';
   ReactDOM.render(<DecisionItem>A decision</DecisionItem>, container);
   ReactDOM.render(
@@ -31,5 +22,17 @@ export default md`
     </DecisionList>,
     container,
   );
-  ~~~
+   };`}
+
+   ${(
+     <Example
+       packageName="@atlaskit/status"
+       Component={TaskDecisionExample}
+       title="Status Picker"
+       source={TaskDecisionSource}
+     />
+   )}
+
+  ${<Props heading="Decision Props" props={TaskDecisionProps} />}
 `;
+// TODO: Add more information for task.

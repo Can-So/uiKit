@@ -3,7 +3,8 @@ import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock/src/client';
 
 import * as React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl } from 'enzyme-react-intl';
 
 import * as UtilAnalytics from '../../../util/analytics';
 
@@ -17,7 +18,7 @@ const mentionResource = new MentionResource({
 });
 
 function setupPicker(props?: Props): ReactWrapper<Props, State> {
-  return mount(
+  return mountWithIntl(
     <MentionPicker
       resourceProvider={mentionResource}
       query=""
@@ -63,7 +64,7 @@ describe('MentionPicker', () => {
   it('should fire analytics when new mention data is fetched', () => {
     mentionResource.notify(Date.now(), mentionsResult, query, true);
 
-    return new Promise(resolve => setTimeout(resolve)).then(() => {
+    return new Promise(resolve => window.setTimeout(resolve)).then(() => {
       expect(fireAnalyticsMock).toHaveBeenCalled();
 
       const firstArgument = fireAnalyticsMock.mock.calls[0][0];
@@ -92,7 +93,7 @@ describe('MentionPicker', () => {
   it('should not fire analytics when mention data is from local search', () => {
     mentionResource.notify(Date.now(), mentionsResult, query, false);
 
-    return new Promise(resolve => setTimeout(resolve)).then(() => {
+    return new Promise(resolve => window.setTimeout(resolve)).then(() => {
       expect(fireAnalyticsMock).not.toHaveBeenCalled();
     });
   });

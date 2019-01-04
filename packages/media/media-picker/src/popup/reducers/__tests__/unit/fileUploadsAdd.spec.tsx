@@ -1,23 +1,48 @@
 import fileUploadsAdd from '../../fileUploadsAdd';
 import { mockState } from '../../../mocks/index';
-import { State } from '../../../domain/index';
+import { LocalUpload, State } from '../../../domain/index';
 import { fileUploadsStart } from '../../../actions/fileUploadsStart';
+import { MediaFile } from '../../../../domain/file';
 
 describe('fileUploadsAdd() reducer', () => {
+  const MOCK_TIMESTAMP = Date.now();
+  let dateNowSpy: jest.SpyInstance<any>;
+
+  beforeAll(() => {
+    // Lock Time
+    dateNowSpy = jest.spyOn(Date, 'now');
+    dateNowSpy.mockImplementation(() => MOCK_TIMESTAMP);
+  });
+
+  afterAll(() => {
+    dateNowSpy.mockReset();
+    dateNowSpy.mockRestore();
+  });
+
   const nowDate = Date.now();
-  const file1 = {
+  const upfrontId = Promise.resolve('1');
+  const occurrenceKey = 'key';
+  const file1: MediaFile = {
     name: 'some-file1.ext',
     id: 'some-id1',
     type: 'image/some',
     creationDate: nowDate,
     size: 42,
+    upfrontId,
+    occurrenceKey,
+    userUpfrontId: Promise.resolve(''),
+    userOccurrenceKey: Promise.resolve(''),
   };
-  const file2 = {
+  const file2: MediaFile = {
     name: 'some-file2.ext',
     id: 'some-id2',
     type: 'image/some',
     creationDate: nowDate,
     size: 42,
+    upfrontId,
+    occurrenceKey,
+    userUpfrontId: Promise.resolve(''),
+    userOccurrenceKey: Promise.resolve(''),
   };
 
   it('returns same state if action has different type', () => {
@@ -35,28 +60,25 @@ describe('fileUploadsAdd() reducer', () => {
       }),
     );
     expect(Object.keys(newState.uploads)).toHaveLength(2);
-    expect(newState.uploads['some-id1']).toEqual({
+    const expectedUpload: LocalUpload = {
       file: {
         metadata: {
           id: 'some-id1',
           name: 'some-file1.ext',
           mimeType: 'image/some',
           size: 42,
+          upfrontId,
+          occurrenceKey,
+          userUpfrontId: expect.any(Promise),
+          userOccurrenceKey: expect.any(Promise),
         },
-        dataURI: '',
       },
       progress: 0,
+      timeStarted: MOCK_TIMESTAMP,
       events: [],
       index: 0,
-      tenant: {
-        auth: {
-          baseUrl: 'some-api-url',
-          clientId: 'some-tenant-client-id',
-          token: 'some-tenant-client-token',
-        },
-        uploadParams: {},
-      },
-    });
+    };
+    expect(newState.uploads['some-id1']).toEqual(expectedUpload);
     expect(newState.uploads['some-id2'].index).toEqual(1);
   });
 
@@ -77,6 +99,8 @@ describe('fileUploadsAdd() reducer', () => {
       parentId: '',
       size: 42,
       serviceName: 'upload',
+      upfrontId,
+      occurrenceKey,
     });
   });
 

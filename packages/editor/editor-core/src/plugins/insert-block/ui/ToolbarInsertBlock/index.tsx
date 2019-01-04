@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { ReactElement } from 'react';
+import { ReactInstance } from 'react';
 import * as ReactDOM from 'react-dom';
+import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 import { EditorView } from 'prosemirror-view';
 import { Node as PMNode } from 'prosemirror-model';
 import AddIcon from '@atlaskit/icon/glyph/editor/add';
@@ -10,12 +11,14 @@ import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
 import CodeIcon from '@atlaskit/icon/glyph/editor/code';
 import InfoIcon from '@atlaskit/icon/glyph/editor/info';
 import MentionIcon from '@atlaskit/icon/glyph/editor/mention';
+import TaskIcon from '@atlaskit/icon/glyph/editor/task';
 import DecisionIcon from '@atlaskit/icon/glyph/editor/decision';
 import QuoteIcon from '@atlaskit/icon/glyph/quote';
 import EditorMoreIcon from '@atlaskit/icon/glyph/editor/more';
 import LinkIcon from '@atlaskit/icon/glyph/editor/link';
 import EmojiIcon from '@atlaskit/icon/glyph/editor/emoji';
 import DateIcon from '@atlaskit/icon/glyph/editor/date';
+import LabelIcon from '@atlaskit/icon/glyph/label';
 import PlaceholderTextIcon from '@atlaskit/icon/glyph/media-services/text';
 import LayoutTwoEqualIcon from '@atlaskit/icon/glyph/editor/layout-two-equal';
 import HorizontalRuleIcon from '@atlaskit/icon/glyph/editor/horizontal-rule';
@@ -24,11 +27,11 @@ import {
   EmojiPicker as AkEmojiPicker,
   EmojiProvider,
 } from '@atlaskit/emoji';
-import { Popup } from '@atlaskit/editor-common';
+import { Popup, akEditorMenuZIndex } from '@atlaskit/editor-common';
 import EditorActions from '../../../../actions';
 import {
   analyticsService as analytics,
-  analyticsDecorator,
+  withAnalytics,
 } from '../../../../analytics';
 import {
   toggleTable,
@@ -39,7 +42,12 @@ import {
 import { InsertMenuCustomItem } from '../../../../types';
 import DropdownMenu from '../../../../ui/DropdownMenu';
 import ToolbarButton from '../../../../ui/ToolbarButton';
-import { Wrapper, ButtonGroup, ExpandIconWrapper } from '../../../../ui/styles';
+import {
+  Wrapper,
+  ButtonGroup,
+  ExpandIconWrapper,
+  Shortcut,
+} from '../../../../ui/styles';
 import { BlockType } from '../../../block-type/types';
 import { MacroProvider } from '../../../macro/types';
 import { createTable } from '../../../table/actions';
@@ -48,18 +56,112 @@ import { showPlaceholderFloatingToolbar } from '../../../placeholder-text/action
 import { createHorizontalRule } from '../../../rule/pm-plugins/input-rule';
 import { TriggerWrapper } from './styles';
 import { insertLayoutColumns } from '../../../layout/actions';
-import { changeToTaskDecision } from '../../../tasks-and-decisions/commands';
-import { Command } from '../../../../commands';
+import { insertTaskDecision } from '../../../tasks-and-decisions/commands';
+import { Command } from '../../../../types';
 import { showLinkToolbar } from '../../../hyperlink/commands';
+import { insertMentionQuery } from '../../../mentions/commands/insert-mention-query';
+import { updateStatus } from '../../../status/actions';
+
+export const messages = defineMessages({
+  action: {
+    id: 'fabric.editor.action',
+    defaultMessage: 'Action item',
+    description: 'Also known as a “task”, “to do item”, or a checklist',
+  },
+  bulletList: {
+    id: 'fabric.editor.bulletList',
+    defaultMessage: 'Bullet list',
+    description: 'Also known as a “unordered list”',
+  },
+  orderedList: {
+    id: 'fabric.editor.orderedList',
+    defaultMessage: 'Ordered list',
+    description: 'Also known as a “numbered list”',
+  },
+  link: {
+    id: 'fabric.editor.link',
+    defaultMessage: 'Link',
+    description: 'Insert a hyperlink',
+  },
+  filesAndImages: {
+    id: 'fabric.editor.filesAndImages',
+    defaultMessage: 'Files & images',
+    description: 'Insert one or more files or images',
+  },
+  image: {
+    id: 'fabric.editor.image',
+    defaultMessage: 'Image',
+    description: 'Insert an image.',
+  },
+  mention: {
+    id: 'fabric.editor.mention',
+    defaultMessage: 'Mention',
+    description: 'Reference another person in your document',
+  },
+  emoji: {
+    id: 'fabric.editor.emoji',
+    defaultMessage: 'Emoji',
+    description: 'Insert an emoticon or smiley :-)',
+  },
+  table: {
+    id: 'fabric.editor.table',
+    defaultMessage: 'Table',
+    description: 'Inserts a table in the document',
+  },
+  decision: {
+    id: 'fabric.editor.decision',
+    defaultMessage: 'Decision',
+    description: 'Capture a decision you’ve made',
+  },
+  horizontalRule: {
+    id: 'fabric.editor.horizontalRule',
+    defaultMessage: 'Divider',
+    description: 'A horizontal rule or divider',
+  },
+  date: {
+    id: 'fabric.editor.date',
+    defaultMessage: 'Date',
+    description: 'Opens a date picker that lets you select a date',
+  },
+  placeholderText: {
+    id: 'fabric.editor.placeholderText',
+    defaultMessage: 'Placeholder text',
+    description: '',
+  },
+  columns: {
+    id: 'fabric.editor.columns',
+    defaultMessage: 'Columns',
+    description: 'Create a multi column section or layout',
+  },
+  status: {
+    id: 'fabric.editor.status',
+    defaultMessage: 'Status',
+    description:
+      'Inserts an item representing the status of an activity to task.',
+  },
+  viewMore: {
+    id: 'fabric.editor.viewMore',
+    defaultMessage: 'View more',
+    description: '',
+  },
+  insertMenu: {
+    id: 'fabric.editor.insertMenu',
+    defaultMessage: 'Insert',
+    description:
+      'Opens a menu of additional items that can be inserted into your document.',
+  },
+});
 
 export interface Props {
   buttons: number;
   isReducedSpacing: boolean;
   isDisabled?: boolean;
+  isTypeAheadAllowed?: boolean;
   editorView: EditorView;
   editorActions?: EditorActions;
   tableSupported?: boolean;
   mentionsEnabled?: boolean;
+  actionSupported?: boolean;
   decisionSupported?: boolean;
   mentionsSupported?: boolean;
   insertMentionQuery?: () => void;
@@ -67,7 +169,7 @@ export interface Props {
   mediaSupported?: boolean;
   imageUploadSupported?: boolean;
   imageUploadEnabled?: boolean;
-  handleImageUpload?: (editorView: EditorView) => {};
+  handleImageUpload?: (event?: Event) => Command;
   dateEnabled?: boolean;
   horizontalRuleEnabled?: boolean;
   placeholderTextEnabled?: boolean;
@@ -78,6 +180,7 @@ export interface Props {
   linkDisabled?: boolean;
   emojiDisabled?: boolean;
   insertEmoji?: (emojiId: EmojiId) => void;
+  nativeStatusSupported?: boolean;
   popupsMountPoint?: HTMLElement;
   popupsBoundariesElement?: HTMLElement;
   popupsScrollableElement?: HTMLElement;
@@ -109,11 +212,11 @@ const blockTypeIcons = {
 const isDetachedElement = el => !document.body.contains(el);
 const noop = () => {};
 
-export default class ToolbarInsertBlock extends React.PureComponent<
-  Props,
+class ToolbarInsertBlock extends React.PureComponent<
+  Props & InjectedIntlProps,
   State
 > {
-  private pickerRef: ReactElement<any>;
+  private pickerRef: ReactInstance;
   private button?;
 
   state: State = {
@@ -223,6 +326,7 @@ export default class ToolbarInsertBlock extends React.PureComponent<
       isDisabled,
       buttons: numberOfButtons,
       isReducedSpacing,
+      intl: { formatMessage },
     } = this.props;
 
     const items = this.createItems();
@@ -233,6 +337,7 @@ export default class ToolbarInsertBlock extends React.PureComponent<
       return null;
     }
 
+    const labelInsertMenu = formatMessage(messages.insertMenu);
     const toolbarButtonFactory = (disabled: boolean, items) => (
       <ToolbarButton
         ref={el => this.handleDropDownButtonRef(el, items)}
@@ -240,11 +345,12 @@ export default class ToolbarInsertBlock extends React.PureComponent<
         disabled={disabled}
         onClick={this.handleTriggerClick}
         spacing={isReducedSpacing ? 'none' : 'default'}
+        title={`${labelInsertMenu} /`}
         iconBefore={
           <TriggerWrapper>
-            <AddIcon label="Open or close insert block dropdown" />
+            <AddIcon label={labelInsertMenu} />
             <ExpandIconWrapper>
-              <ExpandIcon label="Open or close insert block dropdown" />
+              <ExpandIcon label={labelInsertMenu} />
             </ExpandIconWrapper>
           </TriggerWrapper>
         }
@@ -261,7 +367,7 @@ export default class ToolbarInsertBlock extends React.PureComponent<
             disabled={isDisabled || btn.isDisabled}
             iconBefore={btn.elemBefore}
             selected={btn.isActive}
-            title={btn.content}
+            title={btn.content + (btn.shortcut ? ' ' + btn.shortcut : '')}
             onClick={() => this.onItemActivated({ item: btn })}
           />
         ))}
@@ -279,6 +385,7 @@ export default class ToolbarInsertBlock extends React.PureComponent<
                 isOpen={isOpen}
                 fitHeight={188}
                 fitWidth={175}
+                zIndex={akEditorMenuZIndex}
               >
                 {toolbarButtonFactory(false, dropdownItems)}
               </DropdownMenu>
@@ -292,148 +399,178 @@ export default class ToolbarInsertBlock extends React.PureComponent<
 
   private createItems = () => {
     const {
+      isTypeAheadAllowed,
       tableSupported,
       mediaUploadsEnabled,
       mediaSupported,
       imageUploadSupported,
       imageUploadEnabled,
-      mentionsEnabled,
       mentionsSupported,
       availableWrapperBlockTypes,
+      actionSupported,
       decisionSupported,
       macroProvider,
       linkSupported,
       linkDisabled,
       emojiDisabled,
       emojiProvider,
+      nativeStatusSupported,
       insertMenuItems,
       dateEnabled,
       placeholderTextEnabled,
       horizontalRuleEnabled,
       layoutSectionEnabled,
+      intl: { formatMessage },
     } = this.props;
     let items: any[] = [];
 
-    if (linkSupported) {
+    if (actionSupported) {
+      const labelAction = formatMessage(messages.action);
       items.push({
-        content: 'Add link',
+        content: labelAction,
+        value: { name: 'action' },
+        elemBefore: <TaskIcon label={labelAction} />,
+        elemAfter: <Shortcut>{'[]'}</Shortcut>,
+        shortcut: '[]',
+      });
+    }
+
+    if (linkSupported) {
+      const labelLink = formatMessage(messages.link);
+      const shortcutLink = tooltip(addLink);
+      items.push({
+        content: labelLink,
         value: { name: 'link' },
         isDisabled: linkDisabled,
-        tooltipDescription: tooltip(addLink),
-        tooltipPosition: 'right',
-        elemBefore: <LinkIcon label="Add link" />,
+        elemBefore: <LinkIcon label={labelLink} />,
+        elemAfter: <Shortcut>{shortcutLink}</Shortcut>,
+        shortcut: shortcutLink,
       });
     }
     if (mediaSupported && mediaUploadsEnabled) {
+      const labelFilesAndImages = formatMessage(messages.filesAndImages);
       items.push({
-        content: 'Files and images',
+        content: labelFilesAndImages,
         value: { name: 'media' },
-        tooltipDescription: 'Files and Images',
-        tooltipPosition: 'right',
-        elemBefore: <EditorImageIcon label="Insert files and images" />,
+        elemBefore: <EditorImageIcon label={labelFilesAndImages} />,
       });
     }
     if (imageUploadSupported) {
+      const labelImage = formatMessage(messages.image);
       items.push({
-        content: 'Insert image',
+        content: labelImage,
         value: { name: 'image upload' },
         isDisabled: !imageUploadEnabled,
-        tooltipDescription: 'Insert image',
-        tooltipPosition: 'right',
-        elemBefore: <EditorImageIcon label="Insert image" />,
+        elemBefore: <EditorImageIcon label={labelImage} />,
       });
     }
     if (mentionsSupported) {
+      const labelMention = formatMessage(messages.mention);
       items.push({
-        content: 'Mention',
+        content: labelMention,
         value: { name: 'mention' },
-        isDisabled: !mentionsEnabled,
-        tooltipDescription: 'Mention a person (@)',
-        tooltipPosition: 'right',
-        elemBefore: <MentionIcon label="Add mention" />,
+        isDisabled: !isTypeAheadAllowed,
+        elemBefore: <MentionIcon label={labelMention} />,
+        elemAfter: <Shortcut>@</Shortcut>,
+        shortcut: '@',
       });
     }
     if (emojiProvider) {
+      const labelEmoji = formatMessage(messages.emoji);
       items.push({
-        content: 'Emoji',
+        content: labelEmoji,
         value: { name: 'emoji' },
         isDisabled: emojiDisabled,
-        tooltipDescription: 'Insert emoji (:)',
-        tooltipPosition: 'right',
-        elemBefore: <EmojiIcon label="Insert emoji" />,
+        elemBefore: <EmojiIcon label={labelEmoji} />,
         handleRef: this.handleButtonRef,
+        elemAfter: <Shortcut>:</Shortcut>,
+        shortcut: ':',
       });
     }
     if (tableSupported) {
+      const labelTable = formatMessage(messages.table);
+      const shortcutTable = tooltip(toggleTable);
       items.push({
-        content: 'Table',
+        content: labelTable,
         value: { name: 'table' },
-        tooltipDescription: tooltip(toggleTable),
-        tooltipPosition: 'right',
-        elemBefore: <TableIcon label="Insert table" />,
+        elemBefore: <TableIcon label={labelTable} />,
+        elemAfter: <Shortcut>{shortcutTable}</Shortcut>,
+        shortcut: shortcutTable,
       });
     }
     if (availableWrapperBlockTypes) {
       availableWrapperBlockTypes.forEach(blockType => {
         const BlockTypeIcon = blockTypeIcons[blockType.name];
+        const labelBlock = formatMessage(blockType.title);
+        const shortcutBlock = tooltip(
+          findKeymapByDescription(blockType.title.defaultMessage),
+        );
         items.push({
-          content: blockType.title,
+          content: labelBlock,
           value: blockType,
-          tooltipDescription: tooltip(findKeymapByDescription(blockType.title)),
-          tooltipPosition: 'right',
-          elemBefore: <BlockTypeIcon label={`Insert ${blockType} block`} />,
+          elemBefore: <BlockTypeIcon label={labelBlock} />,
+          elemAfter: <Shortcut>{shortcutBlock}</Shortcut>,
+          shortcut: shortcutBlock,
         });
       });
     }
     if (decisionSupported) {
+      const labelDecision = formatMessage(messages.decision);
       items.push({
-        content: 'Decision',
+        content: labelDecision,
         value: { name: 'decision' },
-        tooltipDescription: 'Insert decision',
-        tooltipPosition: 'right',
-        elemBefore: <DecisionIcon label="Insert decision" />,
+        elemBefore: <DecisionIcon label={labelDecision} />,
+        elemAfter: <Shortcut>{'<>'}</Shortcut>,
+        shortcut: '<>',
       });
     }
     if (
       horizontalRuleEnabled &&
       this.props.editorView.state.schema.nodes.rule
     ) {
+      const labelHorizontalRule = formatMessage(messages.horizontalRule);
       items.push({
-        content: 'Horizontal Rule',
+        content: labelHorizontalRule,
         value: { name: 'horizontalrule' },
-        tooltipDescription: 'Insert horizontal rule',
-        tooltipPosition: 'right',
-        elemBefore: <HorizontalRuleIcon label="Insert horizontal rule" />,
+        elemBefore: <HorizontalRuleIcon label={labelHorizontalRule} />,
+        elemAfter: <Shortcut>---</Shortcut>,
+        shortcut: '---',
       });
     }
 
     if (dateEnabled) {
+      const labelDate = formatMessage(messages.date);
       items.push({
-        content: 'Date',
+        content: labelDate,
         value: { name: 'date' },
-        tooltipDescription: 'Insert date',
-        tooltipPosition: 'right',
-        elemBefore: <DateIcon label="Insert date" />,
+        elemBefore: <DateIcon label={labelDate} />,
       });
     }
 
     if (placeholderTextEnabled) {
+      const labelPlaceholderText = formatMessage(messages.placeholderText);
       items.push({
-        content: 'Placeholder Text',
+        content: labelPlaceholderText,
         value: { name: 'placeholder text' },
-        tooltipDescription: 'Add placeholder text',
-        tooltipPosition: 'right',
-        elemBefore: <PlaceholderTextIcon label="Add placeholder text" />,
+        elemBefore: <PlaceholderTextIcon label={labelPlaceholderText} />,
       });
     }
 
     if (layoutSectionEnabled) {
+      const labelColumns = formatMessage(messages.columns);
       items.push({
-        content: 'Columns',
+        content: labelColumns,
         value: { name: 'layout' },
-        tooltipDescription: 'Insert columns',
-        tooltipPosition: 'right',
-        elemBefore: <LayoutTwoEqualIcon label="Insert columns" />,
+        elemBefore: <LayoutTwoEqualIcon label={labelColumns} />,
+      });
+    }
+
+    if (nativeStatusSupported) {
+      const labelStatus = formatMessage(messages.status);
+      items.push({
+        content: labelStatus,
+        value: { name: 'status' },
+        elemBefore: <LabelIcon label={labelStatus} />,
       });
     }
 
@@ -443,99 +580,143 @@ export default class ToolbarInsertBlock extends React.PureComponent<
       // has time to implement this button before it disappears.
       // Should be safe to delete soon. If in doubt ask Leandro Lemos (llemos)
     } else if (typeof macroProvider !== 'undefined' && macroProvider) {
+      const labelViewMore = formatMessage(messages.viewMore);
       items.push({
-        content: 'View more',
+        content: labelViewMore,
         value: { name: 'macro' },
-        tooltipDescription: 'View more',
-        tooltipPosition: 'right',
-        elemBefore: <EditorMoreIcon label="View more" />,
+        elemBefore: <EditorMoreIcon label={labelViewMore} />,
       });
     }
     return items;
   };
 
-  @analyticsDecorator('atlassian.editor.format.hyperlink.button')
-  private toggleLinkPanel = (): boolean => {
-    const { editorView } = this.props;
-    showLinkToolbar()(editorView.state, editorView.dispatch);
-    return true;
-  };
+  private toggleLinkPanel = withAnalytics(
+    'atlassian.editor.format.hyperlink.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      showLinkToolbar()(editorView.state, editorView.dispatch);
+      return true;
+    },
+  );
 
-  @analyticsDecorator('atlassian.fabric.mention.picker.trigger.button')
-  private insertMention = (): boolean => {
-    const { insertMentionQuery } = this.props;
-    insertMentionQuery!();
-    return true;
-  };
+  private insertMention = withAnalytics(
+    'atlassian.fabric.mention.picker.trigger.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      insertMentionQuery()(editorView.state, editorView.dispatch);
+      return true;
+    },
+  );
 
-  @analyticsDecorator('atlassian.editor.format.table.button')
-  private createTable = (): boolean => {
-    const { editorView } = this.props;
-    createTable(editorView.state, editorView.dispatch);
-    return true;
-  };
+  private createTable = withAnalytics(
+    'atlassian.editor.format.table.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      createTable(editorView.state, editorView.dispatch);
+      return true;
+    },
+  );
 
-  @analyticsDecorator('atlassian.editor.format.date.button')
-  private createDate = (): boolean => {
-    const { editorView } = this.props;
-    insertDate()(editorView.state, editorView.dispatch);
-    openDatePicker(editorView.domAtPos.bind(editorView))(
-      editorView.state,
-      editorView.dispatch,
-    );
-    return true;
-  };
+  private createDate = withAnalytics(
+    'atlassian.editor.format.date.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      insertDate()(editorView.state, editorView.dispatch);
+      openDatePicker(editorView.domAtPos.bind(editorView))(
+        editorView.state,
+        editorView.dispatch,
+      );
+      return true;
+    },
+  );
 
-  @analyticsDecorator('atlassian.editor.format.placeholder.button')
-  private createPlaceholderText = (): boolean => {
-    const { editorView } = this.props;
-    showPlaceholderFloatingToolbar(editorView.state, editorView.dispatch);
-    return true;
-  };
+  private createPlaceholderText = withAnalytics(
+    'atlassian.editor.format.placeholder.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      showPlaceholderFloatingToolbar(editorView.state, editorView.dispatch);
+      return true;
+    },
+  );
 
-  @analyticsDecorator('atlassian.editor.format.layout.button')
-  private insertLayoutColumns = (): boolean => {
-    const { editorView } = this.props;
-    insertLayoutColumns(editorView.state, editorView.dispatch);
-    return true;
-  };
+  private insertLayoutColumns = withAnalytics(
+    'atlassian.editor.format.layout.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      insertLayoutColumns(editorView.state, editorView.dispatch);
+      return true;
+    },
+  );
 
-  @analyticsDecorator('atlassian.editor.format.media.button')
-  private openMediaPicker = (): boolean => {
-    const { onShowMediaPicker } = this.props;
-    onShowMediaPicker!();
-    return true;
-  };
+  private createStatus = withAnalytics(
+    'atlassian.editor.format.status.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      updateStatus(undefined, true)(editorView);
+      return true;
+    },
+  );
 
-  @analyticsDecorator('atlassian.editor.format.decision.button')
-  private insertDecision = (): boolean => {
-    const { editorView } = this.props;
-    if (!editorView) {
-      return false;
-    }
-    changeToTaskDecision(editorView, 'decisionList');
-    return true;
-  };
+  private openMediaPicker = withAnalytics(
+    'atlassian.editor.format.media.button',
+    (): boolean => {
+      const { onShowMediaPicker } = this.props;
+      onShowMediaPicker!();
+      return true;
+    },
+  );
 
-  @analyticsDecorator('atlassian.editor.format.horizontalrule.button')
-  private insertHorizontalRule = (): boolean => {
-    const { editorView } = this.props;
-    editorView.dispatch(
-      createHorizontalRule(
+  private insertDecision = withAnalytics(
+    'atlassian.fabric.decision.trigger.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      if (!editorView) {
+        return false;
+      }
+      insertTaskDecision(editorView, 'decisionList');
+      return true;
+    },
+  );
+
+  private insertAction = withAnalytics(
+    'atlassian.fabric.action.trigger.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      if (!editorView) {
+        return false;
+      }
+      insertTaskDecision(editorView, 'taskList');
+      return true;
+    },
+  );
+
+  private insertHorizontalRule = withAnalytics(
+    'atlassian.editor.format.horizontalrule.button',
+    (): boolean => {
+      const { editorView } = this.props;
+      const tr = createHorizontalRule(
         editorView.state,
         editorView.state.selection.from,
         editorView.state.selection.to,
-      ),
-    );
-    return true;
-  };
+      );
 
-  @analyticsDecorator('atlassian.editor.emoji.button')
-  private handleSelectedEmoji = (emojiId: EmojiId): boolean => {
-    this.props.insertEmoji!(emojiId);
-    this.toggleEmojiPicker();
-    return true;
-  };
+      if (tr) {
+        editorView.dispatch(tr);
+        return true;
+      }
+
+      return false;
+    },
+  );
+
+  private handleSelectedEmoji = withAnalytics(
+    'atlassian.editor.emoji.button',
+    (emojiId: EmojiId): boolean => {
+      this.props.insertEmoji!(emojiId);
+      this.toggleEmojiPicker();
+      return true;
+    },
+  );
 
   private onItemActivated = ({ item }): void => {
     const {
@@ -556,7 +737,8 @@ export default class ToolbarInsertBlock extends React.PureComponent<
         break;
       case 'image upload':
         if (handleImageUpload) {
-          handleImageUpload(editorView);
+          const { state, dispatch } = editorView;
+          handleImageUpload()(state, dispatch);
         }
         break;
       case 'media':
@@ -576,6 +758,9 @@ export default class ToolbarInsertBlock extends React.PureComponent<
         );
         const { state, dispatch } = editorView;
         onInsertBlockType!(item.value.name)(state, dispatch);
+        break;
+      case 'action':
+        this.insertAction();
         break;
       case 'decision':
         this.insertDecision();
@@ -601,6 +786,9 @@ export default class ToolbarInsertBlock extends React.PureComponent<
       case 'layout':
         this.insertLayoutColumns();
         break;
+      case 'status':
+        this.createStatus();
+        break;
       default:
         if (item && item.onClick) {
           item.onClick(editorActions);
@@ -613,3 +801,5 @@ export default class ToolbarInsertBlock extends React.PureComponent<
     }
   };
 }
+
+export default injectIntl(ToolbarInsertBlock);

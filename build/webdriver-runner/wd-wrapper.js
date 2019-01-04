@@ -1,6 +1,6 @@
 /*
-* wrapper on top of webdriver-io apis to give a feel of puppeeteer api
-*/
+ * wrapper on top of webdriver-io apis to give a feel of puppeeteer api
+ */
 
 //TODO :move this to a new npm-pkg
 const webdriverio = require('webdriverio');
@@ -91,6 +91,10 @@ export default class Page {
     return this.browser.addValue(selector, text);
   }
 
+  setValue(selector, text) {
+    return this.browser.setValue(selector, text);
+  }
+
   click(selector) {
     return this.browser.click(selector);
   }
@@ -99,9 +103,17 @@ export default class Page {
     return this.browser.keys(value);
   }
 
+  debug() {
+    return this.browser.debug();
+  }
+
   // Get
   getProperty(selector, cssProperty) {
     return this.browser.getCssProperty(selector, cssProperty);
+  }
+
+  getLocation(selector, property) {
+    return this.browser.getLocation(selector, property);
   }
 
   url() {
@@ -116,7 +128,21 @@ export default class Page {
   close() {
     return this.browser.close();
   }
-
+  checkConsoleErrors() {
+    // Console errors can only be checked in Chrome
+    if (
+      this.browser.desiredCapabilities.browserName === 'chrome' &&
+      this.browser.log('browser').value
+    ) {
+      this.browser.logs('browser').value.forEach(val => {
+        assert.notEqual(
+          val.level,
+          'SEVERE',
+          `Those console errors :${val.message} are displayed`,
+        );
+      });
+    }
+  }
   backspace(selector) {
     this.browser.execute(selector => {
       return document
@@ -181,8 +207,8 @@ export default class Page {
   }
 
   // Wait
-  waitForSelector(selector) {
-    return this.browser.waitForExist(selector, WAIT_TIMEOUT);
+  waitForSelector(selector, options = {}) {
+    return this.browser.waitForExist(selector, options.timeout || WAIT_TIMEOUT);
   }
 
   waitFor(selector, ms, reverse) {

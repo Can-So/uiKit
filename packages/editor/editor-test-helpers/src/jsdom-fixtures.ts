@@ -15,9 +15,9 @@ export class NullSelectionReader {
   }
 
   // Store the current state of the DOM selection.
-  storeDOMState = function(selection) {
+  storeDOMState(selection) {
     this.warnOnce();
-  };
+  }
 
   clearDOMState() {
     this.warnOnce();
@@ -26,31 +26,11 @@ export class NullSelectionReader {
   // : (?string) → bool
   // When the DOM selection changes in a notable manner, modify the
   // current selection state to match.
-  readFromDOM = function(origin) {
+  readFromDOM(origin) {
     this.warnOnce();
     return true;
-  };
+  }
 }
-
-const clientRectFixture = {
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-};
-
-const selectionFixture = {
-  removeAllRanges: () => {},
-  addRange: () => {},
-};
-
-const rangeFixture = {
-  setEnd: () => {},
-  setStart: () => {},
-  collapse: () => {},
-  getClientRects: () => [] as any,
-  getBoundingClientRect: () => clientRectFixture as any,
-};
 
 export default editorView => {
   const warnOnce = (() => {
@@ -83,32 +63,7 @@ export default editorView => {
     warnOnce();
   };
 
-  // Do nothing when attempting to retrieve selection
-  window.getSelection = () => {
-    warnOnce();
-    return selectionFixture as any;
-  };
-
-  document.getSelection = () => {
-    warnOnce();
-    return selectionFixture as any;
-  };
-
-  // Do nothing when attempting to create DOM ranges
-  document.createRange = () => {
-    warnOnce();
-    return rangeFixture as any;
-  };
-
-  if (!('getClientRects' in document.createElement('div'))) {
-    Element.prototype.getClientRects = () => [] as any;
-    Element.prototype.getBoundingClientRect = () => clientRectFixture as any;
-  }
-
   (editorView as any).destroy = function() {
     EditorView.prototype.destroy.apply(this, arguments);
-    delete (window as any).getSelection;
-    delete (document as any).getSelection;
-    delete (document as any).createRange;
   };
 };

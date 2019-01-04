@@ -17,16 +17,13 @@ const atlaskitTeam = [
   'bconolly',
   'raja07',
   'thejameskyle',
-  'mblaszczyk-atlassian',
   'jmackison',
   'scurtis',
-  'jaredcroweatlassian',
-  'jedw',
   'alexreardon',
   'pete_gleeson',
   'mgardiner_atlas',
   'padmaia',
-  'isriharsha', // Navteam
+  'vbelgiornozegna',
 ];
 const editorTeam = [
   'imsysoev',
@@ -46,6 +43,9 @@ const editorTeam = [
   'ahixon_atlassian',
   'wangjerome',
   'nathanflew',
+  'fghilini',
+  'MichaelOates',
+  'wcalderipe',
 ];
 const elementsTeam = [
   'sguillope',
@@ -86,8 +86,46 @@ const kitkatTeam = [
   'vpetrychuk',
   'bgryta',
 ];
-const growthTeam = ['llemos'];
-const navigationTeam = ['wmendesneto'];
+const growthTeam = [
+  'hchehab',
+  'jcanoatlas',
+  'kanishkpurohit',
+  'anthonyrussell',
+  'wiwong',
+  'leandro_lemos',
+  'rob_sangster',
+  'mpuckeridge',
+  'ilavskym',
+];
+const navigationTeam = [
+  'jaredcroweatlassian',
+  'jedw',
+  'mblaszczyk-atlassian',
+  'wmendesneto',
+  'isriharsha',
+  'lucaslago_atlassian',
+];
+const homeTeam = [
+  'losang', // maintainer
+  'damevin', // maintainer
+  'sesther', // maintainer
+  'erwinbolwidt',
+  'zeev_gilovitz',
+  'hmaher',
+];
+const bitbucketTeam = [
+  'bgummer',
+  'stacylondoner',
+  'ttadej-atlassian',
+  'mafrauen',
+  'IvonneTerrero',
+  'seanaty',
+  'sogrady',
+  'ebutleratlassian',
+  'jpoh',
+  'cdoan-atlassian',
+  'peterwilliams-atl',
+];
 const usersAllowedToApprove = [].concat(
   atlaskitTeam,
   editorTeam,
@@ -98,6 +136,8 @@ const usersAllowedToApprove = [].concat(
   kitkatTeam,
   growthTeam,
   navigationTeam,
+  homeTeam,
+  bitbucketTeam,
 );
 
 module.exports = {

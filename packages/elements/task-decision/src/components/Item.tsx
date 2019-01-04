@@ -19,7 +19,7 @@ export interface Props {
   participants?: Participant[];
   appearance?: Appearance;
   contentRef?: ContentRef;
-  placeholder: string;
+  placeholder?: string;
   showPlaceholder?: boolean;
   attribution?: string;
 }
@@ -31,7 +31,7 @@ export default class Item extends PureComponent<Props, {}> {
 
   private renderPlaceholder() {
     const { children, placeholder, showPlaceholder } = this.props;
-    if (!showPlaceholder || children) {
+    if (!showPlaceholder || !placeholder || children) {
       return null;
     }
     return <Placeholder contentEditable={false}>{placeholder}</Placeholder>;
@@ -62,7 +62,7 @@ export default class Item extends PureComponent<Props, {}> {
   renderCardAppearance() {
     const { appearance, contentRef, children, icon } = this.props;
     return (
-      <Wrapper theme={{ appearance }}>
+      <Wrapper appearance={appearance}>
         <CardHeadingWrapper>
           {icon}
           {this.renderParticipants()}
@@ -77,7 +77,7 @@ export default class Item extends PureComponent<Props, {}> {
   renderMessageAppearance() {
     const { appearance, contentRef, children, icon } = this.props;
     return (
-      <Wrapper theme={{ appearance }}>
+      <Wrapper appearance={appearance}>
         {icon}
         {this.renderPlaceholder()}
         <ContentWrapper innerRef={contentRef}>{children}</ContentWrapper>

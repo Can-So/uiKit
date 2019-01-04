@@ -5,32 +5,38 @@ export const TRACK_EVENT_TYPE = 'track';
 export const SCREEN_EVENT_TYPE = 'screen';
 export const OPERATIONAL_EVENT_TYPE = 'operational';
 
+export const DEFAULT_SOURCE = 'unknown';
+
 export type EventType = 'ui' | 'track' | 'screen' | 'operational';
 
-export type GasScreenEventPayload = {
+export type GasPureScreenEventPayload = {
   name: string;
-  eventType: EventType;
   attributes?: {
     [key: string]: any;
   };
   tags?: Array<string>;
 };
 
-export type GasCorePayload = {
+export type GasPurePayload = {
   actionSubject: string;
   actionSubjectId?: string;
-  eventType: EventType;
   attributes?: {
-    packageName: string;
-    packageVersion: string;
-    componentName: string;
+    packageName?: string;
+    packageVersion?: string;
+    componentName?: string;
     [key: string]: any;
   };
   nonPrivacySafeAttributes?: {
     [key: string]: any;
   };
   tags?: Array<string>;
-  source: string;
+  source?: string;
 };
+
+export type WithEventType = {
+  eventType: EventType;
+};
+export type GasCorePayload = GasPurePayload & WithEventType;
+export type GasScreenEventPayload = GasPureScreenEventPayload & WithEventType;
 
 export type GasPayload = AnalyticsEventPayload & GasCorePayload;

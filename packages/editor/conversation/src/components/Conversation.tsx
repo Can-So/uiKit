@@ -3,12 +3,15 @@ import CommentContainer from '../containers/Comment';
 import Comment from '../components/Comment';
 import Editor from './Editor';
 import { Conversation as ConversationType } from '../model';
-import { SharedProps } from './types';
+import { SharedProps, SendAnalyticsEvent } from './types';
 import {
   createAnalyticsEvent,
   actionSubjectIds,
   fireEvent,
+  trackEventActions,
+  eventTypes,
 } from '../internal/analytics';
+import { SuccessHandler } from '../internal/actions';
 
 // See https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeunload
 // https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
@@ -19,7 +22,7 @@ interface UnloadEvent extends Event {
 // This is a stop-gap for preventing the user from losing their work. Eventually
 // this will be replaced with drafts/auto-save functionality
 function beforeUnloadHandler(e: UnloadEvent) {
-  // The beforeUnload dialog is implemented inconsistenly.
+  // The beforeUnload dialog is implemented inconsistently.
   // The following is the most cross-browser approach.
   const confirmationMessage =
     'You have an unsaved comment. Are you sure you want to leave without saving?';
@@ -33,8 +36,6 @@ export interface Props extends SharedProps {
   conversation?: ConversationType;
   containerId: string;
   showBeforeUnloadWarning?: boolean;
-  onEditorOpen?: () => void;
-  onEditorClose?: () => void;
 
   // Dispatch
   onCreateConversation?: (
@@ -42,6 +43,7 @@ export interface Props extends SharedProps {
     containerId: string,
     value: any,
     meta: any,
+    onSuccess?: SuccessHandler,
   ) => void;
 
   isExpanded?: boolean;
@@ -73,9 +75,12 @@ export default class Conversation extends React.PureComponent<Props, State> {
     Only use this method when instrumenting something that isn't instrumented itself (like Editor)
     Once editor is instrumented use the analyticsEvent passed in by editor instead.
 
+    nestedDepth is always 0 when using the save handlers in this file.
+    Because a new comment created on the conversation itself is always going to be the top comment.
+
     @deprecated
   */
-  sendEditorAnalyticsEvent = (actionSubjectId: actionSubjectIds) => {
+  sendEditorAnalyticsEvent: SendAnalyticsEvent = eventData => {
     const { createAnalyticsEvent, containerId } = this.props;
 
     const analyticsEvent = createAnalyticsEvent({
@@ -83,7 +88,7 @@ export default class Conversation extends React.PureComponent<Props, State> {
       action: 'clicked',
     });
 
-    fireEvent(analyticsEvent, actionSubjectId, containerId);
+    fireEvent(analyticsEvent, { containerId, ...eventData });
   };
 
   private renderComments() {
@@ -103,6 +108,7 @@ export default class Conversation extends React.PureComponent<Props, State> {
       containerId,
       placeholder,
       disableScrollTo,
+      allowFeedbackAndHelpButtons,
     } = this.props;
 
     if (!conversation) {
@@ -123,6 +129,7 @@ export default class Conversation extends React.PureComponent<Props, State> {
         onRevertComment={onRevertComment}
         onEditorOpen={this.onEditorOpen}
         onEditorClose={this.onEditorClose}
+        onEditorChange={this.handleEditorChange}
         onHighlightComment={onHighlightComment}
         onRetry={this.onRetry(comment.document)}
         onCancel={onCancel}
@@ -134,12 +141,15 @@ export default class Conversation extends React.PureComponent<Props, State> {
         placeholder={placeholder}
         disableScrollTo={disableScrollTo}
         sendAnalyticsEvent={this.sendEditorAnalyticsEvent}
+        allowFeedbackAndHelpButtons={allowFeedbackAndHelpButtons}
       />
     ));
   }
 
   private onCancel = () => {
-    this.sendEditorAnalyticsEvent(actionSubjectIds.cancelButton);
+    this.sendEditorAnalyticsEvent({
+      actionSubjectId: actionSubjectIds.cancelButton,
+    });
 
     if (this.props.onCancel) {
       this.props.onCancel();
@@ -147,7 +157,9 @@ export default class Conversation extends React.PureComponent<Props, State> {
   };
 
   private onOpen = () => {
-    this.sendEditorAnalyticsEvent(actionSubjectIds.createCommentInput);
+    this.sendEditorAnalyticsEvent({
+      actionSubjectId: actionSubjectIds.createCommentInput,
+    });
     this.onEditorOpen();
   };
 
@@ -175,6 +187,7 @@ export default class Conversation extends React.PureComponent<Props, State> {
           onCancel={this.onCancel}
           onOpen={this.onOpen}
           onClose={this.onEditorClose}
+          onChange={this.handleEditorChange}
           dataProviders={dataProviders}
           user={user}
           renderEditor={renderEditor}
@@ -187,7 +200,9 @@ export default class Conversation extends React.PureComponent<Props, State> {
   }
 
   private onRetry = (document: any) => (commentLocalId?: string) => {
-    this.sendEditorAnalyticsEvent(actionSubjectIds.retryFailedRequestButton);
+    this.sendEditorAnalyticsEvent({
+      actionSubjectId: actionSubjectIds.retryFailedRequestButton,
+    });
     this.onSave(document, commentLocalId, true);
   };
 
@@ -207,14 +222,42 @@ export default class Conversation extends React.PureComponent<Props, State> {
     } = this.props;
 
     if (!retry) {
-      this.sendEditorAnalyticsEvent(actionSubjectIds.saveButton);
+      this.sendEditorAnalyticsEvent({
+        actionSubjectId: actionSubjectIds.saveButton,
+      });
     }
 
     if (!id && !commentLocalId && onCreateConversation) {
-      onCreateConversation(localId!, containerId, value, meta);
+      onCreateConversation(localId!, containerId, value, meta, id => {
+        this.sendEditorAnalyticsEvent({
+          actionSubjectId: id,
+          eventType: eventTypes.TRACK,
+          attributes: {
+            nestedDepth: 0,
+          },
+          action: trackEventActions.created,
+          actionSubject: 'comment',
+        });
+      });
     } else if (onAddComment) {
       const conversationId = id || conversation!.conversationId;
-      onAddComment(conversationId, conversationId, value, commentLocalId);
+      onAddComment(
+        conversationId,
+        conversationId,
+        value,
+        commentLocalId,
+        id => {
+          this.sendEditorAnalyticsEvent({
+            actionSubjectId: id,
+            eventType: eventTypes.TRACK,
+            attributes: {
+              nestedDepth: 0,
+            },
+            action: trackEventActions.created,
+            actionSubject: 'comment',
+          });
+        },
+      );
     }
   };
 
@@ -230,6 +273,15 @@ export default class Conversation extends React.PureComponent<Props, State> {
     this.setState({
       openEditorCount: this.state.openEditorCount + 1,
     });
+  };
+
+  private handleEditorChange = (value: any, commentId?: string) => {
+    const { id, localId, containerId, onEditorChange, meta } = this.props;
+
+    if (onEditorChange) {
+      const isLocal = !id;
+      onEditorChange(isLocal, value, localId!, commentId, containerId, meta);
+    }
   };
 
   componentDidUpdate() {

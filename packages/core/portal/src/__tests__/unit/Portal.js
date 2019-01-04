@@ -5,8 +5,8 @@ import Portal from '../..';
 
 const App = ({ children }: { children: Node }) => <div>{children}</div>;
 
-const zIndex = (elem: HTMLElement) =>
-  parseInt(elem.style.getPropertyValue('z-index'), 10);
+const zIndex = (elem: HTMLElement | void) =>
+  elem ? parseInt(elem.style.getPropertyValue('z-index'), 10) : 0;
 
 let wrapper: any;
 
@@ -38,8 +38,10 @@ test('should use z-index to stack nested portals', () => {
     </App>,
   );
   const elements = document.getElementsByClassName('atlaskit-portal');
-  expect(elements).toHaveLength(2);
-  const [front, back] = elements;
+  const getElement = text =>
+    [...elements].find(e => e.innerHTML.indexOf(text) > -1);
+  const front = getElement('front');
+  const back = getElement('back');
   expect(zIndex(front)).toBeGreaterThan(zIndex(back));
 });
 
@@ -59,4 +61,34 @@ test('should use DOM ordering to stack sibiling portals', () => {
   const [back, front] = elements;
   expect(zIndex(front)).toEqual(zIndex(back));
   expect(back.nextSibling).toBe(front);
+});
+
+test('should create a new stacking context', () => {
+  wrapper = mount(
+    <App>
+      <Portal>
+        <div>Hi</div>
+      </Portal>
+    </App>,
+  );
+  const container = document.querySelector('body > .atlaskit-portal-container');
+  expect(container && container.style.getPropertyValue('display')).toBe('flex');
+});
+
+test('should clean up elements after unmount', () => {
+  const Wrapper = ({ renderPortal }: { renderPortal: boolean }) => (
+    <App>
+      {renderPortal && (
+        <Portal zIndex={500}>
+          <div>Hi</div>
+        </Portal>
+      )}
+    </App>
+  );
+  wrapper = mount(<Wrapper renderPortal />);
+  wrapper.setProps({ renderPortal: false });
+  const parent = document.querySelector('.atlaskit-portal-container');
+  expect(parent).toBeNull();
+  const portal = document.querySelector('.atlaskit-portal');
+  expect(portal).toBeNull();
 });

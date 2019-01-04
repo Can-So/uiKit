@@ -1,5 +1,102 @@
 # @atlaskit/tooltip
 
+## 12.1.14
+- [patch] [8f179c4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8f179c4):
+
+  - Remove scroll listener in componentWillMount in Tooltip to fix potential memory leak from 'close' tooltip not properly unmounting when hiding Examples modal via the X button
+
+## 12.1.13
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/popper@0.3.6
+  - @atlaskit/portal@0.0.17
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 12.1.12
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/popper@0.3.3
+  - @atlaskit/theme@7.0.0
+
+## 12.1.11
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/portal@0.0.16
+  - @atlaskit/icon@15.0.0
+
+## 12.1.10
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/popper@0.3.2
+  - @atlaskit/portal@0.0.15
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 12.1.9
+- Updated dependencies [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+  - @atlaskit/portal@0.0.14
+
+## 12.1.8
+- Updated dependencies [3f5a4dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5a4dd):
+  - @atlaskit/portal@0.0.13
+
+## 12.1.7
+- [patch] [3b03f52](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b03f52):
+
+  - Use @atlaskit/popper internally instead of a custom approach to position management
+
+## 12.1.6
+- [patch] [7f1ff28](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7f1ff28):
+
+  Fixes error when Tooltip attempts to setState on an unmounted component
+
+## 12.1.5
+- [patch] Updated dependencies [aaab348](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/aaab348)
+  - @atlaskit/portal@0.0.12
+
+## 12.1.4
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 12.1.3
+- [patch] onHide and onShow are now called in componentDidUpdate so they behave consistently between all hides and shows [e20f11a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e20f11a)
+
+## 12.1.2
+- [patch] Fix edgecase where when handleMouseOver was called before handleMouseEnter, causing the mouseCoordinates to be null, and the tooltip to render at the top left of the page [c2694aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2694aa)
+
+## 12.1.1
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/button@9.0.13
+  - @atlaskit/portal@0.0.10
+  - @atlaskit/icon@14.0.0
+
+## 12.1.0
+- [minor] Adds the new hideTooltipOnMouseDown was required since global-navigation and navigation-next are using onMouseDown and onMouseUp iteractions [8719daf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8719daf)
+
+## 12.0.14
+- [patch] Updated dependencies [d5a043a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5a043a)
+  - @atlaskit/icon@13.8.1
+  - @atlaskit/portal@0.0.9
+
+## 12.0.13
+- [patch] Updated dependencies [d9d2f0d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9d2f0d)
+- [none] Updated dependencies [89be4f1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/89be4f1)
+  - @atlaskit/portal@0.0.8
+
+## 12.0.12
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 12.0.11
+- [patch] tooltip will not appear when content is undefined null or an empty string [239b448](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/239b448)
+
 ## 12.0.9
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

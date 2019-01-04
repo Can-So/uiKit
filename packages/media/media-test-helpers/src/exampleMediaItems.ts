@@ -4,7 +4,11 @@ import {
   LinkDetails,
   FileDetails,
 } from '@atlaskit/media-core';
-import { defaultCollectionName as collectionName } from './collectionNames';
+import { ExternalImageIdentifier } from '@atlaskit/media-card';
+import {
+  defaultCollectionName as collectionName,
+  onlyAnimatedGifsCollectionName,
+} from './collectionNames';
 
 const fileType: MediaItemType = 'file';
 const linkType: MediaItemType = 'link';
@@ -154,6 +158,12 @@ export const videoLargeFileId = {
   collectionName,
 };
 
+export const videoSquareFileId = {
+  id: 'cdff20d6-2c0a-4d0d-b2a9-22cc728a0368',
+  mediaItemType: fileType,
+  collectionName,
+};
+
 export const videoProcessingFailedId = {
   id: 'e558199f-f982-4d23-93eb-313be5998d1b',
   mediaItemType: fileType,
@@ -230,8 +240,22 @@ export const noMetadataFileId = {
   mediaItemType: fileType,
   collectionName,
 };
-// === DETAILS ===
 
+export const animatedFileId = {
+  id: 'af637c7a-75c3-4254-b074-d16e6ae2e04b',
+  mediaItemType: fileType,
+  collectionName: onlyAnimatedGifsCollectionName,
+};
+// === EXTERNAL IMAGE ===
+
+export const atlassianLogoUrl =
+  'https://wac-cdn.atlassian.com/assets/img/favicons/atlassian/apple-touch-icon-152x152.png';
+export const externalImageIdentifier: ExternalImageIdentifier = {
+  mediaItemType: 'external-image',
+  dataURI: atlassianLogoUrl,
+};
+
+// === DETAILS ===
 export const genericUrlPreview: UrlPreview = {
   url: 'https://www.atlassian.com/',
   type: 'link',
@@ -244,8 +268,7 @@ export const genericUrlPreview: UrlPreview = {
   },
   resources: {
     icon: {
-      url:
-        'https://wac-cdn.atlassian.com/assets/img/favicons/atlassian/apple-touch-icon-152x152.png',
+      url: atlassianLogoUrl,
       type: 'image/png',
       width: 152,
       height: 152,

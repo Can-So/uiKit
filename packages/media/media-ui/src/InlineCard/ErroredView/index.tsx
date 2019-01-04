@@ -6,14 +6,22 @@ import { truncateUrlForErrorView } from '../utils';
 import { Frame } from '../Frame';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
 
-export interface ErroredViewProps {
+export interface InlineCardErroredViewProps {
+  /** The url to display */
   url: string;
+  /** The error message to display */
   message: string;
+  /** The optional click handler */
   onClick?: () => void;
+  /** What to do when a user clicks "Try again" button */
   onRetry?: () => void;
+  /** A flag that determines whether the card is selected in edit mode. */
+  isSelected?: boolean;
 }
 
-export class ErroredView extends React.Component<ErroredViewProps> {
+export class InlineCardErroredView extends React.Component<
+  InlineCardErroredViewProps
+> {
   handleRetry = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { onRetry } = this.props;
     if (onRetry) {
@@ -24,9 +32,9 @@ export class ErroredView extends React.Component<ErroredViewProps> {
   };
 
   render() {
-    const { url, message, onClick, onRetry } = this.props;
+    const { url, message, onClick, onRetry, isSelected } = this.props;
     return (
-      <Frame onClick={onClick}>
+      <Frame onClick={onClick} isSelected={isSelected}>
         <IconAndTitleLayout
           icon={
             <ErrorIcon label="error" size="medium" primaryColor={colors.R300} />

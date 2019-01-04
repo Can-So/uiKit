@@ -1,5 +1,86 @@
 # @atlaskit/profilecard
 
+## 6.1.4
+- [patch] [ba95c0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ba95c0e):
+
+  - Remove typescript type InjectedIntlProps from flow js code
+
+## 6.1.3
+- [patch] [3ef5292](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ef5292):
+
+  - Include type definitions in npm package
+
+## 6.1.2
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/button@10.1.1
+  - @atlaskit/dynamic-table@10.0.22
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/layer@5.0.10
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/docs@6.0.0
+
+## 6.1.1
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/dynamic-table@10.0.20
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/lozenge@6.2.3
+
+## 6.1.0
+- [minor] [a2da489](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2da489):
+
+  - - wrap profile card in IntlProvider and support i18n
+
+## 6.0.3
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/icon@15.0.0
+
+## 6.0.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/dynamic-table@10.0.18
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 6.0.1
+- [patch] [9d63842](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d63842):
+
+  - Fixed a bug where content is not rendered for cards of users whose accounts are closed
+
+## 6.0.0
+- [major] [9c0844d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c0844d):
+
+  - Replace "isActive" prop with new "status" prop and adding react-intl messages
+
+## 5.0.0
+- [major] [a6dd6e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6dd6e3):
+
+  - Removed isCensored prop as this state no longer exists
+
+## 4.0.10
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/avatar@14.0.11
+  - @atlaskit/button@9.0.13
+  - @atlaskit/icon@14.0.0
+
+## 4.0.9
+- [patch] Remove promise polyfill to fix Jira SSR [e793f6e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e793f6e)
+
 ## 4.0.8
 - [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
   - @atlaskit/util-data-test@10.0.7

@@ -1,115 +1,110 @@
 // @flow
 import React from 'react';
-import { md, Example } from '@atlaskit/docs';
+import { md, code, Example } from '@atlaskit/docs';
 
 export default md`
-  # CSS Reset
 
-  This package exports a CSS file which provides a minimal reset along with base styles for many HTML elements. It is meant to be used as a basis for all styling to be built upon.
+This package exports a CSS file which provides a minimal reset along with base styles for many HTML elements. It is meant to be used as a basis for all styling to be built upon.
 
-  ## Installation
+## Usage
 
-  \`\`\`
-  npm install @atlaskit/css-reset
-  \`\`\`
+Please include the stylesheet bundle available in css-reset package.
 
-  ## Using the component
+*css-reset* should be the first stylesheet on your page, that is, all the other stylesheet should be included after css-reset*
 
-  ### Importing
+${code`
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Your page</title>
+    <link rel="stylesheet" href="node_modules/@atlaskit/css-reset/dist/bundle.css" />
+    <!-- your awesome styles -->
+  </head>
+  <body>
+    <p>Hello world!</p>
+  </body>
+</html>
+`}
 
-  The @atlaskit/css-reset package can be consumed via the dist, or in Webpack.
+${(
+  <Example
+    packageName="@atlaskit/css-reset"
+    Component={require('../examples/01-heading').default}
+    title="Heading"
+    source={require('!!raw-loader!../examples/01-heading')}
+  />
+)}
 
-  #### Importing in Webpack
+${(
+  <Example
+    packageName="@atlaskit/css-reset"
+    Component={require('../examples/02-links').default}
+    title="Links"
+    source={require('!!raw-loader!../examples/02-links')}
+  />
+)}
 
-  \`\`\`
-  import '@atlaskit/css-reset';
-  \`\`\`
+${(
+  <Example
+    packageName="@atlaskit/css-reset"
+    Component={require('../examples/03-lists-flat').default}
+    title="Lists - flat"
+    source={require('!!raw-loader!../examples/03-lists-flat')}
+  />
+)}
 
-  The Webpack style loader should then place the CSS within the HEAD of your HTML element.
+${(
+  <Example
+    packageName="@atlaskit/css-reset"
+    Component={require('../examples/04-lists-nested').default}
+    title="Lists - nested"
+    source={require('!!raw-loader!../examples/04-lists-nested')}
+  />
+)}
 
-  #### Importing in HTML
+${(
+  <Example
+    packageName="@atlaskit/css-reset"
+    Component={require('../examples/05-tables-simple').default}
+    title="Table - simple"
+    source={require('!!raw-loader!../examples/05-tables-simple')}
+  />
+)}
 
-  \`\`\`
-    <html>
-      <head>
-        <link rel="stylesheet" href="node_modules/@atlaskit/css-reset/dist/bundle.css" />
-      </head>
-      <body>
-        <!-- ... -->
-      </body>
-    </html>
-  \`\`\`
+${(
+  <Example
+    packageName="@atlaskit/css-reset"
+    Component={require('../examples/06-tables-complex').default}
+    title="Tables - complex"
+    source={require('!!raw-loader!../examples/06-tables-complex')}
+  />
+)}
 
-  ${(
-    <Example
-      Component={require('../examples/01-heading').default}
-      title="Heading"
-      source={require('!!raw-loader!../examples/01-heading')}
-    />
-  )}
+${(
+  <Example
+    packageName="@atlaskit/css-reset"
+    Component={require('../examples/07-quotes').default}
+    title="Quotes"
+    source={require('!!raw-loader!../examples/07-quotes')}
+  />
+)}
 
-  ${(
-    <Example
-      Component={require('../examples/02-links').default}
-      title="Links"
-      source={require('!!raw-loader!../examples/02-links')}
-    />
-  )}
+${(
+  <Example
+    packageName="@atlaskit/css-reset"
+    Component={require('../examples/08-code-and-pre').default}
+    title="Code/ Pre"
+    source={require('!!raw-loader!../examples/08-code-and-pre')}
+  />
+)}
 
-  ${(
-    <Example
-      Component={require('../examples/03-lists-flat').default}
-      title="Lists - flat"
-      source={require('!!raw-loader!../examples/03-lists-flat')}
-    />
-  )}
-
-  ${(
-    <Example
-      Component={require('../examples/04-lists-nested').default}
-      title="Lists - nested"
-      source={require('!!raw-loader!../examples/04-lists-nested')}
-    />
-  )}
-
-  ${(
-    <Example
-      Component={require('../examples/05-tables-simple').default}
-      title="Table - simple"
-      source={require('!!raw-loader!../examples/05-tables-simple')}
-    />
-  )}
-
-  ${(
-    <Example
-      Component={require('../examples/06-tables-complex').default}
-      title="Tables - complex"
-      source={require('!!raw-loader!../examples/06-tables-complex')}
-    />
-  )}
-
-  ${(
-    <Example
-      Component={require('../examples/07-quotes').default}
-      title="Quotes"
-      source={require('!!raw-loader!../examples/07-quotes')}
-    />
-  )}
-
-  ${(
-    <Example
-      Component={require('../examples/08-code-and-pre').default}
-      title="Code/ Pre"
-      source={require('!!raw-loader!../examples/08-code-and-pre')}
-    />
-  )}
-
-  ${(
-    <Example
-      Component={require('../examples/09-misc-elements').default}
-      title="Miscellaneous"
-      source={require('!!raw-loader!../examples/09-misc-elements')}
-    />
-  )}
-
+${(
+  <Example
+    packageName="@atlaskit/css-reset"
+    Component={require('../examples/09-misc-elements').default}
+    title="Miscellaneous"
+    source={require('!!raw-loader!../examples/09-misc-elements')}
+  />
+)}
 `;

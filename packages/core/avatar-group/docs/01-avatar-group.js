@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
-import { Prop } from 'pretty-proptypes';
+import { md, Example, Props, Prop, code } from '@atlaskit/docs';
 
 export default md`
   \`AvatarGroup\` is a wrapper around avatars designed to render a collection
@@ -23,8 +22,13 @@ export default md`
   - \`size\` will get the \`AvatarGroup\`'s \`size\`
   - \`groupAppearance\` will get the \`AvatarGroup\`'s \`appearance\`
 
+  ## Usage
+
+  ${code`import AvatarGroup from '@atlaskit/avatar-group';`}
+
 ${(
   <Example
+    packageName="@atlaskit/avatar-group"
     Component={require('../examples/02-basicAvatarGroup').default}
     title="AvatarGroup"
     source={require('!!raw-loader!../examples/02-basicAvatarGroup')}
@@ -36,6 +40,21 @@ ${(
     heading="Avatar Group Props"
     props={require('!!extract-react-types-loader!../src/components/AvatarGroup')}
     overrides={{
+      data: props => {
+        /* eslint-disable */
+        if (
+          props &&
+          props.typeValue &&
+          props.typeValue.typeParams &&
+          props.typeValue.typeParams.params
+        ) {
+          props.typeValue.typeParams.params = [
+            { kind: 'id', name: '@atlaskit/avatar props' },
+          ];
+        }
+        /* eslint-enable */
+        return <Prop {...props} type="Array<@atlaskit/avatar props>" />;
+      },
       avatar: props => {
         // Currently prett-proptypes does not have a good print type for function
         // calls, so we are overriding how this is printed. AK-5133 should resolve

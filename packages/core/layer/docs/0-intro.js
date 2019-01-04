@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { md, Props } from '@atlaskit/docs';
+import { code, md, Props } from '@atlaskit/docs';
 
 export default md`
 
@@ -11,14 +11,8 @@ export default md`
   If you use a layer with a component that could be opened or closed, you have to make sure you re-render the layer the first time you open the component, otherwise it will end up with a wrong position.
 
   ![Example of Layer](https://i.imgur.com/f2UkGw8.gif)
-
-  ## Installation
-
-  ~~~js
-  yarn add @atlaskit/layer
-  ~~~
-
-  ## Using the component
+ 
+  ## Usage
 
   ### HTML
 
@@ -26,9 +20,8 @@ export default md`
 
   Import the component in your React app as follows:
 
-  ~~~js
-  import Layer from '@atlaskit/layer';
-
+  ${code`import Layer from '@atlaskit/layer';
+ 
   const myContent = <div>I'm going to be aligned to the right!</div>;
 
   ReactDOM.render(
@@ -37,13 +30,13 @@ export default md`
     </Layer>,
     container,
   );
-  ~~~
+  `}
 
   Any content that is passed to Layer as children will always be rendered and any content passed through the \`content\` prop will be rendered aligned to the internal content.
 
 ${(
   <Props
-    heading="Props"
+    heading="Layer Props"
     props={require('!!extract-react-types-loader!../src/components/Layer')}
   />
 )}

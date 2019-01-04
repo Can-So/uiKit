@@ -18,7 +18,9 @@ const defaultProps = {
   searchSessionId: 'session_id',
   renderNoRecentActivity: () => <div id="advanced-search-link" />,
   renderNoResult: () => <div id="no-result" />,
-  renderAdvancedSearchGroup: () => <div id="advanced-search-group" />,
+  renderAdvancedSearchGroup: (analyticsData?) => (
+    <div id="advanced-search-group" />
+  ),
   getPreQueryGroups: () => [],
   getPostQueryGroups: () => [],
 };
@@ -35,7 +37,6 @@ const mockResultsGroup = [
       },
     ],
     key: 'issues',
-    titleI18nId: 'issues.key',
   },
 ];
 
@@ -103,6 +104,19 @@ it('should render pre query state while its loading and it should keep the previ
 
   const preQueryState = wrapper.find(PreQueryState);
   expect(preQueryState.length).toBe(1);
+});
+
+it('should render before pre query state when provided', () => {
+  const BeforePreQuery = () => <span className="before" />;
+
+  const props: Partial<Props> = {
+    query: '',
+    isLoading: false,
+    renderBeforePreQueryState: () => <BeforePreQuery />,
+  };
+
+  const wrapper = render(props);
+  expect(wrapper.find(BeforePreQuery)).toHaveLength(1);
 });
 
 it('should render no results state when there are no results and a query is entered', () => {

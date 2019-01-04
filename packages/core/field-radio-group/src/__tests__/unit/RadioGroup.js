@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { mount, shallow } from 'enzyme';
-import Base from '@atlaskit/field-base';
+import Base, { Label } from '@atlaskit/field-base';
 
 import Radio from '../../RadioBase';
 import AkFieldRadioGroupWithAnalytics, {
@@ -63,12 +63,12 @@ describe(name, () => {
       });
 
       describe('label prop', () => {
-        it('is reflected to the FieldBase', () => {
+        it('is reflected to the Label component', () => {
           const label = 'string label content';
           const wrapper = shallow(
             <AkFieldRadioGroup onRadioChange={() => {}} label={label} />,
           );
-          expect(wrapper.find(Base).prop('label')).toBe(label);
+          expect(wrapper.find(Label).prop('label')).toBe(label);
         });
       });
 

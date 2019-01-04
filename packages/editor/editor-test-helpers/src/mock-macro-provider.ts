@@ -15,7 +15,7 @@ const getMacroADFNode = (macroName, macroParams): MacroAttributes => {
       parameters: {
         macroParams,
         macroMetadata: {
-          macroId: { value: new Date().valueOf() },
+          macroId: { value: 12345 },
           placeholder: [
             {
               data: { url: '' },
@@ -42,10 +42,14 @@ export class MockMacroProvider implements MacroProvider {
 
   autoConvert(link: String): MacroAttributes | null {
     switch (link) {
+      case 'http://www.dumbmacro.com?paramA=CFE':
+      case 'https://www.dumbmacro.com?paramA=CFE':
       case 'www.dumbmacro.com?paramA=CFE':
         return getMacroADFNode('dumbMacro', {
           paramA: { value: 'CFE' },
         });
+      case 'http://www.smartmacro.com?paramB=CFE':
+      case 'https://www.smartmacro.com?paramB=CFE':
       case 'www.smartmacro.com?paramB=CFE':
         return getMacroADFNode('smartMacro', {
           paramB: { value: 'CFE' },

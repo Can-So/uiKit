@@ -1,5 +1,10 @@
 # @atlaskit/webpack-config
 
+## 2.0.5
+- [patch] [92d8324](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/92d8324):
+
+  - Fix build not exiting with non-zero exit code on failure
+
 ## 2.0.4
 - [patch] suppress "export not found" warnings for ts transpiling in webpack [9baa015](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9baa015)
 

@@ -1,5 +1,101 @@
 # @atlaskit/dropdown-menu
 
+## 6.1.25
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/button@10.1.1
+  - @atlaskit/droplist@7.0.17
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/item@8.0.14
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/docs@6.0.0
+
+## 6.1.24
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/droplist@7.0.16
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/item@8.0.13
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/lozenge@6.2.3
+
+## 6.1.23
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/droplist@7.0.14
+  - @atlaskit/item@8.0.12
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
+## 6.1.22
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/droplist@7.0.13
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/button@10.0.0
+
+## 6.1.21
+- [patch] [1fb2c2a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1fb2c2a):
+
+  - Fixed issue where tooltips and modals would initially render in the wrong location
+
+## 6.1.20
+- [patch] [fe943bb"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe943bb"
+d):
+
+  - Make sure we check userAgent only if we have a DOM
+
+## 6.1.19
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 6.1.18
+- [patch] Fix the dropdown menu height exceeding viewport height when appearance prop is set to ‘tall’ [0deec63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0deec63)
+
+## 6.1.17
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/avatar@14.0.11
+  - @atlaskit/button@9.0.13
+  - @atlaskit/droplist@7.0.10
+  - @atlaskit/item@8.0.8
+  - @atlaskit/tooltip@12.1.1
+  - @atlaskit/icon@14.0.0
+
+## 6.1.16
+- [patch] Fixing dropdown-menu analytics [c4098d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c4098d0)
+
+## 6.1.15
+- [patch] Updated dependencies [7d51a09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d51a09)
+  - @atlaskit/button@9.0.10
+  - @atlaskit/lozenge@6.2.1
+
+## 6.1.14
+- [patch] Updated dependencies [4b36fd6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b36fd6)
+  - @atlaskit/lozenge@6.2.0
+
+## 6.1.13
+- [patch] Updated dependencies [969233e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/969233e)
+  - @atlaskit/lozenge@6.1.8
+
+## 6.1.12
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 6.1.11
+- [patch] Fix initial position glitch when opening dropdown menu [d79e361](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d79e361)
+
 ## 6.1.9
 - [patch] Fix dropdown menu calls onOpenChange unnecessarily [2868a72](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2868a72)
 - [patch] Updated dependencies [2868a72](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2868a72)

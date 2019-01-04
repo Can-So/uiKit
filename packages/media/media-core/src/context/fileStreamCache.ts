@@ -40,6 +40,19 @@ export class FileStreamCache {
 
     return this.get(id)!;
   }
+
+  removeAll() {
+    this.fileStreams.removeAll();
+  }
+
+  remove(id: string) {
+    this.fileStreams.remove(id);
+  }
+
+  get size(): number {
+    return this.fileStreams.size;
+  }
 }
 
+export const fileStreamsCache = new FileStreamCache();
 export default FileStreamCache;

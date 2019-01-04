@@ -1,11 +1,11 @@
-import { akFontFamily, akFontSizeDefault } from '@atlaskit/util-shared-styles';
+import { fontFamily, fontSize } from '@atlaskit/theme';
 
 import { Fragment, Node as PMNode, Schema } from 'prosemirror-model';
 
 import { Serializer } from '../serializer';
 import { nodeSerializers } from './serializers';
 import { serializeStyle } from './util';
-import { calcTableColumnWidths } from '@atlaskit/editor-common';
+import { calcTableColumnWidths } from '@atlaskit/adf-schema';
 
 const serializeNode = (node: PMNode, serializedHTML?: string): string => {
   // ignore nodes with unknown type
@@ -46,8 +46,8 @@ const traverseTree = (fragment: Fragment): string => {
 };
 
 const wrapperCSS = serializeStyle({
-  'font-family': akFontFamily,
-  'font-size': akFontSizeDefault,
+  'font-family': fontFamily(),
+  'font-size': fontSize(),
   'font-weight': 400,
   'line-height': '24px',
 });

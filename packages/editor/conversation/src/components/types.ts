@@ -1,7 +1,10 @@
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { Comment as CommentType, User } from '../model';
 import { Editor as AkEditor, EditorProps } from '@atlaskit/editor-core';
+import { SuccessHandler } from '../internal/actions';
+import { EventData } from '../internal/analytics';
 
+export type SendAnalyticsEvent = (eventData: EventData) => void;
 /**
  * Props which are passed down from the parent Conversation/Comment
  */
@@ -15,19 +18,33 @@ export interface SharedProps {
     parentId: string,
     value: any,
     localId?: string,
+    onSuccess?: SuccessHandler,
   ) => void;
   onUpdateComment?: (
     conversationId: string,
     commentId: string,
     value: any,
+    onSuccess?: SuccessHandler,
   ) => void;
-  onDeleteComment?: (conversationId: string, commentId: string) => void;
+  onDeleteComment?: (
+    conversationId: string,
+    commentId: string,
+    onSuccess?: SuccessHandler,
+  ) => void;
   onRevertComment?: (conversationId: string, commentId: string) => void;
   onCancelComment?: (conversationId: string, commentId: string) => void;
   onCancel?: () => void;
   onHighlightComment?: (commentId: string) => void;
   onEditorOpen?: () => void;
   onEditorClose?: () => void;
+  onEditorChange?: (
+    isLocal: boolean,
+    value: any,
+    conversationId: string,
+    commentId: string | undefined,
+    containerId: string,
+    meta: any,
+  ) => void;
 
   // Provider
   dataProviders?: ProviderFactory;
@@ -45,5 +62,5 @@ export interface SharedProps {
   placeholder?: string;
   disableScrollTo?: boolean;
   allowFeedbackAndHelpButtons?: boolean;
-  sendAnalyticsEvent: (action: string) => void;
+  sendAnalyticsEvent: SendAnalyticsEvent;
 }

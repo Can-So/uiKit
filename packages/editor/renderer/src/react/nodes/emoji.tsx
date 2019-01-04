@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EmojiAttributes } from '@atlaskit/editor-common';
+import { EmojiAttributes } from '@atlaskit/adf-schema';
 import { PureComponent } from 'react';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { Emoji } from '@atlaskit/editor-common';

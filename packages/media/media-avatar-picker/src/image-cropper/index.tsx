@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { isImageRemote } from './isImageRemote';
 import CrossIcon from '@atlaskit/icon/glyph/cross';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
+import { isImageRemote } from './isImageRemote';
 import {
   CircularMask,
   Container,
@@ -38,7 +40,10 @@ export interface ImageCropperProp {
 
 const defaultScale = 1;
 
-export class ImageCropper extends Component<ImageCropperProp, {}> {
+export class ImageCropper extends Component<
+  ImageCropperProp & InjectedIntlProps,
+  {}
+> {
   private imageElement?: HTMLImageElement;
 
   static defaultProps = {
@@ -50,7 +55,12 @@ export class ImageCropper extends Component<ImageCropperProp, {}> {
   };
 
   componentDidMount() {
-    const { onLoad, imageSource, onImageError } = this.props;
+    const {
+      onLoad,
+      imageSource,
+      onImageError,
+      intl: { formatMessage },
+    } = this.props;
     if (onLoad) {
       onLoad({
         export: this.export,
@@ -59,7 +69,7 @@ export class ImageCropper extends Component<ImageCropperProp, {}> {
     try {
       isImageRemote(imageSource);
     } catch (e) {
-      onImageError(ERROR.URL);
+      onImageError(formatMessage(ERROR.URL));
     }
   }
 
@@ -76,7 +86,11 @@ export class ImageCropper extends Component<ImageCropperProp, {}> {
   };
 
   onImageError = () => {
-    this.props.onImageError(ERROR.FORMAT);
+    const {
+      onImageError,
+      intl: { formatMessage },
+    } = this.props;
+    onImageError(formatMessage(ERROR.FORMAT));
   };
 
   render() {
@@ -87,6 +101,7 @@ export class ImageCropper extends Component<ImageCropperProp, {}> {
       left,
       imageSource,
       onRemoveImage,
+      intl: { formatMessage },
     } = this.props;
     const containerStyle = {
       width: `${containerSize}px`,
@@ -119,7 +134,10 @@ export class ImageCropper extends Component<ImageCropperProp, {}> {
         <DragOverlay onMouseDown={this.onDragStarted} />
         <RemoveImageContainer>
           <RemoveImageButton onClick={onRemoveImage}>
-            <CrossIcon size="small" label="Remove image" />
+            <CrossIcon
+              size="small"
+              label={formatMessage(messages.remove_image)}
+            />
           </RemoveImageButton>
         </RemoveImageContainer>
       </Container>
@@ -168,3 +186,5 @@ export class ImageCropper extends Component<ImageCropperProp, {}> {
     return imageData;
   };
 }
+
+export default injectIntl(ImageCropper);

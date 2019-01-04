@@ -41,9 +41,7 @@ interface LiveUrlConverterState {
 }
 
 class LiveUrlConverter extends Component<{}, LiveUrlConverterState> {
-  interval: number;
-
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = { link: 'https://www.atlassian.com', loading: false };
   }
@@ -55,19 +53,6 @@ class LiveUrlConverter extends Component<{}, LiveUrlConverterState> {
     };
 
     const cards = [
-      {
-        title: 'small',
-        content: (
-          <Card
-            identifier={identifier}
-            context={context}
-            appearance="small"
-            onClick={eventHandler('click')}
-            onMouseEnter={eventHandler('mouseEnter')}
-            actions={menuActions}
-          />
-        ),
-      },
       {
         title: 'image',
         content: (
@@ -144,14 +129,14 @@ class LiveUrlConverter extends Component<{}, LiveUrlConverterState> {
     );
   }
 
-  onLoadingChange = state => {
+  onLoadingChange = (state: any) => {
     if (state) {
       this.setState({ loading: state.loading });
     }
   };
 
   // TODO debounce
-  onInputChange = e => {
+  onInputChange = (e: any) => {
     const link = e.target.value;
     this.setState({ link });
   };

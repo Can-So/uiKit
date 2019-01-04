@@ -6,20 +6,22 @@ This project is bound by a [Code of Conduct][codeofconduct].
 
 Lots more information about contributing to this project can also be found on our website. See [getting-started][getting-started] for more.
 
-## Reporting Issues
+## Reporting Tickets
 
-This section guides you through submitting a bug report for Atlaskit. Following these guidelines helps us and the community understand your issue, reproduce the behavior, and find related issues.
+Our service desk is now open to public, you can access it [here](https://ecosystem.atlassian.net/servicedesk/customer/portal/24).
 
-When you are creating an issue, please include as many details as possible. Fill out [the required template](ISSUE_TEMPLATE.md), the information it asks helps us resolve issues faster.
-
-### Before submitting an issue
+### Before submitting a ticket
 
 * **Perform a [cursory search][issuetracker]** to see if the problem has already been reported. If it has, add a comment to the existing issue instead of opening a new one.
 
-### How do I submit a (good) issue?
+### How do I submit a (good) bug report?
+
+Follow these guidelines to help us and the community understand your issue, reproduce the behavior, and find other related/duplicate issues.
+
+When you are creating a bug report, please include as many details as possible. Fill out [the required template](BUG_TEMPLATE.md) thoroughly to help us resolve issues faster.
 
 * **Use a clear and descriptive title** for the issue to identify the problem.
-* **Describe the exact steps which reproduce the problem** in as many details as possible. Add a link to a codepen example using [this codepen](http://go.atlassian.com/ak-codepen) as starting point. When listing steps, **don't just say what you did, but explain how you did it**. For example, if you opened a inline dialog, explain if you used the mouse, or a keyboard shortcut.
+* **Describe the exact steps which reproduce the problem** in as many details as possible. Add a link to a codesanbox example using [this codesanbox](http://go.atlassian.com/ak-sandbox) as starting point. When listing steps, **don't just say what you did, but explain how you did it**. For example, if you opened a inline dialog, explain if you used the mouse, or a keyboard shortcut.
 * **If the problem wasn't triggered by a specific action**, describe what you were doing before the problem happened and share more information using the guidelines below.
 
 Include details about your configuration and environment:
@@ -31,12 +33,10 @@ Include details about your configuration and environment:
 
 #### Why should I contribute?
 
-1. While we strive to look at new issues as soon as we can, because of the many priorities we juggle and limited resources, issues raised often don't get looked into soon enough.
+1. While we strive to look at new tickets as soon as we can, because of the many priorities we juggle and limited resources, tickets raised often don't get looked into soon enough.
 2. We want your contributions. We are always trying to improve our docs, processes and tools to make it easier to submit your own changes.
 3. With the build system and auto-deployment to npm, using Atlaskit components in your projects simplifies your development stack. Treat Atlaskit as part of your codebase and make changes in it.
 4. At Atlassian, "Play, As A Team" is one of our values. We encourage cross team contributions and collaborations.
-
-Please raise a new issue [here][issuetracker]. (Atlassians, please use this [internal link][atlassianbug].)
 
 # Contributing
 
@@ -48,8 +48,7 @@ little while. So bear with us for a little while as we work out all the
 problems.
 
 Don't worry though, we're making it easier than ever to work on Atlaskit from
-end to end. If you have any questions/problems, feel free to contact James Kyle
-or Luke Batchelor.
+end to end. If you have any questions/problems, feel free to contact Luke Batchelor.
 
 A more in-depth view of how we want to work with other teams and open source
 contributions can be found on the
@@ -93,6 +92,16 @@ bolt install
 This will take a minute or two the first time, but every subsequent run should
 only take about a second.
 
+Now you can start the development server for a specific component you are working on using
+`bolt start <pkg-name>`, for example:
+
+```sh
+bolt start button
+```
+
+This will start the dev server with only packages matching "button"
+pattern being served on http://localhost:9000.
+
 #### Linux / Mac / Windows
 
 The main `bolt` / `bolt install` commands work on all platforms. However, custom commands may not work in a Windows environment (i.e. `bolt start`). For now, if you're running Windows, you'll have to do the following:
@@ -110,7 +119,7 @@ After running `bolt install` you will most likely experiencing issues with IDE i
     {find . -type d -name 'node_modules' | grep 'node_modules$' | grep -v 'node_modules/' | while read line ; do echo "<excludeFolder url=\"file://\$MODULE_DIR$/$line\" />"; done;} | pbcopy
     ``` 
     This will find paths to each node_modules/ folder in the project, create <excludeFolder> tags for each of them and copy resulting text to clipboard 
-1. Open `.idea/atlaskit.iml` in your favorite text editor. 
+1. Open `.idea/atlaskit-mk-2.iml` in your favorite text editor. 
 1. Pres Ctrl + V to paste text from clipboard after existing `<excludeFolder>` tags. Or paste inside `<content>` if you do not have `<excludeFolder>` tags. Save the file.
 1. Open IntelliJ. You should be fine
 
@@ -305,11 +314,11 @@ How you do this will completely depend on what *exactly* you are trying to achie
 >
 > If your package is a flow package run:
 >
-> NODE_ENV=production BABEL_ENV=production:cjs bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/cjs
+> NODE_ENV=production BABEL_ENV=production:cjs bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/cjs --root-mode upward
 >
 > **or** if you know that you are consuming the package as a module:
 >
-> NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/esm
+> NODE_ENV=production BABEL_ENV=production:esm bolt workspaces exec --only "@atlaskit/pkgName" -- babel src -d dist/esm --root-mode upward
 >
 > If your package is written in TS:
 > NODE_ENV=production bolt workspaces exec --only "@atlaskit/pkgName" -- tsc --project ./build/es5
@@ -376,8 +385,7 @@ create the changelog entry for each package being released.
 More information about this can be found [here][releasing-packages] and in the [faq][faq]
 
 [codeofconduct]: ./CODE_OF_CONDUCT.md
-[issuetracker]: https://bitbucket.org/atlassian/atlaskit-mk-2/issues?status=new&status=open
-[atlassianbug]: http://go/ak-bug
+[issuetracker]: https://ecosystem.atlassian.net/issues/?filter=56701
 [testing]: https://atlaskit.atlassian.com/docs/guides/testing
 [releasing-packages]: https://atlaskit.atlassian.com/docs/guides/releasing-packages
 [getting-started]: https://atlaskit.atlassian.com/docs/getting-started

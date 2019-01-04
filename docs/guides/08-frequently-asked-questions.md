@@ -9,6 +9,10 @@ Related reading:
 * [versioning](./versioning)
 * [releasing-packages](./releasing-packages)
 
+## Why can't I create a branch to create a pull request? Should I fork this repository?
+
+Please don't fork this repository for pull requests. Instead, request permission to create branches by follwing the instructions under "Become a contributor" section in our [README.md](https://bitbucket.org/atlassian/atlaskit-mk-2/src).
+
 ## How do I release a change once it's merged?
 
 See the related reading above^ ([releasing-packages](./releasing-packages)) (hopefully before you've merged...).
@@ -40,14 +44,6 @@ One solution is to not make empty changeset commits (**reccomended**) or to use 
 ```
 git rebase -i --keep-empty origin/master
 ```
-
-### I'm getting a failure in CI during the `build` step that has nothing to do with my changes. Is this normal?
-
-Yes (sort of). It's a known issue that we believe is caused by a race condition between some of the `TypeScript` components.
-
-We are tracking the issue [here](https://ecosystem.atlassian.net/browse/AK-3974) and will likely be solving it with [this](https://github.com/thejameskyle/graph-sequencer) (currently WIP).
-
-In the meantime, simply rerunning should solve the issue (eventually...).
 
 ## Master has gone red suddenly and is complaining about not depending on the latest version of an internal package. What gives?
 

@@ -2,118 +2,178 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { ProviderFactory } from '@atlaskit/editor-common';
-import { CardDimensions, CardEventHandler } from '@atlaskit/media-card';
+import { ProviderFactory, ImageLoaderProps } from '@atlaskit/editor-common';
 import { ProsemirrorGetPosHandler, ReactNodeProps } from '../../../nodeviews';
-import UIMedia from '../ui/Media';
 import {
   MediaPluginState,
   stateKey as mediaStateKey,
 } from '../pm-plugins/main';
-import { akEditorFullPageMaxWidth } from '@atlaskit/editor-common';
-import ProgressLoader from '../../../ui/ProgressLoader';
+import { Context, ImageResizeMode } from '@atlaskit/media-core';
+import { MediaProvider } from '../pm-plugins/main';
+import {
+  Card,
+  CardDimensions,
+  CardView,
+  CardEventHandler,
+  CardOnClickCallback,
+  Identifier,
+} from '@atlaskit/media-card';
+import { MediaType, MediaBaseAttributes } from '@atlaskit/adf-schema';
+import { withImageLoader, ImageStatus } from '@atlaskit/editor-common';
+
+import { EditorAppearance } from '../../../types';
+
+// This is being used by DropPlaceholder now
+export const MEDIA_HEIGHT = 125;
+export const FILE_WIDTH = 156;
+
+export type Appearance = 'small' | 'image' | 'horizontal' | 'square';
 
 export interface MediaNodeProps extends ReactNodeProps {
   getPos: ProsemirrorGetPosHandler;
   view: EditorView;
   node: PMNode;
-  providerFactory: ProviderFactory;
+  providerFactory?: ProviderFactory;
   cardDimensions: CardDimensions;
   isMediaSingle?: boolean;
-  progress?: number;
+  mediaProvider?: Promise<MediaProvider>;
+  onClick?: CardOnClickCallback;
   onExternalImageLoaded?: (
     dimensions: { width: number; height: number },
   ) => void;
+  editorAppearance: EditorAppearance;
 }
 
-export default class MediaNode extends Component<MediaNodeProps, {}> {
+export interface Props extends Partial<MediaBaseAttributes> {
+  type: MediaType;
+  mediaProvider?: Promise<MediaProvider>;
+  cardDimensions?: CardDimensions;
+  onClick?: CardOnClickCallback;
+  onDelete?: CardEventHandler;
+  resizeMode?: ImageResizeMode;
+  appearance?: Appearance;
+  selected?: boolean;
+  url?: string;
+  imageStatus?: ImageStatus;
+  context: Context;
+  disableOverlay?: boolean;
+}
+
+export interface MediaNodeState {
+  viewContext?: Context;
+}
+
+class MediaNode extends Component<
+  MediaNodeProps & ImageLoaderProps,
+  MediaNodeState
+> {
   private pluginState: MediaPluginState;
+  private mediaProvider;
+  private hasBeenMounted: boolean = false;
+
+  state = {
+    viewContext: undefined,
+  };
 
   constructor(props) {
     super(props);
-
     const { view } = this.props;
     this.pluginState = mediaStateKey.getState(view.state);
+    this.mediaProvider = props.mediaProvider;
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      this.props.selected !== nextProps.selected ||
+      this.state.viewContext !== nextState.viewContext ||
+      this.props.node.attrs.id !== nextProps.node.attrs.id ||
+      this.props.node.attrs.collection !== nextProps.node.attrs.collection ||
+      this.props.cardDimensions !== nextProps.cardDimensions
+    ) {
+      return true;
+    }
+    return false;
   }
 
   componentDidMount() {
+    this.hasBeenMounted = true;
     this.handleNewNode(this.props);
+    this.updateMediaContext();
   }
 
   componentWillUnmount() {
     const { node } = this.props;
     this.pluginState.handleMediaNodeUnmount(node);
+    this.hasBeenMounted = false;
   }
 
-  cancelProgress = () => {
-    const {
-      node: {
-        attrs: { __key },
-      },
-    } = this.props;
-    this.pluginState.removeNodeById(__key);
+  componentDidUpdate() {
+    this.pluginState.updateElement();
+  }
+
+  private updateMediaContext = async () => {
+    const mediaProvider = await this.mediaProvider;
+    if (mediaProvider) {
+      const viewContext = await mediaProvider.viewContext;
+      if (viewContext && this.hasBeenMounted) {
+        this.setState({ viewContext });
+      }
+    }
   };
 
   render() {
     const {
       node,
-      providerFactory,
       selected,
-      view,
       cardDimensions,
-      isMediaSingle,
-      progress = 0,
-      onExternalImageLoaded,
+      onClick,
+      editorAppearance,
     } = this.props;
-    const { id, type, collection, url, __key, width } = node.attrs;
+    const { id, type, collection, url, __key } = node.attrs;
 
-    const deleteEventHandler = isMediaSingle ? undefined : this.handleRemove;
-    if (
-      !width &&
-      this.pluginState.editorAppearance !== 'message' &&
-      isMediaSingle &&
-      type !== 'external'
-    ) {
-      return (
-        <ProgressLoader
-          progress={progress}
-          maxWidth={akEditorFullPageMaxWidth}
-          onCancel={this.cancelProgress}
-          cancelLabel="Cancel upload"
-        />
-      );
+    if (!this.state.viewContext) {
+      return <CardView status="loading" dimensions={cardDimensions} />;
     }
 
+    /** For new images, the media state will be loaded inside the plugin state */
+    const getState = this.pluginState.getMediaNodeState(__key);
+    const fileId = getState && getState.fileId ? getState.fileId : id;
+
+    const identifier: Identifier =
+      type === 'external'
+        ? {
+            dataURI: url!,
+            name: url,
+            mediaItemType: 'external-image',
+          }
+        : {
+            id: fileId,
+            mediaItemType: 'file',
+            collectionName: collection!,
+          };
+
     return (
-      <UIMedia
-        key={`media-node-${__key}`}
-        editorView={view}
-        id={id!}
-        tempId={__key!}
-        type={type!}
-        collection={collection!}
-        providers={providerFactory}
-        cardDimensions={cardDimensions}
-        onDelete={deleteEventHandler}
+      <Card
+        context={this.state.viewContext!}
+        resizeMode="stretchy-fit"
+        dimensions={cardDimensions}
+        identifier={identifier}
+        selectable={true}
         selected={selected}
-        url={url}
-        onExternalImageLoaded={onExternalImageLoaded}
-        disableOverlay={isMediaSingle}
+        disableOverlay={true}
+        onClick={onClick}
+        useInlinePlayer={false}
+        isLazy={editorAppearance !== 'mobile'}
       />
     );
   }
 
-  private handleRemove: CardEventHandler = (item, event) => {
-    const { getPos, node } = this.props;
-    this.pluginState.handleMediaNodeRemoval(node, getPos);
-
-    if (event) {
-      event.stopPropagation();
-    }
-  };
-
   private handleNewNode = (props: MediaNodeProps) => {
-    const { getPos, node } = props;
-    this.pluginState.handleMediaNodeMount(node, getPos);
+    const { node } = props;
+
+    // +1 indicates the media node inside the mediaSingle nodeview
+    this.pluginState.handleMediaNodeMount(node, () => this.props.getPos() + 1);
   };
 }
+
+export default withImageLoader<MediaNodeProps>(MediaNode);

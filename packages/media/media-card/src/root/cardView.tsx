@@ -52,6 +52,7 @@ export interface CardViewOwnProps extends SharedCardProps {
   readonly dataURI?: string;
   readonly progress?: number;
   readonly disableOverlay?: boolean;
+  readonly previewOrientation?: number;
 }
 
 export interface CardViewState {
@@ -71,10 +72,7 @@ export class CardViewBase extends React.Component<
   CardViewBaseProps,
   CardViewState
 > {
-  constructor(props: CardViewBaseProps) {
-    super(props);
-    this.state = {};
-  }
+  state: CardViewState = {};
 
   componentDidMount() {
     this.saveElementWidth();
@@ -141,16 +139,18 @@ export class CardViewBase extends React.Component<
   render() {
     const { onClick, onMouseEnter } = this;
     const { dimensions, appearance, mediaItemType } = this.props;
+    const isFileLikeIdentifier =
+      mediaItemType === 'file' || mediaItemType === 'external-image';
     const wrapperDimensions = dimensions
       ? dimensions
-      : mediaItemType === 'file'
-        ? getDefaultCardDimensions(appearance)
-        : undefined;
+      : isFileLikeIdentifier
+      ? getDefaultCardDimensions(appearance)
+      : undefined;
     let card;
 
     if (mediaItemType === 'link') {
       card = this.renderLink();
-    } else if (mediaItemType === 'file') {
+    } else if (isFileLikeIdentifier) {
       card = this.renderFile();
     }
 
@@ -210,6 +210,8 @@ export class CardViewBase extends React.Component<
       selectable,
       selected,
       disableOverlay,
+      mediaItemType,
+      previewOrientation,
     } = this.props;
 
     return (
@@ -226,6 +228,8 @@ export class CardViewBase extends React.Component<
         selectable={selectable}
         selected={selected}
         disableOverlay={disableOverlay}
+        mediaItemType={mediaItemType}
+        previewOrientation={previewOrientation}
       />
     );
   };

@@ -5,6 +5,7 @@ import { ComponentClass, Consumer, Provider } from 'react';
 import { Fragment, Mark, Node, Schema } from 'prosemirror-model';
 
 import { Serializer } from '../';
+import { getText } from '../utils';
 import { RendererAppearance } from '../ui/Renderer';
 
 import {
@@ -17,14 +18,13 @@ import {
 } from './nodes';
 
 import { toReact as markToReact } from './marks';
-
+import { calcTableColumnWidths } from '@atlaskit/adf-schema';
 import {
   ProviderFactory,
   getMarksByOrder,
   isSameMark,
   EventHandlers,
   ExtensionHandlers,
-  calcTableColumnWidths,
 } from '@atlaskit/editor-common';
 import { bigEmojiHeight } from '../utils';
 
@@ -41,8 +41,9 @@ export interface ConstructorParams {
   extensionHandlers?: ExtensionHandlers;
   portal?: HTMLElement;
   objectContext?: RendererContext;
-  useNewApplicationCard?: boolean;
   appearance?: RendererAppearance;
+  disableHeadingIDs?: boolean;
+  allowDynamicTextSizing?: boolean;
 }
 
 export default class ReactSerializer implements Serializer<JSX.Element> {
@@ -51,8 +52,10 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
   private extensionHandlers?: ExtensionHandlers;
   private portal?: HTMLElement;
   private rendererContext?: RendererContext;
-  private useNewApplicationCard?: boolean;
   private appearance?: RendererAppearance;
+  private disableHeadingIDs?: boolean;
+  private headingIds: string[] = [];
+  private allowDynamicTextSizing?: boolean;
 
   constructor({
     providers,
@@ -60,16 +63,22 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
     extensionHandlers,
     portal,
     objectContext,
-    useNewApplicationCard,
     appearance,
+    disableHeadingIDs,
+    allowDynamicTextSizing,
   }: ConstructorParams) {
     this.providers = providers;
     this.eventHandlers = eventHandlers;
     this.extensionHandlers = extensionHandlers;
     this.portal = portal;
     this.rendererContext = objectContext;
-    this.useNewApplicationCard = useNewApplicationCard;
     this.appearance = appearance;
+    this.disableHeadingIDs = disableHeadingIDs;
+    this.allowDynamicTextSizing = allowDynamicTextSizing;
+  }
+
+  private resetState() {
+    this.headingIds = [];
   }
 
   serializeFragment(
@@ -79,39 +88,60 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
     key: string = 'root-0',
     parentInfo?: { parentIsIncompleteTask: boolean },
   ): JSX.Element | null {
+    // This makes sure that we reset internal state on re-render.
+    if (key === 'root-0') {
+      this.resetState();
+    }
+
     const emojiBlock = isEmojiDoc(fragment, props);
     const content = ReactSerializer.getChildNodes(fragment).map(
       (node, index) => {
-        if (isTextWrapper(node.type.name)) {
-          return this.serializeTextWrapper((node as TextWrapper).content);
+        if (isTextWrapper(node)) {
+          return this.serializeTextWrapper(node.content);
         }
+
         let props;
 
         if (emojiBlock && this.appearance === 'message') {
-          props = this.getEmojiBlockProps(node as Node);
+          props = this.getEmojiBlockProps(node);
         } else if (node.type.name === 'table') {
-          props = this.getTableProps(node as Node);
+          props = this.getTableProps(node);
         } else if (node.type.name === 'date') {
-          props = this.getDateProps(node as Node, parentInfo);
+          props = this.getDateProps(node, parentInfo);
+        } else if (node.type.name === 'heading') {
+          props = this.getHeadingProps(node);
         } else {
-          props = this.getProps(node as Node);
+          props = this.getProps(node);
         }
 
         let pInfo = parentInfo;
-        if (
-          node.type.name === 'taskItem' &&
-          (node as Node).attrs.state !== 'DONE'
-        ) {
+        if (node.type.name === 'taskItem' && node.attrs.state !== 'DONE') {
           pInfo = { parentIsIncompleteTask: true };
         }
 
-        return this.serializeFragment(
-          (node as Node).content,
+        const serializedContent = this.serializeFragment(
+          node.content,
           props,
-          toReact(node as Node),
+          toReact(node),
           `${node.type.name}-${index}`,
           pInfo,
         );
+
+        if (node.marks && node.marks.length) {
+          return ([] as Array<Mark>)
+            .concat(node.marks)
+            .reverse()
+            .reduce((acc, mark) => {
+              return this.renderMark(
+                markToReact(mark),
+                this.getMarkProps(mark),
+                `${mark.type.name}-${index}`,
+                acc,
+              );
+            }, serializedContent);
+        }
+
+        return serializedContent;
       },
     );
 
@@ -140,7 +170,6 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
     );
   }
 
-  // tslint:disable-next-line:variable-name
   private renderNode(
     NodeComponent: ComponentClass<any>,
     props: any,
@@ -154,7 +183,6 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
     );
   }
 
-  // tslint:disable-next-line:variable-name
   private renderMark(
     MarkComponent: ComponentClass<any>,
     props: any,
@@ -202,9 +230,46 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
       rendererContext: this.rendererContext,
       serializer: this,
       content: node.content ? node.content.toJSON() : undefined,
-      useNewApplicationCard: this.useNewApplicationCard,
+      allowDynamicTextSizing: this.allowDynamicTextSizing,
+      rendererAppearance: this.appearance,
       ...node.attrs,
     };
+  }
+
+  private getHeadingProps(node: Node) {
+    return {
+      ...node.attrs,
+      content: node.content ? node.content.toJSON() : undefined,
+      headingId: this.getHeadingId(node),
+    };
+  }
+
+  private getHeadingId(node: Node) {
+    if (this.disableHeadingIDs || !node.content.size) {
+      return;
+    }
+
+    const headingId = (node as any).content
+      .toJSON()
+      .reduce((acc, node) => acc.concat(getText(node) || ''), '')
+      .replace(/ /g, '-');
+
+    return this.getUniqueHeadingId(headingId);
+  }
+
+  private getUniqueHeadingId(baseId, counter = 0) {
+    if (counter === 0 && this.headingIds.indexOf(baseId) === -1) {
+      this.headingIds.push(baseId);
+      return baseId;
+    } else if (counter !== 0) {
+      const headingId = `${baseId}.${counter}`;
+      if (this.headingIds.indexOf(headingId) === -1) {
+        this.headingIds.push(headingId);
+        return headingId;
+      }
+    }
+
+    return this.getUniqueHeadingId(baseId, ++counter);
   }
 
   private getMarkProps(mark: Mark): any {
@@ -280,6 +345,8 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
       eventHandlers,
       extensionHandlers,
       appearance,
+      disableHeadingIDs,
+      allowDynamicTextSizing,
     }: ConstructorParams,
   ): ReactSerializer {
     // TODO: Do we actually need the schema here?
@@ -288,9 +355,8 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
       eventHandlers,
       extensionHandlers,
       appearance,
+      disableHeadingIDs,
+      allowDynamicTextSizing,
     });
   }
 }
-
-const { Provider, Consumer } = React.createContext(0);
-export { Provider as BreakoutProvider, Consumer as BreakoutConsumer };

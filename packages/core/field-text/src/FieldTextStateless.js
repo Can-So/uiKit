@@ -19,11 +19,9 @@ const Wrapper = styled.div`
   flex: 1 1 100%;
 `;
 
-type Props = {|
-  // $FlowFixMe - inexact `FieldTextProps` is incompatible with exact `Props`
-  ...FieldTextProps,
+type Props = FieldTextProps & {
   innerRef?: (node: ?HTMLInputElement) => void,
-|};
+};
 
 class FieldTextStateless extends Component<Props, void> {
   static defaultProps = {
@@ -56,13 +54,15 @@ class FieldTextStateless extends Component<Props, void> {
   render() {
     return (
       <Wrapper>
-        <Label
-          htmlFor={this.props.id}
-          isDisabled={this.props.disabled}
-          isLabelHidden={this.props.isLabelHidden}
-          isRequired={this.props.required}
-          label={this.props.label || ''}
-        />
+        {!this.props.isLabelHidden && (
+          <Label
+            htmlFor={this.props.id}
+            isDisabled={this.props.disabled}
+            isLabelHidden={this.props.isLabelHidden}
+            isRequired={this.props.required}
+            label={this.props.label || ''}
+          />
+        )}
         <Base
           invalidMessage={this.props.invalidMessage}
           isCompact={this.props.compact}
@@ -80,6 +80,7 @@ class FieldTextStateless extends Component<Props, void> {
             form={this.props.form}
             id={this.props.id}
             innerRef={this.setInputRef}
+            isMonospaced={this.props.isMonospaced}
             maxLength={this.props.maxLength}
             min={this.props.min}
             max={this.props.max}

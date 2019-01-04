@@ -1,5 +1,387 @@
 # @atlaskit/navigation-next
 
+## 4.1.0
+- [minor] [86aaacd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/86aaacd):
+
+  - [Update flyout hover activation zone](https://product-fabric.atlassian.net/browse/NAV-197)
+  	- It is controlled by a new FF prop called `experimental_alternateFlyoutBehaviour` which defaults to false. ::NOTE:: For this feature to be enabled, it’s is necessary to have the FF  `experimental_flyoutOnHover` to be set to true.
+  - Update expand affordance icon
+
+## 4.0.10
+- [patch] [3a33b6b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a33b6b):
+
+  - New entry point for Global Navigation Skeleton
+
+## 4.0.9
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/badge@9.2.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/drawer@2.6.1
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/field-base@11.0.13
+  - @atlaskit/global-navigation@5.3.8
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/onboarding@6.1.14
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/select@6.1.13
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/toggle@5.0.14
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/analytics-listeners@4.1.4
+  - @atlaskit/analytics-namespaced-context@2.1.5
+  - @atlaskit/docs@6.0.0
+
+## 4.0.8
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/drawer@2.5.4
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/field-base@11.0.12
+  - @atlaskit/global-navigation@5.3.6
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/select@6.1.10
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/toggle@5.0.13
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/badge@9.2.1
+  - @atlaskit/lozenge@6.2.3
+  - @atlaskit/onboarding@6.1.12
+
+## 4.0.7
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/drawer@2.5.3
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/field-base@11.0.11
+  - @atlaskit/global-navigation@5.3.5
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/onboarding@6.1.11
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/select@6.1.9
+  - @atlaskit/toggle@5.0.12
+  - @atlaskit/tooltip@12.1.11
+  - @atlaskit/icon@15.0.0
+
+## 4.0.6
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/drawer@2.5.2
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/global-navigation@5.3.4
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/onboarding@6.1.10
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/select@6.1.8
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/toggle@5.0.11
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/analytics-listeners@4.1.1
+  - @atlaskit/button@10.0.0
+
+## 4.0.5
+- [patch] [21bc705](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/21bc705):
+
+  - Fixing flowtype exports on @atlaskit/navigation-next entry points
+
+## 4.0.4
+- [patch] [abd3a39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abd3a39):
+
+  - Bump react-beautiful-dnd dependency to v10.0.2
+
+## 4.0.3
+- [patch] [d22baae](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d22baae):
+
+  - Fixing entrypoint replacement script
+
+## 4.0.2
+- [patch] [01d913d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01d913d):
+
+  - fixing exports integration on JFE
+
+## 4.0.1
+- [patch] [f66f71f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f66f71f):
+
+  - Makes all entrypoints have a corresponding .flow file containing the //@flow comment
+
+## 4.0.0
+- [major] [8e753fc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8e753fc):
+
+  - View the [upgrade guide](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/upgrade-guide) to help you upgrade to v4
+  - The API for renderer items that use components as their `type` property have now changed to use a type value of `'InlineComponent'` and specify the component via a `component` prop instead. This allows the renderer item types to be typed correctly as disjoint unions on the type property.
+  - Rename `withNavigationUI` HOC to `withNavigationUIController`
+  - Rename `ViewRenderer` component to `ItemsRenderer`
+  - Rename AsyncLayoutManagerWithViewController's `viewRenderer` prop to `itemsRenderer`
+  - Remove icon prop from ConnectedItem and built-in renderer 'Item' type
+  - Remove deprecated `key` prop from GlobalNav's `primaryItems` and `secondaryItems` props
+  - Remove ScrollableSectionInner component. Remove scrollHint styles from theme.
+  - Remove peeking behaviour
+
+## 3.26.0
+- [minor] [5c6c893](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c6c893):
+
+  - Create an entrypoint for ViewController and UIController
+
+## 3.25.2
+- [patch] [5e99cb1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5e99cb1):
+
+  - Replacing LayoutManagerWithViewController impl by composing AsyncLMWVC
+
+## 3.25.1
+- [patch] [a22db3c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a22db3c):
+
+  - Update flowtypes of UIController to allow consumer supplied cache getters to return null/undefined
+
+## 3.25.0
+- [minor] [d96b032](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d96b032):
+
+  - BREAKING: A breaking change was accidentally released in this version.
+
+    The API for renderer items that use components as their \`type\` property have now changed to use a type value of \`'InlineComponent'\` and specify the component via a \`component\` prop instead. See the View the [v3 - v4 upgrade guide](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/upgrade-guide) for more information.
+  - Export flow types for each built-in item renderer type
+  - Export a generic flow typed version of the renderer, `TypedViewRenderer`, that is designed to be extended to pass custom component flow types
+    so the renderer typechecks custom components. See the [View Renderer documentation](https://atlaskit.atlassian.com/packages/core/navigation-next/docs/state-controllers#view-renderer) for more information.
+
+## 3.24.0
+- [minor] [c2c0b0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2c0b0c):
+
+  - Adding new component AsyncLayoutManagerWithViewController to be used with code splitting
+
+## 3.23.0
+- [minor] [b40e33e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b40e33e):
+
+  - Update flow types of navigation components and higher-order components (HOCs) to allow types to flow through to consumers.
+
+    Previously this was broken because our navigation HOCs (withTheme, withNavigationUIController, withNavigationViewController)
+    weren't explicitly typed and swallowed types of a component. Types were also lost when components were wrapped with multiple HOCs (including withAnalyticsEvents, withAnalyticsContext HOCs). This is now fixed by default and a number of types related to our navigation HOCs have been exported so that you can explicitly type any subsequent components
+    wrapped with our HOCs.
+
+## 3.22.1
+- [patch] [a637f5e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a637f5e):
+
+  - Refine and fix some flow type errors found by fixing @atlaskit/analytics-next HOCs to allow flow to type check properly
+
+## 3.22.0
+- [minor] [b8bda3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b8bda3a):
+
+  - Make Switcher option components styles customizable
+
+## 3.21.0
+- [minor] [9d98f92](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d98f92):
+
+  - Add SortableContext, SortableGroup and SortableItem components to enable drag and drop of items within a view.
+
+## 3.20.1
+- [patch] [c2a6561](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c2a6561):
+
+  - Fixing section animation on first-page load
+
+## 3.20.0
+- [minor] [3f17176](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f17176):
+
+  - Make GoToItem display arrow icon on focus event
+
+## 3.19.1
+- [patch] [f3d0351"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f3d0351"
+d):
+
+  - Removing animations on first page load
+
+## 3.19.0
+- [minor] Export the following view renderer components as standalone UI components: BackItem, ConnectedItem, GoToItem, HeaderSection, MenuSection, Wordmark [459c2dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/459c2dd)
+
+## 3.18.4
+- [patch] Fix LayoutManager's onExpandStart, onExpandEnd, onCollapseStart and onCollapseEnd callbacks being called when the flyout opens or closes. [7b78219](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b78219)
+
+## 3.18.3
+- [patch] Make nav bar snap to default width if not moved below collapsing threshold [9617164](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9617164)
+
+## 3.18.2
+- [patch] stop isResizing state being cached in localStorage. fixes bug where the nav becomes uninteractive if the user refreshes the page mid-drag [67a8d0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/67a8d0e)
+
+## 3.18.1
+- [patch] fix issues with PopupSelect and NavigationSwitcher [b4e19c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b4e19c3)
+
+## 3.18.0
+- [minor] Adds a 350ms delay to Flyout to prevent it from opening accidentally. [8175029](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8175029)
+
+## 3.17.2
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 3.17.1
+- [patch] Fix nav flyout getting stuck in an opened state after global nav drawers are opened [ed585c6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ed585c6)
+
+## 3.17.0
+- [minor] Add expand analytics for flyout hover state [45f9a92](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/45f9a92)
+
+## 3.16.0
+- [minor] introduce flyout on hover, with feature-flag property [5c00034](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c00034)
+
+## 3.15.6
+- [patch] Avoid re-mount of custom components on re-render [1a47c0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a47c0b)
+
+## 3.15.5
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/avatar@14.0.11
+  - @atlaskit/button@9.0.13
+  - @atlaskit/drawer@2.1.1
+  - @atlaskit/dropdown-menu@6.1.17
+  - @atlaskit/field-base@11.0.8
+  - @atlaskit/global-navigation@5.0.1
+  - @atlaskit/modal-dialog@7.0.2
+  - @atlaskit/onboarding@6.0.2
+  - @atlaskit/section-message@1.0.8
+  - @atlaskit/select@6.0.2
+  - @atlaskit/toggle@5.0.9
+  - @atlaskit/tooltip@12.1.1
+  - @atlaskit/icon@14.0.0
+
+## 3.15.4
+- [patch] Updated dependencies [ac88888](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ac88888)
+  - @atlaskit/global-navigation@5.0.0
+
+## 3.15.3
+- [patch] Update global nav item click analytics to use actionSubjectId rather than the itemId attribute [56a3ada](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56a3ada)
+
+## 3.15.2
+- [patch] Fix misalignment of tooltips for small global items [2c48609](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c48609)
+
+## 3.15.1
+- [patch] hide GlobalItem tooltip on click as well as on mousedown [6c35a0d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c35a0d)
+
+## 3.15.0
+- [minor] Add itemComponent prop to GlobalNav to allow consumers to pass a custom component for rendering items. Add isSelected prop to GlobalItem. [e8163a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e8163a6)
+
+## 3.14.3
+- [patch] fix item after onclick [ab3a683](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab3a683)
+
+## 3.14.2
+- [patch] Remove memoization of custom components in globaItem and wrapping tooltip children in div to maintain reference to it [08dd5f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/08dd5f4)
+
+## 3.14.1
+- [patch] Fix GlobalItem not passing all GlobalItem props to custom component. [9f95736](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9f95736)
+
+## 3.14.0
+- [minor] Add enableResize(), disableResize(), and state.isResizeDisabled to UIController. The NavigationProvider's initialUIController prop can now containe a isResizeDisabled property. [a932511](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a932511)
+
+## 3.13.3
+- [patch] Adds the new hideTooltipOnMouseDown was required since global-navigation and navigation-next are using onMouseDown and onMouseUp iteractions [8719daf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8719daf)
+
+## 3.13.2
+- [patch] Updated dependencies [4194aa4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4194aa4)
+  - @atlaskit/logo@9.2.2
+  - @atlaskit/select@6.0.0
+
+## 3.13.1
+- [patch] fixing remount component on GlobalItem component [e71825a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e71825a)
+
+## 3.13.0
+- [minor] introduces never-fully-collapsed content navigation [99add85](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99add85)
+
+## 3.12.2
+- [patch] fixing HelpIcon active on children :hover [ae95dad](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ae95dad)
+
+## 3.12.1
+- [patch] limit page renders [36da70a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/36da70a)
+
+## 3.12.0
+- [minor] Export SkeletonContainerView component [b1acba3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1acba3)
+
+## 3.11.4
+- [patch] Adds support for closing switcher on create click [057f006](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/057f006)
+
+## 3.11.3
+- [patch] Enforcing CONTENT_NAV_WIDTH on the components [d9ae0a9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d9ae0a9)
+
+## 3.11.2
+- [patch] Do not cache CustomComponent in GlobalItem [372795f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/372795f)
+
+## 3.11.1
+- [patch] hotfix: return nav item on click element to button [23fa988](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23fa988)
+
+## 3.11.0
+- [minor] Add a `getAnalyticsAttributes` prop to the `addView` function of ViewController that enables passing extra analytics attributes to analytics events fired within navigation when the specified view is active. [56452d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56452d3)
+- [patch] Add missing navigationLayer attribute to productNavigation expanded/collapsed. [1ffd2ca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ffd2ca)
+
+## 3.10.1
+- [patch] Resolves nav item pseudo-state locking issue [2a4693c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2a4693c)
+
+## 3.10.0
+- [minor] Export ThemeProvider from the package. [978e055](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/978e055)
+
+## 3.9.1
+- [patch] Fix navigation-next items being re-created at every render [6e8270d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e8270d)
+
+## 3.9.0
+- [minor] LayoutManager and LayoutManagerWithViewController accept a getRefs prop which exposes a ref to the expand/collapse button node. The intended use-case is for creating a changeboarding experience for the new collapsed state. [51cd072](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/51cd072)
+
+## 3.8.1
+- [patch] add styled-components as a peer dep [ce45300](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce45300)
+
+## 3.8.0
+- [minor] Add MenuSection, HeaderSection, Wordmark, and BackItem convenience types to the renderer. Lots of design alignment and polishing across all of the components. [742a8f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/742a8f3)
+
+## 3.7.6
+- [patch] Changes the way GlobalNavigationItemPrimitive is rendered. The earlier way of rendering was causing the items to mount and remount on every render [b18d920](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b18d920)
+
+## 3.7.5
+- [patch] Updated dependencies [9c66d4d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c66d4d)
+  - @atlaskit/select@5.0.16
+  - @atlaskit/webdriver-runner@0.1.0
+
+## 3.7.4
+- [patch] Adjust navigation items background colours theming [da7b64d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/da7b64d)
+
+## 3.7.3
+- [patch] LayoutManagerWithViewController now will pass Collapse Listeners props to LayoutManager [881ba31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/881ba31)
+
+## 3.7.2
+- [patch] Fixing multiple skeleton load states, rendering product and container skeletons [68e49a1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/68e49a1)
+
+## 3.7.1
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 3.7.0
+- [minor] Align styles and behaviours with updated designs [170fda7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/170fda7)
+
+## 3.6.6
+- [patch] Updated dependencies [90ba6bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90ba6bd)
+  - @atlaskit/global-navigation@4.2.2
+  - @atlaskit/analytics-namespaced-context@2.1.2
+  - @atlaskit/analytics-listeners@4.0.0
+
+## 3.6.5
+- [patch] Update navigation item analytics to gracefully handle invalid or missing ID prop [c3e29af](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c3e29af)
+
+## 3.6.4
+- [patch] Remove BackItem extra margin [bc2d997](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bc2d997)
+
+## 3.6.3
+- [patch] Update navigation item click analytics to use an attribute identifier rather than action subject ID. Also convert kebab-case ids to camelCase. [5efaeaf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5efaeaf)
+
+## 3.6.2
+- [patch] add better guards around browser globals for SSR [a3db793](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3db793)
+
 ## 3.6.1
 - [patch] Fix navigation componentName analytics context attribute being placed underneath attributes. It will now appear in componentHierarchy correctly in the resulting event payload rather than componentName [ac34b7a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ac34b7a)
 

@@ -1,5 +1,90 @@
 # @atlaskit/media-store
 
+## 9.0.2
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/media-test-helpers@18.7.2
+  - @atlaskit/media-card@47.0.0
+
+## 9.0.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
+## 9.0.0
+- [minor] [46cacba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/46cacba):
+
+  - Add touchEndpoint() method that calls /upload/createWithFiles and creates uploads & files with given ids
+- [major] [096f898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/096f898):
+
+  - Add touchFiles function to store; Add mandatory upfrontIds object to `uploadFile` function - now it's responsibility of consumer to create file and give promise of upload id that will be used as part of upload; `uploadFile` function's callback object: `onId` callback is removed and replaced with `onUploadFinish` that can be called with an error object as an argument in case of an error; `deferredFileId` value is removed from `uploadFile` return object.
+
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/media-card@46.0.0
+  - @atlaskit/media-test-helpers@18.7.0
+
+## 8.5.1
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/media-card@45.0.0
+  - @atlaskit/media-test-helpers@18.6.2
+
+## 8.5.0
+- [minor] [0f42ec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f42ec1):
+
+  Use /items endpoint in media-core
+
+## 8.4.1
+- [patch] [2c40be7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c40be7):
+
+  - Bump to fix dep for @atlaskit/docs
+
+## 8.4.0
+- [minor] [602eaec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/602eaec):
+
+  - Media store object now has removeCollectionFile method; uploadFile third argument (UploadFileCallbacks) onId now will be supplied with occurrenceKey as second argument;
+
+## 8.3.1
+- [patch] [705dcf3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/705dcf3):
+
+  - pass collectionName to MediaStore in order to use right auth token
+
+## 8.3.0
+- [minor] [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+
+  - Allow to inline play video files in media-card
+
+## 8.2.0
+- [minor] Split Media + Editor cleanup part 1 [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+
+## 8.1.1
+- [patch] Fix bug with download binary [71ebe0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/71ebe0b)
+
+## 8.1.0
+- [minor] Media-card: allow to download binary when processing failed, add failed-processing to CardStatus; Media-core: add context.file.downloadBinary, add failed-processing to FileStatus; Media-store: add getFileBinaryURL; [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+
+## 8.0.1
+- [patch] Add pagination to recents view in MediaPicker [4b3c1f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b3c1f5)
+
+## 8.0.0
+- [major] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [major] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+
+## 7.0.0
+- [major] Make hasherCreator load async and remove public export of createHasher [2d848cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d848cd)
+
+## 6.2.1
+- [patch] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+  - @atlaskit/media-test-helpers@18.0.0
+
+## 6.2.0
+- [minor] expose new context.collection methods [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+
+## 6.1.0
+- [minor] Expose upfrontId in MediaPicker [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
+
+## 6.0.1
+- [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+  - @atlaskit/media-test-helpers@17.0.0
+
 ## 6.0.0
 - [major] Synchronous property "serviceHost" as part of many Interfaces in media components (like MediaApiConfig) is removed and replaced with asynchronous "baseUrl" as part of Auth object. [d02746f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d02746f)
 - [major] Updated dependencies [d02746f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d02746f)

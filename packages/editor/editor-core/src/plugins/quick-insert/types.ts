@@ -1,3 +1,4 @@
+import { InjectedIntl } from 'react-intl';
 import { EditorState, Transaction } from 'prosemirror-state';
 import { Node } from 'prosemirror-model';
 import { TypeAheadItem } from '../type-ahead/types';
@@ -6,7 +7,10 @@ export type QuickInsertItem = TypeAheadItem & {
   keywords?: Array<string>;
   priority?: number;
   action: (
-    insert: (node?: Node | Object | string) => Transaction,
+    insert: (
+      node?: Node | Object | string,
+      opts?: { selectInlineNode?: boolean },
+    ) => Transaction,
     state: EditorState,
   ) => Transaction | false;
 };
@@ -20,3 +24,7 @@ export type QuickInsertOptions =
   | {
       provider: Promise<QuickInsertProvider>;
     };
+
+export type QuickInsertHandler =
+  | Array<QuickInsertItem>
+  | ((intl: InjectedIntl) => Array<QuickInsertItem>);

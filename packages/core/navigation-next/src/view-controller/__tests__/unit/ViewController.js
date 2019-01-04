@@ -30,35 +30,12 @@ const incomingView = {
 
 describe('NavigationNext View Controller', () => {
   afterEach(() => {
-    getItems.mockRestore();
-  });
-
-  it('should NOT set default values for peekView if initial peek view ID value is null', () => {
-    const viewController = new ViewController({
-      initialPeekViewId: null,
-      isDebugEnabled: true,
-    });
-
-    expect(viewController.initialPeekViewId).toEqual(null);
-    expect(viewController.state.incomingPeekView).toEqual(null);
-  });
-
-  it('should set default values for peekView if receives initial peek view ID value', () => {
-    const viewController = new ViewController({
-      initialPeekViewId: 'view-id',
-      isDebugEnabled: true,
-    });
-
-    expect(viewController.state.incomingPeekView).toEqual({
-      id: 'view-id',
-      type: null,
-    });
+    getItems.mockClear();
   });
 
   describe('Reducers', () => {
     it('should be able to add and remove view controller reducers', () => {
       const viewController = new ViewController({
-        initialPeekViewId: 'view-id',
         isDebugEnabled: true,
       });
 
@@ -84,7 +61,6 @@ describe('NavigationNext View Controller', () => {
 
     it('should not change reducers if any reducer was added before remove function call', () => {
       const viewController = new ViewController({
-        initialPeekViewId: 'view-id',
         isDebugEnabled: true,
       });
 
@@ -95,7 +71,6 @@ describe('NavigationNext View Controller', () => {
 
     it('should not remove reducers if is not the same function reference', () => {
       const viewController = new ViewController({
-        initialPeekViewId: 'view-id',
         isDebugEnabled: true,
       });
 
@@ -112,7 +87,6 @@ describe('NavigationNext View Controller', () => {
   describe('Views', () => {
     it('should call method `getItems` in the given view object', () => {
       const viewController = new ViewController({
-        initialPeekViewId: 'view-id',
         isDebugEnabled: true,
       });
       viewController.addView(view);
@@ -121,13 +95,11 @@ describe('NavigationNext View Controller', () => {
       expect(view.getItems).toHaveBeenCalled();
     });
 
-    it('should add view as incoming when setView is called if view id with `getItems` is NOT a promise', () => {
+    it('should add view as incoming when setView is called if view id with `getItems` promise was NOT solved', () => {
       const viewController = new ViewController({
-        initialPeekViewId: 'view-id',
         isDebugEnabled: true,
       });
-
-      viewController.addView({ ...view, getITems: () => {} });
+      viewController.addView(view);
       viewController.setView('view-id');
 
       expect(viewController.state.incomingView).toMatchObject({
@@ -136,9 +108,19 @@ describe('NavigationNext View Controller', () => {
       });
     });
 
+    it('should NOT add view as incoming when setView is called if view id with `getItems` is returning an empty list', () => {
+      const viewController = new ViewController({
+        isDebugEnabled: true,
+      });
+
+      viewController.addView({ ...view, getItems: () => [] });
+      viewController.setView('view-id');
+
+      expect(viewController.state.incomingView).toBe(null);
+    });
+
     it('should add view as active when setView is called if view id with `getItems` promise and solved', async () => {
       const viewController = new ViewController({
-        initialPeekViewId: 'view-id',
         isDebugEnabled: true,
       });
 
@@ -151,9 +133,50 @@ describe('NavigationNext View Controller', () => {
       });
     });
 
+    it('should add view as active when setView is called if view id with `getItems` is a function rather than a promise', () => {
+      const viewController = new ViewController({
+        isDebugEnabled: true,
+      });
+
+      const items = [{ type: 'Item', id: 'foo' }];
+
+      viewController.addView({ ...view, getItems: () => items });
+      viewController.setView('view-id');
+
+      expect(viewController.state.activeView).toMatchObject({
+        data: items,
+        id: view.id,
+        type: view.type,
+      });
+    });
+
+    it('should provide an analyticsAttributes prop within activeView if a getAnalyticsAttributes prop has been provided when registering a view', () => {
+      const viewController = new ViewController();
+
+      const extraAttributes = { product: 'foo' };
+      const items = [{ type: 'Item', id: 'bar' }];
+
+      const getAnalyticsAttributes = jest.fn(() => extraAttributes);
+
+      viewController.addView({
+        ...view,
+        getItems: () => items,
+        getAnalyticsAttributes,
+      });
+
+      expect(getAnalyticsAttributes).not.toHaveBeenCalled();
+      viewController.setView('view-id');
+      expect(getAnalyticsAttributes).toHaveBeenCalledWith(items);
+      expect(viewController.state.activeView).toMatchObject({
+        analyticsAttributes: extraAttributes,
+        data: items,
+        id: view.id,
+        type: view.type,
+      });
+    });
+
     it('should be able to add and remove views', () => {
       const viewController = new ViewController({
-        initialPeekViewId: 'view-id',
         isDebugEnabled: true,
       });
 
@@ -172,7 +195,6 @@ describe('NavigationNext View Controller', () => {
 
     it('should not change views if any view was added before remove function call', () => {
       const viewController = new ViewController({
-        initialPeekViewId: 'view-id',
         isDebugEnabled: true,
       });
       expect(viewController.views).toEqual({});
@@ -184,7 +206,6 @@ describe('NavigationNext View Controller', () => {
 
     it('should not remove views if is not the same function reference', () => {
       const viewController = new ViewController({
-        initialPeekViewId: 'view-id',
         isDebugEnabled: true,
       });
 
@@ -199,7 +220,6 @@ describe('NavigationNext View Controller', () => {
 
   it('should add incoming view as active view if the added and incoming view matches', () => {
     const viewController = new ViewController({
-      initialPeekViewId: 'view-id',
       isDebugEnabled: true,
     });
 
@@ -214,14 +234,11 @@ describe('NavigationNext View Controller', () => {
       id: view.id,
       type: view.type,
     });
-    expect(viewController.state.activePeekView).toBe(null);
     expect(viewController.state.incomingView).toEqual(incomingView);
-    expect(viewController.state.incomingPeekView).toEqual(incomingView);
   });
 
   it('should reset the view if a view ID has been provided and it matches the active view', () => {
     const viewController = new ViewController({
-      initialPeekViewId: 'view-id',
       isDebugEnabled: true,
     });
 
@@ -239,14 +256,11 @@ describe('NavigationNext View Controller', () => {
     };
 
     expect(viewController.state.activeView).toMatchObject(expectedData);
-    expect(viewController.state.activePeekView).toBe(null);
     expect(viewController.state.incomingView).toEqual(incomingView);
-    expect(viewController.state.incomingPeekView).toEqual(incomingView);
   });
 
   it('should reset the view, active container and product If a view ID has NOT been provided', () => {
     const viewController = new ViewController({
-      initialPeekViewId: 'view-id',
       isDebugEnabled: true,
     });
 
@@ -264,8 +278,6 @@ describe('NavigationNext View Controller', () => {
     };
 
     expect(viewController.state.activeView).toMatchObject(expectedData);
-    expect(viewController.state.activePeekView).toBe(null);
     expect(viewController.state.incomingView).toEqual(incomingView);
-    expect(viewController.state.incomingPeekView).toEqual(incomingView);
   });
 });

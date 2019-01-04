@@ -1,4 +1,4 @@
-import { uuid } from '@atlaskit/editor-common';
+import { uuid } from '@atlaskit/adf-schema';
 import { inputRules, InputRule } from 'prosemirror-inputrules';
 import { Schema, NodeType, Node } from 'prosemirror-model';
 import {
@@ -13,6 +13,7 @@ import {
   leafNodeReplacementCharacter,
 } from '../../../utils/input-rules';
 import { canInsert } from 'prosemirror-utils';
+import { changeInDepth } from '../commands';
 
 const createListRule = (
   regex: RegExp,
@@ -53,7 +54,7 @@ const createListRule = (
         $end.parent.type !== paragraph ||
         !canInsert($endOfParent, list.createAndFill() as Node)
       ) {
-        return;
+        return null;
       }
 
       const where = $from.before($from.depth);
@@ -63,8 +64,7 @@ const createListRule = (
       );
 
       if (!shouldBreakNode) {
-        tr
-          .delete(where, $from.end($from.depth))
+        tr.delete(where, $from.end($from.depth))
           .replaceSelectionWith(
             list.create({ localId: uuid.generate() }, [
               item.create({ localId: uuid.generate() }, content),
@@ -73,16 +73,20 @@ const createListRule = (
           .delete(start + 1, end + 1)
           .setSelection(new TextSelection(tr.doc.resolve(start + 1)));
       } else {
-        tr
-          .split($from.pos)
+        const depthAdjustment = changeInDepth($from, tr.selection.$from);
+        tr.split($from.pos)
           .setSelection(new NodeSelection(tr.doc.resolve($from.pos + 1)))
           .replaceSelectionWith(
             list.create({ localId: uuid.generate() }, [
               item.create(
                 { localId: uuid.generate() },
-                tr.doc.nodeAt($from.pos + 1)!.content,
+                // TODO: [ts30] handle void and null properly
+                (tr.doc.nodeAt($from.pos + 1) as Node).content,
               ),
             ]),
+          )
+          .setSelection(
+            new TextSelection(tr.doc.resolve($from.pos + depthAdjustment)),
           )
           .delete(start, end + 1);
       }

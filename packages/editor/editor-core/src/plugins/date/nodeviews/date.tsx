@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { akBorderRadius, akColorB200 } from '@atlaskit/util-shared-styles';
+import { borderRadius, colors } from '@atlaskit/theme';
 import {
   timestampToString,
   timestampToTaskContext,
@@ -10,19 +10,16 @@ import {
 } from '@atlaskit/editor-common';
 import { Date } from '@atlaskit/date';
 import { setDatePickerAt } from '../actions';
-import { defaultEditorFontStyles } from '../../../styles';
 
 const SelectableDate = styled(Date)`
-  ${defaultEditorFontStyles};
-
   .ProseMirror-selectednode & {
     display: 'relative';
     &::before {
       content: '';
-      border: 2px solid ${akColorB200};
+      border: 2px solid ${colors.B200};
       display: 'absolute';
       background: transparent;
-      border-radius: ${akBorderRadius};
+      border-radius: ${borderRadius()}px;
       box-sizing: border-box;
       position: absolute;
       top: 0;
@@ -43,13 +40,14 @@ export interface Props {
 export default class DateNodeView extends React.Component<Props> {
   render() {
     const {
-      attrs: { timestamp },
-    } = this.props.node;
-    const {
+      node: {
+        attrs: { timestamp },
+      },
       view: {
         state: { schema, selection },
       },
     } = this.props;
+
     const parent = selection.$from.parent;
     const withinIncompleteTask =
       parent.type === schema.nodes.taskItem && parent.attrs.state !== 'DONE';

@@ -36,12 +36,16 @@ it('should focus button', () => {
 
 it('should focus what is returned by the function', () => {
   const ref = React.createRef();
+  /* eslint-disable */
   mount(
-    <FocusLock autoFocus={() => ref.current}>
+    <FocusLock>
       <button>Button 1</button>
-      <button ref={ref}>Button 2</button>
+      <button autoFocus ref={ref}>
+        Button 2
+      </button>
     </FocusLock>,
   );
+  /* eslint-enable */
   expect(textContent(document.activeElement)).toBe('Button 2');
 });
 
@@ -88,7 +92,8 @@ it('should focus on inner lock', () => {
       </FocusLock>
     </FocusLock>,
   );
-  expect(textContent(document.activeElement)).toBe('Button 2');
+  const { activeElement } = document;
+  expect(activeElement && activeElement.tabIndex).toBe(1);
 });
 
 it('should focus on last enabled inner lock', () => {
@@ -107,7 +112,8 @@ it('should focus on last enabled inner lock', () => {
       </div>
     </FocusLock>,
   );
-  expect(textContent(document.activeElement)).toBe('Button 2');
+  const { activeElement } = document;
+  expect(activeElement && activeElement.tabIndex).toBe(1);
 });
 
 it('should work through Portals', () => {
@@ -183,9 +189,12 @@ it('should stay focused in inner lock when disabled', () => {
     </FocusLock>,
   );
   wrapper.find('#button-2').simulate('click');
-  return nextTick(() =>
-    expect(textContent(document.activeElement)).toBe('Button 2 unlocked'),
-  );
+  return nextTick(() => {
+    const { activeElement } = document;
+    expect(textContent(activeElement && activeElement.nextElementSibling)).toBe(
+      'Button 2 unlocked',
+    );
+  });
 });
 
 it('should focus on previous lock after state change', () => {

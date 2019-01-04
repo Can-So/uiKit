@@ -28,6 +28,8 @@ type Props = {|
   id?: string,
   /** Sets whether to show or hide the label. */
   isLabelHidden?: boolean,
+  /** Sets content text value to monospace */
+  isMonospaced?: boolean,
   /** Provided component is rendered inside a modal dialogue when the field is
    selected. */
   invalidMessage?: Node,
@@ -54,7 +56,6 @@ type State = {|
 |};
 
 export default class FieldTextArea extends Component<Props, State> {
-  props: Props; // eslint-disable-line react/sort-comp
   input: any; // eslint-disable-line react/sort-comp
 
   static defaultProps = {

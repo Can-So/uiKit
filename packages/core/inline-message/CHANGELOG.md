@@ -1,5 +1,52 @@
 # @atlaskit/inline-message
 
+## 7.0.10
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/inline-dialog@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 7.0.9
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/inline-dialog@9.0.12
+  - @atlaskit/theme@7.0.0
+
+## 7.0.8
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/inline-dialog@9.0.11
+  - @atlaskit/icon@15.0.0
+
+## 7.0.7
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/inline-dialog@9.0.10
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 7.0.6
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 7.0.5
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/button@9.0.13
+  - @atlaskit/inline-dialog@9.0.6
+  - @atlaskit/icon@14.0.0
+
+## 7.0.4
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 7.0.3
+- [patch] Inline-message now closes on outside click correctly. [988b80a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/988b80a)
+
 ## 7.0.1
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

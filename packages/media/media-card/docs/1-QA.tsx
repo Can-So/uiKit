@@ -9,25 +9,24 @@ export default md`
 
   Here are the places where you can find media-cards:
 
-  * Components
+  - Components
 
-    * editor-core
-      * single node
-      * within filmstrip
-    * renderer
-      * single node
-      * within filmstrip
-    * media picker
-      * single cards in recents view
+    - editor-core
+      - single node
+      - within filmstrip
+    - renderer
+      - single node
+      - within filmstrip
+    - media picker
+      - single cards in recents view
 
-  * Products
-    * Stride
-      * sidebar => CardList
-      * conversation view => renderer
-      * message composition => editor
-    * Confluence
-      * editor full screen
-    * Jira
-      * issue detail
-        * within filmstrip
+  - Products
+    - Stride
+      - conversation view => renderer
+      - message composition => editor
+    - Confluence
+      - editor full screen
+    - Jira
+      - issue detail
+        - within filmstrip
 `;

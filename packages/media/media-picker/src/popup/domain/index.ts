@@ -1,6 +1,6 @@
-import { Auth, AuthProvider, Context } from '@atlaskit/media-core';
-
-import { UploadParams } from '../../domain/config';
+import { Context } from '@atlaskit/media-core';
+import { MediaCollectionItem } from '@atlaskit/media-store';
+import { Subscription } from 'rxjs/Subscription';
 import { LocalUploads } from './local-upload';
 
 export { AuthHeaders } from './auth';
@@ -29,18 +29,20 @@ export interface State {
   readonly editorData?: EditorData;
   readonly recents: Recents;
   readonly selectedItems: SelectedItem[];
-  readonly tenant: Tenant;
   readonly uploads: LocalUploads;
   readonly remoteUploads: RemoteUploads;
   readonly isCancelling: boolean;
   readonly isUploading: boolean;
-  readonly userAuthProvider: AuthProvider;
-  readonly context: Context;
+  readonly tenantContext: Context;
+  readonly userContext: Context;
   readonly lastUploadIndex: number;
   readonly giphy: GiphyState;
-
+  readonly collectionItemsSubscription?: Subscription;
   readonly onCancelUpload: CancelUploadHandler;
   readonly config: Partial<PopupConfig>;
+  readonly deferredIdUpfronts: {
+    [id: string]: { resolver: (id: string) => void; rejecter: Function };
+  };
 }
 
 export type CancelUploadHandler = (uploadId: string) => void;
@@ -51,12 +53,11 @@ export interface GiphyState {
 }
 
 export interface Recents {
-  readonly nextKey: string;
-  readonly items: CollectionItem[];
+  readonly items: MediaCollectionItem[];
 }
 
 export type RemoteUpload = {
-  readonly tenant: Tenant;
+  readonly timeStarted: number;
 };
 
 export type RemoteUploads = { [uploadId: string]: RemoteUpload };
@@ -86,12 +87,12 @@ export interface EditorError {
   readonly retryHandler?: () => void;
 }
 
-export interface Tenant {
-  readonly auth: Auth;
-  readonly uploadParams: UploadParams;
-}
-
-export type ServiceName = 'google' | 'dropbox' | 'upload' | 'giphy';
+export type ServiceName =
+  | 'recent_files'
+  | 'google'
+  | 'dropbox'
+  | 'upload'
+  | 'giphy';
 
 export const isRemoteCloudAccount = (serviceName: ServiceName): boolean => {
   return serviceName === 'google' || serviceName === 'dropbox';
@@ -135,16 +136,19 @@ export interface ServiceFolder {
   readonly cursor?: string;
 }
 
+// TODO [MS-1255] this interface is almost identical to LocalUploadFileMetadata (and possibly to tens others)
 export interface ServiceFile {
   readonly mimeType: string;
   readonly id: string;
+  readonly upfrontId: Promise<string>;
   readonly name: string;
   readonly size: number;
   readonly date: number;
+  readonly occurrenceKey?: string;
 }
 
 export interface SelectedItem extends ServiceFile {
-  readonly serviceName: string;
+  readonly serviceName: ServiceName;
   readonly accountId?: string;
 }
 
@@ -170,17 +174,4 @@ export type Path = Array<FolderReference>;
 export interface FileReference {
   readonly id: string;
   readonly name: string;
-}
-
-export interface CollectionItem {
-  readonly type: string;
-  readonly id: string;
-  readonly insertedAt: number;
-  readonly occurrenceKey: string;
-  readonly details: CollectionItemDetails;
-}
-
-export interface CollectionItemDetails {
-  readonly name?: string;
-  readonly size?: number;
 }

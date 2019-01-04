@@ -6,14 +6,22 @@ import { CollapsedFrame } from '../CollapsedFrame';
 import { minWidth, maxWidth } from '../dimensions';
 import { CollapsedIconTitleDescriptionLayout } from '../CollapsedIconTitleDescriptionLayout';
 
-export interface ErroredViewProps {
+export interface BlockCardErroredViewProps {
+  /** The url to display */
   url: string;
-  message: string;
+  /** The optional click handler */
   onClick?: () => void;
+  /** The error message to display */
+  message: string;
+  /** What to do when a user clicks "Try again" button. */
   onRetry?: () => void;
+  /** A flag that determines whether the card is selected in edit mode. */
+  isSelected?: boolean;
 }
 
-export class ErroredView extends React.Component<ErroredViewProps> {
+export class BlockCardErroredView extends React.Component<
+  BlockCardErroredViewProps
+> {
   handleRetry = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { onRetry } = this.props;
     if (onRetry) {
@@ -24,9 +32,14 @@ export class ErroredView extends React.Component<ErroredViewProps> {
   };
 
   render() {
-    const { url, message, onClick, onRetry } = this.props;
+    const { url, message, onClick, onRetry, isSelected } = this.props;
     return (
-      <CollapsedFrame minWidth={minWidth} maxWidth={maxWidth} onClick={onClick}>
+      <CollapsedFrame
+        isSelected={isSelected}
+        minWidth={minWidth}
+        maxWidth={maxWidth}
+        onClick={onClick}
+      >
         <CollapsedIconTitleDescriptionLayout
           icon={
             <WarningIcon

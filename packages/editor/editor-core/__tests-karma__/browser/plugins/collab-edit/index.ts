@@ -144,12 +144,12 @@ describe('editor/plugins/collab-edit', () => {
       const spy = sandbox.spy(provider, 'sendMessage');
 
       const { doc, tr } = editorView.state;
-      tr
-        .setMeta('sessionId', { sid: 'test' })
-        .setSelection(TextSelection.create(doc, 13));
+      tr.setMeta('sessionId', { sid: 'test' }).setSelection(
+        TextSelection.create(doc, 13),
+      );
       editorView.dispatch(tr);
       // Wait for next tick
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise(resolve => window.setTimeout(resolve, 0));
       sinon.assert.calledOnce(spy);
 
       sinon.assert.calledWith(spy, {
@@ -269,7 +269,7 @@ describe('editor/plugins/collab-edit', () => {
       });
       // tableCommands.createTable()(editorView.state, editorView.dispatch);
       // Wait for next tick
-      await new Promise(resolve => setTimeout(resolve, 20));
+      await new Promise(resolve => window.setTimeout(resolve, 20));
       const decorations = collabEditPluginKey.getState(editorView.state)
         .decorations;
       expect(findPointers('test', decorations)![0].from).to.eq(4);

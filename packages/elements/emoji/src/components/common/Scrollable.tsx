@@ -25,7 +25,7 @@ export default class Scrollable extends PureComponent<Props, {}> {
   // API
   reveal = (child: HTMLElement, forceToTop?: boolean): void => {
     if (child && this.scrollableDiv) {
-      const childNode = findDOMNode(child);
+      const childNode = findDOMNode(child) as Element;
       // Not using Element.scrollIntoView as it scrolls even to top/bottom of view even if
       // already visible
       const scrollableRect = this.scrollableDiv.getBoundingClientRect();

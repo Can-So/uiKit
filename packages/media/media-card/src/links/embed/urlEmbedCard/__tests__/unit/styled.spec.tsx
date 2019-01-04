@@ -27,7 +27,7 @@ describe('Wrapper', () => {
   it('should have the default width and a calculated height when aspectRatio is passed', () => {
     const tree = shallow(<Wrapper aspectRatio={1.33} />);
     expect(tree).toHaveStyleRule('width', `${defaultWidth}px`);
-    expect(tree).toHaveStyleRule('padding-bottom', `${1 / 1.33 * 100}%`);
+    expect(tree).toHaveStyleRule('padding-bottom', `${(1 / 1.33) * 100}%`);
     expect(tree).toMatchSnapshot();
   });
 });

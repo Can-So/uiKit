@@ -1,22 +1,4 @@
-import {
-  ApplicationCardDefinition,
-  BlockQuoteDefinition,
-  BulletListDefinition,
-  CodeBlockDefinition,
-  DecisionListDefinition,
-  ExtensionDefinition,
-  HeadingDefinition,
-  MediaGroupDefinition,
-  MediaSingleDefinition,
-  OrderedListDefinition,
-  PanelDefinition,
-  ParagraphDefinition,
-  RuleDefinition,
-  TaskListDefinition,
-  BlockCardDefinition,
-} from '@atlaskit/editor-common';
-
-import { TableHeaderDefinition, CellAttributes } from '@atlaskit/editor-common';
+import { TableHeaderDefinition, CellAttributes } from '@atlaskit/adf-schema';
 
 export const tableHeader = (attrs?: CellAttributes) => (
   ...content: TableHeaderDefinition['content']
@@ -25,21 +7,3 @@ export const tableHeader = (attrs?: CellAttributes) => (
   attrs,
   content: content,
 });
-
-export {
-  ApplicationCardDefinition,
-  BlockQuoteDefinition,
-  BulletListDefinition,
-  CodeBlockDefinition,
-  DecisionListDefinition,
-  ExtensionDefinition,
-  HeadingDefinition,
-  MediaGroupDefinition,
-  MediaSingleDefinition,
-  OrderedListDefinition,
-  PanelDefinition,
-  ParagraphDefinition,
-  RuleDefinition,
-  TaskListDefinition,
-  BlockCardDefinition,
-};

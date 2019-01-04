@@ -154,9 +154,7 @@ describe('Spinner', () => {
 
     beforeEach(() => {
       const svg = mount(<Spinner />).find(Svg);
-      const svgInterpolatedStyles: Object => Array<
-        string,
-      > = (svgStyles[1]: any);
+      const svgInterpolatedStyles: Object => Array<string> = (svgStyles[1]: any);
       styles = svgInterpolatedStyles(svg.props()).join('');
     });
 

@@ -1,6 +1,6 @@
 // @flow
-import type { ComponentType } from 'react';
-import type { GlobalItemProps } from '@atlaskit/navigation-next';
+import type { ComponentType, ElementConfig } from 'react';
+import { GlobalItem, GlobalNav } from '@atlaskit/navigation-next';
 
 type DefaultItemShape = {
   icon?: ComponentType<*>,
@@ -37,6 +37,7 @@ export type DefaultConfigShape = {
     rank: number,
   },
   help: DefaultItemShape,
+  settings: DefaultItemShape,
   profile: DefaultItemShape,
 };
 
@@ -47,27 +48,30 @@ export type ProductConfigShape = {
   starred: ?ItemShape,
   notification: ?ItemShape,
   appSwitcher: ?{
-    component: ComponentType<*>,
+    itemComponent: ComponentType<*>,
   },
   help: ?DropdownItem,
+  settings: ?ItemShape,
   profile: ?DropdownItem,
 };
 
-type Size = 'small' | 'large';
+type ExtractArrayType = <T>(T[]) => T;
+
+type GlobalNavItem = $Call<
+  ExtractArrayType,
+  $PropertyType<ElementConfig<typeof GlobalNav>, 'primaryItems'>,
+>;
 
 export type NavItem = {
-  label?: string,
-  onClick?: () => void,
-  icon?: ComponentType<*>,
-  rank: number,
+  ...$Exact<GlobalNavItem>,
   section: 'primary' | 'secondary',
-  component?: ComponentType<*>,
-  badge?: ComponentType<*>,
-  tooltip?: string,
-  href?: string,
-  size?: Size,
-  id?: string,
+  rank: number,
 };
 
 // The shape of the item data required by GlobalNav
-export type GlobalNavItemData = GlobalItemProps & { key?: string };
+export type GlobalNavItemData = {
+  ...$Exact<ElementConfig<typeof GlobalItem>>,
+  dropdownItems?: ComponentType<{}>,
+  itemComponent?: ComponentType<{}>,
+  badgeCount?: number,
+};

@@ -1,5 +1,213 @@
 # @atlaskit/smart-card
 
+## 9.2.2
+- Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
+  - @atlaskit/radio@0.4.5
+  - @atlaskit/textfield@0.1.5
+  - @atlaskit/form@5.0.0
+
+## 9.2.1
+- [patch] [9c50550](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c50550):
+
+  - Do not show connect button if there are no auth methods.
+
+## 9.2.0
+- [minor] [95f98cc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95f98cc):
+
+  - User can click on a smart card to open a new window/tab
+
+## 9.1.0
+- [minor] [1175616](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1175616):
+
+  - Simplified error state in inline cards: no red state anymore, just blue link
+
+## 9.0.4
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/checkbox@5.0.9
+  - @atlaskit/field-range@5.0.12
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/field-text-area@4.0.14
+  - @atlaskit/form@4.0.21
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/icon-file-type@3.0.2
+  - @atlaskit/icon-object@3.0.2
+  - @atlaskit/inline-message@7.0.10
+  - @atlaskit/page@8.0.12
+  - @atlaskit/radio@0.4.4
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/media-ui@8.1.2
+  - @atlaskit/outbound-auth-flow-client@1.0.2
+  - @atlaskit/docs@6.0.0
+
+## 9.0.3
+- Updated dependencies [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+  - @atlaskit/media-ui@8.0.0
+
+## 9.0.2
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/checkbox@5.0.8
+  - @atlaskit/field-range@5.0.11
+  - @atlaskit/field-text@7.0.16
+  - @atlaskit/field-text-area@4.0.13
+  - @atlaskit/form@4.0.20
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/icon-file-type@3.0.1
+  - @atlaskit/icon-object@3.0.1
+  - @atlaskit/inline-message@7.0.9
+  - @atlaskit/radio@0.4.3
+  - @atlaskit/media-ui@7.8.2
+  - @atlaskit/theme@7.0.0
+
+## 9.0.1
+- [patch] [4c0c2a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c0c2a0):
+
+  - Fix Cards throwing Error when client is not provided.
+
+## 9.0.0
+- [major] [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+
+  - Introduced pending state (which is represented as a link) and a race between resolving state and the data fetch.
+
+## 8.8.5
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/checkbox@5.0.7
+  - @atlaskit/form@4.0.19
+  - @atlaskit/inline-message@7.0.8
+  - @atlaskit/radio@0.4.2
+  - @atlaskit/media-ui@7.6.2
+  - @atlaskit/icon-file-type@3.0.0
+  - @atlaskit/icon-object@3.0.0
+  - @atlaskit/icon@15.0.0
+
+## 8.8.4
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/checkbox@5.0.6
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/field-text-area@4.0.12
+  - @atlaskit/form@4.0.18
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/icon-file-type@2.0.1
+  - @atlaskit/icon-object@2.0.1
+  - @atlaskit/inline-message@7.0.7
+  - @atlaskit/page@8.0.11
+  - @atlaskit/radio@0.4.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/media-ui@7.6.1
+  - @atlaskit/field-range@5.0.9
+  - @atlaskit/button@10.0.0
+
+## 8.8.3
+- Updated dependencies [b42680b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b42680b):
+  - @atlaskit/form@4.0.17
+  - @atlaskit/radio@0.4.0
+
+## 8.8.2
+- [patch] [b859e08](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b859e08):
+
+  - Update dependent versions
+
+## 8.8.1
+- Updated dependencies [8199088](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8199088):
+  - @atlaskit/form@4.0.16
+  - @atlaskit/radio@0.3.0
+
+## 8.8.0
+- [minor] [93b31fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/93b31fa):
+
+  - Add support for nested <SmartCardProvider />
+
+## 8.7.1
+- [patch] [00cd9a8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00cd9a8):
+
+  - Add tag support for inline task card.
+
+## 8.7.0
+- [minor] [e89e244](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e89e244):
+
+  - Implemented time-based caching for the client.
+
+## 8.6.3
+- [patch] [4b989c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b989c3):
+
+  - Fix inline cards crashing after change to the format.
+
+## 8.6.2
+- [patch] [a567cc9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a567cc9):
+
+  - Improve rendering of Smart Cards.
+
+## 8.6.1
+- [patch] [7bc4461](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7bc4461):
+
+  - ED-5565: support connecting external React.Context to nodeviews
+
+## 8.6.0
+- [minor] [1aa57ab](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1aa57ab):
+
+  Clean up for media up and new task converter for smart cards
+- [minor] [d310628](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d310628):
+
+  Added a converter for atlassian:task type
+
+## 8.5.2
+- [patch] ED-5439: add block smart cards, toolbar switcher [5f8bdfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f8bdfe)
+
+## 8.5.1
+- [patch] fix cards being reloaded with the same definition id [b4b6a45](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b4b6a45)
+
+## 8.5.0
+- [minor] Added task converter  [8678076](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8678076)
+
+## 8.4.1
+- [patch] Update blockcard and inline card exports to be compatible with tree shaking. Preperation for asyncloading parts of smart card [ced32d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ced32d0)
+
+## 8.4.0
+- [minor] Client to be extended [039c0ad](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/039c0ad)
+
+## 8.3.3
+- [patch] Replace @atlassian/outbound-auth-flow-client with @atlaskit/ [faff9c1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/faff9c1)
+
+## 8.3.2
+- [patch] expose onClick handler for Card [3f5585c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3f5585c)
+
+## 8.3.1
+- [patch] Additional test case [9b86661](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b86661)
+
+## 8.3.0
+- [minor] Refactored the rxjs set up for smart cards [026c96e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/026c96e)
+
+## 8.2.4
+- [patch] Removes usages of rxjs/Rx  [d098f25](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d098f25)
+
+## 8.2.3
+- [patch] Fix rxjs and date-fns import in TS components [ab15cee](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab15cee)
+
+## 8.2.2
+- [patch] Updated dependencies [dae7792](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dae7792)
+  - @atlaskit/media-ui@6.0.0
+
+## 8.2.1
+- [patch] Fix rxjs imports to only import what's needed [2e0ce2b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e0ce2b)
+
+## 8.2.0
+- [minor] Added `isSelected` to the `Card` component (inline resolved view) [6666d82](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6666d82)
+
+## 8.1.2
+- [patch] Updated dependencies [4194aa4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4194aa4)
+  - @atlaskit/form@4.0.9
+  - @atlaskit/select@6.0.0
+
+## 8.1.1
+- [patch] Updated dependencies [d8d8107](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d8d8107)
+  - @atlaskit/select@5.0.14
+  - @atlaskit/form@4.0.0
+
 ## 8.1.0
 - [minor] Switched to the amerizan way of spelling unauthorized [7c223f9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c223f9)
 

@@ -5,11 +5,11 @@ export default {
       props: {
         extensionKey: { type: 'string', minLength: 1 },
         extensionType: { type: 'string', minLength: 1 },
-        parameters: { optional: true },
+        parameters: { type: 'object', optional: true },
         text: { type: 'string', optional: true },
         layout: {
           type: 'enum',
-          values: ['wide', 'full-width', 'default'],
+          values: ['default', 'full-width', 'wide'],
           optional: true,
         },
       },

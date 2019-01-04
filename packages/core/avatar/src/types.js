@@ -1,5 +1,9 @@
 // @flow
+
+import type { AnalyticsEventInterface } from '@atlaskit/analytics-next';
+import type { ThemeProp } from '@atlaskit/theme';
 import type { Node, ComponentType } from 'react';
+import type { ThemeProps, ThemeTokens } from './theme';
 
 export type AppearanceType = 'circle' | 'square';
 export type PresenceType = ('online' | 'busy' | 'focus' | 'offline') | Node;
@@ -13,11 +17,12 @@ export type SizeType =
   | 'xxlarge';
 export type SupportedSizeWithAnIcon = 'small' | 'medium' | 'large' | 'xlarge';
 
-export type StatusType = 'approved' | 'declined' | 'locked';
+export type StatusType = ('approved' | 'declined' | 'locked') | Node;
 export type StyledComponentType = 'custom' | 'button' | 'link' | 'span';
 
 export type AvatarClickType = (
   ?{ event?: KeyboardEvent | MouseEvent, item: Object },
+  ?AnalyticsEventInterface,
 ) => void;
 
 export type AvatarPropTypesBase = {
@@ -68,6 +73,12 @@ export type AvatarPropTypesBase = {
   tabIndex?: number,
   /** Pass target down to the anchor, if href is provided. */
   target?: '_blank' | '_self' | '_top' | '_parent',
+  /** You should not be accessing this prop under any circumstances. It is
+   provided by @atlaskit/analytics-next. */
+  createAnalyticsEvent?: any,
+
+  /** The theme that should be applied to the avatar. */
+  theme?: ThemeProp<ThemeTokens, ThemeProps>,
 };
 
 export type AvatarPropTypes = AvatarPropTypesBase & {

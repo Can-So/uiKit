@@ -1,5 +1,60 @@
 # @atlaskit/code
 
+## 8.2.2
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 8.2.1
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/theme@7.0.0
+
+## 8.2.0
+- [minor] [10fe416](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/10fe416):
+
+  - Props Language should be required and surfacing more props for code
+
+## 8.1.1
+- [patch] [84e8015](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/84e8015):
+
+  - Bump react-syntax-highlighter to 10.0.1
+
+## 8.1.0
+- [minor] [26027dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/26027dd):
+
+  - Upgrade react syntax highlighter to version that ships its own async loaded languages and supports SSR
+
+## 8.0.12
+- [patch] Inline code should wrap [f1d9a54](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f1d9a54)
+
+## 8.0.11
+- [patch] Fix webpack 3 support for page & code [03af95e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/03af95e)
+
+## 8.0.10
+- [patch] Update babel config to transpile out dynamic imports for commonjs [2dae295](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2dae295)
+
+## 8.0.9
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 8.0.8
+- [patch] Add some padding to the code without line numbers [67cd63d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/67cd63d)
+
+## 8.0.7
+- [patch] Added yaml to supported languages for code and added styling for the key token. [95f9236](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/95f9236)
+
+## 8.0.6
+- [patch] Async load highlighter languages [9102fa2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9102fa2)
+
+## 8.0.5
+- [patch] Upgrade react-syntax-highlighter again and use async loaded prism [260d66a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/260d66a)
+
+## 8.0.4
+- [patch] Upgraded react-syntax-highlighter to 8.0.2 [7cc7000](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7cc7000)
+
+## 8.0.3
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 8.0.1
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

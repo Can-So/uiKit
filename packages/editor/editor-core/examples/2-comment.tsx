@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import Button, { ButtonGroup } from '@atlaskit/button';
 import LockCircleIcon from '@atlaskit/icon/glyph/lock-circle';
-import Editor from './../src/editor';
+import Editor, { EditorProps } from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
 import WithEditorActions from './../src/ui/WithEditorActions';
 import ToolbarHelp from './../src/ui/ToolbarHelp';
@@ -49,13 +49,17 @@ const exampleDocument = {
   ],
 };
 
-export type Props = {};
+export type Props = {
+  editorProps?: EditorProps;
+  replacementDoc?: any;
+};
+
 export type State = {
   hasJquery?: boolean;
   isExpanded?: boolean;
 };
 
-export default class EditorWithFeedback extends React.Component<Props, State> {
+export class CommentEditorWithFeedback extends React.Component<Props, State> {
   state = {
     hasJquery: false,
     isExpanded: false,
@@ -81,7 +85,11 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
             render={actions => (
               <ButtonGroup>
                 <Button
-                  onClick={() => actions.replaceDocument(exampleDocument)}
+                  onClick={() =>
+                    actions.replaceDocument(
+                      this.props.replacementDoc || exampleDocument,
+                    )
+                  }
                 >
                   Load Document
                 </Button>
@@ -99,6 +107,7 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
               contextIdentifierProvider,
               onChange,
               disabled,
+              enabledFeatures,
             }) => (
               <div style={{ padding: '20px' }}>
                 <CollapsedEditor
@@ -113,19 +122,22 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
                     analyticsHandler={analyticsHandler}
                     shouldFocus={true}
                     quickInsert={true}
-                    allowTasksAndDecisions={true}
                     allowCodeBlocks={true}
                     allowTextColor={true}
                     allowLists={true}
                     allowRule={true}
                     allowTables={true}
                     allowHelpDialog={true}
-                    allowGapCursor={true}
                     disabled={disabled}
                     activityProvider={activityProvider}
                     mentionProvider={mentionProvider}
                     emojiProvider={emojiProvider}
-                    media={{ provider: mediaProvider, allowMediaSingle: true }}
+                    media={{
+                      provider: mediaProvider,
+                      allowMediaSingle: enabledFeatures.imageResizing,
+                      allowResizing: enabledFeatures.imageResizing,
+                    }}
+                    allowDynamicTextSizing={enabledFeatures.dynamicTextSizing}
                     taskDecisionProvider={taskDecisionProvider}
                     contextIdentifierProvider={contextIdentifierProvider}
                     onChange={onChange}
@@ -138,6 +150,7 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
                           packageVersion={version}
                           packageName={name}
                           key="toolbar-feedback"
+                          labels={['atlaskit-comment']}
                         />
                         <ToolbarHelp key="toolbar-help" />
                       </>
@@ -152,6 +165,7 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
                         label="Permissions"
                       />,
                     ]}
+                    {...this.props.editorProps}
                   />
                 </CollapsedEditor>
               </div>
@@ -178,4 +192,8 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
 
     document.body.appendChild(scriptElem);
   };
+}
+
+export default function CommentExample(props?: Props) {
+  return <CommentEditorWithFeedback {...props} />;
 }

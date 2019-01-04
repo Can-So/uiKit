@@ -1,7 +1,10 @@
+declare var window: any;
 import * as React from 'react';
-import * as jQuery from 'jquery';
 import FeedbackIcon from '@atlaskit/icon/glyph/feedback';
 import Button from '@atlaskit/button';
+import { FormattedMessage } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
+import * as exenv from 'exenv';
 import { FeedbackWrapper } from './styled';
 
 // The following function fetches the code to show a JIRA issue collector.
@@ -24,14 +27,11 @@ const loadIssueCollector: () => Promise<ShowIssueCollectorFn> = (function() {
     if (!showIssueCollector) {
       showIssueCollector = new Promise(resolve => {
         window.ATL_JQ_PAGE_PROPS = {
-          ...window.ATL_JQ_PAGE_PROPS,
-          [COLLECTOR_ID]: {
-            triggerFunction(showIssueCollector: ShowIssueCollectorFn) {
-              resolve(showIssueCollector);
-            },
+          triggerFunction(showIssueCollector: ShowIssueCollectorFn) {
+            resolve(showIssueCollector);
           },
         };
-        jQuery.ajax({
+        window.jQuery.ajax({
           url: ISSUE_COLLECTOR_URL,
           type: 'get',
           cache: true,
@@ -45,14 +45,19 @@ const loadIssueCollector: () => Promise<ShowIssueCollectorFn> = (function() {
 
 export class FeedbackButton extends React.Component<{}, {}> {
   render() {
+    const isJQueryAvailable =
+      exenv.canUseDOM && typeof window.jQuery !== 'undefined';
+    if (!isJQueryAvailable) {
+      return null;
+    }
     return (
       <FeedbackWrapper>
         <Button
-          appearance="toolbar"
+          appearance={'toolbar' as any}
           onClick={this.showFeedbackDialog}
           iconBefore={<FeedbackIcon label="feedback" />}
         >
-          Give feedback
+          <FormattedMessage {...messages.give_feedback} />
         </Button>
       </FeedbackWrapper>
     );

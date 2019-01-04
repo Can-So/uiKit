@@ -1,5 +1,59 @@
 # @atlaskit/popper
 
+## 0.3.7
+- [patch] [efc35d1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/efc35d1):
+
+  - Internal changes:
+  	- Adding react-dom and build utils as dev dependencies
+  	- Adding unit test for server side rendering use-case
+  	- Adding unit test to cover Popper component
+
+## 0.3.6
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 0.3.5
+- [patch] [82fc5f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82fc5f5):
+
+  - Pinning react-popper to 1.0.2 to avoid recursive bug
+
+## 0.3.4
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
+## 0.3.3
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/theme@7.0.0
+
+## 0.3.2
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 0.3.1
+- [patch] Fix referenceElement overriding ref from Reference component  [874d5bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/874d5bd)
+
+## 0.3.0
+- [minor] Adds replacementElement prop to enable onboarding use-case. See prop documentation [here](https://github.com/FezVrasta/react-popper#usage-without-a-reference-htmlelement) [1a752e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a752e6)
+
+## 0.2.5
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 0.2.4
+- [patch] Fixed popper placement offset to not fire deprecation warning. [4fcff1c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4fcff1c)
+
+## 0.2.3
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 0.2.2
+- [patch] Using the latest popper to avoid recursive setState calls. [9dceca9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9dceca9)
+
 ## 0.2.1
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

@@ -1,59 +1,6 @@
 // @flow
 /* eslint import/no-dynamic-require: 0, global-require: 0 */
-import { registerLanguage } from 'react-syntax-highlighter/prism-light';
 import memoizeOne from 'memoize-one';
-
-/*
- * These are those languages which will be pre-loaded to auto-detect
- * the language for syntax highlighting. This list is based on the top 20
- * languages on github by number of PR, as of May 2018
- * https://madnight.github.io/githut/#/pull_requests/2018/1
- */
-import coffeescript from 'react-syntax-highlighter/languages/prism/coffeescript';
-import cpp from 'react-syntax-highlighter/languages/prism/cpp';
-import clike from 'react-syntax-highlighter/languages/prism/clike';
-import csharp from 'react-syntax-highlighter/languages/prism/csharp';
-import css from 'react-syntax-highlighter/languages/prism/css';
-import d from 'react-syntax-highlighter/languages/prism/d';
-import go from 'react-syntax-highlighter/languages/prism/go';
-import groovy from 'react-syntax-highlighter/languages/prism/groovy';
-import java from 'react-syntax-highlighter/languages/prism/java';
-import javascript from 'react-syntax-highlighter/languages/prism/javascript';
-import kotlin from 'react-syntax-highlighter/languages/prism/kotlin';
-import lua from 'react-syntax-highlighter/languages/prism/lua';
-import objectivec from 'react-syntax-highlighter/languages/prism/objectivec';
-import php from 'react-syntax-highlighter/languages/prism/php';
-import python from 'react-syntax-highlighter/languages/prism/python';
-import ruby from 'react-syntax-highlighter/languages/prism/ruby';
-import rust from 'react-syntax-highlighter/languages/prism/rust';
-import scala from 'react-syntax-highlighter/languages/prism/scala';
-import shell from 'react-syntax-highlighter/languages/prism/bash';
-import sql from 'react-syntax-highlighter/languages/prism/sql';
-import swift from 'react-syntax-highlighter/languages/prism/swift';
-import typescript from 'react-syntax-highlighter/languages/prism/typescript';
-
-registerLanguage('coffeescript', coffeescript);
-registerLanguage('cpp', cpp);
-registerLanguage('clike', clike);
-registerLanguage('cs', csharp);
-registerLanguage('css', css);
-registerLanguage('d', d);
-registerLanguage('go', go);
-registerLanguage('groovy', groovy);
-registerLanguage('java', java);
-registerLanguage('javascript', javascript);
-registerLanguage('kotlin', kotlin);
-registerLanguage('lua', lua);
-registerLanguage('objectivec', objectivec);
-registerLanguage('php', php);
-registerLanguage('python', python);
-registerLanguage('ruby', ruby);
-registerLanguage('rust', rust);
-registerLanguage('scala', scala);
-registerLanguage('shell', shell);
-registerLanguage('sql', sql);
-registerLanguage('swift', swift);
-registerLanguage('typescript', typescript);
 
 /*
  * These values all those are supported by ADF.
@@ -61,7 +8,7 @@ registerLanguage('typescript', typescript);
  * language definition file, or to that of the most
  * syntactically similar language supported by highlightjs
  */
-export type ADFSupportedLanguages =
+export type SupportedLanguages =
   | 'abap' // → sql
   | 'actionscript'
   | 'ada'
@@ -131,7 +78,7 @@ export type ADFSupportedLanguages =
   | 'xml'
   | 'xquery';
 
-export const SUPPORTED_LANGUAGES = Object.freeze([
+export const SUPPORTED_LANGUAGE_ALIASES = Object.freeze([
   {
     name: 'PHP',
     alias: ['php', 'php3', 'php4', 'php5'],
@@ -489,15 +436,22 @@ export const SUPPORTED_LANGUAGES = Object.freeze([
     alias: ['text', 'plaintext'],
     value: 'text',
   },
+  {
+    name: 'Yaml',
+    alias: ['yaml', 'yml'],
+    value: 'yaml',
+  },
 ]);
 
-export const normalizeLanguage = memoizeOne((language?: string): string => {
-  if (!language) {
-    return '';
-  }
-  const match = SUPPORTED_LANGUAGES.find(val => {
-    return val.name === language || val.alias.includes(language);
-  });
-  // Fallback to plain monospaced text if language passed but not supported
-  return match ? match.value : 'text';
-});
+export const normalizeLanguage = memoizeOne(
+  (language?: string): string => {
+    if (!language) {
+      return '';
+    }
+    const match = SUPPORTED_LANGUAGE_ALIASES.find(val => {
+      return val.name === language || val.alias.includes(language);
+    });
+    // Fallback to plain monospaced text if language passed but not supported
+    return match ? match.value : 'text';
+  },
+);

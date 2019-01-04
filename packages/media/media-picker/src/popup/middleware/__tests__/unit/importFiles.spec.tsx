@@ -1,5 +1,3 @@
-import * as uuid from 'uuid';
-
 import {
   mockStore,
   mockWsConnectionHolder,
@@ -11,7 +9,7 @@ import {
   isRemoteService,
   importFiles,
 } from '../../importFiles';
-import { LocalUpload, LocalUploads, Tenant } from '../../../domain';
+import { LocalUpload, LocalUploads } from '../../../domain';
 import { RECENTS_COLLECTION } from '../../../config';
 import { finalizeUpload } from '../../../actions/finalizeUpload';
 import { startImport } from '../../../actions/startImport';
@@ -36,6 +34,7 @@ import {
   SendUploadEventAction,
   SendUploadEventActionPayload,
 } from '../../../actions/sendUploadEvent';
+import { SCALE_FACTOR_DEFAULT } from '../../../../util/getPreviewFromImage';
 
 describe('importFiles middleware', () => {
   const todayDate = Date.now();
@@ -45,12 +44,14 @@ describe('importFiles middleware', () => {
   const defaultOptions: SetupOptions = {
     withSelectedItems: true,
   };
-
+  const upfrontId = Promise.resolve('1');
   const makeFileData = (index: number) => ({
     id: `some-selected-item-id-${index}`,
     name: `picture${index}.jpg`,
     mimeType: 'image/jpg',
     size: 42 + index,
+    upfrontId,
+    occurrenceKey: `occurrence-key-${index}`,
   });
 
   const getSendUploadEventPayloads = (
@@ -74,7 +75,6 @@ describe('importFiles middleware', () => {
       ...defaultOptions,
       ...opts,
     } as SetupOptions;
-    const tenant: Tenant = {} as Tenant;
 
     const makeLocalUpload = (index: number, total: number): LocalUpload => {
       const files: MediaFile[] = [];
@@ -82,13 +82,22 @@ describe('importFiles middleware', () => {
       // Each LocalUpload will have a list of events with one of them being uploads-start,
       // and each of those events will contain all UploadFiles.
       for (let i = 1; i <= total; i++) {
-        const { id, name, mimeType: type, size } = makeFileData(i);
+        const {
+          id,
+          name,
+          mimeType: type,
+          size,
+          upfrontId,
+          occurrenceKey,
+        } = makeFileData(i);
         files.push({
           id,
           name,
           type,
           size,
+          upfrontId,
           creationDate: todayDate,
+          occurrenceKey,
         });
       }
 
@@ -110,7 +119,7 @@ describe('importFiles middleware', () => {
               width: 10,
               height: 10,
             },
-            src: 'blob',
+            scaleFactor: SCALE_FACTOR_DEFAULT,
           },
         },
       };
@@ -132,8 +141,9 @@ describe('importFiles middleware', () => {
         file: {
           metadata: {
             ...makeFileData(index),
+            userUpfrontId: Promise.resolve(''),
+            userOccurrenceKey: Promise.resolve(''),
           },
-          dataURI: '',
         },
         events: [
           // uploads-event won't be part of events list. See fileUploadsAdd.tsx
@@ -141,9 +151,9 @@ describe('importFiles middleware', () => {
           uploadProcessingEvent,
           uploadEndEvent,
         ],
-        tenant,
         index,
         progress: null,
+        timeStarted: 0,
       };
     };
 
@@ -157,7 +167,6 @@ describe('importFiles middleware', () => {
       withSelectedItems
         ? {
             uploads: localUploads,
-            tenant,
             selectedItems: [
               {
                 serviceName: 'upload',
@@ -200,19 +209,9 @@ describe('importFiles middleware', () => {
       wsConnectionHolder,
       store,
       nextDispatch,
-      tenant,
       eventEmitter: mockPopupUploadEventEmitter(),
     };
   };
-
-  beforeEach(() => {
-    jest
-      .spyOn(uuid, 'v4')
-      .mockReturnValueOnce('uuid1')
-      .mockReturnValueOnce('uuid2')
-      .mockReturnValueOnce('uuid3')
-      .mockReturnValueOnce('uuid4');
-  });
 
   afterEach(() => {
     jest.resetAllMocks();
@@ -247,32 +246,40 @@ describe('importFiles middleware', () => {
       return importFiles(eventEmitter, store, mockWsProvider).then(() => {
         expect(eventEmitter.emitUploadsStart).toBeCalledWith([
           {
-            id: 'uuid1',
+            id: expect.stringMatching(/[a-f0-9\-]+/),
             name: 'picture1.jpg',
             type: 'image/jpg',
             size: 43,
             creationDate: todayDate,
+            upfrontId,
+            occurrenceKey: 'occurrence-key-1',
           },
           {
-            id: 'uuid2',
+            id: expect.stringMatching(/[a-f0-9\-]+/),
             name: 'picture3.jpg',
             type: 'image/jpg',
             size: 45,
             creationDate: todayDate,
+            upfrontId,
+            occurrenceKey: 'occurrence-key-3',
           },
           {
-            id: 'uuid3',
+            id: expect.stringMatching(/[a-f0-9\-]+/),
             name: 'picture4.jpg',
             type: 'image/jpg',
             size: 46,
             creationDate: todayDate,
+            upfrontId,
+            occurrenceKey: 'occurrence-key-4',
           },
           {
-            id: 'uuid4',
+            id: expect.stringMatching(/[a-f0-9\-]+/),
             name: 'picture5.jpg',
             type: 'image/jpg',
             size: 47,
             creationDate: expect.any(Number),
+            upfrontId,
+            occurrenceKey: 'occurrence-key-5',
           },
         ]);
       });
@@ -294,13 +301,15 @@ describe('importFiles middleware', () => {
         return importFiles(eventEmitter, store, mockWsProvider).then(() => {
           expect(store.dispatch).toBeCalledWith(
             getPreview(
-              'uuid3',
+              expect.stringMatching(/[a-f0-9\-]+/),
               {
                 id: 'some-selected-item-id-4',
                 name: 'picture4.jpg',
                 type: 'image/jpg',
                 size: 46,
                 creationDate: todayDate,
+                upfrontId,
+                occurrenceKey: 'occurrence-key-4',
               },
               RECENTS_COLLECTION,
             ),
@@ -311,12 +320,12 @@ describe('importFiles middleware', () => {
 
     describe('each selected and locally uploaded file', () => {
       it('should dispatch FINALIZE_UPLOAD action', () => {
-        const { eventEmitter, mockWsProvider, store, tenant } = setup();
+        const { eventEmitter, mockWsProvider, store } = setup();
 
         return importFiles(eventEmitter, store, mockWsProvider).then(() => {
           const localUploadsFinalizedNum = 2;
           const recentFinalizedNum = 1;
-          const isFinalizeUploadCall = (call: [Action]) =>
+          const isFinalizeUploadCall = (call: Action[]) =>
             call[0].type === 'FINALIZE_UPLOAD';
 
           expect(
@@ -347,13 +356,14 @@ describe('importFiles middleware', () => {
                 type: 'image/jpg',
                 size: 46,
                 creationDate: todayDate,
+                upfrontId,
+                occurrenceKey: 'occurrence-key-4',
               },
-              'uuid3',
+              expect.stringMatching(/[a-f0-9\-]+/),
               {
                 id: 'some-selected-item-id-4',
                 collection: RECENTS_COLLECTION,
               },
-              tenant,
             ),
           );
         });
@@ -365,7 +375,7 @@ describe('importFiles middleware', () => {
           nextDispatch,
         )(action);
 
-        setImmediate(() => {
+        window.setTimeout(() => {
           const sendUploadEventsCalls = getSendUploadEventPayloads(
             store,
             'upload-preview-update',
@@ -388,7 +398,7 @@ describe('importFiles middleware', () => {
           nextDispatch,
         )(action);
 
-        setImmediate(() => {
+        window.setTimeout(() => {
           expect(eventEmitter.emitUploadsStart).toHaveBeenCalledTimes(1);
           expect(
             getSendUploadEventPayloads(store, 'uploads-start'),
@@ -406,17 +416,23 @@ describe('importFiles middleware', () => {
           nextDispatch,
         )(action);
 
-        setImmediate(() => {
+        window.setTimeout(() => {
           const setEventProxyCalls = getDispatchArgs(
             store,
             'SET_EVENT_PROXY',
           ) as SetEventProxyAction[];
           expect(setEventProxyCalls).toHaveLength(2);
           expect(setEventProxyCalls[0]).toEqual(
-            setEventProxy('some-selected-item-id-1', 'uuid1'),
+            setEventProxy(
+              'some-selected-item-id-1',
+              expect.stringMatching(/[a-f0-9\-]+/),
+            ),
           );
           expect(setEventProxyCalls[1]).toEqual(
-            setEventProxy('some-selected-item-id-3', 'uuid2'),
+            setEventProxy(
+              'some-selected-item-id-3',
+              expect.stringMatching(/[a-f0-9\-]+/),
+            ),
           );
           done();
         });
@@ -437,7 +453,7 @@ describe('importFiles middleware', () => {
           nextDispatch,
         )(action);
 
-        setImmediate(() => {
+        window.setTimeout(() => {
           expect(wsConnectionHolder.openConnection).toHaveBeenCalledTimes(1);
           expect(wsConnectionHolder.send).toHaveBeenCalledTimes(1);
           expect(wsConnectionHolder.send).toHaveBeenCalledWith({
@@ -448,7 +464,7 @@ describe('importFiles middleware', () => {
               fileId: 'some-selected-item-id-5',
               fileName: 'picture5.jpg',
               collection: RECENTS_COLLECTION,
-              jobId: 'uuid4',
+              jobId: expect.stringMatching(/[a-f0-9\-]+/),
             },
           });
           done();

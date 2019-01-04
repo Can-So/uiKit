@@ -6,9 +6,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
-const HappyPack = require('happypack');
 
 const { createDefaultGlob } = require('./utils');
+const statsOptions = require('./statsOptions');
+
+const baseCacheDir = path.resolve(
+  __dirname,
+  '../../../node_modules/.cache-loader',
+);
 
 module.exports = function createWebpackConfig(
   {
@@ -18,6 +23,8 @@ module.exports = function createWebpackConfig(
     websiteDir = process.cwd(), // if not passed in, we must be in the websiteDir already
     noMinimize = false,
     report = false,
+    entry,
+    output,
   } /*: {
     globs?: Array<string>,
     websiteDir?: string,
@@ -25,30 +32,33 @@ module.exports = function createWebpackConfig(
     websiteEnv: string,
     noMinimize?: boolean,
     report?: boolean,
+    entry?: any,
+    output?: any
   }*/,
 ) {
   const isProduction = mode === 'production';
 
   return {
+    stats: statsOptions,
     mode,
     performance: {
       // performance hints are used to warn you about large bundles but come at their own perf cost
       hints: false,
     },
     // parallelism: ??, TODO
-    entry: {
+    entry: entry || {
       main: getEntries({
         isProduction,
         websiteDir,
-        entryPath: './src/index.js',
+        entryPath: './src/index.tsx',
       }),
       examples: getEntries({
         isProduction,
         websiteDir,
-        entryPath: './src/examples-entry.js',
+        entryPath: './src/examples-entry.tsx',
       }),
     },
-    output: {
+    output: output || {
       filename: '[name].js',
       path: path.resolve(websiteDir, 'dist'),
       publicPath: '/',
@@ -104,15 +114,41 @@ module.exports = function createWebpackConfig(
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          loader: 'happypack/loader',
+          use: [
+            {
+              loader: 'thread-loader',
+              options: {
+                name: 'babel-pool',
+              },
+            },
+            {
+              loader: 'babel-loader',
+              options: {
+                babelrc: true,
+                rootMode: 'upward',
+                envName: 'production:cjs',
+                cacheDirectory: path.resolve(baseCacheDir, 'babel'),
+              },
+            },
+          ],
         },
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
-          loader: require.resolve('ts-loader'),
-          options: {
-            transpileOnly: true,
-          },
+          use: [
+            {
+              loader: 'cache-loader',
+              options: {
+                cacheDirectory: path.resolve(baseCacheDir, 'ts'),
+              },
+            },
+            {
+              loader: require.resolve('ts-loader'),
+              options: {
+                transpileOnly: true,
+              },
+            },
+          ],
         },
 
         {
@@ -155,7 +191,7 @@ module.exports = function createWebpackConfig(
       ],
     },
     resolve: {
-      mainFields: ['atlaskit:src', 'browser', 'main'],
+      mainFields: ['module', 'atlaskit:src', 'browser', 'main'],
       extensions: ['.js', '.ts', '.tsx'],
     },
     resolveLoader: {
@@ -210,23 +246,18 @@ function getPlugins(
       BASE_TITLE: `"Atlaskit by Atlassian ${!isProduction ? '- DEV' : ''}"`,
       DEFAULT_META_DESCRIPTION: `"Atlaskit is the official component library for Atlassian's Design System."`,
     }),
-
-    new HappyPack({
-      loaders: ['babel-loader?cacheDirectory=true'],
-    }),
   ];
 
-  if (report) {
-    plugins.push(
-      new BundleAnalyzerPlugin({
-        analyzerMode: 'static',
-        statsOptions: { source: false },
-        generateStatsFile: true,
-        openAnalyzer: true,
-        logLevel: 'error',
-      }),
-    );
-  }
+  plugins.push(
+    new BundleAnalyzerPlugin({
+      analyzerMode: report ? 'static' : 'disabled',
+      generateStatsFile: true,
+      openAnalyzer: report,
+      logLevel: 'error',
+      statsOptions: statsOptions,
+      defaultSizes: 'gzip',
+    }),
+  );
 
   return plugins;
 }

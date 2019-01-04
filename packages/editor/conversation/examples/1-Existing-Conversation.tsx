@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {
-  MockProvider as ConversationResource,
-  getDataProviderFactory,
-} from '../example-helpers/MockProvider';
 import { MOCK_USERS } from '../example-helpers/MockData';
+import {
+  getDataProviderFactory,
+  MockProvider as ConversationResource,
+} from '../example-helpers/MockProvider';
 import { Conversation } from '../src';
 
 const provider = new ConversationResource({
@@ -16,7 +16,7 @@ export default class ExistingConversation extends React.Component<
   { conversationId?: string }
 > {
   state = {
-    conversationId: null,
+    conversationId: undefined,
   };
 
   async componentDidMount() {

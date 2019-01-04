@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { defaultSchema, ProviderFactory } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
+import { ProviderFactory } from '@atlaskit/editor-common';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
 import { WikiMarkupTransformer } from '../src';
 import { ReactRenderer } from '@atlaskit/renderer';
@@ -94,7 +95,9 @@ const wikiTransformer = new WikiMarkupTransformer(defaultSchema);
 const adfTransformer = new JSONTransformer();
 
 function getADF(wiki: string) {
-  const pmNode = wikiTransformer.parse(wiki);
+  const pmNode = wikiTransformer.parse(wiki, (err, type) =>
+    console.log(err, type),
+  );
   return adfTransformer.encode(pmNode);
 }
 

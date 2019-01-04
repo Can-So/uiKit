@@ -1,10 +1,4 @@
-// @ts-ignore
-import { TextDefinition } from '@atlaskit/editor-common';
-
-import {
-  ActionDefinition,
-  ActionMarkAttributes,
-} from '@atlaskit/editor-common';
+import { ActionDefinition, ActionMarkAttributes } from '@atlaskit/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

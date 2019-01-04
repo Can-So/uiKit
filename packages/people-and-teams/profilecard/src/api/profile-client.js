@@ -1,6 +1,4 @@
 // @flow
-import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
-import 'whatwg-fetch';
 import { LRUCache } from 'lru-fast';
 
 import { type AkProfileClientConfig } from '../types';
@@ -55,8 +53,6 @@ export const modifyResponse = (response: any) => {
     }`;
   }
 
-  data.isCensored = data.isCensored !== 'visible';
-
   data.timestring = data.remoteTimeString;
 
   delete data.remoteWeekdayIndex;
@@ -84,8 +80,8 @@ const buildUserQuery = (cloudId: string, userId: string) => ({
     User: CloudUser(userId: $userId, cloudId: $cloudId) {
       id,
       isCurrentUser,
-      isCensored: censoredStatus,
-      isActive: active,
+      status,
+      statusModifiedDate,
       isBot,
       isNotMentionable,
       fullName,
@@ -93,6 +89,7 @@ const buildUserQuery = (cloudId: string, userId: string) => ({
       email,
       meta: title,
       location,
+      companyName,
       avatarUrl(size: 192),
       remoteWeekdayIndex: localTime(format: "d"),
       remoteWeekdayString: localTime(format: "ddd"),

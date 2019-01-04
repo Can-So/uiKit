@@ -43,8 +43,6 @@ type Props = {
   dangerouslySetGlyph?: string,
   /** String to use as the aria-label for the icon. Set to an empty string if you are rendering the icon with visible text to prevent accessibility label duplication. */
   label: string,
-  /** onClick handler for the icon element */
-  onClick?: () => mixed,
   /** For primary colour for icons */
   primaryColor?: string,
   /** For secondary colour for 2-color icons. Set to inherit to control this via "fill" in CSS */
@@ -54,10 +52,6 @@ type Props = {
 };
 
 export default class Icon extends Component<Props, {}> {
-  static defaultProps = {
-    onClick: () => {},
-  };
-
   /* Icons need unique gradient IDs across instances for different gradient definitions to work
    * correctly.
    * A step in the icon build process replaces linear gradient IDs and their references in paths
@@ -83,7 +77,6 @@ export default class Icon extends Component<Props, {}> {
     const {
       glyph: Glyph,
       dangerouslySetGlyph,
-      onClick,
       primaryColor,
       secondaryColor,
       size,
@@ -93,7 +86,6 @@ export default class Icon extends Component<Props, {}> {
     if (dangerouslySetGlyph) {
       return (
         <IconWrapper
-          onClick={onClick}
           primaryColor={primaryColor}
           secondaryColor={secondaryColor}
           size={size}
@@ -107,7 +99,6 @@ export default class Icon extends Component<Props, {}> {
     // handling the glyphs when passed through as functions
     return (
       <IconWrapper
-        onClick={onClick}
         primaryColor={primaryColor}
         secondaryColor={secondaryColor}
         size={size}

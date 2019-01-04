@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import PreQueryState, { Props } from '../../../components/common/PreQueryState';
 import NoRecentActivity from '../../../components/NoRecentActivity';
 import { makeConfluenceObjectResult } from '../_test-util';
+import { messages } from '../../../messages';
 import ResultGroupsComponent from '../../../components/common/ResultGroupsComponent';
 
 function render(partialProps: Partial<Props>) {
@@ -11,7 +12,7 @@ function render(partialProps: Partial<Props>) {
     resultsGroups: [],
     searchSessionId: '0',
     renderNoRecentActivity: () => <div id="search link" />,
-    renderAdvancedSearchGroup: () => <div id="search-group" />,
+    renderAdvancedSearchGroup: (analyticsData?) => <div id="search-group" />,
     ...partialProps,
   };
 
@@ -31,7 +32,7 @@ it('should render recent activities when there is recent activity', () => {
       {
         items: [makeConfluenceObjectResult()],
         key: 'recentlyViewedPages',
-        titleI18nId: 'recentlyViewedPages',
+        title: messages.confluence_recent_pages_heading,
       },
     ],
   });

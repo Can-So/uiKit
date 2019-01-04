@@ -1,8 +1,7 @@
 import { Node as PMNode, Schema, Fragment } from 'prosemirror-model';
 import { EditorView } from 'prosemirror-view';
-import { ImagePreview } from '@atlaskit/media-picker';
 
-import { isImage, setTextSelection, isTableCell } from '../../../utils';
+import { isImage } from '../../../utils';
 import {
   insertNodesEndWithNewParagraph,
   shouldAppendParagraphAfterBlockNode,
@@ -12,7 +11,8 @@ import { MediaState } from '../types';
 import { safeInsert } from 'prosemirror-utils';
 
 export interface MediaSingleState extends MediaState {
-  thumbnail: ImagePreview;
+  dimensions: { width: number; height: number };
+  scaleFactor?: number;
 }
 
 export const insertMediaAsMediaSingle = (
@@ -27,7 +27,10 @@ export const insertMediaAsMediaSingle = (
   }
 
   // if not an image type media node
-  if (node.type !== media || !isImage(node.attrs.__fileMimeType)) {
+  if (
+    node.type !== media ||
+    (!isImage(node.attrs.__fileMimeType) && node.attrs.type !== 'external')
+  ) {
     return false;
   }
 
@@ -41,7 +44,7 @@ export const insertMediaSingleNode = (
   mediaState: MediaState,
   collection?: string,
 ): boolean => {
-  if (!collection) {
+  if (collection === undefined) {
     return false;
   }
 
@@ -55,14 +58,6 @@ export const insertMediaSingleNode = (
 
   if (shouldSplit) {
     insertNodesEndWithNewParagraph([node])(state, dispatch);
-    if (isTableCell(state)) {
-      /** If table cell, the default is to move to the next cell, override to select paragraph */
-      setTextSelection(
-        view,
-        state.selection.head + 1,
-        state.selection.head + 1,
-      );
-    }
   } else {
     dispatch(
       safeInsert(
@@ -79,10 +74,10 @@ export const insertMediaSingleNode = (
 export const createMediaSingleNode = (schema: Schema, collection: string) => (
   mediaState: MediaSingleState,
 ) => {
-  const { id, thumbnail } = mediaState;
-  const { width, height } = (thumbnail && thumbnail.dimensions) || {
-    width: undefined,
+  const { id, dimensions, scaleFactor = 1 } = mediaState;
+  const { width, height } = dimensions || {
     height: undefined,
+    width: undefined,
   };
   const { media, mediaSingle } = schema.nodes;
 
@@ -90,8 +85,8 @@ export const createMediaSingleNode = (schema: Schema, collection: string) => (
     id,
     type: 'file',
     collection,
-    width,
-    height,
+    width: width / scaleFactor,
+    height: height / scaleFactor,
     __key: id,
   });
 

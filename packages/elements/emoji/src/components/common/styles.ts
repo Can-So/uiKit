@@ -10,11 +10,16 @@ export const emojiNode = 'emoji-common-node';
 
 export const deleteButton = style({
   // hide by default
-  display: 'none',
-  float: 'right',
+  visibility: 'hidden',
+  display: 'flex',
   height: '0px',
-  marginRight: '-14px',
-  marginTop: '-14px',
+  // 40px emoji width with 2px left offset
+  width: '38px',
+  alignItems: 'flex-end',
+  justifyContent: 'flex-end',
+  // vertically align button and prevent emoji offset
+  paddingTop: '4px',
+  marginBottom: '-4px',
 });
 
 export const emoji = style({
@@ -33,7 +38,7 @@ export const emoji = style({
     },
     [`&.${selected},&.${selectOnHover}:hover .${deleteButton}`]: {
       // show delete button on hover
-      display: 'inline-block',
+      visibility: 'visible',
     },
     img: {
       display: 'block',
@@ -444,8 +449,12 @@ export const emojiPreviewErrorMessage = style({
   alignItems: 'center',
 });
 
+export const addCustomEmojiButton = style({
+  maxWidth: '285px',
+});
+
 export const uploadRetryButton = style({
-  width: '93px',
+  maxWidth: '172px',
   justifyContent: 'center',
   fontWeight: 'bold',
   marginRight: '4px',
@@ -457,7 +466,7 @@ export const uploadRetryButton = style({
 });
 
 export const uploadEmojiButton = style({
-  width: '93px',
+  maxWidth: '187px',
   justifyContent: 'center',
   marginRight: '4px',
   $nest: {
@@ -465,4 +474,13 @@ export const uploadEmojiButton = style({
       display: 'flex',
     },
   },
+});
+
+export const cancelButton = style({
+  maxWidth: '100px',
+});
+
+export const buttonSpinner = style({
+  marginRight: '10px',
+  marginLeft: '10px',
 });

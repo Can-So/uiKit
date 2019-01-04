@@ -1,11 +1,15 @@
 import * as React from 'react';
+import { IntlProvider } from 'react-intl';
+
 import Page, { Grid, GridColumn } from '@atlaskit/page';
-import { Field } from '@atlaskit/form';
-import Select from '@atlaskit/select';
-import TextField from '@atlaskit/field-text';
+import Form, { Field, FormHeader } from '@atlaskit/form';
+import Textfield from '@atlaskit/textfield';
+import Button from '@atlaskit/button';
 import { Provider, Card } from '../src';
-import { CardAppearance } from '../src/Card/CardContent';
-import '../mocks';
+import { CardAppearance } from '../src/Card/types';
+import { Checkbox } from '@atlaskit/checkbox';
+import { RadioGroup } from '@atlaskit/radio';
+import urlsJSON from './example-urls.json';
 
 const params =
   typeof URLSearchParams !== 'undefined'
@@ -14,70 +18,139 @@ const params =
 const param = params ? params.get('url') : null;
 const defaultURL = param
   ? param
-  : 'https://drive.google.com/open?id=0B1I77F_P5VV2c3RhcnRlcl9maWxlX2Rhc2hlclYw';
-
-export interface ExampleProps {}
-
-export type AppearanceOption = {
-  label: string;
-  value: CardAppearance;
-};
+  : 'https://docs.google.com/document/d/1igbED2X5Qt8rQCeO-5rbDGG6u51wUNumlo2P_EtC9lo/edit';
 
 export interface ExampleState {
-  appearance: AppearanceOption;
+  appearance: CardAppearance;
   url: string;
+  isSelected: boolean;
 }
 
-class Example extends React.Component<ExampleProps, ExampleState> {
+class Example extends React.Component<{}, ExampleState> {
   state: ExampleState = {
-    appearance: { label: 'Block', value: 'block' },
+    appearance: 'block',
     url: defaultURL,
+    isSelected: false,
   };
+
+  preventDefaultAndSetUrl(url: string) {
+    return (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      this.setState({ url });
+    };
+  }
 
   handleUrlChange = (event: React.FormEvent<HTMLInputElement>) => {
     this.setState({ url: (event.target as HTMLInputElement).value });
   };
 
-  handleAppearanceChange = (option: AppearanceOption) => {
+  changeUrl = (url: string) => {
+    this.setState({ url });
+  };
+
+  handleIsSelected = (event: React.FormEvent<HTMLInputElement>) => {
     this.setState({
-      appearance: option,
+      isSelected: (event.target as HTMLInputElement).checked,
     });
   };
 
+  handleAppearanceChange = (event: React.FormEvent<HTMLInputElement>) => {
+    this.setState({
+      appearance: (event.target as HTMLInputElement).value as any,
+    });
+  };
+
+  renderCard(url: string, isSelected: boolean, appearance: any) {
+    if (url) {
+      return <Card isSelected={isSelected} appearance={appearance} url={url} />;
+    }
+    return null;
+  }
+
   render() {
-    const { appearance, url } = this.state;
+    const { appearance, url, isSelected } = this.state;
+
     return (
-      <Provider>
-        <Page>
-          <Grid>
-            <GridColumn>
-              <Field label="Appearance">
-                <Select
-                  options={[
-                    { label: 'Block', value: 'block' },
-                    { label: 'Inline', value: 'inline' },
-                  ]}
-                  value={appearance}
-                  onChange={this.handleAppearanceChange}
-                />
-              </Field>
-              <TextField
-                autoFocus={true}
-                label="URL"
-                shouldFitContainer={true}
-                value={url}
-                onChange={this.handleUrlChange}
-              />
-            </GridColumn>
-          </Grid>
-          <Grid>
-            <GridColumn>
-              <br />
-              <Card appearance={appearance.value} url={url} />
-            </GridColumn>
-          </Grid>
-        </Page>
-      </Provider>
+      <IntlProvider locale="en">
+        <Provider>
+          <Page>
+            <Grid>
+              <GridColumn medium={12} key={url}>
+                <div
+                  style={{
+                    margin: '20px 0',
+                    minHeight: 150,
+                    borderBottom: '1px solid #eee',
+                  }}
+                >
+                  {this.renderCard(url, isSelected, appearance)}
+                </div>
+              </GridColumn>
+              <GridColumn medium={6}>
+                <Form onSubmit={() => {}}>
+                  {() => (
+                    <form>
+                      <FormHeader title="Card options" />
+                      <Field name="url" label="Url">
+                        {() => (
+                          <Textfield
+                            onChange={this.handleUrlChange}
+                            value={url}
+                            autoFocus
+                          />
+                        )}
+                      </Field>
+                      <Field name="appearance" label="Appearance">
+                        {() => (
+                          <RadioGroup
+                            options={[
+                              { label: 'Block', value: 'block' },
+                              { label: 'Inline', value: 'inline' },
+                            ]}
+                            value={appearance}
+                            onChange={this.handleAppearanceChange}
+                          />
+                        )}
+                      </Field>
+                      <Field name="selected" label="Selection">
+                        {() => (
+                          <Checkbox
+                            isChecked={isSelected}
+                            onChange={this.handleIsSelected}
+                            label="is selected"
+                            value={true}
+                            name="isSelected"
+                          />
+                        )}
+                      </Field>
+                    </form>
+                  )}
+                </Form>
+              </GridColumn>
+              <GridColumn medium={6}>
+                <h2>Example urls</h2>
+                {urlsJSON.map((example: any, i: number) => (
+                  <p key={i}>
+                    <Button
+                      spacing="compact"
+                      onClick={() => this.changeUrl(example.url)}
+                    >
+                      Try it
+                    </Button>
+                    &nbsp;
+                    <a href={example.url}>
+                      {example.description ||
+                        `${example.provider} ${example.visibility} ${
+                          example.type
+                        }`}
+                    </a>
+                  </p>
+                ))}
+              </GridColumn>
+            </Grid>
+          </Page>
+        </Provider>
+      </IntlProvider>
     );
   }
 }

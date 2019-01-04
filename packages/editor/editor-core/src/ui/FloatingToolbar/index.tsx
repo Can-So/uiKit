@@ -4,13 +4,14 @@ import { Popup } from '@atlaskit/editor-common';
 import { Container } from './styles';
 
 export type Coordinates = {
-  left: number;
-  right: number;
-  top: number;
-  bottom: number;
+  left?: number;
+  right?: number;
+  top?: number;
+  bottom?: number;
 };
 
 export interface Props {
+  zIndex?: number;
   className?: string;
   containerRef?: (node: HTMLElement) => void;
   target?: HTMLElement;
@@ -20,6 +21,7 @@ export interface Props {
   fitWidth?: number;
   fitHeight?: number;
   alignX?: 'left' | 'center' | 'right';
+  alignY?: 'bottom' | 'top';
   onPositionCalculated?: (position: Coordinates) => any;
 }
 
@@ -42,7 +44,9 @@ export default class FloatingToolbar extends PureComponent<Props, any> {
       popupsMountPoint,
       popupsBoundariesElement,
       className,
-      alignX = 'center',
+      alignX,
+      alignY,
+      zIndex,
     } = this.props;
 
     if (!target) {
@@ -52,7 +56,9 @@ export default class FloatingToolbar extends PureComponent<Props, any> {
     return (
       <Popup
         alignX={alignX}
+        alignY={alignY}
         target={target}
+        zIndex={zIndex}
         mountTo={popupsMountPoint}
         boundariesElement={popupsBoundariesElement}
         offset={offset}

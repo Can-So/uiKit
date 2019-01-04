@@ -1,5 +1,126 @@
 # @atlaskit/datetime-picker
 
+## 6.3.23
+- [patch] [4c4bdc5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c4bdc5):
+
+  - AK-5672 - Refactor parseTime by separating logic and concerns into smaller, testable functions. Fixes meridiem issues.
+- [patch] [58a40bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58a40bf):
+
+  - Factoring in meridiem for 24hr time in editable
+
+## 6.3.22
+- [patch] [5c548ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c548ea):
+
+  - Removing extraneous wrapping span around icons which was causing an accessibility error
+
+## 6.3.21
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/calendar@7.0.16
+  - @atlaskit/field-base@11.0.13
+  - @atlaskit/field-range@5.0.12
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/popper@0.3.6
+  - @atlaskit/select@6.1.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 6.3.20
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/calendar@7.0.15
+  - @atlaskit/field-base@11.0.12
+  - @atlaskit/field-range@5.0.11
+  - @atlaskit/field-text@7.0.16
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/popper@0.3.3
+  - @atlaskit/select@6.1.10
+  - @atlaskit/theme@7.0.0
+
+## 6.3.19
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/calendar@7.0.14
+  - @atlaskit/field-base@11.0.11
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/select@6.1.9
+  - @atlaskit/icon@15.0.0
+
+## 6.3.18
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/calendar@7.0.13
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/popper@0.3.2
+  - @atlaskit/select@6.1.8
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/field-range@5.0.9
+  - @atlaskit/button@10.0.0
+
+## 6.3.17
+- [patch] [b332c91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b332c91):
+
+  - upgrades verison of react-scrolllock to SSR safe version
+
+## 6.3.16
+- [patch] Datetime Picker modal sticks to bottom, if needed [0149735](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0149735)
+
+## 6.3.15
+- [patch] Added logic to onCalendarChange for impossibly large dates. These dates now get converted to the last day of the month, as opposed to default js behaviour. '2018-02-31' now converts to '2018-02-28' as opposed to '2018-03-02' [4b23458](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b23458)
+
+## 6.3.14
+- [patch] Fixing blank state for datetime-picker in Firefox.  [0e6d838](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e6d838)
+
+## 6.3.13
+- [patch] Updated dependencies [1a752e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a752e6)
+  - @atlaskit/popper@0.3.0
+
+## 6.3.12
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 6.3.11
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/button@9.0.13
+  - @atlaskit/calendar@7.0.9
+  - @atlaskit/field-base@11.0.8
+  - @atlaskit/modal-dialog@7.0.2
+  - @atlaskit/select@6.0.2
+  - @atlaskit/icon@14.0.0
+
+## 6.3.10
+- [patch] Updated dependencies [4194aa4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4194aa4)
+  - @atlaskit/select@6.0.0
+
+## 6.3.9
+- [patch] Fixes bug on next and prev month navigation. [c4770a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c4770a0)
+
+## 6.3.8
+- [patch] TimePicker not longer throws console error when input cleared [dba1bb0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dba1bb0)
+
+## 6.3.7
+- [patch] Updated dependencies [d5a043a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5a043a)
+  - @atlaskit/icon@13.8.1
+  - @atlaskit/select@5.0.17
+  - @atlaskit/modal-dialog@7.0.0
+
+## 6.3.6
+- [patch] Updated dependencies [9c66d4d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9c66d4d)
+  - @atlaskit/select@5.0.16
+  - @atlaskit/webdriver-runner@0.1.0
+
+## 6.3.5
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 6.3.3
 - [patch] Updating datetime-picker and select styles [981b96c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/981b96c)
 

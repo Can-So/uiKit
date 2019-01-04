@@ -1,11 +1,12 @@
 {
   "name": "@atlaskit/layer-manager",
-  "version": "5.0.6",
+  "version": "5.0.19",
   "description": "A React Component for managing layers",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "atlaskit:src": "src/index.js",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
@@ -17,9 +18,10 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "prop-types": "^15.5.10",
-    "react-focus-lock": "^1.11.1",
-    "react-scrolllock": "^3.0.1",
+    "react-focus-lock": "^1.11.3",
+    "react-scrolllock": "^3.0.2",
     "react-transition-group": "^2.2.1"
   },
   "peerDependencies": {
@@ -28,18 +30,18 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/analytics-next": "^3.0.4",
-    "@atlaskit/build-utils": "^1.11.0",
-    "@atlaskit/button": "^9.0.6",
-    "@atlaskit/docs": "^5.0.6",
-    "@atlaskit/icon": "^13.2.5",
-    "@atlaskit/modal-dialog": "^6.0.9",
-    "@atlaskit/onboarding": "^5.1.6",
-    "@atlaskit/section-message": "^1.0.5",
-    "@atlaskit/theme": "^6.0.0",
-    "@atlaskit/tooltip": "^12.0.9",
-    "@atlaskit/webdriver-runner": "^0.0.3",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "@atlaskit/analytics-next": "^3.1.2",
+    "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/button": "^10.1.1",
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/icon": "^15.0.2",
+    "@atlaskit/modal-dialog": "^7.1.1",
+    "@atlaskit/onboarding": "^6.1.14",
+    "@atlaskit/section-message": "^1.0.14",
+    "@atlaskit/theme": "^7.0.1",
+    "@atlaskit/tooltip": "^12.1.13",
+    "@atlaskit/webdriver-runner": "^0.1.0",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },
   "keywords": [

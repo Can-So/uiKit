@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { PureComponent, ReactInstance } from 'react';
+import { MentionUserType as UserType } from '@atlaskit/adf-schema';
 import { MentionProvider, ResourcedMention } from '@atlaskit/mention';
 
-import { MentionUserType as UserType } from '../../schema';
 import { ProfilecardProvider } from './types';
 import ProfileCard, {
   AkProfilecardTriggerActions,
@@ -75,7 +75,7 @@ export default class MentionWithProfileCard extends PureComponent<
     if (!component) {
       this.domNode = null;
     } else {
-      this.domNode = findDOMNode<HTMLElement>(component);
+      this.domNode = findDOMNode(component) as HTMLElement;
     }
   };
 
@@ -161,26 +161,24 @@ export default class MentionWithProfileCard extends PureComponent<
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         />
-        {target &&
-          portal &&
-          visible && (
-            <Popup
-              offset={[0, 8]}
-              target={target}
-              mountTo={portal}
-              alignX={popupAlignX}
-              alignY={popupAlignY}
-            >
-              <ProfilecardResourcedWithListeners
-                handleClickOutside={this.hideProfilecard}
-                handleEscapeKeydown={this.hideProfilecard}
-                cloudId={cloudId}
-                userId={id}
-                resourceClient={resourceClient}
-                actions={this.getActions(id, text, accessLevel)}
-              />
-            </Popup>
-          )}
+        {target && portal && visible && (
+          <Popup
+            offset={[0, 8]}
+            target={target}
+            mountTo={portal}
+            alignX={popupAlignX}
+            alignY={popupAlignY}
+          >
+            <ProfilecardResourcedWithListeners
+              handleClickOutside={this.hideProfilecard}
+              handleEscapeKeydown={this.hideProfilecard}
+              cloudId={cloudId}
+              userId={id}
+              resourceClient={resourceClient}
+              actions={this.getActions(id, text, accessLevel)}
+            />
+          </Popup>
+        )}
       </span>
     );
   }

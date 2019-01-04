@@ -1,41 +1,41 @@
 import { MouseEvent } from 'react';
 import {
   MediaItemDetails,
-  MediaCollectionItem,
   MediaType,
   FileProcessingStatus,
+  Context,
+  ImageResizeMode,
 } from '@atlaskit/media-core';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 
 import { CardAction } from './actions';
+import { Identifier } from './root/domain';
 
-// the only components we expose to consumers is Card, CardView and CardList
-export * from './root/card';
-export * from './root/cardView';
+// the only components we expose to consumers is Card and CardView
+export { default as Card } from './root/card/cardLoader';
+
+export { CardView } from './root/cardViewLoader';
+
+export {
+  CardViewState,
+  CardViewOwnProps as CardViewProps,
+} from './root/cardView';
+
 export * from './root/domain';
-export * from './list';
+
 export * from './actions';
 export { isUrlPreviewIdentifier } from './utils/identifier';
 // TODO: don't expose this directly https://jira.atlassian.com/browse/FIL-4396
-export {
-  AppCardView,
-  AppCardModel,
-  convertAppCardToSmartCard,
-} from './app_2/AppCardViewV2';
 
 export type CardStatus =
   | 'uploading'
   | 'loading'
   | 'processing'
   | 'complete'
-  | 'error';
+  | 'error'
+  | 'failed-processing';
 
-export type CardAppearance =
-  | 'auto'
-  | 'small'
-  | 'image'
-  | 'square'
-  | 'horizontal';
+export type CardAppearance = 'auto' | 'image' | 'square' | 'horizontal';
 
 export type CardDimensionValue = number | string;
 
@@ -47,12 +47,6 @@ export interface CardDimensions {
 export interface CardEvent {
   event: MouseEvent<HTMLElement>;
   mediaItemDetails?: MediaItemDetails;
-}
-
-export interface CardListEvent {
-  event: MouseEvent<HTMLElement>;
-  collectionName: string;
-  mediaCollectionItem: MediaCollectionItem;
 }
 
 export interface OnSelectChangeFuncResult {
@@ -125,8 +119,32 @@ export interface CardAnalyticsContext extends BaseAnalyticsContext {}
 
 export interface CardViewAnalyticsContext extends BaseAnalyticsContext {
   loadStatus: 'fail' | 'loading_metadata' | 'uploading' | 'complete';
-  type: 'file' | 'link' | 'smart';
+  type: 'file' | 'link' | 'smart' | 'external-image';
   viewAttributes: AnalyticsViewAttributes;
   fileAttributes?: AnalyticsFileAttributes;
   linkAttributes?: AnalyticsLinkAttributes;
 }
+
+export interface CardProps extends SharedCardProps, CardEventProps {
+  readonly context: Context;
+  readonly identifier: Identifier;
+  readonly isLazy?: boolean;
+  readonly resizeMode?: ImageResizeMode;
+
+  // only relevant to file card with image appearance
+  readonly disableOverlay?: boolean;
+  readonly useInlinePlayer?: boolean;
+}
+
+export interface CardState {
+  status: CardStatus;
+  isCardVisible: boolean;
+  previewOrientation: number;
+  readonly isPlayingFile: boolean;
+  metadata?: MediaItemDetails;
+  dataURI?: string;
+  progress?: number;
+  readonly error?: Error;
+}
+
+export { defaultImageCardDimensions } from './utils';

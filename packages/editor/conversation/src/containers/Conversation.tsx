@@ -14,6 +14,8 @@ import {
   updateUser,
   createConversation,
   HIGHLIGHT_COMMENT,
+  SuccessHandler,
+  saveDraft,
 } from '../internal/actions';
 import { getComments, getConversation, getUser } from '../internal/selectors';
 import { uuid } from '../internal/uuid';
@@ -56,16 +58,30 @@ const mapDispatchToProps = (
     parentId: string,
     value: any,
     localId?: string,
+    onSuccess?: SuccessHandler,
   ) {
-    dispatch(addComment(conversationId, parentId, value, localId, provider));
+    dispatch(
+      addComment(conversationId, parentId, value, localId, provider, onSuccess),
+    );
   },
 
-  onUpdateComment(conversationId: string, commentId: string, value: any) {
-    dispatch(updateComment(conversationId, commentId, value, provider));
+  onUpdateComment(
+    conversationId: string,
+    commentId: string,
+    value: any,
+    onSuccess?: SuccessHandler,
+  ) {
+    dispatch(
+      updateComment(conversationId, commentId, value, provider, onSuccess),
+    );
   },
 
-  onDeleteComment(conversationId: string, commentId: string) {
-    dispatch(deleteComment(conversationId, commentId, provider));
+  onDeleteComment(
+    conversationId: string,
+    commentId: string,
+    onSuccess?: SuccessHandler,
+  ) {
+    dispatch(deleteComment(conversationId, commentId, provider, onSuccess));
   },
 
   onRevertComment(conversationId: string, commentId: string) {
@@ -85,13 +101,47 @@ const mapDispatchToProps = (
     containerId: string,
     value: any,
     meta: any,
+    onSuccess?: SuccessHandler,
   ) {
-    dispatch(createConversation(localId, containerId, value, meta, provider));
+    dispatch(
+      createConversation(
+        localId,
+        containerId,
+        value,
+        meta,
+        provider,
+        onSuccess,
+      ),
+    );
+  },
+
+  onEditorChange(
+    isLocal: boolean,
+    value: any,
+    conversationId: string,
+    commentId: string | undefined,
+    containerId: string,
+    meta: any,
+  ) {
+    dispatch(
+      saveDraft(
+        isLocal,
+        value,
+        conversationId,
+        commentId,
+        containerId,
+        meta,
+        provider,
+      ),
+    );
   },
 });
 
 const ResourcedConversation = withAnalyticsEvents()(
-  connect(mapStateToProps, mapDispatchToProps)(Conversation as any),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(Conversation as any),
 );
 
 export interface ContainerProps {
@@ -107,6 +157,7 @@ export interface ContainerProps {
   showBeforeUnloadWarning?: boolean;
   onEditorOpen?: () => void;
   onEditorClose?: () => void;
+  onEditorChange?: () => void;
   renderEditor?: (Editor: typeof AkEditor, props: EditorProps) => JSX.Element;
   placeholder?: string;
   disableScrollTo?: boolean;

@@ -1,6 +1,5 @@
 import { browser } from '@atlaskit/editor-common';
-import { EditorState, Transaction } from 'prosemirror-state';
-import { EditorView } from 'prosemirror-view';
+import { Command } from '../types';
 
 export const toggleBold = makeKeyMapWithCommon('Bold', 'Mod-b');
 export const toggleItalic = makeKeyMapWithCommon('Italic', 'Mod-i');
@@ -51,10 +50,12 @@ export const outdentList = makeKeyMapWithCommon('Outdent List', 'Shift-Tab');
 export const redo = makeKeymap('Redo', 'Ctrl-y', 'Cmd-Shift-z');
 export const redoBarred = makeKeymap('Redo Barred', 'Ctrl-Shift-z', 'Cmd-y');
 export const openHelp = makeKeyMapWithCommon('Open Help', 'Mod-/');
-export const addLink = makeKeyMapWithCommon('Insert link', 'Mod-k');
+export const addLink = makeKeyMapWithCommon('Link', 'Mod-k');
 export const submit = makeKeyMapWithCommon('Submit Content', 'Mod-Enter');
 export const enter = makeKeyMapWithCommon('Enter', 'Enter');
 export const tab = makeKeyMapWithCommon('Tab', 'Tab');
+export const indent = makeKeyMapWithCommon('Indent', 'Tab');
+export const outdent = makeKeyMapWithCommon('Outdent', 'Shift-Tab');
 export const backspace = makeKeyMapWithCommon('Backspace', 'Backspace');
 export const deleteKey = makeKeyMapWithCommon('Delete', 'Delete');
 export const space = makeKeyMapWithCommon('Space', 'Space');
@@ -62,6 +63,22 @@ export const escape = makeKeyMapWithCommon('Escape', 'Escape');
 export const nextCell = makeKeyMapWithCommon('Next cell', 'Tab');
 export const previousCell = makeKeyMapWithCommon('Previous cell', 'Shift-Tab');
 export const toggleTable = makeKeyMapWithCommon('Table', 'Shift-Alt-t');
+export const addRowBefore = makeKeyMapWithCommon(
+  'Add Row Above',
+  'Ctrl-Alt-ArrowUp',
+);
+export const addRowAfter = makeKeyMapWithCommon(
+  'Add Row Below',
+  'Ctrl-Alt-ArrowDown',
+);
+export const addColumnAfter = makeKeyMapWithCommon(
+  'Add Column After',
+  'Ctrl-Alt-ArrowRight',
+);
+export const addColumnBefore = makeKeyMapWithCommon(
+  'Add Column Before',
+  'Ctrl-Alt-ArrowLeft',
+);
 export const cut = makeKeyMapWithCommon('Cut', 'Mod-x');
 export const copy = makeKeyMapWithCommon('Copy', 'Mod-c');
 export const paste = makeKeyMapWithCommon('Paste', 'Mod-v');
@@ -69,7 +86,7 @@ export const altPaste = makeKeyMapWithCommon('Paste', 'Mod-Shift-v');
 
 export function tooltip(
   keymap: Keymap | undefined,
-  compact?: boolean,
+  description?: string,
 ): string | undefined {
   if (keymap) {
     let shortcut: string;
@@ -85,7 +102,7 @@ export function tooltip(
     const keys = shortcut.split('-');
     keys[keys.length - 1] = keys[keys.length - 1].toUpperCase();
     shortcut = keys.join(browser.mac ? '' : '+');
-    return compact ? shortcut : `${keymap.description} ${shortcut}`;
+    return description ? `${description} ${shortcut}` : shortcut;
   }
 }
 
@@ -167,21 +184,13 @@ export interface Keymap {
 
 export function bindKeymapWithCommand(
   shortcut: string,
-  cmd: (
-    state: EditorState,
-    dispatch: (tr: Transaction) => void,
-    editorView?: EditorView,
-  ) => boolean,
+  cmd: Command,
   keymap: { [key: string]: Function },
 ) {
   const oldCmd = keymap[shortcut];
   let newCmd = cmd;
   if (keymap[shortcut]) {
-    newCmd = (
-      state: EditorState,
-      dispatch: (tr: Transaction) => void,
-      editorView?: EditorView,
-    ): boolean => {
+    newCmd = (state, dispatch, editorView) => {
       return oldCmd(state, dispatch) || cmd(state, dispatch, editorView);
     };
   }

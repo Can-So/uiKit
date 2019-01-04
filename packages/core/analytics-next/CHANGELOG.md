@@ -1,5 +1,44 @@
 # @atlaskit/analytics-next
 
+## 3.1.2
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/docs@6.0.0
+
+## 3.1.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/button@10.0.0
+
+## 3.1.0
+- [minor] [cffeed0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cffeed0):
+
+  - Type `withAnalyticsEvents` and `withAnalyticsContext` HOCs so that they do not lose flow types of the components they wrap when chained together.
+
+    This will fix flow types not flowing through all of the components that we have instrumented with analytics as they are typically wrapped with both HOCs. To get flow types flowing
+    through your components again, upgrade them to the latest version and also update their @atlaskit/analytics-next dependency to the latest version.
+
+    We also now export `AnalyticsContextWrappedComp` and `AnalyticsEventsWrappedComp` parameterised types that allow you to explicitly type components wrapped with these HOCs which is necessary in cases where the HOC wrapping is extracted into another function.
+
+## 3.0.11
+- [patch] [d903ab5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d903ab5):
+
+  - Updates list of instrumented components
+
+## 3.0.10
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 3.0.9
+- [patch] adds missing babel-runtime dependency to package json [93b031a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/93b031a)
+
+## 3.0.8
+- [patch] Fixing analytics events for checkbox/radio/select [3e428e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3e428e3)
+
+## 3.0.7
+- [patch] Loosen AnalyticsEventPayload type to cater for Screen events [2d4b52e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d4b52e)
+
 ## 3.0.5
 - [patch] Loosen AnalyticsEventCreator return type [f7432a2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f7432a2)
 - [none] Updated dependencies [f7432a2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f7432a2)

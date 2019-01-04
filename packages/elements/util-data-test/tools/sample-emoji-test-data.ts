@@ -4,11 +4,10 @@
 // Usage:
 //  curl -s http://localhost:7788/emoji/standard | ./sample-emoji-test-data.ts > test-emoji-standard.json
 
-const stdin = process.stdin;
-const stdout = process.stdout;
-const inputChunks = [];
+const inputChunks: any[] = [];
 
 const reservedEmojis = new Map([
+  // :grin: used to test exact match ranking
   // :smiley: used to test ascii representations
   // :thumbsup: has skin variations need for testing
   // :thumbsdown: used to verify order against :thumbsup:
@@ -28,7 +27,7 @@ const reservedEmojis = new Map([
       ':sweat_smile:',
     ],
   ],
-  ['FLAGS', [':flag_black:', ':flag_cg:']],
+  ['FLAGS', [':flag_black:', ':flag_cg:', ':flag_al:', ':flag_dz:']],
   // :heart: and :green_heart: are used to test sorting by usage
   ['SYMBOLS', [':heart:', ':green_heart:']],
   // :boom: is used for testing duplicate shortName between standard and atlassian
@@ -49,14 +48,14 @@ function initCountByCategory() {
   return count;
 }
 
-stdin.resume();
-stdin.setEncoding('utf8');
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
 
-stdin.on('data', chunk => {
+process.stdin.on('data', chunk => {
   inputChunks.push(chunk);
 });
 
-stdin.on('end', () => {
+process.stdin.on('end', () => {
   const inputJSON = inputChunks.join('');
   const parsedData = JSON.parse(inputJSON);
 
@@ -81,6 +80,6 @@ stdin.on('end', () => {
   });
 
   const outputJSON = JSON.stringify({ emojis: filteredEmojis, meta }, null, 2);
-  stdout.write(outputJSON);
-  stdout.write('\n');
+  process.stdout.write(outputJSON);
+  process.stdout.write('\n');
 });

@@ -5,7 +5,7 @@ export default {
       props: {
         extensionKey: { type: 'string', minLength: 1 },
         extensionType: { type: 'string', minLength: 1 },
-        parameters: { optional: true },
+        parameters: { type: 'object', optional: true },
         text: { type: 'string', optional: true },
       },
     },

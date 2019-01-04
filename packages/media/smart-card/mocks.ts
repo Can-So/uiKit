@@ -1,10 +1,9 @@
-import mock, { delay, proxy } from 'xhr-mock';
+import * as fm from 'fetch-mock';
 
-const resolveUrl =
-  'https://api-private.stg.atlassian.com/object-resolver/resolve';
-
-const context = '';
-const definitionId = 'google-drive';
+const context = 'Document';
+const googleDefinitionId = 'google';
+const trelloDefinitionId = 'trello';
+const dropboxDefinitionId = 'dropbox';
 
 const serviceAuth = {
   key: 'default',
@@ -15,11 +14,13 @@ const serviceAuth = {
 
 const generator = {
   name: 'Google Drive',
-  icon:
-    'https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico',
+  icon: {
+    url:
+      'https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico',
+  },
 };
 
-const resolvedBody = {
+const genResolvedBody = (definitionId: string, name: string) => ({
   meta: {
     visibility: 'restricted',
     access: 'granted',
@@ -27,13 +28,19 @@ const resolvedBody = {
     definitionId,
   },
   data: {
+    '@type': ['Document'],
     '@context': context,
     generator,
-    name: 'URL A',
+    name,
+    updated: '2018-07-19T03:34:07.930Z',
+    updatedBy: {
+      '@type': 'Person',
+      name: 'Artur Bodera',
+    },
   },
-};
+});
 
-const unauthorisedBody = {
+const genUnauthorisedBody = (definitionId: string) => ({
   meta: {
     visibility: 'restricted',
     access: 'unauthorized',
@@ -44,9 +51,9 @@ const unauthorisedBody = {
     '@context': context,
     generator,
   },
-};
+});
 
-const forbiddenBody = {
+const gebForbiddenBody = (definitionId: string) => ({
   meta: {
     visibility: 'restricted',
     access: 'forbidden',
@@ -57,121 +64,95 @@ const forbiddenBody = {
     '@context': context,
     generator,
   },
-};
+});
 
-const notFoundBody = {
-  meta: {
-    visibility: 'not_found',
-    access: 'forbidden',
-    auth: [serviceAuth],
-    definitionId,
+const responses = {
+  'google.com': {
+    'google.com/doc/1': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      gebForbiddenBody(googleDefinitionId),
+      undefined,
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+    ],
+    'google.com/doc/2': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      gebForbiddenBody(googleDefinitionId),
+      undefined,
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+    ],
+    'google.com/doc/3': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      undefined,
+      gebForbiddenBody(googleDefinitionId),
+      gebForbiddenBody(googleDefinitionId),
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+      undefined,
+    ],
+    'google.com/spreadshet/1': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      gebForbiddenBody(googleDefinitionId),
+      undefined,
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+    ],
+    'google.com/spreadshet/2': [
+      (resourceUrl: string) => genResolvedBody(googleDefinitionId, resourceUrl),
+      gebForbiddenBody(googleDefinitionId),
+      undefined,
+      genUnauthorisedBody(googleDefinitionId),
+      undefined,
+    ],
   },
-  data: {
-    '@context': context,
-    generator,
+  'trello.com': {
+    'trello.com/task/a': [
+      (resourceUrl: string) => genResolvedBody(trelloDefinitionId, resourceUrl),
+      gebForbiddenBody(trelloDefinitionId),
+      genUnauthorisedBody(trelloDefinitionId),
+    ],
+  },
+  'dropbox.com': {
+    'dropbox.com/file/a': [
+      (resourceUrl: string) =>
+        genResolvedBody(dropboxDefinitionId, resourceUrl),
+      gebForbiddenBody(dropboxDefinitionId),
+      gebForbiddenBody(dropboxDefinitionId),
+      undefined,
+      genUnauthorisedBody(dropboxDefinitionId),
+      undefined,
+    ],
   },
 };
 
-const flowResponsesByUrl = {
-  'public-happy': [
-    {
-      status: 200,
-      body: resolvedBody,
-    },
-  ],
-  'private-happy': [
-    {
-      status: 200,
-      body: unauthorisedBody,
-    },
-    {
-      status: 200,
-      body: resolvedBody,
-    },
-  ],
-  'private-happy-b': [
-    {
-      status: 200,
-      body: unauthorisedBody,
-    },
-    {
-      status: 200,
-      body: {
-        ...resolvedBody,
-        data: {
-          ...resolvedBody.data,
-          name: 'URL B',
-        },
-      },
-    },
-  ],
-  'private-happy-c': [
-    {
-      status: 200,
-      body: unauthorisedBody,
-    },
-    {
-      status: 200,
-      body: {
-        ...resolvedBody,
-        data: {
-          ...resolvedBody.data,
-          name: 'URL C',
-        },
-      },
-    },
-  ],
-  'private-forbidden': [
-    {
-      status: 200,
-      body: unauthorisedBody,
-    },
-    {
-      status: 200,
-      body: forbiddenBody,
-    },
-  ],
-  'not-found': [
-    {
-      status: 200,
-      body: notFoundBody,
-    },
-  ],
-  error: [
-    {
-      status: 500,
-    },
-  ],
-};
+const random = (max: number) => Math.floor(Math.random() * max);
+const delayP = (n: number) => new Promise(res => window.setTimeout(res, n));
 
-const flowIndiciesByUrl = {};
+export const mockMultipleCards = () => {
+  fm.mock('*', async (_, opts: any) => {
+    const delay = random(2000);
+    await delayP(delay);
 
-mock.setup();
+    const resourceUrl = JSON.parse(opts.body).resourceUrl as string;
 
-mock.post(
-  `${resolveUrl}`,
-  delay((req, res) => {
-    const url = JSON.parse(req.body()).resourceUrl;
-    const response =
-      (flowResponsesByUrl as any)[url] &&
-      (flowResponsesByUrl as any)[url][(flowIndiciesByUrl as any)[url] || 0];
-    if (response) {
-      (flowIndiciesByUrl as any)[url] =
-        ((flowIndiciesByUrl as any)[url] || 0) + 1;
-      if (
-        (flowIndiciesByUrl as any)[url] >=
-        (flowResponsesByUrl as any)[url].length
-      ) {
-        (flowIndiciesByUrl as any)[url] = 0;
-      }
-      if (response.status) res.status(response.status);
-      if (response.headers) res.headers(response.headers);
-      if (response.body) res.body(JSON.stringify(response.body));
-      return res;
-    } else {
-      return undefined;
+    const domain = resourceUrl.split('/')[0] as keyof typeof responses;
+
+    const perDomain = responses[domain];
+
+    if (!perDomain) {
+      throw new Error('Unknown domain name');
     }
-  }, 900),
-);
 
-mock.use(proxy);
+    //@ts-ignore
+    let response = perDomain[resourceUrl].pop();
+
+    if (typeof response === 'function') {
+      response = response(resourceUrl);
+    }
+
+    console.log(`[SERVER] <${delay}> ${domain} ${resourceUrl}`, response);
+
+    return response;
+  });
+};

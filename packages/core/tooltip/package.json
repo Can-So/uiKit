@@ -1,11 +1,12 @@
 {
   "name": "@atlaskit/tooltip",
-  "version": "12.0.9",
+  "version": "12.1.14",
   "description": "A React Component for displaying Tooltips",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "atlaskit:src": "src/index.js",
+  "sideEffects": false,
   "atlaskit:designLink": "https://atlassian.design/guidelines/product/components/tooltips",
   "files": [
     "dist"
@@ -18,10 +19,11 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/analytics-next": "^3.0.4",
-    "@atlaskit/portal": "^0.0.6",
-    "@atlaskit/theme": "^6.0.0",
-    "babel-runtime": "^6.26.0",
+    "@atlaskit/analytics-next": "^3.1.2",
+    "@atlaskit/popper": "^0.3.6",
+    "@atlaskit/portal": "^0.0.17",
+    "@atlaskit/theme": "^7.0.1",
+    "@babel/runtime": "^7.0.0",
     "flushable": "^1.0.0",
     "react-node-resolver": "^1.0.1",
     "react-transition-group": "^2.2.1"
@@ -32,11 +34,12 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^1.11.0",
-    "@atlaskit/button": "^9.0.6",
-    "@atlaskit/docs": "^5.0.6",
-    "@atlaskit/icon": "^13.2.5",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/button": "^10.1.1",
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/icon": "^15.0.2",
+    "@atlaskit/visual-regression": "^0.0.1",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },
   "keywords": [

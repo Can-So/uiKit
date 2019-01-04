@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { typeAheadQuery } from '@atlaskit/editor-common';
+import { typeAheadQuery } from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
 import WithPluginState from '../../ui/WithPluginState';
 import { TypeAheadHandler } from './types';
 import {
+  createInitialPluginState,
   createPlugin,
   pluginKey as typeAheadPluginKey,
   PluginState as TypeAheadPluginState,
@@ -23,7 +24,8 @@ const typeAheadPlugin: EditorPlugin = {
     return [
       {
         name: 'typeAhead',
-        plugin: ({ dispatch }) => createPlugin(dispatch, typeAhead),
+        plugin: ({ dispatch, reactContext }) =>
+          createPlugin(dispatch, reactContext, typeAhead),
       },
       {
         name: 'typeAheadInputRule',
@@ -48,18 +50,19 @@ const typeAheadPlugin: EditorPlugin = {
           typeAhead: typeAheadPluginKey,
         }}
         render={({
-          typeAhead = {
-            active: false,
-            items: [],
-            currentIndex: 0,
-            itemsLoader: null,
-          },
+          typeAhead = createInitialPluginState(),
         }: {
           typeAhead: TypeAheadPluginState;
         }) => {
-          const anchorElement = editorView.dom.querySelector(
-            '[data-type-ahead-query]',
-          ) as HTMLElement;
+          const { queryMarkPos } = typeAhead;
+          const domRef =
+            queryMarkPos !== null ? editorView.domAtPos(queryMarkPos) : null;
+          const anchorElement = domRef
+            ? ((domRef.node as HTMLElement).childNodes[
+                domRef.offset
+              ] as HTMLElement)
+            : undefined;
+
           return (
             <TypeAhead
               editorView={editorView}

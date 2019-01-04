@@ -3,14 +3,25 @@
 export class MockFile implements File {
   readonly size: number;
   readonly type: string;
-  readonly lastModified: number;
+  readonly lastModified: number = 1234;
   readonly lastModifiedDate: any;
   readonly name: string;
   readonly webkitRelativePath: string;
   msClose(): void {}
   msDetachStream(): any {}
-  slice(start?: number, end?: number, contentType?: string): Blob {
+  slice(): Blob {
     throw new Error('not implemented');
+  }
+  constructor(
+    options: { type: string; name: string } = {
+      type: '',
+      name: 'some-file.png',
+    },
+  ) {
+    this.type = options.type;
+    this.name = options.name;
+    this.size = 0;
+    this.webkitRelativePath = '';
   }
 }
 
@@ -31,26 +42,24 @@ export class MockFileList extends Array<File> {
 // this isn't implemented by JSDOM so we've implemented it to make Typescript happy
 // see https://github.com/tmpvar/jsdom/issues/1568
 export class MockDataTransfer implements DataTransfer {
-  dropEffect: string;
-  effectAllowed: string;
-  readonly files: FileList;
-  readonly items: DataTransferItemList;
-  readonly types: string[];
+  constructor(
+    readonly files: FileList,
+    readonly types: string[] = [],
+    readonly items: DataTransferItemList = [] as any,
+    readonly dropEffect: string = '',
+    readonly effectAllowed: string = '',
+  ) {}
 
-  constructor(files?: FileList) {
-    this.files = files as any;
-  }
-
-  clearData(format?: string): boolean {
+  clearData(): boolean {
     return false;
   }
-  getData(format: string): string {
+  getData(): string {
     return '';
   }
-  setData(format: string, data: string): boolean {
+  setData(): boolean {
     return false;
   }
-  setDragImage(image: Element, x: number, y: number): void {}
+  setDragImage(): void {}
 }
 
 // this isn't implemented by JSDOM, and JSDOM .dispatchEvent() requires that event is an instanceof event,
@@ -58,9 +67,12 @@ export class MockDataTransfer implements DataTransfer {
 // see https://github.com/tmpvar/jsdom/issues/1568
 export class MockClipboardEvent extends Event implements ClipboardEvent {
   clipboardData: DataTransfer;
-  constructor(event: string, files: File[] = []) {
+  constructor(event: string, files: File[] = [], types: string[] = []) {
     super(event);
-    this.clipboardData = new MockDataTransfer(MockFileList.fromArray(files));
+    this.clipboardData = new MockDataTransfer(
+      MockFileList.fromArray(files),
+      types,
+    );
   }
 }
 
@@ -70,27 +82,10 @@ export class MockDragEvent extends MouseEvent implements DragEvent {
     super(event);
     this.dataTransfer = new MockDataTransfer(MockFileList.fromArray(files));
   }
-  initDragEvent(
-    typeArg: string,
-    canBubbleArg: boolean,
-    cancelableArg: boolean,
-    viewArg: Window,
-    detailArg: number,
-    screenXArg: number,
-    screenYArg: number,
-    clientXArg: number,
-    clientYArg: number,
-    ctrlKeyArg: boolean,
-    altKeyArg: boolean,
-    shiftKeyArg: boolean,
-    metaKeyArg: boolean,
-    buttonArg: number,
-    relatedTargetArg: EventTarget,
-    dataTransferArg: DataTransfer,
-  ): void {
+  initDragEvent(): void {
     // noop
   }
-  msConvertURL(file: File, targetType: string, targetURL?: string): void {
+  msConvertURL(): void {
     // noop
   }
 }

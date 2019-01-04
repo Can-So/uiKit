@@ -3,12 +3,9 @@ import { Component } from 'react';
 import { UrlPreview, ImageResizeMode, Resource } from '@atlaskit/media-core';
 
 import { SharedCardProps, CardStatus, CardAppearance } from '../..';
-import { AppCardView } from '../../app';
 import { LinkCardGenericView } from '../cardGenericView';
-import { CardGenericViewSmall } from '../../utils/cardGenericViewSmall';
 import { URLEmbedCard } from '../embed/urlEmbedCard';
 import { HTMLEmbedCard } from '../embed/htmlEmbedCard';
-import { A } from './styled';
 
 export interface LinkCardProps extends SharedCardProps {
   readonly status: CardStatus;
@@ -22,14 +19,11 @@ export const defaultLinkCardAppearance: CardAppearance = 'square';
 export class LinkCard extends Component<LinkCardProps, {}> {
   render(): JSX.Element | null {
     const {
-      resources: { smartCard, app, player },
+      resources: { app, player },
     } = this;
     const { appearance } = this.props;
 
     switch (appearance) {
-      case 'small':
-        return this.renderSmallCard();
-
       case 'horizontal':
         return this.renderGenericLink(appearance);
 
@@ -37,28 +31,13 @@ export class LinkCard extends Component<LinkCardProps, {}> {
         return this.renderGenericLink(appearance);
 
       default:
-        if (smartCard) {
-          return this.renderSmartCard();
-        } else if (app && this.isEmbed(app)) {
+        if (app && this.isEmbed(app)) {
           return this.renderEmbed(app);
         } else if (player && this.isEmbed(player)) {
           return this.renderEmbed(player);
         } else {
           return this.renderGenericLink(defaultLinkCardAppearance);
         }
-    }
-  }
-
-  private renderInLink(link, child): JSX.Element {
-    const { isLoading, isError } = this;
-    if (link && !isLoading && !isError) {
-      return (
-        <A linkUrl={link} className="link-wrapper">
-          {child}
-        </A>
-      );
-    } else {
-      return child;
     }
   }
 
@@ -121,23 +100,6 @@ export class LinkCard extends Component<LinkCardProps, {}> {
     return null;
   }
 
-  private renderSmartCard(): JSX.Element {
-    const {
-      resources: { smartCard },
-    } = this;
-
-    // this check is just to silence TS - this method should never be called if we don't have
-    // data for a smart-card
-    if (!smartCard) {
-      throw new Error('Must have smartCard data to render a smart card');
-    }
-
-    return this.renderInLink(
-      smartCard.link ? smartCard.link.url : '',
-      <AppCardView model={smartCard} />,
-    );
-  }
-
   private renderGenericLink(appearance: CardAppearance): JSX.Element | null {
     const { url, title, site, description } = this.urlPreview;
     const { onRetry } = this.props;
@@ -156,28 +118,6 @@ export class LinkCard extends Component<LinkCardProps, {}> {
         isLoading={this.isLoading}
         onRetry={onRetry}
       />
-    );
-  }
-
-  private renderSmallCard(): JSX.Element {
-    const { url, title, site } = this.urlPreview;
-    const { dimensions, actions, onRetry } = this.props;
-    const { iconUrl, thumbnailUrl, isLoading, errorMessage } = this;
-    return this.renderInLink(
-      url,
-      <CardGenericViewSmall
-        title={title}
-        subtitle={site || url}
-        iconUrl={iconUrl}
-        thumbnailUrl={thumbnailUrl}
-        dimensions={dimensions}
-        loading={isLoading}
-        actions={actions}
-        error={errorMessage}
-        type="link"
-        mediaType="image"
-        onRetry={onRetry}
-      />,
     );
   }
 

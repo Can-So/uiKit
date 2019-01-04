@@ -16,10 +16,11 @@ export interface Props {
   isLoading: boolean;
   renderNoResult: () => JSX.Element;
   renderNoRecentActivity: () => JSX.Element;
+  renderBeforePreQueryState?: () => JSX.Element;
   retrySearch();
   getPreQueryGroups: () => ResultsGroup[];
   getPostQueryGroups: () => ResultsGroup[];
-  renderAdvancedSearchGroup: () => JSX.Element;
+  renderAdvancedSearchGroup: (analyticsData?) => JSX.Element;
   keepPreQueryState: boolean;
   searchSessionId: string;
   preQueryScreenCounter?: ScreenCounter;
@@ -62,19 +63,23 @@ export default class SearchResults extends React.Component<Props> {
       preQueryScreenCounter,
       renderNoRecentActivity,
       referralContextIdentifiers,
+      renderBeforePreQueryState,
       renderAdvancedSearchGroup,
       getPreQueryGroups,
     } = this.props;
     return (
-      <PreQueryState
-        resultsGroups={getPreQueryGroups()}
-        renderNoRecentActivity={renderNoRecentActivity}
-        query={query}
-        searchSessionId={searchSessionId}
-        screenCounter={preQueryScreenCounter}
-        referralContextIdentifiers={referralContextIdentifiers}
-        renderAdvancedSearchGroup={renderAdvancedSearchGroup}
-      />
+      <>
+        {renderBeforePreQueryState && renderBeforePreQueryState()}
+        <PreQueryState
+          resultsGroups={getPreQueryGroups()}
+          renderNoRecentActivity={renderNoRecentActivity}
+          query={query}
+          searchSessionId={searchSessionId}
+          screenCounter={preQueryScreenCounter}
+          referralContextIdentifiers={referralContextIdentifiers}
+          renderAdvancedSearchGroup={renderAdvancedSearchGroup}
+        />
+      </>
     );
   }
 

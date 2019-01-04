@@ -1,4 +1,3 @@
-declare var global: any;
 declare var require: any;
 
 describe('checkWebpSupport util', () => {
@@ -6,7 +5,8 @@ describe('checkWebpSupport util', () => {
 
   beforeEach(() => {
     imageObjects = [];
-    global.Image = function Image() {
+    // @ts-ignore
+    (global as any).Image = function Image() {
       const stubImage = {};
       imageObjects.push(stubImage);
       return stubImage;
@@ -15,7 +15,8 @@ describe('checkWebpSupport util', () => {
   });
 
   afterAll(() => {
-    delete global.Image;
+    // @ts-ignore
+    delete (global as any).Image;
   });
 
   describe('without caching', () => {

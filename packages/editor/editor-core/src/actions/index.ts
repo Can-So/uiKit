@@ -3,10 +3,11 @@ import { TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Transformer } from '@atlaskit/editor-common';
 import {
+  compose,
   getEditorValueWithMedia,
-  insertFileFromDataUrl,
-  preprocessDoc,
+  insertFileFromDataUrl as insertFileFromUrl,
   toJSON,
+  removeQueryMarksFromJSON,
   processRawValue,
 } from '../utils';
 import { EventDispatcher } from '../event-dispatcher';
@@ -17,7 +18,18 @@ export type ContextUpdateHandler = (
   eventDispatcher: EventDispatcher,
 ) => void;
 
-export default class EditorActions {
+export interface EditorActionsOptions {
+  focus(): boolean;
+  blur(): boolean;
+  clear(): boolean;
+  getValue(): Promise<any | undefined>;
+  replaceDocument(rawValue: any): boolean;
+  replaceSelection(rawValue: Node | Object | string): boolean;
+  appendText(text: string): boolean;
+  insertFileFromDataUrl(url: string, filename: string): boolean;
+}
+
+export default class EditorActions implements EditorActionsOptions {
   private editorView?: EditorView;
   private contentTransformer?: Transformer<any>;
   private eventDispatcher?: EventDispatcher;
@@ -38,7 +50,7 @@ export default class EditorActions {
     return this.editorView;
   }
 
-  _privateGetEventDispathcer(): EventDispatcher | undefined {
+  _privateGetEventDispatcher(): EventDispatcher | undefined {
     return this.eventDispatcher;
   }
 
@@ -117,17 +129,24 @@ export default class EditorActions {
     return true;
   }
 
-  getValue(): Promise<any | undefined> {
-    return getEditorValueWithMedia(this.editorView).then(doc => {
-      const processedDoc = preprocessDoc(this.editorView!.state.schema, doc);
-      if (this.contentTransformer && processedDoc) {
-        return this.contentTransformer.encode(processedDoc);
-      }
-      return processedDoc ? toJSON(processedDoc) : processedDoc;
-    });
+  async getValue(): Promise<any | undefined> {
+    const doc = await getEditorValueWithMedia(this.editorView);
+
+    if (!doc) {
+      return;
+    }
+
+    if (this.contentTransformer) {
+      return this.contentTransformer.encode(doc);
+    }
+
+    return compose(
+      removeQueryMarksFromJSON,
+      toJSON,
+    )(doc);
   }
 
-  replaceDocument(rawValue: any): boolean {
+  replaceDocument(rawValue: any, shouldScrollToBottom = true): boolean {
     if (!this.editorView || rawValue === undefined || rawValue === null) {
       return false;
     }
@@ -145,10 +164,12 @@ export default class EditorActions {
       return false;
     }
 
-    const tr = state.tr
-      // In case of replacing a whole document, we only need a content of a top level node e.g. document.
-      .replaceWith(0, state.doc.nodeSize - 2, content.content)
-      .scrollIntoView();
+    // In case of replacing a whole document, we only need a content of a top level node e.g. document.
+    let tr = state.tr.replaceWith(0, state.doc.nodeSize - 2, content.content);
+
+    if (shouldScrollToBottom) {
+      tr = tr.scrollIntoView();
+    }
 
     this.editorView.dispatch(tr);
 
@@ -203,7 +224,7 @@ export default class EditorActions {
     if (!this.editorView) {
       return false;
     }
-    insertFileFromDataUrl(this.editorView.state, url, filename);
+    insertFileFromUrl(this.editorView.state, url, filename);
     return true;
   }
 }

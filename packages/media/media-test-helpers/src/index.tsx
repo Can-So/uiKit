@@ -8,8 +8,17 @@ export * from './story-styles';
 export * from './collectionNames';
 export * from './exampleMediaItems';
 export * from './createMouseEvent';
+export * from './createTouchEvent';
 export * from './userAuthProvider';
 export * from './mediaPickerAuthProvider';
 export * from './mocks';
 export * from './await-error';
 export * from './nextTick';
+export * from './asMock';
+export * from './I18nWrapper';
+export * from './mountWithIntlContext';
+export * from './fakeI18n';
+export * from './mockCanvas';
+export {
+  default as KeyboardEventWithKeyCode,
+} from './keyboardEventWithKeyCode';

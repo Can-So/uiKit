@@ -1,34 +1,9 @@
-// @ts-ignore
-// @ts-ignore: unused variable
-import styled, { ThemedOuterStyledProps } from 'styled-components';
-import {
-  // @ts-ignore: unused variable
-  HTMLAttributes,
-  // @ts-ignore: unused variable
-  ComponentClass,
-} from 'react';
+import styled from 'styled-components';
 import { akColorN50A } from '@atlaskit/util-shared-styles';
 
 export interface MutableCardContainerProps {
   mutable: boolean;
 }
-
-export const MutableCardContainer = styled.div`
-  min-width: 250px;
-  height: 200px;
-  background-color: ${(props: MutableCardContainerProps) =>
-    props.mutable ? 'lightgreen' : 'darkgreen'};
-
-  h3 {
-    font-size: 20pt;
-  }
-`;
-
-export const MutableCardContentContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.3);
-  height: 50px;
-  width: 100%;
-`;
 
 export const FilmstripContainer = styled.div`
   border: 1px dotted ${akColorN50A};

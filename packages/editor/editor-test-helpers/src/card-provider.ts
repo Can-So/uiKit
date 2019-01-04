@@ -1,30 +1,27 @@
-import { CardProvider } from '@atlaskit/editor-core';
+import { EditorCardProvider } from '@atlaskit/smart-card';
 
-export class CardProviderMock implements CardProvider {
-  public config = {};
+type CardAppearance = 'inline' | 'block';
 
-  getType(url: string) {
-    if (/product-fabric.atlassian.net\/browse\/ED-\d+$/.test(url)) {
-      return 'smart-card';
+export class EditorTestCardProvider extends EditorCardProvider {
+  testUrlMatch = new RegExp('^https?://([a-z_-]*.)?atlassian.com');
+
+  async resolve(url: string, appearance: CardAppearance): Promise<any> {
+    if (url.match(this.testUrlMatch)) {
+      return {
+        type: appearance === 'inline' ? 'inlineCard' : 'blockCard',
+        attrs: {
+          data: {
+            '@context': 'https://www.w3.org/ns/activitystreams',
+            '@type': 'Document',
+            name: 'Welcome to Atlassian!',
+            url: 'http://www.atlassian.com',
+          },
+        },
+      };
+    } else {
+      return super.resolve(url, appearance);
     }
-    if (/www.atlassian.com/.test(url)) {
-      return 'custom';
-    }
-    return 'unsupported';
-  }
-
-  getData(url: string): Promise<any> {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve({
-          '@context': 'https://www.w3.org/ns/activitystreams',
-          '@type': 'Document',
-          name: 'Welcome to Atlassian!',
-          url: 'http://www.atlassian.com',
-        });
-      }, 1000);
-    });
   }
 }
 
-export const cardProvider = new CardProviderMock();
+export const cardProvider = new EditorTestCardProvider();

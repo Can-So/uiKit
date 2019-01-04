@@ -1,5 +1,5 @@
 # Note: This image can be found in build/pipelines/docker-image
-image: atlassianlabs/atlaskit-mk-2:1.0.3
+image: atlassianlabs/atlaskit-mk-2:1.0.4
 # This ensures we do a full clone on each build which prevents issues when cross referencing
 # changesets and releases
 clone:
@@ -24,7 +24,18 @@ pipelines:
             # - yarn test
             # Disabled until we find the source of the flakeyness
             # - yarn test:browser:browserstack
-            - yarn release
+            # Bump all packages and their dependents using saved changesets
+            - node ./build/releases/bin/build-releases.js version
+            # We push the bumped packages to master now as it's much better to fail whilst BB is
+            # ahead of npm, than the other way round.
+            - git push
+            # We run the build:pkg script again, because the versions in our package.jsons may have changed
+            # after the bump. We've kept it running in both places, just to limit the scope of this change
+            # so that we don't break anything that was working previously
+            - yarn build:pkg
+            # Release all unreleased packages
+            - node ./build/releases/bin/build-releases.js publish --public
+            - git push --tags # push only the tags
             - (cd build/ci-scripts && yarn restart-stopped-build)
           caches:
             - node
@@ -49,9 +60,6 @@ pipelines:
               - node build/ci-scripts/run.tool.if.changed.js tslint -- yarn lint:tslint
               - node build/ci-scripts/run.tool.if.changed.js stylelint -- yarn lint:stylelint
               - node build/ci-scripts/run.tool.if.changed.js flow -- yarn typecheck:flow
-              # The script below counts flowfixme and fails if above the threshold.
-              # The goal is to reduce the threshold over time.
-              - source build/ci-scripts/count-flowfixme.sh 126
               - node build/ci-scripts/run.tool.if.changed.js typescript -- yarn typecheck:typescript
               # Get the commit that we diverged from master at
               - export DIVERGED_AT=$(git merge-base master HEAD)
@@ -67,20 +75,29 @@ pipelines:
             script:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
-              - OVERRIDE_TEST_IGNORE='(editor)' yarn run test:changed
-              - OVERRIDE_TEST_IGNORE='(!editor)' yarn run test:changed --runInBand
+              # Run the non-editor tests, --passWithNoTests has been added in case of no tests found to avoid failure in CI.
+              - TEST_ONLY_PATTERN='!packages/editor' yarn run test:changed --passWithNoTests
+              # Run the editor tests (runInBand is required or it fails in CI)
+              - TEST_ONLY_PATTERN='packages/editor' yarn run test:changed --runInBand --passWithNoTests
             caches:
               - node
         - step:
-            name: Browser Testing
+            name: Browser Unit Testing
             script:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
               - echo "Run browser unit tests using Karma + Browserstack"
               - node build/ci-scripts/run.tool.if.changed.js browserstack  -- yarn test:browser:browserstack
+            caches:
+              - node
+        - step:
+            name: Browser Integration Testing
+            script:
+              - source ./build-setup.sh
+              - bolt install --pure-lockfile
               - echo "Run browser integration tests using Webdriver + Browserstack"
               # If we have changed any packages with webdriver tests, we wait until browserstack has free resources, then run our tests
-              -  LOCAL_IDENTIFIER=$(date +%s) BS_RETRY=5 BS_BUILD_ALLOWED=3 node build/ci-scripts/run.tool.if.changed.js webdriver -- node build/ci-scripts/wait.for.browserstack.resources.js && yarn test:webdriver:browserstack:changed
+              - LOCAL_IDENTIFIER=$(date +%s) BS_RETRY=5 BS_BUILD_ALLOWED=3 node build/ci-scripts/run.tool.if.changed.js webdriver -- node build/ci-scripts/wait.for.browserstack.resources.js && yarn test:webdriver:browserstack:changed
             caches:
               - node
         - step:
@@ -89,12 +106,15 @@ pipelines:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
               - cd website
-              - WEBSITE_ENV=staging yarn build:no-minimize
+              # This next line just makes it so we can skip website builds by having a branch name that starts with "skip-website/"
+              - if [[ "$BITBUCKET_BRANCH" == skip-website/* ]]; then echo "Skipping website build" && mkdir dist && echo "Build skipped" > dist/index.html; else WEBSITE_ENV=staging yarn build:no-minimize; fi
               - yarn build:copy
-              - yarn build:zip
-              - yarn deploy:staging | tee netlify-build.txt
+              - set -o pipefail # make sure we fail if the deployment fails
+              # we pipe the output to stdout AND deploy-log.txt so that we can read the live url
+              - yarn deploy:staging | tee deploy-log.txt
+              - cat deploy-log.txt | grep "Live Draft Url:" | sed -e "s/Live Draft Url..//" > netlify-link.txt
               - echo "Uploading netlify build link to s3 so that we can fetch at the end..."
-              - node ../build/ci-scripts/upload.build.artefact.for.commit.js netlify-build.txt
+              - node ../build/ci-scripts/upload.build.artefact.for.commit.js netlify-link.txt
             caches:
               - node
     - step:
@@ -103,12 +123,10 @@ pipelines:
           - (cd build/utils && yarn install) # needed for npm-run when updating status
           - cd build/ci-scripts
           - yarn install
-          - node download.build.artefact.for.commit.js netlify-build.txt
+          - node download.build.artefact.for.commit.js netlify-link.txt
           - node update.build.status.with.netlify.link.js
 
-
   custom: # Pipelines that can be scheduled or triggered manually
-
     # This should only be called by a scheduled build
     build-website-production:
       - step:
@@ -118,27 +136,37 @@ pipelines:
             - cd website
             - WEBSITE_ENV=production yarn build
             - yarn build:copy
-            - yarn build:zip
             - yarn deploy:production
-            - cd ..
-            # This is a sanity check to make sure the website renders on all browsers without error
-            - yarn test:webdriver:browserstack website
+          caches:
+            - node
+
+    # This should only be called by a scheduled or manual build for master
+    send-website-build-analytics:
+      - step:
+          script:
+            - source ./build-setup.sh
+            - bolt install --pure-lockfile
+            - cd website
+            - yarn build:report
+            # We could optionally upload these to s3 if we wanted, leaving this here as an example
+            # - node ../build/ci-scripts/upload.build.artefact.for.commit.js dist/report.html
+            # - node ../build/ci-scripts/upload.build.artefact.for.commit.js dist/stats.json
+            - node ./scripts/uploadBundleAnalyticsEvent.js
           caches:
             - node
 
     # This will run with the webdriver tests
     build-webdriver:
-    - step:
+      - step:
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
             - yarn test:webdriver:browserstack
           caches:
             - node
-
-    # This will run with the visual regression tool
+      # This will run with the visual regression tool
     build-visual-regression:
-    - step:
+      - step:
           script:
             #to overcome puppeteer drawback yarn add again
             # When running Puppeteer in Docker,
@@ -155,9 +183,8 @@ pipelines:
             - yarn test:vr
           caches:
             - node
-
-    # This will run essentially the branch builds, but without any optimizations and should be manually
-    # run in any potentially risky builds
+      # This will run essentially the branch builds, but without any optimizations and should be manually
+      # run in any potentially risky builds
     run-full-suite:
       - step:
           script:
@@ -169,7 +196,10 @@ pipelines:
             - yarn test
             - yarn test:browser:browserstack
             - yarn test:webdriver:browserstack
-            - (cd website && yarn deploy-staging:no-minimize)
+            - cd website
+            # don't worry about deploying, this build will always be run alongside a branch build
+            - yarn build
+
     # We deliberately don't use the cache here as well
 
     run-bundle-analysis:
@@ -181,7 +211,6 @@ pipelines:
             - yarn build:bundle-analysis
           caches:
             - node
-
 
     landkid:
       - parallel:
@@ -202,12 +231,17 @@ pipelines:
                 - yarn lint
 
           - step:
-              name: Typechecking
+              name: Typechecking (and checking changesets)
               script:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
                 - yarn typecheck
+                - echo "We are now about to run the `version` command which will read changesets and bump packages"
+                - echo "We do this so that we know if the repo will be in an inconsistent state when this branch hits master"
+                - echo "If the step below fails, it's because a changeset may be bumping a package that is depended upon by a package that didn't exist when the changeset was created"
+                - echo "Read the very last error message, it will tell you exactly what is wrong (ignore all the first warnings you'll see)"
+                - node ./build/releases/bin/build-releases.js version
           # Rest of the steps are jest tests. We no longer use the $BITBUCKET_PARALLEL_STEP_COUNT and $BITBUCKET_PARALLEL_STEP
           # variables as they mean the jest steps need to be in their own parallel block, so we just hardcode them here
           - step:
@@ -216,29 +250,46 @@ pipelines:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
-                - STEPS="4" STEP_IDX="0" PARALLELIZE_TESTS="$(yarn --silent jest --listTests)" yarn jest --runInBand
+                - export TMPFILE=$(mktemp /tmp/jest.XXXXXX) && yarn --silent jest --listTests --json > $TMPFILE
+                - STEPS="4" STEP_IDX="0" PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --runInBand
           - step:
               name: Running Jest 2 of 4 chunks
               script:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
-                - STEPS="4" STEP_IDX="1" PARALLELIZE_TESTS="$(yarn --silent jest --listTests)" yarn jest --runInBand
+                - export TMPFILE=$(mktemp /tmp/jest.XXXXXX) && yarn --silent jest --listTests --json > $TMPFILE
+                - STEPS="4" STEP_IDX="1" PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --runInBand
           - step:
               name: Running Jest 3 of 4 chunks
               script:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
-                - STEPS="4" STEP_IDX="2" PARALLELIZE_TESTS="$(yarn --silent jest --listTests)" yarn jest --runInBand
+                - export TMPFILE=$(mktemp /tmp/jest.XXXXXX) && yarn --silent jest --listTests --json > $TMPFILE
+                - STEPS="4" STEP_IDX="2" PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --runInBand
           - step:
               name: Running Jest 4 of 4 chunks
               script:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
-                - STEPS="4" STEP_IDX="3" PARALLELIZE_TESTS="$(yarn --silent jest --listTests)" yarn jest --runInBand
-
+                - export TMPFILE=$(mktemp /tmp/jest.XXXXXX) && yarn --silent jest --listTests --json > $TMPFILE
+                - STEPS="4" STEP_IDX="3" PARALLELIZE_TESTS_FILE="$TMPFILE" yarn jest --runInBand
+          - step:
+              name: Running Browser Integration tests
+              script:
+                - source ./build-setup.sh
+                - git merge master --no-edit
+                - bolt install --pure-lockfile
+                - LANKDID=true yarn test:webdriver:browserstack:changed
+      - step:
+          name: Wait until no master is running
+          script:
+            - source ./build-setup.sh
+            - cd build/ci-scripts
+            - yarn --ignore-engines
+            - node ./wait.until.no.master.build.running.js
     # This build should only be run on the master branch, once per day.
     # It manually clears the cache and runs a very quick install node_modules
     # We split into two steps so that one can clear the cache so that the second one starts with no cache
@@ -259,5 +310,23 @@ pipelines:
             # we re-clear the cache here in case any other builds have managed to start and finish in between us starting
             # (our build will only upload a cache if there is none when the build finishes)
             - node build/ci-scripts/clear.pipelines.node.cache.js
+          caches:
+            - node
+
+    deploy-branch-build-dists:
+      - step:
+          name: Deploy branch build dists
+          script:
+            - source ./build-setup.sh
+            - bolt install --pure-lockfile
+            - yarn build
+            - export CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js)
+            # Change into a glob pattern (removing brackets, spaces and quotes)
+            - export CHANGED_PACKAGES_GLOB=$(echo "$CHANGED_PACKAGES" | sed 's/[][" ]//g')
+            # We add in the exta brances and a trailing comma in case we only have one package
+            - bolt ws exec --only-fs="{$CHANGED_PACKAGES_GLOB,}" -- npm pack
+            - mkdir -p dists/
+            - node build/ci-scripts/copy.built.tgzs.to.dists.dir.js
+            - for file in dists/*; do node build/ci-scripts/upload.build.artefact.for.commit.js $file dists/; done
           caches:
             - node

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as UtilSharedStyles from '@atlaskit/util-shared-styles';
+import { borderRadius, colors, themed } from '@atlaskit/theme';
 import styled from 'styled-components';
 
 export type Color = 'grey' | 'red' | 'blue' | 'green' | 'purple' | 'yellow';
@@ -9,21 +9,26 @@ export type Props = React.HTMLProps<HTMLSpanElement> & {
   color?: Color;
 };
 
-export const resolveColors = (color?: Color): [string, string, string] => {
+type ColoursTuple = [string, string, string];
+export const resolveColors = (
+  color?: Color,
+): { light: ColoursTuple; dark: ColoursTuple } => {
   if (!color || color === 'grey') {
-    return [
-      UtilSharedStyles.akColorN30A,
-      UtilSharedStyles.akColorN800,
-      UtilSharedStyles.akColorN40,
-    ];
+    return {
+      light: [colors.N30A, colors.N800, colors.N40],
+      dark: [colors.DN70, colors.DN800, colors.DN60],
+    };
   }
-
   const letter = color.toUpperCase().charAt(0);
-  return [
-    UtilSharedStyles[`akColor${letter}50`],
-    UtilSharedStyles[`akColor${letter}500`],
-    UtilSharedStyles[`akColor${letter}75`],
+  const resolvedColors: ColoursTuple = [
+    colors[`${letter}50`],
+    colors[`${letter}500`],
+    colors[`${letter}75`],
   ];
+  return {
+    light: resolvedColors,
+    dark: resolvedColors,
+  };
 };
 
 /**
@@ -31,7 +36,7 @@ export const resolveColors = (color?: Color): [string, string, string] => {
  * add custom props as Generic Parameter to span instead of casting
  */
 export const DateLozenge = styled.span`
-  border-radius: ${UtilSharedStyles.akBorderRadius};
+  border-radius: ${borderRadius()}px;
   padding: 2px 4px;
   margin: 0 1px;
   position: relative;
@@ -40,7 +45,9 @@ export const DateLozenge = styled.span`
   cursor: ${(props: Props) => (props.onClick ? 'pointer' : 'unset')};
 
   ${(props: Props) => {
-    const [background, color, hoverBackground] = resolveColors(props.color);
+    const [background, color, hoverBackground]: ColoursTuple = themed(
+      resolveColors(props.color),
+    )(props);
     return `
       background: ${background};
       color: ${color};

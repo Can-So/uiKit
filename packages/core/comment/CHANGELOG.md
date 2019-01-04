@@ -1,5 +1,119 @@
 # @atlaskit/comment
 
+## 6.0.32
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-core@92.0.0
+
+## 6.0.31
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-core@91.0.0
+
+## 6.0.30
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/button@10.1.1
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/lozenge@6.2.4
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/editor-core@90.3.15
+  - @atlaskit/docs@6.0.0
+
+## 6.0.29
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/editor-core@90.2.1
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+  - @atlaskit/lozenge@6.2.3
+
+## 6.0.28
+- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+  - @atlaskit/editor-core@90.0.0
+
+## 6.0.27
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/avatar@14.1.5
+  - @atlaskit/button@10.0.1
+  - @atlaskit/editor-core@89.0.6
+  - @atlaskit/icon@15.0.0
+
+## 6.0.26
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/editor-core@89.0.4
+  - @atlaskit/button@10.0.0
+
+## 6.0.25
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-core@89.0.0
+
+## 6.0.24
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-core@88.0.0
+
+## 6.0.23
+- [patch] Updated dependencies [052ce89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/052ce89)
+  - @atlaskit/editor-core@87.0.0
+
+## 6.0.22
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 6.0.21
+- [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+  - @atlaskit/editor-core@86.0.0
+
+## 6.0.20
+- [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+  - @atlaskit/editor-core@85.0.0
+
+## 6.0.19
+- [patch] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [patch] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+  - @atlaskit/editor-core@84.0.0
+
+## 6.0.18
+- [patch] Updated dependencies [23c7eca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23c7eca)
+  - @atlaskit/editor-core@83.0.0
+
+## 6.0.17
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/avatar@14.0.11
+  - @atlaskit/button@9.0.13
+  - @atlaskit/editor-core@82.3.1
+  - @atlaskit/icon@14.0.0
+
+## 6.0.16
+- [patch] Updated dependencies [ef76f1f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef76f1f)
+  - @atlaskit/editor-core@82.0.0
+
+## 6.0.15
+- [patch] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+  - @atlaskit/editor-core@81.0.0
+
+## 6.0.14
+- [patch] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+  - @atlaskit/editor-core@80.0.0
+
+## 6.0.13
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 6.0.12
+- [patch] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
+  - @atlaskit/editor-core@79.0.0
+
+## 6.0.11
+- [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+  - @atlaskit/editor-core@78.0.0
+
 ## 6.0.9
 - [patch] Clean changelogs and exclude the editor example from the ssr test [ced154b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ced154b)
 

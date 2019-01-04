@@ -1,18 +1,9 @@
 import * as React from 'react';
-import { md, Example, Props } from '@atlaskit/docs';
+import { md, code, Example, Props } from '@atlaskit/docs';
 
 export default md`
-  # @atlaskit/media-avatar-picker
 
-  Provides a component to select, drag and resize image avatars. It also provides a default list of predefined avatars.
-
-  ## Installation
-
-  ~~~sh
-  yarn add @atlaskit/media-avatar-picker
-  ~~~
-
-  ## Using the component
+  This component provides a component to select, drag and resize image avatars. It also provides a default list of predefined avatars.
 
   ### Local Image Upload and Cropping
 
@@ -47,72 +38,91 @@ export default md`
 
   See the \`errorMessage\` property below to set your own custom error message if required.
 
-  ## API
+  ### Usage
 
-  \`onImagePicked?: (file: File, crop: CropProperties) => void\`
+  Below is an example of rendering an \`AvatarPickerDialog\`. The dialog should be wrapped in a \`ModalTransition\` component so it fades out when closed.
 
-  This property is raised when the user clicks the **Save** button and there is a selected image. Two arguments are passed, the \`file:File\` which is a blob, and the crop settings which is an object containing \`x:number\`,\`y:number\`, and \`size:number\` values, which are all relative to the coordinates of the selected image.
+${code`
+import { AvatarPickerDialog, Avatar } from '@atlaskit/media-avatar-picker';
+import { ModalTransition } from '@atlaskit/modal-dialog';
 
-  **Note** Due to limitations on Safari <= 10.0 and IE11, a \`Blob\` object will be returned instead of a \`File\`. This still allows access to the image byte data to facilitate uploads, essentially minus the filename and date attributes.
+const avatars: Array<Avatar> = [{ dataURI: 'some-data-uri' }];
 
-  The \`x\` and \`y\` represent the origin of the crop area. The \`size\` value is a single value which represents the width and height of the crop area. To get the crop area from the selected image, simply take the clipped rect of (\`x\`, \`y\`, \`size\`, \`size\`) from the given image.
+const App = ({ isOpen }) => (
+  <ModalTransition>
+    {isOpen && (
+      <AvatarPickerDialog
+        avatars={avatars}
+        onImagePicked={(selectedImage, crop) => {
+          console.log(selectedImage.size, crop.x, crop.y, crop.size);
+        }}
+        onAvatarPicked={selectedAvatar =>
+          console.log(selectedAvatar.dataURI)
+        }
+        onCancel={() => /* we need to close the dialog... */}
+      />
+    )}
+  </ModalTransition>
+);
+`}
 
-  \`onImagePickedDataURI?: (dataURI: string) => void\`
-
-  This property is raised when the user clicks the **Save** button and there is a selected image. The selected image is provided as a dataURI string.
-
-  \`onAvatarPicked: (avatar: Avatar) => void\`
-
-  This property is raised when the user clicks the **Save** button and there is a pre-defined avatar selected, and no image selected. An \`Avatar\` object with a \`dataURI\` property is passed.
-
-  \`onCancel: Function\`
-
-  This property is raised when the user clicks **Cancel** button.
-
-  **Note** this does not close the dialog. It is up to the consumer to re-render and remove the dialog from the UI.
-
-  \`imageSource?: string\`
-
-  _(optional)_ This property is used to set the selected image so that the component opens up with it visible already.
-
-  The value should be a valid dataURI string. If an invalid dataURI is given, the bad format error state will be triggered and a message shown.
-
-  \`avatars: Array<Avatar>\`
-
-  This property is used to provide an array of pre-defined avatars. The \`Avatar\` object is a simple type with a single \`dataURI: string\` property. For convenience, this type is exported from the \`@atlassian/media-avatar-picker\` module along with the \`AvatarPickerDialog\` component.
-
-  \`defaultSelectedAvatar?: Avatar\`
-
-  _(optional)_ This property is used along with the \`avatar\` property. It allows you to set the currently selected pre-defined avatar. By default, there is no pre-defined avatar selected, even if the \`avatars\` property is set.
-
-  \`title?: string\`
-
-  _(optional)_ The title text for the dialog. The default is _Upload an avatar_.
-
-  \`primaryButtonText?: string\`
-
-  _(optional)_ The primary button text. The default is _Save_.
-
-  \`errorMessage?: string\`
-
-  _(optional)_ This property allows the consumer to display an error message. This may occur from a call to a service. The string is clipped if greater than 125 charaters (approximately 3 lines within the dialog).
-
-  ### Usage Example
-
-  ~~~
-  import {AvatarPickerDialog, Avatar} from '@atlaskit/media-avatar-picker';
-
-  const avatars: Array<Avatar> = [{ dataURI:'some-data-uri' }];
-
-  <AvatarPickerDialog
-    avatars={avatars}
-    onImagePicked={(selectedImage, crop) => {
-      console.log(selectedImage.size, crop.x, crop.y, crop.size);
-    }}
-    onAvatarPicked={selectedAvatar =>
-      console.log(selectedAvatar.dataURI)
-    }
-    onCancel={() => /* we need to close the dialog... */}
+${(
+  <Example
+    Component={require('../examples/0-avatar-picker-with-source').default}
+    title="Avatar Picker With Source"
+    source={require('!!raw-loader!../examples/0-avatar-picker-with-source')}
   />
-  ~~~
+)}
+
+${(
+  <Props
+    heading="Avatar List Props"
+    props={require('!!extract-react-types-loader!../src/avatar-list')}
+  />
+)}
+
+${(
+  <Props
+    heading="Avatar Picker Dialog Props"
+    props={require('!!extract-react-types-loader!../src/avatar-picker-dialog')}
+  />
+)}
+
+${(
+  <Props
+    heading="Predefined Avatar List Props"
+    props={require('!!extract-react-types-loader!../src/predefined-avatar-list')}
+  />
+)}
+
+${(
+  <Props
+    heading="Predefined Avatar View Props"
+    props={require('!!extract-react-types-loader!../src/predefined-avatar-view')}
+  />
+)}
 `;
+
+// TODO: Image Cropper, Navigator, Placer have issues to propage their Props.
+// There is an issue with react prop types and it will be solved in the coming weeks.
+
+// ${(
+//   <Props
+//     heading = "Image Cropper Props"
+//     props={require('!!extract-react-types-loader!../src/image-cropper')}
+//   />
+// )}
+
+// ${(
+//   <Props
+//     heading = "Image Navigator Props"
+//     props={require('!!extract-react-types-loader!../src/image-navigator')}
+//   />
+// )}
+
+// ${(
+//   <Props
+//     heading = "Image Placer Props"
+//     props={require('!!extract-react-types-loader!../src/image-placer')}
+//   />
+// )}

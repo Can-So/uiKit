@@ -2,14 +2,15 @@ import * as React from 'react';
 import { Component, FormEvent } from 'react';
 import { connect } from 'react-redux';
 import * as debounce from 'lodash.debounce';
-
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { messages } from '@atlaskit/media-ui';
 import FieldText from '@atlaskit/field-text';
 import Button from '@atlaskit/button';
 import Spinner from '@atlaskit/spinner';
 import { CardView } from '@atlaskit/media-card';
-
 import { BricksLayout } from './bricksGrid';
 import { fileClick } from '../../../actions/fileClick';
+import { setUpfrontIdDeferred } from '../../../actions/setUpfrontIdDeferred';
 import { ImageCardModel } from '../../../tools/fetcher/fetcher';
 import gridCellScaler from '../../../tools/gridCellScaler';
 import { State, SelectedItem } from '../../../domain';
@@ -44,10 +45,17 @@ export interface GiphyViewStateProps {
 export interface GiphyViewDispatchProps {
   onSearchQueryChange(query: string): void;
   onLoadMoreButtonClick(query: string, shouldAppendResults: boolean): void;
-  onCardClick(item: ImageCardModel): void;
+  onCardClick(item: ImageCardModel, upfrontId: Promise<string>): void;
+  setUpfrontIdDeferred: (
+    id: string,
+    resolver: (id: string) => void,
+    rejecter: Function,
+  ) => void;
 }
 
-export type GiphyViewProps = GiphyViewStateProps & GiphyViewDispatchProps;
+export type GiphyViewProps = GiphyViewStateProps &
+  GiphyViewDispatchProps &
+  InjectedIntlProps;
 
 export interface GiphyViewState {
   query: string;
@@ -77,6 +85,9 @@ export class GiphyView extends Component<GiphyViewProps, GiphyViewState> {
   }
 
   render(): JSX.Element {
+    const {
+      intl: { formatMessage },
+    } = this.props;
     const { query } = this.state;
 
     return (
@@ -84,7 +95,7 @@ export class GiphyView extends Component<GiphyViewProps, GiphyViewState> {
         <Title>GIPHY</Title>
         <FieldText
           label=""
-          placeholder="Search all the GIFs!"
+          placeholder={formatMessage(messages.search_all_gifs)}
           onChange={this.searchChangeHandler}
           shouldFitContainer={true}
           value={query}
@@ -112,9 +123,15 @@ export class GiphyView extends Component<GiphyViewProps, GiphyViewState> {
     return (
       <WarningContainer>
         <WarningIconWrapper>{errorIcon}</WarningIconWrapper>
-        <WarningHeading>Ouch! We could not retrieve any GIFs</WarningHeading>
-        <WarningSuggestion>Check your network connection</WarningSuggestion>
-        <Button onClick={this.handleRetryButtonClick}>Try again</Button>
+        <WarningHeading>
+          <FormattedMessage {...messages.cant_retrieve_gifs} />
+        </WarningHeading>
+        <WarningSuggestion>
+          <FormattedMessage {...messages.check_your_network} />
+        </WarningSuggestion>
+        <Button onClick={this.handleRetryButtonClick}>
+          <FormattedMessage {...messages.try_again} />
+        </Button>
       </WarningContainer>
     );
   };
@@ -126,9 +143,14 @@ export class GiphyView extends Component<GiphyViewProps, GiphyViewState> {
     return (
       <WarningContainer>
         <WarningImage src="https://media1.giphy.com/media/10YK5Hh53nC3dK/200w.gif" />
-        <WarningHeading>Hello? Was it me you're looking for?</WarningHeading>
+        <WarningHeading>
+          <FormattedMessage {...messages.no_gifs_found} />
+        </WarningHeading>
         <WarningSuggestion>
-          We couldn't find anything for "{query}"
+          <FormattedMessage
+            {...messages.no_gifs_found_suggestion}
+            values={{ query }}
+          />
         </WarningSuggestion>
       </WarningContainer>
     );
@@ -208,29 +230,11 @@ export class GiphyView extends Component<GiphyViewProps, GiphyViewState> {
           isDisabled={isLoading}
           iconAfter={iconAfter}
         >
-          Load more GIFs
+          <FormattedMessage {...messages.load_more_gifs} />
         </Button>
       </ButtonContainer>
     );
   };
-
-  // private scaleThumbnailGif = ({
-  //   width,
-  //   height,
-  // }: {
-  //   width: number;
-  //   height: number;
-  // }) => {
-  //   const desiredWith = Math.floor(
-  //     (CONTAINER_WIDTH - GAP_SIZE * (NUMBER_OF_COLUMNS - 1)) /
-  //       NUMBER_OF_COLUMNS,
-  //   );
-  //
-  //   return {
-  //     width: desiredWith,
-  //     height: Math.round(desiredWith / width * height),
-  //   };
-  // };
 
   private createSearchChangeHandler = () => {
     const { onSearchQueryChange } = this.props;
@@ -247,7 +251,13 @@ export class GiphyView extends Component<GiphyViewProps, GiphyViewState> {
   };
 
   private createClickHandler = (cardModel: ImageCardModel) => () => {
-    this.props.onCardClick(cardModel);
+    const { onCardClick, setUpfrontIdDeferred } = this.props;
+    const upfrontId = new Promise<string>((resolve, reject) => {
+      const { id } = cardModel.metadata;
+      setUpfrontIdDeferred(id, resolve, reject);
+    });
+
+    onCardClick(cardModel, upfrontId);
   };
 
   private handleLoadMoreButtonClick = () => {
@@ -261,8 +271,8 @@ export class GiphyView extends Component<GiphyViewProps, GiphyViewState> {
   };
 }
 
-export default connect<GiphyViewStateProps, GiphyViewDispatchProps, {}>(
-  (state: State) => ({
+export default connect<GiphyViewStateProps, GiphyViewDispatchProps, {}, State>(
+  state => ({
     hasError: state.view.hasError,
     isLoading: state.view.isLoading,
     cardModels: state.giphy.imageCardModels,
@@ -273,7 +283,7 @@ export default connect<GiphyViewStateProps, GiphyViewDispatchProps, {}>(
     onSearchQueryChange: query => dispatch(searchGiphy(query, false)),
     onLoadMoreButtonClick: (query, shouldAppendResults) =>
       dispatch(searchGiphy(query, shouldAppendResults)),
-    onCardClick: cardModel => {
+    onCardClick: (cardModel, upfrontId) => {
       const { id, name, size } = cardModel.metadata;
 
       dispatch(
@@ -284,10 +294,13 @@ export default connect<GiphyViewStateProps, GiphyViewDispatchProps, {}>(
             name: name || '',
             size: size || 0,
             date: Date.now(),
+            upfrontId,
           },
           'giphy',
         ),
       );
     },
+    setUpfrontIdDeferred: (id, resolver, rejecter) =>
+      dispatch(setUpfrontIdDeferred(id, resolver, rejecter)),
   }),
-)(GiphyView);
+)(injectIntl(GiphyView));

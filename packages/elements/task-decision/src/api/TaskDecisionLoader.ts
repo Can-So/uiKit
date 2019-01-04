@@ -65,7 +65,7 @@ export const loadWithDelay = <T>(
   delay: number,
 ): Promise<T[]> => {
   return new Promise(resolve => {
-    setTimeout(() => {
+    window.setTimeout(() => {
       loader().then(items => {
         resolve(items);
       });

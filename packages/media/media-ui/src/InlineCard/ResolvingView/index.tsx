@@ -4,16 +4,22 @@ import Spinner from '@atlaskit/spinner';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
 import { SpinnerWrapper } from './styled';
 
-export interface ResolvingViewProps {
+export interface InlineCardResolvingViewProps {
+  /** The url to display */
   url: string;
+  /** The optional click handler */
   onClick?: () => void;
+  /** A flag that determines whether the card is selected in edit mode. */
+  isSelected?: boolean;
 }
 
-export class ResolvingView extends React.Component<ResolvingViewProps> {
+export class InlineCardResolvingView extends React.Component<
+  InlineCardResolvingViewProps
+> {
   render() {
-    const { url, onClick } = this.props;
+    const { url, onClick, isSelected } = this.props;
     return (
-      <Frame onClick={onClick}>
+      <Frame onClick={onClick} isSelected={isSelected}>
         <IconAndTitleLayout
           icon={
             <SpinnerWrapper>
@@ -21,9 +27,7 @@ export class ResolvingView extends React.Component<ResolvingViewProps> {
             </SpinnerWrapper>
           }
           title={url}
-        >
-          - Connect your account to preview links
-        </IconAndTitleLayout>
+        />
       </Frame>
     );
   }

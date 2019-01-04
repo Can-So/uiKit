@@ -3,9 +3,9 @@ import React from 'react';
 
 import { BreadcrumbsStateless, BreadcrumbsItem } from '@atlaskit/breadcrumbs';
 import Button, { ButtonGroup } from '@atlaskit/button';
-import TextField from '@atlaskit/field-text';
-import InlineEdit from '@atlaskit/inline-edit';
-import SingleLineTextInput from '@atlaskit/input';
+import TextField from '@atlaskit/textfield';
+import Select from '@atlaskit/select';
+import InlineEdit, { SingleLineTextInput } from '@atlaskit/inline-edit';
 
 import PageHeader from '../src';
 
@@ -23,9 +23,18 @@ const actionsContent = (
   </ButtonGroup>
 );
 const barContent = (
-  <ButtonGroup>
-    <TextField isLabelHidden placeholder="Filter" label="hidden" />
-  </ButtonGroup>
+  <div style={{ display: 'flex' }}>
+    <div style={{ flex: '0 0 200px' }}>
+      <TextField isCompact placeholder="Filter" aria-label="Filter" />
+    </div>
+    <div style={{ flex: '0 0 200px', marginLeft: 8 }}>
+      <Select
+        spacing="compact"
+        placeholder="Choose an option"
+        aria-label="Choose an option"
+      />
+    </div>
+  </div>
 );
 
 const textStyle = {

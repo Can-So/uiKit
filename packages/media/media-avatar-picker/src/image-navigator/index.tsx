@@ -1,13 +1,21 @@
 import * as React from 'react';
 import { Component } from 'react';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { akGridSizeUnitless } from '@atlaskit/util-shared-styles';
 import Button from '@atlaskit/button';
 import ScaleLargeIcon from '@atlaskit/icon/glyph/media-services/scale-large';
 import ScaleSmallIcon from '@atlaskit/icon/glyph/media-services/scale-small';
-import { ImageCropper, OnLoadHandler } from '../image-cropper';
+import ImageCropper, { OnLoadHandler } from '../image-cropper';
 import Slider from '@atlaskit/field-range';
 import Spinner from '@atlaskit/spinner';
-import { Ellipsify, Camera, Rectangle, Vector2 } from '@atlaskit/media-ui';
+import {
+  Ellipsify,
+  Camera,
+  Rectangle,
+  Vector2,
+  messages,
+} from '@atlaskit/media-ui';
+import * as exenv from 'exenv';
 import {
   Container,
   SliderContainer,
@@ -87,10 +95,16 @@ const defaultState = {
   isDroppingFile: false,
 };
 
-export class ImageNavigator extends Component<Props, State> {
+export class ImageNavigator extends Component<
+  Props & InjectedIntlProps,
+  State
+> {
   state: State = defaultState;
 
   componentWillMount() {
+    if (!exenv.canUseDOM) {
+      return;
+    }
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
   }
@@ -220,10 +234,16 @@ export class ImageNavigator extends Component<Props, State> {
   }
 
   validateFile(imageFile: File): string | null {
+    const {
+      intl: { formatMessage },
+    } = this.props;
+
     if (ACCEPT.indexOf(imageFile.type) === -1) {
-      return ERROR.FORMAT;
+      return formatMessage(ERROR.FORMAT);
     } else if (fileSizeMb(imageFile) > MAX_SIZE_MB) {
-      return ERROR.SIZE;
+      return formatMessage(ERROR.SIZE, {
+        MAX_SIZE_MB,
+      });
     }
     return null;
   }
@@ -238,13 +258,14 @@ export class ImageNavigator extends Component<Props, State> {
         onImageUploaded(imageFile);
       }
 
-      this.setState({ fileImageSource, imageFile });
+      // TODO: [ts30] Add proper handling for null and ArrayBuffer
+      this.setState({ fileImageSource: fileImageSource as string, imageFile });
     };
     reader.readAsDataURL(imageFile);
   }
 
   // Trick to have a nice <input /> appearance
-  onUploadButtonClick = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  onUploadButtonClick: React.MouseEventHandler = e => {
     const input = e.currentTarget.querySelector(
       '#image-input',
     ) as HTMLInputElement;
@@ -303,12 +324,16 @@ export class ImageNavigator extends Component<Props, State> {
   };
 
   renderDragZone = () => {
+    const {
+      intl: { formatMessage },
+    } = this.props;
     const { isDroppingFile } = this.state;
     const { errorMessage, isLoading } = this.props;
     const showBorder = !isLoading && !!!errorMessage;
     const dropZoneImageSrc = errorMessage ? errorIcon : uploadPlaceholder;
-    let dragZoneText = errorMessage || 'Drag and drop your images here';
-    const dragZoneAlt = errorMessage || 'Upload image';
+    let dragZoneText =
+      errorMessage || formatMessage(messages.drag_and_drop_images_here);
+    const dragZoneAlt = errorMessage || formatMessage(messages.upload_image);
 
     return (
       <DragZone
@@ -335,16 +360,19 @@ export class ImageNavigator extends Component<Props, State> {
 
   renderImageUploader() {
     const { errorMessage, isLoading } = this.props;
-    const separatorText = errorMessage ? 'Try again' : 'or';
 
     return (
       <ImageUploader>
         {this.renderDragZone()}
         {isLoading ? null : (
           <div>
-            <PaddedBreak>{separatorText}</PaddedBreak>
+            <PaddedBreak>
+              <FormattedMessage
+                {...(errorMessage ? messages.try_again : messages.or)}
+              />
+            </PaddedBreak>
             <Button onClick={this.onUploadButtonClick} isDisabled={isLoading}>
-              Upload a photo
+              <FormattedMessage {...messages.upload_photo} />
               <FileInput
                 type="file"
                 id="image-input"
@@ -419,3 +447,5 @@ export class ImageNavigator extends Component<Props, State> {
     return <Container>{content}</Container>;
   }
 }
+
+export default injectIntl(ImageNavigator);

@@ -1,3 +1,5 @@
+import 'es6-promise/auto'; // 'whatwg-fetch' needs a Promise polyfill
+import 'whatwg-fetch';
 import * as fetchMock from 'fetch-mock/src/client';
 
 import PresenceResource, {
@@ -9,6 +11,7 @@ import { mention } from '@atlaskit/util-data-test';
 
 // avoid polluting test logs with error message in console
 // please ensure you fix it if you expect console.error to be thrown
+// tslint:disable-next-line:no-console
 let consoleError = console.error;
 
 const { validPresenceData, invalidPresenceData } = mention.presenceData;
@@ -26,9 +29,11 @@ const parser = new DefaultPresenceParser();
 
 describe('PresenceParser', () => {
   beforeEach(() => {
+    // tslint:disable-next-line:no-console
     console.error = jest.fn();
   });
   afterEach(() => {
+    // tslint:disable-next-line:no-console
     console.error = consoleError;
   });
   it('should parse presences into correct states', () => {
@@ -63,10 +68,12 @@ describe('PresenceCache', () => {
     };
     // Setup presence resource and cache
     cache = new DefaultPresenceCache();
+    // tslint:disable-next-line:no-console
     console.error = jest.fn();
   });
 
   afterEach(() => {
+    // tslint:disable-next-line:no-console
     console.error = consoleError;
     fetchMock.restore();
   });
@@ -171,10 +178,12 @@ describe('PresenceResource', () => {
         body: validPresenceData,
       },
     });
+    // tslint:disable-next-line:no-console
     console.error = jest.fn();
   });
 
   afterEach(() => {
+    // tslint:disable-next-line:no-console
     console.error = consoleError;
     fetchMock.restore();
   });
@@ -187,7 +196,7 @@ describe('PresenceResource', () => {
         resource.refreshPresence(testIds);
         let calls = fetchMock.calls(mockName);
         expect(calls).toHaveLength(1);
-        setTimeout(() => {
+        window.setTimeout(() => {
           resource.refreshPresence(testIds.slice(0, 6));
         }, 5);
         calls = fetchMock.calls(mockName);

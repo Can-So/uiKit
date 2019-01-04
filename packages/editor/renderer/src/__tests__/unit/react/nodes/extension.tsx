@@ -4,7 +4,8 @@ import { expect } from 'chai';
 import Extension from '../../../../react/nodes/extension';
 import { RendererContext } from '../../../../react';
 import ReactSerializer from '../../../../react';
-import { defaultSchema, ExtensionHandlers } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
+import { ExtensionHandlers } from '@atlaskit/editor-common';
 
 describe('Renderer - React/Nodes/Extension', () => {
   const extensionHandlers: ExtensionHandlers = {
@@ -51,7 +52,6 @@ describe('Renderer - React/Nodes/Extension', () => {
           attrs: {
             extensionType: 'com.atlassian.stride',
             extensionKey: 'default',
-            bodyType: 'rich',
           },
           content: [
             {

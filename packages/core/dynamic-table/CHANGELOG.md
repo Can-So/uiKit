@@ -1,5 +1,76 @@
 # @atlaskit/dynamic-table
 
+## 10.0.22
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/button@10.1.1
+  - @atlaskit/dropdown-menu@6.1.25
+  - @atlaskit/pagination@9.0.1
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/toggle@5.0.14
+  - @atlaskit/docs@6.0.0
+
+## 10.0.21
+- Updated dependencies [1a09599](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a09599):
+  - @atlaskit/pagination@9.0.0
+
+## 10.0.20
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/dropdown-menu@6.1.24
+  - @atlaskit/pagination@8.0.8
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/toggle@5.0.13
+  - @atlaskit/theme@7.0.0
+  - @atlaskit/avatar@14.1.6
+
+## 10.0.19
+- [patch] [492b8ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/492b8ea):
+
+  - Added `colspan` to cell type. Added example using `colspan`.
+
+## 10.0.18
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/avatar@14.1.4
+  - @atlaskit/dropdown-menu@6.1.22
+  - @atlaskit/pagination@8.0.6
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/toggle@5.0.11
+  - @atlaskit/button@10.0.0
+
+## 10.0.17
+- [patch] [abd3a39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abd3a39):
+
+  - Bump react-beautiful-dnd dependency to v10.0.2
+
+## 10.0.16
+- [patch] [85b3592](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85b3592):
+
+  - Passes analytics event through onSetPage prop when pagination component is clicked on
+
+## 10.0.15
+- [patch] Fixing blank state for datetime-picker in Firefox.  [0e6d838](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e6d838)
+
+## 10.0.14
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 10.0.13
+- [patch] Added space of 3x gridSize between table and pagination component [83a3471](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/83a3471)
+- [patch] Updated dependencies [8276156](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8276156)
+  - @atlaskit/pagination@8.0.0
+
+## 10.0.12
+- [patch] Pulling the shared styles from @atlaskit/theme and removed dependency on util-shraed-styles [7d51a09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d51a09)
+
+## 10.0.11
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 10.0.9
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

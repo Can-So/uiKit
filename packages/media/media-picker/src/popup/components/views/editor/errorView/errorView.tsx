@@ -1,15 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
-// import Button from '@atlaskit/button';
-
+import { messages } from '@atlaskit/media-ui';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { EscHelper } from '../escHelper';
-import {
-  errorHintRetry,
-  errorHintCritical,
-  errorButtonRetry,
-  errorButtonCancel,
-  errorButtonClose,
-} from '../phrases';
 import { CenterView } from '../styles';
 import {
   ErrorPopup,
@@ -27,15 +20,17 @@ export interface ErrorViewProps {
   readonly onRetry?: () => void;
 }
 
-export class ErrorView extends Component<ErrorViewProps> {
-  private escHelper: EscHelper;
+export class ErrorView extends Component<ErrorViewProps & InjectedIntlProps> {
+  private escHelper?: EscHelper;
 
   componentDidMount() {
     this.escHelper = new EscHelper(this.props.onCancel);
   }
 
   componentWillUnmount() {
-    this.escHelper.teardown();
+    if (this.escHelper) {
+      this.escHelper.teardown();
+    }
   }
 
   render(): JSX.Element {
@@ -53,20 +48,26 @@ export class ErrorView extends Component<ErrorViewProps> {
   }
 
   private renderHint(): JSX.Element {
-    const { onRetry } = this.props;
+    const {
+      onRetry,
+      intl: { formatMessage },
+    } = this.props;
     if (onRetry) {
-      return <span>{errorHintRetry}</span>;
+      return <span>{formatMessage(messages.error_hint_retry)}</span>;
     }
 
-    return <span>{errorHintCritical}</span>;
+    return <span>{formatMessage(messages.error_hint_critical)}</span>;
   }
 
   private renderTryAgainButton(): JSX.Element | null {
-    const { onRetry } = this.props;
+    const {
+      onRetry,
+      intl: { formatMessage },
+    } = this.props;
     if (onRetry) {
       return (
         <ErrorButton appearance="primary" onClick={onRetry}>
-          {errorButtonRetry}
+          {formatMessage(messages.try_again)}
         </ErrorButton>
       );
     }
@@ -75,11 +76,18 @@ export class ErrorView extends Component<ErrorViewProps> {
   }
 
   private renderCancelButton(): JSX.Element {
-    const { onCancel, onRetry } = this.props;
+    const {
+      onCancel,
+      onRetry,
+      intl: { formatMessage },
+    } = this.props;
+    const message = onRetry ? messages.cancel : messages.close;
     return (
       <ErrorButton appearance="subtle" onClick={onCancel}>
-        {onRetry ? errorButtonCancel : errorButtonClose}
+        {formatMessage(message)}
       </ErrorButton>
     );
   }
 }
+
+export default injectIntl(ErrorView);

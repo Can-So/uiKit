@@ -1,32 +1,25 @@
-import { keymap } from 'prosemirror-keymap';
-import { Schema, Slice, Node, Fragment } from 'prosemirror-model';
-import {
-  EditorState,
-  Plugin,
-  PluginKey,
-  TextSelection,
-  Selection,
-} from 'prosemirror-state';
-import { EditorView } from 'prosemirror-view';
 import * as MarkdownIt from 'markdown-it';
+// @ts-ignore
+import { handlePaste as handlePasteTable } from 'prosemirror-tables';
+import { Schema, Slice, Node, Fragment } from 'prosemirror-model';
+import { Plugin, PluginKey, TextSelection, Selection } from 'prosemirror-state';
+import { closeHistory } from 'prosemirror-history';
+import { hasParentNodeOfType } from 'prosemirror-utils';
 import { MarkdownTransformer } from '@atlaskit/editor-markdown-transformer';
 import { analyticsService } from '../../../analytics';
-import * as keymaps from '../../../keymaps';
 import * as clipboard from '../../../utils/clipboard';
 import { EditorAppearance } from '../../../types';
 import { insertMediaAsMediaSingle } from '../../media/utils/media-single';
 import linkify from '../linkify-md-plugin';
-import { escapeLinks, isPastedFromWord } from '../util';
+import { escapeLinks, getPasteSource } from '../util';
 import { transformSliceToRemoveOpenBodiedExtension } from '../../extension/actions';
 import { transformSliceToRemoveOpenLayoutNodes } from '../../layout/utils';
 import { linkifyContent } from '../../hyperlink/utils';
-import { closeHistory } from 'prosemirror-history';
-import { hasParentNodeOfType } from 'prosemirror-utils';
 import { pluginKey as tableStateKey } from '../../table/pm-plugins/main';
-import { transformSliceToRemoveOpenTable } from '../../table/utils';
-
-// @ts-ignore
-import { handlePaste as handlePasteTable } from 'prosemirror-tables';
+import {
+  transformSliceToRemoveOpenTable,
+  transformSliceToRemoveNumberColumn,
+} from '../../table/utils';
 import { transformSliceToAddTableHeaders } from '../../table/actions';
 import {
   handlePasteIntoTaskAndDecision,
@@ -37,6 +30,7 @@ import {
   transformSliceToJoinAdjacentCodeBlocks,
   transformSingleLineCodeBlockToCodeMark,
 } from '../../code-block/utils';
+import { queueCardsFromChangedTr } from '../../card/pm-plugins/doc';
 
 export const stateKey = new PluginKey('pastePlugin');
 
@@ -44,8 +38,6 @@ export function createPlugin(
   schema: Schema,
   editorAppearance?: EditorAppearance,
 ) {
-  let atlassianMarkDownParser: MarkdownTransformer;
-
   const md = MarkdownIt('zero', { html: false });
 
   md.enable([
@@ -61,41 +53,70 @@ export function createPlugin(
   // @see https://product-fabric.atlassian.net/browse/ED-3097
   md.use(linkify);
 
-  atlassianMarkDownParser = new MarkdownTransformer(schema, md);
+  const atlassianMarkDownParser = new MarkdownTransformer(schema, md);
 
   return new Plugin({
     key: stateKey,
     props: {
-      handlePaste(view: EditorView, event: ClipboardEvent, slice: Slice) {
+      handlePaste(view, rawEvent, slice) {
+        const event = rawEvent as ClipboardEvent;
         if (!event.clipboardData) {
           return false;
-        }
-
-        // Bail if copied content has files
-        if (clipboard.isPastedFile(event)) {
-          if (!isPastedFromWord(event)) {
-            return true;
-          }
-          // Microsoft Office always copies an image to clipboard so we don't let the event reach media
-          event.stopPropagation();
-        }
-
-        const { state, dispatch } = view;
-        const { codeBlock, media } = state.schema.nodes;
-
-        if (handlePasteIntoTaskAndDecision(slice)(state, dispatch)) {
-          return true;
-        }
-
-        if (handlePasteAsPlainText(slice)(state, dispatch, view)) {
-          return true;
         }
 
         const text = event.clipboardData.getData('text/plain');
         const html = event.clipboardData.getData('text/html');
 
-        // runs macro autoconvert prior to other conversions
-        if (text && !html && handleMacroAutoConvert(text)(state, dispatch)) {
+        // Bail if copied content has files
+        if (clipboard.isPastedFile(event)) {
+          if (!html) {
+            return true;
+          }
+          /**
+           * Microsoft Office, Number, Pages, etc. adds an image to clipboard
+           * with other mime-types so we don't let the event reach media
+           */
+          event.stopPropagation();
+        }
+
+        const { state, dispatch } = view;
+        const { codeBlock, media, decisionItem, taskItem } = state.schema.nodes;
+
+        if (handlePasteAsPlainText(slice, event)(state, dispatch, view)) {
+          return true;
+        }
+
+        // send analytics
+        if (hasParentNodeOfType([decisionItem, taskItem])(state.selection)) {
+          analyticsService.trackEvent(
+            'atlassian.fabric.action-decision.editor.paste',
+          );
+        } else {
+          analyticsService.trackEvent('atlassian.editor.paste', {
+            source: getPasteSource(event),
+          });
+        }
+        let markdownSlice: Slice | undefined;
+        if (text && !html) {
+          const doc = atlassianMarkDownParser.parse(escapeLinks(text));
+          if (doc && doc.content) {
+            markdownSlice = new Slice(
+              doc.content,
+              slice.openStart,
+              slice.openEnd,
+            );
+          }
+
+          // run macro autoconvert prior to other conversions
+          if (
+            markdownSlice &&
+            handleMacroAutoConvert(text, markdownSlice)(state, dispatch, view)
+          ) {
+            return true;
+          }
+        }
+
+        if (handlePasteIntoTaskAndDecision(slice)(state, dispatch)) {
           return true;
         }
 
@@ -115,23 +136,25 @@ export function createPlugin(
         }
 
         // If the clipboard only contains plain text, attempt to parse it as Markdown
-        if (text && !html && atlassianMarkDownParser) {
+        if (text && !html && markdownSlice) {
           analyticsService.trackEvent('atlassian.editor.paste.markdown');
-          const doc = atlassianMarkDownParser.parse(escapeLinks(text));
-          if (doc && doc.content) {
-            const tr = closeHistory(state.tr);
-            tr.replaceSelection(
-              new Slice(doc.content, slice.openStart, slice.openEnd),
-            );
-            dispatch(tr.scrollIntoView());
-            return true;
-          }
+          const tr = closeHistory(state.tr);
+          tr.replaceSelection(markdownSlice);
+
+          queueCardsFromChangedTr(state, tr);
+          dispatch(tr.scrollIntoView());
+          return true;
         }
 
         // finally, handle rich-text copy-paste
         if (html) {
           // linkify the text where possible
           slice = linkifyContent(state.schema, slice);
+
+          // run macro autoconvert prior to other conversions
+          if (handleMacroAutoConvert(text, slice)(state, dispatch, view)) {
+            return true;
+          }
 
           const { table, tableCell } = state.schema.nodes;
 
@@ -169,28 +192,34 @@ export function createPlugin(
 
           // get prosemirror-tables to handle pasting tables if it can
           // otherwise, just the replace the selection with the content
-          if (!handlePasteTable(view, null, slice)) {
-            closeHistory(tr);
-            tr.replaceSelection(slice);
-            tr.setStoredMarks([]);
-            if (
-              tr.selection.empty &&
-              tr.selection.$from.parent.type === codeBlock
-            ) {
-              tr.setSelection(TextSelection.near(
-                tr.selection.$from,
-                1,
-              ) as Selection);
-            }
-            dispatch(tr);
+          if (handlePasteTable(view, null, slice)) {
+            return true;
           }
 
+          closeHistory(tr);
+          tr.replaceSelection(slice);
+          tr.setStoredMarks([]);
+          if (
+            tr.selection.empty &&
+            tr.selection.$from.parent.type === codeBlock
+          ) {
+            tr.setSelection(TextSelection.near(
+              tr.selection.$from,
+              1,
+            ) as Selection);
+          }
+
+          // queue link cards, ignoring any errors
+          dispatch(queueCardsFromChangedTr(state, tr));
           return true;
         }
 
         return false;
       },
       transformPasted(slice) {
+        // remove table number column if its part of the node
+        slice = transformSliceToRemoveNumberColumn(slice, schema);
+
         /** If a partial paste of table, paste only table's content */
         slice = transformSliceToRemoveOpenTable(slice, schema);
 
@@ -232,34 +261,3 @@ export function createPlugin(
     },
   });
 }
-
-export function createKeymapPlugin(schema: Schema): Plugin {
-  const list = {};
-
-  keymaps.bindKeymapWithCommand(
-    keymaps.paste.common!,
-    (state: EditorState, dispatch) => {
-      analyticsService.trackEvent('atlassian.editor.paste');
-
-      return false;
-    },
-    list,
-  );
-
-  keymaps.bindKeymapWithCommand(
-    keymaps.altPaste.common!,
-    (state: EditorState, dispatch) => {
-      analyticsService.trackEvent('atlassian.editor.paste');
-
-      return false;
-    },
-    list,
-  );
-
-  return keymap(list);
-}
-
-export default (schema: Schema, editorAppearance?: EditorAppearance) => [
-  createPlugin(schema, editorAppearance),
-  createKeymapPlugin(schema),
-];

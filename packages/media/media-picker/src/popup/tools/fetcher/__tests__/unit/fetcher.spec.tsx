@@ -1,37 +1,19 @@
 jest.mock('axios');
-jest.mock('../../../../../util/getPreviewFromBlob');
 
 import axios from 'axios';
-import { Auth } from '@atlaskit/media-core';
 import { Service } from '../../../../domain';
-import { isImagePreview } from '../../../../../domain/preview';
 import {
   MediaApiFetcher,
   flattenAccounts,
   GiphyResponse,
   GiphyImage,
 } from '../../fetcher';
-import { getPreviewFromBlob } from '../../../../../util/getPreviewFromBlob';
 
 describe('Fetcher', () => {
-  const auth: Auth = {
-    clientId: '',
-    token: '',
-    baseUrl: '',
-  };
-  const fileId = 'file-id';
-  const imageFile = {
-    mediaType: 'image',
-  };
-  const nonImageFile = {
-    mediaType: 'unknown',
-  };
-  let fetcher = new MediaApiFetcher();
   let querySpy = jest.fn();
 
   beforeEach(() => {
     (axios.request as any).mockReturnValue(Promise.resolve({}));
-    fetcher = new MediaApiFetcher();
 
     querySpy = jest.fn();
     querySpy.mockReturnValue(Promise.resolve({}));
@@ -39,60 +21,6 @@ describe('Fetcher', () => {
 
   afterEach(() => {
     (axios.request as any).mockReset();
-  });
-
-  describe('getPreview()', () => {
-    it('should call api with biggest supported dimensions for image files', () => {
-      fetcher['query'] = querySpy;
-      fetcher.pollFile = jest.fn().mockReturnValue(Promise.resolve(imageFile));
-      return fetcher.getPreview(auth, fileId).then(() => {
-        expect(querySpy.mock.calls[0][2]).toEqual(
-          expect.objectContaining({
-            width: 4096,
-            height: 4096,
-          }),
-        );
-      });
-    });
-
-    it('should call api with default dimensions for non image files', () => {
-      fetcher['query'] = querySpy;
-      fetcher.pollFile = jest
-        .fn()
-        .mockReturnValue(Promise.resolve(nonImageFile));
-      return fetcher.getPreview(auth, fileId).then(() => {
-        expect(querySpy.mock.calls[0][2]).toEqual(
-          expect.objectContaining({
-            width: 640,
-            height: 480,
-          }),
-        );
-      });
-    });
-  });
-
-  describe('getImagePreview()', () => {
-    it('should return a valid image preview', () => {
-      (getPreviewFromBlob as jest.Mock<void>).mockReturnValue({
-        dimensions: {
-          width: 100,
-          height: 100,
-        },
-      });
-      fetcher['query'] = querySpy;
-      fetcher.pollFile = jest.fn().mockReturnValue(Promise.resolve(imageFile));
-
-      return fetcher.getPreview(auth, fileId).then(preview => {
-        if (!isImagePreview(preview)) {
-          throw new Error('no preview returned');
-        }
-
-        expect(preview.dimensions).toEqual({
-          width: 100,
-          height: 100,
-        });
-      });
-    });
   });
 
   describe('flattenAccounts()', () => {
@@ -123,54 +51,6 @@ describe('Fetcher', () => {
           status: 'available',
           displayName: 'user@atlassian.com',
           type: 'dropbox',
-        },
-      ]);
-    });
-  });
-
-  describe('getRecentFiles()', () => {
-    it('should not return empty files', async () => {
-      querySpy.mockReturnValue(
-        Promise.resolve({
-          data: {
-            contents: [
-              {
-                details: {
-                  size: 100,
-                },
-              },
-              {
-                details: {
-                  size: 0,
-                },
-              },
-              {
-                details: {},
-              },
-              {
-                details: {
-                  size: 1,
-                },
-              },
-            ],
-            nextInclusiveStartKey: 'next-key',
-          },
-        }),
-      );
-      fetcher['query'] = querySpy;
-      const recents = await fetcher.getRecentFiles(auth, 30, 'desc');
-
-      expect(recents.nextInclusiveStartKey).toEqual('next-key');
-      expect(recents.contents).toEqual([
-        {
-          details: {
-            size: 100,
-          },
-        },
-        {
-          details: {
-            size: 1,
-          },
         },
       ]);
     });

@@ -1,5 +1,120 @@
 # @atlaskit/editor-bitbucket-transformer
 
+## 4.1.1
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/editor-test-helpers@6.3.4
+  - @atlaskit/util-data-test@10.0.28
+
+## 4.1.0
+- [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+
+  - Move schema to its own package
+
+## 4.0.23
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/editor-test-helpers@6.3.2
+  - @atlaskit/util-data-test@10.0.26
+
+## 4.0.22
+- [patch] [da43fb4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/da43fb4):
+
+  - ED-5840 Fixed Bitbucket markdown transformer to use triple backticks
+
+## 4.0.21
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/editor-core@90.3.15
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/docs@6.0.0
+
+## 4.0.20
+- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+  - @atlaskit/editor-test-helpers@6.2.23
+  - @atlaskit/editor-core@90.0.0
+
+## 4.0.19
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/editor-core@89.0.0
+  - @atlaskit/editor-test-helpers@6.2.19
+  - @atlaskit/util-data-test@10.0.21
+
+## 4.0.18
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/editor-test-helpers@6.2.16
+  - @atlaskit/util-data-test@10.0.20
+
+## 4.0.17
+- [patch] Updated dependencies [052ce89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/052ce89)
+  - @atlaskit/editor-test-helpers@6.2.8
+  - @atlaskit/editor-core@87.0.0
+  - @atlaskit/editor-common@20.1.2
+
+## 4.0.16
+- [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+  - @atlaskit/editor-common@20.0.0
+  - @atlaskit/editor-core@86.0.0
+  - @atlaskit/editor-test-helpers@6.2.7
+  - @atlaskit/util-data-test@10.0.16
+
+## 4.0.15
+- [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+  - @atlaskit/editor-common@19.0.0
+  - @atlaskit/editor-core@85.0.0
+  - @atlaskit/editor-test-helpers@6.2.6
+  - @atlaskit/util-data-test@10.0.14
+
+## 4.0.14
+- [patch] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [patch] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+  - @atlaskit/editor-common@18.0.0
+  - @atlaskit/editor-core@84.0.0
+  - @atlaskit/editor-test-helpers@6.2.5
+  - @atlaskit/util-data-test@10.0.12
+
+## 4.0.13
+- [patch] Updated dependencies [23c7eca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23c7eca)
+  - @atlaskit/editor-test-helpers@6.2.4
+  - @atlaskit/util-data-test@10.0.11
+  - @atlaskit/editor-core@83.0.0
+
+## 4.0.12
+- [patch] Updated dependencies [ef76f1f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef76f1f)
+  - @atlaskit/editor-common@17.0.1
+  - @atlaskit/editor-core@82.0.0
+  - @atlaskit/editor-test-helpers@6.1.3
+
+## 4.0.11
+- [patch] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+  - @atlaskit/editor-common@17.0.0
+  - @atlaskit/editor-core@81.0.0
+  - @atlaskit/util-data-test@10.0.10
+  - @atlaskit/editor-test-helpers@6.1.2
+
+## 4.0.10
+- [patch] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+  - @atlaskit/editor-common@16.0.0
+  - @atlaskit/editor-core@80.0.0
+  - @atlaskit/editor-test-helpers@6.0.9
+  - @atlaskit/util-data-test@10.0.9
+
+## 4.0.9
+- [patch] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
+  - @atlaskit/editor-common@15.0.0
+  - @atlaskit/editor-core@79.0.0
+  - @atlaskit/editor-test-helpers@6.0.6
+  - @atlaskit/util-data-test@10.0.8
+
+## 4.0.8
+- [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+  - @atlaskit/editor-test-helpers@6.0.5
+  - @atlaskit/editor-core@78.0.0
+
 ## 4.0.7
 - [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
   - @atlaskit/util-data-test@10.0.7

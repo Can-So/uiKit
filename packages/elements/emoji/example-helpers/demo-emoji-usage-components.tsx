@@ -34,11 +34,13 @@ export class EmojiUsageList extends PureComponent<EmojiUsageProps, any> {
             return (
               <span key={emoji.id} style={{ marginRight: '15px' }}>
                 <span style={{ marginRight: '3px' }}>
-                  ({
+                  (
+                  {
                     this.props.emojiQueue.filter(
                       emojiId => emojiId === emoji.id,
                     ).length
-                  })
+                  }
+                  )
                 </span>
                 <ResourcedEmoji
                   emojiId={emoji}
@@ -138,7 +140,7 @@ export abstract class UsageShowAndClearComponent extends PureComponent<
 
   onSelection = (emojiId: EmojiId, emoji: OptionalEmojiDescription): void => {
     // give the tracker a chance to write to the queue and local storage before updating state
-    setTimeout(() => {
+    window.setTimeout(() => {
       this.refreshFrequentlyUsedList();
     });
   };

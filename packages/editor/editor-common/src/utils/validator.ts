@@ -1,9 +1,11 @@
-import { generateUuid as uuid } from './uuid';
-import { defaultSchema } from '../schema';
+import {
+  generateUuid as uuid,
+  defaultSchema,
+  isSafeUrl,
+  inlineNodes,
+  CellAttributes,
+} from '@atlaskit/adf-schema';
 import { Mark as PMMark, Schema } from 'prosemirror-model';
-import { isSafeUrl } from '.';
-import { inlineNodes } from '../schema';
-import { CellAttributes } from '../schema/nodes/tableNodes';
 
 export type ADFStage = 'stage0' | 'final';
 
@@ -46,6 +48,7 @@ export const markOrder = [
   'underline',
   'code',
   'confluenceInlineComment',
+  'textColor',
 ];
 
 export const isSubSupType = (type: string): type is 'sub' | 'sup' => {
@@ -88,11 +91,8 @@ export const getValidDocument = (
 };
 
 const wrapInlineNodes = (nodes: ADNode[] = []): ADNode[] => {
-  return nodes.map(
-    node =>
-      inlineNodes.has(node.type)
-        ? { type: 'paragraph', content: [node] }
-        : node,
+  return nodes.map(node =>
+    inlineNodes.has(node.type) ? { type: 'paragraph', content: [node] } : node,
   );
 };
 
@@ -370,15 +370,26 @@ export const getValidNode = (
             type,
             attrs,
             content,
+            marks,
           };
         }
         return {
           type,
           content,
+          marks,
         };
       }
       case 'date': {
         if (attrs && attrs.timestamp) {
+          return {
+            type,
+            attrs,
+          };
+        }
+        break;
+      }
+      case 'status': {
+        if (attrs && attrs.text && attrs.color) {
           return {
             type,
             attrs,
@@ -494,6 +505,7 @@ export const getValidNode = (
             type,
             attrs,
             content,
+            marks,
           };
         }
         break;
@@ -530,10 +542,13 @@ export const getValidNode = (
         break;
       }
       case 'paragraph': {
-        return {
-          type,
-          content: content || [],
-        };
+        return marks
+          ? {
+              type,
+              content: content || [],
+              marks,
+            }
+          : { type, content: content || [] };
       }
       case 'rule': {
         return {
@@ -561,17 +576,26 @@ export const getValidNode = (
         break;
       }
       case 'heading': {
-        if (attrs && content) {
+        if (attrs) {
           const { level } = attrs;
           const between = (x, a, b) => x >= a && x <= b;
           if (level && between(level, 1, 6)) {
-            return {
-              type,
-              content,
-              attrs: {
-                level,
-              },
-            };
+            return marks
+              ? {
+                  type,
+                  content,
+                  marks,
+                  attrs: {
+                    level,
+                  },
+                }
+              : {
+                  type,
+                  content,
+                  attrs: {
+                    level,
+                  },
+                };
           }
         }
         break;
@@ -601,7 +625,7 @@ export const getValidNode = (
         if (content) {
           return {
             type,
-            content,
+            content: wrapInlineNodes(content),
           };
         }
         break;
@@ -630,22 +654,24 @@ export const getValidNode = (
         break;
       }
       case 'layoutSection': {
-        if (attrs && content) {
-          const { layoutType } = attrs;
+        if (content) {
           return {
             type,
-            attrs: { layoutType },
+            marks,
             content,
           };
         }
         break;
       }
       case 'layoutColumn': {
-        if (content) {
-          return {
-            type,
-            content,
-          };
+        if (attrs && content) {
+          if (attrs.width > 0 && attrs.width <= 100) {
+            return {
+              type,
+              content,
+              attrs,
+            };
+          }
         }
         break;
       }
@@ -739,7 +765,7 @@ export const getValidNode = (
 
           return {
             type,
-            content,
+            content: wrapInlineNodes(content),
             attrs: attrs ? cellAttrs : undefined,
           };
         }

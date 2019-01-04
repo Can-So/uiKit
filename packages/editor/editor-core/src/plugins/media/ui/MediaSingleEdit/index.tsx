@@ -1,62 +1,76 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { defineMessages, injectIntl, InjectedIntlProps } from 'react-intl';
 
 import WrapLeftIcon from '@atlaskit/icon/glyph/editor/media-wrap-left';
 import WrapRightIcon from '@atlaskit/icon/glyph/editor/media-wrap-right';
-import CenterIcon from '@atlaskit/icon/glyph/editor/media-center';
 import WideIcon from '@atlaskit/icon/glyph/editor/media-wide';
 import FullWidthIcon from '@atlaskit/icon/glyph/editor/media-full-width';
 import RemoveIcon from '@atlaskit/icon/glyph/editor/remove';
-import {
-  MediaSingleLayout,
-  akEditorFullPageMaxWidth,
-} from '@atlaskit/editor-common';
-import {
-  akColorN70,
-  akColorR300,
-  akColorR400,
-} from '@atlaskit/util-shared-styles';
+import EditorAlignImageLeft from '@atlaskit/icon/glyph/editor/align-image-left';
+import EditorAlignImageRight from '@atlaskit/icon/glyph/editor/align-image-right';
+import EditorAlignImageCenter from '@atlaskit/icon/glyph/editor/align-image-center';
 
-import { MediaPluginState } from '../../pm-plugins/main';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
+import { colors } from '@atlaskit/theme';
+
+import commonMessages from '../../../../messages';
 import UiToolbarButton from '../../../../ui/ToolbarButton';
 import UiSeparator from '../../../../ui/Separator';
 import UiFloatingToolbar from '../../../../ui/FloatingToolbar';
 import MediaServicesAnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';
 
 import { closestElement } from '../../../../utils';
+import { MediaPluginState } from '../../pm-plugins/main';
+
+export const messages = defineMessages({
+  wrapLeft: {
+    id: 'fabric.editor.wrapLeft',
+    defaultMessage: 'Wrap left',
+    description: 'Aligns your image to the left and wraps text around it.',
+  },
+  wrapRight: {
+    id: 'fabric.editor.wrapRight',
+    defaultMessage: 'Wrap right',
+    description: 'Aligns your image to the right and wraps text around it.',
+  },
+});
 
 export interface Props {
-  pluginState: MediaPluginState;
-}
-
-export interface State {
   target?: HTMLElement;
   layout?: MediaSingleLayout;
   allowBreakout: boolean;
   allowLayout: boolean;
+  pluginState: MediaPluginState;
+  allowResizing?: boolean;
+  editorDisabled?: boolean;
 }
 
-const icons = {
-  'wrap-left': {
-    icon: WrapLeftIcon,
-    label: 'Align left',
-  },
-  center: {
-    icon: CenterIcon,
-    label: 'Align center',
-  },
-  'wrap-right': {
-    icon: WrapRightIcon,
-    label: 'Align right',
-  },
-  wide: {
-    icon: WideIcon,
-    label: 'Wide',
-  },
-  'full-width': {
-    icon: FullWidthIcon,
-    label: 'Full width',
-  },
+export type IconMap = { value: string; Icon?: React.ComponentClass<any> }[];
+
+const icons: IconMap = [
+  { value: 'align-start', Icon: EditorAlignImageLeft },
+  { value: 'center', Icon: EditorAlignImageCenter },
+  { value: 'align-end', Icon: EditorAlignImageRight },
+  { value: 'separator' },
+  { value: 'wrap-left', Icon: WrapLeftIcon },
+  { value: 'wrap-right', Icon: WrapRightIcon },
+];
+
+const breakoutIcons: IconMap = [
+  { value: 'separator' },
+  { value: 'wide', Icon: WideIcon },
+  { value: 'full-width', Icon: FullWidthIcon },
+];
+
+const layoutToMessages = {
+  'wrap-left': messages.wrapLeft,
+  center: commonMessages.alignImageCenter,
+  'wrap-right': messages.wrapRight,
+  wide: commonMessages.layoutWide,
+  'full-width': commonMessages.layoutFullWidth,
+  'align-end': commonMessages.alignImageRight,
+  'align-start': commonMessages.alignImageLeft,
 };
 
 const ToolbarButton = styled(UiToolbarButton)`
@@ -84,61 +98,75 @@ const FloatingToolbar = styled(UiFloatingToolbar)`
 
 const ToolbarButtonDestructive = styled(ToolbarButton)`
   &:hover {
-    color: ${akColorR300} !important;
+    color: ${colors.R300} !important;
   }
   &:active {
-    color: ${akColorR400} !important;
+    color: ${colors.R400} !important;
   }
   &[disabled]:hover {
-    color: ${akColorN70} !important;
+    color: ${colors.N70} !important;
   }
 `;
 
-export default class MediaSingleEdit extends React.Component<Props, State> {
-  state: State = { layout: 'center', allowBreakout: true, allowLayout: true };
+class MediaSingleEdit extends React.Component<Props & InjectedIntlProps, {}> {
+  getItems = (allowResizing, allowBreakout) => {
+    if (!allowResizing) {
+      return icons.concat(breakoutIcons);
+    }
 
-  componentDidMount() {
-    this.props.pluginState.subscribe(this.handlePluginStateChange);
-  }
-
-  componentWillUnmount() {
-    this.props.pluginState.unsubscribe(this.handlePluginStateChange);
-  }
+    return icons;
+  };
 
   render() {
+    const { formatMessage } = this.props.intl;
     const {
       target,
       layout: selectedLayout,
       allowBreakout,
       allowLayout,
-    } = this.state;
+      allowResizing,
+      editorDisabled,
+    } = this.props;
+    const toolbarIcons = this.getItems(allowResizing, allowBreakout);
     if (
       target &&
       !closestElement(target, 'li') &&
-      !closestElement(target, 'table')
+      !closestElement(target, 'table') &&
+      !editorDisabled
     ) {
+      const labelRemove = formatMessage(commonMessages.remove);
       return (
-        <FloatingToolbar target={target} offset={[0, 12]} fitHeight={32}>
-          {Object.keys(icons).map((type, index) => {
-            // Don't render Wide and Full width button for image smaller than editor content width
-            if (index > 2 && !allowBreakout) {
-              return;
-            }
-            const Icon = icons[type].icon;
-            const label = icons[type].label;
-            return (
-              <ToolbarButton
-                spacing="compact"
-                key={index}
-                disabled={!allowLayout}
-                selected={type === selectedLayout}
-                onClick={this.handleChangeLayout.bind(this, type)}
-                title={label}
-                iconBefore={<Icon label={`Change layout to ${label}`} />}
-              />
-            );
-          })}
-          <Separator />
+        <FloatingToolbar
+          target={target}
+          offset={[0, 12]}
+          fitHeight={32}
+          alignX="center"
+        >
+          {allowLayout && (
+            <>
+              {toolbarIcons.map((layout, index) => {
+                // Don't render Wide and Full width button for image smaller than editor content width
+                const { value, Icon } = layout;
+
+                if (value === 'separator') {
+                  return <Separator key={index} />;
+                }
+                const label = formatMessage(layoutToMessages[value]);
+
+                return (
+                  <ToolbarButton
+                    spacing="compact"
+                    key={index}
+                    selected={value === selectedLayout}
+                    onClick={this.handleChangeLayout.bind(this, value)}
+                    title={label}
+                    iconBefore={Icon && <Icon label={label} />}
+                  />
+                );
+              })}
+              <Separator />
+            </>
+          )}
           <ToolbarButton
             spacing="compact"
             disabled={!allowLayout}
@@ -150,8 +178,8 @@ export default class MediaSingleEdit extends React.Component<Props, State> {
           <ToolbarButtonDestructive
             spacing="compact"
             onClick={this.handleRemove}
-            title="Remove image"
-            iconBefore={<RemoveIcon label="Remove image" />}
+            title={labelRemove}
+            iconBefore={<RemoveIcon label={labelRemove} />}
           />
         </FloatingToolbar>
       );
@@ -172,16 +200,6 @@ export default class MediaSingleEdit extends React.Component<Props, State> {
   private handleEdit = () => {
     this.props.pluginState.edit();
   };
-
-  private handlePluginStateChange = (pluginState: MediaPluginState) => {
-    const { element: target, layout } = pluginState;
-    const node = pluginState.selectedMediaNode();
-    const allowBreakout = !!(
-      node &&
-      node.attrs &&
-      node.attrs.width > akEditorFullPageMaxWidth
-    );
-    const allowLayout = !!pluginState.isLayoutSupported();
-    this.setState({ target, layout, allowBreakout, allowLayout });
-  };
 }
+
+export default injectIntl(MediaSingleEdit);

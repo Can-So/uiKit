@@ -238,6 +238,15 @@ export const Img: ComponentClass<ImgHTMLAttributes<{}> & ImgProps> = styled.img`
       return 'auto';
     }
   }};
+  /* Prevent images from being smoothed when scaled up */
+  image-rendering: optimizeSpeed; /* Legal fallback */
+  image-rendering: -moz-crisp-edges; /* Firefox        */
+  image-rendering: -o-crisp-edges; /* Opera          */
+  image-rendering: -webkit-optimize-contrast; /* Safari         */
+  image-rendering: optimize-contrast; /* CSS3 Proposed  */
+  image-rendering: crisp-edges; /* CSS4 Proposed  */
+  image-rendering: pixelated; /* CSS4 Proposed  */
+  -ms-interpolation-mode: nearest-neighbor; /* IE8+           */
 `;
 
 export const MedatadataTextWrapper = styled.div`
@@ -286,17 +295,27 @@ export const RightHeader = styled.div`
   }
 `;
 
+export const CustomAudioPlayerWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+`;
+
 export const AudioPlayer = styled.div`
+  background-color: ${blanketColor};
   border-radius: ${akBorderRadius};
   align-items: center;
   justify-content: center;
   width: 400px;
-  height: 250px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
 `;
+
+AudioPlayer.displayName = 'AudioPlayer';
 
 export const Audio = styled.audio`
   width: 100%;
@@ -308,7 +327,8 @@ export const Audio = styled.audio`
 export const AudioCover = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: scale-down;
+  background-color: #000000;
 `;
 
 export const DefaultCoverWrapper = styled.div`
@@ -333,5 +353,14 @@ export const DownloadButtonWrapper = styled.div`
 
   button {
     font-weight: bold;
+  }
+`;
+
+export const CustomVideoPlayerWrapper = styled.div`
+  video {
+    flex: 1;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
   }
 `;

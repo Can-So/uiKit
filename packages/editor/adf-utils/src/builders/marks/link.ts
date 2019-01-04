@@ -1,7 +1,4 @@
-// @ts-ignore
-import { TextDefinition } from '@atlaskit/editor-common';
-
-import { LinkDefinition, LinkAttributes } from '@atlaskit/editor-common';
+import { LinkDefinition, LinkAttributes } from '@atlaskit/adf-schema';
 import { applyMark } from '../utils/apply-mark';
 import { WithMark } from '../types';
 

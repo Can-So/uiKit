@@ -1,10 +1,4 @@
 import { ITokenizer, Search, UnorderedSearchIndex } from 'js-search';
-
-import * as XRegExp from 'xregexp/src/xregexp'; // Not using 'xregexp' directly to only include what we use
-import * as XRegExpUnicodeBase from 'xregexp/src/addons/unicode-base';
-import * as XRegExpUnicodeScripts from 'xregexp/src/addons/unicode-scripts';
-import * as XRegExpUnicodeCategories from 'xregexp/src/addons/unicode-categories';
-
 import { defaultCategories, frequentCategory } from '../constants';
 import {
   EmojiDescription,
@@ -23,17 +17,7 @@ import {
 } from './internal/Comparators';
 import { UsageFrequencyTracker } from './internal/UsageFrequencyTracker';
 import { CategoryId } from '../components/picker/categories';
-
-XRegExpUnicodeBase(XRegExp);
-XRegExpUnicodeScripts(XRegExp);
-XRegExpUnicodeCategories(XRegExp);
-
-// \p{Han} => each chinese character is a separate token
-// \p{L}+[\p{Mn}|']*\p{L} => consecutive letters, including non spacing mark and apostrophe are a single token
-const tokenizerRegex = XRegExp.cache(
-  "\\p{Han}|[\\p{L}|\\p{N}]+[\\p{Mn}|']*\\p{L}*",
-  'gi',
-);
+import { tokenizerRegex } from './EmojiRepositoryRegex';
 
 type Token = {
   token: string;
@@ -170,9 +154,12 @@ export default class EmojiRepository {
   // protected to allow subclasses to access (for testing and storybooks).
   protected usageTracker: UsageFrequencyTracker;
 
-  constructor(emojis: EmojiDescription[]) {
+  constructor(
+    emojis: EmojiDescription[],
+    usageTracker?: UsageFrequencyTracker,
+  ) {
     this.emojis = emojis;
-    this.initMembers();
+    this.initMembers(usageTracker);
   }
 
   /**
@@ -299,7 +286,7 @@ export default class EmojiRepository {
     // the frequent category will not appear until the usage has been tracked (avoiding the possibility of an empty
     // frequent category being shown in the picker).
     if (this.dynamicCategoryList.indexOf(frequentCategory) === -1) {
-      setTimeout(() => {
+      window.setTimeout(() => {
         this.dynamicCategoryList.push(frequentCategory);
       });
     }
@@ -311,7 +298,7 @@ export default class EmojiRepository {
       // Remove the deleted emojis from the internal list
       this.emojis.splice(deletedIndex, 1);
       // Reconstruct repository member variables
-      this.initMembers();
+      this.initMembers(this.usageTracker);
     }
   }
 
@@ -371,8 +358,8 @@ export default class EmojiRepository {
     return emojis;
   }
 
-  private initMembers(): void {
-    this.usageTracker = new UsageFrequencyTracker();
+  private initMembers(usageTracker?: UsageFrequencyTracker): void {
+    this.usageTracker = usageTracker || new UsageFrequencyTracker();
     this.initRepositoryMetadata();
     this.initSearchIndex();
   }

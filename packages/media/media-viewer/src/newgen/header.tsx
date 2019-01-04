@@ -1,10 +1,15 @@
 import * as React from 'react';
-import { Context, FileItem, MediaType } from '@atlaskit/media-core';
-import Button from '@atlaskit/button';
-import DownloadIcon from '@atlaskit/icon/glyph/download';
-import { Subscription } from 'rxjs';
+import { ReactNode } from 'react';
+import {
+  Context,
+  FileState,
+  MediaType,
+  ProcessedFileState,
+} from '@atlaskit/media-core';
+import { Subscription } from 'rxjs/Subscription';
 import * as deepEqual from 'deep-equal';
-import { toHumanReadableMediaSize } from '@atlaskit/media-ui';
+import { messages, toHumanReadableMediaSize } from '@atlaskit/media-ui';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Outcome, Identifier } from './domain';
 import {
   Header as HeaderWrapper,
@@ -19,8 +24,11 @@ import {
 } from './styled';
 import { MediaTypeIcon } from './media-type-icon';
 import { FeedbackButton } from './feedback-button';
-import { downloadItem } from './domain/download';
 import { MediaViewerError, createError } from './error';
+import {
+  ToolbarDownloadButton,
+  DisabledToolbarDownloadButton,
+} from './download';
 
 export type Props = {
   readonly identifier: Identifier;
@@ -29,14 +37,14 @@ export type Props = {
 };
 
 export type State = {
-  item: Outcome<FileItem, MediaViewerError>;
+  item: Outcome<FileState, MediaViewerError>;
 };
 
 const initialState: State = {
   item: Outcome.pending(),
 };
 
-export default class Header extends React.Component<Props, State> {
+export class Header extends React.Component<Props & InjectedIntlProps, State> {
   state: State = initialState;
 
   private subscription?: Subscription;
@@ -59,56 +67,36 @@ export default class Header extends React.Component<Props, State> {
   private init(props: Props) {
     this.setState(initialState, () => {
       const { context, identifier } = props;
-      const provider = context.getMediaItemProvider(
-        identifier.id,
-        identifier.type,
-        identifier.collectionName,
-      );
-
-      this.subscription = provider.observable().subscribe({
-        next: mediaItem => {
-          if (mediaItem.type === 'file') {
+      this.subscription = context.file
+        .getFileState(identifier.id, {
+          collectionName: identifier.collectionName,
+        })
+        .subscribe({
+          next: file => {
             this.setState({
-              item: Outcome.successful(mediaItem),
+              item: Outcome.successful(file),
             });
-          } else if (mediaItem.type === 'link') {
+          },
+          error: err => {
             this.setState({
-              item: Outcome.failed(createError('linksNotSupported')),
+              item: Outcome.failed(createError('metadataFailed', err)),
             });
-          }
-        },
-        error: err => {
-          this.setState({
-            item: Outcome.failed(createError('metadataFailed', undefined, err)),
-          });
-        },
-      });
+          },
+        });
     });
   }
 
   private renderDownload = () => {
     const { item } = this.state;
     const { identifier, context } = this.props;
-    const icon = <DownloadIcon label="Download" />;
-
-    const disabledDownloadButton = (
-      <Button
-        label="Download"
-        appearance="toolbar"
-        isDisabled={true}
-        iconBefore={icon}
-      />
-    );
-
     return item.match({
-      pending: () => disabledDownloadButton,
-      failed: () => disabledDownloadButton,
+      pending: () => DisabledToolbarDownloadButton,
+      failed: () => DisabledToolbarDownloadButton,
       successful: item => (
-        <Button
-          label="Download"
-          appearance="toolbar"
-          onClick={downloadItem(item, context, identifier.collectionName)}
-          iconBefore={icon}
+        <ToolbarDownloadButton
+          state={item}
+          identifier={identifier}
+          context={context}
         />
       ),
     });
@@ -135,28 +123,32 @@ export default class Header extends React.Component<Props, State> {
     });
   }
 
-  private renderMetadataLayout(item: FileItem) {
-    return (
-      <MetadataWrapper>
-        <MetadataIconWrapper>
-          {this.getMediaIcon(item.details.mediaType)}
-        </MetadataIconWrapper>
-        <MedatadataTextWrapper>
-          <MetadataFileName>{item.details.name || 'unknown'}</MetadataFileName>
-          <MetadataSubText>
-            {this.renderFileTypeText(item.details.mediaType)}
-            {this.renderSize(item)}
-          </MetadataSubText>
-        </MedatadataTextWrapper>
-      </MetadataWrapper>
-    );
+  private renderMetadataLayout(item: FileState) {
+    if (item.status === 'processed') {
+      return (
+        <MetadataWrapper>
+          <MetadataIconWrapper>
+            {this.getMediaIcon(item.mediaType)}
+          </MetadataIconWrapper>
+          <MedatadataTextWrapper>
+            <MetadataFileName>
+              {item.name || <FormattedMessage {...messages.unknown} />}
+            </MetadataFileName>
+            <MetadataSubText>
+              {this.renderFileTypeText(item.mediaType)}
+              {this.renderSize(item)}
+            </MetadataSubText>
+          </MedatadataTextWrapper>
+        </MetadataWrapper>
+      );
+    } else {
+      return null;
+    }
   }
 
-  private renderSize = (item: FileItem) => {
-    if (item.details.size) {
-      return (
-        this.renderSeparator() + toHumanReadableMediaSize(item.details.size)
-      );
+  private renderSize = (item: ProcessedFileState) => {
+    if (item.size) {
+      return this.renderSeparator() + toHumanReadableMediaSize(item.size);
     } else {
       return '';
     }
@@ -166,12 +158,18 @@ export default class Header extends React.Component<Props, State> {
     return ' · ';
   };
 
-  private renderFileTypeText = (mediaType?: MediaType): string => {
-    if (mediaType === 'doc') {
-      return 'document';
-    } else {
-      return mediaType || 'unknown';
-    }
+  private renderFileTypeText = (mediaType?: MediaType): ReactNode => {
+    const mediaTypeTranslationMap = {
+      doc: messages.document,
+      audio: messages.audio,
+      video: messages.video,
+      image: messages.image,
+      unknown: messages.unknown,
+    };
+    const message = mediaTypeTranslationMap[mediaType || 'unknown'];
+
+    // Defaulting to unknown again since backend has more mediaTypes than the current supported ones
+    return <FormattedMessage {...message || messages.unknown} />;
   };
 
   private getMediaIcon = (mediaType?: MediaType) => {
@@ -191,3 +189,5 @@ export default class Header extends React.Component<Props, State> {
     }
   }
 }
+
+export default injectIntl(Header);

@@ -1,11 +1,12 @@
 {
   "name": "@atlaskit/theme",
-  "version": "6.0.0",
+  "version": "7.0.2",
   "description": "The Atlaskit theme framework",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "atlaskit:src": "src/index.js",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
@@ -17,6 +18,8 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
+    "exenv": "^1.2.2",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
@@ -24,12 +27,14 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^1.11.0",
-    "@atlaskit/button": "^9.0.6",
-    "@atlaskit/docs": "^5.0.6",
-    "@atlaskit/lozenge": "^6.1.5",
+    "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/button": "^10.1.1",
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/lozenge": "^6.2.4",
+    "@atlaskit/section-message": "^1.0.14",
+    "@atlaskit/visual-regression": "^0.0.1",
     "color": "^3.0.0",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },
   "keywords": [

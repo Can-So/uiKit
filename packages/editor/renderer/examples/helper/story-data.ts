@@ -497,6 +497,102 @@ export const document = {
       ],
     },
     {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: 'Showing a status: ',
+        },
+        {
+          type: 'status',
+          attrs: {
+            text: 'In progress',
+            color: 'blue',
+          },
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 1 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 1 level of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 2 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 2 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 3 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 3 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 4 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 4 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 5 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 5 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'indentation', attrs: { level: 6 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with 6 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'alignment', attrs: { align: 'center' } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with center alignment',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      marks: [{ type: 'alignment', attrs: { align: 'end' } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Paragraph with end alignment',
+        },
+      ],
+    },
+    {
       type: 'heading',
       attrs: { level: 1 },
       content: [
@@ -565,6 +661,105 @@ export const document = {
       ],
     },
     {
+      type: 'heading',
+      attrs: { level: 1 },
+      marks: [{ type: 'indentation', attrs: { level: 1 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 1 with 1 level of indentation',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 2 },
+      marks: [{ type: 'indentation', attrs: { level: 2 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 2 with 2 levels of indentation',
+          marks: [
+            {
+              type: 'link',
+              attrs: {
+                href: 'www.atlassian.com',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 3 },
+      marks: [{ type: 'indentation', attrs: { level: 3 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 3 with 3 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 4 },
+      marks: [{ type: 'indentation', attrs: { level: 4 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 4 with 4 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 5 },
+      marks: [{ type: 'indentation', attrs: { level: 5 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 5 with 5 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 6 },
+      marks: [{ type: 'indentation', attrs: { level: 6 } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 6 with 6 levels of indentation',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 2 },
+      marks: [{ type: 'alignment', attrs: { align: 'center' } }],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 2 with center alignment',
+        },
+      ],
+    },
+    {
+      type: 'heading',
+      attrs: { level: 3 },
+      marks: [
+        { type: 'alignment', attrs: { align: 'end' } },
+        { type: 'indentation', attrs: { level: 3 } },
+      ],
+      content: [
+        {
+          type: 'text',
+          text: 'Heading 3 with end alignment',
+        },
+      ],
+    },
+    {
       type: 'paragraph',
       content: [
         {
@@ -578,6 +773,24 @@ export const document = {
         {
           type: 'text',
           text: 'that contains a new line',
+        },
+      ],
+    },
+    {
+      type: 'mediaSingle',
+      attrs: {
+        layout: 'full-width',
+      },
+      content: [
+        {
+          type: 'media',
+          attrs: {
+            id: '2aa22582-ca0e-4bd4-b1bc-9369d10a0719',
+            type: 'file',
+            collection: 'MediaServicesSample',
+            width: 5845,
+            height: 1243,
+          },
         },
       ],
     },
@@ -665,6 +878,14 @@ System.out.println("There are " + count + " values >= 5");`,
           attrs: {
             type: 'file',
             id: '5556346b-b081-482b-bc4a-4faca8ecd2de',
+            collection: 'MediaServicesSample',
+          },
+        },
+        {
+          type: 'media',
+          attrs: {
+            type: 'file',
+            id: '2afaf845-4385-431f-9a15-3e21520cf896',
             collection: 'MediaServicesSample',
           },
         },
@@ -771,6 +992,23 @@ System.out.println("There are " + count + " values >= 5");`,
           ],
         },
       ],
+    },
+    {
+      type: 'codeBlock',
+      marks: [{ type: 'breakout', attrs: { mode: 'wide' } }],
+      content: [
+        {
+          type: 'text',
+          text: `// Create a map.
+final IntIntOpenHashMap map = new IntIntOpenHashMap();
+map.put(1, 2);
+map.put(2, 5);
+map.put(3, 10);`,
+        },
+      ],
+      attrs: {
+        language: 'javascript',
+      },
     },
     {
       type: 'orderedList',
@@ -1042,192 +1280,6 @@ System.out.println("There are " + count + " values >= 5");`,
       ],
     },
     {
-      type: 'applicationCard',
-      text: 'applicationCard',
-      attrs: {
-        text: 'applicationCard',
-        background: {
-          url: 'http://atlassian.com',
-        },
-        link: {
-          url: 'http://atlassian.com',
-        },
-        title: {
-          text: 'Sascha Reuter commented on a file: Desktop sidebar states.png',
-        },
-        user: {
-          icon: {
-            url:
-              'https://extranet.atlassian.com/download/attachments/2246873520/sreuter-57703-pp-1530510_4271148635152_5186589029777108540_n.jpg',
-            label: 'Sascha Reuter',
-          },
-        },
-        preview: {
-          url:
-            'https://image.ibb.co/ghKzoF/1a99566b0c8e0589ca327bb1efe0be5ca1419aa8.png',
-        },
-        description: {
-          title: 'Can haz description',
-          text:
-            '\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis varius mattis massa, quis ornare orci. Integer congue\nrutrum velit, quis euismod eros condimentum quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris\nlobortis nibh id odio egestas luctus. Nunc nulla lacus, congue eu nibh non, imperdiet varius lacus. Nulla sagittis\nmagna et tincidunt volutpat. Nunc augue lorem, eleifend et tempor ut, malesuada ac lorem. Praesent quis feugiat eros,\net vehicula nibh. Maecenas vehicula commodo nisi, at rutrum ipsum posuere sit amet. Integer sit amet nisl sed ligula\nconsectetur feugiat non at ligula. Cras dignissim suscipit magna at mattis. Maecenas ante leo, feugiat vestibulum velit\na, commodo finibus velit. Maecenas interdum ullamcorper velit non suscipit. Proin tempor, magna vitae dapibus laoreet,\nquam dui convallis lectus, in vestibulum arcu eros eu velit. Quisque vel dolor enim.\n',
-        },
-        details: [
-          {
-            icon: {
-              url:
-                'http://www.fellowshipgw.com/wp-content/themes/lenexabaptist/images/icon-story-gray.png',
-              label: 'Issue type',
-            },
-            text: 'Story',
-          },
-          {
-            badge: {
-              value: 101,
-              max: 99,
-              appearance: 'important',
-            },
-          },
-          {
-            lozenge: {
-              text: 'In Progress',
-              appearance: 'inprogress',
-            },
-          },
-          {
-            title: 'Watchers',
-            users: [
-              {
-                icon: {
-                  url:
-                    'https://extranet.atlassian.com/download/attachments/3189817539/user-avatar',
-                  label: 'James Newell',
-                },
-              },
-              {
-                icon: {
-                  url:
-                    'https://extranet.atlassian.com/download/attachments/2928873907/user-avatar',
-                  label: 'Jon Blower',
-                },
-              },
-              {
-                icon: {
-                  url:
-                    'https://extranet.atlassian.com/download/attachments/2491694727/user-avatar',
-                  label: 'Scott Simpson',
-                },
-              },
-            ],
-          },
-          {
-            icon: {
-              url:
-                'http://www.fellowshipgw.com/wp-content/themes/lenexabaptist/images/icon-story-gray.png',
-              label: 'Issue type',
-            },
-            text: 'Story',
-          },
-          {
-            badge: {
-              value: 101,
-              max: 99,
-              appearance: 'important',
-            },
-          },
-          {
-            lozenge: {
-              text: 'In Progress',
-              appearance: 'inprogress',
-            },
-          },
-          {
-            title: 'Watchers',
-            users: [
-              {
-                icon: {
-                  url:
-                    'https://extranet.atlassian.com/download/attachments/3189817539/user-avatar',
-                  label: 'James Newell',
-                },
-              },
-              {
-                icon: {
-                  url:
-                    'https://extranet.atlassian.com/download/attachments/2928873907/user-avatar',
-                  label: 'Jon Blower',
-                },
-              },
-              {
-                icon: {
-                  url:
-                    'https://extranet.atlassian.com/download/attachments/2491694727/user-avatar',
-                  label: 'Scott Simpson',
-                },
-              },
-            ],
-          },
-          {
-            icon: {
-              url:
-                'http://www.fellowshipgw.com/wp-content/themes/lenexabaptist/images/icon-story-gray.png',
-              label: 'Issue type',
-            },
-            text: 'Story',
-          },
-          {
-            badge: {
-              value: 101,
-              max: 99,
-              appearance: 'important',
-            },
-          },
-          {
-            lozenge: {
-              text: 'In Progress',
-              appearance: 'inprogress',
-            },
-          },
-          {
-            title: 'Watchers',
-            users: [
-              {
-                icon: {
-                  url:
-                    'https://extranet.atlassian.com/download/attachments/3189817539/user-avatar',
-                  label: 'James Newell',
-                },
-              },
-              {
-                icon: {
-                  url:
-                    'https://extranet.atlassian.com/download/attachments/2928873907/user-avatar',
-                  label: 'Jon Blower',
-                },
-              },
-              {
-                icon: {
-                  url:
-                    'https://extranet.atlassian.com/download/attachments/2491694727/user-avatar',
-                  label: 'Scott Simpson',
-                },
-              },
-            ],
-          },
-        ],
-        context: {
-          text: 'Design Home / ... / Media Cards Design',
-          icon: {
-            url:
-              'https://image.ibb.co/jSrC8F/f4b5e33d6b1d36556114a18b594768f41f32673e.png',
-            label: 'foobar',
-          },
-          link: {
-            url: 'https://confluence.atlassian.com/',
-          },
-        },
-      },
-    },
-    {
       type: 'decisionList',
       attrs: {
         localId: 'empty-list-should-not-render',
@@ -1482,7 +1534,7 @@ System.out.println("There are " + count + " values >= 5");`,
             {
               type: 'tableHeader',
               attrs: {
-                background: '#DEEBFF',
+                background: '#deebff',
               },
               content: [
                 {
@@ -1600,11 +1652,33 @@ System.out.println("There are " + count + " values >= 5");`,
       ],
     },
     {
+      type: 'heading',
+      attrs: { level: 1 },
+      content: [
+        {
+          type: 'text',
+          text: 'Media single without width defined',
+        },
+      ],
+    },
+    {
+      type: 'mediaSingle',
+      content: [
+        {
+          type: 'media',
+          attrs: {
+            type: 'file',
+            id: '5556346b-b081-482b-bc4a-4faca8ecd2de',
+            collection: 'MediaServicesSample',
+          },
+        },
+      ],
+    },
+    {
       type: 'bodiedExtension',
       attrs: {
         extensionType: 'com.atlassian.fabric',
         extensionKey: 'clock',
-        bodyType: 'rich',
       },
       content: [
         {

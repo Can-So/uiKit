@@ -1,8 +1,17 @@
 // @flow
 import React from 'react';
 import { md, Props } from '@atlaskit/docs';
+import SectionMessage from '@atlaskit/section-message';
 
 export default md`
+  ${(
+    <SectionMessage appearance="error">
+      <p>
+        <strong>Note: @atlaskit/navigation is now deprecated.</strong>
+      </p>
+      <p>We recommend upgrading to @atlaskit/navigation-next</p>
+    </SectionMessage>
+  )}
 
   Drawers are designed to enter from the left of the screen and overlay the site,
   allowing additional options to be visible that are outside or may change the
@@ -14,7 +23,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkCreateDrawer"
+      heading="AkCreateDrawer Props"
       props={require('!!extract-react-types-loader!../src/components/js/drawers/CreateDrawer.js')}
     />
   )}
@@ -22,7 +31,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkSearchDrawer"
+      heading="AkSearchDrawer Props"
       props={require('!!extract-react-types-loader!../src/components/js/drawers/SearchDrawer.js')}
     />
   )}
@@ -30,12 +39,8 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkCustomDrawer"
+      heading="AkCustomDrawer Props"
       props={require('!!extract-react-types-loader!../src/components/js/drawers/CustomDrawer.js')}
     />
   )}
 `;
-
-// AkCreateDrawer
-// AkCustomDrawer
-// AkSearchDrawer

@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import * as pWaitFor from 'p-wait-for';
 
 import { customCategory, customType } from '../../../constants';
 import { EmojiDescription, SearchSort } from '../../../types';
@@ -176,12 +177,185 @@ const frequentTest: EmojiDescription = {
   searchable: true,
 };
 
+export const siteEmojiChinese1 = {
+  id: 'chinese1',
+  name: '我想你',
+  fallback: ':chinese1:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':我想你:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
+export const siteEmojiChinese2 = {
+  id: 'chinese2',
+  name: '象形字',
+  fallback: ':chinese2:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':象形字:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
+export const siteEmojiChinese3 = {
+  id: 'chinese3',
+  name: '我字',
+  fallback: ':chinese3:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':我字:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
+export const siteEmojiGreek1 = {
+  id: 'greek1',
+  name: 'ΦΏϖϘώ',
+  fallback: ':greek1:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':ΦΏϖϘώ:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
+export const siteEmojiGreek2 = {
+  id: 'greek2',
+  name: 'ϪϮϼϠ',
+  fallback: ':greek2:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':ϪϮϼϠ:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
+export const siteEmojiGreek3 = {
+  id: 'greek3',
+  name: 'ϪϮϘώ',
+  fallback: ':greek3:',
+  type: 'SITE',
+  category: 'CUSTOM',
+  order: -1000,
+  searchable: true,
+  shortName: ':ϪϮϘώ:',
+  creatorUserId: 'Thor',
+  representation: {
+    height: 120,
+    width: 100,
+    imagePath:
+      'https://pf-emoji-service--cdn.useast.atlassian.io/atlassian/wtf@4x.png',
+  },
+  skinVariations: [],
+};
+
 describe('EmojiRepository', () => {
   let emojiRepository;
 
   beforeEach(() => {
     // emojiRepository has state that can influence search results so make it fresh for each test.
     emojiRepository = newEmojiRepository();
+  });
+
+  describe('Search with non standard characters', () => {
+    it('one match expected when searching emoji with chinese characters', () => {
+      const repository = new EmojiRepository([
+        cowboy,
+        frequentTest,
+        siteEmojiChinese1,
+        siteEmojiChinese2,
+        siteEmojiChinese3,
+      ]);
+      const emojis = repository.search(':想').emojis;
+      expect(emojis.length).to.equal(1);
+      expect(emojis[0].shortName).to.equal(':我想你:');
+    });
+
+    it('two matches expected when searching emoji with chinese characters', () => {
+      const repository = new EmojiRepository([
+        cowboy,
+        frequentTest,
+        siteEmojiChinese1,
+        siteEmojiChinese2,
+        siteEmojiChinese3,
+      ]);
+      const emojis = repository.search(':字').emojis;
+      expect(emojis.length).to.equal(2);
+
+      expect(emojis[0].shortName).to.equal(':我字:');
+      expect(emojis[1].shortName).to.equal(':象形字:');
+    });
+
+    it('one match expected when searching emoji with greek characters', () => {
+      const repository = new EmojiRepository([
+        cowboy,
+        frequentTest,
+        siteEmojiChinese1,
+        siteEmojiGreek1,
+        siteEmojiGreek2,
+        siteEmojiGreek3,
+      ]);
+      const emojis = repository.search(':ϪϮϼ').emojis;
+      expect(emojis.length).to.equal(1);
+      expect(emojis[0].id).to.equal('greek2');
+    });
+
+    it('two matches expected when searching emoji with greek characters', () => {
+      const repository = new EmojiRepository([
+        cowboy,
+        frequentTest,
+        siteEmojiChinese1,
+        siteEmojiGreek1,
+        siteEmojiGreek2,
+        siteEmojiGreek3,
+      ]);
+      const emojis = repository.search(':ϪϮ').emojis;
+      expect(emojis.length).to.equal(2);
+      expect(emojis[0].id).to.equal('greek3');
+      expect(emojis[1].id).to.equal('greek2');
+    });
   });
 
   describe('#search', () => {
@@ -253,8 +427,8 @@ describe('EmojiRepository', () => {
 
         emojiRepository.used(greenHeart);
 
-        // usage is recorded asynchronously so give it a chance to happen by running the asserts with setTimeout
-        setTimeout(() => {
+        // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
+        window.setTimeout(() => {
           const nextResult: EmojiDescription[] = emojiRepository.search(':hear')
             .emojis;
           heartIndex = nextResult.indexOf(heart);
@@ -278,19 +452,8 @@ describe('EmojiRepository', () => {
     });
 
     it('returns exact matches first', () => {
-      const emojis = emojiRepository.search(':grin').emojis;
-      const grinEmojis = searchableEmojis
-        .filter(emoji => emoji.shortName.indexOf(':grin') === 0)
-        .sort((e1, e2) => {
-          // If second emoji matches query exactly, bring forward
-          if (e2.shortName === ':grin:' && e1.shortName !== ':grin:') {
-            return 1;
-          }
-          // Leave emojis in current order
-          return 0;
-        });
-
-      checkOrder(grinEmojis, emojis);
+      const firstEmoji = emojiRepository.search(':grin').emojis[0];
+      expect(firstEmoji.shortName).to.equal(':grin:');
     });
 
     it('conflicting shortName matches show in type order Site -> Atlassian -> Standard', () => {
@@ -570,8 +733,8 @@ describe('EmojiRepository', () => {
       } else {
         repository.used(heart);
 
-        // usage is recorded asynchronously so give it a chance to happen by running the asserts with setTimeout
-        setTimeout(() => {
+        // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
+        window.setTimeout(() => {
           expect(repository.getDynamicCategoryList()).to.deep.equal([
             'FREQUENT',
           ]);
@@ -596,8 +759,8 @@ describe('EmojiRepository', () => {
       const emojiRepository = newEmojiRepository();
       emojiRepository.used(thumbsupEmoji);
 
-      // usage is recorded asynchronously so give it a chance to happen by running the asserts with setTimeout
-      setTimeout(() => {
+      // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
+      window.setTimeout(() => {
         let emoji = emojiRepository.getFrequentlyUsed({ skinTone: 4 });
         expect(emoji).to.have.lengthOf(1);
         expect(emoji[0].shortName).to.equal(
@@ -607,31 +770,28 @@ describe('EmojiRepository', () => {
       });
     });
 
-    it('should return a limited number of frequently used', done => {
+    it('should return a limited number of frequently used', async () => {
       const emojiRepository = newEmojiRepository();
       emojiRepository.used(thumbsupEmoji);
       emojiRepository.used(thumbsdownEmoji);
       emojiRepository.used(smileyEmoji);
       emojiRepository.used(openMouthEmoji);
 
-      // usage is recorded asynchronously so give it a chance to happen by running the asserts with setTimeout
-      setTimeout(() => {
-        let emoji = emojiRepository.getFrequentlyUsed();
-        expect(emoji).to.have.lengthOf(4);
+      await pWaitFor(() => emojiRepository.getFrequentlyUsed().length === 4);
 
-        emoji = emojiRepository.getFrequentlyUsed({ limit: 2 });
-        expect(emoji).to.have.lengthOf(2);
+      let emoji = emojiRepository.getFrequentlyUsed();
+      expect(emoji).to.have.lengthOf(4);
 
-        done();
-      });
+      emoji = emojiRepository.getFrequentlyUsed({ limit: 2 });
+      expect(emoji).to.have.lengthOf(2);
     });
 
     it('should return frequent emoji on find operations with original category', done => {
       const emojiRepository = newEmojiRepository();
       emojiRepository.used(thumbsupEmoji);
 
-      // usage is recorded asynchronously so give it a chance to happen by running the asserts with setTimeout
-      setTimeout(() => {
+      // usage is recorded asynchronously so give it a chance to happen by running the asserts with window.setTimeout
+      window.setTimeout(() => {
         const thumbsUp = emojiRepository.findByShortName(':thumbsup:');
         expect(thumbsUp!.category).to.equal('PEOPLE');
 

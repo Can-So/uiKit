@@ -1,5 +1,92 @@
 # @atlaskit/reduced-ui-pack
 
+## 10.5.3
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/css-reset@3.0.5
+  - @atlaskit/docs@6.0.0
+
+## 10.5.2
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/css-reset@3.0.4
+  - @atlaskit/theme@7.0.0
+
+## 10.5.1
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/icon@15.0.0
+
+## 10.5.0
+- [minor] [29968f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29968f4):
+
+  - Add a menu expand icon
+
+## 10.4.0
+- [minor] [f5e26e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e26e1):
+
+  - Add a retry icon
+
+## 10.3.1
+- [patch] [f2f231c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f2f231c):
+
+  - Use fontSizeSmall from theme
+
+## 10.3.0
+- [minor] [dced9bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dced9bf):
+
+  - Remove StarOutlineIcon as it is not used
+
+## 10.2.1
+- [patch] [d15caa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d15caa6):
+
+  - adding editor image alignment icons
+
+## 10.2.0
+- [minor] [fe3c283"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe3c283"
+d):
+
+  - ED-5600: add icons for new table ux
+
+## 10.1.1
+- [patch] Consume smallFontSize from @atlaskit/theme [a6f8a43](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6f8a43)
+
+## 10.1.0
+- [minor] Add drag-handler [b0a64d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b0a64d6)
+
+## 10.0.1
+- [patch] Update build process to use babel-7 [0e9a221](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0e9a221)
+
+## 10.0.0
+- [major] Icons that do not exist in the main icons package have been removed [6dd05b2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6dd05b2)
+
+## 9.6.2
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/section-message@1.0.8
+  - @atlaskit/icon@14.0.0
+
+## 9.6.1
+- [patch] Moved to @atlaskit/theme for all the values from util-shared-styles [6d35164](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d35164)
+
+## 9.6.0
+- [minor] Add like icon [cd71c5f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cd71c5f)
+
+## 9.5.0
+- [minor] Add the questions icon [ad96a89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad96a89)
+
+## 9.4.0
+- [minor] Add and edit star icons [55e3ec7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55e3ec7)
+
+## 9.3.0
+- [minor] Add the new child-issues icon [8d3f8dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d3f8dd)
+
 ## 9.2.0
 - [minor] Add new icon [d36f760](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d36f760)
 - [patch] Add new icon for Roadmap [365460a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/365460a)

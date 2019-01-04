@@ -6,15 +6,18 @@ export default md`
 The component displays a table of expandable, nested rows that form a tree-like hierarchy.
 Child rows can be loaded asynchronously, on expansion.
 
-## Basic Usage
+## Usage
+
+${code`import TableTree from '@atlaskit/table-tree';`}
 
 Import the default exported Component and provide the data in \`items\` prop.
 
 ${(
   <Example
+    packageName="@atlaskit/table-tree"
     Component={require('../examples/single-component').default}
     source={require('!!raw-loader!../examples/single-component')}
-    title="Basic Usage: With Static Data"
+    title="With Static Data"
     language="jsx"
   />
 )}
@@ -42,8 +45,20 @@ ${code`
 ]
 `}
 
+  ## Usage
+
+  ${code`import TableTree, {
+  Headers,
+  Header,
+  Cell,
+  Rows,
+  Row,
+  TableTreeDataHelper,
+} from '@atlaskit/table-tree';`}
+
 ${(
   <Props
+    heading="TableTree Props"
     props={require('!!extract-react-types-loader!../src/components/TableTree')}
   />
 )}

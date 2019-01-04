@@ -22,13 +22,15 @@ export interface Props {
   onBlur?: (event: FormEvent<HTMLInputElement>) => void;
   onFocus?: (event: FormEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: FormEvent<HTMLInputElement>) => void;
-  onKeyPess?: (event: FormEvent<HTMLInputElement>) => void;
+  onKeyPress?: (event: FormEvent<HTMLInputElement>) => void;
   onKeyUp?: (event: FormEvent<HTMLInputElement>) => void;
   placeholder?: string;
   required?: boolean;
   shouldFitContainer?: boolean;
   type?: string;
   value?: string;
+  isValidationHidden?: boolean;
+  innerRef?: (node: HTMLInputElement) => void;
 }
 
 export class FieldTextStateless extends Component<Props, {}> {}

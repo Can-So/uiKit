@@ -1,4 +1,5 @@
-import { defaultSchema, Transformer } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
+import { Transformer } from '@atlaskit/editor-common';
 import * as MarkdownIt from 'markdown-it';
 import { markdownItTable } from 'markdown-it-table';
 import { MarkdownParser } from 'prosemirror-markdown';
@@ -12,7 +13,6 @@ function filterMdToPmSchemaMapping(schema: Schema, map: any) {
     const mark = value.mark;
 
     if ((block && schema.nodes[block]) || (mark && schema.marks[mark])) {
-      // @ts-ignore
       newMap[key] = value;
     }
     return newMap;
@@ -57,6 +57,7 @@ const mdToPmMapping = {
     attrs: (tok: any) => ({ level: +tok.tag.slice(1) }),
   },
   softbreak: { node: 'hardBreak' },
+  hardbreak: { node: 'hardBreak' },
   code_block: { block: 'codeBlock' },
   list_item: { block: 'listItem' },
   bullet_list: { block: 'bulletList' },
@@ -116,10 +117,9 @@ export class MarkdownTransformer implements Transformer<Markdown> {
   private markdownParser: MarkdownParser;
   constructor(schema: Schema = defaultSchema, tokenizer: MarkdownIt = md) {
     // Enable markdown plugins based on schema
-    ['nodes', 'marks'].forEach((key: 'nodes' | 'marks') => {
+    ['nodes', 'marks'].forEach(key => {
       for (const idx in pmSchemaToMdMapping[key]) {
         if (schema[key][idx]) {
-          // @ts-ignore
           tokenizer.enable(pmSchemaToMdMapping[key][idx]);
         }
       }

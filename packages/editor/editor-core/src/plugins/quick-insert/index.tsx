@@ -1,14 +1,20 @@
+import { InjectedIntl } from 'react-intl';
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { analyticsService } from '../../analytics';
 import { EditorPlugin, Command } from '../../types';
-import { QuickInsertItem, QuickInsertProvider } from './types';
+import { dedupe } from '../../utils';
+import {
+  QuickInsertItem,
+  QuickInsertProvider,
+  QuickInsertHandler,
+} from './types';
 import { find } from './search';
 
 const quickInsertPlugin: EditorPlugin = {
   name: 'quickInsert',
 
-  pmPlugins(quickInsert: Array<Array<QuickInsertItem>>) {
+  pmPlugins(quickInsert: Array<QuickInsertHandler>) {
     return [
       {
         name: 'quickInsert', // It's important that this plugin is above TypeAheadPlugin
@@ -21,15 +27,21 @@ const quickInsertPlugin: EditorPlugin = {
   pluginsOptions: {
     typeAhead: {
       trigger: '/',
-      getItems: (query, state) => {
+      getItems: (query, state, intl) => {
         analyticsService.trackEvent('atlassian.editor.quickinsert.query');
 
         const quickInsertState = pluginKey.getState(state);
-        const defaultSearch = () => find(query, quickInsertState.items);
+        const defaultItems = processItems(quickInsertState.items, intl);
+        const defaultSearch = () => find(query, defaultItems);
 
         if (quickInsertState.provider) {
           return quickInsertState.provider
-            .then(items => find(query, [...quickInsertState.items, ...items]))
+            .then(items =>
+              find(
+                query,
+                dedupe([...defaultItems, ...items], item => item.title),
+              ),
+            )
             .catch(err => {
               // tslint:disable-next-line:no-console
               console.error(err);
@@ -51,6 +63,22 @@ const quickInsertPlugin: EditorPlugin = {
 
 export default quickInsertPlugin;
 
+const itemsCache = {};
+const processItems = (items: Array<QuickInsertHandler>, intl: InjectedIntl) => {
+  if (!itemsCache[intl.locale]) {
+    itemsCache[intl.locale] = items.reduce(
+      (acc: Array<QuickInsertItem>, item) => {
+        if (typeof item === 'function') {
+          return acc.concat(item(intl));
+        }
+        return acc.concat(item);
+      },
+      [],
+    );
+  }
+  return itemsCache[intl.locale];
+};
+
 /**
  *
  * ProseMirror Plugin
@@ -60,12 +88,14 @@ export default quickInsertPlugin;
 export const pluginKey = new PluginKey('quickInsertPluginKey');
 
 export const setProvider = (provider): Command => (state, dispatch) => {
-  dispatch(state.tr.setMeta(pluginKey, provider));
+  if (dispatch) {
+    dispatch(state.tr.setMeta(pluginKey, provider));
+  }
   return true;
 };
 
 function quickInsertPluginFactory(
-  quickInsertItems: Array<Array<QuickInsertItem>>,
+  quickInsertItems: Array<QuickInsertHandler>,
   providerFactory: ProviderFactory,
 ) {
   return new Plugin({
@@ -73,10 +103,7 @@ function quickInsertPluginFactory(
     state: {
       init() {
         return {
-          items: (quickInsertItems || []).reduce(
-            (acc, item) => acc.concat(...item),
-            [],
-          ),
+          items: quickInsertItems || [],
         };
       },
 

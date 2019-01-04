@@ -6,7 +6,7 @@ const SVGSpriter = require('svg-sprite'); // eslint-disable-line import/no-extra
 const mkdirp = require('mkdirp'); // eslint-disable-line import/no-extraneous-dependencies
 
 // get the path for the linked @atlaskit/icon package
-const iconPath = require.resolve('@atlaskit/icon').replace('/es5/index.js', '');
+const iconPath = require.resolve('@atlaskit/icon').replace('/cjs/index.js', '');
 
 const spriterConfig = {
   dest: './src',
@@ -35,6 +35,7 @@ const spriter = new SVGSpriter(spriterConfig);
 
 // Add SVG source files from 'ak-icon'
 glob.sync(path.join(iconPath, 'svgs/**/*.svg'), {}).forEach(svgFile => {
+  console.log(svgFile);
   const svgContents = fs.readFileSync(svgFile, { encoding: 'utf-8' });
   spriter.add(svgFile, path.basename(svgFile), svgContents);
 });

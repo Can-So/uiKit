@@ -1,5 +1,27 @@
 # @atlaskit/badge
 
+## 9.2.2
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 9.2.1
+- [patch] [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+
+  - Change API to experimental theming API to namespace component themes into separate contexts and make theming simpler. Update all dependant components.
+
+## 9.2.0
+- [minor] Allow badge to accept strings, so custom number formats can be easily passed in [cc0a1de](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cc0a1de)
+
+## 9.1.5
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 9.1.4
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 9.1.2
+- [patch] Fix broken type export [a203203](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a203203)
+
 ## 9.1.1
 - [patch] Remove export from * to fix the cjs export [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
 

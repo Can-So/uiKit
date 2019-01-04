@@ -6,11 +6,16 @@ import {
 import {
   ResultType,
   AnalyticsType,
-  JiraObjectResult,
+  JiraResult,
   ContentType,
 } from '../model/Result';
+import { addJiraResultQueryParams } from './JiraItemMapper';
+import { JiraResultQueryParams } from './types';
 
-const RECENT_ITEMS_PATH: string = '/rest/internal/2/productsearch/recent';
+const RECENT_ITEMS_PATH: string = 'rest/internal/2/productsearch/recent';
+const PERMISSIONS_PATH: string =
+  'rest/api/2/mypermissions?permissions=USER_PICKER';
+
 export type RecentItemsCounts = {
   issues?: number;
   boards?: number;
@@ -19,10 +24,10 @@ export type RecentItemsCounts = {
 };
 
 export const DEFAULT_RECENT_ITEMS_COUNT: RecentItemsCounts = {
-  issues: 10,
-  boards: 3,
-  projects: 3,
-  filters: 3,
+  issues: 8,
+  boards: 2,
+  projects: 2,
+  filters: 2,
 };
 
 /**
@@ -37,7 +42,9 @@ export interface JiraClient {
   getRecentItems(
     searchSessionId: string,
     recentItemCounts?: RecentItemsCounts,
-  ): Promise<JiraObjectResult[]>;
+  ): Promise<JiraResult[]>;
+
+  canSearchUsers(): Promise<boolean>;
 }
 
 enum JiraResponseGroup {
@@ -60,6 +67,23 @@ type JiraRecentItemGroup = {
   items: JiraRecentItem[];
 };
 
+type JiraRecentIssueAttributes = {
+  containerId?: string;
+  containerName?: string;
+  issueTypeId?: string;
+  issueTypeName?: string;
+};
+
+type JiraRecentBoardAttributes = {
+  containerId?: string;
+  containerName?: string;
+  parentType?: 'user' | 'project';
+};
+
+type JiraRecentFilterAttributes = {
+  ownerId?: string;
+};
+
 type JiraRecentItem = {
   id: string;
   title: string;
@@ -67,15 +91,34 @@ type JiraRecentItem = {
   metadata: string;
   avatarUrl: string;
   url: string;
+  attributes?:
+    | JiraRecentBoardAttributes
+    | JiraRecentIssueAttributes
+    | JiraRecentFilterAttributes;
+};
+
+type JiraMyPermissionsResponse = {
+  permissions: {
+    USER_PICKER?: {
+      havePermission: boolean;
+    };
+  };
 };
 
 export default class JiraClientImpl implements JiraClient {
   private serviceConfig: ServiceConfig;
   private cloudId: string;
+  private addSessionIdToJiraResult;
+  private canSearchUsersCache: boolean | undefined;
 
-  constructor(url: string, cloudId: string) {
+  constructor(
+    url: string,
+    cloudId: string,
+    addSessionIdToJiraResult?: boolean,
+  ) {
     this.serviceConfig = { url: url };
     this.cloudId = cloudId;
+    this.addSessionIdToJiraResult = addSessionIdToJiraResult;
   }
 
   // Unused, just to mute ts lint
@@ -92,11 +135,11 @@ export default class JiraClientImpl implements JiraClient {
   public async getRecentItems(
     searchSessionId: string,
     recentItemCounts: RecentItemsCounts = DEFAULT_RECENT_ITEMS_COUNT,
-  ): Promise<JiraObjectResult[]> {
+  ): Promise<JiraResult[]> {
     const options: RequestServiceOptions = {
       path: RECENT_ITEMS_PATH,
       queryParams: {
-        ...recentItemCounts,
+        counts: this.getRecentCountQueryParam(recentItemCounts),
         search_id: searchSessionId,
       },
     };
@@ -105,28 +148,81 @@ export default class JiraClientImpl implements JiraClient {
       options,
     );
     return recentItems
-      .map(group => this.recentItemGroupToItems(group))
+      .filter(group => JiraResponseGroupToContentType.hasOwnProperty(group.id))
+      .map(group => this.recentItemGroupToItems(group, searchSessionId))
       .reduce((acc, item) => [...acc, ...item], []);
   }
 
-  private recentItemGroupToItems(group: JiraRecentItemGroup) {
+  public async canSearchUsers(): Promise<boolean> {
+    if (typeof this.canSearchUsersCache === 'boolean') {
+      return Promise.resolve(this.canSearchUsersCache);
+    }
+
+    const options: RequestServiceOptions = {
+      path: PERMISSIONS_PATH,
+    };
+
+    const permissionsResponse: JiraMyPermissionsResponse = await utils.requestService<
+      JiraMyPermissionsResponse
+    >(this.serviceConfig, options);
+
+    this.canSearchUsersCache = permissionsResponse.permissions.USER_PICKER
+      ? permissionsResponse.permissions.USER_PICKER.havePermission
+      : false;
+
+    return this.canSearchUsersCache;
+  }
+
+  private recentItemGroupToItems(
+    group: JiraRecentItemGroup,
+    searchSessionId: string,
+  ) {
     const { id, items } = group;
-    return items.map(item => this.recentItemToResultItem(item, id));
+    return items.map(item =>
+      this.recentItemToResultItem(item, id, searchSessionId),
+    );
   }
   private recentItemToResultItem(
     item: JiraRecentItem,
     jiraGroup: JiraResponseGroup,
-  ): JiraObjectResult {
+    searchSessionId: string,
+  ): JiraResult {
+    const containerId = this.getContainerId(item, jiraGroup);
+    const contentType = JiraResponseGroupToContentType[jiraGroup];
+    const resultId = '' + item.id;
+    const href = this.addSessionIdToJiraResult
+      ? addJiraResultQueryParams(item.url, {
+          searchSessionId,
+          searchContainerId: containerId,
+          searchContentType: contentType.replace(
+            'jira-',
+            '',
+          ) as JiraResultQueryParams['searchContentType'],
+          searchObjectId: resultId,
+        })
+      : item.url;
+
     return {
       resultType: ResultType.JiraObjectResult,
-      resultId: item.id,
+      resultId,
       name: item.title,
-      href: item.url,
+      href,
       analyticsType: AnalyticsType.RecentJira,
-      avatarUrl: `${item.avatarUrl}`,
-      contentType: JiraResponseGroupToContentType[jiraGroup],
+      avatarUrl: item.avatarUrl,
+      containerId: containerId,
+      contentType,
       ...this.getTypeSpecificAttributes(item, jiraGroup),
     };
+  }
+
+  private getContainerId(item: JiraRecentItem, jiraGroup: JiraResponseGroup) {
+    return jiraGroup === JiraResponseGroup.Filters
+      ? item.attributes &&
+          (item.attributes as JiraRecentFilterAttributes).ownerId
+      : item.attributes &&
+          (item.attributes as
+            | JiraRecentBoardAttributes
+            | JiraRecentIssueAttributes).containerId;
   }
 
   private getTypeSpecificAttributes(
@@ -136,11 +232,44 @@ export default class JiraClientImpl implements JiraClient {
     objectKey?: string;
     containerName?: string;
   } {
-    return {
-      ...(jiraGroup === JiraResponseGroup.Filters
-        ? { objectKey: 'Filters' }
-        : null),
-      containerName: item.metadata,
-    };
+    switch (jiraGroup) {
+      case JiraResponseGroup.Filters:
+        return {
+          containerName: item.metadata,
+          objectKey: 'Filters',
+        };
+      case JiraResponseGroup.Projects:
+        return {
+          containerName: item.metadata,
+        };
+      case JiraResponseGroup.Issues:
+        const issueType =
+          item.attributes &&
+          (item.attributes as JiraRecentIssueAttributes).issueTypeName;
+        return {
+          containerName: issueType ? issueType : item.metadata,
+          objectKey: issueType ? item.metadata : undefined,
+        };
+      case JiraResponseGroup.Boards:
+        return {
+          containerName: item.attributes
+            ? (item.attributes as JiraRecentBoardAttributes).containerName
+            : item.metadata,
+        };
+    }
+  }
+
+  /**
+   * Private method to construct a valid value for the 'counts' query param
+   * for the Jira recent API. The format is as follows:
+   *
+   * ?counts=issues=8,boards=2,projects=2,filters=2
+   *
+   * @param recentCounts
+   */
+  private getRecentCountQueryParam(recentCounts: RecentItemsCounts): string {
+    const keys = Object.keys(recentCounts);
+
+    return keys.map(key => `${key}=${recentCounts[key]}`).join(',');
   }
 }

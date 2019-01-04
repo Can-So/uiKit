@@ -3,6 +3,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Button from '@atlaskit/button';
+import { ModalTransition } from '@atlaskit/modal-dialog';
 import { Avatar, AvatarPickerDialog, AvatarPickerDialogProps } from '../src';
 import { generateAvatars } from '../example-helpers';
 
@@ -33,7 +34,7 @@ export default class StatefulAvatarPickerDialog extends React.Component<
   timeoutId: number = 0;
 
   state = {
-    isOpen: true,
+    isOpen: false,
     imagePreviewSource: '',
     isLoading: false,
   };
@@ -57,7 +58,7 @@ export default class StatefulAvatarPickerDialog extends React.Component<
       },
       () => {
         // Fake "uploading" call by adding a delay
-        this.timeoutId = setTimeout(() => {
+        this.timeoutId = window.setTimeout(() => {
           this.setState({
             imagePreviewSource: dataURI,
             isOpen: false,
@@ -70,29 +71,29 @@ export default class StatefulAvatarPickerDialog extends React.Component<
 
   renderPicker() {
     const { isOpen, isLoading } = this.state;
-    if (!isOpen) {
-      return null;
-    }
-
     return (
-      <AvatarPickerDialog
-        avatars={avatars}
-        onAvatarPicked={selectedAvatar => {
-          console.log('onAvatarPicked:', selectedAvatar);
-          this.save(selectedAvatar.dataURI);
-        }}
-        onImagePicked={(selectedImage, crop) => {
-          console.log('onImagePicked:', selectedImage, crop);
-        }}
-        onImagePickedDataURI={exportedImg => {
-          console.log('onImagePickedDataURI: ', { dataURI: exportedImg });
-          this.save(exportedImg);
-        }}
-        onCancel={this.closePicker}
-        isLoading={isLoading}
-        predefinedAvatarsText="Default icons"
-        {...this.props}
-      />
+      <ModalTransition>
+        {isOpen && (
+          <AvatarPickerDialog
+            avatars={avatars}
+            onAvatarPicked={selectedAvatar => {
+              console.log('onAvatarPicked:', selectedAvatar);
+              this.save(selectedAvatar.dataURI);
+            }}
+            onImagePicked={(selectedImage, crop) => {
+              console.log('onImagePicked:', selectedImage, crop);
+            }}
+            onImagePickedDataURI={exportedImg => {
+              console.log('onImagePickedDataURI: ', { dataURI: exportedImg });
+              this.save(exportedImg);
+            }}
+            onCancel={this.closePicker}
+            isLoading={isLoading}
+            predefinedAvatarsText="Default icons"
+            {...this.props}
+          />
+        )}
+      </ModalTransition>
     );
   }
 

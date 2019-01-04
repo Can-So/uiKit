@@ -1,5 +1,212 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.4
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/media-test-helpers@18.7.0
+  - @atlaskit/media-core@24.7.0
+
+## 6.3.3
+- [patch] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+
+  - Move schema to its own package
+
+## 6.3.2
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/media-test-helpers@18.6.2
+  - @atlaskit/media-core@24.6.0
+
+## 6.3.1
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
+## 6.3.0
+- [minor] [a1b03d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a1b03d0):
+
+  - ED-3890 Adds Indentation support on paragraphs and headings
+
+## 6.2.24
+- [patch] [94094fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/94094fe):
+
+  - Adds support for links around images
+
+## 6.2.23
+- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+  - @atlaskit/editor-core@90.0.0
+
+## 6.2.22
+- Updated dependencies [df32968](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df32968):
+  - @atlaskit/editor-core@89.0.7
+  - @atlaskit/smart-card@9.0.0
+
+## 6.2.21
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/smart-card@8.8.5
+  - @atlaskit/editor-common@22.0.2
+  - @atlaskit/editor-core@89.0.6
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/icon@15.0.0
+
+## 6.2.20
+- [patch] [a2cae0c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2cae0c):
+
+  - Fix conversion of pasted urls via macroPlugin with html in clipboard (ED-5786)
+
+## 6.2.19
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/editor-core@89.0.0
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 6.2.18
+- [patch] [16ff8d2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/16ff8d2):
+
+  - Add jira card editor example.
+
+## 6.2.17
+- [patch] [14477fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/14477fa):
+
+  - Adding text alignment to editor and renderer
+
+## 6.2.16
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+
+## 6.2.15
+- [patch] [a9eb99f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a9eb99f):
+
+  - ED-5510: fix deleting last character in a cell in Safari
+
+## 6.2.14
+- [patch] [798cff1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/798cff1):
+
+  - Adds an Import option in full-page example
+
+## 6.2.13
+- [patch] [7fc0ffb"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7fc0ffb"
+d):
+
+  - ED-5619 Change "Loren ipsun" to "Lorem ipsum" in the example
+
+## 6.2.12
+- [patch] [44d9c5b"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44d9c5b"
+d):
+
+  - ED-5632: mock Selection API globally; allows dispatching before Editor finishes mounting
+
+## 6.2.11
+- [patch] [1662ae0"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1662ae0"
+d):
+
+  - ED-5440 convert sections to use percentages
+
+## 6.2.10
+- [patch] ED-5439: add block smart cards, toolbar switcher [5f8bdfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f8bdfe)
+
+## 6.2.9
+- [patch] Wrap invalid node with unsupported node [fb60e39](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fb60e39)
+
+## 6.2.8
+- [patch] Updated dependencies [052ce89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/052ce89)
+  - @atlaskit/editor-core@87.0.0
+  - @atlaskit/editor-common@20.1.2
+
+## 6.2.7
+- [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+  - @atlaskit/editor-common@20.0.0
+  - @atlaskit/editor-core@86.0.0
+  - @atlaskit/media-core@24.3.0
+  - @atlaskit/media-test-helpers@18.2.8
+
+## 6.2.6
+- [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+  - @atlaskit/editor-common@19.0.0
+  - @atlaskit/editor-core@85.0.0
+  - @atlaskit/media-test-helpers@18.2.5
+  - @atlaskit/media-core@24.2.0
+
+## 6.2.5
+- [patch] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [patch] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+  - @atlaskit/editor-common@18.0.0
+  - @atlaskit/editor-core@84.0.0
+  - @atlaskit/media-core@24.1.0
+  - @atlaskit/media-test-helpers@18.2.3
+
+## 6.2.4
+- [patch] Updated dependencies [23c7eca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23c7eca)
+  - @atlaskit/editor-core@83.0.0
+
+## 6.2.3
+- [patch] change grey to gray to keep consistent across editor pkgs [1b2a0b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1b2a0b3)
+
+## 6.2.2
+- [patch] ED-5424: fix telepointers in collab editing [643a860](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/643a860)
+
+## 6.2.1
+- [patch] ED-5151 Editor i18n: Floating toolbars [403b547](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/403b547)
+
+## 6.2.0
+- [minor] FS-2893 - Creation use cases for full page actions and decisions [c8aa5f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8aa5f5)
+
+## 6.1.3
+- [patch] ED-5150 Editor i18n: Main toolbar [ef76f1f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef76f1f)
+
+## 6.1.2
+- [patch] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+  - @atlaskit/editor-common@17.0.0
+  - @atlaskit/editor-core@81.0.0
+  - @atlaskit/media-core@24.0.0
+  - @atlaskit/media-test-helpers@18.0.0
+
+## 6.1.1
+- [patch] ED-5346: prosemirror upgrade [5bd4432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5bd4432)
+
+## 6.1.0
+- [minor] FS-2961 Introduce status component and status node in editor [7fe2b0a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7fe2b0a)
+
+## 6.0.9
+- [patch] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+  - @atlaskit/editor-common@16.0.0
+  - @atlaskit/editor-core@80.0.0
+  - @atlaskit/media-core@23.2.0
+  - @atlaskit/media-test-helpers@17.1.0
+
+## 6.0.8
+- [patch] Update TS to 3.0 [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+- [none] Updated dependencies [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+  - @atlaskit/media-test-helpers@17.0.2
+  - @atlaskit/media-core@23.1.1
+  - @atlaskit/editor-common@15.0.7
+  - @atlaskit/editor-core@79.0.12
+
+## 6.0.7
+- [patch] ED-4680 add smart card plugin, enable for inline smart cards [b9529e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9529e6)
+
+## 6.0.6
+- [patch] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
+  - @atlaskit/editor-common@15.0.0
+  - @atlaskit/editor-core@79.0.0
+  - @atlaskit/media-core@23.1.0
+
+## 6.0.5
+- [patch] Remove new upload service feature flag (useNewUploadService). Now new upload service will be used by default. [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+- [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+  - @atlaskit/media-test-helpers@17.0.0
+  - @atlaskit/media-core@23.0.2
+  - @atlaskit/editor-core@78.0.0
+
 ## 6.0.4
 - [patch] Check current selected nodes before change node selection when interacting with extensions. ED-5199 [bb15908](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bb15908)
 

@@ -1,5 +1,42 @@
 # @atlaskit/docs
 
+## 6.0.0
+- [major] [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+
+  - Use latest version of pretty-proptypes - this is incompatible with `extract-react-types` versions under `0.15.0`
+
+## 5.2.3
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/button@10.0.4
+  - @atlaskit/code@8.2.1
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/theme@7.0.0
+
+## 5.2.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/button@10.0.1
+  - @atlaskit/icon@15.0.0
+
+## 5.2.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/button@10.0.0
+
+## 5.2.0
+- [minor] Add ErrorBoundary to Examples so that errors in Example components don't leak out onto the containing page when embedding examples within docs. [5131102](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5131102)
+
+## 5.1.0
+- [minor] Example component now accepts a packageName. This prop is now required [7a8278d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7a8278d)
+
+## 5.0.8
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/button@9.0.13
+  - @atlaskit/icon@14.0.0
+
+## 5.0.7
+- [patch] Upgrade extract-react-types to add TypeScript support. [c742e5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c742e5a)
+
 ## 5.0.6
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

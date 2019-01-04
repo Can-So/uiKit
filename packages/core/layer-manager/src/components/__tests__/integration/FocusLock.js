@@ -9,10 +9,10 @@ const LastButton = '#examples p:nth-child(2) > button:nth-child(3)';
 const FirstButton = '#examples p:nth-child(2) > button:nth-child(1)';
 
 BrowserTestCase(
-  'AK-4416 - focus should loop to first element when inside a focus boundary',
+  'FocusLock.js: AK-4416 - focus should loop to first element when inside a focus boundary',
   { skip: ['safari'] }, // browserstack has an issue with safari
   async client => {
-    const LayerManagerTest = await new Page(client);
+    const LayerManagerTest = new Page(client);
     await LayerManagerTest.goto(urlFocusLock);
     await LayerManagerTest.click(FocusLockButton);
     await LayerManagerTest.click(LastButton);
@@ -21,5 +21,6 @@ BrowserTestCase(
     // get focus status of first button
     const firstButtonFocused = await LayerManagerTest.hasFocus(FirstButton);
     expect(firstButtonFocused).toBe(true);
+    await LayerManagerTest.checkConsoleErrors();
   },
 );

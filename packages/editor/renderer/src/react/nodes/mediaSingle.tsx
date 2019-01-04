@@ -1,11 +1,17 @@
 import * as React from 'react';
 import { Component, ReactElement } from 'react';
 import styled from 'styled-components';
+import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import {
   MediaSingle as UIMediaSingle,
-  MediaSingleLayout,
+  WidthConsumer,
+  akEditorFullPageMaxWidth,
+  mapBreakpointToLayoutMaxWidth,
+  ImageLoaderProps,
 } from '@atlaskit/editor-common';
-import { BreakoutConsumer } from '../';
+import { FullPagePadding } from '../../ui/Renderer/style';
+import { RendererAppearance } from '../../ui/Renderer';
+import { MediaProps } from './media';
 
 export interface Props {
   children: ReactElement<any>;
@@ -31,7 +37,12 @@ const ExtendedUIMediaSingle = styled(UIMediaSingle)`
 `;
 
 export default class MediaSingle extends Component<
-  { layout: MediaSingleLayout } & React.Props<any>,
+  {
+    layout: MediaSingleLayout;
+    width?: number;
+    allowDynamicTextSizing?: boolean;
+    rendererAppearance: RendererAppearance;
+  },
   State
 > {
   constructor(props) {
@@ -53,42 +64,62 @@ export default class MediaSingle extends Component<
       React.Children.toArray(props.children)[0],
     );
 
-    const media = React.cloneElement(child, {
-      cardDimensions: {
-        width: '100%',
-        height: '100%',
-      },
-      onExternalImageLoaded: this.onExternalImageLoaded,
-      disableOverlay: true,
-    });
-
     let { width, height, type } = child.props;
 
     if (type === 'external') {
       const { width: stateWidth, height: stateHeight } = this.state;
-
       if (width === null) {
         width = stateWidth || DEFAULT_WIDTH;
       }
-
       if (height === null) {
         height = stateHeight || DEFAULT_HEIGHT;
       }
     }
 
+    if (width === null) {
+      width = DEFAULT_WIDTH;
+      height = DEFAULT_HEIGHT;
+    }
+
+    // TODO: put appearance-based padding into theme instead
+    const padding =
+      this.props.rendererAppearance === 'full-page' ? FullPagePadding * 2 : 0;
+
     return (
-      <BreakoutConsumer>
-        {containerWidth => (
-          <ExtendedUIMediaSingle
-            layout={props.layout}
-            width={width}
-            height={height}
-            containerWidth={containerWidth}
-          >
-            {media}
-          </ExtendedUIMediaSingle>
-        )}
-      </BreakoutConsumer>
+      <WidthConsumer>
+        {({ width: containerWidth, breakpoint }) => {
+          const cardWidth = containerWidth;
+          const cardHeight = (height / width) * cardWidth;
+          const cardDimensions = {
+            width: `${cardWidth}px`,
+            height: `${cardHeight}px`,
+          };
+
+          return (
+            <ExtendedUIMediaSingle
+              layout={props.layout}
+              width={width}
+              height={height}
+              containerWidth={containerWidth}
+              lineLength={
+                containerWidth - padding >= akEditorFullPageMaxWidth
+                  ? this.props.allowDynamicTextSizing
+                    ? mapBreakpointToLayoutMaxWidth(breakpoint)
+                    : akEditorFullPageMaxWidth
+                  : containerWidth - padding
+              }
+              pctWidth={props.width}
+            >
+              {React.cloneElement(child, {
+                resizeMode: 'stretchy-fit',
+                cardDimensions,
+                onExternalImageLoaded: this.onExternalImageLoaded,
+                disableOverlay: true,
+              } as MediaProps & ImageLoaderProps)}
+            </ExtendedUIMediaSingle>
+          );
+        }}
+      </WidthConsumer>
     );
   }
 }

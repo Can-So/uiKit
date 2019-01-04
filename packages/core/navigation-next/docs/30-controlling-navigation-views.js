@@ -20,9 +20,10 @@ We refer to each state the navigation can be in as a 'view'. As an example, here
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-views-example')}
+      source={require('!!raw-loader!./examples/views-controller/views-example')}
       title="Navigation views"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-views-example"
+      id="views-example"
+      path="/views-controller"
     />
   )}
 
@@ -33,16 +34,14 @@ Representing a view as a Javascript array makes them really easy to work with. L
 ${code`// Component representation
 const componentView = (
   <Fragment>
-    <Section key="header">
+    <HeaderSection>
       {({ className }) => (
         <div className={className}>
-          <div css={{ padding: '16px 0' }}>
-            <JiraWordmark />
-          </div>
+          <Wordmark wordmark={JiraWordmark} />
         </div>
       )}
-    </Section>
-    <Section key="menu">
+    </HeaderSection>
+    <MenuSection>
       {({ className }) => (
         <div className={className}>
           <Item before={DashboardIcon} text="Dashboards" />
@@ -51,29 +50,26 @@ const componentView = (
           <Item before={PortfolioIcon} text="Portfolio" />
         </div>
       )}
-    </Section>
+    </MenuSection>
   </Fragment>
 );
 
 // JSON representation
 const jsonView = [
   {
-    type: 'Section',
+    type: 'HeaderSection',
     id: 'header',
     items: [
       {
-        type: () => (
-          <div css={{ padding: '16px 0' }}>
-            <JiraWordmark />
-          </div>
-        ),
+        type: 'Wordmark',
+        wordmark: JiraWordmark,
         id: 'jira-wordmark',
       },
     ],
   },
   {
-    type: 'Section',
-    id: 'header',
+    type: 'MenuSection',
+    id: 'menu',
     items: [
       {
         type: 'Item',
@@ -102,8 +98,8 @@ In this model a view is represented as an array of items. Each item in this arra
 
 A few things to note:
 
-* Some \`type\`s are built into the package (such as, 'Item' and 'Section') and these types can be provided as a string. In the above example the Jira wordmark component isn't built into \`navigation-next\`, so we have to provide a component as the type.
-* A view is expected to be an array of Sections. Sections should not be nested.
+* Some \`type\`s are built into the package (such as, 'Item' and 'HeaderSection') and these types can be provided as a string. If you need your own custom behaviour or presentation, you can provide your own component as the type instead.
+* A view is expected to be an array of Sections. Sections should not be nested. As well as the generic \`Section\` component, the renderer includes two pre-configured Section components - \`HeaderSection\` and \`MenuSection\` - which we recommend using to get the correct spacing and scrolling behaviour in your navigation.
 * You can find a complete [list of the in-built item types here](/packages/core/navigation-next/docs/state-controllers#built-in-view-item-types).
 
 ${<H>A smart LayoutManager</H>}
@@ -121,9 +117,10 @@ We provide a state manager to help you handle this, and a wrapped version of the
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-layoutmanagerwithviewcontroller')}
+      source={require('!!raw-loader!./examples/views-controller/layoutmanagerwithviewcontroller')}
       title="LayoutManagerWithViewController"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-layoutmanagerwithviewcontroller"
+      id="layoutmanagerwithviewcontroller"
+      path="/views-controller"
     />
   )}
 
@@ -164,21 +161,23 @@ We call \`navigationViewController.addView(myView)\` to register that view. We t
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-add-and-set-view')}
+      source={require('!!raw-loader!./examples/views-controller/add-and-set-view')}
       title="Adding and setting a view"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-add-and-set-view"
+      id="add-and-set-view"
+      path="/views-controller"
     />
   )}
 
 ${<H>Transitioning between views</H>}
 
-Let's add a Project issues view to our navigation. Now when we click on the 'Issues and filters' item the view will update. Clicking the 'Back' item will take us back again.
+Let's add a Project issues view to our navigation. Now when we click on the 'Issues and filters' item the view will update. Clicking the 'Back to Jira' item will take us back again.
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-update-view')}
+      source={require('!!raw-loader!./examples/views-controller/update-view')}
       title="Transitioning between views"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-update-view"
+      id="update-view"
+      path="/views-controller"
     />
   )}
 
@@ -196,16 +195,16 @@ ${code`{
   type: 'Item',
 },`}
 
-This renders a special Item which will call \`navigationViewController.setView('product/issues')\` when it's clicked. The 'Back' item in the product issues view works the same way.
+This renders a special Item which will call \`navigationViewController.setView('product/issues')\` when it's clicked. The 'Back to Jira' item in the product issues view works the same way.
 
 #### 2. Linking nested Sections
 
-To get a nested navigation animation we need to add some information to our Sections. Our menu sections now looks like this:
+To get a nested navigation animation we need to add some information to our \`MenuSection\`s. They now look like this:
 
 ${code`// 'product/home' menu section
 {
   items: [/* ... */],
-  type: 'Section',
+  type: 'MenuSection',
   id: 'product/home:menu',
 + parentId: null,
 + nestedGroupKey: 'menu',
@@ -214,7 +213,7 @@ ${code`// 'product/home' menu section
 // 'product/issues' menu section
 {
   items: [/* ... */],
-  type: 'Section',
+  type: 'MenuSection',
   id: 'product/issues:menu',
   parentId: 'product/home:menu',
   nestedGroupKey: 'menu',
@@ -228,9 +227,10 @@ Let's add some routing to our app. In this example we'll use \`react-router\`.
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-adding-routes')}
+      source={require('!!raw-loader!./examples/views-controller/adding-routes')}
       title="Adding routing to our app"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-adding-routes"
+      id="adding-routes"
+      path="/views-controller"
     />
   )}
 
@@ -261,7 +261,8 @@ ${code`const LinkItem = ({ components: { Item }, to, ...props }) => {
 ${code`// Project home view Dashboards item
 {
 - type: 'Item',
-+ type: LinkItem,
++ type: 'InlineComponent',
++ component: LinkItem,
   id: 'dashboards',
   before: DashboardIcon,
   text: 'Dashboards',
@@ -269,6 +270,8 @@ ${code`// Project home view Dashboards item
 }`}
 
 This component renders a \`react-router\` \`Link\`. It also connects to the router and will appear selected when the current route matches its \`to\` property.
+
+An alternative way to specify a custom component is using the \`customComponents\` prop of \`LayoutManagerWithViewcontroller\` component and then referencing the custom component type directly as a string, similar to a built-in type.
 
 #### 2. Add routes to our app which set their view on mount
 
@@ -298,7 +301,9 @@ ${code`class App extends Component {
 
   render() {
     return (
-      <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
+      <LayoutManagerWithViewController
+        globalNavigation={MyGlobalNavigation}
+      >
 -       <div>Page content goes here.</div>
 +       <Switch>
 +         <Route path="/issues" component={IssuesAndFiltersRoute} />
@@ -311,8 +316,8 @@ ${code`class App extends Component {
 const AppWithNavigationViewController = withNavigationViewController(App);
 
 export default () => (
-  /* Note: in this example we're using HashRouter from react-router, but you can
-  use any routing solution you wish. */
+  /* Note: in this example we're using HashRouter from react-router, but you
+  can use any routing solution you wish. */
 + <HashRouter>
     <NavigationProvider>
       <AppWithNavigationViewController />
@@ -328,9 +333,10 @@ What if your view needs some data to render, but you don't want to fetch that da
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-asynchronous-views')}
+      source={require('!!raw-loader!./examples/views-controller/asynchronous-views')}
       title="Asynchronous views"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-asynchronous-views"
+      id="asynchronous-views"
+      path="/views-controller"
     />
   )}
 
@@ -342,9 +348,10 @@ So far we've only been dealing with 'product' navigation. When we enter a 'conta
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-container-views')}
+      source={require('!!raw-loader!./examples/views-controller/container-views')}
       title="Container views"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-container-views"
+      id="container-views"
+      path="/views-controller"
     />
   )}
 
@@ -352,7 +359,6 @@ Here's what changed:
 
 1. We added a view called \`'project/home'\` with the \`'container'\` type. We register this view along with the rest of the views in our App's \`componentDidMount\` method.
 2. We created a new component for the projects route, which sets the \`project/home\` view when it mounts. We added a \`Link\` to this route in the Dashboards component.
-3. We set the \`product/home\` view as the initial peek view in our App's \`componentDidMount\` method. The 'peek view' is the product navigation view which should be active when a container view is being rendered over the top of the product navigation layer. **Note:** The concept of peeking has been removed from the UX spec so this feature will soon be deprecated and removed, but please continue to do this for now.
 
 ${<H>Using reducers</H>}
 
@@ -360,9 +366,10 @@ You may run into situations in your application where one part of the app wants 
 
 ${(
     <IframeExample
-      source={require('!!raw-loader!../examples/9999-views-controller-reducing-views')}
+      source={require('!!raw-loader!./examples/views-controller/reducing-views')}
       title="Container views"
-      url="/examples.html?groupId=core&packageId=navigation-next&exampleId=views-controller-reducing-views"
+      id="reducing-views"
+      path="/views-controller"
     />
   )}
 
@@ -416,7 +423,9 @@ It's then as simple as rendering the \`GrowthExperiment\` component as long as w
 
 ${code`render() {
   return (
-    <LayoutManagerWithViewController globalNavigation={MyGlobalNavigation}>
+    <LayoutManagerWithViewController
+      globalNavigation={MyGlobalNavigation}
+    >
       <Switch>
         <Route path="/projects/my-project" component={ProjectBacklogRoute} />
         <Route path="/issues" component={IssuesAndFiltersRoute} />
@@ -436,8 +445,8 @@ ${(
     >
       Recommended uses for this feature are pretty much limited to experiments
       and legacy (non-React) integrations. If {`you're`} trying to create a
-      stateful view, either control the state externally and pass props to the{' '}
-      <code>getItems</code> function, or use a custom item in the view which
+      stateful view, either control the state externally and pass arguments to
+      the <code>getItems</code> function, or use a custom item in the view which
       manages some internal state.
     </SectionMessage>
   )}

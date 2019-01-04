@@ -1,28 +1,33 @@
 import * as React from 'react';
-import { FileItem, Context } from '@atlaskit/media-core';
+import { ProcessedFileState, Context } from '@atlaskit/media-core';
 import AudioIcon from '@atlaskit/icon/glyph/media-services/audio';
 import { constructAuthTokenUrl } from '../utils';
-import { Outcome } from '../domain';
-import { Spinner } from '../loading';
+import { Outcome, MediaViewerFeatureFlags } from '../domain';
 import {
   AudioPlayer,
   AudioCover,
   Audio,
   DefaultCoverWrapper,
   blanketColor,
+  CustomAudioPlayerWrapper,
 } from '../styled';
-import { ErrorMessage, createError, MediaViewerError } from '../error';
-import { renderDownloadButton } from '../domain/download';
+import { createError, MediaViewerError } from '../error';
+import { getArtifactUrl } from '@atlaskit/media-store';
+import { BaseState, BaseViewer } from './base-viewer';
+import { isIE } from '../utils/isIE';
+import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import { getFeatureFlag } from '../utils/getFeatureFlag';
 
 export type Props = Readonly<{
-  item: FileItem;
+  item: ProcessedFileState;
   context: Context;
   collectionName?: string;
   previewCount: number;
+  featureFlags?: MediaViewerFeatureFlags;
+  showControls?: () => void;
 }>;
 
-export type State = {
-  src: Outcome<string, MediaViewerError>;
+export type State = BaseState<string> & {
   coverUrl?: string;
 };
 
@@ -33,34 +38,17 @@ const defaultCover = (
 );
 
 const getCoverUrl = (
-  item: FileItem,
+  item: ProcessedFileState,
   context: Context,
   collectionName?: string,
 ): Promise<string> =>
-  constructAuthTokenUrl(
-    `/file/${item.details.id}/image`,
-    context,
-    collectionName,
-  );
+  constructAuthTokenUrl(`/file/${item.id}/image`, context, collectionName);
 
-export class AudioViewer extends React.Component<Props, State> {
-  state: State = { src: Outcome.pending() };
-
-  componentDidMount() {
-    this.init();
-  }
-
-  render() {
-    return this.state.src.match({
-      pending: () => <Spinner />,
-      successful: src => this.renderPlayer(src),
-      failed: err => (
-        <ErrorMessage error={err}>
-          <p>Try downloading the file to view it.</p>
-          {this.renderDownloadButton()}
-        </ErrorMessage>
-      ),
-    });
+export class AudioViewer extends BaseViewer<string, Props, State> {
+  protected get initialState() {
+    return {
+      content: Outcome.pending<string, MediaViewerError>(),
+    };
   }
 
   private renderCover = () => {
@@ -68,7 +56,7 @@ export class AudioViewer extends React.Component<Props, State> {
     const { coverUrl } = this.state;
 
     if (coverUrl) {
-      return <AudioCover src={coverUrl} alt={item.details.name} />;
+      return <AudioCover src={coverUrl} alt={item.name} />;
     } else {
       return defaultCover;
     }
@@ -82,21 +70,41 @@ export class AudioViewer extends React.Component<Props, State> {
     audioElement.setAttribute('controlsList', 'nodownload');
   };
 
-  private renderPlayer = (src: string) => {
-    const { previewCount } = this.props;
-    return (
+  protected renderSuccessful(src: string) {
+    const { showControls, previewCount, featureFlags } = this.props;
+
+    const useCustomAudioPlayer =
+      !isIE() && getFeatureFlag('customVideoPlayer', featureFlags);
+    const isAutoPlay = previewCount === 0;
+
+    return useCustomAudioPlayer ? (
       <AudioPlayer>
         {this.renderCover()}
-        <Audio
-          autoPlay={previewCount === 0}
-          controls
-          innerRef={this.saveAudioElement}
-          src={src}
-          preload="metadata"
-        />
+        <CustomAudioPlayerWrapper>
+          <CustomMediaPlayer
+            type="audio"
+            isAutoPlay={isAutoPlay}
+            src={src}
+            isShortcutEnabled={true}
+            showControls={showControls}
+          />
+        </CustomAudioPlayerWrapper>
+      </AudioPlayer>
+    ) : (
+      <AudioPlayer>
+        {this.renderCover()}
+        <CustomAudioPlayerWrapper>
+          <Audio
+            autoPlay={isAutoPlay}
+            controls
+            innerRef={this.saveAudioElement}
+            src={src}
+            preload="metadata"
+          />
+        </CustomAudioPlayerWrapper>
       </AudioPlayer>
     );
-  };
+  }
 
   private loadCover = (coverUrl: string) => {
     return new Promise(async (resolve, reject) => {
@@ -118,38 +126,24 @@ export class AudioViewer extends React.Component<Props, State> {
     } catch (e) {}
   };
 
-  private async init() {
+  protected async init() {
     const { context, item, collectionName } = this.props;
-    const audioUrl = getAudioArtifactUrl(item);
+    const audioUrl = getArtifactUrl(item.artifacts, 'audio.mp3');
     try {
       if (!audioUrl) {
         throw new Error('No audio artifacts found');
       }
       this.setCoverUrl();
       this.setState({
-        src: Outcome.successful(
+        content: Outcome.successful(
           await constructAuthTokenUrl(audioUrl, context, collectionName),
         ),
       });
     } catch (err) {
       this.setState({
-        src: Outcome.failed(createError('previewFailed', item, err)),
+        content: Outcome.failed(createError('previewFailed', err, item)),
       });
     }
   }
-
-  private renderDownloadButton() {
-    const { item, context, collectionName } = this.props;
-    return renderDownloadButton(item, context, collectionName);
-  }
-}
-
-function getAudioArtifactUrl(fileItem: FileItem) {
-  const artifact = 'audio.mp3';
-  return (
-    fileItem.details &&
-    fileItem.details.artifacts &&
-    fileItem.details.artifacts[artifact] &&
-    fileItem.details.artifacts[artifact].url
-  );
+  protected release() {}
 }

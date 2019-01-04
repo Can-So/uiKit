@@ -1,5 +1,81 @@
 # @atlaskit/tree
 
+## 4.1.9
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/navigation@33.3.8
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/docs@6.0.0
+
+## 4.1.8
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/navigation@33.3.7
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/theme@7.0.0
+
+## 4.1.7
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/navigation@33.3.6
+  - @atlaskit/section-message@1.0.12
+  - @atlaskit/icon@15.0.0
+
+## 4.1.6
+- [patch] [ce60809](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ce60809):
+
+  - Replace react-beautiful-dnd-next dependency with react-beautiful-dnd@10.0.2
+
+## 4.1.5
+- [patch] [6c250fe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c250fe):
+
+  - Upgrading react-beautiful-dnd-next to 10.0.0-beta.2
+
+## 4.1.4
+- [patch] [7b08fd4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7b08fd4):
+
+  - Solving race condition when dropping and nesting at the same time
+
+## 4.1.3
+- [patch] [5de65a9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de65a9):
+
+  - Upgrading react-beautiful-dnd-next to 10.0.0-alpha.5
+
+## 4.1.2
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 4.1.1
+- [patch] Fixing drag&drop on clipped trees [b18ecfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b18ecfe)
+
+## 4.1.0
+- [minor] Expanded parent item is collapsed while dragged. [192b3e2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/192b3e2)
+
+## 4.0.0
+- [major] Implementing nesting and expanding parents while dragging [2bdbf04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2bdbf04)
+
+## 3.0.4
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/navigation@33.1.11
+  - @atlaskit/section-message@1.0.8
+  - @atlaskit/icon@14.0.0
+
+## 3.0.3
+- [patch] Collapsing parent automatically when last child moved out [f4992db](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f4992db)
+
+## 3.0.2
+- [patch] Fixing issue of not calling onDragStart when drag&drop starts [d7be874](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7be874)
+
+## 3.0.1
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 3.0.0
+- [major] Horizontal movement to disambiguate the case when the user is dropping at end of subtree [9ee9657](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9ee9657)
+
 ## 2.0.6
 - [patch] Updated dependencies [df22ad8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df22ad8)
   - @atlaskit/theme@6.0.0

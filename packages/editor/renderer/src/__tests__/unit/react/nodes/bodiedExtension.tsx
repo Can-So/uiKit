@@ -5,7 +5,8 @@ import BodiedExtension from '../../../../react/nodes/bodiedExtension';
 
 import { RendererContext } from '../../../../react';
 import ReactSerializer from '../../../../react';
-import { defaultSchema, ExtensionHandlers } from '@atlaskit/editor-common';
+import { defaultSchema } from '@atlaskit/adf-schema';
+import { ExtensionHandlers } from '@atlaskit/editor-common';
 
 describe('Renderer - React/Nodes/BodiedExtension', () => {
   const extensionHandlers: ExtensionHandlers = {
@@ -54,7 +55,6 @@ describe('Renderer - React/Nodes/BodiedExtension', () => {
           attrs: {
             extensionType: 'com.atlassian.stride',
             extensionKey: 'default',
-            bodyType: 'rich',
           },
           content: [
             {

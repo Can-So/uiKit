@@ -22,6 +22,7 @@ const walkView = (selector: ItemSelector) => (modifier: ItemModifier) => (
     if (item.items && item.items.length) {
       item = { ...item, items: walk(item.items) };
     }
+
     if (selector(item)) {
       item = modifier(item);
     }
@@ -82,10 +83,25 @@ const prependChildren = (prepended: View) => (item: ViewItem) => ({
   items: [...prepended, ...(item.items || [])],
 });
 
+/**
+ * Transformers
+ */
+
+// Flatten navigation items
+const flattenItems = (items: any): any => {
+  const itemProps = [];
+  walkView(() => true)(item => {
+    itemProps.push(item);
+    return item;
+  })(items);
+  return itemProps;
+};
+
 export default {
   appendChildren,
   findId,
   findLegacyId,
+  flattenItems,
   insertAfter,
   insertBefore,
   matchId,

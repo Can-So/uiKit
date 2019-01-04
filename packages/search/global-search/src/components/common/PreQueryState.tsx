@@ -16,7 +16,7 @@ export interface Props {
   screenCounter?: ScreenCounter;
   referralContextIdentifiers?: ReferralContextIdentifiers;
   renderNoRecentActivity: () => JSX.Element;
-  renderAdvancedSearchGroup: () => JSX.Element;
+  renderAdvancedSearchGroup: (analyticsData?) => JSX.Element;
 }
 
 export default class PreQueryState extends React.Component<Props> {
@@ -38,16 +38,17 @@ export default class PreQueryState extends React.Component<Props> {
             screenCounter={screenCounter}
             searchSessionId={searchSessionId}
             referralContextIdentifiers={referralContextIdentifiers}
-          />,
+          />
           <NoRecentActivity key="no-recent-activity">
             {renderNoRecentActivity()}
-          </NoRecentActivity>,
+          </NoRecentActivity>
         </>
       );
     }
 
     return (
       <ResultGroupsComponent
+        key="prequery-results-groups"
         type={ResultGroupType.PreQuery}
         renderAdvancedSearch={renderAdvancedSearchGroup}
         resultsGroups={resultsGroups}

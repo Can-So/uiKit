@@ -294,9 +294,9 @@ export class MentionPicker extends React.PureComponent<
   }
 }
 
-export const MentionPickerWithAnalytics: React.ComponentClass<
-  Props
-> = withAnalyticsEvents({})(MentionPicker) as React.ComponentClass<Props>;
+export const MentionPickerWithAnalytics = withAnalyticsEvents({})(
+  MentionPicker,
+);
 
 export type MentionPickerWithAnalytics = MentionPicker;
 

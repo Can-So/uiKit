@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '../src';
 
@@ -17,16 +17,24 @@ export default class DrawersExample extends Component<{}, State> {
       isDrawerOpen: true,
     });
 
-  closeDrawer = () =>
+  onClose = (
+    ...args: [SyntheticMouseEvent<*> | SyntheticKeyboardEvent<*>, any]
+  ) => {
+    console.log('onClose', args);
     this.setState({
       isDrawerOpen: false,
     });
+  };
+
+  onCloseComplete = (...args: [HTMLElement]) =>
+    console.log('onCloseComplete', args);
 
   render() {
     return (
-      <Fragment>
+      <div css={{ padding: '2rem' }}>
         <Drawer
-          onClose={this.closeDrawer}
+          onClose={this.onClose}
+          onCloseComplete={this.onCloseComplete}
           isOpen={this.state.isDrawerOpen}
           width="wide"
         >
@@ -35,7 +43,7 @@ export default class DrawersExample extends Component<{}, State> {
         <Button type="button" onClick={this.openDrawer}>
           Open drawer
         </Button>
-      </Fragment>
+      </div>
     );
   }
 }

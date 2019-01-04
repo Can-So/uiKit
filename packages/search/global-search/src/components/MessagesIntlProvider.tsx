@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { IntlProvider, injectIntl, InjectedIntlProps } from 'react-intl';
-import { getMessagesForLocale } from '../i18n';
+import { getMessagesForLocale } from '../util/i18n-util';
 
 export interface Props {
-  children: JSX.Element;
+  children: React.ReactChild;
 }
 
 class MessagesIntlProvider extends React.Component<Props & InjectedIntlProps> {

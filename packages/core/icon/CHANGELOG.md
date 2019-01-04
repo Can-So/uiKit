@@ -1,5 +1,149 @@
 # @atlaskit/icon
 
+## 15.0.3
+- [patch] [1d1f6d1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d1f6d1):
+
+  - Make icon glyphs not import metadata
+
+## 15.0.2
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/button@10.1.1
+  - @atlaskit/dynamic-table@10.0.22
+  - @atlaskit/field-text@7.0.18
+  - @atlaskit/icon-file-type@3.0.2
+  - @atlaskit/icon-object@3.0.2
+  - @atlaskit/logo@9.2.6
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/section-message@1.0.14
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/tooltip@12.1.13
+  - @atlaskit/docs@6.0.0
+
+## 15.0.1
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/dynamic-table@10.0.20
+  - @atlaskit/field-text@7.0.16
+  - @atlaskit/icon-file-type@3.0.1
+  - @atlaskit/icon-object@3.0.1
+  - @atlaskit/logo@9.2.5
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/section-message@1.0.13
+  - @atlaskit/tooltip@12.1.12
+  - @atlaskit/theme@7.0.0
+
+## 15.0.0
+- [major] [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+
+  - Remove onClick props as icon is only a presentational placeholder. Please wrap icon into a Button or a Link component.
+
+## 14.6.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/dynamic-table@10.0.18
+  - @atlaskit/field-text@7.0.15
+  - @atlaskit/icon-file-type@2.0.1
+  - @atlaskit/icon-object@2.0.1
+  - @atlaskit/logo@9.2.4
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/section-message@1.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/tooltip@12.1.10
+  - @atlaskit/button@10.0.0
+
+## 14.6.0
+- [minor] [29968f4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29968f4):
+
+  - Add a menu expand icon
+
+## 14.5.0
+- [minor] [f5e26e1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f5e26e1):
+
+  - Add a retry icon
+
+## 14.4.0
+- [patch] [29b160f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/29b160f):
+
+  - Simplify the icons build process
+
+  Icons no longer need a custom `build` step to be accurate on npm. This
+  has come about by renaming the `es5` folder to `cjs`. If you weren't reaching
+  into our package's internals, you shouldn't notice.
+
+- [minor] [62a7c37](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/62a7c37):
+
+  - Add metadata export
+
+  In trying to align the icons packages, the core `@atlaskit/icon` package now exports
+  `metadata`, which includes information about every icon in this package.
+- Updated dependencies [b29bec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b29bec1):
+- Updated dependencies [80304f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80304f0):
+  - @atlaskit/icon-file-type@2.0.0
+  - @atlaskit/icon-object@2.0.0
+  - @atlaskit/icon-build-process@0.1.0
+
+## 14.3.0
+- [minor] [dced9bf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dced9bf):
+
+  - Remove StarOutlineIcon as it is not used
+
+## 14.2.1
+- [patch] [d15caa6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d15caa6):
+
+  - adding editor image alignment icons
+
+## 14.2.0
+- [minor] [fe3c283"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fe3c283"
+d):
+
+  - ED-5600: add icons for new table ux
+
+## 14.1.0
+- [minor] Add drag-handler [b0a64d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b0a64d6)
+
+## 14.0.3
+- [patch] Update to use babel-7 for build processes [e7bb74d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7bb74d)
+
+## 14.0.2
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 14.0.1
+- [patch] Change devDependency on sectionMessage to caret dependency [91a3ced](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/91a3ced)
+
+## 14.0.0
+- [major] Remove product logo icons from icons, recommend using @atlaskit/logo instead [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+- [patch] Updated dependencies [709b239](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/709b239)
+  - @atlaskit/icon-file-type@1.0.0
+  - @atlaskit/icon-object@1.0.0
+
+## 13.9.0
+- [minor] Add like icon [cd71c5f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cd71c5f)
+
+## 13.8.1
+- [patch] Updated dependencies [d5a043a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5a043a)
+  - @atlaskit/tooltip@12.0.14
+  - @atlaskit/modal-dialog@7.0.0
+
+## 13.8.0
+- [minor] Add the questions icon [ad96a89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad96a89)
+
+## 13.7.0
+- [minor] Add and edit star icons [55e3ec7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55e3ec7)
+
+## 13.6.1
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
+## 13.6.0
+- [minor] Add static displayName prop to all icons. This results in accurate display names even after minifying and uglifying the icon variable names. [a75db9d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a75db9d)
+
+## 13.5.0
+- [minor] Add the new child-issues icon [8d3f8dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8d3f8dd)
+
+## 13.4.0
+- [minor] Add the new check circle outline [22af4c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/22af4c5)
+
 ## 13.3.0
 - [minor] Add new icon [d36f760](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d36f760)
 - [patch] Add new icon for Roadmap [7cf05b3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7cf05b3)

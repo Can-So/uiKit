@@ -1,5 +1,299 @@
 # @atlaskit/media-viewer
 
+## 29.1.0
+- [minor] [6bc785d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bc785d):
+
+  - default to HD video if available in video viewer
+
+## 29.0.2
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/media-core@24.7.2
+  - @atlaskit/media-store@9.0.2
+  - @atlaskit/media-test-helpers@18.7.2
+  - @atlaskit/media-card@47.0.0
+
+## 29.0.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
+## 29.0.0
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+- Updated dependencies [096f898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/096f898):
+  - @atlaskit/media-card@46.0.0
+  - @atlaskit/media-store@9.0.0
+  - @atlaskit/media-test-helpers@18.7.0
+  - @atlaskit/media-core@24.7.0
+
+## 28.0.0
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/media-card@45.0.0
+  - @atlaskit/media-store@8.5.1
+  - @atlaskit/media-test-helpers@18.6.2
+  - @atlaskit/media-core@24.6.0
+
+## 27.1.1
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/button@10.1.1
+  - @atlaskit/field-range@5.0.12
+  - @atlaskit/icon@15.0.2
+  - @atlaskit/modal-dialog@7.1.1
+  - @atlaskit/spinner@9.0.13
+  - @atlaskit/theme@7.0.1
+  - @atlaskit/analytics-gas-types@3.2.3
+  - @atlaskit/media-card@44.1.3
+  - @atlaskit/media-core@24.5.2
+  - @atlaskit/media-ui@8.1.2
+  - @atlaskit/docs@6.0.0
+
+## 27.1.0
+- [minor] [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+
+  - CustomVideoPlayer is now CustomMediaPlayer and supports audio through type property. Media Viewer now uses custom audio player for audio everywhere except IE11.
+
+## 27.0.6
+- [patch] [01697a6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01697a6):
+
+  - CustomVideoPlayer improvements: fix currentTime origin + apply custom theme
+
+## 27.0.5
+- [patch] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
+
+  - use custom video player for inline video in media-card
+
+## 27.0.4
+- Updated dependencies [d13242d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d13242d):
+  - @atlaskit/docs@5.2.3
+  - @atlaskit/button@10.0.4
+  - @atlaskit/field-range@5.0.11
+  - @atlaskit/icon@15.0.1
+  - @atlaskit/modal-dialog@7.0.14
+  - @atlaskit/spinner@9.0.12
+  - @atlaskit/media-ui@7.8.2
+  - @atlaskit/theme@7.0.0
+
+## 27.0.3
+- [patch] [5a6de24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6de24):
+
+  - translate component properties in media components
+
+## 27.0.2
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/docs@5.2.2
+  - @atlaskit/button@10.0.1
+  - @atlaskit/modal-dialog@7.0.13
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-test-helpers@18.3.1
+  - @atlaskit/media-ui@7.6.2
+  - @atlaskit/icon@15.0.0
+
+## 27.0.1
+- Updated dependencies [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
+  - @atlaskit/docs@5.2.1
+  - @atlaskit/analytics-next@3.1.1
+  - @atlaskit/icon@14.6.1
+  - @atlaskit/modal-dialog@7.0.12
+  - @atlaskit/spinner@9.0.11
+  - @atlaskit/theme@6.2.1
+  - @atlaskit/media-card@44.0.1
+  - @atlaskit/media-core@24.5.1
+  - @atlaskit/media-ui@7.6.1
+  - @atlaskit/field-range@5.0.9
+  - @atlaskit/button@10.0.0
+  - @atlaskit/analytics-next-types@3.1.2
+
+## 27.0.0
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/media-test-helpers@18.3.0
+  - @atlaskit/media-core@24.5.0
+
+## 26.0.1
+- [patch] [8584c5a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8584c5a):
+
+  - Fix zoom not sorting numerical values correctly
+
+## 26.0.0
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/media-test-helpers@18.2.12
+  - @atlaskit/media-core@24.4.0
+  - @atlaskit/media-store@8.3.0
+
+## 25.0.3
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-test-helpers@18.2.11
+  - @atlaskit/media-card@42.0.0
+
+## 25.0.2
+- [patch] [714f6ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/714f6ba):
+
+  - Add analytics for navigation events in MediaViewer
+
+## 25.0.1
+- [patch] [74c9cd1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/74c9cd1):
+
+  - Add analytics for zoom controls
+
+## 25.0.0
+- [major] [023cb45"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/023cb45"
+d):
+
+  - Add i18n support to MediaViewer
+
+## 24.1.11
+- [patch] [12afe80"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/12afe80"
+d):
+
+  - Move mocks directory structure to fix dist build issues
+
+## 24.1.10
+- [patch] [4b84e8b"
+d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b84e8b"
+d):
+
+  - Avoid unnecessary render cycle in ItemViewer
+
+## 24.1.9
+- [patch] [a787ee9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a787ee9):
+
+  Add analytics for downloads
+
+## 24.1.8
+- [patch] Make DocViewer inherit from BaseViewer [a2ee570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a2ee570)
+
+## 24.1.7
+- [patch] Make VideoViewer inherit from BaseViewer [2faedda](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2faedda)
+
+## 24.1.6
+- [patch] Make AudioViewer inherit from BaseViewer [5f7e58b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f7e58b)
+
+## 24.1.5
+- [patch] Add analytics for the header download button [4e8cacc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e8cacc)
+
+## 24.1.4
+- [patch] MS-1032: get rid of risky lifecycle hooks in ImageViewer [0795871](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0795871)
+
+## 24.1.3
+- [patch] Updated dependencies [ced32d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ced32d0)
+  - @atlaskit/media-card@41.1.2
+  - @atlaskit/media-test-helpers@18.2.10
+  - @atlaskit/media-ui@7.0.0
+
+## 24.1.2
+- [patch] use latest onLoad prop in ImageViewer init [de72be8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/de72be8)
+
+## 24.1.1
+- [patch] Pass the proper context object when reinitializing the BaseViewer" [215ea6c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/215ea6c)
+
+## 24.1.0
+- [minor] Add analytics to MVNG (and reset ImageViewer when collectionName changes) [d60bf6d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d60bf6d)
+
+## 24.0.1
+- [patch] Fix MediaViewer showing the spinner when it should show the error view [914bdb2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/914bdb2)
+
+## 24.0.0
+- [major] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+  - @atlaskit/media-card@41.0.0
+  - @atlaskit/media-core@24.3.0
+  - @atlaskit/media-store@8.2.0
+  - @atlaskit/media-test-helpers@18.2.8
+
+## 23.0.2
+- [patch] Updated dependencies [6e510d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e510d8)
+  - @atlaskit/media-core@24.2.2
+  - @atlaskit/media-test-helpers@18.2.7
+  - @atlaskit/media-card@40.0.0
+
+## 23.0.1
+- [patch] Prevent images from being smoothed when scaled up [5f1a429](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f1a429)
+
+## 23.0.0
+- [patch] Media-card: allow to download binary when processing failed, add failed-processing to CardStatus; Media-core: add context.file.downloadBinary, add failed-processing to FileStatus; Media-store: add getFileBinaryURL; [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+- [major] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+  - @atlaskit/media-card@39.0.0
+  - @atlaskit/media-test-helpers@18.2.5
+  - @atlaskit/media-core@24.2.0
+  - @atlaskit/media-store@8.1.0
+
+## 22.0.0
+- [patch] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [patch] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+- [major] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [major] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+  - @atlaskit/media-card@38.0.0
+  - @atlaskit/media-core@24.1.0
+  - @atlaskit/media-store@8.0.0
+  - @atlaskit/media-test-helpers@18.2.3
+
+## 21.0.5
+- [patch] Bumping dependency on media-store [f28fb3e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f28fb3e)
+
+## 21.0.4
+- [patch] Use context.getFile in MediaViewer NG [0056ef8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0056ef8)
+
+## 21.0.3
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/docs@5.0.8
+  - @atlaskit/button@9.0.13
+  - @atlaskit/modal-dialog@7.0.2
+  - @atlaskit/media-test-helpers@18.2.1
+  - @atlaskit/media-ui@6.0.1
+  - @atlaskit/icon@14.0.0
+
+## 21.0.2
+- [patch] Updated dependencies [dae7792](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dae7792)
+  - @atlaskit/media-core@24.0.2
+  - @atlaskit/media-test-helpers@18.2.0
+  - @atlaskit/media-ui@6.0.0
+
+## 21.0.1
+- [patch] Fix rxjs imports to only import what's needed [2e0ce2b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2e0ce2b)
+
+## 21.0.0
+- [major] Update RXJS dependency to ^5.5.0 [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+- [major] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+  - @atlaskit/media-core@24.0.0
+  - @atlaskit/media-test-helpers@18.0.0
+
+## 20.0.0
+- [major] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+  - @atlaskit/media-core@23.2.0
+  - @atlaskit/media-test-helpers@17.1.0
+
+## 19.0.1
+- [patch] Update TS to 3.0 [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+- [none] Updated dependencies [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+  - @atlaskit/media-test-helpers@17.0.2
+  - @atlaskit/media-core@23.1.1
+
+## 19.0.0
+- [major] remove jquery dep and mediaviewer classic support [02dee16](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/02dee16)
+
+## 18.0.2
+- [patch] Updated dependencies [d5a043a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d5a043a)
+  - @atlaskit/icon@13.8.1
+  - @atlaskit/modal-dialog@7.0.0
+
+## 18.0.1
+- [patch] Fix feedback button in MVNG [44bfc3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/44bfc3a)
+
+## 18.0.0
+- [major] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
+  - @atlaskit/media-core@23.1.0
+
+## 17.0.8
+- [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+  - @atlaskit/media-test-helpers@17.0.0
+  - @atlaskit/media-core@23.0.2
+
+## 17.0.7
+- [patch] List datasource takes priority to be consistent with the old behaviour MS-410 [31fafe6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/31fafe6)
+
 ## 17.0.6
 - [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
   - @atlaskit/media-ui@5.1.2

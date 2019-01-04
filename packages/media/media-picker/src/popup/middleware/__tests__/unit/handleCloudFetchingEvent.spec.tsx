@@ -5,7 +5,6 @@ import {
   HandleCloudFetchingEventAction,
 } from '../../../actions/handleCloudFetchingEvent';
 import { FINALIZE_UPLOAD } from '../../../actions/finalizeUpload';
-import { GET_PREVIEW } from '../../../actions/getPreview';
 import { RECENTS_COLLECTION } from '../../../config';
 import { sendUploadEvent } from '../../../actions/sendUploadEvent';
 
@@ -15,14 +14,16 @@ describe('handleCloudFetchingEvent', () => {
   const bytes = 50;
   const fileSize = 1000;
   const client = { id: 'some-client-id', token: 'some-client-token' };
-  const tenant = { id: 'some-tenant-id', token: 'some-tenant-token' };
   const description = 'some-error-description';
+  const deferredIdUpfronts = {};
+  const upfrontId = Promise.resolve('1');
   const file = {
     id: 'some-id',
     name: 'some-name',
     size: 12345,
     creationDate: Date.now(),
     type: 'image/jpg',
+    upfrontId,
   };
 
   const setup = () => {
@@ -73,10 +74,14 @@ describe('handleCloudFetchingEvent', () => {
       payload: { fileId, uploadId },
     };
     const remoteUploads = {
-      'some-upload-id': { tenant },
+      'some-upload-id': {},
     };
 
-    store.getState.mockReturnValue({ client, remoteUploads });
+    (store.getState as jest.Mock<any>).mockReturnValue({
+      client,
+      remoteUploads,
+      deferredIdUpfronts,
+    });
 
     handleCloudFetchingEvent(store)(next)(action);
 
@@ -85,7 +90,7 @@ describe('handleCloudFetchingEvent', () => {
       id: fileId,
     };
 
-    expect(store.dispatch).toHaveBeenCalledTimes(2);
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch.mock.calls[0][0]).toEqual({
       type: FINALIZE_UPLOAD,
       uploadId,
@@ -94,13 +99,6 @@ describe('handleCloudFetchingEvent', () => {
         id: fileId,
         collection: RECENTS_COLLECTION,
       },
-      tenant,
-    });
-    expect(store.dispatch.mock.calls[1][0]).toEqual({
-      type: GET_PREVIEW,
-      uploadId,
-      file: uploadedFile,
-      collection: RECENTS_COLLECTION,
     });
   });
 

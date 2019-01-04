@@ -1,8 +1,6 @@
 import { SmartMediaProgress } from '../../domain/progress';
 import { Action, Dispatch, Store } from 'redux';
-
 import { finalizeUpload } from '../actions/finalizeUpload';
-import { getPreview } from '../actions/getPreview';
 import {
   HANDLE_CLOUD_FETCHING_EVENT,
   HandleCloudFetchingEventAction,
@@ -19,6 +17,7 @@ import {
 } from '../tools/websocket/upload/wsUploadEvents';
 import { MediaFile } from '../../domain/file';
 import { sendUploadEvent } from '../actions/sendUploadEvent';
+import { setUpfrontIdDeferred } from '../actions/setUpfrontIdDeferred';
 
 type CloudFetchingEventAction = HandleCloudFetchingEventAction<
   keyof WsUploadEvents
@@ -83,10 +82,9 @@ export const handleCloudFetchingEvent = (store: Store<State>) => (
     file: MediaFile,
     data: RemoteUploadEndPayload,
   ) => {
-    const { remoteUploads } = store.getState();
+    const { deferredIdUpfronts } = store.getState();
     const { uploadId, fileId } = data;
-    const remoteUpload = remoteUploads[uploadId];
-    const { tenant } = remoteUpload;
+    const deferred = deferredIdUpfronts[uploadId];
     const source = {
       id: fileId,
       collection: RECENTS_COLLECTION,
@@ -96,8 +94,13 @@ export const handleCloudFetchingEvent = (store: Store<State>) => (
       id: fileId,
     };
 
-    store.dispatch(finalizeUpload(uploadedFile, uploadId, source, tenant));
-    store.dispatch(getPreview(uploadId, uploadedFile, RECENTS_COLLECTION));
+    if (deferred) {
+      const { rejecter, resolver } = deferred;
+      // We asociate the uploadId with the public fileId on the user collection
+      store.dispatch(setUpfrontIdDeferred(fileId, resolver, rejecter));
+    }
+
+    store.dispatch(finalizeUpload(uploadedFile, uploadId, source));
   };
 
   // Handle cloud upload fail

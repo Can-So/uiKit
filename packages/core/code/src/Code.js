@@ -1,36 +1,55 @@
 // @flow
 import React, { PureComponent } from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter/prism-light';
+import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+
 import { withTheme, ThemeProvider } from 'styled-components';
 import {
   normalizeLanguage,
-  type ADFSupportedLanguages,
+  type SupportedLanguages,
 } from './supportedLanguages';
 import { type Theme, type ThemeProps, applyTheme } from './themes/themeBuilder';
 
 type CodeProps = {
+  /** The style object to apply to code */
+  codeStyle?: {},
+  /** The element or custom react component to use in place of the default code tag */
+  codeTagProps?: {},
+  /** The language in which the code is written */
+  language: SupportedLanguages | string,
+  /** The style object to apply to the container that shows line number */
+  lineNumberContainerStyle: {},
+  /** The element or custom react component to use in place of the default span tag */
+  preTag: Node | string,
+  /** Indicates whether or not to show line numbers */
+  showLineNumbers: boolean,
   /** The code to be formatted */
   text: string,
-  /** The language in which the code is written */
-  language?: ADFSupportedLanguages | string,
   /** A custom theme to be applied, implements the Theme interface */
   theme?: Theme | ThemeProps,
 };
 
 export class Code extends PureComponent<CodeProps, {}> {
   static defaultProps = {
-    language: '',
     theme: {},
+    showLineNumbers: false,
+    lineNumberContainerStyle: {},
+    codeTagProps: {},
+    preTag: 'span',
   };
 
   render() {
     const { inlineCodeStyle } = applyTheme(this.props.theme);
+    const language = normalizeLanguage(this.props.language);
+
     const props = {
-      language: normalizeLanguage(this.props.language),
-      PreTag: 'span',
-      style: inlineCodeStyle,
-      showLineNumbers: false,
+      language,
+      PreTag: this.props.preTag,
+      style: this.props.codeStyle || inlineCodeStyle,
+      showLineNumbers: this.props.showLineNumbers,
+      lineNumberContainerStyle: this.props.lineNumberContainerStyle,
+      codeTagProps: this.props.codeTagProps,
     };
+
     return <SyntaxHighlighter {...props}>{this.props.text}</SyntaxHighlighter>;
   }
 }

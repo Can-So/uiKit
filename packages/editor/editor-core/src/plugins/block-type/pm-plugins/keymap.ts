@@ -10,7 +10,7 @@ import { trackAndInvoke } from '../../../analytics';
 import * as blockTypes from '../types';
 import {
   insertBlockType,
-  removeEmptyHeadingAtStartOfDocument,
+  cleanUpAtTheStartOfDocument,
 } from '../../block-type/commands';
 
 const analyticsEventName = (blockTypeName: string, eventSource: string) =>
@@ -65,7 +65,7 @@ export default function keymapPlugin(schema: Schema): Plugin {
 
   keymaps.bindKeymapWithCommand(
     keymaps.backspace.common!,
-    removeEmptyHeadingAtStartOfDocument,
+    cleanUpAtTheStartOfDocument,
     list,
   );
 
@@ -80,7 +80,9 @@ export default function keymapPlugin(schema: Schema): Plugin {
     blockTypes.BLOCK_QUOTE,
   ].forEach(blockType => {
     if (schema.nodes[blockType.nodeName]) {
-      const shortcut = keymaps.findShortcutByDescription(blockType.title);
+      const shortcut = keymaps.findShortcutByDescription(
+        blockType.title.defaultMessage,
+      );
       if (shortcut) {
         const eventName = analyticsEventName(blockType.name, 'keyboard');
         keymaps.bindKeymapWithCommand(

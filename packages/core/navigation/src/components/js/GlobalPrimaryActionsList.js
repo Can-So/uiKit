@@ -29,10 +29,9 @@ export default class GlobalPrimaryActionsList extends PureComponent<Props> {
   render() {
     return (
       <div>
-        {this.props.actions.map(
-          (action, index) =>
-            // eslint-disable-next-line react/no-array-index-key
-            index < maxPrimaryItems ? <div key={index}>{action}</div> : null,
+        {this.props.actions.map((action, index) =>
+          // eslint-disable-next-line react/no-array-index-key
+          index < maxPrimaryItems ? <div key={index}>{action}</div> : null,
         )}
       </div>
     );

@@ -7,15 +7,24 @@ export interface ProviderProps {
   children: React.ReactElement<any>;
 }
 
-export class Provider extends React.Component<ProviderProps> {
-  static defaultClient: Client = new Client();
+const defaultClient: Client = new Client();
 
+export class Provider extends React.Component<ProviderProps> {
   render() {
     const { client, children } = this.props;
+
+    // Note: the provider is also a consumer which passes through a client from
+    // parent context in case a Card is wrapped with multiple Providers.
     return (
-      <Context.Provider value={client || Provider.defaultClient}>
-        {children}
-      </Context.Provider>
+      <Context.Consumer>
+        {clientFromParentContext => (
+          <Context.Provider
+            value={client || clientFromParentContext || defaultClient}
+          >
+            {children}
+          </Context.Provider>
+        )}
+      </Context.Consumer>
     );
   }
 }

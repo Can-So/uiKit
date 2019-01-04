@@ -16,7 +16,7 @@ export default function getRuleNodeView(
   }
 }
 
-export function createRuleNode(input: string, schema: Schema): PMNode[] {
+export function createRuleNode(schema: Schema): PMNode[] {
   const { rule } = schema.nodes;
 
   const ruleNode = rule.createChecked();

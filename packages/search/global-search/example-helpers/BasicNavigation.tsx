@@ -1,13 +1,11 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import Navigation, {
   AkGlobalItem,
-  AkCreateDrawer,
   AkSearchDrawer,
   presetThemes,
 } from '@atlaskit/navigation';
 import ArrowleftIcon from '@atlaskit/icon/glyph/arrow-left';
-import AtlassianIcon from '@atlaskit/icon/glyph/atlassian';
+import { AtlassianIcon } from '@atlaskit/logo';
 import SearchIcon from '@atlaskit/icon/glyph/search';
 import QuestionCircleIcon from '@atlaskit/icon/glyph/question-circle';
 import Avatar from '@atlaskit/avatar';
@@ -17,12 +15,12 @@ export interface Props {
 }
 
 export interface State {
-  openDrawer: string;
+  openDrawer: string | null;
 }
 
 export default class BasicNavigation extends React.Component<Props, State> {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
     this.state = {
       openDrawer: 'search',
     };
@@ -46,7 +44,7 @@ export default class BasicNavigation extends React.Component<Props, State> {
         globalTheme={presetThemes.global}
         containerTheme={presetThemes.container}
         isResizeable={true}
-        globalPrimaryIcon={<AtlassianIcon label="atl" size="large" />}
+        globalPrimaryIcon={<AtlassianIcon label="atl" size="medium" />}
         globalPrimaryItemHref="#"
         width={300}
         isOpen={true}
@@ -56,7 +54,7 @@ export default class BasicNavigation extends React.Component<Props, State> {
             isOpen={this.state.openDrawer === 'search'}
             key="search"
             onBackButton={this.closeDrawer}
-            primaryIcon={<AtlassianIcon label="atl" size="large" />}
+            primaryIcon={<AtlassianIcon label="atl" size="medium" />}
             backIcon={<ArrowleftIcon label="back" size="medium" />}
           >
             {this.props.searchDrawerContent}

@@ -3,8 +3,6 @@ import { Store } from 'react-redux';
 import { Observable } from 'rxjs/Observable';
 import { ContextFactory } from '@atlaskit/media-core';
 
-const baseUrl = 'some-api-url';
-
 export const mockState: State = {
   redirectUrl: 'some-redirect-url',
   view: {
@@ -22,33 +20,27 @@ export const mockState: State = {
   },
   accounts: [],
   recents: {
-    nextKey: 'some-recents-next-key',
     items: [],
   },
   selectedItems: [],
-  tenant: {
-    auth: {
-      clientId: 'some-tenant-client-id',
-      token: 'some-tenant-client-token',
-      baseUrl,
-    },
-    uploadParams: {},
-  },
   lastUploadIndex: 0,
   uploads: {},
   remoteUploads: {},
   isCancelling: false,
   isUploading: false,
-  userAuthProvider: jest.fn().mockReturnValue(Promise.resolve({})),
   giphy: {
     imageCardModels: [],
     totalResultCount: 100,
   },
   onCancelUpload: jest.fn(),
-  context: ContextFactory.create({
+  tenantContext: ContextFactory.create({
+    authProvider: jest.fn(),
+  }),
+  userContext: ContextFactory.create({
     authProvider: jest.fn(),
   }),
   config: {},
+  deferredIdUpfronts: {},
 };
 
 export const mockStore = (state?: Partial<State>) => ({
@@ -56,7 +48,7 @@ export const mockStore = (state?: Partial<State>) => ({
   getState: jest.fn().mockReturnValue({
     ...mockState,
     ...state,
-  }),
+  }) as () => State,
   subscribe: jest.fn(),
   replaceReducer: jest.fn(),
 });

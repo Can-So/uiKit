@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 import { MediaType, ImageResizeMode } from '@atlaskit/media-core';
 
 import { CardDimensions, CardStatus } from '../../index';
@@ -9,6 +9,7 @@ import { UploadingView } from '../../utils/uploadingView';
 import { CardContent } from './cardContent';
 import { CardOverlay } from './cardOverlay';
 import { Wrapper } from './styled';
+import { isLoadingImage } from '../../utils/isLoadingImage';
 
 export interface FileCardImageViewProps {
   readonly mediaName?: string;
@@ -26,10 +27,11 @@ export interface FileCardImageViewProps {
   readonly selectable?: boolean;
   readonly selected?: boolean;
 
-  readonly error?: string;
+  readonly error?: ReactNode;
 
   readonly actions?: Array<CardAction>;
   readonly onRetry?: () => void;
+  readonly previewOrientation?: number;
 }
 
 export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
@@ -39,8 +41,13 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
   };
 
   private isDownloadingOrProcessing() {
-    const { status } = this.props;
-    return status === 'loading' || status === 'processing';
+    const { status, dataURI, mediaType } = this.props;
+
+    return (
+      status === 'loading' ||
+      status === 'processing' ||
+      isLoadingImage(mediaType, dataURI)
+    );
   }
 
   render() {
@@ -58,17 +65,18 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
   }
 
   private getCardContents = (): Array<JSX.Element> | JSX.Element => {
-    const { error, status } = this.props;
+    const { status } = this.props;
 
-    if (error) {
-      return this.getErrorContents();
+    switch (status) {
+      case 'error':
+        return this.getErrorContents();
+      case 'failed-processing':
+        return this.getFailedContents();
+      case 'uploading':
+        return this.getUploadingContents();
+      default:
+        return this.getSuccessCardContents();
     }
-
-    if (status === 'uploading') {
-      return this.getUploadingContents();
-    }
-
-    return this.getSuccessCardContents();
   };
 
   private getErrorContents = (): JSX.Element => {
@@ -90,6 +98,24 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
           mediaType={mediaType}
           error={error}
           onRetry={onRetry}
+          actions={actions}
+          subtitle={fileSize}
+        />
+      </>
+    );
+  };
+
+  private getFailedContents = () => {
+    const { mediaName, mediaType, actions, fileSize } = this.props;
+
+    return (
+      <>
+        <div className="wrapper" />
+        <CardOverlay
+          noHover={true}
+          persistent={true}
+          mediaName={mediaName}
+          mediaType={mediaType}
           actions={actions}
           subtitle={fileSize}
         />
@@ -131,7 +157,12 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
   };
 
   private getSuccessCardContents = (): JSX.Element => {
-    const { mediaType, dataURI, disableOverlay } = this.props;
+    const {
+      mediaType,
+      dataURI,
+      disableOverlay,
+      previewOrientation,
+    } = this.props;
     const overlay =
       this.isDownloadingOrProcessing() || disableOverlay
         ? null
@@ -146,6 +177,8 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
             mediaType={mediaType}
             dataURI={dataURI}
             crop={this.isCropped}
+            stretch={this.isStretched}
+            previewOrientation={previewOrientation}
           />
         </div>
         {overlay}
@@ -182,6 +215,12 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
     const { resizeMode } = this.props;
 
     return resizeMode === 'crop';
+  }
+
+  get isStretched() {
+    const { resizeMode } = this.props;
+
+    return resizeMode === 'stretchy-fit';
   }
 }
 

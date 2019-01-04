@@ -1,5 +1,25 @@
 # @atlaskit/layer
 
+## 5.1.0
+- [minor] [f292408](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f292408):
+
+  - Replace copied popper.js by the actual popper.js library. In addition, mocking popper.js with jest
+
+## 5.0.10
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/docs@6.0.0
+
+## 5.0.9
+- [patch] [b332c91](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b332c91):
+
+  - upgrades verison of react-scrolllock to SSR safe version
+
+## 5.0.8
+- [patch] Adds missing implicit @babel/runtime dependency [b71751b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b71751b)
+
+## 5.0.7
+- [patch] Adds sideEffects: false to allow proper tree shaking [b5d6d04](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b5d6d04)
+
 ## 5.0.5
 - [patch] Implement left offset position to fixed-position layer [8242529](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8242529)
 - [none] Updated dependencies [8242529](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8242529)

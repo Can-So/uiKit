@@ -1,7 +1,9 @@
 // @flow
 import React from 'react';
 import { mount } from 'enzyme';
-import Pagination from '@atlaskit/pagination';
+import { UIAnalyticsEvent } from '@atlaskit/analytics-next';
+import Button from '@atlaskit/button';
+import Pagination from '../../managedPagination';
 import TableHead from '../../TableHead';
 import {
   EmptyViewContainer,
@@ -353,20 +355,18 @@ describe(name, () => {
           },
           expect.anything(),
         );
-        expect(onSetPage).toHaveBeenCalledWith(1);
+        expect(onSetPage).toHaveBeenCalledWith(1, undefined);
         expect(onSetPage).toHaveBeenCalledTimes(1);
       });
 
-      // TODO: @thejameskyle - Fails unexpectedly, fix test after sinon is removed from codebase.
-      it.skip('onSetPage', () => {
-        // eslint-disable-line jest/no-disabled-tests
+      it('onSetPage', () => {
         wrapper
           .find(Pagination)
           .find('button')
           .at(1)
           .simulate('click');
         expect(onSetPage).toHaveBeenCalledTimes(1);
-        expect(onSetPage).toHaveBeenCalledWith(1);
+        expect(onSetPage).toHaveBeenCalledWith(1, expect.any(UIAnalyticsEvent));
       });
     });
   });
@@ -506,4 +506,21 @@ describe(name, () => {
       ).toBe('Clinton');
     });
   });
+});
+
+test('should pass analytics event in setPage callback', () => {
+  const spy = jest.fn();
+  const wrapper = mount(
+    <DynamicTable head={head} rows={rows} rowsPerPage={1} onSetPage={spy} />,
+  );
+  wrapper
+    .find(Pagination)
+    .find(Button)
+    .last()
+    .simulate('click');
+  expect(spy).toHaveBeenCalledTimes(1);
+  expect(spy).toHaveBeenCalledWith(
+    expect.any(Number),
+    expect.any(UIAnalyticsEvent),
+  );
 });

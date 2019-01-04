@@ -1,19 +1,12 @@
 // @flow
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, type Node, type ElementType } from 'react';
 import rafSchedule from 'raf-schd';
 import ScrollLock from 'react-scrolllock';
 
 import Footer from './Footer';
 import Header from './Header';
 
-import type {
-  AppearanceType,
-  ChildrenType,
-  ComponentType,
-  FunctionType,
-  KeyboardOrMouseEvent,
-} from '../types';
+import type { AppearanceType, KeyboardOrMouseEvent } from '../types';
 import { Body, keylineHeight, Wrapper } from '../styled/Content';
 
 function getInitialState() {
@@ -29,7 +22,7 @@ type Props = {
     Buttons to render in the footer
   */
   actions?: Array<{
-    onClick?: FunctionType,
+    onClick?: Function,
     text?: string,
   }>,
   /**
@@ -39,19 +32,19 @@ type Props = {
   /**
     Component to render the body of the modal.
   */
-  body: ComponentType,
+  body: ElementType,
   /**
     Content of the modal
   */
-  children?: ChildrenType,
+  children?: Node,
   /**
     Component to render the header of the modal.
   */
-  header?: ComponentType,
+  header?: ElementType,
   /**
     Component to render the footer of the moda.l
   */
-  footer?: ComponentType,
+  footer?: ElementType,
   /**
     Function that will be called to initiate the exit transition.
   */
@@ -101,19 +94,10 @@ export default class Content extends Component<Props, State> {
     body: Body,
     isHeadingMultiline: true,
   };
-  static contextTypes = {
-    /** available when invoked within @atlaskit/layer-manager */
-    appId: PropTypes.string,
-  };
 
   escapeIsHeldDown: boolean = false;
   _isMounted: boolean = false;
   scrollContainer: HTMLElement | void;
-
-  constructor(props: Props, context: mixed) {
-    super(props, context);
-    this.determineKeylines = rafSchedule(this.determineKeylines);
-  }
 
   state: State = getInitialState();
 
@@ -161,7 +145,7 @@ export default class Content extends Component<Props, State> {
     }
   }
 
-  determineKeylines = () => {
+  determineKeylines = rafSchedule(() => {
     if (!this.scrollContainer) return;
 
     const { scrollTop, scrollHeight, clientHeight } = this.scrollContainer;
@@ -170,7 +154,7 @@ export default class Content extends Component<Props, State> {
     const showFooterKeyline = scrollTop <= scrollableDistance - keylineHeight;
 
     this.setState({ showHeaderKeyline, showFooterKeyline });
-  };
+  });
   getScrollContainer = (ref: HTMLElement) => {
     if (!ref) return;
     this.scrollContainer = ref;

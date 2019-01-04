@@ -1,20 +1,37 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { withAnalytics } from '@atlaskit/analytics';
 import { EditorView } from 'prosemirror-view';
-import { ProviderFactory, Transformer } from '@atlaskit/editor-common';
+import { intlShape, IntlShape, IntlProvider } from 'react-intl';
+
+import {
+  ProviderFactory,
+  Transformer,
+  BaseTheme,
+  WidthProvider,
+} from '@atlaskit/editor-common';
 import { getUiComponent } from './create-editor';
 import EditorActions from './actions';
-import { EditorProps } from './types';
+import { EditorProps } from './types/editor-props';
 import { ReactEditorView } from './create-editor';
 import { EventDispatcher } from './event-dispatcher';
 import EditorContext from './ui/EditorContext';
+import { WithCreateAnalyticsEvent } from './ui/WithCreateAnalyticsEvent';
 import { PortalProvider, PortalRenderer } from './ui/PortalProvider';
-import IntlMessageProvider from './ui/IntlMessageProvider';
-import messages from './i18n/messages';
+import { nextMajorVersion } from './version';
+import { Context as CardContext } from '@atlaskit/smart-card';
+import { createContextAdapter } from './nodeviews';
 
 export * from './types';
 
+type Context = {
+  editorActions?: EditorActions;
+  intl: IntlShape;
+};
+
+// allows connecting external React.Context through to nodeviews
+const ContextAdapter = createContextAdapter({
+  card: CardContext,
+});
 export default class Editor extends React.Component<EditorProps, {}> {
   static defaultProps: EditorProps = {
     appearance: 'message',
@@ -24,16 +41,13 @@ export default class Editor extends React.Component<EditorProps, {}> {
 
   static contextTypes = {
     editorActions: PropTypes.object,
-  };
-
-  context: {
-    editorActions?: EditorActions;
+    intl: intlShape,
   };
 
   private providerFactory: ProviderFactory;
   private editorActions: EditorActions;
 
-  constructor(props: EditorProps, context) {
+  constructor(props: EditorProps, context: Context) {
     super(props);
     this.providerFactory = new ProviderFactory();
     this.deprecationWarnings(props);
@@ -67,7 +81,7 @@ export default class Editor extends React.Component<EditorProps, {}> {
     );
     if (this.props.shouldFocus) {
       if (!instance.view.hasFocus()) {
-        setTimeout(() => {
+        window.setTimeout(() => {
           instance.view.focus();
         }, 0);
       }
@@ -75,10 +89,86 @@ export default class Editor extends React.Component<EditorProps, {}> {
   }
 
   private deprecationWarnings(props) {
-    if (props.hasOwnProperty('mediaProvider')) {
+    const nextVersion = nextMajorVersion();
+    const deprecatedProperties = {
+      mediaProvider: {
+        message:
+          'To pass media provider use media property – <Editor media={{ provider }} />',
+        type: 'removed',
+      },
+      allowTasksAndDecisions: {
+        message:
+          'To allow tasks and decisions use taskDecisionProvider – <Editor taskDecisionProvider={{ provider }} />',
+        type: 'removed',
+      },
+      allowPlaceholderCursor: {
+        type: 'removed',
+      },
+      allowInlineAction: {
+        type: 'removed',
+      },
+      allowConfluenceInlineComment: {
+        type: 'removed',
+      },
+      addonToolbarComponents: {
+        type: 'removed',
+      },
+      cardProvider: {
+        type: 'removed',
+      },
+      allowCodeBlocks: {
+        message:
+          'To disable codeBlocks use - <Editor allowBlockTypes={{ exclude: ["codeBlocks"] }} />',
+      },
+      allowLists: {},
+      allowHelpDialog: {},
+      allowGapCursor: {
+        type: 'removed',
+      },
+      allowUnsupportedContent: {
+        message: 'Deprecated. Defaults to true.',
+        type: 'removed',
+      },
+    };
+
+    Object.keys(deprecatedProperties).forEach(property => {
+      if (props.hasOwnProperty(property)) {
+        const meta = deprecatedProperties[property];
+        const type = meta.type || 'enabled by default';
+
+        // tslint:disable-next-line:no-console
+        console.warn(
+          `${property} property is deprecated. ${meta.message ||
+            ''} [Will be ${type} in editor-core@${nextVersion}]`,
+        );
+      }
+    });
+
+    if (!props.hasOwnProperty('appearance')) {
       // tslint:disable-next-line:no-console
       console.warn(
-        'mediaProvider property is deprecated. To pass media provider use media property – <Editor media={{ provider }} /> [Will be removed in editor-core@77.0.0]',
+        `The default appearance is changing from "message" to "comment", to main current behaviour use <Editor appearance="message" />. [Will be changed in editor-core@${nextVersion}]`,
+      );
+    }
+
+    if (
+      props.hasOwnProperty('quickInsert') &&
+      typeof props.quickInsert === 'boolean'
+    ) {
+      // tslint:disable-next-line:no-console
+      console.warn(
+        `quickInsert property is deprecated. [Will be enabled by default in editor-core@${nextVersion}]`,
+      );
+    }
+
+    if (
+      props.hasOwnProperty('allowTables') &&
+      typeof props.allowTables !== 'boolean' &&
+      !props.allowTables.advanced
+    ) {
+      // tslint:disable-next-line:no-console
+      console.warn(
+        `Advanced table options are deprecated (except isHeaderRowRequired) to continue using advanced table features use - <Editor allowTables={{ advanced: true }} /> [Will be changed in editor-core@${nextVersion}]`,
       );
     }
   }
@@ -177,7 +267,9 @@ export default class Editor extends React.Component<EditorProps, {}> {
     // to work around the PM editable being out of sync with
     // the document, force a DOM sync before calling onSave
     // if we've already started typing
+    // @ts-ignore
     if (view['inDOMChange']) {
+      // @ts-ignore
       view['inDOMChange'].finish(true);
     }
 
@@ -185,71 +277,92 @@ export default class Editor extends React.Component<EditorProps, {}> {
   };
 
   render() {
-    const Component = getUiComponent(this.props.appearance);
+    const Component = getUiComponent(this.props.appearance!);
 
     const overriddenEditorProps = {
       ...this.props,
       onSave: this.props.onSave ? this.handleSave : undefined,
     };
 
-    return (
-      <EditorContext editorActions={this.editorActions}>
-        <IntlMessageProvider messages={messages}>
-          <PortalProvider
-            render={portalProviderAPI => (
-              <>
-                <ReactEditorView
-                  editorProps={overriddenEditorProps}
-                  portalProviderAPI={portalProviderAPI}
-                  providerFactory={this.providerFactory}
-                  onEditorCreated={this.onEditorCreated}
-                  onEditorDestroyed={this.onEditorDestroyed}
-                  render={({ editor, view, eventDispatcher, config }) => (
-                    <Component
-                      disabled={this.props.disabled}
-                      editorActions={this.editorActions}
-                      editorDOMElement={editor}
-                      editorView={view}
-                      providerFactory={this.providerFactory}
-                      eventDispatcher={eventDispatcher}
-                      maxHeight={this.props.maxHeight}
-                      onSave={this.props.onSave ? this.handleSave : undefined}
-                      onCancel={this.props.onCancel}
-                      popupsMountPoint={this.props.popupsMountPoint}
-                      popupsBoundariesElement={
-                        this.props.popupsBoundariesElement
-                      }
-                      contentComponents={config.contentComponents}
-                      primaryToolbarComponents={config.primaryToolbarComponents}
-                      secondaryToolbarComponents={
-                        config.secondaryToolbarComponents
-                      }
-                      insertMenuItems={this.props.insertMenuItems}
-                      customContentComponents={this.props.contentComponents}
-                      customPrimaryToolbarComponents={
-                        this.props.primaryToolbarComponents
-                      }
-                      customSecondaryToolbarComponents={
-                        this.props.secondaryToolbarComponents
-                      }
-                      addonToolbarComponents={this.props.addonToolbarComponents}
-                      collabEdit={this.props.collabEdit}
-                    />
+    const editor = (
+      <WidthProvider>
+        <EditorContext editorActions={this.editorActions}>
+          <WithCreateAnalyticsEvent
+            render={createAnalyticsEvent => (
+              <ContextAdapter>
+                <PortalProvider
+                  render={portalProviderAPI => (
+                    <>
+                      <ReactEditorView
+                        editorProps={overriddenEditorProps}
+                        createAnalyticsEvent={createAnalyticsEvent}
+                        portalProviderAPI={portalProviderAPI}
+                        providerFactory={this.providerFactory}
+                        onEditorCreated={this.onEditorCreated}
+                        onEditorDestroyed={this.onEditorDestroyed}
+                        disabled={this.props.disabled}
+                        render={({ editor, view, eventDispatcher, config }) => (
+                          <BaseTheme
+                            dynamicTextSizing={
+                              this.props.allowDynamicTextSizing
+                            }
+                          >
+                            <Component
+                              disabled={this.props.disabled}
+                              editorActions={this.editorActions}
+                              editorDOMElement={editor}
+                              editorView={view}
+                              providerFactory={this.providerFactory}
+                              eventDispatcher={eventDispatcher}
+                              maxHeight={this.props.maxHeight}
+                              onSave={
+                                this.props.onSave ? this.handleSave : undefined
+                              }
+                              onCancel={this.props.onCancel}
+                              popupsMountPoint={this.props.popupsMountPoint}
+                              popupsBoundariesElement={
+                                this.props.popupsBoundariesElement
+                              }
+                              contentComponents={config.contentComponents}
+                              primaryToolbarComponents={
+                                config.primaryToolbarComponents
+                              }
+                              secondaryToolbarComponents={
+                                config.secondaryToolbarComponents
+                              }
+                              insertMenuItems={this.props.insertMenuItems}
+                              customContentComponents={
+                                this.props.contentComponents
+                              }
+                              customPrimaryToolbarComponents={
+                                this.props.primaryToolbarComponents
+                              }
+                              customSecondaryToolbarComponents={
+                                this.props.secondaryToolbarComponents
+                              }
+                              addonToolbarComponents={
+                                this.props.addonToolbarComponents
+                              }
+                              collabEdit={this.props.collabEdit}
+                            />
+                          </BaseTheme>
+                        )}
+                      />
+                      <PortalRenderer portalProviderAPI={portalProviderAPI} />
+                    </>
                   )}
                 />
-                <PortalRenderer portalProviderAPI={portalProviderAPI} />
-              </>
+              </ContextAdapter>
             )}
           />
-        </IntlMessageProvider>
-      </EditorContext>
+        </EditorContext>
+      </WidthProvider>
+    );
+
+    return this.context.intl ? (
+      editor
+    ) : (
+      <IntlProvider locale="en">{editor}</IntlProvider>
     );
   }
 }
-
-export const EditorWithAnalytics = withAnalytics<typeof Editor>(
-  Editor,
-  {},
-  {},
-  true,
-);

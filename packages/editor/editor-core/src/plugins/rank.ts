@@ -1,7 +1,10 @@
 export default {
   plugins: [
+    'inlineCursorTargetPlugin',
     'focusHandlerPlugin',
     'submitEditor',
+    'imageUpload',
+    'imageUploadInputRule',
     'paste',
     'pasteKeymap',
     'mention',
@@ -20,8 +23,11 @@ export default {
     'typeAhead',
     'typeAheadKeymap',
     'typeAheadInputRule',
+    // This should be always after `typeAheadKeymap` & `emojiKeymap`
+    'indentationKeymap',
     'lists',
     'textColor',
+    'alignmentPlugin',
     'listsInputRule',
     'listsKeymap',
     'codeBlock',
@@ -54,8 +60,6 @@ export default {
     'media',
     'mediaKeymap',
     'mediaSingleKeymap',
-    'imageUpload',
-    'imageUploadInputRule',
     'unsupportedContent',
     'jiraIssue',
     'fakeTextCursor',
@@ -77,6 +81,7 @@ export default {
     'width',
     'maxContentSize',
     'multilineContent',
+    'grid',
   ],
   nodes: [
     'doc',
@@ -120,6 +125,7 @@ export default {
     'blockCard',
   ],
   marks: [
+    // Inline marks
     'link',
     'confluenceInlineComment',
     'em',
@@ -129,9 +135,13 @@ export default {
     'subsup',
     'underline',
     'code',
-    'mentionQuery',
     'typeAheadQuery',
     'emojiQuery',
     'textColor',
+
+    // Block marks
+    'alignment',
+    'breakout',
+    'indentation',
   ],
 };

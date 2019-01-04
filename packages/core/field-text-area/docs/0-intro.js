@@ -3,9 +3,10 @@ import React from 'react';
 import { md, Example, Props, code } from '@atlaskit/docs';
 
 export default md`
-  ### Usage
 
   Provides a standard way to create a text-based form input with an associated label.
+
+  ## Usage
 
 ${code`
 import FieldTextArea, { FieldTextAreaStateless } from '@atlaskit/field-text-area';
@@ -17,6 +18,7 @@ import FieldTextArea, { FieldTextAreaStateless } from '@atlaskit/field-text-area
 
   ${(
     <Example
+      packageName="@atlaskit/field-text-area"
       Component={require('../examples/00-basic-usage').default}
       title="Basic"
       source={require('!!raw-loader!../examples/00-basic-usage')}
@@ -25,6 +27,7 @@ import FieldTextArea, { FieldTextAreaStateless } from '@atlaskit/field-text-area
 
   ${(
     <Example
+      packageName="@atlaskit/field-text-area"
       Component={require('../examples/01-stateless-example').default}
       title="Stateless Example"
       source={require('!!raw-loader!../examples/01-stateless-example')}
@@ -33,6 +36,7 @@ import FieldTextArea, { FieldTextAreaStateless } from '@atlaskit/field-text-area
 
   ${(
     <Example
+      packageName="@atlaskit/field-text-area"
       Component={require('../examples/02-form-example').default}
       title="Form Example"
       source={require('!!raw-loader!../examples/02-form-example')}

@@ -1,18 +1,18 @@
 // tslint:disable:no-console
 import * as React from 'react';
-import { PureComponent } from 'react';
 import {
   profilecard as profilecardUtils,
   emoji,
   taskDecision,
 } from '@atlaskit/util-data-test';
 import { CardEvent } from '@atlaskit/media-card';
+import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   CardSurroundings,
   ProviderFactory,
   ExtensionHandlers,
-  defaultSchema,
 } from '@atlaskit/editor-common';
+import Button from '@atlaskit/button';
 import {
   storyMediaProviderFactory,
   storyContextIdentifierProviderFactory,
@@ -29,6 +29,8 @@ import {
 import { AkProfileClient, modifyResponse } from '@atlaskit/profilecard';
 
 import { EmailSerializer, renderDocument, TextSerializer } from '../../src';
+
+import Sidebar, { getDefaultShowSidebarState } from './NavigationNext';
 
 const { getMockProfileClient: getMockProfileClientUtil } = profilecardUtils;
 const MockProfileClient = getMockProfileClientUtil(
@@ -154,10 +156,6 @@ const eventHandlers = {
       );
     },
   },
-  applicationCard: {
-    onClick: () => console.log('onClick'),
-    onActionClick: () => console.log('onActionClick'),
-  },
   action: {
     onClick: event => console.log('onClick', '[react.MouseEvent]', event),
   },
@@ -170,24 +168,26 @@ export interface DemoRendererProps {
   serializer: 'react' | 'text' | 'email';
   document?: object;
   appearance?: RendererAppearance;
+  maxHeight?: number;
+  truncationEnabled?: boolean;
+  allowDynamicTextSizing?: boolean;
 }
 
 export interface DemoRendererState {
   input: string;
   portal?: HTMLElement;
+  truncated: boolean;
+  showSidebar: boolean;
 }
 
-export default class RendererDemo extends PureComponent<
+export default class RendererDemo extends React.Component<
   DemoRendererProps,
   DemoRendererState
 > {
   textSerializer = new TextSerializer(defaultSchema);
   emailSerializer = new EmailSerializer();
   emailRef?: HTMLIFrameElement;
-
-  refs: {
-    input: HTMLTextAreaElement;
-  };
+  inputBox: HTMLTextAreaElement | null;
 
   constructor(props: DemoRendererProps) {
     super(props);
@@ -196,6 +196,8 @@ export default class RendererDemo extends PureComponent<
 
     this.state = {
       input: JSON.stringify(doc, null, 2),
+      truncated: true,
+      showSidebar: getDefaultShowSidebarState(false),
     };
   }
 
@@ -225,28 +227,36 @@ export default class RendererDemo extends PureComponent<
 
   render() {
     return (
-      <div ref="root" style={{ padding: 20 }}>
-        <fieldset style={{ marginBottom: 20 }}>
-          <legend>Input</legend>
-          <textarea
-            style={{
-              boxSizing: 'border-box',
-              border: '1px solid lightgray',
-              fontFamily: 'monospace',
-              fontSize: 16,
-              padding: 10,
-              width: '100%',
-              height: 320,
-            }}
-            ref="input"
-            onChange={this.onDocumentChange}
-            value={this.state.input}
-          />
-        </fieldset>
-        {this.renderRenderer()}
-        {this.renderText()}
-        {this.renderEmail()}
-      </div>
+      <Sidebar showSidebar={this.state.showSidebar}>
+        {additionalRendererProps => (
+          <div ref="root" style={{ padding: 20 }}>
+            <fieldset style={{ marginBottom: 20 }}>
+              <legend>Input</legend>
+              <textarea
+                id="renderer-value-input"
+                style={{
+                  boxSizing: 'border-box',
+                  border: '1px solid lightgray',
+                  fontFamily: 'monospace',
+                  fontSize: 16,
+                  padding: 10,
+                  width: '100%',
+                  height: 320,
+                }}
+                ref={ref => {
+                  this.inputBox = ref;
+                }}
+                onChange={this.onDocumentChange}
+                value={this.state.input}
+              />
+              <button onClick={this.toggleSidebar}>Toggle Sidebar</button>
+            </fieldset>
+            {this.renderRenderer(additionalRendererProps)}
+            {this.renderText()}
+            {this.renderEmail()}
+          </div>
+        )}
+      </Sidebar>
     );
   }
 
@@ -259,7 +269,7 @@ export default class RendererDemo extends PureComponent<
       const doc = JSON.parse(this.state.input);
       const html = renderDocument<string>(doc, this.emailSerializer).result;
 
-      if (this.emailRef && html) {
+      if (this.emailRef && this.emailRef.contentDocument && html) {
         this.emailRef.contentDocument.body.innerHTML = html;
       }
     } catch (ex) {
@@ -267,13 +277,19 @@ export default class RendererDemo extends PureComponent<
     }
   }
 
-  private renderRenderer() {
+  private toggleTruncated(e) {
+    this.setState(prevState => ({
+      truncated: !prevState.truncated,
+    }));
+  }
+
+  private renderRenderer(additionalRendererProps) {
     if (this.props.serializer !== 'react') {
       return null;
     }
 
     try {
-      const props: RendererProps = {
+      let props: RendererProps = {
         document: JSON.parse(this.state.input),
       };
 
@@ -291,14 +307,42 @@ export default class RendererDemo extends PureComponent<
       }
 
       props.appearance = this.props.appearance;
+      props.maxHeight = this.props.maxHeight;
+      props.truncated = this.props.truncationEnabled && this.state.truncated;
+      props.allowDynamicTextSizing = this.props.allowDynamicTextSizing;
+
+      if (additionalRendererProps) {
+        props = {
+          ...props,
+          ...additionalRendererProps,
+        };
+      }
+
+      const expandButton = (
+        <div>
+          <Button
+            appearance={'link'}
+            spacing={'none'}
+            onClick={e => this.toggleTruncated(e)}
+          >
+            {this.state.truncated ? 'Expand text' : 'Collapse text'}
+          </Button>
+          &nbsp;&middot;&nbsp;
+          <Button appearance={'link'} spacing={'none'}>
+            Do something else
+          </Button>
+        </div>
+      );
+
       return (
         <div>
           <div style={{ color: '#ccc', marginBottom: '8px' }}>
             &lt;Renderer&gt;
           </div>
           <div id="RendererOutput">
-            <Renderer {...props} useNewApplicationCard={true} />
+            <Renderer {...props} />
           </div>
+          {this.props.truncationEnabled ? expandButton : null}
           <div style={{ color: '#ccc', marginTop: '8px' }}>
             &lt;/Renderer&gt;
           </div>
@@ -354,6 +398,13 @@ export default class RendererDemo extends PureComponent<
     }
   }
 
-  private onDocumentChange = () =>
-    this.setState({ input: this.refs.input.value });
+  private toggleSidebar = () => {
+    this.setState(prevState => ({ showSidebar: !prevState.showSidebar }));
+  };
+
+  private onDocumentChange = () => {
+    if (this.inputBox) {
+      this.setState({ input: this.inputBox.value });
+    }
+  };
 }

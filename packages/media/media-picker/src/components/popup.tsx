@@ -1,13 +1,12 @@
-import { Context } from '@atlaskit/media-core';
+import { Context, ContextFactory } from '@atlaskit/media-core';
 import { Store } from 'redux';
 import * as React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-
+import * as exenv from 'exenv';
 import App, { AppProxyReactContext } from '../popup/components/app';
 import { cancelUpload } from '../popup/actions/cancelUpload';
 import { showPopup } from '../popup/actions/showPopup';
 import { resetView } from '../popup/actions/resetView';
-import { setTenant } from '../popup/actions/setTenant';
 import { getFilesInRecents } from '../popup/actions/getFilesInRecents';
 import { getConnectedRemoteAccounts } from '../popup/actions/getConnectedRemoteAccounts';
 import { State } from '../popup/domain';
@@ -21,13 +20,10 @@ import { UploadEventPayloadMap } from '../domain/uploadEvent';
 
 export interface PopupConfig {
   readonly container?: HTMLElement;
-  readonly uploadParams: UploadParams;
+  readonly uploadParams: UploadParams; // Tenant upload params
   readonly proxyReactContext?: AppProxyReactContext;
-  readonly useNewUploadService?: boolean;
   readonly singleSelect?: boolean;
 }
-
-export const USER_RECENTS_COLLECTION = 'recents';
 
 export interface PopupConstructor {
   new (context: Context, config: PopupConfig): Popup;
@@ -43,17 +39,16 @@ export interface PopupUploadEventEmitter extends UploadEventEmitter {
 
 export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   implements PopupUploadEventEmitter {
-  private readonly container: HTMLElement;
+  private readonly container?: HTMLElement;
   private readonly store: Store<State>;
-  private uploadParams: UploadParams;
+  private tenantUploadParams: UploadParams;
   private proxyReactContext?: AppProxyReactContext;
 
   constructor(
-    readonly context: Context,
+    readonly tenantContext: Context,
     {
-      container = document.body,
-      uploadParams,
-      useNewUploadService,
+      container = exenv.canUseDOM ? document.body : undefined,
+      uploadParams, // tenant
       proxyReactContext,
       singleSelect,
     }: PopupConfig,
@@ -61,55 +56,67 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
     super();
     this.proxyReactContext = proxyReactContext;
 
-    this.store = createStore(this, context, {
-      useNewUploadService,
-      singleSelect,
-    });
+    const { userAuthProvider, cacheSize } = tenantContext.config;
+    if (!userAuthProvider) {
+      throw new Error(
+        'When using Popup media picker userAuthProvider must be provided in the context',
+      );
+    }
 
-    this.uploadParams = {
+    const userContext = ContextFactory.create({
+      cacheSize,
+      authProvider: userAuthProvider,
+    });
+    const tenantUploadParams = {
       ...defaultUploadParams,
       ...uploadParams,
     };
 
+    this.store = createStore(this, tenantContext, userContext, {
+      proxyReactContext,
+      singleSelect,
+      uploadParams: tenantUploadParams,
+    });
+
+    this.tenantUploadParams = tenantUploadParams;
+
     const popup = this.renderPopup();
+    if (!popup) {
+      return;
+    }
 
     this.container = popup;
-    container.appendChild(popup);
-  }
-
-  public show(): Promise<void> {
-    return this.context.config
-      .authProvider({
-        collectionName: this.uploadParams.collection,
-      })
-      .then(auth => {
-        this.store.dispatch(
-          setTenant({
-            auth,
-            uploadParams: this.uploadParams,
-          }),
-        );
-
-        this.store.dispatch(resetView());
-        this.store.dispatch(getFilesInRecents());
-        // TODO [MSW-466]: Fetch remote accounts only when needed
-        this.store.dispatch(getConnectedRemoteAccounts());
-
-        this.store.dispatch(showPopup());
-      });
-  }
-
-  public cancel(uniqueIdentifier?: string): void {
-    if (uniqueIdentifier === undefined) {
-      // TODO Make popup able to accept undefined and cancel all the inflight uploads (MSW-691)
-      throw new Error(
-        "Popup doesn't support canceling without a unique identifier",
-      );
+    if (container) {
+      container.appendChild(popup);
     }
-    this.store.dispatch(cancelUpload({ tenantUploadId: uniqueIdentifier }));
+  }
+
+  public async show(): Promise<void> {
+    const { dispatch } = this.store;
+
+    dispatch(resetView());
+    dispatch(getFilesInRecents());
+    // TODO [MSW-466]: Fetch remote accounts only when needed
+    dispatch(getConnectedRemoteAccounts());
+    dispatch(showPopup());
+  }
+
+  public async cancel(
+    uniqueIdentifier?: string | Promise<string>,
+  ): Promise<void> {
+    if (!uniqueIdentifier) {
+      return;
+    }
+
+    this.store.dispatch(
+      cancelUpload({ tenantUploadId: await uniqueIdentifier }),
+    );
   }
 
   public teardown(): void {
+    if (!this.container) {
+      return;
+    }
     unmountComponentAtNode(this.container);
   }
 
@@ -118,7 +125,7 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
   }
 
   public setUploadParams(uploadParams: UploadParams): void {
-    this.uploadParams = {
+    this.tenantUploadParams = {
       ...defaultUploadParams,
       ...uploadParams,
     };
@@ -128,10 +135,18 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
     this.emit('closed', undefined);
   }
 
-  private renderPopup(): HTMLElement {
+  private renderPopup(): HTMLElement | undefined {
+    if (!exenv.canUseDOM) {
+      return;
+    }
     const container = document.createElement('div');
+
     render(
-      <App store={this.store} proxyReactContext={this.proxyReactContext} />,
+      <App
+        store={this.store}
+        proxyReactContext={this.proxyReactContext}
+        tenantUploadParams={this.tenantUploadParams}
+      />,
       container,
     );
     return container;

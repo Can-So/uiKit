@@ -3,6 +3,8 @@ import 'jest-styled-components';
 import snakeCase from 'snake-case';
 import { toMatchSnapshot } from 'jest-snapshot';
 import { configureToMatchImageSnapshot } from 'jest-image-snapshot';
+import * as emotion from 'emotion';
+import { createSerializer } from 'jest-emotion';
 
 let consoleError;
 let consoleWarn;
@@ -17,6 +19,11 @@ if (global.URL) {
 if (!global.WEBSITE_ENV) {
   global.WEBSITE_ENV = 'local';
 }
+
+// Node promise rejection are now logged for debbugging
+process.on('unhandledRejection', reason => {
+  console.log('REJECTION', reason);
+});
 
 /*
   This file is executed after the test framework is setup for each test file. Addons that modify
@@ -232,15 +239,15 @@ expect.extend({
   toMatchDocSnapshot(actual) {
     const { currentTestName, snapshotState } = this;
 
-    const removeLastWord = sentence =>
+    const removeFirstWord = sentence =>
       sentence
         .split(' ')
-        .slice(0, -1)
+        .slice(1)
         .join(' ');
 
-    // we append the browser name to the end of the test, so remove it so
-    // all the individual browser snapshots map to the same one
-    const newTestName = removeLastWord(currentTestName);
+    // this change is to ensure we are mentioning test file name only once in snapshot file
+    // for integration tests only
+    const newTestName = removeFirstWord(currentTestName);
 
     // remove ids that may change from the document so snapshots are repeatable
     const transformedDoc = removeIdsFromDoc(actual);
@@ -316,15 +323,23 @@ if (process.env.CI) {
   });
 }
 
+expect.addSnapshotSerializer(createSerializer(emotion));
+
 // set up for visual regression
 if (process.env.VISUAL_REGRESSION) {
   const puppeteer = require('puppeteer');
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 
   beforeAll(async () => {
+    // show browser when watch is enabled
+    const isWatch = process.env.WATCH === 'true';
+    let headless = true;
+    if (isWatch) {
+      headless = false;
+    }
     global.browser = await puppeteer.launch({
       // run test in headless mode
-      headless: true,
+      headless: headless,
       slowMo: 100,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
@@ -335,8 +350,10 @@ if (process.env.VISUAL_REGRESSION) {
     await global.browser.close();
   });
 
+  // TODO tweak failureThreshold to provide best results
+  // TODO: A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
   const toMatchProdImageSnapshot = configureToMatchImageSnapshot({
-    customDiffConfig: { threshold: 0.2 },
+    customDiffConfig: { threshold: 0.3 },
     noColors: true,
   });
 

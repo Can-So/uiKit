@@ -8,8 +8,9 @@ import {
   taskItem,
   taskList,
   uuid,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
 import { EditorPlugin } from '../../types';
+import { messages as insertBlockMessages } from '../insert-block/ui/ToolbarInsertBlock';
 import { createPlugin } from './pm-plugins/main';
 import inputRulePlugin from './pm-plugins/input-rules';
 import keymap from './pm-plugins/keymaps';
@@ -36,12 +37,7 @@ const tasksAndDecisionsPlugin: EditorPlugin = {
       {
         name: 'tasksAndDecisions',
         plugin: ({ schema, props, portalProviderAPI, providerFactory }) => {
-          const { delegateAnalyticsEvent } = props;
-          return createPlugin(
-            portalProviderAPI,
-            { delegateAnalyticsEvent },
-            providerFactory,
-          );
+          return createPlugin(portalProviderAPI, providerFactory);
         },
       },
       {
@@ -73,12 +69,14 @@ const tasksAndDecisionsPlugin: EditorPlugin = {
   },
 
   pluginsOptions: {
-    quickInsert: [
+    quickInsert: ({ formatMessage }) => [
       {
-        title: 'Action',
+        title: formatMessage(insertBlockMessages.action),
         priority: 100,
-        keywords: ['task'],
-        icon: () => <EditorTaskIcon label="Action" />,
+        keywords: ['checkbox', 'task', 'todo'],
+        icon: () => (
+          <EditorTaskIcon label={formatMessage(insertBlockMessages.action)} />
+        ),
         action(insert, state) {
           return insert(
             state.schema.nodes.taskList.createChecked(
@@ -91,9 +89,13 @@ const tasksAndDecisionsPlugin: EditorPlugin = {
         },
       },
       {
-        title: 'Decision',
+        title: formatMessage(insertBlockMessages.decision),
         priority: 900,
-        icon: () => <EditorDecisionIcon label="Insert Decision" />,
+        icon: () => (
+          <EditorDecisionIcon
+            label={formatMessage(insertBlockMessages.decision)}
+          />
+        ),
         action(insert, state) {
           return insert(
             state.schema.nodes.decisionList.createChecked(

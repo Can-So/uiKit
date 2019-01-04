@@ -7,7 +7,11 @@ import {
 import HomeSearchResults from '../../../components/home/HomeSearchResults';
 import { Result } from '../../../model/Result';
 import GlobalQuickSearch from '../../../components/GlobalQuickSearch';
-import { Scope } from '../../../api/CrossProductSearchClient';
+import {
+  CrossProductSearchResults,
+  EMPTY_CROSS_PRODUCT_SEARCH_RESPONSE,
+} from '../../../api/CrossProductSearchClient';
+import { Scope } from '../../../api/types';
 import { delay, makeJiraObjectResult } from '../_test-util';
 import {
   noResultsPeopleSearchClient,
@@ -24,7 +28,7 @@ import {
   errorRecentSearchClient,
 } from '../mocks/_mockRecentSearchClient';
 
-function searchFor(query: string, wrapper: ShallowWrapper) {
+function searchFor(query: string, wrapper: ShallowWrapper<any, any>) {
   const quicksearch = wrapper.find(GlobalQuickSearch);
   const onSearchFn = quicksearch.prop('onSearch') as Function;
   onSearchFn(query);
@@ -35,7 +39,10 @@ function searchFor(query: string, wrapper: ShallowWrapper) {
  * This component uses a lot of internal state and async calls.
  * Make sure we wait for next tick and then force render update for React 16.
  */
-async function waitForRender(wrapper: ShallowWrapper, millis?: number) {
+async function waitForRender(
+  wrapper: ShallowWrapper<any, any>,
+  millis?: number,
+) {
   await delay(millis);
   wrapper.update();
 }
@@ -166,7 +173,9 @@ describe('HomeQuickSearchContainer', () => {
       return delay(5, [makeJiraObjectResult()]);
     }
 
-    function searchCrossProduct(query: string): Promise<Map<Scope, Result[]>> {
+    function searchCrossProduct(
+      query: string,
+    ): Promise<CrossProductSearchResults> {
       return delay(
         5,
         makeSingleResultCrossProductSearchResponse(Scope.JiraIssue),
@@ -174,6 +183,7 @@ describe('HomeQuickSearchContainer', () => {
     }
 
     const mockSearchClient = {
+      getAbTestData: jest.fn(),
       search: jest.fn(searchCrossProduct),
     };
 
@@ -205,7 +215,7 @@ describe('HomeQuickSearchContainer', () => {
       5. Make sure the fast result is displayed and not the delayed result
     */
 
-    function searchDelayed(query: string): Promise<Map<Scope, Result[]>> {
+    function searchDelayed(query: string): Promise<CrossProductSearchResults> {
       return delay(
         5,
         makeSingleResultCrossProductSearchResponse(
@@ -215,7 +225,7 @@ describe('HomeQuickSearchContainer', () => {
       );
     }
 
-    function searchCurrent(query: string): Promise<Map<Scope, Result[]>> {
+    function searchCurrent(query: string): Promise<CrossProductSearchResults> {
       return Promise.resolve(
         makeSingleResultCrossProductSearchResponse(
           Scope.JiraIssue,
@@ -230,6 +240,7 @@ describe('HomeQuickSearchContainer', () => {
       .mockImplementationOnce(searchCurrent);
 
     const mockSearchClient = {
+      getAbTestData: jest.fn(),
       search: searchMock,
     };
 
@@ -292,9 +303,12 @@ describe('HomeQuickSearchContainer', () => {
       const searchMock = jest
         .fn()
         .mockImplementationOnce((query: string) => Promise.reject('error'))
-        .mockImplementationOnce((query: string) => Promise.resolve(new Map()));
+        .mockImplementationOnce((query: string) =>
+          Promise.resolve(EMPTY_CROSS_PRODUCT_SEARCH_RESPONSE),
+        );
 
       const mockSearchClient = {
+        getAbTestData: jest.fn(),
         search: searchMock,
       };
 

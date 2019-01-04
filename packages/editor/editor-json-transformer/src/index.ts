@@ -3,12 +3,13 @@ import {
   defaultSchema,
   linkToJSON,
   mediaToJSON,
+  mediaSingleToJSON,
   mentionToJSON,
   tableToJSON,
   toJSONTableCell,
   toJSONTableHeader,
-  Transformer,
-} from '@atlaskit/editor-common';
+} from '@atlaskit/adf-schema';
+import { Transformer } from '@atlaskit/editor-common';
 import { Node as PMNode, Mark as PMMark } from 'prosemirror-model';
 
 export type JSONNode = {
@@ -25,14 +26,21 @@ export type JSONDocNode = {
   content: JSONNode[];
 };
 
-const isCodeBlock = (node: PMNode) => node.type.name === 'codeBlock';
-const isMediaNode = (node: PMNode) => node.type.name === 'media';
-const isMentionNode = (node: PMNode) => node.type.name === 'mention';
-const isParagraph = (node: PMNode) => node.type.name === 'paragraph';
-const isTable = (node: PMNode) => node.type.name === 'table';
-const isTableCell = (node: PMNode) => node.type.name === 'tableCell';
-const isTableHeader = (node: PMNode) => node.type.name === 'tableHeader';
-const isLinkMark = (mark: PMMark) => mark.type.name === 'link';
+const isType = (type: string) => (node: PMNode | PMMark) =>
+  node.type.name === type;
+
+const isCodeBlock = isType('codeBlock');
+const isMediaNode = isType('media');
+const isMediaSingleNode = isType('mediaSingle');
+const isMentionNode = isType('mention');
+const isParagraph = isType('paragraph');
+const isHeading = isType('heading');
+const isTable = isType('table');
+const isTableCell = isType('tableCell');
+const isTableHeader = isType('tableHeader');
+const isLinkMark = isType('link');
+const isUnsupportedNode = (node: PMNode) =>
+  isType('unsupportedBlock')(node) || isType('unsupportedInline')(node);
 
 const filterNull = subject => {
   return Object.keys(subject).reduce((acc, key) => {
@@ -52,8 +60,12 @@ const filterNull = subject => {
 
 const toJSON = (node: PMNode): JSONNode => {
   const obj: JSONNode = { type: node.type.name };
-  if (isMediaNode(node)) {
+  if (isUnsupportedNode(node)) {
+    return node.attrs.originalValue;
+  } else if (isMediaNode(node)) {
     obj.attrs = mediaToJSON(node).attrs;
+  } else if (isMediaSingleNode(node)) {
+    obj.attrs = mediaSingleToJSON(node).attrs;
   } else if (isMentionNode(node)) {
     obj.attrs = mentionToJSON(node).attrs;
   } else if (isCodeBlock(node)) {
@@ -81,8 +93,7 @@ const toJSON = (node: PMNode): JSONNode => {
     });
   }
 
-  if (isParagraph(node)) {
-    // Paragraph shall always has a content
+  if (isParagraph(node) || isHeading(node)) {
     obj.content = obj.content || [];
   }
 

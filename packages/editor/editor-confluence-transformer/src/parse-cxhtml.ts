@@ -6,7 +6,7 @@ export default function(xhtml: string): Document {
   const nsHtml = `<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ac="${AC_XMLNS}" xmlns:ri="${RI_XMLNS}" xmlns:fab="${FAB_XMLNS}"><body>${xhtml}</body></html>`;
   const parser: DOMParser = new (window as any).DOMParser();
   const tree = parser.parseFromString(nsHtml, 'application/xhtml+xml');
-  collapse(tree.documentElement, isBlock, isPre);
+  collapse(tree.documentElement!, isBlock, isPre);
   return tree;
 }
 

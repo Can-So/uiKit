@@ -1,12 +1,18 @@
 // @flow
 import React from 'react';
 import { md, Props } from '@atlaskit/docs';
-
-// AkCollapseOverflow
-// AkCollapseOverflowItem
-// AkCollapseOverflowItemGroup
+import SectionMessage from '@atlaskit/section-message';
 
 export default md`
+  ${(
+    <SectionMessage appearance="error">
+      <p>
+        <strong>Note: @atlaskit/navigation is now deprecated.</strong>
+      </p>
+      <p>We recommend upgrading to @atlaskit/navigation-next</p>
+    </SectionMessage>
+  )}
+
   The components provided here are designed to be used within the container
   navigation to ensure the correct stylistic behaviour for items within them.
 
@@ -17,7 +23,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkNavigationItem"
+      heading="AkNavigationItem Props"
       props={require('!!extract-react-types-loader!../src/components/js/NavigationItem.js')}
     />
   )}
@@ -25,7 +31,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkNavigationItemGroup"
+      heading="AkNavigationItemGroup Props"
       props={require('!!extract-react-types-loader!../src/components/js/NavigationItemGroup.js')}
     />
   )}
@@ -33,7 +39,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkContainerTitle"
+      heading="AkContainerTitle Props"
       props={require('!!extract-react-types-loader!../src/components/js/ContainerTitle.js')}
     />
   )}
@@ -41,7 +47,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkContainerLogo"
+      heading="AkContainerLogo Props"
       props={require('!!extract-react-types-loader!../src/components/js/ContainerLogo.js')}
     />
   )}
@@ -49,7 +55,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkContainerTitleDropdown"
+      heading="AkContainerTitleDropdown Props"
       props={require('!!extract-react-types-loader!../src/components/js/ContainerTitleDropdown.js')}
     />
   )}
@@ -57,7 +63,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkContainerNavigation"
+      heading="AkContainerNavigation Props"
       props={require('!!extract-react-types-loader!../src/components/js/ContainerNavigation.js')}
     />
   )}
@@ -65,7 +71,7 @@ export default md`
   ${(
     <Props
       shouldCollapseProps
-      heading="AkContainerNavigationNested"
+      heading="AkContainerNavigationNested Props"
       props={require('!!extract-react-types-loader!../src/components/js/nested/ContainerNavigationNested.js')}
     />
   )}

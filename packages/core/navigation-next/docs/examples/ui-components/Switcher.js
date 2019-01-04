@@ -5,11 +5,14 @@ import { colors } from '@atlaskit/theme';
 import ChevD from '@atlaskit/icon/glyph/chevron-down';
 import {
   ContainerHeader,
-  GroupHeading,
   Item,
   ItemAvatar,
+  SectionHeading,
   Switcher,
+  NavigationProvider,
 } from '../../../src';
+
+import { CONTENT_NAV_WIDTH } from '../../../src/common/constants';
 
 const Wrapper = (props: *) => (
   <div
@@ -17,7 +20,7 @@ const Wrapper = (props: *) => (
       backgroundColor: colors.N20,
       boxSizing: 'border-box',
       padding: '16px',
-      width: '270px ',
+      width: `${CONTENT_NAV_WIDTH}px`,
     }}
     {...props}
   />
@@ -97,7 +100,7 @@ export default class extends React.Component<*, State> {
     },
     text: 'Create board',
   });
-  target = (selected: *) => {
+  target = ({ id, subText, text }: *) => {
     const avatar = s => (
       <ItemAvatar
         appearance="square"
@@ -108,7 +111,15 @@ export default class extends React.Component<*, State> {
       />
     );
 
-    return <ContainerHeader before={avatar} after={ChevD} {...selected} />;
+    return (
+      <ContainerHeader
+        before={avatar}
+        after={ChevD}
+        id={id}
+        subText={subText}
+        text={text}
+      />
+    );
   };
   onChange = (selected: *) => {
     this.setState({ selected });
@@ -116,17 +127,21 @@ export default class extends React.Component<*, State> {
   render() {
     const { selected } = this.state;
     return (
-      <Wrapper>
-        <Switcher
-          create={this.create()}
-          onChange={this.onChange}
-          options={projects}
-          target={this.target(selected)}
-          value={selected}
-        />
-        <GroupHeading>Section title</GroupHeading>
-        {items.map(p => <Item key={p.text} {...p} />)}
-      </Wrapper>
+      <NavigationProvider>
+        <Wrapper>
+          <Switcher
+            create={this.create()}
+            onChange={this.onChange}
+            options={projects}
+            target={this.target(selected)}
+            value={selected}
+          />
+          <SectionHeading>Section heading</SectionHeading>
+          {items.map(p => (
+            <Item key={p.text} {...p} />
+          ))}
+        </Wrapper>
+      </NavigationProvider>
     );
   }
 }

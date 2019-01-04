@@ -4,19 +4,20 @@ import {
   Popup,
   timestampToUTCDate,
   timestampToIsoFormat,
-  akEditorFloatingPanelZIndex,
+  akEditorFloatingDialogZIndex,
 } from '@atlaskit/editor-common';
 import Calendar from '@atlaskit/calendar';
-import { akColorN60A, akBorderRadius } from '@atlaskit/util-shared-styles';
+import { colors, borderRadius } from '@atlaskit/theme';
 import withOuterListeners from '../../../../ui/with-outer-listeners';
 import { DateType } from '../../index';
 
 const PopupWithListeners = withOuterListeners(Popup);
 
 const calendarStyle = {
-  padding: akBorderRadius,
-  borderRadius: akBorderRadius,
-  boxShadow: `0 4px 8px -2px ${akColorN60A}, 0 0 1px ${akColorN60A}`,
+  padding: borderRadius(),
+  borderRadius: borderRadius(),
+  boxShadow: `0 4px 8px -2px ${colors.N60A}, 0 0 1px ${colors.N60A}`,
+  backgroundColor: colors.N0,
 };
 
 export interface Props {
@@ -59,9 +60,11 @@ export default class DatePicker extends React.Component<Props, State> {
       <PopupWithListeners
         target={element!}
         offset={[0, 8]}
+        fitHeight={327}
+        fitWidth={340}
         handleClickOutside={closeDatePicker}
         handleEscapeKeydown={closeDatePicker}
-        zIndex={akEditorFloatingPanelZIndex + 1}
+        zIndex={akEditorFloatingDialogZIndex}
       >
         <Calendar
           onChange={this.handleChange}

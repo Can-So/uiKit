@@ -1,8 +1,19 @@
+import { ABTest } from '../api/CrossProductSearchClient';
+import { FormattedMessage } from 'react-intl';
+
 export enum ResultType {
   JiraObjectResult = 'jira-object-result',
+  JiraProjectResult = 'jira-project-result',
   GenericContainerResult = 'generic-container-result',
   PersonResult = 'person-result',
   ConfluenceObjectResult = 'confluence-object-result',
+}
+
+export enum JiraProjectType {
+  Software = 'software',
+  ServiceDesk = 'service_desk',
+  Business = 'business',
+  Ops = 'ops',
 }
 
 export interface Result {
@@ -21,12 +32,14 @@ export interface Result {
   containerId?: string;
   // optional id for the experiment that generated this result
   experimentId?: string;
+  contentType: ContentType;
+  key?: string;
 }
 /**
  * Map of String keys and Array of results value, but can be empty as well
  */
-export interface GenericResultMap {
-  [key: string]: Result[];
+export interface GenericResultMap<T = Result> {
+  [key: string]: T[];
 }
 
 export type ResultsWithTiming = {
@@ -34,6 +47,7 @@ export type ResultsWithTiming = {
   timings?: {
     [key: string]: number | string;
   };
+  abTest?: ABTest;
 };
 
 export interface ConfluenceResultsMap extends GenericResultMap {
@@ -52,7 +66,7 @@ export interface JiraResultsMap extends GenericResultMap {
 export interface ConfluenceObjectResult extends Result {
   containerName: string;
   containerId: string;
-  contentType?: ContentType;
+  contentType: ContentType;
   resultType: ResultType.ConfluenceObjectResult;
   iconClass?: string;
 }
@@ -60,18 +74,20 @@ export interface ConfluenceObjectResult extends Result {
 export type ResultsGroup = {
   items: Result[];
   key: string;
-  titleI18nId: string;
+  title: FormattedMessage.MessageDescriptor;
 };
 
-export interface JiraObjectResult extends Result {
+export interface JiraResult extends Result {
   objectKey?: string;
   containerName?: string;
-  resultType: ResultType.JiraObjectResult;
-  contentType?: ContentType;
+  projectType?: JiraProjectType;
+  resultType: ResultType.JiraObjectResult | ResultType.JiraProjectResult;
+  contentType: ContentType;
 }
 
 export interface ContainerResult extends Result {
   resultType: ResultType.GenericContainerResult;
+  contentType: ContentType.ConfluenceSpace;
 }
 
 export interface PersonResult extends Result {
@@ -81,14 +97,11 @@ export interface PersonResult extends Result {
   resultType: ResultType.PersonResult;
 }
 
-/**
- * An enum to identify the specific type of content each search result is displaying.
- * It is used to select the appropriate icon to display.
- */
 export enum ContentType {
   ConfluencePage = 'confluence-page',
   ConfluenceBlogpost = 'confluence-blogpost',
   ConfluenceAttachment = 'confluence-attachment',
+  ConfluenceSpace = 'confluence-space',
   JiraIssue = 'jira-issue',
   JiraBoard = 'jira-board',
   JiraFilter = 'jira-filter',
@@ -98,11 +111,13 @@ export enum ContentType {
 
 export enum AnalyticsType {
   RecentJira = 'recent-jira',
-  RecentConfluence = 'recent-confluence',
   ResultJira = 'result-jira',
+  RecentConfluence = 'recent-confluence',
   ResultConfluence = 'result-confluence',
+  RecentPerson = 'recent-person',
   ResultPerson = 'result-person',
-  AdvancedSearchJira = 'advanced-search-jira',
   AdvancedSearchConfluence = 'advanced-search-confluence',
+  AdvancedSearchJira = 'advanced-search-jira',
+  TopLinkPreQueryAdvancedSearchJira = 'top-link-prequery-advanced-search-jira',
   AdvancedSearchPeople = 'advanced-search-people',
 }

@@ -1,4 +1,4 @@
-import { Rectangle, Camera, Vector2 } from '../../camera';
+import { Bounds, Rectangle, Camera, Vector2 } from '../../camera';
 import * as jsc from 'jsverify';
 
 const ACCEPTABLE_FLOATING_ERROR = 0.001;
@@ -18,7 +18,9 @@ describe('Rectangle', () => {
       (w1, h1, w2, h2) => {
         const containing = new Rectangle(w1, h1);
         const original = new Rectangle(w2, h2);
-        const fitted = original.scaled(original.scaleToFit(containing));
+        const fitted = original.scaled(
+          original.scaleToFitLargestSide(containing),
+        );
         return !(
           Math.round(fitted.width) > Math.round(containing.width) ||
           Math.round(fitted.height) > Math.round(containing.height)
@@ -35,7 +37,9 @@ describe('Rectangle', () => {
       (w1, h1, w2, h2) => {
         const containing = new Rectangle(w1, h1);
         const original = new Rectangle(w2, h2);
-        const fitted = original.scaled(original.scaleToFit(containing));
+        const fitted = original.scaled(
+          original.scaleToFitSmallestSide(containing),
+        );
         return (
           Math.round(fitted.width) === Math.round(containing.width) ||
           Math.round(fitted.height) === Math.round(containing.height)
@@ -52,12 +56,67 @@ describe('Rectangle', () => {
       (w1, h1, w2, h2) => {
         const containing = new Rectangle(w1, h1);
         const original = new Rectangle(w2, h2);
-        const fitted = original.scaled(original.scaleToFit(containing));
+        const fitted = original.scaled(
+          original.scaleToFitSmallestSide(containing),
+        );
         return (
           original.aspectRatio - fitted.aspectRatio <= ACCEPTABLE_FLOATING_ERROR
         );
       },
     );
+  });
+});
+
+describe('Bounds', () => {
+  it('should provide origin and size', () => {
+    const X = 1;
+    const Y = 2;
+    const WIDTH = 3;
+    const HEIGHT = 4;
+    const bounds = new Bounds(X, Y, WIDTH, HEIGHT);
+    expect(bounds.x).toBe(X);
+    expect(bounds.y).toBe(Y);
+    expect(bounds.width).toBe(WIDTH);
+    expect(bounds.height).toBe(HEIGHT);
+    expect(bounds.left).toBe(X);
+    expect(bounds.top).toBe(Y);
+    expect(bounds.right).toBe(X + WIDTH);
+    expect(bounds.bottom).toBe(Y + HEIGHT);
+    expect(bounds.corner).toEqual({ x: X + WIDTH, y: Y + HEIGHT });
+  });
+
+  it('should provide center point relative to origin', () => {
+    const bounds = new Bounds(10, 20, 30, 40);
+    const center = bounds.center;
+    expect(center.x).toBe(bounds.x + bounds.width * 0.5);
+    expect(center.y).toBe(bounds.y + bounds.height * 0.5);
+  });
+
+  it('should clone new bounds from current values', () => {
+    const bounds = new Bounds(1, 2, 3, 4);
+    const clone = bounds.clone();
+    expect(clone.x).toBe(bounds.x);
+    expect(clone.y).toBe(bounds.y);
+    expect(clone.width).toBe(bounds.width);
+    expect(clone.height).toBe(bounds.height);
+  });
+
+  it('should scale origin and size', () => {
+    const bounds = new Bounds(1, 2, 3, 4);
+    const scaled = bounds.scaled(0.5);
+    expect(scaled.x).toBe(bounds.x * 0.5);
+    expect(scaled.y).toBe(bounds.y * 0.5);
+    expect(scaled.width).toBe(bounds.width * 0.5);
+    expect(scaled.height).toBe(bounds.height * 0.5);
+  });
+
+  it('should flip correctly', () => {
+    const bounds = new Bounds(1, 2, 3, 4);
+    const flipped = bounds.flipped();
+    expect(flipped.x).toBe(bounds.x);
+    expect(flipped.y).toBe(bounds.y);
+    expect(flipped.width).toBe(bounds.height);
+    expect(flipped.height).toBe(bounds.width);
   });
 });
 

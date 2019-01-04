@@ -1,10 +1,16 @@
 // @flow
 import { Component } from 'react';
-import { type DragHandleProps } from 'react-beautiful-dnd';
-import type { Props } from './TreeItem-types';
+import type {
+  DraggableProps,
+  DraggableStateSnapshot,
+} from 'react-beautiful-dnd';
 import { isSamePath } from '../../utils/path';
 import { sameProps } from '../../utils/react';
-import { type TreeDraggableProvided } from '../TreeItem/TreeItem-types';
+import type {
+  Props,
+  TreeDraggableProvided,
+  TreeDraggableProps,
+} from './TreeItem-types';
 
 export default class TreeItem extends Component<Props> {
   shouldComponentUpdate(nextProps: Props) {
@@ -14,34 +20,34 @@ export default class TreeItem extends Component<Props> {
     );
   }
 
-  patchDragHandleProps = (
-    dragHandleProps: ?DragHandleProps,
-  ): ?DragHandleProps => {
-    const { onDragAction } = this.props;
-    if (dragHandleProps) {
-      return {
-        ...dragHandleProps,
-        onMouseDown: (event: MouseEvent) => {
-          onDragAction('mouse');
-          if (dragHandleProps) {
-            dragHandleProps.onMouseDown(event);
-          }
-        },
-        onKeyDown: (event: KeyboardEvent) => {
-          onDragAction('key');
-          if (dragHandleProps) {
-            dragHandleProps.onKeyDown(event);
-          }
-        },
-        onTouchStart: (event: TouchEvent) => {
-          onDragAction('touch');
-          if (dragHandleProps) {
-            dragHandleProps.onTouchStart(event);
-          }
-        },
-      };
+  patchDraggableProps = (
+    draggableProps: DraggableProps,
+    snapshot: DraggableStateSnapshot,
+  ): TreeDraggableProps => {
+    const { path, offsetPerLevel } = this.props;
+
+    const transitions =
+      draggableProps.style && draggableProps.style.transition
+        ? [draggableProps.style.transition]
+        : [];
+    if (snapshot.dropAnimation) {
+      transitions.push(
+        `padding-left ${snapshot.dropAnimation.duration}s ${
+          snapshot.dropAnimation.curve
+        }`,
+      );
     }
-    return null;
+    const transition = transitions.join(', ');
+
+    //$FlowFixMe
+    return {
+      ...draggableProps,
+      style: {
+        ...draggableProps.style,
+        paddingLeft: (path.length - 1) * offsetPerLevel,
+        transition,
+      },
+    };
   };
 
   render() {
@@ -53,11 +59,21 @@ export default class TreeItem extends Component<Props> {
       renderItem,
       provided,
       snapshot,
+      itemRef,
     } = this.props;
 
+    const innerRef = (el: ?HTMLElement) => {
+      itemRef(item.id, el);
+      provided.innerRef(el);
+    };
+
     const finalProvided: TreeDraggableProvided = {
-      ...provided,
-      dragHandleProps: this.patchDragHandleProps(provided.dragHandleProps),
+      draggableProps: this.patchDraggableProps(
+        provided.draggableProps,
+        snapshot,
+      ),
+      dragHandleProps: provided.dragHandleProps,
+      innerRef,
     };
 
     return renderItem({

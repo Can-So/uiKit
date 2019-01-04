@@ -3,20 +3,31 @@ import { Observable } from 'rxjs';
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import { fakeContext, nextTick } from '@atlaskit/media-test-helpers';
-import { Context, UrlPreview } from '@atlaskit/media-core';
+import {
+  Context,
+  FileState,
+  UrlPreview,
+  FileDetails,
+} from '@atlaskit/media-core';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import {
-  Card,
+  CardAction,
   CardProps,
   UrlPreviewIdentifier,
   FileIdentifier,
   LinkIdentifier,
-  CardEvent,
-  CardView,
+  CardDimensions,
 } from '../../../src';
+
+import { CardView } from '../../../src/root/cardView';
+
+import { Card } from '../../../src/root/card';
+
 import { LazyContent } from '../../../src/utils/lazyContent';
 import { getDataURIFromFileState } from '../../../src/utils/getDataURIFromFileState';
+import { ExternalImageIdentifier } from '../../root';
+import { InlinePlayer } from '../../../src/root/inlinePlayer';
 
 describe('Card', () => {
   const urlIdentifier: UrlPreviewIdentifier = {
@@ -43,7 +54,10 @@ describe('Card', () => {
     props?: Partial<CardProps>,
   ) => {
     (getDataURIFromFileState as any).mockReset();
-    (getDataURIFromFileState as any).mockReturnValue('some-data-uri');
+    (getDataURIFromFileState as any).mockReturnValue({
+      src: 'some-data-uri',
+      orientation: 6,
+    });
     const component = shallow(
       <Card
         context={context}
@@ -58,20 +72,20 @@ describe('Card', () => {
       context,
     };
   };
-  const createContextWithGetFile = () => {
-    const getImage = jest.fn();
-    const context = {
-      getFile: () =>
-        Observable.of({
+  const createContextWithGetFile = (fileState: Partial<FileState> = {}) =>
+    fakeContext({
+      file: {
+        getFileState: Observable.of({
           id: '123',
           mediaType: 'image',
           status: 'processed',
+          mimeType: 'image/png',
+          name: 'file-name',
+          size: 10,
+          ...fileState,
         }),
-      getImage,
-    } as any;
-
-    return context;
-  };
+      },
+    });
 
   it('should render card with UrlPreviewProvider when passed a UrlPreviewIdentifier', () => {
     const dummyUrl = 'http://some.url.com';
@@ -138,31 +152,34 @@ describe('Card', () => {
     });
   });
 
-  it('should use the new context to create the subscription when context prop changes', () => {
+  it('should use the new context to create the subscription when context prop changes', async () => {
     const firstContext = fakeContext({});
-    const secondContext = fakeContext({}) as any;
+    const secondContext = fakeContext({}) as Context;
     const { component } = setup(firstContext);
     component.setProps({ context: secondContext, fileIdentifier });
 
     const { id, collectionName } = fileIdentifier;
-    expect(secondContext.getFile).toHaveBeenCalledTimes(1);
-    expect(secondContext.getFile).toBeCalledWith(id, { collectionName });
+    await nextTick();
+    expect(secondContext.file.getFileState).toHaveBeenCalledTimes(1);
+    expect(secondContext.file.getFileState).toBeCalledWith(id, {
+      collectionName,
+    });
     expect(component.find(CardView)).toHaveLength(1);
   });
 
-  it('should create a new subscription when the identifier changes', () => {
+  it('should create a new subscription when the identifier changes', async () => {
     const firstIdentifier: FileIdentifier = fileIdentifier;
     const secondIdentifier: LinkIdentifier = linkIdentifier;
     const dummyProvider = { observable: 'dummy provider ftw!' };
     const context = fakeContext({
       getMediaItemProvider: dummyProvider,
-    }) as any;
+    }) as Context;
     const { component } = setup(context, { identifier: firstIdentifier });
     component.setProps({ context, identifier: secondIdentifier });
 
     const { id, mediaItemType, collectionName } = secondIdentifier;
-
-    expect(context.getFile).toHaveBeenCalledTimes(1);
+    await nextTick();
+    expect(context.file.getFileState).toHaveBeenCalledTimes(1);
     expect(context.getMediaItemProvider).toHaveBeenCalledTimes(1);
     expect(context.getMediaItemProvider).toBeCalledWith(
       id,
@@ -171,6 +188,100 @@ describe('Card', () => {
     );
 
     expect(component.find(CardView)).toHaveLength(1);
+  });
+
+  it('should refetch the image when width changes to a higher value', async () => {
+    const initialDimensions: CardDimensions = {
+      width: 100,
+      height: 200,
+    };
+    const newDimensions: CardDimensions = {
+      ...initialDimensions,
+      width: 1000,
+    };
+    const context = createContextWithGetFile();
+    const { component } = setup(context, {
+      identifier: fileIdentifier,
+      dimensions: initialDimensions,
+    });
+    component.setProps({ context, dimensions: newDimensions });
+
+    await nextTick();
+    expect(context.getImage).toHaveBeenCalledTimes(2);
+    expect(context.getImage).toHaveBeenLastCalledWith('some-random-id', {
+      allowAnimated: true,
+      collection: 'some-collection-name',
+      mode: 'crop',
+      width: 1000,
+      height: 200,
+    });
+  });
+
+  it('should refetch the image when height changes to a higher value', async () => {
+    const initialDimensions: CardDimensions = {
+      width: 100,
+      height: 200,
+    };
+    const newDimensions: CardDimensions = {
+      ...initialDimensions,
+      height: 2000,
+    };
+    const context = createContextWithGetFile();
+    const { component } = setup(context, {
+      identifier: fileIdentifier,
+      dimensions: initialDimensions,
+    });
+    component.setProps({ context, dimensions: newDimensions });
+
+    await nextTick();
+    expect(context.getImage).toHaveBeenCalledTimes(2);
+    expect(context.getImage).toHaveBeenLastCalledWith('some-random-id', {
+      allowAnimated: true,
+      collection: 'some-collection-name',
+      mode: 'crop',
+      width: 100,
+      height: 2000,
+    });
+  });
+
+  it('should not refetch the image when width changes to a smaller value', async () => {
+    const initialDimensions: CardDimensions = {
+      width: 100,
+      height: 200,
+    };
+    const newDimensions: CardDimensions = {
+      ...initialDimensions,
+      width: 10,
+    };
+    const context = createContextWithGetFile();
+    const { component } = setup(context, {
+      identifier: fileIdentifier,
+      dimensions: initialDimensions,
+    });
+    component.setProps({ context, dimensions: newDimensions });
+
+    await nextTick();
+    expect(context.getImage).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not refetch the image when height changes to a smaller value', async () => {
+    const initialDimensions: CardDimensions = {
+      width: 100,
+      height: 200,
+    };
+    const newDimensions: CardDimensions = {
+      ...initialDimensions,
+      height: 20,
+    };
+    const context = createContextWithGetFile();
+    const { component } = setup(context, {
+      identifier: fileIdentifier,
+      dimensions: initialDimensions,
+    });
+    component.setProps({ context, dimensions: newDimensions });
+
+    await nextTick();
+    expect(context.getImage).toHaveBeenCalledTimes(1);
   });
 
   it('should fire onClick when passed in as a prop and CardView fires onClick', () => {
@@ -196,7 +307,7 @@ describe('Card', () => {
 
   it('should pass onMouseEnter to CardView', () => {
     const context = fakeContext() as any;
-    const hoverHandler = (result: CardEvent) => {};
+    const hoverHandler = () => {};
     const card = shallow(
       <Card
         context={context}
@@ -210,7 +321,7 @@ describe('Card', () => {
 
   it('should use lazy load by default', () => {
     const context = fakeContext() as any;
-    const hoverHandler = (result: CardEvent) => {};
+    const hoverHandler = () => {};
     const card = shallow(
       <Card
         context={context}
@@ -223,7 +334,7 @@ describe('Card', () => {
 
   it('should not use lazy load when "isLazy" is false', () => {
     const context = fakeContext() as any;
-    const hoverHandler = (result: CardEvent) => {};
+    const hoverHandler = () => {};
     const card = shallow(
       <Card
         isLazy={false}
@@ -242,12 +353,10 @@ describe('Card', () => {
       <Card
         context={context}
         identifier={fileIdentifier}
-        appearance="small"
         dimensions={{ width: 100, height: 50 }}
       />,
     );
 
-    expect(card.find(CardView).props().appearance).toBe('small');
     expect(card.find(CardView).props().dimensions).toEqual({
       width: 100,
       height: 50,
@@ -260,7 +369,6 @@ describe('Card', () => {
       <Card
         context={context}
         identifier={fileIdentifier}
-        appearance="small"
         dimensions={{ width: 100, height: 50 }}
       />,
     );
@@ -269,15 +377,9 @@ describe('Card', () => {
     );
     const filePlaceholder = fileCard.find(CardView);
     const linkPlaceholder = linkCard.find(CardView);
-    const {
-      status,
-      appearance,
-      mediaItemType,
-      dimensions,
-    } = filePlaceholder.props();
+    const { status, mediaItemType, dimensions } = filePlaceholder.props();
 
     expect(status).toBe('loading');
-    expect(appearance).toBe('small');
     expect(mediaItemType).toBe('file');
     expect(dimensions).toEqual({ width: 100, height: 50 });
     expect(linkPlaceholder.prop('mediaItemType')).toBe('link');
@@ -356,32 +458,49 @@ describe('Card', () => {
     expect(card.find(CardView).prop('disableOverlay')).toBe(true);
   });
 
-  it('should use context.getFile to fetch file data', () => {
+  it('should use context.file.getFile to fetch file data', async () => {
     const { context } = setup();
-
-    expect(context.getFile).toHaveBeenCalledTimes(1);
-    expect(context.getFile).toBeCalledWith('some-random-id', {
+    await nextTick();
+    expect(context.file.getFileState).toHaveBeenCalledTimes(1);
+    expect(context.file.getFileState).toBeCalledWith('some-random-id', {
       collectionName: 'some-collection-name',
+    });
+  });
+
+  it('should work with async identifier', async () => {
+    const identifier: FileIdentifier = {
+      id: Promise.resolve('file-id'),
+      mediaItemType: 'file',
+      collectionName: 'collection',
+    };
+    const { context } = setup(undefined, { identifier });
+    await nextTick();
+    expect(context.file.getFileState).toHaveBeenCalledTimes(1);
+    expect(context.file.getFileState).toBeCalledWith('file-id', {
+      collectionName: 'collection',
     });
   });
 
   it('should set dataURI only if its not present', async () => {
     const { component } = setup();
-    expect(getDataURIFromFileState).toHaveBeenCalledTimes(1);
     await nextTick();
+    expect(getDataURIFromFileState).toHaveBeenCalledTimes(1);
     expect(component.state('dataURI')).toEqual('some-data-uri');
   });
 
+  it('should set preview orientation and pass it down do view', async () => {
+    const { component } = setup();
+    await nextTick();
+
+    expect(component.state('previewOrientation')).toEqual(6);
+    component.update();
+    expect(component.find(CardView).prop('previewOrientation')).toEqual(6);
+  });
+
   it('should set right state when file is uploading', async () => {
-    const context = fakeContext({
-      getFile: Observable.of({
-        id: '123',
-        status: 'uploading',
-        progress: 0.2,
-        mediaType: 'image',
-        size: 10,
-        name: 'me.png',
-      }),
+    const context = createContextWithGetFile({
+      status: 'uploading',
+      progress: 0.2,
     });
     const { component } = setup(context);
 
@@ -391,24 +510,21 @@ describe('Card', () => {
       dataURI: 'some-data-uri',
       isCardVisible: true,
       progress: 0.2,
+      previewOrientation: 6,
+      isPlayingFile: false,
       metadata: {
         id: '123',
         mediaType: 'image',
-        name: 'me.png',
+        mimeType: 'image/png',
+        name: 'file-name',
         size: 10,
       },
     });
   });
 
   it('should set right state when file is processing', async () => {
-    const context = fakeContext({
-      getFile: Observable.of({
-        id: '123',
-        status: 'uploading',
-        mediaType: 'image',
-        size: 10,
-        name: 'me.png',
-      }),
+    const context = createContextWithGetFile({
+      status: 'uploading',
     });
     const { component } = setup(context);
 
@@ -418,28 +534,21 @@ describe('Card', () => {
       dataURI: 'some-data-uri',
       progress: undefined,
       isCardVisible: true,
+      isPlayingFile: false,
+      previewOrientation: 6,
       metadata: {
         id: '123',
         mediaType: 'image',
-        name: 'me.png',
+        mimeType: 'image/png',
+        name: 'file-name',
         size: 10,
       },
     });
   });
 
   it('should set right state when file is processed', async () => {
-    const getImage = jest.fn();
-    const context = {
-      getFile: () =>
-        Observable.of({
-          id: '123',
-          status: 'processed',
-          mediaType: 'image',
-          size: 10,
-          name: 'me.png',
-        }),
-      getImage,
-    } as any;
+    const context = createContextWithGetFile();
+
     const { component } = setup(context);
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
@@ -451,19 +560,20 @@ describe('Card', () => {
       dataURI: 'mock result of URL.createObjectURL()',
       progress: undefined,
       isCardVisible: true,
+      isPlayingFile: false,
+      previewOrientation: 6,
       metadata: {
         id: '123',
         mediaType: 'image',
-        name: 'me.png',
+        name: 'file-name',
+        mimeType: 'image/png',
         size: 10,
       },
     });
   });
 
-  it('should render error card when getFile resolves with status=error', async () => {
-    const context = fakeContext({
-      getFile: Observable.of({ status: 'error' }),
-    });
+  it('should render error card when getFileState resolves with status=error', async () => {
+    const context = createContextWithGetFile({ status: 'error' });
     const { component } = setup(context);
 
     await nextTick();
@@ -471,12 +581,31 @@ describe('Card', () => {
     expect(component.find(CardView).prop('status')).toEqual('error');
   });
 
-  it('should render error card when getFile fails', async () => {
-    const getFile = new Observable(subscriber => {
+  it('should render failed card when getFileState resolves with status=failed', async () => {
+    const context = createContextWithGetFile({
+      status: 'failed-processing',
+    });
+    const { component } = setup(context);
+
+    await nextTick();
+    component.update();
+    const { status, metadata } = component.find(CardView).props();
+    expect(status).toEqual('failed-processing');
+    expect(metadata).toEqual({
+      id: '123',
+      size: 10,
+      name: 'file-name',
+      mimeType: 'image/png',
+      mediaType: 'image',
+    } as FileDetails);
+  });
+
+  it('should render error card when getFileState fails', async () => {
+    const getFileState = new Observable(subscriber => {
       subscriber.error('some-error');
     });
     const context = fakeContext({
-      getFile,
+      file: { getFileState },
     });
     const { component } = setup(context);
 
@@ -495,30 +624,11 @@ describe('Card', () => {
     await nextTick();
 
     expect(context.getImage).toHaveBeenCalledTimes(1);
-    expect(context.getImage).toBeCalledWith('123', {
+    expect(context.getImage).toBeCalledWith('some-random-id', {
       collection: 'some-collection-name',
       height: 125,
       width: 156,
       allowAnimated: true,
-      mode: 'crop',
-    });
-  });
-
-  it('should use allowAnimated=false for small cards', async () => {
-    const context = createContextWithGetFile();
-    setup(context, {
-      appearance: 'small',
-    });
-
-    // we need to wait for 2 promises: fetch metadata + fetch preview
-    await nextTick();
-    await nextTick();
-
-    expect(context.getImage).toBeCalledWith('123', {
-      collection: 'some-collection-name',
-      height: 32,
-      width: 32,
-      allowAnimated: false,
       mode: 'crop',
     });
   });
@@ -534,7 +644,25 @@ describe('Card', () => {
     await nextTick();
 
     expect(context.getImage).toBeCalledWith(
-      '123',
+      'some-random-id',
+      expect.objectContaining({
+        mode: 'full-fit',
+      }),
+    );
+  });
+
+  it('should change mode from stretchy-fit to full-fit while passing down to getImage call', async () => {
+    const context = createContextWithGetFile();
+    setup(context, {
+      resizeMode: 'stretchy-fit',
+    });
+
+    // we need to wait for 2 promises: fetch metadata + fetch preview
+    await nextTick();
+    await nextTick();
+
+    expect(context.getImage).toBeCalledWith(
+      'some-random-id',
       expect.objectContaining({
         mode: 'full-fit',
       }),
@@ -542,19 +670,7 @@ describe('Card', () => {
   });
 
   it('should render CardView with expected props', async () => {
-    const getImage = jest.fn();
-    const context = {
-      getFile: () =>
-        Observable.of({
-          id: '123',
-          status: 'processed',
-          mediaType: 'image',
-          mimeType: 'image/png',
-          name: 'file-name',
-          size: 10,
-        }),
-      getImage,
-    } as any;
+    const context = createContextWithGetFile();
 
     const { component } = setup(context, {
       dimensions: { width: 10, height: 20 },
@@ -608,13 +724,111 @@ describe('Card', () => {
   });
 
   describe('Retry', () => {
-    it('should pass down "onRetry" prop when an error occurs', () => {
+    it('should pass down "onRetry" prop when an error occurs', async () => {
       const { component, context } = setup();
       const cardViewOnError = component.find(CardView).prop('onRetry')!;
-
-      expect(context.getFile).toHaveBeenCalledTimes(1);
+      await nextTick();
+      expect(context.file.getFileState).toHaveBeenCalledTimes(1);
       cardViewOnError();
-      expect(context.getFile).toHaveBeenCalledTimes(2);
+      await nextTick();
+      expect(context.file.getFileState).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('External image identifier', () => {
+    it('should work with external image identifier', () => {
+      const identifier: ExternalImageIdentifier = {
+        mediaItemType: 'external-image',
+        dataURI: 'bla',
+        name: 'some external image',
+      };
+
+      const { component } = setup(undefined, { identifier });
+
+      expect(component.find('CardView').prop('dataURI')).toEqual('bla');
+      expect(component.find('CardView').prop('metadata')).toEqual({
+        id: 'bla',
+        mediaType: 'image',
+        name: 'some external image',
+      });
+    });
+
+    it('should use dataURI as default name', () => {
+      const identifier: ExternalImageIdentifier = {
+        mediaItemType: 'external-image',
+        dataURI: 'bla',
+      };
+
+      const { component } = setup(undefined, { identifier });
+
+      expect(component.find('CardView').prop('metadata')).toEqual({
+        id: 'bla',
+        mediaType: 'image',
+        name: 'bla',
+      });
+    });
+  });
+
+  it('should add download Action when in failed-processing state', () => {
+    const initialActions: Array<CardAction> = [
+      {
+        handler: () => {},
+      },
+    ];
+    const { component } = setup(undefined, {
+      actions: initialActions,
+    });
+    component.setState({
+      status: 'failed-processing',
+      metadata: {},
+    });
+    component.update();
+    const actions = component.find(CardView).prop('actions')!;
+    expect(actions).toHaveLength(2);
+    expect(actions[0].label).toEqual('Download');
+  });
+
+  it('should call item download when download Action is executed', async () => {
+    const { component, context } = setup();
+    component.setState({
+      status: 'failed-processing',
+      metadata: {
+        name: 'some-file-name',
+      },
+    });
+    component.update();
+    const actions = component.find(CardView).prop('actions')!;
+    actions[0].handler();
+    await fileIdentifier.id;
+    expect(context.file.downloadBinary).toHaveBeenCalledWith(
+      fileIdentifier.id,
+      'some-file-name',
+      fileIdentifier.collectionName,
+    );
+  });
+
+  describe('Inline player', () => {
+    it('should render InlinePlayer when isPlayingFile=true', () => {
+      const { component } = setup();
+
+      component.setState({
+        isPlayingFile: true,
+      });
+      component.update();
+      expect(component.find(InlinePlayer)).toHaveLength(1);
+    });
+
+    it('should set isPlayingFile=true when clicking on a video file', () => {
+      const { component } = setup(undefined, { useInlinePlayer: true });
+      const instance = component.instance() as Card;
+
+      instance.onClick({
+        mediaItemDetails: {
+          mediaType: 'video',
+        },
+      } as any);
+
+      expect(component.state('isPlayingFile')).toBeTruthy();
     });
   });
 });

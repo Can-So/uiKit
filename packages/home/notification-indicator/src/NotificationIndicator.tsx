@@ -80,7 +80,7 @@ export default class NotificationIndicator extends Component<Props, State> {
       clearInterval(this.intervalId);
     }
     if (refreshRate && refreshRate > 0) {
-      this.intervalId = setInterval(this.timerTick, refreshRate);
+      this.intervalId = window.setInterval(this.timerTick, refreshRate);
     }
   }
 
@@ -127,11 +127,15 @@ export default class NotificationIndicator extends Component<Props, State> {
     try {
       const count =
         updatingResult.countOverride ||
-        (await this.notificationLogProvider.countUnseenNotifications()).count;
+        (await this.notificationLogProvider.countUnseenNotifications({
+          queryParams: {
+            currentCount: this.state.count,
+          },
+        })).count;
 
       if (
         this.props.onCountUpdated &&
-        (!this.state.count || this.state.count !== count)
+        (this.state.count === null || this.state.count !== count)
       ) {
         this.props.onCountUpdated({
           oldCount: this.state.count || 0,
@@ -151,7 +155,9 @@ export default class NotificationIndicator extends Component<Props, State> {
     const { appearance, max } = this.props;
 
     return count ? (
-      <Badge max={max} appearance={appearance} value={count} />
+      <div data-test-selector="NotificationIndicator">
+        <Badge max={max} appearance={appearance} value={count} />
+      </div>
     ) : null;
   }
 }

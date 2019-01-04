@@ -14,6 +14,7 @@ export default md`
   
   ${(
     <Example
+      packageName="@atlaskit/table-tree"
       Component={SimpleFacadeExample}
       source={require('!!raw-loader!../examples/single-component')}
       title="Single component facade"
@@ -23,6 +24,7 @@ export default md`
 
   ${(
     <Props
+      heading="TableTree Props"
       props={require('!!extract-react-types-loader!../src/components/TableTree')}
     />
   )}

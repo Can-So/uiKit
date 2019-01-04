@@ -9,7 +9,7 @@ import {
   withAnalyticsContext,
   createAndFireEvent,
 } from '@atlaskit/analytics-next';
-import { format, isValid, parse } from 'date-fns';
+import { format, isValid, parse, getDaysInMonth } from 'date-fns';
 import pick from 'lodash.pick';
 import React, { Component, type Node, type ElementRef } from 'react';
 import styled from 'styled-components';
@@ -21,8 +21,9 @@ import {
 
 import {
   ClearIndicator,
-  DropdownIndicator,
   defaultDateFormat,
+  DropdownIndicator,
+  padToTwo,
 } from '../internal';
 import FixedLayer from '../internal/FixedLayer';
 import type { Event } from '../types';
@@ -90,13 +91,12 @@ type State = {
 
 function isoToObj(iso: string) {
   const parsed = parse(iso);
-  return isValid(parsed)
-    ? {
-        day: parsed.getDate(),
-        month: parsed.getMonth() + 1,
-        year: parsed.getFullYear(),
-      }
-    : {};
+  if (!isValid(parsed)) return {};
+  return {
+    day: parsed.getDate(),
+    month: parsed.getMonth() + 1,
+    year: parsed.getFullYear(),
+  };
 }
 
 const arrowKeys = {
@@ -121,7 +121,6 @@ const Menu = ({ innerProps: menuInnerProps, selectProps }: Object) => (
       disabled={selectProps.calendarDisabled}
       onChange={selectProps.onCalendarChange}
       onSelect={selectProps.onCalendarSelect}
-      // $FlowFixMe - Calendar is not a react component
       ref={selectProps.calendarRef}
       selected={[selectProps.selectedCalendarValue]}
       innerProps={menuInnerProps}
@@ -131,6 +130,7 @@ const Menu = ({ innerProps: menuInnerProps, selectProps }: Object) => (
 
 const FixedLayeredMenu = ({ selectProps, ...props }: Object) => (
   <FixedLayer
+    inputValue={selectProps.inputValue}
     containerRef={selectProps.calendarContainerRef}
     content={<Menu {...props} selectProps={selectProps} />}
   />
@@ -167,12 +167,22 @@ class DatePicker extends Component<Props, State> {
     spacing: 'default',
   };
 
-  state = {
-    isOpen: this.props.defaultIsOpen,
-    value: this.props.defaultValue,
-    view: this.props.value || this.props.defaultValue,
-    selectedValue: this.props.value || this.props.defaultValue,
-  };
+  constructor(props: any) {
+    super(props);
+    const now = new Date();
+    const thisDay = now.getDate();
+    const thisMonth = now.getMonth() + 1;
+    const thisYear = now.getFullYear();
+    this.state = {
+      isOpen: this.props.defaultIsOpen,
+      selectedValue: this.props.value || this.props.defaultValue,
+      value: this.props.defaultValue,
+      view:
+        this.props.value ||
+        this.props.defaultValue ||
+        `${thisYear}-${padToTwo(thisMonth)}-${padToTwo(thisDay)}`,
+    };
+  }
 
   // All state needs to be accessed via this function so that the state is mapped from props
   // correctly to allow controlled/uncontrolled usage.
@@ -191,7 +201,18 @@ class DatePicker extends Component<Props, State> {
   };
 
   onCalendarChange = ({ iso }: { iso: string }) => {
-    this.setState({ view: iso });
+    const [year, month, date] = iso.split('-');
+    let newIso = iso;
+
+    const lastDayInMonth = getDaysInMonth(
+      new Date(parseInt(year, 10), parseInt(month, 10) - 1),
+    );
+
+    if (parseInt(lastDayInMonth, 10) < parseInt(date, 10)) {
+      newIso = `${year}-${month}-${lastDayInMonth}`;
+    }
+
+    this.setState({ view: newIso });
   };
 
   onCalendarSelect = ({ iso: value }: { iso: string }) => {
@@ -254,12 +275,15 @@ class DatePicker extends Component<Props, State> {
       this.triggerChange('');
 
       // Dates may be disabled
-    } else if (
-      !this.isDateDisabled(view) &&
-      (key === 'Enter' || key === 'Tab')
-    ) {
-      this.triggerChange(view);
-      this.setState({ isOpen: false, selectedValue: view });
+    } else if (!this.isDateDisabled(view)) {
+      if (key === 'Enter') {
+        this.triggerChange(view);
+        this.setState({ isOpen: false, selectedValue: view });
+      }
+
+      if (key === 'Tab') {
+        this.setState({ isOpen: false });
+      }
     }
   };
 
@@ -339,7 +363,6 @@ class DatePicker extends Component<Props, State> {
         ref={this.getContainerRef}
       >
         <input name={name} type="hidden" value={value} />
-        {/* $FlowFixMe - complaining about required args that aren't required. */}
         <Select
           menuIsOpen={isOpen && !isDisabled}
           openMenuOnFocus

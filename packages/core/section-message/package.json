@@ -1,11 +1,12 @@
 {
   "name": "@atlaskit/section-message",
-  "version": "1.0.5",
+  "version": "1.0.14",
   "description": "A react component used to alert users of a particular screen area that needs user action",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "atlaskit:src": "src/index.js",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
@@ -15,20 +16,21 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/button": "^9.0.6",
-    "@atlaskit/icon": "^13.2.5",
-    "@atlaskit/theme": "^6.0.0"
+    "@atlaskit/button": "^10.1.1",
+    "@atlaskit/icon": "^15.0.2",
+    "@atlaskit/theme": "^7.0.1",
+    "@babel/runtime": "^7.0.0"
   },
   "peerDependencies": {
     "react": "^16.4.0",
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/build-utils": "^1.11.0",
-    "@atlaskit/docs": "^5.0.6",
-    "@atlaskit/field-range": "^5.0.4",
+    "@atlaskit/build-utils": "^2.0.0",
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/field-range": "^5.0.12",
     "@atlaskit/visual-regression": "^0.0.1",
-    "enzyme": "https://registry.npmjs.org/@pgleeson/enzyme/-/enzyme-3.3.7.tgz",
+    "enzyme": "^3.7.0",
     "jest-in-case": "^1.0.2",
     "react-dom": "^16.4.2",
     "react-test-renderer": "^16.3.0"

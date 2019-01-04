@@ -26,16 +26,13 @@ exports[`@atlaskit/icon Icon should match the DOM Snapshot 1`] = `
 <Icon
   glyph={[Function]}
   label="My icon"
-  onClick={[Function]}
 >
   <styled.span
     aria-label="My icon"
-    onClick={[Function]}
   >
     <span
       aria-label="My icon"
       className="c0"
-      onClick={[Function]}
     >
       <empty
         role="presentation"

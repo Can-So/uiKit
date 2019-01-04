@@ -7,6 +7,7 @@ import { createStorybookContext } from '@atlaskit/media-test-helpers';
 import { ButtonList, Container, Group } from '../example-helpers/styled';
 import {
   docIdentifier,
+  largePdfIdentifier,
   imageIdentifier,
   imageIdentifier2,
   unsupportedIdentifier,
@@ -14,13 +15,23 @@ import {
   videoIdentifier,
   wideImageIdentifier,
   defaultCollectionName,
+  audioItem,
+  audioItemNoCover,
 } from '../example-helpers';
 import { MediaViewer } from '../src';
 import { videoFileId } from '@atlaskit/media-test-helpers';
 import { MediaViewerItem } from '../src';
 import { MediaViewerDataSource } from '..';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
+import { I18NWrapper } from '@atlaskit/media-test-helpers';
 
 const context = createStorybookContext();
+
+const handleEvent = (analyticsEvent: UIAnalyticsEventInterface) => {
+  const { payload, context } = analyticsEvent;
+  console.log('Received event:', { payload, context });
+};
 
 export type State = {
   selected?: {
@@ -75,7 +86,10 @@ export default class Example extends React.Component<{}, State> {
             videoIdentifier,
             videoHorizontalFileItem,
             wideImageIdentifier,
+            audioItem,
+            audioItemNoCover,
             docIdentifier,
+            largePdfIdentifier,
             imageIdentifier2,
             unsupportedIdentifier,
           ],
@@ -141,64 +155,65 @@ export default class Example extends React.Component<{}, State> {
 
   render() {
     return (
-      <Container>
-        <Group>
-          <h2>File lists</h2>
-          <ButtonList>
-            <li>
-              <Button onClick={this.openList}>Small list</Button>
-            </li>
-          </ButtonList>
-        </Group>
+      <I18NWrapper>
+        <Container>
+          <Group>
+            <h2>File lists</h2>
+            <ButtonList>
+              <li>
+                <Button onClick={this.openList}>Small list</Button>
+              </li>
+            </ButtonList>
+          </Group>
 
-        <Group>
-          <h2>Collection names</h2>
-          <ButtonList>
-            <li>
-              {this.state.firstCollectionItem ? (
-                <Button onClick={this.openCollection}>
-                  Default collection
+          <Group>
+            <h2>Collection names</h2>
+            <ButtonList>
+              <li>
+                {this.state.firstCollectionItem ? (
+                  <Button onClick={this.openCollection}>
+                    Default collection
+                  </Button>
+                ) : (
+                  <AkSpinner />
+                )}
+              </li>
+            </ButtonList>
+          </Group>
+
+          <Group>
+            <h2>Errors</h2>
+            <ButtonList>
+              <li>
+                <Button onClick={this.openNotFound}>
+                  Selected item not found
                 </Button>
-              ) : (
-                <AkSpinner />
-              )}
-            </li>
-          </ButtonList>
-        </Group>
+              </li>
+              <li>
+                <Button onClick={this.openInvalidId}>Invalid ID</Button>
+              </li>
+              <li>
+                <Button onClick={this.openInvalidCollection}>
+                  Invalid collection name
+                </Button>
+              </li>
+            </ButtonList>
+          </Group>
 
-        <Group>
-          <h2>Errors</h2>
-          <ButtonList>
-            <li>
-              <Button onClick={this.openNotFound}>
-                Selected item not found
-              </Button>
-            </li>
-            <li>
-              <Button onClick={this.openInvalidId}>Invalid ID</Button>
-            </li>
-            <li>
-              <Button onClick={this.openInvalidCollection}>
-                Invalid collection name
-              </Button>
-            </li>
-          </ButtonList>
-        </Group>
-
-        {this.state.selected && (
-          <MediaViewer
-            featureFlags={{ nextGen: true }}
-            MediaViewer={null as any}
-            basePath={null as any}
-            context={context}
-            selectedItem={this.state.selected.identifier}
-            dataSource={this.state.selected.dataSource}
-            collectionName={defaultCollectionName}
-            onClose={this.onClose}
-            pageSize={5}
-          />
-        )}
-      </Container>
+          {this.state.selected && (
+            <AnalyticsListener channel="media" onEvent={handleEvent}>
+              <MediaViewer
+                context={context}
+                selectedItem={this.state.selected.identifier}
+                dataSource={this.state.selected.dataSource}
+                collectionName={defaultCollectionName}
+                onClose={this.onClose}
+                pageSize={5}
+              />
+            </AnalyticsListener>
+          )}
+        </Container>
+      </I18NWrapper>
     );
   }
 }

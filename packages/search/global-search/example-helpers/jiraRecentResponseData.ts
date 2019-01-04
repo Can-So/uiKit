@@ -163,14 +163,31 @@ export const JiraRecentResponse = [
     url:
       'https://product-fabric.atlassian.net/secure/ManageFilters.jspa?searchName=&Search=Search&filterView=search',
   },
+  {
+    id: 'quick-search-dashboards',
+    name: 'Recent dashboards',
+    viewAllTitle: 'View all dashboards',
+    items: [
+      {
+        id: 10000,
+        title: 'System dashboard',
+        url:
+          'https://confluence-only.jira-dev.com/secure/Dashboard.jspa?selectPageId=10000',
+        favourite: false,
+      },
+    ],
+    url:
+      'https://confluence-only.jira-dev.com/secure/ConfigurePortalPages%21default.jspa?name=',
+  },
 ];
 
 export const TransformedResponse = [
   {
     resultType: 'jira-object-result',
-    resultId: 67391,
+    resultId: '67391',
     name: 'Jira recent endpoint is missing some fields',
-    href: 'https://product-fabric.atlassian.net/browse/QS-136',
+    href:
+      'https://product-fabric.atlassian.net/browse/QS-136?searchSessionId=session&searchContentType=issue&searchObjectId=67391',
     analyticsType: 'recent-jira',
     avatarUrl:
       'https://product-fabric.atlassian.net/secure/viewavatar?size=medium&avatarId=10303&avatarType=issuetype',
@@ -179,9 +196,10 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 64304,
+    resultId: '64304',
     name: 'Create the Jira boilerplate code',
-    href: 'https://product-fabric.atlassian.net/browse/QS-40',
+    href:
+      'https://product-fabric.atlassian.net/browse/QS-40?searchSessionId=session&searchContentType=issue&searchObjectId=64304',
     analyticsType: 'recent-jira',
     avatarUrl:
       'https://product-fabric.atlassian.net/images/icons/issuetypes/story.svg',
@@ -190,10 +208,11 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 67462,
+    resultId: '67462',
     name:
       'Services are not executing searches in parallel (aggregator + conf searcher)',
-    href: 'https://product-fabric.atlassian.net/browse/QS-137',
+    href:
+      'https://product-fabric.atlassian.net/browse/QS-137?searchSessionId=session&searchContentType=issue&searchObjectId=67462',
     analyticsType: 'recent-jira',
     avatarUrl:
       'https://product-fabric.atlassian.net/secure/viewavatar?size=medium&avatarId=10303&avatarType=issuetype',
@@ -202,9 +221,10 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 64350,
+    resultId: '64350',
     name: 'Decide on an approach for Jira boilerplate',
-    href: 'https://product-fabric.atlassian.net/browse/QS-60',
+    href:
+      'https://product-fabric.atlassian.net/browse/QS-60?searchSessionId=session&searchContentType=issue&searchObjectId=64350',
     analyticsType: 'recent-jira',
     avatarUrl:
       'https://product-fabric.atlassian.net/secure/viewavatar?size=medium&avatarId=10318&avatarType=issuetype',
@@ -213,9 +233,10 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 64271,
+    resultId: '64271',
     name: 'Update Global Search UI to use XPSearch',
-    href: 'https://product-fabric.atlassian.net/browse/QS-21',
+    href:
+      'https://product-fabric.atlassian.net/browse/QS-21?searchSessionId=session&searchContentType=issue&searchObjectId=64271',
     analyticsType: 'recent-jira',
     avatarUrl:
       'https://product-fabric.atlassian.net/images/icons/issuetypes/story.svg',
@@ -224,9 +245,10 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 65205,
+    resultId: '65205',
     name: 'Retro: Add unit testing for analytics',
-    href: 'https://product-fabric.atlassian.net/browse/QS-95',
+    href:
+      'https://product-fabric.atlassian.net/browse/QS-95?searchSessionId=session&searchContentType=issue&searchObjectId=65205',
     analyticsType: 'recent-jira',
     avatarUrl:
       'https://product-fabric.atlassian.net/images/icons/issuetypes/story.svg',
@@ -235,9 +257,10 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 65643,
+    resultId: '65643',
     name: 'Analytics validation fixes',
-    href: 'https://product-fabric.atlassian.net/browse/QS-107',
+    href:
+      'https://product-fabric.atlassian.net/browse/QS-107?searchSessionId=session&searchContentType=issue&searchObjectId=65643',
     analyticsType: 'recent-jira',
     avatarUrl:
       'https://product-fabric.atlassian.net/secure/viewavatar?size=medium&avatarId=10303&avatarType=issuetype',
@@ -246,10 +269,10 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 201,
+    resultId: '201',
     name: 'Quick Search',
     href:
-      'https://product-fabric.atlassian.net/secure/RapidBoard.jspa?rapidView=201&useStoredSettings=true',
+      'https://product-fabric.atlassian.net/secure/RapidBoard.jspa?rapidView=201&useStoredSettings=true&searchSessionId=session&searchContentType=board&searchObjectId=201',
     analyticsType: 'recent-jira',
     avatarUrl: '/secure/projectavatar?size=medium&pid=12793&avatarId=11567',
     contentType: 'jira-board',
@@ -257,10 +280,10 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 77,
+    resultId: '77',
     name: 'Analytics Pipeline',
     href:
-      'https://product-fabric.atlassian.net/secure/RapidBoard.jspa?rapidView=77&useStoredSettings=true',
+      'https://product-fabric.atlassian.net/secure/RapidBoard.jspa?rapidView=77&useStoredSettings=true&searchSessionId=session&searchContentType=board&searchObjectId=77',
     analyticsType: 'recent-jira',
     avatarUrl: '/secure/projectavatar?size=medium&pid=12703&avatarId=11514',
     contentType: 'jira-board',
@@ -268,10 +291,10 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 49,
+    resultId: '49',
     name: 'CONFSIM board',
     href:
-      'https://product-fabric.atlassian.net/secure/RapidBoard.jspa?rapidView=49&useStoredSettings=true',
+      'https://product-fabric.atlassian.net/secure/RapidBoard.jspa?rapidView=49&useStoredSettings=true&searchSessionId=session&searchContentType=board&searchObjectId=49',
     analyticsType: 'recent-jira',
     avatarUrl: '/secure/projectavatar?size=medium&pid=11800&avatarId=11514',
     contentType: 'jira-board',
@@ -279,9 +302,10 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 12793,
+    resultId: '12793',
     name: 'Quick Search (QS)',
-    href: 'https://product-fabric.atlassian.net/browse/QS',
+    href:
+      'https://product-fabric.atlassian.net/browse/QS?searchSessionId=session&searchContentType=project&searchObjectId=12793',
     analyticsType: 'recent-jira',
     avatarUrl:
       'https://product-fabric.atlassian.net/secure/projectavatar?size=medium&pid=12793&avatarId=11567',
@@ -290,9 +314,10 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: 12703,
+    resultId: '12703',
     name: 'Data Services (DS)',
-    href: 'https://product-fabric.atlassian.net/browse/DS',
+    href:
+      'https://product-fabric.atlassian.net/browse/DS?searchSessionId=session&searchContentType=project&searchObjectId=12703',
     analyticsType: 'recent-jira',
     avatarUrl:
       'https://product-fabric.atlassian.net/secure/projectavatar?size=medium&avatarId=10324',
@@ -301,11 +326,12 @@ export const TransformedResponse = [
   },
   {
     resultType: 'jira-object-result',
-    resultId: -3,
+    resultId: '-3',
     name: 'Viewed recently',
-    href: 'https://product-fabric.atlassian.net/issues/?filter=-3',
+    href:
+      'https://product-fabric.atlassian.net/issues/?filter=-3&searchSessionId=session&searchContentType=filter&searchObjectId=-3',
     analyticsType: 'recent-jira',
-    avatarUrl: 'undefined',
+    avatarUrl: undefined,
     contentType: 'jira-filter',
     objectKey: 'Filters',
     containerName: 'Ahmed Fouad',

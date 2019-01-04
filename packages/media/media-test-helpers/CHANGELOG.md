@@ -1,5 +1,175 @@
 # @atlaskit/media-test-helpers
 
+## 18.8.0
+- [minor] [6bc785d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bc785d):
+
+  - default to HD video if available in video viewer
+
+## 18.7.3
+- [patch] [b677631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b677631):
+
+  - Add new example and ensure occurrenceKey is set for all copy/withToken calls
+
+## 18.7.2
+- Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
+  - @atlaskit/media-core@24.7.2
+  - @atlaskit/media-store@9.0.2
+  - @atlaskit/media-card@47.0.0
+
+## 18.7.1
+- [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
+
+  - Add SSR support to media components
+
+## 18.7.0
+- [minor] [5c06476](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5c06476):
+
+  - Add touch endpoint to mock server
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+- Updated dependencies [096f898](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/096f898):
+  - @atlaskit/media-card@46.0.0
+  - @atlaskit/media-store@9.0.0
+  - @atlaskit/media-core@24.7.0
+
+## 18.6.2
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/media-card@45.0.0
+  - @atlaskit/media-store@8.5.1
+  - @atlaskit/media-core@24.6.0
+
+## 18.6.1
+- [patch] [f621523](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f621523):
+
+  - fix MediaMocker router
+
+## 18.6.0
+- [minor] [0f42ec1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0f42ec1):
+
+  Use /items endpoint in media-core
+
+## 18.5.2
+- Updated dependencies [5de3574](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5de3574):
+  - @atlaskit/media-card@44.1.1
+  - @atlaskit/media-ui@8.0.0
+
+## 18.5.1
+- [patch] [0a297ba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0a297ba):
+
+  - Packages should not be shown in the navigation, search and overview
+
+## 18.5.0
+- [minor] [c1ea81c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c1ea81c):
+
+  - use custom video player for inline video in media-card
+
+## 18.4.0
+- [minor] [b02ffa7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b02ffa7):
+
+  - add touch event helpers and canvas mocking
+
+## 18.3.2
+- [patch] [5a6de24](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5a6de24):
+
+  - translate component properties in media components
+
+## 18.3.1
+- Updated dependencies [ab9b69c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ab9b69c):
+  - @atlaskit/dropdown-menu@6.1.23
+  - @atlaskit/select@6.1.9
+  - @atlaskit/media-card@44.0.2
+  - @atlaskit/media-ui@7.6.2
+  - @atlaskit/icon@15.0.0
+
+## 18.3.0
+- [minor] [fa7d4c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fa7d4c5):
+
+  - asMock method was added; It can be used to convert any function into jest.Mock;
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/media-card@44.0.0
+  - @atlaskit/media-core@24.5.0
+
+## 18.2.12
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/media-card@43.0.0
+  - @atlaskit/media-core@24.4.0
+  - @atlaskit/media-store@8.3.0
+
+## 18.2.11
+- Updated dependencies [04c7192](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/04c7192):
+  - @atlaskit/media-core@24.3.1
+  - @atlaskit/media-card@42.0.0
+
+## 18.2.10
+- [patch] Updated dependencies [ced32d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ced32d0)
+  - @atlaskit/media-card@41.1.2
+  - @atlaskit/media-ui@7.0.0
+
+## 18.2.9
+- [patch] Cleanup media + editor integration 🔥 [2f9d14d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2f9d14d)
+
+## 18.2.8
+- [patch] Split Media + Editor cleanup part 1 [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+
+## 18.2.7
+- [patch] Updated dependencies [6e510d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e510d8)
+  - @atlaskit/media-core@24.2.2
+  - @atlaskit/media-card@40.0.0
+
+## 18.2.6
+- [patch] Fix bug with download binary [71ebe0b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/71ebe0b)
+
+## 18.2.5
+- [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+  - @atlaskit/media-card@39.0.0
+  - @atlaskit/media-core@24.2.0
+  - @atlaskit/media-store@8.1.0
+
+## 18.2.4
+- [patch] Add pagination to recents view in MediaPicker [4b3c1f5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b3c1f5)
+
+## 18.2.3
+- [patch] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [patch] Deprecate context.uploadFile & context.getFile. Instead context.file.upload & context.file.getFileState should be used; media-store's uploadFile function now takes MediaStore as a second argument, not MediaApiConfig [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+
+## 18.2.2
+- [patch] Updated dependencies [2d848cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d848cd)
+  - @atlaskit/media-core@24.0.3
+  - @atlaskit/media-store@7.0.0
+
+## 18.2.1
+- [patch] Updated dependencies [65c6514](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/65c6514)
+  - @atlaskit/dropdown-menu@6.1.17
+  - @atlaskit/select@6.0.2
+  - @atlaskit/media-card@37.0.1
+  - @atlaskit/media-ui@6.0.1
+  - @atlaskit/icon@14.0.0
+
+## 18.2.0
+- [minor] Add I18n support to media-card [dae7792](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dae7792)
+
+## 18.1.0
+- [minor] Support external image identifiers in media-card [82c8bb9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/82c8bb9)
+
+## 18.0.0
+- [major] Update RXJS dependency to ^5.5.0 [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+
+## 17.1.0
+- [minor] expose new context.collection methods [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+
+## 17.0.2
+- [patch] Update TS to 3.0 [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+- [none] Updated dependencies [f68d367](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f68d367)
+  - @atlaskit/media-core@23.1.1
+
+## 17.0.1
+- [patch] fix media-test-helpers dist [20756c3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/20756c3)
+
+## 17.0.0
+- [major] Remove new upload service feature flag (useNewUploadService). Now new upload service will be used by default. [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+- [none] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+  - @atlaskit/media-store@6.0.1
+  - @atlaskit/media-core@23.0.2
+
 ## 16.0.0
 - [major] Synchronous property "serviceHost" as part of many Interfaces in media components (like MediaApiConfig) is removed and replaced with asynchronous "baseUrl" as part of Auth object. [d02746f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d02746f)
 - [major] Updated dependencies [d02746f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d02746f)

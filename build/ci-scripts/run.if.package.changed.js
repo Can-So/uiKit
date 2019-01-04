@@ -5,6 +5,35 @@ const {
 } = require('../utils/packages');
 const git = require('../utils/git');
 const spawndamnit = require('spawndamnit');
+const fse = require('fs-extra');
+const path = require('path');
+const bolt = require('bolt');
+
+async function getAllFSChangesets(cwd) {
+  const projectRoot = (await bolt.getProject({ cwd: process.cwd() })).dir;
+  const changesetBase = path.join(projectRoot, '.changeset');
+  if (!fse.existsSync(changesetBase)) {
+    throw new Error('There is no .changeset directory in this project');
+  }
+
+  const dirs = fse.readdirSync(changesetBase);
+  // this needs to support just not dealing with dirs that aren't set up properly
+  return dirs
+    .filter(file => fse.lstatSync(path.join(changesetBase, file)).isDirectory())
+    .map(changesetDir => {
+      const jsonPath = path.join(changesetBase, changesetDir, 'changes.json');
+      // $ExpectError
+      return require(jsonPath);
+    });
+}
+
+async function getNewFSChangesets(cwd) {
+  const projectRoot = (await bolt.getProject({ cwd: process.cwd() })).dir;
+  const paths = await git.getChangedChangesetFilesSinceMaster();
+
+  // $ExpectError
+  return paths.map(filePath => require(path.join(projectRoot, filePath)));
+}
 
 /**
  * This is a helper to run a script if a certaing package changed.
@@ -28,10 +57,18 @@ const spawndamnit = require('spawndamnit');
     );
     process.exit(1);
   }
+  // Take changed files since a commit or master branch
+  let branch = await git.getBranchName();
 
   // Take packages that are going to be released,
-  // because using only files is not enough in cases where pacakges is only dependent of other package
-  let unpublishedChangesets = await git.getUnpublishedChangesetCommits();
+  // because using only files is not enough in cases where packages is only dependent of other package
+  let newChangesets =
+    branch === 'master'
+      ? await getAllFSChangesets(cwd)
+      : await getNewFSChangesets(cwd);
+  let oldChangesets = await git.getUnpublishedChangesetCommits();
+  let unpublishedChangesets = oldChangesets.concat(newChangesets);
+
   let packagesToRelease = unpublishedChangesets
     .reduce(
       (acc, changeset) =>
@@ -39,9 +76,6 @@ const spawndamnit = require('spawndamnit');
       [],
     )
     .filter(change => change.type !== 'none');
-
-  // Take changed files since a commit or master branch
-  let branch = await git.getBranchName();
   let changedPackages =
     branch === 'master'
       ? await getChangedPackagesSincePublishCommit()

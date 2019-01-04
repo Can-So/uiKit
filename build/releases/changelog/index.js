@@ -1,52 +1,37 @@
-const { generateMarkdownTemplate } = require('./template');
+const generateMarkdownTemplate = require('./template');
 const fs = require('fs');
 const bolt = require('bolt');
 const path = require('path');
-const os = require('os');
 const util = require('util');
-const { sep } = require('path');
-const logger = require('../../utils/logger');
+const logger = require('@atlaskit/build-utils/logger');
 
 function writeFile(filePath, fileContents) {
   return util.promisify(cb => fs.writeFile(filePath, fileContents, cb))();
 }
 
-async function getRepoUrl(cwd, opts) {
-  if (opts.repoUrl) return opts.repoUrl;
-  const project = await bolt.getProject({ cwd });
-  if (
-    project &&
-    project.config.bolt &&
-    project.config.bolt.releases &&
-    project.config.bolt.releases.baseCommitUrl
-  )
-    return project.config.bolt.releases.baseCommitUrl;
-  return '';
-}
-
-async function updateChangelog(releaseObject, opts = { cwd: '', repoUrl: '' }) {
+async function updateChangelog(releaseObject, opts) {
   const cwd = opts.cwd || process.cwd();
   const allPackages = await bolt.getWorkspaces({ cwd });
-  const prefix = opts.prefix || '';
-  const repoUrl = await getRepoUrl(cwd, opts);
-  let udpatedChangelogs = [];
+  const udpatedChangelogs = [];
   // Updating ChangeLog files for each package
-  for (let i = 0; i < releaseObject.releases.length; i++) {
-    const release = releaseObject.releases[i];
+  for (const release of releaseObject.releases) {
     const pkg = allPackages.find(a => a.name === release.name);
-    if (!pkg)
+    if (!pkg) {
       logger.warn(
         `While writing changelog, could not find workspace ${
           release.name
         } in project.`,
       );
+    }
     const changelogPath = path.join(pkg.dir, 'CHANGELOG.md');
 
-    const templateString = `\n\n${generateMarkdownTemplate(
+    const markdown = await generateMarkdownTemplate(
       release,
       releaseObject,
-      repoUrl,
-    ).trim('\n')}\n`;
+      opts,
+    );
+
+    const templateString = `\n\n${markdown.trim('\n')}\n`;
     try {
       if (fs.existsSync(changelogPath)) {
         await prependFile(changelogPath, templateString, pkg);
@@ -55,6 +40,7 @@ async function updateChangelog(releaseObject, opts = { cwd: '', repoUrl: '' }) {
       }
     } catch (e) {
       logger.warn(e);
+      return;
     }
     logger.log(`Updated file ${changelogPath}`);
     udpatedChangelogs.push(changelogPath);
@@ -64,6 +50,7 @@ async function updateChangelog(releaseObject, opts = { cwd: '', repoUrl: '' }) {
 
 async function prependFile(filePath, data, pkg) {
   const fileData = fs.readFileSync(filePath).toString();
+  // if the file exists but doesn't have the header, we'll add it in
   if (!fileData) {
     const completelyNewChangelog = `# ${pkg.name}${data}`;
     fs.writeFileSync(filePath, completelyNewChangelog);
@@ -73,6 +60,4 @@ async function prependFile(filePath, data, pkg) {
   fs.writeFileSync(filePath, newChangelog);
 }
 
-module.exports = {
-  updateChangelog,
-};
+module.exports = updateChangelog;

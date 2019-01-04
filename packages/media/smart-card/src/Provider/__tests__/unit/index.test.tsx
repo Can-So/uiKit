@@ -7,12 +7,13 @@ import Context from '../../../Context';
 describe('Provider', () => {
   it('should inject the default client instance', () => {
     const render = jest.fn();
+    const client = new Client();
     mount(
-      <Provider>
+      <Provider client={client}>
         <Context.Consumer>{render}</Context.Consumer>
       </Provider>,
     );
-    expect(render).toBeCalledWith(Provider.defaultClient);
+    expect(render).toBeCalledWith(client);
   });
 
   it('should inject the custom client instance', () => {

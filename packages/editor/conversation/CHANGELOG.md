@@ -1,5 +1,190 @@
 # @atlaskit/conversation
 
+## 11.1.7
+- Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
+  - @atlaskit/editor-common@25.0.0
+  - @atlaskit/editor-core@92.0.0
+  - @atlaskit/renderer@33.0.0
+  - @atlaskit/comment@6.0.32
+  - @atlaskit/reactions@15.0.11
+  - @atlaskit/util-data-test@10.0.28
+
+## 11.1.6
+- Updated dependencies [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
+  - @atlaskit/editor-common@24.0.0
+  - @atlaskit/editor-core@91.1.0
+  - @atlaskit/renderer@32.1.0
+
+## 11.1.5
+- Updated dependencies [80f765b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80f765b):
+  - @atlaskit/editor-common@23.0.0
+  - @atlaskit/editor-core@91.0.0
+  - @atlaskit/renderer@32.0.0
+  - @atlaskit/comment@6.0.31
+  - @atlaskit/reactions@15.0.10
+  - @atlaskit/util-data-test@10.0.26
+
+## 11.1.4
+- Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
+  - @atlaskit/analytics-next@3.1.2
+  - @atlaskit/avatar@14.1.7
+  - @atlaskit/comment@6.0.30
+  - @atlaskit/single-select@6.0.11
+  - @atlaskit/editor-core@90.3.15
+  - @atlaskit/renderer@31.1.3
+  - @atlaskit/analytics-listeners@4.1.4
+  - @atlaskit/reactions@15.0.9
+  - @atlaskit/util-data-test@10.0.25
+  - @atlaskit/docs@6.0.0
+
+## 11.1.3
+- Updated dependencies [3a7224a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3a7224a):
+  - @atlaskit/comment@6.0.28
+  - @atlaskit/editor-core@90.0.0
+
+## 11.1.2
+- Updated dependencies [7e8b4b9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8b4b9):
+  - @atlaskit/editor-common@22.0.0
+  - @atlaskit/editor-core@89.0.0
+  - @atlaskit/renderer@31.0.0
+  - @atlaskit/comment@6.0.25
+  - @atlaskit/reactions@15.0.4
+  - @atlaskit/util-data-test@10.0.21
+
+## 11.1.1
+- Updated dependencies [2c21466](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2c21466):
+  - @atlaskit/editor-common@21.0.0
+  - @atlaskit/editor-core@88.0.0
+  - @atlaskit/renderer@30.0.0
+  - @atlaskit/comment@6.0.24
+  - @atlaskit/reactions@15.0.3
+  - @atlaskit/util-data-test@10.0.20
+
+## 11.1.0
+- [minor] adds a new saveDraft abstract method on the ConversationResource which will be implemented in Bitbucket to enable storing of comment drafts in localStorage [66e2375](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/66e2375)
+
+## 11.0.2
+- [patch] Updated dependencies [052ce89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/052ce89)
+  - @atlaskit/comment@6.0.23
+  - @atlaskit/editor-core@87.0.0
+  - @atlaskit/editor-common@20.1.2
+
+## 11.0.1
+- [patch] Updated dependencies [b1ce691](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1ce691)
+  - @atlaskit/editor-common@20.0.0
+  - @atlaskit/editor-core@86.0.0
+  - @atlaskit/renderer@29.0.0
+  - @atlaskit/comment@6.0.21
+  - @atlaskit/reactions@15.0.1
+  - @atlaskit/util-data-test@10.0.16
+
+## 11.0.0
+- [major] Fix reactions. Remove context and receive store as a prop. [b1de9c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1de9c8)
+
+## 10.0.6
+- [patch] Updated dependencies [6e510d8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e510d8)
+  - @atlaskit/editor-core@85.5.1
+  - @atlaskit/editor-common@19.3.2
+  - @atlaskit/renderer@28.0.0
+
+## 10.0.5
+- [patch] Updated dependencies [2afa60d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2afa60d)
+  - @atlaskit/editor-common@19.0.0
+  - @atlaskit/editor-core@85.0.0
+  - @atlaskit/renderer@27.0.0
+  - @atlaskit/comment@6.0.20
+  - @atlaskit/reactions@14.0.5
+  - @atlaskit/util-data-test@10.0.14
+
+## 10.0.4
+- [patch] Upgrade react-syntax-highlighter again and use async loaded prism [260d66a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/260d66a)
+
+## 10.0.3
+- [patch] Updated dependencies [8b2c4d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8b2c4d3)
+- [patch] Updated dependencies [3302d51](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3302d51)
+  - @atlaskit/editor-common@18.0.0
+  - @atlaskit/editor-core@84.0.0
+  - @atlaskit/renderer@26.0.0
+  - @atlaskit/comment@6.0.19
+  - @atlaskit/reactions@14.0.3
+  - @atlaskit/util-data-test@10.0.12
+
+## 10.0.2
+- [patch] Updated dependencies [23c7eca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23c7eca)
+  - @atlaskit/comment@6.0.18
+  - @atlaskit/util-data-test@10.0.11
+  - @atlaskit/editor-core@83.0.0
+  - @atlaskit/renderer@25.0.0
+
+## 10.0.1
+- [patch] Fix allowFeedbackAndHelpButtons prop not being passed through to the CommentContainer by Conversations [76f20a3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76f20a3)
+
+## 10.0.0
+- [major] Reactions state management revisited [7e8d079](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8d079)
+- [major] Updated dependencies [7e8d079](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7e8d079)
+  - @atlaskit/reactions@14.0.0
+
+## 9.3.8
+- [patch] Updated dependencies [ef76f1f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ef76f1f)
+  - @atlaskit/comment@6.0.16
+  - @atlaskit/editor-common@17.0.1
+  - @atlaskit/editor-core@82.0.0
+
+## 9.3.7
+- [patch] Updated dependencies [927ae63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/927ae63)
+  - @atlaskit/editor-common@17.0.0
+  - @atlaskit/editor-core@81.0.0
+  - @atlaskit/reactions@13.1.3
+  - @atlaskit/util-data-test@10.0.10
+  - @atlaskit/renderer@24.0.0
+  - @atlaskit/comment@6.0.15
+
+## 9.3.6
+- [patch] Updated dependencies [2a6410f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2a6410f)
+  - @atlaskit/editor-common@16.2.0
+  - @atlaskit/editor-core@80.5.0
+  - @atlaskit/renderer@23.0.0
+
+## 9.3.5
+- [patch] use new tsconfig for typechecking [09df171](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/09df171)
+
+## 9.3.4
+- [patch] Updated dependencies [6e1d642](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6e1d642)
+  - @atlaskit/editor-common@16.0.0
+  - @atlaskit/editor-core@80.0.0
+  - @atlaskit/renderer@22.0.0
+  - @atlaskit/comment@6.0.14
+  - @atlaskit/reactions@13.1.1
+  - @atlaskit/util-data-test@10.0.9
+
+## 9.3.3
+- [patch] Add module mainField to packagejson to get codesplitting to work in BBCloud [f8c92b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f8c92b0)
+
+## 9.3.2
+- [patch] Updated dependencies [7545979](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7545979)
+  - @atlaskit/editor-common@15.0.0
+  - @atlaskit/editor-core@79.0.0
+  - @atlaskit/renderer@21.0.0
+  - @atlaskit/comment@6.0.12
+  - @atlaskit/reactions@13.0.9
+  - @atlaskit/util-data-test@10.0.8
+
+## 9.3.1
+- [patch] Updated dependencies [90ba6bd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/90ba6bd)
+  - @atlaskit/analytics-listeners@4.0.0
+
+## 9.3.0
+- [minor] Add analytics track events to Conversation component [2d6ab8d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d6ab8d)
+
+## 9.2.1
+- [patch] Updated dependencies [911a570](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/911a570)
+  - @atlaskit/renderer@20.1.1
+  - @atlaskit/editor-core@78.0.0
+  - @atlaskit/comment@6.0.11
+
+## 9.2.0
+- [minor] Adds option to disable heading ids in renderer, and disable them by default in conversations [efcca1a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/efcca1a)
+
 ## 9.1.5
 - [patch] Updated dependencies [b12f7e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b12f7e6)
   - @atlaskit/renderer@20.0.11

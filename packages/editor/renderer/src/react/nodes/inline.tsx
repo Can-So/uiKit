@@ -1,0 +1,11 @@
+import * as React from 'react';
+export default function Inline(props) {
+  const { children } = props;
+  const childCount = React.Children.toArray(children).length;
+
+  if (!childCount) {
+    return <>&nbsp;</>;
+  }
+
+  return children;
+}
