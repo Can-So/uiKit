@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { CSSProperties } from 'react';
-import { Rectangle, Camera, Vector2 } from '@atlaskit/media-ui';
+import {
+  Rectangle,
+  Camera,
+  Vector2,
+  getCssFromImageOrientation,
+} from '@atlaskit/media-ui';
 import { BaselineExtend, ImageWrapper, Img } from '../../styled';
 import { ZoomLevel } from '../../domain/zoomLevel';
 import { closeOnDirectClick } from '../../utils/closeOnDirectClick';
@@ -29,6 +34,7 @@ const naturalSizeRectangle = (el: HTMLImageElement): Rectangle => {
 
 export type Props = {
   src: string;
+  orientation?: number;
   onClose?: () => void;
   onLoad: () => void;
   onError: () => void;
@@ -67,7 +73,7 @@ export class InteractiveImg extends React.Component<Props, State> {
   }
 
   render() {
-    const { src, onClose } = this.props;
+    const { src, onClose, orientation } = this.props;
     const { zoomLevel, camera, isDragging } = this.state;
 
     const canDrag = camera.match({
@@ -81,6 +87,10 @@ export class InteractiveImg extends React.Component<Props, State> {
       pending: () => ({}),
       failed: () => ({}),
     });
+    if (orientation) {
+      const transform = getCssFromImageOrientation(orientation);
+      imgStyle.transform = transform;
+    }
 
     return (
       <ImageWrapper

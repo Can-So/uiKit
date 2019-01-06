@@ -161,3 +161,14 @@ export const CardsWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
 export const CardItemWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
   display: inline-block;
 `;
+
+export const SelectWrapper = styled.div`
+  width: 150px;
+`;
+export const OptionsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: space-around;
+  width: 250px;
+`;

@@ -20,6 +20,7 @@ import {
   UploadableFileUpfrontIds,
 } from '@atlaskit/media-store';
 import { EventEmitter2 } from 'eventemitter2';
+import { map } from 'rxjs/operators/map';
 import { MediaFile, PublicMediaFile } from '../domain/file';
 
 import { RECENTS_COLLECTION } from '../popup/config';
@@ -169,7 +170,6 @@ export class NewUploadServiceImpl implements UploadService {
 
         let userUpfrontId: Promise<string> | undefined;
         let userOccurrenceKey: Promise<string> | undefined;
-
         let upfrontId = Promise.resolve(id);
 
         if (!shouldCopyFileToRecents) {
@@ -180,6 +180,8 @@ export class NewUploadServiceImpl implements UploadService {
             occurrenceKey: tenantOccurrenceKey,
           };
           // We want to create an empty file in the tenant collection
+          // TODO [MS-1355]: using context.file.touchFiles instead of createFile will speed up things
+          // since we can lookup the id in the cache without wait for this to finish
           upfrontId = this.tenantMediaStore
             .createFile(options)
             .then(response => response.data.id);
@@ -231,10 +233,24 @@ export class NewUploadServiceImpl implements UploadService {
         const keyWithCollection = FileStreamCache.createKey(id, {
           collectionName: this.tenantUploadParams.collection,
         });
-
         // We want to save the observable without collection too, due consumers using cards without collection.
         fileStreamsCache.set(key, observable);
         fileStreamsCache.set(keyWithCollection, observable);
+        upfrontId.then(id => {
+          // We assign the tenant id to the observable to not emit user id instead
+          const tenantObservable = observable.pipe(
+            map(file => ({
+              ...file,
+              id,
+            })),
+          );
+          const key = FileStreamCache.createKey(id);
+          const keyWithCollection = FileStreamCache.createKey(id, {
+            collectionName: this.tenantUploadParams.collection,
+          });
+          fileStreamsCache.set(key, tenantObservable);
+          fileStreamsCache.set(keyWithCollection, tenantObservable);
+        });
 
         return cancellableFileUpload;
       },
