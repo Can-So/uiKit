@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 27.0.5
+- [patch] [8314694](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8314694):
+
+  - Support uploading + processing files in MediaViewer
+
 ## 27.0.4
 - [patch] [442821a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/442821a):
 

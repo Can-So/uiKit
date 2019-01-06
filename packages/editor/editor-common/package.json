@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-common",
-  "version": "25.0.4",
+  "version": "26.0.0",
   "description": "A package that contains common classes and components for editor and renderer",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -47,8 +47,8 @@
     "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "@atlaskit/editor-json-transformer": "^4.1.1",
-    "@atlaskit/editor-test-helpers": "^6.3.4",
+    "@atlaskit/editor-json-transformer": "^4.1.2",
+    "@atlaskit/editor-test-helpers": "^6.3.5",
     "@atlaskit/media-core": "^24.7.2",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "@types/chai": "^4.0.4",

@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.4.1
+- [patch] [57cffcb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/57cffcb):
+
+  - Need tslib
+
 ## 5.4.0
 - [minor] [1205725](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1205725):
 

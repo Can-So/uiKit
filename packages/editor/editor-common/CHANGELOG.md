@@ -1,5 +1,15 @@
 # @atlaskit/editor-common
 
+## 26.0.0
+- [major] [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+
+  - ED-5805: Popup to support being sticky with alignX=top
+
+## 25.0.5
+- [patch] [5d4527e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5d4527e):
+
+  - Fix issue where date was not respecting user's local date for initial date selection in quick insert
+
 ## 25.0.4
 - [patch] [80cadc7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80cadc7):
 

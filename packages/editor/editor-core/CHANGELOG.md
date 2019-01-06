@@ -1,5 +1,20 @@
 # @atlaskit/editor-core
 
+## 92.0.19
+- [patch] [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+
+  - ED-5805: Popup to support being sticky with alignX=top
+
+## 92.0.18
+- [patch] [5d4527e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5d4527e):
+
+  - Fix issue where date was not respecting user's local date for initial date selection in quick insert
+
+## 92.0.17
+- [patch] [561f6cb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/561f6cb):
+
+  - ED-5336 Disallow nesting lists past 6 levels
+
 ## 92.0.16
 - [patch] [e251065](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e251065):
 
