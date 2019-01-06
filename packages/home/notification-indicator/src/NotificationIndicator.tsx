@@ -3,8 +3,10 @@ import { Component } from 'react';
 
 import Badge from '@atlaskit/badge';
 import { NotificationLogProvider } from '@atlaskit/notification-log-client';
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 
 const MAX_NOTIFICATIONS_COUNT: number = 9;
+const NAVIGATION_CHANNEL = 'navigation';
 
 export interface ValueUpdatingParams {
   source: string;
@@ -31,13 +33,14 @@ export interface Props {
   refreshOnVisibilityChange?: boolean;
   onCountUpdating?: (param: ValueUpdatingParams) => ValueUpdatingResult;
   onCountUpdated?: (param: ValueUpdatedParams) => void;
+  createAnalyticsEvent?: any;
 }
 
 export interface State {
   count: number | null;
 }
 
-export default class NotificationIndicator extends Component<Props, State> {
+class NotificationIndicator extends Component<Props, State> {
   private intervalId?: number;
   private visibilityChangesSinceTimer: number = 0;
   private notificationLogProvider?: NotificationLogProvider;
@@ -137,6 +140,19 @@ export default class NotificationIndicator extends Component<Props, State> {
         this.props.onCountUpdated &&
         (this.state.count === null || this.state.count !== count)
       ) {
+        // TODO mt: decide the event payload and channel
+        const { createAnalyticsEvent } = this.props;
+        if (createAnalyticsEvent && source === 'mount' && count > 0) {
+          const event = createAnalyticsEvent({
+            name: 'notificationsDrawer',
+            action: 'mounted',
+            attributes: {
+              badgeCount: count,
+            },
+          });
+          event.fire(NAVIGATION_CHANNEL);
+        }
+
         this.props.onCountUpdated({
           oldCount: this.state.count || 0,
           newCount: count,
@@ -161,3 +177,5 @@ export default class NotificationIndicator extends Component<Props, State> {
     ) : null;
   }
 }
+
+export default withAnalyticsEvents()(NotificationIndicator);

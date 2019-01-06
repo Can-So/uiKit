@@ -7,6 +7,7 @@ import Button from '@atlaskit/button';
 import { LayoutManager, NavigationProvider } from '@atlaskit/navigation-next';
 
 import GlobalNavigation from '../src';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
 
 const fabricNotificationLogUrl = '/gateway/api/notification-log/';
 const cloudId = 'DUMMY-158c8204-ff3b-47c2-adbb-a0906ccc722b';
@@ -89,10 +90,25 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
       <NavigationProvider>
         <LayoutManager
           globalNavigation={() => (
-            <Global
-              updateIframeUrl={this.updateIframeUrl}
-              resetNotificationCount={this.resetNotificationCount}
-            />
+            <AnalyticsListener
+              channel="navigation"
+              onEvent={analyticsEvent => {
+                const { payload, context } = analyticsEvent;
+                const eventId =
+                  (payload.actionSubject || payload.name) +
+                  ' ' +
+                  (payload.action || payload.eventType);
+                console.log('Received event [' + eventId + ']: ', {
+                  payload,
+                  context,
+                });
+              }}
+            >
+              <Global
+                updateIframeUrl={this.updateIframeUrl}
+                resetNotificationCount={this.resetNotificationCount}
+              />
+            </AnalyticsListener>
           )}
           productNavigation={() => null}
           containerNavigation={() => null}
