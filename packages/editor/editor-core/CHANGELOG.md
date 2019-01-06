@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.19
+- [patch] [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+
+  - ED-5805: Popup to support being sticky with alignX=top
+
 ## 92.0.18
 - [patch] [5d4527e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5d4527e):
 
