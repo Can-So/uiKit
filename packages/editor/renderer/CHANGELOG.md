@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 33.0.5
+- [patch] [f112576](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f112576):
+
+  - ED-6001: fix react error "Maximum update depth exceeded" in renderer
+
 ## 33.0.4
 - Updated dependencies [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
   - @atlaskit/editor-json-transformer@4.1.2

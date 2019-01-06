@@ -1,1 +1,0 @@
-- ED-6001: fix react error "Maximum update depth exceeded" in renderer
