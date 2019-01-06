@@ -69,7 +69,6 @@ export class ImageViewer extends BaseViewer<
           collection: collectionName,
         });
         this.cancelImageFetch = () => controller && controller.abort();
-        // imagePreview = URL.createObjectURL(await response);
         imagePreview = await response;
       } else {
         const { preview } = file;
