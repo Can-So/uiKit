@@ -6,6 +6,7 @@ import {
   WidthConsumer,
   TableSharedCssClassName,
   akEditorTableNumberColumnWidth,
+  tableCellMinWidth,
 } from '@atlaskit/editor-common';
 import overflowShadow, { OverflowShadowProps } from '../../ui/overflow-shadow';
 
@@ -38,9 +39,6 @@ const addNumberColumnIndexes = rows => {
     });
   });
 };
-
-const getStyle = (dom: Element, prop: string) =>
-  parseInt(window.getComputedStyle(dom)[prop] || '0', 10);
 
 class Table extends React.Component<TableProps & OverflowShadowProps> {
   wrapper: HTMLDivElement | null;
@@ -83,22 +81,17 @@ class Table extends React.Component<TableProps & OverflowShadowProps> {
     if (!columnWidths) {
       return null;
     }
-    let cellMinWidth = 0;
     let actualWidth = 0;
     if (this.wrapper) {
-      const cell = this.wrapper.querySelector('td, th');
-      if (cell) {
-        cellMinWidth = getStyle(cell, 'min-width');
-      }
-      actualWidth = getStyle(this.wrapper, 'width');
+      actualWidth = this.wrapper.offsetWidth;
+    } else {
+      this.forceUpdate();
+      return;
     }
 
-    const minTableWidth = columnWidths.reduce(
-      (acc: number, width: number | null) => {
-        return (acc += width || cellMinWidth);
-      },
-      0,
-    );
+    const minTableWidth = columnWidths.reduce((acc: number, width: number) => {
+      return (acc += Math.ceil(width) || tableCellMinWidth);
+    }, 0);
 
     return (
       <colgroup>
@@ -111,9 +104,9 @@ class Table extends React.Component<TableProps & OverflowShadowProps> {
           // we can't rely on css min-width as long as we use "table-layout: fixed"
           // therefore if a column is not resized, we enforce min-width when table is smaller than minimum table width
           if (colWidth) {
-            width = colWidth < cellMinWidth ? cellMinWidth : colWidth;
+            width = colWidth < tableCellMinWidth ? tableCellMinWidth : colWidth;
           } else {
-            width = actualWidth < minTableWidth ? cellMinWidth : null;
+            width = actualWidth <= minTableWidth ? tableCellMinWidth : 0;
           }
           const style = width ? { width: `${width}px` } : {};
           return <col key={idx} style={style} />;
