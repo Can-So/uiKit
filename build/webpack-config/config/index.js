@@ -150,7 +150,6 @@ module.exports = function createWebpackConfig(
             },
           ],
         },
-
         {
           test: /\.css$/,
           use: [

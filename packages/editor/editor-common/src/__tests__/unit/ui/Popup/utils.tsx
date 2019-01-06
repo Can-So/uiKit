@@ -4,7 +4,7 @@ import { calculatePosition } from '../../../../ui/Popup/utils';
 
 describe('@atlaskit/editor-common popup utils', () => {
   let offset;
-  let stickToBottom;
+  let stick;
   let wrapper;
   let root;
   let popup;
@@ -12,7 +12,7 @@ describe('@atlaskit/editor-common popup utils', () => {
 
   beforeEach(() => {
     offset = [0, 0];
-    stickToBottom = false;
+    stick = false;
     wrapper = mount(
       <div id="root">
         <span id="popup">OPA</span>
@@ -62,7 +62,7 @@ describe('@atlaskit/editor-common popup utils', () => {
       target,
       popup,
       offset,
-      stickToBottom,
+      stick,
     });
 
     expect(calc).toEqual({
@@ -78,7 +78,7 @@ describe('@atlaskit/editor-common popup utils', () => {
       target,
       popup,
       offset,
-      stickToBottom,
+      stick,
     });
 
     expect(calc).toEqual({
@@ -94,7 +94,7 @@ describe('@atlaskit/editor-common popup utils', () => {
       target,
       popup,
       offset,
-      stickToBottom,
+      stick,
     });
 
     expect(calc).toEqual({
@@ -110,7 +110,7 @@ describe('@atlaskit/editor-common popup utils', () => {
       target,
       popup,
       offset,
-      stickToBottom,
+      stick,
     });
 
     expect(calc).toEqual({

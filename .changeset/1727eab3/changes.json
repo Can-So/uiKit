@@ -1,0 +1,106 @@
+{
+  "releases": [
+    { "name": "@atlaskit/editor-common", "type": "major" },
+    { "name": "@atlaskit/editor-core", "type": "patch" }
+  ],
+  "dependents": [
+    {
+      "name": "@atlaskit/conversation",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/renderer",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-bitbucket-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-test-helpers",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-confluence-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-test-helpers",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-jira-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-json-transformer",
+        "@atlaskit/editor-test-helpers",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-json-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-test-helpers",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-markdown-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-test-helpers",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-mobile-bridge",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-json-transformer",
+        "@atlaskit/editor-test-helpers",
+        "@atlaskit/renderer",
+        "@atlaskit/task-decision",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core"
+      ]
+    },
+    {
+      "name": "@atlaskit/editor-test-helpers",
+      "type": "patch",
+      "dependencies": ["@atlaskit/editor-common", "@atlaskit/editor-core"]
+    },
+    {
+      "name": "@atlaskit/editor-wikimarkup-transformer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-json-transformer",
+        "@atlaskit/editor-test-helpers",
+        "@atlaskit/renderer",
+        "@atlaskit/editor-common",
+        "@atlaskit/editor-core"
+      ]
+    },
+    {
+      "name": "@atlaskit/renderer",
+      "type": "patch",
+      "dependencies": [
+        "@atlaskit/editor-json-transformer",
+        "@atlaskit/editor-test-helpers",
+        "@atlaskit/task-decision",
+        "@atlaskit/editor-common"
+      ]
+    },
+    {
+      "name": "@atlaskit/task-decision",
+      "type": "patch",
+      "dependencies": ["@atlaskit/renderer", "@atlaskit/editor-common"]
+    }
+  ]
+}
