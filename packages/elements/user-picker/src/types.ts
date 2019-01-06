@@ -1,8 +1,8 @@
 export type UserPickerProps = {
   /** List of users or teams to be used as options by the user picker. */
   options?: OptionData[];
-  /** Width of the user picker field. */
-  width?: number;
+  /** Width of the user picker field. It can be the amount of pixels as numbers or a string with the percentage.*/
+  width?: number | string;
   /** Sets the minimum width for the menu. If not set, menu will always have the same width of the field */
   menuMinWidth?: number;
   /** Function used to load options asynchronously. */
@@ -35,6 +35,8 @@ export type UserPickerProps = {
   defaultValue?: Value;
   /** Placeholder text to be shown when there is no value in the field. */
   placeholder?: string;
+  /** Message to encourage the user to add more items to user picker. */
+  addMoreMessage?: string;
   /** Message to be shown when the menu is open but no options are provided. */
   noOptionsMessage?: string;
   /** Controls if the user picker has a value or not. If not provided, UserPicker will control the value internally. */

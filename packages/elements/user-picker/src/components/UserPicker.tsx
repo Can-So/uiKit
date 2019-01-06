@@ -346,6 +346,8 @@ class UserPickerInternal extends React.Component<
       clearValueLabel,
       menuMinWidth,
       menuPortalTarget,
+      addMoreMessage,
+      isRequired,
     } = this.props;
     const {
       count,
@@ -374,6 +376,7 @@ class UserPickerInternal extends React.Component<
         placeholder={
           placeholder || <FormattedMessage {...messages.placeholder} />
         }
+        addMoreMessage={addMoreMessage}
         classNamePrefix="fabric-user-picker"
         onClearIndicatorHover={this.handleClearIndicatorHover}
         hoveringClearIndicator={hoveringClearIndicator}
@@ -392,6 +395,7 @@ class UserPickerInternal extends React.Component<
         clearValueLabel={clearValueLabel}
         menuMinWidth={menuMinWidth}
         menuPortalTarget={menuPortalTarget}
+        isRequired={isRequired}
       />
     );
   }
