@@ -339,6 +339,7 @@ if (process.env.VISUAL_REGRESSION) {
     }
     console.log('puppeteer:', puppeteer.executablePath());
     global.browser = await puppeteer.launch({
+      executablePath: '/usr/bin/chromium-browser',
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -349,7 +350,7 @@ if (process.env.VISUAL_REGRESSION) {
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);
 
   // afterAll(async () => {
-    // await global.browser.close();
+  // await global.browser.close();
   // });
 
   // TODO tweak failureThreshold to provide best results
