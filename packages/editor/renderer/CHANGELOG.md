@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 33.0.6
+- [patch] [38f3592](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38f3592):
+
+  - ED-5990 Fixes logic for merging marks
+
 ## 33.0.5
 - [patch] [f112576](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f112576):
 
