@@ -164,10 +164,10 @@ pipelines:
             - yarn test:webdriver:browserstack
           caches:
             - node
-      # This will run with the visual regression tool
+    # This will run with the visual regression tool
     build-visual-regression:
-      image: atlassianlabs/atlaskit-mk-2:visual-regression
       - step:
+          image: atlassianlabs/atlaskit-mk-2:visual-regression
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
