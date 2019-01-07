@@ -96,6 +96,7 @@ describe('modal-dialog', () => {
       });
     });
 
+    /* eslint-disable no-console */
     describe('header', () => {
       it('should render when set via components prop', () => {
         const node = <span>My header</span>;
@@ -105,6 +106,8 @@ describe('modal-dialog', () => {
         expect(wrapper.contains(node)).toBe(true);
       });
       it('should render when set via (deprecated) header prop', () => {
+        // $FlowFixMe
+        console.warn = jest.fn();
         const node = <span>My header</span>;
         const wrapper = mount(
           <ModalDialog header={() => node} onClose={noop} />,
@@ -112,6 +115,8 @@ describe('modal-dialog', () => {
         expect(wrapper.contains(node)).toBe(true);
       });
       it('should prefer the components prop over header prop ', () => {
+        // $FlowFixMe
+        console.warn = jest.fn();
         const node = <span>My header</span>;
         const nodeDeprecated = <span>My deprecated header</span>;
         const wrapper = mount(
@@ -137,6 +142,8 @@ describe('modal-dialog', () => {
         expect(wrapper.contains(node)).toBe(true);
       });
       it('should render when set via (deprecated) footer prop', () => {
+        // $FlowFixMe
+        console.warn = jest.fn();
         const node = <span>My footer</span>;
         const wrapper = mount(
           <ModalDialog footer={() => node} onClose={noop} />,
@@ -145,6 +152,8 @@ describe('modal-dialog', () => {
         expect(wrapper.contains(node)).toBe(true);
       });
       it('should prefer the components prop over footer prop ', () => {
+        // $FlowFixMe
+        console.warn = jest.fn();
         const node = <span>My footer</span>;
         const nodeDeprecated = <span>My deprecated footer</span>;
         const wrapper = mount(
@@ -173,6 +182,8 @@ describe('modal-dialog', () => {
       });
 
       it('should render when set via (deprecated) body prop', () => {
+        // $FlowFixMe
+        console.warn = jest.fn();
         const node = <span>My body</span>;
         const wrapper = mount(<ModalDialog body={() => node} onClose={noop} />);
 
@@ -180,6 +191,8 @@ describe('modal-dialog', () => {
       });
 
       it('should prefer the components prop over body prop ', () => {
+        // $FlowFixMe
+        console.warn = jest.fn();
         // $FlowFixMe
         const node = React.forwardRef((props, ref) => {
           return <span ref={ref}>My body</span>;
@@ -197,6 +210,7 @@ describe('modal-dialog', () => {
         expect(wrapper.contains(nodeDeprecated)).toBe(false);
       });
     });
+    /* eslint-enable no-console */
 
     describe('children', () => {
       it('should render when set', () => {

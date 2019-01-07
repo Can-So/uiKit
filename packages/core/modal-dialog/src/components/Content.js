@@ -127,6 +127,22 @@ export default class Content extends Component<Props, State> {
       );
       this.determineKeylines();
     }
+
+    /* eslint-disable no-console */
+    // Check for deprecated props
+    if (this.props.header)
+      console.warn(
+        "Deprecation warning: Use of the header prop in ModalDialog is deprecated. Please compose your ModalDialog using the 'components' prop instead",
+      );
+    if (this.props.footer)
+      console.warn(
+        "Deprecation warning: Use of the footer prop in ModalDialog is deprecated. Please compose your ModalDialog using the 'components' prop instead",
+      );
+    if (this.props.body)
+      console.warn(
+        "Deprecation warning: Use of the body prop in ModalDialog is deprecated. Please compose your ModalDialog using the 'components' prop instead",
+      );
+    /* eslint-enable no-console */
   }
   componentWillReceiveProps(nextProps: Props) {
     const { stackIndex } = this.props;
