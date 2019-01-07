@@ -28,6 +28,7 @@ import {
   TableSharedCssClassName,
   tableMarginTop,
   akEditorSmallZIndex,
+  gridMediumMaxWidth,
 } from '@atlaskit/editor-common';
 import { RendererAppearance } from './';
 import { RendererCssClassName } from '../../consts';
@@ -227,7 +228,7 @@ export const Wrapper = styled.div < Props & HTMLAttributes < {} >> `
     }
   }
 
-  ${mediaSingleSharedStyle} & 
+  ${mediaSingleSharedStyle} &
   div[class^='image-wrap-'] + div[class^='image-wrap-'] {
     margin-left: 0;
     margin-right: 0;
@@ -322,10 +323,16 @@ export const Wrapper = styled.div < Props & HTMLAttributes < {} >> `
   }
 
   ${columnLayoutSharedStyle};
-  & [data-layout-type] {
+  & [data-layout-section] {
     margin-top: ${gridSize() * 2.5}px;
     & > div + div {
       margin-left: ${gridSize() * 4}px;
+    }
+
+    @media screen and (max-width: ${gridMediumMaxWidth}px) {
+      & > div + div {
+        margin-left: 0;
+      }
     }
   }
 
