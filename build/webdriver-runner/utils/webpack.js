@@ -163,7 +163,7 @@ async function startDevServer() {
   return new Promise((resolve, reject) => {
     let hasValidDepGraph = true;
 
-    compiler.plugin('invalid', fileName => {
+    compiler.hooks.invalid.tap('invalid', fileName => {
       hasValidDepGraph = false;
       console.log(
         'Something has changed and Webpack needs to invalidate dependencies graph',
@@ -171,7 +171,7 @@ async function startDevServer() {
       );
     });
 
-    compiler.plugin('done', () => {
+    compiler.hooks.done.tap('done', () => {
       hasValidDepGraph = true;
       setTimeout(() => {
         if (hasValidDepGraph) {
