@@ -1,0 +1,1 @@
+- JSDOM can't properly stub innertText (see: https://github.com/jsdom/jsdom/issues/1245) but textContent works fine. Changing all uses of innerText to textContent prevents future problems for new SSR consumers
