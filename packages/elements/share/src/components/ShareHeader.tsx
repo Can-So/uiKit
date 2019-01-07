@@ -3,11 +3,15 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';
 
-type Props = {
-  title?: string;
-};
+export namespace ShareHeader {
+  export type Props = {
+    title?: string;
+  };
+}
 
-export const ShareHeader = ({ title }: Props) => (
+export const ShareHeader: React.StatelessComponent<ShareHeader.Props> = ({
+  title,
+}) => (
   <FormHeader
     title={
       title === undefined ? <FormattedMessage {...messages.formTitle} /> : title

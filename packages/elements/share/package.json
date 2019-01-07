@@ -4,9 +4,6 @@
   "config": {
     "access": "private"
   },
-  "atlaskit": {
-    "internal": true
-  },
   "description": "Fabric Share Element",
   "main": "dist/es5/index.js",
   "modules": "dist/es2015/index.js",

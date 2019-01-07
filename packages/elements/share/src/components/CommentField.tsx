@@ -4,7 +4,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';
 
-export const CommentField = () => (
+export const CommentField: React.StatelessComponent<{}> = () => (
   <Field name="comment">
     {({ fieldProps }) => (
       <FormattedMessage {...messages.commentPlaceholder}>

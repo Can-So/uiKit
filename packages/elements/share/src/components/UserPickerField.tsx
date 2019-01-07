@@ -1,16 +1,19 @@
 import { Field } from '@atlaskit/form';
-import UserPicker, { OptionData } from '@atlaskit/user-picker';
-import { userPickerData } from '@atlaskit/util-data-test';
+import UserPicker, { LoadOptions, OptionData } from '@atlaskit/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';
 
-const validate = (value: OptionData[]) => {
-  console.log('validate');
-  return value && value.length > 0 ? undefined : 'REQUIRED';
-};
+const validate = (value: OptionData[]) =>
+  value && value.length > 0 ? undefined : 'REQUIRED';
 
-export const UserPickerField = () => (
+export namespace UserPickerField {
+  export type Props = {
+    loadOptions: LoadOptions;
+  };
+}
+
+export const UserPickerField = (props: UserPickerField.Props) => (
   <Field name="users" validate={validate}>
     {({ fieldProps }) => (
       <FormattedMessage {...messages.userPickerAddMoreMessage}>
@@ -19,7 +22,7 @@ export const UserPickerField = () => (
             {placeholder => (
               <UserPicker
                 {...fieldProps}
-                options={userPickerData}
+                loadOptions={props.loadOptions}
                 isMulti
                 width="100%"
                 placeholder={placeholder as string}
