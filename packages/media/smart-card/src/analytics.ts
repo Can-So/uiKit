@@ -26,7 +26,7 @@ export const unresolvedEvent = (
   url: string,
   state: ObjectState,
 ): GasPayload => ({
-  action: 'resolved',
+  action: 'unresolved',
   actionSubject: 'smartCard',
   actionSubjectId: url,
   eventType: 'operational',
