@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.20
+- [patch] [ababb4a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ababb4a):
+
+  - ED-5999: fix padding between Columns in renderer
+
 ## 92.0.19
 - [patch] [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
 
