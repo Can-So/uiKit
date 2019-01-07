@@ -220,6 +220,7 @@ export default class PickerFacade {
       fileName: file.name,
       fileSize: file.size,
       fileMimeType: file.type,
+      status: 'preview',
       dimensions,
       scaleFactor,
     });
