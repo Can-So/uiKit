@@ -75,7 +75,7 @@ export const updateStatus = (status?: StatusType) => (
     tr = tr.setNodeMarkup(showStatusPickerAt, schema.nodes.status, statusProps);
     tr = tr.setSelection(NodeSelection.create(tr.doc, showStatusPickerAt));
     tr = tr
-      .setMeta(pluginKey, { showStatusPickerAt, selectedStatus, isNew: false })
+      .setMeta(pluginKey, { showStatusPickerAt, selectedStatus })
       .scrollIntoView();
 
     dispatch(tr);
