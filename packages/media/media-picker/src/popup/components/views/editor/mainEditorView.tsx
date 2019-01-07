@@ -7,7 +7,6 @@ import { BinaryUploader } from '../../../../components/binary';
 import { State, EditorData, EditorError, FileReference } from '../../../domain';
 import ErrorView from './errorView/errorView';
 import { SpinnerView } from './spinnerView/spinnerView';
-import { MainContainer } from './styles';
 import { Selection, editorClose } from '../../../actions/editorClose';
 import { editorShowError } from '../../../actions/editorShowError';
 import { editorShowImage } from '../../../actions/editorShowImage';
@@ -74,7 +73,7 @@ export class MainEditorView extends Component<
   render(): JSX.Element | null {
     const { editorData } = this.props;
     if (editorData) {
-      return <MainContainer>{this.renderContent(editorData)}</MainContainer>;
+      return this.renderContent(editorData);
     } else {
       return null;
     }

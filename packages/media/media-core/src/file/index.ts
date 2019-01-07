@@ -25,6 +25,7 @@ import {
 } from '../fileState';
 import { fileStreamsCache, FileStreamCache } from '../context/fileStreamCache';
 import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploadableFile';
+import { convertBase64ToBlob } from '../utils/convertBase64ToBlob';
 
 const POLLING_INTERVAL = 1000;
 const maxNumberOfItemsPerCall = 100;
@@ -214,6 +215,10 @@ export class FileFetcher {
     controller?: UploadController,
     uploadableFileUpfrontIds?: UploadableFileUpfrontIds,
   ): Observable<FileState> {
+    if (typeof file.content === 'string') {
+      file.content = convertBase64ToBlob(file.content);
+    }
+
     const {
       content,
       name = '', // name property is not available in base64 image
@@ -243,6 +248,7 @@ export class FileFetcher {
         blob: content,
       };
     }
+
     const stateBase = {
       name,
       size,
@@ -283,11 +289,15 @@ export class FileFetcher {
       },
     );
 
+    const key = FileStreamCache.createKey(id, {
+      collectionName: collection,
+      occurrenceKey,
+    });
+    fileStreamsCache.set(key, subject);
+
     // We should report progress asynchronously, since this is what consumer expects
     // (otherwise in newUploadService file-converting event will be emitted before files-added)
     setTimeout(() => {
-      const key = FileStreamCache.createKey(id, { collectionName: collection });
-      fileStreamsCache.set(key, subject);
       onProgress(0);
     }, 0);
 

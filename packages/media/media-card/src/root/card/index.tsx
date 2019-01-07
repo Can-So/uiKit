@@ -151,11 +151,11 @@ export class Card extends Component<CardProps, CardState> {
       return;
     }
 
-    const { id, collectionName } = identifier;
+    const { id, collectionName, occurrenceKey } = identifier;
     const resolvedId = await id;
     this.unsubscribe();
     this.subscription = context.file
-      .getFileState(resolvedId, { collectionName })
+      .getFileState(resolvedId, { collectionName, occurrenceKey })
       .subscribe({
         next: async state => {
           const {

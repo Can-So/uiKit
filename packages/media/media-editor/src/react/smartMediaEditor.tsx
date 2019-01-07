@@ -63,7 +63,7 @@ export class SmartMediaEditor extends React.Component<
             this.fileName = name;
             // we can only ask for the image once the file is processed
             this.setImageUrl(identifier);
-            getFileSubscription.unsubscribe();
+            setTimeout(() => getFileSubscription.unsubscribe(), 0);
           }
         },
       });
