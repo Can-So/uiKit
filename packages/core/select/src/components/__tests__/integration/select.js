@@ -16,7 +16,7 @@ const urlArray = [
 
 urlArray.forEach(url => {
   BrowserTestCase(
-    `select.js: ${url.toUpperCase()} should display its menu once clicked on it and no errors`,
+    `select.js: ${url.toUpperCase()} should display a menu once clicked and not throwing errors`,
     { skip: ['firefox'] },
     async client => {
       const selectTest = new Page(client);
