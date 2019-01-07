@@ -1,1 +1,0 @@
-- ED-5999: fix padding between Columns in renderer
