@@ -119,9 +119,10 @@ export class CollectionFetcher {
         collection.items = items.data.contents;
 
         // We only want to asign nextInclusiveStartKey the first time
-        if (!collection.nextInclusiveStartKey) {
-          collection.nextInclusiveStartKey = nextInclusiveStartKey;
-        }
+        // TODO: why are we only doing this for the first time?
+        // if (!collection.nextInclusiveStartKey) {
+        collection.nextInclusiveStartKey = nextInclusiveStartKey;
+        // }
 
         subject.next(collection.items);
       });

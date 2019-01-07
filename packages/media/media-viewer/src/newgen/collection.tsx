@@ -114,9 +114,11 @@ export class Collection extends React.Component<Props, State> {
   }
 
   private onNavigationChange = (item: Identifier) => {
-    const { context, collectionName } = this.props;
+    const { context, collectionName, pageSize } = this.props;
     if (this.shouldLoadNext(item)) {
-      context.collection.loadNextPage(collectionName);
+      context.collection.loadNextPage(collectionName, {
+        limit: pageSize,
+      });
     }
   };
 
