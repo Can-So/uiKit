@@ -14,7 +14,6 @@ export interface DataType {
 
 /**
  * @name inlineCard_node
- * @stage 0
  */
 export interface InlineCardDefinition {
   type: 'inlineCard';
