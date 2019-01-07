@@ -168,6 +168,7 @@ pipelines:
     build-visual-regression:
       - step:
           script:
+            - source ./build/visual-regression/puppeteer.sh
             - source ./build-setup.sh
             - bolt install --pure-lockfile
             - yarn test:vr button
