@@ -337,8 +337,13 @@ if (process.env.VISUAL_REGRESSION) {
     if (isWatch) {
       headless = false;
     }
+    console.log('puppeteer:', puppeteer.executablePath());
     global.browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+      ],
     });
     global.page = await global.browser.newPage();
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);
