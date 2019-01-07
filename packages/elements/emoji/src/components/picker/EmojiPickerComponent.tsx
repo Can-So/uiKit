@@ -562,6 +562,10 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
       this.onSelectWrapper,
     );
 
+    const formattedErrorMessage = uploadErrorMessage ? (
+      <FormattedMessage {...uploadErrorMessage} />
+    ) : null;
+
     const classes = [styles.emojiPicker];
 
     const picker = (
@@ -599,7 +603,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
           toneEmoji={toneEmoji}
           uploading={uploading}
           emojiToDelete={emojiToDelete}
-          uploadErrorMessage={uploadErrorMessage}
+          uploadErrorMessage={formattedErrorMessage}
           uploadEnabled={uploadSupported && showUploadButton && !uploading}
           onUploadEmoji={this.onUploadEmoji}
           onUploadCancelled={this.onUploadCancelled}

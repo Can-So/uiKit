@@ -7,6 +7,7 @@ import Emoji from '../../../../components/common/Emoji';
 import EmojiDeletePreview from '../../../../components/common/EmojiDeletePreview';
 import EmojiErrorMessage from '../../../../components/common/EmojiErrorMessage';
 import EmojiUploadPreview from '../../../../components/common/EmojiUploadPreview';
+import ErrorIcon from '@atlaskit/icon/glyph/error';
 import * as commonStyles from '../../../../components/common/styles';
 import { CategoryGroupKey } from '../../../../components/picker/categories';
 import CategorySelector from '../../../../components/picker/CategorySelector';
@@ -19,6 +20,7 @@ import EmojiPickerListSearch from '../../../../components/picker/EmojiPickerList
 import { EmojiDescription } from '../../../../types';
 import { hasSelector } from '../../_emoji-selectors';
 import { getEmojiResourcePromise, newEmojiRepository } from '../../_test-data';
+import { FormattedMessage } from 'react-intl';
 
 export function setupPickerWithoutToneSelector(): Promise<
   ReactWrapper<any, any>
@@ -222,3 +224,21 @@ export const finishDelete = component =>
 
 export const errorMessageVisible = component =>
   component.update() && component.find(EmojiErrorMessage).length === 1;
+
+export const tooltipErrorMessageMatches = async (component, message) => {
+  component
+    .find(EmojiErrorMessage)
+    .find(ErrorIcon)
+    .simulate('mouseOver');
+  await waitUntil(
+    () =>
+      component.update() &&
+      component.find(EmojiErrorMessage).find(FormattedMessage).length > 0,
+  );
+  expect(
+    component
+      .find(EmojiErrorMessage)
+      .find(FormattedMessage)
+      .props(),
+  ).toMatchObject(message);
+};

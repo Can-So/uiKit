@@ -20,8 +20,10 @@ import EmojiUploadComponent from '../../../../components/uploader/EmojiUploadCom
 import EmojiUploader, {
   Props,
 } from '../../../../components/uploader/EmojiUploader';
-import { mount, ReactWrapper } from 'enzyme';
-import EmojiErrorMessage from '../../../../components/common/EmojiErrorMessage';
+import { ReactWrapper } from 'enzyme';
+
+import { messages } from '../../../../components/i18n';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 
 const sampleEmoji = {
   name: 'Sample',
@@ -42,7 +44,7 @@ export function setupUploader(
     uploaderProps.emojiProvider = getEmojiResourcePromise(config);
   }
 
-  const uploader = mount(<EmojiUploader {...uploaderProps} />);
+  const uploader = mountWithIntl(<EmojiUploader {...uploaderProps} />);
 
   return waitUntil(() => {
     uploader.update();
@@ -176,9 +178,7 @@ describe('<EmojiUploader />', () => {
 
       await waitUntil(() => helper.errorMessageVisible(component));
 
-      expect(component.find(EmojiErrorMessage).prop('message')).toEqual(
-        'Selected image is invalid',
-      );
+      helper.tooltipErrorMessageMatches(component, messages.emojiInvalidImage);
     });
 
     it('should show error if file too big', async () => {
@@ -194,9 +194,7 @@ describe('<EmojiUploader />', () => {
 
       await waitUntil(() => helper.errorMessageVisible(component));
 
-      expect(component.find(EmojiErrorMessage).prop('message')).toEqual(
-        'Selected image is more than 1 MB',
-      );
+      helper.tooltipErrorMessageMatches(component, messages.emojiImageTooBig);
     });
 
     it('should go back when cancel clicked', async () => {

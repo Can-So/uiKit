@@ -534,9 +534,7 @@ describe('<UploadingEmojiPicker />', () => {
       await waitUntil(() => helper.errorMessageVisible(component));
 
       // Check error displayed
-      expect(component.find(EmojiErrorMessage).prop('message')).toEqual(
-        'Upload failed',
-      );
+      helper.tooltipErrorMessageMatches(component, messages.emojiUploadFailed);
 
       const retryButton = component
         .find(EmojiUploadPreview)
@@ -603,9 +601,7 @@ describe('<UploadingEmojiPicker />', () => {
       await waitUntil(() => helper.errorMessageVisible(component));
 
       // Check error displayed
-      expect(component.find(EmojiErrorMessage).prop('message')).toEqual(
-        'Upload failed',
-      );
+      helper.tooltipErrorMessageMatches(component, messages.emojiUploadFailed);
 
       const retryButton = component
         .find(EmojiUploadPreview)

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { PureComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import * as classNames from 'classnames';
 
 import * as styles from './styles';
@@ -10,6 +11,8 @@ import { EmojiContext } from '../common/internal-types';
 import { EmojiProvider, supportsUploadFeature } from '../../api/EmojiResource';
 import { FireAnalyticsEvent } from '@atlaskit/analytics';
 import EmojiUploadPicker from '../common/EmojiUploadPicker';
+
+import { messages } from '../i18n';
 
 export interface UploadRefHandler {
   (ref: HTMLDivElement): void;
@@ -22,7 +25,7 @@ export interface Props {
 }
 
 export interface State {
-  uploadErrorMessage?: string;
+  uploadErrorMessage?: FormattedMessage.MessageDescriptor;
   uploadSupported: boolean;
 }
 
@@ -100,7 +103,7 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
         })
         .catch(err => {
           this.setState({
-            uploadErrorMessage: 'Upload failed',
+            uploadErrorMessage: messages.emojiUploadFailed,
           });
           // tslint:disable-next-line
           console.error('Unable to upload emoji', err);
@@ -130,10 +133,14 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     }
   };
 
-  private getFooter = () => {
+  private getUploadPicker = () => {
     const { uploadErrorMessage } = this.state;
 
     const previewFooterClassnames = classNames([styles.emojiUploadFooter]);
+
+    const formattedErrorMessage = uploadErrorMessage ? (
+      <FormattedMessage {...uploadErrorMessage} />
+    ) : null;
 
     return (
       <div className={previewFooterClassnames}>
@@ -144,7 +151,7 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
           onUploadCancelled={this.onUploadCancelled}
           onUploadEmoji={this.onUploadEmoji}
           onFileChosen={this.onFileChosen}
-          errorMessage={uploadErrorMessage}
+          errorMessage={formattedErrorMessage}
           initialUploadName=""
         />
       </div>
@@ -160,7 +167,7 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
         ref={this.props.onUploadRef}
         data-emoji-picker-container
       >
-        {this.getFooter()}
+        {this.getUploadPicker()}
       </div>
     );
   }
