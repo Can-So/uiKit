@@ -181,6 +181,8 @@ pipelines:
             # For further details see: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
             # - yarn add puppeteer
             - yarn test:vr button
+          caches:
+            - node
       # This will run essentially the branch builds, but without any optimizations and should be manually
       # run in any potentially risky builds
     run-full-suite:
