@@ -8,13 +8,11 @@ export const REQUIRED = 'REQUIRED';
 const validate = (value: OptionData[]) =>
   value && value.length > 0 ? undefined : REQUIRED;
 
-export namespace UserPickerField {
-  export type Props = {
-    loadOptions: LoadOptions;
-  };
-}
+export type Props = {
+  loadOptions: LoadOptions;
+};
 
-export const UserPickerField = (props: UserPickerField.Props) => (
+export const UserPickerField: React.StatelessComponent<Props> = props => (
   <Field name="users" validate={validate}>
     {({ fieldProps, error, meta: { valid } }) => (
       <>

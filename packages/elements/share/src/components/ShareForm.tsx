@@ -8,16 +8,14 @@ import { CommentField } from './CommentField';
 import { ShareHeader } from './ShareHeader';
 import { UserPickerField } from './UserPickerField';
 
-export namespace ShareForm {
-  export type Props = {
-    title?: string;
-    loadOptions: LoadOptions;
-    shareActive?: boolean;
-    onShareClick?: Function;
-  };
-}
+export type Props = {
+  title?: string;
+  loadOptions: LoadOptions;
+  shareActive?: boolean;
+  onShareClick?: Function;
+};
 
-export const ShareForm: React.StatelessComponent<ShareForm.Props> = props => (
+export const ShareForm: React.StatelessComponent<Props> = props => (
   <Form onSubmit={props.onShareClick}>
     {({ formProps }) => (
       <form {...formProps}>

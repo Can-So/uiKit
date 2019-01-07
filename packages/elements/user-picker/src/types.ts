@@ -3,9 +3,9 @@ import * as React from 'react';
 export type UserPickerProps = {
   /** List of users or teams to be used as options by the user picker. */
   options?: OptionData[];
-  /** Width of the user picker field. It can be the amount of pixels as numbers or a string with the percentage.*/
+  /** Width of the user picker field. It can be the amount of pixels as numbers or a string with the percentage. */
   width?: number | string;
-  /** Sets the minimum width for the menu. If not set, menu will always have the same width of the field */
+  /** Sets the minimum width for the menu. If not set, menu will always have the same width of the field. */
   menuMinWidth?: number;
   /** Function used to load options asynchronously. */
   loadOptions?: LoadOptions;
@@ -49,7 +49,7 @@ export type UserPickerProps = {
   isClearable?: boolean;
   /** Optional tooltip to display on hover over the clear indicator. */
   clearValueLabel?: string;
-  /** Whether the menu should use a portal, and where it should attach.  */
+  /** Whether the menu should use a portal, and where it should attach. */
   menuPortalTarget?: HTMLElement;
 };
 
