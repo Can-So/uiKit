@@ -27,4 +27,10 @@ export const messages = defineMessages({
     description:
       'Message to encourage the user to add more items to user picker in Share form.',
   },
+  userPickerRequiredMessage: {
+    id: 'fabric.elements.share.form.user-picker.validation.required',
+    defaultMessage: 'Select at least one user, team or email.',
+    description:
+      'Required error message for the user picker field in Share form.',
+  },
 });

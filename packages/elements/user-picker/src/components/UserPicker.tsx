@@ -347,7 +347,6 @@ class UserPickerInternal extends React.Component<
       menuMinWidth,
       menuPortalTarget,
       addMoreMessage,
-      isRequired,
     } = this.props;
     const {
       count,
@@ -395,7 +394,6 @@ class UserPickerInternal extends React.Component<
         clearValueLabel={clearValueLabel}
         menuMinWidth={menuMinWidth}
         menuPortalTarget={menuPortalTarget}
-        isRequired={isRequired}
       />
     );
   }

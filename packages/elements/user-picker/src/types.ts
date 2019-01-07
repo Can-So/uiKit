@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 export type UserPickerProps = {
   /** List of users or teams to be used as options by the user picker. */
   options?: OptionData[];
@@ -34,7 +36,7 @@ export type UserPickerProps = {
   /** Default value for the field to be used on initial render. */
   defaultValue?: Value;
   /** Placeholder text to be shown when there is no value in the field. */
-  placeholder?: string;
+  placeholder?: React.ReactNode;
   /** Message to encourage the user to add more items to user picker. */
   addMoreMessage?: string;
   /** Message to be shown when the menu is open but no options are provided. */
