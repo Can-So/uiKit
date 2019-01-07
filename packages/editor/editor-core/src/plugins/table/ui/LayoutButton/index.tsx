@@ -67,7 +67,7 @@ class LayoutButton extends React.Component<Props & InjectedIntlProps, any> {
         target={targetRef}
         alignY="top"
         alignX="right"
-        stickToBottom={true}
+        stick={true}
         mountTo={mountPoint}
         boundariesElement={boundariesElement}
         scrollableElement={scrollableElement}

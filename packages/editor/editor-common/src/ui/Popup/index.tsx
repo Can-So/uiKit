@@ -23,7 +23,7 @@ export interface Props {
   onPositionCalculated?: (position: Position) => Position;
   onPlacementChanged?: (placement: [string, string]) => void;
   scrollableElement?: HTMLElement;
-  stickToBottom?: boolean;
+  stick?: boolean;
   ariaLabel?: string;
 }
 
@@ -62,7 +62,7 @@ export default class Popup extends React.Component<Props, State> {
       onPlacementChanged,
       alignX,
       alignY,
-      stickToBottom,
+      stick,
     } = props;
     const { popup } = state;
 
@@ -87,8 +87,8 @@ export default class Popup extends React.Component<Props, State> {
       placement,
       popup,
       target,
+      stick,
       offset: offset!,
-      stickToBottom,
     });
     position = onPositionCalculated ? onPositionCalculated(position) : position;
 
@@ -153,9 +153,9 @@ export default class Popup extends React.Component<Props, State> {
   componentDidMount() {
     window.addEventListener('resize', this.onResize);
 
-    const { stickToBottom } = this.props;
+    const { stick } = this.props;
 
-    if (stickToBottom) {
+    if (stick) {
       this.scrollElement = findOverflowScrollParent(this.props.target!);
     } else {
       this.scrollElement = this.props.scrollableElement;
