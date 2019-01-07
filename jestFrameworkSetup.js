@@ -338,8 +338,6 @@ if (process.env.VISUAL_REGRESSION) {
       headless = false;
     }
     global.browser = await puppeteer.launch({
-      // run test in headless mode
-      executablePath: process.env.CHROME_BIN || null,
       args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
     });
     global.page = await global.browser.newPage();
