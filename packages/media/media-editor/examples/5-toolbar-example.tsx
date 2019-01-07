@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { I18NWrapper } from '@atlaskit/media-test-helpers';
 import Toolbar from '../src/react/editorView/toolbar/toolbar';
 import { Color, Tool } from '../index';
 
@@ -32,16 +33,18 @@ class ToolbarExample extends React.Component<{}, State> {
     const { lineWidth, color, tool } = this.state;
 
     return (
-      <Toolbar
-        color={color}
-        tool={tool}
-        lineWidth={lineWidth}
-        onSave={this.onSave}
-        onCancel={this.onCancel}
-        onToolChanged={this.onToolChanged}
-        onColorChanged={this.onColorChanged}
-        onLineWidthChanged={this.onLineWidthChanged}
-      />
+      <I18NWrapper>
+        <Toolbar
+          color={color}
+          tool={tool}
+          lineWidth={lineWidth}
+          onSave={this.onSave}
+          onCancel={this.onCancel}
+          onToolChanged={this.onToolChanged}
+          onColorChanged={this.onColorChanged}
+          onLineWidthChanged={this.onLineWidthChanged}
+        />
+      </I18NWrapper>
     );
   }
 }

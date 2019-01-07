@@ -5,6 +5,7 @@ import { Context, UploadableFile } from '@atlaskit/media-core';
 import { FileIdentifier } from '@atlaskit/media-card';
 import { Shortcut } from '@atlaskit/media-ui';
 import Spinner from '@atlaskit/spinner';
+import { intlShape, IntlProvider } from 'react-intl';
 import EditorView from './editorView/editorView';
 import { Blanket, SpinnerWrapper } from './styled';
 
@@ -27,6 +28,10 @@ export class SmartMediaEditor extends React.Component<
   state: SmartMediaEditorState = {};
   getFileSubscription?: Subscription;
   uploadFileSubscription?: Subscription;
+
+  static contextTypes = {
+    intl: intlShape,
+  };
 
   componentDidMount() {
     const { identifier } = this.props;
@@ -79,7 +84,7 @@ export class SmartMediaEditor extends React.Component<
 
   onSave = (imageData: string) => {
     const { fileName } = this;
-    const { context, identifier, onUploadStart } = this.props;
+    const { context, identifier, onUploadStart, onFinish } = this.props;
     const { collectionName } = identifier;
     const uploadableFile: UploadableFile = {
       content: imageData,
@@ -116,6 +121,7 @@ export class SmartMediaEditor extends React.Component<
       mediaItemType: 'file',
     };
     onUploadStart(newFileIdentifier);
+    onFinish();
   };
 
   onCancel = () => {};
@@ -131,13 +137,19 @@ export class SmartMediaEditor extends React.Component<
   };
 
   renderEditor = (imageUrl: string) => {
-    return (
+    const content = (
       <EditorView
         imageUrl={imageUrl}
         onSave={this.onSave}
         onCancel={this.onCancel}
         onError={this.onError}
       />
+    );
+
+    return this.context.intl ? (
+      content
+    ) : (
+      <IntlProvider locale="en">{content}</IntlProvider>
     );
   };
 
