@@ -164,7 +164,7 @@ pipelines:
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
-            - yarn test:vr button
+            - yarn test:vr
           caches:
             - node
       # This will run essentially the branch builds, but without any optimizations and should be manually
