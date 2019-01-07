@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import {
   MediaEditor,
   Tool,
@@ -7,12 +8,10 @@ import {
   Dimensions,
   LoadParameters,
   ShapeParameters,
-} from '@atlaskit/media-editor';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+} from '../..';
 import { messages } from '@atlaskit/media-ui';
 import Toolbar, { tools } from './toolbar/toolbar';
 import { EditorContainer } from './styles';
-import { couldNotLoadEditor, couldNotSaveImage } from './phrases';
 
 const DEFAULT_WIDTH = 845;
 const DEFAULT_HEIGHT = 530;
@@ -24,19 +23,12 @@ const propertyColor = 'media-editor-color';
 const propertyTool = 'media-editor-tool';
 const propertyLineWidth = 'media-editor-line-width';
 
-export interface EditorViewStateProps {
+export interface EditorViewProps {
   readonly imageUrl: string;
-}
-
-export interface EditorViewOwnProps {
   readonly onSave: (image: string) => void;
   readonly onCancel: () => void;
   readonly onError: (message: string) => void;
 }
-
-export type EditorViewProps = EditorViewStateProps &
-  EditorViewOwnProps &
-  InjectedIntlProps;
 
 export interface EditorViewState {
   readonly dimensions: Dimensions;
@@ -45,7 +37,10 @@ export interface EditorViewState {
   readonly tool: Tool;
 }
 
-export class EditorView extends Component<EditorViewProps, EditorViewState> {
+class EditorView extends Component<
+  EditorViewProps & InjectedIntlProps,
+  EditorViewState
+> {
   private loadParameters?: LoadParameters;
   private rootDiv?: HTMLDivElement;
   state: EditorViewState = {
@@ -220,8 +215,4 @@ function isTool(value: string): value is Tool {
   return tools.some(tool => tool === value);
 }
 
-export default connect<EditorViewStateProps, {}, EditorViewOwnProps, State>(
-  ({ editorData }) => ({
-    imageUrl: editorData ? editorData.imageUrl || '' : '',
-  }),
-)(injectIntl(EditorView));
+export default injectIntl(EditorView);

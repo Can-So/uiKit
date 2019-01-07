@@ -1,11 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import {
-  Container,
-  FrontArea,
-  HoverArea,
-  MainArea,
-} from './lineWidthButtonStyles';
+import { FrontArea, MainArea } from './lineWidthButtonStyles';
 
 export interface LineWidthButtonProps {
   readonly isActive: boolean;
@@ -18,7 +13,7 @@ export class LineWidthIcon extends Component<LineWidthButtonProps> {
     const { lineWidth, isActive, onLineWidthClick } = this.props;
     const onClick = () => onLineWidthClick(lineWidth);
 
-    const map = {
+    const map: { [key: number]: number } = {
       4: 4,
       8: 6,
       12: 10,

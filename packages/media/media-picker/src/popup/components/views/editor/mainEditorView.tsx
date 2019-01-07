@@ -11,14 +11,14 @@ import { MainContainer } from './styles';
 import { Selection, editorClose } from '../../../actions/editorClose';
 import { editorShowError } from '../../../actions/editorShowError';
 import { editorShowImage } from '../../../actions/editorShowImage';
-import { EditorViewOwnProps } from '@atlaskit/media-editor';
+import { EditorViewProps } from '@atlaskit/media-editor';
 import editorViewLoader from './editorViewLoader';
 export interface MainEditorViewStateProps {
   readonly editorData?: EditorData;
 }
 
 export interface MainEditorViewState {
-  EditorViewComponent?: ComponentClass<EditorViewOwnProps>;
+  EditorViewComponent?: ComponentClass<EditorViewProps>;
 }
 
 export interface MainEditorViewOwnProps {
@@ -43,7 +43,7 @@ export class MainEditorView extends Component<
   MainEditorViewProps,
   MainEditorViewState
 > {
-  static EditorViewComponent: ComponentClass<EditorViewOwnProps>;
+  static EditorViewComponent: ComponentClass<EditorViewProps>;
 
   state: MainEditorViewState = {
     EditorViewComponent: MainEditorView.EditorViewComponent,
@@ -89,6 +89,7 @@ export class MainEditorView extends Component<
     } else if (imageUrl && originalFile && EditorViewComponent) {
       return (
         <EditorViewComponent
+          imageUrl={imageUrl}
           onSave={this.onEditorSave(originalFile)}
           onCancel={this.onCancel}
           onError={this.onEditorError}

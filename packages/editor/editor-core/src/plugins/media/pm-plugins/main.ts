@@ -147,9 +147,9 @@ export class MediaPluginState {
 
     // TODO disable (not destroy!) pickers until mediaProvider is resolved
     let Picker: typeof PickerFacade;
-
+    let resolvedMediaProvider: MediaProvider;
     try {
-      let resolvedMediaProvider: MediaProvider = (this.mediaProvider = await mediaProvider);
+      resolvedMediaProvider = this.mediaProvider = await mediaProvider;
       Picker = await pickerFacadeLoader();
 
       assert(
@@ -452,7 +452,7 @@ export class MediaPluginState {
     this.view.dispatch(this.view.state.tr.setMeta(stateKey, 'edit'));
   };
 
-  onCloseEditing = preview => {
+  onCloseEditing = () => {
     this.showEditingDialog = false;
 
     if (!this.editingMediaId) {
@@ -471,21 +471,17 @@ export class MediaPluginState {
     const existingNode = mediaNodeWithPos.node;
 
     this.stateManager.updateState(oldId, {
-      ready: false,
-      preview: true,
-      thumbnail: {
-        src: preview,
-        dimensions: {
-          width: existingNode.attrs.width,
-          height: existingNode.attrs.height,
-        },
+      status: 'preview',
+      dimensions: {
+        width: existingNode.attrs.width,
+        height: existingNode.attrs.height,
       },
     });
 
     this.view.dispatch(this.view.state.tr.setMeta(stateKey, 'close-edit'));
   };
 
-  onFinishEditing = (newId: FileIdentifier, preview: string, oldNode: Node) => {
+  onFinishEditing = (fileIdentifier: FileIdentifier, oldNode: Node) => {
     this.showEditingDialog = false;
 
     const oldId = this.editingMediaId;
@@ -504,7 +500,7 @@ export class MediaPluginState {
 
     const newNode = this.view.state.schema.nodes.media!.create({
       ...oldNode.attrs,
-      id: newId.id,
+      id: fileIdentifier.id,
     });
 
     const nodePos = getPos();
@@ -522,19 +518,16 @@ export class MediaPluginState {
     this.view.dispatch(tr.setMeta('addToHistory', false));
     this.editingMediaId = undefined;
 
-    this.resolvedViewContext!.setLocalPreview(newId.id, preview);
+    if (typeof fileIdentifier.id !== 'string') {
+      return;
+    }
 
     this.stateManager.updateState(oldId, {
-      ready: true,
-      progress: 1,
       status: 'ready',
-      publicId: newId.id,
-      thumbnail: {
-        src: preview,
-        dimensions: {
-          width: mediaNode.attrs.width,
-          height: mediaNode.attrs.height,
-        },
+      publicId: fileIdentifier.id,
+      dimensions: {
+        width: mediaNode.attrs.width,
+        height: mediaNode.attrs.height,
       },
     });
   };

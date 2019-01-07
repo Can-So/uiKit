@@ -1,16 +1,12 @@
 import * as React from 'react';
 import Button from '@atlaskit/button';
-import { CardList } from '@atlaskit/media-card';
+import { Card, FileIdentifier } from '@atlaskit/media-card';
+import { imageFileId, createUploadContext } from '@atlaskit/media-test-helpers';
 import { SmartMediaEditor } from '../src';
-import {
-  imageFileId,
-  createUploadContext,
-  defaultCollectionName,
-} from '@atlaskit/media-test-helpers';
-import { CardListWrapper } from '../example-helpers/styled';
 
 interface State {
   showEditor: boolean;
+  newFileIdentifier?: FileIdentifier;
 }
 
 const context = createUploadContext();
@@ -24,34 +20,22 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
     this.setState({ showEditor: true });
   };
 
-  onFinish = (identifier, preview) => {
-    console.log('onFinish', identifier, preview);
+  onFinish = () => {
+    console.log('onFinish');
     this.setState({
       showEditor: false,
     });
   };
 
-  renderCardList = () => {
-    return (
-      <CardListWrapper>
-        <h1>Public collection: {defaultCollectionName}</h1>
-        <CardList context={context} collectionName={defaultCollectionName} />
-      </CardListWrapper>
-    );
-  };
-
-  onUploadStart = async (deferredIdentifier, preview) => {
-    console.log('onUploadStart', preview);
+  onUploadStart = (identifier: FileIdentifier) => {
+    console.log('onUploadStart', identifier);
     this.setState({
-      showEditor: false,
+      newFileIdentifier: identifier,
     });
-    const identifier = await deferredIdentifier;
-
-    console.log({ identifier });
   };
 
   render() {
-    const { showEditor } = this.state;
+    const { showEditor, newFileIdentifier } = this.state;
 
     const editor = (
       <SmartMediaEditor
@@ -65,7 +49,9 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
     return (
       <div>
         <Button onClick={this.openSmartEditor}>Open Smart Editor</Button>
-        {this.renderCardList()}
+        {newFileIdentifier ? (
+          <Card identifier={newFileIdentifier} context={context} />
+        ) : null}
         {showEditor ? editor : null}
       </div>
     );

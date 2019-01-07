@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Toolbar } from '../src/react/editorView/toolbar/toolbar';
+import Toolbar from '../src/react/editorView/toolbar/toolbar';
 import { Color, Tool } from '../index';
 
 interface State {

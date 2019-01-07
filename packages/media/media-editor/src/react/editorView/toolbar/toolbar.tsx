@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import Button from '@atlaskit/button';
 import { Tool, Color } from '../../../..';
 
@@ -9,10 +10,10 @@ import { ToolButton } from './buttons/toolButton';
 import { LineWidthPopup } from './popups/lineWidthPopup';
 import { ColorPopup } from './popups/colorPopup';
 import { ToolbarContainer, CenterButtons, VerticalLine } from './styles';
-import { buttonSave, buttonCancel } from '../../../react/editorView/phrases';
 import { ShapePopup, shapeTools } from './popups/shapePopup';
 import { ShapeButton } from './buttons/shapeButton';
 import { ButtonGroup } from './buttons/buttonGroup';
+import { messages } from '@atlaskit/media-ui';
 
 export type PopupState = 'none' | 'color' | 'lineWidth' | 'shape';
 
@@ -41,11 +42,11 @@ export interface ToolbarState {
   readonly popup: PopupState;
 }
 
-export class Toolbar extends Component<ToolbarProps, ToolbarState> {
-  constructor(props: ToolbarProps) {
-    super(props);
-    this.state = { popup: 'none' };
-  }
+export class Toolbar extends Component<
+  ToolbarProps & InjectedIntlProps,
+  ToolbarState
+> {
+  state: ToolbarState = { popup: 'none' };
 
   render() {
     const {
@@ -54,6 +55,9 @@ export class Toolbar extends Component<ToolbarProps, ToolbarState> {
       lineWidth,
       onColorChanged,
       onLineWidthChanged,
+      onSave,
+      onCancel,
+      intl: { formatMessage },
     } = this.props;
 
     const onColorButtonClick = () => this.showOrHidePopup('color');
@@ -131,19 +135,11 @@ export class Toolbar extends Component<ToolbarProps, ToolbarState> {
 
             <VerticalLine />
 
-            <Button
-              appearance="primary"
-              theme="dark"
-              onClick={this.props.onSave}
-            >
-              {buttonSave}
+            <Button appearance="primary" theme="dark" onClick={onSave}>
+              {formatMessage(messages.save)}
             </Button>
-            <Button
-              appearance="subtle"
-              onClick={this.props.onCancel}
-              theme="dark"
-            >
-              {buttonCancel}
+            <Button appearance="subtle" onClick={onCancel} theme="dark">
+              {formatMessage(messages.cancel)}
             </Button>
           </ButtonGroup>
         </CenterButtons>
@@ -177,3 +173,5 @@ export class Toolbar extends Component<ToolbarProps, ToolbarState> {
     }
   }
 }
+
+export default injectIntl(Toolbar);

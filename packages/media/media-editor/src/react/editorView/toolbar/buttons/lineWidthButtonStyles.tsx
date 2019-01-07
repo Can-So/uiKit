@@ -4,11 +4,8 @@ import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
 import {
-  akColorB50,
-  akColorB400,
   akColorN0,
   akColorN30,
-  akColorN50,
   akColorN500,
 } from '@atlaskit/util-shared-styles';
 

@@ -15,19 +15,14 @@ import keymapMediaSinglePlugin from './pm-plugins/keymap-media-single';
 import keymapPlugin from './pm-plugins/keymap';
 import ToolbarMedia from './ui/ToolbarMedia';
 import MediaSingleEdit from './ui/MediaSingleEdit';
-import { ReactMediaGroupNode } from './nodeviews/mediaGroup';
-import { ReactMediaSingleNode } from './nodeviews/mediaSingle';
 import { CustomMediaPicker, MediaProvider } from './types';
 import WithPluginState from '../../ui/WithPluginState';
 import { akEditorFullPageMaxWidth } from '@atlaskit/editor-common';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';
 import { pluginKey as editorDisabledPluginKey } from '../editor-disabled';
-import ReactMediaGroupNode from './nodeviews/media-group';
-import ReactMediaNode from './nodeviews/media';
-import ReactMediaSingleNode from './nodeviews/media-single';
-import { CustomMediaPicker } from './types';
+import { ReactMediaGroupNode } from './nodeviews/mediaGroup';
+import { ReactMediaSingleNode } from './nodeviews/mediaSingle';
 import { FileIdentifier } from '@atlaskit/media-card';
-import WithPluginState from '../../ui/WithPluginState';
 
 export {
   MediaState,
@@ -137,8 +132,8 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
       disableLayout = allowMediaSingle.disableLayout;
     }
     if (
-      (typeof allowMediaSingle === 'boolean' && allowMediaSingle === false) ||
-      (typeof disableLayout === 'boolean' && disableLayout === true)
+      (typeof allowMediaSingle === 'boolean' && !allowMediaSingle) ||
+      (typeof disableLayout === 'boolean' && disableLayout)
     ) {
       return null;
     }
@@ -166,9 +161,9 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
           let smartMediaEditor;
 
           if (
-            mediaState.resolvedUploadContext &&
             node &&
-            pluginState.showEditingDialog
+            mediaState.resolvedUploadContext &&
+            mediaState.showEditingDialog
           ) {
             const identifier: FileIdentifier = {
               id: node.attrs.id,
@@ -182,17 +177,11 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
                 context={
                   (mediaState as MediaPluginState).resolvedUploadContext!
                 }
-                onUploadStart={(
-                  deferredIdentifier: Promise<FileIdentifier>,
-                  preview: string,
-                ) => {
-                  mediaState.onCloseEditing(preview);
-
-                  deferredIdentifier.then(identifier =>
-                    mediaState.onFinishEditing(identifier, preview, node),
-                  );
+                onUploadStart={(newFileIdentifier: FileIdentifier) => {
+                  mediaState.onCloseEditing();
+                  mediaState.onFinishEditing(newFileIdentifier, node);
                 }}
-                onFinish={finish => {
+                onFinish={() => {
                   mediaState.onCloseEditing();
                 }}
               />

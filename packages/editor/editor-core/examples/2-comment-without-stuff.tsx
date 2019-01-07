@@ -8,23 +8,20 @@ import Editor from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
 import WithEditorActions from './../src/ui/WithEditorActions';
 import ToolbarHelp from './../src/ui/ToolbarHelp';
-import ToolsDrawer from '../example-helpers/ToolsDrawer';
 import CollapsedEditor from '../src/ui/CollapsedEditor';
 import ToolbarFeedback from '../src/ui/ToolbarFeedback';
 import { name, version } from '../package.json';
 
 import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
-import { DevTools } from '../example-helpers/DevTools';
 import { EmojiProvider } from '@atlaskit/emoji';
 import { MockActivityResource } from '@atlaskit/activity/dist/es5/support';
 import { mention, emoji, taskDecision } from '@atlaskit/util-data-test';
 import {
-  storyMediaProviderFactory,
   storyContextIdentifierProviderFactory,
   macroProvider,
-  cardProvider,
 } from '@atlaskit/editor-test-helpers';
+import { storyMediaProviderFactory } from '../../editor-test-helpers';
 
 const SAVE_ACTION = () => console.log('Save');
 const CANCEL_ACTION = () => console.log('Cancel');
@@ -80,6 +77,10 @@ const providers = {
   macroProvider: Promise.resolve(macroProvider),
 };
 
+export const mediaProvider = storyMediaProviderFactory({
+  includeUserAuthProvider: true,
+});
+
 export default class EditorWithFeedback extends React.Component<Props, State> {
   state = {
     hasJquery: false,
@@ -133,13 +134,13 @@ export default class EditorWithFeedback extends React.Component<Props, State> {
               allowRule={true}
               allowTables={true}
               allowHelpDialog={true}
-              allowGapCursor={true}
               activityProvider={providers.activityProvider}
               mentionProvider={providers.mentionProvider}
               emojiProvider={providers.emojiProvider}
               media={{
-                provider: providers.mediaProvider,
+                provider: mediaProvider,
                 allowMediaSingle: true,
+                allowResizing: true,
               }}
               taskDecisionProvider={providers.taskDecisionProvider}
               contextIdentifierProvider={providers.contextIdentifierProvider}
