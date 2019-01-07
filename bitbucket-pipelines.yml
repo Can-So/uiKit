@@ -160,6 +160,7 @@ pipelines:
             - node
       # This will run with the visual regression tool
     build-visual-regression:
+      image: atlassianlabs/atlaskit-mk-2:visual-regression
       - step:
           script:
             - source ./build-setup.sh
