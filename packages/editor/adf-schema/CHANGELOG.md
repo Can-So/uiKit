@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.3.0
+- [minor] [cbcac2e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbcac2e):
+
+  - Promote smartcard nodes to full schema
+
 ## 1.2.0
 - [minor] [5b11b69](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b11b69):
 

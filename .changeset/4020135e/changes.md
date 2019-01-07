@@ -1,1 +1,0 @@
-- Promote smartcard nodes to full schema
