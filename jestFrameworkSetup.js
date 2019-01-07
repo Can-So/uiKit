@@ -337,7 +337,6 @@ if (process.env.VISUAL_REGRESSION) {
     if (isWatch) {
       headless = false;
     }
-    console.log('puppeteer:', puppeteer.executablePath());
     global.browser = await puppeteer.launch({
       executablePath: process.env.CHROME_BIN || undefined,
       args: [
@@ -349,9 +348,9 @@ if (process.env.VISUAL_REGRESSION) {
     global.page = await global.browser.newPage();
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);
 
-  // afterAll(async () => {
-  // await global.browser.close();
-  // });
+  afterAll(async () => {
+    await global.browser.close();
+  });
 
   // TODO tweak failureThreshold to provide best results
   // TODO: A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
