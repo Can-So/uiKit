@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { waitUntil } from '@atlaskit/util-common-test';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
+import { MockEmojiResource } from '@atlaskit/util-data-test';
 
 import * as ImageUtil from '../../../../util/image';
 
@@ -16,14 +18,15 @@ import FileChooser from '../../../../components/common/FileChooser';
 import AkFieldBase from '@atlaskit/field-base';
 
 import Emoji from '../../../../components/common/Emoji';
-import EmojiUploadComponent from '../../../../components/uploader/EmojiUploadComponent';
 import EmojiUploader, {
   Props,
 } from '../../../../components/uploader/EmojiUploader';
+import EmojiUploadComponent from '../../../../components/uploader/EmojiUploadComponent';
+import EmojiUploadPreview from '../../../../components/common/EmojiUploadPreview';
+
 import { ReactWrapper } from 'enzyme';
 
 import { messages } from '../../../../components/i18n';
-import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 
 const sampleEmoji = {
   name: 'Sample',
@@ -210,6 +213,41 @@ describe('<EmojiUploader />', () => {
       // Should be back to initial screen
       await waitUntil(() => component.update().find(FileChooser).length > 0);
       expect(component.find(FileChooser)).toHaveLength(1);
+    });
+
+    it('retry on upload error', async () => {
+      const spy = jest
+        .spyOn(MockEmojiResource.prototype, 'uploadCustomEmoji')
+        .mockImplementation(() => Promise.reject(new Error('upload error')));
+
+      const provider = await emojiProvider;
+      typeEmojiName(component);
+
+      chooseFile(component, createPngFile());
+      await waitUntil(() => helper.addEmojiButtonVisible(component));
+
+      // Try adding
+      const addEmojiButton = helper.findAddEmojiButton(component);
+      addEmojiButton.simulate('click');
+
+      // Check for error message
+      await waitUntil(() => helper.errorMessageVisible(component));
+      helper.tooltipErrorMessageMatches(component, messages.emojiUploadFailed);
+
+      const retryButton = component
+        .find(EmojiUploadPreview)
+        .find('button')
+        .at(0);
+
+      expect(retryButton.text()).toEqual(messages.retryLabel.defaultMessage);
+      expect(spy).toHaveBeenCalledTimes(1);
+
+      // Reset mocking to make upload successful
+      spy.mockRestore();
+
+      // Successfully upload this time
+      retryButton.simulate('click');
+      await waitUntil(() => provider.getUploads().length > 0);
     });
   });
 });
