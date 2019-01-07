@@ -1,5 +1,10 @@
 # @atlaskit/theme
 
+## 7.0.3
+- [patch] [899fac7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/899fac7):
+
+  - added the focus ring and no focus ring styles
+
 ## 7.0.2
 - [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
 

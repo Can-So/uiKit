@@ -1,5 +1,10 @@
 # @atlaskit/website
 
+## 4.1.31
+- [patch] [b9b1900](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9b1900):
+
+  - Use @atlaskit/select instead of @atlaskit/single-select on the Fullscreen examples on website
+
 ## 4.1.30
 - Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
   - @atlaskit/media-core@24.7.2

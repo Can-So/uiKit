@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
-import { akEditorTableNumberColumnWidth } from '@atlaskit/editor-common';
+import {
+  akEditorTableNumberColumnWidth,
+  tableCellMinWidth,
+} from '@atlaskit/editor-common';
 import Table from '../../../../react/nodes/table';
 import TableCell from '../../../../react/nodes/tableCell';
 import TableHeader from '../../../../react/nodes/tableHeader';
@@ -181,13 +184,11 @@ describe('Renderer - React/Nodes/Table', () => {
   describe('When a columns does not have width', () => {
     it('should not collapse to a width smaller than defined min width', () => {
       const columnWidths = [500, 500, 0];
-      const cellMinWidth = 128;
       const wrapperWidth = 680;
 
       const mock = jest.spyOn(window, 'getComputedStyle' as any);
       mock.mockImplementation(() => ({
         width: wrapperWidth,
-        'min-width': cellMinWidth,
       }));
 
       const table = mount(
@@ -216,7 +217,7 @@ describe('Renderer - React/Nodes/Table', () => {
         if (index < 2) {
           expect(col.prop('style')!.width).to.equal(`${columnWidths[index]}px`);
         } else {
-          expect(col.prop('style')!.width).to.equal(`${cellMinWidth}px`);
+          expect(col.prop('style')!.width).to.equal(`${tableCellMinWidth}px`);
         }
       });
 

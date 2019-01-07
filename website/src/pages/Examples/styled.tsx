@@ -155,11 +155,9 @@ export const NavLink = (styled(Link)`
 // ==============================
 
 export const Control = styled.div`
-  display: inline-block;
-
-  & + & {
-    margin-left: 2px;
-  }
+  display: flex;
+  width: 300px;
+  margin-right: 2px;
 `;
 
 export const ErrorMessage = styled.div`

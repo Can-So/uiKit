@@ -1,5 +1,13 @@
 # @atlaskit/datetime-picker
 
+## 6.3.24
+- [patch] [55e0a3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55e0a3a):
+
+  - Fixes keyboard entry bug
+- [patch] [075dfa2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/075dfa2):
+
+  - Allowing control of input value in datetime-picker
+
 ## 6.3.23
 - [patch] [4c4bdc5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c4bdc5):
 

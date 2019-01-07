@@ -106,6 +106,33 @@ BrowserTestCase(
 );
 
 BrowserTestCase(
+  'datetime-picker.js: Invalid times in TimePicker should be cleared',
+  { skip: ['ie'] }, // IE has an issue AK-5570, AK-5492
+  async client => {
+    const timePicker = new Page(client);
+    await timePicker.goto(urlDateTimePicker);
+    await timePicker.waitForSelector(timepickerDefault);
+    await timePicker.click(timepickerDefault);
+    await timePicker.waitForSelector(timePickerMenu);
+
+    if (timePicker.browser.desiredCapabilities.browserName === 'firefox') {
+      // Focus on the input - `type` will do it for you
+      await timePicker.type(timeInput, ['a', 's', 'd']);
+      await timePicker.waitForSelector(timeOption);
+      await timePicker.type(timeInput, ['Enter']);
+    } else {
+      await timePicker.type(timeInput, ['a', 's', 'd']);
+      await timePicker.waitForSelector(timeOption);
+      // There is small issue there about the Key ENTER pressed too fast
+      timePicker.keys(['Enter']);
+    }
+
+    expect(await timePicker.getText(timeValue)).toEqual(['', '']);
+    await timePicker.checkConsoleErrors();
+  },
+);
+
+BrowserTestCase(
   'datetime-picker.js: When DateTimePicker is focused & backspace pressed, the date value should be cleared but the time value should not be affected',
   { skip: ['safari', 'ie'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
   async client => {
@@ -121,6 +148,30 @@ BrowserTestCase(
     const AfterTime = (await dateTimePickerTest.getText(dateTimeValues))[1];
     expect(AfterDate).not.toBe(previousDate);
     expect(previousTime).toBe(AfterTime);
+    await dateTimePickerTest.checkConsoleErrors();
+  },
+);
+
+BrowserTestCase(
+  'datetime-picker.js: When a user types a year into the date input in DatetimePicker and subsequently hits enter, the value is correctly updated',
+  { skip: ['safari', 'ie'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
+  async client => {
+    const dateTimePickerTest = new Page(client);
+    await dateTimePickerTest.goto(urlDateTimePicker);
+    await dateTimePickerTest.click(dateTimePicker);
+    await dateTimePickerTest.waitForSelector(datepickerMenu);
+    await dateTimePickerTest.click(date);
+    await dateTimePickerTest.type(dateTimePickerDateInput, [
+      '2',
+      '0',
+      '1',
+      '6',
+    ]);
+    await dateTimePickerTest.type(dateTimePickerDateInput, ['Enter']);
+
+    const newDate = (await dateTimePickerTest.getText(dateTimeValues))[0];
+
+    expect(newDate).toBe('2016/01/01');
     await dateTimePickerTest.checkConsoleErrors();
   },
 );

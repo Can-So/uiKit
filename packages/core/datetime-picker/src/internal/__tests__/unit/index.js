@@ -80,23 +80,6 @@ test('parseDateIntoStateValues', () => {
   });
 });
 
-test('TimePicker invalid times should be cleared', () => {
-  const timePickerWrapper = mount(
-    <TimePicker id="timepicker-1" timeIsEditable />,
-  );
-  // Simulate user entering invalid date
-  timePickerWrapper
-    .find('Control Input')
-    .simulate('focus')
-    .simulate('keydown', { key: 'a' })
-    .simulate('keydown', { key: 's' })
-    .simulate('keydown', { key: 'd' })
-    .simulate('keydown', { key: 'Enter' })
-    .simulate('blur');
-
-  expect(timePickerWrapper.state().value).toEqual('');
-});
-
 test('DatePicker default parseInputValue parses valid dates to the expected value', () => {
   const onChangeSpy = jest.fn();
   const expectedResult = '2018-01-02';
