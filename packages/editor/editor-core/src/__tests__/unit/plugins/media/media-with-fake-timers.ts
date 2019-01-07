@@ -64,7 +64,6 @@ describe('Media plugin', async () => {
         {
           id: 'foo',
           fileMimeType: 'image/jpeg',
-          fileId: Promise.resolve('id'),
         },
       ]);
       jest.runOnlyPendingTimers();
@@ -81,7 +80,6 @@ describe('Media plugin', async () => {
         {
           id: 'foo',
           fileMimeType: 'image/jpeg',
-          fileId: Promise.resolve('id'),
           status: 'preview',
         },
       ]);

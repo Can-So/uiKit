@@ -83,7 +83,7 @@ describe(name, () => {
           editorProps: {
             mediaProvider,
             waitForMediaUpload: true,
-            uploadErrorHandler: () => {},
+            uploadErrorHandler: () => { },
           },
           providerFactory,
         });
@@ -149,7 +149,7 @@ describe(name, () => {
         });
       });
 
-      describe('#getValue', function() {
+      describe('#getValue', function () {
         it('should return current editor value', async () => {
           const result = doc(p('some text'))(defaultSchema);
           const tr = editorView.state.tr;
@@ -210,7 +210,7 @@ describe(name, () => {
               .then(() => {
                 throw new Error('The promise should not resolve successfully');
               })
-              .catch(() => {});
+              .catch(() => { });
           });
 
           it('should not resolve when some media operations are pending', async () => {

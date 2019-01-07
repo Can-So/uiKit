@@ -723,7 +723,6 @@ describe('table plugin', () => {
         editorView,
         media({
           id: temporaryFileId,
-          __key: temporaryFileId,
           type: 'file',
           collection: testCollectionName,
           __fileMimeType: 'image/png',
@@ -743,7 +742,6 @@ describe('table plugin', () => {
                     mediaSingle()(
                       media({
                         id: temporaryFileId,
-                        __key: temporaryFileId,
                         type: 'file',
                         collection: testCollectionName,
                         __fileMimeType: 'image/png',

@@ -91,9 +91,7 @@ export default class MediaGroup extends React.Component<
     const { node } = props;
     this.mediaNodes = [] as Array<PMNode>;
     node.forEach((item, childOffset) => {
-      this.mediaPluginState.mediaGroupNodes[
-        item.attrs.__key || item.attrs.id
-      ] = {
+      this.mediaPluginState.mediaGroupNodes[item.attrs.id] = {
         node: item,
         getPos: () => props.getPos() + childOffset + 1,
       };

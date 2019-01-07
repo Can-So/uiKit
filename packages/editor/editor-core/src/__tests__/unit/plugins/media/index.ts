@@ -204,7 +204,6 @@ describe('Media plugin', () => {
             })(
               media({
                 id: '1',
-                __key: '1',
                 type: 'file',
                 collection: testCollectionName,
                 __fileName: 'foo.jpg',
@@ -219,7 +218,6 @@ describe('Media plugin', () => {
             })(
               media({
                 id: '2',
-                __key: '2',
                 type: 'file',
                 collection: testCollectionName,
                 __fileName: 'bar.png',
@@ -244,7 +242,6 @@ describe('Media plugin', () => {
             editorView,
             media({
               id: temporaryFileId,
-              __key: temporaryFileId,
               type: 'file',
               collection: testCollectionName,
               __fileMimeType: 'image/png',
@@ -255,7 +252,6 @@ describe('Media plugin', () => {
             editorView,
             media({
               id: temporaryFileId,
-              __key: temporaryFileId,
               type: 'file',
               collection: testCollectionName,
               __fileMimeType: 'image/png',
@@ -270,7 +266,6 @@ describe('Media plugin', () => {
                     mediaSingle({ layout: 'center' })(
                       media({
                         id: temporaryFileId,
-                        __key: temporaryFileId,
                         type: 'file',
                         collection: testCollectionName,
                         __fileMimeType: 'image/png',
@@ -279,7 +274,6 @@ describe('Media plugin', () => {
                     mediaSingle({ layout: 'center' })(
                       media({
                         id: temporaryFileId,
-                        __key: temporaryFileId,
                         type: 'file',
                         collection: testCollectionName,
                         __fileMimeType: 'image/png',
@@ -304,7 +298,6 @@ describe('Media plugin', () => {
             editorView,
             media({
               id: temporaryFileId,
-              __key: temporaryFileId,
               type: 'file',
               collection: testCollectionName,
               __fileMimeType: 'image/png',
@@ -320,7 +313,6 @@ describe('Media plugin', () => {
                     mediaSingle({ layout: 'center' })(
                       media({
                         id: temporaryFileId,
-                        __key: temporaryFileId,
                         type: 'file',
                         collection: testCollectionName,
                         __fileMimeType: 'image/png',
@@ -382,7 +374,6 @@ describe('Media plugin', () => {
             mediaGroup(
               media({
                 id: id1,
-                __key: id1,
                 type: 'file',
                 __fileMimeType: 'pdf',
                 __fileSize: 200,
@@ -393,7 +384,6 @@ describe('Media plugin', () => {
             mediaSingle({ layout: 'center' })(
               media({
                 id: id2,
-                __key: id2,
                 __fileName: 'bar.png',
                 __fileSize: 200,
                 height: 200,
@@ -425,21 +415,18 @@ describe('Media plugin', () => {
             mediaGroup(
               media({
                 id: 'foo',
-                __key: 'foo',
                 type: 'file',
                 __fileMimeType: 'pdf',
                 collection: testCollectionName,
               })(),
               media({
                 id: 'bar',
-                __key: 'bar',
                 type: 'file',
                 __fileMimeType: 'pdf',
                 collection: testCollectionName,
               })(),
               media({
                 id: 'foobar',
-                __key: 'foobar',
                 type: 'file',
                 __fileMimeType: 'pdf',
                 collection: testCollectionName,
@@ -808,13 +795,11 @@ describe('Media plugin', () => {
         mediaGroup(
           media({
             id: 'bar',
-            __key: 'bar',
             type: 'file',
             collection: testCollectionName,
           })(),
           media({
             id: 'foo',
-            __key: 'foo',
             type: 'file',
             collection: testCollectionName,
           })(),
@@ -850,7 +835,6 @@ describe('Media plugin', () => {
         mediaGroup(
           media({
             id: temporaryFileId,
-            __key: temporaryFileId,
             type: 'file',
             collection: testCollectionName,
             __fileName: 'foo.png',
