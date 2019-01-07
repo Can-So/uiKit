@@ -90,7 +90,7 @@ export default class PickerFacade {
     }
 
     (picker as any).removeAllListeners('upload-preview-update');
-    (picker as any).removeAllListeners('upload-end');
+    (picker as any).removeAllListeners('upload-processing');
     (picker as any).removeAllListeners('upload-error');
 
     if (isDropzone(picker)) {
