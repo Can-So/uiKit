@@ -339,6 +339,7 @@ if (process.env.VISUAL_REGRESSION) {
     }
     global.browser = await puppeteer.launch({
       executablePath: process.env.CHROME_BIN || undefined,
+      headless,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
