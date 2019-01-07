@@ -339,7 +339,7 @@ if (process.env.VISUAL_REGRESSION) {
     }
     console.log('puppeteer:', puppeteer.executablePath());
     global.browser = await puppeteer.launch({
-      executablePath: '/usr/bin/chromium-browser',
+      executablePath: process.env.CHROME_BIN || undefined,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
