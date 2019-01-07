@@ -75,3 +75,13 @@ export const connectFailedEvent = (
       : {}),
   },
 });
+
+export const trackAppAccountConnected = (definitionId?: string) => ({
+  action: 'connected',
+  actionObject: 'applicationAccount',
+  eventType: 'track',
+  attributes: {
+    ...context,
+    definitionId,
+  },
+});

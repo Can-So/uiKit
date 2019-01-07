@@ -20,7 +20,11 @@ import { extractInlinePropsFromJSONLD } from '../extractInlinePropsFromJSONLD';
 import { DefinedState } from '../Client/types';
 import { CardAppearance } from './types';
 import { WithObject } from '../WithObject';
-import { connectFailedEvent, connectSucceededEvent } from '../analytics';
+import {
+  connectFailedEvent,
+  connectSucceededEvent,
+  trackAppAccountConnected,
+} from '../analytics';
 
 const getCollapsedIcon = (state: DefinedState): string | undefined => {
   const { data } = state;
@@ -202,6 +206,9 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
           auth(firstAuthService.startAuthUrl).then(
             () => {
               if (createAnalyticsEvent) {
+                createAnalyticsEvent(
+                  trackAppAccountConnected((state as any).definitionId),
+                ).fire('media');
                 createAnalyticsEvent(connectSucceededEvent(url, state)).fire(
                   'media',
                 );
