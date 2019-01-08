@@ -1,5 +1,10 @@
 # @atlaskit/reactions
 
+## 15.2.1
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/emoji@50.0.0
+  - @atlaskit/util-data-test@10.0.30
+
 ## 15.2.0
 - [minor] [277edda](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/277edda):
 
