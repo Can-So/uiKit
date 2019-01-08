@@ -17,22 +17,20 @@ const { buildCacheGroups, createWebpackConfig } = require('./utils/webpack');
 const { prepareForPrint } = require('./utils/print');
 const { printReport } = require('./reporters/console');
 
-const measureOutputPath = path.join(__dirname, '..', '..', '.measure-output');
+module.exports = function main(filePath, isAnalyze, isJson, isLint) {
+  const measureOutputPath = path.join(
+    process.cwd(),
+    filePath,
+    '.measure-output',
+  );
 
-main(
-  process.argv[2],
-  process.argv.includes('--analyze'),
-  process.argv.includes('--json'),
-  process.argv.includes('--lint'),
-);
-
-function main(filePath, isAnalyze, isJson, isLint) {
   const sanitizedFilePath = filePath.replace('/', '__');
   const measureCompiledOutputPath = path.join(
     measureOutputPath,
     sanitizedFilePath,
   );
-  const entryPoint = path.resolve(__dirname, '../../packages', filePath);
+  const entryPoint = path.join(process.cwd(), filePath);
+
   const spinner = ora(chalk.cyan(`Compiling "${filePath}"`)).start();
 
   if (!fExists(entryPoint)) {
@@ -57,9 +55,7 @@ function main(filePath, isAnalyze, isJson, isLint) {
           fileName: 'main_async.js',
           cacheGroup: {
             name: 'main_async',
-            test: module =>
-              module.context &&
-              module.context.includes(`packages/${filePath}/`),
+            test: module => module.context && module.context.includes(filePath),
             enforce: true,
             chunks: 'async',
           },
@@ -181,10 +177,7 @@ function main(filePath, isAnalyze, isJson, isLint) {
       exec(`rm -rf ${measureCompiledOutputPath}`);
     } catch (e) {}
 
-    const prevStatsPath = path.join(
-      measureOutputPath,
-      `${sanitizedFilePath}–stats.json`,
-    );
+    const prevStatsPath = path.join(entryPoint, `bundle-size-ratchet.json`);
 
     let prevStats;
     if (fExists(prevStatsPath)) {
@@ -216,4 +209,4 @@ function main(filePath, isAnalyze, isJson, isLint) {
       process.exit(1);
     }
   });
-}
+};
