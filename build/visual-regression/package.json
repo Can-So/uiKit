@@ -6,8 +6,5 @@
   "dependencies": {
      "puppeteer":"^1.10.0",
      "jest-image-snapshot": "^2.4.2"
-  },
-  "scripts" :{
-    "create:vr-image": "docker build -t atlassianlabs/atlaskit-mk-2:visual-regression . && docker push atlassianlabs/atlaskit-mk-2:visual-regression"
   }
 }

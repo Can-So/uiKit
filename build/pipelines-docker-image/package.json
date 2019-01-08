@@ -6,7 +6,8 @@
   "scripts": {
     "get-image-name": "node -e 'console.log(\"atlassianlabs/atlaskit-mk-2:\" + require(\"./package.json\").version)'",
     "build-image": "docker build -t $(yarn -s get-image-name) -t atlassianlabs/atlaskit-mk-2:latest .",
-    "push-image": "docker push $(yarn -s get-image-name) && docker push atlassianlabs/atlaskit-mk-2:latest"
+    "push-image": "docker push $(yarn -s get-image-name) && docker push atlassianlabs/atlaskit-mk-2:latest",
+    "create-vr-image": "docker build -t atlassianlabs/atlaskit-mk-2:visual-regression -f ./visual-regression-image/Dockerfile . && docker push atlassianlabs/atlaskit-mk-2:visual-regression"
   },
   "author": "Luke Batchelor",
   "license": "Apache-2.0"
