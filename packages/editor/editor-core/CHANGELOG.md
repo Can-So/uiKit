@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 92.0.21
+- [patch] [e930505](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e930505):
+
+  - Added plugin state factory: createPluginState
+
 ## 92.0.20
 - [patch] [ababb4a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ababb4a):
 
