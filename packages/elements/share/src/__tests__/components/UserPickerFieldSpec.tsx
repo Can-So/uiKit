@@ -30,7 +30,7 @@ describe('UserPickerField', () => {
       messages.userPickerAddMoreMessage,
     );
 
-    expect(field.find(ErrorMessage).isEmpty()).toBeTruthy();
+    expect(field.find(ErrorMessage).exists()).toBeFalsy();
 
     const userPicker = renderProp(
       formattedMessageAddMore,
