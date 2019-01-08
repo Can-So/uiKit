@@ -37,9 +37,7 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
       emojiProvider.prepareForUpload();
     }
 
-    this.state = {
-      uploadErrorMessage: undefined,
-    };
+    this.state = {};
   }
 
   private onUploadEmoji = (upload: EmojiUpload) => {
@@ -57,7 +55,6 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
           this.setState({
             uploadErrorMessage: messages.emojiUploadFailed,
           });
-          // tslint:disable-next-line
           console.error('Unable to upload emoji', err);
         });
     }

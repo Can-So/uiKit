@@ -21,7 +21,7 @@ const emojiUploadLoader: () => Promise<ComponentClass<ComponentProps>> = () =>
   emojiUploadModuleLoader().then(module => module.default);
 
 export interface Props extends LoadingProps {
-  onPickerRef?: UploadRefHandler;
+  onUploaderRef?: UploadRefHandler;
   firePrivateAnalyticsEvent?: FireAnalyticsEvent;
 }
 
@@ -50,8 +50,8 @@ export class EmojiUploaderInternal extends LoadingEmojiComponent<
   renderLoading(): JSX.Element | null {
     const item = new LoadingItem();
     const handleUploadRef = (ref: any) => {
-      if (this.props.onPickerRef) {
-        this.props.onPickerRef(ref);
+      if (this.props.onUploaderRef) {
+        this.props.onUploaderRef(ref);
       }
     };
     return (
@@ -75,7 +75,6 @@ export class EmojiUploaderInternal extends LoadingEmojiComponent<
   }
 }
 
-// tslint:disable-next-line:variable-name
 const EmojiUploader = withAnalytics<typeof EmojiUploaderInternal>(
   EmojiUploaderInternal,
   {},
