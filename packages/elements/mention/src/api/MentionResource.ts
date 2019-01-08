@@ -33,15 +33,6 @@ export interface MentionResourceConfig extends ServiceConfig {
   containerId?: string;
   productId?: string;
   shouldHighlightMention?: (mention: MentionDescription) => boolean;
-
-  /**
-   * Hook for consumers to provide a list of users in the current context.
-   * Users provided here will be searched when mentioning and
-   * will appear first.
-   *
-   * @returns {Promise<MentionDescription[]>}
-   */
-  getUsersInContext?: () => Promise<MentionDescription[]>;
 }
 
 export interface ResourceProvider<Result> {

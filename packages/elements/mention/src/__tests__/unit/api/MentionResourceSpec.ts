@@ -462,48 +462,6 @@ describe('MentionResource', () => {
       );
       resource.filter('test');
     });
-
-    it('401 for search when documents from previous search are already indexed', done => {
-      fetchMock.restore();
-      fetchMock
-        .mock(/\/mentions\/search\?.*query=c(&|$)/, {
-          body: {
-            mentions: resultC,
-          },
-        })
-        .mock(/.*\/mentions\/search\?.*query=cz(&|$)/, 401);
-
-      const resource = new MentionResource(apiConfig);
-      let count = 0;
-      resource.subscribe(
-        'test1',
-        mentions => {
-          count++;
-          if (count === 1) {
-            // the first call is for a remote search for 'c' and should return mentions.
-            expect(mentions).toHaveLength(resultC.length);
-          } else if (count === 2) {
-            // the second call is from a search against the local index for 'cz' and should return no matches
-            expect(mentions).toHaveLength(0);
-          } else if (count > 2) {
-            done(
-              new Error(
-                'Result callback was called more than expected. Error callback was expected.',
-              ),
-            );
-          }
-        },
-        err => {
-          expect((err as any).code).toEqual(401);
-          done();
-        },
-      );
-
-      resource.filter('c'); // this call should succeed and return mentions which get indexed locally
-      window.setTimeout(() => {
-        resource.filter('cz'); // this is the call that will result in a 401
-      }, 10);
-    });
   });
 
   describe('#recordMentionSelection', () => {
