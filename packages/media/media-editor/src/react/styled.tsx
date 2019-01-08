@@ -12,9 +12,10 @@ import {
   akColorN90,
   akColorN200,
   akColorN600A,
+  akColorN700A,
 } from '@atlaskit/util-shared-styles';
 import { ButtonProps } from './toolbarButtons';
-import { colors, layers } from '@atlaskit/theme';
+import { layers } from '@atlaskit/theme';
 
 export interface ToolbarButtonProps {
   selected: boolean;
@@ -25,7 +26,7 @@ export interface LineWidthFrontCircleProps {
   width: number;
 }
 
-export const blanketColor = colors.N0;
+export const blanketColor = akColorN700A;
 const overlayZindex = layers.modal() + 10;
 
 export const EditorContainer: ComponentClass<HTMLAttributes<{}>> = styled.div`

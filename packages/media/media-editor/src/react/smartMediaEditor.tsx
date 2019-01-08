@@ -14,6 +14,7 @@ export interface SmartMediaEditorProps {
   context: Context;
   onUploadStart: (identifier: FileIdentifier) => void;
   onFinish: () => void;
+  onError: (error: any) => void;
 }
 
 export interface SmartMediaEditorState {
@@ -49,12 +50,12 @@ export class SmartMediaEditor extends React.Component<
   }
 
   getFile = async (identifier: FileIdentifier) => {
-    const { context } = this.props;
+    const { context, onError } = this.props;
     const { collectionName } = identifier;
     const id = await identifier.id;
 
-    const getFileSubscription = context
-      .getFile(id, { collectionName })
+    const getFileSubscription = context.file
+      .getFileState(id, { collectionName })
       .subscribe({
         next: state => {
           if (state.status === 'processed') {
@@ -65,6 +66,9 @@ export class SmartMediaEditor extends React.Component<
             this.setImageUrl(identifier);
             setTimeout(() => getFileSubscription.unsubscribe(), 0);
           }
+        },
+        error: error => {
+          onError(error);
         },
       });
     this.getFileSubscription = getFileSubscription;
@@ -124,14 +128,20 @@ export class SmartMediaEditor extends React.Component<
     onFinish();
   };
 
-  onCancel = () => {};
+  onCancel = () => {
+    const { onFinish } = this.props;
+    onFinish();
+  };
 
-  onError = () => {};
+  onError = (error: any) => {
+    const { onError } = this.props;
+    onError(error);
+  };
 
   renderLoading = () => {
     return (
       <SpinnerWrapper>
-        <Spinner size="large" />
+        <Spinner size="large" invertColor={true} />
       </SpinnerWrapper>
     );
   };

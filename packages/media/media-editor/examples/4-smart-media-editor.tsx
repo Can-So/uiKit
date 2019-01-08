@@ -27,6 +27,13 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
     });
   };
 
+  onError = (error: any) => {
+    console.log('onError', error);
+    this.setState({
+      showEditor: false,
+    });
+  };
+
   onUploadStart = (identifier: FileIdentifier) => {
     console.log('onUploadStart', identifier);
     this.setState({
@@ -42,6 +49,7 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
         identifier={imageFileId}
         context={context}
         onFinish={this.onFinish}
+        onError={this.onError}
         onUploadStart={this.onUploadStart}
       />
     );
