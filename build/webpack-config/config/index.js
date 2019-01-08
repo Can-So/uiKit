@@ -204,10 +204,6 @@ module.exports = function createWebpackConfig(
       isProduction,
       noMinimizeFlag: noMinimize,
     }),
-    stats: {
-      // https://github.com/TypeStrong/ts-loader/issues/751
-      warningsFilter: /export .* was not found in/,
-    },
   };
 };
 

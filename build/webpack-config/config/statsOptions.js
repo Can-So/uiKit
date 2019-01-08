@@ -95,5 +95,7 @@ module.exports = {
 
   // Add warnings
   warnings: false,
-  warningsFilter: () => true,
+
+  // https://github.com/TypeStrong/ts-loader/issues/751
+  warningsFilter: /export .* was not found in/,
 };
