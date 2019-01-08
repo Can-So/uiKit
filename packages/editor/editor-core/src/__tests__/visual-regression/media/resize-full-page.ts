@@ -5,9 +5,9 @@ import {
   editable,
   rerenderEditor,
   setFeature,
+  dynamicTextViewportSizes,
 } from '../_utils';
 import { TestPageConfig, resizeWithSnapshots, layoutAvailable } from './_utils';
-import { viewportSizes as dynamicTextViewportSizes } from '../dynamic-text-sizing';
 import { mediaSingleLayouts } from './layouts';
 
 const editorConfigs: Array<TestPageConfig> = [

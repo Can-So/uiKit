@@ -1,5 +1,25 @@
 # @atlaskit/editor-jira-transformer
 
+## 5.1.5
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/editor-common@27.0.0
+  - @atlaskit/editor-core@93.0.0
+  - @atlaskit/editor-test-helpers@6.3.6
+  - @atlaskit/editor-json-transformer@4.1.3
+  - @atlaskit/util-data-test@10.0.30
+
+## 5.1.4
+- [patch] [4f0bf09](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4f0bf09):
+
+  - JSDOM can't properly stub innertText (see: https://github.com/jsdom/jsdom/issues/1245) but textContent works fine. Changing all uses of innerText to textContent prevents future problems for new SSR consumers
+
+## 5.1.3
+- Updated dependencies [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+  - @atlaskit/editor-json-transformer@4.1.2
+  - @atlaskit/editor-test-helpers@6.3.5
+  - @atlaskit/editor-common@26.0.0
+  - @atlaskit/editor-core@92.0.19
+
 ## 5.1.2
 - [patch] [ad41550](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ad41550):
 

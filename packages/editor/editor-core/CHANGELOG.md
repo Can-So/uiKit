@@ -1,5 +1,42 @@
 # @atlaskit/editor-core
 
+## 93.0.0
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/editor-common@27.0.0
+  - @atlaskit/editor-test-helpers@6.3.6
+  - @atlaskit/renderer@34.0.0
+  - @atlaskit/emoji@50.0.0
+  - @atlaskit/media-card@48.0.0
+  - @atlaskit/media-filmstrip@22.0.0
+  - @atlaskit/media-picker@28.0.0
+  - @atlaskit/editor-bitbucket-transformer@4.1.3
+  - @atlaskit/editor-json-transformer@4.1.3
+  - @atlaskit/editor-markdown-transformer@2.1.3
+  - @atlaskit/task-decision@11.1.3
+  - @atlaskit/util-data-test@10.0.30
+  - @atlaskit/media-core@25.0.0
+  - @atlaskit/media-test-helpers@18.9.0
+
+## 92.0.21
+- [patch] [e930505](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e930505):
+
+  - Added plugin state factory: createPluginState
+
+## 92.0.20
+- [patch] [ababb4a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ababb4a):
+
+  - ED-5999: fix padding between Columns in renderer
+
+## 92.0.19
+- [patch] [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+
+  - ED-5805: Popup to support being sticky with alignX=top
+
+## 92.0.18
+- [patch] [5d4527e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5d4527e):
+
+  - Fix issue where date was not respecting user's local date for initial date selection in quick insert
+
 ## 92.0.17
 - [patch] [561f6cb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/561f6cb):
 

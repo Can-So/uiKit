@@ -12,8 +12,8 @@ const commit = process.env.BITBUCKET_COMMIT
 if (!process.env.BITBUCKET_BRANCH && process.env.USER) {
   process.env.BITBUCKET_BRANCH = process.env.USER + '_local_run';
 }
+
 function setBrowserStackClients() /*: Array<?Object>*/ {
-  let isLandKid = process.env.LANDKID !== 'false';
   let launchers = {
     chrome: {
       os: 'Windows',
@@ -51,7 +51,7 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
       resolution: '1440x900',
     },
   };
-  if (isLandKid) {
+  if (process.env.LANDKID) {
     delete launchers.safari;
     delete launchers.ie;
     delete launchers.firefox;

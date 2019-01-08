@@ -1,5 +1,26 @@
 # @atlaskit/media-viewer
 
+## 30.0.0
+- [patch] [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+
+  - Remove deprecated methods from media-core
+  - Use context.collection methods in MediaViewer
+  - Remove link support from media-card
+  - Remove legacy services + providers from media-core
+  - Remove link related methods from media-core
+  - Remove axios dependency
+  - Make context.getImage cancelable
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/media-card@48.0.0
+  - @atlaskit/media-core@25.0.0
+  - @atlaskit/media-store@9.1.0
+  - @atlaskit/media-test-helpers@18.9.0
+
+## 29.2.0
+- [minor] [8314694](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8314694):
+
+  - Support uploading + processing files in MediaViewer
+
 ## 29.1.0
 - [minor] [6bc785d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bc785d):
 

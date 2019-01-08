@@ -1,5 +1,18 @@
 # @atlaskit/media-picker
 
+## 28.0.0
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/media-card@48.0.0
+  - @atlaskit/media-editor@22.0.0
+  - @atlaskit/media-core@25.0.0
+  - @atlaskit/media-store@9.1.0
+  - @atlaskit/media-test-helpers@18.9.0
+
+## 27.0.5
+- [patch] [8314694](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8314694):
+
+  - Support uploading + processing files in MediaViewer
+
 ## 27.0.4
 - [patch] [442821a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/442821a):
 

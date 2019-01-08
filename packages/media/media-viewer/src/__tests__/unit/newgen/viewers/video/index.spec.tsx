@@ -127,6 +127,7 @@ describe('Video viewer', () => {
     el.update();
 
     const errorMessage = el.find(ErrorMessage);
+
     expect(errorMessage).toHaveLength(1);
     expect(errorMessage.text()).toContain(
       "We couldn't generate a preview for this file",

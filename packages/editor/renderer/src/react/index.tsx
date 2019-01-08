@@ -46,6 +46,24 @@ export interface ConstructorParams {
   allowDynamicTextSizing?: boolean;
 }
 
+type MarkWithContent = Partial<Mark<any>> & { content: any[] };
+
+const mergeMarks = (marks: MarkWithContent[]) =>
+  marks.reduce(
+    (acc, cur) => {
+      const prev = acc.length && acc[acc.length - 1];
+
+      if (prev && isSameMark(prev as Mark, cur as Mark)) {
+        prev.content = mergeMarks(prev.content.concat(cur.content));
+      } else {
+        acc.push(cur);
+      }
+
+      return acc;
+    },
+    [] as MarkWithContent[],
+  );
+
 export default class ReactSerializer implements Serializer<JSX.Element> {
   private providers?: ProviderFactory;
   private eventHandlers?: EventHandlers;
@@ -298,44 +316,27 @@ export default class ReactSerializer implements Serializer<JSX.Element> {
   }
 
   static buildMarkStructure(content: Node[]) {
-    let currentMarkNode: any;
-    return content.reduce(
-      (acc, node, index) => {
+    return mergeMarks(
+      content.map(node => {
         const nodeMarks = this.getMarks(node);
-
         if (nodeMarks.length === 0) {
-          currentMarkNode = node;
-          acc.push(currentMarkNode);
-        } else {
-          nodeMarks.forEach((mark, markIndex) => {
-            const isSameAsPrevious = isSameMark(mark, currentMarkNode as Mark);
-            const previousIsInMarks =
-              markIndex > 0 &&
-              nodeMarks.some(m => isSameMark(m, currentMarkNode));
-
-            if (!isSameAsPrevious) {
-              let newMarkNode: any = {
-                ...mark,
-                content: [],
-              };
-
-              if (previousIsInMarks) {
-                currentMarkNode.content!.push(newMarkNode);
-                currentMarkNode = newMarkNode;
-              } else {
-                acc.push(newMarkNode);
-                currentMarkNode = newMarkNode;
-              }
-            }
-          });
-
-          currentMarkNode.content!.push(node);
+          return node;
         }
 
-        return acc;
-      },
-      [] as Mark[],
-    );
+        return nodeMarks.reverse().reduce(
+          (acc, mark) => {
+            const { eq } = mark;
+
+            return {
+              ...mark,
+              eq,
+              content: [acc],
+            };
+          },
+          node as any,
+        );
+      }),
+    ) as Mark[];
   }
 
   static fromSchema(

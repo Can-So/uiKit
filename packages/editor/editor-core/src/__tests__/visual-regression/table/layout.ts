@@ -1,6 +1,6 @@
 import { initEditor, clearEditor, insertTable, snapshot } from '../_utils';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
-import { insertColumn, setTableLayout } from './_table-utils';
+import { insertColumn, setTableLayout, insertRow } from './_table-utils';
 
 describe('Snapshot Test: table layout', () => {
   let page;
@@ -61,6 +61,22 @@ describe('Snapshot Test: table layout', () => {
           `.ProseMirror .${ClassName.TABLE_NODE_WRAPPER}`,
         )!.scrollLeft = 300;
       }, ClassName);
+      await snapshot(page);
+    });
+
+    it('should have toggle layout button sticky', async () => {
+      await page.setViewport({ width: 1000, height: 500 });
+      for (let k = 0; k < 7; k++) {
+        await insertRow(page);
+      }
+      await page.click('table tr td:nth-child(1) p');
+
+      await page.evaluate(() => {
+        document.querySelector(
+          '.fabric-editor-popup-scroll-parent',
+        )!.scrollTop = 300;
+      });
+
       await snapshot(page);
     });
   });

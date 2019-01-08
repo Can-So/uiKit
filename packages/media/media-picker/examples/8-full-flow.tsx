@@ -7,7 +7,8 @@ import { Card, FileIdentifier, CardEvent } from '@atlaskit/media-card';
 import { MediaViewer, MediaViewerItem } from '@atlaskit/media-viewer';
 import { FileDetails } from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
-import * as uuid from 'uuid/v4';
+import Select from '@atlaskit/select';
+import { SelectWrapper, OptionsWrapper } from '../example-helpers/styled';
 import { MediaPicker } from '../src';
 
 const context = createUploadContext();
@@ -17,21 +18,25 @@ const popup = MediaPicker('popup', context, {
     collection: defaultCollectionName,
   },
 });
-
+const dataSourceOptions = [
+  { label: 'List', value: 'list' },
+  { label: 'Collection', value: 'collection' },
+];
 popup.show();
 
 export type TenantFileRecord = {
   id: Promise<string>;
-  occKey?: string;
+  occurrenceKey?: string;
 };
-
+export type DataSourceType = 'collection' | 'list';
 export interface State {
   events: Array<TenantFileRecord>;
   selectedItem?: MediaViewerItem;
+  dataSourceType: DataSourceType;
 }
 
 export default class Example extends React.Component<{}, State> {
-  state: State = { events: [] };
+  state: State = { events: [], dataSourceType: 'list' };
 
   componentDidMount() {
     popup.on('uploads-start', payload => {
@@ -42,7 +47,7 @@ export default class Example extends React.Component<{}, State> {
           ...events,
           ...payload.files.map(file => ({
             id: file.upfrontId,
-            occKey: file.occurrenceKey,
+            occurrenceKey: file.occurrenceKey,
           })),
         ],
       });
@@ -69,13 +74,12 @@ export default class Example extends React.Component<{}, State> {
         id: fileRecord.id,
         mediaItemType: 'file',
         collectionName: defaultCollectionName,
-        occurrenceKey: fileRecord.occKey,
+        occurrenceKey: fileRecord.occurrenceKey,
       };
 
       return (
-        <div key={uuid()} style={{ display: 'inline-block', margin: '10px' }}>
+        <div key={key} style={{ display: 'inline-block', margin: '10px' }}>
           <Card
-            key={key}
             context={context}
             identifier={identifier}
             dimensions={{
@@ -93,17 +97,21 @@ export default class Example extends React.Component<{}, State> {
     this.setState({ selectedItem: undefined });
   };
 
+  private onDataSourceChange = (event: { value: DataSourceType }) => {
+    this.setState({
+      dataSourceType: event.value,
+    });
+  };
+
   private renderMediaViewer = () => {
-    const { events, selectedItem } = this.state;
+    const { dataSourceType, selectedItem } = this.state;
     if (!selectedItem) {
       return null;
     }
-
     const dataSource =
-      events.length > 1
+      dataSourceType === 'collection'
         ? { collectionName: defaultCollectionName }
         : { list: [selectedItem] };
-
     return (
       <MediaViewer
         featureFlags={{ customVideoPlayer: true }}
@@ -119,12 +127,18 @@ export default class Example extends React.Component<{}, State> {
   render() {
     return (
       <>
-        <div style={{ margin: '10px', marginBottom: '0px' }}>
-          <Button id="show" onClick={popup.show}>
+        <OptionsWrapper>
+          <Button appearance="primary" id="show" onClick={() => popup.show()}>
             Show
           </Button>
-        </div>
-
+          <SelectWrapper>
+            <Select
+              options={dataSourceOptions}
+              defaultValue={dataSourceOptions[0]}
+              onChange={this.onDataSourceChange}
+            />
+          </SelectWrapper>
+        </OptionsWrapper>
         <div>{this.renderCards()}</div>
         {this.renderMediaViewer()}
       </>

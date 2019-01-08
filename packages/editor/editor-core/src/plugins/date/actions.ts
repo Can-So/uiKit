@@ -6,6 +6,7 @@ import {
 } from 'prosemirror-state';
 import { pluginKey } from './plugin';
 import { DateType } from './index';
+import { todayTimestampInUTC } from '@atlaskit/editor-common';
 
 export const insertDate = (date?: DateType) => (
   state: EditorState,
@@ -16,12 +17,7 @@ export const insertDate = (date?: DateType) => (
   if (date) {
     timestamp = Date.UTC(date.year, date.month - 1, date.day).toString();
   } else {
-    const currentDate = new Date();
-    timestamp = Date.UTC(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      currentDate.getDate(),
-    ).toString();
+    timestamp = todayTimestampInUTC();
   }
 
   const tr = state.tr;

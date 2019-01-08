@@ -10,7 +10,7 @@ export interface CalculatePositionParams {
   target?: HTMLElement;
   popup?: HTMLElement;
   offset: number[];
-  stickToBottom?: boolean;
+  stick?: boolean;
 }
 
 export function isBody(elem: HTMLElement | Element): boolean {
@@ -170,6 +170,7 @@ const calculateVerticalStickBottom = ({
   position,
 }): Position => {
   const scrollParent = findOverflowScrollParent(target);
+  const newPos = { ...position };
 
   if (scrollParent) {
     let topOffsetTop = targetTop - scrollParent.getBoundingClientRect().top;
@@ -180,14 +181,52 @@ const calculateVerticalStickBottom = ({
       topOffsetTop < scrollParent.clientHeight
     ) {
       const scroll = targetEnd - scrollParent.clientHeight + offset[1] * 2;
-      let top = position.top || 0;
+      let top = newPos.top || 0;
       top = top - (scroll + popup.clientHeight);
 
-      position.top = top;
+      newPos.top = top;
     }
   }
 
-  return position;
+  return newPos;
+};
+
+const calculateVerticalStickTop = ({
+  target,
+  targetTop,
+  targetHeight,
+  popupOffsetParentHeight,
+  popupOffsetParent,
+
+  popup,
+  offset,
+  position,
+}): Position => {
+  const scrollParent = findOverflowScrollParent(target);
+  const newPos = { ...position };
+
+  if (scrollParent) {
+    const { top: scrollParentTop } = scrollParent.getBoundingClientRect();
+    const topBoundary = targetTop - scrollParentTop;
+    const scrollParentScrollTop = scrollParent.scrollTop;
+    if (topBoundary < 0) {
+      if (
+        targetTop +
+          (scrollParentScrollTop - scrollParentTop) +
+          targetHeight +
+          offset[1] <
+        scrollParentScrollTop
+      ) {
+        newPos.bottom =
+          popupOffsetParentHeight -
+          (topBoundary + popupOffsetParent.scrollTop + targetHeight);
+      } else {
+        newPos.bottom += topBoundary;
+      }
+    }
+  }
+
+  return newPos;
 };
 
 const calculateVerticalPlacement = ({
@@ -238,7 +277,7 @@ export function calculatePosition({
   target,
   popup,
   offset,
-  stickToBottom,
+  stick,
 }: CalculatePositionParams): Position {
   let position: Position = {};
 
@@ -287,10 +326,10 @@ export function calculatePosition({
     offset,
   });
 
-  position = Object.assign({}, position, verticalPosition);
+  position = { ...position, ...verticalPosition };
 
-  if (verticalPlacement !== 'top' && stickToBottom) {
-    const verticalStickToBottomPosition = calculateVerticalStickBottom({
+  if (verticalPlacement !== 'top' && stick) {
+    position = calculateVerticalStickBottom({
       target,
       targetTop,
       targetHeight,
@@ -298,8 +337,19 @@ export function calculatePosition({
       offset,
       position,
     });
+  }
 
-    position = Object.assign({}, position, verticalStickToBottomPosition);
+  if (verticalPlacement === 'top' && stick) {
+    position = calculateVerticalStickTop({
+      target,
+      targetTop,
+      targetHeight,
+      popupOffsetParentHeight,
+      popupOffsetParent,
+      popup,
+      offset,
+      position,
+    });
   }
 
   const horizontalPosition = calculateHorizontalPlacement({
@@ -315,7 +365,7 @@ export function calculatePosition({
     offset,
   });
 
-  position = Object.assign({}, position, horizontalPosition);
+  position = { ...position, ...horizontalPosition };
 
   return position;
 }
