@@ -117,13 +117,7 @@ export class CollectionFetcher {
         // It's hard to merge two together, so we just take what's came from the server.
         // Since we load only one page > 2 pages will be ditched from the cache.
         collection.items = items.data.contents;
-
-        // We only want to asign nextInclusiveStartKey the first time
-        // TODO: why are we only doing this for the first time?
-        // if (!collection.nextInclusiveStartKey) {
         collection.nextInclusiveStartKey = nextInclusiveStartKey;
-        // }
-
         subject.next(collection.items);
       });
 
