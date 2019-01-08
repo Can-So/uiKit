@@ -18,18 +18,16 @@ export const UserPickerField: React.StatelessComponent<Props> = props => (
       <>
         <FormattedMessage {...messages.userPickerAddMoreMessage}>
           {addMore => (
-            <>
-              <UserPicker
-                {...fieldProps}
-                loadOptions={props.loadOptions}
-                isMulti
-                width="100%"
-                placeholder={
-                  <FormattedMessage {...messages.userPickerPlaceholder} />
-                }
-                addMoreMessage={addMore as string}
-              />
-            </>
+            <UserPicker
+              {...fieldProps}
+              loadOptions={props.loadOptions}
+              isMulti
+              width="100%"
+              placeholder={
+                <FormattedMessage {...messages.userPickerPlaceholder} />
+              }
+              addMoreMessage={addMore as string}
+            />
           )}
         </FormattedMessage>
         {!valid && error === REQUIRED && (
