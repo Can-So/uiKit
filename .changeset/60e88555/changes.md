@@ -1,0 +1,1 @@
+- ED-6002 Fixes overflowed layout column rendering in renderer
