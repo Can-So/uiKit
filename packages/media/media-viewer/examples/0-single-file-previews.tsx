@@ -108,7 +108,6 @@ export default class Example extends React.Component<{}, State> {
           {this.state.selectedItem && (
             <AnalyticsListener channel="media" onEvent={handleEvent}>
               <MediaViewer
-                featureFlags={{ customVideoPlayer: true }}
                 context={context}
                 selectedItem={this.state.selectedItem}
                 dataSource={{ list: [this.state.selectedItem] }}

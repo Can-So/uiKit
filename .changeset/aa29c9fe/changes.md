@@ -1,0 +1,1 @@
+- remove customVideoPlayer featureFlag prop and enable by default
