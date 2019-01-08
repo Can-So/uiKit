@@ -1,1 +1,0 @@
-- FS-3412 add durationSinceInput analytics property
