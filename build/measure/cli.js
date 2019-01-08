@@ -39,5 +39,5 @@ if (paths) {
     measure(path, c.flags.analyze, c.flags.json, c.flags.lint);
   });
 } else {
-  console.log(chalk.red('no branch name, no work to do. :D'));
+  console.log(chalk.red('no paths specified, no work to do. :D'));
 }
