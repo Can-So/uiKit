@@ -11,7 +11,6 @@ import { UserPickerField } from './UserPickerField';
 export type Props = {
   title?: string;
   loadOptions: LoadOptions;
-  shareActive?: boolean;
   onShareClick?: Function;
 };
 
