@@ -125,7 +125,6 @@ export default class ResizableMediaSingle extends React.Component<Props> {
         calcPxFromColumns(i, lineLength, this.gridWidth) - offsetLeft,
       );
     }
-
     // full width
     snapTargets.push(lineLength - offsetLeft);
 
@@ -134,12 +133,19 @@ export default class ResizableMediaSingle extends React.Component<Props> {
       lineLength,
       this.props.gridSize,
     );
-    const snapPoints = snapTargets.filter(width => width >= minimumWidth);
 
+    let snapPoints = snapTargets.filter(width => width >= minimumWidth);
     const $pos = this.$pos;
     if (!$pos) {
       return snapPoints;
     }
+
+    const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
+    const isVideoFile =
+      getMediaNode && getMediaNode.attrs.__fileMimeType.match('video/');
+    snapPoints = isVideoFile
+      ? snapPoints.filter(width => width > 320)
+      : snapPoints;
 
     const isTopLevel = $pos.parent.type.name === 'doc';
     if (isTopLevel && appearance === 'full-page') {
