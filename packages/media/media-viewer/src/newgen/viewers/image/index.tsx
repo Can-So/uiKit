@@ -60,14 +60,20 @@ export class ImageViewer extends BaseViewer<
       if (file.status === 'processed') {
         const item = processedFileStateToMediaItem(file);
         const controller =
-          typeof AbortController !== 'undefined' && new AbortController();
-        const response = context.getImage(item.details.id, {
-          width: 1920,
-          height: 1080,
-          mode: 'fit',
-          allowAnimated: true,
-          collection: collectionName,
-        });
+          typeof AbortController !== 'undefined'
+            ? new AbortController()
+            : undefined;
+        const response = context.getImage(
+          item.details.id,
+          {
+            width: 1920,
+            height: 1080,
+            mode: 'fit',
+            allowAnimated: true,
+            collection: collectionName,
+          },
+          controller,
+        );
         this.cancelImageFetch = () => controller && controller.abort();
         imagePreview = await response;
       } else {
