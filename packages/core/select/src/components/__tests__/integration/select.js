@@ -4,6 +4,7 @@ import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
 import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 
 const urlSelect = getExampleUrl('core', 'select');
+// css-selectors:
 const selectDefault = '.react-select__control';
 const selectMenu = '.react-select__menu';
 
