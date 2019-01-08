@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/renderer",
-  "version": "33.0.6",
+  "version": "33.0.7",
   "description": "Renderer component",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -21,7 +21,7 @@
     "@atlaskit/adf-schema": "^1.1.0",
     "@atlaskit/analytics-namespaced-context": "^2.1.5",
     "@atlaskit/code": "^8.2.2",
-    "@atlaskit/editor-common": "^26.0.0",
+    "@atlaskit/editor-common": "^26.0.2",
     "@atlaskit/editor-json-transformer": "^4.1.2",
     "@atlaskit/icon": "^15.0.2",
     "@atlaskit/media-card": "^47.0.0",

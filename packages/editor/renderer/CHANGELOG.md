@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 33.0.7
+- [patch] [8db5ddc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8db5ddc):
+
+  - ED-6002 Fixes overflowed layout column rendering in renderer
+
 ## 33.0.6
 - [patch] [38f3592](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38f3592):
 
