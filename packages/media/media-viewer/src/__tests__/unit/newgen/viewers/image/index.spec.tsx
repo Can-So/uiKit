@@ -98,6 +98,7 @@ describe('ImageViewer', () => {
     expect(context.getImage).toHaveBeenCalledWith(
       'some-id',
       expect.objectContaining({ collection: 'some-collection' }),
+      expect.anything(),
     );
   });
 
