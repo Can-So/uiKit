@@ -1,0 +1,13 @@
+{
+  "name": "app-switcher",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.4.0"
+  },
+  "devDependencies": {
+    "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/theme": "^7.0.1"
+  }
+}
