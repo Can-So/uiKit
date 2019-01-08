@@ -1,87 +1,87 @@
 // Japanese
 export default {
-  'focused-task-close-account.deactivate-account': 'Deactivate account',
-  'focused-task-close-account.delete-account': 'Delete account',
-  'focused-task-close-account.learnMore': 'Learn more',
-  'focused-task-close-account.cancel': 'Cancel',
-  'focused-task-close-account.next': 'Next',
-  'focused-task-close-account.previous': 'Previous',
+  'focused-task-close-account.deactivate-account': 'アカウントの無効化',
+  'focused-task-close-account.delete-account': 'アカウントの削除',
+  'focused-task-close-account.learnMore': 'さらに詳しく',
+  'focused-task-close-account.cancel': 'キャンセル',
+  'focused-task-close-account.next': '次へ',
+  'focused-task-close-account.previous': '戻る',
   'focused-task-close-account.delete-account.overview.heading.self':
-    'Delete your account',
+    'アカウントの削除',
   'focused-task-close-account.delete-account.overview.heading.admin':
-    'Delete account',
+    'アカウントの削除',
   'focused-task-close-account.delete-account.overview.first.line.self':
-    "You're about to delete your account:",
+    '次のアカウントを削除しようとしています：',
   'focused-task-close-account.delete-account.overview.first.line.admin':
-    "You're about to delete the account of:",
+    '次のアカウントを削除しようとしています：',
   'focused-task-close-account.delete-account.overview.warning-section.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
+    '14日間の猶予期間後は、アカウントの削除を取り消すことはできません。後でアカウントが必要になると思われる場合は、代わりにアカウントを無効にしてください。',
   'focused-task-close-account.delete-account.overview.warning-section.deactivated.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    '14日間の猶予期間後は、アカウントの削除を取り消すことはできません。',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
-    'When you delete the account:',
+    'アカウントを削除すると:',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
-    'When you delete your account:',
+    'アカウントを削除すると:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    '{fullName}はAtlassianのすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。 現在アクセス権限のあるサービス：',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    'Atlassianのすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。 現在アクセス権限のあるサービス：',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    '{fullName}はAtlassianのすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。  現在、コミュニティやMarketplaceなどのサービスを除いて、アクセス権限はありません。',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    'Atlassianのすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。  現在、コミュニティやMarketplaceなどのサービスを除いて、アクセス権限はありません。',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Atlassian コミュニティやMarketplaceなどの他のAtlassian アカウントサービス。',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.admin':
-    "The content they've created will remain in Atlassian account services.",
+    '作成されたコンテンツはAtlassian アカウントサービスから削除されません。',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.self':
-    "The content you've created will remain in Atlassian account services.",
+    '作成されたコンテンツはAtlassian アカウントサービスから削除されません。',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.admin':
-    "For example, pages, issues, and comments they've created in products.",
+    '例えば、製品で作成したページ、課題、コメントなど。',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.self':
-    "For example, pages, issues, and comments you've created in products.",
+    '例えば、製品で作成したページ、課題、コメントなど。',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin':
-    "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    '正当な業務上または法律上の目的で必要とされる場合を除き、30日以内にAtlassian アカウントサービスから氏名やメールアドレスなどの<b>個人データは削除</b>されます。',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self':
-    "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    '正当な業務上または法律上の目的で必要とされる場合を除き、30日以内にAtlassian アカウントサービスから氏名やメールアドレスなどの<b>個人データは削除</b>されます。',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin':
-    'We’ll email you a list of apps that may have stored their personal data.',
+    '個人データを保存している可能性のあるアプリの一覧をメールでお知らせします。',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
-    'We’ll email you a list of apps that may have stored your personal data.',
+    '個人データを保存している可能性のあるアプリの一覧をメールでお知らせします。',
   'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    '14日間の猶予期間後は、アカウントの削除を取り消すことはできません。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    '正当な業務上または法律上の目的で、個人データを限られた期間保管します。例：',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    '正当な業務上または法律上の目的で、個人データを限られた期間保管します。例：',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    '財務報告のために保管する必要がある購入に関する情報。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    '財務報告のために保管する必要がある購入に関する情報。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'アカウントの削除を示す記録。規制当局に提供する必要があるかもしれません。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'アカウントの削除を示す記録。規制当局に提供する必要があるかもしれません。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    '進行中の訴訟の一部であり、法律上、保存する必要のあるデータ。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    '進行中の訴訟の一部であり、法律上、保存する必要のあるデータ。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.admin':
-    'We don’t delete any personal data from content created by users, such as names or email addresses they typed in a page or issue. The product admins need to delete that data manually.',
+    'ページや課題に入力された名前やメールアドレスなど、あなたや他の人が作成したコンテンツから個人データが削除されることはありません。これらの個人データは製品管理者が手動で削除する必要があります。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.self':
-    "We don't delete any personal data from content created by you or other people, such as names or email addresses typed into a page or issue. Your product admins need to delete that data manually.",
+    'ページや課題に入力された名前やメールアドレスなど、あなたや他の人が作成したコンテンツから個人データを削除することはありません。これらの個人データは製品管理者が手動で削除する必要があります。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.admin':
-    'Users have the right to submit complaints to the supervisory authority in their country.',
+    'ユーザーは自国の監督当局に苦情を提起する権利を有しています。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self':
-    'You have the right to submit complaints to the supervisory authority in your country.',
+    'お客様はお住まいの地域の監督当局に苦情を提起する権利を有しています。',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    'あなた、または他のユーザーがAtlassian製品に機能を追加するアプリケーションをインストールしている可能性があります。これらのアプリはユーザーのプロフィール情報を保存している可能性があります。',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
+    'あなた、または他のユーザーがAtlassian製品に機能を追加するアプリケーションをインストールしている可能性があります。これらのアプリはプロフィール情報を保存している可能性があります。',
   'focused-task-close-account.delete-account.content-preview.heading':
-    'How users will see this account',
+    'アカウントのプレビュー',
   'focused-task-close-account.delete-account.drop-down-expand-button':
-    '{num} more',
+    'あと{num}つ',
   'focused-task-close-account.delete-account.drop-down-collapse-button':
-    'Show less',
+    '表示を減らす',
 };

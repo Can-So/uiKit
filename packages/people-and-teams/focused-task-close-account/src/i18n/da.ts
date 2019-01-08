@@ -1,87 +1,87 @@
 // Danish
 export default {
-  'focused-task-close-account.deactivate-account': 'Deactivate account',
-  'focused-task-close-account.delete-account': 'Delete account',
-  'focused-task-close-account.learnMore': 'Learn more',
-  'focused-task-close-account.cancel': 'Cancel',
-  'focused-task-close-account.next': 'Next',
-  'focused-task-close-account.previous': 'Previous',
+  'focused-task-close-account.deactivate-account': 'Deaktivér konto',
+  'focused-task-close-account.delete-account': 'Slet konto',
+  'focused-task-close-account.learnMore': 'Læs mere',
+  'focused-task-close-account.cancel': 'Annullér',
+  'focused-task-close-account.next': 'Næste',
+  'focused-task-close-account.previous': 'Seneste',
   'focused-task-close-account.delete-account.overview.heading.self':
-    'Delete your account',
+    'Slet din konto',
   'focused-task-close-account.delete-account.overview.heading.admin':
-    'Delete account',
+    'Slet konto',
   'focused-task-close-account.delete-account.overview.first.line.self':
-    "You're about to delete your account:",
+    'Du er ved at slette din konto:',
   'focused-task-close-account.delete-account.overview.first.line.admin':
-    "You're about to delete the account of:",
+    'Du er ved at slette kontoen for:',
   'focused-task-close-account.delete-account.overview.warning-section.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
+    'Efter en henstandsperiode på 14 dage vil du ikke kunne annullere sletningen af kontoen. Hvis du tror, at du får brug for kontoen senere, skal du deaktivere den i stedet.',
   'focused-task-close-account.delete-account.overview.warning-section.deactivated.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    'Efter en henstandsperiode på 14 dage vil du ikke kunne annullere sletningen af kontoen.',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
-    'When you delete the account:',
+    'Når du sletter kontoen:',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
-    'When you delete your account:',
+    'Når du sletter din konto:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    '{fullName} vil <b>øjeblikkeligt miste adgang</b> til alle Atlassian-kontotjenester. Vedkommende har p.t. adgang til:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    'Du vil <b>øjeblikkeligt miste adgang</b> til alle Atlassian-kontotjenester. Du har p.t. adgang til:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    '{fullName} vil <b>øjeblikkeligt miste adgang</b> til alle Atlassian-kontotjenester. Personen har p.t. ikke adgang til nogen, bortset fra tjenester som Fællesskab og Markedsplads.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    'Du vil <b>øjeblikkeligt miste adgang</b> til alle Atlassian-kontotjenester. Du har p.t. ikke adgang til nogen, bortset fra tjenester som Fællesskab og Markedsplads.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Andre Atlassian-kontotjenester, såsom Atlassian Fællesskab og Markedsplads.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.admin':
-    "The content they've created will remain in Atlassian account services.",
+    'Indholdet, personen har oprettet, vil blive i Atlassian-kontotjenesterne.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.self':
-    "The content you've created will remain in Atlassian account services.",
+    'Indholdet, du har oprettet, vil blive i Atlassian-kontotjenesterne.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.admin':
-    "For example, pages, issues, and comments they've created in products.",
+    'For eksempel sider, opgaver og kommentarer, personen har tilføjet til produkter.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.self':
-    "For example, pages, issues, and comments you've created in products.",
+    'For eksempel sider, opgaver og kommentarer, du har tilføjet til produkter.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin':
-    "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    'Vi vil<b>slette personens private oplysninger</b>, såsom vedkommendes fulde navn og e-mailadresse, fra Atlassian-kontotjenester inden for 30 dage, bortset fra nogle få tilfælde, hvor de er påkrævede til drift af lovlig virksomhed eller juridiske formål.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self':
-    "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    'Vi vil<b>slette dine private oplysninger</b>, såsom dit fulde navn og e-mailadresse, fra Atlassian-kontotjenester inden for 30 dage, bortset fra nogle få tilfælde, hvor de er påkrævede til drift af lovlig virksomhed eller juridiske formål.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin':
-    'We’ll email you a list of apps that may have stored their personal data.',
+    'Vi sender dig en e-mail med en liste over apps, der kan indeholde personens private oplysninger.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
-    'We’ll email you a list of apps that may have stored your personal data.',
+    'Vi sender dig en e-mail med en liste over apps, der kan indeholde dine private oplysninger.',
   'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    'Efter en henstandsperiode på 14 dage vil du ikke kunne annullere sletningen af din konto.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Vi beholder private oplysninger i begrænsede tidsrum, når de er påkrævede til drift af lovlig virksomhed eller juridiske formål. Eksempler omfatter:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Vi beholder private oplysninger i begrænsede tidsrum, når de er påkrævede til drift af lovlig virksomhed eller juridiske formål. Eksempler omfatter:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Information vedrørende køb, som vi er forpligtede til at beholde af hensyn til finansiel rapportering.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Information vedrørende køb, som vi er forpligtede til at beholde af hensyn til finansiel rapportering.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Fortegnelser, der viser, at vi slettet en persons konto, som kan være forpligtede til at videregive til lovgivere.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Fortegnelser, der viser, at vi slettet en persons konto, som kan være forpligtede til at videregive til lovgivere.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Data, som indgår i en aktiv retssag, og som loven påbyder os at beholde.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Data, som indgår i en aktiv retssag, og som loven påbyder os at beholde.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.admin':
-    'We don’t delete any personal data from content created by users, such as names or email addresses they typed in a page or issue. The product admins need to delete that data manually.',
+    'Vi sletter ikke private oplysninger fra indhold, brugere har oprettet, såsom navne og e-mailadresser, de har indtastet på en side eller i en opgave. Disse oplysninger skal slettes manuelt af produktadministratorerne.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.self':
-    "We don't delete any personal data from content created by you or other people, such as names or email addresses typed into a page or issue. Your product admins need to delete that data manually.",
+    'Vi sletter ikke private oplysninger fra indhold, brugere har oprettet, såsom navne og e-mailadresser, de har indtastet på en side eller i en opgave. Disse oplysninger skal slettes manuelt af produktadministratorerne.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.admin':
-    'Users have the right to submit complaints to the supervisory authority in their country.',
+    'Brugere har ret til at indsende klager til den relevante myndighed i deres land.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self':
-    'You have the right to submit complaints to the supervisory authority in your country.',
+    'Du har ret til at indsende klager til den relevante myndighed i dit land.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    'Du og andre brugere kan have installeret apps, der tilføjer funktioner til Atlassian-produkter. Disse apps kan indeholde brugerens profiloplysninger.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
+    'Du og andre brugere kan have installeret apps, der tilføjer funktioner til Atlassian-produkter. Disse apps kan indeholde brugerens profiloplysninger.',
   'focused-task-close-account.delete-account.content-preview.heading':
-    'How users will see this account',
+    'Hvordan brugere vil se denne konto',
   'focused-task-close-account.delete-account.drop-down-expand-button':
-    '{num} more',
+    '{num} mere',
   'focused-task-close-account.delete-account.drop-down-collapse-button':
-    'Show less',
+    'Vis mindre',
 };

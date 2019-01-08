@@ -1,87 +1,86 @@
 // Icelandic
 export default {
-  'focused-task-close-account.deactivate-account': 'Deactivate account',
-  'focused-task-close-account.delete-account': 'Delete account',
-  'focused-task-close-account.learnMore': 'Learn more',
-  'focused-task-close-account.cancel': 'Cancel',
-  'focused-task-close-account.next': 'Next',
-  'focused-task-close-account.previous': 'Previous',
+  'focused-task-close-account.deactivate-account': 'Gera reikning óvirkan',
+  'focused-task-close-account.delete-account': 'Eyða reikningi',
+  'focused-task-close-account.learnMore': 'Fáðu að vita meira ',
+  'focused-task-close-account.cancel': 'Hætta við ',
+  'focused-task-close-account.next': 'Næsta',
+  'focused-task-close-account.previous': 'Fyrra',
   'focused-task-close-account.delete-account.overview.heading.self':
-    'Delete your account',
-  'focused-task-close-account.delete-account.overview.heading.admin':
-    'Delete account',
+    'Þegar reikningnum þínum er eytt',
+  'focused-task-close-account.delete-account.overview.heading.admin': ' ',
   'focused-task-close-account.delete-account.overview.first.line.self':
-    "You're about to delete your account:",
+    'Þú er við það að eyða reikningnum þínum:',
   'focused-task-close-account.delete-account.overview.first.line.admin':
-    "You're about to delete the account of:",
+    'Þú er við það að eyða reikningi:',
   'focused-task-close-account.delete-account.overview.warning-section.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
+    'Eftir 14-daga greiðslufrest muntu ekki geta hætt við eyðingu reikningsins. Ef þú heldur að þú gætir þurft á honum að halda síðar, gerðu hann þá frekar óvirkan.',
   'focused-task-close-account.delete-account.overview.warning-section.deactivated.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    ' ',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
-    'When you delete the account:',
+    ' ',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
-    'When you delete your account:',
+    'Þegar þú eyðir reikningum þínum:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    '{fullName} mun <b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hafa þeir aðgang að:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    'Þú munt <b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hefur þú aðgang að:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    ' ',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    'Þú munt<b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hefur þú ekki aðgang að neinni þjónustu nema þjónustu eins og Community og Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Önnur Atlassian reikningsþjónusta, eins og Atlassian Community og Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.admin':
-    "The content they've created will remain in Atlassian account services.",
+    'Innihaldið sem notandi hefur búið til mun vera áframhaldandi í Atlassian reikningsþjónustu.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.self':
-    "The content you've created will remain in Atlassian account services.",
+    'Innihaldið sem þú hefur búið til mun vera áframhaldandi í Atlassian reikningsþjónustu.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.admin':
-    "For example, pages, issues, and comments they've created in products.",
+    'Til dæmis síður, málefni og athugasemdir sem þeir hafa búið til í vörum.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.self':
-    "For example, pages, issues, and comments you've created in products.",
+    'Til dæmis síður, málefni og athugasemdir sem þú hefur búið til í vörum.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin':
-    "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    'Við munum <b>eyða persónuupplýsingunum þeirra</b>, eins og til dæmis fullu nafni og netfangi, af Atlassian reikningum innan 30 daga, að örfáum tilvikum undanskildum þar sem þær eru nauðsynlegar fyrir lögleg fyrirtæki og í lagalegum tilgangi.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self':
-    "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    'Við munum <b>eyða persónuupplýsingunum þínum</b>, eins og til dæmis fullu nafni og netfangi, af Atlassian reikningum innan 30 daga, að örfáum tilvikum undanskildum þar sem þær eru nauðsynlegar fyrir lögleg fyrirtæki og í lagalegum tilgangi.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin':
-    'We’ll email you a list of apps that may have stored their personal data.',
+    'Við munum senda þér lista með tölvupósti af forritum sem gætu hafa geymt persónuupplýsingarnar þeirra. ',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
-    'We’ll email you a list of apps that may have stored your personal data.',
+    'Við munum senda þér lista með tölvupósti af forritum sem gætu hafa geymt persónuupplýsingarnar þínar. ',
   'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    ' ',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Við geymum persónuupplýsingar í takmarkaðan tíma þegar um lögleg fyrirtæki eða lagalegan tilgang er að ræða. Sum þessara tilvika eru:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Við geymum persónuupplýsingar í takmarkaðan tíma þegar um lögleg fyrirtæki eða lagalegan tilgang er að ræða. Sum þessara tilvika eru:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    ' ',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Upplýsingar sem tengjast vörukaupum sem okkur er áskilið að geyma fyrir fjárhagslegar skýrslugerðir.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Gögn sem sýna að við höfum eytt reikningi einhvers, sem við gætum þurft að gefa upp til eftirlitsaðila.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Gögn sem sýna að við höfum eytt reikningi einhvers, sem við gætum þurft að gefa upp til eftirlitsaðila.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Gögn sem eru hluti af virkri málssókn, sem okkur er áskilið að geyma samkvæmt lögum.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Gögn sem eru hluti af virkri málssókn, sem okkur er áskilið að geyma samkvæmt lögum.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.admin':
-    'We don’t delete any personal data from content created by users, such as names or email addresses they typed in a page or issue. The product admins need to delete that data manually.',
+    'Við eyðum ekki neinum persónuupplýsingum úr innihaldi sem búið til var af notendum, eins og nöfnum og netföngum sem þeir slógu inn á síðu eða málefni. Vörustjórnendurnir verða að eyða þeim upplýsingum handvirkt.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.self':
-    "We don't delete any personal data from content created by you or other people, such as names or email addresses typed into a page or issue. Your product admins need to delete that data manually.",
+    'Við eyðum ekki neinum persónuupplýsingum úr innihaldi sem búið til var af þér eða öðrum aðilum, eins og nöfnum og netföngum sem slegin hafa verið inn á síðu eða málefni. Vörustjórnendurnir þínir verða að eyða þeim upplýsingum handvirkt.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.admin':
-    'Users have the right to submit complaints to the supervisory authority in their country.',
+    'Notendur hafa rétt á því að leggja fram kvartanir til eftirlitsstofnunar landsins síns.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self':
-    'You have the right to submit complaints to the supervisory authority in your country.',
+    'Þú hefur rétt á því að leggja fram kvartanir til eftirlitsstofnunar landsins þíns.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    'Þú og aðrir notendur gætuð hafa sett upp forrit sem bæta eiginleikum við Atlassian vörur. Þessi forrit gætu hafa geymt notendasíðuupplýsingar notandans.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
+    ' ',
   'focused-task-close-account.delete-account.content-preview.heading':
-    'How users will see this account',
+    'Hvernig notendur munu sjá þennan reikning',
   'focused-task-close-account.delete-account.drop-down-expand-button':
-    '{num} more',
+    '{num} meira',
   'focused-task-close-account.delete-account.drop-down-collapse-button':
-    'Show less',
+    'Sýna minna ',
 };

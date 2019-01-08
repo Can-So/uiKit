@@ -1,87 +1,87 @@
 // Finnish
 export default {
-  'focused-task-close-account.deactivate-account': 'Deactivate account',
-  'focused-task-close-account.delete-account': 'Delete account',
-  'focused-task-close-account.learnMore': 'Learn more',
-  'focused-task-close-account.cancel': 'Cancel',
-  'focused-task-close-account.next': 'Next',
-  'focused-task-close-account.previous': 'Previous',
+  'focused-task-close-account.deactivate-account': 'Poista tili käytöstä',
+  'focused-task-close-account.delete-account': 'Poista tili',
+  'focused-task-close-account.learnMore': 'Lue lisää ',
+  'focused-task-close-account.cancel': 'Peruuta',
+  'focused-task-close-account.next': 'Seuraava ',
+  'focused-task-close-account.previous': 'Edellinen',
   'focused-task-close-account.delete-account.overview.heading.self':
-    'Delete your account',
+    'Poista tilisi',
   'focused-task-close-account.delete-account.overview.heading.admin':
-    'Delete account',
+    'Poista tili',
   'focused-task-close-account.delete-account.overview.first.line.self':
-    "You're about to delete your account:",
+    'Olet poistamassa tilisi:',
   'focused-task-close-account.delete-account.overview.first.line.admin':
-    "You're about to delete the account of:",
+    'Olet poistamassa seuraavan henkilön tilin:',
   'focused-task-close-account.delete-account.overview.warning-section.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
+    '14 päivän lisäajan jälkeen et voi peruuttaa tilin poistamista. Jos luulet, että tarvitset tiliä myöhemmin, poista se sen sijaan käytöstä.',
   'focused-task-close-account.delete-account.overview.warning-section.deactivated.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    '14 päivän lisäajan jälkeen et voi peruuttaa tilin poistamista. ',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
-    'When you delete the account:',
+    'Kun poistat tilin tapahtuu seuraavaa:',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
-    'When you delete your account:',
+    'Kun poistat tilisi tapahtuu seuraavaa:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    '{fullName} <b>menettää heti pääsyn</b> kaikkiin Atlassian-tilipalveluihin. Tällä hetkellä hänellä on pääsy seuraaviin kohteisiin:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    'Menetät <b>heti pääsyn</b> kaikkiin Atlassian-tilipalveluihin. Tällä hetkellä sinulla on pääsy seuraaviin kohteisiin:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    '{fullName} <b>menettää heti pääsyn</b> kaikkiin Atlassian-tilipalveluihin. Tällä hetkellä hänellä ei ole pääsyä mihinkään palveluihin, paitsi Yhteisön ja Marketplacen kaltaisiin palveluihin.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    'Menetät <b>heti pääsyn</b> kaikkiin Atlassian-tilipalveluihin. Tällä hetkellä sinulla ei ole pääsyä mihinkään palveluihin, paitsi Yhteisön ja Marketplacen kaltaisiin palveluihin.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Muut Atlassian-tilipalvelut, kuten Atlassian-Yhteisö ja Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.admin':
-    "The content they've created will remain in Atlassian account services.",
+    'Hänen luomansa sisältö pysyy Atlassian-tilipalveluissa.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.self':
-    "The content you've created will remain in Atlassian account services.",
+    'Luomasi sisältö pysyy Atlassian-tilipalveluissa.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.admin':
-    "For example, pages, issues, and comments they've created in products.",
+    'Esimerkiksi, sivut, asiat ja kommentit, jotka hän on luonut tuotteissa.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.self':
-    "For example, pages, issues, and comments you've created in products.",
+    'Esimerkiksi, sivut, asiat ja kommentit, jotka olet luonut tuotteissa.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin':
-    "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    'Poistamme <b>hänen henkilötietonsa</b>, kuten koko nimen ja sähköpostiosoitteen, Atlassian-tilipalveluista 30 päivän sisällä, paitsi muutamassa tapauksessa, kun niitä tarvitaan laillisiin liiketoiminnallisiin tai oikeudellisiin tarkoituksiin.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self':
-    "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    'Poistamme <b>henkilötietosi</b>, kuten koko nimesi ja sähköpostiosoitteesi, Atlassian-tilipalveluista 30 päivän sisällä, paitsi muutamassa tapauksessa, kun niitä tarvitaan laillisiin liiketoiminnallisiin tai oikeudellisiin tarkoituksiin.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin':
-    'We’ll email you a list of apps that may have stored their personal data.',
+    'Lähetämme sinulle sähköpostitse luettelon sovelluksista, jotka ovat saattaneet tallentaa hänen henkilötietojaan.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
-    'We’ll email you a list of apps that may have stored your personal data.',
+    'Lähetämme sinulle sähköpostitse luettelon sovelluksista, jotka ovat saattaneet tallentaa sinun henkilötietojasi.',
   'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    '14 päivän lisäajan jälkeen et voi peruuttaa tilin poistamista. ',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Säilytämme henkilötietoja rajoitetun ajanjakson ajan laillisia liiketoiminnallisia tai oikeudellisia tarkoituksia varten. Esimerkkejä näistä:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Säilytämme henkilötietoja rajoitetun ajanjakson ajan laillisia liiketoiminnallisia tai oikeudellisia tarkoituksia varten. Esimerkkejä näistä:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Ostoksiin liittyvät tiedot, jotka meidän tulee säilyttää talousraportteja varten.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Ostoksiin liittyvät tiedot, jotka meidän tulee säilyttää talousraportteja varten.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Kirjanpidossa näkyy, että poistimme jonkun henkilön tilin, ja meidän tulee ehkä todistaa tämä valvojille.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Kirjanpidossa näkyy, että poistimme jonkun henkilön tilin, ja meidän tulee ehkä todistaa tämä valvojille.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Käynnissä olevaan oikeusjuttuun liittyvät tiedot, joita meidän tulee säilyttää lain mukaan.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Käynnissä olevaan oikeusjuttuun liittyvät tiedot, joita meidän tulee säilyttää lain mukaan.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.admin':
-    'We don’t delete any personal data from content created by users, such as names or email addresses they typed in a page or issue. The product admins need to delete that data manually.',
+    'Emme poista mitään henkilötietoja käyttäjien luomasta sisällöstä, kuten nimiä tai sähköpostiosoitteita, joita he kirjoittivat sivulle tai asiaan. Tuotteen pääkäyttäjien tulee poistaa nämä tiedot manuaalisesti.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.self':
-    "We don't delete any personal data from content created by you or other people, such as names or email addresses typed into a page or issue. Your product admins need to delete that data manually.",
+    'Emme poista mitään henkilötietoja sinun tai muiden luomasta sisällöstä, kuten nimiä tai sähköpostiosoitteita, joita he kirjoittivat sivulle tai asiaan. Tuotteen pääkäyttäjiesi tulee poistaa nämä tiedot manuaalisesti.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.admin':
-    'Users have the right to submit complaints to the supervisory authority in their country.',
+    'Käyttäjillä on oikeus jättää valituksia maansa valvontaviranomaisille.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self':
-    'You have the right to submit complaints to the supervisory authority in your country.',
+    'Sinulla on oikeus jättää valituksia maasi valvontaviranomaisille.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    'Sinä tai muut käyttäjät olette ehkä asentaneet sovelluksia, jotka lisäävät ominaisuuksia Atlassian-tuotteisiin. Nämä sovellukset ovat saattaneet tallentaa käyttäjän profiilitietoja.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
+    'Sinä tai muut käyttäjät olette ehkä asentaneet sovelluksia, jotka lisäävät ominaisuuksia Atlassian-tuotteisiin. Nämä sovellukset ovat saattaneet tallentaa sinun profiilitietojasi.',
   'focused-task-close-account.delete-account.content-preview.heading':
-    'How users will see this account',
+    'Miltä tämä tili näyttää käyttäjille',
   'focused-task-close-account.delete-account.drop-down-expand-button':
-    '{num} more',
+    '{num} lisää',
   'focused-task-close-account.delete-account.drop-down-collapse-button':
-    'Show less',
+    'Näytä vähemmän',
 };

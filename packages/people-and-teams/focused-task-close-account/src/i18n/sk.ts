@@ -1,87 +1,87 @@
 // Slovak
 export default {
-  'focused-task-close-account.deactivate-account': 'Deactivate account',
-  'focused-task-close-account.delete-account': 'Delete account',
-  'focused-task-close-account.learnMore': 'Learn more',
-  'focused-task-close-account.cancel': 'Cancel',
-  'focused-task-close-account.next': 'Next',
-  'focused-task-close-account.previous': 'Previous',
+  'focused-task-close-account.deactivate-account': 'Deaktivovať konto',
+  'focused-task-close-account.delete-account': 'Odstrániť konto',
+  'focused-task-close-account.learnMore': 'Ďalšie informácie',
+  'focused-task-close-account.cancel': 'Zrušiť',
+  'focused-task-close-account.next': 'Ďalej',
+  'focused-task-close-account.previous': 'Späť',
   'focused-task-close-account.delete-account.overview.heading.self':
-    'Delete your account',
+    'Odstránenie konta',
   'focused-task-close-account.delete-account.overview.heading.admin':
-    'Delete account',
+    'Odstránenie konta',
   'focused-task-close-account.delete-account.overview.first.line.self':
-    "You're about to delete your account:",
+    'Chystáte sa odstrániť svoje konto:',
   'focused-task-close-account.delete-account.overview.first.line.admin':
-    "You're about to delete the account of:",
+    'Chystáte sa odstrániť konto:',
   'focused-task-close-account.delete-account.overview.warning-section.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
+    'Po uplynutí 14-dňového prechodného obdobia nebudete môcť zrušiť odstránenie konta. Ak si myslíte, že konto budete neskôr potrebovať, namiesto toho ho deaktivujte.',
   'focused-task-close-account.delete-account.overview.warning-section.deactivated.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    'Po uplynutí 14-dňového prechodného obdobia nebudete môcť zrušiť odstránenie konta. ',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
-    'When you delete the account:',
+    'Po odstránení konta:',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
-    'When you delete your account:',
+    'Po odstránení konta:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    'Používateľ {fullName} <b>okamžite stratí prístup</b> k všetkým službám konta Atlassian. Momentálne má prístup k:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    '<b>Okamžite stratíte prístup</b> k všetkým službám konta Atlassian. Momentálne máte prístup k:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    'Používateľ {fullName} <b>okamžite stratí prístup</b> k všetkým službám konta Atlassian. Momentálne nemá prístup k žiadnym službám, okrem služieb typu Komunita a Obchod.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    '<b>Okamžite stratíte prístup</b> k všetkým službám konta Atlassian. Momentálne nemáte prístup k žiadnym službám, okrem služieb typu Komunita a Obchod.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Ďalšie služby konta Atlassian, ako napríklad Komunita Atlassian a Obchod.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.admin':
-    "The content they've created will remain in Atlassian account services.",
+    'Obsah, ktorý vytvorili, ostane v službách konta Atlassian.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.self':
-    "The content you've created will remain in Atlassian account services.",
+    'Obsah, ktorý ste vytvorili, ostane v službách konta Atlassian.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.admin':
-    "For example, pages, issues, and comments they've created in products.",
+    'Napríklad stránky, problémy a komentáre, ktoré vytvorili v produktoch.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.self':
-    "For example, pages, issues, and comments you've created in products.",
+    'Napríklad stránky, problémy a komentáre, ktoré ste vytvorili v produktoch.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin':
-    "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    '<b>Odstránime ich osobné údaje</b>, ako napríklad celé meno a e-mailovú adresu zo služieb konta Atlassian do 30 dní, s výnimkou niekoľkých prípadov, keď sú potrebné na legitímne obchodné alebo právne účely.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self':
-    "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    '<b>Odstránime vaše osobné údaje</b>, ako napríklad celé meno a e-mailovú adresu zo služieb konta Atlassian do 30 dní, s výnimkou niekoľkých prípadov, keď sú potrebné na legitímne obchodné alebo právne účely.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin':
-    'We’ll email you a list of apps that may have stored their personal data.',
+    'Pošleme vám e-mail so zoznamom aplikácií, ktoré môžu ukladať ich osobné údaje.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
-    'We’ll email you a list of apps that may have stored your personal data.',
+    'Pošleme vám e-mail so zoznamom aplikácií, ktoré môžu ukladať vaše osobné údaje.',
   'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    'Po uplynutí 14-dňového prechodného obdobia nebudete môcť zrušiť odstránenie konta. ',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Osobné údaje uchovávame na obmedzené obdobia, ak máme legitímne obchodné alebo právne záujmy. Niektoré príklady zahŕňajú:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Osobné údaje uchovávame na obmedzené obdobia, ak máme legitímne obchodné alebo právne záujmy. Niektoré príklady zahŕňajú:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Informácie týkajúce sa nákupov, ktoré musíme uchovávať pre finančné výkazníctvo.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Informácie týkajúce sa nákupov, ktoré musíme uchovávať pre finančné výkazníctvo.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Záznamy, ktoré obsahujú informácie o odstránení konta určitej osoby, ktoré možno budeme musieť poskytnúť regulačným orgánom.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Záznamy, ktoré obsahujú informácie o odstránení konta určitej osoby, ktoré možno budeme musieť poskytnúť regulačným orgánom.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Údaje, ktoré sú súčasťou prebiehajúceho súdneho sporu, ktoré musíme podľa zákona uchovávať.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Údaje, ktoré sú súčasťou prebiehajúceho súdneho sporu, ktoré musíme podľa zákona uchovávať.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.admin':
-    'We don’t delete any personal data from content created by users, such as names or email addresses they typed in a page or issue. The product admins need to delete that data manually.',
+    'Neodstránime žiadne osobné údaje z obsahu vytvoreného používateľmi, ako napríklad mená alebo e-mailové adresy, ktoré zadali na stránke alebo v probléme. Správcovia produktov musia tieto údaje odstrániť manuálne.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.self':
-    "We don't delete any personal data from content created by you or other people, such as names or email addresses typed into a page or issue. Your product admins need to delete that data manually.",
+    'Neodstránime žiadne osobné údaje z obsahu vytvoreného vami alebo inými osobami, ako napríklad mená alebo e-mailové adresy, ktoré sa zadali na stránke alebo v probléme. Správcovia produktov musia tieto údaje odstrániť manuálne.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.admin':
-    'Users have the right to submit complaints to the supervisory authority in their country.',
+    'Používatelia majú právo podávať sťažnosti dozornému orgánu vo svojej krajine.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self':
-    'You have the right to submit complaints to the supervisory authority in your country.',
+    'Máte právo podávať sťažnosti dozornému orgánu vo svojej krajine.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    'Vy alebo iní používatelia môžete mať nainštalované aplikácie, ktoré pridávajú funkcie do produktov spoločnosti Atlassian. Tieto aplikácie môžu ukladať informácie o profile používateľa.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
+    'Vy alebo iní používatelia môžete mať nainštalované aplikácie, ktoré pridávajú funkcie do produktov spoločnosti Atlassian. Tieto aplikácie môžu ukladať informácie o vašom profile.',
   'focused-task-close-account.delete-account.content-preview.heading':
-    'How users will see this account',
+    'Ako používatelia uvidia toto konto',
   'focused-task-close-account.delete-account.drop-down-expand-button':
-    '{num} more',
+    'Ďalšie: {num}',
   'focused-task-close-account.delete-account.drop-down-collapse-button':
-    'Show less',
+    'Zobraziť menej',
 };

@@ -1,87 +1,87 @@
 // Romanian
 export default {
-  'focused-task-close-account.deactivate-account': 'Deactivate account',
-  'focused-task-close-account.delete-account': 'Delete account',
-  'focused-task-close-account.learnMore': 'Learn more',
-  'focused-task-close-account.cancel': 'Cancel',
-  'focused-task-close-account.next': 'Next',
-  'focused-task-close-account.previous': 'Previous',
+  'focused-task-close-account.deactivate-account': 'Dezactivare cont',
+  'focused-task-close-account.delete-account': 'Ștergere cont',
+  'focused-task-close-account.learnMore': 'Aflați mai multe',
+  'focused-task-close-account.cancel': 'Anulare',
+  'focused-task-close-account.next': 'Înainte',
+  'focused-task-close-account.previous': 'Înapoi',
   'focused-task-close-account.delete-account.overview.heading.self':
-    'Delete your account',
+    'Ștergerea contului dvs.',
   'focused-task-close-account.delete-account.overview.heading.admin':
-    'Delete account',
+    'Ștergere cont',
   'focused-task-close-account.delete-account.overview.first.line.self':
-    "You're about to delete your account:",
+    'Urmează să vă ștergeți contul:',
   'focused-task-close-account.delete-account.overview.first.line.admin':
-    "You're about to delete the account of:",
+    'Urmează să ștergeți contul lui:',
   'focused-task-close-account.delete-account.overview.warning-section.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
+    'După perioada de grație de 14 zile, nu vom mai putea anula ștergerea contului. Dacă credeți că veți avea nevoie de cont ulterior, dezactivați-l mai bine.',
   'focused-task-close-account.delete-account.overview.warning-section.deactivated.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    'După perioada de grație de 14 zile, nu vom mai putea anula ștergerea contului.',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
-    'When you delete the account:',
+    'Când ștergeți contul:',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
-    'When you delete your account:',
+    'Când vă ștergeți contul:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    '{fullName} va <b>pierde imediat accesul</b> la toate serviciile din contul Atlassian. În acest moment, persoana are acces la:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    'Veți <b>pierde imediat accesul</b> la toate serviciile din contul Altassian. În acest moment, aveți acces la:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    '{fullName} va <b>pierde imediat accesul</b> la toate serviciile din contul Atlassian. În acest moment, persoana nu are acces la niciun serviciu, cu excepția Comunitate și Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    'Veți <b>pierde imediat accesul</b> la toate serviciile din contul Altassian. În acest moment, nu aveți acces la niciun serviciu, cu excepția Comunitate și Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Alte servicii din contul Atlassian, precum Comunitate și Marketplace Atlassian.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.admin':
-    "The content they've created will remain in Atlassian account services.",
+    'Conținutul creat va rămâne în serviciile din contul Atlassian.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.self':
-    "The content you've created will remain in Atlassian account services.",
+    'Conținutul pe care l-ați creat va rămâne în serviciile din contul Atlassian.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.admin':
-    "For example, pages, issues, and comments they've created in products.",
+    'De exemplu, paginile, problemele și comentariile pe care le-au creat în produse.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.self':
-    "For example, pages, issues, and comments you've created in products.",
+    'De exemplu, paginile, problemele și comentariile pe care le-ați creat în produse.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin':
-    "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    'Vom <b>șterge datele cu caracter personal</b>, precum numele complet și adresa de e-mail, din serviciile contului Atlassian într-un interval de 30 de zile, cu excepția unor cazuri obligatorii din motive legale sau de afaceri.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self':
-    "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    'Vom <b>șterge datele dvs. cu caracter personal</b>, precum numele complet și adresa de e-mail, din serviciile contului Atlassian într-un interval de 30 de zile, cu excepția unor cazuri obligatorii din motive legale sau de afaceri.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin':
-    'We’ll email you a list of apps that may have stored their personal data.',
+    'Vă vom trimite prin e-mail o listă cu aplicațiile care au stocat datele acestora cu caracter personal.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
-    'We’ll email you a list of apps that may have stored your personal data.',
+    'Vă vom trimite prin e-mail o listă cu aplicațiile care au stocat datele dvs. cu caracter personal.',
   'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    'După perioada de grație de 14 zile, nu vom mai putea anula ștergerea contului.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Păstrăm datele cu caracter personal pentru perioade limitate de timp, din motive legale sau de afaceri. Unele exemple includ:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Păstrăm datele cu caracter personal pentru perioade limitate de timp, din motive legale sau de afaceri. Unele exemple includ:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Informații privind achizițiile, pe care suntem obligați să le păstrăm pentru raportările financiare.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Informații privind achizițiile, pe care suntem obligați să le păstrăm pentru raportările financiare.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Înregistrările care demonstrează că am șters contul unei persoane, pe care le putem prezenta agențiilor de reglementare.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Înregistrările care demonstrează că am șters contul unei persoane, pe care le putem prezenta agențiilor de reglementare.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Datele care fac parte dintr-o acțiune în justiție, pe care avem obligația legală de a le păstra.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Datele care fac parte dintr-o acțiune în justiție, pe care avem obligația legală de a le păstra.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.admin':
-    'We don’t delete any personal data from content created by users, such as names or email addresses they typed in a page or issue. The product admins need to delete that data manually.',
+    'Nu vom șterge datele cu caracter personal din conținutul creat de utilizatori, precum numele sau adresele de e-mail introduse pe o pagină sau la o problemă. Adminii de produs trebuie să șteargă aceste date manual.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.self':
-    "We don't delete any personal data from content created by you or other people, such as names or email addresses typed into a page or issue. Your product admins need to delete that data manually.",
+    'Nu vom șterge datele cu caracter personal din conținutul creat de dvs. sau de alte persoane, precum numele sau adresele de e-mail introduse pe o pagină sau la o problemă. Adminii produselor dvs. trebuie să șteargă aceste date manual.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.admin':
-    'Users have the right to submit complaints to the supervisory authority in their country.',
+    'Utilizatorii au dreptul de a trimite plângeri către autoritatea de supraveghere din țara natală.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self':
-    'You have the right to submit complaints to the supervisory authority in your country.',
+    'Aveți dreptul de a trimite plângeri către autoritatea de supraveghere din țara natală.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    'Dvs. sau alți utilizatori ați instalat aplicații care adaugă funcții produselor Atlassian. Este posibil ca aceste aplicații să fi stocat informații privind profilul utilizatorului.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
+    'Dvs. sau alți utilizatori ați instalat aplicații care adaugă funcții produselor Atlassian. Este posibil ca aceste aplicații să fi stocat informații privind profilul dvs.',
   'focused-task-close-account.delete-account.content-preview.heading':
-    'How users will see this account',
+    'Modul în care utilizatorii vor vizualiza contul',
   'focused-task-close-account.delete-account.drop-down-expand-button':
-    '{num} more',
+    'Încă {num}',
   'focused-task-close-account.delete-account.drop-down-collapse-button':
-    'Show less',
+    'Afișare mai puține',
 };

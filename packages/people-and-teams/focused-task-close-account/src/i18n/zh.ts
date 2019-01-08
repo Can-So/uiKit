@@ -1,87 +1,87 @@
 // Chinese
 export default {
-  'focused-task-close-account.deactivate-account': 'Deactivate account',
-  'focused-task-close-account.delete-account': 'Delete account',
-  'focused-task-close-account.learnMore': 'Learn more',
-  'focused-task-close-account.cancel': 'Cancel',
-  'focused-task-close-account.next': 'Next',
-  'focused-task-close-account.previous': 'Previous',
+  'focused-task-close-account.deactivate-account': '停用帐户',
+  'focused-task-close-account.delete-account': '删除帐户',
+  'focused-task-close-account.learnMore': '了解更多',
+  'focused-task-close-account.cancel': '取消',
+  'focused-task-close-account.next': '下一步',
+  'focused-task-close-account.previous': '上一步',
   'focused-task-close-account.delete-account.overview.heading.self':
-    'Delete your account',
+    '删除您的帐户',
   'focused-task-close-account.delete-account.overview.heading.admin':
-    'Delete account',
+    '删除帐户',
   'focused-task-close-account.delete-account.overview.first.line.self':
-    "You're about to delete your account:",
+    '您即将删除您的帐户：',
   'focused-task-close-account.delete-account.overview.first.line.admin':
-    "You're about to delete the account of:",
+    '您即将删除以下帐户：',
   'focused-task-close-account.delete-account.overview.warning-section.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
+    '在14天的宽限期后，您将无法取消删除帐户。如果您认为以后需要该帐户，请将其停用。',
   'focused-task-close-account.delete-account.overview.warning-section.deactivated.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    '在14天的宽限期后，您将无法取消删除帐户。',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
-    'When you delete the account:',
+    '当您删除帐户时：',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
-    'When you delete your account:',
+    '当您删除帐户时：',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    '{fullName}将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。 他们目前可以访问：',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    '您将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。 您目前可以访问：',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    '{fullName}将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。目前，除社区和商城等服务外，他们无权访问任何服务。',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    '您将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。目前，除社区和商城等服务外，您无权访问任何服务。',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    '其他 Atlassian 帐户服务，如 Atlassian 社区和商城。',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.admin':
-    "The content they've created will remain in Atlassian account services.",
+    '他们创建的内容将保留在 Atlassian 帐户服务中。',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.self':
-    "The content you've created will remain in Atlassian account services.",
+    '您创建的内容将保留在 Atlassian 帐户服务中。',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.admin':
-    "For example, pages, issues, and comments they've created in products.",
+    '例如，他们在产品中创建的页面、事务和评论。',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.self':
-    "For example, pages, issues, and comments you've created in products.",
+    '例如，您在产品中创建的页面、事务和评论。',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin':
-    "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    '我们将在30天内从 Atlassian 帐户服务中<b>删除他们的个人数据</b>，如全名和电子邮件地址，但出于合法业务或法律目的的少数情况除外。',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self':
-    "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    '我们将在30天内从 Atlassian 帐户服务中<b>删除您的个人数据</b>，如您的全名和电子邮件地址，但出于合法业务或法律目的的少数情况除外。',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin':
-    'We’ll email you a list of apps that may have stored their personal data.',
+    '我们将通过电子邮件向您发送可能存储其个人数据的应用程序列表。',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
-    'We’ll email you a list of apps that may have stored your personal data.',
+    '我们将通过电子邮件向您发送可能存储您个人数据的应用程序列表。',
   'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    '在14天的宽限期后，您将无法取消删除帐户。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    '当我们出于合法的业务或法律目的时，我们会在一定的时间内保留个人数据。一些例子包括:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    '当我们出于合法的业务或法律目的时，我们会在一定的时间内保留个人数据。一些例子包括:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    '我们需要为财务报告保留与购买相关的信息。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    '我们需要为财务报告保留与购买相关的信息。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    '记录显示我们删除了某人的帐户，我们可能需要向监管机构提供此帐户信息。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    '记录显示我们删除了某人的帐户，我们可能需要向监管机构提供此帐户信息。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    '我们需要依法保留作为有效诉讼的一部分的数据。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    '我们需要依法保留作为有效诉讼的一部分的数据。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.admin':
-    'We don’t delete any personal data from content created by users, such as names or email addresses they typed in a page or issue. The product admins need to delete that data manually.',
+    '我们不会从用户创建的内容中删除任何个人数据，例如他们在页面或事务中键入的姓名或电子邮件地址。产品管理员需要手动删除该数据。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.self':
-    "We don't delete any personal data from content created by you or other people, such as names or email addresses typed into a page or issue. Your product admins need to delete that data manually.",
+    '我们不会从您或其他人创建的内容中删除任何个人数据，例如在页面或事务中键入的姓名或电子邮件地址。您的产品管理员需要手动删除该数据。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.admin':
-    'Users have the right to submit complaints to the supervisory authority in their country.',
+    '用户有权向其所在国家的监管当局提出申诉。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self':
-    'You have the right to submit complaints to the supervisory authority in your country.',
+    '您有权向贵国的监管当局提出申诉。',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    '您或其他用户可能已经安装了向 Atlassian 产品添加功能的应用程序。这些应用程序可能存储了用户的个人信息。',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
+    '您或其他用户可能已经安装了向 Atlassian 产品添加功能的应用程序。这些应用程序可能存储了您的个人信息。',
   'focused-task-close-account.delete-account.content-preview.heading':
-    'How users will see this account',
+    '用户将如何查看此帐户',
   'focused-task-close-account.delete-account.drop-down-expand-button':
-    '{num} more',
+    '{num}更多',
   'focused-task-close-account.delete-account.drop-down-collapse-button':
-    'Show less',
+    '显示更少',
 };

@@ -1,87 +1,87 @@
 // Dutch
 export default {
-  'focused-task-close-account.deactivate-account': 'Deactivate account',
-  'focused-task-close-account.delete-account': 'Delete account',
-  'focused-task-close-account.learnMore': 'Learn more',
-  'focused-task-close-account.cancel': 'Cancel',
-  'focused-task-close-account.next': 'Next',
-  'focused-task-close-account.previous': 'Previous',
+  'focused-task-close-account.deactivate-account': 'Account deactiveren',
+  'focused-task-close-account.delete-account': 'Account verwijderen',
+  'focused-task-close-account.learnMore': 'Meer informatie',
+  'focused-task-close-account.cancel': 'Annuleren',
+  'focused-task-close-account.next': 'Volgende',
+  'focused-task-close-account.previous': 'Vorige',
   'focused-task-close-account.delete-account.overview.heading.self':
-    'Delete your account',
+    'Je account verwijderen',
   'focused-task-close-account.delete-account.overview.heading.admin':
-    'Delete account',
+    'Account verwijderen',
   'focused-task-close-account.delete-account.overview.first.line.self':
-    "You're about to delete your account:",
+    'Je staat op het punt om je account te verwijderen:',
   'focused-task-close-account.delete-account.overview.first.line.admin':
-    "You're about to delete the account of:",
+    'Je staat op het punt om de account te verwijderen van:',
   'focused-task-close-account.delete-account.overview.warning-section.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
+    'Na een wachtperiode van 14 dagen kan het verwijderen van de account niet meer geannuleerd worden. Als je denkt dat je de account later toch nog nodig hebt, deactiveer hem dan.',
   'focused-task-close-account.delete-account.overview.warning-section.deactivated.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    'Na een wachtperiode van 14 dagen kan het verwijderen van de account niet meer geannuleerd worden.',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
-    'When you delete the account:',
+    'Wanneer je de account verwijderd:',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
-    'When you delete your account:',
+    'Wanneer je je account verwijderd:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    '{fullName} zal <b>direct toegang verliezen</b> tot alle Atlassian-accountservices. Deze gebruiker heeft momenteel toegang tot:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    'Je zult <b>direct toegang verliezen</b> tot alle Atlassian-accountservices. Je hebt momenteel toegang tot: ',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    '{fullName} zal <b>direct toegang verliezen</b> tot alle Atlassian-accountservices. Deze gebruiker heeft momenteel geen toegang tot een service, behalve Community en Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    'Je zult <b>direct toegang verliezen</b> tot alle Atlassian-accountservices. Je hebt momenteel geen toegang tot een service, behalve Community en Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Andere Atlassian-accountservices, zoals Atlassian Community en Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.admin':
-    "The content they've created will remain in Atlassian account services.",
+    'De content die ze hebben gemaakt, blijft bewaard op de Atlassian-accountservices.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.self':
-    "The content you've created will remain in Atlassian account services.",
+    'De content die je hebt gemaakt, blijft bewaard op Atlassian-accountservices.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.admin':
-    "For example, pages, issues, and comments they've created in products.",
+    "Bijvoorbeeld pagina's, issues en opmerkingen die ze hebben gemaakt in producten.",
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.self':
-    "For example, pages, issues, and comments you've created in products.",
+    "Bijvoorbeeld pagina's, issues en opmerkingen die je hebt gemaakt in producten.",
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin':
-    "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    'We <b>verwijderen hun persoonlijke gegevens</b>, zoals hun volledige naam en e-mailadres, binnen 30 dagen van de Atlassian-accountservices. Er zijn echter een aantal uitzonderingen waarin we bepaalde gegevens moeten bewaren om zakelijke of juridische redenen.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self':
-    "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    'We <b>verwijderen je persoonlijke gegevens</b>, zoals je volledige naam en e-mailadres, binnen 30 dagen van de Atlassian-accountservices. Er zijn echter een aantal uitzonderingen waarin we bepaalde gegevens moeten bewaren om zakelijke of juridische redenen.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin':
-    'We’ll email you a list of apps that may have stored their personal data.',
+    'We zullen je een lijst met apps sturen die mogelijk hun persoonlijke gegevens hebben opgeslagen.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
-    'We’ll email you a list of apps that may have stored your personal data.',
+    'We zullen je een lijst met apps sturen die mogelijk je persoonlijke gegevens hebben opgeslagen.',
   'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    'Na een wachtperiode van 14 dagen kan het verwijderen van de account niet meer geannuleerd worden.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'We bewaren persoonlijke gegevens voor een beperkte periode om zakelijke of juridische redenen. Voorbeelden zijn onder andere:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'We bewaren persoonlijke gegevens voor een beperkte periode om zakelijke of juridische redenen. Voorbeelden zijn onder andere:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Informatie met betrekking tot aankopen, die we verplicht zijn om te bewaren wegens financiële verslaggeving.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Informatie met betrekking tot aankopen, die we verplicht zijn om te bewaren wegens financiële verslaggeving.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Gegevens waarmee we kunnen aantonen dat iemands account is verwijderd, mocht deze informatie overlegd moeten worden aan toezichthouders.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'Gegevens waarmee we kunnen aantonen dat iemands account is verwijderd, mocht deze informatie overlegd moeten worden aan toezichthouders.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Data die deel uitmaakt van een lopende rechtszaak, welke we wettelijk verplicht zijn om te bewaren.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Data die deel uitmaakt van een lopende rechtszaak, welke we wettelijk verplicht zijn om te bewaren.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.admin':
-    'We don’t delete any personal data from content created by users, such as names or email addresses they typed in a page or issue. The product admins need to delete that data manually.',
+    'We verwijderen geen persoonlijke gegevens uit content die door gebruikers is gemaakt, bijvoorbeeld namen of e-mailadressen die door hen in een pagina of issue zijn gezet. De productbeheerders moeten deze gegevens handmatig verwijderen.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.self':
-    "We don't delete any personal data from content created by you or other people, such as names or email addresses typed into a page or issue. Your product admins need to delete that data manually.",
+    'We verwijderen geen persoonlijke gegevens uit content die door jou of andere mensen is gemaakt, bijvoorbeeld namen of e-mailadressen die in een pagina of issue zijn gezet. Je productbeheerders moeten deze gegevens handmatig verwijderen.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.admin':
-    'Users have the right to submit complaints to the supervisory authority in their country.',
+    'Gebruikers hebben het recht om een klacht in te dienen bij de toezichthoudende autoriteit in hun land.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self':
-    'You have the right to submit complaints to the supervisory authority in your country.',
+    'Je hebt het recht om een klacht in te dienen bij de toezichthoudende autoriteit in jouw land.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    'Jij of andere gebruikers hebben misschien apps geïnstalleerd die functies toevoegen aan Atlassian-producten. Deze apps hebben mogelijk profielinformatie van de gebruiker opgeslagen.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
+    'Jij of andere gebruikers hebben misschien apps geïnstalleerd die functies toevoegen aan Atlassian-producten. Deze apps hebben mogelijk jouw profielinformatie opgeslagen.',
   'focused-task-close-account.delete-account.content-preview.heading':
-    'How users will see this account',
+    'Hoe gebruikers deze account zullen zien',
   'focused-task-close-account.delete-account.drop-down-expand-button':
-    '{num} more',
+    '{num} meer',
   'focused-task-close-account.delete-account.drop-down-collapse-button':
-    'Show less',
+    'Minder weergeven',
 };

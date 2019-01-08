@@ -1,87 +1,87 @@
 // Hungarian
 export default {
-  'focused-task-close-account.deactivate-account': 'Deactivate account',
-  'focused-task-close-account.delete-account': 'Delete account',
-  'focused-task-close-account.learnMore': 'Learn more',
-  'focused-task-close-account.cancel': 'Cancel',
-  'focused-task-close-account.next': 'Next',
-  'focused-task-close-account.previous': 'Previous',
+  'focused-task-close-account.deactivate-account': 'Fiók inaktiválása',
+  'focused-task-close-account.delete-account': 'Fiók törlése',
+  'focused-task-close-account.learnMore': 'További információ',
+  'focused-task-close-account.cancel': 'Mégse',
+  'focused-task-close-account.next': 'Következő',
+  'focused-task-close-account.previous': 'Előző',
   'focused-task-close-account.delete-account.overview.heading.self':
-    'Delete your account',
+    'Az Ön fiókjának törlése',
   'focused-task-close-account.delete-account.overview.heading.admin':
-    'Delete account',
+    'Fiók törlése',
   'focused-task-close-account.delete-account.overview.first.line.self':
-    "You're about to delete your account:",
+    'A fiók törlésére készül:',
   'focused-task-close-account.delete-account.overview.first.line.admin':
-    "You're about to delete the account of:",
+    'A következő fiók törlésére készül:',
   'focused-task-close-account.delete-account.overview.warning-section.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account. If you think you’ll need the account later, deactivate it instead.',
+    'A 14 napos türelmi időszakot követően nem tudja majd visszavonni a fiók törlését. Ha úgy gondolja, hogy később szüksége lesz a fiókra, akkor érdemes inkább inaktiválnia azt.',
   'focused-task-close-account.delete-account.overview.warning-section.deactivated.body':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    'A 14 napos türelmi időszakot követően nem tudja majd visszavonni a fiók törlését.',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
-    'When you delete the account:',
+    'Ha törli a fiókot:',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
-    'When you delete your account:',
+    'Ha törli a fiókját:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    '{fullName} <b>azonnal elveszíti hozzáférését</b> az összes Atlassian-fiókszolgáltatáshoz. Jelenleg a következőkhöz van hozzáférése:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    'Ön <b>azonnal elveszíti hozzáférését</b> az összes Atlassian-fiókszolgáltatáshoz. Jelenleg a következőkhöz van hozzáférése:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    '{fullName} <b>azonnal elveszíti hozzáférését</b> az összes Atlassian-fiókszolgáltatáshoz. Jelenleg kizárólag a Community és a Marketplace szolgáltatáshoz van hozzáférése.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    'Ön <b>azonnal elveszíti hozzáférését</b> az összes Atlassian-fiókszolgáltatáshoz. Jelenleg kizárólag a Community és a Marketplace szolgáltatáshoz van hozzáférése.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Egyéb Atlassian-fiókszolgáltatások, például az Atlassian Community és Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.admin':
-    "The content they've created will remain in Atlassian account services.",
+    'A felhasználó által létrehozott tartalmat a rendszer megőrzi az Atlassian-fiókszolgáltatásokban.',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.self':
-    "The content you've created will remain in Atlassian account services.",
+    'Az Ön által létrehozott tartalmat a rendszer megőrzi az Atlassian-fiókszolgáltatásokban.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.admin':
-    "For example, pages, issues, and comments they've created in products.",
+    'Például a termékekben létrehozott oldalak, ügyek és megjegyzések.',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.self':
-    "For example, pages, issues, and comments you've created in products.",
+    'Például a termékekben Ön által létrehozott oldalak, ügyek és megjegyzések.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin':
-    "We'll <b>delete their personal data</b>, such as their full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    '30 napon belül <b>törölni fogjuk a felhasználó személyes adatait</b>, például a teljes nevét és e-mail-címét az Atlassian-fiókszolgáltatásokból, néhány esetet kivéve, amikor törvényes üzleti vagy jogi okokból szükség van ezekre az adatokra.',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self':
-    "We'll <b>delete your personal data</b>, such as your full name and email address, from Atlassian account services within 30 days, except in a few cases where required for legitimate business or legal purposes.",
+    '30 napon belül <b>törölni fogjuk az Ön személyes adatait</b>, például a teljes nevét és e-mail-címét az Atlassian-fiókszolgáltatásokból, néhány esetet kivéve, amikor törvényes üzleti vagy jogi okokból szükség van ezekre az adatokra.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin':
-    'We’ll email you a list of apps that may have stored their personal data.',
+    'E-mailben elküldjük Önnek azon alkalmazások listáját, amelyek tárolhatják a felhasználó személyes adatait.',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
-    'We’ll email you a list of apps that may have stored your personal data.',
+    'E-mailben elküldjük Önnek azon alkalmazások listáját, amelyek tárolhatják az Ön személyes adatait.',
   'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin':
-    'After a 14-day grace period, you won’t be able to cancel the deletion of the account.',
+    'A 14 napos türelmi időszakot követően nem tudja majd visszavonni a fiók törlését.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Korlátozott ideig megőrizzük a személyes adatokat, ha törvényes üzleti vagy jogi okokból erre szükség van. Ilyen adatok lehetnek például a következők:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self':
-    'We keep personal data for limited periods when we have legitimate business or legal purposes. Some examples include:',
+    'Korlátozott ideig megőrizzük a személyes adatokat, ha törvényes üzleti vagy jogi okokból erre szükség van. Ilyen adatok lehetnek például a következők:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Vásárlásokkal kapcsolatos információk, amelyeket meg kell őriznünk a pénzügyi beszámolásokhoz.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
-    "Information related to purchases, which we're required to keep for financial reporting.",
+    'Vásárlásokkal kapcsolatos információk, amelyeket meg kell őriznünk a pénzügyi beszámolásokhoz.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'A felhasználó fiókjának törlését igazoló rekordok, amelyeket esetleg be kell mutatnunk a szabályozó hatóságoknak.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self':
-    "Records showing that we deleted someone's account, which we may need to provide to regulators.",
+    'A felhasználó fiókjának törlését igazoló rekordok, amelyeket esetleg be kell mutatnunk a szabályozó hatóságoknak.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Egy aktív per részét képező adatok, amelyeket a jogszabályokban előírtak értelmében meg kell őriznünk.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self':
-    "Data that's part of an active lawsuit, which we're required to keep by law.",
+    'Egy aktív per részét képező adatok, amelyeket a jogszabályokban előírtak értelmében meg kell őriznünk.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.admin':
-    'We don’t delete any personal data from content created by users, such as names or email addresses they typed in a page or issue. The product admins need to delete that data manually.',
+    'Nem töröljük a személyes adatokat a felhasználók által létrehozott tartalomból, így például az oldalakon vagy ügyekben begépelt neveket vagy e-mail-címeket. A termékadminisztrátoroknak kézzel kell törölniük ezeket az adatokat.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p2.self':
-    "We don't delete any personal data from content created by you or other people, such as names or email addresses typed into a page or issue. Your product admins need to delete that data manually.",
+    'Nem töröljük a személyes adatokat az Ön vagy más személyek által létrehozott tartalomból, így például az oldalakon vagy ügyekben begépelt neveket vagy e-mail-címeket. Az Ön termékadminisztrátorainak kézzel kell törölniük ezeket az adatokat.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.admin':
-    'Users have the right to submit complaints to the supervisory authority in their country.',
+    'A felhasználóknak joguk van arra, hogy panaszt nyújtsanak be az országukban illetékes felügyeleti hatóságnak.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self':
-    'You have the right to submit complaints to the supervisory authority in your country.',
+    'Önnek joga van arra, hogy panaszt nyújtson be az országában illetékes felügyeleti hatóságnak.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
+    'Ön vagy más felhasználók olyan alkalmazásokat telepíthettek, amelyek szolgáltatásokkal bővítik az Atlassian-termékeket. Ezek az alkalmazások tárolhatják a felhasználók profiladatait.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
+    'Ön vagy más felhasználók olyan alkalmazásokat telepíthettek, amelyek szolgáltatásokkal bővítik az Atlassian-termékeket. Ezek az alkalmazások tárolhatják az Ön profiladatait.',
   'focused-task-close-account.delete-account.content-preview.heading':
-    'How users will see this account',
+    'Hogyan jelenik meg ez a fiók a felhasználók számára?',
   'focused-task-close-account.delete-account.drop-down-expand-button':
-    '{num} more',
+    '{num} további',
   'focused-task-close-account.delete-account.drop-down-collapse-button':
-    'Show less',
+    'Kevesebb',
 };
