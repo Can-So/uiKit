@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { ProcessedFileState } from '@atlaskit/media-core';
-import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
-import { Stubs, createContext } from '../../../_stubs';
+import {
+  awaitError,
+  mountWithIntlContext,
+  fakeContext,
+} from '@atlaskit/media-test-helpers';
 import {
   ImageViewer,
   REQUEST_CANCELLED,
@@ -18,16 +21,9 @@ const imageItem: ProcessedFileState = {
   artifacts: {},
 };
 
-function createFixture(
-  fetchImageBlobCancelableResponse: Promise<Blob>,
-  cancel?: Function,
-) {
-  const blobService = Stubs.blobService();
-  blobService.fetchImageBlobCancelable.mockReturnValue({
-    response: fetchImageBlobCancelableResponse || Promise.resolve(new Blob()),
-    cancel: cancel || jest.fn(),
-  });
-  const context = createContext({ blobService });
+function createFixture(response: Promise<Blob>) {
+  const context = fakeContext();
+  (context.getImage as jest.Mock).mockReturnValue(response);
   const onClose = jest.fn();
   const onLoaded = jest.fn();
   const el = mountWithIntlContext(
@@ -39,7 +35,7 @@ function createFixture(
       onLoad={onLoaded}
     />,
   );
-  return { blobService, context, el, onClose };
+  return { context, el, onClose };
 }
 
 describe('ImageViewer', () => {
@@ -66,13 +62,17 @@ describe('ImageViewer', () => {
   });
 
   it('cancels an image fetch request when unmounted', () => {
+    const abort = jest.fn();
+    class FakeAbortController {
+      abort = abort;
+    }
+    (global as any).AbortController = FakeAbortController;
     const response: any = new Promise(() => {});
-    const cancel = jest.fn();
-    const { el } = createFixture(response, cancel);
+    const { el } = createFixture(response);
 
     el.unmount();
 
-    expect(cancel).toHaveBeenCalled();
+    expect(abort).toHaveBeenCalled();
   });
 
   it('revokes an existing object url when unmounted', async () => {
@@ -88,14 +88,18 @@ describe('ImageViewer', () => {
     expect(revokeObjectUrl).toHaveBeenCalled();
   });
 
-  it('MSW-720: creates the blobService with collectionName', async () => {
+  it('should pass collectionName to context.getImage', async () => {
     const response = Promise.resolve(new Blob());
     const { el, context } = createFixture(response);
 
     await response;
     el.update();
 
-    expect(context.getBlobService).toHaveBeenCalledWith(collectionName);
+    expect(context.getImage).toHaveBeenCalledWith(
+      'some-id',
+      expect.objectContaining({ collection: 'some-collection' }),
+      expect.anything(),
+    );
   });
 
   it('MSW-700: clicking on background of ImageViewer does not close it', async () => {

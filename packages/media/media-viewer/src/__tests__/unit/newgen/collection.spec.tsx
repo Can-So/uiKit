@@ -1,14 +1,19 @@
 import * as React from 'react';
 import { Subject } from 'rxjs/Subject';
-import { Context, MediaItemType, MediaCollection } from '@atlaskit/media-core';
-import { Stubs, createContext } from '../_stubs';
+import { Observable } from 'rxjs';
+import { Context, MediaItemType } from '@atlaskit/media-core';
+import {
+  mountWithIntlContext,
+  fakeContext,
+} from '@atlaskit/media-test-helpers';
+import { MediaCollectionItem } from '@atlaskit/media-store';
+import Spinner from '@atlaskit/spinner';
+import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
+import { createContext } from '../_stubs';
 import { Collection } from '../../../newgen/collection';
 import { ErrorMessage } from '../../../newgen/error';
 import { Identifier } from '../../../newgen/domain';
-import Spinner from '@atlaskit/spinner';
-import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import { List } from '../../../newgen/list';
-import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
 
 const collectionName = 'my-collection';
 
@@ -24,35 +29,36 @@ const identifier2 = {
   type: 'file' as MediaItemType,
 };
 
-const mediaCollection: MediaCollection = {
-  id: collectionName,
-  items: [
-    {
-      type: 'file',
-      details: {
-        id: identifier.id,
-        occurrenceKey: identifier.occurrenceKey,
-      },
+const mediaCollectionItems: MediaCollectionItem[] = [
+  {
+    id: identifier.id,
+    occurrenceKey: identifier.occurrenceKey,
+    insertedAt: 1,
+    type: 'file',
+    details: {
+      artifacts: {},
+      mediaType: 'image',
+      mimeType: '',
+      name: '',
+      processingStatus: 'succeeded',
+      size: 1,
     },
-    {
-      type: 'file',
-      details: {
-        id: identifier2.id,
-        occurrenceKey: identifier2.occurrenceKey,
-      },
+  },
+  {
+    type: 'file',
+    id: identifier2.id,
+    occurrenceKey: identifier2.occurrenceKey,
+    insertedAt: 1,
+    details: {
+      artifacts: {},
+      mediaType: 'image',
+      mimeType: '',
+      name: '',
+      processingStatus: 'succeeded',
+      size: 1,
     },
-    {
-      type: 'link',
-      details: {
-        type: 'link',
-        id: identifier2.id,
-        occurrenceKey: '',
-        url: 'http://mylink',
-        title: 'test',
-      },
-    },
-  ],
-};
+  },
+];
 
 function createFixture(
   context: Context,
@@ -73,35 +79,26 @@ function createFixture(
 
 describe('<Collection />', () => {
   it('should show a spinner while requesting items', () => {
-    const subject = new Subject();
-    const el = createFixture(createContext({ subject }), identifier);
+    const el = createFixture(createContext(), identifier);
     expect(el.find(Spinner)).toHaveLength(1);
   });
 
   it('should fetch collection items', () => {
-    const subject = new Subject<MediaCollection>();
-    const context = createContext({ subject });
+    const context = createContext();
     createFixture(context, identifier);
-    expect(context.getMediaCollectionProvider).toHaveBeenCalledTimes(1);
-    expect(context.getMediaCollectionProvider).toHaveBeenCalledWith(
-      'my-collection',
-      999,
-    );
-  });
-
-  it('should filter links', () => {
-    const subject = new Subject<MediaCollection | Error>();
-    const context = createContext({ subject });
-    const el = createFixture(context, identifier);
-    subject.next(mediaCollection);
-    expect(mediaCollection.items).toHaveLength(3);
-    expect(el.state().items.data).toHaveLength(2);
+    expect(context.collection.getItems).toHaveBeenCalledTimes(1);
+    expect(context.collection.getItems).toHaveBeenCalledWith('my-collection', {
+      limit: 999,
+    });
   });
 
   it('should show an error if items failed to be fetched', () => {
-    const subject = new Subject<MediaCollection | Error>();
-    const el = createFixture(createContext({ subject }), identifier);
-    subject.next(new Error('error'));
+    const context = fakeContext({
+      collection: {
+        getItems: new Observable(observer => observer.error()),
+      },
+    });
+    const el = createFixture(context, identifier);
     el.update();
     const errorMessage = el.find(ErrorMessage);
     expect(errorMessage).toHaveLength(1);
@@ -111,34 +108,35 @@ describe('<Collection />', () => {
   });
 
   it('should reset the component when the collection prop changes', () => {
-    const subject = new Subject<MediaCollection | Error>();
-    const context = createContext({ subject });
+    const context = createContext();
     const el = createFixture(context, identifier);
-    expect(context.getMediaCollectionProvider).toHaveBeenCalledTimes(1);
+    expect(context.collection.getItems).toHaveBeenCalledTimes(1);
     el.setProps({ collectionName: 'other-collection' });
-    expect(context.getMediaCollectionProvider).toHaveBeenCalledTimes(2);
+    expect(context.collection.getItems).toHaveBeenCalledTimes(2);
   });
 
   it('should reset the component when the context prop changes', () => {
-    const subject = new Subject<MediaCollection | Error>();
-    const context = createContext({ subject });
+    const context = createContext();
     const el = createFixture(context, identifier);
-    expect(context.getMediaCollectionProvider).toHaveBeenCalledTimes(1);
+    expect(context.collection.getItems).toHaveBeenCalledTimes(1);
 
-    const subject2 = new Subject<MediaCollection | Error>();
-    const context2 = createContext({ subject: subject2 });
+    const context2 = createContext();
     el.setProps({ context: context2 });
 
-    expect(context.getMediaCollectionProvider).toHaveBeenCalledTimes(1);
-    expect(context2.getMediaCollectionProvider).toHaveBeenCalledTimes(1);
+    expect(context.collection.getItems).toHaveBeenCalledTimes(1);
+    expect(context2.collection.getItems).toHaveBeenCalledTimes(1);
   });
 
   it('should restore PENDING state when component resets', () => {
-    const subject = new Subject<MediaCollection | Error>();
-    const context = createContext({ subject });
+    const subject = new Subject();
+    const context = fakeContext({
+      collection: {
+        getItems: subject,
+      },
+    });
     const el = createFixture(context, identifier);
     expect(el.state().items.status).toEqual('PENDING');
-    subject.next(mediaCollection);
+    subject.next(mediaCollectionItems);
     expect(el.state().items.status).toEqual('SUCCESSFUL');
 
     el.setProps({ collectionName: 'other-collection' });
@@ -146,10 +144,15 @@ describe('<Collection />', () => {
   });
 
   it('MSW-720: adds the collectionName to all identifiers passed to the List component', () => {
-    const subject = new Subject<MediaCollection | Error>();
-    const context = createContext({ subject });
+    const subject = new Subject();
+    const context = fakeContext({
+      collection: {
+        getItems: subject,
+        loadNextPage: jest.fn(),
+      },
+    });
     const el = createFixture(context, identifier);
-    subject.next(mediaCollection);
+    subject.next(mediaCollectionItems);
     el.update();
     const listProps = el.find(List).props();
     expect(listProps.defaultSelectedItem.collectionName).toEqual(
@@ -162,36 +165,41 @@ describe('<Collection />', () => {
 
   describe('Next page', () => {
     it('should load next page if we instantiate the component with the last item of the page as selectedItem', () => {
-      const subject = new Subject<MediaCollection>();
-      const provider = Stubs.mediaCollectionProvider(subject);
-      const context = createContext({ subject, provider });
+      const subject = new Subject();
+      const context = fakeContext({
+        collection: {
+          getItems: subject,
+          loadNextPage: jest.fn(),
+        },
+      });
       createFixture(context, identifier2);
-      subject.next(mediaCollection);
-      expect(context.getMediaCollectionProvider).toHaveBeenCalledTimes(1);
-      expect(provider.loadNextPage).toHaveBeenCalled();
+      subject.next(mediaCollectionItems);
+      expect(context.collection.getItems).toHaveBeenCalledTimes(1);
+      expect(context.collection.loadNextPage).toHaveBeenCalled();
     });
 
     it('should NOT load next page if we instantiate the component normally', () => {
-      const subject = new Subject<MediaCollection>();
-      const provider = Stubs.mediaCollectionProvider(subject);
-      const context = createContext({ subject, provider });
+      const context = createContext();
       createFixture(context, identifier);
-      subject.next(mediaCollection);
-      expect(context.getMediaCollectionProvider).toHaveBeenCalledTimes(1);
-      expect(provider.loadNextPage).not.toHaveBeenCalled();
+      expect(context.collection.getItems).toHaveBeenCalledTimes(1);
+      expect(context.collection.loadNextPage).not.toHaveBeenCalled();
     });
 
     it('should load next page if we navigate to the last item of the list', () => {
-      const subject = new Subject<MediaCollection>();
-      const provider = Stubs.mediaCollectionProvider(subject);
-      const context = createContext({ subject, provider });
+      const subject = new Subject();
+      const context = fakeContext({
+        collection: {
+          getItems: subject,
+          loadNextPage: jest.fn(),
+        },
+      });
       const el = createFixture(context, identifier);
-      subject.next(mediaCollection);
+      subject.next(mediaCollectionItems);
       el.update();
 
-      expect(provider.loadNextPage).not.toHaveBeenCalled();
+      expect(context.collection.loadNextPage).not.toHaveBeenCalled();
       el.find(ArrowRightCircleIcon).simulate('click');
-      expect(provider.loadNextPage).toHaveBeenCalled();
+      expect(context.collection.loadNextPage).toHaveBeenCalled();
     });
   });
 });

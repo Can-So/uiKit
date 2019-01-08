@@ -11,3 +11,4 @@ export {
   UploadFileCallbacks,
   UploadFileResult,
 } from './uploader';
+export * from './utils/request';

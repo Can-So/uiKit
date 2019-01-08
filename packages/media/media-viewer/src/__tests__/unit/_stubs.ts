@@ -4,11 +4,7 @@ import { Observable } from 'rxjs';
 import {
   Context,
   ContextConfig,
-  MediaCollection,
-  MediaCollectionProvider,
-  MediaItemProvider,
   MediaItem,
-  BlobService,
   Auth,
   FileState,
 } from '@atlaskit/media-core';
@@ -44,93 +40,51 @@ export class Stubs {
     return jest.fn(() => Stubs.mediaViewer(overrides || {}));
   }
 
-  static mediaCollectionProvider(subject?: Subject<MediaCollection>) {
-    return {
-      observable: jest.fn(() => subject || new Subject<MediaCollection>()),
-      refresh: jest.fn(),
-      loadNextPage: jest.fn(),
-    };
-  }
-
   static mediaItemProvider(subject?: Subject<MediaItem>) {
     return {
       observable: jest.fn(() => subject || new Subject<MediaItem>()),
     };
   }
 
-  static blobService() {
-    return {
-      fetchImageBlob: jest.fn(() => Promise.resolve(new Blob())),
-      fetchOriginalBlob: jest.fn(() => Promise.resolve(new Blob())),
-      fetchImageBlobCancelable: jest.fn(() => ({
-        response: Promise.resolve(new Blob()),
-        cancel: jest.fn(),
-      })),
-      fetchOriginalBlobCancelable: jest.fn(() => ({
-        response: Promise.resolve(new Blob()),
-        cancel: jest.fn(),
-      })),
-    };
-  }
-
   static context(
     config: ContextConfig,
-    collectionProvider?: MediaCollectionProvider,
-    mediaItemProvider?: MediaItemProvider,
-    blobService?: BlobService,
     getFileState?: () => Observable<FileState>,
   ): Partial<Context> {
     return {
       config,
-      getMediaCollectionProvider: jest.fn(
-        () => collectionProvider || Stubs.mediaCollectionProvider(),
-      ),
-      getMediaItemProvider: jest.fn(
-        () => mediaItemProvider || Stubs.mediaItemProvider(),
-      ),
-      getBlobService: jest.fn(() => blobService || Stubs.blobService()),
       file: {
         downloadBinary: jest.fn(),
         getFileState: jest.fn(getFileState || (() => Observable.empty())),
         upload: jest.fn(),
+      } as any,
+      collection: {
+        getItems: jest.fn(() => Observable.empty()),
+        loadNextPage: jest.fn(),
       } as any,
     };
   }
 }
 
 export interface CreateContextOptions {
-  subject?: Subject<any>;
-  provider?: MediaCollectionProvider;
   authPromise?: Promise<Auth>;
-  blobService?: BlobService;
   getFileState?: () => Observable<FileState>;
   config?: ContextConfig;
 }
 
 export const createContext = (options?: CreateContextOptions) => {
   const defaultOptions: CreateContextOptions = {
-    subject: undefined,
-    provider: undefined,
     authPromise: Promise.resolve<Auth>({
       token: 'some-token',
       clientId: 'some-client-id',
       baseUrl: 'some-service-host',
     }),
-    blobService: undefined,
     getFileState: undefined,
     config: undefined,
   };
-  const { subject, provider, authPromise, blobService, getFileState, config } =
-    options || defaultOptions;
+  const { authPromise, getFileState, config } = options || defaultOptions;
   const authProvider = jest.fn(() => authPromise);
   const contextConfig: ContextConfig = {
     authProvider,
   };
-  return Stubs.context(
-    config || contextConfig,
-    provider || Stubs.mediaCollectionProvider(subject),
-    Stubs.mediaItemProvider(subject),
-    blobService,
-    getFileState,
-  ) as any;
+  return Stubs.context(config || contextConfig, getFileState) as Context;
 };
