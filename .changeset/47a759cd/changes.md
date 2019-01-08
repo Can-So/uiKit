@@ -1,0 +1,1 @@
+- Disable some stats to make webpack faster
