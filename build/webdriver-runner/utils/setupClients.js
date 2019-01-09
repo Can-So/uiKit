@@ -26,7 +26,7 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
       os: 'Windows',
       os_version: '10',
       browserName: 'firefox',
-      browser_version: '63.0',
+      browser_version: '64.0',
       resolution: '1440x900',
     },
     ie: {
@@ -47,7 +47,7 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
       os: 'Windows',
       os_version: '10',
       browserName: 'edge',
-      browser_version: '18',
+      browser_version: '17',
       resolution: '1440x900',
     },
   };
