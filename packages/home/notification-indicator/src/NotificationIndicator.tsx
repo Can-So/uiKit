@@ -103,6 +103,24 @@ class NotificationIndicator extends Component<Props, State> {
     this.refresh('timer');
   };
 
+  private handleAnalytics = countUpateProperties => {
+    const { newCount, oldCount, source } = countUpateProperties;
+
+    // Only fire the analytics event if the notification indicator is 'activating'
+    // ie going from not visible to visible
+    if (this.props.createAnalyticsEvent && newCount > 0 && oldCount == 0) {
+      const event = this.props.createAnalyticsEvent({
+        name: 'notificationIndicator',
+        action: 'activated',
+        attributes: {
+          badgeCount: newCount,
+          refreshSource: source,
+        },
+      });
+      event.fire(NAVIGATION_CHANNEL);
+    }
+  };
+
   private refresh = async source => {
     // Provider should be available by this point, if not, we exit.
     if (!this.notificationLogProvider) {
@@ -140,24 +158,14 @@ class NotificationIndicator extends Component<Props, State> {
         this.props.onCountUpdated &&
         (this.state.count === null || this.state.count !== count)
       ) {
-        // TODO mt: decide the event payload and channel
-        const { createAnalyticsEvent } = this.props;
-        if (createAnalyticsEvent && source === 'mount' && count > 0) {
-          const event = createAnalyticsEvent({
-            name: 'notificationsDrawer',
-            action: 'mounted',
-            attributes: {
-              badgeCount: count,
-            },
-          });
-          event.fire(NAVIGATION_CHANNEL);
-        }
-
-        this.props.onCountUpdated({
+        const countUpateProperties = {
           oldCount: this.state.count || 0,
           newCount: count,
           source,
-        });
+        };
+
+        this.handleAnalytics(countUpateProperties);
+        this.props.onCountUpdated(countUpateProperties);
       }
       this.setState({ count });
     } catch (e) {
