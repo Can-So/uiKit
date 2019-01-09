@@ -68,6 +68,18 @@ describe('Status', () => {
     expect(component.find(Lozenge).length).toBe(0);
   });
 
+  it('should use render data attributes for copy/paste', () => {
+    const component = mountWithIntl(
+      <Status text="TODO" color="blue" style="subtle" />,
+    );
+
+    const span = component.find('span[className="status-lozenge-span"]');
+    expect(span.prop('data-node-type')).toBe('status');
+    expect(span.prop('data-style')).toBe('subtle');
+    expect(span.prop('data-color')).toBe('blue');
+    expect(span.prop('data-local-id')).toBeUndefined();
+  });
+
   describe('Status onHover', () => {
     let realDateNow;
     let dateNowStub;

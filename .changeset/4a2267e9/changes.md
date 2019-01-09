@@ -1,0 +1,1 @@
+- fixed copy/paste status from renderer to editor
