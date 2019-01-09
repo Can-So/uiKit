@@ -1,14 +1,11 @@
 // @flow
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import Button from '@atlaskit/button';
 
 import Form, { Field, CheckboxField } from '@atlaskit/form';
 import { Checkbox } from '@atlaskit/checkbox';
 import Textfield from '@atlaskit/textfield';
 import RadioGroup, { AkRadio } from '@atlaskit/field-radio-group';
-import CrossIcon from '@atlaskit/icon/glyph/cross';
-import { colors } from '@atlaskit/theme';
 
 import ModalDialog, { ModalFooter, ModalTransition } from '../src';
 
@@ -44,7 +41,7 @@ export default class AtlaskitFormDemo extends Component<{}, State> {
         <ModalTransition>
           {isOpen && (
             <ModalDialog
-              heading="Atlaskit Form Demo"
+              heading="Form Demo"
               onClose={this.close}
               components={{
                 Container: ({ children, className }) => (

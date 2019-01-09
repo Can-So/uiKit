@@ -1,9 +1,5 @@
 // @flow
-import React, {
-  Component,
-  type ElementType,
-  type Node,
-} from 'react';
+import React, { Component, type ElementType, type Node } from 'react';
 import { layers } from '@atlaskit/theme';
 import Portal from '@atlaskit/portal';
 import { ModalTransitionConsumer } from './ModalTransition';
@@ -31,9 +27,11 @@ export type Props = {
   autoFocus: boolean | (() => HTMLElement | null),
 
   /**
-    Object containing header, footer, body and container elements, as well as the element type 
-    the components are wrapped in. Use this to allow forms to work across sibling Header, Body 
-    and Footer elements.
+    Object containing header, footer, body and container components. Components here will be used instead of the defaults.
+    - Header: container for the title
+    - Footer: container for the actions
+    - Body: container for the content. Component ref must return a HTMLElement. See Custom example.
+    - Container: wrapper around Header, Body and Footer components.
   */
   components?: {
     Header?: ElementType,
@@ -46,15 +44,15 @@ export type Props = {
   */
   children?: Node,
   /**
-    Component to render the body of the modal, replaces the internal implementation.
+    Deprecated, use components prop: Component to render the body of the modal, replaces the internal implementation.
   */
   body?: ElementType,
   /**
-    Component to render the footer of the modal, replaces internal implementation.
+    Deprecated, use components prop: Component to render the footer of the modal, replaces internal implementation.
   */
   footer?: ElementType,
   /**
-    Component to render the header of the modal, replaces internal implementation.
+    Deprecated, use components prop: Component to render the header of the modal, replaces internal implementation.
   */
   header?: ElementType,
   /**

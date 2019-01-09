@@ -9,7 +9,6 @@ import Content from '../../Content';
 import Header from '../../Header';
 import Footer from '../../Footer';
 import { dialogHeight, dialogWidth, Dialog } from '../../../styled/Modal';
-import { Wrapper as ModalWrapper } from '../../../styled/Content';
 
 jest.mock('raf-schd', () => fn => fn);
 
@@ -88,7 +87,6 @@ describe('modal-dialog', () => {
       });
     });
 
-    /* eslint-disable no-console */
     describe('header', () => {
       it('should render when set via components prop', () => {
         const node = <span>My header</span>;
@@ -214,7 +212,6 @@ describe('modal-dialog', () => {
         expect(warnSpy).toHaveBeenCalled();
       });
     });
-    /* eslint-enable no-console */
 
     describe('children', () => {
       it('should render when set', () => {
