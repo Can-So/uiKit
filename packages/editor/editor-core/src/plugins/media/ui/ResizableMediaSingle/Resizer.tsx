@@ -49,7 +49,10 @@ export default class Resizer extends React.Component<
     isResizing: false,
   };
 
-  handleResizeStart = () => {
+  handleResizeStart = event => {
+    // prevent creating a drag event on Firefox
+    event.preventDefault();
+
     this.setState({ isResizing: true }, () => {
       this.props.displayGrid(
         true,

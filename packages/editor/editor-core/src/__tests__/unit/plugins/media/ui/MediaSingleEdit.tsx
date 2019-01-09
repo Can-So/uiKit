@@ -15,6 +15,7 @@ import { stateKey as pluginKey } from '../../../../../plugins/media/pm-plugins/m
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 import FloatingToolbar from '../../../../../ui/FloatingToolbar';
 import MediaSingleEdit from '../../../../../plugins/media/ui/MediaSingleEdit';
+import { setNodeSelection } from '../../../../../utils';
 
 describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
   const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -90,7 +91,9 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
       ),
     );
 
+    setNodeSelection(editorView, 1);
     editorView.focus();
+
     const pluginState = pluginKey.getState(editorView.state);
 
     const mediaSingleEdit = mountWithIntl(
@@ -100,9 +103,6 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
         allowBreakout={true}
         allowLayout={false}
       />,
-    );
-    expect(editorView.state.selection.$from.node().type.name).toEqual(
-      'mediaSingle',
     );
 
     expect(mediaSingleEdit.find(ToolbarButton).length).toEqual(1);
@@ -124,13 +124,15 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
                 __fileMimeType: 'image/png',
                 width: 100,
                 height: 100,
-              })(),
+              })('{<>}'),
             ),
           ),
         ),
       ),
     );
+    setNodeSelection(editorView, 6);
     editorView.focus();
+
     const pluginState = pluginKey.getState(editorView.state);
 
     const mediaSingleEdit = mountWithIntl(
@@ -141,9 +143,7 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
         allowLayout={false}
       />,
     );
-    expect(editorView.state.selection.$from.node().type.name).toEqual(
-      'mediaSingle',
-    );
+
     expect(mediaSingleEdit.find(ToolbarButton).length).toEqual(1);
     mediaSingleEdit.unmount();
   });
@@ -163,13 +163,15 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
                 __fileMimeType: 'image/png',
                 width: 100,
                 height: 100,
-              })(),
+              })('{<>}'),
             ),
           ),
         ),
       ),
     );
     editorView.focus();
+    setNodeSelection(editorView, 6);
+
     const pluginState = pluginKey.getState(editorView.state);
 
     const mediaSingleEdit = mountWithIntl(
@@ -181,7 +183,7 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
         allowResizing={true}
       />,
     );
-    expect(editorView.state.selection.$from.node().type.name).toEqual(
+    expect(editorView.state.selection.$from.nodeAfter!.type.name).toEqual(
       'mediaSingle',
     );
     expect(mediaSingleEdit.find(ToolbarButton).length).toEqual(1);
