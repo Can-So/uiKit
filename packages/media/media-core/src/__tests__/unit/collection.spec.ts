@@ -126,8 +126,8 @@ describe('CollectionFetcher', () => {
       collectionFetcher.getItems('recents').subscribe({
         next() {
           expect(fileStreamsCache.size).toEqual(2);
-          expect(fileStreamsCache.has('1-recents')).toBeTruthy();
-          expect(fileStreamsCache.has('2-recents')).toBeTruthy();
+          expect(fileStreamsCache.has('1')).toBeTruthy();
+          expect(fileStreamsCache.has('2')).toBeTruthy();
           done();
         },
       });
@@ -308,7 +308,7 @@ describe('CollectionFetcher', () => {
         'some-occurrence-key',
       );
       expect(collectionCache['some-collection-name'].items).toHaveLength(0);
-      expect(removeSpy).toHaveBeenCalledWith('some-id-some-collection-name');
+      expect(removeSpy).toHaveBeenCalledWith('some-id');
     });
 
     it('should propagate the change in cached observable', async () => {
