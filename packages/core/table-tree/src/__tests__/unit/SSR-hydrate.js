@@ -12,12 +12,6 @@ jest.mock('exenv', () => ({
   },
 }));
 
-afterAll(() =>
-  document
-    .querySelectorAll('[role=treegrid]')
-    .forEach(e => e.parentNode && e.parentNode.removeChild(e)),
-);
-
 const App = () => (
   <TableTree>
     <Headers>
@@ -53,7 +47,5 @@ test('should ssr then hydrate table-tree correctly', () => {
   canUseDom.mockReturnValue(true);
   const elem = document.createElement('div');
   elem.innerHTML = serverHTML;
-  ReactDOM.hydrate(<App />, elem);
-  expect(elem.getElementsByTagName('h1')).toHaveLength(0);
-  expect(elem.querySelectorAll('[role=treegrid]')).toHaveLength(1);
+  expect(() => ReactDOM.hydrate(<App />, elem)).not.toThrow();
 });
