@@ -2,7 +2,6 @@
 import React, {
   Component,
   type ElementType,
-  type ComponentType,
   type Node,
 } from 'react';
 import { layers } from '@atlaskit/theme';
