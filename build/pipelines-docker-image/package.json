@@ -4,10 +4,10 @@
   "private": true,
   "description": "Docker image used to set up the Atlaskit repo in pipelines",
   "scripts": {
-    "get-image-name": "node ./get.image.name.js",
-    "build-image": "docker build -t $(yarn -s get-image-name) -t $(yarn -s get-image-name latest) .",
-    "push-image": "docker push $(yarn -s get-image-name) && docker push $(yarn -s get-image-name latest)",
-    "create-vr-image": "docker build -t $(yarn -s get-image-name vr) -f ./visual-regression-image/Dockerfile . && docker push $(yarn -s get-image-name vr)"
+    "build-image": "docker build -t atlassianlabs/atlaskit-mk-2:$npm_package_version -t atlassianlabs/atlaskit-mk-2:latest .",
+    "build-vr-image": "docker build -t atlassianlabs/atlaskit-mk-2-vr:$npm_package_version -t atlassianlabs/atlaskit-mk-2-vr:latest -f ./visual-regression-image/Dockerfile .",
+    "push-images": "docker push atlassianlabs/atlaskit-mk-2:$npm_package_version && docker push atlassianlabs/atlaskit-mk-2:latest",
+    "push-vr-images": "docker push atlassianlabs/atlaskit-mk-2-vr:$npm_package_version && docker push atlassianlabs/atlaskit-mk-2-vr:latest"
   },
   "author": "Luke Batchelor",
   "license": "Apache-2.0"
