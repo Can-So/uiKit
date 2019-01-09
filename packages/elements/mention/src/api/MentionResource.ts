@@ -384,14 +384,13 @@ class MentionResource extends AbstractMentionResource {
   ): MentionsResult {
     const mentions = result.mentions.map((mention, index) => {
       let lozenge: string | undefined;
-      const weight = mention.weight !== undefined ? mention.weight : index;
       if (isAppMention(mention)) {
         lozenge = mention.userType;
       } else if (isTeamMention(mention)) {
         lozenge = mention.userType;
       }
 
-      return { ...mention, lozenge, weight, query };
+      return { ...mention, lozenge, query };
     });
 
     return { ...result, mentions, query: result.query || query };
