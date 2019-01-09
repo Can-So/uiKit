@@ -49,7 +49,7 @@ export class ImageViewer extends BaseViewer<
   }
 
   protected async init() {
-    const { item: file, context } = this.props;
+    const { item: file, context, collectionName } = this.props;
     if (file.status === 'error') {
       return;
     }
@@ -58,16 +58,23 @@ export class ImageViewer extends BaseViewer<
       let imagePreview: Blob | undefined;
       let orientation = 1;
       if (file.status === 'processed') {
-        const service = context.getBlobService(this.props.collectionName);
-        // MSW-922: once we make getImage cancelable we can use it instead of fetchImageBlobCancelable
         const item = processedFileStateToMediaItem(file);
-        const { response, cancel } = service.fetchImageBlobCancelable(item, {
-          width: 1920,
-          height: 1080,
-          mode: 'fit',
-          allowAnimated: true,
-        });
-        this.cancelImageFetch = () => cancel(REQUEST_CANCELLED);
+        const controller =
+          typeof AbortController !== 'undefined'
+            ? new AbortController()
+            : undefined;
+        const response = context.getImage(
+          item.details.id,
+          {
+            width: 1920,
+            height: 1080,
+            mode: 'fit',
+            allowAnimated: true,
+            collection: collectionName,
+          },
+          controller,
+        );
+        this.cancelImageFetch = () => controller && controller.abort();
         imagePreview = await response;
       } else {
         const { preview } = file;
@@ -83,6 +90,7 @@ export class ImageViewer extends BaseViewer<
       }
 
       const objectUrl = URL.createObjectURL(imagePreview);
+
       this.setState({
         content: Outcome.successful({ objectUrl, orientation }),
       });

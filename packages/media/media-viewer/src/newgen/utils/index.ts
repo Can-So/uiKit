@@ -1,10 +1,7 @@
-import {
-  Context,
-  isClientBasedAuth,
-  MediaCollectionItem,
-} from '@atlaskit/media-core';
+import { Context, isClientBasedAuth } from '@atlaskit/media-core';
 import { stringify } from 'query-string';
 import { Identifier } from '../domain';
+import { MediaCollectionItem } from '@atlaskit/media-store';
 
 // We want to remove constructAuthTokenUrl and use mediaStore instead
 // https://product-fabric.atlassian.net/browse/MSW-869
@@ -64,9 +61,9 @@ export const toIdentifier = (
   collectionName: string,
 ): Identifier => {
   return {
-    id: item.details.id,
+    id: item.id,
     type: item.type,
-    occurrenceKey: item.details.occurrenceKey,
+    occurrenceKey: item.occurrenceKey,
     collectionName,
   };
 };

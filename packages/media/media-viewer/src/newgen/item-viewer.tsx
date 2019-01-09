@@ -170,6 +170,8 @@ export class ItemViewerBase extends React.Component<Props, State> {
           case 'failed-processing':
           case 'error':
             return this.renderError('previewFailed', item);
+          default:
+            return <Spinner />;
         }
       },
       pending: () => <Spinner />,
