@@ -22,4 +22,4 @@ export const createStatusAnalyticsAndFire = (
   }
 };
 
-export const analyticsState = isNew => (isNew ? 'new' : 'existing');
+export const analyticsState = isNew => (isNew ? 'new' : 'update');
