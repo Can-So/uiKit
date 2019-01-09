@@ -84,15 +84,7 @@ describe('modal-dialog', () => {
           <ModalDialog components={{ Container: 'form' }} onClose={noop} />,
         );
 
-        expect(
-          wrapper
-            .find(ModalWrapper)
-            .children()
-            .at(0)
-            .children()
-            .at(0)
-            .type(),
-        ).toEqual('form');
+        expect(wrapper.find('form')).toHaveLength(1);
       });
     });
 
@@ -106,17 +98,20 @@ describe('modal-dialog', () => {
         expect(wrapper.contains(node)).toBe(true);
       });
       it('should render when set via (deprecated) header prop', () => {
-        // $FlowFixMe
-        console.warn = jest.fn();
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
         const node = <span>My header</span>;
         const wrapper = mount(
           <ModalDialog header={() => node} onClose={noop} />,
         );
         expect(wrapper.contains(node)).toBe(true);
+        expect(warnSpy).toHaveBeenCalled();
       });
       it('should prefer the components prop over header prop ', () => {
-        // $FlowFixMe
-        console.warn = jest.fn();
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
         const node = <span>My header</span>;
         const nodeDeprecated = <span>My deprecated header</span>;
         const wrapper = mount(
@@ -129,6 +124,7 @@ describe('modal-dialog', () => {
 
         expect(wrapper.contains(node)).toBe(true);
         expect(wrapper.contains(nodeDeprecated)).toBe(false);
+        expect(warnSpy).toHaveBeenCalled();
       });
     });
 
@@ -142,18 +138,21 @@ describe('modal-dialog', () => {
         expect(wrapper.contains(node)).toBe(true);
       });
       it('should render when set via (deprecated) footer prop', () => {
-        // $FlowFixMe
-        console.warn = jest.fn();
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
         const node = <span>My footer</span>;
         const wrapper = mount(
           <ModalDialog footer={() => node} onClose={noop} />,
         );
 
         expect(wrapper.contains(node)).toBe(true);
+        expect(warnSpy).toHaveBeenCalled();
       });
       it('should prefer the components prop over footer prop ', () => {
-        // $FlowFixMe
-        console.warn = jest.fn();
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
         const node = <span>My footer</span>;
         const nodeDeprecated = <span>My deprecated footer</span>;
         const wrapper = mount(
@@ -166,6 +165,7 @@ describe('modal-dialog', () => {
 
         expect(wrapper.contains(node)).toBe(true);
         expect(wrapper.contains(nodeDeprecated)).toBe(false);
+        expect(warnSpy).toHaveBeenCalled();
       });
     });
 
@@ -182,17 +182,20 @@ describe('modal-dialog', () => {
       });
 
       it('should render when set via (deprecated) body prop', () => {
-        // $FlowFixMe
-        console.warn = jest.fn();
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
         const node = <span>My body</span>;
         const wrapper = mount(<ModalDialog body={() => node} onClose={noop} />);
 
         expect(wrapper.contains(node)).toBe(true);
+        expect(warnSpy).toHaveBeenCalled();
       });
 
       it('should prefer the components prop over body prop ', () => {
-        // $FlowFixMe
-        console.warn = jest.fn();
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
         // $FlowFixMe
         const node = React.forwardRef((props, ref) => {
           return <span ref={ref}>My body</span>;
@@ -208,6 +211,7 @@ describe('modal-dialog', () => {
 
         expect(wrapper.contains(node)).toBe(true);
         expect(wrapper.contains(nodeDeprecated)).toBe(false);
+        expect(warnSpy).toHaveBeenCalled();
       });
     });
     /* eslint-enable no-console */
@@ -335,7 +339,6 @@ test('nested modals should stack on one another', () => {
     .find(Content)
     .map(content => content.prop('stackIndex'));
   expect(indexes).toEqual([2, 1, 0]);
-  // wrapper.unmount();
 });
 
 test('multiple modals update stack on unmount', () => {
@@ -357,7 +360,7 @@ test('multiple modals update stack on unmount', () => {
       );
     }
   }
-  const wrapper = mount(<Wrapper key="hello" />);
+  const wrapper = mount(<Wrapper />);
   wrapper.find('button').simulate('click');
   const indexes = wrapper
     .find(Content)

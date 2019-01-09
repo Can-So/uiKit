@@ -1,9 +1,5 @@
 // @flow
-import React, {
-  Component,
-  type Node,
-  type ElementType,
-} from 'react';
+import React, { Component, type Node, type ElementType } from 'react';
 import rafSchedule from 'raf-schd';
 import ScrollLock from 'react-scrolllock';
 
@@ -11,7 +7,12 @@ import Footer from './Footer';
 import Header from './Header';
 
 import type { AppearanceType, KeyboardOrMouseEvent } from '../types';
-import { Body, CustomBody, keylineHeight, Wrapper } from '../styled/Content';
+import {
+  Body as DefaultBody,
+  styledBody,
+  keylineHeight,
+  Wrapper,
+} from '../styled/Content';
 
 function getInitialState() {
   return {
@@ -227,7 +228,7 @@ export default class Content extends Component<Props, State> {
     const {
       actions,
       appearance,
-      body: BodyProp,
+      body: DeprecatedBody,
       components,
       children,
       footer,
@@ -239,11 +240,12 @@ export default class Content extends Component<Props, State> {
       shouldScroll,
     } = this.props;
 
-    // Only load in 'div' default if there's no deprecated 'body' prop provided
-    const BodyComponent = BodyProp || Body;
-    const CustomBodyComponent = components.Body;
+    const { Container = 'div', Body: CustomBody } = components;
 
-    const { Container = 'div' } = components;
+    // Only load in 'div' default if there's no deprecated 'body' prop provided
+    // Prefer components.Body over deprecated body prop and default to DefaultBody
+    const BodyComponent =
+      styledBody(CustomBody) || DeprecatedBody || DefaultBody;
     const { showFooterKeyline, showHeaderKeyline } = this.state;
 
     return (
@@ -260,22 +262,12 @@ export default class Content extends Component<Props, State> {
               isHeadingMultiline={isHeadingMultiline}
               showKeyline={showHeaderKeyline}
             />
-            {CustomBodyComponent ? (
-              <CustomBody
-                component={CustomBodyComponent}
-                innerRef={this.getScrollContainer}
-                shouldScroll={shouldScroll}
-              >
-                {children}
-              </CustomBody>
-            ) : (
-              <BodyComponent
-                innerRef={this.getScrollContainer}
-                shouldScroll={shouldScroll}
-              >
-                {children}
-              </BodyComponent>
-            )}
+            <BodyComponent
+              innerRef={this.getScrollContainer}
+              shouldScroll={shouldScroll}
+            >
+              {children}
+            </BodyComponent>
             <Footer
               actions={actions}
               appearance={appearance}

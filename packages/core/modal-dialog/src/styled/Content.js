@@ -124,48 +124,25 @@ export const Body = styled.div`
   }};
 `;
 
-export const CustomBody = ({
-  component,
-  children,
-  innerRef,
-  shouldScroll,
-}: {
-  component: ElementType,
-  children: Node,
-  innerRef: Function,
-  shouldScroll?: boolean,
-}) => {
-  let BodyStyledComponent = Body;
-  if (component !== 'div') {
-    // $FlowFixMe
-    BodyStyledComponent = styled(component)`
-      flex: 1 1 auto;
-      ${p => {
-        return p.shouldScroll
-          ? `
+export const styledBody = (component: ?ElementType) =>
+  component
+    ? // $FlowFixMe
+      styled(component)`
+        flex: 1 1 auto;
+        ${p => {
+          return p.shouldScroll
+            ? `
             overflow-y: auto;
             overflow-x: hidden;
             padding: ${keylineHeight}px ${outerGutter}px;
           `
-          : `
+            : `
             border-radius: 0px;
             padding: 0 ${outerGutter}px;
     `;
-      }};
-    `;
-  }
-
-  return (
-    <BodyStyledComponent shouldScroll={shouldScroll} innerRef={innerRef}>
-      {children}
-    </BodyStyledComponent>
-  );
-};
-
-CustomBody.defaultProps = {
-  component: 'div',
-  innerRef: () => {},
-};
+        }};
+      `
+    : undefined;
 
 // Footer
 // ==============================
