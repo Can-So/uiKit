@@ -1,10 +1,12 @@
 FROM node:8.9.0-alpine
 
-# Install git and bash
+# Install git, bash & flow
+# flow-bin needs to be installed in Alpine - https://github.com/facebook/flow/issues/3649
 RUN apk update && \
     apk upgrade && \
     apk add curl && \
-    apk add --no-cache bash git openssh
+    apk add --no-cache bash git openssh && \
+    apk add --no-cache --repository https://nl.alpinelinux.org/alpine/edge/testing flow
 
 # Update yarn version
 # NOTE: This version of yarn is not the one that is used to install dependencies at the root. That yarn
