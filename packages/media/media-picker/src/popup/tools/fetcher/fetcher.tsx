@@ -183,12 +183,15 @@ export class MediaApiFetcher implements Fetcher {
       return '';
     }
 
-    return keys
-      .reduce((prev, key) => {
+    const stringifiedParams = keys
+      .map(key => {
         const value = queryParams[key];
-        return value !== undefined ? prev + `${key}=${value}&` : prev;
-      }, '?')
-      .slice(0, -1);
+        return value !== undefined ? `${key}=${value}` : undefined;
+      })
+      .filter(key => !!key)
+      .join('&');
+
+    return `?${stringifiedParams}`;
   }
 
   fetchTrendingGifs = (offset?: number): Promise<GiphyData> => {
