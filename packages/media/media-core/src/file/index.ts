@@ -23,12 +23,15 @@ import {
   GetFileOptions,
   mapMediaItemToFileState,
 } from '../fileState';
-import { fileStreamsCache, FileStreamCache } from '../context/fileStreamCache';
+import { fileStreamsCache } from '../context/fileStreamCache';
 import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploadableFile';
 import { convertBase64ToBlob } from '../utils/convertBase64ToBlob';
 
 const POLLING_INTERVAL = 1000;
 const maxNumberOfItemsPerCall = 100;
+const makeCacheKey = (id: string, collection?: string) =>
+  collection ? `${id}-${collection}` : id;
+
 export type DataloaderMap = { [id: string]: DataloaderResult };
 export const getItemsFromKeys = (
   dataloaderKeys: DataloaderKey[],
@@ -37,7 +40,7 @@ export const getItemsFromKeys = (
   const itemsByKey: DataloaderMap = fileItems.reduce(
     (prev: DataloaderMap, nextFileItem) => {
       const { id, collection } = nextFileItem;
-      const key = FileStreamCache.createKey(id, { collectionName: collection });
+      const key = makeCacheKey(id, collection);
 
       prev[key] = nextFileItem.details;
 
@@ -48,7 +51,7 @@ export const getItemsFromKeys = (
 
   return dataloaderKeys.map(dataloaderKey => {
     const { id, collection } = dataloaderKey;
-    const key = FileStreamCache.createKey(id, { collectionName: collection });
+    const key = makeCacheKey(id, collection);
 
     return itemsByKey[key];
   });
@@ -116,10 +119,7 @@ export class FileFetcher {
       });
     }
 
-    const key = FileStreamCache.createKey(id, options);
-    console.log('getFileState(key=', key, ')');
-
-    return fileStreamsCache.getOrInsert(key, () => {
+    return fileStreamsCache.getOrInsert(id, () => {
       const collection = options && options.collectionName;
       const fileStream$ = publishReplay<FileState>(1)(
         this.createDownloadFileStream(id, collection),
@@ -291,12 +291,7 @@ export class FileFetcher {
       },
     );
 
-    const key = FileStreamCache.createKey(id, {
-      collectionName: collection,
-      occurrenceKey,
-    });
-    console.log('key on upload', key);
-    fileStreamsCache.set(key, subject);
+    fileStreamsCache.set(id, subject);
 
     // We should report progress asynchronously, since this is what consumer expects
     // (otherwise in newUploadService file-converting event will be emitted before files-added)

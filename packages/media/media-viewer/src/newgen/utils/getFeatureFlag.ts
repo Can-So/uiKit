@@ -1,8 +1,6 @@
 import { MediaViewerFeatureFlags } from '../domain';
 
-export const featureFlagsMap = {
-  customVideoPlayer: 'MediaViewerNextGenCustomVideoPlayer',
-};
+export const featureFlagsMap: { [key: string]: string } = {};
 
 export const getFeatureFlag = (
   featureName: keyof MediaViewerFeatureFlags,

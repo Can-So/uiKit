@@ -1,5 +1,10 @@
 # @atlaskit/media-core
 
+## 26.0.0
+- [major] [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+
+  - Remove redundant fileStreamCache createKey() method and replace the cache key with id everywhere
+
 ## 25.0.0
 - [major] [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
 

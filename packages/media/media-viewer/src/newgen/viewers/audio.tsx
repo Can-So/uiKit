@@ -16,7 +16,6 @@ import { getArtifactUrl } from '@atlaskit/media-store';
 import { BaseState, BaseViewer } from './base-viewer';
 import { isIE } from '../utils/isIE';
 import { CustomMediaPlayer } from '@atlaskit/media-ui';
-import { getFeatureFlag } from '../utils/getFeatureFlag';
 import { getObjectUrlFromFileState } from '../utils/getObjectUrlFromFileState';
 
 export type Props = Readonly<{
@@ -72,12 +71,10 @@ export class AudioViewer extends BaseViewer<string, Props, State> {
   };
 
   protected renderSuccessful(src: string) {
-    const { showControls, previewCount, featureFlags } = this.props;
+    const { showControls, previewCount } = this.props;
 
-    const useCustomAudioPlayer =
-      !isIE() && getFeatureFlag('customVideoPlayer', featureFlags);
+    const useCustomAudioPlayer = !isIE();
     const isAutoPlay = previewCount === 0;
-
     return useCustomAudioPlayer ? (
       <AudioPlayer>
         {this.renderCover()}

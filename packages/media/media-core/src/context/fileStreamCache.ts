@@ -1,4 +1,4 @@
-import { FileState, GetFileOptions } from '../fileState';
+import { FileState } from '../fileState';
 import { LRUCache } from 'lru-fast';
 import { Observable } from 'rxjs/Observable';
 
@@ -7,15 +7,6 @@ export class FileStreamCache {
 
   constructor() {
     this.fileStreams = new LRUCache(1000);
-  }
-
-  static createKey(id: string, options: GetFileOptions = {}): string {
-    const collection = options.collectionName
-      ? `-${options.collectionName}`
-      : '';
-    const occurrence = options.occurrenceKey ? `-${options.occurrenceKey}` : '';
-
-    return `${id}${collection}${occurrence}`;
   }
 
   has(id: string): boolean {
