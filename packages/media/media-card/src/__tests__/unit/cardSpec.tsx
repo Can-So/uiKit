@@ -3,18 +3,12 @@ import { Observable } from 'rxjs';
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import { fakeContext, nextTick } from '@atlaskit/media-test-helpers';
-import {
-  Context,
-  FileState,
-  UrlPreview,
-  FileDetails,
-} from '@atlaskit/media-core';
+import { Context, FileState, FileDetails } from '@atlaskit/media-core';
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
 import {
   CardAction,
   CardProps,
-  UrlPreviewIdentifier,
   FileIdentifier,
   LinkIdentifier,
   CardDimensions,
@@ -30,10 +24,6 @@ import { ExternalImageIdentifier } from '../../root';
 import { InlinePlayer } from '../../../src/root/inlinePlayer';
 
 describe('Card', () => {
-  const urlIdentifier: UrlPreviewIdentifier = {
-    mediaItemType: 'link',
-    url: 'some-url',
-  };
   const linkIdentifier: LinkIdentifier = {
     id: 'some-random-id',
     mediaItemType: 'link',
@@ -43,11 +33,6 @@ describe('Card', () => {
     id: 'some-random-id',
     mediaItemType: 'file',
     collectionName: 'some-collection-name',
-  };
-  const linkUrlPreview: UrlPreview = {
-    type: 'link',
-    url: 'some-url',
-    title: 'some-title',
   };
   const setup = (
     context: Context = fakeContext(),
@@ -87,71 +72,6 @@ describe('Card', () => {
       },
     });
 
-  it('should render card with UrlPreviewProvider when passed a UrlPreviewIdentifier', () => {
-    const dummyUrl = 'http://some.url.com';
-    const mediaItemType = 'link';
-    const identifier: UrlPreviewIdentifier = {
-      url: dummyUrl,
-      mediaItemType,
-    };
-    const dummyProvider = { observable: 'dummy provider ftw!' };
-    const context = fakeContext({
-      getUrlPreviewProvider: dummyProvider,
-    }) as any;
-    const { component } = setup(context, { identifier });
-
-    expect(context.getUrlPreviewProvider).toHaveBeenCalledTimes(1);
-    expect(context.getUrlPreviewProvider).toBeCalledWith(dummyUrl);
-    expect(component.find(CardView)).toHaveLength(1);
-    expect(component.find(CardView).prop('mediaItemType')).toEqual('link');
-  });
-
-  it('should render a CardView with the right metadata when using a LinkIdentifier', async () => {
-    const context = fakeContext({
-      getMediaItemProvider: {
-        observable: () =>
-          Observable.of({
-            details: linkUrlPreview,
-          }),
-      },
-    });
-    const { component } = setup(context, { identifier: linkIdentifier });
-
-    // we need to wait for 2 promises: fetch metadata + fetch preview
-    await nextTick();
-    await nextTick();
-    component.update();
-
-    expect(component.find(CardView)).toHaveLength(1);
-    expect(component.find(CardView).prop('status')).toEqual('complete');
-    expect(component.find(CardView).prop('metadata')).toEqual({
-      type: 'link',
-      title: 'some-title',
-      url: 'some-url',
-    });
-  });
-
-  it('should render a CardView with the right metadata when using a UrlPreviewIdentifier', async () => {
-    const context = fakeContext({
-      getUrlPreviewProvider: {
-        observable: () => Observable.of(linkUrlPreview),
-      },
-    });
-    const { component } = setup(context, { identifier: urlIdentifier });
-    // we need to wait for 2 promises: fetch metadata + fetch preview
-    await nextTick();
-    await nextTick();
-    component.update();
-
-    expect(component.find(CardView)).toHaveLength(1);
-    expect(component.find(CardView).prop('status')).toEqual('complete');
-    expect(component.find(CardView).prop('metadata')).toEqual({
-      type: 'link',
-      title: 'some-title',
-      url: 'some-url',
-    });
-  });
-
   it('should use the new context to create the subscription when context prop changes', async () => {
     const firstContext = fakeContext({});
     const secondContext = fakeContext({}) as Context;
@@ -164,29 +84,6 @@ describe('Card', () => {
     expect(secondContext.file.getFileState).toBeCalledWith(id, {
       collectionName,
     });
-    expect(component.find(CardView)).toHaveLength(1);
-  });
-
-  it('should create a new subscription when the identifier changes', async () => {
-    const firstIdentifier: FileIdentifier = fileIdentifier;
-    const secondIdentifier: LinkIdentifier = linkIdentifier;
-    const dummyProvider = { observable: 'dummy provider ftw!' };
-    const context = fakeContext({
-      getMediaItemProvider: dummyProvider,
-    }) as Context;
-    const { component } = setup(context, { identifier: firstIdentifier });
-    component.setProps({ context, identifier: secondIdentifier });
-
-    const { id, mediaItemType, collectionName } = secondIdentifier;
-    await nextTick();
-    expect(context.file.getFileState).toHaveBeenCalledTimes(1);
-    expect(context.getMediaItemProvider).toHaveBeenCalledTimes(1);
-    expect(context.getMediaItemProvider).toBeCalledWith(
-      id,
-      mediaItemType,
-      collectionName,
-    );
-
     expect(component.find(CardView)).toHaveLength(1);
   });
 

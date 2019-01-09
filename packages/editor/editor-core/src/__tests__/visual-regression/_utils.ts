@@ -21,6 +21,18 @@ export {
 const DEFAULT_WIDTH = 800;
 const DEFAULT_HEIGHT = 600;
 
+export const dynamicTextViewportSizes = [
+  { width: 1440, height: 3000 },
+  { width: 1120, height: 3000 },
+  { width: 1000, height: 3000 },
+  { width: 800, height: 3000 },
+];
+
+export const viewportSizes = [
+  ...dynamicTextViewportSizes,
+  { width: 400, height: 3000 },
+];
+
 export const resetViewport = async page => {
   await page.setViewport({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
 };
@@ -359,8 +371,12 @@ export const setTests = forInput => {
   });
 };
 
-export const snapshot = async (page, tolerance?: number) => {
-  const editor = await page.$('.akEditor');
+export const snapshot = async (
+  page,
+  tolerance?: number,
+  selector = '.akEditor',
+) => {
+  const editor = await page.$(selector);
 
   // Try to take a screenshot of only the editor.
   // Otherwise take the whole page.

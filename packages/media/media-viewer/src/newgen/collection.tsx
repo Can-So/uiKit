@@ -1,16 +1,12 @@
 import * as React from 'react';
-import {
-  Context,
-  MediaCollectionItem,
-  MediaCollectionProvider,
-  isError,
-} from '@atlaskit/media-core';
+import { Context } from '@atlaskit/media-core';
 import { Outcome, Identifier, MediaViewerFeatureFlags } from './domain';
 import ErrorMessage, { createError, MediaViewerError } from './error';
 import { List } from './list';
 import { Subscription } from 'rxjs/Subscription';
 import { toIdentifier } from './utils';
 import { Spinner } from './loading';
+import { MediaCollectionItem } from '@atlaskit/media-store';
 
 export type Props = Readonly<{
   onClose?: () => void;
@@ -32,7 +28,6 @@ export class Collection extends React.Component<Props, State> {
   state: State = initialState;
 
   private subscription?: Subscription;
-  private provider?: MediaCollectionProvider;
 
   componentWillUpdate(nextProps: Props) {
     if (this.needsReset(this.props, nextProps)) {
@@ -65,6 +60,7 @@ export class Collection extends React.Component<Props, State> {
         const item = defaultSelectedItem
           ? { ...defaultSelectedItem, collectionName }
           : identifiers[0];
+
         return (
           <List
             items={identifiers}
@@ -83,32 +79,25 @@ export class Collection extends React.Component<Props, State> {
   private init(props: Props) {
     this.setState(initialState);
     const { collectionName, context, defaultSelectedItem, pageSize } = props;
-    this.provider = context.getMediaCollectionProvider(
-      collectionName,
-      pageSize,
-    );
-    const collectionFileItemFilter = (item: MediaCollectionItem) =>
-      item.type === 'file';
-    this.subscription = this.provider.observable().subscribe({
-      next: collection => {
-        if (isError(collection)) {
+    this.subscription = context.collection
+      .getItems(collectionName, { limit: pageSize })
+      .subscribe({
+        next: items => {
           this.setState({
-            items: Outcome.failed(createError('metadataFailed', collection)),
-          });
-        } else {
-          this.setState({
-            items: Outcome.successful(
-              collection.items.filter(collectionFileItemFilter),
-            ),
+            items: Outcome.successful(items),
           });
           if (defaultSelectedItem && this.shouldLoadNext(defaultSelectedItem)) {
-            if (this.provider) {
-              this.provider.loadNextPage();
-            }
+            context.collection.loadNextPage(collectionName, {
+              limit: pageSize,
+            });
           }
-        }
-      },
-    });
+        },
+        error: () => {
+          this.setState({
+            items: Outcome.failed(createError('metadataFailed')),
+          });
+        },
+      });
   }
 
   private release() {
@@ -125,8 +114,11 @@ export class Collection extends React.Component<Props, State> {
   }
 
   private onNavigationChange = (item: Identifier) => {
-    if (this.shouldLoadNext(item) && this.provider) {
-      this.provider.loadNextPage();
+    const { context, collectionName, pageSize } = this.props;
+    if (this.shouldLoadNext(item)) {
+      context.collection.loadNextPage(collectionName, {
+        limit: pageSize,
+      });
     }
   };
 
@@ -143,8 +135,8 @@ export class Collection extends React.Component<Props, State> {
   private isLastItem(selectedItem: Identifier, items: MediaCollectionItem[]) {
     const lastItem = items[items.length - 1];
     const isLastItem =
-      selectedItem.id === lastItem.details.id &&
-      selectedItem.occurrenceKey === lastItem.details.occurrenceKey;
+      selectedItem.id === lastItem.id &&
+      selectedItem.occurrenceKey === lastItem.occurrenceKey;
     return isLastItem;
   }
 }

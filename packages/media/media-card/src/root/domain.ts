@@ -1,15 +1,10 @@
-import {
-  MediaItemProvider,
-  UrlPreviewProvider,
-  MediaType,
-} from '@atlaskit/media-core';
+import { MediaType } from '@atlaskit/media-core';
 
 export type Identifier =
   | UrlPreviewIdentifier
   | LinkIdentifier
   | FileIdentifier
   | ExternalImageIdentifier;
-export type Provider = MediaItemProvider | UrlPreviewProvider;
 
 export interface FileIdentifier {
   readonly mediaItemType: 'file';

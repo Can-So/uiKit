@@ -20,7 +20,7 @@ import { LazyContent } from '../../utils/lazyContent';
 import { getBaseAnalyticsContext } from '../../utils/analyticsUtils';
 import { getDataURIDimension } from '../../utils/getDataURIDimension';
 import { getDataURIFromFileState } from '../../utils/getDataURIFromFileState';
-import { getLinkMetadata, extendMetadata } from '../../utils/metadata';
+import { extendMetadata } from '../../utils/metadata';
 import {
   isFileIdentifier,
   isUrlPreviewIdentifier,
@@ -135,18 +135,10 @@ export class Card extends Component<CardProps, CardState> {
     }
 
     if (identifier.mediaItemType !== 'file') {
-      try {
-        const metadata = await getLinkMetadata(identifier, context);
-        this.notifyStateChange({
-          status: 'complete',
-          metadata,
-        });
-      } catch (error) {
-        this.notifyStateChange({
-          error,
-          status: 'error',
-        });
-      }
+      this.notifyStateChange({
+        error: new Error('Links are no longer supported in <Card />'),
+        status: 'error',
+      });
 
       return;
     }

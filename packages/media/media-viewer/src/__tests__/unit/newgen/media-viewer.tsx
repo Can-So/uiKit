@@ -14,7 +14,7 @@ import { ItemSource, Identifier } from '../../../newgen/domain';
 
 function createFixture(items: Identifier[], identifier: Identifier) {
   const subject = new Subject<MediaItem>();
-  const context = createContext({ subject });
+  const context = createContext();
   const onClose = jest.fn();
   const itemSource: ItemSource = {
     kind: 'ARRAY',
