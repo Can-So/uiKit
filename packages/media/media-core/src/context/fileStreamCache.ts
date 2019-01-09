@@ -37,7 +37,7 @@ export class FileStreamCache {
     if (!this.has(id)) {
       this.set(id, callback());
     }
-
+    console.log('key found', id);
     return this.get(id)!;
   }
 

@@ -517,6 +517,23 @@ export class MediaPluginState {
 
     this.view.dispatch(tr.setMeta('addToHistory', false));
     this.editingMediaId = undefined;
+
+    if (typeof fileIdentifier.id !== 'string') {
+      // Smart Editor will always return string.
+      return;
+    }
+
+    const mediaState = this.stateManager.getState(oldId);
+    this.stateManager.newState(fileIdentifier.id, {
+      ...mediaState,
+      status: 'ready',
+      publicId: fileIdentifier.id,
+      fileId: Promise.resolve(fileIdentifier.id),
+      dimensions: {
+        width: mediaNode.attrs.width,
+        height: mediaNode.attrs.height,
+      },
+    });
   };
 
   align = (layout: MediaSingleLayout, gridSize: number = 12): boolean => {

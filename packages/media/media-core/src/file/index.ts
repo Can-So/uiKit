@@ -117,6 +117,7 @@ export class FileFetcher {
     }
 
     const key = FileStreamCache.createKey(id, options);
+    console.log('getFileState(key=', key, ')');
 
     return fileStreamsCache.getOrInsert(key, () => {
       const collection = options && options.collectionName;
@@ -146,6 +147,7 @@ export class FileFetcher {
     id: string,
     collection?: string,
   ): Observable<FileState> => {
+    console.log('createDownloadFileStream(', id, ',', collection, ')');
     return Observable.create(async (observer: Observer<FileState>) => {
       let timeoutId: number;
 

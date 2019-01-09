@@ -2,6 +2,7 @@ import * as React from 'react';
 import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
 import { media, mediaGroup, mediaSingle } from '@atlaskit/adf-schema';
 import { SmartMediaEditor } from '@atlaskit/media-editor';
+import { FileIdentifier } from '@atlaskit/media-card';
 import { EditorPlugin } from '../../types';
 import {
   stateKey as pluginKey,
@@ -15,14 +16,13 @@ import keymapMediaSinglePlugin from './pm-plugins/keymap-media-single';
 import keymapPlugin from './pm-plugins/keymap';
 import ToolbarMedia from './ui/ToolbarMedia';
 import MediaSingleEdit from './ui/MediaSingleEdit';
+import { ReactMediaGroupNode } from './nodeviews/mediaGroup';
+import { ReactMediaSingleNode } from './nodeviews/mediaSingle';
 import { CustomMediaPicker, MediaProvider } from './types';
 import WithPluginState from '../../ui/WithPluginState';
 import { akEditorFullPageMaxWidth } from '@atlaskit/editor-common';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';
 import { pluginKey as editorDisabledPluginKey } from '../editor-disabled';
-import { ReactMediaGroupNode } from './nodeviews/mediaGroup';
-import { ReactMediaSingleNode } from './nodeviews/mediaSingle';
-import { FileIdentifier } from '@atlaskit/media-card';
 
 export {
   MediaState,
@@ -148,6 +148,7 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
         render={({ mediaState, disabled }) => {
           const { element: target, layout } = mediaState as MediaPluginState;
           const node = mediaState.selectedMediaNode();
+
           const isFullPage = appearance === 'full-page';
           const allowBreakout = !!(
             node &&
@@ -165,12 +166,20 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
             mediaState.resolvedUploadContext &&
             mediaState.showEditingDialog
           ) {
+            const state = (mediaState as MediaPluginState).getMediaNodeState(
+              node.attrs.id,
+            );
+            const id = (state && state.fileId) || node.attrs.id;
             const identifier: FileIdentifier = {
-              id: node.attrs.id,
+              id,
               mediaItemType: 'file',
               collectionName: node.attrs.collection,
             };
 
+            console.log(
+              'opening smart media editor with identifier',
+              identifier,
+            );
             smartMediaEditor = (
               <SmartMediaEditor
                 identifier={identifier}
