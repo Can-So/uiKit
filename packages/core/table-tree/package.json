@@ -41,6 +41,7 @@
     "@atlaskit/select": "^6.1.13",
     "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
+    "exenv": "^1.2.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.0",
     "redux": "^3.7.2",
