@@ -5,7 +5,6 @@ import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { constructAuthTokenUrl } from '../utils';
 import { Outcome, MediaViewerFeatureFlags } from '../domain';
 import { Video, CustomVideoPlayerWrapper } from '../styled';
-import { getFeatureFlag } from '../utils/getFeatureFlag';
 import { isIE } from '../utils/isIE';
 import { createError, MediaViewerError } from '../error';
 import { BaseState, BaseViewer } from './base-viewer';
@@ -46,9 +45,8 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
 
   protected renderSuccessful(content: string) {
     const { isHDActive } = this.state;
-    const { item, featureFlags, showControls, previewCount } = this.props;
-    const useCustomVideoPlayer =
-      !isIE() && getFeatureFlag('customVideoPlayer', featureFlags);
+    const { item, showControls, previewCount } = this.props;
+    const useCustomVideoPlayer = !isIE();
     const isAutoPlay = previewCount === 0;
     return useCustomVideoPlayer ? (
       <CustomVideoPlayerWrapper>
