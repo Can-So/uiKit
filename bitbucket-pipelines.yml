@@ -168,8 +168,6 @@ pipelines:
     build-visual-regression:
       - step:
           image: atlassianlabs/atlaskit-mk-2-vr:1.0.5
-          options:
-            size: 2x
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
