@@ -1,5 +1,22 @@
 # @atlaskit/media-picker
 
+## 29.0.1
+- [patch] [c91adfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c91adfe):
+
+  - remove customVideoPlayer featureFlag prop and enable by default
+
+## 29.0.0
+- [patch] [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+
+  - Remove redundant fileStreamCache createKey() method and replace the cache key with id everywhere
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/media-card@49.0.0
+  - @atlaskit/media-editor@23.0.0
+  - @atlaskit/media-test-helpers@18.9.1
+  - @atlaskit/media-viewer@31.0.0
+  - @atlaskit/media-store@9.1.1
+  - @atlaskit/media-core@26.0.0
+
 ## 28.0.0
 - Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
   - @atlaskit/media-card@48.0.0

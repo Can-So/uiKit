@@ -114,7 +114,6 @@ export default class Example extends React.Component<{}, State> {
         : { list: [selectedItem] };
     return (
       <MediaViewer
-        featureFlags={{ customVideoPlayer: true }}
         context={context}
         selectedItem={selectedItem}
         dataSource={dataSource}

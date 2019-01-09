@@ -10,7 +10,6 @@ export default class Example extends React.Component<{}, {}> {
   render() {
     return (
       <MediaViewer
-        featureFlags={{ customVideoPlayer: true }}
         context={context}
         selectedItem={selectedItem}
         dataSource={{
