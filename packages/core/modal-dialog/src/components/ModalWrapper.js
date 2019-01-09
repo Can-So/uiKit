@@ -1,5 +1,10 @@
 // @flow
-import React, { Component, type ElementType, type Node } from 'react';
+import React, {
+  Component,
+  type ElementType,
+  type ComponentType,
+  type Node,
+} from 'react';
 import { layers } from '@atlaskit/theme';
 import Portal from '@atlaskit/portal';
 import { ModalTransitionConsumer } from './ModalTransition';

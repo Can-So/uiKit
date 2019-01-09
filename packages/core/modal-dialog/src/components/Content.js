@@ -1,5 +1,10 @@
 // @flow
-import React, { Component, type Node, type ElementType } from 'react';
+import React, {
+  Component,
+  type Node,
+  type ElementType,
+  type ComponentType,
+} from 'react';
 import rafSchedule from 'raf-schd';
 import ScrollLock from 'react-scrolllock';
 
@@ -30,7 +35,7 @@ type Props = {
   */
   appearance?: AppearanceType,
   /**
-    deprecated, use components prop: Component to render the body of the modal.
+    Deprecated, use components prop: Component to render the body of the modal.
   */
   body?: ElementType,
   /**
@@ -47,11 +52,11 @@ type Props = {
     Container?: ElementType,
   },
   /**
-    deprecated, use components prop: Component to render the header of the modal.
+    Deprecated, use components prop: Component to render the header of the modal.
   */
   header?: ElementType,
   /**
-    deprecated, use components prop: Component to render the footer of the moda.l
+    Deprecated, use components prop: Component to render the footer of the moda.l
   */
   footer?: ElementType,
   /**
@@ -142,8 +147,18 @@ export default class Content extends Component<Props, State> {
       console.warn(
         "Deprecation warning: Use of the body prop in ModalDialog is deprecated. Please compose your ModalDialog using the 'components' prop instead",
       );
+
+    // Check that custom body components have used ForwardRef to attach to a DOM element
+    if (this.props.components.Body) {
+      if (!(this.scrollContainer instanceof HTMLElement)) {
+        console.warn(
+          'Warning: Ref must attach to a DOM element; check you are using fowardRef and attaching the ref to an appropriate element. Check the examples for more details.',
+        );
+      }
+    }
     /* eslint-enable no-console */
   }
+
   componentWillReceiveProps(nextProps: Props) {
     const { stackIndex } = this.props;
 
