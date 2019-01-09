@@ -3,7 +3,6 @@ import React, {
   Component,
   type Node,
   type ElementType,
-  type ComponentType,
 } from 'react';
 import rafSchedule from 'raf-schd';
 import ScrollLock from 'react-scrolllock';
