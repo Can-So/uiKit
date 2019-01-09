@@ -179,7 +179,9 @@ export class MediaApiFetcher implements Fetcher {
     [key: string]: string | undefined | number;
   }): string {
     const keys = Object.keys(queryParams);
-    if (!keys.length) return '';
+    if (!keys.length) {
+      return '';
+    }
 
     return keys
       .reduce((prev, key) => {
@@ -224,7 +226,6 @@ export class MediaApiFetcher implements Fetcher {
   private mapGiphyResponseToViewModel = (
     response: GiphyResponse,
   ): GiphyData => {
-    console.log(response);
     const { data, pagination } = response;
 
     const cardModels = data.map(gif => {
