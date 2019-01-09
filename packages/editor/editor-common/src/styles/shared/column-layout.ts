@@ -7,6 +7,7 @@ const columnLayoutSharedStyle = css`
     flex-direction: row;
     & > * {
       flex: 1;
+      min-width: 0;
     }
 
     @media screen and (max-width: ${gridMediumMaxWidth}px) {

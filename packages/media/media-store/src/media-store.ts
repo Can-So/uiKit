@@ -280,14 +280,20 @@ export class MediaStore {
     });
   };
 
+  // TODO [MS-1352]: add WEBP header
   getImage = (
     id: string,
     params?: MediaStoreGetFileImageParams,
+    controller?: AbortController,
   ): Promise<Blob> => {
-    return this.request(`/file/${id}/image`, {
-      params: extendImageParams(params),
-      authContext: { collectionName: params && params.collection },
-    }).then(mapResponseToBlob);
+    return this.request(
+      `/file/${id}/image`,
+      {
+        params: extendImageParams(params),
+        authContext: { collectionName: params && params.collection },
+      },
+      controller,
+    ).then(mapResponseToBlob);
   };
 
   getItems = (
@@ -350,19 +356,23 @@ export class MediaStore {
       method: 'GET',
       authContext: {},
     },
+    controller?: AbortController,
   ): Promise<Response> {
     const { authProvider } = this.config;
     const { method, authContext, params, headers, body } = options;
-
     const auth = await authProvider(authContext);
 
-    return request(`${auth.baseUrl}${path}`, {
-      method,
-      auth,
-      params,
-      headers,
-      body,
-    });
+    return request(
+      `${auth.baseUrl}${path}`,
+      {
+        method,
+        auth,
+        params,
+        headers,
+        body,
+      },
+      controller,
+    );
   }
 }
 

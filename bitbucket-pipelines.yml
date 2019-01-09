@@ -273,7 +273,7 @@ pipelines:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
-                - LANKDID=true yarn test:webdriver:browserstack:changed
+                - LANDKID=true yarn test:webdriver:browserstack:changed
       - step:
           name: Wait until no master is running
           script:
