@@ -367,11 +367,6 @@ function mentionPluginFactory(
                   mentionProvider.unsubscribe('mentionPlugin');
                 }
 
-                // Preload mentions, and populate cache
-                if (provider) {
-                  provider.filter('');
-                }
-
                 mentionProvider = provider;
                 setProvider(provider)(editorView.state, editorView.dispatch);
 
