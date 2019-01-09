@@ -517,19 +517,6 @@ export class MediaPluginState {
 
     this.view.dispatch(tr.setMeta('addToHistory', false));
     this.editingMediaId = undefined;
-
-    if (typeof fileIdentifier.id !== 'string') {
-      return;
-    }
-
-    this.stateManager.updateState(oldId, {
-      status: 'ready',
-      publicId: fileIdentifier.id,
-      dimensions: {
-        width: mediaNode.attrs.width,
-        height: mediaNode.attrs.height,
-      },
-    });
   };
 
   align = (layout: MediaSingleLayout, gridSize: number = 12): boolean => {

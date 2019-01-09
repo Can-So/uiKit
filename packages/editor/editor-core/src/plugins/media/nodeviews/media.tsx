@@ -133,14 +133,14 @@ class MediaNode extends Component<
       onClick,
       editorAppearance,
     } = this.props;
-    const { id, type, collection, url, __key } = node.attrs;
+    const { id, type, collection, url } = node.attrs;
 
     if (!this.state.viewContext) {
       return <CardView status="loading" dimensions={cardDimensions} />;
     }
 
     /** For new images, the media state will be loaded inside the plugin state */
-    const getState = this.pluginState.getMediaNodeState(__key);
+    const getState = this.pluginState.getMediaNodeState(id);
     const fileId = getState && getState.fileId ? getState.fileId : id;
     const identifier: Identifier =
       type === 'external'

@@ -61,8 +61,8 @@ export class SmartMediaEditor extends React.Component<
         next: async state => {
           if (state.status === 'processed') {
             const { name } = state;
-
             this.fileName = name;
+            // TODO do we need to set new URL second time? (in case first time it was set with preview.blob)
             this.setImageUrl(identifier);
             setTimeout(() => getFileSubscription.unsubscribe(), 0);
           } else if (state.status === 'error') {

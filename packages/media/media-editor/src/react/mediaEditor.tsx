@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import Spinner from '@atlaskit/spinner';
 import {
   EditorContainer,
   OutputArea,
@@ -7,6 +7,7 @@ import {
   HiddenTextArea,
   HiddenTextHelperDiv,
   SupplementaryCanvas,
+  SpinnerWrapper,
 } from './styled';
 import { Engine } from '../engine/engine';
 import {
@@ -61,9 +62,16 @@ export interface MediaEditorProps {
   onShapeParametersChanged: ShapeParametersChangedHandler;
 }
 
+export interface MediaEditorState {
+  isImageLoaded: boolean;
+}
+
 const defaultTextDirection = 'ltr';
 
-export class MediaEditor extends React.Component<MediaEditorProps, {}> {
+export class MediaEditor extends React.Component<
+  MediaEditorProps,
+  MediaEditorState
+> {
   private isUnmounted: boolean;
 
   // DOM elements that we need to create the engine
@@ -81,6 +89,9 @@ export class MediaEditor extends React.Component<MediaEditorProps, {}> {
   constructor(props: MediaEditorProps) {
     super(props);
     this.isUnmounted = false;
+    this.state = {
+      isImageLoaded: false,
+    };
   }
 
   componentDidMount() {
@@ -162,12 +173,20 @@ export class MediaEditor extends React.Component<MediaEditorProps, {}> {
   };
 
   render() {
+    const { isImageLoaded } = this.state;
     const { dimensions } = this.props;
     const width = `${dimensions.width}px`;
     const height = `${dimensions.height}px`;
 
+    const loadingSpinner = (
+      <SpinnerWrapper>
+        <Spinner size="large" invertColor={true} />
+      </SpinnerWrapper>
+    );
+
     return (
       <EditorContainer style={{ width, height }}>
+        {!isImageLoaded ? loadingSpinner : null}
         <OutputArea
           innerRef={this.handleOutputAreaInnerRef}
           style={{ width, height }}
@@ -206,6 +225,7 @@ export class MediaEditor extends React.Component<MediaEditorProps, {}> {
         if (this.isUnmounted || imageUrl !== this.props.imageUrl) {
           return;
         }
+        this.setState({ isImageLoaded: true });
 
         // Creating components for the engine
         const outputSize = MediaEditor.toOutputSize(this.props);
@@ -268,6 +288,7 @@ export class MediaEditor extends React.Component<MediaEditorProps, {}> {
     if (this.engine) {
       this.engine.unload();
       delete this.engine;
+      this.setState({ isImageLoaded: false });
     }
   }
 
