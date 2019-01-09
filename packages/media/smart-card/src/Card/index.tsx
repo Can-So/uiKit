@@ -12,11 +12,17 @@ export { CardAppearance, CardProps };
 
 type CardWithAnalyticsProps = CardProps & WithAnalyticsEventProps;
 
-const CardWithAnalytics = (props: CardWithAnalyticsProps) =>
-  isCardWithData(props) ? (
-    <CardWithDataRenderer {...props} />
-  ) : (
-    <CardWithURLRenderer {...props} />
-  );
+class CardWithAnalytics extends React.PureComponent<
+  CardWithAnalyticsProps,
+  any
+> {
+  render() {
+    return isCardWithData(this.props) ? (
+      <CardWithDataRenderer {...this.props} />
+    ) : (
+      <CardWithURLRenderer {...this.props} />
+    );
+  }
+}
 
 export const Card = withAnalyticsEvents()(CardWithAnalytics);
