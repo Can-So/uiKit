@@ -36,7 +36,6 @@
     "@atlaskit/spinner": "^9.0.13",
     "@atlaskit/util-shared-styles": "^2.10.3",
     "@types/bricks.js": "^1.8.0",
-    "axios": "^0.17.1",
     "bricks.js": "^1.8.0",
     "dateformat": "^1.0.12",
     "eventemitter2": "^4.1.0",
