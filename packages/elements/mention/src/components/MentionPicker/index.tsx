@@ -189,7 +189,7 @@ export class MentionPicker extends React.PureComponent<
 
     UtilAnalytics.fireAnalyticsMentionTypeaheadEvent(this.props)(
       'rendered',
-      stats ? stats.duration : undefined,
+      stats && stats.duration,
       mentions.map(mention => mention.id),
       query,
     );

@@ -382,7 +382,7 @@ function mentionPluginFactory(
 
                     fireEvent(
                       buildTypeAheadRenderedPayload(
-                        stats ? stats.duration : undefined,
+                        stats && stats.duration,
                         mentions.map(mention => mention.id),
                         query || '',
                       ),
