@@ -1,5 +1,10 @@
 # @atlaskit/media-viewer
 
+## 32.0.0
+- [major] [c91adfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c91adfe):
+
+  - remove customVideoPlayer featureFlag prop and enable by default
+
 ## 31.0.0
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/media-card@49.0.0

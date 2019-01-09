@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 29.0.1
+- [patch] [c91adfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c91adfe):
+
+  - remove customVideoPlayer featureFlag prop and enable by default
+
 ## 29.0.0
 - [patch] [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
 
