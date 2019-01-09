@@ -684,9 +684,8 @@ describe('UploadService', () => {
       });
       uploadService.addFiles([file]);
 
-      expect(fileStreamCacheSpy).toHaveBeenCalledTimes(2);
+      expect(fileStreamCacheSpy).toHaveBeenCalledTimes(1);
       expect(fileStreamCacheSpy.mock.calls[0][0]).toBe('uuid1');
-      expect(fileStreamCacheSpy.mock.calls[1][0]).toBe('uuid1-some-collection');
     });
   });
 });
