@@ -9,7 +9,6 @@ import ErrorView from './errorView/errorView';
 import { SpinnerView } from './spinnerView/spinnerView';
 import { Selection, editorClose } from '../../../actions/editorClose';
 import { editorShowError } from '../../../actions/editorShowError';
-import { editorShowImage } from '../../../actions/editorShowImage';
 import { EditorViewProps } from '@atlaskit/media-editor';
 import editorViewLoader from './editorViewLoader';
 export interface MainEditorViewStateProps {
@@ -27,10 +26,6 @@ export interface MainEditorViewOwnProps {
 export interface MainEditorViewDispatchProps {
   readonly onCloseEditor: (selection: Selection) => void;
   readonly onShowEditorError: (error: EditorError) => void;
-  readonly onShowEditorImage: (
-    imageUrl: string,
-    originalFile?: FileReference,
-  ) => void;
   readonly onDeselectFile: (fileId: string) => void;
 }
 
@@ -139,8 +134,6 @@ export default connect<
 >(
   ({ editorData }) => ({ editorData }),
   dispatch => ({
-    onShowEditorImage: (imageUrl, originalFile) =>
-      dispatch(editorShowImage(imageUrl, originalFile)),
     onShowEditorError: ({ message, retryHandler }) =>
       dispatch(editorShowError(message, retryHandler)),
     onCloseEditor: (selection: Selection) => dispatch(editorClose(selection)),

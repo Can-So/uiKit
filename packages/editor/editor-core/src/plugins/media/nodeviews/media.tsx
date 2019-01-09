@@ -107,7 +107,11 @@ class MediaNode extends Component<
     this.hasBeenMounted = false;
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: Readonly<MediaNodeProps & ImageLoaderProps>) {
+    if (prevProps.node.attrs.id !== this.props.node.attrs.id) {
+      this.pluginState.handleMediaNodeUnmount(prevProps.node);
+      this.handleNewNode(this.props);
+    }
     this.pluginState.updateElement();
   }
 
@@ -138,7 +142,6 @@ class MediaNode extends Component<
     /** For new images, the media state will be loaded inside the plugin state */
     const getState = this.pluginState.getMediaNodeState(__key);
     const fileId = getState && getState.fileId ? getState.fileId : id;
-
     const identifier: Identifier =
       type === 'external'
         ? {

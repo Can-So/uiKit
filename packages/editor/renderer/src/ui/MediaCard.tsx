@@ -6,6 +6,7 @@ import {
   Card,
   CardView,
   CardOnClickCallback,
+  FileIdentifier,
 } from '@atlaskit/media-card';
 import { Context, ImageResizeMode } from '@atlaskit/media-core';
 import { MediaType } from '@atlaskit/adf-schema';
@@ -101,6 +102,7 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       id,
       type,
       collection,
+      occurrenceKey,
       cardDimensions,
       resizeMode,
       rendererAppearance,
@@ -121,12 +123,26 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       );
     }
 
-    let identifier: any = {
+    if (!id) {
+      return (
+        <CardView
+          status="error"
+          mediaItemType={type}
+          dimensions={cardDimensions}
+        />
+      );
+    }
+
+    // TODO do we support links still?
+
+    let identifier: FileIdentifier = {
       id,
-      mediaItemType: type,
+      mediaItemType: 'file',
       collectionName: collection,
+      occurrenceKey: occurrenceKey,
     };
 
+    console.log('renderer <Card', identifier);
     return (
       <Card
         identifier={identifier}

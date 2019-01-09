@@ -179,7 +179,10 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
                 }
                 onUploadStart={(newFileIdentifier: FileIdentifier) => {
                   mediaState.onCloseEditing();
-                  mediaState.onFinishEditing(newFileIdentifier, node);
+                  mediaState.onFinishEditing(newFileIdentifier);
+                }}
+                onError={() => {
+                  // TODO deal with that
                 }}
                 onFinish={() => {
                   mediaState.onCloseEditing();

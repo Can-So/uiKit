@@ -8,6 +8,7 @@ import Spinner from '@atlaskit/spinner';
 import { intlShape, IntlProvider } from 'react-intl';
 import EditorView from './editorView/editorView';
 import { Blanket, SpinnerWrapper } from './styled';
+import { fileToBase64 } from '../util';
 
 export interface SmartMediaEditorProps {
   identifier: FileIdentifier;
@@ -51,20 +52,26 @@ export class SmartMediaEditor extends React.Component<
 
   getFile = async (identifier: FileIdentifier) => {
     const { context, onError } = this.props;
-    const { collectionName } = identifier;
+    const { collectionName, occurrenceKey } = identifier;
     const id = await identifier.id;
 
     const getFileSubscription = context.file
-      .getFileState(id, { collectionName })
+      .getFileState(id, { collectionName, occurrenceKey })
       .subscribe({
-        next: state => {
+        next: async state => {
           if (state.status === 'processed') {
             const { name } = state;
 
             this.fileName = name;
-            // we can only ask for the image once the file is processed
             this.setImageUrl(identifier);
             setTimeout(() => getFileSubscription.unsubscribe(), 0);
+          } else if (state.status === 'error') {
+            onError(state.message);
+          } else if (state.preview) {
+            const base64ImageUrl = await fileToBase64(state.preview.blob);
+            this.setState({
+              imageUrl: base64ImageUrl,
+            });
           }
         },
         error: error => {
@@ -79,6 +86,7 @@ export class SmartMediaEditor extends React.Component<
     const id = await identifier.id;
     const imageUrl = await context.getImageUrl(id, {
       collection: identifier.collectionName,
+      mode: 'full-fit',
     });
 
     this.setState({
@@ -89,20 +97,18 @@ export class SmartMediaEditor extends React.Component<
   onSave = (imageData: string) => {
     const { fileName } = this;
     const { context, identifier, onUploadStart, onFinish } = this.props;
-    const { collectionName } = identifier;
+    const { collectionName, occurrenceKey } = identifier;
     const uploadableFile: UploadableFile = {
       content: imageData,
       collection: collectionName,
       name: fileName,
     };
     const id = uuid();
-    const occurrenceKey = uuid();
     const touchedFiles = context.file.touchFiles(
       [
         {
           fileId: id,
           collection: collectionName,
-          occurrenceKey,
         },
       ],
       collectionName,
@@ -120,7 +126,6 @@ export class SmartMediaEditor extends React.Component<
 
     const newFileIdentifier: FileIdentifier = {
       id,
-      occurrenceKey,
       collectionName,
       mediaItemType: 'file',
     };

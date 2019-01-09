@@ -1,9 +1,15 @@
 import { State } from '../domain';
 
-import { EDITOR_SHOW_IMAGE } from '../actions/editorShowImage';
+import {
+  EditorShowImageAction,
+  isEditorShowImageAction,
+} from '../actions/editorShowImage';
 
-export default function editorShowImage(state: State, action: any): State {
-  if (action.type === EDITOR_SHOW_IMAGE) {
+export default function editorShowImage(
+  state: State,
+  action: EditorShowImageAction,
+): State {
+  if (isEditorShowImageAction(action)) {
     const { editorData } = state;
     const { imageUrl } = action;
     const originalFile =

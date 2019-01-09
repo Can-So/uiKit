@@ -293,6 +293,7 @@ export class FileFetcher {
       collectionName: collection,
       occurrenceKey,
     });
+    console.log('key on upload', key);
     fileStreamsCache.set(key, subject);
 
     // We should report progress asynchronously, since this is what consumer expects

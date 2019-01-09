@@ -445,7 +445,7 @@ export class MediaPluginState {
       return;
     }
 
-    this.editingMediaId = selected.attrs.__key;
+    this.editingMediaId = selected.attrs.id;
     this.showEditingDialog = true;
 
     // triggers contentComponent render
@@ -459,7 +459,7 @@ export class MediaPluginState {
       return;
     }
 
-    const oldId = this.selectedMediaNode()!.attrs.__key;
+    const oldId = this.selectedMediaNode()!.attrs.id;
     this.editingMediaId = oldId;
 
     const mediaNodeWithPos = this.findMediaNode(oldId);
@@ -481,7 +481,7 @@ export class MediaPluginState {
     this.view.dispatch(this.view.state.tr.setMeta(stateKey, 'close-edit'));
   };
 
-  onFinishEditing = (fileIdentifier: FileIdentifier, oldNode: Node) => {
+  onFinishEditing = (fileIdentifier: FileIdentifier) => {
     this.showEditingDialog = false;
 
     const oldId = this.editingMediaId;
@@ -499,7 +499,7 @@ export class MediaPluginState {
     const { getPos, node: mediaNode } = mediaNodeWithPos;
 
     const newNode = this.view.state.schema.nodes.media!.create({
-      ...oldNode.attrs,
+      ...mediaNode.attrs,
       id: fileIdentifier.id,
     });
 
@@ -624,7 +624,7 @@ export class MediaPluginState {
         }
 
         const { node } = nodeWithPos;
-        if (node.attrs.__key === id) {
+        if (node.attrs.id === id) {
           return nodeWithPos;
         }
 
