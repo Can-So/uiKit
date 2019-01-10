@@ -1,4 +1,3 @@
-import axios from 'axios';
 import * as url from 'url';
 import { Auth, FileDetails } from '@atlaskit/media-core';
 import {
@@ -13,6 +12,8 @@ import {
 import { mapAuthToAuthHeaders } from '../../domain/auth';
 
 const METADATA_POLL_INTERVAL_MS = 2000;
+const giphyApiKey = 'lBOxhhz1BM62Y3JsK0iQv1pRYyOGUjR8';
+const toJson = (response: Response) => response.json();
 type Method = 'GET' | 'POST' | 'DELETE';
 
 export interface GiphyImage {
@@ -82,7 +83,7 @@ export class MediaApiFetcher implements Fetcher {
     folderId: string,
     cursor?: string,
   ): Promise<ServiceFolder> {
-    return this.query<{ data: ServiceFolder }>(
+    return this.query(
       `${pickerUrl(auth.baseUrl)}/service/${serviceName}/${accountId}/folder`,
       'GET',
       {
@@ -91,16 +92,18 @@ export class MediaApiFetcher implements Fetcher {
         cursor,
       },
       mapAuthToAuthHeaders(auth),
-    ).then(({ data: serviceFolder }) => {
-      if (serviceName === 'dropbox') {
-        return {
-          ...serviceFolder,
-          items: this.sortDropboxFiles(serviceFolder.items),
-        };
-      } else {
-        return serviceFolder;
-      }
-    });
+    )
+      .then(toJson)
+      .then(({ data: serviceFolder }) => {
+        if (serviceName === 'dropbox') {
+          return {
+            ...serviceFolder,
+            items: this.sortDropboxFiles(serviceFolder.items),
+          };
+        } else {
+          return serviceFolder;
+        }
+      });
   }
 
   // TODO [MS-725]: remove
@@ -110,7 +113,7 @@ export class MediaApiFetcher implements Fetcher {
     collection?: string,
   ): Promise<FileDetails> {
     return new Promise((resolve, reject) => {
-      return this.query<{ data: FileDetails }>(
+      return this.query(
         `${fileStoreUrl(auth.baseUrl)}/file/${fileId}`,
         'GET',
         {
@@ -118,6 +121,7 @@ export class MediaApiFetcher implements Fetcher {
         },
         mapAuthToAuthHeaders(auth),
       )
+        .then(toJson)
         .then(({ data: file }) => {
           if (
             file.processingStatus === 'succeeded' ||
@@ -148,17 +152,18 @@ export class MediaApiFetcher implements Fetcher {
       'GET',
       { mode: 'full-fit' },
       mapAuthToAuthHeaders(auth),
-      'blob',
-    );
+    ).then(response => response.blob());
   }
 
   getServiceList(auth: Auth): Promise<ServiceAccountWithType[]> {
-    return this.query<{ data: Service[] }>(
+    return this.query(
       `${pickerUrl(auth.baseUrl)}/accounts`,
       'GET',
       {},
       mapAuthToAuthHeaders(auth),
-    ).then(({ data: services }) => flattenAccounts(services));
+    )
+      .then(toJson)
+      .then(({ data: services }) => flattenAccounts(services));
   }
 
   unlinkCloudAccount(auth: Auth, accountId: string): Promise<void> {
@@ -167,25 +172,40 @@ export class MediaApiFetcher implements Fetcher {
       'DELETE',
       {},
       mapAuthToAuthHeaders(auth),
-    );
+    ).then(toJson);
+  }
+
+  stringifyParams(queryParams: {
+    [key: string]: string | undefined | number;
+  }): string {
+    const keys = Object.keys(queryParams);
+    if (!keys.length) {
+      return '';
+    }
+
+    const stringifiedParams = keys
+      .map(key => {
+        const value = queryParams[key];
+        return value !== undefined ? `${key}=${value}` : undefined;
+      })
+      .filter(key => !!key)
+      .join('&');
+
+    return `?${stringifiedParams}`;
   }
 
   fetchTrendingGifs = (offset?: number): Promise<GiphyData> => {
     const baseUrl = 'https://api.giphy.com/v1/gifs/trending';
-
-    const requestConfig = {
-      url: `${baseUrl}`,
-      params: {
-        // TODO Move these keys somewhere in config MSW-406
-        api_key: 'lBOxhhz1BM62Y3JsK0iQv1pRYyOGUjR8',
-        rating: 'pg',
-        offset,
-      },
+    const params = {
+      api_key: giphyApiKey,
+      rating: 'pg',
+      offset,
     };
+    const url = `${baseUrl}${this.stringifyParams(params)}`;
 
-    return axios
-      .request(requestConfig)
-      .then(response => this.mapGiphyResponseToViewModel(response.data));
+    return fetch(url)
+      .then(toJson)
+      .then(this.mapGiphyResponseToViewModel);
   };
 
   fetchGifsRelevantToSearch = (
@@ -193,20 +213,17 @@ export class MediaApiFetcher implements Fetcher {
     offset?: number,
   ): Promise<GiphyData> => {
     const baseUrl = 'https://api.giphy.com/v1/gifs/search';
-
-    const requestConfig = {
-      url: `${baseUrl}`,
-      params: {
-        api_key: 'lBOxhhz1BM62Y3JsK0iQv1pRYyOGUjR8',
-        rating: 'pg',
-        q: query,
-        offset,
-      },
+    const params = {
+      api_key: giphyApiKey,
+      rating: 'pg',
+      q: query,
+      offset,
     };
+    const url = `${baseUrl}${this.stringifyParams(params)}`;
 
-    return axios
-      .request(requestConfig)
-      .then(response => this.mapGiphyResponseToViewModel(response.data));
+    return fetch(url)
+      .then(toJson)
+      .then(this.mapGiphyResponseToViewModel);
   };
 
   private mapGiphyResponseToViewModel = (
@@ -242,54 +259,27 @@ export class MediaApiFetcher implements Fetcher {
     };
   };
 
-  private parsePayload(
-    method: Method,
-    payload: any,
-  ): { data?: any; params?: any } {
-    if (method === 'GET') {
-      return { params: payload };
-    } else {
-      return { data: payload };
-    }
-  }
-
-  private query<R = void>(
-    url: string,
-    method: Method,
-    payload: any,
-    authHeaders: AuthHeaders,
-  ): Promise<R>;
   private query(
-    url: string,
+    baseUrl: string,
     method: Method,
     payload: any,
     authHeaders: AuthHeaders,
-    responseType: 'blob',
-  ): Promise<Blob>;
-  private query<R = void>(
-    url: string,
-    method: Method,
-    payload: any,
-    authHeaders: AuthHeaders,
-    responseType?: string,
-  ): Promise<R> | Promise<Blob> {
+  ): Promise<Response> {
     const contentType = 'application/json; charset=utf-8';
-    const headers = {
+    const headers = new Headers({
       ...authHeaders,
       'Content-Type': contentType,
-    };
-    const { data, params } = this.parsePayload(method, payload);
-    const config = {
-      url,
+    });
+    const params = method === 'GET' ? this.stringifyParams(payload) : '';
+    const body = method !== 'GET' ? JSON.stringify(payload) : undefined;
+    const url = `${baseUrl}${params}`;
+    const request = new Request(url, {
       method,
       headers,
-      data,
-      params,
-      contentType,
-      responseType,
-    };
+      body,
+    });
 
-    return axios.request(config).then(response => response.data);
+    return fetch(request);
   }
 
   private isFolder(item: ServiceFolderItem): boolean {
