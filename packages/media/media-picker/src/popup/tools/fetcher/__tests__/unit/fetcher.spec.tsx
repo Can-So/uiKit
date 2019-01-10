@@ -1,6 +1,5 @@
-jest.mock('axios');
-
-import axios from 'axios';
+import 'whatwg-fetch';
+import * as fetchMock from 'fetch-mock';
 import { Service } from '../../../../domain';
 import {
   MediaApiFetcher,
@@ -10,18 +9,7 @@ import {
 } from '../../fetcher';
 
 describe('Fetcher', () => {
-  let querySpy = jest.fn();
-
-  beforeEach(() => {
-    (axios.request as any).mockReturnValue(Promise.resolve({}));
-
-    querySpy = jest.fn();
-    querySpy.mockReturnValue(Promise.resolve({}));
-  });
-
-  afterEach(() => {
-    (axios.request as any).mockReset();
-  });
+  afterEach(fetchMock.restore);
 
   describe('flattenAccounts()', () => {
     const services: Service[] = [
@@ -92,33 +80,24 @@ describe('Fetcher', () => {
       it('should pass rating=pg as a query parameter', () => {
         const offset = 0;
         const fetcher = new MediaApiFetcher();
-
+        fetchMock.get('*', {});
         fetcher.fetchTrendingGifs(offset);
-        expect(axios.request).toHaveBeenCalledTimes(1);
-        expect((axios.request as any).mock.calls[0][0].params.rating).toEqual(
-          'pg',
-        );
+
+        expect(fetchMock.lastUrl()).toContain('rating=pg');
       });
 
       it('should append passed in offset to the query string when it is greater than 0', () => {
         const offset = 25;
         const fetcher = new MediaApiFetcher();
-
+        fetchMock.get('*', {});
         fetcher.fetchTrendingGifs(offset);
-        expect(axios.request).toHaveBeenCalledTimes(1);
-        expect((axios.request as any).mock.calls[0][0].params.offset).toEqual(
-          offset,
-        );
+        expect(fetchMock.lastUrl()).toContain(`offset=${offset}`);
       });
 
       it('should map the GiphyResponse into GiphyCardModels', async () => {
         const fetcher = new MediaApiFetcher();
-        (axios.request as any).mockReturnValue(
-          Promise.resolve({ data: response }),
-        );
-
+        fetchMock.get('*', response);
         const result = await fetcher.fetchTrendingGifs();
-        expect(axios.request).toHaveBeenCalledTimes(1);
         expect(result).toEqual({
           totalResultCount: 100,
           cardModels: [
@@ -144,47 +123,35 @@ describe('Fetcher', () => {
       it('should pass rating=pg as a query parameter', () => {
         const queryString = 'some-gif-search';
         const fetcher = new MediaApiFetcher();
-
+        fetchMock.get('*', {});
         fetcher.fetchGifsRelevantToSearch(queryString);
-        expect(axios.request).toHaveBeenCalledTimes(1);
-        expect((axios.request as any).mock.calls[0][0].params.rating).toEqual(
-          'pg',
-        );
+
+        expect(fetchMock.lastUrl()).toContain('rating=pg');
       });
 
       it('should append passed in query string to the queried url', () => {
         const queryString = 'some-gif-search';
         const fetcher = new MediaApiFetcher();
-
+        fetchMock.get('*', {});
         fetcher.fetchGifsRelevantToSearch(queryString);
-        expect(axios.request).toHaveBeenCalledTimes(1);
-        expect((axios.request as any).mock.calls[0][0].params.q).toEqual(
-          queryString,
-        );
+        expect(fetchMock.lastUrl()).toContain(`q=${queryString}`);
       });
 
       it('should append passed in offset to the query string when it is greater than 0', () => {
         const queryString = 'some-gif-search';
         const offset = 25;
         const fetcher = new MediaApiFetcher();
-
+        fetchMock.get('*', {});
         fetcher.fetchGifsRelevantToSearch(queryString, offset);
-
-        expect(axios.request).toHaveBeenCalledTimes(1);
-        expect((axios.request as any).mock.calls[0][0].params.offset).toEqual(
-          offset,
-        );
+        expect(fetchMock.lastUrl()).toContain(`offset=${offset}`);
       });
 
       it('should map the GiphyResponse into GiphyCardModels', async () => {
         const queryString = 'some-gif-search';
         const fetcher = new MediaApiFetcher();
-        (axios.request as any).mockReturnValue(
-          Promise.resolve({ data: response }),
-        );
+        fetchMock.get('*', response);
 
         const result = await fetcher.fetchGifsRelevantToSearch(queryString);
-        expect(axios.request).toHaveBeenCalledTimes(1);
         expect(result).toEqual({
           totalResultCount: 100,
           cardModels: [
