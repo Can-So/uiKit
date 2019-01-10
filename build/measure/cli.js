@@ -36,7 +36,7 @@ let c = meow(
 const paths = c.input;
 
 if (paths) {
-  executeMeasure(paths, c).then(errors => {
+  executeMeasure(paths, c).then((errors = []) => {
     if (errors.length > 0) {
       console.log(
         chalk.red('Bundle size build failed with the following errors:'),
