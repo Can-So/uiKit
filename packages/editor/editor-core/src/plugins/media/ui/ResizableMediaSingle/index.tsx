@@ -23,6 +23,7 @@ const imageAlignmentMap = {
 
 export default class ResizableMediaSingle extends React.Component<Props> {
   state = {
+    // TODO: treat it as video until we know the type
     isVideoFile: false,
   };
 
@@ -43,6 +44,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
     }
 
     const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
+    // TODO: don't use fileStreamsCache directly
     const state = await fileStreamsCache.getState(getMediaNode!.attrs.id);
     if (state.status !== 'error' && state.mediaType === 'video') {
       this.setState({
