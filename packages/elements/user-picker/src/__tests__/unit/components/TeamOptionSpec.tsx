@@ -13,7 +13,6 @@ import {
 import { Team } from 'src/types';
 
 describe('Team Option', () => {
-  // todo - create using funciton ?
   const basicTeam: Team = {
     id: 'team-7',
     name: 'Team-1',
