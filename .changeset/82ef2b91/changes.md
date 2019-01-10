@@ -1,0 +1,1 @@
+- ED-5493 Fix Media Cards bigger in renderer than editor
