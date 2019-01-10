@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "@atlaskit/global-navigation", "type": "minor" },
+    { "name": "@atlaskit/notification-indicator", "type": "minor" }
+  ],
+  "dependents": []
+}
