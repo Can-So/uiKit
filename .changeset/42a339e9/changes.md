@@ -1,0 +1,1 @@
+- only apply css pixelation to zoomed in images
