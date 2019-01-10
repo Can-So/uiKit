@@ -1,0 +1,122 @@
+[
+  {
+    "id": "src.main",
+    "name": "main",
+    "stats": {
+      "size": 35683,
+      "gzipSize": 8899
+    }
+  },
+  {
+    "id": "node_modules.main",
+    "name": "node_modules [main]",
+    "stats": {
+      "size": 1557943,
+      "gzipSize": 503725
+    }
+  },
+  {
+    "id": "node_modules.async",
+    "name": "node_modules [async]",
+    "stats": {
+      "size": 347159,
+      "gzipSize": 92038
+    }
+  },
+  {
+    "id": "atlaskit.core.main",
+    "name": "main",
+    "stats": {
+      "size": 468134,
+      "gzipSize": 101839
+    }
+  },
+  {
+    "id": "atlaskit.core.async",
+    "name": "async",
+    "stats": {
+      "size": 178809,
+      "gzipSize": 38083
+    }
+  },
+  {
+    "id": "atlaskit.editor.main",
+    "name": "main",
+    "stats": {
+      "size": 711694,
+      "gzipSize": 181610
+    }
+  },
+  {
+    "id": "atlaskit.editor.async",
+    "name": "async",
+    "stats": {
+      "size": 30748,
+      "gzipSize": 7863
+    }
+  },
+  {
+    "id": "atlaskit.elements.main",
+    "name": "main",
+    "stats": {
+      "size": 98940,
+      "gzipSize": 25006
+    }
+  },
+  {
+    "id": "atlaskit.elements.async",
+    "name": "async",
+    "stats": {
+      "size": 68611,
+      "gzipSize": 20670
+    }
+  },
+  {
+    "id": "atlaskit.media.main",
+    "name": "main",
+    "stats": {
+      "size": 211031,
+      "gzipSize": 48576
+    }
+  },
+  {
+    "id": "atlaskit.media.async",
+    "name": "async",
+    "stats": {
+      "size": 776473,
+      "gzipSize": 193175
+    }
+  },
+  {
+    "id": "atlaskit.people-and-teams.main",
+    "name": "main",
+    "stats": {
+      "size": 84329,
+      "gzipSize": 14825
+    }
+  },
+  {
+    "id": "atlaskit.teamwork-ecosystem.async",
+    "name": "async",
+    "stats": {
+      "size": 625,
+      "gzipSize": 368
+    }
+  },
+  {
+    "id": "combined.main",
+    "name": "main",
+    "stats": {
+      "size": 3162948,
+      "gzipSize": 894904
+    }
+  },
+  {
+    "id": "combined.async",
+    "name": "async",
+    "stats": {
+      "size": 1399431,
+      "gzipSize": 354010
+    }
+  }
+]
