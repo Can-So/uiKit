@@ -87,7 +87,15 @@ export default class Page {
     });
   }
 
-  type(selector, text) {
+  async type(selector, text) {
+    if (Array.isArray(text)) {
+      while (text.length > 1) {
+        let first = text.shift();
+        await this.browser.addValue(selector, first);
+      }
+
+      return this.browser.addValue(selector, text[0]);
+    }
     return this.browser.addValue(selector, text);
   }
 
