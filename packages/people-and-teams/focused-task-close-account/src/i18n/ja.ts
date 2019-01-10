@@ -23,27 +23,27 @@ export default {
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
     'アカウントを削除すると:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
-    '{fullName}はAtlassianのすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。 現在アクセス権限のあるサービス：',
+    '{fullName}は Atlassian のすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。 現在アクセス権限のあるサービス：',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
-    'Atlassianのすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。 現在アクセス権限のあるサービス：',
+    'Atlassian のすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。 現在アクセス権限のあるサービス：',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName}はAtlassianのすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。  現在、コミュニティやMarketplaceなどのサービスを除いて、アクセス権限はありません。',
+    '{fullName}は Atlassian のすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。  現在、コミュニティや Marketplace などのサービスを除いて、アクセス権限はありません。',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
-    'Atlassianのすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。  現在、コミュニティやMarketplaceなどのサービスを除いて、アクセス権限はありません。',
+    'Atlassian のすべてのアカウントサービスへの<b>アクセス権限を直ちに失います</b>。  現在、コミュニティや Marketplace などのサービスを除いて、アクセス権限はありません。',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
-    'Atlassian コミュニティやMarketplaceなどの他のAtlassian アカウントサービス。',
+    'Atlassian コミュニティや Marketplace など、その他の Atlassian アカウントサービス。',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.admin':
-    '作成されたコンテンツはAtlassian アカウントサービスから削除されません。',
+    '作成されたコンテンツは Atlassian アカウントサービスから削除されません。',
   'focused-task-close-account.delete-account.overview.paragraph.content-created.self':
-    '作成されたコンテンツはAtlassian アカウントサービスから削除されません。',
+    '作成されたコンテンツは Atlassian アカウントサービスから削除されません。',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.admin':
-    '例えば、製品で作成したページ、課題、コメントなど。',
+    '製品で作成したページ、課題、コメントなど。',
   'focused-task-close-account.delete-account.overview.inline-dialog.content-created.self':
-    '例えば、製品で作成したページ、課題、コメントなど。',
+    '製品で作成したページ、課題、コメントなど。',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.admin':
-    '正当な業務上または法律上の目的で必要とされる場合を除き、30日以内にAtlassian アカウントサービスから氏名やメールアドレスなどの<b>個人データは削除</b>されます。',
+    '正当な業務上または法律上の目的で必要とされる場合を除き、30日以内に Atlassian アカウントサービスから氏名やメールアドレスなどの<b>個人データは削除</b>されます。',
   'focused-task-close-account.delete-account.overview.paragraph.personal-data-will-be-deleted.self':
-    '正当な業務上または法律上の目的で必要とされる場合を除き、30日以内にAtlassian アカウントサービスから氏名やメールアドレスなどの<b>個人データは削除</b>されます。',
+    '正当な業務上または法律上の目的で必要とされる場合を除き、30日以内に Atlassian アカウントサービスから氏名やメールアドレスなどの<b>個人データは削除</b>されます。',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.admin':
     '個人データを保存している可能性のあるアプリの一覧をメールでお知らせします。',
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
@@ -59,9 +59,9 @@ export default {
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
     '財務報告のために保管する必要がある購入に関する情報。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
-    'アカウントの削除を示す記録。規制当局に提供する必要があるかもしれません。',
+    'アカウントの削除を示す記録。規制当局への提出の必要がある場合があります。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.self':
-    'アカウントの削除を示す記録。規制当局に提供する必要があるかもしれません。',
+    'アカウントの削除を示す記録。規制当局への提出の必要がある場合があります。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.admin':
     '進行中の訴訟の一部であり、法律上、保存する必要のあるデータ。',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li3.self':
@@ -75,9 +75,43 @@ export default {
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p3.self':
     'お客様はお住まいの地域の監督当局に苦情を提起する権利を有しています。',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
-    'あなた、または他のユーザーがAtlassian製品に機能を追加するアプリケーションをインストールしている可能性があります。これらのアプリはユーザーのプロフィール情報を保存している可能性があります。',
+    'あなた、または他のユーザーが Atlassian 製品に機能を追加するアプリケーションをインストールしている可能性があります。これらのアプリはユーザーのプロファイル情報を保存している可能性があります。',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    'あなた、または他のユーザーがAtlassian製品に機能を追加するアプリケーションをインストールしている可能性があります。これらのアプリはプロフィール情報を保存している可能性があります。',
+    'あなた、または他のユーザーが Atlassian 製品に機能を追加するアプリケーションをインストールしている可能性があります。これらのアプリはプロファイル情報を保存している可能性があります。',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Deactivate account',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Deactivate account',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    "You're about to deactivate the user account of:",
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    "You're about to deactivate the user account of:",
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'You can reactivate the account at any time.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'You can reactivate the account at any time.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'When you deactivate the account:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'When you deactivate the account:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    "We'll no longer bill you for them.",
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    "We'll no longer bill you for them.",
   'focused-task-close-account.delete-account.content-preview.heading':
     'アカウントのプレビュー',
   'focused-task-close-account.delete-account.drop-down-expand-button':
