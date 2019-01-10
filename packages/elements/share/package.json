@@ -34,8 +34,10 @@
     "react-intl": "^2.6.0"
   },
   "devDependencies": {
+    "@atlaskit/button": "^10.1.1",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/i18n-tools": "^0.4.0",
+    "@atlaskit/inline-dialog": "^9.0.13",
     "@atlaskit/section-message": "^1.0.14",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
