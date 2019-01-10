@@ -143,6 +143,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
     const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
     const isVideoFile =
       getMediaNode && getMediaNode.attrs.__fileMimeType.match('video/');
+    // await mediaContext.getState().type
     snapPoints = isVideoFile
       ? snapPoints.filter(width => width > 320)
       : snapPoints;

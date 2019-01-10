@@ -30,6 +30,16 @@ export class FileStreamCache {
     return this.fileStreams.get(id);
   }
 
+  getState(id: string): Promise<FileState> | undefined {
+    const state = this.get(id);
+
+    if (state) {
+      return state.toPromise();
+    }
+
+    return undefined;
+  }
+
   getOrInsert(
     id: string,
     callback: () => Observable<FileState>,
