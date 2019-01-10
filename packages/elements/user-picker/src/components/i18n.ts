@@ -23,4 +23,18 @@ export const messages = defineMessages({
     defaultMessage: 'Clear',
     description: 'Tooltip for clear button in the single user select field.',
   },
+  memberCount: {
+    id: 'fabric.elements.user-picker.team.member.count',
+    defaultMessage:
+      '{count} {count, plural, one {member} other {members}}{includes, select, true {, including you} other {}}',
+    description:
+      'Number of members in the team and whether it includes the current user',
+  },
+  plus50Members: {
+    id: 'fabric.elements.user-picker.team.member.50plus',
+    defaultMessage:
+      '50+ members{includes, select, true {, including you} other {}}',
+    description:
+      'Number of members in a team exceeds 50 and whether it includes the current user',
+  },
 });

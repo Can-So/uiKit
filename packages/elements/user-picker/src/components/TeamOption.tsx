@@ -1,11 +1,13 @@
 import { AvatarItem } from '@atlaskit/avatar';
 import { colors } from '@atlaskit/theme';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { Team } from '../types';
 import { HighlightText } from './HighlightText';
 import { SizeableAvatar } from './SizeableAvatar';
 import { hasValue } from './utils';
+import { messages } from './i18n';
 
 const AvatarComponent = styled.div`
   &,
@@ -79,14 +81,29 @@ export class TeamOption extends React.PureComponent<TeamOptionProps> {
     return result;
   };
 
-  private renderByline = () =>
-    this.props.team.description ? ( //todo - verfiy this logic
-      <TextWrapper color={this.props.isSelected ? colors.N50 : colors.N200}>
-        {this.props.team.description}
+  private renderByline = () => {
+    const {
+      isSelected,
+      team: { memberCount, includesYou },
+    } = this.props;
+
+    // Member count should always be present in the data that's apssed by Legion. But for some reason
+    // if it's not there, Do not show the byline if the member count is not included
+    if (memberCount == null) {
+      return undefined;
+    }
+
+    return (
+      <TextWrapper color={isSelected ? colors.N50 : colors.N200}>
+        <FormattedMessage
+          {...(memberCount > 50
+            ? messages.plus50Members
+            : messages.memberCount)}
+          values={{ count: memberCount, includes: includesYou }}
+        />
       </TextWrapper>
-    ) : (
-      undefined
     );
+  };
 
   render() {
     return (
