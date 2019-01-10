@@ -17,7 +17,13 @@ const { buildCacheGroups, createWebpackConfig } = require('./utils/webpack');
 const { prepareForPrint } = require('./utils/print');
 const { printReport } = require('./reporters/console');
 
-module.exports = function main(filePath, isAnalyze, isJson, isLint) {
+module.exports = function main(
+  filePath,
+  isAnalyze,
+  isJson,
+  isLint,
+  updateSnapshot,
+) {
   return new Promise((resolve, reject) => {
     const measureOutputPath = path.join(
       process.cwd(),
@@ -198,7 +204,10 @@ module.exports = function main(filePath, isAnalyze, isJson, isLint) {
         stat => stat.isTooBig,
       );
 
-      if (!isLint || (isLint && !statsExceededSizeLimit.length)) {
+      if (
+        (updateSnapshot && !isLint) ||
+        (isLint && !statsExceededSizeLimit.length)
+      ) {
         fs.writeFileSync(
           prevStatsPath,
           JSON.stringify(clearStats(stats), null, 2),

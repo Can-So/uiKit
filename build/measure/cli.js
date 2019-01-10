@@ -29,6 +29,10 @@ let c = meow(
         type: 'boolean',
         default: false,
       },
+      updateSnapshot: {
+        type: 'boolean',
+        default: false,
+      },
     },
   },
 );
@@ -60,7 +64,13 @@ async function executeMeasure(paths, c, errors = []) {
   const path = paths.pop();
 
   try {
-    await measure(path, c.flags.analyze, c.flags.json, c.flags.lint);
+    await measure(
+      path,
+      c.flags.analyze,
+      c.flags.json,
+      c.flags.lint,
+      c.flags.updateSnapshot,
+    );
   } catch (error) {
     errors.push(error);
   }
