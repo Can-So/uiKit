@@ -1,8 +1,7 @@
 FROM node:8.9.0-slim
 
-# Install zip
-RUN apt-get -y update
-RUN apt-get -y install zip
+# Install git
+RUN apt-get -y update && apt-get -y install git
 
 # Install yarn
 # NOTE: This version of yarn is not the one that is used to install dependencies at the root. That yarn
