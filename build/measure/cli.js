@@ -35,9 +35,16 @@ let c = meow(
 
 const paths = c.input;
 if (paths) {
-  paths.forEach(path => {
-    measure(path, c.flags.analyze, c.flags.json, c.flags.lint);
-  });
+  executeMeasure(paths, c);
 } else {
   console.log(chalk.red('no paths specified, no work to do. :D'));
+}
+
+async function executeMeasure(paths, c) {
+  const path = paths.pop();
+  await measure(path, c.flags.analyze, c.flags.json, c.flags.lint);
+
+  if (paths.length > 0) {
+    executeMeasure(paths, c);
+  }
 }
