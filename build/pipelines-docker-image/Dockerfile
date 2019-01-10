@@ -6,6 +6,9 @@ RUN apk update && \
     apk add curl && \
     apk add --no-cache bash git openssh
 
+# Install flow-bin in Alpine - https://github.com/facebook/flow/issues/3649 
+RUN apk add --no-cache --repository https://nl.alpinelinux.org/alpine/edge/testing flow
+
 # Update yarn version
 # NOTE: This version of yarn is not the one that is used to install dependencies at the root. That yarn
 # version comes from bolt itself ("~/.config/yarn/global/node_modules/bolt/node_modules/.bin/yarn")
@@ -18,6 +21,3 @@ ENV PATH $HOME/.yarn/bin:$PATH
 # much easier to update obviously).
 ENV BOLT_VERSION "0.22.2"
 RUN yarn global add "bolt@$BOLT_VERSION"
-
-# Install flow-bin in Alpine - https://github.com/facebook/flow/issues/3649 
-RUN yarn global add flow-bin@latest
