@@ -210,6 +210,8 @@ module.exports = function main(filePath, isAnalyze, isJson, isLint) {
         console.error(
           chalk.red(`  ✖ Entry "${filePath}" has exceeded size limit!`),
         );
+
+        reject(`"${filePath}" has exceeded size limit!`);
       }
 
       resolve();

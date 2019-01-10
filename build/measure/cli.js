@@ -34,17 +34,39 @@ let c = meow(
 );
 
 const paths = c.input;
+
 if (paths) {
-  executeMeasure(paths, c);
+  const errors = executeMeasure(paths, c);
+  if (errors.length > 0) {
+    console.log(
+      chalk.red('Bundle size build failed with the following errors:'),
+    );
+
+    errors.forEach(error => {
+      console.log(chalk.red(error));
+    });
+
+    process.exit(1);
+  } else {
+    console.log(chalk.green('No significant bundle size changes detected'));
+    process.exit(0);
+  }
 } else {
   console.log(chalk.red('no paths specified, no work to do. :D'));
 }
 
-async function executeMeasure(paths, c) {
+async function executeMeasure(paths, c, errors = []) {
   const path = paths.pop();
-  await measure(path, c.flags.analyze, c.flags.json, c.flags.lint);
+
+  try {
+    await measure(path, c.flags.analyze, c.flags.json, c.flags.lint);
+  } catch (error) {
+    errors.push(error);
+  }
 
   if (paths.length > 0) {
-    executeMeasure(paths, c);
+    executeMeasure(paths, c, errors);
+  } else {
+    return errors;
   }
 }
