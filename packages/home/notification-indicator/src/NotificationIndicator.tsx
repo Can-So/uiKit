@@ -3,7 +3,6 @@ import { Component } from 'react';
 
 import Badge from '@atlaskit/badge';
 import { NotificationLogProvider } from '@atlaskit/notification-log-client';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 
 const MAX_NOTIFICATIONS_COUNT: number = 9;
 const NAVIGATION_CHANNEL = 'navigation';
@@ -186,4 +185,4 @@ class NotificationIndicator extends Component<Props, State> {
   }
 }
 
-export default withAnalyticsEvents()(NotificationIndicator);
+export default NotificationIndicator;
