@@ -108,7 +108,7 @@ class NotificationIndicator extends Component<Props, State> {
 
     // Only fire the analytics event if the notification indicator is 'activating'
     // ie going from not visible to visible
-    if (this.props.createAnalyticsEvent && newCount > 0 && oldCount == 0) {
+    if (this.props.createAnalyticsEvent && newCount > 0 && oldCount === 0) {
       const event = this.props.createAnalyticsEvent({
         name: 'notificationIndicator',
         action: 'activated',
