@@ -1,0 +1,1 @@
+- FS-3417 added ShareButton, ShareDialogTrigger components to @atlaskit/share
