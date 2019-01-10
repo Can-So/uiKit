@@ -150,7 +150,7 @@ class NotificationIndicator extends Component<Props, State> {
         updatingResult.countOverride ||
         (await this.notificationLogProvider.countUnseenNotifications({
           queryParams: {
-            currentCount: this.state.count,
+            currentCount: this.state.count || 0,
           },
         })).count;
 
