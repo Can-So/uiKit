@@ -34,6 +34,7 @@ export const panelSharedStyles = css`
 
     .ak-editor-panel__content {
       margin: 1px 0 1px;
+      flex: 1 0 0;
     }
   }
 `;

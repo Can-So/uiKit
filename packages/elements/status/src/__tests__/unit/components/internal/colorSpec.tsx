@@ -1,15 +1,14 @@
-import * as React from 'react';
-import { mount } from 'enzyme';
 import EditorDoneIcon from '@atlaskit/icon/glyph/editor/done';
-import Color from '../../../../components/internal/color';
+import { mountWithIntl } from 'enzyme-react-intl';
+import * as React from 'react';
 import { ANALYTICS_HOVER_DELAY } from '../../../../components/constants';
+import Color from '../../../../components/internal/color';
 
 describe('Color', () => {
   it('should render color button', () => {
-    const component = mount(
+    const component = mountWithIntl(
       <Color
         value={'red'}
-        label={'Red'}
         onClick={jest.fn()}
         backgroundColor={'backgroundColor'}
         borderColor={'borderColor'}
@@ -20,10 +19,9 @@ describe('Color', () => {
   });
 
   it('should render done icon when selected', () => {
-    const component = mount(
+    const component = mountWithIntl(
       <Color
         value={'red'}
-        label={'Red'}
         onClick={jest.fn()}
         backgroundColor={'backgroundColor'}
         borderColor={'borderColor'}
@@ -35,10 +33,9 @@ describe('Color', () => {
   });
 
   it('should not render done icon when not selected', () => {
-    const component = mount(
+    const component = mountWithIntl(
       <Color
         value={'red'}
-        label={'Red'}
         onClick={jest.fn()}
         backgroundColor={'backgroundColor'}
         borderColor={'borderColor'}
@@ -52,10 +49,9 @@ describe('Color', () => {
   it('should call onClick handler prop on click', () => {
     const onClick = jest.fn();
     const value = 'red';
-    const component = mount(
+    const component = mountWithIntl(
       <Color
         value={value}
-        label={'Red'}
         onClick={onClick}
         backgroundColor={'backgroundColor'}
         borderColor={'borderColor'}
@@ -85,10 +81,9 @@ describe('Color', () => {
       const now = realDateNow();
       const onHover = jest.fn();
       const value = 'purple';
-      const component = mount(
+      const component = mountWithIntl(
         <Color
           value={value}
-          label={'Purple'}
           onClick={jest.fn()}
           onHover={onHover}
           backgroundColor={'backgroundColor'}

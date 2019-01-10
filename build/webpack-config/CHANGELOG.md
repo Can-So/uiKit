@@ -1,5 +1,15 @@
 # @atlaskit/webpack-config
 
+## 2.0.7
+- [patch] [1b9e213](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1b9e213):
+
+  - Make local builds 20s faster
+
+## 2.0.6
+- [patch] [eb19d6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/eb19d6a):
+
+  - Disable some stats to make webpack faster
+
 ## 2.0.5
 - [patch] [92d8324](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/92d8324):
 

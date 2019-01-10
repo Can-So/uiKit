@@ -14,6 +14,7 @@ export interface Props {
   selectRow: (row: number) => void;
   hasHeaderRow?: boolean;
   isInDanger?: boolean;
+  isResizing?: boolean;
 }
 
 export default class NumberColumn extends Component<Props, any> {
@@ -60,10 +61,10 @@ export default class NumberColumn extends Component<Props, any> {
   };
 
   private getClassNames = (index: number) => {
-    const { hoveredRows, editorView, isInDanger } = this.props;
+    const { hoveredRows, editorView, isInDanger, isResizing } = this.props;
     const isActive =
       isRowSelected(index)(editorView.state.selection) ||
-      (hoveredRows || []).indexOf(index) !== -1;
+      ((hoveredRows || []).indexOf(index) !== -1 && !isResizing);
     return [
       ClassName.NUMBERED_COLUMN_BUTTON,
       isActive ? 'active' : '',

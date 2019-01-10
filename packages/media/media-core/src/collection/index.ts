@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { FileItem, FileDetails, LinkItem, LinkDetails } from '../item';
 import { FileState, mapMediaFileToFileState } from '../fileState';
-import { FileStreamCache, fileStreamsCache } from '../context/fileStreamCache';
+import { fileStreamsCache } from '../context/fileStreamCache';
 
 export interface MediaCollectionFileItemDetails extends FileDetails {
   occurrenceKey: string;
@@ -70,25 +70,19 @@ export class CollectionFetcher {
     return subject;
   }
 
-  private populateCache(items: MediaCollectionItem[], collectionName: string) {
-    const keyOptions = { collectionName };
-
+  private populateCache(items: MediaCollectionItem[]) {
     items.forEach(item => {
-      const key = FileStreamCache.createKey(item.id, keyOptions);
       const fileStream = this.createFileStateObserver(
         item.id,
         item.details as MediaCollectionItemFullDetails,
       );
 
-      fileStreamsCache.set(key, fileStream);
+      fileStreamsCache.set(item.id, fileStream);
     });
   }
 
   private removeFromCache(id: string, collectionName: string) {
-    const keyOptions = { collectionName };
-
-    const key = FileStreamCache.createKey(id, keyOptions);
-    fileStreamsCache.remove(key);
+    fileStreamsCache.remove(id);
     const collectionCacheIndex = collectionCache[
       collectionName
     ].items.findIndex(item => item.id === id);
@@ -113,16 +107,11 @@ export class CollectionFetcher {
       .then(items => {
         const { contents, nextInclusiveStartKey } = items.data;
 
-        this.populateCache(contents, collectionName);
+        this.populateCache(contents);
         // It's hard to merge two together, so we just take what's came from the server.
         // Since we load only one page > 2 pages will be ditched from the cache.
         collection.items = items.data.contents;
-
-        // We only want to asign nextInclusiveStartKey the first time
-        if (!collection.nextInclusiveStartKey) {
-          collection.nextInclusiveStartKey = nextInclusiveStartKey;
-        }
-
+        collection.nextInclusiveStartKey = nextInclusiveStartKey;
         subject.next(collection.items);
       });
 
@@ -164,7 +153,7 @@ export class CollectionFetcher {
       details: 'full',
     });
     const { contents, nextInclusiveStartKey } = response.data;
-    this.populateCache(contents, collectionName);
+    this.populateCache(contents);
     const newItems = response.data.contents;
     const items = [...currentItems, ...newItems];
 

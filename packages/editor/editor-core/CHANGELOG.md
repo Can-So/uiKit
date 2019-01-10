@@ -1,5 +1,106 @@
 # @atlaskit/editor-core
 
+## 94.0.0
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-common@28.0.0
+  - @atlaskit/editor-test-helpers@6.3.7
+  - @atlaskit/renderer@35.0.0
+  - @atlaskit/emoji@51.0.0
+  - @atlaskit/media-card@49.0.0
+  - @atlaskit/media-filmstrip@23.0.0
+  - @atlaskit/media-picker@29.0.0
+  - @atlaskit/media-test-helpers@18.9.1
+  - @atlaskit/editor-bitbucket-transformer@4.1.4
+  - @atlaskit/editor-json-transformer@4.1.4
+  - @atlaskit/editor-markdown-transformer@2.1.4
+  - @atlaskit/task-decision@11.1.4
+  - @atlaskit/util-data-test@10.0.31
+  - @atlaskit/media-core@26.0.0
+
+## 93.0.0
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/editor-common@27.0.0
+  - @atlaskit/editor-test-helpers@6.3.6
+  - @atlaskit/renderer@34.0.0
+  - @atlaskit/emoji@50.0.0
+  - @atlaskit/media-card@48.0.0
+  - @atlaskit/media-filmstrip@22.0.0
+  - @atlaskit/media-picker@28.0.0
+  - @atlaskit/editor-bitbucket-transformer@4.1.3
+  - @atlaskit/editor-json-transformer@4.1.3
+  - @atlaskit/editor-markdown-transformer@2.1.3
+  - @atlaskit/task-decision@11.1.3
+  - @atlaskit/util-data-test@10.0.30
+  - @atlaskit/media-core@25.0.0
+  - @atlaskit/media-test-helpers@18.9.0
+
+## 92.0.21
+- [patch] [e930505](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e930505):
+
+  - Added plugin state factory: createPluginState
+
+## 92.0.20
+- [patch] [ababb4a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ababb4a):
+
+  - ED-5999: fix padding between Columns in renderer
+
+## 92.0.19
+- [patch] [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+
+  - ED-5805: Popup to support being sticky with alignX=top
+
+## 92.0.18
+- [patch] [5d4527e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5d4527e):
+
+  - Fix issue where date was not respecting user's local date for initial date selection in quick insert
+
+## 92.0.17
+- [patch] [561f6cb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/561f6cb):
+
+  - ED-5336 Disallow nesting lists past 6 levels
+
+## 92.0.16
+- [patch] [e251065](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e251065):
+
+  - ED-5894: fix table controls disappearing while dragging resize handle
+
+## 92.0.15
+- [patch] [4b1567c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4b1567c):
+
+  - ED-5991: fixed Position NaN out of range when resizing tables
+
+## 92.0.14
+- [patch] [88a8605](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/88a8605):
+
+  - ED-5958: fix "getBoundingClientRect" errors
+
+## 92.0.13
+- [patch] [e79f8b0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e79f8b0):
+
+  - Disable alignment when editor is disabled
+
+## 92.0.12
+- [patch] [80cadc7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80cadc7):
+
+  - ED-5861 - Fix panel style in order to render telepointers properly
+
+## 92.0.11
+- [patch] [53c513c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/53c513c):
+
+  - ED-5947: fix preserving CellSelection  when clicking on context menu
+
+## 92.0.10
+- [patch] [6d435cf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6d435cf):
+
+  - Fix issue where table contextual menu had incorrect styling when using a popups mount point outside of the editor
+
+## 92.0.9
+- Updated dependencies [00c648e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00c648e):
+- Updated dependencies [a17bb0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a17bb0e):
+- Updated dependencies [99f08a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99f08a0):
+  - @atlaskit/renderer@33.0.3
+  - @atlaskit/status@0.3.0
+
 ## 92.0.8
 - [patch] [4611d97](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4611d97):
 

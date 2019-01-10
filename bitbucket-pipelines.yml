@@ -18,12 +18,6 @@ pipelines:
             - (cd build/ci-scripts && yarn stop-if-older-build)
             - yarn build
             - node build/ci-scripts/run.if.package.changed.js @atlaskit/editor-mobile-bridge -- yarn build:editor-mobile-bridge
-            # Disabled until we get rid of the race condition in Landkid
-            # - yarn lint
-            # - yarn typecheck
-            # - yarn test
-            # Disabled until we find the source of the flakeyness
-            # - yarn test:browser:browserstack
             # Bump all packages and their dependents using saved changesets
             - node ./build/releases/bin/build-releases.js version
             # We push the bumped packages to master now as it's much better to fail whilst BB is
@@ -60,9 +54,6 @@ pipelines:
               - node build/ci-scripts/run.tool.if.changed.js tslint -- yarn lint:tslint
               - node build/ci-scripts/run.tool.if.changed.js stylelint -- yarn lint:stylelint
               - node build/ci-scripts/run.tool.if.changed.js flow -- yarn typecheck:flow
-              # The script below counts flowfixme and fails if above the threshold.
-              # The goal is to reduce the threshold over time.
-              - source build/ci-scripts/count-flowfixme.sh 98
               - node build/ci-scripts/run.tool.if.changed.js typescript -- yarn typecheck:typescript
               # Get the commit that we diverged from master at
               - export DIVERGED_AT=$(git merge-base master HEAD)
@@ -285,7 +276,7 @@ pipelines:
                 - source ./build-setup.sh
                 - git merge master --no-edit
                 - bolt install --pure-lockfile
-                - LANKDID=true yarn test:webdriver:browserstack:changed
+                - LANDKID=true yarn test:webdriver:browserstack:changed
       - step:
           name: Wait until no master is running
           script:

@@ -15,6 +15,7 @@ export interface Props {
   tableRef?: HTMLTableElement;
   tableActive?: boolean;
   isInDanger?: boolean;
+  isResizing?: boolean;
   isHeaderColumnEnabled?: boolean;
   isHeaderRowEnabled?: boolean;
   isNumberColumnEnabled?: boolean;
@@ -30,6 +31,7 @@ export default class TableFloatingControls extends Component<Props> {
     const {
       tableRef,
       isInDanger,
+      isResizing,
       isHeaderRowEnabled,
       isHeaderColumnEnabled,
       isNumberColumnEnabled,
@@ -47,6 +49,7 @@ export default class TableFloatingControls extends Component<Props> {
       tableHeight !== nextProps.tableHeight ||
       tableActive !== nextProps.tableActive ||
       isInDanger !== nextProps.isInDanger ||
+      isResizing !== nextProps.isResizing ||
       hoveredRows !== nextProps.hoveredRows ||
       isHeaderRowEnabled !== nextProps.isHeaderRowEnabled ||
       isHeaderColumnEnabled !== nextProps.isHeaderColumnEnabled ||
@@ -60,6 +63,7 @@ export default class TableFloatingControls extends Component<Props> {
       editorView,
       tableRef,
       isInDanger,
+      isResizing,
       isNumberColumnEnabled,
       isHeaderColumnEnabled,
       isHeaderRowEnabled,
@@ -85,6 +89,7 @@ export default class TableFloatingControls extends Component<Props> {
             hoveredRows={hoveredRows}
             hasHeaderRow={hasHeaderRow}
             isInDanger={isInDanger}
+            isResizing={isResizing}
             selectRow={this.selectRow}
           />
         ) : null}
@@ -92,6 +97,7 @@ export default class TableFloatingControls extends Component<Props> {
           editorView={editorView}
           tableRef={tableRef}
           isInDanger={isInDanger}
+          isResizing={isResizing}
           isHeaderColumnEnabled={isHeaderColumnEnabled}
           isHeaderRowEnabled={isHeaderRowEnabled}
           insertColumnButtonIndex={insertColumnButtonIndex}
@@ -104,6 +110,7 @@ export default class TableFloatingControls extends Component<Props> {
           hoverRows={this.hoverRows}
           hoveredRows={hoveredRows}
           isInDanger={isInDanger}
+          isResizing={isResizing}
           selectRow={this.selectRow}
           insertRowButtonIndex={insertRowButtonIndex}
         />

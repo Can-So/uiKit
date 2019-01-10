@@ -57,6 +57,7 @@
     "@atlaskit/textfield": "^0.1.5",
     "@atlaskit/toggle": "^5.0.14",
     "@atlaskit/tooltip": "^12.1.13",
+    "@atlaskit/visual-regression": "^0.0.1",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",

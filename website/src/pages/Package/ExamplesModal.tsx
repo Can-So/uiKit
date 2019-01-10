@@ -105,7 +105,6 @@ function ExampleNavigation({
   exampleId,
   groupId,
   packageId,
-  groups,
   onPackageSelected,
   loadingSandbox,
   onExampleSelected,
@@ -294,8 +293,8 @@ export default class ExamplesModal extends React.Component<Props, State> {
     router: PropTypes.object.isRequired,
   };
 
-  onPackageSelected = (selected: { item: { value: string } }) => {
-    const [groupId, packageId] = selected.item.value.split('/');
+  onPackageSelected = (selected: { value: string }) => {
+    const [groupId, packageId] = selected.value.split('/');
     this.updateSelected(groupId, packageId);
   };
 
@@ -333,7 +332,6 @@ export default class ExamplesModal extends React.Component<Props, State> {
   render() {
     const {
       hasChanged,
-      groups,
       examples,
       packageId,
       groupId,
@@ -397,7 +395,6 @@ export default class ExamplesModal extends React.Component<Props, State> {
             groupId={groupId}
             packageId={packageId}
             exampleId={exampleId}
-            groups={groups}
             examples={examples}
             onPackageSelected={this.onPackageSelected}
             onExampleSelected={this.onExampleSelected}

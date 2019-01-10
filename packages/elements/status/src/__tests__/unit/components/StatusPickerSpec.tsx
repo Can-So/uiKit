@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
 import { StatusPicker } from '../../..';
 import { FieldTextStateless } from '@atlaskit/field-text';
 import ColorPalette from '../../../components/internal/color-palette';
+import { shallowWithIntl } from 'enzyme-react-intl';
 
 describe('StatusPicker', () => {
   it('should render color palette', () => {
     const onColorClick = jest.fn();
     const onColorHover = jest.fn();
 
-    const component = shallow(
+    const component = shallowWithIntl(
       <StatusPicker
         selectedColor="red"
         text=""
@@ -27,7 +27,7 @@ describe('StatusPicker', () => {
   });
 
   it('should render field text', () => {
-    const component = shallow(
+    const component = shallowWithIntl(
       <StatusPicker
         selectedColor="red"
         text="In progress"
@@ -46,7 +46,7 @@ describe('StatusPicker', () => {
 
   it('should pass onColorClick handler prop to color palette', () => {
     const onColorClick = () => {};
-    const component = shallow(
+    const component = shallowWithIntl(
       <StatusPicker
         selectedColor="red"
         text=""
@@ -61,7 +61,7 @@ describe('StatusPicker', () => {
 
   it('should call onTextChanged on text field change', () => {
     const onTextChanged = jest.fn();
-    const component = shallow(
+    const component = shallowWithIntl(
       <StatusPicker
         selectedColor="red"
         text=""
@@ -79,7 +79,7 @@ describe('StatusPicker', () => {
 
   it('should call onEnter on enter in text field', () => {
     const onEnter = jest.fn();
-    const component = shallow(
+    const component = shallowWithIntl(
       <StatusPicker
         selectedColor="red"
         text=""

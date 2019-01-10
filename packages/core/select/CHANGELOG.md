@@ -1,5 +1,15 @@
 # @atlaskit/select
 
+## 6.1.17
+- [patch] [e9ccac7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9ccac7):
+
+  - pin react-select at 2.1.x to avoid SSR issues in 2.2.0
+
+## 6.1.16
+- [patch] [b9b1900](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b9b1900):
+
+  - Use @atlaskit/select instead of @atlaskit/single-select on the Fullscreen examples on website
+
 ## 6.1.15
 - [patch] [6195ac3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6195ac3):
 

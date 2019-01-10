@@ -1,11 +1,17 @@
-import * as React from 'react';
-import { PureComponent } from 'react';
-import styled from 'styled-components';
-import { HTMLAttributes, ComponentClass, ButtonHTMLAttributes } from 'react';
-import { colors } from '@atlaskit/theme';
 import EditorDoneIcon from '@atlaskit/icon/glyph/editor/done';
-import { Color as ColorType } from '../Status';
+import { colors } from '@atlaskit/theme';
+import * as React from 'react';
+import {
+  ButtonHTMLAttributes,
+  ComponentClass,
+  HTMLAttributes,
+  PureComponent,
+} from 'react';
+import { FormattedMessage } from 'react-intl';
+import styled from 'styled-components';
 import { ANALYTICS_HOVER_DELAY } from '../constants';
+import { messages } from '../i18n';
+import { Color as ColorType } from '../Status';
 
 const Button: ComponentClass<ButtonHTMLAttributes<{}>> = styled.button`
   height: 24px;
@@ -34,7 +40,6 @@ const ButtonWrapper: ComponentClass<HTMLAttributes<{}>> = styled.span`
 
 export interface ColorProps {
   value: ColorType;
-  label: string;
   tabIndex?: number;
   isSelected?: boolean;
   onClick: (value: ColorType) => void;
@@ -43,37 +48,41 @@ export interface ColorProps {
   borderColor: string;
 }
 
-export default class Color extends PureComponent<ColorProps, any> {
+export default class Color extends PureComponent<ColorProps> {
   private hoverStartTime: number = 0;
 
   render() {
     const {
       tabIndex,
       backgroundColor,
-      label,
       isSelected,
       borderColor,
+      value,
     } = this.props;
     const borderStyle = `1px solid ${borderColor}`;
     return (
       <ButtonWrapper>
-        <Button
-          onClick={this.onClick}
-          onMouseEnter={this.onMouseEnter}
-          onMouseLeave={this.onMouseLeave}
-          onMouseDown={this.onMouseDown}
-          tabIndex={tabIndex}
-          className={`${isSelected ? 'selected' : ''}`}
-          title={label}
-          style={{
-            backgroundColor: backgroundColor || 'transparent',
-            border: borderStyle,
-          }}
-        >
-          {isSelected && (
-            <EditorDoneIcon primaryColor={borderColor} label="Selected" />
+        <FormattedMessage {...messages[`${value}Color`]}>
+          {(label: string) => (
+            <Button
+              onClick={this.onClick}
+              onMouseEnter={this.onMouseEnter}
+              onMouseLeave={this.onMouseLeave}
+              onMouseDown={this.onMouseDown}
+              tabIndex={tabIndex}
+              className={`${isSelected ? 'selected' : ''}`}
+              title={label}
+              style={{
+                backgroundColor: backgroundColor || 'transparent',
+                border: borderStyle,
+              }}
+            >
+              {isSelected && (
+                <EditorDoneIcon primaryColor={borderColor} label={label} />
+              )}
+            </Button>
           )}
-        </Button>
+        </FormattedMessage>
       </ButtonWrapper>
     );
   }

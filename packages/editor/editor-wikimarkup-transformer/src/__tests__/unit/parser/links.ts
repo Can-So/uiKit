@@ -37,6 +37,10 @@ describe('JIRA wiki markup - Links', () => {
       'An IRC address: irc://atlassian.com/confluence',
     ],
     [
+      'should convert mailto address text',
+      'An IRC address: mailto:example@email.com',
+    ],
+    [
       'should ignore invalid protocal',
       'An invalid URL: invalid://nowhere.com/hello',
     ],

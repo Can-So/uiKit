@@ -44,6 +44,7 @@ const keywordTokenMap = {
   '[': TokenType.LINK_FORMAT,
   http: TokenType.LINK_TEXT,
   irc: TokenType.LINK_TEXT,
+  mailto: TokenType.LINK_TEXT,
   '\\\\': TokenType.FORCE_LINE_BREAK,
   '\r': TokenType.HARD_BREAK,
   '\n': TokenType.HARD_BREAK,

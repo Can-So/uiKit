@@ -15,7 +15,6 @@ export type CardAttributes = UrlType | DataType;
 
 /**
  * @name blockCard_node
- * @stage 0
  */
 export interface BlockCardDefinition {
   type: 'blockCard';

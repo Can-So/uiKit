@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
+import * as classnames from 'classnames';
 import { EditorView } from 'prosemirror-view';
 import { findTable } from 'prosemirror-utils';
 import { TableLayout } from '@atlaskit/adf-schema';
@@ -19,6 +20,7 @@ export interface Props {
   mountPoint?: HTMLElement;
   boundariesElement?: HTMLElement;
   scrollableElement?: HTMLElement;
+  isResizing?: boolean;
 }
 
 const POPUP_OFFSET = [
@@ -46,6 +48,7 @@ class LayoutButton extends React.Component<Props & InjectedIntlProps, any> {
       scrollableElement,
       targetRef,
       editorView,
+      isResizing,
     } = this.props;
     if (!targetRef) {
       return null;
@@ -64,12 +67,16 @@ class LayoutButton extends React.Component<Props & InjectedIntlProps, any> {
         target={targetRef}
         alignY="top"
         alignX="right"
-        stickToBottom={true}
+        stick={true}
         mountTo={mountPoint}
         boundariesElement={boundariesElement}
         scrollableElement={scrollableElement}
       >
-        <div className={ClassName.LAYOUT_BUTTON}>
+        <div
+          className={classnames(ClassName.LAYOUT_BUTTON, {
+            [ClassName.IS_RESIZING]: isResizing,
+          })}
+        >
           <ToolbarButton
             title={title}
             onClick={this.handleClick}

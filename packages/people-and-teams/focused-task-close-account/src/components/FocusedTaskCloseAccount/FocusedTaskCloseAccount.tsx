@@ -8,6 +8,7 @@ import ShortcutIcon from '@atlaskit/icon/glyph/shortcut';
 import * as Styled from './styled';
 import Footer from '../Footer';
 import { commonMessages } from '../../messages';
+import MessagesIntlProvider from '../MessagesIntlProvider';
 
 export interface Props {
   isOpen: boolean;
@@ -58,38 +59,40 @@ export class FocusedTaskCloseAccount extends React.Component<Props, State> {
     } = this.props;
     const { currentScreenIdx } = this.state;
     return (
-      <Drawer
-        icon={props => <CrossIcon label="" {...props} size="medium" />}
-        isOpen={isOpen}
-        onClose={onClose}
-        width="full"
-      >
-        <Styled.DrawerInner>
-          {this.renderCurrentScreen()}
+      <MessagesIntlProvider>
+        <Drawer
+          icon={props => <CrossIcon label="" {...props} size="medium" />}
+          isOpen={isOpen}
+          onClose={onClose}
+          width="full"
+        >
+          <Styled.DrawerInner>
+            {this.renderCurrentScreen()}
 
-          <Footer
-            numScreens={screens.length}
-            currentScreenIdx={currentScreenIdx}
-            onCancel={onClose}
-            onNext={this.nextScreen}
-            onPrevious={this.previousScreen}
-            secondaryActions={
-              learnMoreLink && (
-                <Button
-                  appearance="subtle-link"
-                  spacing="none"
-                  href={learnMoreLink}
-                  target="_blank"
-                >
-                  <FormattedMessage {...commonMessages.learnMore} />{' '}
-                  <ShortcutIcon size="small" label="" />
-                </Button>
-              )
-            }
-            submitButton={submitButton}
-          />
-        </Styled.DrawerInner>
-      </Drawer>
+            <Footer
+              numScreens={screens.length}
+              currentScreenIdx={currentScreenIdx}
+              onCancel={onClose}
+              onNext={this.nextScreen}
+              onPrevious={this.previousScreen}
+              secondaryActions={
+                learnMoreLink && (
+                  <Button
+                    appearance="subtle-link"
+                    spacing="none"
+                    href={learnMoreLink}
+                    target="_blank"
+                  >
+                    <FormattedMessage {...commonMessages.learnMore} />{' '}
+                    <ShortcutIcon size="small" label="" />
+                  </Button>
+                )
+              }
+              submitButton={submitButton}
+            />
+          </Styled.DrawerInner>
+        </Drawer>
+      </MessagesIntlProvider>
     );
   }
 }

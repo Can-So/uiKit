@@ -216,7 +216,7 @@ describe('Renderer - ReactSerializer', () => {
   });
 
   describe('buildMarkStructure', () => {
-    const { em, strong, link, textColor } = schema.marks;
+    const { em, strong, link, textColor, subsup } = schema.marks;
 
     it('should wrap text nodes with marks', () => {
       const textNodes = [
@@ -232,6 +232,42 @@ describe('Renderer - ReactSerializer', () => {
       expect((output[1] as any).content[0].text).to.equal('World!');
     });
 
+    it('should not merge marks when parent mark is different', () => {
+      const textNodes = [
+        schema.text('Hello ', [em.create(), subsup.create({ type: 'sup' })]),
+        schema.text('World!', [subsup.create({ type: 'sup ' })]),
+      ];
+
+      const output = ReactSerializer.buildMarkStructure(textNodes);
+      expect(output[0].type.name).to.equal('em');
+      expect(output[1].type.name).to.equal('subsup');
+    });
+
+    it('should merge same marks when possible', () => {
+      const textNodes = [
+        schema.text('Hello ', [
+          link.create({ href: 'https://www.atlassian.com' }),
+          em.create(),
+          strong.create(),
+        ]),
+        schema.text('World ', [
+          link.create({ href: 'https://www.atlassian.com' }),
+          em.create(),
+        ]),
+      ];
+
+      const output = ReactSerializer.buildMarkStructure(textNodes);
+      expect(output.length).to.equal(1);
+      expect(output[0].type.name).to.equal('link');
+
+      const { content } = output[0] as any;
+      expect(content.length).to.equal(1);
+      expect(content[0].type.name).to.equal('em');
+      expect(content[0].content.length).to.equal(2);
+      expect(content[0].content[0].type.name).to.equal('strong');
+      expect(content[0].content[1].type.name).to.equal('text');
+    });
+
     it('should merge mark nodes with text color', () => {
       const textNodes = [
         schema.text('2Pac '),
@@ -244,10 +280,9 @@ describe('Renderer - ReactSerializer', () => {
       ];
 
       const output = ReactSerializer.buildMarkStructure(textNodes);
-      expect(output.length).to.equal(3);
+      expect(output.length).to.equal(2);
       expect(output[0].type.name).to.equal('text');
       expect(output[1].type.name).to.equal('strong');
-      expect(output[2].type.name).to.equal('strong');
       expect((output[1] as any).content[0].attrs).to.deep.equal({
         color: '#aaeebb',
       });

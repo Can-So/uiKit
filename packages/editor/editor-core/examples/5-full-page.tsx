@@ -184,7 +184,11 @@ export class ExampleEditor extends React.Component<
               }}
               allowStatus={true}
               {...providers}
-              media={{ provider: mediaProvider, allowMediaSingle: true }}
+              media={{
+                provider: mediaProvider,
+                allowMediaSingle: true,
+                allowResizing: true,
+              }}
               placeholder="Write something..."
               shouldFocus={false}
               disabled={this.state.disabled}

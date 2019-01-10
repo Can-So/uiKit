@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/comment",
-  "version": "6.0.32",
+  "version": "6.0.34",
   "description": "Comments enable discussions on an entity such as a page, blog post, issue or pull request",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -24,6 +24,7 @@
     "@atlaskit/icon": "^15.0.2",
     "@atlaskit/lozenge": "^6.2.4",
     "@atlaskit/theme": "^7.0.1",
+    "@atlaskit/visual-regression": "^0.0.1",
     "@babel/runtime": "^7.0.0"
   },
   "peerDependencies": {
@@ -34,7 +35,7 @@
     "@atlaskit/avatar": "^14.1.7",
     "@atlaskit/build-utils": "^2.0.0",
     "@atlaskit/docs": "^6.0.0",
-    "@atlaskit/editor-core": "^92.0.0",
+    "@atlaskit/editor-core": "^94.0.0",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2"
   },

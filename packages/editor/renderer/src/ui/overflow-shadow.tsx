@@ -29,6 +29,7 @@ export default function overflowShadow<P extends OverflowShadowProps>(
     OverflowShadowState
   > {
     overflowContainer: HTMLElement;
+    container: HTMLElement;
     scrollable: NodeList;
 
     state = {
@@ -90,9 +91,10 @@ export default function overflowShadow<P extends OverflowShadowProps>(
     };
 
     handleContainer = container => {
-      if (!container) {
+      if (!container || this.container) {
         return;
       }
+      this.container = container;
 
       this.overflowContainer = container.querySelector(
         options.overflowSelector,

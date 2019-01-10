@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { EditorView } from 'prosemirror-view';
 import { findCellRectClosestToPos, isCellSelection } from 'prosemirror-utils';
 import { findDomRefAtPos, getSelectionRect } from 'prosemirror-utils';
@@ -7,9 +8,13 @@ import {
   akEditorFloatingOverlapPanelZIndex,
 } from '@atlaskit/editor-common';
 import ContextualMenu from './ContextualMenu';
-import { contextualMenuTriggerSize } from '../styles';
+import { contextualMenuTriggerSize, tablePopupStyles } from '../styles';
 import { pluginKey } from '../../pm-plugins/main';
 import { PluginConfig } from '../../types';
+
+const MenuWrapper = styled.div`
+  ${tablePopupStyles}
+`;
 
 // offset of the contextual menu dropdown
 const calculateOffset = (targetCellRef, state) => {
@@ -78,15 +83,17 @@ const FloatingContextualMenu = ({
       // in table, but below floating dialogs like typeaheads, pickers, etc.
       zIndex={akEditorFloatingOverlapPanelZIndex}
     >
-      <ContextualMenu
-        editorView={editorView}
-        offset={calculateOffset(targetCellRef, editorView.state)}
-        isOpen={isOpen}
-        targetCellPosition={targetCellPosition}
-        allowMergeCells={pluginConfig!.allowMergeCells}
-        allowBackgroundColor={pluginConfig!.allowBackgroundColor}
-        selectionRect={selectionRect}
-      />
+      <MenuWrapper>
+        <ContextualMenu
+          editorView={editorView}
+          offset={calculateOffset(targetCellRef, editorView.state)}
+          isOpen={isOpen}
+          targetCellPosition={targetCellPosition}
+          allowMergeCells={pluginConfig!.allowMergeCells}
+          allowBackgroundColor={pluginConfig!.allowBackgroundColor}
+          selectionRect={selectionRect}
+        />
+      </MenuWrapper>
     </Popup>
   );
 };

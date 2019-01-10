@@ -12,8 +12,8 @@ const commit = process.env.BITBUCKET_COMMIT
 if (!process.env.BITBUCKET_BRANCH && process.env.USER) {
   process.env.BITBUCKET_BRANCH = process.env.USER + '_local_run';
 }
+
 function setBrowserStackClients() /*: Array<?Object>*/ {
-  let isLandKid = process.env.LANDKID !== 'false';
   let launchers = {
     chrome: {
       os: 'Windows',
@@ -26,7 +26,7 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
       os: 'Windows',
       os_version: '10',
       browserName: 'firefox',
-      browser_version: '63.0',
+      browser_version: '64.0',
       resolution: '1440x900',
     },
     ie: {
@@ -47,11 +47,11 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
       os: 'Windows',
       os_version: '10',
       browserName: 'edge',
-      browser_version: '18',
+      browser_version: '17',
       resolution: '1440x900',
     },
   };
-  if (isLandKid) {
+  if (process.env.LANDKID) {
     delete launchers.safari;
     delete launchers.ie;
     delete launchers.firefox;

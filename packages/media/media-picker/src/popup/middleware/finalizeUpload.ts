@@ -110,7 +110,9 @@ async function copyFile({
           uploadId,
         }),
       );
-      const auth = await tenantContext.config.authProvider();
+      const auth = await tenantContext.config.authProvider({
+        collectionName: collection,
+      });
       // TODO [MS-725]: replace by context.getFile
       return fetcher.pollFile(auth, publicId, collection);
     })

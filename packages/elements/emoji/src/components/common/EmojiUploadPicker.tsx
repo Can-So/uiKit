@@ -1,16 +1,16 @@
+import AkFieldBase from '@atlaskit/field-base';
 import * as React from 'react';
 import { ChangeEvent, ChangeEventHandler, PureComponent } from 'react';
-
-import AkFieldBase from '@atlaskit/field-base';
-
-import { EmojiUpload } from '../../types';
+import { FormattedMessage } from 'react-intl';
+import { EmojiUpload, Message } from '../../types';
 import * as ImageUtil from '../../util/image';
 import debug from '../../util/logger';
-import * as styles from './styles';
-import FileChooser from './FileChooser';
+import { messages } from '../i18n';
 import EmojiErrorMessage from './EmojiErrorMessage';
-import { UploadStatus } from './internal-types';
 import EmojiUploadPreview from './EmojiUploadPreview';
+import FileChooser from './FileChooser';
+import { UploadStatus } from './internal-types';
+import * as styles from './styles';
 
 export interface OnUploadEmoji {
   (upload: EmojiUpload): void;
@@ -20,7 +20,7 @@ export interface Props {
   onUploadEmoji: OnUploadEmoji;
   onUploadCancelled: () => void;
   onFileChosen?: (name: string) => void;
-  errorMessage?: string;
+  errorMessage?: Message;
   initialUploadName?: string;
 }
 
@@ -29,7 +29,7 @@ export interface State {
   name?: string;
   filename?: string;
   uploadStatus?: UploadStatus;
-  chooseEmojiErrorMessage?: string;
+  chooseEmojiErrorMessage?: FormattedMessage.MessageDescriptor;
 }
 
 const disallowedReplacementsMap = new Map([
@@ -66,7 +66,7 @@ interface ChooseEmojiFileProps {
   onChooseFile: ChangeEventHandler<any>;
   onNameChange: ChangeEventHandler<any>;
   onUploadCancelled: () => void;
-  errorMessage?: string;
+  errorMessage?: Message;
 }
 
 class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
@@ -84,7 +84,9 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
     return (
       <div className={styles.emojiUpload}>
         <div className={styles.uploadChooseFileMessage}>
-          <h5>Add your own emoji</h5>
+          <FormattedMessage {...messages.addCustomEmojiLabel}>
+            {message => <h5>{message}</h5>}
+          </FormattedMessage>
         </div>
         <div className={styles.uploadChooseFileRow}>
           <span className={styles.uploadChooseFileEmojiName}>
@@ -95,29 +97,39 @@ class ChooseEmojiFile extends PureComponent<ChooseEmojiFileProps, {}> {
               isFocused={true}
               isFitContainerWidthEnabled={true}
             >
-              <input
-                placeholder="Emoji name"
-                maxLength={maxNameLength}
-                onChange={onNameChange}
-                onKeyDown={this.onKeyDown}
-                value={name}
-                ref="name"
-                autoFocus={true}
-              />
+              <FormattedMessage {...messages.emojiPlaceholder}>
+                {message => (
+                  <input
+                    placeholder={message as string}
+                    maxLength={maxNameLength}
+                    onChange={onNameChange}
+                    onKeyDown={this.onKeyDown}
+                    value={name}
+                    ref="name"
+                    autoFocus={true}
+                  />
+                )}
+              </FormattedMessage>
             </AkFieldBase>
           </span>
           <span className={styles.uploadChooseFileBrowse}>
-            <FileChooser
-              label="Choose file"
-              onChange={onChooseFile}
-              accept="image/png,image/jpeg,image/gif"
-              isDisabled={disableChooser}
-            />
+            <FormattedMessage {...messages.emojiChooseFileTitle}>
+              {message => (
+                <FileChooser
+                  label={message as string}
+                  onChange={onChooseFile}
+                  accept="image/png,image/jpeg,image/gif"
+                  isDisabled={disableChooser}
+                />
+              )}
+            </FormattedMessage>
           </span>
         </div>
         <div className={styles.emojiUploadBottom}>
           {!errorMessage ? (
-            <p>JPG, PNG or GIF. Max size 1 MB.</p>
+            <p>
+              <FormattedMessage {...messages.emojiImageRequirements} />
+            </p>
           ) : (
             <EmojiErrorMessage
               className={styles.emojiChooseFileErrorMessage}
@@ -215,7 +227,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
   private errorOnUpload = (event: any): void => {
     debug('File load error: ', event);
     this.setState({
-      chooseEmojiErrorMessage: 'Upload failed',
+      chooseEmojiErrorMessage: messages.emojiUploadFailed,
     });
     this.cancelChooseFile();
   };
@@ -231,7 +243,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
       })
       .catch(() => {
         this.setState({
-          chooseEmojiErrorMessage: 'Selected image is invalid',
+          chooseEmojiErrorMessage: messages.emojiInvalidImage,
         });
         this.cancelChooseFile();
       });
@@ -253,7 +265,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
 
       if (ImageUtil.hasFileExceededSize(file)) {
         this.setState({
-          chooseEmojiErrorMessage: 'Selected image is more than 1 MB',
+          chooseEmojiErrorMessage: messages.emojiImageTooBig,
         });
         this.cancelChooseFile();
         return;
@@ -299,7 +311,13 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
         onChooseFile={this.onChooseFile}
         onNameChange={this.onNameChange}
         onUploadCancelled={onUploadCancelled}
-        errorMessage={chooseEmojiErrorMessage}
+        errorMessage={
+          chooseEmojiErrorMessage ? (
+            <FormattedMessage {...chooseEmojiErrorMessage} />
+          ) : (
+            undefined
+          )
+        }
       />
     );
   }

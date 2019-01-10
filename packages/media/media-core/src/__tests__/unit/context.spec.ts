@@ -1,6 +1,5 @@
 import * as uuid from 'uuid';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import {
   UploadableFileUpfrontIds,
   uploadFile,
@@ -11,8 +10,6 @@ import {
 } from '@atlaskit/media-store';
 import {
   AuthProvider,
-  MediaItem,
-  MediaItemProvider,
   ProcessingFileState,
   UploadableFile,
   UploadController,
@@ -43,197 +40,21 @@ describe('Context', () => {
     uploadFileMock.mockReset();
   });
 
-  describe('.getMediaItemProvider()', () => {
-    it('should return different mediaItemProviders for different fileIds', () => {
-      const fileId = 'some-id';
-      const fileId2 = 'some-other-id';
-      const context = createContext();
-      const mediaItemProvider = context.getMediaItemProvider(fileId, 'file');
-      expect(mediaItemProvider).not.toBe(
-        context.getMediaItemProvider(fileId2, 'file'),
-      );
-    });
-
-    it('should return media item when a link media item is passed in', done => {
-      let actualMediaItem: MediaItem;
-      const expectedMediaItem: MediaItem = {
-        type: 'link',
-        details: {
-          id: 'abcd',
-          type: 'link',
-          url: 'http://google.com.au',
-          title: 'Google!!!',
-        },
-      };
-
-      const context = createContext();
-      const provider = context.getMediaItemProvider(
-        'some-id',
-        'link',
-        undefined,
-        expectedMediaItem,
-      );
-
-      provider.observable().subscribe({
-        next(mediaItem) {
-          actualMediaItem = mediaItem;
-        },
-        complete() {
-          expect(actualMediaItem).toBe(expectedMediaItem);
-          done();
-        },
-        error(error) {
-          done(error || new Error('Uknown error.'));
-        },
-      });
-    });
-
-    it('should return media item when a file media item is passed in and the media item processingStatus is not pending', done => {
-      let actualMediaItem: MediaItem;
-      const expectedMediaItem: MediaItem = {
-        type: 'file',
-        details: {
-          id: 'abcd',
-        },
-      };
-
-      const context = createContext();
-      const provider = context.getMediaItemProvider(
-        'some-id',
-        'link',
-        undefined,
-        expectedMediaItem,
-      );
-
-      provider.observable().subscribe({
-        next(mediaItem) {
-          actualMediaItem = mediaItem;
-        },
-        complete() {
-          expect(actualMediaItem).toBe(expectedMediaItem);
-          done();
-        },
-        error(error) {
-          done(error || new Error('Uknown error.'));
-        },
-      });
-    });
-
-    it('should return media item and then fetch media item when a file media item is passed in and the processingStatus is pending', done => {
-      let actualMediaItems: Array<MediaItem> = [];
-      const firstExpectedMediaItem: MediaItem = {
-        type: 'file',
-        details: {
-          id: 'abcd',
-          processingStatus: 'pending',
-        },
-      };
-      const secondExpectedMediaItem: MediaItem = {
-        type: 'file',
-        details: {
-          id: 'abcd',
-          processingStatus: 'succeeded',
-        },
-      };
-
-      const fromPool = jest
-        .spyOn(MediaItemProvider, 'fromPool')
-        .mockImplementation(() => ({
-          observable() {
-            return of(secondExpectedMediaItem);
-          },
-        }));
-
-      const context = createContext();
-      const provider = context.getMediaItemProvider(
-        'some-id',
-        'link',
-        undefined,
-        firstExpectedMediaItem,
-      );
-
-      provider.observable().subscribe({
-        next(mediaItem) {
-          actualMediaItems.push(mediaItem);
-        },
-        complete() {
-          expect(fromPool).toHaveBeenCalledTimes(1);
-          expect(actualMediaItems).toHaveLength(2);
-          expect(actualMediaItems[0]).toBe(firstExpectedMediaItem);
-          expect(actualMediaItems[1]).toBe(secondExpectedMediaItem);
-          done();
-        },
-        error(error) {
-          done(error || new Error('Uknown error.'));
-        },
-      });
-    });
-
-    it('should fetch media item when no media item is passed in', done => {
-      let actualMediaItems: Array<MediaItem> = [];
-      const firstExpectedMediaItem: MediaItem = {
-        type: 'file',
-        details: {
-          id: 'abcd',
-          processingStatus: 'succeeded',
-        },
-      };
-
-      const fromPool = jest
-        .spyOn(MediaItemProvider, 'fromPool')
-        .mockImplementation(() => ({
-          observable() {
-            return of(firstExpectedMediaItem);
-          },
-        }));
-
-      fromPool.mockClear();
-
-      const context = createContext();
-      const provider = context.getMediaItemProvider(
-        'some-id',
-        'link',
-        undefined,
-      );
-
-      provider.observable().subscribe({
-        next(mediaItem) {
-          actualMediaItems.push(mediaItem);
-        },
-        complete() {
-          expect(fromPool).toHaveBeenCalledTimes(1);
-          expect(actualMediaItems).toHaveLength(1);
-          expect(actualMediaItems[0]).toBe(firstExpectedMediaItem);
-          done();
-        },
-        error(error) {
-          done(error || new Error('Uknown error.'));
-        },
-      });
-    });
-  });
-
-  describe('local preview', () => {
-    it('should get the local preview after being asigned', () => {
-      const context = createContext();
-
-      expect(context.getLocalPreview('123')).toBeUndefined();
-      context.setLocalPreview('123', 'some-preview');
-      expect(context.getLocalPreview('123')).toEqual('some-preview');
-      context.removeLocalPreview('123');
-      expect(context.getLocalPreview('123')).toBeUndefined();
-    });
-  });
-
   describe('.file.getFileState()', () => {
-    const id = uuid.v4();
-    const occurrenceKey = uuid.v4();
-    const uploadableFileUpfrontIds: UploadableFileUpfrontIds = {
-      id,
-      occurrenceKey,
-      deferredUploadId: Promise.resolve(uuid.v4()),
-    };
+    let id: string;
+    let occurrenceKey: string;
+    let uploadableFileUpfrontIds: UploadableFileUpfrontIds;
     const controller = new UploadController();
+
+    beforeEach(() => {
+      id = uuid.v4();
+      occurrenceKey = uuid.v4();
+      uploadableFileUpfrontIds = {
+        id,
+        occurrenceKey,
+        deferredUploadId: Promise.resolve(uuid.v4()),
+      };
+    });
 
     it('should fetch the file if it doesnt exist locally', done => {
       const context = createContext();
@@ -283,13 +104,8 @@ describe('Context', () => {
 
     it('should poll for changes and return the latest file state', done => {
       const context = createContext();
-      let getFileCalledTimes = 0;
-      const getItems = jest.fn().mockImplementation(() => {
-        getFileCalledTimes++;
-        const processingStatus =
-          getFileCalledTimes === 2 ? 'succeeded' : 'pending';
-
-        return Promise.resolve({
+      const getFilePromiseWithProcessingStatus = (processingStatus: string) =>
+        Promise.resolve({
           data: {
             items: [
               {
@@ -303,7 +119,10 @@ describe('Context', () => {
             ],
           },
         });
-      });
+      const getItems = jest
+        .fn()
+        .mockReturnValueOnce(getFilePromiseWithProcessingStatus('pending'))
+        .mockReturnValueOnce(getFilePromiseWithProcessingStatus('succeeded'));
       const fakeStore = {
         getItems,
       };
@@ -332,10 +151,7 @@ describe('Context', () => {
         occurrenceKey: 'some-occurrenceKey',
       });
 
-      expect(getOrInsertSpy).toHaveBeenLastCalledWith(
-        `${id}-my-collection-some-occurrenceKey`,
-        expect.anything(),
-      );
+      expect(getOrInsertSpy).toHaveBeenLastCalledWith(id, expect.anything());
     });
 
     it('should return local file state while file is still uploading', done => {

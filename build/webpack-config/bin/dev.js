@@ -35,6 +35,7 @@ const { print, devServerBanner, errorMsg } = require('../banner');
 
 const HOST = 'localhost';
 const PORT = +process.env.ATLASKIT_DEV_PORT || 9000;
+const stats = require('../config/statsOptions');
 
 async function runDevServer() {
   const [workspacesGlobRaw = ''] = process.argv.slice(2);
@@ -102,17 +103,7 @@ async function runDevServer() {
     historyApiFallback: true,
 
     overlay: true,
-    stats: {
-      colors: true,
-      assets: false,
-      version: false,
-      hash: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      // https://github.com/TypeStrong/ts-loader/issues/751
-      warningsFilter: /export .* was not found in/,
-    },
+    stats,
   });
 
   return new Promise((resolve, reject) => {

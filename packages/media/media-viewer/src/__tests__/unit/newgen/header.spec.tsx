@@ -245,9 +245,9 @@ describe('<Header />', () => {
       );
       el.update();
       el.find(DownloadIcon).simulate('click');
-      expect(context.file.downloadBinary.mock.calls[0][2]).toEqual(
-        collectionName,
-      );
+      expect(
+        (context.file.downloadBinary as jest.Mock).mock.calls[0][2],
+      ).toEqual(collectionName);
     });
   });
 

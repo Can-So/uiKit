@@ -35,6 +35,8 @@ import Animation from './Animation';
 
 import { hoveredPayload, unhoveredPayload } from './utils/analytics-payloads';
 
+const SCROLL_OPTIONS = { capture: true, passive: true };
+
 function getMousePosition(mouseCoordinates) {
   const safeMouse = mouseCoordinates || { top: 0, left: 0 };
   const getBoundingClientRect = () => {
@@ -152,23 +154,30 @@ class Tooltip extends Component<Props, State> {
 
   componentWillUnmount() {
     this.cancelPendingSetState();
+    this.removeScrollListener();
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const scrollOptions = { capture: true, passive: true };
     if (!prevState.isVisible && this.state.isVisible) {
       if (this.props.onShow) this.props.onShow();
 
-      window.addEventListener('scroll', this.handleWindowScroll, scrollOptions);
-    } else if (prevState.isVisible && !this.state.isVisible) {
-      if (this.props.onHide) this.props.onHide();
-
-      window.removeEventListener(
+      window.addEventListener(
         'scroll',
         this.handleWindowScroll,
-        scrollOptions,
+        SCROLL_OPTIONS,
       );
+    } else if (prevState.isVisible && !this.state.isVisible) {
+      if (this.props.onHide) this.props.onHide();
+      this.removeScrollListener();
     }
+  }
+
+  removeScrollListener() {
+    window.removeEventListener(
+      'scroll',
+      this.handleWindowScroll,
+      SCROLL_OPTIONS,
+    );
   }
 
   handleWindowScroll = () => {

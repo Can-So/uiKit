@@ -1,19 +1,19 @@
+import * as classNames from 'classnames';
 import * as React from 'react';
 import { PureComponent } from 'react';
-import * as classNames from 'classnames';
-
-import * as styles from './styles';
-import EmojiPreview from '../common/EmojiPreview';
-import EmojiUploadPicker, { OnUploadEmoji } from '../common/EmojiUploadPicker';
 import {
   EmojiDescription,
   EmojiDescriptionWithVariations,
+  Message,
   OnToneSelected,
   ToneSelection,
 } from '../../types';
 import EmojiDeletePreview, {
   OnDeleteEmoji,
 } from '../common/EmojiDeletePreview';
+import EmojiPreview from '../common/EmojiPreview';
+import EmojiUploadPicker, { OnUploadEmoji } from '../common/EmojiUploadPicker';
+import * as styles from './styles';
 
 export interface Props {
   selectedEmoji?: EmojiDescription;
@@ -24,7 +24,7 @@ export interface Props {
   uploadEnabled: boolean;
   emojiToDelete?: EmojiDescription;
   initialUploadName?: string;
-  uploadErrorMessage?: string;
+  uploadErrorMessage?: Message;
   onUploadCancelled: () => void;
   onUploadEmoji: OnUploadEmoji;
   onCloseDelete: () => void;

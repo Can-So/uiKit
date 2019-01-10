@@ -1,5 +1,44 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.5.6
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-common@28.0.0
+  - @atlaskit/editor-core@94.0.0
+  - @atlaskit/editor-test-helpers@6.3.7
+  - @atlaskit/renderer@35.0.0
+  - @atlaskit/emoji@51.0.0
+  - @atlaskit/editor-json-transformer@4.1.4
+  - @atlaskit/task-decision@11.1.4
+  - @atlaskit/media-core@26.0.0
+
+## 6.5.5
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/editor-common@27.0.0
+  - @atlaskit/editor-core@93.0.0
+  - @atlaskit/editor-test-helpers@6.3.6
+  - @atlaskit/renderer@34.0.0
+  - @atlaskit/emoji@50.0.0
+  - @atlaskit/editor-json-transformer@4.1.3
+  - @atlaskit/task-decision@11.1.3
+  - @atlaskit/media-core@25.0.0
+
+## 6.5.4
+- Updated dependencies [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+  - @atlaskit/editor-json-transformer@4.1.2
+  - @atlaskit/editor-test-helpers@6.3.5
+  - @atlaskit/renderer@33.0.4
+  - @atlaskit/task-decision@11.1.2
+  - @atlaskit/editor-common@26.0.0
+  - @atlaskit/editor-core@92.0.19
+
+## 6.5.3
+- Updated dependencies [00c648e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00c648e):
+- Updated dependencies [a17bb0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a17bb0e):
+- Updated dependencies [99f08a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99f08a0):
+  - @atlaskit/editor-core@92.0.9
+  - @atlaskit/renderer@33.0.3
+  - @atlaskit/status@0.3.0
+
 ## 6.5.2
 - Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
   - @atlaskit/editor-common@25.0.0

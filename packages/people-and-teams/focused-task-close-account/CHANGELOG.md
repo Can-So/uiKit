@@ -1,5 +1,10 @@
 # @atlaskit/focused-task-close-account
 
+## 0.6.0
+- [minor] [52c6b63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52c6b63):
+
+  - i18n support added for focused task component
+
 ## 0.5.0
 - [minor] [49bd44d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/49bd44d):
 

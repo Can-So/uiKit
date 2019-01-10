@@ -2,15 +2,19 @@ import * as util from '../../../../../newgen/utils';
 const constructAuthTokenUrlSpy = jest.spyOn(util, 'constructAuthTokenUrl');
 
 import * as React from 'react';
-import { mount } from 'enzyme';
 import { createContext } from '../../../_stubs';
 import { Auth, ProcessedFileState } from '@atlaskit/media-core';
-import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import {
+  awaitError,
+  mountWithIntlContext,
+  nextTick,
+} from '@atlaskit/media-test-helpers';
 import { AudioViewer } from '../../../../../newgen/viewers/audio';
 import Spinner from '@atlaskit/spinner';
 import { DefaultCoverWrapper, AudioCover } from '../../../../../newgen/styled';
 import { ErrorMessage } from '../../../../../newgen/error';
 import Button from '@atlaskit/button';
+import { CustomMediaPlayer } from '@atlaskit/media-ui';
 
 const token = 'some-token';
 const clientId = 'some-client-id';
@@ -44,7 +48,6 @@ function createFixture(
   const context = createContext({ authPromise });
   const el = mountWithIntlContext(
     <AudioViewer
-      featureFlags={{ customVideoPlayer: true }}
       context={context}
       item={item || audioItem}
       collectionName={collectionName}
@@ -138,6 +141,8 @@ describe('Audio viewer', () => {
       instance['loadCover'] = () => promiseSrc;
       await instance['init']();
       await promiseSrc;
+      await nextTick();
+
       el.update();
 
       expect(el.find(DefaultCoverWrapper)).toHaveLength(0);
@@ -166,7 +171,7 @@ describe('Audio viewer', () => {
       async function createAutoPlayFixture(previewCount: number) {
         const authPromise = Promise.resolve({ token, clientId, baseUrl });
         const context = createContext({ authPromise });
-        const el = mount(
+        const el = mountWithIntlContext(
           <AudioViewer
             context={context}
             item={audioItem}
@@ -182,12 +187,12 @@ describe('Audio viewer', () => {
 
       it('should auto play when it is the first preview', async () => {
         const el = await createAutoPlayFixture(0);
-        expect(el.find({ autoPlay: true })).toHaveLength(2);
+        expect(el.find(CustomMediaPlayer).prop('isAutoPlay')).toBeTruthy();
       });
 
       it('should not auto play when it is not the first preview', async () => {
         const el = await createAutoPlayFixture(1);
-        expect(el.find({ autoPlay: true })).toHaveLength(0);
+        expect(el.find(CustomMediaPlayer).prop('isAutoPlay')).toBeFalsy();
       });
     });
   });
