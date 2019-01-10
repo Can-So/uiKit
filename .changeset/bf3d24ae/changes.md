@@ -1,1 +1,0 @@
-- pin react-select at 2.1.x to avoid SSR issues in 2.2.0
