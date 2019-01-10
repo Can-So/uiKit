@@ -66,7 +66,7 @@ async function executeMeasure(paths, c, errors = []) {
   }
 
   if (paths.length > 0) {
-    executeMeasure(paths, c, errors);
+    return executeMeasure(paths, c, errors);
   } else {
     return errors;
   }
