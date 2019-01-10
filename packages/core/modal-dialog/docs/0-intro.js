@@ -39,7 +39,7 @@ ${code`
     />
   )}
 
-  \nThe example below shows off some of the different appearances that \`ModalDialog\` comes
+  The example below shows off some of the different appearances that \`ModalDialog\` comes
   with out of the box.
 
   ${(

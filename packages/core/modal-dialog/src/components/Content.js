@@ -152,7 +152,7 @@ export default class Content extends Component<Props, State> {
     if (this.props.components.Body) {
       if (!(this.scrollContainer instanceof HTMLElement)) {
         console.warn(
-          '@atlaskit/modal-dialog: Warning - Ref must attach to a DOM element; check you are using fowardRef and attaching the ref to an appropriate element. Check the examples for more details.',
+          '@atlaskit/modal-dialog: Warning - Ref must attach to a DOM element; check you are using forwardRef and attaching the ref to an appropriate element. Check the examples for more details.',
         );
       }
     }

@@ -211,6 +211,31 @@ describe('modal-dialog', () => {
         expect(wrapper.contains(nodeDeprecated)).toBe(false);
         expect(warnSpy).toHaveBeenCalled();
       });
+
+      it('should warn the user about using forwardRef if not present on a custom body', () => {
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
+        const errorSpy = jest
+          .spyOn(console, 'error')
+          .mockImplementation(() => {});
+
+        const node = props => {
+          return (
+            <>
+              <span>My body</span>
+              {props.children}
+            </>
+          );
+        };
+
+        mount(<ModalDialog components={{ Body: node }} />);
+
+        expect(errorSpy).toHaveBeenCalled();
+        expect(warnSpy).toHaveBeenCalledWith(
+          expect.stringMatching(/forwardRef/),
+        );
+      });
     });
 
     describe('children', () => {
