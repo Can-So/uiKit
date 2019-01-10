@@ -1,6 +1,5 @@
 import * as util from '../../../../../newgen/utils';
 const constructAuthTokenUrlSpy = jest.spyOn(util, 'constructAuthTokenUrl');
-
 import * as React from 'react';
 import Button from '@atlaskit/button';
 import { Auth, ProcessedFileState } from '@atlaskit/media-core';
@@ -73,6 +72,8 @@ function createFixture(
 describe('Video viewer', () => {
   afterEach(() => {
     constructAuthTokenUrlSpy.mockClear();
+    localStorage.clear();
+    (localStorage.setItem as jest.Mock).mockClear();
   });
 
   it('assigns a src for videos when successful', async () => {
@@ -174,6 +175,32 @@ describe('Video viewer', () => {
   it('should default to sd if hd is not available', async () => {
     const authPromise = Promise.resolve({ token, clientId, baseUrl });
     const { el } = createFixture(authPromise, {}, sdVideoItem);
+
+    await (el as any).instance()['init']();
+    el.update();
+    expect(el.state('isHDActive')).toBeFalsy();
+  });
+
+  it('should save video quality when changes', async () => {
+    const authPromise = Promise.resolve({ token, clientId, baseUrl });
+    const { el } = createFixture(authPromise, {});
+
+    await (el as any).instance()['init']();
+    el.update();
+    el.find(Button)
+      .at(2)
+      .simulate('click');
+    expect(localStorage.setItem).toBeCalledWith(
+      'mv_video_player_quality',
+      'sd',
+    );
+    expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+  });
+
+  it('should default to sd if previous quality was sd', async () => {
+    localStorage.setItem('mv_video_player_quality', 'sd');
+    const authPromise = Promise.resolve({ token, clientId, baseUrl });
+    const { el } = createFixture(authPromise, {});
 
     await (el as any).instance()['init']();
     el.update();

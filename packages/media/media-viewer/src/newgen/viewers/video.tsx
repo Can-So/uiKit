@@ -31,19 +31,19 @@ const localStorageKeyName = 'mv_video_player_quality';
 export class VideoViewer extends BaseViewer<string, Props, State> {
   protected get initialState() {
     const { item } = this.props;
-    const preferedQuality = localStorage.getItem(localStorageKeyName);
+    const preferredQuality = localStorage.getItem(localStorageKeyName);
 
     return {
       content: Outcome.pending<string, MediaViewerError>(),
-      isHDActive: isHDAvailable(item) && preferedQuality !== 'sd',
+      isHDActive: isHDAvailable(item) && preferredQuality !== 'sd',
     };
   }
 
   private onHDChange = () => {
     const isHDActive = !this.state.isHDActive;
-    const preferedQuality = isHDActive ? 'hd' : 'sd';
+    const preferredQuality = isHDActive ? 'hd' : 'sd';
 
-    localStorage.setItem(localStorageKeyName, preferedQuality);
+    localStorage.setItem(localStorageKeyName, preferredQuality);
     this.setState({ isHDActive });
     this.init(isHDActive);
   };
