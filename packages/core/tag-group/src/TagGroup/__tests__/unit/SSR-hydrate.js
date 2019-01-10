@@ -12,6 +12,12 @@ jest.mock('exenv', () => ({
   },
 }));
 
+jest.spyOn(global.console, 'error');
+
+afterEach(() => {
+  jest.resetAllMocks();
+});
+
 const App = () => (
   <TagGroup>
     <Tag text="Base Tag" />
@@ -28,4 +34,5 @@ test('should ssr then hydrate tag-group correctly', () => {
   const elem = document.createElement('div');
   elem.innerHTML = serverHTML;
   expect(() => ReactDOM.hydrate(<App />, elem)).not.toThrow();
+  expect(console.error).not.toBeCalled();
 });
