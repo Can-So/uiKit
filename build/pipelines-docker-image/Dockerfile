@@ -5,8 +5,9 @@ FROM node:8.9.0-alpine
 RUN apk update && \
     apk upgrade && \
     apk add curl && \
-    apk add --no-cache bash git openssh && \
-    apk add --no-cache --repository https://nl.alpinelinux.org/alpine/edge/testing flow
+    apk add --no-cache bash git openssh
+
+RUN npm install --global flow-bin
 
 # Update yarn version
 # NOTE: This version of yarn is not the one that is used to install dependencies at the root. That yarn
