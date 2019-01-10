@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { Team } from '../types';
 import { HighlightText } from './HighlightText';
 import { SizeableAvatar } from './SizeableAvatar';
-import { hasValue } from './utils';
 import { messages } from './i18n';
 
 const AvatarComponent = styled.div`
@@ -51,10 +50,10 @@ export class TeamOption extends React.PureComponent<TeamOptionProps> {
 
   private getPrimaryText = () => {
     const {
-      team: { name, description, highlight },
+      team: { name, highlight },
     } = this.props;
 
-    const result = [
+    return [
       <TextWrapper
         key="name"
         color={this.props.isSelected ? colors.N0 : colors.N800}
@@ -64,21 +63,6 @@ export class TeamOption extends React.PureComponent<TeamOptionProps> {
         </HighlightText>
       </TextWrapper>,
     ];
-    if (hasValue(description) && name.trim() !== description.trim()) {
-      result.push(
-        <React.Fragment key="description">
-          {' '}
-          <TextWrapper color={this.props.isSelected ? colors.N50 : colors.N200}>
-            (
-            <HighlightText highlights={highlight && highlight.description}>
-              {description}
-            </HighlightText>
-            )
-          </TextWrapper>
-        </React.Fragment>,
-      );
-    }
-    return result;
   };
 
   private renderByline = () => {
