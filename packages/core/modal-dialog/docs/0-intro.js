@@ -71,7 +71,7 @@ ${code`
 
   ${(
     <Example
-      packageName="@atlaskkit/modal-dialog"
+      packageName="@atlaskit/modal-dialog"
       Component={require('../examples/45-form').default}
       title="Form"
       source={require('!!raw-loader!../examples/45-form')}
