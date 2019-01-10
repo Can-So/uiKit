@@ -51,16 +51,13 @@ export class SmartMediaEditor extends React.Component<
   }
 
   getFile = async (identifier: FileIdentifier) => {
-    console.log('getFile', identifier);
     const { context, onError } = this.props;
     const { collectionName, occurrenceKey } = identifier;
     const id = await identifier.id;
-    console.log('context.file.getFileState("', id, '")');
     const getFileSubscription = context.file
       .getFileState(id, { collectionName, occurrenceKey })
       .subscribe({
         next: async state => {
-          console.log({ state });
           if (state.status === 'processed') {
             const { name } = state;
             this.fileName = name;
@@ -125,7 +122,6 @@ export class SmartMediaEditor extends React.Component<
     };
 
     context.file.upload(uploadableFile, undefined, uploadableFileUpfrontIds);
-    console.log('new file id', id);
 
     const newFileIdentifier: FileIdentifier = {
       id,

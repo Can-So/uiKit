@@ -137,10 +137,7 @@ class MediaNode extends Component<
     /** For new images, the media state will be loaded inside the plugin state */
     const state = this.pluginState.getMediaNodeState(id);
 
-    console.log('nodeviews.media.render', id, state);
-
     if (!this.state.viewContext || (!state && !id)) {
-      console.log('still loading');
       return <CardView status="loading" dimensions={cardDimensions} />;
     }
 

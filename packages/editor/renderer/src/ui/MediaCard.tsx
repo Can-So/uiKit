@@ -142,7 +142,6 @@ export class MediaCardInternal extends Component<MediaCardProps, State> {
       occurrenceKey: occurrenceKey,
     };
 
-    console.log('renderer <Card', identifier);
     return (
       <Card
         identifier={identifier}

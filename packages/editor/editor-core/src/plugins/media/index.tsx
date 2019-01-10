@@ -176,10 +176,6 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
               collectionName: node.attrs.collection,
             };
 
-            console.log(
-              'opening smart media editor with identifier',
-              identifier,
-            );
             smartMediaEditor = (
               <SmartMediaEditor
                 identifier={identifier}

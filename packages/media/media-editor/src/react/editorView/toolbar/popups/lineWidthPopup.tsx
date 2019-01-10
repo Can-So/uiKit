@@ -26,7 +26,6 @@ export class LineWidthPopup extends Component<LineWidthPopupProps> {
   private buttons(): JSX.Element[] {
     const { onLineWidthClick, lineWidth: currentLineWidth } = this.props;
     const lineWidths = [4, 8, 12, 16, 20];
-    console.log({ currentLineWidth });
 
     return lineWidths.map(lineWidth => (
       <LineWidthIcon
