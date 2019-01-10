@@ -1,0 +1,1 @@
+- Bug fix in the basic drawer assembly example
