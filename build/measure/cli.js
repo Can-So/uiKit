@@ -36,21 +36,22 @@ let c = meow(
 const paths = c.input;
 
 if (paths) {
-  const errors = executeMeasure(paths, c);
-  if (errors.length > 0) {
-    console.log(
-      chalk.red('Bundle size build failed with the following errors:'),
-    );
+  executeMeasure(paths, c).then(errors => {
+    if (errors.length > 0) {
+      console.log(
+        chalk.red('Bundle size build failed with the following errors:'),
+      );
 
-    errors.forEach(error => {
-      console.log(chalk.red(error));
-    });
+      errors.forEach(error => {
+        console.log(chalk.red(error));
+      });
 
-    process.exit(1);
-  } else {
-    console.log(chalk.green('No significant bundle size changes detected'));
-    process.exit(0);
-  }
+      process.exit(1);
+    } else {
+      console.log(chalk.green('No significant bundle size changes detected'));
+      process.exit(0);
+    }
+  });
 } else {
   console.log(chalk.red('no paths specified, no work to do. :D'));
 }

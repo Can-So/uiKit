@@ -7,7 +7,7 @@ There are two commands in measure:
 ## Basic usage
 
 ```sh
-yarn measure [path1gs] [path2] [path3]
+yarn measure [path1] [path2] [path3]
 ```
 
 For example, to measure button, you would use:
