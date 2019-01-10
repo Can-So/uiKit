@@ -1,0 +1,122 @@
+[
+  {
+    "id": "src.main",
+    "name": "main",
+    "stats": {
+      "size": 13795,
+      "gzipSize": 3835
+    }
+  },
+  {
+    "id": "node_modules.main",
+    "name": "node_modules [main]",
+    "stats": {
+      "size": 1537519,
+      "gzipSize": 498421
+    }
+  },
+  {
+    "id": "node_modules.async",
+    "name": "node_modules [async]",
+    "stats": {
+      "size": 365785,
+      "gzipSize": 97101
+    }
+  },
+  {
+    "id": "atlaskit.core.main",
+    "name": "main",
+    "stats": {
+      "size": 448483,
+      "gzipSize": 97763
+    }
+  },
+  {
+    "id": "atlaskit.core.async",
+    "name": "async",
+    "stats": {
+      "size": 179708,
+      "gzipSize": 38327
+    }
+  },
+  {
+    "id": "atlaskit.editor.main",
+    "name": "main",
+    "stats": {
+      "size": 699187,
+      "gzipSize": 177967
+    }
+  },
+  {
+    "id": "atlaskit.editor.async",
+    "name": "async",
+    "stats": {
+      "size": 30749,
+      "gzipSize": 7885
+    }
+  },
+  {
+    "id": "atlaskit.elements.main",
+    "name": "main",
+    "stats": {
+      "size": 72904,
+      "gzipSize": 18061
+    }
+  },
+  {
+    "id": "atlaskit.elements.async",
+    "name": "async",
+    "stats": {
+      "size": 68610,
+      "gzipSize": 20669
+    }
+  },
+  {
+    "id": "atlaskit.media.main",
+    "name": "main",
+    "stats": {
+      "size": 211026,
+      "gzipSize": 47954
+    }
+  },
+  {
+    "id": "atlaskit.media.async",
+    "name": "async",
+    "stats": {
+      "size": 776478,
+      "gzipSize": 193131
+    }
+  },
+  {
+    "id": "atlaskit.people-and-teams.main",
+    "name": "main",
+    "stats": {
+      "size": 84327,
+      "gzipSize": 14825
+    }
+  },
+  {
+    "id": "atlaskit.teamwork-ecosystem.async",
+    "name": "async",
+    "stats": {
+      "size": 625,
+      "gzipSize": 368
+    }
+  },
+  {
+    "id": "combined.main",
+    "name": "main",
+    "stats": {
+      "size": 3062654,
+      "gzipSize": 869468
+    }
+  },
+  {
+    "id": "combined.async",
+    "name": "async",
+    "stats": {
+      "size": 1418983,
+      "gzipSize": 359562
+    }
+  }
+]
