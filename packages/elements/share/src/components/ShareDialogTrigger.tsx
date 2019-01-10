@@ -1,37 +1,11 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import InlineDialog from '@atlaskit/inline-dialog';
+import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 import { ShareButton } from './ShareButton';
 import { ShareForm } from './ShareForm';
 import { messages } from '../i18n';
-
-export type InvitationsCapabilities = {
-  directInvite?: DirectInviteCapabilities;
-  invitePendingApproval?: RequestAccessCapabilities;
-};
-
-export type DirectInviteCapabilities = {
-  mode: 'NONE' | 'ANYONE' | 'DOMAIN_RESTRICTED';
-  domains: string[];
-  permittedResources: string[];
-};
-
-export type RequestAccessCapabilities = {
-  mode: 'NONE' | 'ANYONE';
-  permittedResources: string[];
-};
-
-export type Props = {
-  buttonStyle?: 'default' | 'withText';
-  children?: RenderChildren;
-  capabilities?: InvitationsCapabilities;
-  isCapabilitiesRequired?: boolean;
-  isDisable?: boolean;
-  loadOptions?: any;
-  // TODO: work out the Promise return
-  onSubmit?: (dialogContentState: DialogContentState) => Promise<any>;
-  shouldCloseOnEscapePress?: boolean;
-};
+import { InvitationsCapabilities } from '../clients/IdentityClient';
 
 export type RenderChildren = (openModal: Function) => React.ReactNode;
 
@@ -49,6 +23,23 @@ export type User = {
   email?: string;
 };
 
+export type Props = {
+  buttonStyle?: 'default' | 'withText';
+  children?: RenderChildren;
+  capabilities?: InvitationsCapabilities;
+  isDisable?: boolean;
+  loadOptions?: any;
+  onUsersChange?: (users: User[]) => any;
+  onCommentChange?: (comment: string) => any;
+  // TODO: work out the Promise return
+  onSubmit?: (dialogContentState: DialogContentState) => Promise<any>;
+  shouldCloseOnEscapePress?: boolean;
+  validateStateWithCapabilities?: (
+    state: DialogContentState,
+    capabilities: InvitationsCapabilities,
+  ) => boolean;
+};
+
 export const defaultDialogContentState: DialogContentState = {
   users: [],
   comment: '',
@@ -61,7 +52,6 @@ export class ShareDialogTrigger extends React.Component<
   static defaultProps = {
     buttonAppearance: 'default',
     capabilities: {},
-    isCapabilitiesRequired: false,
     isDisable: false,
     shouldCloseOnEscapePress: false,
   };
@@ -69,6 +59,7 @@ export class ShareDialogTrigger extends React.Component<
   state = {
     isDialogOpen: false,
     ...defaultDialogContentState,
+    isStateValidWithCapabilities: true,
   };
 
   componentDidMount() {
@@ -83,7 +74,30 @@ export class ShareDialogTrigger extends React.Component<
     }
   }
 
-  handleOpenDialog = () => {
+  static getDerivedStateFromProps(props, state) {
+    const { capabilities, validateStateWithCapabilities } = props;
+
+    if (
+      !state.isDialogOpen ||
+      !validateStateWithCapabilities ||
+      !capabilities
+    ) {
+      return state;
+    }
+
+    return {
+      ...state,
+      isStateValidWithCapabilities: validateStateWithCapabilities(
+        state,
+        capabilities,
+      ),
+    };
+  }
+
+  handleOpenDialog = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    analyticsEvent: UIAnalyticsEvent,
+  ) => {
     // TODO: send analytics
 
     this.setState({
@@ -92,12 +106,8 @@ export class ShareDialogTrigger extends React.Component<
   };
 
   handleCloseDialog = ({ isOpen, event }) => {
-    // retain the state when it is a click, let the state cleared when it is an escape press
-    if (event!.type === 'click') {
-      const dialogContentState: DialogContentState = { users: [], comment: '' };
-      this.retainDialogContentState(dialogContentState);
-      // may not need this if this component is going to be the only form state holder
-    } else if (event!.type === 'keyPress' || event!.type === 'submit') {
+    // clear the state when it is an escape press or a succesful submit
+    if (event!.type === 'keyPress' || event!.type === 'submit') {
       this.clearDialogContentState();
     }
 
@@ -112,12 +122,20 @@ export class ShareDialogTrigger extends React.Component<
     this.setState(defaultDialogContentState);
   };
 
-  // may not need this if this component is going to be the only form state holder
-  retainDialogContentState = (contentState: DialogContentState) => {
-    this.setState({
-      users: contentState.users,
-      comment: contentState.comment,
-    });
+  handleShareUsersChange = (users: User[]) => {
+    this.setState({ users });
+
+    if (this.props.onUsersChange) {
+      this.props.onUsersChange!(users);
+    }
+  };
+
+  handleShareCommentChange = (comment: string) => {
+    this.setState({ comment });
+
+    if (this.props.onCommentChange) {
+      this.props.onCommentChange!(comment);
+    }
   };
 
   handleShareSubmit = event => {
@@ -138,20 +156,8 @@ export class ShareDialogTrigger extends React.Component<
   };
 
   render() {
-    const { isDialogOpen } = this.state;
-    const {
-      isCapabilitiesRequired,
-      isDisable,
-      capabilities,
-      loadOptions,
-    } = this.props;
-
-    // if it cannot share without capabilities and if capabilities are not provided
-    // should the component be not rendered or disabled?
-    if (isCapabilitiesRequired && !Object.keys(capabilities!).length) {
-      // TODO: send analytics event
-      return null;
-    }
+    const { isDialogOpen, isStateValidWithCapabilities } = this.state;
+    const { isDisable, loadOptions } = this.props;
 
     // for performance purposes, we may want to have a lodable content i.e. ShareForm
     return (
@@ -160,7 +166,10 @@ export class ShareDialogTrigger extends React.Component<
           content={
             <ShareForm
               loadOptions={loadOptions}
+              onCommentChange={this.handleShareCommentChange}
+              onUsersChange={this.handleShareUsersChange}
               onShareClick={this.handleShareSubmit}
+              shouldCapabilitiesWarningShow={isStateValidWithCapabilities}
             />
           }
           isOpen={isDialogOpen}

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Button from '@atlaskit/button';
 import { ShareDialogTrigger } from '../src/components/ShareDialogTrigger';
 
 export default () => (
@@ -9,7 +10,7 @@ export default () => (
     <ShareDialogTrigger buttonStyle="withText" />
     <h4>Custom share button</h4>
     <ShareDialogTrigger>
-      {openDialog => <button onClick={openDialog}>Custom Button</button>}
+      {openDialog => <Button onClick={openDialog}>Custom Button</Button>}
     </ShareDialogTrigger>
   </>
 );

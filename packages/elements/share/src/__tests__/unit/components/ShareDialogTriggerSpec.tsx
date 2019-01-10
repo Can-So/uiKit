@@ -9,7 +9,6 @@ import { ShareForm } from '../../../components/ShareForm';
 import {
   ShareDialogTrigger,
   defaultDialogContentState,
-  DialogContentState,
 } from '../../../components/ShareDialogTrigger';
 
 describe('ShareDialogTrigger', () => {
@@ -21,13 +20,6 @@ describe('ShareDialogTrigger', () => {
       expect(wrapper.find<any>(InlineDialog).props().isOpen).toBe(false);
       expect(wrapper.find(ShareForm).length).toBe(0);
       expect(wrapper.find(ShareButton).length).toBe(1);
-    });
-
-    it('should not render if isCapabilitiesRequired prop is true and capabilities prop is not given', () => {
-      const wrapper = shallow(
-        <ShareDialogTrigger isCapabilitiesRequired={true} />,
-      );
-      expect(wrapper.find(InlineDialog).length).toBe(0);
     });
   });
 
@@ -63,6 +55,58 @@ describe('ShareDialogTrigger', () => {
       const wrapper = mount<ShareDialogTrigger>(<ShareDialogTrigger />);
       wrapper.setState({ isDialogOpen: true });
       expect(wrapper.find(ShareForm).length).toBe(1);
+    });
+  });
+
+  describe('isStateValidWithCapabilities', () => {
+    it('should be updated only if isDialogOpen state is true, capabilities and validateStateWithCapabilities props are given', () => {
+      const mockCapabilities = {};
+      const mockIsStateValidWithCapabilities = false;
+      const spiedValidateStateWithCapabilities = jest.fn(
+        () => mockIsStateValidWithCapabilities,
+      );
+      let wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger
+          capabilities={mockCapabilities}
+          validateStateWithCapabilities={spiedValidateStateWithCapabilities}
+        />,
+      );
+      expect(spiedValidateStateWithCapabilities).not.toHaveBeenCalled();
+
+      wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger
+          validateStateWithCapabilities={spiedValidateStateWithCapabilities}
+        />,
+      );
+      wrapper.setState({ isDialogOpen: true });
+      expect(spiedValidateStateWithCapabilities).not.toHaveBeenCalled();
+
+      const latestStateSnapshot = wrapper.state();
+      wrapper.setProps({ capabilities: mockCapabilities });
+      expect(spiedValidateStateWithCapabilities).toHaveBeenCalledTimes(1);
+      expect(spiedValidateStateWithCapabilities.mock.calls[0][0]).toEqual(
+        latestStateSnapshot,
+      );
+      expect(spiedValidateStateWithCapabilities.mock.calls[0][1]).toEqual(
+        mockCapabilities,
+      );
+
+      expect(wrapper.state().isStateValidWithCapabilities).toEqual(
+        mockIsStateValidWithCapabilities,
+      );
+    });
+
+    it('should be passed into ShareForm as shouldCapabilitiesWarningShow props', () => {
+      const wrapper = mount<ShareDialogTrigger>(<ShareDialogTrigger />);
+      wrapper.setState({
+        isDialogOpen: true,
+        isStateValidWithCapabilities: !wrapper.state()
+          .isStateValidWithCapabilities,
+      });
+      let shareFormProps = wrapper.find(ShareForm).props();
+      expect(shareFormProps.shouldCapabilitiesWarningShow).toEqual(
+        wrapper.state().isStateValidWithCapabilities,
+      );
     });
   });
 
@@ -106,6 +150,7 @@ describe('ShareDialogTrigger', () => {
     it('should set the isDialogOpen state to true', () => {
       const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
       expect(wrapper.state().isDialogOpen).toEqual(false);
+      // @ts-ignore
       wrapper.instance().handleOpenDialog();
       expect(wrapper.state().isDialogOpen).toEqual(true);
     });
@@ -170,6 +215,42 @@ describe('ShareDialogTrigger', () => {
 
       // check if the spied function is called
       expect(spiedHandleCloseDialog).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('handleShareUsersChange', () => {
+    it('should update the users state with the first parameter', () => {
+      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const mockUsers = [{}, {}, {}];
+      wrapper.instance().handleShareUsersChange(mockUsers);
+      expect(wrapper.state().users).toEqual(mockUsers);
+    });
+
+    it('should call onUsersChange prop if it is given', () => {
+      const spiedOnUsersChange = jest.fn();
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger onUsersChange={spiedOnUsersChange} />,
+      );
+      wrapper.instance().handleShareUsersChange([{}]);
+      expect(spiedOnUsersChange).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('handleShareCommentChange', () => {
+    it('should update the users state with the first parameter', () => {
+      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const mockComment = 'comment';
+      wrapper.instance().handleShareCommentChange(mockComment);
+      expect(wrapper.state().comment).toEqual(mockComment);
+    });
+
+    it('should call onCommentChange prop if it is given', () => {
+      const spiedOnCommentChange = jest.fn();
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger onCommentChange={spiedOnCommentChange} />,
+      );
+      wrapper.instance().handleShareCommentChange('comment');
+      expect(spiedOnCommentChange).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -259,21 +340,6 @@ describe('ShareDialogTrigger', () => {
       expect(state.isDialogOpen).toEqual(newState.isDialogOpen);
       expect(state.users).toEqual(defaultDialogContentState.users);
       expect(state.comment).toEqual(defaultDialogContentState.comment);
-    });
-  });
-
-  describe('retainDialogContentState', () => {
-    it('should set the state with the value from the parameter', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
-      const mockState = {
-        users: [{}, {}, {}],
-        comment: 'comment',
-      };
-      wrapper.instance().retainDialogContentState(mockState);
-
-      const state: DialogContentState = wrapper.state();
-      expect(state.users).toEqual(mockState.users);
-      expect(state.comment).toEqual(mockState.comment);
     });
   });
 });
