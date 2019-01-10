@@ -152,9 +152,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
     const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
     console.log('id', getMediaNode!.attrs.id);
     const state = fileStreamsCache.getState(getMediaNode!.attrs.id);
-    window.fileStreamsCache = fileStreamsCache;
     console.log(fileStreamsCache.fileStreams);
-    // const x = fileStreamsCache;
     console.log({ state });
     if (state) {
       state.then(state => {

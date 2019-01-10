@@ -23,6 +23,7 @@ export class FileStreamCache {
   }
 
   set(id: string, fileStream: Observable<FileState>) {
+    console.log('cache set', id);
     this.fileStreams.set(id, fileStream);
   }
 
