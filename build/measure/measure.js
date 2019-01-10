@@ -18,7 +18,7 @@ const { prepareForPrint } = require('./utils/print');
 const { printReport } = require('./reporters/console');
 
 module.exports = function main(filePath, isAnalyze, isJson, isLint) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     const measureOutputPath = path.join(
       process.cwd(),
       filePath,
