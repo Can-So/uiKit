@@ -219,6 +219,13 @@ export default class Page {
     return this.browser.waitForExist(selector, options.timeout || WAIT_TIMEOUT);
   }
 
+  waitForVisible(selector, options = {}) {
+    return this.browser.waitForVisible(
+      selector,
+      options.timeout || WAIT_TIMEOUT,
+    );
+  }
+
   waitFor(selector, ms, reverse) {
     return this.browser.waitForVisible(selector, ms, reverse);
   }
