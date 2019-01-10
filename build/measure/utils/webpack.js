@@ -43,6 +43,8 @@ function createWebpackConfig({
     'styled-components': path.resolve(__dirname, '..', 'noop.js'),
     react: path.resolve(__dirname, '..', 'noop.js'),
     'react-dom': path.resolve(__dirname, '..', 'noop.js'),
+    'prop-types': path.resolve(__dirname, '..', 'noop.js'),
+    tslib: path.resolve(__dirname, '..', 'noop.js'),
   };
 
   if (optimization) {

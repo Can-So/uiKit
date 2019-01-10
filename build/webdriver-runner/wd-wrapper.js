@@ -227,6 +227,48 @@ export default class Page {
   chooseFile(selector, localPath) {
     return this.browser.chooseFile(selector, localPath);
   }
+
+  mockDate(timestamp, timezoneOffset) {
+    return this.browser.execute(
+      (t, tz) => {
+        const _Date = Date;
+        const realDate = params => new _Date(params);
+        const mockedDate = new _Date(t);
+
+        if (tz) {
+          const localDateOffset = new _Date().getTimezoneOffset() / 60;
+          const dateWithTimezoneOffset = new _Date(
+            t + (tz + localDateOffset) * 3600000,
+          );
+          const localDateMethods = [
+            'getFullYear',
+            'getYear',
+            'getMonth',
+            'getDate',
+            'getDay',
+            'getHours',
+            'getMinutes',
+          ];
+          localDateMethods.forEach(dateMethod => {
+            mockedDate[dateMethod] = () => dateWithTimezoneOffset[dateMethod]();
+          });
+        }
+
+        Date = function(...params) {
+          if (params.length > 0) {
+            return realDate(...params);
+          }
+          return mockedDate;
+        };
+        Object.getOwnPropertyNames(_Date).forEach(property => {
+          Date[property] = _Date[property];
+        });
+        Date.now = () => t;
+      },
+      timestamp,
+      timezoneOffset,
+    );
+  }
 }
 //TODO: Maybe wrapping all functions?
 async function wrapper(fn) {

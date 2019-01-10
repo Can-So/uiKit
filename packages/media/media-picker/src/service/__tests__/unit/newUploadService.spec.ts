@@ -3,16 +3,13 @@ jest.mock('../../../util/getPreviewFromImage');
 
 import {
   ContextFactory,
-  FileItem,
   AuthProvider,
-  MediaItemProvider,
   ContextConfig,
   UploadableFile,
   Context,
   Auth,
   fileStreamsCache,
   FileState,
-  MediaItem,
 } from '@atlaskit/media-core';
 import { TouchedFiles } from '@atlaskit/media-store';
 import * as uuid from 'uuid';
@@ -359,83 +356,6 @@ describe('UploadService', () => {
       });
     });
 
-    it.skip('should emit file-converted when file is successfully processed', done => {
-      const context = getContext();
-      const pendingFileItem: FileItem = {
-        type: 'file',
-        details: {
-          id: 'some-id',
-          processingStatus: 'pending',
-        },
-      };
-      const succeededFileItem: FileItem = {
-        type: 'file',
-        details: {
-          id: 'some-id',
-          processingStatus: 'succeeded',
-        },
-      };
-      const failedFileItem: FileItem = {
-        type: 'file',
-        details: {
-          id: 'some-id',
-          processingStatus: 'failed',
-        },
-      };
-      const mediaItemProvider: MediaItemProvider = {
-        observable: () =>
-          Observable.create((observer: Subscriber<MediaItem>) => {
-            observer.next(pendingFileItem);
-            expect(fileConvertedCallback).not.toHaveBeenCalled();
-            observer.next(succeededFileItem);
-            const expectedFile = {
-              publicId: 'public-file-id',
-              id: expect.any(String),
-              creationDate: expect.any(Number),
-              name: 'some-filename',
-              size: 100,
-              type: 'video/mp4',
-            };
-            expect(fileConvertedCallback).toHaveBeenCalledWith({
-              file: expectedFile,
-              public: {
-                id: 'some-id',
-                processingStatus: 'succeeded',
-              },
-            });
-            observer.next(failedFileItem);
-            expect(fileConvertedCallback).toHaveBeenCalledWith({
-              file: expectedFile,
-              public: {
-                id: 'some-id',
-                processingStatus: 'failed',
-              },
-            });
-            done();
-          }),
-      };
-
-      jest
-        .spyOn(context, 'getMediaItemProvider')
-        .mockReturnValue(mediaItemProvider);
-      const { uploadService } = setup(context, {
-        collection: 'some-collection',
-      });
-      const fileConvertedCallback = jest.fn();
-      uploadService.on('file-converted', fileConvertedCallback);
-      jest.spyOn(context.file, 'upload').mockReturnValue(
-        new Observable(observer => {
-          window.setTimeout(() => {
-            observer.next({
-              status: 'processing',
-              id: 'public-file-id',
-            });
-          });
-        }),
-      );
-      uploadService.addFiles([file]);
-    });
-
     it.skip('should call emit "file-uploading" when it receives an onProgress event from Context.file#upload()', () => {
       const context = getContext();
       const { uploadService } = setup(context, {
@@ -557,135 +477,6 @@ describe('UploadService', () => {
       uploadService.addFiles([file1, file2]);
       uploadService.cancel();
       expect(createUploadController).toHaveBeenCalledTimes(2);
-    });
-
-    it.skip('should cancel status polling if file was already uploaded', done => {
-      const file = {
-        size: 100,
-        name: 'some-filename',
-        type: 'some-type',
-      } as any;
-
-      const pendingFileItem: FileItem = {
-        type: 'file',
-        details: {
-          id: 'some-id',
-          processingStatus: 'pending',
-        },
-      };
-
-      const succeededFileItem: FileItem = {
-        type: 'file',
-        details: {
-          id: 'some-id',
-          processingStatus: 'succeeded',
-        },
-      };
-
-      const context = getContext();
-      const { uploadService } = setup(context);
-
-      const fileConvertedCallback = jest.fn();
-      uploadService.on('file-converted', fileConvertedCallback);
-      const chunkinatorCancel = jest.fn();
-
-      jest.spyOn(context.file, 'upload').mockReturnValue(
-        new Observable(observer => {
-          window.setTimeout(() => {
-            observer.next({
-              status: 'processing',
-              id: 'some-id',
-            });
-          });
-        }),
-      );
-      const mediaItemProvider: MediaItemProvider = {
-        observable: () =>
-          Observable.create((observer: Subscriber<MediaItem>) => {
-            // We have to wait 1 cycle otherwise :next callback called synchronously
-            window.setTimeout(() => {
-              // It's not required, but I like "natural" feel of this call
-              observer.next(pendingFileItem);
-
-              // At this point cancellableFilesUpload.cancel should be the one that cancels polling observable
-              uploadService.cancel();
-              // Just checking that original cancel method (that came from context.file.upload)
-              // is not called at this point
-              expect(chunkinatorCancel).not.toHaveBeenCalled();
-              expect(observer.closed).toBe(true);
-
-              // Double checking that cancellableFilesUpload was released
-              expect(
-                Object.keys((uploadService as any).cancellableFilesUploads),
-              ).toHaveLength(0);
-
-              // Just checking that `file-converted` event is not triggered even if .next be called
-              observer.next(succeededFileItem);
-              expect(fileConvertedCallback).not.toHaveBeenCalled();
-              done();
-            });
-          }),
-      };
-
-      jest
-        .spyOn(context, 'getMediaItemProvider')
-        .mockReturnValue(mediaItemProvider);
-
-      uploadService.addFiles([file]);
-    });
-
-    it.skip('should release cancellableFilesUpload after files were added and succeeded status received', done => {
-      const file: File = {
-        size: 100,
-        name: 'some-filename',
-        type: 'doc',
-      } as any;
-
-      const succeededFileItem: FileItem = {
-        type: 'file',
-        details: {
-          id: 'some-id',
-          processingStatus: 'succeeded',
-        },
-      };
-
-      const context = getContext();
-      const { uploadService } = setup(context);
-
-      const filesAddedCallback = jest.fn();
-      uploadService.on('files-added', filesAddedCallback);
-
-      jest.spyOn(context.file, 'upload').mockReturnValue(
-        new Observable(observer => {
-          window.setTimeout(() => {
-            observer.next({
-              status: 'processing',
-            });
-          });
-        }),
-      );
-
-      const mediaItemProvider: MediaItemProvider = {
-        observable: () =>
-          Observable.create((observer: Subscriber<MediaItem>) => {
-            window.setTimeout(() => {
-              observer.next(succeededFileItem);
-              expect(
-                Object.keys((uploadService as any).cancellableFilesUploads),
-              ).toHaveLength(0);
-              done();
-            });
-          }),
-      };
-
-      jest
-        .spyOn(context, 'getMediaItemProvider')
-        .mockReturnValue(mediaItemProvider);
-
-      uploadService.addFiles([file]);
-      expect(
-        Object.keys((uploadService as any).cancellableFilesUploads),
-      ).toHaveLength(1);
     });
 
     it.skip('should release cancellableFilesUpload after file failed to upload', () => {
@@ -893,9 +684,8 @@ describe('UploadService', () => {
       });
       uploadService.addFiles([file]);
 
-      expect(fileStreamCacheSpy).toHaveBeenCalledTimes(2);
+      expect(fileStreamCacheSpy).toHaveBeenCalledTimes(1);
       expect(fileStreamCacheSpy.mock.calls[0][0]).toBe('uuid1');
-      expect(fileStreamCacheSpy.mock.calls[1][0]).toBe('uuid1-some-collection');
     });
   });
 });

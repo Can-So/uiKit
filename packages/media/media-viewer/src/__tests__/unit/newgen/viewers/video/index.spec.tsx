@@ -9,7 +9,6 @@ import { awaitError, mountWithIntlContext } from '@atlaskit/media-test-helpers';
 import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { createContext } from '../../../_stubs';
 import { VideoViewer, Props } from '../../../../../newgen/viewers/video';
-import { Video } from '../../../../../newgen/styled';
 import { ErrorMessage } from '../../../../../newgen/error';
 
 const token = 'some-token';
@@ -30,6 +29,20 @@ const videoItem: ProcessedFileState = {
     },
     'video_1280.mp4': {
       url: '/video_hd',
+      processingStatus: 'succeeded',
+    },
+  },
+};
+const sdVideoItem: ProcessedFileState = {
+  id: 'some-id',
+  status: 'processed',
+  name: 'my video',
+  size: 11222,
+  mediaType: 'video',
+  mimeType: 'mp4',
+  artifacts: {
+    'video_640.mp4': {
+      url: '/video',
       processingStatus: 'succeeded',
     },
   },
@@ -67,8 +80,8 @@ describe('Video viewer', () => {
     const { el } = createFixture(authPromise);
     await (el as any).instance()['init']();
     el.update();
-    expect(el.find(Video).prop('src')).toEqual(
-      'some-base-url/video?client=some-client-id&token=some-token',
+    expect(el.find(CustomMediaPlayer).prop('src')).toEqual(
+      'some-base-url/video_hd?client=some-client-id&token=some-token',
     );
   });
 
@@ -101,18 +114,13 @@ describe('Video viewer', () => {
 
   it('shows error message when there are not video artifacts in the media item', async () => {
     const authPromise = Promise.resolve({ token, clientId, baseUrl });
-    const { el } = createFixture(
-      authPromise,
-      {
-        featureFlags: { customVideoPlayer: true },
-      },
-      videoItemWithNoArtifacts,
-    );
+    const { el } = createFixture(authPromise, {}, videoItemWithNoArtifacts);
 
     await (el as any).instance()['init']();
     el.update();
 
     const errorMessage = el.find(ErrorMessage);
+
     expect(errorMessage).toHaveLength(1);
     expect(errorMessage.text()).toContain(
       "We couldn't generate a preview for this file",
@@ -130,39 +138,50 @@ describe('Video viewer', () => {
 
   it('should render a custom video player if the feature flag is active', async () => {
     const authPromise = Promise.resolve({ token, clientId, baseUrl });
-    const { el } = createFixture(authPromise, {
-      featureFlags: { customVideoPlayer: true },
-    });
+    const { el } = createFixture(authPromise);
 
     await (el as any).instance()['init']();
     el.update();
 
     expect(el.find(CustomMediaPlayer)).toHaveLength(1);
     expect(el.find(CustomMediaPlayer).prop('src')).toEqual(
-      'some-base-url/video?client=some-client-id&token=some-token',
+      'some-base-url/video_hd?client=some-client-id&token=some-token',
     );
   });
 
   it('should toggle hd when button is clicked', async () => {
     const authPromise = Promise.resolve({ token, clientId, baseUrl });
-    const { el } = createFixture(authPromise, {
-      featureFlags: { customVideoPlayer: true },
-    });
+    const { el } = createFixture(authPromise);
+
+    await (el as any).instance()['init']();
+    el.update();
+    expect(el.state('isHDActive')).toBeTruthy();
+    el.find(Button)
+      .at(2)
+      .simulate('click');
+    expect(el.state('isHDActive')).toBeFalsy();
+  });
+
+  it('should default to hd if available', async () => {
+    const authPromise = Promise.resolve({ token, clientId, baseUrl });
+    const { el } = createFixture(authPromise);
+
+    await (el as any).instance()['init']();
+    el.update();
+    expect(el.state('isHDActive')).toBeTruthy();
+  });
+
+  it('should default to sd if hd is not available', async () => {
+    const authPromise = Promise.resolve({ token, clientId, baseUrl });
+    const { el } = createFixture(authPromise, {}, sdVideoItem);
 
     await (el as any).instance()['init']();
     el.update();
     expect(el.state('isHDActive')).toBeFalsy();
-    el.find(Button)
-      .at(2)
-      .simulate('click');
-    expect(el.state('isHDActive')).toBeTruthy();
   });
 
   describe('AutoPlay', () => {
-    async function createAutoPlayFixture(
-      previewCount: number,
-      isCustomVideoPlayer: boolean,
-    ) {
+    async function createAutoPlayFixture(previewCount: number) {
       const authPromise = Promise.resolve({ token, clientId, baseUrl });
       const context = createContext({ authPromise });
       const el = mountWithIntlContext(
@@ -170,7 +189,6 @@ describe('Video viewer', () => {
           context={context}
           previewCount={previewCount}
           item={videoItem}
-          featureFlags={{ customVideoPlayer: isCustomVideoPlayer }}
         />,
       );
       await (el as any).instance()['init']();
@@ -178,27 +196,15 @@ describe('Video viewer', () => {
       return el;
     }
 
-    it('should auto play custom video viewer when it is the first preview', async () => {
-      const el = await createAutoPlayFixture(0, true);
+    it('should auto play video viewer when it is the first preview', async () => {
+      const el = await createAutoPlayFixture(0);
       expect(el.find(CustomMediaPlayer)).toHaveLength(1);
       expect(el.find({ autoPlay: true })).toHaveLength(2);
     });
 
-    it('should not auto play custom video viewer when it is not the first preview', async () => {
-      const el = await createAutoPlayFixture(1, true);
+    it('should not auto play video viewer when it is not the first preview', async () => {
+      const el = await createAutoPlayFixture(1);
       expect(el.find(CustomMediaPlayer)).toHaveLength(1);
-      expect(el.find({ autoPlay: true })).toHaveLength(0);
-    });
-
-    it('should auto play native video viewer when it is the first preview', async () => {
-      const el = await createAutoPlayFixture(0, false);
-      expect(el.find(CustomMediaPlayer)).toHaveLength(0);
-      expect(el.find({ autoPlay: true })).toHaveLength(2);
-    });
-
-    it('should not auto play native video viewer when it is not the first preview', async () => {
-      const el = await createAutoPlayFixture(1, false);
-      expect(el.find(CustomMediaPlayer)).toHaveLength(0);
       expect(el.find({ autoPlay: true })).toHaveLength(0);
     });
   });

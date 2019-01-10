@@ -5,7 +5,7 @@ import {
 } from '@atlaskit/visual-regression/helper';
 
 describe('Snapshot Test', () => {
-  it('Icon size example-should match production example', async () => {
+  it('Icon size example should match production example', async () => {
     const url = getExampleUrl(
       'core',
       'icon',

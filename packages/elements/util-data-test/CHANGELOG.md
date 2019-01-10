@@ -1,5 +1,20 @@
 # @atlaskit/util-data-test
 
+## 10.0.31
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/emoji@51.0.0
+  - @atlaskit/task-decision@11.1.4
+
+## 10.0.30
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/emoji@50.0.0
+  - @atlaskit/task-decision@11.1.3
+
+## 10.0.29
+- [patch] [551696e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/551696e):
+
+  - FS-3398 Fix incorrect event type for mention's "rendered" analytics event, ui -> operational
+
 ## 10.0.28
 - Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
   - @atlaskit/emoji@49.0.0

@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { Context, ProcessedFileState } from '@atlaskit/media-core';
+import { Context, ProcessedFileState, FileState } from '@atlaskit/media-core';
 import { getArtifactUrl } from '@atlaskit/media-store';
 import { CustomMediaPlayer } from '@atlaskit/media-ui';
 import { constructAuthTokenUrl } from '../utils';
 import { Outcome, MediaViewerFeatureFlags } from '../domain';
 import { Video, CustomVideoPlayerWrapper } from '../styled';
-import { getFeatureFlag } from '../utils/getFeatureFlag';
 import { isIE } from '../utils/isIE';
 import { createError, MediaViewerError } from '../error';
 import { BaseState, BaseViewer } from './base-viewer';
+import { getObjectUrlFromFileState } from '../utils/getObjectUrlFromFileState';
 
 export type Props = Readonly<{
-  item: ProcessedFileState;
+  item: FileState;
   context: Context;
   collectionName?: string;
   featureFlags?: MediaViewerFeatureFlags;
@@ -29,9 +29,11 @@ const hdArtifact = 'video_1280.mp4';
 
 export class VideoViewer extends BaseViewer<string, Props, State> {
   protected get initialState() {
+    const { item } = this.props;
+
     return {
       content: Outcome.pending<string, MediaViewerError>(),
-      isHDActive: false,
+      isHDActive: isHDAvailable(item),
     };
   }
 
@@ -43,9 +45,8 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
 
   protected renderSuccessful(content: string) {
     const { isHDActive } = this.state;
-    const { item, featureFlags, showControls, previewCount } = this.props;
-    const useCustomVideoPlayer =
-      !isIE() && getFeatureFlag('customVideoPlayer', featureFlags);
+    const { item, showControls, previewCount } = this.props;
+    const useCustomVideoPlayer = !isIE();
     const isAutoPlay = previewCount === 0;
     return useCustomVideoPlayer ? (
       <CustomVideoPlayerWrapper>
@@ -65,19 +66,38 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
     );
   }
 
-  protected async init(isHDActive?: boolean) {
+  protected async init(isHDActive: boolean = this.state.isHDActive) {
     const { context, item, collectionName } = this.props;
-    const preferHd = isHDActive && isHDAvailable(item);
 
-    const contentUrl = getVideoArtifactUrl(item, preferHd);
     try {
-      if (!contentUrl) {
-        throw new Error(`No video artifacts found`);
+      let contentUrl: string | undefined;
+      if (item.status === 'processed') {
+        const preferHd = isHDActive && isHDAvailable(item);
+        const artifactUrl = getVideoArtifactUrl(item, preferHd);
+        if (!artifactUrl) {
+          throw new Error(`No video artifacts found`);
+        }
+        contentUrl = await constructAuthTokenUrl(
+          artifactUrl,
+          context,
+          collectionName,
+        );
+        if (!contentUrl) {
+          throw new Error(`No video artifacts found`);
+        }
+      } else {
+        contentUrl = getObjectUrlFromFileState(item);
+
+        if (!contentUrl) {
+          this.setState({
+            content: Outcome.pending(),
+          });
+          return;
+        }
       }
+
       this.setState({
-        content: Outcome.successful(
-          await constructAuthTokenUrl(contentUrl, context, collectionName),
-        ),
+        content: Outcome.successful(contentUrl),
       });
     } catch (err) {
       this.setState({
@@ -89,7 +109,10 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
   protected release() {}
 }
 
-function isHDAvailable(file: ProcessedFileState): boolean {
+function isHDAvailable(file: FileState): boolean {
+  if (file.status !== 'processed') {
+    return false;
+  }
   return !!getArtifactUrl(file.artifacts, hdArtifact);
 }
 

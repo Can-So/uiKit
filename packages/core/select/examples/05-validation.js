@@ -16,8 +16,6 @@ const validate = value => {
 };
 
 const getValidationState = (error, valid): ValidationState => {
-  console.log('getValidationState', { error, valid });
-
   if (!error && !valid) {
     return 'default';
   } else if (valid === true) {

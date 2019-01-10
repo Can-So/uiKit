@@ -126,7 +126,10 @@ export default class DrawerPrimitive extends Component<DrawerPrimitiveProps> {
     return (
       <Slide component={Wrapper} onExited={onCloseComplete} {...props}>
         <Sidebar>
-          <IconWrapper onClick={onClose}>
+          <IconWrapper
+            onClick={onClose}
+            data-test-selector="DrawerPrimitiveSidebarCloseButton"
+          >
             {Icon ? <Icon size="large" /> : <ArrowLeft />}
           </IconWrapper>
         </Sidebar>

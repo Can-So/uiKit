@@ -28,6 +28,7 @@ export interface Props {
   hoverRows: (rows: number[], danger?: boolean) => void;
   hoveredRows?: number[];
   isInDanger?: boolean;
+  isResizing?: boolean;
   insertRowButtonIndex?: number;
 }
 
@@ -39,6 +40,7 @@ export default class RowControls extends Component<Props, any> {
       insertRowButtonIndex,
       hoveredRows,
       isInDanger,
+      isResizing,
     } = this.props;
     if (!tableRef) {
       return null;
@@ -60,6 +62,7 @@ export default class RowControls extends Component<Props, any> {
                 selection,
                 hoveredRows,
                 isInDanger,
+                isResizing,
               )}`}
               key={startIndex}
               style={{ height }}
@@ -89,7 +92,9 @@ export default class RowControls extends Component<Props, any> {
                   type="row"
                   tableRef={tableRef}
                   index={endIndex}
-                  showInsertButton={insertRowButtonIndex === endIndex}
+                  showInsertButton={
+                    !isResizing && insertRowButtonIndex === endIndex
+                  }
                   onMouseDown={() => this.insertRow(endIndex)}
                 />
               )}

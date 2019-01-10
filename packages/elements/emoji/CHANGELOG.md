@@ -1,5 +1,27 @@
 # @atlaskit/emoji
 
+## 51.0.0
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-test-helpers@6.3.7
+  - @atlaskit/util-data-test@10.0.31
+  - @atlaskit/media-core@26.0.0
+
+## 50.0.0
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/util-data-test@10.0.30
+  - @atlaskit/media-core@25.0.0
+
+## 49.1.0
+- [patch] [53cb129](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/53cb129):
+
+  - show emoji preview error in a tooltip, render spinner outside button, css changes
+- [minor] [514790b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/514790b):
+
+  - added i18n support to emoji
+- [patch] [686de31](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/686de31):
+
+  - added maxWidth to other buttons
+
 ## 49.0.0
 - Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
   - @atlaskit/util-data-test@10.0.28

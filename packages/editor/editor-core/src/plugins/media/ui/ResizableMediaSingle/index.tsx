@@ -36,8 +36,19 @@ export default class ResizableMediaSingle extends React.Component<Props> {
     );
   }
 
-  componentWillReceiveProps(newProps) {
-    console.log(newProps);
+  async componentDidMount() {
+    const $pos = this.$pos;
+    if (!$pos) {
+      return;
+    }
+
+    const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
+    const state = await fileStreamsCache.getState(getMediaNode!.attrs.id);
+    if (state.status !== 'error' && state.mediaType === 'video') {
+      this.setState({
+        isVideoFile: true,
+      });
+    }
   }
 
   calcNewSize = (newWidth: number, stop: boolean) => {
@@ -71,7 +82,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
 
   get $pos() {
     const pos = this.props.getPos();
-    if (typeof pos !== 'number') {
+    if (Number.isNaN(pos as any) || typeof pos !== 'number') {
       return null;
     }
 
@@ -149,21 +160,6 @@ export default class ResizableMediaSingle extends React.Component<Props> {
       return snapPoints;
     }
 
-    const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
-    console.log('id', getMediaNode!.attrs.id);
-    const state = fileStreamsCache.getState(getMediaNode!.attrs.id);
-    console.log(fileStreamsCache.fileStreams);
-    console.log({ state });
-    if (state) {
-      state.then(state => {
-        console.log(state);
-        // state.mimeType.match('video/') && !this.state.isVideoFile ?
-        //   this.setState({
-        //     isVideoFile: true
-        //   }) : false;
-      });
-    }
-    console.log('this.state', this.state);
     const { isVideoFile } = this.state;
 
     snapPoints = isVideoFile

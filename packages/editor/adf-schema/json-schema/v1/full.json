@@ -1249,20 +1249,17 @@
           ]
         },
         "content": {
-          "anyOf": [
-            {
-              "type": "array",
-              "items": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/table_cell_node"
+              },
+              {
                 "$ref": "#/definitions/table_header_node"
               }
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/table_cell_node"
-              }
-            }
-          ]
+            ]
+          }
         }
       },
       "required": [
@@ -1631,6 +1628,88 @@
       ],
       "additionalProperties": false
     },
+    "blockCard_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "blockCard"
+          ]
+        },
+        "attrs": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "data": {}
+              },
+              "required": [
+                "data"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
+    "inlineCard_node": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "inlineCard"
+          ]
+        },
+        "attrs": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "data": {}
+              },
+              "required": [
+                "data"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
     "table_cell_content": {
       "type": "array",
       "items": {
@@ -1676,6 +1755,9 @@
           },
           {
             "$ref": "#/definitions/extension_node"
+          },
+          {
+            "$ref": "#/definitions/blockCard_node"
           }
         ]
       },
@@ -1729,6 +1811,9 @@
           },
           {
             "$ref": "#/definitions/extension_node"
+          },
+          {
+            "$ref": "#/definitions/blockCard_node"
           }
         ]
       },
@@ -1825,6 +1910,9 @@
           "$ref": "#/definitions/placeholder_node"
         },
         {
+          "$ref": "#/definitions/inlineCard_node"
+        },
+        {
           "$ref": "#/definitions/formatted_text_inline_node"
         },
         {
@@ -1896,6 +1984,9 @@
               },
               {
                 "$ref": "#/definitions/bodiedExtension_node"
+              },
+              {
+                "$ref": "#/definitions/blockCard_node"
               }
             ]
           }

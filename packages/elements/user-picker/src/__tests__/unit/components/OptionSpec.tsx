@@ -14,7 +14,7 @@ describe('Option', () => {
   };
   const shallowOption = (
     props = {
-      data: { user },
+      data: { data: user },
       status: 'online',
       isSelected: true,
     },
@@ -25,7 +25,7 @@ describe('Option', () => {
     const option = component.find(components.Option);
     expect(option).toHaveLength(1);
     expect(option.props()).toMatchObject({
-      data: { user },
+      data: { data: user },
       status: 'online',
       isSelected: true,
     });

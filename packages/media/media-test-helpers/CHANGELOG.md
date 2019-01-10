@@ -1,5 +1,32 @@
 # @atlaskit/media-test-helpers
 
+## 18.9.1
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/media-card@49.0.0
+  - @atlaskit/media-store@9.1.1
+  - @atlaskit/media-core@26.0.0
+
+## 18.9.0
+- [minor] [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+
+  - Remove deprecated methods from media-core
+  - Use context.collection methods in MediaViewer
+  - Remove link support from media-card
+  - Remove legacy services + providers from media-core
+  - Remove link related methods from media-core
+  - Remove axios dependency
+  - Make context.getImage cancelable
+
+## 18.8.0
+- [minor] [6bc785d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6bc785d):
+
+  - default to HD video if available in video viewer
+
+## 18.7.3
+- [patch] [b677631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b677631):
+
+  - Add new example and ensure occurrenceKey is set for all copy/withToken calls
+
 ## 18.7.2
 - Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
   - @atlaskit/media-core@24.7.2

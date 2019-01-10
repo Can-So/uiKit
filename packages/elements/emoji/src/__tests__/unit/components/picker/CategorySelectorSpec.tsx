@@ -1,4 +1,5 @@
-import { mount, ReactWrapper } from 'enzyme';
+import { ReactWrapper } from 'enzyme';
+import { mountWithIntl } from '@atlaskit/editor-test-helpers';
 import * as React from 'react';
 import { expect } from 'chai';
 
@@ -9,9 +10,10 @@ import CategorySelector, {
   sortCategories,
 } from '../../../../components/picker/CategorySelector';
 import { CategoryDescriptionMap } from '../../../../components/picker/categories';
+import { messages } from '../../../../components/i18n';
 
 const setupComponent = (props?: Props): ReactWrapper<any, any> =>
-  mount(<CategorySelector {...props} />);
+  mountWithIntl(<CategorySelector {...props} />);
 
 describe('<CategorySelector />', () => {
   it('all standard categories visible by default', () => {
@@ -44,8 +46,9 @@ describe('<CategorySelector />', () => {
     const categoryButtons = component.find('button');
     orderedCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
+      const categoryKey = CategoryDescriptionMap[categoryId].name;
       expect(button.prop('title'), `Button #${i}`).to.equal(
-        CategoryDescriptionMap[categoryId].name,
+        messages[categoryKey].defaultMessage,
       );
     });
   });
@@ -58,8 +61,9 @@ describe('<CategorySelector />', () => {
     );
     defaultCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
+      const categoryKey = CategoryDescriptionMap[categoryId].name;
       expect(button.prop('title'), `Button #${i}`).to.equal(
-        CategoryDescriptionMap[categoryId].name,
+        messages[categoryKey].defaultMessage,
       );
       expect(
         button.hasClass(styles.disable),
@@ -92,8 +96,9 @@ describe('<CategorySelector />', () => {
     );
     defaultCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
+      const categoryKey = CategoryDescriptionMap[categoryId].name;
       expect(button.prop('title'), `Button #${i}`).to.equal(
-        CategoryDescriptionMap[categoryId].name,
+        messages[categoryKey].defaultMessage,
       );
       const shouldBeActive = i === 3;
       expect(

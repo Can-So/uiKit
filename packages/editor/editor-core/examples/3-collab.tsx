@@ -137,6 +137,7 @@ export default class Example extends React.Component<Props, State> {
                     allowLists={true}
                     allowTextColor={true}
                     allowDate={true}
+                    allowPanel={true}
                     allowTables={{
                       allowColumnResizing: true,
                       allowMergeCells: true,
@@ -206,6 +207,7 @@ export default class Example extends React.Component<Props, State> {
                     allowLists={true}
                     allowTextColor={true}
                     allowDate={true}
+                    allowPanel={true}
                     allowTables={{
                       allowColumnResizing: true,
                       allowMergeCells: true,

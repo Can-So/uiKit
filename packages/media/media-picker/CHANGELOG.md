@@ -1,5 +1,50 @@
 # @atlaskit/media-picker
 
+## 29.0.2
+- [patch] [a55e4e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a55e4e6):
+
+  - Remove Axios dependency from media-picker
+
+## 29.0.1
+- [patch] [c91adfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c91adfe):
+
+  - remove customVideoPlayer featureFlag prop and enable by default
+
+## 29.0.0
+- [patch] [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+
+  - Remove redundant fileStreamCache createKey() method and replace the cache key with id everywhere
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/media-card@49.0.0
+  - @atlaskit/media-editor@23.0.0
+  - @atlaskit/media-test-helpers@18.9.1
+  - @atlaskit/media-viewer@31.0.0
+  - @atlaskit/media-store@9.1.1
+  - @atlaskit/media-core@26.0.0
+
+## 28.0.0
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/media-card@48.0.0
+  - @atlaskit/media-editor@22.0.0
+  - @atlaskit/media-core@25.0.0
+  - @atlaskit/media-store@9.1.0
+  - @atlaskit/media-test-helpers@18.9.0
+
+## 27.0.5
+- [patch] [8314694](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8314694):
+
+  - Support uploading + processing files in MediaViewer
+
+## 27.0.4
+- [patch] [442821a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/442821a):
+
+  - Fix the issue with being unable to save image inserted into the editor: pass collection to tenant auth for file polling
+
+## 27.0.3
+- [patch] [b677631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b677631):
+
+  - Add new example and ensure occurrenceKey is set for all copy/withToken calls
+
 ## 27.0.2
 - Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
   - @atlaskit/media-core@24.7.2

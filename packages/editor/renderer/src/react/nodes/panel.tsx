@@ -55,6 +55,7 @@ export default class Panel extends PureComponent<Props, {}> {
       <div
         style={{ background: config[panelType].background }}
         className="ak-editor-panel"
+        data-panel-type={panelType}
       >
         <span
           style={{ color: config[panelType].iconColor }}

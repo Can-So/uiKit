@@ -1,5 +1,16 @@
 # @atlaskit/status
 
+## 0.3.0
+- [minor] [00c648e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00c648e):
+
+  - fixed typo in i18n messages and code improvements
+- [minor] [a17bb0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a17bb0e):
+
+  - added i18n translations
+- [minor] [99f08a0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/99f08a0):
+
+  - added i18n support to Fabric Status
+
 ## 0.2.11
 - [patch] [d3f3e19](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d3f3e19):
 

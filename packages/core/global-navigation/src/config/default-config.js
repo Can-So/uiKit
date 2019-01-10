@@ -4,6 +4,7 @@ import SearchIcon from '@atlaskit/icon/glyph/search';
 import CreateIcon from '@atlaskit/icon/glyph/add';
 import StarLargeIcon from '@atlaskit/icon/glyph/star-large';
 import NotificationIcon from '@atlaskit/icon/glyph/notification';
+import SettingsIcon from '@atlaskit/icon/glyph/settings';
 
 import type { DefaultConfigShape } from './types';
 
@@ -40,6 +41,7 @@ export default function generateDefaultConfig(): DefaultConfigShape {
       tooltip: 'Create',
       id: 'create',
     },
+    // ==============  secondary section  ==============
     notification: {
       icon: NotificationIcon,
       label: 'Notifications',
@@ -60,10 +62,18 @@ export default function generateDefaultConfig(): DefaultConfigShape {
       tooltip: 'Help',
       id: 'help',
     },
+    settings: {
+      icon: SettingsIcon,
+      label: 'Settings',
+      section: 'secondary',
+      rank: 4,
+      tooltip: 'Settings',
+      id: 'settings',
+    },
     profile: {
       label: 'Your profile and Settings',
       section: 'secondary',
-      rank: 4,
+      rank: 5,
       tooltip: 'Your profile and Settings',
       id: 'profile',
     },

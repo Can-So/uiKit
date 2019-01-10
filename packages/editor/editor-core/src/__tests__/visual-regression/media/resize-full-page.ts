@@ -5,9 +5,9 @@ import {
   editable,
   rerenderEditor,
   setFeature,
+  dynamicTextViewportSizes,
 } from '../_utils';
 import { TestPageConfig, resizeWithSnapshots, layoutAvailable } from './_utils';
-import { viewportSizes as dynamicTextViewportSizes } from '../dynamic-text-sizing';
 import { mediaSingleLayouts } from './layouts';
 
 const editorConfigs: Array<TestPageConfig> = [
@@ -109,7 +109,7 @@ describe('Snapshot Test: Media', () => {
               await page.waitForSelector(layoutButton);
               await page.click(layoutButton);
 
-              await page.waitForSelector(`.media-single.wrap-left`);
+              await page.waitForSelector(`.media-single.image-wrap-left`);
 
               // resize from right handle
               await page.waitForSelector('.mediaSingle-resize-handle-right');
@@ -135,7 +135,7 @@ describe('Snapshot Test: Media', () => {
               await page.waitForSelector(layoutButton);
               await page.click(layoutButton);
 
-              await page.waitForSelector(`.media-single.wrap-right`);
+              await page.waitForSelector(`.media-single.image-wrap-right`);
 
               // resize from left handle
               await page.waitForSelector('.mediaSingle-resize-handle-left');

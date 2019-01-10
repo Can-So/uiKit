@@ -1,5 +1,22 @@
 # @atlaskit/task-decision
 
+## 11.1.4
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-common@28.0.0
+  - @atlaskit/renderer@35.0.0
+  - @atlaskit/util-data-test@10.0.31
+
+## 11.1.3
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/editor-common@27.0.0
+  - @atlaskit/renderer@34.0.0
+  - @atlaskit/util-data-test@10.0.30
+
+## 11.1.2
+- Updated dependencies [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+  - @atlaskit/renderer@33.0.4
+  - @atlaskit/editor-common@26.0.0
+
 ## 11.1.1
 - Updated dependencies [b3738ea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b3738ea):
   - @atlaskit/editor-common@25.0.0

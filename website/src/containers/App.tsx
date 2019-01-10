@@ -8,7 +8,7 @@ import styled, { injectGlobal } from 'styled-components';
 
 import Home from '../pages/Home';
 import ChangeLogExplorer from '../pages/ChangeLogExplorer';
-import Examples from '../pages/Examples';
+import FullscreenExamples from '../pages/Examples';
 import FourOhFour from '../pages/FourOhFour';
 import Pattern from '../pages/Pattern';
 import PatternsInfo from '../pages/PatternsInfo';
@@ -59,17 +59,7 @@ const ScrollHandler = withRouter(ScrollToTop);
 class Boundary extends React.Component {
   state = { hasError: false };
 
-  componentDidMount() {
-    if (sessionStorage.getItem('loadedOnce') !== 'true') {
-      sessionStorage.setItem('loadedOnce', 'false');
-    }
-  }
-
   componentDidCatch(error, info) {
-    if (sessionStorage.getItem('loadedOnce') === 'false') {
-      sessionStorage.setItem('loadedOnce', 'true');
-      window.location.reload();
-    }
     this.setState({ hasError: true });
   }
 
@@ -118,7 +108,7 @@ export default class App extends React.Component<{}, State> {
             <Switch>
               <Route
                 path="/examples/:groupId?/:pkgId?/:exampleId*"
-                component={Examples}
+                component={FullscreenExamples}
               />
               <Route>
                 <Page navigation={<Nav />}>

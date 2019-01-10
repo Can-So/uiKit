@@ -33,6 +33,7 @@
     "@atlaskit/logo": "^9.2.6",
     "@atlaskit/navigation": "^33.3.8",
     "@atlaskit/toggle": "^5.0.14",
+    "@atlaskit/visual-regression": "^0.0.1",
     "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",
     "react-lorem-component": "^0.12.2",
