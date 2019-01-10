@@ -1,1 +1,0 @@
-- Remove Axios dependency from media-picker

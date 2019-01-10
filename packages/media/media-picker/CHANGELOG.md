@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 29.0.2
+- [patch] [a55e4e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a55e4e6):
+
+  - Remove Axios dependency from media-picker
+
 ## 29.0.1
 - [patch] [c91adfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c91adfe):
 
