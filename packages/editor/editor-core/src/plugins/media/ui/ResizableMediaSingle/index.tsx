@@ -14,6 +14,7 @@ import {
 import { Wrapper } from './styled';
 import { Props, EnabledHandles } from './types';
 import Resizer, { handleSides } from './Resizer';
+import { fileStreamsCache } from '@atlaskit/media-core';
 
 const imageAlignmentMap = {
   left: 'start',
@@ -21,6 +22,10 @@ const imageAlignmentMap = {
 };
 
 export default class ResizableMediaSingle extends React.Component<Props> {
+  state = {
+    isVideoFile: false,
+  };
+
   get wrappedLayout() {
     const { layout } = this.props;
     return (
@@ -29,6 +34,10 @@ export default class ResizableMediaSingle extends React.Component<Props> {
       layout === 'align-start' ||
       layout === 'align-end'
     );
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log(newProps);
   }
 
   calcNewSize = (newWidth: number, stop: boolean) => {
@@ -115,7 +124,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
   };
 
   wrapper: HTMLElement | null;
-  get snapPoints() {
+  snapPoints = () => {
     const offsetLeft = this.calcOffsetLeft();
 
     const { containerWidth, lineLength, appearance } = this.props;
@@ -141,9 +150,24 @@ export default class ResizableMediaSingle extends React.Component<Props> {
     }
 
     const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
-    const isVideoFile =
-      getMediaNode && getMediaNode.attrs.__fileMimeType.match('video/');
-    // await mediaContext.getState().type
+    console.log('id', getMediaNode!.attrs.id);
+    const state = fileStreamsCache.getState(getMediaNode!.attrs.id);
+    window.fileStreamsCache = fileStreamsCache;
+    console.log(fileStreamsCache.fileStreams);
+    // const x = fileStreamsCache;
+    console.log({ state });
+    if (state) {
+      state.then(state => {
+        console.log(state);
+        // state.mimeType.match('video/') && !this.state.isVideoFile ?
+        //   this.setState({
+        //     isVideoFile: true
+        //   }) : false;
+      });
+    }
+    console.log('this.state', this.state);
+    const { isVideoFile } = this.state;
+
     snapPoints = isVideoFile
       ? snapPoints.filter(width => width > 320)
       : snapPoints;
@@ -158,7 +182,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
     }
 
     return snapPoints;
-  }
+  };
 
   get insideInlineLike(): boolean {
     const $pos = this.$pos;
@@ -227,7 +251,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
           selected={this.props.selected}
           enable={enable}
           calcNewSize={this.calcNewSize}
-          snapPoints={this.snapPoints}
+          snapPoints={this.snapPoints()}
           scaleFactor={!this.wrappedLayout && !this.insideInlineLike ? 2 : 1}
           isInlineLike={this.insideInlineLike}
           getColumnLeft={this.calcColumnLeft}
