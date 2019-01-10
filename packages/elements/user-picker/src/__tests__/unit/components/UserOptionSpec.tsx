@@ -10,7 +10,7 @@ import {
   UserOptionProps,
 } from '../../../components/UserOption';
 
-describe('Option', () => {
+describe('User Option', () => {
   const user = {
     id: 'abc-123',
     name: 'Jace Beleren',
