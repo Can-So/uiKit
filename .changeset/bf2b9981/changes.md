@@ -1,0 +1,1 @@
+- ED-5871 Fix issue where user had to click twice to focus cursor in editor on full page editor in Firefox
