@@ -4,7 +4,22 @@ import InlineDialog from '@atlaskit/inline-dialog';
 import { ShareButton } from './ShareButton';
 import { ShareForm } from './ShareForm';
 import { messages } from '../i18n';
-import { InvitationsCapabilities } from '../clients/IdentityClient';
+
+export type InvitationsCapabilities = {
+  directInvite?: DirectInviteCapabilities;
+  invitePendingApproval?: RequestAccessCapabilities;
+};
+
+export type DirectInviteCapabilities = {
+  mode: 'NONE' | 'ANYONE' | 'DOMAIN_RESTRICTED';
+  domains: string[];
+  permittedResources: string[];
+};
+
+export type RequestAccessCapabilities = {
+  mode: 'NONE' | 'ANYONE';
+  permittedResources: string[];
+};
 
 export type Props = {
   buttonStyle?: 'default' | 'withText';

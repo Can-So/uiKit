@@ -6,7 +6,10 @@ export type Props = {
   appearance?: ButtonAppearances;
   isSelected?: boolean;
   isDisable?: boolean;
-  onClick: Function;
+  onClick: (
+    e: MouseEvent<HTMLButtonElement>,
+    analyticsEvent: UIAnalyticsEvent,
+  ) => void;
   text?: React.ReactNode;
 };
 
