@@ -8,7 +8,7 @@ interface ProviderProps {
     data: {} | null;
     isLoading: boolean;
     error: {} | null;
-  }): JSX.Element;
+  }): JSX.Element | string;
 }
 
 export default class MockProvider extends Component<
