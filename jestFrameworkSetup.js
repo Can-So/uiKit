@@ -5,6 +5,7 @@ import { toMatchSnapshot } from 'jest-snapshot';
 import { configureToMatchImageSnapshot } from 'jest-image-snapshot';
 import * as emotion from 'emotion';
 import { createSerializer } from 'jest-emotion';
+import 'jest-localstorage-mock';
 
 let consoleError;
 let consoleWarn;
