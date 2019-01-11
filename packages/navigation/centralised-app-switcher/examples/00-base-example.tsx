@@ -24,7 +24,6 @@ export default class AppSwitcherExample extends Component {
       <div style={{ padding: '2rem' }}>
         <Drawer
           onClose={this.onClose}
-          onCloseComplete={this.onCloseComplete}
           isOpen={this.state.isDrawerOpen}
           width="wide"
         >

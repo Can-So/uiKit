@@ -1,6 +1,24 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
-export default class MockProvider extends Component {
+interface ProviderState {
+  isLoading: boolean;
+}
+interface ProviderProps {
+  children(props: {
+    data: {} | null;
+    isLoading: boolean;
+    error: {} | null;
+  }): JSX.Element;
+}
+
+export default class MockProvider extends Component<
+  ProviderProps,
+  ProviderState
+> {
+  static defaultProps = {
+    children: null,
+  };
+
   state = {
     isLoading: true,
   };
@@ -16,6 +34,10 @@ export default class MockProvider extends Component {
   render() {
     const { isLoading } = this.state;
     const { children } = this.props;
+
+    if (!children) {
+      return null;
+    }
 
     return children({
       data: null,
