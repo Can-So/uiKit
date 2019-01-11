@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 94.1.0
+- [minor] [58e30bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58e30bb):
+
+  - deduped i18n key fabric.editor.orderedList
+
 ## 94.0.0
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/editor-common@28.0.0

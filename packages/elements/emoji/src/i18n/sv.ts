@@ -14,7 +14,6 @@ export default {
   'fabric.emoji.retry.label': 'Försök igen',
   'fabric.emoji.cancel.label': 'Avbryt',
   'fabric.emoji.search.label': 'Sök',
-  'fabric.emoji.search.placeholder': 'Sök',
   'fabric.emoji.categories.search.results': 'Sökresultat',
   'fabric.emoji.category.frequent': 'Vanliga',
   'fabric.emoji.category.people': 'Personer',

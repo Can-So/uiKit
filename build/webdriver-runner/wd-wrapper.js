@@ -87,7 +87,15 @@ export default class Page {
     });
   }
 
-  type(selector, text) {
+  async type(selector, text) {
+    if (Array.isArray(text)) {
+      while (text.length > 1) {
+        let first = text.shift();
+        await this.browser.addValue(selector, first);
+      }
+
+      return this.browser.addValue(selector, text[0]);
+    }
     return this.browser.addValue(selector, text);
   }
 
@@ -209,6 +217,13 @@ export default class Page {
   // Wait
   waitForSelector(selector, options = {}) {
     return this.browser.waitForExist(selector, options.timeout || WAIT_TIMEOUT);
+  }
+
+  waitForVisible(selector, options = {}) {
+    return this.browser.waitForVisible(
+      selector,
+      options.timeout || WAIT_TIMEOUT,
+    );
   }
 
   waitFor(selector, ms, reverse) {
