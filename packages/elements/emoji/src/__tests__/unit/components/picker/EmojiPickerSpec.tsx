@@ -28,8 +28,6 @@ import {
 } from '../../_test-data';
 import * as helper from './_emoji-picker-test-helpers';
 
-declare var global: any;
-
 describe('<EmojiPicker />', () => {
   let firePrivateAnalyticsEvent;
 
