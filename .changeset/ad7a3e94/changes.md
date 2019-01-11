@@ -1,1 +1,0 @@
-- ED-6023: fix scaling a table when deleting column
