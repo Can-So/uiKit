@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.9.8
+- [patch] [74bf476](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/74bf476):
+
+  - support codeblock in list
+
 ## 2.9.7
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/editor-common@28.0.0

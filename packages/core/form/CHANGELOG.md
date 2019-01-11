@@ -1,5 +1,10 @@
 # @atlaskit/form
 
+## 5.1.1
+- [patch] [58e7bc1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58e7bc1):
+
+  - Added example of Form use within a ModalDialog - no changes required
+
 ## 5.1.0
 - [minor] [b36a82f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b36a82f):
 

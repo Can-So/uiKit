@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/form",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "Form package provides layout & validation for form fields",
   "license": "Apache-2.0",
   "main": "dist/cjs/index.js",
@@ -47,7 +47,7 @@
     "@atlaskit/field-text": "^7.0.19",
     "@atlaskit/field-text-area": "^4.0.15",
     "@atlaskit/inline-edit": "^7.1.7",
-    "@atlaskit/modal-dialog": "^7.1.1",
+    "@atlaskit/modal-dialog": "^7.2.0",
     "@atlaskit/multi-select": "^11.0.13",
     "@atlaskit/radio": "^0.4.5",
     "@atlaskit/section-message": "^1.0.14",

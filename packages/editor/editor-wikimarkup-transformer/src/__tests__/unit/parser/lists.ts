@@ -158,6 +158,13 @@ abc
 * list item --- 2
 `,
     ],
+    [
+      'should support codeBlock in listItem now',
+      `
+* item 1
+* item 2 with {code}code block{code}
+`,
+    ],
   ];
 
   for (const [testCaseDescription, markup] of testCases) {
