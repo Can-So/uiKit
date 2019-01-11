@@ -102,11 +102,12 @@ class NotificationIndicator extends Component<Props, State> {
     this.refresh('timer');
   };
 
-  private handleAnalytics = countUpateProperties => {
-    const { newCount, oldCount, source } = countUpateProperties;
+  private handleAnalytics = countUpdateProperties => {
+    const { newCount, oldCount, source } = countUpdateProperties;
 
-    // Only fire the analytics event if the notification indicator is 'activating'
-    // ie going from not visible to visible
+    // Only fire the analytics event if the notification indicator is 'activating' for the first time
+    // ie going from a number of 0 (the indicator is not visible)
+    // to a number > 0 (the indicator becomes visible)
     if (this.props.createAnalyticsEvent && newCount > 0 && oldCount === 0) {
       const event = this.props.createAnalyticsEvent({
         name: 'notificationIndicator',
@@ -153,20 +154,21 @@ class NotificationIndicator extends Component<Props, State> {
           },
         })).count;
 
-      if (
-        this.props.onCountUpdated &&
-        (this.state.count === null || this.state.count !== count)
-      ) {
-        const countUpateProperties = {
+      if (this.state.count === null || this.state.count !== count) {
+        const countUpdateProperties = {
           oldCount: this.state.count || 0,
           newCount: count,
           source,
         };
 
-        this.handleAnalytics(countUpateProperties);
-        this.props.onCountUpdated(countUpateProperties);
+        this.handleAnalytics(countUpdateProperties);
+
+        if (this.props.onCountUpdated) {
+          this.props.onCountUpdated(countUpdateProperties);
+        }
+
+        this.setState({ count });
       }
-      this.setState({ count });
     } catch (e) {
       // Do nothing
     }
