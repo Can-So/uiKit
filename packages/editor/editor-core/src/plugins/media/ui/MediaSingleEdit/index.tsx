@@ -18,8 +18,6 @@ import commonMessages from '../../../../messages';
 import UiToolbarButton from '../../../../ui/ToolbarButton';
 import UiSeparator from '../../../../ui/Separator';
 import UiFloatingToolbar from '../../../../ui/FloatingToolbar';
-import MediaServicesAnnotateIcon from '@atlaskit/icon/glyph/media-services/annotate';
-
 import { closestElement } from '../../../../utils';
 import { MediaPluginState } from '../../pm-plugins/main';
 
@@ -167,14 +165,6 @@ class MediaSingleEdit extends React.Component<Props & InjectedIntlProps, {}> {
               <Separator />
             </>
           )}
-          <ToolbarButton
-            spacing="compact"
-            disabled={!allowLayout}
-            onClick={this.handleEdit}
-            title="Annotate image"
-            iconBefore={<MediaServicesAnnotateIcon label="Annotate image" />}
-          />
-          <Separator />
           <ToolbarButtonDestructive
             spacing="compact"
             onClick={this.handleRemove}
@@ -196,10 +186,6 @@ class MediaSingleEdit extends React.Component<Props & InjectedIntlProps, {}> {
   private handleChangeLayout(layout: MediaSingleLayout) {
     this.props.pluginState.align(layout);
   }
-
-  private handleEdit = () => {
-    this.props.pluginState.edit();
-  };
 }
 
 export default injectIntl(MediaSingleEdit);

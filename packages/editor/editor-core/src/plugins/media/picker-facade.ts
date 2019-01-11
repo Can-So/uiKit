@@ -201,15 +201,11 @@ export default class PickerFacade {
 
   resolvePublicId(file) {
     if (file.upfrontId) {
-      file.upfrontId.then((publicId: string) => {
-        const state = this.stateManager.getState(file.id);
-        const newState: Partial<MediaState> = {
-          ...state,
-          publicId,
+      file.upfrontId.then(data => {
+        this.stateManager.updateState(file.id, {
+          publicId: data,
           status: 'preview',
-        };
-        this.stateManager.updateState(file.id, newState);
-        this.stateManager.updateState(publicId, newState);
+        });
       });
     }
   }

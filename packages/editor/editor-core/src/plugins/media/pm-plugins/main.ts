@@ -36,7 +36,6 @@ import DefaultMediaStateManager from '../default-state-manager';
 import { insertMediaSingleNode } from '../utils/media-single';
 
 import { hasParentNodeOfType } from 'prosemirror-utils';
-import { FileIdentifier } from '@atlaskit/media-card';
 export { DefaultMediaStateManager };
 export { MediaState, MediaProvider, MediaStateStatus, MediaStateManager };
 
@@ -79,16 +78,10 @@ export class MediaPluginState {
   private dropzonePicker?: PickerFacade;
   // @ts-ignore
   private customPicker?: PickerFacade;
-  public editingMediaId?: string;
-  public showEditingDialog?: boolean;
-
   public editorAppearance: EditorAppearance;
   private removeOnCloseListener: () => void = () => {};
 
   private reactContext: () => {};
-
-  public resolvedUploadContext: Context | undefined;
-  public resolvedViewContext: Context | undefined;
 
   constructor(
     state: EditorState,
@@ -147,9 +140,9 @@ export class MediaPluginState {
 
     // TODO disable (not destroy!) pickers until mediaProvider is resolved
     let Picker: typeof PickerFacade;
-    let resolvedMediaProvider: MediaProvider;
+
     try {
-      resolvedMediaProvider = this.mediaProvider = await mediaProvider;
+      let resolvedMediaProvider: MediaProvider = (this.mediaProvider = await mediaProvider);
       Picker = await pickerFacadeLoader();
 
       assert(
@@ -184,9 +177,8 @@ export class MediaPluginState {
     if (stateManager) {
       this.stateManager = stateManager;
     }
-    this.resolvedViewContext = await resolvedMediaProvider.viewContext;
 
-    this.allowsUploads = !!resolvedMediaProvider.uploadContext;
+    this.allowsUploads = !!this.mediaProvider.uploadContext;
     const { view, allowsUploads } = this;
 
     // make sure editable DOM node is mounted
@@ -205,8 +197,6 @@ export class MediaPluginState {
           Picker,
           this.reactContext,
         );
-
-        this.resolvedUploadContext = uploadContext;
       } else {
         this.destroyPickers();
       }
@@ -439,103 +429,6 @@ export class MediaPluginState {
     this.mediaNodes = this.mediaNodes.filter(({ node }) => oldNode !== node);
   };
 
-  edit = () => {
-    const selected = this.selectedMediaNode();
-    if (!selected) {
-      return;
-    }
-
-    this.editingMediaId = selected.attrs.id;
-    this.showEditingDialog = true;
-
-    // triggers contentComponent render
-    this.view.dispatch(this.view.state.tr.setMeta(stateKey, 'edit'));
-  };
-
-  onCloseEditing = () => {
-    this.showEditingDialog = false;
-
-    if (!this.editingMediaId) {
-      return;
-    }
-
-    const oldId = this.selectedMediaNode()!.attrs.id;
-    this.editingMediaId = oldId;
-
-    const mediaNodeWithPos = this.findMediaNode(oldId);
-    if (!mediaNodeWithPos) {
-      console.warn('no media node with id', oldId);
-      return;
-    }
-
-    const existingNode = mediaNodeWithPos.node;
-
-    this.stateManager.updateState(oldId, {
-      status: 'preview',
-      dimensions: {
-        width: existingNode.attrs.width,
-        height: existingNode.attrs.height,
-      },
-    });
-
-    this.view.dispatch(this.view.state.tr.setMeta(stateKey, 'close-edit'));
-  };
-
-  onFinishEditing = (fileIdentifier: FileIdentifier) => {
-    this.showEditingDialog = false;
-
-    const oldId = this.editingMediaId;
-    if (!oldId) {
-      console.warn('no old id');
-      return;
-    }
-
-    const mediaNodeWithPos = this.findMediaNode(oldId);
-    if (!mediaNodeWithPos) {
-      console.warn('no media node with id', oldId);
-      return;
-    }
-
-    const { getPos, node: mediaNode } = mediaNodeWithPos;
-
-    const newNode = this.view.state.schema.nodes.media!.create({
-      ...mediaNode.attrs,
-      id: fileIdentifier.id,
-    });
-
-    const nodePos = getPos();
-    if (!nodePos) {
-      console.warn('no nodepos on existing node');
-      return;
-    }
-
-    const tr = this.view.state.tr.replaceWith(
-      nodePos,
-      nodePos + mediaNode.nodeSize,
-      newNode,
-    );
-
-    this.view.dispatch(tr.setMeta('addToHistory', false));
-    this.editingMediaId = undefined;
-
-    if (typeof fileIdentifier.id !== 'string') {
-      // Smart Editor will always return string.
-      return;
-    }
-
-    const mediaState = this.stateManager.getState(oldId);
-    this.stateManager.newState(fileIdentifier.id, {
-      ...mediaState,
-      status: 'ready',
-      publicId: fileIdentifier.id,
-      fileId: Promise.resolve(fileIdentifier.id),
-      dimensions: {
-        width: mediaNode.attrs.width,
-        height: mediaNode.attrs.height,
-      },
-    });
-  };
-
   align = (layout: MediaSingleLayout, gridSize: number = 12): boolean => {
     if (!this.selectedMediaNode()) {
       return false;
@@ -628,7 +521,7 @@ export class MediaPluginState {
         }
 
         const { node } = nodeWithPos;
-        if (node.attrs.id === id) {
+        if (node.attrs.__key === id) {
           return nodeWithPos;
         }
 

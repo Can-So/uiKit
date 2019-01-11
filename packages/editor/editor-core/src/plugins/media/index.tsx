@@ -1,8 +1,6 @@
 import * as React from 'react';
 import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
 import { media, mediaGroup, mediaSingle } from '@atlaskit/adf-schema';
-import { SmartMediaEditor } from '@atlaskit/media-editor';
-import { FileIdentifier } from '@atlaskit/media-card';
 import { EditorPlugin } from '../../types';
 import {
   stateKey as pluginKey,
@@ -131,9 +129,10 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
     if (typeof allowMediaSingle === 'object') {
       disableLayout = allowMediaSingle.disableLayout;
     }
+
     if (
-      (typeof allowMediaSingle === 'boolean' && !allowMediaSingle) ||
-      (typeof disableLayout === 'boolean' && disableLayout)
+      (typeof allowMediaSingle === 'boolean' && allowMediaSingle === false) ||
+      (typeof disableLayout === 'boolean' && disableLayout === true)
     ) {
       return null;
     }
@@ -148,7 +147,6 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
         render={({ mediaState, disabled }) => {
           const { element: target, layout } = mediaState as MediaPluginState;
           const node = mediaState.selectedMediaNode();
-
           const isFullPage = appearance === 'full-page';
           const allowBreakout = !!(
             node &&
@@ -158,57 +156,16 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
           );
           const allowLayout = isFullPage && !!mediaState.isLayoutSupported();
           const { allowResizing } = mediaState.getMediaOptions();
-
-          let smartMediaEditor;
-
-          if (
-            node &&
-            mediaState.resolvedUploadContext &&
-            mediaState.showEditingDialog
-          ) {
-            const state = (mediaState as MediaPluginState).getMediaNodeState(
-              node.attrs.id,
-            );
-            const id = (state && state.fileId) || node.attrs.id;
-            const identifier: FileIdentifier = {
-              id,
-              mediaItemType: 'file',
-              collectionName: node.attrs.collection,
-            };
-
-            smartMediaEditor = (
-              <SmartMediaEditor
-                identifier={identifier}
-                context={
-                  (mediaState as MediaPluginState).resolvedUploadContext!
-                }
-                onUploadStart={(newFileIdentifier: FileIdentifier) => {
-                  mediaState.onCloseEditing();
-                  mediaState.onFinishEditing(newFileIdentifier);
-                }}
-                onError={() => {
-                  // TODO deal with that
-                }}
-                onFinish={() => {
-                  mediaState.onCloseEditing();
-                }}
-              />
-            );
-          }
-
           return (
-            <>
-              <MediaSingleEdit
-                pluginState={mediaState}
-                allowBreakout={allowBreakout}
-                allowLayout={allowLayout}
-                layout={layout}
-                target={target}
-                allowResizing={allowResizing}
-                editorDisabled={disabled.editorDisabled}
-              />
-              {smartMediaEditor}
-            </>
+            <MediaSingleEdit
+              pluginState={mediaState}
+              allowBreakout={allowBreakout}
+              allowLayout={allowLayout}
+              layout={layout}
+              target={target}
+              allowResizing={allowResizing}
+              editorDisabled={disabled.editorDisabled}
+            />
           );
         }}
       />

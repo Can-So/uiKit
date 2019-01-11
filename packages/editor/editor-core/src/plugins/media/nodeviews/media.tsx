@@ -107,11 +107,7 @@ class MediaNode extends Component<
     this.hasBeenMounted = false;
   }
 
-  componentDidUpdate(prevProps: Readonly<MediaNodeProps & ImageLoaderProps>) {
-    if (prevProps.node.attrs.id !== this.props.node.attrs.id) {
-      this.pluginState.handleMediaNodeUnmount(prevProps.node);
-      this.handleNewNode(this.props);
-    }
+  componentDidUpdate() {
     this.pluginState.updateElement();
   }
 
@@ -133,15 +129,16 @@ class MediaNode extends Component<
       onClick,
       editorAppearance,
     } = this.props;
-    const { id, type, collection, url } = node.attrs;
-    /** For new images, the media state will be loaded inside the plugin state */
-    const state = this.pluginState.getMediaNodeState(id);
+    const { id, type, collection, url, __key } = node.attrs;
 
-    if (!this.state.viewContext || (!state && !id)) {
+    if (!this.state.viewContext) {
       return <CardView status="loading" dimensions={cardDimensions} />;
     }
 
-    const fileId = (state && state.fileId) || id;
+    /** For new images, the media state will be loaded inside the plugin state */
+    const getState = this.pluginState.getMediaNodeState(__key);
+    const fileId = getState && getState.fileId ? getState.fileId : id;
+
     const identifier: Identifier =
       type === 'external'
         ? {
