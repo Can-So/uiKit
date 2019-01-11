@@ -1,34 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`task-decision-1.ts: can edit a decision 1`] = `
-Object {
-  "content": Array [
-    Object {
-      "attrs": Object {
-        "localId": "abc-123",
-      },
-      "content": Array [
-        Object {
-          "attrs": Object {
-            "localId": "abc-123",
-            "state": "DECIDED",
-          },
-          "content": Array [
-            Object {
-              "text": "a preloaded decision has been edited",
-              "type": "text",
-            },
-          ],
-          "type": "decisionItem",
-        },
-      ],
-      "type": "decisionList",
-    },
-  ],
-  "type": "doc",
-}
-`;
-
 exports[`task-decision-1.ts: can paste plain text into a decision 1`] = `
 Object {
   "content": Array [
@@ -136,6 +107,35 @@ Object {
                 },
               ],
               "text": " formatting",
+              "type": "text",
+            },
+          ],
+          "type": "decisionItem",
+        },
+      ],
+      "type": "decisionList",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`task-decision-1.ts: can type into decision 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "attrs": Object {
+        "localId": "abc-123",
+      },
+      "content": Array [
+        Object {
+          "attrs": Object {
+            "localId": "abc-123",
+            "state": "DECIDED",
+          },
+          "content": Array [
+            Object {
+              "text": "adding decisions",
               "type": "text",
             },
           ],

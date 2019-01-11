@@ -72,7 +72,7 @@ Object {
         Object {
           "content": Array [
             Object {
-              "text": "this is inside blockquote ",
+              "text": "blockquote ",
               "type": "text",
             },
             Object {
@@ -109,7 +109,7 @@ Object {
             Object {
               "content": Array [
                 Object {
-                  "text": "this is inside list ",
+                  "text": "this ",
                   "type": "text",
                 },
                 Object {
@@ -187,7 +187,7 @@ Object {
             Object {
               "content": Array [
                 Object {
-                  "text": "this is inside list ",
+                  "text": "list ",
                   "type": "text",
                 },
                 Object {

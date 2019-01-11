@@ -7,12 +7,11 @@ import {
   copyAsHTMLButton,
   copyAsPlaintextButton,
   insertMentionUsingClick,
-} from '../_helpers';
-import {
-  messageEditor,
   editable,
-  loadActionButton,
-} from './_task-decision-helpers';
+  gotoEditor,
+} from '../_helpers';
+
+export const loadActionButton = '[aria-label="Action item"]';
 
 /*
  * Safari adds special characters that end up in the snapshot
@@ -32,7 +31,7 @@ BrowserTestCase(
     );
     await browser.click(copyAsHTMLButton);
 
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitFor(editable);
     await browser.type(editable, '[] ');
     await browser.waitForSelector('ol');
@@ -54,7 +53,7 @@ BrowserTestCase(
       'this is a link http://www.google.com more elements with some **format** some addition *formatting*',
     );
     await browser.click(copyAsPlaintextButton);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitFor(editable);
     await browser.type(editable, '[] ');
     await browser.waitForSelector('ol');
@@ -67,15 +66,15 @@ BrowserTestCase(
 // Safari highlights entire text on clic
 // IE is generally flaky
 BrowserTestCase(
-  'task-decision-2.ts: can edit an action',
+  'task-decision-2.ts: can type into decision',
   { skip: ['ie', 'safari', 'edge'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.click(loadActionButton);
     await browser.waitForSelector('ol span + div');
     await browser.click('ol span + div');
-    await browser.type(editable, ' has been edited');
+    await browser.type(editable, 'adding action');
     const doc = await browser.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
@@ -86,7 +85,7 @@ BrowserTestCase(
   { skip: ['ie', 'safari'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitFor(editable);
     await browser.type(editable, '[] ');
     await browser.waitForSelector('ol');

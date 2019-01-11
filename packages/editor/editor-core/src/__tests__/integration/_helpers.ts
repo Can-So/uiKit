@@ -22,6 +22,13 @@ export const insertMention = async (browser, query: string) => {
   await browser.type(editable, 'Return');
 };
 
+export const gotoEditor = async browser => {
+  await browser.goto(fullpage.path);
+  await browser.waitForSelector(fullpage.placeholder);
+  await browser.click(fullpage.placeholder);
+  await browser.waitForSelector(editable);
+};
+
 export const insertMentionUsingClick = async (browser, mentionId: string) => {
   await browser.type(editable, '@');
   await browser.waitForSelector(typeAheadPicker);
