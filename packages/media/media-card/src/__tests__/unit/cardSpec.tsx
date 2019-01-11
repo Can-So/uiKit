@@ -33,6 +33,7 @@ describe('Card', () => {
     id: 'some-random-id',
     mediaItemType: 'file',
     collectionName: 'some-collection-name',
+    occurrenceKey: 'some-occurrence-key',
   };
   const setup = (
     context: Context = fakeContext(),
@@ -78,11 +79,12 @@ describe('Card', () => {
     const { component } = setup(firstContext);
     component.setProps({ context: secondContext, fileIdentifier });
 
-    const { id, collectionName } = fileIdentifier;
+    const { id, collectionName, occurrenceKey } = fileIdentifier;
     await nextTick();
     expect(secondContext.file.getFileState).toHaveBeenCalledTimes(1);
     expect(secondContext.file.getFileState).toBeCalledWith(id, {
       collectionName,
+      occurrenceKey,
     });
     expect(component.find(CardView)).toHaveLength(1);
   });
@@ -369,12 +371,14 @@ describe('Card', () => {
       id: Promise.resolve('file-id'),
       mediaItemType: 'file',
       collectionName: 'collection',
+      occurrenceKey: 'some-occurrence-key',
     };
     const { context } = setup(undefined, { identifier });
     await nextTick();
     expect(context.file.getFileState).toHaveBeenCalledTimes(1);
     expect(context.file.getFileState).toBeCalledWith('file-id', {
       collectionName: 'collection',
+      occurrenceKey: 'some-occurrence-key',
     });
   });
 

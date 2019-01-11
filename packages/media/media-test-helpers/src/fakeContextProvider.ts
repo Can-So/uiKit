@@ -21,6 +21,7 @@ export const fakeContext = (
     loadNextPage: jest.fn(),
   } as any;
   const getImage = jest.fn() as any;
+  const getImageUrl = jest.fn().mockResolvedValue('some-image-url');
   const getImageMetadata = jest.fn();
   const file = {
     getFileState: getFile,
@@ -29,7 +30,7 @@ export const fakeContext = (
   const defaultContext: Context = {
     getImageMetadata,
     getImage,
-    getImageUrl: getUrlPreviewProvider,
+    getImageUrl,
     config,
     collection,
     file,

@@ -239,7 +239,10 @@ export class Card extends Component<CardProps, CardState> {
 
   notifyStateChange = (state: Partial<CardState>) => {
     if (this.hasBeenMounted) {
-      this.setState(state as any, this.onLoadingChangeCallback);
+      this.setState(
+        state as Pick<CardState, keyof CardState>,
+        this.onLoadingChangeCallback,
+      );
     }
   };
 
