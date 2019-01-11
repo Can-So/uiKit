@@ -25,21 +25,34 @@ export type Props = {
     Boolean indicating whether to focus on the first tabbable element inside the focus lock.
   */
   autoFocus: boolean | (() => HTMLElement | null),
-  components?: { Body: ElementType },
+
+  /**
+    Object containing header, footer, body and container components. Components here will be used instead of the defaults.
+    - Header: container for the title
+    - Footer: container for the actions
+    - Body: container for the content. Component ref must return a HTMLElement. See Custom example.
+    - Container: wrapper around Header, Body and Footer components.
+  */
+  components?: {
+    Header?: ElementType,
+    Footer?: ElementType,
+    Body?: ElementType,
+    Container?: ElementType,
+  },
   /**
     Content of the modal
   */
   children?: Node,
   /**
-    Component to render the body of the modal, replaces the internal implementation.
+    Deprecated, use components prop: Component to render the body of the modal, replaces the internal implementation.
   */
   body?: ElementType,
   /**
-    Component to render the footer of the modal, replaces internal implementation.
+    Deprecated, use components prop: Component to render the footer of the modal, replaces internal implementation.
   */
   footer?: ElementType,
   /**
-    Component to render the header of the modal, replaces internal implementation.
+    Deprecated, use components prop: Component to render the header of the modal, replaces internal implementation.
   */
   header?: ElementType,
   /**

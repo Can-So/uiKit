@@ -28,7 +28,7 @@ ${code`
   statement that controls the rendering of a \`ModalDialog\`. Take a look our other
   \`ModalDialog\` examples for more usages of this pattern.
 
-  This example controls the rendering of a \`ModalDialog\` based on component state.
+  The example below controls the rendering of a \`ModalDialog\` based on component state.
 
   ${(
     <Example
@@ -39,7 +39,7 @@ ${code`
     />
   )}
 
-  This example shows off some of the different appearances that \`ModalDialog\` comes
+  The example below shows off some of the different appearances that \`ModalDialog\` comes
   with out of the box.
 
   ${(
@@ -51,8 +51,11 @@ ${code`
     />
   )}
 
-  This example demonstrates how to replace the internal components of \`ModalDialog\`
-  to achieve a very specific appearance.
+  The example below demonstrates how to toggle and replace the internal components of \`ModalDialog\`
+  to achieve a more customised appearance. 
+  
+  Note that the ref of any custom Body components
+  must resolve to a DOM node - this example uses \`React.forwardRef\` to support this behaviour.
 
   ${(
     <Example
@@ -60,6 +63,18 @@ ${code`
       Component={require('../examples/15-custom').default}
       title="Custom"
       source={require('!!raw-loader!../examples/15-custom')}
+    />
+  )}
+
+  The example below demonstrates how to wrap the internal components of \`ModalDialog\` to provide 
+  support for forms.
+
+  ${(
+    <Example
+      packageName="@atlaskit/modal-dialog"
+      Component={require('../examples/45-form').default}
+      title="Form"
+      source={require('!!raw-loader!../examples/45-form')}
     />
   )}
 

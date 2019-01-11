@@ -1,5 +1,10 @@
 # @atlaskit/focused-task-close-account
 
+## 0.7.0
+- [minor] [91f6abc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/91f6abc):
+
+  - Bug fix in the basic drawer assembly example
+
 ## 0.6.0
 - [minor] [52c6b63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52c6b63):
 

@@ -48,6 +48,7 @@
     "typecheck:flow": "                      flow check --max-warnings=0",
     "typecheck:typescript": "                tsc --noEmit --project ./tsconfig.typecheck.json",
     "measure": "                             measure",
+    "measure:changed": "                     yarn measure $(node build/ci-scripts/get.changed.packages.since.master.js --spaceDelimited) ",
     "website:start": "                       cd website && yarn start",
     "start": "                               yarn run website:start",
     "start:bitbucket": "                     yarn run website:start **/packages/bitbucket/**",

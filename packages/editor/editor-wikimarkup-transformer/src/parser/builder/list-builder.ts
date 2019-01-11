@@ -6,6 +6,7 @@ const supportedContentType = [
   'orderedList',
   'bulletList',
   'mediaSingle',
+  'codeBlock',
 ];
 
 /**
