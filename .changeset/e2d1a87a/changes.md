@@ -1,0 +1,1 @@
+- Various changes to measure cli in preperation of unleashing it to the masses. Added --updateSnapshot command to make updating of snapshots a explicit action.

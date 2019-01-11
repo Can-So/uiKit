@@ -65,6 +65,14 @@ pipelines:
             caches:
               - node
         - step:
+            name: Check bundle sizes
+            script:
+              - source ./build-setup.sh
+              - bolt install --pure-lockfile
+              - bolt measure:changed
+            caches:
+              - node
+        - step:
             name: Unit Testing
             script:
               - source ./build-setup.sh
