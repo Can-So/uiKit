@@ -43,10 +43,16 @@ export const updateStatus = (status?: StatusType, autoFocus?: boolean) => (
   const { schema } = state;
   const selectedStatus = null;
 
+  const updatedStatus = status
+    ? Object.assign(status, {
+        text: status.text.trim(),
+        localId: status.localId || uuid.generate(),
+      })
+    : status;
+
   const statusProps = {
     ...DEFAULT_STATUS,
-    localId: uuid.generate(),
-    ...status,
+    ...updatedStatus,
   };
 
   let tr = state.tr;
