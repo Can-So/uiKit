@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 94.1.4
+- [patch] [7d9ccd7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d9ccd7):
+
+  - fixed copy/paste status from renderer to editor
+
 ## 94.1.3
 - [patch] [323b457](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/323b457):
 
