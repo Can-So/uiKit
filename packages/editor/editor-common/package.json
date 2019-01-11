@@ -50,6 +50,7 @@
     "@atlaskit/editor-json-transformer": "^4.1.4",
     "@atlaskit/editor-test-helpers": "^6.3.7",
     "@atlaskit/media-core": "^26.0.0",
+    "@atlaskit/visual-regression": "^0.0.1",
     "@atlaskit/webdriver-runner": "^0.1.0",
     "@types/chai": "^4.0.4",
     "chai": "^4.1.2",
