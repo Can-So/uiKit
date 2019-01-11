@@ -52,7 +52,12 @@ if (paths) {
 
       process.exit(1);
     } else {
-      console.log(chalk.green('No significant bundle size changes detected'));
+      if (c.flags.updateSnapshot) {
+        console.log(chalk.green('Updated bundle size snapshots'));
+      } else {
+        console.log(chalk.green('No significant bundle size changes detected'));
+      }
+
       process.exit(0);
     }
   });

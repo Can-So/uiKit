@@ -204,18 +204,13 @@ module.exports = function main(
         stat => stat.isTooBig,
       );
 
-      if (
-        (updateSnapshot && !isLint) ||
-        (isLint && !statsExceededSizeLimit.length)
-      ) {
+      if (updateSnapshot) {
         fs.writeFileSync(
           prevStatsPath,
           JSON.stringify(clearStats(stats), null, 2),
           'utf8',
         );
-      }
-
-      if (statsExceededSizeLimit.length) {
+      } else if (statsExceededSizeLimit.length) {
         console.error(
           chalk.red(`  ✖ Entry "${filePath}" has exceeded size limit!`),
         );
