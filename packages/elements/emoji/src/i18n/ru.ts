@@ -14,7 +14,6 @@ export default {
   'fabric.emoji.retry.label': 'Повторить попытку',
   'fabric.emoji.cancel.label': 'Отменить',
   'fabric.emoji.search.label': 'Поиск',
-  'fabric.emoji.search.placeholder': 'Поиск',
   'fabric.emoji.categories.search.results': 'Результаты поиска',
   'fabric.emoji.category.frequent': 'Популярные',
   'fabric.emoji.category.people': 'Люди',
