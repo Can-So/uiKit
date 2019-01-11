@@ -9,6 +9,7 @@ import { ProviderFactory, Transformer } from '@atlaskit/editor-common';
 import { EventDispatcher, createDispatch } from '../event-dispatcher';
 import { processRawValue } from '../utils';
 import createPluginList from './create-plugins-list';
+import { analyticsEventKey, fireAnalyticsEvent } from '../analytics';
 import { EditorProps, EditorConfig, EditorPlugin } from '../types';
 import { PortalProviderAPI } from '../ui/PortalProvider';
 import {
@@ -73,9 +74,24 @@ export default class ReactEditorView<T = {}> extends React.Component<
   constructor(props: EditorViewProps & T) {
     super(props);
 
-    initAnalytics(props.editorProps.analyticsHandler);
-
     this.editorState = this.createEditorState({ props, replaceDoc: true });
+
+    const { createAnalyticsEvent } = props.editorProps;
+    if (createAnalyticsEvent) {
+      this.eventDispatcher.on(
+        analyticsEventKey,
+        fireAnalyticsEvent(createAnalyticsEvent),
+      );
+    }
+
+    this.eventDispatcher.emit(analyticsEventKey, {
+      action: 'started',
+      actionSubject: 'editor',
+      attributes: {
+        platform: 'web',
+      },
+    });
+    initAnalytics(props.editorProps.analyticsHandler);
   }
 
   private broadcastDisabled = (disabled: boolean) => {
@@ -100,6 +116,20 @@ export default class ReactEditorView<T = {}> extends React.Component<
       this.view.setProps({
         editable: state => !nextProps.editorProps.disabled,
       } as DirectEditorProps);
+    }
+
+    if (
+      nextProps.editorProps.createAnalyticsEvent !==
+      this.props.editorProps.createAnalyticsEvent
+    ) {
+      this.eventDispatcher.off(
+        analyticsEventKey,
+        fireAnalyticsEvent(this.props.editorProps.createAnalyticsEvent),
+      );
+      this.eventDispatcher.on(
+        analyticsEventKey,
+        fireAnalyticsEvent(nextProps.editorProps.createAnalyticsEvent),
+      );
     }
   }
 
@@ -236,6 +266,11 @@ export default class ReactEditorView<T = {}> extends React.Component<
         attributes: { 'data-gramm': 'false' },
       },
     );
+
+    this.eventDispatcher.emit(analyticsEventKey, {
+      action: 'started',
+      actionSubject: 'editor',
+    });
   };
 
   handleEditorViewRef = (node: HTMLDivElement) => {

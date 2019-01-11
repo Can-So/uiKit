@@ -9,6 +9,9 @@ import {
   BaseTheme,
   WidthProvider,
 } from '@atlaskit/editor-common';
+import { Context as CardContext } from '@atlaskit/smart-card';
+import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+
 import { getUiComponent } from './create-editor';
 import EditorActions from './actions';
 import { EditorProps } from './types/editor-props';
@@ -18,7 +21,6 @@ import EditorContext from './ui/EditorContext';
 import { WithCreateAnalyticsEvent } from './ui/WithCreateAnalyticsEvent';
 import { PortalProvider, PortalRenderer } from './ui/PortalProvider';
 import { nextMajorVersion } from './version';
-import { Context as CardContext } from '@atlaskit/smart-card';
 import { createContextAdapter } from './nodeviews';
 
 export * from './types';
@@ -32,7 +34,8 @@ type Context = {
 const ContextAdapter = createContextAdapter({
   card: CardContext,
 });
-export default class Editor extends React.Component<EditorProps, {}> {
+
+export class Editor extends React.Component<EditorProps, {}> {
   static defaultProps: EditorProps = {
     appearance: 'message',
     disabled: false,
@@ -366,3 +369,5 @@ export default class Editor extends React.Component<EditorProps, {}> {
     );
   }
 }
+
+export default withAnalyticsEvents()(Editor);
