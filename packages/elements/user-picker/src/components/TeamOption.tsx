@@ -73,7 +73,7 @@ export class TeamOption extends React.PureComponent<TeamOptionProps> {
 
     // Member count should always be present in the data that's apssed by Legion. But for some reason
     // if it's not there, do not show the byline
-    if (memberCount == null) {
+    if (memberCount === null || typeof memberCount === 'undefined') {
       return undefined;
     }
 

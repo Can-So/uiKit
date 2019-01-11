@@ -10,7 +10,7 @@ import {
   TeamOption,
   TeamOptionProps,
 } from '../../../components/TeamOption';
-import { Team } from 'src/types';
+import { Team } from '../../../types';
 
 describe('Team Option', () => {
   const basicTeam: Team = {
