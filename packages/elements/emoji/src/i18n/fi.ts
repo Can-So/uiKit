@@ -14,7 +14,6 @@ export default {
   'fabric.emoji.retry.label': 'Yritä uudelleen',
   'fabric.emoji.cancel.label': 'Peruuta',
   'fabric.emoji.search.label': 'Hae',
-  'fabric.emoji.search.placeholder': 'Haku',
   'fabric.emoji.categories.search.results': 'Hakutulokset',
   'fabric.emoji.category.frequent': 'Usein toistuvat',
   'fabric.emoji.category.people': 'Henkilöt',
