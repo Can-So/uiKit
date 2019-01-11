@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 94.1.3
+- [patch] [323b457](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/323b457):
+
+  - trimmed status text so now the placeholder appears correctly when user types spaces in the status picker
+
 ## 94.1.2
 - [patch] [c8a5e65](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8a5e65):
 

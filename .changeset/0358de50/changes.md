@@ -1,1 +1,0 @@
-- trimmed status text so now the placeholder appears correctly when user types spaces in the status picker
