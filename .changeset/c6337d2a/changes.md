@@ -1,1 +1,0 @@
-- FS-3360 - Support state analytics attribute with values new or existing. Implement for web, and mobile support via mobile-bridge.
