@@ -1,5 +1,52 @@
 # @atlaskit/editor-core
 
+## 94.1.5
+- [patch] [c0dc7e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c0dc7e3):
+
+  - FS-3360 - Support state analytics attribute with values new or existing. Implement for web, and mobile support via mobile-bridge.
+
+## 94.1.4
+- [patch] [7d9ccd7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d9ccd7):
+
+  - fixed copy/paste status from renderer to editor
+
+## 94.1.3
+- [patch] [323b457](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/323b457):
+
+  - trimmed status text so now the placeholder appears correctly when user types spaces in the status picker
+
+## 94.1.2
+- [patch] [c8a5e65](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8a5e65):
+
+  - ED-6023: fix scaling a table when deleting column
+
+## 94.1.1
+- [patch] [9b0341d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b0341d):
+
+  - ED-5871 Fix issue where user had to click twice to focus cursor in editor on full page editor in Firefox
+
+## 94.1.0
+- [minor] [58e30bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58e30bb):
+
+  - deduped i18n key fabric.editor.orderedList
+
+## 94.0.0
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-common@28.0.0
+  - @atlaskit/editor-test-helpers@6.3.7
+  - @atlaskit/renderer@35.0.0
+  - @atlaskit/emoji@51.0.0
+  - @atlaskit/media-card@49.0.0
+  - @atlaskit/media-filmstrip@23.0.0
+  - @atlaskit/media-picker@29.0.0
+  - @atlaskit/media-test-helpers@18.9.1
+  - @atlaskit/editor-bitbucket-transformer@4.1.4
+  - @atlaskit/editor-json-transformer@4.1.4
+  - @atlaskit/editor-markdown-transformer@2.1.4
+  - @atlaskit/task-decision@11.1.4
+  - @atlaskit/util-data-test@10.0.31
+  - @atlaskit/media-core@26.0.0
+
 ## 93.0.0
 - Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
   - @atlaskit/editor-common@27.0.0

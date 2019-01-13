@@ -322,20 +322,13 @@ describe('UploadingEmojiResource', () => {
 });
 
 describe('#toneSelectionStorage', () => {
-  let getItemSpy: jest.SpyInstance<any>;
-  let setItemSpy: jest.SpyInstance<any>;
-
-  beforeEach(() => {
-    // https://github.com/facebook/jest/issues/6798#issuecomment-412871616
-    getItemSpy = jest.spyOn(Storage.prototype, 'getItem');
-    setItemSpy = jest.spyOn(Storage.prototype, 'setItem');
-  });
-
   it('retrieves previously stored tone selection upon construction', () => {
     // tslint:disable-next-line:no-unused-expression
     new EmojiResource(defaultApiConfig);
 
-    global.expect(getItemSpy).toHaveBeenCalledWith(selectedToneStorageKey);
+    global
+      .expect(localStorage.getItem)
+      .toHaveBeenCalledWith(selectedToneStorageKey);
   });
 
   it('calling setSelectedTone calls setItem in localStorage', () => {
@@ -344,7 +337,7 @@ describe('#toneSelectionStorage', () => {
     resource.setSelectedTone(tone);
 
     global
-      .expect(setItemSpy)
+      .expect(localStorage.setItem)
       .toHaveBeenCalledWith(selectedToneStorageKey, '' + tone);
   });
 });

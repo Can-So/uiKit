@@ -97,6 +97,7 @@ export function TypeAheadItemsList({
               onMouseMove={() => setCurrentIndex(index)}
               elemBefore={item.icon ? item.icon() : null}
               isSelected={index === currentIndex}
+              aria-describedby={item.title}
               ref={
                 index === currentIndex
                   ? ref => ref && scrollIntoViewIfNeeded(ref.ref)

@@ -4,7 +4,7 @@ import ColumnState from './columnState';
 
 import { renderColgroupFromNode } from '../../../utils';
 
-function recreateResizeColsByNode(
+export function recreateResizeColsByNode(
   tableElem: HTMLTableElement,
   node: PMNode,
 ): HTMLCollection {

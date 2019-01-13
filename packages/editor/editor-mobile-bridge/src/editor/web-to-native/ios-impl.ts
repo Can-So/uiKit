@@ -85,21 +85,28 @@ export default class IosBridge implements NativeBridge {
     }
   }
 
-  showStatusPicker(text: string, color: StatusColor, uuid: string) {
+  showStatusPicker(
+    text: string,
+    color: StatusColor,
+    uuid: string,
+    isNew: boolean,
+  ) {
     if (window.webkit && window.webkit.messageHandlers.statusBridge) {
       window.webkit.messageHandlers.statusBridge.postMessage({
         name: 'showStatusPicker',
         text,
         color,
         uuid,
+        isNew,
       });
     }
   }
 
-  dismissStatusPicker() {
+  dismissStatusPicker(isNew: boolean) {
     if (window.webkit && window.webkit.messageHandlers.statusBridge) {
       window.webkit.messageHandlers.statusBridge.postMessage({
         name: 'dismissStatusPicker',
+        isNew,
       });
     }
   }

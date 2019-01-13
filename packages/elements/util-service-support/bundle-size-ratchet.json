@@ -1,0 +1,26 @@
+[
+  {
+    "id": "src.main",
+    "name": "main",
+    "stats": {
+      "size": 3569,
+      "gzipSize": 1520
+    }
+  },
+  {
+    "id": "node_modules.main",
+    "name": "node_modules [main]",
+    "stats": {
+      "size": 16175,
+      "gzipSize": 6398
+    }
+  },
+  {
+    "id": "combined.main",
+    "name": "main",
+    "stats": {
+      "size": 19130,
+      "gzipSize": 7368
+    }
+  }
+]

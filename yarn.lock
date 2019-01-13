@@ -1219,7 +1219,6 @@
 "@types/exenv@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/exenv/-/exenv-1.2.0.tgz#84ff936feeafc917c3c66f80b43e917f56eed00b"
-  integrity sha512-kSyh9q6bvrOGEnJ9X9Io5gjXaakcSRQTax/Nj2ZKJHuOZ7bH4uvUgLyXA9uV2QBCP7+T8KS0JHbPfP1/79ckKw==
 
 "@types/fetch-mock@^6.0.3":
   version "6.0.3"
@@ -4277,7 +4276,6 @@ cloneable-readable@^1.0.0:
 closest-file-data@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/closest-file-data/-/closest-file-data-0.1.4.tgz#975f87c132f299d24a0375b9f63ca3fb88f72b3a"
-  integrity sha1-l1+HwTLymdJKA3W59jyj+4j3Kzo=
 
 cmd-shim@^2.0.2:
   version "2.0.2"
@@ -5757,7 +5755,6 @@ enzyme-adapter-utils@^1.9.0:
 enzyme-react-intl@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/enzyme-react-intl/-/enzyme-react-intl-2.0.3.tgz#d108330f6c5ada94bb1417ad1dae29637ae43091"
-  integrity sha512-POlJiYr5cmSURXhhE08LkVsP8w4V/KdPEPjQ6dni2CGbbcVNimlFEVezt/3peMzGbXFhBbORX6xw6YkhuZEZmA==
   optionalDependencies:
     jsonfile "^4.0.0"
 
@@ -6837,7 +6834,6 @@ fs-access@^1.0.0:
 fs-extra@6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-6.0.1.tgz#8abc128f7946e310135ddc93b98bddb410e7a34b"
-  integrity sha512-GnyIkKhhzXZUWFCaJzvyDLEEgDkPfb4/TPvJCJVuS8MWZgoSsErf++QpiAlDnKFcqhRlm+tIOcencCjyJE6ZCA==
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^4.0.0"
@@ -8805,6 +8801,11 @@ jest-leak-detector@^23.6.0:
   dependencies:
     pretty-format "^23.6.0"
 
+jest-localstorage-mock@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.4.0.tgz#c6073810735dd3af74020ea6c3885ec1cc6d0d13"
+  integrity sha512-/mC1JxnMeuIlAaQBsDMilskC/x/BicsQ/BXQxEOw+5b1aGZkkOAqAF3nu8yq449CpzGtp5jJ5wCmDNxLgA2m6A==
+
 jest-matcher-utils@^23.6.0:
   version "23.6.0"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-23.6.0.tgz#726bcea0c5294261a7417afb6da3186b4b8cac80"
@@ -9215,7 +9216,6 @@ junk@2.1.0:
 kakapo@^3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/kakapo/-/kakapo-3.3.4.tgz#15154ac3332a0479da1380e61078b4fd1a34fab3"
-  integrity sha512-7fdKRQMnLkBeailCg0ICIm1VIE/j7ocmP2HwWW/BCq0RH9/OS//Qobt5kQqh1DrwaOqAsyvjLS2J4382mFuscA==
   dependencies:
     "@types/lodash" "^4.14.106"
     faker "^3.1.0"
@@ -13082,7 +13082,6 @@ react-redux@^5.0.0, react-redux@^5.0.7:
 react-render-image@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/react-render-image/-/react-render-image-1.1.3.tgz#65a35c7f18a5b5a7c24d717e82b2285186f02b9e"
-  integrity sha512-FsrcqSed/P6AaWZq2ABgzfXOexbMFKc/i9W7Pk/jIFwiEdmM9/xzivVNMK4MdIRw5Q1sbaGTVfDozgMPxu/s7A==
 
 react-router-dom@^4.2.2:
   version "4.2.2"
@@ -13113,9 +13112,9 @@ react-scrolllock@^3.0.1, react-scrolllock@^3.0.2:
   dependencies:
     exenv "^1.2.2"
 
-react-select@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-2.1.1.tgz#762d0babd8c7c46a944db51cbb72e4ee117253f9"
+react-select@~2.1.1:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-2.1.2.tgz#7a3e4c2b9efcd8c44ae7cf6ebb8b060ef69c513c"
   dependencies:
     classnames "^2.2.5"
     emotion "^9.1.2"
@@ -13179,7 +13178,6 @@ react-value@^0.2.0:
 react-video-renderer@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/react-video-renderer/-/react-video-renderer-2.4.2.tgz#d412f8677ad173822105c370095715c70eee55b1"
-  integrity sha512-ue+epb8Q2goOqa3LPchs+50r3xR3F23l2RZkS01wOmlNu+J3kFVbC2jdwzQK+/Pq67Tq31bLrYzdQJqksJrpEg==
 
 react-virtualized@^9.8.0:
   version "9.12.0"
@@ -15594,7 +15592,6 @@ tryit@^1.0.1:
 ts-jest@23.1.4:
   version "23.1.4"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-23.1.4.tgz#66ac1d8d3fbf8f9a98432b11aa377aa850664b2b"
-  integrity sha512-9rCSxbWfoZxxeXnSoEIzRNr9hDIQ8iEJAWmSRsWhDHDT8OeuGfURhJQUE8jtJlkyEygs6rngH8RYtHz9cfjmEA==
   dependencies:
     closest-file-data "^0.1.4"
     fs-extra "6.0.1"
@@ -16293,7 +16290,6 @@ vfile@^2.0.0:
 video-snapshot@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/video-snapshot/-/video-snapshot-1.0.3.tgz#33f7424a53390d5c1c7f05a7904b0098df3648e0"
-  integrity sha512-Z6srt1Jdx/tf+hVNFjCQo25AfnxlfIji0EHHe0kjFcRanPvktOCcr0O9p+oAl/6xoiQk93GSoffSCYVvzQzJZQ==
 
 vinyl-file@^2.0.0:
   version "2.0.0"

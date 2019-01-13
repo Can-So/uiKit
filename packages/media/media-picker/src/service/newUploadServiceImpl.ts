@@ -6,7 +6,6 @@ import {
   FileDetails,
   getMediaTypeFromMimeType,
   ContextFactory,
-  FileStreamCache,
   fileStreamsCache,
 } from '@atlaskit/media-core';
 import {
@@ -229,13 +228,8 @@ export class NewUploadServiceImpl implements UploadService {
 
         this.cancellableFilesUploads[id] = cancellableFileUpload;
         // Save observable in the cache
-        const key = FileStreamCache.createKey(id);
-        const keyWithCollection = FileStreamCache.createKey(id, {
-          collectionName: this.tenantUploadParams.collection,
-        });
         // We want to save the observable without collection too, due consumers using cards without collection.
-        fileStreamsCache.set(key, observable);
-        fileStreamsCache.set(keyWithCollection, observable);
+        fileStreamsCache.set(id, observable);
         upfrontId.then(id => {
           // We assign the tenant id to the observable to not emit user id instead
           const tenantObservable = observable.pipe(
@@ -244,12 +238,7 @@ export class NewUploadServiceImpl implements UploadService {
               id,
             })),
           );
-          const key = FileStreamCache.createKey(id);
-          const keyWithCollection = FileStreamCache.createKey(id, {
-            collectionName: this.tenantUploadParams.collection,
-          });
-          fileStreamsCache.set(key, tenantObservable);
-          fileStreamsCache.set(keyWithCollection, tenantObservable);
+          fileStreamsCache.set(id, tenantObservable);
         });
 
         return cancellableFileUpload;

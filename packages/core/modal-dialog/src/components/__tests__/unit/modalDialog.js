@@ -71,30 +71,170 @@ describe('modal-dialog', () => {
       TSHIRT_SIZES.forEach(width => {
         it(`width = "${width}" is applied uniquely`, () => {
           const wrapper = mount(<ModalDialog width={width} onClose={noop} />);
-          const widthProp = wrapper.find(Positioner).prop('widthName');
+          const widthProp = wrapper.find('Positioner').prop('widthName');
           expect(widthProp).toEqual(width);
         });
       });
     });
 
+    describe('container', () => {
+      it('should render element set via components prop', () => {
+        const wrapper = mount(
+          <ModalDialog components={{ Container: 'form' }} onClose={noop} />,
+        );
+
+        expect(wrapper.find('form')).toHaveLength(1);
+      });
+    });
+
     describe('header', () => {
-      it('should render when set', () => {
+      it('should render when set via components prop', () => {
+        const node = <span>My header</span>;
+        const wrapper = mount(
+          <ModalDialog components={{ Header: () => node }} onClose={noop} />,
+        );
+        expect(wrapper.contains(node)).toBe(true);
+      });
+      it('should render when set via (deprecated) header prop', () => {
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
         const node = <span>My header</span>;
         const wrapper = mount(
           <ModalDialog header={() => node} onClose={noop} />,
         );
         expect(wrapper.contains(node)).toBe(true);
+        expect(warnSpy).toHaveBeenCalled();
+      });
+      it('should prefer the components prop over header prop ', () => {
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
+        const node = <span>My header</span>;
+        const nodeDeprecated = <span>My deprecated header</span>;
+        const wrapper = mount(
+          <ModalDialog
+            header={() => nodeDeprecated}
+            components={{ Header: () => node }}
+            onClose={noop}
+          />,
+        );
+
+        expect(wrapper.contains(node)).toBe(true);
+        expect(wrapper.contains(nodeDeprecated)).toBe(false);
+        expect(warnSpy).toHaveBeenCalled();
       });
     });
 
     describe('footer', () => {
-      it('should render when set', () => {
+      it('should render when set via components prop', () => {
+        const node = <span>My footer</span>;
+        const wrapper = mount(
+          <ModalDialog components={{ Footer: () => node }} onClose={noop} />,
+        );
+
+        expect(wrapper.contains(node)).toBe(true);
+      });
+      it('should render when set via (deprecated) footer prop', () => {
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
         const node = <span>My footer</span>;
         const wrapper = mount(
           <ModalDialog footer={() => node} onClose={noop} />,
         );
 
         expect(wrapper.contains(node)).toBe(true);
+        expect(warnSpy).toHaveBeenCalled();
+      });
+      it('should prefer the components prop over footer prop ', () => {
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
+        const node = <span>My footer</span>;
+        const nodeDeprecated = <span>My deprecated footer</span>;
+        const wrapper = mount(
+          <ModalDialog
+            footer={() => nodeDeprecated}
+            components={{ Footer: () => node }}
+            onClose={noop}
+          />,
+        );
+
+        expect(wrapper.contains(node)).toBe(true);
+        expect(wrapper.contains(nodeDeprecated)).toBe(false);
+        expect(warnSpy).toHaveBeenCalled();
+      });
+    });
+
+    describe('body', () => {
+      it('should render when set via components prop', () => {
+        // $FlowFixMe
+        const node = React.forwardRef((props, ref) => {
+          return <span ref={ref}>My body</span>;
+        });
+        const wrapper = mount(
+          <ModalDialog components={{ Body: node }} onClose={noop} />,
+        );
+        expect(wrapper.contains(node)).toBe(true);
+      });
+
+      it('should render when set via (deprecated) body prop', () => {
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
+        const node = <span>My body</span>;
+        const wrapper = mount(<ModalDialog body={() => node} onClose={noop} />);
+
+        expect(wrapper.contains(node)).toBe(true);
+        expect(warnSpy).toHaveBeenCalled();
+      });
+
+      it('should prefer the components prop over body prop ', () => {
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
+        // $FlowFixMe
+        const node = React.forwardRef((props, ref) => {
+          return <span ref={ref}>My body</span>;
+        });
+        const nodeDeprecated = <span>My deprecated body</span>;
+        const wrapper = mount(
+          <ModalDialog
+            body={() => nodeDeprecated}
+            components={{ Body: node }}
+            onClose={noop}
+          />,
+        );
+
+        expect(wrapper.contains(node)).toBe(true);
+        expect(wrapper.contains(nodeDeprecated)).toBe(false);
+        expect(warnSpy).toHaveBeenCalled();
+      });
+
+      it('should warn the user about using forwardRef if not present on a custom body', () => {
+        const warnSpy = jest
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
+        const errorSpy = jest
+          .spyOn(console, 'error')
+          .mockImplementation(() => {});
+
+        const node = props => {
+          return (
+            <>
+              <span>My body</span>
+              {props.children}
+            </>
+          );
+        };
+
+        mount(<ModalDialog components={{ Body: node }} />);
+
+        expect(errorSpy).toHaveBeenCalled();
+        expect(warnSpy).toHaveBeenCalledWith(
+          expect.stringMatching(/forwardRef/),
+        );
       });
     });
 
@@ -271,7 +411,7 @@ test('no transform is applied to content', () => {
   // update enzyme's view of component tree after animations have finished
   wrapper.update();
   const style = wrapper.find(Positioner).prop('style');
-  expect(style.transform).toEqual(null);
+  expect(style.transform).toBeNull();
 });
 
 test('should throw deprecation error when using a function for auto focus', () => {

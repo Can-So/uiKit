@@ -15,7 +15,6 @@ export default {
   'fabric.emoji.retry.label': 'Prøv igjen',
   'fabric.emoji.cancel.label': 'Avbryt',
   'fabric.emoji.search.label': 'Søk',
-  'fabric.emoji.search.placeholder': 'Søk',
   'fabric.emoji.categories.search.results': 'Søkeresultater',
   'fabric.emoji.category.frequent': 'Hyppig brukt',
   'fabric.emoji.category.people': 'Mennesker',

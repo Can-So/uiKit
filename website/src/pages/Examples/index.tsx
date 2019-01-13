@@ -66,7 +66,7 @@ function PackageSelector(props) {
         styles={{
           container: styles => ({
             ...styles,
-            flex: '1 1 0',
+            flex: '1 1 0px',
           }),
           control: styles => ({
             ...styles,
@@ -113,7 +113,7 @@ function ExampleSelector(props) {
         styles={{
           container: styles => ({
             ...styles,
-            flex: '1 1 0',
+            flex: '1 1 0px',
           }),
           control: styles => ({
             ...styles,

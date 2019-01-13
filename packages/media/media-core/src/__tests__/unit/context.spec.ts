@@ -41,14 +41,20 @@ describe('Context', () => {
   });
 
   describe('.file.getFileState()', () => {
-    const id = uuid.v4();
-    const occurrenceKey = uuid.v4();
-    const uploadableFileUpfrontIds: UploadableFileUpfrontIds = {
-      id,
-      occurrenceKey,
-      deferredUploadId: Promise.resolve(uuid.v4()),
-    };
+    let id: string;
+    let occurrenceKey: string;
+    let uploadableFileUpfrontIds: UploadableFileUpfrontIds;
     const controller = new UploadController();
+
+    beforeEach(() => {
+      id = uuid.v4();
+      occurrenceKey = uuid.v4();
+      uploadableFileUpfrontIds = {
+        id,
+        occurrenceKey,
+        deferredUploadId: Promise.resolve(uuid.v4()),
+      };
+    });
 
     it('should fetch the file if it doesnt exist locally', done => {
       const context = createContext();
@@ -98,13 +104,8 @@ describe('Context', () => {
 
     it('should poll for changes and return the latest file state', done => {
       const context = createContext();
-      let getFileCalledTimes = 0;
-      const getItems = jest.fn().mockImplementation(() => {
-        getFileCalledTimes++;
-        const processingStatus =
-          getFileCalledTimes === 2 ? 'succeeded' : 'pending';
-
-        return Promise.resolve({
+      const getFilePromiseWithProcessingStatus = (processingStatus: string) =>
+        Promise.resolve({
           data: {
             items: [
               {
@@ -118,7 +119,10 @@ describe('Context', () => {
             ],
           },
         });
-      });
+      const getItems = jest
+        .fn()
+        .mockReturnValueOnce(getFilePromiseWithProcessingStatus('pending'))
+        .mockReturnValueOnce(getFilePromiseWithProcessingStatus('succeeded'));
       const fakeStore = {
         getItems,
       };
@@ -147,10 +151,7 @@ describe('Context', () => {
         occurrenceKey: 'some-occurrenceKey',
       });
 
-      expect(getOrInsertSpy).toHaveBeenLastCalledWith(
-        `${id}-my-collection-some-occurrenceKey`,
-        expect.anything(),
-      );
+      expect(getOrInsertSpy).toHaveBeenLastCalledWith(id, expect.anything());
     });
 
     it('should return local file state while file is still uploading', done => {

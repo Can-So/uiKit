@@ -48,6 +48,8 @@
     "typecheck:flow": "                      flow check --max-warnings=0",
     "typecheck:typescript": "                tsc --noEmit --project ./tsconfig.typecheck.json",
     "measure": "                             measure",
+    "measure:changed": "                     yarn measure $(node build/ci-scripts/get.changed.packages.since.master.js --spaceDelimited) --lint",
+    "measure:updateSnapshot": "              yarn measure $(node build/ci-scripts/get.changed.packages.since.master.js --spaceDelimited) --updateSnapshot",
     "website:start": "                       cd website && yarn start",
     "start": "                               yarn run website:start",
     "start:bitbucket": "                     yarn run website:start **/packages/bitbucket/**",
@@ -161,6 +163,7 @@
     "jest-emotion": "^9.2.7",
     "jest-image-snapshot": "^2.4.2",
     "jest-in-case": "^1.0.2",
+    "jest-localstorage-mock": "^2.4.0",
     "jest-resolve": "^23.6.0",
     "jest-sandbox": "^1.1.1",
     "jquery": "^3.2.1",
@@ -441,7 +444,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scrolllock": "^3.0.2",
-    "react-select": "^2.1.1",
+    "react-select": "~2.1.1",
     "react-syntax-highlighter": "^10.0.1",
     "react-transition-group": "^2.2.1",
     "react-video-renderer": "^2.4.2",
@@ -497,7 +500,7 @@
     "**/expand-range/fill-range": "2.2.3"
   },
   "engines": {
-    "node": "^8.4.0"
+    "node": "^8.9.0"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [

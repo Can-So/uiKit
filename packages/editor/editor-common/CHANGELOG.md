@@ -1,5 +1,13 @@
 # @atlaskit/editor-common
 
+## 28.0.0
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-test-helpers@6.3.7
+  - @atlaskit/emoji@51.0.0
+  - @atlaskit/media-card@49.0.0
+  - @atlaskit/editor-json-transformer@4.1.4
+  - @atlaskit/media-core@26.0.0
+
 ## 27.0.0
 - Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
   - @atlaskit/editor-test-helpers@6.3.6
