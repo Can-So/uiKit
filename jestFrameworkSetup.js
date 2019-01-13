@@ -5,6 +5,7 @@ import { toMatchSnapshot } from 'jest-snapshot';
 import { configureToMatchImageSnapshot } from 'jest-image-snapshot';
 import * as emotion from 'emotion';
 import { createSerializer } from 'jest-emotion';
+import 'jest-localstorage-mock';
 
 let consoleError;
 let consoleWarn;
@@ -338,10 +339,11 @@ if (process.env.VISUAL_REGRESSION) {
       headless = false;
     }
     global.browser = await puppeteer.launch({
-      // run test in headless mode
-      headless: headless,
-      slowMo: 100,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+      ],
     });
     global.page = await global.browser.newPage();
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);

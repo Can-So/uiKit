@@ -77,6 +77,30 @@ describe('Status - NodeView', () => {
     expect(wrapper.find(Status).prop('localId')).toBe('666');
   });
 
+  it('should use status as placeholder when empty text', () => {
+    const { editorView: view } = editor(doc(p('Status: {<>}')));
+
+    Actions.updateStatus({
+      text: '        ',
+      color: 'blue',
+      localId: '666',
+    })(view);
+
+    const wrapper = mountWithIntl(
+      <StatusNodeView
+        view={view}
+        node={view.state.selection.$from.nodeAfter!}
+        getPos={jest.fn()}
+      />,
+    );
+    expect(wrapper.find(Status).length).toBe(1);
+    expect(wrapper.find(Status).prop('text')).toBe(
+      messages.placeholder.defaultMessage,
+    );
+    expect(wrapper.find(Status).prop('color')).toBe('blue');
+    expect(wrapper.find(Status).prop('localId')).toBe('666');
+  });
+
   it('should call setStatusPickerAt on click', () => {
     const setStatusPickerAtSpy = jest.spyOn(Actions, 'setStatusPickerAt');
     const { editorView: view } = editor(doc(p('Status: {<>}')));

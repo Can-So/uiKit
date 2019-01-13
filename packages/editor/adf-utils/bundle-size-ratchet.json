@@ -1,0 +1,18 @@
+[
+  {
+    "id": "src.main",
+    "name": "main",
+    "stats": {
+      "size": 28059,
+      "gzipSize": 5929
+    }
+  },
+  {
+    "id": "combined.main",
+    "name": "main",
+    "stats": {
+      "size": 28059,
+      "gzipSize": 5929
+    }
+  }
+]

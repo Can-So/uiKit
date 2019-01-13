@@ -5,7 +5,7 @@ import {
 } from '@atlaskit/visual-regression/helper';
 
 describe('Snapshot Test', () => {
-  it('Basic example should match production example', async () => {
+  it('Logo basic example should match production example', async () => {
     const url = getExampleUrl('core', 'logo', 'basic', global.__BASEURL__);
     const image = await takeScreenShot(global.page, url);
     //$FlowFixMe
