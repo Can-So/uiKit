@@ -1,26 +1,11 @@
-import React, { Component } from 'react';
+import withDataProviders from './with-data-provider';
 
-export default class MockProvider extends Component {
-  state = {
-    isLoading: true,
+const SOME_STATIC_DATA = {
+  data: 'yay!',
+};
+
+export default withDataProviders(() => {
+  return {
+    staticData: SOME_STATIC_DATA,
   };
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        isLoading: false,
-      });
-    }, 2000);
-  }
-
-  render() {
-    const { isLoading } = this.state;
-    const { children } = this.props;
-
-    return children({
-      data: null,
-      isLoading,
-      error: null,
-    });
-  }
-}
+});
