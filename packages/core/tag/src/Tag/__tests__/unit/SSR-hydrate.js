@@ -28,6 +28,6 @@ test('should ssr then hydrate tag correctly', () => {
   canUseDom.mockReturnValue(true);
   const elem = document.createElement('div');
   elem.innerHTML = serverHTML;
-  expect(() => ReactDOM.hydrate(<App />, elem)).not.toThrow();
+  ReactDOM.hydrate(<App />, elem);
   expect(console.error).not.toBeCalled();
 });
