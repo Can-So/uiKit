@@ -1,0 +1,1 @@
+- TEAMS-169:Adding teams support to user picker
