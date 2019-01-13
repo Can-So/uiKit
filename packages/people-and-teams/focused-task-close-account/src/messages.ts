@@ -1,9 +1,6 @@
-/**
- * Once copy is finalised, these message objects should be wrapped in a call to react-intl::defineMessages()
- * This makes them visible to the i18n pipeline where they'll receive translations from Transifex.
- */
+import { defineMessages, Messages as ReactIntlMessages } from 'react-intl';
 
-export const commonMessages = {
+export const commonMessages: ReactIntlMessages = defineMessages({
   deactivateAccount: {
     id: 'focused-task-close-account.deactivate-account',
     defaultMessage: 'Deactivate account',
@@ -45,9 +42,9 @@ export const commonMessages = {
     description:
       'Text for a button for a user to go back to the previous step of a process',
   },
-};
+});
 
-export const overviewMessages = {
+export const overviewMessages: ReactIntlMessages = defineMessages({
   headingSelf: {
     id: 'focused-task-close-account.delete-account.overview.heading.self',
     defaultMessage: 'Delete your account',
@@ -352,18 +349,18 @@ export const overviewMessages = {
     description:
       'Text elaborating on the note about apps storing personal data',
   },
-};
+});
 
-export const contentPreviewMessages = {
+export const contentPreviewMessages: ReactIntlMessages = defineMessages({
   heading: {
     id: 'focused-task-close-account.delete-account.content-preview.heading',
     defaultMessage: 'How users will see this account',
     description:
       'Heading for the screen that explains what other users will see when viewing the deleted/deactivated user',
   },
-};
+});
 
-export const dropDownListMessages = {
+export const dropDownListMessages: ReactIntlMessages = defineMessages({
   expandButton: {
     id: 'focused-task-close-account.delete-account.drop-down-expand-button',
     defaultMessage: '{num} more',
@@ -376,4 +373,4 @@ export const dropDownListMessages = {
     defaultMessage: 'Show less',
     description: 'Button text displaying text on collapse',
   },
-};
+});

@@ -87,7 +87,15 @@ export default class Page {
     });
   }
 
-  type(selector, text) {
+  async type(selector, text) {
+    if (Array.isArray(text)) {
+      while (text.length > 1) {
+        let first = text.shift();
+        await this.browser.addValue(selector, first);
+      }
+
+      return this.browser.addValue(selector, text[0]);
+    }
     return this.browser.addValue(selector, text);
   }
 
@@ -211,6 +219,13 @@ export default class Page {
     return this.browser.waitForExist(selector, options.timeout || WAIT_TIMEOUT);
   }
 
+  waitForVisible(selector, options = {}) {
+    return this.browser.waitForVisible(
+      selector,
+      options.timeout || WAIT_TIMEOUT,
+    );
+  }
+
   waitFor(selector, ms, reverse) {
     return this.browser.waitForVisible(selector, ms, reverse);
   }
@@ -226,6 +241,48 @@ export default class Page {
 
   chooseFile(selector, localPath) {
     return this.browser.chooseFile(selector, localPath);
+  }
+
+  mockDate(timestamp, timezoneOffset) {
+    return this.browser.execute(
+      (t, tz) => {
+        const _Date = Date;
+        const realDate = params => new _Date(params);
+        const mockedDate = new _Date(t);
+
+        if (tz) {
+          const localDateOffset = new _Date().getTimezoneOffset() / 60;
+          const dateWithTimezoneOffset = new _Date(
+            t + (tz + localDateOffset) * 3600000,
+          );
+          const localDateMethods = [
+            'getFullYear',
+            'getYear',
+            'getMonth',
+            'getDate',
+            'getDay',
+            'getHours',
+            'getMinutes',
+          ];
+          localDateMethods.forEach(dateMethod => {
+            mockedDate[dateMethod] = () => dateWithTimezoneOffset[dateMethod]();
+          });
+        }
+
+        Date = function(...params) {
+          if (params.length > 0) {
+            return realDate(...params);
+          }
+          return mockedDate;
+        };
+        Object.getOwnPropertyNames(_Date).forEach(property => {
+          Date[property] = _Date[property];
+        });
+        Date.now = () => t;
+      },
+      timestamp,
+      timezoneOffset,
+    );
   }
 }
 //TODO: Maybe wrapping all functions?

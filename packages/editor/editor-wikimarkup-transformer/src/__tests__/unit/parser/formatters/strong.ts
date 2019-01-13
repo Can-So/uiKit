@@ -78,4 +78,11 @@ another line`;
     const transformer = new WikiMarkupTransformer();
     expect(transformer.parse(wiki)).toMatchSnapshot();
   });
+
+  test('should not be a strong mark if it is escaped', () => {
+    const wiki = 'This is not a *strong\\* text';
+
+    const transformer = new WikiMarkupTransformer();
+    expect(transformer.parse(wiki)).toMatchSnapshot();
+  });
 });

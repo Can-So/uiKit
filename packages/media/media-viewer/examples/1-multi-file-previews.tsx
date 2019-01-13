@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Subscription } from 'rxjs/Subscription';
-import { isError } from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
 import AkSpinner from '@atlaskit/spinner';
 import { createStorybookContext } from '@atlaskit/media-test-helpers';
@@ -46,26 +45,21 @@ export default class Example extends React.Component<{}, State> {
   private subscription?: Subscription;
 
   componentDidMount() {
-    this.subscription = context
-      .getMediaCollectionProvider(defaultCollectionName, 1)
-      .observable()
+    this.subscription = context.collection
+      .getItems(defaultCollectionName, { limit: 1 })
       .subscribe({
-        next: (collection: any) => {
-          if (!isError(collection)) {
-            const firstItem = collection.items[0];
-            if (firstItem) {
-              this.setState({
-                firstCollectionItem: {
-                  id: firstItem.details.id,
-                  type: firstItem.type,
-                  occurrenceKey: firstItem.details.occurrenceKey,
-                },
-              });
-            } else {
-              console.error('No items found in the collection');
-            }
+        next: items => {
+          const firstItem = items[0];
+          if (firstItem) {
+            this.setState({
+              firstCollectionItem: {
+                id: firstItem.id,
+                type: firstItem.type,
+                occurrenceKey: firstItem.occurrenceKey,
+              },
+            });
           } else {
-            console.error(collection);
+            console.error('No items found in the collection');
           }
         },
       });

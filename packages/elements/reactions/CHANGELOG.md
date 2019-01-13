@@ -1,5 +1,26 @@
 # @atlaskit/reactions
 
+## 15.3.0
+- [minor] [e60d7aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e60d7aa):
+
+  - updated i18n translations
+
+## 15.2.2
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-test-helpers@6.3.7
+  - @atlaskit/emoji@51.0.0
+  - @atlaskit/util-data-test@10.0.31
+
+## 15.2.1
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/emoji@50.0.0
+  - @atlaskit/util-data-test@10.0.30
+
+## 15.2.0
+- [minor] [277edda](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/277edda):
+
+  - replaced enzyme-react-intl with @atlaskit/editor-test-helpers
+
 ## 15.1.0
 - [minor] [1296324](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1296324):
 

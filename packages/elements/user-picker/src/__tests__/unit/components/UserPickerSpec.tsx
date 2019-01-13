@@ -561,7 +561,7 @@ describe('UserPicker', () => {
             actionSubject: 'userPicker',
             eventType: 'ui',
             attributes: {
-              duration: expect.any(Number),
+              sessionDuration: expect.any(Number),
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
@@ -599,7 +599,7 @@ describe('UserPicker', () => {
             actionSubject: 'userPicker',
             eventType: 'ui',
             attributes: {
-              duration: expect.any(Number),
+              sessionDuration: expect.any(Number),
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
@@ -638,7 +638,7 @@ describe('UserPicker', () => {
             actionSubject: 'userPicker',
             eventType: 'ui',
             attributes: {
-              duration: expect.any(Number),
+              sessionDuration: expect.any(Number),
               packageName: '@atlaskit/user-picker',
               packageVersion: expect.any(String),
               sessionId: expect.any(String),
@@ -759,7 +759,8 @@ describe('UserPicker', () => {
                   packageVersion: expect.any(String),
                   packageName: '@atlaskit/user-picker',
                   sessionId: expect.any(String),
-                  duration: expect.any(Number),
+                  sessionDuration: expect.any(Number),
+                  durationSinceInputChange: expect.any(Number),
                   queryLength: 0,
                   results: [
                     { id: 'abc-123', type: UserType },
@@ -809,7 +810,8 @@ describe('UserPicker', () => {
                   packageVersion: expect.any(String),
                   packageName: '@atlaskit/user-picker',
                   sessionId: expect.any(String),
-                  duration: expect.any(Number),
+                  sessionDuration: expect.any(Number),
+                  durationSinceInputChange: expect.any(Number),
                   queryLength: 0,
                   results: [{ id: 'abc-123', type: UserType }],
                   pickerType: 'single',

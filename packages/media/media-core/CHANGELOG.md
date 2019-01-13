@@ -1,5 +1,21 @@
 # @atlaskit/media-core
 
+## 26.0.0
+- [major] [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+
+  - Remove redundant fileStreamCache createKey() method and replace the cache key with id everywhere
+
+## 25.0.0
+- [major] [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+
+  - Remove deprecated methods from media-core
+  - Use context.collection methods in MediaViewer
+  - Remove link support from media-card
+  - Remove legacy services + providers from media-core
+  - Remove link related methods from media-core
+  - Remove axios dependency
+  - Make context.getImage cancelable
+
 ## 24.7.2
 - Updated dependencies [135ed00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/135ed00):
   - @atlaskit/media-store@9.0.2

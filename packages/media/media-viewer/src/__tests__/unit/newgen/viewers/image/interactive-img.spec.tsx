@@ -10,13 +10,14 @@ import { Rectangle, Camera, Vector2 } from '@atlaskit/media-ui';
 import {
   InteractiveImg,
   zoomLevelAfterResize,
+  Props,
 } from '../../../../../newgen/viewers/image/interactive-img';
 import { ZoomControls } from '../../../../../newgen/zoomControls';
 import { ImageWrapper, Img } from '../../../../../newgen/styled';
 import { ZoomLevel } from '../../../../../newgen/domain/zoomLevel';
 import { Outcome } from '../../../../../newgen/domain';
 
-function createFixture() {
+function createFixture(props?: Partial<Props>) {
   const onClose = jest.fn();
   const el = mountWithIntlContext(
     <InteractiveImg
@@ -24,6 +25,7 @@ function createFixture() {
       onError={jest.fn()}
       src={''}
       onClose={onClose}
+      {...props}
     />,
   );
   const viewport = new Rectangle(400, 300);
@@ -120,6 +122,16 @@ describe('InteractiveImg', () => {
     expect(actualZoomLevel.value).toEqual(expectedZoomLevel.value);
   });
 
+  it('rotates image when orientation is provided', () => {
+    const { el } = createFixture({ orientation: 2 });
+
+    expect(el.find(Img).prop('style')).toEqual(
+      expect.objectContaining({
+        transform: 'rotateY(180deg)',
+      }),
+    );
+  });
+
   describe('drag and drop', () => {
     it('the image will not move before a mousedown event', () => {
       const { el } = createFixture();
@@ -200,6 +212,14 @@ describe('InteractiveImg', () => {
       el.setState({ zoomLevel });
       expect(el.find(Img).prop('isDragging')).toEqual(false);
     });
+  });
+
+  it('only applies image-rendering css props when zoom level greater than 1 (zoomed in)', () => {
+    const { el } = createFixture();
+
+    expect(el.find(Img)).not.toHaveStyleRule('image-rendering', 'pixelated');
+    clickZoomIn(el);
+    expect(el.find(Img)).toHaveStyleRule('image-rendering', 'pixelated');
   });
 });
 

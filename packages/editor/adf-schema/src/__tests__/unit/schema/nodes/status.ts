@@ -51,7 +51,9 @@ describe(`${name}/schema status node`, () => {
       expect(node.attrs.color).toEqual(color);
       expect(node.attrs.text).toEqual('In progress');
       expect(node.attrs.style).toEqual(null);
-      expect(node.attrs.localId).toEqual(null);
+      expect(node.attrs.localId).toHaveLength(
+        '7f4189c0-89f2-4f0e-a439-3fa9e57934fa'.length,
+      ); // random UUID, just match the length
     });
   });
 

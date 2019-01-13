@@ -289,6 +289,9 @@ class UserPickerInternal extends React.Component<
       !this.state.preventFilter &&
       this.state.inputValue !== prevState.inputValue
     ) {
+      if (this.session) {
+        this.session.inputChangeTime = Date.now();
+      }
       callCallback(this.props.onInputChange, this.state.inputValue);
     }
   }

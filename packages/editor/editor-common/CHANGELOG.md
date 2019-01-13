@@ -1,5 +1,41 @@
 # @atlaskit/editor-common
 
+## 28.0.0
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-test-helpers@6.3.7
+  - @atlaskit/emoji@51.0.0
+  - @atlaskit/media-card@49.0.0
+  - @atlaskit/editor-json-transformer@4.1.4
+  - @atlaskit/media-core@26.0.0
+
+## 27.0.0
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/editor-test-helpers@6.3.6
+  - @atlaskit/emoji@50.0.0
+  - @atlaskit/media-card@48.0.0
+  - @atlaskit/editor-json-transformer@4.1.3
+  - @atlaskit/media-core@25.0.0
+
+## 26.0.2
+- [patch] [8db5ddc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8db5ddc):
+
+  - ED-6002 Fixes overflowed layout column rendering in renderer
+
+## 26.0.1
+- [patch] [ababb4a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ababb4a):
+
+  - ED-5999: fix padding between Columns in renderer
+
+## 26.0.0
+- [major] [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+
+  - ED-5805: Popup to support being sticky with alignX=top
+
+## 25.0.5
+- [patch] [5d4527e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5d4527e):
+
+  - Fix issue where date was not respecting user's local date for initial date selection in quick insert
+
 ## 25.0.4
 - [patch] [80cadc7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/80cadc7):
 

@@ -4,6 +4,8 @@ import Button from '@atlaskit/button';
 import accessibleSites from '../src/mocks/accessibleSites';
 import { catherineHirons } from '../src/mocks/users';
 
+import { IntlProvider } from 'react-intl';
+
 import {
   FocusedTaskCloseAccount,
   DeleteUserOverviewScreen,
@@ -20,20 +22,22 @@ export default function Example() {
   return (
     <>
       <h1>See code</h1>
-      <FocusedTaskCloseAccount
-        onClose={() => {}}
-        isOpen={false}
-        screens={[
-          <DeleteUserOverviewScreen
-            accessibleSites={accessibleSites}
-            isCurrentUser
-            user={catherineHirons}
-          />,
-          <DeleteUserContentPreviewScreen user={catherineHirons} />,
-        ]}
-        submitButton={submitButton}
-        learnMoreLink={''}
-      />
+      <IntlProvider locale="en">
+        <FocusedTaskCloseAccount
+          onClose={() => {}}
+          isOpen={false}
+          screens={[
+            <DeleteUserOverviewScreen
+              accessibleSites={accessibleSites}
+              isCurrentUser
+              user={catherineHirons}
+            />,
+            <DeleteUserContentPreviewScreen user={catherineHirons} />,
+          ]}
+          submitButton={submitButton}
+          learnMoreLink={''}
+        />
+      </IntlProvider>
     </>
   );
 }

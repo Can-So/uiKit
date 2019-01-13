@@ -79,6 +79,13 @@ another line`;
     expect(transformer.parse(wiki)).toMatchSnapshot();
   });
 
+  test('should not be a deleted mark if it is escaped', () => {
+    const wiki = 'This is not a -deleted\\- text';
+
+    const transformer = new WikiMarkupTransformer();
+    expect(transformer.parse(wiki)).toMatchSnapshot();
+  });
+
   test('should not be a deleted mark if the - is in a link format', () => {
     const wiki = 'This is not a -[link|https://www.atlass-ian.com]';
     const transformer = new WikiMarkupTransformer();

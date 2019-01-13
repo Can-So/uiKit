@@ -19,6 +19,7 @@ import {
 export type UserPickerSession = {
   id: string;
   start: number;
+  inputChangeTime: number;
   upCount: number;
   downCount: number;
   lastKey?: number;
@@ -27,6 +28,7 @@ export type UserPickerSession = {
 export const startSession = (): UserPickerSession => ({
   id: uuid(),
   start: Date.now(),
+  inputChangeTime: Date.now(),
   upCount: 0,
   downCount: 0,
   lastKey: undefined,
@@ -105,7 +107,7 @@ export const deleteEvent: EventCreator = (props, state, session, ...args) =>
 export const cancelEvent: EventCreator = (props, state, session, ...args) =>
   createEvent('ui', 'cancelled', 'userPicker', {
     sessionId: sessionId(session),
-    duration: duration(session),
+    sessionDuration: sessionDuration(session),
     queryLength: queryLength(args[0]),
     spaceInQuery: spaceInQuery(args[0]),
     upKeyCount: upKeyCount(session),
@@ -117,7 +119,7 @@ export const selectEvent: EventCreator = (props, state, session, ...args) =>
   createEvent('ui', selectEventType(session), 'userPicker', {
     sessionId: sessionId(session),
     pickerType: pickerType(props),
-    duration: duration(session),
+    sessionDuration: sessionDuration(session),
     position: position(state, args[0]),
     queryLength: queryLength(state),
     spaceInQuery: spaceInQuery(state),
@@ -129,7 +131,8 @@ export const selectEvent: EventCreator = (props, state, session, ...args) =>
 export const searchedEvent: EventCreator = (props, state, session) =>
   createEvent('operational', 'searched', 'userPicker', {
     sessionId: sessionId(session),
-    duration: duration(session),
+    sessionDuration: sessionDuration(session),
+    durationSinceInputChange: durationSinceInputChange(session),
     queryLength: queryLength(state),
     isLoading: isLoading(props, state),
     results: results(state),
@@ -162,8 +165,12 @@ function spaceInQuery(state: UserPickerState) {
   return state.preventFilter ? false : state.inputValue.indexOf(' ') !== -1;
 }
 
-function duration(session?: UserPickerSession) {
+function sessionDuration(session?: UserPickerSession) {
   return session ? Date.now() - session.start : null;
+}
+
+function durationSinceInputChange(session?: UserPickerSession) {
+  return session ? Date.now() - session.inputChangeTime : null;
 }
 
 function sessionId(session?: UserPickerSession) {

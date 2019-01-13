@@ -1,5 +1,51 @@
 # @atlaskit/renderer
 
+## 35.0.0
+- Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
+  - @atlaskit/editor-common@28.0.0
+  - @atlaskit/editor-test-helpers@6.3.7
+  - @atlaskit/media-card@49.0.0
+  - @atlaskit/media-filmstrip@23.0.0
+  - @atlaskit/media-test-helpers@18.9.1
+  - @atlaskit/editor-json-transformer@4.1.4
+  - @atlaskit/task-decision@11.1.4
+  - @atlaskit/util-data-test@10.0.31
+  - @atlaskit/media-core@26.0.0
+
+## 34.0.0
+- Updated dependencies [72d37fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/72d37fb):
+  - @atlaskit/editor-common@27.0.0
+  - @atlaskit/editor-test-helpers@6.3.6
+  - @atlaskit/media-card@48.0.0
+  - @atlaskit/media-filmstrip@22.0.0
+  - @atlaskit/editor-json-transformer@4.1.3
+  - @atlaskit/task-decision@11.1.3
+  - @atlaskit/util-data-test@10.0.30
+  - @atlaskit/media-core@25.0.0
+  - @atlaskit/media-test-helpers@18.9.0
+
+## 33.0.7
+- [patch] [8db5ddc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8db5ddc):
+
+  - ED-6002 Fixes overflowed layout column rendering in renderer
+
+## 33.0.6
+- [patch] [38f3592](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/38f3592):
+
+  - ED-5990 Fixes logic for merging marks
+
+## 33.0.5
+- [patch] [f112576](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f112576):
+
+  - ED-6001: fix react error "Maximum update depth exceeded" in renderer
+
+## 33.0.4
+- Updated dependencies [e858305](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e858305):
+  - @atlaskit/editor-json-transformer@4.1.2
+  - @atlaskit/editor-test-helpers@6.3.5
+  - @atlaskit/task-decision@11.1.2
+  - @atlaskit/editor-common@26.0.0
+
 ## 33.0.3
 - Updated dependencies [00c648e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00c648e):
 - Updated dependencies [a17bb0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a17bb0e):

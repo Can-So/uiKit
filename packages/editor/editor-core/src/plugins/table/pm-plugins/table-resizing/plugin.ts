@@ -2,6 +2,7 @@ import { Plugin, PluginKey } from 'prosemirror-state';
 import { Decoration, DecorationSet } from 'prosemirror-view';
 import { TableMap } from 'prosemirror-tables';
 import { findParentNodeOfType, hasParentNodeOfType } from 'prosemirror-utils';
+import * as classnames from 'classnames';
 
 import {
   updateControls,
@@ -106,10 +107,14 @@ export function createPlugin(
     }),
     props: {
       attributes(state) {
-        let pluginState = pluginKey.getState(state);
-        return pluginState.activeHandle > -1
-          ? { class: `${ClassName.RESIZING} resize-cursor` }
-          : { class: ClassName.RESIZING };
+        const pluginState = pluginKey.getState(state);
+
+        return {
+          class: classnames(ClassName.RESIZING_PLUGIN, {
+            [ClassName.RESIZE_CURSOR]: pluginState.activeHandle > -1,
+            [ClassName.IS_RESIZING]: !!pluginState.dragging,
+          }),
+        };
       },
 
       handleDOMEvents: {
