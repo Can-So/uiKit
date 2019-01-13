@@ -40,25 +40,17 @@ var _styledComponents = _interopRequireDefault(require('styled-components'));
 var _theme = require('@atlaskit/theme');
 
 var sizes = {
-  small: {
-    height: '16px',
-    width: '16px',
-  },
-  medium: {
-    height: '24px',
-    width: '24px',
-  },
-  xlarge: {
-    height: '64px',
-    width: '48px',
-  },
+  small: '16px',
+  medium: '24px',
+  large: '32px',
+  xlarge: '48px',
 };
 
 var getSize = function getSize(props) {
   if (props.size) {
     return 'height: '
-      .concat(sizes[props.size].height, '; width: ')
-      .concat(sizes[props.size].width, ';');
+      .concat(sizes[props.size], '; width: ')
+      .concat(sizes[props.size], ';');
   }
 
   return null;

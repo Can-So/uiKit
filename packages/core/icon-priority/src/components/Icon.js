@@ -4,16 +4,15 @@ import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
 
 const sizes = {
-  small: { height: '16px', width: '16px' },
-  medium: { height: '24px', width: '24px' },
-  xlarge: { height: '64px', width: '48px' },
+  small: '16px',
+  medium: '24px',
+  large: '32px',
+  xlarge: '48px',
 };
 
 const getSize = props => {
   if (props.size) {
-    return `height: ${sizes[props.size].height}; width: ${
-      sizes[props.size].width
-    };`;
+    return `height: ${sizes[props.size]}; width: ${sizes[props.size]};`;
   }
   return null;
 };
@@ -48,7 +47,7 @@ type Props = {
   /** String to use as the aria-label for the icon. Set to an empty string if you are rendering the icon with visible text to prevent accessibility label duplication. */
   label: string,
   /** Control the size of the icon */
-  size?: 'small' | 'medium' | 'xlarge',
+  size?: 'small' | 'medium' | 'large' | 'xlarge',
 };
 
 export default class Icon extends Component<Props, {}> {
