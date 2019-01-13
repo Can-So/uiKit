@@ -36,16 +36,11 @@ export default class JiraAppSwitcherExample extends Component {
     });
   };
 
-  onCloseComplete = () => {
-    console.log('onclose');
-  };
-
   render() {
     return (
       <div style={{ padding: '2rem' }}>
         <Drawer
           onClose={this.onClose}
-          onCloseComplete={this.onCloseComplete}
           isOpen={this.state.isDrawerOpen}
           width="wide"
         >

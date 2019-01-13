@@ -28,7 +28,6 @@ export default function(mapPropsToPromise) {
       Object.keys(dataSources)
         .reduce((resultingPromise, dataSourceKey) => {
           const dataSource = dataSources[dataSourceKey];
-          console.log(dataSources);
           if (dataSource instanceof Promise) {
             return Promise.all([resultingPromise, dataSource]).then(
               ([results, dataSourceResult]) => ({
