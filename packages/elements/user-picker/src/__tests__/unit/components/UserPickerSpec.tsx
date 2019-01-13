@@ -474,11 +474,15 @@ describe('UserPicker', () => {
         id: 'team-123',
         name: 'The A team',
         type: 'team',
+        memberCount: 1,
+        includesYou: false,
       },
       {
         id: 'team-abc',
         name: 'The B team',
         type: 'team',
+        memberCount: 51,
+        includesYou: true,
       },
     ];
 
