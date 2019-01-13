@@ -31,12 +31,12 @@ export const createStatus = (showStatusPickerAtOffset = -2) => (
     .setSelection(NodeSelection.create(tr.doc, showStatusPickerAt))
     .setMeta(pluginKey, {
       showStatusPickerAt,
-      autoFocus: true,
+      isNew: true,
       selectedStatus,
     });
 };
 
-export const updateStatus = (status?: StatusType, autoFocus?: boolean) => (
+export const updateStatus = (status?: StatusType) => (
   editorView: EditorView,
 ): boolean => {
   const { state, dispatch } = editorView;
@@ -70,7 +70,7 @@ export const updateStatus = (status?: StatusType, autoFocus?: boolean) => (
       .setMeta(pluginKey, {
         showStatusPickerAt: newShowStatusPickerAt,
         selectedStatus,
-        autoFocus,
+        isNew: true,
       })
       .scrollIntoView();
     dispatch(tr);
@@ -98,7 +98,7 @@ export const setStatusPickerAt = (showStatusPickerAt: number | null) => (
   dispatch(
     state.tr.setMeta(pluginKey, {
       showStatusPickerAt,
-      autoFocus: false,
+      isNew: false,
       selectedStatus: null,
     }),
   );
@@ -122,7 +122,7 @@ export const commitStatusPicker = () => (editorView: EditorView) => {
   let tr = state.tr;
   tr = tr.setMeta(pluginKey, {
     showStatusPickerAt: null,
-    autoFocus: false,
+    isNew: false,
     selectedStatus: null,
   });
 

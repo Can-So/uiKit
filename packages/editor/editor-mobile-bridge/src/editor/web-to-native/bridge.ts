@@ -27,8 +27,13 @@ export interface ListBridge {
 }
 
 export interface StatusBridge {
-  showStatusPicker(text: string, color: StatusColor, uuid: string);
-  dismissStatusPicker();
+  showStatusPicker(
+    text: string,
+    color: StatusColor,
+    uuid: string,
+    isNew: boolean,
+  );
+  dismissStatusPicker(isNew: boolean);
 }
 
 export default interface NativeBridge
