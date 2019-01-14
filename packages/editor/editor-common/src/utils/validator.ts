@@ -47,6 +47,7 @@ export const markOrder = [
   'subsup',
   'underline',
   'code',
+  'annotation',
   'confluenceInlineComment',
   'textColor',
 ];
@@ -896,6 +897,12 @@ export const getValidMark = (
       case 'underline': {
         return {
           type,
+        };
+      }
+      case 'annotation': {
+        return {
+          type,
+          attrs,
         };
       }
     }

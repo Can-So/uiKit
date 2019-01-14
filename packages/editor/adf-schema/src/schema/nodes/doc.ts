@@ -49,6 +49,7 @@ import { SubSupDefinition as SubSup } from '../marks/subsup';
 import { UnderlineDefinition as Underline } from '../marks/underline';
 import { TextColorDefinition as TextColor } from '../marks/text-color';
 import { ActionDefinition as Action } from '../marks/action';
+import { AnnotationDefinition as Annotation } from '../marks/annotation';
 
 // NOTE: BlockContent is only being used by layoutColumn now.
 /**
@@ -147,7 +148,15 @@ export interface NoMark {
  */
 export type InlineFormattedText = Text &
   MarksObject<
-    Link | Em | Strong | Strike | SubSup | Underline | TextColor | Action
+    | Link
+    | Em
+    | Strong
+    | Strike
+    | SubSup
+    | Underline
+    | TextColor
+    | Action
+    | Annotation
   >;
 
 /**

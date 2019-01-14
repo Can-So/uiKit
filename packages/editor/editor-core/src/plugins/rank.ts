@@ -127,6 +127,7 @@ export default {
   marks: [
     // Inline marks
     'link',
+    'annotation',
     'confluenceInlineComment',
     'em',
     'strong',
