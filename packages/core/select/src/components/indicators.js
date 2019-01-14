@@ -19,7 +19,7 @@ export const DropdownIndicator = (props: any) => (
 );
 
 export const LoadingIndicator = (props: any) => (
-  <div style={props.getStyles('loadingIndicator', props)}>
-    <Spinner size="small" {...props} />
+  <div style={props.getStyles('loadingIndicator', props)} {...props.innerProps}>
+    <Spinner size="small" />
   </div>
 );
