@@ -3,13 +3,16 @@ import { MarkSpec } from 'prosemirror-model';
 /**
  * @name annotation
  */
-export interface AnnotationDefinition {
+export interface AnnotationMarkDefinition {
   type: 'annotation';
-  attrs: {
-    id: string;
-    annotationType?: AnnotationType;
-  };
+  attrs: AnnotationMarkAttributes;
 }
+
+export interface AnnotationMarkAttributes {
+  id: string;
+  annotationType?: AnnotationType;
+}
+
 export const INLINE_COMMENT = 'inlineComment';
 export type AnnotationType = 'inlineComment';
 
