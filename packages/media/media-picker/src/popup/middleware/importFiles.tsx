@@ -110,8 +110,6 @@ export async function importFiles(
   const selectedUploadFiles = selectedItems.map(item =>
     mapSelectedItemToSelectedUploadFile(item, tenantCollection),
   );
-  console.log(selectedUploadFiles[0].touchFileDescriptor.fileId);
-  // TODO: should we do it only when servideName === 'recent_files' ?
   const touchFileDescriptors = selectedUploadFiles
     .filter(file => file.serviceName !== 'upload')
     .map(file => file.touchFileDescriptor);

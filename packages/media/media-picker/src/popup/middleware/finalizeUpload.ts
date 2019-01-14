@@ -86,8 +86,6 @@ async function copyFile({
     occurrenceKey: file.occurrenceKey,
   };
 
-  console.log('copyFile', params.replaceFileId);
-
   return mediaStore
     .copyFileWithToken(body, params)
     .then(async destinationFile => {
