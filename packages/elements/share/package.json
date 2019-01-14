@@ -28,7 +28,9 @@
     "fabric",
     "elements"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@atlaskit/util-service-support": "^3.0.5"
+  },
   "peerDependencies": {
     "react": "^16.4.0",
     "react-intl": "^2.6.0"
