@@ -6,7 +6,7 @@ export class FileStreamCache {
   private readonly fileStreams: LRUCache<string, Observable<FileState>>;
   private readonly stateDeferreds: Map<
     string,
-    { promise: Promise<FileState>; deferred: Function }
+    { promise: Promise<FileState>; resolve: Function }
   >;
 
   constructor() {
@@ -24,7 +24,7 @@ export class FileStreamCache {
 
     if (deferred) {
       fileStream.toPromise().then(state => {
-        deferred.deferred(state);
+        deferred.resolve(state);
       });
     }
   }
@@ -33,7 +33,7 @@ export class FileStreamCache {
     return this.fileStreams.get(id);
   }
 
-  getStateCurrentState(id: string): Promise<FileState> {
+  getCurrentState(id: string): Promise<FileState> {
     const state = this.get(id);
 
     if (state) {
@@ -43,8 +43,8 @@ export class FileStreamCache {
     if (deferred) {
       return deferred.promise;
     }
-    const promise = new Promise<FileState>(deferred => {
-      this.stateDeferreds.set(id, { promise, deferred });
+    const promise = new Promise<FileState>(resolve => {
+      this.stateDeferreds.set(id, { promise, resolve });
     });
 
     return promise;

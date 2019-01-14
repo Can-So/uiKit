@@ -45,7 +45,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
 
     const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
     // TODO: use mediaContext don't use fileStreamsCache directly
-    const state = await fileStreamsCache.getStateCurrentState(
+    const state = await fileStreamsCache.getCurrentState(
       getMediaNode!.attrs.id,
     );
     if (state.status !== 'error' && state.mediaType === 'image') {

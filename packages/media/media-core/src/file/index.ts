@@ -131,7 +131,7 @@ export class FileFetcher {
   }
 
   getCurrentState(id: string): Promise<FileState> {
-    return fileStreamsCache.getStateCurrentState(id);
+    return fileStreamsCache.getCurrentState(id);
   }
 
   getArtifactURL(
