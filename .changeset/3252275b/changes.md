@@ -1,1 +1,1 @@
-- Created the package with priority icons
+- First release of the priority icons package
