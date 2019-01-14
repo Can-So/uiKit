@@ -1,5 +1,11 @@
 # @atlaskit/editor-common
 
+## 28.0.2
+- Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
+  - @atlaskit/editor-json-transformer@4.1.5
+  - @atlaskit/editor-test-helpers@6.3.8
+  - @atlaskit/mention@16.0.0
+
 ## 28.0.1
 - [patch] [0145eef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0145eef):
 
