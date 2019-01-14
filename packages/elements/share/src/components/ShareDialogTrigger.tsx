@@ -181,7 +181,7 @@ export class ShareDialogTrigger extends React.Component<
             <ShareButton
               text={
                 this.props.buttonStyle === 'withText' ? (
-                  <FormattedMessage {...messages.shareButtonText} />
+                  <FormattedMessage {...messages.shareTriggerButtonText} />
                 ) : null
               }
               onClick={this.handleOpenDialog}

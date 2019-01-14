@@ -1,9 +1,9 @@
 import { defineMessages } from 'react-intl';
 
 export const messages = defineMessages({
-  shareButtonText: {
-    id: 'fabric.elements.share.button.text',
+  shareTriggerButtonText: {
+    id: 'fabric.elements.share.trigger.button.text',
     defaultMessage: 'Share',
-    description: 'Default text for the Share button',
+    description: 'Default text for the Share Dialog trigger button',
   },
 });
