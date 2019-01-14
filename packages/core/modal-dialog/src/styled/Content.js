@@ -1,4 +1,5 @@
 // @flow
+import React, { type ElementType, type Node } from 'react';
 import styled, { css } from 'styled-components';
 import { colors, gridSize, math, themed } from '@atlaskit/theme';
 
@@ -13,12 +14,37 @@ export const keylineHeight = 2;
 
 // Wrapper
 // ==============================
-export const Wrapper = styled.div`
+
+const DefaultWrapperComponent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
   ${flexMaxHeightIEFix};
 `;
+
+export const Wrapper = ({
+  component,
+  children,
+}: {
+  component: ElementType,
+  children: Node,
+}) => {
+  let StyledComponent = DefaultWrapperComponent;
+  if (component !== 'div') {
+    // $FlowFixMe
+    StyledComponent = styled(component)`
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      ${flexMaxHeightIEFix};
+    `;
+  }
+  return <StyledComponent>{children}</StyledComponent>;
+};
+
+Wrapper.defaultProps = {
+  component: 'div',
+};
 
 // Header
 // ==============================
@@ -81,10 +107,11 @@ export const TitleIconWrapper = styled.span`
   children. The combined vertical spacing is maintained by subtracting the
   keyline height from header and footer.
 */
+
 export const Body = styled.div`
   flex: 1 1 auto;
-  ${p =>
-    p.shouldScroll
+  ${p => {
+    return p.shouldScroll
       ? `
           overflow-y: auto;
           overflow-x: hidden;
@@ -92,8 +119,29 @@ export const Body = styled.div`
         `
       : `
           padding: 0 ${outerGutter}px;
-        `};
+        `;
+  }};
 `;
+
+export const styledBody = (component: ?ElementType) =>
+  component
+    ? // $FlowFixMe
+      styled(component)`
+        flex: 1 1 auto;
+        ${p => {
+          return p.shouldScroll
+            ? `
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: ${keylineHeight}px ${outerGutter}px;
+          `
+            : `
+            border-radius: 0px;
+            padding: 0 ${outerGutter}px;
+    `;
+        }};
+      `
+    : undefined;
 
 // Footer
 // ==============================

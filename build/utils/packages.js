@@ -21,6 +21,7 @@ async function getChangedPackagesSinceCommit(commit) {
 
   return (
     changedFiles
+      .filter(fileName => !fileName.endsWith('bundle-size-ratchet.json'))
       // ignore deleted files
       .filter(fileName => fileExistsInPackage(fileName))
       .map(fileName => fileNameToPackage(fileName))

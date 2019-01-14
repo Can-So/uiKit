@@ -1,5 +1,10 @@
 # @atlaskit/reactions
 
+## 15.3.0
+- [minor] [e60d7aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e60d7aa):
+
+  - updated i18n translations
+
 ## 15.2.2
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/editor-test-helpers@6.3.7

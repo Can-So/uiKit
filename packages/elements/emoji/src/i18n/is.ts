@@ -14,7 +14,6 @@ export default {
   'fabric.emoji.retry.label': 'Reyna aftur',
   'fabric.emoji.cancel.label': 'Hætta við ',
   'fabric.emoji.search.label': 'Leita',
-  'fabric.emoji.search.placeholder': 'Leita',
   'fabric.emoji.categories.search.results': 'Leitarniðurstöður',
   'fabric.emoji.category.frequent': 'Oft',
   'fabric.emoji.category.people': 'Fólk',

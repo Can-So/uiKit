@@ -28,8 +28,6 @@ import {
 } from '../../_test-data';
 import * as helper from './_emoji-picker-test-helpers';
 
-declare var global: any;
-
 describe('<EmojiPicker />', () => {
   let firePrivateAnalyticsEvent;
 
@@ -461,13 +459,6 @@ describe('<EmojiPicker />', () => {
   });
 
   describe('with localStorage available', () => {
-    let setItemSpy: jest.SpyInstance<any>;
-
-    beforeEach(() => {
-      // https://github.com/facebook/jest/issues/6798#issuecomment-412871616
-      setItemSpy = jest.spyOn(Storage.prototype, 'setItem');
-    });
-
     it('should use localStorage to remember tone selection between sessions', async () => {
       const findToneEmojiInNewPicker = async () => {
         const component = await helper.setupPicker();
@@ -486,10 +477,10 @@ describe('<EmojiPicker />', () => {
       const provider = await getEmojiResourcePromise();
       provider.setSelectedTone(parseInt(tone, 10));
 
-      await waitUntil(() => !!setItemSpy.mock.calls.length);
-      global
-        .expect(setItemSpy)
-        .toHaveBeenCalledWith(selectedToneStorageKey, tone);
+      expect(localStorage.setItem).toHaveBeenCalledWith(
+        selectedToneStorageKey,
+        tone,
+      );
 
       // First picker should have tone set by default
       const handEmoji1 = await findToneEmojiInNewPicker();

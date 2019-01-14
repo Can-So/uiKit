@@ -68,16 +68,6 @@ export const messages = defineMessages({
     defaultMessage: 'Action item',
     description: 'Also known as a “task”, “to do item”, or a checklist',
   },
-  bulletList: {
-    id: 'fabric.editor.bulletList',
-    defaultMessage: 'Bullet list',
-    description: 'Also known as a “unordered list”',
-  },
-  orderedList: {
-    id: 'fabric.editor.orderedList',
-    defaultMessage: 'Ordered list',
-    description: 'Also known as a “numbered list”',
-  },
   link: {
     id: 'fabric.editor.link',
     defaultMessage: 'Link',
@@ -652,7 +642,7 @@ class ToolbarInsertBlock extends React.PureComponent<
     'atlassian.editor.format.status.button',
     (): boolean => {
       const { editorView } = this.props;
-      updateStatus(undefined, true)(editorView);
+      updateStatus()(editorView);
       return true;
     },
   );

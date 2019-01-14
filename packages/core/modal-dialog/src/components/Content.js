@@ -7,7 +7,12 @@ import Footer from './Footer';
 import Header from './Header';
 
 import type { AppearanceType, KeyboardOrMouseEvent } from '../types';
-import { Body, keylineHeight, Wrapper } from '../styled/Content';
+import {
+  Body as DefaultBody,
+  styledBody,
+  keylineHeight,
+  Wrapper,
+} from '../styled/Content';
 
 function getInitialState() {
   return {
@@ -30,19 +35,28 @@ type Props = {
   */
   appearance?: AppearanceType,
   /**
-    Component to render the body of the modal.
+    Deprecated, use components prop: Component to render the body of the modal.
   */
-  body: ElementType,
+  body?: ElementType,
   /**
     Content of the modal
   */
   children?: Node,
   /**
-    Component to render the header of the modal.
+    Object describing internal components. Use this to swap out the default components. 
+  */
+  components: {
+    Header?: ElementType,
+    Body?: ElementType,
+    Footer?: ElementType,
+    Container?: ElementType,
+  },
+  /**
+    Deprecated, use components prop: Component to render the header of the modal.
   */
   header?: ElementType,
   /**
-    Component to render the footer of the moda.l
+    Deprecated, use components prop: Component to render the footer of the moda.l
   */
   footer?: ElementType,
   /**
@@ -89,9 +103,9 @@ type State = {
 export default class Content extends Component<Props, State> {
   static defaultProps = {
     autoFocus: false,
+    components: {},
     isChromeless: false,
     stackIndex: 0,
-    body: Body,
     isHeadingMultiline: true,
   };
 
@@ -118,7 +132,33 @@ export default class Content extends Component<Props, State> {
       );
       this.determineKeylines();
     }
+
+    /* eslint-disable no-console */
+    // Check for deprecated props
+    if (this.props.header)
+      console.warn(
+        "@atlaskit/modal-dialog: Deprecation warning - Use of the header prop in ModalDialog is deprecated. Please compose your ModalDialog using the 'components' prop instead",
+      );
+    if (this.props.footer)
+      console.warn(
+        "@atlaskit/modal-dialog: Deprecation warning - Use of the footer prop in ModalDialog is deprecated. Please compose your ModalDialog using the 'components' prop instead",
+      );
+    if (this.props.body)
+      console.warn(
+        "@atlaskit/modal-dialog: Deprecation warning - Use of the body prop in ModalDialog is deprecated. Please compose your ModalDialog using the 'components' prop instead",
+      );
+
+    // Check that custom body components have used ForwardRef to attach to a DOM element
+    if (this.props.components.Body) {
+      if (!(this.scrollContainer instanceof HTMLElement)) {
+        console.warn(
+          '@atlaskit/modal-dialog: Warning - Ref must attach to a DOM element; check you are using forwardRef and attaching the ref to an appropriate element. Check the examples for more details.',
+        );
+      }
+    }
+    /* eslint-enable no-console */
   }
+
   componentWillReceiveProps(nextProps: Props) {
     const { stackIndex } = this.props;
 
@@ -188,7 +228,8 @@ export default class Content extends Component<Props, State> {
     const {
       actions,
       appearance,
-      body: ModalBody,
+      body: DeprecatedBody,
+      components,
       children,
       footer,
       header,
@@ -198,40 +239,44 @@ export default class Content extends Component<Props, State> {
       isHeadingMultiline,
       shouldScroll,
     } = this.props;
+
+    const { Container = 'div', Body: CustomBody } = components;
+
+    // Only load in 'div' default if there's no deprecated 'body' prop provided
+    // Prefer components.Body over deprecated body prop and default to DefaultBody
+    const BodyComponent =
+      styledBody(CustomBody) || DeprecatedBody || DefaultBody;
     const { showFooterKeyline, showHeaderKeyline } = this.state;
 
-    if (isChromeless) {
-      return (
-        <Wrapper>
-          {children}
-          <ScrollLock />
-        </Wrapper>
-      );
-    }
-
     return (
-      <Wrapper>
-        <Header
-          appearance={appearance}
-          component={header}
-          heading={heading}
-          onClose={onClose}
-          isHeadingMultiline={isHeadingMultiline}
-          showKeyline={showHeaderKeyline}
-        />
-        <ModalBody
-          innerRef={this.getScrollContainer}
-          shouldScroll={shouldScroll}
-        >
-          {children}
-        </ModalBody>
-        <Footer
-          actions={actions}
-          appearance={appearance}
-          component={footer}
-          onClose={onClose}
-          showKeyline={showFooterKeyline}
-        />
+      <Wrapper component={Container}>
+        {isChromeless ? (
+          children
+        ) : (
+          <>
+            <Header
+              appearance={appearance}
+              component={components.Header ? components.Header : header}
+              heading={heading}
+              onClose={onClose}
+              isHeadingMultiline={isHeadingMultiline}
+              showKeyline={showHeaderKeyline}
+            />
+            <BodyComponent
+              innerRef={this.getScrollContainer}
+              shouldScroll={shouldScroll}
+            >
+              {children}
+            </BodyComponent>
+            <Footer
+              actions={actions}
+              appearance={appearance}
+              component={components.Footer ? components.Footer : footer}
+              onClose={onClose}
+              showKeyline={showFooterKeyline}
+            />
+          </>
+        )}
         <ScrollLock />
       </Wrapper>
     );

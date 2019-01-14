@@ -1,5 +1,15 @@
 # @atlaskit/media-viewer
 
+## 32.1.0
+- [minor] [2dc7a74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2dc7a74):
+
+  - Remember video quality in video player in MediaViewer
+
+## 32.0.1
+- [patch] [3cc69de](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3cc69de):
+
+  - only apply css pixelation to zoomed in images
+
 ## 32.0.0
 - [major] [c91adfe](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c91adfe):
 

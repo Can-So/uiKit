@@ -14,7 +14,6 @@ export default {
   'fabric.emoji.retry.label': 'Reîncercare',
   'fabric.emoji.cancel.label': 'Anulare',
   'fabric.emoji.search.label': 'Căutare',
-  'fabric.emoji.search.placeholder': 'Căutare',
   'fabric.emoji.categories.search.results': 'Rezultate căutare',
   'fabric.emoji.category.frequent': 'Frecvente',
   'fabric.emoji.category.people': 'Persoane',
