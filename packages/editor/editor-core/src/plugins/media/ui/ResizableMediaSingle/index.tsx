@@ -23,8 +23,8 @@ const imageAlignmentMap = {
 
 export default class ResizableMediaSingle extends React.Component<Props> {
   state = {
-    // TODO: treat it as video until we know the type
-    isVideoFile: false,
+    // We default to true until we resolve the file type
+    isVideoFile: true,
   };
 
   get wrappedLayout() {
@@ -44,11 +44,13 @@ export default class ResizableMediaSingle extends React.Component<Props> {
     }
 
     const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
-    // TODO: don't use fileStreamsCache directly
-    const state = await fileStreamsCache.getState(getMediaNode!.attrs.id);
-    if (state.status !== 'error' && state.mediaType === 'video') {
+    // TODO: use mediaContext don't use fileStreamsCache directly
+    const state = await fileStreamsCache.getStateCurrentState(
+      getMediaNode!.attrs.id,
+    );
+    if (state.status !== 'error' && state.mediaType === 'image') {
       this.setState({
-        isVideoFile: true,
+        isVideoFile: false,
       });
     }
   }
@@ -137,7 +139,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
   };
 
   wrapper: HTMLElement | null;
-  snapPoints = () => {
+  get snapPoints() {
     const offsetLeft = this.calcOffsetLeft();
 
     const { containerWidth, lineLength, appearance } = this.props;
@@ -178,7 +180,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
     }
 
     return snapPoints;
-  };
+  }
 
   get insideInlineLike(): boolean {
     const $pos = this.$pos;
@@ -247,7 +249,7 @@ export default class ResizableMediaSingle extends React.Component<Props> {
           selected={this.props.selected}
           enable={enable}
           calcNewSize={this.calcNewSize}
-          snapPoints={this.snapPoints()}
+          snapPoints={this.snapPoints}
           scaleFactor={!this.wrappedLayout && !this.insideInlineLike ? 2 : 1}
           isInlineLike={this.insideInlineLike}
           getColumnLeft={this.calcColumnLeft}

@@ -33,8 +33,7 @@ export class FileStreamCache {
     return this.fileStreams.get(id);
   }
 
-  // TODO: expose this on the context => context.getState or context.file.getCurrentState
-  getState(id: string): Promise<FileState> {
+  getStateCurrentState(id: string): Promise<FileState> {
     const state = this.get(id);
 
     if (state) {

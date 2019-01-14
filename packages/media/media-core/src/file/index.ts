@@ -130,6 +130,10 @@ export class FileFetcher {
     });
   }
 
+  getCurrentState(id: string): Promise<FileState> {
+    return fileStreamsCache.getStateCurrentState(id);
+  }
+
   getArtifactURL(
     artifacts: MediaFileArtifacts,
     artifactName: keyof MediaFileArtifacts,
