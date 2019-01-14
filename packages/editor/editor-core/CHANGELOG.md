@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.2
+- [patch] [6866eba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6866eba):
+
+  - ED-5638: insert a space after pasting links that turn into inline cards to help avoid refreshing them
+
 ## 95.0.1
 - [patch] [df30c63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df30c63):
 
