@@ -43,7 +43,7 @@ describe('MultiValue', () => {
       text: 'Jace Beleren',
       elemBefore: (
         <SizeableAvatar
-          appearance="compact"
+          appearance="multi"
           src="http://avatars.atlassian.com/jace.png"
           name="Jace Beleren"
         />
@@ -64,7 +64,7 @@ describe('MultiValue', () => {
       text: 'Jace Beleren',
       elemBefore: (
         <SizeableAvatar
-          appearance="compact"
+          appearance="multi"
           src="http://avatars.atlassian.com/jace.png"
           name="Jace Beleren"
         />
