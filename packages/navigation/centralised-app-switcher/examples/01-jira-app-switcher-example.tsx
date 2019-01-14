@@ -4,7 +4,21 @@ import Drawer from '@atlaskit/drawer';
 import JiraAppSwitcher from '../src/components/jira-app-switcher';
 import fetchMock from 'fetch-mock';
 
-const RESPONSE_DATA = [
+const RECENT_CONTAINERS_DATA = {
+  data: [
+    {
+      objectId:
+        'ari:cloud:jira:a436116f-02ce-4520-8fbb-7301462a1674:project/30255',
+      type: 'jira-project',
+      name: 'Centralised App Switcher',
+      url: 'https://hello.atlassian.net/projects/CEN',
+      iconUrl:
+        'https://hello.atlassian.net/secure/projectavatar?size=medium&avatarId=24523',
+    },
+  ],
+};
+
+const CUSTOM_LINKS_DATA = [
   {
     key: 'home',
     link: 'https://hello.atlassian.net/secure',
@@ -23,7 +37,11 @@ export default class JiraAppSwitcherExample extends Component {
   openDrawer = () => {
     fetchMock.get(
       '/gateway/api/activity/api/client/recent/containers?cloudId=some-cloud-id',
-      new Promise(res => setTimeout(() => res(RESPONSE_DATA), 1500)),
+      new Promise(res => setTimeout(() => res(RECENT_CONTAINERS_DATA), 1500)),
+    );
+    fetchMock.get(
+      '/rest/menu/latest/appswitcher',
+      new Promise(res => setTimeout(() => res(CUSTOM_LINKS_DATA), 2500)),
     );
     this.setState({
       isDrawerOpen: true,

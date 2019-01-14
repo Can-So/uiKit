@@ -1,30 +1,43 @@
 import React from 'react';
 import { AppSwitcherWrapper, Item, Section, ManageButton } from '../primitives';
-import JiraDataProvider from '../providers/jira-data-provider';
+import {
+  RecentContainersProvider,
+  CustomLinksProvider,
+} from '../providers/jira-data-providers';
 
 export default ({ cloudId }) => {
   return (
-    <JiraDataProvider cloudId={cloudId}>
-      {({ isLoading, data }) =>
-        isLoading ? (
-          'Loading...'
-        ) : (
-          <AppSwitcherWrapper>
-            <Section title="First Section">
-              <Item>First Item</Item>
-              <Item>Second Item</Item>
-              <Item>Third Item</Item>
-            </Section>
-            <Section title="Second Section">
-              <Item>First Item</Item>
-              <Item>Second Item</Item>
-              <Item>Third Item</Item>
-            </Section>
-            <ManageButton />
-            {JSON.stringify(data)}
-          </AppSwitcherWrapper>
-        )
-      }
-    </JiraDataProvider>
+    <RecentContainersProvider cloudId={cloudId}>
+      {({
+        isLoading: isLoadingRecentContainers,
+        data: recentContainersData,
+      }) => (
+        <CustomLinksProvider>
+          {({ isLoading: isLoadingCustomLinks, data: customLinksData }) => (
+            <AppSwitcherWrapper>
+              {isLoadingRecentContainers ? (
+                'Loading First Section...'
+              ) : (
+                <Section title="First Section">
+                  <Item>First Item</Item>
+                  <Item>Second Item</Item>
+                  <Item>{JSON.stringify(recentContainersData)}</Item>
+                </Section>
+              )}
+              {isLoadingCustomLinks ? (
+                'Loading Seconds Section...'
+              ) : (
+                <Section title="Second Section">
+                  <Item>First Item</Item>
+                  <Item>Second Item</Item>
+                  <Item>{JSON.stringify(customLinksData)}</Item>
+                </Section>
+              )}
+              <ManageButton />
+            </AppSwitcherWrapper>
+          )}
+        </CustomLinksProvider>
+      )}
+    </RecentContainersProvider>
   );
 };

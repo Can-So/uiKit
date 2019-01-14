@@ -1,11 +1,7 @@
-import withDataProviders from './with-data-provider';
+import asDataProvider from './as-data-provider';
 
 const SOME_STATIC_DATA = {
   data: 'yay!',
 };
 
-export default withDataProviders(() => {
-  return {
-    staticData: SOME_STATIC_DATA,
-  };
-});
+export default asDataProvider(() => SOME_STATIC_DATA);
