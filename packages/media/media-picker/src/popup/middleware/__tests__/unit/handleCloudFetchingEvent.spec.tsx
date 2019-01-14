@@ -95,6 +95,7 @@ describe('handleCloudFetchingEvent', () => {
       type: FINALIZE_UPLOAD,
       uploadId,
       file: uploadedFile,
+      replaceFileId: file.id,
       source: {
         id: fileId,
         collection: RECENTS_COLLECTION,

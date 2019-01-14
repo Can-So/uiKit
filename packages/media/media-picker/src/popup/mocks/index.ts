@@ -2,6 +2,7 @@ import { State } from '../domain';
 import { Store } from 'react-redux';
 import { Observable } from 'rxjs/Observable';
 import { ContextFactory } from '@atlaskit/media-core';
+import { fakeContext } from '@atlaskit/media-test-helpers';
 
 export const mockState: State = {
   redirectUrl: 'some-redirect-url',
@@ -33,9 +34,7 @@ export const mockState: State = {
     totalResultCount: 100,
   },
   onCancelUpload: jest.fn(),
-  tenantContext: ContextFactory.create({
-    authProvider: jest.fn(),
-  }),
+  tenantContext: fakeContext(),
   userContext: ContextFactory.create({
     authProvider: jest.fn(),
   }),

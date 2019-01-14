@@ -22,9 +22,11 @@ export const fakeContext = (
   } as any;
   const getImage = jest.fn() as any;
   const getImageMetadata = jest.fn();
+  const touchFiles = jest.fn();
   const file = {
     getFileState: getFile,
     downloadBinary,
+    touchFiles,
   } as any;
   const defaultContext: Context = {
     getImageMetadata,

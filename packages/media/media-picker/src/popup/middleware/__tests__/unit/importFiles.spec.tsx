@@ -364,6 +364,7 @@ describe('importFiles middleware', () => {
                 id: 'some-selected-item-id-4',
                 collection: RECENTS_COLLECTION,
               },
+              expect.anything(),
             ),
           );
         });
