@@ -1,7 +1,7 @@
 import { TextSelection, Selection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { toggleMark } from 'prosemirror-commands';
-import { removeIgnoredNodesLeft, hasCode } from '../utils';
+import { hasCode } from '../utils';
 import { markActive } from '../utils';
 import { transformToCodeAction } from './transform-to-code';
 import { analyticsService } from '../../../analytics';
@@ -93,11 +93,6 @@ export const moveLeft = (
         Array.isArray(storedMarks) &&
         !storedMarks.length;
 
-      // removing ignored nodes (cursor wrapper) to make sure cursor isn't stuck
-      if (view.cursorWrapper && !atLeftEdge && !atRightEdge) {
-        removeIgnoredNodesLeft(view);
-      }
-
       // at the right edge: remove code mark and move the cursor to the left
       if (!insideCode && atRightEdge) {
         const tr = state.tr.setSelection(
@@ -143,17 +138,6 @@ export const moveLeft = (
       }
     }
 
-    return false;
-  };
-};
-
-// removing ignored nodes (cursor wrapper) when pressing Backspace to make sure cursor isn't stuck
-export const removeIgnoredNodes = (view: EditorView): Command => {
-  return state => {
-    const { empty, $cursor } = state.selection as TextSelection;
-    if (empty && $cursor && $cursor.nodeBefore) {
-      removeIgnoredNodesLeft(view);
-    }
     return false;
   };
 };
