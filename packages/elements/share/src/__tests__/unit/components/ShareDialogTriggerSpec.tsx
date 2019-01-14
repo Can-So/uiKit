@@ -29,7 +29,7 @@ describe('ShareDialogTrigger', () => {
       expect(wrapper.state().isDialogOpen).toBe(false);
     });
 
-    it('should be passed into isOpen prop InlineDialog and isSelected and isDisable props in ShareButton', () => {
+    it('should be passed into isOpen prop InlineDialog and isSelected and isDisabled props in ShareButton', () => {
       const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
       let { isDialogOpen } = wrapper.state();
       // TODO: where to get type InlineDialogProps?
@@ -40,7 +40,7 @@ describe('ShareDialogTrigger', () => {
       expect(isDialogOpen).toEqual(false);
       expect(inlineDialogProps.isOpen).toEqual(isDialogOpen);
       expect(shareButtonProps.isSelected).toEqual(isDialogOpen);
-      expect(shareButtonProps.isDisable).toEqual(isDialogOpen);
+      expect(shareButtonProps.isDisabled).toEqual(isDialogOpen);
 
       wrapper.setState({ isDialogOpen: !isDialogOpen });
 
@@ -48,7 +48,7 @@ describe('ShareDialogTrigger', () => {
       shareButtonProps = wrapper.find(ShareButton).props();
       expect(inlineDialogProps.isOpen).toEqual(!isDialogOpen);
       expect(shareButtonProps.isSelected).toEqual(!isDialogOpen);
-      expect(shareButtonProps.isDisable).toEqual(!isDialogOpen);
+      expect(shareButtonProps.isDisabled).toEqual(!isDialogOpen);
     });
 
     it('should render ShareForm if isDialogOpen is true', () => {
@@ -128,21 +128,21 @@ describe('ShareDialogTrigger', () => {
     });
   });
 
-  describe('isDisable prop', () => {
+  describe('isDisabled prop', () => {
     it('should be passed into ShareButton', () => {
-      let isDisable = false;
+      let isDisabled = false;
       const wrapper = shallow<ShareDialogTrigger>(
-        <ShareDialogTrigger isDisable={isDisable} />,
+        <ShareDialogTrigger isDisabled={isDisabled} />,
       );
       let shareButtonProps: ShareButtonProps = wrapper
         .find(ShareButton)
         .props();
-      expect(shareButtonProps.isDisable).toEqual(isDisable);
+      expect(shareButtonProps.isDisabled).toEqual(isDisabled);
 
-      wrapper.setProps({ isDisable: !isDisable });
+      wrapper.setProps({ isDisabled: !isDisabled });
 
       shareButtonProps = wrapper.find(ShareButton).props();
-      expect(shareButtonProps.isDisable).toEqual(!isDisable);
+      expect(shareButtonProps.isDisabled).toEqual(!isDisabled);
     });
   });
 

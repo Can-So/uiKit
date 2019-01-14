@@ -27,7 +27,7 @@ export type Props = {
   buttonStyle?: 'default' | 'withText';
   children?: RenderChildren;
   capabilities?: InvitationsCapabilities;
-  isDisable?: boolean;
+  isDisabled?: boolean;
   loadOptions?: any;
   onUsersChange?: (users: User[]) => any;
   onCommentChange?: (comment: string) => any;
@@ -52,7 +52,7 @@ export class ShareDialogTrigger extends React.Component<
   static defaultProps = {
     buttonAppearance: 'default',
     capabilities: {},
-    isDisable: false,
+    isDisabled: false,
     shouldCloseOnEscapePress: false,
   };
 
@@ -157,7 +157,7 @@ export class ShareDialogTrigger extends React.Component<
 
   render() {
     const { isDialogOpen, isStateValidWithCapabilities } = this.state;
-    const { isDisable, loadOptions } = this.props;
+    const { isDisabled, loadOptions } = this.props;
 
     // for performance purposes, we may want to have a lodable content i.e. ShareForm
     return (
@@ -186,7 +186,7 @@ export class ShareDialogTrigger extends React.Component<
               }
               onClick={this.handleOpenDialog}
               isSelected={isDialogOpen}
-              isDisable={isDialogOpen || isDisable}
+              isDisabled={isDialogOpen || isDisabled}
             />
           )}
         </InlineDialog>

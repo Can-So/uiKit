@@ -6,7 +6,7 @@ import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 export type Props = {
   appearance?: ButtonAppearances;
   isSelected?: boolean;
-  isDisable?: boolean;
+  isDisabled?: boolean;
   onClick: (
     e: React.MouseEvent<HTMLButtonElement>,
     analyticsEvent: UIAnalyticsEvent,
