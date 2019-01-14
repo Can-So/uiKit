@@ -33,8 +33,8 @@ import {
 } from '../../types';
 import { getToneEmoji } from '../../util/filters';
 import { EmojiContext } from '../common/internal-types';
+import { uploadEmoji } from '../common/UploadEmoji';
 import { createRecordSelectionDefault } from '../common/RecordSelectionDefault';
-import { messages } from '../i18n';
 import { CategoryId } from './categories';
 import CategorySelector from './CategorySelector';
 import EmojiPickerFooter from './EmojiPickerFooter';
@@ -438,34 +438,25 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
 
   private onUploadEmoji = (upload: EmojiUpload) => {
     const { emojiProvider } = this.props;
-    this.setState({
-      uploadErrorMessage: undefined, // clear previous errors
-    });
     this.fireAnalytics('upload.start');
-    if (supportsUploadFeature(emojiProvider)) {
-      emojiProvider
-        .uploadCustomEmoji(upload)
-        .then(emojiDescription => {
-          this.setState({
-            activeCategory: customCategory,
-            selectedEmoji: emojiDescription,
-            uploading: false,
-          });
-          // this.loadEmoji(emojiProvider, emojiDescription);
-          this.scrollToEndOfList();
-          this.fireAnalytics('upload.successful', {
-            duration: this.calculateElapsedTime(),
-          });
-        })
-        .catch(err => {
-          this.setState({
-            uploadErrorMessage: messages.emojiUploadFailed,
-          });
-          // tslint:disable-next-line
-          console.error('Unable to upload emoji', err);
-          this.fireAnalytics('upload.failed');
-        });
-    }
+    const errorSetter = message =>
+      this.setState({
+        uploadErrorMessage: message,
+      });
+    const onSuccess = emojiDescription => {
+      this.setState({
+        activeCategory: customCategory,
+        selectedEmoji: emojiDescription,
+        uploading: false,
+      });
+      // this.loadEmoji(emojiProvider, emojiDescription);
+      this.scrollToEndOfList();
+      this.fireAnalytics('upload.successful', {
+        duration: this.calculateElapsedTime(),
+      });
+    };
+    const onFailure = () => this.fireAnalytics('upload.failed');
+    uploadEmoji(upload, emojiProvider, errorSetter, onSuccess, onFailure);
   };
 
   private onTriggerDelete = (emojiId: EmojiId, emoji?: EmojiDescription) => {

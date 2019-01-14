@@ -9,8 +9,7 @@ import { EmojiUpload } from '../../types';
 import { EmojiProvider, supportsUploadFeature } from '../../api/EmojiResource';
 import { FireAnalyticsEvent } from '@atlaskit/analytics';
 import EmojiUploadPicker from '../common/EmojiUploadPicker';
-
-import { messages } from '../i18n';
+import { uploadEmoji } from '../common/UploadEmoji';
 
 export interface UploadRefHandler {
   (ref: HTMLDivElement): void;
@@ -42,22 +41,17 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
 
   private onUploadEmoji = (upload: EmojiUpload) => {
     const { emojiProvider } = this.props;
-    this.setState({
-      uploadErrorMessage: undefined, // clear previous errors
-    });
-    if (supportsUploadFeature(emojiProvider)) {
-      emojiProvider
-        .uploadCustomEmoji(upload)
-        .then(() => {
-          this.primeUpload();
-        })
-        .catch(err => {
-          this.setState({
-            uploadErrorMessage: messages.emojiUploadFailed,
-          });
-          console.error('Unable to upload emoji', err);
-        });
-    }
+    const errorSetter = message =>
+      this.setState({
+        uploadErrorMessage: message,
+      });
+    uploadEmoji(
+      upload,
+      emojiProvider,
+      errorSetter,
+      this.primeUpload,
+      () => null,
+    );
   };
 
   private onUploadCancelled = () => {
