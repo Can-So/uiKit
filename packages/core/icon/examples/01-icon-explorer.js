@@ -64,7 +64,7 @@ const fileTypeIconInfo = Promise.all(
 
 const priorityIconInfo = Promise.all(
   Object.keys(priorityIconMetadata).map(
-    async (name: $Keys<typeof metadata>) => {
+    async (name: $Keys<typeof priorityIconMetadata>) => {
       // $ExpectError - we are fine with this being dynamic
       const icon = await import(`@atlaskit/icon-priority/glyph/${name}.js`);
       return { name, icon: icon.default };
