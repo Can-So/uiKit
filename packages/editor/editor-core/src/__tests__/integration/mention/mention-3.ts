@@ -5,13 +5,9 @@ import {
   insertMention,
   editable,
   typeAheadPicker,
-} from '../_helpers';
-
-import {
-  messageEditor,
   lozenge as mentionId,
-} from './_message-renderer-helpers';
-import { messages } from '../../../plugins/insert-block/ui/ToolbarInsertBlock';
+  gotoEditor,
+} from '../_helpers';
 
 /*
  * Safari does not understand webdriver keyboard actions so a
@@ -20,16 +16,15 @@ import { messages } from '../../../plugins/insert-block/ui/ToolbarInsertBlock';
  * The remaining skipped tests for IE11/Edge are bugs that should be fixed for those browsers.
  */
 
+// add the button click on the right toolbar
 BrowserTestCase(
   'mention-3.ts: user can click ToolbarMentionPicker and see mention',
   { skip: ['ie'] },
   async client => {
-    const mentionButton = `[aria-label="${messages.mention.defaultMessage}"]`;
     const browser = new Page(client);
-    await browser.goto(messageEditor);
-    await browser.waitForSelector(editable);
-    await browser.waitForSelector(mentionButton);
-    await browser.click(mentionButton);
+    await gotoEditor(browser);
+    await browser.waitForSelector('[aria-label="Mention"]');
+    await browser.click('[aria-label="Mention"]');
     await browser.waitForSelector(mentionId);
     await browser.click(mentionId);
     const doc = await browser.$eval(editable, getDocFromElement);
@@ -42,8 +37,7 @@ BrowserTestCase(
   { skip: ['ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
-    await browser.waitForSelector(editable);
+    await gotoEditor(browser);
     await browser.type(editable, '@');
     await browser.waitForSelector(typeAheadPicker);
     await browser.type(editable, 'gill');
@@ -61,7 +55,7 @@ BrowserTestCase(
   { skip: ['ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@');
     await browser.waitForSelector(typeAheadPicker);
@@ -85,7 +79,7 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '`this is inline code ');
     await insertMention(browser, 'Carolyn');
@@ -101,7 +95,7 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '```');
     await browser.waitForSelector('pre');
@@ -117,7 +111,7 @@ BrowserTestCase(
   { skip: ['ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@');
     await browser.waitForSelector(typeAheadPicker);

@@ -1,34 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`task-decision-2.ts: can edit an action 1`] = `
-Object {
-  "content": Array [
-    Object {
-      "attrs": Object {
-        "localId": "abc-123",
-      },
-      "content": Array [
-        Object {
-          "attrs": Object {
-            "localId": "abc-123",
-            "state": "TODO",
-          },
-          "content": Array [
-            Object {
-              "text": "a preloaded action has been edited",
-              "type": "text",
-            },
-          ],
-          "type": "taskItem",
-        },
-      ],
-      "type": "taskList",
-    },
-  ],
-  "type": "doc",
-}
-`;
-
 exports[`task-decision-2.ts: can insert mention into an action using click 1`] = `
 Object {
   "content": Array [
@@ -174,6 +145,35 @@ Object {
                 },
               ],
               "text": " formatting",
+              "type": "text",
+            },
+          ],
+          "type": "taskItem",
+        },
+      ],
+      "type": "taskList",
+    },
+  ],
+  "type": "doc",
+}
+`;
+
+exports[`task-decision-2.ts: can type into decision 1`] = `
+Object {
+  "content": Array [
+    Object {
+      "attrs": Object {
+        "localId": "abc-123",
+      },
+      "content": Array [
+        Object {
+          "attrs": Object {
+            "localId": "abc-123",
+            "state": "TODO",
+          },
+          "content": Array [
+            Object {
+              "text": "adding action",
               "type": "text",
             },
           ],

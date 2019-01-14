@@ -1,4 +1,5 @@
 import { NodeSpec, Node as PMNode } from 'prosemirror-model';
+import { uuid } from '../../utils/uuid';
 
 /**
  * @name status_node
@@ -27,7 +28,7 @@ export const status: NodeSpec = {
   attrs: {
     text: { default: '' },
     color: { default: '' },
-    localId: { default: '' },
+    localId: { default: uuid.generate() },
     style: { default: null },
   },
   parseDOM: [
@@ -38,7 +39,7 @@ export const status: NodeSpec = {
         return {
           text: dom.textContent!.replace(/\n/, '').trim(),
           color: dom.getAttribute('data-color'),
-          localId: dom.getAttribute('data-local-id'),
+          localId: dom.getAttribute('data-local-id') || uuid.generate(),
           style: dom.getAttribute('data-style'),
         };
       },

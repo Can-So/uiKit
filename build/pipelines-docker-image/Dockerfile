@@ -1,8 +1,7 @@
-FROM node:8.9.0
+FROM node:8.9.0-slim
 
-# Install zip
-RUN apt-get -y update
-RUN apt-get -y install zip
+# Install git and bzip2
+RUN apt-get -y update && apt-get -y install git && apt-get -qq -y install bzip2 && rm -rf /var/lib/apt/lists/*
 
 # Install yarn
 # NOTE: This version of yarn is not the one that is used to install dependencies at the root. That yarn
@@ -15,4 +14,3 @@ ENV PATH $HOME/.yarn/bin:$PATH
 # much easier to update obviously).
 ENV BOLT_VERSION "0.22.2"
 RUN yarn global add "bolt@$BOLT_VERSION"
-

@@ -29,6 +29,10 @@ let c = meow(
         type: 'boolean',
         default: false,
       },
+      updateSnapshot: {
+        type: 'boolean',
+        default: false,
+      },
     },
   },
 );
@@ -48,7 +52,12 @@ if (paths) {
 
       process.exit(1);
     } else {
-      console.log(chalk.green('No significant bundle size changes detected'));
+      if (c.flags.updateSnapshot) {
+        console.log(chalk.green('Updated bundle size snapshots'));
+      } else {
+        console.log(chalk.green('No significant bundle size changes detected'));
+      }
+
       process.exit(0);
     }
   });
@@ -60,13 +69,19 @@ async function executeMeasure(paths, c, errors = []) {
   const path = paths.pop();
 
   try {
-    await measure(path, c.flags.analyze, c.flags.json, c.flags.lint);
+    await measure(
+      path,
+      c.flags.analyze,
+      c.flags.json,
+      c.flags.lint,
+      c.flags.updateSnapshot,
+    );
   } catch (error) {
     errors.push(error);
   }
 
   if (paths.length > 0) {
-    executeMeasure(paths, c, errors);
+    return executeMeasure(paths, c, errors);
   } else {
     return errors;
   }

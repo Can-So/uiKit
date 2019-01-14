@@ -1,5 +1,5 @@
 # Note: This image can be found in build/pipelines/docker-image
-image: atlassianlabs/atlaskit-mk-2:1.0.4
+image: atlassianlabs/atlaskit-mk-2:1.0.6
 # This ensures we do a full clone on each build which prevents issues when cross referencing
 # changesets and releases
 clone:
@@ -62,6 +62,14 @@ pipelines:
               # The below runs prettier over all changed files and fails if anyone of them don't match prettier's rules
               # We add fileMock.js to the list of files so that we never pass an empty list to prettier
               - yarn prettier --no-editorconfig "{$CHANGED_FILES,fileMock.js}" --list-different
+            caches:
+              - node
+        - step:
+            name: Check bundle sizes
+            script:
+              - source ./build-setup.sh
+              - bolt install --pure-lockfile
+              - bolt measure:changed
             caches:
               - node
         - step:
@@ -134,6 +142,24 @@ pipelines:
           caches:
             - node
 
+    # This can be called for skip-website branches to perform website build
+    build-website-staging:
+      - step:
+          name: Building website
+          script:
+            - source ./build-setup.sh
+            - bolt install --pure-lockfile
+            - cd website
+            - WEBSITE_ENV=staging yarn build:no-minimize
+            - yarn build:copy
+            - set -o pipefail
+            - yarn deploy:staging | tee deploy-log.txt
+            - cat deploy-log.txt | grep "Live Draft Url:" | sed -e "s/Live Draft Url..//" > netlify-link.txt
+            - echo "Uploading netlify build link to s3 so that we can fetch at the end..."
+            - node ../build/ci-scripts/upload.build.artefact.for.commit.js netlify-link.txt
+          caches:
+            - node
+
     # This should only be called by a scheduled or manual build for master
     send-website-build-analytics:
       - step:
@@ -158,23 +184,14 @@ pipelines:
             - yarn test:webdriver:browserstack
           caches:
             - node
-      # This will run with the visual regression tool
+    # This will run with the visual regression tool
     build-visual-regression:
       - step:
+          image: atlassianlabs/atlaskit-mk-2-vr:1.0.5
           script:
-            #to overcome puppeteer drawback yarn add again
-            # When running Puppeteer in Docker,
-            # getting headless Chrome up and running in Docker can be tricky.
-            # The bundled Chromium that Puppeteer installs is missing the necessary shared library dependencies.
-            # To fix, you'll need to install the missing dependencies and the latest Chromium package in your Dockerfile:
-            - source ./build/visual-regression/puppeteer.sh
             - source ./build-setup.sh
             - bolt install --pure-lockfile
-            # Install puppeteer so it's available in the container.
-            # Even if it is present in the package.json
-            # For further details see: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
-            - yarn add puppeteer
-            - yarn test:vr
+            - yarn test:vr:changed
           caches:
             - node
       # This will run essentially the branch builds, but without any optimizations and should be manually

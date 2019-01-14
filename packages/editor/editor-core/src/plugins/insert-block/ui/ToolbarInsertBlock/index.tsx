@@ -642,7 +642,7 @@ class ToolbarInsertBlock extends React.PureComponent<
     'atlassian.editor.format.status.button',
     (): boolean => {
       const { editorView } = this.props;
-      updateStatus(undefined, true)(editorView);
+      updateStatus()(editorView);
       return true;
     },
   );

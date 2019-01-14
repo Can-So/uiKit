@@ -44,15 +44,16 @@ const configs: Array<BridgePluginListener<any>> = [
     bridge: 'statusBridge',
     pluginKey: statusPluginKey,
     updater: state => {
-      const { selectedStatus: status, showStatusPickerAt } = state;
+      const { selectedStatus: status, showStatusPickerAt, isNew } = state;
       if (status) {
         toNativeBridge.call('statusBridge', 'showStatusPicker', {
           text: status.text,
           color: status.color,
           uuid: status.localId,
+          isNew,
         });
       } else if (!showStatusPickerAt) {
-        toNativeBridge.call('statusBridge', 'dismissStatusPicker');
+        toNativeBridge.call('statusBridge', 'dismissStatusPicker', { isNew });
       }
     },
   }),
