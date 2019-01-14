@@ -1,0 +1,1 @@
+- FS-3452 fix avatar size in multi user picker
