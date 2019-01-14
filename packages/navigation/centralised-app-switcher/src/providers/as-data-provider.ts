@@ -10,12 +10,12 @@ export interface DataProviderProps {
   children: (props: ChildrenProps) => ReactNode | string;
 }
 
-export interface mapPropsToPromiseSignature<T> {
+export interface MapPropsToPromiseSignature<T> {
   (props: T): Promise<any> | any;
 }
 
 export default function<T extends DataProviderProps>(
-  mapPropsToPromise: mapPropsToPromiseSignature<T>,
+  mapPropsToPromise: MapPropsToPromiseSignature<T>,
 ) {
   return class extends Component<T> {
     state = {
