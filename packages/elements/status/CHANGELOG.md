@@ -1,5 +1,10 @@
 # @atlaskit/status
 
+## 0.3.1
+- [patch] [7d9ccd7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d9ccd7):
+
+  - fixed copy/paste status from renderer to editor
+
 ## 0.3.0
 - [minor] [00c648e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/00c648e):
 

@@ -31,22 +31,28 @@ export const createStatus = (showStatusPickerAtOffset = -2) => (
     .setSelection(NodeSelection.create(tr.doc, showStatusPickerAt))
     .setMeta(pluginKey, {
       showStatusPickerAt,
-      autoFocus: true,
+      isNew: true,
       selectedStatus,
     });
 };
 
-export const updateStatus = (status?: StatusType, autoFocus?: boolean) => (
+export const updateStatus = (status?: StatusType) => (
   editorView: EditorView,
 ): boolean => {
   const { state, dispatch } = editorView;
   const { schema } = state;
   const selectedStatus = null;
 
+  const updatedStatus = status
+    ? Object.assign(status, {
+        text: status.text.trim(),
+        localId: status.localId || uuid.generate(),
+      })
+    : status;
+
   const statusProps = {
     ...DEFAULT_STATUS,
-    localId: uuid.generate(),
-    ...status,
+    ...updatedStatus,
   };
 
   let tr = state.tr;
@@ -64,7 +70,7 @@ export const updateStatus = (status?: StatusType, autoFocus?: boolean) => (
       .setMeta(pluginKey, {
         showStatusPickerAt: newShowStatusPickerAt,
         selectedStatus,
-        autoFocus,
+        isNew: true,
       })
       .scrollIntoView();
     dispatch(tr);
@@ -92,7 +98,7 @@ export const setStatusPickerAt = (showStatusPickerAt: number | null) => (
   dispatch(
     state.tr.setMeta(pluginKey, {
       showStatusPickerAt,
-      autoFocus: false,
+      isNew: false,
       selectedStatus: null,
     }),
   );
@@ -116,7 +122,7 @@ export const commitStatusPicker = () => (editorView: EditorView) => {
   let tr = state.tr;
   tr = tr.setMeta(pluginKey, {
     showStatusPickerAt: null,
-    autoFocus: false,
+    isNew: false,
     selectedStatus: null,
   });
 

@@ -105,6 +105,7 @@ export class InteractiveImg extends React.Component<Props, State> {
           onLoad={this.onImgLoad}
           onError={this.onError}
           onMouseDown={this.startDragging}
+          shouldPixelate={zoomLevel.value > 1}
         />
         {/*
           The BaselineExtend element is required to align the Img element in the

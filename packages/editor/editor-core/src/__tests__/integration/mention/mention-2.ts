@@ -1,12 +1,12 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import { getDocFromElement } from '../_helpers';
 import {
-  message,
-  editable,
   typeAheadPicker,
   insertMention,
   lozenge,
+  getDocFromElement,
+  editable,
+  gotoEditor,
 } from '../_helpers';
 
 /*
@@ -22,7 +22,7 @@ BrowserTestCase(
   { skip: ['ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(message.path);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@');
     await browser.waitForSelector(typeAheadPicker);
@@ -35,7 +35,7 @@ BrowserTestCase(
   { skip: ['ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(message.path);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, 'test@');
     expect(await browser.isExisting(typeAheadPicker)).toBe(false);
@@ -47,8 +47,7 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(message.path);
-    await browser.waitForSelector(editable);
+    await gotoEditor(browser);
     await insertMention(browser, 'Carolyn');
     await insertMention(browser, 'Summer');
     await insertMention(browser, 'Amber');
@@ -64,7 +63,7 @@ BrowserTestCase(
   { skip: ['ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(message.path);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@ Carolyn');
     expect(await browser.isExisting(typeAheadPicker)).toBe(false);
@@ -76,8 +75,7 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.waitForSelector(editable);
-    await browser.goto(message.path);
+    await gotoEditor(browser);
     await insertMention(browser, 'Summer');
     await browser.waitForSelector('span=@Summer');
     const doc = await browser.$eval(editable, getDocFromElement);
@@ -90,7 +88,7 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(message.path);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@');
     await browser.waitForSelector(typeAheadPicker);

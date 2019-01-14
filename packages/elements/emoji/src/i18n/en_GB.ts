@@ -14,7 +14,6 @@ export default {
   'fabric.emoji.retry.label': 'Retry',
   'fabric.emoji.cancel.label': 'Cancel',
   'fabric.emoji.search.label': 'Search',
-  'fabric.emoji.search.placeholder': 'Search',
   'fabric.emoji.categories.search.results': 'Search results',
   'fabric.emoji.category.frequent': 'Frequent',
   'fabric.emoji.category.people': 'People',

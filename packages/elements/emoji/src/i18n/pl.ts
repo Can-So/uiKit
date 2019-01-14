@@ -15,7 +15,6 @@ export default {
   'fabric.emoji.retry.label': 'Ponów',
   'fabric.emoji.cancel.label': 'Anuluj',
   'fabric.emoji.search.label': 'Szukaj',
-  'fabric.emoji.search.placeholder': 'Szukaj',
   'fabric.emoji.categories.search.results': 'Wyniki wyszukiwania',
   'fabric.emoji.category.frequent': 'Częste',
   'fabric.emoji.category.people': 'Użytkownicy',

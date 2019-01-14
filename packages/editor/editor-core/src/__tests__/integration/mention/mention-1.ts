@@ -5,9 +5,9 @@ import {
   editable,
   insertMention,
   typeAheadPicker,
+  lozenge,
+  gotoEditor,
 } from '../_helpers';
-
-import { messageEditor, lozenge } from './_message-renderer-helpers';
 
 /*
  * Safari does not understand webdriver keyboard actions so a
@@ -21,10 +21,10 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '> ');
-    await browser.type(editable, 'this is inside blockquote ');
+    await browser.type(editable, 'blockquote ');
     await insertMention(browser, 'Carolyn');
     await browser.waitForSelector(lozenge);
     const doc = await browser.$eval(editable, getDocFromElement);
@@ -37,11 +37,11 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '* ');
     await browser.waitForSelector('ul');
-    await browser.type(editable, 'this is inside list ');
+    await browser.type(editable, 'this ');
     await insertMention(browser, 'Carolyn');
     await browser.waitForSelector(lozenge);
     const doc = await browser.$eval(editable, getDocFromElement);
@@ -54,11 +54,11 @@ BrowserTestCase(
   { skip: ['safari', 'ie'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '1. ');
     await browser.waitForSelector('ol');
-    await browser.type(editable, 'this is inside list ');
+    await browser.type(editable, 'list ');
     await insertMention(browser, 'Carolyn');
     await browser.waitForSelector(lozenge);
     const doc = await browser.$eval(editable, getDocFromElement);
@@ -71,7 +71,7 @@ BrowserTestCase(
   { skip: ['ie', 'safari'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '<> ');
     await insertMention(browser, 'Carolyn');
@@ -86,7 +86,7 @@ BrowserTestCase(
   { skip: ['ie', 'safari'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '[] ');
     await insertMention(browser, 'Carolyn');
@@ -101,7 +101,7 @@ BrowserTestCase(
   { skip: ['ie', 'safari'] },
   async client => {
     const browser = new Page(client);
-    await browser.goto(messageEditor);
+    await gotoEditor(browser);
     await browser.waitForSelector(editable);
     await browser.type(editable, '@');
     await browser.waitForSelector(typeAheadPicker);

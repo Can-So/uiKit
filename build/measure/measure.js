@@ -17,8 +17,14 @@ const { buildCacheGroups, createWebpackConfig } = require('./utils/webpack');
 const { prepareForPrint } = require('./utils/print');
 const { printReport } = require('./reporters/console');
 
-module.exports = function main(filePath, isAnalyze, isJson, isLint) {
-  return new Promise(resolve => {
+module.exports = function main(
+  filePath,
+  isAnalyze,
+  isJson,
+  isLint,
+  updateSnapshot,
+) {
+  return new Promise((resolve, reject) => {
     const measureOutputPath = path.join(
       process.cwd(),
       filePath,
@@ -198,15 +204,13 @@ module.exports = function main(filePath, isAnalyze, isJson, isLint) {
         stat => stat.isTooBig,
       );
 
-      if (!isLint || (isLint && !statsExceededSizeLimit.length)) {
+      if (updateSnapshot) {
         fs.writeFileSync(
           prevStatsPath,
           JSON.stringify(clearStats(stats), null, 2),
           'utf8',
         );
-      }
-
-      if (statsExceededSizeLimit.length) {
+      } else if (statsExceededSizeLimit.length) {
         console.error(
           chalk.red(`  ✖ Entry "${filePath}" has exceeded size limit!`),
         );
