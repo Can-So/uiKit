@@ -1,4 +1,4 @@
 {
-  "releases": [{ "name": "@atlaskit/website", "type": "patch" }],
+  "releases": [{ "name": "@atlaskit/website", "type": "minor" }],
   "dependents": []
 }
