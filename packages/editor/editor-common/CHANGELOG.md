@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 28.0.1
+- [patch] [0145eef](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0145eef):
+
+  - ED-5733 Update size styles for headers and paragraph to match typography document
+
 ## 28.0.0
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/editor-test-helpers@6.3.7
