@@ -1,0 +1,1 @@
+- ED-5638: insert a space after pasting links that turn into inline cards to help avoid refreshing them
