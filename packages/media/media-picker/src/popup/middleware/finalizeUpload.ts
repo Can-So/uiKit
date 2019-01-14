@@ -60,7 +60,7 @@ type CopyFileParams = {
   file: MediaFile;
   uploadId: string;
   sourceFile: SourceFile;
-  replaceFileId?: Promise<string>;
+  replaceFileId?: Promise<string> | string;
 };
 
 async function copyFile({
@@ -85,6 +85,8 @@ async function copyFile({
     replaceFileId: replaceFileId ? await replaceFileId : undefined,
     occurrenceKey: file.occurrenceKey,
   };
+
+  console.log('copyFile', params.replaceFileId);
 
   return mediaStore
     .copyFileWithToken(body, params)

@@ -9,7 +9,7 @@ import { FileDetails } from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
 import { SelectWrapper, OptionsWrapper } from '../example-helpers/styled';
-import { MediaPicker } from '../src';
+import { MediaPicker, UploadPreviewUpdateEventPayload } from '../src';
 
 const context = createUploadContext();
 
@@ -41,7 +41,7 @@ export default class Example extends React.Component<{}, State> {
   componentDidMount() {
     popup.on('uploads-start', payload => {
       const { events } = this.state;
-
+      console.log('uploads-start', payload.files[0].id);
       this.setState({
         events: [
           ...events,
@@ -52,7 +52,16 @@ export default class Example extends React.Component<{}, State> {
         ],
       });
     });
+
+    popup.on('upload-preview-update', this.onUploadPreviewUpdate);
   }
+
+  private onUploadPreviewUpdate = async (
+    event: UploadPreviewUpdateEventPayload,
+  ) => {
+    console.log('onUploadPreviewUpdate id', event.file.id);
+    console.log('onUploadPreviewUpdate upfrontId', await event.file.upfrontId);
+  };
 
   private onCardClick = (occurrenceKey: string = '') => (event: CardEvent) => {
     if (event.mediaItemDetails) {

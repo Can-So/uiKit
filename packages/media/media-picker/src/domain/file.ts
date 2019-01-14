@@ -25,11 +25,11 @@ export function copyMediaFileForUpload(
     occurrenceKey,
     userOccurrenceKey,
   }: MediaFile,
-  uploadId: string,
+  fileId: string,
 ): MediaFile {
   // We dont' use spread here because user upload events are not sanitized
   return {
-    id: uploadId,
+    id: fileId,
     name,
     size,
     creationDate,

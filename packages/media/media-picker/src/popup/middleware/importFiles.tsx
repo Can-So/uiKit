@@ -23,6 +23,7 @@ import { setUpfrontIdDeferred } from '../actions/setUpfrontIdDeferred';
 import { WsNotifyMetadata } from '../tools/websocket/wsMessageData';
 
 import { getPreviewFromMetadata } from '../../domain/preview';
+import { TouchFileDescriptor } from '@atlaskit/media-store';
 export interface RemoteFileItem extends SelectedItem {
   accountId: string;
   publicId: string;
@@ -40,22 +41,25 @@ export const isRemoteService = (serviceName: string) => {
 
 type SelectedUploadFile = {
   readonly file: MediaFile;
-  readonly uploadId: string;
   readonly serviceName: string;
+  readonly touchFileDescriptor: TouchFileDescriptor;
   readonly accountId?: string;
 };
 
-const mapSelectedItemToSelectedUploadFile = ({
-  id,
-  name,
-  mimeType,
-  size,
-  date,
-  serviceName,
-  accountId,
-  upfrontId,
-  occurrenceKey = uuid(),
-}: SelectedItem): SelectedUploadFile => ({
+const mapSelectedItemToSelectedUploadFile = (
+  {
+    id,
+    name,
+    mimeType,
+    size,
+    date,
+    serviceName,
+    accountId,
+    upfrontId,
+    occurrenceKey = uuid(),
+  }: SelectedItem,
+  collection?: string,
+): SelectedUploadFile => ({
   file: {
     id,
     name,
@@ -67,7 +71,11 @@ const mapSelectedItemToSelectedUploadFile = ({
   },
   serviceName,
   accountId,
-  uploadId: uuid(),
+  touchFileDescriptor: {
+    fileId: uuid(),
+    occurrenceKey,
+    collection,
+  },
 });
 
 export function importFilesMiddleware(
@@ -87,23 +95,37 @@ export async function importFiles(
   store: Store<State>,
   wsProvider: WsProvider,
 ): Promise<void> {
-  const { uploads, selectedItems, userContext } = store.getState();
-
+  const {
+    uploads,
+    selectedItems,
+    userContext,
+    tenantContext,
+    config,
+  } = store.getState();
+  const tenantCollection =
+    config.uploadParams && config.uploadParams.collection;
   store.dispatch(hidePopup());
 
   const auth = await userContext.config.authProvider();
-  const selectedUploadFiles = selectedItems.map(
-    mapSelectedItemToSelectedUploadFile,
+  const selectedUploadFiles = selectedItems.map(item =>
+    mapSelectedItemToSelectedUploadFile(item, tenantCollection),
   );
-
+  console.log(selectedUploadFiles[0].touchFileDescriptor.fileId);
+  // TODO: should we do it only when servideName === 'recent_files' ?
+  const touchFileDescriptors = selectedUploadFiles
+    .filter(file => file.serviceName !== 'upload')
+    .map(file => file.touchFileDescriptor);
+  if (touchFileDescriptors.length) {
+    tenantContext.file.touchFiles(touchFileDescriptors, tenantCollection);
+  }
   eventEmitter.emitUploadsStart(
-    selectedUploadFiles.map(({ file, uploadId }) =>
-      copyMediaFileForUpload(file, uploadId),
+    selectedUploadFiles.map(({ file, touchFileDescriptor }) =>
+      copyMediaFileForUpload(file, touchFileDescriptor.fileId),
     ),
   );
 
   selectedUploadFiles.forEach(selectedUploadFile => {
-    const { file, serviceName, uploadId } = selectedUploadFile;
+    const { file, serviceName, touchFileDescriptor } = selectedUploadFile;
     const selectedItemId = file.id;
     if (serviceName === 'upload') {
       const localUpload: LocalUpload = uploads[selectedItemId];
@@ -111,7 +133,7 @@ export async function importFiles(
 
       importFilesFromLocalUpload(
         selectedItemId,
-        uploadId,
+        touchFileDescriptor.fileId,
         store,
         localUpload,
         replaceFileId,
@@ -160,14 +182,23 @@ export const importFilesFromRecentFiles = (
   selectedUploadFile: SelectedUploadFile,
   store: Store<State>,
 ): void => {
-  const { file, uploadId } = selectedUploadFile;
+  const { file, touchFileDescriptor } = selectedUploadFile;
   const source = {
     id: file.id,
     collection: RECENTS_COLLECTION,
   };
 
-  store.dispatch(finalizeUpload(file, uploadId, source));
-  store.dispatch(getPreview(uploadId, file, RECENTS_COLLECTION));
+  store.dispatch(
+    finalizeUpload(
+      file,
+      touchFileDescriptor.fileId,
+      source,
+      touchFileDescriptor.fileId,
+    ),
+  );
+  store.dispatch(
+    getPreview(touchFileDescriptor.fileId, file, RECENTS_COLLECTION),
+  );
 };
 
 export const importFilesFromRemoteService = (
@@ -175,17 +206,24 @@ export const importFilesFromRemoteService = (
   store: Store<State>,
   wsConnectionHolder: WsConnectionHolder,
 ): void => {
-  const { uploadId, serviceName, accountId, file } = selectedUploadFile;
+  const {
+    touchFileDescriptor,
+    serviceName,
+    accountId,
+    file,
+  } = selectedUploadFile;
   const { deferredIdUpfronts } = store.getState();
   const deferred = deferredIdUpfronts[file.id];
 
   if (deferred) {
     const { rejecter, resolver } = deferred;
     // We asociate the temporary file.id with the uploadId
-    store.dispatch(setUpfrontIdDeferred(uploadId, resolver, rejecter));
+    store.dispatch(
+      setUpfrontIdDeferred(touchFileDescriptor.fileId, resolver, rejecter),
+    );
   }
   const uploadActivity = new RemoteUploadActivity(
-    uploadId,
+    touchFileDescriptor.fileId,
     (event, payload) => {
       if (event === 'NotifyMetadata') {
         const preview = getPreviewFromMetadata(
@@ -202,7 +240,7 @@ export const importFilesFromRemoteService = (
                 preview,
               },
             },
-            uploadId,
+            uploadId: touchFileDescriptor.fileId,
           }),
         );
       } else {
@@ -220,7 +258,7 @@ export const importFilesFromRemoteService = (
   );
 
   uploadActivity.on('Started', () => {
-    store.dispatch(remoteUploadStart(uploadId));
+    store.dispatch(remoteUploadStart(touchFileDescriptor.fileId));
   });
 
   wsConnectionHolder.openConnection(uploadActivity);
@@ -233,7 +271,7 @@ export const importFilesFromRemoteService = (
       fileId: file.id,
       fileName: file.name,
       collection: RECENTS_COLLECTION,
-      jobId: uploadId,
+      jobId: touchFileDescriptor.fileId,
     },
   });
 };
