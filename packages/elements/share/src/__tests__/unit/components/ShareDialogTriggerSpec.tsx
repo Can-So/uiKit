@@ -29,7 +29,7 @@ describe('ShareDialogTrigger', () => {
       expect(wrapper.state().isDialogOpen).toBe(false);
     });
 
-    it('should be passed into isOpen prop InlineDialog and isSelected and isDisabled props in ShareButton', () => {
+    it('should be passed into isOpen prop InlineDialog and isSelected props in ShareButton', () => {
       const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
       let { isDialogOpen } = wrapper.state();
       // TODO: where to get type InlineDialogProps?
@@ -40,7 +40,6 @@ describe('ShareDialogTrigger', () => {
       expect(isDialogOpen).toEqual(false);
       expect(inlineDialogProps.isOpen).toEqual(isDialogOpen);
       expect(shareButtonProps.isSelected).toEqual(isDialogOpen);
-      expect(shareButtonProps.isDisabled).toEqual(isDialogOpen);
 
       wrapper.setState({ isDialogOpen: !isDialogOpen });
 
@@ -48,7 +47,6 @@ describe('ShareDialogTrigger', () => {
       shareButtonProps = wrapper.find(ShareButton).props();
       expect(inlineDialogProps.isOpen).toEqual(!isDialogOpen);
       expect(shareButtonProps.isSelected).toEqual(!isDialogOpen);
-      expect(shareButtonProps.isDisabled).toEqual(!isDialogOpen);
     });
 
     it('should render ShareForm if isDialogOpen is true', () => {

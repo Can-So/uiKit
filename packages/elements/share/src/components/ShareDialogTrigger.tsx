@@ -186,7 +186,7 @@ export class ShareDialogTrigger extends React.Component<
               }
               onClick={this.handleOpenDialog}
               isSelected={isDialogOpen}
-              isDisabled={isDialogOpen || isDisabled}
+              isDisabled={isDisabled}
             />
           )}
         </InlineDialog>
