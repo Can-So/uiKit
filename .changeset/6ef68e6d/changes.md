@@ -1,0 +1,1 @@
+- ED-5733 Update size styles for headers and paragraph to match typography document
