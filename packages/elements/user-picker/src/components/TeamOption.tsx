@@ -28,7 +28,6 @@ export const TextWrapper = styled.span`
 
 export type TeamOptionProps = {
   team: Team;
-  status: string;
   isSelected: boolean;
 };
 
@@ -36,16 +35,8 @@ export class TeamOption extends React.PureComponent<TeamOptionProps> {
   private renderAvatar = () => {
     const {
       team: { avatarUrl, name },
-      status,
     } = this.props;
-    return (
-      <SizeableAvatar
-        appearance="big"
-        src={avatarUrl}
-        presence={status}
-        name={name}
-      />
-    );
+    return <SizeableAvatar appearance="big" src={avatarUrl} name={name} />;
   };
 
   private getPrimaryText = () => {

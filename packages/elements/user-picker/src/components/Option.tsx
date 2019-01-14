@@ -21,7 +21,7 @@ export const Option = props => {
   if (isTeam(data)) {
     return (
       <components.Option {...props}>
-        <TeamOption team={data} status={status} isSelected={isSelected} />
+        <TeamOption team={data} isSelected={isSelected} />
       </components.Option>
     );
   }
