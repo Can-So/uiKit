@@ -5,7 +5,7 @@ import { mount, shallow } from 'enzyme';
 import path from 'path';
 import fs from 'fs';
 import { name } from '../../../../package.json';
-import BookIcon from '../../../../glyph/source-code/24';
+import PriorityCritical from '../../../../glyph/priority-critical';
 import DefaultIcon, { metadata } from '../../../../src';
 
 // List all files in a directory in Node.js recursively in a synchronous fashion
@@ -37,35 +37,20 @@ describe(name, () => {
 
       // This list should be sorted alphabetically.
       const expected = [
-        'archive',
-        'audio',
-        'document',
-        'excel-spreadsheet',
-        'executable',
-        'folder',
-        'generic',
-        'gif',
-        'google-doc',
-        'google-form',
-        'google-sheet',
-        'google-slide',
-        'image',
-        'pdf-document',
-        'powerpoint-presentation',
-        'presentation',
-        'sketch',
-        'source-code',
-        'spreadsheet',
-        'video',
-        'word-document',
+        'priority-critical',
+        'priority-high',
+        'priority-highest',
+        'priority-low',
+        'priority-lowest',
+        'priority-major',
+        'priority-medium',
+        'priority-minor',
+        'priority-trivial',
+        'priotity-blocker',
       ];
 
       const expectedPaths = expected
-        .map(a => [
-          path.join(__dirname, '../../../../glyph', `${a}/16.js`),
-          path.join(__dirname, '../../../../glyph', `${a}/24.js`),
-          path.join(__dirname, '../../../../glyph', `${a}/48.js`),
-        ])
+        .map(a => [path.join(__dirname, '../../../../glyph', `${a}.js`)])
         .reduce((accumulater, current) => [...accumulater, ...current], []);
 
       const actual = walkSync(
@@ -122,7 +107,7 @@ describe(name, () => {
     describe('label property', () => {
       it('should accept a label', () => {
         const label = 'my label';
-        const wrapper = mount(<BookIcon label={label} />);
+        const wrapper = mount(<PriorityCritical label={label} />);
         const span = wrapper.find('span').first();
 
         expect(span.is('[aria-label="my label"]')).toBe(true);
