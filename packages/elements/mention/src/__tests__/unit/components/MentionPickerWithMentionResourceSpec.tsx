@@ -62,7 +62,7 @@ describe('MentionPicker', () => {
   });
 
   it('should fire analytics when new mention data is fetched', () => {
-    mentionResource.notify(Date.now(), mentionsResult, query, true);
+    mentionResource.notify(Date.now(), mentionsResult, query);
 
     return new Promise(resolve => window.setTimeout(resolve)).then(() => {
       expect(fireAnalyticsMock).toHaveBeenCalled();
@@ -87,14 +87,6 @@ describe('MentionPicker', () => {
         ],
         query,
       );
-    });
-  });
-
-  it('should not fire analytics when mention data is from local search', () => {
-    mentionResource.notify(Date.now(), mentionsResult, query, false);
-
-    return new Promise(resolve => window.setTimeout(resolve)).then(() => {
-      expect(fireAnalyticsMock).not.toHaveBeenCalled();
     });
   });
 });
