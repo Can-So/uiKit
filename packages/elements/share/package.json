@@ -29,7 +29,8 @@
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/field-text-area": "^4.0.15",
     "@atlaskit/form": "^5.1.0",
-    "@atlaskit/user-picker": "^1.0.6"
+    "@atlaskit/user-picker": "^1.0.6",
+    "@atlaskit/util-service-support": "^3.0.5"
   },
   "peerDependencies": {
     "react": "^16.4.0",
