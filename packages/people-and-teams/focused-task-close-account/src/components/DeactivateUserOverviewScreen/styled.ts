@@ -33,7 +33,8 @@ export const MainInformationList = styled.ul`
       font-weight: 600;
     }
   }
-  p + ul {
-    margin-top: ${gridSizeTimes(1.5)}px;
-  }
+`;
+
+export const AccessibleSitesWrapper = styled.div`
+  margin-top: ${gridSizeTimes(1.5)}px;
 `;

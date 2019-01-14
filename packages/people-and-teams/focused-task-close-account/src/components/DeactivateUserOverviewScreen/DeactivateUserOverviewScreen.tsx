@@ -19,7 +19,7 @@ export class DeactivateUserOverviewScreen extends React.Component<
     return this.props.isCurrentUser ? selfCopy : adminCopy;
   };
 
-  displayFirstListElement = () => {
+  renderLoseAccessListItem = () => {
     const { accessibleSites, user } = this.props;
     const hasAccessibleSites = accessibleSites && accessibleSites.length > 0;
     return (
@@ -43,14 +43,16 @@ export class DeactivateUserOverviewScreen extends React.Component<
               values={{ fullName: user.fullName }}
               tagName={'p'}
             />
-            <DropdownList accessibleSites={accessibleSites} />
+            <Styled.AccessibleSitesWrapper>
+              <DropdownList accessibleSites={accessibleSites} />
+            </Styled.AccessibleSitesWrapper>
           </>
         )}
       </li>
     );
   };
 
-  displaySecondListElement = () => {
+  renderPersonalDataListElement = () => {
     return (
       <li>
         <FormattedHTMLMessage
@@ -63,7 +65,7 @@ export class DeactivateUserOverviewScreen extends React.Component<
     );
   };
 
-  displayThirdListElement = () => {
+  renderBillingListElement = () => {
     return (
       <li>
         <FormattedMessage
@@ -105,9 +107,9 @@ export class DeactivateUserOverviewScreen extends React.Component<
             )}
           />
           <Styled.MainInformationList>
-            {this.displayFirstListElement()}
-            {this.displaySecondListElement()}
-            {this.displayThirdListElement()}
+            {this.renderLoseAccessListItem()}
+            {this.renderPersonalDataListElement()}
+            {this.renderBillingListElement()}
           </Styled.MainInformationList>
           <FormattedMessage
             {...this.selectAdminOrSelfCopy(

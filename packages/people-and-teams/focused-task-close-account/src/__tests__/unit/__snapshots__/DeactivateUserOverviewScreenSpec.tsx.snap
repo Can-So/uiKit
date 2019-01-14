@@ -46,17 +46,19 @@ exports[`DeactivateUserOverviewScreen 1`] = `
             }
           }
         />
-        <DropdownList
-          accessibleSites={
-            Array [
-              "hello.atlassian.net",
-              "acme.atlassian.net",
-              "test.atlassian.net",
-              "bitflix.atlassian.net",
-              "Bitbucket",
-            ]
-          }
-        />
+        <styled.div>
+          <DropdownList
+            accessibleSites={
+              Array [
+                "hello.atlassian.net",
+                "acme.atlassian.net",
+                "test.atlassian.net",
+                "bitflix.atlassian.net",
+                "Bitbucket",
+              ]
+            }
+          />
+        </styled.div>
       </li>
       <li>
         <FormattedHTMLMessage
