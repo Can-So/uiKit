@@ -41,8 +41,8 @@ export const IconWrapper = styled.span`
 `;
 
 type Props = {
-  /** More performant than the glyph prop, but potentially dangerous if the SVG string hasn't
-   been "sanitised" */
+  /** This is for internal use only in this package. If you want to use prop please consider using the
+   * @atlaskit/icon package  */
   dangerouslySetGlyph?: string,
   /** String to use as the aria-label for the icon. Set to an empty string if you are rendering the icon with visible text to prevent accessibility label duplication. */
   label: string,
