@@ -23,14 +23,7 @@ describe('Team Option', () => {
   };
 
   const shallowOption = (props: Partial<TeamOptionProps> = {}, team: Team) =>
-    shallow(
-      <TeamOption
-        team={team}
-        status="approved"
-        isSelected={false}
-        {...props}
-      />,
-    );
+    shallow(<TeamOption team={team} isSelected={false} {...props} />);
 
   const buildTeam = (teamData: Partial<Team> = {}): Team => {
     return {
@@ -48,7 +41,6 @@ describe('Team Option', () => {
         <SizeableAvatar
           appearance="big"
           src="https://avatars.atlassian.com/team-1.png"
-          presence="approved"
           name="Team-1"
         />
       ),
@@ -82,7 +74,6 @@ describe('Team Option', () => {
         <SizeableAvatar
           appearance="big"
           src="https://avatars.atlassian.com/team-1.png"
-          presence="approved"
           name="Team-1"
         />
       ),
@@ -116,7 +107,6 @@ describe('Team Option', () => {
         <SizeableAvatar
           appearance="big"
           src="https://avatars.atlassian.com/team-1.png"
-          presence="approved"
           name="Team-1"
         />
       ),
@@ -150,7 +140,6 @@ describe('Team Option', () => {
         <SizeableAvatar
           appearance="big"
           src="https://avatars.atlassian.com/team-1.png"
-          presence="approved"
           name="Team-1"
         />
       ),
