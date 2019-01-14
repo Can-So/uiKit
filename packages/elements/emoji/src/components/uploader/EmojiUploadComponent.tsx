@@ -26,14 +26,12 @@ export interface State {
 }
 
 export default class EmojiUploadComponent extends PureComponent<Props, State> {
-  private emojiUploadPicker;
+  private ref;
 
   constructor(props: Props) {
     super(props);
-    const { emojiProvider } = props;
-
-    if (supportsUploadFeature(emojiProvider)) {
-      emojiProvider.prepareForUpload();
+    if (supportsUploadFeature(props.emojiProvider)) {
+      props.emojiProvider.prepareForUpload();
     }
 
     this.state = {};
@@ -49,19 +47,12 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
       upload,
       emojiProvider,
       errorSetter,
-      this.primeUpload,
+      this.prepareForUpload,
       () => null,
     );
   };
 
-  private onUploadCancelled = () => {
-    this.setState({
-      uploadErrorMessage: undefined,
-    });
-    this.primeUpload();
-  };
-
-  private primeUpload = () => {
+  private prepareForUpload = () => {
     const { emojiProvider } = this.props;
     if (supportsUploadFeature(emojiProvider)) {
       emojiProvider.prepareForUpload();
@@ -71,39 +62,33 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
       uploadErrorMessage: undefined,
     });
 
-    if (this.emojiUploadPicker) {
-      this.emojiUploadPicker.clearUploadPicker();
+    if (this.ref) {
+      this.ref.clearUploadPicker();
     }
   };
 
-  private getUploadPicker = () => {
+  render() {
     const { uploadErrorMessage } = this.state;
 
-    const formattedErrorMessage = uploadErrorMessage ? (
+    const errorMessage = uploadErrorMessage ? (
       <FormattedMessage {...uploadErrorMessage} />
     ) : null;
 
-    return (
-      <div className={classNames([styles.emojiUploadFooter])}>
-        <EmojiUploadPicker
-          ref={emojiUploadPicker => {
-            this.emojiUploadPicker = emojiUploadPicker;
-          }}
-          onUploadCancelled={this.onUploadCancelled}
-          onUploadEmoji={this.onUploadEmoji}
-          errorMessage={formattedErrorMessage}
-        />
-      </div>
-    );
-  };
-
-  render() {
     return (
       <div
         className={classNames([styles.emojiUploadWidget])}
         ref={this.props.onUploadRef}
       >
-        {this.getUploadPicker()}
+        <div className={classNames([styles.emojiUploadFooter])}>
+          <EmojiUploadPicker
+            ref={emojiUploadPicker => {
+              this.ref = emojiUploadPicker;
+            }}
+            onUploadCancelled={this.prepareForUpload}
+            onUploadEmoji={this.onUploadEmoji}
+            errorMessage={errorMessage}
+          />
+        </div>
       </div>
     );
   }

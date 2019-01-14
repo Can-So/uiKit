@@ -21,6 +21,7 @@ import { EmojiDescription } from '../../../../types';
 import { hasSelector } from '../../_emoji-selectors';
 import { getEmojiResourcePromise, newEmojiRepository } from '../../_test-data';
 import { FormattedMessage } from 'react-intl';
+import FileChooser from '../../../../components/common/FileChooser';
 
 export function setupPickerWithoutToneSelector(): Promise<
   ReactWrapper<any, any>
@@ -241,4 +242,16 @@ export const tooltipErrorMessageMatches = async (component, message) => {
       .find(FormattedMessage)
       .props(),
   ).toMatchObject(message);
+};
+
+export const chooseFile = (component, file) => {
+  const fileChooser = component.find(FileChooser);
+  const fileOnChange = fileChooser.prop('onChange');
+  expect(fileOnChange).toBeDefined();
+  fileOnChange!({
+    target: {
+      files: [file],
+    },
+  } as React.ChangeEvent<any>);
+  return fileChooser;
 };

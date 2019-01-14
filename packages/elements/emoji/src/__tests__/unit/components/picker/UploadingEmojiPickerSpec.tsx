@@ -53,18 +53,6 @@ describe('<UploadingEmojiPicker />', () => {
     expect(emoji.representation.imagePath).toEqual(pngDataURL);
   };
 
-  const chooseFile = (component, file) => {
-    const fileChooser = component.find(FileChooser);
-    const fileOnChange = fileChooser.prop('onChange');
-    expect(fileOnChange).toBeDefined();
-    fileOnChange!({
-      target: {
-        files: [file],
-      },
-    } as React.ChangeEvent<any>);
-    return fileChooser;
-  };
-
   const typeEmojiName = component => {
     const nameInput = helper.findEmojiNameInput(component);
     nameInput.simulate('focus');
@@ -140,7 +128,7 @@ describe('<UploadingEmojiPicker />', () => {
       typeEmojiName(component);
 
       // choose file
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       await waitUntil(() => helper.addEmojiButtonVisible(component));
 
       // upload preview shown
@@ -202,7 +190,7 @@ describe('<UploadingEmojiPicker />', () => {
       typeEmojiName(component);
 
       // choose file
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       await waitUntil(() => helper.addEmojiButtonVisible(component));
 
       // upload preview shown
@@ -292,7 +280,7 @@ describe('<UploadingEmojiPicker />', () => {
 
       typeEmojiName(component);
 
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       expect(component.find('FileChooser')).toHaveLength(1);
 
       await waitUntil(() => helper.errorMessageVisible(component));
@@ -329,7 +317,7 @@ describe('<UploadingEmojiPicker />', () => {
       // type name
       typeEmojiName(component);
 
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       expect(component.find('FileChooser')).toHaveLength(1);
 
       await waitUntil(() => helper.errorMessageVisible(component));
@@ -378,7 +366,7 @@ describe('<UploadingEmojiPicker />', () => {
       expect(nameInput.prop('value')).toEqual('cheese_burger');
 
       // choose file
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       await waitUntil(() => helper.addEmojiButtonVisible(component));
 
       // upload preview shown
@@ -453,7 +441,7 @@ describe('<UploadingEmojiPicker />', () => {
       typeEmojiName(component);
 
       // choose file
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       await waitUntil(() => helper.addEmojiButtonVisible(component));
 
       // upload preview shown
@@ -520,7 +508,7 @@ describe('<UploadingEmojiPicker />', () => {
       typeEmojiName(component);
 
       // choose file
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       await waitUntil(() => helper.addEmojiButtonVisible(component));
 
       // upload preview shown

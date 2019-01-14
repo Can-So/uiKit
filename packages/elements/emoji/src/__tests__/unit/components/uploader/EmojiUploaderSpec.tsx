@@ -79,21 +79,6 @@ describe('<EmojiUploader />', () => {
     });
   };
 
-  const chooseFile = (component, file) => {
-    const fileChooser = component.update().find(FileChooser);
-    expect(fileChooser).toHaveLength(1);
-
-    const fileOnChange = fileChooser.prop('onChange');
-    expect(fileOnChange).toBeDefined();
-
-    fileOnChange!({
-      target: {
-        files: [file],
-      },
-    } as React.ChangeEvent<any>);
-    return fileChooser;
-  };
-
   describe('display', () => {
     it('should display disabled emoji file chooser initially', async () => {
       const uploader = await setupUploader();
@@ -148,7 +133,7 @@ describe('<EmojiUploader />', () => {
 
       await typeEmojiName(component);
 
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       await waitUntil(() => helper.addEmojiButtonVisible(component));
 
       uploadPreviewShown(component);
@@ -177,7 +162,7 @@ describe('<EmojiUploader />', () => {
       await emojiProvider;
       typeEmojiName(component);
 
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
 
       await waitUntil(() => helper.errorMessageVisible(component));
 
@@ -192,7 +177,7 @@ describe('<EmojiUploader />', () => {
       await emojiProvider;
       typeEmojiName(component);
 
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       expect(component.find(FileChooser)).toHaveLength(1);
 
       await waitUntil(() => helper.errorMessageVisible(component));
@@ -203,7 +188,7 @@ describe('<EmojiUploader />', () => {
     it('should go back when cancel clicked', async () => {
       typeEmojiName(component);
 
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       await waitUntil(() => helper.addEmojiButtonVisible(component));
 
       uploadPreviewShown(component);
@@ -223,7 +208,7 @@ describe('<EmojiUploader />', () => {
       const provider = await emojiProvider;
       typeEmojiName(component);
 
-      chooseFile(component, createPngFile());
+      helper.chooseFile(component, createPngFile());
       await waitUntil(() => helper.addEmojiButtonVisible(component));
 
       // Try adding
