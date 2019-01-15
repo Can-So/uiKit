@@ -22,15 +22,15 @@ const rejectedPromise = Promise.reject(
 );
 const pendingPromise = new Promise<any>(() => {});
 
-const testCloudId = 'f7ebe2c0-0309-4687-b913-41d422f2110b';
+// https://pug.jira-dev.com
+const testCloudId = 'DUMMY-a5a01d21-1cc3-4f29-9565-f2bb8cd969f5';
 const providers = {
   mentionProvider: {
     resolved: Promise.resolve(mention.storyData.resourceProvider),
     external: Promise.resolve(
       new MentionResource({
         url: `https://api-private.stg.atlassian.com/mentions/${testCloudId}`,
-        containerId: 'b0d035bd-9b98-4386-863b-07286c34dc14',
-        productId: 'chat',
+        productId: 'micros-group/confluence',
       }),
     ),
     pending: pendingPromise,

@@ -7,7 +7,7 @@ There are two commands in measure:
 ## Basic usage
 
 ```sh
-yarn measure [path/from/packages]
+yarn measure [path1] [path2] [path3]
 ```
 
 For example, to measure button, you would use:
@@ -27,7 +27,7 @@ As you can see, we have split our code into different chunks to better understan
 Sometime you will need to look into what is in each chunk. To do this, you can add the `--analyze` flag.
 
 ```sh
-yarn measure [path/from/packages] --analyze
+yarn measure [path] --analyze
 ```
 
 This will output the information above to the console, but will also launch a new tab in your browser which shows the [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) view of the code.

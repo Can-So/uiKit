@@ -9,12 +9,12 @@ const enterArr: string[] = [];
 const arrowUpArr: string[] = [];
 for (let i = 0; i < 80; i++) {
   enterArr.push('Enter');
-  arrowUpArr.push('Up arrow');
+  arrowUpArr.push('ArrowUp');
 }
 
 BrowserTestCase(
   'table.ts: Table floating toolbar should be visible even after table scrolls',
-  { skip: ['edge', 'ie', 'safari'] },
+  { skip: ['edge', 'ie', 'safari', 'firefox'] },
   async client => {
     const insertTableMenu = `[aria-label="${
       insertBlockMessages.table.defaultMessage

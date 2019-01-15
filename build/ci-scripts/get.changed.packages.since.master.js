@@ -16,5 +16,9 @@ const packages = require('../utils/packages');
     pkg => pkg.relativeDir,
   );
 
-  console.log(JSON.stringify(changedPackagesRelativePaths));
+  if (process.argv.includes('--spaceDelimited')) {
+    console.log(changedPackagesRelativePaths.join(' '));
+  } else {
+    console.log(JSON.stringify(changedPackagesRelativePaths));
+  }
 })();

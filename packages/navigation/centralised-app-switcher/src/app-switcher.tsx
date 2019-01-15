@@ -1,0 +1,34 @@
+import React, { Component } from 'react';
+import { AppSwitcherWrapper, Item, Section, ManageButton } from './primitives';
+import MockProvider from './providers/mock-provider';
+
+class AppSwitcher extends Component {
+  render() {
+    return (
+      <MockProvider>
+        {({ isLoading, data }) =>
+          isLoading ? (
+            'Loading...'
+          ) : (
+            <AppSwitcherWrapper>
+              <Section title="First Section">
+                <Item>First Item</Item>
+                <Item>Second Item</Item>
+                <Item>Third Item</Item>
+              </Section>
+              <Section title="Second Section">
+                <Item>First Item</Item>
+                <Item>Second Item</Item>
+                <Item>Third Item</Item>
+              </Section>
+              <ManageButton />
+              {JSON.stringify(data)}
+            </AppSwitcherWrapper>
+          )
+        }
+      </MockProvider>
+    );
+  }
+}
+
+export default AppSwitcher;

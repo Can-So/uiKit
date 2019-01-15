@@ -35,9 +35,9 @@ export default class WebToNativeReporter extends React.Component<Props, State> {
     (toNativeBridge as any).log = this.oldLog;
   }
 
-  private handleNewLog = (...args) => {
+  private handleNewLog = (bridge, event, props) => {
     const { filter } = this.props;
-    const logText = args.join(' ');
+    const logText = `${bridge}:${event} ${JSON.stringify(props)}`;
     const isInFilter = (acc: boolean, filterBy: string) =>
       acc || logText.startsWith(filterBy);
     if (!filter || !filter.length || filter.reduce(isInFilter, false)) {

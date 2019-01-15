@@ -22,3 +22,7 @@ export * from './mockCanvas';
 export {
   default as KeyboardEventWithKeyCode,
 } from './keyboardEventWithKeyCode';
+export * from './fileReader';
+export * from './mockLoadImage';
+export * from './mediaPickerMocks';
+export * from './clipboardEventMocks';

@@ -1,5 +1,73 @@
 # @atlaskit/editor-core
 
+## 95.0.5
+- [patch] [844feea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/844feea):
+
+  - ED-6039 Fixed extension toolbar remove action
+
+## 95.0.4
+- [patch] [e082366](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e082366):
+
+  - ED-6045: fixed unable to select table row
+
+## 95.0.3
+- [patch] [61ce3c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/61ce3c5):
+
+  - ED-6015 Fix bug where cursor would jump to start of mention after hitting backspace after a mention
+
+## 95.0.2
+- [patch] [6866eba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6866eba):
+
+  - ED-5638: insert a space after pasting links that turn into inline cards to help avoid refreshing them
+
+## 95.0.1
+- [patch] [df30c63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df30c63):
+
+  - ED-5723: Enables typeahead support for mobile editor
+
+  * Added a new bridge `typeAheadBridge`, which contains `typeAheadQuery()` and `dismissTypeAhead()`
+    * `typeAheadQuery(query: string, trigger: string)` - This will notify integrators when a user is attempting to filter down a list.
+    * `dismissTypeAhead` - Call this to dismiss any typeahead related content.
+  * Added bridge function `insertTypeAheadItem()`, which currently only supports inserting mentions.
+    * `insertTypeAheadItem(type: 'mention', payload: string)` - Payload is a stringified JSON blob containing the information to insert a mention in this scenario.
+  * Added bridge function `setFocus()` to handle returning the focus to the editor after a native interaction.
+  * Added new promise `getAccountId`, which is used to highlight the current user's mention.
+
+## 95.0.0
+- [major] [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
+
+  - Removed client-side indexed cache of mention results. Also removed method 'getUsersInContext' from MentionResourceConfig, 'remoteSearch' from MentionStats and 'weight' from MentionDescription. If you used to use them, simply remove any references to them.
+
+## 94.1.5
+- [patch] [c0dc7e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c0dc7e3):
+
+  - FS-3360 - Support state analytics attribute with values new or existing. Implement for web, and mobile support via mobile-bridge.
+
+## 94.1.4
+- [patch] [7d9ccd7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d9ccd7):
+
+  - fixed copy/paste status from renderer to editor
+
+## 94.1.3
+- [patch] [323b457](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/323b457):
+
+  - trimmed status text so now the placeholder appears correctly when user types spaces in the status picker
+
+## 94.1.2
+- [patch] [c8a5e65](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c8a5e65):
+
+  - ED-6023: fix scaling a table when deleting column
+
+## 94.1.1
+- [patch] [9b0341d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b0341d):
+
+  - ED-5871 Fix issue where user had to click twice to focus cursor in editor on full page editor in Firefox
+
+## 94.1.0
+- [minor] [58e30bb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58e30bb):
+
+  - deduped i18n key fabric.editor.orderedList
+
 ## 94.0.0
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/editor-common@28.0.0

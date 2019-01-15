@@ -7,7 +7,7 @@ import {
 import { Action, Dispatch } from 'redux';
 import { State } from '../../../domain';
 import analyticsProcessing from '../../analyticsProcessing';
-import { mockStore } from '../../../mocks';
+import { mockStore } from '@atlaskit/media-test-helpers';
 import { showPopup } from '../../../actions/showPopup';
 import { editorShowImage } from '../../../actions/editorShowImage';
 import { searchGiphy } from '../../../actions';

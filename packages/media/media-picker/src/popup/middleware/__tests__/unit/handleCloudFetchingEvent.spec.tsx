@@ -1,5 +1,5 @@
 import { handleCloudFetchingEvent } from '../../handleCloudFetchingEvent';
-import { mockStore } from '../../../mocks';
+import { mockStore } from '@atlaskit/media-test-helpers';
 import {
   HANDLE_CLOUD_FETCHING_EVENT,
   HandleCloudFetchingEventAction,

@@ -10,7 +10,7 @@ import {
 import { TableCssClassName as ClassName } from '../../types';
 import { addContainerLeftRightPadding } from './resizer/utils';
 
-import Resizer from './resizer/resizer';
+import Resizer, { recreateResizeColsByNode } from './resizer/resizer';
 import ResizeState from './resizer/resizeState';
 
 import { getPluginState } from '../main';
@@ -259,5 +259,9 @@ function scale(
     });
 
     return resizer.scale(maxSize);
+  } else {
+    // If its not a re-sized table, we still want to re-create cols
+    // To force reflow of columns upon delete.
+    recreateResizeColsByNode(tableElem, node);
   }
 }

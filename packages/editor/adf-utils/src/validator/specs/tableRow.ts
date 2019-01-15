@@ -1,10 +1,6 @@
 export default {
   props: {
     type: { type: 'enum', values: ['tableRow'] },
-    content: [
-      { type: 'array', items: ['tableHeader'] },
-      { type: 'array', items: ['tableCell'] },
-    ],
+    content: { type: 'array', items: [['tableCell', 'tableHeader']] },
   },
-  required: ['content'],
 };

@@ -11,7 +11,6 @@ import {
   MentionsResult,
 } from '../types';
 import debug from '../util/logger';
-import { SearchIndex, mentionDescriptionComparator } from '../util/searchIndex';
 
 const MAX_QUERY_ITEMS = 100;
 const MAX_NOTIFIED_ITEMS = 20;
@@ -34,15 +33,6 @@ export interface MentionResourceConfig extends ServiceConfig {
   containerId?: string;
   productId?: string;
   shouldHighlightMention?: (mention: MentionDescription) => boolean;
-
-  /**
-   * Hook for consumers to provide a list of users in the current context.
-   * Users provided here will be searched when mentioning and
-   * will appear first.
-   *
-   * @returns {Promise<MentionDescription[]>}
-   */
-  getUsersInContext?: () => Promise<MentionDescription[]>;
 }
 
 export interface ResourceProvider<Result> {
@@ -94,7 +84,6 @@ const emptySecurityProvider = () => {
 
 type SearchResponse = {
   mentions: Promise<MentionsResult>;
-  remoteSearch: boolean;
 };
 
 class AbstractResource<Result> implements ResourceProvider<Result> {
@@ -236,7 +225,6 @@ class AbstractMentionResource extends AbstractResource<MentionDescription[]>
 class MentionResource extends AbstractMentionResource {
   private config: MentionResourceConfig;
   private lastReturnedSearch: number;
-  private searchIndex: SearchIndex;
   private activeSearches: Set<string>;
 
   constructor(config: MentionResourceConfig) {
@@ -252,7 +240,6 @@ class MentionResource extends AbstractMentionResource {
 
     this.config = config;
     this.lastReturnedSearch = 0;
-    this.searchIndex = new SearchIndex();
     this.activeSearches = new Set();
   }
 
@@ -264,26 +251,18 @@ class MentionResource extends AbstractMentionResource {
     return false;
   }
 
-  notify(
-    searchTime: number,
-    mentionResult: MentionsResult,
-    query?: string,
-    remoteSearch?: boolean,
-  ) {
-    this.sortMentionsResult(mentionResult).then(sortedMentionsResult => {
-      if (searchTime > this.lastReturnedSearch) {
-        this.lastReturnedSearch = searchTime;
-        this._notifyListeners(sortedMentionsResult, {
-          duration: Date.now() - searchTime,
-          remoteSearch,
-        });
-      } else {
-        const date = new Date(searchTime).toISOString().substr(17, 6);
-        debug('Stale search result, skipping', date, query); // eslint-disable-line no-console, max-len
-      }
+  notify(searchTime: number, mentionResult: MentionsResult, query?: string) {
+    if (searchTime > this.lastReturnedSearch) {
+      this.lastReturnedSearch = searchTime;
+      this._notifyListeners(mentionResult, {
+        duration: Date.now() - searchTime,
+      });
+    } else {
+      const date = new Date(searchTime).toISOString().substr(17, 6);
+      debug('Stale search result, skipping', date, query); // eslint-disable-line no-console, max-len
+    }
 
-      this._notifyAllResultsListeners(sortedMentionsResult);
-    });
+    this._notifyAllResultsListeners(mentionResult);
   }
 
   notifyError(error: Error, query?: string) {
@@ -298,7 +277,7 @@ class MentionResource extends AbstractMentionResource {
 
     if (!query) {
       this.initialState(contextIdentifier).then(
-        results => this.notify(searchTime, results, query, true),
+        results => this.notify(searchTime, results, query),
         error => this.notifyError(error, query),
       );
     } else {
@@ -307,7 +286,7 @@ class MentionResource extends AbstractMentionResource {
 
       searchResponse.mentions.then(
         results => {
-          this.notify(searchTime, results, query, searchResponse.remoteSearch);
+          this.notify(searchTime, results, query);
         },
         error => this.notifyError(error, query),
       );
@@ -332,18 +311,6 @@ class MentionResource extends AbstractMentionResource {
     contextIdentifier?: MentionContextIdentifier,
   ): Promise<MentionsResult> {
     return this.remoteInitialState(contextIdentifier);
-  }
-
-  private getUserIdsInContext(): Promise<Set<string>> {
-    if (this.config.getUsersInContext) {
-      return this.config
-        .getUsersInContext()
-        .then(users =>
-          users.reduce((acc, value) => acc.add(value.id), new Set()),
-        );
-    }
-
-    return Promise.resolve(new Set());
   }
 
   private getQueryParams(
@@ -381,64 +348,16 @@ class MentionResource extends AbstractMentionResource {
 
     return serviceUtils
       .requestService<MentionsResult>(this.config, options)
-      .then(result => this.transformServiceResponse(result, ''))
-      .then(result => {
-        this.searchIndex.indexResults(result.mentions);
-        return result;
-      });
-  }
-
-  private searchAsync(
-    query: string,
-    contextIdentifier?: MentionContextIdentifier,
-  ): void {
-    const searchTime = Date.now() + 1; // Ensure that search time is different than the local search time
-    this.remoteSearch(query, contextIdentifier).then(
-      result => {
-        this.activeSearches.delete(query);
-        this.notify(searchTime, result, query, true);
-        this.searchIndex.indexResults(result.mentions);
-      },
-      err => {
-        this._notifyErrorListeners(err);
-      },
-    );
+      .then(result => this.transformServiceResponse(result, ''));
   }
 
   private search(
     query: string,
     contextIdentifier?: MentionContextIdentifier,
   ): SearchResponse {
-    if (this.searchIndex.hasDocuments()) {
-      return {
-        mentions: this.searchIndex.search(query).then(result => {
-          this.searchAsync(query, contextIdentifier);
-          // return local search result quickly while the back-end search runs async
-          return result;
-        }),
-        remoteSearch: false, // due to be returning the local search results above
-      };
-    }
     return {
-      mentions: this.remoteSearch(query, contextIdentifier).then(result => {
-        this.searchIndex.indexResults(result.mentions);
-        return result;
-      }),
-      remoteSearch: true,
+      mentions: this.remoteSearch(query, contextIdentifier),
     };
-  }
-
-  private sortMentionsResult(
-    mentionsResult: MentionsResult,
-  ): Promise<MentionsResult> {
-    return this.getUserIdsInContext().then(userIdsInContext => {
-      return {
-        ...mentionsResult,
-        mentions: mentionsResult.mentions.sort(
-          mentionDescriptionComparator(userIdsInContext),
-        ),
-      };
-    });
   }
 
   private remoteSearch(
@@ -465,14 +384,13 @@ class MentionResource extends AbstractMentionResource {
   ): MentionsResult {
     const mentions = result.mentions.map((mention, index) => {
       let lozenge: string | undefined;
-      const weight = mention.weight !== undefined ? mention.weight : index;
       if (isAppMention(mention)) {
         lozenge = mention.userType;
       } else if (isTeamMention(mention)) {
         lozenge = mention.userType;
       }
 
-      return { ...mention, lozenge, weight, query };
+      return { ...mention, lozenge, query };
     });
 
     return { ...result, mentions, query: result.query || query };
