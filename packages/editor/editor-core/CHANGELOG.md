@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.7
+- [patch] [5f8b151](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f8b151):
+
+  - Open date picker on enter when date node is selected
+
 ## 95.0.6
 - [patch] [6855bec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6855bec):
 

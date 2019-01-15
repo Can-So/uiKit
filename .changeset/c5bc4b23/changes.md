@@ -1,1 +1,0 @@
-- Open date picker on enter when date node is selected
