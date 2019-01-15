@@ -37,6 +37,7 @@ import {
 import { SCALE_FACTOR_DEFAULT } from '../../../../util/getPreviewFromImage';
 
 describe('importFiles middleware', () => {
+  const expectUUID = expect.stringMatching(/[a-f0-9\-]+/);
   const todayDate = Date.now();
   interface SetupOptions {
     withSelectedItems: boolean;
@@ -167,6 +168,11 @@ describe('importFiles middleware', () => {
       withSelectedItems
         ? {
             uploads: localUploads,
+            config: {
+              uploadParams: {
+                collection: 'tenant-collection',
+              },
+            },
             selectedItems: [
               {
                 serviceName: 'upload',
@@ -246,7 +252,7 @@ describe('importFiles middleware', () => {
       return importFiles(eventEmitter, store, mockWsProvider).then(() => {
         expect(eventEmitter.emitUploadsStart).toBeCalledWith([
           {
-            id: expect.stringMatching(/[a-f0-9\-]+/),
+            id: expectUUID,
             name: 'picture1.jpg',
             type: 'image/jpg',
             size: 43,
@@ -255,7 +261,7 @@ describe('importFiles middleware', () => {
             occurrenceKey: 'occurrence-key-1',
           },
           {
-            id: expect.stringMatching(/[a-f0-9\-]+/),
+            id: expectUUID,
             name: 'picture3.jpg',
             type: 'image/jpg',
             size: 45,
@@ -264,7 +270,7 @@ describe('importFiles middleware', () => {
             occurrenceKey: 'occurrence-key-3',
           },
           {
-            id: expect.stringMatching(/[a-f0-9\-]+/),
+            id: expectUUID,
             name: 'picture4.jpg',
             type: 'image/jpg',
             size: 46,
@@ -273,7 +279,7 @@ describe('importFiles middleware', () => {
             occurrenceKey: 'occurrence-key-4',
           },
           {
-            id: expect.stringMatching(/[a-f0-9\-]+/),
+            id: expectUUID,
             name: 'picture5.jpg',
             type: 'image/jpg',
             size: 47,
@@ -301,7 +307,7 @@ describe('importFiles middleware', () => {
         return importFiles(eventEmitter, store, mockWsProvider).then(() => {
           expect(store.dispatch).toBeCalledWith(
             getPreview(
-              expect.stringMatching(/[a-f0-9\-]+/),
+              expectUUID,
               {
                 id: 'some-selected-item-id-4',
                 name: 'picture4.jpg',
@@ -359,7 +365,7 @@ describe('importFiles middleware', () => {
                 upfrontId,
                 occurrenceKey: 'occurrence-key-4',
               },
-              expect.stringMatching(/[a-f0-9\-]+/),
+              expectUUID,
               {
                 id: 'some-selected-item-id-4',
                 collection: RECENTS_COLLECTION,
@@ -424,16 +430,10 @@ describe('importFiles middleware', () => {
           ) as SetEventProxyAction[];
           expect(setEventProxyCalls).toHaveLength(2);
           expect(setEventProxyCalls[0]).toEqual(
-            setEventProxy(
-              'some-selected-item-id-1',
-              expect.stringMatching(/[a-f0-9\-]+/),
-            ),
+            setEventProxy('some-selected-item-id-1', expectUUID),
           );
           expect(setEventProxyCalls[1]).toEqual(
-            setEventProxy(
-              'some-selected-item-id-3',
-              expect.stringMatching(/[a-f0-9\-]+/),
-            ),
+            setEventProxy('some-selected-item-id-3', expectUUID),
           );
           done();
         });
@@ -465,9 +465,38 @@ describe('importFiles middleware', () => {
               fileId: 'some-selected-item-id-5',
               fileName: 'picture5.jpg',
               collection: RECENTS_COLLECTION,
-              jobId: expect.stringMatching(/[a-f0-9\-]+/),
+              jobId: expectUUID,
             },
           });
+          done();
+        });
+      });
+
+      it('should touch non local files', done => {
+        const { eventEmitter, mockWsProvider, store, nextDispatch } = setup();
+
+        importFilesMiddleware(eventEmitter, mockWsProvider)(store)(
+          nextDispatch,
+        )(action);
+
+        window.setTimeout(() => {
+          const { tenantContext } = store.getState();
+          expect(tenantContext.file.touchFiles).toBeCalledTimes(1);
+          expect(tenantContext.file.touchFiles).toBeCalledWith(
+            [
+              {
+                collection: 'tenant-collection',
+                fileId: expectUUID,
+                occurrenceKey: 'occurrence-key-4',
+              },
+              {
+                collection: 'tenant-collection',
+                fileId: expectUUID,
+                occurrenceKey: 'occurrence-key-5',
+              },
+            ],
+            'tenant-collection',
+          );
           done();
         });
       });
