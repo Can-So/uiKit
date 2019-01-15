@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.3
+- [patch] [61ce3c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/61ce3c5):
+
+  - ED-6015 Fix bug where cursor would jump to start of mention after hitting backspace after a mention
+
 ## 95.0.2
 - [patch] [6866eba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6866eba):
 

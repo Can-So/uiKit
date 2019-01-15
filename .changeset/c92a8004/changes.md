@@ -1,1 +1,0 @@
-- ED-6015 Fix bug where cursor would jump to start of mention after hitting backspace after a mention
