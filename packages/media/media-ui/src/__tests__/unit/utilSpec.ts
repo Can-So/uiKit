@@ -5,7 +5,7 @@ import {
   mockFileReaderWithError,
   unmockFileReader,
   mockFileReaderError,
-} from '../../test-helpers/mockFileReader';
+} from '@atlaskit/media-test-helpers';
 
 const GlobalFile = global.File;
 const GlobalFileCtor = (blobParts: [], filename: string, flags?: {}) =>

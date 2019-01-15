@@ -9,6 +9,7 @@ import {
   tableCellMinWidth,
 } from '@atlaskit/editor-common';
 import overflowShadow, { OverflowShadowProps } from '../../ui/overflow-shadow';
+import TableHeader from './tableHeader';
 
 export interface TableProps {
   columnWidths?: Array<number>;
@@ -22,12 +23,10 @@ const isHeaderRowEnabled = rows => {
     return false;
   }
   const { children } = rows[0].props;
-  for (let i = 0, len = children.length; i < len; i++) {
-    if (children[i].type.name === 'TableCell') {
-      return false;
-    }
+  if (!children.length) {
+    return false;
   }
-  return true;
+  return children[0].type === TableHeader;
 };
 
 const addNumberColumnIndexes = rows => {

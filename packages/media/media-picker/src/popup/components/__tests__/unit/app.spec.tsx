@@ -10,7 +10,10 @@ import { State } from '../../../domain';
 import ConnectedApp, { App, AppDispatchProps } from '../../app';
 import UploadView from '../../views/upload/upload';
 import Browser from '../../views/browser/browser';
-import { getComponentClassWithStore, mockStore } from '../../../mocks';
+import {
+  getComponentClassWithStore,
+  mockStore,
+} from '@atlaskit/media-test-helpers';
 import { fileUploadsStart } from '../../../actions/fileUploadsStart';
 import { UploadParams } from '../../../../domain/config';
 import { LocalBrowserButton } from '../../views/upload/uploadButton';

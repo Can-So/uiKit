@@ -1,7 +1,7 @@
 import { keymap } from 'prosemirror-keymap';
 import { Schema } from 'prosemirror-model';
-import { Plugin } from 'prosemirror-state';
-import { closeDatePicker } from './actions';
+import { Plugin, NodeSelection } from 'prosemirror-state';
+import { closeDatePicker, openDatePicker } from './actions';
 import * as keymaps from '../../keymaps';
 import { pluginKey, DateState } from './plugin';
 
@@ -12,8 +12,18 @@ export function keymapPlugin(schema: Schema): Plugin {
     keymaps.enter.common!,
     (state, dispatch) => {
       const datePlugin = pluginKey.getState(state) as DateState;
-      if (!datePlugin.showDatePickerAt) {
+      const isDateNode =
+        state.selection instanceof NodeSelection
+          ? state.selection.node.type === state.schema.nodes.date
+          : false;
+
+      if (!isDateNode) {
         return false;
+      }
+
+      if (!datePlugin.showDatePickerAt) {
+        openDatePicker()(state, dispatch);
+        return true;
       }
 
       closeDatePicker()(state, dispatch);

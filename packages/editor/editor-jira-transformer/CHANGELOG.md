@@ -1,5 +1,10 @@
 # @atlaskit/editor-jira-transformer
 
+## 5.2.0
+- [minor] [d351b2e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d351b2e):
+
+  - Support code blocks nested inside a list item
+
 ## 5.1.7
 - Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
   - @atlaskit/editor-json-transformer@4.1.5

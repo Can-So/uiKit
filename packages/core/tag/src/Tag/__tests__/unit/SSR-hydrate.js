@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import exenv from 'exenv';
-import Portal from '../..';
+import Tag from '../..';
 
 jest.mock('exenv', () => ({
   get canUseDOM() {
@@ -17,22 +17,9 @@ afterEach(() => {
   jest.resetAllMocks();
 });
 
-afterAll(() =>
-  document
-    .querySelectorAll('.atlaskit-portal')
-    .forEach(e => e.parentNode && e.parentNode.removeChild(e)),
-);
+const App = () => <Tag text="Base Tag" />;
 
-const App = () => (
-  <div>
-    <Portal>
-      <h1>:wave:</h1>
-    </Portal>
-    <p>Hi everyone</p>
-  </div>
-);
-
-test('should ssr then hydrate portal correctly', () => {
+test('should ssr then hydrate tag correctly', () => {
   const canUseDom = jest.spyOn(exenv, 'canUseDOM', 'get');
   // server-side
   canUseDom.mockReturnValue(false);
@@ -43,6 +30,4 @@ test('should ssr then hydrate portal correctly', () => {
   elem.innerHTML = serverHTML;
   ReactDOM.hydrate(<App />, elem);
   expect(console.error).not.toBeCalled();
-  expect(elem.getElementsByTagName('h1')).toHaveLength(0);
-  expect(document.getElementsByClassName('atlaskit-portal')).toHaveLength(1);
 });
