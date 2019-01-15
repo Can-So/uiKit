@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.4
+- [patch] [e082366](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e082366):
+
+  - ED-6045: fixed unable to select table row
+
 ## 95.0.3
 - [patch] [61ce3c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/61ce3c5):
 
