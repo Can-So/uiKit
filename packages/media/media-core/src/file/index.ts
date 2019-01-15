@@ -147,7 +147,6 @@ export class FileFetcher {
     id: string,
     collection?: string,
   ): Observable<FileState> => {
-    console.log('createDownloadFileStream(', id, ',', collection, ')');
     return Observable.create(async (observer: Observer<FileState>) => {
       let timeoutId: number;
 

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { HTMLAttributes, ComponentClass } from 'react';
 
-//TODO Extract common part from these:
+// TODO Extract common part from these:
 
 export const LineWidthPopupContainer: ComponentClass<
   HTMLAttributes<{}>

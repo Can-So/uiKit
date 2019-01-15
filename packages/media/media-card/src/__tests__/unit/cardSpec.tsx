@@ -363,6 +363,7 @@ describe('Card', () => {
     expect(context.file.getFileState).toHaveBeenCalledTimes(1);
     expect(context.file.getFileState).toBeCalledWith('some-random-id', {
       collectionName: 'some-collection-name',
+      occurrenceKey: 'some-occurrence-key',
     });
   });
 
