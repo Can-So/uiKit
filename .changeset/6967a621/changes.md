@@ -1,1 +1,0 @@
-- Move media mocks into right location to prevent them to be included in dist
