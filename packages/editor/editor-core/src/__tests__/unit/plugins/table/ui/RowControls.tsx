@@ -163,7 +163,7 @@ describe('RowControls', () => {
           .at(row)
           .find('button')
           .first()
-          .simulate('mousedown');
+          .simulate('click');
 
         // selecting the row mutates the editor state (which is inside editorView)
         // we set tableHeight prop to trick shouldComponentUpdate and force re-render
