@@ -4,7 +4,7 @@ import {
   mockLoadImage,
   mockLoadImageError,
   unMockLoadImage,
-} from '../../image-placer/test-helpers';
+} from '@atlaskit/media-test-helpers';
 
 const getCanvasMock = mockCanvas();
 

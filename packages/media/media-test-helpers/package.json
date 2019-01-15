@@ -29,6 +29,7 @@
     "@atlaskit/icon": "^15.0.0",
     "@atlaskit/media-card": "^49.0.0",
     "@atlaskit/media-core": "^26.0.0",
+    "@atlaskit/media-picker": "^29.0.2",
     "@atlaskit/media-store": "^9.1.1",
     "@atlaskit/media-ui": "^8.2.2",
     "@atlaskit/select": "^6.1.9",

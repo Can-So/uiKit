@@ -1,4 +1,4 @@
-import { State } from '../domain';
+import { State } from '@atlaskit/media-picker/src/popup/domain';
 import { Store } from 'react-redux';
 import { Observable } from 'rxjs/Observable';
 import { ContextFactory } from '@atlaskit/media-core';

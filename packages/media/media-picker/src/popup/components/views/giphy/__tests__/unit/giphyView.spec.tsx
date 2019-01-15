@@ -13,7 +13,7 @@ import {
   mockStore,
   mockState,
   getComponentClassWithStore,
-} from '../../../../../mocks';
+} from '@atlaskit/media-test-helpers';
 import ConnectedGiphyView, { GiphyView } from '../../giphyView';
 import { BricksLayout } from '../../bricksGrid';
 import {
