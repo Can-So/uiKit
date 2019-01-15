@@ -22,7 +22,6 @@
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/icon": "^15.0.2",
     "@atlaskit/inline-dialog": "^9.0.2",
-    "@atlaskit/media-card": "^49.0.0",
     "@atlaskit/media-ui": "^8.2.2",
     "@atlaskit/spinner": "^9.0.6",
     "@atlaskit/theme": "^7.0.2",
@@ -41,6 +40,7 @@
   "devDependencies": {
     "@atlaskit/build-utils": "^2.1.0",
     "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/media-card": "^49.0.0",
     "@atlaskit/media-core": "^26.0.0",
     "@atlaskit/media-test-helpers": "^18.9.1",
     "react-dom": "^16.4.2",
