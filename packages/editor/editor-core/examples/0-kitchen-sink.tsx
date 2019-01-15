@@ -148,9 +148,7 @@ export const Textarea: any = styled.textarea`
   border: 1px solid lightgray;
   font-family: monospace;
   font-size: 14px;
-
   padding: 1em;
-
   width: 100%;
   height: 80%;
 `;
@@ -210,6 +208,13 @@ export default class FullPageRendererExample extends React.Component<
     showErrors: false,
     waitingToValidate: false,
   };
+
+  private quickInsertProviderPromise = Promise.resolve(quickInsertProvider);
+  private cardProviderPromise = Promise.resolve(cardProvider);
+  private dataProviders = ProviderFactory.create({
+    ...providers,
+    mediaProvider,
+  });
 
   private inputRef: HTMLTextAreaElement | null;
   private popupMountPoint: HTMLElement | null;
@@ -337,7 +342,7 @@ export default class FullPageRendererExample extends React.Component<
                         appearance={this.state.appearance}
                         analyticsHandler={analyticsHandler}
                         quickInsert={{
-                          provider: Promise.resolve(quickInsertProvider),
+                          provider: this.quickInsertProviderPromise,
                         }}
                         allowCodeBlocks={{ enableKeybindingsForIDE: true }}
                         allowLists={true}
@@ -360,7 +365,7 @@ export default class FullPageRendererExample extends React.Component<
                         allowTextAlignment={true}
                         allowTemplatePlaceholders={{ allowInserting: true }}
                         UNSAFE_cards={{
-                          provider: Promise.resolve(cardProvider),
+                          provider: this.cardProviderPromise,
                         }}
                         allowStatus={true}
                         {...providers}
@@ -409,10 +414,7 @@ export default class FullPageRendererExample extends React.Component<
                           <ReactRenderer
                             document={this.state.adf}
                             adfStage="stage0"
-                            dataProviders={ProviderFactory.create({
-                              ...providers,
-                              mediaProvider,
-                            })}
+                            dataProviders={this.dataProviders}
                             // @ts-ignore
                             appearance={this.state.appearance}
                           />
