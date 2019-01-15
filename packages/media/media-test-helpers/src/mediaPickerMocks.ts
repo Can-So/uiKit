@@ -1,9 +1,15 @@
-import { State } from '../domain';
+import { State } from '@atlaskit/media-picker/src/popup/domain';
 import { Store } from 'react-redux';
 import { Observable } from 'rxjs/Observable';
 import { ContextFactory } from '@atlaskit/media-core';
 import { fakeContext } from '@atlaskit/media-test-helpers';
 
+if (typeof jest === 'undefined') {
+  // We need to do this since jest is not defined on browser integration tests
+  (global as any).jest = {
+    fn: () => ({ mockReturnValue() {} }),
+  };
+}
 export const mockState: State = {
   redirectUrl: 'some-redirect-url',
   view: {
@@ -92,7 +98,7 @@ export const mockFetcher = () => ({
 });
 
 export const mockIsWebGLNotAvailable = () => {
-  jest.mock('../tools/webgl', () => {
+  jest.mock('@atlaskit/media-picker/src/popup/tools/webgl', () => {
     return {
       isWebGLAvailable: jest.fn(() => {
         return false;

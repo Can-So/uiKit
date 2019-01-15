@@ -11,6 +11,12 @@ jest.mock('exenv', () => ({
   },
 }));
 
+jest.spyOn(global.console, 'error');
+
+afterEach(() => {
+  jest.resetAllMocks();
+});
+
 afterAll(() =>
   document
     .querySelectorAll('.atlaskit-portal')
@@ -36,6 +42,7 @@ test('should ssr then hydrate portal correctly', () => {
   const elem = document.createElement('div');
   elem.innerHTML = serverHTML;
   ReactDOM.hydrate(<App />, elem);
+  expect(console.error).not.toBeCalled();
   expect(elem.getElementsByTagName('h1')).toHaveLength(0);
   expect(document.getElementsByClassName('atlaskit-portal')).toHaveLength(1);
 });

@@ -23,6 +23,8 @@ import {
   createTable,
   insertTaskDecision,
   changeColor,
+  TypeAheadItem,
+  selectItem as selectTypeAheadItem,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
@@ -206,24 +208,17 @@ export default class WebBridgeImpl extends WebBridge
       return;
     }
 
+    const { state, dispatch } = this.editorView;
+
     switch (type) {
       case 'blockquote':
-        insertBlockType('blockquote')(
-          this.editorView.state,
-          this.editorView.dispatch,
-        );
+        insertBlockType('blockquote')(state, dispatch);
         return;
       case 'codeblock':
-        insertBlockType('codeblock')(
-          this.editorView.state,
-          this.editorView.dispatch,
-        );
+        insertBlockType('codeblock')(state, dispatch);
         return;
       case 'panel':
-        insertBlockType('panel')(
-          this.editorView.state,
-          this.editorView.dispatch,
-        );
+        insertBlockType('panel')(state, dispatch);
         return;
       case 'action':
         insertTaskDecision(this.editorView, 'taskList');
@@ -232,7 +227,7 @@ export default class WebBridgeImpl extends WebBridge
         insertTaskDecision(this.editorView, 'decisionList');
         return;
       case 'table':
-        createTable(this.editorView.state, this.editorView.dispatch);
+        createTable(state, dispatch);
         return;
 
       default:
@@ -240,6 +235,48 @@ export default class WebBridgeImpl extends WebBridge
         console.error(`${type} cannot be inserted as it's not supported`);
         return;
     }
+  }
+
+  insertTypeAheadItem(type: 'mention' | 'emoji', payload: string) {
+    if (!this.editorView) {
+      return;
+    }
+
+    const { state, dispatch } = this.editorView;
+    const item: TypeAheadItem = JSON.parse(payload);
+
+    selectTypeAheadItem(
+      {
+        selectItem: (state, item, insert) => {
+          if (type === 'mention') {
+            const { id, name, nickname, accessLevel, userType } = item;
+            const renderName = nickname ? nickname : name;
+            const mention = state.schema.nodes.mention.createChecked({
+              text: `@${renderName}`,
+              id,
+              accessLevel,
+              userType: userType === 'DEFAULT' ? null : userType,
+            });
+            return insert(mention);
+          }
+
+          return false;
+        },
+        // Needed for interface.
+        trigger: '',
+        getItems: () => [],
+      },
+      item,
+    )(state, dispatch);
+  }
+
+  setFocus() {
+    if (!this.editorView || this.editorView.hasFocus()) {
+      return false;
+    }
+
+    this.editorView.focus();
+    return true;
   }
 
   getRootElement(): HTMLElement | null {

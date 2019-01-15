@@ -2,7 +2,7 @@ import {
   mockStore,
   mockWsConnectionHolder,
   mockPopupUploadEventEmitter,
-} from '../../../mocks';
+} from '@atlaskit/media-test-helpers';
 
 import {
   importFilesMiddleware,

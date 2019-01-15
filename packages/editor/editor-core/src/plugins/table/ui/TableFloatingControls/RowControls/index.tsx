@@ -70,8 +70,9 @@ export default class RowControls extends Component<Props, any> {
               <button
                 type="button"
                 className={ClassName.CONTROLS_BUTTON}
-                onMouseDown={() => this.props.selectRow(startIndex)}
+                onClick={() => this.props.selectRow(startIndex)}
                 onMouseOver={() => this.props.hoverRows([startIndex])}
+                onMouseMove={e => e.preventDefault()}
                 onMouseOut={this.clearHoverSelection}
               >
                 {!isCellSelection(selection) && (
