@@ -205,24 +205,15 @@ export default class MediaSingleNode extends Component<
     };
 
     const MediaChild = (
-      <WithProviders
-        providers={['mediaProvider']}
-        providerFactory={this.mediaPluginState.options.providerFactory}
-        renderNode={({ mediaProvider }) => {
-          return (
-            <MediaItem
-              node={childNode}
-              view={this.props.view}
-              getPos={this.props.getPos}
-              cardDimensions={cardDimensions}
-              mediaProvider={mediaProvider}
-              selected={selected()}
-              onClick={this.selectMediaSingle}
-              onExternalImageLoaded={this.onExternalImageLoaded}
-              editorAppearance={editorAppearance}
-            />
-          );
-        }}
+      <MediaItem
+        node={childNode}
+        view={this.props.view}
+        getPos={this.props.getPos}
+        cardDimensions={cardDimensions}
+        selected={selected()}
+        onClick={this.selectMediaSingle}
+        onExternalImageLoaded={this.onExternalImageLoaded}
+        editorAppearance={editorAppearance}
       />
     );
 
@@ -236,6 +227,7 @@ export default class MediaSingleNode extends Component<
         state={this.props.view.state}
         appearance={this.mediaPluginState.options.appearance}
         selected={this.props.selected()}
+        mediaProvider={this.mediaPluginState.mediaProvider}
       >
         {MediaChild}
       </ResizableMediaSingle>

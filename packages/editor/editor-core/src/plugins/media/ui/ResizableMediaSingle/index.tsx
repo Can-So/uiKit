@@ -14,7 +14,6 @@ import {
 import { Wrapper } from './styled';
 import { Props, EnabledHandles } from './types';
 import Resizer, { handleSides } from './Resizer';
-import { fileStreamsCache } from '@atlaskit/media-core';
 
 const imageAlignmentMap = {
   left: 'start',
@@ -44,8 +43,9 @@ export default class ResizableMediaSingle extends React.Component<Props> {
     }
 
     const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
-    // TODO: use mediaContext don't use fileStreamsCache directly
-    const state = await fileStreamsCache.getCurrentState(
+    const { mediaProvider } = this.props;
+    const viewContext = await mediaProvider.viewContext;
+    const state = await viewContext.file.getCurrentState(
       getMediaNode!.attrs.id,
     );
     if (state.status !== 'error' && state.mediaType === 'image') {

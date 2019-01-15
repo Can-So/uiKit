@@ -3,6 +3,7 @@ import { MediaSingleProps } from '@atlaskit/editor-common';
 import { EditorState } from 'prosemirror-state';
 import { EditorAppearance } from '../../../../types';
 import { GridType } from '../../../grid/types';
+import { MediaProvider } from '../..';
 
 export type EnabledHandles = { left?: boolean; right?: boolean };
 
@@ -20,4 +21,5 @@ export type Props = MediaSingleProps & {
   containerWidth: number;
   appearance: EditorAppearance;
   selected: boolean;
+  mediaProvider: MediaProvider;
 };

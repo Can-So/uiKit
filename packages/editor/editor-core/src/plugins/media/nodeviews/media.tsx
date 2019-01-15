@@ -9,7 +9,6 @@ import {
   stateKey as mediaStateKey,
 } from '../pm-plugins/main';
 import { Context, ImageResizeMode } from '@atlaskit/media-core';
-import { MediaProvider } from '../pm-plugins/main';
 import {
   Card,
   CardDimensions,
@@ -36,7 +35,6 @@ export interface MediaNodeProps extends ReactNodeProps {
   providerFactory?: ProviderFactory;
   cardDimensions: CardDimensions;
   isMediaSingle?: boolean;
-  mediaProvider?: Promise<MediaProvider>;
   onClick?: CardOnClickCallback;
   onExternalImageLoaded?: (
     dimensions: { width: number; height: number },
@@ -46,7 +44,6 @@ export interface MediaNodeProps extends ReactNodeProps {
 
 export interface Props extends Partial<MediaBaseAttributes> {
   type: MediaType;
-  mediaProvider?: Promise<MediaProvider>;
   cardDimensions?: CardDimensions;
   onClick?: CardOnClickCallback;
   onDelete?: CardEventHandler;
@@ -79,7 +76,7 @@ class MediaNode extends Component<
     super(props);
     const { view } = this.props;
     this.pluginState = mediaStateKey.getState(view.state);
-    this.mediaProvider = props.mediaProvider;
+    this.mediaProvider = this.pluginState.mediaProvider;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -112,12 +109,9 @@ class MediaNode extends Component<
   }
 
   private updateMediaContext = async () => {
-    const mediaProvider = await this.mediaProvider;
-    if (mediaProvider) {
-      const viewContext = await mediaProvider.viewContext;
-      if (viewContext && this.hasBeenMounted) {
-        this.setState({ viewContext });
-      }
+    const viewContext = await this.mediaProvider.viewContext;
+    if (viewContext && this.hasBeenMounted) {
+      this.setState({ viewContext });
     }
   };
 
