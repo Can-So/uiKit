@@ -125,6 +125,13 @@ describe(name, () => {
           .at(1)
           .text(),
       ).toBe('Clinton');
+      expect(
+        bodyRows
+          .at(0)
+          .find('td')
+          .at(2)
+          .text(),
+      ).toBe('-1');
     });
 
     const checkSortedData = isRankable => {
@@ -192,6 +199,88 @@ describe(name, () => {
 
     it('should display sorted data in rankable table', () => {
       checkSortedData(true);
+    });
+
+    it('should sort numeric data correctly with zero values', () => {
+      const headCells = head.cells.map(cell => ({
+        ...cell,
+        isSortable: true,
+      }));
+      const wrapper = mount(
+        <DynamicTableStateless
+          sortKey="numeric"
+          sortOrder="ASC"
+          head={{ cells: headCells }}
+          rows={rowsWithKeys}
+          isRankable
+        />,
+      );
+      const bodyRows = wrapper.find('tbody tr');
+
+      expect(
+        bodyRows
+          .at(0)
+          .find('td')
+          .at(0)
+          .text(),
+      ).toBe('Hillary');
+      expect(
+        bodyRows
+          .at(0)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('Clinton');
+      expect(
+        bodyRows
+          .at(0)
+          .find('td')
+          .at(2)
+          .text(),
+      ).toBe('-1');
+
+      expect(
+        bodyRows
+          .at(1)
+          .find('td')
+          .at(0)
+          .text(),
+      ).toBe('Donald');
+      expect(
+        bodyRows
+          .at(1)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('Trump');
+      expect(
+        bodyRows
+          .at(1)
+          .find('td')
+          .at(2)
+          .text(),
+      ).toBe('0');
+      expect(
+        bodyRows
+          .at(2)
+          .find('td')
+          .at(0)
+          .text(),
+      ).toBe('Barack');
+      expect(
+        bodyRows
+          .at(2)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('Obama');
+      expect(
+        bodyRows
+          .at(2)
+          .find('td')
+          .at(2)
+          .text(),
+      ).toBe('1');
     });
 
     it('should pass down extra props', () => {
@@ -504,6 +593,83 @@ describe(name, () => {
           .at(1)
           .text(),
       ).toBe('Clinton');
+    });
+
+    it('should sort numeric data', () => {
+      const wrapper = mount(<DynamicTable head={head} rows={rows} />);
+      wrapper
+        .find('th')
+        .at(2)
+        .simulate('click');
+      wrapper.update();
+
+      const bodyRows = wrapper.find('tbody tr');
+
+      expect(
+        bodyRows
+          .at(0)
+          .find('td')
+          .at(0)
+          .text(),
+      ).toBe('Hillary');
+      expect(
+        bodyRows
+          .at(0)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('Clinton');
+      expect(
+        bodyRows
+          .at(0)
+          .find('td')
+          .at(2)
+          .text(),
+      ).toBe('-1');
+
+      expect(
+        bodyRows
+          .at(1)
+          .find('td')
+          .at(0)
+          .text(),
+      ).toBe('Donald');
+      expect(
+        bodyRows
+          .at(1)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('Trump');
+      expect(
+        bodyRows
+          .at(1)
+          .find('td')
+          .at(2)
+          .text(),
+      ).toBe('0');
+
+      expect(
+        bodyRows
+          .at(2)
+          .find('td')
+          .at(0)
+          .text(),
+      ).toBe('Barack');
+      expect(
+        bodyRows
+          .at(2)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('Obama');
+      expect(
+        bodyRows
+          .at(2)
+          .find('td')
+          .at(2)
+          .text(),
+      ).toBe('1');
     });
   });
 });
