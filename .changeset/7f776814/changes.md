@@ -1,1 +1,0 @@
-- ED-6026: unify attributes for blockCard and inlineCard; allow parseDOM using just 'data' attribute

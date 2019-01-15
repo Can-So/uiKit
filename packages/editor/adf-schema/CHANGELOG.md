@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.3.2
+- [patch] [a50c114](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a50c114):
+
+  - ED-6026: unify attributes for blockCard and inlineCard; allow parseDOM using just 'data' attribute
+
 ## 1.3.1
 - [patch] [7d9ccd7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7d9ccd7):
 
