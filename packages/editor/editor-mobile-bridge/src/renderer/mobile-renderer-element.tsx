@@ -41,7 +41,7 @@ export default class MobileRenderer extends React.Component<
 
     this.providerFactory = ProviderFactory.create({
       mediaProvider: MediaProvider,
-      mentionProvider: MentionProvider,
+      mentionProvider: Promise.resolve(MentionProvider),
       taskDecisionProvider: Promise.resolve(taskDecisionProvider),
       emojiProvider: Promise.resolve(EmojiProvider),
     });

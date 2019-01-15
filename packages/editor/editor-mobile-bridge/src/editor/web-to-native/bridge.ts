@@ -36,6 +36,11 @@ export interface StatusBridge {
   dismissStatusPicker(isNew: boolean);
 }
 
+export interface TypeAheadBridge {
+  dismissTypeAhead();
+  typeAheadQuery(query: string, trigger: string);
+}
+
 export default interface NativeBridge
   extends MentionBridge,
     TextFormattingBridge,

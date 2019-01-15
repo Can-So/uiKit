@@ -361,23 +361,25 @@ export default class ExamplesModal extends React.Component<Props, State> {
     return (
       <Modal
         autoFocus={false}
-        body={ModalBody}
-        header={({ showKeyline }) => (
-          <ModalHeaderComp
-            afterDeployError={null}
-            showKeyline={showKeyline}
-            packageId={packageId}
-            example={example}
-            examples={examples}
-            exampleId={exampleId}
-            groupId={groupId}
-            pkgJSON={pkgJSON}
-            displayCode={displayCode}
-            loaderUrl={loaderUrl}
-            onCodeToggle={this.onCodeToggle}
-            close={this.close}
-          />
-        )}
+        components={{
+          Header: ({ showKeyline }) => (
+            <ModalHeaderComp
+              afterDeployError={null}
+              showKeyline={showKeyline}
+              packageId={packageId}
+              example={example}
+              examples={examples}
+              exampleId={exampleId}
+              groupId={groupId}
+              pkgJSON={pkgJSON}
+              displayCode={displayCode}
+              loaderUrl={loaderUrl}
+              onCodeToggle={this.onCodeToggle}
+              close={this.close}
+            />
+          ),
+          Body: ModalBody,
+        }}
         height="100%"
         onClose={this.close}
         width={1180}

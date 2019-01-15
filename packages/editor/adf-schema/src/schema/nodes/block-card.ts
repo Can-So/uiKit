@@ -30,19 +30,22 @@ export const blockCard: NodeSpec = {
   },
   parseDOM: [
     {
-      tag: 'div[data-block-card-url]',
-      getAttrs: dom => ({
-        url: (dom as HTMLElement).getAttribute('data-block-card-url'),
-        data: JSON.parse(
-          (dom as HTMLElement).getAttribute('data-block-card-data') || '{}',
-        ),
-      }),
+      tag: 'div[data-block-card]',
+      getAttrs: dom => {
+        const data = (dom as HTMLElement).getAttribute('data-card-data');
+
+        return {
+          url: (dom as HTMLElement).getAttribute('data-card-url'),
+          data: data ? JSON.parse(data) : null,
+        };
+      },
     },
   ],
   toDOM(node: PMNode) {
     const attrs = {
-      'data-block-card-url': node.attrs.url,
-      'data-block-card-data': JSON.stringify(node.attrs.data),
+      'data-block-card': '',
+      'data-card-url': node.attrs.url,
+      'data-card-data': node.attrs.data ? JSON.stringify(node.attrs.data) : '',
     };
     return ['div', attrs];
   },

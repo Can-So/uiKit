@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.4.2
+- [patch] [76ed7f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76ed7f0):
+
+  - Update Specs
+
 ## 5.4.1
 - [patch] [57cffcb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/57cffcb):
 

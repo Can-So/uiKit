@@ -31,6 +31,12 @@ describe('SizeableAvatar', () => {
     expect(avatar.prop('size')).toEqual('medium');
   });
 
+  it('should render xsmall Avatar with multi appearance', () => {
+    const component = shallowSizeableAvatar({ appearance: 'multi' });
+    const avatar = component.find(Avatar);
+    expect(avatar.prop('size')).toEqual('xsmall');
+  });
+
   it('should set presence in Avatar component', () => {
     const component = shallowSizeableAvatar({ presence: 'online' });
     const avatar = component.find(Avatar);

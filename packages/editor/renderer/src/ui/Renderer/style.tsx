@@ -119,7 +119,7 @@ export const Wrapper = styled.div < Props & HTMLAttributes < {} >> `
 
   & span.date-node {
     background: ${colors.N30A};
-    border-radius: ${borderRadius()};
+    border-radius: ${borderRadius()}px;
     color: ${colors.N800};
     padding: 2px 4px;
     margin: 0 1px;
