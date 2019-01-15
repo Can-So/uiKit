@@ -25,12 +25,12 @@ export default ({ cloudId }) => {
                 </Section>
               )}
               {isLoadingCustomLinks ? (
-                'Loading Seconds Section...'
+                'Loading Custom Links...'
               ) : (
-                <Section title="Second Section">
-                  <Item>First Item</Item>
-                  <Item>Second Item</Item>
-                  <Item>{JSON.stringify(customLinksData)}</Item>
+                <Section title="Custom Links">
+                  {customLinksData.map(({ label }) => (
+                    <Item>{label}</Item>
+                  ))}
                 </Section>
               )}
               <ManageButton />
