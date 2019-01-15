@@ -1,0 +1,1 @@
+- Fixed date border radius in renderer
