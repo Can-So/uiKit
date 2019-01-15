@@ -4,10 +4,10 @@ import AkButton from '@atlaskit/button';
 
 import { startAuth } from '../../../../../../actions';
 import { ServiceAccountLink } from '../../../../../../domain';
-import { mockState, mockStore } from '../../../../../../mocks';
+import { mockState, mockStore } from '@atlaskit/media-test-helpers';
 import { StatelessAuth, default as ConnectedAuth } from '../../auth';
 
-import { getComponentClassWithStore } from '../../../../../../mocks/index';
+import { getComponentClassWithStore } from '@atlaskit/media-test-helpers';
 
 const ConnectedAuthWithStore = getComponentClassWithStore(ConnectedAuth);
 
