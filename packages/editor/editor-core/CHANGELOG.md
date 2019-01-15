@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.6
+- [patch] [6855bec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6855bec):
+
+  - Updated internal use of ModalDialog to use new composition API
+
 ## 95.0.5
 - [patch] [844feea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/844feea):
 
