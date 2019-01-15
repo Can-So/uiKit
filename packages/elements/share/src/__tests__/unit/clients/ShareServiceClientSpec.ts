@@ -2,8 +2,8 @@ import { utils } from '@atlaskit/util-service-support';
 import {
   ShareServiceClientImpl,
   ShareServiceClient,
-  SHARE_SERVICE_URL,
-  SHARE_PATH,
+  DEFAULT_SHARE_SERVICE_URL,
+  DEFAULT_SHARE_PATH,
 } from '../../../clients/ShareServiceClient';
 
 describe('ShareServiceClientImpl', () => {
@@ -22,7 +22,7 @@ describe('ShareServiceClientImpl', () => {
   let mockComment: 'comment';
 
   beforeEach(() => {
-    requestSpy = jest.spyOn(utils, 'requestService');
+    requestSpy = jest.spyOn(utils, 'requestService').mockResolvedValue({});
     shareServiceClient = new ShareServiceClientImpl();
   });
 
@@ -31,7 +31,7 @@ describe('ShareServiceClientImpl', () => {
   });
 
   describe('share', () => {
-    it('should call requestService with serviceConfig and options object', async () => {
+    it('should call requestService with default serviceConfig and options object', async () => {
       await shareServiceClient.share(
         mockContent,
         mockRecipients,
@@ -41,10 +41,10 @@ describe('ShareServiceClientImpl', () => {
       expect(requestSpy).toBeCalledTimes(1);
       const callArgs = requestSpy.mock.calls[0];
       expect(callArgs[0]).toMatchObject({
-        url: SHARE_SERVICE_URL,
+        url: DEFAULT_SHARE_SERVICE_URL,
       });
       expect(callArgs[1]).toMatchObject({
-        path: SHARE_PATH,
+        path: DEFAULT_SHARE_PATH,
         requestInit: {
           method: 'post',
           headers: {
@@ -60,51 +60,20 @@ describe('ShareServiceClientImpl', () => {
       });
     });
 
-    it('should return the error instance if the requestService throws an error', async () => {
-      const mockError = new Error('Bad Request');
-      requestSpy.mockRejectedValue(mockError);
-      const result = await shareServiceClient.share(
-        mockContent,
-        mockRecipients,
-        mockMetaData,
-        mockComment,
-      );
-      expect(result).toEqual(mockError);
-    });
-
-    it('should return the resolved value by the requestService', async () => {
-      const mockResponse = {
-        contentAri: 'contentAri',
-        statuses: [
-          {
-            shareId: 'shareId1',
-            recipient: {
-              id: 'id',
-            },
-            status: 'PENDING_INVITE',
-          },
-          {
-            shareId: 'shareId2',
-            recipient: {
-              email: 'email',
-            },
-            status: 'INVITED',
-          },
-        ],
-        metadata: {
-          ...mockMetaData,
-          numberOfSharesToAtlassianAccountHolders: 1,
-          numberOfSharesToNewUsers: 0,
-        },
+    it('should call requestService with configurable serviceConfig', async () => {
+      const mockServiceConfig = {
+        url: 'customurl',
       };
-      requestSpy.mockResolvedValue(mockResponse);
-      const result = await shareServiceClient.share(
+      shareServiceClient = new ShareServiceClientImpl(mockServiceConfig);
+      await shareServiceClient.share(
         mockContent,
         mockRecipients,
         mockMetaData,
         mockComment,
       );
-      expect(result).toEqual(mockResponse);
+      expect(requestSpy).toBeCalledTimes(1);
+      const callArgs = requestSpy.mock.calls[0];
+      expect(callArgs[0]).toMatchObject(mockServiceConfig);
     });
   });
 });
