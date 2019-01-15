@@ -28,12 +28,14 @@ export default ({ cloudId }) => {
                 'Loading Custom Links...'
               ) : (
                 <Section title="Custom Links">
-                  {customLinksData.map(({ label }) => (
-                    <Item>{label}</Item>
+                  {customLinksData[0].map(({ key, label }) => (
+                    <Item key={key}>{label}</Item>
                   ))}
                 </Section>
               )}
-              <ManageButton />
+              <ManageButton
+                onClick={() => (window.location = customLinksData[1])}
+              />
             </AppSwitcherWrapper>
           )}
         </CustomLinksProvider>

@@ -15,12 +15,14 @@ export default () => {
             'Loading Custom Links...'
           ) : (
             <Section title="Custom Links">
-              {customLinksData.map(({ label }) => (
+              {customLinksData[0].map(({ label }) => (
                 <Item>{label}</Item>
               ))}
             </Section>
           )}
-          <ManageButton />
+          <ManageButton
+            onClick={() => (window.location = customLinksData[1])}
+          />
         </AppSwitcherWrapper>
       )}
     </CustomLinksProvider>
