@@ -14,7 +14,7 @@ export type StatusType = {
 };
 
 export type StatusState = {
-  autoFocus: boolean;
+  isNew: boolean;
   showStatusPickerAt: number | null;
   selectionChanges: SelectionChange;
   selectedStatus: StatusType | null;
@@ -49,7 +49,7 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
   new Plugin({
     state: {
       init: () => ({
-        autoFocus: false,
+        isNew: false,
         selectionChanges: new SelectionChange(),
         showStatusPickerAt: null,
         selectedStatus: null,

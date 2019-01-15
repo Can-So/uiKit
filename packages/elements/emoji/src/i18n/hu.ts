@@ -15,7 +15,6 @@ export default {
   'fabric.emoji.retry.label': 'Próbálja újra',
   'fabric.emoji.cancel.label': 'Mégse',
   'fabric.emoji.search.label': 'Keresés',
-  'fabric.emoji.search.placeholder': 'Keresés',
   'fabric.emoji.categories.search.results': 'Keresési eredmények',
   'fabric.emoji.category.frequent': 'Gyakori',
   'fabric.emoji.category.people': 'Személyek',

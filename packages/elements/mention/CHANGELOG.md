@@ -1,5 +1,10 @@
 # @atlaskit/mention
 
+## 16.0.0
+- [major] [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
+
+  - Removed client-side indexed cache of mention results. Also removed method 'getUsersInContext' from MentionResourceConfig, 'remoteSearch' from MentionStats and 'weight' from MentionDescription. If you used to use them, simply remove any references to them.
+
 ## 15.3.0
 - [minor] [c238c00](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c238c00):
 

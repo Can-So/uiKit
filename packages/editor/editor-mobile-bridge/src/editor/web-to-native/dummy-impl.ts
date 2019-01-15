@@ -30,11 +30,18 @@ export default class DummyBridge implements NativeBridge {
   updateListState(listState: string) {
     this.log(`updateListState(listState=${listState})`);
   }
-  showStatusPicker(text: string, color: StatusColor, uuid: string) {
-    this.log(`showStatusPicker(text=${text}, color=${color}, uuid=${uuid})`);
+  showStatusPicker(
+    text: string,
+    color: StatusColor,
+    uuid: string,
+    isNew: boolean,
+  ) {
+    this.log(
+      `showStatusPicker(text=${text}, color=${color}, uuid=${uuid}), isNew=${isNew})`,
+    );
   }
-  dismissStatusPicker() {
-    this.log('dismissStatusPicker');
+  dismissStatusPicker(isNew: boolean) {
+    this.log(`dismissStatusPicker(isNew=${isNew})`);
   }
 
   call<T extends EditorPluginBridges>(

@@ -2,7 +2,6 @@ export default {
   type: 'array',
   items: [
     [
-      'table',
       'paragraph_with_no_marks',
       'bulletList',
       'mediaSingle',
@@ -16,6 +15,7 @@ export default {
       'applicationCard',
       'decisionList',
       'taskList',
+      'table',
       'extension',
       'blockCard',
     ],

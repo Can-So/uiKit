@@ -67,7 +67,7 @@ const floatingToolbarLanguageSelector = 'div[aria-label="Floating Toolbar"]';
     `code-block: code block selected language correctly changes when moving selection directly from one code block to another for ${
       editor.name
     }`,
-    { skip: ['ie', 'safari'] },
+    { skip: ['ie', 'safari', 'edge'] },
     async client => {
       const page = new Page(client);
       await page.goto(editor.path);
@@ -76,13 +76,15 @@ const floatingToolbarLanguageSelector = 'div[aria-label="Floating Toolbar"]';
       // Insert code block
       await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
       await page.waitForSelector(selectQuery);
+
       // Change code block language
       await page.type(selectQuery, ['javascript', 'Return']);
       await page.click(editable);
       // Move out of code block
-      await page.type(editable, ['ArrowDown']);
+      await page.type(editable, ['ArrowRight', 'Return']);
       // Insert a second code block
       await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+
       // Make sure the second code block doesn't have a language set.
       await page.waitForSelector(selectQuery);
       const secondCodeblockInitialLanguage = await page.getText(

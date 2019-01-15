@@ -285,13 +285,13 @@ describe('status plugin: actions', () => {
       const { dispatch } = editorView;
 
       let pluginState = pluginKey.getState(editorView.state);
-      expect(pluginState.autoFocus).toEqual(false);
+      expect(pluginState.isNew).toEqual(false);
 
       // Simulate quick insert, without quick insert
       dispatch(createStatus(-1)(insert(editorView), editorView.state));
 
       pluginState = pluginKey.getState(editorView.state);
-      expect(pluginState.autoFocus).toEqual(true);
+      expect(pluginState.isNew).toEqual(true);
 
       updateStatus({
         color: 'green',
@@ -300,7 +300,7 @@ describe('status plugin: actions', () => {
       })(editorView);
 
       pluginState = pluginKey.getState(editorView.state);
-      expect(pluginState.autoFocus).toEqual(true);
+      expect(pluginState.isNew).toEqual(true);
     });
 
     it('focus on input field should not be set when updating', () => {
@@ -321,7 +321,7 @@ describe('status plugin: actions', () => {
       setStatusPickerAt(selectionFrom)(editorView.state, editorView.dispatch);
 
       let pluginState = pluginKey.getState(editorView.state);
-      expect(pluginState.autoFocus).toEqual(false);
+      expect(pluginState.isNew).toEqual(false);
 
       updateStatus({
         color: 'green',
@@ -329,11 +329,11 @@ describe('status plugin: actions', () => {
         localId: '666',
       })(editorView);
       pluginState = pluginKey.getState(editorView.state);
-      expect(pluginState.autoFocus).toEqual(false);
+      expect(pluginState.isNew).toEqual(false);
 
       commitStatusPicker()(editorView);
       pluginState = pluginKey.getState(editorView.state);
-      expect(pluginState.autoFocus).toEqual(false);
+      expect(pluginState.isNew).toEqual(false);
     });
   });
 });

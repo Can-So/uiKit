@@ -50,11 +50,12 @@ class InlineCardNode extends React.PureComponent<Props, {}> {
   }
 }
 
+const ClickableInlineCard = wrapComponentWithClickArea(InlineCardNode, true);
+
 export default class WrappedInline extends React.PureComponent<Props, {}> {
   render() {
-    const WrappedComponent = wrapComponentWithClickArea(InlineCardNode, true);
     return (
-      <WrappedComponent
+      <ClickableInlineCard
         {...this.props}
         pluginState={ReactNodeViewState.getState(this.props.view.state)}
       />

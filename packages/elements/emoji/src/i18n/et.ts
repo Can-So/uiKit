@@ -14,7 +14,6 @@ export default {
   'fabric.emoji.retry.label': 'Proovi uuesti',
   'fabric.emoji.cancel.label': 'Tühista',
   'fabric.emoji.search.label': 'Otsi',
-  'fabric.emoji.search.placeholder': 'Otsi',
   'fabric.emoji.categories.search.results': 'Otsingu tulemused',
   'fabric.emoji.category.frequent': 'Sage',
   'fabric.emoji.category.people': 'Inimesed',

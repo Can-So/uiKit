@@ -9,7 +9,7 @@ import { DEFAULT_STATUS } from '../actions';
 import { StatusType } from '../plugin';
 import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
-import { createStatusAnalyticsAndFire } from '../analytics';
+import { analyticsState, createStatusAnalyticsAndFire } from '../analytics';
 
 const PopupWithListeners = withOuterListeners(Popup);
 
@@ -23,9 +23,9 @@ export interface Props {
   target: HTMLElement | null;
   closeStatusPicker: () => void;
   onSelect: (status: StatusType) => void;
-  onTextChanged: (status: StatusType) => void;
+  onTextChanged: (status: StatusType, isNew: boolean) => void;
   onEnter: (status: StatusType) => void;
-  autoFocus?: boolean;
+  isNew?: boolean;
   defaultText?: string;
   defaultColor?: Color;
   defaultLocalId?: string;
@@ -76,6 +76,7 @@ class StatusPicker extends React.Component<Props, State> {
         textLength: text ? text.length : 0,
         selectedColor: color,
         localId,
+        state: analyticsState(this.props.isNew),
       },
     });
   }
@@ -93,6 +94,7 @@ class StatusPicker extends React.Component<Props, State> {
         textLength: text ? text.length : 0,
         selectedColor: color,
         localId,
+        state: analyticsState(this.props.isNew),
       },
     });
 
@@ -134,7 +136,7 @@ class StatusPicker extends React.Component<Props, State> {
   );
 
   render() {
-    const { autoFocus, target } = this.props;
+    const { isNew, target } = this.props;
     const { color, text } = this.state;
     return (
       target && (
@@ -149,7 +151,7 @@ class StatusPicker extends React.Component<Props, State> {
         >
           <PickerContainer onClick={this.handlePopupClick}>
             <AkStatusPicker
-              autoFocus={autoFocus}
+              autoFocus={isNew}
               selectedColor={color}
               text={text}
               onColorClick={this.onColorClick}
@@ -170,6 +172,7 @@ class StatusPicker extends React.Component<Props, State> {
       attributes: {
         color,
         localId: this.state.localId,
+        state: analyticsState(this.props.isNew),
       },
     });
   };
@@ -190,6 +193,7 @@ class StatusPicker extends React.Component<Props, State> {
       attributes: {
         color,
         localId,
+        state: analyticsState(this.props.isNew),
       },
     });
   };
@@ -197,11 +201,14 @@ class StatusPicker extends React.Component<Props, State> {
   private onTextChanged = text => {
     const { color, localId } = this.state;
     this.setState({ text });
-    this.props.onTextChanged({
-      text,
-      color,
-      localId,
-    });
+    this.props.onTextChanged(
+      {
+        text,
+        color,
+        localId,
+      },
+      !!this.props.isNew,
+    );
   };
 
   private onEnter = () => {

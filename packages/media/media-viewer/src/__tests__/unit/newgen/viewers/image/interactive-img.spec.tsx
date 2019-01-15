@@ -213,6 +213,14 @@ describe('InteractiveImg', () => {
       expect(el.find(Img).prop('isDragging')).toEqual(false);
     });
   });
+
+  it('only applies image-rendering css props when zoom level greater than 1 (zoomed in)', () => {
+    const { el } = createFixture();
+
+    expect(el.find(Img)).not.toHaveStyleRule('image-rendering', 'pixelated');
+    clickZoomIn(el);
+    expect(el.find(Img)).toHaveStyleRule('image-rendering', 'pixelated');
+  });
 });
 
 describe('zoomLevelAfterResize', () => {
