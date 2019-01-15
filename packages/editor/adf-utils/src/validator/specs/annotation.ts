@@ -4,10 +4,7 @@ export default {
     attrs: {
       props: {
         id: { type: 'string' },
-        annotationType: {
-          type: 'enum',
-          values: ['inlineComment'],
-        },
+        annotationType: { type: 'enum', values: ['inlineComment'] },
       },
     },
   },
