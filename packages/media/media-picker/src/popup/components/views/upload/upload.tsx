@@ -317,10 +317,10 @@ export class StatelessUploadView extends Component<
     return itemsKeys.map(key => {
       const item = this.props.uploads[key];
       const { file } = item;
-      const mimeType = getMediaTypeFromMimeType(file.metadata.mimeType);
+      const mediaType = getMediaTypeFromMimeType(file.metadata.mimeType);
       const fileMetadata: LocalUploadFileMetadata = {
         ...file.metadata,
-        mimeType,
+        mimeType: mediaType,
       };
       const {
         id,
@@ -333,7 +333,7 @@ export class StatelessUploadView extends Component<
       const selected = selectedUploadIds.indexOf(id) > -1;
       const serviceFile: ServiceFile = {
         id,
-        mimeType,
+        mimeType: mediaType,
         name,
         size,
         upfrontId,

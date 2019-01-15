@@ -66,11 +66,13 @@ export class SmartMediaEditor extends React.Component<
             setTimeout(() => getFileSubscription.unsubscribe(), 0);
           } else if (state.status === 'error') {
             onError(state.message);
+            setTimeout(() => getFileSubscription.unsubscribe(), 0);
           } else if (state.preview) {
             const base64ImageUrl = await fileToBase64(state.preview.blob);
             this.setState({
               imageUrl: base64ImageUrl,
             });
+            setTimeout(() => getFileSubscription.unsubscribe(), 0);
           }
         },
         error: error => {
@@ -87,7 +89,6 @@ export class SmartMediaEditor extends React.Component<
       collection: identifier.collectionName,
       mode: 'full-fit',
     });
-
     this.setState({
       imageUrl,
     });
@@ -95,7 +96,13 @@ export class SmartMediaEditor extends React.Component<
 
   onSave = (imageData: string) => {
     const { fileName } = this;
-    const { context, identifier, onUploadStart, onFinish } = this.props;
+    const {
+      context,
+      identifier,
+      onUploadStart,
+      onFinish,
+      onError,
+    } = this.props;
     const { collectionName, occurrenceKey } = identifier;
     const uploadableFile: UploadableFile = {
       content: imageData,
@@ -121,15 +128,31 @@ export class SmartMediaEditor extends React.Component<
       occurrenceKey,
     };
 
-    context.file.upload(uploadableFile, undefined, uploadableFileUpfrontIds);
-
+    const uploadingFileState = context.file.upload(
+      uploadableFile,
+      undefined,
+      uploadableFileUpfrontIds,
+    );
+    const uploadingFileStateSubscription = uploadingFileState.subscribe({
+      next: fileState => {
+        if (fileState.status === 'processed') {
+          onFinish();
+          setTimeout(() => uploadingFileStateSubscription.unsubscribe(), 0);
+        } else if (fileState.status === 'failed-processing') {
+          onError(new Error('Failed to process'));
+          setTimeout(() => uploadingFileStateSubscription.unsubscribe(), 0);
+        } else if (fileState.status === 'error') {
+          onError(new Error(fileState.message));
+          setTimeout(() => uploadingFileStateSubscription.unsubscribe(), 0);
+        }
+      },
+    });
     const newFileIdentifier: FileIdentifier = {
       id,
       collectionName,
       mediaItemType: 'file',
     };
     onUploadStart(newFileIdentifier);
-    onFinish();
   };
 
   onCancel = () => {

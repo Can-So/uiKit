@@ -48,6 +48,10 @@ export class Toolbar extends Component<
 > {
   state: ToolbarState = { popup: 'none' };
 
+  onColorButtonClick = () => this.showOrHidePopup('color');
+  onLineWidthButtonClick = () => this.showOrHidePopup('lineWidth');
+  onShapeButtonClick = () => this.showOrHidePopup('shape');
+
   render() {
     const {
       color,
@@ -59,14 +63,11 @@ export class Toolbar extends Component<
       onCancel,
       intl: { formatMessage },
     } = this.props;
+    const { popup } = this.state;
 
-    const onColorButtonClick = () => this.showOrHidePopup('color');
-    const onLineWidthButtonClick = () => this.showOrHidePopup('lineWidth');
-    const onShapeButtonClick = () => this.showOrHidePopup('shape');
-
-    const showColorPopup = this.state.popup === 'color';
-    const showLineWidthPopup = this.state.popup === 'lineWidth';
-    const showShapePopup = this.state.popup === 'shape';
+    const showColorPopup = popup === 'color';
+    const showLineWidthPopup = popup === 'lineWidth';
+    const showShapePopup = popup === 'shape';
 
     const onPickColor = (color: Color) => {
       onColorChanged(color);
@@ -94,7 +95,7 @@ export class Toolbar extends Component<
             >
               <div>
                 <ShapeButton
-                  onClick={onShapeButtonClick}
+                  onClick={this.onShapeButtonClick}
                   isActive={isShapeTool}
                   activeShape={tool}
                 />
@@ -114,7 +115,7 @@ export class Toolbar extends Component<
                 <LineWidthButton
                   lineWidth={lineWidth}
                   isActive={showLineWidthPopup}
-                  onClick={onLineWidthButtonClick}
+                  onClick={this.onLineWidthButtonClick}
                 />
               </div>
             </LineWidthPopup>
@@ -128,7 +129,7 @@ export class Toolbar extends Component<
                 <ColorButton
                   color={color}
                   isActive={showColorPopup}
-                  onClick={onColorButtonClick}
+                  onClick={this.onColorButtonClick}
                 />
               </div>
             </ColorPopup>

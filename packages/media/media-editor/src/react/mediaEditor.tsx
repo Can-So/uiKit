@@ -172,21 +172,21 @@ export class MediaEditor extends React.Component<
     this.canvas = canvas;
   };
 
+  private renderSpinner = () => (
+    <SpinnerWrapper>
+      <Spinner size="large" invertColor={true} />
+    </SpinnerWrapper>
+  );
+
   render() {
     const { isImageLoaded } = this.state;
     const { dimensions } = this.props;
     const width = `${dimensions.width}px`;
     const height = `${dimensions.height}px`;
 
-    const loadingSpinner = (
-      <SpinnerWrapper>
-        <Spinner size="large" invertColor={true} />
-      </SpinnerWrapper>
-    );
-
     return (
       <EditorContainer style={{ width, height }}>
-        {!isImageLoaded ? loadingSpinner : null}
+        {!isImageLoaded ? this.renderSpinner() : null}
         <OutputArea
           innerRef={this.handleOutputAreaInnerRef}
           style={{ width, height }}
