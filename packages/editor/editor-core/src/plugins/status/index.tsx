@@ -52,7 +52,7 @@ const baseStatusPlugin = (): EditorPlugin => ({
 
           return (
             <StatusPicker
-              autoFocus={statusState.autoFocus}
+              isNew={statusState.isNew}
               target={target}
               defaultText={text}
               defaultColor={color}

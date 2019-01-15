@@ -65,12 +65,17 @@ export default class AndroidBridge implements NativeBridge {
     this.listBridge.updateListState(listState);
   }
 
-  showStatusPicker(text: string, color: StatusColor, uuid: string) {
-    this.statusBridge.showStatusPicker(text, color, uuid);
+  showStatusPicker(
+    text: string,
+    color: StatusColor,
+    uuid: string,
+    isNew: boolean,
+  ) {
+    this.statusBridge.showStatusPicker(text, color, uuid, isNew);
   }
 
-  dismissStatusPicker() {
-    this.statusBridge.dismissStatusPicker();
+  dismissStatusPicker(isNew: boolean) {
+    this.statusBridge.dismissStatusPicker(isNew);
   }
 
   call<T extends EditorPluginBridges>(

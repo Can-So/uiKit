@@ -11,7 +11,7 @@ import { TableCssClassName as ClassName } from '../../../plugins/table/types';
 
 BrowserTestCase(
   'delete-last-row.ts: Delete last table row with empty action',
-  { skip: ['ie'] },
+  { skip: ['ie', 'edge'] },
   async client => {
     const FIRST_CELL_FROM_LAST_ROW =
       'table > tbody > tr:last-child > td:first-child';
@@ -27,7 +27,7 @@ BrowserTestCase(
     await browser.click(FIRST_CELL_FROM_LAST_ROW);
 
     // Add empty action on first cell from last row
-    await quickInsert(browser, 'Action Item');
+    await quickInsert(browser, 'Action item');
 
     // Select button wrapper from last row
     const controlSelector = `.${ClassName.ROW_CONTROLS_WRAPPER} .${
@@ -40,7 +40,7 @@ BrowserTestCase(
     const deleteButtonSelector = `.${ClassName.CONTROLS_DELETE_BUTTON_WRAP} .${
       ClassName.CONTROLS_DELETE_BUTTON
     }`;
-    await browser.waitForSelector(deleteButtonSelector);
+    await browser.waitForVisible(deleteButtonSelector);
     await browser.click(deleteButtonSelector);
 
     const doc = await browser.$eval(editable, getDocFromElement);

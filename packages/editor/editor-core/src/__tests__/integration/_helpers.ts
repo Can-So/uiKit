@@ -22,6 +22,13 @@ export const insertMention = async (browser, query: string) => {
   await browser.type(editable, 'Return');
 };
 
+export const gotoEditor = async browser => {
+  await browser.goto(fullpage.path);
+  await browser.waitForSelector(fullpage.placeholder);
+  await browser.click(fullpage.placeholder);
+  await browser.waitForSelector(editable);
+};
+
 export const insertMentionUsingClick = async (browser, mentionId: string) => {
   await browser.type(editable, '@');
   await browser.waitForSelector(typeAheadPicker);
@@ -223,46 +230,11 @@ export const changeSelectedNodeLayout = async (page, layoutName) => {
  */
 
 export const quickInsert = async (browser, insertTitle) => {
-  const firstTitleWord = insertTitle.split(' ')[0];
+  await browser.type(editable, `/${insertTitle.split(' ')[0]}`);
+  await browser.waitForSelector('div[aria-label="Popup"]');
+  await browser.waitForSelector(
+    `[aria-label="Popup"] [role="button"][aria-describedby="${insertTitle}"]`,
+  );
 
-  // Quick insert doesnt work in FF, as `keys` isn't supported.
-  if (browser.browser.desiredCapabilities.browserName === 'firefox') {
-    await quickInsertActiveElement(browser, firstTitleWord);
-  } else {
-    await browser.keys('/');
-    await browser.waitForSelector('div[aria-label="Popup"]');
-    await browser.keys(firstTitleWord);
-  }
-
-  await browser.browser.waitUntil(async () => {
-    let firstInsertText = await browser.browser.getText(
-      '[aria-label="Popup"] [role="button"]',
-    );
-    if (Array.isArray(firstInsertText)) {
-      firstInsertText = firstInsertText[0];
-    }
-
-    return firstInsertText && firstInsertText.startsWith(firstTitleWord);
-  }, LONG_WAIT_FOR);
-
-  await browser.click('[aria-label="Popup"] [role="button"]');
-};
-
-/**
- * Firefox has deprecated `keys`, this is a workaround to type in Firefox.
- * @see https://stackoverflow.com/a/44712416
- */
-const quickInsertActiveElement = async (browser, insertTitle) => {
-  const result = await browser.browser.elementActive();
-  // Newer versions of the webdriver like Gecko/IEDriver return the element as "element-6066-11e4-a52e-4f735466cecf"
-  // (which is documented in the W3C specs) instead of "ELEMENT".
-  const activeElement =
-    result.value &&
-    (result.value.ELEMENT ||
-      result.value['element-6066-11e4-a52e-4f735466cecf']);
-  if (activeElement) {
-    await browser.browser.elementIdValue(activeElement, '/');
-    await browser.waitFor('div[aria-label="Popup"]');
-    await browser.browser.elementIdValue(activeElement, insertTitle);
-  }
+  await browser.click(`[aria-label="Popup"] [role="button"]`);
 };

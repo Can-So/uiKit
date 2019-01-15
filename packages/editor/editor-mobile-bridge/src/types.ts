@@ -15,3 +15,5 @@ export interface NativeFetchResponse {
   status: number;
   statusText: string;
 }
+
+export type AccountId = string;

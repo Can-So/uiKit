@@ -98,9 +98,7 @@ export default class Example extends React.Component<Props, {}> {
           </Container>
           <Container height="200px">
             <h3>Web to native</h3>
-            <WebToNativeReporter
-              filter={['showStatusPicker', 'dismissStatusPicker']}
-            />
+            <WebToNativeReporter filter={['statusBridge']} />
           </Container>
         </div>
       </div>

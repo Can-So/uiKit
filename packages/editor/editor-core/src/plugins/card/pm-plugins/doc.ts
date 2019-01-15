@@ -7,6 +7,7 @@ import { appearanceForNodeType } from '../utils';
 
 import { Command } from '../../../types';
 import { processRawValue, getStepRange } from '../../../utils';
+import { Schema } from 'prosemirror-model';
 
 export const replaceQueuedUrlWithCard = (
   url: string,
@@ -21,7 +22,8 @@ export const replaceQueuedUrlWithCard = (
   const requests = state.requests.filter(req => req.url === url);
 
   // try to transform response to ADF
-  const schema = editorState.schema;
+  const schema: Schema = editorState.schema;
+  const { inlineCard } = schema.nodes;
   const cardAdf = processRawValue(schema, cardData);
 
   let tr = editorState.tr;
@@ -45,7 +47,13 @@ export const replaceQueuedUrlWithCard = (
         return;
       }
 
-      tr = tr.replaceWith(pos, pos + url.length, cardAdf);
+      // ED-5638: add an extra space after inline cards to avoid re-rendering them
+      const nodes = [cardAdf];
+      if (cardAdf.type === inlineCard) {
+        nodes.push(schema.text(' '));
+      }
+
+      tr = tr.replaceWith(pos, pos + url.length, nodes);
     });
   }
 

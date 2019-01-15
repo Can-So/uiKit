@@ -1,4 +1,4 @@
-import { mockStore, mockFetcher } from '../../../mocks';
+import { mockStore, mockFetcher } from '@atlaskit/media-test-helpers';
 import { searchGiphy as createSearchGiphyAction } from '../../../actions';
 
 import searchGiphy, { fetchGifs } from '../../searchGiphy';

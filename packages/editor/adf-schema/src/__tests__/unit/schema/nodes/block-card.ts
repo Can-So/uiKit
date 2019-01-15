@@ -24,17 +24,23 @@ describe(`${name}/schema blockCard node`, () => {
   describe('blockCard with "url" attribute', () => {
     describe('parse html', () => {
       it('converts to blockCard PM node', () => {
-        const doc = fromHTML(`<div data-block-card-url="${url}" />`, schema);
+        const doc = fromHTML(
+          `<div data-block-card data-card-url="${url}" />`,
+          schema,
+        );
         const node = doc.firstChild!;
         expect(node.type.spec).toEqual(blockCard);
       });
 
       it('gets attributes from html', () => {
-        const doc = fromHTML(`<div data-block-card-url="${url}" />`, schema);
+        const doc = fromHTML(
+          `<div data-block-card data-card-url="${url}" />`,
+          schema,
+        );
 
         const node = doc.firstChild!;
         expect(node.attrs.url).toEqual(url);
-        expect(node.attrs.data).toEqual({});
+        expect(node.attrs.data).toEqual(null);
       });
     });
 
@@ -43,8 +49,8 @@ describe(`${name}/schema blockCard node`, () => {
         const dom = toDOM(schema.nodes.blockCard.create({ url }), schema)
           .firstChild as HTMLElement;
 
-        expect(dom.getAttribute('data-block-card-url')).toEqual(url);
-        expect(dom.getAttribute('data-block-card-data')).toEqual('null');
+        expect(dom.getAttribute('data-card-url')).toEqual(url);
+        expect(dom.getAttribute('data-card-data')).toEqual('');
       });
 
       it('encodes and decodes to the same node', () => {
@@ -60,7 +66,7 @@ describe(`${name}/schema blockCard node`, () => {
     describe('parse html', () => {
       it('converts to blockCard PM node', () => {
         const doc = fromHTML(
-          `<div data-block-card-url="" data-block-card-data='${JSON.stringify(
+          `<div data-block-card data-card-url="" data-card-data='${JSON.stringify(
             data,
           )}' />`,
           schema,
@@ -71,7 +77,7 @@ describe(`${name}/schema blockCard node`, () => {
 
       it('gets attributes from html', () => {
         const doc = fromHTML(
-          `<div data-block-card-url="" data-block-card-data='${JSON.stringify(
+          `<div data-block-card data-card-url="" data-card-data='${JSON.stringify(
             data,
           )}' />`,
           schema,
@@ -87,8 +93,8 @@ describe(`${name}/schema blockCard node`, () => {
         const dom = toDOM(schema.nodes.blockCard.create({ data }), schema)
           .firstChild as HTMLElement;
 
-        expect(dom.getAttribute('data-block-card-url')).toEqual('');
-        expect(dom.getAttribute('data-block-card-data')).toEqual(
+        expect(dom.getAttribute('data-card-url')).toEqual('');
+        expect(dom.getAttribute('data-card-data')).toEqual(
           JSON.stringify(data),
         );
       });

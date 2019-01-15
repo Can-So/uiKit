@@ -1,13 +1,11 @@
 jest.mock('../../../service/types');
 
 import { Auth, ContextFactory } from '@atlaskit/media-core';
-import {
-  MockClipboardEvent,
-  MockFile,
-} from '../../../util/clipboardEventMocks';
+import { getMockClipboardEvent, MockFile } from '@atlaskit/media-test-helpers';
 import { Clipboard } from '../../clipboard';
 import { UploadService, LocalFileSource } from '../../../service/types';
 
+const MockClipboardEvent = getMockClipboardEvent();
 /**
  * Skipping all clipboard tests, failing due to mock keyboard events
  * TODO: JEST-23 Fix these tests

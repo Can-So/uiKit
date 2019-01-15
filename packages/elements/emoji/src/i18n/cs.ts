@@ -15,7 +15,6 @@ export default {
   'fabric.emoji.retry.label': 'Zkusit znovu',
   'fabric.emoji.cancel.label': 'Zrušit',
   'fabric.emoji.search.label': 'Vyhledat',
-  'fabric.emoji.search.placeholder': 'Vyhledat',
   'fabric.emoji.categories.search.results': 'Výsledky vyhledávání',
   'fabric.emoji.category.frequent': 'Časté',
   'fabric.emoji.category.people': 'Lidé',

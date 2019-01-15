@@ -1,6 +1,6 @@
 import { RequestUnlinkCloudAccountAction } from '../../../actions/unlinkCloudAccount';
 import { FileListUpdateAction } from '../../../actions/fileListUpdate';
-import { mockFetcher, mockStore } from '../../../mocks';
+import { mockFetcher, mockStore } from '@atlaskit/media-test-helpers';
 import { changeCloudAccountFolderMiddleware } from '../../changeCloudAccountFolder';
 import {
   changeCloudAccountFolder,

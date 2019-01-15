@@ -1,7 +1,10 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { changeService, searchGiphy } from '../../../../../actions';
-import { mockStore, getComponentClassWithStore } from '../../../../../mocks';
+import {
+  mockStore,
+  getComponentClassWithStore,
+} from '@atlaskit/media-test-helpers';
 
 import { StatelessSidebarItem } from '../../sidebarItem';
 import {

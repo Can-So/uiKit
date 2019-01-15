@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 8.2.3
+- [patch] [e6516fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6516fb):
+
+  - Move media mocks into right location to prevent them to be included in dist
+
 ## 8.2.2
 - [patch] [ca16fa9](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ca16fa9):
 

@@ -1,5 +1,32 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.7.0
+- [minor] [df30c63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df30c63):
+
+  - ED-5723: Enables typeahead support for mobile editor
+
+  * Added a new bridge `typeAheadBridge`, which contains `typeAheadQuery()` and `dismissTypeAhead()`
+    * `typeAheadQuery(query: string, trigger: string)` - This will notify integrators when a user is attempting to filter down a list.
+    * `dismissTypeAhead` - Call this to dismiss any typeahead related content.
+  * Added bridge function `insertTypeAheadItem()`, which currently only supports inserting mentions.
+    * `insertTypeAheadItem(type: 'mention', payload: string)` - Payload is a stringified JSON blob containing the information to insert a mention in this scenario.
+  * Added bridge function `setFocus()` to handle returning the focus to the editor after a native interaction.
+  * Added new promise `getAccountId`, which is used to highlight the current user's mention.
+
+## 6.6.1
+- Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
+  - @atlaskit/editor-json-transformer@4.1.5
+  - @atlaskit/editor-test-helpers@6.3.8
+  - @atlaskit/editor-common@28.0.2
+  - @atlaskit/renderer@35.0.1
+  - @atlaskit/editor-core@95.0.0
+  - @atlaskit/mention@16.0.0
+
+## 6.6.0
+- [minor] [c0dc7e3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c0dc7e3):
+
+  - FS-3360 - Support state analytics attribute with values new or existing. Implement for web, and mobile support via mobile-bridge.
+
 ## 6.5.6
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/editor-common@28.0.0
