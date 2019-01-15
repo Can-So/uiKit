@@ -34,25 +34,25 @@ import { queueCardsFromChangedTr } from '../../card/pm-plugins/doc';
 
 export const stateKey = new PluginKey('pastePlugin');
 
+export const md = MarkdownIt('zero', { html: false });
+
+md.enable([
+  // Process html entity - &#123;, &#xAF;, &quot;, ...
+  'entity',
+  // Process escaped chars and hardbreaks
+  'escape',
+
+  'newline',
+]);
+
+// enable modified version of linkify plugin
+// @see https://product-fabric.atlassian.net/browse/ED-3097
+md.use(linkify);
+
 export function createPlugin(
   schema: Schema,
   editorAppearance?: EditorAppearance,
 ) {
-  const md = MarkdownIt('zero', { html: false });
-
-  md.enable([
-    // Process html entity - &#123;, &#xAF;, &quot;, ...
-    'entity',
-    // Process escaped chars and hardbreaks
-    'escape',
-
-    'newline',
-  ]);
-
-  // enable modified version of linkify plugin
-  // @see https://product-fabric.atlassian.net/browse/ED-3097
-  md.use(linkify);
-
   const atlassianMarkDownParser = new MarkdownTransformer(schema, md);
 
   return new Plugin({
