@@ -93,7 +93,7 @@ export const mockFetcher = () => ({
 });
 
 export const mockIsWebGLNotAvailable = () => {
-  jest.mock('../tools/webgl', () => {
+  jest.mock('@atlaskit/media-picker/src/popup/tools/webgl', () => {
     return {
       isWebGLAvailable: jest.fn(() => {
         return false;
