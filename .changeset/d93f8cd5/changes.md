@@ -1,0 +1,1 @@
+- ED-6039 Fixed extension toolbar remove action
