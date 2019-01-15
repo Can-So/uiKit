@@ -1,0 +1,1 @@
+- Updated internal use of ModalDialog to use new composition API
