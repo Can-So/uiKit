@@ -8,12 +8,17 @@ let c = meow(
   `
     Usage
         $ measure <[paths]>
+
       Options
-        --analyze 
-        --json
-        --lint
+        --analyze               Opens bundle analyzer report
+        --json                  Outputs measure stats as json
+        --lint                  Lint mode fails build if size has been increased beyond threshold
+        --updateSnapshots       Update measure snapshots
+
       Examples
         $ measure packages/editor/editor-core
+        $ measure packages/editor/editor-core --updateSnapshots
+        $ measure packages/editor/editor-core --analyze
 `,
   {
     flags: {
@@ -43,12 +48,21 @@ if (paths) {
   executeMeasure(paths, c).then((errors = []) => {
     if (errors.length > 0) {
       console.log(
-        chalk.red('Bundle size build failed with the following errors:'),
+        chalk.red('  Bundle size build failed with the following errors:'),
       );
 
       errors.forEach(error => {
-        console.log(chalk.red(error));
+        console.log('    ' + chalk.red(error));
       });
+
+      console.log();
+      console.log(
+        chalk.dim(
+          `  Run ${chalk.yellow(
+            'npx measure --help',
+          )} for more information on how to use this tool`,
+        ),
+      );
 
       process.exit(1);
     } else {
