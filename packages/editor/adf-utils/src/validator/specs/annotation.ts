@@ -7,7 +7,6 @@ export default {
         annotationType: {
           type: 'enum',
           values: ['inlineComment'],
-          optional: true,
         },
       },
     },

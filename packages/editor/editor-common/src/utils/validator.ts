@@ -47,9 +47,9 @@ export const markOrder = [
   'subsup',
   'underline',
   'code',
-  'annotation',
   'confluenceInlineComment',
   'textColor',
+  'annotation',
 ];
 
 export const isSubSupType = (type: string): type is 'sub' | 'sup' => {
