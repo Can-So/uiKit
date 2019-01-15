@@ -43,8 +43,8 @@ class MockFileReaderWithError extends MockFileReader {
 }
 
 const GlobalFileReader = global.FileReader;
-let FileReader: jest.Mock;
-if (global.FileReader) {
+let FileReader: any;
+if (global.FileReader && typeof jest !== 'undefined') {
   FileReader = jest
     .spyOn(global, 'FileReader')
     .mockImplementation(() => new GlobalFileReader());
