@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 35.0.3
+- [patch] [48abc90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/48abc90):
+
+  - Fixed date border radius in renderer
+
 ## 35.0.2
 - [patch] [609d32d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/609d32d):
 
