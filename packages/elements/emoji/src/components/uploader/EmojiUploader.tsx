@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { ComponentClass } from 'react';
-import * as styles from './styles';
 
 import LoadingEmojiComponent, {
   Props as LoadingProps,
@@ -10,7 +9,6 @@ import {
   UploadRefHandler,
   Props as ComponentProps,
 } from './EmojiUploadComponent';
-import { LoadingItem } from '../picker/EmojiPickerVirtualItems';
 import { EmojiProvider } from '../../api/EmojiResource';
 import { FireAnalyticsEvent, withAnalytics } from '@atlaskit/analytics';
 
@@ -47,27 +45,13 @@ export class EmojiUploaderInternal extends LoadingEmojiComponent<
     });
   }
 
-  renderLoading(): JSX.Element | null {
-    const item = new LoadingItem();
-    const handleUploadRef = (ref: any) => {
-      if (this.props.onUploaderRef) {
-        this.props.onUploaderRef(ref);
-      }
-    };
-    return (
-      <div className={styles.emojiUploadWidget} ref={handleUploadRef}>
-        {item.renderItem()}
-      </div>
-    );
-  }
-
   renderLoaded(
     loadedEmojiProvider: EmojiProvider,
-    EmojiUploaderComponent: ComponentClass<ComponentProps>,
+    EmojiUploadComponent: ComponentClass<ComponentProps>,
   ) {
     const { emojiProvider, ...otherProps } = this.props;
     return (
-      <EmojiUploaderComponent
+      <EmojiUploadComponent
         emojiProvider={loadedEmojiProvider}
         {...otherProps}
       />

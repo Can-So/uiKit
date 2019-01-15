@@ -17,7 +17,7 @@ export interface UploadRefHandler {
 
 export interface Props {
   emojiProvider: EmojiProvider;
-  onUploadRef?: UploadRefHandler;
+  onUploaderRef?: UploadRefHandler;
   firePrivateAnalyticsEvent?: FireAnalyticsEvent;
 }
 
@@ -67,6 +67,10 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     }
   };
 
+  private onUploaderRef = emojiUploadPicker => {
+    this.ref = emojiUploadPicker;
+  };
+
   render() {
     const { uploadErrorMessage } = this.state;
 
@@ -77,13 +81,11 @@ export default class EmojiUploadComponent extends PureComponent<Props, State> {
     return (
       <div
         className={classNames([styles.emojiUploadWidget])}
-        ref={this.props.onUploadRef}
+        ref={this.props.onUploaderRef}
       >
         <div className={classNames([styles.emojiUploadFooter])}>
           <EmojiUploadPicker
-            ref={emojiUploadPicker => {
-              this.ref = emojiUploadPicker;
-            }}
+            ref={this.onUploaderRef}
             onUploadCancelled={this.prepareForUpload}
             onUploadEmoji={this.onUploadEmoji}
             errorMessage={errorMessage}
