@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 35.0.2
+- [patch] [609d32d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/609d32d):
+
+  - ED-5966 Fix issue where renderer incorrectly displayed numbered tables without headers
+
 ## 35.0.1
 - Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
   - @atlaskit/editor-json-transformer@4.1.5

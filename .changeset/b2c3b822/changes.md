@@ -1,1 +1,0 @@
-- ED-5966 Fix issue where renderer incorrectly displayed numbered tables without headers
