@@ -79,39 +79,39 @@ export default {
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Þú og aðrir notendur gætuð hafa sett upp forrit sem bæta eiginleikum við Atlassian vörur. Þessi forrit gætu hafa geymt notendasíðuupplýsingar notandans.',
   'focused-task-close-account.deactivate-account.overview.heading.self':
-    'Deactivate account',
+    'Gera reikning óvirkan',
   'focused-task-close-account.deactivate-account.overview.heading.admin':
-    'Deactivate account',
+    'Gera reikning óvirkan',
   'focused-task-close-account.deactivate-account.overview.first.line.self':
-    "You're about to deactivate the user account of:",
+    'Þú er við það að slökkva reikningi:',
   'focused-task-close-account.deactivate-account.overview.first.line.admin':
-    "You're about to deactivate the user account of:",
+    'Þú er við það að slökkva reikningi:',
   'focused-task-close-account.deactivate-account.overview.last.line.self':
-    'You can reactivate the account at any time.',
+    'Þú getur endurvirkjað reikninginn hvenær sem er.',
   'focused-task-close-account.deactivate-account.overview.last.line.admin':
-    'You can reactivate the account at any time.',
+    'Þú getur endurvirkjað reikninginn hvenær sem er.',
   'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
-    'When you deactivate the account:',
+    'Þegar þú slökkva á reikningum:',
   'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
-    'When you deactivate the account:',
+    'Þegar þú slökkva á reikningum:',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    '{fullName} mun <b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hafa þeir aðgang að:',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    'Þú munt <b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hefur þú aðgang að:',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    '{fullName} mun <b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu.  Í augnablikinu hafa þeir aðgang að neinni þjónustu nema þjónustu eins og Community og Marketplace.',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    'Þú munt<b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hefur þú ekki aðgang að neinni þjónustu nema þjónustu eins og Community og Marketplace.',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Önnur Atlassian reikningsþjónusta, eins og Atlassian Community og Marketplace.',
   'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
-    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+    'Persónuleg gögn, svo sem fullt nafn og netfang, og innihaldið sem notandi hefur búið til mun vera áframhaldandi í Atlassian reikningsþjónustu.',
   'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
-    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+    'Persónuleg gögn, svo sem fullt nafn og netfang, og innihaldið sem notandi hefur búið til mun vera áframhaldandi í Atlassian reikningsþjónustu.',
   'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
-    "We'll no longer bill you for them.",
+    'Við munum ekki rukka þig lengur fyrir þær.',
   'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
-    "We'll no longer bill you for them.",
+    'Við munum ekki rukka þig lengur fyrir þær.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Hvernig notendur munu sjá þennan reikning',
   'focused-task-close-account.delete-account.drop-down-expand-button':

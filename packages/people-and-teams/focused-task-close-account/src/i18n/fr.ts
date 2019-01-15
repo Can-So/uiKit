@@ -79,39 +79,39 @@ export default {
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     "Vous ou d'autres utilisateurs avez pu installer des applications permettant d'ajouter des fonctionnalités aux produits Atlassian. Ces applications ont pu conserver les informations de votre profil.",
   'focused-task-close-account.deactivate-account.overview.heading.self':
-    'Deactivate account',
+    'Désactiver le compte',
   'focused-task-close-account.deactivate-account.overview.heading.admin':
-    'Deactivate account',
+    'Désactiver le compte',
   'focused-task-close-account.deactivate-account.overview.first.line.self':
-    "You're about to deactivate the user account of:",
+    'Vous êtes sur le point de désactiver le compte utilisateur de :',
   'focused-task-close-account.deactivate-account.overview.first.line.admin':
-    "You're about to deactivate the user account of:",
+    'Vous êtes sur le point de désactiver le compte utilisateur de :',
   'focused-task-close-account.deactivate-account.overview.last.line.self':
-    'You can reactivate the account at any time.',
+    'Vous pouvez réactiver le compte à tout moment.',
   'focused-task-close-account.deactivate-account.overview.last.line.admin':
-    'You can reactivate the account at any time.',
+    'Vous pouvez réactiver le compte à tout moment.',
   'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
-    'When you deactivate the account:',
+    'Lorsque vous désactivez le compte :',
   'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
-    'When you deactivate the account:',
+    'Lorsque vous désactivez votre compte :',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    "{fullName} <b>perdra immédiatement l'accès</b> à tous les services de compte Atlassian. Il a actuellement accès à :",
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    "Vous <b>perdrez immédiatement l'accès</b> à tous les services de compte Atlassian. Vous avez actuellement accès à :",
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    "{fullName} <b>perdra immédiatement l'accès</b> à tous les services de compte Atlassian. Il n'a pour le moment accès à aucun service, sauf Community et Marketplace.",
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    "Vous <b>perdrez immédiatement l'accès</b> à tous les services de compte Atlassian. Vous n'avez pour le moment accès à aucun service, sauf Community et Marketplace.",
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Autres services de compte Atlassian, comme Atlassian Community et Marketplace.',
   'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
-    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+    "Les données personnelles, comme le nom complet et l'adresse e-mail, ainsi que le contenu créés seront toujours disponibles dans les services de compte Atlassian.",
   'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
-    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+    "Les données personnelles, comme le nom complet et l'adresse e-mail, ainsi que le contenu créés seront toujours disponibles dans les services de compte Atlassian.",
   'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
-    "We'll no longer bill you for them.",
+    'Ils ne vous seront plus facturés.',
   'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
-    "We'll no longer bill you for them.",
+    'Ils ne vous seront plus facturés.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Comment les utilisateurs verront ce compte',
   'focused-task-close-account.delete-account.drop-down-expand-button':
