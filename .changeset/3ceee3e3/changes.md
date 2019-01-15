@@ -1,0 +1,1 @@
+- ED-6045: fixed unable to select table row
