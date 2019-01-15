@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.5
+- [patch] [844feea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/844feea):
+
+  - ED-6039 Fixed extension toolbar remove action
+
 ## 95.0.4
 - [patch] [e082366](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e082366):
 
