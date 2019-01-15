@@ -2,6 +2,7 @@
 
 export const sortKey = 'first_name';
 export const secondSortKey = 'last_name';
+export const thirdSortKey = 'numeric';
 
 export const head = {
   cells: [
@@ -13,6 +14,11 @@ export const head = {
     {
       key: secondSortKey,
       content: 'Last name',
+    },
+    {
+      key: thirdSortKey,
+      content: 'Arbitrary numeric',
+      isSortable: true,
     },
   ],
 };
@@ -27,6 +33,9 @@ export const rows = [
       {
         content: 'Obama',
       },
+      {
+        content: 1,
+      },
     ],
   },
   {
@@ -37,6 +46,9 @@ export const rows = [
       },
       {
         content: 'Trump',
+      },
+      {
+        content: 0,
       },
     ],
   },
@@ -49,6 +61,9 @@ export const rows = [
       {
         content: 'Clinton',
       },
+      {
+        content: -1,
+      },
     ],
   },
   {
@@ -59,6 +74,9 @@ export const rows = [
       },
       {
         content: 'Jefferson',
+      },
+      {
+        content: 20,
       },
     ],
   },
