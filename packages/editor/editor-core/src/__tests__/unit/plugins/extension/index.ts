@@ -3,6 +3,7 @@ import {
   createEditor,
   p as paragraph,
   bodiedExtension,
+  extension,
   inlineExtension,
   macroProvider,
   MockMacroProvider,
@@ -204,10 +205,22 @@ describe('extension', () => {
     });
 
     describe('removeExtension', () => {
-      it('should set "element" prop in plugin state to null and remove the node', () => {
+      it('should set "element" prop in plugin state to null and remove the node, if it is an bodied extension', () => {
         const { editorView } = editor(
           doc(bodiedExtension(extensionAttrs)(paragraph('te{<>}xt'))),
         );
+
+        expect(removeExtension()(editorView.state, editorView.dispatch)).toBe(
+          true,
+        );
+
+        const pluginState = pluginKey.getState(editorView.state);
+        expect(pluginState.element).toEqual(null);
+        expect(editorView.state.doc).toEqualDocument(doc(paragraph('')));
+      });
+
+      it('should set "element" prop in plugin state to null and remove the node, if it is an extension', () => {
+        const { editorView } = editor(doc(extension(extensionAttrs)()));
 
         expect(removeExtension()(editorView.state, editorView.dispatch)).toBe(
           true,
