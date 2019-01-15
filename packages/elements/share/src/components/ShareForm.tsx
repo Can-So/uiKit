@@ -9,9 +9,10 @@ import { ShareHeader } from './ShareHeader';
 import { UserPickerField } from './UserPickerField';
 
 export type Props = {
-  title?: string;
+  title?: React.ReactNode;
   loadOptions: LoadOptions;
   onShareClick?: Function;
+  submitButtonLabel?: React.ReactNode;
 };
 
 export const ShareForm: React.StatelessComponent<Props> = props => (
@@ -25,7 +26,9 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
         </FormSection>
         <FormFooter>
           <Button appearance="primary" type="submit">
-            <FormattedMessage {...messages.formSend} />
+            {props.submitButtonLabel || (
+              <FormattedMessage {...messages.formSend} />
+            )}
           </Button>
         </FormFooter>
       </form>

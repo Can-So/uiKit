@@ -51,4 +51,19 @@ describe('ShareForm', () => {
     expect(buttonLabel).toHaveLength(1);
     expect(buttonLabel.props()).toMatchObject(messages.formSend);
   });
+
+  it('should override submit button label', () => {
+    const loadOptions = jest.fn();
+    const component = shallow(
+      <ShareForm loadOptions={loadOptions} submitButtonLabel="Invite" />,
+    );
+
+    const akForm = component.find<any>(Form);
+    const formProps = {};
+    const form = renderProp(akForm, 'children', { formProps }).find('form');
+
+    const footer = form.find(FormFooter);
+    const button = footer.find(Button);
+    expect(button.text()).toEqual('Invite');
+  });
 });

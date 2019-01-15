@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';
 
 export type Props = {
-  title?: string;
+  title?: React.ReactNode;
 };
 
 export const ShareHeader: React.StatelessComponent<Props> = ({ title }) => (
