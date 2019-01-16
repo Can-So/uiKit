@@ -46,11 +46,14 @@ export default class ClickAreaBlock extends React.Component<Props> {
       event.target,
       '[data-editor-popup]',
     );
+    // Fixes issue when using a textarea for editor title in full page editor doesn't let user focus it.
+    const isTextAreaClicked = event.target.nodeName === 'TEXTAREA';
     if (
       (!contentArea ||
         !insideContentArea(event.target.parentNode) ||
         editorFocused === false) &&
       !isInputClicked &&
+      !isTextAreaClicked &&
       !isPopupClicked &&
       view
     ) {
