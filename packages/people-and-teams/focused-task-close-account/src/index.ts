@@ -7,3 +7,6 @@ export {
 export {
   default as DeleteUserOverviewScreen,
 } from './components/DeleteUserOverviewScreen';
+export {
+  default as DeactivateUserOverviewScreen,
+} from './components/DeactivateUserOverviewScreen';

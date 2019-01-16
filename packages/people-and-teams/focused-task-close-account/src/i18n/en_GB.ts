@@ -78,6 +78,40 @@ export default {
     'You or other users may have installed apps that add features to Atlassian products. These apps may have stored the user’s profile information.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'You or other users may have installed apps that add features to Atlassian products. These apps may have stored your profile information.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Deactivate account',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Deactivate account',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    "You're about to deactivate the user account of:",
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    "You're about to deactivate the user account of:",
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'You can reactivate the account at any time.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'You can reactivate the account at any time.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'When you deactivate the account:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'When you deactivate the account:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    "We'll no longer bill you for them.",
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    "We'll no longer bill you for them.",
   'focused-task-close-account.delete-account.content-preview.heading':
     'How users will see this account',
   'focused-task-close-account.delete-account.drop-down-expand-button':

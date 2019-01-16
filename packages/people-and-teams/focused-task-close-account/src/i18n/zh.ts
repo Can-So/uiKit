@@ -78,6 +78,40 @@ export default {
     '您或其他用户可能已经安装了向 Atlassian 产品添加功能的应用程序。这些应用程序可能存储了用户的个人信息。',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     '您或其他用户可能已经安装了向 Atlassian 产品添加功能的应用程序。这些应用程序可能存储了您的个人信息。',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    '停用账户',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    '停用账户',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    '您即将停用的用户账户：',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    '您即将停用的用户账户：',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    '您可以在任何时候重新激活该账户。',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    '您可以在任何时候重新激活该账户。',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    '当您停用账户：',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    '当您停用账户：',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName}将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。 他们目前可以访问：',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    '您将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。 您目前可以访问：',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName}将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。目前，除社区和商城等服务外，他们无权访问任何服务。',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    '您将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。目前，除社区和商城等服务外，您无权访问任何服务。',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    '其他 Atlassian 帐户服务，如 Atlassian 社区和商城。',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    '他们的个人数据，如全名、电子邮件地址，以及他们创建的内容，将保留在Atlassian 帐户服务中。',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    '他们的个人数据，如全名、电子邮件地址，以及他们创建的内容，将保留在Atlassian 帐户服务中。',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    '我们不再为此向您收费。',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    '我们不再为此向您收费。',
   'focused-task-close-account.delete-account.content-preview.heading':
     '用户将如何查看此帐户',
   'focused-task-close-account.delete-account.drop-down-expand-button':

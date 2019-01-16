@@ -78,6 +78,40 @@ export default {
     'Jij of andere gebruikers hebben misschien apps geïnstalleerd die functies toevoegen aan Atlassian-producten. Deze apps hebben mogelijk profielinformatie van de gebruiker opgeslagen.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Jij of andere gebruikers hebben misschien apps geïnstalleerd die functies toevoegen aan Atlassian-producten. Deze apps hebben mogelijk jouw profielinformatie opgeslagen.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Account deactiveren',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Account deactiveren',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    'Je staat op het punt om de account te deactiveren van:',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    'Je staat op het punt om de account te deactiveren van:',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'Je kunt de account op elk gewenst moment weer activeren.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'Je kunt de account op elk gewenst moment weer activeren.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'Wanneer je de account deactiveert:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'Wanneer je de account deactiveert:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} zal <b>direct toegang verliezen</b> tot alle Atlassian-accountservices. Deze gebruiker heeft momenteel toegang tot:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    'Je zult <b>direct toegang verliezen</b> tot alle Atlassian-accountservices. Je hebt momenteel toegang tot: ',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName} zal <b>direct toegang verliezen</b> tot alle Atlassian-accountservices. Deze gebruiker heeft momenteel geen toegang tot een service, behalve Community en Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    'Je zult <b>direct toegang verliezen</b> tot alle Atlassian-accountservices. Je hebt momenteel geen toegang tot een service, behalve Community en Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Andere Atlassian-accountservices, zoals Atlassian Community en Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    'Hun persoonsgegevens, zoals hun volledige naam en e-mailadres, en content die ze hebben gemaakt blijven bewaard op de Atlassian-accountservices.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    'Hun persoonsgegevens, zoals hun volledige naam en e-mailadres, en content die ze hebben gemaakt blijven bewaard op de Atlassian-accountservices.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'Ze worden niet meer in rekening gebracht.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'Ze worden niet meer in rekening gebracht.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Hoe gebruikers deze account zullen zien',
   'focused-task-close-account.delete-account.drop-down-expand-button':

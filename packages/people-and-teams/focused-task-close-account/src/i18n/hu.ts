@@ -78,6 +78,40 @@ export default {
     'Ön vagy más felhasználók olyan alkalmazásokat telepíthettek, amelyek szolgáltatásokkal bővítik az Atlassian-termékeket. Ezek az alkalmazások tárolhatják a felhasználók profiladatait.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Ön vagy más felhasználók olyan alkalmazásokat telepíthettek, amelyek szolgáltatásokkal bővítik az Atlassian-termékeket. Ezek az alkalmazások tárolhatják az Ön profiladatait.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Fiók inaktiválása',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Fiók inaktiválása',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    'A következő felhasználói fiók inaktiválására készül:',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    'A következő felhasználói fiók inaktiválására készül:',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'A fiókot bármikor újraaktiválhatja.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'A fiókot bármikor újraaktiválhatja.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'Ha inaktiválja a fiókot:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'Ha inaktiválja a fiókot:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} <b>azonnal elveszíti hozzáférését</b> az összes Atlassian-fiókszolgáltatáshoz. Jelenleg a következőkhöz van hozzáférése:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    'Ön <b>azonnal elveszíti hozzáférését</b> az összes Atlassian-fiókszolgáltatáshoz. Jelenleg a következőkhöz van hozzáférése:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName} <b>azonnal elveszíti hozzáférését</b> az összes Atlassian-fiókszolgáltatáshoz. Jelenleg kizárólag a Community és a Marketplace szolgáltatáshoz van hozzáférése.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    'Ön <b>azonnal elveszíti hozzáférését</b> az összes Atlassian-fiókszolgáltatáshoz. Jelenleg kizárólag a Community és a Marketplace szolgáltatáshoz van hozzáférése.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Egyéb Atlassian-fiókszolgáltatások, például az Atlassian Community és Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    'A felhasználó személyes adatait, így a teljes nevét és e-mail-címét, valamint az általa létrehozott tartalmat a rendszer megőrzi az Atlassian-fiókszolgáltatásokban.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    'A felhasználó személyes adatait, így a teljes nevét és e-mail-címét, valamint az általa létrehozott tartalmat a rendszer megőrzi az Atlassian-fiókszolgáltatásokban.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'A továbbiakban nem számlázzuk ki ezen termékek díjait.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'A továbbiakban nem számlázzuk ki ezen termékek díjait.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Hogyan jelenik meg ez a fiók a felhasználók számára?',
   'focused-task-close-account.delete-account.drop-down-expand-button':
