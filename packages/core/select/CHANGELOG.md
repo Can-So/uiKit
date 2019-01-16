@@ -1,5 +1,10 @@
 # @atlaskit/select
 
+## 6.1.18
+- [patch] [6148c6c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6148c6c):
+
+  - AK-5693 apply styles to loading indicator
+
 ## 6.1.17
 - [patch] [e9ccac7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9ccac7):
 
