@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.8
+- [patch] [fc9a884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc9a884):
+
+  - ED-5543: fix backspacing after hardbreak node
+
 ## 95.0.7
 - [patch] [5f8b151](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f8b151):
 

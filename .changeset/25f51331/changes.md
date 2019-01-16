@@ -1,1 +1,0 @@
-- ED-5543: fix backspacing after hardbreak node
