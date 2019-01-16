@@ -1,0 +1,1 @@
+- Sorting behaviour for numeric data improved, 0 values placed correctly
