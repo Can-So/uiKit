@@ -181,22 +181,14 @@ export const importFilesFromRecentFiles = (
   store: Store<State>,
 ): void => {
   const { file, touchFileDescriptor } = selectedUploadFile;
+  const { fileId } = touchFileDescriptor;
   const source = {
     id: file.id,
     collection: RECENTS_COLLECTION,
   };
 
-  store.dispatch(
-    finalizeUpload(
-      file,
-      touchFileDescriptor.fileId,
-      source,
-      touchFileDescriptor.fileId,
-    ),
-  );
-  store.dispatch(
-    getPreview(touchFileDescriptor.fileId, file, RECENTS_COLLECTION),
-  );
+  store.dispatch(finalizeUpload(file, fileId, source, fileId));
+  store.dispatch(getPreview(fileId, file, RECENTS_COLLECTION));
 };
 
 export const importFilesFromRemoteService = (
@@ -210,53 +202,49 @@ export const importFilesFromRemoteService = (
     accountId,
     file,
   } = selectedUploadFile;
+  const { fileId } = touchFileDescriptor;
   const { deferredIdUpfronts } = store.getState();
   const deferred = deferredIdUpfronts[file.id];
 
   if (deferred) {
     const { rejecter, resolver } = deferred;
     // We asociate the temporary file.id with the uploadId
-    store.dispatch(
-      setUpfrontIdDeferred(touchFileDescriptor.fileId, resolver, rejecter),
-    );
+    store.dispatch(setUpfrontIdDeferred(fileId, resolver, rejecter));
   }
-  const uploadActivity = new RemoteUploadActivity(
-    touchFileDescriptor.fileId,
-    (event, payload) => {
-      if (event === 'NotifyMetadata') {
-        const preview = getPreviewFromMetadata(
-          (payload as WsNotifyMetadata).metadata,
-        );
+  const uploadActivity = new RemoteUploadActivity(fileId, (event, payload) => {
+    if (event === 'NotifyMetadata') {
+      const preview = getPreviewFromMetadata(
+        (payload as WsNotifyMetadata).metadata,
+      );
 
-        // TODO [MS-1011]: store preview url in context cache
-        store.dispatch(
-          sendUploadEvent({
-            event: {
-              name: 'upload-preview-update',
-              data: {
-                file,
-                preview,
-              },
+      // TODO [MS-1011]: store preview url in context cache
+      store.dispatch(
+        sendUploadEvent({
+          event: {
+            name: 'upload-preview-update',
+            data: {
+              file,
+              preview,
             },
-            uploadId: touchFileDescriptor.fileId,
-          }),
-        );
-      } else {
-        // TODO figure out the difference between this uploadId and the last MSW-405
-        const { uploadId: newUploadId } = payload;
-        const newFile: MediaFile = {
-          ...file,
-          id: newUploadId,
-          creationDate: Date.now(),
-        };
+          },
+          uploadId: fileId,
+        }),
+      );
+    } else {
+      // TODO figure out the difference between this uploadId and the last MSW-405
+      const { uploadId: newUploadId } = payload;
+      const newFile: MediaFile = {
+        ...file,
+        id: newUploadId,
+        creationDate: Date.now(),
+      };
 
-        store.dispatch(handleCloudFetchingEvent(newFile, event, payload));
-      }
-    },
-  );
+      store.dispatch(handleCloudFetchingEvent(newFile, event, payload));
+    }
+  });
 
   uploadActivity.on('Started', () => {
-    store.dispatch(remoteUploadStart(touchFileDescriptor.fileId));
+    store.dispatch(remoteUploadStart(fileId));
   });
 
   wsConnectionHolder.openConnection(uploadActivity);
@@ -269,7 +257,7 @@ export const importFilesFromRemoteService = (
       fileId: file.id,
       fileName: file.name,
       collection: RECENTS_COLLECTION,
-      jobId: touchFileDescriptor.fileId,
+      jobId: fileId,
     },
   });
 };
