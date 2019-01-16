@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.9
+- [patch] [6514dda](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6514dda):
+
+  - ED-5415, ED-6020: don't create broken document after sequential media insertion; always try to insert an empty paragraph after images, even in tables
+
 ## 95.0.8
 - [patch] [fc9a884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc9a884):
 

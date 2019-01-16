@@ -1,1 +1,0 @@
-- ED-5415, ED-6020: don't create broken document after sequential media insertion; always try to insert an empty paragraph after images, even in tables
