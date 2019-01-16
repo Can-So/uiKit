@@ -3,7 +3,7 @@ import ShareIcon from '@atlaskit/icon/glyph/share';
 import Button, { ButtonAppearances } from '@atlaskit/button';
 import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 
-export type Props = {
+type Props = {
   appearance?: ButtonAppearances;
   isSelected?: boolean;
   isDisabled?: boolean;

@@ -11,7 +11,10 @@ import { UserPickerField } from './UserPickerField';
 export type Props = {
   title?: React.ReactNode;
   loadOptions: LoadOptions;
+  onUsersChange?: Function;
+  onCommentChange?: Function;
   onShareClick?: Function;
+  shouldCapabilitiesWarningShow?: boolean;
   submitButtonLabel?: React.ReactNode;
 };
 
@@ -22,7 +25,7 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
         <ShareHeader title={props.title} />
         <FormSection>
           <UserPickerField loadOptions={props.loadOptions} />
-          <CommentField />
+          <CommentField onChange={props.onCommentChange} />
         </FormSection>
         <FormFooter>
           <Button appearance="primary" type="submit">
@@ -38,4 +41,5 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
 
 ShareForm.defaultProps = {
   onShareClick: () => {},
+  shouldCapabilitiesWarningShow: false,
 };

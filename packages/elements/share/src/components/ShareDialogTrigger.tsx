@@ -7,9 +7,9 @@ import { ShareForm } from './ShareForm';
 import { messages } from '../i18n';
 import { InvitationsCapabilities } from '../clients/IdentityClient';
 
-export type RenderChildren = (openModal: Function) => React.ReactNode;
+type RenderChildren = (openModal: Function) => React.ReactNode;
 
-export type DialogState = {
+type DialogState = {
   isDialogOpen: boolean;
 };
 
@@ -18,12 +18,17 @@ export type DialogContentState = {
   comment?: string;
 };
 
-export type User = {
-  id?: string;
-  email?: string;
+export type User = UserWithId | UserWithEmail;
+
+type UserWithId = {
+  id: string;
 };
 
-export type Props = {
+type UserWithEmail = {
+  email: string;
+};
+
+type Props = {
   buttonStyle?: 'default' | 'withText';
   children?: RenderChildren;
   capabilities?: InvitationsCapabilities;

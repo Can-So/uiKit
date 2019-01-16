@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 import InlineDialog from '@atlaskit/inline-dialog';
-import {
-  ShareButton,
-  Props as ShareButtonProps,
-} from '../../../components/ShareButton';
+import { ShareButton } from '../../../components/ShareButton';
 import { ShareForm } from '../../../components/ShareForm';
 import {
   ShareDialogTrigger,
@@ -34,9 +31,7 @@ describe('ShareDialogTrigger', () => {
       let { isDialogOpen } = wrapper.state();
       // TODO: where to get type InlineDialogProps?
       let inlineDialogProps = wrapper.find<any>(InlineDialog).props();
-      let shareButtonProps: ShareButtonProps = wrapper
-        .find(ShareButton)
-        .props();
+      let shareButtonProps = wrapper.find(ShareButton).props();
       expect(isDialogOpen).toEqual(false);
       expect(inlineDialogProps.isOpen).toEqual(isDialogOpen);
       expect(shareButtonProps.isSelected).toEqual(isDialogOpen);
@@ -132,9 +127,7 @@ describe('ShareDialogTrigger', () => {
       const wrapper = shallow<ShareDialogTrigger>(
         <ShareDialogTrigger isDisabled={isDisabled} />,
       );
-      let shareButtonProps: ShareButtonProps = wrapper
-        .find(ShareButton)
-        .props();
+      let shareButtonProps = wrapper.find(ShareButton).props();
       expect(shareButtonProps.isDisabled).toEqual(isDisabled);
 
       wrapper.setProps({ isDisabled: !isDisabled });
@@ -219,7 +212,7 @@ describe('ShareDialogTrigger', () => {
   describe('handleShareUsersChange', () => {
     it('should update the users state with the first parameter', () => {
       const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
-      const mockUsers = [{}, {}, {}];
+      const mockUsers = [{ id: 'id' }, { email: 'email' }];
       wrapper.instance().handleShareUsersChange(mockUsers);
       expect(wrapper.state().users).toEqual(mockUsers);
     });
@@ -229,7 +222,7 @@ describe('ShareDialogTrigger', () => {
       const wrapper = shallow<ShareDialogTrigger>(
         <ShareDialogTrigger onUsersChange={spiedOnUsersChange} />,
       );
-      wrapper.instance().handleShareUsersChange([{}]);
+      wrapper.instance().handleShareUsersChange([]);
       expect(spiedOnUsersChange).toHaveBeenCalledTimes(1);
     });
   });
@@ -255,7 +248,12 @@ describe('ShareDialogTrigger', () => {
   describe('handleShareSubmit', () => {
     it('should call onSubmit props with an object of users and comment as an argument', () => {
       const mockOnSubmit = jest.fn().mockResolvedValue({});
-      const mockState = { users: [{}, {}, {}], comment: 'comment' };
+      const mockState = {
+        isDialogOpen: true,
+        users: [{ id: 'id' }, { email: 'email' }],
+        comment: 'comment',
+        isStateValidWithCapabilities: true,
+      };
       const mockSubmitEvent = {
         target: document.createElement('form'),
         type: 'submit',
@@ -326,18 +324,22 @@ describe('ShareDialogTrigger', () => {
   describe('clearDialogContentState', () => {
     it('should set the defaultDialogContentState', () => {
       const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
-      const newState = {
+      const newInitState = {
         isDialogOpen: true,
-        users: [{}, {}, {}],
+        users: [{ id: 'id' }, { email: 'email' }],
         comment: 'comment',
+        isStateValidWithCapabilities: true,
       };
-      wrapper.setState(newState);
+      wrapper.setState(newInitState);
       wrapper.instance().clearDialogContentState();
 
       const state = wrapper.state();
-      expect(state.isDialogOpen).toEqual(newState.isDialogOpen);
+      expect(state.isDialogOpen).toEqual(newInitState.isDialogOpen);
       expect(state.users).toEqual(defaultDialogContentState.users);
       expect(state.comment).toEqual(defaultDialogContentState.comment);
+      expect(state.isStateValidWithCapabilities).toEqual(
+        newInitState.isStateValidWithCapabilities,
+      );
     });
   });
 });
