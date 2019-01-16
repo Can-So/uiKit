@@ -1,7 +1,7 @@
 import * as uuid from 'uuid/v4';
 import { Store, Dispatch, Middleware } from 'redux';
 
-import { State, SelectedItem, LocalUpload } from '../domain';
+import { State, SelectedItem, LocalUpload, ServiceName } from '../domain';
 
 import { isStartImportAction } from '../actions/startImport';
 import { finalizeUpload } from '../actions/finalizeUpload';
@@ -24,6 +24,14 @@ import { WsNotifyMetadata } from '../tools/websocket/wsMessageData';
 
 import { getPreviewFromMetadata } from '../../domain/preview';
 import { TouchFileDescriptor } from '@atlaskit/media-store';
+import { ReplaySubject } from 'rxjs';
+import {
+  FileState,
+  fileStreamsCache,
+  getMediaTypeFromMimeType,
+  FilePreview,
+} from '@atlaskit/media-core';
+import { convertBase64ToBlob } from '../../util/convertBase64ToBlob';
 export interface RemoteFileItem extends SelectedItem {
   accountId: string;
   publicId: string;
@@ -35,13 +43,13 @@ export const isRemoteFileItem = (
   return ['dropbox', 'google', 'giphy'].indexOf(item.serviceName) !== -1;
 };
 
-export const isRemoteService = (serviceName: string) => {
+export const isRemoteService = (serviceName: ServiceName) => {
   return ['dropbox', 'google', 'giphy'].indexOf(serviceName) !== -1;
 };
 
 type SelectedUploadFile = {
   readonly file: MediaFile;
-  readonly serviceName: string;
+  readonly serviceName: ServiceName;
   readonly touchFileDescriptor: TouchFileDescriptor;
   readonly accountId?: string;
 };
@@ -101,6 +109,7 @@ export async function importFiles(
     userContext,
     tenantContext,
     config,
+    giphy,
   } = store.getState();
   const tenantCollection =
     config.uploadParams && config.uploadParams.collection;
@@ -114,6 +123,42 @@ export async function importFiles(
     .filter(file => file.serviceName !== 'upload')
     .map(file => file.touchFileDescriptor);
   if (touchFileDescriptors.length) {
+    touchFileDescriptors.forEach(descriptor => {
+      // TODO: move into own method
+      const id = descriptor.fileId;
+      const selectedFile = selectedUploadFiles.find(
+        file => file.touchFileDescriptor.fileId === id,
+      );
+      if (selectedFile) {
+        let preview: FilePreview | undefined;
+        const { file } = selectedFile;
+        if (selectedFile.serviceName === 'giphy') {
+          const selectedGiphy = giphy.imageCardModels.find(
+            cardModel => cardModel.metadata.id === file.id,
+          );
+          if (selectedGiphy) {
+            preview = {
+              blob: selectedGiphy.dataURI,
+            };
+          }
+        } else {
+          // TODO: get preview for other services
+        }
+
+        const state: FileState = {
+          id,
+          status: 'processing',
+          mediaType: getMediaTypeFromMimeType(file.type),
+          mimeType: file.type,
+          name: file.name,
+          size: file.size,
+          preview,
+        };
+        const subject = new ReplaySubject<FileState>(1);
+        subject.next(state);
+        fileStreamsCache.set(id, subject);
+      }
+    });
     tenantContext.file.touchFiles(touchFileDescriptors, tenantCollection);
   }
   eventEmitter.emitUploadsStart(

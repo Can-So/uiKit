@@ -14,7 +14,7 @@ export type FileStatus =
   | 'error'
   | 'failed-processing';
 export interface FilePreview {
-  blob: Blob;
+  blob: Blob | string; // TODO: probably rename into "value"?
   originalDimensions?: {
     width: number;
     height: number;
