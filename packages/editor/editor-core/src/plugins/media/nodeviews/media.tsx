@@ -7,6 +7,7 @@ import { ProsemirrorGetPosHandler, ReactNodeProps } from '../../../nodeviews';
 import {
   MediaPluginState,
   stateKey as mediaStateKey,
+  MediaProvider,
 } from '../pm-plugins/main';
 import { Context, ImageResizeMode } from '@atlaskit/media-core';
 import {
@@ -65,7 +66,7 @@ class MediaNode extends Component<
   MediaNodeState
 > {
   private pluginState: MediaPluginState;
-  private mediaProvider;
+  private mediaProvider: MediaProvider;
   private hasBeenMounted: boolean = false;
 
   state = {
