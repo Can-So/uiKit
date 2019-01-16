@@ -167,7 +167,7 @@ export type InlineLinkText = Text & MarksObject<Link>;
 /**
  * @name code_inline_node
  */
-export type InlineCode = Text & MarksObject<Code | Link>;
+export type InlineCode = Text & MarksObject<Code | Link | Annotation>;
 
 /**
  * @name atomic_inline_node
