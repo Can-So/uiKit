@@ -12,13 +12,15 @@ describe('Renderer - React/Marks/Code', () => {
 
   it('should output correct html', () => {
     const mark = mount(<Code>This is code</Code>);
-    expect(mark.html()).to.include('<code>This is code</code>');
+    expect(mark.html()).to.include('<span class="code">This is code</span>');
     mark.unmount();
   });
 
   it('should handle arrays correctly', () => {
     const markWithArray = mount(<Code>{['This ', 'is', ' code']}</Code>);
-    expect(markWithArray.html()).to.include('<code>This is code</code>');
+    expect(markWithArray.html()).to.include(
+      '<span class="code">This is code</span>',
+    );
     markWithArray.unmount();
   });
 });
