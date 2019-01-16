@@ -53,7 +53,16 @@ describe('ShareDialogTrigger', () => {
 
   describe('isStateValidWithCapabilities', () => {
     it('should be updated only if isDialogOpen state is true, capabilities and validateStateWithCapabilities props are given', () => {
-      const mockCapabilities = {};
+      const mockCapabilities = {
+        directInvite: {
+          mode: 'ANYONE',
+          permittedResources: ['mockAri'],
+        },
+        invitePendingApproval: {
+          mode: 'ANYONE',
+          permittedResources: ['mockAri'],
+        },
+      };
       const mockIsStateValidWithCapabilities = false;
       const spiedValidateStateWithCapabilities = jest.fn(
         () => mockIsStateValidWithCapabilities,

@@ -5,7 +5,6 @@ import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 import { ShareButton } from './ShareButton';
 import { ShareForm } from './ShareForm';
 import { messages } from '../i18n';
-import { InvitationsCapabilities } from '../clients/IdentityClient';
 
 type RenderChildren = (openModal: Function) => React.ReactNode;
 
@@ -26,6 +25,22 @@ type UserWithId = {
 
 type UserWithEmail = {
   email: string;
+};
+
+type InvitationsCapabilities = {
+  directInvite: DirectInviteCapabilities;
+  invitePendingApproval: RequestAccessCapabilities;
+};
+
+type DirectInviteCapabilities = {
+  mode: 'NONE' | 'ANYONE' | 'DOMAIN_RESTRICTED';
+  domains?: string[];
+  permittedResources: string[];
+};
+
+type RequestAccessCapabilities = {
+  mode: 'NONE' | 'ANYONE';
+  permittedResources: string[];
 };
 
 type Props = {
