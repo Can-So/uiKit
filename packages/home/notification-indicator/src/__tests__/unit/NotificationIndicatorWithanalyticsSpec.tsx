@@ -9,19 +9,15 @@ import {
 import NotificationIndicator from '../../NotificationIndicator';
 
 class MockNotificationLogClient extends NotificationLogClient {
-  private response?: Promise<NotificationCountResponse>;
+  private response: Promise<NotificationCountResponse>;
 
-  constructor() {
+  constructor(response: Promise<NotificationCountResponse>) {
     super('', '');
+    this.response = response;
   }
 
   public async countUnseenNotifications() {
-    return (
-      this.response ||
-      Promise.resolve({
-        count: 0,
-      })
-    );
+    return this.response;
   }
 
   public setResponse(response: Promise<NotificationCountResponse>) {
@@ -31,25 +27,20 @@ class MockNotificationLogClient extends NotificationLogClient {
 
 describe('NotificationIndicator', () => {
   let notificationLogClient;
+  let mockCreateAnalyticsEvent;
+  let mockClientPromise;
+  let notificationLogResponse;
 
-  function returnCount(count: number): Promise<NotificationCountResponse> {
-    return Promise.resolve({ count });
+  function setMockResponseCount(count: number) {
+    notificationLogResponse = Promise.resolve({ count });
+    notificationLogClient.setResponse(notificationLogResponse);
+    mockClientPromise = Promise.resolve(notificationLogClient);
   }
 
-  var mockCreateAnalyticsEvent = jest.fn(analyticsEvent => {
-    return;
-  });
-
-  async function renderNotificationIndicator(
-    response: Promise<NotificationCountResponse>,
-    props: Object = {},
-  ) {
-    notificationLogClient.setResponse(response);
-    const clientPromise = Promise.resolve(notificationLogClient);
-
+  async function renderNotificationIndicator(props: Object = {}) {
     const wrapper = mount(
       <NotificationIndicator
-        notificationLogProvider={clientPromise}
+        notificationLogProvider={mockClientPromise}
         refreshOnHidden={true}
         createAnalyticsEvent={mockCreateAnalyticsEvent}
         {...props}
@@ -57,22 +48,30 @@ describe('NotificationIndicator', () => {
     );
 
     try {
-      await clientPromise;
+      await mockClientPromise;
     } catch (e) {}
 
     try {
-      await response;
+      await notificationLogResponse;
     } catch (e) {}
 
     return wrapper;
   }
 
   beforeEach(() => {
-    notificationLogClient = new MockNotificationLogClient();
+    notificationLogClient = new MockNotificationLogClient(
+      Promise.resolve({ count: 0 }),
+    );
+    mockCreateAnalyticsEvent = jest.fn(analytics => {
+      return {
+        fire: () => null,
+      };
+    });
   });
 
-  it('Should trigger analytics event when activating', async () => {
-    const wrapper = await renderNotificationIndicator(returnCount(7), {
+  it('Should trigger analytics event when activating on mount', async () => {
+    setMockResponseCount(7);
+    const wrapper = await renderNotificationIndicator({
       max: 10,
       appearance: 'primary',
     });
@@ -87,5 +86,55 @@ describe('NotificationIndicator', () => {
         refreshSource: 'mount',
       },
     });
+  });
+
+  it('Should trigger analytics event when activating on timer', async done => {
+    setMockResponseCount(0);
+    let wrapper = await renderNotificationIndicator({
+      max: 10,
+      appearance: 'primary',
+      refreshRate: 10,
+    });
+    wrapper.update();
+    setMockResponseCount(10);
+    wrapper.update();
+
+    setTimeout(() => {
+      expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(1);
+      expect(mockCreateAnalyticsEvent.mock.calls[0][0]).toEqual({
+        name: 'notificationIndicator',
+        action: 'activated',
+        attributes: {
+          badgeCount: 10,
+          refreshSource: 'timer',
+        },
+      });
+      done();
+    }, 50);
+  });
+
+  it('Should not trigger analytics event if already activated', async done => {
+    setMockResponseCount(7);
+    let wrapper = await renderNotificationIndicator({
+      max: 10,
+      appearance: 'primary',
+      refreshRate: 10,
+    });
+    wrapper.update();
+    setMockResponseCount(10);
+    wrapper.update();
+
+    setTimeout(() => {
+      expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(1);
+      expect(mockCreateAnalyticsEvent.mock.calls[0][0]).toEqual({
+        name: 'notificationIndicator',
+        action: 'activated',
+        attributes: {
+          badgeCount: 7,
+          refreshSource: 'mount',
+        },
+      });
+      done();
+    }, 50);
   });
 });
