@@ -36,7 +36,7 @@ var PriorityTrivialIcon = function PriorityTrivialIcon(props) {
     _extends(
       {
         dangerouslySetGlyph:
-          '<svg width="24" height="24" viewBox="0 0 24 24" focusable="false" role="presentation"><circle stroke="#7A8699" stroke-width="2" cx="12" cy="12" r="7" fill-rule="evenodd"/></svg>',
+          '<svg width="24" height="24" viewBox="0 0 24 24" focusable="false" role="presentation"><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zm0 2a8 8 0 1 1 0-16 8 8 0 0 1 0 16z" fill="#7A8699"/></svg>',
       },
       props,
     ),
