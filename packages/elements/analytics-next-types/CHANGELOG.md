@@ -1,5 +1,10 @@
 # @atlaskit/analytics-next-types
 
+## 3.2.0
+- [minor] [c3fa0b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c3fa0b6):
+
+  - Added support for props of Sum type
+
 ## 3.1.2
 - [patch] [6998f11](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6998f11):
 
