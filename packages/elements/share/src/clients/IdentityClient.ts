@@ -5,7 +5,7 @@ import {
 } from '@atlaskit/util-service-support';
 
 export interface IdentityClient {
-  getInvitationsCapabilities: () => Promise<InvitationsCapabilities>;
+  getInvitationsCapabilities: () => Promise<InvitationsCapabilitiesResponse>;
 }
 
 type InvitationsCapabilitiesResponse = {
@@ -38,7 +38,9 @@ export class IdentityClientImpl implements IdentityClient {
     };
   }
 
-  public getInvitationsCapabilities<T>(): Promise<T> {
+  public getInvitationsCapabilities(): Promise<
+    InvitationsCapabilitiesResponse
+  > {
     const cloudId = this.cloudId;
     // we might need an ARI resolver in the future
     const ari = `ari:cloud:platform::site/${cloudId}`;
