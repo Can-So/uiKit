@@ -197,7 +197,6 @@ export default class Resizer extends React.Component<
           `image-${this.props.layout}`,
           this.props.className,
           {
-            'is-loading': this.props.isLoading,
             'is-resizing': this.state.isResizing,
             'not-resized': !this.props.pctWidth,
             'mediaSingle-selected': this.props.selected,

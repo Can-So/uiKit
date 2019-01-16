@@ -3,10 +3,10 @@ import { Component } from 'react';
 import { Node as PMNode } from 'prosemirror-model';
 import { EditorView, NodeView } from 'prosemirror-view';
 import { MediaSingleLayout } from '@atlaskit/adf-schema';
-import { MediaSingle } from '@atlaskit/editor-common';
+import { MediaSingle, WithProviders } from '@atlaskit/editor-common';
 import { CardEvent } from '@atlaskit/media-card';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
-import { stateKey, MediaPluginState } from '../pm-plugins/main';
+import { stateKey, MediaPluginState, MediaProvider } from '../pm-plugins/main';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';
 import MediaItem from './media';
 import WithPluginState from '../../../ui/WithPluginState';
@@ -78,9 +78,6 @@ export default class MediaSingleNode extends Component<
     if (this.props.selected()) {
       this.mediaPluginState.updateLayout(layout);
     }
-    this.setState({
-      lastMediaStatus: this.getMediaNodeStatus(this.props.node.firstChild),
-    });
   }
 
   private onExternalImageLoaded = ({ width, height }) => {
@@ -93,16 +90,6 @@ export default class MediaSingleNode extends Component<
         this.forceUpdate();
       },
     );
-  };
-
-  private getMediaNodeStatus = (childNode?: PMNode | null) => {
-    if (childNode) {
-      const state = this.mediaPluginState.getMediaNodeState(
-        childNode.attrs.__key,
-      );
-      return state && state.status;
-    }
-    return undefined;
   };
 
   private mediaChildHasUpdated = nextProps => {
@@ -148,8 +135,6 @@ export default class MediaSingleNode extends Component<
       editorAppearance,
     } = this.props;
 
-    const { lastMediaStatus } = this.state;
-
     const { layout, width: mediaSingleWidth } = node.attrs;
     const childNode = node.firstChild!;
 
@@ -167,8 +152,7 @@ export default class MediaSingleNode extends Component<
       }
     }
 
-    const isLoading = lastMediaStatus ? lastMediaStatus !== 'ready' : false;
-    let canResize = !!this.mediaPluginState.options.allowResizing && !isLoading;
+    let canResize = !!this.mediaPluginState.options.allowResizing;
 
     const pos = getPos();
     if (pos) {
@@ -197,7 +181,6 @@ export default class MediaSingleNode extends Component<
       layout,
       width,
       height,
-      isLoading,
 
       containerWidth: this.props.width,
       lineLength: this.props.lineLength,
@@ -205,15 +188,24 @@ export default class MediaSingleNode extends Component<
     };
 
     const MediaChild = (
-      <MediaItem
-        node={childNode}
-        view={this.props.view}
-        getPos={this.props.getPos}
-        cardDimensions={cardDimensions}
-        selected={selected()}
-        onClick={this.selectMediaSingle}
-        onExternalImageLoaded={this.onExternalImageLoaded}
-        editorAppearance={editorAppearance}
+      <WithProviders
+        providers={['mediaProvider']}
+        providerFactory={this.mediaPluginState.options.providerFactory}
+        renderNode={({ mediaProvider }) => {
+          return (
+            <MediaItem
+              node={childNode}
+              view={this.props.view}
+              getPos={this.props.getPos}
+              cardDimensions={cardDimensions}
+              mediaProvider={mediaProvider}
+              selected={selected()}
+              onClick={this.selectMediaSingle}
+              onExternalImageLoaded={this.onExternalImageLoaded}
+              editorAppearance={editorAppearance}
+            />
+          );
+        }}
       />
     );
 

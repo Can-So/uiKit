@@ -41,6 +41,7 @@ export interface MediaNodeProps extends ReactNodeProps {
     dimensions: { width: number; height: number },
   ) => void;
   editorAppearance: EditorAppearance;
+  mediaProvider: Promise<any>;
 }
 
 export interface Props extends Partial<MediaBaseAttributes> {
@@ -55,6 +56,7 @@ export interface Props extends Partial<MediaBaseAttributes> {
   imageStatus?: ImageStatus;
   context: Context;
   disableOverlay?: boolean;
+  mediaProvider: Promise<any>;
 }
 
 export interface MediaNodeState {
@@ -77,7 +79,6 @@ class MediaNode extends Component<
     super(props);
     const { view } = this.props;
     this.pluginState = mediaStateKey.getState(view.state);
-    this.mediaProvider = this.pluginState.mediaProvider;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -96,7 +97,9 @@ class MediaNode extends Component<
   componentDidMount() {
     this.hasBeenMounted = true;
     this.handleNewNode(this.props);
-    this.updateMediaContext();
+    if (this.props.mediaProvider) {
+      this.updateMediaContext();
+    }
   }
 
   componentWillUnmount() {
@@ -110,6 +113,7 @@ class MediaNode extends Component<
   }
 
   private updateMediaContext = async () => {
+    this.mediaProvider = await this.props.mediaProvider;
     const viewContext = await this.mediaProvider.viewContext;
     if (viewContext && this.hasBeenMounted) {
       this.setState({ viewContext });
