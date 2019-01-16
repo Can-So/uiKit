@@ -1,0 +1,8 @@
+{
+  "releases": [
+    { "name": "@atlaskit/editor-core", "type": "patch" },
+    { "name": "@atlaskit/media-picker", "type": "minor" },
+    { "name": "@atlaskit/media-test-helpers", "type": "minor" }
+  ],
+  "dependents": []
+}
