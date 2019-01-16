@@ -19,7 +19,7 @@ export class DeactivateUserOverviewScreen extends React.Component<
     return this.props.isCurrentUser ? selfCopy : adminCopy;
   };
 
-  renderLoseAccessListItem = () => {
+  renderLoseAccessListElement = () => {
     const { accessibleSites, user } = this.props;
     const hasAccessibleSites = accessibleSites && accessibleSites.length > 0;
     return (
@@ -107,7 +107,7 @@ export class DeactivateUserOverviewScreen extends React.Component<
             )}
           />
           <Styled.MainInformationList>
-            {this.renderLoseAccessListItem()}
+            {this.renderLoseAccessListElement()}
             {this.renderPersonalDataListElement()}
             {this.renderBillingListElement()}
           </Styled.MainInformationList>

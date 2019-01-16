@@ -79,39 +79,39 @@ export default {
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     '您或其他用户可能已经安装了向 Atlassian 产品添加功能的应用程序。这些应用程序可能存储了您的个人信息。',
   'focused-task-close-account.deactivate-account.overview.heading.self':
-    'Deactivate account',
+    '停用账户',
   'focused-task-close-account.deactivate-account.overview.heading.admin':
-    'Deactivate account',
+    '停用账户',
   'focused-task-close-account.deactivate-account.overview.first.line.self':
-    "You're about to deactivate the user account of:",
+    '您即将停用的用户账户：',
   'focused-task-close-account.deactivate-account.overview.first.line.admin':
-    "You're about to deactivate the user account of:",
+    '您即将停用的用户账户：',
   'focused-task-close-account.deactivate-account.overview.last.line.self':
-    'You can reactivate the account at any time.',
+    '您可以在任何时候重新激活该账户。',
   'focused-task-close-account.deactivate-account.overview.last.line.admin':
-    'You can reactivate the account at any time.',
+    '您可以在任何时候重新激活该账户。',
   'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
-    'When you deactivate the account:',
+    '当您停用账户：',
   'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
-    'When you deactivate the account:',
+    '当您停用账户：',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    '{fullName}将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。 他们目前可以访问：',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    '您将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。 您目前可以访问：',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    '{fullName}将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。目前，除社区和商城等服务外，他们无权访问任何服务。',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    '您将<b>立即失去对所有 Atlassian 帐户服务的访问权限</b>。目前，除社区和商城等服务外，您无权访问任何服务。',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    '其他 Atlassian 帐户服务，如 Atlassian 社区和商城。',
   'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
-    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+    '他们的个人数据，如全名、电子邮件地址，以及他们创建的内容，将保留在Atlassian 帐户服务中。',
   'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
-    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+    '他们的个人数据，如全名、电子邮件地址，以及他们创建的内容，将保留在Atlassian 帐户服务中。',
   'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
-    "We'll no longer bill you for them.",
+    '我们不再为此向您收费。',
   'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
-    "We'll no longer bill you for them.",
+    '我们不再为此向您收费。',
   'focused-task-close-account.delete-account.content-preview.heading':
     '用户将如何查看此帐户',
   'focused-task-close-account.delete-account.drop-down-expand-button':

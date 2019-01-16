@@ -79,39 +79,39 @@ export default {
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Vy nebo jiní uživatelé jste si mohli nainstalovat aplikace, které přidávají do produktů Atlassian funkce. Tyto aplikace mohly uložit údaje o vašem profilu.',
   'focused-task-close-account.deactivate-account.overview.heading.self':
-    'Deactivate account',
+    'Deaktivovat účet',
   'focused-task-close-account.deactivate-account.overview.heading.admin':
-    'Deactivate account',
+    'Deaktivovat účet',
   'focused-task-close-account.deactivate-account.overview.first.line.self':
-    "You're about to deactivate the user account of:",
+    'Chystáte se deaktivovat uživatelský účet:',
   'focused-task-close-account.deactivate-account.overview.first.line.admin':
-    "You're about to deactivate the user account of:",
+    'Chystáte se deaktivovat uživatelský účet:',
   'focused-task-close-account.deactivate-account.overview.last.line.self':
-    'You can reactivate the account at any time.',
+    'Účet můžete kdykoli zase aktivovat.',
   'focused-task-close-account.deactivate-account.overview.last.line.admin':
-    'You can reactivate the account at any time.',
+    'Účet můžete kdykoli zase aktivovat.',
   'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
-    'When you deactivate the account:',
+    'Když deaktivujete účet:',
   'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
-    'When you deactivate the account:',
+    'Když deaktivujete účet:',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. They currently have access to:',
+    'Uživatel {fullName} <b>okamžitě ztratí přístup</b> ke všem službám účtu Atlassian. Nyní má přístup k:',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. You currently have access to:",
+    '<b>Okamžitě ztratíte přístup</b> ke všem službám účtu Atlassian. Nyní máte přístup k:',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
-    '{fullName} will <b>immediately lose access</b> to all Atlassian account services. Currently, they don’t have access to any, except services like Community and Marketplace.',
+    'Uživatel {fullName} <b>okamžitě ztratí přístup</b> ke všem službám účtu Atlassian. Nyní nemá přístup k žádným službám kromě služeb jako Community nebo Marketplace.',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
-    "You'll <b>immediately lose access</b> to all Atlassian account services. Currently, you don’t have access to any, except services like Community and Marketplace.",
+    '<b>Okamžitě ztratíte přístup</b> ke všem službám účtu Atlassian. Nyní nemáte přístup k žádným službám kromě služeb jako Community nebo Marketplace.',
   'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
-    'Other Atlassian account services, such as Atlassian Community and Marketplace.',
+    'Další služby účtu Atlassian jako Atlassian Community a Marketplace.',
   'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
-    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+    'Osobní údaje uživatelů, jako je celé jméno a e-mailová adresa, a obsah, který vytvořili, ve službách účtu účet Atlassian zůstane.',
   'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
-    "Their personal data, such as their full name and email address, and content they've created will remain in Atlassian account services.",
+    'Osobní údaje uživatelů, jako je celé jméno a e-mailová adresa, a obsah, který vytvořili, ve službách účtu účet Atlassian zůstane.',
   'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
-    "We'll no longer bill you for them.",
+    'Už vám je nebudeme fakturovat.',
   'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
-    "We'll no longer bill you for them.",
+    'Už vám je nebudeme fakturovat.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Jak uživatelé uvidí tento účet',
   'focused-task-close-account.delete-account.drop-down-expand-button':
