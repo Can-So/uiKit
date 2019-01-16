@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { ReactElement, PureComponent } from 'react';
-import { CardEvent, Identifier, LinkIdentifier } from '@atlaskit/media-card';
+import {
+  CardEvent,
+  defaultImageCardDimensions,
+  Identifier,
+  LinkIdentifier,
+} from '@atlaskit/media-card';
 import { FilmstripView } from '@atlaskit/media-filmstrip';
 import { EventHandlers, CardSurroundings } from '@atlaskit/editor-common';
 import { MediaProps } from './media';
@@ -53,10 +58,7 @@ export default class MediaGroup extends PureComponent<
   renderSingleFile(child: ReactElement<MediaProps>) {
     return React.cloneElement(child, {
       resizeMode: 'stretchy-fit',
-      cardDimensions: {
-        width: '300px',
-        height: '200px',
-      },
+      cardDimensions: defaultImageCardDimensions,
     } as MediaProps);
   }
 

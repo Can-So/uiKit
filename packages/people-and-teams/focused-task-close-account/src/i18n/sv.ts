@@ -78,6 +78,40 @@ export default {
     'Du eller andra användare kan ha installerat appar som lägger till funktioner till Atlassian-produkter. Dessa appar kan ha lagrat användarens profilinformation.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Du eller andra användare kan ha installerat appar som lägger till funktioner till Atlassian-produkter. Dessa appar kan ha lagrat din profilinformation.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Inaktivera konto',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Inaktivera konto',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    'Du är på väg att inaktivera användarkontot för:',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    'Du är på väg att inaktivera användarkontot för:',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'Du kan när som helst återaktivera kontot.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'Du kan när som helst återaktivera kontot.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'När du inaktiverar kontot:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'När du inaktiverar kontot:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} kommer <b>omedelbart att förlora åtkomst</b> till samtliga Atlassian-kontotjänster. För närvarande ges åtkomst till:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    'Du kommer <b>omedelbart att förlora åtkomst</b> till samtliga Atlassian-kontotjänster. Du har har för närvarande åtkomst till:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName} kommer <b>omedelbart att förlora åtkomst</b> till samtliga Atlassian-kontotjänster. I nuläget har de inte åtkomst till några, med undantag av tjänster så som Community och Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    'Du kommer <b>omedelbart att förlora åtkomst</b> till samtliga Atlassian-kontotjänster. I nuläget har du inte åtkomst till några, med undantag av tjänster så som Community och Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Andra Atlassian-kontotjänster, så som Atlassian Community och Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    'Deras personuppgifter, till exempel deras fullständiga namn och e-postadress, och innehåll som de har skapat kommer att finnas kvar i Atlassian-kontotjänster.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    'Deras personuppgifter, till exempel deras fullständiga namn och e-postadress, och innehåll som de har skapat kommer att finnas kvar i Atlassian-kontotjänster.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'Vi kommer inte längre att ta betalt för dem.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'Vi kommer inte längre att ta betalt för dem.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Hur användare kommer att se detta konto',
   'focused-task-close-account.delete-account.drop-down-expand-button':

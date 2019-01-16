@@ -1,11 +1,8 @@
 {
   "name": "@atlaskit/share",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "config": {
     "access": "private"
-  },
-  "atlaskit": {
-    "internal": true
   },
   "description": "Fabric Share Element",
   "main": "dist/es5/index.js",
@@ -28,15 +25,22 @@
     "fabric",
     "elements"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@atlaskit/button": "^10.1.1",
+    "@atlaskit/field-text-area": "^4.0.15",
+    "@atlaskit/form": "^5.1.0",
+    "@atlaskit/user-picker": "^1.0.6"
+  },
   "peerDependencies": {
     "react": "^16.4.0",
     "react-intl": "^2.6.0"
   },
   "devDependencies": {
     "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/editor-test-helpers": "^6.3.4",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/section-message": "^1.0.14",
+    "@atlaskit/util-data-test": "^10.0.29",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-react-intl": "^2.0.3",

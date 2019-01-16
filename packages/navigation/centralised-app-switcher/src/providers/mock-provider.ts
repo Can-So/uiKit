@@ -1,48 +1,7 @@
-import { Component } from 'react';
+import asDataProvider from './as-data-provider';
 
-interface ProviderState {
-  isLoading: boolean;
-}
-interface ProviderProps {
-  children(props: {
-    data: {} | null;
-    isLoading: boolean;
-    error: {} | null;
-  }): JSX.Element | string;
-}
+const SOME_STATIC_DATA = {
+  data: 'yay!',
+};
 
-export default class MockProvider extends Component<
-  ProviderProps,
-  ProviderState
-> {
-  static defaultProps = {
-    children: null,
-  };
-
-  state = {
-    isLoading: true,
-  };
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        isLoading: false,
-      });
-    }, 2000);
-  }
-
-  render() {
-    const { isLoading } = this.state;
-    const { children } = this.props;
-
-    if (!children) {
-      return null;
-    }
-
-    return children({
-      data: null,
-      isLoading,
-      error: null,
-    });
-  }
-}
+export default asDataProvider(() => SOME_STATIC_DATA);

@@ -82,4 +82,5 @@ const typeAheadPlugin: EditorPlugin = {
   },
 };
 
+export { typeAheadPluginKey, TypeAheadPluginState };
 export default typeAheadPlugin;

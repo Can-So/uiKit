@@ -115,8 +115,6 @@ export const plugin = (dispatch: Dispatch) =>
           return commands.moveRight()(state, dispatch);
         } else if (event.key === keymaps.moveLeft.common) {
           return commands.moveLeft(view)(state, dispatch);
-        } else if (event.key === keymaps.backspace.common) {
-          return commands.removeIgnoredNodes(view)(state, dispatch);
         }
         return false;
       },

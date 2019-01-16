@@ -1,5 +1,10 @@
 # @atlaskit/embedded-document
 
+## 0.0.16
+- Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
+  - @atlaskit/renderer@35.0.1
+  - @atlaskit/editor-core@95.0.0
+
 ## 0.0.15
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/editor-core@94.0.0

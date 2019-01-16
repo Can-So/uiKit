@@ -1,4 +1,4 @@
-import { code_block, doc } from '@atlaskit/editor-test-helpers';
+import { code_block, doc, ul, li, p } from '@atlaskit/editor-test-helpers';
 import {
   checkParseEncodeRoundTrips,
   checkEncode,
@@ -6,7 +6,7 @@ import {
 } from './_test-helpers';
 import { createJIRASchema } from '@atlaskit/adf-schema';
 
-const schema = createJIRASchema({ allowCodeBlock: true });
+const schema = createJIRASchema({ allowCodeBlock: true, allowLists: true });
 
 // Nodes
 
@@ -17,6 +17,21 @@ describe('JIRATransformer', () => {
       schema,
       `<div class="code panel"><div class="codeContent panelContent"><pre class="code-javascript">var foo = "bar";</pre></div></div>`,
       doc(code_block({ language: 'javascript' })('var foo = "bar";')),
+    );
+
+    checkParseEncodeRoundTrips(
+      'code_block node inside a list',
+      schema,
+      `<ul class="alternate" type="disc"><li data-parent="ul">123<div class="code panel"><div class="codeContent panelContent"><pre class="code-plain">var foo = "bar";</pre></div></div><p>456</p></li></ul>`,
+      doc(
+        ul(
+          li(
+            p('123'),
+            code_block({ language: 'plain' })('var foo = "bar";'),
+            p('456'),
+          ),
+        ),
+      ),
     );
 
     checkParseEncodeRoundTrips(

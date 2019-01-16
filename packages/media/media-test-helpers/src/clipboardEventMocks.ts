@@ -65,27 +65,29 @@ export class MockDataTransfer implements DataTransfer {
 // this isn't implemented by JSDOM, and JSDOM .dispatchEvent() requires that event is an instanceof event,
 // so we've implemented it to make Typescript happy
 // see https://github.com/tmpvar/jsdom/issues/1568
-export class MockClipboardEvent extends Event implements ClipboardEvent {
-  clipboardData: DataTransfer;
-  constructor(event: string, files: File[] = [], types: string[] = []) {
-    super(event);
-    this.clipboardData = new MockDataTransfer(
-      MockFileList.fromArray(files),
-      types,
-    );
-  }
-}
+export const getMockClipboardEvent = () =>
+  class MockClipboardEvent extends Event implements ClipboardEvent {
+    clipboardData: DataTransfer;
+    constructor(event: string, files: File[] = [], types: string[] = []) {
+      super(event);
+      this.clipboardData = new MockDataTransfer(
+        MockFileList.fromArray(files),
+        types,
+      );
+    }
+  };
 
-export class MockDragEvent extends MouseEvent implements DragEvent {
-  dataTransfer: DataTransfer;
-  constructor(event: string, files: File[] = []) {
-    super(event);
-    this.dataTransfer = new MockDataTransfer(MockFileList.fromArray(files));
-  }
-  initDragEvent(): void {
-    // noop
-  }
-  msConvertURL(): void {
-    // noop
-  }
-}
+export const MockDragEvent = () =>
+  class MockDragEvent extends MouseEvent implements DragEvent {
+    dataTransfer: DataTransfer;
+    constructor(event: string, files: File[] = []) {
+      super(event);
+      this.dataTransfer = new MockDataTransfer(MockFileList.fromArray(files));
+    }
+    initDragEvent(): void {
+      // noop
+    }
+    msConvertURL(): void {
+      // noop
+    }
+  };

@@ -367,11 +367,6 @@ function mentionPluginFactory(
                   mentionProvider.unsubscribe('mentionPlugin');
                 }
 
-                // Preload mentions, and populate cache
-                if (provider) {
-                  provider.filter('');
-                }
-
                 mentionProvider = provider;
                 setProvider(provider)(editorView.state, editorView.dispatch);
 
@@ -380,15 +375,13 @@ function mentionPluginFactory(
                   (mentions, query, stats) => {
                     setResults(mentions)(editorView.state, editorView.dispatch);
 
-                    if (stats && stats.remoteSearch) {
-                      fireEvent(
-                        buildTypeAheadRenderedPayload(
-                          stats.duration,
-                          mentions.map(mention => mention.id),
-                          query || '',
-                        ),
-                      );
-                    }
+                    fireEvent(
+                      buildTypeAheadRenderedPayload(
+                        stats && stats.duration,
+                        mentions.map(mention => mention.id),
+                        query || '',
+                      ),
+                    );
                   },
                 );
               })

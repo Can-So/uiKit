@@ -27,7 +27,7 @@ import {
   mockState,
   getComponentClassWithStore,
   mockIsWebGLNotAvailable,
-} from '../../../../../mocks';
+} from '@atlaskit/media-test-helpers';
 
 mockIsWebGLNotAvailable(); // mock WebGL fail check before StatelessUploadView is imported
 import { isWebGLAvailable } from '../../../../../tools/webgl';

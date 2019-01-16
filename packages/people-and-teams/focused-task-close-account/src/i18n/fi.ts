@@ -78,6 +78,40 @@ export default {
     'Sinä tai muut käyttäjät olette ehkä asentaneet sovelluksia, jotka lisäävät ominaisuuksia Atlassian-tuotteisiin. Nämä sovellukset ovat saattaneet tallentaa käyttäjän profiilitietoja.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Sinä tai muut käyttäjät olette ehkä asentaneet sovelluksia, jotka lisäävät ominaisuuksia Atlassian-tuotteisiin. Nämä sovellukset ovat saattaneet tallentaa sinun profiilitietojasi.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Poista tili käytöstä',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Poista tili käytöstä',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    'Olet poistamassa käytöstä seuraavan henkilön tilin:',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    'Olet poistamassa käytöstä seuraavan henkilön tilin:',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'Voit ottaa tilin uudelleen käyttöön milloin tahansa.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'Voit ottaa tilin uudelleen käyttöön milloin tahansa.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'Kun poistat tilin käytöstä tapahtuu seuraavaa:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'Kun poistat tilin käytöstä tapahtuu seuraavaa:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} <b>menettää heti pääsyn</b> kaikkiin Atlassian-tilipalveluihin. Tällä hetkellä hänellä on pääsy seuraaviin kohteisiin:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    'Menetät <b>heti pääsyn</b> kaikkiin Atlassian-tilipalveluihin. Tällä hetkellä sinulla on pääsy seuraaviin kohteisiin:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName} <b>menettää heti pääsyn</b> kaikkiin Atlassian-tilipalveluihin. Tällä hetkellä hänellä ei ole pääsyä mihinkään palveluihin, paitsi Yhteisön ja Marketplacen kaltaisiin palveluihin.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    'Menetät <b>heti pääsyn</b> kaikkiin Atlassian-tilipalveluihin. Tällä hetkellä sinulla ei ole pääsyä mihinkään palveluihin, paitsi Yhteisön ja Marketplacen kaltaisiin palveluihin.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Muut Atlassian-tilipalvelut, kuten Atlassian-Yhteisö ja Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    'Hänen henkilötietonsa, kuten hänen koko nimensä ja sähköpostiosoitteensa, sekä hänen luomansa sisältö pysyvät Atlassian-tilipalveluissa.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    'Hänen henkilötietonsa, kuten hänen koko nimensä ja sähköpostiosoitteensa, sekä hänen luomansa sisältö pysyvät Atlassian-tilipalveluissa.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'Emme enää laskuta sinua hänestä.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'Emme enää laskuta sinua hänestä.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Miltä tämä tili näyttää käyttäjille',
   'focused-task-close-account.delete-account.drop-down-expand-button':

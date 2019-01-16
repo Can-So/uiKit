@@ -25,26 +25,39 @@ describe('MultiValueContainer', () => {
     shallow(<MultiValueContainer selectProps={selectProps} {...props} />);
 
   test.each([
-    ['add more people...', selectProps.value, false],
-    [undefined, selectProps.options, false],
-    [undefined, [], false],
-    [undefined, [], true],
+    ['add more people...', selectProps.value, false, false],
+    ['Enter more...', selectProps.value, false, true],
+    [undefined, selectProps.options, false, false],
+    [undefined, [], false, false],
+    [undefined, [], true, false],
   ])(
     'should set placeholder to "%s" when (value: %p, loading: %s)',
-    (placeholder, value, isLoading) => {
+    (placeholder, value, isLoading, override) => {
       const component = shallowValueContainer({
         children: [
           <div key="placeholder">Placeholder</div>,
           <input key="input" type="text" />,
         ],
-        selectProps: { ...selectProps, value, isLoading },
+        selectProps: {
+          ...selectProps,
+          value,
+          isLoading,
+          addMoreMessage: override ? placeholder : undefined,
+        },
       });
-      const children = renderProp(
-        component.find(FormattedMessage as React.ComponentClass<any>),
-        'children',
-        'add more people...',
-      );
-      expect(children.find('input').prop('placeholder')).toEqual(placeholder);
+
+      const input = (component
+        .find(FormattedMessage as React.ComponentClass<any>)
+        .exists()
+        ? renderProp(
+            component.find(FormattedMessage as React.ComponentClass<any>),
+            'children',
+            'add more people...',
+          )
+        : component
+      ).find('input');
+
+      expect(input.prop('placeholder')).toEqual(placeholder);
     },
   );
 
