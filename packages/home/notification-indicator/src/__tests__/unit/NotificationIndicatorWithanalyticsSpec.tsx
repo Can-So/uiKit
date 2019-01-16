@@ -71,7 +71,7 @@ describe('NotificationIndicator', () => {
 
   it('Should trigger analytics events when activating on mount', async () => {
     setMockResponseCount(7);
-    const wrapper = await renderNotificationIndicator({
+    await renderNotificationIndicator({
       max: 10,
       appearance: 'primary',
     });
@@ -98,7 +98,7 @@ describe('NotificationIndicator', () => {
 
   it('Should trigger analytics events when activating on timer', async done => {
     setMockResponseCount(0);
-    let wrapper = await renderNotificationIndicator({
+    await renderNotificationIndicator({
       max: 10,
       appearance: 'primary',
       refreshRate: 20,
@@ -131,7 +131,7 @@ describe('NotificationIndicator', () => {
 
   it('Should not trigger an activated event more than once', async done => {
     setMockResponseCount(7);
-    let wrapper = await renderNotificationIndicator({
+    await renderNotificationIndicator({
       max: 10,
       appearance: 'primary',
       refreshRate: 20,
