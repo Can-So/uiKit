@@ -34,7 +34,7 @@ export default ({ cloudId }) => {
                 </Section>
               )}
               <ManageButton
-                onClick={() => (window.location = customLinksData[1])}
+                onClick={() => (window.location.href = customLinksData[1])}
               />
             </AppSwitcherWrapper>
           )}
