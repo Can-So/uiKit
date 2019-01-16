@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/share",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "config": {
     "access": "private"
   },
@@ -29,7 +29,7 @@
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/field-text-area": "^4.0.15",
     "@atlaskit/form": "^5.1.0",
-    "@atlaskit/user-picker": "^1.0.3"
+    "@atlaskit/user-picker": "^1.0.6"
   },
   "peerDependencies": {
     "react": "^16.4.0",

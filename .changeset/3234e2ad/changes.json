@@ -1,7 +1,0 @@
-{
-  "releases": [
-    { "name": "@atlaskit/share", "type": "patch" },
-    { "name": "@atlaskit/user-picker", "type": "patch" }
-  ],
-  "dependents": []
-}
