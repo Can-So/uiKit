@@ -214,8 +214,10 @@ describe('MentionResource', () => {
     it('should add valid duration field to stats object', done => {
       const resource = new MentionResource(apiConfig);
       resource.subscribe('test1', (mentions, query, stats) => {
-        expect(stats).toBeDefined();
-        expect(stats!.duration).toBeGreaterThan(0);
+        if ((stats && !stats!.duration) || !stats) {
+          fail(`stats.duration is undefined: ${stats}`);
+        }
+        expect(stats!.duration).toBeGreaterThanOrEqual(0);
         done();
       });
       resource.filter('');
