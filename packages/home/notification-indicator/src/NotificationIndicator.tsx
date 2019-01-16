@@ -105,7 +105,7 @@ class NotificationIndicator extends Component<Props, State> {
   private handleAnalytics = countUpdateProperties => {
     const { newCount, oldCount, source } = countUpdateProperties;
 
-    // Only fire the analytics event if the notification indicator is 'activating' for the first time
+    // Only fire an 'activating' analytics event if the notification indicator is 'activating' for the first time
     // ie going from a number of 0 (the indicator is not visible)
     // to a number > 0 (the indicator becomes visible)
     if (this.props.createAnalyticsEvent && newCount > 0 && oldCount === 0) {
@@ -114,6 +114,19 @@ class NotificationIndicator extends Component<Props, State> {
         action: 'activated',
         attributes: {
           badgeCount: newCount,
+          refreshSource: source,
+        },
+      });
+      event.fire(NAVIGATION_CHANNEL);
+    }
+
+    if (this.props.createAnalyticsEvent && newCount !== oldCount) {
+      const event = this.props.createAnalyticsEvent({
+        name: 'notificationIndicator',
+        action: 'updated',
+        attributes: {
+          oldCount: oldCount,
+          newCount: newCount,
           refreshSource: source,
         },
       });

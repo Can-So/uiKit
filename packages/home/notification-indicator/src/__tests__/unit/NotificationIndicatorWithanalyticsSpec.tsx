@@ -69,15 +69,14 @@ describe('NotificationIndicator', () => {
     });
   });
 
-  it('Should trigger analytics event when activating on mount', async () => {
+  it('Should trigger analytics events when activating on mount', async () => {
     setMockResponseCount(7);
     const wrapper = await renderNotificationIndicator({
       max: 10,
       appearance: 'primary',
     });
-    wrapper.update();
 
-    expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(1);
+    expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(2);
     expect(mockCreateAnalyticsEvent.mock.calls[0][0]).toEqual({
       name: 'notificationIndicator',
       action: 'activated',
@@ -86,21 +85,29 @@ describe('NotificationIndicator', () => {
         refreshSource: 'mount',
       },
     });
+    expect(mockCreateAnalyticsEvent.mock.calls[1][0]).toEqual({
+      name: 'notificationIndicator',
+      action: 'updated',
+      attributes: {
+        oldCount: 0,
+        newCount: 7,
+        refreshSource: 'mount',
+      },
+    });
   });
 
-  it('Should trigger analytics event when activating on timer', async done => {
+  it('Should trigger analytics events when activating on timer', async done => {
     setMockResponseCount(0);
     let wrapper = await renderNotificationIndicator({
       max: 10,
       appearance: 'primary',
-      refreshRate: 10,
+      refreshRate: 20,
     });
-    wrapper.update();
     setMockResponseCount(10);
-    wrapper.update();
+    expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(0);
 
     setTimeout(() => {
-      expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(1);
+      expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(2);
       expect(mockCreateAnalyticsEvent.mock.calls[0][0]).toEqual({
         name: 'notificationIndicator',
         action: 'activated',
@@ -109,29 +116,59 @@ describe('NotificationIndicator', () => {
           refreshSource: 'timer',
         },
       });
+      expect(mockCreateAnalyticsEvent.mock.calls[1][0]).toEqual({
+        name: 'notificationIndicator',
+        action: 'updated',
+        attributes: {
+          oldCount: 0,
+          newCount: 10,
+          refreshSource: 'timer',
+        },
+      });
       done();
     }, 50);
   });
 
-  it('Should not trigger analytics event if already activated', async done => {
+  it('Should not trigger an activated event more than once', async done => {
     setMockResponseCount(7);
     let wrapper = await renderNotificationIndicator({
       max: 10,
       appearance: 'primary',
-      refreshRate: 10,
+      refreshRate: 20,
     });
-    wrapper.update();
+
+    // Mount events
+    expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(2);
+    expect(mockCreateAnalyticsEvent.mock.calls[0][0]).toEqual({
+      name: 'notificationIndicator',
+      action: 'activated',
+      attributes: {
+        badgeCount: 7,
+        refreshSource: 'mount',
+      },
+    });
+    expect(mockCreateAnalyticsEvent.mock.calls[1][0]).toEqual({
+      name: 'notificationIndicator',
+      action: 'updated',
+      attributes: {
+        oldCount: 0,
+        newCount: 7,
+        refreshSource: 'mount',
+      },
+    });
+
     setMockResponseCount(10);
-    wrapper.update();
 
     setTimeout(() => {
-      expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(1);
-      expect(mockCreateAnalyticsEvent.mock.calls[0][0]).toEqual({
+      // On refresh we only expect the updated event because the indicator was already 'activated'
+      expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(3);
+      expect(mockCreateAnalyticsEvent.mock.calls[2][0]).toEqual({
         name: 'notificationIndicator',
-        action: 'activated',
+        action: 'updated',
         attributes: {
-          badgeCount: 7,
-          refreshSource: 'mount',
+          oldCount: 7,
+          newCount: 10,
+          refreshSource: 'timer',
         },
       });
       done();
