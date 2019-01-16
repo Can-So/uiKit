@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 28.0.4
+- [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
+
+  - ED-5991: bumped prosemirror-view to 1.6.8
+
 ## 28.0.3
 - [patch] [61ce3c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/61ce3c5):
 

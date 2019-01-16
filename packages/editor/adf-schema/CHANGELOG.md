@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.3.3
+- [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
+
+  - ED-5991: bumped prosemirror-view to 1.6.8
+
 ## 1.3.2
 - [patch] [a50c114](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a50c114):
 
