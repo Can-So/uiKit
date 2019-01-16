@@ -37,5 +37,7 @@ const {
     .filter(pkg => filters.every(filter => filter(pkg)))
     .map(pkg => pkg.relativeDir);
 
-  console.log(`{${relativePaths.join(',')}}`);
+  console.log(
+    relativePaths.length > 1 ? `{${relativePaths.join()}}` : relativePaths[0],
+  );
 })();
