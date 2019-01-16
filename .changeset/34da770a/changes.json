@@ -1,0 +1,8 @@
+{
+  "releases": [
+    { "name": "@atlaskit/analytics-next", "type": "minor" },
+    { "name": "@atlaskit/type-helpers", "type": "minor" },
+    { "name": "@atlaskit/analytics-next-types", "type": "minor" }
+  ],
+  "dependents": []
+}
