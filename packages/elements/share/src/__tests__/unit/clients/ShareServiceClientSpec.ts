@@ -16,8 +16,12 @@ describe('ShareServiceClientImpl', () => {
   };
   let mockRecipients = [{ id: 'id' }, { email: 'email' }];
   let mockMetaData = {
-    shareToAtlassianAccountHoldersOriginId: 'atlOrigin1',
-    shareToNewUsersOriginId: 'atlOrigin2',
+    toAtlassianAccountHolders: {
+      atlOriginId: 'atlOrigin1',
+    },
+    toNewUsers: {
+      atlOriginId: 'atlOrigin2',
+    },
   };
   let mockComment: 'comment';
 
