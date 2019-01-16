@@ -23,9 +23,7 @@ type InputProps = {
   text: string;
 };
 
-export const VisuallyHiddenInput: React.ComponentType<
-  InputProps
-> = React.forwardRef(
+export const HiddenInput: React.ComponentType<InputProps> = React.forwardRef(
   (props: { text: string }, ref?: React.Ref<HTMLInputElement>) => (
     <input
       style={{ position: 'absolute', left: '-9999px' }}
@@ -43,25 +41,25 @@ export class CopyLinkButton extends React.Component<Props> {
   private inputRef: React.RefObject<HTMLInputElement> = React.createRef();
 
   state = {
-    shouldCopiedMessageShown: false,
+    shouldShowCopiedMessage: false,
   };
 
   handleClick = () => {
     this.inputRef.current!.select();
     document.execCommand('copy');
-    this.setState({ shouldCopiedMessageShown: true });
+    this.setState({ shouldShowCopiedMessage: true });
   };
 
   handleDismissCopiedMessage = () => {
-    this.setState({ shouldCopiedMessageShown: false });
+    this.setState({ shouldShowCopiedMessage: false });
   };
 
   render() {
-    const { shouldCopiedMessageShown } = this.state;
+    const { shouldShowCopiedMessage } = this.state;
 
     return (
       <>
-        <VisuallyHiddenInput ref={this.inputRef} text={this.props.link} />
+        <HiddenInput ref={this.inputRef} text={this.props.link} />
         <InlineDialog
           content={
             <MessageContainer>
@@ -71,7 +69,7 @@ export class CopyLinkButton extends React.Component<Props> {
               </MessageSpan>
             </MessageContainer>
           }
-          isOpen={shouldCopiedMessageShown}
+          isOpen={shouldShowCopiedMessage}
           onClose={this.handleDismissCopiedMessage}
           placement="top-start"
         >

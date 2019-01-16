@@ -6,7 +6,7 @@ import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
 import {
   CopyLinkButton,
   MessageContainer,
-  VisuallyHiddenInput,
+  HiddenInput,
 } from '../../../components/CopyLinkButton';
 
 describe('CopyLinkButton', () => {
@@ -38,7 +38,7 @@ describe('CopyLinkButton', () => {
     expect(button.length).toEqual(1);
     expect(button.prop('appearance')).toEqual('subtle-link');
 
-    const hiddenInput = wrapper.find(VisuallyHiddenInput);
+    const hiddenInput = wrapper.find(HiddenInput);
     expect(hiddenInput.length).toEqual(1);
     expect(hiddenInput.prop('text')).toEqual(mockLink);
 
@@ -48,14 +48,14 @@ describe('CopyLinkButton', () => {
     ).toBe(true);
   });
 
-  describe('shouldCopiedMessageShown state', () => {
+  describe('shouldShowCopiedMessage state', () => {
     it('should render the copied to clip board message, and dismiss the message when click outside the Inline Dialog', () => {
       const eventMap: { click: Function } = { click: () => {} };
       window.addEventListener = jest.fn((event, cb) => (eventMap[event] = cb));
 
       const wrapper = mount<CopyLinkButton>(<CopyLinkButton link={mockLink} />);
       wrapper.setState({
-        shouldCopiedMessageShown: true,
+        shouldShowCopiedMessage: true,
       });
       expect(wrapper.find(CheckCircleIcon).length).toEqual(1);
       expect(wrapper.find(MessageContainer).length).toEqual(1);
@@ -81,7 +81,7 @@ describe('CopyLinkButton', () => {
   });
 
   describe('handleClick', () => {
-    it('should copy the text from the VisuallyHiddenInput', () => {
+    it('should copy the text from the HiddenInput', () => {
       const wrapper = mount<CopyLinkButton>(<CopyLinkButton link={mockLink} />);
       // @ts-ignore accessing private property just for testing purpose
       const spiedInputSelect = jest.spyOn(
@@ -91,6 +91,7 @@ describe('CopyLinkButton', () => {
       wrapper.instance().handleClick();
       expect(spiedInputSelect).toHaveBeenCalledTimes(1);
       expect(spiedExecCommand).toHaveBeenCalledTimes(1);
+      expect(wrapper.state().shouldShowCopiedMessage).toBe(true);
     });
   });
 });
