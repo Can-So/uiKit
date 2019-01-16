@@ -1,0 +1,1 @@
+- AK-5693 apply styles to loading indicator
