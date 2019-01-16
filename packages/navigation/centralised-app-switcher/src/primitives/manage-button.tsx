@@ -1,3 +1,3 @@
 import React from 'react';
 
-export default () => <button>Manage</button>;
+export default ({ onClick }) => <button onClick={onClick}>Manage</button>;

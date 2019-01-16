@@ -13,5 +13,8 @@ export const RecentContainersProvider = asDataProvider<JiraCloudIdProvider>(
 );
 
 export const CustomLinksProvider = asDataProvider<DataProviderProps>(() =>
-  fetchJson(`/rest/menu/latest/appswitcher`),
+  Promise.all([
+    fetchJson(`/rest/menu/latest/appswitcher`),
+    '/plugins/servlet/customize-application-navigator',
+  ]),
 );
