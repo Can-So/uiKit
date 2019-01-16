@@ -2,7 +2,10 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 import { ServiceIcon, Wrapper, ServiceName } from '../../styled';
 import { changeService } from '../../../../../actions';
-import { mockStore, getComponentClassWithStore } from '../../../../../mocks';
+import {
+  mockStore,
+  getComponentClassWithStore,
+} from '@atlaskit/media-test-helpers';
 import {
   StatelessSidebarItem,
   default as ConnectedSidebarItem,

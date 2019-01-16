@@ -1,5 +1,5 @@
 import fileUploadsAdd from '../../fileUploadsAdd';
-import { mockState } from '../../../mocks/index';
+import { mockState } from '@atlaskit/media-test-helpers';
 import { LocalUpload, State } from '../../../domain/index';
 import { fileUploadsStart } from '../../../actions/fileUploadsStart';
 import { MediaFile } from '../../../../domain/file';

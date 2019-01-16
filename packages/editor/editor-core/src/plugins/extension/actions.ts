@@ -73,7 +73,8 @@ export const removeExtension = (): Command => (state, dispatch) => {
 
   if (
     selection instanceof NodeSelection &&
-    selection.node.type === schema.nodes.inlineExtension
+    (selection.node.type === schema.nodes.inlineExtension ||
+      selection.node.type === schema.nodes.extension)
   ) {
     tr = removeSelectedNode(tr);
   } else {

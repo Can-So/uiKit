@@ -24,17 +24,23 @@ describe(`${name}/schema inlineCard node`, () => {
   describe('inlineCard with "url" attribute', () => {
     describe('parse html', () => {
       it('converts to inlineCard PM node', () => {
-        const doc = fromHTML(`<span data-card-url="${url}" />`, schema);
+        const doc = fromHTML(
+          `<span data-inline-card data-card-url="${url}" />`,
+          schema,
+        );
         const node = doc.firstChild!.firstChild!;
         expect(node.type.spec).toEqual(inlineCard);
       });
 
       it('gets attributes from html', () => {
-        const doc = fromHTML(`<span data-card-url="${url}" />`, schema);
+        const doc = fromHTML(
+          `<span data-inline-card data-card-url="${url}" />`,
+          schema,
+        );
 
         const node = doc.firstChild!.firstChild!;
         expect(node.attrs.url).toEqual(url);
-        expect(node.attrs.data).toEqual({});
+        expect(node.attrs.data).toEqual(null);
       });
     });
 
@@ -60,7 +66,9 @@ describe(`${name}/schema inlineCard node`, () => {
     describe('parse html', () => {
       it('converts to inlineCard PM node', () => {
         const doc = fromHTML(
-          `<span data-card-url="" data-card-data='${JSON.stringify(data)}' />`,
+          `<span data-inline-card data-card-url="" data-card-data='${JSON.stringify(
+            data,
+          )}' />`,
           schema,
         );
         const node = doc.firstChild!.firstChild!;
@@ -69,7 +77,9 @@ describe(`${name}/schema inlineCard node`, () => {
 
       it('gets attributes from html', () => {
         const doc = fromHTML(
-          `<span data-card-url="" data-card-data='${JSON.stringify(data)}' />`,
+          `<span data-inline-card data-card-url="" data-card-data='${JSON.stringify(
+            data,
+          )}' />`,
           schema,
         );
 

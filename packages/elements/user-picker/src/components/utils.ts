@@ -55,8 +55,10 @@ export const optionToSelectableOptions = memoizeOne((defaultValue: Value) => {
   return optionToSelectableOption(defaultValue);
 });
 
-export const getAvatarSize = (appearance: string): 'small' | 'medium' =>
-  appearance === 'big' ? 'medium' : 'small';
+export const getAvatarSize = (
+  appearance: string,
+): 'xsmall' | 'small' | 'medium' =>
+  appearance === 'big' ? 'medium' : appearance === 'multi' ? 'xsmall' : 'small';
 
 export const isChildInput = (child: ReactChild): child is ReactElement<any> =>
   child &&

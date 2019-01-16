@@ -29,6 +29,9 @@ describe('ProviderFactory', () => {
     });
 
     it('should remove provider from map if undefined', () => {
+      // set it initially
+      providerFactory.setProvider(providerName1, provider);
+
       const spySet = jest.spyOn((providerFactory as any).providers, 'set');
       const spyDelete = jest.spyOn(
         (providerFactory as any).providers,
@@ -53,6 +56,46 @@ describe('ProviderFactory', () => {
       expect(spy).toHaveBeenCalledWith(providerName1, provider);
       expect(spy).toHaveBeenLastCalledWith(providerName1, undefined);
       spy.mockRestore();
+    });
+
+    describe('when provider is unchanged', () => {
+      beforeEach(() => {
+        providerFactory.setProvider(providerName1, provider);
+      });
+
+      it('should not update map with provider', () => {
+        const spy = jest.spyOn((providerFactory as any).providers, 'set');
+        providerFactory.setProvider(providerName1, provider);
+
+        expect(spy).not.toHaveBeenCalled();
+      });
+
+      it('should not trigger notifyUpdated', () => {
+        const spy = jest.spyOn(providerFactory, 'notifyUpdated');
+        providerFactory.setProvider(providerName1, provider);
+
+        expect(spy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('when provider is undefined and new value is also undefined', () => {
+      beforeEach(() => {
+        providerFactory.setProvider(providerName1, undefined);
+      });
+
+      it('should not update map with provider', () => {
+        const spy = jest.spyOn((providerFactory as any).providers, 'set');
+        providerFactory.setProvider(providerName1, undefined);
+
+        expect(spy).not.toHaveBeenCalled();
+      });
+
+      it('should not trigger notifyUpdated', () => {
+        const spy = jest.spyOn(providerFactory, 'notifyUpdated');
+        providerFactory.setProvider(providerName1, undefined);
+
+        expect(spy).not.toHaveBeenCalled();
+      });
     });
   });
 
