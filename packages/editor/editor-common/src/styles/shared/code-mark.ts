@@ -10,6 +10,7 @@ export const codeMarkSharedStyles = css`
     background-color: ${colors.N30A};
     box-decoration-break: clone;
     border-radius: 3px;
+    border-style: none;
     font-family: ${codeFontFamily()};
     white-space: pre-wrap;
     margin: 0 4px 0 4px;

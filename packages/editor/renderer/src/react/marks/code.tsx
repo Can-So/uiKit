@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-export default function Code(props: {
-  children: React.ReactChild | React.ReactChild[];
-}) {
+export default function Code(props: { children: React.ReactNode }) {
   return <span className="code">{props.children}</span>;
 }
