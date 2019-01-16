@@ -277,8 +277,8 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
       duration: this._durationSince(this._timeOpen),
     });
     const isDisabledUser = status === 'inactive' || status === 'closed';
-
     const actions = this.renderActionsButtons();
+
     return (
       <CardContainer isDisabledUser={isDisabledUser}>
         <ProfileImage>
@@ -293,7 +293,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
           {actions ? (
             <>
               <ActionsFlexSpacer />
-              {this.renderActionsButtons()}
+              {actions}
             </>
           ) : null}
         </CardContent>
