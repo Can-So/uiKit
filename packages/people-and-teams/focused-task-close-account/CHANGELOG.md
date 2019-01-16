@@ -1,5 +1,10 @@
 # @atlaskit/focused-task-close-account
 
+## 0.8.0
+- [minor] [d89857a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d89857a):
+
+  - Deactivation flow added which is a single screen flow in the focused task component
+
 ## 0.7.0
 - [minor] [91f6abc](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/91f6abc):
 

@@ -6,7 +6,7 @@ class AppSwitcher extends Component {
   render() {
     return (
       <MockProvider>
-        {({ isLoading }) =>
+        {({ isLoading, data }) =>
           isLoading ? (
             'Loading...'
           ) : (
@@ -22,6 +22,7 @@ class AppSwitcher extends Component {
                 <Item>Third Item</Item>
               </Section>
               <ManageButton />
+              {JSON.stringify(data)}
             </AppSwitcherWrapper>
           )
         }

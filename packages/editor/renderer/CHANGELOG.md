@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 35.0.4
+- [patch] [dfdfaf2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfdfaf2):
+
+  - ED-5493 Fix Media Cards bigger in renderer than editor
+
 ## 35.0.3
 - [patch] [48abc90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/48abc90):
 

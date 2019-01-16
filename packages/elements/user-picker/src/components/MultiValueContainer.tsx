@@ -54,19 +54,32 @@ export class MultiValueContainer extends React.PureComponent<any, State> {
     );
   };
 
+  private addPlaceholder = (placeholder: string) =>
+    React.Children.map(this.props.children, child =>
+      isChildInput(child) && this.showPlaceholder()
+        ? React.cloneElement(child, { placeholder })
+        : child,
+    );
+
+  private renderChildren = () => {
+    const {
+      selectProps: { addMoreMessage },
+    } = this.props;
+    if (addMoreMessage === undefined) {
+      return (
+        <FormattedMessage {...messages.addMore}>
+          {addMore => this.addPlaceholder(addMore as string)}
+        </FormattedMessage>
+      );
+    }
+    return this.addPlaceholder(addMoreMessage);
+  };
+
   render() {
     const { children, ...valueContainerProps } = this.props;
     return (
       <components.ValueContainer {...valueContainerProps}>
-        <FormattedMessage {...messages.addMore}>
-          {addMore =>
-            React.Children.map(children, child =>
-              isChildInput(child) && this.showPlaceholder()
-                ? React.cloneElement(child, { placeholder: addMore })
-                : child,
-            )
-          }
-        </FormattedMessage>
+        {this.renderChildren()}
         <ScrollAnchor innerRef={this.handleBottomAnchor} />
       </components.ValueContainer>
     );

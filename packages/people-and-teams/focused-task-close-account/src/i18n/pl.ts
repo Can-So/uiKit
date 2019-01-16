@@ -78,6 +78,40 @@ export default {
     'Ty lub inni użytkownicy mogą mieć zainstalowane aplikacje, które dodają funkcje do produktów Atlassian. Aplikacje te mogły przechowywać informacje o profilu użytkownika.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Ty lub inni użytkownicy mogą mieć zainstalowane aplikacje, które dodają funkcje do produktów Atlassian. Aplikacje te mogły przechowywać informacje o Twoim profilu.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Dezaktywuj konto',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Dezaktywuj konto',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    'Zamierzasz dezaktywować konto użytkownika:',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    'Zamierzasz dezaktywować konto użytkownika:',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'W każdej chwili możesz ponownie aktywować konto.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'W każdej chwili możesz ponownie aktywować konto.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'Gdy dezaktywujesz konto:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'Gdy dezaktywujesz konto:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} <b>natychmiast utraci dostęp</b> do wszystkich usług kont Atlassian. Obecnie ma dostęp do:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    '<b>Natychmiast utracisz dostęp</b> do wszystkich usług kont Atlassian. Obecnie masz dostęp do:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName} natychmiast <b>utraci dostęp</b> do wszystkich usług kont Atlassian. Obecnie nie ma dostępu do żadnych innych usług, z wyjątkiem Community i Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    'Natychmiast <b>utracisz dostęp</b> do wszystkich usług kont Atlassian. Obecnie nie masz dostępu do żadnych innych usług, z wyjątkiem Community i Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Inne usługi konta Atlassian, takie jak społeczność Atlassian Community i sklep Atlassian Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    'Jego dane osobowe, takie jak imię i nazwisko, adres e-mail oraz treść, którą stworzył, pozostaną w usługach konta Atlassian.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    'Jego dane osobowe, takie jak imię i nazwisko, adres e-mail oraz treść, którą stworzył, pozostaną w usługach konta Atlassian.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'W związku z tym nie będziemy już naliczać Ci opłat za nich.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'W związku z tym nie będziemy już naliczać Ci opłat za nich.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Jak użytkownicy będą widzieć to konto',
   'focused-task-close-account.delete-account.drop-down-expand-button':

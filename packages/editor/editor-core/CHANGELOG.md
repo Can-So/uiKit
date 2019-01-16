@@ -1,5 +1,25 @@
 # @atlaskit/editor-core
 
+## 95.0.8
+- [patch] [fc9a884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc9a884):
+
+  - ED-5543: fix backspacing after hardbreak node
+
+## 95.0.7
+- [patch] [5f8b151](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5f8b151):
+
+  - Open date picker on enter when date node is selected
+
+## 95.0.6
+- [patch] [6855bec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6855bec):
+
+  - Updated internal use of ModalDialog to use new composition API
+
+## 95.0.5
+- [patch] [844feea](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/844feea):
+
+  - ED-6039 Fixed extension toolbar remove action
+
 ## 95.0.4
 - [patch] [e082366](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e082366):
 

@@ -78,6 +78,40 @@ export default {
     'Atlassian 제품에 기능을 추가하는 앱을 귀하나 다른 사용자가 설치했을 수 있습니다. 해당 앱은 설치한 사용자의 프로필 정보에 저장되어 있습니다.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Atlassian 제품에 기능을 추가하는 앱을 귀하나 다른 사용자가 설치했을 수 있습니다. 해당 앱은 귀하의 프로필 정보에 저장되어 있습니다.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    '계정 비활성화',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    '계정 비활성화',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    '다음의 계정을 비활성화하려고 합니다.',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    '다음의 계정을 비활성화하려고 합니다.',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    '언제든지 계정을 다시 활성화할 수 있습니다.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    '언제든지 계정을 다시 활성화할 수 있습니다.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    '계정 비활성화 시기:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    '계정 비활성화 시기:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName}은(는) 즉시 Atlassian 계정 서비스에 대한 <b>액세스 권한을 상실</b>하게 됩니다. 현재 액세스할 수 있는 항목은 다음과 같습니다.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    '귀하는 즉시 Atlassian 계정 서비스에 대한 <b>액세스 권한을 상실</b>하게 됩니다. 현재 액세스할 수 있는 항목은 다음과 같습니다.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName}은(는) 즉시 Atlassian 계정 서비스에 대한 <b>액세스 권한을 상실</b>하게 됩니다. 현재 해당 사용자는 커뮤니티 및 Marketplace와 같은 서비스 외에는 액세스 권한을 가지고 있지 않습니다.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    '귀하는 즉시 Atlassian 계정 서비스에 대한 <b>액세스 권한을 상실</b>하게 됩니다. 현재 귀하는 커뮤니티 및 Marketplace와 같은 서비스 외에는 액세스 권한을 가지고 있지 않습니다.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Atlassian 커뮤니티 및 Marketplace와 같은 기타 Atlassian 계정 서비스.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    '본인의 성명 및 이메일 주소와 생성한 콘텐츠와 같은 사용자의 개인 데이터는 Atlassian 계정 서비스 내에 보존됩니다.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    '본인의 성명 및 이메일 주소와 생성한 콘텐츠와 같은 사용자의 개인 데이터는 Atlassian 계정 서비스 내에 보존됩니다.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'Atlassian은 더 이상 해당 항목으로 귀하에게 청구하지 않습니다.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'Atlassian은 더 이상 해당 항목으로 귀하에게 청구하지 않습니다.',
   'focused-task-close-account.delete-account.content-preview.heading':
     '다른 사용자에게 해당 계정이 보이는 방식',
   'focused-task-close-account.delete-account.drop-down-expand-button':
