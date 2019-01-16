@@ -16,6 +16,7 @@ const {
 const { buildCacheGroups, createWebpackConfig } = require('./utils/webpack');
 const { prepareForPrint } = require('./utils/print');
 const { printReport } = require('./reporters/console');
+const { printHowToReadStats } = require('./utils/how-to-read-stats');
 
 module.exports = function main(
   filePath,
@@ -178,7 +179,6 @@ module.exports = function main(
 
       const joinedStatsGroups = [...mainStatsGroups, ...combinedStatsGroups];
       const stats = buildStats(measureCompiledOutputPath, joinedStatsGroups);
-      spinner.succeed(chalk.cyan(`Module "${filePath}" successfully built:\n`));
 
       // Cleanup measure output directory
       try {
@@ -193,16 +193,25 @@ module.exports = function main(
       }
 
       const statsWithDiff = prevStats ? diff(prevStats, stats) : stats;
-
-      if (isJson) {
-        return console.log(JSON.stringify(stats, null, 2));
-      } else {
-        printReport(prepareForPrint(joinedStatsGroups, statsWithDiff));
-      }
-
       const statsExceededSizeLimit = statsWithDiff.filter(
         stat => stat.isTooBig,
       );
+
+      if (statsExceededSizeLimit.length) {
+        spinner.fail(
+          chalk.red(`Module "${filePath}" has exceeded size limit!`),
+        );
+      } else {
+        spinner.succeed(chalk.cyan(`Module "${filePath}" successfully built`));
+      }
+
+      if (isJson) {
+        return console.log(JSON.stringify(stats, null, 2));
+      } else if (!isLint || statsExceededSizeLimit.length) {
+        console.log('');
+        printHowToReadStats();
+        printReport(prepareForPrint(joinedStatsGroups, statsWithDiff));
+      }
 
       if (updateSnapshot) {
         fs.writeFileSync(
@@ -210,12 +219,8 @@ module.exports = function main(
           JSON.stringify(clearStats(stats), null, 2),
           'utf8',
         );
-      } else if (statsExceededSizeLimit.length) {
-        console.error(
-          chalk.red(`  ✖ Entry "${filePath}" has exceeded size limit!`),
-        );
-
-        reject(`"${filePath}" has exceeded size limit!`);
+      } else if (statsExceededSizeLimit.length && isLint) {
+        return reject(`✖ Module "${filePath}" has exceeded size limit!`);
       }
 
       resolve();
