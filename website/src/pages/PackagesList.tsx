@@ -23,7 +23,7 @@ const head: Head = {
       key: 'name',
       content: 'Name',
       isSortable: true,
-      width: 15,
+      width: 20,
     },
     {
       key: 'description',
@@ -37,7 +37,7 @@ const head: Head = {
       content: 'Latest',
       shouldTruncate: true,
       isSortable: false,
-      width: 20,
+      width: 15,
     },
     {
       key: 'team',
@@ -138,7 +138,6 @@ export default function PackagesList() {
         <Table
           head={head}
           rows={StatRows()}
-          isFixedSize
           defaultSortKey="name"
           defaultSortOrder="ASC"
         />
