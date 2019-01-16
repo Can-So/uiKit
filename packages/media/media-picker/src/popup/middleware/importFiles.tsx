@@ -31,7 +31,6 @@ import {
   getMediaTypeFromMimeType,
   FilePreview,
 } from '@atlaskit/media-core';
-import { convertBase64ToBlob } from '../../util/convertBase64ToBlob';
 export interface RemoteFileItem extends SelectedItem {
   accountId: string;
   publicId: string;

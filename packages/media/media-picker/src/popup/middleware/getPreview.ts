@@ -62,7 +62,10 @@ export async function getPreview(
           dispatchPreviewUpdate(store, action, preview);
         } else {
           const preview: NonImagePreview = {
-            file: state.preview ? state.preview.blob : undefined,
+            file:
+              state.preview && state.preview.blob instanceof Blob
+                ? state.preview.blob
+                : undefined,
           };
           dispatchPreviewUpdate(store, action, preview);
         }

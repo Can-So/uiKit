@@ -43,7 +43,7 @@ export class InlinePlayer extends Component<
           if (state.status !== 'error' && state.preview) {
             const { blob } = state.preview;
 
-            if (blob.type.indexOf('video/') === 0) {
+            if (blob instanceof Blob && blob.type.indexOf('video/') === 0) {
               const fileSrc = URL.createObjectURL(state.preview.blob);
               this.setState({ fileSrc });
               window.setTimeout(this.unsubscribe, 0);

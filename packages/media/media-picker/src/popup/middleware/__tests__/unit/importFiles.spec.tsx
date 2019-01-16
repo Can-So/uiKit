@@ -513,7 +513,7 @@ describe('importFiles middleware', () => {
     });
 
     it('should return false for service name other than "dropbox" or "google"', () => {
-      expect(isRemoteService('some-service')).toEqual(false);
+      expect(isRemoteService('recent_files')).toEqual(false);
     });
   });
 });
