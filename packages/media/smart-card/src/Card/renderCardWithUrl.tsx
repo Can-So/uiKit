@@ -12,7 +12,6 @@ import {
   InlineCardForbiddenView,
   InlineCardUnauthorizedView,
 } from '@atlaskit/media-ui';
-import { auth } from '@atlaskit/outbound-auth-flow-client';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { ObjectState, Client } from '../Client';
 import { extractBlockPropsFromJSONLD } from '../extractBlockPropsFromJSONLD';
@@ -177,6 +176,7 @@ export type CardWithUrlContentProps = {
   appearance: CardAppearance;
   onClick?: () => void;
   isSelected?: boolean;
+  authFn: (startUrl: string) => Promise<void>;
 } & WithAnalyticsEventProps;
 
 export function CardWithUrlContent(props: CardWithUrlContentProps) {
@@ -187,6 +187,7 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
     client,
     appearance,
     createAnalyticsEvent,
+    authFn,
   } = props;
   return (
     <WithObject
@@ -203,7 +204,7 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
           (state as DefinedState).services[0];
 
         const handleAuthorise = () => {
-          auth(firstAuthService.startAuthUrl).then(
+          authFn(firstAuthService.startAuthUrl).then(
             () => {
               if (createAnalyticsEvent) {
                 createAnalyticsEvent(

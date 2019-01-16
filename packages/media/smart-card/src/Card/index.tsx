@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
+import { withAnalyticsForSumTypeProps } from '@atlaskit/analytics-next';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { CardAppearance } from './types';
 import { CardProps } from './types';
@@ -10,12 +10,7 @@ import {
 } from './render';
 export { CardAppearance, CardProps };
 
-type CardWithAnalyticsProps = CardProps & WithAnalyticsEventProps;
-
-class CardWithAnalytics extends React.PureComponent<
-  CardWithAnalyticsProps,
-  any
-> {
+class PlainCard extends React.PureComponent<CardProps> {
   render() {
     return isCardWithData(this.props) ? (
       <CardWithDataRenderer {...this.props} />
@@ -25,4 +20,6 @@ class CardWithAnalytics extends React.PureComponent<
   }
 }
 
-export const Card = withAnalyticsEvents()(CardWithAnalytics);
+export const Card = withAnalyticsForSumTypeProps<WithAnalyticsEventProps>()(
+  PlainCard,
+);

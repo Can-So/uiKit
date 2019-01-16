@@ -8,6 +8,8 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { Provider, Client, ResolveResponse, ObjectState } from '../../..';
 import { Card } from '../..';
+import { withAnalyticsForSumTypeProps } from '@atlaskit/analytics-next';
+console.log(withAnalyticsForSumTypeProps);
 import { from } from 'rxjs/observable/from';
 import { CardWithUrl } from '../../types';
 import {

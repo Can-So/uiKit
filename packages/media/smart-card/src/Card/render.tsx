@@ -5,6 +5,7 @@ import { CardProps, CardWithData, CardWithUrl } from './types';
 import { CardWithUrlContent as CardWithUrlContentType } from './renderCardWithUrl';
 import { CardWithDataContent as CardWithDataContentType } from './renderCardWithData';
 import { CardLinkView } from '@atlaskit/media-ui';
+import { auth } from '@atlaskit/outbound-auth-flow-client';
 
 export const isCardWithData = (props: CardProps): props is CardWithData =>
   !!(props as CardWithData).data;
@@ -57,6 +58,7 @@ export class CardWithURLRenderer extends React.Component<
               onClick={onClick}
               isSelected={isSelected}
               createAnalyticsEvent={createAnalyticsEvent}
+              authFn={auth}
             />
           ) : (
             <CardLinkView text={url}>{url}</CardLinkView>
