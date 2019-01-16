@@ -42,8 +42,8 @@ describe('CopyLinkButton', () => {
     expect(hiddenInput.length).toEqual(1);
     expect(hiddenInput.prop('text')).toEqual(mockLink);
 
-    // @ts-ignore accessing private property just for testing purpose
     expect(
+      // @ts-ignore accessing private property just for testing purpose
       wrapper.instance().inputRef.current instanceof HTMLInputElement,
     ).toBe(true);
   });
@@ -83,8 +83,8 @@ describe('CopyLinkButton', () => {
   describe('handleClick', () => {
     it('should copy the text from the HiddenInput', () => {
       const wrapper = mount<CopyLinkButton>(<CopyLinkButton link={mockLink} />);
-      // @ts-ignore accessing private property just for testing purpose
       const spiedInputSelect = jest.spyOn(
+        // @ts-ignore accessing private property just for testing purpose
         wrapper.instance().inputRef.current,
         'select',
       );
