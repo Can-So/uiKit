@@ -135,5 +135,12 @@
     "type": "Task",
     "url": "https://trello.com/c/gfrst89H/4-much-muffins",
     "description": "A Trello issue"
+  },
+  {
+    "provider": "Trello (Public)",
+    "visibility": "public",
+    "type": "Task",
+    "url": "https://trello.com/c/gfrst89H/4-much-muffins",
+    "description": "A Trello issue"
   }
 ]

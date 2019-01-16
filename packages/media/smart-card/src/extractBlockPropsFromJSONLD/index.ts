@@ -7,6 +7,7 @@ import { extractBlockViewPropsFromTask } from './extractPropsFromTask';
 import { extractPropsFromPresentation } from './extractPropsFromPresentation';
 import { extractPropsFromTextDocument } from './extractPropsFromTextDocument';
 import { extractBlockViewPropsFromProject } from './extractPropsFromProject';
+import { extractPropsFromSourceCodeRepository } from './extractPropsFromSourceCodeRepository';
 
 const extractorPrioritiesByType = {
   Object: 0,
@@ -17,6 +18,7 @@ const extractorPrioritiesByType = {
   Spreadsheet: 10,
   'atlassian:Task': 10,
   'atlassian:Project': 10,
+  'atlassian:SourceCodeRepository': 10,
 };
 
 const extractorFunctionsByType = {
@@ -29,6 +31,7 @@ const extractorFunctionsByType = {
   Presentation: extractPropsFromPresentation,
   'atlassian:Task': extractBlockViewPropsFromTask,
   'atlassian:Project': extractBlockViewPropsFromProject,
+  'atlassian:SourceCodeRepository': extractPropsFromSourceCodeRepository,
 };
 
 export function extractBlockPropsFromJSONLD(
