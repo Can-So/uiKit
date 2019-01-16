@@ -11,9 +11,11 @@ declare global {
 export const skipBrowsers: any = ['ie', 'firefox', 'edge'];
 
 export const navigateOrClear = async (browser, path) => {
-  const currentUrl = browser.url();
+  const currentUrl = await browser.url();
+
   if (currentUrl === path) {
     await clearEditor(browser);
+    await clearBridgeOutput(browser);
   } else {
     await browser.goto(path);
   }
@@ -44,6 +46,13 @@ export const callNativeBridge = async (browser, bridgeFn, ...args) => {
     bridgeFn,
     args || [],
   );
+};
+
+const clearBridgeOutput = async browser => {
+  await browser.browser.execute(() => {
+    // @ts-ignore
+    window.logBridge = [];
+  });
 };
 
 export const getBridgeOutput = async (browser, bridge, bridgeFn) => {

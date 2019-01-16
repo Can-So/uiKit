@@ -3,8 +3,8 @@
     "id": "src.main",
     "name": "main",
     "stats": {
-      "size": 9225,
-      "gzipSize": 2406
+      "size": 9307,
+      "gzipSize": 2435
     }
   },
   {
@@ -19,8 +19,8 @@
     "id": "combined.main",
     "name": "main",
     "stats": {
-      "size": 12805,
-      "gzipSize": 3250
+      "size": 12887,
+      "gzipSize": 3284
     }
   }
 ]

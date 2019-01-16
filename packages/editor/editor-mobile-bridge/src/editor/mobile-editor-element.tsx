@@ -54,7 +54,7 @@ export default function mobileEditor(props) {
   return (
     <EditorWithState
       appearance="mobile"
-      mentionProvider={MentionProvider}
+      mentionProvider={Promise.resolve(MentionProvider)}
       emojiProvider={Promise.resolve(MockEmojiProvider)}
       media={{
         customMediaPicker: new MobilePicker(),

@@ -5,6 +5,7 @@ import {
   PromiseBridge,
   TextFormattingBridge,
   StatusBridge,
+  TypeAheadBridge,
 } from './bridge';
 import AndroidBridge from './android-impl';
 import IosBridge from './ios-impl';
@@ -20,6 +21,7 @@ export interface EditorBridges {
   listBridge?: ListBridge;
   blockFormatBridge?: TextFormattingBridge;
   statusBridge?: StatusBridge;
+  typeAheadBridge?: TypeAheadBridge;
 }
 
 export type EditorPluginBridges = keyof EditorBridges;

@@ -131,3 +131,5 @@ export default function withAnalyticsEvents<P: {}, C: ComponentType<P>>(
     return WithAnalyticsEvents;
   };
 }
+
+export const withAnalyticsForSumTypeProps = withAnalyticsEvents;

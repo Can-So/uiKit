@@ -3,7 +3,7 @@ import * as React from 'react';
 import { getAvatarSize } from './utils';
 
 export class Props {
-  appearance: 'compact' | 'normal' | 'big';
+  appearance: 'compact' | 'normal' | 'big' | 'multi';
   src?: string;
   name?: string;
   presence?: string;

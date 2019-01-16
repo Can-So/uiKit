@@ -1,4 +1,4 @@
-import { mockStore } from '../../../mocks';
+import { mockStore } from '@atlaskit/media-test-helpers';
 import getPreviewMiddleware, { getPreview } from '../../getPreview';
 import { sendUploadEvent } from '../../../actions/sendUploadEvent';
 import { GetPreviewAction } from '../../../actions/getPreview';

@@ -34,6 +34,7 @@ import {
   FocusedTaskCloseAccount,
   DeleteUserOverviewScreen,
   DeleteUserContentPreviewScreen,
+  DeactivateUserOverviewScreen,
 } from '@atlaskit/focused-task-close-account';
   `}
 
@@ -61,6 +62,15 @@ import {
       title="Single screen drawer"
       Component={require('../examples/02-SingleScreenDrawer').default}
       source={require('!!raw-loader!../examples/02-SingleScreenDrawer')}
+    />
+  )}
+
+  ${(
+    <Example
+      packageName="@atlaskit/focused-task-close-account"
+      title="Deactivate drawer"
+      Component={require('../examples/03-DeactivateDrawer').default}
+      source={require('!!raw-loader!../examples/03-DeactivateDrawer')}
     />
   )}
 

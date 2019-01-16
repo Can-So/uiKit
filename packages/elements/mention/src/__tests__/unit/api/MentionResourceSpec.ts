@@ -211,83 +211,15 @@ describe('MentionResource', () => {
   });
 
   describe('#filter', () => {
-    it('should add weight based on response order - bootstrap', done => {
+    it('should add valid duration field to stats object', done => {
       const resource = new MentionResource(apiConfig);
       resource.subscribe('test1', (mentions, query, stats) => {
-        for (let i = 0; i < mentions.length; i++) {
-          expect(mentions[i].weight).toBe(i);
-        }
         expect(stats).toBeDefined();
         expect(stats!.duration).toBeGreaterThan(0);
-        expect(stats!.remoteSearch).toBeTruthy();
         done();
       });
       resource.filter('');
     });
-
-    // TODO: JEST-23 - skipping as it failed in landkid - needs to be investigated
-    // https://bitbucket.org/atlassian/atlaskit-mk-2/addon/pipelines/home#!/results/35513/steps/%7B6c9f6e68-2d31-4029-a7ce-d9bc3a76d831%7D/test-report
-    // it('should add weight based on response order', done => {
-    //   const resource = new MentionResource(apiConfig);
-    //   resource.subscribe(
-    //     'test1',
-    //     (mentions, query: string, stats?: MentionStats) => {
-    //       for (let i = 0; i < mentions.length; i++) {
-    //         expect(mentions[i].weight).toBe(i);
-    //       }
-    //       expect(stats).toBeDefined();
-    //       expect(stats!.duration).toBeGreaterThan(0);
-    //       expect(stats!.remoteSearch).toBeTruthy();
-    //       done();
-    //     },
-    //   );
-    //   resource.filter('c');
-    // });
-
-    // 20-11-2018 - skipping as this seems to be flakey since the node upgrade
-    // it('in order responses', done => {
-    //   const resource = new MentionResource(apiConfig);
-    //   let sequence = 0;
-
-    //   resource.subscribe(
-    //     'test1',
-    //     (mentions, query: string, stats?: MentionStats) => {
-    //       sequence++;
-
-    //       expect(stats).toBeDefined();
-
-    //       // 1st: remote search for 'c'
-    //       // 2nd: local index for 'craig'  => no results
-    //       // 3rd: remote search for 'craig'
-
-    //       if (sequence === 1) {
-    //         expect(query).toBe('c');
-    //         expect(mentions).toBe(resultC);
-    //         expect(stats!.duration).toBeGreaterThan(0);
-    //         expect(stats!.remoteSearch).toBeTruthy();
-    //       }
-
-    //       if (sequence === 2) {
-    //         expect(query).toBe('craig');
-    //         expect(mentions).toBe([]);
-    //         expect(stats!.duration).toBeGreaterThan(0);
-    //         expect(stats!.remoteSearch).toBeFalsy();
-    //       }
-
-    //       if (sequence === 3) {
-    //         expect(query).toBe('craig');
-    //         expect(mentions).toMatchObject(resultCraig);
-    //         expect(stats!.duration).toBeGreaterThan(0);
-    //         expect(stats!.remoteSearch).toBeTruthy();
-    //         done();
-    //       }
-    //     },
-    //   );
-    //   resource.filter('c');
-    //   window.setTimeout(() => {
-    //     resource.filter('craig');
-    //   }, 10);
-    // });
 
     it('all results callback should receive all results', done => {
       const resource = new MentionResource(apiConfig);
@@ -362,26 +294,6 @@ describe('MentionResource', () => {
         done();
       });
       resource.filter('polly');
-    });
-
-    it('should use users in context to sort', done => {
-      const craig = { id: '84029', name: 'Craig Petchell', nickname: 'homer' };
-      const resource = new MentionResource({
-        ...apiConfig,
-        getUsersInContext: () => Promise.resolve([craig]),
-      });
-
-      const results: MentionDescription[][] = [];
-      resource.subscribe('test1', undefined, undefined, undefined, mentions => {
-        results.push(mentions);
-
-        if (results.length === 1) {
-          expect(results[0][0].name).toEqual(craig.name);
-          done();
-        }
-      });
-
-      resource.filter('craig');
     });
   });
 
@@ -482,48 +394,6 @@ describe('MentionResource', () => {
         },
       );
       resource.filter('test');
-    });
-
-    it('401 for search when documents from previous search are already indexed', done => {
-      fetchMock.restore();
-      fetchMock
-        .mock(/\/mentions\/search\?.*query=c(&|$)/, {
-          body: {
-            mentions: resultC,
-          },
-        })
-        .mock(/.*\/mentions\/search\?.*query=cz(&|$)/, 401);
-
-      const resource = new MentionResource(apiConfig);
-      let count = 0;
-      resource.subscribe(
-        'test1',
-        mentions => {
-          count++;
-          if (count === 1) {
-            // the first call is for a remote search for 'c' and should return mentions.
-            expect(mentions).toHaveLength(resultC.length);
-          } else if (count === 2) {
-            // the second call is from a search against the local index for 'cz' and should return no matches
-            expect(mentions).toHaveLength(0);
-          } else if (count > 2) {
-            done(
-              new Error(
-                'Result callback was called more than expected. Error callback was expected.',
-              ),
-            );
-          }
-        },
-        err => {
-          expect((err as any).code).toEqual(401);
-          done();
-        },
-      );
-
-      resource.filter('c'); // this call should succeed and return mentions which get indexed locally
-      window.setTimeout(() => {
-        resource.filter('cz'); // this is the call that will result in a 401
-      }, 10);
     });
   });
 

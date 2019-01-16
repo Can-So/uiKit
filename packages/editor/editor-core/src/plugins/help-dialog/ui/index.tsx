@@ -456,8 +456,7 @@ class HelpDialog extends React.Component<Props & InjectedIntlProps> {
           <AkModalDialog
             width="large"
             onClose={this.closeDialog}
-            header={ModalHeader}
-            footer={ModalFooter}
+            components={{ Header: ModalHeader, Footer: ModalFooter }}
           >
             <ContentWrapper>
               <Line />

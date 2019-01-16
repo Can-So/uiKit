@@ -1,9 +1,17 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 import * as sinon from 'sinon';
-import { imageFileId, youtubeLinkId } from '@atlaskit/media-test-helpers';
+import {
+  imageFileId,
+  youtubeLinkId,
+  genericFileId,
+} from '@atlaskit/media-test-helpers';
 import { storyMediaProviderFactory } from '@atlaskit/editor-test-helpers';
-import { Card, CardEvent } from '@atlaskit/media-card';
+import {
+  Card,
+  CardEvent,
+  defaultImageCardDimensions,
+} from '@atlaskit/media-card';
 import { FilmstripView } from '@atlaskit/media-filmstrip';
 import { ProviderFactory, EventHandlers } from '@atlaskit/editor-common';
 import Media from '../../../../react/nodes/media';
@@ -23,6 +31,21 @@ describe('MediaGroup', () => {
 
   afterEach(() => {
     document.body.removeChild(fixture);
+  });
+
+  it('should render media card with the right dimention if is a file', () => {
+    const mediaGroup = shallow(
+      <MediaGroup>
+        <Media
+          id={genericFileId.id}
+          type={genericFileId.mediaItemType}
+          collection={genericFileId.collectionName}
+        />
+      </MediaGroup>,
+    );
+    expect(mediaGroup.find(Media).prop('cardDimensions')).toEqual(
+      defaultImageCardDimensions,
+    );
   });
 
   it('should not render a FilmstripView component if it has only one media node', () => {

@@ -1,6 +1,6 @@
 import { changeService as changeServiceActionCreator } from '../../../actions';
 import { changeService } from '../../changeService';
-import { mockStore } from '../../../mocks';
+import { mockStore } from '@atlaskit/media-test-helpers';
 
 describe('changeService()', () => {
   it('should NOT dispatch CHANGE_ACCOUNT given unknown action', () => {

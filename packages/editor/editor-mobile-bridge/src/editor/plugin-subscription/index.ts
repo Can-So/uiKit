@@ -12,6 +12,8 @@ import {
   StatusState,
   textColorPluginKey,
   TextColorPluginState,
+  typeAheadPluginKey,
+  TypeAheadPluginState,
 } from '@atlaskit/editor-core';
 
 import { valueOf as valueOfListState } from '../web-to-native/listState';
@@ -125,6 +127,23 @@ const configs: Array<BridgePluginListener<any>> = [
       });
     },
     sendInitialState: true,
+  }),
+  createListenerConfig<TypeAheadPluginState>({
+    bridge: 'typeAheadBridge',
+    pluginKey: typeAheadPluginKey,
+    updater: state => {
+      const { active, query, trigger } = state;
+
+      if (active === false) {
+        toNativeBridge.call('typeAheadBridge', 'dismissTypeAhead');
+        return;
+      }
+
+      toNativeBridge.call('typeAheadBridge', 'typeAheadQuery', {
+        query,
+        trigger,
+      });
+    },
   }),
 ];
 
