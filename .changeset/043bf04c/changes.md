@@ -1,0 +1,1 @@
+- Expose new getCurrentState method to context
