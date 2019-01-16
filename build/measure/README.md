@@ -26,6 +26,8 @@ As you can see, we have split our code into different chunks to better understan
 
 If changes that have been introduced increase a bundle size beyond the allowed threshold, you might need to update measure snapshots. To do this, you can add the `--updateSnapshots` flag.
 
+Please make sure that this decision is carefully considered and discussed. The point of measuring bundle size change like this is to prevent things growing unexpectedly. Always ask if there is a better way to do what you are trying to do.
+
 ```sh
 yarn measure [path] --updateSnapshots
 ```
