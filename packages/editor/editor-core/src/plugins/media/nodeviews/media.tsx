@@ -41,7 +41,7 @@ export interface MediaNodeProps extends ReactNodeProps {
     dimensions: { width: number; height: number },
   ) => void;
   editorAppearance: EditorAppearance;
-  mediaProvider: Promise<any>;
+  mediaProvider: Promise<MediaProvider>;
 }
 
 export interface Props extends Partial<MediaBaseAttributes> {
@@ -56,7 +56,7 @@ export interface Props extends Partial<MediaBaseAttributes> {
   imageStatus?: ImageStatus;
   context: Context;
   disableOverlay?: boolean;
-  mediaProvider: Promise<any>;
+  mediaProvider: Promise<MediaProvider>;
 }
 
 export interface MediaNodeState {
