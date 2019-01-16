@@ -267,10 +267,18 @@ export function canJoinDown(
   doc: any,
   nodeType: NodeType,
 ): boolean {
+  return checkNodeDown(selection, doc, node => node.type === nodeType);
+}
+
+export function checkNodeDown(
+  selection: Selection,
+  doc: Node,
+  filter: (node: Node) => boolean,
+): boolean {
   const res = doc.resolve(
     selection.$to.after(findAncestorPosition(doc, selection.$to).depth),
   );
-  return res.nodeAfter && res.nodeAfter.type === nodeType;
+  return res.nodeAfter ? filter(res.nodeAfter) : false;
 }
 
 export const setNodeSelection = (view: EditorView, pos: number) => {
@@ -710,7 +718,7 @@ export const isEmptyNode = (schema: Schema) => {
   return innerIsEmptyNode;
 };
 
-export const isTableCell = (state: EditorState) => {
+export const insideTableCell = (state: EditorState) => {
   const { tableCell, tableHeader } = state.schema.nodes;
   return hasParentNodeOfType([tableCell, tableHeader])(state.selection);
 };
