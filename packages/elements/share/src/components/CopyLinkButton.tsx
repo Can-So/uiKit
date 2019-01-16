@@ -1,0 +1,89 @@
+import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
+import styled from 'styled-components';
+import { colors } from '@atlaskit/theme';
+import Button from '@atlaskit/button';
+import LinkFilledIcon from '@atlaskit/icon/glyph/link-filled';
+import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
+import InlineDialog from '@atlaskit/inline-dialog';
+import { messages } from '../i18n';
+
+export const MessageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: -10px -15px;
+`;
+
+const MessageSpan = styled.span`
+  text-indent: 6px;
+`;
+
+type InputProps = {
+  ref?: React.RefObject<HTMLInputElement>;
+  text: string;
+};
+
+export const VisuallyHiddenInput: React.ComponentType<
+  InputProps
+> = React.forwardRef(
+  (props: { text: string }, ref?: React.Ref<HTMLInputElement>) => (
+    <input
+      style={{ position: 'absolute', left: '-9999px' }}
+      ref={ref}
+      value={props.text}
+    />
+  ),
+);
+
+type Props = {
+  link: string;
+};
+
+export class CopyLinkButton extends React.Component<Props> {
+  private inputRef: React.RefObject<HTMLInputElement> = React.createRef();
+
+  state = {
+    shouldCopiedMessageShown: false,
+  };
+
+  handleClick = () => {
+    this.inputRef.current!.select();
+    document.execCommand('copy');
+    this.setState({ shouldCopiedMessageShown: true });
+  };
+
+  handleDismissCopiedMessage = () => {
+    this.setState({ shouldCopiedMessageShown: false });
+  };
+
+  render() {
+    const { shouldCopiedMessageShown } = this.state;
+
+    return (
+      <>
+        <VisuallyHiddenInput ref={this.inputRef} text={this.props.link} />
+        <InlineDialog
+          content={
+            <MessageContainer>
+              <CheckCircleIcon label="" primaryColor={colors.G300} />
+              <MessageSpan>
+                <FormattedMessage {...messages.copiedToClipboardMessage} />
+              </MessageSpan>
+            </MessageContainer>
+          }
+          isOpen={shouldCopiedMessageShown}
+          onClose={this.handleDismissCopiedMessage}
+          placement="top-start"
+        >
+          <Button
+            appearance="subtle-link"
+            iconBefore={<LinkFilledIcon label="" />}
+            onClick={this.handleClick}
+          >
+            <FormattedMessage {...messages.copyLinkButtonText} />
+          </Button>
+        </InlineDialog>
+      </>
+    );
+  }
+}
