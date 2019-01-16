@@ -4,6 +4,7 @@ import {
   doc,
   p as paragraph,
   date,
+  sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
 
 import {
@@ -48,9 +49,9 @@ describe('date plugin', () => {
       it('should insert date node to the document', () => {
         const { editorView: view } = editor(doc(paragraph('hello{<>}')));
         insertDate()(view.state, view.dispatch);
-        expect(view.state.selection.$from.nodeBefore!.type).toEqual(
-          view.state.schema.nodes.date,
-        );
+        expect(
+          view.state.doc.nodeAt(view.state.selection.$from.pos)!.type.name,
+        ).toEqual(view.state.schema.nodes.date.name);
         const pluginState = pluginKey.getState(view.state);
         expect(pluginState.showDatePickerAt).toEqual(null);
       });
@@ -58,21 +59,15 @@ describe('date plugin', () => {
       it('should insert UTC timestamp', () => {
         const { editorView: view } = editor(doc(paragraph('hello{<>}')));
         insertDate({ year: 2018, month: 5, day: 1 })(view.state, view.dispatch);
-        expect(view.state.selection.$from.nodeBefore!.type).toEqual(
-          view.state.schema.nodes.date,
-        );
-        expect(view.state.selection.$from.nodeBefore!.attrs.timestamp).toEqual(
-          Date.UTC(2018, 4, 1).toString(),
-        );
-        expect(
-          view.state.selection.$from.nodeBefore!.attrs.timestamp,
-        ).not.toEqual(new Date(2018, 5, 1));
+        const node = view.state.doc.nodeAt(view.state.selection.$from.pos);
+        expect(node!.type.name).toEqual(view.state.schema.nodes.date.name);
+        expect(node!.attrs.timestamp).toEqual(Date.UTC(2018, 4, 1).toString());
       });
 
       it('should keep the same "showDatePickerAt" in collab mode', () => {
         const { editorView: view } = editor(doc(paragraph('world{<>}')));
         insertDate()(view.state, view.dispatch);
-        openDatePicker(view.domAtPos.bind(view))(view.state, view.dispatch);
+        openDatePicker()(view.state, view.dispatch);
 
         const documentChangeTr = view.state.tr.insertText('hello ', 1);
         // Don't use dispatch to mimic collab provider
@@ -85,8 +80,23 @@ describe('date plugin', () => {
 
     describe('openDatePicker', () => {
       it('should set "showDatePickerAt" prop in plugin state to a DOM node and select the node', () => {
-        const { editorView: view } = editor(doc(paragraph('hello{<>}')));
-        openDatePicker(view.domAtPos.bind(view))(view.state, view.dispatch);
+        const { editorView: view } = editor(
+          doc(paragraph('hello{<>}', date(attrs))),
+        );
+        openDatePicker()(view.state, view.dispatch);
+        const pluginState = pluginKey.getState(view.state);
+        expect(pluginState.showDatePickerAt).toBeTruthy();
+        expect(view.state.selection instanceof NodeSelection).toEqual(true);
+      });
+
+      it('should open date picker on enter when date node is selected', () => {
+        const { editorView: view, sel } = editor(
+          doc(paragraph('hello{<>}', date(attrs))),
+        );
+        const tr = view.state.tr;
+        tr.setSelection(NodeSelection.create(tr.doc, sel));
+        view.dispatch(tr);
+        sendKeyToPm(view, 'Enter');
         const pluginState = pluginKey.getState(view.state);
         expect(pluginState.showDatePickerAt).toBeTruthy();
         expect(view.state.selection instanceof NodeSelection).toEqual(true);
@@ -95,17 +105,15 @@ describe('date plugin', () => {
 
     describe('closeDatePicker', () => {
       it('should set "showDatePickerAt" prop to falsy and move selection to after the node', () => {
-        const { editorView: view } = editor(doc(paragraph('hello{<>}')));
-        openDatePicker(view.domAtPos.bind(view))(view.state, view.dispatch);
-        const pluginState = pluginKey.getState(view.state);
-        expect(pluginState.showDatePickerAt).toBeTruthy();
-        expect(view.state.selection instanceof NodeSelection).toEqual(true);
-
+        const { editorView: view } = editor(
+          doc(paragraph('hello{<>}', date(attrs))),
+        );
+        openDatePicker()(view.state, view.dispatch);
         closeDatePicker()(view.state, view.dispatch);
         const newPluginState = pluginKey.getState(view.state);
         expect(newPluginState.showDatePickerAt).toBeFalsy();
         expect(view.state.selection instanceof NodeSelection).toEqual(false);
-        expect(view.state.selection.from).toEqual(6);
+        expect(view.state.selection.from).toEqual(7);
       });
     });
   });

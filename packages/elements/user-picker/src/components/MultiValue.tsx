@@ -85,7 +85,7 @@ export class MultiValue extends React.Component<Props> {
               text={label}
               elemBefore={
                 <SizeableAvatar
-                  appearance="compact"
+                  appearance="multi"
                   src={getAvatarUrl(data)}
                   name={label}
                 />

@@ -356,6 +356,7 @@ export class JIRATransformer implements Transformer<string> {
   private encodeListItem(node: PMNode) {
     const elem = this.doc.createElement('li');
     if (node.content.childCount) {
+      let hasBlocks = false;
       node.content.forEach(childNode => {
         if (
           childNode.type === this.schema.nodes.bulletList ||
@@ -378,9 +379,14 @@ export class JIRATransformer implements Transformer<string> {
           }
 
           elem.appendChild(list);
-        } else {
+        } else if (childNode.type.name === 'paragraph' && !hasBlocks) {
           // Strip the paragraph node from the list item.
           elem.appendChild(this.encodeFragment((childNode as PMNode).content));
+        } else {
+          if (childNode.isBlock) {
+            hasBlocks = true;
+          }
+          elem.appendChild(this.encodeNode(childNode));
         }
       });
     }

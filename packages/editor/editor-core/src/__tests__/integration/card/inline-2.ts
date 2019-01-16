@@ -50,7 +50,7 @@ const moveUp = (page, selector) => {
       await browser.paste(editable);
 
       // type some text around it
-      await browser.type(editable, ' more typing');
+      await browser.type(editable, 'more typing');
       await moveUp(browser, editable);
       await browser.type(editable, 'more typing ');
 

@@ -2,7 +2,7 @@ import { LocalUploads } from '../../../domain';
 import cancelUploadMiddleware from '../../cancelUpload';
 import { cancelUpload } from '../../../actions/cancelUpload';
 import { removeEventProxy } from '../../../actions/removeEventProxy';
-import { mockStore } from '../../../mocks';
+import { mockStore } from '@atlaskit/media-test-helpers';
 
 describe('cancelUpload', () => {
   const uploadId = 'some-upload-id';

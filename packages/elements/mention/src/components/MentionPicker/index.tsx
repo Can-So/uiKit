@@ -187,14 +187,12 @@ export class MentionPicker extends React.PureComponent<
 
     this.onFilterVisibilityChange(wasVisible, visible);
 
-    if (stats && stats.remoteSearch) {
-      UtilAnalytics.fireAnalyticsMentionTypeaheadEvent(this.props)(
-        'rendered',
-        stats.duration,
-        mentions.map(mention => mention.id),
-        query,
-      );
-    }
+    UtilAnalytics.fireAnalyticsMentionTypeaheadEvent(this.props)(
+      'rendered',
+      stats && stats.duration,
+      mentions.map(mention => mention.id),
+      query,
+    );
   };
 
   private filterError = error => {

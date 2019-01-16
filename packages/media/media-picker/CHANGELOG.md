@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 29.0.3
+- [patch] [e6516fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6516fb):
+
+  - Move media mocks into right location to prevent them to be included in dist
+
 ## 29.0.2
 - [patch] [a55e4e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a55e4e6):
 

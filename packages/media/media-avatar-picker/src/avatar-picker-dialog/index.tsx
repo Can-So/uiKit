@@ -214,8 +214,10 @@ export class AvatarPickerDialog extends PureComponent<
       <ModalDialog
         height={`${AVATAR_DIALOG_HEIGHT}px`}
         width={`${AVATAR_DIALOG_WIDTH}px`}
-        header={this.headerContent}
-        footer={this.footerContent}
+        components={{
+          Header: this.headerContent,
+          Footer: this.footerContent,
+        }}
         onClose={this.props.onCancel}
         isOpen={true}
       >

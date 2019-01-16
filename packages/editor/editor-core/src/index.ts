@@ -72,6 +72,9 @@ export {
   setStatusPickerAt,
   updateStatus,
 } from './plugins/status/actions';
+export { typeAheadPluginKey, TypeAheadPluginState } from './plugins/type-ahead';
+export { TypeAheadItem } from './plugins/type-ahead/types';
+export { selectItem } from './plugins/type-ahead/commands/select-item';
 
 // Used in editor-test-helpers
 export { setTextSelection } from './utils';

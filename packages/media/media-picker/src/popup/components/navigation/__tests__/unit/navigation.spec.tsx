@@ -9,7 +9,7 @@ import {
   getComponentClassWithStore,
   mockStore,
   mockState,
-} from '../../../../mocks';
+} from '@atlaskit/media-test-helpers';
 import { Navigation, default as ConnectedNavigation } from '../../navigation';
 import {
   changeAccount,
