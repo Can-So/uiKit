@@ -1,5 +1,4 @@
 import { EditorState } from 'prosemirror-state';
-import { EditorView } from 'prosemirror-view';
 import { Mark, MarkType } from 'prosemirror-model';
 import {
   FORMATTING_MARK_TYPES,
@@ -38,71 +37,6 @@ export const deepEqual = (obj1, obj2) => {
     }
   }
   return true;
-};
-
-// Make sure the cursor isn't directly after one or more ignored
-// nodes, which will confuse the browser's cursor motion logic.
-export const removeIgnoredNodesLeft = (view: EditorView) => {
-  const sel = (view.root as any).getSelection();
-  let node = sel.anchorNode;
-  let offset = sel.anchorOffset;
-  let removeNode;
-  // TODO: un-ignore it
-  // @ts-ignore
-  let removeOffset;
-
-  if (!node) {
-    return;
-  }
-  for (;;) {
-    if (offset > 0) {
-      if (node.nodeType !== 1) {
-        // zero-width non-breaking space
-        if (
-          node.nodeType === 3 &&
-          node.nodeValue.charAt(offset - 1) === '\ufeff'
-        ) {
-          removeNode = node;
-          removeOffset = --offset;
-        } else {
-          break;
-        }
-      } else {
-        const before = node.childNodes[offset - 1];
-        if (isIgnorable(before)) {
-          removeNode = before;
-          removeOffset = --offset;
-        } else if (before.nodeType === 3) {
-          node = before;
-          offset = node.nodeValue.length;
-        } else {
-          break;
-        }
-      }
-    } else if (isBlockNode(node)) {
-      break;
-    } else {
-      let prev = node.previousSibling;
-      while (prev && isIgnorable(prev)) {
-        removeNode = node.parentNode;
-        removeOffset = domIndex(prev);
-        prev = prev.previousSibling;
-      }
-      if (!prev) {
-        node = node.parentNode;
-        if (node === view.dom) {
-          break;
-        }
-        offset = 0;
-      } else {
-        node = prev;
-        offset = nodeLen(node);
-      }
-    }
-  }
-  if (removeNode) {
-    removeNode.parentNode.removeChild(removeNode);
-  }
 };
 
 export const hasCode = (state: EditorState, pos: number): boolean => {
