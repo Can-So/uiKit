@@ -1,0 +1,1 @@
+- FS-3416 add ShareForm component to @atlaskit/share
