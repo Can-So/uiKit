@@ -72,6 +72,8 @@ type State = {
   hasLoadingState: boolean,
   hasErrorState: boolean,
   hasLongPresenceMessage: string,
+  hasCustomMessageForDisabledAccount: boolean,
+  hasStatusLozengeForDisabledAccount: boolean,
 };
 
 export default class ProfilecardInteractive extends Component<Props, State> {
@@ -107,6 +109,8 @@ export default class ProfilecardInteractive extends Component<Props, State> {
     hasLoadingState: false,
     hasErrorState: false,
     hasLongPresenceMessage: '',
+    hasCustomMessageForDisabledAccount: false,
+    hasStatusLozengeForDisabledAccount: false,
   };
 
   actions = [
@@ -288,6 +292,14 @@ export default class ProfilecardInteractive extends Component<Props, State> {
                   ? 'I honestly have a very long and useless presence message'
                   : ''
               }
+              customMessageForDisabledAccount={
+                this.state.hasCustomMessageForDisabledAccount
+                  ? 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.'
+                  : undefined
+              }
+              hasStatusLozengeForDisabledAccount={
+                this.state.hasStatusLozengeForDisabledAccount
+              }
             />
           </ProfileCardWrapper>
 
@@ -350,6 +362,16 @@ export default class ProfilecardInteractive extends Component<Props, State> {
               <li>{this.createRadioStatusModifiedDate('aFewMonths')}</li>
               <li>{this.createRadioStatusModifiedDate('severalMonths')}</li>
               <li>{this.createRadioStatusModifiedDate('moreThanAYear')}</li>
+              <li>
+                {this.createCheckboxBooleanAttribute(
+                  'hasCustomMessageForDisabledAccount',
+                )}
+              </li>
+              <li>
+                {this.createCheckboxBooleanAttribute(
+                  'hasStatusLozengeForDisabledAccount',
+                )}
+              </li>
             </ul>
           </div>
         </StoryWrapper>

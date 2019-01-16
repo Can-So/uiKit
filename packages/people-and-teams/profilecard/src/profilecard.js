@@ -44,6 +44,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
     analytics: () => {},
     clientFetchProfile: () => {},
     presenceMessage: '',
+    hasStatusLozengeForDisabledAccount: true,
   };
 
   _timeOpen: any;
@@ -153,7 +154,12 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   }
 
   renderCardDetailsForDisabledAccount() {
-    const { nickname, status, companyName } = this.props;
+    const {
+      nickname,
+      status,
+      companyName,
+      hasStatusLozengeForDisabledAccount,
+    } = this.props;
 
     return (
       <DetailsGroup>
@@ -161,16 +167,18 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
           {this.getDisabledAccountName()}
         </FullNameLabel>
 
-        <LozengeWrapper>
-          <AkLozenge appearance="default" isBold>
-            {status === 'inactive' && (
-              <FormattedMessage {...messages.inactiveAccountMsg} />
-            )}
-            {status === 'closed' && (
-              <FormattedMessage {...messages.closedAccountMsg} />
-            )}
-          </AkLozenge>
-        </LozengeWrapper>
+        {hasStatusLozengeForDisabledAccount && (
+          <LozengeWrapper>
+            <AkLozenge appearance="default" isBold>
+              {status === 'inactive' && (
+                <FormattedMessage {...messages.inactiveAccountMsg} />
+              )}
+              {status === 'closed' && (
+                <FormattedMessage {...messages.closedAccountMsg} />
+              )}
+            </AkLozenge>
+          </LozengeWrapper>
+        )}
 
         <DisabledInfo>{this.getDisabledAccountDesc()}</DisabledInfo>
 
@@ -200,11 +208,20 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
   }
 
   getDisabledAccountDesc() {
-    const { status = 'closed', statusModifiedDate } = this.props;
+    const {
+      status = 'closed',
+      statusModifiedDate,
+      customMessageForDisabledAccount,
+    } = this.props;
     const date = statusModifiedDate
       ? new Date(statusModifiedDate * 1000)
       : null;
     const relativeDateKey = relativeDate(date);
+
+    // consumer does not want to use built-in message
+    if (customMessageForDisabledAccount) {
+      return <p>{customMessageForDisabledAccount}</p>;
+    }
 
     let secondSentence = null;
     if (relativeDateKey) {
@@ -261,6 +278,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
     });
     const isDisabledUser = status === 'inactive' || status === 'closed';
 
+    const actions = this.renderActionsButtons();
     return (
       <CardContainer isDisabledUser={isDisabledUser}>
         <ProfileImage>
@@ -272,8 +290,12 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
         </ProfileImage>
         <CardContent>
           {this.renderCardDetails()}
-          <ActionsFlexSpacer />
-          {this.renderActionsButtons()}
+          {actions ? (
+            <>
+              <ActionsFlexSpacer />
+              {this.renderActionsButtons()}
+            </>
+          ) : null}
         </CardContent>
       </CardContainer>
     );

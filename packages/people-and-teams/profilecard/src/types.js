@@ -50,6 +50,11 @@ export type ProfilecardProps = {
   // allow to pass custom elevation, example value of this prop is: `e100`, `e200`, `e300`, `e400` and `e500`
   // Reference from `packages/core/theme/src/elevation.js` to see all valid values.
   customElevation?: string,
+
+  // Allow to pass custom message for disabled account which `status` prop is `inactive` or `closed`
+  customMessageForDisabledAccount?: string,
+  // Allhow to show a status lozenge for disabled account which `status` prop is `inactive` or `closed`
+  hasStatusLozengeForDisabledAccount?: boolean,
 };
 
 export type MessageIntlProviderProps = {

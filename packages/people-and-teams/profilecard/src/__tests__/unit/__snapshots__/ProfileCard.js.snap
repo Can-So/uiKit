@@ -1,5 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Profilecard AkProfilecard status property should match snapshot when status=closed and customMessageForDisabledAccount is defined 1`] = `
+<MockMessagesIntlProvider>
+  <HeightTransitionWrapper>
+    <styled.div
+      isDisabledUser={true}
+    >
+      <styled.div>
+        <WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar))))
+          borderColor="#FFFFFF"
+          size="xlarge"
+          src={null}
+        />
+      </styled.div>
+      <styled.div>
+        <styled.div>
+          <styled.span
+            isDisabledAccount={true}
+            noMeta={true}
+          >
+            jscrazy
+          </styled.span>
+          <styled.div>
+            <Lozenge
+              appearance="default"
+              isBold={true}
+              maxWidth={200}
+            >
+              <FormattedMessage
+                defaultMessage="Account deleted"
+                description="A text in a grey lozenge shows that this user is closed/deleted"
+                id="pt.profile-card.closed.account"
+                values={Object {}}
+              />
+            </Lozenge>
+          </styled.div>
+          <styled.div>
+            <p>
+              this is a custom message for closed account
+            </p>
+          </styled.div>
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </HeightTransitionWrapper>
+</MockMessagesIntlProvider>
+`;
+
+exports[`Profilecard AkProfilecard status property should match snapshot when status=closed and hasStatusLozengeForDisabledAccount=false 1`] = `
+<MockMessagesIntlProvider>
+  <HeightTransitionWrapper>
+    <styled.div
+      isDisabledUser={true}
+    >
+      <styled.div>
+        <WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar))))
+          borderColor="#FFFFFF"
+          size="xlarge"
+          src={null}
+        />
+      </styled.div>
+      <styled.div>
+        <styled.div>
+          <styled.span
+            isDisabledAccount={true}
+            noMeta={true}
+          >
+            jscrazy
+          </styled.span>
+          <styled.div>
+            <p>
+              <FormattedMessage
+                defaultMessage="You can no longer collaborate with this person."
+                description="A first sentence of a long text explains this user is inactive/closed"
+                id="pt.profile-card.general.msg.disabled.user"
+                values={Object {}}
+              />
+               
+              <FormattedMessage
+                defaultMessage="Their account has been deleted."
+                description="A long text explains this user is closed when we do not know the date of starting to close"
+                id="pt.profile-card.closed.account.no.date"
+                values={Object {}}
+              />
+            </p>
+          </styled.div>
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </HeightTransitionWrapper>
+</MockMessagesIntlProvider>
+`;
+
 exports[`Profilecard AkProfilecard status property should match snapshot when status=closed and status modified date is defined 1`] = `
 <MockMessagesIntlProvider>
   <HeightTransitionWrapper>
@@ -53,7 +145,6 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             </p>
           </styled.div>
         </styled.div>
-        <styled.div />
       </styled.div>
     </styled.div>
   </HeightTransitionWrapper>
@@ -113,7 +204,98 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             </p>
           </styled.div>
         </styled.div>
-        <styled.div />
+      </styled.div>
+    </styled.div>
+  </HeightTransitionWrapper>
+</MockMessagesIntlProvider>
+`;
+
+exports[`Profilecard AkProfilecard status property should match snapshot when status=inactive and customMessageForDisabledAccount is defined 1`] = `
+<MockMessagesIntlProvider>
+  <HeightTransitionWrapper>
+    <styled.div
+      isDisabledUser={true}
+    >
+      <styled.div>
+        <WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar))))
+          borderColor="#FFFFFF"
+          size="xlarge"
+          src={null}
+        />
+      </styled.div>
+      <styled.div>
+        <styled.div>
+          <styled.span
+            isDisabledAccount={true}
+            noMeta={true}
+          >
+            jscrazy
+          </styled.span>
+          <styled.div>
+            <Lozenge
+              appearance="default"
+              isBold={true}
+              maxWidth={200}
+            >
+              <FormattedMessage
+                defaultMessage="Account deleted"
+                description="A text in a grey lozenge shows that this user is closed/deleted"
+                id="pt.profile-card.closed.account"
+                values={Object {}}
+              />
+            </Lozenge>
+          </styled.div>
+          <styled.div>
+            <p>
+              this is a custom message for inactive account
+            </p>
+          </styled.div>
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </HeightTransitionWrapper>
+</MockMessagesIntlProvider>
+`;
+
+exports[`Profilecard AkProfilecard status property should match snapshot when status=inactive and hasStatusLozengeForDisabledAccount=false 1`] = `
+<MockMessagesIntlProvider>
+  <HeightTransitionWrapper>
+    <styled.div
+      isDisabledUser={true}
+    >
+      <styled.div>
+        <WithAnalyticsContext(WithAnalyticsEvents(mapProps(withPseudoState(Avatar))))
+          borderColor="#FFFFFF"
+          size="xlarge"
+          src={null}
+        />
+      </styled.div>
+      <styled.div>
+        <styled.div>
+          <styled.span
+            isDisabledAccount={true}
+            noMeta={true}
+          >
+            jscrazy
+          </styled.span>
+          <styled.div>
+            <p>
+              <FormattedMessage
+                defaultMessage="You can no longer collaborate with this person."
+                description="A first sentence of a long text explains this user is inactive/closed"
+                id="pt.profile-card.general.msg.disabled.user"
+                values={Object {}}
+              />
+               
+              <FormattedMessage
+                defaultMessage="Their account has been deleted."
+                description="A long text explains this user is closed when we do not know the date of starting to close"
+                id="pt.profile-card.closed.account.no.date"
+                values={Object {}}
+              />
+            </p>
+          </styled.div>
+        </styled.div>
       </styled.div>
     </styled.div>
   </HeightTransitionWrapper>
@@ -182,7 +364,6 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             Atlassian
           </IconLabel>
         </styled.div>
-        <styled.div />
       </styled.div>
     </styled.div>
   </HeightTransitionWrapper>
@@ -251,7 +432,6 @@ exports[`Profilecard AkProfilecard status property should match snapshot when st
             Atlassian
           </IconLabel>
         </styled.div>
-        <styled.div />
       </styled.div>
     </styled.div>
   </HeightTransitionWrapper>

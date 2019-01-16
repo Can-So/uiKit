@@ -69,6 +69,66 @@ export default function Example() {
             dolor sit amet
           </div>
         </Section>
+
+        <Section>
+          <h4>Profilecard triggered for closed account</h4>
+          <div>
+            Lorem ipsum{' '}
+            <AkProfilecardTrigger
+              cloudId="DUMMY-10ae0bf3-157e-43f7-be45-f1bb13b39048"
+              userId="1"
+              position="bottom left"
+              resourceClient={getMockProfileClient(10, 0, {
+                status: 'closed',
+              })}
+              trigger="click"
+            >
+              <strong>click me</strong>
+            </AkProfilecardTrigger>{' '}
+            dolor sit amet
+          </div>
+        </Section>
+
+        <Section>
+          <h4>Profilecard triggered for inactive account</h4>
+          <div>
+            Lorem ipsum{' '}
+            <AkProfilecardTrigger
+              cloudId="DUMMY-10ae0bf3-157e-43f7-be45-f1bb13b39048"
+              userId="1"
+              position="bottom left"
+              resourceClient={getMockProfileClient(10, 0, {
+                status: 'inactive',
+              })}
+              trigger="click"
+            >
+              <strong>click me</strong>
+            </AkProfilecardTrigger>{' '}
+            dolor sit amet
+          </div>
+        </Section>
+
+        <Section>
+          <h4>Profilecard triggered for closed account and custom message </h4>
+          <div>
+            Lorem ipsum{' '}
+            <AkProfilecardTrigger
+              cloudId="DUMMY-10ae0bf3-157e-43f7-be45-f1bb13b39048"
+              userId="1"
+              position="bottom left"
+              resourceClient={getMockProfileClient(10, 0, {
+                status: 'closed',
+                customMessageForDisabledAccount:
+                  'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.',
+                hasStatusLozengeForDisabledAccount: false,
+              })}
+              trigger="click"
+            >
+              <strong>click me</strong>
+            </AkProfilecardTrigger>{' '}
+            dolor sit amet
+          </div>
+        </Section>
       </MainStage>
     </LocaleIntlProvider>
   );
