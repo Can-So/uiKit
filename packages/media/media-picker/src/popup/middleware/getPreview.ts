@@ -61,11 +61,9 @@ export async function getPreview(
           const preview = getPreviewFromMetadata(metadata);
           dispatchPreviewUpdate(store, action, preview);
         } else {
+          const blob = state.preview && (await state.preview);
           const preview: NonImagePreview = {
-            file:
-              state.preview && state.preview.blob instanceof Blob
-                ? state.preview.blob
-                : undefined,
+            file: state.preview && blob instanceof Blob ? blob : undefined,
           };
           dispatchPreviewUpdate(store, action, preview);
         }

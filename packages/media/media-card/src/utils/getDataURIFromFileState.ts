@@ -17,7 +17,7 @@ export const getDataURIFromFileState = async (
   ) {
     return {};
   }
-  const { blob } = state.preview;
+  const { blob } = await state.preview;
   if (blob instanceof Blob) {
     const { type } = blob;
     const mediaType = getMediaTypeFromMimeType(type);

@@ -35,7 +35,7 @@ export interface UploadingFileState {
   progress: number;
   mediaType: MediaType;
   mimeType: string;
-  preview?: FilePreview;
+  preview?: FilePreview | Promise<FilePreview>;
 }
 export interface ProcessingFileState {
   status: 'processing';
@@ -45,7 +45,7 @@ export interface ProcessingFileState {
   size: number;
   mediaType: MediaType;
   mimeType: string;
-  preview?: FilePreview;
+  preview?: FilePreview | Promise<FilePreview>;
 }
 
 export interface ProcessedFileState {
@@ -57,7 +57,7 @@ export interface ProcessedFileState {
   artifacts: MediaFileArtifacts;
   mediaType: MediaType;
   mimeType: string;
-  preview?: FilePreview;
+  preview?: FilePreview | Promise<FilePreview>;
 }
 export interface ProcessingFailedState {
   status: 'failed-processing';
@@ -68,7 +68,7 @@ export interface ProcessingFailedState {
   artifacts: Object;
   mediaType: MediaType;
   mimeType: string;
-  preview?: FilePreview;
+  preview?: FilePreview | Promise<FilePreview>;
 }
 export interface ErrorFileState {
   status: 'error';

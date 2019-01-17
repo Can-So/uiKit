@@ -41,10 +41,10 @@ export class InlinePlayer extends Component<
       .subscribe({
         next: async state => {
           if (state.status !== 'error' && state.preview) {
-            const { blob } = state.preview;
+            const { blob } = await state.preview;
 
             if (blob instanceof Blob && blob.type.indexOf('video/') === 0) {
-              const fileSrc = URL.createObjectURL(state.preview.blob);
+              const fileSrc = URL.createObjectURL(blob);
               this.setState({ fileSrc });
               window.setTimeout(this.unsubscribe, 0);
               return;

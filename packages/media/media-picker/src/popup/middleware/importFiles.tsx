@@ -119,7 +119,7 @@ export async function importFiles(
     mapSelectedItemToSelectedUploadFile(item, tenantCollection),
   );
   const touchFileDescriptors = selectedUploadFiles
-    .filter(file => file.serviceName !== 'upload')
+    // .filter(file => file.serviceName !== 'upload')
     .map(file => file.touchFileDescriptor);
   if (touchFileDescriptors.length) {
     touchFileDescriptors.forEach(descriptor => {
@@ -129,9 +129,9 @@ export async function importFiles(
         file => file.touchFileDescriptor.fileId === id,
       );
       if (selectedFile) {
-        let preview: FilePreview | undefined;
-        const { file } = selectedFile;
-        if (selectedFile.serviceName === 'giphy') {
+        let preview: FilePreview | Promise<FilePreview> | undefined;
+        const { file, serviceName } = selectedFile;
+        if (serviceName === 'giphy') {
           const selectedGiphy = giphy.imageCardModels.find(
             cardModel => cardModel.metadata.id === file.id,
           );
@@ -140,8 +140,49 @@ export async function importFiles(
               blob: selectedGiphy.dataURI,
             };
           }
-        } else {
+        } else if (serviceName === 'upload') {
+          const observable = fileStreamsCache.get(file.id);
+          if (observable) {
+            preview = new Promise<FilePreview>(resolve => {
+              const subscription = observable.subscribe({
+                next(state) {
+                  if (state.status !== 'error') {
+                    setTimeout(() => subscription.unsubscribe(), 0);
+                    resolve(state.preview);
+                  }
+                },
+              });
+            });
+          }
+        } else if (serviceName === 'recent_files') {
+          preview = new Promise<FilePreview>(async resolve => {
+            // TODO: pass bigger dimensions aka MV values
+            const blob = await userContext.getImage(file.id, {
+              collection: RECENTS_COLLECTION,
+            });
+
+            resolve({ blob });
+          });
+        } else if (serviceName === 'dropbox' || serviceName === 'google') {
           // TODO: get preview for other services
+          // TODO: after the file has been processed we should poll for it and transition into processed when it's done
+          // setTimeout(() => {
+          //   const observable = fileStreamsCache.get(id);
+          //   if (observable) {
+          //     const subscription = observable.subscribe({
+          //       next(currentState) {
+          //         setTimeout(() => subscription.unsubscribe(), 0);
+          //         setTimeout(() => {
+          //           console.log('emit processed', currentState);
+          //           (observable as ReplaySubject<FileState>).next({
+          //             ...currentState,
+          //             status: 'processed'
+          //           })
+          //         }, 0);
+          //       }
+          //     })
+          //   }
+          // }, 5000)
         }
 
         const state: FileState = {
@@ -171,14 +212,14 @@ export async function importFiles(
     const selectedItemId = file.id;
     if (serviceName === 'upload') {
       const localUpload: LocalUpload = uploads[selectedItemId];
-      const replaceFileId = file.upfrontId;
+      const { fileId } = touchFileDescriptor;
 
       importFilesFromLocalUpload(
         selectedItemId,
-        touchFileDescriptor.fileId,
+        fileId,
         store,
         localUpload,
-        replaceFileId,
+        fileId,
       );
     } else if (serviceName === 'recent_files') {
       importFilesFromRecentFiles(selectedUploadFile, store);
@@ -199,7 +240,7 @@ export const importFilesFromLocalUpload = (
   uploadId: string,
   store: Store<State>,
   localUpload: LocalUpload,
-  replaceFileId?: Promise<string>,
+  replaceFileId?: string,
 ): void => {
   localUpload.events.forEach(originalEvent => {
     const event = { ...originalEvent };

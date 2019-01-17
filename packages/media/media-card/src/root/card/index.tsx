@@ -162,10 +162,10 @@ export class Card extends Component<CardProps, CardState> {
 
           if (!currentDataURI) {
             const {
-              src: dataURI,
+              src,
               orientation: previewOrientation,
             } = await getDataURIFromFileState(state);
-
+            dataURI = src;
             this.notifyStateChange({ dataURI, previewOrientation });
           }
 
@@ -194,7 +194,11 @@ export class Card extends Component<CardProps, CardState> {
               }
               break;
             case 'processed':
-              if (metadata.mediaType && isPreviewableType(metadata.mediaType)) {
+              if (
+                !dataURI &&
+                metadata.mediaType &&
+                isPreviewableType(metadata.mediaType)
+              ) {
                 const { appearance, dimensions, resizeMode } = this.props;
                 const options = {
                   appearance,
