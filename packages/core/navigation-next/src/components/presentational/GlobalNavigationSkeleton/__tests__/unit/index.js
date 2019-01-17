@@ -2,13 +2,15 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import GlobalNavigationSkeleton from '../../index';
+import BaseGlobalNavigationSkeleton from '../../GlobalNavigationSkeleton';
 
 describe('GlobalNavigationSkeleton with theming', () => {
-  it('should have theme props provider via HoC', () => {
+  it('should render a ThemeProvider with a GlobalNavigationSkeleton', () => {
     const wrapper = mount(<GlobalNavigationSkeleton />);
-    const globalNavigationSkeletonWithTheming = wrapper.find(
-      'GlobalNavigationSkeleton',
-    );
-    expect(globalNavigationSkeletonWithTheming.props()).toHaveProperty('theme');
+    const themeProviderWrapper = wrapper.find('ThemeProvider');
+    expect(themeProviderWrapper.props()).toHaveProperty('theme');
+    expect(
+      themeProviderWrapper.find(BaseGlobalNavigationSkeleton),
+    ).toHaveLength(1);
   });
 });
