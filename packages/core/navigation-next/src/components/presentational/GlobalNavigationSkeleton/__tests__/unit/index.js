@@ -5,12 +5,31 @@ import GlobalNavigationSkeleton from '../../index';
 import BaseGlobalNavigationSkeleton from '../../GlobalNavigationSkeleton';
 
 describe('GlobalNavigationSkeleton with theming', () => {
-  it('should render a ThemeProvider with a GlobalNavigationSkeleton', () => {
+  it('should render a ThemeProvider with a BaseGlobalNavigationSkeleton', () => {
     const wrapper = mount(<GlobalNavigationSkeleton />);
     const themeProviderWrapper = wrapper.find('ThemeProvider');
     expect(themeProviderWrapper.props()).toHaveProperty('theme');
     expect(
       themeProviderWrapper.find(BaseGlobalNavigationSkeleton),
     ).toHaveLength(1);
+  });
+
+  it('should pass navigation-next theme to BaseGlobalNavigationSkeleton', () => {
+    const wrapper = mount(<GlobalNavigationSkeleton />);
+    expect(wrapper.find(BaseGlobalNavigationSkeleton).prop('theme')).toEqual(
+      expect.objectContaining({
+        context: 'product',
+        mode: expect.objectContaining({
+          contentNav: expect.any(Function),
+          globalItem: expect.any(Function),
+          globalNav: expect.any(Function),
+          heading: expect.any(Function),
+          item: expect.any(Function),
+          section: expect.any(Function),
+          separator: expect.any(Function),
+          skeletonItem: expect.any(Function),
+        }),
+      }),
+    );
   });
 });
