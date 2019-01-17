@@ -19,7 +19,7 @@ type ShareResponse = {
   // This is not from swagger and TBC
   // it will contain any additional attributes to the invite endpoint response
   // mainly for atlOrigin
-  metadata?: MetaData;
+  metadata?: MetaDataResponse;
 };
 
 type ResponseStatus = {
@@ -58,13 +58,24 @@ type Content = {
 // for more info, visit:
 // https://hello.atlassian.net/wiki/spaces/~804672962/pages/379043535/Draft+Origin+Tracing+in+Common+Share+Component
 type MetaData = {
+  productId: string;
   toAtlassianAccountHolders: {
     atlOriginId: string;
-    userIds?: string[];
   };
   toNewUsers: {
     atlOriginId: string;
-    userIds?: string[];
+  };
+};
+
+type MetaDataResponse = {
+  productId?: string;
+  toAtlassianAccountHolders: {
+    atlOriginId: string;
+    userIds: string[];
+  };
+  toNewUsers: {
+    atlOriginId: string;
+    userIds: string[];
   };
 };
 
@@ -82,8 +93,7 @@ export class ShareServiceClientImpl implements ShareServiceClient {
   }
 
   /**
-   * Share service accepts batch invite request, and it will break it down to separated request
-   * to Invite v2 endpoint with corresponding continueUrl
+   * To send a POST request to the share endpoint in Share service
    */
   public share(
     content: Content,

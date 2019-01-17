@@ -23,7 +23,7 @@ describe('ShareServiceClientImpl', () => {
       atlOriginId: 'atlOrigin2',
     },
   };
-  let mockComment: 'comment';
+  let mockComment = 'comment';
 
   beforeEach(() => {
     requestSpy = jest.spyOn(utils, 'requestService').mockResolvedValue({});
