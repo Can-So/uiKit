@@ -37,6 +37,10 @@ type Props = {
   link: string;
 };
 
+const NoPaddingButton = styled(Button)`
+  padding: 0;
+`;
+
 export class CopyLinkButton extends React.Component<Props> {
   private inputRef: React.RefObject<HTMLInputElement> = React.createRef();
 
@@ -73,13 +77,13 @@ export class CopyLinkButton extends React.Component<Props> {
           onClose={this.handleDismissCopiedMessage}
           placement="top-start"
         >
-          <Button
+          <NoPaddingButton
             appearance="subtle-link"
             iconBefore={<LinkFilledIcon label="" />}
             onClick={this.handleClick}
           >
             <FormattedMessage {...messages.copyLinkButtonText} />
-          </Button>
+          </NoPaddingButton>
         </InlineDialog>
       </>
     );
