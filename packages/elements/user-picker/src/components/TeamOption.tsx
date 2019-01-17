@@ -62,8 +62,8 @@ export class TeamOption extends React.PureComponent<TeamOptionProps> {
       <CommonOption
         name={name}
         avatarUrl={avatarUrl}
-        getByline={this.renderByline}
-        getPrimaryText={this.getPrimaryText}
+        byline={this.renderByline()}
+        primaryText={this.getPrimaryText()}
       />
     );
   }

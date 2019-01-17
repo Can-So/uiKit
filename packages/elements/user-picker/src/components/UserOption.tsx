@@ -13,7 +13,7 @@ export type UserOptionProps = {
 };
 
 export class UserOption extends React.PureComponent<UserOptionProps> {
-  private getPrimaryText = () => {
+  getPrimaryText = () => {
     const {
       user: { name, publicName, highlight },
     } = this.props;
@@ -47,7 +47,7 @@ export class UserOption extends React.PureComponent<UserOptionProps> {
     return result;
   };
 
-  private renderByline = () =>
+  renderByline = () =>
     this.props.user.byline ? (
       <OptionTextWrapper
         color={this.props.isSelected ? colors.N50 : colors.N200}
@@ -68,8 +68,8 @@ export class UserOption extends React.PureComponent<UserOptionProps> {
         name={name}
         avatarUrl={avatarUrl}
         presence={status}
-        getByline={this.renderByline}
-        getPrimaryText={this.getPrimaryText}
+        byline={this.renderByline()}
+        primaryText={this.getPrimaryText()}
       />
     );
   }

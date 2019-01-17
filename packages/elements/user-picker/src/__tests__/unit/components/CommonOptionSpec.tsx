@@ -22,9 +22,8 @@ describe('Common Option', () => {
       <CommonOption
         avatarUrl="http://avatars.atlassian.com/jace.png"
         name="Awesome option"
-        presence="present"
-        getByline={getByLine}
-        getPrimaryText={getPrimaryText}
+        byline={getByLine()}
+        primaryText={getPrimaryText()}
         {...props}
       />,
     );
@@ -38,7 +37,24 @@ describe('Common Option', () => {
         <SizeableAvatar
           appearance="big"
           src="http://avatars.atlassian.com/jace.png"
+          name="Awesome option"
+        />
+      ),
+      primaryText: <OptionTextWrapper>This is primary text</OptionTextWrapper>,
+      secondaryText: <OptionTextWrapper>This is byline</OptionTextWrapper>,
+    });
+  });
+
+  it('should render presence only when it is supplied', () => {
+    const component = shallowOption({ presence: 'present' });
+    const avatarItem = component.find(AvatarItem);
+    expect(avatarItem.props()).toMatchObject({
+      backgroundColor: 'transparent',
+      avatar: (
+        <SizeableAvatar
+          appearance="big"
           presence="present"
+          src="http://avatars.atlassian.com/jace.png"
           name="Awesome option"
         />
       ),

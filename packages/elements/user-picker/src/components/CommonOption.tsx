@@ -18,8 +18,8 @@ export type CommonOptionProps = {
   avatarUrl: string | undefined;
   name: string;
   presence?: string;
-  getByline: () => void; //todo - this is not the expected return type
-  getPrimaryText: () => void;
+  byline: React.ReactNode;
+  primaryText: React.ReactNode;
 };
 
 export class CommonOption extends React.PureComponent<CommonOptionProps> {
@@ -29,7 +29,7 @@ export class CommonOption extends React.PureComponent<CommonOptionProps> {
       <SizeableAvatar
         appearance="big"
         src={avatarUrl}
-        presence={presence} // todo - teams should not show presence, test this logic as well
+        presence={presence}
         name={name}
       />
     );
@@ -41,8 +41,8 @@ export class CommonOption extends React.PureComponent<CommonOptionProps> {
         backgroundColor="transparent"
         avatar={this.renderAvatar()}
         component={AvatarComponent}
-        primaryText={this.props.getPrimaryText()}
-        secondaryText={this.props.getByline()}
+        primaryText={this.props.primaryText}
+        secondaryText={this.props.byline}
       />
     );
   }
