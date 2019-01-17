@@ -25,6 +25,8 @@ import {
   trackAppAccountConnected,
 } from '../analytics';
 
+const ANALYTICS_CHANNEL = 'media';
+
 const getCollapsedIcon = (state: DefinedState): string | undefined => {
   const { data } = state;
   return (
@@ -209,23 +211,25 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
               if (createAnalyticsEvent) {
                 createAnalyticsEvent(
                   trackAppAccountConnected((state as any).definitionId),
-                ).fire('media');
+                ).fire(ANALYTICS_CHANNEL);
                 createAnalyticsEvent(connectSucceededEvent(url, state)).fire(
-                  'media',
+                  ANALYTICS_CHANNEL,
                 );
               }
               reload();
             },
-            () => {
+            (err: Error) => {
               if (createAnalyticsEvent) {
                 createAnalyticsEvent(
-                  // The outbound-auth-flow-client lib, when
-                  // outbound-auth:failure happens rejects with
-                  // a data.message.
-                  // But I am not sure if I can use this message here
-                  // as it might contain sensitive data.
-                  connectFailedEvent('unknown', url, state),
-                ).fire('media');
+                  // Yes, dirty, but we had a ticket for that
+                  err.message === 'The auth window was closed'
+                    ? connectFailedEvent('auth.window.was.closed', url, state)
+                    : connectFailedEvent(
+                        'potential.sensitive.data',
+                        url,
+                        state,
+                      ),
+                ).fire(ANALYTICS_CHANNEL);
               }
               reload();
             },

@@ -76,7 +76,7 @@ class Example extends React.Component {
               <div>
                 <h5>The event's payload:</h5>
                 <pre>
-                  {this.state.c1Event
+                  {this.state.c2Event
                     ? JSON.stringify(this.state.c2Event, null, 2)
                     : 'nothing happened yet'}
                 </pre>

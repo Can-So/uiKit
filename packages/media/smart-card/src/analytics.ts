@@ -33,7 +33,7 @@ export const unresolvedEvent = (
   attributes: {
     ...context,
     url,
-    reson: state.status,
+    reason: state.status,
     ...((state as any).definitionId
       ? { definitionId: (state as any).definitionId }
       : {}),
@@ -50,7 +50,6 @@ export const connectSucceededEvent = (
   eventType: 'operational',
   attributes: {
     ...context,
-    url,
     ...((state as any).definitionId
       ? { definitionId: (state as any).definitionId }
       : {}),
@@ -68,7 +67,6 @@ export const connectFailedEvent = (
   eventType: 'operational',
   attributes: {
     ...context,
-    url,
     reason,
     ...((state as any).definitionId
       ? { definitionId: (state as any).definitionId }
