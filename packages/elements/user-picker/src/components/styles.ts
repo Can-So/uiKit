@@ -1,5 +1,6 @@
 import { AVATAR_SIZES, BORDER_WIDTH } from '@atlaskit/avatar';
 import { colors } from '@atlaskit/theme';
+import styled from 'styled-components';
 import memoizeOne from 'memoize-one';
 import { getAvatarSize } from './utils';
 
@@ -121,3 +122,10 @@ export const getStyles = memoizeOne(width => ({
     },
   }),
 }));
+
+export const OptionTextWrapper = styled.span`
+  color: ${({ color }) => color};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+`;

@@ -1,30 +1,11 @@
-import { AvatarItem } from '@atlaskit/avatar';
 import { colors } from '@atlaskit/theme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import styled from 'styled-components';
 import { Team } from '../types';
 import { HighlightText } from './HighlightText';
-import { SizeableAvatar } from './SizeableAvatar';
 import { messages } from './i18n';
-
-const AvatarComponent = styled.div`
-  &,
-  &:hover,
-  &:active,
-  &:focus {
-    padding: 0;
-    margin: 0;
-    border: none;
-  }
-`;
-
-export const TextWrapper = styled.span`
-  color: ${({ color }) => color};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
-`;
+import { CommonOption } from './CommonOption';
+import { OptionTextWrapper } from './styles';
 
 export type TeamOptionProps = {
   team: Team;
@@ -32,27 +13,20 @@ export type TeamOptionProps = {
 };
 
 export class TeamOption extends React.PureComponent<TeamOptionProps> {
-  private renderAvatar = () => {
-    const {
-      team: { avatarUrl, name },
-    } = this.props;
-    return <SizeableAvatar appearance="big" src={avatarUrl} name={name} />;
-  };
-
   private getPrimaryText = () => {
     const {
       team: { name, highlight },
     } = this.props;
 
     return [
-      <TextWrapper
+      <OptionTextWrapper
         key="name"
         color={this.props.isSelected ? colors.N0 : colors.N800}
       >
         <HighlightText highlights={highlight && highlight.name}>
           {name}
         </HighlightText>
-      </TextWrapper>,
+      </OptionTextWrapper>,
     ];
   };
 
@@ -69,25 +43,27 @@ export class TeamOption extends React.PureComponent<TeamOptionProps> {
     }
 
     return (
-      <TextWrapper color={isSelected ? colors.N50 : colors.N200}>
+      <OptionTextWrapper color={isSelected ? colors.N50 : colors.N200}>
         <FormattedMessage
           {...(memberCount > 50
             ? messages.plus50Members
             : messages.memberCount)}
           values={{ count: memberCount, includes: includesYou }}
         />
-      </TextWrapper>
+      </OptionTextWrapper>
     );
   };
 
   render() {
+    const {
+      team: { name, avatarUrl },
+    } = this.props;
     return (
-      <AvatarItem
-        backgroundColor="transparent"
-        avatar={this.renderAvatar()}
-        component={AvatarComponent}
-        primaryText={this.getPrimaryText()}
-        secondaryText={this.renderByline()}
+      <CommonOption
+        name={name}
+        avatarUrl={avatarUrl}
+        getByline={this.renderByline}
+        getPrimaryText={this.getPrimaryText}
       />
     );
   }
