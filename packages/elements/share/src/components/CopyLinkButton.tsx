@@ -49,7 +49,7 @@ export class CopyLinkButton extends React.Component<Props> {
   };
 
   handleClick = () => {
-    this.inputRef.current!.select();
+    this.inputRef.current && this.inputRef.current!.select();
     document.execCommand('copy');
     this.setState({ shouldShowCopiedMessage: true });
   };
@@ -67,7 +67,10 @@ export class CopyLinkButton extends React.Component<Props> {
         <InlineDialog
           content={
             <MessageContainer>
-              <CheckCircleIcon label="" primaryColor={colors.G300} />
+              <CheckCircleIcon
+                label="check circle icon"
+                primaryColor={colors.G300}
+              />
               <MessageSpan>
                 <FormattedMessage {...messages.copiedToClipboardMessage} />
               </MessageSpan>
@@ -79,7 +82,7 @@ export class CopyLinkButton extends React.Component<Props> {
         >
           <NoPaddingButton
             appearance="subtle-link"
-            iconBefore={<LinkFilledIcon label="" />}
+            iconBefore={<LinkFilledIcon label="copy link icon" />}
             onClick={this.handleClick}
           >
             <FormattedMessage {...messages.copyLinkButtonText} />
