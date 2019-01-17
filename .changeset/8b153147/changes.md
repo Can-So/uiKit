@@ -1,0 +1,1 @@
+- Fixes an issue with ClickAreaBlock that wouldn't allow focus textareas
