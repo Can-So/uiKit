@@ -6,7 +6,7 @@ import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import { MediaSingle, WithProviders } from '@atlaskit/editor-common';
 import { CardEvent } from '@atlaskit/media-card';
 import { findParentNodeOfTypeClosestToPos } from 'prosemirror-utils';
-import { stateKey, MediaPluginState, MediaProvider } from '../pm-plugins/main';
+import { stateKey, MediaPluginState } from '../pm-plugins/main';
 import ReactNodeView from '../../../nodeviews/ReactNodeView';
 import MediaItem from './media';
 import WithPluginState from '../../../ui/WithPluginState';
