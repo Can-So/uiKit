@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.12
+- [patch] [888e563](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/888e563):
+
+  - Fixes an issue with ClickAreaBlock that wouldn't allow focus textareas
+
 ## 95.0.11
 - [patch] [ec9ed50](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ec9ed50):
 
