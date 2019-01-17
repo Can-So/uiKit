@@ -1,0 +1,1 @@
+- add support for source code repository urls (currently Bitbucket and Github) in smart-cards.
