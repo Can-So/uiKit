@@ -54,6 +54,7 @@ const marks = [
   'code',
   'textColor',
   'confluenceInlineComment',
+  'annotation',
 ];
 
 export const confluenceSchema: Schema = createSchema({ nodes, marks });

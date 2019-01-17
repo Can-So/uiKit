@@ -14,6 +14,7 @@ export default [
             'subsup',
             'textColor',
             'action',
+            'annotation',
           ],
         ],
         optional: true,

@@ -306,6 +306,39 @@
       ],
       "additionalProperties": false
     },
+    "annotation_mark": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "annotation"
+          ]
+        },
+        "attrs": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "annotationType": {
+              "enum": [
+                "inlineComment"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "annotationType"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "attrs"
+      ],
+      "additionalProperties": false
+    },
     "paragraph_node": {
       "type": "object",
       "properties": {
@@ -2233,6 +2266,9 @@
                   },
                   {
                     "$ref": "#/definitions/action_mark"
+                  },
+                  {
+                    "$ref": "#/definitions/annotation_mark"
                   }
                 ]
               }

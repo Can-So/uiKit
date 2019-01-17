@@ -17,6 +17,7 @@ import {
   breakout,
   alignment,
   indentation,
+  annotation,
 } from './marks';
 
 import {
@@ -185,6 +186,7 @@ const marksInOrder: SchemaBuiltInItem[] = [
   { name: 'textColor', spec: textColor },
   { name: 'action', spec: action },
   { name: 'alignment', spec: alignment },
+  { name: 'annotation', spec: annotation },
   { name: 'confluenceInlineComment', spec: confluenceInlineComment },
   ...markGroupDeclarations,
   { name: 'breakout', spec: breakout },
