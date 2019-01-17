@@ -14,6 +14,7 @@ import Action from './action';
 import Breakout from './breakout';
 import Alignment from './alignment';
 import Indentation from './indentation';
+import Annotation from './annotation';
 
 // Stage0
 import ConfluenceInlineComment from './confluence-inline-comment';
@@ -28,6 +29,7 @@ export const markToReact = {
   textColor: TextColor,
   underline: Underline,
   action: Action,
+  annotation: Annotation,
 
   // Stage0
   confluenceInlineComment: ConfluenceInlineComment,
@@ -51,4 +53,5 @@ export {
   Underline,
   Action,
   Breakout,
+  Annotation,
 };

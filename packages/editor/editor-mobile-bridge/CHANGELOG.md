@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.7.1
+- [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
+
+  - ED-5991: bumped prosemirror-view to 1.6.8
+
 ## 6.7.0
 - [minor] [df30c63](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df30c63):
 

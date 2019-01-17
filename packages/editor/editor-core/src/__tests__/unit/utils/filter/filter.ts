@@ -171,5 +171,20 @@ describe('@atlaskit/editor-core/utils/filter', () => {
         },
       ]);
     });
+    it('preserves slice openStart/openEnd', () => {
+      const jsonDoc = toJSON(doc(p('some text'))(defaultSchema));
+      const content = filterSliceByType(
+        Slice.fromJSON(defaultSchema, {
+          content: jsonDoc.content,
+          openStart: 1,
+          openEnd: 1,
+        }),
+        new Set(['text']),
+        defaultSchema,
+        false,
+      );
+      expect(content.openStart).toEqual(1);
+      expect(content.openEnd).toEqual(1);
+    });
   });
 });

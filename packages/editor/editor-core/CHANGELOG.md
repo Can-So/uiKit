@@ -1,5 +1,60 @@
 # @atlaskit/editor-core
 
+## 95.0.19
+- [patch] [967f631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/967f631):
+
+  -  ED-4732: Fixed preserving marks when pasting text into paragraph
+
+## 95.0.18
+- [patch] [8158fe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8158fe0):
+
+  - ED-6059: Extension and inlineExtension should read their content from attrs not the PMNode.
+
+## 95.0.17
+- [patch] [37b7edf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37b7edf):
+
+  - ED-6062: fix deleting last character inside a node with breakout mark
+
+## 95.0.16
+- [patch] [23d298e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23d298e):
+
+  - ED-5950: fix merging rows
+
+## 95.0.15
+- [patch] [a8d8855](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a8d8855):
+
+  - fixed StatusPicker analytics firing when user clicks in two Status instances, one after another
+
+## 95.0.14
+- [patch] [be6313e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be6313e):
+
+  - ED-5477 Support rendering of inline code together with other marks
+
+## 95.0.13
+- [patch] [c5ee0c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c5ee0c8):
+
+  - Added Annotation mark to ADF, editor & renderer
+
+## 95.0.12
+- [patch] [888e563](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/888e563):
+
+  - Fixes an issue with ClickAreaBlock that wouldn't allow focus textareas
+
+## 95.0.11
+- [patch] [ec9ed50](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ec9ed50):
+
+  - ED-5814 Fix issue where numbered columns' styling was off on small screens
+
+## 95.0.10
+- [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
+
+  - ED-5991: bumped prosemirror-view to 1.6.8
+
+## 95.0.9
+- [patch] [6514dda](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6514dda):
+
+  - ED-5415, ED-6020: don't create broken document after sequential media insertion; always try to insert an empty paragraph after images, even in tables
+
 ## 95.0.8
 - [patch] [fc9a884](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fc9a884):
 

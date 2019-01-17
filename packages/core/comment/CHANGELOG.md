@@ -1,5 +1,10 @@
 # @atlaskit/comment
 
+## 6.0.36
+- [patch] [19783cb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/19783cb):
+
+  - Fixed @atlaskit/visual-regression being incorrectly listed as a dependency.
+
 ## 6.0.35
 - Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
   - @atlaskit/editor-core@95.0.0

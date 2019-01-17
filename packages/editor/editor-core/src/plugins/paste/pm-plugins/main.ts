@@ -24,6 +24,7 @@ import { transformSliceToAddTableHeaders } from '../../table/actions';
 import {
   handlePasteIntoTaskAndDecision,
   handlePasteAsPlainText,
+  handlePastePreservingMarks,
   handleMacroAutoConvert,
 } from '../handlers';
 import {
@@ -138,6 +139,11 @@ export function createPlugin(
         // If the clipboard only contains plain text, attempt to parse it as Markdown
         if (text && !html && markdownSlice) {
           analyticsService.trackEvent('atlassian.editor.paste.markdown');
+
+          if (handlePastePreservingMarks(markdownSlice)(state, dispatch)) {
+            return true;
+          }
+
           const tr = closeHistory(state.tr);
           tr.replaceSelection(markdownSlice);
 
@@ -149,7 +155,7 @@ export function createPlugin(
         // finally, handle rich-text copy-paste
         if (html) {
           // linkify the text where possible
-          slice = linkifyContent(state.schema, slice);
+          slice = linkifyContent(state.schema)(slice);
 
           // run macro autoconvert prior to other conversions
           if (handleMacroAutoConvert(text, slice)(state, dispatch, view)) {
@@ -193,6 +199,11 @@ export function createPlugin(
           // get prosemirror-tables to handle pasting tables if it can
           // otherwise, just the replace the selection with the content
           if (handlePasteTable(view, null, slice)) {
+            return true;
+          }
+
+          // ED-4732
+          if (handlePastePreservingMarks(slice)(state, dispatch)) {
             return true;
           }
 
