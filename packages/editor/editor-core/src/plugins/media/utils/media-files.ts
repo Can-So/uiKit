@@ -23,9 +23,6 @@ import {
 } from './media-common';
 import { safeInsert } from 'prosemirror-utils';
 
-/** These nodes don't allow non images to exist inside them */
-const nonImagesBannedNodes = ['listItem'];
-
 export interface Range {
   start: number;
   end: number;
@@ -199,8 +196,4 @@ const setSelectionAfterMediaInsertion = (
   } else {
     setTextSelection(view, endOfMediaGroup + 1);
   }
-};
-
-export const isNonImagesBanned = (node?: PMNode) => {
-  return node && nonImagesBannedNodes.indexOf(node.type.name) > -1;
 };
