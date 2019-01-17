@@ -5,7 +5,7 @@ import { Team } from '../types';
 import { HighlightText } from './HighlightText';
 import { messages } from './i18n';
 import { CommonOption } from './CommonOption';
-import { OptionTextWrapper } from './styles';
+import { OptionTextWrapper } from './OptionTextWrapper';
 
 export type TeamOptionProps = {
   team: Team;

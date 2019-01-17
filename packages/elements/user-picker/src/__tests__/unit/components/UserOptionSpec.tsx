@@ -4,7 +4,7 @@ import * as React from 'react';
 import { HighlightText } from '../../../components/HighlightText';
 import { UserOption, UserOptionProps } from '../../../components/UserOption';
 import { CommonOption } from '../../../components/CommonOption';
-import { OptionTextWrapper } from '../../../components/styles';
+import { OptionTextWrapper } from '../../../components/OptionTextWrapper';
 
 describe('User Option', () => {
   const user = {

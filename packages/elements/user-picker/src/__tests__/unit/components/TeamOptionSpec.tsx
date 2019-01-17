@@ -6,7 +6,7 @@ import { HighlightText } from '../../../components/HighlightText';
 import { TeamOption, TeamOptionProps } from '../../../components/TeamOption';
 import { Team } from '../../../types';
 import { CommonOption } from '../../../components/CommonOption';
-import { OptionTextWrapper } from '../../../components/styles';
+import { OptionTextWrapper } from '../../../components/OptionTextWrapper';
 
 describe('Team Option', () => {
   const basicTeam: Team = {

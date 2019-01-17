@@ -4,7 +4,7 @@ import { User } from '../types';
 import { HighlightText } from './HighlightText';
 import { hasValue } from './utils';
 import { CommonOption } from './CommonOption';
-import { OptionTextWrapper } from './styles';
+import { OptionTextWrapper } from './OptionTextWrapper';
 
 export type UserOptionProps = {
   user: User;
