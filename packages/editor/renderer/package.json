@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/renderer",
-  "version": "35.0.4",
+  "version": "35.0.5",
   "description": "Renderer component",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
@@ -18,7 +18,7 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
-    "@atlaskit/adf-schema": "^1.1.0",
+    "@atlaskit/adf-schema": "^1.4.0",
     "@atlaskit/analytics-namespaced-context": "^2.1.5",
     "@atlaskit/code": "^8.2.2",
     "@atlaskit/editor-common": "^28.0.2",

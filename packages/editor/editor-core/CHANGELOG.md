@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.13
+- [patch] [c5ee0c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c5ee0c8):
+
+  - Added Annotation mark to ADF, editor & renderer
+
 ## 95.0.12
 - [patch] [888e563](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/888e563):
 

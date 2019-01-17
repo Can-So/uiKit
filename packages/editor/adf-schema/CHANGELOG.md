@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.4.0
+- [minor] [c5ee0c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c5ee0c8):
+
+  - Added Annotation mark to ADF, editor & renderer
+
 ## 1.3.3
 - [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
 
