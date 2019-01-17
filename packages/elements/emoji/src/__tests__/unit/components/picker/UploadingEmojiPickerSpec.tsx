@@ -1,14 +1,12 @@
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
 import { waitUntil } from '@atlaskit/util-common-test';
 import { MockEmojiResource } from '@atlaskit/util-data-test';
-import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import EmojiRepository from '../../../../api/EmojiRepository';
 import Emoji from '../../../../components/common/Emoji';
 import EmojiDeletePreview from '../../../../components/common/EmojiDeletePreview';
 import EmojiErrorMessage from '../../../../components/common/EmojiErrorMessage';
 import EmojiUploadPreview from '../../../../components/common/EmojiUploadPreview';
-import FileChooser from '../../../../components/common/FileChooser';
 import { messages } from '../../../../components/i18n';
 import EmojiPickerCategoryHeading from '../../../../components/picker/EmojiPickerCategoryHeading';
 import EmojiPickerList from '../../../../components/picker/EmojiPickerList';
