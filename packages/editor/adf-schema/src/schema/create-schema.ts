@@ -78,13 +78,16 @@ function addItems(
   /**
    * Add built-in Node / Mark specs
    */
-  const items = builtInItems.reduce((items, { name, spec }) => {
-    if (config.indexOf(name) !== -1) {
-      items[name] = customSpecs[name] || spec;
-    }
+  const items = builtInItems.reduce<Record<string, NodeSpec | MarkSpec>>(
+    (items, { name, spec }) => {
+      if (config.indexOf(name) !== -1) {
+        items[name] = customSpecs[name] || spec;
+      }
 
-    return items;
-  }, {});
+      return items;
+    },
+    {},
+  );
 
   /**
    * Add Custom Node / Mark specs
