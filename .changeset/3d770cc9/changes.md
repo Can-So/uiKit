@@ -1,0 +1,1 @@
+- Fixed @atlaskit/visual-regression being incorrectly listed as a dependency.
