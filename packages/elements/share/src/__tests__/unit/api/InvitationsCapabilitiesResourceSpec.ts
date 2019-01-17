@@ -1,20 +1,22 @@
 import { utils } from '@atlaskit/util-service-support';
 import {
-  IdentityClientImpl,
-  IdentityClient,
+  InvitationsCapabilitiesResource,
+  InvitationCapabilitiesProvider,
   DEFAULT_INVITATIONS_CAPABILITIES_PATH,
   DEFAULT_ID_PUBLIC_FACADE_URL,
-} from '../../../clients/IdentityClient';
+} from '../../../api/InvitationsCapabilitiesResource';
 
 const mockCloudId = 'mockCloudId';
 
-describe('IdentityClientImpl', () => {
+describe('InvitationsCapabilitiesResource', () => {
   let requestSpy;
-  let identityClient: IdentityClient;
+  let invitationsCapabilitiesResource: InvitationCapabilitiesProvider;
 
   beforeEach(() => {
     requestSpy = jest.spyOn(utils, 'requestService').mockResolvedValue({});
-    identityClient = new IdentityClientImpl(mockCloudId);
+    invitationsCapabilitiesResource = new InvitationsCapabilitiesResource(
+      mockCloudId,
+    );
   });
 
   afterEach(() => {
@@ -23,7 +25,7 @@ describe('IdentityClientImpl', () => {
 
   describe('getInvitationsCapabilities', () => {
     it('should call requestService with the this.serviceConfig and options object with properties path and queryParams object', async () => {
-      await identityClient.getInvitationsCapabilities();
+      await invitationsCapabilitiesResource.getCapabilities();
       expect(requestSpy).toBeCalledTimes(1);
       expect(requestSpy.mock.calls[0][0]).toMatchObject({
         url: DEFAULT_ID_PUBLIC_FACADE_URL,
@@ -40,8 +42,11 @@ describe('IdentityClientImpl', () => {
       const mockServiceConfig = {
         url: 'mockUrl',
       };
-      identityClient = new IdentityClientImpl(mockCloudId, mockServiceConfig);
-      await identityClient.getInvitationsCapabilities();
+      invitationsCapabilitiesResource = new InvitationsCapabilitiesResource(
+        mockCloudId,
+        mockServiceConfig,
+      );
+      await invitationsCapabilitiesResource.getCapabilities();
       expect(requestSpy).toBeCalledTimes(1);
       expect(requestSpy.mock.calls[0][0]).toMatchObject({
         url: mockServiceConfig.url,
