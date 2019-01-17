@@ -31,21 +31,21 @@ describe('CopyLinkButton', () => {
     const wrapper = mount<CopyLinkButton>(<CopyLinkButton link={mockLink} />);
 
     const inlineDialog = wrapper.find(InlineDialog);
-    expect(inlineDialog.length).toEqual(1);
+    expect(inlineDialog).toHaveLength(1);
     expect(inlineDialog.prop('placement')).toEqual('top-start');
 
     const button = wrapper.find(Button);
-    expect(button.length).toEqual(1);
+    expect(button).toHaveLength(1);
     expect(button.prop('appearance')).toEqual('subtle-link');
 
     const hiddenInput = wrapper.find(HiddenInput);
-    expect(hiddenInput.length).toEqual(1);
+    expect(hiddenInput).toHaveLength(1);
     expect(hiddenInput.prop('text')).toEqual(mockLink);
 
     expect(
       // @ts-ignore accessing private property just for testing purpose
       wrapper.instance().inputRef.current instanceof HTMLInputElement,
-    ).toBe(true);
+    ).toBeTruthy();
   });
 
   describe('shouldShowCopiedMessage state', () => {
@@ -57,8 +57,8 @@ describe('CopyLinkButton', () => {
       wrapper.setState({
         shouldShowCopiedMessage: true,
       });
-      expect(wrapper.find(CheckCircleIcon).length).toEqual(1);
-      expect(wrapper.find(MessageContainer).length).toEqual(1);
+      expect(wrapper.find(CheckCircleIcon)).toHaveLength(1);
+      expect(wrapper.find(MessageContainer)).toHaveLength(1);
 
       const spiedHandleDimissCopiedMessage = jest.spyOn(
         wrapper.instance(),
@@ -75,8 +75,8 @@ describe('CopyLinkButton', () => {
       wrapper.update();
 
       expect(spiedHandleDimissCopiedMessage).toHaveBeenCalledTimes(1);
-      expect(wrapper.find(CheckCircleIcon).length).toEqual(0);
-      expect(wrapper.find(MessageContainer).length).toEqual(0);
+      expect(wrapper.find(CheckCircleIcon)).toHaveLength(0);
+      expect(wrapper.find(MessageContainer)).toHaveLength(0);
     });
   });
 
@@ -91,7 +91,7 @@ describe('CopyLinkButton', () => {
       wrapper.instance().handleClick();
       expect(spiedInputSelect).toHaveBeenCalledTimes(1);
       expect(spiedExecCommand).toHaveBeenCalledTimes(1);
-      expect(wrapper.state().shouldShowCopiedMessage).toBe(true);
+      expect(wrapper.state().shouldShowCopiedMessage).toBeTruthy();
     });
   });
 });

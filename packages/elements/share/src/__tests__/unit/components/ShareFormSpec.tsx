@@ -61,7 +61,11 @@ describe('ShareForm', () => {
   it('should override submit button label', () => {
     const loadOptions = jest.fn();
     const component = shallow(
-      <ShareForm loadOptions={loadOptions} submitButtonLabel="Invite" />,
+      <ShareForm
+        link={mockLink}
+        loadOptions={loadOptions}
+        submitButtonLabel="Invite"
+      />,
     );
 
     const akForm = component.find<any>(Form);
