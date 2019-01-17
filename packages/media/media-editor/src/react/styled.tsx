@@ -17,11 +17,6 @@ import {
 import { ButtonProps } from './toolbarButtons';
 import { layers } from '@atlaskit/theme';
 
-export interface ToolbarButtonProps {
-  selected: boolean;
-  onClick: () => void;
-}
-
 export interface LineWidthFrontCircleProps {
   width: number;
 }
@@ -29,9 +24,13 @@ export interface LineWidthFrontCircleProps {
 export const blanketColor = akColorN700A;
 const overlayZindex = layers.modal() + 10;
 
-export const EditorContainer: ComponentClass<HTMLAttributes<{}>> = styled.div`
-  position: relative;
+export const MediaEditorContainer: ComponentClass<
+  HTMLAttributes<{}>
+> = styled.div`
+  position: absolute;
+  top: 0;
 `;
+MediaEditorContainer.displayName = 'MediaEditorContainer';
 
 export const OutputArea: ComponentClass<
   HTMLAttributes<{}> & ThemedOuterStyledProps<{}, {}>
@@ -39,6 +38,7 @@ export const OutputArea: ComponentClass<
   position: absolute;
   overflow: hidden;
 `;
+OutputArea.displayName = 'OutputArea';
 
 export const DrawingCanvas: ComponentClass<
   CanvasHTMLAttributes<{}> & ThemedOuterStyledProps<{}, {}>
@@ -47,6 +47,7 @@ export const DrawingCanvas: ComponentClass<
   left: 0;
   top: 0;
 `;
+DrawingCanvas.displayName = 'DrawingCanvas';
 
 export const SupplementaryCanvas: ComponentClass<
   CanvasHTMLAttributes<{}> & ThemedOuterStyledProps<{}, {}>
@@ -56,6 +57,7 @@ export const SupplementaryCanvas: ComponentClass<
   left: 0;
   top: 0;
 `;
+SupplementaryCanvas.displayName = 'SupplementaryCanvas';
 
 // TODO Check with transparent canvas, because DefaultKeyboardInput makes the text area visible to get focus.
 // https://jira.atlassian.com/browse/FIL-4059
@@ -73,6 +75,7 @@ export const HiddenTextArea: ComponentClass<
   resize: none;
   opacity: 0;
 `;
+HiddenTextArea.displayName = 'HiddenTextArea';
 
 export const HiddenTextHelperDiv: ComponentClass<
   HTMLAttributes<{}> & ThemedOuterStyledProps<{}, {}>
@@ -87,6 +90,7 @@ export const HiddenTextHelperDiv: ComponentClass<
   overflow: hidden;
   white-space: pre; /* to preserve multiple whitespace characters and not to break lines */
 `;
+HiddenTextHelperDiv.displayName = 'HiddenTextHelperDiv';
 
 export const ToolbarContainer: ComponentClass<HTMLAttributes<{}>> = styled.div`
   width: 32px;
@@ -95,6 +99,7 @@ export const ToolbarContainer: ComponentClass<HTMLAttributes<{}>> = styled.div`
   border-radius: 4px;
   padding: 8px;
 `;
+ToolbarContainer.displayName = 'ToolbarContainer';
 
 export const ToolbarButton: ComponentClass<
   HTMLAttributes<{}> & ButtonProps
@@ -110,6 +115,7 @@ export const ToolbarButton: ComponentClass<
     background-color: ${akColorN90};
   }
 `;
+ToolbarButton.displayName = 'ToolbarButton';
 
 export const ColorSquare: ComponentClass<HTMLAttributes<{}>> = styled.div`
   width: 20px;
@@ -121,6 +127,7 @@ export const ColorSquare: ComponentClass<HTMLAttributes<{}>> = styled.div`
   border-color: ${akColorN50A};
   border-style: solid;
 `;
+ColorSquare.displayName = 'ColorSquare';
 
 export const LineWidthBackCircle: ComponentClass<
   HTMLAttributes<{}>
@@ -132,6 +139,7 @@ export const LineWidthBackCircle: ComponentClass<
   background-color: ${akColorN200};
   border-radius: 10px;
 `;
+LineWidthBackCircle.displayName = 'LineWidthBackCircle';
 
 export const LineWidthFrontCircle: ComponentClass<
   HTMLAttributes<{}> & LineWidthFrontCircleProps
@@ -145,6 +153,7 @@ export const LineWidthFrontCircle: ComponentClass<
   margin: ${(props: LineWidthFrontCircleProps) =>
     props.width ? `${10 - props.width / 2}px` : '0'};
 `;
+LineWidthFrontCircle.displayName = 'LineWidthFrontCircle';
 
 export const ToolIcon: ComponentClass<HTMLAttributes<{}>> = styled.div`
   width: 20px;
@@ -152,6 +161,7 @@ export const ToolIcon: ComponentClass<HTMLAttributes<{}>> = styled.div`
   margin: 4px;
   color: ${akColorN40};
 `;
+ToolIcon.displayName = 'ToolIcon';
 
 // TODO This is copy paste from media-viewer
 export const Blanket: ComponentClass<HTMLAttributes<{}>> = styled.div`
@@ -163,6 +173,7 @@ export const Blanket: ComponentClass<HTMLAttributes<{}>> = styled.div`
   background-color: ${blanketColor};
   z-index: ${overlayZindex};
 `;
+Blanket.displayName = 'Blanket';
 
 export const SpinnerWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
   position: absolute;
@@ -170,3 +181,4 @@ export const SpinnerWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
+SpinnerWrapper.displayName = 'SpinnerWrapper';

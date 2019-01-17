@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Spinner from '@atlaskit/spinner';
 import {
-  EditorContainer,
+  MediaEditorContainer,
   OutputArea,
   DrawingCanvas,
   HiddenTextArea,
@@ -185,7 +185,7 @@ export class MediaEditor extends React.Component<
     const height = `${dimensions.height}px`;
 
     return (
-      <EditorContainer style={{ width, height }}>
+      <MediaEditorContainer style={{ width, height }}>
         {!isImageLoaded ? this.renderSpinner() : null}
         <OutputArea
           innerRef={this.handleOutputAreaInnerRef}
@@ -209,7 +209,7 @@ export class MediaEditor extends React.Component<
             style={{ width, height }}
           />
         </OutputArea>
-      </EditorContainer>
+      </MediaEditorContainer>
     );
   }
 

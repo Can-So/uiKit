@@ -6,6 +6,7 @@ import { SmartMediaEditor } from '../src';
 
 interface State {
   showEditor: boolean;
+  showWithError: boolean;
   newFileIdentifier?: FileIdentifier;
 }
 
@@ -13,22 +14,20 @@ const context = createUploadContext();
 
 class SmartMediaEditorExample extends React.Component<{}, State> {
   state: State = {
+    showWithError: false,
     showEditor: true,
   };
 
   openSmartEditor = () => {
-    this.setState({ showEditor: true });
+    this.setState({ showEditor: true, showWithError: false });
+  };
+
+  openSmartEditorWithError = () => {
+    this.setState({ showEditor: true, showWithError: true });
   };
 
   onFinish = () => {
     console.log('onFinish');
-    this.setState({
-      showEditor: false,
-    });
-  };
-
-  onError = (error: any) => {
-    console.log('onError', error);
     this.setState({
       showEditor: false,
     });
@@ -42,14 +41,16 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
   };
 
   render() {
-    const { showEditor, newFileIdentifier } = this.state;
+    const { showWithError, showEditor, newFileIdentifier } = this.state;
 
     const editor = (
       <SmartMediaEditor
-        identifier={imageFileId}
+        identifier={{
+          ...imageFileId,
+          id: showWithError ? '🥳' : imageFileId.id,
+        }}
         context={context}
         onFinish={this.onFinish}
-        onError={this.onError}
         onUploadStart={this.onUploadStart}
       />
     );
@@ -57,6 +58,10 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
     return (
       <div>
         <Button onClick={this.openSmartEditor}>Open Smart Editor</Button>
+        <br />
+        <Button onClick={this.openSmartEditorWithError}>
+          Open Smart Editor (with an error)
+        </Button>
         {newFileIdentifier ? (
           <Card identifier={newFileIdentifier} context={context} />
         ) : null}

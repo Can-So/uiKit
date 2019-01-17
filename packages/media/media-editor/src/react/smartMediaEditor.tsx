@@ -9,6 +9,7 @@ import { intlShape, IntlProvider } from 'react-intl';
 import EditorView from './editorView/editorView';
 import { Blanket, SpinnerWrapper } from './styled';
 import { fileToBase64 } from '../util';
+import ErrorView from './editorView/errorView/errorView';
 
 export interface SmartMediaEditorProps {
   identifier: FileIdentifier;
@@ -178,32 +179,36 @@ export class SmartMediaEditor extends React.Component<
     );
   };
 
-  renderEditor = (imageUrl: string) => {
-    const content = (
-      <EditorView
-        imageUrl={imageUrl}
-        onSave={this.onSave}
-        onCancel={this.onCancel}
-        onError={this.onError}
-      />
-    );
-
+  private renderWithIntl(content: JSX.Element) {
     return this.context.intl ? (
       content
     ) : (
       <IntlProvider locale="en">{content}</IntlProvider>
     );
+  }
+
+  renderEditor = (imageUrl: string) => {
+    return this.renderWithIntl(
+      <EditorView
+        imageUrl={imageUrl}
+        onSave={this.onSave}
+        onCancel={this.onCancel}
+        onError={this.onError}
+      />,
+    );
   };
 
-  renderError = () => {
-    // TODO move proper error screen from media-picker's media
-    return <div>🤕</div>;
+  renderError = (error: any) => {
+    const { onFinish } = this.props;
+    return this.renderWithIntl(
+      <ErrorView message={error} onCancel={onFinish} />,
+    );
   };
 
   render() {
     const { imageUrl, error } = this.state;
     const content = error
-      ? this.renderError()
+      ? this.renderError(error)
       : imageUrl
       ? this.renderEditor(imageUrl)
       : this.renderLoading();
