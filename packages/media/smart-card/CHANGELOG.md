@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.3.0
+- [minor] [150626e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/150626e):
+
+  - add support for source code repository urls (currently Bitbucket and Github) in smart-cards.
+
 ## 9.2.2
 - Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
   - @atlaskit/radio@0.4.5
