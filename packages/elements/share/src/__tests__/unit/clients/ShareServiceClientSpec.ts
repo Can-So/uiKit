@@ -16,6 +16,7 @@ describe('ShareServiceClientImpl', () => {
   };
   let mockRecipients = [{ id: 'id' }, { email: 'email' }];
   let mockMetaData = {
+    productId: 'confluence',
     toAtlassianAccountHolders: {
       atlOriginId: 'atlOrigin1',
     },
