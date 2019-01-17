@@ -15,10 +15,10 @@ export interface SmartMediaEditorProps {
   context: Context;
   onUploadStart: (identifier: FileIdentifier) => void;
   onFinish: () => void;
-  onError?: (error: any) => void;
 }
 
 export interface SmartMediaEditorState {
+  error?: any;
   imageUrl?: string;
 }
 
@@ -38,6 +38,16 @@ export class SmartMediaEditor extends React.Component<
   componentDidMount() {
     const { identifier } = this.props;
     this.getFile(identifier);
+  }
+
+  componentWillReceiveProps(nextProps: Readonly<SmartMediaEditorProps>) {
+    const { identifier, context } = this.props;
+    if (
+      nextProps.identifier.id !== identifier.id ||
+      nextProps.context !== context
+    ) {
+      this.getFile(nextProps.identifier);
+    }
   }
 
   componentWillUnmount() {
@@ -155,10 +165,9 @@ export class SmartMediaEditor extends React.Component<
   };
 
   onError = (error: any) => {
-    const { onError } = this.props;
-    if (onError) {
-      onError(error);
-    }
+    this.setState({
+      error,
+    });
   };
 
   renderLoading = () => {
@@ -186,9 +195,16 @@ export class SmartMediaEditor extends React.Component<
     );
   };
 
+  renderError = () => {
+    // TODO move proper error screen from media-picker's media
+    return <div>🤕</div>;
+  };
+
   render() {
-    const { imageUrl } = this.state;
-    const content = imageUrl
+    const { imageUrl, error } = this.state;
+    const content = error
+      ? this.renderError()
+      : imageUrl
       ? this.renderEditor(imageUrl)
       : this.renderLoading();
 
