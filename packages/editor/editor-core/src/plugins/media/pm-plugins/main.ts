@@ -286,13 +286,6 @@ export class MediaPluginState {
       media => !isImage(media.fileMimeType),
     );
 
-    const grandParentNode = this.view.state.selection.$from.node(-1);
-
-    // in case of gap cursor, selection might be at depth=0
-    if (grandParentNode && isNonImagesBanned(grandParentNode)) {
-      nonImageAttachments = [];
-    }
-
     mediaStates.forEach(mediaState => {
       this.stateManager.on(mediaState.id, this.handleMediaState);
     });
