@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.14
+- [patch] [be6313e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be6313e):
+
+  - ED-5477 Support rendering of inline code together with other marks
+
 ## 95.0.13
 - [patch] [c5ee0c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c5ee0c8):
 

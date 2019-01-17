@@ -1,1 +1,0 @@
-- ED-5477 Support rendering of inline code together with other marks

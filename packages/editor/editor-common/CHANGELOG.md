@@ -1,5 +1,10 @@
 # @atlaskit/editor-common
 
+## 28.1.0
+- [minor] [be6313e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be6313e):
+
+  - ED-5477 Support rendering of inline code together with other marks
+
 ## 28.0.4
 - [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
 
