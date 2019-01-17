@@ -140,7 +140,7 @@ export class SmartMediaEditor extends React.Component<
     );
     const uploadingFileStateSubscription = uploadingFileState.subscribe({
       next: fileState => {
-        if (fileState.status === 'processed') {
+        if (fileState.status === 'processing') {
           onFinish();
           setTimeout(() => uploadingFileStateSubscription.unsubscribe(), 0);
         } else if (fileState.status === 'failed-processing') {

@@ -28,15 +28,13 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
 
   onFinish = () => {
     console.log('onFinish');
-    this.setState({
-      showEditor: false,
-    });
   };
 
   onUploadStart = (identifier: FileIdentifier) => {
     console.log('onUploadStart', identifier);
     this.setState({
       newFileIdentifier: identifier,
+      showEditor: false,
     });
   };
 
