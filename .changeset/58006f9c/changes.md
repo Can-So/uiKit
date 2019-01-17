@@ -1,1 +1,0 @@
-- ED-5814 Fix issue where numbered columns' styling was off on small screens

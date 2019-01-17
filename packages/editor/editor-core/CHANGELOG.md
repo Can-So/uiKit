@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.11
+- [patch] [ec9ed50](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ec9ed50):
+
+  - ED-5814 Fix issue where numbered columns' styling was off on small screens
+
 ## 95.0.10
 - [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
 
