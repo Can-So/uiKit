@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.19
+- [patch] [967f631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/967f631):
+
+  -  ED-4732: Fixed preserving marks when pasting text into paragraph
+
 ## 95.0.18
 - [patch] [8158fe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8158fe0):
 
