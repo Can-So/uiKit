@@ -1,0 +1,1 @@
+-  ED-4732: Fixed preserving marks when pasting text into paragraph
