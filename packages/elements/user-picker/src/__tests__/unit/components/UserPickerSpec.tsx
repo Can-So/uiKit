@@ -530,7 +530,7 @@ describe('UserPicker', () => {
     });
   });
 
-  describe.only('analytics', () => {
+  describe('analytics', () => {
     const onEvent = jest.fn();
     let component;
 
@@ -575,10 +575,9 @@ describe('UserPicker', () => {
       );
     });
 
-    it.only('should trigger pressed event', () => {
+    it('should trigger pressed event', () => {
       const input = component.find('input');
       input.simulate('focus');
-      console.log(component);
       component.setProps({ options });
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 40 });
