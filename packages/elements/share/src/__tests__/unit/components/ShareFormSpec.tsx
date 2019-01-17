@@ -59,6 +59,7 @@ describe('ShareForm', () => {
   });
 
   it('should override submit button label', () => {
+    const mockLink = 'link';
     const loadOptions = jest.fn();
     const component = shallow(
       <ShareForm
