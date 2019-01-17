@@ -3,6 +3,7 @@ import CrossProductSearchClient, {
   SearchSession,
   ScopeResult,
   ABTest,
+  CrossProductExperimentResponse,
 } from '../../api/CrossProductSearchClient';
 import { Scope, ConfluenceItem, PersonItem } from '../../api/types';
 import 'whatwg-fetch';
@@ -29,6 +30,15 @@ function apiWillReturn(state: CrossProductSearchResponse) {
   };
 
   fetchMock.mock('localhost/quicksearch/v1', state, opts);
+}
+
+function experimentApiWillReturn(state: CrossProductExperimentResponse) {
+  const opts = {
+    method: 'post',
+    name: 'xpsearch',
+  };
+
+  fetchMock.mock('localhost/experiment/v1', state, opts);
 }
 
 const abTest: ABTest = {
@@ -342,11 +352,10 @@ describe('CrossProductSearchClient', () => {
         controlId: 'controlId',
       };
 
-      apiWillReturn({
+      experimentApiWillReturn({
         scopes: [
           {
             id: 'confluence.page,blogpost' as Scope,
-            results: [],
             abTest,
           },
         ],
@@ -359,12 +368,12 @@ describe('CrossProductSearchClient', () => {
       expect(result).toEqual(abTest);
     });
 
-    it('should not fail when there is no ab test data', async () => {
-      apiWillReturn({
+    it('should not fail if getting experiments fails', async () => {
+      experimentApiWillReturn({
         scopes: [
           {
             id: 'confluence.page,blogpost' as Scope,
-            results: [],
+            error: 'did not work',
           },
         ],
       });
