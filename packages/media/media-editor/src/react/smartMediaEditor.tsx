@@ -15,7 +15,7 @@ export interface SmartMediaEditorProps {
   context: Context;
   onUploadStart: (identifier: FileIdentifier) => void;
   onFinish: () => void;
-  onError: (error: any) => void;
+  onError?: (error: any) => void;
 }
 
 export interface SmartMediaEditorState {
@@ -51,7 +51,7 @@ export class SmartMediaEditor extends React.Component<
   }
 
   getFile = async (identifier: FileIdentifier) => {
-    const { context, onError } = this.props;
+    const { context } = this.props;
     const { collectionName, occurrenceKey } = identifier;
     const id = await identifier.id;
     const getFileSubscription = context.file
@@ -65,7 +65,7 @@ export class SmartMediaEditor extends React.Component<
             this.setImageUrl(identifier);
             setTimeout(() => getFileSubscription.unsubscribe(), 0);
           } else if (state.status === 'error') {
-            onError(state.message);
+            this.onError(state.message);
             setTimeout(() => getFileSubscription.unsubscribe(), 0);
           } else if (state.preview) {
             const base64ImageUrl = await fileToBase64(state.preview.blob);
@@ -76,7 +76,7 @@ export class SmartMediaEditor extends React.Component<
           }
         },
         error: error => {
-          onError(error);
+          this.onError(error);
         },
       });
     this.getFileSubscription = getFileSubscription;
@@ -96,13 +96,7 @@ export class SmartMediaEditor extends React.Component<
 
   onSave = (imageData: string) => {
     const { fileName } = this;
-    const {
-      context,
-      identifier,
-      onUploadStart,
-      onFinish,
-      onError,
-    } = this.props;
+    const { context, identifier, onUploadStart, onFinish } = this.props;
     const { collectionName, occurrenceKey } = identifier;
     const uploadableFile: UploadableFile = {
       content: imageData,
@@ -139,10 +133,10 @@ export class SmartMediaEditor extends React.Component<
           onFinish();
           setTimeout(() => uploadingFileStateSubscription.unsubscribe(), 0);
         } else if (fileState.status === 'failed-processing') {
-          onError(new Error('Failed to process'));
+          this.onError(new Error('Failed to process'));
           setTimeout(() => uploadingFileStateSubscription.unsubscribe(), 0);
         } else if (fileState.status === 'error') {
-          onError(new Error(fileState.message));
+          this.onError(new Error(fileState.message));
           setTimeout(() => uploadingFileStateSubscription.unsubscribe(), 0);
         }
       },
@@ -162,7 +156,9 @@ export class SmartMediaEditor extends React.Component<
 
   onError = (error: any) => {
     const { onError } = this.props;
-    onError(error);
+    if (onError) {
+      onError(error);
+    }
   };
 
   renderLoading = () => {
