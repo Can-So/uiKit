@@ -4,8 +4,8 @@ import {
   ServiceConfig,
 } from '@atlaskit/util-service-support';
 
-export interface IdentityClient {
-  getInvitationsCapabilities: () => Promise<InvitationsCapabilitiesResponse>;
+export interface InvitationCapabilitiesProvider {
+  getCapabilities: () => Promise<InvitationsCapabilitiesResponse>;
 }
 
 type InvitationsCapabilitiesResponse = {
@@ -27,7 +27,8 @@ type RequestAccessCapabilities = {
 export const DEFAULT_INVITATIONS_CAPABILITIES_PATH = 'invitations/capabilities';
 export const DEFAULT_ID_PUBLIC_FACADE_URL = '/gateway/api';
 
-export class IdentityClientImpl implements IdentityClient {
+export class InvitationsCapabilitiesResource
+  implements InvitationCapabilitiesProvider {
   private cloudId: string;
   private serviceConfig: ServiceConfig;
 
@@ -38,9 +39,7 @@ export class IdentityClientImpl implements IdentityClient {
     };
   }
 
-  public getInvitationsCapabilities(): Promise<
-    InvitationsCapabilitiesResponse
-  > {
+  public getCapabilities(): Promise<InvitationsCapabilitiesResponse> {
     const cloudId = this.cloudId;
     // we might need an ARI resolver in the future
     const ari = `ari:cloud:platform::site/${cloudId}`;
