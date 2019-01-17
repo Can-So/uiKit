@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.15
+- [patch] [a8d8855](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a8d8855):
+
+  - fixed StatusPicker analytics firing when user clicks in two Status instances, one after another
+
 ## 95.0.14
 - [patch] [be6313e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be6313e):
 

@@ -1,1 +1,0 @@
-- fixed StatusPicker analytics firing when user clicks in two Status instances, one after another
