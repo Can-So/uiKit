@@ -415,6 +415,7 @@ export default class FullPageRendererExample extends React.Component<
                             document={this.state.adf}
                             adfStage="stage0"
                             dataProviders={this.dataProviders}
+                            extensionHandlers={extensionHandlers}
                             // @ts-ignore
                             appearance={this.state.appearance}
                           />

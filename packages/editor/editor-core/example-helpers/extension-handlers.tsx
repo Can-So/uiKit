@@ -16,12 +16,12 @@ const FakeExtension = ({ colour, children }) => {
   );
 };
 
-const InlineExtension = () => {
-  return <FakeExtension colour="green">Inline extension demo</FakeExtension>;
+const InlineExtension = ({ node }) => {
+  return <FakeExtension colour="green">{node.content}</FakeExtension>;
 };
 
-const BlockExtension = () => {
-  return <FakeExtension colour="black">Block extension demo</FakeExtension>;
+const BlockExtension = ({ node }) => {
+  return <FakeExtension colour="black">{node.content}</FakeExtension>;
 };
 
 const BodiedExtension = () => {

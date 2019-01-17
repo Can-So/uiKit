@@ -1,0 +1,1 @@
+- ED-6059: Extension and inlineExtension should read their content from attrs not the PMNode.
