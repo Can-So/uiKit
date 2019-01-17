@@ -55,6 +55,17 @@ export const selectByTextAndClick = async ({ page, tagName, text }) => {
   }
 };
 
+export const gotoKitchenSink = async page => {
+  const editor = '.ProseMirror';
+  const url = getExampleUrl(
+    'editor',
+    'editor-core',
+    'kitchen-sink',
+    // @ts-ignore
+    global.__BASEURL__,
+  );
+};
+
 export const initEditor = async (page, appearance: string) => {
   const editor = '.ProseMirror';
   const url = getExampleUrl(
