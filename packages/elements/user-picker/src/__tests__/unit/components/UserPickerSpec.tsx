@@ -475,13 +475,11 @@ describe('UserPicker', () => {
         name: 'The A team',
         type: 'team',
         memberCount: 1,
-        includesYou: false,
       },
       {
         id: 'team-abc',
         name: 'The B team',
         type: 'team',
-        memberCount: 51,
         includesYou: true,
       },
     ];
@@ -532,7 +530,7 @@ describe('UserPicker', () => {
     });
   });
 
-  describe('analytics', () => {
+  describe.only('analytics', () => {
     const onEvent = jest.fn();
     let component;
 
@@ -577,9 +575,10 @@ describe('UserPicker', () => {
       );
     });
 
-    it('should trigger pressed event', () => {
+    it.only('should trigger pressed event', () => {
       const input = component.find('input');
       input.simulate('focus');
+      console.log(component);
       component.setProps({ options });
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 40 });

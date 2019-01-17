@@ -101,8 +101,8 @@ export const TeamType = 'team';
 export interface Team extends OptionData {
   avatarUrl?: string;
   description?: string;
-  memberCount: number;
-  includesYou: boolean;
+  memberCount?: number;
+  includesYou?: boolean;
   highlight?: TeamHighlight;
   type: 'team';
 }

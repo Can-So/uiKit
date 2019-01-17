@@ -18,8 +18,6 @@ describe('Option', () => {
     id: 'team-123',
     name: 'That Awesome team',
     type: 'team',
-    memberCount: 1,
-    includesYou: false,
   };
   const shallowOption = props => shallow(<Option {...props} />);
 
