@@ -59,7 +59,7 @@ describe('Snapshot Test: table insert/delete', () => {
 
         it('control button', async () => {
           const controlSelector = getSelectorForTableControl(type);
-          await page.hover(`${controlSelector}:nth-child(${i})`);
+          await page.hover(`${controlSelector}:nth-child(1)`);
           await page.waitForSelector(
             `.ProseMirror table .${ClassName.HOVERED_CELL}`,
           );
@@ -67,7 +67,7 @@ describe('Snapshot Test: table insert/delete', () => {
           await page.click(`${controlSelector} button`);
           await snapshot(page);
         });
-        it(`add ${type} button at ${i} index`, async () => {
+        it(`add ${type} button at 1 index`, async () => {
           const controlSelector = getSelectorForTableControl(type);
           const insertSelector = getInsertClass(type);
           const buttonSelector = `${controlSelector} .${insertSelector}`;
@@ -78,9 +78,9 @@ describe('Snapshot Test: table insert/delete', () => {
           await page.click(`table td:nth-child(1) p`);
           await snapshot(page);
         });
-        it(`remove ${type} button at ${i} index`, async () => {
+        it(`remove ${type} button at 1 index`, async () => {
           const removeButtonSelector = `.${ClassName.CONTROLS_DELETE_BUTTON}`;
-          const controlSelector = getSelectorForTableControl(type, i);
+          const controlSelector = getSelectorForTableControl(type, 1);
           await page.click(`${controlSelector} button`);
           await page.hover(removeButtonSelector);
           await page.waitForSelector(
