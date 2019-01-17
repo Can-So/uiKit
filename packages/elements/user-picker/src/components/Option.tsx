@@ -10,20 +10,14 @@ export const Option = props => {
     status,
     isSelected,
   } = props;
-  if (isUser(data)) {
-    return (
-      <components.Option {...props}>
-        <UserOption user={data} status={status} isSelected={isSelected} />
-      </components.Option>
-    );
-  }
 
-  if (isTeam(data)) {
-    return (
-      <components.Option {...props}>
-        <TeamOption team={data} isSelected={isSelected} />
-      </components.Option>
-    );
-  }
-  return null;
+  return (
+    <components.Option {...props}>
+      {isUser(data) ? (
+        <UserOption user={data} status={status} isSelected={isSelected} />
+      ) : (
+        isTeam(data) && <TeamOption team={data} isSelected={isSelected} />
+      )}
+    </components.Option>
+  );
 };
