@@ -120,6 +120,10 @@ function mockJiraApi(delayMs: number, canSearchUsers: boolean) {
   );
 }
 
+function mockAnalyticsApi() {
+  fetchMock.mock('https://analytics.atlassian.com/analytics/events', 200);
+}
+
 export function setupMocks(config: MocksConfig = DEFAULT_MOCKS_CONFIG) {
   seedrandom('random seed', { global: true });
   const recentResponse = recentData();
@@ -129,6 +133,7 @@ export function setupMocks(config: MocksConfig = DEFAULT_MOCKS_CONFIG) {
   const queryMockQuickNav = makeQuickNavSearchData();
   const queryPeopleSearch = makePeopleSearchData();
 
+  mockAnalyticsApi();
   mockRecentApi(recentResponse);
   mockCrossProductSearchApi(config.crossProductSearchDelay, queryMockSearch);
   mockPeopleApi(config.peopleSearchDelay, queryPeopleSearch);
