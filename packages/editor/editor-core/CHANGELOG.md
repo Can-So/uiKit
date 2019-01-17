@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.16
+- [patch] [23d298e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23d298e):
+
+  - ED-5950: fix merging rows
+
 ## 95.0.15
 - [patch] [a8d8855](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a8d8855):
 
