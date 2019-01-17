@@ -97,15 +97,17 @@ class MediaNode extends Component<
   componentDidMount() {
     this.hasBeenMounted = true;
     this.handleNewNode(this.props);
-    if (this.props.mediaProvider) {
-      this.updateMediaContext();
-    }
+    this.updateMediaContext();
   }
 
   componentWillUnmount() {
     const { node } = this.props;
     this.pluginState.handleMediaNodeUnmount(node);
     this.hasBeenMounted = false;
+  }
+
+  componentWillReceiveProps(props) {
+    this.updateMediaContext();
   }
 
   componentDidUpdate() {

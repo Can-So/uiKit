@@ -219,7 +219,6 @@ export default class MediaSingleNode extends Component<
         state={this.props.view.state}
         appearance={this.mediaPluginState.options.appearance}
         selected={this.props.selected()}
-        mediaProvider={this.mediaPluginState.mediaProvider}
       >
         {MediaChild}
       </ResizableMediaSingle>
