@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.17
+- [patch] [37b7edf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37b7edf):
+
+  - ED-6062: fix deleting last character inside a node with breakout mark
+
 ## 95.0.16
 - [patch] [23d298e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/23d298e):
 

@@ -1,1 +1,0 @@
-- ED-6062: fix deleting last character inside a node with breakout mark
