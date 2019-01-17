@@ -18,6 +18,7 @@
     "@atlaskit/analytics-next": "^3.1.0",
     "@atlaskit/analytics-next-types": "^3.1.1",
     "@atlaskit/avatar": "^14.1.7",
+    "@atlaskit/icon": "^16.0.1",
     "@atlaskit/lozenge": "^6.2.4",
     "@atlaskit/select": "^6.1.13",
     "@atlaskit/tag": "^6.1.3",

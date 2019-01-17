@@ -2,10 +2,10 @@ import { colors } from '@atlaskit/theme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Team } from '../types';
+import { AvatarItemOption, TextWrapper } from './AvatarItemOption';
 import { HighlightText } from './HighlightText';
 import { messages } from './i18n';
-import { CommonOption } from './CommonOption';
-import { OptionTextWrapper } from './OptionTextWrapper';
+import { SizeableAvatar } from './SizeableAvatar';
 
 export type TeamOptionProps = {
   team: Team;
@@ -19,14 +19,14 @@ export class TeamOption extends React.PureComponent<TeamOptionProps> {
     } = this.props;
 
     return [
-      <OptionTextWrapper
+      <TextWrapper
         key="name"
         color={this.props.isSelected ? colors.N0 : colors.N800}
       >
         <HighlightText highlights={highlight && highlight.name}>
           {name}
         </HighlightText>
-      </OptionTextWrapper>,
+      </TextWrapper>,
     ];
   };
 
@@ -42,26 +42,29 @@ export class TeamOption extends React.PureComponent<TeamOptionProps> {
     }
 
     return (
-      <OptionTextWrapper color={isSelected ? colors.N50 : colors.N200}>
+      <TextWrapper color={isSelected ? colors.N50 : colors.N200}>
         <FormattedMessage
           {...(memberCount > 50
             ? messages.plus50Members
             : messages.memberCount)}
           values={{ count: memberCount, includes: includesYou }}
         />
-      </OptionTextWrapper>
+      </TextWrapper>
     );
   };
 
-  render() {
+  private renderAvatar = () => {
     const {
-      team: { name, avatarUrl },
+      team: { avatarUrl, name },
     } = this.props;
+    return <SizeableAvatar appearance="big" src={avatarUrl} name={name} />;
+  };
+
+  render() {
     return (
-      <CommonOption
-        name={name}
-        avatarUrl={avatarUrl}
-        byline={this.renderByline()}
+      <AvatarItemOption
+        avatar={this.renderAvatar()}
+        secondaryText={this.renderByline()}
         primaryText={this.getPrimaryText()}
       />
     );

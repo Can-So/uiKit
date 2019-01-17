@@ -1,6 +1,6 @@
 import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
-import Select from '@atlaskit/select';
+import Select, { CreatableSelect } from '@atlaskit/select';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -28,6 +28,7 @@ import {
 } from '../types';
 import { batchByKey } from './batch';
 import { getComponents } from './components';
+import { getCreatableProps } from './creatable';
 import { messages } from './i18n';
 import { getStyles } from './styles';
 import {
@@ -355,7 +356,10 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
       menuMinWidth,
       menuPortalTarget,
       addMoreMessage,
+      allowEmail,
     } = this.props;
+
+    const SelectComponent = allowEmail ? CreatableSelect : Select;
     const {
       count,
       hoveringClearIndicator,
@@ -367,7 +371,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
     const width = this.props.width as string | number;
 
     return (
-      <Select
+      <SelectComponent
         value={value}
         autoFocus={menuIsOpen}
         ref={this.handleSelectRef}
@@ -405,6 +409,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
         clearValueLabel={clearValueLabel}
         menuMinWidth={menuMinWidth}
         menuPortalTarget={menuPortalTarget}
+        {...getCreatableProps(allowEmail)}
       />
     );
   }
