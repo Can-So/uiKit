@@ -8,10 +8,15 @@ describe('GlobalNavigationSkeleton with theming', () => {
   it('should render a ThemeProvider with a BaseGlobalNavigationSkeleton', () => {
     const wrapper = mount(<GlobalNavigationSkeleton />);
     const themeProviderWrapper = wrapper.find('ThemeProvider');
-    expect(themeProviderWrapper.props()).toHaveProperty('theme');
     expect(
       themeProviderWrapper.find(BaseGlobalNavigationSkeleton),
     ).toHaveLength(1);
+  });
+
+  it('should pass a theme prop to ThemeProvider', () => {
+    const wrapper = mount(<GlobalNavigationSkeleton />);
+    const themeProviderWrapper = wrapper.find('ThemeProvider');
+    expect(themeProviderWrapper.props()).toHaveProperty('theme');
   });
 
   it('should pass navigation-next theme to BaseGlobalNavigationSkeleton', () => {
