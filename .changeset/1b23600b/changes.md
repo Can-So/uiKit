@@ -1,0 +1,1 @@
+- ED-5950: fix merging rows
