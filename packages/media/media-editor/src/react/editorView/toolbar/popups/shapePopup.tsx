@@ -4,7 +4,7 @@ import InlineDialog from '@atlaskit/inline-dialog';
 import Button from '@atlaskit/button';
 
 import { ShapePopupContentWrapper } from './popupStyles';
-import { Tool } from '../../../../../index';
+import { Tool } from '../../../../common';
 import { toolIcons } from '../buttons/toolButton';
 import { ShapeTitle } from '../buttons/styles';
 
