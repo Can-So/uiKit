@@ -49,7 +49,9 @@ export class CopyLinkButton extends React.Component<Props> {
   };
 
   handleClick = () => {
-    if (this.inputRef.current) this.inputRef.current!.select();
+    if (this.inputRef.current) {
+      this.inputRef.current!.select();
+    }
     document.execCommand('copy');
     this.setState({ shouldShowCopiedMessage: true });
   };
