@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.18
+- [patch] [8158fe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8158fe0):
+
+  - ED-6059: Extension and inlineExtension should read their content from attrs not the PMNode.
+
 ## 95.0.17
 - [patch] [37b7edf](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/37b7edf):
 
