@@ -1,5 +1,16 @@
 # @atlaskit/smart-card
 
+## 9.4.0
+- [minor] [8ff07c1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ff07c1):
+
+  - Analytics, first attempt, validate the idea
+- [minor] [7777442](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7777442):
+
+  - More analytics for smart links
+- [minor] [7302ea6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7302ea6):
+
+  - Analytics for smart cards
+
 ## 9.3.0
 - [minor] [150626e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/150626e):
 

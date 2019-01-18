@@ -1,1 +1,0 @@
-- Analytics, first attempt, validate the idea
