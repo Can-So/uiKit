@@ -1,1 +1,0 @@
-- Fixes GlobalNavigationSkeleton throwing TypeError when rendered in products with no globalNav theme
