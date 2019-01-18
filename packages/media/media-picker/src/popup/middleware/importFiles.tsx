@@ -163,26 +163,6 @@ export async function importFiles(
 
             resolve({ blob });
           });
-        } else if (serviceName === 'dropbox' || serviceName === 'google') {
-          // TODO: get preview for other services
-          // TODO: after the file has been processed we should poll for it and transition into processed when it's done
-          // setTimeout(() => {
-          //   const observable = fileStreamsCache.get(id);
-          //   if (observable) {
-          //     const subscription = observable.subscribe({
-          //       next(currentState) {
-          //         setTimeout(() => subscription.unsubscribe(), 0);
-          //         setTimeout(() => {
-          //           console.log('emit processed', currentState);
-          //           (observable as ReplaySubject<FileState>).next({
-          //             ...currentState,
-          //             status: 'processed'
-          //           })
-          //         }, 0);
-          //       }
-          //     })
-          //   }
-          // }, 5000)
         }
 
         const state: FileState = {
@@ -213,7 +193,6 @@ export async function importFiles(
     if (serviceName === 'upload') {
       const localUpload: LocalUpload = uploads[selectedItemId];
       const { fileId } = touchFileDescriptor;
-
       importFilesFromLocalUpload(
         selectedItemId,
         fileId,

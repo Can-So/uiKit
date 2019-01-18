@@ -39,9 +39,12 @@ export default class Example extends React.Component<{}, State> {
   state: State = { events: [], dataSourceType: 'list' };
 
   componentDidMount() {
-    popup.on('uploads-start', payload => {
+    popup.on('uploads-start', async payload => {
       const { events } = this.state;
-      console.log('uploads-start', payload.files.map(file => file.id));
+      payload.files.forEach(async file => {
+        console.log('PUBLIC: uploads-start', file.id, await file.upfrontId);
+      });
+
       this.setState({
         events: [
           ...events,
@@ -59,8 +62,11 @@ export default class Example extends React.Component<{}, State> {
   private onUploadPreviewUpdate = async (
     event: UploadPreviewUpdateEventPayload,
   ) => {
-    console.log('onUploadPreviewUpdate id', event.file.id);
-    console.log('onUploadPreviewUpdate upfrontId', await event.file.upfrontId);
+    console.log(
+      'PUBLIC: upload-preview-update',
+      event.file.id,
+      await event.file.upfrontId,
+    );
   };
 
   private onCardClick = (occurrenceKey: string = '') => (event: CardEvent) => {

@@ -4,6 +4,8 @@ import {
   MediaStoreCopyFileWithTokenBody,
   MediaStoreCopyFileWithTokenParams,
 } from '@atlaskit/media-store';
+import { fileStreamsCache, FileState } from '@atlaskit/media-core';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Fetcher } from '../tools/fetcher/fetcher';
 import {
   FinalizeUploadAction,
@@ -40,7 +42,6 @@ export function finalizeUpload(
         ...source,
         owner,
       };
-
       const copyFileParams: CopyFileParams = {
         store,
         fetcher,
@@ -117,6 +118,21 @@ async function copyFile({
       return fetcher.pollFile(auth, publicId, collection);
     })
     .then(processedDestinationFile => {
+      const observable = fileStreamsCache.get(processedDestinationFile.id);
+      if (observable) {
+        const subscription = observable.subscribe({
+          next(currentState) {
+            setTimeout(() => subscription.unsubscribe(), 0);
+            setTimeout(() => {
+              // TODO: ensure we can call "next"
+              (observable as ReplaySubject<FileState>).next({
+                ...currentState,
+                status: 'processed',
+              });
+            }, 0);
+          },
+        });
+      }
       return store.dispatch(
         sendUploadEvent({
           event: {
