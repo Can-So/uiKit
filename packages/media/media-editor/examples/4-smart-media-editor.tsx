@@ -28,6 +28,7 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
 
   onFinish = () => {
     console.log('onFinish');
+    this.setState({ showEditor: false });
   };
 
   onUploadStart = (identifier: FileIdentifier) => {
@@ -41,7 +42,7 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
   render() {
     const { showWithError, showEditor, newFileIdentifier } = this.state;
 
-    const editor = (
+    const renderEditor = () => (
       <SmartMediaEditor
         identifier={{
           ...imageFileId,
@@ -63,7 +64,7 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
         {newFileIdentifier ? (
           <Card identifier={newFileIdentifier} context={context} />
         ) : null}
-        {showEditor ? editor : null}
+        {showEditor ? renderEditor() : null}
       </div>
     );
   }

@@ -117,6 +117,7 @@ export class SmartMediaEditor extends React.Component<
       onFinish,
       intl: { formatMessage },
     } = this.props;
+
     const { collectionName, occurrenceKey } = identifier;
     const uploadableFile: UploadableFile = {
       content: imageData,
@@ -189,22 +190,14 @@ export class SmartMediaEditor extends React.Component<
     );
   };
 
-  private renderWithDefaultIntl(content: JSX.Element) {
-    return this.context.intl ? (
-      content
-    ) : (
-      <IntlProvider locale="en">{content}</IntlProvider>
-    );
-  }
-
   renderEditor = (imageUrl: string) => {
-    return this.renderWithDefaultIntl(
+    return (
       <EditorView
         imageUrl={imageUrl}
         onSave={this.onSave}
         onCancel={this.onCancel}
         onError={this.onError}
-      />,
+      />
     );
   };
 
@@ -213,9 +206,7 @@ export class SmartMediaEditor extends React.Component<
     if (error instanceof Error) {
       error = error.message;
     }
-    return this.renderWithDefaultIntl(
-      <ErrorView message={error} onCancel={onFinish} />,
-    );
+    return <ErrorView message={error} onCancel={onFinish} />;
   };
 
   render() {
@@ -235,4 +226,14 @@ export class SmartMediaEditor extends React.Component<
   }
 }
 
-export default injectIntl(SmartMediaEditor);
+export default class extends React.Component<SmartMediaEditorProps> {
+  render() {
+    const Component = injectIntl(SmartMediaEditor);
+    const content = <Component {...this.props} />;
+    return this.context.intl ? (
+      content
+    ) : (
+      <IntlProvider locale="en">{content}</IntlProvider>
+    );
+  }
+}
