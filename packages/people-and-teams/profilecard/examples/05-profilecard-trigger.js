@@ -12,9 +12,9 @@ const mockClientForInactiveAccount = getMockProfileClient(10, 0, {
 });
 const mockClientForClosedAccountAndCustomMessage = getMockProfileClient(10, 0, {
   status: 'closed',
-  customMessageForDisabledAccount:
+  disabledAccountMessage:
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.',
-  hasStatusLozengeForDisabledAccount: false,
+  hasDisabledAccountLozenge: false,
 });
 
 export const MainStage = styled.div`

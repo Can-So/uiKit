@@ -247,38 +247,37 @@ describe('Profilecard', () => {
         expect(card).toMatchSnapshot();
       });
 
-      it('should match snapshot when status=closed and hasStatusLozengeForDisabledAccount=false', () => {
+      it('should match snapshot when status=closed and hasDisabledAccountLozenge=false', () => {
         const card = renderShallow({
           status: 'closed',
-          hasStatusLozengeForDisabledAccount: false,
+          hasDisabledAccountLozenge: false,
         });
 
         expect(card).toMatchSnapshot();
       });
 
-      it('should match snapshot when status=inactive and hasStatusLozengeForDisabledAccount=false', () => {
+      it('should match snapshot when status=inactive and hasDisabledAccountLozenge=false', () => {
         const card = renderShallow({
-          status: 'closed',
-          hasStatusLozengeForDisabledAccount: false,
+          status: 'inactive',
+          hasDisabledAccountLozenge: false,
         });
 
         expect(card).toMatchSnapshot();
       });
 
-      it('should match snapshot when status=closed and customMessageForDisabledAccount is defined', () => {
+      it('should match snapshot when status=closed and disabledAccountMessage is defined', () => {
         const card = renderShallow({
           status: 'closed',
-          customMessageForDisabledAccount:
-            'this is a custom message for closed account',
+          disabledAccountMessage: 'this is a custom message for closed account',
         });
 
         expect(card).toMatchSnapshot();
       });
 
-      it('should match snapshot when status=inactive and customMessageForDisabledAccount is defined', () => {
+      it('should match snapshot when status=inactive and disabledAccountMessage is defined', () => {
         const card = renderShallow({
-          status: 'closed',
-          customMessageForDisabledAccount:
+          status: 'inactive',
+          disabledAccountMessage:
             'this is a custom message for inactive account',
         });
 

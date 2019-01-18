@@ -52,9 +52,9 @@ export type ProfilecardProps = {
   customElevation?: string,
 
   // Allow to pass custom message for disabled account which `status` prop is `inactive` or `closed`
-  customMessageForDisabledAccount?: string,
-  // Allhow to show a status lozenge for disabled account which `status` prop is `inactive` or `closed`
-  hasStatusLozengeForDisabledAccount?: boolean,
+  disabledAccountMessage?: string,
+  // Allow to show a status lozenge for disabled account which `status` prop is `inactive` or `closed`
+  hasDisabledAccountLozenge?: boolean,
 };
 
 export type MessageIntlProviderProps = {

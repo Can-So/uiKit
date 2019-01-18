@@ -72,8 +72,8 @@ type State = {
   hasLoadingState: boolean,
   hasErrorState: boolean,
   hasLongPresenceMessage: string,
-  hasCustomMessageForDisabledAccount: boolean,
-  hasStatusLozengeForDisabledAccount: boolean,
+  hasDisabledAccountMessage: boolean,
+  hasDisabledAccountLozenge: boolean,
 };
 
 export default class ProfilecardInteractive extends Component<Props, State> {
@@ -109,8 +109,8 @@ export default class ProfilecardInteractive extends Component<Props, State> {
     hasLoadingState: false,
     hasErrorState: false,
     hasLongPresenceMessage: '',
-    hasCustomMessageForDisabledAccount: false,
-    hasStatusLozengeForDisabledAccount: false,
+    hasDisabledAccountMessage: false,
+    hasDisabledAccountLozenge: false,
   };
 
   actions = [
@@ -292,14 +292,12 @@ export default class ProfilecardInteractive extends Component<Props, State> {
                   ? 'I honestly have a very long and useless presence message'
                   : ''
               }
-              customMessageForDisabledAccount={
-                this.state.hasCustomMessageForDisabledAccount
+              disabledAccountMessage={
+                this.state.hasDisabledAccountMessage
                   ? 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.'
                   : undefined
               }
-              hasStatusLozengeForDisabledAccount={
-                this.state.hasStatusLozengeForDisabledAccount
-              }
+              hasDisabledAccountLozenge={this.state.hasDisabledAccountLozenge}
             />
           </ProfileCardWrapper>
 
@@ -364,12 +362,12 @@ export default class ProfilecardInteractive extends Component<Props, State> {
               <li>{this.createRadioStatusModifiedDate('moreThanAYear')}</li>
               <li>
                 {this.createCheckboxBooleanAttribute(
-                  'hasCustomMessageForDisabledAccount',
+                  'hasDisabledAccountMessage',
                 )}
               </li>
               <li>
                 {this.createCheckboxBooleanAttribute(
-                  'hasStatusLozengeForDisabledAccount',
+                  'hasDisabledAccountLozenge',
                 )}
               </li>
             </ul>
