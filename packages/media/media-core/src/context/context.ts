@@ -5,7 +5,7 @@ import {
   ImageMetadata,
 } from '@atlaskit/media-store';
 import { CollectionFetcher } from '../collection';
-import { FileFetcher } from '../file';
+import { FileFetcherImpl, FileFetcher } from '../file';
 
 export interface Context {
   getImage(
@@ -43,7 +43,7 @@ class ContextImpl implements Context {
       authProvider: config.authProvider,
     });
     this.collection = new CollectionFetcher(this.mediaStore);
-    this.file = new FileFetcher(this.mediaStore);
+    this.file = new FileFetcherImpl(this.mediaStore);
   }
 
   getImage(

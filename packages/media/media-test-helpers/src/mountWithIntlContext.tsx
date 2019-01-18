@@ -2,11 +2,11 @@ import { IntlProvider, intlShape } from 'react-intl';
 import { mount, ReactWrapper } from 'enzyme';
 import { ReactElement } from 'react';
 
-export const mountWithIntlContext = (
-  component: ReactElement<any>,
+export const mountWithIntlContext = <P, S>(
+  component: ReactElement<P>,
   reactContext?: Object,
   childContextTypes?: Object,
-): ReactWrapper<any, any> => {
+): ReactWrapper<P, S> => {
   const intlProvider = new IntlProvider({
     locale: 'en',
     messages: {},

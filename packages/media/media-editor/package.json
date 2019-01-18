@@ -41,6 +41,7 @@
   "devDependencies": {
     "@atlaskit/build-utils": "^2.1.0",
     "@atlaskit/docs": "^6.0.0",
+    "@atlaskit/media-store": "^9.1.1",
     "@atlaskit/media-core": "^26.0.0",
     "@atlaskit/media-test-helpers": "^18.9.1",
     "react-dom": "^16.4.2",

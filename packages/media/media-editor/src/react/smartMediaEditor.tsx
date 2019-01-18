@@ -1,14 +1,15 @@
 import * as React from 'react';
-import * as uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { Subscription } from 'rxjs/Subscription';
 import { Context, UploadableFile } from '@atlaskit/media-core';
 import { FileIdentifier } from '@atlaskit/media-card';
-import { Shortcut } from '@atlaskit/media-ui';
+import { messages, Shortcut } from '@atlaskit/media-ui';
 import Spinner from '@atlaskit/spinner';
 import { intlShape, IntlProvider } from 'react-intl';
 import EditorView from './editorView/editorView';
 import { Blanket, SpinnerWrapper } from './styled';
 import { fileToBase64 } from '../util';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import ErrorView from './editorView/errorView/errorView';
 
 export interface SmartMediaEditorProps {
@@ -19,16 +20,19 @@ export interface SmartMediaEditorProps {
 }
 
 export interface SmartMediaEditorState {
-  error?: any;
+  hasError: boolean;
+  errorMessage?: any;
   imageUrl?: string;
 }
 
 export class SmartMediaEditor extends React.Component<
-  SmartMediaEditorProps,
+  SmartMediaEditorProps & InjectedIntlProps,
   SmartMediaEditorState
 > {
   fileName?: string;
-  state: SmartMediaEditorState = {};
+  state: SmartMediaEditorState = {
+    hasError: false,
+  };
   getFileSubscription?: Subscription;
   uploadFileSubscription?: Subscription;
 
@@ -72,7 +76,6 @@ export class SmartMediaEditor extends React.Component<
           if (state.status === 'processed') {
             const { name } = state;
             this.fileName = name;
-            // TODO do we need to set new URL second time? (in case first time it was set with preview.blob)
             this.setImageUrl(identifier);
             setTimeout(() => getFileSubscription.unsubscribe(), 0);
           } else if (state.status === 'error') {
@@ -105,9 +108,15 @@ export class SmartMediaEditor extends React.Component<
     });
   };
 
-  onSave = (imageData: string) => {
+  private onSave = (imageData: string) => {
     const { fileName } = this;
-    const { context, identifier, onUploadStart, onFinish } = this.props;
+    const {
+      context,
+      identifier,
+      onUploadStart,
+      onFinish,
+      intl: { formatMessage },
+    } = this.props;
     const { collectionName, occurrenceKey } = identifier;
     const uploadableFile: UploadableFile = {
       content: imageData,
@@ -143,11 +152,11 @@ export class SmartMediaEditor extends React.Component<
         if (fileState.status === 'processing') {
           onFinish();
           setTimeout(() => uploadingFileStateSubscription.unsubscribe(), 0);
-        } else if (fileState.status === 'failed-processing') {
-          this.onError(new Error('Failed to process'));
-          setTimeout(() => uploadingFileStateSubscription.unsubscribe(), 0);
-        } else if (fileState.status === 'error') {
-          this.onError(new Error(fileState.message));
+        } else if (
+          fileState.status === 'failed-processing' ||
+          fileState.status === 'error'
+        ) {
+          this.onError(formatMessage(messages.could_not_save_image));
           setTimeout(() => uploadingFileStateSubscription.unsubscribe(), 0);
         }
       },
@@ -167,7 +176,8 @@ export class SmartMediaEditor extends React.Component<
 
   onError = (error: any) => {
     this.setState({
-      error,
+      hasError: true,
+      errorMessage: error,
     });
   };
 
@@ -179,7 +189,7 @@ export class SmartMediaEditor extends React.Component<
     );
   };
 
-  private renderWithIntl(content: JSX.Element) {
+  private renderWithDefaultIntl(content: JSX.Element) {
     return this.context.intl ? (
       content
     ) : (
@@ -188,7 +198,7 @@ export class SmartMediaEditor extends React.Component<
   }
 
   renderEditor = (imageUrl: string) => {
-    return this.renderWithIntl(
+    return this.renderWithDefaultIntl(
       <EditorView
         imageUrl={imageUrl}
         onSave={this.onSave}
@@ -200,15 +210,18 @@ export class SmartMediaEditor extends React.Component<
 
   renderError = (error: any) => {
     const { onFinish } = this.props;
-    return this.renderWithIntl(
+    if (error instanceof Error) {
+      error = error.message;
+    }
+    return this.renderWithDefaultIntl(
       <ErrorView message={error} onCancel={onFinish} />,
     );
   };
 
   render() {
-    const { imageUrl, error } = this.state;
-    const content = error
-      ? this.renderError(error)
+    const { imageUrl, hasError, errorMessage } = this.state;
+    const content = hasError
+      ? this.renderError(errorMessage)
       : imageUrl
       ? this.renderEditor(imageUrl)
       : this.renderLoading();
@@ -221,3 +234,5 @@ export class SmartMediaEditor extends React.Component<
     );
   }
 }
+
+export default injectIntl(SmartMediaEditor);
