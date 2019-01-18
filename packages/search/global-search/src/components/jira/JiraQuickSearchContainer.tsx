@@ -165,6 +165,14 @@ export class JiraQuickSearchContainer extends React.Component<
   };
 
   getRecentlyInteractedPeople = (): Promise<Result[]> => {
+    return Promise.resolve([]);
+
+    /*
+    the following code is temporarily disabled for performance reasons and will be shortly reinstated.
+    https://product-fabric.atlassian.net/browse/QS-459
+    */
+
+    /*
     const peoplePromise: Promise<
       Result[]
     > = this.props.peopleSearchClient.getRecentPeople();
@@ -175,6 +183,7 @@ export class JiraQuickSearchContainer extends React.Component<
         error,
       ),
     ) as Promise<Result[]>;
+    */
   };
 
   getJiraRecentItems = (sessionId: string): Promise<GenericResultMap> => {
@@ -219,6 +228,14 @@ export class JiraQuickSearchContainer extends React.Component<
   };
 
   canSearchUsers = (): Promise<boolean> => {
+    return Promise.resolve(false);
+
+    /*
+    the following code is temporarily disabled for performance reasons and will be shortly reinstated.
+    https://product-fabric.atlassian.net/browse/QS-459
+    */
+
+    /*
     return handlePromiseError(
       this.props.jiraClient.canSearchUsers(),
       false,
@@ -229,6 +246,7 @@ export class JiraQuickSearchContainer extends React.Component<
           error,
         ),
     );
+    */
   };
 
   getRecentItems = (sessionId: string): Promise<ResultsWithTiming> => {
