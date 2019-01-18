@@ -44,6 +44,7 @@
     "@atlaskit/media-store": "^9.1.1",
     "@atlaskit/media-core": "^26.0.0",
     "@atlaskit/media-test-helpers": "^18.9.1",
+    "enzyme": "^3.7.0",
     "react-dom": "^16.4.2",
     "react-intl": "^2.6.0",
     "rxjs": "^5.5.0"
