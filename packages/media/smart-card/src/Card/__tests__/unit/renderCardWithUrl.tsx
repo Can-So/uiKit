@@ -9,40 +9,40 @@ import {
 } from '@atlaskit/analytics-next-types';
 import { InlineCardUnauthorizedView } from '@atlaskit/media-ui';
 
-namespace Mock {
-  export class FakeClient extends Client {
-    fetchData(): Promise<ResolveResponse> {
-      return Promise.resolve({
-        meta: {
-          visibility: 'restricted' as any,
-          access: 'unauthorized' as any,
-          auth: [
-            {
-              key: 'string',
-              displayName: 'string',
-              url: 'string',
-            },
-          ],
-          definitionId: 'd1',
-        },
-      });
-    }
+class FakeClient extends Client {
+  fetchData(): Promise<ResolveResponse> {
+    return Promise.resolve({
+      meta: {
+        visibility: 'restricted' as any,
+        access: 'unauthorized' as any,
+        auth: [
+          {
+            key: 'string',
+            displayName: 'string',
+            url: 'string',
+          },
+        ],
+        definitionId: 'd1',
+      },
+    });
   }
-  export const positiveAuthFn = () => Promise.resolve();
-  export const negativeAuthFn = () =>
-    Promise.reject(new Error('rejected auth'));
-  export const winClosedAuthFn = () =>
-    Promise.reject(new Error('The auth window was closed'));
-  export const mockedFireFn = jest.fn();
-  export const fakeCreateAnalyticsEvent = jest.fn().mockImplementation(
+}
+
+const Mock = {
+  positiveAuthFn: () => Promise.resolve(),
+  negativeAuthFn: () => Promise.reject(new Error('rejected auth')),
+  winClosedAuthFn: () =>
+    Promise.reject(new Error('The auth window was closed')),
+  mockedFireFn: jest.fn(),
+  fakeCreateAnalyticsEvent: jest.fn().mockImplementation(
     (payload: AnalyticsEventPayload): UIAnalyticsEventInterface => {
       return ({
-        fire: mockedFireFn,
+        fire: Mock.mockedFireFn,
         payload,
       } as any) as UIAnalyticsEventInterface;
     },
-  );
-}
+  ),
+};
 
 const delay = (n: number) => new Promise(res => setTimeout(res, n));
 
@@ -52,7 +52,7 @@ describe('Render Card With URL', () => {
   });
 
   it('should fire connectSucceeded event when auth suceeds', async () => {
-    const fakeClient = new Mock.FakeClient({ loadingStateDelay: 0 });
+    const fakeClient = new FakeClient({ loadingStateDelay: 0 });
     const wrapper = mount(
       <CardWithUrlContent
         url="http://some.url"
@@ -83,7 +83,7 @@ describe('Render Card With URL', () => {
   });
 
   it('should fire connectFailed event when auth fails', async () => {
-    const fakeClient = new Mock.FakeClient({ loadingStateDelay: 0 });
+    const fakeClient = new FakeClient({ loadingStateDelay: 0 });
     const wrapper = mount(
       <CardWithUrlContent
         url="http://some.url"
@@ -114,7 +114,7 @@ describe('Render Card With URL', () => {
   });
 
   it('should track the reason for auth failure', async () => {
-    const fakeClient = new Mock.FakeClient({ loadingStateDelay: 0 });
+    const fakeClient = new FakeClient({ loadingStateDelay: 0 });
     const wrapper = mount(
       <CardWithUrlContent
         url="http://some.url"
@@ -145,7 +145,7 @@ describe('Render Card With URL', () => {
   });
 
   it('should track when auth dialog was closed', async () => {
-    const fakeClient = new Mock.FakeClient({ loadingStateDelay: 0 });
+    const fakeClient = new FakeClient({ loadingStateDelay: 0 });
     const wrapper = mount(
       <CardWithUrlContent
         url="http://some.url"
