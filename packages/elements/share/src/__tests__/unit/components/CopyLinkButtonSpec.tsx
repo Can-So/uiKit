@@ -28,7 +28,9 @@ describe('CopyLinkButton', () => {
   });
 
   it('should render', () => {
-    const wrapper = mount<CopyLinkButton>(<CopyLinkButton link={mockLink} />);
+    const wrapper = mount<CopyLinkButton>(
+      <CopyLinkButton shareLink={mockLink} />,
+    );
 
     const inlineDialog = wrapper.find(InlineDialog);
     expect(inlineDialog).toHaveLength(1);
@@ -53,7 +55,9 @@ describe('CopyLinkButton', () => {
       const eventMap: { click: Function } = { click: () => {} };
       window.addEventListener = jest.fn((event, cb) => (eventMap[event] = cb));
 
-      const wrapper = mount<CopyLinkButton>(<CopyLinkButton link={mockLink} />);
+      const wrapper = mount<CopyLinkButton>(
+        <CopyLinkButton shareLink={mockLink} />,
+      );
       wrapper.setState({
         shouldShowCopiedMessage: true,
       });
@@ -81,8 +85,11 @@ describe('CopyLinkButton', () => {
   });
 
   describe('handleClick', () => {
-    it('should copy the text from the HiddenInput', () => {
-      const wrapper = mount<CopyLinkButton>(<CopyLinkButton link={mockLink} />);
+    it('should copy the text from the HiddenInput and call onLinkCopy prop if given', () => {
+      const spiedOnLinkCopy = jest.fn();
+      const wrapper = mount<CopyLinkButton>(
+        <CopyLinkButton onLinkCopy={spiedOnLinkCopy} shareLink={mockLink} />,
+      );
       const spiedInputSelect = jest.spyOn(
         // @ts-ignore accessing private property just for testing purpose
         wrapper.instance().inputRef.current,
@@ -91,6 +98,8 @@ describe('CopyLinkButton', () => {
       wrapper.instance().handleClick();
       expect(spiedInputSelect).toHaveBeenCalledTimes(1);
       expect(spiedExecCommand).toHaveBeenCalledTimes(1);
+      expect(spiedOnLinkCopy).toHaveBeenCalledTimes(1);
+      expect(spiedOnLinkCopy.mock.calls[0][0]).toEqual(mockLink);
       expect(wrapper.state().shouldShowCopiedMessage).toBeTruthy();
     });
   });

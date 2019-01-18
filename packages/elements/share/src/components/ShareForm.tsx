@@ -15,10 +15,11 @@ const LeftAlignmentContainer = styled.div`
 `;
 
 export type Props = {
-  link: string;
   title?: React.ReactNode;
   loadOptions: LoadOptions;
+  onLinkCopy?: (link: string) => void;
   onShareClick?: Function;
+  shareLink: string;
   submitButtonLabel?: React.ReactNode;
 };
 
@@ -33,7 +34,10 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
         </FormSection>
         <FormFooter>
           <LeftAlignmentContainer>
-            <CopyLinkButton link={props.link} />
+            <CopyLinkButton
+              onLinkCopy={props.onLinkCopy}
+              shareLink={props.shareLink}
+            />
           </LeftAlignmentContainer>
           <Button appearance="primary" type="submit">
             {props.submitButtonLabel || (

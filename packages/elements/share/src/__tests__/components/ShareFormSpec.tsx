@@ -18,7 +18,7 @@ describe('ShareForm', () => {
     const onShareClick = jest.fn();
     const component = shallow(
       <ShareForm
-        link={mockLink}
+        shareLink={mockLink}
         loadOptions={loadOptions}
         onShareClick={onShareClick}
         title="some title"
@@ -63,7 +63,7 @@ describe('ShareForm', () => {
     const loadOptions = jest.fn();
     const component = shallow(
       <ShareForm
-        link={mockLink}
+        shareLink={mockLink}
         loadOptions={loadOptions}
         submitButtonLabel="Invite"
       />,
