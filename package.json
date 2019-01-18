@@ -26,7 +26,7 @@
     "delete:build": "                        bolt ws exec --parallel -- rm -rf dist",
     "precommit": "                           lint-staged",
     "prepush": "                             ./prepush $HUSKY_GIT_PARAMS <<< $HUSKY_GIT_STDIN",
-    "enable:lfs": "                          ./enable-lfs-hooks",
+    "enable:lfs": "                          node enable-lfs-hooks.js",
     "test": "                                 yarn jest",
     "test:changed": "                        CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js) COVERAGE_PACKAGES=$(node build/ci-scripts/get.code.threshold.for.changed.packages.since.master.js) yarn jest",
     "test:browser": "                        projector ./projector testBrowser",
