@@ -1,11 +1,6 @@
-import {
-  initEditor,
-  clearEditor,
-  snapshot,
-  changeSelectedNodeLayout,
-} from './_utils';
-import { setTableLayout } from './table/_table-utils';
-import commonMessages from '../../messages';
+import { initEditor, clearEditor, snapshot } from './_utils';
+// import { setTableLayout } from './table/_table-utils';
+// import commonMessages from '../../messages';
 
 const nodeLabel = node => {
   switch (node) {
