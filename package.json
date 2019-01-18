@@ -82,8 +82,7 @@
     "build:bundle-analysis": "               node ./build/ci-scripts/run.bundle.analysis",
     "build:css-reset": "                     BABEL_ENV=production:cjs bolt w @atlaskit/css-reset run build",
     "build:reduced-ui-pack": "               BABEL_ENV=production:cjs bolt w @atlaskit/reduced-ui-pack run build",
-    "build:adf-schema:checkuptodate": "      cd packages/editor/adf-schema && yarn run generate:json-schema && git diff --exit-code",
-    "build:run-if-changed": "                node build/ci-scripts/run.if.package.changed.js @atlaskit/adf-schema -- yarn build:adf-schema:checkuptodate"
+    "build:adf-schema:checkuptodate": "      cd packages/editor/adf-schema && yarn run generate:json-schema && git diff --exit-code"
   },
   "bolt": {
     "version": "^0.20.6 || ^0.21.1 || ^0.22.1",
