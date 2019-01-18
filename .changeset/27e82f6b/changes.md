@@ -1,1 +1,0 @@
-- ED-6041: fix converting encoded URLs (e.g. URLs with spaces as %20) to smart cards

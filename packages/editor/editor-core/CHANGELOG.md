@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.21
+- [patch] [6c81bca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c81bca):
+
+  - ED-6041: fix converting encoded URLs (e.g. URLs with spaces as %20) to smart cards
+
 ## 95.0.20
 - [patch] [9d3f48c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d3f48c):
 
