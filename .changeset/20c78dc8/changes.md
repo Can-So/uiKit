@@ -1,0 +1,1 @@
+- Disable people search on the pre-query screen temporarily for performance reasons.
