@@ -2,8 +2,7 @@ import { AvatarItem } from '@atlaskit/avatar';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { SizeableAvatar } from '../../../components/SizeableAvatar';
-
-import { OptionTextWrapper } from '../../../components/styles';
+import { OptionTextWrapper } from '../../../components/OptionTextWrapper';
 
 import {
   CommonOption,
