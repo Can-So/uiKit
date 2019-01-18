@@ -51,7 +51,7 @@ describe('ShareForm', () => {
     });
     const copyLinkButton = footer.find(CopyLinkButton);
     expect(copyLinkButton.length).toBe(1);
-    expect(copyLinkButton.prop('link')).toEqual(mockLink);
+    expect(copyLinkButton.prop('shareLink')).toEqual(mockLink);
 
     const buttonLabel = button.find(FormattedMessage);
     expect(buttonLabel).toHaveLength(1);
