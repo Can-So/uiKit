@@ -1,8 +1,8 @@
 import * as uuid from 'uuid/v4';
 import { Store, Dispatch, Middleware } from 'redux';
-
+import { TouchFileDescriptor } from '@atlaskit/media-store';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { State, SelectedItem, LocalUpload, ServiceName } from '../domain';
-
 import { isStartImportAction } from '../actions/startImport';
 import { finalizeUpload } from '../actions/finalizeUpload';
 import { remoteUploadStart } from '../actions/remoteUploadStart';
@@ -10,9 +10,7 @@ import { getPreview } from '../actions/getPreview';
 import { handleCloudFetchingEvent } from '../actions/handleCloudFetchingEvent';
 import { setEventProxy } from '../actions/setEventProxy';
 import { hidePopup } from '../actions/hidePopup';
-
 import { RECENTS_COLLECTION } from '../config';
-
 import { WsProvider } from '../tools/websocket/wsProvider';
 import { WsConnectionHolder } from '../tools/websocket/wsConnectionHolder';
 import { RemoteUploadActivity } from '../tools/websocket/upload/remoteUploadActivity';
@@ -21,10 +19,8 @@ import { PopupUploadEventEmitter } from '../../components/popup';
 import { sendUploadEvent } from '../actions/sendUploadEvent';
 import { setUpfrontIdDeferred } from '../actions/setUpfrontIdDeferred';
 import { WsNotifyMetadata } from '../tools/websocket/wsMessageData';
-
 import { getPreviewFromMetadata } from '../../domain/preview';
-import { TouchFileDescriptor } from '@atlaskit/media-store';
-import { ReplaySubject } from 'rxjs';
+
 import {
   FileState,
   fileStreamsCache,

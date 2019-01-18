@@ -4,7 +4,11 @@ import {
   MediaStoreCopyFileWithTokenBody,
   MediaStoreCopyFileWithTokenParams,
 } from '@atlaskit/media-store';
-import { fileStreamsCache, FileState } from '@atlaskit/media-core';
+import {
+  fileStreamsCache,
+  FileState,
+  ProcessedFileState,
+} from '@atlaskit/media-core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Fetcher } from '../tools/fetcher/fetcher';
 import {
@@ -118,15 +122,17 @@ async function copyFile({
       return fetcher.pollFile(auth, publicId, collection);
     })
     .then(processedDestinationFile => {
-      const observable = fileStreamsCache.get(processedDestinationFile.id);
-      if (observable) {
-        const subscription = observable.subscribe({
+      const subject = fileStreamsCache.get(
+        processedDestinationFile.id,
+      ) as ReplaySubject<FileState>;
+      // We need to cast to ReplaySubject and check for "next" method since the current
+      if (subject && subject.next) {
+        const subscription = subject.subscribe({
           next(currentState) {
             setTimeout(() => subscription.unsubscribe(), 0);
             setTimeout(() => {
-              // TODO: ensure we can call "next"
-              (observable as ReplaySubject<FileState>).next({
-                ...currentState,
+              subject.next({
+                ...(currentState as ProcessedFileState),
                 status: 'processed',
               });
             }, 0);
