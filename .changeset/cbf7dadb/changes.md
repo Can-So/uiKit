@@ -1,1 +1,0 @@
-- ED-4501 Wrap placeholder text onto new line

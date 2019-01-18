@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.0.20
+- [patch] [9d3f48c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d3f48c):
+
+  - ED-4501 Wrap placeholder text onto new line
+
 ## 95.0.19
 - [patch] [967f631](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/967f631):
 
