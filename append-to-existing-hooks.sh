@@ -16,13 +16,3 @@ echo "command -v git-lfs >/dev/null 2>&1 || { echo >&2 "\nThis repository is con
 
 echo "command -v git-lfs >/dev/null 2>&1 || { echo >&2 "\nThis repository is configured for Git LFS but 'git-lfs' was not found on your path. If you no longer wish to use Git LFS, remove this hook by deleting .git/hooks/post-merge.\n"; exit 2; }
 	git lfs post-merge "$@"" >> .git/hooks/post-merge
-
-## remove the backup files after push
-rm .git/hooks/pre-push.bk 
-rm .git/hooks/post-checkout.bk
-rm .git/hooks/post-commit.bk
-rm .git/hooks/post-merge.bk
-
-
-
-
