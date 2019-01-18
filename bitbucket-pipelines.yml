@@ -81,6 +81,7 @@ pipelines:
               - TEST_ONLY_PATTERN='!packages/editor' yarn run test:changed --passWithNoTests
               # Run the editor tests (runInBand is required or it fails in CI)
               - TEST_ONLY_PATTERN='packages/editor' yarn run test:changed --runInBand --passWithNoTests
+              - node build/ci-scripts/run.if.package.changed.js @atlaskit/adf-schema -- yarn build:adf-schema:checkuptodate
             caches:
               - node
         - step:
