@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Component, SyntheticEvent } from 'react';
+import { first } from 'rxjs/operators/first';
 import {
   createUploadContext,
   genericFileId,
@@ -164,7 +165,7 @@ class Example extends Component<{}, ExampleState> {
 
     context.file
       .upload(uplodableFile)
-      .first()
+      .pipe(first())
       .subscribe({
         next: state => {
           if (state.status === 'uploading') {

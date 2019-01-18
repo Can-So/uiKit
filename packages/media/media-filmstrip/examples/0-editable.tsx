@@ -83,11 +83,22 @@ export class ViewStory extends React.Component<ViewStoryProps, ViewStoryState> {
     ),
   };
 
-  handleSizeChange = ({ offset, offsets, minOffset, maxOffset }) => {
+  handleSizeChange = ({
+    offset,
+    offsets,
+    minOffset,
+    maxOffset,
+  }: Pick<
+    ViewStoryState,
+    'offset' | 'offsets' | 'minOffset' | 'maxOffset'
+  >) => {
     this.setState({ offset, offsets, minOffset, maxOffset });
   };
 
-  handleScrollChange = ({ offset, animate }) => {
+  handleScrollChange = ({
+    offset,
+    animate,
+  }: Pick<ViewStoryState, 'offset' | 'animate'>) => {
     this.setState({ offset, animate });
   };
 
@@ -99,11 +110,11 @@ export class ViewStory extends React.Component<ViewStoryProps, ViewStoryState> {
     this.setState(({ maxOffset }) => ({ offset: maxOffset, animate: true }));
   };
 
-  handleGoTo = offset => {
+  handleGoTo = (offset: number) => {
     this.setState({ offset, animate: false });
   };
 
-  handleChangeWidthType = event => {
+  handleChangeWidthType = (event: any) => {
     const type = event.target.value;
     if (type === 'auto') {
       this.setState({ containerWidth: 'auto' });
@@ -112,11 +123,11 @@ export class ViewStory extends React.Component<ViewStoryProps, ViewStoryState> {
     }
   };
 
-  handleChangeContainerWidth = containerWidth => {
+  handleChangeContainerWidth = (containerWidth: number) => {
     this.setState({ containerWidth });
   };
 
-  handleChangeCardCount = cardCount => {
+  handleChangeCardCount = (cardCount: number) => {
     const children: JSX.Element[] = [];
     for (let i = 0; i < cardCount; ++i) {
       children.push(

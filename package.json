@@ -101,6 +101,7 @@
     "@babel/preset-typescript": "^7.1.0",
     "@types/chai": "^4.0.4",
     "@types/classnames": "^2.2.6",
+    "@types/debounce": "^1.2.0",
     "@types/enzyme": "^3.1.15",
     "@types/fetch-mock": "^6.0.3",
     "@types/jest": "^23.3.7",
