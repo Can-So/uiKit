@@ -510,11 +510,6 @@
       "git add"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "pre-push-lfs.sh $HUSKY_GIT_PARAMS <<< $HUSKY_GIT_STDIN"
-    }
-  },
   "jest-junit": {
     "output": "test-reports/junit.xml"
   },
