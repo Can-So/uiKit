@@ -8,6 +8,6 @@ const Container = styled.div`
 
 export default () => (
   <Container>
-    <CopyLinkButton link={'Testing Copy Link'} />
+    <CopyLinkButton onLinkCopy={console.log} shareLink={'Testing Copy Link'} />
   </Container>
 );

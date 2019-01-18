@@ -34,7 +34,8 @@ export const HiddenInput: React.ComponentType<InputProps> = React.forwardRef(
 );
 
 type Props = {
-  link: string;
+  onLinkCopy?: (link: string) => void;
+  shareLink: string;
 };
 
 const NoPaddingButton = styled(Button)`
@@ -53,6 +54,10 @@ export class CopyLinkButton extends React.Component<Props> {
       this.inputRef.current!.select();
     }
     document.execCommand('copy');
+
+    if (this.props.onLinkCopy) {
+      this.props.onLinkCopy!(this.props.shareLink);
+    }
     this.setState({ shouldShowCopiedMessage: true });
   };
 
@@ -65,7 +70,7 @@ export class CopyLinkButton extends React.Component<Props> {
 
     return (
       <>
-        <HiddenInput ref={this.inputRef} text={this.props.link} />
+        <HiddenInput ref={this.inputRef} text={this.props.shareLink} />
         <InlineDialog
           content={
             <MessageContainer>
