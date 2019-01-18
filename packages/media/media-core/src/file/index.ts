@@ -82,7 +82,7 @@ export interface FileFetcher {
   ): Observable<FileState>;
   downloadBinary(
     id: string,
-    name: string,
+    name?: string,
     collectionName?: string,
   ): Promise<void>;
 }

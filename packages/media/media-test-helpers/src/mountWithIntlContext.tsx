@@ -3,7 +3,7 @@ import { mount, ReactWrapper } from 'enzyme';
 import { ReactElement } from 'react';
 
 export const mountWithIntlContext = <P, S>(
-  component: ReactElement<P>,
+  node: ReactElement<P>,
   reactContext?: Object,
   childContextTypes?: Object,
 ): ReactWrapper<P, S> => {
@@ -13,7 +13,7 @@ export const mountWithIntlContext = <P, S>(
   });
   const intl = intlProvider.getChildContext().intl;
 
-  return mount(component, {
+  return mount<P, S>(node, {
     context: { intl, ...reactContext },
     childContextTypes: { intl: intlShape, ...childContextTypes },
   });
