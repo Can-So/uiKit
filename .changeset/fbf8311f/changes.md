@@ -1,0 +1,1 @@
+- ED-5379: rework selecting media under the hood; maintain size and layout when copy-pasting

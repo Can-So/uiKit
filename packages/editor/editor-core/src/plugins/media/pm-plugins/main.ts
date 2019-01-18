@@ -35,7 +35,7 @@ import {
 import DefaultMediaStateManager from '../default-state-manager';
 import { insertMediaSingleNode } from '../utils/media-single';
 
-import { hasParentNodeOfType } from 'prosemirror-utils';
+import { hasParentNodeOfType, findDomRefAtPos } from 'prosemirror-utils';
 export { DefaultMediaStateManager };
 export { MediaState, MediaProvider, MediaStateStatus, MediaStateManager };
 
@@ -211,7 +211,10 @@ export class MediaPluginState {
 
   updateElement(): void {
     let newElement;
-    if (this.selectedMediaNode() && this.isMediaSingle()) {
+    const selectedContainer = this.selectedMediaContainerNode();
+    const { mediaSingle } = this.view.state.schema.nodes;
+
+    if (selectedContainer && selectedContainer.type === mediaSingle) {
       newElement = this.getDomElement(this.view.domAtPos.bind(this.view));
     }
     if (this.element !== newElement) {
@@ -246,19 +249,24 @@ export class MediaPluginState {
     this.notifyPluginStateSubscribers();
   }
 
-  private isMediaSingle(): boolean {
-    const { selection, schema } = this.view.state;
-    return selection.$from.parent.type === schema.nodes.mediaSingle;
-  }
-
   private getDomElement(domAtPos: EditorView['domAtPos']) {
-    const { from } = this.view.state.selection;
-    if (this.selectedMediaNode()) {
-      const { node } = domAtPos(from);
+    const { selection, schema } = this.view.state;
+    if (!(selection instanceof NodeSelection)) {
+      return;
+    }
+
+    if (selection.node.type !== schema.nodes.mediaSingle) {
+      return;
+    }
+
+    const node = findDomRefAtPos(selection.from, domAtPos);
+    if (node) {
       if (!node.childNodes.length) {
         return node.parentNode as HTMLElement | undefined;
       }
-      return (node as HTMLElement).querySelector('.wrapper') || node;
+
+      const target = (node as HTMLElement).querySelector('.wrapper') || node;
+      return target;
     }
   }
 
@@ -430,7 +438,10 @@ export class MediaPluginState {
   };
 
   align = (layout: MediaSingleLayout, gridSize: number = 12): boolean => {
-    if (!this.selectedMediaNode()) {
+    const { mediaSingle } = this.view.state.schema.nodes;
+
+    const mediaSingleNode = this.selectedMediaContainerNode();
+    if (!mediaSingleNode || mediaSingleNode.type !== mediaSingle) {
       return false;
     }
 
@@ -439,11 +450,6 @@ export class MediaPluginState {
       tr,
       schema,
     } = this.view.state;
-
-    const mediaSingleNode = this.view.state.doc.nodeAt(from - 1)!;
-    if (!mediaSingleNode) {
-      return false;
-    }
 
     let width = mediaSingleNode.attrs.width;
     const oldLayout: MediaSingleLayout = mediaSingleNode.attrs.layout;
@@ -484,7 +490,7 @@ export class MediaPluginState {
     }
 
     this.view.dispatch(
-      tr.setNodeMarkup(from - 1, schema.nodes.mediaSingle, {
+      tr.setNodeMarkup(from, schema.nodes.mediaSingle, {
         ...mediaSingleNode.attrs,
         layout,
         width,
@@ -721,24 +727,27 @@ export class MediaPluginState {
     }
   };
 
-  removeSelectedMediaNode = (): boolean => {
+  removeSelectedMediaContainer = (): boolean => {
     const { view } = this;
-    if (this.selectedMediaNode()) {
-      const { from, node } = view.state.selection as NodeSelection;
-      removeMediaNode(view, node, () => from);
-      return true;
+
+    const selectedNode = this.selectedMediaContainerNode();
+    if (!selectedNode) {
+      return false;
     }
-    return false;
+
+    let { from } = view.state.selection;
+    removeMediaNode(view, selectedNode.firstChild!, () => from + 1);
+    return true;
   };
 
-  selectedMediaNode(): Node | undefined {
+  selectedMediaContainerNode(): Node | undefined {
     const { selection, schema } = this.view.state;
     if (
       selection instanceof NodeSelection &&
-      selection.node.type === schema.nodes.media
+      (selection.node.type === schema.nodes.mediaSingle ||
+        selection.node.type === schema.nodes.mediaGroup)
     ) {
-      const node = selection.node;
-      return node;
+      return selection.node;
     }
   }
 
@@ -746,7 +755,7 @@ export class MediaPluginState {
     const { selection, schema } = this.view.state;
     if (
       selection instanceof NodeSelection &&
-      selection.node.type === schema.nodes.media
+      selection.node.type === schema.nodes.mediaSingle
     ) {
       return (
         !hasParentNodeOfType(schema.nodes.bodiedExtension)(selection) &&
