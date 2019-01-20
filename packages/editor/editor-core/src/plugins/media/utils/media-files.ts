@@ -28,6 +28,70 @@ export interface Range {
   end: number;
 }
 
+/**
+ * Check if current editor selections is a media group or not.
+ * @param state Editor state
+ */
+function isSelectionMediaGroup(state: EditorState) {
+  const { schema } = state;
+  const selectionParent = state.selection.$anchor.node();
+
+  return selectionParent && selectionParent.type === schema.nodes.mediaGroup;
+}
+
+/**
+ * Check if grand parent accepts media group
+ * @param state Editor state
+ * @param mediaNodes Media nodes to be inserted
+ */
+function grandParentAcceptMediaGroup(state: EditorState, mediaNodes: PMNode[]) {
+  const grandParent = state.selection.$from.node(-1);
+
+  return (
+    grandParent &&
+    grandParent.type.validContent(
+      Fragment.from(
+        state.schema.nodes.mediaGroup.createChecked({}, mediaNodes),
+      ),
+    )
+  );
+}
+
+/**
+ * Insert a paragraph after if reach the end of doc
+ * and there is no media group in the front or selection is a non media block node
+ * @param node Node at insertion point
+ * @param state Editor state
+ */
+function shouldAppendParagraph(
+  node: PMNode | null | undefined,
+  state: EditorState,
+) {
+  const {
+    schema: {
+      nodes: { media },
+    },
+  } = state;
+
+  const wasMediaNode = node && node.type === media;
+
+  return (
+    (insideTableCell(state) ||
+      isInListItem(state) ||
+      (atTheEndOfDoc(state) &&
+        (!posOfPrecedingMediaGroup(state) ||
+          isSelectionNonMediaBlockNode(state)))) &&
+    !wasMediaNode
+  );
+}
+
+/**
+ * Insert a media into an existing media group
+ * or create a new media group to insert the new media.
+ * @param view Editor view
+ * @param mediaStates Media files to be added to the editor
+ * @param collection Collection for the media to be added
+ */
 export const insertMediaGroupNode = (
   view: EditorView,
   mediaStates: MediaState[],
@@ -37,6 +101,7 @@ export const insertMediaGroupNode = (
   const { tr, schema } = state;
   const { media, paragraph } = schema.nodes;
 
+  // Do nothing if no media found
   if (!collection || !media || !mediaStates.length) {
     return;
   }
@@ -46,34 +111,14 @@ export const insertMediaGroupNode = (
   const resolvedInsertPos = tr.doc.resolve(mediaInsertPos);
   const parent = resolvedInsertPos.parent;
   const nodeAtInsertionPoint = tr.doc.nodeAt(mediaInsertPos);
-  const grandParent = state.selection.$from.node(-1);
-  const selectionParent = state.selection.$anchor.node();
 
   const shouldSplit =
-    selectionParent &&
-    selectionParent.type !== schema.nodes.mediaGroup &&
-    grandParent &&
-    grandParent.type.validContent(
-      Fragment.from(
-        state.schema.nodes.mediaGroup.createChecked({}, mediaNodes),
-      ),
-    );
-
-  const wasMediaNode =
-    nodeAtInsertionPoint && nodeAtInsertionPoint.type === media;
-
-  // insert a paragraph after if reach the end of doc
-  // and there is no media group in the front or selection is a non media block node
-  const shouldAppendParagraph =
-    (insideTableCell(state) ||
-      isInListItem(state) ||
-      (atTheEndOfDoc(state) &&
-        (!posOfPrecedingMediaGroup(state) ||
-          isSelectionNonMediaBlockNode(state)))) &&
-    !wasMediaNode;
+    !isSelectionMediaGroup(state) &&
+    grandParentAcceptMediaGroup(state, mediaNodes);
+  const appendParagraph = shouldAppendParagraph(nodeAtInsertionPoint, state);
 
   if (shouldSplit) {
-    const content: PMNode[] = shouldAppendParagraph
+    const content: PMNode[] = appendParagraph
       ? mediaNodes.concat(paragraph.create())
       : mediaNodes;
 
@@ -103,7 +148,7 @@ export const insertMediaGroupNode = (
       : [schema.nodes.mediaGroup.createChecked({}, mediaNodes)];
 
   // Don't append new paragraph when adding media to a existing mediaGroup
-  if (shouldAppendParagraph && parent.type !== schema.nodes.mediaGroup) {
+  if (appendParagraph && parent.type !== schema.nodes.mediaGroup) {
     content.push(paragraph.create());
   }
 
