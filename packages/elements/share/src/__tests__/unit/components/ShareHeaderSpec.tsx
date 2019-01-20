@@ -2,8 +2,8 @@ import { FormHeader } from '@atlaskit/form';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ShareHeader } from '../../components/ShareHeader';
-import { messages } from '../../i18n';
+import { ShareHeader } from '../../../components/ShareHeader';
+import { messages } from '../../../i18n';
 
 describe('ShareHeader', () => {
   it('should render FormHeader with default title', () => {
