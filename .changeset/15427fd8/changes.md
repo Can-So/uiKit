@@ -1,0 +1,1 @@
+- ED-5810 Fix issue where numbered table rows flickered when hovering on the edge of row controls
