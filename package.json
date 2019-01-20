@@ -189,7 +189,7 @@
     "mkdirp": "^0.5.1",
     "mocha": "^3.5.0",
     "moment": "^2.22.2",
-    "netlify-cli": "^2.1.1",
+    "netlify-cli": "^2.6.3",
     "ngrok": "^2.2.24",
     "node-fetch": "^2.2.0",
     "npm-run-all": "^4.1.1",
