@@ -1,0 +1,1 @@
+- More jest utilities has been added: expectToEqual, expectConstructorToHaveBeenCalledWith and expectFunctionToHaveBeenCalledWith to allow for typed jest assertions. mountWithIntlContext got generics types.
