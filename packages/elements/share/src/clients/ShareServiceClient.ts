@@ -9,7 +9,7 @@ export interface ShareServiceClient {
     content: Content,
     recipients: Recipient[],
     metadata: MetaData,
-    comment?: string,
+    comment?: Comment,
   ) => Promise<ShareResponse>;
 }
 
@@ -48,6 +48,11 @@ type Content = {
   ari: string;
   link: string;
   title: string;
+};
+
+type Comment = {
+  format: string;
+  value: string;
 };
 
 // In Draft and TBC
@@ -99,7 +104,7 @@ export class ShareServiceClientImpl implements ShareServiceClient {
     content: Content,
     recipients: Recipient[],
     metadata: MetaData,
-    comment?: string,
+    comment?: Comment,
   ): Promise<ShareResponse> {
     const options: RequestServiceOptions = {
       path: DEFAULT_SHARE_PATH,
