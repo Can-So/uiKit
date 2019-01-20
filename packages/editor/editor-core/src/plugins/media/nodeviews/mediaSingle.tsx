@@ -16,7 +16,7 @@ import { setNodeSelection } from '../../../utils';
 import ResizableMediaSingle from '../ui/ResizableMediaSingle';
 import { createDisplayGrid } from '../../../plugins/grid';
 import { EventDispatcher } from '../../../event-dispatcher';
-import { MediaStateStatus } from '../types';
+import { MediaStateStatus, MediaProvider } from '../types';
 import { EditorAppearance } from '../../../types';
 
 const DEFAULT_WIDTH = 250;
@@ -31,6 +31,7 @@ export interface MediaSingleNodeProps {
   getPos: () => number;
   lineLength: number;
   editorAppearance: EditorAppearance;
+  mediaProvider: Promise<MediaProvider>;
 }
 
 export interface MediaSingleNodeState {
@@ -188,24 +189,16 @@ export default class MediaSingleNode extends Component<
     };
 
     const MediaChild = (
-      <WithProviders
-        providers={['mediaProvider']}
-        providerFactory={this.mediaPluginState.options.providerFactory}
-        renderNode={({ mediaProvider }) => {
-          return (
-            <MediaItem
-              node={childNode}
-              view={this.props.view}
-              getPos={this.props.getPos}
-              cardDimensions={cardDimensions}
-              mediaProvider={mediaProvider}
-              selected={selected()}
-              onClick={this.selectMediaSingle}
-              onExternalImageLoaded={this.onExternalImageLoaded}
-              editorAppearance={editorAppearance}
-            />
-          );
-        }}
+      <MediaItem
+        node={childNode}
+        view={this.props.view}
+        getPos={this.props.getPos}
+        cardDimensions={cardDimensions}
+        mediaProvider={this.props.mediaProvider}
+        selected={selected()}
+        onClick={this.selectMediaSingle}
+        onExternalImageLoaded={this.onExternalImageLoaded}
+        editorAppearance={editorAppearance}
       />
     );
 
@@ -216,6 +209,7 @@ export default class MediaSingleNode extends Component<
         updateSize={this.updateSize}
         displayGrid={createDisplayGrid(this.props.eventDispatcher)}
         gridSize={12}
+        mediaProvider={this.props.mediaProvider}
         state={this.props.view.state}
         appearance={this.mediaPluginState.options.appearance}
         selected={this.props.selected()}
@@ -231,24 +225,37 @@ export default class MediaSingleNode extends Component<
 class MediaSingleNodeView extends ReactNodeView {
   render(props, forwardRef) {
     const { eventDispatcher, editorAppearance } = this.reactComponentProps;
+    const mediaPluginState = stateKey.getState(
+      this.view.state,
+    ) as MediaPluginState;
+
     return (
-      <WithPluginState
-        editorView={this.view}
-        plugins={{
-          width: widthPluginKey,
-          reactNodeViewState: reactNodeViewStateKey,
-        }}
-        render={({ width, reactNodeViewState }) => {
+      <WithProviders
+        providers={['mediaProvider']}
+        providerFactory={mediaPluginState.options.providerFactory}
+        renderNode={({ mediaProvider }) => {
           return (
-            <MediaSingleNode
-              width={width.width}
-              lineLength={width.lineLength}
-              node={this.node}
-              getPos={this.getPos}
-              view={this.view}
-              selected={() => this.getPos() + 1 === reactNodeViewState}
-              eventDispatcher={eventDispatcher}
-              editorAppearance={editorAppearance}
+            <WithPluginState
+              editorView={this.view}
+              plugins={{
+                width: widthPluginKey,
+                reactNodeViewState: reactNodeViewStateKey,
+              }}
+              render={({ width, reactNodeViewState }) => {
+                return (
+                  <MediaSingleNode
+                    width={width.width}
+                    lineLength={width.lineLength}
+                    node={this.node}
+                    getPos={this.getPos}
+                    mediaProvider={mediaProvider}
+                    view={this.view}
+                    selected={() => this.getPos() + 1 === reactNodeViewState}
+                    eventDispatcher={eventDispatcher}
+                    editorAppearance={editorAppearance}
+                  />
+                );
+              }}
             />
           );
         }}

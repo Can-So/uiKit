@@ -38,32 +38,19 @@ export default class ResizableMediaSingle extends React.Component<Props> {
 
   async componentDidMount() {
     const $pos = this.$pos;
-    if (!$pos) {
+    if (!$pos || !this.props.mediaProvider) {
       return;
     }
-    try {
-      /**
-       * Grab the provider from the child
-       * Faster than having to wrap the resizeable node with a WithProvider
-       */
-      const mediaProvider = await (this.props.children as React.ReactElement<
-        any
-      >).props.providerFactory.providers.get('mediaProvider');
-      if (!mediaProvider) {
-        return;
-      }
-      const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
-      const viewContext = await mediaProvider.viewContext;
-      const state = await viewContext.file.getCurrentState(
-        getMediaNode!.attrs.id,
-      );
-      if (state.status !== 'error' && state.mediaType === 'image') {
-        this.setState({
-          isVideoFile: false,
-        });
-      }
-    } catch (e) {
-      return;
+    const mediaProvider = await this.props.mediaProvider;
+    const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
+    const viewContext = await mediaProvider.viewContext;
+    const state = await viewContext.file.getCurrentState(
+      getMediaNode!.attrs.id,
+    );
+    if (state.status !== 'error' && state.mediaType === 'image') {
+      this.setState({
+        isVideoFile: false,
+      });
     }
   }
 
