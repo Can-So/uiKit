@@ -31,6 +31,8 @@ describe('Renderer - React/Nodes/Mention', () => {
     const eventHandlers = {
       mention: {
         onClick,
+        onMouseEnter: () => {},
+        onMouseLeave: () => {},
       },
     };
 
