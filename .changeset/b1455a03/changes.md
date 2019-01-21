@@ -1,0 +1,1 @@
+- ED-6070: Don't render proper mediaCard on mobile until we have a valid collection
