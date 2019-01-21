@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from '@atlaskit/button';
+import Button, { ButtonGroup } from '@atlaskit/button';
 import { Card, FileIdentifier } from '@atlaskit/media-card';
 import { imageFileId, createUploadContext } from '@atlaskit/media-test-helpers';
 import { SmartMediaEditor } from '../src';
@@ -15,7 +15,7 @@ const context = createUploadContext();
 class SmartMediaEditorExample extends React.Component<{}, State> {
   state: State = {
     showWithError: false,
-    showEditor: true,
+    showEditor: false,
   };
 
   openSmartEditor = () => {
@@ -56,11 +56,12 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
 
     return (
       <div>
-        <Button onClick={this.openSmartEditor}>Open Smart Editor</Button>
-        <br />
-        <Button onClick={this.openSmartEditorWithError}>
-          Open Smart Editor (with an error)
-        </Button>
+        <ButtonGroup>
+          <Button onClick={this.openSmartEditor}>Open Smart Editor</Button>
+          <Button onClick={this.openSmartEditorWithError}>
+            Open Smart Editor (with an error)
+          </Button>
+        </ButtonGroup>
         {newFileIdentifier ? (
           <Card identifier={newFileIdentifier} context={context} />
         ) : null}
