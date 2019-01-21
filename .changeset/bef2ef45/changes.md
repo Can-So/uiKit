@@ -1,0 +1,1 @@
+- Added share service client
