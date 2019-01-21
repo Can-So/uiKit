@@ -28,6 +28,7 @@ export const fakeContext = (
     upload: jest.fn(),
     getArtifactURL: jest.fn(),
     touchFiles: jest.fn(),
+    getCurrentState: jest.fn(),
   } as FileFetcher;
 
   const defaultContext: Context = {

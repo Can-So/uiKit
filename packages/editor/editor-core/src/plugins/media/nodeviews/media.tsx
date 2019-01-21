@@ -7,9 +7,9 @@ import { ProsemirrorGetPosHandler, ReactNodeProps } from '../../../nodeviews';
 import {
   MediaPluginState,
   stateKey as mediaStateKey,
+  MediaProvider,
 } from '../pm-plugins/main';
 import { Context, ImageResizeMode } from '@atlaskit/media-core';
-import { MediaProvider } from '../pm-plugins/main';
 import {
   Card,
   CardDimensions,
@@ -36,17 +36,16 @@ export interface MediaNodeProps extends ReactNodeProps {
   providerFactory?: ProviderFactory;
   cardDimensions: CardDimensions;
   isMediaSingle?: boolean;
-  mediaProvider?: Promise<MediaProvider>;
   onClick?: CardOnClickCallback;
   onExternalImageLoaded?: (
     dimensions: { width: number; height: number },
   ) => void;
   editorAppearance: EditorAppearance;
+  mediaProvider?: Promise<MediaProvider>;
 }
 
 export interface Props extends Partial<MediaBaseAttributes> {
   type: MediaType;
-  mediaProvider?: Promise<MediaProvider>;
   cardDimensions?: CardDimensions;
   onClick?: CardOnClickCallback;
   onDelete?: CardEventHandler;
@@ -57,6 +56,7 @@ export interface Props extends Partial<MediaBaseAttributes> {
   imageStatus?: ImageStatus;
   context: Context;
   disableOverlay?: boolean;
+  mediaProvider?: Promise<MediaProvider>;
 }
 
 export interface MediaNodeState {
@@ -68,7 +68,7 @@ class MediaNode extends Component<
   MediaNodeState
 > {
   private pluginState: MediaPluginState;
-  private mediaProvider;
+  private mediaProvider: MediaProvider;
   private hasBeenMounted: boolean = false;
 
   state = {
@@ -79,7 +79,6 @@ class MediaNode extends Component<
     super(props);
     const { view } = this.props;
     this.pluginState = mediaStateKey.getState(view.state);
-    this.mediaProvider = props.mediaProvider;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -107,14 +106,18 @@ class MediaNode extends Component<
     this.hasBeenMounted = false;
   }
 
+  componentWillReceiveProps(props) {
+    this.updateMediaContext();
+  }
+
   componentDidUpdate() {
     this.pluginState.updateElement();
   }
 
   private updateMediaContext = async () => {
-    const mediaProvider = await this.mediaProvider;
-    if (mediaProvider) {
-      const viewContext = await mediaProvider.viewContext;
+    if (this.props.mediaProvider) {
+      this.mediaProvider = await this.props.mediaProvider;
+      const viewContext = await this.mediaProvider.viewContext;
       if (viewContext && this.hasBeenMounted) {
         this.setState({ viewContext });
       }
@@ -170,7 +173,7 @@ class MediaNode extends Component<
         selected={selected}
         disableOverlay={true}
         onClick={onClick}
-        useInlinePlayer={false}
+        useInlinePlayer={!isMobile}
         isLazy={!isMobile}
       />
     );
