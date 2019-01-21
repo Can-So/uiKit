@@ -12,7 +12,7 @@ export const isSpecial = (node: Node | null | undefined) => {
   return node && SPECIAL_NODES.indexOf(node.type.name) !== -1;
 };
 
-const ZWSP = '\u200b';
+export const ZWSP = '\u200b';
 
 export const findSpecialNodeAfter = ($pos: ResolvedPos, tr: Transaction) => {
   if (isSpecial($pos.nodeAfter)) {

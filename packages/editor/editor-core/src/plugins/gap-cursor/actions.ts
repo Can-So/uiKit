@@ -1,16 +1,18 @@
 import { EditorState, Selection, TextSelection } from 'prosemirror-state';
 import { removeNodeBefore } from 'prosemirror-utils';
+import { findDomRefAtPos } from 'prosemirror-utils';
 import { Direction, isBackward, isForward } from './direction';
 import { GapCursorSelection, Side } from './selection';
 import { isTextBlockNearPos, isValidTargetNode } from './utils';
 import { Command } from '../../types';
 import { atTheBeginningOfDoc, atTheEndOfDoc } from '../../utils';
 import { pluginKey } from './pm-plugins/main';
+import { ZWSP } from '../base/pm-plugins/inline-cursor-target';
 
 export const arrow = (
   dir: Direction,
   endOfTextblock: (dir: string, state?: EditorState) => boolean,
-): Command => (state, dispatch) => {
+): Command => (state, dispatch, view) => {
   const { doc, schema, selection, tr } = state;
 
   let $pos = isBackward(dir) ? selection.$from : selection.$to;
@@ -62,6 +64,15 @@ export const arrow = (
       );
     }
     return true;
+  }
+
+  if (view) {
+    const domAtPos = view.domAtPos.bind(view);
+    const target = findDomRefAtPos($pos.pos, domAtPos) as HTMLElement;
+
+    if (target && target.textContent === ZWSP) {
+      return false;
+    }
   }
 
   const nextSelection = GapCursorSelection.findFrom(
