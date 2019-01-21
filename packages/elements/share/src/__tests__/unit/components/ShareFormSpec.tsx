@@ -3,11 +3,11 @@ import Form, { FormFooter, FormSection } from '@atlaskit/form';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { CommentField } from '../../components/CommentField';
-import { ShareForm } from '../../components/ShareForm';
-import { ShareHeader } from '../../components/ShareHeader';
-import { UserPickerField } from '../../components/UserPickerField';
-import { messages } from '../../i18n';
+import { CommentField } from '../../../components/CommentField';
+import { ShareForm } from '../../../components/ShareForm';
+import { ShareHeader } from '../../../components/ShareHeader';
+import { UserPickerField } from '../../../components/UserPickerField';
+import { messages } from '../../../i18n';
 import { renderProp } from '../_testUtils';
 
 describe('ShareForm', () => {
