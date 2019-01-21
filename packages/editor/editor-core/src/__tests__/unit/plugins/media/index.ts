@@ -1546,5 +1546,54 @@ describe('Media plugin', () => {
         ),
       );
     });
+
+    it('should insert media in the media group that already exist', async () => {
+      const listDoc = doc(
+        ul(li(p('te{<>}xt'))),
+        mediaGroup(
+          media({
+            id: pdfFile.id,
+            __key: pdfFile.id,
+            type: 'file',
+            __fileMimeType: pdfFile.fileMimeType,
+            __fileName: pdfFile.fileName,
+            __fileSize: pdfFile.fileSize,
+            collection: testCollectionName,
+          })(),
+        ),
+        p(''),
+      );
+      const { pluginState, editorView } = editor(listDoc);
+      await waitForMediaPickerReady(pluginState);
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ul(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
+    });
   });
 });
