@@ -1,5 +1,17 @@
 # @atlaskit/media-image
 
+## 51.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/field-radio-group@4.0.15
+  - @atlaskit/toggle@5.0.15
+  - @atlaskit/media-test-helpers@19.1.1
+  - @atlaskit/media-ui@8.2.5
+  - @atlaskit/field-range@5.0.14
+  - @atlaskit/icon@16.0.0
+
 ## 51.0.0
 - [patch] [b1627a5837](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1627a5837):
 

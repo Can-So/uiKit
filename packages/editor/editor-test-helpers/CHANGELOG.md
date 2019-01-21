@@ -1,5 +1,13 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.13
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/editor-common@30.0.1
+  - @atlaskit/editor-core@97.0.1
+  - @atlaskit/media-test-helpers@19.1.1
+  - @atlaskit/smart-card@9.4.1
+  - @atlaskit/icon@16.0.0
+
 ## 6.3.12
 - Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
   - @atlaskit/editor-common@30.0.0
