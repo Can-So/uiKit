@@ -11,6 +11,7 @@ import { Selection, editorClose } from '../../../actions/editorClose';
 import { editorShowError } from '../../../actions/editorShowError';
 import { EditorViewProps } from '@atlaskit/media-editor';
 import editorViewLoader from './editorViewLoader';
+import { CenterView } from './styles';
 export interface MainEditorViewStateProps {
   readonly editorData?: EditorData;
 }
@@ -82,12 +83,14 @@ export class MainEditorView extends Component<
       return this.renderError(error);
     } else if (imageUrl && originalFile && EditorViewComponent) {
       return (
-        <EditorViewComponent
-          imageUrl={imageUrl}
-          onSave={this.onEditorSave(originalFile)}
-          onCancel={this.onCancel}
-          onError={this.onEditorError}
-        />
+        <CenterView>
+          <EditorViewComponent
+            imageUrl={imageUrl}
+            onSave={this.onEditorSave(originalFile)}
+            onCancel={this.onCancel}
+            onError={this.onEditorError}
+          />
+        </CenterView>
       );
     } else {
       return <SpinnerView onCancel={this.onCancel} />;
