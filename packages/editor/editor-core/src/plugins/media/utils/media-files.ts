@@ -1,5 +1,5 @@
 import { Node as PMNode, NodeType, Fragment } from 'prosemirror-model';
-import { EditorState } from 'prosemirror-state';
+import { EditorState, Selection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import {
   atTheEndOfDoc,
@@ -21,7 +21,11 @@ import {
   isInsidePotentialEmptyParagraph,
   copyOptionalAttrsFromMediaState,
 } from './media-common';
-import { safeInsert } from 'prosemirror-utils';
+import {
+  safeInsert,
+  hasParentNode,
+  ContentNodeWithPos,
+} from 'prosemirror-utils';
 
 export interface Range {
   start: number;
@@ -127,12 +131,11 @@ export const insertMediaGroupNode = (
 
     // delete the selection or empty paragraph
     const deleteRange = findDeleteRange(state);
-    if (!deleteRange) {
-      tr.insert(mediaInsertPos, content);
-    } else {
+    if (deleteRange) {
       tr.deleteRange(deleteRange.start, deleteRange.end);
-      tr.insert(tr.mapping.map(mediaInsertPos), content);
     }
+
+    tr.insert(tr.mapping.map(mediaInsertPos), content);
     dispatch(tr);
     setSelectionAfterMediaInsertion(view, mediaInsertPos);
     return;
@@ -171,8 +174,95 @@ const createMediaFileNodes = (
   return nodes;
 };
 
+/**
+ * Find the farthest node given a condition
+ * @param predicate Function to check the node
+ */
+const findFarthestParentNode = (predicate: (node: PMNode) => boolean) => (
+  selection: Selection,
+): ContentNodeWithPos | null => {
+  const { $from } = selection;
+
+  let candidate: ContentNodeWithPos | null = null;
+
+  for (let i = $from.depth; i > 0; i--) {
+    const node = $from.node(i);
+    if (predicate(node)) {
+      candidate = {
+        pos: i > 0 ? $from.before(i) : 0,
+        start: $from.start(i),
+        depth: i,
+        node,
+      };
+    }
+  }
+  return candidate;
+};
+
+/**
+ * Find root list node if exist from current selection
+ * @param state Editor state
+ */
+const findRootListNode = (state: EditorState): ContentNodeWithPos | null => {
+  const {
+    schema: {
+      nodes: { bulletList, orderedList },
+    },
+  } = state;
+
+  return findFarthestParentNode(
+    (node: PMNode) => node.type === bulletList || node.type === orderedList,
+  )(state.selection);
+};
+
+/**
+ * Return position of media to be inserted, if it is inside a list
+ * @param content Content to be inserted
+ * @param state Editor State
+ */
+const getPosInList = (state: EditorState): number | undefined => {
+  const {
+    schema: {
+      nodes: { mediaGroup, listItem },
+    },
+  } = state;
+
+  if (hasParentNode(node => node.type === listItem)(state.selection)) {
+    // 2. Get end position of root list
+    // const pos = safeInsertPos(content, state);
+    const rootListNode = findRootListNode(state);
+
+    if (rootListNode) {
+      const pos = rootListNode.pos + rootListNode.node.nodeSize;
+      // 3. Check if node is media group
+      const nextNode = state.doc.nodeAt(pos);
+      if (nextNode && nextNode.type === mediaGroup) {
+        return pos + 1;
+      }
+
+      return pos;
+    }
+  }
+};
+
+/**
+ * Find insertion point,
+ * If it is in a List it will return position to the next block,
+ * If there are any media group close it will return this position
+ * Otherwise, It will return the respective block given selection.
+ * @param content Content to be inserted
+ * @param state Editor state
+ */
 const findMediaInsertPos = (state: EditorState): number => {
   const { $from, $to } = state.selection;
+
+  // Check if selection is inside a list.
+  const posInList = getPosInList(state);
+
+  if (posInList) {
+    // If I have a position in lists, I should return, otherwise I am not inside a list
+    return posInList;
+  }
 
   const nearbyMediaGroupPos = posOfMediaGroupNearby(state);
 
