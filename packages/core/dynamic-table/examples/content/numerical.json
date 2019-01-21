@@ -2,7 +2,7 @@
     "id": 1,
     "nm": "George Washington",
     "pp": "None, Federalist",
-    "num": 1
+    "num": -1
   },
   {
     "id": 2,
@@ -14,19 +14,19 @@
     "id": 3,
     "nm": "Thomas Jefferson",
     "pp": "Democratic-Republican",
-    "num": 3
+    "num": -3
   },
   {
     "id": 4,
     "nm": "James Madison",
     "pp": "Democratic-Republican",
-    "num": 4
+    "num": -4
   },
   {
     "id": 5,
     "nm": "James Monroe",
     "pp": "Democratic-Republican",
-    "num": 20
+    "num": -20
   },
   {
     "id": 6,
@@ -56,30 +56,43 @@
     "id": 10,
     "nm": "John Tyler",
     "pp": "Whig",
-    "num": ""
+    "num": 5
  },
  {
   "id": 11,
-  "nm": "James K. Polk",
-  "pp": "Democrat",
-  "tm": "test"
+  "nm": "Zachary Taylor",
+  "pp": "Whig",
+  "num": 0
 },
 {
   "id": 12,
-  "nm": "Zachary Taylor",
-  "pp": "Whig",
-  "tm": 0
-},
-{
-  "id": 13,
   "nm": "Millard Fillmore",
   "pp": "Whig",
-  "tm": -0.5
+  "num": 4
+},
+ {
+  "id": 13,
+  "nm": "<Test String 2>",
+  "pp": "Democrat",
+  "num": "test"
 },
 {
   "id": 14,
-  "nm": "Franklin Pierce",
+  "nm": "<Test String 1>",
   "pp": "Democrat",
-  "tm": "3"
+  "num": "a test"
+},
+
+{
+  "id": 15,
+  "nm": "<Number as string>",
+  "pp": "Democrat",
+  "num": "3"
+},
+{
+  "id": 16,
+  "nm": "<Empty String>",
+  "pp": "Democrat",
+  "num": ""
 }
 ]
