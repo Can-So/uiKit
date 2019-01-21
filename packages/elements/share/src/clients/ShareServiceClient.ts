@@ -14,22 +14,7 @@ export interface ShareClient {
 }
 
 type ShareResponse = {
-  contentAri: string;
-  statuses: ResponseStatus[];
-  // This is not from swagger and TBC
-  // it will contain any additional attributes to the invite endpoint response
-  // mainly for atlOrigin
-  metadata?: MetaDataResponse;
-};
-
-type ResponseStatus = {
-  // This is not from swagger and TBC
-  // we may have to deal with the timeout / long time taking process from the invite v2 endpoint
-  // depending on the frontend solution we will come up with
-  // polling status by shareId may be needed
   shareId: string;
-  recipient: Recipient;
-  status: Status;
 };
 
 type Recipient = RecipientWithId | RecipientWithEmail;
@@ -42,8 +27,6 @@ type RecipientWithId = {
 type RecipientWithEmail = {
   email: string;
 };
-
-type Status = 'PENDING_INVITE' | 'SHARED' | 'ERROR';
 
 type Content = {
   ari: string;
@@ -65,24 +48,12 @@ type Comment = {
 // https://hello.atlassian.net/wiki/spaces/~804672962/pages/379043535/Draft+Origin+Tracing+in+Common+Share+Component
 type MetaData = {
   productId: string;
-  toAtlassianAccountHolders: {
-    atlOriginId: string;
-  };
-  toNewUsers: {
-    atlOriginId: string;
-  };
-};
-
-type MetaDataResponse = {
-  productId?: string;
   tracking: {
     toAtlassianAccountHolders: {
       atlOriginId: string;
-      userIds: string[];
     };
     toNewUsers: {
       atlOriginId: string;
-      userIds: string[];
     };
   };
 };
