@@ -4,7 +4,7 @@ import {
   ServiceConfig,
 } from '@atlaskit/util-service-support';
 
-export interface ShareServiceClient {
+export interface ShareClient {
   share: (
     content: Content,
     recipients: Recipient[],
@@ -75,13 +75,15 @@ type MetaData = {
 
 type MetaDataResponse = {
   productId?: string;
-  toAtlassianAccountHolders: {
-    atlOriginId: string;
-    userIds: string[];
-  };
-  toNewUsers: {
-    atlOriginId: string;
-    userIds: string[];
+  tracking: {
+    toAtlassianAccountHolders: {
+      atlOriginId: string;
+      userIds: string[];
+    };
+    toNewUsers: {
+      atlOriginId: string;
+      userIds: string[];
+    };
   };
 };
 
@@ -89,7 +91,7 @@ export const DEFAULT_SHARE_PATH = 'share';
 // TODO: replace with the real stargate namespace
 export const DEFAULT_SHARE_SERVICE_URL = '/gateway/api';
 
-export class ShareServiceClientImpl implements ShareServiceClient {
+export class ShareServiceClient implements ShareClient {
   private serviceConfig: ServiceConfig;
 
   constructor(serviceConfig?: ServiceConfig) {

@@ -1,6 +1,6 @@
 import { utils } from '@atlaskit/util-service-support';
 import {
-  ShareServiceClientImpl,
+  ShareClient,
   ShareServiceClient,
   DEFAULT_SHARE_SERVICE_URL,
   DEFAULT_SHARE_PATH,
@@ -8,7 +8,7 @@ import {
 
 describe('ShareServiceClientImpl', () => {
   let requestSpy;
-  let shareServiceClient: ShareServiceClient;
+  let shareServiceClient: ShareClient;
   let mockContent = {
     link: 'link',
     ari: 'ari',
@@ -34,7 +34,7 @@ describe('ShareServiceClientImpl', () => {
 
   beforeEach(() => {
     requestSpy = jest.spyOn(utils, 'requestService').mockResolvedValue({});
-    shareServiceClient = new ShareServiceClientImpl();
+    shareServiceClient = new ShareServiceClient();
   });
 
   afterEach(() => {
@@ -75,7 +75,7 @@ describe('ShareServiceClientImpl', () => {
       const mockServiceConfig = {
         url: 'customurl',
       };
-      shareServiceClient = new ShareServiceClientImpl(mockServiceConfig);
+      shareServiceClient = new ShareServiceClient(mockServiceConfig);
       await shareServiceClient.share(
         mockContent,
         mockRecipients,
