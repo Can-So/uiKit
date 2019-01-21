@@ -1,14 +1,18 @@
 import * as React from 'react';
 import LazyRender from 'react-lazily-render';
+import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { CardProps, CardWithData, CardWithUrl } from './types';
 import { CardWithUrlContent as CardWithUrlContentType } from './renderCardWithUrl';
 import { CardWithDataContent as CardWithDataContentType } from './renderCardWithData';
 import { CardLinkView } from '@atlaskit/media-ui';
+import { auth } from '@atlaskit/outbound-auth-flow-client';
 
 export const isCardWithData = (props: CardProps): props is CardWithData =>
   !!(props as CardWithData).data;
 
-export class CardWithURLRenderer extends React.Component<CardWithUrl> {
+export class CardWithURLRenderer extends React.Component<
+  CardWithUrl & WithAnalyticsEventProps
+> {
   static CardContent: typeof CardWithUrlContentType | null = null;
 
   static moduleImporter(target: any) {
@@ -27,7 +31,14 @@ export class CardWithURLRenderer extends React.Component<CardWithUrl> {
   }
 
   render() {
-    const { url, client, appearance, isSelected, onClick } = this.props;
+    const {
+      url,
+      client,
+      appearance,
+      isSelected,
+      onClick,
+      createAnalyticsEvent,
+    } = this.props;
 
     if (!url) {
       throw new Error('@atlaskit/smart-card: url property is missing.');
@@ -46,6 +57,8 @@ export class CardWithURLRenderer extends React.Component<CardWithUrl> {
               appearance={appearance}
               onClick={onClick}
               isSelected={isSelected}
+              createAnalyticsEvent={createAnalyticsEvent}
+              authFn={auth}
             />
           ) : (
             <CardLinkView text={url}>{url}</CardLinkView>
@@ -56,7 +69,9 @@ export class CardWithURLRenderer extends React.Component<CardWithUrl> {
   }
 }
 
-export class CardWithDataRenderer extends React.Component<CardWithData> {
+export class CardWithDataRenderer extends React.Component<
+  CardWithData & WithAnalyticsEventProps
+> {
   static CardContent: typeof CardWithDataContentType | null = null;
 
   static moduleImporter(target: any) {

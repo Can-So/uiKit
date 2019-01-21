@@ -1,12 +1,12 @@
+import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
+import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
+import { ToolbarFeatures } from '../../../example-helpers/ToolsDrawer';
+
 /**
  * This function will in browser context. Make sure you call `toJSON` otherwise you will get:
  * unknown error: Maximum call stack size exceeded
  * And, don't get too fancy with it ;)
  */
-import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
-import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
-import { ToolbarFeatures } from '../../../example-helpers/ToolsDrawer';
-
 export const getDocFromElement = el => el.pmViewDesc.node.toJSON();
 export const editable = '.ProseMirror';
 export const LONG_WAIT_FOR = 5000;
@@ -51,6 +51,12 @@ export const fullpage = {
 export const fullpageDisabled = {
   name: 'fullpage-disabled',
   path: getExampleUrl('editor', 'editor-core', 'full-page-with-content'),
+  placeholder: '.ProseMirror',
+};
+
+export const fullpageWithImport = {
+  name: 'fullpage-with-import',
+  path: getExampleUrl('editor', 'editor-core', 'full-page-with-adf-import'),
   placeholder: '.ProseMirror',
 };
 

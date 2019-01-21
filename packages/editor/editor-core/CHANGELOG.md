@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 95.1.0
+- [minor] [2d6d5b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d6d5b6):
+
+  - ED-5379: rework selecting media under the hood; maintain size and layout when copy-pasting
+
 ## 95.0.21
 - [patch] [6c81bca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c81bca):
 
