@@ -1,5 +1,24 @@
 # @atlaskit/media-image
 
+## 51.0.0
+- [patch] [b1627a5837](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1627a5837):
+
+  - Enable inline video player in Editor and Renderer
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/media-store@9.1.3
+  - @atlaskit/media-test-helpers@19.1.0
+  - @atlaskit/media-core@26.2.0
+
+## 50.0.0
+- [patch] [5b1e270](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5b1e270):
+
+  - Minor bug fixes
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/media-test-helpers@19.0.0
+  - @atlaskit/media-core@26.1.0
+  - @atlaskit/media-ui@8.2.4
+
 ## 49.0.0
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/media-test-helpers@18.9.1

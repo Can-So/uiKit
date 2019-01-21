@@ -1,5 +1,25 @@
 # @atlaskit/media-test-helpers
 
+## 19.1.0
+- [minor] [b1627a5837](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1627a5837):
+
+  - Enable inline video player in Editor and Renderer
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/media-card@51.0.0
+  - @atlaskit/media-picker@31.0.0
+  - @atlaskit/media-store@9.1.3
+  - @atlaskit/media-core@26.2.0
+
+## 19.0.0
+- [major] [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+
+  - More jest utilities has been added: expectToEqual, expectConstructorToHaveBeenCalledWith and expectFunctionToHaveBeenCalledWith to allow for typed jest assertions. mountWithIntlContext got generics types.
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+  - @atlaskit/media-card@50.0.0
+  - @atlaskit/media-picker@30.0.0
+  - @atlaskit/media-store@9.1.2
+  - @atlaskit/media-core@26.1.0
+
 ## 18.10.0
 - [minor] [e6516fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6516fb):
 

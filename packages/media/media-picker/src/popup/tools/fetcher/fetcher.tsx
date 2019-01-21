@@ -66,7 +66,6 @@ export interface Fetcher {
     fileId: string,
     collection?: string,
   ): Promise<FileDetails>;
-  getImage(auth: Auth, fileId: string, collection?: string): Promise<Blob>;
   getServiceList(auth: Auth): Promise<ServiceAccountWithType[]>;
   unlinkCloudAccount(auth: Auth, accountId: string): Promise<void>;
   fetchTrendingGifs(offset?: number): Promise<GiphyData>;
@@ -139,20 +138,6 @@ export class MediaApiFetcher implements Fetcher {
           reject('metadata_fetch_fail');
         });
     });
-  }
-
-  getImage(auth: Auth, fileId: string, collection?: string): Promise<Blob> {
-    const collectionName = collection ? `?collection=${collection}` : '';
-    const url = `${fileStoreUrl(
-      auth.baseUrl,
-    )}/file/${fileId}/image${collectionName}`;
-
-    return this.query(
-      url,
-      'GET',
-      { mode: 'full-fit' },
-      mapAuthToAuthHeaders(auth),
-    ).then(response => response.blob());
   }
 
   getServiceList(auth: Auth): Promise<ServiceAccountWithType[]> {

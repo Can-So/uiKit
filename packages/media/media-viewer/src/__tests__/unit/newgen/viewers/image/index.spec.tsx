@@ -8,7 +8,10 @@ import {
 import {
   ImageViewer,
   REQUEST_CANCELLED,
+  ImageViewerProps,
 } from '../../../../../newgen/viewers/image';
+import { BaseState } from '../../../../../newgen/viewers/base-viewer';
+import { Content } from '../../../../../newgen/content';
 
 const collectionName = 'some-collection';
 const imageItem: ProcessedFileState = {
@@ -26,7 +29,7 @@ function createFixture(response: Promise<Blob>) {
   (context.getImage as jest.Mock).mockReturnValue(response);
   const onClose = jest.fn();
   const onLoaded = jest.fn();
-  const el = mountWithIntlContext(
+  const el = mountWithIntlContext<ImageViewerProps, BaseState<Content>>(
     <ImageViewer
       context={context}
       item={imageItem}

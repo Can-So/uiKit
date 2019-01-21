@@ -20,9 +20,9 @@ export default md`
   
     ${(
       <Example
-        Component={require('../examples/0-fixed-size').default}
+        Component={require('../examples/4-smart-media-editor').default}
         title="Fixed Sized"
-        source={require('!!raw-loader!../examples/0-fixed-size')}
+        source={require('!!raw-loader!../examples/4-smart-media-editor')}
       />
     )}
   

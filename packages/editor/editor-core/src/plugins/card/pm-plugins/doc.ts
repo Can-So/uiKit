@@ -9,6 +9,7 @@ import { Command } from '../../../types';
 import { processRawValue, getStepRange } from '../../../utils';
 import { Schema } from 'prosemirror-model';
 import { md } from '../../paste/pm-plugins/main';
+import { closeHistory } from 'prosemirror-history';
 
 export const replaceQueuedUrlWithCard = (
   url: string,
@@ -59,7 +60,7 @@ export const replaceQueuedUrlWithCard = (
   }
 
   if (dispatch) {
-    dispatch(resolveCard(url)(tr));
+    dispatch(resolveCard(url)(closeHistory(tr)));
   }
   return true;
 };

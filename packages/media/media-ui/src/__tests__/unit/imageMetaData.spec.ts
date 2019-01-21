@@ -1,14 +1,7 @@
-const readImageMetaTags = jest
-  .fn()
-  .mockReturnValue({ Orientation: 'top-right' });
-const loadImage = jest
-  .fn()
-  .mockReturnValue({ naturalWidth: 1, naturalHeight: 2 });
+jest.mock('../../imageMetaData/metatags');
 
-import { getFileInfo } from '../../util';
-jest.mock('../../imageMetaData/metatags', () => ({ readImageMetaTags }));
-jest.mock('../../util', () => ({ getFileInfo, loadImage }));
-
+import { asMock } from '@atlaskit/media-test-helpers';
+import * as util from '../../util';
 import {
   getImageInfo,
   getOrientation,
@@ -19,14 +12,22 @@ import {
   ImageMetaDataTags,
   ImageInfo,
 } from '../../imageMetaData';
-
+import { readImageMetaTags } from '../../imageMetaData/metatags';
 import { ExifOrientation } from '../../imageMetaData/types';
 
 describe('Image Meta Data', () => {
+  let loadImage: jest.Mock<any>;
   const fileInfo = {
     file: new File([], 'some-file', { type: 'image/png' }),
     src: 'some-src',
   };
+
+  beforeEach(() => {
+    loadImage = jest
+      .spyOn(util, 'loadImage')
+      .mockReturnValue({ naturalWidth: 1, naturalHeight: 2 });
+    asMock(readImageMetaTags).mockReturnValue({ Orientation: 'top-right' });
+  });
 
   describe('getImageInfo()', () => {
     it('should return image info from valid file', async () => {
@@ -67,13 +68,13 @@ describe('Image Meta Data', () => {
     });
 
     it('should return orientation from metatags using numbers', async () => {
-      readImageMetaTags.mockReturnValue({ Orientation: '6' });
+      asMock(readImageMetaTags).mockReturnValue({ Orientation: '6' });
       const orientation = await getOrientation(file);
       expect(orientation).toBe(6);
     });
 
     it('should return 1="top-left" (default) when cannot read orientation from metatags', async () => {
-      readImageMetaTags.mockReturnValue({});
+      asMock(readImageMetaTags).mockReturnValue({});
       const orientation = await getOrientation(file);
       expect(readImageMetaTags).toBeCalled();
       expect(orientation).toBe(ExifOrientation['top-left']);
@@ -122,7 +123,7 @@ describe('Image Meta Data', () => {
         naturalWidth: 1,
         naturalHeight: 2,
       });
-      readImageMetaTags.mockReturnValue({ Orientation: 'top-left' });
+      asMock(readImageMetaTags).mockReturnValue({ Orientation: 'top-left' });
       const imageMetaData = (await readImageMetaData(
         fileInfo,
       )) as ImageMetaData;

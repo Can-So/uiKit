@@ -283,6 +283,14 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
     }
   };
 
+  clearUploadPicker = () => {
+    this.setState({
+      name: undefined,
+      previewImage: undefined,
+      uploadStatus: UploadStatus.Waiting,
+    });
+  };
+
   render() {
     const { errorMessage, onUploadCancelled } = this.props;
     const {
@@ -292,13 +300,18 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
       chooseEmojiErrorMessage,
     } = this.state;
 
+    const cancelUpload = () => {
+      this.clearUploadPicker();
+      onUploadCancelled();
+    };
+
     if (name && previewImage) {
       return (
         <EmojiUploadPreview
           errorMessage={errorMessage}
           name={name}
           onAddEmoji={this.onAddEmoji}
-          onUploadCancelled={onUploadCancelled}
+          onUploadCancelled={cancelUpload}
           previewImage={previewImage}
           uploadStatus={uploadStatus}
         />
@@ -310,7 +323,7 @@ export default class EmojiUploadPicker extends PureComponent<Props, State> {
         name={name}
         onChooseFile={this.onChooseFile}
         onNameChange={this.onNameChange}
-        onUploadCancelled={onUploadCancelled}
+        onUploadCancelled={cancelUpload}
         errorMessage={
           chooseEmojiErrorMessage ? (
             <FormattedMessage {...chooseEmojiErrorMessage} />

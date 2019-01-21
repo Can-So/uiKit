@@ -5,10 +5,12 @@ import * as React from 'react';
 import { ProcessedFileState } from '@atlaskit/media-core';
 import { createContext } from '../../../_stubs';
 import { Spinner } from '../../../../../newgen/loading';
-import { DocViewer } from '../../../../../newgen/viewers/doc/index';
+import { DocViewer, Props } from '../../../../../newgen/viewers/doc/index';
 import { ErrorMessage, createError } from '../../../../../newgen/error';
 import Button from '@atlaskit/button';
 import { mountWithIntlContext } from '@atlaskit/media-test-helpers';
+import { BaseState } from '../../../../../newgen/viewers/base-viewer';
+import { Content } from '../../../../../newgen/content';
 
 function createFixture(
   fetchPromise: Promise<any>,
@@ -17,7 +19,7 @@ function createFixture(
 ) {
   const context = createContext(undefined as any);
   const onClose = jest.fn(() => fetchPromise);
-  const el = mountWithIntlContext(
+  const el = mountWithIntlContext<Props, BaseState<Content>>(
     <DocViewer item={item} context={context} collectionName={collectionName} />,
   );
   (el as any).instance()['fetch'] = jest.fn();

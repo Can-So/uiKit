@@ -1,5 +1,58 @@
 # @atlaskit/editor-core
 
+## 97.0.0
+- [minor] [b1627a5837](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1627a5837):
+
+  - Enable inline video player in Editor and Renderer
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/editor-common@30.0.0
+  - @atlaskit/renderer@37.0.0
+  - @atlaskit/emoji@53.0.0
+  - @atlaskit/media-card@51.0.0
+  - @atlaskit/media-filmstrip@25.0.0
+  - @atlaskit/media-picker@31.0.0
+  - @atlaskit/editor-bitbucket-transformer@4.1.7
+  - @atlaskit/editor-json-transformer@4.1.7
+  - @atlaskit/editor-markdown-transformer@2.1.7
+  - @atlaskit/editor-test-helpers@6.3.12
+  - @atlaskit/task-decision@11.1.6
+  - @atlaskit/util-data-test@10.0.34
+  - @atlaskit/media-test-helpers@19.1.0
+  - @atlaskit/media-core@26.2.0
+
+## 96.0.2
+- [patch] [4e764a26d4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e764a26d4):
+
+  - ED-6070: Don't render proper mediaCard on mobile until we have a valid collection
+
+## 96.0.1
+- [patch] [af85018](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af85018):
+
+  - ED-6064: always undo smart cards to links
+
+## 96.0.0
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/editor-common@29.0.0
+  - @atlaskit/renderer@36.0.0
+  - @atlaskit/emoji@52.0.0
+  - @atlaskit/media-card@50.0.0
+  - @atlaskit/media-filmstrip@24.0.0
+  - @atlaskit/media-picker@30.0.0
+  - @atlaskit/editor-bitbucket-transformer@4.1.6
+  - @atlaskit/editor-json-transformer@4.1.6
+  - @atlaskit/editor-markdown-transformer@2.1.6
+  - @atlaskit/editor-test-helpers@6.3.11
+  - @atlaskit/task-decision@11.1.5
+  - @atlaskit/util-data-test@10.0.33
+  - @atlaskit/media-test-helpers@19.0.0
+  - @atlaskit/media-core@26.1.0
+
+## 95.1.0
+- [minor] [2d6d5b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d6d5b6):
+
+  - ED-5379: rework selecting media under the hood; maintain size and layout when copy-pasting
+
 ## 95.0.21
 - [patch] [6c81bca](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6c81bca):
 

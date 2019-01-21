@@ -6,10 +6,6 @@ import { akColorN30, akFontFamily } from '@atlaskit/util-shared-styles';
 export const MediaPickerPopupWrapper: ComponentClass<
   HTMLAttributes<{}>
 > = styled.div`
-  * {
-    box-sizing: border-box;
-  }
-
   display: flex;
   cursor: default;
   user-select: none;

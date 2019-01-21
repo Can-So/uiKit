@@ -1,4 +1,4 @@
-FROM node:8.9.0-slim
+FROM node:8.15.0-slim
 
 # Install git and bzip2
 RUN apt-get -y update && apt-get -y install git && apt-get -qq -y install bzip2 && rm -rf /var/lib/apt/lists/*
