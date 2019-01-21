@@ -15,7 +15,14 @@ import LoadingContainer from '../../LoadingContainer';
 import LoadingContainerAdvanced from '../../LoadingContainerAdvanced';
 import { Caption } from '../../../styled/DynamicTable';
 import DynamicTable, { DynamicTableStateless } from '../../..';
-import { rows, head, rowsWithKeys } from './_data';
+import {
+  rows,
+  head,
+  rowsWithKeys,
+  headNumeric,
+  rowsNumeric,
+  rowsNumericWithKeys,
+} from './_data';
 
 import { name } from '../../../../package.json';
 
@@ -125,13 +132,6 @@ describe(name, () => {
           .at(1)
           .text(),
       ).toBe('Clinton');
-      expect(
-        bodyRows
-          .at(0)
-          .find('td')
-          .at(2)
-          .text(),
-      ).toBe('-1');
     });
 
     const checkSortedData = isRankable => {
@@ -201,8 +201,8 @@ describe(name, () => {
       checkSortedData(true);
     });
 
-    it('should sort numeric data correctly with zero values', () => {
-      const headCells = head.cells.map(cell => ({
+    it('should sort numeric data correctly, listed before zero, empty and string values', () => {
+      const headCellsNumeric = headNumeric.cells.map(cell => ({
         ...cell,
         isSortable: true,
       }));
@@ -210,8 +210,8 @@ describe(name, () => {
         <DynamicTableStateless
           sortKey="numeric"
           sortOrder="ASC"
-          head={{ cells: headCells }}
-          rows={rowsWithKeys}
+          head={{ cells: headCellsNumeric }}
+          rows={rowsNumericWithKeys}
           isRankable
         />,
       );
@@ -223,64 +223,49 @@ describe(name, () => {
           .find('td')
           .at(0)
           .text(),
-      ).toBe('Hillary');
+      ).toBe('Negative One');
       expect(
         bodyRows
           .at(0)
           .find('td')
           .at(1)
-          .text(),
-      ).toBe('Clinton');
-      expect(
-        bodyRows
-          .at(0)
-          .find('td')
-          .at(2)
           .text(),
       ).toBe('-1');
-
-      expect(
-        bodyRows
-          .at(1)
-          .find('td')
-          .at(0)
-          .text(),
-      ).toBe('Donald');
       expect(
         bodyRows
           .at(1)
           .find('td')
           .at(1)
-          .text(),
-      ).toBe('Trump');
-      expect(
-        bodyRows
-          .at(1)
-          .find('td')
-          .at(2)
           .text(),
       ).toBe('0');
       expect(
         bodyRows
           .at(2)
           .find('td')
-          .at(0)
+          .at(1)
           .text(),
-      ).toBe('Barack');
+      ).toBe('1');
       expect(
         bodyRows
-          .at(2)
+          .at(3)
           .find('td')
           .at(1)
           .text(),
-      ).toBe('Obama');
+      ).toBe('');
       expect(
         bodyRows
-          .at(2)
+          .at(4)
           .find('td')
-          .at(2)
+          .at(1)
           .text(),
-      ).toBe('1');
+      ).toBe(' ');
+      expect(
+        bodyRows
+          .at(5)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('a string');
     });
 
     it('should pass down extra props', () => {
@@ -595,11 +580,13 @@ describe(name, () => {
       ).toBe('Clinton');
     });
 
-    it('should sort numeric data', () => {
-      const wrapper = mount(<DynamicTable head={head} rows={rows} />);
+    it('should sort numeric data correctly, listed before strings or empty values', () => {
+      const wrapper = mount(
+        <DynamicTable head={headNumeric} rows={rowsNumeric} />,
+      );
       wrapper
         .find('th')
-        .at(2)
+        .at(1)
         .simulate('click');
       wrapper.update();
 
@@ -611,65 +598,49 @@ describe(name, () => {
           .find('td')
           .at(0)
           .text(),
-      ).toBe('Hillary');
+      ).toBe('Negative One');
       expect(
         bodyRows
           .at(0)
           .find('td')
           .at(1)
-          .text(),
-      ).toBe('Clinton');
-      expect(
-        bodyRows
-          .at(0)
-          .find('td')
-          .at(2)
           .text(),
       ).toBe('-1');
-
-      expect(
-        bodyRows
-          .at(1)
-          .find('td')
-          .at(0)
-          .text(),
-      ).toBe('Donald');
       expect(
         bodyRows
           .at(1)
           .find('td')
           .at(1)
-          .text(),
-      ).toBe('Trump');
-      expect(
-        bodyRows
-          .at(1)
-          .find('td')
-          .at(2)
           .text(),
       ).toBe('0');
-
-      expect(
-        bodyRows
-          .at(2)
-          .find('td')
-          .at(0)
-          .text(),
-      ).toBe('Barack');
       expect(
         bodyRows
           .at(2)
           .find('td')
           .at(1)
           .text(),
-      ).toBe('Obama');
+      ).toBe('1');
       expect(
         bodyRows
-          .at(2)
+          .at(3)
           .find('td')
-          .at(2)
+          .at(1)
           .text(),
-      ).toBe('1');
+      ).toBe('');
+      expect(
+        bodyRows
+          .at(4)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe(' ');
+      expect(
+        bodyRows
+          .at(5)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('a string');
     });
   });
 });

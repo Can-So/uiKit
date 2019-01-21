@@ -20,30 +20,6 @@ const getSortedRows = (head, rows, sortKey, sortOrder) => {
       null,
     );
 
-  let a = (valA, valB) => {
-    // modifier used for sorting type (ascending or descending)
-    const modifier = 1;
-    if (typeof valA !== typeof valB) {
-      console.log('not same type');
-      // numbers are always grouped higher in the sort
-      if (typeof valA === 'number') return -1;
-      if (typeof valB === 'number') return 1;
-      console.log('no numbers');
-      // strings are grouped next
-      if (typeof valA === 'string') return -1;
-      if (typeof valB === 'string') return 1;
-      console.log('no strings');
-    }
-
-    console.log('No type conflicts, comparing values:');
-    if ((!valA && valA !== 0) || valA < valB) return -modifier;
-    if ((!valB && valB !== 0) || valA > valB) return modifier;
-    console.log('Testing for equality');
-    if (valA === valB) return 0;
-    console.log('Equality failed, null value is present');
-    return 1;
-  };
-
   // Reorder rows in table based on sorting cell value
   // Algorithm will sort numerics or strings, but not both
   return rows.slice().sort((a, b) => {
