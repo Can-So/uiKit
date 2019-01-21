@@ -1,4 +1,4 @@
-require('node-fetch');
+const fetchUrl = require('node-fetch');
 const stats = require('../dist/stats.json');
 
 // These are the known splits in the repo that we can look for.
@@ -34,7 +34,7 @@ sendAnalyticsEvents(events)
   });
 
 function sendAnalyticsEvents(events) {
-  return fetch('https://analytics.atlassian.com/analytics/events', {
+  return fetchUrl('https://analytics.atlassian.com/analytics/events', {
     method: 'POST',
     headers: {
       Accept: 'application/json, */*',
