@@ -612,10 +612,7 @@ class ToolbarInsertBlock extends React.PureComponent<
     (): boolean => {
       const { editorView } = this.props;
       insertDate()(editorView.state, editorView.dispatch);
-      openDatePicker(editorView.domAtPos.bind(editorView))(
-        editorView.state,
-        editorView.dispatch,
-      );
+      openDatePicker()(editorView.state, editorView.dispatch);
       return true;
     },
   );

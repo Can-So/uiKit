@@ -48,6 +48,7 @@ import {
   alignment,
   editorDisabledPlugin,
   indentationPlugin,
+  annotationPlugin,
 } from '../plugins';
 
 /**
@@ -217,6 +218,10 @@ export default function createPluginsList(
       nativeStatusSupported: !statusMenuDisabled,
     }),
   );
+
+  if (props.allowConfluenceInlineComment) {
+    plugins.push(annotationPlugin);
+  }
 
   plugins.push(gapCursorPlugin);
   plugins.push(gridPlugin);

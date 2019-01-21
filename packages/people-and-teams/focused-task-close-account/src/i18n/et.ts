@@ -78,6 +78,40 @@ export default {
     'Sina või muud kasutajad võivad olla paigaldanud rakendusi, mis lisavad Atlassiani toodetele funktsioone. Need rakendused võisid säilitada kasutajate profiiliteavet.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Sina või muud kasutajad võivad olla paigaldanud rakendusi, mis lisavad Atlassiani toodetele funktsioone. Need rakendused võisid säilitada sinu profiiliteavet.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Keela konto',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Keela konto',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    'Oled keelamas kontot, mis kuulub kasutajale:',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    'Oled keelamas kontot, mis kuulub kasutajale:',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'Võid kontot igal ajal lubada.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'Võid kontot igal ajal lubada.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'Konto keelamisel:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'Konto keelamisel:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} <b>kaotab ligipääsu kohe</b> kõikidele Atlassiani konto teenustele. Hetkel on tal ligipääs:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    '<b>kaotad ligipääsu kohe</b> kõikidele Atlassiani teenustele. Hetkel pääsed ligi:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    "{fullName} <b>kaotab ligipääsu kohe</b> kõikidele Atlassiani konto teenustele. Hetkel on neil ligipääs ainult Community-le ja Marketplace'le.",
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    '<b>kaotad ligipääsu kohe</b> kõikidele Atlassiani teenustele. Hetkel pääsed ligi ainult Community-le ja Marketplace-le.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Muud Atlassiani konto teenused nagu Atlassian Community ja Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    'Nende isiklikud andmed nagu täisnimi ja e-posti aadress ning nende loodud sisu jäävad Atlassiani konto teenustesse.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    'Nende isiklikud andmed nagu täisnimi ja e-posti aadress ning nende loodud sisu jäävad Atlassiani konto teenustesse.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'Me ei esita nende eest enam arvet',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'Me ei esita nende eest enam arvet',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Kuidas kasutajad näevad seda kontot?',
   'focused-task-close-account.delete-account.drop-down-expand-button':

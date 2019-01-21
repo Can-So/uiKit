@@ -1,5 +1,10 @@
 # @atlaskit/website
 
+## 4.1.34
+- [patch] [6855bec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6855bec):
+
+  - Updated internal use of ModalDialog to use new modal composition API
+
 ## 4.1.33
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/media-card@49.0.0

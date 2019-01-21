@@ -1,5 +1,10 @@
 # @atlaskit/emoji
 
+## 51.2.0
+- [minor] [6ef7a45](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ef7a45):
+
+  - FS-1230 New standalone emoji upload component added
+
 ## 51.1.0
 - [minor] [e60d7aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e60d7aa):
 

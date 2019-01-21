@@ -88,9 +88,9 @@ export class Card extends Component<CardProps, CardState> {
   };
 
   componentWillUnmount() {
+    this.hasBeenMounted = false;
     this.unsubscribe();
     this.releaseDataURI();
-    this.hasBeenMounted = false;
   }
 
   releaseDataURI = () => {
@@ -143,11 +143,11 @@ export class Card extends Component<CardProps, CardState> {
       return;
     }
 
-    const { id, collectionName } = identifier;
+    const { id, collectionName, occurrenceKey } = identifier;
     const resolvedId = await id;
     this.unsubscribe();
     this.subscription = context.file
-      .getFileState(resolvedId, { collectionName })
+      .getFileState(resolvedId, { collectionName, occurrenceKey })
       .subscribe({
         next: async state => {
           const {
@@ -242,7 +242,12 @@ export class Card extends Component<CardProps, CardState> {
   }
 
   notifyStateChange = (state: Partial<CardState>) => {
-    this.setState(state as any, this.onLoadingChangeCallback);
+    if (this.hasBeenMounted) {
+      this.setState(
+        state as Pick<CardState, keyof CardState>,
+        this.onLoadingChangeCallback,
+      );
+    }
   };
 
   unsubscribe = () => {
@@ -250,7 +255,9 @@ export class Card extends Component<CardProps, CardState> {
       this.subscription.unsubscribe();
     }
 
-    this.setState({ dataURI: undefined });
+    if (this.hasBeenMounted) {
+      this.setState({ dataURI: undefined });
+    }
   };
 
   // This method is called when card fails and user press 'Retry'

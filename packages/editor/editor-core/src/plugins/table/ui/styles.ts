@@ -48,6 +48,7 @@ export const tableToolbarSize = akEditorTableToolbarSize;
 export const tableBorderRadiusSize = 3;
 export const tableInsertColumnButtonSize = 20;
 export const tableDeleteButtonSize = 16;
+export const tablePadding = 8;
 export const contextualMenuTriggerSize = 16;
 export const contextualMenuDropdownWidth = 180;
 export const layoutButtonSize = 32;
@@ -210,10 +211,14 @@ export const tableStyles = css`
     ${tableSharedStyle}
 
     .less-padding {
-      padding: 0 8px;
+      padding: 0 ${tablePadding}px;
 
       .${ClassName.ROW_CONTROLS_WRAPPER} {
-         padding: 0 8px;
+        padding: 0 ${tablePadding}px;
+      }
+
+      &.${ClassName.TABLE_CONTAINER}[data-number-column='true'] {
+        padding-left: ${akEditorTableNumberColumnWidth + tablePadding - 1}px;
       }
     }
 

@@ -135,6 +135,8 @@ export const emoji = (attrs: {
 }) => schema.nodes.emoji.createChecked(attrs);
 export const confluenceInlineComment = (attrs: { reference: string }) =>
   markFactory(schema.marks.confluenceInlineComment, attrs ? attrs : {}, true);
+export const annotation = (attrs: { reference: string }) =>
+  markFactory(schema.marks.annotation, attrs ? attrs : {}, true);
 export const taskList = (attrs: { localId?: string } = {}) =>
   nodeFactory(schema.nodes.taskList, attrs);
 export const taskItem = (attrs: { localId?: string; state?: string } = {}) =>

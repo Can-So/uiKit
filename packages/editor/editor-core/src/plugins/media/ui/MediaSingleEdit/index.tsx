@@ -180,7 +180,7 @@ class MediaSingleEdit extends React.Component<Props & InjectedIntlProps, {}> {
 
   private handleRemove = () => {
     const { pluginState } = this.props;
-    pluginState.removeSelectedMediaNode();
+    pluginState.removeSelectedMediaContainer();
   };
 
   private handleChangeLayout(layout: MediaSingleLayout) {

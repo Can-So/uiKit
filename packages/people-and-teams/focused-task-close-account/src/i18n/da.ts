@@ -78,6 +78,40 @@ export default {
     'Du og andre brugere kan have installeret apps, der tilføjer funktioner til Atlassian-produkter. Disse apps kan indeholde brugerens profiloplysninger.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Du og andre brugere kan have installeret apps, der tilføjer funktioner til Atlassian-produkter. Disse apps kan indeholde brugerens profiloplysninger.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Deaktivér konto',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Deaktivér konto',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    'Du er ved at deaktivere brugerkontoen for:',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    'Du er ved at deaktivere brugerkontoen for:',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'Du kan genaktivere kontoen når som helst.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'Du kan genaktivere kontoen når som helst.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'Når du deaktiverer kontoen:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'Når du deaktiverer kontoen:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} <b>mister øjeblikkeligt adgang</b> til alle Atlassian-kontotjenester. Personen har p.t. adgang til:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    'Du <b>mister øjeblikkeligt adgang</b> til alle Atlassian-kontotjenester. Du har p.t. adgang til:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName} <b>mister øjeblikkeligt adgang</b> til alle Atlassian-kontotjenester. Personen har p.t. ikke adgang til nogen bortset fra tjenester som Community og Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    'Du <b>mister øjeblikkeligt adgang</b> til alle Atlassian-kontotjenester. Du har p.t. ikke adgang til nogen bortset fra tjenester som Community og Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Andre Atlassian-kontotjenester såsom Atlassian Community og Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    'Vedkommendes personoplysninger såsom fulde navn og e-mailadresse samt indhold, vedkommende har oprettet, vil blive i Atlassian-kontotjenesterne.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    'Vedkommendes personoplysninger såsom fulde navn og e-mailadresse samt indhold, vedkommende har oprettet, vil blive i Atlassian-kontotjenesterne.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'Fakturerer vi dig ikke længere for vedkommende.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'Fakturerer vi dig ikke længere for vedkommende.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Hvordan brugere vil se denne konto',
   'focused-task-close-account.delete-account.drop-down-expand-button':

@@ -1,5 +1,15 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.10
+- [patch] [8158fe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8158fe0):
+
+  - ED-6059: Extension and inlineExtension should read their content from attrs not the PMNode.
+
+## 6.3.9
+- [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
+
+  - ED-5991: bumped prosemirror-view to 1.6.8
+
 ## 6.3.8
 - Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
   - @atlaskit/editor-common@28.0.2

@@ -1,5 +1,10 @@
 # @atlaskit/media-avatar-picker
 
+## 12.1.8
+- [patch] [6855bec](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6855bec):
+
+  - Updated internal use of ModalDialog to use new composition API
+
 ## 12.1.7
 - [patch] [e6516fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6516fb):
 

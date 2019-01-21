@@ -42,7 +42,7 @@ const filterContent = (
   breakBetweenBlocks?: boolean,
 ) => {
   return content.reduce(
-    (acc, node, index) => {
+    (acc, node) => {
       if (types.has(node.type)) {
         if (node.content) {
           acc.push({
@@ -102,5 +102,9 @@ export const filterSliceByType = (
     schema,
     breakBetweenBlocks,
   );
-  return Slice.fromJSON(schema, { content: filteredContent });
+  return Slice.fromJSON(schema, {
+    content: filteredContent,
+    openStart: slice.openStart,
+    openEnd: slice.openEnd,
+  });
 };

@@ -12,13 +12,20 @@ import {
   InlineCardForbiddenView,
   InlineCardUnauthorizedView,
 } from '@atlaskit/media-ui';
-import { auth } from '@atlaskit/outbound-auth-flow-client';
+import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { ObjectState, Client } from '../Client';
 import { extractBlockPropsFromJSONLD } from '../extractBlockPropsFromJSONLD';
 import { extractInlinePropsFromJSONLD } from '../extractInlinePropsFromJSONLD';
 import { DefinedState } from '../Client/types';
 import { CardAppearance } from './types';
 import { WithObject } from '../WithObject';
+import {
+  connectFailedEvent,
+  connectSucceededEvent,
+  trackAppAccountConnected,
+} from '../analytics';
+
+const ANALYTICS_CHANNEL = 'media';
 
 const getCollapsedIcon = (state: DefinedState): string | undefined => {
   const { data } = state;
@@ -165,22 +172,32 @@ const renderInlineCard = (
   }
 };
 
-export interface CardWithUrlContentProps {
+export type CardWithUrlContentProps = {
   client: Client;
   url: string;
   appearance: CardAppearance;
   onClick?: () => void;
   isSelected?: boolean;
-}
+  authFn: (startUrl: string) => Promise<void>;
+} & WithAnalyticsEventProps;
 
 export function CardWithUrlContent(props: CardWithUrlContentProps) {
-  const { url, isSelected, onClick, client, appearance } = props;
+  const {
+    url,
+    isSelected,
+    onClick,
+    client,
+    appearance,
+    createAnalyticsEvent,
+    authFn,
+  } = props;
   return (
     <WithObject
       client={client}
       url={url}
       isSelected={isSelected}
       appearance={appearance}
+      createAnalyticsEvent={createAnalyticsEvent}
     >
       {({ state, reload }) => {
         // TODO: support multiple auth services
@@ -189,9 +206,33 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
           (state as DefinedState).services[0];
 
         const handleAuthorise = () => {
-          auth(firstAuthService.startAuthUrl).then(
-            () => reload(),
-            () => reload(),
+          authFn(firstAuthService.startAuthUrl).then(
+            () => {
+              if (createAnalyticsEvent) {
+                createAnalyticsEvent(
+                  trackAppAccountConnected((state as any).definitionId),
+                ).fire(ANALYTICS_CHANNEL);
+                createAnalyticsEvent(connectSucceededEvent(url, state)).fire(
+                  ANALYTICS_CHANNEL,
+                );
+              }
+              reload();
+            },
+            (err: Error) => {
+              if (createAnalyticsEvent) {
+                createAnalyticsEvent(
+                  // Yes, dirty, but we had a ticket for that
+                  err.message === 'The auth window was closed'
+                    ? connectFailedEvent('auth.window.was.closed', url, state)
+                    : connectFailedEvent(
+                        'potential.sensitive.data',
+                        url,
+                        state,
+                      ),
+                ).fire(ANALYTICS_CHANNEL);
+              }
+              reload();
+            },
           );
         };
 

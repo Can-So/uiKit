@@ -1,5 +1,15 @@
 # @atlaskit/renderer
 
+## 35.1.0
+- [minor] [be6313e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be6313e):
+
+  - ED-5477 Support rendering of inline code together with other marks
+
+## 35.0.5
+- [patch] [c5ee0c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c5ee0c8):
+
+  - Added Annotation mark to ADF, editor & renderer
+
 ## 35.0.4
 - [patch] [dfdfaf2](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dfdfaf2):
 

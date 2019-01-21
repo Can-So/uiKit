@@ -1,3 +1,4 @@
+import './ject_check';
 export * from './authProvider';
 export * from './contextProvider';
 export * from './fakeContextProvider';
@@ -14,7 +15,7 @@ export * from './mediaPickerAuthProvider';
 export * from './mocks';
 export * from './await-error';
 export * from './nextTick';
-export * from './asMock';
+export * from './jestHelpers';
 export * from './I18nWrapper';
 export * from './mountWithIntlContext';
 export * from './fakeI18n';

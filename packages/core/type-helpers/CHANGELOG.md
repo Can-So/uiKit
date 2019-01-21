@@ -1,5 +1,10 @@
 # @atlaskit/type-helpers
 
+## 2.1.0
+- [minor] [c3fa0b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c3fa0b6):
+
+  - Added support for props of Sum type
+
 ## 2.0.2
 - [patch] [b81da9b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b81da9b):
 

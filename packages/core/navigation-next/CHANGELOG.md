@@ -1,5 +1,10 @@
 # @atlaskit/navigation-next
 
+## 4.1.1
+- [patch] [81b12c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/81b12c5):
+
+  - Fixes GlobalNavigationSkeleton throwing TypeError when rendered in products with no globalNav theme
+
 ## 4.1.0
 - [minor] [86aaacd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/86aaacd):
 

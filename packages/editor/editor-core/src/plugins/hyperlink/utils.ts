@@ -70,37 +70,39 @@ export function normalizeUrl(url: string) {
   return (match && match.url) || url;
 }
 
-export function linkifyContent(schema: Schema, slice: Slice): Slice {
-  return mapSlice(slice, (node, parent) => {
-    const isAllowedInParent = !parent || parent.type !== schema.nodes.codeBlock;
-    if (isAllowedInParent && node.isText) {
-      const linkified = [] as Node[];
-      const link = node.type.schema.marks['link'];
-      const text = node.text!;
-      const matches: any[] = findLinkMatches(text);
-      let pos = 0;
-      matches.forEach(match => {
-        if (match.start > 0) {
-          linkified.push(node.cut(pos, match.start));
+export function linkifyContent(schema: Schema): (slice: Slice) => Slice {
+  return (slice: Slice): Slice =>
+    mapSlice(slice, (node, parent) => {
+      const isAllowedInParent =
+        !parent || parent.type !== schema.nodes.codeBlock;
+      if (isAllowedInParent && node.isText) {
+        const linkified = [] as Node[];
+        const link = node.type.schema.marks['link'];
+        const text = node.text!;
+        const matches: any[] = findLinkMatches(text);
+        let pos = 0;
+        matches.forEach(match => {
+          if (match.start > 0) {
+            linkified.push(node.cut(pos, match.start));
+          }
+          linkified.push(
+            node
+              .cut(match.start, match.end)
+              .mark(
+                link
+                  .create({ href: normalizeUrl(match.href) })
+                  .addToSet(node.marks),
+              ),
+          );
+          pos = match.end;
+        });
+        if (pos < text.length) {
+          linkified.push(node.cut(pos));
         }
-        linkified.push(
-          node
-            .cut(match.start, match.end)
-            .mark(
-              link
-                .create({ href: normalizeUrl(match.href) })
-                .addToSet(node.marks),
-            ),
-        );
-        pos = match.end;
-      });
-      if (pos < text.length) {
-        linkified.push(node.cut(pos));
+        return linkified;
       }
-      return linkified;
-    }
-    return node;
-  });
+      return node;
+    });
 }
 
 interface LinkMatch {

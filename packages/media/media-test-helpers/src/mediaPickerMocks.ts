@@ -3,12 +3,6 @@ import { Store } from 'react-redux';
 import { Observable } from 'rxjs/Observable';
 import { fakeContext } from './fakeContextProvider';
 
-if (typeof jest === 'undefined') {
-  // We need to do this since jest is not defined on browser integration tests
-  (global as any).jest = {
-    fn: () => ({ mockReturnValue() {} }),
-  };
-}
 export const mockState: State = {
   redirectUrl: 'some-redirect-url',
   view: {
@@ -38,7 +32,7 @@ export const mockState: State = {
     imageCardModels: [],
     totalResultCount: 100,
   },
-  onCancelUpload: jest.fn(),
+  onCancelUpload: global.jest.fn(),
   tenantContext: fakeContext(),
   userContext: fakeContext(),
   config: {},

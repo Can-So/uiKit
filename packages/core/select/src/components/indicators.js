@@ -18,6 +18,8 @@ export const DropdownIndicator = (props: any) => (
   </components.DropdownIndicator>
 );
 
-export const LoadingIndicator = ({ innerProps }: any) => {
-  return <Spinner size="small" {...innerProps} />;
-};
+export const LoadingIndicator = (props: any) => (
+  <div style={props.getStyles('loadingIndicator', props)} {...props.innerProps}>
+    <Spinner size="small" />
+  </div>
+);

@@ -25,6 +25,7 @@ import {
 } from '../fileState';
 import { fileStreamsCache } from '../context/fileStreamCache';
 import { getMediaTypeFromUploadableFile } from '../utils/getMediaTypeFromUploadableFile';
+import { convertBase64ToBlob } from '../utils/convertBase64ToBlob';
 
 const POLLING_INTERVAL = 1000;
 const maxNumberOfItemsPerCall = 100;
@@ -63,7 +64,30 @@ interface DataloaderKey {
 
 type DataloaderResult = MediaCollectionItemFullDetails | undefined;
 
-export class FileFetcher {
+export interface FileFetcher {
+  getFileState(id: string, options?: GetFileOptions): Observable<FileState>;
+  getArtifactURL(
+    artifacts: MediaFileArtifacts,
+    artifactName: keyof MediaFileArtifacts,
+    collectionName?: string,
+  ): Promise<string>;
+  touchFiles(
+    descriptors: TouchFileDescriptor[],
+    collection?: string,
+  ): Promise<TouchedFiles>;
+  upload(
+    file: UploadableFile,
+    controller?: UploadController,
+    uploadableFileUpfrontIds?: UploadableFileUpfrontIds,
+  ): Observable<FileState>;
+  downloadBinary(
+    id: string,
+    name?: string,
+    collectionName?: string,
+  ): Promise<void>;
+}
+
+export class FileFetcherImpl implements FileFetcher {
   private readonly dataloader: Dataloader<DataloaderKey, DataloaderResult>;
 
   constructor(private readonly mediaStore: MediaStore) {
@@ -76,7 +100,7 @@ export class FileFetcher {
   }
 
   // Returns an array of the same length as the keys filled with file items
-  batchLoadingFunc = async (keys: DataloaderKey[]) => {
+  private batchLoadingFunc = async (keys: DataloaderKey[]) => {
     const nonCollectionName = '__media-single-file-collection__';
     const fileIdsByCollection = keys.reduce(
       (prev, next) => {
@@ -111,7 +135,10 @@ export class FileFetcher {
     return getItemsFromKeys(keys, items);
   };
 
-  getFileState(id: string, options?: GetFileOptions): Observable<FileState> {
+  public getFileState(
+    id: string,
+    options?: GetFileOptions,
+  ): Observable<FileState> {
     if (!isValidId(id)) {
       return Observable.create((observer: Observer<FileState>) => {
         observer.error(`${id} is not a valid file id`);
@@ -130,7 +157,7 @@ export class FileFetcher {
     });
   }
 
-  getArtifactURL(
+  public getArtifactURL(
     artifacts: MediaFileArtifacts,
     artifactName: keyof MediaFileArtifacts,
     collectionName?: string,
@@ -178,7 +205,7 @@ export class FileFetcher {
     });
   };
 
-  touchFiles(
+  public touchFiles(
     descriptors: TouchFileDescriptor[],
     collection?: string,
   ): Promise<TouchedFiles> {
@@ -210,11 +237,15 @@ export class FileFetcher {
     };
   }
 
-  upload(
+  public upload(
     file: UploadableFile,
     controller?: UploadController,
     uploadableFileUpfrontIds?: UploadableFileUpfrontIds,
   ): Observable<FileState> {
+    if (typeof file.content === 'string') {
+      file.content = convertBase64ToBlob(file.content);
+    }
+
     const {
       content,
       name = '', // name property is not available in base64 image
@@ -244,6 +275,7 @@ export class FileFetcher {
         blob: content,
       };
     }
+
     const stateBase = {
       name,
       size,
@@ -284,10 +316,11 @@ export class FileFetcher {
       },
     );
 
+    fileStreamsCache.set(id, subject);
+
     // We should report progress asynchronously, since this is what consumer expects
     // (otherwise in newUploadService file-converting event will be emitted before files-added)
     setTimeout(() => {
-      fileStreamsCache.set(id, subject);
       onProgress(0);
     }, 0);
 
@@ -298,7 +331,7 @@ export class FileFetcher {
     return subject;
   }
 
-  async downloadBinary(
+  public async downloadBinary(
     id: string,
     name: string = 'download',
     collectionName?: string,

@@ -78,14 +78,10 @@ function getData(parentItem: ?Object) {
 const tableTreeHelper = new TableTreeDataHelper({ key: 'id' });
 
 export default class WithDifferentChildComponent extends Component<*, *> {
-  state = {
-    items: [],
-  };
-
+  state = { items: [] };
   componentDidMount() {
     this.loadTableData();
   }
-
   loadTableData = (parentItem: ?Object) => {
     if (parentItem && parentItem.childIds) {
       return;
@@ -97,7 +93,6 @@ export default class WithDifferentChildComponent extends Component<*, *> {
       });
     });
   };
-
   render() {
     const { items } = this.state;
     return (
@@ -115,10 +110,10 @@ export default class WithDifferentChildComponent extends Component<*, *> {
             page,
             hasChildren,
             children,
-            component: CutomComponent,
+            component: CustomComponent,
           }) =>
-            CutomComponent ? (
-              <CutomComponent
+            CustomComponent ? (
+              <CustomComponent
                 header="I am the header"
                 imageUrl={exampleImage}
               />
