@@ -1,0 +1,1 @@
+- Correcting attribute name in analytics event
