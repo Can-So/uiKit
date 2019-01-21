@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 96.0.1
+- [patch] [af85018](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af85018):
+
+  - ED-6064: always undo smart cards to links
+
 ## 96.0.0
 - Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
 - Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
