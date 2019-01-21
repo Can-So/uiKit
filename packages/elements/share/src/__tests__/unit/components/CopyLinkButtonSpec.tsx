@@ -5,6 +5,7 @@ import InlineDialog from '@atlaskit/inline-dialog';
 import CheckCircleIcon from '@atlaskit/icon/glyph/check-circle';
 import {
   CopyLinkButton,
+  NoPaddingButton,
   MessageContainer,
   HiddenInput,
 } from '../../../components/CopyLinkButton';
@@ -85,7 +86,7 @@ describe('CopyLinkButton', () => {
   });
 
   describe('handleClick', () => {
-    it('should copy the text from the HiddenInput and call onLinkCopy prop if given', () => {
+    it('should copy the text from the HiddenInput and call onLinkCopy prop if given when the user clicks on the button', () => {
       const spiedOnLinkCopy = jest.fn();
       const wrapper = mount<CopyLinkButton>(
         <CopyLinkButton onLinkCopy={spiedOnLinkCopy} shareLink={mockLink} />,
@@ -95,7 +96,7 @@ describe('CopyLinkButton', () => {
         wrapper.instance().inputRef.current,
         'select',
       );
-      wrapper.instance().handleClick();
+      wrapper.find(NoPaddingButton).simulate('click');
       expect(spiedInputSelect).toHaveBeenCalledTimes(1);
       expect(spiedExecCommand).toHaveBeenCalledTimes(1);
       expect(spiedOnLinkCopy).toHaveBeenCalledTimes(1);
