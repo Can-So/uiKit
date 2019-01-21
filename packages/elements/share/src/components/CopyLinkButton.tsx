@@ -38,7 +38,7 @@ type Props = {
   shareLink: string;
 };
 
-const NoPaddingButton = styled(Button)`
+export const NoPaddingButton = styled(Button)`
   padding: 0;
 `;
 
@@ -49,7 +49,7 @@ export class CopyLinkButton extends React.Component<Props> {
     shouldShowCopiedMessage: false,
   };
 
-  handleClick = () => {
+  private handleClick = () => {
     if (this.inputRef.current) {
       this.inputRef.current!.select();
     }
