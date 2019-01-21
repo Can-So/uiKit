@@ -552,7 +552,7 @@ describe('Card', () => {
     });
   });
 
-  it.only('should not fetch remote preview when file is processed and there is local preview', async () => {
+  it('should not fetch remote preview when file is processed and there is local preview', async () => {
     const context = createContextWithGetFile();
     setup(context);
 

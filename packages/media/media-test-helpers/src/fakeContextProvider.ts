@@ -2,12 +2,13 @@ import { of } from 'rxjs/observable/of';
 import { Context, ContextConfig } from '@atlaskit/media-core';
 
 const defaultContextConfig: ContextConfig = {
-  authProvider: () =>
+  authProvider: jest.fn().mockReturnValue(() =>
     Promise.resolve({
       clientId: 'some-client-id',
       token: 'some-token',
       baseUrl: 'some-service-host',
     }),
+  ),
 };
 export const fakeContext = (
   stubbedContext: any = {},

@@ -99,7 +99,7 @@ describe('<InlinePlayer />', () => {
     const { component } = setup({ context });
 
     await update(component);
-    console.log(component.debug());
+
     expect(component.find(CustomMediaPlayer).prop('src')).toEqual(
       'mock result of URL.createObjectURL()',
     );

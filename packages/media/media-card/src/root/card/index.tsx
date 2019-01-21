@@ -168,7 +168,7 @@ export class Card extends Component<CardProps, CardState> {
             dataURI = src;
             this.notifyStateChange({ dataURI, previewOrientation });
           }
-          // console.log(dataURI)
+
           switch (state.status) {
             case 'uploading':
               const { progress } = state;
