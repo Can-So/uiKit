@@ -35,6 +35,7 @@ type ResponseStatus = {
 type Recipient = RecipientWithId | RecipientWithEmail;
 
 type RecipientWithId = {
+  type: 'user' | 'group' | 'team';
   id: string;
 };
 
