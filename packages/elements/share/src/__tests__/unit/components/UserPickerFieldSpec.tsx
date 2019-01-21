@@ -3,8 +3,8 @@ import { ErrorMessage } from '@atlaskit/form';
 import UserPicker from '@atlaskit/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { REQUIRED, UserPickerField } from '../../components/UserPickerField';
-import { messages } from '../../i18n';
+import { REQUIRED, UserPickerField } from '../../../components/UserPickerField';
+import { messages } from '../../../i18n';
 import { renderProp } from '../_testUtils';
 
 describe('UserPickerField', () => {
