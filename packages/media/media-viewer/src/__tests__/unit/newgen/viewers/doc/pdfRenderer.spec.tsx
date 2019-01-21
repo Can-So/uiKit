@@ -5,6 +5,8 @@ import Button from '@atlaskit/button';
 import {
   PDFRenderer,
   pdfViewerClassName,
+  Props,
+  State,
 } from '../../../../../newgen/viewers/doc/pdfRenderer';
 import { ZoomControls } from '../../../../../newgen/zoomControls';
 import { Spinner } from '../../../../../newgen/loading';
@@ -22,7 +24,9 @@ function createFixture(documentPromise: Promise<any>) {
       firstPagePromise: new Promise(() => {}),
     };
   });
-  const el = mountWithIntlContext(<PDFRenderer src={''} onClose={onClose} />);
+  const el = mountWithIntlContext<Props, State>(
+    <PDFRenderer src={''} onClose={onClose} />,
+  );
   return { el, onClose };
 }
 

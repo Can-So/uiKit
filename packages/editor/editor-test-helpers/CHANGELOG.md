@@ -1,5 +1,13 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.11
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/editor-common@29.0.0
+  - @atlaskit/editor-core@96.0.0
+  - @atlaskit/media-test-helpers@19.0.0
+  - @atlaskit/media-core@26.1.0
+
 ## 6.3.10
 - [patch] [8158fe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8158fe0):
 
