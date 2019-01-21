@@ -1,1 +1,0 @@
-- Enable inline video player in Editor and Renderer
