@@ -1,3 +1,5 @@
 export * from './react/mediaEditor';
-export * from './react/toolbar';
+export { default as SmartMediaEditor } from './react/smartMediaEditor';
+export * from './react/editorView/editorView';
+export { default as EditorView } from './react/editorView/editorView';
 export * from './common';

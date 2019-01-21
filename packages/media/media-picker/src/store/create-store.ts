@@ -67,7 +67,7 @@ export default (
         getConnectedRemoteAccounts(fetcher) as Middleware,
         cancelUpload as Middleware,
         importFilesMiddleware(eventEmitter, wsProvider),
-        editRemoteImageMiddleware(fetcher) as Middleware,
+        editRemoteImageMiddleware() as Middleware,
         getPreviewMiddleware(),
         finalizeUploadMiddleware(fetcher),
         proxyUploadEvents as Middleware,

@@ -1,0 +1,1 @@
+- Implementation of MediaEditor is partially moved to media-editor
