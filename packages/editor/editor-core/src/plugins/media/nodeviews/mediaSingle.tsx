@@ -31,7 +31,7 @@ export interface MediaSingleNodeProps {
   getPos: () => number;
   lineLength: number;
   editorAppearance: EditorAppearance;
-  mediaProvider: Promise<MediaProvider>;
+  mediaProvider?: Promise<MediaProvider>;
 }
 
 export interface MediaSingleNodeState {
