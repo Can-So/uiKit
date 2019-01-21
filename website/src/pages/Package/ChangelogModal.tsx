@@ -182,7 +182,7 @@ export default class ExamplesModal extends React.Component<Props, State> {
     return (
       <Modal
         autoFocus
-        header={this.header}
+        components={{ Header: this.header }}
         height={600}
         onClose={this.close}
         width={640}

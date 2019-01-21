@@ -5,6 +5,7 @@ import fetchMock from 'fetch-mock';
 import EmojiAtlassianIcon from '@atlaskit/icon/glyph/emoji/atlassian';
 import Button from '@atlaskit/button';
 import { LayoutManager, NavigationProvider } from '@atlaskit/navigation-next';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
 
 import GlobalNavigation from '../src';
 
@@ -89,10 +90,23 @@ export default class GlobalNavigationWithNotificationIntegration extends Compone
       <NavigationProvider>
         <LayoutManager
           globalNavigation={() => (
-            <Global
-              updateIframeUrl={this.updateIframeUrl}
-              resetNotificationCount={this.resetNotificationCount}
-            />
+            <AnalyticsListener
+              channel="navigation"
+              onEvent={analyticsEvent => {
+                const { payload, context } = analyticsEvent;
+                const eventId = `${payload.actionSubject ||
+                  payload.name} ${payload.action || payload.eventType}`;
+                console.log(`Received event [${eventId}]: `, {
+                  payload,
+                  context,
+                });
+              }}
+            >
+              <Global
+                updateIframeUrl={this.updateIframeUrl}
+                resetNotificationCount={this.resetNotificationCount}
+              />
+            </AnalyticsListener>
           )}
           productNavigation={() => null}
           containerNavigation={() => null}

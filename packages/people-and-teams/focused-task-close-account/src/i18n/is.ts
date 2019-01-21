@@ -8,7 +8,8 @@ export default {
   'focused-task-close-account.previous': 'Fyrra',
   'focused-task-close-account.delete-account.overview.heading.self':
     'Þegar reikningnum þínum er eytt',
-  'focused-task-close-account.delete-account.overview.heading.admin': ' ',
+  'focused-task-close-account.delete-account.overview.heading.admin':
+    'Eyða reikningi',
   'focused-task-close-account.delete-account.overview.first.line.self':
     'Þú er við það að eyða reikningnum þínum:',
   'focused-task-close-account.delete-account.overview.first.line.admin':
@@ -16,9 +17,9 @@ export default {
   'focused-task-close-account.delete-account.overview.warning-section.body':
     'Eftir 14-daga greiðslufrest muntu ekki geta hætt við eyðingu reikningsins. Ef þú heldur að þú gætir þurft á honum að halda síðar, gerðu hann þá frekar óvirkan.',
   'focused-task-close-account.delete-account.overview.warning-section.deactivated.body':
-    ' ',
+    ' Eftir 14-daga greiðslufrest muntu ekki geta hætt við eyðingu reikningsins.',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.admin':
-    ' ',
+    'Þegar þú eyða reikningum:',
   'focused-task-close-account.delete-account.overview.paragraph.about-to-delete.self':
     'Þegar þú eyðir reikningum þínum:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin':
@@ -26,7 +27,7 @@ export default {
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self':
     'Þú munt <b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hefur þú aðgang að:',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.admin.noSites':
-    ' ',
+    '{fullName} mun <b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu.  Í augnablikinu hafa þeir aðgang að neinni þjónustu nema þjónustu eins og Community og Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.self.noSites':
     'Þú munt<b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hefur þú ekki aðgang að neinni þjónustu nema þjónustu eins og Community og Marketplace.',
   'focused-task-close-account.delete-account.overview.paragraph.loseAccess.footnote':
@@ -48,13 +49,13 @@ export default {
   'focused-task-close-account.delete-account.overview.paragraph.list-of-apps-with-personal-data.self':
     'Við munum senda þér lista með tölvupósti af forritum sem gætu hafa geymt persónuupplýsingarnar þínar. ',
   'focused-task-close-account.delete-account.overview.paragraph.grace-period.admin':
-    ' ',
+    ' Eftir 14-daga greiðslufrest muntu ekki geta hætt við eyðingu reikningsins.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.admin':
     'Við geymum persónuupplýsingar í takmarkaðan tíma þegar um lögleg fyrirtæki eða lagalegan tilgang er að ræða. Sum þessara tilvika eru:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.p1.self':
     'Við geymum persónuupplýsingar í takmarkaðan tíma þegar um lögleg fyrirtæki eða lagalegan tilgang er að ræða. Sum þessara tilvika eru:',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.admin':
-    ' ',
+    'Upplýsingar sem tengjast vörukaupum sem okkur er áskilið að geyma fyrir fjárhagslegar skýrslugerðir.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li1.self':
     'Upplýsingar sem tengjast vörukaupum sem okkur er áskilið að geyma fyrir fjárhagslegar skýrslugerðir.',
   'focused-task-close-account.delete-account.overview.inline-dialog.personal-data-will-be-deleted.li2.admin':
@@ -76,7 +77,41 @@ export default {
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.admin':
     'Þú og aðrir notendur gætuð hafa sett upp forrit sem bæta eiginleikum við Atlassian vörur. Þessi forrit gætu hafa geymt notendasíðuupplýsingar notandans.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
-    ' ',
+    'Þú og aðrir notendur gætuð hafa sett upp forrit sem bæta eiginleikum við Atlassian vörur. Þessi forrit gætu hafa geymt notendasíðuupplýsingar notandans.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Gera reikning óvirkan',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Gera reikning óvirkan',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    'Þú er við það að slökkva reikningi:',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    'Þú er við það að slökkva reikningi:',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'Þú getur endurvirkjað reikninginn hvenær sem er.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'Þú getur endurvirkjað reikninginn hvenær sem er.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'Þegar þú slökkva á reikningum:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'Þegar þú slökkva á reikningum:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} mun <b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hafa þeir aðgang að:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    'Þú munt <b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hefur þú aðgang að:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName} mun <b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu.  Í augnablikinu hafa þeir aðgang að neinni þjónustu nema þjónustu eins og Community og Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    'Þú munt<b>tafarlaust missa aðgang</b> að allri Atlassian reikningsþjónustu. Í augnablikinu hefur þú ekki aðgang að neinni þjónustu nema þjónustu eins og Community og Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Önnur Atlassian reikningsþjónusta, eins og Atlassian Community og Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    'Persónuleg gögn, svo sem fullt nafn og netfang, og innihaldið sem notandi hefur búið til mun vera áframhaldandi í Atlassian reikningsþjónustu.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    'Persónuleg gögn, svo sem fullt nafn og netfang, og innihaldið sem notandi hefur búið til mun vera áframhaldandi í Atlassian reikningsþjónustu.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'Við munum ekki rukka þig lengur fyrir þær.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'Við munum ekki rukka þig lengur fyrir þær.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Hvernig notendur munu sjá þennan reikning',
   'focused-task-close-account.delete-account.drop-down-expand-button':

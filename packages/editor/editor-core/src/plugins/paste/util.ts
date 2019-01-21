@@ -1,3 +1,5 @@
+import { Slice, Mark, Node, NodeType, Schema } from 'prosemirror-model';
+
 export function isPastedFromWord(html?: string): boolean {
   return !!html && html.indexOf('urn:schemas-microsoft-com:office:word') >= 0;
 }
@@ -98,4 +100,57 @@ export function escapeLinks(text) {
   return text.replace(/(\[([^\]]+)\]\()?((https?|ftp):\/\/[^\s]+)/g, str => {
     return str.match(/^(https?|ftp):\/\/[^\s]+$/) ? `<${str}>` : str;
   });
+}
+
+export function hasOnlyNodesOfType(
+  ...nodeTypes: NodeType[]
+): (slice: Slice) => boolean {
+  return (slice: Slice) => {
+    let hasOnlyNodesOfType = true;
+
+    slice.content.descendants((node: Node) => {
+      hasOnlyNodesOfType =
+        hasOnlyNodesOfType && nodeTypes.indexOf(node.type) > -1;
+
+      return hasOnlyNodesOfType;
+    });
+
+    return hasOnlyNodesOfType;
+  };
+}
+
+export function applyTextMarksToSlice(
+  schema: Schema,
+  marks?: Mark<any>[],
+): (slice: Slice) => Slice {
+  return (slice: Slice) => {
+    const {
+      marks: { code: codeMark, link: linkMark },
+    } = schema;
+
+    if (!Array.isArray(marks) || marks.length === 0) {
+      return slice;
+    }
+
+    const sliceCopy = Slice.fromJSON(schema, slice.toJSON() || {});
+
+    sliceCopy.content.descendants((node, pos, parent) => {
+      if (node.isText && parent && parent.isBlock) {
+        node.marks = [
+          ...((node.marks &&
+            !codeMark.isInSet(marks) &&
+            node.marks.filter(mark => mark.type === linkMark)) ||
+            []),
+          ...parent.type
+            .allowedMarks(marks)
+            .filter(mark => mark.type !== linkMark),
+        ];
+        return false;
+      }
+
+      return true;
+    });
+
+    return sliceCopy;
+  };
 }

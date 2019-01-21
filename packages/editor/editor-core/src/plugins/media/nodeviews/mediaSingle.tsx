@@ -18,6 +18,7 @@ import { createDisplayGrid } from '../../../plugins/grid';
 import { EventDispatcher } from '../../../event-dispatcher';
 import { MediaStateStatus, MediaProvider } from '../types';
 import { EditorAppearance } from '../../../types';
+import { browser } from '@atlaskit/editor-common';
 
 const DEFAULT_WIDTH = 250;
 const DEFAULT_HEIGHT = 200;
@@ -109,7 +110,7 @@ export default class MediaSingleNode extends Component<
     // We need to call "stopPropagation" here in order to prevent the browser from navigating to
     // another URL if the media node is wrapped in a link mark.
     event.stopPropagation();
-    setNodeSelection(this.props.view, this.props.getPos() + 1);
+    setNodeSelection(this.props.view, this.props.getPos());
   };
 
   updateSize = (width: number | null, layout: MediaSingleLayout) => {
@@ -223,7 +224,7 @@ export default class MediaSingleNode extends Component<
 }
 
 class MediaSingleNodeView extends ReactNodeView {
-  render(props, forwardRef) {
+  render() {
     const { eventDispatcher, editorAppearance } = this.reactComponentProps;
     const mediaPluginState = stateKey.getState(
       this.view.state,
@@ -250,7 +251,7 @@ class MediaSingleNodeView extends ReactNodeView {
                     getPos={this.getPos}
                     mediaProvider={mediaProvider}
                     view={this.view}
-                    selected={() => this.getPos() + 1 === reactNodeViewState}
+                    selected={() => this.getPos() === reactNodeViewState}
                     eventDispatcher={eventDispatcher}
                     editorAppearance={editorAppearance}
                   />
@@ -261,6 +262,16 @@ class MediaSingleNodeView extends ReactNodeView {
         }}
       />
     );
+  }
+
+  createDomRef() {
+    /**
+     * ED-5379 and https://github.com/ProseMirror/prosemirror/issues/884
+     *
+     * Workaround a Chrome bug where selecting the middle nodes of sequential leaf nodes
+     * doesn't create copy events.
+     */
+    return document.createElement(browser.chrome ? 'object' : 'div');
   }
 }
 

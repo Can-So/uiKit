@@ -78,6 +78,40 @@ export default {
     'Vy alebo iní používatelia môžete mať nainštalované aplikácie, ktoré pridávajú funkcie do produktov spoločnosti Atlassian. Tieto aplikácie môžu ukladať informácie o profile používateľa.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Vy alebo iní používatelia môžete mať nainštalované aplikácie, ktoré pridávajú funkcie do produktov spoločnosti Atlassian. Tieto aplikácie môžu ukladať informácie o vašom profile.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Deaktivácia konta',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Deaktivácia konta',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    'Chystáte sa deaktivovať používateľské konto:',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    'Chystáte sa deaktivovať používateľské konto:',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'Konto môžete kedykoľvek znovu aktivovať.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'Konto môžete kedykoľvek znovu aktivovať.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'Po deaktivácii konta:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'Po deaktivácii konta:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    'Používateľ {fullName} <b>okamžite stratí prístup</b> k všetkým službám konta Atlassian. Momentálne má prístup k:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    '<b>Okamžite stratíte prístup</b> k všetkým službám konta Atlassian. Momentálne máte prístup k:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    'Používateľ {fullName} <b>okamžite stratí prístup</b> k všetkým službám konta Atlassian. Momentálne nemá prístup k žiadnym službám, okrem služieb typu Komunita a Obchod.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    '<b>Okamžite stratíte prístup</b> k všetkým službám konta Atlassian. Momentálne nemáte prístup k žiadnym službám, okrem služieb typu Komunita a Obchod.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Ďalšie služby konta Atlassian, ako napríklad Komunita Atlassian a Obchod.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    'Osobné údaje, ako napríklad celé meno a e-mailová adresa, a obsah, ktorý vytvorili, ostane v službách konta Atlassian.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    'Osobné údaje, ako napríklad celé meno a e-mailová adresa, a obsah, ktorý vytvorili, ostane v službách konta Atlassian.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'Túto položku vám už nebudeme účtovať.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'Túto položku vám už nebudeme účtovať.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Ako používatelia uvidia toto konto',
   'focused-task-close-account.delete-account.drop-down-expand-button':

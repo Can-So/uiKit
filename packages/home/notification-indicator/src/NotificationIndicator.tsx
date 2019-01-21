@@ -5,6 +5,7 @@ import Badge from '@atlaskit/badge';
 import { NotificationLogProvider } from '@atlaskit/notification-log-client';
 
 const MAX_NOTIFICATIONS_COUNT: number = 9;
+const NAVIGATION_CHANNEL = 'navigation';
 
 export interface ValueUpdatingParams {
   source: string;
@@ -31,13 +32,14 @@ export interface Props {
   refreshOnVisibilityChange?: boolean;
   onCountUpdating?: (param: ValueUpdatingParams) => ValueUpdatingResult;
   onCountUpdated?: (param: ValueUpdatedParams) => void;
+  createAnalyticsEvent?: any;
 }
 
 export interface State {
   count: number | null;
 }
 
-export default class NotificationIndicator extends Component<Props, State> {
+class NotificationIndicator extends Component<Props, State> {
   private intervalId?: number;
   private visibilityChangesSinceTimer: number = 0;
   private notificationLogProvider?: NotificationLogProvider;
@@ -100,6 +102,38 @@ export default class NotificationIndicator extends Component<Props, State> {
     this.refresh('timer');
   };
 
+  private handleAnalytics = countUpdateProperties => {
+    const { newCount, oldCount, source } = countUpdateProperties;
+
+    // Only fire an 'activating' analytics event if the notification indicator is 'activating' for the first time
+    // ie going from a number of 0 (the indicator is not visible)
+    // to a number > 0 (the indicator becomes visible)
+    if (this.props.createAnalyticsEvent && newCount > 0 && oldCount === 0) {
+      const event = this.props.createAnalyticsEvent({
+        name: 'notificationIndicator',
+        action: 'activated',
+        attributes: {
+          badgeCount: newCount,
+          refreshSource: source,
+        },
+      });
+      event.fire(NAVIGATION_CHANNEL);
+    }
+
+    if (this.props.createAnalyticsEvent && newCount !== oldCount) {
+      const event = this.props.createAnalyticsEvent({
+        name: 'notificationIndicator',
+        action: 'updated',
+        attributes: {
+          oldCount: oldCount,
+          newCount: newCount,
+          refreshSource: source,
+        },
+      });
+      event.fire(NAVIGATION_CHANNEL);
+    }
+  };
+
   private refresh = async source => {
     // Provider should be available by this point, if not, we exit.
     if (!this.notificationLogProvider) {
@@ -129,21 +163,25 @@ export default class NotificationIndicator extends Component<Props, State> {
         updatingResult.countOverride ||
         (await this.notificationLogProvider.countUnseenNotifications({
           queryParams: {
-            currentCount: this.state.count,
+            currentCount: this.state.count || 0,
           },
         })).count;
 
-      if (
-        this.props.onCountUpdated &&
-        (this.state.count === null || this.state.count !== count)
-      ) {
-        this.props.onCountUpdated({
+      if (this.state.count === null || this.state.count !== count) {
+        const countUpdateProperties = {
           oldCount: this.state.count || 0,
           newCount: count,
           source,
-        });
+        };
+
+        this.handleAnalytics(countUpdateProperties);
+
+        if (this.props.onCountUpdated) {
+          this.props.onCountUpdated(countUpdateProperties);
+        }
+
+        this.setState({ count });
       }
-      this.setState({ count });
     } catch (e) {
       // Do nothing
     }
@@ -161,3 +199,5 @@ export default class NotificationIndicator extends Component<Props, State> {
     ) : null;
   }
 }
+
+export default NotificationIndicator;

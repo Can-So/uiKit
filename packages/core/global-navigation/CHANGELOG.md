@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.5.1
+- [patch] [a4b0717](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4b0717):
+
+  - Updated analytics events triggered by the notification-indicator
+
 ## 5.5.0
 - [minor] [52224f1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52224f1):
 

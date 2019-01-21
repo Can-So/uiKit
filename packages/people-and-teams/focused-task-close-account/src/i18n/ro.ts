@@ -78,6 +78,40 @@ export default {
     'Dvs. sau alți utilizatori ați instalat aplicații care adaugă funcții produselor Atlassian. Este posibil ca aceste aplicații să fi stocat informații privind profilul utilizatorului.',
   'focused-task-close-account.delete-account.overview.inline-dialog.data-apps.self':
     'Dvs. sau alți utilizatori ați instalat aplicații care adaugă funcții produselor Atlassian. Este posibil ca aceste aplicații să fi stocat informații privind profilul dvs.',
+  'focused-task-close-account.deactivate-account.overview.heading.self':
+    'Dezactivare cont',
+  'focused-task-close-account.deactivate-account.overview.heading.admin':
+    'Dezactivare cont',
+  'focused-task-close-account.deactivate-account.overview.first.line.self':
+    'Urmează să dezactivați contul de utilizator al lui:',
+  'focused-task-close-account.deactivate-account.overview.first.line.admin':
+    'Urmează să dezactivați contul de utilizator al lui:',
+  'focused-task-close-account.deactivate-account.overview.last.line.self':
+    'Puteți reactiva contul oricând.',
+  'focused-task-close-account.deactivate-account.overview.last.line.admin':
+    'Puteți reactiva contul oricând.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.admin':
+    'Când dezactivați contul:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.about-to-deactivate.self':
+    'Când dezactivați contul:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin':
+    '{fullName} va <b>pierde imediat accesul</b> la toate serviciile din contul Atlassian. În acest moment, persoana are acces la:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self':
+    'Veți <b>pierde imediat accesul</b> la toate serviciile din contul Altassian. În acest moment, aveți acces la:',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.admin.noSites':
+    '{fullName} va <b>pierde imediat accesul</b> la toate serviciile din contul Atlassian. În acest moment, persoana nu are acces la niciun serviciu, cu excepția Comunitate și Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.self.noSites':
+    'Veți <b>pierde imediat accesul</b> la toate serviciile din contul Altassian. În acest moment, nu aveți acces la niciun serviciu, cu excepția Comunitate și Marketplace.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.loseAccess.footnote':
+    'Alte servicii din contul Atlassian, precum Comunitate și Marketplace Atlassian.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.admin':
+    'Datele cu caracter personal, precum numele complet și adresa de e-mail, și conținutul creat vor rămâne în serviciile de cont Atlassian.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.personal-data.self':
+    'Datele cu caracter personal, precum numele complet și adresa de e-mail, și conținutul creat vor rămâne în serviciile de cont Atlassian.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.admin':
+    'Nu veți mai fi tarifat pentru aceste conturi.',
+  'focused-task-close-account.deactivate-account.overview.paragraph.billing.self':
+    'Nu veți mai fi tarifat pentru aceste conturi.',
   'focused-task-close-account.delete-account.content-preview.heading':
     'Modul în care utilizatorii vor vizualiza contul',
   'focused-task-close-account.delete-account.drop-down-expand-button':

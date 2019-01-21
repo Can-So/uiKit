@@ -29,6 +29,7 @@ import {
   tableMarginTop,
   akEditorSmallZIndex,
   gridMediumMaxWidth,
+  codeMarkSharedStyles,
 } from '@atlaskit/editor-common';
 import { RendererAppearance } from './';
 import { RendererCssClassName } from '../../consts';
@@ -107,7 +108,8 @@ export const Wrapper = styled.div < Props & HTMLAttributes < {} >> `
   ${ruleSharedStyles};
   ${paragraphSharedStyles};
   ${indentationSharedStyles};
-  ${blockMarksSharedStyles}
+  ${blockMarksSharedStyles};
+  ${codeMarkSharedStyles};
 
   & .UnknownBlock {
     font-family: ${fontFamily()};
