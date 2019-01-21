@@ -2,7 +2,7 @@ import { getObjectUrlFromFileState } from '../../../../newgen/utils/getObjectUrl
 import { FileState } from '@atlaskit/media-core';
 
 describe('getObjectUrlFromFileState()', () => {
-  it('should return an objectUrl if there is available preview in the state', () => {
+  it('should return an objectUrl if there is available preview in the state', async () => {
     const fileState: FileState = {
       status: 'processing',
       name: '',
@@ -15,12 +15,12 @@ describe('getObjectUrlFromFileState()', () => {
       },
     };
 
-    expect(getObjectUrlFromFileState(fileState)).toEqual(
+    expect(await getObjectUrlFromFileState(fileState)).toEqual(
       'mock result of URL.createObjectURL()',
     );
   });
 
-  it('should return undefined if preview is not available', () => {
+  it('should return undefined if preview is not available', async () => {
     const errorState: FileState = {
       status: 'error',
       id: '',
@@ -35,7 +35,7 @@ describe('getObjectUrlFromFileState()', () => {
       size: 1,
     };
 
-    expect(getObjectUrlFromFileState(errorState)).toBeUndefined();
-    expect(getObjectUrlFromFileState(processedState)).toBeUndefined();
+    expect(await getObjectUrlFromFileState(errorState)).toBeUndefined();
+    expect(await getObjectUrlFromFileState(processedState)).toBeUndefined();
   });
 });

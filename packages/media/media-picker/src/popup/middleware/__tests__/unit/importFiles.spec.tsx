@@ -472,7 +472,7 @@ describe('importFiles middleware', () => {
         });
       });
 
-      it('should touch non local files', done => {
+      it('should touch all files to import', done => {
         const { eventEmitter, mockWsProvider, store, nextDispatch } = setup();
 
         importFilesMiddleware(eventEmitter, mockWsProvider)(store)(
@@ -484,6 +484,16 @@ describe('importFiles middleware', () => {
           expect(tenantContext.file.touchFiles).toBeCalledTimes(1);
           expect(tenantContext.file.touchFiles).toBeCalledWith(
             [
+              {
+                collection: 'tenant-collection',
+                fileId: expectUUID,
+                occurrenceKey: 'occurrence-key-1',
+              },
+              {
+                collection: 'tenant-collection',
+                fileId: expectUUID,
+                occurrenceKey: 'occurrence-key-3',
+              },
               {
                 collection: 'tenant-collection',
                 fileId: expectUUID,

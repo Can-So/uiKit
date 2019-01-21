@@ -1,7 +1,6 @@
 import { State } from '@atlaskit/media-picker/src/popup/domain';
 import { Store } from 'react-redux';
 import { Observable } from 'rxjs/Observable';
-import { ContextFactory } from '@atlaskit/media-core';
 import { fakeContext } from './fakeContextProvider';
 
 if (typeof jest === 'undefined') {
@@ -41,9 +40,7 @@ export const mockState: State = {
   },
   onCancelUpload: jest.fn(),
   tenantContext: fakeContext(),
-  userContext: ContextFactory.create({
-    authProvider: jest.fn(),
-  }),
+  userContext: fakeContext(),
   config: {},
   deferredIdUpfronts: {},
 };

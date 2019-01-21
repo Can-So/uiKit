@@ -19,7 +19,10 @@ import { CardView } from '../../../src/root/cardView';
 import { Card } from '../../../src/root/card';
 
 import { LazyContent } from '../../../src/utils/lazyContent';
-import { getDataURIFromFileState } from '../../../src/utils/getDataURIFromFileState';
+import {
+  getDataURIFromFileState,
+  FilePreview,
+} from '../../../src/utils/getDataURIFromFileState';
 import { ExternalImageIdentifier } from '../../root';
 import { InlinePlayer } from '../../../src/root/inlinePlayer';
 
@@ -37,12 +40,10 @@ describe('Card', () => {
   const setup = (
     context: Context = fakeContext(),
     props?: Partial<CardProps>,
+    filePreview: FilePreview = { src: 'some-data-uri', orientation: 6 },
   ) => {
     (getDataURIFromFileState as any).mockReset();
-    (getDataURIFromFileState as any).mockReturnValue({
-      src: 'some-data-uri',
-      orientation: 6,
-    });
+    (getDataURIFromFileState as any).mockReturnValue(filePreview);
     const component = shallow(
       <Card
         context={context}
@@ -71,6 +72,7 @@ describe('Card', () => {
         }),
       },
     });
+  const emptyPreview: FilePreview = { src: undefined };
 
   it('should use the new context to create the subscription when context prop changes', async () => {
     const firstContext = fakeContext({});
@@ -97,10 +99,14 @@ describe('Card', () => {
       width: 1000,
     };
     const context = createContextWithGetFile();
-    const { component } = setup(context, {
-      identifier: fileIdentifier,
-      dimensions: initialDimensions,
-    });
+    const { component } = setup(
+      context,
+      {
+        identifier: fileIdentifier,
+        dimensions: initialDimensions,
+      },
+      emptyPreview,
+    );
     component.setProps({ context, dimensions: newDimensions });
 
     await nextTick();
@@ -124,10 +130,14 @@ describe('Card', () => {
       height: 2000,
     };
     const context = createContextWithGetFile();
-    const { component } = setup(context, {
-      identifier: fileIdentifier,
-      dimensions: initialDimensions,
-    });
+    const { component } = setup(
+      context,
+      {
+        identifier: fileIdentifier,
+        dimensions: initialDimensions,
+      },
+      emptyPreview,
+    );
     component.setProps({ context, dimensions: newDimensions });
 
     await nextTick();
@@ -150,11 +160,17 @@ describe('Card', () => {
       ...initialDimensions,
       width: 10,
     };
-    const context = createContextWithGetFile();
-    const { component } = setup(context, {
-      identifier: fileIdentifier,
-      dimensions: initialDimensions,
+    const context = createContextWithGetFile({
+      preview: undefined,
     });
+    const { component } = setup(
+      context,
+      {
+        identifier: fileIdentifier,
+        dimensions: initialDimensions,
+      },
+      emptyPreview,
+    );
     component.setProps({ context, dimensions: newDimensions });
 
     await nextTick();
@@ -171,10 +187,14 @@ describe('Card', () => {
       height: 20,
     };
     const context = createContextWithGetFile();
-    const { component } = setup(context, {
-      identifier: fileIdentifier,
-      dimensions: initialDimensions,
-    });
+    const { component } = setup(
+      context,
+      {
+        identifier: fileIdentifier,
+        dimensions: initialDimensions,
+      },
+      emptyPreview,
+    );
     component.setProps({ context, dimensions: newDimensions });
 
     await nextTick();
@@ -445,8 +465,10 @@ describe('Card', () => {
 
   it('should set right state when file is processed', async () => {
     const context = createContextWithGetFile();
-
-    const { component } = setup(context);
+    const { component } = setup(context, undefined, {
+      src: undefined,
+      orientation: 6,
+    });
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();
@@ -512,9 +534,9 @@ describe('Card', () => {
     expect(component.find(CardView).prop('status')).toEqual('error');
   });
 
-  it('should fetch remote preview when file is processed', async () => {
+  it('should fetch remote preview when file is processed and there is no local preview', async () => {
     const context = createContextWithGetFile();
-    setup(context);
+    setup(context, undefined, emptyPreview);
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();
@@ -530,11 +552,26 @@ describe('Card', () => {
     });
   });
 
+  it.only('should not fetch remote preview when file is processed and there is local preview', async () => {
+    const context = createContextWithGetFile();
+    setup(context);
+
+    // we need to wait for 2 promises: fetch metadata + fetch preview
+    await nextTick();
+    await nextTick();
+
+    expect(context.getImage).toHaveBeenCalledTimes(0);
+  });
+
   it('should pass resize mode down to getImage call', async () => {
     const context = createContextWithGetFile();
-    setup(context, {
-      resizeMode: 'full-fit',
-    });
+    setup(
+      context,
+      {
+        resizeMode: 'full-fit',
+      },
+      emptyPreview,
+    );
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();
@@ -550,9 +587,13 @@ describe('Card', () => {
 
   it('should change mode from stretchy-fit to full-fit while passing down to getImage call', async () => {
     const context = createContextWithGetFile();
-    setup(context, {
-      resizeMode: 'stretchy-fit',
-    });
+    setup(
+      context,
+      {
+        resizeMode: 'stretchy-fit',
+      },
+      emptyPreview,
+    );
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();
@@ -568,14 +609,17 @@ describe('Card', () => {
 
   it('should render CardView with expected props', async () => {
     const context = createContextWithGetFile();
-
-    const { component } = setup(context, {
-      dimensions: { width: 10, height: 20 },
-      selectable: true,
-      selected: true,
-      resizeMode: 'fit',
-      disableOverlay: true,
-    });
+    const { component } = setup(
+      context,
+      {
+        dimensions: { width: 10, height: 20 },
+        selectable: true,
+        selected: true,
+        resizeMode: 'fit',
+        disableOverlay: true,
+      },
+      emptyPreview,
+    );
 
     // we need to wait for 2 promises: fetch metadata + fetch preview
     await nextTick();

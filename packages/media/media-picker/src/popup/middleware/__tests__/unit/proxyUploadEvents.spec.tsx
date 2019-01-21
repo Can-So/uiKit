@@ -73,14 +73,14 @@ describe('proxyUploadEvents middleware', () => {
       uploadId: firstUploadId,
       file: originalEvent.data.file,
       source,
-      replaceFileId: upfrontId,
+      replaceFileId: firstUploadId,
     });
     expect(calls[1][0]).toEqual({
       type: FINALIZE_UPLOAD,
       uploadId: secondUploadId,
       file: originalEvent.data.file,
       source,
-      replaceFileId: upfrontId,
+      replaceFileId: secondUploadId,
     });
   });
 });
