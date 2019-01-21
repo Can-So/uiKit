@@ -126,13 +126,12 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
           nodeAtSelection &&
           nodeAtSelection.type === state.schema.nodes.status
         ) {
-          const resolvedPos = state.doc.resolve(tr.selection.from);
           const delayedNodeRendering = () => {
             return document.createTextNode(ZWSP);
           };
 
           const decoration = Decoration.widget(
-            resolvedPos.pos,
+            tr.selection.from,
             delayedNodeRendering,
             {
               side: 1,
