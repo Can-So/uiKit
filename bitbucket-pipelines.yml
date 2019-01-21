@@ -1,5 +1,5 @@
 # Note: This image can be found in build/pipelines/docker-image
-image: atlassianlabs/atlaskit-mk-2:1.0.7
+image: atlassianlabs/atlaskit-mk-2:1.0.6
 # This ensures we do a full clone on each build which prevents issues when cross referencing
 # changesets and releases
 clone:
@@ -115,7 +115,7 @@ pipelines:
               - set -o pipefail # make sure we fail if the deployment fails
               # we pipe the output to stdout AND deploy-log.txt so that we can read the live url
               - yarn deploy:staging | tee deploy-log.txt
-              - cat deploy-log.txt | grep "Live Draft Url:" | sed -e "s/Live Draft Url..//" > netlify-link.txt
+              - cat deploy-log.txt | grep "URL:" | sed "s/Live Draft Url..//gi" > netlify-link.txt
               - echo "Uploading netlify build link to s3 so that we can fetch at the end..."
               - node ../build/ci-scripts/upload.build.artefact.for.commit.js netlify-link.txt
             caches:
@@ -155,7 +155,7 @@ pipelines:
             - yarn build:copy
             - set -o pipefail
             - yarn deploy:staging | tee deploy-log.txt
-            - cat deploy-log.txt | grep "Live Draft Url:" | sed -e "s/Live Draft Url..//" > netlify-link.txt
+            - cat deploy-log.txt | grep "URL:" | sed "s/Live Draft Url..//gi" > netlify-link.txt
             - echo "Uploading netlify build link to s3 so that we can fetch at the end..."
             - node ../build/ci-scripts/upload.build.artefact.for.commit.js netlify-link.txt
           caches:
