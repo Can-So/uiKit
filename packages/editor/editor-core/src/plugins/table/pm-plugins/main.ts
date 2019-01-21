@@ -236,14 +236,15 @@ export const createPlugin = (
         // ED-6069: workaround for Chrome given a regression introduced in prosemirror-view@1.6.8
         // Returning true prevents that updateSelection() is getting called in the commit below:
         // @see https://github.com/ProseMirror/prosemirror-view/commit/33fe4a8b01584f6b4103c279033dcd33e8047b95
-        if (
-          browser.chrome &&
-          event.target &&
-          (event.target as HTMLElement).classList.contains(
-            ClassName.CONTROLS_BUTTON,
-          )
-        ) {
-          return true;
+        if (browser.chrome && event.target) {
+          const targetClassList = (event.target as HTMLElement).classList;
+
+          if (
+            targetClassList.contains(ClassName.CONTROLS_BUTTON) ||
+            targetClassList.contains(ClassName.CONTEXTUAL_MENU_BUTTON)
+          ) {
+            return true;
+          }
         }
 
         return false;

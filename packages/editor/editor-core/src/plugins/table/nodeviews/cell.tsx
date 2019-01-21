@@ -65,8 +65,9 @@ class Cell extends React.Component<CellProps & InjectedIntlProps> {
     return (
       <div className={ClassName.CELL_NODEVIEW_WRAPPER} ref={forwardRef}>
         {withCursor && !disabled && appearance !== 'mobile' && (
-          <div className={ClassName.CONTEXTUAL_MENU_BUTTON}>
+          <div className={ClassName.CONTEXTUAL_MENU_BUTTON_WRAP}>
             <ToolbarButton
+              className={ClassName.CONTEXTUAL_MENU_BUTTON}
               disabled={isResizing}
               selected={isContextualMenuOpen}
               title={labelCellOptions}
