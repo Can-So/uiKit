@@ -1,4 +1,5 @@
 import * as React from 'react';
+import LazyRender from 'react-lazily-render';
 import {
   CardLinkView,
   BlockCardResolvingView,
@@ -191,69 +192,84 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
     authFn,
   } = props;
   return (
-    <WithObject
-      client={client}
-      url={url}
-      isSelected={isSelected}
-      appearance={appearance}
-      createAnalyticsEvent={createAnalyticsEvent}
-    >
-      {({ state, reload }) => {
-        // TODO: support multiple auth services
-        const firstAuthService =
-          (state as DefinedState).services &&
-          (state as DefinedState).services[0];
+    <LazyRender
+      offset={100}
+      component={appearance === 'inline' ? 'span' : 'div'}
+      placeholder={
+        <CardLinkView key={'lazy-render-placeholder'} text={url}>
+          {url}
+        </CardLinkView>
+      }
+      content={
+        <WithObject
+          client={client}
+          url={url}
+          isSelected={isSelected}
+          appearance={appearance}
+          createAnalyticsEvent={createAnalyticsEvent}
+        >
+          {({ state, reload }) => {
+            // TODO: support multiple auth services
+            const firstAuthService =
+              (state as DefinedState).services &&
+              (state as DefinedState).services[0];
 
-        const handleAuthorise = () => {
-          authFn(firstAuthService.startAuthUrl).then(
-            () => {
-              if (createAnalyticsEvent) {
-                createAnalyticsEvent(
-                  trackAppAccountConnected((state as any).definitionId),
-                ).fire(ANALYTICS_CHANNEL);
-                createAnalyticsEvent(connectSucceededEvent(url, state)).fire(
-                  ANALYTICS_CHANNEL,
-                );
-              }
-              reload();
-            },
-            (err: Error) => {
-              if (createAnalyticsEvent) {
-                createAnalyticsEvent(
-                  // Yes, dirty, but we had a ticket for that
-                  err.message === 'The auth window was closed'
-                    ? connectFailedEvent('auth.window.was.closed', url, state)
-                    : connectFailedEvent(
-                        'potential.sensitive.data',
-                        url,
-                        state,
-                      ),
-                ).fire(ANALYTICS_CHANNEL);
-              }
-              reload();
-            },
-          );
-        };
+            const handleAuthorise = () => {
+              authFn(firstAuthService.startAuthUrl).then(
+                () => {
+                  if (createAnalyticsEvent) {
+                    createAnalyticsEvent(
+                      trackAppAccountConnected((state as any).definitionId),
+                    ).fire(ANALYTICS_CHANNEL);
+                    createAnalyticsEvent(
+                      connectSucceededEvent(url, state),
+                    ).fire(ANALYTICS_CHANNEL);
+                  }
+                  reload();
+                },
+                (err: Error) => {
+                  if (createAnalyticsEvent) {
+                    createAnalyticsEvent(
+                      // Yes, dirty, but we had a ticket for that
+                      err.message === 'The auth window was closed'
+                        ? connectFailedEvent(
+                            'auth.window.was.closed',
+                            url,
+                            state,
+                          )
+                        : connectFailedEvent(
+                            'potential.sensitive.data',
+                            url,
+                            state,
+                          ),
+                    ).fire(ANALYTICS_CHANNEL);
+                  }
+                  reload();
+                },
+              );
+            };
 
-        if (appearance === 'inline') {
-          return renderInlineCard(
-            url,
-            state,
-            firstAuthService ? handleAuthorise : undefined,
-            () => (onClick ? onClick() : window.open(url)),
-            isSelected,
-          );
-        }
+            if (appearance === 'inline') {
+              return renderInlineCard(
+                url,
+                state,
+                firstAuthService ? handleAuthorise : undefined,
+                () => (onClick ? onClick() : window.open(url)),
+                isSelected,
+              );
+            }
 
-        return renderBlockCard(
-          url,
-          state,
-          firstAuthService ? handleAuthorise : undefined,
-          reload,
-          () => (onClick ? onClick() : window.open(url)),
-          isSelected,
-        );
-      }}
-    </WithObject>
+            return renderBlockCard(
+              url,
+              state,
+              firstAuthService ? handleAuthorise : undefined,
+              reload,
+              () => (onClick ? onClick() : window.open(url)),
+              isSelected,
+            );
+          }}
+        </WithObject>
+      }
+    />
   );
 }
