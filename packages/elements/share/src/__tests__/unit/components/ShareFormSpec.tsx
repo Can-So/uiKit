@@ -18,7 +18,7 @@ describe('ShareForm', () => {
     const onShareClick = jest.fn();
     const component = shallow(
       <ShareForm
-        shareLink={mockLink}
+        copyLink={mockLink}
         loadOptions={loadOptions}
         onShareClick={onShareClick}
         title="some title"
@@ -51,7 +51,7 @@ describe('ShareForm', () => {
     });
     const copyLinkButton = footer.find(CopyLinkButton);
     expect(copyLinkButton.length).toBe(1);
-    expect(copyLinkButton.prop('shareLink')).toEqual(mockLink);
+    expect(copyLinkButton.prop('link')).toEqual(mockLink);
 
     const buttonLabel = button.find(FormattedMessage);
     expect(buttonLabel).toHaveLength(1);
@@ -63,7 +63,7 @@ describe('ShareForm', () => {
     const loadOptions = jest.fn();
     const component = shallow(
       <ShareForm
-        shareLink={mockLink}
+        copyLink={mockLink}
         loadOptions={loadOptions}
         submitButtonLabel="Invite"
       />,
