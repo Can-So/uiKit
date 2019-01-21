@@ -32,7 +32,7 @@ export interface Range {
  * Check if current editor selections is a media group or not.
  * @param state Editor state
  */
-function isSelectionMediaGroup(state: EditorState) {
+function isSelectionMediaGroup(state: EditorState): boolean {
   const { schema } = state;
   const selectionParent = state.selection.$anchor.node();
 
@@ -44,7 +44,10 @@ function isSelectionMediaGroup(state: EditorState) {
  * @param state Editor state
  * @param mediaNodes Media nodes to be inserted
  */
-function grandParentAcceptMediaGroup(state: EditorState, mediaNodes: PMNode[]) {
+function grandParentAcceptMediaGroup(
+  state: EditorState,
+  mediaNodes: PMNode[],
+): boolean {
   const grandParent = state.selection.$from.node(-1);
 
   return (
@@ -66,7 +69,7 @@ function grandParentAcceptMediaGroup(state: EditorState, mediaNodes: PMNode[]) {
 function shouldAppendParagraph(
   node: PMNode | null | undefined,
   state: EditorState,
-) {
+): boolean {
   const {
     schema: {
       nodes: { media },
@@ -115,10 +118,10 @@ export const insertMediaGroupNode = (
   const shouldSplit =
     !isSelectionMediaGroup(state) &&
     grandParentAcceptMediaGroup(state, mediaNodes);
-  const appendParagraph = shouldAppendParagraph(nodeAtInsertionPoint, state);
+  const withParagraph = shouldAppendParagraph(nodeAtInsertionPoint, state);
 
   if (shouldSplit) {
-    const content: PMNode[] = appendParagraph
+    const content: PMNode[] = withParagraph
       ? mediaNodes.concat(paragraph.create())
       : mediaNodes;
 
@@ -148,7 +151,7 @@ export const insertMediaGroupNode = (
       : [schema.nodes.mediaGroup.createChecked({}, mediaNodes)];
 
   // Don't append new paragraph when adding media to a existing mediaGroup
-  if (appendParagraph && parent.type !== schema.nodes.mediaGroup) {
+  if (withParagraph && parent.type !== schema.nodes.mediaGroup) {
     content.push(paragraph.create());
   }
 
