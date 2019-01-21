@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 96.0.2
+- [patch] [4e764a26d4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e764a26d4):
+
+  - ED-6070: Don't render proper mediaCard on mobile until we have a valid collection
+
 ## 96.0.1
 - [patch] [af85018](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af85018):
 

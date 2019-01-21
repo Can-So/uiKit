@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.7.3
+- [patch] [4e764a26d4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e764a26d4):
+
+  - ED-6070: Don't render proper mediaCard on mobile until we have a valid collection
+
 ## 6.7.2
 - Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
   - @atlaskit/editor-common@29.0.0
