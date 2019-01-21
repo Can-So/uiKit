@@ -1,29 +1,30 @@
 // tslint:disable-next-line no-implicit-dependencies
-import * as React from 'react';
-import { mount } from 'enzyme';
 import {
-  UI_EVENT_TYPE,
+  GasPurePayload,
   OPERATIONAL_EVENT_TYPE,
+  UI_EVENT_TYPE,
 } from '@atlaskit/analytics-gas-types';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { mount } from 'enzyme';
 import * as cases from 'jest-in-case';
-
-import NavigationListener from '../../../navigation/NavigationListener';
-import { AnalyticsListener, AnalyticsContext } from '@atlaskit/analytics-next';
-import { AnalyticsWebClient, FabricChannel } from '../../../types';
+import * as React from 'react';
 import { createButtonWithAnalytics } from '../../../../examples/helpers';
+import Logger from '../../../helpers/logger';
+import NavigationListener from '../../../navigation/NavigationListener';
+import { AnalyticsWebClient, FabricChannel } from '../../../types';
+import { createAnalyticsContexts, createLoggerMock } from '../../_testUtils';
 
-const createAnalyticsContexts = contexts => ({ children }) =>
-  contexts
-    .slice(0)
-    .reverse()
-    .reduce(
-      (prev, curr) => <AnalyticsContext data={curr}>{prev}</AnalyticsContext>,
-      children,
-    );
+type CaseArgs = {
+  name: string;
+  eventPayload: GasPurePayload;
+  clientPayload: GasPurePayload;
+  eventType?: string;
+  context: any[];
+};
 
 describe('NavigationListener', () => {
   let analyticsWebClientMock: AnalyticsWebClient;
-  let loggerMock;
+  let loggerMock: Logger;
 
   beforeEach(() => {
     analyticsWebClientMock = {
@@ -32,12 +33,7 @@ describe('NavigationListener', () => {
       sendTrackEvent: jest.fn(),
       sendScreenEvent: jest.fn(),
     };
-    loggerMock = {
-      debug: jest.fn(),
-      info: jest.fn(),
-      warn: jest.fn(),
-      error: jest.fn(),
-    };
+    loggerMock = createLoggerMock();
   });
 
   it('should register an Analytics listener on the navigation channel', () => {
@@ -54,8 +50,13 @@ describe('NavigationListener', () => {
   cases(
     'should transform events from analyticsListener and fire UI and Operational events to the analyticsWebClient',
     (
-      { eventPayload, clientPayload, eventType = UI_EVENT_TYPE, context = [] },
-      done,
+      {
+        eventPayload,
+        clientPayload,
+        eventType = UI_EVENT_TYPE,
+        context = [],
+      }: CaseArgs,
+      done: Function,
     ) => {
       const spy = jest.fn();
       const ButtonWithAnalytics = createButtonWithAnalytics(
