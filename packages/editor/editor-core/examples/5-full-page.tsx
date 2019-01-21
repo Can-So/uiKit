@@ -176,6 +176,7 @@ export class ExampleEditor extends React.Component<
                 provider: mediaProvider,
                 allowMediaSingle: true,
                 allowResizing: true,
+                allowAnnotation: true,
               }}
               placeholder="Use markdown shortcuts to format your page as you type, like * for lists, # for headers, and *** for a horizontal rule."
               shouldFocus={false}
