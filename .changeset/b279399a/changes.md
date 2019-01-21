@@ -1,1 +1,0 @@
-- ED-6064: always undo smart cards to links
