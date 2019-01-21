@@ -130,12 +130,21 @@ export const insertMediaGroupNode = (
       : mediaNodes;
 
     // delete the selection or empty paragraph
+    // delete the selection or empty paragraph
     const deleteRange = findDeleteRange(state);
-    if (deleteRange) {
-      tr.deleteRange(deleteRange.start, deleteRange.end);
+    if (!deleteRange) {
+      tr.insert(mediaInsertPos, content);
+    } else if (mediaInsertPos <= deleteRange.start) {
+      tr.deleteRange(deleteRange.start, deleteRange.end).insert(
+        mediaInsertPos,
+        content,
+      );
+    } else {
+      tr.insert(mediaInsertPos, content).deleteRange(
+        deleteRange.start,
+        deleteRange.end,
+      );
     }
-
-    tr.insert(tr.mapping.map(mediaInsertPos), content);
     dispatch(tr);
     setSelectionAfterMediaInsertion(view, mediaInsertPos);
     return;
