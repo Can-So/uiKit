@@ -39,7 +39,6 @@ export const createHead = (withWidth: boolean) => {
       {
         key: 'numeric',
         content: 'Arbitrary Number',
-        shouldTruncate: true,
         isSortable: true,
         width: withWidth ? 10 : undefined,
       },
