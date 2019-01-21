@@ -1,1 +1,0 @@
-- Numerous changes, main one introduction of SmartMediaEditor.

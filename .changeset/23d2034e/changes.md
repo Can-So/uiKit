@@ -1,1 +1,0 @@
-- Introduce getImageUrl method and FileFetcher TS interface

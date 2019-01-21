@@ -1,5 +1,12 @@
 # @atlaskit/media-ui
 
+## 8.2.4
+- [patch] [e7100a8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e7100a8):
+
+  - Minor tests realted changes
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/media-test-helpers@19.0.0
+
 ## 8.2.3
 - [patch] [e6516fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6516fb):
 

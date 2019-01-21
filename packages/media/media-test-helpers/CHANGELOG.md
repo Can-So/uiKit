@@ -1,5 +1,15 @@
 # @atlaskit/media-test-helpers
 
+## 19.0.0
+- [major] [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+
+  - More jest utilities has been added: expectToEqual, expectConstructorToHaveBeenCalledWith and expectFunctionToHaveBeenCalledWith to allow for typed jest assertions. mountWithIntlContext got generics types.
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+  - @atlaskit/media-card@50.0.0
+  - @atlaskit/media-picker@30.0.0
+  - @atlaskit/media-store@9.1.2
+  - @atlaskit/media-core@26.1.0
+
 ## 18.10.0
 - [minor] [e6516fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e6516fb):
 
