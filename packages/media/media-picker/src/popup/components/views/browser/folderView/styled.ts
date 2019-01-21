@@ -53,6 +53,7 @@ export const FolderViewerRow: ComponentClass<
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
 
   width: 100%;
   height: 48px;
@@ -72,6 +73,7 @@ export const FolderViewerRow: ComponentClass<
         : `background-color: ${akColorN30};`};
   }
 `;
+FolderViewerRow.displayName = 'FolderViewerRow';
 
 export const FileMetadataGroup: ComponentClass<HTMLAttributes<{}>> = styled.div`
   display: flex;
