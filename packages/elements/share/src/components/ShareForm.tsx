@@ -19,7 +19,7 @@ export type Props = {
   loadOptions: LoadOptions;
   onLinkCopy?: (link: string) => void;
   onShareClick?: Function;
-  shareLink: string;
+  copyLink: string;
   submitButtonLabel?: React.ReactNode;
 };
 
@@ -36,7 +36,7 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
           <LeftAlignmentContainer>
             <CopyLinkButton
               onLinkCopy={props.onLinkCopy}
-              shareLink={props.shareLink}
+              link={props.copyLink}
             />
           </LeftAlignmentContainer>
           <Button appearance="primary" type="submit">

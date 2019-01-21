@@ -9,6 +9,6 @@ export default () => (
     onLinkCopy={console.log}
     onShareClick={console.log}
     loadOptions={loadOptions}
-    shareLink={window.location.href}
+    copyLink={window.location.href}
   />
 );
