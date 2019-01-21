@@ -32,7 +32,7 @@ export const mockState: State = {
     imageCardModels: [],
     totalResultCount: 100,
   },
-  onCancelUpload: global.jest.fn(),
+  onCancelUpload: jest.fn(),
   tenantContext: fakeContext(),
   userContext: fakeContext(),
   config: {},
