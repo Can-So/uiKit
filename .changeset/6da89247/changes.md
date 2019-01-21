@@ -1,0 +1,1 @@
+- enable status and date components to be pasted into a task component
