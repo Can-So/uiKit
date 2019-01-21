@@ -1,9 +1,11 @@
+import { DecorationSet, Decoration } from 'prosemirror-view';
 import { EditorState, Plugin, PluginKey, Selection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Color as ColorType } from '@atlaskit/status';
 import StatusNodeView from './nodeviews/status';
 import { ReactNodeView } from '../../nodeviews';
 import { PMPluginFactory } from '../../types';
+import { ZWSP } from '../../utils';
 
 export const pluginKey = new PluginKey('statusPlugin');
 
@@ -115,6 +117,33 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
     props: {
       nodeViews: {
         status: ReactNodeView.fromComponent(StatusNodeView, portalProviderAPI),
+      },
+      decorations(state: EditorState) {
+        const { tr } = state;
+        const nodeAtSelection = tr.doc.nodeAt(tr.selection.from);
+
+        if (
+          nodeAtSelection &&
+          nodeAtSelection.type === state.schema.nodes.status
+        ) {
+          const resolvedPos = state.doc.resolve(tr.selection.from);
+          const delayedNodeRendering = () => {
+            return document.createTextNode(ZWSP);
+          };
+
+          const decoration = Decoration.widget(
+            resolvedPos.pos,
+            delayedNodeRendering,
+            {
+              side: 1,
+            },
+          );
+
+          const { doc } = state;
+          return DecorationSet.create(doc, [decoration]);
+        }
+
+        return null;
       },
     },
     view: (view: EditorView) => {

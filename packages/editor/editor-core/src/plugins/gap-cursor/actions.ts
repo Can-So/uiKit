@@ -5,9 +5,8 @@ import { Direction, isBackward, isForward } from './direction';
 import { GapCursorSelection, Side } from './selection';
 import { isTextBlockNearPos, isValidTargetNode } from './utils';
 import { Command } from '../../types';
-import { atTheBeginningOfDoc, atTheEndOfDoc } from '../../utils';
+import { atTheBeginningOfDoc, atTheEndOfDoc, ZWSP } from '../../utils';
 import { pluginKey } from './pm-plugins/main';
-import { ZWSP } from '../base/pm-plugins/inline-cursor-target';
 
 export const arrow = (
   dir: Direction,
