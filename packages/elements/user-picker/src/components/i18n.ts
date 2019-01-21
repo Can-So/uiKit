@@ -40,6 +40,6 @@ export const messages = defineMessages({
   addEmail: {
     id: 'fabric.elements.user-picker.email.add',
     defaultMessage: 'Add user',
-    description: 'Tooltip for clear button in the single user select field.',
+    description: 'Byline for email option.',
   },
 });
