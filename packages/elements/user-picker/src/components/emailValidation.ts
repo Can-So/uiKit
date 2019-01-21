@@ -1,6 +1,6 @@
 export type EmailValidationResponse = 'INVALID' | 'POTENTIAL' | 'VALID';
 
-const validRegex = /^[^\s@]+@[^\s@]+$/i;
+const validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
 const potentialRegex = /^[^\s@]+@$/i;
 
 export const isValidEmail = (inputText: string): EmailValidationResponse => {
