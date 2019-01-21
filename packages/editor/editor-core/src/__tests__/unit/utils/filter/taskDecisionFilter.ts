@@ -92,9 +92,8 @@ describe('@atlaskit/editor-core/utils/filter', () => {
           ),
         )(defaultSchema),
       );
-      const content = (taskDecisionSliceFilter(
+      const content = (taskDecisionSliceFilter(defaultSchema)(
         Slice.fromJSON(defaultSchema, jsonDoc),
-        defaultSchema,
       ).toJSON() as any).content;
       expect(content).toEqual([
         {
@@ -127,9 +126,8 @@ describe('@atlaskit/editor-core/utils/filter', () => {
       const jsonDoc = toJSON(
         doc(p('some text'), p('some other text'))(defaultSchema),
       );
-      const content = (taskDecisionSliceFilter(
+      const content = (taskDecisionSliceFilter(defaultSchema)(
         Slice.fromJSON(defaultSchema, jsonDoc),
-        defaultSchema,
       ).toJSON() as any).content;
       expect(content).toEqual([
         {

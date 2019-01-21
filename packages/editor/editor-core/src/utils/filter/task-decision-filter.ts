@@ -9,11 +9,16 @@ const taskDecisionAllowedNodeTypes = new Set([
   'hardBreak',
 ]);
 
-export const taskDecisionDocFilter = (
+export function taskDecisionDocFilter(
   doc: JSONDocNode,
   schema?: Schema,
-): JSONNode[] =>
-  filterContentByType(doc, taskDecisionAllowedNodeTypes, schema, true);
+): JSONNode[] {
+  return filterContentByType(doc, taskDecisionAllowedNodeTypes, schema, true);
+}
 
-export const taskDecisionSliceFilter = (slice: Slice, schema: Schema): Slice =>
-  filterSliceByType(slice, taskDecisionAllowedNodeTypes, schema, true);
+export function taskDecisionSliceFilter(
+  schema: Schema,
+): (slice: Slice) => Slice {
+  return (slice: Slice) =>
+    filterSliceByType(slice, taskDecisionAllowedNodeTypes, schema, true);
+}

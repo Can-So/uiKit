@@ -128,4 +128,100 @@ describe('@atlaskit/editor-core/ui/Extension', () => {
     expect(component.length).toBe(1);
     expect(component.find('GalleryComponent').length).toBe(0);
   });
+
+  it('should pass the correct content to inlineExtension', () => {
+    const InlineCompontent = ({ node }) => <div>{node.content}</div>;
+
+    const extensionHandlers = {
+      'com.atlassian.editor': ext => {
+        if (ext.extensionKey === 'example-inline') {
+          return <InlineCompontent node={ext} />;
+        }
+
+        return null;
+      },
+    };
+
+    const extensionNode = {
+      type: {
+        name: 'inlineExtension',
+      },
+      attrs: {
+        extensionType: 'com.atlassian.editor',
+        extensionKey: 'example-inline',
+        text: 'Hello inlineExtension!',
+        parameters: {
+          appearance: 'success',
+        },
+      },
+    } as any;
+
+    const extension = mount(
+      <Extension
+        editorView={
+          {
+            state: {
+              doc: {},
+            },
+          } as any
+        }
+        node={extensionNode}
+        handleContentDOMRef={noop}
+        extensionHandlers={extensionHandlers}
+      />,
+    );
+
+    const component = extension.find(ExtensionComponent);
+    expect(component.find(InlineCompontent).text()).toEqual(
+      'Hello inlineExtension!',
+    );
+  });
+
+  it('should pass the correct content to extension', () => {
+    const ExtensionCompontent = ({ node }) => <div>{node.content}</div>;
+
+    const extensionHandlers = {
+      'com.atlassian.editor': ext => {
+        if (ext.extensionKey === 'example-extension') {
+          return <ExtensionCompontent node={ext} />;
+        }
+
+        return null;
+      },
+    };
+
+    const extensionNode = {
+      type: {
+        name: 'extension',
+      },
+      attrs: {
+        extensionType: 'com.atlassian.editor',
+        extensionKey: 'example-extension',
+        text: 'Hello extension!',
+        parameters: {
+          appearance: 'success',
+        },
+      },
+    } as any;
+
+    const extension = mount(
+      <Extension
+        editorView={
+          {
+            state: {
+              doc: {},
+            },
+          } as any
+        }
+        node={extensionNode}
+        handleContentDOMRef={noop}
+        extensionHandlers={extensionHandlers}
+      />,
+    );
+
+    const component = extension.find(ExtensionComponent);
+    expect(component.find(ExtensionCompontent).text()).toEqual(
+      'Hello extension!',
+    );
+  });
 });

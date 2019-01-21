@@ -1,5 +1,10 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.10
+- [patch] [8158fe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8158fe0):
+
+  - ED-6059: Extension and inlineExtension should read their content from attrs not the PMNode.
+
 ## 6.3.9
 - [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
 

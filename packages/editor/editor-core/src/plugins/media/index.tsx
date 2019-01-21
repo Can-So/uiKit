@@ -20,7 +20,10 @@ import { CustomMediaPicker, MediaProvider } from './types';
 import WithPluginState from '../../ui/WithPluginState';
 import { akEditorFullPageMaxWidth } from '@atlaskit/editor-common';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';
-import { pluginKey as editorDisabledPluginKey } from '../editor-disabled';
+import {
+  pluginKey as editorDisabledPluginKey,
+  EditorDisabledPluginState,
+} from '../editor-disabled';
 
 export {
   MediaState,
@@ -144,14 +147,21 @@ const mediaPlugin = (options?: MediaOptions): EditorPlugin => ({
           mediaState: pluginKey,
           disabled: editorDisabledPluginKey,
         }}
-        render={({ mediaState, disabled }) => {
-          const { element: target, layout } = mediaState as MediaPluginState;
-          const node = mediaState.selectedMediaNode();
+        render={({
+          mediaState,
+          disabled,
+        }: {
+          mediaState: MediaPluginState;
+          disabled: EditorDisabledPluginState;
+        }) => {
+          const { element: target, layout } = mediaState;
+          const node = mediaState.selectedMediaContainerNode();
           const isFullPage = appearance === 'full-page';
           const allowBreakout = !!(
             node &&
-            node.attrs &&
-            node.attrs.width > akEditorFullPageMaxWidth &&
+            node.type === mediaSingle &&
+            node.firstChild!.attrs &&
+            node.firstChild!.attrs.width > akEditorFullPageMaxWidth &&
             isFullPage
           );
           const allowLayout = isFullPage && !!mediaState.isLayoutSupported();

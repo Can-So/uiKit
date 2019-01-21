@@ -105,6 +105,40 @@ describe('table merging logic', () => {
       });
     });
 
+    describe('when more than two rows gets merged', () => {
+      describe('when last non-merged cell gets merged from the end of the row', () => {
+        it('should delete an empty row that gets created as a result', () => {
+          const {
+            editorView,
+            refs: { anchor, head },
+          } = editor(
+            doc(
+              p('text'),
+              table()(
+                tr(td({ rowspan: 4 })(p('a1')), td({})(p('{anchor}a2'))),
+                tr(tdEmpty),
+                tr(td({})(p('{head}c2'))),
+                tr(tdEmpty),
+                tr(tdEmpty, tdEmpty),
+              ),
+            ),
+          );
+          setCellSelection(anchor, head)(editorView.state, editorView.dispatch);
+          mergeCells(editorView.state, editorView.dispatch);
+          expect(editorView.state.doc).toEqualDocument(
+            doc(
+              p('text'),
+              table()(
+                tr(td({ rowspan: 2 })(p('a1')), td({})(p('a2'), p('c2'))),
+                tr(tdEmpty),
+                tr(tdEmpty, tdEmpty),
+              ),
+            ),
+          );
+        });
+      });
+    });
+
     describe('when rows from the first columns get merged', () => {
       describe('and table has merged rows in the next column', () => {
         it('should delete an empty row and decrement rowspan of the next column', () => {

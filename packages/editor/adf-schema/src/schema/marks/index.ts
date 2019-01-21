@@ -42,3 +42,8 @@ export {
   IndentationMarkAttributes,
   IndentationMarkDefinition,
 } from './indentation';
+export {
+  annotation,
+  AnnotationMarkDefinition,
+  AnnotationMarkAttributes,
+} from './annotation';

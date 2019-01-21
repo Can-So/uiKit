@@ -8,6 +8,7 @@ import { appearanceForNodeType } from '../utils';
 import { Command } from '../../../types';
 import { processRawValue, getStepRange } from '../../../utils';
 import { Schema } from 'prosemirror-model';
+import { md } from '../../paste/pm-plugins/main';
 
 export const replaceQueuedUrlWithCard = (
   url: string,
@@ -66,6 +67,7 @@ export const replaceQueuedUrlWithCard = (
 export const queueCardsFromChangedTr = (
   state: EditorState,
   tr: Transaction,
+  normalizeLinkText: boolean = true,
 ): Transaction => {
   const { schema } = state;
   const { link } = schema.marks;
@@ -85,8 +87,12 @@ export const queueCardsFromChangedTr = (
     const linkMark = node.marks.find(mark => mark.type === link);
 
     if (linkMark) {
+      // ED-6041: compare normalised link text after linkfy from Markdown transformer
+      // instead, since it always decodes URL ('%20' -> ' ') on the link text
+      const normalizedLinkText = md.normalizeLinkText(linkMark.attrs.href);
+
       // don't bother queueing nodes that have user-defined text for a link
-      if (node.text !== linkMark.attrs.href) {
+      if (node.text !== normalizedLinkText) {
         return false;
       }
 

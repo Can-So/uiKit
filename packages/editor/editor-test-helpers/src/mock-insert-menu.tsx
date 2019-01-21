@@ -28,6 +28,7 @@ export const customInsertMenuItems = [
         attrs: {
           extensionType: 'com.atlassian.confluence.macro.core',
           extensionKey: 'inline-eh',
+          text: 'Inline extension demo',
           parameters: {
             macroParams: {},
             macroMetadata: {
@@ -56,6 +57,7 @@ export const customInsertMenuItems = [
         attrs: {
           extensionType: 'com.atlassian.confluence.macro.core',
           extensionKey: 'block-eh',
+          text: 'Block extension demo',
           parameters: {
             macroParams: {},
             macroMetadata: {

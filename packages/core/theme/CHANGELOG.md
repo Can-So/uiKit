@@ -1,5 +1,10 @@
 # @atlaskit/theme
 
+## 7.0.4
+- [patch] [1a98f74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1a98f74):
+
+  - Added the missing unit to box-shadow for focus ring styles
+
 ## 7.0.3
 - [patch] [899fac7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/899fac7):
 

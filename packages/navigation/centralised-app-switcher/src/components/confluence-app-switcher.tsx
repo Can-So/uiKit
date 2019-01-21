@@ -1,30 +1,43 @@
 import React from 'react';
 import { AppSwitcherWrapper, Item, Section, ManageButton } from '../primitives';
 import { CustomLinksProvider } from '../providers/confluence-data-providers';
+import { RecentContainersProvider } from '../providers/instance-data-providers';
 
-export default () => {
+export default ({ cloudId }) => {
   return (
-    <CustomLinksProvider>
-      {({ isLoading: isLoadingCustomLinks, data: customLinksData }) => (
-        <AppSwitcherWrapper>
-          <Section title="First Section">
-            <Item>First Item</Item>
-            <Item>Second Item</Item>
-          </Section>
-          {isLoadingCustomLinks ? (
-            'Loading Custom Links...'
-          ) : (
-            <Section title="Custom Links">
-              {customLinksData[0].map(({ label }) => (
-                <Item>{label}</Item>
-              ))}
-            </Section>
+    <RecentContainersProvider cloudId={cloudId}>
+      {({
+        isLoading: isLoadingRecentContainers,
+        data: recentContainersData,
+      }) => (
+        <CustomLinksProvider>
+          {({ isLoading: isLoadingCustomLinks, data: customLinksData }) => (
+            <AppSwitcherWrapper>
+              {isLoadingRecentContainers ? (
+                'Loading Recent Containers...'
+              ) : (
+                <Section title="Recent Containers">
+                  {recentContainersData.data.map(({ objectId, name }) => (
+                    <Item key={objectId}>{name}</Item>
+                  ))}
+                </Section>
+              )}
+              {isLoadingCustomLinks ? (
+                'Loading Custom Links...'
+              ) : (
+                <Section title="Custom Links">
+                  {customLinksData[0].map(({ key, label }) => (
+                    <Item key={key}>{label}</Item>
+                  ))}
+                </Section>
+              )}
+              <ManageButton
+                onClick={() => (window.location.href = customLinksData[1])}
+              />
+            </AppSwitcherWrapper>
           )}
-          <ManageButton
-            onClick={() => (window.location.href = customLinksData[1])}
-          />
-        </AppSwitcherWrapper>
+        </CustomLinksProvider>
       )}
-    </CustomLinksProvider>
+    </RecentContainersProvider>
   );
 };

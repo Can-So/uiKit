@@ -76,3 +76,24 @@ BrowserTestCase(
     expect(await page.$eval(editable, getDocFromElement)).toMatchDocSnapshot();
   },
 );
+
+BrowserTestCase(
+  'breakout: should be able to delete last character inside a "wide" codeBlock preserving the node',
+  { skip: [] },
+  async client => {
+    const page = new Page(client);
+    await page.goto(fullpage.path);
+    await page.waitForSelector(fullpage.placeholder);
+    await page.click(fullpage.placeholder);
+
+    await insertBlockMenuItem(page, messages.codeblock.defaultMessage);
+
+    // Switch to wide breakout mode
+    await page.waitForSelector(wideBreakoutButtonQuery);
+    await page.click(wideBreakoutButtonQuery);
+
+    await page.type(editable, 'a');
+    await page.type(editable, 'Backspace');
+    expect(await page.$eval(editable, getDocFromElement)).toMatchDocSnapshot();
+  },
+);

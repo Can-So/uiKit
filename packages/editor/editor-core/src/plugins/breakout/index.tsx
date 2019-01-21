@@ -18,7 +18,10 @@ export const Wrapper = styled.div`
 
 class BreakoutView extends ReactNodeView {
   getContentDOM() {
-    return { dom: document.createElement('div') };
+    const dom = document.createElement('div');
+    // MutationObserver bug with nodeviews @see ED-6062
+    dom.className = 'fabric-editor-breakout-mark-dom';
+    return { dom };
   }
 
   render(props, forwardRef) {

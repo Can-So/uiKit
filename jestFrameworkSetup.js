@@ -137,7 +137,7 @@ const removeIdsFromDoc = transformDoc(node => {
    * @see https://regex101.com/r/FrYUen/1
    */
   if (node.type === 'media') {
-    return {
+    const replacedNode = {
       ...node,
       attrs: {
         ...node.attrs,
@@ -146,14 +146,18 @@ const removeIdsFromDoc = transformDoc(node => {
           '$11234-5678-abcd-efgh$3',
         ),
 
-        __key: node.attrs.__key.replace(
-          /(temporary:)?([a-z0-9\-]+)(:.*)?$/,
-          '$11234-5678-abcd-efgh$3',
-        ),
-
         __fileName: 'example.png',
       },
     };
+
+    if (node.attrs.__key) {
+      replacedNode.attrs.__key = node.attrs.__key.replace(
+        /(temporary:)?([a-z0-9\-]+)(:.*)?$/,
+        '$11234-5678-abcd-efgh$3',
+      );
+    }
+
+    return replacedNode;
   }
   if (hasLocalId(node.type)) {
     return {
