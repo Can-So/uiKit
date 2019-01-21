@@ -85,6 +85,7 @@ export interface FileFetcher {
     name?: string,
     collectionName?: string,
   ): Promise<void>;
+  getCurrentState(id: string): Promise<FileState>;
 }
 
 export class FileFetcherImpl implements FileFetcher {
