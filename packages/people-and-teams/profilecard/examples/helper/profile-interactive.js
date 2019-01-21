@@ -293,9 +293,21 @@ export default class ProfilecardInteractive extends Component<Props, State> {
                   : ''
               }
               disabledAccountMessage={
-                this.state.hasDisabledAccountMessage
-                  ? 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.'
-                  : undefined
+                this.state.hasDisabledAccountMessage ? (
+                  <>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
+                    <p>
+                      Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                      laboris nisi ut aliquip ex ea commodo.
+                    </p>
+                  </>
+                ) : (
+                  undefined
+                )
               }
               hasDisabledAccountLozenge={this.state.hasDisabledAccountLozenge}
             />

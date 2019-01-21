@@ -1,5 +1,5 @@
 // @flow
-import { type Element as ReactElement } from 'react';
+import { type Element as ReactElement, type Node as ReactNode } from 'react';
 import type { IntlShape } from 'react-intl';
 
 export type PresenceTypes =
@@ -51,8 +51,11 @@ export type ProfilecardProps = {
   // Reference from `packages/core/theme/src/elevation.js` to see all valid values.
   customElevation?: string,
 
-  // Allow to pass custom message for disabled account which `status` prop is `inactive` or `closed`
-  disabledAccountMessage?: string,
+  // Allow to pass custom message for disabled account which `status` prop is `inactive` or `closed`.
+  // `disabledAccountMessage` should not contain react-intl components, ex: `FormattedMessage`,
+  // because ProfileCard component is wrapped in its own `IntlProvider` and `FormattedMessage` will loads messages of `@atlaskit/profilecard`,
+  // not from the consumer of `@atlaskit/profilecard`.
+  disabledAccountMessage?: ReactNode,
   // Allow to show a status lozenge for disabled account which `status` prop is `inactive` or `closed`
   hasDisabledAccountLozenge?: boolean,
 };

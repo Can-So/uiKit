@@ -268,7 +268,9 @@ describe('Profilecard', () => {
       it('should match snapshot when status=closed and disabledAccountMessage is defined', () => {
         const card = renderShallow({
           status: 'closed',
-          disabledAccountMessage: 'this is a custom message for closed account',
+          disabledAccountMessage: (
+            <p>this is a custom message for closed account</p>
+          ),
         });
 
         expect(card).toMatchSnapshot();
@@ -277,8 +279,9 @@ describe('Profilecard', () => {
       it('should match snapshot when status=inactive and disabledAccountMessage is defined', () => {
         const card = renderShallow({
           status: 'inactive',
-          disabledAccountMessage:
-            'this is a custom message for inactive account',
+          disabledAccountMessage: (
+            <p>this is a custom message for inactive account</p>
+          ),
         });
 
         expect(card).toMatchSnapshot();

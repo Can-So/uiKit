@@ -220,7 +220,7 @@ export default class Profilecard extends PureComponent<ProfilecardProps, void> {
 
     // consumer does not want to use built-in message
     if (disabledAccountMessage) {
-      return <p>{disabledAccountMessage}</p>;
+      return disabledAccountMessage;
     }
 
     let secondSentence = null;
