@@ -134,7 +134,15 @@ class MediaNode extends Component<
     } = this.props;
     const { id, type, collection, url, __key } = node.attrs;
 
-    if (!this.state.viewContext) {
+    /**
+     * On mobile we don't receive a collectionName until the `upload-end` event.
+     * We don't want to render a proper card until we have a valid collection.
+     * Render loading until we do.
+     */
+    const isMobile = editorAppearance === 'mobile';
+    let isMobileReady = isMobile ? typeof collection === 'string' : true;
+
+    if (!this.state.viewContext || !isMobileReady) {
       return <CardView status="loading" dimensions={cardDimensions} />;
     }
 
@@ -165,8 +173,8 @@ class MediaNode extends Component<
         selected={selected}
         disableOverlay={true}
         onClick={onClick}
-        useInlinePlayer={editorAppearance !== 'mobile'}
-        isLazy={editorAppearance !== 'mobile'}
+        useInlinePlayer={!isMobile}
+        isLazy={!isMobile}
       />
     );
   }
