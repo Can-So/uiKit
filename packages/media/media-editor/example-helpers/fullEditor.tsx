@@ -9,13 +9,13 @@ import {
   LoadHandler,
   MediaEditor,
   Tool,
-  Toolbar,
 } from '../src';
 import { ShapeParametersChangedHandler } from '../src/react/mediaEditor';
 import {
   ColorChangedHandler,
   LineWidthChangedHandler,
   ToolChangedHandler,
+  Toolbar,
 } from '../src/react/toolbar';
 
 export interface FullEditorProps {

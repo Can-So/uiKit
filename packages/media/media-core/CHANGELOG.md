@@ -1,5 +1,14 @@
 # @atlaskit/media-core
 
+## 26.1.0
+- [minor] [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+
+  - Introduce getImageUrl method and FileFetcher TS interface
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/media-card@50.0.0
+  - @atlaskit/media-store@9.1.2
+  - @atlaskit/media-test-helpers@19.0.0
+
 ## 26.0.0
 - [major] [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
 

@@ -1,7 +1,5 @@
 import { Store, Dispatch } from 'redux';
 
-import { fileToBase64 } from '../tools/fileToBase64';
-import { Fetcher } from '../tools/fetcher/fetcher';
 import { couldNotLoadImage } from '../components/views/editor/phrases';
 import { editorShowError } from '../actions/editorShowError';
 import { editorShowImage } from '../actions/editorShowImage';
@@ -34,18 +32,17 @@ const continueRenderingEditor = (id: string, store: Store<State>): boolean => {
   }
 };
 
-export const editRemoteImageMiddleware = (fetcher: Fetcher) => (
-  store: Store<State>,
-) => (next: Dispatch<State>) => (action: EditRemoteImageAction) => {
+export const editRemoteImageMiddleware = () => (store: Store<State>) => (
+  next: Dispatch<State>,
+) => (action: EditRemoteImageAction) => {
   if (action.type === EDIT_REMOTE_IMAGE) {
-    editRemoteImage(fetcher, store, action);
+    editRemoteImage(store, action);
   }
 
   return next(action);
 };
 
 export function editRemoteImage(
-  fetcher: Fetcher,
   store: Store<State>,
   action: EditRemoteImageAction,
 ): Promise<void> {
@@ -54,13 +51,14 @@ export function editRemoteImage(
 
   store.dispatch(editorShowLoading(item));
 
-  return userContext.config
-    .authProvider()
-    .then(auth => fetcher.getImage(auth, item.id, collectionName))
-    .then(fileToBase64)
-    .then(base64image => {
+  return userContext
+    .getImageUrl(item.id, {
+      mode: 'full-fit',
+      collection: collectionName,
+    })
+    .then(imageUrl => {
       if (continueRenderingEditor(item.id, store)) {
-        store.dispatch(editorShowImage(base64image));
+        store.dispatch(editorShowImage(imageUrl));
       }
     })
     .catch(() => {
