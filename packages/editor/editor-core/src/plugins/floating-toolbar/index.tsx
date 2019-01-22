@@ -14,6 +14,7 @@ import {
   pluginKey as editorDisabledPluginKey,
   EditorDisabledPluginState,
 } from '../editor-disabled';
+import ProviderFactory from '../../../../editor-common/src/providerFactory';
 
 const getRelevantConfig = (
   view: EditorView,
@@ -66,11 +67,12 @@ const floatingToolbarPlugin: EditorPlugin = {
       {
         // Should be after all toolbar plugins
         name: 'floatingToolbar',
-        plugin: ({ dispatch, reactContext }) =>
+        plugin: ({ dispatch, reactContext, providerFactory }) =>
           floatingToolbarPluginFactory({
             dispatch,
             floatingToolbarHandlers,
             reactContext,
+            providerFactory,
           }),
       },
     ];
@@ -81,6 +83,7 @@ const floatingToolbarPlugin: EditorPlugin = {
     popupsBoundariesElement,
     popupsScrollableElement,
     editorView,
+    providerFactory,
   }) {
     return (
       <WithPluginState
@@ -103,6 +106,8 @@ const floatingToolbarPlugin: EditorPlugin = {
               title,
               getDomRef = getDomRefFromSelection,
               items,
+              align = 'center',
+              className = '',
             } = relevantConfig;
             const targetRef = getDomRef(editorView);
 
@@ -113,7 +118,7 @@ const floatingToolbarPlugin: EditorPlugin = {
                   offset={[0, 12]}
                   target={targetRef}
                   alignY="bottom"
-                  alignX="center"
+                  alignX={align}
                   stick={true}
                   mountTo={popupsMountPoint}
                   boundariesElement={popupsBoundariesElement}
@@ -124,6 +129,9 @@ const floatingToolbarPlugin: EditorPlugin = {
                     dispatchCommand={fn =>
                       fn && fn(editorView.state, editorView.dispatch)
                     }
+                    className={className}
+                    focusEditor={() => editorView.focus()}
+                    providerFactory={providerFactory}
                     popupsMountPoint={popupsMountPoint}
                     popupsBoundariesElement={popupsBoundariesElement}
                     popupsScrollableElement={popupsScrollableElement}
@@ -153,8 +161,14 @@ function floatingToolbarPluginFactory(options: {
   floatingToolbarHandlers: Array<FloatingToolbarHandler>;
   dispatch: Dispatch<Array<FloatingToolbarConfig> | undefined>;
   reactContext: () => { [key: string]: any };
+  providerFactory: ProviderFactory;
 }) {
-  const { floatingToolbarHandlers, dispatch, reactContext } = options;
+  const {
+    floatingToolbarHandlers,
+    dispatch,
+    reactContext,
+    providerFactory,
+  } = options;
   return new Plugin({
     key: pluginKey,
     state: {
@@ -164,7 +178,7 @@ function floatingToolbarPluginFactory(options: {
       apply(tr, pluginState, oldState, newState) {
         const { intl } = reactContext();
         const newPluginState = floatingToolbarHandlers
-          .map(handler => handler(newState, intl))
+          .map(handler => handler(newState, intl, providerFactory))
           .filter(Boolean) as Array<FloatingToolbarConfig>;
 
         dispatch(pluginKey, newPluginState);

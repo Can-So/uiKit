@@ -39,6 +39,7 @@ export function setLinkHref(pos: number, href: string): Command {
         pos + node.nodeSize,
         link.create({ ...mark.attrs, href: url }),
       );
+      tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR);
     }
 
     if (dispatch) {
@@ -57,6 +58,7 @@ export function setLinkText(pos: number, text: string): Command {
       const tr = state.tr;
       tr.insertText(text, pos, pos + node.nodeSize);
       tr.addMark(pos, pos + text.length, mark);
+      tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR);
 
       if (dispatch) {
         dispatch(tr);
@@ -91,6 +93,7 @@ export function insertLink(
       }
 
       if (dispatch) {
+        tr.setMeta(stateKey, LinkAction.HIDE_TOOLBAR);
         dispatch(tr);
       }
       return true;

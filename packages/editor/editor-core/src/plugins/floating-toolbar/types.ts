@@ -7,6 +7,8 @@ import { Command } from '../../types';
 import { ButtonAppearance } from './ui/Button';
 import { DropdownOptions, RenderOptionsPropsT } from './ui/Dropdown';
 import { SelectOptions, SelectOption } from './ui/Select';
+import { ProviderFactory } from '@atlaskit/editor-common';
+import React from 'react';
 
 export type Icon = React.ComponentType<{ label: string }>;
 export type RenderOptionsProps = RenderOptionsPropsT<Command>;
@@ -22,6 +24,25 @@ export type FloatingToolbarButton<T> = {
   disabled?: boolean;
   hidden?: boolean;
   appearance?: ButtonAppearance;
+  href?: string;
+  target?: string;
+};
+
+export type FloatingToolbarInput<T> = {
+  type: 'input';
+  onSubmit: (...args: any[]) => any;
+  onBlur: (...args: any[]) => any;
+  defaultValue?: string;
+  placeholder?: string;
+  hidden?: boolean;
+};
+
+export type FloatingToolbarCustom<T> = {
+  type: 'custom';
+  onSubmit: (...args: any[]) => any;
+  onBlur: (...args: any[]) => any;
+  Component: React.ComponentClass<any>;
+  providerFactory: ProviderFactory;
 };
 
 export type FloatingToolbarSelect<T> = {
@@ -52,6 +73,8 @@ export type FloatingToolbarItem<T> =
   | FloatingToolbarButton<T>
   | FloatingToolbarDropdown<T>
   | FloatingToolbarSelect<T>
+  | FloatingToolbarInput<T>
+  | FloatingToolbarCustom<T>
   | FloatingToolbarSeparator;
 
 export interface FloatingToolbarConfig {
@@ -69,9 +92,12 @@ export interface FloatingToolbarConfig {
   visible?: boolean;
   nodeType: NodeType | NodeType[];
   items: Array<FloatingToolbarItem<Command>>;
+  align?: 'left' | 'center' | 'right';
+  className?: string;
 }
 
 export type FloatingToolbarHandler = (
   state: EditorState,
   intl: InjectedIntl,
+  providerFactory: ProviderFactory,
 ) => FloatingToolbarConfig | undefined;
