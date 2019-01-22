@@ -1,5 +1,12 @@
 # @atlaskit/profilecard
 
+## 6.1.5
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/button@10.1.2
+  - @atlaskit/icon@16.0.0
+
 ## 6.1.4
 - [patch] [ba95c0e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ba95c0e):
 

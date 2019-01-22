@@ -1,5 +1,11 @@
 # @atlaskit/calendar
 
+## 7.0.17
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/icon@16.0.0
+
 ## 7.0.16
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

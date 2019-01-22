@@ -1,5 +1,16 @@
 # @atlaskit/datetime-picker
 
+## 6.3.25
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/calendar@7.0.17
+  - @atlaskit/field-base@11.0.14
+  - @atlaskit/modal-dialog@7.2.1
+  - @atlaskit/select@6.1.19
+  - @atlaskit/field-range@5.0.14
+  - @atlaskit/icon@16.0.0
+
 ## 6.3.24
 - [patch] [55e0a3a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/55e0a3a):
 

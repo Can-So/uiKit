@@ -1,5 +1,13 @@
 # @atlaskit/media-test-helpers
 
+## 19.1.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/select@6.1.19
+  - @atlaskit/media-card@51.0.1
+  - @atlaskit/media-ui@8.2.5
+  - @atlaskit/icon@16.0.0
+
 ## 19.1.0
 - [minor] [b1627a5837](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1627a5837):
 
