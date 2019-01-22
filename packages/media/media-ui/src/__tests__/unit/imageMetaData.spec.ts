@@ -135,6 +135,19 @@ describe('Image Meta Data', () => {
       );
     });
 
+    it("should flip width and height when image is on it's side", async () => {
+      loadImage.mockReturnValue({
+        naturalWidth: 100,
+        naturalHeight: 75,
+      });
+      asMock(readImageMetaTags).mockReturnValue({ Orientation: 'right-top' });
+      const imageMetaData = (await readImageMetaData(
+        fileInfo,
+      )) as ImageMetaData;
+      expect(imageMetaData.width).toBe(75);
+      expect(imageMetaData.height).toBe(100);
+    });
+
     it('should return null when images fail to load', async () => {
       loadImage.mockImplementation(() => {
         throw new Error();
