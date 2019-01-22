@@ -33,4 +33,19 @@ export const messages = defineMessages({
     description:
       'Required error message for the user picker field in Share form.',
   },
+  shareTriggerButtonText: {
+    id: 'fabric.elements.share.trigger.button.text',
+    defaultMessage: 'Share',
+    description: 'Default text for the Share Dialog trigger button',
+  },
+  copyLinkButtonText: {
+    id: 'fabric.elements.share.copylink.button.text',
+    defaultMessage: 'Copy page link',
+    description: 'Default text for the Copy Link button',
+  },
+  copiedToClipboardMessage: {
+    id: 'fabric.elements.share.copied.to.clipboard.message',
+    defaultMessage: 'Link copied to clipboard',
+    description: 'Default text for the Copy Link button',
+  },
 });
