@@ -1,0 +1,1 @@
+- Adds ability to send search terms for jira quick search
