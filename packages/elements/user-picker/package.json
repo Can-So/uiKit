@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/user-picker",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "config": {
     "access": "public"
   },
@@ -49,7 +49,7 @@
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/i18n-tools": "^0.4.0",
     "@atlaskit/section-message": "^1.0.14",
-    "@atlaskit/util-data-test": "^10.0.25",
+    "@atlaskit/util-data-test": "^10.0.35",
     "@types/uuid": "^3.4.4",
     "enzyme": "^3.7.0",
     "react-intl": "^2.6.0"

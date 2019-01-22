@@ -96,9 +96,14 @@ export interface Props {
   useCPUSForPeopleResults?: boolean;
 
   /**
-   * Indicates wheter to add sessionId to jira result query param
+   * Indicates whether to add sessionId to jira result query param
    */
   addSessionIdToJiraResult?: boolean;
+
+  /**
+   * Indicates whether to disable Jira people search on the pre-query screen
+   */
+  disableJiraPreQueryPeopleSearch?: boolean;
 
   /**
    * logger with 3 levels error, warn and info
@@ -181,6 +186,7 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
       referralContextIdentifiers,
       useCPUSForPeopleResults,
       logger,
+      disableJiraPreQueryPeopleSearch,
     } = this.props;
 
     return (
@@ -192,6 +198,7 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
           useQuickNavForPeopleResults={useQuickNavForPeopleResults}
           referralContextIdentifiers={referralContextIdentifiers}
           useCPUSForPeopleResults={useCPUSForPeopleResults}
+          disableJiraPreQueryPeopleSearch={disableJiraPreQueryPeopleSearch}
           logger={logger}
         />
       </MessagesIntlProvider>
