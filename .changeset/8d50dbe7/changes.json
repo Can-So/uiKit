@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "@atlaskit/util-data-test", "type": "patch" }],
+  "dependents": []
+}
