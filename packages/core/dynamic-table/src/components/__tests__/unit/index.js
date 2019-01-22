@@ -118,14 +118,14 @@ describe(name, () => {
           .find('td')
           .at(0)
           .text(),
-      ).toBe('Hillary');
+      ).toBe('Donald');
       expect(
         bodyRows
           .at(0)
           .find('td')
           .at(1)
           .text(),
-      ).toBe('Clinton');
+      ).toBe('Trump');
     });
 
     const checkSortedData = isRankable => {
@@ -135,8 +135,8 @@ describe(name, () => {
       }));
       const wrapper = mount(
         <DynamicTableStateless
-          defaultSortKey="last_name"
-          defaultSortOrder="DESC"
+          sortKey="first_name"
+          sortOrder="ASC"
           head={{ cells: headCells }}
           rows={rowsWithKeys}
           isRankable={isRankable}
@@ -177,14 +177,14 @@ describe(name, () => {
           .find('td')
           .at(0)
           .text(),
-      ).toBe('Hillary');
+      ).toBe('hillary');
       expect(
         bodyRows
           .at(2)
           .find('td')
           .at(1)
           .text(),
-      ).toBe('Clinton');
+      ).toBe('clinton');
     };
 
     it('should display sorted data', () => {
@@ -405,11 +405,18 @@ describe(name, () => {
         );
       });
 
-      it('onSort & onSetPage', () => {
+      it('should not run onSort for a non-sortable column', () => {
         const headCells = wrapper.find('th');
         headCells.at(0).simulate('click');
         expect(onSort).toHaveBeenCalledTimes(1);
         headCells.at(1).simulate('click');
+        expect(onSort).toHaveBeenCalledTimes(1);
+        expect(onSetPage).toHaveBeenCalledWith(1, undefined);
+      });
+
+      it('should run onSort & onSetPage', () => {
+        const headCells = wrapper.find('th');
+        headCells.at(0).simulate('click');
         expect(onSort).toHaveBeenCalledTimes(1);
         expect(onSort).toHaveBeenCalledWith(
           {
@@ -478,14 +485,14 @@ describe(name, () => {
           .find('td')
           .at(0)
           .text(),
-      ).toBe('Donald');
+      ).toBe('hillary');
       expect(
         bodyRows
           .at(1)
           .find('td')
           .at(1)
           .text(),
-      ).toBe('Trump');
+      ).toBe('clinton');
     });
 
     it('should pass i18n info down correctly', () => {
@@ -564,14 +571,14 @@ describe(name, () => {
           .find('td')
           .at(0)
           .text(),
-      ).toBe('Hillary');
+      ).toBe('hillary');
       expect(
         bodyRows
           .at(2)
           .find('td')
           .at(1)
           .text(),
-      ).toBe('Clinton');
+      ).toBe('clinton');
     });
 
     it('should sort numeric data correctly, listed before strings or empty values', () => {
