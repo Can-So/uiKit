@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
-import { MediaImage } from '../../mediaImage';
+import { mount, ReactWrapper } from 'enzyme';
+import { MediaImage, MediaImageProps, MediaImageState } from '../../mediaImage';
 import { ImageComponent } from '../../mediaImage/styled';
+import { expectToEqual } from '@atlaskit/media-test-helpers';
 
 interface SetupParams {
   isCoverStrategy: boolean;
@@ -21,6 +22,30 @@ describe('MediaImage', () => {
     transform: 'translate(-50%, -50%)',
   };
 
+  const mockImageTag = (
+    component: ReactWrapper<MediaImageProps, MediaImageState>,
+    imageDimentions: number[],
+    containerDimentions: number[],
+    loadImageImmediately: boolean,
+  ) => {
+    Element.prototype.getBoundingClientRect = () =>
+      ({
+        width: containerDimentions[0],
+        height: containerDimentions[1],
+      } as any);
+    const img = component.find('img');
+    const imgInstance = img.instance();
+    Object.defineProperty(imgInstance, 'naturalHeight', {
+      value: imageDimentions[1],
+    });
+    Object.defineProperty(imgInstance, 'naturalWidth', {
+      value: imageDimentions[0],
+    });
+    if (loadImageImmediately) {
+      img.simulate('load');
+    }
+  };
+
   const setup = (params: SetupParams) => {
     const {
       isCoverStrategy,
@@ -35,12 +60,7 @@ describe('MediaImage', () => {
         : 'isImageMorePortraityThanContainer'
     ];
 
-    Element.prototype.getBoundingClientRect = () =>
-      ({
-        width: containerDimentions[0],
-        height: containerDimentions[1],
-      } as any);
-    const component = mount(
+    const component = mount<MediaImageProps, MediaImageState>(
       <MediaImage
         dataURI="data:image/png;base64,"
         stretch={!isStretchingProhibited}
@@ -48,17 +68,13 @@ describe('MediaImage', () => {
         previewOrientation={previewOrientation}
       />,
     );
-    const img = component.find('img');
-    const imgInstance = img.instance();
-    Object.defineProperty(imgInstance, 'naturalHeight', {
-      value: imageDimentions[1],
-    });
-    Object.defineProperty(imgInstance, 'naturalWidth', {
-      value: imageDimentions[0],
-    });
-    if (loadImageImmediately) {
-      img.simulate('load');
-    }
+    mockImageTag(
+      component,
+      imageDimentions,
+      containerDimentions,
+      loadImageImmediately,
+    );
+
     return component.find(ImageComponent);
   };
 
@@ -206,22 +222,26 @@ describe('MediaImage', () => {
           previewOrientation: 1,
         });
 
-        expect(component.prop('style')!.transform).toEqual(
+        expect(component.prop('style').transform).toEqual(
           defaultTransform.transform,
         );
       });
-      it('should rotate the image when orientation is bigger than 1', () => {
-        const component = setup({
-          isCoverStrategy: false,
-          isImageMoreLandscapyThanContainer: false,
-          isStretchingProhibited: false,
-          loadImageImmediately: true,
-          previewOrientation: 6,
-        });
 
-        expect(component.prop('style')!.transform).toEqual(
-          'translate(-50%, -50%) rotate(90deg)',
+      it('should rotate the image and revert width and height when orientation is 6', () => {
+        const component = mount<MediaImageProps, MediaImageState>(
+          <MediaImage
+            dataURI="data:image/png;base64,"
+            stretch={true}
+            crop={false}
+            previewOrientation={6}
+          />,
         );
+        mockImageTag(component, [1000, 750], [75, 100], true);
+        expectToEqual(component.find(ImageComponent).prop('style'), {
+          ...defaultTransform,
+          height: '75%',
+          transform: 'translate(-50%, -50%) rotate(90deg)',
+        });
       });
     });
   });

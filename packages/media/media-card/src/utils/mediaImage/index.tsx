@@ -84,10 +84,76 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
 
     const parentRatio = parentWidth / parentHeight;
     let imgRatio = imgWidth / imgHeight;
+    let percentSize = '100%';
 
     const isRotated = isOnItsSide(previewOrientation || 1);
+    /*
+      When photo has orientation of 90deg or 270deg (store in meta data)
+      things get very tricky. Let me go through an example to explain how we deal with that:
+
+      Image gets in as     ________    But it needs to be     ┌──────┐
+      horizontal picture  |        |   displayed as 750x1000  │      │
+      of 1000x750         |        |                          │      │
+                          |________|                          │      │
+                                                              │      │
+                                                              └──────┘
+
+      Container is much smaller, but at least has right dimensions of 75x100.
+      (There is other place where we flip width and height to get right container dimensions)
+      So, parameters are:
+        parentWidth: 75
+        parentHeight: 100
+        imgWidth: 1000
+        imgHeight: 750
+        crop: false (means we want to fit)
+        stretch: true
+
+      For algo to work properly first we need to flip the imgRation. Initial value would be
+      1000/750 = 1.33 but we want it to be 750/1000 = 0.75
+      At this point this can be achieved by 1/1.3333 = 0.75.
+
+      In this situation it's not very important what fit and stretch values are, since
+      container and image ratios are the same. This means it's not very important if resulting
+      style will be height: 100% or width: 100%. But, in this case algorithm will choose
+      height: 100%.
+
+      Now here is what going to happened.
+      FIRST, Browser will put an image with 1000x750 into the box 75x100 and apply height:100%.
+
+      ┌───┬──────┬───┐  This will scale an image according to rules of ratios:
+      │░░░│▓▓▓▓▓▓│░░░│  (img height) -> (container height /
+      │░░░│▓▓▓▓▓▓│░░░│                   scaled down img height) -- This defined by css height: 100%
+      │░░░│▓▓▓▓▓▓│░░░│  750px        -> 100px
+      └───┴──────┴───┘  (img width)  -> (scaled down img width)
+                        1000px       -> (100 x 1000) / 750 = 133.33px
+
+      And only NOW browser will apply rotate: 90deg and turn image around.
+      And we end up with this:
+
+      ┌─┬──────┬─┐   Where our image has size of 100x133.3
+      │░│░░░░░░│░│   in the box of size 75x100.
+      │░│▓▓▓▓▓▓│░│
+      │░│▓▓▓▓▓▓│░│
+      │░│▓▓▓▓▓▓│░│
+      │░│░░░░░░│░│
+      └─┴──────┴─┘
+
+      To combat this we will not make height: 100% but use ration of an image.
+      In this case imgRation is now 0.75 (after flipping)
+      
+      New math will look like this:
+      (img height) -> (container height /
+                       scaled down img height) -- This defined by css height: 75%
+      750px        -> (0.75 x 100px) = 75px
+      (img width)  -> (scaled down img width)
+      1000px       -> (75 x 1000) / 750 = 100px
+
+      Resulting in scaled down image size: 75x100, which matched container.
+
+     */
     if (isRotated) {
       imgRatio = 1 / imgRatio;
+      percentSize = `${Math.floor(imgRatio * 100)}%`;
     }
 
     /*
@@ -164,12 +230,12 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
            └──────┘    │         │    ├─────────┤
                        └─────────┘    └─────────┘
          */
-        style.width = '100%';
+        style.width = percentSize;
       } else if (isFitStrategy && !isImageMoreLandscapyThanContainer) {
         /*
           Image matches its height to container's and width scales accordingly.
          */
-        style.height = '100%';
+        style.height = percentSize;
       } else if (isCoverStrategy && isImageMoreLandscapyThanContainer) {
         /*
           In order to cover whole container guaranteed (even in expense of stretching)
@@ -183,9 +249,9 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
            └──────┘    │         │    │░░│▓▓▓▓▓▓│░░│
                        └─────────┘    └──┴──────┴──┘
          */
-        style.height = '100%';
+        style.height = percentSize;
       } else if (isCoverStrategy && !isImageMoreLandscapyThanContainer) {
-        style.width = '100%';
+        style.width = percentSize;
       }
     } else {
       if (isFitStrategy) {
@@ -213,8 +279,8 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
                        │          │    │          │
                        └──────────┘    └──────────┘
          */
-        style.maxWidth = '100%';
-        style.maxHeight = '100%';
+        style.maxWidth = percentSize;
+        style.maxHeight = percentSize;
       } else if (isCoverStrategy && isImageMoreLandscapyThanContainer) {
         /*
           We want to fill container but we can't stretch an image if it's smaller then container.
@@ -228,9 +294,9 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
            └────────────┘
 
          */
-        style.maxHeight = '100%';
+        style.maxHeight = percentSize;
       } else if (isCoverStrategy && !isImageMoreLandscapyThanContainer) {
-        style.maxWidth = '100%';
+        style.maxWidth = percentSize;
       }
     }
 
