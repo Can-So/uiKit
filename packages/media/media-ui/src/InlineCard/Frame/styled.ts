@@ -22,7 +22,7 @@ const isInteractive = ({ isInteractive }: WrapperProps) => {
     return `
       cursor: pointer;
       :hover {
-        background-color: ${colors.N20};
+        background-color: ${colors.N40A};
         text-decoration: none;
       }
       :active {
@@ -55,5 +55,6 @@ export const Wrapper: ComponentClass<
   padding: 1px 2px 2px 2px;
   border-radius: ${akBorderRadius()}px;
   user-select: none;
+  background-color: ${colors.N30A};
   ${isInteractive} ${isSelected};
 `;

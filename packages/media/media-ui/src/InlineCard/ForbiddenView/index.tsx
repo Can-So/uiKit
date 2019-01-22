@@ -37,11 +37,7 @@ export class InlineCardForbiddenView extends React.Component<
         <IconAndTitleLayout
           icon={
             <LockIconWrapper>
-              <LockIcon
-                label="error"
-                size="medium"
-                primaryColor={colors.B400}
-              />
+              <LockIcon label="error" size="small" primaryColor={colors.B400} />
             </LockIconWrapper>
           }
           title={
