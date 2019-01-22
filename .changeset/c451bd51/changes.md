@@ -1,0 +1,1 @@
+- Flip width and height around when image is on it's side according to metadata orientation; Introduce isRotated utility
