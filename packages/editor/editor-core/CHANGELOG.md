@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.0.2
+- [patch] [8dc4a35361](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8dc4a35361):
+
+  - enable status and date components to be pasted into a task component
+
 ## 97.0.1
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1
