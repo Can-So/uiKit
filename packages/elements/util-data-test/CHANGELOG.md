@@ -1,5 +1,10 @@
 # @atlaskit/util-data-test
 
+## 10.0.35
+- [patch] [1ce0c13301](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ce0c13301):
+
+  - TEAMS-169 Adding team related example data
+
 ## 10.0.34
 - Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
   - @atlaskit/emoji@53.0.0
