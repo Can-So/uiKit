@@ -238,7 +238,6 @@ const getPosInList = (state: EditorState): number | undefined => {
 
   if (hasParentNode(node => node.type === listItem)(state.selection)) {
     // 2. Get end position of root list
-    // const pos = safeInsertPos(content, state);
     const rootListNode = findRootListNode(state);
 
     if (rootListNode) {
