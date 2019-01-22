@@ -67,6 +67,7 @@ export interface Props {
   jiraClient: JiraClient;
   peopleSearchClient: PeopleSearchClient;
   crossProductSearchClient: CrossProductSearchClient;
+  disableJiraPreQueryPeopleSearch?: boolean;
   logger: Logger;
 }
 
@@ -165,16 +166,27 @@ export class JiraQuickSearchContainer extends React.Component<
   };
 
   getRecentlyInteractedPeople = (): Promise<Result[]> => {
-    const peoplePromise: Promise<
-      Result[]
-    > = this.props.peopleSearchClient.getRecentPeople();
-    return handlePromiseError<Result[]>(peoplePromise, [] as Result[], error =>
-      this.props.logger.safeError(
-        LOGGER_NAME,
-        'error in recently interacted people promise',
-        error,
-      ),
-    ) as Promise<Result[]>;
+    /*
+      the following code is temporarily feature flagged for performance reasons and will be shortly reinstated.
+      https://product-fabric.atlassian.net/browse/QS-459
+    */
+    if (this.props.disableJiraPreQueryPeopleSearch) {
+      return Promise.resolve([]);
+    } else {
+      const peoplePromise: Promise<
+        Result[]
+      > = this.props.peopleSearchClient.getRecentPeople();
+      return handlePromiseError<Result[]>(
+        peoplePromise,
+        [] as Result[],
+        error =>
+          this.props.logger.safeError(
+            LOGGER_NAME,
+            'error in recently interacted people promise',
+            error,
+          ),
+      ) as Promise<Result[]>;
+    }
   };
 
   getJiraRecentItems = (sessionId: string): Promise<GenericResultMap> => {
@@ -219,16 +231,24 @@ export class JiraQuickSearchContainer extends React.Component<
   };
 
   canSearchUsers = (): Promise<boolean> => {
-    return handlePromiseError(
-      this.props.jiraClient.canSearchUsers(),
-      false,
-      error =>
-        this.props.logger.safeError(
-          LOGGER_NAME,
-          'error fetching browse user permission',
-          error,
-        ),
-    );
+    /*
+      the following code is temporarily feature flagged for performance reasons and will be shortly reinstated.
+      https://product-fabric.atlassian.net/browse/QS-459
+    */
+    if (this.props.disableJiraPreQueryPeopleSearch) {
+      return Promise.resolve(false);
+    } else {
+      return handlePromiseError(
+        this.props.jiraClient.canSearchUsers(),
+        false,
+        error =>
+          this.props.logger.safeError(
+            LOGGER_NAME,
+            'error fetching browse user permission',
+            error,
+          ),
+      );
+    }
   };
 
   getRecentItems = (sessionId: string): Promise<ResultsWithTiming> => {
