@@ -229,7 +229,7 @@ const findRootListNode = (state: EditorState): ContentNodeWithPos | null => {
  * @param content Content to be inserted
  * @param state Editor State
  */
-const getPosInList = (state: EditorState): number | undefined => {
+export const getPosInList = (state: EditorState): number | undefined => {
   const {
     schema: {
       nodes: { mediaGroup, listItem },

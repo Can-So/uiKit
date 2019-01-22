@@ -6,14 +6,20 @@ import {
   p,
   h1,
   hr,
+  ul,
+  li,
   mention,
   code_block,
   randomId,
   panel,
 } from '@atlaskit/editor-test-helpers';
-import { insertMediaGroupNode } from '../../../../plugins/media/utils/media-files';
+import {
+  insertMediaGroupNode,
+  getPosInList,
+} from '../../../../plugins/media/utils/media-files';
 import { setNodeSelection } from '../../../../utils';
 import mediaPlugin from '../../../../plugins/media';
+import listsPlugin from '../../../../plugins/lists';
 import mentionsPlugin from '../../../../plugins/mentions';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import rulePlugin from '../../../../plugins/rule';
@@ -31,6 +37,7 @@ describe('media-files', () => {
         mentionsPlugin(),
         codeBlockPlugin(),
         rulePlugin,
+        listsPlugin,
         panelPlugin,
       ],
     });
@@ -1201,6 +1208,69 @@ describe('media-files', () => {
           p(''),
         ),
       );
+    });
+  });
+
+  describe('when inside a list', () => {
+    it('should get pos after existing list', () => {
+      const complexList = doc(
+        ul(
+          li(
+            p('first'),
+            ul(
+              li(p('second')),
+              li(p('thiird'), ul(li(p('fourth')), li(p('fifth{<>}')))),
+            ),
+          ),
+        ),
+      );
+
+      const { editorView } = editor(complexList);
+      const rootList = editorView.state.doc.nodeAt(0);
+      const startPosition = 0;
+      // @ts-ignore
+      const endListPos = startPosition + rootList.nodeSize;
+
+      const posInList = getPosInList(editorView.state);
+
+      expect(posInList).not.toBeUndefined();
+      // @ts-ignore
+      expect(posInList).toEqual(endListPos);
+    });
+
+    it('should get pos in media group', () => {
+      const complexList = doc(
+        ul(
+          li(
+            p('first'),
+            ul(
+              li(p('second')),
+              li(p('thiird'), ul(li(p('fourth')), li(p('fifth{<>}')))),
+            ),
+          ),
+        ),
+        mediaGroup(
+          media({
+            id: temporaryFileId,
+            __key: temporaryFileId,
+            type: 'file',
+            collection: testCollectionName,
+          })(),
+        ),
+        p(''),
+      );
+
+      const { editorView } = editor(complexList);
+      const rootList = editorView.state.doc.nodeAt(0);
+      const startPosition = 0;
+      // @ts-ignore
+      const endListPos = startPosition + rootList.nodeSize;
+
+      const posInList = getPosInList(editorView.state);
+
+      expect(posInList).not.toBeUndefined();
+      // @ts-ignore
+      expect(posInList).toEqual(endListPos + 1); // endListPos + 1 is the media group
     });
   });
 });
