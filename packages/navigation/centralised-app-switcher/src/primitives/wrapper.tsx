@@ -6,7 +6,7 @@ import { gridSize, colors } from '@atlaskit/theme';
 
 const Wrapper = styled.div`
   height: calc(100vh - 3 * ${gridSize()}px);
-  padding: 0 ${2 * gridSize()}px;
+  padding-right: ${gridSize() * 4}px;
 `;
 
 const Body = styled.div`

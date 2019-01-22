@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-import Item from '@atlaskit/item';
+import styled, { ThemeProvider } from 'styled-components';
+import Item, { itemThemeNamespace } from '@atlaskit/item';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import { gridSize, colors, elevation } from '@atlaskit/theme';
@@ -22,9 +22,22 @@ const IconWithBackground = ({ isAdmin, icon: Icon = WorldIcon }) => (
   </Background>
 );
 
+const itemTheme = {
+  padding: {
+    default: {
+      bottom: gridSize(),
+      left: gridSize(),
+      top: gridSize(),
+      right: gridSize(),
+    },
+  },
+};
+
 export default ({ isAdmin, icon, ...rest }) => (
-  <Item
-    elemBefore={<IconWithBackground isAdmin={isAdmin} icon={icon} />}
-    {...rest}
-  />
+  <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
+    <Item
+      elemBefore={<IconWithBackground isAdmin={isAdmin} icon={icon} />}
+      {...rest}
+    />
+  </ThemeProvider>
 );
