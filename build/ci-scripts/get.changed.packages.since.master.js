@@ -78,7 +78,11 @@ const flattenDeep = require('lodash.flattendeep');
         changedPackagesRelativePaths.concat(changedPackagesWithDependent),
       ),
     ];
-    console.log(JSON.stringify(changedPackagesRelativePathsWithDependent));
+    if (process.argv.includes('--spaceDelimited')) {
+      console.log(changedPackagesRelativePathsWithDependent.join(' '));
+    } else {
+      console.log(changedPackagesRelativePathsWithDependent);
+    }
   } else {
     if (process.argv.includes('--spaceDelimited')) {
       console.log(changedPackagesRelativePaths.join(' '));
