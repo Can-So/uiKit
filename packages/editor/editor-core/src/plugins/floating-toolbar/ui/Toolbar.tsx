@@ -41,11 +41,6 @@ const ToolbarContainer = styled.div`
   & > div {
     align-items: center;
   }
-
-  .hyperlink-toolbar {
-    position: relative;
-    left: 50%;
-  }
 `;
 
 export default class Toolbar extends Component<Props> {

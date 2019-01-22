@@ -124,7 +124,7 @@ export const getToolbarConfig: FloatingToolbarHandler = (
               onSubmit: (href, text) => insertLink(from, to, href, text),
               Component: RecentList,
               providerFactory: providerFactory,
-              // onBlur: () => hideLinkToolbar()
+              onBlur: () => hideLinkToolbar(),
             },
           ],
         };
