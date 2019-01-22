@@ -71,8 +71,8 @@ function grandParentAcceptMediaGroup(
  * @param state Editor state
  */
 function shouldAppendParagraph(
-  node: PMNode | null | undefined,
   state: EditorState,
+  node?: PMNode | null,
 ): boolean {
   const {
     schema: {
@@ -122,7 +122,7 @@ export const insertMediaGroupNode = (
   const shouldSplit =
     !isSelectionMediaGroup(state) &&
     grandParentAcceptMediaGroup(state, mediaNodes);
-  const withParagraph = shouldAppendParagraph(nodeAtInsertionPoint, state);
+  const withParagraph = shouldAppendParagraph(state, nodeAtInsertionPoint);
 
   if (shouldSplit) {
     const content: PMNode[] = withParagraph
