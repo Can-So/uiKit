@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@atlaskit/button';
 import Drawer from '@atlaskit/drawer';
-import AppSwitcher from '../src';
+import AppSwitcher from './helpers';
 
 export default class AppSwitcherExample extends Component {
   state = {
