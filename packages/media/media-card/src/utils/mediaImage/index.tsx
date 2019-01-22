@@ -4,7 +4,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Component, CSSProperties } from 'react';
-import { getCssFromImageOrientation, isOnItsSide } from '@atlaskit/media-ui';
+import { getCssFromImageOrientation, isRotated } from '@atlaskit/media-ui';
 import { ImageComponent } from './styled';
 
 export interface MediaImageProps {
@@ -86,7 +86,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
     let imgRatio = imgWidth / imgHeight;
     let percentSize = '100%';
 
-    const isRotated = isOnItsSide(previewOrientation || 1);
+    const isImageRotated = isRotated(previewOrientation || 1);
     /*
       When photo has orientation of 90deg or 270deg (store in meta data)
       things get very tricky. Let me go through an example to explain how we deal with that:
@@ -154,7 +154,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
       Resulting in scaled down image size: 75x100, which matched container.
 
      */
-    if (isRotated) {
+    if (isImageRotated) {
       imgRatio = 1 / imgRatio;
       percentSize = `${Math.floor(imgRatio * 100)}%`;
     }
