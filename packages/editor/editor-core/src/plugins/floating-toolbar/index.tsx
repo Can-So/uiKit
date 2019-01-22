@@ -2,7 +2,7 @@ import * as React from 'react';
 import { EditorView } from 'prosemirror-view';
 import { Plugin, PluginKey } from 'prosemirror-state';
 import { findDomRefAtPos, findSelectedNodeOfType } from 'prosemirror-utils';
-import { Popup } from '@atlaskit/editor-common';
+import { Popup, ProviderFactory } from '@atlaskit/editor-common';
 
 import WithPluginState from '../../ui/WithPluginState';
 import { EditorPlugin } from '../../types';
@@ -14,7 +14,6 @@ import {
   pluginKey as editorDisabledPluginKey,
   EditorDisabledPluginState,
 } from '../editor-disabled';
-import ProviderFactory from '../../../../editor-common/src/providerFactory';
 
 const getRelevantConfig = (
   view: EditorView,

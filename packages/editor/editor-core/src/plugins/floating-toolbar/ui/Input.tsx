@@ -29,12 +29,16 @@ export default class TextField extends Component<Props, State> {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit && this.props.onSubmit(this.state.text);
+    if (this.props.onSubmit) {
+      this.props.onSubmit(this.state.text);
+    }
   };
 
   handleBlur = e => {
     e.preventDefault();
-    this.props.onBlur && this.props.onBlur(this.state.text);
+    if (this.props.onBlur) {
+      this.props.onBlur(this.state.text);
+    }
   };
 
   render() {
