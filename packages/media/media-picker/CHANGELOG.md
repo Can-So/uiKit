@@ -1,5 +1,21 @@
 # @atlaskit/media-picker
 
+## 31.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/flag@9.1.9
+  - @atlaskit/modal-dialog@7.2.1
+  - @atlaskit/select@6.1.19
+  - @atlaskit/toggle@5.0.15
+  - @atlaskit/media-card@51.0.1
+  - @atlaskit/media-editor@25.0.1
+  - @atlaskit/media-test-helpers@19.1.1
+  - @atlaskit/media-ui@8.2.5
+  - @atlaskit/media-viewer@34.0.1
+  - @atlaskit/icon@16.0.0
+
 ## 31.0.0
 - Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
   - @atlaskit/media-card@51.0.0
