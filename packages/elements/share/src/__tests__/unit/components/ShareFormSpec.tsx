@@ -7,15 +7,18 @@ import { CommentField } from '../../../components/CommentField';
 import { ShareForm } from '../../../components/ShareForm';
 import { ShareHeader } from '../../../components/ShareHeader';
 import { UserPickerField } from '../../../components/UserPickerField';
+import { CopyLinkButton } from '../../../components/CopyLinkButton';
 import { messages } from '../../../i18n';
 import { renderProp } from '../_testUtils';
 
 describe('ShareForm', () => {
   it('should render Form with fields', () => {
+    const mockLink = 'link';
     const loadOptions = jest.fn();
     const onShareClick = jest.fn();
     const component = shallow(
       <ShareForm
+        copyLink={mockLink}
         loadOptions={loadOptions}
         onShareClick={onShareClick}
         title="some title"
@@ -46,6 +49,9 @@ describe('ShareForm', () => {
       appearance: 'primary',
       type: 'submit',
     });
+    const copyLinkButton = footer.find(CopyLinkButton);
+    expect(copyLinkButton.length).toBe(1);
+    expect(copyLinkButton.prop('link')).toEqual(mockLink);
 
     const buttonLabel = button.find(FormattedMessage);
     expect(buttonLabel).toHaveLength(1);
@@ -53,9 +59,14 @@ describe('ShareForm', () => {
   });
 
   it('should override submit button label', () => {
+    const mockLink = 'link';
     const loadOptions = jest.fn();
     const component = shallow(
-      <ShareForm loadOptions={loadOptions} submitButtonLabel="Invite" />,
+      <ShareForm
+        copyLink={mockLink}
+        loadOptions={loadOptions}
+        submitButtonLabel="Invite"
+      />,
     );
 
     const akForm = component.find<any>(Form);
