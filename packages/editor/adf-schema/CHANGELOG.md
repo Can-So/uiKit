@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.4.1
+- [patch] [2d6d5b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d6d5b6):
+
+  - ED-5379: rework selecting media under the hood; maintain size and layout when copy-pasting
+
 ## 1.4.0
 - [minor] [c5ee0c8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c5ee0c8):
 

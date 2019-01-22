@@ -7,6 +7,7 @@ import { FieldTextStateless } from '@atlaskit/field-text';
 
 import { metadata as objectIconMetadata } from '@atlaskit/icon-object';
 import { metadata as fileTypeIconMetadata } from '@atlaskit/icon-file-type';
+import { metadata as priorityIconMetadata } from '@atlaskit/icon-priority';
 
 import { metadata } from '../src';
 import IconExplorerCell from './utils/IconExplorerCell';
@@ -61,10 +62,27 @@ const fileTypeIconInfo = Promise.all(
     .reduce((acc, b) => ({ ...acc, ...b })),
 );
 
+const priorityIconInfo = Promise.all(
+  Object.keys(priorityIconMetadata).map(
+    async (name: $Keys<typeof priorityIconMetadata>) => {
+      // $ExpectError - we are fine with this being dynamic
+      const icon = await import(`@atlaskit/icon-priority/glyph/${name}.js`);
+      return { name, icon: icon.default };
+    },
+  ),
+).then(newData =>
+  newData
+    .map(icon => ({
+      [icon.name]: { ...priorityIconMetadata[icon.name], component: icon.icon },
+    }))
+    .reduce((acc, b) => ({ ...acc, ...b })),
+);
+
 const getAllIcons = async () => {
   const iconData = await iconIconInfo;
   const objectData = await objectIconInfo;
   const filetypeData = await fileTypeIconInfo;
+  const priorityData = await priorityIconInfo;
   return {
     first: {
       componentName: 'divider-icons',
@@ -94,6 +112,13 @@ const getAllIcons = async () => {
       divider: true,
     },
     ...filetypeData,
+    forth: {
+      componentName: 'divider-priority-icons',
+      component: () => 'exported from @atlaskit/icon-priority',
+      keywords: getKeywords(priorityIconMetadata),
+      divider: true,
+    },
+    ...priorityData,
   };
 };
 const allIconsPromise = getAllIcons();

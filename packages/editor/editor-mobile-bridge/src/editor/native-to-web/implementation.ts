@@ -270,9 +270,15 @@ export default class WebBridgeImpl extends WebBridge
     )(state, dispatch);
   }
 
-  setFocus() {
-    if (!this.editorView || this.editorView.hasFocus()) {
+  setFocus(force: boolean) {
+    if (!this.editorView) {
       return false;
+    }
+    if (this.editorView.hasFocus() && force) {
+      /**
+       * Forcefully remove focus (we re-focus below), as in some scenarios native views make webview cursors invisble.
+       */
+      (this.editorView.dom as HTMLElement).blur();
     }
 
     this.editorView.focus();

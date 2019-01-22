@@ -1,6 +1,6 @@
 import { MediaStore, FileItem } from '@atlaskit/media-store';
 import * as uuid from 'uuid';
-import { FileFetcher, getItemsFromKeys } from '../../file';
+import { FileFetcherImpl, getItemsFromKeys } from '../../file';
 
 describe('FileFetcher', () => {
   const setup = () => {
@@ -36,7 +36,7 @@ describe('FileFetcher', () => {
       getFileBinaryURL: jest.fn(),
       getItems: jest.fn().mockReturnValue(itemsResponse),
     } as any;
-    const fileFetcher = new FileFetcher(mediaStore);
+    const fileFetcher = new FileFetcherImpl(mediaStore);
 
     return { fileFetcher, mediaStore, items, itemsResponse };
   };

@@ -55,21 +55,6 @@ describe('media - keymaps', () => {
     });
   });
 
-  describe('Backspace keypress', () => {
-    it('calls media plugin state to remove media node', () => {
-      const { editorView, pluginState } = editor(doc(p('something{<>}')));
-      const removeMediaNodeSpy = jest.spyOn(
-        pluginState,
-        'removeSelectedMediaNode',
-      );
-
-      sendKeyToPm(editorView, 'Backspace');
-
-      expect(removeMediaNodeSpy).toHaveBeenCalled();
-      editorView.destroy();
-    });
-  });
-
   describe('Enter keypress', () => {
     it('splits media group', () => {
       const { editorView, pluginState } = editor(doc(p('{<>}')));

@@ -214,6 +214,19 @@ export default class Page {
     return this.browser.addValue(selector, keys);
   }
 
+  copy(selector) {
+    let keys;
+    if (this.browser.desiredCapabilities.os === 'Windows') {
+      keys = ['Control', 'c'];
+    } else if (this.browser.desiredCapabilities.browserName === 'chrome') {
+      // Workaround for https://bugs.chromium.org/p/chromedriver/issues/detail?id=30
+      keys = ['Control', 'Insert'];
+    } else {
+      keys = ['Command', 'c'];
+    }
+    return this.browser.addValue(selector, keys);
+  }
+
   // Wait
   waitForSelector(selector, options = {}) {
     return this.browser.waitForExist(selector, options.timeout || WAIT_TIMEOUT);

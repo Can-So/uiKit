@@ -43,19 +43,16 @@ export default class StaticTree extends Component<void, State> {
   ) {
     if (item.hasChildren) {
       return item.isExpanded ? (
-        <ChevronDownIcon
-          label=""
-          size="medium"
-          onClick={() => onCollapse(item.id)}
-        />
+        <div role="button" tabIndex="0" onClick={() => onCollapse(item.id)}>
+          <ChevronDownIcon label="" size="medium" />
+        </div>
       ) : (
-        <ChevronRightIcon
-          label=""
-          size="medium"
-          onClick={() => onExpand(item.id)}
-        />
+        <div role="button" tabIndex="0" onClick={() => onExpand(item.id)}>
+          <ChevronRightIcon label="" size="medium" />
+        </div>
       );
     }
+
     return <Dot>&bull;</Dot>;
   }
 

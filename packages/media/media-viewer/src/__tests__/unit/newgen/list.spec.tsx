@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { MediaItemType } from '@atlaskit/media-core';
 import { Observable } from 'rxjs';
-import { List, Props } from '../../../newgen/list';
+import { List, Props, State } from '../../../newgen/list';
 import { ErrorMessage } from '../../../newgen/error';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import { ItemViewer } from '../../../newgen/item-viewer';
@@ -26,7 +26,7 @@ function createFixture(props: Partial<Props>) {
         }),
     },
   } as any;
-  const el = mountWithIntlContext(
+  const el = mountWithIntlContext<Props, State>(
     <List
       items={items}
       defaultSelectedItem={selectedItem}

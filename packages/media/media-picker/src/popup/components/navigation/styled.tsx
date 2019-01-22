@@ -18,9 +18,10 @@ export const FolderViewerNavigation: ComponentClass<
   min-height: 60px;
   padding: 15px 13px;
   border-radius: 3px;
-
+  box-sizing: border-box;
   background-color: ${akColorN0};
 `;
+FolderViewerNavigation.displayName = 'FolderViewerNavigation';
 
 export const ControlsWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div``;
 

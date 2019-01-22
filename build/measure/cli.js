@@ -44,7 +44,7 @@ let c = meow(
 
 const paths = c.input;
 
-if (paths) {
+if (paths && paths.length > 0) {
   executeMeasure(paths, c).then((errors = []) => {
     if (errors.length > 0) {
       console.log(

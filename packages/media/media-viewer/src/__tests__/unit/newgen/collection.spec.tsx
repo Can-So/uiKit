@@ -10,7 +10,7 @@ import { MediaCollectionItem } from '@atlaskit/media-store';
 import Spinner from '@atlaskit/spinner';
 import ArrowRightCircleIcon from '@atlaskit/icon/glyph/chevron-right-circle';
 import { createContext } from '../_stubs';
-import { Collection } from '../../../newgen/collection';
+import { Collection, Props, State } from '../../../newgen/collection';
 import { ErrorMessage } from '../../../newgen/error';
 import { Identifier } from '../../../newgen/domain';
 import { List } from '../../../newgen/list';
@@ -65,7 +65,7 @@ function createFixture(
   identifier: Identifier,
   onClose?: () => {},
 ) {
-  const el = mountWithIntlContext(
+  const el = mountWithIntlContext<Props, State>(
     <Collection
       defaultSelectedItem={identifier}
       collectionName={collectionName}
