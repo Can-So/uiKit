@@ -9,6 +9,7 @@ import {
   stateKey as mediaStateKey,
 } from '../pm-plugins/main';
 import { FileIdentifier } from '@atlaskit/media-card';
+import { Context } from '@atlaskit/media-core';
 import { setNodeSelection } from '../../../utils';
 import WithPluginState from '../../../ui/WithPluginState';
 import { stateKey as reactNodeViewStateKey } from '../../../plugins/base/pm-plugins/react-nodeview';
@@ -35,12 +36,19 @@ export type MediaGroupProps = {
   editorAppearance: EditorAppearance;
 };
 
-export default class MediaGroup extends React.Component<MediaGroupProps> {
+export interface MediaGroupState {
+  viewContext?: Context;
+}
+
+export default class MediaGroup extends React.Component<
+  MediaGroupProps,
+  MediaGroupState
+> {
   private mediaPluginState: MediaPluginState;
   private mediaNodes: PMNode[];
 
-  state = {
-    selected: null,
+  state: MediaGroupState = {
+    viewContext: undefined,
   };
 
   constructor(props) {
@@ -49,8 +57,19 @@ export default class MediaGroup extends React.Component<MediaGroupProps> {
     this.setMediaItems(props);
   }
 
-  componentWillReceiveProps(props) {
+  componentDidMount() {
+    // TODO: should we check for viewContext here as well?
+  }
+
+  componentWillReceiveProps(props: MediaGroupProps) {
+    const { viewContext } = this.state;
+    const { mediaContext } = this.mediaPluginState; // TODO: we should make this property optional
     this.setMediaItems(props);
+    if (!viewContext && mediaContext) {
+      this.setState({
+        viewContext: mediaContext,
+      });
+    }
   }
 
   shouldComponentUpdate(nextProps) {
@@ -78,7 +97,12 @@ export default class MediaGroup extends React.Component<MediaGroupProps> {
     });
   };
 
-  renderChildNodes = node => {
+  renderChildNodes = () => {
+    const { viewContext } = this.state;
+
+    if (!viewContext) {
+      return null; // TODO: we probably want to show N loading cards => Potentially Filmstrip can handle this
+    }
     const items = this.mediaNodes.map((item, idx) => {
       const getState = this.mediaPluginState.stateManager.getState(
         item.attrs.__key || item.attrs.id,
@@ -113,13 +137,11 @@ export default class MediaGroup extends React.Component<MediaGroupProps> {
       };
     });
 
-    return (
-      <Filmstrip items={items} context={this.mediaPluginState.mediaContext} />
-    );
+    return <Filmstrip items={items} context={viewContext} />;
   };
 
   render() {
-    return this.renderChildNodes(this.props.node);
+    return this.renderChildNodes();
   }
 }
 
