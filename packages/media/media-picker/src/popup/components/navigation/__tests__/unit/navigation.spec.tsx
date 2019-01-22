@@ -4,7 +4,11 @@ import Dropdown from '@atlaskit/dropdown-menu';
 import RefreshIcon from '@atlaskit/icon/glyph/refresh';
 import DropdownMenu, { DropdownItem } from '@atlaskit/dropdown-menu';
 import SettingsIcon from '@atlaskit/icon/glyph/settings';
-import { mountWithIntlContext, fakeIntl } from '@atlaskit/media-test-helpers';
+import {
+  mountWithIntlContext,
+  fakeIntl,
+  nextTick,
+} from '@atlaskit/media-test-helpers';
 import {
   getComponentClassWithStore,
   mockStore,
@@ -70,7 +74,7 @@ describe('<Navigation />', () => {
     name: SERVICE_NAME_DROPBOX,
     accountId: ACCOUNT_ID_DROPBOX,
   };
-  const ACCOUNTS: ServiceAccountWithType[] = [
+  const ACCOUNTS: Promise<ServiceAccountWithType[]> = Promise.resolve([
     {
       displayName: 'me@google.com',
       id: 'meatgoogle',
@@ -95,7 +99,7 @@ describe('<Navigation />', () => {
       status: 'available',
       type: 'dropbox',
     },
-  ];
+  ] as ServiceAccountWithType[]);
   let onStartAuth = jest.fn();
   let onChangeAccount = jest.fn();
   let onUnlinkAccount = jest.fn();
@@ -227,7 +231,7 @@ describe('<Navigation />', () => {
   });
 
   describe('#getAccountsDropdownItems()', () => {
-    it('should retrieve available Google Accounts', () => {
+    it('should retrieve available Google Accounts', async () => {
       const component = shallow(
         <Navigation
           accounts={ACCOUNTS}
@@ -240,6 +244,8 @@ describe('<Navigation />', () => {
           intl={fakeIntl}
         />,
       );
+
+      await nextTick();
 
       expect(component.find(DropdownItem).get(0).props.children.type).toEqual(
         'b',
@@ -258,7 +264,7 @@ describe('<Navigation />', () => {
       ).toEqual('Unlink Account');
     });
 
-    it('should retrieve available Dropbox Accounts', () => {
+    it('should retrieve available Dropbox Accounts', async () => {
       const component = shallow(
         <Navigation
           accounts={ACCOUNTS}
@@ -271,6 +277,8 @@ describe('<Navigation />', () => {
           intl={fakeIntl}
         />,
       );
+
+      await nextTick();
 
       expect(component.find(DropdownItem).get(0).props.children.type).toEqual(
         'b',
@@ -289,7 +297,7 @@ describe('<Navigation />', () => {
       ).toEqual('Unlink Account');
     });
 
-    it('should switch active account when clicking on inactive one', () => {
+    it('should switch active account when clicking on inactive one', async () => {
       const component = shallow(
         <Navigation
           accounts={ACCOUNTS}
@@ -302,6 +310,8 @@ describe('<Navigation />', () => {
           intl={fakeIntl}
         />,
       );
+
+      await nextTick();
 
       component
         .find(DropdownItem)

@@ -8,7 +8,6 @@ describe('<FolderViewr />', () => {
   const setup = () => {
     const props: FolderViewerProps = {
       path: [],
-      accounts: [],
       service: {
         accountId: 'some-service-account-id',
         name: 'google',
