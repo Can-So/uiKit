@@ -18,6 +18,7 @@ import {
 import {
   containsEmojiId,
   isPromise /*, isEmojiIdEqual, isEmojiLoaded*/,
+  isEmojiDescription,
 } from '../../type-helpers';
 import {
   EmojiDescription,
@@ -133,9 +134,9 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     }
     if (!hideToneSelector) {
       const toneEmoji = getToneEmoji(emojiProvider);
-      if (isPromise(toneEmoji)) {
+      if (isPromise<OptionalEmojiDescriptionWithVariations>(toneEmoji)) {
         toneEmoji.then(emoji => this.setState({ toneEmoji: emoji }));
-      } else {
+      } else if (toneEmoji === undefined || isEmojiDescription(toneEmoji)) {
         this.setState({ toneEmoji });
       }
     }
@@ -260,7 +261,7 @@ export default class EmojiPickerComponent extends PureComponent<Props, State> {
     });
   };
 
-  private onSearch = query => {
+  private onSearch = (query: string) => {
     this.setState({
       query,
     });

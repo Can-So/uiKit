@@ -1,7 +1,10 @@
 import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle';
 import { waitUntil } from '@atlaskit/util-common-test';
 import { MockEmojiResource } from '@atlaskit/util-data-test';
+import { ReactWrapper } from 'enzyme';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { EmojiProvider } from '../../../..';
 import EmojiRepository from '../../../../api/EmojiRepository';
 import Emoji from '../../../../components/common/Emoji';
 import EmojiDeletePreview from '../../../../components/common/EmojiDeletePreview';
@@ -16,7 +19,7 @@ import {
   customTitle,
   userCustomTitle,
 } from '../../../../constants';
-import {} from '../../../../types';
+import { EmojiDescription } from '../../../../types';
 import * as ImageUtil from '../../../../util/image';
 import {
   createPngFile,
@@ -32,23 +35,26 @@ import * as commonHelper from '../common/_common-test-helpers';
 import * as helper from './_emoji-picker-test-helpers';
 
 describe('<UploadingEmojiPicker />', () => {
-  let firePrivateAnalyticsEvent;
+  let firePrivateAnalyticsEvent: jest.Mock;
 
-  const safeFindCustomEmojiButton = async component => {
+  const safeFindCustomEmojiButton = async (component: ReactWrapper) => {
     await waitUntil(() => commonHelper.customEmojiButtonVisible(component));
     return commonHelper.findCustomEmojiButton(component);
   };
 
-  const uploadPreviewShown = component => {
+  const uploadPreviewShown = (component: ReactWrapper) => {
     const uploadPreview = helper.findUploadPreview(component);
     expect(uploadPreview).toHaveLength(1);
 
     const uploadPreviewEmoji = uploadPreview.find(Emoji);
     // Should show two emoji in EmojiUploadPrevew
     expect(uploadPreviewEmoji).toHaveLength(2);
-    let emoji = uploadPreviewEmoji.at(0).prop('emoji');
+    const emoji: EmojiDescription = uploadPreviewEmoji.at(0).prop('emoji');
     expect(emoji.shortName).toEqual(':cheese_burger:');
-    expect(emoji.representation.imagePath).toEqual(pngDataURL);
+    expect(emoji.representation).toBeDefined();
+    expect(emoji.representation).toMatchObject({
+      imagePath: pngDataURL,
+    });
   };
 
   const typeEmojiName = component => {
@@ -69,8 +75,8 @@ describe('<UploadingEmojiPicker />', () => {
   });
 
   describe('upload', () => {
-    let consoleError;
-    let emojiProvider;
+    let consoleError: jest.SpyInstance;
+    let emojiProviderPromise: Promise<any>;
 
     beforeEach(() => {
       consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -99,7 +105,9 @@ describe('<UploadingEmojiPicker />', () => {
       consoleError.mockRestore();
     });
 
-    const navigateToUploadPreview = async providerPromise => {
+    const navigateToUploadPreview = async (
+      providerPromise: Promise<EmojiProvider>,
+    ) => {
       const component = await helper.setupPicker({
         emojiProvider: providerPromise,
         hideToneSelector: true,
@@ -625,10 +633,10 @@ describe('<UploadingEmojiPicker />', () => {
     });
 
     // Click delete button on user emoji in picker
-    const openDeletePrompt = component =>
+    const openDeletePrompt = (component: ReactWrapper) =>
       component.find(CrossCircleIcon).simulate('click');
     // Click 'Remove' in delete preview
-    const clickRemove = component =>
+    const clickRemove = (component: ReactWrapper) =>
       component
         .find(EmojiDeletePreview)
         .find('button')

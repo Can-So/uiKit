@@ -100,7 +100,7 @@ export default class EmojiPickerVirtualList extends PureComponent<
 
   context: EmojiContext;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.buildEmojiGroupedByCategory(props.emojis, props.currentUser);
@@ -140,7 +140,7 @@ export default class EmojiPickerVirtualList extends PureComponent<
     }
   };
 
-  private onSearch = e => {
+  private onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (this.props.onSearch) {
       this.props.onSearch(e.target.value);
     }
@@ -305,8 +305,10 @@ export default class EmojiPickerVirtualList extends PureComponent<
       {} as CategoryKeyToGroup,
     );
 
-    this.allEmojiGroups = Object.keys(categoryToGroupMap)
-      .map(key => categoryToGroupMap[key])
+    this.allEmojiGroups = (Object.keys(
+      categoryToGroupMap,
+    ) as CategoryGroupKey[])
+      .map((key: CategoryGroupKey) => categoryToGroupMap[key])
       .map(group => {
         if (group.category !== 'FREQUENT') {
           group.emojis.sort(byOrder);
@@ -331,7 +333,7 @@ export default class EmojiPickerVirtualList extends PureComponent<
    * Checks if list is showing a new CategoryId
    * to inform selector to change active category
    */
-  private checkCategoryIdChange = indexes => {
+  private checkCategoryIdChange = (indexes: { startIndex: number }) => {
     const { startIndex } = indexes;
 
     // FS-1844 Fix a rendering problem when scrolling to the top
@@ -356,8 +358,9 @@ export default class EmojiPickerVirtualList extends PureComponent<
     }
   };
 
-  private rowSize = ({ index }) => this.virtualItems[index].height;
-  private renderRow = context =>
+  private rowSize = ({ index }: { index: number }) =>
+    this.virtualItems[index].height;
+  private renderRow = (context: Items.VirtualRenderContext) =>
     virtualItemRenderer(this.virtualItems, context);
 
   render() {

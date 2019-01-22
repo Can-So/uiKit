@@ -1,20 +1,18 @@
 import { expect } from 'chai';
-
-import { customCategory } from '../../../constants';
-import {
-  EmojiDescription,
-  EmojiServiceResponse,
-  EmojiServiceDescription,
-  EmojiServiceDescriptionWithVariations,
-  ImageRepresentation,
-  SpriteRepresentation,
-} from '../../../types';
 import {
   denormaliseEmojiServiceResponse,
   shouldUseAltRepresentation,
 } from '../../../api/EmojiUtils';
+import { customCategory } from '../../../constants';
 import { isEmojiVariationDescription } from '../../../type-helpers';
-
+import {
+  EmojiDescription,
+  EmojiServiceDescription,
+  EmojiServiceDescriptionWithVariations,
+  EmojiServiceResponse,
+  ImageRepresentation,
+  SpriteRepresentation,
+} from '../../../types';
 import {
   defaultMediaApiToken,
   mediaEmoji,
@@ -32,7 +30,11 @@ describe('EmojiUtils', () => {
       'order',
     ];
 
-    const checkFields = (actual, expected, fields) => {
+    const checkFields = (
+      actual: { [key: string]: any } = {},
+      expected: { [key: string]: any } = {},
+      fields: string[] = [],
+    ) => {
       fields.forEach(field => {
         expect(actual[field], field).to.equal(expected[field]);
       });
@@ -163,6 +165,7 @@ describe('EmojiUtils', () => {
       expect(emojis.length).to.equal(1);
       const e = emojis[0];
       checkFields(e, emoji, emojiFields);
+
       checkFields(e.representation, emoji.representation, [
         'imagePath',
         'height',

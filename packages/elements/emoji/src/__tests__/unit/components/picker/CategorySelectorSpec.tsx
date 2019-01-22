@@ -1,16 +1,17 @@
-import { ReactWrapper } from 'enzyme';
 import { mountWithIntl } from '@atlaskit/editor-test-helpers';
-import * as React from 'react';
 import { expect } from 'chai';
-
-import { defaultCategories } from '../../../../constants';
-import * as styles from '../../../../components/picker/styles';
+import { ReactWrapper } from 'enzyme';
+import * as React from 'react';
+import { messages } from '../../../../components/i18n';
+import { CategoryDescriptionMap } from '../../../../components/picker/categories';
 import CategorySelector, {
   Props,
   sortCategories,
 } from '../../../../components/picker/CategorySelector';
-import { CategoryDescriptionMap } from '../../../../components/picker/categories';
-import { messages } from '../../../../components/i18n';
+import * as styles from '../../../../components/picker/styles';
+import { defaultCategories } from '../../../../constants';
+import { isMessagesKey } from '../../../../type-helpers';
+import { CategoryId } from '../../../../types';
 
 const setupComponent = (props?: Props): ReactWrapper<any, any> =>
   mountWithIntl(<CategorySelector {...props} />);
@@ -35,7 +36,6 @@ describe('<CategorySelector />', () => {
   });
 
   it('displays categories in sorted order', () => {
-    // @ts-ignore
     const dynamicCategories: CategoryId[] = ['CUSTOM', 'FREQUENT', 'ATLASSIAN'];
     const component = setupComponent({
       dynamicCategories,
@@ -47,9 +47,12 @@ describe('<CategorySelector />', () => {
     orderedCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
       const categoryKey = CategoryDescriptionMap[categoryId].name;
-      expect(button.prop('title'), `Button #${i}`).to.equal(
-        messages[categoryKey].defaultMessage,
-      );
+      expect(isMessagesKey(categoryKey)).to.be.true;
+      if (isMessagesKey(categoryKey)) {
+        expect(button.prop('title'), `Button #${i}`).to.equal(
+          messages[categoryKey].defaultMessage,
+        );
+      }
     });
   });
 
@@ -62,13 +65,16 @@ describe('<CategorySelector />', () => {
     defaultCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
       const categoryKey = CategoryDescriptionMap[categoryId].name;
-      expect(button.prop('title'), `Button #${i}`).to.equal(
-        messages[categoryKey].defaultMessage,
-      );
-      expect(
-        button.hasClass(styles.disable),
-        `Button #${i} is disabled`,
-      ).to.equal(true);
+      expect(isMessagesKey(categoryKey)).to.be.true;
+      if (isMessagesKey(categoryKey)) {
+        expect(button.prop('title'), `Button #${i}`).to.equal(
+          messages[categoryKey].defaultMessage,
+        );
+        expect(
+          button.hasClass(styles.disable),
+          `Button #${i} is disabled`,
+        ).to.equal(true);
+      }
     });
   });
 
@@ -97,9 +103,12 @@ describe('<CategorySelector />', () => {
     defaultCategories.forEach((categoryId, i) => {
       const button = categoryButtons.at(i);
       const categoryKey = CategoryDescriptionMap[categoryId].name;
-      expect(button.prop('title'), `Button #${i}`).to.equal(
-        messages[categoryKey].defaultMessage,
-      );
+      expect(isMessagesKey(categoryKey)).to.be.true;
+      if (isMessagesKey(categoryKey)) {
+        expect(button.prop('title'), `Button #${i}`).to.equal(
+          messages[categoryKey].defaultMessage,
+        );
+      }
       const shouldBeActive = i === 3;
       expect(
         button.hasClass(styles.active),

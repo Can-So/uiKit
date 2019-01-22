@@ -55,10 +55,12 @@ const leftClick = {
   button: 0,
 };
 
-const findEmojiItems = component =>
+const findEmojiItems = (component: ReactWrapper) =>
   component.update() && component.find(EmojiTypeAheadItem);
-const itemsVisibleCount = component => findEmojiItems(component).length;
-const itemsVisible = component => itemsVisibleCount(component) > 0;
+const itemsVisibleCount = (component: ReactWrapper) =>
+  findEmojiItems(component).length;
+const itemsVisible = (component: ReactWrapper) =>
+  itemsVisibleCount(component) > 0;
 const doneLoading = (component: ReactWrapper<TypeAheadProps, TypeAheadState>) =>
   component.update() && !component.state('loading');
 

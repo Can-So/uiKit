@@ -38,7 +38,7 @@ export class EmojiPickerInternal extends LoadingEmojiComponent<
     asyncLoadedComponent: EmojiPickerInternal.AsyncLoadedComponent,
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props, {});
   }
 

@@ -1,15 +1,14 @@
-import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import * as React from 'react';
 import { Component } from 'react';
-
+import EmojiProvider from '../../api/EmojiResource';
 import { defaultEmojiHeight } from '../../constants';
-import { EmojiContext } from './internal-types';
+import { isPromise } from '../../type-helpers';
+import { EmojiId, OptionalEmojiDescription } from '../../types';
 import CachingEmoji from './CachingEmoji';
 import EmojiPlaceholder from './EmojiPlaceholder';
+import { EmojiContext } from './internal-types';
 import { State as LoadingState } from './LoadingEmojiComponent';
-import { EmojiId, OptionalEmojiDescription } from '../../types';
-import { isPromise } from '../../type-helpers';
-import EmojiProvider from '../../api/EmojiResource';
 
 export interface BaseResourcedEmojiProps {
   emojiId: EmojiId;
@@ -33,7 +32,7 @@ export default class ResourcedEmojiComponent extends Component<Props, State> {
 
   private ready = false;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -52,7 +51,7 @@ export default class ResourcedEmojiComponent extends Component<Props, State> {
 
   private refreshEmoji(emojiProvider: EmojiProvider, emojiId: EmojiId) {
     const foundEmoji = emojiProvider.findByEmojiId(emojiId);
-    if (isPromise(foundEmoji)) {
+    if (isPromise<OptionalEmojiDescription>(foundEmoji)) {
       this.setState({
         loaded: false,
       });
