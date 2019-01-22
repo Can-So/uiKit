@@ -188,11 +188,12 @@ pipelines:
     # This will run with the visual regression tool
     build-visual-regression:
       - step:
-          image: atlassianlabs/atlaskit-mk-2-vr:1.0.5
+          image: atlassianlabs/atlaskit-mk-2-vr:1.0.6
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
-            - yarn test:vr:changed
+            # Run it for button now since this is the only pkg with store snapshot
+            - yarn test:vr button
           caches:
             - node
       # This will run essentially the branch builds, but without any optimizations and should be manually

@@ -333,23 +333,40 @@ expect.addSnapshotSerializer(createSerializer(emotion));
 // set up for visual regression
 if (process.env.VISUAL_REGRESSION) {
   const puppeteer = require('puppeteer');
+  const request = require('request-promise-native');
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 
   beforeAll(async () => {
-    // show browser when watch is enabled
-    const isWatch = process.env.WATCH === 'true';
-    let headless = true;
-    if (isWatch) {
-      headless = false;
+    if (process.env.CI) {
+      // launch and run puppeteer if inside of CI
+      console.log('puppeteer:', puppeteer.executablePath());
+      global.browser = await puppeteer.launch({
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+        ],
+      });
+      global.page = await global.browser.newPage();
+    } else {
+      // connect to puppeteer running on local docker
+      const options = {
+        uri: `http://localhost:9222/json/version`,
+        json: true,
+        resolveWithFullResponse: true,
+      };
+      const response = await request(options);
+      console.log(
+        'Connecting to webSocket:',
+        response.body.webSocketDebuggerUrl,
+      );
+      const wsEndpoint = response.body.webSocketDebuggerUrl;
+      global.browser = await puppeteer.connect({
+        browserWSEndpoint: wsEndpoint,
+        ignoreHTTPSErrors: true,
+      });
+      global.page = await global.browser.newPage();
     }
-    global.browser = await puppeteer.launch({
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-      ],
-    });
-    global.page = await global.browser.newPage();
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);
 
   afterAll(async () => {
