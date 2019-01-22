@@ -1,1 +1,1 @@
-- Sorting behaviour for numeric data improved, 0 values placed correctly
+- Sorting behaviour fixed for integers. New behaviour groups datatypes with integers first, then strings, then other values, and sorting is performed within those groups.
