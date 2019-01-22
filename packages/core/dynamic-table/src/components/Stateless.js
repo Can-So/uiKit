@@ -194,7 +194,6 @@ class DynamicTable extends Component<Props, State> {
     const spinnerSize = this.getSpinnerSize();
     const emptyBody = this.renderEmptyBody();
     const canRank = isRankable && !sortKey;
-
     return (
       <>
         <LoadingContainerAdvanced
