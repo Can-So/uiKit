@@ -1,1 +1,0 @@
-- added support for rendering of icons with Confluence links
