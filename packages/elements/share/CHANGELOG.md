@@ -1,5 +1,10 @@
 # @atlaskit/share
 
+## 0.1.3
+- [patch] [42bfdcf8ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/42bfdcf8ed):
+
+  - Added CopyLinkButton component and integrated into ShareForm
+
 ## 0.1.2
 - [patch] [48856cfa79](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/48856cfa79):
 
