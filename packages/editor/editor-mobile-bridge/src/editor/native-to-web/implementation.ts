@@ -34,6 +34,7 @@ import {
   setLinkText,
 } from '@atlaskit/editor-core';
 import { EditorView } from 'prosemirror-view';
+import { EditorState } from 'prosemirror-state';
 import { JSONTransformer } from '@atlaskit/editor-json-transformer';
 import { Color as StatusColor } from '@atlaskit/status';
 
@@ -294,7 +295,8 @@ export default class WebBridgeImpl extends WebBridge
 
     selectTypeAheadItem(
       {
-        selectItem: (state, item, insert) => {
+        // TODO export insert type from editor-core.
+        selectItem: (state: EditorState, item: TypeAheadItem, insert: any) => {
           if (type === 'mention') {
             const { id, name, nickname, accessLevel, userType } = item;
             const renderName = nickname ? nickname : name;

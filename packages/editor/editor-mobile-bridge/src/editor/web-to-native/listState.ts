@@ -1,10 +1,12 @@
+import { ListsState } from '@atlaskit/editor-core';
+
 export class ListState {
   name: string;
   active: boolean;
   enabled: boolean;
 }
 
-export function valueOf(state): ListState[] {
+export function valueOf(state: ListsState): ListState[] {
   let states: ListState[] = [
     {
       name: 'bullet',
