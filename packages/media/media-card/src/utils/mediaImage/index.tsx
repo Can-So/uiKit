@@ -4,7 +4,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Component, CSSProperties } from 'react';
-import { getCssFromImageOrientation } from '@atlaskit/media-ui';
+import { getCssFromImageOrientation, isOnItsSide } from '@atlaskit/media-ui';
 import { ImageComponent } from './styled';
 
 export interface MediaImageProps {
@@ -83,7 +83,12 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
     } = this.state;
 
     const parentRatio = parentWidth / parentHeight;
-    const imgRatio = imgWidth / imgHeight;
+    let imgRatio = imgWidth / imgHeight;
+
+    const isRotated = isOnItsSide(previewOrientation || 1);
+    if (isRotated) {
+      imgRatio = 1 / imgRatio;
+    }
 
     /*
       Cover strategy means we want to full entire screen with an image. Here is an example:

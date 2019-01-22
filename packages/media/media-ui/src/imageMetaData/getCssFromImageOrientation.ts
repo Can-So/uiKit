@@ -9,6 +9,9 @@ const ORIENT_TRANSFORMS: { [key: number]: string } = {
   8: 'rotate(270deg)', // Rotate 270 CW
 };
 
+export const isOnItsSide = (orientation: number) =>
+  orientation === 6 || orientation === 8;
+
 export const getCssFromImageOrientation = (orientation: number): string => {
   return ORIENT_TRANSFORMS[orientation];
 };
