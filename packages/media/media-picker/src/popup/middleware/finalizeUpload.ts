@@ -4,11 +4,7 @@ import {
   MediaStoreCopyFileWithTokenBody,
   MediaStoreCopyFileWithTokenParams,
 } from '@atlaskit/media-store';
-import {
-  fileStreamsCache,
-  FileState,
-  ProcessedFileState,
-} from '@atlaskit/media-core';
+import { fileStreamsCache, FileState } from '@atlaskit/media-core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Fetcher } from '../tools/fetcher/fetcher';
 import {
@@ -106,10 +102,7 @@ async function copyFile({
           event: {
             name: 'upload-processing',
             data: {
-              file: {
-                ...file,
-                publicId,
-              },
+              file,
             },
           },
           uploadId,
@@ -131,9 +124,21 @@ async function copyFile({
           next(currentState) {
             setTimeout(() => subscription.unsubscribe(), 0);
             setTimeout(() => {
+              const {
+                artifacts,
+                mediaType,
+                mimeType,
+                name,
+                size,
+              } = processedDestinationFile;
               subject.next({
-                ...(currentState as ProcessedFileState),
+                ...currentState,
                 status: 'processed',
+                artifacts,
+                mediaType,
+                mimeType,
+                name,
+                size,
               });
             }, 0);
           },
@@ -144,10 +149,7 @@ async function copyFile({
           event: {
             name: 'upload-end',
             data: {
-              file: {
-                ...file,
-                publicId: processedDestinationFile.id,
-              },
+              file,
               public: processedDestinationFile,
             },
           },

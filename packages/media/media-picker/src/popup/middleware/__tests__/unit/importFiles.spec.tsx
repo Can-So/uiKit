@@ -128,10 +128,7 @@ describe('importFiles middleware', () => {
       const uploadEndEvent: UploadEndEvent = {
         name: 'upload-end',
         data: {
-          file: {
-            ...file,
-            publicId: `some-public-id-${index}`,
-          },
+          file,
           public: {
             id: `some-public-id-${index}`,
           },

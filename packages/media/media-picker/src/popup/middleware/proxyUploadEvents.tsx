@@ -38,7 +38,7 @@ export const proxyUploadEvents = (store: Store<State>) => (
           if (event.name === 'upload-processing') {
             const { file: localFile } = event.data;
             const source = {
-              id: localFile.publicId,
+              id: localFile.id,
               collection: RECENTS_COLLECTION,
             };
             store.dispatch(

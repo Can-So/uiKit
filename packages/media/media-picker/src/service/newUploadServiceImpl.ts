@@ -3,7 +3,6 @@ import {
   Context,
   UploadableFile,
   MediaType,
-  FileDetails,
   getMediaTypeFromMimeType,
   ContextFactory,
   fileStreamsCache,
@@ -20,7 +19,7 @@ import {
 } from '@atlaskit/media-store';
 import { EventEmitter2 } from 'eventemitter2';
 import { map } from 'rxjs/operators/map';
-import { MediaFile, PublicMediaFile } from '../domain/file';
+import { MediaFile } from '../domain/file';
 
 import { RECENTS_COLLECTION } from '../popup/config';
 import { mapAuthToSourceFileOwner } from '../popup/domain/source-file';
@@ -337,22 +336,23 @@ export class NewUploadServiceImpl implements UploadService {
       // tslint:disable-next-line:no-console
       .catch(console.log); // We intentionally swallow these errors
 
-    const publicMediaFile: PublicMediaFile = {
-      ...mediaFile,
-      publicId: fileId,
-    };
+    // TODO: do we need to override the id: fileId ?
+    // const mediaFile: MediaFile = {
+    //   ...mediaFile,
+    //   id: fileId,
+    // };
 
     this.emit('file-converting', {
-      file: publicMediaFile,
+      file: mediaFile,
     });
 
     // TODO: fill extra available details? should we use this.context.getFile(publicId, {collectionName}) here?
-    const details: FileDetails = {
+    const details = {
       id: fileId,
     };
 
     this.emit('file-converted', {
-      file: publicMediaFile,
+      file: mediaFile,
       public: details,
     });
 

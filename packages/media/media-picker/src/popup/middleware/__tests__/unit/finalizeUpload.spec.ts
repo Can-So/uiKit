@@ -81,10 +81,7 @@ describe('finalizeUploadMiddleware', () => {
           event: {
             name: 'upload-end',
             data: {
-              file: {
-                ...file,
-                publicId: copiedFile.id,
-              },
+              file,
               public: copiedFile,
             },
           },
@@ -103,10 +100,7 @@ describe('finalizeUploadMiddleware', () => {
           event: {
             name: 'upload-processing',
             data: {
-              file: {
-                ...file,
-                publicId: copiedFile.id,
-              },
+              file,
             },
           },
           uploadId,

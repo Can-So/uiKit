@@ -89,7 +89,7 @@ describe('MediaLocalUpload', () => {
     const { emitter, emitUploadServiceEvent } = setup();
 
     emitUploadServiceEvent('file-converted', {
-      file: { ...imageFile, publicId: 'some-id' },
+      file: imageFile,
       public: { id: 'some-id' },
     });
 

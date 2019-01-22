@@ -1,6 +1,5 @@
-import { FileDetails } from '@atlaskit/media-core';
-
-import { MediaFile, PublicMediaFile } from '../domain/file';
+import { MediaFile as MediaStoreMediaFile } from '@atlaskit/media-store';
+import { MediaFile } from '../domain/file';
 import { MediaProgress } from '../domain/progress';
 import { MediaError } from '../domain/error';
 import { Preview } from '../domain/preview';
@@ -12,8 +11,11 @@ export interface UploadEventEmitter {
   emitUploadsStart(files: MediaFile[]): void;
   emitUploadProgress(file: MediaFile, progress: MediaProgress): void;
   emitUploadPreviewUpdate(file: MediaFile, preview: Preview): void;
-  emitUploadProcessing(file: PublicMediaFile): void;
-  emitUploadEnd(file: PublicMediaFile, fileDetails: FileDetails): void;
+  emitUploadProcessing(file: MediaFile): void;
+  emitUploadEnd(
+    file: MediaFile,
+    fileDetails: Partial<MediaStoreMediaFile>,
+  ): void;
   emitUploadError(file: MediaFile, error: MediaError): void;
 }
 
@@ -40,11 +42,14 @@ export class UploadComponent<M extends UploadEventPayloadMap>
     });
   }
 
-  emitUploadProcessing(file: PublicMediaFile): void {
+  emitUploadProcessing(file: MediaFile): void {
     this.emit('upload-processing', { file });
   }
 
-  emitUploadEnd(file: PublicMediaFile, fileDetails: FileDetails): void {
+  emitUploadEnd(
+    file: MediaFile,
+    fileDetails: Partial<MediaStoreMediaFile>,
+  ): void {
     this.emit('upload-end', { file, public: fileDetails });
   }
 

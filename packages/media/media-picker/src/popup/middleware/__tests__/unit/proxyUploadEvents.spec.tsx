@@ -50,10 +50,7 @@ describe('proxyUploadEvents middleware', () => {
     const originalEvent: UploadProcessingEvent = {
       name: 'upload-processing',
       data: {
-        file: {
-          ...file,
-          publicId,
-        },
+        file,
       },
     };
     const action = {

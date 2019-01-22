@@ -114,9 +114,9 @@ export async function importFiles(
   const selectedUploadFiles = selectedItems.map(item =>
     mapSelectedItemToSelectedUploadFile(item, tenantCollection),
   );
-  const touchFileDescriptors = selectedUploadFiles
-    // .filter(file => file.serviceName !== 'upload')
-    .map(file => file.touchFileDescriptor);
+  const touchFileDescriptors = selectedUploadFiles.map(
+    file => file.touchFileDescriptor,
+  );
   if (touchFileDescriptors.length) {
     touchFileDescriptors.forEach(descriptor => {
       // TODO: move into own method
@@ -152,9 +152,12 @@ export async function importFiles(
           }
         } else if (serviceName === 'recent_files') {
           preview = new Promise<FilePreview>(async resolve => {
-            // TODO: pass bigger dimensions aka MV values
+            // We fetch a good size image, since it can be opened later on in MV
             const blob = await userContext.getImage(file.id, {
               collection: RECENTS_COLLECTION,
+              width: 1920,
+              height: 1080,
+              mode: 'fit',
             });
 
             resolve({ blob });
@@ -223,7 +226,7 @@ export const importFilesFromLocalUpload = (
     if (event.name === 'upload-processing') {
       const { file } = event.data;
       const source = {
-        id: file.publicId,
+        id: file.id,
         collection: RECENTS_COLLECTION,
       };
 

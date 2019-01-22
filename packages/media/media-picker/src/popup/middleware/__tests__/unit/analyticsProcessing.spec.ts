@@ -484,15 +484,12 @@ describe('analyticsProcessing middleware', () => {
     };
     verifyAnalyticsCall(
       fileUploadEnd({
-        file: {
-          ...testFile1,
-          publicId: 'pubid1',
-        },
+        file: testFile1,
         public: {
           id: 'id1',
           name: 'file1',
           size: 1,
-          creationDate: 1,
+          // creationDate: 1,
           mimeType: 'type1',
           mediaType: 'image',
           processingStatus: 'succeeded',
@@ -522,15 +519,12 @@ describe('analyticsProcessing middleware', () => {
             events: [
               {
                 data: {
-                  file: {
-                    ...testFile1,
-                    publicId: 'pubid1',
-                  },
+                  file: testFile1,
                   public: {
                     id: 'id1',
                     name: 'file1',
                     size: 1,
-                    creationDate: 1,
+                    // creationDate: 1,
                     mimeType: testFile1.type,
                     mediaType: 'image',
                     processingStatus: 'succeeded',
