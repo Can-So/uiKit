@@ -1,1 +1,0 @@
-- Fixed table column not selectable (regression in prosemirror-view@1.6.8)

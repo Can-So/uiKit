@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.0.3
+- [patch] [a5714ccc17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5714ccc17):
+
+  - Fixed table column not selectable (regression in prosemirror-view@1.6.8)
+
 ## 97.0.2
 - [patch] [8dc4a35361](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8dc4a35361):
 
