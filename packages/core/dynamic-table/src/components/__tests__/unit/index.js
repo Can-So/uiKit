@@ -15,14 +15,8 @@ import LoadingContainer from '../../LoadingContainer';
 import LoadingContainerAdvanced from '../../LoadingContainerAdvanced';
 import { Caption } from '../../../styled/DynamicTable';
 import DynamicTable, { DynamicTableStateless } from '../../..';
-import {
-  rows,
-  head,
-  rowsWithKeys,
-  headNumeric,
-  rowsNumeric,
-  rowsNumericWithKeys,
-} from './_data';
+import { rows, head, rowsWithKeys } from './_data';
+import { headNumeric, rowsNumeric, rowsNumericWithKeys } from './_dataNumeric';
 
 import { name } from '../../../../package.json';
 

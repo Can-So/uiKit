@@ -39,7 +39,6 @@ const getSortedRows = (head, rows, sortKey, sortOrder) => {
 
     // Sort strings using localeCompare
     if (typeof valA === 'string' && typeof valB === 'string') {
-      console.log('strings!');
       return (
         modifier *
         valA.localeCompare(valB, undefined, {
