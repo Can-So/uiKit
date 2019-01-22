@@ -20,6 +20,7 @@
     "@atlaskit/button": "^10.1.1",
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/drawer": "^2.6.1",
+    "@atlaskit/navigation": "^33.3.8",
     "@atlaskit/theme": "^7.0.1",
     "fetch-mock": "^6.5.2"
   },
