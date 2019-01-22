@@ -195,73 +195,6 @@ describe(name, () => {
       checkSortedData(true);
     });
 
-    it('should sort numeric data correctly, listed before zero, empty and string values', () => {
-      const headCellsNumeric = headNumeric.cells.map(cell => ({
-        ...cell,
-        isSortable: true,
-      }));
-      const wrapper = mount(
-        <DynamicTableStateless
-          sortKey="numeric"
-          sortOrder="ASC"
-          head={{ cells: headCellsNumeric }}
-          rows={rowsNumericWithKeys}
-          isRankable
-        />,
-      );
-      const bodyRows = wrapper.find('tbody tr');
-
-      expect(
-        bodyRows
-          .at(0)
-          .find('td')
-          .at(0)
-          .text(),
-      ).toBe('Negative One');
-      expect(
-        bodyRows
-          .at(0)
-          .find('td')
-          .at(1)
-          .text(),
-      ).toBe('-1');
-      expect(
-        bodyRows
-          .at(1)
-          .find('td')
-          .at(1)
-          .text(),
-      ).toBe('0');
-      expect(
-        bodyRows
-          .at(2)
-          .find('td')
-          .at(1)
-          .text(),
-      ).toBe('1');
-      expect(
-        bodyRows
-          .at(3)
-          .find('td')
-          .at(1)
-          .text(),
-      ).toBe('');
-      expect(
-        bodyRows
-          .at(4)
-          .find('td')
-          .at(1)
-          .text(),
-      ).toBe(' ');
-      expect(
-        bodyRows
-          .at(5)
-          .find('td')
-          .at(1)
-          .text(),
-      ).toBe('a string');
-    });
-
     it('should pass down extra props', () => {
       const theadOnClick = () => {};
       const thOnClick = () => {};
@@ -641,7 +574,48 @@ describe(name, () => {
           .find('td')
           .at(1)
           .text(),
+      ).toBe('1');
+      expect(
+        bodyRows
+          .at(8)
+          .find('td')
+          .at(1)
+          .text(),
       ).toBe('a string');
+    });
+
+    it('should sort grouped numbers in strings', () => {
+      const wrapper = mount(
+        <DynamicTable head={headNumeric} rows={rowsNumeric} />,
+      );
+      wrapper
+        .find('th')
+        .at(1)
+        .simulate('click');
+      wrapper.update();
+      const bodyRows = wrapper.find('tbody tr');
+
+      expect(
+        bodyRows
+          .at(5)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('1');
+      expect(
+        bodyRows
+          .at(6)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('5');
+      expect(
+        bodyRows
+          .at(7)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('10');
     });
   });
 });
