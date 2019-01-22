@@ -1,0 +1,1 @@
+- ED-6056: fix zero width columns in renderer for migration tables
