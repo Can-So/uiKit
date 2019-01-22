@@ -1,0 +1,1 @@
+- Flip widht and height around when image is on it's side according to metadata orientation
