@@ -68,8 +68,9 @@ const config = {
   },
   globals: {
     'ts-jest': {
-      tsConfigFile: './tsconfig.jest.json',
-      skipBabel: true,
+      tsConfig: './tsconfig.jest.json',
+      babelConfig: false,
+      diagnostics: false,
     },
     __BASEURL__: 'http://localhost:9000',
   },

@@ -1,5 +1,33 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.13
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/editor-common@30.0.1
+  - @atlaskit/editor-core@97.0.1
+  - @atlaskit/media-test-helpers@19.1.1
+  - @atlaskit/smart-card@9.4.1
+  - @atlaskit/icon@16.0.0
+
+## 6.3.12
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/editor-common@30.0.0
+  - @atlaskit/editor-core@97.0.0
+  - @atlaskit/media-test-helpers@19.1.0
+  - @atlaskit/media-core@26.2.0
+
+## 6.3.11
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/editor-common@29.0.0
+  - @atlaskit/editor-core@96.0.0
+  - @atlaskit/media-test-helpers@19.0.0
+  - @atlaskit/media-core@26.1.0
+
+## 6.3.10
+- [patch] [8158fe0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8158fe0):
+
+  - ED-6059: Extension and inlineExtension should read their content from attrs not the PMNode.
+
 ## 6.3.9
 - [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
 

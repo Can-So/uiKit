@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { RefObject } from 'react';
 import * as classnames from 'classnames';
 import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import {
@@ -27,29 +28,37 @@ const snapTo = (target: number, points: number[]): number =>
       : point;
   });
 
+type ResizerProps = Props & {
+  selected: boolean;
+  enable: EnabledHandles;
+  calcNewSize: (
+    newWidth: number,
+    stop: boolean,
+  ) => { layout: MediaSingleLayout; width: number | null };
+  snapPoints: number[];
+  scaleFactor?: number;
+  getColumnLeft: () => number;
+  isInlineLike: boolean;
+};
+type ResizerState = {
+  isResizing: boolean;
+};
 export default class Resizer extends React.Component<
-  Props & {
-    selected: boolean;
-    enable: EnabledHandles;
-    calcNewSize: (
-      newWidth: number,
-      stop: boolean,
-    ) => { layout: MediaSingleLayout; width: number | null };
-    snapPoints: number[];
-    scaleFactor?: number;
-    getColumnLeft: () => number;
-    isInlineLike: boolean;
-  },
-  {
-    isResizing: boolean;
-  }
+  ResizerProps,
+  ResizerState
 > {
-  resizable: Resizable;
+  resizable: RefObject<Resizable>;
   state = {
     isResizing: false,
   };
+  constructor(props: ResizerProps) {
+    super(props);
+    this.resizable = React.createRef();
+  }
 
-  handleResizeStart = () => {
+  handleResizeStart = event => {
+    // prevent creating a drag event on Firefox
+    event.preventDefault();
     this.setState({ isResizing: true }, () => {
       this.props.displayGrid(
         true,
@@ -65,12 +74,13 @@ export default class Resizer extends React.Component<
     elementRef: HTMLDivElement,
     delta: NumberSize,
   ) => {
-    if (!this.resizable || !this.resizable.state.original) {
+    const resizable = this.resizable.current;
+    if (!resizable || !resizable.state.original) {
       return;
     }
 
     const newWidth = Math.max(
-      this.resizable.state.original.width +
+      resizable.state.original.width +
         delta.width * (this.props.scaleFactor || 1),
       this.props.snapPoints[0],
     );
@@ -85,7 +95,7 @@ export default class Resizer extends React.Component<
       gridTypeForLayout(newSize.layout),
       this.highlights(newWidth),
     );
-    this.resizable.updateSize({ width: newWidth, height: 'auto' });
+    resizable.updateSize({ width: newWidth, height: 'auto' });
   };
 
   highlights = newWidth => {
@@ -131,16 +141,13 @@ export default class Resizer extends React.Component<
     refToElement,
     delta: { width: number; height: number },
   ) => {
-    if (!this.resizable) {
-      return;
-    }
-
-    if (!this.resizable.state.original) {
+    const resizable = this.resizable.current;
+    if (!resizable || !resizable.state.original) {
       return;
     }
 
     const newWidth = Math.max(
-      this.resizable.state.original.width + delta.width,
+      resizable.state.original.width + delta.width,
       this.props.snapPoints[0],
     );
 
@@ -158,10 +165,6 @@ export default class Resizer extends React.Component<
       this.props.updateSize(newSize.width, newSize.layout);
       this.props.displayGrid(false, gridTypeForLayout(this.props.layout));
     });
-  };
-
-  setResizableRef = ref => {
-    this.resizable = ref;
   };
 
   render() {
@@ -185,7 +188,7 @@ export default class Resizer extends React.Component<
     // the div. For now, we just apply the same styles using CSS
     return (
       <Resizable
-        ref={this.setResizableRef}
+        ref={this.resizable}
         onResize={this.handleResize}
         size={{
           width: shouldHalfSize ? halfSize : this.props.width || 0,
@@ -195,7 +198,6 @@ export default class Resizer extends React.Component<
           `image-${this.props.layout}`,
           this.props.className,
           {
-            'is-loading': this.props.isLoading,
             'is-resizing': this.state.isResizing,
             'not-resized': !this.props.pctWidth,
             'mediaSingle-selected': this.props.selected,

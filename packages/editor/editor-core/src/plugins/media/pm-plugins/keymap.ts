@@ -8,11 +8,6 @@ import { Command } from '../../../types';
 export function keymapPlugin(): Plugin {
   const list = {};
 
-  keymaps.bindKeymapWithCommand(
-    keymaps.backspace.common!,
-    removeMediaNode,
-    list,
-  );
   keymaps.bindKeymapWithCommand(keymaps.undo.common!, ignoreLinksInSteps, list);
   keymaps.bindKeymapWithCommand(keymaps.enter.common!, splitMediaGroup, list);
   keymaps.bindKeymapWithCommand(
@@ -23,11 +18,6 @@ export function keymapPlugin(): Plugin {
 
   return keymap(list);
 }
-
-const removeMediaNode: Command = state => {
-  const mediaPluginState = stateKey.getState(state) as MediaPluginState;
-  return mediaPluginState.removeSelectedMediaNode();
-};
 
 const ignoreLinksInSteps: Command = state => {
   const mediaPluginState = stateKey.getState(state) as MediaPluginState;

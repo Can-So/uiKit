@@ -78,7 +78,7 @@ describe('NotificationIndicator', () => {
 
     expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(2);
     expect(mockCreateAnalyticsEvent.mock.calls[0][0]).toEqual({
-      name: 'notificationIndicator',
+      actionSubject: 'notificationIndicator',
       action: 'activated',
       attributes: {
         badgeCount: 7,
@@ -86,7 +86,7 @@ describe('NotificationIndicator', () => {
       },
     });
     expect(mockCreateAnalyticsEvent.mock.calls[1][0]).toEqual({
-      name: 'notificationIndicator',
+      actionSubject: 'notificationIndicator',
       action: 'updated',
       attributes: {
         oldCount: 0,
@@ -109,7 +109,7 @@ describe('NotificationIndicator', () => {
     setTimeout(() => {
       expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(2);
       expect(mockCreateAnalyticsEvent.mock.calls[0][0]).toEqual({
-        name: 'notificationIndicator',
+        actionSubject: 'notificationIndicator',
         action: 'activated',
         attributes: {
           badgeCount: 10,
@@ -117,7 +117,7 @@ describe('NotificationIndicator', () => {
         },
       });
       expect(mockCreateAnalyticsEvent.mock.calls[1][0]).toEqual({
-        name: 'notificationIndicator',
+        actionSubject: 'notificationIndicator',
         action: 'updated',
         attributes: {
           oldCount: 0,
@@ -140,7 +140,7 @@ describe('NotificationIndicator', () => {
     // Mount events
     expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(2);
     expect(mockCreateAnalyticsEvent.mock.calls[0][0]).toEqual({
-      name: 'notificationIndicator',
+      actionSubject: 'notificationIndicator',
       action: 'activated',
       attributes: {
         badgeCount: 7,
@@ -148,7 +148,7 @@ describe('NotificationIndicator', () => {
       },
     });
     expect(mockCreateAnalyticsEvent.mock.calls[1][0]).toEqual({
-      name: 'notificationIndicator',
+      actionSubject: 'notificationIndicator',
       action: 'updated',
       attributes: {
         oldCount: 0,
@@ -163,7 +163,7 @@ describe('NotificationIndicator', () => {
       // On refresh we only expect the updated event because the indicator was already 'activated'
       expect(mockCreateAnalyticsEvent.mock.calls.length).toBe(3);
       expect(mockCreateAnalyticsEvent.mock.calls[2][0]).toEqual({
-        name: 'notificationIndicator',
+        actionSubject: 'notificationIndicator',
         action: 'updated',
         attributes: {
           oldCount: 7,

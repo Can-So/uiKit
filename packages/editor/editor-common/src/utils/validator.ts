@@ -49,6 +49,7 @@ export const markOrder = [
   'code',
   'confluenceInlineComment',
   'textColor',
+  'annotation',
 ];
 
 export const isSubSupType = (type: string): type is 'sub' | 'sup' => {
@@ -904,6 +905,12 @@ export const getValidMark = (
   if (adfStage === 'stage0') {
     switch (type) {
       case 'confluenceInlineComment': {
+        return {
+          type,
+          attrs,
+        };
+      }
+      case 'annotation': {
         return {
           type,
           attrs,

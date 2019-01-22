@@ -12,6 +12,7 @@ export { default as action } from './action';
 export { default as breakout } from './breakout';
 export { default as alignment } from './alignment';
 export { default as indentation } from './indentation';
+export { default as annotation } from './annotation';
 export { default as paragraph } from './paragraph';
 export { default as paragraph_with_no_marks } from './paragraph_with_no_marks';
 export {

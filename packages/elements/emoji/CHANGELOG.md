@@ -1,5 +1,32 @@
 # @atlaskit/emoji
 
+## 53.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/field-base@11.0.14
+  - @atlaskit/section-message@1.0.16
+  - @atlaskit/tooltip@12.1.15
+  - @atlaskit/editor-test-helpers@6.3.13
+  - @atlaskit/icon@16.0.0
+
+## 53.0.0
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/editor-test-helpers@6.3.12
+  - @atlaskit/util-data-test@10.0.34
+  - @atlaskit/media-core@26.2.0
+
+## 52.0.0
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+  - @atlaskit/editor-test-helpers@6.3.11
+  - @atlaskit/util-data-test@10.0.33
+  - @atlaskit/media-core@26.1.0
+
+## 51.2.0
+- [minor] [6ef7a45](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ef7a45):
+
+  - FS-1230 New standalone emoji upload component added
+
 ## 51.1.0
 - [minor] [e60d7aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e60d7aa):
 

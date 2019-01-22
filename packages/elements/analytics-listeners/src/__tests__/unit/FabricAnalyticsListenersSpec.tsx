@@ -45,11 +45,11 @@ describe('<FabricAnalyticsListeners />', () => {
     };
     originalConsoleError = global.console.error;
     originalConsoleWarn = global.console.warn;
-    global.console.error = jest.fn();
+    global.console.hasError = jest.fn();
   });
 
   afterEach(() => {
-    global.console.error = originalConsoleError;
+    global.console.hasError = originalConsoleError;
     global.console.warn = originalConsoleWarn;
 
     analyticsWebClientMock = {

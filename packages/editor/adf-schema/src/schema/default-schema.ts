@@ -63,5 +63,6 @@ export const defaultSchema: Schema = createSchema({
     'breakout',
     'alignment',
     'indentation',
+    'annotation',
   ],
 });

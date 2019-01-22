@@ -13,7 +13,14 @@ import {
   optionToSelectableOption,
   optionToSelectableOptions,
 } from '../../../components/utils';
-import { Option, User, UserPickerProps, UserType } from '../../../types';
+import {
+  Option,
+  User,
+  OptionData,
+  UserPickerProps,
+  UserType,
+  Team,
+} from '../../../types';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<UserPickerProps> = {}) =>
@@ -459,6 +466,68 @@ describe('UserPicker', () => {
     const preventDefault = jest.fn();
     component.find(Select).simulate('keyDown', { keyCode: 32, preventDefault });
     expect(preventDefault).toHaveBeenCalledTimes(0);
+  });
+
+  describe('teams', () => {
+    const teamOptions: Team[] = [
+      {
+        id: 'team-123',
+        name: 'The A team',
+        type: 'team',
+        memberCount: 1,
+      },
+      {
+        id: 'team-abc',
+        name: 'The B team',
+        type: 'team',
+        includesYou: true,
+      },
+    ];
+
+    const selectableTeamOptions: Option[] = optionToSelectableOptions(
+      teamOptions,
+    );
+
+    const mixedOptions: OptionData[] = (options as OptionData[]).concat(
+      teamOptions,
+    );
+    const selectableMixedOptions: Option[] = optionToSelectableOptions(
+      mixedOptions,
+    );
+
+    it('should render select with only teams', () => {
+      const component = shallowUserPicker({ options: teamOptions });
+      const select = component.find(Select);
+      expect(select.prop('options')).toEqual(selectableTeamOptions);
+      expect(getStyles).toHaveBeenCalledWith(350);
+      expect(select.prop('menuPlacement')).toBeTruthy();
+    });
+
+    it('should render select with both teams and users', () => {
+      const component = shallowUserPicker({ options: mixedOptions });
+      const select = component.find(Select);
+      expect(select.prop('options')).toEqual(selectableMixedOptions);
+      expect(getStyles).toHaveBeenCalledWith(350);
+      expect(select.prop('menuPlacement')).toBeTruthy();
+    });
+
+    it('should be able to multi-select a mix of users and teams', () => {
+      const onChange = jest.fn();
+      const component = shallowUserPicker({
+        options: mixedOptions,
+        isMulti: true,
+        onChange,
+      });
+
+      component.find(Select).simulate('change', selectableMixedOptions, {
+        action: 'select-option',
+      });
+
+      expect(onChange).toHaveBeenCalledWith(
+        [mixedOptions[0], mixedOptions[1], mixedOptions[2], mixedOptions[3]],
+        'select-option',
+      );
+    });
   });
 
   describe('analytics', () => {

@@ -5,7 +5,7 @@ import {
   ImageMetadata,
 } from '@atlaskit/media-store';
 import { CollectionFetcher } from '../collection';
-import { FileFetcher } from '../file';
+import { FileFetcherImpl, FileFetcher } from '../file';
 
 export interface Context {
   getImage(
@@ -17,6 +17,10 @@ export interface Context {
     id: string,
     params?: MediaStoreGetFileImageParams,
   ): Promise<ImageMetadata>;
+  getImageUrl(
+    id: string,
+    params?: MediaStoreGetFileImageParams,
+  ): Promise<string>;
 
   readonly collection: CollectionFetcher;
   readonly file: FileFetcher;
@@ -39,7 +43,7 @@ class ContextImpl implements Context {
       authProvider: config.authProvider,
     });
     this.collection = new CollectionFetcher(this.mediaStore);
-    this.file = new FileFetcher(this.mediaStore);
+    this.file = new FileFetcherImpl(this.mediaStore);
   }
 
   getImage(
@@ -48,6 +52,13 @@ class ContextImpl implements Context {
     controller?: AbortController,
   ): Promise<Blob> {
     return this.mediaStore.getImage(id, params, controller);
+  }
+
+  getImageUrl(
+    id: string,
+    params?: MediaStoreGetFileImageParams,
+  ): Promise<string> {
+    return this.mediaStore.getFileImageURL(id, params);
   }
 
   async getImageMetadata(

@@ -1,16 +1,12 @@
-import { AvatarItem } from '@atlaskit/avatar';
 import { colors } from '@atlaskit/theme';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { HighlightText } from '../../../components/HighlightText';
-import { SizeableAvatar } from '../../../components/SizeableAvatar';
-import {
-  TextWrapper,
-  UserOption,
-  UserOptionProps,
-} from '../../../components/UserOption';
+import { UserOption, UserOptionProps } from '../../../components/UserOption';
+import { CommonOption } from '../../../components/CommonOption';
+import { OptionTextWrapper } from '../../../components/OptionTextWrapper';
 
-describe('Option', () => {
+describe('User Option', () => {
   const user = {
     id: 'abc-123',
     name: 'Jace Beleren',
@@ -19,7 +15,7 @@ describe('Option', () => {
     byline: 'Teammate',
   };
   const shallowOption = (props: Partial<UserOptionProps> = {}) =>
-    shallow(
+    shallow<UserOption>(
       <UserOption
         user={user}
         status="approved"
@@ -30,56 +26,51 @@ describe('Option', () => {
 
   it('should render UserOption component', () => {
     const component = shallowOption();
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.props()).toMatchObject({
-      backgroundColor: 'transparent',
-      avatar: (
-        <SizeableAvatar
-          appearance="big"
-          src="http://avatars.atlassian.com/jace.png"
-          presence="approved"
-          name="Jace Beleren"
-        />
-      ),
+    const commonOption = component.find(CommonOption);
+
+    expect(commonOption.props()).toMatchObject({
+      name: 'Jace Beleren',
+      avatarUrl: 'http://avatars.atlassian.com/jace.png',
+      presence: 'approved',
       primaryText: [
-        <TextWrapper key="name" color={colors.N800}>
+        <OptionTextWrapper key="name" color={colors.N800}>
           <HighlightText>Jace Beleren</HighlightText>
-        </TextWrapper>,
+        </OptionTextWrapper>,
         <React.Fragment key="publicName">
           {' '}
-          <TextWrapper color={colors.N200}>
+          <OptionTextWrapper color={colors.N200}>
             (<HighlightText>jbeleren</HighlightText>)
-          </TextWrapper>
+          </OptionTextWrapper>
         </React.Fragment>,
       ],
-      secondaryText: <TextWrapper color={colors.N200}>Teammate</TextWrapper>,
+      byline: (
+        <OptionTextWrapper color={colors.N200}>Teammate</OptionTextWrapper>
+      ),
     });
   });
 
   it('should render Option in selected state', () => {
     const component = shallowOption({ isSelected: true });
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.props()).toMatchObject({
-      backgroundColor: 'transparent',
-      avatar: (
-        <SizeableAvatar
-          appearance="big"
-          src="http://avatars.atlassian.com/jace.png"
-          presence="approved"
-          name="Jace Beleren"
-        />
-      ),
+    const commonOption = component.find(CommonOption);
+
+    expect(commonOption.props()).toMatchObject({
+      name: 'Jace Beleren',
+      avatarUrl: 'http://avatars.atlassian.com/jace.png',
+      presence: 'approved',
       primaryText: [
-        <TextWrapper key="name" color={colors.N0}>
+        <OptionTextWrapper key="name" color={colors.N0}>
           <HighlightText>Jace Beleren</HighlightText>
-        </TextWrapper>,
+        </OptionTextWrapper>,
         <React.Fragment key="publicName">
           {' '}
-          <TextWrapper color={colors.N50}>
+          <OptionTextWrapper color={colors.N50}>
             (<HighlightText>jbeleren</HighlightText>)
-          </TextWrapper>
+          </OptionTextWrapper>
         </React.Fragment>,
       ],
+      byline: (
+        <OptionTextWrapper color={colors.N50}>Teammate</OptionTextWrapper>
+      ),
     });
   });
 
@@ -92,25 +83,31 @@ describe('Option', () => {
       },
     };
     const component = shallowOption({ user: userWithHighlight });
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.props()).toMatchObject({
+    const commonOption = component.find(CommonOption);
+    expect(commonOption.props()).toMatchObject({
+      name: 'Jace Beleren',
+      avatarUrl: 'http://avatars.atlassian.com/jace.png',
+      presence: 'approved',
       primaryText: [
-        <TextWrapper key="name" color={colors.N800}>
+        <OptionTextWrapper key="name" color={colors.N800}>
           <HighlightText highlights={[{ start: 0, end: 2 }]}>
             Jace Beleren
           </HighlightText>
-        </TextWrapper>,
+        </OptionTextWrapper>,
         <React.Fragment key="publicName">
           {' '}
-          <TextWrapper color={colors.N200}>
+          <OptionTextWrapper color={colors.N200}>
             (
             <HighlightText highlights={[{ start: 2, end: 4 }]}>
               jbeleren
             </HighlightText>
             )
-          </TextWrapper>
+          </OptionTextWrapper>
         </React.Fragment>,
       ],
+      byline: (
+        <OptionTextWrapper color={colors.N200}>Teammate</OptionTextWrapper>
+      ),
     });
   });
 
@@ -124,13 +121,13 @@ describe('Option', () => {
       },
     };
     const component = shallowOption({ user: userWithoutName });
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.prop('primaryText')).toEqual([
-      <TextWrapper key="name" color={colors.N800}>
+    const commonOption = component.find(CommonOption);
+    expect(commonOption.prop('primaryText')).toEqual([
+      <OptionTextWrapper key="name" color={colors.N800}>
         <HighlightText highlights={[{ start: 2, end: 4 }]}>
           jbeleren
         </HighlightText>
-      </TextWrapper>,
+      </OptionTextWrapper>,
     ]);
   });
 
@@ -140,11 +137,11 @@ describe('Option', () => {
       publicName: user.name,
     };
     const component = shallowOption({ user: userWithSamePublicName });
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.prop('primaryText')).toEqual([
-      <TextWrapper key="name" color={colors.N800}>
+    const commonOption = component.find(CommonOption);
+    expect(commonOption.prop('primaryText')).toEqual([
+      <OptionTextWrapper key="name" color={colors.N800}>
         <HighlightText>Jace Beleren</HighlightText>
-      </TextWrapper>,
+      </OptionTextWrapper>,
     ]);
   });
 
@@ -154,11 +151,11 @@ describe('Option', () => {
       publicName: `  ${user.name}  `,
     };
     const component = shallowOption({ user: userWithSamePublicName });
-    const avatarItem = component.find(AvatarItem);
-    expect(avatarItem.prop('primaryText')).toEqual([
-      <TextWrapper key="name" color={colors.N800}>
+    const commonOption = component.find(CommonOption);
+    expect(commonOption.prop('primaryText')).toEqual([
+      <OptionTextWrapper key="name" color={colors.N800}>
         <HighlightText>Jace Beleren</HighlightText>
-      </TextWrapper>,
+      </OptionTextWrapper>,
     ]);
   });
 });

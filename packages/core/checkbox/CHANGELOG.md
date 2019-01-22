@@ -1,5 +1,12 @@
 # @atlaskit/checkbox
 
+## 5.0.11
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/section-message@1.0.16
+  - @atlaskit/icon@16.0.0
+
 ## 5.0.10
 - [patch] [fad28be](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fad28be):
 

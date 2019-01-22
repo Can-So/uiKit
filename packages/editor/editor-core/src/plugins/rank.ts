@@ -143,5 +143,6 @@ export default {
     'alignment',
     'breakout',
     'indentation',
+    'annotation',
   ],
 };

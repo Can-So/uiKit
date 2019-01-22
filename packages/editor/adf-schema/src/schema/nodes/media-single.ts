@@ -42,6 +42,7 @@ export const defaultAttrs = {
 export const mediaSingle: NodeSpec = {
   inline: false,
   group: 'block',
+  selectable: true,
   content: 'media',
   attrs: defaultAttrs,
   parseDOM: [

@@ -7,22 +7,22 @@ import ChatIcon from '@atlaskit/icon/glyph/comment';
 import { colors } from '@atlaskit/theme';
 import { FormattedRelative } from 'react-intl';
 
-export const buildTitle = (json: any) => {
+export const buildTaskTitle = (json: any) => {
   let name = json.name && json.name.trim();
   return name ? { title: { text: name } } : {};
 };
 
-export const buildDescription = (json: any) => {
+export const buildTaskDescription = (json: any) => {
   const summary = json.summary && json.summary.trim();
   return summary ? { description: { text: summary } } : {};
 };
 
-export const buildLink = (json: any) => {
+export const buildTaskLink = (json: any) => {
   const url = json['@url'] && json['@url'].trim();
   return url ? { link: url } : {};
 };
 
-export const buildByline = (json: any) => {
+export const buildTaskByline = (json: any) => {
   const updatedBy =
     json.updatedBy && json.updatedBy.name ? ' by ' + json.updatedBy.name : '';
 
@@ -48,7 +48,7 @@ export const buildByline = (json: any) => {
   return {};
 };
 
-export const buildUser = (json: any) => {
+export const buildTaskUser = (json: any) => {
   if (json.assignedBy && (json.assignedBy.image || json.assignedBy.name)) {
     return {
       user: {
@@ -60,7 +60,7 @@ export const buildUser = (json: any) => {
   return {};
 };
 
-export const buildUsers = (json: any) => {
+export const buildTaskUsers = (json: any) => {
   if (Array.isArray(json.assignedTo) && json.assignedTo.length > 0) {
     return {
       users: json.assignedTo.map((assignee: any) => ({
@@ -72,7 +72,7 @@ export const buildUsers = (json: any) => {
   return {};
 };
 
-export const buildCommentCount = (json: any) => {
+export const buildTaskCommentCount = (json: any) => {
   if (!isNaN(Number(json.commentCount)) && Number(json.commentCount) > 0) {
     return {
       icon: (
@@ -89,7 +89,7 @@ export const buildCommentCount = (json: any) => {
   return {};
 };
 
-export const buildDetailsLozenge = (json: any) => {
+export const buildTaskDetailsLozenge = (json: any) => {
   if (json.taskStatus && json.taskStatus.name) {
     return {
       lozenge: {
@@ -101,16 +101,16 @@ export const buildDetailsLozenge = (json: any) => {
   return {};
 };
 
-export const buildDetails = (json: any) => {
+export const buildTaskDetails = (json: any) => {
   if (json.taskStatus || json.commentCount) {
     return {
-      details: [buildDetailsLozenge(json), buildCommentCount(json)],
+      details: [buildTaskDetailsLozenge(json), buildTaskCommentCount(json)],
     };
   }
   return {};
 };
 
-export const buildContext = (json: any) => {
+export const buildTaskContext = (json: any) => {
   const genName =
     json.generator && json.generator.name && json.generator.name.trim();
   if (genName) {
@@ -138,14 +138,14 @@ export function extractBlockViewPropsFromTask(
   }
 
   const props: BlockCardResolvedViewProps = {
-    ...buildContext(json),
-    ...buildTitle(json),
-    ...buildDescription(json),
-    ...buildLink(json),
-    ...buildByline(json),
-    ...buildUser(json),
-    ...buildUsers(json),
-    ...buildDetails(json),
+    ...buildTaskContext(json),
+    ...buildTaskTitle(json),
+    ...buildTaskDescription(json),
+    ...buildTaskLink(json),
+    ...buildTaskByline(json),
+    ...buildTaskUser(json),
+    ...buildTaskUsers(json),
+    ...buildTaskDetails(json),
   };
 
   return props;
