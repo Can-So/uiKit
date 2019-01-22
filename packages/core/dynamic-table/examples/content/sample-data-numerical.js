@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import presidents from './numerical.json';
 
 function createKey(input) {
-  return input ? input.replace(/^(the|a|an)/, '').replace(/\s/g, '') : input;
+  return input ? input.replace(/\s/g, '') : input;
 }
 
 const NameWrapper = styled.span`
