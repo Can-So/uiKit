@@ -5,7 +5,7 @@ import AppSwitcher from '../src';
 
 export default class AppSwitcherExample extends Component {
   state = {
-    isDrawerOpen: false,
+    isDrawerOpen: true,
   };
 
   openDrawer = () =>

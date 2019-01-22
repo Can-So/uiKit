@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import { AppSwitcherWrapper, Item, Section, ManageButton } from './primitives';
+import {
+  AppSwitcherWrapper,
+  AppSwitcherItem,
+  Section,
+  ManageButton,
+  WithBackground,
+} from './primitives';
 import MockProvider from './providers/mock-provider';
+import SettingsIcon from '@atlaskit/icon/glyph/settings';
 
 class AppSwitcher extends Component {
   render() {
@@ -11,15 +18,37 @@ class AppSwitcher extends Component {
             'Loading...'
           ) : (
             <AppSwitcherWrapper>
-              <Section title="First Section">
-                <Item>First Item</Item>
-                <Item>Second Item</Item>
-                <Item>Third Item</Item>
+              <Section isAdmin title="First Section">
+                <AppSwitcherItem icon={SettingsIcon}>
+                  First Item
+                </AppSwitcherItem>
+                <AppSwitcherItem>Second Item</AppSwitcherItem>
+                <AppSwitcherItem>Third Item</AppSwitcherItem>
               </Section>
               <Section title="Second Section">
-                <Item>First Item</Item>
-                <Item>Second Item</Item>
-                <Item>Third Item</Item>
+                <AppSwitcherItem>First Item</AppSwitcherItem>
+                <AppSwitcherItem>Second Item</AppSwitcherItem>
+                <AppSwitcherItem>Third Item</AppSwitcherItem>
+              </Section>
+              <Section title="Second Section">
+                <AppSwitcherItem>First Item</AppSwitcherItem>
+                <AppSwitcherItem>Second Item</AppSwitcherItem>
+                <AppSwitcherItem>Third Item</AppSwitcherItem>
+              </Section>
+              <Section title="Second Section">
+                <AppSwitcherItem>First Item</AppSwitcherItem>
+                <AppSwitcherItem>Second Item</AppSwitcherItem>
+                <AppSwitcherItem>Third Item</AppSwitcherItem>
+              </Section>
+              <Section title="Second Section">
+                <AppSwitcherItem>First Item</AppSwitcherItem>
+                <AppSwitcherItem>Second Item</AppSwitcherItem>
+                <AppSwitcherItem>Third Item</AppSwitcherItem>
+              </Section>
+              <Section title="Second Section">
+                <AppSwitcherItem>First Item</AppSwitcherItem>
+                <AppSwitcherItem>Second Item</AppSwitcherItem>
+                <AppSwitcherItem>Third Item</AppSwitcherItem>
               </Section>
               <ManageButton onClick={() => {}} />
               {JSON.stringify(data)}
