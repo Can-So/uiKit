@@ -107,6 +107,7 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
         imgHeight: 750
         crop: false (means we want to fit)
         stretch: true
+        previewOrientation: 6
 
       For algo to work properly first we need to flip the imgRation. Initial value would be
       1000/750 = 1.33 but we want it to be 750/1000 = 0.75
@@ -130,16 +131,18 @@ export class MediaImage extends Component<MediaImageProps, MediaImageState> {
       And only NOW browser will apply rotate: 90deg and turn image around.
       And we end up with this:
 
-      ┌─┬──────┬─┐   Where our image has size of 100x133.3
-      │░│░░░░░░│░│   in the box of size 75x100.
+      ┌──────────┐   Where our image has size of 100x133.3
+      │░░░░░░░░░░│   in the box of size 75x100.
+      │░┌──────┐░│
       │░│▓▓▓▓▓▓│░│
       │░│▓▓▓▓▓▓│░│
       │░│▓▓▓▓▓▓│░│
-      │░│░░░░░░│░│
-      └─┴──────┴─┘
+      │░└──────┘░│
+      │░░░░░░░░░░│
+      └──────────┘
 
-      To combat this we will not make height: 100% but use ration of an image.
-      In this case imgRation is now 0.75 (after flipping)
+      To combat this we will not make height: 100% but use ratio of an image.
+      In this case imgRatio is now 0.75 (after flipping)
       
       New math will look like this:
       (img height) -> (container height /
