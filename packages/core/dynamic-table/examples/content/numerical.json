@@ -24,7 +24,7 @@
   },
   {
     "id": 5,
-    "nm": "James Monroe",
+    "nm": "james Monroe",
     "pp": "Democratic-Republican",
     "num": -20
   },
@@ -87,10 +87,22 @@
   "id": 15,
   "nm": "<Number as string>",
   "pp": "Democrat",
-  "num": "3"
+  "num": "1"
 },
 {
   "id": 16,
+  "nm": "<Number as string 2>",
+  "pp": "Democrat",
+  "num": "5"
+},
+{
+  "id": 17,
+  "nm": "<Number as string 3>",
+  "pp": "Democrat",
+  "num": "10"
+},
+{
+  "id": 18,
   "nm": "<Empty String>",
   "pp": "Democrat",
   "num": ""
