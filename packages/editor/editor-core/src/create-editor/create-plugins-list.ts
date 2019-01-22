@@ -50,13 +50,18 @@ import {
   indentationPlugin,
   annotationPlugin,
   compositionPlugin,
+  analyticsPlugin,
 } from '../plugins';
 
 /**
  * Returns list of plugins that are absolutely necessary for editor to work
  */
-export function getDefaultPluginsList(props: EditorProps): EditorPlugin[] {
+export function getDefaultPluginsList(
+  props: EditorProps,
+  createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
+): EditorPlugin[] {
   return [
+    analyticsPlugin(createAnalyticsEvent),
     pastePlugin,
     basePlugin,
     blockTypePlugin,

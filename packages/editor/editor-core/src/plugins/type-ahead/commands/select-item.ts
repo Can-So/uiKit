@@ -8,6 +8,7 @@ import { pluginKey, ACTIONS } from '../pm-plugins/main';
 import { TypeAheadHandler, TypeAheadItem } from '../types';
 import { findTypeAheadQuery } from '../utils/find-query-mark';
 import { dismissCommand } from './dismiss';
+import { addAnalytics } from '../../../plugins/analytics';
 
 export type SelectItemMode =
   | 'shift-enter'
@@ -161,7 +162,14 @@ export const selectItem = (
     }
 
     if (dispatch) {
-      dispatch(tr);
+      dispatch(
+        addAnalytics(tr, {
+          action: 'invoked',
+          actionSubject: 'typeAhead',
+          actionSubjectId: 'quickInsertTypeAhead',
+          attributes: { inputMethod: 'keyboard' },
+        }),
+      );
     }
     return true;
   });

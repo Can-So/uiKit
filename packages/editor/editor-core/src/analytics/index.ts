@@ -11,11 +11,11 @@ export { default as trackAndInvoke } from './trackAndInvoke';
 
 export const analyticsEventKey = 'EDITOR_ANALYTICS_EVENT';
 
-type AEP<A, B, C, D> = {
-  action: A;
-  actionSubject: B;
-  actionSubjectId?: C;
-  attributes?: D;
+type AEP<Action, ActionSubject, ActionSubjectID, Attributes> = {
+  action: Action;
+  actionSubject: ActionSubject;
+  actionSubjectId?: ActionSubjectID;
+  attributes?: Attributes;
 };
 
 type HelpDialogAEP = AEP<
@@ -32,7 +32,17 @@ type EmojiAEP = AEP<
   { inputMethod: 'toolbar' }
 >;
 
-export type AnalyticsEventPayload = EmojiAEP | HelpDialogAEP;
+type TypeAheadQuickInsertAEP = AEP<
+  'invoked',
+  'typeAhead',
+  'quickInsertTypeAhead',
+  { inputMethod: string }
+>;
+
+export type AnalyticsEventPayload =
+  | EmojiAEP
+  | HelpDialogAEP
+  | TypeAheadQuickInsertAEP;
 
 export const fireAnalyticsEvent = createAnalyticsEvent => (
   event: AnalyticsEventPayload,
