@@ -88,7 +88,7 @@ export class Navigation extends Component<NavigationProps, NavigationState> {
   async componentDidUpdate(prevProps: NavigationProps) {
     const { accounts, service } = this.props;
 
-    if (prevProps.service !== this.props.service) {
+    if (prevProps.service !== service) {
       const availableAccounts = (await accounts).filter(
         account => account.type === service.name,
       );

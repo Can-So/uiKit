@@ -1,6 +1,6 @@
 import { Store, Dispatch, Action } from 'redux';
 
-import { State, ServiceName } from '../domain';
+import { State, ServiceName, ServiceAccountWithType } from '../domain';
 import { changeAccount, isChangeServiceAction } from '../actions';
 import { getConnectedRemoteAccounts } from '../actions/getConnectedRemoteAccounts';
 
@@ -16,9 +16,9 @@ export const changeService = (store: Store<State>) => (
       store.dispatch(getConnectedRemoteAccounts());
     }
 
-    const firstAccount = (await store.getState().accounts).filter(
-      account => account.type === action.serviceName,
-    )[0];
+    const firstAccount = (await store.getState().accounts).find(
+      (account: ServiceAccountWithType) => account.type === action.serviceName,
+    );
     const accountId = firstAccount ? firstAccount.id : '';
 
     store.dispatch(changeAccount(serviceName, accountId));
