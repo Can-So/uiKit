@@ -5577,6 +5577,12 @@ dns-txt@^2.0.2:
   dependencies:
     buffer-indexof "^1.0.0"
 
+docker-compose@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/docker-compose/-/docker-compose-0.9.3.tgz#4d4f5203b57cd3e5f8e9e25728aedc6691bf1972"
+  dependencies:
+    winston "^2.3.1"
+
 doctrine@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.5.0.tgz#379dce730f6166f76cefa4e6707a159b02c5a6fa"
@@ -8930,7 +8936,6 @@ jest-leak-detector@^23.6.0:
 jest-localstorage-mock@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.4.0.tgz#c6073810735dd3af74020ea6c3885ec1cc6d0d13"
-  integrity sha512-/mC1JxnMeuIlAaQBsDMilskC/x/BicsQ/BXQxEOw+5b1aGZkkOAqAF3nu8yq449CpzGtp5jJ5wCmDNxLgA2m6A==
 
 jest-matcher-utils@^23.6.0:
   version "23.6.0"

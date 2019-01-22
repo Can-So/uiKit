@@ -193,7 +193,8 @@ pipelines:
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
-            - yarn test:vr:changed
+            # Run it for button now since this is the only pkg with store snapshot
+            - yarn test:vr button
           caches:
             - node
       # This will run essentially the branch builds, but without any optimizations and should be manually
