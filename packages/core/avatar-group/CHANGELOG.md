@@ -1,5 +1,17 @@
 # @atlaskit/avatar-group
 
+## 2.1.10
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/button@10.1.2
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/field-base@11.0.14
+  - @atlaskit/item@8.0.15
+  - @atlaskit/toggle@5.0.15
+  - @atlaskit/tooltip@12.1.15
+  - @atlaskit/icon@16.0.0
+
 ## 2.1.9
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/avatar@14.1.7

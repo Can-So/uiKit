@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/task-decision",
-  "version": "11.1.5",
+  "version": "11.1.7",
   "config": {
     "access": "public"
   },
@@ -19,9 +19,9 @@
     "@atlaskit/analytics-namespaced-context": "^2.1.5",
     "@atlaskit/analytics-next": "^3.1.2",
     "@atlaskit/analytics-next-types": "^3.1.2",
-    "@atlaskit/avatar-group": "^2.1.9",
-    "@atlaskit/button": "^10.1.1",
-    "@atlaskit/icon": "^15.0.2",
+    "@atlaskit/avatar-group": "^2.1.10",
+    "@atlaskit/button": "^10.1.2",
+    "@atlaskit/icon": "^16.0.0",
     "@atlaskit/spinner": "^9.0.13",
     "@atlaskit/theme": "^7.0.1",
     "@atlaskit/util-service-support": "^3.0.5",
@@ -48,12 +48,12 @@
   },
   "devDependencies": {
     "@atlaskit/analytics-listeners": "^4.1.4",
-    "@atlaskit/avatar": "^14.1.7",
-    "@atlaskit/docs": "^6.0.0",
-    "@atlaskit/editor-common": "^29.0.0",
-    "@atlaskit/renderer": "^36.0.0",
+    "@atlaskit/avatar": "^14.1.8",
+    "@atlaskit/docs": "^6.0.1",
+    "@atlaskit/editor-common": "^30.0.1",
+    "@atlaskit/renderer": "^37.0.1",
     "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^10.0.33",
+    "@atlaskit/util-data-test": "^10.0.34",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "fetch-mock": "^6.5.2",

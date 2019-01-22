@@ -10904,7 +10904,7 @@ neo-async@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
 
-netlify-cli@^2.1.1:
+netlify-cli@^2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/netlify-cli/-/netlify-cli-2.6.3.tgz#e919d38fc3c766376ee28a9714c635c5de290f22"
   integrity sha512-LvdHzJevd7Y0b1CStWi5y+XBzI3rTeYU5m2GJ4VbUCGX4xaJyU2JHD18QGqSxaHIiumccnzrASLb10box/15NA==

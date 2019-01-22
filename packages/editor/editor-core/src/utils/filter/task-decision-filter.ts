@@ -6,6 +6,8 @@ const taskDecisionAllowedNodeTypes = new Set([
   'text',
   'emoji',
   'mention',
+  'status',
+  'date',
   'hardBreak',
 ]);
 
