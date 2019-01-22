@@ -31,7 +31,8 @@ const flattenDeep = require('lodash.flattendeep');
   // Packages that are dependent on the changed packages.
   // If dependencies flag is passed, CHANGED_PACKAGES will return packages that are dependent on the changed packages.
   // Get dependency graph for all packages.
-  if (process.argv[2] && process.argv[2].includes('dependencies')) {
+  if (process.argv[2] && process.argv[2].includes('--dependents')) {
+    const typeOfDep = process.argv[2].split('=')[1];
     const dependencyGraph = await bolt.getDependentsGraph({ cwd });
     // 1. Match with changed packages
     // 2. Get the package.json from those packages
@@ -48,13 +49,13 @@ const flattenDeep = require('lodash.flattendeep');
             const dependentPkgJSON = getPackageJSON(dependent).config;
             // Direct dependencies will return packages with direct dependencies on the changed packages.
             // When a package does not have dependent or not required such as the build script.
-            if (process.argv[2].includes('direct'))
+            if (typeOfDep.includes('direct'))
               return (
                 dependentPkgJSON.dependencies[changedPkgName] !== undefined
               );
             // All dependencies will return packages with direct, dev and peer dependencies on the changed packages.
             // For peerDependencies, some packages do not have it that's why it needed to check for its existence.
-            if (process.argv[2].includes('all'))
+            if (typeOfDep.includes('all'))
               return (
                 dependentPkgJSON.dependencies[changedPkgName] !== undefined ||
                 (dependentPkgJSON.peerDependencies &&
@@ -78,6 +79,9 @@ const flattenDeep = require('lodash.flattendeep');
       ),
     ];
     console.log(JSON.stringify(changedPackagesRelativePathsWithDependent));
+  }
+  if (process.argv.includes('--spaceDelimited')) {
+    console.log(changedPackagesRelativePaths.join(' '));
   } else {
     console.log(JSON.stringify(changedPackagesRelativePaths));
   }
