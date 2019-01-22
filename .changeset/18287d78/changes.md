@@ -1,0 +1,1 @@
+- Fix ts-node config because it can not resolve type package as the name doesn't match 
