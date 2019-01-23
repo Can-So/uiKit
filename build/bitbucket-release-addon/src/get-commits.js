@@ -4,25 +4,26 @@ function commitsToValues(response) {
   return response.values;
 }
 
-function commitUrl(user, repo, pullrequestid, page) {
-  if (page) {
-    return `/2.0/repositories/${user}/${repo}/pullrequests/${pullrequestid}/commits?page=${page}`;
+function commitUrl(user, repo, pullrequestid, urlNext) {
+  if (urlNext) {
+    return urlNext;
   } else {
     return `/2.0/repositories/${user}/${repo}/pullrequests/${pullrequestid}/commits`;
   }
 }
 
-function getCommits(user, repo, pullrequestid, page) {
+function getCommits(user, repo, pullrequestid, urlNext) {
   return new Promise((resolve, reject) => {
     window.AP.require('request', request => {
       request({
-        url: commitUrl(user, repo, pullrequestid, page),
+        url: commitUrl(user, repo, pullrequestid, urlNext),
         success(response) {
           if (response.next) {
-            page = response.page;
-            getCommits(user, repo, pullrequestid, page + 1).then(commits => {
-              resolve(commitsToValues(response).concat(commits));
-            });
+            getCommits(user, repo, pullrequestid, response.next).then(
+              commits => {
+                resolve(commitsToValues(response).concat(commits));
+              },
+            );
           } else {
             resolve(commitsToValues(response));
           }
