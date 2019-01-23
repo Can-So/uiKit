@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.1.0
+- [minor] [2db7577588](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db7577588):
+
+  - ED-5924: Fixes handling of node deletion for composition events.
+
 ## 97.0.3
 - [patch] [a5714ccc17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5714ccc17):
 
