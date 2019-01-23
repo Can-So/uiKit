@@ -39,7 +39,7 @@ export const status: NodeSpec = {
         return {
           text: dom.textContent!.replace(/\n/, '').trim(),
           color: dom.getAttribute('data-color'),
-          localId: dom.getAttribute('data-local-id') || uuid.generate(),
+          localId: uuid.generate(),
           style: dom.getAttribute('data-style'),
         };
       },
