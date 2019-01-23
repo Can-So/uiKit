@@ -1,8 +1,14 @@
+jest.mock('@atlaskit/media-ui');
 import * as React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
+import { getCssFromImageOrientation, isRotated } from '@atlaskit/media-ui';
 import { MediaImage, MediaImageProps, MediaImageState } from '../../mediaImage';
 import { ImageComponent } from '../../mediaImage/styled';
-import { expectToEqual } from '@atlaskit/media-test-helpers';
+import {
+  asMock,
+  expectFunctionToHaveBeenCalledWith,
+  expectToEqual,
+} from '@atlaskit/media-test-helpers';
 
 interface SetupParams {
   isCoverStrategy: boolean;
@@ -227,7 +233,10 @@ describe('MediaImage', () => {
         );
       });
 
-      it('should rotate the image and revert width and height when orientation is 6', () => {
+      it('should rotate the image and revert width and height when image is rotated 90deg', () => {
+        asMock(getCssFromImageOrientation).mockReturnValue('rotate(90deg)');
+        asMock(isRotated).mockReturnValue(true);
+
         const component = mount<MediaImageProps, MediaImageState>(
           <MediaImage
             dataURI="data:image/png;base64,"
@@ -236,6 +245,8 @@ describe('MediaImage', () => {
             previewOrientation={6}
           />,
         );
+        expectFunctionToHaveBeenCalledWith(getCssFromImageOrientation, [6]);
+
         mockImageTag(component, [1000, 750], [75, 100], true);
         expectToEqual(component.find(ImageComponent).prop('style'), {
           ...defaultTransform,

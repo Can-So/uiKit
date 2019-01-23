@@ -1,7 +1,9 @@
 jest.mock('../../imageMetaData/metatags');
+jest.mock('../../imageMetaData/imageOrientationUtil');
 
 import { asMock } from '@atlaskit/media-test-helpers';
 import * as util from '../../util';
+
 import {
   getImageInfo,
   getOrientation,
@@ -12,6 +14,7 @@ import {
   ImageMetaDataTags,
   ImageInfo,
 } from '../../imageMetaData';
+import { isRotated } from '../../imageMetaData/imageOrientationUtil';
 import { readImageMetaTags } from '../../imageMetaData/metatags';
 import { ExifOrientation } from '../../imageMetaData/types';
 
@@ -140,7 +143,7 @@ describe('Image Meta Data', () => {
         naturalWidth: 100,
         naturalHeight: 75,
       });
-      asMock(readImageMetaTags).mockReturnValue({ Orientation: 'right-top' });
+      asMock(isRotated).mockReturnValue(true);
       const imageMetaData = (await readImageMetaData(
         fileInfo,
       )) as ImageMetaData;

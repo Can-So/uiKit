@@ -9,7 +9,7 @@ import {
 import { readImageMetaTags } from './metatags';
 
 import { loadImage } from '../util';
-import { isRotated } from './getCssFromImageOrientation';
+import { isRotated } from './imageOrientationUtil';
 
 const { Orientation, XResolution } = SupportedImageMetaTag;
 
@@ -157,4 +157,4 @@ export async function readImageMetaData(
   return data;
 }
 
-export * from './getCssFromImageOrientation';
+export * from './imageOrientationUtil';
