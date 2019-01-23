@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.1.4
+- [patch] [f77cd3fb66](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f77cd3fb66):
+
+  - fixed reactjs warning on FieldBase.onBlur and prevent breaking line when inserting Status via enter key
+
 ## 97.1.3
 - Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
   - @atlaskit/editor-test-helpers@6.3.14
