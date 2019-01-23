@@ -1,5 +1,10 @@
 # @atlaskit/global-navigation
 
+## 5.5.3
+- [patch] [4c9a6d2187](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c9a6d2187):
+
+  - Correcting attribute name in analytics event
+
 ## 5.5.2
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

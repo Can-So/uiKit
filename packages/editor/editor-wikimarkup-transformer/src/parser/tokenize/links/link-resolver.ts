@@ -4,6 +4,7 @@ import { Node as PMNode, Schema } from 'prosemirror-model';
 import { mentionLinkResolver } from './mention-link';
 import { attachmentLinkResolver } from './attachment-link';
 import { urlLinkResolver } from './url-link';
+import { issueLinkResolver } from './issue-link';
 
 /**
  * Given some parsed link text, convert it into a link object that can then be rendered into
@@ -30,6 +31,7 @@ type ContentLinkResolver = (
 const linkResolverStrategies: ContentLinkResolver[] = [
   attachmentLinkResolver,
   mentionLinkResolver,
+  issueLinkResolver,
   urlLinkResolver,
 ];
 

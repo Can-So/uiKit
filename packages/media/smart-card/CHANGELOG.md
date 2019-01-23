@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.5.0
+- [minor] [d664fc3d49](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d664fc3d49):
+
+  - added support for rendering of icons with Confluence links
+
 ## 9.4.1
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

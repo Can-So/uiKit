@@ -110,7 +110,7 @@ class NotificationIndicator extends Component<Props, State> {
     // to a number > 0 (the indicator becomes visible)
     if (this.props.createAnalyticsEvent && newCount > 0 && oldCount === 0) {
       const event = this.props.createAnalyticsEvent({
-        name: 'notificationIndicator',
+        actionSubject: 'notificationIndicator',
         action: 'activated',
         attributes: {
           badgeCount: newCount,
@@ -122,7 +122,7 @@ class NotificationIndicator extends Component<Props, State> {
 
     if (this.props.createAnalyticsEvent && newCount !== oldCount) {
       const event = this.props.createAnalyticsEvent({
-        name: 'notificationIndicator',
+        actionSubject: 'notificationIndicator',
         action: 'updated',
         attributes: {
           oldCount: oldCount,

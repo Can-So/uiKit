@@ -1,5 +1,20 @@
 # @atlaskit/editor-core
 
+## 97.1.0
+- [minor] [2db7577588](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db7577588):
+
+  - ED-5924: Fixes handling of node deletion for composition events.
+
+## 97.0.3
+- [patch] [a5714ccc17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5714ccc17):
+
+  - Fixed table column not selectable (regression in prosemirror-view@1.6.8)
+
+## 97.0.2
+- [patch] [8dc4a35361](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8dc4a35361):
+
+  - enable status and date components to be pasted into a task component
+
 ## 97.0.1
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1
