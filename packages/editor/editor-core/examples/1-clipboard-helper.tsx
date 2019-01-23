@@ -33,12 +33,15 @@ export default class ClipboardHelper extends React.Component<{}, State> {
           value={this.state.value}
         />
         <button
-          id="copy-as-plaintext"
+          className="copy-as-plaintext"
           onClick={() => this.copyAs('text/plain')}
         >
           Copy Plain Text
         </button>
-        <button id="copy-as-html" onClick={() => this.copyAs('text/html')}>
+        <button
+          className="copy-as-html"
+          onClick={() => this.copyAs('text/html')}
+        >
           Copy HTML
         </button>
       </div>
