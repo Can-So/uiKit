@@ -192,7 +192,7 @@ export const enterKeyCommand: Command = (state, dispatch): boolean => {
   const { selection } = state;
   if (selection.empty) {
     const { $from } = selection;
-    const { listItem } = state.schema.nodes;
+    const { listItem, codeBlock } = state.schema.nodes;
     const node = $from.node($from.depth);
     const wrapper = $from.node($from.depth - 1);
 
@@ -201,7 +201,7 @@ export const enterKeyCommand: Command = (state, dispatch): boolean => {
       const wrapperHasContent = hasVisibleContent(wrapper);
       if (isEmptyNode(node) && !wrapperHasContent) {
         return outdentList()(state, dispatch);
-      } else {
+      } else if (!hasParentNodeOfType(codeBlock)(selection)) {
         return splitListItem(listItem)(state, dispatch);
       }
     }
