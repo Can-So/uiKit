@@ -131,7 +131,7 @@ class UserPickerInternal extends React.Component<
       return;
     }
     this.setState({ inputValue: '' });
-    const { onChange, onSelection, isMulti } = this.props;
+    const { onChange, onSelection, onClear, isMulti } = this.props;
     callCallback(onChange, extractOptionValue(value), action);
 
     switch (action) {
@@ -143,6 +143,7 @@ class UserPickerInternal extends React.Component<
         this.session = isMulti ? startSession() : undefined;
         break;
       case 'clear':
+        callCallback(onClear);
         this.fireEvent(clearEvent);
         break;
       case 'remove-value':

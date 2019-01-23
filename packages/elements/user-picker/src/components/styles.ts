@@ -3,7 +3,7 @@ import { colors } from '@atlaskit/theme';
 import memoizeOne from 'memoize-one';
 import { getAvatarSize } from './utils';
 
-export const PLACEHOLDER_PADDING = 8;
+export const PLACEHOLDER_PADDING = 6;
 
 export const getStyles = memoizeOne(width => ({
   menu: (css, state) => ({

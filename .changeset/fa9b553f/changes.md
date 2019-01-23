@@ -1,0 +1,1 @@
+- Fix styling and add API for onClear

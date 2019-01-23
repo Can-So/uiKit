@@ -99,6 +99,16 @@ describe('UserPicker', () => {
     expect(onSelection).toHaveBeenCalledWith(options[0]);
   });
 
+  it('should trigger props.onClear if onChange with clear action', () => {
+    const onClear = jest.fn();
+    const component = shallowUserPicker({ onClear });
+
+    const select = component.find(Select);
+    select.simulate('change', userOptions[0], { action: 'clear' });
+
+    expect(onClear).toHaveBeenCalled();
+  });
+
   it('should call onFocus handler', () => {
     const onFocus = jest.fn();
     const component = shallowUserPicker({ onFocus });
