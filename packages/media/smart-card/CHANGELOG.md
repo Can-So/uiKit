@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.6.0
+- [minor] [27b12fdfc6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27b12fdfc6):
+
+  - added support for rendering of icons in Jira links
+
 ## 9.5.0
 - [minor] [d664fc3d49](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d664fc3d49):
 
