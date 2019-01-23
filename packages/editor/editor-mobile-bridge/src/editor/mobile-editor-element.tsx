@@ -25,6 +25,7 @@ class EditorWithState extends Editor {
     transformer?: any;
   }) {
     super.onEditorCreated(instance);
+
     const { eventDispatcher, view } = instance;
     bridge.editorView = view;
     bridge.editorActions._privateRegisterEditor(view, eventDispatcher);
@@ -75,6 +76,9 @@ export default function mobileEditor(props) {
       allowDate={true}
       allowRule={true}
       allowStatus={true}
+      allowLayouts={{
+        allowBreakout: true,
+      }}
       taskDecisionProvider={Promise.resolve(TaskDecisionProvider())}
     />
   );
