@@ -189,9 +189,14 @@ if (config.testMatch.length === 0) {
     console.log('No packages were changed, so no tests should be run.');
   }
 }
+if (process.env.VISUAL_REGRESSION) {
+  config.globalSetup = `${__dirname}/build/visual-regression/config/jest/globalSetup.js`;
+  config.globalTeardown = `${__dirname}/build/visual-regression/config/jest/globalTeardown.js`;
+  config.testEnvironment = `${__dirname}/build/visual-regression/config/jest/jsdomEnvironment.js`;
 
-if (process.env.VISUAL_REGRESSION && !process.env.CI) {
-  config.globals.__BASEURL__ = 'http://testing.local.com:9000';
+  if (!process.env.CI) {
+    config.globals.__BASEURL__ = 'http://testing.local.com:9000';
+  }
 }
 
 module.exports = config;
