@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.4.2
+- [patch] [478a86ae8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/478a86ae8a):
+
+  - avoid using the same localId when pasting status
+
 ## 1.4.1
 - [patch] [2d6d5b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d6d5b6):
 

@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.1.1
+- [patch] [478a86ae8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/478a86ae8a):
+
+  - avoid using the same localId when pasting status
+
 ## 97.1.0
 - [minor] [2db7577588](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db7577588):
 
