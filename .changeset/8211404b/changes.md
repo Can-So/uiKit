@@ -1,1 +1,0 @@
-- Fetch cloud accounts only on cloud folder opening
