@@ -1,8 +1,8 @@
+import { shallowWithIntl } from '@atlaskit/editor-test-helpers';
+import { FieldTextStateless } from '@atlaskit/field-text';
 import * as React from 'react';
 import { StatusPicker } from '../../..';
-import { FieldTextStateless } from '@atlaskit/field-text';
 import ColorPalette from '../../../components/internal/color-palette';
-import { shallowWithIntl } from 'enzyme-react-intl';
 
 describe('StatusPicker', () => {
   it('should render color palette', () => {
