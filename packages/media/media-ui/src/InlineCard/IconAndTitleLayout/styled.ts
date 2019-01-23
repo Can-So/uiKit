@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import { ImgHTMLAttributes, HTMLAttributes, ComponentClass } from 'react';
+import { HTMLAttributes, ComponentClass } from 'react';
 
-export const IconWrapper: ComponentClass<ImgHTMLAttributes<{}>> = styled.span`
-  position: absolute;
-  left: 0;
-  top: 1px;
-`;
+export interface IconTitleWrapperProps {
+  hasIcon: boolean;
+}
 
-export const IconTitleWrapper: ComponentClass<HTMLAttributes<{}>> = styled.span`
+export const IconTitleWrapper: ComponentClass<
+  HTMLAttributes<{}> & IconTitleWrapperProps
+> = styled.span`
   position: relative;
-  padding-left: 20px;
+  ${(props: IconTitleWrapperProps) => props.hasIcon && `padding-left: 20px;`}
 `;
 
 export const OtherWrapper: ComponentClass<HTMLAttributes<{}>> = styled.span`

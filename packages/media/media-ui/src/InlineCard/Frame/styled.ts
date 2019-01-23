@@ -51,8 +51,8 @@ export const Wrapper: ComponentClass<
   AnchorHTMLAttributes<{}> & WrapperProps
 > = styled.a`
   line-height: ${16 / 14};
-  margin: 2px 2px 2px 0;
-  padding: 1px 2px 2px 2px;
+  margin: 0px 2px;
+  padding: 2px;
   border-radius: ${akBorderRadius()}px;
   user-select: none;
   background-color: ${colors.N30A};
