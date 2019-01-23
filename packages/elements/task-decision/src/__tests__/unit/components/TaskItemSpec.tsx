@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { mount } from 'enzyme';
-import FabricAnalyticsListener from '@atlaskit/analytics-listeners';
+import FabricAnalyticsListener, {
+  AnalyticsWebClient,
+} from '@atlaskit/analytics-listeners';
 import TaskItem from '../../../components/TaskItem';
 import Participants from '../../../components/Participants';
 import { AttributionWrapper, ContentWrapper } from '../../../styled/Item';
@@ -9,7 +11,7 @@ import { Placeholder } from '../../../styled/Placeholder';
 import { getParticipants } from '../_test-data';
 
 describe('<TaskItem/>', () => {
-  let analyticsWebClientMock;
+  let analyticsWebClientMock: AnalyticsWebClient;
 
   beforeEach(() => {
     analyticsWebClientMock = {
@@ -31,15 +33,15 @@ describe('<TaskItem/>', () => {
   });
 
   it('should render callback with ref', () => {
-    let contentRef: HTMLElement | undefined;
-    const handleContentRef = ref => (contentRef = ref);
+    let contentRef: HTMLElement | null = null;
+    const handleContentRef = (ref: HTMLElement | null) => (contentRef = ref);
     const component = mount(
       <TaskItem taskId="task-id" contentRef={handleContentRef}>
         Hello <b>world</b>
       </TaskItem>,
     );
     expect(component.find('b').length).toEqual(1);
-    expect(contentRef).not.toEqual(undefined);
+    expect(contentRef).not.toEqual(null);
     expect(contentRef!.textContent).toEqual('Hello world');
   });
 

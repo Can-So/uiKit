@@ -1576,6 +1576,11 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/url-search-params@^0.10.0":
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/@types/url-search-params/-/url-search-params-0.10.2.tgz#bf7587e67953906ea67a8ff0ddbcb6f4482ebaa3"
+  integrity sha512-AaM3cTaHIbIJecuqf15ystbsUL3rtiJHZHhv6hTu1hBeKbvGwUNdHXfqNiY2LMWIT8ip6SqA+M9wYWIsQiMH2g==
+
 "@types/uuid-validate@^0.0.0":
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/@types/uuid-validate/-/uuid-validate-0.0.0.tgz#636ed8b85b318abfccee5dab91b28e93f5e318cf"

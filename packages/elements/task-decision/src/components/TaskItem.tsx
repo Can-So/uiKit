@@ -37,7 +37,7 @@ export class TaskItem extends PureComponent<
 
   private checkBoxId: string;
 
-  constructor(props) {
+  constructor(props: Props & WithAnalyticsEventProps) {
     super(props);
     this.checkBoxId = getCheckBoxId(props.taskId);
   }
