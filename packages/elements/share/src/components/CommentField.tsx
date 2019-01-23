@@ -4,11 +4,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from '../i18n';
 
-type Props = {
-  onChange?: Function;
-};
-
-export const CommentField: React.StatelessComponent<Props> = props => (
+export const CommentField: React.StatelessComponent<{}> = () => (
   <Field name="comment">
     {({ fieldProps }) => (
       <FormattedMessage {...messages.commentPlaceholder}>
@@ -19,7 +15,6 @@ export const CommentField: React.StatelessComponent<Props> = props => (
             shouldFitContainer
             isLabelHidden
             placeholder={placeholder as string}
-            onChange={props.onChange}
           />
         )}
       </FormattedMessage>
