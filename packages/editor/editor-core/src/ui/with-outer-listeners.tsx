@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ComponentClass, StatelessComponent, PureComponent } from 'react';
 import * as ReactDOM from 'react-dom';
 
-export type SimpleEventHandler = () => void;
+export type SimpleEventHandler = (event: Event) => void;
 
 export interface WithOutsideClickProps {
   handleClickOutside?: SimpleEventHandler;
@@ -38,22 +38,21 @@ export default function withOuterListeners<P>(
       }
     }
 
-    handleClick = evt => {
+    handleClick = (evt: Event) => {
       const domNode = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
-
       if (
         !domNode ||
         (evt.target instanceof Node && !domNode.contains(evt.target))
       ) {
-        (this.props.handleClickOutside as SimpleEventHandler)();
+        (this.props.handleClickOutside as SimpleEventHandler)(evt);
       }
     };
 
     handleKeydown = evt => {
       if (evt.code === 'Escape' && this.props.handleEscapeKeydown) {
-        (this.props.handleEscapeKeydown as SimpleEventHandler)();
+        (this.props.handleEscapeKeydown as SimpleEventHandler)(evt);
       } else if (evt.code === 'Enter' && this.props.handleEnterKeydown) {
-        (this.props.handleEnterKeydown as SimpleEventHandler)();
+        (this.props.handleEnterKeydown as SimpleEventHandler)(evt);
       }
     };
 

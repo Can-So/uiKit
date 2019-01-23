@@ -1,0 +1,1 @@
+- fixed reactjs warning on FieldBase.onBlur and prevent breaking line when inserting Status via enter key
