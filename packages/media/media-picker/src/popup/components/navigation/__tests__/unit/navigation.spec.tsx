@@ -320,5 +320,48 @@ describe('<Navigation />', () => {
 
       expect(onChangeAccount).toBeCalledWith('dropbox', 'youatdropbox');
     });
+
+    it('can re-render component on new account and service', async () => {
+      const accountGoog0 = (await ACCOUNTS)[0];
+      const accountGoog1 = (await ACCOUNTS)[1];
+      const accountDb = (await ACCOUNTS)[2];
+
+      const component = shallow(
+        <Navigation
+          accounts={Promise.resolve([accountGoog0])}
+          path={PATH}
+          service={SERVICE_GOOGLE}
+          onChangeAccount={onChangeAccount}
+          onChangePath={onChangePath}
+          onStartAuth={onStartAuth}
+          onUnlinkAccount={onUnlinkAccount}
+          intl={fakeIntl}
+        />,
+      );
+
+      await nextTick();
+
+      expect(component.contains(<b>me@google.com</b>)).toBeTruthy();
+
+      component.setProps({
+        accounts: Promise.resolve([accountDb]),
+        service: SERVICE_DROPBOX,
+      });
+
+      await nextTick();
+
+      expect(component.contains(<b>me@dropbox.com</b>)).toBeTruthy();
+      expect(component.contains(<b>me@google.com</b>)).toBeFalsy();
+
+      component.setProps({
+        accounts: Promise.resolve([accountGoog0, accountGoog1]),
+        service: SERVICE_GOOGLE,
+      });
+
+      await nextTick();
+
+      expect(component.contains(<b>me@google.com</b>)).toBeTruthy();
+      expect(component.contains('you@google.com')).toBeTruthy();
+    });
   });
 });
