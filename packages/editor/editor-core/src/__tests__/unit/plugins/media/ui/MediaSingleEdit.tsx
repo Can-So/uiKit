@@ -2,8 +2,6 @@ import * as React from 'react';
 import {
   doc,
   mediaSingle,
-  media,
-  randomId,
   createEditorFactory,
   bodiedExtension,
   layoutColumn,
@@ -16,11 +14,10 @@ import ToolbarButton from '../../../../../ui/ToolbarButton';
 import FloatingToolbar from '../../../../../ui/FloatingToolbar';
 import MediaSingleEdit from '../../../../../plugins/media/ui/MediaSingleEdit';
 import { setNodeSelection } from '../../../../../utils';
+import { temporaryMediaWithDimensions } from '../_utils';
 
 describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
   const createEditor = createEditorFactory();
-  const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
-  const temporaryFileId = `temporary:${randomId()}`;
   const editor = (doc: any) =>
     createEditor({
       doc,
@@ -35,19 +32,7 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
     });
   it('should have layout options if media single not inside bodied extension', () => {
     const { editorView } = editor(
-      doc(
-        mediaSingle({ layout: 'center' })(
-          media({
-            id: temporaryFileId,
-            __key: temporaryFileId,
-            type: 'file',
-            collection: testCollectionName,
-            __fileMimeType: 'image/png',
-            width: 100,
-            height: 100,
-          })(),
-        ),
-      ),
+      doc(mediaSingle({ layout: 'center' })(temporaryMediaWithDimensions())),
     );
     editorView.focus();
     const pluginState = pluginKey.getState(editorView.state);
@@ -76,19 +61,7 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
         bodiedExtension({
           extensionKey: 'extensionKey',
           extensionType: 'bodiedExtension',
-        })(
-          mediaSingle({ layout: 'center' })(
-            media({
-              id: temporaryFileId,
-              __key: temporaryFileId,
-              type: 'file',
-              collection: testCollectionName,
-              __fileMimeType: 'image/png',
-              width: 100,
-              height: 100,
-            })(),
-          ),
-        ),
+        })(mediaSingle({ layout: 'center' })(temporaryMediaWithDimensions())),
       ),
     );
 
@@ -116,17 +89,7 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
         layoutSection(
           layoutColumn({ width: 50 })(p('')),
           layoutColumn({ width: 50 })(
-            mediaSingle({ layout: 'center' })(
-              media({
-                id: temporaryFileId,
-                __key: temporaryFileId,
-                type: 'file',
-                collection: testCollectionName,
-                __fileMimeType: 'image/png',
-                width: 100,
-                height: 100,
-              })('{<>}'),
-            ),
+            mediaSingle({ layout: 'center' })(temporaryMediaWithDimensions()),
           ),
         ),
       ),
@@ -155,17 +118,7 @@ describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
         layoutSection(
           layoutColumn({ width: 50 })(p('')),
           layoutColumn({ width: 50 })(
-            mediaSingle({ layout: 'center' })(
-              media({
-                id: temporaryFileId,
-                __key: temporaryFileId,
-                type: 'file',
-                collection: testCollectionName,
-                __fileMimeType: 'image/png',
-                width: 100,
-                height: 100,
-              })('{<>}'),
-            ),
+            mediaSingle({ layout: 'center' })(temporaryMediaWithDimensions()),
           ),
         ),
       ),
