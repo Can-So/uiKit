@@ -1,6 +1,7 @@
 import {
   mockEmojiResourceFactory,
   UsageClearEmojiResource,
+  MockEmojiResourceConfig,
 } from './MockEmojiResource';
 import {
   EmojiDescription,
@@ -95,10 +96,12 @@ export const lorem = `
 
 export const getEmojiRepository = (): any => new EmojiRepository(getEmojis());
 
-export const getEmojiResource = (config?) =>
+export const getEmojiResource = (config?: MockEmojiResourceConfig) =>
   mockEmojiResourceFactory(getEmojiRepository(), config);
 
-export const getEmojiResourceWithStandardAndAtlassianEmojis = (config?) => {
+export const getEmojiResourceWithStandardAndAtlassianEmojis = (
+  config?: MockEmojiResourceConfig,
+) => {
   const standardEmojis: EmojiDescription[] = getStandardEmojis();
   const atlassianEmojis: EmojiDescription[] = getAtlassianEmojis();
   return mockEmojiResourceFactory(

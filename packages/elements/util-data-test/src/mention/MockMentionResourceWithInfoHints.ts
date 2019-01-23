@@ -39,11 +39,11 @@ export class MockMentionResourceWithInfoHints extends AbstractMentionResource {
       }
       this._notifyAllResultsListeners(mentions);
     };
-    const notifyInfo = info => {
+    const notifyInfo = (info: string) => {
       this._notifyInfoListeners(info);
     };
 
-    const notifyErrors = error => {
+    const notifyErrors = (error: Error) => {
       this._notifyErrorListeners(error);
     };
 
