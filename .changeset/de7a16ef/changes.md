@@ -1,0 +1,1 @@
+- Added capabilities info message in ShareForm
