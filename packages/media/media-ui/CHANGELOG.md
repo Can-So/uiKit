@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 8.3.0
+- [minor] [89668941e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/89668941e6):
+
+  - Flip width and height around when image is on it's side according to metadata orientation; Introduce isRotated utility
+
 ## 8.2.6
 - Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
   - @atlaskit/media-test-helpers@20.0.0
