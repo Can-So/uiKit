@@ -96,6 +96,10 @@ export default class FieldBase extends Component<FieldBaseProps, State> {
     }, 0);
   }
 
+  componentWillUnmount() {
+    this.cancelSchedule(ON_BLUR_KEY);
+  }
+
   render() {
     const { defaultIsFocused, ...props } = this.props;
     const { isFocused, isDialogFocused } = this.state;
