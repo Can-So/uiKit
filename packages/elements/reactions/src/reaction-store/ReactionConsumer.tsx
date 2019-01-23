@@ -4,6 +4,8 @@ import { ReactionsStore, State } from './ReactionsStore';
 
 export type ReactionStoreProp = ReactionsStore | Promise<ReactionsStore>;
 
+export type ReactionStoreState = State;
+
 export type Actions = {
   getReactions: (containerId: string, aris: string) => void;
   toggleReaction: ReactionAction;
@@ -30,7 +32,7 @@ export class ReactionConsumer<
   private previousActions: Actions | undefined;
   private propsFromActions: PropsFromActions | undefined;
 
-  constructor(props) {
+  constructor(props: Props<PropsFromState, PropsFromActions>) {
     super(props);
     this.state = {};
   }
