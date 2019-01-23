@@ -1,5 +1,15 @@
 # @atlaskit/editor-core
 
+## 97.1.3
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/editor-test-helpers@6.3.14
+  - @atlaskit/renderer@37.0.2
+  - @atlaskit/media-card@51.0.2
+  - @atlaskit/media-core@26.2.1
+  - @atlaskit/media-filmstrip@25.0.2
+  - @atlaskit/media-picker@31.0.2
+  - @atlaskit/media-test-helpers@20.0.0
+
 ## 97.1.2
 - [patch] [5132bc24a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5132bc24a5):
 
