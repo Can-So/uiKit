@@ -1,7 +1,9 @@
 jest.mock('../../imageMetaData/metatags');
+jest.mock('../../imageMetaData/imageOrientationUtil');
 
 import { asMock } from '@atlaskit/media-test-helpers';
 import * as util from '../../util';
+
 import {
   getImageInfo,
   getOrientation,
@@ -12,6 +14,7 @@ import {
   ImageMetaDataTags,
   ImageInfo,
 } from '../../imageMetaData';
+import { isRotated } from '../../imageMetaData/imageOrientationUtil';
 import { readImageMetaTags } from '../../imageMetaData/metatags';
 import { ExifOrientation } from '../../imageMetaData/types';
 
@@ -133,6 +136,19 @@ describe('Image Meta Data', () => {
       expect((imageMetaData.tags as ImageMetaDataTags).Orientation).toBe(
         'top-left',
       );
+    });
+
+    it("should flip width and height when image is on it's side", async () => {
+      loadImage.mockReturnValue({
+        naturalWidth: 100,
+        naturalHeight: 75,
+      });
+      asMock(isRotated).mockReturnValue(true);
+      const imageMetaData = (await readImageMetaData(
+        fileInfo,
+      )) as ImageMetaData;
+      expect(imageMetaData.width).toBe(75);
+      expect(imageMetaData.height).toBe(100);
     });
 
     it('should return null when images fail to load', async () => {

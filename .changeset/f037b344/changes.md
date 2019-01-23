@@ -1,0 +1,1 @@
+- Take into account if image is on it's side according to orientation tag when deciding how to crop/fit and image
