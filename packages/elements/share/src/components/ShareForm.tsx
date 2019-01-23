@@ -3,19 +3,44 @@ import Form, { FormFooter, FormSection } from '@atlaskit/form';
 import { LoadOptions } from '@atlaskit/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import styled from 'styled-components';
 import { messages } from '../i18n';
 import { CommentField } from './CommentField';
 import { ShareHeader } from './ShareHeader';
 import { UserPickerField } from './UserPickerField';
+import { CopyLinkButton } from './CopyLinkButton';
+
+const LeftAlignmentContainer = styled.div`
+  margin-right: auto;
+`;
+
+type ShareError = {
+  message: string;
+} | null;
+
+type User = UserWithId | UserWithEmail;
+
+type UserWithId = {
+  type: 'user' | 'group' | 'team';
+  id: string;
+};
+
+type UserWithEmail = {
+  email: string;
+};
 
 export type Props = {
-  title?: React.ReactNode;
+  copyLink: string;
+  isSharing?: boolean;
   loadOptions: LoadOptions;
-  onUsersChange?: Function;
-  onCommentChange?: Function;
+  onCommentChange?: (event: React.SyntheticEvent) => void;
+  onLinkCopy?: (link: string) => void;
   onShareClick?: Function;
-  shouldCapabilitiesWarningShow?: boolean;
+  onUsersChange?: (users: User[]) => void;
+  shareError?: ShareError;
+  shouldShowCapabilitiesInfoMessage?: boolean;
   submitButtonLabel?: React.ReactNode;
+  title?: React.ReactNode;
 };
 
 export const ShareForm: React.StatelessComponent<Props> = props => (
@@ -25,9 +50,15 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
         <ShareHeader title={props.title} />
         <FormSection>
           <UserPickerField loadOptions={props.loadOptions} />
-          <CommentField onChange={props.onCommentChange} />
+          <CommentField />
         </FormSection>
         <FormFooter>
+          <LeftAlignmentContainer>
+            <CopyLinkButton
+              onLinkCopy={props.onLinkCopy}
+              link={props.copyLink}
+            />
+          </LeftAlignmentContainer>
           <Button appearance="primary" type="submit">
             {props.submitButtonLabel || (
               <FormattedMessage {...messages.formSend} />
@@ -41,5 +72,4 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
 
 ShareForm.defaultProps = {
   onShareClick: () => {},
-  shouldCapabilitiesWarningShow: false,
 };

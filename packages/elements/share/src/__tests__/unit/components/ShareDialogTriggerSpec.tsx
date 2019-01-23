@@ -11,7 +11,9 @@ import {
 describe('ShareDialogTrigger', () => {
   describe('default', () => {
     it('should render', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       expect(wrapper.find(InlineDialog).length).toBe(1);
       // TODO: where to get type InlineDialogProps?
       expect(wrapper.find<any>(InlineDialog).props().isOpen).toBe(false);
@@ -22,12 +24,16 @@ describe('ShareDialogTrigger', () => {
 
   describe('isDialogOpen state', () => {
     it('should be false by default', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       expect(wrapper.state().isDialogOpen).toBe(false);
     });
 
     it('should be passed into isOpen prop InlineDialog and isSelected props in ShareButton', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       let { isDialogOpen } = wrapper.state();
       // TODO: where to get type InlineDialogProps?
       let inlineDialogProps = wrapper.find<any>(InlineDialog).props();
@@ -45,7 +51,9 @@ describe('ShareDialogTrigger', () => {
     });
 
     it('should render ShareForm if isDialogOpen is true', () => {
-      const wrapper = mount<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const wrapper = mount<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       wrapper.setState({ isDialogOpen: true });
       expect(wrapper.find(ShareForm).length).toBe(1);
     });
@@ -55,11 +63,11 @@ describe('ShareDialogTrigger', () => {
     it('should be updated only if isDialogOpen state is true, capabilities and validateStateWithCapabilities props are given', () => {
       const mockCapabilities = {
         directInvite: {
-          mode: 'ANYONE',
+          mode: 'ANYONE' as 'ANYONE',
           permittedResources: ['mockAri'],
         },
         invitePendingApproval: {
-          mode: 'ANYONE',
+          mode: 'ANYONE' as 'ANYONE',
           permittedResources: ['mockAri'],
         },
       };
@@ -69,6 +77,7 @@ describe('ShareDialogTrigger', () => {
       );
       let wrapper = shallow<ShareDialogTrigger>(
         <ShareDialogTrigger
+          copyLink="copyLink"
           capabilities={mockCapabilities}
           validateStateWithCapabilities={spiedValidateStateWithCapabilities}
         />,
@@ -77,6 +86,7 @@ describe('ShareDialogTrigger', () => {
 
       wrapper = shallow<ShareDialogTrigger>(
         <ShareDialogTrigger
+          copyLink="copyLink"
           validateStateWithCapabilities={spiedValidateStateWithCapabilities}
         />,
       );
@@ -98,35 +108,46 @@ describe('ShareDialogTrigger', () => {
       );
     });
 
-    it('should be passed into ShareForm as shouldCapabilitiesWarningShow props', () => {
-      const wrapper = mount<ShareDialogTrigger>(<ShareDialogTrigger />);
+    it('should be passed into ShareForm as shouldShowCapabilitiesInfoMessage props', () => {
+      const wrapper = mount<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       wrapper.setState({
         isDialogOpen: true,
         isStateValidWithCapabilities: !wrapper.state()
           .isStateValidWithCapabilities,
       });
       let shareFormProps = wrapper.find(ShareForm).props();
-      expect(shareFormProps.shouldCapabilitiesWarningShow).toEqual(
-        wrapper.state().isStateValidWithCapabilities,
+      expect(shareFormProps.shouldShowCapabilitiesInfoMessage).toEqual(
+        !wrapper.state().isStateValidWithCapabilities,
       );
     });
   });
 
   describe('children prop', () => {
     it('should render a ShareButton if children prop is not given', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       expect(wrapper.find(ShareButton).length).toBe(1);
     });
 
     it('should be called with the this.handleOpenDialog function as argument if given', () => {
       const spiedRenderer = jest.fn();
       const wrapper = shallow<ShareDialogTrigger>(
-        <ShareDialogTrigger>{spiedRenderer}</ShareDialogTrigger>,
+        <ShareDialogTrigger copyLink="copyLink">
+          {spiedRenderer}
+        </ShareDialogTrigger>,
       );
+      const wrapperState = wrapper.state();
       expect(spiedRenderer).toHaveBeenCalledTimes(1);
       expect(spiedRenderer.mock.calls[0][0]).toBe(
         wrapper.instance().handleOpenDialog,
       );
+      expect(spiedRenderer.mock.calls[0][1]).toMatchObject({
+        loading: wrapperState.isSharing,
+        error: wrapperState.shareError,
+      });
     });
   });
 
@@ -134,7 +155,7 @@ describe('ShareDialogTrigger', () => {
     it('should be passed into ShareButton', () => {
       let isDisabled = false;
       const wrapper = shallow<ShareDialogTrigger>(
-        <ShareDialogTrigger isDisabled={isDisabled} />,
+        <ShareDialogTrigger copyLink="copyLink" isDisabled={isDisabled} />,
       );
       let shareButtonProps = wrapper.find(ShareButton).props();
       expect(shareButtonProps.isDisabled).toEqual(isDisabled);
@@ -148,7 +169,9 @@ describe('ShareDialogTrigger', () => {
 
   describe('handleOpenDialog', () => {
     it('should set the isDialogOpen state to true', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       expect(wrapper.state().isDialogOpen).toEqual(false);
       // @ts-ignore
       wrapper.instance().handleOpenDialog();
@@ -158,7 +181,9 @@ describe('ShareDialogTrigger', () => {
     it.skip('should send an analytic event', () => {});
 
     it('should be triggered when ShareButton is clicked', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       const instance = wrapper.instance();
       const spiedHandleOpenDialog = jest.spyOn(instance, 'handleOpenDialog');
       instance.forceUpdate();
@@ -183,7 +208,9 @@ describe('ShareDialogTrigger', () => {
     });
 
     it('should set the isDialogOpen state to false', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       wrapper.setState({ isDialogOpen: true });
       expect(wrapper.state().isDialogOpen).toEqual(true);
       wrapper
@@ -200,7 +227,9 @@ describe('ShareDialogTrigger', () => {
       window.addEventListener = jest.fn((event, cb) => (eventMap[event] = cb));
 
       // mount the component, and display the InlineDialog
-      const wrapper = mount<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const wrapper = mount<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       wrapper.setState({ isDialogOpen: true });
       const instance = wrapper.instance();
       const spiedHandleCloseDialog = jest.spyOn(instance, 'handleCloseDialog');
@@ -220,8 +249,13 @@ describe('ShareDialogTrigger', () => {
 
   describe('handleShareUsersChange', () => {
     it('should update the users state with the first parameter', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
-      const mockUsers = [{ id: 'id' }, { email: 'email' }];
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
+      const mockUsers = [
+        { type: 'user' as 'user', id: 'id' },
+        { email: 'email' },
+      ];
       wrapper.instance().handleShareUsersChange(mockUsers);
       expect(wrapper.state().users).toEqual(mockUsers);
     });
@@ -229,28 +263,13 @@ describe('ShareDialogTrigger', () => {
     it('should call onUsersChange prop if it is given', () => {
       const spiedOnUsersChange = jest.fn();
       const wrapper = shallow<ShareDialogTrigger>(
-        <ShareDialogTrigger onUsersChange={spiedOnUsersChange} />,
+        <ShareDialogTrigger
+          copyLink="copyLink"
+          onUsersChange={spiedOnUsersChange}
+        />,
       );
       wrapper.instance().handleShareUsersChange([]);
       expect(spiedOnUsersChange).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('handleShareCommentChange', () => {
-    it('should update the users state with the first parameter', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
-      const mockComment = 'comment';
-      wrapper.instance().handleShareCommentChange(mockComment);
-      expect(wrapper.state().comment).toEqual(mockComment);
-    });
-
-    it('should call onCommentChange prop if it is given', () => {
-      const spiedOnCommentChange = jest.fn();
-      const wrapper = shallow<ShareDialogTrigger>(
-        <ShareDialogTrigger onCommentChange={spiedOnCommentChange} />,
-      );
-      wrapper.instance().handleShareCommentChange('comment');
-      expect(spiedOnCommentChange).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -259,8 +278,11 @@ describe('ShareDialogTrigger', () => {
       const mockOnSubmit = jest.fn().mockResolvedValue({});
       const mockState = {
         isDialogOpen: true,
-        users: [{ id: 'id' }, { email: 'email' }],
-        comment: 'comment',
+        users: [{ type: 'user' as 'user', id: 'id' }, { email: 'email' }],
+        comment: {
+          type: 'mock type',
+          value: 'comment',
+        },
         isStateValidWithCapabilities: true,
       };
       const mockSubmitEvent = {
@@ -268,12 +290,15 @@ describe('ShareDialogTrigger', () => {
         type: 'submit',
       };
       const wrapper = shallow<ShareDialogTrigger>(
-        <ShareDialogTrigger onSubmit={mockOnSubmit} />,
+        <ShareDialogTrigger copyLink="copyLink" onSubmit={mockOnSubmit} />,
       );
       wrapper.setState(mockState);
       wrapper.instance().handleShareSubmit(mockSubmitEvent);
       expect(mockOnSubmit).toHaveBeenCalledTimes(1);
-      expect(mockOnSubmit.mock.calls[0][0]).toEqual(mockState);
+      expect(mockOnSubmit.mock.calls[0][0]).toEqual({
+        users: mockState.users,
+        comment: mockState.comment,
+      });
     });
 
     it('should only call this.handleCloseDialog if onSubmit resolves a value', async () => {
@@ -286,7 +311,7 @@ describe('ShareDialogTrigger', () => {
         type: 'submit',
       };
       const wrapper = shallow<ShareDialogTrigger>(
-        <ShareDialogTrigger onSubmit={mockOnSubmit} />,
+        <ShareDialogTrigger copyLink="copyLink" onSubmit={mockOnSubmit} />,
       );
       const spiedHandleCloseDialog = jest.spyOn(
         wrapper.instance(),
@@ -315,7 +340,7 @@ describe('ShareDialogTrigger', () => {
         type: 'keyPress',
       };
       const wrapper = shallow<ShareDialogTrigger>(
-        <ShareDialogTrigger onSubmit={mockOnSubmit} />,
+        <ShareDialogTrigger copyLink="copyLink" onSubmit={mockOnSubmit} />,
       );
       const spiedClearDialogContentState = jest.spyOn(
         wrapper.instance(),
@@ -332,11 +357,16 @@ describe('ShareDialogTrigger', () => {
 
   describe('clearDialogContentState', () => {
     it('should set the defaultDialogContentState', () => {
-      const wrapper = shallow<ShareDialogTrigger>(<ShareDialogTrigger />);
+      const wrapper = shallow<ShareDialogTrigger>(
+        <ShareDialogTrigger copyLink="copyLink" />,
+      );
       const newInitState = {
         isDialogOpen: true,
-        users: [{ id: 'id' }, { email: 'email' }],
-        comment: 'comment',
+        users: [{ type: 'user' as 'user', id: 'id' }, { email: 'email' }],
+        comment: {
+          type: 'mock type',
+          value: 'comment',
+        },
         isStateValidWithCapabilities: true,
       };
       wrapper.setState(newInitState);

@@ -5,6 +5,7 @@ import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 
 type Props = {
   appearance?: ButtonAppearances;
+  isLoading?: boolean;
   isSelected?: boolean;
   isDisabled?: boolean;
   onClick: (

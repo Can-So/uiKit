@@ -38,4 +38,19 @@ export const messages = defineMessages({
     defaultMessage: 'Share',
     description: 'Default text for the Share Dialog trigger button',
   },
+  copyLinkButtonText: {
+    id: 'fabric.elements.share.copylink.button.text',
+    defaultMessage: 'Copy page link',
+    description: 'Default text for the Copy Link button',
+  },
+  copiedToClipboardMessage: {
+    id: 'fabric.elements.share.copied.to.clipboard.message',
+    defaultMessage: 'Link copied to clipboard',
+    description: 'Default text for the Copy Link button',
+  },
+  capabilitiesInfoMessage: {
+    id: 'fabric.elements.share.form.capabilities.info.message',
+    defaultMessage: 'Your Admin will be asked to approve the user invite',
+    description: 'Default text for capabilities info',
+  },
 });

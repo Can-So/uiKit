@@ -5,5 +5,10 @@ import { ShareForm } from '../src/components/ShareForm';
 const loadOptions = () => userPickerData;
 
 export default () => (
-  <ShareForm onShareClick={console.log} loadOptions={loadOptions} />
+  <ShareForm
+    copyLink={window.location.href}
+    onLinkCopy={console.log}
+    onShareClick={console.log}
+    loadOptions={loadOptions}
+  />
 );

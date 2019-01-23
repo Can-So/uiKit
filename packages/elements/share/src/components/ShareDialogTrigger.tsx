@@ -6,26 +6,42 @@ import { ShareButton } from './ShareButton';
 import { ShareForm } from './ShareForm';
 import { messages } from '../i18n';
 
-type RenderChildren = (openModal: Function) => React.ReactNode;
+type RenderChildren = (
+  openModal: Function,
+  { loading, error }: { loading: boolean; error: ShareError },
+) => React.ReactNode;
 
 type DialogState = {
   isDialogOpen: boolean;
+  isSharing: boolean;
+  isStateValidWithCapabilities: boolean;
+  shareError: ShareError;
 };
 
 export type DialogContentState = {
   users: User[];
-  comment?: string;
+  comment?: Comment;
 };
 
 export type User = UserWithId | UserWithEmail;
 
 type UserWithId = {
+  type: 'user' | 'group' | 'team';
   id: string;
 };
 
 type UserWithEmail = {
   email: string;
 };
+
+type Comment = {
+  type: string;
+  value: string;
+};
+
+type ShareError = {
+  message: string;
+} | null;
 
 type InvitationsCapabilities = {
   directInvite: DirectInviteCapabilities;
@@ -45,14 +61,16 @@ type RequestAccessCapabilities = {
 
 type Props = {
   buttonStyle?: 'default' | 'withText';
-  children?: RenderChildren;
   capabilities?: InvitationsCapabilities;
+  copyLink: string;
+  children?: RenderChildren;
   isDisabled?: boolean;
   loadOptions?: any;
-  onUsersChange?: (users: User[]) => any;
-  onCommentChange?: (comment: string) => any;
-  // TODO: work out the Promise return
+  onLinkCopy?: Function;
+  onCommentChange?: (comment: Comment) => any;
   onSubmit?: (dialogContentState: DialogContentState) => Promise<any>;
+  onUsersChange?: (users: User[]) => any;
+  shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
   validateStateWithCapabilities?: (
     state: DialogContentState,
@@ -62,7 +80,10 @@ type Props = {
 
 export const defaultDialogContentState: DialogContentState = {
   users: [],
-  comment: '',
+  comment: {
+    type: '',
+    value: '',
+  },
 };
 
 export class ShareDialogTrigger extends React.Component<
@@ -73,26 +94,17 @@ export class ShareDialogTrigger extends React.Component<
     buttonAppearance: 'default',
     capabilities: {},
     isDisabled: false,
+    isSharing: false,
     shouldCloseOnEscapePress: false,
   };
 
   state = {
     isDialogOpen: false,
-    ...defaultDialogContentState,
+    isSharing: false,
     isStateValidWithCapabilities: true,
+    shareError: null,
+    ...defaultDialogContentState,
   };
-
-  componentDidMount() {
-    if (this.props.shouldCloseOnEscapePress) {
-      // add event listener
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.props.shouldCloseOnEscapePress) {
-      // remove event listener
-    }
-  }
 
   static getDerivedStateFromProps(props, state) {
     const { capabilities, validateStateWithCapabilities } = props;
@@ -150,7 +162,13 @@ export class ShareDialogTrigger extends React.Component<
     }
   };
 
-  handleShareCommentChange = (comment: string) => {
+  handleShareCommentChange = (event: React.SyntheticEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    const comment: Comment = {
+      type: 'plain',
+      value: target!.value,
+    };
+
     this.setState({ comment });
 
     if (this.props.onCommentChange) {
@@ -159,25 +177,41 @@ export class ShareDialogTrigger extends React.Component<
   };
 
   handleShareSubmit = event => {
+    if (!this.props.onSubmit) {
+      return;
+    }
+
     const dialogContentState = {
       users: this.state.users,
       comment: this.state.comment,
     };
 
+    this.setState({ isSharing: true });
+
     this.props.onSubmit!(dialogContentState)
       .then(res => {
         this.handleCloseDialog({ isOpen: false, event });
-
-        // TODO: show successful flag
+        this.setState({ isSharing: false });
       })
       .catch(err => {
-        // TODO: show failure flag
+        this.handleShareFailure(err);
+        this.setState({ isSharing: false });
       });
   };
 
+  handleShareFailure = err => {
+    // TBC: FS-3429 replace send button with retry button
+    // will need a prop to pass through the error message to the ShareForm
+  };
+
   render() {
-    const { isDialogOpen, isStateValidWithCapabilities } = this.state;
-    const { isDisabled, loadOptions } = this.props;
+    const {
+      isDialogOpen,
+      isSharing,
+      isStateValidWithCapabilities,
+      shareError,
+    } = this.state;
+    const { copyLink, isDisabled, loadOptions } = this.props;
 
     // for performance purposes, we may want to have a lodable content i.e. ShareForm
     return (
@@ -185,18 +219,24 @@ export class ShareDialogTrigger extends React.Component<
         <InlineDialog
           content={
             <ShareForm
+              copyLink={copyLink}
               loadOptions={loadOptions}
+              isSharing={isSharing}
               onCommentChange={this.handleShareCommentChange}
               onUsersChange={this.handleShareUsersChange}
               onShareClick={this.handleShareSubmit}
-              shouldCapabilitiesWarningShow={isStateValidWithCapabilities}
+              shareError={shareError}
+              shouldShowCapabilitiesInfoMessage={!isStateValidWithCapabilities}
             />
           }
           isOpen={isDialogOpen}
           onClose={this.handleCloseDialog}
         >
           {this.props.children ? (
-            this.props.children(this.handleOpenDialog)
+            this.props.children(this.handleOpenDialog, {
+              loading: isSharing,
+              error: shareError,
+            })
           ) : (
             <ShareButton
               text={
