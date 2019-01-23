@@ -48,6 +48,8 @@ import {
   alignment,
   editorDisabledPlugin,
   indentationPlugin,
+  annotationPlugin,
+  compositionPlugin,
 } from '../plugins';
 
 /**
@@ -218,6 +220,10 @@ export default function createPluginsList(
     }),
   );
 
+  if (props.allowConfluenceInlineComment) {
+    plugins.push(annotationPlugin);
+  }
+
   plugins.push(gapCursorPlugin);
   plugins.push(gridPlugin);
   plugins.push(submitEditorPlugin);
@@ -226,6 +232,10 @@ export default function createPluginsList(
 
   if (props.appearance !== 'mobile') {
     plugins.push(quickInsertPlugin);
+  }
+
+  if (props.appearance === 'mobile') {
+    plugins.push(compositionPlugin);
   }
 
   if (props.appearance === 'message') {

@@ -29,10 +29,10 @@ const renderRows = (count: number) => {
         <Cell width={300}>KEY-{i}</Cell>
         <Cell width={100}>
           <ExampleWrapper>
-            {({ users, onInputChange }) => (
+            {({ options, onInputChange }) => (
               <UserPicker
                 menuPortalTarget={document.body}
-                options={users}
+                options={options}
                 onInputChange={onInputChange}
                 onChange={console.log}
               />

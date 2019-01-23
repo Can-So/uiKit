@@ -5,14 +5,21 @@ import { emoji } from './emoji';
 import { hardBreak } from './hard-break';
 import { mention } from './mention';
 import { text } from './text';
+import { inlineCard } from './inline-card';
+import { unknown } from './unknown';
 
 const inlinesEncoderMapping = {
   emoji,
   hardBreak,
   mention,
   text,
+  inlineCard,
 };
 
 export const inlines: NodeEncoder = (node: PMNode, parent?: PMNode): string => {
-  return inlinesEncoderMapping[node.type.name](node, parent);
+  const encoder = inlinesEncoderMapping[node.type.name];
+  if (encoder) {
+    return encoder(node, parent);
+  }
+  return unknown(node);
 };

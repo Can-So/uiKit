@@ -159,7 +159,7 @@ export const initPluginListeners = (
       ...bridge[`${config.bridge}State`],
       ...state,
     };
-    if (config.sendInitialState) {
+    if (config.sendInitialState && state) {
       updater(state, true);
     }
     eventDispatcher.on((pluginKey as any).key, state => updater(state));

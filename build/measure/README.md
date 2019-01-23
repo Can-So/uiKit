@@ -22,6 +22,16 @@ This prints output just to the terminal which will look like:
 
 As you can see, we have split our code into different chunks to better understand where weight is. Most importantly, you can see if atlaskit, the code's own source, or external dependencies are the things weighing the package down.
 
+## Updating snapshots
+
+If changes that have been introduced increase a bundle size beyond the allowed threshold, you might need to update measure snapshots. To do this, you can add the `--updateSnapshots` flag.
+
+Please make sure that this decision is carefully considered and discussed. The point of measuring bundle size change like this is to prevent things growing unexpectedly. Always ask if there is a better way to do what you are trying to do.
+
+```sh
+yarn measure [path] --updateSnapshots
+```
+
 ## In-depth analysis
 
 Sometime you will need to look into what is in each chunk. To do this, you can add the `--analyze` flag.

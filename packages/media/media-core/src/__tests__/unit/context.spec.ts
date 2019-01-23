@@ -211,7 +211,7 @@ describe('Context', () => {
       });
       const next = jest.fn();
       const file = {
-        content: 'some-base-64',
+        content: 'data:image/gif;base64,R0lGODlhAQABAAAAACw=',
       };
       (context as any).mediaStore = { getFile };
       uploadFileMock.mockImplementation((_, __, ___, callbacks) => {
@@ -228,13 +228,15 @@ describe('Context', () => {
             const expectedState: ProcessingFileState = {
               id,
               status: 'processing',
-              mediaType: 'unknown',
-              mimeType: '',
+              mediaType: 'image',
+              mimeType: 'image/jpeg',
               name: '',
-              size: 0,
+              size: 14,
               occurrenceKey,
             };
-            expect(next.mock.calls[0][0]).toEqual(expectedState);
+            expect(next.mock.calls[0][0]).toEqual(
+              expect.objectContaining(expectedState),
+            );
             done();
           },
         });

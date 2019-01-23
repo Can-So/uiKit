@@ -4,6 +4,11 @@ import { EditorView, NodeView } from 'prosemirror-view';
 import DecisionItem from '../ui/Decision';
 import { ReactNodeView } from '../../../nodeviews';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
+import WithPluginState from '../../../ui/WithPluginState';
+import {
+  stateKey as taskPluginKey,
+  TaskDecisionPluginState,
+} from '../pm-plugins/main';
 
 export interface Props {
   children?: React.ReactNode;
@@ -28,9 +33,31 @@ class Decision extends ReactNodeView {
 
   render(props, forwardRef) {
     return (
-      <DecisionItem
-        contentRef={forwardRef}
-        showPlaceholder={this.isContentEmpty()}
+      <WithPluginState
+        plugins={{
+          taskDecisionPlugin: taskPluginKey,
+        }}
+        render={({
+          taskDecisionPlugin,
+        }: {
+          taskDecisionPlugin: TaskDecisionPluginState;
+        }) => {
+          let insideCurrentNode = false;
+          if (
+            taskDecisionPlugin &&
+            taskDecisionPlugin.currentTaskDecisionItem
+          ) {
+            insideCurrentNode = this.node.eq(
+              taskDecisionPlugin.currentTaskDecisionItem,
+            );
+          }
+          return (
+            <DecisionItem
+              contentRef={forwardRef}
+              showPlaceholder={!insideCurrentNode && this.isContentEmpty()}
+            />
+          );
+        }}
       />
     );
   }

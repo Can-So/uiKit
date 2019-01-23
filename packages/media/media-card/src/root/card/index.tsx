@@ -33,6 +33,10 @@ import { InlinePlayer } from '../inlinePlayer';
 
 export class Card extends Component<CardProps, CardState> {
   private hasBeenMounted: boolean = false;
+  private onClickPayload?: {
+    result: CardEvent;
+    analyticsEvent?: UIAnalyticsEventInterface;
+  };
 
   subscription?: Subscription;
   static defaultProps: Partial<CardProps> = {
@@ -88,9 +92,9 @@ export class Card extends Component<CardProps, CardState> {
   };
 
   componentWillUnmount() {
+    this.hasBeenMounted = false;
     this.unsubscribe();
     this.releaseDataURI();
-    this.hasBeenMounted = false;
   }
 
   releaseDataURI = () => {
@@ -143,11 +147,11 @@ export class Card extends Component<CardProps, CardState> {
       return;
     }
 
-    const { id, collectionName } = identifier;
+    const { id, collectionName, occurrenceKey } = identifier;
     const resolvedId = await id;
     this.unsubscribe();
     this.subscription = context.file
-      .getFileState(resolvedId, { collectionName })
+      .getFileState(resolvedId, { collectionName, occurrenceKey })
       .subscribe({
         next: async state => {
           const {
@@ -238,7 +242,12 @@ export class Card extends Component<CardProps, CardState> {
   }
 
   notifyStateChange = (state: Partial<CardState>) => {
-    this.setState(state as any, this.onLoadingChangeCallback);
+    if (this.hasBeenMounted) {
+      this.setState(
+        state as Pick<CardState, keyof CardState>,
+        this.onLoadingChangeCallback,
+      );
+    }
   };
 
   unsubscribe = () => {
@@ -246,7 +255,9 @@ export class Card extends Component<CardProps, CardState> {
       this.subscription.unsubscribe();
     }
 
-    this.setState({ dataURI: undefined });
+    if (this.hasBeenMounted) {
+      this.setState({ dataURI: undefined });
+    }
   };
 
   // This method is called when card fails and user press 'Retry'
@@ -289,6 +300,12 @@ export class Card extends Component<CardProps, CardState> {
   onClick = (result: CardEvent, analyticsEvent?: UIAnalyticsEventInterface) => {
     const { onClick, useInlinePlayer } = this.props;
     const { mediaItemDetails } = result;
+
+    this.onClickPayload = {
+      result,
+      analyticsEvent,
+    };
+
     if (onClick) {
       onClick(result, analyticsEvent);
     }
@@ -309,6 +326,13 @@ export class Card extends Component<CardProps, CardState> {
     });
   };
 
+  onInlinePlayerClick = () => {
+    const { onClick } = this.props;
+    if (onClick && this.onClickPayload) {
+      onClick(this.onClickPayload.result, this.onClickPayload.analyticsEvent);
+    }
+  };
+
   renderInlinePlayer = () => {
     const { identifier, context, dimensions } = this.props;
     return (
@@ -317,6 +341,7 @@ export class Card extends Component<CardProps, CardState> {
         dimensions={dimensions}
         identifier={identifier as FileIdentifier}
         onError={this.onInlinePlayerError}
+        onClick={this.onInlinePlayerClick}
       />
     );
   };

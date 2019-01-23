@@ -20,7 +20,7 @@ import {
 } from '@atlaskit/editor-common';
 
 import { analyticsService } from '../../analytics';
-import { EditorPlugin, Command } from '../../types';
+import { EditorPlugin, Command, EditorAppearance } from '../../types';
 import { Dispatch } from '../../event-dispatcher';
 import { PortalProviderAPI } from '../../ui/PortalProvider';
 import WithPluginState from '../../ui/WithPluginState';
@@ -61,12 +61,13 @@ const mentionsPlugin = (
       return [
         {
           name: 'mention',
-          plugin: ({ providerFactory, dispatch, portalProviderAPI }) =>
+          plugin: ({ providerFactory, dispatch, portalProviderAPI, props }) =>
             mentionPluginFactory(
               dispatch,
               providerFactory,
               portalProviderAPI,
               fireEvent,
+              props.appearance,
             ),
         },
       ];
@@ -292,6 +293,7 @@ function mentionPluginFactory(
   providerFactory: ProviderFactory,
   portalProviderAPI: PortalProviderAPI,
   fireEvent: (payload: any) => void,
+  editorAppearance?: EditorAppearance,
 ) {
   let mentionProvider: MentionProvider;
 
@@ -343,7 +345,7 @@ function mentionPluginFactory(
         mention: ReactNodeView.fromComponent(
           mentionNodeView,
           portalProviderAPI,
-          { providerFactory },
+          { providerFactory, editorAppearance },
         ),
       },
     },

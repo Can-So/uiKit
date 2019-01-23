@@ -1,6 +1,5 @@
 import {
   Fragment,
-  Slice,
   Node as PMNode,
   NodeType,
   MarkType,
@@ -12,13 +11,7 @@ import {
   TextSelection,
   Transaction,
 } from 'prosemirror-state';
-import {
-  canMoveDown,
-  canMoveUp,
-  atTheEndOfDoc,
-  atTheBeginningOfBlock,
-  isTableCell,
-} from '../utils';
+import { canMoveDown, canMoveUp } from '../utils';
 import { Command } from '../types';
 import { EditorView } from 'prosemirror-view';
 
@@ -68,33 +61,6 @@ export function insertRule(): Command {
       return true;
     }
     return false;
-  };
-}
-
-export function shouldAppendParagraphAfterBlockNode(state: EditorState) {
-  return atTheEndOfDoc(state) && atTheBeginningOfBlock(state);
-}
-
-export function insertNodesEndWithNewParagraph(nodes: PMNode[]): Command {
-  return function(state, dispatch) {
-    const { tr, schema } = state;
-    const { paragraph } = schema.nodes;
-    const { head } = state.selection;
-
-    if (shouldAppendParagraphAfterBlockNode(state)) {
-      nodes.push(paragraph.create());
-    }
-
-    /** If table cell, the default is to move to the next cell, override to select paragraph */
-    tr.replaceSelection(new Slice(Fragment.from(nodes), 0, 0));
-    if (isTableCell(state)) {
-      tr.setSelection(TextSelection.create(state.doc, head, head));
-    }
-
-    if (dispatch) {
-      dispatch(tr);
-    }
-    return true;
   };
 }
 

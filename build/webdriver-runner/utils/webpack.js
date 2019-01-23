@@ -9,17 +9,12 @@
 // Start of the hack for the issue with the webpack watcher that leads to it dying in attempt of watching files
 // in node_modules folder which contains circular symbolic links
 const DirectoryWatcher = require('watchpack/lib/DirectoryWatcher');
-const _oldSetDirectory = DirectoryWatcher.prototype.setDirectory;
-DirectoryWatcher.prototype.setDirectory = function(
-  directoryPath /*: string */,
-  exist,
-  initial,
-  type,
+const _oldcreateNestedWatcher = DirectoryWatcher.prototype.createNestedWatcher;
+DirectoryWatcher.prototype.createNestedWatcher = function(
+  dirPath /*: string */,
 ) {
-  if (directoryPath.includes('node_modules')) return;
-  if (directoryPath.includes('__snapshots__')) return;
-  if (directoryPath.includes('__image_snapshots__')) return;
-  _oldSetDirectory.call(this, directoryPath, exist, initial, type);
+  if (dirPath.includes('node_modules')) return;
+  _oldcreateNestedWatcher.call(this, dirPath);
 };
 
 const flattenDeep = require('lodash.flattendeep');
@@ -40,7 +35,7 @@ const {
 } = require('@atlaskit/webpack-config/banner');
 const utils = require('@atlaskit/webpack-config/config/utils');
 
-const HOST = 'localhost';
+const HOST = '0.0.0.0';
 const PORT = 9000;
 const WEBPACK_BUILD_TIMEOUT = 10000;
 const CHANGED_PACKAGES = process.env.CHANGED_PACKAGES;
@@ -155,6 +150,8 @@ async function startDevServer() {
     quiet: true,
     noInfo: false,
     overlay: false,
+    disableHostCheck: true,
+
     // disable hot reload for tests - they don't need it for running
     hot: false,
     inline: false,

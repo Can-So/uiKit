@@ -1,5 +1,10 @@
 # @atlaskit/analytics-next
 
+## 3.2.1
+- [patch] [8de4c3f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8de4c3f):
+
+  - Added missing export
+
 ## 3.2.0
 - [minor] [c3fa0b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/c3fa0b6):
 

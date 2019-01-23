@@ -1,5 +1,11 @@
 # @atlaskit/panel
 
+## 0.0.12
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/icon@16.0.0
+
 ## 0.0.11
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/button@10.1.1

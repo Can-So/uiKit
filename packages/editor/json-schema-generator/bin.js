@@ -13,7 +13,7 @@ require('ts-node').register({
       'ES2015.Promise',
     ],
 
-    types: ['Node'],
+    types: ['node'],
     target: 'ES2017',
     module: 'CommonJS',
     sourceMap: false,

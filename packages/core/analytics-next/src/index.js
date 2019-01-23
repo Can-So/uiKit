@@ -21,7 +21,10 @@ export type {
   WithAnalyticsEventsProps,
   AnalyticsEventsWrappedComp,
 } from './withAnalyticsEvents';
-export { default as withAnalyticsEvents } from './withAnalyticsEvents';
+export {
+  default as withAnalyticsEvents,
+  withAnalyticsForSumTypeProps,
+} from './withAnalyticsEvents';
 // Helper functions
 export { default as createAndFireEvent } from './createAndFireEvent';
 export { default as cleanProps } from './cleanProps';

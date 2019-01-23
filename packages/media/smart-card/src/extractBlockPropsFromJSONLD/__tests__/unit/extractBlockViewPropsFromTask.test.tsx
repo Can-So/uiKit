@@ -3,26 +3,26 @@ import { mount } from 'enzyme';
 
 import { atlassianTask } from './_fixtures';
 import {
-  buildTitle,
-  buildDescription,
-  buildLink,
-  buildByline,
-  buildUser,
-  buildUsers,
-  buildCommentCount,
-  buildDetailsLozenge,
-  buildContext,
+  buildTaskTitle,
+  buildTaskDescription,
+  buildTaskLink,
+  buildTaskByline,
+  buildTaskUser,
+  buildTaskUsers,
+  buildTaskCommentCount,
+  buildTaskDetailsLozenge,
+  buildTaskContext,
 } from '../../extractPropsFromTask';
 import { FormattedRelative, IntlProvider } from 'react-intl';
 
 describe('extractPropsFromTask()', () => {
   describe('build a title', () => {
     it('should not fail for empty input', () => {
-      expect(buildTitle({})).toEqual({});
+      expect(buildTaskTitle({})).toEqual({});
     });
 
     it('should build a title', () => {
-      expect(buildTitle(atlassianTask)).toEqual({
+      expect(buildTaskTitle(atlassianTask)).toEqual({
         title: { text: atlassianTask.name },
       });
     });
@@ -30,11 +30,11 @@ describe('extractPropsFromTask()', () => {
 
   describe('build a description', () => {
     it('should not fail for empty input', () => {
-      expect(buildDescription({})).toEqual({});
+      expect(buildTaskDescription({})).toEqual({});
     });
 
     it('should build a title', () => {
-      expect(buildDescription(atlassianTask)).toEqual({
+      expect(buildTaskDescription(atlassianTask)).toEqual({
         description: { text: atlassianTask.summary },
       });
     });
@@ -42,17 +42,19 @@ describe('extractPropsFromTask()', () => {
 
   describe('build a link', () => {
     it('should not fail for empty input', () => {
-      expect(buildLink({})).toEqual({});
+      expect(buildTaskLink({})).toEqual({});
     });
 
     it('should build a title', () => {
-      expect(buildLink(atlassianTask)).toEqual({ link: atlassianTask['@url'] });
+      expect(buildTaskLink(atlassianTask)).toEqual({
+        link: atlassianTask['@url'],
+      });
     });
   });
 
   describe('build a byline', () => {
     it('should not fail for empty input', () => {
-      expect(buildByline({})).toEqual({});
+      expect(buildTaskByline({})).toEqual({});
     });
 
     it("should include 'updated by user' in byline", () => {
@@ -63,7 +65,7 @@ describe('extractPropsFromTask()', () => {
         },
         dateCreated: '2018-06-27T11:14:57.392Z',
       };
-      const props = buildByline(mock);
+      const props = buildTaskByline(mock);
       expect(props).toHaveProperty('byline');
 
       const byline = props.byline as React.ReactElement<any>;
@@ -79,7 +81,7 @@ describe('extractPropsFromTask()', () => {
         updated: '2018-07-27T11:14:57.392Z',
         dateCreated: '2018-06-27T11:14:57.392Z',
       };
-      const props = buildByline(mock);
+      const props = buildTaskByline(mock);
       expect(props).toHaveProperty('byline');
 
       const byline = props.byline as React.ReactElement<any>;
@@ -97,7 +99,7 @@ describe('extractPropsFromTask()', () => {
           name: 'Test User',
         },
       };
-      const props = buildByline(mock);
+      const props = buildTaskByline(mock);
       expect(props).toHaveProperty('byline');
 
       const byline = props.byline as React.ReactElement<any>;
@@ -111,7 +113,7 @@ describe('extractPropsFromTask()', () => {
 
   describe('build a user', () => {
     it('should not fail for empty input', () => {
-      expect(buildUser({})).toEqual({});
+      expect(buildTaskUser({})).toEqual({});
     });
 
     it('should build a full user', () => {
@@ -121,7 +123,7 @@ describe('extractPropsFromTask()', () => {
           image: 'user.jpg',
         },
       };
-      expect(buildUser(mock)).toEqual({
+      expect(buildTaskUser(mock)).toEqual({
         user: {
           icon: mock.assignedBy.image,
           name: mock.assignedBy.name,
@@ -135,7 +137,7 @@ describe('extractPropsFromTask()', () => {
           name: 'Test User',
         },
       };
-      expect(buildUser(mock)).toEqual({
+      expect(buildTaskUser(mock)).toEqual({
         user: {
           name: mock.assignedBy.name,
         },
@@ -145,21 +147,21 @@ describe('extractPropsFromTask()', () => {
 
   describe('build a users', () => {
     it('should not fail for empty input', () => {
-      expect(buildUsers({})).toEqual({});
+      expect(buildTaskUsers({})).toEqual({});
     });
 
     it('should handle array only', () => {
       const mock = {
         assignedTo: {},
       };
-      expect(buildUsers(mock)).toEqual({});
+      expect(buildTaskUsers(mock)).toEqual({});
     });
 
     it('should handle non-array only', () => {
       const mock = {
         assignedTo: [],
       };
-      expect(buildUsers(mock)).toEqual({});
+      expect(buildTaskUsers(mock)).toEqual({});
     });
 
     it('should handle non-array only', () => {
@@ -171,7 +173,7 @@ describe('extractPropsFromTask()', () => {
           },
         ],
       };
-      expect(buildUsers(mock)).toEqual({
+      expect(buildTaskUsers(mock)).toEqual({
         users: [
           {
             icon: mock.assignedTo[0].image,
@@ -184,29 +186,29 @@ describe('extractPropsFromTask()', () => {
 
   describe('build a comment count', () => {
     it('should not fail for empty input', () => {
-      expect(buildCommentCount({})).toEqual({});
+      expect(buildTaskCommentCount({})).toEqual({});
     });
 
     it('should build comment count out of a string', () => {
       const mock = {
         commentCount: '123',
       };
-      expect(buildCommentCount(mock).text).toEqual('123');
-      expect(buildCommentCount(mock).icon).toBeDefined();
+      expect(buildTaskCommentCount(mock).text).toEqual('123');
+      expect(buildTaskCommentCount(mock).icon).toBeDefined();
     });
 
     it('should build comment count out of a number', () => {
       const mock = {
         commentCount: 123,
       };
-      expect(buildCommentCount(mock).text).toEqual('123');
-      expect(buildCommentCount(mock).icon).toBeDefined();
+      expect(buildTaskCommentCount(mock).text).toEqual('123');
+      expect(buildTaskCommentCount(mock).icon).toBeDefined();
     });
   });
 
   describe('build details lozenge', () => {
     it('should not fail for empty input', () => {
-      expect(buildCommentCount({})).toEqual({});
+      expect(buildTaskCommentCount({})).toEqual({});
     });
 
     it('should build a lozenge', () => {
@@ -215,7 +217,7 @@ describe('extractPropsFromTask()', () => {
           name: 'abc',
         },
       };
-      expect(buildDetailsLozenge(mock)).toEqual({
+      expect(buildTaskDetailsLozenge(mock)).toEqual({
         lozenge: {
           text: mock.taskStatus.name,
           appearance: 'success',
@@ -226,7 +228,7 @@ describe('extractPropsFromTask()', () => {
 
   describe('build context', () => {
     it('should handle empty input', () => {
-      expect(buildContext({})).toEqual({});
+      expect(buildTaskContext({})).toEqual({});
     });
 
     it('should handle empty input', () => {
@@ -239,7 +241,7 @@ describe('extractPropsFromTask()', () => {
           name: 'test cotnext',
         },
       };
-      expect(buildContext(mock)).toEqual({
+      expect(buildTaskContext(mock)).toEqual({
         context: {
           text: `${mock.generator.name} / ${mock.context.name}`,
           icon: mock.generator.icon,

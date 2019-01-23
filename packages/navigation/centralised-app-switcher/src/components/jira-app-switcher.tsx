@@ -1,9 +1,7 @@
 import React from 'react';
 import { AppSwitcherWrapper, Item, Section, ManageButton } from '../primitives';
-import {
-  RecentContainersProvider,
-  CustomLinksProvider,
-} from '../providers/jira-data-providers';
+import { CustomLinksProvider } from '../providers/jira-data-providers';
+import { RecentContainersProvider } from '../providers/instance-data-providers';
 
 export default ({ cloudId }) => {
   return (
@@ -16,24 +14,26 @@ export default ({ cloudId }) => {
           {({ isLoading: isLoadingCustomLinks, data: customLinksData }) => (
             <AppSwitcherWrapper>
               {isLoadingRecentContainers ? (
-                'Loading First Section...'
+                'Loading Recent Containers...'
               ) : (
-                <Section title="First Section">
-                  <Item>First Item</Item>
-                  <Item>Second Item</Item>
-                  <Item>{JSON.stringify(recentContainersData)}</Item>
+                <Section title="Recent Containers">
+                  {recentContainersData.data.map(({ objectId, name }) => (
+                    <Item key={objectId}>{name}</Item>
+                  ))}
                 </Section>
               )}
               {isLoadingCustomLinks ? (
-                'Loading Seconds Section...'
+                'Loading Custom Links...'
               ) : (
-                <Section title="Second Section">
-                  <Item>First Item</Item>
-                  <Item>Second Item</Item>
-                  <Item>{JSON.stringify(customLinksData)}</Item>
+                <Section title="Custom Links">
+                  {customLinksData[0].map(({ key, label }) => (
+                    <Item key={key}>{label}</Item>
+                  ))}
                 </Section>
               )}
-              <ManageButton />
+              <ManageButton
+                onClick={() => (window.location.href = customLinksData[1])}
+              />
             </AppSwitcherWrapper>
           )}
         </CustomLinksProvider>

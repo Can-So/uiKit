@@ -11,7 +11,7 @@ const {
  * This is a helper script to return whether or not a certain tool should be run.
  * It works by returning a zero code if a tool should be run, so that the normal usage becomes:
  *
- * `node build/ci-scripts/run.tool.if.needed.js toolName -- yarn toolName`.
+ * `node build/ci-scripts/run.tool.if.changed.js toolName -- yarn toolName`.
  */
 (async () => {
   let cwd = process.cwd();

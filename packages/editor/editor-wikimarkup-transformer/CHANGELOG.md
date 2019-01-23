@@ -1,5 +1,28 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.10.0
+- [minor] [f56a86f8ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f56a86f8ff):
+
+  - Adds in smart card conversion
+
+## 2.9.11
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/editor-common@30.0.0
+  - @atlaskit/editor-core@97.0.0
+  - @atlaskit/renderer@37.0.0
+  - @atlaskit/editor-json-transformer@4.1.7
+  - @atlaskit/editor-test-helpers@6.3.12
+  - @atlaskit/util-data-test@10.0.34
+
+## 2.9.10
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+  - @atlaskit/editor-common@29.0.0
+  - @atlaskit/editor-core@96.0.0
+  - @atlaskit/renderer@36.0.0
+  - @atlaskit/editor-json-transformer@4.1.6
+  - @atlaskit/editor-test-helpers@6.3.11
+  - @atlaskit/util-data-test@10.0.33
+
 ## 2.9.9
 - Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
   - @atlaskit/editor-json-transformer@4.1.5

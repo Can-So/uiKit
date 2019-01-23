@@ -7,13 +7,12 @@ import fetchMock from 'fetch-mock';
 const RECENT_CONTAINERS_DATA = {
   data: [
     {
-      objectId:
-        'ari:cloud:jira:a436116f-02ce-4520-8fbb-7301462a1674:project/30255',
+      objectId: 'some-id',
       type: 'jira-project',
-      name: 'Centralised App Switcher',
+      name: 'Jira App Switcher',
       url: 'https://hello.atlassian.net/projects/CEN',
       iconUrl:
-        'https://hello.atlassian.net/secure/projectavatar?size=medium&avatarId=24523',
+        'https://hello.atlassian.net/secure/projectavatar?size=medium&avatarId=some-id',
     },
   ],
 };
