@@ -1,0 +1,1 @@
+- added support for rendering of icons in Jira links
