@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { MentionProvider } from '../../api/MentionResource';
-import Mention from './';
 import { MentionEventHandler } from '../../types';
+import Mention from './';
 
 export interface Props {
   id: string;
@@ -21,7 +21,7 @@ export default class ResourcedMention extends React.PureComponent<
   Props,
   State
 > {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

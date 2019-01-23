@@ -1,23 +1,26 @@
 import * as React from 'react';
-import {
-  MentionListErrorStyle,
-  MentionListErrorHeadlineStyle,
-  MentionListAdviceStyle,
-} from './styles';
 import { HttpError } from '../../api/MentionResource';
-import { GenericErrorIllustration } from './GenericErrorIllustration';
 import {
   DefaultAdvisedAction,
   DefaultHeadline,
   DifferentText,
+  Formatter,
   LoginAgain,
 } from '../../util/i18n';
+import { GenericErrorIllustration } from './GenericErrorIllustration';
+import {
+  MentionListAdviceStyle,
+  MentionListErrorHeadlineStyle,
+  MentionListErrorStyle,
+} from './styles';
 
 export interface Props {
   error?: Error;
 }
 
-const advisedActionMessages = {
+const advisedActionMessages: {
+  [key: string]: Formatter<{}>;
+} = {
   '401': LoginAgain,
   '403': DifferentText,
   default: DefaultAdvisedAction,
