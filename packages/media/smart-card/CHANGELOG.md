@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.6.1
+- [patch] [bef9abc8de](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bef9abc8de):
+
+  - added background colour to inline card views, fixed icon alignment.
+
 ## 9.6.0
 - [minor] [27b12fdfc6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27b12fdfc6):
 

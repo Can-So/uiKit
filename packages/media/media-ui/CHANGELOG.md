@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 8.3.1
+- [patch] [bef9abc8de](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bef9abc8de):
+
+  - added background colour to inline card views, fixed icon alignment.
+
 ## 8.3.0
 - [minor] [89668941e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/89668941e6):
 

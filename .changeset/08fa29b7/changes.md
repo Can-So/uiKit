@@ -1,1 +1,0 @@
-- added background colour to inline card views, fixed icon alignment.
