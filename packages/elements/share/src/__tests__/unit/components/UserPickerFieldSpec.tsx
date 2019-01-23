@@ -1,6 +1,6 @@
 import { shallowWithIntl } from '@atlaskit/editor-test-helpers';
 import { ErrorMessage } from '@atlaskit/form';
-import UserPicker from '@atlaskit/user-picker';
+import UserPicker, { OptionData } from '@atlaskit/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { REQUIRED, UserPickerField } from '../../../components/UserPickerField';
@@ -10,7 +10,7 @@ import { renderProp } from '../_testUtils';
 describe('UserPickerField', () => {
   const loadOptions = jest.fn();
 
-  const renderField = (...args) =>
+  const renderField = (...args: any[]) =>
     renderProp(
       shallowWithIntl(<UserPickerField loadOptions={loadOptions} />),
       'children',
@@ -48,7 +48,7 @@ describe('UserPickerField', () => {
   });
 
   describe('validate function', () => {
-    let validate;
+    let validate: (value: OptionData[]) => string;
     beforeEach(() => {
       const component = shallowWithIntl(
         <UserPickerField loadOptions={loadOptions} />,
