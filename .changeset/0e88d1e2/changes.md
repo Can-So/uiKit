@@ -1,1 +1,0 @@
-- added fabric status to ADF full schema

@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.4.3
+- [patch] [d10cf50721](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d10cf50721):
+
+  - added fabric status to ADF full schema
+
 ## 1.4.2
 - [patch] [478a86ae8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/478a86ae8a):
 
