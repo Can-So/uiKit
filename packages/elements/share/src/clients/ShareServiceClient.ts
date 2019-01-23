@@ -14,7 +14,7 @@ export interface ShareClient {
 }
 
 type ShareResponse = {
-  shareId: string;
+  shareRequestId: string;
 };
 
 type Recipient = RecipientWithId | RecipientWithEmail;
