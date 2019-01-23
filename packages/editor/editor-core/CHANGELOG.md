@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.1.2
+- [patch] [5132bc24a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5132bc24a5):
+
+  - Fix codeblock enter-press inside lists
+
 ## 97.1.1
 - [patch] [478a86ae8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/478a86ae8a):
 
