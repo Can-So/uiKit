@@ -26,7 +26,6 @@ import {
   padToTwo,
 } from '../internal';
 import FixedLayer from '../internal/FixedLayer';
-import type { Event } from '../types';
 
 /* eslint-disable react/no-unused-prop-types */
 type Props = {
@@ -90,14 +89,18 @@ type State = {
   inputValue: string,
 };
 
-function isoToObj(iso: string) {
-  const parsed = parse(iso);
-  if (!isValid(parsed)) return {};
+function getDateObj(date: Date) {
   return {
-    day: parsed.getDate(),
-    month: parsed.getMonth() + 1,
-    year: parsed.getFullYear(),
+    day: date.getDate(),
+    month: date.getMonth() + 1,
+    year: date.getFullYear(),
   };
+}
+
+function getValidDate(iso: string) {
+  const date = parse(iso);
+
+  return isValid(date) ? getDateObj(date) : {};
 }
 
 const arrowKeys = {
@@ -117,8 +120,8 @@ const StyledMenu = styled.div`
 const Menu = ({ innerProps: menuInnerProps, selectProps }: Object) => (
   <StyledMenu>
     <Calendar
-      {...isoToObj(selectProps.calendarValue)}
-      {...isoToObj(selectProps.calendarView)}
+      {...getValidDate(selectProps.calendarValue)}
+      {...getValidDate(selectProps.calendarView)}
       disabled={selectProps.calendarDisabled}
       onChange={selectProps.onCalendarChange}
       onSelect={selectProps.onCalendarSelect}
@@ -170,10 +173,9 @@ class DatePicker extends Component<Props, State> {
 
   constructor(props: any) {
     super(props);
-    const now = new Date();
-    const thisDay = now.getDate();
-    const thisMonth = now.getMonth() + 1;
-    const thisYear = now.getFullYear();
+
+    const { day, month, year } = getDateObj(new Date());
+
     this.state = {
       isOpen: this.props.defaultIsOpen,
       inputValue: this.props.selectProps.inputValue,
@@ -182,7 +184,7 @@ class DatePicker extends Component<Props, State> {
       view:
         this.props.value ||
         this.props.defaultValue ||
-        `${thisYear}-${padToTwo(thisMonth)}-${padToTwo(thisDay)}`,
+        `${year}-${padToTwo(month)}-${padToTwo(day)}`,
     };
   }
 
@@ -227,19 +229,20 @@ class DatePicker extends Component<Props, State> {
     if (!this.getState().isOpen) this.setState({ isOpen: true });
   };
 
-  onSelectBlur = (e: SyntheticFocusEvent<>) => {
+  onSelectBlur = (e: SyntheticFocusEvent<HTMLInputElement>) => {
     this.setState({ isOpen: false });
     this.props.onBlur(e);
   };
 
-  onSelectFocus = (e: SyntheticFocusEvent<>) => {
+  onSelectFocus = (e: SyntheticFocusEvent<HTMLInputElement>) => {
     this.setState({ isOpen: true });
     this.props.onFocus(e);
   };
 
-  onSelectInput = (e: Event) => {
+  onSelectInput = (e: SyntheticInputEvent<HTMLInputElement>) => {
     let value = e.target.value;
     const { dateFormat, parseInputValue } = this.props;
+
     if (value) {
       const parsed = parseInputValue(value, dateFormat);
       // Only try to set the date if we have month & day
@@ -251,10 +254,11 @@ class DatePicker extends Component<Props, State> {
         this.triggerChange(value);
       }
     }
+
     this.setState({ isOpen: true });
   };
 
-  onSelectKeyDown = (e: Event) => {
+  onSelectKeyDown = (e: SyntheticKeyboardEvent<HTMLInputElement>) => {
     const { key } = e;
     const dir = arrowKeys[key];
     const { view } = this.getState();
