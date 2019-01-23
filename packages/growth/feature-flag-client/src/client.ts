@@ -1,4 +1,4 @@
-import { Flags, ExposureEvent, FlagShape } from './types';
+import { AnalyticsHandler, Flags, ExposureEvent, FlagShape } from './types';
 import {
   isObject,
   enforceAttributes,
@@ -13,7 +13,7 @@ import UntrackedFlag from './untracked-flag';
 export default class FeatureFlagClient {
   flags: Readonly<Flags> = {};
   trackedFlags: { [flagKey: string]: boolean } = {};
-  analyticsHandler: (event: ExposureEvent) => void;
+  analyticsHandler: AnalyticsHandler;
 
   constructor(options: {
     flags?: Flags;
@@ -43,7 +43,7 @@ export default class FeatureFlagClient {
     };
   }
 
-  setAnalyticsHandler(analyticsHandler) {
+  setAnalyticsHandler(analyticsHandler: AnalyticsHandler) {
     this.analyticsHandler = analyticsHandler;
   }
 

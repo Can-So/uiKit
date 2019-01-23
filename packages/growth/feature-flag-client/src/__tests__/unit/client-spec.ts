@@ -1,7 +1,8 @@
 import FeatureFlagClient from '../../client';
+import { AnalyticsHandler } from '../../types';
 
 describe('Feature Flag Client', () => {
-  let analyticsHandler;
+  let analyticsHandler: AnalyticsHandler;
   beforeEach(() => {
     analyticsHandler = jest.fn();
   });
@@ -399,7 +400,7 @@ describe('Feature Flag Client', () => {
         const STRING_DEFAULT_VALUE = 'defaultValue';
         const STRING_TEST_VALUE = 'string';
 
-        const INVALID_ITEMS = {
+        const INVALID_ITEMS: any = {
           boolean: true,
           object: {},
           zero: 0,
@@ -407,7 +408,7 @@ describe('Feature Flag Client', () => {
           'string-not-in-possibleValues': 'abc',
         };
 
-        Object.keys(INVALID_ITEMS).forEach(key => {
+        Object.keys(INVALID_ITEMS).forEach((key: string) => {
           const wrongValue = INVALID_ITEMS[key];
 
           test(`should fall back to defaultValue when given ${key}`, () => {
