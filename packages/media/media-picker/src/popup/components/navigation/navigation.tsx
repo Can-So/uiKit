@@ -38,7 +38,7 @@ const SERVICENAME: { [key: string]: string } = {
 };
 
 export interface NavigationStateProps {
-  readonly accounts: ServiceAccountWithType[];
+  readonly accounts: Promise<ServiceAccountWithType[]>;
   readonly path: Path;
   readonly service: ServiceAccountLink;
 }
@@ -66,12 +66,38 @@ export type NavigationProps = NavigationStateProps &
 
 export interface NavigationState {
   readonly dropdownOpen: boolean;
+  readonly availableAccounts: ServiceAccountWithType[];
 }
 
 export class Navigation extends Component<NavigationProps, NavigationState> {
   state: NavigationState = {
     dropdownOpen: false,
+    availableAccounts: [],
   };
+
+  async componentDidMount() {
+    const { accounts, service } = this.props;
+    const availableAccounts = (await accounts).filter(
+      account => account.type === service.name,
+    );
+    this.setState({
+      availableAccounts,
+    });
+  }
+
+  async componentDidUpdate(prevProps: NavigationProps) {
+    const { accounts, service } = this.props;
+
+    if (prevProps.service !== service) {
+      const availableAccounts = (await accounts).filter(
+        account => account.type === service.name,
+      );
+
+      this.setState({
+        availableAccounts,
+      });
+    }
+  }
 
   render(): JSX.Element {
     const { service, path } = this.props;
@@ -128,12 +154,10 @@ export class Navigation extends Component<NavigationProps, NavigationState> {
   getAccountsDropdownItems() {
     const {
       service,
-      accounts,
       intl: { formatMessage },
     } = this.props;
-    const availableAccounts = accounts.filter(
-      account => account.type === service.name,
-    );
+    const { availableAccounts } = this.state;
+
     const dropdownAccountItems = availableAccounts.map(
       ({ id, displayName, type }) => (
         <DropdownItem key={id} onClick={this.onChangeAccountHandler(type, id)}>
