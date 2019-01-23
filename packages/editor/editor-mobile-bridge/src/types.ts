@@ -1,3 +1,10 @@
+export interface ProseMirrorDOMChange {
+  inDOMChange: {
+    composing: boolean;
+    finish: (force: boolean) => void;
+  };
+}
+
 export interface ElementsConfig {
   baseUrl: string;
   cloudId?: string;

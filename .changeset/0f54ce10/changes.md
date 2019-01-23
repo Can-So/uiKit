@@ -1,0 +1,1 @@
+- ED-5924: Fixes handling of node deletion for composition events.
