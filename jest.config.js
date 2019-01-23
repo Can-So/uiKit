@@ -63,14 +63,13 @@ const config = {
   ],
   resolver: `${__dirname}/resolver.js`,
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.tsx?$': 'ts-jest/preprocessor',
     '^.+\\.js$': 'babel-jest',
   },
   globals: {
     'ts-jest': {
-      tsConfig: './tsconfig.jest.json',
-      babelConfig: false,
-      diagnostics: false,
+      tsConfigFile: './tsconfig.jest.json',
+      skipBabel: true,
     },
     __BASEURL__: 'http://localhost:9000',
   },
