@@ -644,7 +644,7 @@ export const tableStyles = css`
   }
 
   /* =============== TABLE CONTEXTUAL MENU ================== */
-  .${ClassName.CONTEXTUAL_MENU_BUTTON} {
+  .${ClassName.CONTEXTUAL_MENU_BUTTON_WRAP} {
     position: absolute;
     right: 2px;
     top: 2px;
@@ -660,6 +660,9 @@ export const tableStyles = css`
     button {
       flex-direction: column;
       padding: 0;
+    }
+    span {
+      pointer-events: none;
     }
   }
 `;

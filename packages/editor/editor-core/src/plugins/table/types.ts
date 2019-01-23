@@ -101,6 +101,7 @@ export const TableCssClassName = {
   IS_RESIZING: `${clPrefix}is-resizing`,
 
   CONTEXTUAL_SUBMENU: `${clPrefix}contextual-submenu`,
+  CONTEXTUAL_MENU_BUTTON_WRAP: `${clPrefix}contextual-menu-button-wrap`,
   CONTEXTUAL_MENU_BUTTON: `${clPrefix}contextual-menu-button`,
   CONTEXTUAL_MENU_ICON: `${clPrefix}contextual-submenu-icon`,
 

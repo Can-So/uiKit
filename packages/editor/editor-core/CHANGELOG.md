@@ -1,5 +1,73 @@
 # @atlaskit/editor-core
 
+## 97.1.0
+- [minor] [2db7577588](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db7577588):
+
+  - ED-5924: Fixes handling of node deletion for composition events.
+
+## 97.0.3
+- [patch] [a5714ccc17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5714ccc17):
+
+  - Fixed table column not selectable (regression in prosemirror-view@1.6.8)
+
+## 97.0.2
+- [patch] [8dc4a35361](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8dc4a35361):
+
+  - enable status and date components to be pasted into a task component
+
+## 97.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/avatar-group@2.1.10
+  - @atlaskit/button@10.1.2
+  - @atlaskit/calendar@7.0.17
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/droplist@7.0.18
+  - @atlaskit/item@8.0.15
+  - @atlaskit/modal-dialog@7.2.1
+  - @atlaskit/section-message@1.0.16
+  - @atlaskit/select@6.1.19
+  - @atlaskit/tooltip@12.1.15
+  - @atlaskit/editor-common@30.0.1
+  - @atlaskit/editor-test-helpers@6.3.13
+  - @atlaskit/renderer@37.0.1
+  - @atlaskit/emoji@53.0.1
+  - @atlaskit/mention@16.0.1
+  - @atlaskit/status@0.3.2
+  - @atlaskit/task-decision@11.1.7
+  - @atlaskit/media-card@51.0.1
+  - @atlaskit/media-filmstrip@25.0.1
+  - @atlaskit/media-picker@31.0.1
+  - @atlaskit/media-test-helpers@19.1.1
+  - @atlaskit/smart-card@9.4.1
+  - @atlaskit/icon@16.0.0
+
+## 97.0.0
+- [minor] [b1627a5837](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1627a5837):
+
+  - Enable inline video player in Editor and Renderer
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/editor-common@30.0.0
+  - @atlaskit/renderer@37.0.0
+  - @atlaskit/emoji@53.0.0
+  - @atlaskit/media-card@51.0.0
+  - @atlaskit/media-filmstrip@25.0.0
+  - @atlaskit/media-picker@31.0.0
+  - @atlaskit/editor-bitbucket-transformer@4.1.7
+  - @atlaskit/editor-json-transformer@4.1.7
+  - @atlaskit/editor-markdown-transformer@2.1.7
+  - @atlaskit/editor-test-helpers@6.3.12
+  - @atlaskit/task-decision@11.1.6
+  - @atlaskit/util-data-test@10.0.34
+  - @atlaskit/media-test-helpers@19.1.0
+  - @atlaskit/media-core@26.2.0
+
+## 96.0.2
+- [patch] [4e764a26d4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e764a26d4):
+
+  - ED-6070: Don't render proper mediaCard on mobile until we have a valid collection
+
 ## 96.0.1
 - [patch] [af85018](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af85018):
 

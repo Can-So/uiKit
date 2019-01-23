@@ -6,6 +6,8 @@ import {
   hardBreak,
   mention,
   p,
+  status,
+  date,
 } from '@atlaskit/editor-test-helpers';
 
 import { toJSON } from '../../../../utils';
@@ -15,6 +17,8 @@ import {
 } from '../../../../utils/filter';
 
 describe('@atlaskit/editor-core/utils/filter', () => {
+  const now = Date.now();
+
   describe('taskDecisionDocFilter', () => {
     it('filter preserves supported types', () => {
       const jsonDoc = toJSON(
@@ -29,6 +33,12 @@ describe('@atlaskit/editor-core/utils/filter', () => {
             hardBreak(),
             ' and mention ',
             mention({ id: 'id', text: 'mention name' })(),
+            status({
+              text: 'yay',
+              color: 'blue',
+              localId: '7f4189c0-89f2-4f0e-a439-3fa9e57934fa',
+            }),
+            date({ timestamp: now }),
           ),
         )(defaultSchema),
       );
@@ -52,6 +62,18 @@ describe('@atlaskit/editor-core/utils/filter', () => {
         {
           type: 'mention',
           attrs: { id: 'id', text: 'mention name', accessLevel: '' },
+        },
+        {
+          type: 'status',
+          attrs: {
+            text: 'yay',
+            color: 'blue',
+            localId: '7f4189c0-89f2-4f0e-a439-3fa9e57934fa',
+          },
+        },
+        {
+          type: 'date',
+          attrs: { timestamp: now },
         },
       ]);
     });
@@ -89,6 +111,12 @@ describe('@atlaskit/editor-core/utils/filter', () => {
             hardBreak(),
             ' and mention ',
             mention({ id: 'id', text: 'mention name' })(),
+            status({
+              text: 'yay',
+              color: 'blue',
+              localId: '7f4189c0-89f2-4f0e-a439-3fa9e57934fa',
+            }),
+            date({ timestamp: now }),
           ),
         )(defaultSchema),
       );
@@ -119,6 +147,19 @@ describe('@atlaskit/editor-core/utils/filter', () => {
             accessLevel: '',
             userType: null,
           },
+        },
+        {
+          type: 'status',
+          attrs: {
+            text: 'yay',
+            style: null,
+            color: 'blue',
+            localId: '7f4189c0-89f2-4f0e-a439-3fa9e57934fa',
+          },
+        },
+        {
+          type: 'date',
+          attrs: { timestamp: now },
         },
       ]);
     });

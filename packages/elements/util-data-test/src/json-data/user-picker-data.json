@@ -219,5 +219,64 @@
         }
       ]
     }
+  },
+  {
+    "id": "team-1",
+    "name": "The minimal team",
+    "type" : "team"
+  },
+  {
+    "id": "team-2",
+    "name": "That team with an Avatar",
+    "avatarUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/1.svg",
+    "type" : "team"
+  },
+  {
+    "id": "team-3",
+    "name": "Team with 1 member",
+    "avatarUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/0.svg",
+    "type" : "team",
+    "memberCount" : 1
+  },
+  {
+    "id": "team-4",
+    "name": "Team which you are the only member",
+    "avatarUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/2.svg",
+    "type" : "team",
+    "memberCount" : 1,
+    "includesYou" : true
+  },
+  {
+    "id": "team-5",
+    "name": "Team with 50+ members",
+    "avatarUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/4.svg",
+    "type" : "team",
+    "memberCount" : 51
+  },
+  {
+    "id": "team-6",
+    "name": "Large team which includes you",
+    "avatarUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/3.svg",
+    "type" : "team",
+    "memberCount" : 51,
+    "includesYou" : true
+  },
+  {
+    "id": "team-7",
+    "name": "Team which includes you",
+    "avatarUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/6.svg",
+    "type" : "team",
+    "memberCount" : 49,
+    "includesYou" : true
+  },
+  {
+    "id": "team-8",
+    "name": "Team with all the fields (except highlight)",
+    "avatarUrl": "https://ptc-directory-sited-static.us-east-1.staging.public.atl-paas.net/teams/avatars/5.svg",
+    "type" : "team",
+    "fixed" : false,
+    "description" : "This team has all the fields populated except highlights",
+    "memberCount" : 35,
+    "includesYou" : false
   }
 ]

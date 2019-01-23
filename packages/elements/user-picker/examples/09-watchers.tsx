@@ -4,16 +4,17 @@ import SelectClearIcon from '@atlaskit/icon/glyph/select-clear';
 import * as React from 'react';
 import styled from 'styled-components';
 import { ExampleWrapper } from '../example-helpers/ExampleWrapper';
-import { User } from '../src';
+import { OptionData } from '../src';
 import { UserPicker } from '../src/components/UserPicker';
+import { isUser, isTeam } from '../src/components/utils';
 
 type State = {
-  value: User[];
+  value: OptionData[];
 };
 
 type UserValueProps = {
-  user: User;
-  onRemove: (user: User) => void;
+  user: OptionData;
+  onRemove: (user: OptionData) => void;
 };
 
 const UserValueContainer = styled.div`
@@ -34,7 +35,11 @@ class UserValue extends React.PureComponent<UserValueProps> {
     return (
       <UserValueContainer>
         <AvatarItem
-          avatar={<Avatar src={user.avatarUrl} />}
+          avatar={
+            <Avatar
+              src={isUser(user) || isTeam(user) ? user.avatarUrl : undefined}
+            />
+          }
           primaryText={user.name}
         />
         <Button
@@ -91,7 +96,7 @@ export default class Example extends React.PureComponent<{}, State> {
     const { value } = this.state;
     return (
       <ExampleWrapper>
-        {({ users, onInputChange }) => (
+        {({ options, onInputChange }) => (
           <div>
             {value.map(user => (
               <UserValue
@@ -102,7 +107,7 @@ export default class Example extends React.PureComponent<{}, State> {
             ))}
             <UserPicker
               ref={this.userPickerRef}
-              options={users.filter(user => value.indexOf(user) === -1)}
+              options={options.filter(user => value.indexOf(user) === -1)}
               value={null}
               onChange={this.handleOnChange}
               onInputChange={onInputChange}

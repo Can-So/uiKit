@@ -21,6 +21,11 @@ const imageAlignmentMap = {
 };
 
 export default class ResizableMediaSingle extends React.Component<Props> {
+  state = {
+    // We default to true until we resolve the file type
+    isVideoFile: true,
+  };
+
   get wrappedLayout() {
     const { layout } = this.props;
     return (
@@ -29,6 +34,24 @@ export default class ResizableMediaSingle extends React.Component<Props> {
       layout === 'align-start' ||
       layout === 'align-end'
     );
+  }
+
+  async componentDidMount() {
+    const $pos = this.$pos;
+    if (!$pos || !this.props.mediaProvider) {
+      return;
+    }
+    const mediaProvider = await this.props.mediaProvider;
+    const getMediaNode = this.props.state.doc.nodeAt($pos.pos + 1);
+    const viewContext = await mediaProvider.viewContext;
+    const state = await viewContext.file.getCurrentState(
+      getMediaNode!.attrs.id,
+    );
+    if (state.status !== 'error' && state.mediaType === 'image') {
+      this.setState({
+        isVideoFile: false,
+      });
+    }
   }
 
   calcNewSize = (newWidth: number, stop: boolean) => {
@@ -125,7 +148,6 @@ export default class ResizableMediaSingle extends React.Component<Props> {
         calcPxFromColumns(i, lineLength, this.gridWidth) - offsetLeft,
       );
     }
-
     // full width
     snapTargets.push(lineLength - offsetLeft);
 
@@ -134,12 +156,18 @@ export default class ResizableMediaSingle extends React.Component<Props> {
       lineLength,
       this.props.gridSize,
     );
-    const snapPoints = snapTargets.filter(width => width >= minimumWidth);
 
+    let snapPoints = snapTargets.filter(width => width >= minimumWidth);
     const $pos = this.$pos;
     if (!$pos) {
       return snapPoints;
     }
+
+    const { isVideoFile } = this.state;
+
+    snapPoints = isVideoFile
+      ? snapPoints.filter(width => width > 320)
+      : snapPoints;
 
     const isTopLevel = $pos.parent.type.name === 'doc';
     if (isTopLevel && appearance === 'full-page') {

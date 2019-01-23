@@ -1,5 +1,10 @@
 # @atlaskit/media-core
 
+## 26.2.0
+- [minor] [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+
+  - Expose new getCurrentState method to context
+
 ## 26.1.0
 - [minor] [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
 
