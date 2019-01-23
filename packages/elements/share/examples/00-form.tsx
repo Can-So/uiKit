@@ -6,9 +6,10 @@ const loadOptions = () => userPickerData;
 
 export default () => (
   <ShareForm
+    copyLink={window.location.href}
     onLinkCopy={console.log}
     onShareClick={console.log}
     loadOptions={loadOptions}
-    copyLink={window.location.href}
+    shouldShowCapabilitiesInfoMessage
   />
 );
