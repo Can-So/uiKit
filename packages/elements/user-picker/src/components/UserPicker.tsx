@@ -364,7 +364,7 @@ class UserPickerInternal extends React.Component<
         isMulti={isMulti}
         options={this.getOptions()}
         onChange={this.handleChange}
-        styles={getStyles(width)}
+        styles={getStyles(width, appearance)}
         components={getComponents(isMulti, anchor)}
         inputValue={inputValue}
         menuIsOpen={menuIsOpen}

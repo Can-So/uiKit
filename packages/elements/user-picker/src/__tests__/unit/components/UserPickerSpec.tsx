@@ -47,7 +47,7 @@ describe('UserPicker', () => {
     const component = shallowUserPicker({ options });
     const select = component.find(Select);
     expect(select.prop('options')).toEqual(userOptions);
-    expect(getStyles).toHaveBeenCalledWith(350);
+    expect(getStyles).toHaveBeenCalledWith(350, 'normal');
     expect(select.prop('menuPlacement')).toBeTruthy();
   });
 
@@ -60,7 +60,13 @@ describe('UserPicker', () => {
   it('should set width', () => {
     shallowUserPicker({ width: 500 });
 
-    expect(getStyles).toHaveBeenCalledWith(500);
+    expect(getStyles).toHaveBeenCalledWith(500, expect.any(String));
+  });
+
+  it('should set pass appearance to getStyles', () => {
+    shallowUserPicker({ appearance: 'compact' });
+
+    expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'compact');
   });
 
   it('should set custom placeholder', () => {
@@ -509,16 +515,12 @@ describe('UserPicker', () => {
       const component = shallowUserPicker({ options: teamOptions });
       const select = component.find(Select);
       expect(select.prop('options')).toEqual(selectableTeamOptions);
-      expect(getStyles).toHaveBeenCalledWith(350);
-      expect(select.prop('menuPlacement')).toBeTruthy();
     });
 
     it('should render select with both teams and users', () => {
       const component = shallowUserPicker({ options: mixedOptions });
       const select = component.find(Select);
       expect(select.prop('options')).toEqual(selectableMixedOptions);
-      expect(getStyles).toHaveBeenCalledWith(350);
-      expect(select.prop('menuPlacement')).toBeTruthy();
     });
 
     it('should be able to multi-select a mix of users and teams', () => {
