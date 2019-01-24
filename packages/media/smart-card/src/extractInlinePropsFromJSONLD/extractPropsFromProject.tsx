@@ -12,7 +12,7 @@ export const buildProjectIcon: BuildInlineProps<
     return { icon: json.icon.url };
   }
   return {
-    icon: <ProjectDefaultIcon label={json.name || 'Project'} />,
+    icon: <ProjectDefaultIcon size="small" label={json.name || 'Project'} />,
   };
 };
 

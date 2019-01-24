@@ -17,7 +17,7 @@ describe('extractPropsFromSourceCodeRepository', () => {
       expect(buildRepositoryLink({})).toEqual({});
     });
     it('should return link key for non-empty url', () => {
-      expect(buildRepositoryLink({ '@url': 'http://some/url' })).toEqual({
+      expect(buildRepositoryLink({ url: 'http://some/url' })).toEqual({
         link: 'http://some/url',
       });
     });
