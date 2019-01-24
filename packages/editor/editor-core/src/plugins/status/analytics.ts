@@ -2,15 +2,21 @@ import {
   name as packageName,
   version as packageVersion,
 } from '../../../package.json';
-import { CreateUIAnalyticsEventSignature } from '@atlaskit/analytics-next-types';
+import {
+  CreateUIAnalyticsEventSignature,
+  AnalyticsEventPayload,
+} from '@atlaskit/analytics-next-types';
 
 export const FABRIC_CHANNEL = 'fabric-elements';
 
 export const createStatusAnalyticsAndFire = (
   createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
-) => payload => {
+) => (payload: AnalyticsEventPayload) => {
   if (createAnalyticsEvent && payload) {
-    const statusPayload = { ...payload, eventType: 'ui' };
+    const statusPayload: AnalyticsEventPayload = {
+      ...payload,
+      eventType: 'ui',
+    };
     if (!statusPayload.attributes) {
       statusPayload.attributes = {};
     }
@@ -22,4 +28,5 @@ export const createStatusAnalyticsAndFire = (
   }
 };
 
-export const analyticsState = isNew => (isNew ? 'new' : 'update');
+export const analyticsState = (isNew: boolean | undefined) =>
+  isNew ? 'new' : 'update';
