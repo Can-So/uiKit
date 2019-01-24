@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.15.0
+- [minor] [a6a76aa7cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6a76aa7cd):
+
+  - Adds ability to send search terms for jira quick search
+
 ## 5.14.1
 - [patch] [f9e27f2b99](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f9e27f2b99):
 
