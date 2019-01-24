@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.1.7
+- [patch] [7c497c2de6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c497c2de6):
+
+  - ED-5810 Fix issue where numbered table rows flickered when hovering on the edge of row controls
+
 ## 97.1.6
 - [patch] [cbc601aed3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbc601aed3):
 
