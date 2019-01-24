@@ -90,6 +90,9 @@ const config = {
   collectCoverage: false,
   collectCoverageFrom: [],
   coverageThreshold: {},
+  globalSetup: undefined,
+  globalTeardown: undefined,
+  testEnvironment: 'jsdom',
 };
 
 // If the CHANGED_PACKAGES variable is set, we parse it to get an array of changed packages and only
