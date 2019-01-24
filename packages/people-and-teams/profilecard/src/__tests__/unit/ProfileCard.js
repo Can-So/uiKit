@@ -246,6 +246,46 @@ describe('Profilecard', () => {
 
         expect(card).toMatchSnapshot();
       });
+
+      it('should match snapshot when status=closed and hasDisabledAccountLozenge=false', () => {
+        const card = renderShallow({
+          status: 'closed',
+          hasDisabledAccountLozenge: false,
+        });
+
+        expect(card).toMatchSnapshot();
+      });
+
+      it('should match snapshot when status=inactive and hasDisabledAccountLozenge=false', () => {
+        const card = renderShallow({
+          status: 'inactive',
+          hasDisabledAccountLozenge: false,
+        });
+
+        expect(card).toMatchSnapshot();
+      });
+
+      it('should match snapshot when status=closed and disabledAccountMessage is defined', () => {
+        const card = renderShallow({
+          status: 'closed',
+          disabledAccountMessage: (
+            <p>this is a custom message for closed account</p>
+          ),
+        });
+
+        expect(card).toMatchSnapshot();
+      });
+
+      it('should match snapshot when status=inactive and disabledAccountMessage is defined', () => {
+        const card = renderShallow({
+          status: 'inactive',
+          disabledAccountMessage: (
+            <p>this is a custom message for inactive account</p>
+          ),
+        });
+
+        expect(card).toMatchSnapshot();
+      });
     });
 
     describe('customElevation', () => {
