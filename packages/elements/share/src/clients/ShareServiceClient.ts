@@ -35,7 +35,7 @@ type Content = {
 };
 
 type Comment = {
-  format: string;
+  format: 'plain_text' | 'adf';
   value: string;
 };
 

@@ -30,7 +30,7 @@ describe('ShareServiceClientImpl', () => {
     },
   };
   let mockComment = {
-    format: 'mock format',
+    format: 'plain_text' as 'plain_text',
     value: 'mock comment',
   };
 
