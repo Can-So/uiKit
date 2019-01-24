@@ -29,6 +29,8 @@ export type UserPickerProps = {
   onFocus?: OnPicker;
   /** Callback for when the field loses focus. */
   onBlur?: OnPicker;
+  /** Callback for when the value/s in the picker is cleared. */
+  onClear?: OnPicker;
   /** Appearance of the user picker. */
   appearance?: 'normal' | 'compact';
   /** Display the picker with a subtle style. */

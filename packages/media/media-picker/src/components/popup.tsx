@@ -8,7 +8,6 @@ import { cancelUpload } from '../popup/actions/cancelUpload';
 import { showPopup } from '../popup/actions/showPopup';
 import { resetView } from '../popup/actions/resetView';
 import { getFilesInRecents } from '../popup/actions/getFilesInRecents';
-import { getConnectedRemoteAccounts } from '../popup/actions/getConnectedRemoteAccounts';
 import { State } from '../popup/domain';
 import { hidePopup } from '../popup/actions/hidePopup';
 import { createStore } from '../store';
@@ -96,8 +95,6 @@ export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
 
     dispatch(resetView());
     dispatch(getFilesInRecents());
-    // TODO [MSW-466]: Fetch remote accounts only when needed
-    dispatch(getConnectedRemoteAccounts());
     dispatch(showPopup());
   }
 

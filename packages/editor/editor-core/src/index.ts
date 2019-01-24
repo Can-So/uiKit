@@ -58,7 +58,7 @@ export {
   toggleEm,
   toggleStrong,
 } from './plugins/text-formatting/commands/text-formatting';
-export { insertBlockType } from './plugins/block-type/commands';
+export { insertBlockType, setBlockType } from './plugins/block-type/commands';
 export { createTable } from './plugins/table/actions';
 export { insertTaskDecision } from './plugins/tasks-and-decisions/commands';
 export { EventDispatcher } from './event-dispatcher';

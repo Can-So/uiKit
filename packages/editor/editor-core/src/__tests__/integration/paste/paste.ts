@@ -1,15 +1,14 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
 import Page from '@atlaskit/webdriver-runner/wd-wrapper';
-import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
 import {
   getDocFromElement,
   clipboardHelper,
   clipboardInput,
   copyAsPlaintextButton,
   copyAsHTMLButton,
+  gotoEditor,
 } from '../_helpers';
 
-const messageEditor = getExampleUrl('editor', 'editor-core', 'message');
 const editorSelector = '.ProseMirror';
 
 BrowserTestCase(
@@ -22,7 +21,7 @@ BrowserTestCase(
     await sample.type(clipboardInput, 'This text is plain.');
     await sample.click(copyAsPlaintextButton);
 
-    await sample.goto(messageEditor);
+    await gotoEditor(sample);
     await sample.waitFor(editorSelector);
     await sample.paste(editorSelector);
 
@@ -44,7 +43,7 @@ BrowserTestCase(
     await sample.type(clipboardInput, testData);
     await sample.click(copyAsHTMLButton);
 
-    await sample.goto(messageEditor);
+    await gotoEditor(sample);
     await sample.waitFor(editorSelector);
     await sample.paste(editorSelector);
 
@@ -53,32 +52,6 @@ BrowserTestCase(
     expect(doc).toMatchDocSnapshot();
   },
 );
-
-// eslint-disable-next-line jest/no-disabled-tests
-describe.skip('Tables are not enabled in the message editor', () => {
-  BrowserTestCase(
-    'paste.ts: paste tests on message editor: table',
-    { skip: ['edge', 'ie', 'safari'] },
-    async client => {
-      const sample = new Page(client);
-      await sample.goto(clipboardHelper);
-      await sample.isVisible(clipboardInput);
-      await sample.type(
-        clipboardInput,
-        '<table><tbody><tr><th><p>this</p></th><th class=""><p>is</p></th><th><p>table</p></th></tr><tr><td><p><br></p></td><td><p><br></p></td><td><p><br></p></td></tr><tr><td><p><br></p></td><td><p><br></p></td><td><p><br></p></td></tr></tbody></table>',
-      );
-      await sample.click(copyAsHTMLButton);
-
-      await sample.goto(messageEditor);
-      await sample.waitFor(editorSelector);
-      await sample.paste(editorSelector);
-
-      await sample.waitForSelector('table');
-      const doc = await sample.$eval(editorSelector, getDocFromElement);
-      expect(doc).toMatchDocSnapshot();
-    },
-  );
-});
 
 BrowserTestCase(
   'paste.ts: paste tests on message editor: bullet list',
@@ -93,7 +66,7 @@ BrowserTestCase(
     );
     await sample.click(copyAsHTMLButton);
 
-    await sample.goto(messageEditor);
+    await gotoEditor(sample);
     await sample.waitFor(editorSelector);
     await sample.paste(editorSelector);
 
@@ -116,7 +89,7 @@ BrowserTestCase(
     );
     await sample.click(copyAsHTMLButton);
 
-    await sample.goto(messageEditor);
+    await gotoEditor(sample);
     await sample.waitFor(editorSelector);
     await sample.paste(editorSelector);
 

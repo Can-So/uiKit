@@ -1,4 +1,11 @@
-import { Plugin, PluginKey, Transaction, EditorState } from 'prosemirror-state';
+import { EditorView } from 'prosemirror-view';
+import {
+  Plugin,
+  PluginKey,
+  Transaction,
+  EditorState,
+  TextSelection,
+} from 'prosemirror-state';
 import { Dispatch } from '../../../event-dispatcher';
 import { isMarkTypeAllowedInCurrentSelection } from '../../../utils';
 import {
@@ -8,6 +15,7 @@ import {
 } from '../types';
 import { dismissCommand } from '../commands/dismiss';
 import { itemsListUpdated } from '../commands/items-list-updated';
+import { updateQueryCommand } from '../commands/update-query';
 import { isQueryActive } from '../utils/is-query-active';
 import { findTypeAheadQuery } from '../utils/find-query-mark';
 
@@ -29,11 +37,19 @@ export type PluginState = {
   downKeyCount: number;
 };
 
+type EditorViewWithDOMChange = EditorView & {
+  inDOMChange: {
+    composing: boolean;
+    finish: (force: boolean) => void;
+  };
+};
+
 export const ACTIONS = {
   SELECT_PREV: 'SELECT_PREV',
   SELECT_NEXT: 'SELECT_NEXT',
   SELECT_CURRENT: 'SELECT_CURRENT',
   SET_CURRENT_INDEX: 'SET_CURRENT_INDEX',
+  SET_QUERY: 'SET_QUERY',
   ITEMS_LIST_UPDATED: 'ITEMS_LIST_UPDATED',
 };
 
@@ -107,6 +123,9 @@ export function createPlugin(
                 })
               : selectCurrentActionHandler({ dispatch, pluginState, tr });
 
+          case ACTIONS.SET_QUERY:
+            return updateQueryHandler({ dispatch, pluginState, tr, params });
+
           default:
             return defaultActionHandler({
               dispatch,
@@ -173,6 +192,42 @@ export function createPlugin(
         },
       };
     },
+    props: {
+      handleDOMEvents: {
+        input(view, event: any) {
+          const {
+            state,
+            dispatch,
+            inDOMChange: domChange,
+          } = view as EditorViewWithDOMChange;
+          const { selection, schema } = state;
+
+          if (
+            selection instanceof TextSelection &&
+            selection.$cursor &&
+            schema.marks.typeAheadQuery.isInSet(selection.$cursor.marks())
+          ) {
+            updateQueryCommand(event.data)(state, dispatch);
+            return false;
+          }
+
+          const triggers = typeAhead.map(
+            typeAheadHandler => typeAheadHandler.trigger,
+          );
+
+          if (
+            triggers.indexOf(event.data) !== -1 &&
+            event.inputType === 'insertCompositionText' &&
+            domChange &&
+            domChange.composing
+          ) {
+            domChange.finish(true);
+          }
+
+          return false;
+        },
+      },
+    },
   });
 }
 
@@ -188,6 +243,7 @@ export type ActionHandlerParams = {
   tr: Transaction;
   params?: {
     currentIndex?: number;
+    query?: string;
   };
 };
 
@@ -330,6 +386,24 @@ export function setCurrentItemIndex({
       params.currentIndex || params.currentIndex === 0
         ? params.currentIndex
         : pluginState.currentIndex,
+  };
+
+  dispatch(pluginKey, newPluginState);
+  return newPluginState;
+}
+
+export function updateQueryHandler({
+  dispatch,
+  pluginState,
+  params,
+}: ActionHandlerParams): PluginState {
+  if (!params) {
+    return pluginState;
+  }
+
+  const newPluginState = {
+    ...pluginState,
+    query: typeof params.query === 'string' ? params.query : null,
   };
 
   dispatch(pluginKey, newPluginState);

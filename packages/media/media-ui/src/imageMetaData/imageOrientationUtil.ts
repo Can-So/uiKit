@@ -9,6 +9,11 @@ const ORIENT_TRANSFORMS: { [key: number]: string } = {
   8: 'rotate(270deg)', // Rotate 270 CW
 };
 
+/**
+ * Returns true if image rotated 90 or 270 degrees (on it's side)
+ */
+export const isRotated = (orientation: number) => orientation >= 5;
+
 export const getCssFromImageOrientation = (orientation: number): string => {
   return ORIENT_TRANSFORMS[orientation];
 };

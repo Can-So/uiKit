@@ -25,7 +25,7 @@ import { PopupConfig } from '../..';
 export interface State {
   readonly redirectUrl: string;
   readonly view: View;
-  readonly accounts: ServiceAccountWithType[];
+  readonly accounts: Promise<ServiceAccountWithType[]>;
   readonly editorData?: EditorData;
   readonly recents: Recents;
   readonly selectedItems: SelectedItem[];
