@@ -1,1 +1,0 @@
-- ED-6094: add table CellSelection test helpers
