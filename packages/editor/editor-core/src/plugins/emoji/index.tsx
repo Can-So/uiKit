@@ -1,7 +1,7 @@
 import * as React from 'react';
 import EmojiIcon from '@atlaskit/icon/glyph/editor/emoji';
 import { emoji, emojiQuery } from '@atlaskit/adf-schema';
-import { WithProviders } from '@atlaskit/editor-common';
+import { WithProviders, Providers } from '@atlaskit/editor-common';
 
 import { EditorPlugin } from '../../types';
 import { messages } from '../insert-block/ui/ToolbarInsertBlock';
@@ -56,7 +56,7 @@ const emojiPlugin: EditorPlugin = {
     popupsBoundariesElement,
     popupsScrollableElement,
   }) {
-    const renderNode = providers => {
+    const renderNode = (providers: Providers) => {
       return (
         <EmojiTypeAhead
           editorView={editorView}
@@ -87,7 +87,7 @@ const emojiPlugin: EditorPlugin = {
     popupsScrollableElement,
     disabled,
   }) {
-    const renderNode = providers => {
+    const renderNode = (providers: Providers) => {
       // numFollowingButtons must be changed if buttons are added after ToolbarEmojiPicker to the message editor
       return (
         <ToolbarEmojiPicker
