@@ -1,0 +1,1 @@
+- ED-6050: enabled layouts (mobile editor)
