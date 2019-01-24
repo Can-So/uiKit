@@ -2,7 +2,7 @@ import { AVATAR_SIZES, BORDER_WIDTH } from '@atlaskit/avatar';
 import { colors } from '@atlaskit/theme';
 import memoizeOne from 'memoize-one';
 import { getAvatarSize } from './utils';
-import { Appearance } from 'src/types';
+import { Appearance } from '../types';
 
 export const BORDER_PADDING = 6;
 export const PLACEHOLDER_PADDING = 8;
