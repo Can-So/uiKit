@@ -24,6 +24,7 @@ import {
   OptionData,
   UserPickerProps,
   UserPickerState,
+  Appearance,
 } from '../types';
 import { batchByKey } from './batch';
 import { getComponents } from './components';
@@ -45,7 +46,6 @@ class UserPickerInternal extends React.Component<
   static defaultProps: UserPickerProps = {
     width: 350,
     isMulti: false,
-    appearance: 'normal',
     subtle: false,
     isClearable: true,
   };
@@ -333,13 +333,19 @@ class UserPickerInternal extends React.Component<
 
   private getOptions = (): Option[] => getOptions(this.state.options) || [];
 
+  private getAppearance = (): Appearance =>
+    this.props.appearance
+      ? this.props.appearance
+      : this.props.isMulti
+      ? 'compact'
+      : 'normal';
+
   render() {
     const {
       width,
       isMulti,
       anchor,
       isLoading,
-      appearance,
       subtle,
       placeholder,
       isClearable,
@@ -356,6 +362,8 @@ class UserPickerInternal extends React.Component<
       value,
       inputValue,
     } = this.state;
+    const appearance = this.getAppearance();
+
     return (
       <Select
         value={value}
@@ -380,7 +388,7 @@ class UserPickerInternal extends React.Component<
         classNamePrefix="fabric-user-picker"
         onClearIndicatorHover={this.handleClearIndicatorHover}
         hoveringClearIndicator={hoveringClearIndicator}
-        appearance={isMulti ? 'compact' : appearance}
+        appearance={appearance}
         isClearable={isClearable}
         subtle={isMulti ? false : subtle}
         blurInputOnSelect={!isMulti}
