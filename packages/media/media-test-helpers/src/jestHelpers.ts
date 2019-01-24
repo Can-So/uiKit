@@ -1,7 +1,7 @@
 export const asMock = (fn: Function): jest.Mock => fn as jest.Mock;
 
 export const expectToEqual = <T>(actual: T, expected: T) =>
-  expect(expected).toEqual(actual);
+  expect(actual).toEqual(expected);
 
 export type ExpectFunctionToHaveBeenCalledWith = <
   T extends (...args: any[]) => any

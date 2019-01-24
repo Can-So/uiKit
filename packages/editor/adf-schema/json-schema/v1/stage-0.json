@@ -2295,6 +2295,9 @@
                   },
                   {
                     "$ref": "#/definitions/link_mark"
+                  },
+                  {
+                    "$ref": "#/definitions/annotation_mark"
                   }
                 ]
               }
