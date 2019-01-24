@@ -1,0 +1,1 @@
+- Show progress bar while file is uploading
