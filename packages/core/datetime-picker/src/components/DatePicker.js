@@ -323,36 +323,33 @@ class DatePicker extends Component<Props, State> {
     }
   };
 
-  getSubtleControlStyles = () => {
-    return {
-      border: `2px solid ${
-        this.getState().isOpen ? `${colors.B100}` : `transparent`
-      }`,
-      backgroundColor: 'transparent',
-      padding: '1px',
-    };
-  };
+  getSubtleControlStyles = (isOpen: boolean) => ({
+    border: `2px solid ${isOpen ? colors.B100 : `transparent`}`,
+    backgroundColor: 'transparent',
+    padding: '1px',
+  });
 
   render() {
     const {
+      appearance,
       autoFocus,
+      dateFormat,
       disabled,
       formatDisplayLabel,
+      hideIcon,
+      icon,
       id,
       innerProps,
       isDisabled,
+      isInvalid,
       name,
+      placeholder,
       selectProps,
       spacing,
-      dateFormat,
-      placeholder,
     } = this.props;
     const { value, view, isOpen, inputValue } = this.getState();
-    const validationState = this.props.isInvalid ? 'error' : 'default';
-    const icon =
-      this.props.appearance === 'subtle' || this.props.hideIcon
-        ? null
-        : this.props.icon;
+    const validationState = isInvalid ? 'error' : 'default';
+    const dropDownIcon = appearance === 'subtle' || hideIcon ? null : icon;
 
     const calendarProps = {
       calendarContainerRef: this.containerRef,
@@ -360,7 +357,7 @@ class DatePicker extends Component<Props, State> {
       calendarDisabled: disabled,
       calendarValue: value,
       calendarView: view,
-      dropdownIndicatorIcon: icon,
+      dropdownIndicatorIcon: dropDownIcon,
       onCalendarChange: this.onCalendarChange,
       onCalendarSelect: this.onCalendarSelect,
       selectedCalendarValue: this.state.selectedValue,
@@ -368,7 +365,7 @@ class DatePicker extends Component<Props, State> {
 
     const { styles: selectStyles = {} } = selectProps;
     const controlStyles =
-      this.props.appearance === 'subtle' ? this.getSubtleControlStyles() : {};
+      appearance === 'subtle' ? this.getSubtleControlStyles(isOpen) : {};
     const disabledStyle = isDisabled ? { pointerEvents: 'none' } : {};
 
     return (
