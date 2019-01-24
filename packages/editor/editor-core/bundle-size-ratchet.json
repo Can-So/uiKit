@@ -80,8 +80,8 @@
     }
   },
   {
-    "id": "atlaskit.media.async",
-    "name": "async",
+    "id": "atlaskit.people-and-teams.main",
+    "name": "main",
     "stats": {
       "size": 766787,
       "gzipSize": 190492

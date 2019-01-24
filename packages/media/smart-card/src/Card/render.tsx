@@ -54,9 +54,7 @@ export class CardWithURLRenderer extends React.Component<
         authFn={auth}
       />
     ) : (
-      <CardLinkView key={'chunk-placeholder'} text={url}>
-        {url}
-      </CardLinkView>
+      <CardLinkView key={'chunk-placeholder'} url={url} />
     );
   }
 }

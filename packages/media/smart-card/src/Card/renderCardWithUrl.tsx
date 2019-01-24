@@ -195,11 +195,7 @@ export function CardWithUrlContent(props: CardWithUrlContentProps) {
     <LazyRender
       offset={100}
       component={appearance === 'inline' ? 'span' : 'div'}
-      placeholder={
-        <CardLinkView key={'lazy-render-placeholder'} text={url}>
-          {url}
-        </CardLinkView>
-      }
+      placeholder={<CardLinkView key={'lazy-render-placeholder'} url={url} />}
       content={
         <WithObject
           client={client}
