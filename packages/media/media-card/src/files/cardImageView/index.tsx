@@ -128,7 +128,14 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
   };
 
   private getUploadingContents = (): JSX.Element => {
-    const { actions, mediaName, progress, dataURI, selectable } = this.props;
+    const {
+      actions,
+      mediaName,
+      progress,
+      dataURI,
+      selectable,
+      previewOrientation,
+    } = this.props;
 
     const overlay = selectable ? this.createUploadingCardOverlay() : null;
 
@@ -140,6 +147,9 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
             progress={progress || 0}
             dataURI={dataURI}
             actions={actions}
+            previewOrientation={previewOrientation}
+            crop={this.isCropped}
+            stretch={this.isStretched}
           />
         </div>
         {overlay}
