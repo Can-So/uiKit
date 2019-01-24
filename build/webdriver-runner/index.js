@@ -14,7 +14,6 @@ const reportTestFailures = require('./reporting');
  * start and stop webpack-dev-server, selenium-standalone-server, browserstack connections
  * and run and wait for webdriver tests complete
  *
- * maxWorkers set to 4 when using browserstack and 1 when running locally.
  * By default the tests are running headlessly, set HEADLESS=false if you want to run them directly on real browsers.
  * if WATCH= true, by default, it will start chrome.
  */
@@ -23,7 +22,7 @@ process.env.NODE_ENV = 'test';
 process.env.INTEGRATION_TESTS = 'true';
 
 const isBrowserStack = process.env.TEST_ENV === 'browserstack';
-const maxWorkers = isBrowserStack ? 4 : 1;
+const maxWorkers = isBrowserStack ? 5 : 1;
 
 const cli = meow({
   flags: {
