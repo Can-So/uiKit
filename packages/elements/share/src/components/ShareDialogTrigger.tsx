@@ -23,6 +23,8 @@ export type DialogContentState = {
   comment?: Comment;
 };
 
+type State = DialogState & DialogContentState;
+
 export type User = UserWithId | UserWithEmail;
 
 type UserWithId = {
@@ -86,10 +88,7 @@ export const defaultDialogContentState: DialogContentState = {
   },
 };
 
-export class ShareDialogTrigger extends React.Component<
-  Props,
-  DialogState & DialogContentState
-> {
+export class ShareDialogTrigger extends React.Component<Props, State> {
   static defaultProps = {
     buttonAppearance: 'default',
     capabilities: {},
@@ -100,7 +99,7 @@ export class ShareDialogTrigger extends React.Component<
 
   escapeIsHeldDown: boolean = false;
 
-  state = {
+  state: State = {
     isDialogOpen: false,
     isSharing: false,
     isStateValidWithCapabilities: true,
@@ -108,7 +107,7 @@ export class ShareDialogTrigger extends React.Component<
     ...defaultDialogContentState,
   };
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props: Props, state: State) {
     const { capabilities, validateStateWithCapabilities } = props;
 
     if (
@@ -137,7 +136,7 @@ export class ShareDialogTrigger extends React.Component<
     document.addEventListener('keyup', this.handleKeyUp);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     if (typeof document === 'undefined') {
       return;
     }
@@ -197,7 +196,7 @@ export class ShareDialogTrigger extends React.Component<
     });
   };
 
-  handleCloseDialog = ({ isOpen, event }) => {
+  handleCloseDialog = ({ isOpen, event }: { isOpen: boolean; event: any }) => {
     // clear the state when it is an escape press or a succesful submit
     if (event!.type === 'keydown' || event!.type === 'submit') {
       this.clearDialogContentState();
@@ -236,7 +235,7 @@ export class ShareDialogTrigger extends React.Component<
     }
   };
 
-  handleShareSubmit = event => {
+  handleShareSubmit = (event: React.SyntheticEvent) => {
     if (!this.props.onSubmit) {
       return;
     }
@@ -249,17 +248,17 @@ export class ShareDialogTrigger extends React.Component<
     this.setState({ isSharing: true });
 
     this.props.onSubmit!(dialogContentState)
-      .then(res => {
+      .then(() => {
         this.handleCloseDialog({ isOpen: false, event });
         this.setState({ isSharing: false });
       })
-      .catch(err => {
+      .catch((err: Error) => {
         this.handleShareFailure(err);
         this.setState({ isSharing: false });
       });
   };
 
-  handleShareFailure = err => {
+  handleShareFailure = (err: Error) => {
     // TBC: FS-3429 replace send button with retry button
     // will need a prop to pass through the error message to the ShareForm
   };

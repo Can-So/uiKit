@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 import InlineDialog from '@atlaskit/inline-dialog';
+import { createMockEvent } from '../_testUtils';
 import { ShareButton } from '../../../components/ShareButton';
 import { ShareForm } from '../../../components/ShareForm';
 import {
@@ -15,8 +16,7 @@ describe('ShareDialogTrigger', () => {
         <ShareDialogTrigger copyLink="copyLink" />,
       );
       expect(wrapper.find(InlineDialog).length).toBe(1);
-      // TODO: where to get type InlineDialogProps?
-      expect(wrapper.find<any>(InlineDialog).props().isOpen).toBe(false);
+      expect(wrapper.find(InlineDialog).prop('isOpen')).toBe(false);
       expect(wrapper.find(ShareForm).length).toBe(0);
       expect(wrapper.find(ShareButton).length).toBe(1);
     });
@@ -35,19 +35,18 @@ describe('ShareDialogTrigger', () => {
         <ShareDialogTrigger copyLink="copyLink" />,
       );
       let { isDialogOpen } = wrapper.state();
-      // TODO: where to get type InlineDialogProps?
-      let inlineDialogProps = wrapper.find<any>(InlineDialog).props();
-      let shareButtonProps = wrapper.find(ShareButton).props();
       expect(isDialogOpen).toEqual(false);
-      expect(inlineDialogProps.isOpen).toEqual(isDialogOpen);
-      expect(shareButtonProps.isSelected).toEqual(isDialogOpen);
+      expect(wrapper.find(InlineDialog).prop('isOpen')).toEqual(isDialogOpen);
+      expect(wrapper.find(ShareButton).prop('isSelected')).toEqual(
+        isDialogOpen,
+      );
 
       wrapper.setState({ isDialogOpen: !isDialogOpen });
 
-      inlineDialogProps = wrapper.find(InlineDialog).props();
-      shareButtonProps = wrapper.find(ShareButton).props();
-      expect(inlineDialogProps.isOpen).toEqual(!isDialogOpen);
-      expect(shareButtonProps.isSelected).toEqual(!isDialogOpen);
+      expect(wrapper.find(InlineDialog).prop('isOpen')).toEqual(!isDialogOpen);
+      expect(wrapper.find(ShareButton).prop('isSelected')).toEqual(
+        !isDialogOpen,
+      );
     });
 
     it('should render ShareForm if isDialogOpen is true', () => {
@@ -305,10 +304,9 @@ describe('ShareDialogTrigger', () => {
         },
         isStateValidWithCapabilities: true,
       };
-      const mockSubmitEvent = {
+      const mockSubmitEvent = createMockEvent('submit', {
         target: document.createElement('form'),
-        type: 'submit',
-      };
+      });
       const wrapper = shallow<ShareDialogTrigger>(
         <ShareDialogTrigger copyLink="copyLink" onSubmit={mockOnSubmit} />,
       );
@@ -326,10 +324,9 @@ describe('ShareDialogTrigger', () => {
         .fn()
         .mockRejectedValueOnce(new Error('rejected'))
         .mockResolvedValue({});
-      const mockSubmitEvent = {
+      const mockSubmitEvent = createMockEvent('submit', {
         target: document.createElement('form'),
-        type: 'submit',
-      };
+      });
       const wrapper = shallow<ShareDialogTrigger>(
         <ShareDialogTrigger copyLink="copyLink" onSubmit={mockOnSubmit} />,
       );
@@ -352,13 +349,12 @@ describe('ShareDialogTrigger', () => {
 
     it('should call clearDialogContentState if there is an ESC key pressed down or a form submission', async () => {
       const mockOnSubmit = jest.fn().mockResolvedValue({});
-      const mockSubmitEvent = {
+      const mockSubmitEvent = createMockEvent('submit', {
         target: document.createElement('form'),
-        type: 'submit',
-      };
-      const mockEscKeyDownEvent = {
-        type: 'keydown',
-      };
+      });
+      const mockEscKeyDownEvent = createMockEvent('keydown', {
+        key: 'Escape',
+      });
       const wrapper = shallow<ShareDialogTrigger>(
         <ShareDialogTrigger copyLink="copyLink" onSubmit={mockOnSubmit} />,
       );
