@@ -18,7 +18,7 @@ const contextIdentifierProvider = Promise.resolve({
 });
 
 describe('@atlaskit/editor-core/ui/Task', () => {
-  let providerFactory;
+  let providerFactory: ProviderFactory;
 
   beforeEach(() => {
     providerFactory = new ProviderFactory();
