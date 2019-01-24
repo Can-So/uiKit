@@ -1,5 +1,10 @@
 # @atlaskit/global-search
 
+## 5.14.1
+- [patch] [f9e27f2b99](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f9e27f2b99):
+
+  - Modified CPUS response objects to match API correctly
+
 ## 5.14.0
 - [minor] [df2b5b7235](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df2b5b7235):
 
