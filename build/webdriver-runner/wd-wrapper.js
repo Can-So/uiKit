@@ -87,14 +87,12 @@ export default class Page {
 
   async type(selector, text) {
     if (Array.isArray(text)) {
-      while (text.length > 1) {
-        let first = text.shift();
-        await this.browser.addValue(selector, first);
+      for (let t of text) {
+        await this.browser.addValue(selector, t);
       }
-
-      return this.browser.addValue(selector, text[0]);
+    } else {
+      await this.browser.addValue(selector, text);
     }
-    return this.browser.addValue(selector, text);
   }
 
   setValue(selector, text) {

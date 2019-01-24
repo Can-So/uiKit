@@ -34,6 +34,7 @@ export default class Example extends React.Component<any, State> {
           <DevTools />
           <Textarea
             id="adf-input"
+            className="adf-input"
             innerRef={this.handleRef}
             value={this.state.inputValue}
             onChange={this.handleInputChange}
@@ -43,12 +44,14 @@ export default class Example extends React.Component<any, State> {
               <>
                 <button
                   id="import-adf"
+                  className="import-adf"
                   onClick={() => this.handleImport(actions)}
                 >
                   Import ADF
                 </button>
                 <button
                   id="export-adf"
+                  className="export-adf"
                   onClick={() => this.handleExport(actions)}
                 >
                   Export ADF
