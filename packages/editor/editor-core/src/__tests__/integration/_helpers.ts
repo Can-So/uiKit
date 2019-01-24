@@ -1,12 +1,12 @@
+import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
+import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
+import { ToolbarFeatures } from '../../../example-helpers/ToolsDrawer';
+
 /**
  * This function will in browser context. Make sure you call `toJSON` otherwise you will get:
  * unknown error: Maximum call stack size exceeded
  * And, don't get too fancy with it ;)
  */
-import { getExampleUrl } from '@atlaskit/webdriver-runner/utils/example';
-import { messages as insertBlockMessages } from '../../plugins/insert-block/ui/ToolbarInsertBlock';
-import { ToolbarFeatures } from '../../../example-helpers/ToolsDrawer';
-
 export const getDocFromElement = el => el.pmViewDesc.node.toJSON();
 export const editable = '.ProseMirror';
 export const LONG_WAIT_FOR = 5000;
@@ -54,6 +54,12 @@ export const fullpageDisabled = {
   placeholder: '.ProseMirror',
 };
 
+export const fullpageWithImport = {
+  name: 'fullpage-with-import',
+  path: getExampleUrl('editor', 'editor-core', 'full-page-with-adf-import'),
+  placeholder: '.ProseMirror',
+};
+
 export const message = {
   name: 'message',
   path: getExampleUrl('editor', 'editor-core', 'message'),
@@ -68,10 +74,10 @@ export const clipboardHelper = getExampleUrl(
   'clipboard-helper',
 );
 
-export const clipboardInput = '#input';
+export const clipboardInput = 'textarea';
 
-export const copyAsPlaintextButton = '#copy-as-plaintext';
-export const copyAsHTMLButton = '#copy-as-html';
+export const copyAsPlaintextButton = '.copy-as-plaintext';
+export const copyAsHTMLButton = '.copy-as-html';
 
 export const mediaInsertDelay = 1000;
 
@@ -237,4 +243,19 @@ export const quickInsert = async (browser, insertTitle) => {
   );
 
   await browser.click(`[aria-label="Popup"] [role="button"]`);
+};
+
+export const forEach = async (
+  array: Array<any>,
+  cb: (item: any, index: number) => Promise<void>,
+) => {
+  let idx = 0;
+  for (let item of array) {
+    await cb(item, idx++);
+  }
+};
+
+export const insertMenuItem = async (browser, title) => {
+  await browser.waitForSelector(`button span[aria-label="${title}"]`);
+  await browser.click(`button span[aria-label="${title}"]`);
 };

@@ -5,13 +5,13 @@ import { colors } from '@atlaskit/theme';
 
 export const placeholderStyles = css`
   .ProseMirror .placeholder-decoration {
-    position: absolute;
+    position: relative;
+    color: ${colors.N90};
     pointer-events: none;
-    user-select: none;
+    display: block;
 
-    &::before {
-      content: attr(data-text);
-      color: ${colors.N90};
+    > span {
+      position: absolute;
       pointer-events: none;
     }
   }

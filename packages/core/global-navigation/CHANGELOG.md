@@ -1,5 +1,29 @@
 # @atlaskit/global-navigation
 
+## 5.5.3
+- [patch] [4c9a6d2187](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c9a6d2187):
+
+  - Correcting attribute name in analytics event
+
+## 5.5.2
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/avatar@14.1.8
+  - @atlaskit/button@10.1.2
+  - @atlaskit/drawer@2.7.1
+  - @atlaskit/dropdown-menu@6.1.26
+  - @atlaskit/field-radio-group@4.0.15
+  - @atlaskit/modal-dialog@7.2.1
+  - @atlaskit/navigation-next@4.1.2
+  - @atlaskit/section-message@1.0.16
+  - @atlaskit/toggle@5.0.15
+  - @atlaskit/icon@16.0.0
+
+## 5.5.1
+- [patch] [a4b0717](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4b0717):
+
+  - Updated analytics events triggered by the notification-indicator
+
 ## 5.5.0
 - [minor] [52224f1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52224f1):
 

@@ -1,5 +1,15 @@
 # @atlaskit/notification-indicator
 
+## 4.1.2
+- [patch] [4c9a6d2187](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4c9a6d2187):
+
+  - Correcting attribute name in analytics event
+
+## 4.1.1
+- [patch] [a4b0717](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a4b0717):
+
+  - Updated analytics events triggered by the notification-indicator
+
 ## 4.1.0
 - [minor] [9cfee26](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9cfee26):
 

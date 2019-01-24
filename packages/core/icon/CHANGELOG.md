@@ -1,5 +1,17 @@
 # @atlaskit/icon
 
+## 16.0.1
+- [patch] [6b5daa8080](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6b5daa8080):
+
+  - Added the new Status icon
+
+## 16.0.0
+- [major] [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+
+  - Moved the priority icons to its own package
+- Updated dependencies [d0333acfba](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d0333acfba):
+  - @atlaskit/icon-priority@1.0.0
+
 ## 15.0.3
 - [patch] [1d1f6d1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d1f6d1):
 

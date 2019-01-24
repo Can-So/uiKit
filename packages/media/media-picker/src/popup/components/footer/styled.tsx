@@ -4,6 +4,7 @@ import { HTMLAttributes, ComponentClass } from 'react';
 import Button from '@atlaskit/button';
 
 export const Wrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
+  box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
 

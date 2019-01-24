@@ -1,7 +1,9 @@
 import { InlineCardResolvedViewProps } from '@atlaskit/media-ui';
 
-export function extractPropsFromObject(json: any): InlineCardResolvedViewProps {
-  if (!json) {
+export function extractInlineViewPropsFromObject(
+  json: any,
+): InlineCardResolvedViewProps {
+  if (!json || typeof json !== 'object') {
     throw new Error('smart-card: data is not parsable JSON-LD.');
   }
 

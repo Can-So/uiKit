@@ -24,7 +24,6 @@ describe('MainEditorView', () => {
     delete MainEditorView.EditorViewComponent;
     const binaryUploader: any = {};
     const onCloseEditor = jest.fn();
-    const onShowEditorImage = jest.fn();
     const onShowEditorError = jest.fn();
     const onDeselectFile = jest.fn();
     const mainView = shallow(
@@ -32,7 +31,6 @@ describe('MainEditorView', () => {
         binaryUploader={binaryUploader}
         editorData={{}}
         onCloseEditor={onCloseEditor}
-        onShowEditorImage={onShowEditorImage}
         onShowEditorError={onShowEditorError}
         onDeselectFile={onDeselectFile}
         {...props}

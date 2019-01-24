@@ -33,7 +33,7 @@ describe('codeBlock - keymaps', () => {
     });
 
     describe('when enter key is pressed 2 times', () => {
-      it('should exit code block', () => {
+      it('should not exit code block', () => {
         const { editorView } = editor(
           doc(breakout({ mode: 'wide' })(code_block()('codeBlock{<>}'))),
         );
@@ -41,7 +41,7 @@ describe('codeBlock - keymaps', () => {
         sendKeyToPm(editorView, 'Enter');
         sendKeyToPm(editorView, 'Enter');
         expect(editorView.state.doc).toEqualDocument(
-          doc(breakout({ mode: 'wide' })(code_block()('codeBlock')), p('{<>}')),
+          doc(breakout({ mode: 'wide' })(code_block()('codeBlock\n\n'))),
         );
         editorView.destroy();
       });
@@ -58,12 +58,12 @@ describe('codeBlock - keymaps', () => {
         editorView.destroy();
       });
 
-      it('it should exit code block if selection is at the end', () => {
+      it('it should not exit code block if selection is at the end', () => {
         const { editorView } = editor(doc(code_block()('codeBlock\n{<>}')));
 
         sendKeyToPm(editorView, 'Enter');
         expect(editorView.state.doc).toEqualDocument(
-          doc(code_block()('codeBlock'), p('{<>}')),
+          doc(code_block()('codeBlock\n\n')),
         );
         editorView.destroy();
       });

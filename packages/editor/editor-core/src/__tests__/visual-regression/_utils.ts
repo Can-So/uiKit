@@ -18,8 +18,11 @@ export {
   toggleFeature,
 } from '../integration/_helpers';
 
-const DEFAULT_WIDTH = 800;
-const DEFAULT_HEIGHT = 600;
+export const DEFAULT_WIDTH = 800;
+export const DEFAULT_HEIGHT = 600;
+
+const adfInputSelector = '#adf-input';
+const importAdfBtnSelector = '#import-adf';
 
 export const dynamicTextViewportSizes = [
   { width: 1440, height: 3000 },
@@ -78,6 +81,24 @@ export const initEditor = async (page, appearance: string) => {
       .ProseMirror-gapcursor span::after { animation-play-state: paused !important; }
     `,
   });
+};
+
+export const initFullPageEditorWithAdf = async (page, adf: Object) => {
+  const url = getExampleUrl(
+    'editor',
+    'editor-core',
+    'full-page-with-adf-import',
+  );
+  await page.goto(url);
+
+  await page.evaluate(
+    (adfInputSelector, adf) => {
+      document.querySelector(adfInputSelector).value = JSON.stringify(adf);
+    },
+    adfInputSelector,
+    adf,
+  );
+  await page.click(importAdfBtnSelector);
 };
 
 export const clearEditor = async page => {

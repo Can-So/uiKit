@@ -42,7 +42,7 @@ export const focusRing = (
 ) => `
   &:focus {
     outline: none;
-    box-shadow: 0px 0px 0px ${outlineWidth} ${color};
+    box-shadow: 0px 0px 0px ${outlineWidth}px ${color};
   }
 `;
 

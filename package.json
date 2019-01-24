@@ -25,7 +25,9 @@
     "delete:modules": "                      bolt ws exec --parallel -- rm -rf node_modules && rm -rf node_modules",
     "delete:build": "                        bolt ws exec --parallel -- rm -rf dist",
     "precommit": "                           lint-staged",
-    "test": "                                yarn jest",
+    "prepush": "                             ./prepush $HUSKY_GIT_PARAMS <<< $HUSKY_GIT_STDIN",
+    "enable:lfs": "                          node enable-lfs-hooks.js",
+    "test": "                                 yarn jest",
     "test:changed": "                        CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js) COVERAGE_PACKAGES=$(node build/ci-scripts/get.code.threshold.for.changed.packages.since.master.js) yarn jest",
     "test:browser": "                        projector ./projector testBrowser",
     "test:browser:watch": "                  projector ./projector testBrowser --watch",
@@ -36,7 +38,6 @@
     "test:webdriver:browserstack": "         TEST_ENV=browserstack node ./build/webdriver-runner/index.js",
     "test:webdriver:browserstack:changed": " CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js) yarn test:webdriver:browserstack",
     "test:vr": "                             node ./build/visual-regression/index.js",
-    "test:vr:local:watch": "                 WATCH=true RUN_LOCAL_ONLY=true node ./build/visual-regression/index.js",
     "test:vr:changed": "                     CHANGED_PACKAGES=$(node build/ci-scripts/get.changed.packages.since.master.js) yarn test:vr",
     "lint": "                                yarn run lint:eslint && yarn run lint:tslint && yarn run lint:stylelint",
     "lint:stylelint": "                      stylelint '**/*.{js,ts,tsx}'",
@@ -81,7 +82,8 @@
     "build:navigation-next": "               cd packages/core/navigation-next && yarn build",
     "build:bundle-analysis": "               node ./build/ci-scripts/run.bundle.analysis",
     "build:css-reset": "                     BABEL_ENV=production:cjs bolt w @atlaskit/css-reset run build",
-    "build:reduced-ui-pack": "               BABEL_ENV=production:cjs bolt w @atlaskit/reduced-ui-pack run build"
+    "build:reduced-ui-pack": "               BABEL_ENV=production:cjs bolt w @atlaskit/reduced-ui-pack run build",
+    "build:adf-schema:checkuptodate": "      cd packages/editor/adf-schema && yarn run generate:json-schema && git diff --exit-code"
   },
   "bolt": {
     "version": "^0.20.6 || ^0.21.1 || ^0.22.1",
@@ -134,6 +136,7 @@
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^0.28.0",
     "custom-event-polyfill": "^0.3.0",
+    "docker-compose": "^0.9.3",
     "enhanced-resolve": "3.4.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
@@ -159,6 +162,7 @@
     "globby": "^6.1.0",
     "got": "^8.3.1",
     "husky": "^0.14.3",
+    "ip": "^1.1.5",
     "jest": "^23.6.0",
     "jest-emotion": "^9.2.7",
     "jest-image-snapshot": "^2.4.2",
@@ -188,7 +192,7 @@
     "mkdirp": "^0.5.1",
     "mocha": "^3.5.0",
     "moment": "^2.22.2",
-    "netlify-cli": "^2.1.1",
+    "netlify-cli": "^2.6.4",
     "ngrok": "^2.2.24",
     "node-fetch": "^2.2.0",
     "npm-run-all": "^4.1.1",
@@ -211,6 +215,7 @@
     "react-value": "^0.2.0",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
+    "request-promise-native": "^1.0.5",
     "seedrandom": "^2.4.4",
     "sinon": "^2.2.0",
     "spawndamnit": "^1.0.0",
@@ -411,7 +416,7 @@
     "prosemirror-tables": "^0.7.10",
     "prosemirror-transform": "^1.1.3",
     "prosemirror-utils": "^0.7.5",
-    "prosemirror-view": "^1.6.7",
+    "prosemirror-view": "^1.6.8",
     "pubnub": "^4.20.3",
     "puppeteer": "^1.10.0",
     "query-string": "^4.3.2",
@@ -500,7 +505,7 @@
     "**/expand-range/fill-range": "2.2.3"
   },
   "engines": {
-    "node": "^8.9.0"
+    "node": "^8.15.0"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [

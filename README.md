@@ -95,6 +95,11 @@ Next, to install packages, we use bolt, just calling it:
 ```sh
 bolt
 ```
+Since this is a git-lfs repo, turn on lfs hooks for code push by just running: 
+
+```sh
+yarn enable:lfs
+```
 
 Then you can run the examples with `yarn start`. Check `package.json` for more commands to start specific package examples.
 

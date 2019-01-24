@@ -36,6 +36,7 @@ export interface State {
   color: Color;
   text: string;
   localId?: string;
+  isNew?: boolean;
 }
 
 const PickerContainer = styled.div`
@@ -45,7 +46,7 @@ const PickerContainer = styled.div`
   ${dropShadow};
 `;
 
-class StatusPicker extends React.Component<Props, State> {
+export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
   private startTime: number;
   private inputMethod: InputMethod;
   private createStatusAnalyticsAndFireFunc: Function;
@@ -63,11 +64,9 @@ class StatusPicker extends React.Component<Props, State> {
     );
   }
 
-  componentDidMount() {
-    const { color, text, localId } = this.state;
-
+  private fireStatusPopupOpenedAnalytics(state) {
+    const { color, text, localId, isNew } = state;
     this.startTime = Date.now();
-    this.inputMethod = InputMethod.blur;
 
     this.createStatusAnalyticsAndFireFunc({
       action: 'opened',
@@ -76,28 +75,39 @@ class StatusPicker extends React.Component<Props, State> {
         textLength: text ? text.length : 0,
         selectedColor: color,
         localId,
-        state: analyticsState(this.props.isNew),
+        state: analyticsState(isNew),
       },
     });
   }
 
-  componentWillUnmount() {
-    const { color, text, localId } = this.state;
-    const inputMethod = this.inputMethod;
-
+  private fireStatusPopupClosedAnalytics(state) {
+    const { color, text, localId, isNew } = state;
     this.createStatusAnalyticsAndFireFunc({
       action: 'closed',
       actionSubject: 'statusPopup',
       attributes: {
-        inputMethod,
+        inputMethod: this.inputMethod,
         duration: Date.now() - this.startTime,
         textLength: text ? text.length : 0,
         selectedColor: color,
         localId,
-        state: analyticsState(this.props.isNew),
+        state: analyticsState(isNew),
       },
     });
+  }
 
+  private reset() {
+    this.startTime = Date.now();
+    this.inputMethod = InputMethod.blur;
+  }
+
+  componentDidMount() {
+    this.reset();
+    this.fireStatusPopupOpenedAnalytics(this.state);
+  }
+
+  componentWillUnmount() {
+    this.fireStatusPopupClosedAnalytics(this.state);
     this.startTime = 0;
   }
 
@@ -107,22 +117,31 @@ class StatusPicker extends React.Component<Props, State> {
     snapshot?: any,
   ): void {
     const element = this.props.target;
+
     if (prevProps.target !== element) {
-      this.setState(this.extractStateFromProps(this.props));
+      const newState = this.extractStateFromProps(this.props);
+      this.setState(newState);
+
+      this.fireStatusPopupClosedAnalytics(prevState);
+      this.reset();
+      this.fireStatusPopupOpenedAnalytics(newState);
     }
   }
 
   private extractStateFromProps(props: Props): State {
-    let state = {} as State;
-    const { defaultColor, defaultText, defaultLocalId } = props;
-    state.color = defaultColor || DEFAULT_STATUS.color;
-    state.text = defaultText || DEFAULT_STATUS.text;
-    state.localId = defaultLocalId;
-
-    return state;
+    const { defaultColor, defaultText, defaultLocalId, isNew } = props;
+    return {
+      color: defaultColor || DEFAULT_STATUS.color,
+      text: defaultText || DEFAULT_STATUS.text,
+      localId: defaultLocalId,
+      isNew,
+    } as State;
   }
 
-  private handleCloseStatusPicker = (inputMethod: InputMethod) => () => {
+  private handleCloseStatusPicker = (inputMethod: InputMethod) => (
+    event: Event,
+  ) => {
+    event.preventDefault();
     this.inputMethod = inputMethod;
     this.props.closeStatusPicker();
   };
@@ -222,4 +241,4 @@ class StatusPicker extends React.Component<Props, State> {
     event.nativeEvent.stopImmediatePropagation();
 }
 
-export default withAnalyticsEvents()(StatusPicker);
+export default withAnalyticsEvents()(StatusPickerWithoutAnalytcs);

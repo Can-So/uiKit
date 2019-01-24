@@ -21,13 +21,6 @@ async function takeElementScreenShot(page /*:any*/, selector /*:string*/) {
   return element.screenshot();
 }
 
-//function to check if image snapshot dir exists and delete it
-function removeOldProdSnapshots(snapshotDir /*: string */) {
-  if (process.env.PROD === 'true' && fs.existsSync(snapshotDir)) {
-    fs.removeSync(snapshotDir);
-  }
-}
-
 // get all examples from the code sync
 function getAllExamplesSync() /*: Array<Object> */ {
   return glob
@@ -52,18 +45,16 @@ function getExamplesFor(pkgName /*: string */) /*: Array<Object> */ {
 }
 
 // construct example urls for a given example
-const baseUrl = 'http://localhost:9000';
 const getExampleUrl = (
   group: string,
   packageName: string,
   exampleName: string = '',
-  environment: string = baseUrl,
+  environment: string = global.__BASEURL__,
 ) =>
   `${environment}/examples.html?groupId=${group}&packageId=${packageName}&exampleId=${exampleName}`;
 
 module.exports = {
   getExamplesFor,
-  removeOldProdSnapshots,
   takeScreenShot,
   takeElementScreenShot,
   getExampleUrl,

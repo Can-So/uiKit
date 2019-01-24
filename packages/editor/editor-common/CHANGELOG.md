@@ -1,5 +1,45 @@
 # @atlaskit/editor-common
 
+## 30.0.2
+- [patch] [bfe22480d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfe22480d0):
+
+  - ED-6056: fix zero width columns in renderer for migration tables
+
+## 30.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/editor-test-helpers@6.3.13
+  - @atlaskit/emoji@53.0.1
+  - @atlaskit/mention@16.0.1
+  - @atlaskit/media-card@51.0.1
+  - @atlaskit/profilecard@6.1.5
+  - @atlaskit/icon@16.0.0
+
+## 30.0.0
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/emoji@53.0.0
+  - @atlaskit/media-card@51.0.0
+  - @atlaskit/editor-json-transformer@4.1.7
+  - @atlaskit/editor-test-helpers@6.3.12
+  - @atlaskit/media-core@26.2.0
+
+## 29.0.0
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+  - @atlaskit/emoji@52.0.0
+  - @atlaskit/media-card@50.0.0
+  - @atlaskit/editor-json-transformer@4.1.6
+  - @atlaskit/editor-test-helpers@6.3.11
+  - @atlaskit/media-core@26.1.0
+
+## 28.1.0
+- [minor] [be6313e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be6313e):
+
+  - ED-5477 Support rendering of inline code together with other marks
+
+## 28.0.4
+- [patch] [060f2da](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/060f2da):
+
+  - ED-5991: bumped prosemirror-view to 1.6.8
+
 ## 28.0.3
 - [patch] [61ce3c5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/61ce3c5):
 

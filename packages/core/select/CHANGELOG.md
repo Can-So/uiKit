@@ -1,5 +1,20 @@
 # @atlaskit/select
 
+## 6.1.19
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/checkbox@5.0.11
+  - @atlaskit/form@5.1.2
+  - @atlaskit/modal-dialog@7.2.1
+  - @atlaskit/tooltip@12.1.15
+  - @atlaskit/icon@16.0.0
+
+## 6.1.18
+- [patch] [6148c6c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6148c6c):
+
+  - AK-5693 apply styles to loading indicator
+
 ## 6.1.17
 - [patch] [e9ccac7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e9ccac7):
 

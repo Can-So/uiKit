@@ -1,5 +1,6 @@
 export default {
   plugins: [
+    'compositionPlugin',
     'inlineCursorTargetPlugin',
     'focusHandlerPlugin',
     'submitEditor',
@@ -143,5 +144,6 @@ export default {
     'alignment',
     'breakout',
     'indentation',
+    'annotation',
   ],
 };

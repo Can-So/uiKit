@@ -178,18 +178,18 @@ export default class CrossProductSearchClientImpl
 }
 
 function mapPersonItemToResult(item: PersonItem): PersonResult {
-  const mention = item.nickName || item.displayName;
+  const mention = item.nickname || item.name;
 
   return {
     resultType: ResultType.PersonResult,
-    resultId: 'people-' + item.userId,
-    name: item.displayName,
-    href: '/people/' + item.userId,
-    avatarUrl: item.primaryPhoto,
+    resultId: 'people-' + item.account_id,
+    name: item.name,
+    href: '/people/' + item.account_id,
+    avatarUrl: item.picture,
     contentType: ContentType.Person,
     analyticsType: AnalyticsType.ResultPerson,
     mentionName: mention,
-    presenceMessage: item.title || '',
+    presenceMessage: item.job_title || '',
   };
 }
 

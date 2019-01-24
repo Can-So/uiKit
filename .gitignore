@@ -10,7 +10,7 @@ coverage/
 junit.xml
 test-reports/
 browserstack.err
-**/__image_snapshots__/
+**/__image_snapshots__/__diff_output__/
 .measure-output/
 
 # created by build-stats tool

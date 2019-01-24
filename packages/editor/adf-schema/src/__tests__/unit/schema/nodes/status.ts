@@ -2,6 +2,8 @@ import { name } from '../../../../../package.json';
 import { schema, toDOM, fromHTML } from '../../../../../test-helpers';
 import { status } from '../../../../../src';
 
+const localIdRegex = /[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}/;
+
 describe(`${name}/schema status node`, () => {
   describe('parse html', () => {
     it('converts to status PM node', () => {
@@ -28,10 +30,14 @@ describe(`${name}/schema status node`, () => {
         schema,
       );
       const node = doc.firstChild!.firstChild!;
-      expect(node.attrs.color).toEqual(color);
-      expect(node.attrs.localId).toEqual(localId);
-      expect(node.attrs.text).toEqual('In progress');
-      expect(node.attrs.style).toEqual(style);
+      expect(node.attrs).toMatchObject({
+        text: 'In progress',
+        color,
+        localId: expect.stringMatching(localIdRegex),
+        style,
+      });
+
+      expect(node.attrs.localId).not.toEqual(localId);
     });
 
     it('gets attributes from html without optional ones', () => {
@@ -48,12 +54,13 @@ describe(`${name}/schema status node`, () => {
         schema,
       );
       const node = doc.firstChild!.firstChild!;
-      expect(node.attrs.color).toEqual(color);
-      expect(node.attrs.text).toEqual('In progress');
-      expect(node.attrs.style).toEqual(null);
-      expect(node.attrs.localId).toHaveLength(
-        '7f4189c0-89f2-4f0e-a439-3fa9e57934fa'.length,
-      ); // random UUID, just match the length
+
+      expect(node.attrs).toMatchObject({
+        text: 'In progress',
+        color,
+        localId: expect.stringMatching(localIdRegex),
+        style: null,
+      });
     });
   });
 
@@ -85,7 +92,15 @@ describe(`${name}/schema status node`, () => {
       const dom = toDOM(node, schema).firstChild as HTMLElement;
       const parsedNode = fromHTML(dom.outerHTML, schema).firstChild!
         .firstChild!;
-      expect(parsedNode).toEqual(node);
+
+      expect(parsedNode.attrs).toMatchObject({
+        text: 'In progress',
+        color: 'blue',
+        localId: expect.stringMatching(localIdRegex),
+        style: 'bold',
+      });
+
+      expect(parsedNode.attrs.localId).not.toEqual(attrs.localId);
     });
 
     it('converts html status attributes to node attributes without style', () => {

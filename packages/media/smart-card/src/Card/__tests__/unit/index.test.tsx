@@ -24,6 +24,8 @@ import {
 } from '@atlaskit/media-ui';
 import { ClientConfig } from '../../../Client';
 import Button from '@atlaskit/button';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
+import { resolvedEvent } from '../../../analytics';
 
 function createClient(
   consequentStates?: ObjectState[],
@@ -48,9 +50,54 @@ describe('Card', () => {
   // tslint:disable-next-line:no-console
   console.error = jest.fn();
 
+  describe('analytics', () => {
+    it('should fire the resolved analytics event when the url was resolved', done => {
+      class CustomClient extends Client {
+        fetchData() {
+          return Promise.resolve({
+            meta: {
+              visibility: 'public',
+              access: 'granted',
+              auth: [],
+              definitionId: 'd1',
+            },
+            data: {},
+          } as ResolveResponse);
+        }
+      }
+      const customClient = new CustomClient();
+      const url = 'some.url';
+      const expectedPayload = resolvedEvent(url);
+      const logger = jest.fn().mockImplementation(arg => {
+        expect(arg.payload).toEqual(expectedPayload);
+        done();
+      });
+      mount(
+        <AnalyticsListener onEvent={logger}>
+          <Card appearance="inline" client={customClient} url={url} />
+        </AnalyticsListener>,
+      );
+    });
+  });
+
   describe('Client.config.loadingStateDelay', () => {
     it('should render the link placeholder for the initial state', () => {
-      const client = createClient();
+      class CustomClient extends Client {
+        fetchData() {
+          return new Promise<ResolveResponse>(resolve =>
+            setTimeout(resolve, 1, {
+              meta: {
+                visibility: 'public',
+                access: 'granted',
+                auth: [],
+                definitionId: 'd1',
+              },
+              data: {},
+            } as ResolveResponse),
+          );
+        }
+      }
+      const client = new CustomClient();
       const url = 'https://www.atlassian.com/';
       const wrapper = mount(
         <Card appearance="block" client={client} url={url} />,

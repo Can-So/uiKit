@@ -37,7 +37,7 @@ export const VolumeWrapper = styled.div`
 
   &:hover,
   &:active {
-    width: 159px;
+    width: 155px;
     transition: width 0.3s ease-out;
   }
 `;

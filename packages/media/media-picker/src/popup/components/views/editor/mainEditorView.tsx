@@ -7,18 +7,17 @@ import { BinaryUploader } from '../../../../components/binary';
 import { State, EditorData, EditorError, FileReference } from '../../../domain';
 import ErrorView from './errorView/errorView';
 import { SpinnerView } from './spinnerView/spinnerView';
-import { MainContainer } from './styles';
 import { Selection, editorClose } from '../../../actions/editorClose';
 import { editorShowError } from '../../../actions/editorShowError';
-import { editorShowImage } from '../../../actions/editorShowImage';
-import { EditorViewOwnProps } from './editorView/editorView';
+import { EditorViewProps } from '@atlaskit/media-editor';
 import editorViewLoader from './editorViewLoader';
+import { CenterView } from './styles';
 export interface MainEditorViewStateProps {
   readonly editorData?: EditorData;
 }
 
 export interface MainEditorViewState {
-  EditorViewComponent?: ComponentClass<EditorViewOwnProps>;
+  EditorViewComponent?: ComponentClass<EditorViewProps>;
 }
 
 export interface MainEditorViewOwnProps {
@@ -28,10 +27,6 @@ export interface MainEditorViewOwnProps {
 export interface MainEditorViewDispatchProps {
   readonly onCloseEditor: (selection: Selection) => void;
   readonly onShowEditorError: (error: EditorError) => void;
-  readonly onShowEditorImage: (
-    imageUrl: string,
-    originalFile?: FileReference,
-  ) => void;
   readonly onDeselectFile: (fileId: string) => void;
 }
 
@@ -43,7 +38,7 @@ export class MainEditorView extends Component<
   MainEditorViewProps,
   MainEditorViewState
 > {
-  static EditorViewComponent: ComponentClass<EditorViewOwnProps>;
+  static EditorViewComponent: ComponentClass<EditorViewProps>;
 
   state: MainEditorViewState = {
     EditorViewComponent: MainEditorView.EditorViewComponent,
@@ -74,7 +69,7 @@ export class MainEditorView extends Component<
   render(): JSX.Element | null {
     const { editorData } = this.props;
     if (editorData) {
-      return <MainContainer>{this.renderContent(editorData)}</MainContainer>;
+      return this.renderContent(editorData);
     } else {
       return null;
     }
@@ -88,11 +83,14 @@ export class MainEditorView extends Component<
       return this.renderError(error);
     } else if (imageUrl && originalFile && EditorViewComponent) {
       return (
-        <EditorViewComponent
-          onSave={this.onEditorSave(originalFile)}
-          onCancel={this.onCancel}
-          onError={this.onEditorError}
-        />
+        <CenterView>
+          <EditorViewComponent
+            imageUrl={imageUrl}
+            onSave={this.onEditorSave(originalFile)}
+            onCancel={this.onCancel}
+            onError={this.onEditorError}
+          />
+        </CenterView>
       );
     } else {
       return <SpinnerView onCancel={this.onCancel} />;
@@ -139,8 +137,6 @@ export default connect<
 >(
   ({ editorData }) => ({ editorData }),
   dispatch => ({
-    onShowEditorImage: (imageUrl, originalFile) =>
-      dispatch(editorShowImage(imageUrl, originalFile)),
     onShowEditorError: ({ message, retryHandler }) =>
       dispatch(editorShowError(message, retryHandler)),
     onCloseEditor: (selection: Selection) => dispatch(editorClose(selection)),

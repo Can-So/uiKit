@@ -12,10 +12,6 @@ export const mediaStyles = css`
       transform: translateX(-50%);
     }
 
-    .media-single.is-loading {
-      min-height: 20px;
-    }
-
     & [layout^='wrap-'] + [layout^='wrap-'] {
       clear: none;
       & + p,

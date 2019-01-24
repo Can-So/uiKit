@@ -52,6 +52,7 @@ export const DropzoneContentWrapper: ComponentClass<
 export const DropzoneContainer: ComponentClass<
   HTMLAttributes<{}> & IsEmptyProps
 > = styled.div`
+  box-sizing: border-box;
   border: 2px dashed #cfd4db;
   border-image-source: url('${borderIcon}');
   border-image-slice: 2;
@@ -86,6 +87,7 @@ export const CardWrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
 `;
 
 export const Wrapper: ComponentClass<HTMLAttributes<{}>> = styled.div`
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   background-color: white;

@@ -1,5 +1,47 @@
 # @atlaskit/smart-card
 
+## 9.6.1
+- [patch] [bef9abc8de](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bef9abc8de):
+
+  - added background colour to inline card views, fixed icon alignment.
+
+## 9.6.0
+- [minor] [27b12fdfc6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/27b12fdfc6):
+
+  - added support for rendering of icons in Jira links
+
+## 9.5.0
+- [minor] [d664fc3d49](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d664fc3d49):
+
+  - added support for rendering of icons with Confluence links
+
+## 9.4.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/checkbox@5.0.11
+  - @atlaskit/form@5.1.2
+  - @atlaskit/inline-message@7.0.11
+  - @atlaskit/radio@0.4.6
+  - @atlaskit/media-ui@8.2.5
+  - @atlaskit/icon@16.0.0
+
+## 9.4.0
+- [minor] [8ff07c1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8ff07c1):
+
+  - Analytics, first attempt, validate the idea
+- [minor] [7777442](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7777442):
+
+  - More analytics for smart links
+- [minor] [7302ea6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7302ea6):
+
+  - Analytics for smart cards
+
+## 9.3.0
+- [minor] [150626e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/150626e):
+
+  - add support for source code repository urls (currently Bitbucket and Github) in smart-cards.
+
 ## 9.2.2
 - Updated dependencies [647a46f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/647a46f):
   - @atlaskit/radio@0.4.5

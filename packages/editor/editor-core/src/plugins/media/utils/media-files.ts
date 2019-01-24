@@ -9,7 +9,7 @@ import {
   startPositionOfParent,
   setNodeSelection,
   setTextSelection,
-  isTableCell,
+  insideTableCell,
   isInListItem,
 } from '../../../utils';
 import { MediaState } from '../types';
@@ -48,6 +48,7 @@ export const insertMediaGroupNode = (
   const mediaInsertPos = findMediaInsertPos(state);
   const resolvedInsertPos = tr.doc.resolve(mediaInsertPos);
   const parent = resolvedInsertPos.parent;
+  const nodeAtInsertionPoint = tr.doc.nodeAt(mediaInsertPos);
   const grandParent = state.selection.$from.node(-1);
   const selectionParent = state.selection.$anchor.node();
 
@@ -61,14 +62,18 @@ export const insertMediaGroupNode = (
       ),
     );
 
+  const wasMediaNode =
+    nodeAtInsertionPoint && nodeAtInsertionPoint.type === media;
+
   // insert a paragraph after if reach the end of doc
   // and there is no media group in the front or selection is a non media block node
   const shouldAppendParagraph =
-    isTableCell(state) ||
-    isInListItem(state) ||
-    (atTheEndOfDoc(state) &&
-      (!posOfPrecedingMediaGroup(state) ||
-        isSelectionNonMediaBlockNode(state)));
+    (insideTableCell(state) ||
+      isInListItem(state) ||
+      (atTheEndOfDoc(state) &&
+        (!posOfPrecedingMediaGroup(state) ||
+          isSelectionNonMediaBlockNode(state)))) &&
+    !wasMediaNode;
 
   if (shouldSplit) {
     const content: PMNode[] = shouldAppendParagraph
