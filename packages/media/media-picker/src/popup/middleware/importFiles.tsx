@@ -42,7 +42,7 @@ export const isRemoteService = (serviceName: ServiceName) => {
   return ['dropbox', 'google', 'giphy'].indexOf(serviceName) !== -1;
 };
 
-type SelectedUploadFile = {
+export type SelectedUploadFile = {
   readonly file: MediaFile;
   readonly serviceName: ServiceName;
   readonly touchFileDescriptor: TouchFileDescriptor;
@@ -118,6 +118,7 @@ export const touchSelectedFiles = (
           const selectedGiphy = giphy.imageCardModels.find(
             cardModel => cardModel.metadata.id === file.id,
           );
+
           if (selectedGiphy) {
             preview = {
               blob: selectedGiphy.dataURI,

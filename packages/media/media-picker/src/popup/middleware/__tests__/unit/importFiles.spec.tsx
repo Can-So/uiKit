@@ -8,6 +8,8 @@ import {
   importFilesMiddleware,
   isRemoteService,
   importFiles,
+  touchSelectedFiles,
+  SelectedUploadFile,
 } from '../../importFiles';
 import { LocalUpload, LocalUploads } from '../../../domain';
 import { RECENTS_COLLECTION } from '../../../config';
@@ -35,6 +37,8 @@ import {
   SendUploadEventActionPayload,
 } from '../../../actions/sendUploadEvent';
 import { SCALE_FACTOR_DEFAULT } from '../../../../util/getPreviewFromImage';
+import { fileStreamsCache, FileState } from '@atlaskit/media-core';
+import { ReplaySubject, Observable } from 'rxjs';
 
 describe('importFiles middleware', () => {
   const expectUUID = expect.stringMatching(/[a-f0-9\-]+/);
@@ -521,6 +525,128 @@ describe('importFiles middleware', () => {
 
     it('should return false for service name other than "dropbox" or "google"', () => {
       expect(isRemoteService('recent_files')).toEqual(false);
+    });
+  });
+
+  describe('touchSelectedFiles()', () => {
+    const file: MediaFile = {
+      id: 'id-1',
+      creationDate: 1,
+      name: '',
+      size: 1,
+      type: 'image/png',
+      upfrontId: Promise.resolve(''),
+    };
+    it('should add file preview for Giphy files', done => {
+      const selectedFiles: SelectedUploadFile[] = [
+        {
+          file,
+          serviceName: 'giphy',
+          touchFileDescriptor: {
+            fileId: 'id-1',
+          },
+        },
+      ];
+      const store = mockStore({
+        giphy: {
+          imageCardModels: [
+            {
+              dataURI: 'giphy-preview-1',
+              dimensions: { height: 1, width: 1 },
+              metadata: {
+                id: 'id-1',
+              },
+            },
+            {
+              dataURI: 'giphy-preview-2',
+              dimensions: { height: 1, width: 1 },
+              metadata: {
+                id: 'id-2',
+              },
+            },
+          ],
+        },
+      });
+      touchSelectedFiles(selectedFiles, store);
+      const observable = fileStreamsCache.get('id-1');
+
+      observable!.subscribe({
+        next(state) {
+          if (state.status !== 'error') {
+            expect(state.preview).toEqual({
+              blob: 'giphy-preview-1',
+            });
+            done();
+          }
+        },
+      });
+    });
+
+    it('should add file preview for local uploads', done => {
+      const subject = new ReplaySubject<Partial<FileState>>(1);
+      subject.next({
+        id: 'id-1',
+        status: 'processing',
+        preview: {
+          blob: 'some-local-preview',
+        },
+      });
+      fileStreamsCache.set('id-1', subject as Observable<FileState>);
+      const selectedFiles: SelectedUploadFile[] = [
+        {
+          file,
+          serviceName: 'upload',
+          touchFileDescriptor: {
+            fileId: 'id-1',
+          },
+        },
+      ];
+      const store = mockStore();
+      touchSelectedFiles(selectedFiles, store);
+      const observable = fileStreamsCache.get('id-1');
+
+      observable!.subscribe({
+        async next(state) {
+          if (state.status !== 'error') {
+            expect(await state.preview).toEqual({
+              blob: 'some-local-preview',
+            });
+            done();
+          }
+        },
+      });
+    });
+
+    it('should fetch remote preview for recent files if image is previewable', done => {
+      const selectedFiles: SelectedUploadFile[] = [
+        {
+          file,
+          serviceName: 'recent_files',
+          touchFileDescriptor: {
+            fileId: 'id-1',
+          },
+        },
+      ];
+      const store = mockStore();
+      touchSelectedFiles(selectedFiles, store);
+      const observable = fileStreamsCache.get('id-1');
+
+      observable!.subscribe({
+        async next(state) {
+          if (state.status !== 'error') {
+            await state.preview;
+            const { userContext } = store.getState();
+            expect(userContext.getImage).toBeCalledTimes(1);
+            expect(userContext.getImage).toBeCalledWith('id-1', {
+              collection: RECENTS_COLLECTION,
+              width: 1920,
+              height: 1080,
+              mode: 'fit',
+            });
+            done();
+          }
+        },
+      });
     });
   });
 });
