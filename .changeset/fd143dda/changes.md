@@ -1,1 +1,0 @@
-- FS-3521 support normal multi appearance
