@@ -1,7 +1,14 @@
 import * as uuid from 'uuid/v4';
 import { Store, Dispatch, Middleware } from 'redux';
-import { TouchFileDescriptor, isPreviewableType } from '@atlaskit/media-store';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import {
+  TouchFileDescriptor,
+  FileState,
+  fileStreamsCache,
+  getMediaTypeFromMimeType,
+  FilePreview,
+  isPreviewableType,
+} from '@atlaskit/media-core';
 import { State, SelectedItem, LocalUpload, ServiceName } from '../domain';
 import { isStartImportAction } from '../actions/startImport';
 import { finalizeUpload } from '../actions/finalizeUpload';
@@ -20,13 +27,6 @@ import { sendUploadEvent } from '../actions/sendUploadEvent';
 import { setUpfrontIdDeferred } from '../actions/setUpfrontIdDeferred';
 import { WsNotifyMetadata } from '../tools/websocket/wsMessageData';
 import { getPreviewFromMetadata } from '../../domain/preview';
-
-import {
-  FileState,
-  fileStreamsCache,
-  getMediaTypeFromMimeType,
-  FilePreview,
-} from '@atlaskit/media-core';
 export interface RemoteFileItem extends SelectedItem {
   accountId: string;
   publicId: string;

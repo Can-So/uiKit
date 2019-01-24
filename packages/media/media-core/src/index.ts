@@ -15,6 +15,7 @@ export {
   UploadController,
   MediaType,
   isPreviewableType,
+  TouchFileDescriptor,
 } from '@atlaskit/media-store';
 export { FileFetcher } from './file';
 export * from './context/context';

@@ -1,5 +1,3 @@
-import { MediaType } from '@atlaskit/media-core';
-
 export type Identifier =
   | UrlPreviewIdentifier
   | LinkIdentifier
