@@ -43,7 +43,7 @@ const defaultState: DefaultState = {
     isUploading: false,
     isCancelling: false,
   },
-  accounts: [],
+  accounts: Promise.resolve([]),
   selectedItems: [],
   isUploading: false,
   isCancelling: false,

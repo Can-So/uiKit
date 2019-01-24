@@ -9,6 +9,7 @@ import {
 import { readImageMetaTags } from './metatags';
 
 import { loadImage } from '../util';
+import { isRotated } from './imageOrientationUtil';
 
 const { Orientation, XResolution } = SupportedImageMetaTag;
 
@@ -68,8 +69,7 @@ export function getScaleFactor(
   }
 }
 
-export async function getOrientation(file: File): Promise<number> {
-  const tags = await readImageMetaTags(file);
+const getOrientationFromTags = (tags: ImageMetaDataTags | null) => {
   if (tags && tags[Orientation]) {
     const tagValue = tags[Orientation];
     if (tagValue) {
@@ -81,6 +81,11 @@ export async function getOrientation(file: File): Promise<number> {
     }
   }
   return 1;
+};
+
+export async function getOrientation(file: File): Promise<number> {
+  const tags = await readImageMetaTags(file);
+  return getOrientationFromTags(tags);
 }
 
 export function getMetaTagNumericValue(
@@ -139,13 +144,17 @@ export async function readImageMetaData(
     width = naturalWidth;
     height = naturalHeight;
   }
+  const orientation = getOrientationFromTags(tags);
+  const isImageRotated = isRotated(orientation);
+
   const data: ImageMetaData = {
     type,
-    width,
-    height,
+    width: isImageRotated ? height : width,
+    height: isImageRotated ? width : height,
     tags,
   };
+
   return data;
 }
 
-export * from './getCssFromImageOrientation';
+export * from './imageOrientationUtil';

@@ -74,10 +74,10 @@ export const clipboardHelper = getExampleUrl(
   'clipboard-helper',
 );
 
-export const clipboardInput = '#input';
+export const clipboardInput = 'textarea';
 
-export const copyAsPlaintextButton = '#copy-as-plaintext';
-export const copyAsHTMLButton = '#copy-as-html';
+export const copyAsPlaintextButton = '.copy-as-plaintext';
+export const copyAsHTMLButton = '.copy-as-html';
 
 export const mediaInsertDelay = 1000;
 
@@ -243,4 +243,19 @@ export const quickInsert = async (browser, insertTitle) => {
   );
 
   await browser.click(`[aria-label="Popup"] [role="button"]`);
+};
+
+export const forEach = async (
+  array: Array<any>,
+  cb: (item: any, index: number) => Promise<void>,
+) => {
+  let idx = 0;
+  for (let item of array) {
+    await cb(item, idx++);
+  }
+};
+
+export const insertMenuItem = async (browser, title) => {
+  await browser.waitForSelector(`button span[aria-label="${title}"]`);
+  await browser.click(`button span[aria-label="${title}"]`);
 };

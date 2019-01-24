@@ -6,10 +6,9 @@ import {
   fullpage,
   editable,
   clipboardHelper,
+  clipboardInput,
+  copyAsHTMLButton,
 } from '../_helpers';
-
-const clipboardInput = '#input';
-const copyAsHTMLButton = '#copy-as-html';
 
 // broken on firefox - https://product-fabric.atlassian.net/browse/ED-4337
 [comment, fullpage].forEach(editor => {

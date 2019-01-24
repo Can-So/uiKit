@@ -304,14 +304,17 @@ class ExampleNav extends Component<void, State> {
             onCreateDrawerOpen={this.openCreateDrawer}
             drawers={[
               <SearchDrawer
+                key="searchDrawer"
                 drawerIsOpen={openDrawer === 'searchDrawer'}
                 closeDrawer={this.closeDrawer}
               />,
               <CreateDrawer
+                key="createDrawer"
                 drawerIsOpen={openDrawer === 'createDrawer'}
                 closeDrawer={this.closeDrawer}
               />,
               <CustomDrawer
+                key="customDrawer"
                 drawerIsOpen={openDrawer === 'customDrawer'}
                 closeDrawer={this.closeDrawer}
               />,

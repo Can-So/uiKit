@@ -3,7 +3,6 @@ import { uuid } from '../../utils/uuid';
 
 /**
  * @name status_node
- * @stage 0
  */
 export interface StatusDefinition {
   type: 'status';
@@ -39,7 +38,7 @@ export const status: NodeSpec = {
         return {
           text: dom.textContent!.replace(/\n/, '').trim(),
           color: dom.getAttribute('data-color'),
-          localId: dom.getAttribute('data-local-id') || uuid.generate(),
+          localId: uuid.generate(),
           style: dom.getAttribute('data-style'),
         };
       },

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 import { IconAndTitleLayout } from '../../index';
-import { IconWrapper, OtherWrapper } from '../../styled';
+import { OtherWrapper } from '../../styled';
+import { Icon } from '../../../Icon';
 
 describe('IconAndTitleLayout', () => {
   it('should render the text', () => {
@@ -13,13 +14,16 @@ describe('IconAndTitleLayout', () => {
     const element = mount(
       <IconAndTitleLayout icon="some-link-to-icon" title="some text content" />,
     );
-    expect(element.find(IconWrapper)).toHaveLength(1);
-    expect(element.find(IconWrapper).text()).toEqual('some-link-to-icon');
+    const elementIcon = element.find(Icon);
+    expect(elementIcon).toHaveLength(1);
+    const elementIconImage = elementIcon.find('img');
+    expect(elementIconImage).toHaveLength(1);
+    expect(elementIconImage.prop('src')).toEqual('some-link-to-icon');
   });
 
   it('should not render an icon when it is not provided', () => {
     const element = shallow(<IconAndTitleLayout title="some text content" />);
-    expect(element.find(IconWrapper)).toHaveLength(0);
+    expect(element.find(Icon)).toHaveLength(0);
   });
 
   it('should render children when it is provided', () => {
