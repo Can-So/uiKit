@@ -85,6 +85,7 @@ export interface FileFetcher {
     name?: string,
     collectionName?: string,
   ): Promise<void>;
+  getCurrentState(id: string): Promise<FileState>;
 }
 
 export class FileFetcherImpl implements FileFetcher {
@@ -155,6 +156,10 @@ export class FileFetcherImpl implements FileFetcher {
 
       return fileStream$;
     });
+  }
+
+  getCurrentState(id: string): Promise<FileState> {
+    return fileStreamsCache.getCurrentState(id);
   }
 
   public getArtifactURL(

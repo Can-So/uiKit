@@ -80,7 +80,7 @@ function createSingleQuotesRules(trackingEventName): Array<InputRule> {
     ),
 
     // apostrophe
-    createReplacementRule('’', /(\w)(')(\w)$/, trackingEventName),
+    createReplacementRule('’', /(\w+)(')(\w+)$/, trackingEventName),
   ];
 }
 

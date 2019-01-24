@@ -13,7 +13,14 @@ import {
   optionToSelectableOption,
   optionToSelectableOptions,
 } from '../../../components/utils';
-import { Option, User, UserPickerProps, UserType } from '../../../types';
+import {
+  Option,
+  User,
+  OptionData,
+  UserPickerProps,
+  UserType,
+  Team,
+} from '../../../types';
 
 describe('UserPicker', () => {
   const shallowUserPicker = (props: Partial<UserPickerProps> = {}) =>
@@ -40,7 +47,7 @@ describe('UserPicker', () => {
     const component = shallowUserPicker({ options });
     const select = component.find(Select);
     expect(select.prop('options')).toEqual(userOptions);
-    expect(getStyles).toHaveBeenCalledWith(350);
+    expect(getStyles).toHaveBeenCalledWith(350, 'normal');
     expect(select.prop('menuPlacement')).toBeTruthy();
   });
 
@@ -53,7 +60,13 @@ describe('UserPicker', () => {
   it('should set width', () => {
     shallowUserPicker({ width: 500 });
 
-    expect(getStyles).toHaveBeenCalledWith(500);
+    expect(getStyles).toHaveBeenCalledWith(500, expect.any(String));
+  });
+
+  it('should set pass appearance to getStyles', () => {
+    shallowUserPicker({ appearance: 'compact' });
+
+    expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'compact');
   });
 
   it('should set custom placeholder', () => {
@@ -90,6 +103,16 @@ describe('UserPicker', () => {
     select.simulate('change', userOptions[0], { action: 'select-option' });
 
     expect(onSelection).toHaveBeenCalledWith(options[0]);
+  });
+
+  it('should trigger props.onClear if onChange with clear action', () => {
+    const onClear = jest.fn();
+    const component = shallowUserPicker({ onClear });
+
+    const select = component.find(Select);
+    select.simulate('change', userOptions[0], { action: 'clear' });
+
+    expect(onClear).toHaveBeenCalled();
   });
 
   it('should call onFocus handler', () => {
@@ -459,6 +482,64 @@ describe('UserPicker', () => {
     const preventDefault = jest.fn();
     component.find(Select).simulate('keyDown', { keyCode: 32, preventDefault });
     expect(preventDefault).toHaveBeenCalledTimes(0);
+  });
+
+  describe('teams', () => {
+    const teamOptions: Team[] = [
+      {
+        id: 'team-123',
+        name: 'The A team',
+        type: 'team',
+        memberCount: 1,
+      },
+      {
+        id: 'team-abc',
+        name: 'The B team',
+        type: 'team',
+        includesYou: true,
+      },
+    ];
+
+    const selectableTeamOptions: Option[] = optionToSelectableOptions(
+      teamOptions,
+    );
+
+    const mixedOptions: OptionData[] = (options as OptionData[]).concat(
+      teamOptions,
+    );
+    const selectableMixedOptions: Option[] = optionToSelectableOptions(
+      mixedOptions,
+    );
+
+    it('should render select with only teams', () => {
+      const component = shallowUserPicker({ options: teamOptions });
+      const select = component.find(Select);
+      expect(select.prop('options')).toEqual(selectableTeamOptions);
+    });
+
+    it('should render select with both teams and users', () => {
+      const component = shallowUserPicker({ options: mixedOptions });
+      const select = component.find(Select);
+      expect(select.prop('options')).toEqual(selectableMixedOptions);
+    });
+
+    it('should be able to multi-select a mix of users and teams', () => {
+      const onChange = jest.fn();
+      const component = shallowUserPicker({
+        options: mixedOptions,
+        isMulti: true,
+        onChange,
+      });
+
+      component.find(Select).simulate('change', selectableMixedOptions, {
+        action: 'select-option',
+      });
+
+      expect(onChange).toHaveBeenCalledWith(
+        [mixedOptions[0], mixedOptions[1], mixedOptions[2], mixedOptions[3]],
+        'select-option',
+      );
+    });
   });
 
   describe('analytics', () => {

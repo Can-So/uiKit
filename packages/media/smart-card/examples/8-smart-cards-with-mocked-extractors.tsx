@@ -2,8 +2,16 @@ import * as React from 'react';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
 import { Card, Client, Provider, ResolveResponse } from '..';
 import { ClientConfig } from '../src/Client';
-import { GithubRepository, BitbucketRepository } from './_jsonLDExamples';
+import {
+  GithubRepository,
+  BitbucketRepository,
+  ConfluencePage,
+  ConfluenceBlogPost,
+  ConfluenceSpace,
+  ConfluenceTemplate,
+} from './_jsonLDExamples';
 import { IntlProvider } from 'react-intl';
+import { JiraTasks } from './_jsonLDExamples/atlassian.task';
 
 const metaMock = {
   access: 'granted',
@@ -46,20 +54,75 @@ class Example extends React.Component {
         <Page>
           <Grid>
             <GridColumn>
-              <Provider client={bitbucketClient}>
+              <h3>Source Repository Examples (block)</h3>
+              <br />
+              <div>
+                <Provider client={bitbucketClient}>
+                  <Card
+                    url="https://bitbucket.org/tuser/test-repo"
+                    appearance="block"
+                  />
+                </Provider>
+              </div>
+              <br />
+              <div>
+                <Provider client={githubClient}>
+                  <Card
+                    url="https://github.com/User/repo-name"
+                    appearance="block"
+                  />
+                </Provider>
+              </div>
+            </GridColumn>
+            <GridColumn>
+              <br />
+              <h3>Confluence Examples (inline)</h3>
+              <br />
+              <div>
+                Hey maybe you were after the info on:
                 <Card
-                  url="https://bitbucket.org/tuser/test-repo"
-                  appearance="block"
-                  data={BitbucketRepository}
+                  url="https://confluence.atlassian.com/some/page"
+                  appearance="inline"
+                  data={ConfluencePage}
                 />
-              </Provider>
-              <hr />
-              <Provider client={githubClient}>
+              </div>
+              <div>
+                Or was it...
                 <Card
-                  url="https://github.com/User/repo-name"
-                  appearance="block"
+                  url="https://confluence.atlassian.com/some/blog"
+                  appearance="inline"
+                  data={ConfluenceBlogPost}
                 />
-              </Provider>
+              </div>
+              <div>
+                I've added all the info you were after on
+                <Card
+                  url="https://confluence.atlassian.com/some/space"
+                  appearance="inline"
+                  data={ConfluenceSpace}
+                />
+              </div>
+              <div>
+                The template you're after is probably
+                <Card
+                  url="https://confluence.atlassian.com/some/template"
+                  appearance="inline"
+                  data={ConfluenceTemplate}
+                />
+              </div>
+              <h3>Jira Examples (inline)</h3>
+              <br />
+              {JiraTasks.map(task => (
+                <div>
+                  Maybe checkout the {task.taskType.name} at{' '}
+                  <Card
+                    key={task['@id']}
+                    url={task['@url']}
+                    appearance="inline"
+                    data={task}
+                  />
+                </div>
+              ))}
             </GridColumn>
           </Grid>
         </Page>

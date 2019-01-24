@@ -13,6 +13,7 @@ export interface InlinePlayerProps {
   context: Context;
   dimensions: CardDimensions;
   onError?: (error: Error) => void;
+  onClick?: () => void;
 }
 
 export interface InlinePlayerState {
@@ -55,9 +56,12 @@ export class InlinePlayer extends Component<
             const { artifacts } = state;
 
             try {
+              const preferedArtifact = artifacts['video_1280.mp4']
+                ? 'video_1280.mp4'
+                : 'video_640.mp4';
               const fileSrc = await context.file.getArtifactURL(
                 artifacts,
-                'video_1280.mp4',
+                preferedArtifact,
                 collectionName,
               );
 
@@ -107,15 +111,15 @@ export class InlinePlayer extends Component<
   };
 
   render() {
+    const { onClick, dimensions } = this.props;
     const { fileSrc } = this.state;
 
     if (!fileSrc) {
-      const { dimensions } = this.props;
       return <CardLoading mediaItemType="file" dimensions={dimensions} />;
     }
 
     return (
-      <InlinePlayerWrapper style={this.getStyle()}>
+      <InlinePlayerWrapper style={this.getStyle()} onClick={onClick}>
         <CustomMediaPlayer
           type="video"
           src={fileSrc}

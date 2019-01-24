@@ -1,5 +1,23 @@
 # @atlaskit/conversation
 
+## 11.1.13
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/editor-common@30.0.0
+  - @atlaskit/editor-core@97.0.0
+  - @atlaskit/renderer@37.0.0
+  - @atlaskit/comment@6.0.38
+  - @atlaskit/reactions@15.3.2
+  - @atlaskit/util-data-test@10.0.34
+
+## 11.1.12
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+  - @atlaskit/editor-common@29.0.0
+  - @atlaskit/editor-core@96.0.0
+  - @atlaskit/renderer@36.0.0
+  - @atlaskit/comment@6.0.37
+  - @atlaskit/reactions@15.3.1
+  - @atlaskit/util-data-test@10.0.33
+
 ## 11.1.11
 - Updated dependencies [0c116d6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/0c116d6):
   - @atlaskit/comment@6.0.35

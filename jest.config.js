@@ -9,7 +9,7 @@ const VISUAL_REGRESSION = process.env.VISUAL_REGRESSION;
 const PARALLELIZE_TESTS = process.env.PARALLELIZE_TESTS;
 const PARALLELIZE_TESTS_FILE = process.env.PARALLELIZE_TESTS_FILE;
 const TEST_ONLY_PATTERN = process.env.TEST_ONLY_PATTERN;
-const PROD = process.env.PROD;
+
 // These are set by Pipelines if you are running in a parallel steps
 const STEP_IDX = Number(process.env.STEP_IDX);
 const STEPS = Number(process.env.STEPS);
@@ -68,9 +68,8 @@ const config = {
   },
   globals: {
     'ts-jest': {
-      tsConfig: './tsconfig.jest.json',
-      babelConfig: false,
-      diagnostics: false,
+      tsConfigFile: './tsconfig.jest.json',
+      skipBabel: true,
     },
     __BASEURL__: 'http://localhost:9000',
   },
@@ -190,8 +189,8 @@ if (config.testMatch.length === 0) {
   }
 }
 
-if (PROD) {
-  config.globals.__BASEURL__ = 'https://atlaskit.atlassian.com';
+if (process.env.VISUAL_REGRESSION && !process.env.CI) {
+  config.globals.__BASEURL__ = 'http://testing.local.com:9000';
 }
 
 module.exports = config;

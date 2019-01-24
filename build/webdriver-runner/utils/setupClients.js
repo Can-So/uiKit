@@ -1,7 +1,6 @@
 'use strict';
 // @flow
 const webdriverio = require('webdriverio');
-const port = require('./chromeDriver').port;
 const uniqIdentifierStamp = process.env.LOCAL_IDENTIFIER || '';
 const commit = process.env.BITBUCKET_COMMIT
   ? process.env.BITBUCKET_COMMIT + uniqIdentifierStamp
@@ -82,10 +81,12 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
     const driver = webdriverio.remote(option);
     return { driver: driver, isReady: false };
   });
+
   return options;
 }
 
 function setLocalClients() /*: Array<?Object>*/ {
+  const port = require('./chromeDriver').port;
   let isHeadless = process.env.HEADLESS !== 'false';
   // Keep only chrome for watch mode
   if (process.env.WATCH === 'true') isHeadless === 'false';

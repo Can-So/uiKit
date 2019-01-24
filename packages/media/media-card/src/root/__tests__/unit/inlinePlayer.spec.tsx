@@ -2,21 +2,26 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Observable } from 'rxjs';
 import { CustomMediaPlayer } from '@atlaskit/media-ui';
+import { MediaFileArtifacts } from '@atlaskit/media-store';
 import { InlinePlayer, InlinePlayerProps } from '../../../root/inlinePlayer';
 import { FileIdentifier } from '../../../root/domain';
 import { CardLoading } from '../../../utils';
 import { InlinePlayerWrapper } from '../../../root/styled';
 
 describe('<InlinePlayer />', () => {
-  const setup = (props?: Partial<InlinePlayerProps>) => {
+  const defaultArtifact: MediaFileArtifacts = {
+    'video_1280.mp4': { processingStatus: 'succeeded', url: '' },
+  };
+  const setup = (
+    props?: Partial<InlinePlayerProps>,
+    artifacts: MediaFileArtifacts = defaultArtifact,
+  ) => {
     const context = {
       file: {
         getFileState: jest.fn().mockReturnValue(
           Observable.of({
             status: 'processed',
-            artifacts: {
-              'video_1280.mp4': {},
-            },
+            artifacts,
           }),
         ),
         getArtifactURL: jest.fn().mockReturnValue('some-url'),
@@ -111,8 +116,36 @@ describe('<InlinePlayer />', () => {
     await update(component);
     expect(context.file.getArtifactURL).toBeCalledTimes(1);
     expect(context.file.getArtifactURL).toBeCalledWith(
-      { 'video_1280.mp4': {} },
+      {
+        'video_1280.mp4': {
+          processingStatus: 'succeeded',
+          url: '',
+        },
+      },
       'video_1280.mp4',
+      'some-collection',
+    );
+    expect(component.find(CustomMediaPlayer).prop('src')).toEqual('some-url');
+  });
+
+  it('should use sd artifact if hd one is not present', async () => {
+    const { component, context } = setup(undefined, {
+      'video_640.mp4': {
+        processingStatus: 'succeeded',
+        url: '',
+      },
+    });
+
+    await update(component);
+    expect(context.file.getArtifactURL).toBeCalledTimes(1);
+    expect(context.file.getArtifactURL).toBeCalledWith(
+      {
+        'video_640.mp4': {
+          processingStatus: 'succeeded',
+          url: '',
+        },
+      },
+      'video_640.mp4',
       'some-collection',
     );
     expect(component.find(CustomMediaPlayer).prop('src')).toEqual('some-url');

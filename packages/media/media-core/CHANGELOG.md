@@ -1,5 +1,25 @@
 # @atlaskit/media-core
 
+## 26.2.1
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/media-card@51.0.2
+  - @atlaskit/media-store@9.1.4
+  - @atlaskit/media-test-helpers@20.0.0
+
+## 26.2.0
+- [minor] [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+
+  - Expose new getCurrentState method to context
+
+## 26.1.0
+- [minor] [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+
+  - Introduce getImageUrl method and FileFetcher TS interface
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/media-card@50.0.0
+  - @atlaskit/media-store@9.1.2
+  - @atlaskit/media-test-helpers@19.0.0
+
 ## 26.0.0
 - [major] [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
 

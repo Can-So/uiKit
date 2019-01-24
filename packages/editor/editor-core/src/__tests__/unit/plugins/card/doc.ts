@@ -1,11 +1,3 @@
-import { pluginKey } from '../../../../plugins/card/pm-plugins/main';
-import cardPlugin from '../../../../plugins/card';
-import { CardProvider, CardPluginState } from '../../../../plugins/card/types';
-import {
-  setProvider,
-  queueCards,
-} from '../../../../plugins/card/pm-plugins/actions';
-
 import {
   doc,
   createEditor,
@@ -14,9 +6,17 @@ import {
   insertText,
 } from '@atlaskit/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
+import { Fragment, Slice } from 'prosemirror-model';
+
+import { pluginKey } from '../../../../plugins/card/pm-plugins/main';
+import cardPlugin from '../../../../plugins/card';
+import { CardProvider, CardPluginState } from '../../../../plugins/card/types';
+import {
+  setProvider,
+  queueCards,
+} from '../../../../plugins/card/pm-plugins/actions';
 
 import { setTextSelection } from '../../../../utils';
-import { Fragment, Slice } from 'prosemirror-model';
 import { queueCardsFromChangedTr } from '../../../../plugins/card/pm-plugins/doc';
 
 describe('card', () => {
@@ -256,22 +256,20 @@ describe('card', () => {
     describe('changed document', () => {
       let promises: Promise<any>[] = [];
       let provider: CardProvider;
+      const cardAdf = {
+        type: 'paragraph',
+        content: [
+          {
+            type: 'text',
+            text: 'hello world',
+          },
+        ],
+      };
 
       beforeEach(() => {
         provider = new class implements CardProvider {
           resolve(url: string): Promise<any> {
-            const promise = new Promise(resolve =>
-              resolve({
-                type: 'paragraph',
-                content: [
-                  {
-                    type: 'text',
-                    text: 'hello world',
-                  },
-                ],
-              }),
-            );
-
+            const promise = new Promise(resolve => resolve(cardAdf));
             promises.push(promise);
             return promise;
           }

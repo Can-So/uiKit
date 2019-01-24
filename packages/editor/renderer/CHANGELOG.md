@@ -1,5 +1,59 @@
 # @atlaskit/renderer
 
+## 37.0.2
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/editor-test-helpers@6.3.14
+  - @atlaskit/media-card@51.0.2
+  - @atlaskit/media-core@26.2.1
+  - @atlaskit/media-filmstrip@25.0.2
+  - @atlaskit/media-test-helpers@20.0.0
+
+## 37.0.1
+- Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
+  - @atlaskit/docs@6.0.1
+  - @atlaskit/button@10.1.2
+  - @atlaskit/navigation-next@4.1.2
+  - @atlaskit/editor-common@30.0.1
+  - @atlaskit/editor-test-helpers@6.3.13
+  - @atlaskit/mention@16.0.1
+  - @atlaskit/status@0.3.2
+  - @atlaskit/task-decision@11.1.7
+  - @atlaskit/media-card@51.0.1
+  - @atlaskit/media-filmstrip@25.0.1
+  - @atlaskit/media-test-helpers@19.1.1
+  - @atlaskit/smart-card@9.4.1
+  - @atlaskit/profilecard@6.1.5
+  - @atlaskit/field-range@5.0.14
+  - @atlaskit/icon@16.0.0
+
+## 37.0.0
+- [minor] [b1627a5837](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b1627a5837):
+
+  - Enable inline video player in Editor and Renderer
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/editor-common@30.0.0
+  - @atlaskit/media-card@51.0.0
+  - @atlaskit/media-filmstrip@25.0.0
+  - @atlaskit/editor-json-transformer@4.1.7
+  - @atlaskit/editor-test-helpers@6.3.12
+  - @atlaskit/task-decision@11.1.6
+  - @atlaskit/util-data-test@10.0.34
+  - @atlaskit/media-test-helpers@19.1.0
+  - @atlaskit/media-core@26.2.0
+
+## 36.0.0
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/editor-common@29.0.0
+  - @atlaskit/media-card@50.0.0
+  - @atlaskit/media-filmstrip@24.0.0
+  - @atlaskit/editor-json-transformer@4.1.6
+  - @atlaskit/editor-test-helpers@6.3.11
+  - @atlaskit/task-decision@11.1.5
+  - @atlaskit/util-data-test@10.0.33
+  - @atlaskit/media-test-helpers@19.0.0
+  - @atlaskit/media-core@26.1.0
+
 ## 35.1.0
 - [minor] [be6313e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/be6313e):
 

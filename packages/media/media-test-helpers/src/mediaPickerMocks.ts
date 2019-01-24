@@ -18,7 +18,7 @@ export const mockState: State = {
     isUploading: false,
     isCancelling: false,
   },
-  accounts: [],
+  accounts: Promise.resolve([]),
   recents: {
     items: [],
   },

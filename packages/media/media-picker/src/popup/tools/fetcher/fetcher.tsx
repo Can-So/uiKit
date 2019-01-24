@@ -148,7 +148,7 @@ export class MediaApiFetcher implements Fetcher {
       'DELETE',
       {},
       mapAuthToAuthHeaders(auth),
-    ).then(toJson);
+    ).then(() => {});
   }
 
   stringifyParams(queryParams: {

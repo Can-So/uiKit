@@ -1,5 +1,21 @@
 # @atlaskit/media-store
 
+## 9.1.4
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/media-card@51.0.2
+  - @atlaskit/media-test-helpers@20.0.0
+
+## 9.1.3
+- Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
+  - @atlaskit/media-card@51.0.0
+  - @atlaskit/media-test-helpers@19.1.0
+
+## 9.1.2
+- Updated dependencies [dadef80](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/dadef80):
+- Updated dependencies [3ad16f3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3ad16f3):
+  - @atlaskit/media-card@50.0.0
+  - @atlaskit/media-test-helpers@19.0.0
+
 ## 9.1.1
 - Updated dependencies [cbb8cb5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbb8cb5):
   - @atlaskit/media-card@49.0.0

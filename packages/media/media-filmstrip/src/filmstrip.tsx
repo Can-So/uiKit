@@ -56,6 +56,7 @@ export class Filmstrip extends Component<FilmstripProps, FilmstripState> {
           key={key}
           context={context}
           dimensions={defaultImageCardDimensions}
+          useInlinePlayer={false}
           {...item}
         />
       );
