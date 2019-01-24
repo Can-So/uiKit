@@ -1,1 +1,0 @@
-- Support 2 new props "hasStatusLozengeForDisabledAccount" and "customMessageForDisabledAccount" 
