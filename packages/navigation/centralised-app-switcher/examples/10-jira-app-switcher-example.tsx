@@ -28,6 +28,27 @@ const CUSTOM_LINKS_DATA = [
   },
 ];
 
+const LICENSE_INFORMATION_DATA = {
+  hostname: 'https://some-instance.atlassian.net',
+  firstActivationDate: 1541541873107,
+  maintenanceEndDate: '2018-03-01',
+  maintenanceStartDate: '2018-01-01',
+  products: {
+    'confluence.ondemand': {
+      billingPeriod: 'MONTHLY',
+      state: 'DEACTIVATED',
+    },
+    'jira-servicedesk.ondemand': {
+      billingPeriod: 'MONTHLY',
+      state: 'ACTIVE',
+    },
+    'jira-software.ondemand': {
+      billingPeriod: 'MONTHLY',
+      state: 'DEACTIVATED',
+    },
+  },
+};
+
 export default class JiraAppSwitcherExample extends Component {
   state = {
     isDrawerOpen: false,
@@ -41,6 +62,10 @@ export default class JiraAppSwitcherExample extends Component {
     fetchMock.get(
       '/rest/menu/latest/appswitcher',
       new Promise(res => setTimeout(() => res(CUSTOM_LINKS_DATA), 2500)),
+    );
+    fetchMock.get(
+      '/gateway/api/xflow/some-cloud-id/license-information',
+      new Promise(res => setTimeout(() => res(LICENSE_INFORMATION_DATA), 2000)),
     );
     this.setState({
       isDrawerOpen: true,
