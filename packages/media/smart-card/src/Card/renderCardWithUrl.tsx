@@ -44,7 +44,7 @@ const renderBlockCard = (
 ) => {
   switch (state.status) {
     case 'pending':
-      return <CardLinkView text={url}>{url}</CardLinkView>;
+      return <CardLinkView url={url} />;
 
     case 'resolving':
       return (
@@ -116,7 +116,7 @@ const renderInlineCard = (
 ): React.ReactNode => {
   switch (state.status) {
     case 'pending':
-      return <CardLinkView text={url}>{url}</CardLinkView>;
+      return <CardLinkView url={url} />;
 
     case 'resolving':
       return (
@@ -168,7 +168,7 @@ const renderInlineCard = (
       );
 
     case 'errored':
-      return <CardLinkView text={url}>{url}</CardLinkView>;
+      return <CardLinkView url={url} />;
   }
 };
 
