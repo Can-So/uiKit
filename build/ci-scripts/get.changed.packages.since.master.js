@@ -78,7 +78,7 @@ const flattenDeep = require('lodash.flattendeep');
         changedPackagesRelativePaths.concat(changedPackagesWithDependent),
       ),
     ];
-    console.log(changedPackagesRelativePathsWithDependent);
+    console.log(JSON.stringify(changedPackagesRelativePathsWithDependent));
   } else {
     // This script is related to the measure the bundle size
     if (process.argv.includes('--spaceDelimited')) {
