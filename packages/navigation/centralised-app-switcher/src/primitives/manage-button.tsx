@@ -1,4 +1,9 @@
 import React from 'react';
 import Button from '@atlaskit/button';
 
-export default ({ onClick }) => <Button onClick={onClick}>Manage list</Button>;
+type Props = {
+  onClick: () => void;
+};
+export default ({ onClick }: Props) => (
+  <Button onClick={onClick}>Manage list</Button>
+);
