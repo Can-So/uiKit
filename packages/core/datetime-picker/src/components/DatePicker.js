@@ -220,9 +220,16 @@ class DatePicker extends Component<Props, State> {
     this.setState({ view: newIso });
   };
 
-  onCalendarSelect = ({ iso: value }: { iso: string }) => {
-    this.setState({ isOpen: false, selectedValue: value, inputValue: '' });
-    this.triggerChange(value);
+  onCalendarSelect = ({ iso }: { iso: string }) => {
+    this.setState({
+      inputValue: '',
+      isOpen: false,
+      selectedValue: iso,
+      view: iso,
+      value: iso,
+    });
+
+    this.props.onChange(iso);
   };
 
   onInputClick = () => {
@@ -284,17 +291,23 @@ class DatePicker extends Component<Props, State> {
       target instanceof HTMLInputElement &&
       target.value.length < 1
     ) {
-      this.setState({ selectedValue: '' });
-      this.triggerChange('');
+      this.setState({
+        selectedValue: '',
+        value: '',
+        view: this.props.defaultValue || format(new Date(), 'YYYY-MM-DD'),
+      });
+      this.props.onChange('');
       // Dates may be disabled
     } else if (!this.isDateDisabled(view)) {
       if (key === 'Enter') {
-        this.triggerChange(view);
         this.setState({
+          inputValue: '',
           isOpen: false,
           selectedValue: view,
-          inputValue: '',
+          value: view,
+          view,
         });
+        this.props.onChange(view);
       }
 
       if (key === 'Tab') {
@@ -311,11 +324,6 @@ class DatePicker extends Component<Props, State> {
     const { onInputChange } = this.props.selectProps;
     if (onInputChange) onInputChange(inputValue, actionMeta);
     this.setState({ inputValue });
-  };
-
-  triggerChange = (value: string) => {
-    this.props.onChange(value);
-    this.setState({ value, view: value });
   };
 
   getContainerRef = (ref: ?HTMLElement) => {
@@ -335,7 +343,8 @@ class DatePicker extends Component<Props, State> {
   });
 
   isValidDate(value: string): boolean {
-    const date = this.props.parseInputValue(value, this.props.dateFormat);
+    const { parseInputValue, dateFormat } = this.props;
+    const date = parseInputValue(value, dateFormat);
 
     return isValid(date);
   }
