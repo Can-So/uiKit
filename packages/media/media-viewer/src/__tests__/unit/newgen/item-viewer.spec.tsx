@@ -407,7 +407,7 @@ describe('<ItemViewer />', () => {
         eventType: 'operational',
       });
       expect(createAnalyticsEventSpy).toHaveBeenCalledWith({
-        action: 'loaded',
+        action: 'loadFailed',
         actionSubject: 'mediaFile',
         actionSubjectId: 'some-id',
         attributes: {
@@ -437,7 +437,7 @@ describe('<ItemViewer />', () => {
         identifier,
       );
       expect(createAnalyticsEventSpy).toHaveBeenCalledWith({
-        action: 'loaded',
+        action: 'loadFailed',
         actionSubject: 'mediaFile',
         actionSubjectId: 'some-id',
         attributes: {
@@ -465,7 +465,7 @@ describe('<ItemViewer />', () => {
         identifier,
       );
       expect(createAnalyticsEventSpy).toHaveBeenCalledWith({
-        action: 'loaded',
+        action: 'loadSucceeded',
         actionSubject: 'mediaFile',
         actionSubjectId: 'some-id',
         attributes: {

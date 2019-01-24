@@ -1,4 +1,3 @@
-import { createAndFireEvent } from '@atlaskit/analytics-next';
 import { FileState } from '@atlaskit/media-core';
 import { MediaType } from '@atlaskit/media-store';
 import {
@@ -7,15 +6,14 @@ import {
 } from '../../../package.json';
 
 export const channel = 'media';
-export const createAndFireEventOnMedia = createAndFireEvent(channel);
 
-export const context: PackageContext = {
+export const packageAttributes: PackageAttributes = {
   componentName: 'media-viewer',
   packageName,
   packageVersion,
 };
 
-export interface PackageContext {
+export interface PackageAttributes {
   componentName: string;
   packageName: string;
   packageVersion: string;

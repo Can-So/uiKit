@@ -28,8 +28,8 @@ import { I18NWrapper } from '@atlaskit/media-test-helpers';
 const context = createStorybookContext();
 
 const handleEvent = (analyticsEvent: UIAnalyticsEventInterface) => {
-  const { payload, context } = analyticsEvent;
-  console.log('Received event:', { payload, context });
+  const { payload } = analyticsEvent;
+  console.log(payload);
 };
 
 export type State = {
