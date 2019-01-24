@@ -1,4 +1,4 @@
-export { WithProviders } from './withProviders';
+export { WithProviders, Providers } from './withProviders';
 
 export type ProviderHandler = (name: string, provider?: Promise<any>) => void;
 
