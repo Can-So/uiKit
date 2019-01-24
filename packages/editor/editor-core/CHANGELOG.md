@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.1.5
+- [patch] [bfe22480d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfe22480d0):
+
+  - ED-6056: fix zero width columns in renderer for migration tables
+
 ## 97.1.4
 - [patch] [f77cd3fb66](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f77cd3fb66):
 
