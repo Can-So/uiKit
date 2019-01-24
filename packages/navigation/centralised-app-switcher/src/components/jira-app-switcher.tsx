@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   AppSwitcherWrapper,
   AppSwitcherItem,
@@ -6,9 +6,12 @@ import {
   ManageButton,
 } from '../primitives';
 import { CustomLinksProvider } from '../providers/jira-data-providers';
-import { RecentContainersProvider } from '../providers/instance-data-providers';
-
-export default ({ cloudId }) => {
+import {
+  RecentContainersProvider,
+  LicenseInformationProvider,
+} from '../providers/instance-data-providers';
+import { WithCloudId, RecentContainer, CustomLink } from '../types';
+export default ({ cloudId }: WithCloudId) => {
   return (
     <RecentContainersProvider cloudId={cloudId}>
       {({
@@ -17,29 +20,61 @@ export default ({ cloudId }) => {
       }) => (
         <CustomLinksProvider>
           {({ isLoading: isLoadingCustomLinks, data: customLinksData }) => (
-            <AppSwitcherWrapper>
-              {isLoadingRecentContainers ? (
-                'Loading Recent Containers...'
-              ) : (
-                <Section title="Recent Containers">
-                  {recentContainersData.data.map(({ objectId, name }) => (
-                    <AppSwitcherItem key={objectId}>{name}</AppSwitcherItem>
-                  ))}
-                </Section>
+            <LicenseInformationProvider cloudId={cloudId}>
+              {({
+                isLoading: isLoadingLicenseInformation,
+                data: licenseInformationData,
+              }) => (
+                <AppSwitcherWrapper>
+                  {isLoadingRecentContainers ? (
+                    'Loading Recent Containers...'
+                  ) : (
+                    <Section title="Recent Containers">
+                      {recentContainersData &&
+                        recentContainersData.data.map(
+                          ({ objectId, name }: RecentContainer) => (
+                            <AppSwitcherItem key={objectId}>
+                              {name}
+                            </AppSwitcherItem>
+                          ),
+                        )}
+                    </Section>
+                  )}
+                  {isLoadingCustomLinks ? (
+                    'Loading Custom Links...'
+                  ) : (
+                    <Section title="Custom Links">
+                      {customLinksData &&
+                        customLinksData[0].map(({ key, label }: CustomLink) => (
+                          <AppSwitcherItem key={key}>{label}</AppSwitcherItem>
+                        ))}
+                    </Section>
+                  )}
+                  {isLoadingLicenseInformation ? (
+                    'Loading License Information...'
+                  ) : (
+                    <Section title="License Information">
+                      {licenseInformationData &&
+                        Object.keys(licenseInformationData.products).map(
+                          (productKey: string) => (
+                            <AppSwitcherItem
+                              key={productKey}
+                            >{`${productKey} - ${
+                              licenseInformationData.products[productKey].state
+                            }`}</AppSwitcherItem>
+                          ),
+                        )}
+                    </Section>
+                  )}
+                  <ManageButton
+                    onClick={() =>
+                      customLinksData &&
+                      (window.location.href = customLinksData[1])
+                    }
+                  />
+                </AppSwitcherWrapper>
               )}
-              {isLoadingCustomLinks ? (
-                'Loading Custom Links...'
-              ) : (
-                <Section title="Custom Links">
-                  {customLinksData[0].map(({ key, label }) => (
-                    <AppSwitcherItem key={key}>{label}</AppSwitcherItem>
-                  ))}
-                </Section>
-              )}
-              <ManageButton
-                onClick={() => (window.location.href = customLinksData[1])}
-              />
-            </AppSwitcherWrapper>
+            </LicenseInformationProvider>
           )}
         </CustomLinksProvider>
       )}
