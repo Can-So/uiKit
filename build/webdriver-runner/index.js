@@ -6,8 +6,6 @@ const isReachable = require('is-reachable');
 const jest = require('jest');
 const meow = require('meow');
 
-const browserstack = require('./utils/browserstack');
-const local = require('./utils/chromeDriver');
 const webpack = require('./utils/webpack');
 const reportTestFailures = require('./reporting');
 
@@ -106,15 +104,26 @@ function runTestsWithRetry() {
   });
 }
 
+function initClient() {
+  /* To avoid load unnecessary libs and code
+   * we require the clients only when it's necessary
+   */
+  if (isBrowserStack) {
+    return require('./utils/browserstack');
+  }
+
+  return require('./utils/chromeDriver');
+}
+
 async function main() {
   const serverAlreadyRunning = await isReachable('http://localhost:9000');
   if (!serverAlreadyRunning) {
     await webpack.startDevServer();
   }
 
-  isBrowserStack
-    ? await browserstack.startBrowserStack()
-    : await local.startChromeServer();
+  let client = initClient();
+
+  client.startServer();
 
   const code = await runTestsWithRetry();
 
@@ -123,7 +132,7 @@ async function main() {
     webpack.stopDevServer();
   }
 
-  isBrowserStack ? browserstack.stopBrowserStack() : local.stopChromeServer();
+  client.stopServer();
   process.exit(code);
 }
 

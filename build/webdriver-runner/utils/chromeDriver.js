@@ -11,14 +11,14 @@ const chromedriver = require('chromedriver');
 const port = 9515;
 const args = ['--url-base=wd/hub', `--port=${port}`];
 
-async function startChromeServer() {
+async function startServer() {
   chromedriver.start(args);
   console.log('Started chrome server');
 }
 
-function stopChromeServer() {
+function stopServer() {
   chromedriver.stop();
   console.log('Stopping chrome server');
 }
 
-module.exports = { startChromeServer, stopChromeServer, port };
+module.exports = { startServer, stopServer, port };
