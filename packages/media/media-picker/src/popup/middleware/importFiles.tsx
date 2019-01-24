@@ -1,6 +1,6 @@
 import * as uuid from 'uuid/v4';
 import { Store, Dispatch, Middleware } from 'redux';
-import { TouchFileDescriptor } from '@atlaskit/media-store';
+import { TouchFileDescriptor, isPreviewableType } from '@atlaskit/media-store';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { State, SelectedItem, LocalUpload, ServiceName } from '../domain';
 import { isStartImportAction } from '../actions/startImport';
@@ -93,33 +93,18 @@ export function importFilesMiddleware(
   };
 }
 
-export async function importFiles(
-  eventEmitter: PopupUploadEventEmitter,
+export const touchSelectedFiles = (
+  selectedUploadFiles: SelectedUploadFile[],
   store: Store<State>,
-  wsProvider: WsProvider,
-): Promise<void> {
-  const {
-    uploads,
-    selectedItems,
-    userContext,
-    tenantContext,
-    config,
-    giphy,
-  } = store.getState();
-  const tenantCollection =
-    config.uploadParams && config.uploadParams.collection;
-  store.dispatch(hidePopup());
-
-  const auth = await userContext.config.authProvider();
-  const selectedUploadFiles = selectedItems.map(item =>
-    mapSelectedItemToSelectedUploadFile(item, tenantCollection),
-  );
+) => {
   const touchFileDescriptors = selectedUploadFiles.map(
     file => file.touchFileDescriptor,
   );
   if (touchFileDescriptors.length) {
+    const { userContext, tenantContext, config, giphy } = store.getState();
+    const tenantCollection =
+      config.uploadParams && config.uploadParams.collection;
     touchFileDescriptors.forEach(descriptor => {
-      // TODO: move into own method
       const id = descriptor.fileId;
       const selectedFile = selectedUploadFiles.find(
         file => file.touchFileDescriptor.fileId === id,
@@ -127,6 +112,8 @@ export async function importFiles(
       if (selectedFile) {
         let preview: FilePreview | Promise<FilePreview> | undefined;
         const { file, serviceName } = selectedFile;
+        const mediaType = getMediaTypeFromMimeType(file.type);
+
         if (serviceName === 'giphy') {
           const selectedGiphy = giphy.imageCardModels.find(
             cardModel => cardModel.metadata.id === file.id,
@@ -150,7 +137,10 @@ export async function importFiles(
               });
             });
           }
-        } else if (serviceName === 'recent_files') {
+        } else if (
+          serviceName === 'recent_files' &&
+          isPreviewableType(mediaType)
+        ) {
           preview = new Promise<FilePreview>(async resolve => {
             // We fetch a good size image, since it can be opened later on in MV
             const blob = await userContext.getImage(file.id, {
@@ -167,7 +157,7 @@ export async function importFiles(
         const state: FileState = {
           id,
           status: 'processing',
-          mediaType: getMediaTypeFromMimeType(file.type),
+          mediaType,
           mimeType: file.type,
           name: file.name,
           size: file.size,
@@ -178,8 +168,28 @@ export async function importFiles(
         fileStreamsCache.set(id, subject);
       }
     });
+
     tenantContext.file.touchFiles(touchFileDescriptors, tenantCollection);
   }
+};
+
+export async function importFiles(
+  eventEmitter: PopupUploadEventEmitter,
+  store: Store<State>,
+  wsProvider: WsProvider,
+): Promise<void> {
+  const { uploads, selectedItems, userContext, config } = store.getState();
+  const tenantCollection =
+    config.uploadParams && config.uploadParams.collection;
+  store.dispatch(hidePopup());
+
+  const auth = await userContext.config.authProvider();
+  const selectedUploadFiles = selectedItems.map(item =>
+    mapSelectedItemToSelectedUploadFile(item, tenantCollection),
+  );
+
+  touchSelectedFiles(selectedUploadFiles, store);
+
   eventEmitter.emitUploadsStart(
     selectedUploadFiles.map(({ file, touchFileDescriptor }) =>
       copyMediaFileForUpload(file, touchFileDescriptor.fileId),
@@ -280,7 +290,6 @@ export const importFilesFromRemoteService = (
         (payload as WsNotifyMetadata).metadata,
       );
 
-      // TODO [MS-1011]: store preview url in context cache
       store.dispatch(
         sendUploadEvent({
           event: {

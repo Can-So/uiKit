@@ -335,18 +335,10 @@ export class NewUploadServiceImpl implements UploadService {
     this.copyFileToUsersCollection(fileId)
       // tslint:disable-next-line:no-console
       .catch(console.log); // We intentionally swallow these errors
-
-    // TODO: do we need to override the id: fileId ?
-    // const mediaFile: MediaFile = {
-    //   ...mediaFile,
-    //   id: fileId,
-    // };
-
     this.emit('file-converting', {
       file: mediaFile,
     });
 
-    // TODO: fill extra available details? should we use this.context.getFile(publicId, {collectionName}) here?
     const details = {
       id: fileId,
     };

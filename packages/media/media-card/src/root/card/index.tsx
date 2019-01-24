@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context, FileDetails } from '@atlaskit/media-core';
+import { Context, FileDetails, isPreviewableType } from '@atlaskit/media-core';
 import { AnalyticsContext } from '@atlaskit/analytics-next';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
@@ -14,7 +14,7 @@ import {
   CardState,
   CardEvent,
 } from '../..';
-import { Identifier, isPreviewableType, FileIdentifier } from '../domain';
+import { Identifier, FileIdentifier } from '../domain';
 import { CardView } from '../cardView';
 import { LazyContent } from '../../utils/lazyContent';
 import { getBaseAnalyticsContext } from '../../utils/analyticsUtils';
