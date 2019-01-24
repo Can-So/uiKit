@@ -98,6 +98,8 @@ export class ShareDialogTrigger extends React.Component<
     shouldCloseOnEscapePress: false,
   };
 
+  escapeIsHeldDown: boolean = false;
+
   state = {
     isDialogOpen: false,
     isSharing: false,
@@ -126,6 +128,64 @@ export class ShareDialogTrigger extends React.Component<
     };
   }
 
+  componentDidMount() {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    document.addEventListener('keydown', this.handleKeyDown);
+    document.addEventListener('keyup', this.handleKeyUp);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    if (!prevState.isDialogOpen && this.state.isDialogOpen) {
+      document.addEventListener('keydown', this.handleKeyDown);
+      document.addEventListener('keyup', this.handleKeyUp);
+    } else if (prevState.isDialogOpen && !this.state.isDialogOpen) {
+      document.removeEventListener('keydown', this.handleKeyDown);
+      document.removeEventListener('keyup', this.handleKeyUp);
+    }
+  }
+
+  componentWillUnmount() {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    document.removeEventListener('keydown', this.handleKeyDown, false);
+    document.removeEventListener('keyup', this.handleKeyUp, false);
+  }
+
+  handleKeyDown = (event: KeyboardEvent) => {
+    const { isDialogOpen } = this.state;
+
+    if (isDialogOpen) {
+      // this is to prevent from unintentionally closing modal dialog
+      event.stopImmediatePropagation();
+    }
+
+    // this is to prevent from continuous firing if an user holds escape key.
+    if (this.escapeIsHeldDown) {
+      return;
+    }
+
+    switch (event.key) {
+      case 'Escape':
+        this.escapeIsHeldDown = true;
+        if (isDialogOpen) {
+          this.handleCloseDialog({ isOpen: false, event });
+        }
+    }
+  };
+
+  handleKeyUp = (event: KeyboardEvent) => {
+    this.escapeIsHeldDown = false;
+  };
+
   handleOpenDialog = (
     e: React.MouseEvent<HTMLButtonElement>,
     analyticsEvent: UIAnalyticsEvent,
@@ -139,7 +199,7 @@ export class ShareDialogTrigger extends React.Component<
 
   handleCloseDialog = ({ isOpen, event }) => {
     // clear the state when it is an escape press or a succesful submit
-    if (event!.type === 'keyPress' || event!.type === 'submit') {
+    if (event!.type === 'keydown' || event!.type === 'submit') {
       this.clearDialogContentState();
     }
 

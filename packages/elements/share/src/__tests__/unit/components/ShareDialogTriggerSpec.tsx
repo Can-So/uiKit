@@ -193,11 +193,17 @@ describe('ShareDialogTrigger', () => {
   });
 
   describe('handleCloseDialog', () => {
-    const eventMap: { click: Function | null } = { click: null };
+    const eventMap: { click: Function | null; keydown: Function | null } = {
+      click: null,
+      keydown: null,
+    };
 
     beforeAll(() => {
       // prepare for the addEventListener mock
       window.addEventListener = jest.fn((event, cb) => (eventMap[event] = cb));
+      document.addEventListener = jest.fn(
+        (event, cb) => (eventMap[event] = cb),
+      );
     });
 
     afterAll(() => {
@@ -205,6 +211,8 @@ describe('ShareDialogTrigger', () => {
       // TODO: how to extend to addEventListener type with { mockClear: Function }?
       // @ts-ignore
       window.addEventListener.mockClear();
+      // @ts-ignore
+      document.addEventListener.mockClear();
     });
 
     it('should set the isDialogOpen state to false', () => {
@@ -222,10 +230,6 @@ describe('ShareDialogTrigger', () => {
     it.skip('should send an analytic event', () => {});
 
     it('should be trigger when the InlineDialog is closed', () => {
-      // prepare for the addEventListener stub
-      const eventMap: { click: Function | null } = { click: null };
-      window.addEventListener = jest.fn((event, cb) => (eventMap[event] = cb));
-
       // mount the component, and display the InlineDialog
       const wrapper = mount<ShareDialogTrigger>(
         <ShareDialogTrigger copyLink="copyLink" />,
@@ -244,6 +248,22 @@ describe('ShareDialogTrigger', () => {
 
       // check if the spied function is called
       expect(spiedHandleCloseDialog).toHaveBeenCalledTimes(1);
+
+      spiedHandleCloseDialog.mockReset();
+
+      wrapper.setState({ isDialogOpen: true });
+
+      const spiedStopImmediatePropagation = jest.fn();
+      const escapeKeyDownEvent = {
+        target: document,
+        type: 'keydown',
+        key: 'Escape',
+        stopImmediatePropagation: spiedStopImmediatePropagation,
+      };
+
+      eventMap.keydown!(escapeKeyDownEvent);
+      expect(spiedHandleCloseDialog).toHaveBeenCalledTimes(1);
+      expect(spiedStopImmediatePropagation).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -330,14 +350,14 @@ describe('ShareDialogTrigger', () => {
       );
     });
 
-    it('should call clearDialogContentState if there is an ESC key pressed or a form submission', async () => {
+    it('should call clearDialogContentState if there is an ESC key pressed down or a form submission', async () => {
       const mockOnSubmit = jest.fn().mockResolvedValue({});
       const mockSubmitEvent = {
         target: document.createElement('form'),
         type: 'submit',
       };
-      const mockEscKeyPressEvent = {
-        type: 'keyPress',
+      const mockEscKeyDownEvent = {
+        type: 'keydown',
       };
       const wrapper = shallow<ShareDialogTrigger>(
         <ShareDialogTrigger copyLink="copyLink" onSubmit={mockOnSubmit} />,
@@ -350,7 +370,7 @@ describe('ShareDialogTrigger', () => {
       await wrapper.instance().handleShareSubmit(mockSubmitEvent);
       expect(spiedClearDialogContentState).toHaveBeenCalledTimes(1);
 
-      await wrapper.instance().handleShareSubmit(mockEscKeyPressEvent);
+      await wrapper.instance().handleShareSubmit(mockEscKeyDownEvent);
       expect(spiedClearDialogContentState).toHaveBeenCalledTimes(2);
     });
   });
