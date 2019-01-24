@@ -95,7 +95,7 @@ describe('MediaLocalUpload', () => {
 
     expect(emitter.emit).toHaveBeenCalledTimes(1);
     expect(emitter.emit).toBeCalledWith('upload-end', {
-      file: { ...imageFile, publicId: 'some-id' },
+      file: { ...imageFile },
       public: { id: 'some-id' },
     });
   });

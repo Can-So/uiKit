@@ -14,7 +14,6 @@ describe('proxyUploadEvents middleware', () => {
     'third-id': { proxy: [firstUploadId, secondUploadId] },
   };
   const state = { uploads, client };
-  const publicId = 'some-public-id';
   const upfrontId = Promise.resolve('1');
   const file = {
     id: 'third-id',
@@ -58,7 +57,7 @@ describe('proxyUploadEvents middleware', () => {
       file,
       originalEvent,
     };
-    const source = { id: publicId, collection: RECENTS_COLLECTION };
+    const source = { id: file.id, collection: RECENTS_COLLECTION };
 
     proxyUploadEvents(store)(next)(action);
 
