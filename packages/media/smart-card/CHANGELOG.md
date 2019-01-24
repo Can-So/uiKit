@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.6.2
+- [patch] [cbc601aed3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbc601aed3):
+
+  - Added missing type of events for Confluence
+
 ## 9.6.1
 - [patch] [bef9abc8de](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bef9abc8de):
 

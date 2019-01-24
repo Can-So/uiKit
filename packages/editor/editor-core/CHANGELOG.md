@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.1.6
+- [patch] [cbc601aed3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbc601aed3):
+
+  - Added missing type of events for Confluence
+
 ## 97.1.5
 - [patch] [bfe22480d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfe22480d0):
 

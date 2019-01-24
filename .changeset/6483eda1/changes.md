@@ -1,1 +1,0 @@
-- Added missing type of events for Confluence
