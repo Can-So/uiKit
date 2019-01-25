@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import asDataProvider from '../as-data-provider';
 
 const RESOLVED_VALUE = {};
@@ -23,14 +23,14 @@ describe('as-data-provider', () => {
     const resolvedPromise = Promise.resolve(RESOLVED_VALUE);
     const DataProvider = asDataProvider(() => resolvedPromise);
 
-    const wrapper = mount(<DataProvider>{childrenPropMock}</DataProvider>);
+    const wrapper = shallow(<DataProvider>{childrenPropMock}</DataProvider>);
     expect(wrapper.contains(CHILDREN_PROP_RETURN_VALUE)).toBe(true);
     expect(childrenPropMock).toHaveBeenCalled();
   });
   it('should resolve with static data', () => {
     const DataProvider = asDataProvider(() => RESOLVED_VALUE);
 
-    mount(<DataProvider>{childrenPropMock}</DataProvider>);
+    shallow(<DataProvider>{childrenPropMock}</DataProvider>);
     expect(childrenPropMock).toHaveBeenCalledTimes(2);
     expect(childrenPropMock.mock.calls[1][0].isLoading).toBe(false);
     expect(childrenPropMock.mock.calls[1][0].data).toBe(RESOLVED_VALUE);
@@ -43,7 +43,7 @@ describe('as-data-provider', () => {
     );
     const DataProvider = asDataProvider(() => promise);
 
-    mount(<DataProvider>{childrenPropMock}</DataProvider>);
+    shallow(<DataProvider>{childrenPropMock}</DataProvider>);
     expect(childrenPropMock).toHaveBeenCalledTimes(1);
     expect(childrenPropMock.mock.calls[0][0].isLoading).toBe(true);
     expect(childrenPropMock.mock.calls[0][0].data).toBe(null);
