@@ -1,0 +1,8 @@
+{
+  "releases": [
+    { "name": "@atlaskit/editor-confluence-transformer", "type": "patch" },
+    { "name": "@atlaskit/editor-core", "type": "patch" },
+    { "name": "@atlaskit/adf-schema", "type": "patch" }
+  ],
+  "dependents": []
+}

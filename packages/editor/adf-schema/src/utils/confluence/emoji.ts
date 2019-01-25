@@ -41,7 +41,9 @@ const acNameToEmojiMap = {
   'broken-heart': ['1f494', ':broken_heart:', '\uD83D\uDC94'],
 };
 
-export function acNameToEmoji(acName: string) {
+export type NameToEmoji = keyof typeof acNameToEmojiMap;
+
+export function acNameToEmoji(acName: NameToEmoji) {
   const emojiData = acNameToEmojiMap[acName];
   return emojiData
     ? {
@@ -57,9 +59,11 @@ export function acNameToEmoji(acName: string) {
 }
 
 export function emojiIdToAcName(emojiId: string) {
-  const filterEmojis = acName =>
+  const filterEmojis = (acName: keyof typeof acNameToEmojiMap) =>
     acNameToEmojiMap[acName] ? acNameToEmojiMap[acName][0] === emojiId : false;
-  return Object.keys(acNameToEmojiMap).filter(filterEmojis)[0];
+  return (Object.keys(acNameToEmojiMap) as Array<
+    keyof typeof acNameToEmoji
+  >).filter(filterEmojis)[0];
 }
 
 export function acShortcutToEmoji(hipchatEmoticonShortName: string) {
@@ -77,7 +81,13 @@ function getAcNameFromShortName(shortName: string) {
   );
 }
 
-export function getEmojiAcName({ id, shortName }) {
+export function getEmojiAcName({
+  id,
+  shortName,
+}: {
+  id: string;
+  shortName: string;
+}) {
   if (DEFAULT_EMOJI_ID === id) {
     const possibleName = getAcNameFromShortName(shortName);
     if (possibleName in acNameToEmojiMap) {

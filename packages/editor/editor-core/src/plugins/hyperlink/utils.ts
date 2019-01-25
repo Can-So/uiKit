@@ -30,7 +30,7 @@ export function getLinkMatch(str: string): Match | LinkifyMatch | null {
   if (!str) {
     return null;
   }
-  let match = linkifyMatch(str);
+  let match: null | LinkifyMatch[] = linkifyMatch(str);
   if (!match.length) {
     match = linkify.match(str);
   }
@@ -47,7 +47,7 @@ export class LinkMatcher {
     if (str.endsWith(' ')) {
       const chunks = str.slice(0, str.length - 1).split(' ');
       const lastChunk = chunks[chunks.length - 1];
-      const links: Match[] = linkify.match(lastChunk);
+      const links: null | Match[] = linkify.match(lastChunk);
       if (links && links.length > 0) {
         const lastLink: Match = links[links.length - 1];
         lastLink.input = lastChunk;
@@ -114,7 +114,7 @@ interface LinkMatch {
 
 function findLinkMatches(text: string): LinkMatch[] {
   const matches: LinkMatch[] = [];
-  let linkMatches: Match[] = text && linkify.match(text);
+  let linkMatches: '' | null | Match[] = text && linkify.match(text);
   if (linkMatches && linkMatches.length > 0) {
     linkMatches.forEach(match => {
       matches.push({
