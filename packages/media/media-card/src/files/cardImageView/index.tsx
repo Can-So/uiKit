@@ -41,9 +41,9 @@ export class FileCardImageView extends Component<FileCardImageViewProps, {}> {
   };
 
   private isImageNotReadyForDisplay() {
-    const { status, dataURI, mediaType, progress } = this.props;
+    const { status, dataURI, mediaType } = this.props;
 
-    if (dataURI && progress === 1) {
+    if (dataURI) {
       return false;
     }
 
