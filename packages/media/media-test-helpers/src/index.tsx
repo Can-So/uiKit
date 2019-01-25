@@ -1,4 +1,4 @@
-import './ject_check';
+import './jest_check';
 export * from './authProvider';
 export * from './contextProvider';
 export * from './fakeContextProvider';

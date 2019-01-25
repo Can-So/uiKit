@@ -88,6 +88,10 @@ export class SmartMediaEditor extends React.Component<
               this.setState({
                 imageUrl: base64ImageUrl,
               });
+            } else {
+              this.setState({
+                imageUrl: blob,
+              });
             }
 
             setTimeout(() => getFileSubscription.unsubscribe(), 0);

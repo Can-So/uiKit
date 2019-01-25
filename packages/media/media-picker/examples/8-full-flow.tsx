@@ -41,8 +41,10 @@ export default class Example extends React.Component<{}, State> {
   componentDidMount() {
     popup.on('uploads-start', async payload => {
       const { events } = this.state;
-      payload.files.forEach(async file => {
-        console.log('PUBLIC: uploads-start', file.id, await file.upfrontId);
+      payload.files.forEach(file => {
+        file.upfrontId.then(id => {
+          console.log('PUBLIC: uploads-start', file.id, id);
+        });
       });
 
       this.setState({

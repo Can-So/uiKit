@@ -26,7 +26,7 @@ export type UploadProcessingEventPayload = {
 
 export type UploadEndEventPayload = {
   readonly file: MediaFile;
-  readonly public: Partial<MediaStoreMediaFile>;
+  readonly public: Partial<MediaStoreMediaFile>; // TODO [MS-1446]: remove
 };
 
 export type UploadErrorEventPayload = {
