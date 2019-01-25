@@ -53,32 +53,6 @@ BrowserTestCase(
   },
 );
 
-// eslint-disable-next-line jest/no-disabled-tests
-describe.skip('Tables are not enabled in the message editor', () => {
-  BrowserTestCase(
-    'paste.ts: paste tests on message editor: table',
-    { skip: ['edge', 'ie', 'safari'] },
-    async client => {
-      const sample = new Page(client);
-      await sample.goto(clipboardHelper);
-      await sample.isVisible(clipboardInput);
-      await sample.type(
-        clipboardInput,
-        '<table><tbody><tr><th><p>this</p></th><th class=""><p>is</p></th><th><p>table</p></th></tr><tr><td><p><br></p></td><td><p><br></p></td><td><p><br></p></td></tr><tr><td><p><br></p></td><td><p><br></p></td><td><p><br></p></td></tr></tbody></table>',
-      );
-      await sample.click(copyAsHTMLButton);
-
-      await gotoEditor(sample);
-      await sample.waitFor(editorSelector);
-      await sample.paste(editorSelector);
-
-      await sample.waitForSelector('table');
-      const doc = await sample.$eval(editorSelector, getDocFromElement);
-      expect(doc).toMatchDocSnapshot();
-    },
-  );
-});
-
 BrowserTestCase(
   'paste.ts: paste tests on message editor: bullet list',
   { skip: ['edge', 'ie', 'safari'] },

@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/adf-schema",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Shared package that contains the ADF-schema (json) and ProseMirror node/mark specs",
   "license": "Apache-2.0",
   "atlaskit:src": "src/index.ts",
@@ -27,6 +27,7 @@
     "internal": true
   },
   "dependencies": {
+    "@types/linkify-it": "^2.0.4",
     "@types/prosemirror-model": "^1.5.0",
     "@types/prosemirror-state": "^1.2.0",
     "@types/prosemirror-view": "^1.3.0",

@@ -38,7 +38,7 @@ export const mention: NodeSpec = {
       tag: 'span[data-mention-id]',
       getAttrs: domNode => {
         const dom = domNode as HTMLElement;
-        const attrs = {
+        const attrs: MentionAttributes = {
           id: dom.getAttribute('data-mention-id') || mention.attrs!.id.default,
           text: dom.textContent || mention.attrs!.text.default,
           accessLevel:
@@ -46,9 +46,9 @@ export const mention: NodeSpec = {
             mention.attrs!.accessLevel.default,
         };
 
-        const userType = dom.getAttribute('data-user-type')!;
+        const userType = dom.getAttribute('data-user-type') as USER_TYPES;
         if (USER_TYPES[userType]) {
-          attrs['userType'] = userType;
+          attrs.userType = userType;
         }
 
         return attrs;
@@ -57,7 +57,7 @@ export const mention: NodeSpec = {
   ],
   toDOM(node) {
     const { id, accessLevel, text, userType } = node.attrs;
-    const attrs = {
+    const attrs: any = {
       'data-mention-id': id,
       'data-access-level': accessLevel,
       contenteditable: 'false',
@@ -74,7 +74,7 @@ const isOptional = (key: string) => {
 };
 
 export const toJSON = (node: PMNode) => ({
-  attrs: Object.keys(node.attrs).reduce((obj, key) => {
+  attrs: Object.keys(node.attrs).reduce<typeof node.attrs>((obj, key) => {
     if (isOptional(key) && !node.attrs[key]) {
       return obj;
     }

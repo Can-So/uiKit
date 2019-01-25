@@ -108,3 +108,4 @@ export * from './schema-element-builder';
 export { cardProvider, EditorTestCardProvider } from './card-provider';
 export * from './enzyme';
 export { compareSelection } from './selection';
+export * from './table';

@@ -267,6 +267,7 @@
     "@types/exenv": "^1.2.0",
     "@types/filesize": "^3.2.15",
     "@types/jquery": "^2.0.41",
+    "@types/linkify-it": "^2.0.4",
     "@types/lodash.debounce": "^4.0.4",
     "@types/prosemirror-commands": "^1.0.1",
     "@types/prosemirror-history": "^1.0.1",

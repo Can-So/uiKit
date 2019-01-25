@@ -1,5 +1,10 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.15
+- [patch] [ccc39ca887](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ccc39ca887):
+
+  - ED-6094: add table CellSelection test helpers
+
 ## 6.3.14
 - Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
   - @atlaskit/editor-core@97.1.3

@@ -16,6 +16,7 @@ export const resolvedEvent = (url: string): GasPayload => ({
   actionSubject: 'smartCard',
   actionSubjectId: url,
   eventType: 'operational',
+  type: 'sendOperationalEvent',
   attributes: {
     ...context,
     url: url,
@@ -30,6 +31,7 @@ export const unresolvedEvent = (
   actionSubject: 'smartCard',
   actionSubjectId: url,
   eventType: 'operational',
+  type: 'sendOperationalEvent',
   attributes: {
     ...context,
     url,
@@ -48,6 +50,7 @@ export const connectSucceededEvent = (
   actionSubject: 'smartCard',
   actionSubjectId: url,
   eventType: 'operational',
+  type: 'sendOperationalEvent',
   attributes: {
     ...context,
     ...((state as any).definitionId
@@ -65,6 +68,7 @@ export const connectFailedEvent = (
   actionSubject: 'smartCard',
   actionSubjectId: url,
   eventType: 'operational',
+  type: 'sendOperationalEvent',
   attributes: {
     ...context,
     reason,
@@ -78,6 +82,7 @@ export const trackAppAccountConnected = (definitionId?: string) => ({
   action: 'connected',
   actionObject: 'applicationAccount',
   eventType: 'track',
+  type: 'sendTrackEvent',
   attributes: {
     ...context,
     definitionId,
