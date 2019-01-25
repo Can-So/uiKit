@@ -9,17 +9,60 @@ const datepickerDefault = 'label[for="react-select-datepicker-1--input"] + div';
 const datepickerMenu = '[aria-label="calendar"]';
 const date =
   '[aria-label="calendar"] > table > tbody > tr:nth-child(5) > td:nth-child(6)';
-const datepickerInput = 'input#react-select-datepicker-2-input';
-const dateValue = `${datepickerDefault} > div > div > div`;
+const datepickerInput = 'input#react-select-datepicker-1-input';
+const dateValue = `${datepickerDefault} > div > div > div:first-child > div:first-child`;
+
 const timepickerDefault = 'label[for="react-select-timepicker-4--input"] + div';
 const timePickerMenu = '.timepicker-select__menu-list';
 const timeInput = 'input#react-select-timepicker-4-input';
 const timeValue = `${timepickerDefault} > div > div > div > div:first-child`;
 const timeOption = '[role="option"]';
+
 const dateTime = 'label[for="react-select-datetimepicker-1--input"]';
 const dateTimePicker = `${dateTime} + div > div`;
 const dateTimePickerDateInput = 'input#react-select-datetimepicker-1-input';
 const dateTimeValues = `${dateTimePicker} > div > div > div`;
+
+BrowserTestCase(
+  'When the user enters a partial date and hits enter, the value should be selected from the calendar',
+  {},
+  async client => {
+    const dateTimePickerTest = new Page(client);
+
+    await dateTimePickerTest.goto(urlDateTimePicker);
+    await dateTimePickerTest.click(datepickerDefault);
+    await dateTimePickerTest.type(datepickerInput, ['2016', 'Enter']);
+    await dateTimePickerTest.waitForSelector(dateTimeValues);
+
+    const nextDate = await dateTimePickerTest.getText(dateValue);
+
+    expect(nextDate).toBe(`2016/01/01`);
+
+    await dateTimePickerTest.checkConsoleErrors();
+  },
+);
+
+BrowserTestCase(
+  'When the user enters an invalid date and hits enter, the value should be selected from the calendar',
+  {},
+  async client => {
+    const dateTimePickerTest = new Page(client);
+
+    await dateTimePickerTest.goto(urlDateTimePicker);
+    await dateTimePickerTest.click(datepickerDefault);
+    await dateTimePickerTest.waitForSelector(datepickerMenu);
+    await dateTimePickerTest.type(datepickerInput, ['2016', '/abcd']);
+    await dateTimePickerTest.type(datepickerInput, ['Enter']);
+
+    await dateTimePickerTest.waitForSelector(dateTimeValues);
+
+    const nextDate = await dateTimePickerTest.getText(dateValue);
+
+    expect(nextDate).toEqual(`2016/01/01`);
+
+    await dateTimePickerTest.checkConsoleErrors();
+  },
+);
 
 BrowserTestCase(
   'When DatePicker is focused & backspace pressed, the input should be cleared',
@@ -31,7 +74,9 @@ BrowserTestCase(
     await dateTimePickerTest.click(datepickerDefault);
     await dateTimePickerTest.waitForSelector(datepickerMenu);
     await dateTimePickerTest.click(date);
+    await dateTimePickerTest.waitForSelector(dateTimeValues);
 
+    // await dateTimePickerTest.waitForSelector(datepickerMenu, { timeout: 12330});
     const previousDate = await dateTimePickerTest.getText(dateValue);
 
     if (dateTimePickerTest.isBrowser('firefox')) {
@@ -43,7 +88,10 @@ BrowserTestCase(
     } else {
       await dateTimePickerTest.keys(['Backspace']);
     }
-    expect(await dateTimePickerTest.getText(dateValue)).not.toBe(previousDate);
+
+    const nextDate = await dateTimePickerTest.getText(dateValue);
+
+    expect(nextDate).not.toBe(previousDate);
 
     await dateTimePickerTest.checkConsoleErrors();
   },
@@ -167,15 +215,13 @@ BrowserTestCase(
 );
 
 BrowserTestCase(
-  'datetime-picker.js: When a user types a year into the date input in DatetimePicker and subsequently hits enter, the value is correctly updated',
+  'When a user types a year into the date input in DatetimePicker and subsequently hits enter, the value is correctly updated',
   { skip: ['safari', 'ie'] }, // Safari and IE drivers have issues - AK-5570, AK-5492
   async client => {
     const dateTimePickerTest = new Page(client);
 
     await dateTimePickerTest.goto(urlDateTimePicker);
     await dateTimePickerTest.click(dateTimePicker);
-    await dateTimePickerTest.waitForSelector(datepickerMenu);
-    await dateTimePickerTest.click(date);
     await dateTimePickerTest.type(dateTimePickerDateInput, [
       '2',
       '0',
