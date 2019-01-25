@@ -11,10 +11,12 @@ describe('as-data-provider', () => {
 
   beforeEach(() => {
     childrenPropMock.mockReturnValue(CHILDREN_PROP_RETURN_VALUE);
+    jest.useFakeTimers();
   });
 
   afterEach(() => {
     childrenPropMock.mockReset();
+    jest.clearAllTimers();
   });
 
   it("should render what it's callback returns", () => {
@@ -35,7 +37,7 @@ describe('as-data-provider', () => {
     expect(childrenPropMock.mock.calls[1][0].error).toBe(null);
   });
 
-  it('should send isLoading and data parameters to children render prop', done => {
+  it('should send isLoading and data parameters to children render prop', () => {
     const promise = new Promise(accept =>
       setTimeout(() => accept(RESOLVED_VALUE), 100),
     );
@@ -46,16 +48,16 @@ describe('as-data-provider', () => {
     expect(childrenPropMock.mock.calls[0][0].isLoading).toBe(true);
     expect(childrenPropMock.mock.calls[0][0].data).toBe(null);
     expect(childrenPropMock.mock.calls[0][0].error).toBe(null);
+    jest.runAllTimers();
     promise.then(() => {
       expect(childrenPropMock).toHaveBeenCalledTimes(2);
       expect(childrenPropMock.mock.calls[1][0].isLoading).toBe(false);
       expect(childrenPropMock.mock.calls[1][0].data).toBe(RESOLVED_VALUE);
       expect(childrenPropMock.mock.calls[1][0].error).toBe(null);
-      done();
     });
   });
 
-  it('should send an error parameter when the promise rejects', done => {
+  it('should send an error parameter when the promise rejects', () => {
     const promise = new Promise((accept, reject) =>
       setTimeout(() => reject(EXPECTED_ERROR_VALUE), 20),
     );
@@ -66,6 +68,7 @@ describe('as-data-provider', () => {
     expect(childrenPropMock.mock.calls[0][0].isLoading).toBe(true);
     expect(childrenPropMock.mock.calls[0][0].data).toBe(null);
     expect(childrenPropMock.mock.calls[0][0].error).toBe(null);
+    jest.runAllTimers();
     setTimeout(() => {
       expect(childrenPropMock).toHaveBeenCalledTimes(2);
       expect(childrenPropMock.mock.calls[1][0].isLoading).toBe(false);
@@ -73,7 +76,6 @@ describe('as-data-provider', () => {
       expect(childrenPropMock.mock.calls[1][0].error).toBe(
         EXPECTED_ERROR_VALUE,
       );
-      done();
     }, 25);
   });
 });
