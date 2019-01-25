@@ -25,7 +25,7 @@ const mentionButton = `span[aria-label="${
 }"]`;
 const mentionQuery = 'span[data-type-ahead-query]';
 
-describe('Snapshot Test: z-indexes', () => {
+describe.skip('Snapshot Test: z-indexes', () => {
   ['full-page', 'comment'].forEach(appearance => {
     let page;
 
