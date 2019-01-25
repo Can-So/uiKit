@@ -23,15 +23,13 @@ export class InlineCardForbiddenView extends React.Component<
 > {
   handleRetry = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { onAuthorise } = this.props;
-    if (onAuthorise) {
-      event.preventDefault();
-      event.stopPropagation();
-      onAuthorise();
-    }
+    event.preventDefault();
+    event.stopPropagation();
+    onAuthorise!();
   };
 
   render() {
-    const { url, onClick, isSelected } = this.props;
+    const { url, onClick, isSelected, onAuthorise } = this.props;
     return (
       <Frame onClick={onClick} isSelected={isSelected}>
         <IconAndTitleLayout
@@ -44,10 +42,17 @@ export class InlineCardForbiddenView extends React.Component<
             truncateUrlForErrorView(url) +
             " - You don't have permissions to view"
           }
-        />{' '}
-        <Button spacing="none" appearance="link" onClick={this.handleRetry}>
-          Try another account
-        </Button>
+        />
+        {!onAuthorise ? (
+          ''
+        ) : (
+          <>
+            {' '}
+            <Button spacing="none" appearance="link" onClick={this.handleRetry}>
+              Try another account
+            </Button>
+          </>
+        )}
       </Frame>
     );
   }
