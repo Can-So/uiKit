@@ -1,1 +1,0 @@
-- Adds index to visitor
