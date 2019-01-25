@@ -1,6 +1,6 @@
 // @flow
 import styled, { css } from 'styled-components';
-import { colors, themed } from '@atlaskit/theme';
+import { colors, themed, math, gridSize } from '@atlaskit/theme';
 
 export const HiddenCheckbox = styled.input`
   left: 50%;
@@ -131,4 +131,9 @@ export const IconWrapper = styled.span`
     transition: stroke 0.2s ease-in-out;
     ${getBorderColor};
   }
+`;
+
+export const RequiredIndicator = styled.span`
+  color: ${colors.R400};
+  padding-left: ${math.multiply(gridSize, 0.25)}px;
 `;
