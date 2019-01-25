@@ -26,9 +26,9 @@ const extractResultInformationIntoProperties = results => {
     }));
 };
 
-const buildEventPayload = properties => {
+const buildEventPayload = (properties, eventName) => {
   return {
-    name: 'atlaskit.qa.integration_test.failure',
+    name: eventName,
     properties,
     server: process.env.CI ? 'master' : 'test',
     product: 'atlaskit',
@@ -37,7 +37,7 @@ const buildEventPayload = properties => {
   };
 };
 
-module.exports = async (results /*: Object */) => {
+module.exports = async (results /*: any */, eventName /*: string */) => {
   const properties = extractResultInformationIntoProperties(results);
 
   if (!properties.length) {
@@ -51,7 +51,9 @@ module.exports = async (results /*: Object */) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      events: properties.map(buildEventPayload),
+      events: properties.map(property => {
+        buildEventPayload(property, eventName);
+      }),
     }),
   });
 
