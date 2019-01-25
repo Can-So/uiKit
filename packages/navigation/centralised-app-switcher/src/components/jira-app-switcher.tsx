@@ -51,7 +51,7 @@ export default ({ cloudId }) => {
                       {Object.keys(licenseInformationData.products).map(
                         productKey => (
                           <AppSwitcherItem key={productKey}>{`${productKey} - ${
-                            licenseInformationData.products[productKey]
+                            licenseInformationData.products[productKey].state
                           }`}</AppSwitcherItem>
                         ),
                       )}
