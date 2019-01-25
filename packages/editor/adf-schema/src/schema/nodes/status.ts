@@ -3,7 +3,6 @@ import { uuid } from '../../utils/uuid';
 
 /**
  * @name status_node
- * @stage 0
  */
 export interface StatusDefinition {
   type: 'status';

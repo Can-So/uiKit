@@ -43,7 +43,7 @@ const ContainerHeaderComponent = ({
   stackLength: number,
   goBackHome: () => mixed,
 }) => (
-  <div>
+  <div key={1}>
     <SkeletonDefaultContainerHeader />
     {stackLength > 1 ? (
       <AkNavigationItem

@@ -69,6 +69,7 @@ export interface Props {
   crossProductSearchClient: CrossProductSearchClient;
   disableJiraPreQueryPeopleSearch?: boolean;
   logger: Logger;
+  isSendSearchTermsEnabled?: boolean;
 }
 
 const contentTypeToSection = {
@@ -343,7 +344,12 @@ export class JiraQuickSearchContainer extends React.Component<
   }
 
   render() {
-    const { linkComponent, createAnalyticsEvent, logger } = this.props;
+    const {
+      linkComponent,
+      createAnalyticsEvent,
+      isSendSearchTermsEnabled,
+      logger,
+    } = this.props;
     const { selectedResultId } = this.state;
 
     return (
@@ -364,6 +370,7 @@ export class JiraQuickSearchContainer extends React.Component<
         onSelectedResultIdChanged={newId =>
           this.handleSelectedResultIdChanged(newId)
         }
+        isSendSearchTermsEnabled={isSendSearchTermsEnabled}
       />
     );
   }

@@ -6,8 +6,6 @@ const isReachable = require('is-reachable');
 const jest = require('jest');
 const meow = require('meow');
 
-const browserstack = require('./utils/browserstack');
-const local = require('./utils/chromeDriver');
 const webpack = require('./utils/webpack');
 const reportTestFailures = require('./reporting');
 
@@ -16,7 +14,6 @@ const reportTestFailures = require('./reporting');
  * start and stop webpack-dev-server, selenium-standalone-server, browserstack connections
  * and run and wait for webdriver tests complete
  *
- * maxWorkers set to 4 when using browserstack and 1 when running locally.
  * By default the tests are running headlessly, set HEADLESS=false if you want to run them directly on real browsers.
  * if WATCH= true, by default, it will start chrome.
  */
@@ -25,7 +22,7 @@ process.env.NODE_ENV = 'test';
 process.env.INTEGRATION_TESTS = 'true';
 
 const isBrowserStack = process.env.TEST_ENV === 'browserstack';
-const maxWorkers = isBrowserStack ? 4 : 1;
+const maxWorkers = isBrowserStack ? 5 : 1;
 
 const cli = meow({
   flags: {
@@ -106,15 +103,26 @@ function runTestsWithRetry() {
   });
 }
 
+function initClient() {
+  /* To avoid load unnecessary libs and code
+   * we require the clients only when it's necessary
+   */
+  if (isBrowserStack) {
+    return require('./utils/browserstack');
+  }
+
+  return require('./utils/chromeDriver');
+}
+
 async function main() {
   const serverAlreadyRunning = await isReachable('http://localhost:9000');
   if (!serverAlreadyRunning) {
     await webpack.startDevServer();
   }
 
-  isBrowserStack
-    ? await browserstack.startBrowserStack()
-    : await local.startChromeServer();
+  let client = initClient();
+
+  client.startServer();
 
   const code = await runTestsWithRetry();
 
@@ -123,7 +131,7 @@ async function main() {
     webpack.stopDevServer();
   }
 
-  isBrowserStack ? browserstack.stopBrowserStack() : local.stopChromeServer();
+  client.stopServer();
   process.exit(code);
 }
 

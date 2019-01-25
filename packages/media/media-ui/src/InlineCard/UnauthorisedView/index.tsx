@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Icon } from '../Icon';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
 import Button from '@atlaskit/button';
 import { truncateUrlForErrorView } from '../utils';
@@ -32,10 +31,7 @@ export class InlineCardUnauthorizedView extends React.Component<
     const { url, icon, onClick, isSelected, onAuthorise } = this.props;
     return (
       <Frame onClick={onClick} isSelected={isSelected}>
-        <IconAndTitleLayout
-          icon={typeof icon === 'string' ? <Icon src={icon} /> : icon}
-          title={truncateUrlForErrorView(url)}
-        />
+        <IconAndTitleLayout icon={icon} title={truncateUrlForErrorView(url)} />
         {!onAuthorise ? (
           ''
         ) : (

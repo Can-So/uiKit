@@ -1,5 +1,10 @@
 # @atlaskit/media-test-helpers
 
+## 20.0.1
+- [patch] [28353efea8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/28353efea8):
+
+  - Fix expected/actual in expectToEqual utility
+
 ## 20.0.0
 - [major] [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
 
