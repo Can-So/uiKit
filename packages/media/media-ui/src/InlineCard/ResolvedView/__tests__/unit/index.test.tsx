@@ -17,8 +17,11 @@ describe('ResolvedView', () => {
         title="some text content"
       />,
     );
-    expect(element.find(Icon)).toHaveLength(1);
-    expect(element.find(Icon).props()).toEqual(
+    const elementIcon = element.find(Icon);
+    expect(elementIcon).toHaveLength(1);
+    const elementIconImage = elementIcon.find('img');
+    expect(elementIconImage).toHaveLength(1);
+    expect(elementIconImage.props()).toEqual(
       expect.objectContaining({
         src: 'some-link-to-icon',
       }),

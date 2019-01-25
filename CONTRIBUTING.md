@@ -21,7 +21,7 @@ Follow these guidelines to help us and the community understand your issue, repr
 When you are creating a bug report, please include as many details as possible. Fill out [the required template](BUG_TEMPLATE.md) thoroughly to help us resolve issues faster.
 
 * **Use a clear and descriptive title** for the issue to identify the problem.
-* **Describe the exact steps which reproduce the problem** in as many details as possible. Add a link to a codesanbox example using [this codesanbox](http://go.atlassian.com/ak-sandbox) as starting point. When listing steps, **don't just say what you did, but explain how you did it**. For example, if you opened a inline dialog, explain if you used the mouse, or a keyboard shortcut.
+* **Describe the exact steps which reproduce the problem** in as many details as possible. Add a link to a codesandbox example using [this codesanbox](http://go.atlassian.com/ak-sandbox) as starting point. When listing steps, **don't just say what you did, but explain how you did it**. For example, if you opened a inline dialog, explain if you used the mouse, or a keyboard shortcut.
 * **If the problem wasn't triggered by a specific action**, describe what you were doing before the problem happened and share more information using the guidelines below.
 
 Include details about your configuration and environment:
@@ -279,7 +279,7 @@ function atlastart() {
 }
 ```
 
-No you can start the website with the specific packages you want rather than entire directories at a time
+Now you can start the website with the specific packages you want rather than entire directories at a time
 
 ```sh
 atlastart flag,tooltip

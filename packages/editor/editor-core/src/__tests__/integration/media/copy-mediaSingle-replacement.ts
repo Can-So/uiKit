@@ -79,8 +79,8 @@ const baseADF = {
   ],
 };
 
-const adfInputSelector = '#adf-input';
-const importAdfBtnSelector = '#import-adf';
+const adfInputSelector = '.adf-input';
+const importAdfBtnSelector = '.import-adf';
 
 BrowserTestCase(
   'copy-mediaSingle-replacement.ts: Copies and pastes mediaSingle on fullpage',

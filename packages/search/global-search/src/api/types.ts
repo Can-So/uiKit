@@ -74,11 +74,11 @@ export interface JiraItemV2 {
 export type JiraItem = JiraItemV1 | JiraItemV2;
 
 export interface PersonItem {
-  userId: string;
-  displayName: string;
-  nickName?: string;
-  title?: string;
-  primaryPhoto: string;
+  account_id: string;
+  name: string;
+  nickname?: string;
+  job_title?: string;
+  picture: string;
 }
 
 export interface JiraResultQueryParams {

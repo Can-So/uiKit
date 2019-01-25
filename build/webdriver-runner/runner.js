@@ -12,14 +12,15 @@
 
 // increase this time out to handle queuing on browserstack
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1200e3;
-const setBrowserStackClients = require('./utils/setupClients')
-  .setBrowserStackClients;
-const setLocalClients = require('./utils/setupClients').setLocalClients;
+const isBrowserStack = process.env.TEST_ENV === 'browserstack';
+const setupClients = require('./utils/setupClients');
 let clients /*: Array<?Object>*/ = [];
 
-process.env.TEST_ENV === 'browserstack'
-  ? (clients = setBrowserStackClients())
-  : (clients = setLocalClients());
+if (isBrowserStack) {
+  clients = setupClients.setBrowserStackClients();
+} else {
+  clients = setupClients.setLocalClients();
+}
 
 const launchClient = async client => {
   if (

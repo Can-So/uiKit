@@ -1,8 +1,7 @@
-import React, { Children, cloneElement } from 'react';
+import React, { Children, ReactNode, isValidElement } from 'react';
 import styled from 'styled-components';
-import React, { Children, cloneElement } from 'react';
-import { ManageButton } from './';
 import { gridSize, colors } from '@atlaskit/theme';
+import { ManageButton } from './';
 
 const Wrapper = styled.div`
   height: calc(100vh - 3 * ${gridSize()}px);
@@ -25,12 +24,12 @@ const Footer = styled.footer`
   background-color: ${colors.N0};
 `;
 
-export default ({ children }) => {
+export default ({ children }: { children: ReactNode }) => {
   const manageButton = Children.toArray(children).filter(
-    child => child.type === ManageButton,
+    child => isValidElement(child) && child.type === ManageButton,
   );
   const items = Children.toArray(children).filter(
-    child => child.type !== ManageButton,
+    child => isValidElement(child) && child.type !== ManageButton,
   );
 
   return (

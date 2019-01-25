@@ -138,7 +138,10 @@ export class StatusPickerWithoutAnalytcs extends React.Component<Props, State> {
     } as State;
   }
 
-  private handleCloseStatusPicker = (inputMethod: InputMethod) => () => {
+  private handleCloseStatusPicker = (inputMethod: InputMethod) => (
+    event: Event,
+  ) => {
+    event.preventDefault();
     this.inputMethod = inputMethod;
     this.props.closeStatusPicker();
   };

@@ -1,5 +1,40 @@
 # @atlaskit/editor-core
 
+## 97.1.5
+- [patch] [bfe22480d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfe22480d0):
+
+  - ED-6056: fix zero width columns in renderer for migration tables
+
+## 97.1.4
+- [patch] [f77cd3fb66](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f77cd3fb66):
+
+  - fixed reactjs warning on FieldBase.onBlur and prevent breaking line when inserting Status via enter key
+
+## 97.1.3
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/editor-test-helpers@6.3.14
+  - @atlaskit/renderer@37.0.2
+  - @atlaskit/media-card@51.0.2
+  - @atlaskit/media-core@26.2.1
+  - @atlaskit/media-filmstrip@25.0.2
+  - @atlaskit/media-picker@31.0.2
+  - @atlaskit/media-test-helpers@20.0.0
+
+## 97.1.2
+- [patch] [5132bc24a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5132bc24a5):
+
+  - Fix codeblock enter-press inside lists
+
+## 97.1.1
+- [patch] [478a86ae8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/478a86ae8a):
+
+  - avoid using the same localId when pasting status
+
+## 97.1.0
+- [minor] [2db7577588](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db7577588):
+
+  - ED-5924: Fixes handling of node deletion for composition events.
+
 ## 97.0.3
 - [patch] [a5714ccc17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5714ccc17):
 

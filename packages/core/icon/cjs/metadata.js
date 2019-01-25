@@ -1537,6 +1537,11 @@ var _default = {
     componentName: 'StarIcon',
     package: '@atlaskit/icon/glyph/star'
   },
+  status: {
+    keywords: ['status', 'icon', 'core'],
+    componentName: 'StatusIcon',
+    package: '@atlaskit/icon/glyph/status'
+  },
   subtask: {
     keywords: ['subtask', 'issue', 'task', 'icon', 'core'],
     componentName: 'SubtaskIcon',

@@ -1,5 +1,10 @@
 # @atlaskit/editor-wikimarkup-transformer
 
+## 2.10.0
+- [minor] [f56a86f8ff](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f56a86f8ff):
+
+  - Adds in smart card conversion
+
 ## 2.9.11
 - Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
   - @atlaskit/editor-common@30.0.0

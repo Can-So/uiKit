@@ -2,7 +2,7 @@ import { Store, Dispatch } from 'redux';
 
 import { updateServiceList, START_AUTH, StartAuthAction } from '../actions';
 import { changeAccount } from '../actions/changeAccount';
-import { State } from '../domain';
+import { State, ServiceAccountWithType } from '../domain';
 import { Fetcher } from '../tools/fetcher/fetcher';
 import { CloudService } from '../services/cloud-service';
 
@@ -16,24 +16,21 @@ export const startCloudAccountOAuthFlow = (
     const { redirectUrl, userContext } = store.getState();
     const { serviceName } = action;
 
-    cloudService
+    const accounts = cloudService
       .startAuth(redirectUrl, serviceName)
       .then(() => userContext.config.authProvider())
-      .then(auth => fetcher.getServiceList(auth))
-      .then(accounts => {
-        store.dispatch(updateServiceList(accounts));
+      .then(auth => fetcher.getServiceList(auth));
 
-        const selectedAccount = accounts.find(
-          account => account.type === serviceName,
-        );
-        if (selectedAccount) {
-          store.dispatch(changeAccount(serviceName, selectedAccount.id));
-        }
-      })
-      .catch(() => {
-        // https://jira.atlassian.com/browse/FIL-3247
-        // add error handler
-      });
+    store.dispatch(updateServiceList(accounts));
+
+    accounts.then((accounts: ServiceAccountWithType[]) => {
+      const selectedAccount = accounts.find(
+        account => account.type === serviceName,
+      );
+      if (selectedAccount) {
+        store.dispatch(changeAccount(serviceName, selectedAccount.id));
+      }
+    });
   }
 
   return next(action);

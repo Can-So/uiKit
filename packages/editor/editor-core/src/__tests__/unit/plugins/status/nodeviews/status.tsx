@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { ReactWrapper } from 'enzyme';
-import { Selection } from 'prosemirror-state';
+import { Selection, TextSelection } from 'prosemirror-state';
 import {
   createEditor,
   doc,
   p,
   mountWithIntl,
+  dispatchPasteEvent,
+  status,
 } from '@atlaskit/editor-test-helpers';
 import { Status } from '@atlaskit/status';
 import StatusNodeView, {
@@ -21,6 +23,9 @@ import {
   StatusState,
 } from '../../../../../plugins/status/plugin';
 import * as Actions from '../../../../../plugins/status/actions';
+// @ts-ignore
+import { __serializeForClipboard } from 'prosemirror-view';
+import { EditorInstance } from '../../../../../types';
 
 describe('Status - NodeView', () => {
   const editor = (doc: any) => {
@@ -103,7 +108,7 @@ describe('Status - NodeView', () => {
 
   it('should call setStatusPickerAt on click', () => {
     const setStatusPickerAtSpy = jest.spyOn(Actions, 'setStatusPickerAt');
-    const { editorView: view } = editor(doc(p('Status: {<>}')));
+    const { editorView: view } = editor(doc(p('Status: {<>}'), p(' ')));
 
     Actions.updateStatus({
       text: 'In progress',
@@ -127,6 +132,7 @@ describe('Status - NodeView', () => {
     let wrapper: ReactWrapper<StatusNodeViewProps, StatusNodeViewState>;
     let getPos: jest.Mock<number>;
     let selectionChanges: SelectionChange;
+    let editorInstance: EditorInstance;
 
     const createSelection = (from: number, to?: number): Selection => {
       const actualTo = to === undefined ? from : to;
@@ -138,7 +144,8 @@ describe('Status - NodeView', () => {
     };
 
     beforeEach(() => {
-      const { editorView: view } = editor(doc(p('Status: {<>}')));
+      editorInstance = editor(doc(p('Status: {<>}')));
+      const { editorView: view } = editorInstance;
 
       const pluginState: StatusState = pluginKey.getState(view.state);
       selectionChanges = pluginState.selectionChanges;
@@ -198,6 +205,56 @@ describe('Status - NodeView', () => {
       wrapper.update();
       expect(wrapper.state().selected).toBe(true);
       expect(wrapper.find(StatusContainer).prop('selected')).toBe(true);
+    });
+
+    it('Copying/pasting a Status instance should generate a new localId', () => {
+      const { editorView } = editorInstance;
+      let state = editorView.state;
+
+      getPos.mockReturnValue(1);
+      selectionChanges.notifyNewSelection(
+        createSelection(1, 2),
+        createSelection(0),
+      );
+      wrapper.update();
+      expect(wrapper.state().selected).toBe(true);
+      expect(wrapper.find(StatusContainer).prop('selected')).toBe(true);
+
+      const { dom, text } = __serializeForClipboard(
+        editorView,
+        state.selection.content(),
+      );
+
+      // move cursor to the position to paste a new status
+      const $pos = editorView.state.doc.resolve(12);
+      state = state.apply(state.tr.setSelection(new TextSelection($pos, $pos)));
+      editorView.updateState(state);
+
+      // paste Status
+      dispatchPasteEvent(editorView, { html: dom.innerHTML, plain: text });
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          p(
+            'Status: ',
+            status({
+              text: 'In progress',
+              color: 'blue',
+              localId: '666',
+            }),
+            ' ',
+          ),
+          p(
+            status({
+              text: 'In progress',
+              color: 'blue',
+              localId: expect.stringMatching(
+                /[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}/,
+              ),
+            }),
+          ),
+        ),
+      );
     });
   });
 });
