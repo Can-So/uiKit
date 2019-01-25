@@ -104,12 +104,6 @@ if (typeof window !== 'undefined' && !('cancelAnimationFrame' in window)) {
   };
 }
 
-function isNodeOrFragment(thing) {
-  // Using a simple `instanceof` check is intentionally avoided here to make
-  // this code agnostic to a specific instance of a Schema.
-  return thing && typeof thing.eq === 'function';
-}
-
 function transformDoc(fn) {
   return doc => {
     const walk = fn => node => {
