@@ -48,11 +48,11 @@ export default ({ cloudId }) => {
                     'Loading License Information...'
                   ) : (
                     <Section title="License Information">
-                      {Object.entries(licenseInformationData.products).map(
-                        ([productKey, { state }]) => (
-                          <AppSwitcherItem
-                            key={productKey}
-                          >{`${productKey} - ${state}`}</AppSwitcherItem>
+                      {Object.keys(licenseInformationData.products).map(
+                        productKey => (
+                          <AppSwitcherItem key={productKey}>{`${productKey} - ${
+                            licenseInformationData.products[productKey]
+                          }`}</AppSwitcherItem>
                         ),
                       )}
                     </Section>
