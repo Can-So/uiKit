@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   typeAheadQuery,
@@ -7,6 +7,8 @@ import {
 import { dismissCommand } from '../../../../../plugins/type-ahead/commands/dismiss';
 
 describe('dismissCommand', () => {
+  const createEditor = createEditorFactory();
+
   it('should remove active typeAheadQuery mark at selection', () => {
     const { editorView } = createEditor({
       doc: doc(

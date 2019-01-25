@@ -6,7 +6,7 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import {
   doc,
   h1,
-  createEditor,
+  createEditorFactory,
   mediaGroup,
   mediaSingle,
   media,
@@ -53,6 +53,8 @@ const getFreshMediaProvider = () =>
  * TODO: JEST-23 Fix these tests
  */
 describe('Media plugin', () => {
+  const createEditor = createEditorFactory<MediaPluginState>();
+
   const mediaProvider = getFreshMediaProvider();
   const temporaryFileId = `temporary:${randomId()}`;
   const providerFactory = ProviderFactory.create({ mediaProvider });
@@ -62,7 +64,7 @@ describe('Media plugin', () => {
     editorProps = {},
     dropzoneContainer: HTMLElement = document.body,
   ) =>
-    createEditor<MediaPluginState>({
+    createEditor({
       doc,
       editorPlugins: [
         mediaPlugin({
@@ -538,7 +540,7 @@ describe('Media plugin', () => {
         p(),
       ),
     );
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -601,7 +603,7 @@ describe('Media plugin', () => {
 
     expect(editorView.state.doc).toEqualDocument(doc(p(), p()));
     collectionFromProvider.mockRestore();
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -864,7 +866,7 @@ describe('Media plugin', () => {
           ),
         ),
       );
-      editorView.destroy();
+
       pluginState.destroy();
     });
   });
@@ -885,7 +887,7 @@ describe('Media plugin', () => {
         pluginState.removeSelectedMediaContainer();
 
         expect(editorView.state.doc).toEqualDocument(doc(p()));
-        editorView.destroy();
+
         pluginState.destroy();
       });
 
@@ -901,7 +903,7 @@ describe('Media plugin', () => {
         setNodeSelection(editorView, 0);
 
         expect(pluginState.removeSelectedMediaContainer()).toBe(true);
-        editorView.destroy();
+
         pluginState.destroy();
       });
     });
@@ -923,7 +925,7 @@ describe('Media plugin', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(hr(), mediaGroup(deletingMediaNode())),
         );
-        editorView.destroy();
+
         pluginState.destroy();
       });
 
@@ -939,7 +941,7 @@ describe('Media plugin', () => {
         setNodeSelection(editorView, 0);
 
         expect(pluginState.removeSelectedMediaContainer()).toBe(false);
-        editorView.destroy();
+
         pluginState.destroy();
       });
     });
@@ -960,7 +962,7 @@ describe('Media plugin', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(p('hello'), mediaGroup(deletingMediaNode())),
         );
-        editorView.destroy();
+
         pluginState.destroy();
       });
 
@@ -1010,7 +1012,7 @@ describe('Media plugin', () => {
       ),
     );
     spy.mockRestore();
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -1050,7 +1052,7 @@ describe('Media plugin', () => {
       ),
     );
     collectionFromProvider.mockRestore();
-    editorView.destroy();
+
     pluginState.destroy();
   });
 
@@ -1089,7 +1091,7 @@ describe('Media plugin', () => {
           p(),
         ),
       );
-      editorView.destroy();
+
       pluginState.destroy();
     });
 
@@ -1128,7 +1130,7 @@ describe('Media plugin', () => {
             ),
           ),
         );
-        editorView.destroy();
+
         pluginState.destroy();
       });
     });

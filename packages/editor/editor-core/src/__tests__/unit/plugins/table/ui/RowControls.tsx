@@ -3,7 +3,7 @@ import { selectTable, selectRow, getSelectionRect } from 'prosemirror-utils';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   tdEmpty,
@@ -30,8 +30,10 @@ const InsertRowButton = `.${ClassName.CONTROLS_INSERT_BUTTON_WRAP}`;
 const InsertColumnButtonInner = `.${ClassName.CONTROLS_INSERT_BUTTON_INNER}`;
 
 describe('RowControls', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin()],
       pluginKey,
@@ -53,7 +55,6 @@ describe('RowControls', () => {
         );
         expect(floatingControls.find(RowControlsButtonWrap)).toHaveLength(row);
         floatingControls.unmount();
-        editorView.destroy();
       });
     });
   });

@@ -1,6 +1,6 @@
 import { NodeSelection } from 'prosemirror-state';
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p as paragraph,
   date,
@@ -17,6 +17,8 @@ import { pluginKey } from '../../../../plugins/date/plugin';
 import datePlugin from '../../../../plugins/date';
 
 describe('date plugin', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,

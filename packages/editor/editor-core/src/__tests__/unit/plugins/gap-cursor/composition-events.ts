@@ -1,4 +1,4 @@
-import { doc, createEditor, p } from '@atlaskit/editor-test-helpers';
+import { doc, createEditorFactory, p } from '@atlaskit/editor-test-helpers';
 import { EditorView } from 'prosemirror-view';
 
 import { setGapCursorSelection } from '../../../../utils';
@@ -24,6 +24,8 @@ const deleteContentBackward = (view: EditorView) => {
 };
 
 describe('gap-cursor: composition events', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent?: () => {}) =>
     createEditor({
       doc,
@@ -55,7 +57,6 @@ describe('gap-cursor: composition events', () => {
             deleteContentBackward(editorView);
 
             expect(editorView.state.doc).toEqualDocument(doc(p('')));
-            editorView.destroy();
           });
         });
       });
@@ -69,7 +70,6 @@ describe('gap-cursor: composition events', () => {
             deleteContentBackward(editorView);
 
             expect(editorView.state.doc).toEqualDocument(doc(p('')));
-            editorView.destroy();
           });
         });
       });

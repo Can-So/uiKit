@@ -1,6 +1,6 @@
 import { name } from '../../../../package.json';
 import { Selection } from 'prosemirror-state';
-import { createEditor } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory } from '@atlaskit/editor-test-helpers';
 import {
   sortByRank,
   fixExcludes,
@@ -111,6 +111,7 @@ describe(name, () => {
   describe('onChange', () => {
     it('should call onChange only when document changes', () => {
       const onChange = jest.fn();
+      const createEditor = createEditorFactory();
       const editor = createEditor({ editorProps: { onChange } });
       const { editorView } = editor;
       editorView.dispatch(editorView.state.tr.insertText('hello'));

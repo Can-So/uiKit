@@ -1,7 +1,7 @@
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   h1,
   panel,
   code_block,
@@ -26,8 +26,9 @@ import listPlugin from '../../../../plugins/lists';
 import { toggleBulletList } from '../../../../plugins/lists/commands';
 
 describe('alignment', () => {
+  const createEditor = createEditorFactory<AlignmentPluginState>();
   const editor = (doc: any) =>
-    createEditor<AlignmentPluginState>({
+    createEditor({
       doc,
       pluginKey: alignmentPluginKey,
       editorPlugins: [
@@ -54,7 +55,6 @@ describe('alignment', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(alignmentMark({ align: 'end' })(p('hello{<>}'))),
       );
-      editorView.destroy();
     });
 
     it('applies alignment only to the current paragraph', () => {
@@ -64,8 +64,6 @@ describe('alignment', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(alignmentMark({ align: 'end' })(p('hello{<>}')), p('world')),
       );
-
-      editorView.destroy();
     });
 
     it('should be able to add alignment to a top level heading', () => {
@@ -75,7 +73,6 @@ describe('alignment', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(alignmentMark({ align: 'end' })(h1('hello{<>}'))),
       );
-      editorView.destroy();
     });
 
     it('applies alignment to multiple paragraphs', () => {
@@ -91,7 +88,6 @@ describe('alignment', () => {
           alignmentMark({ align: 'end' })(p('world{>}')),
         ),
       );
-      editorView.destroy();
     });
   });
 
@@ -103,7 +99,6 @@ describe('alignment', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(panel()(p('hello{<>}'))),
       );
-      editorView.destroy();
     });
 
     it('Does not apply to paragraph inside a codeblock', () => {
@@ -113,7 +108,6 @@ describe('alignment', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(code_block()('hello{<>}')),
       );
-      editorView.destroy();
     });
 
     it('Removes alignment when panel is added to the selection', () => {
@@ -125,7 +119,6 @@ describe('alignment', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(panel()(p('hello{<>}'))),
       );
-      editorView.destroy();
     });
 
     it('Removes alignment when the text is toggled to a list', () => {
@@ -134,8 +127,6 @@ describe('alignment', () => {
       );
       toggleBulletList(editorView);
       expect(editorView.state.doc).toEqualDocument(doc(ul(li(p('hello')))));
-
-      editorView.destroy();
     });
   });
 
@@ -157,7 +148,6 @@ describe('alignment', () => {
           ),
         ),
       );
-      editorView.destroy();
     });
   });
 });

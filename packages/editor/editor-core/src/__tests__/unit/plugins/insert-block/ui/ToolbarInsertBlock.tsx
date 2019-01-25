@@ -5,7 +5,7 @@ import { emoji as emojiData } from '@atlaskit/util-data-test';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   code_block,
   decisionList,
   decisionItem,
@@ -37,6 +37,7 @@ const mediaProvider: Promise<MediaProvider> = Promise.resolve({
 const providerFactory = ProviderFactory.create({ mediaProvider });
 
 describe('@atlaskit/editor-core/ui/ToolbarInsertBlock', () => {
+  const createEditor = createEditorFactory();
   let trackEvent;
   let editorActions;
 

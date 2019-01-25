@@ -1,6 +1,6 @@
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   a,
   insertText,
@@ -21,6 +21,8 @@ import { queueCardsFromChangedTr } from '../../../../plugins/card/pm-plugins/doc
 import { panelPlugin } from '../../../../plugins';
 
 describe('card', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,

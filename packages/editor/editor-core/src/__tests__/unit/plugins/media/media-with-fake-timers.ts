@@ -1,7 +1,7 @@
 import { ProviderFactory } from '@atlaskit/editor-common';
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   storyMediaProviderFactory,
   randomId,
@@ -26,6 +26,7 @@ const getFreshMediaProvider = () =>
   });
 
 describe('Media plugin', async () => {
+  const createEditor = createEditorFactory<MediaPluginState>();
   const mediaProvider = getFreshMediaProvider();
   const providerFactory = ProviderFactory.create({ mediaProvider });
 
@@ -34,7 +35,7 @@ describe('Media plugin', async () => {
     editorProps = {},
     dropzoneContainer: HTMLElement = document.body,
   ) =>
-    createEditor<MediaPluginState>({
+    createEditor({
       doc,
       editorPlugins: [mediaPlugin({ provider: mediaProvider })],
       editorProps: editorProps,

@@ -9,7 +9,7 @@ import {
 } from '../../../plugins/placeholder-text/actions';
 import { FakeTextCursorSelection } from '../../../plugins/fake-text-cursor/cursor';
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   placeholder,
@@ -17,13 +17,13 @@ import {
 } from '@atlaskit/editor-test-helpers';
 import { Selection } from 'prosemirror-state';
 
-const editor = (doc: any, options = { allowInserting: true }) =>
-  createEditor({
-    doc,
-    editorProps: { allowTemplatePlaceholders: options },
-  });
-
 describe(name, () => {
+  const createEditor = createEditorFactory();
+  const editor = (doc: any, options = { allowInserting: true }) =>
+    createEditor({
+      doc,
+      editorProps: { allowTemplatePlaceholders: options },
+    });
   describe('Plugins -> PlaceholderText', () => {
     it('should set the `state.allowInserting` to true', () => {
       const { editorView } = editor(

@@ -2,7 +2,7 @@ import {
   sendKeyToPm,
   insertText,
   compareSelection,
-  createEditor,
+  createEditorFactory,
   doc,
   blockquote,
   p,
@@ -29,6 +29,8 @@ import { taskDecision } from '@atlaskit/util-data-test';
 import { uuid } from '@atlaskit/adf-schema';
 
 describe('tasks and decisions - input rules', () => {
+  const createEditor = createEditorFactory();
+
   beforeEach(() => {
     uuid.setStatic('local-uuid');
   });

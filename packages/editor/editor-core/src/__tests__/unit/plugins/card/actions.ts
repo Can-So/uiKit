@@ -7,12 +7,14 @@ import {
 
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   EditorTestCardProvider,
 } from '@atlaskit/editor-test-helpers';
 
 describe('card', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,

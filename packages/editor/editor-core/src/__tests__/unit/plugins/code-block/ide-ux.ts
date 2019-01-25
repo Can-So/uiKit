@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   code_block,
@@ -9,6 +9,8 @@ import {
 import { AllSelection } from 'prosemirror-state';
 
 describe('IDE UX plugin', () => {
+  const createEditor = createEditorFactory();
+
   let trackEvent = jest.fn();
   const editor = doc =>
     createEditor({

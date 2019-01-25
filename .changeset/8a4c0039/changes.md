@@ -1,0 +1,1 @@
+- ED-6104: refactor createEditor to correctly call editorView.destroy() afterEach test

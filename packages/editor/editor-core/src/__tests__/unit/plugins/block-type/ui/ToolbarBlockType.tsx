@@ -4,7 +4,7 @@ import AkButton from '@atlaskit/button';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   code_block,
   blockquote,
   panel,
@@ -32,6 +32,8 @@ import codeBlockPlugin from '../../../../../plugins/code-block';
 import { setBlockType } from '../../../../../plugins/block-type/commands';
 
 describe('@atlaskit/editor-core/ui/ToolbarBlockType', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,

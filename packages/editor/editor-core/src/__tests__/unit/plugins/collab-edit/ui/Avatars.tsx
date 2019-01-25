@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
 import { ProviderFactory } from '@atlaskit/editor-common';
-import { doc, p, createEditor } from '@atlaskit/editor-test-helpers';
+import { doc, p, createEditorFactory } from '@atlaskit/editor-test-helpers';
 
 import {
   PluginState,
@@ -14,12 +14,14 @@ import Avatars from '../../../../../plugins/collab-edit/ui/avatars';
 import ToolbarButton from '../../../../../ui/ToolbarButton';
 
 describe('collab-edit | Avatars', () => {
+  const createEditor = createEditorFactory<PluginState>();
+
   const providerFactory = ProviderFactory.create({
     collabEditProvider: collabEditProvider('rick'),
   });
 
   const editor = (doc: any) =>
-    createEditor<PluginState>({
+    createEditor({
       doc,
       editorPlugins: [collabEdit()],
       pluginKey,

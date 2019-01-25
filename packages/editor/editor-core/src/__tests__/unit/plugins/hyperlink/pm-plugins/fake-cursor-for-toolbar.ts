@@ -2,7 +2,7 @@ import fakeCursorForToolbarPlugin from '../../../../../plugins/hyperlink/pm-plug
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   defaultSchema,
   insertText,
   a,
@@ -18,6 +18,8 @@ const getDecorations = (state: EditorState) =>
   ) as DecorationSet;
 
 describe('hyperlink', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,
