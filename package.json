@@ -342,6 +342,7 @@
     "eventemitter2": "^4.1.0",
     "execa": "^0.10.0",
     "exenv": "^1.2.2",
+    "extract-react-types-loader": "^0.3.0",
     "fbjs": "^1.0.0",
     "filesize": "^3.2.1",
     "final-form": "^4.10.0",
