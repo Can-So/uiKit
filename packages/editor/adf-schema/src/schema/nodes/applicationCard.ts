@@ -130,9 +130,11 @@ export const applicationCard: NodeSpec = {
           title: { text: '' },
         };
 
-        Object.keys(defaultAttrs).forEach(key => {
-          attrs[key] = (dom as HTMLElement).dataset[key];
-        });
+        (Object.keys(defaultAttrs) as Array<keyof typeof defaultAttrs>).forEach(
+          key => {
+            attrs[key] = (dom as HTMLElement).dataset[key] as any;
+          },
+        );
 
         return attrs;
       },

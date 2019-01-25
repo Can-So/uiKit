@@ -45,12 +45,11 @@ function getExamplesFor(pkgName /*: string */) /*: Array<Object> */ {
 }
 
 // construct example urls for a given example
-const baseUrl = 'http://localhost:9000';
 const getExampleUrl = (
   group: string,
   packageName: string,
   exampleName: string = '',
-  environment: string = baseUrl,
+  environment: string = global.__BASEURL__,
 ) =>
   `${environment}/examples.html?groupId=${group}&packageId=${packageName}&exampleId=${exampleName}`;
 

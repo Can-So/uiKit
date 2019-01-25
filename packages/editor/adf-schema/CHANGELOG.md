@@ -1,5 +1,10 @@
 # @atlaskit/adf-schema
 
+## 1.4.4
+- [patch] [adff2caed7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/adff2caed7):
+
+  - Improve typings
+
 ## 1.4.3
 - [patch] [d10cf50721](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d10cf50721):
 

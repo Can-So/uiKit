@@ -1,5 +1,10 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.7.6
+- [patch] [4a52fa0b89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a52fa0b89):
+
+  - ED-6050: enabled layouts (mobile editor)
+
 ## 6.7.5
 - [patch] [2db7577588](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db7577588):
 

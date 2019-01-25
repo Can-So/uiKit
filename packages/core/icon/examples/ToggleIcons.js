@@ -55,6 +55,7 @@ export default class ToggleIcons extends Component<{}, State> {
               onClick={() =>
                 this.setState({ toggleColor: !this.state.toggleColor })
               }
+              key={id}
             >
               <Icon
                 key={id}

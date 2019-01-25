@@ -57,18 +57,6 @@ describe('UserPicker', () => {
     expect(select.prop('isDisabled')).toEqual(true);
   });
 
-  it('should set width', () => {
-    shallowUserPicker({ width: 500 });
-
-    expect(getStyles).toHaveBeenCalledWith(500, expect.any(String));
-  });
-
-  it('should set pass appearance to getStyles', () => {
-    shallowUserPicker({ appearance: 'compact' });
-
-    expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'compact');
-  });
-
   it('should set custom placeholder', () => {
     const custom = 'Custom';
     const component = shallowUserPicker({ placeholder: custom });
@@ -129,6 +117,38 @@ describe('UserPicker', () => {
 
     component.simulate('blur');
     expect(onBlur).toHaveBeenCalled();
+  });
+
+  describe('getStyles/appearance', () => {
+    it('should set width', () => {
+      shallowUserPicker({ width: 500 });
+
+      expect(getStyles).toHaveBeenCalledWith(500, expect.any(String));
+    });
+
+    it('should infer normal appearance if single picker', () => {
+      const component = shallowUserPicker();
+
+      expect(component.find(Select).prop('appearance')).toEqual('normal');
+      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'normal');
+    });
+
+    it('should infer compact appearance if multi picker', () => {
+      const component = shallowUserPicker({ isMulti: true });
+
+      expect(component.find(Select).prop('appearance')).toEqual('compact');
+      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'compact');
+    });
+
+    it('should pass in appearance that comes from props', () => {
+      const component = shallowUserPicker({
+        isMulti: true,
+        appearance: 'normal',
+      });
+
+      expect(component.find(Select).prop('appearance')).toEqual('normal');
+      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'normal');
+    });
   });
 
   describe('Multiple users select', () => {

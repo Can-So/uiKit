@@ -32,7 +32,7 @@ export type UserPickerProps = {
   /** Callback for when the value/s in the picker is cleared. */
   onClear?: OnPicker;
   /** Appearance of the user picker. */
-  appearance?: 'normal' | 'compact';
+  appearance?: Appearance;
   /** Display the picker with a subtle style. */
   subtle?: boolean;
   /** Default value for the field to be used on initial render. */
@@ -160,3 +160,5 @@ export type AtlasKitSelectChange = (
     action: ActionTypes;
   },
 ) => void;
+
+export type Appearance = 'normal' | 'compact';

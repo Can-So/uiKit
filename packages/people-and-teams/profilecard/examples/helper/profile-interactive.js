@@ -72,6 +72,8 @@ type State = {
   hasLoadingState: boolean,
   hasErrorState: boolean,
   hasLongPresenceMessage: string,
+  hasDisabledAccountMessage: boolean,
+  hasDisabledAccountLozenge: boolean,
 };
 
 export default class ProfilecardInteractive extends Component<Props, State> {
@@ -107,6 +109,8 @@ export default class ProfilecardInteractive extends Component<Props, State> {
     hasLoadingState: false,
     hasErrorState: false,
     hasLongPresenceMessage: '',
+    hasDisabledAccountMessage: false,
+    hasDisabledAccountLozenge: false,
   };
 
   actions = [
@@ -288,6 +292,24 @@ export default class ProfilecardInteractive extends Component<Props, State> {
                   ? 'I honestly have a very long and useless presence message'
                   : ''
               }
+              disabledAccountMessage={
+                this.state.hasDisabledAccountMessage ? (
+                  <>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
+                    <p>
+                      Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                      laboris nisi ut aliquip ex ea commodo.
+                    </p>
+                  </>
+                ) : (
+                  undefined
+                )
+              }
+              hasDisabledAccountLozenge={this.state.hasDisabledAccountLozenge}
             />
           </ProfileCardWrapper>
 
@@ -350,6 +372,16 @@ export default class ProfilecardInteractive extends Component<Props, State> {
               <li>{this.createRadioStatusModifiedDate('aFewMonths')}</li>
               <li>{this.createRadioStatusModifiedDate('severalMonths')}</li>
               <li>{this.createRadioStatusModifiedDate('moreThanAYear')}</li>
+              <li>
+                {this.createCheckboxBooleanAttribute(
+                  'hasDisabledAccountMessage',
+                )}
+              </li>
+              <li>
+                {this.createCheckboxBooleanAttribute(
+                  'hasDisabledAccountLozenge',
+                )}
+              </li>
             </ul>
           </div>
         </StoryWrapper>

@@ -3,7 +3,7 @@ import { Link } from './styled';
 
 export interface CardLinkViewProps {
   /** The text to display */
-  text: string;
+  url: string;
   /** The optional click handler */
   onClick?: () => void;
 }
@@ -19,7 +19,12 @@ export class CardLinkView extends React.Component<CardLinkViewProps> {
   };
 
   render() {
-    const { text } = this.props;
-    return <Link onClick={this.handleClick}>{text}</Link>;
+    const { url: text, onClick } = this.props;
+
+    const linkProps = onClick
+      ? { onClick: this.handleClick }
+      : { href: text, target: '_blank' };
+
+    return <Link {...linkProps}>{text}</Link>;
   }
 }

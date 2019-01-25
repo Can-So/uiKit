@@ -51,7 +51,7 @@ const Wrapper = props => (
 export default () => (
   <Fragment>
     {logoOptions.map((Child, index) => (
-      <div style={{ display: 'flex', marginBottom: '20px' }}>
+      <div style={{ display: 'flex', marginBottom: '20px' }} key={index}>
         {iconVariants.map((pairing, index2) => (
           <Wrapper {...pairing} key={`${index}${index2}`}>
             <Child />
