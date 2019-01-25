@@ -7,6 +7,7 @@ import {
 const openModalBtn = "[type='button']";
 const modalDialog = "[role='dialog']";
 
+// TODO - fails when comparing snapshot need to identify adding threshold
 describe('Snapshot Test', () => {
   it('Select in a modal dialog example should match production example', async () => {
     const url = getExampleUrl(

@@ -1,7 +1,8 @@
 import { getExampleUrl } from '@atlaskit/visual-regression/helper';
 import { snapshot, viewportSizes } from '../_utils';
 
-describe('Snapshot Test: Media', () => {
+// TODO - causes memory errors
+describe.skip('Snapshot Test: Media', () => {
   describe('renderer', () => {
     let page;
 
