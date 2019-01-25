@@ -1,0 +1,1 @@
+- Fix "try again" should not be showing when there are no auth methods
