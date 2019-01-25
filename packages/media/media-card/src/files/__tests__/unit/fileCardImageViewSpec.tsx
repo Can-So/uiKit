@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
+import { expectToEqual } from '@atlaskit/media-test-helpers';
 
 import { FileCardImageView } from '../..';
 import { CardOverlay, CardOverlayProps } from '../../cardImageView/cardOverlay';
@@ -8,7 +9,6 @@ import { UploadingView } from '../../../utils/uploadingView';
 import { Wrapper } from '../../cardImageView/styled';
 import { CardAction } from '../../../actions';
 import { CardContent } from '../../cardImageView/cardContent';
-import { expectToEqual } from '@atlaskit/media-test-helpers';
 import { CardStatus } from '../../../index';
 
 describe('FileCardView', () => {
