@@ -8,6 +8,7 @@ import {
   getMediaTypeFromMimeType,
   FilePreview,
   isPreviewableType,
+  MediaType,
 } from '@atlaskit/media-core';
 import { State, SelectedItem, LocalUpload, ServiceName } from '../domain';
 import { isStartImportAction } from '../actions/startImport';
@@ -93,85 +94,97 @@ export function importFilesMiddleware(
   };
 }
 
+const getPreviewByService = (
+  store: Store<State>,
+  serviceName: ServiceName,
+  mediaType: MediaType,
+  fileId: string,
+) => {
+  const { userContext, giphy } = store.getState();
+
+  if (serviceName === 'giphy') {
+    const selectedGiphy = giphy.imageCardModels.find(
+      cardModel => cardModel.metadata.id === fileId,
+    );
+    if (selectedGiphy) {
+      return {
+        blob: selectedGiphy.dataURI,
+      };
+    }
+  } else if (serviceName === 'upload') {
+    const observable = fileStreamsCache.get(fileId);
+    if (observable) {
+      return new Promise<FilePreview>(resolve => {
+        const subscription = observable.subscribe({
+          next(state) {
+            if (state.status !== 'error') {
+              setTimeout(() => subscription.unsubscribe(), 0);
+              resolve(state.preview);
+            }
+          },
+        });
+      });
+    }
+  } else if (serviceName === 'recent_files' && isPreviewableType(mediaType)) {
+    return new Promise<FilePreview>(async resolve => {
+      // We fetch a good size image, since it can be opened later on in MV
+      const blob = await userContext.getImage(fileId, {
+        collection: RECENTS_COLLECTION,
+        width: 1920,
+        height: 1080,
+        mode: 'fit',
+      });
+
+      resolve({ blob });
+    });
+  }
+
+  return undefined;
+};
+
 export const touchSelectedFiles = (
   selectedUploadFiles: SelectedUploadFile[],
   store: Store<State>,
 ) => {
-  const touchFileDescriptors = selectedUploadFiles.map(
-    file => file.touchFileDescriptor,
-  );
-  if (touchFileDescriptors.length) {
-    const { userContext, tenantContext, config, giphy } = store.getState();
-    const tenantCollection =
-      config.uploadParams && config.uploadParams.collection;
-    touchFileDescriptors.forEach(descriptor => {
-      const id = descriptor.fileId;
-      const selectedFile = selectedUploadFiles.find(
-        file => file.touchFileDescriptor.fileId === id,
-      );
-      if (selectedFile) {
-        let preview: FilePreview | Promise<FilePreview> | undefined;
-        const { file, serviceName } = selectedFile;
-        const mediaType = getMediaTypeFromMimeType(file.type);
-
-        if (serviceName === 'giphy') {
-          const selectedGiphy = giphy.imageCardModels.find(
-            cardModel => cardModel.metadata.id === file.id,
-          );
-
-          if (selectedGiphy) {
-            preview = {
-              blob: selectedGiphy.dataURI,
-            };
-          }
-        } else if (serviceName === 'upload') {
-          const observable = fileStreamsCache.get(file.id);
-          if (observable) {
-            preview = new Promise<FilePreview>(resolve => {
-              const subscription = observable.subscribe({
-                next(state) {
-                  if (state.status !== 'error') {
-                    setTimeout(() => subscription.unsubscribe(), 0);
-                    resolve(state.preview);
-                  }
-                },
-              });
-            });
-          }
-        } else if (
-          serviceName === 'recent_files' &&
-          isPreviewableType(mediaType)
-        ) {
-          preview = new Promise<FilePreview>(async resolve => {
-            // We fetch a good size image, since it can be opened later on in MV
-            const blob = await userContext.getImage(file.id, {
-              collection: RECENTS_COLLECTION,
-              width: 1920,
-              height: 1080,
-              mode: 'fit',
-            });
-
-            resolve({ blob });
-          });
-        }
-
-        const state: FileState = {
-          id,
-          status: 'processing',
-          mediaType,
-          mimeType: file.type,
-          name: file.name,
-          size: file.size,
-          preview,
-        };
-        const subject = new ReplaySubject<FileState>(1);
-        subject.next(state);
-        fileStreamsCache.set(id, subject);
-      }
-    });
-
-    tenantContext.file.touchFiles(touchFileDescriptors, tenantCollection);
+  if (selectedUploadFiles.length === 0) {
+    return;
   }
+
+  const { tenantContext, config } = store.getState();
+  const tenantCollection =
+    config.uploadParams && config.uploadParams.collection;
+
+  selectedUploadFiles.forEach(
+    ({ file: selectedFile, serviceName, touchFileDescriptor }) => {
+      const id = touchFileDescriptor.fileId;
+
+      const mediaType = getMediaTypeFromMimeType(selectedFile.type);
+      const preview = getPreviewByService(
+        store,
+        serviceName,
+        mediaType,
+        selectedFile.id,
+      );
+
+      const state: FileState = {
+        id,
+        status: 'processing',
+        mediaType,
+        mimeType: selectedFile.type,
+        name: selectedFile.name,
+        size: selectedFile.size,
+        preview,
+      };
+      const subject = new ReplaySubject<FileState>(1);
+      subject.next(state);
+      fileStreamsCache.set(id, subject);
+    },
+  );
+
+  const touchFileDescriptors = selectedUploadFiles.map(
+    selectedUploadFile => selectedUploadFile.touchFileDescriptor,
+  );
+  tenantContext.file.touchFiles(touchFileDescriptors, tenantCollection);
 };
 
 export async function importFiles(
