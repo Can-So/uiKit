@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.1.8
+- [patch] [adff2caed7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/adff2caed7):
+
+  - Improve typings
+
 ## 97.1.7
 - [patch] [7c497c2de6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c497c2de6):
 
