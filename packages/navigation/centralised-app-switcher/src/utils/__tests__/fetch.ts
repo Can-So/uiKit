@@ -1,3 +1,4 @@
+declare var global: any;
 import { fetchJson } from '../fetch';
 
 const REQUEST_URL = '/some/url';
