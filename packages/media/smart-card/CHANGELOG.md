@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.6.3
+- [patch] [63e6f7d420](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/63e6f7d420):
+
+  - Fix missing attributes for link view
+
 ## 9.6.2
 - [patch] [cbc601aed3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbc601aed3):
 

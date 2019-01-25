@@ -1,5 +1,10 @@
 # @atlaskit/media-ui
 
+## 8.4.0
+- [minor] [63e6f7d420](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/63e6f7d420):
+
+  - Fix missing attributes for link view
+
 ## 8.3.1
 - [patch] [bef9abc8de](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bef9abc8de):
 

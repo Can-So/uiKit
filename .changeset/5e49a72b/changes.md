@@ -1,1 +1,0 @@
-- Fix missing attributes for link view
