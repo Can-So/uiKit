@@ -42,6 +42,7 @@ const getLanguageFromBitbucketStyle = (
     // code block html from Bitbucket always contains an extra new line
     return extractLanguageFromClass(dom.className);
   }
+  return;
 };
 
 const extractLanguageFromClass = (className: string): string | undefined => {
@@ -50,6 +51,7 @@ const extractLanguageFromClass = (className: string): string | undefined => {
   if (result && result[1]) {
     return result[1];
   }
+  return;
 };
 
 const removeLastNewLine = (dom: HTMLElement): HTMLElement => {
@@ -153,7 +155,7 @@ export const codeBlock: NodeSpec = {
 };
 
 export const toJSON = (node: PMNode) => ({
-  attrs: Object.keys(node.attrs).reduce((memo, key) => {
+  attrs: Object.keys(node.attrs).reduce<Record<string, any>>((memo, key) => {
     if (key === 'uniqueId') {
       return memo;
     }

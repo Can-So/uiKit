@@ -69,7 +69,7 @@ export const link: MarkSpec = {
     },
   ],
   toDOM(node, isInline) {
-    const attrs = Object.keys(node.attrs).reduce((attrs, key) => {
+    const attrs = Object.keys(node.attrs).reduce<any>((attrs, key) => {
       if (key === '__confluenceMetadata') {
         if (node.attrs[key] !== null) {
           attrs[key] = JSON.stringify(node.attrs[key]);
@@ -106,10 +106,13 @@ const OPTIONAL_ATTRS = [
 
 export const toJSON = (mark: Mark) => ({
   type: mark.type.name,
-  attrs: Object.keys(mark.attrs).reduce((attrs, key) => {
-    if (OPTIONAL_ATTRS.indexOf(key) === -1 || mark.attrs[key] !== null) {
-      attrs[key] = mark.attrs[key];
-    }
-    return attrs;
-  }, {}),
+  attrs: Object.keys(mark.attrs).reduce<Record<string, string>>(
+    (attrs, key) => {
+      if (OPTIONAL_ATTRS.indexOf(key) === -1 || mark.attrs[key] !== null) {
+        attrs[key] = mark.attrs[key];
+      }
+      return attrs;
+    },
+    {},
+  ),
 });

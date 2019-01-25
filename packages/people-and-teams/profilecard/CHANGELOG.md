@@ -1,5 +1,10 @@
 # @atlaskit/profilecard
 
+## 6.2.0
+- [minor] [e0e5dd69a7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e0e5dd69a7):
+
+  - Support 2 new props "hasStatusLozengeForDisabledAccount" and "customMessageForDisabledAccount"
+
 ## 6.1.5
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

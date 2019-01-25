@@ -1,13 +1,13 @@
-function commitUrl(user, repo, pullrequestid, page) {
-  return `/2.0/repositories/${user}/${repo}/pullrequests/${pullrequestid}/commits?page=1`;
+function commitUrl(user, repo, pullrequestid) {
+  return `/2.0/repositories/${user}/${repo}/pullrequests/${pullrequestid}/commits`;
 }
 
 function fetchFolderInfo(user, repo, node, folderPath) {
   return `/2.0/repositories/${user}/${repo}/src/${node}/${folderPath}`;
 }
 
-function getDiffStatFromMasterUrl(user, repo, hash, page) {
-  return `/2.0/repositories/${user}/${repo}/diffstat/${hash}..master?page=${page}`;
+function getDiffStatFromMasterUrl(user, repo, hash) {
+  return `/2.0/repositories/${user}/${repo}/diffstat/${hash}..master`;
 }
 
 function getFileUrl(user, repo, hash, filePath) {
@@ -30,18 +30,15 @@ function promisifyAPRequest(url) {
   });
 }
 
-function getFullDiffStat(user, repo, hash, page, allValues = []) {
-  return promisifyAPRequest(
-    getDiffStatFromMasterUrl(user, repo, hash, page),
-  ).then(res => {
-    if (res.next) {
-      return getFullDiffStat(user, repo, hash, page + 1, [
-        ...allValues,
-        ...res.values,
-      ]);
-    }
-    return [...allValues, ...res.values];
-  });
+function getFullDiffStat(user, repo, hash, allValues = []) {
+  return promisifyAPRequest(getDiffStatFromMasterUrl(user, repo, hash)).then(
+    res => {
+      if (res.next) {
+        return getFullDiffStat(user, repo, hash, [...allValues, ...res.values]);
+      }
+      return [...allValues, ...res.values];
+    },
+  );
 }
 
 /**
@@ -57,9 +54,8 @@ export default function getChangesetInfo(user, repo, pullrequestid) {
       throw new Error('Could not find latest commit on branch');
     return response.values[0].hash;
   });
-
   return hashPromise.then(hash =>
-    getFullDiffStat(user, repo, hash, 1).then(allDiffStats => {
+    getFullDiffStat(user, repo, hash).then(allDiffStats => {
       const relevantDiffs = allDiffStats
         .filter(diff => diff.status !== 'removed')
         .filter(diff => diff.new.path.match(/\.changeset\/.+?\/changes.json$/))

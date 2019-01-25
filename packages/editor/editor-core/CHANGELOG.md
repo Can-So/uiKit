@@ -1,5 +1,25 @@
 # @atlaskit/editor-core
 
+## 97.1.8
+- [patch] [adff2caed7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/adff2caed7):
+
+  - Improve typings
+
+## 97.1.7
+- [patch] [7c497c2de6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c497c2de6):
+
+  - ED-5810 Fix issue where numbered table rows flickered when hovering on the edge of row controls
+
+## 97.1.6
+- [patch] [cbc601aed3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbc601aed3):
+
+  - Added missing type of events for Confluence
+
+## 97.1.5
+- [patch] [bfe22480d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfe22480d0):
+
+  - ED-6056: fix zero width columns in renderer for migration tables
+
 ## 97.1.4
 - [patch] [f77cd3fb66](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f77cd3fb66):
 

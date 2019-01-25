@@ -38,10 +38,6 @@ function runCommand(cmd, resolve, reject) {
 async function main() {
   const serverAlreadyRunning = await isReachable('http://localhost:9000');
 
-  if (!process.env.CI) {
-    docker.startDocker();
-  }
-
   if (!serverAlreadyRunning) {
     // Overriding the env variable to start the correct packages
     process.env.VISUAL_REGRESSION = 'true';
@@ -53,10 +49,6 @@ async function main() {
 
   if (!serverAlreadyRunning) {
     webpack.stopDevServer();
-  }
-
-  if (!process.env.CI) {
-    docker.stopDocker();
   }
 }
 
