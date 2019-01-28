@@ -121,6 +121,15 @@ pipelines:
               - node ../build/ci-scripts/upload.build.artefact.for.commit.js netlify-link.txt
             caches:
               - node
+        - step:
+          image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
+          script:
+            - source ./build-setup.sh
+            - bolt install --pure-lockfile
+            # Run it for button now since this is the only pkg with store snapshot
+            - TEST_ONLY_PATTERN='!packages/editor' yarn run yarn test:vr
+          caches:
+              - node     
     - step:
         name: Sending Website Build Url
         script:
