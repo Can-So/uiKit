@@ -14,6 +14,8 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1200e3;
 const isBrowserStack = process.env.TEST_ENV === 'browserstack';
 const setupClients = require('./utils/setupClients');
+const path = require('path');
+
 let clients /*: Array<?Object>*/ = [];
 
 if (isBrowserStack) {
@@ -32,7 +34,7 @@ const launchClient = async client => {
   }
 
   client.isReady = true;
-  return await client.driver.init();
+  return client.driver.init();
 };
 
 const endSession = async client => {
@@ -41,50 +43,48 @@ const endSession = async client => {
     await client.driver.end();
   }
 };
+const filename = path.basename(module.parent.filename);
+
+beforeAll(async function() {
+  const c = [];
+
+  for (const client of clients) {
+    if (!client) {
+      continue;
+    }
+
+    client.driver.desiredCapabilities.name = filename;
+    c.push(launchClient(client));
+  }
+
+  await Promise.all(c);
+});
 
 afterAll(async function() {
   await Promise.all(clients.map(endSession));
 });
 
-function BrowserTestCase(...args /*:Array<any> */) {
-  const testname = args.shift();
-  /* Based on the recent changes of the runnner, test names are slightly wrong, they do not represent the test file. We now spinning one session to
-   * run all the tests contained in the test file then closing the session. Hence, we needed to update the test name to contain the filename.
-   * */
-  const testFileName = testname.split(':')[0] || testname;
-  const testFn = args.pop();
-  const skipForBrowser = args.length > 0 ? args.shift() : { skip: [] };
+function BrowserTestCase(testCase, options, tester) {
+  if (!tester && typeof options === 'function') {
+    tester = options;
+  } else if (!tester) {
+    console.error('Nothing to test!!!!');
+    return false;
+  }
 
-  describe(testFileName, () => {
+  describe(filename, () => {
     let testsToRun = [];
-
-    for (const client of clients) {
-      if (!client) {
-        continue;
-      }
-
-      const browserName = client.driver.desiredCapabilities.browserName.toLowerCase();
-
-      if (skipForBrowser.skip.includes(browserName)) {
-        continue;
-      }
-
-      testsToRun.push(async (fn, ...args) => {
-        client.driver.desiredCapabilities.name = testFileName;
-        await launchClient(client);
-        try {
-          await fn(client.driver, ...args);
-        } catch (err) {
-          console.error(
-            `[Browser: ${browserName}]\n[Test: ${testname}]\n${err.message}`,
-          );
-          throw err;
-        }
+    let skip = Array.isArray(options.skip) ? options.skip : [];
+    clients
+      .filter(c => !skip.includes(c.browserName.toLowerCase()))
+      .map(c => {
+        testsToRun.push(async (fn, ...args) => {
+          await fn(c.driver, ...args);
+        });
       });
-    }
 
-    testRun(testname, async (...args) => {
-      await Promise.all(testsToRun.map(f => f(testFn, ...args)));
+    testRun(testCase, async (...args) => {
+      await Promise.all(testsToRun.map(f => f(tester, ...args)));
     });
   });
 }
