@@ -194,7 +194,7 @@ pipelines:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
             # Run it for button now since this is the only pkg with store snapshot
-            - yarn test:vr 
+            - TEST_ONLY_PATTERN='!packages/editor' yarn run yarn test:vr 
       # This will run essentially the branch builds, but without any optimizations and should be manually
       # run in any potentially risky builds
     run-full-suite:
