@@ -17,6 +17,22 @@ describe('mentionTypeahead', () => {
   let provider: MentionProvider;
 
   /**
+   * Sets the editor up to be used in the test suite, using default options
+   * relevant to all tests.
+   *
+   * @param options List of options to add or override when creating the editor.
+   */
+  const setUpEditor = async (options?) => {
+    ({ editorView, sel } = createEditor({
+      doc: doc(p('{<>}')),
+      editorProps: { mentionProvider },
+      providerFactory: ProviderFactory.create({ mentionProvider }),
+      ...options,
+    }));
+    provider = await mentionProvider;
+  };
+
+  /**
    * Triggers the mention typeahead in the editor with the provided text to be
    * used as the query. This is a helper that can be used to ensure that
    * results have resolved in the typeahead before executing expectations.
@@ -49,13 +65,7 @@ describe('mentionTypeahead', () => {
         .fn(() => event)
         .mockName('createAnalyticsEvent');
 
-      ({ editorView, sel } = createEditor({
-        doc: doc(p('{<>}')),
-        editorProps: { mentionProvider },
-        providerFactory: ProviderFactory.create({ mentionProvider }),
-        createAnalyticsEvent,
-      }));
-      provider = await mentionProvider;
+      await setUpEditor({ createAnalyticsEvent });
     });
 
     it('should fire typeahead cancelled event', () => {
@@ -184,6 +194,31 @@ describe('mentionTypeahead', () => {
       );
       expect(event.fire).toHaveBeenCalledTimes(4);
       expect(event.fire).toHaveBeenCalledWith('fabric-elements');
+    });
+  });
+
+  describe('mentionProvider', () => {
+    describe('when selecting a user', () => {
+      beforeEach(async () => {
+        await setUpEditor();
+      });
+
+      it('should record the selection', async () => {
+        let recordMentionSelectionSpy = jest.spyOn(
+          provider,
+          'recordMentionSelection',
+        );
+        await triggerMentionTypeahead('here');
+
+        selectCurrentItem()(editorView.state, editorView.dispatch);
+
+        expect(recordMentionSelectionSpy).toHaveBeenCalledTimes(1);
+        expect(recordMentionSelectionSpy).toHaveBeenCalledWith(
+          expect.objectContaining({
+            id: 'here',
+          }),
+        );
+      });
     });
   });
 });
