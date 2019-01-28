@@ -5,8 +5,4 @@ type Props = {
   href: string;
 };
 
-const getHrefCallback = href => () => (window.location.href = href);
-
-export default ({ href }: Props) => (
-  <Button onClick={getHrefCallback(href)}>Manage list</Button>
-);
+export default ({ href }: Props) => <Button href={href}>Manage list</Button>;
