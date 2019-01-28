@@ -48,4 +48,9 @@ export const messages = defineMessages({
     defaultMessage: 'Link copied to clipboard',
     description: 'Default text for the Copy Link button',
   },
+  capabilitiesInfoMessage: {
+    id: 'fabric.elements.share.form.capabilities.info.message',
+    defaultMessage: 'Your Admin will be asked to approve the user invite',
+    description: 'Default text for capabilities info',
+  },
 });

@@ -33,7 +33,7 @@ const cli = meow({
   },
 });
 
-function getExitCode(result) {
+function getExitCode(result /*: any */) {
   return !result || result.success ? 0 : 1;
 }
 
@@ -79,19 +79,29 @@ async function rerunFailedTests(result) {
     'test-reports/junit-rerun.xml',
   );
   const results = await runJest(failingTestPaths);
-  return getExitCode(results);
+  return results;
 }
 
 function runTestsWithRetry() {
   return new Promise(async resolve => {
     let code = 0;
+    let results;
     try {
-      const results = await runJest();
+      results = await runJest();
       code = getExitCode(results);
       // Only retry and report results in CI.
       if (code !== 0 && process.env.CI) {
-        reportTestFailures(results);
-        code = await rerunFailedTests(results);
+        reportTestFailures(results, 'atlaskit.qa.integration_test.failure');
+        results = await rerunFailedTests(results);
+        code = getExitCode(results);
+      }
+
+      /**
+       * If the run succeeds,
+       * log the previously failed tests to indicate flakiness
+       */
+      if (code === 0 && process.env.CI) {
+        reportTestFailures(results, 'atlaskit.qa.integration_test.flakiness');
       }
     } catch (err) {
       console.error(err.toString());

@@ -1,5 +1,15 @@
 # @atlaskit/media-ui
 
+## 8.4.1
+- [patch] [56c5a4b41f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56c5a4b41f):
+
+  - Fix "try again" should not be showing when there are no auth methods
+
+## 8.4.0
+- [minor] [63e6f7d420](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/63e6f7d420):
+
+  - Fix missing attributes for link view
+
 ## 8.3.1
 - [patch] [bef9abc8de](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bef9abc8de):
 

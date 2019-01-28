@@ -23,6 +23,7 @@
     "@atlaskit/docs": "^6.0.0",
     "@atlaskit/drawer": "^2.6.1",
     "@atlaskit/navigation": "^33.3.8",
+    "enzyme": "^3.7.0",
     "fetch-mock": "^6.5.2"
   },
   "peerDependencies": {

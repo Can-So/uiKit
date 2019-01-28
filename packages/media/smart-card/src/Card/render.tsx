@@ -48,7 +48,7 @@ export class CardWithURLRenderer extends React.Component<
       <LazyRender
         offset={100}
         component={appearance === 'inline' ? 'span' : 'div'}
-        placeholder={<CardLinkView text={url}>{url}</CardLinkView>}
+        placeholder={<CardLinkView url={url} />}
         content={
           CardWithURLRenderer.CardContent !== null ? (
             <CardWithURLRenderer.CardContent
@@ -61,7 +61,7 @@ export class CardWithURLRenderer extends React.Component<
               authFn={auth}
             />
           ) : (
-            <CardLinkView text={url}>{url}</CardLinkView>
+            <CardLinkView url={url} />
           )
         }
       />

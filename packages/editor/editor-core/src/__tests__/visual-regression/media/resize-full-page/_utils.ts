@@ -5,40 +5,29 @@ import {
   editable,
   rerenderEditor,
   setFeature,
-  dynamicTextViewportSizes,
+} from '../../_utils';
+import {
+  TestPageConfig,
+  resizeWithSnapshots,
+  layoutAvailable,
 } from '../_utils';
-import { TestPageConfig, resizeWithSnapshots, layoutAvailable } from './_utils';
-import { mediaSingleLayouts } from './layouts';
+import { mediaSingleLayouts } from '../layouts';
 
-const editorConfigs: Array<TestPageConfig> = [
-  // all sizes where dynamic text sizing is enabled
-  ...dynamicTextViewportSizes.map(viewport => ({
-    viewport,
-    dynamicTextSizing: true,
-  })),
+export function createResizeFullPageForConfig(config: TestPageConfig) {
+  describe('Snapshot Test: Media', () => {
+    describe('full page editor', () => {
+      let page;
 
-  // and a fixed size where we have no dynamic text sizing
-  {
-    viewport: { width: 1440, height: 3000 },
-    dynamicTextSizing: false,
-  },
-];
+      beforeAll(async () => {
+        // @ts-ignore
+        page = global.page;
+        await initEditor(page, 'full-page-with-toolbar');
+        await setFeature(page, 'imageResizing', true);
+        await setupMediaMocksProviders(page);
+      });
 
-// TODO- fix this test
-describe.skip('Snapshot Test: Media', () => {
-  describe('full page editor', () => {
-    let page;
+      // run the suite of tests for each viewport/prop combination
 
-    beforeAll(async () => {
-      // @ts-ignore
-      page = global.page;
-      await initEditor(page, 'full-page-with-toolbar');
-      await setFeature(page, 'imageResizing', true);
-      await setupMediaMocksProviders(page);
-    });
-
-    // run the suite of tests for each viewport/prop combination
-    editorConfigs.forEach(config => {
       const {
         dynamicTextSizing,
         viewport: { width, height },
@@ -169,4 +158,4 @@ describe.skip('Snapshot Test: Media', () => {
       });
     });
   });
-});
+}

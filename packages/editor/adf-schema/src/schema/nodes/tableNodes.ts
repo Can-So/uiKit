@@ -44,6 +44,7 @@ export const setCellAttrs = (node: PmNode, cell?: HTMLElement) => {
     colspan?: number;
     rowspan?: number;
     style?: string;
+    'data-colwidth'?: string;
   } = {};
   const colspan = cell ? parseInt(cell.getAttribute('colspan') || '1', 10) : 1;
   const rowspan = cell ? parseInt(cell.getAttribute('rowspan') || '1', 10) : 1;
@@ -119,10 +120,10 @@ export const tableBackgroundColorNames = new Map<string, string>();
 });
 
 export function calcTableColumnWidths(node: PmNode): number[] {
-  let tableColumnWidths = [];
+  let tableColumnWidths: Array<number> = [];
   const { isNumberColumnEnabled } = node.attrs;
 
-  node.forEach((rowNode, _, i) => {
+  node.forEach((rowNode, _) => {
     rowNode.forEach((colNode, _, j) => {
       let colwidth = colNode.attrs.colwidth || [0];
 
@@ -233,7 +234,7 @@ export const table: any = {
 export const tableToJSON = (node: PmNode) => ({
   attrs: Object.keys(node.attrs)
     .filter(key => !key.startsWith('__'))
-    .reduce((obj, key) => {
+    .reduce<typeof node.attrs>((obj, key) => {
       obj[key] = node.attrs[key];
       return obj;
     }, {}),
@@ -276,7 +277,9 @@ export const tableCell = {
 };
 
 export const toJSONTableCell = (node: PmNode) => ({
-  attrs: Object.keys(node.attrs).reduce((obj, key) => {
+  attrs: (Object.keys(node.attrs) as Array<keyof CellAttributes>).reduce<
+    Record<string, any>
+  >((obj, key) => {
     if (cellAttrs[key].default !== node.attrs[key]) {
       obj[key] = node.attrs[key];
     }

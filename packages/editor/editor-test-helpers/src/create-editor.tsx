@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
+import { CellSelection } from 'prosemirror-tables';
+import { findCellClosestToPos } from 'prosemirror-utils';
 import {
   EditorProps,
   EditorInstance,
@@ -101,22 +103,23 @@ export default function createEditorForTests<T = any>({
   let refs;
   const { view: editorView } = editor.instance() as ReactEditorView;
 
-  if (doc) {
-    const defaultDoc = doc(editorView!.state.schema);
-    const tr = editorView!.state.tr.replaceWith(
+  if (doc && editorView) {
+    const { state, dispatch } = editorView;
+    const defaultDoc = doc(state.schema);
+    const tr = state.tr.replaceWith(
       0,
-      editorView!.state.doc.nodeSize - 2,
+      state.doc.nodeSize - 2,
       defaultDoc.content,
     );
 
     tr.setMeta('addToHistory', false);
-    editorView!.dispatch(tr);
+    dispatch(tr);
 
     refs = defaultDoc.refs;
     if (refs) {
       // Collapsed selection.
       if ('<>' in refs) {
-        setTextSelection(editorView!, refs['<>']);
+        setTextSelection(editorView, refs['<>']);
         // Expanded selection
       } else if ('<' in refs || '>' in refs) {
         if ('<' in refs === false) {
@@ -126,6 +129,22 @@ export default function createEditorForTests<T = any>({
           throw new Error('A `>` ref must complement a `<` ref.');
         }
         setTextSelection(editorView!, refs['<'], refs['>']);
+      }
+      // CellSelection
+      else if (refs['<cell'] && refs['cell>']) {
+        const { state } = editorView;
+        const anchorCell = findCellClosestToPos(
+          state.doc.resolve(refs['<cell']),
+        );
+        const headCell = findCellClosestToPos(state.doc.resolve(refs['cell>']));
+        if (anchorCell && headCell) {
+          dispatch(
+            state.tr.setSelection(new CellSelection(
+              state.doc.resolve(anchorCell.pos),
+              state.doc.resolve(headCell.pos),
+            ) as any),
+          );
+        }
       }
     }
   }

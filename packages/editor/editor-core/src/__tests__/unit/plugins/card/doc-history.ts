@@ -20,6 +20,16 @@ describe('card', () => {
     });
   };
 
+  beforeAll(() => {
+    (closeHistory as jest.Mock).mockImplementation(tr => {
+      return tr;
+    });
+  });
+
+  afterAll(() => {
+    (closeHistory as jest.Mock).mockClear();
+  });
+
   describe('doc', () => {
     describe('changed document', () => {
       let promises: Promise<any>[] = [];
