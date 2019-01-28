@@ -422,14 +422,16 @@ describe('Context', () => {
       const subscription = context.file
         .upload(file, controller, uploadableFileUpfrontIds)
         .subscribe({
-          next(state) {
+          async next(state) {
             expect(state as UploadingFileState).toEqual(
               expect.objectContaining({
                 name: 'file-name.png',
                 mediaType: 'image',
               }),
             );
-            expect((state as any).preview.blob).toBeInstanceOf(Blob);
+            expect(
+              (await (state as UploadingFileState).preview!).value,
+            ).toBeInstanceOf(Blob);
             subscription.unsubscribe();
             done();
           },

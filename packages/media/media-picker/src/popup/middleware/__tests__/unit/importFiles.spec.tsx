@@ -574,7 +574,7 @@ describe('importFiles middleware', () => {
         next(state) {
           if (state.status !== 'error') {
             expect(state.preview).toEqual({
-              blob: 'giphy-preview-1',
+              value: 'giphy-preview-1',
             });
             done();
           }
@@ -609,7 +609,7 @@ describe('importFiles middleware', () => {
         async next(state) {
           if (state.status !== 'error') {
             expect(await state.preview).toEqual({
-              blob: 'some-local-preview',
+              value: 'some-local-preview',
             });
             done();
           }

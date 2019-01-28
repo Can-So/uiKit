@@ -95,7 +95,7 @@ describe('<InlinePlayer />', () => {
           Observable.of({
             status: 'uploading',
             preview: {
-              blob,
+              value: blob,
             },
           }),
         ),
