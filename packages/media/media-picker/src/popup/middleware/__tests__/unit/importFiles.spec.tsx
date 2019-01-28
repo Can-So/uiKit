@@ -588,7 +588,7 @@ describe('importFiles middleware', () => {
         id: 'id-1',
         status: 'processing',
         preview: {
-          blob: 'some-local-preview',
+          value: 'some-local-preview',
         },
       });
       fileStreamsCache.set('id-1', subject as Observable<FileState>);

@@ -17,14 +17,14 @@ export const getDataURIFromFileState = async (
   ) {
     return {};
   }
-  const { blob } = await state.preview;
-  if (blob instanceof Blob) {
-    const { type } = blob;
+  const { value } = await state.preview;
+  if (value instanceof Blob) {
+    const { type } = value;
     const mediaType = getMediaTypeFromMimeType(type);
 
     if (mediaType === 'image') {
-      const orientation = await getOrientation(blob as File);
-      const src = URL.createObjectURL(blob);
+      const orientation = await getOrientation(value as File);
+      const src = URL.createObjectURL(value);
 
       return {
         src,
@@ -33,7 +33,7 @@ export const getDataURIFromFileState = async (
     }
 
     if (mediaType === 'video') {
-      const snapshoter = new VideoSnapshot(blob);
+      const snapshoter = new VideoSnapshot(value);
       const src = await snapshoter.takeSnapshot();
 
       snapshoter.end();
@@ -44,7 +44,7 @@ export const getDataURIFromFileState = async (
     }
   } else {
     return {
-      src: blob,
+      src: value,
       orientation: 1,
     };
   }

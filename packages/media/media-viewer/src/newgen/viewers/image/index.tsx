@@ -79,12 +79,12 @@ export class ImageViewer extends BaseViewer<
       } else {
         const { preview } = file;
         if (preview) {
-          const { blob } = await preview;
-          if (blob instanceof Blob) {
-            orientation = await getOrientation(blob as File);
-            objectUrl = URL.createObjectURL(blob);
+          const { value } = await preview;
+          if (value instanceof Blob) {
+            orientation = await getOrientation(value as File);
+            objectUrl = URL.createObjectURL(value);
           } else {
-            objectUrl = blob;
+            objectUrl = value;
           }
         } else {
           this.setState({

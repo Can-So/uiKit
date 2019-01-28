@@ -183,7 +183,7 @@ describe('Context', () => {
                   mimeType: '',
                   size: 0,
                   preview: {
-                    blob: content,
+                    value: content,
                   },
                   occurrenceKey,
                 };

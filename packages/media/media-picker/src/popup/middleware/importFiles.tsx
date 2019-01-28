@@ -108,7 +108,7 @@ const getPreviewByService = (
     );
     if (selectedGiphy) {
       return {
-        blob: selectedGiphy.dataURI,
+        value: selectedGiphy.dataURI,
       };
     }
   } else if (serviceName === 'upload') {
@@ -135,7 +135,7 @@ const getPreviewByService = (
         mode: 'fit',
       });
 
-      resolve({ blob });
+      resolve({ value: blob });
     });
   }
 

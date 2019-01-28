@@ -11,7 +11,7 @@ describe('getObjectUrlFromFileState()', () => {
       mimeType: '',
       size: 1,
       preview: {
-        blob: new Blob(),
+        value: new Blob(),
       },
     };
 
