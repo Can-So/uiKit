@@ -402,40 +402,44 @@ export function makeCrossProductSearchData(
   };
 }
 
-export function makeCrossProductExperimentData(): () => CrossProductExperimentResponse {
+export function makeCrossProductExperimentData(): (
+  scopeNames: string[],
+) => CrossProductExperimentResponse {
   const abTest = {
     experimentId: 'experiment-1',
     controlId: 'control-id',
     abTestId: 'abtest-id',
   };
 
-  return () => ({
-    scopes: [
-      {
-        id: Scope.ConfluencePageBlog,
-        abTest,
-      },
-      {
-        id: Scope.ConfluencePageBlogAttachment,
-        abTest,
-      },
-      {
-        id: Scope.JiraIssue,
-        abTest,
-      },
-      {
-        id: Scope.JiraBoardProjectFilter,
-        abTest,
-      },
-      {
-        id: Scope.ConfluenceSpace,
-        abTest,
-      },
-      {
-        id: Scope.People,
-        abTest,
-      },
-    ],
+  const allScopes = [
+    {
+      id: Scope.ConfluencePageBlog,
+      abTest,
+    },
+    {
+      id: Scope.ConfluencePageBlogAttachment,
+      abTest,
+    },
+    {
+      id: Scope.JiraIssue,
+      abTest,
+    },
+    {
+      id: Scope.JiraBoardProjectFilter,
+      abTest,
+    },
+    {
+      id: Scope.ConfluenceSpace,
+      abTest,
+    },
+    {
+      id: Scope.People,
+      abTest,
+    },
+  ];
+
+  return (scopeNames: string[]) => ({
+    scopes: allScopes.filter(scope => scopeNames.includes(scope.id)),
   });
 }
 

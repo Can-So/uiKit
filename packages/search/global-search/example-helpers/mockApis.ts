@@ -89,8 +89,8 @@ function mockCrossProductExperimentApi(delayMs: number, queryMockExperiments) {
     new RegExp('/experiment/v1'),
     (request: Request, options: Options) => {
       const body = JSON.parse(options.body);
-      const query = body.query;
-      const results = queryMockExperiments(query);
+      const scopes = body.scopes;
+      const results = queryMockExperiments(scopes);
 
       return delay(delayMs, results);
     },
