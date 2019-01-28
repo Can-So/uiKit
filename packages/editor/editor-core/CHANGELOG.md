@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 97.1.9
+- [patch] [4552e804d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4552e804d3):
+
+  - dismiss StatusPicker if status node is not selected
+
 ## 97.1.8
 - [patch] [adff2caed7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/adff2caed7):
 

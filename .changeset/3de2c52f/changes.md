@@ -1,1 +1,0 @@
-- dismiss StatusPicker if status node is not selected
