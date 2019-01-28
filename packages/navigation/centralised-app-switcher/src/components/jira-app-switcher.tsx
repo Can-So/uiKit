@@ -27,6 +27,7 @@ export default ({ cloudId }) => {
               }) => (
                 <AppSwitcherWrapper>
                   {isLoadingRecentContainers ? (
+                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
                     'Loading Recent Containers...'
                   ) : (
                     <Section title="Recent Containers">
@@ -36,6 +37,7 @@ export default ({ cloudId }) => {
                     </Section>
                   )}
                   {isLoadingCustomLinks ? (
+                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
                     'Loading Custom Links...'
                   ) : (
                     <Section title="Custom Links">
@@ -45,6 +47,7 @@ export default ({ cloudId }) => {
                     </Section>
                   )}
                   {isLoadingLicenseInformation ? (
+                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
                     'Loading License Information...'
                   ) : (
                     <Section title="License Information">
@@ -57,9 +60,7 @@ export default ({ cloudId }) => {
                       )}
                     </Section>
                   )}
-                  <ManageButton
-                    onClick={() => (window.location.href = customLinksData[1])}
-                  />
+                  <ManageButton href={customLinksData && customLinksData[1]} />
                 </AppSwitcherWrapper>
               )}
             </LicenseInformationProvider>
