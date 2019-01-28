@@ -299,6 +299,10 @@ atlastart flag,tooltip
  ```sh
   yarn run test:webdriver
  ```
+ - visual regression tests
+  ```sh
+  yarn run test:vr
+ ```
 
 Please refer to [testing in atlaskit][testing] for more information about testing.
 

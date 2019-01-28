@@ -105,6 +105,7 @@ pipelines:
             caches:
               - node
         - step:
+            name: Visual Regression Tests
             image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
             script:
               - source ./build-setup.sh
