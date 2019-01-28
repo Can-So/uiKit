@@ -9,16 +9,16 @@ const datepickerDefault = 'label[for="react-select-datepicker-1--input"] + div';
 const datepickerMenu = '[aria-label="calendar"]';
 const date =
   '[aria-label="calendar"] > table > tbody > tr:nth-child(5) > td:nth-child(6)';
-const datepickerInput = '#react-select-datepicker-2-input';
+const datepickerInput = 'input#react-select-datepicker-2-input';
 const dateValue = `${datepickerDefault} > div > div > div`;
 const timepickerDefault = 'label[for="react-select-timepicker-4--input"] + div';
 const timePickerMenu = '.timepicker-select__menu-list';
-const timeInput = '#react-select-timepicker-4-input';
+const timeInput = 'input#react-select-timepicker-4-input';
 const timeValue = `${timepickerDefault} > div > div > div > div:first-child`;
 const timeOption = '[role="option"]';
 const dateTime = 'label[for="react-select-datetimepicker-1--input"]';
 const dateTimePicker = `${dateTime} + div > div`;
-const dateTimePickerDateInput = '#react-select-datetimepicker-1-input';
+const dateTimePickerDateInput = 'input#react-select-datetimepicker-1-input';
 const dateTimeValues = `${dateTimePicker} > div > div > div`;
 
 BrowserTestCase(
