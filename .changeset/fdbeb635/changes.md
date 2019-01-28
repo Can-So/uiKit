@@ -1,1 +1,0 @@
-- ED-6111: fixed renderer rendering unsupported content with some ADF
