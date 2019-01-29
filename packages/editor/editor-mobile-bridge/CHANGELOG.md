@@ -1,5 +1,20 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.7.7
+- [patch] [e2eca7e6d5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e2eca7e6d5):
+
+  - ED-6111: fixed renderer rendering unsupported content with some ADF
+
+## 6.7.6
+- [patch] [4a52fa0b89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a52fa0b89):
+
+  - ED-6050: enabled layouts (mobile editor)
+
+## 6.7.5
+- [patch] [2db7577588](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db7577588):
+
+  - ED-5924: Fixes handling of node deletion for composition events.
+
 ## 6.7.4
 - Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
   - @atlaskit/editor-common@30.0.0

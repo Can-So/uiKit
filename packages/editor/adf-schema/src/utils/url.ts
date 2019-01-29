@@ -52,7 +52,7 @@ export interface Match {
 const linkify = LinkifyIt();
 linkify.add('sourcetree:', 'http:');
 
-export function getLinkMatch(str: string): Match | null {
+export function getLinkMatch(str: string): '' | Match | null {
   const match = str && linkify.match(str);
   return match && match[0];
 }

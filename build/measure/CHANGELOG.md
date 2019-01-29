@@ -1,5 +1,10 @@
 # @atlaskit/measure
 
+## 0.2.1
+- [patch] [a6a76aa7cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6a76aa7cd):
+
+  - Adds ability to send search terms for jira quick search
+
 ## 0.2.0
 - [minor] [d6970ce](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d6970ce):
 

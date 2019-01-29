@@ -43,7 +43,9 @@ export const emoji: NodeSpec = {
     {
       tag: 'img[data-emoticon-name]',
       getAttrs: dom =>
-        acNameToEmoji((dom as Element).getAttribute('data-emoticon-name')!),
+        acNameToEmoji((dom as Element).getAttribute(
+          'data-emoticon-name',
+        ) as any),
     },
     // Handle copy/paste from old <ac:hipchat-emoticons />
     {

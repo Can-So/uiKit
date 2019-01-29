@@ -73,7 +73,9 @@ export const textColor: MarkSpec = {
           hexColor = value.toLowerCase();
         }
         // else handle other colour formats
-        return colorPalette.has(hexColor) ? { color: hexColor } : false;
+        return hexColor && colorPalette.has(hexColor)
+          ? { color: hexColor }
+          : false;
       },
     },
   ],

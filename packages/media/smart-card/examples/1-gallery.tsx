@@ -52,6 +52,15 @@ const Heading = styled.a`
   }
 `;
 
+// Same as Fabric Editor.
+const LoremText = styled.p`
+  font-size: 1em;
+  line-height: 1.714;
+  font-weight: normal;
+  margin-bottom: 0px;
+  letter-spacing: -0.005em;
+`;
+
 const ucFirst = (text: string): string =>
   text[0].toUpperCase() + text.substring(1);
 
@@ -147,9 +156,10 @@ class Example extends React.Component<{}, ExampleState> {
                 <Card url={example.url} appearance="block" />
               </GridColumn>
               <GridColumn medium={6}>
-                {loremText()}
-                <Card url={example.url} appearance="inline" />
-                {loremText()}
+                <LoremText>
+                  {loremText()} <Card url={example.url} appearance="inline" />{' '}
+                  {loremText()}
+                </LoremText>
               </GridColumn>
             </Grid>
           </DivWithMargin>

@@ -5,6 +5,7 @@ import Button from '@atlaskit/button';
 import { truncateUrlForErrorView } from '../utils';
 import { Frame } from '../Frame';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
+import { AKIconWrapper } from '../Icon';
 
 export interface InlineCardErroredViewProps {
   /** The url to display */
@@ -37,7 +38,13 @@ export class InlineCardErroredView extends React.Component<
       <Frame onClick={onClick} isSelected={isSelected}>
         <IconAndTitleLayout
           icon={
-            <ErrorIcon label="error" size="medium" primaryColor={colors.R300} />
+            <AKIconWrapper>
+              <ErrorIcon
+                label="error"
+                size="small"
+                primaryColor={colors.R300}
+              />
+            </AKIconWrapper>
           }
           title={
             <span style={{ color: colors.R300 }}>

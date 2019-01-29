@@ -56,12 +56,14 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
       }),
       apply(tr, state: StatusState, editorState) {
         const meta = tr.getMeta(pluginKey);
-
         const nodeAtSelection = tr.doc.nodeAt(tr.selection.from);
+
         if (
           state.showStatusPickerAt &&
           (!nodeAtSelection ||
-            nodeAtSelection.type !== editorState.schema.nodes.status)
+            nodeAtSelection.type !== editorState.schema.nodes.status ||
+            // note: Status node has to==from+1 so from==to is positioned just before the Status node and StatusPicker should be dismissed
+            tr.selection.from === tr.selection.to)
         ) {
           let newState = {
             ...state,
@@ -84,6 +86,7 @@ const createPlugin: PMPluginFactory = ({ dispatch, portalProviderAPI }) =>
             }
           }
           let newState = { ...state, ...meta, selectedStatus };
+
           dispatch(pluginKey, newState);
           return newState;
         }

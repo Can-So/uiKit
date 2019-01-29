@@ -307,6 +307,7 @@ describe(name, () => {
         'sign-out',
         'star-filled',
         'star',
+        'status',
         'subtask',
         'switcher',
         'table',

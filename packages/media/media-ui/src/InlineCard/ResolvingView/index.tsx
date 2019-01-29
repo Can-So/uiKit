@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Frame } from '../Frame';
 import Spinner from '@atlaskit/spinner';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
-import { SpinnerWrapper } from './styled';
+import { IconPlaceholderWrapper } from '../Icon';
 
 export interface InlineCardResolvingViewProps {
   /** The url to display */
@@ -22,9 +22,9 @@ export class InlineCardResolvingView extends React.Component<
       <Frame onClick={onClick} isSelected={isSelected}>
         <IconAndTitleLayout
           icon={
-            <SpinnerWrapper>
+            <IconPlaceholderWrapper>
               <Spinner size={16} />
-            </SpinnerWrapper>
+            </IconPlaceholderWrapper>
           }
           title={url}
         />

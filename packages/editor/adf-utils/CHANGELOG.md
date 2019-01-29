@@ -1,5 +1,10 @@
 # @atlaskit/adf-utils
 
+## 5.5.0
+- [minor] [a5b5a5098e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5b5a5098e):
+
+  - Adds index to visitor
+
 ## 5.4.2
 - [patch] [76ed7f0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/76ed7f0):
 

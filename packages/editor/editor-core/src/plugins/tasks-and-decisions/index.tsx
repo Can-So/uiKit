@@ -36,8 +36,13 @@ const tasksAndDecisionsPlugin: EditorPlugin = {
     return [
       {
         name: 'tasksAndDecisions',
-        plugin: ({ schema, props, portalProviderAPI, providerFactory }) => {
-          return createPlugin(portalProviderAPI, providerFactory);
+        plugin: ({ portalProviderAPI, providerFactory, dispatch, props }) => {
+          return createPlugin(
+            portalProviderAPI,
+            providerFactory,
+            dispatch,
+            props.appearance,
+          );
         },
       },
       {

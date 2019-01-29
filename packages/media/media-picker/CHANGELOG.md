@@ -1,5 +1,10 @@
 # @atlaskit/media-picker
 
+## 31.0.2
+- [patch] [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+
+  - Fetch cloud accounts only on cloud folder opening
+
 ## 31.0.1
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

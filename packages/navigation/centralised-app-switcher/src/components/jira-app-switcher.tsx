@@ -27,51 +27,44 @@ export default ({ cloudId }: WithCloudId) => {
               }) => (
                 <AppSwitcherWrapper>
                   {isLoadingRecentContainers ? (
+                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
                     'Loading Recent Containers...'
                   ) : (
                     <Section title="Recent Containers">
-                      {recentContainersData &&
-                        recentContainersData.data.map(
-                          ({ objectId, name }: RecentContainer) => (
-                            <AppSwitcherItem key={objectId}>
-                              {name}
-                            </AppSwitcherItem>
-                          ),
-                        )}
+                      {recentContainersData.data.map(
+                        ({ objectId, name }: RecentContainer) => (
+                          <AppSwitcherItem key={objectId}>
+                            {name}
+                          </AppSwitcherItem>
+                        ),
+                      )}
                     </Section>
                   )}
                   {isLoadingCustomLinks ? (
+                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
                     'Loading Custom Links...'
                   ) : (
                     <Section title="Custom Links">
-                      {customLinksData &&
-                        customLinksData[0].map(({ key, label }: CustomLink) => (
-                          <AppSwitcherItem key={key}>{label}</AppSwitcherItem>
-                        ))}
+                      {customLinksData[0].map(({ key, label }: CustomLink) => (
+                        <AppSwitcherItem key={key}>{label}</AppSwitcherItem>
+                      ))}
                     </Section>
                   )}
                   {isLoadingLicenseInformation ? (
+                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
                     'Loading License Information...'
                   ) : (
                     <Section title="License Information">
-                      {licenseInformationData &&
-                        Object.keys(licenseInformationData.products).map(
-                          (productKey: string) => (
-                            <AppSwitcherItem
-                              key={productKey}
-                            >{`${productKey} - ${
-                              licenseInformationData.products[productKey].state
-                            }`}</AppSwitcherItem>
-                          ),
-                        )}
+                      {Object.keys(licenseInformationData.products).map(
+                        productKey => (
+                          <AppSwitcherItem key={productKey}>{`${productKey} - ${
+                            licenseInformationData.products[productKey].state
+                          }`}</AppSwitcherItem>
+                        ),
+                      )}
                     </Section>
                   )}
-                  <ManageButton
-                    onClick={() =>
-                      customLinksData &&
-                      (window.location.href = customLinksData[1])
-                    }
-                  />
+                  <ManageButton href={customLinksData && customLinksData[1]} />
                 </AppSwitcherWrapper>
               )}
             </LicenseInformationProvider>
