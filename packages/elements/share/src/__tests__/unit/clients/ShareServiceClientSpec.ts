@@ -16,7 +16,7 @@ describe('ShareServiceClientImpl', () => {
   };
   let mockRecipients = [
     { type: 'user' as 'user', id: 'id' },
-    { email: 'email' },
+    { type: 'user' as 'user', email: 'email' },
   ];
   let mockMetaData = {
     productId: 'confluence',

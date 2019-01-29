@@ -25,6 +25,7 @@ type RecipientWithId = {
 };
 
 type RecipientWithEmail = {
+  type: 'user';
   email: string;
 };
 
