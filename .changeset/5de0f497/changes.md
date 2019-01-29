@@ -1,0 +1,1 @@
+- Remove Props and State types for EditorView. Also make both EditorView and SmartMediaEditor export async component.
