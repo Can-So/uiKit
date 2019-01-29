@@ -38,7 +38,7 @@ const buildEventPayload = (properties, eventName) => {
 };
 
 module.exports = {
-  reportFailure(results, eventName) {
+  reportFailure(results /*: any */, eventName /*: string */) {
     const properties = extractResultInformationIntoProperties(results);
     if (!properties.length) {
       return;
@@ -58,7 +58,7 @@ module.exports = {
       },
     );
   },
-  reportLongRunningTests(results, threshold) {
+  reportLongRunningTests(results /*: any */, threshold /*: number */) {
     return sendLogs(
       JSON.stringify({
         events: results.map(result => {
