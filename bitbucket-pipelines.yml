@@ -109,6 +109,7 @@ pipelines:
             image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
             script:
               - source ./build-setup.sh
+              - git lfs pull
               - bolt install --pure-lockfile
               - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr:changed
             caches:
