@@ -9,20 +9,19 @@ import { FileDetails, MediaItemType } from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
 import { SelectWrapper, OptionsWrapper } from '../example-helpers/styled';
-import { MediaPicker, UploadPreviewUpdateEventPayload } from '../src';
+import {
+  MediaPicker,
+  UploadPreviewUpdateEventPayload,
+  MediaFile,
+  Popup,
+} from '../src';
 
 const context = createUploadContext();
 
-const popup = MediaPicker('popup', context, {
-  uploadParams: {
-    collection: defaultCollectionName,
-  },
-});
 const dataSourceOptions = [
   { label: 'List', value: 'list' },
   { label: 'Collection', value: 'collection' },
 ];
-popup.show();
 
 export type TenantFileRecord = {
   id: string;
@@ -33,13 +32,20 @@ export interface State {
   events: Array<TenantFileRecord>;
   selectedItem?: MediaViewerItem;
   dataSourceType: DataSourceType;
+  popup?: Popup;
 }
 
 export default class Example extends React.Component<{}, State> {
   state: State = { events: [], dataSourceType: 'list' };
 
-  componentDidMount() {
-    popup.on('uploads-start', async payload => {
+  async componentDidMount() {
+    const popup = await MediaPicker('popup', context, {
+      uploadParams: {
+        collection: defaultCollectionName,
+      },
+    });
+
+    popup.on('uploads-start', (payload: { files: MediaFile[] }) => {
       const { events } = this.state;
       payload.files.forEach(file => {
         file.upfrontId.then(id => {
@@ -59,6 +65,9 @@ export default class Example extends React.Component<{}, State> {
     });
 
     popup.on('upload-preview-update', this.onUploadPreviewUpdate);
+    this.setState({ popup });
+
+    popup.show();
   }
 
   private onUploadPreviewUpdate = async (
@@ -148,10 +157,16 @@ export default class Example extends React.Component<{}, State> {
   };
 
   render() {
+    const { popup } = this.state;
+
     return (
       <>
         <OptionsWrapper>
-          <Button appearance="primary" id="show" onClick={() => popup.show()}>
+          <Button
+            appearance="primary"
+            id="show"
+            onClick={() => (popup ? popup.show() : {})}
+          >
             Show
           </Button>
           <SelectWrapper>

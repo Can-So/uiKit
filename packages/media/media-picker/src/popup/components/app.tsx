@@ -44,7 +44,6 @@ import { fileUploadError } from '../actions/fileUploadError';
 import { dropzoneDropIn } from '../actions/dropzoneDropIn';
 import { dropzoneDragIn } from '../actions/dropzoneDragIn';
 import { dropzoneDragOut } from '../actions/dropzoneDragOut';
-import { MediaPicker } from '../..';
 import PassContext from './passContext';
 import {
   UploadsStartEventPayload,
@@ -137,7 +136,7 @@ export class App extends Component<AppProps, AppState> {
       cacheSize: tenantContext.config.cacheSize,
     });
 
-    this.mpBrowser = MediaPicker('browser', context, {
+    this.mpBrowser = new MpBrowser(context, {
       uploadParams: tenantUploadParams,
       shouldCopyFileToRecents: false,
       multiple: true,
@@ -149,7 +148,7 @@ export class App extends Component<AppProps, AppState> {
     this.mpBrowser.on('upload-end', onUploadEnd);
     this.mpBrowser.on('upload-error', onUploadError);
 
-    this.mpDropzone = MediaPicker('dropzone', context, {
+    this.mpDropzone = new MpDropzone(context, {
       uploadParams: tenantUploadParams,
       shouldCopyFileToRecents: false,
       headless: true,
@@ -163,7 +162,7 @@ export class App extends Component<AppProps, AppState> {
     this.mpDropzone.on('upload-end', onUploadEnd);
     this.mpDropzone.on('upload-error', onUploadError);
 
-    this.mpBinary = MediaPicker('binary', context, {
+    this.mpBinary = new MpBinary(context, {
       uploadParams: tenantUploadParams,
       shouldCopyFileToRecents: false,
     });

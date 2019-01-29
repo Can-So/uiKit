@@ -40,21 +40,23 @@ export default class PickerFacade {
 
   constructor(
     pickerType: PickerType,
-    config: PickerFacadeConfig,
-    pickerConfig?: ExtendedComponentConfigs[PickerType],
+    readonly config: PickerFacadeConfig,
+    readonly pickerConfig?: ExtendedComponentConfigs[PickerType],
   ) {
     this.pickerType = pickerType;
     this.errorReporter = config.errorReporter;
     this.stateManager = config.stateManager;
+  }
 
+  async init() {
     let picker;
-    if (pickerType === 'customMediaPicker') {
-      picker = this.picker = pickerConfig as CustomMediaPicker;
+    if (this.pickerType === 'customMediaPicker') {
+      picker = this.picker = this.pickerConfig as CustomMediaPicker;
     } else {
-      picker = this.picker = MediaPicker(
-        pickerType,
-        config.context,
-        pickerConfig as any,
+      picker = this.picker = await MediaPicker(
+        this.pickerType,
+        this.config.context,
+        this.pickerConfig as any,
       );
     }
 

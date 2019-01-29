@@ -25,7 +25,6 @@ import { MediaPluginOptions } from '../media-plugin-options';
 import { insertMediaGroupNode, isNonImagesBanned } from '../utils/media-files';
 import { removeMediaNode, splitMediaGroup } from '../utils/media-common';
 import PickerFacade, { PickerFacadeConfig } from '../picker-facade';
-import pickerFacadeLoader from '../picker-facade-loader';
 import {
   MediaState,
   MediaProvider,
@@ -139,11 +138,10 @@ export class MediaPluginState {
     }
 
     // TODO disable (not destroy!) pickers until mediaProvider is resolved
-    let Picker: typeof PickerFacade;
+    const Picker = PickerFacade;
 
     try {
       let resolvedMediaProvider: MediaProvider = (this.mediaProvider = await mediaProvider);
-      Picker = await pickerFacadeLoader();
 
       assert(
         resolvedMediaProvider && resolvedMediaProvider.viewContext,
@@ -191,7 +189,7 @@ export class MediaPluginState {
       const uploadContext = await this.mediaProvider.uploadContext;
 
       if (this.mediaProvider.uploadParams && uploadContext) {
-        this.initPickers(
+        await this.initPickers(
           this.mediaProvider.uploadParams,
           uploadContext,
           Picker,
@@ -550,7 +548,7 @@ export class MediaPluginState {
     this.customPicker = undefined;
   };
 
-  private initPickers(
+  private async initPickers(
     uploadParams: UploadParams,
     context: Context,
     Picker: typeof PickerFacade,
@@ -580,6 +578,7 @@ export class MediaPluginState {
             this.options.customMediaPicker,
           )),
         );
+        await this.customPicker.init();
       } else {
         pickers.push(
           (this.popupPicker = new Picker(
@@ -589,6 +588,7 @@ export class MediaPluginState {
             defaultPickerConfig,
           )),
         );
+        await this.popupPicker.init();
 
         pickers.push(
           (this.binaryPicker = new Picker(
@@ -597,6 +597,7 @@ export class MediaPluginState {
             defaultPickerConfig,
           )),
         );
+        await this.binaryPicker.init();
 
         pickers.push(
           (this.clipboardPicker = new Picker(
@@ -605,6 +606,7 @@ export class MediaPluginState {
             defaultPickerConfig,
           )),
         );
+        await this.clipboardPicker.init();
 
         pickers.push(
           (this.dropzonePicker = new Picker('dropzone', pickerFacadeConfig, {
@@ -613,6 +615,7 @@ export class MediaPluginState {
             ...defaultPickerConfig,
           })),
         );
+        await this.dropzonePicker.init();
 
         this.dropzonePicker.onDrag(this.handleDrag);
         this.removeOnCloseListener = this.popupPicker.onClose(
