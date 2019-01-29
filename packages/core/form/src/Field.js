@@ -168,8 +168,8 @@ class FieldInner extends React.Component<InnerProps, State> {
   componentDidUpdate(prevProps: Props) {
     const { defaultValue, name } = this.props;
     if (
-      !shallowEqual(prevProps.defaultValue, defaultValue) ||
-      prevProps.name !== name
+      prevProps.name !== name ||
+      !shallowEqual(prevProps.defaultValue, defaultValue)
     ) {
       this.unregisterField();
       this.unregisterField = this.register();
