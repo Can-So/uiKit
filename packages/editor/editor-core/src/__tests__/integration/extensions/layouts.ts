@@ -1,12 +1,14 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 import {
   getDocFromElement,
-  fullpage,
   editable,
   insertBlockMenuItem,
   changeSelectedNodeLayout,
 } from '../_helpers';
+import {
+  mountEditor,
+  goToEditorTestingExample,
+} from '../../__helpers/testing-example-helpers';
 
 import commonMessages from '../../../messages';
 
@@ -14,15 +16,18 @@ import commonMessages from '../../../messages';
   commonMessages.layoutFixedWidth.defaultMessage,
   commonMessages.layoutWide.defaultMessage,
   commonMessages.layoutFullWidth.defaultMessage,
-].forEach(async layoutName => {
+].forEach(layoutName => {
   BrowserTestCase(
     `layouts.ts: Extension: ${layoutName} Layout`,
     { skip: ['edge', 'ie'] },
     async client => {
-      const page = new Page(client);
-      await page.goto(fullpage.path);
-      await page.waitForSelector(fullpage.placeholder);
-      await page.click(fullpage.placeholder);
+      const page = await goToEditorTestingExample(client);
+      await mountEditor(page, {
+        appearance: 'full-page',
+        allowExtension: {
+          allowBreakout: true,
+        },
+      });
 
       await insertBlockMenuItem(page, 'Block macro (EH)');
       await changeSelectedNodeLayout(page, layoutName);

@@ -1,7 +1,10 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 import { getDocFromElement, comment, fullpage, editable } from '../_helpers';
 import { messages } from '../../../plugins/text-formatting/ui/ToolbarAdvancedTextFormatting';
+import {
+  goToEditorTestingExample,
+  mountEditor,
+} from '../../__helpers/testing-example-helpers';
 
 const more = `[aria-label="${messages.moreFormatting.defaultMessage}"]`;
 const underline = `span=${messages.underline.defaultMessage}`;
@@ -15,19 +18,19 @@ const clear = `span=${messages.clearFormatting.defaultMessage}`;
     } editor`,
     { skip: ['ie', 'safari'] },
     async client => {
-      const browser = new Page(client);
-      await browser.goto(editor.path);
-      await browser.waitForSelector(editor.placeholder);
-      await browser.click(editor.placeholder);
-      await browser.waitForSelector(more);
-      await browser.click(more);
-      await browser.waitForSelector(underline);
-      await browser.click(underline);
-      await browser.type(editable, 'test');
-      await browser.click(more);
-      await browser.click(clear);
-      await browser.type(editable, 'cleared');
-      const doc = await browser.$eval(editable, getDocFromElement);
+      const page = await goToEditorTestingExample(client);
+      await mountEditor(page, { appearance: editor.appearance });
+
+      await page.click(editable);
+      await page.waitForSelector(more);
+      await page.click(more);
+      await page.waitForSelector(underline);
+      await page.click(underline);
+      await page.type(editable, 'test');
+      await page.click(more);
+      await page.click(clear);
+      await page.type(editable, 'cleared');
+      const doc = await page.$eval(editable, getDocFromElement);
       expect(doc).toMatchDocSnapshot();
     },
   );
