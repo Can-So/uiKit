@@ -1,5 +1,20 @@
 # @atlaskit/media-picker
 
+## 32.0.0
+- [minor] [4e82fedc90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e82fedc90):
+
+  - Expose real id upfront for remote files in MediaPicker
+- [major] [9d881f1eb8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d881f1eb8):
+
+  - Use real id upfront for remote files + remove PublicMediaFile interface + now integrators can just use file.id from public events
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/media-card@52.0.0
+  - @atlaskit/media-editor@26.0.0
+  - @atlaskit/media-test-helpers@20.1.0
+  - @atlaskit/media-viewer@35.0.0
+  - @atlaskit/media-store@9.1.5
+  - @atlaskit/media-core@27.0.0
+
 ## 31.0.2
 - [patch] [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
 

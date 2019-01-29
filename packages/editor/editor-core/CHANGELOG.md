@@ -1,5 +1,31 @@
 # @atlaskit/editor-core
 
+## 98.0.1
+- [patch] [2035bef8fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2035bef8fb):
+
+  - Fix inline extractor priority preventing @type arrays in some cases.
+
+## 98.0.0
+- [patch] [4e82fedc90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e82fedc90):
+
+  - Expose real id upfront for remote files in MediaPicker
+- Updated dependencies [9d881f1eb8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d881f1eb8):
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/media-test-helpers@20.1.0
+  - @atlaskit/media-picker@32.0.0
+  - @atlaskit/editor-common@31.0.0
+  - @atlaskit/editor-test-helpers@6.3.17
+  - @atlaskit/renderer@38.0.0
+  - @atlaskit/emoji@54.0.0
+  - @atlaskit/media-card@52.0.0
+  - @atlaskit/media-filmstrip@26.0.0
+  - @atlaskit/editor-bitbucket-transformer@4.1.8
+  - @atlaskit/editor-json-transformer@4.1.8
+  - @atlaskit/editor-markdown-transformer@2.1.8
+  - @atlaskit/task-decision@11.1.8
+  - @atlaskit/util-data-test@10.0.36
+  - @atlaskit/media-core@27.0.0
+
 ## 97.1.9
 - [patch] [4552e804d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4552e804d3):
 

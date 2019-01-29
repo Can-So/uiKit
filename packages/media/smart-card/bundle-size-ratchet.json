@@ -4,15 +4,15 @@
     "name": "main",
     "stats": {
       "size": 11777,
-      "gzipSize": 4005
+      "gzipSize": 4004
     }
   },
   {
     "id": "src.async",
     "name": "async",
     "stats": {
-      "size": 19400,
-      "gzipSize": 4659
+      "size": 19399,
+      "gzipSize": 4654
     }
   },
   {
@@ -83,8 +83,8 @@
     "id": "combined.async",
     "name": "async",
     "stats": {
-      "size": 430448,
-      "gzipSize": 104088
+      "size": 430447,
+      "gzipSize": 104083
     }
   }
 ]

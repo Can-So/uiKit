@@ -88,15 +88,14 @@ describe('<InlinePlayer />', () => {
   });
 
   it('should use local preview if available', async () => {
+    const blob = new Blob([], { type: 'video/mp4' });
     const context = {
       file: {
         getFileState: jest.fn().mockReturnValue(
           Observable.of({
             status: 'uploading',
             preview: {
-              blob: {
-                type: 'video/mp4',
-              },
+              value: blob,
             },
           }),
         ),
@@ -105,6 +104,7 @@ describe('<InlinePlayer />', () => {
     const { component } = setup({ context });
 
     await update(component);
+
     expect(component.find(CustomMediaPlayer).prop('src')).toEqual(
       'mock result of URL.createObjectURL()',
     );

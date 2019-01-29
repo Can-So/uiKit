@@ -20,7 +20,8 @@ export default (action: Action, store: MiddlewareAPI<State>): HandlerResult => {
             fileMediatype: publicFile.mediaType,
             fileState: publicFile.processingStatus,
             fileStatus:
-              publicFile.artifacts && publicFile.artifacts.length > 0
+              publicFile.artifacts &&
+              Object.keys(publicFile.artifacts).length > 0
                 ? 'original'
                 : 'converted',
             fileSize: publicFile.size,

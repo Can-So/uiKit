@@ -1,8 +1,10 @@
 // @flow
+import testData from './_data.json';
 
 export const sortKey = 'first_name';
 export const secondSortKey = 'last_name';
 
+// Presidents data
 export const head = {
   cells: [
     {
@@ -17,52 +19,7 @@ export const head = {
   ],
 };
 
-export const rows = [
-  {
-    cells: [
-      {
-        key: 'baob',
-        content: 'Barack',
-      },
-      {
-        content: 'Obama',
-      },
-    ],
-  },
-  {
-    cells: [
-      {
-        key: 'dotr',
-        content: 'Donald',
-      },
-      {
-        content: 'Trump',
-      },
-    ],
-  },
-  {
-    cells: [
-      {
-        key: 'hicl',
-        content: 'Hillary',
-      },
-      {
-        content: 'Clinton',
-      },
-    ],
-  },
-  {
-    cells: [
-      {
-        key: 'tjeff',
-        content: 'Thomas',
-      },
-      {
-        content: 'Jefferson',
-      },
-    ],
-  },
-];
+export const rows = testData;
 
 export const row = rows[0];
 

@@ -13,7 +13,7 @@ export interface FinalizeUploadAction extends Action {
   readonly file: MediaFile;
   readonly uploadId: string;
   readonly source: FinalizeUploadSource;
-  readonly replaceFileId?: Promise<string>;
+  readonly replaceFileId?: Promise<string> | string;
   readonly occurrenceKey?: string;
 }
 
@@ -27,7 +27,7 @@ export function finalizeUpload(
   file: MediaFile,
   uploadId: string,
   source: FinalizeUploadSource,
-  replaceFileId?: Promise<string>,
+  replaceFileId?: Promise<string> | string,
 ): FinalizeUploadAction {
   return {
     type: FINALIZE_UPLOAD,

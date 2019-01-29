@@ -16,6 +16,7 @@ import LoadingContainerAdvanced from '../../LoadingContainerAdvanced';
 import { Caption } from '../../../styled/DynamicTable';
 import DynamicTable, { DynamicTableStateless } from '../../..';
 import { rows, head, rowsWithKeys } from './_data';
+import { headNumeric, rowsNumeric } from './_dataNumeric';
 
 import { name } from '../../../../package.json';
 
@@ -117,14 +118,14 @@ describe(name, () => {
           .find('td')
           .at(0)
           .text(),
-      ).toBe('Hillary');
+      ).toBe('Donald');
       expect(
         bodyRows
           .at(0)
           .find('td')
           .at(1)
           .text(),
-      ).toBe('Clinton');
+      ).toBe('Trump');
     });
 
     const checkSortedData = isRankable => {
@@ -134,8 +135,8 @@ describe(name, () => {
       }));
       const wrapper = mount(
         <DynamicTableStateless
-          defaultSortKey="last_name"
-          defaultSortOrder="DESC"
+          sortKey="first_name"
+          sortOrder="ASC"
           head={{ cells: headCells }}
           rows={rowsWithKeys}
           isRankable={isRankable}
@@ -176,14 +177,14 @@ describe(name, () => {
           .find('td')
           .at(0)
           .text(),
-      ).toBe('Hillary');
+      ).toBe('hillary');
       expect(
         bodyRows
           .at(2)
           .find('td')
           .at(1)
           .text(),
-      ).toBe('Clinton');
+      ).toBe('clinton');
     };
 
     it('should display sorted data', () => {
@@ -337,11 +338,18 @@ describe(name, () => {
         );
       });
 
-      it('onSort & onSetPage', () => {
+      it('should not run onSort for a non-sortable column', () => {
         const headCells = wrapper.find('th');
         headCells.at(0).simulate('click');
         expect(onSort).toHaveBeenCalledTimes(1);
         headCells.at(1).simulate('click');
+        expect(onSort).toHaveBeenCalledTimes(1);
+        expect(onSetPage).toHaveBeenCalledWith(1, undefined);
+      });
+
+      it('should run onSort & onSetPage', () => {
+        const headCells = wrapper.find('th');
+        headCells.at(0).simulate('click');
         expect(onSort).toHaveBeenCalledTimes(1);
         expect(onSort).toHaveBeenCalledWith(
           {
@@ -410,14 +418,14 @@ describe(name, () => {
           .find('td')
           .at(0)
           .text(),
-      ).toBe('Donald');
+      ).toBe('hillary');
       expect(
         bodyRows
           .at(1)
           .find('td')
           .at(1)
           .text(),
-      ).toBe('Trump');
+      ).toBe('clinton');
     });
 
     it('should pass i18n info down correctly', () => {
@@ -496,14 +504,118 @@ describe(name, () => {
           .find('td')
           .at(0)
           .text(),
-      ).toBe('Hillary');
+      ).toBe('hillary');
       expect(
         bodyRows
           .at(2)
           .find('td')
           .at(1)
           .text(),
-      ).toBe('Clinton');
+      ).toBe('clinton');
+    });
+
+    it('should sort numeric data correctly, listed before strings or empty values', () => {
+      const wrapper = mount(
+        <DynamicTable head={headNumeric} rows={rowsNumeric} />,
+      );
+      wrapper
+        .find('th')
+        .at(1)
+        .simulate('click');
+      wrapper.update();
+
+      const bodyRows = wrapper.find('tbody tr');
+
+      expect(
+        bodyRows
+          .at(0)
+          .find('td')
+          .at(0)
+          .text(),
+      ).toBe('Negative One');
+      expect(
+        bodyRows
+          .at(0)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('-1');
+      expect(
+        bodyRows
+          .at(1)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('0');
+      expect(
+        bodyRows
+          .at(2)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('1');
+      expect(
+        bodyRows
+          .at(3)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('');
+      expect(
+        bodyRows
+          .at(4)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe(' ');
+      expect(
+        bodyRows
+          .at(5)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('1');
+      expect(
+        bodyRows
+          .at(8)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('a string');
+    });
+
+    it('should sort grouped numbers in strings', () => {
+      const wrapper = mount(
+        <DynamicTable head={headNumeric} rows={rowsNumeric} />,
+      );
+      wrapper
+        .find('th')
+        .at(1)
+        .simulate('click');
+      wrapper.update();
+      const bodyRows = wrapper.find('tbody tr');
+
+      expect(
+        bodyRows
+          .at(5)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('1');
+      expect(
+        bodyRows
+          .at(6)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('5');
+      expect(
+        bodyRows
+          .at(7)
+          .find('td')
+          .at(1)
+          .text(),
+      ).toBe('10');
     });
   });
 });

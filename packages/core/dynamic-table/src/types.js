@@ -38,6 +38,7 @@ export type StatelessProps = {
   sortKey?: string,
   /** Whether to sort in ascending or descending order */
   sortOrder?: SortOrderType,
+  /** Whether to allow 'rank' sort in addition to ascending/descending */
   isRankable?: boolean,
   isRankingDisabled?: boolean,
   onRankStart?: RankStart => void,
