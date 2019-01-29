@@ -83,12 +83,12 @@ type Props = {
 export const defaultDialogContentState: DialogContentState = {
   users: [],
   comment: {
-    format: '',
+    format: 'plain_text' as 'plain_text',
     value: '',
   },
 };
 
-export class ShareDialogTrigger extends React.Component<Props, State> {
+export class ShareDialogWithTrigger extends React.Component<Props, State> {
   static defaultProps = {
     buttonAppearance: 'default',
     capabilities: {},
@@ -224,7 +224,7 @@ export class ShareDialogTrigger extends React.Component<Props, State> {
   handleShareCommentChange = (event: React.SyntheticEvent) => {
     const target = event.target as HTMLTextAreaElement;
     const comment: Comment = {
-      format: 'plain',
+      format: 'plain_text' as 'plain_text',
       value: target!.value,
     };
 
