@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.0.1
+- [patch] [2035bef8fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2035bef8fb):
+
+  - Fix inline extractor priority preventing @type arrays in some cases.
+
 ## 98.0.0
 - [patch] [4e82fedc90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e82fedc90):
 
