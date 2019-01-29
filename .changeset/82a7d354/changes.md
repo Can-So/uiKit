@@ -1,0 +1,1 @@
+- Fixing analytics in smart-cards
