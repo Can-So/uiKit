@@ -27,11 +27,11 @@ test('defaultTimes', () => {
 });
 
 test('DropdownIndicator', () => {
+  const Icon = () => <i>V</i>;
+
   expect(mount(<DropdownIndicator selectProps={{}} />)).toMatchSnapshot();
   expect(
-    mount(
-      <DropdownIndicator selectProps={{ dropdownIndicatorIcon: 'asdf' }} />,
-    ),
+    mount(<DropdownIndicator selectProps={{ dropdownIndicatorIcon: Icon }} />),
   ).toMatchSnapshot();
 });
 
