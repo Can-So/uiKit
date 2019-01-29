@@ -43,7 +43,7 @@ class AppSwitcher extends Component {
                 <AppSwitcherItem>Second Item</AppSwitcherItem>
                 <AppSwitcherItem>Third Item</AppSwitcherItem>
               </Section>
-              <ManageButton onClick={() => {}} />
+              <ManageButton href="/some-href" />
             </AppSwitcherWrapper>
           )
         }

@@ -2,8 +2,7 @@ import React from 'react';
 import Button from '@atlaskit/button';
 
 type Props = {
-  onClick: () => void;
+  href: string;
 };
-export default ({ onClick }: Props) => (
-  <Button onClick={onClick}>Manage list</Button>
-);
+
+export default ({ href }: Props) => <Button href={href}>Manage list</Button>;
