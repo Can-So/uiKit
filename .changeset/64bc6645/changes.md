@@ -1,0 +1,1 @@
+- Fix inline extractor priority preventing @type arrays in some cases.
