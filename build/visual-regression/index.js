@@ -50,6 +50,7 @@ async function main() {
   if (!serverAlreadyRunning) {
     webpack.stopDevServer();
   }
+  process.exit(code);
 }
 
 main().catch(err => {
