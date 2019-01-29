@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Loader from './loader';
+import Loader from './loadingView';
 import SmartMediaEditorType, {
   SmartMediaEditorProps,
 } from './smartMediaEditor';
@@ -13,7 +13,7 @@ export default class AsyncSmartMediaEditor extends React.PureComponent<
   SmartMediaEditorProps & AsyncSmartMediaEditorState,
   AsyncSmartMediaEditorState
 > {
-  static displayName = 'AsyncCard';
+  static displayName = 'AsyncSmartMediaEditor';
   static SmartMediaEditor?: typeof SmartMediaEditorType;
 
   state = {
@@ -23,7 +23,7 @@ export default class AsyncSmartMediaEditor extends React.PureComponent<
 
   componentWillMount() {
     if (!this.state.SmartMediaEditor) {
-      import(/* webpackChunkName:"@atlaskit-internal_SmartMediaEditor" */
+      import(/* webpackChunkName:"@atlaskit-internal_smart-media-editor" */
       './smartMediaEditor').then(module => {
         AsyncSmartMediaEditor.SmartMediaEditor = module.default;
         this.setState({ SmartMediaEditor: module.default });

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Loader from '../loader';
+import Loader from '../loadingView';
 import EditorViewType, { EditorViewProps } from './editorView';
 
 interface AsyncEditorViewState {
@@ -10,7 +10,7 @@ export default class AsyncEditorView extends React.PureComponent<
   EditorViewProps & AsyncEditorViewState,
   AsyncEditorViewState
 > {
-  static displayName = 'AsyncCard';
+  static displayName = 'AsyncEditorView';
   static EditorView?: typeof EditorViewType;
 
   state = {
@@ -20,7 +20,7 @@ export default class AsyncEditorView extends React.PureComponent<
 
   componentWillMount() {
     if (!this.state.EditorView) {
-      import(/* webpackChunkName:"@atlaskit-internal_EditorView" */
+      import(/* webpackChunkName:"@atlaskit-internal_media-editor-view" */
       './editorView').then(module => {
         AsyncEditorView.EditorView = module.default;
         this.setState({ EditorView: module.default });
