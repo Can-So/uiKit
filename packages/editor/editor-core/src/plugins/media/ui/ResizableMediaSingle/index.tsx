@@ -224,16 +224,16 @@ export default class ResizableMediaSingle extends React.Component<
     const highlight: number[] = [];
 
     if (layout === 'wrap-left' || layout === 'align-start') {
-      highlight.push(0);
-      highlight.push(columnWidth);
+      highlight.push(0, columnWidth);
     } else if (layout === 'wrap-right' || layout === 'align-end') {
-      highlight.push(gridSize);
-      highlight.push(gridSize - columnWidth);
+      highlight.push(gridSize, gridSize - columnWidth);
     } else if (this.insideInlineLike) {
       highlight.push(Math.round(columns + this.calcColumnLeftOffset()));
     } else {
-      highlight.push(Math.floor((gridSize - columnWidth) / 2));
-      highlight.push(Math.ceil((gridSize + columnWidth) / 2));
+      highlight.push(
+        Math.floor((gridSize - columnWidth) / 2),
+        Math.ceil((gridSize + columnWidth) / 2),
+      );
     }
 
     return highlight;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { Node as PMNode } from 'prosemirror-model';
-import { EditorView, NodeView } from 'prosemirror-view';
+import { EditorView } from 'prosemirror-view';
 import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import { MediaSingle, WithProviders } from '@atlaskit/editor-common';
 import { CardEvent } from '@atlaskit/media-card';
@@ -266,7 +266,7 @@ export const ReactMediaSingleNode = (
   portalProviderAPI,
   eventDispatcher,
   editorAppearance,
-) => (node: PMNode, view: EditorView, getPos: () => number): NodeView => {
+) => (node: PMNode, view: EditorView, getPos: () => number) => {
   return new MediaSingleNodeView(node, view, getPos, portalProviderAPI, {
     eventDispatcher,
     editorAppearance,
