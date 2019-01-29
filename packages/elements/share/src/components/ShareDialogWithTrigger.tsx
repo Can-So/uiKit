@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import InlineDialog from '@atlaskit/inline-dialog';
-import { UIAnalyticsEvent } from '@atlaskit/analytics-next-types';
 import { ShareButton } from './ShareButton';
 import { ShareForm } from './ShareForm';
 import { messages } from '../i18n';
@@ -185,10 +184,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     this.escapeIsHeldDown = false;
   };
 
-  handleOpenDialog = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    analyticsEvent: UIAnalyticsEvent,
-  ) => {
+  handleOpenDialog = (e: React.MouseEvent<HTMLButtonElement>) => {
     // TODO: send analytics
 
     this.setState({
