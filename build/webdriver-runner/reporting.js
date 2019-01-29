@@ -1,7 +1,7 @@
 // @flow
 const fetch = require('node-fetch');
 const get = require('lodash.get');
-
+const sendLogs = require('@atlaskit/analytics-reporting');
 /**
  * Test that fail, cause other blocks in the same file to cascade fail
  * So as a result we only pull out the first error as the cascade results aren't useful
@@ -37,29 +37,51 @@ const buildEventPayload = (properties, eventName) => {
   };
 };
 
-module.exports = async (results /*: any */, eventName /*: string */) => {
-  const properties = extractResultInformationIntoProperties(results);
-
-  if (!properties.length) {
-    return;
-  }
-
-  await fetch('https://analytics.atlassian.com/analytics/events', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json, */*',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      events: properties.map(property => {
-        buildEventPayload(property, eventName);
+module.exports = {
+  reportFailure(results, eventName) {
+    const properties = extractResultInformationIntoProperties(results);
+    if (!properties.length) {
+      return;
+    }
+    return sendLogs(
+      JSON.stringify({
+        events: properties.map(property => {
+          buildEventPayload(property, eventName);
+        }),
       }),
-    }),
-  });
-
-  console.log(
-    `Sent ${properties.length} integration test failure event${
-      properties.length > 1 ? 's' : ''
-    }`,
-  );
+      () => {
+        console.log(
+          `Sent ${properties.length} integration test failure event${
+            properties.length > 1 ? 's' : ''
+          }`,
+        );
+      },
+    );
+  },
+  reportLongRunningTests(results, threshold) {
+    return sendLogs(
+      JSON.stringify({
+        events: results.map(result => {
+          return {
+            name: 'atlaskit.qa.integration_test.testtimes',
+            server: process.env.CI ? 'master' : 'test',
+            product: 'atlaskit',
+            properties: {
+              timeTaken: result.timeTaken,
+              testFilePath: result.testFilePath,
+              threshold,
+            },
+            user: process.env.CI ? '-' : process.env.USER, // On CI we send as an anonymous user
+            serverTime: Date.now(),
+          };
+        }),
+      }),
+    ).then(res => {
+      console.log(
+        `Sent ${results.length} integration long running tests event${
+          results.length > 1 ? 's' : ''
+        }`,
+      );
+    });
+  },
 };
