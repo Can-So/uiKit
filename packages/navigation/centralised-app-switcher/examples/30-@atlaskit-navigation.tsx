@@ -6,65 +6,7 @@ import AppSwitcherIcon from '@atlaskit/icon/glyph/app-switcher';
 import { colors } from '@atlaskit/theme';
 import AkDrawer from '@atlaskit/drawer';
 import ConfluenceAppSwitcher from '../src/components/confluence-app-switcher';
-import fetchMock from 'fetch-mock';
-
-const RECENT_CONTAINERS_DATA = {
-  data: [
-    {
-      objectId: 'some-id',
-      type: 'jira-project',
-      name: 'Confluence App Switcher',
-      url: 'https://hello.atlassian.net/projects/CEN',
-      iconUrl:
-        'https://hello.atlassian.net/secure/projectavatar?size=medium&avatarId=some-id',
-    },
-  ],
-};
-
-const CUSTOM_LINKS_DATA = [
-  {
-    key: 'home',
-    link: 'https://hello.atlassian.net/wiki',
-    label: 'Hello Confluence',
-    local: true,
-    self: false,
-    applicationType: 'confluence',
-  },
-];
-
-const LICENSE_INFORMATION_DATA = {
-  hostname: 'https://some-instance.atlassian.net',
-  firstActivationDate: 1541541873107,
-  maintenanceEndDate: '2018-03-01',
-  maintenanceStartDate: '2018-01-01',
-  products: {
-    'confluence.ondemand': {
-      billingPeriod: 'MONTHLY',
-      state: 'DEACTIVATED',
-    },
-    'jira-servicedesk.ondemand': {
-      billingPeriod: 'MONTHLY',
-      state: 'ACTIVE',
-    },
-    'jira-software.ondemand': {
-      billingPeriod: 'MONTHLY',
-      state: 'DEACTIVATED',
-    },
-  },
-};
-
-fetchMock.get(
-  '/gateway/api/activity/api/client/recent/containers?cloudId=some-cloud-id',
-  () => new Promise(res => setTimeout(() => res(RECENT_CONTAINERS_DATA), 1500)),
-);
-fetchMock.get(
-  '/wiki/rest/menu/latest/appswitcher',
-  () => new Promise(res => setTimeout(() => res(CUSTOM_LINKS_DATA), 2500)),
-);
-fetchMock.get(
-  '/gateway/api/xflow/some-cloud-id/license-information',
-  new Promise(res => setTimeout(() => res(LICENSE_INFORMATION_DATA), 2000)),
-);
+import { mockEndpoints } from './helpers/mock-endpoints';
 
 export default class ConfluenceAppSwitcherExample extends Component {
   state = {
@@ -72,6 +14,7 @@ export default class ConfluenceAppSwitcherExample extends Component {
   };
 
   openDrawer = () => {
+    mockEndpoints('confluence');
     this.setState({
       isDrawerOpen: true,
     });
