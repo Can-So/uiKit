@@ -299,7 +299,7 @@ describe('ShareDialogTrigger', () => {
         isDialogOpen: true,
         users: [{ type: 'user' as 'user', id: 'id' }, { email: 'email' }],
         comment: {
-          type: 'mock type',
+          format: 'plain_text' as 'plain_text',
           value: 'comment',
         },
         isStateValidWithCapabilities: true,
@@ -380,7 +380,7 @@ describe('ShareDialogTrigger', () => {
         isDialogOpen: true,
         users: [{ type: 'user' as 'user', id: 'id' }, { email: 'email' }],
         comment: {
-          type: 'mock type',
+          format: 'plain_text' as 'plain_text',
           value: 'comment',
         },
         isStateValidWithCapabilities: true,

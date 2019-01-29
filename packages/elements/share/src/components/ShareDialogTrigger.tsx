@@ -37,7 +37,7 @@ type UserWithEmail = {
 };
 
 type Comment = {
-  type: string;
+  format: 'plain_text' | 'adf';
   value: string;
 };
 
@@ -83,7 +83,7 @@ type Props = {
 export const defaultDialogContentState: DialogContentState = {
   users: [],
   comment: {
-    type: '',
+    format: '',
     value: '',
   },
 };
@@ -224,7 +224,7 @@ export class ShareDialogTrigger extends React.Component<Props, State> {
   handleShareCommentChange = (event: React.SyntheticEvent) => {
     const target = event.target as HTMLTextAreaElement;
     const comment: Comment = {
-      type: 'plain',
+      format: 'plain',
       value: target!.value,
     };
 
