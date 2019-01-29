@@ -1,0 +1,1 @@
+- ED-5845, ED-6072: support resizing in multiple editors on page, fix snapping images in lists
