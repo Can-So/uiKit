@@ -79,7 +79,11 @@ function setBrowserStackClients() /*: Array<?Object>*/ {
       waitforTimeout: 3000,
     };
     const driver = webdriverio.remote(option);
-    return { driver: driver, isReady: false };
+    return {
+      browserName: launchers[launchKey].browserName,
+      driver: driver,
+      isReady: false,
+    };
   });
 
   return options;
@@ -98,7 +102,7 @@ function setLocalClients() /*: Array<?Object>*/ {
     },
   };
   const driver = webdriverio.remote(options);
-  return [{ driver: driver, isReady: false }];
+  return [{ browserName: 'chrome', driver: driver, isReady: false }];
 }
 
 module.exports = { setLocalClients, setBrowserStackClients };

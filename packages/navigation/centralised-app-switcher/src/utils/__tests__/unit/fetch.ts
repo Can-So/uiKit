@@ -1,5 +1,5 @@
 declare var global: any;
-import { fetchJson } from '../fetch';
+import { fetchJson } from '../../fetch';
 
 const REQUEST_URL = '/some/url';
 const REQUEST_RESPONSE_DATA = {

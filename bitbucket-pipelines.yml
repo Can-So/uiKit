@@ -105,6 +105,16 @@ pipelines:
             caches:
               - node
         - step:
+            name: Visual Regression Tests
+            image: atlassianlabs/atlaskit-mk-2-vr:1.0.8
+            script:
+              - source ./build-setup.sh
+              - git lfs pull
+              - bolt install --pure-lockfile
+              - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr:changed
+            caches:
+              - node
+        - step:
             name: Building website
             script:
               - source ./build-setup.sh
@@ -193,10 +203,8 @@ pipelines:
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
-            # Run it for button now since this is the only pkg with store snapshot
-            - yarn test:vr button
-          caches:
-            - node
+            # Will work for all pkgs other than editor
+            - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr 
       # This will run essentially the branch builds, but without any optimizations and should be manually
       # run in any potentially risky builds
     run-full-suite:

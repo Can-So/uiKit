@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/task-decision",
-  "version": "11.1.7",
+  "version": "11.1.8",
   "config": {
     "access": "public"
   },
@@ -50,10 +50,10 @@
     "@atlaskit/analytics-listeners": "^4.1.4",
     "@atlaskit/avatar": "^14.1.8",
     "@atlaskit/docs": "^6.0.1",
-    "@atlaskit/editor-common": "^30.0.1",
-    "@atlaskit/renderer": "^37.0.1",
+    "@atlaskit/editor-common": "^31.0.0",
+    "@atlaskit/renderer": "^38.0.0",
     "@atlaskit/util-common-test": "^2.4.2",
-    "@atlaskit/util-data-test": "^10.0.34",
+    "@atlaskit/util-data-test": "^10.0.36",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "fetch-mock": "^6.5.2",

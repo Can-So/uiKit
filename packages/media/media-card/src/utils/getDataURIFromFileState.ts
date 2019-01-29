@@ -17,28 +17,35 @@ export const getDataURIFromFileState = async (
   ) {
     return {};
   }
-  const type = state.preview.blob.type;
-  const blob = state.preview.blob;
-  const mediaType = getMediaTypeFromMimeType(type);
+  const { value } = await state.preview;
+  if (value instanceof Blob) {
+    const { type } = value;
+    const mediaType = getMediaTypeFromMimeType(type);
 
-  if (mediaType === 'image') {
-    const orientation = await getOrientation(blob as File);
-    const src = URL.createObjectURL(blob);
+    if (mediaType === 'image') {
+      const orientation = await getOrientation(value as File);
+      const src = URL.createObjectURL(value);
 
+      return {
+        src,
+        orientation,
+      };
+    }
+
+    if (mediaType === 'video') {
+      const snapshoter = new VideoSnapshot(value);
+      const src = await snapshoter.takeSnapshot();
+
+      snapshoter.end();
+
+      return {
+        src,
+      };
+    }
+  } else {
     return {
-      src,
-      orientation,
-    };
-  }
-
-  if (mediaType === 'video') {
-    const snapshoter = new VideoSnapshot(blob);
-    const src = await snapshoter.takeSnapshot();
-
-    snapshoter.end();
-
-    return {
-      src,
+      src: value,
+      orientation: 1,
     };
   }
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import asDataProvider from '../as-data-provider';
+import asDataProvider from '../../as-data-provider';
 
 const RESOLVED_VALUE = {};
 const CHILDREN_PROP_RETURN_VALUE = 'TEST';

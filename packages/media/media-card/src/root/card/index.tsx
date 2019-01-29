@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Context, FileDetails } from '@atlaskit/media-core';
+import { Context, FileDetails, isPreviewableType } from '@atlaskit/media-core';
 import { AnalyticsContext } from '@atlaskit/analytics-next';
 import DownloadIcon from '@atlaskit/icon/glyph/download';
 import { UIAnalyticsEventInterface } from '@atlaskit/analytics-next-types';
@@ -14,7 +14,7 @@ import {
   CardState,
   CardEvent,
 } from '../..';
-import { Identifier, isPreviewableType, FileIdentifier } from '../domain';
+import { Identifier, FileIdentifier } from '../domain';
 import { CardView } from '../cardView';
 import { LazyContent } from '../../utils/lazyContent';
 import { getBaseAnalyticsContext } from '../../utils/analyticsUtils';
@@ -166,10 +166,10 @@ export class Card extends Component<CardProps, CardState> {
 
           if (!currentDataURI) {
             const {
-              src: dataURI,
+              src,
               orientation: previewOrientation,
             } = await getDataURIFromFileState(fileState);
-
+            dataURI = src;
             this.notifyStateChange({ dataURI, previewOrientation });
           }
 
@@ -197,7 +197,11 @@ export class Card extends Component<CardProps, CardState> {
               }
               break;
             case 'processed':
-              if (metadata.mediaType && isPreviewableType(metadata.mediaType)) {
+              if (
+                !dataURI &&
+                metadata.mediaType &&
+                isPreviewableType(metadata.mediaType)
+              ) {
                 const { appearance, dimensions, resizeMode } = this.props;
                 const options = {
                   appearance,

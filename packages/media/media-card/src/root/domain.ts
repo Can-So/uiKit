@@ -1,5 +1,3 @@
-import { MediaType } from '@atlaskit/media-core';
-
 export type Identifier =
   | UrlPreviewIdentifier
   | LinkIdentifier
@@ -30,7 +28,3 @@ export interface ExternalImageIdentifier {
   readonly dataURI: string;
   readonly name?: string;
 }
-
-export const isPreviewableType = (type: MediaType): boolean => {
-  return ['audio', 'video', 'image'].indexOf(type) > -1;
-};

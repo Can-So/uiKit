@@ -21,7 +21,7 @@ const startBtn = '#examples > button';
 const tellMeMoreBtn = '[type="button"]';
 
 BrowserTestCase(
-  'on-boarding.js: AK-4279 - Clicking on show should display the onboarding and no errors',
+  'AK-4279 - Clicking on show should display the onboarding and no errors',
   { skip: ['safari', 'edge'] }, // Safari and Edge have issues at the moment
   async client => {
     const onBoardingTest = new Page(client);
@@ -35,7 +35,7 @@ BrowserTestCase(
 );
 
 BrowserTestCase(
-  'on-boarding.js: AK-5612 - Blanket should never be on top of the spotlight modal',
+  'AK-5612 - Blanket should never be on top of the spotlight modal',
   { skip: ['safari', 'edge', 'firefox', 'chrome'] }, // The actual issue was only occuring in IE11
   async client => {
     const onBoardingTest = new Page(client);
