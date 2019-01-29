@@ -1,1 +1,0 @@
-- FM-1494: turned off CSS properties overflow and overflow-scrolling
