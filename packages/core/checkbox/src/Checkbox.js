@@ -131,7 +131,7 @@ class Checkbox extends Component<CheckboxProps, State> {
       value,
       onChange,
       isRequired,
-      ...props
+      ...rest
     } = this.props;
     const isChecked = this.getProp('isChecked');
     const { isFocused, isActive, isHovered } = this.state;
@@ -139,7 +139,6 @@ class Checkbox extends Component<CheckboxProps, State> {
     return (
       <ThemeProvider theme={emptyTheme}>
         <Label
-          {...props}
           isDisabled={isDisabled}
           onMouseDown={this.onMouseDown}
           onMouseEnter={this.onMouseEnter}
@@ -160,6 +159,7 @@ class Checkbox extends Component<CheckboxProps, State> {
               name={name}
               innerRef={r => (this.checkbox = r)} // eslint-disable-line
               required={isRequired}
+              {...rest}
             />
             <CheckboxIcon
               isChecked={isChecked}
