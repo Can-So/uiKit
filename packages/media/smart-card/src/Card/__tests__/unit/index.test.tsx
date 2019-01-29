@@ -74,7 +74,7 @@ describe('Card', () => {
         done();
       });
       mount(
-        <AnalyticsListener onEvent={logger}>
+        <AnalyticsListener onEvent={logger} channel="media">
           <Card appearance="inline" client={customClient} url={url} />
         </AnalyticsListener>,
       );
