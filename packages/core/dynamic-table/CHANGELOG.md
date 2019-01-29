@@ -1,5 +1,11 @@
 # @atlaskit/dynamic-table
 
+## 10.0.23
+- [patch] [d026472527](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d026472527):
+
+  - Sorting behaviour fixed for integers. New behaviour groups datatypes with integers first, then strings, then other values, and sorting is performed within those groups.
+  - Fixed sorting for strings; lowercase, uppercase and accented characters will be treated as equivalent.
+
 ## 10.0.22
 - Updated dependencies [58b84fa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/58b84fa):
   - @atlaskit/analytics-next@3.1.2

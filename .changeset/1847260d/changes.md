@@ -1,2 +1,0 @@
-- Sorting behaviour fixed for integers. New behaviour groups datatypes with integers first, then strings, then other values, and sorting is performed within those groups.
-- Fixed sorting for strings; lowercase, uppercase and accented characters will be treated as equivalent.
