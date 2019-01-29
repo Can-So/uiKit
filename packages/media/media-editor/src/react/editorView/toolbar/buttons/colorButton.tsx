@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import ChevronDownIcon from '@atlaskit/icon/glyph/chevron-down';
-import { Color } from '../../../..';
+import { Color } from '../../../../common';
 
 import Button from '@atlaskit/button';
 import {
