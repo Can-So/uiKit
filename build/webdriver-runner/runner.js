@@ -64,27 +64,32 @@ afterAll(async function() {
   await Promise.all(clients.map(endSession));
 });
 
-function BrowserTestCase(testCase, options, tester) {
-  if (!tester && typeof options === 'function') {
-    tester = options;
-  } else if (!tester) {
-    console.error('Nothing to test!!!!');
-    return false;
-  }
-
+function BrowserTestCase(
+  testCase /*: string */,
+  options /*: {skip?: string[]} */,
+  tester /*: Tester<Object> */,
+) {
   describe(filename, () => {
     let testsToRun = [];
-    let skip = Array.isArray(options.skip) ? options.skip : [];
+    let skip = [];
+    if (options && options.skip) {
+      skip = Array.isArray(options.skip) ? options.skip : [];
+    }
+
     clients
-      .filter(c => !skip.includes(c.browserName.toLowerCase()))
+      .filter(
+        c => c && c.browserName && !skip.includes(c.browserName.toLowerCase()),
+      )
       .map(c => {
-        testsToRun.push(async (fn, ...args) => {
-          await fn(c.driver, ...args);
+        testsToRun.push(async fn => {
+          if (c && c.driver) {
+            await fn(c.driver);
+          }
         });
       });
 
     testRun(testCase, async (...args) => {
-      await Promise.all(testsToRun.map(f => f(tester, ...args)));
+      await Promise.all(testsToRun.map(f => f(tester)));
     });
   });
 }
@@ -93,27 +98,15 @@ function BrowserTestCase(testCase, options, tester) {
 type Tester<Object> = (opts?: Object, done?: () => void) => ?Promise<mixed>;
 */
 
-function testRun(
-  testCase /*: {name:string, skip?:boolean ,only?:boolean}*/,
-  tester /*: Tester<Object>*/,
-) {
-  let testFn;
-  if (testCase.only) {
-    testFn = test.only;
-  } else if (testCase.skip) {
-    testFn = test.skip;
-  } else {
-    testFn = test;
-  }
-
+function testRun(testCase /*: string */, tester /*: Tester<Object>*/) {
+  const testFn = test;
   let callback;
   if (tester && tester.length > 1) {
     callback = done => tester(done);
   } else {
     callback = () => tester();
   }
-  // $FlowFixMe: Coerce object to string
-  testFn(`${testCase}`, callback);
+  testFn(testCase, callback);
 }
 
 module.exports = { BrowserTestCase };

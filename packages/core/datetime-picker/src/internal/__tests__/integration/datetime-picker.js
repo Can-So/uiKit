@@ -23,6 +23,7 @@ const dateTimeValues = `${dateTimePicker} > div > div > div`;
 
 BrowserTestCase(
   'datetime-picker.js: When DatePicker is focused & backspace pressed, the input should be cleared',
+  {},
   async client => {
     const dateTimePickerTest = new Page(client);
 
@@ -50,6 +51,7 @@ BrowserTestCase(
 
 BrowserTestCase(
   'datetime-picker.js: When choosing another day in a Datetime picker focused, the date should be updated to the new value',
+  {},
   async client => {
     const dateTimePickerTest = new Page(client);
 
