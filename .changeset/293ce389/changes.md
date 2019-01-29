@@ -1,1 +1,0 @@
-- ED-6107: don't act on destroyed EditorView during cleanup in media plugin

@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.0.2
+- [patch] [4437882a9a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4437882a9a):
+
+  - ED-6107: don't act on destroyed EditorView during cleanup in media plugin
+
 ## 98.0.1
 - [patch] [2035bef8fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2035bef8fb):
 
