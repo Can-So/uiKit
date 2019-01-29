@@ -9,7 +9,7 @@ import {
 import { SmartMediaEditor } from '../src';
 
 interface State {
-  showEditor: boolean;
+  showEditorVersion?: 'with-i18n' | 'without-i18n';
   showWithError: boolean;
   newFileIdentifier?: FileIdentifier;
 }
@@ -19,32 +19,31 @@ const context = createUploadContext();
 class SmartMediaEditorExample extends React.Component<{}, State> {
   state: State = {
     showWithError: false,
-    showEditor: false,
   };
 
-  openSmartEditor = () => {
-    this.setState({ showEditor: true, showWithError: false });
+  openSmartEditor = (editorVersion: State['showEditorVersion']) => () => {
+    this.setState({ showEditorVersion: editorVersion, showWithError: false });
   };
 
-  openSmartEditorWithError = () => {
-    this.setState({ showEditor: true, showWithError: true });
+  openSmartEditorWithError = (
+    editorVersion: State['showEditorVersion'],
+  ) => () => {
+    this.setState({ showEditorVersion: editorVersion, showWithError: true });
   };
 
   onFinish = () => {
-    console.log('onFinish');
-    this.setState({ showEditor: false });
+    this.setState({ showEditorVersion: undefined });
   };
 
   onUploadStart = (identifier: FileIdentifier) => {
-    console.log('onUploadStart', identifier);
     this.setState({
       newFileIdentifier: identifier,
-      showEditor: false,
+      showEditorVersion: undefined,
     });
   };
 
-  private renderContent = () => {
-    const { showWithError, showEditor } = this.state;
+  private renderContent = (editorVersion: State['showEditorVersion']) => {
+    const { showWithError, showEditorVersion } = this.state;
 
     const renderEditor = () => (
       <SmartMediaEditor
@@ -61,13 +60,17 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
     return (
       <div>
         <ButtonGroup>
-          <Button onClick={this.openSmartEditor}>Open Smart Editor</Button>
-          <Button onClick={this.openSmartEditorWithError}>
+          <Button onClick={this.openSmartEditor(editorVersion)}>
+            Open Smart Editor
+          </Button>
+          <Button onClick={this.openSmartEditorWithError(editorVersion)}>
             Open Smart Editor (with an error)
           </Button>
         </ButtonGroup>
 
-        {showEditor ? renderEditor() : null}
+        {editorVersion && showEditorVersion === editorVersion
+          ? renderEditor()
+          : null}
       </div>
     );
   };
@@ -77,10 +80,10 @@ class SmartMediaEditorExample extends React.Component<{}, State> {
     return (
       <div>
         <h3>With i18n</h3>
-        <I18NWrapper>{this.renderContent()}</I18NWrapper>
+        <I18NWrapper>{this.renderContent('with-i18n')}</I18NWrapper>
 
         <h3>Without i18n</h3>
-        {this.renderContent()}
+        {this.renderContent('without-i18n')}
 
         {newFileIdentifier ? (
           <Card identifier={newFileIdentifier} context={context} />
