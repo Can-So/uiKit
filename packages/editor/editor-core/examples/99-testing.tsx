@@ -13,6 +13,7 @@ import { MockActivityResource } from '@atlaskit/activity/dist/es5/support';
 import quickInsertProviderFactory from '../example-helpers/quick-insert-provider';
 import { Editor, EditorProps } from './../src';
 import ClipboardHelper from './1-clipboard-helper';
+import mediaMockServer from '../example-helpers/media-mock';
 
 export const providers: any = {
   emojiProvider: emoji.storyData.getEmojiResource({
@@ -31,7 +32,7 @@ export const providers: any = {
 };
 
 export const mediaProvider = storyMediaProviderFactory({
-  includeUserAuthProvider: true,
+  useMediaPickerAuthProvider: false,
 });
 
 export const quickInsertProvider = quickInsertProviderFactory();
@@ -55,6 +56,19 @@ function createEditorWindowBindings(win: Window) {
     }
     if (props && props.quickInsert && props.quickInsert) {
       props.quickInsert = { provider: Promise.resolve(quickInsertProvider) };
+    }
+
+    if (props && props.media) {
+      props.media = {
+        allowMediaSingle: true,
+        allowResizing: true,
+        ...props.media,
+        provider: mediaProvider,
+      };
+
+      mediaMockServer.enable();
+    } else {
+      mediaMockServer.disable();
     }
 
     ReactDOM.unmountComponentAtNode(target);
