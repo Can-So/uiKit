@@ -110,7 +110,6 @@ pipelines:
             script:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
-             # Run it for button now since this is the only pkg with store snapshot
               - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr:changed
             caches:
               - node
@@ -203,8 +202,8 @@ pipelines:
           script:
             - source ./build-setup.sh
             - bolt install --pure-lockfile
-            # Run it for button now since this is the only pkg with store snapshot
-            - TEST_ONLY_PATTERN='!packages/editor' yarn run yarn test:vr 
+            # Will work for all pkgs other than editor
+            - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr 
       # This will run essentially the branch builds, but without any optimizations and should be manually
       # run in any potentially risky builds
     run-full-suite:
