@@ -1,0 +1,1 @@
+- onChange is now called only when the user selects or clears a value. The date passed to onChange will always be a valid date
