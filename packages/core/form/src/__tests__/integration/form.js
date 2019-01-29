@@ -13,18 +13,18 @@ import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 const urlFormCreateRepo = getExampleUrl('core', 'form', 'create-repository');
 
 /* Css selectors used for the test */
-const createForm = '[name="create-repo"]';
-const owner = '#owner-select';
-const project = '#project-select';
-const repoName = '[name="repo-name"]';
+const createForm = 'form[name="create-repo"]';
+const owner = 'div#owner-select';
+const project = 'div#project-select';
+const repoName = 'input[name="repo-name"]';
 const accessLevel = 'input[type="checkbox"][name="access-level"]';
-const includeReadme = '#include-readme-select';
+const includeReadme = 'div#include-readme-select';
 const createRepoBtn = 'button[type="submit"]#create-repo-button';
 const cancelBtn = 'button[type="button"]#create-repo-cancel';
 
 BrowserTestCase(
   'form.js: Create repository form should render without errors',
-  { skip: ['safari'] }, // Safari has an issue with css / wd / puppeeter at the moment - to be investigated
+  { skip: [] },
   async client => {
     const formTest = new Page(client);
     await formTest.goto(urlFormCreateRepo);
