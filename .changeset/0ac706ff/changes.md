@@ -1,1 +1,0 @@
-- Enabled the isRequired validation on checkbox and added the asterisk after the checkbox label to signify the required field
