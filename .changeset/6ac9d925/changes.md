@@ -1,1 +1,0 @@
-- Use real id upfront for remote files + remove PublicMediaFile interface + now integrators can just use file.id from public events

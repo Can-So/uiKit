@@ -1,1 +1,0 @@
-- Rename fileState.preview.blob to fileState.preview.value and support string + Blob as value
