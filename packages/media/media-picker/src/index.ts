@@ -37,7 +37,7 @@ export {
   isImagePreview,
 } from './domain/uploadEvent';
 
-export { MediaFile, PublicMediaFile } from './domain/file';
+export { MediaFile } from './domain/file';
 export { MediaProgress } from './domain/progress';
 export { MediaError } from './domain/error';
 export { ImagePreview, Preview, NonImagePreview } from './domain/preview';

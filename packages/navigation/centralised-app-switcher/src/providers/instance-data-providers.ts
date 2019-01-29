@@ -11,3 +11,8 @@ export const RecentContainersProvider = asDataProvider<CloudIdDataProvider>(
       `/gateway/api/activity/api/client/recent/containers?cloudId=${cloudId}`,
     ),
 );
+
+export const LicenseInformationProvider = asDataProvider<CloudIdDataProvider>(
+  ({ cloudId }) =>
+    fetchJson(`/gateway/api/xflow/${cloudId}/license-information`),
+);

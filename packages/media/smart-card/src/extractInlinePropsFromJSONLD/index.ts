@@ -10,7 +10,7 @@ import { extractInlineViewPropsFromTemplate } from './extractPropsFromTemplate';
 
 const extractorPrioritiesByType = {
   Object: 0,
-  Document: 10,
+  Document: 5,
   'schema:TextDigitalDocument': 10,
   'schema:BlogPosting': 10,
   'atlassian:Task': 10,

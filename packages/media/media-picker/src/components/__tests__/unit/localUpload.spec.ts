@@ -89,13 +89,13 @@ describe('MediaLocalUpload', () => {
     const { emitter, emitUploadServiceEvent } = setup();
 
     emitUploadServiceEvent('file-converted', {
-      file: { ...imageFile, publicId: 'some-id' },
+      file: imageFile,
       public: { id: 'some-id' },
     });
 
     expect(emitter.emit).toHaveBeenCalledTimes(1);
     expect(emitter.emit).toBeCalledWith('upload-end', {
-      file: { ...imageFile, publicId: 'some-id' },
+      file: { ...imageFile },
       public: { id: 'some-id' },
     });
   });

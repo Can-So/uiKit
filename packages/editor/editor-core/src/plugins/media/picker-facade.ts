@@ -199,17 +199,6 @@ export default class PickerFacade {
     this.onDragListeners.push(cb);
   }
 
-  resolvePublicId(file) {
-    if (file.upfrontId) {
-      file.upfrontId.then(data => {
-        this.stateManager.updateState(file.id, {
-          publicId: data,
-          status: 'preview',
-        });
-      });
-    }
-  }
-
   private handleUploadPreviewUpdate = (
     event: UploadPreviewUpdateEventPayload,
   ) => {
@@ -226,12 +215,11 @@ export default class PickerFacade {
       fileName: file.name,
       fileSize: file.size,
       fileMimeType: file.type,
-      fileId: file.upfrontId,
+      fileId: Promise.resolve(file.id),
       dimensions,
+      publicId: file.id,
       scaleFactor,
     });
-
-    this.resolvePublicId(file);
 
     this.onStartListeners.forEach(cb => cb.call(cb, [states]));
   };

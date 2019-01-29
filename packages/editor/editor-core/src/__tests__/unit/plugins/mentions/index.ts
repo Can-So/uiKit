@@ -1,198 +1,189 @@
-import { createEditor, sleep, insertText } from '@atlaskit/editor-test-helpers';
-import { doc, p, typeAheadQuery } from '@atlaskit/editor-test-helpers';
-import { mention as mentionData } from '@atlaskit/util-data-test';
+import { createEditor, insertText } from '@atlaskit/editor-test-helpers';
+import { doc, p } from '@atlaskit/editor-test-helpers';
+import { MockMentionResource } from '@atlaskit/util-data-test';
 import { selectCurrentItem } from '../../../../plugins/type-ahead/commands/select-item';
 import { dismissCommand } from '../../../../plugins/type-ahead/commands/dismiss';
-import { ProviderFactory } from '../../../../../../editor-common';
+import { ProviderFactory } from '@atlaskit/editor-common';
+import { MentionProvider, MentionDescription } from '@atlaskit/mention';
+import { EditorView } from 'prosemirror-view';
 
 describe('mentionTypeahead', () => {
   const sessionIdRegex = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
-  const createAnalyticsEvent = jest.fn();
   const mentionProvider = new Promise<any>(resolve => {
-    resolve(mentionData.storyData.resourceProvider);
+    resolve(new MockMentionResource({}));
   });
-  const CONTAINER_ID = 'container-id';
-  const OBJECT_ID = 'object-id';
-  const contextIdentifierProvider = Promise.resolve({
-    containerId: CONTAINER_ID,
-    objectId: OBJECT_ID,
-  });
+  let editorView: EditorView;
+  let sel: number;
+  let provider: MentionProvider;
 
-  beforeEach(() => {
-    createAnalyticsEvent.mockReturnValue({ fire: jest.fn() });
-  });
-
-  afterEach(() => {
-    createAnalyticsEvent.mockReset();
-  });
-
-  it('should fire typeahead cancelled event', () => {
-    const event: any = { fire: jest.fn() };
-    const { editorView } = createEditor({
-      doc: doc(p(typeAheadQuery({ trigger: '@' })('@123'))),
-      editorProps: { mentionProvider, contextIdentifierProvider },
-      createAnalyticsEvent,
+  /**
+   * Triggers the mention typeahead in the editor with the provided text to be
+   * used as the query. This is a helper that can be used to ensure that
+   * results have resolved in the typeahead before executing expectations.
+   *
+   * @param query Text to be used as the mention query.
+   * @returns A promise that resolves once mention results are returned for the
+   *          provided query.
+   */
+  const triggerMentionTypeahead = async (query: string = '') => {
+    const promise = new Promise<MentionDescription[]>(resolve => {
+      const subscribeKey = 'mentionPluginTest';
+      provider.subscribe(subscribeKey, (mentions, resultQuery) => {
+        if (query === resultQuery) {
+          provider.unsubscribe(subscribeKey);
+          resolve(mentions);
+        }
+      });
     });
-    createAnalyticsEvent.mockReturnValueOnce(event);
-    dismissCommand()(editorView.state, editorView.dispatch);
-    expect(createAnalyticsEvent).toHaveBeenCalledWith(
-      expect.objectContaining({
-        action: 'cancelled',
-        actionSubject: 'mentionTypeahead',
-        eventType: 'ui',
-        attributes: expect.objectContaining({
-          packageName: '@atlaskit/editor-core',
-          packageVersion: expect.any(String),
-          sessionId: expect.stringMatching(sessionIdRegex),
-          spaceInQuery: false,
-          queryLength: 3,
-          duration: expect.any(Number),
-        }),
-      }),
-    );
-    expect(event.fire).toHaveBeenCalledTimes(1);
-    expect(event.fire).toHaveBeenCalledWith('fabric-elements');
-  });
+    insertText(editorView, `@${query}`, sel);
+    return await promise;
+  };
 
-  it('should fire typeahead pressed event', async () => {
-    const event: any = { fire: jest.fn() };
-    const providerFactory = new ProviderFactory();
-    providerFactory.setProvider('mentionProvider', mentionProvider);
-    providerFactory.setProvider(
-      'contextIdentifierProvider',
-      contextIdentifierProvider,
-    );
-    createAnalyticsEvent.mockReturnValueOnce(event);
-    const { editorView, sel } = createEditor({
-      doc: doc(p(typeAheadQuery({ trigger: '@' })('@a{<>}'))),
-      editorProps: { mentionProvider, contextIdentifierProvider },
-      providerFactory,
-      createAnalyticsEvent,
+  describe('analytics', () => {
+    let createAnalyticsEvent;
+    let event;
+
+    beforeEach(async () => {
+      event = { fire: jest.fn().mockName('event.fire') };
+      createAnalyticsEvent = jest
+        .fn(() => event)
+        .mockName('createAnalyticsEvent');
+
+      ({ editorView, sel } = createEditor({
+        doc: doc(p('{<>}')),
+        editorProps: { mentionProvider },
+        providerFactory: ProviderFactory.create({ mentionProvider }),
+        createAnalyticsEvent,
+      }));
+      provider = await mentionProvider;
     });
 
-    // Waiting for mention provider to resolve
-    await sleep(100);
+    it('should fire typeahead cancelled event', () => {
+      triggerMentionTypeahead('all');
 
-    insertText(editorView, 'll', sel);
+      dismissCommand()(editorView.state, editorView.dispatch);
 
-    // After querying mentions search need to wait for promise to resolve
-    await sleep(100);
-
-    selectCurrentItem('enter')(editorView.state, editorView.dispatch);
-
-    expect(createAnalyticsEvent).toHaveBeenCalledWith(
-      expect.objectContaining({
-        action: 'pressed',
-        actionSubject: 'mentionTypeahead',
-        eventType: 'ui',
-        attributes: expect.objectContaining({
-          packageName: '@atlaskit/editor-core',
-          packageVersion: expect.any(String),
-          duration: expect.any(Number),
-          position: 0,
-          keyboardKey: 'enter',
-          queryLength: 3,
-          spaceInQuery: false,
-          accessLevel: 'CONTAINER',
-          userType: 'SPECIAL',
-          userId: 'all',
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          action: 'cancelled',
+          actionSubject: 'mentionTypeahead',
+          eventType: 'ui',
+          attributes: expect.objectContaining({
+            packageName: '@atlaskit/editor-core',
+            packageVersion: expect.any(String),
+            sessionId: expect.stringMatching(sessionIdRegex),
+            spaceInQuery: false,
+            queryLength: 3,
+            duration: expect.any(Number),
+          }),
         }),
-      }),
-    );
-    expect(event.fire).toHaveBeenCalledTimes(1);
-    expect(event.fire).toHaveBeenCalledWith('fabric-elements');
-  });
-
-  it('should fire typeahead clicked event', async () => {
-    const event: any = { fire: jest.fn() };
-    const providerFactory = new ProviderFactory();
-    providerFactory.setProvider('mentionProvider', mentionProvider);
-    providerFactory.setProvider(
-      'contextIdentifierProvider',
-      contextIdentifierProvider,
-    );
-    createAnalyticsEvent.mockReturnValueOnce(event);
-    const { editorView, sel } = createEditor({
-      doc: doc(p(typeAheadQuery({ trigger: '@' })('@a{<>}'))),
-      editorProps: { mentionProvider, contextIdentifierProvider },
-      providerFactory,
-      createAnalyticsEvent,
+      );
+      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
 
-    // Waiting for mention provider to resolve
-    await sleep(100);
+    it('should fire typeahead pressed event', async () => {
+      await triggerMentionTypeahead('here');
 
-    insertText(editorView, 'll', sel);
+      event.fire.mockClear();
+      selectCurrentItem('enter')(editorView.state, editorView.dispatch);
 
-    // After querying mentions search need to wait for promise to resolve
-    await sleep(100);
-
-    selectCurrentItem()(editorView.state, editorView.dispatch);
-
-    expect(createAnalyticsEvent).toHaveBeenCalledWith(
-      expect.objectContaining({
-        action: 'clicked',
-        actionSubject: 'mentionTypeahead',
-        eventType: 'ui',
-        attributes: expect.objectContaining({
-          packageName: '@atlaskit/editor-core',
-          packageVersion: expect.any(String),
-          duration: expect.any(Number),
-          position: 0,
-          keyboardKey: undefined,
-          queryLength: 3,
-          spaceInQuery: false,
-          accessLevel: 'CONTAINER',
-          userType: 'SPECIAL',
-          userId: 'all',
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          action: 'pressed',
+          actionSubject: 'mentionTypeahead',
+          eventType: 'ui',
+          attributes: expect.objectContaining({
+            packageName: '@atlaskit/editor-core',
+            packageVersion: expect.any(String),
+            duration: expect.any(Number),
+            position: 0,
+            keyboardKey: 'enter',
+            queryLength: 4,
+            spaceInQuery: false,
+            accessLevel: 'CONTAINER',
+            userType: 'SPECIAL',
+            userId: 'here',
+          }),
         }),
-      }),
-    );
-    expect(event.fire).toHaveBeenCalledTimes(1);
-    expect(event.fire).toHaveBeenCalledWith('fabric-elements');
-  });
-
-  it('should fire typeahead rendered event', async () => {
-    const event: any = { fire: jest.fn() };
-    const providerFactory = new ProviderFactory();
-    providerFactory.setProvider('mentionProvider', mentionProvider);
-    providerFactory.setProvider(
-      'contextIdentifierProvider',
-      contextIdentifierProvider,
-    );
-    createAnalyticsEvent.mockReturnValueOnce(event);
-    const { editorView, sel } = createEditor({
-      doc: doc(p(typeAheadQuery({ trigger: '@' })('@{<>}'))),
-      editorProps: { mentionProvider, contextIdentifierProvider },
-      providerFactory,
-      createAnalyticsEvent,
+      );
+      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(event.fire).toHaveBeenCalledWith('fabric-elements');
     });
 
-    // Waiting for mention provider to resolve
-    await sleep(100);
+    it('should fire typeahead clicked event', async () => {
+      await triggerMentionTypeahead('all');
 
-    insertText(editorView, 'all', sel);
+      event.fire.mockClear();
+      selectCurrentItem()(editorView.state, editorView.dispatch);
 
-    // After querying mentions search need to wait for promise to resolve
-    await sleep(100);
-
-    expect(createAnalyticsEvent).toHaveBeenCalledWith(
-      expect.objectContaining({
-        action: 'rendered',
-        actionSubject: 'mentionTypeahead',
-        eventType: 'operational',
-        attributes: expect.objectContaining({
-          packageName: '@atlaskit/editor-core',
-          packageVersion: expect.any(String),
-          duration: expect.any(Number),
-          queryLength: 3,
-          spaceInQuery: false,
-          userIds: expect.any(Array),
-          sessionId: expect.any(String),
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          action: 'clicked',
+          actionSubject: 'mentionTypeahead',
+          eventType: 'ui',
+          attributes: expect.objectContaining({
+            packageName: '@atlaskit/editor-core',
+            packageVersion: expect.any(String),
+            duration: expect.any(Number),
+            position: 0,
+            keyboardKey: undefined,
+            queryLength: 3,
+            spaceInQuery: false,
+            accessLevel: 'CONTAINER',
+            userType: 'SPECIAL',
+            userId: 'all',
+          }),
         }),
-      }),
-    );
-    expect(event.fire).toHaveBeenCalledTimes(1);
-    expect(event.fire).toHaveBeenCalledWith('fabric-elements');
+      );
+      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(event.fire).toHaveBeenCalledWith('fabric-elements');
+    });
+
+    it('should fire typeahead rendered event on bootstrap', async () => {
+      await triggerMentionTypeahead();
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          action: 'rendered',
+          actionSubject: 'mentionTypeahead',
+          eventType: 'operational',
+          attributes: expect.objectContaining({
+            packageName: '@atlaskit/editor-core',
+            packageVersion: expect.any(String),
+            duration: expect.any(Number),
+            queryLength: 0,
+            spaceInQuery: false,
+            userIds: expect.any(Array),
+            sessionId: expect.any(String),
+          }),
+        }),
+      );
+      expect(event.fire).toHaveBeenCalledTimes(1);
+      expect(event.fire).toHaveBeenCalledWith('fabric-elements');
+    });
+
+    it('should fire typeahead rendered event', async () => {
+      await triggerMentionTypeahead('all');
+
+      expect(createAnalyticsEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          action: 'rendered',
+          actionSubject: 'mentionTypeahead',
+          eventType: 'operational',
+          attributes: expect.objectContaining({
+            packageName: '@atlaskit/editor-core',
+            packageVersion: expect.any(String),
+            duration: expect.any(Number),
+            queryLength: 3,
+            spaceInQuery: false,
+            userIds: expect.any(Array),
+            sessionId: expect.any(String),
+          }),
+        }),
+      );
+      expect(event.fire).toHaveBeenCalledTimes(4);
+      expect(event.fire).toHaveBeenCalledWith('fabric-elements');
+    });
   });
 });

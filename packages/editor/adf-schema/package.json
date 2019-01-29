@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/adf-schema",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Shared package that contains the ADF-schema (json) and ProseMirror node/mark specs",
   "license": "Apache-2.0",
   "atlaskit:src": "src/index.ts",
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@atlaskit/editor-json-transformer": "^4.1.0",
-    "@atlaskit/editor-test-helpers": "^6.3.9",
+    "@atlaskit/editor-test-helpers": "^6.3.16",
     "@atlaskit/json-schema-generator": "^1.2.0",
     "ajv": "^4.11.3",
     "axios": "^0.17.1",

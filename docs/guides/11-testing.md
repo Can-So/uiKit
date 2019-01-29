@@ -57,7 +57,7 @@ For further details or a test template, please consult this [link](https://hello
 - on local these run using jest-image-snapshot, puppeteer and chromium.
 - to run all *visual regression tests* on local `yarn test:vr`.
 - to run all tests under a package on local `yarn test:vr <pkg>`.
-- on CI to run all packages in pipeline as a custom build, go to any branch, run pipeline for a branc and select **custom build:visual-regression**.
+- on CI to run all packages in pipeline as a custom build, go to any branch, run pipeline for a branch and select **custom build:visual-regression**.
 - on CI, after every chamge to master branch, it runs all the vr tests.
 
 For further details or a test template, please consult this [link](https://hello.atlassian.net/wiki/spaces/AtlasKit/pages/136113035/How+to+add+visual+regression+tests+in+Atlaskit).

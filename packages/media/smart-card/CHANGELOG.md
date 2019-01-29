@@ -1,5 +1,15 @@
 # @atlaskit/smart-card
 
+## 9.6.5
+- [patch] [2035bef8fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2035bef8fb):
+
+  - Fix inline extractor priority preventing @type arrays in some cases.
+
+## 9.6.4
+- [patch] [56c5a4b41f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56c5a4b41f):
+
+  - Fix "try again" should not be showing when there are no auth methods
+
 ## 9.6.3
 - [patch] [63e6f7d420](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/63e6f7d420):
 

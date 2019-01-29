@@ -1,5 +1,13 @@
 # @atlaskit/share
 
+## 0.1.5
+- [patch] [2f73eeac57](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2f73eeac57):
+
+  - Added ShareServiceClient and unit test
+- [patch] [8c905d11b7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/8c905d11b7):
+
+  - Added share service client
+
 ## 0.1.4
 - [patch] [b752299534](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b752299534):
 
