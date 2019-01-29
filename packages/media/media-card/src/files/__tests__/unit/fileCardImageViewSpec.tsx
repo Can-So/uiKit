@@ -265,15 +265,10 @@ describe('FileCardView', () => {
   });
 
   test.each(['loading', 'processing'] as CardStatus[])(
-    'should render CardContent with loading flag when status is %s',
+    'should render CardContent with loading flag when status is %s and no data present',
     (status: CardStatus) => {
       const card = mount(
-        <FileCardImageView
-          mediaType="image"
-          dataURI="data"
-          status={status}
-          progress={0.5}
-        />,
+        <FileCardImageView mediaType="image" status={status} progress={0.5} />,
       );
       expectToEqual(card.find(CardContent).props().loading, true);
     },
