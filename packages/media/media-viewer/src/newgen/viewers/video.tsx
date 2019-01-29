@@ -91,7 +91,7 @@ export class VideoViewer extends BaseViewer<string, Props, State> {
           throw new Error(`No video artifacts found`);
         }
       } else {
-        contentUrl = getObjectUrlFromFileState(item);
+        contentUrl = await getObjectUrlFromFileState(item);
 
         if (!contentUrl) {
           this.setState({

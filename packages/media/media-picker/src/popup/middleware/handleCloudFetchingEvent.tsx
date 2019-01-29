@@ -99,8 +99,7 @@ export const handleCloudFetchingEvent = (store: Store<State>) => (
       // We asociate the uploadId with the public fileId on the user collection
       store.dispatch(setUpfrontIdDeferred(fileId, resolver, rejecter));
     }
-
-    store.dispatch(finalizeUpload(uploadedFile, uploadId, source));
+    store.dispatch(finalizeUpload(uploadedFile, uploadId, source, file.id));
   };
 
   // Handle cloud upload fail
