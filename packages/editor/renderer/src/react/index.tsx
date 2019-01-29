@@ -2,7 +2,7 @@ import * as React from 'react';
 // @ts-ignore: unused variable
 // prettier-ignore
 import { ComponentClass, Consumer, Provider } from 'react';
-import { Fragment, Mark, MarkType, Node, Schema } from 'prosemirror-model';
+import { Fragment, Mark, Node, Schema } from 'prosemirror-model';
 
 import { Serializer } from '../';
 import { getText } from '../utils';
@@ -46,34 +46,23 @@ export interface ConstructorParams {
   allowDynamicTextSizing?: boolean;
 }
 
-type MarkWithContent = Partial<Mark<any>> & {
-  content: Array<MarkWithContent | Node<any>>;
-};
+type MarkWithContent = Partial<Mark<any>> & { content: any[] };
 
-function mergeMarks(marksAndNodes: Array<MarkWithContent | Node>) {
-  return marksAndNodes.reduce(
-    (acc, markOrNode) => {
-      const prev = (acc.length && acc[acc.length - 1]) || null;
+const mergeMarks = (marks: MarkWithContent[]) =>
+  marks.reduce(
+    (acc, cur) => {
+      const prev = acc.length && acc[acc.length - 1];
 
-      if (
-        markOrNode.type instanceof MarkType &&
-        prev &&
-        prev.type instanceof MarkType &&
-        Array.isArray(prev.content) &&
-        isSameMark(prev as Mark, markOrNode as Mark)
-      ) {
-        prev.content = mergeMarks(
-          prev.content.concat((markOrNode as MarkWithContent).content),
-        );
+      if (prev && isSameMark(prev as Mark, cur as Mark)) {
+        prev.content = mergeMarks(prev.content.concat(cur.content));
       } else {
-        acc.push(markOrNode);
+        acc.push(cur);
       }
 
       return acc;
     },
-    [] as Array<MarkWithContent | Node>,
+    [] as MarkWithContent[],
   );
-}
 
 export default class ReactSerializer implements Serializer<JSX.Element> {
   private providers?: ProviderFactory;

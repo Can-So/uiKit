@@ -1,10 +1,5 @@
 # @atlaskit/renderer
 
-## 37.0.3
-- [patch] [e2eca7e6d5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e2eca7e6d5):
-
-  - ED-6111: fixed renderer rendering unsupported content with some ADF
-
 ## 37.0.2
 - Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
   - @atlaskit/editor-test-helpers@6.3.14

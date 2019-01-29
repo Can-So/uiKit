@@ -408,7 +408,16 @@ export const snapshot = async (
     image = await page.screenshot();
   }
 
-  expect(image).toMatchProdImageSnapshot();
+  if (tolerance !== undefined) {
+    // @ts-ignore
+    expect(image).toMatchProdImageSnapshot({
+      failureThreshold: `${tolerance}`,
+      failureThresholdType: 'percent',
+    });
+  } else {
+    // @ts-ignore
+    expect(image).toMatchProdImageSnapshot();
+  }
 };
 
 export const insertMedia = async (page, filenames = ['one.svg']) => {

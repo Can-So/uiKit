@@ -1,10 +1,5 @@
 # @atlaskit/editor-mobile-bridge
 
-## 6.7.7
-- [patch] [e2eca7e6d5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e2eca7e6d5):
-
-  - ED-6111: fixed renderer rendering unsupported content with some ADF
-
 ## 6.7.6
 - [patch] [4a52fa0b89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4a52fa0b89):
 

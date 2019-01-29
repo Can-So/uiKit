@@ -6,7 +6,7 @@ import {
 } from '../_utils';
 import * as adf from './adf/numbered-table.adf.json';
 
-describe.skip('Snapshot Test: numbered table', () => {
+describe('Snapshot Test: numbered table', () => {
   let page;
 
   const viewports = [

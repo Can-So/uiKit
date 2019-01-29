@@ -1,8 +1,7 @@
 import { initEditor, clearEditor, insertTable, snapshot } from '../_utils';
 import { selectTableDisplayOption } from './_table-utils';
 
-// TODO - fix this test
-describe.skip('Snapshot Test: table floating toolbar', () => {
+describe('Snapshot Test: table floating toolbar', () => {
   ['full-page'].forEach(appearance => {
     let page;
 

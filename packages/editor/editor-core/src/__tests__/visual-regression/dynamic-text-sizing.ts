@@ -9,7 +9,7 @@ const loadExampleDocument = async browser => {
   await browser.click('.loadExampleDocument');
 };
 
-describe.skip('Snapshot Test: Dynamic Text Sizing', () => {
+describe('Snapshot Test: Dynamic Text Sizing', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore
