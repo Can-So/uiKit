@@ -31,8 +31,3 @@ export const LicenseInformationProvider = asDataProvider<
 >(({ cloudId }) =>
   fetchJson(`/gateway/api/xflow/${cloudId}/license-information`),
 );
-
-export const LicenseInformationProvider = asDataProvider<CloudIdDataProvider>(
-  ({ cloudId }) =>
-    fetchJson(`/gateway/api/xflow/${cloudId}/license-information`),
-);

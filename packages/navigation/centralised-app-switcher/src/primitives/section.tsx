@@ -20,7 +20,7 @@ const SectionTitle = styled.h1`
 type Props = {
   title: string;
   isAdmin?: boolean;
-  children: ReactElement<any>[];
+  children: ReactElement<any>[] | null;
 };
 export default ({ title, isAdmin = false, children }: Props) => {
   const childrenWithIsAdmin = Children.map(
