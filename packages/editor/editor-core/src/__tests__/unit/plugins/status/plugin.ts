@@ -7,7 +7,7 @@ import {
 } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   StatusLocalIdRegex,
@@ -19,6 +19,8 @@ import createPlugin, {
 } from '../../../../plugins/status/plugin';
 
 describe('status plugin: plugin', () => {
+  const createEditor = createEditorFactory();
+
   const createSelection = (from: number, to?: number): Selection => {
     const actualTo = to === undefined ? from : to;
     return {
