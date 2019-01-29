@@ -1,5 +1,10 @@
 # @atlaskit/share
 
+## 0.1.4
+- [patch] [b752299534](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b752299534):
+
+  - Added capabilities info message in ShareForm
+
 ## 0.1.3
 - [patch] [42bfdcf8ed](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/42bfdcf8ed):
 

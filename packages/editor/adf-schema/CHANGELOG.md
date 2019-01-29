@@ -1,5 +1,25 @@
 # @atlaskit/adf-schema
 
+## 1.4.5
+- [patch] [4552e804d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4552e804d3):
+
+  - dismiss StatusPicker if status node is not selected
+
+## 1.4.4
+- [patch] [adff2caed7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/adff2caed7):
+
+  - Improve typings
+
+## 1.4.3
+- [patch] [d10cf50721](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d10cf50721):
+
+  - added fabric status to ADF full schema
+
+## 1.4.2
+- [patch] [478a86ae8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/478a86ae8a):
+
+  - avoid using the same localId when pasting status
+
 ## 1.4.1
 - [patch] [2d6d5b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d6d5b6):
 

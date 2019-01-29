@@ -1,5 +1,10 @@
 import React from 'react';
-import { AppSwitcherWrapper, Item, Section, ManageButton } from '../primitives';
+import {
+  AppSwitcherWrapper,
+  AppSwitcherItem,
+  Section,
+  ManageButton,
+} from '../primitives';
 import { CustomLinksProvider } from '../providers/jira-data-providers';
 import { RecentContainersProvider } from '../providers/instance-data-providers';
 
@@ -18,7 +23,7 @@ export default ({ cloudId }) => {
               ) : (
                 <Section title="Recent Containers">
                   {recentContainersData.data.map(({ objectId, name }) => (
-                    <Item key={objectId}>{name}</Item>
+                    <AppSwitcherItem key={objectId}>{name}</AppSwitcherItem>
                   ))}
                 </Section>
               )}
@@ -27,7 +32,7 @@ export default ({ cloudId }) => {
               ) : (
                 <Section title="Custom Links">
                   {customLinksData[0].map(({ key, label }) => (
-                    <Item key={key}>{label}</Item>
+                    <AppSwitcherItem key={key}>{label}</AppSwitcherItem>
                   ))}
                 </Section>
               )}

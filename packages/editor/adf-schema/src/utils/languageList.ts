@@ -117,7 +117,9 @@ export function findMatchedLanguage(
   return undefined;
 }
 
-export function filterSupportedLanguages(supportedLanguages): Language[] {
+export function filterSupportedLanguages(
+  supportedLanguages: Array<string>,
+): Language[] {
   if (!supportedLanguages || !supportedLanguages.length) {
     return DEFAULT_LANGUAGES;
   }

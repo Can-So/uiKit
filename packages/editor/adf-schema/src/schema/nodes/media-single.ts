@@ -59,6 +59,7 @@ export const mediaSingle: NodeSpec = {
     const attrs = {
       'data-node-type': 'mediaSingle',
       'data-layout': layout,
+      'data-width': '',
     };
 
     if (width) {
@@ -73,7 +74,7 @@ export const mediaSingle: NodeSpec = {
 };
 
 export const toJSON = (node: Node) => ({
-  attrs: Object.keys(node.attrs).reduce((obj, key) => {
+  attrs: Object.keys(node.attrs).reduce<any>((obj, key) => {
     if (node.attrs[key] !== null) {
       obj[key] = node.attrs[key];
     }

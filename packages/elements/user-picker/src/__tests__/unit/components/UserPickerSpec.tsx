@@ -47,7 +47,7 @@ describe('UserPicker', () => {
     const component = shallowUserPicker({ options });
     const select = component.find(Select);
     expect(select.prop('options')).toEqual(userOptions);
-    expect(getStyles).toHaveBeenCalledWith(350);
+    expect(getStyles).toHaveBeenCalledWith(350, 'normal');
     expect(select.prop('menuPlacement')).toBeTruthy();
   });
 
@@ -55,12 +55,6 @@ describe('UserPicker', () => {
     const component = shallowUserPicker({ isDisabled: true });
     const select = component.find(Select);
     expect(select.prop('isDisabled')).toEqual(true);
-  });
-
-  it('should set width', () => {
-    shallowUserPicker({ width: 500 });
-
-    expect(getStyles).toHaveBeenCalledWith(500);
   });
 
   it('should set custom placeholder', () => {
@@ -99,6 +93,16 @@ describe('UserPicker', () => {
     expect(onSelection).toHaveBeenCalledWith(options[0]);
   });
 
+  it('should trigger props.onClear if onChange with clear action', () => {
+    const onClear = jest.fn();
+    const component = shallowUserPicker({ onClear });
+
+    const select = component.find(Select);
+    select.simulate('change', userOptions[0], { action: 'clear' });
+
+    expect(onClear).toHaveBeenCalled();
+  });
+
   it('should call onFocus handler', () => {
     const onFocus = jest.fn();
     const component = shallowUserPicker({ onFocus });
@@ -113,6 +117,38 @@ describe('UserPicker', () => {
 
     component.simulate('blur');
     expect(onBlur).toHaveBeenCalled();
+  });
+
+  describe('getStyles/appearance', () => {
+    it('should set width', () => {
+      shallowUserPicker({ width: 500 });
+
+      expect(getStyles).toHaveBeenCalledWith(500, expect.any(String));
+    });
+
+    it('should infer normal appearance if single picker', () => {
+      const component = shallowUserPicker();
+
+      expect(component.find(Select).prop('appearance')).toEqual('normal');
+      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'normal');
+    });
+
+    it('should infer compact appearance if multi picker', () => {
+      const component = shallowUserPicker({ isMulti: true });
+
+      expect(component.find(Select).prop('appearance')).toEqual('compact');
+      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'compact');
+    });
+
+    it('should pass in appearance that comes from props', () => {
+      const component = shallowUserPicker({
+        isMulti: true,
+        appearance: 'normal',
+      });
+
+      expect(component.find(Select).prop('appearance')).toEqual('normal');
+      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'normal');
+    });
   });
 
   describe('Multiple users select', () => {
@@ -499,16 +535,12 @@ describe('UserPicker', () => {
       const component = shallowUserPicker({ options: teamOptions });
       const select = component.find(Select);
       expect(select.prop('options')).toEqual(selectableTeamOptions);
-      expect(getStyles).toHaveBeenCalledWith(350);
-      expect(select.prop('menuPlacement')).toBeTruthy();
     });
 
     it('should render select with both teams and users', () => {
       const component = shallowUserPicker({ options: mixedOptions });
       const select = component.find(Select);
       expect(select.prop('options')).toEqual(selectableMixedOptions);
-      expect(getStyles).toHaveBeenCalledWith(350);
-      expect(select.prop('menuPlacement')).toBeTruthy();
     });
 
     it('should be able to multi-select a mix of users and teams', () => {

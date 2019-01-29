@@ -1,5 +1,10 @@
 # @atlaskit/editor-cq-transformer
 
+## 5.1.8
+- [patch] [adff2caed7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/adff2caed7):
+
+  - Improve typings
+
 ## 5.1.7
 - Updated dependencies [85d5d168fd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/85d5d168fd):
   - @atlaskit/editor-common@30.0.0

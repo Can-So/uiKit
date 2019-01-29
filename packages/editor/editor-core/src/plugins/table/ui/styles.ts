@@ -397,10 +397,10 @@ export const tableStyles = css`
         position: relative;
         margin-top: -1px;
       }
-      .${ClassName.ROW_CONTROLS_BUTTON_WRAP}.active .${ClassName.CONTROLS_BUTTON},
+      .${ClassName.ROW_CONTROLS_BUTTON_WRAP}:hover,
+      .${ClassName.ROW_CONTROLS_BUTTON_WRAP}.active,
       .${ClassName.CONTROLS_BUTTON}:hover {
         z-index: ${akEditorUnitZIndex};
-        position: relative;
       }
       .${ClassName.CONTROLS_INSERT_BUTTON_WRAP} {
         position: absolute;
@@ -480,6 +480,7 @@ export const tableStyles = css`
       .${ClassName.NUMBERED_COLUMN} {
         border-left: 0 none;
         padding-left: 1px;
+        margin-left: 0;
 
         .${ClassName.NUMBERED_COLUMN_BUTTON}.active {
           border-bottom: 1px solid ${tableBorderSelectedColor};

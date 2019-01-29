@@ -1,5 +1,5 @@
 import Button from '@atlaskit/button';
-import Form, { FormFooter, FormSection } from '@atlaskit/form';
+import Form, { FormFooter, FormSection, HelperMessage } from '@atlaskit/form';
 import { LoadOptions } from '@atlaskit/user-picker';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -30,6 +30,7 @@ type UserWithEmail = {
 };
 
 export type Props = {
+  capabilitiesInfoMessage?: React.ReactNode;
   copyLink: string;
   isSharing?: boolean;
   loadOptions: LoadOptions;
@@ -50,6 +51,13 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
         <ShareHeader title={props.title} />
         <FormSection>
           <UserPickerField loadOptions={props.loadOptions} />
+          {props.shouldShowCapabilitiesInfoMessage && (
+            <HelperMessage>
+              {props.capabilitiesInfoMessage || (
+                <FormattedMessage {...messages.capabilitiesInfoMessage} />
+              )}
+            </HelperMessage>
+          )}
           <CommentField />
         </FormSection>
         <FormFooter>
@@ -72,4 +80,5 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
 
 ShareForm.defaultProps = {
   onShareClick: () => {},
+  shouldShowCapabilitiesInfoMessage: false,
 };

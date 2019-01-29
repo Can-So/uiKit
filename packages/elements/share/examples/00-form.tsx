@@ -10,5 +10,6 @@ export default () => (
     onLinkCopy={console.log}
     onShareClick={console.log}
     loadOptions={loadOptions}
+    shouldShowCapabilitiesInfoMessage
   />
 );
