@@ -5,11 +5,11 @@ import {
 } from '@atlaskit/media-test-helpers';
 import { Card, FileIdentifier, CardEvent } from '@atlaskit/media-card';
 import { MediaViewer, MediaViewerItem } from '@atlaskit/media-viewer';
-import { FileDetails } from '@atlaskit/media-core';
+import { FileDetails, MediaItemType } from '@atlaskit/media-core';
 import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
 import { SelectWrapper, OptionsWrapper } from '../example-helpers/styled';
-import { MediaPicker } from '../src';
+import { MediaPicker, UploadPreviewUpdateEventPayload } from '../src';
 
 const context = createUploadContext();
 
@@ -25,7 +25,7 @@ const dataSourceOptions = [
 popup.show();
 
 export type TenantFileRecord = {
-  id: Promise<string>;
+  id: string;
   occurrenceKey?: string;
 };
 export type DataSourceType = 'collection' | 'list';
@@ -39,20 +39,37 @@ export default class Example extends React.Component<{}, State> {
   state: State = { events: [], dataSourceType: 'list' };
 
   componentDidMount() {
-    popup.on('uploads-start', payload => {
+    popup.on('uploads-start', async payload => {
       const { events } = this.state;
+      payload.files.forEach(file => {
+        file.upfrontId.then(id => {
+          console.log('PUBLIC: uploads-start', file.id, id);
+        });
+      });
 
       this.setState({
         events: [
           ...events,
           ...payload.files.map(file => ({
-            id: file.upfrontId,
+            id: file.id,
             occurrenceKey: file.occurrenceKey,
           })),
         ],
       });
     });
+
+    popup.on('upload-preview-update', this.onUploadPreviewUpdate);
   }
+
+  private onUploadPreviewUpdate = async (
+    event: UploadPreviewUpdateEventPayload,
+  ) => {
+    console.log(
+      'PUBLIC: upload-preview-update',
+      event.file.id,
+      await event.file.upfrontId,
+    );
+  };
 
   private onCardClick = (occurrenceKey: string = '') => (event: CardEvent) => {
     if (event.mediaItemDetails) {
@@ -104,14 +121,21 @@ export default class Example extends React.Component<{}, State> {
   };
 
   private renderMediaViewer = () => {
-    const { dataSourceType, selectedItem } = this.state;
+    const { dataSourceType, selectedItem, events } = this.state;
     if (!selectedItem) {
       return null;
     }
+    const list: MediaViewerItem[] = events.map(event => {
+      return {
+        id: event.id,
+        occurrenceKey: event.occurrenceKey || '',
+        type: 'file' as MediaItemType,
+      };
+    });
     const dataSource =
       dataSourceType === 'collection'
         ? { collectionName: defaultCollectionName }
-        : { list: [selectedItem] };
+        : { list };
     return (
       <MediaViewer
         context={context}
