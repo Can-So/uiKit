@@ -12,13 +12,10 @@ import {
 
 import { ServiceName, State } from '../domain';
 
-import {
-  BinaryUploader as MpBinary,
-  Browser as MpBrowser,
-  Dropzone as MpDropzone,
-  UploadParams,
-  PopupConfig,
-} from '../..';
+import { BinaryUploaderImpl as MpBinary } from '../../components/binary';
+import { BrowserImpl as MpBrowser } from '../../components/browser';
+import { DropzoneImpl as MpDropzone } from '../../components/dropzone';
+import { UploadParams, PopupConfig } from '../..';
 
 /* Components */
 import Footer from './footer/footer';

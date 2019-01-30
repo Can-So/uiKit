@@ -18,9 +18,16 @@ export interface LocalUploadConfig {
   shouldCopyFileToRecents?: boolean;
 }
 
+export interface LocalUploadComponent<
+  M extends UploadEventPayloadMap = UploadEventPayloadMap
+> {
+  cancel(uniqueIdentifier?: string): void;
+  setUploadParams(uploadParams: UploadParams): void;
+}
+
 export class LocalUploadComponent<
   M extends UploadEventPayloadMap = UploadEventPayloadMap
-> extends UploadComponent<M> {
+> extends UploadComponent<M> implements LocalUploadComponent {
   protected readonly uploadService: UploadService;
   readonly context: Context;
   config: LocalUploadConfig;

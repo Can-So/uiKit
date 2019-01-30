@@ -16,6 +16,7 @@ import { UploadComponent, UploadEventEmitter } from './component';
 import { defaultUploadParams } from '../domain/uploadParams';
 import { UploadParams } from '../domain/config';
 import { UploadEventPayloadMap } from '../domain/uploadEvent';
+import { EventEmitter } from '../util/eventEmitter';
 
 export interface PopupConfig {
   readonly container?: HTMLElement;
@@ -35,9 +36,18 @@ export type PopupUploadEventPayloadMap = UploadEventPayloadMap & {
 export interface PopupUploadEventEmitter extends UploadEventEmitter {
   emitClosed(): void;
 }
-
-export class Popup extends UploadComponent<PopupUploadEventPayloadMap>
-  implements PopupUploadEventEmitter {
+export interface Popup
+  extends UploadEventEmitter,
+    EventEmitter<PopupUploadEventPayloadMap> {
+  show(): Promise<void>;
+  cancel(uniqueIdentifier?: string | Promise<string>): Promise<void>;
+  teardown(): void;
+  hide(): void;
+  setUploadParams(uploadParams: UploadParams): void;
+  emitClosed(): void;
+}
+export class PopupImpl extends UploadComponent<PopupUploadEventPayloadMap>
+  implements PopupUploadEventEmitter, Popup {
   private readonly container?: HTMLElement;
   private readonly store: Store<State>;
   private tenantUploadParams: UploadParams;

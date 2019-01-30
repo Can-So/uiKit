@@ -34,9 +34,14 @@ export type DropzoneUploadEventPayloadMap = UploadEventPayloadMap & {
 
 const toArray = (arr: any) => [].slice.call(arr, 0);
 
-export class Dropzone extends LocalUploadComponent<
-  DropzoneUploadEventPayloadMap
-> {
+export interface Dropzone
+  extends LocalUploadComponent<DropzoneUploadEventPayloadMap> {
+  activate(): Promise<void>;
+  deactivate(): void;
+}
+export class DropzoneImpl
+  extends LocalUploadComponent<DropzoneUploadEventPayloadMap>
+  implements Dropzone {
   private container: HTMLElement;
   private instance?: HTMLElement;
   private headless: boolean;
@@ -98,7 +103,7 @@ export class Dropzone extends LocalUploadComponent<
   private onDragOver = (e: DragEvent): void => {
     e.preventDefault();
 
-    if (this.instance && e.dataTransfer && Dropzone.dragContainsFiles(e)) {
+    if (this.instance && e.dataTransfer && DropzoneImpl.dragContainsFiles(e)) {
       const dataTransfer = e.dataTransfer;
       let allowed;
 
@@ -135,7 +140,7 @@ export class Dropzone extends LocalUploadComponent<
       e.preventDefault();
       this.instance.classList.remove('active');
       let length = 0;
-      if (Dropzone.dragContainsFiles(e)) {
+      if (DropzoneImpl.dragContainsFiles(e)) {
         const dataTransfer = e.dataTransfer;
         length = this.getDraggedItemsLength(dataTransfer);
       }
@@ -170,7 +175,7 @@ export class Dropzone extends LocalUploadComponent<
   private onDrop = (e: DragEvent): void => {
     const { instance } = this;
 
-    if (instance && e.dataTransfer && Dropzone.dragContainsFiles(e)) {
+    if (instance && e.dataTransfer && DropzoneImpl.dragContainsFiles(e)) {
       instance.classList.remove('active');
       const dataTransfer = e.dataTransfer;
       const length = this.getDraggedItemsLength(dataTransfer);

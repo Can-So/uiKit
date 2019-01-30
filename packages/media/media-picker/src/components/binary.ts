@@ -7,7 +7,11 @@ export interface BinaryUploaderConstructor {
   new (context: Context, config: BinaryConfig): BinaryUploader;
 }
 
-export class BinaryUploader extends LocalUploadComponent {
+export interface BinaryUploader extends LocalUploadComponent {
+  upload(base64: string, name: string): void;
+}
+export class BinaryUploaderImpl extends LocalUploadComponent
+  implements BinaryUploader {
   constructor(context: Context, config: BinaryConfig) {
     super(context, config);
   }

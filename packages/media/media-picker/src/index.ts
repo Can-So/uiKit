@@ -20,6 +20,30 @@ import {
 } from './components/dropzone';
 import { Popup, PopupConfig, PopupConstructor } from './components/popup';
 
+export const isBinaryUploader = (
+  component: any,
+): component is BinaryUploader => {
+  return 'upload' in component;
+};
+export const isBrowser = (component: any): component is Browser => {
+  return component && 'browse' in component && 'teardown' in component;
+};
+export const isClipboard = (component: any): component is Clipboard => {
+  return component && 'activate' in component && 'deactivate' in component;
+};
+export const isDropzone = (component: any): component is Dropzone => {
+  return component && 'activate' in component && 'deactivate' in component;
+};
+export const isPopup = (component: any): component is Popup => {
+  return (
+    component &&
+    ['show', 'cancel', 'teardown', 'hide'].reduce(
+      (allIn, prop) => allIn && prop in component,
+      true,
+    )
+  );
+};
+
 export { DropzoneUploadEventPayloadMap } from './components/dropzone';
 export { PopupUploadEventPayloadMap } from './components/popup';
 
@@ -89,7 +113,6 @@ export {
   PopupConstructor,
 };
 
-// TODO: split real class from interface
 export async function MediaPicker<K extends keyof any>(
   componentName: K,
   context: any,
@@ -98,31 +121,35 @@ export async function MediaPicker<K extends keyof any>(
   switch (componentName) {
     case 'binary':
       const {
-        BinaryUploader,
+        BinaryUploaderImpl,
       } = await import(/* webpackChunkName:"@atlaskit-internal_media-picker-binary" */ './components/binary');
-      return new BinaryUploader(context, pickerConfig as BinaryConfig);
+      return new BinaryUploaderImpl(context, pickerConfig as BinaryConfig);
     case 'browser':
       const {
-        Browser,
+        BrowserImpl,
       } = await import(/* webpackChunkName:"@atlaskit-internal_media-picker-browser" */ './components/browser');
-      return new Browser(context, pickerConfig as BrowserConfig | undefined);
+      return new BrowserImpl(context, pickerConfig as
+        | BrowserConfig
+        | undefined);
     case 'clipboard':
       const {
-        Clipboard,
+        ClipboardImpl,
       } = await import(/* webpackChunkName:"@atlaskit-internal_media-picker-clipboard" */ './components/clipboard');
-      return new Clipboard(context, pickerConfig as
+      return new ClipboardImpl(context, pickerConfig as
         | ClipboardConfig
         | undefined);
     case 'dropzone':
       const {
-        Dropzone,
+        DropzoneImpl,
       } = await import(/* webpackChunkName:"@atlaskit-internal_media-picker-dropzone" */ './components/dropzone');
-      return new Dropzone(context, pickerConfig as DropzoneConfig | undefined);
+      return new DropzoneImpl(context, pickerConfig as
+        | DropzoneConfig
+        | undefined);
     case 'popup':
       const {
-        Popup,
+        PopupImpl,
       } = await import(/* webpackChunkName:"@atlaskit-internal_media-picker-popup" */ './components/popup');
-      return new Popup(context, pickerConfig as any);
+      return new PopupImpl(context, pickerConfig as any);
     default:
       throw new Error(`The component ${componentName} does not exist`);
   }

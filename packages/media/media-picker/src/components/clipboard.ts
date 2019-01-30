@@ -24,7 +24,11 @@ export const getFilesFromClipboard = (files: FileList) => {
   });
 };
 
-export class Clipboard extends LocalUploadComponent {
+export interface Clipboard extends LocalUploadComponent {
+  activate(): Promise<void>;
+  deactivate(): void;
+}
+export class ClipboardImpl extends LocalUploadComponent implements Clipboard {
   constructor(
     context: Context,
     config: ClipboardConfig = { uploadParams: {} },

@@ -10,7 +10,11 @@ export interface BrowserConstructor {
   new (context: Context, browserConfig: BrowserConfig): Browser;
 }
 
-export class Browser extends LocalUploadComponent {
+export interface Browser extends LocalUploadComponent {
+  browse(): void;
+  teardown(): void;
+}
+export class BrowserImpl extends LocalUploadComponent implements Browser {
   private readonly browseElement: HTMLInputElement;
 
   constructor(
