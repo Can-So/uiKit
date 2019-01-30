@@ -9,7 +9,7 @@ const meow = require('meow');
 const webpack = require('./utils/webpack');
 const reporting = require('./reporting');
 
-const LONG_RUNNING_TESTS_THRESHOLD_SECS = 45;
+const LONG_RUNNING_TESTS_THRESHOLD_SECS = 70;
 
 /*
  * function main() to
