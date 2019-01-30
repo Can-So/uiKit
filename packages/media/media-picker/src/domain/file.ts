@@ -10,10 +10,6 @@ export type MediaFile = {
   readonly occurrenceKey?: string;
 };
 
-export type PublicMediaFile = MediaFile & {
-  readonly publicId: string;
-};
-
 export function copyMediaFileForUpload(
   {
     name,
@@ -25,11 +21,11 @@ export function copyMediaFileForUpload(
     occurrenceKey,
     userOccurrenceKey,
   }: MediaFile,
-  uploadId: string,
+  fileId: string,
 ): MediaFile {
   // We dont' use spread here because user upload events are not sanitized
   return {
-    id: uploadId,
+    id: fileId,
     name,
     size,
     creationDate,
@@ -38,32 +34,5 @@ export function copyMediaFileForUpload(
     userUpfrontId,
     occurrenceKey,
     userOccurrenceKey,
-  };
-}
-
-export function copyPublicMediaFileForUpload(
-  {
-    name,
-    size,
-    creationDate,
-    type,
-    publicId,
-    upfrontId,
-    userUpfrontId,
-    occurrenceKey,
-  }: PublicMediaFile,
-  uploadId: string,
-): PublicMediaFile {
-  // We dont' use spread here because user upload events are not sanitized
-  return {
-    id: uploadId,
-    name,
-    size,
-    creationDate,
-    type,
-    publicId,
-    upfrontId,
-    userUpfrontId,
-    occurrenceKey,
   };
 }

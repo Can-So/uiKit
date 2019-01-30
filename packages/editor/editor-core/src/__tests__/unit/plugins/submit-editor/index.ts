@@ -1,12 +1,14 @@
 import {
   sendKeyToPm,
-  createEditor,
+  createEditorFactory,
   doc,
   p,
 } from '@atlaskit/editor-test-helpers';
 import submitPlugin from '../../../../plugins/submit-editor';
 
 describe('submit-editor', () => {
+  const createEditor = createEditorFactory();
+
   let onSave;
   const editor = (doc: any) =>
     createEditor({
@@ -25,6 +27,5 @@ describe('submit-editor', () => {
     const { editorView } = editor(doc(p('{<>}')));
     sendKeyToPm(editorView, 'Mod-Enter');
     expect(onSave).toHaveBeenCalledTimes(1);
-    editorView.destroy();
   });
 });

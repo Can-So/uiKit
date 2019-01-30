@@ -3,7 +3,7 @@ import type { Node } from 'react';
 
 export type FieldTextProps = {
   /** Standard HTML input autocomplete attribute. */
-  autoComplete?: 'on' | 'off',
+  autoComplete?: string,
   /** Standard HTML input form attribute. This is useful if the input cannot be included directly
    inside a form. */
   form?: string,

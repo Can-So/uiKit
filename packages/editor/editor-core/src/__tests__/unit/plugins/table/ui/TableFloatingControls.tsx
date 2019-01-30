@@ -5,7 +5,7 @@ import { DecorationSet } from 'prosemirror-view';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   tdEmpty,
@@ -24,8 +24,10 @@ import RowControls from '../../../../../plugins/table/ui/TableFloatingControls/R
 import tablesPlugin from '../../../../../plugins/table';
 
 describe('TableFloatingControls', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin()],
       pluginKey: pluginKey,

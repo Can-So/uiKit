@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   emoji,
   mention,
@@ -28,6 +28,8 @@ const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 const providerFactory = ProviderFactory.create({ emojiProvider });
 
 describe('composition events', () => {
+  const createEditor = createEditorFactory();
+
   describe('deleteContentBackwards', () => {
     const editor = (doc: any) =>
       createEditor({
@@ -123,6 +125,8 @@ describe('composition events', () => {
  * in the event it gets removed we should know about.
  */
 describe('inDOMChange', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,

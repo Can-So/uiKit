@@ -1,5 +1,10 @@
 # @atlaskit/datetime-picker
 
+## 6.4.0
+- [minor] [52827feffb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/52827feffb):
+
+  - onChange is now called only when the user selects or clears a value. The date passed to onChange will always be a valid date
+
 ## 6.3.25
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

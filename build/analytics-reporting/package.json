@@ -1,0 +1,13 @@
+{
+  "name": "@atlaskit/analytics-reporting",
+  "version": "0.1.0",
+  "private": true,
+  "atlaskit": {
+    "internal": true
+  },
+  "description": "Send analytics events to analytics.atlassian.com ",
+  "main": "index.js",
+  "dependencies": {
+    "node-fetch": "^2.2.0"
+  }
+}

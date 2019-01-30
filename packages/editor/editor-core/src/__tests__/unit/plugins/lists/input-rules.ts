@@ -3,7 +3,7 @@ import {
   code_block,
   doc,
   li,
-  createEditor,
+  createEditorFactory,
   ol,
   p,
   ul,
@@ -14,6 +14,8 @@ import listPlugin from '../../../../plugins/lists';
 import codeBlockPlugin from '../../../../plugins/code-block';
 
 describe('inputrules', () => {
+  const createEditor = createEditorFactory();
+
   let trackEvent;
   const editor = (doc: any) =>
     createEditor({

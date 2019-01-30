@@ -96,9 +96,9 @@ export default ({ cloudId }: WithCloudId) => {
                           )}
                         </Section>
                       )}
-                      <ManageButton
-                        href={customLinksData ? customLinksData[1] : ''}
-                      />
+                      {customLinksData && (
+                        <ManageButton href={customLinksData[1]} />
+                      )}
                     </AppSwitcherWrapper>
                   )}
                 </UserPermissionProvider>

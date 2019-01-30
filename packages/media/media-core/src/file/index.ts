@@ -277,7 +277,7 @@ export class FileFetcherImpl implements FileFetcher {
       size = content.size;
       mimeType = content.type;
       preview = {
-        blob: content,
+        value: content,
       };
     }
 

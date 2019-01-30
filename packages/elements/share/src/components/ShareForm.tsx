@@ -14,12 +14,31 @@ const LeftAlignmentContainer = styled.div`
   margin-right: auto;
 `;
 
+type ShareError = {
+  message: string;
+} | null;
+
+type User = UserWithId | UserWithEmail;
+
+type UserWithId = {
+  type: 'user' | 'group' | 'team';
+  id: string;
+};
+
+type UserWithEmail = {
+  email: string;
+};
+
 export type Props = {
   capabilitiesInfoMessage?: React.ReactNode;
   copyLink: string;
+  isSharing?: boolean;
   loadOptions: LoadOptions;
+  onCommentChange?: (event: React.SyntheticEvent) => void;
   onLinkCopy?: (link: string) => void;
   onShareClick?: Function;
+  onUsersChange?: (users: User[]) => void;
+  shareError?: ShareError;
   shouldShowCapabilitiesInfoMessage?: boolean;
   submitButtonLabel?: React.ReactNode;
   title?: React.ReactNode;

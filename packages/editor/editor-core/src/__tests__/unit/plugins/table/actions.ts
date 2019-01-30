@@ -6,7 +6,7 @@ import { defaultSchema } from '@atlaskit/adf-schema';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   td,
@@ -39,8 +39,10 @@ import {
 } from '../../../../plugins/table/pm-plugins/main';
 
 describe('table plugin: actions', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin(), panelPlugin],
       pluginKey,
@@ -230,7 +232,6 @@ describe('table plugin: actions', () => {
           const cell = cells[i] as HTMLElement;
           expect(cell.getAttribute('colspan')).not.toEqual('2');
         }
-        editorView.destroy();
       });
     });
   });
@@ -268,7 +269,6 @@ describe('table plugin: actions', () => {
           const cell = cells[i] as HTMLElement;
           expect(cell.getAttribute('rowspan')).not.toEqual('2');
         }
-        editorView.destroy();
       });
     });
   });
@@ -491,7 +491,6 @@ describe('table plugin: actions', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -531,7 +530,6 @@ describe('table plugin: actions', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
   });

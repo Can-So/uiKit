@@ -1,14 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import {
-  MediaEditor,
-  Tool,
-  Color,
-  Dimensions,
-  LoadParameters,
-  ShapeParameters,
-} from '../..';
+import { MediaEditor, LoadParameters } from '../mediaEditor';
+import { Tool, Color, Dimensions, ShapeParameters } from '../../common';
 import { messages } from '@atlaskit/media-ui';
 import Toolbar, { tools } from './toolbar/toolbar';
 import { EditorContainer } from './styles';

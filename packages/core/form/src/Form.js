@@ -37,6 +37,7 @@ type State = {
 const createFinalForm = (onSubmit, formRef) => {
   const form = createForm({
     onSubmit,
+    destroyOnUnregister: true,
     initialValues: {},
     mutators: {
       // https://medium.com/@erikras/final-form-arrays-and-mutators-13159cb7d285

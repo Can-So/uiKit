@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { createEditor, doc, p } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory, doc, p } from '@atlaskit/editor-test-helpers';
 import Message from '../../../ui/Appearance/Message';
 import EditorActions from '../../../actions';
 import * as utils from '../../../utils';
 
-const editor = (doc: any) =>
-  createEditor({
-    doc,
-  });
-
 describe('message editor', () => {
+  const createEditor = createEditorFactory();
+  const editor = (doc: any) =>
+    createEditor({
+      doc,
+    });
+
   it('should create empty terminal empty paragraph when clicked outside editor', () => {
     const { editorView } = editor(doc(p('Hello world'), p('Hello world')));
     const message = mount(

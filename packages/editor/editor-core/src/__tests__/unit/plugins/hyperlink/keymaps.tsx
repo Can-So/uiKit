@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   a as link,
@@ -16,6 +16,8 @@ import {
 } from '../../../../plugins/hyperlink/pm-plugins/main';
 
 describe('hyperlink - keymap', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, editorProps = {}) =>
     createEditor({
       doc,

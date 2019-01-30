@@ -1,19 +1,25 @@
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   mediaGroup,
   media,
   p,
   h1,
   hr,
+  ul,
+  li,
   mention,
   code_block,
   randomId,
   panel,
 } from '@atlaskit/editor-test-helpers';
-import { insertMediaGroupNode } from '../../../../plugins/media/utils/media-files';
+import {
+  insertMediaGroupNode,
+  getPosInList,
+} from '../../../../plugins/media/utils/media-files';
 import { setNodeSelection } from '../../../../utils';
 import mediaPlugin from '../../../../plugins/media';
+import listsPlugin from '../../../../plugins/lists';
 import mentionsPlugin from '../../../../plugins/mentions';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import rulePlugin from '../../../../plugins/rule';
@@ -22,6 +28,8 @@ import { panelPlugin } from '../../../../plugins';
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 describe('media-files', () => {
+  const createEditor = createEditorFactory();
+
   const temporaryFileId = `temporary:${randomId()}`;
   const editor = (doc: any, uploadErrorHandler?: () => void) =>
     createEditor({
@@ -31,6 +39,7 @@ describe('media-files', () => {
         mentionsPlugin(),
         codeBlockPlugin(),
         rulePlugin,
+        listsPlugin,
         panelPlugin,
       ],
     });
@@ -59,7 +68,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('puts cursor to the next paragraph after inserting media node', () => {
@@ -83,7 +91,6 @@ describe('media-files', () => {
       expect(editorView.state.selection.from).toEqual(
         paragraphNodeSize + mediaGroupNodeSize + 1,
       );
-      editorView.destroy();
     });
 
     it('should prepend media node to existing media group after it', () => {
@@ -126,7 +133,6 @@ describe('media-files', () => {
           ),
         ),
       );
-      editorView.destroy();
     });
   });
 
@@ -171,7 +177,6 @@ describe('media-files', () => {
           p('text'),
         ),
       );
-      editorView.destroy();
     });
   });
 
@@ -200,7 +205,6 @@ describe('media-files', () => {
             p('xt'),
           ),
         );
-        editorView.destroy();
       });
 
       it('moves cursor to the front of later part of the text', () => {
@@ -225,7 +229,6 @@ describe('media-files', () => {
         expect(editorView.state.selection.from).toEqual(
           paragraphNodeSize + mediaGroupNodeSize + 1,
         );
-        editorView.destroy();
       });
     });
 
@@ -253,7 +256,6 @@ describe('media-files', () => {
             h1('xt'),
           ),
         );
-        editorView.destroy();
       });
     });
   });
@@ -283,7 +285,6 @@ describe('media-files', () => {
               p('t'),
             ),
           );
-          editorView.destroy();
         });
       });
 
@@ -312,7 +313,6 @@ describe('media-files', () => {
                   p(),
                 ),
               );
-              editorView.destroy();
             });
           });
 
@@ -340,7 +340,6 @@ describe('media-files', () => {
                   p(),
                 ),
               );
-              editorView.destroy();
             });
           });
         });
@@ -402,7 +401,6 @@ describe('media-files', () => {
                 ),
               ),
             );
-            editorView.destroy();
           });
         });
       });
@@ -431,7 +429,6 @@ describe('media-files', () => {
               p(),
             ),
           );
-          editorView.destroy();
         });
 
         it('prepends to existing media group after parent', () => {
@@ -474,7 +471,6 @@ describe('media-files', () => {
               ),
             ),
           );
-          editorView.destroy();
         });
       });
     });
@@ -507,7 +503,6 @@ describe('media-files', () => {
               p(),
             ),
           );
-          editorView.destroy();
         });
       });
 
@@ -553,7 +548,6 @@ describe('media-files', () => {
               p('text'),
             ),
           );
-          editorView.destroy();
         });
 
         it('prepends to the existing media group - w/o any following paragraph', () => {
@@ -595,7 +589,6 @@ describe('media-files', () => {
               ),
             ),
           );
-          editorView.destroy();
         });
 
         it('sets cursor to the paragraph after', () => {
@@ -637,7 +630,6 @@ describe('media-files', () => {
           expect(editorView.state.selection.from).toEqual(
             mediaGroupNodeSize + 1,
           );
-          editorView.destroy();
         });
       });
 
@@ -667,7 +659,6 @@ describe('media-files', () => {
                 p(),
               ),
             );
-            editorView.destroy();
           });
         });
 
@@ -725,7 +716,6 @@ describe('media-files', () => {
                   p(),
                 ),
               );
-              editorView.destroy();
             });
           });
 
@@ -771,7 +761,6 @@ describe('media-files', () => {
                   ),
                 ),
               );
-              editorView.destroy();
             });
           });
 
@@ -841,7 +830,6 @@ describe('media-files', () => {
                   ),
                 ),
               );
-              editorView.destroy();
             });
           });
         });
@@ -871,7 +859,6 @@ describe('media-files', () => {
             p('xt'),
           ),
         );
-        editorView.destroy();
       });
 
       it('prepends to exisiting media group before parent', () => {
@@ -914,7 +901,6 @@ describe('media-files', () => {
             p('xt'),
           ),
         );
-        editorView.destroy();
       });
     });
   });
@@ -942,7 +928,6 @@ describe('media-files', () => {
         p(),
       ),
     );
-    editorView.destroy();
   });
 
   it(`should insert media node into the document after current codeblock node`, () => {
@@ -968,7 +953,6 @@ describe('media-files', () => {
         p(),
       ),
     );
-    editorView.destroy();
   });
 
   describe('inside empty block', () => {
@@ -994,7 +978,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('apends media group to empty paragraph in an empty code block', () => {
@@ -1020,7 +1003,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('apends media group to empty paragraph in an empty heading', () => {
@@ -1046,7 +1028,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('prepends media to existing media group before the empty paragraph', () => {
@@ -1089,7 +1070,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('should replace empty paragraph with mediaGroup and preserve next empty paragraph', () => {
@@ -1114,7 +1094,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('should replace empty paragraph with mediaGroup and preserve previous empty paragraph', () => {
@@ -1140,7 +1119,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
 
     it('should insert all media nodes on the same line', async () => {
@@ -1174,7 +1152,6 @@ describe('media-files', () => {
           p(),
         ),
       );
-      editorView.destroy();
     });
   });
 
@@ -1201,6 +1178,67 @@ describe('media-files', () => {
           p(''),
         ),
       );
+    });
+  });
+
+  describe('when inside a list', () => {
+    it('should get pos after existing list', () => {
+      const complexList = doc(
+        ul(
+          li(
+            p('first'),
+            ul(
+              li(p('second')),
+              li(p('thiird'), ul(li(p('fourth')), li(p('fifth{<>}')))),
+            ),
+          ),
+        ),
+      );
+
+      const { editorView } = editor(complexList);
+      const rootList = editorView.state.doc.nodeAt(0)!;
+      const startPosition = 0;
+
+      const endListPos = startPosition + rootList.nodeSize;
+
+      const posInList = getPosInList(editorView.state);
+
+      expect(posInList).not.toBeUndefined();
+      expect(posInList).toEqual(endListPos);
+    });
+
+    it('should get pos in media group', () => {
+      const complexList = doc(
+        ul(
+          li(
+            p('first'),
+            ul(
+              li(p('second')),
+              li(p('thiird'), ul(li(p('fourth')), li(p('fifth{<>}')))),
+            ),
+          ),
+        ),
+        mediaGroup(
+          media({
+            id: temporaryFileId,
+            __key: temporaryFileId,
+            type: 'file',
+            collection: testCollectionName,
+          })(),
+        ),
+        p(''),
+      );
+
+      const { editorView } = editor(complexList);
+      const rootList = editorView.state.doc.nodeAt(0)!;
+      const startPosition = 0;
+
+      const endListPos = startPosition + rootList.nodeSize;
+
+      const posInList = getPosInList(editorView.state);
+
+      expect(posInList).not.toBeUndefined();
+      expect(posInList).toEqual(endListPos + 1); // endListPos + 1 is the media group
     });
   });
 });

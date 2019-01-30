@@ -2,7 +2,7 @@ import * as React from 'react';
 import { isTableSelected } from 'prosemirror-utils';
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   tdEmpty,
@@ -26,8 +26,10 @@ const InsertRowButton = `.${ClassName.CONTROLS_INSERT_ROW}`;
 const CornerButton = `.${ClassName.CONTROLS_CORNER_BUTTON}`;
 
 describe('CornerControls', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin()],
       pluginKey,
@@ -52,7 +54,6 @@ describe('CornerControls', () => {
       expect(controls.find(InsertColumnButton)).toHaveLength(1);
       expect(controls.find(InsertRowButton)).toHaveLength(1);
       controls.unmount();
-      editorView.destroy();
     });
   });
 
@@ -75,7 +76,6 @@ describe('CornerControls', () => {
       expect(controls.find(InsertColumnButton)).toHaveLength(0);
       expect(controls.find(InsertRowButton)).toHaveLength(1);
       controls.unmount();
-      editorView.destroy();
     });
   });
 
@@ -98,7 +98,6 @@ describe('CornerControls', () => {
       expect(controls.find(InsertColumnButton)).toHaveLength(1);
       expect(controls.find(InsertRowButton)).toHaveLength(0);
       controls.unmount();
-      editorView.destroy();
     });
   });
 
@@ -119,7 +118,6 @@ describe('CornerControls', () => {
 
       expect(isTableSelected(editorView.state.selection)).toBe(true);
       controls.unmount();
-      editorView.destroy();
     });
   });
 
@@ -144,7 +142,6 @@ describe('CornerControls', () => {
       expect(hoveredColumns).toEqual([0, 1, 2]);
       expect(hoveredRows).toEqual([0, 1]);
       controls.unmount();
-      editorView.destroy();
     });
   });
 });

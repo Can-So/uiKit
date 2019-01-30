@@ -3,17 +3,18 @@ import {
   layoutColumn,
   doc,
   p,
-  createEditor,
+  createEditorFactory,
 } from '@atlaskit/editor-test-helpers';
 import {
   deleteActiveLayoutNode,
   setPresetLayout,
 } from '../../../../plugins/layout/actions';
 
-const editor = doc =>
-  createEditor({ doc, editorProps: { allowLayouts: true } });
-
 describe('layout actions', () => {
+  const createEditor = createEditorFactory();
+  const editor = doc =>
+    createEditor({ doc, editorProps: { allowLayouts: true } });
+
   describe('#setActiveLayoutType', () => {
     it('should update layout type of active layoutSection', () => {
       const { editorView } = editor(

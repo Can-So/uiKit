@@ -19,7 +19,7 @@ export const AsanaTask = {
   },
   '@id': 'https://app.asana.com/0/759475196256783/759474743020981',
   '@type': ['Object', 'atlassian:Task'],
-  '@url': 'https://app.asana.com/0/759475196256783/759474743020981',
+  url: 'https://app.asana.com/0/759475196256783/759474743020981',
   assigned: '2018-07-27T11:15:06.815Z',
   assignedBy: {
     '@type': 'Person',
@@ -100,7 +100,7 @@ export const GitHubIssue = {
   },
   '@id': 'https://github.com/User/repo-name/issues/8',
   '@type': ['Object', 'atlassian:Task'],
-  '@url': 'https://github.com/user/repo-name/issues/8?somefilter=true',
+  url: 'https://github.com/user/repo-name/issues/8?somefilter=true',
   assignedBy: {
     '@type': 'Person',
     image: 'https://avatars2.githubusercontent.com/u/15986691?v=4',
@@ -198,7 +198,7 @@ const generateJiraTask = (
     schema: 'http://schema.org/',
   },
   '@id': `https://jira.atlassian.com/browse/?jql=issuetype%20=%20${taskTypeName}%20order%20by%20created%20DESC`,
-  '@url': `https://jira.atlassian.com/browse/MAC-123`,
+  url: `https://jira.atlassian.com/browse/MAC-123`,
   icon: {
     url: 'https://cdn.iconscout.com/icon/free/png-256/guitar-61-160923.png',
   },

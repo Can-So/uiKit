@@ -3,7 +3,7 @@ import AkButton from '@atlaskit/button';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   mountWithIntl,
 } from '@atlaskit/editor-test-helpers';
 import { analyticsService } from '../../../../../analytics';
@@ -18,8 +18,10 @@ import DropdownMenu from '../../../../../ui/DropdownMenu';
 import ToolbarLists from '../../../../../plugins/lists/ui/ToolbarLists';
 
 describe('ToolbarLists', () => {
+  const createEditor = createEditorFactory<ListsPluginState>();
+
   const editor = (doc: any) =>
-    createEditor<ListsPluginState>({
+    createEditor({
       doc,
       editorPlugins: [listPlugin, tasksAndDecisionsPlugin],
       pluginKey,

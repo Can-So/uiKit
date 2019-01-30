@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   decisionList,
@@ -12,6 +12,8 @@ import saveOnEnterPlugin from '../../../../plugins/save-on-enter';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
 
 describe('save on enter', () => {
+  const createEditor = createEditorFactory();
+
   const onSaveSpy = jest.fn();
 
   beforeEach(() => {

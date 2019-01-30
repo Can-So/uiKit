@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   // Node
   blockquote,
@@ -56,6 +56,8 @@ const parseJSON = node => transformer.parse(node);
 const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 
 describe('JSONTransformer:', () => {
+  const createEditor = createEditorFactory();
+
   describe('encode', () => {
     const editor = (doc: any) =>
       createEditor({

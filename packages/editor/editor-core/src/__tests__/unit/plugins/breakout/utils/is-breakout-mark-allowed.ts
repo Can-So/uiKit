@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   code_block,
   p,
@@ -7,6 +7,8 @@ import {
 import { isBreakoutMarkAllowed } from '../../../../../plugins/breakout/utils/is-breakout-mark-allowed';
 
 describe('Breakout Commands: getBreakoutMode', () => {
+  const createEditor = createEditorFactory();
+
   it('should return true for allowed nodes', () => {
     const { editorView } = createEditor({
       doc: doc(code_block()('Hel{<>}lo')),

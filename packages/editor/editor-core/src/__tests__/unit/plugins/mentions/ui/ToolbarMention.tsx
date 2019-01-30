@@ -1,12 +1,13 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import { doc, p, createEditor } from '@atlaskit/editor-test-helpers';
+import { doc, p, createEditorFactory } from '@atlaskit/editor-test-helpers';
 import MentionIcon from '@atlaskit/icon/glyph/editor/mention';
 import { analyticsService } from '../../../../../analytics';
 import mentionsPlugin from '../../../../../plugins/mentions';
 import ToolbarMention from '../../../../../plugins/mentions/ui/ToolbarMention';
 
 describe('ToolbarMention', () => {
+  const createEditor = createEditorFactory();
   const editor = (doc: any, analyticsHandler = () => {}) =>
     createEditor({
       doc,

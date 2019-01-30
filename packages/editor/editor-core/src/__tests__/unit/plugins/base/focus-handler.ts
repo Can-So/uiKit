@@ -1,18 +1,19 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   createEvent,
 } from '@atlaskit/editor-test-helpers';
 import { focusStateKey } from '../../../../plugins/base/pm-plugins/focus-handler';
 
-const editor = (doc: any) => {
-  return createEditor({ doc, pluginKey: focusStateKey });
-};
-
 const event = createEvent('event');
 
 describe('isEditorFocused', () => {
+  const createEditor = createEditorFactory();
+  const editor = (doc: any) => {
+    return createEditor({ doc, pluginKey: focusStateKey });
+  };
+
   it('should set to `true` when a focus event fires', () => {
     const { plugin, editorView } = editor(doc(p('{<>}')));
     plugin.props.handleDOMEvents!.blur(editorView, event);

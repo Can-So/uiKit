@@ -1,7 +1,10 @@
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { EditorView } from 'prosemirror-view';
-import { createEditor, sendKeyToPm } from '@atlaskit/editor-test-helpers';
+import {
+  createEditorFactory,
+  sendKeyToPm,
+} from '@atlaskit/editor-test-helpers';
 import helpDialog, {
   pluginKey,
   openHelpCommand,
@@ -14,6 +17,7 @@ import { EventDispatcher } from '../../../../src/event-dispatcher';
 describe('@atlaskit/editor-core/editor/ui/HelpDialog', () => {
   let editorActions: EditorActions;
   let editorView: EditorView;
+  const createEditor = createEditorFactory();
 
   beforeEach(() => {
     const editor = createEditor({ editorPlugins: [helpDialog] });
@@ -23,10 +27,6 @@ describe('@atlaskit/editor-core/editor/ui/HelpDialog', () => {
       new EventDispatcher(),
     );
     editorView = editor.editorView;
-  });
-
-  afterEach(() => {
-    editorView.destroy();
   });
 
   describe('openHelpCommand', () => {

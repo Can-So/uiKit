@@ -7,7 +7,7 @@ import {
   h2,
   h3,
   insertText,
-  createEditor,
+  createEditorFactory,
   p,
   code,
   hardBreak,
@@ -19,6 +19,8 @@ import panelPlugin from '../../../../plugins/panel';
 import listPlugin from '../../../../plugins/lists';
 
 describe('inputrules', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,
@@ -42,7 +44,6 @@ describe('inputrules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.heading1.autoformatting',
       );
-      editorView.destroy();
     });
 
     it('should convert "# " after shift+enter to heading 1', () => {
@@ -53,7 +54,6 @@ describe('inputrules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.heading1.autoformatting',
       );
-      editorView.destroy();
     });
 
     it('should not convert "# " to heading 1 when inside a code_block', () => {
@@ -61,7 +61,6 @@ describe('inputrules', () => {
 
       insertText(editorView, '# ', sel);
       expect(editorView.state.doc).toEqualDocument(doc(code_block()('# ')));
-      editorView.destroy();
     });
 
     it('should convert "## " to heading 2', () => {
@@ -72,7 +71,6 @@ describe('inputrules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.heading2.autoformatting',
       );
-      editorView.destroy();
     });
 
     it('should not convert "## " to heading 1 when inside a code_block', () => {
@@ -80,7 +78,6 @@ describe('inputrules', () => {
 
       insertText(editorView, '## ', sel);
       expect(editorView.state.doc).toEqualDocument(doc(code_block()('## ')));
-      editorView.destroy();
     });
 
     it('should convert "### " to heading 3', () => {
@@ -91,7 +88,6 @@ describe('inputrules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.heading3.autoformatting',
       );
-      editorView.destroy();
     });
 
     it('should not convert "### " to heading 3 when inside a code_block', () => {
@@ -99,7 +95,6 @@ describe('inputrules', () => {
 
       insertText(editorView, '### ', sel);
       expect(editorView.state.doc).toEqualDocument(doc(code_block()('### ')));
-      editorView.destroy();
     });
   });
 
@@ -112,7 +107,6 @@ describe('inputrules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.blockquote.autoformatting',
       );
-      editorView.destroy();
     });
 
     it('should convert "> " to a blockquote after shift+enter', () => {
@@ -125,7 +119,6 @@ describe('inputrules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.blockquote.autoformatting',
       );
-      editorView.destroy();
     });
 
     it('should convert "> " to a blockquote after multiple shift+enter', () => {
@@ -140,7 +133,6 @@ describe('inputrules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.blockquote.autoformatting',
       );
-      editorView.destroy();
     });
 
     it('should convert "> " after shift+enter to blockquote for only current line', () => {
@@ -155,7 +147,6 @@ describe('inputrules', () => {
       expect(trackEvent).toHaveBeenCalledWith(
         'atlassian.editor.format.blockquote.autoformatting',
       );
-      editorView.destroy();
     });
 
     it('should not convert "> " inside code mark to blockquote', () => {
@@ -163,7 +154,6 @@ describe('inputrules', () => {
 
       insertText(editorView, ' ', sel);
       expect(editorView.state.doc).toEqualDocument(doc(p(code('> '))));
-      editorView.destroy();
     });
 
     it('should not convert "> " inside link to blockquote', () => {
@@ -174,7 +164,6 @@ describe('inputrules', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(p(link({ href: 'http://www.atlassian.com' })('>'), ' ')),
       );
-      editorView.destroy();
     });
 
     it('should not convert "> " to a blockquote when inside a code_block', () => {
@@ -182,7 +171,6 @@ describe('inputrules', () => {
 
       insertText(editorView, '> ', sel);
       expect(editorView.state.doc).toEqualDocument(doc(code_block()('> ')));
-      editorView.destroy();
     });
   });
 
@@ -201,7 +189,6 @@ describe('inputrules', () => {
           expect(trackEvent).toHaveBeenCalledWith(
             'atlassian.editor.format.codeblock.autoformatting',
           );
-          editorView.destroy();
         });
 
         it('should convert "```" after shift+enter to a code block', () => {
@@ -216,7 +203,6 @@ describe('inputrules', () => {
           expect(trackEvent).toHaveBeenCalledWith(
             'atlassian.editor.format.codeblock.autoformatting',
           );
-          editorView.destroy();
         });
 
         it('should convert "```" in middle of paragraph to a code block', () => {

@@ -1,6 +1,6 @@
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   mediaGroup,
   media,
   p,
@@ -22,6 +22,8 @@ import rulePlugin from '../../../../plugins/rule';
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 describe('media-common', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, uploadErrorHandler?: () => void) =>
     createEditor({
       doc,
@@ -75,7 +77,6 @@ describe('media-common', () => {
               ),
             ),
           );
-          editorView.destroy();
         });
 
         it('is not able to undo', () => {
@@ -115,7 +116,6 @@ describe('media-common', () => {
               ),
             ),
           );
-          editorView.destroy();
         });
       });
 
@@ -162,7 +162,6 @@ describe('media-common', () => {
               ),
             ),
           );
-          editorView.destroy();
         });
 
         it('is able to undo', () => {
@@ -203,7 +202,6 @@ describe('media-common', () => {
               ),
             ),
           );
-          editorView.destroy();
         });
       });
 
@@ -244,7 +242,6 @@ describe('media-common', () => {
             );
 
             expect(editorView.state.selection.from).toEqual(sel);
-            editorView.destroy();
           });
         });
 
@@ -285,7 +282,6 @@ describe('media-common', () => {
             const selectedNode = (editorView.state.selection as NodeSelection)
               .node;
             expect(selectedNode && selectedNode.attrs.id).toEqual('media2');
-            editorView.destroy();
           });
         });
       });
@@ -327,7 +323,6 @@ describe('media-common', () => {
             .node;
 
           expect(selectedNode && selectedNode.attrs.id).toEqual('media1');
-          editorView.destroy();
         });
       });
 
@@ -368,7 +363,6 @@ describe('media-common', () => {
             .node;
 
           expect(selectedNode && selectedNode.attrs.id).toEqual('media3');
-          editorView.destroy();
         });
 
         it('removes the node', () => {
@@ -419,7 +413,6 @@ describe('media-common', () => {
               ),
             ),
           );
-          editorView.destroy();
         });
       });
 
@@ -460,7 +453,6 @@ describe('media-common', () => {
             .node;
 
           expect(selectedNode && selectedNode.attrs.id).toEqual('media2');
-          editorView.destroy();
         });
       });
 
@@ -492,7 +484,6 @@ describe('media-common', () => {
             expect(editorView.state.selection.from).toEqual(
               positionOfDeletingNode,
             );
-            editorView.destroy();
           });
         });
 
@@ -522,7 +513,6 @@ describe('media-common', () => {
             expect(editorView.state.selection.from).toEqual(
               positionOfDeletingNode,
             );
-            editorView.destroy();
           });
         });
       });
@@ -550,7 +540,6 @@ describe('media-common', () => {
         const result = splitMediaGroup(editorView);
 
         expect(result).toBe(true);
-        editorView.destroy();
       });
 
       describe('when media node is the first one in media group', () => {
@@ -600,7 +589,6 @@ describe('media-common', () => {
               p('text'),
             ),
           );
-          editorView.destroy();
         });
       });
 
@@ -653,7 +641,6 @@ describe('media-common', () => {
               p('text'),
             ),
           );
-          editorView.destroy();
         });
       });
 
@@ -702,8 +689,6 @@ describe('media-common', () => {
               p('text'),
             ),
           );
-
-          editorView.destroy();
         });
 
         it('removes the selected media node (without last paragraph)', () => {
@@ -749,7 +734,6 @@ describe('media-common', () => {
               p(),
             ),
           );
-          editorView.destroy();
         });
       });
 
@@ -773,7 +757,6 @@ describe('media-common', () => {
           splitMediaGroup(editorView);
 
           expect(editorView.state.doc).toEqualDocument(doc(p('text')));
-          editorView.destroy();
         });
       });
     });
@@ -797,7 +780,6 @@ describe('media-common', () => {
         const result = splitMediaGroup(editorView);
 
         expect(result).toBe(false);
-        editorView.destroy();
       });
 
       it('does nothing', () => {
@@ -830,7 +812,6 @@ describe('media-common', () => {
             p('text'),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -854,7 +835,6 @@ describe('media-common', () => {
         const result = splitMediaGroup(editorView);
 
         expect(result).toBe(false);
-        editorView.destroy();
       });
 
       it('does nothing', () => {
@@ -888,7 +868,6 @@ describe('media-common', () => {
             p('text'),
           ),
         );
-        editorView.destroy();
       });
     });
   });

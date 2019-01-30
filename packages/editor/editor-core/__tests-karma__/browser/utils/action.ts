@@ -6,7 +6,7 @@ import {
   doc,
   p,
   randomId,
-  createEditor,
+  createEditorFactory,
   storyMediaProviderFactory,
 } from '@atlaskit/editor-test-helpers';
 
@@ -30,18 +30,20 @@ const mediaProvider = getFreshMediaProvider();
 const providerFactory = new ProviderFactory();
 providerFactory.setProvider('mediaProvider', mediaProvider);
 
-const editor = (doc: any, uploadErrorHandler?: () => void) =>
-  createEditor<MediaPluginState>({
-    doc,
-    editorPlugins: [mediaPlugin()],
-    pluginKey: stateKey,
-    providerFactory,
-  });
-
 const waitForPluginStateChange = async (pluginState: MediaPluginState) =>
   new Promise(resolve => pluginState.subscribe(resolve));
 
 describe(name, () => {
+  const createEditor = createEditorFactory<MediaPluginState>();
+
+  const editor = (doc: any, uploadErrorHandler?: () => void) =>
+    createEditor({
+      doc,
+      editorPlugins: [mediaPlugin()],
+      pluginKey: stateKey,
+      providerFactory,
+    });
+
   describe('Utils -> Action', () => {
     describe('#insertFileFromDataUrl', () => {
       it('should invoke binary picker when calling insertFileFromDataUrl', async () => {
@@ -69,7 +71,6 @@ describe(name, () => {
         );
         collectionFromProvider.restore();
         pluginState.destroy();
-        editorView.destroy();
       });
     });
   });
