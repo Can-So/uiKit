@@ -171,6 +171,37 @@ test('change in defaultValue should reset form field', () => {
   });
 });
 
+test('change in name should reset form field', done => {
+  const submitFn = jest.fn();
+  const wrapper = mount(
+    <WithState defaultState={'name'}>
+      {(name, setName) => (
+        <>
+          <Form onSubmit={submitFn}>
+            {({ formProps: { onSubmit } }) => (
+              <>
+                <Field name={name} defaultValue="joe bloggs">
+                  {({ fieldProps }) => <FieldText {...fieldProps} />}
+                </Field>
+                <Button onClick={() => setName('username')}>Change</Button>
+                <Button onClick={onSubmit}>Submit</Button>
+              </>
+            )}
+          </Form>
+        </>
+      )}
+    </WithState>,
+  );
+  wrapper.find('button').forEach(b => setTimeout(() => b.simulate('click')));
+  setTimeout(() => {
+    expect(submitFn).toHaveBeenCalledWith(
+      { username: 'joe bloggs' },
+      expect.anything(),
+    );
+    done();
+  });
+});
+
 test('should assosiate messages with field', () => {
   const wrapper = mount(
     <Form onSubmit={jest.fn()}>
