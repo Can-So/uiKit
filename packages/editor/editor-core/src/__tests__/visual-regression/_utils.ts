@@ -392,7 +392,7 @@ export const setTests = forInput => {
   });
 };
 
-export const snapshot = async (page, selector = '.proseMirror') => {
+export const snapshot = async (page, selector = '.akEditor') => {
   const editor = await page.$(selector);
 
   // Try to take a screenshot of only the editor.
@@ -400,6 +400,8 @@ export const snapshot = async (page, selector = '.proseMirror') => {
   let image;
   if (editor) {
     image = await editor.screenshot();
+  } else {
+    image = await page.screenshot();
   }
   // @ts-ignore
   expect(image).toMatchProdImageSnapshot();
