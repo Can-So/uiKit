@@ -11,8 +11,8 @@ import {
 
 export interface Props {
   zIndex?: number;
-  alignX?: 'left' | 'right' | 'center';
-  alignY?: 'top' | 'bottom';
+  alignX?: 'left' | 'right' | 'center' | 'end';
+  alignY?: 'top' | 'bottom' | 'start';
   target?: HTMLElement;
   fitHeight?: number;
   fitWidth?: number;

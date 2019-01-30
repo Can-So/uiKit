@@ -59,6 +59,38 @@ describe('@atlaskit/editor-common popup utils', () => {
     });
   });
 
+  it('should calculatePosition for start and right placement', () => {
+    const placement = ['start', 'left'] as [string, string];
+    const calc = calculatePosition({
+      placement,
+      target,
+      popup,
+      offset,
+      stickToBottom,
+    });
+
+    expect(calc).toEqual({
+      top: 29,
+      left: 34,
+    });
+  });
+
+  it('should calculatePosition for start and end placement', () => {
+    const placement = ['start', 'end'] as [string, string];
+    const calc = calculatePosition({
+      placement,
+      target,
+      popup,
+      offset,
+      stickToBottom,
+    });
+
+    expect(calc).toEqual({
+      top: 29,
+      right: 34,
+    });
+  });
+
   it('should calculatePosition for top and left placement', () => {
     const placement = ['top', 'left'] as [string, string];
     const calc = calculatePosition({

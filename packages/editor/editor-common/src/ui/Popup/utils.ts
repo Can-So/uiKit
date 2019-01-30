@@ -163,6 +163,16 @@ const calculateHorizontalPlacement = ({
         targetWidth / 2 -
         popupClientWidth / 2,
     );
+  } else if (placement === 'end') {
+    const right = Math.ceil(
+      targetLeft -
+        popupOffsetParentLeft -
+        popupClientWidth -
+        (isPopupParentBody ? 0 : popupOffsetParentScrollLeft) +
+        offset[0],
+    );
+
+    position.right = Math.max(right, 0);
   } else {
     position.right = Math.ceil(
       popupOffsetParentRight -
@@ -268,6 +278,8 @@ const calculateVerticalPlacement = ({
         borderBottomWidth +
         offset[1],
     );
+  } else if (placement === 'start') {
+    position.top = Math.ceil(targetTop - popupOffsetParentTop - offset[1]);
   } else {
     let top = Math.ceil(
       targetTop -
