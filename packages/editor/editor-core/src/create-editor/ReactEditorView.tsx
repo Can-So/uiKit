@@ -9,7 +9,7 @@ import { ProviderFactory, Transformer } from '@atlaskit/editor-common';
 import { EventDispatcher, createDispatch } from '../event-dispatcher';
 import { processRawValue } from '../utils';
 import createPluginList from './create-plugins-list';
-import { analyticsEventKey, fireAnalyticsEvent } from '../analytics';
+import { analyticsEventKey, fireAnalyticsEvent } from '../plugins/analytics';
 import { EditorProps, EditorConfig, EditorPlugin } from '../types';
 import { PortalProviderAPI } from '../ui/PortalProvider';
 import {
@@ -85,10 +85,12 @@ export default class ReactEditorView<T = {}> extends React.Component<
     }
 
     this.eventDispatcher.emit(analyticsEventKey, {
-      action: 'started',
-      actionSubject: 'editor',
-      attributes: {
-        platform: 'web',
+      payload: {
+        action: 'started',
+        actionSubject: 'editor',
+        attributes: {
+          platform: 'web',
+        },
       },
     });
     initAnalytics(props.editorProps.analyticsHandler);
@@ -266,11 +268,6 @@ export default class ReactEditorView<T = {}> extends React.Component<
         attributes: { 'data-gramm': 'false' },
       },
     );
-
-    this.eventDispatcher.emit(analyticsEventKey, {
-      action: 'started',
-      actionSubject: 'editor',
-    });
   };
 
   handleEditorViewRef = (node: HTMLDivElement) => {

@@ -3,8 +3,13 @@ import styled from 'styled-components';
 import { EditorView } from 'prosemirror-view';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { EditorAppearance, UIComponentFactory } from '../../types';
-import { EventDispatcher } from '../../event-dispatcher';
+import { EventDispatcher, createDispatch } from '../../event-dispatcher';
 import EditorActions from '../../actions';
+import {
+  analyticsEventKey,
+  AnalyticsDispatch,
+  AnalyticsEventPayload,
+} from '../../plugins/analytics';
 
 const PluginsComponentsWrapper = styled.div`
   display: flex;
@@ -52,6 +57,17 @@ export default class PluginSlot extends React.Component<Props, any> {
     );
   }
 
+  fireAnalyticsEvent = (payload: AnalyticsEventPayload): void => {
+    if (this.props.eventDispatcher) {
+      const dispatch: AnalyticsDispatch = createDispatch(
+        this.props.eventDispatcher,
+      );
+      dispatch(analyticsEventKey, {
+        payload,
+      });
+    }
+  };
+
   render() {
     const {
       items,
@@ -80,6 +96,7 @@ export default class PluginSlot extends React.Component<Props, any> {
             editorActions: editorActions as EditorActions,
             eventDispatcher: eventDispatcher as EventDispatcher,
             providerFactory,
+            fireAnalyticsEvent: this.fireAnalyticsEvent,
             appearance,
             popupsMountPoint,
             popupsBoundariesElement,

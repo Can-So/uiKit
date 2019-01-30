@@ -135,7 +135,6 @@ const insertBlockPlugin = (options: InsertBlockOptions): EditorPlugin => ({
               popupsScrollableElement={popupsScrollableElement}
               insertMenuItems={options.insertMenuItems}
               editorActions={editorActions}
-              eventDispatcher={eventDispatcher}
             />
           )}
         />

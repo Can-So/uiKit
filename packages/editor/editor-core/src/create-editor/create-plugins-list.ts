@@ -83,7 +83,7 @@ export default function createPluginsList(
   props: EditorProps,
   createAnalyticsEvent?: CreateUIAnalyticsEventSignature,
 ): EditorPlugin[] {
-  const plugins = getDefaultPluginsList(props);
+  const plugins = getDefaultPluginsList(props, createAnalyticsEvent);
 
   if (props.allowBreakout && props.appearance === 'full-page') {
     plugins.push(breakoutPlugin);

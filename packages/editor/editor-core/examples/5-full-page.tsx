@@ -154,7 +154,7 @@ export class ExampleEditor extends React.Component<
     return (
       <AnalyticsListener
         channel="fabric-editor"
-        onEvent={({ payload }) => console.log(payload)}
+        onEvent={({ payload }) => console.log('analytics-next event:', payload)}
       >
         <Wrapper>
           <Content>

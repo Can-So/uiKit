@@ -61,11 +61,6 @@ import { Command } from '../../../../types';
 import { showLinkToolbar } from '../../../hyperlink/commands';
 import { insertMentionQuery } from '../../../mentions/commands/insert-mention-query';
 import { updateStatus } from '../../../status/actions';
-import {
-  analyticsEventKey,
-  AnalyticsEventPayload,
-} from '../../../../analytics';
-import { EventDispatcher } from '../../../../event-dispatcher';
 
 export const messages = defineMessages({
   action: {
@@ -188,7 +183,6 @@ export interface Props {
     node?: PMNode,
     isEditing?: boolean,
   ) => (state, dispatch) => void;
-  eventDispatcher: EventDispatcher<AnalyticsEventPayload>;
 }
 
 export interface State {
@@ -244,21 +238,8 @@ class ToolbarInsertBlock extends React.PureComponent<
   };
 
   private toggleEmojiPicker = () => {
-    this.setState(
-      prevState => ({ emojiPickerOpen: !prevState.emojiPickerOpen }),
-      () => {
-        if (this.state.emojiPickerOpen) {
-          this.props.eventDispatcher.emit(analyticsEventKey, {
-            action: 'opened',
-            actionSubject: 'picker',
-            actionSubjectId: 'emojiPicker',
-            attributes: {
-              inputMethod: 'toolbar',
-            },
-          });
-        }
-      },
-    );
+    const emojiPickerOpen = !this.state.emojiPickerOpen;
+    this.setState({ emojiPickerOpen });
   };
 
   private renderPopup() {

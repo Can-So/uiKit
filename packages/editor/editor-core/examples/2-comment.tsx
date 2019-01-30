@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import Button, { ButtonGroup } from '@atlaskit/button';
 import LockCircleIcon from '@atlaskit/icon/glyph/lock-circle';
+import { AnalyticsListener } from '@atlaskit/analytics-next';
 import Editor, { EditorProps } from './../src/editor';
 import EditorContext from './../src/ui/EditorContext';
 import WithEditorActions from './../src/ui/WithEditorActions';
@@ -12,7 +13,6 @@ import ToolsDrawer from '../example-helpers/ToolsDrawer';
 import CollapsedEditor from '../src/ui/CollapsedEditor';
 import ToolbarFeedback from '../src/ui/ToolbarFeedback';
 import { name, version } from '../package.json';
-
 import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';
 import { DevTools } from '../example-helpers/DevTools';
@@ -79,101 +79,106 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
     }
 
     return (
-      <EditorContext>
-        <div>
-          <WithEditorActions
-            render={actions => (
-              <ButtonGroup>
-                <Button
-                  onClick={() =>
-                    actions.replaceDocument(
-                      this.props.replacementDoc || exampleDocument,
-                    )
-                  }
-                >
-                  Load Document
-                </Button>
-                <Button onClick={() => actions.clear()}>Clear</Button>
-              </ButtonGroup>
-            )}
-          />
-          <ToolsDrawer
-            renderEditor={({
-              mentionProvider,
-              emojiProvider,
-              mediaProvider,
-              activityProvider,
-              taskDecisionProvider,
-              contextIdentifierProvider,
-              onChange,
-              disabled,
-              enabledFeatures,
-            }) => (
-              <div style={{ padding: '20px' }}>
-                <CollapsedEditor
-                  placeholder="What do you want to say?"
-                  isExpanded={this.state.isExpanded}
-                  onFocus={this.onFocus}
-                  onExpand={EXPAND_ACTION}
-                >
-                  <Editor
-                    appearance="comment"
-                    placeholder="What do you want to say?"
-                    analyticsHandler={analyticsHandler}
-                    shouldFocus={true}
-                    quickInsert={true}
-                    allowCodeBlocks={true}
-                    allowTextColor={true}
-                    allowLists={true}
-                    allowRule={true}
-                    allowTables={true}
-                    allowHelpDialog={true}
-                    disabled={disabled}
-                    activityProvider={activityProvider}
-                    mentionProvider={mentionProvider}
-                    emojiProvider={emojiProvider}
-                    media={{
-                      provider: mediaProvider,
-                      allowMediaSingle: enabledFeatures.imageResizing,
-                      allowResizing: enabledFeatures.imageResizing,
-                    }}
-                    allowDynamicTextSizing={enabledFeatures.dynamicTextSizing}
-                    taskDecisionProvider={taskDecisionProvider}
-                    contextIdentifierProvider={contextIdentifierProvider}
-                    onChange={onChange}
-                    onSave={SAVE_ACTION}
-                    onCancel={CANCEL_ACTION}
-                    primaryToolbarComponents={
-                      <>
-                        <ToolbarFeedback
-                          product={'bitbucket'}
-                          packageVersion={version}
-                          packageName={name}
-                          key="toolbar-feedback"
-                          labels={['atlaskit-comment']}
-                        />
-                        <ToolbarHelp key="toolbar-help" />
-                      </>
+      <AnalyticsListener
+        channel="fabric-editor"
+        onEvent={({ payload }) => console.log('analytics-next event:', payload)}
+      >
+        <EditorContext>
+          <div>
+            <WithEditorActions
+              render={actions => (
+                <ButtonGroup>
+                  <Button
+                    onClick={() =>
+                      actions.replaceDocument(
+                        this.props.replacementDoc || exampleDocument,
+                      )
                     }
-                    allowExtension={true}
-                    insertMenuItems={customInsertMenuItems}
-                    extensionHandlers={extensionHandlers}
-                    secondaryToolbarComponents={[
-                      <LockCircleIcon
-                        key="permission"
-                        size="large"
-                        label="Permissions"
-                      />,
-                    ]}
-                    {...this.props.editorProps}
-                  />
-                </CollapsedEditor>
-              </div>
-            )}
-          />
-          <DevTools />
-        </div>
-      </EditorContext>
+                  >
+                    Load Document
+                  </Button>
+                  <Button onClick={() => actions.clear()}>Clear</Button>
+                </ButtonGroup>
+              )}
+            />
+            <ToolsDrawer
+              renderEditor={({
+                mentionProvider,
+                emojiProvider,
+                mediaProvider,
+                activityProvider,
+                taskDecisionProvider,
+                contextIdentifierProvider,
+                onChange,
+                disabled,
+                enabledFeatures,
+              }) => (
+                <div style={{ padding: '20px' }}>
+                  <CollapsedEditor
+                    placeholder="What do you want to say?"
+                    isExpanded={this.state.isExpanded}
+                    onFocus={this.onFocus}
+                    onExpand={EXPAND_ACTION}
+                  >
+                    <Editor
+                      appearance="comment"
+                      placeholder="What do you want to say?"
+                      analyticsHandler={analyticsHandler}
+                      shouldFocus={true}
+                      quickInsert={true}
+                      allowCodeBlocks={true}
+                      allowTextColor={true}
+                      allowLists={true}
+                      allowRule={true}
+                      allowTables={true}
+                      allowHelpDialog={true}
+                      disabled={disabled}
+                      activityProvider={activityProvider}
+                      mentionProvider={mentionProvider}
+                      emojiProvider={emojiProvider}
+                      media={{
+                        provider: mediaProvider,
+                        allowMediaSingle: enabledFeatures.imageResizing,
+                        allowResizing: enabledFeatures.imageResizing,
+                      }}
+                      allowDynamicTextSizing={enabledFeatures.dynamicTextSizing}
+                      taskDecisionProvider={taskDecisionProvider}
+                      contextIdentifierProvider={contextIdentifierProvider}
+                      onChange={onChange}
+                      onSave={SAVE_ACTION}
+                      onCancel={CANCEL_ACTION}
+                      primaryToolbarComponents={
+                        <>
+                          <ToolbarFeedback
+                            product={'bitbucket'}
+                            packageVersion={version}
+                            packageName={name}
+                            key="toolbar-feedback"
+                            labels={['atlaskit-comment']}
+                          />
+                          <ToolbarHelp key="toolbar-help" />
+                        </>
+                      }
+                      allowExtension={true}
+                      insertMenuItems={customInsertMenuItems}
+                      extensionHandlers={extensionHandlers}
+                      secondaryToolbarComponents={[
+                        <LockCircleIcon
+                          key="permission"
+                          size="large"
+                          label="Permissions"
+                        />,
+                      ]}
+                      {...this.props.editorProps}
+                    />
+                  </CollapsedEditor>
+                </div>
+              )}
+            />
+            <DevTools />
+          </div>
+        </EditorContext>
+      </AnalyticsListener>
     );
   }
 
