@@ -1,1 +1,0 @@
-- Remove feedback button
