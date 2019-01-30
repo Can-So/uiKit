@@ -1,6 +1,7 @@
+import { EditorView } from '@atlaskit/media-editor';
 import { deselectItem } from '../../../actions/deselectItem';
 import * as React from 'react';
-import { Component, ComponentClass } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { BinaryUploader } from '../../../../components/binary';
@@ -9,15 +10,10 @@ import ErrorView from './errorView/errorView';
 import { SpinnerView } from './spinnerView/spinnerView';
 import { Selection, editorClose } from '../../../actions/editorClose';
 import { editorShowError } from '../../../actions/editorShowError';
-import { EditorViewProps } from '@atlaskit/media-editor';
-import editorViewLoader from './editorViewLoader';
 import { CenterView } from './styles';
+
 export interface MainEditorViewStateProps {
   readonly editorData?: EditorData;
-}
-
-export interface MainEditorViewState {
-  EditorViewComponent?: ComponentClass<EditorViewProps>;
 }
 
 export interface MainEditorViewOwnProps {
@@ -34,38 +30,7 @@ export type MainEditorViewProps = MainEditorViewStateProps &
   MainEditorViewOwnProps &
   MainEditorViewDispatchProps;
 
-export class MainEditorView extends Component<
-  MainEditorViewProps,
-  MainEditorViewState
-> {
-  static EditorViewComponent: ComponentClass<EditorViewProps>;
-
-  state: MainEditorViewState = {
-    EditorViewComponent: MainEditorView.EditorViewComponent,
-  };
-
-  componentDidMount() {
-    this.loadEditorView(this.props);
-  }
-
-  componentWillReceiveProps(newProps: MainEditorViewProps) {
-    this.loadEditorView(newProps);
-  }
-
-  private loadEditorView = async (props: MainEditorViewProps) => {
-    const { editorData } = props;
-    if (!editorData) {
-      return;
-    }
-
-    const EditorViewComponent = await editorViewLoader();
-
-    MainEditorView.EditorViewComponent = EditorViewComponent;
-    this.setState({
-      EditorViewComponent,
-    });
-  };
-
+export class MainEditorView extends Component<MainEditorViewProps> {
   render(): JSX.Element | null {
     const { editorData } = this.props;
     if (editorData) {
@@ -76,15 +41,14 @@ export class MainEditorView extends Component<
   }
 
   private renderContent = (editorData: EditorData): JSX.Element => {
-    const { EditorViewComponent } = this.state;
     const { imageUrl, originalFile, error } = editorData;
 
     if (error) {
       return this.renderError(error);
-    } else if (imageUrl && originalFile && EditorViewComponent) {
+    } else if (imageUrl && originalFile) {
       return (
         <CenterView>
-          <EditorViewComponent
+          <EditorView
             imageUrl={imageUrl}
             onSave={this.onEditorSave(originalFile)}
             onCancel={this.onCancel}

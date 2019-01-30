@@ -1,0 +1,1 @@
+- Move Async module loading of EditorView into media-editor component.
