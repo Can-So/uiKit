@@ -91,8 +91,8 @@ export default class PickerFacade {
     (picker as any).removeAllListeners('upload-error');
 
     if (isDropzone(picker)) {
-      picker.removeAllListeners('drag-enter');
-      picker.removeAllListeners('drag-leave');
+      (picker as any).removeAllListeners('drag-enter');
+      (picker as any).removeAllListeners('drag-leave');
     }
 
     this.onStartListeners = [];

@@ -20,7 +20,7 @@ export interface LocalUploadConfig {
 
 export interface LocalUploadComponent<
   M extends UploadEventPayloadMap = UploadEventPayloadMap
-> {
+> extends UploadComponent<M> {
   cancel(uniqueIdentifier?: string): void;
   setUploadParams(uploadParams: UploadParams): void;
 }
