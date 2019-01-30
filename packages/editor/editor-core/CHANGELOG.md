@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.1
+- [patch] [2d14c5dae1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d14c5dae1):
+
+  - ED-5730 Allow attachment to be inserted after list
+
 ## 98.1.0
 - [minor] [a26d644414](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a26d644414):
 
