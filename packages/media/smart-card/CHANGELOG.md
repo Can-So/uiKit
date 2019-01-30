@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.6.6
+- [patch] [5ae645d661](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ae645d661):
+
+  - Fixing analytics in smart-cards
+
 ## 9.6.5
 - [patch] [2035bef8fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2035bef8fb):
 

@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.0.3
+- [patch] [5ae645d661](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ae645d661):
+
+  - Fixing analytics in smart-cards
+
 ## 98.0.2
 - [patch] [4437882a9a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4437882a9a):
 
