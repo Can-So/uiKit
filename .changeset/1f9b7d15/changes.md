@@ -1,2 +1,0 @@
-- Bugfix: field entry in form state gets deleted when Field is unmounted
-- Bugfix: Shallow equal check in Field works correctly across different types

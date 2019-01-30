@@ -1,5 +1,11 @@
 # @atlaskit/form
 
+## 5.1.3
+- [patch] [a360a3d2b6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a360a3d2b6):
+
+  - Bugfix: field entry in form state gets deleted when Field is unmounted
+  - Bugfix: Shallow equal check in Field works correctly across different types
+
 ## 5.1.2
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1
