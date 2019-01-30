@@ -22,7 +22,7 @@ describe.skip('Snapshot Test: Panel', () => {
 
   afterEach(async () => {
     await page.waitFor(1000);
-    await snapshot(page, 0);
+    await snapshot(page);
   });
 
   describe('Long link text', () => {

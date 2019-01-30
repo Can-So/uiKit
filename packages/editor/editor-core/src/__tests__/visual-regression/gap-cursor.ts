@@ -13,7 +13,7 @@ const nodeLabel = node => {
   }
 };
 
-describe.skip('Snapshot Test: Gap cursor', () => {
+describe('Snapshot Test: Gap cursor', () => {
   let page;
 
   beforeAll(async () => {
