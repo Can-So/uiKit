@@ -1,9 +1,10 @@
 import { MediaSingleLayout } from '@atlaskit/adf-schema';
 import { MediaSingleProps } from '@atlaskit/editor-common';
-import { EditorState } from 'prosemirror-state';
 import { EditorAppearance } from '../../../../types';
 import { GridType } from '../../../grid/types';
 import { MediaProvider } from '../../types';
+import { EditorView } from 'prosemirror-view';
+import { EditorState } from 'prosemirror-state';
 
 export type EnabledHandles = { left?: boolean; right?: boolean };
 
@@ -15,6 +16,7 @@ export type Props = MediaSingleProps & {
     highlight?: number[] | string[],
   ) => void;
   getPos: () => number | undefined;
+  view: EditorView;
   state: EditorState;
   lineLength: number;
   gridSize: number;
