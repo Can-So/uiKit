@@ -1,5 +1,10 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.18
+- [patch] [e5a98ed46b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e5a98ed46b):
+
+  - ED-6104: refactor createEditor to correctly call editorView.destroy() afterEach test
+
 ## 6.3.17
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/editor-common@31.0.0

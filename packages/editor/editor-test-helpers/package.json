@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/editor-test-helpers",
-  "version": "6.3.17",
+  "version": "6.3.18",
   "description": "Test Helpers for Atlassian Editor components",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",
