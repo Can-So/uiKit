@@ -1,4 +1,0 @@
-{
-  "releases": [{ "name": "@atlaskit/datetime-picker", "type": "minor" }],
-  "dependents": []
-}
