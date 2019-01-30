@@ -7,6 +7,7 @@ describe('emailValidation', () => {
     ['INVALID', 'abc'],
     ['INVALID', '123'],
     ['POTENTIAL', 'someEmail@'],
+    ['POTENTIAL', 'someEmail@atlassian'],
     ['VALID', 'someEmail@atlassian.com'],
   ])('should return "%s" for "%s" input text', (expectation, inputText) => {
     expect(isValidEmail(inputText)).toEqual(expectation);
