@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import InlineDialog from '@atlaskit/inline-dialog';
+import { LoadOptions } from '@atlaskit/user-picker';
 import { ShareButton } from './ShareButton';
 import { ShareForm } from './ShareForm';
 import { messages } from '../i18n';
+import { Comment, User } from '../types';
+import { InvitationsCapabilitiesResponse } from '../api/InvitationsCapabilitiesResource';
 
 type RenderChildren = (
   openModal: Function,
@@ -24,58 +27,26 @@ export type DialogContentState = {
 
 type State = DialogState & DialogContentState;
 
-export type User = UserWithId | UserWithEmail;
-
-type UserWithId = {
-  type: 'user' | 'group' | 'team';
-  id: string;
-};
-
-type UserWithEmail = {
-  email: string;
-};
-
-type Comment = {
-  format: 'plain_text' | 'adf';
-  value: string;
-};
-
 type ShareError = {
   message: string;
 } | null;
 
-type InvitationsCapabilities = {
-  directInvite: DirectInviteCapabilities;
-  invitePendingApproval: RequestAccessCapabilities;
-};
-
-type DirectInviteCapabilities = {
-  mode: 'NONE' | 'ANYONE' | 'DOMAIN_RESTRICTED';
-  domains?: string[];
-  permittedResources: string[];
-};
-
-type RequestAccessCapabilities = {
-  mode: 'NONE' | 'ANYONE';
-  permittedResources: string[];
-};
-
 type Props = {
   buttonStyle?: 'default' | 'withText';
-  capabilities?: InvitationsCapabilities;
+  capabilities?: InvitationsCapabilitiesResponse;
   copyLink: string;
   children?: RenderChildren;
   isDisabled?: boolean;
-  loadOptions?: any;
+  loadUserOptions: LoadOptions;
   onLinkCopy?: Function;
   onCommentChange?: (comment: Comment) => any;
-  onSubmit?: (dialogContentState: DialogContentState) => Promise<any>;
+  onShareSubmit?: (dialogContentState: DialogContentState) => Promise<any>;
   onUsersChange?: (users: User[]) => any;
   shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
   validateStateWithCapabilities?: (
     state: DialogContentState,
-    capabilities: InvitationsCapabilities,
+    capabilities: InvitationsCapabilitiesResponse,
   ) => boolean;
 };
 
@@ -209,7 +180,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     this.setState(defaultDialogContentState);
   };
 
-  handleShareUsersChange = (users: User[]) => {
+  handleChangeShareUsers = (users: User[]) => {
     this.setState({ users });
 
     if (this.props.onUsersChange) {
@@ -217,7 +188,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     }
   };
 
-  handleShareCommentChange = (event: React.SyntheticEvent) => {
+  handleChangeShareComment = (event: React.SyntheticEvent) => {
     const target = event.target as HTMLTextAreaElement;
     const comment: Comment = {
       format: 'plain_text' as 'plain_text',
@@ -231,8 +202,8 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     }
   };
 
-  handleShareSubmit = (event: React.SyntheticEvent) => {
-    if (!this.props.onSubmit) {
+  handleSubmitShare = (event: React.SyntheticEvent) => {
+    if (!this.props.onShareSubmit) {
       return;
     }
 
@@ -243,8 +214,8 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
 
     this.setState({ isSharing: true });
 
-    this.props.onSubmit!(dialogContentState)
-      .then(() => {
+    this.props.onShareSubmit!(dialogContentState)
+      .then(res => {
         this.handleCloseDialog({ isOpen: false, event });
         this.setState({ isSharing: false });
       })
@@ -266,7 +237,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
       isStateValidWithCapabilities,
       shareError,
     } = this.state;
-    const { copyLink, isDisabled, loadOptions } = this.props;
+    const { copyLink, isDisabled, loadUserOptions } = this.props;
 
     // for performance purposes, we may want to have a lodable content i.e. ShareForm
     return (
@@ -275,11 +246,11 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
           content={
             <ShareForm
               copyLink={copyLink}
-              loadOptions={loadOptions}
+              loadOptions={loadUserOptions}
               isSharing={isSharing}
-              onCommentChange={this.handleShareCommentChange}
-              onUsersChange={this.handleShareUsersChange}
-              onShareClick={this.handleShareSubmit}
+              onCommentChange={this.handleChangeShareComment}
+              onUsersChange={this.handleChangeShareUsers}
+              onShareClick={this.handleSubmitShare}
               shareError={shareError}
               shouldShowCapabilitiesInfoMessage={!isStateValidWithCapabilities}
             />

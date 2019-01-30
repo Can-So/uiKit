@@ -9,6 +9,7 @@ import { CommentField } from './CommentField';
 import { ShareHeader } from './ShareHeader';
 import { UserPickerField } from './UserPickerField';
 import { CopyLinkButton } from './CopyLinkButton';
+import { User } from '../types';
 
 const LeftAlignmentContainer = styled.div`
   margin-right: auto;
@@ -17,17 +18,6 @@ const LeftAlignmentContainer = styled.div`
 type ShareError = {
   message: string;
 } | null;
-
-type User = UserWithId | UserWithEmail;
-
-type UserWithId = {
-  type: 'user' | 'group' | 'team';
-  id: string;
-};
-
-type UserWithEmail = {
-  email: string;
-};
 
 export type Props = {
   capabilitiesInfoMessage?: React.ReactNode;

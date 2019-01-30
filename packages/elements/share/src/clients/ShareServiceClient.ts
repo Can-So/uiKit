@@ -3,41 +3,19 @@ import {
   utils,
   ServiceConfig,
 } from '@atlaskit/util-service-support';
+import { Content, Comment, User } from '../types';
 
 export interface ShareClient {
   share: (
     content: Content,
-    recipients: Recipient[],
+    recipients: User[],
     metadata: MetaData,
     comment?: Comment,
   ) => Promise<ShareResponse>;
 }
 
-type ShareResponse = {
+export type ShareResponse = {
   shareRequestId: string;
-};
-
-type Recipient = RecipientWithId | RecipientWithEmail;
-
-type RecipientWithId = {
-  type: 'user' | 'group' | 'team';
-  id: string;
-};
-
-type RecipientWithEmail = {
-  type: 'user';
-  email: string;
-};
-
-type Content = {
-  ari: string;
-  link: string;
-  title: string;
-};
-
-type Comment = {
-  format: 'plain_text' | 'adf';
-  value: string;
 };
 
 // In Draft and TBC
@@ -47,7 +25,7 @@ type Comment = {
 // with corresponding expected follow up actions, i.e. Login and Sign up.
 // for more info, visit:
 // https://hello.atlassian.net/wiki/spaces/~804672962/pages/379043535/Draft+Origin+Tracing+in+Common+Share+Component
-type MetaData = {
+export type MetaData = {
   productId: string;
   tracking: {
     toAtlassianAccountHolders: {
@@ -77,7 +55,7 @@ export class ShareServiceClient implements ShareClient {
    */
   public share(
     content: Content,
-    recipients: Recipient[],
+    recipients: User[],
     metadata: MetaData,
     comment?: Comment,
   ): Promise<ShareResponse> {
