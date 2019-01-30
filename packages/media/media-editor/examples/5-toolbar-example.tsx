@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { I18NWrapper } from '@atlaskit/media-test-helpers';
 import Toolbar from '../src/react/editorView/toolbar/toolbar';
-import { Color, Tool } from '../src';
+import { Color, Tool } from '../src/common';
 
 interface State {
   readonly color: Color;

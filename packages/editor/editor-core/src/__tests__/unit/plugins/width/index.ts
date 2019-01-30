@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p as paragraph,
 } from '@atlaskit/editor-test-helpers';
@@ -7,6 +7,8 @@ import {
 import { pluginKey } from '../../../../plugins/width';
 
 describe('width plugin', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,

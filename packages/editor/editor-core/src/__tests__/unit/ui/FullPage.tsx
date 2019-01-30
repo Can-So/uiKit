@@ -1,16 +1,21 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { createEditor, doc, p, extension } from '@atlaskit/editor-test-helpers';
+import {
+  createEditorFactory,
+  doc,
+  p,
+  extension,
+} from '@atlaskit/editor-test-helpers';
 
 import FullPage from '../../../ui/Appearance/FullPage';
 
-const editor = (doc: any) =>
-  createEditor({
-    doc,
-    editorProps: { allowExtension: true },
-  });
-
 describe('full page editor', () => {
+  const createEditor = createEditorFactory();
+  const editor = (doc: any) =>
+    createEditor({
+      doc,
+      editorProps: { allowExtension: true },
+    });
   it('should create empty terminal empty paragraph when clicked outside editor', () => {
     const { editorView } = editor(doc(p('Hello world'), p('Hello world')));
     const fullPage = mount(

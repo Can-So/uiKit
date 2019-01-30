@@ -1,5 +1,18 @@
 # @atlaskit/editor-common
 
+## 31.0.0
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/editor-test-helpers@6.3.17
+  - @atlaskit/emoji@54.0.0
+  - @atlaskit/media-card@52.0.0
+  - @atlaskit/editor-json-transformer@4.1.8
+  - @atlaskit/media-core@27.0.0
+
+## 30.0.2
+- [patch] [bfe22480d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfe22480d0):
+
+  - ED-6056: fix zero width columns in renderer for migration tables
+
 ## 30.0.1
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/editor-test-helpers@6.3.13

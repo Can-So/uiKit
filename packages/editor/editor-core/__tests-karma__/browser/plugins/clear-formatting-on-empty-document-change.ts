@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { EditorView } from 'prosemirror-view';
 import { sendKeyToPm, insertText } from '@atlaskit/editor-test-helpers';
 
-import { createEditor } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory } from '@atlaskit/editor-test-helpers';
 
 /**
  * We need to simulate a backspace here as sendKeyToPm(view, 'Backspace') throws an error
@@ -18,6 +18,8 @@ const backspace = (view: EditorView) => {
 };
 
 describe('clear-marks-on-empty-document-change', () => {
+  const createEditor = createEditorFactory();
+
   const editor = () =>
     createEditor({
       editorProps: { shouldFocus: true },
@@ -45,7 +47,6 @@ describe('clear-marks-on-empty-document-change', () => {
         },
       ],
     });
-    editorView.destroy();
   });
 
   it('should not clear stored marks when the document changes but still has content', () => {
@@ -71,7 +72,6 @@ describe('clear-marks-on-empty-document-change', () => {
         },
       ],
     });
-    editorView.destroy();
   });
 
   it('should allow stored marks to be set on an empty document', () => {
@@ -95,6 +95,5 @@ describe('clear-marks-on-empty-document-change', () => {
         },
       ],
     });
-    editorView.destroy();
   });
 });

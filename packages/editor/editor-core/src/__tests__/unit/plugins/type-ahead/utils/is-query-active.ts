@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   typeAheadQuery,
@@ -7,6 +7,8 @@ import {
 import { isQueryActive } from '../../../../../plugins/type-ahead/utils/is-query-active';
 
 describe('findQueryMark', () => {
+  const createEditor = createEditorFactory();
+
   it('should return true if typeAheadQuery mark is active', () => {
     const { editorView } = createEditor({
       doc: doc(p(typeAheadQuery({ trigger: '/' })('/query'))),

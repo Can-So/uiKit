@@ -82,8 +82,8 @@ type State = {
 const shallowEqual = (a, b) =>
   a === b ||
   typeof b === 'function' ||
-  (Array.isArray(b) && arrayShallowEqual(a, b)) ||
-  (typeof b === 'object' && objectShallowEqual(a, b));
+  (Array.isArray(a) && Array.isArray(b) && arrayShallowEqual(a, b)) ||
+  (typeof a === 'object' && typeof b === 'object' && objectShallowEqual(a, b));
 
 // Provides the id of the field to message components.
 // This links the message with the field for screen-readers.
@@ -168,8 +168,8 @@ class FieldInner extends React.Component<InnerProps, State> {
   componentDidUpdate(prevProps: Props) {
     const { defaultValue, name } = this.props;
     if (
-      !shallowEqual(prevProps.defaultValue, defaultValue) ||
-      prevProps.name !== name
+      prevProps.name !== name ||
+      !shallowEqual(prevProps.defaultValue, defaultValue)
     ) {
       this.unregisterField();
       this.unregisterField = this.register();

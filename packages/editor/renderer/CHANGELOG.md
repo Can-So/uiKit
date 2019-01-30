@@ -1,5 +1,30 @@
 # @atlaskit/renderer
 
+## 38.0.0
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/editor-common@31.0.0
+  - @atlaskit/editor-test-helpers@6.3.17
+  - @atlaskit/media-card@52.0.0
+  - @atlaskit/media-filmstrip@26.0.0
+  - @atlaskit/media-test-helpers@20.1.0
+  - @atlaskit/editor-json-transformer@4.1.8
+  - @atlaskit/task-decision@11.1.8
+  - @atlaskit/util-data-test@10.0.36
+  - @atlaskit/media-core@27.0.0
+
+## 37.0.3
+- [patch] [e2eca7e6d5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e2eca7e6d5):
+
+  - ED-6111: fixed renderer rendering unsupported content with some ADF
+
+## 37.0.2
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/editor-test-helpers@6.3.14
+  - @atlaskit/media-card@51.0.2
+  - @atlaskit/media-core@26.2.1
+  - @atlaskit/media-filmstrip@25.0.2
+  - @atlaskit/media-test-helpers@20.0.0
+
 ## 37.0.1
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

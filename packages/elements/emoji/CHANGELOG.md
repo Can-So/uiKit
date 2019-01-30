@@ -1,5 +1,11 @@
 # @atlaskit/emoji
 
+## 54.0.0
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/editor-test-helpers@6.3.17
+  - @atlaskit/util-data-test@10.0.36
+  - @atlaskit/media-core@27.0.0
+
 ## 53.0.1
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

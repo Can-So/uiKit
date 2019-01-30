@@ -1,7 +1,7 @@
 import {
   code_block,
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   table,
   tr,
@@ -21,6 +21,8 @@ import { setTextSelection } from '../../../../utils';
 import codeBlockPlugin from '../../../../plugins/code-block';
 
 describe('code-block', () => {
+  const createEditor = createEditorFactory();
+
   const event = createEvent('event');
   const editor = (doc: any) => {
     return createEditor({
@@ -125,12 +127,12 @@ describe('code-block', () => {
       });
 
       describe('when Enter key is pressed twice', () => {
-        it('a new paragraph should be created outside code block', () => {
+        it('a new paragraph should be not created outside code block', () => {
           const { editorView } = editor(doc(code_block()('text{<>}')));
           sendKeyToPm(editorView, 'Enter');
           sendKeyToPm(editorView, 'Enter');
           expect(editorView.state.doc).toEqualDocument(
-            doc(code_block()('text'), p()),
+            doc(code_block()('text\n\n')),
           );
         });
       });
@@ -149,7 +151,6 @@ describe('code-block', () => {
           expect(codeBlockPluginKey.getState(editorView.state)).toEqual(
             pluginState,
           );
-          editorView.destroy();
         });
       });
 
@@ -168,7 +169,6 @@ describe('code-block', () => {
             language: undefined,
             toolbarVisible: false,
           });
-          editorView.destroy();
         });
       });
     });

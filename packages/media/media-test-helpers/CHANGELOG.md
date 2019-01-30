@@ -1,5 +1,26 @@
 # @atlaskit/media-test-helpers
 
+## 20.1.0
+- [minor] [4e82fedc90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e82fedc90):
+
+  - Expose real id upfront for remote files in MediaPicker
+- Updated dependencies [9d881f1eb8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d881f1eb8):
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/media-picker@32.0.0
+  - @atlaskit/media-card@52.0.0
+  - @atlaskit/media-store@9.1.5
+  - @atlaskit/media-core@27.0.0
+
+## 20.0.1
+- [patch] [28353efea8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/28353efea8):
+
+  - Fix expected/actual in expectToEqual utility
+
+## 20.0.0
+- [major] [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+
+  - Fetch cloud accounts only on cloud folder opening
+
 ## 19.1.1
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/dropdown-menu@6.1.26

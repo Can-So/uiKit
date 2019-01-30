@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   code_block,
@@ -13,6 +13,8 @@ import {
 } from '../../../../../plugins/code-block/ide-ux/line-handling';
 
 describe('IDE UX - Line Handling', () => {
+  const createEditor = createEditorFactory();
+
   const getState = doc =>
     createEditor({
       doc,

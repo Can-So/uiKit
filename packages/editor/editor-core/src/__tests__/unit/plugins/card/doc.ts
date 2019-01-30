@@ -1,6 +1,6 @@
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   a,
   insertText,
@@ -18,12 +18,15 @@ import {
 
 import { setTextSelection } from '../../../../utils';
 import { queueCardsFromChangedTr } from '../../../../plugins/card/pm-plugins/doc';
+import { panelPlugin } from '../../../../plugins';
 
 describe('card', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,
-      editorPlugins: [cardPlugin],
+      editorPlugins: [cardPlugin, panelPlugin],
       pluginKey,
     });
   };
@@ -192,7 +195,7 @@ describe('card', () => {
       it('does not replace if provider returns invalid ADF', async () => {
         const { dispatch } = view;
         const doc = {
-          type: 'mediaSingle',
+          type: 'panel',
           content: [
             {
               type: 'panel',
@@ -228,7 +231,7 @@ describe('card', () => {
         const { dispatch } = view;
         provider = new class implements CardProvider {
           resolve(url: string): Promise<any> {
-            return Promise.reject('error');
+            return Promise.reject('error').catch(() => {});
           }
         }();
 

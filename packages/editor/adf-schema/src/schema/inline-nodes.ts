@@ -1,5 +1,9 @@
 import * as nodes from './nodes';
 
+const typedNodes: Record<string, any> = nodes;
+
 export const inlineNodes = new Set(
-  Object.keys(nodes).filter(key => nodes[key] && nodes[key].group === 'inline'),
+  Object.keys(typedNodes).filter(
+    key => typedNodes[key] && typedNodes[key].group === 'inline',
+  ),
 );

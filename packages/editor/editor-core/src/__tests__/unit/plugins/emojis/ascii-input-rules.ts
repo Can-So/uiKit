@@ -2,7 +2,7 @@ import { ProviderFactory } from '@atlaskit/editor-common';
 import { EmojiDescription } from '@atlaskit/emoji';
 import {
   insertText,
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   code,
@@ -19,6 +19,8 @@ const emojiProvider = emojiData.testData.getEmojiResourcePromise();
 const providerFactory = ProviderFactory.create({ emojiProvider });
 
 describe('ascii emojis - input rules', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     const editor = createEditor({
       doc,
@@ -60,7 +62,6 @@ describe('ascii emojis - input rules', () => {
 
     const { state } = editorView;
     expectation(state);
-    editorView.destroy();
   };
 
   /**
@@ -276,7 +277,6 @@ describe('ascii emojis - input rules', () => {
         const selections: EmojiDescription[] = resource.recordedSelections;
         expect(selections.length).toBe(1);
         expect(selections[0].shortName).toEqual(':smiley:');
-        editorView.destroy();
       });
     });
   });

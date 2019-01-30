@@ -7,7 +7,7 @@ import {
   panel,
   panelNote,
   p,
-  createEditor,
+  createEditorFactory,
   createEvent,
   sendKeyToPm,
   table,
@@ -25,9 +25,11 @@ import {
 } from '../../../../plugins/panel/actions';
 
 describe('@atlaskit/editor-core ui/PanelPlugin', () => {
+  const createEditor = createEditorFactory<PanelState>();
+
   const event = createEvent('event');
   const editor = (doc: any) =>
-    createEditor<PanelState>({
+    createEditor({
       doc,
       editorPlugins: [panelPlugin, listPlugin, tablesPlugin()],
       pluginKey: panelPluginKey,

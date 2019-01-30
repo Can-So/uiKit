@@ -14,7 +14,7 @@ import vsCodeSingleLine from './__third-party__/vs-code/single-line/html';
 
 import { toJSON } from '../../../../utils';
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   dispatchPasteEvent,
@@ -23,6 +23,8 @@ import { smallImage } from '@atlaskit/media-test-helpers';
 import { dataURItoBlob } from '../../../../../../../media/media-test-helpers/src/mockData/utils';
 
 describe('paste plugin: third-party', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,

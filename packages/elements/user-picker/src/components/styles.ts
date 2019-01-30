@@ -2,10 +2,12 @@ import { AVATAR_SIZES, BORDER_WIDTH } from '@atlaskit/avatar';
 import { colors } from '@atlaskit/theme';
 import memoizeOne from 'memoize-one';
 import { getAvatarSize } from './utils';
+import { Appearance } from '../types';
 
+export const BORDER_PADDING = 6;
 export const PLACEHOLDER_PADDING = 8;
 
-export const getStyles = memoizeOne(width => ({
+export const getStyles = memoizeOne((width, appearance: Appearance) => ({
   menu: (css, state) => ({
     ...css,
     width,
@@ -42,7 +44,7 @@ export const getStyles = memoizeOne(width => ({
           : colors.N30,
     },
     padding: 0,
-    minHeight: state.selectProps.appearance === 'compact' ? 32 : 44,
+    minHeight: appearance === 'compact' ? 32 : 44,
     alignItems: 'stretch',
     maxWidth: '100%',
   }),
@@ -61,6 +63,10 @@ export const getStyles = memoizeOne(width => ({
     ':hover': {
       color: colors.R400,
     },
+  }),
+  indicatorsContainer: css => ({
+    ...css,
+    paddingRight: 4,
   }),
   valueContainer: ({ paddingTop, paddingBottom, position, ...css }, state) => ({
     ...css,
@@ -82,11 +88,12 @@ export const getStyles = memoizeOne(width => ({
     '&:hover': { backgroundColor: 'transparent' },
   }),
   placeholder: (css, state) => {
-    const avatarSize = getAvatarSize(state.selectProps.appearance);
+    const avatarSize = getAvatarSize(appearance);
     return {
       ...css,
       paddingLeft: !state.selectProps.isMulti
-        ? 2 * PLACEHOLDER_PADDING +
+        ? BORDER_PADDING +
+          PLACEHOLDER_PADDING +
           2 * BORDER_WIDTH[avatarSize] +
           AVATAR_SIZES[avatarSize]
         : PLACEHOLDER_PADDING,
@@ -95,7 +102,6 @@ export const getStyles = memoizeOne(width => ({
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      paddingTop: 2,
       maxWidth: '100%',
       margin: 0,
     };
@@ -104,11 +110,11 @@ export const getStyles = memoizeOne(width => ({
     ...css,
     overflow: 'hidden',
   }),
-  input: ({ margin, ...css }) => ({
+  input: ({ margin, paddingTop, ...css }) => ({
     ...css,
     display: 'flex',
     alignSelf: 'center',
-    paddingBottom: 1,
+    paddingBottom: appearance === 'compact' ? 1 : 0,
     paddingLeft: PLACEHOLDER_PADDING,
     '& input::placeholder': {
       /* Chrome, Firefox, Opera, Safari 10.1+ */

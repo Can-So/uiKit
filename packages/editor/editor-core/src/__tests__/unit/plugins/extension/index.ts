@@ -1,6 +1,6 @@
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p as paragraph,
   bodiedExtension,
   extension,
@@ -35,6 +35,8 @@ const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 const temporaryFileId = `temporary:${randomId()}`;
 
 describe('extension', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,
@@ -293,7 +295,6 @@ describe('extension', () => {
       )!;
       expect(node).toBeDefined();
       expect(node!.attrs.layout).toBe('full-width');
-      editorView.destroy();
     });
 
     it('respects the layout attribute', () => {
@@ -314,8 +315,6 @@ describe('extension', () => {
       expect(getExtensionElement.getAttribute('data-layout')).toBe(
         'full-width',
       );
-
-      editorView.destroy();
     });
 
     it('sets the data-layout attribute on the extension DOM element', () => {
@@ -338,8 +337,6 @@ describe('extension', () => {
       expect(getExtensionElement.getAttribute('data-layout')).toBe(
         'full-width',
       );
-
-      editorView.destroy();
     });
 
     it('sets layout attributes uniquely on extension elements', () => {
@@ -377,7 +374,6 @@ describe('extension', () => {
       expect(getSecondExtensionElement.getAttribute('data-layout')).toBe(
         'full-width',
       );
-      editorView.destroy();
     });
   });
 });

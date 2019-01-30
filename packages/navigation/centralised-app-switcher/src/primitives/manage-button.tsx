@@ -1,3 +1,8 @@
 import React from 'react';
+import Button from '@atlaskit/button';
 
-export default ({ onClick }) => <button onClick={onClick}>Manage</button>;
+type Props = {
+  href: string;
+};
+
+export default ({ href }: Props) => <Button href={href}>Manage list</Button>;

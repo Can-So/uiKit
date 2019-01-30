@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   sendKeyToPm,
   doc,
   p,
@@ -13,6 +13,8 @@ import breakoutPlugin from '../../../../plugins/breakout';
 import listPlugin from '../../../../plugins/lists';
 
 describe('codeBlock - keymaps', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,
@@ -28,12 +30,11 @@ describe('codeBlock - keymaps', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(code_block()('codeBlock\n')),
         );
-        editorView.destroy();
       });
     });
 
     describe('when enter key is pressed 2 times', () => {
-      it('should exit code block', () => {
+      it('should not exit code block', () => {
         const { editorView } = editor(
           doc(breakout({ mode: 'wide' })(code_block()('codeBlock{<>}'))),
         );
@@ -41,9 +42,8 @@ describe('codeBlock - keymaps', () => {
         sendKeyToPm(editorView, 'Enter');
         sendKeyToPm(editorView, 'Enter');
         expect(editorView.state.doc).toEqualDocument(
-          doc(breakout({ mode: 'wide' })(code_block()('codeBlock')), p('{<>}')),
+          doc(breakout({ mode: 'wide' })(code_block()('codeBlock\n\n'))),
         );
-        editorView.destroy();
       });
     });
 
@@ -55,17 +55,15 @@ describe('codeBlock - keymaps', () => {
         expect(editorView.state.doc).toEqualDocument(
           doc(code_block()('\ncodeBlock\n')),
         );
-        editorView.destroy();
       });
 
-      it('it should exit code block if selection is at the end', () => {
+      it('it should not exit code block if selection is at the end', () => {
         const { editorView } = editor(doc(code_block()('codeBlock\n{<>}')));
 
         sendKeyToPm(editorView, 'Enter');
         expect(editorView.state.doc).toEqualDocument(
-          doc(code_block()('codeBlock'), p('{<>}')),
+          doc(code_block()('codeBlock\n\n')),
         );
-        editorView.destroy();
       });
     });
   });
@@ -78,7 +76,6 @@ describe('codeBlock - keymaps', () => {
 
       sendKeyToPm(editorView, 'Backspace');
       expect(editorView.state.doc).toEqualDocument(doc(p()));
-      editorView.destroy();
     });
 
     it('should remove the code block if the cursor is at the beginning of the code block - 2', () => {
@@ -86,7 +83,6 @@ describe('codeBlock - keymaps', () => {
 
       sendKeyToPm(editorView, 'Backspace');
       expect(editorView.state.doc).toEqualDocument(doc(p('Hello')));
-      editorView.destroy();
     });
 
     describe('when codeblock is nested inside list item', () => {
@@ -95,7 +91,6 @@ describe('codeBlock - keymaps', () => {
 
         sendKeyToPm(editorView, 'Backspace');
         expect(editorView.state.doc).toEqualDocument(doc(ul(li(p('Hello')))));
-        editorView.destroy();
       });
     });
 
@@ -104,7 +99,6 @@ describe('codeBlock - keymaps', () => {
 
       sendKeyToPm(editorView, 'Backspace');
       expect(editorView.state.doc).toEqualDocument(doc(p('const x = 10;')));
-      editorView.destroy();
     });
 
     it('should not remove the code block if selection is not empty ', () => {
@@ -114,7 +108,6 @@ describe('codeBlock - keymaps', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(code_block()('const x = 1;')),
       );
-      editorView.destroy();
     });
   });
 });

@@ -104,12 +104,6 @@ if (typeof window !== 'undefined' && !('cancelAnimationFrame' in window)) {
   };
 }
 
-function isNodeOrFragment(thing) {
-  // Using a simple `instanceof` check is intentionally avoided here to make
-  // this code agnostic to a specific instance of a Schema.
-  return thing && typeof thing.eq === 'function';
-}
-
 function transformDoc(fn) {
   return doc => {
     const walk = fn => node => {
@@ -332,34 +326,24 @@ expect.addSnapshotSerializer(createSerializer(emotion));
 
 // set up for visual regression
 if (process.env.VISUAL_REGRESSION) {
-  const puppeteer = require('puppeteer');
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 
   beforeAll(async () => {
-    // show browser when watch is enabled
-    const isWatch = process.env.WATCH === 'true';
-    let headless = true;
-    if (isWatch) {
-      headless = false;
-    }
-    global.browser = await puppeteer.launch({
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-      ],
-    });
     global.page = await global.browser.newPage();
   }, jasmine.DEFAULT_TIMEOUT_INTERVAL);
 
   afterAll(async () => {
-    await global.browser.close();
+    await global.page.close();
+    await global.browser.disconnect();
   });
 
   // TODO tweak failureThreshold to provide best results
   // TODO: A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
+  const customConfig = { threshold: 0.5 };
   const toMatchProdImageSnapshot = configureToMatchImageSnapshot({
-    customDiffConfig: { threshold: 0.3 },
+    customDiffConfig: customConfig,
+    failureThreshold: '0.03',
+    failureThresholdType: 'percent',
     noColors: true,
   });
 

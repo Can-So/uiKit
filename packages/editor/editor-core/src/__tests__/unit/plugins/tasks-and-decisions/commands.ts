@@ -1,7 +1,7 @@
 import { NodeSelection } from 'prosemirror-state';
 import {
   compareSelection,
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   blockquote,
@@ -24,6 +24,8 @@ import mediaPlugin from '../../../../plugins/media';
 import panelPlugin from '../../../../plugins/panel';
 
 describe('tasks and decisions - commands', () => {
+  const createEditor = createEditorFactory();
+
   beforeEach(() => {
     uuid.setStatic('local-uuid');
   });

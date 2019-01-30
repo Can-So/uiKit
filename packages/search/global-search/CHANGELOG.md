@@ -1,5 +1,20 @@
 # @atlaskit/global-search
 
+## 5.15.0
+- [minor] [a6a76aa7cd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a6a76aa7cd):
+
+  - Adds ability to send search terms for jira quick search
+
+## 5.14.1
+- [patch] [f9e27f2b99](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f9e27f2b99):
+
+  - Modified CPUS response objects to match API correctly
+
+## 5.14.0
+- [minor] [df2b5b7235](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/df2b5b7235):
+
+  - Disable people search on the pre-query screen temporarily for performance reasons.
+
 ## 5.13.7
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

@@ -2,7 +2,9 @@ import { MediaFileArtifacts } from './artifacts';
 
 export type MediaFileProcessingStatus = 'pending' | 'succeeded' | 'failed';
 export type MediaType = 'doc' | 'audio' | 'video' | 'image' | 'unknown';
-
+export const isPreviewableType = (type: MediaType): boolean => {
+  return ['audio', 'video', 'image'].indexOf(type) > -1;
+};
 export type MediaFile = {
   readonly id: string;
   readonly mediaType: MediaType;

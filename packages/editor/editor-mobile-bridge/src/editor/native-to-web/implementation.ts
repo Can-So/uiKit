@@ -20,6 +20,7 @@ import {
   updateStatus,
   commitStatusPicker,
   insertBlockType,
+  setBlockType,
   createTable,
   insertTaskDecision,
   changeColor,
@@ -32,8 +33,8 @@ import { Color as StatusColor } from '@atlaskit/status';
 
 import NativeToWebBridge from './bridge';
 import WebBridge from '../../web-bridge';
+import { ProseMirrorDOMChange } from '../../types';
 import { rejectPromise, resolvePromise } from '../../cross-platform-promise';
-import { setBlockType } from '../../../../editor-core/src/plugins/block-type/commands';
 
 export default class WebBridgeImpl extends WebBridge
   implements NativeToWebBridge {
@@ -42,7 +43,7 @@ export default class WebBridgeImpl extends WebBridge
   blockFormatBridgeState: BlockTypeState | null = null;
   listBridgeState: ListsState | null = null;
   mentionsPluginState: MentionPluginState | null = null;
-  editorView: EditorView | null = null;
+  editorView: EditorView & ProseMirrorDOMChange | null = null;
   transformer: JSONTransformer = new JSONTransformer();
   editorActions: EditorActions = new EditorActions();
   mediaPicker: CustomMediaPicker | undefined;
@@ -115,9 +116,14 @@ export default class WebBridgeImpl extends WebBridge
   }
 
   getContent(): string {
-    return this.editorView
-      ? JSON.stringify(this.transformer.encode(this.editorView.state.doc))
-      : '';
+    if (!this.editorView) {
+      return '';
+    }
+
+    // Flush DOM to apply current in flight composition.
+    this.flushDOM();
+
+    return JSON.stringify(this.transformer.encode(this.editorView.state.doc));
   }
 
   setTextFormattingStateAndSubscribe(state: TextFormattingState) {
@@ -242,6 +248,8 @@ export default class WebBridgeImpl extends WebBridge
       return;
     }
 
+    this.flushDOM();
+
     const { state, dispatch } = this.editorView;
     const item: TypeAheadItem = JSON.parse(payload);
 
@@ -283,6 +291,26 @@ export default class WebBridgeImpl extends WebBridge
 
     this.editorView.focus();
     return true;
+  }
+
+  flushDOM() {
+    if (!this.editorView) {
+      return false;
+    }
+
+    /**
+     * NOTE: `inDOMChange` is a private API, it's used as a workaround to forcefully apply current composition
+     * when integrators request the content. It doesn't break the users current composing so they may continue
+     * to compose the current item.
+     * @see ED-5924
+     */
+    const domChange = this.editorView.inDOMChange;
+    if (domChange && domChange.composing) {
+      domChange.finish(true);
+      return true;
+    }
+
+    return false;
   }
 
   getRootElement(): HTMLElement | null {

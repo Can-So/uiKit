@@ -47,7 +47,9 @@ export const layoutColumn: NodeSpec = {
     },
   ],
   toDOM(node) {
-    const attrs = { 'data-layout-column': 'true' };
+    const attrs: Record<string, string> = {
+      'data-layout-column': 'true',
+    };
     const { width } = node.attrs;
     if (width) {
       attrs['style'] = `flex-basis: ${width}%`;

@@ -2,8 +2,6 @@
  * wrapper on top of webdriver-io apis to give a feel of puppeeteer api
  */
 
-//TODO :move this to a new npm-pkg
-const webdriverio = require('webdriverio');
 const WAIT_TIMEOUT = 5000;
 
 const TODO = () => {
@@ -89,14 +87,12 @@ export default class Page {
 
   async type(selector, text) {
     if (Array.isArray(text)) {
-      while (text.length > 1) {
-        let first = text.shift();
-        await this.browser.addValue(selector, first);
+      for (let t of text) {
+        await this.browser.addValue(selector, t);
       }
-
-      return this.browser.addValue(selector, text[0]);
+    } else {
+      await this.browser.addValue(selector, text);
     }
-    return this.browser.addValue(selector, text);
   }
 
   setValue(selector, text) {
@@ -138,10 +134,7 @@ export default class Page {
   }
   checkConsoleErrors() {
     // Console errors can only be checked in Chrome
-    if (
-      this.browser.desiredCapabilities.browserName === 'chrome' &&
-      this.browser.log('browser').value
-    ) {
+    if (this.isBrowser('chrome') && this.browser.log('browser').value) {
       this.browser.logs('browser').value.forEach(val => {
         assert.notEqual(
           val.level,
@@ -169,6 +162,14 @@ export default class Page {
     // replace with await page.evaluate(() => document.querySelector('p').textContent)
     // for puppteer
     return this.browser.getText(selector);
+  }
+
+  getBrowserName() {
+    return this.browser.desiredCapabilities.browserName;
+  }
+
+  isBrowser(browserName) {
+    return this.getBrowserName() === browserName;
   }
 
   getCssProperty(selector, cssProperty) {
@@ -205,7 +206,7 @@ export default class Page {
     let keys;
     if (this.browser.desiredCapabilities.os === 'Windows') {
       keys = ['Control', 'v'];
-    } else if (this.browser.desiredCapabilities.browserName === 'chrome') {
+    } else if (this.isBrowser('chrome')) {
       // Workaround for https://bugs.chromium.org/p/chromedriver/issues/detail?id=30
       keys = ['Shift', 'Insert'];
     } else {
@@ -218,7 +219,7 @@ export default class Page {
     let keys;
     if (this.browser.desiredCapabilities.os === 'Windows') {
       keys = ['Control', 'c'];
-    } else if (this.browser.desiredCapabilities.browserName === 'chrome') {
+    } else if (this.isBrowser('chrome')) {
       // Workaround for https://bugs.chromium.org/p/chromedriver/issues/detail?id=30
       keys = ['Control', 'Insert'];
     } else {

@@ -1,5 +1,23 @@
 # @atlaskit/media-image
 
+## 52.0.0
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/media-test-helpers@20.1.0
+  - @atlaskit/media-store@9.1.5
+  - @atlaskit/media-core@27.0.0
+
+## 51.0.3
+- [patch] [a3f8e527aa](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a3f8e527aa):
+
+  - Take into account if image is on it's side according to orientation tag when deciding how to crop/fit and image
+
+## 51.0.2
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/media-core@26.2.1
+  - @atlaskit/media-store@9.1.4
+  - @atlaskit/media-ui@8.2.6
+  - @atlaskit/media-test-helpers@20.0.0
+
 ## 51.0.1
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

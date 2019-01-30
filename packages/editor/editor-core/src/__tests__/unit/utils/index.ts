@@ -4,7 +4,7 @@ import {
   code,
   p,
   strong,
-  createEditor,
+  createEditorFactory,
   panel,
   blockquote,
   h1,
@@ -36,6 +36,8 @@ import mentionsPlugin from '../../../plugins/mentions';
 import tasksAndDecisionsPlugin from '../../../plugins/tasks-and-decisions';
 
 describe('@atlaskit/editore-core/utils', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,

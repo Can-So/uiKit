@@ -1,5 +1,29 @@
 # @atlaskit/media-ui
 
+## 8.4.1
+- [patch] [56c5a4b41f](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/56c5a4b41f):
+
+  - Fix "try again" should not be showing when there are no auth methods
+
+## 8.4.0
+- [minor] [63e6f7d420](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/63e6f7d420):
+
+  - Fix missing attributes for link view
+
+## 8.3.1
+- [patch] [bef9abc8de](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bef9abc8de):
+
+  - added background colour to inline card views, fixed icon alignment.
+
+## 8.3.0
+- [minor] [89668941e6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/89668941e6):
+
+  - Flip width and height around when image is on it's side according to metadata orientation; Introduce isRotated utility
+
+## 8.2.6
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/media-test-helpers@20.0.0
+
 ## 8.2.5
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/docs@6.0.1

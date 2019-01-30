@@ -9,7 +9,7 @@ const VISUAL_REGRESSION = process.env.VISUAL_REGRESSION;
 const PARALLELIZE_TESTS = process.env.PARALLELIZE_TESTS;
 const PARALLELIZE_TESTS_FILE = process.env.PARALLELIZE_TESTS_FILE;
 const TEST_ONLY_PATTERN = process.env.TEST_ONLY_PATTERN;
-const PROD = process.env.PROD;
+
 // These are set by Pipelines if you are running in a parallel steps
 const STEP_IDX = Number(process.env.STEP_IDX);
 const STEPS = Number(process.env.STEPS);
@@ -68,9 +68,8 @@ const config = {
   },
   globals: {
     'ts-jest': {
-      tsConfig: './tsconfig.jest.json',
-      babelConfig: false,
-      diagnostics: false,
+      tsConfigFile: './tsconfig.jest.json',
+      skipBabel: true,
     },
     __BASEURL__: 'http://localhost:9000',
   },
@@ -79,7 +78,7 @@ const config = {
     '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/fileMock.js',
   },
   snapshotSerializers: ['enzyme-to-json/serializer'],
-  setupFiles: ['./build/jest-config/index.js'],
+  setupFiles: ['./build/jest-config/setup.js'],
   setupTestFrameworkScriptFile: `${__dirname}/jestFrameworkSetup.js`,
   testResultsProcessor: 'jest-junit',
   testEnvironmentOptions: {
@@ -90,6 +89,9 @@ const config = {
   collectCoverage: false,
   collectCoverageFrom: [],
   coverageThreshold: {},
+  globalSetup: undefined,
+  globalTeardown: undefined,
+  testEnvironment: 'jsdom',
 };
 
 // If the CHANGED_PACKAGES variable is set, we parse it to get an array of changed packages and only
@@ -189,9 +191,14 @@ if (config.testMatch.length === 0) {
     console.log('No packages were changed, so no tests should be run.');
   }
 }
+if (process.env.VISUAL_REGRESSION) {
+  config.globalSetup = `${__dirname}/build/visual-regression/config/jest/globalSetup.js`;
+  config.globalTeardown = `${__dirname}/build/visual-regression/config/jest/globalTeardown.js`;
+  config.testEnvironment = `${__dirname}/build/visual-regression/config/jest/jsdomEnvironment.js`;
 
-if (PROD) {
-  config.globals.__BASEURL__ = 'https://atlaskit.atlassian.com';
+  if (!process.env.CI) {
+    config.globals.__BASEURL__ = 'http://testing.local.com:9000';
+  }
 }
 
 module.exports = config;

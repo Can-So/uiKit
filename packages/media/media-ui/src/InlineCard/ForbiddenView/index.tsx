@@ -5,7 +5,7 @@ import Button from '@atlaskit/button';
 import { truncateUrlForErrorView } from '../utils';
 import { Frame } from '../Frame';
 import { IconAndTitleLayout } from '../IconAndTitleLayout';
-import { LockIconWrapper } from './styled';
+import { AKIconWrapper } from '../Icon';
 
 export interface InlineCardForbiddenViewProps {
   /** The url to display */
@@ -23,35 +23,36 @@ export class InlineCardForbiddenView extends React.Component<
 > {
   handleRetry = (event: React.MouseEvent<HTMLButtonElement>) => {
     const { onAuthorise } = this.props;
-    if (onAuthorise) {
-      event.preventDefault();
-      event.stopPropagation();
-      onAuthorise();
-    }
+    event.preventDefault();
+    event.stopPropagation();
+    onAuthorise!();
   };
 
   render() {
-    const { url, onClick, isSelected } = this.props;
+    const { url, onClick, isSelected, onAuthorise } = this.props;
     return (
       <Frame onClick={onClick} isSelected={isSelected}>
         <IconAndTitleLayout
           icon={
-            <LockIconWrapper>
-              <LockIcon
-                label="error"
-                size="medium"
-                primaryColor={colors.B400}
-              />
-            </LockIconWrapper>
+            <AKIconWrapper>
+              <LockIcon label="error" size="small" primaryColor={colors.B400} />
+            </AKIconWrapper>
           }
           title={
             truncateUrlForErrorView(url) +
             " - You don't have permissions to view"
           }
-        />{' '}
-        <Button spacing="none" appearance="link" onClick={this.handleRetry}>
-          Try another account
-        </Button>
+        />
+        {!onAuthorise ? (
+          ''
+        ) : (
+          <>
+            {' '}
+            <Button spacing="none" appearance="link" onClick={this.handleRetry}>
+              Try another account
+            </Button>
+          </>
+        )}
       </Frame>
     );
   }

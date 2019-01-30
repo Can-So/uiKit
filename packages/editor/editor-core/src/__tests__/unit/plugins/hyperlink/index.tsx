@@ -1,6 +1,6 @@
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   a,
   p,
   insertText,
@@ -8,6 +8,8 @@ import {
 import hyperlinkEditorPlugin from '../../../../plugins/hyperlink';
 
 describe('hyperlink', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,

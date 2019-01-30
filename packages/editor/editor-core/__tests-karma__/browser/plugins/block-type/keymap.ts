@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import * as sinon from 'sinon';
 import {
   sendKeyToPm,
-  createEditor,
+  createEditorFactory,
   blockquote,
   doc,
   h1,
@@ -18,6 +18,8 @@ import tablesPlugin from '../../../../src/plugins/table';
 import rulePlugin from '../../../../src/plugins/rule';
 
 describe('block-type – keymaps', () => {
+  const createEditor = createEditorFactory();
+
   if (browser.mac) {
     let trackEvent;
     const editor = (doc: any) =>
@@ -53,7 +55,6 @@ describe('block-type – keymaps', () => {
               'atlassian.editor.format.blockquote.keyboard',
             ),
           ).to.eq(true);
-          editorView.destroy();
         });
       });
 
@@ -71,7 +72,6 @@ describe('block-type – keymaps', () => {
           expect(editorView.state.doc).to.deep.equal(
             doc(p('text'))(editorView.state.schema),
           );
-          editorView.destroy();
         });
       });
 
@@ -85,7 +85,6 @@ describe('block-type – keymaps', () => {
           expect(
             trackEvent.calledWith('atlassian.editor.newline.keyboard'),
           ).to.eq(true);
-          editorView.destroy();
         });
 
         it('can insert multiple hard-breaks', () => {
@@ -112,8 +111,6 @@ describe('block-type – keymaps', () => {
           ).to.eq(true);
 
           sinon.assert.callCount(trackEvent, 3);
-
-          editorView.destroy();
         });
 
         it('moves selection along with hard-breaks', () => {
@@ -151,8 +148,6 @@ describe('block-type – keymaps', () => {
           ).to.eq(true);
 
           sinon.assert.callCount(trackEvent, 3);
-
-          editorView.destroy();
         });
       });
     });

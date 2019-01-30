@@ -1,5 +1,101 @@
 # @atlaskit/editor-core
 
+## 98.1.0
+- [minor] [a26d644414](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a26d644414):
+
+  - ED-5845, ED-6072: support resizing in multiple editors on page, fix snapping images in lists
+
+## 98.0.3
+- [patch] [5ae645d661](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ae645d661):
+
+  - Fixing analytics in smart-cards
+
+## 98.0.2
+- [patch] [4437882a9a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4437882a9a):
+
+  - ED-6107: don't act on destroyed EditorView during cleanup in media plugin
+
+## 98.0.1
+- [patch] [2035bef8fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2035bef8fb):
+
+  - Fix inline extractor priority preventing @type arrays in some cases.
+
+## 98.0.0
+- [patch] [4e82fedc90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e82fedc90):
+
+  - Expose real id upfront for remote files in MediaPicker
+- Updated dependencies [9d881f1eb8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9d881f1eb8):
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/media-test-helpers@20.1.0
+  - @atlaskit/media-picker@32.0.0
+  - @atlaskit/editor-common@31.0.0
+  - @atlaskit/editor-test-helpers@6.3.17
+  - @atlaskit/renderer@38.0.0
+  - @atlaskit/emoji@54.0.0
+  - @atlaskit/media-card@52.0.0
+  - @atlaskit/media-filmstrip@26.0.0
+  - @atlaskit/editor-bitbucket-transformer@4.1.8
+  - @atlaskit/editor-json-transformer@4.1.8
+  - @atlaskit/editor-markdown-transformer@2.1.8
+  - @atlaskit/task-decision@11.1.8
+  - @atlaskit/util-data-test@10.0.36
+  - @atlaskit/media-core@27.0.0
+
+## 97.1.9
+- [patch] [4552e804d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4552e804d3):
+
+  - dismiss StatusPicker if status node is not selected
+
+## 97.1.8
+- [patch] [adff2caed7](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/adff2caed7):
+
+  - Improve typings
+
+## 97.1.7
+- [patch] [7c497c2de6](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/7c497c2de6):
+
+  - ED-5810 Fix issue where numbered table rows flickered when hovering on the edge of row controls
+
+## 97.1.6
+- [patch] [cbc601aed3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/cbc601aed3):
+
+  - Added missing type of events for Confluence
+
+## 97.1.5
+- [patch] [bfe22480d0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/bfe22480d0):
+
+  - ED-6056: fix zero width columns in renderer for migration tables
+
+## 97.1.4
+- [patch] [f77cd3fb66](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/f77cd3fb66):
+
+  - fixed reactjs warning on FieldBase.onBlur and prevent breaking line when inserting Status via enter key
+
+## 97.1.3
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/editor-test-helpers@6.3.14
+  - @atlaskit/renderer@37.0.2
+  - @atlaskit/media-card@51.0.2
+  - @atlaskit/media-core@26.2.1
+  - @atlaskit/media-filmstrip@25.0.2
+  - @atlaskit/media-picker@31.0.2
+  - @atlaskit/media-test-helpers@20.0.0
+
+## 97.1.2
+- [patch] [5132bc24a5](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5132bc24a5):
+
+  - Fix codeblock enter-press inside lists
+
+## 97.1.1
+- [patch] [478a86ae8a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/478a86ae8a):
+
+  - avoid using the same localId when pasting status
+
+## 97.1.0
+- [minor] [2db7577588](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2db7577588):
+
+  - ED-5924: Fixes handling of node deletion for composition events.
+
 ## 97.0.3
 - [patch] [a5714ccc17](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a5714ccc17):
 

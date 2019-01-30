@@ -1,5 +1,33 @@
 # @atlaskit/editor-test-helpers
 
+## 6.3.18
+- [patch] [e5a98ed46b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e5a98ed46b):
+
+  - ED-6104: refactor createEditor to correctly call editorView.destroy() afterEach test
+
+## 6.3.17
+- Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
+  - @atlaskit/editor-common@31.0.0
+  - @atlaskit/editor-core@98.0.0
+  - @atlaskit/media-test-helpers@20.1.0
+  - @atlaskit/media-core@27.0.0
+
+## 6.3.16
+- [patch] [4552e804d3](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4552e804d3):
+
+  - dismiss StatusPicker if status node is not selected
+
+## 6.3.15
+- [patch] [ccc39ca887](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/ccc39ca887):
+
+  - ED-6094: add table CellSelection test helpers
+
+## 6.3.14
+- Updated dependencies [07a187bb30](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/07a187bb30):
+  - @atlaskit/editor-core@97.1.3
+  - @atlaskit/media-core@26.2.1
+  - @atlaskit/media-test-helpers@20.0.0
+
 ## 6.3.13
 - Updated dependencies [d7ef59d432](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/d7ef59d432):
   - @atlaskit/editor-common@30.0.1

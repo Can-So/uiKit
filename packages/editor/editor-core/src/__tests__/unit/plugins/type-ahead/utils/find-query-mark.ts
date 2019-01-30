@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   typeAheadQuery,
@@ -10,6 +10,8 @@ import {
 } from '../../../../../plugins/type-ahead/utils/find-query-mark';
 
 describe('findQueryMark', () => {
+  const createEditor = createEditorFactory();
+
   it('should return positions of a typeAheadQuery mark', () => {
     const { editorView } = createEditor({
       doc: doc(p(typeAheadQuery({ trigger: '/' })('/query'))),
@@ -42,6 +44,8 @@ describe('findQueryMark', () => {
 });
 
 describe('findTypeAheadQuery', () => {
+  const createEditor = createEditorFactory();
+
   it('should return positions of typeAheadQuery mark based on selection', () => {
     const { editorView } = createEditor({
       doc: doc(

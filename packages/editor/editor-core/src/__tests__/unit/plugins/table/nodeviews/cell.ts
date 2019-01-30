@@ -2,7 +2,7 @@ import { setCellAttrs, findCellClosestToPos } from 'prosemirror-utils';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   td,
@@ -13,8 +13,10 @@ import { TablePluginState } from '../../../../../plugins/table/types';
 import { pluginKey } from '../../../../../plugins/table/pm-plugins/main';
 
 describe('table -> nodeviews -> cell.tsx', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorProps: {
         allowTables: { advanced: true },
@@ -36,7 +38,6 @@ describe('table -> nodeviews -> cell.tsx', () => {
       dispatch(setCellAttrs(cell, { background })(state.tr));
       const cellDomNode = document.querySelector('td')!;
       expect(cellDomNode.style.backgroundColor).toEqual(background);
-      editorView.destroy();
     });
   });
 
@@ -59,7 +60,6 @@ describe('table -> nodeviews -> cell.tsx', () => {
       dispatch(setCellAttrs(cell, { background })(state.tr));
       const cellDomNode = document.querySelector('td')!;
       expect(cellDomNode.style.backgroundColor).toEqual('');
-      editorView.destroy();
     });
   });
 });

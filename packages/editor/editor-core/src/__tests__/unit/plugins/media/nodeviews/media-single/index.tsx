@@ -12,10 +12,13 @@ import {
   stateKey as mediaStateKey,
   DefaultMediaStateManager,
 } from '../../../../../../plugins/media/pm-plugins/main';
-import MediaSingle from '../../../../../../plugins/media/nodeviews/mediaSingle';
+import MediaSingle, {
+  ReactMediaSingleNode,
+} from '../../../../../../plugins/media/nodeviews/mediaSingle';
 import Media from '../../../../../../plugins/media/nodeviews/media';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import { EventDispatcher } from '../../../../../../event-dispatcher';
+import { PortalProviderAPI } from '../../../../../../ui/PortalProvider';
 
 const stateManager = new DefaultMediaStateManager();
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
@@ -48,6 +51,12 @@ describe('nodeviews/mediaSingle', () => {
   const view = {} as EditorView;
   const eventDispatcher = {} as EventDispatcher;
   const getPos = jest.fn();
+  const portalProviderAPI: PortalProviderAPI = {
+    render(component) {
+      component();
+    },
+    remove() {},
+  } as any;
 
   beforeEach(() => {
     const mediaProvider = getFreshMediaProvider();
@@ -141,6 +150,43 @@ describe('nodeviews/mediaSingle', () => {
     );
   });
 
+  describe('re-rendering based on offsetLeft', () => {
+    const node = mediaSingle()(mediaNode)(defaultSchema);
+
+    it('does not call render if the parent has not offsetLeft changed', () => {
+      const nodeView = ReactMediaSingleNode(
+        portalProviderAPI,
+        eventDispatcher,
+        'full-page',
+      )(node, view, getPos);
+
+      const renderMock = jest.fn();
+      nodeView.render = renderMock;
+
+      nodeView.ignoreMutation();
+      expect(renderMock).not.toBeCalled();
+    });
+
+    it('re-renders if the parent offsetLeft changes', () => {
+      const nodeView = ReactMediaSingleNode(
+        portalProviderAPI,
+        eventDispatcher,
+        'full-page',
+      )(node, view, getPos);
+
+      const renderMock = jest.fn();
+      nodeView.render = renderMock;
+
+      Object.defineProperties(nodeView.dom!, {
+        offsetLeft: {
+          get: () => 20,
+        },
+      });
+
+      nodeView.ignoreMutation();
+      expect(renderMock).toBeCalled();
+    });
+  });
   afterEach(() => {
     jest.resetAllMocks();
   });

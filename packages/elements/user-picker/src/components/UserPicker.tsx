@@ -24,6 +24,7 @@ import {
   OptionData,
   UserPickerProps,
   UserPickerState,
+  Appearance,
 } from '../types';
 import { batchByKey } from './batch';
 import { getComponents } from './components';
@@ -45,7 +46,6 @@ class UserPickerInternal extends React.Component<
   static defaultProps: UserPickerProps = {
     width: 350,
     isMulti: false,
-    appearance: 'normal',
     subtle: false,
     isClearable: true,
   };
@@ -131,7 +131,7 @@ class UserPickerInternal extends React.Component<
       return;
     }
     this.setState({ inputValue: '' });
-    const { onChange, onSelection, isMulti } = this.props;
+    const { onChange, onSelection, onClear, isMulti } = this.props;
     callCallback(onChange, extractOptionValue(value), action);
 
     switch (action) {
@@ -143,6 +143,7 @@ class UserPickerInternal extends React.Component<
         this.session = isMulti ? startSession() : undefined;
         break;
       case 'clear':
+        callCallback(onClear);
         this.fireEvent(clearEvent);
         break;
       case 'remove-value':
@@ -332,13 +333,19 @@ class UserPickerInternal extends React.Component<
 
   private getOptions = (): Option[] => getOptions(this.state.options) || [];
 
+  private getAppearance = (): Appearance =>
+    this.props.appearance
+      ? this.props.appearance
+      : this.props.isMulti
+      ? 'compact'
+      : 'normal';
+
   render() {
     const {
       width,
       isMulti,
       anchor,
       isLoading,
-      appearance,
       subtle,
       placeholder,
       isClearable,
@@ -355,6 +362,8 @@ class UserPickerInternal extends React.Component<
       value,
       inputValue,
     } = this.state;
+    const appearance = this.getAppearance();
+
     return (
       <Select
         value={value}
@@ -363,7 +372,7 @@ class UserPickerInternal extends React.Component<
         isMulti={isMulti}
         options={this.getOptions()}
         onChange={this.handleChange}
-        styles={getStyles(width)}
+        styles={getStyles(width, appearance)}
         components={getComponents(isMulti, anchor)}
         inputValue={inputValue}
         menuIsOpen={menuIsOpen}
@@ -379,7 +388,7 @@ class UserPickerInternal extends React.Component<
         classNamePrefix="fabric-user-picker"
         onClearIndicatorHover={this.handleClearIndicatorHover}
         hoveringClearIndicator={hoveringClearIndicator}
-        appearance={isMulti ? 'compact' : appearance}
+        appearance={appearance}
         isClearable={isClearable}
         subtle={isMulti ? false : subtle}
         blurInputOnSelect={!isMulti}

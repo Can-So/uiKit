@@ -8,6 +8,10 @@ import TaskItem from '../ui/Task';
 import { PortalProviderAPI } from '../../../ui/PortalProvider';
 import WithPluginState from '../../../ui/WithPluginState';
 import {
+  stateKey as taskPluginKey,
+  TaskDecisionPluginState,
+} from '../pm-plugins/main';
+import {
   pluginKey as editorDisabledPluginKey,
   EditorDisabledPluginState,
 } from '../../editor-disabled';
@@ -95,22 +99,37 @@ class Task extends ReactNodeView {
         <WithPluginState
           plugins={{
             editorDisabledPlugin: editorDisabledPluginKey,
+            taskDecisionPlugin: taskPluginKey,
           }}
           render={({
             editorDisabledPlugin,
+            taskDecisionPlugin,
           }: {
             editorDisabledPlugin: EditorDisabledPluginState;
-          }) => (
-            <TaskItem
-              taskId={localId}
-              contentRef={forwardRef}
-              isDone={state === 'DONE'}
-              onChange={this.handleOnChange}
-              showPlaceholder={this.isContentEmpty()}
-              providers={props.providerFactory}
-              disabled={(editorDisabledPlugin || {}).editorDisabled}
-            />
-          )}
+            taskDecisionPlugin: TaskDecisionPluginState;
+          }) => {
+            let insideCurrentNode = false;
+            if (
+              taskDecisionPlugin &&
+              taskDecisionPlugin.currentTaskDecisionItem
+            ) {
+              insideCurrentNode = this.node.eq(
+                taskDecisionPlugin.currentTaskDecisionItem,
+              );
+            }
+
+            return (
+              <TaskItem
+                taskId={localId}
+                contentRef={forwardRef}
+                isDone={state === 'DONE'}
+                onChange={this.handleOnChange}
+                showPlaceholder={!insideCurrentNode && this.isContentEmpty()}
+                providers={props.providerFactory}
+                disabled={(editorDisabledPlugin || {}).editorDisabled}
+              />
+            );
+          }}
         />
       </AnalyticsListener>
     );

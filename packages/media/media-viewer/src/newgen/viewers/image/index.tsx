@@ -55,8 +55,8 @@ export class ImageViewer extends BaseViewer<
     }
 
     try {
-      let imagePreview: Blob | undefined;
       let orientation = 1;
+      let objectUrl: string;
       if (file.status === 'processed') {
         const item = processedFileStateToMediaItem(file);
         const controller =
@@ -75,12 +75,17 @@ export class ImageViewer extends BaseViewer<
           controller,
         );
         this.cancelImageFetch = () => controller && controller.abort();
-        imagePreview = await response;
+        objectUrl = URL.createObjectURL(await response);
       } else {
         const { preview } = file;
         if (preview) {
-          imagePreview = preview.blob;
-          orientation = await getOrientation(imagePreview as File);
+          const { value } = await preview;
+          if (value instanceof Blob) {
+            orientation = await getOrientation(value as File);
+            objectUrl = URL.createObjectURL(value);
+          } else {
+            objectUrl = value;
+          }
         } else {
           this.setState({
             content: Outcome.pending(),
@@ -88,8 +93,6 @@ export class ImageViewer extends BaseViewer<
           return;
         }
       }
-
-      const objectUrl = URL.createObjectURL(imagePreview);
 
       this.setState({
         content: Outcome.successful({ objectUrl, orientation }),

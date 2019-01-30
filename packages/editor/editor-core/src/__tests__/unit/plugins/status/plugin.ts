@@ -1,11 +1,26 @@
-import { EditorState, Plugin, Selection } from 'prosemirror-state';
+import {
+  EditorState,
+  Plugin,
+  Selection,
+  TextSelection,
+  NodeSelection,
+} from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
+import {
+  createEditorFactory,
+  doc,
+  p,
+  StatusLocalIdRegex,
+} from '@atlaskit/editor-test-helpers';
+import { updateStatus } from '../../../../plugins/status/actions';
 import createPlugin, {
   pluginKey,
   SelectionChange,
 } from '../../../../plugins/status/plugin';
 
 describe('status plugin: plugin', () => {
+  const createEditor = createEditorFactory();
+
   const createSelection = (from: number, to?: number): Selection => {
     const actualTo = to === undefined ? from : to;
     return {
@@ -17,6 +32,14 @@ describe('status plugin: plugin', () => {
 
   const sel1 = createSelection(1);
   const sel2 = createSelection(2);
+
+  const editorFactory = (doc: any) =>
+    createEditor({
+      editorProps: {
+        allowStatus: true,
+      },
+      doc,
+    });
 
   describe('SelectionChangeHandler', () => {
     let change: SelectionChange;
@@ -104,6 +127,51 @@ describe('status plugin: plugin', () => {
       } as EditorState;
       update(editorView, previousEditorState);
       expect(notifyNewSelectionSpy).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe('Edge cases', () => {
+    it('StatusPicker should be dismissed if cursor is outside the Status node selection', () => {
+      const { editorView } = editorFactory(doc(p('Status: {<>}')));
+      // insert new Status at {<>}
+      updateStatus({ text: 'Yay', color: 'blue' })(editorView);
+
+      let statusState = pluginKey.getState(editorView.state);
+
+      expect(editorView.state.tr.selection).toBeInstanceOf(NodeSelection);
+      expect(editorView.state.tr.selection.to).toBe(
+        editorView.state.tr.selection.from + 1,
+      );
+      expect(statusState).toMatchObject({
+        isNew: true,
+        showStatusPickerAt: editorView.state.tr.selection.from, // status node start position
+        selectedStatus: expect.objectContaining({
+          text: 'Yay',
+          color: 'blue',
+          localId: expect.stringMatching(StatusLocalIdRegex),
+        }),
+      });
+
+      const statusFromPosition = editorView.state.tr.selection.from;
+
+      // simulate the scenario where user uses left arrow to move cursor outside the status node
+      editorView.dispatch(
+        editorView.state.tr.setSelection(
+          TextSelection.create(editorView.state.doc, statusFromPosition),
+        ),
+      );
+
+      statusState = pluginKey.getState(editorView.state);
+
+      // expects the showStatusPickerAt to be reset to null
+      expect(editorView.state.tr.selection).toBeInstanceOf(TextSelection);
+      expect(editorView.state.tr.selection.to).toBe(
+        editorView.state.tr.selection.from,
+      );
+      expect(statusState).toMatchObject({
+        showStatusPickerAt: null,
+        selectedStatus: null,
+      });
     });
   });
 });

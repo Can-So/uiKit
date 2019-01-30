@@ -1,4 +1,9 @@
-import { createEditor, doc, p, status } from '@atlaskit/editor-test-helpers';
+import {
+  createEditorFactory,
+  doc,
+  p,
+  status,
+} from '@atlaskit/editor-test-helpers';
 import statusPlugin from '../../../../plugins/status';
 import { pluginKey } from '../../../../plugins/status/plugin';
 import {
@@ -9,6 +14,8 @@ import {
 } from '../../../../plugins/status/actions';
 
 describe('status plugin: actions', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,

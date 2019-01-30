@@ -176,7 +176,7 @@ class PopupWrapper extends Component<{}, PopupWrapperState> {
     const publicFile = publicFiles[data.file.id];
 
     if (publicFile) {
-      const publicId = data.file.publicId;
+      const publicId = data.file.id;
       publicFile.publicId = publicId;
 
       this.setState({
