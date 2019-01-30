@@ -63,7 +63,6 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     buttonAppearance: 'default',
     capabilities: {},
     isDisabled: false,
-    isSharing: false,
     shouldCloseOnEscapePress: false,
   };
 

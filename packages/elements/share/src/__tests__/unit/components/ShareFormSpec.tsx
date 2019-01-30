@@ -1,5 +1,6 @@
 import Button from '@atlaskit/button';
 import Form, { FormFooter, FormSection, HelperMessage } from '@atlaskit/form';
+import Spinner from '@atlaskit/spinner';
 import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -79,6 +80,24 @@ describe('ShareForm', () => {
     const footer = form.find(FormFooter);
     const button = footer.find(Button);
     expect(button.text()).toEqual('Invite');
+  });
+
+  describe('isSharing prop', () => {
+    it('should replace the Send button with a Spinner', () => {
+      const mockLink = 'link';
+      const loadOptions = jest.fn();
+      const wrapper = shallow(
+        <ShareForm copyLink={mockLink} loadOptions={loadOptions} isSharing />,
+      );
+
+      const akForm = wrapper.find<any>(Form);
+      const form = renderProp(akForm, 'children', { formProps: {} }).find(
+        'form',
+      );
+      const footer = form.find(FormFooter);
+      expect(footer.find(Button)).toHaveLength(0);
+      expect(footer.find(Spinner)).toHaveLength(1);
+    });
   });
 
   describe('shouldShowCapabilitiesInfoMessage prop', () => {

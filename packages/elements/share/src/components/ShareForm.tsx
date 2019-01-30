@@ -1,6 +1,7 @@
 import Button from '@atlaskit/button';
 import Form, { FormFooter, FormSection, HelperMessage } from '@atlaskit/form';
 import { LoadOptions } from '@atlaskit/user-picker';
+import Spinner from '@atlaskit/spinner';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
@@ -57,11 +58,15 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
               link={props.copyLink}
             />
           </LeftAlignmentContainer>
-          <Button appearance="primary" type="submit">
-            {props.submitButtonLabel || (
-              <FormattedMessage {...messages.formSend} />
-            )}
-          </Button>
+          {props.isSharing ? (
+            <Spinner size="medium" />
+          ) : (
+            <Button appearance="primary" type="submit">
+              {props.submitButtonLabel || (
+                <FormattedMessage {...messages.formSend} />
+              )}
+            </Button>
+          )}
         </FormFooter>
       </form>
     )}
@@ -69,6 +74,7 @@ export const ShareForm: React.StatelessComponent<Props> = props => (
 );
 
 ShareForm.defaultProps = {
+  isSharing: false,
   onShareClick: () => {},
   shouldShowCapabilitiesInfoMessage: false,
 };
