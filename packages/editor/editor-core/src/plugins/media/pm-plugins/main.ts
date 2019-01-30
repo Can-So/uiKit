@@ -22,7 +22,7 @@ import { ProsemirrorGetPosHandler } from '../../../nodeviews';
 import { EditorAppearance } from '../../../types/editor-props';
 import DropPlaceholder, { PlaceholderType } from '../ui/Media/DropPlaceholder';
 import { MediaPluginOptions } from '../media-plugin-options';
-import { insertMediaGroupNode, isNonImagesBanned } from '../utils/media-files';
+import { insertMediaGroupNode } from '../utils/media-files';
 import { removeMediaNode, splitMediaGroup } from '../utils/media-common';
 import PickerFacade, { PickerFacadeConfig } from '../picker-facade';
 import pickerFacadeLoader from '../picker-facade-loader';
@@ -285,13 +285,6 @@ export class MediaPluginState {
     let nonImageAttachments = mediaStates.filter(
       media => !isImage(media.fileMimeType),
     );
-
-    const grandParentNode = this.view.state.selection.$from.node(-1);
-
-    // in case of gap cursor, selection might be at depth=0
-    if (grandParentNode && isNonImagesBanned(grandParentNode)) {
-      nonImageAttachments = [];
-    }
 
     mediaStates.forEach(mediaState => {
       this.stateManager.on(mediaState.id, this.handleMediaState);

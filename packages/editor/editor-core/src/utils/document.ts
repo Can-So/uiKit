@@ -1,5 +1,5 @@
 import { Node, Schema } from 'prosemirror-model';
-import { Transaction } from 'prosemirror-state';
+import { Transaction, Selection } from 'prosemirror-state';
 import {
   validator,
   Entity,
@@ -7,6 +7,7 @@ import {
   ValidationError,
 } from '@atlaskit/adf-utils';
 import { analyticsService } from '../analytics';
+import { ContentNodeWithPos } from 'prosemirror-utils';
 
 const FALSE_POSITIVE_MARKS = ['code', 'alignment', 'indentation'];
 
@@ -255,4 +256,29 @@ export const getStepRange = (
   }
 
   return null;
+};
+
+/**
+ * Find the farthest node given a condition
+ * @param predicate Function to check the node
+ */
+export const findFarthestParentNode = (predicate: (node: Node) => boolean) => (
+  selection: Selection,
+): ContentNodeWithPos | null => {
+  const { $from } = selection;
+
+  let candidate: ContentNodeWithPos | null = null;
+
+  for (let i = $from.depth; i > 0; i--) {
+    const node = $from.node(i);
+    if (predicate(node)) {
+      candidate = {
+        pos: i > 0 ? $from.before(i) : 0,
+        start: $from.start(i),
+        depth: i,
+        node,
+      };
+    }
+  }
+  return candidate;
 };
