@@ -58,18 +58,12 @@ export default class MediaGroup extends React.Component<
   }
 
   componentDidMount() {
-    // TODO: should we check for viewContext here as well?
+    this.updateMediaContext();
   }
 
   componentWillReceiveProps(props: MediaGroupProps) {
-    const { viewContext } = this.state;
-    const { mediaContext } = this.mediaPluginState; // TODO: we should make this property optional
+    this.updateMediaContext();
     this.setMediaItems(props);
-    if (!viewContext && mediaContext) {
-      this.setState({
-        viewContext: mediaContext,
-      });
-    }
   }
 
   shouldComponentUpdate(nextProps) {
@@ -81,6 +75,16 @@ export default class MediaGroup extends React.Component<
     }
 
     return false;
+  }
+
+  updateMediaContext() {
+    const { viewContext } = this.state;
+    const { mediaContext } = this.mediaPluginState;
+    if (!viewContext && mediaContext) {
+      this.setState({
+        viewContext: mediaContext,
+      });
+    }
   }
 
   setMediaItems = props => {
@@ -99,10 +103,6 @@ export default class MediaGroup extends React.Component<
 
   renderChildNodes = () => {
     const { viewContext } = this.state;
-
-    if (!viewContext) {
-      return null; // TODO: we probably want to show N loading cards => Potentially Filmstrip can handle this
-    }
     const items = this.mediaNodes.map((item, idx) => {
       const getState = this.mediaPluginState.stateManager.getState(
         item.attrs.__key || item.attrs.id,
