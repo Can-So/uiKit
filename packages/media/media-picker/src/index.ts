@@ -25,24 +25,17 @@ export const isBinaryUploader = (
 ): component is BinaryUploader => {
   return 'upload' in component;
 };
-export const isBrowser = (component: any): component is Browser => {
-  return component && 'browse' in component && 'teardown' in component;
-};
-export const isClipboard = (component: any): component is Clipboard => {
-  return component && 'activate' in component && 'deactivate' in component;
-};
-export const isDropzone = (component: any): component is Dropzone => {
-  return component && 'activate' in component && 'deactivate' in component;
-};
-export const isPopup = (component: any): component is Popup => {
-  return (
-    component &&
-    ['show', 'cancel', 'teardown', 'hide'].reduce(
-      (allIn, prop) => allIn && prop in component,
-      true,
-    )
+export const isBrowser = (component: any): component is Browser =>
+  component && 'browse' in component && 'teardown' in component;
+export const isClipboard = (component: any): component is Clipboard =>
+  component && 'activate' in component && 'deactivate' in component;
+export const isDropzone = (component: any): component is Dropzone =>
+  component && 'activate' in component && 'deactivate' in component;
+export const isPopup = (component: any): component is Popup =>
+  component &&
+  ['show', 'cancel', 'teardown', 'hide'].every(
+    (prop: string) => prop in component,
   );
-};
 
 export { DropzoneUploadEventPayloadMap } from './components/dropzone';
 export { PopupUploadEventPayloadMap } from './components/popup';
