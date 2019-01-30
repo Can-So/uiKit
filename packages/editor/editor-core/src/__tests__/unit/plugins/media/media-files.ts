@@ -1260,15 +1260,14 @@ describe('media-files', () => {
       );
 
       const { editorView } = editor(complexList);
-      const rootList = editorView.state.doc.nodeAt(0);
+      const rootList = editorView.state.doc.nodeAt(0)!;
       const startPosition = 0;
-      // @ts-ignore
+
       const endListPos = startPosition + rootList.nodeSize;
 
       const posInList = getPosInList(editorView.state);
 
       expect(posInList).not.toBeUndefined();
-      // @ts-ignore
       expect(posInList).toEqual(endListPos + 1); // endListPos + 1 is the media group
     });
   });
