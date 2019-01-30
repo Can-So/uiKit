@@ -1,0 +1,1 @@
+- Weakened FieldText & FieldTextArea autoComplete prop TypeScript definition to allow for more options than just 'on' or 'off'
