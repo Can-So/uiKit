@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.0
+- [minor] [a26d644414](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a26d644414):
+
+  - ED-5845, ED-6072: support resizing in multiple editors on page, fix snapping images in lists
+
 ## 98.0.3
 - [patch] [5ae645d661](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ae645d661):
 
