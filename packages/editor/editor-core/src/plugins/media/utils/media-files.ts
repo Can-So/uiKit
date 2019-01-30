@@ -1,5 +1,5 @@
 import { Node as PMNode, NodeType, Fragment } from 'prosemirror-model';
-import { EditorState, Selection } from 'prosemirror-state';
+import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import {
   atTheEndOfDoc,
@@ -11,6 +11,7 @@ import {
   setTextSelection,
   insideTableCell,
   isInListItem,
+  findFarthestParentNode,
 } from '../../../utils';
 import { MediaState } from '../types';
 import {
@@ -184,31 +185,6 @@ const createMediaFileNodes = (
 };
 
 /**
- * Find the farthest node given a condition
- * @param predicate Function to check the node
- */
-const findFarthestParentNode = (predicate: (node: PMNode) => boolean) => (
-  selection: Selection,
-): ContentNodeWithPos | null => {
-  const { $from } = selection;
-
-  let candidate: ContentNodeWithPos | null = null;
-
-  for (let i = $from.depth; i > 0; i--) {
-    const node = $from.node(i);
-    if (predicate(node)) {
-      candidate = {
-        pos: i > 0 ? $from.before(i) : 0,
-        start: $from.start(i),
-        depth: i,
-        node,
-      };
-    }
-  }
-  return candidate;
-};
-
-/**
  * Find root list node if exist from current selection
  * @param state Editor state
  */
@@ -236,13 +212,14 @@ export const getPosInList = (state: EditorState): number | undefined => {
     },
   } = state;
 
+  // 1. Check if I am inside a list.
   if (hasParentNode(node => node.type === listItem)(state.selection)) {
     // 2. Get end position of root list
     const rootListNode = findRootListNode(state);
 
     if (rootListNode) {
       const pos = rootListNode.pos + rootListNode.node.nodeSize;
-      // 3. Check if node is media group
+      // 3. Fint the first location inside the media group
       const nextNode = state.doc.nodeAt(pos);
       if (nextNode && nextNode.type === mediaGroup) {
         return pos + 1;
