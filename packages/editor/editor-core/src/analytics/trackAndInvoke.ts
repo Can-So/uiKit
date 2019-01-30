@@ -8,7 +8,7 @@ import service from './service';
  *     let doSomething = function(a, b) { // ... }
  *     doSomething = trackAndInvoke('atlassian.editor.dosomething', doSomething);
  *
- *     doSomething(); // this will send analytics event and call the original function
+ *     doSomething(); // This will send analytics event and call the original function.
  *
  */
 export default function trackAndInvoke<A, B, C, D, X>(
