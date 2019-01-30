@@ -23,9 +23,8 @@ import {
   connectFailedEvent,
   connectSucceededEvent,
   trackAppAccountConnected,
+  ANALYTICS_CHANNEL,
 } from '../analytics';
-
-const ANALYTICS_CHANNEL = 'media';
 
 const getCollapsedIcon = (state: DefinedState): string | undefined => {
   const { data } = state;
