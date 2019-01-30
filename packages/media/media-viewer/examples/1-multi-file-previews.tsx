@@ -93,6 +93,35 @@ export default class Example extends React.Component<{}, State> {
     });
   };
 
+  private openErrorList = () => {
+    const invalidItem: MediaViewerItem = {
+      type: 'file',
+      id: 'invalid-id',
+      occurrenceKey: 'invalid-key',
+    };
+
+    this.setState({
+      selected: {
+        dataSource: {
+          list: [
+            imageIdentifier,
+            invalidItem,
+            wideImageIdentifier,
+            videoIdentifier,
+            videoHorizontalFileItem,
+            audioItem,
+            audioItemNoCover,
+            docIdentifier,
+            largePdfIdentifier,
+            imageIdentifier2,
+            unsupportedIdentifier,
+          ],
+        },
+        identifier: imageIdentifier,
+      },
+    });
+  };
+
   private openCollection = () => {
     const { firstCollectionItem } = this.state;
     if (!firstCollectionItem) {
@@ -190,6 +219,9 @@ export default class Example extends React.Component<{}, State> {
                 <Button onClick={this.openInvalidCollection}>
                   Invalid collection name
                 </Button>
+              </li>
+              <li>
+                <Button onClick={this.openErrorList}>Error list</Button>
               </li>
             </ButtonList>
           </Group>

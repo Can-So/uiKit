@@ -23,6 +23,7 @@ import {
   mediaFileCommencedEvent,
   mediaFileLoadSucceededEvent,
   mediaFileLoadFailedEvent,
+  mediaPreviewFailedEvent,
 } from './analytics/item-viewer';
 import { channel } from './analytics/index';
 import {
@@ -144,11 +145,17 @@ export class ItemViewerBase extends React.Component<Props, State> {
     }
   }
 
+  private onErrorDisplayed = (failReason: string, file?: FileState) => {
+    this.fireAnalytics(
+      mediaPreviewFailedEvent(file ? file.id : '', failReason, file),
+    );
+  };
+
   private renderError(errorName: ErrorName, file?: FileState) {
     if (file) {
       const err = createError(errorName, undefined, file);
       return (
-        <ErrorMessage error={err}>
+        <ErrorMessage error={err} onErrorDisplayed={this.onErrorDisplayed}>
           <p>
             <FormattedMessage {...messages.try_downloading_file} />
           </p>
@@ -156,7 +163,12 @@ export class ItemViewerBase extends React.Component<Props, State> {
         </ErrorMessage>
       );
     } else {
-      return <ErrorMessage error={createError(errorName)} />;
+      return (
+        <ErrorMessage
+          error={createError(errorName)}
+          onErrorDisplayed={this.onErrorDisplayed}
+        />
+      );
     }
   }
 

@@ -2,7 +2,7 @@ import {
   GasPayload,
   GasScreenEventPayload,
 } from '@atlaskit/analytics-gas-types';
-import { ProcessedFileState } from '@atlaskit/media-core';
+import { ProcessedFileState, FileState } from '@atlaskit/media-core';
 import { packageAttributes, fileStateToFileGasPayload } from './index';
 
 export type ViewerLoadPayload = {
@@ -68,6 +68,30 @@ export const mediaFileLoadFailedEvent = (
     eventType: 'operational',
     actionSubject: 'mediaFile',
     action: 'loadFailed',
+    actionSubjectId: id,
+    attributes: {
+      status: 'fail',
+      ...fileAttributes,
+      failReason,
+      ...packageAttributes,
+    },
+  };
+};
+
+export const mediaPreviewFailedEvent = (
+  id: string,
+  failReason: string,
+  file?: FileState,
+): GasPayload => {
+  const fileAttributes = file
+    ? fileStateToFileGasPayload(file)
+    : {
+        fileId: id,
+      };
+  return {
+    eventType: 'screen',
+    actionSubject: 'mediaFile',
+    action: 'previewFailed',
     actionSubjectId: id,
     attributes: {
       status: 'fail',

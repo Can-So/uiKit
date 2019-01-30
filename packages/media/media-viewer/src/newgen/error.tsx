@@ -18,6 +18,7 @@ export type ErrorName =
 export type Props = Readonly<{
   error: MediaViewerError;
   children?: ReactNode;
+  onErrorDisplayed?: (failReason: string, file?: FileState) => void;
 }>;
 export type FormatMessageFn = (
   messageDescriptor: FormattedMessage.MessageDescriptor,
@@ -113,6 +114,16 @@ export class ErrorMessage extends React.Component<
   Props & InjectedIntlProps,
   {}
 > {
+  componentDidMount() {
+    const {
+      onErrorDisplayed,
+      error: { errorName: failReason, file },
+    } = this.props;
+    if (onErrorDisplayed) {
+      onErrorDisplayed(failReason, file);
+    }
+  }
+
   render() {
     const {
       intl: { formatMessage },
