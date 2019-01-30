@@ -117,7 +117,7 @@ class Example extends React.Component {
                   Maybe checkout the {task.taskType.name} at{' '}
                   <Card
                     key={task['@id']}
-                    url={task['@url']}
+                    url={task.url}
                     appearance="inline"
                     data={task}
                   />
