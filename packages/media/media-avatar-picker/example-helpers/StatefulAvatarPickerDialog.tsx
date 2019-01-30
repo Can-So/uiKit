@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Button from '@atlaskit/button';
 import { ModalTransition } from '@atlaskit/modal-dialog';
 import { Avatar, AvatarPickerDialog } from '../src';
+import { AvatarPickerDialogProps } from '../src/avatar-picker-dialog/types';
 import { generateAvatars } from '../example-helpers';
 
 const avatars: Array<Avatar> = generateAvatars(30);
@@ -24,7 +25,7 @@ export interface State {
 }
 
 export default class StatefulAvatarPickerDialog extends React.Component<
-  Partial<AvatarPickerDialog['props']>,
+  Partial<AvatarPickerDialogProps>,
   State
 > {
   timeoutId: number = 0;
