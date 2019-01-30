@@ -69,7 +69,8 @@ export default class MediaGroup extends React.Component<
   shouldComponentUpdate(nextProps) {
     if (
       this.props.selected !== nextProps.selected ||
-      this.props.node !== nextProps.node
+      this.props.node !== nextProps.node ||
+      this.state.viewContext !== this.mediaPluginState.mediaContext
     ) {
       return true;
     }
