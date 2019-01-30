@@ -11,6 +11,8 @@ import {
 
 export interface Props {
   zIndex?: number;
+  // The alignments are using the same placements from Popper
+  // https://popper.js.org/popper-documentation.html#Popper.placements
   alignX?: 'left' | 'right' | 'center' | 'end';
   alignY?: 'top' | 'bottom' | 'start';
   target?: HTMLElement;

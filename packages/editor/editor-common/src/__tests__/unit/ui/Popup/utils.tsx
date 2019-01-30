@@ -66,7 +66,7 @@ describe('@atlaskit/editor-common popup utils', () => {
       target,
       popup,
       offset,
-      stickToBottom,
+      stick,
     });
 
     expect(calc).toEqual({
@@ -82,7 +82,7 @@ describe('@atlaskit/editor-common popup utils', () => {
       target,
       popup,
       offset,
-      stickToBottom,
+      stick,
     });
 
     expect(calc).toEqual({

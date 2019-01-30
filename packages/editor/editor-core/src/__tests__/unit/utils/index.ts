@@ -27,6 +27,7 @@ import {
   isEmptyNode,
   dedupe,
   compose,
+  closestElement,
 } from '../../../utils';
 import mediaPlugin from '../../../plugins/media';
 import codeBlockPlugin from '../../../plugins/code-block';
@@ -50,6 +51,22 @@ describe('@atlaskit/editore-core/utils', () => {
         tasksAndDecisionsPlugin,
       ],
     });
+
+  describe('#closest', () => {
+    it('return first parentNode using query selector', () => {
+      const divSecondary = document.createElement('div');
+      divSecondary.setAttribute('id', 'secondary');
+
+      const div = document.createElement('div');
+      div.setAttribute('id', 'primary');
+      div.appendChild(divSecondary);
+      document.body.appendChild(div);
+
+      const result = closestElement(divSecondary, '#primary');
+      expect(result).toEqual(div);
+      div.remove();
+    });
+  });
 
   describe('#isMarkTypeAllowedInCurrentSelection', () => {
     describe('when the current node supports the given mark type', () => {

@@ -69,7 +69,7 @@ function closest(
   const matches = el.matches ? 'matches' : 'msMatchesSelector';
 
   do {
-    if (el[matches](s)) {
+    if (el[matches] && el[matches](s)) {
       return el;
     }
     el = (el.parentElement || el.parentNode) as HTMLElement;
