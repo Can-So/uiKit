@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   AppSwitcherWrapper,
   AppSwitcherItem,
@@ -10,8 +10,8 @@ import {
   RecentContainersProvider,
   LicenseInformationProvider,
 } from '../providers/instance-data-providers';
-
-export default ({ cloudId }) => {
+import { WithCloudId, RecentContainer, CustomLink } from '../types';
+export default ({ cloudId }: WithCloudId) => {
   return (
     <RecentContainersProvider cloudId={cloudId}>
       {({
@@ -31,9 +31,14 @@ export default ({ cloudId }) => {
                     'Loading Recent Containers...'
                   ) : (
                     <Section title="Recent Containers">
-                      {recentContainersData.data.map(({ objectId, name }) => (
-                        <AppSwitcherItem key={objectId}>{name}</AppSwitcherItem>
-                      ))}
+                      {recentContainersData &&
+                        recentContainersData.data.map(
+                          ({ objectId, name }: RecentContainer) => (
+                            <AppSwitcherItem key={objectId}>
+                              {name}
+                            </AppSwitcherItem>
+                          ),
+                        )}
                     </Section>
                   )}
                   {isLoadingCustomLinks ? (
@@ -41,9 +46,10 @@ export default ({ cloudId }) => {
                     'Loading Custom Links...'
                   ) : (
                     <Section title="Custom Links">
-                      {customLinksData[0].map(({ key, label }) => (
-                        <AppSwitcherItem key={key}>{label}</AppSwitcherItem>
-                      ))}
+                      {customLinksData &&
+                        customLinksData[0].map(({ key, label }: CustomLink) => (
+                          <AppSwitcherItem key={key}>{label}</AppSwitcherItem>
+                        ))}
                     </Section>
                   )}
                   {isLoadingLicenseInformation ? (
@@ -51,16 +57,21 @@ export default ({ cloudId }) => {
                     'Loading License Information...'
                   ) : (
                     <Section title="License Information">
-                      {Object.keys(licenseInformationData.products).map(
-                        productKey => (
-                          <AppSwitcherItem key={productKey}>{`${productKey} - ${
-                            licenseInformationData.products[productKey].state
-                          }`}</AppSwitcherItem>
-                        ),
-                      )}
+                      {licenseInformationData &&
+                        Object.keys(licenseInformationData.products).map(
+                          productKey => (
+                            <AppSwitcherItem
+                              key={productKey}
+                            >{`${productKey} - ${
+                              licenseInformationData.products[productKey].state
+                            }`}</AppSwitcherItem>
+                          ),
+                        )}
                     </Section>
                   )}
-                  <ManageButton href={customLinksData && customLinksData[1]} />
+                  {customLinksData && (
+                    <ManageButton href={customLinksData[1]} />
+                  )}
                 </AppSwitcherWrapper>
               )}
             </LicenseInformationProvider>
