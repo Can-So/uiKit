@@ -105,13 +105,6 @@ describe('<Filmstrip />', () => {
     const { component } = setup({
       context: undefined,
     });
-
-    expect(component.find(CardView)).toHaveLength(3);
-    expect(
-      component
-        .find(CardView)
-        .first()
-        .prop('status'),
-    ).toEqual('loading');
+    expect(component.find('CardView[status="loading"]')).toHaveLength(3);
   });
 });
