@@ -1,5 +1,10 @@
 # @atlaskit/share
 
+## 0.1.6
+- [patch] [1d284d2437](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1d284d2437):
+
+  - FS-3417 added ShareButton, ShareDialogTrigger components to @atlaskit/share
+
 ## 0.1.5
 - [patch] [2f73eeac57](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2f73eeac57):
 
