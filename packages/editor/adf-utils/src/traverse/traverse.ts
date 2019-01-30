@@ -19,7 +19,7 @@ export type visitor = (
 
 export type ADFNodeParent = { node?: ADFNode; parent?: ADFNodeParent };
 
-export function validateVisitors(visitors: { [type: string]: visitor }) {
+export function validateVisitors(_visitors: { [type: string]: visitor }) {
   return true;
 }
 

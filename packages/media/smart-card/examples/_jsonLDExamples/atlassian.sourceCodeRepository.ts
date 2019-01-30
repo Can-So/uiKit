@@ -6,7 +6,7 @@ export const BitbucketRepository = {
   },
   '@id': 'https://bitbucket.org/tuser/angular-react',
   '@type': 'atlassian:SourceCodeRepository',
-  '@url': 'https://bitbucket.org/tuser/angular-react',
+  url: 'https://bitbucket.org/tuser/angular-react',
   attributedTo: {
     '@type': 'Person',
     image: 'https://bitbucket.org/account/atlassian/avatar/',
@@ -48,7 +48,7 @@ export const GithubRepository = {
   },
   '@id': 'https://github.com/User/blender.js',
   '@type': 'atlassian:SourceCodeRepository',
-  '@url': 'https://github.com/User/cheeser.js',
+  url: 'https://github.com/User/cheeser.js',
   'atlassian:updatedBy': {
     '@type': 'Person',
     image: 'https://avatars.githubusercontent.com/u/20928690?',
