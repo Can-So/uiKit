@@ -392,11 +392,7 @@ export const setTests = forInput => {
   });
 };
 
-export const snapshot = async (
-  page,
-  tolerance?: number,
-  selector = '.akEditor',
-) => {
+export const snapshot = async (page, selector = '.proseMirror') => {
   const editor = await page.$(selector);
 
   // Try to take a screenshot of only the editor.
@@ -404,20 +400,9 @@ export const snapshot = async (
   let image;
   if (editor) {
     image = await editor.screenshot();
-  } else {
-    image = await page.screenshot();
   }
-
-  if (tolerance !== undefined) {
-    // @ts-ignore
-    expect(image).toMatchProdImageSnapshot({
-      failureThreshold: `${tolerance}`,
-      failureThresholdType: 'percent',
-    });
-  } else {
-    // @ts-ignore
-    expect(image).toMatchProdImageSnapshot();
-  }
+  // @ts-ignore
+  expect(image).toMatchProdImageSnapshot();
 };
 
 export const insertMedia = async (page, filenames = ['one.svg']) => {

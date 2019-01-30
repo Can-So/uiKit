@@ -14,7 +14,7 @@ import {
 import { mediaSingleLayouts } from '../layouts';
 
 export function createResizeFullPageForConfig(config: TestPageConfig) {
-  describe('Snapshot Test: Media', () => {
+  describe.skip('Snapshot Test: Media', () => {
     describe('full page editor', () => {
       let page;
 

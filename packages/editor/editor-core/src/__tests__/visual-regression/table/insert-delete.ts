@@ -14,7 +14,7 @@ import {
   getInsertClass,
 } from './_table-utils';
 
-describe('Snapshot Test: table insert/delete', () => {
+describe.skip('Snapshot Test: table insert/delete', () => {
   ['full-page', 'comment'].forEach(appearance => {
     let page;
 

@@ -9,7 +9,7 @@ import { clickInContextMenu } from './_table-utils';
 import { TableCssClassName as ClassName } from '../../../plugins/table/types';
 import { messages as contextualMenuMessages } from '../../../plugins/table/ui/FloatingContextualMenu/ContextualMenu';
 
-describe('Snapshot Test: table context menu', () => {
+describe.skip('Snapshot Test: table context menu', () => {
   let page;
   ['full-page'].forEach(appearance => {
     describe(`${appearance}`, () => {

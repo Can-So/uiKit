@@ -9,7 +9,7 @@ const fullWidthBreakoutButtonQuery = `div[aria-label="CodeBlock floating control
   commonMessages.layoutFullWidth.defaultMessage
 }"]`;
 
-describe('Snapshot Test: Breakout', () => {
+describe.skip('Snapshot Test: Breakout', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore
