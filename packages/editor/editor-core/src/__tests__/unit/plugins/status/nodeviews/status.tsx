@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ReactWrapper } from 'enzyme';
 import { Selection, TextSelection } from 'prosemirror-state';
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   mountWithIntl,
@@ -28,6 +28,8 @@ import { __serializeForClipboard } from 'prosemirror-view';
 import { EditorInstance } from '../../../../../types';
 
 describe('Status - NodeView', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,

@@ -1,7 +1,7 @@
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   h1,
   blockquote,
   indentation,
@@ -13,6 +13,8 @@ import * as indentationCommands from '../../../../plugins/indentation/commands';
 const { indent, outdent } = indentationCommands;
 
 describe('indentation', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,
@@ -30,7 +32,6 @@ describe('indentation', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(indentation({ level: 1 })(p('hello'))),
       );
-      editorView.destroy();
     });
 
     it('indents only the current paragraph', () => {
@@ -40,8 +41,6 @@ describe('indentation', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(indentation({ level: 1 })(p('hello')), p('world')),
       );
-
-      editorView.destroy();
     });
 
     it('indents a top level heading', () => {
@@ -51,7 +50,6 @@ describe('indentation', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(indentation({ level: 1 })(h1('hello'))),
       );
-      editorView.destroy();
     });
 
     it('indents multiple blocks', () => {
@@ -67,7 +65,6 @@ describe('indentation', () => {
           indentation({ level: 1 })(p('world')),
         ),
       );
-      editorView.destroy();
     });
 
     it('should not indent more than 6 levels', () => {
@@ -79,7 +76,6 @@ describe('indentation', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(indentation({ level: 6 })(p('hello'))),
       );
-      editorView.destroy();
     });
   });
 
@@ -93,7 +89,6 @@ describe('indentation', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(indentation({ level: 2 })(p('hello'))),
       );
-      editorView.destroy();
     });
 
     it('outdents only the current paragraph', () => {
@@ -105,8 +100,6 @@ describe('indentation', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(indentation({ level: 2 })(p('hello')), p('world')),
       );
-
-      editorView.destroy();
     });
 
     it('outdents a top level heading', () => {
@@ -118,7 +111,6 @@ describe('indentation', () => {
       expect(editorView.state.doc).toEqualDocument(
         doc(indentation({ level: 2 })(h1('hello'))),
       );
-      editorView.destroy();
     });
 
     it('outdents multiple blocks', () => {
@@ -138,7 +130,6 @@ describe('indentation', () => {
           indentation({ level: 2 })(p('world')),
         ),
       );
-      editorView.destroy();
     });
 
     it('should remove the marks when is at level 1', () => {
@@ -148,7 +139,6 @@ describe('indentation', () => {
       const { dispatch, state } = editorView;
       outdent(state, dispatch);
       expect(editorView.state.doc).toEqualDocument(doc(p('hello')));
-      editorView.destroy();
     });
   });
 
@@ -161,8 +151,6 @@ describe('indentation', () => {
       expect(indentMock).toHaveBeenCalledTimes(0);
       sendKeyToPm(editorView, 'Tab');
       expect(indentMock).toHaveBeenCalledTimes(1);
-
-      editorView.destroy();
     });
 
     it('calls outdent command on Shift + Tab', () => {
@@ -175,8 +163,6 @@ describe('indentation', () => {
       expect(outdentMock).toHaveBeenCalledTimes(0);
       sendKeyToPm(editorView, 'Shift-Tab');
       expect(outdentMock).toHaveBeenCalledTimes(1);
-
-      editorView.destroy();
     });
 
     it('calls outdent command on Backspace at the start of node', () => {
@@ -189,8 +175,6 @@ describe('indentation', () => {
       expect(outdentMock).toHaveBeenCalledTimes(0);
       sendKeyToPm(editorView, 'Backspace');
       expect(outdentMock).toHaveBeenCalledTimes(1);
-
-      editorView.destroy();
     });
 
     it('should not call outdent command on Backspace if not at the start of node', () => {
@@ -203,8 +187,6 @@ describe('indentation', () => {
       expect(outdentMock).toHaveBeenCalledTimes(0);
       sendKeyToPm(editorView, 'Backspace');
       expect(outdentMock).toHaveBeenCalledTimes(0);
-
-      editorView.destroy();
     });
   });
 });

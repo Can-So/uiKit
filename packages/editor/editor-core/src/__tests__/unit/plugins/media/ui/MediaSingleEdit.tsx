@@ -4,7 +4,7 @@ import {
   mediaSingle,
   media,
   randomId,
-  createEditor,
+  createEditorFactory,
   bodiedExtension,
   layoutColumn,
   layoutSection,
@@ -18,6 +18,7 @@ import MediaSingleEdit from '../../../../../plugins/media/ui/MediaSingleEdit';
 import { setNodeSelection } from '../../../../../utils';
 
 describe('@atlaskit/editor-core/ui/MediaSingleEdit', () => {
+  const createEditor = createEditorFactory();
   const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
   const temporaryFileId = `temporary:${randomId()}`;
   const editor = (doc: any) =>

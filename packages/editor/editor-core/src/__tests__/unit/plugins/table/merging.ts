@@ -2,7 +2,7 @@ import { mergeCells } from 'prosemirror-tables';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   td,
@@ -14,8 +14,10 @@ import panelPlugin from '../../../../plugins/panel';
 import { pluginKey } from '../../../../plugins/table/pm-plugins/main';
 
 describe('table merging logic', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin(), panelPlugin],
       pluginKey,

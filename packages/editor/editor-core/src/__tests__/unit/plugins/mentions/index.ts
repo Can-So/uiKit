@@ -1,4 +1,4 @@
-import { createEditor, insertText } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory, insertText } from '@atlaskit/editor-test-helpers';
 import { doc, p } from '@atlaskit/editor-test-helpers';
 import { MockMentionResource } from '@atlaskit/util-data-test';
 import { selectCurrentItem } from '../../../../plugins/type-ahead/commands/select-item';
@@ -40,6 +40,8 @@ describe('mentionTypeahead', () => {
   };
 
   describe('analytics', () => {
+    const createEditor = createEditorFactory();
+
     let createAnalyticsEvent;
     let event;
 

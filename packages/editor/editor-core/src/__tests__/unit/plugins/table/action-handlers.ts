@@ -2,7 +2,7 @@ import { DecorationSet, Decoration } from 'prosemirror-view';
 import { TextSelection } from 'prosemirror-state';
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   tdEmpty,
@@ -34,8 +34,10 @@ import {
 import { TableDecorations } from '../../../../plugins/table/types';
 
 describe('table action handlers', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin()],
       pluginKey,

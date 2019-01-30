@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   code_block,
   breakout,
@@ -8,6 +8,8 @@ import {
 import { setBreakoutMode } from '../../../../../plugins/breakout/commands/set-breakout-mode';
 
 describe('Breakout Commands: set-breakout-mode', () => {
+  const createEditor = createEditorFactory();
+
   it('should wrap supported node in breakout mark', () => {
     const { editorView } = createEditor({
       doc: doc(code_block()('Hel{<>}lo')),

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   mountWithIntl,
 } from '@atlaskit/editor-test-helpers';
 import { ProviderFactory } from '@atlaskit/editor-common';
@@ -11,9 +11,11 @@ import ToolbarTask from '../../../../../plugins/tasks-and-decisions/ui/ToolbarTa
 import tasksAndDecisionsPlugin from '../../../../../plugins/tasks-and-decisions';
 
 describe('@atlaskit/editor-core/ui/ToolbarTask', () => {
+  const createEditor = createEditorFactory();
+
   const providerFactory = new ProviderFactory();
   const editor = (doc: any) =>
-    createEditor<any>({
+    createEditor({
       doc,
       editorPlugins: [tasksAndDecisionsPlugin],
     });

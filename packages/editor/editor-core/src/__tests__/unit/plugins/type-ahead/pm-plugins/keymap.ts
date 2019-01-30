@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   typeAheadQuery,
@@ -9,6 +9,8 @@ import { pluginKey } from '../../../../../plugins/type-ahead/pm-plugins/main';
 import { createTypeAheadPlugin } from './_create-type-ahead-plugin';
 
 describe('typeAhead keymaps', () => {
+  const createEditor = createEditorFactory();
+
   it('enter should select current item', () => {
     const plugin = createTypeAheadPlugin();
     const { editorView } = createEditor({

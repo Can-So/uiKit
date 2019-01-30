@@ -5,7 +5,7 @@ import {
   code,
   mention,
   emoji,
-  createEditor,
+  createEditorFactory,
 } from '@atlaskit/editor-test-helpers';
 import {
   TextFormattingState,
@@ -14,8 +14,10 @@ import {
 import { transformToCodeAction } from '../../../../../plugins/text-formatting/commands/transform-to-code';
 
 describe('transform-to-code', () => {
+  const createEditor = createEditorFactory<TextFormattingState>();
+
   const editor = (doc: any) =>
-    createEditor<TextFormattingState>({
+    createEditor({
       doc,
       editorProps: {
         analyticsHandler: jest.fn(),

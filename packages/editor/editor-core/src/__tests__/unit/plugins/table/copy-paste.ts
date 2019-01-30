@@ -8,7 +8,7 @@ import {
   doc,
   p,
   defaultSchema,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   td,
@@ -42,6 +42,8 @@ const selectCell = (cell: {
 };
 
 describe('table plugin', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any, trackEvent = () => {}) => {
     const tableOptions = {
       allowNumberColumn: true,
@@ -49,7 +51,7 @@ describe('table plugin', () => {
       allowHeaderColumn: true,
       permittedLayouts: 'all',
     } as PluginConfig;
-    return createEditor<TablePluginState>({
+    return createEditor({
       doc,
       editorPlugins: [tablesPlugin(tableOptions)],
       editorProps: {

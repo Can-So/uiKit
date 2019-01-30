@@ -9,7 +9,7 @@ import {
   code,
   p,
   subsup,
-  createEditor,
+  createEditorFactory,
   mention,
   insertText,
   code_block,
@@ -22,9 +22,11 @@ import * as commands from '../../../../plugins/text-formatting/commands/text-for
 import { anyMarkActive } from '../../../../plugins/text-formatting/utils';
 
 describe('text-formatting', () => {
+  const createEditor = createEditorFactory<TextFormattingState>();
+
   let trackEvent;
   const editor = (doc: any) =>
-    createEditor<TextFormattingState>({
+    createEditor({
       doc,
       editorProps: {
         analyticsHandler: trackEvent,

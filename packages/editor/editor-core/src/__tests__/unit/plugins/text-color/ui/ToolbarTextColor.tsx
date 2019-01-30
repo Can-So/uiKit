@@ -3,7 +3,7 @@ import {
   doc,
   code_block,
   p,
-  createEditor,
+  createEditorFactory,
   mountWithIntl,
 } from '@atlaskit/editor-test-helpers';
 
@@ -18,8 +18,10 @@ import textColorPlugin from '../../../../../plugins/text-color';
 import codeBlockPlugin from '../../../../../plugins/code-block';
 
 describe('ToolbarTextColor', () => {
+  const createEditor = createEditorFactory<TextColorPluginState>();
+
   const editor = (doc: any, analyticsHandler = () => {}) =>
-    createEditor<TextColorPluginState>({
+    createEditor({
       doc,
       editorPlugins: [textColorPlugin, codeBlockPlugin()],
       editorProps: { analyticsHandler },

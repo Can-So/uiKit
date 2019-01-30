@@ -1,7 +1,7 @@
 import { stateKey as imageUploadPluginKey } from '../../../../plugins/image-upload/pm-plugins/main';
 import { ProviderFactory } from '@atlaskit/editor-common';
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   media,
   mediaSingle,
@@ -21,6 +21,8 @@ import {
 import { ImageUploadHandler } from '../../../../plugins/image-upload/types';
 
 describe('image-upload', () => {
+  const createEditor = createEditorFactory();
+
   const testImgSrc =
     'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>';
   const testImg = () =>

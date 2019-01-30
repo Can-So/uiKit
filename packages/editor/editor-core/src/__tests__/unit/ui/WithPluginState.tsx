@@ -2,7 +2,7 @@ import { name } from '../../../../package.json';
 import { mount } from 'enzyme';
 import * as React from 'react';
 import { Plugin, PluginKey } from 'prosemirror-state';
-import { createEditor, doc, p } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory, doc, p } from '@atlaskit/editor-test-helpers';
 import WithPluginState from '../../../ui/WithPluginState';
 import { EditorPlugin } from '../../../types/editor-plugin';
 import { EventDispatcher, createDispatch } from '../../../event-dispatcher';
@@ -10,6 +10,8 @@ import EditorActions from '../../../actions';
 import EditorContext from '../../../ui/EditorContext';
 
 describe(name, () => {
+  const createEditor = createEditorFactory();
+
   const pluginKey = new PluginKey('plugin');
   const pluginKey2 = new PluginKey('plugin2');
 

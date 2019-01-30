@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   blockquote,
@@ -19,6 +19,7 @@ import codeBlockPlugin from '../../../../plugins/code-block';
 const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
 
 describe('mediaSingle - keymap', () => {
+  const createEditor = createEditorFactory();
   const providerFactory = new ProviderFactory();
 
   const editor = (doc: any, uploadErrorHandler?: () => void) => {
@@ -67,8 +68,6 @@ describe('mediaSingle - keymap', () => {
         p('Hello World!'),
       ),
     );
-
-    editorView.destroy();
   });
 
   it('should remove the empty blockquote on backspace', () => {
@@ -88,8 +87,6 @@ describe('mediaSingle - keymap', () => {
         p('Hello World!'),
       ),
     );
-
-    editorView.destroy();
   });
 
   it('should remove the empty codeBlock on backspace', () => {
@@ -109,8 +106,6 @@ describe('mediaSingle - keymap', () => {
         p('Hello World!'),
       ),
     );
-
-    editorView.destroy();
   });
 
   it('should not remove anything on backspace if the paragraph before is not empty', () => {
@@ -131,8 +126,6 @@ describe('mediaSingle - keymap', () => {
         p('Hello World!'),
       ),
     );
-
-    editorView.destroy();
   });
 
   it('should not remove the first empty paragraph on backspace if the selection is not empty', () => {
@@ -149,8 +142,6 @@ describe('mediaSingle - keymap', () => {
     expect(editorView.state.doc).toEqualDocument(
       doc(p(''), mediaSingle({ layout: 'wrap-right' })(tempMediaNode), p('')),
     );
-
-    editorView.destroy();
   });
 
   it('should not remove the first empty paragraph on backspace if mediaSingle is not wrap-right', () => {
@@ -171,7 +162,5 @@ describe('mediaSingle - keymap', () => {
         p('Hello World!'),
       ),
     );
-
-    editorView.destroy();
   });
 });

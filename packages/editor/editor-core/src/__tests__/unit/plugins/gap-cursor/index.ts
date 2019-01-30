@@ -1,7 +1,7 @@
 import { TextSelection } from 'prosemirror-state';
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   blockquote,
   table,
@@ -30,6 +30,8 @@ import mediaPlugin from '../../../../plugins/media';
 import { blockNodes, leafBlockNodes } from './_utils';
 
 describe('gap-cursor', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent?: () => {}) =>
     createEditor({
       doc,
@@ -55,19 +57,16 @@ describe('gap-cursor', () => {
         const { editorView } = editor(doc(p('{<>}')));
         sendKeyToPm(editorView, 'ArrowLeft');
         expect(editorView.state.selection instanceof TextSelection).toBe(true);
-        editorView.destroy();
       });
       it('should not create a GapCursor selection for heading', () => {
         const { editorView } = editor(doc(h1('{<>}')));
         sendKeyToPm(editorView, 'ArrowLeft');
         expect(editorView.state.selection instanceof TextSelection).toBe(true);
-        editorView.destroy();
       });
       it('should not create a GapCursor selection for blockquote', () => {
         const { editorView } = editor(doc(blockquote(p('{<>}'))));
         sendKeyToPm(editorView, 'ArrowLeft');
         expect(editorView.state.selection instanceof TextSelection).toBe(true);
-        editorView.destroy();
       });
     });
 
@@ -85,7 +84,6 @@ describe('gap-cursor', () => {
             expect(editorView.state.selection instanceof TextSelection).toBe(
               true,
             );
-            editorView.destroy();
           }),
         ),
       ));
@@ -104,7 +102,6 @@ describe('gap-cursor', () => {
             expect(editorView.state.selection instanceof TextSelection).toBe(
               true,
             );
-            editorView.destroy();
           }),
         ),
       ));
@@ -128,7 +125,6 @@ describe('gap-cursor', () => {
                 expect(
                   (editorView.state.selection as GapCursorSelection).side,
                 ).toEqual(expectedSide);
-                editorView.destroy();
               });
             });
           });
@@ -154,7 +150,6 @@ describe('gap-cursor', () => {
                 expect(
                   (editorView.state.selection as GapCursorSelection).side,
                 ).toEqual(expectedSide);
-                editorView.destroy();
               });
             });
           });
@@ -176,7 +171,6 @@ describe('gap-cursor', () => {
                 expect(
                   editorView.state.selection instanceof TextSelection,
                 ).toBe(true);
-                editorView.destroy();
               });
             });
           });
@@ -193,7 +187,6 @@ describe('gap-cursor', () => {
                 expect(
                   editorView.state.selection instanceof TextSelection,
                 ).toBe(true);
-                editorView.destroy();
               });
             });
           });
@@ -215,7 +208,6 @@ describe('gap-cursor', () => {
                 expect(
                   editorView.state.selection instanceof TextSelection,
                 ).toBe(true);
-                editorView.destroy();
               });
             });
           });
@@ -232,7 +224,6 @@ describe('gap-cursor', () => {
                 expect(
                   editorView.state.selection instanceof TextSelection,
                 ).toBe(true);
-                editorView.destroy();
               });
             });
           });
@@ -254,7 +245,6 @@ describe('gap-cursor', () => {
                 expect(
                   (editorView.state.selection as GapCursorSelection).side,
                 ).toEqual(Side.LEFT);
-                editorView.destroy();
               }),
             ),
           ))),
@@ -278,7 +268,6 @@ describe('gap-cursor', () => {
                 expect(
                   (editorView.state.selection as GapCursorSelection).side,
                 ).toEqual(Side.RIGHT);
-                editorView.destroy();
               });
             });
           }
@@ -297,7 +286,6 @@ describe('gap-cursor', () => {
               expect(
                 (editorView.state.selection as GapCursorSelection).side,
               ).toEqual(Side.RIGHT);
-              editorView.destroy();
             });
           });
         });
@@ -326,7 +314,6 @@ describe('gap-cursor', () => {
                 expect(
                   (editorView.state.selection as GapCursorSelection).side,
                 ).toEqual(Side.LEFT);
-                editorView.destroy();
               });
             });
           }
@@ -351,7 +338,6 @@ describe('gap-cursor', () => {
               expect(
                 (editorView.state.selection as GapCursorSelection).side,
               ).toEqual(Side.LEFT);
-              editorView.destroy();
             });
           });
         });
@@ -378,7 +364,6 @@ describe('gap-cursor', () => {
       expect((editorView.state.selection as GapCursorSelection).side).toEqual(
         Side.RIGHT,
       );
-      editorView.destroy();
     });
   });
 });
