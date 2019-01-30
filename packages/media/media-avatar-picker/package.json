@@ -21,10 +21,10 @@
   ],
   "repository": "https://bitbucket.org/atlassian/atlaskit-mk-2",
   "dependencies": {
+    "@atlaskit/blanket": "^7.0.12",
     "@atlaskit/button": "^10.1.2",
     "@atlaskit/field-range": "^5.0.14",
     "@atlaskit/icon": "^16.0.0",
-    "@atlaskit/media-core": "^27.0.0",
     "@atlaskit/media-ui": "^8.2.6",
     "@atlaskit/modal-dialog": "^7.2.1",
     "@atlaskit/spinner": "^9.0.13",
@@ -33,6 +33,7 @@
     "tslib": "^1.8.0"
   },
   "peerDependencies": {
+    "@atlaskit/media-core": "^27.0.0",
     "react": "^16.4.0",
     "react-intl": "^2.6.0",
     "styled-components": "^3.2.6"
@@ -40,6 +41,7 @@
   "devDependencies": {
     "@atlaskit/build-utils": "^2.1.0",
     "@atlaskit/docs": "^6.0.1",
+    "@atlaskit/media-core": "^27.0.0",
     "@atlaskit/media-test-helpers": "^20.1.0",
     "@atlaskit/page": "^8.0.12",
     "@types/enzyme": "^3.1.15",

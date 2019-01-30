@@ -4,7 +4,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Button from '@atlaskit/button';
 import { ModalTransition } from '@atlaskit/modal-dialog';
-import { Avatar, AvatarPickerDialog, AvatarPickerDialogProps } from '../src';
+import { Avatar, AvatarPickerDialog } from '../src';
 import { generateAvatars } from '../example-helpers';
 
 const avatars: Array<Avatar> = generateAvatars(30);
@@ -15,10 +15,6 @@ const Layout: React.ComponentClass<React.HTMLAttributes<{}>> = styled.div`
   align-items: center;
   justify-content: space-around;
   height: 80vh;
-
-  > * {
-    max-width: 200px;
-  }
 `;
 
 export interface State {
@@ -28,7 +24,7 @@ export interface State {
 }
 
 export default class StatefulAvatarPickerDialog extends React.Component<
-  Partial<AvatarPickerDialogProps>,
+  Partial<AvatarPickerDialog['props']>,
   State
 > {
   timeoutId: number = 0;
