@@ -91,6 +91,8 @@ test('DatePicker default parseInputValue parses valid dates to the expected valu
   );
 
   datePickerWrapper.instance().onSelectInput({ target: { value: '01/02/18' } });
+  datePickerWrapper.first('input').simulate('keyDown', { key: 'Enter' });
+
   expect(onChangeSpy).toBeCalledWith(expectedResult);
 });
 
@@ -107,6 +109,8 @@ test('DatePicker, supplying a custom parseInputValue prop, produces the expected
   );
 
   datePickerWrapper.instance().onSelectInput({ target: { value: 'asdf' } });
+  datePickerWrapper.first('input').simulate('keyDown', { key: 'Enter' });
+
   expect(onChangeSpy).toBeCalledWith(expectedResult);
 });
 
