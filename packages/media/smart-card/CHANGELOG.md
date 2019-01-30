@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.6.7
+- [patch] [abce6949c0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abce6949c0):
+
+  - fix icon sizing and url key.
+
 ## 9.6.6
 - [patch] [5ae645d661](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ae645d661):
 
