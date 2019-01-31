@@ -62,7 +62,11 @@ const ContentStyles: ComponentClass<
     outline: 2px solid #8cf;
   }
 
-  .inlineCardView-content-wrap,
+  .inlineCardView-content-wrap {
+    display: inline-block;
+    max-width: calc(100% - 20px)
+  }
+
   .blockCardView-content-wrap {
     display: inline-block;
   }

@@ -120,6 +120,133 @@ export default function Example() {
   );
 }
 
+const demoTable = {
+  type: 'table',
+  attrs: { isNumberColumnEnabled: false, layout: 'wide' },
+  content: [
+    {
+      type: 'tableRow',
+      content: [
+        {
+          type: 'tableHeader',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Date' }],
+            },
+          ],
+        },
+        {
+          type: 'tableHeader',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Responsible' }],
+            },
+          ],
+        },
+        {
+          type: 'tableHeader',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Content' }],
+            },
+          ],
+        },
+        {
+          type: 'tableHeader',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Actions' }],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'tableRow',
+      content: [
+        {
+          type: 'tableCell',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'inlineCard',
+                  attrs: {
+                    url:
+                      'https://app.box.com/s/2emx282bjxpzvwa5bcz428u6imbgmasg',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'tableCell',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'inlineCard',
+                  attrs: {
+                    url:
+                      'https://onedrive.live.com/redir?resid=5D04B397F4A8ABE!1004&authkey=!AN4C7co5280OG_Y',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'tableCell',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'inlineCard',
+                  attrs: {
+                    url: 'https://1drv.ms/u/s!Ar6KSn85S9AFh2zeAu3KOdvNDhv2',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'tableCell',
+          attrs: {},
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'inlineCard',
+                  attrs: {
+                    url: 'https://1drv.ms/u/s!Ar6KSn85S9AFh2zeAu3KOdvNDhv2',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 const exampleDocument = {
   type: 'doc',
   version: 1,
@@ -181,6 +308,7 @@ const exampleDocument = {
         },
       ],
     },
+    demoTable,
     {
       type: 'paragraph',
       content: [
