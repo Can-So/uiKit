@@ -274,6 +274,8 @@
     "@types/js-search": "^1.4.0",
     "@types/linkify-it": "^2.0.4",
     "@types/lodash.debounce": "^4.0.4",
+    "@types/lodash.sample": "^4.2.4",
+    "@types/markdown-it": "^0.0.7",
     "@types/memoize-one": "^3.0.1",
     "@types/meow": "^5.0.0",
     "@types/node-fetch": "^2.1.4",
