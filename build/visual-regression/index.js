@@ -140,7 +140,6 @@ async function main() {
   const serverAlreadyRunning = await isReachable('http://localhost:9000');
 
   if (!serverAlreadyRunning) {
-    console.log('blah');
     await webpack.startDevServer();
   }
 
@@ -151,7 +150,6 @@ async function main() {
     webpack.stopDevServer();
   }
 
-  client.stopServer();
   process.exit(code);
 }
 
