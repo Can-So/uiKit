@@ -1,2 +1,9 @@
 #!/bin/sh
-command -v git-lfs >/dev/null 2>&1 || { echo >&2 "\nThis repository is configured for Git LFS but 'git-lfs' was not found on your path.Refer https://product-fabric.atlassian.net/wiki/spaces/FBT/pages/864979766/Enabling+git-lfs+on+Atlaskit to enable lfs"; exit 2; }
+
+function printMessage(){
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+`echo >&2 "\n Atlaskit now uses Git LFS.\\n For MacOs install git lfs using ${green} brew install git-lfs ${reset}\\n and when done run ${green} yarn run enable:lfs ${reset}. \\n For more info see [placeholder-update aftermarkdown]."`
+}
+command -v git-lfs >/dev/null 2>&1 || { printMessage ; exit 2; }

@@ -112,6 +112,7 @@ pipelines:
               - git lfs pull
               - bolt install --pure-lockfile
               - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr:changed --passWithNoTests
+              - TEST_ONLY_PATTERN='packages/editor' yarn run test:vr:changed --passWithNoTests
             caches:
               - node
         - step:
