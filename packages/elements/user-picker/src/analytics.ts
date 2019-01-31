@@ -106,7 +106,7 @@ export const clearEvent: EventCreator = (
   });
 
 export const deleteEvent: EventCreator = (
-  props: UserPickerProps,
+  _: UserPickerProps,
   state: UserPickerState,
   session?: UserPickerSession,
   ...args: any[]
@@ -119,7 +119,7 @@ export const deleteEvent: EventCreator = (
 
 export const cancelEvent: EventCreator = (
   props: UserPickerProps,
-  state: UserPickerState,
+  _: UserPickerState,
   session?: UserPickerSession,
   ...args: any[]
 ) =>
@@ -168,7 +168,7 @@ export const searchedEvent: EventCreator = (
 
 export const failedEvent: EventCreator = (
   props: UserPickerProps,
-  state: UserPickerState,
+  _: UserPickerState,
   session?: UserPickerSession,
 ) =>
   createEvent('operational', 'failed', 'userPicker', {
