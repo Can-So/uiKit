@@ -1,7 +1,16 @@
-import asDataProvider from '../../src/providers/as-data-provider';
+import asDataProvider, {
+  DataProviderProps,
+} from '../../src/providers/as-data-provider';
 
-const SOME_STATIC_DATA = {
+interface MockDataStructure {
+  data: string;
+}
+
+const SOME_STATIC_DATA: MockDataStructure = {
   data: 'yay!',
 };
 
-export default asDataProvider(() => SOME_STATIC_DATA);
+export default asDataProvider<
+  DataProviderProps<MockDataStructure>,
+  MockDataStructure
+>(() => SOME_STATIC_DATA);

@@ -1,17 +1,19 @@
-import React from 'react';
+import * as React from 'react';
 import {
   AppSwitcherWrapper,
   AppSwitcherItem,
   Section,
   ManageButton,
+  Skeleton,
 } from '../primitives';
 import { CustomLinksProvider } from '../providers/jira-data-providers';
 import {
   RecentContainersProvider,
   LicenseInformationProvider,
 } from '../providers/instance-data-providers';
+import { WithCloudId, RecentContainer, CustomLink } from '../types';
 
-export default ({ cloudId }) => {
+export default ({ cloudId }: WithCloudId) => {
   return (
     <RecentContainersProvider cloudId={cloudId}>
       {({
@@ -27,40 +29,48 @@ export default ({ cloudId }) => {
               }) => (
                 <AppSwitcherWrapper>
                   {isLoadingRecentContainers ? (
-                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
-                    'Loading Recent Containers...'
+                    <Skeleton />
                   ) : (
                     <Section title="Recent Containers">
-                      {recentContainersData.data.map(({ objectId, name }) => (
-                        <AppSwitcherItem key={objectId}>{name}</AppSwitcherItem>
-                      ))}
+                      {recentContainersData &&
+                        recentContainersData.data.map(
+                          ({ objectId, name }: RecentContainer) => (
+                            <AppSwitcherItem key={objectId}>
+                              {name}
+                            </AppSwitcherItem>
+                          ),
+                        )}
                     </Section>
                   )}
                   {isLoadingCustomLinks ? (
-                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
-                    'Loading Custom Links...'
+                    <Skeleton />
                   ) : (
                     <Section title="Custom Links">
-                      {customLinksData[0].map(({ key, label }) => (
-                        <AppSwitcherItem key={key}>{label}</AppSwitcherItem>
-                      ))}
+                      {customLinksData &&
+                        customLinksData[0].map(({ key, label }: CustomLink) => (
+                          <AppSwitcherItem key={key}>{label}</AppSwitcherItem>
+                        ))}
                     </Section>
                   )}
                   {isLoadingLicenseInformation ? (
-                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
-                    'Loading License Information...'
+                    <Skeleton />
                   ) : (
                     <Section title="License Information">
-                      {Object.keys(licenseInformationData.products).map(
-                        productKey => (
-                          <AppSwitcherItem key={productKey}>{`${productKey} - ${
-                            licenseInformationData.products[productKey].state
-                          }`}</AppSwitcherItem>
-                        ),
-                      )}
+                      {licenseInformationData &&
+                        Object.keys(licenseInformationData.products).map(
+                          productKey => (
+                            <AppSwitcherItem
+                              key={productKey}
+                            >{`${productKey} - ${
+                              licenseInformationData.products[productKey].state
+                            }`}</AppSwitcherItem>
+                          ),
+                        )}
                     </Section>
                   )}
-                  <ManageButton href={customLinksData && customLinksData[1]} />
+                  {customLinksData && (
+                    <ManageButton href={customLinksData[1]} />
+                  )}
                 </AppSwitcherWrapper>
               )}
             </LicenseInformationProvider>

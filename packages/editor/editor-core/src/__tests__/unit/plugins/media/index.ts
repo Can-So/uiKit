@@ -11,6 +11,9 @@ import {
   mediaSingle,
   media,
   p,
+  ol,
+  ul,
+  li,
   hr,
   table,
   tr,
@@ -32,6 +35,7 @@ import {
 import { setNodeSelection, setTextSelection } from '../../../../utils';
 import { AnalyticsHandler, analyticsService } from '../../../../analytics';
 import mediaPlugin from '../../../../plugins/media';
+import listPlugin from '../../../../plugins/lists';
 import codeBlockPlugin from '../../../../plugins/code-block';
 import rulePlugin from '../../../../plugins/rule';
 import tablePlugin from '../../../../plugins/table';
@@ -47,6 +51,15 @@ const getFreshMediaProvider = () =>
     stateManager,
     includeUserAuthProvider: true,
   });
+
+const pdfFile = {
+  id: `${randomId()}`,
+  fileName: 'lala.pdf',
+  fileSize: 200,
+  fileMimeType: 'pdf',
+  dimensions: { width: 200, height: 200 },
+  fileId: Promise.resolve('pdf'),
+};
 
 /**
  * Currently skipping these three failing tests
@@ -67,6 +80,7 @@ describe('Media plugin', () => {
     createEditor({
       doc,
       editorPlugins: [
+        listPlugin,
         mediaPlugin({
           provider: mediaProvider,
           allowMediaSingle: true,
@@ -1479,6 +1493,109 @@ describe('Media plugin', () => {
       pluginState.updateLayout('wrap-right');
 
       expect(subscriber).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('when inserting into a list', () => {
+    it('should insert media group after orderer list', async () => {
+      const listDoc = doc(ol(li(p('text'))));
+      const { pluginState, editorView } = editor(listDoc);
+      await waitForMediaPickerReady(pluginState);
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ol(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
+    });
+
+    it('should insert media group after unorderer list', async () => {
+      const listDoc = doc(ul(li(p('text'))));
+      const { pluginState, editorView } = editor(listDoc);
+      await waitForMediaPickerReady(pluginState);
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ul(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
+    });
+
+    it('should insert media in the media group that already exist', async () => {
+      const listDoc = doc(
+        ul(li(p('te{<>}xt'))),
+        mediaGroup(
+          media({
+            id: pdfFile.id,
+            __key: pdfFile.id,
+            type: 'file',
+            __fileMimeType: pdfFile.fileMimeType,
+            __fileName: pdfFile.fileName,
+            __fileSize: pdfFile.fileSize,
+            collection: testCollectionName,
+          })(),
+        ),
+        p(''),
+      );
+      const { pluginState, editorView } = editor(listDoc);
+      await waitForMediaPickerReady(pluginState);
+
+      pluginState.insertFiles([pdfFile]);
+
+      expect(editorView.state.doc).toEqualDocument(
+        doc(
+          ul(li(p('text'))),
+          mediaGroup(
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+            media({
+              id: pdfFile.id,
+              __key: pdfFile.id,
+              type: 'file',
+              __fileMimeType: pdfFile.fileMimeType,
+              __fileName: pdfFile.fileName,
+              __fileSize: pdfFile.fileSize,
+              collection: testCollectionName,
+            })(),
+          ),
+          p(''),
+        ),
+      );
     });
   });
 });

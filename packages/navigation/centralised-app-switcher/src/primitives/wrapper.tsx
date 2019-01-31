@@ -1,4 +1,4 @@
-import React, { Children, ReactNode, isValidElement } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { gridSize, colors } from '@atlaskit/theme';
 import { ManageButton } from './';
@@ -24,12 +24,12 @@ const Footer = styled.footer`
   background-color: ${colors.N0};
 `;
 
-export default ({ children }: { children: ReactNode }) => {
-  const manageButton = Children.toArray(children).filter(
-    child => isValidElement(child) && child.type === ManageButton,
+export default ({ children }: { children: React.ReactNode }) => {
+  const manageButton = React.Children.toArray(children).filter(
+    child => React.isValidElement(child) && child.type === ManageButton,
   );
-  const items = Children.toArray(children).filter(
-    child => isValidElement(child) && child.type !== ManageButton,
+  const items = React.Children.toArray(children).filter(
+    child => React.isValidElement(child) && child.type !== ManageButton,
   );
 
   return (

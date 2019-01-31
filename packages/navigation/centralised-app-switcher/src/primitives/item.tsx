@@ -1,4 +1,4 @@
-import React, { ReactType } from 'react';
+import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import Item, { itemThemeNamespace } from '@atlaskit/item';
 import WorldIcon from '@atlaskit/icon/glyph/world';
@@ -17,7 +17,7 @@ const Background = styled.div<{ isAdmin: boolean }>`
 
 type Props = {
   isAdmin?: boolean;
-  icon?: ReactType;
+  icon?: React.ReactType;
 };
 const IconWithBackground = ({
   isAdmin = false,
@@ -40,7 +40,7 @@ const itemTheme = {
 };
 
 type AppSwitcherItemProps = Props & {
-  children: ReactType;
+  children: React.ReactType;
   key?: string;
 };
 export default ({ isAdmin, icon, ...rest }: AppSwitcherItemProps) => (
