@@ -47,7 +47,7 @@ describe('UserPicker', () => {
     const component = shallowUserPicker({ options });
     const select = component.find(Select);
     expect(select.prop('options')).toEqual(userOptions);
-    expect(getStyles).toHaveBeenCalledWith(350, 'normal');
+    expect(getStyles).toHaveBeenCalledWith(350);
     expect(select.prop('menuPlacement')).toBeTruthy();
   });
 
@@ -123,21 +123,19 @@ describe('UserPicker', () => {
     it('should set width', () => {
       shallowUserPicker({ width: 500 });
 
-      expect(getStyles).toHaveBeenCalledWith(500, expect.any(String));
+      expect(getStyles).toHaveBeenCalledWith(500);
     });
 
     it('should infer normal appearance if single picker', () => {
       const component = shallowUserPicker();
 
       expect(component.find(Select).prop('appearance')).toEqual('normal');
-      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'normal');
     });
 
     it('should infer compact appearance if multi picker', () => {
       const component = shallowUserPicker({ isMulti: true });
 
       expect(component.find(Select).prop('appearance')).toEqual('compact');
-      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'compact');
     });
 
     it('should pass in appearance that comes from props', () => {
@@ -147,7 +145,6 @@ describe('UserPicker', () => {
       });
 
       expect(component.find(Select).prop('appearance')).toEqual('normal');
-      expect(getStyles).toHaveBeenCalledWith(expect.any(Number), 'normal');
     });
   });
 
@@ -257,6 +254,14 @@ describe('UserPicker', () => {
       it('should call props.onInputChange', () => {
         const onInputChange = jest.fn();
         const component = shallowUserPicker({ onInputChange });
+        const select = component.find(Select);
+        select.simulate('inputChange', 'some text', { action: 'input-change' });
+        expect(onInputChange).toHaveBeenCalled();
+      });
+
+      it('should call props.onInputChange with controlled search', () => {
+        const onInputChange = jest.fn();
+        const component = shallowUserPicker({ onInputChange, search: 'text' });
         const select = component.find(Select);
         select.simulate('inputChange', 'some text', { action: 'input-change' });
         expect(onInputChange).toHaveBeenCalled();

@@ -247,6 +247,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
     { action }: { action: InputActionTypes },
   ) => {
     if (action === 'input-change') {
+      callCallback(this.props.onInputChange, search);
       this.setState({ inputValue: search, preventFilter: false });
 
       this.executeLoadOptions(search);
@@ -295,7 +296,6 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
       if (this.session) {
         this.session.inputChangeTime = Date.now();
       }
-      callCallback(this.props.onInputChange, this.state.inputValue);
     }
   }
 
@@ -374,7 +374,7 @@ class UserPickerInternal extends React.Component<Props, UserPickerState> {
         isMulti={isMulti}
         options={this.getOptions()}
         onChange={this.handleChange}
-        styles={getStyles(width, appearance)}
+        styles={getStyles(width)}
         components={getComponents(isMulti, anchor)}
         inputValue={inputValue}
         menuIsOpen={menuIsOpen}
