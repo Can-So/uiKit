@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.9
+- [patch] [1ee84815dd](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1ee84815dd):
+
+  - ED-6133: Visually apply column resize changes in collab editing
+
 ## 98.1.8
 - [patch] [e83a20575b](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/e83a20575b):
 

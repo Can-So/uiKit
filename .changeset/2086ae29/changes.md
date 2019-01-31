@@ -1,1 +1,0 @@
-- ED-6133: Visually apply column resize changes in collab editing
