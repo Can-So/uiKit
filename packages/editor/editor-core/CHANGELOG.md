@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.3
+- [patch] [af3918bc89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af3918bc89):
+
+  - The url part of the unauthorized link is now grey
+
 ## 98.1.2
 - [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
 

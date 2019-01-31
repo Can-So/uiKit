@@ -1,1 +1,0 @@
-- The url part of the unauthorized link is now grey
