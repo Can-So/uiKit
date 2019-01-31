@@ -27,17 +27,24 @@ export const SpinnerWrapper = styled.div`
 SpinnerWrapper.displayName = 'SpinnerWrapper';
 
 interface Props {
-  mode: 'dark' | 'light';
+  mode: 'dark' | 'light' | 'none';
 }
 
+const getBackgroundColor = (mode: Props['mode']) => {
+  switch (mode) {
+    case 'dark':
+      return darkBlanketColor;
+    case 'light':
+      return lightBlanketColor;
+    default:
+      return 'none';
+  }
+};
+
 export default ({ mode }: Props) => (
-  <Blanket
-    style={{
-      backgroundColor: mode === 'dark' ? darkBlanketColor : lightBlanketColor,
-    }}
-  >
+  <Blanket style={{ backgroundColor: getBackgroundColor(mode) }}>
     <SpinnerWrapper>
-      <Spinner size="large" invertColor={mode === 'dark'} />
+      <Spinner size="large" invertColor={mode !== 'light'} />
     </SpinnerWrapper>
   </Blanket>
 );

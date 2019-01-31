@@ -30,7 +30,7 @@ export default class AsyncEditorView extends React.PureComponent<
 
   render() {
     if (!this.state.EditorView) {
-      return <ModalSpinner mode="dark" />;
+      return <ModalSpinner mode="none" />;
     }
 
     return <this.state.EditorView {...this.props} />;
