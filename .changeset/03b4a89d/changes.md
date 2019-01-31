@@ -1,0 +1,1 @@
+- ED-6092: allow passing undefined context to media filmstrip
