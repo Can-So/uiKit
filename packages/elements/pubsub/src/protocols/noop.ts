@@ -7,7 +7,7 @@ export default class NoopProtocol implements Protocol {
     return 'noop';
   }
 
-  subscribe(config: ProtocolConfig): void {}
+  subscribe(_: ProtocolConfig): void {}
 
   unsubscribeAll(): void {}
 
@@ -15,9 +15,9 @@ export default class NoopProtocol implements Protocol {
     return [];
   }
 
-  on(event: EventType, handler: OnEvent): void {}
+  on(_event: EventType, _handler: OnEvent): void {}
 
-  off(event: EventType, handler: OnEvent): void {}
+  off(_event: EventType, _handler: OnEvent): void {}
 
   networkUp(): void {}
 

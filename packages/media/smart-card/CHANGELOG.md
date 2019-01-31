@@ -1,5 +1,10 @@
 # @atlaskit/smart-card
 
+## 9.6.8
+- [patch] [af3918bc89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af3918bc89):
+
+  - The url part of the unauthorized link is now grey
+
 ## 9.6.7
 - [patch] [abce6949c0](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/abce6949c0):
 
