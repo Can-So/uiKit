@@ -17,7 +17,9 @@ export function addAnalytics(
 }
 
 function createPlugin(createAnalyticsEvent?: CreateUIAnalyticsEventSignature) {
-  if (!createAnalyticsEvent) return;
+  if (!createAnalyticsEvent) {
+    return;
+  }
 
   return new Plugin({
     key: analyticsPluginKey,

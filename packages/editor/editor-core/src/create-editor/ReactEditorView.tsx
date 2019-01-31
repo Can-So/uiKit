@@ -76,7 +76,7 @@ export default class ReactEditorView<T = {}> extends React.Component<
 
     this.editorState = this.createEditorState({ props, replaceDoc: true });
 
-    const { createAnalyticsEvent } = props.editorProps;
+    const { createAnalyticsEvent } = props;
     if (createAnalyticsEvent) {
       this.eventDispatcher.on(
         analyticsEventKey,
@@ -120,17 +120,14 @@ export default class ReactEditorView<T = {}> extends React.Component<
       } as DirectEditorProps);
     }
 
-    if (
-      nextProps.editorProps.createAnalyticsEvent !==
-      this.props.editorProps.createAnalyticsEvent
-    ) {
+    if (nextProps.createAnalyticsEvent !== this.props.createAnalyticsEvent) {
       this.eventDispatcher.off(
         analyticsEventKey,
-        fireAnalyticsEvent(this.props.editorProps.createAnalyticsEvent),
+        fireAnalyticsEvent(this.props.createAnalyticsEvent),
       );
       this.eventDispatcher.on(
         analyticsEventKey,
-        fireAnalyticsEvent(nextProps.editorProps.createAnalyticsEvent),
+        fireAnalyticsEvent(nextProps.createAnalyticsEvent),
       );
     }
   }

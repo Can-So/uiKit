@@ -9,9 +9,10 @@ import analyticsPlugin, {
   analyticsPluginKey,
   AnalyticsEventPayload,
 } from '../../../../plugins/analytics';
-import { createEditor, doc, p } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory, doc, p } from '@atlaskit/editor-test-helpers';
 
 describe('analytics', () => {
+  const createEditor = createEditorFactory();
   const payload: AnalyticsEventPayload = {
     action: 'clicked',
     actionSubject: 'button',

@@ -10,7 +10,6 @@ import {
   WidthProvider,
 } from '@atlaskit/editor-common';
 import { Context as CardContext } from '@atlaskit/smart-card';
-import { withAnalyticsEvents } from '@atlaskit/analytics-next';
 
 import { getUiComponent } from './create-editor';
 import EditorActions from './actions';
@@ -370,4 +369,4 @@ export class Editor extends React.Component<EditorProps, {}> {
   }
 }
 
-export default withAnalyticsEvents()(Editor);
+export default Editor;
