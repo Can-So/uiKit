@@ -54,7 +54,8 @@ For further details or a test template, please consult this [link](https://hello
 - visual regression tests are used to identify visual differences on **UI components** with or without **user interactions**.
 - use **Jest runner** for running the visual regression tests.
 - *visual regression tests* for packages should be structured under `<pkg>/src/__tests__/visual-regression`.
-- on local these run using jest-image-snapshot, puppeteer and chromium.
+*Please note:* You will need to have git lfs enabled and do a `git lfs pull` before starting to run them locally. In addition, you will need to have docker setup and running on your machine.
+- on local these run using docker, jest-image-snapshot, puppeteer and chromium.
 - to run all *visual regression tests* on local `yarn test:vr`.
 - to run all tests under a package on local `yarn test:vr <pkg>`.
 - on CI to run all packages in pipeline as a custom build, go to any branch, run pipeline for a branch and select **custom build:visual-regression**.
