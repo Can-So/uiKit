@@ -8,6 +8,7 @@ describe('Snapshot Test: Placeholder', () => {
     page = global.page;
   });
 
+  // test
   it('wraps long placeholder onto new line', async () => {
     await initEditor(page, 'full-page');
     await snapshot(page);
