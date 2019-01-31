@@ -1,1 +1,0 @@
-- Fix table creation without rows

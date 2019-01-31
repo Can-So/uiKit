@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.5
+- [patch] [b2b0a00d6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b2b0a00d6a):
+
+  - Fix table creation without rows
+
 ## 98.1.4
 - [patch] [3b9236fb74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b9236fb74):
 
