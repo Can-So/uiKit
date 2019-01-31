@@ -1,1 +1,0 @@
-- Fixed alignment of the separator dots
