@@ -1,4 +1,4 @@
-export const mapping = {
+export const mapping: { [key: string]: string } = {
   '1f600': '😀',
   '1f603': '😃',
   '1f604': '😄',

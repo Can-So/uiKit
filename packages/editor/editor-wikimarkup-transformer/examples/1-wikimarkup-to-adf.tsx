@@ -50,7 +50,7 @@ const MockProfileClient = getMockProfileClientUtil(
 );
 
 const mentionProvider = Promise.resolve({
-  shouldHighlightMention(mention) {
+  shouldHighlightMention(mention: any) {
     return mention.id === 'ABCDE-ABCDE-ABCDE-ABCDE';
   },
 });
@@ -117,8 +117,8 @@ export interface State {
 class Example extends React.PureComponent<{}, State> {
   state: State = { source: '' };
 
-  handleChange = evt => {
-    this.setState({ source: evt.target.value });
+  handleChange = (evt: React.FormEvent<HTMLTextAreaElement>) => {
+    this.setState({ source: evt.currentTarget.value });
   };
 
   render() {
