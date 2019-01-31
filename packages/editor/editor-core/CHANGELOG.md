@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.6
+- [patch] [406cbf0a4e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/406cbf0a4e):
+
+  - ED-6092: allow passing undefined context to media filmstrip
+
 ## 98.1.5
 - [patch] [b2b0a00d6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b2b0a00d6a):
 
