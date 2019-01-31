@@ -2,6 +2,12 @@ import * as React from 'react';
 import { bodiedExtensionData } from './mock-extension-data';
 import DevIcon from '@atlaskit/icon/glyph/editor/code';
 
+interface EditorActions {
+  replaceDocument: (input: any) => void;
+  replaceSelection: (input: any) => void;
+  appendText: (input: string) => void;
+}
+
 export const customInsertMenuItems = [
   {
     content: 'Import',
@@ -9,7 +15,7 @@ export const customInsertMenuItems = [
     tooltipDescription: 'import',
     tooltipPosition: 'right',
     elemBefore: <DevIcon label="dev" />,
-    onClick: async editorActions => {
+    onClick: async (editorActions: EditorActions) => {
       const input = prompt('Import from?');
       if (input !== null) {
         editorActions.replaceDocument(input);
@@ -22,7 +28,7 @@ export const customInsertMenuItems = [
     tooltipDescription: 'Inline macro (Using extension handlers)',
     tooltipPosition: 'right',
     elemBefore: <DevIcon label="dev" />,
-    onClick: function(editorActions) {
+    onClick: function(editorActions: EditorActions) {
       editorActions.replaceSelection({
         type: 'inlineExtension',
         attrs: {
@@ -51,7 +57,7 @@ export const customInsertMenuItems = [
     tooltipPosition: 'right',
     elemBefore: <DevIcon label="dev" />,
     className: 'block-macro',
-    onClick: function(editorActions) {
+    onClick: function(editorActions: EditorActions) {
       editorActions.replaceSelection({
         type: 'extension',
         attrs: {
@@ -80,7 +86,7 @@ export const customInsertMenuItems = [
     tooltipPosition: 'right',
     elemBefore: <DevIcon label="dev" />,
     className: 'bodied-macro',
-    onClick: function(editorActions) {
+    onClick: function(editorActions: EditorActions) {
       editorActions.replaceSelection({
         type: 'bodiedExtension',
         attrs: {
@@ -113,7 +119,7 @@ export const customInsertMenuItems = [
     tooltipDescription: 'Bodied macro',
     tooltipPosition: 'right',
     elemBefore: <DevIcon label="dev" />,
-    onClick: function(editorActions) {
+    onClick: function(editorActions: EditorActions) {
       editorActions.replaceSelection({
         type: 'bodiedExtension',
         attrs: {
@@ -147,7 +153,7 @@ export const customInsertMenuItems = [
     tooltipDescription: 'Insert lorem ipsum text',
     tooltipPosition: 'right',
     elemBefore: <DevIcon label="dev" />,
-    onClick: function(editorActions) {
+    onClick: function(editorActions: EditorActions) {
       editorActions.appendText(
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mi nisl, venenatis eget auctor vitae, venenatis quis lorem. Suspendisse maximus tortor vel dui tincidunt cursus. Vestibulum magna nibh, auctor non auctor id, finibus vitae orci. Nulla viverra ipsum et nunc fringilla ultricies. Pellentesque vitae felis molestie justo finibus accumsan. Suspendisse potenti. Nulla facilisi. Integer dignissim quis velit quis elementum. Sed sit amet varius ante. Duis vestibulum porta augue eu laoreet. Morbi id risus et augue sollicitudin aliquam. In et ligula dolor. Nam ac aliquet diam.',
       );
@@ -159,7 +165,7 @@ export const customInsertMenuItems = [
     tooltipDescription: 'Insert info macro',
     tooltipPosition: 'right',
     elemBefore: <DevIcon label="dev" />,
-    onClick: function(editorActions) {
+    onClick: function(editorActions: EditorActions) {
       editorActions.replaceSelection({
         type: 'inlineExtension',
         attrs: {
@@ -187,7 +193,7 @@ export const customInsertMenuItems = [
     tooltipDescription: 'Open macro browser',
     tooltipPosition: 'right',
     elemBefore: <DevIcon label="dev" />,
-    onClick: function(editorActions) {
+    onClick: function(editorActions: EditorActions) {
       // tslint:disable-next-line:no-console
       console.log(
         'Fake promise that simulates the macro browser opening. Will resolve in 1 sec with a selected macro to be inserted.',
