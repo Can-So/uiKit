@@ -1,1 +1,0 @@
-- ED-6122: Handle TinyMCE migrated tables, where total table width is less than defined layout
