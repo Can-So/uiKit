@@ -15,7 +15,7 @@ const threeColumnsLayout = `div[aria-label="Columns floating controls"] [aria-la
   toolbarMessages.threeColumns.defaultMessage
 }"]`;
 
-describe('Snapshot Test: Layouts', () => {
+describe.skip('Snapshot Test: Layouts', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore

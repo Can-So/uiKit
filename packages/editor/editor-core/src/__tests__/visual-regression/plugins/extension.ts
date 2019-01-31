@@ -1,6 +1,6 @@
 import { initEditor, insertMenuSelector, snapshot } from '../_utils';
 
-describe('Snapshot Test: Extensions', () => {
+describe.skip('Snapshot Test: Extensions', () => {
   let page;
   beforeAll(async () => {
     // @ts-ignore
