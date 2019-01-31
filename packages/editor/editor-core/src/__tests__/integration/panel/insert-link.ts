@@ -1,5 +1,4 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 
 import {
   editable,
@@ -7,23 +6,30 @@ import {
   fullpage,
   quickInsert,
 } from '../_helpers';
+import {
+  goToEditorTestingExample,
+  mountEditor,
+} from '../../__helpers/testing-example-helpers';
+import { selectors } from './_utils';
 
 BrowserTestCase(
   'insert-link.ts: Insert link in panel by typing Markdown',
   { skip: ['edge', 'ie'] },
   async client => {
-    const browser = new Page(client);
+    const page = await goToEditorTestingExample(client);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowPanel: true,
+    });
 
-    await browser.goto(fullpage.path);
+    await page.click(fullpage.placeholder);
 
-    await browser.waitForSelector(fullpage.placeholder);
-    await browser.click(fullpage.placeholder);
+    await quickInsert(page, 'Panel');
+    await page.waitForSelector(selectors.PANEL_EDITOR_CONTAINER);
 
-    await quickInsert(browser, 'Panel');
+    await page.type(editable, '[Atlassian](https://www.atlassian.com/)');
 
-    await browser.type(editable, '[Atlassian](https://www.atlassian.com/)');
-
-    const doc = await browser.$eval(editable, getDocFromElement);
+    const doc = await page.$eval(editable, getDocFromElement);
     expect(doc).toMatchDocSnapshot();
   },
 );

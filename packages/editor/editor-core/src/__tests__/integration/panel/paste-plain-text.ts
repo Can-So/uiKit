@@ -1,37 +1,44 @@
 import { BrowserTestCase } from '@atlaskit/webdriver-runner/runner';
-import Page from '@atlaskit/webdriver-runner/wd-wrapper';
 
 import {
   editable,
   getDocFromElement,
   fullpage,
   quickInsert,
-  clipboardHelper,
   clipboardInput,
   copyAsPlaintextButton,
 } from '../_helpers';
+import {
+  goToEditorTestingExample,
+  mountEditor,
+} from '../../__helpers/testing-example-helpers';
+import { selectors } from './_utils';
 
 BrowserTestCase(
   'paste-plain-text.ts: Paste plain text into panel',
   { skip: ['ie', 'edge', 'safari'] },
   async client => {
-    const browser = new Page(client);
-    await browser.goto(clipboardHelper);
-    await browser.isVisible(clipboardInput);
-    await browser.type(
+    const page = await goToEditorTestingExample(client);
+
+    await page.type(
       clipboardInput,
       'this is a link http://www.google.com more elements with some **format** some addition *formatting*',
     );
-    await browser.click(copyAsPlaintextButton);
+    await page.click(copyAsPlaintextButton);
 
-    await browser.goto(fullpage.path);
-    await browser.waitForSelector(editable);
+    await mountEditor(page, {
+      appearance: fullpage.appearance,
+      allowPanel: true,
+    });
 
-    await browser.click(editable);
-    await quickInsert(browser, 'Panel');
+    await page.click(editable);
+    await quickInsert(page, 'Panel');
+    await page.waitForSelector(selectors.PANEL_EDITOR_CONTAINER);
 
-    await browser.paste(editable);
-    const doc = await browser.$eval(editable, getDocFromElement);
+    await page.paste(editable);
+    const doc = await page.$eval(editable, getDocFromElement);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
     expect(doc).toMatchDocSnapshot();
   },
 );
