@@ -50,11 +50,15 @@ We encourage adding tests to all components on **Atlaskit**.
 
 For further details or a test template, please consult this [link](https://hello.atlassian.net/wiki/spaces/AtlasKit/pages/136112313/How+to+add+webdriver+browser+tests+for+components+in+Atlaskit).
 
+### Pre requisite for Visual regression tests
+- since visual regression requires docker - install docker 
+- insall git lfs `brew install git-lfs`
+- run `git lfs pull` to pull lfs assets
+
 ### Visual regression tests
 - visual regression tests are used to identify visual differences on **UI components** with or without **user interactions**.
 - use **Jest runner** for running the visual regression tests.
 - *visual regression tests* for packages should be structured under `<pkg>/src/__tests__/visual-regression`.
-*Please note:* You will need to have git lfs enabled and do a `git lfs pull` before starting to run them locally. In addition, you will need to have docker setup and running on your machine.
 - on local these run using docker, jest-image-snapshot, puppeteer and chromium.
 - to run all *visual regression tests* on local `yarn test:vr`.
 - to run all tests under a package on local `yarn test:vr <pkg>`.
