@@ -55,7 +55,11 @@ export default class Resizer {
       // update state from DOM
       new ResizeState(
         Array.from(colgroupChildren).map((col, i) => {
-          return ColumnState.fromDOM(tableElem, i, minWidth);
+          const column = col as HTMLElement;
+          const existingWidth = column.style.width
+            ? parseInt(column.style.width, 10)
+            : 0;
+          return ColumnState.fromDOM(tableElem, i, minWidth, existingWidth);
         }),
         maxSize,
       ),
