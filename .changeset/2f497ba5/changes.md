@@ -1,0 +1,1 @@
+- MS-1455, MS-1456: Fix max width for the surrounding element for the inline smart cards so that they don't overflow and positioning within li elements
