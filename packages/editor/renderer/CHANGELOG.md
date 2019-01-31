@@ -1,5 +1,10 @@
 # @atlaskit/renderer
 
+## 38.0.2
+- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+
+  - ED-5788: bump prosemirror-view and prosemirror-model
+
 ## 38.0.1
 - [patch] [fab72e17b1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/fab72e17b1):
 

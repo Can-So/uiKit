@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.2
+- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+
+  - ED-5788: bump prosemirror-view and prosemirror-model
+
 ## 98.1.1
 - [patch] [2d14c5dae1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d14c5dae1):
 

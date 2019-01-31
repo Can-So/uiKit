@@ -1,1 +1,0 @@
-- ED-5788: bump prosemirror-view and prosemirror-model
