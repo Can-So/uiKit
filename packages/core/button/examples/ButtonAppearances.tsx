@@ -10,7 +10,7 @@ const appearances = [
   'subtle-link',
   'warning',
   'danger',
-  'help',
+  // 'help',
 ];
 
 const Table = props => <div style={{ display: 'table' }} {...props} />;

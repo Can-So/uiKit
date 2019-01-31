@@ -12,6 +12,7 @@ test-reports/
 browserstack.err
 **/__image_snapshots__/__diff_output__/
 .measure-output/
+diffImg.tar.bz2
 
 # created by build-stats tool
 .data/
