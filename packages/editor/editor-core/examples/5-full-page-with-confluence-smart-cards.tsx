@@ -133,7 +133,7 @@ const demoTable = {
           content: [
             {
               type: 'paragraph',
-              content: [{ type: 'text', text: 'Date' }],
+              content: [{ type: 'text', text: 'Column 1' }],
             },
           ],
         },
@@ -143,7 +143,7 @@ const demoTable = {
           content: [
             {
               type: 'paragraph',
-              content: [{ type: 'text', text: 'Responsible' }],
+              content: [{ type: 'text', text: 'Column 2' }],
             },
           ],
         },
@@ -153,7 +153,7 @@ const demoTable = {
           content: [
             {
               type: 'paragraph',
-              content: [{ type: 'text', text: 'Content' }],
+              content: [{ type: 'text', text: 'Column 3' }],
             },
           ],
         },
@@ -163,7 +163,7 @@ const demoTable = {
           content: [
             {
               type: 'paragraph',
-              content: [{ type: 'text', text: 'Actions' }],
+              content: [{ type: 'text', text: 'Column 4' }],
             },
           ],
         },
@@ -177,14 +177,41 @@ const demoTable = {
           attrs: {},
           content: [
             {
-              type: 'paragraph',
+              type: 'bulletList',
               content: [
                 {
-                  type: 'inlineCard',
-                  attrs: {
-                    url:
-                      'https://app.box.com/s/2emx282bjxpzvwa5bcz428u6imbgmasg',
-                  },
+                  type: 'listItem',
+                  content: [
+                    {
+                      type: 'paragraph',
+                      content: [
+                        {
+                          type: 'inlineCard',
+                          attrs: {
+                            url:
+                              'https://app.box.com/s/2emx282bjxpzvwa5bcz428u6imbgmasg',
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: 'listItem',
+                  content: [
+                    {
+                      type: 'paragraph',
+                      content: [
+                        {
+                          type: 'inlineCard',
+                          attrs: {
+                            url:
+                              'https://app.box.com/s/2emx282bjxpzvwa5bcz428u6imbgmasg',
+                          },
+                        },
+                      ],
+                    },
+                  ],
                 },
               ],
             },

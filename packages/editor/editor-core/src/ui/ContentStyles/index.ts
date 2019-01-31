@@ -64,7 +64,9 @@ const ContentStyles: ComponentClass<
 
   .inlineCardView-content-wrap {
     display: inline-block;
-    max-width: calc(100% - 20px)
+    max-width: calc(100% - 20px);
+    vertical-align: top;
+    word-break: break-all;
   }
 
   .blockCardView-content-wrap {
