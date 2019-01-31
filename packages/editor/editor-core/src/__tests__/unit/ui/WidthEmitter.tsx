@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import * as React from 'react';
 import { Plugin } from 'prosemirror-state';
 import SizeDetector from '@atlaskit/size-detector';
-import { createEditor, doc, p } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory, doc, p } from '@atlaskit/editor-test-helpers';
 import { WidthProvider } from '@atlaskit/editor-common';
 
 import {
@@ -13,6 +13,8 @@ import {
 import WidthEmitter from '../../../ui/WidthEmitter';
 
 describe(name, () => {
+  const createEditor = createEditorFactory();
+
   describe('WidthBroadcaster', () => {
     beforeEach(() => {
       jest.useFakeTimers();

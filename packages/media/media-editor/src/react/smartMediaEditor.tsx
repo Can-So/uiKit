@@ -219,6 +219,7 @@ export class SmartMediaEditor extends React.Component<
 
   render() {
     const { imageUrl, hasError, errorMessage } = this.state;
+
     const content = hasError
       ? this.renderError(errorMessage)
       : imageUrl

@@ -1,4 +1,4 @@
-import { createEditor, insertText } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory, insertText } from '@atlaskit/editor-test-helpers';
 import { doc, p } from '@atlaskit/editor-test-helpers';
 import { MockMentionResource } from '@atlaskit/util-data-test';
 import { selectCurrentItem } from '../../../../plugins/type-ahead/commands/select-item';
@@ -8,6 +8,7 @@ import { MentionProvider, MentionDescription } from '@atlaskit/mention';
 import { EditorView } from 'prosemirror-view';
 
 describe('mentionTypeahead', () => {
+  const createEditor = createEditorFactory();
   const sessionIdRegex = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
   const mentionProvider = new Promise<any>(resolve => {
     resolve(new MockMentionResource({}));

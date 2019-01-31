@@ -10,7 +10,7 @@ export type AlterPropsRepository = AlterProps<BlockCardResolvedViewProps>;
 export type BuildPropsRepository = BuildProps<BlockCardResolvedViewProps>;
 
 export const buildRepositoryLink: BuildPropsRepository = json => {
-  const link = json['@url'] && json['@url'].trim();
+  const link = json.url && json.url.trim();
   return link ? { link } : {};
 };
 

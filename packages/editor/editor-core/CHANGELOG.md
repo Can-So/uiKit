@@ -1,5 +1,45 @@
 # @atlaskit/editor-core
 
+## 98.1.5
+- [patch] [b2b0a00d6a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/b2b0a00d6a):
+
+  - Fix table creation without rows
+
+## 98.1.4
+- [patch] [3b9236fb74](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/3b9236fb74):
+
+  - MS-1455, MS-1456: Fix max width for the surrounding element for the inline smart cards so that they don't overflow and positioning within li elements
+
+## 98.1.3
+- [patch] [af3918bc89](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/af3918bc89):
+
+  - The url part of the unauthorized link is now grey
+
+## 98.1.2
+- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+
+  - ED-5788: bump prosemirror-view and prosemirror-model
+
+## 98.1.1
+- [patch] [2d14c5dae1](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2d14c5dae1):
+
+  - ED-5730 Allow attachment to be inserted after list
+
+## 98.1.0
+- [minor] [a26d644414](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/a26d644414):
+
+  - ED-5845, ED-6072: support resizing in multiple editors on page, fix snapping images in lists
+
+## 98.0.3
+- [patch] [5ae645d661](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/5ae645d661):
+
+  - Fixing analytics in smart-cards
+
+## 98.0.2
+- [patch] [4437882a9a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4437882a9a):
+
+  - ED-6107: don't act on destroyed EditorView during cleanup in media plugin
+
 ## 98.0.1
 - [patch] [2035bef8fb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/2035bef8fb):
 

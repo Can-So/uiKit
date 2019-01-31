@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { TextSelection } from 'prosemirror-state';
-import { createEditor } from '@atlaskit/editor-test-helpers';
+import { createEditorFactory } from '@atlaskit/editor-test-helpers';
 import collabEdit, {
   pluginKey as collabEditPluginKey,
 } from '../../../../src/plugins/collab-edit';
@@ -10,26 +10,28 @@ import { collabEditProvider } from '../../../../example-helpers/mock-collab-prov
 import { findPointers } from '../../../../src/plugins/collab-edit/utils';
 import tablesPlugin from '../../../../src/plugins/table';
 
-const setupEditor = (setProvider: boolean = true) => {
-  const providerFactory = new ProviderFactory();
-  const providerPromise = collabEditProvider();
-
-  if (setProvider) {
-    providerFactory.setProvider('collabEditProvider', providerPromise);
-  }
-
-  const { editorView } = createEditor({
-    editorPlugins: [collabEdit(), tablesPlugin()],
-    providerFactory,
-  });
-
-  return {
-    editorView,
-    providerPromise,
-  };
-};
-
 describe('editor/plugins/collab-edit', () => {
+  const createEditor = createEditorFactory();
+
+  const setupEditor = (setProvider: boolean = true) => {
+    const providerFactory = new ProviderFactory();
+    const providerPromise = collabEditProvider();
+
+    if (setProvider) {
+      providerFactory.setProvider('collabEditProvider', providerPromise);
+    }
+
+    const { editorView } = createEditor({
+      editorPlugins: [collabEdit(), tablesPlugin()],
+      providerFactory,
+    });
+
+    return {
+      editorView,
+      providerPromise,
+    };
+  };
+
   let sandbox;
 
   beforeEach(function() {
@@ -59,7 +61,6 @@ describe('editor/plugins/collab-edit', () => {
           },
         ],
       });
-      editorView.destroy();
     });
   });
 
@@ -77,7 +78,6 @@ describe('editor/plugins/collab-edit', () => {
           },
         ],
       });
-      editorView.destroy();
     });
 
     it('should call .send()-method on provider', async () => {
@@ -87,7 +87,6 @@ describe('editor/plugins/collab-edit', () => {
 
       editorView.dispatch(editorView.state.tr.insertText('hello world'));
       expect(spy.called).to.equal(true);
-      editorView.destroy();
     });
   });
 
@@ -133,7 +132,6 @@ describe('editor/plugins/collab-edit', () => {
           },
         ],
       });
-      editorView.destroy();
     });
   });
 
@@ -161,7 +159,6 @@ describe('editor/plugins/collab-edit', () => {
         },
         sessionId: 'test',
       });
-      editorView.destroy();
     });
 
     it('should keep track of remote telepointers in plugin state', async () => {
@@ -197,7 +194,6 @@ describe('editor/plugins/collab-edit', () => {
           sessionId: 'test',
         },
       });
-      editorView.destroy();
     });
 
     it('should place cursor ', async () => {
@@ -302,7 +298,6 @@ describe('editor/plugins/collab-edit', () => {
           sessionId: 'test',
         },
       ]);
-      editorView.destroy();
     });
 
     it('should remove participants who left', async () => {
@@ -342,7 +337,6 @@ describe('editor/plugins/collab-edit', () => {
           avatar: 'avatar-2.png',
         },
       ]);
-      editorView.destroy();
     });
   });
 });

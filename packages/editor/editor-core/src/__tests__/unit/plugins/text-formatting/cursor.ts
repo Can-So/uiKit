@@ -1,6 +1,6 @@
 import {
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   code,
   strong,
@@ -17,6 +17,8 @@ let handleClick: HandleClick = textFormattingCursorPlugin.spec!.props
   .handleClick;
 
 describe('text-formatting', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => createEditor({ doc });
 
   describe('cursor', () => {

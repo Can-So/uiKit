@@ -1,5 +1,10 @@
 # @atlaskit/field-text
 
+## 7.0.20
+- [patch] [9b4a39c56a](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/9b4a39c56a):
+
+  - Weakened FieldText & FieldTextArea autoComplete prop TypeScript definition to allow for more options than just 'on' or 'off'
+
 ## 7.0.19
 - [patch] [1c8779d](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/1c8779d):
 

@@ -1,5 +1,5 @@
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   code_block,
   breakout,
@@ -7,6 +7,8 @@ import {
 import { getBreakoutMode } from '../../../../../plugins/breakout/utils/get-breakout-mode';
 
 describe('Breakout Commands: getBreakoutMode', () => {
+  const createEditor = createEditorFactory();
+
   it('should return a breakout mode of current node', () => {
     const { editorView } = createEditor({
       doc: doc(breakout({ mode: 'wide' })(code_block()('Hel{<>}lo'))),

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   taskList,
   taskItem,
@@ -13,6 +13,8 @@ import DateNodeView from '../../../../plugins/date/nodeviews/date';
 import { uuid } from '@atlaskit/adf-schema';
 
 describe('date plugin', () => {
+  const createEditor = createEditorFactory();
+
   beforeEach(() => {
     uuid.setStatic('local-decision');
   });

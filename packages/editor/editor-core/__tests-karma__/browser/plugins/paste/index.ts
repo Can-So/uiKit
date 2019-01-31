@@ -7,7 +7,7 @@ import {
   doc,
   insertText,
   a as link,
-  createEditor,
+  createEditorFactory,
   p as paragraph,
   dispatchPasteEvent,
   isMobileBrowser,
@@ -20,6 +20,8 @@ import {
 chai.use(chaiPlugin);
 
 describe('paste', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) =>
     createEditor({
       doc,
@@ -51,7 +53,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -75,7 +76,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -99,7 +99,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -122,7 +121,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -147,7 +145,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -173,7 +170,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -197,7 +193,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -220,7 +215,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -240,7 +234,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -263,7 +256,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -286,7 +278,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -310,7 +301,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
     describe('image content', () => {
@@ -326,7 +316,6 @@ describe('paste', () => {
           return this.skip();
         }
         expect(editorView.state.doc).to.deep.equal(doc(paragraph('')));
-        editorView.destroy();
       });
 
       it('should allow pasting of images with url src', function(this: any) {
@@ -351,7 +340,6 @@ describe('paste', () => {
             paragraph(),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -378,7 +366,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -410,7 +397,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
 
@@ -435,7 +421,6 @@ describe('paste', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
     });
   }

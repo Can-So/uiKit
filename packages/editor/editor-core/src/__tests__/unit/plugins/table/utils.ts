@@ -2,7 +2,7 @@ import { isTableSelected } from 'prosemirror-utils';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   td,
@@ -28,8 +28,10 @@ import tablesPlugin from '../../../../plugins/table';
 import { pluginKey } from '../../../../plugins/table/pm-plugins/main';
 
 describe('table plugin: utils', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin()],
       pluginKey,
@@ -52,7 +54,6 @@ describe('table plugin: utils', () => {
           expect(typeof width).toEqual('number');
           expect(width > 0).toBe(true);
         });
-        editorView.destroy();
       });
     });
 
@@ -73,7 +74,6 @@ describe('table plugin: utils', () => {
             expect(typeof width).toEqual('number');
             expect(width > 0).toBe(true);
           });
-          editorView.destroy();
         });
       });
       describe('when merged column does not have cells', () => {
@@ -97,7 +97,6 @@ describe('table plugin: utils', () => {
               expect(width > 0).toBe(true);
             }
           });
-          editorView.destroy();
         });
       });
     });
@@ -121,7 +120,6 @@ describe('table plugin: utils', () => {
           expect(typeof height).toEqual('number');
           expect(height > 0).toBe(true);
         });
-        editorView.destroy();
       });
     });
 
@@ -144,7 +142,6 @@ describe('table plugin: utils', () => {
             expect(typeof height).toEqual('number');
             expect(height > 0).toBe(true);
           });
-          editorView.destroy();
         });
       });
     });
@@ -161,7 +158,6 @@ describe('table plugin: utils', () => {
             isColumnInsertButtonVisible(i, editorView.state.selection),
           ).toBe(true);
         }
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection', () => {
@@ -183,7 +179,6 @@ describe('table plugin: utils', () => {
               isColumnInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
 
@@ -205,7 +200,6 @@ describe('table plugin: utils', () => {
               isColumnInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
 
@@ -233,7 +227,6 @@ describe('table plugin: utils', () => {
               ).toBe(true);
             }
           }
-          editorView.destroy();
         });
       });
       describe('when three columns are selected', () => {
@@ -254,7 +247,6 @@ describe('table plugin: utils', () => {
               isColumnInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
       describe('when table is selected', () => {
@@ -275,7 +267,6 @@ describe('table plugin: utils', () => {
               isColumnInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
     });
@@ -299,7 +290,6 @@ describe('table plugin: utils', () => {
             true,
           );
         }
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection', () => {
@@ -321,7 +311,6 @@ describe('table plugin: utils', () => {
               isRowInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
 
@@ -343,7 +332,6 @@ describe('table plugin: utils', () => {
               isRowInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
 
@@ -371,7 +359,6 @@ describe('table plugin: utils', () => {
               ).toBe(true);
             }
           }
-          editorView.destroy();
         });
       });
       describe('when three rows are selected', () => {
@@ -393,7 +380,6 @@ describe('table plugin: utils', () => {
               isRowInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
       describe('when table is elected', () => {
@@ -414,7 +400,6 @@ describe('table plugin: utils', () => {
               isRowInsertButtonVisible(i, editorView.state.selection),
             ).toBe(true);
           }
-          editorView.destroy();
         });
       });
     });
@@ -429,7 +414,6 @@ describe('table plugin: utils', () => {
         expect(isColumnDeleteButtonVisible(editorView.state.selection)).toBe(
           false,
         );
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection', () => {
@@ -449,7 +433,6 @@ describe('table plugin: utils', () => {
           expect(isColumnDeleteButtonVisible(editorView.state.selection)).toBe(
             false,
           );
-          editorView.destroy();
         });
       });
       describe('when a column is selected', () => {
@@ -468,7 +451,6 @@ describe('table plugin: utils', () => {
           expect(isColumnDeleteButtonVisible(editorView.state.selection)).toBe(
             true,
           );
-          editorView.destroy();
         });
       });
       describe('when table is selected', () => {
@@ -487,7 +469,6 @@ describe('table plugin: utils', () => {
           expect(isColumnDeleteButtonVisible(editorView.state.selection)).toBe(
             false,
           );
-          editorView.destroy();
         });
       });
     });
@@ -502,7 +483,6 @@ describe('table plugin: utils', () => {
         expect(isRowDeleteButtonVisible(editorView.state.selection)).toBe(
           false,
         );
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection', () => {
@@ -522,7 +502,6 @@ describe('table plugin: utils', () => {
           expect(isRowDeleteButtonVisible(editorView.state.selection)).toBe(
             false,
           );
-          editorView.destroy();
         });
       });
       describe('when a row is selected', () => {
@@ -541,7 +520,6 @@ describe('table plugin: utils', () => {
           expect(isRowDeleteButtonVisible(editorView.state.selection)).toBe(
             true,
           );
-          editorView.destroy();
         });
       });
       describe('when table is selected', () => {
@@ -560,7 +538,6 @@ describe('table plugin: utils', () => {
           expect(isRowDeleteButtonVisible(editorView.state.selection)).toBe(
             false,
           );
-          editorView.destroy();
         });
       });
     });
@@ -579,7 +556,6 @@ describe('table plugin: utils', () => {
             editorView.state.selection,
           ),
         ).toBe(null);
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection and 3 columns are selected', () => {
@@ -603,7 +579,6 @@ describe('table plugin: utils', () => {
           )!;
           expect(indexes).toEqual([0, 1, 2]);
           expect(left > 0).toBe(true);
-          editorView.destroy();
         });
       });
       describe('columnsWidths = [100, ,150, ,200]', () => {
@@ -638,7 +613,6 @@ describe('table plugin: utils', () => {
           )!;
           expect(indexes).toEqual([0, 2]);
           expect(left > 0).toBe(true);
-          editorView.destroy();
         });
       });
     });
@@ -661,7 +635,6 @@ describe('table plugin: utils', () => {
         expect(
           getRowDeleteButtonParams(rowsHeights, editorView.state.selection),
         ).toBe(null);
-        editorView.destroy();
       });
     });
     describe('when selection is a CellSelection and 3 rows are selected', () => {
@@ -686,7 +659,6 @@ describe('table plugin: utils', () => {
           )!;
           expect(indexes).toEqual([0, 1, 2]);
           expect(top > 0).toBe(true);
-          editorView.destroy();
         });
       });
       describe('rowsHeights = [100, ,150, ,200]', () => {
@@ -717,7 +689,6 @@ describe('table plugin: utils', () => {
           )!;
           expect(indexes).toEqual([0, 2]);
           expect(top > 0).toBe(true);
-          editorView.destroy();
         });
       });
     });
@@ -847,7 +818,6 @@ describe('table plugin: utils', () => {
             false,
           );
           expect(classNames).toBe('');
-          editorView.destroy();
         });
       });
       describe('when a column is selected', () => {
@@ -970,7 +940,6 @@ describe('table plugin: utils', () => {
             false,
           );
           expect(classNames).toBe('');
-          editorView.destroy();
         });
       });
       describe('when a row is selected', () => {

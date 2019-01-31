@@ -4,7 +4,7 @@ import {
   mediaSingle,
   media,
   randomId,
-  createEditor,
+  createEditorFactory,
 } from '@atlaskit/editor-test-helpers';
 
 import {
@@ -26,6 +26,7 @@ const createMediaState = (
 });
 
 describe('media-single', () => {
+  const createEditor = createEditorFactory();
   const testCollectionName = `media-plugin-mock-collection-${randomId()}`;
   const temporaryFileId = `temporary:${randomId()}`;
   const editor = (doc: any) =>

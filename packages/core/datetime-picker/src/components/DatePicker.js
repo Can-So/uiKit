@@ -26,7 +26,6 @@ import {
   padToTwo,
 } from '../internal';
 import FixedLayer from '../internal/FixedLayer';
-import type { Event } from '../types';
 
 /* eslint-disable react/no-unused-prop-types */
 type Props = {
@@ -90,14 +89,18 @@ type State = {
   inputValue: string,
 };
 
-function isoToObj(iso: string) {
-  const parsed = parse(iso);
-  if (!isValid(parsed)) return {};
+function getDateObj(date: Date) {
   return {
-    day: parsed.getDate(),
-    month: parsed.getMonth() + 1,
-    year: parsed.getFullYear(),
+    day: date.getDate(),
+    month: date.getMonth() + 1,
+    year: date.getFullYear(),
   };
+}
+
+function getValidDate(iso: string) {
+  const date = parse(iso);
+
+  return isValid(date) ? getDateObj(date) : {};
 }
 
 const arrowKeys = {
@@ -117,8 +120,8 @@ const StyledMenu = styled.div`
 const Menu = ({ innerProps: menuInnerProps, selectProps }: Object) => (
   <StyledMenu>
     <Calendar
-      {...isoToObj(selectProps.calendarValue)}
-      {...isoToObj(selectProps.calendarView)}
+      {...getValidDate(selectProps.calendarValue)}
+      {...getValidDate(selectProps.calendarView)}
       disabled={selectProps.calendarDisabled}
       onChange={selectProps.onCalendarChange}
       onSelect={selectProps.onCalendarSelect}
@@ -170,10 +173,9 @@ class DatePicker extends Component<Props, State> {
 
   constructor(props: any) {
     super(props);
-    const now = new Date();
-    const thisDay = now.getDate();
-    const thisMonth = now.getMonth() + 1;
-    const thisYear = now.getFullYear();
+
+    const { day, month, year } = getDateObj(new Date());
+
     this.state = {
       isOpen: this.props.defaultIsOpen,
       inputValue: this.props.selectProps.inputValue,
@@ -182,7 +184,7 @@ class DatePicker extends Component<Props, State> {
       view:
         this.props.value ||
         this.props.defaultValue ||
-        `${thisYear}-${padToTwo(thisMonth)}-${padToTwo(thisDay)}`,
+        `${year}-${padToTwo(month)}-${padToTwo(day)}`,
     };
   }
 
@@ -218,46 +220,53 @@ class DatePicker extends Component<Props, State> {
     this.setState({ view: newIso });
   };
 
-  onCalendarSelect = ({ iso: value }: { iso: string }) => {
-    this.setState({ isOpen: false, selectedValue: value, inputValue: '' });
-    this.triggerChange(value);
+  onCalendarSelect = ({ iso }: { iso: string }) => {
+    this.setState({
+      inputValue: '',
+      isOpen: false,
+      selectedValue: iso,
+      view: iso,
+      value: iso,
+    });
+
+    this.props.onChange(iso);
   };
 
   onInputClick = () => {
     if (!this.getState().isOpen) this.setState({ isOpen: true });
   };
 
-  onSelectBlur = (e: SyntheticFocusEvent<>) => {
+  onSelectBlur = (e: SyntheticFocusEvent<HTMLInputElement>) => {
     this.setState({ isOpen: false });
     this.props.onBlur(e);
   };
 
-  onSelectFocus = (e: SyntheticFocusEvent<>) => {
+  onSelectFocus = (e: SyntheticFocusEvent<HTMLInputElement>) => {
     this.setState({ isOpen: true });
     this.props.onFocus(e);
   };
 
-  onSelectInput = (e: Event) => {
-    let value = e.target.value;
+  onSelectInput = (e: SyntheticInputEvent<HTMLInputElement>) => {
+    const { value } = e.target;
     const { dateFormat, parseInputValue } = this.props;
+
     if (value) {
       const parsed = parseInputValue(value, dateFormat);
       // Only try to set the date if we have month & day
       if (isValid(parsed)) {
         // We format the parsed date to YYYY-MM-DD here because
         // this is the format expected by the @atlaskit/calendar component
-        const calendarFormat = 'YYYY-MM-DD';
-        value = format(parsed, calendarFormat);
-        this.triggerChange(value);
+        this.setState({ view: format(parsed, 'YYYY-MM-DD') });
       }
     }
+
     this.setState({ isOpen: true });
   };
 
-  onSelectKeyDown = (e: Event) => {
-    const { key } = e;
+  onSelectKeyDown = (e: SyntheticKeyboardEvent<*>) => {
+    const { key, target } = e;
+    const { view, selectedValue } = this.getState();
     const dir = arrowKeys[key];
-    const { view } = this.getState();
 
     if (dir) {
       // Calendar will not exist if it's not open and this also doubles as a
@@ -267,25 +276,38 @@ class DatePicker extends Component<Props, State> {
         if (dir === 'left' || dir === 'right') {
           e.preventDefault();
         }
+
         this.calendar.navigate(dir);
-      } else if (dir === 'down' || dir === 'up') {
+      }
+
+      if (dir === 'down' || dir === 'up') {
         this.setState({ isOpen: true });
       }
     } else if (key === 'Escape') {
       this.setState({ isOpen: false });
-    } else if (key === 'Backspace') {
-      this.setState({ selectedValue: '' });
-      this.triggerChange('');
-
+    } else if (
+      key === 'Backspace' &&
+      selectedValue &&
+      target instanceof HTMLInputElement &&
+      target.value.length < 1
+    ) {
+      this.setState({
+        selectedValue: '',
+        value: '',
+        view: this.props.defaultValue || format(new Date(), 'YYYY-MM-DD'),
+      });
+      this.props.onChange('');
       // Dates may be disabled
     } else if (!this.isDateDisabled(view)) {
       if (key === 'Enter') {
-        this.triggerChange(view);
         this.setState({
+          inputValue: '',
           isOpen: false,
           selectedValue: view,
-          inputValue: '',
+          value: view,
+          view,
         });
+        this.props.onChange(view);
       }
 
       if (key === 'Tab') {
@@ -304,11 +326,6 @@ class DatePicker extends Component<Props, State> {
     this.setState({ inputValue });
   };
 
-  triggerChange = (value: string) => {
-    this.props.onChange(value);
-    this.setState({ value, view: value });
-  };
-
   getContainerRef = (ref: ?HTMLElement) => {
     const oldRef = this.containerRef;
     this.containerRef = ref;
@@ -319,36 +336,40 @@ class DatePicker extends Component<Props, State> {
     }
   };
 
-  getSubtleControlStyles = () => {
-    return {
-      border: `2px solid ${
-        this.getState().isOpen ? `${colors.B100}` : `transparent`
-      }`,
-      backgroundColor: 'transparent',
-      padding: '1px',
-    };
-  };
+  getSubtleControlStyles = (isOpen: boolean) => ({
+    border: `2px solid ${isOpen ? colors.B100 : `transparent`}`,
+    backgroundColor: 'transparent',
+    padding: '1px',
+  });
+
+  isValidDate(value: string): boolean {
+    const { parseInputValue, dateFormat } = this.props;
+    const date = parseInputValue(value, dateFormat);
+
+    return isValid(date);
+  }
 
   render() {
     const {
+      appearance,
       autoFocus,
+      dateFormat,
       disabled,
       formatDisplayLabel,
+      hideIcon,
+      icon,
       id,
       innerProps,
       isDisabled,
+      isInvalid,
       name,
+      placeholder,
       selectProps,
       spacing,
-      dateFormat,
-      placeholder,
     } = this.props;
     const { value, view, isOpen, inputValue } = this.getState();
-    const validationState = this.props.isInvalid ? 'error' : 'default';
-    const icon =
-      this.props.appearance === 'subtle' || this.props.hideIcon
-        ? null
-        : this.props.icon;
+    const validationState = isInvalid ? 'error' : 'default';
+    const dropDownIcon = appearance === 'subtle' || hideIcon ? null : icon;
 
     const calendarProps = {
       calendarContainerRef: this.containerRef,
@@ -356,7 +377,7 @@ class DatePicker extends Component<Props, State> {
       calendarDisabled: disabled,
       calendarValue: value,
       calendarView: view,
-      dropdownIndicatorIcon: icon,
+      dropdownIndicatorIcon: dropDownIcon,
       onCalendarChange: this.onCalendarChange,
       onCalendarSelect: this.onCalendarSelect,
       selectedCalendarValue: this.state.selectedValue,
@@ -364,7 +385,7 @@ class DatePicker extends Component<Props, State> {
 
     const { styles: selectStyles = {} } = selectProps;
     const controlStyles =
-      this.props.appearance === 'subtle' ? this.getSubtleControlStyles() : {};
+      appearance === 'subtle' ? this.getSubtleControlStyles(isOpen) : {};
     const disabledStyle = isDisabled ? { pointerEvents: 'none' } : {};
 
     return (

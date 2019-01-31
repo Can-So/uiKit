@@ -1,9 +1,4 @@
-import React, {
-  Children,
-  cloneElement,
-  isValidElement,
-  ReactElement,
-} from 'react';
+import * as React from 'react';
 import { gridSize, typography } from '@atlaskit/theme';
 import styled from 'styled-components';
 
@@ -20,14 +15,16 @@ const SectionTitle = styled.h1`
 type Props = {
   title: string;
   isAdmin?: boolean;
-  children: ReactElement<any>[];
+  children: React.ReactElement<any>[] | null;
 };
 export default ({ title, isAdmin = false, children }: Props) => {
-  const childrenWithIsAdmin = Children.map(
+  const childrenWithIsAdmin = React.Children.map(
     children,
     child =>
-      isValidElement(child) &&
-      cloneElement(child as ReactElement<any>, { isAdmin: isAdmin }),
+      React.isValidElement(child) &&
+      React.cloneElement(child as React.ReactElement<any>, {
+        isAdmin: isAdmin,
+      }),
   );
 
   return (

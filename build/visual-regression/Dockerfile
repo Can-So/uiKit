@@ -1,4 +1,4 @@
-FROM atlassianlabs/atlaskit-mk-2-vr:1.0.6
+FROM atlassianlabs/atlaskit-mk-2-vr:1.0.8
 EXPOSE 9222
 
 ENV NODE_PATH="/usr/local/share/.config/yarn/global/node_modules:${NODE_PATH}"

@@ -2,7 +2,7 @@ import {
   doc,
   hr,
   insertText,
-  createEditor,
+  createEditorFactory,
   p,
   code_block,
   hardBreak,
@@ -12,6 +12,8 @@ import rulePlugin from '../../../../plugins/rule';
 import codeBlockPlugin from '../../../../plugins/code-block';
 
 describe('inputrules', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent = () => {}) =>
     createEditor({
       doc,

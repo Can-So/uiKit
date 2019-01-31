@@ -3,7 +3,7 @@ import { selectTable, getSelectionRect } from 'prosemirror-utils';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   table,
   tr,
   tdEmpty,
@@ -29,8 +29,10 @@ const InsertColumnButton = `.${ClassName.CONTROLS_INSERT_BUTTON_WRAP}`;
 const InsertColumnButtonInner = `.${ClassName.CONTROLS_INSERT_BUTTON_INNER}`;
 
 describe('ColumnControls', () => {
+  const createEditor = createEditorFactory<TablePluginState>();
+
   const editor = (doc: any) =>
-    createEditor<TablePluginState>({
+    createEditor({
       doc,
       editorPlugins: [tablesPlugin()],
       pluginKey,

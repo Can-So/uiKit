@@ -7,13 +7,15 @@ import {
 import {
   a,
   doc,
-  createEditor,
+  createEditorFactory,
   p,
   insertText,
 } from '@atlaskit/editor-test-helpers';
 import { setTextSelection } from '../../../../../utils';
 
 describe('hyperlink', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,

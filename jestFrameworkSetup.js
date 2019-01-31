@@ -104,12 +104,6 @@ if (typeof window !== 'undefined' && !('cancelAnimationFrame' in window)) {
   };
 }
 
-function isNodeOrFragment(thing) {
-  // Using a simple `instanceof` check is intentionally avoided here to make
-  // this code agnostic to a specific instance of a Schema.
-  return thing && typeof thing.eq === 'function';
-}
-
 function transformDoc(fn) {
   return doc => {
     const walk = fn => node => {
@@ -343,8 +337,7 @@ if (process.env.VISUAL_REGRESSION) {
     await global.browser.disconnect();
   });
 
-  // TODO tweak failureThreshold to provide best results
-  // TODO: A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
+  // A failureThreshold of 1 will pass tests that have > 2 percent failing pixels
   const customConfig = { threshold: 0.5 };
   const toMatchProdImageSnapshot = configureToMatchImageSnapshot({
     customDiffConfig: customConfig,

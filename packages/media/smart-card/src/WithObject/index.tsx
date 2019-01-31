@@ -8,6 +8,7 @@ import {
 } from '@atlaskit/media-ui';
 import { WithAnalyticsEventProps } from '@atlaskit/analytics-next-types';
 import { GasPayload } from '@atlaskit/analytics-gas-types';
+import { ANALYTICS_CHANNEL } from '../analytics';
 
 export interface WithObjectRenderProps {
   state: ObjectState;
@@ -39,7 +40,7 @@ class InnerWithObject extends React.Component<
   private fireAnalyticsEvent = (payload: GasPayload) => {
     const { createAnalyticsEvent } = this.props;
     if (createAnalyticsEvent) {
-      createAnalyticsEvent(payload).fire();
+      createAnalyticsEvent(payload).fire(ANALYTICS_CHANNEL);
     }
   };
 

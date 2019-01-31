@@ -1,22 +1,23 @@
 import { Component, ReactNode } from 'react';
 
-interface ChildrenProps {
-  data: any;
+interface ChildrenProps<DataStructure> {
+  data: null | DataStructure;
   isLoading: boolean;
   error: any;
 }
 
-export interface DataProviderProps {
-  children: (props: ChildrenProps) => ReactNode | string;
+export interface DataProviderProps<DataStructure> {
+  children: (props: ChildrenProps<DataStructure>) => ReactNode | string;
 }
 
-export interface MapPropsToPromiseSignature<T> {
-  (props: T): Promise<any> | any;
+export interface MapPropsToPromiseSignature<T, DataStructure> {
+  (props: T): Promise<DataStructure> | DataStructure;
 }
 
-export default function<T extends DataProviderProps>(
-  mapPropsToPromise: MapPropsToPromiseSignature<T>,
-) {
+export default function<
+  T extends DataProviderProps<DataStructure>,
+  DataStructure
+>(mapPropsToPromise: MapPropsToPromiseSignature<T, DataStructure>) {
   return class extends Component<T> {
     state = {
       isLoading: true,
@@ -28,7 +29,7 @@ export default function<T extends DataProviderProps>(
       const dataSource = mapPropsToPromise(this.props);
       if (dataSource instanceof Promise) {
         dataSource
-          .then(result => {
+          .then((result: DataStructure) => {
             this.setState({
               data: result,
               isLoading: false,

@@ -7,7 +7,9 @@ const jest = require('jest');
 const meow = require('meow');
 
 const webpack = require('./utils/webpack');
-const reportTestFailures = require('./reporting');
+const reporting = require('./reporting');
+
+const LONG_RUNNING_TESTS_THRESHOLD_SECS = 70;
 
 /*
  * function main() to
@@ -48,6 +50,7 @@ async function runJest(testPaths) {
     },
     [process.cwd()],
   );
+
   return status.results;
 }
 
@@ -88,10 +91,32 @@ function runTestsWithRetry() {
     let results;
     try {
       results = await runJest();
+      const perfStats = results.testResults
+        .filter(result => {
+          const timeTaken =
+            (result.perfStats.end - result.perfStats.start) / 3600;
+          return timeTaken > LONG_RUNNING_TESTS_THRESHOLD_SECS;
+        })
+        .map(result => {
+          return {
+            testFilePath: result.testFilePath.replace(process.cwd(), ''),
+            timeTaken: +(
+              (result.perfStats.end - result.perfStats.start) /
+              3600
+            ).toFixed(2),
+          };
+        });
+
+      if (perfStats.length) {
+        await reporting.reportLongRunningTests(
+          perfStats,
+          LONG_RUNNING_TESTS_THRESHOLD_SECS,
+        );
+      }
+
       code = getExitCode(results);
       // Only retry and report results in CI.
       if (code !== 0 && process.env.CI) {
-        reportTestFailures(results, 'atlaskit.qa.integration_test.failure');
         results = await rerunFailedTests(results);
         code = getExitCode(results);
       }
@@ -101,7 +126,15 @@ function runTestsWithRetry() {
        * log the previously failed tests to indicate flakiness
        */
       if (code === 0 && process.env.CI) {
-        reportTestFailures(results, 'atlaskit.qa.integration_test.flakiness');
+        reporting.reportFailure(
+          results,
+          'atlaskit.qa.integration_test.flakiness',
+        );
+      } else if (code !== 0 && process.env.CI) {
+        reporting.reportFailure(
+          results,
+          'atlaskit.qa.integration_test.testfailure',
+        );
       }
     } catch (err) {
       console.error(err.toString());

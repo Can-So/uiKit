@@ -1,5 +1,15 @@
 # @atlaskit/editor-mobile-bridge
 
+## 6.7.10
+- [patch] [557a2b5734](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/557a2b5734):
+
+  - ED-5788: bump prosemirror-view and prosemirror-model
+
+## 6.7.9
+- [patch] [01935688f8](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/01935688f8):
+
+  - FM-1494: turned off CSS properties overflow and overflow-scrolling
+
 ## 6.7.8
 - Updated dependencies [69c8d0c19c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69c8d0c19c):
   - @atlaskit/editor-common@31.0.0

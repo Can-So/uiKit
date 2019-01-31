@@ -1,7 +1,7 @@
 import { browser } from '@atlaskit/editor-common';
 import { pluginKey } from '../../../../plugins/lists/pm-plugins/main';
 import {
-  createEditor,
+  createEditorFactory,
   sendKeyToPm,
   doc,
   h1,
@@ -24,6 +24,8 @@ import { insertMediaAsMediaSingle } from '../../../../plugins/media/utils/media-
 import { GapCursorSelection } from '../../../../plugins/gap-cursor';
 
 describe('lists', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent?: () => {}) =>
     createEditor({
       doc,
@@ -1284,7 +1286,6 @@ describe('lists', () => {
             ),
           ),
         );
-        editorView.destroy();
       });
 
       it('should not add non images inside lists', () => {

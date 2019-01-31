@@ -3,7 +3,7 @@ import AkButton from '@atlaskit/button';
 import {
   doc,
   p,
-  createEditor,
+  createEditorFactory,
   mountWithIntl,
 } from '@atlaskit/editor-test-helpers';
 import { analyticsService } from '../../../../../analytics';
@@ -15,8 +15,10 @@ import {
 import ToolbarTextFormatting from '../../../../../plugins/text-formatting/ui/ToolbarTextFormatting';
 
 describe('ToolbarTextFormatting', () => {
+  const createEditor = createEditorFactory<TextFormattingState>();
+
   const editor = (doc: any) =>
-    createEditor<TextFormattingState>({
+    createEditor({
       doc,
       pluginKey: pluginKey,
     });

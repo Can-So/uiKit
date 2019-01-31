@@ -1,5 +1,12 @@
 # @atlaskit/media-picker
 
+## 32.0.1
+- [patch] [6ead14f4eb](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/6ead14f4eb):
+
+  - Move Async module loading of EditorView into media-editor component.
+- Updated dependencies [79e21779d4](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/79e21779d4):
+  - @atlaskit/media-editor@27.0.0
+
 ## 32.0.0
 - [minor] [4e82fedc90](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/4e82fedc90):
 

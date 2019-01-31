@@ -1,6 +1,6 @@
 {
   "name": "@atlaskit/media-editor",
-  "version": "26.0.0",
+  "version": "27.0.0",
   "description": "Media component for image annotations",
   "license": "Apache-2.0",
   "main": "dist/es5/index.js",

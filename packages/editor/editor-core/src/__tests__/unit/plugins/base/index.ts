@@ -1,18 +1,20 @@
 import {
   compareSelection,
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   sendKeyToPm,
 } from '@atlaskit/editor-test-helpers';
 import tasksAndDecisionsPlugin from '../../../../plugins/tasks-and-decisions';
-const editorFactory = (doc: any) =>
-  createEditor({
-    doc,
-    editorPlugins: [tasksAndDecisionsPlugin],
-  });
 
 describe('Delete', () => {
+  const createEditor = createEditorFactory();
+  const editorFactory = (doc: any) =>
+    createEditor({
+      doc,
+      editorPlugins: [tasksAndDecisionsPlugin],
+    });
+
   it(`should merge paragraph and preserve content`, () => {
     const { editorView } = editorFactory(doc(p('Hello{<>}'), p('World')));
 

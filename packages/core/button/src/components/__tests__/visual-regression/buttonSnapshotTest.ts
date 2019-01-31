@@ -3,6 +3,7 @@ import {
   takeScreenShot,
 } from '@atlaskit/visual-regression/helper';
 
+// add some comments
 describe('Snapshot Test', () => {
   it('ButtonAppearances should match snapshot', async () => {
     const url = getExampleUrl(

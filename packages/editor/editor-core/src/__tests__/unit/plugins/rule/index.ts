@@ -1,7 +1,7 @@
 import {
   doc,
   hr,
-  createEditor,
+  createEditorFactory,
   p,
   sendKeyToPm,
   bodiedExtension,
@@ -11,6 +11,8 @@ import rulePlugin from '../../../../plugins/rule';
 import extensionPlugin from '../../../../plugins/extension';
 
 describe('rule', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any, trackEvent = () => {}) =>
     createEditor({
       doc,

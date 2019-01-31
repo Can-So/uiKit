@@ -12,5 +12,7 @@ describe('@atlaskit/editor-core/editor/plugins/FullPage', () => {
       <Editor editorDOMElement={<div />} providerFactory={providerFactory} />,
     );
     expect(editor).to.not.equal(undefined);
+    editor.unmount();
+    providerFactory.destroy();
   });
 });

@@ -1,6 +1,6 @@
 import {
   compareSelection,
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   decisionList,
@@ -21,6 +21,8 @@ import mentionsPlugin from '../../../../plugins/mentions';
 import tablesPlugin from '../../../../plugins/table';
 
 describe('tasks and decisions - keymaps', () => {
+  const createEditor = createEditorFactory();
+
   beforeEach(() => {
     uuid.setStatic('local-uuid');
   });

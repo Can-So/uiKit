@@ -1,7 +1,7 @@
 import { floatingToolbar } from '../../../../plugins/card/toolbar';
 import { IntlProvider } from 'react-intl';
 import {
-  createEditor,
+  createEditorFactory,
   doc,
   p,
   inlineCard,
@@ -17,6 +17,8 @@ import { setNodeSelection } from '../../../../utils';
 import { Command } from '../../../../types';
 
 describe('card', () => {
+  const createEditor = createEditorFactory();
+
   const editor = (doc: any) => {
     return createEditor({
       doc,
