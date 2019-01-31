@@ -4,6 +4,7 @@ import {
   AppSwitcherItem,
   Section,
   ManageButton,
+  Skeleton,
 } from '../primitives';
 import { CustomLinksProvider } from '../providers/jira-data-providers';
 import {
@@ -11,6 +12,7 @@ import {
   LicenseInformationProvider,
 } from '../providers/instance-data-providers';
 import { WithCloudId, RecentContainer, CustomLink } from '../types';
+
 export default ({ cloudId }: WithCloudId) => {
   return (
     <RecentContainersProvider cloudId={cloudId}>
@@ -27,8 +29,7 @@ export default ({ cloudId }: WithCloudId) => {
               }) => (
                 <AppSwitcherWrapper>
                   {isLoadingRecentContainers ? (
-                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
-                    'Loading Recent Containers...'
+                    <Skeleton />
                   ) : (
                     <Section title="Recent Containers">
                       {recentContainersData &&
@@ -42,8 +43,7 @@ export default ({ cloudId }: WithCloudId) => {
                     </Section>
                   )}
                   {isLoadingCustomLinks ? (
-                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
-                    'Loading Custom Links...'
+                    <Skeleton />
                   ) : (
                     <Section title="Custom Links">
                       {customLinksData &&
@@ -53,8 +53,7 @@ export default ({ cloudId }: WithCloudId) => {
                     </Section>
                   )}
                   {isLoadingLicenseInformation ? (
-                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
-                    'Loading License Information...'
+                    <Skeleton />
                   ) : (
                     <Section title="License Information">
                       {licenseInformationData &&
