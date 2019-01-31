@@ -9,8 +9,8 @@ async function getPackagesInfo(cwd /*: string */) {
 
   return await Promise.all(
     packages.map(async pkg => {
+      let measurePackagesExists = await exists(path.join(pkg.dir, 'packages'));
       let relativeDir = path.relative(project.dir, pkg.dir);
-
       let srcExists = await exists(path.join(pkg.dir, 'src'));
       let tsConfigExists = await exists(path.join(pkg.dir, 'tsconfig.json'));
       let tslintConfigExists = await exists(path.join(pkg.dir, 'tslint.json'));
@@ -43,6 +43,8 @@ async function getPackagesInfo(cwd /*: string */) {
       let isFlow = isBabel || isWebsitePackage;
       let isESLint = isBabel || isWebsitePackage;
 
+      let isMeasure = measurePackagesExists;
+
       let isKarma = testBrowserExists || hasKarmaDep;
       let isBrowserStack = isKarma;
       let isStylelint = srcExists && isBrowserPackage;
@@ -54,6 +56,7 @@ async function getPackagesInfo(cwd /*: string */) {
         name: pkg.name,
         config: pkg.config,
         relativeDir,
+        isMeasure,
         isTypeScript,
         isTSLint,
         isBabel,
@@ -77,6 +80,7 @@ const TOOL_NAME_TO_FILTERS /*: { [key: string]: (pkg: Object) => boolean } */ = 
   eslint: pkg => pkg.isESLint,
   karma: pkg => pkg.isKarma,
   browserstack: pkg => pkg.isBrowserStack,
+  measure: pkg => pkg.isMeasure,
   stylelint: pkg => pkg.isStylelint,
   webdriver: pkg => pkg.isWebdriver,
   vr: pkg => pkg.isVisualRegression,
