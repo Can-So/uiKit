@@ -12,11 +12,8 @@ const LONG_RUNNING_TESTS_THRESHOLD_SECS = 70;
 
 /*
  * function main() to
- * start and stop webpack-dev-server, selenium-standalone-server, browserstack connections
- * and run and wait for webdriver tests complete
- *
- * By default the tests are running headlessly, set HEADLESS=false if you want to run them directly on real browsers.
- * if WATCH= true, by default, it will start chrome.
+ * start and stop webpack-dev-server
+ * and run tests
  */
 
 process.env.NODE_ENV = 'test';
@@ -135,18 +132,11 @@ function runTestsWithRetry() {
 }
 
 async function main() {
-  const serverAlreadyRunning = await isReachable('http://localhost:9000');
-
-  if (!serverAlreadyRunning) {
-    await webpack.startDevServer();
-  }
-
+  await webpack.startDevServer();
+  await isReachable('http://localhost:9000');
   const code = await runTestsWithRetry();
-
   console.log(`Exiting tests with exit code: ${+code}`);
-  if (!serverAlreadyRunning) {
-    webpack.stopDevServer();
-  }
+  await webpack.stopDevServer();
   process.exit(code);
 }
 
