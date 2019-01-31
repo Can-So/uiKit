@@ -69,7 +69,7 @@ pipelines:
             script:
               - source ./build-setup.sh
               - bolt install --pure-lockfile
-              - node build/ci-scripts/run.tool.if.changed.js measure -- yarn measure:changed
+              - bolt measure:changed
             caches:
               - node
         - step:
