@@ -54,6 +54,10 @@ const fixTable = (
     }
   }
 
+  if (!rows.length) {
+    return tr;
+  }
+
   const newTable = table.type.createChecked(table.attrs, rows, table.marks);
   return tr.replaceWith(tablePos, tablePos + table.nodeSize, newTable);
 };
