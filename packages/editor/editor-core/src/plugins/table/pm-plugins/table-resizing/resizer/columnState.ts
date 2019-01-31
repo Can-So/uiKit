@@ -30,9 +30,10 @@ export default class ColumnState {
     table: HTMLElement,
     colIdx: number,
     minWidth: number,
+    existingWidth?: number,
   ): ColumnState {
     let minColWidth = minWidth;
-    const width = calculateColWidth(table, colIdx);
+    const width = existingWidth || calculateColWidth(table, colIdx);
 
     const wrapWidth = calculateColWidth(table, colIdx, (col, computedStyle) => {
       const borderWidth = computedStyle

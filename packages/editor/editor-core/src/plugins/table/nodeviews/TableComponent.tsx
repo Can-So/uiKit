@@ -240,13 +240,14 @@ class TableComponent extends React.Component<ComponentProps> {
 
     const prevColCount = prevProps.node.firstChild!.childCount;
     const currentColCount = node.firstChild!.childCount;
-
     if (
       prevColCount !== currentColCount ||
       prevAttrs.layout !== currentAttrs.layout ||
       prevAttrs.isNumberColumnEnabled !== currentAttrs.isNumberColumnEnabled ||
       prevAttrs.__autoSize !== currentAttrs.__autoSize ||
-      prevProps.containerWidth !== containerWidth
+      prevProps.containerWidth !== containerWidth ||
+      // Force resizing when another collab session changes the table size.
+      prevProps.node.eq(this.props.node) === false
     ) {
       scaleTable(
         view,

@@ -254,10 +254,9 @@ function scale(
   if (hasTableBeenResized(node)) {
     const resizer = Resizer.fromDOM(tableElem, {
       minWidth: tableCellMinWidth,
-      maxSize: tableElem.offsetWidth,
+      maxSize: tableElem.offsetWidth || maxSize,
       node,
     });
-
     return resizer.scale(maxSize);
   } else {
     // If its not a re-sized table, we still want to re-create cols

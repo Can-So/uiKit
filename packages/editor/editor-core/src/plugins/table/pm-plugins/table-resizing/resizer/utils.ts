@@ -123,7 +123,7 @@ export const calculateColWidth = (
 
 export const unitToNumber = (unit: string | null) => {
   if (unit) {
-    return Number(unit.slice(0, unit.length - 2));
+    return parseFloat(unit);
   }
   return 0;
 };
