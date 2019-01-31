@@ -9,7 +9,7 @@ const PlaceholderIconContainer = styled.div`
   line-height: 0;
 `;
 
-const showUserAvatar = (inputValue, value) =>
+const showUserAvatar = (inputValue: string, value?: any) =>
   value && value.option && inputValue === value.label;
 
 export class SingleValueContainer extends React.Component<any> {
@@ -31,6 +31,7 @@ export class SingleValueContainer extends React.Component<any> {
         />
       );
     }
+    return null;
   };
 
   render() {

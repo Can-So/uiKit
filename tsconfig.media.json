@@ -3,6 +3,7 @@
       "allowJs": false,
       "alwaysStrict": true,
       "declaration": true,
+      "downlevelIteration": true,
       "experimentalDecorators": true,
       "importHelpers": true,
       "jsx": "react",

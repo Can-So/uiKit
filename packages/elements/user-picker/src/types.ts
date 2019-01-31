@@ -109,7 +109,7 @@ export interface Team extends OptionData {
   type: 'team';
 }
 
-export type Value = OptionData | Array<OptionData> | null | undefined;
+export type Value = OptionData | OptionData[] | null | undefined;
 
 export type ActionTypes =
   | 'select-option'

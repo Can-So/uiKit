@@ -6,8 +6,6 @@ import JiraQuickSearchContainer from './jira/JiraQuickSearchContainer';
 import configureSearchClients, { Config } from '../api/configureSearchClients';
 import MessagesIntlProvider from './MessagesIntlProvider';
 
-const memoizeOneTyped: <T extends Function>(func: T) => T = memoizeOne;
-
 const DEFAULT_NOOP_LOGGER: Logger = {
   safeInfo() {},
   safeWarn() {},
@@ -119,7 +117,7 @@ export default class GlobalQuickSearchWrapper extends React.Component<Props> {
     logger: DEFAULT_NOOP_LOGGER,
   };
   // configureSearchClients is a potentially expensive function that we don't want to invoke on re-renders
-  memoizedConfigureSearchClients = memoizeOneTyped(configureSearchClients);
+  memoizedConfigureSearchClients = memoizeOne(configureSearchClients);
 
   private makeConfig() {
     const config: Partial<Config> = {};

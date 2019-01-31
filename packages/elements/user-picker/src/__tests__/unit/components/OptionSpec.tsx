@@ -19,7 +19,7 @@ describe('Option', () => {
     name: 'That Awesome team',
     type: 'team',
   };
-  const shallowOption = props => shallow(<Option {...props} />);
+  const shallowOption = (props: any) => shallow(<Option {...props} />);
 
   it('should render Option with UserOption', () => {
     const component = shallowOption({

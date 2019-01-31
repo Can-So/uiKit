@@ -4,7 +4,7 @@ jest.mock('../../../components/styles', () => ({
 
 import { AnalyticsListener } from '@atlaskit/analytics-next';
 import Select from '@atlaskit/select';
-import { mount, shallow } from 'enzyme';
+import { mount, ReactWrapper, shallow } from 'enzyme';
 import * as debounce from 'lodash.debounce';
 import * as React from 'react';
 import { getStyles } from '../../../components/styles';
@@ -564,7 +564,7 @@ describe('UserPicker', () => {
 
   describe('analytics', () => {
     const onEvent = jest.fn();
-    let component;
+    let component: ReactWrapper;
 
     const AnalyticsTestComponent = (props: Partial<UserPickerProps>) => (
       <AnalyticsListener channel="fabric-elements" onEvent={onEvent}>
@@ -616,7 +616,7 @@ describe('UserPicker', () => {
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 38 });
       input.simulate('keyDown', { keyCode: 13 });
-      component.find(Select).prop('onChange')(
+      component.find<any>(Select).prop('onChange')(
         optionToSelectableOption(options[0]),
         {
           action: 'select-option',
@@ -655,7 +655,7 @@ describe('UserPicker', () => {
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 40 });
       input.simulate('keyDown', { keyCode: 38 });
-      component.find(Select).prop('onChange')(
+      component.find<any>(Select).prop('onChange')(
         optionToSelectableOption(options[0]),
         {
           action: 'select-option',
@@ -689,7 +689,7 @@ describe('UserPicker', () => {
     it('should trigger cleared event', () => {
       const input = component.find('input');
       input.simulate('focus');
-      component.find(Select).prop('onChange')(
+      component.find<any>(Select).prop('onChange')(
         optionToSelectableOption(options[0]),
         {
           action: 'clear',
@@ -719,7 +719,7 @@ describe('UserPicker', () => {
       component.setProps({ isMulti: true });
       const input = component.find('input');
       input.simulate('focus');
-      component.find(Select).prop('onChange')([], {
+      component.find<any>(Select).prop('onChange')([], {
         action: 'remove-value',
         removedValue: optionToSelectableOption(options[0]),
       });
