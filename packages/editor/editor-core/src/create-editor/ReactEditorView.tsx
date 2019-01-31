@@ -91,6 +91,7 @@ export default class ReactEditorView<T = {}> extends React.Component<
         attributes: {
           platform: 'web',
         },
+        eventType: 'ui',
       },
     });
     initAnalytics(props.editorProps.analyticsHandler);

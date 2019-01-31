@@ -79,106 +79,101 @@ export class CommentEditorWithFeedback extends React.Component<Props, State> {
     }
 
     return (
-      <AnalyticsListener
-        channel="fabric-editor"
-        onEvent={({ payload }) => console.log('analytics-next event:', payload)}
-      >
-        <EditorContext>
-          <div>
-            <WithEditorActions
-              render={actions => (
-                <ButtonGroup>
-                  <Button
-                    onClick={() =>
-                      actions.replaceDocument(
-                        this.props.replacementDoc || exampleDocument,
-                      )
-                    }
-                  >
-                    Load Document
-                  </Button>
-                  <Button onClick={() => actions.clear()}>Clear</Button>
-                </ButtonGroup>
-              )}
-            />
-            <ToolsDrawer
-              renderEditor={({
-                mentionProvider,
-                emojiProvider,
-                mediaProvider,
-                activityProvider,
-                taskDecisionProvider,
-                contextIdentifierProvider,
-                onChange,
-                disabled,
-                enabledFeatures,
-              }) => (
-                <div style={{ padding: '20px' }}>
-                  <CollapsedEditor
+      <EditorContext>
+        <div>
+          <WithEditorActions
+            render={actions => (
+              <ButtonGroup>
+                <Button
+                  onClick={() =>
+                    actions.replaceDocument(
+                      this.props.replacementDoc || exampleDocument,
+                    )
+                  }
+                >
+                  Load Document
+                </Button>
+                <Button onClick={() => actions.clear()}>Clear</Button>
+              </ButtonGroup>
+            )}
+          />
+          <ToolsDrawer
+            renderEditor={({
+              mentionProvider,
+              emojiProvider,
+              mediaProvider,
+              activityProvider,
+              taskDecisionProvider,
+              contextIdentifierProvider,
+              onChange,
+              disabled,
+              enabledFeatures,
+            }) => (
+              <div style={{ padding: '20px' }}>
+                <CollapsedEditor
+                  placeholder="What do you want to say?"
+                  isExpanded={this.state.isExpanded}
+                  onFocus={this.onFocus}
+                  onExpand={EXPAND_ACTION}
+                >
+                  <Editor
+                    appearance="comment"
                     placeholder="What do you want to say?"
-                    isExpanded={this.state.isExpanded}
-                    onFocus={this.onFocus}
-                    onExpand={EXPAND_ACTION}
-                  >
-                    <Editor
-                      appearance="comment"
-                      placeholder="What do you want to say?"
-                      analyticsHandler={analyticsHandler}
-                      shouldFocus={true}
-                      quickInsert={true}
-                      allowCodeBlocks={true}
-                      allowTextColor={true}
-                      allowLists={true}
-                      allowRule={true}
-                      allowTables={true}
-                      allowHelpDialog={true}
-                      disabled={disabled}
-                      activityProvider={activityProvider}
-                      mentionProvider={mentionProvider}
-                      emojiProvider={emojiProvider}
-                      media={{
-                        provider: mediaProvider,
-                        allowMediaSingle: enabledFeatures.imageResizing,
-                        allowResizing: enabledFeatures.imageResizing,
-                      }}
-                      allowDynamicTextSizing={enabledFeatures.dynamicTextSizing}
-                      taskDecisionProvider={taskDecisionProvider}
-                      contextIdentifierProvider={contextIdentifierProvider}
-                      onChange={onChange}
-                      onSave={SAVE_ACTION}
-                      onCancel={CANCEL_ACTION}
-                      primaryToolbarComponents={
-                        <>
-                          <ToolbarFeedback
-                            product={'bitbucket'}
-                            packageVersion={version}
-                            packageName={name}
-                            key="toolbar-feedback"
-                            labels={['atlaskit-comment']}
-                          />
-                          <ToolbarHelp key="toolbar-help" />
-                        </>
-                      }
-                      allowExtension={true}
-                      insertMenuItems={customInsertMenuItems}
-                      extensionHandlers={extensionHandlers}
-                      secondaryToolbarComponents={[
-                        <LockCircleIcon
-                          key="permission"
-                          size="large"
-                          label="Permissions"
-                        />,
-                      ]}
-                      {...this.props.editorProps}
-                    />
-                  </CollapsedEditor>
-                </div>
-              )}
-            />
-            <DevTools />
-          </div>
-        </EditorContext>
-      </AnalyticsListener>
+                    analyticsHandler={analyticsHandler}
+                    shouldFocus={true}
+                    quickInsert={true}
+                    allowCodeBlocks={true}
+                    allowTextColor={true}
+                    allowLists={true}
+                    allowRule={true}
+                    allowTables={true}
+                    allowHelpDialog={true}
+                    disabled={disabled}
+                    activityProvider={activityProvider}
+                    mentionProvider={mentionProvider}
+                    emojiProvider={emojiProvider}
+                    media={{
+                      provider: mediaProvider,
+                      allowMediaSingle: enabledFeatures.imageResizing,
+                      allowResizing: enabledFeatures.imageResizing,
+                    }}
+                    allowDynamicTextSizing={enabledFeatures.dynamicTextSizing}
+                    taskDecisionProvider={taskDecisionProvider}
+                    contextIdentifierProvider={contextIdentifierProvider}
+                    onChange={onChange}
+                    onSave={SAVE_ACTION}
+                    onCancel={CANCEL_ACTION}
+                    primaryToolbarComponents={
+                      <>
+                        <ToolbarFeedback
+                          product={'bitbucket'}
+                          packageVersion={version}
+                          packageName={name}
+                          key="toolbar-feedback"
+                          labels={['atlaskit-comment']}
+                        />
+                        <ToolbarHelp key="toolbar-help" />
+                      </>
+                    }
+                    allowExtension={true}
+                    insertMenuItems={customInsertMenuItems}
+                    extensionHandlers={extensionHandlers}
+                    secondaryToolbarComponents={[
+                      <LockCircleIcon
+                        key="permission"
+                        size="large"
+                        label="Permissions"
+                      />,
+                    ]}
+                    {...this.props.editorProps}
+                  />
+                </CollapsedEditor>
+              </div>
+            )}
+          />
+          <DevTools />
+        </div>
+      </EditorContext>
     );
   }
 

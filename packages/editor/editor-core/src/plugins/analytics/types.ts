@@ -1,43 +1,60 @@
 import { Dispatch } from '../../event-dispatcher';
 
-type AEP<Action, ActionSubject, ActionSubjectID, Attributes> = {
+type AEP<Action, ActionSubject, ActionSubjectID, Attributes, Type> = {
   action: Action;
   actionSubject: ActionSubject;
   actionSubjectId?: ActionSubjectID;
   attributes?: Attributes;
+  eventType: Type;
 };
+
+type UIAEP<Action, ActionSubject, ActionSubjectID, Attributes> = AEP<
+  Action,
+  ActionSubject,
+  ActionSubjectID,
+  Attributes,
+  'ui'
+>;
+
+type TrackAEP<Action, ActionSubject, ActionSubjectID, Attributes> = AEP<
+  Action,
+  ActionSubject,
+  ActionSubjectID,
+  Attributes,
+  'track'
+>;
 
 /* UI events */
 
-type ButtonAEP<ActionSubjectID, Attributes> = AEP<
+type ButtonAEP<ActionSubjectID, Attributes> = UIAEP<
   'clicked',
   'button',
   ActionSubjectID,
   Attributes
 >;
 
-type PickerAEP<ActionSubjectID, Attributes> = AEP<
+type PickerAEP<ActionSubjectID, Attributes> = UIAEP<
   'opened',
   'picker',
   ActionSubjectID,
   Attributes
 >;
 
-type TypeAheadAEP<ActionSubjectID, Attributes> = AEP<
+type TypeAheadAEP<ActionSubjectID, Attributes> = UIAEP<
   'invoked',
   'typeAhead',
   ActionSubjectID,
   Attributes
 >;
 
-type EditorStartAEP = AEP<
+type EditorStartAEP = UIAEP<
   'started',
   'editor',
   undefined,
   { platform: 'mobileNative' | 'mobileHybrid' | 'web' }
 >;
 
-type EditorStopAEP = AEP<
+type EditorStopAEP = UIAEP<
   'stopped',
   'editor',
   'save' | 'cancel',
@@ -111,14 +128,14 @@ type UIEventPayload =
 
 /** Text input and formatting events */
 
-type FormatAEP<ActionSubjectID, Attributes> = AEP<
+type FormatAEP<ActionSubjectID, Attributes> = TrackAEP<
   'formatted',
   'text',
   ActionSubjectID,
   Attributes
 >;
 
-type SubstituteAEP<ActionSubjectID, Attributes> = AEP<
+type SubstituteAEP<ActionSubjectID, Attributes> = TrackAEP<
   'autoSubstituted',
   'text',
   ActionSubjectID,
@@ -225,7 +242,7 @@ type FormatSubstitutionEventPayload =
 
 /** Insertion events */
 
-type InsertAEP<ActionSubjectID, Attributes> = AEP<
+type InsertAEP<ActionSubjectID, Attributes> = TrackAEP<
   'inserted',
   'document',
   ActionSubjectID,
