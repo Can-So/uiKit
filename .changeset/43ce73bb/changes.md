@@ -1,0 +1,1 @@
+- ED-6148: Prevent autoSize tables from being in an endless loop, integrate with new resizing
