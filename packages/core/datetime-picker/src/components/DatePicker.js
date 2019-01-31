@@ -117,26 +117,24 @@ const StyledMenu = styled.div`
   ${elevation.e200};
 `;
 
-const Menu = ({ innerProps: menuInnerProps, selectProps }: Object) => (
-  <StyledMenu>
-    <Calendar
-      {...getValidDate(selectProps.calendarValue)}
-      {...getValidDate(selectProps.calendarView)}
-      disabled={selectProps.calendarDisabled}
-      onChange={selectProps.onCalendarChange}
-      onSelect={selectProps.onCalendarSelect}
-      ref={selectProps.calendarRef}
-      selected={[selectProps.selectedCalendarValue]}
-      innerProps={menuInnerProps}
-    />
-  </StyledMenu>
-);
-
-const FixedLayeredMenu = ({ selectProps, ...props }: Object) => (
+const Menu = ({ selectProps, innerProps }: Object) => (
   <FixedLayer
     inputValue={selectProps.inputValue}
     containerRef={selectProps.calendarContainerRef}
-    content={<Menu {...props} selectProps={selectProps} />}
+    content={
+      <StyledMenu>
+        <Calendar
+          {...getValidDate(selectProps.calendarValue)}
+          {...getValidDate(selectProps.calendarView)}
+          disabled={selectProps.calendarDisabled}
+          onChange={selectProps.onCalendarChange}
+          onSelect={selectProps.onCalendarSelect}
+          ref={selectProps.calendarRef}
+          selected={[selectProps.calendarValue]}
+          innerProps={innerProps}
+        />
+      </StyledMenu>
+    }
   />
 );
 
@@ -242,7 +240,13 @@ class DatePicker extends Component<Props, State> {
   };
 
   onSelectFocus = (e: SyntheticFocusEvent<HTMLInputElement>) => {
-    this.setState({ isOpen: true });
+    const { value } = this.getState();
+
+    this.setState({
+      isOpen: true,
+      view: value,
+    });
+
     this.props.onFocus(e);
   };
 
@@ -380,7 +384,6 @@ class DatePicker extends Component<Props, State> {
       dropdownIndicatorIcon: dropDownIcon,
       onCalendarChange: this.onCalendarChange,
       onCalendarSelect: this.onCalendarSelect,
-      selectedCalendarValue: this.state.selectedValue,
     };
 
     const { styles: selectStyles = {} } = selectProps;
@@ -412,7 +415,7 @@ class DatePicker extends Component<Props, State> {
           components={{
             ClearIndicator,
             DropdownIndicator,
-            Menu: FixedLayeredMenu,
+            Menu,
           }}
           styles={mergeStyles(selectStyles, {
             control: base => ({
@@ -450,7 +453,6 @@ export default withAnalyticsContext({
     onChange: createAndFireEventOnAtlaskit({
       action: 'selectedDate',
       actionSubject: 'datePicker',
-
       attributes: {
         componentName: 'datePicker',
         packageName,
