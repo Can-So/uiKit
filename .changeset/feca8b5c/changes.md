@@ -1,0 +1,1 @@
+- ED-5860 Prevent invalid steps from being applied in the editor
