@@ -56,7 +56,13 @@ const ProductNavigationPrimitiveBase = ({
   children,
   theme = { mode: light, context: 'product' },
 }: ProductNavigationPrimitiveBaseProps) => (
-  <div css={theme.mode.contentNav().product}>
+  <div
+    css={{
+      ...theme.mode.contentNav().product,
+      // Setting a negative z-index to ensure it stays below the container nav
+      zIndex: -1,
+    }}
+  >
     <ScrollProvider>{children}</ScrollProvider>
   </div>
 );
