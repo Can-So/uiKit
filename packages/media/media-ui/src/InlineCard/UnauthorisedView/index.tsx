@@ -35,7 +35,7 @@ export class InlineCardUnauthorizedView extends React.Component<
         <IconAndTitleLayout
           icon={icon}
           title={
-            <span style={{ color: colors.N100 }}>
+            <span style={{ color: colors.N500 }}>
               {truncateUrlForErrorView(url)}
             </span>
           }
