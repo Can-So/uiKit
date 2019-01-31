@@ -24,10 +24,10 @@ interface State {
 }
 
 class PubSubEventComponent extends Component<{}, State> {
-  private client: Client;
+  private client!: Client;
   private serviceConfig: PubSubClientConfig;
 
-  constructor(props: {}) {
+  constructor(props: any) {
     super(props);
     this.serviceConfig = clientConfig.serviceConfig;
     this.state = {
@@ -87,7 +87,7 @@ class PubSubEventComponent extends Component<{}, State> {
     this.client.off(this.state.eventType, this.onEvent);
   };
 
-  onEvent = (event: any, payload: any) => {
+  onEvent = (event: any, _: any) => {
     this.setState(({ events }) => {
       return {
         events: [...events, event],
