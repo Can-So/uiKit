@@ -1,6 +1,4 @@
 // @flow
-
-// @flow
 'use strict';
 
 const path = require('path');
@@ -149,7 +147,6 @@ async function main() {
   if (!serverAlreadyRunning) {
     webpack.stopDevServer();
   }
-
   process.exit(code);
 }
 

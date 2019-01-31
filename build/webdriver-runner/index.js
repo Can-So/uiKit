@@ -24,7 +24,7 @@ process.env.NODE_ENV = 'test';
 process.env.INTEGRATION_TESTS = 'true';
 
 const isBrowserStack = process.env.TEST_ENV === 'browserstack';
-const maxWorkers = isBrowserStack ? 4 : 1;
+const maxWorkers = isBrowserStack ? 5 : 1;
 
 const cli = meow({
   flags: {

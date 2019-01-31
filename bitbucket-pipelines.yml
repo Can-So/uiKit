@@ -111,8 +111,7 @@ pipelines:
               - source ./build-setup.sh
               - git lfs pull
               - bolt install --pure-lockfile
-              - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr:changed 
-              - TEST_ONLY_PATTERN='packages/editor' yarn run test:vr:changed 
+              - yarn run test:vr:changed 
             caches:
               - node
         - step:
