@@ -1,0 +1,10 @@
+{
+  "releases": [{ "name": "@atlaskit/section-message", "type": "patch" }],
+  "dependents": [
+    {
+      "name": "@atlaskit/field-range",
+      "type": "patch",
+      "dependencies": ["@atlaskit/section-message"]
+    }
+  ]
+}
