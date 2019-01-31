@@ -1,5 +1,10 @@
 # @atlaskit/editor-core
 
+## 98.1.7
+- [patch] [69e29bab6c](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/69e29bab6c):
+
+  - ED-5860 Prevent invalid steps from being applied in the editor
+
 ## 98.1.6
 - [patch] [406cbf0a4e](https://bitbucket.org/atlassian/atlaskit-mk-2/commits/406cbf0a4e):
 
