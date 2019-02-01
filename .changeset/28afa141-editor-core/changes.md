@@ -1,0 +1,1 @@
+- Fixes tableRow validation failure
