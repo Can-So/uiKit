@@ -22,7 +22,7 @@ export interface EditorAppearanceComponentProps {
   editorView?: EditorView;
 
   eventDispatcher?: EventDispatcher;
-  dispatchAnalyticsEvent: (payload: AnalyticsEventPayload) => void;
+  dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
 
   maxHeight?: number;
 

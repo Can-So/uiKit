@@ -50,7 +50,7 @@ export interface ToolbarProps {
   popupsScrollableElement?: HTMLElement;
   disabled: boolean;
   width?: number;
-  dispatchAnalyticsEvent(payload: AnalyticsEventPayload): void;
+  dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
 }
 
 export interface ToolbarInnerProps extends ToolbarProps {

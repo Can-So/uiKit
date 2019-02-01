@@ -17,7 +17,6 @@ import { mention, emoji, taskDecision } from '@atlaskit/util-data-test';
 import { MockActivityResource } from '@atlaskit/activity/dist/es5/support';
 import { EmojiProvider } from '@atlaskit/emoji';
 import { Provider as SmartCardProvider } from '@atlaskit/smart-card';
-import { AnalyticsListener } from '@atlaskit/analytics-next';
 
 import { customInsertMenuItems } from '@atlaskit/editor-test-helpers';
 import { extensionHandlers } from '../example-helpers/extension-handlers';

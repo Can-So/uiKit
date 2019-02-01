@@ -1,4 +1,5 @@
 import { Dispatch } from '../../event-dispatcher';
+
 type AEP<Action, ActionSubject, ActionSubjectID, Attributes, EventType> = {
   action: Action;
   actionSubject: ActionSubject;

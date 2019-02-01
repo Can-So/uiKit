@@ -18,6 +18,7 @@ describe('analytics', () => {
     actionSubject: 'button',
     actionSubjectId: 'helpButton',
     attributes: { inputMethod: 'toolbar' },
+    eventType: 'ui',
   };
 
   const mockCreateAnalyticsEvent = jest.fn();
@@ -69,6 +70,7 @@ describe('analytics', () => {
           inputMethod: 'shortcut',
           documentSize: state.doc.nodeSize,
         },
+        eventType: 'ui',
       };
       tr = addAnalytics(tr, payload);
       tr = addAnalytics(tr, secondPayload);

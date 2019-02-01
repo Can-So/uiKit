@@ -23,7 +23,7 @@ export interface Props {
   popupsScrollableElement?: HTMLElement;
   containerElement: HTMLElement | undefined;
   disabled: boolean;
-  dispatchAnalyticsEvent: (payload: AnalyticsEventPayload) => void;
+  dispatchAnalyticsEvent?: (payload: AnalyticsEventPayload) => void;
 }
 
 export default class PluginSlot extends React.Component<Props, any> {

@@ -34,7 +34,7 @@ const ContextAdapter = createContextAdapter({
   card: CardContext,
 });
 
-export class Editor extends React.Component<EditorProps, {}> {
+export default class Editor extends React.Component<EditorProps, {}> {
   static defaultProps: EditorProps = {
     appearance: 'message',
     disabled: false,
@@ -375,5 +375,3 @@ export class Editor extends React.Component<EditorProps, {}> {
     );
   }
 }
-
-export default Editor;

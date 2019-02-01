@@ -1,14 +1,16 @@
 import {
   fireAnalyticsEvent,
   analyticsChannel,
+  AnalyticsEventPayload,
 } from '../../../../plugins/analytics';
 
 describe('analytics', () => {
-  const payload = {
+  const payload: AnalyticsEventPayload = {
     action: 'clicked',
     actionSubject: 'button',
     actionSubjectId: 'helpButton',
     attributes: { inputMethod: 'toolbar' },
+    eventType: 'ui',
   };
 
   describe('fireAnalyticsEvent', () => {

@@ -13,6 +13,7 @@ import {
   analyticsEventKey,
   fireAnalyticsEvent,
   AnalyticsDispatch,
+  AnalyticsEventPayload,
 } from '../plugins/analytics';
 import { EditorProps, EditorConfig, EditorPlugin } from '../types';
 import { PortalProviderAPI } from '../ui/PortalProvider';
@@ -20,7 +21,6 @@ import {
   pluginKey as editorDisabledPluginKey,
   EditorDisabledPluginState,
 } from '../plugins/editor-disabled';
-import { AnalyticsEventPayload } from '../plugins/analytics';
 
 import {
   processPluginsList,
@@ -94,9 +94,7 @@ export default class ReactEditorView<T = {}> extends React.Component<
       payload: {
         action: 'started',
         actionSubject: 'editor',
-        attributes: {
-          platform: 'web',
-        },
+        attributes: { platform: 'web' },
         eventType: 'ui',
       },
     });
