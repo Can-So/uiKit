@@ -177,14 +177,6 @@
   dependencies:
     babel-runtime "^6.11.6"
 
-"@atlassiansox/origin-tracing@^4.4.163":
-  version "4.4.163"
-  resolved "https://packages.atlassian.com/api/npm/atlassian-npm/@atlassiansox/origin-tracing/-/@atlassiansox/origin-tracing-4.4.163.tgz#cbac20202aff7bae6cacff2ffbc0f3b9dc8fc2d2"
-  integrity sha1-y6wgICr/e65srP8v+8DzudyPwtI=
-  dependencies:
-    querystringify "~1.0.0"
-    uuid "^3.2.1"
-
 "@babel/cli@^7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.1.0.tgz#a9429fd63911711b0fa93ae50d73beee6c42aef8"
@@ -16400,7 +16392,7 @@ uuid-validate@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/uuid-validate/-/uuid-validate-0.0.3.tgz#e30617f75dc742a0e4f95012a11540faf9d39ab4"
 
-uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0, uuid@^3.2.1, uuid@^3.3.2:
+uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
 

@@ -5,12 +5,14 @@ import { ShareDialogContainer } from '../../../components/ShareDialogContainer';
 import { ShareDialogWithTrigger } from '../../../components/ShareDialogWithTrigger';
 
 let wrapper;
+let mockOriginTracing;
+let mockOriginTracingFactory;
 let mockRequestService;
 const mockCloudId = 'cloudId';
 const mockProductId = 'productId';
+const mockShareAri = 'ari';
 const mockShareLink = 'share-link';
 const mockShareTitle = 'Share Title';
-const mockResourceType = 'site';
 const mockCopyLink = 'copy-link';
 const mockFormatCopyLink = jest.fn().mockReturnValue(mockCopyLink);
 const mockShouldShowCommentField = true;
@@ -23,7 +25,6 @@ const mockComment = {
   format: 'plain_text' as 'plain_text',
   value: 'comment',
 };
-const mockAri = 'ari';
 const mockLoadUserOptions = () => [];
 const mockCapabilities = {
   directInvite: {
@@ -37,6 +38,11 @@ const mockCapabilities = {
 };
 
 beforeEach(() => {
+  mockOriginTracing = {
+    addToUrl: jest.fn(),
+    toAnalyticsEvent: jest.fn(),
+  };
+  mockOriginTracingFactory = jest.fn().mockReturnValue(mockOriginTracing);
   mockRequestService = jest
     .spyOn(utils, 'requestService')
     .mockResolvedValue(mockCapabilities);
@@ -44,10 +50,11 @@ beforeEach(() => {
     <ShareDialogContainer
       cloudId={mockCloudId}
       loadUserOptions={mockLoadUserOptions}
+      originTracingFactory={mockOriginTracingFactory}
       productId={mockProductId}
+      shareAri={mockShareAri}
       shareLink={mockShareLink}
       shareTitle={mockShareTitle}
-      resourceType={mockResourceType}
       formatCopyLink={mockFormatCopyLink}
       shouldShowCommentField={mockShouldShowCommentField}
       shouldCloseOnEscapePress={mockShouldCloseOnEscapePress}
@@ -81,66 +88,14 @@ describe('ShareDialogContainer', () => {
     expect(shareDialogWithTrigger.prop('capabilities')).toEqual(
       wrapper.state().capabilities,
     );
+    expect(mockOriginTracingFactory).toHaveBeenCalledTimes(3);
   });
 
-  it('should update origin tracing ids if shareLink prop is updated', () => {
-    const prevState = wrapper.state();
+  it('should call props.originTracingFactory if shareLink prop is updated', () => {
+    mockOriginTracingFactory.mockReset();
     wrapper.setProps({ shareLink: 'new-share-link' });
-
-    const newState = wrapper.state();
-    expect(newState.prevShareLink).toEqual('new-share-link');
-    expect(newState.copyLinkOrigin).not.toEqual(prevState.copyLinkOrigin);
-    expect(newState.shareToAtlassianAccuntHoldersOrigin).not.toEqual(
-      prevState.shareToAtlassianAccuntHoldersOrigin,
-    );
-    expect(newState.shareToNewUsersOrigin).not.toEqual(
-      prevState.shareToNewUsersOrigin,
-    );
-  });
-
-  describe('parseAri', () => {
-    it('should parse an ari with the parameters correctly', () => {
-      const jiraAndConfluenceProductIds = [
-        'jira',
-        'jira-core',
-        'jira-software',
-        'jira-servicedesk',
-        'jira-incident-manager',
-        'confluence',
-      ];
-      jiraAndConfluenceProductIds.forEach((productId: string) => {
-        const siteAri = wrapper
-          .instance()
-          .parseAri(productId, mockCloudId, 'site');
-        expect(siteAri).toEqual(`ari:cloud:${productId}::site/${mockCloudId}`);
-
-        const resourceAri = wrapper
-          .instance()
-          .parseAri(productId, mockCloudId, 'anyResource', 'anyResourceId');
-        expect(resourceAri).toEqual(
-          `ari:cloud:${productId}:${mockCloudId}:anyResource/anyResourceId`,
-        );
-      });
-
-      const otherProductIds = [
-        'platform',
-        'media',
-        'identity',
-        'ecosystem',
-        'bitbucket',
-        'trello',
-        'platform-services',
-        'teams',
-      ];
-      otherProductIds.forEach((productId: string) => {
-        const resourceAri = wrapper
-          .instance()
-          .parseAri(productId, mockCloudId, 'anyResource', 'anyResourceId');
-        expect(resourceAri).toEqual(
-          `ari:cloud:${productId}::anyResource/anyResourceId`,
-        );
-      });
-    });
+    expect(wrapper.state().prevShareLink).toEqual('new-share-link');
+    expect(mockOriginTracingFactory).toHaveBeenCalledTimes(3);
   });
 
   describe('handleCopyLink', () => {
@@ -169,7 +124,6 @@ describe('ShareDialogContainer', () => {
         .fn()
         .mockResolvedValue({});
       const mockShare = wrapper.instance().shareServiceClient.share;
-      wrapper.instance().parseAri = jest.fn().mockReturnValue(mockAri);
       wrapper.instance().forceUpdate();
       const mockDialogContentState = {
         users: mockUsers,
@@ -178,7 +132,7 @@ describe('ShareDialogContainer', () => {
       wrapper.instance().handleSubmitShare(mockDialogContentState);
       expect(mockShare).toHaveBeenCalledTimes(1);
       expect(mockShare.mock.calls[0][0]).toEqual({
-        ari: mockAri,
+        ari: mockShareAri,
         link: mockShareLink,
         title: mockShareTitle,
       });
@@ -199,6 +153,8 @@ describe('ShareDialogContainer', () => {
     });
 
     it('should update shareActionCount and Origin Ids from the state if share is successful', async () => {
+      mockOriginTracingFactory.mockReset();
+
       const mockShareResponse = {};
       wrapper.instance().shareServiceClient.share = jest
         .fn()
@@ -208,13 +164,10 @@ describe('ShareDialogContainer', () => {
         users: mockUsers,
         comment: mockComment,
       };
-      const prevState = wrapper.state();
       const result = await wrapper
         .instance()
         .handleSubmitShare(mockDialogContentState);
-      expect(
-        wrapper.state().shareToAtlassianAccuntHoldersOrigin!.id,
-      ).not.toEqual(prevState.shareToAtlassianAccuntHoldersOrigin!.id);
+      expect(mockOriginTracingFactory).toHaveBeenCalledTimes(2);
       expect(result).toEqual(mockShareResponse);
     });
 

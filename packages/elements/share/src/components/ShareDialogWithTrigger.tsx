@@ -7,10 +7,10 @@ import { ShareForm } from './ShareForm';
 import { messages } from '../i18n';
 import {
   Comment,
-  User,
   InvitationsCapabilitiesResponse,
   ShareContentState,
   ShareError,
+  User,
 } from '../types';
 
 type RenderChildren = (
@@ -30,8 +30,8 @@ type State = DialogState & ShareContentState;
 type Props = {
   buttonStyle?: 'default' | 'withText';
   capabilities?: InvitationsCapabilitiesResponse;
-  copyLink: string;
   children?: RenderChildren;
+  copyLink: string;
   isDisabled?: boolean;
   loadUserOptions: LoadOptions;
   onLinkCopy?: Function;

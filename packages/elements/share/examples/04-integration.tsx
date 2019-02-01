@@ -15,6 +15,15 @@ type UserData = {
   type?: string;
 };
 
+const mockOriginTracing = {
+  id: 'id',
+  addToUrl: l => l,
+  toAnalyticsAttributes: ({ hasGeneratedId }) => ({
+    originIdGenerated: 'id',
+    originProduct: 'product',
+  }),
+};
+
 const loadUserOptions = (searchText?: string): OptionData[] => {
   if (!searchText) {
     return userPickerData;
@@ -42,9 +51,10 @@ export default () => (
   <ShareDialogContainer
     cloudId="12345-12345-12345-12345"
     loadUserOptions={loadUserOptions}
+    originTracingFactory={() => mockOriginTracing}
     productId="confluence"
+    shareAri="ari"
     shareLink={window.location.href}
     shareTitle="My Share"
-    resourceType="site"
   />
 );

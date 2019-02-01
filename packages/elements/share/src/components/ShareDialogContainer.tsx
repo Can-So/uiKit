@@ -1,15 +1,16 @@
 import * as React from 'react';
 import memoizeOne from 'memoize-one';
 import { LoadOptions } from '@atlaskit/user-picker';
-import OriginTracing from '@atlassiansox/origin-tracing';
 import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
 import {
   Content,
   InvitationsCapabilitiesResponse,
   InvitationsCapabilitiesProvider,
+  MetaData,
+  OriginTracing,
+  OriginTracingFactory,
   ShareClient,
   ShareResponse,
-  MetaData,
   ShareContentState,
 } from '../types';
 import { InvitationsCapabilitiesResource } from '../api/InvitationsCapabilitiesResource';
@@ -19,13 +20,13 @@ type Props = {
   cloudId: string;
   formatCopyLink?: Function;
   loadUserOptions: LoadOptions;
+  originTracingFactory: OriginTracingFactory;
   productId: string;
+  shareAri: string;
   shareLink: string;
   shareTitle: string;
   shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
-  resourceId?: string;
-  resourceType: string;
 };
 
 type State = {
@@ -35,13 +36,6 @@ type State = {
   shareActionCount: number;
   shareToAtlassianAccuntHoldersOrigin: OriginTracing | null;
   shareToNewUsersOrigin: OriginTracing | null;
-};
-
-const originTracingFactory: OriginTracing = (
-  product,
-  attributes = {},
-): { product: string; attributes?: {} } => {
-  return new OriginTracing({ product, ...attributes });
 };
 
 const memoizedFormatCopyLink: string = memoizeOne(
@@ -72,17 +66,11 @@ export class ShareDialogContainer extends React.Component<Props, State> {
 
     this.state = {
       capabilities: undefined,
-      copyLinkOrigin: props.shareLink
-        ? originTracingFactory(props.productId)
-        : null,
+      copyLinkOrigin: null,
       prevShareLink: null,
       shareActionCount: 1,
-      shareToAtlassianAccuntHoldersOrigin: props.shareLink
-        ? originTracingFactory(props.productId)
-        : null,
-      shareToNewUsersOrigin: props.shareLink
-        ? originTracingFactory(props.productId)
-        : null,
+      shareToAtlassianAccuntHoldersOrigin: null,
+      shareToNewUsersOrigin: null,
     };
   }
 
@@ -92,14 +80,15 @@ export class ShareDialogContainer extends React.Component<Props, State> {
     // memorization is recommended on React doc, but here the Origin Tracing does not reply on shareLink
     // in getDerivedStateFormProps it makes shareLink as determinant of renewal to stand out better
     // ***
-    if (prevState.prevShareLink !== nextProps.shareLink) {
+    if (
+      prevState.prevShareLink !== nextProps.shareLink &&
+      nextProps.originTracingFactory
+    ) {
       return {
-        copyLinkOrigin: originTracingFactory(nextProps.productId),
+        copyLinkOrigin: nextProps.originTracingFactory!(),
         prevShareLink: nextProps.shareLink,
-        shareToAtlassianAccuntHoldersOrigin: originTracingFactory(
-          nextProps.productId,
-        ),
-        shareToNewUsersOrigin: originTracingFactory(nextProps.productId),
+        shareToAtlassianAccuntHoldersOrigin: nextProps.originTracingFactory!(),
+        shareToNewUsersOrigin: nextProps.originTracingFactory!(),
       };
     }
 
@@ -124,43 +113,19 @@ export class ShareDialogContainer extends React.Component<Props, State> {
       });
   };
 
-  parseAri = (
-    productId: string,
-    cloudId: string,
-    resourceType: string,
-    resourceId?: string,
-  ): string => {
-    let ari = `ari:cloud:${productId}`;
-
-    // Implementations by Jira and Confluence are different from others
-    // https://hello.atlassian.net/wiki/spaces/ARCH/pages/161909906/ARI+Resource+Owners+Inventory
-    if (productId.startsWith('jira') || productId === 'confluence') {
-      if (resourceType === 'site') {
-        ari += `::${resourceType}/${cloudId}`;
-      } else {
-        ari += `:${cloudId}:${resourceType}/${resourceId}`;
-      }
-    } else {
-      ari += `::${resourceType}/${resourceId}`;
-    }
-
-    return ari;
-  };
-
   handleSubmitShare = ({
     users,
     comment,
   }: ShareContentState): Promise<ShareResponse> => {
     const {
-      cloudId,
+      originTracingFactory,
       productId,
+      shareAri,
       shareLink,
       shareTitle,
-      resourceId,
-      resourceType,
     } = this.props;
     const content: Content = {
-      ari: this.parseAri(productId, cloudId, resourceType, resourceId),
+      ari: shareAri,
       // original share link is used here
       link: shareLink,
       title: shareTitle,
@@ -185,8 +150,8 @@ export class ShareDialogContainer extends React.Component<Props, State> {
         // renew Origin Tracing Ids per share action succeeded
         this.setState({
           shareActionCount: this.state.shareActionCount + 1,
-          shareToAtlassianAccuntHoldersOrigin: originTracingFactory(productId),
-          shareToNewUsersOrigin: originTracingFactory(productId),
+          shareToAtlassianAccuntHoldersOrigin: originTracingFactory!(),
+          shareToNewUsersOrigin: originTracingFactory!(),
         });
 
         return response;
