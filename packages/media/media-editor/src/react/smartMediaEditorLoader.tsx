@@ -21,13 +21,12 @@ export default class AsyncSmartMediaEditor extends React.PureComponent<
     SmartMediaEditor: AsyncSmartMediaEditor.SmartMediaEditor,
   };
 
-  componentWillMount() {
+  async componentWillMount() {
     if (!this.state.SmartMediaEditor) {
-      import(/* webpackChunkName:"@atlaskit-internal_smart-media-editor" */
-      './smartMediaEditor').then(module => {
-        AsyncSmartMediaEditor.SmartMediaEditor = module.default;
-        this.setState({ SmartMediaEditor: module.default });
-      });
+      const module = await import(/* webpackChunkName:"@atlaskit-internal_smart-media-editor" */
+      './smartMediaEditor');
+      AsyncSmartMediaEditor.SmartMediaEditor = module.default;
+      this.setState({ SmartMediaEditor: module.default });
     }
   }
 

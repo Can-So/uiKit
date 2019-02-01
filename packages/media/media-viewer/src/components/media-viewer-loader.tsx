@@ -20,13 +20,12 @@ export default class AsyncMediaViewer extends React.PureComponent<
     MediaViewer: AsyncMediaViewer.MediaViewer,
   };
 
-  componentWillMount() {
+  async componentWillMount() {
     if (!this.state.MediaViewer) {
-      import(/* webpackChunkName:"@atlaskit-internal_media-viewer" */
-      './media-viewer').then(module => {
-        AsyncMediaViewer.MediaViewer = module.MediaViewer;
-        this.setState({ MediaViewer: module.MediaViewer });
-      });
+      const module = await import(/* webpackChunkName:"@atlaskit-internal_media-viewer" */
+      './media-viewer');
+      AsyncMediaViewer.MediaViewer = module.MediaViewer;
+      this.setState({ MediaViewer: module.MediaViewer });
     }
   }
 
