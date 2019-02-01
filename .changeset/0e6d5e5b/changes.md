@@ -1,0 +1,1 @@
+- FS-3529 fix disabled state of multi picker

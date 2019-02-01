@@ -25,7 +25,15 @@ describe('MultiValue', () => {
   const onClick = jest.fn();
   const shallowMultiValue = (
     { components, ...props }: any = { components: {} },
-  ) => shallow(<MultiValue data={data} removeProps={{ onClick }} {...props} />);
+  ) =>
+    shallow(
+      <MultiValue
+        data={data}
+        removeProps={{ onClick }}
+        selectProps={{ isDisabled: false }}
+        {...props}
+      />,
+    );
 
   afterEach(() => {
     onClick.mockClear();
@@ -88,6 +96,18 @@ describe('MultiValue', () => {
   it('should not render remove button for fixed value', () => {
     const component = shallowMultiValue({
       data: { ...data, data: { ...data.data, fixed: true } },
+    });
+    const tag = renderProp(
+      component.find(FormattedMessage as React.ComponentClass<any>),
+      'children',
+      'remove',
+    );
+    expect(tag.prop('removeButtonText')).toBeUndefined();
+  });
+
+  it('should not render remove button is picker is disabled', () => {
+    const component = shallowMultiValue({
+      selectProps: { isDisabled: true },
     });
     const tag = renderProp(
       component.find(FormattedMessage as React.ComponentClass<any>),
