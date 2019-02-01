@@ -25,11 +25,7 @@ export default class JiraAppSwitcherExample extends Component {
   render() {
     return (
       <div style={{ padding: '2rem' }}>
-        <Drawer
-          onClose={this.onClose}
-          isOpen={this.state.isDrawerOpen}
-          width="wide"
-        >
+        <Drawer onClose={this.onClose} isOpen={this.state.isDrawerOpen}>
           <JiraAppSwitcher cloudId="some-cloud-id" />
         </Drawer>
         <Button type="button" onClick={this.openDrawer}>

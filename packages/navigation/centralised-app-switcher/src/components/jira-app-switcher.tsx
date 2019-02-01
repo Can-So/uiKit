@@ -13,30 +13,73 @@ import {
   UserPermissionProvider,
 } from '../providers/instance-data-providers';
 import { WithCloudId, RecentContainer, CustomLink } from '../types';
+import {
+  getProductLinks,
+  getAdministrationLinks,
+} from '../utils/product-links';
 export default ({ cloudId }: WithCloudId) => {
   return (
-    <RecentContainersProvider cloudId={cloudId}>
-      {({
-        isLoading: isLoadingRecentContainers,
-        data: recentContainersData,
-      }) => (
-        <CustomLinksProvider>
-          {({ isLoading: isLoadingCustomLinks, data: customLinksData }) => (
-            <LicenseInformationProvider cloudId={cloudId}>
+    // <RecentContainersProvider cloudId={cloudId}>
+    //   {({
+    //     isLoading: isLoadingRecentContainers,
+    //     data: recentContainersData,
+    //   }) => (
+    <CustomLinksProvider>
+      {({ isLoading: isLoadingCustomLinks, data: customLinksData }) => (
+        <LicenseInformationProvider cloudId={cloudId}>
+          {({
+            isLoading: isLoadingLicenseInformation,
+            data: licenseInformationData,
+          }) => (
+            <UserPermissionProvider
+              cloudId={cloudId}
+              permissionId={Permissions.MANAGE}
+            >
               {({
-                isLoading: isLoadingLicenseInformation,
-                data: licenseInformationData,
+                isLoading: isLoadingAdminPermission,
+                data: adminPermissionData,
               }) => (
-                <UserPermissionProvider
-                  cloudId={cloudId}
-                  permissionId={Permissions.MANAGE}
-                >
-                  {({
-                    isLoading: isLoadingAdminPermission,
-                    data: adminPermissionData,
-                  }) => (
-                    <AppSwitcherWrapper>
-                      {isLoadingRecentContainers ? (
+                <AppSwitcherWrapper>
+                  {adminPermissionData &&
+                    adminPermissionData.permitted &&
+                    licenseInformationData && (
+                      <Section title="Administration" isAdmin>
+                        {getAdministrationLinks(
+                          licenseInformationData.hostname,
+                          cloudId,
+                        ).map(linkData => {
+                          const { label, icon, key, link } = linkData;
+                          return (
+                            <AppSwitcherItem
+                              key={key}
+                              icon={icon}
+                              href={link}
+                            >{`${label}`}</AppSwitcherItem>
+                          );
+                        })}
+                      </Section>
+                    )}
+                  {isLoadingLicenseInformation ? (
+                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
+                    'Loading License Information...'
+                  ) : (
+                    <Section title="Applications">
+                      {licenseInformationData &&
+                        getProductLinks(licenseInformationData).map(
+                          productData => {
+                            const { label, icon, key, link } = productData;
+                            return (
+                              <AppSwitcherItem
+                                key={key}
+                                icon={icon}
+                                href={link}
+                              >{`${label}`}</AppSwitcherItem>
+                            );
+                          },
+                        )}
+                    </Section>
+                  )}
+                  {/* {isLoadingRecentContainers ? (
                         // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
                         'Loading Recent Containers...'
                       ) : (
@@ -50,63 +93,29 @@ export default ({ cloudId }: WithCloudId) => {
                               ),
                             )}
                         </Section>
-                      )}
-                      {isLoadingCustomLinks ? (
-                        // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
-                        'Loading Custom Links...'
-                      ) : (
-                        <Section title="Custom Links">
-                          {customLinksData &&
-                            customLinksData[0].map(
-                              ({ key, label }: CustomLink) => (
-                                <AppSwitcherItem key={key}>
-                                  {label}
-                                </AppSwitcherItem>
-                              ),
-                            )}
-                        </Section>
-                      )}
-                      {isLoadingLicenseInformation ? (
-                        // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
-                        'Loading License Information...'
-                      ) : (
-                        <Section title="License Information">
-                          {licenseInformationData &&
-                            Object.keys(licenseInformationData.products).map(
-                              productKey => (
-                                <AppSwitcherItem
-                                  key={productKey}
-                                >{`${productKey} - ${
-                                  licenseInformationData.products[productKey]
-                                    .state
-                                }`}</AppSwitcherItem>
-                              ),
-                            )}
-                        </Section>
-                      )}
-                      {isLoadingAdminPermission ? (
-                        // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
-                        'Loading Admin Permission...'
-                      ) : (
-                        <Section title="Admin Permission">
-                          {adminPermissionData && (
-                            <AppSwitcherItem>{`The user ${
-                              adminPermissionData.permitted ? 'IS' : 'IS NOT'
-                            } a site admin`}</AppSwitcherItem>
-                          )}
-                        </Section>
-                      )}
-                      {customLinksData && (
-                        <ManageButton href={customLinksData[1]} />
-                      )}
-                    </AppSwitcherWrapper>
+                      )} */}
+                  {isLoadingCustomLinks ? (
+                    // TODO: Add proper skeleton component once it's ready https://hello.atlassian.net/browse/CEN-47
+                    'Loading Custom Links...'
+                  ) : (
+                    <Section title="More" isCustom>
+                      {customLinksData &&
+                        customLinksData[0].map(({ label }: CustomLink) => (
+                          <AppSwitcherItem key={label}>{label}</AppSwitcherItem>
+                        ))}
+                    </Section>
                   )}
-                </UserPermissionProvider>
+                  {customLinksData && (
+                    <ManageButton href={customLinksData[1]} />
+                  )}
+                </AppSwitcherWrapper>
               )}
-            </LicenseInformationProvider>
+            </UserPermissionProvider>
           )}
-        </CustomLinksProvider>
+        </LicenseInformationProvider>
       )}
-    </RecentContainersProvider>
+    </CustomLinksProvider>
+    //   )}
+    // </RecentContainersProvider>
   );
 };

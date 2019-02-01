@@ -1,6 +1,7 @@
 import { fetchJson, postJson } from '../utils/fetch';
 import asDataProvider, { DataProviderProps } from './as-data-provider';
 import { WithCloudId, RecentContainer } from '../types';
+import { LicenseInformationDataStructure } from './types';
 
 interface CloudIdDataProvider<T> extends DataProviderProps<T>, WithCloudId {}
 
@@ -16,14 +17,6 @@ export const RecentContainersProvider = asDataProvider<
     `/gateway/api/activity/api/client/recent/containers?cloudId=${cloudId}`,
   ),
 );
-
-interface LicenseInformationDataStructure {
-  products: {
-    [key: string]: {
-      state: string;
-    };
-  };
-}
 
 export const LicenseInformationProvider = asDataProvider<
   CloudIdDataProvider<LicenseInformationDataStructure>,

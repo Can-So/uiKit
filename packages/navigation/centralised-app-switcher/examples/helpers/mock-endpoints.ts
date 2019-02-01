@@ -17,31 +17,44 @@ const CUSTOM_LINKS_DATA = [
   {
     key: 'home',
     link: 'https://hello.atlassian.net/secure',
-    label: 'Hello Jira',
+    label: 'Jira',
     local: true,
+    self: false,
+    applicationType: 'jira',
+  },
+  {
+    key: 'home',
+    link: 'https://hello.atlassian.net/wiki',
+    label: 'Confluence',
+    local: true,
+    self: false,
+    applicationType: 'jira',
+  },
+  {
+    key: 'home',
+    link: 'https://bitbucket.org/my-team',
+    label: 'Bitbucket - My Team',
+    local: false,
     self: false,
     applicationType: 'jira',
   },
 ];
 
 const LICENSE_INFORMATION_DATA = {
-  hostname: 'https://some-instance.atlassian.net',
-  firstActivationDate: 1541541873107,
-  maintenanceEndDate: '2018-03-01',
-  maintenanceStartDate: '2018-01-01',
+  hostname: 'https://someinstance.atlassian.net',
+  firstActivationDate: 1492488658539,
+  maintenanceEndDate: '2017-04-24',
+  maintenanceStartDate: '2017-04-17',
   products: {
-    'confluence.ondemand': {
-      billingPeriod: 'MONTHLY',
-      state: 'DEACTIVATED',
-    },
-    'jira-servicedesk.ondemand': {
-      billingPeriod: 'MONTHLY',
+    'confluence.ondemand': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
+    'hipchat.cloud': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
+    'jira-core.ondemand': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
+    'jira-incident-manager.ondemand': {
+      billingPeriod: 'ANNUAL',
       state: 'ACTIVE',
     },
-    'jira-software.ondemand': {
-      billingPeriod: 'MONTHLY',
-      state: 'DEACTIVATED',
-    },
+    'jira-servicedesk.ondemand': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
+    'jira-software.ondemand': { billingPeriod: 'ANNUAL', state: 'ACTIVE' },
   },
 };
 

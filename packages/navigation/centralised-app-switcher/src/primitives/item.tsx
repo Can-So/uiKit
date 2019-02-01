@@ -4,7 +4,7 @@ import Item, { itemThemeNamespace } from '@atlaskit/item';
 import WorldIcon from '@atlaskit/icon/glyph/world';
 import { gridSize, colors, elevation } from '@atlaskit/theme';
 
-const Background = styled.div<{ isAdmin: boolean }>`
+const Background = styled.div<{ isAdmin: boolean; isCustom: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,19 +12,23 @@ const Background = styled.div<{ isAdmin: boolean }>`
   height: ${4 * gridSize()}px;
   border-radius: ${gridSize() / 2}px;
   ${elevation.e100}
-  background-color: ${props => (props.isAdmin ? colors.DN70 : colors.B400)}
+  background-color: ${({ isAdmin, isCustom }) =>
+    isAdmin ? colors.DN70 : isCustom ? colors.N0 : colors.B400}
 `;
 
 type Props = {
   isAdmin?: boolean;
+  isCustom?: boolean;
   icon?: React.ReactType;
+  href?: string;
 };
 const IconWithBackground = ({
   isAdmin = false,
+  isCustom = false,
   icon: Icon = WorldIcon,
 }: Props) => (
-  <Background isAdmin={isAdmin}>
-    <Icon primaryColor={colors.N0} />
+  <Background isAdmin={isAdmin} isCustom={isCustom}>
+    <Icon primaryColor={isCustom ? colors.DN70 : colors.N0} />
   </Background>
 );
 
@@ -43,10 +47,12 @@ type AppSwitcherItemProps = Props & {
   children: React.ReactType;
   key?: string;
 };
-export default ({ isAdmin, icon, ...rest }: AppSwitcherItemProps) => (
+export default ({ isAdmin, isCustom, icon, ...rest }: AppSwitcherItemProps) => (
   <ThemeProvider theme={{ [itemThemeNamespace]: itemTheme }}>
     <Item
-      elemBefore={<IconWithBackground isAdmin={isAdmin} icon={icon} />}
+      elemBefore={
+        <IconWithBackground isAdmin={isAdmin} isCustom={isCustom} icon={icon} />
+      }
       {...rest}
     />
   </ThemeProvider>
