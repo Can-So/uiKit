@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { ModalSpinner } from '@atlaskit/media-ui';
+import { colors } from '@atlaskit/theme';
 import SmartMediaEditorType, {
   SmartMediaEditorProps,
 } from './smartMediaEditor';
@@ -32,7 +33,9 @@ export default class AsyncSmartMediaEditor extends React.PureComponent<
 
   render() {
     if (!this.state.SmartMediaEditor) {
-      return <ModalSpinner mode="dark" />;
+      return (
+        <ModalSpinner blankedColor={colors.N700A} invertSpinnerColor={true} />
+      );
     }
 
     return <this.state.SmartMediaEditor {...this.props} />;

@@ -32,7 +32,12 @@ export default class AsyncAvatarPickerDialog extends React.PureComponent<
 
   render() {
     if (!this.state.AvatarPickerDialog) {
-      return <ModalSpinner mode="light" />;
+      return (
+        <ModalSpinner
+          blankedColor="rgba(255, 255, 255, 0.53)"
+          invertSpinnerColor={false}
+        />
+      );
     }
 
     return <this.state.AvatarPickerDialog {...this.props} />;
