@@ -1,6 +1,8 @@
 import Button from '@atlaskit/button';
 import Form, { FormFooter, FormSection, HelperMessage } from '@atlaskit/form';
 import Spinner from '@atlaskit/spinner';
+import Tooltip from '@atlaskit/tooltip';
+import ErrorIcon from '@atlaskit/icon/glyph/error';
 import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -60,6 +62,9 @@ describe('ShareForm', () => {
 
     const helperMessage = form.find(HelperMessage);
     expect(helperMessage).toHaveLength(0);
+
+    const spinner = form.find(Spinner);
+    expect(spinner).toHaveLength(0);
   });
 
   it('should override submit button label', () => {
@@ -97,6 +102,39 @@ describe('ShareForm', () => {
       const footer = form.find(FormFooter);
       expect(footer.find(Button)).toHaveLength(0);
       expect(footer.find(Spinner)).toHaveLength(1);
+    });
+  });
+
+  describe('shareError prop', () => {
+    it('should render Retry button with an ErrorIcon and Tooltip', () => {
+      const mockShareError = { message: 'error' };
+      const wrapper = shallow(
+        <ShareForm
+          copyLink="link"
+          loadOptions={jest.fn()}
+          shareError={mockShareError}
+        />,
+      );
+
+      const akForm = wrapper.find<any>(Form);
+      const form = renderProp(akForm, 'children', { formProps: {} }).find(
+        'form',
+      );
+      const footer = form.find(FormFooter);
+      const button = footer.find(Button);
+      expect(button).toHaveLength(1);
+      expect(button.prop('appearance')).toEqual('warning');
+
+      const buttonLabel = button.find('strong').find(FormattedMessage);
+      expect(buttonLabel).toHaveLength(1);
+      expect(buttonLabel.props()).toMatchObject(messages.formRetry);
+
+      const tooltip = form.find(Tooltip);
+      expect(tooltip).toHaveLength(1);
+      expect(tooltip.prop('content')).toEqual(mockShareError.message);
+
+      const errorIcon = tooltip.find(ErrorIcon);
+      expect(errorIcon).toHaveLength(1);
     });
   });
 

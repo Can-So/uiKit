@@ -10,6 +10,7 @@ export default () => (
     onLinkCopy={console.log}
     onShareClick={console.log}
     loadOptions={loadOptions}
+    shareError={{ message: 'Unable to share' }}
     shouldShowCapabilitiesInfoMessage
   />
 );

@@ -11,6 +11,11 @@ export const messages = defineMessages({
     defaultMessage: 'Send',
     description: 'Label for Share form submit button.',
   },
+  formRetry: {
+    id: 'fabric.elements.share.form.retry',
+    defaultMessage: 'Retry',
+    description: 'Label for Share from retry button.',
+  },
   commentPlaceholder: {
     id: 'fabric.elements.share.form.comment.placeholder',
     defaultMessage: 'Add a message',
