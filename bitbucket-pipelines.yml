@@ -115,7 +115,7 @@ pipelines:
               - TEST_ONLY_PATTERN='packages/editor' yarn run test:vr:changed --passWithNoTests
             after-script:
               # Extract all the diff images and store them into a folder for download
-              - mkdir ./diffImg && find . -name '*-diff.png' -not -path "./node_modules/*" -exec cp {} ./imageSnapshotFailures \;
+              - mkdir ./imageSnapshotFailures && find . -name '*-diff.png' -not -path "./node_modules/*" -exec cp {} ./imageSnapshotFailures \;
             # If a failure occurs, you can download the image snapshot of the differences.
             artifacts: 
               - imageSnapshotFailures
