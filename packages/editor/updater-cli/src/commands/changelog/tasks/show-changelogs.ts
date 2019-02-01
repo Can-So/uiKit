@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import { satisfies } from 'semver';
 import { getChangelog, getLogDetails, Log } from '../../../utils/changelog';
 import { ChangeLogTasks } from '../types';
+import { PrintableOutput } from '../../../runner';
 
 export function getUpdated(logs: Log[], currentVersion: string): string[] {
   return Array.from(
@@ -33,7 +34,7 @@ export const showChangelogTask: ChangeLogTasks = {
       sourceVersion,
     );
 
-    const output = [];
+    const output: PrintableOutput = [];
     if (majorChanges.length) {
       output.push(
         chalk.bold(chalk.yellow('💥 Breaking Changes (major)')),

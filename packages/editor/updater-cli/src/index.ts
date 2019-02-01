@@ -42,5 +42,6 @@ export function run() {
     return changelogCommand(inputs[0], inputs[1]);
   }
 
+  // tslint:disable:no-console
   return Promise.resolve(console.log(cli.help));
 }

@@ -22,7 +22,7 @@ function printLogDetails(log: Log) {
 
       return acc;
     },
-    [] as any[],
+    [] as Array<string>,
   );
 }
 
@@ -74,8 +74,12 @@ function sortChanges(logs: Log[]) {
   return logs.sort((a, b) => {
     const aHas = a.details.some(d => !!d.link);
     const bHas = b.details.some(d => !!d.link);
-    if (aHas === bHas) return 0;
-    if (aHas && !bHas) return 1;
+    if (aHas === bHas) {
+      return 0;
+    }
+    if (aHas && !bHas) {
+      return 1;
+    }
     return -1;
   });
 }
@@ -89,10 +93,14 @@ function parseChangelog(raw: string): Log[] {
       (all, log) => {
         const match = log.match(/\d+\.\d+\.\d+/);
         const v = match ? match[0] : null;
-        if (!v) return all;
+        if (!v) {
+          return all;
+        }
 
         const version = coerce(v);
-        if (!version) return all;
+        if (!version) {
+          return all;
+        }
 
         const isPatch = version.patch !== 0;
         const isMinor = version.minor !== 0 && !isPatch;
@@ -117,7 +125,7 @@ function parseChangelog(raw: string): Log[] {
           if (
             !(
               !text ||
-              text.substr(0, 2) == '##' ||
+              text.substr(0, 2) === '##' ||
               text.indexOf('Updated dependencies') !== -1
             )
           ) {

@@ -90,10 +90,12 @@ export class TaskWrapper<C = any, P = any> {
         if (Array.isArray(item)) {
           this.print(item, level + 1);
         } else {
+          // tslint:disable:no-console
           console.log(indent(item, level));
         }
       });
     } else {
+      // tslint:disable:no-console
       console.log(indent(text, level));
     }
 
@@ -164,6 +166,7 @@ export class TaskWrapper<C = any, P = any> {
       }
     } catch (e) {
       this.spinner.fail(chalk.red(`[error] ${e}`));
+      // tslint:disable:no-console
       console.log(e.stack);
       throw e;
     }
@@ -191,6 +194,7 @@ export function createCommand<C, P>(tasks: Array<Task<C, P>>) {
     const timing = (Date.now() - startTime) / 1000;
     const rounded = Math.round(timing * 100) / 100;
 
+    // tslint:disable:no-console
     console.log(`🏁 Done in ${rounded}s.`);
     process.exit(0);
   };

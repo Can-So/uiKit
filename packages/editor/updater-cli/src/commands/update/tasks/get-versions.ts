@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { Task } from '../../../runner';
+import { Task, PrintableOutput } from '../../../runner';
 import { getLatest } from '../../../utils/npm';
 import {
   getPackageVersion,
@@ -17,8 +17,8 @@ export const getVersionsTask: Task<
       '[' + params.packages.join(', ') + ']',
     )}`,
   task: async (ctx, params, task) => {
-    const output = [];
-    const ignoredOutput = [];
+    const output: PrintableOutput = [];
+    const ignoredOutput: Array<string> = [];
     const packages: PackageJsonPatchGroup = {};
     for (const pkg of params.packages) {
       task.progress(`${pkg}...`);
