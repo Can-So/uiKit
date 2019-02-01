@@ -8,7 +8,7 @@ const meow = require('meow');
 const webpack = require('../../build/webdriver-runner/utils/webpack');
 const reporting = require('./reporting');
 
-const LONG_RUNNING_TESTS_THRESHOLD_SECS = 70;
+const LONG_RUNNING_TESTS_THRESHOLD_SECS = 10;
 
 /*
  * function main() to
