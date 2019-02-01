@@ -1,1 +1,0 @@
-- Remove from export everything but AvatarPickerDialog and Avatar (which is TS interface)

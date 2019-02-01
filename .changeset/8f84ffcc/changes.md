@@ -1,1 +1,0 @@
-- Introduce ModalSpinner component to be used in modal type component while those loading via code split
