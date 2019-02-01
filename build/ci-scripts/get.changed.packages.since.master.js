@@ -15,11 +15,14 @@ const packages = require('../utils/packages');
   let changedPackagesRelativePaths = changedPackages.map(
     pkg => pkg.relativeDir,
   );
-  if (process.argv.includes('--spaceDelimited')) {
-    // We need to include only the component 'packages'
+  if (process.argv[3].includes('--only')) {
+    const includedPattern = process.argv[3].split('=')[1];
+    // We need to include only the component 'packages' for example
     changedPackagesRelativePaths = changedPackagesRelativePaths.filter(pkg =>
-      pkg.includes('packages'),
+      pkg.includes(includedPattern),
     );
+  }
+  if (process.argv.includes('--spaceDelimited')) {
     console.log(changedPackagesRelativePaths.join(' '));
   } else {
     console.log(JSON.stringify(changedPackagesRelativePaths));
