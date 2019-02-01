@@ -14,7 +14,7 @@ const LONG_RUNNING_TESTS_THRESHOLD_SECS = 70;
 /*
  * function main() to
  * start and stop webpack-dev-server, selenium-standalone-server, browserstack connections
- * and run and wait for webdriver tests complete
+ * and run and wait for webdriver tests complete.
  *
  * By default the tests are running headlessly, set HEADLESS=false if you want to run them directly on real browsers.
  * if WATCH= true, by default, it will start chrome.
