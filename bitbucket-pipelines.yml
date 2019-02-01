@@ -113,7 +113,7 @@ pipelines:
               - bolt install --pure-lockfile
               - TEST_ONLY_PATTERN='!packages/editor' yarn run test:vr:changed --passWithNoTests
               - TEST_ONLY_PATTERN='packages/editor' yarn run test:vr:changed --passWithNoTests
-            after_script:
+            after-script:
               # Extract all the diff images and store them into a folder for download
               - find . -name '*-diff.png' -not -path "./node_modules/*" | tar -cvjf diffImg.tar.bz2 --files-from -
             # If a failure occurs, you can download the image snapshot of the differences.
