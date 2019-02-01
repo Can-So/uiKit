@@ -1,2 +1,8 @@
-export { Content, Comment } from './ShareContents';
+export {
+  InvitationsCapabilitiesProvider,
+  InvitationsCapabilitiesResponse,
+} from '../api/InvitationsCapabilitiesResource';
+export { ShareClient, ShareResponse } from '../clients/ShareServiceClient';
+export { Content, Comment, MetaData } from './ShareEntities';
+export { ShareContentState, ShareError } from './ShareContentState';
 export { User } from './User';

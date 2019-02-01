@@ -5,8 +5,13 @@ import { LoadOptions } from '@atlaskit/user-picker';
 import { ShareButton } from './ShareButton';
 import { ShareForm } from './ShareForm';
 import { messages } from '../i18n';
-import { Comment, User } from '../types';
-import { InvitationsCapabilitiesResponse } from '../api/InvitationsCapabilitiesResource';
+import {
+  Comment,
+  User,
+  InvitationsCapabilitiesResponse,
+  ShareContentState,
+  ShareError,
+} from '../types';
 
 type RenderChildren = (
   openModal: Function,
@@ -20,16 +25,7 @@ type DialogState = {
   shareError: ShareError;
 };
 
-export type DialogContentState = {
-  users: User[];
-  comment?: Comment;
-};
-
-type State = DialogState & DialogContentState;
-
-type ShareError = {
-  message: string;
-} | null;
+type State = DialogState & ShareContentState;
 
 type Props = {
   buttonStyle?: 'default' | 'withText';
@@ -40,17 +36,17 @@ type Props = {
   loadUserOptions: LoadOptions;
   onLinkCopy?: Function;
   onCommentChange?: (comment: Comment) => any;
-  onShareSubmit?: (dialogContentState: DialogContentState) => Promise<any>;
+  onShareSubmit?: (shareContentState: ShareContentState) => Promise<any>;
   onUsersChange?: (users: User[]) => any;
   shouldShowCommentField?: boolean;
   shouldCloseOnEscapePress?: boolean;
   validateStateWithCapabilities?: (
-    state: DialogContentState,
+    state: ShareContentState,
     capabilities: InvitationsCapabilitiesResponse,
   ) => boolean;
 };
 
-export const defaultDialogContentState: DialogContentState = {
+export const defaultShareContentState: ShareContentState = {
   users: [],
   comment: {
     format: 'plain_text' as 'plain_text',
@@ -73,7 +69,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     isSharing: false,
     isStateValidWithCapabilities: true,
     shareError: null,
-    ...defaultDialogContentState,
+    ...defaultShareContentState,
   };
 
   static getDerivedStateFromProps(props: Props, state: State) {
@@ -165,7 +161,7 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
   handleCloseDialog = ({ isOpen, event }: { isOpen: boolean; event: any }) => {
     // clear the state when it is an escape press or a succesful submit
     if (event!.type === 'keydown' || event!.type === 'submit') {
-      this.clearDialogContentState();
+      this.clearShareContentState();
     }
 
     // TODO: send analytics
@@ -175,8 +171,8 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
     });
   };
 
-  clearDialogContentState = () => {
-    this.setState(defaultDialogContentState);
+  clearShareContentState = () => {
+    this.setState(defaultShareContentState);
   };
 
   handleChangeShareUsers = (users: User[]) => {
@@ -206,14 +202,14 @@ export class ShareDialogWithTrigger extends React.Component<Props, State> {
       return;
     }
 
-    const dialogContentState = {
+    const shareContentState: ShareContentState = {
       users: this.state.users,
       comment: this.state.comment,
     };
 
     this.setState({ isSharing: true });
 
-    this.props.onShareSubmit!(dialogContentState)
+    this.props.onShareSubmit!(shareContentState)
       .then(res => {
         this.handleCloseDialog({ isOpen: false, event });
         this.setState({ isSharing: false });

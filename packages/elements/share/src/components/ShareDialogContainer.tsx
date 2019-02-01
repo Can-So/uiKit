@@ -2,22 +2,18 @@ import * as React from 'react';
 import memoizeOne from 'memoize-one';
 import { LoadOptions } from '@atlaskit/user-picker';
 import OriginTracing from '@atlassiansox/origin-tracing';
+import { ShareDialogWithTrigger } from './ShareDialogWithTrigger';
 import {
-  ShareDialogWithTrigger,
-  DialogContentState,
-} from './ShareDialogWithTrigger';
-import { Content } from '../types';
-import {
-  InvitationsCapabilitiesResource,
-  InvitationsCapabilitiesProvider,
+  Content,
   InvitationsCapabilitiesResponse,
-} from '../api/InvitationsCapabilitiesResource';
-import {
-  MetaData,
+  InvitationsCapabilitiesProvider,
   ShareClient,
   ShareResponse,
-  ShareServiceClient,
-} from '../clients/ShareServiceClient';
+  MetaData,
+  ShareContentState,
+} from '../types';
+import { InvitationsCapabilitiesResource } from '../api/InvitationsCapabilitiesResource';
+import { ShareServiceClient } from '../clients/ShareServiceClient';
 
 type Props = {
   cloudId: string;
@@ -154,7 +150,7 @@ export class ShareDialogContainer extends React.Component<Props, State> {
   handleSubmitShare = ({
     users,
     comment,
-  }: DialogContentState): Promise<ShareResponse> => {
+  }: ShareContentState): Promise<ShareResponse> => {
     const {
       cloudId,
       productId,

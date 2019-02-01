@@ -6,7 +6,7 @@ import { ShareButton } from '../../../components/ShareButton';
 import { ShareForm } from '../../../components/ShareForm';
 import {
   ShareDialogWithTrigger,
-  defaultDialogContentState,
+  defaultShareContentState,
 } from '../../../components/ShareDialogWithTrigger';
 
 let wrapper;
@@ -371,7 +371,7 @@ describe('ShareDialogWithTrigger', () => {
       );
     });
 
-    it('should call clearDialogContentState if there is an ESC key pressed down or a form submission', async () => {
+    it('should call clearShareContentState if there is an ESC key pressed down or a form submission', async () => {
       const mockOnSubmit = jest.fn().mockResolvedValue({});
       const mockSubmitEvent = createMockEvent('submit', {
         target: document.createElement('form'),
@@ -386,21 +386,21 @@ describe('ShareDialogWithTrigger', () => {
           loadUserOptions={mockLoadOptions}
         />,
       );
-      const spiedClearDialogContentState = jest.spyOn(
+      const spiedClearShareContentState = jest.spyOn(
         wrapper.instance(),
-        'clearDialogContentState',
+        'clearShareContentState',
       );
 
       await wrapper.instance().handleSubmitShare(mockSubmitEvent);
-      expect(spiedClearDialogContentState).toHaveBeenCalledTimes(1);
+      expect(spiedClearShareContentState).toHaveBeenCalledTimes(1);
 
       await wrapper.instance().handleSubmitShare(mockEscKeyDownEvent);
-      expect(spiedClearDialogContentState).toHaveBeenCalledTimes(2);
+      expect(spiedClearShareContentState).toHaveBeenCalledTimes(2);
     });
   });
 
-  describe('clearDialogContentState', () => {
-    it('should set the defaultDialogContentState', () => {
+  describe('clearShareContentState', () => {
+    it('should set the defaultShareContentState', () => {
       const newInitState = {
         isDialogOpen: true,
         users: [
@@ -414,12 +414,12 @@ describe('ShareDialogWithTrigger', () => {
         isStateValidWithCapabilities: true,
       };
       wrapper.setState(newInitState);
-      wrapper.instance().clearDialogContentState();
+      wrapper.instance().clearShareContentState();
 
       const state = wrapper.state();
       expect(state.isDialogOpen).toEqual(newInitState.isDialogOpen);
-      expect(state.users).toEqual(defaultDialogContentState.users);
-      expect(state.comment).toEqual(defaultDialogContentState.comment);
+      expect(state.users).toEqual(defaultShareContentState.users);
+      expect(state.comment).toEqual(defaultShareContentState.comment);
       expect(state.isStateValidWithCapabilities).toEqual(
         newInitState.isStateValidWithCapabilities,
       );
