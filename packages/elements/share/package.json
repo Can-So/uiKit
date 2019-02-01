@@ -31,6 +31,7 @@
     "@atlaskit/form": "^5.1.0",
     "@atlaskit/icon": "^16.0.0",
     "@atlaskit/inline-dialog": "^9.0.13",
+    "@atlaskit/spinner": "^9.0.13",
     "@atlaskit/theme": "^7.0.3",
     "@atlaskit/user-picker": "^1.0.6",
     "@atlaskit/util-service-support": "^3.0.5",
